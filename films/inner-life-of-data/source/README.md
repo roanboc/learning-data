@@ -15,6 +15,16 @@ Everything in *The Inner Life of Data* is generated from code: the pictures (a c
 4. `python tools/build.py` again, to embed the soundtrack in the player.
 5. `python tools/render.py` renders 1080p frames at 30 fps and writes `dist/inner-life-of-data.mp4`. It renders in resumable chunks and takes about 20 minutes on one CPU core.
 
+## Other languages
+
+Set `FILM_LANG` to build another language, for example Latin American Spanish: `FILM_LANG=es python tools/tts.py`, then the same steps 2 to 5, each with `FILM_LANG=es`. Output goes to `build/es/` and `dist/es/`.
+
+A language lives in `src/i18n/<lang>/`:
+
+- `narration.js`: the narration, with the same line ids as the English, so the film re-times itself to the new voice.
+- `voice.json`: the Kokoro voice, language and speed, plus `say` rules that respell words for the voice only (for example product names).
+- `strings.js`: the on-screen text, as English → translation pairs, plus pattern rules for text built from numbers. `src/i18n.js` swaps every string drawn on the canvas, so boxes size to the translated text; check the frames for text that no longer fits.
+
 ## Editing
 
 - Narration lives in `src/narration.js`. The film re-times itself to the voice, so after changing a line, re-run steps 1 to 5.

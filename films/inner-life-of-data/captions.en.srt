@@ -1,0 +1,327 @@
+1
+00:00:03,600 --> 00:00:06,478
+You just enrolled in your first university class.
+
+2
+00:00:06,678 --> 00:00:09,061
+One tap. It feels like nothing happened.
+
+3
+00:00:09,261 --> 00:00:15,443
+But that tap was written straight into the student system, the system of record: a snapshot of that moment.
+
+4
+00:00:15,643 --> 00:00:19,487
+Now it's about to travel through a platform most people never see.
+
+5
+00:00:19,687 --> 00:00:20,704
+Let's follow it.
+
+6
+00:00:23,304 --> 00:00:29,123
+Every system at the university keeps its own records: students, learning, people and finance.
+
+7
+00:00:29,323 --> 00:00:31,749
+Think of each one as its own colour of light.
+
+8
+00:00:31,949 --> 00:00:35,209
+Some changes travel as events, the moment they happen.
+
+9
+00:00:35,409 --> 00:00:39,797
+An integration platform routes them, retries them and keeps them secure,
+
+10
+00:00:39,997 --> 00:00:43,736
+and Zerobus Ingest lands them in the lakehouse within seconds.
+
+11
+00:00:43,936 --> 00:00:48,829
+Other data arrives in bulk, as files, like the nightly file of new offers.
+
+12
+00:00:49,029 --> 00:00:53,780
+Auto Loader reads each new file exactly once, and remembers where it stopped.
+
+13
+00:00:53,980 --> 00:00:57,236
+Everything lands in bronze, exactly as it arrived.
+
+14
+00:00:57,436 --> 00:01:02,174
+Only what matters right now travels hot. The rest can wait for the next delivery.
+
+15
+00:01:04,174 --> 00:01:08,807
+Before any of this can make sense, we need a sketch of the world we're trying to understand.
+
+16
+00:01:09,007 --> 00:01:12,874
+What is a student? A class? An enrolment? And how do they connect?
+
+17
+00:01:13,074 --> 00:01:17,266
+That's the conceptual model: agreed with the business, and written down once.
+
+18
+00:01:17,466 --> 00:01:20,013
+Get the sketch wrong, and the pieces never fit.
+
+19
+00:01:20,213 --> 00:01:24,618
+Every picture built on top of it is wrong too, no matter how clean the data is.
+
+20
+00:01:24,818 --> 00:01:27,252
+Get it right, and every piece has its place.
+
+21
+00:01:29,452 --> 00:01:37,618
+Now the refining starts. dbt holds the recipes: models, tests and documentation, all in version control.
+
+22
+00:01:37,818 --> 00:01:40,475
+Databricks runs them, on a SQL warehouse.
+
+23
+00:01:40,675 --> 00:01:43,356
+Look closer at bronze, and the pieces are rough:
+
+24
+00:01:43,556 --> 00:01:47,302
+glitches, duplicates, errors, different formats, different clocks.
+
+25
+00:01:47,502 --> 00:01:51,223
+First, dbt declares each source, and checks that it's fresh.
+
+26
+00:01:51,423 --> 00:01:56,986
+Staging models clean each source: clear names, one format, one clock, no duplicates.
+
+27
+00:01:57,186 --> 00:02:00,437
+Tests run at every step. A missing value stops here.
+
+28
+00:02:00,637 --> 00:02:04,701
+Intermediate models join the sources, exactly as the sketch says.
+
+29
+00:02:04,901 --> 00:02:07,524
+An enrolment with no matching class stops here.
+
+30
+00:02:07,724 --> 00:02:12,540
+What comes out is silver: one clean, consistent picture of the university.
+
+31
+00:02:12,740 --> 00:02:17,441
+And every step is recorded, so any piece can be traced back to the tap that started it.
+
+32
+00:02:19,641 --> 00:02:25,990
+Then the light is split again, this time into business domains: teaching, students, research and finance.
+
+33
+00:02:26,190 --> 00:02:30,227
+Each domain holds many data products. Think of them as paintings.
+
+34
+00:02:30,427 --> 00:02:34,261
+The subject is the domain. The style is what the audience needs.
+
+35
+00:02:34,461 --> 00:02:36,192
+Analysts get every detail.
+
+36
+00:02:36,392 --> 00:02:39,387
+Executives get the essence, in a few bold shapes.
+
+37
+00:02:39,587 --> 00:02:45,240
+Government reports get a painting made by strict rules, like counting students on census date.
+
+38
+00:02:45,440 --> 00:02:48,473
+Live operations get a quick impression of right now.
+
+39
+00:02:48,673 --> 00:02:54,106
+In dbt, each painting is a mart with a contract and an owner: a data product.
+
+40
+00:02:54,306 --> 00:02:58,919
+And its label is an exposure, recording where the painting is shown, and to whom.
+
+41
+00:02:59,119 --> 00:02:59,994
+That's gold.
+
+42
+00:03:02,194 --> 00:03:04,796
+Step back, and the whole system comes into view.
+
+43
+00:03:04,996 --> 00:03:07,350
+Application domains flow in on one side.
+
+44
+00:03:07,550 --> 00:03:12,420
+Bronze keeps what arrived. Silver makes it consistent. Gold makes it useful.
+
+45
+00:03:12,620 --> 00:03:17,022
+Business domains flow out on the other, into dashboards, apps and Genie.
+
+46
+00:03:17,222 --> 00:03:23,325
+dbt governs every step, from source to exposure, and its lineage maps every connection.
+
+47
+00:03:23,525 --> 00:03:28,245
+And the Databricks lakehouse runs and stores it all, governed by Unity Catalog.
+
+48
+00:03:30,445 --> 00:03:32,916
+But pictures without meaning are just noise.
+
+49
+00:03:33,116 --> 00:03:36,512
+The platform is the bricks. Meaning is the shared language.
+
+50
+00:03:36,712 --> 00:03:43,165
+In the dbt Catalog, anyone can read what each picture shows, where it came from, and who owns it.
+
+51
+00:03:43,365 --> 00:03:48,731
+Words are defined once: an enrolled student is one still enrolled on census date.
+
+52
+00:03:48,931 --> 00:03:55,840
+Unity Catalog marks trusted data as certified, decides who can see what, and masks personal details.
+
+53
+00:03:56,040 --> 00:04:03,128
+And a university's knowledge lives everywhere: intranet pages, policy libraries, the handbook, process maps.
+
+54
+00:04:03,328 --> 00:04:08,152
+Through MCP, a standard plug that lets AI connect to other systems,
+
+55
+00:04:08,352 --> 00:04:12,042
+the platform reads those sources where they live, with your permissions.
+
+56
+00:04:12,242 --> 00:04:16,403
+Together with the sketch, they become one map of meaning: Genie Ontology.
+
+57
+00:04:18,803 --> 00:04:24,599
+Some questions need one answer, right now: is there still a seat in Tuesday's 9 am class?
+
+58
+00:04:24,799 --> 00:04:28,650
+Others need every record, over years: which classes fill up first?
+
+59
+00:04:28,850 --> 00:04:30,778
+Different jobs, different engines.
+
+60
+00:04:30,978 --> 00:04:37,174
+Lakebase, a Postgres database built into the platform, gives apps a fast desk copy of what they need,
+
+61
+00:04:37,374 --> 00:04:40,672
+kept in sync automatically, with changes flowing back.
+
+62
+00:04:42,872 --> 00:04:45,034
+Now the pictures go out, four ways.
+
+63
+00:04:45,234 --> 00:04:52,970
+Events: when something changes, the integration platform rings a bell, and each system comes back for exactly what it needs.
+
+64
+00:04:53,170 --> 00:04:58,769
+SQL endpoints: a reading room where tools can scan millions of records for big questions.
+
+65
+00:04:58,969 --> 00:05:05,267
+Copies: for older systems that can't read the originals, the integration platform delivers copies.
+
+66
+00:05:05,467 --> 00:05:08,468
+Useful, but every copy has to be kept up to date.
+
+67
+00:05:09,668 --> 00:05:11,667
+And the fourth way changes everything.
+
+68
+00:05:11,867 --> 00:05:15,865
+A projector shows the original somewhere else, without making a copy.
+
+69
+00:05:16,065 --> 00:05:20,398
+OpenSharing projects live research data to a partner university.
+
+70
+00:05:20,598 --> 00:05:24,630
+Mirroring lets Microsoft Fabric see the same pictures in place.
+
+71
+00:05:24,830 --> 00:05:29,712
+Federation turns the projector around, so we can see other systems where they live.
+
+72
+00:05:29,912 --> 00:05:32,658
+One original. No copies to keep in sync.
+
+73
+00:05:35,058 --> 00:05:36,946
+People meet the data in two ways.
+
+74
+00:05:37,146 --> 00:05:40,363
+Apps: a Databricks App shows an officer a student's record,
+
+75
+00:05:40,563 --> 00:05:45,510
+she fixes a wrong degree code, and the correction flows straight back into the platform.
+
+76
+00:05:45,710 --> 00:05:47,470
+And conversation: Genie.
+
+77
+00:05:47,670 --> 00:05:51,242
+Ask: which first-year classes need more seats next semester?
+
+78
+00:05:51,442 --> 00:05:57,860
+A Genie Agent answers with certified numbers and shows its sources, guided by Genie Ontology.
+
+79
+00:05:58,060 --> 00:06:00,409
+And it only shows you what you're allowed to see.
+
+80
+00:06:02,909 --> 00:06:07,321
+One tap became a snapshot, then a clear picture, and finally a decision:
+
+81
+00:06:07,521 --> 00:06:11,419
+a new class opens, and 140 more students get a seat.
+
+82
+00:06:11,619 --> 00:06:12,997
+Move less. Mean more.

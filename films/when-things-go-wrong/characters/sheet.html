@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>When things go wrong · character sheet</title>
+<link rel="stylesheet" href="../../inner-life-of-data/source/fonts/fonts.css">
+<style>body{margin:0;background:#05080f;color:#ecf3ff;font:16px Manrope,system-ui,sans-serif}canvas{display:block;width:100%;max-width:1920px;margin:0 auto 24px}</style>
+</head>
+<body>
+<!-- Opened in a browser, this page shows the line-up and every card. render.py uses the same functions to save the images and the video. -->
+<script src="../../../site/assets/film/film.js"></script>
+<script src="people.js"></script>
+<script src="sheet.js"></script>
+<script>
+window.__SHEET__=FILM.ready.then(()=>{if(window.__RENDER__)return;const add=f=>{const c=document.createElement("canvas");c.width=1920;c.height=1080;f(c.getContext("2d"));document.body.appendChild(c);};
+  add(x=>lineup(x,0));ORDER.forEach(id=>add(x=>card(x,id,0)));[0.05,0.4,0.62,0.95].forEach(u=>add(x=>throughScreen(x,u,u*7)));});
+</script>
+</body>
+</html>

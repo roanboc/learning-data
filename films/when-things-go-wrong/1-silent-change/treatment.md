@@ -1,6 +1,6 @@
 # When things go wrong · 1. Silent change
 
-*Treatment for the first episode of [When things go wrong](../README.md), v0.4: the main decisions are made, and the theme is set (see [Decisions](#decisions)). Status: agreed; the next step is a character sheet.*
+*Treatment for the first episode of [When things go wrong](../README.md), v0.4: the main decisions are made, and the theme is set (see [Decisions](#decisions)). Status: agreed; the [character sheet](../characters/README.md) has a first pass.*
 
 **Series tagline:** Fail safely. Fix once.
 
@@ -126,7 +126,7 @@ Made by the author on 26 September 2026:
 ## Next checkpoints
 
 1. ~~Agree this treatment.~~ Done.
-2. **A character sheet:** the four characters in three poses and three expressions each, plus one shot moving through Sam's screen into the platform. This decides whether full characters work in code.
+2. **A character sheet:** the four characters in three poses and three expressions each, plus one shot moving through Sam's screen into the platform. This decides whether full characters work in code. First pass done: see [the character sheet](../characters/README.md). Next, three-quarter views for conversations, and sitting.
 3. Script with a rigour sheet and pacing report.
 4. Six style frames: the red thread, the quarantine tray, the version panes, the banner, the contract card at the door, and the review wall.
 5. A voice test.

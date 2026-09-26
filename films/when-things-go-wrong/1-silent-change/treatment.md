@@ -33,7 +33,7 @@ The first film followed a record downstream, from the tap to the decision. This 
 | **6. Recover** | The fix is replayed over the affected nights. Time travel compares the numbers before and after, so nobody has to trust a guess. At 8:40 am the banner is gone, and Ana sends the census report on time. | Backfills, incremental models, Delta versions and time travel, and RESTORE when a table itself is damaged. |
 | **7. The contract** | Later that week, the four of them agree a data contract for enrolments. One card holds the columns and types, the allowed statuses and what each one means, how fresh the data must be, and four owners: technical and business, on the side that produces the data and the side that uses it. Changing the card needs a technical and a business sign-off. The platform checks every load against it at the door, and the student system tests every proposed change against it before release. A new test stays behind, and the team writes a short, blameless review. | What a data contract holds and who signs it. Contracts are versioned, and validated constantly: on every load, and on every change before it ships. No blame. |
 | **8. Three weeks later** | Ben's team proposes another status, `DEFERRED`. Before it ships, the contract check fails in their test environment, and all four owners are told at once. Mei defines what it means, Sam's team adds it to the platform, and the contract becomes version 1.1. The change goes live that week. No banner, no alert, nobody woken up. | Visibility before the change, not after. A contract turns a surprise into a conversation. |
-| **9. Pull back** | The whole platform, calm, with the contract glowing at its door. The last line: "Every incident leaves a test behind." In the final seconds, the gauge beside another painting's number starts to swing towards amber: a hint of the next episode. | The platform's job is not to never fail, but to fail safely, and to make the next change visible to everyone it touches. |
+| **9. Pull back** | The whole platform, calm, with the contract glowing at its door. The last line: "Seen by both sides, before it ships." In the final seconds, the gauge beside another painting's number starts to swing towards amber: a hint of the next episode. | The platform's job is not to never fail, but to fail safely, and to make the next change visible to everyone it touches. |
 
 Other ways things go wrong, such as a late file, a duplicate from a retry or a table overwritten by mistake, get their own episodes (see [the series](../README.md)), so this one stays on a single story.
 
@@ -122,14 +122,14 @@ Made by the author on 26 September 2026:
 1. **The spine:** a new status value after an upgrade (`WAITLISTED`), because the fix starts with meaning and connects back to the sketch in the first film.
 2. **People on screen:** full characters, with faces (see [The people](#the-people)).
 3. **The title:** *When things go wrong* became the series title (in Spanish, *Cuando algo sale mal*). This episode is *Silent change* (*Cambio silencioso*).
-4. **The tagline:** "Fail safely. Fix once.", now for the whole series. This episode's last line is "Every incident leaves a test behind."
+4. **The tagline:** "Fail safely. Fix once.", now for the whole series. This episode's last line is "Seen by both sides, before it ships."
 5. **The theme:** changes need visibility on both the technical and the business side. That's why data contracts matter, and why they're checked constantly. The change starts as a business decision and a technical build that never met; the film ends with a contract catching the next change before it ships.
 
 ## Next checkpoints
 
 1. ~~Agree this treatment.~~ Done.
 2. **A character sheet:** the four characters in three poses and three expressions each, plus one shot moving through Sam's screen into the platform. This decides whether full characters work in code. First pass done: see [the character sheet](../characters/README.md). Next, three-quarter views for conversations, and sitting.
-3. ~~A story outline, fragment by fragment.~~ [First version](story.md), for review.
+3. ~~A story outline, fragment by fragment.~~ [Agreed](story.md): it opens at 7:58, and its decisions are recorded there.
 4. Script with a rigour sheet and pacing report.
 5. Six style frames: the red thread, the quarantine tray, the version panes, the banner, the contract card at the door, and the review wall.
 6. A voice test.

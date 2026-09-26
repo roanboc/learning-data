@@ -41,7 +41,7 @@ Spanish: the same five commands with `FILM_LANG=es` in front of each, for exampl
 
 | Step | What it does |
 |---|---|
-| `tts.py` | Voices each narration line into `build/vo/` and writes the timings to `src/vodur.js`. Lines that already exist are skipped, so delete a line's file to re-voice it. |
+| `tts.py` | Voices each narration line into `build/vo/` and writes the timings to `src/vodur.js`. Lines that already exist are skipped, so delete a line's file to re-voice it. With `--keep-timings` it leaves `vodur.js` alone and fails if a line is more than 0.05 s off it. |
 | `build.py` | Builds `dist/render.html` (used for rendering), `dist/film.html` (a standalone player, with chapters, captions and full screen) and `dist/film.js` (the same player code, which the site loads). |
 | `audio.py` | Mixes narration, music and effects into `build/mix.wav` and `dist/soundtrack.mp3`. |
 | `build.py` again | Embeds the soundtrack in the player. |
@@ -69,7 +69,11 @@ About `render.py`:
    `dist/film.html` is a standalone player with the soundtrack embedded, for sharing or watching offline. The old player addresses, `films/inner-life-of-data/` and `es/films/inner-life-of-data/`, now redirect to the home page and keep `#t=` chapter links working.
 
 2. **The captions.** `python tools/captions.py` writes `../captions/en.srt` and `en.vtt`, and `FILM_LANG=es python tools/captions.py` writes the Spanish ones.
-3. **The videos.** Upload them to a GitHub release (Releases → Draft a new release), named exactly `inner-life-of-data.mp4` and `inner-life-of-data.es.mp4`. The site's download buttons point to these names in the latest release. Don't commit videos to the repository: GitHub rejects files over 100 MB, and the release keeps clones small.
+3. **The videos.** Commit and merge steps 1 and 2 first. Then, in the Actions tab, run *Render and release the film* ([`.github/workflows/release.yml`](../../../.github/workflows/release.yml)) with a new tag, such as `v1.1`. It runs the steps above for both languages on GitHub's machines, in about 30 to 45 minutes, and publishes the two videos and the `.srt` captions to a release with that tag. Tick *draft* to watch the videos before the site's download buttons point to them; running again with the same tag replaces its files.
+
+   The workflow keeps the committed timings (`tts.py --keep-timings`), so the video, the site's player and the captions share one timeline. It stops early if a line's voice no longer matches `vodur.js` (run `tts.py` and commit it), or if the site's `film.js` isn't built from this source (do step 1). It also draws every moment first (`check.py`), and puts the pacing report in the run's summary.
+
+   To publish a video you rendered yourself, upload it to a release (Releases → Draft a new release), named exactly `inner-life-of-data.mp4` or `inner-life-of-data.es.mp4`: the download buttons point to these names in the latest release. Don't commit videos to the repository: GitHub rejects files over 100 MB, and the release keeps clones small.
 
 ## Other languages
 

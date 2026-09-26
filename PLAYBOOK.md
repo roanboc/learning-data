@@ -65,6 +65,7 @@ What made *The Inner Life of Data* work, written so the next film, lab or course
 - **Use cheap checkpoints before expensive rebuilds:** style frames, a five-second voice test, a forty-second sound sketch.
 - **Render in resumable chunks,** and run one heavy job at a time.
 - **Use one source for every output.** The same code makes the MP4, the web player, the labs, the scenario pictures and the posters.
+- **Release from a clean machine.** A workflow renders every language from the committed source, and refuses if the site's player or the voice timings don't match it. What people download is then what the site plays, and anyone can make it again.
 - **Design for other languages from day one.** Keep words in language packs, let boxes size to the translated text, and check the longest language.
 
 *Ask: if a product is renamed tomorrow, how long does the fix take?*
@@ -111,3 +112,4 @@ A film makes people feel they understand; learning comes from using the ideas. T
 - [ ] Logos are unaltered and credited, and the licences are stated.
 - [ ] The labs and scenarios still match the film: same names, numbers and colours.
 - [ ] Tested on a phone, in dark mode and with the keyboard only.
+- [ ] The videos are released by the release workflow, and watched once from the release.

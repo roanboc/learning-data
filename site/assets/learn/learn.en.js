@@ -1,6 +1,6 @@
 /* Learning Data: English words for "Take it apart" and "Make the call". Keep the keys in step with learn.es.js. */
 window.LEARN={lang:"en",
-ui:{stop:"Stop",of:"of",stops:"Stops",lab:"Lab",watch:"Watch this part",next:"Next",again:"Back to the start",real:"In the film vs in real life",mapNote:"Click any part of the platform"},
+ui:{stop:"Stop",of:"of",stops:"Stops",lab:"Lab",watch:"Watch this part",next:"Next",again:"Back to the start",toQuiz:"Ready? Make the call",close:"Close",real:"In the film vs in real life",mapNote:"Click any part of the platform"},
 map:{sources:"Source systems",bronze:"Bronze",dbt:"dbt",silver:"Silver",gold:"Gold",domains:"Business domains",sqlwh:"SQL warehouses",uc:"Unity Catalog",apps:"Databricks Apps",genie:"Genie",dash:"Dashboards and SQL"},
 stops:{
 capture:{name:"Capture",title:"Where data is born",

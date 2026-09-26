@@ -8,20 +8,24 @@ Learning artifacts for data: short, visual explanations of how modern data platf
 
 ```
 site/                          the website, published to GitHub Pages as it is
-  index.html                   one page: Watch (the film), Take it apart (eight labs) and Make the call (twelve scenarios)
+  index.html                   home page: Watch, the film with chapters
+  labs/                        Take it apart: the platform map and eight hands-on labs, one per chapter
+  scenarios/                   Make the call: twelve scenarios to test yourself
   assets/                      styles, icon and poster images (English and Spanish)
     film/                      the film's player code and soundtrack, per language (built in films/inner-life-of-data/source/)
     learn/                     the labs and scenarios: learn.js (map and stops), labs.js and labs2.js (the eight labs),
-                               quiz.js (the scenarios), and their words in learn.en.js and learn.es.js
+                               quiz.js (the scenarios), path.js (the three-step path on every page, with progress),
+                               and their words in learn.en.js and learn.es.js
   films/inner-life-of-data/    redirects the old player address to the home page
   journey/                     the making-of story: index.md (source) and index.html (generated)
   es/                          the Spanish site, with the same layout as the English above
-films/inner-life-of-data/      the first film: everything used to make it
+films/inner-life-of-data/      the first film: everything used to make it, and breathing-cut.md, the plan for its next version
   script.md                    narration, pictures, rigour notes and sources
   captions/                    captions for video platforms: en.srt, en.vtt, es.srt, es.vtt
   source/                      the code that generates the film in each language, and how to rebuild it
 site-tools/                    turns the Markdown pages in site/ into site pages
 .github/workflows/pages.yml    publishes site/ on every push to main
+PLAYBOOK.md                    what made the film work, and how to reuse it for the next film or course
 LICENSE                        MIT licence for the code
 LICENSE-CONTENT.md             CC BY 4.0 for the film, script and text, with exclusions
 NOTICE.md                      credits and trademarks
@@ -36,9 +40,13 @@ The site's English pages sit at its root and the Spanish ones under `es/`, at th
 
 ## The labs and scenarios
 
-*Take it apart* has eight stops, one per part of the film, each with a hands-on lab. *Make the call* has twelve scenarios in four formats: choose, sort, order and spot the row. Both draw with the film's own components (vaults, data tiles, the sketch, paintings, Genie), which `assets/film/film.js` provides, and both take their words from `assets/learn/learn.en.js` and `learn.es.js`. To change a text, edit both language files and keep their keys the same. To add a scenario, add it to `quiz.qs` in both files; `vis` picks one of the small scenes in `quiz.js`.
+The site is a path of three pages: *Watch* (the home page), *Take it apart* (`labs/`) and *Make the call* (`scenarios/`). *Take it apart* has eight stops, one per chapter of the film, each with a hands-on lab, and each stop has its own link, such as `labs/#refine`. Its "Watch this part" buttons play that chapter in a pop-up player. *Make the call* has twelve scenarios in four formats: choose, sort, order and spot the row, and each one links back to its lab. Both draw with the film's own components (vaults, data tiles, the sketch, paintings, Genie), which `assets/film/film.js` provides, and both take their words from `assets/learn/learn.en.js` and `learn.es.js`. To change a text, edit both language files and keep their keys the same. To add a scenario, add it to `quiz.qs` in both files; `vis` picks one of the small scenes in `quiz.js`.
 
-The labs remember the last stop and the scenario answers in the browser only (local storage), so each visitor keeps their own progress.
+The pages remember progress (the stops visited, the scenario answers, and whether the film was watched) in the browser only, with local storage, so each visitor keeps their own. Old links to the one-page version (`#explore`, `#practise`) redirect to the new pages.
+
+## Making the next one
+
+[PLAYBOOK.md](PLAYBOOK.md) collects what made this film work, from the two-audience promise to pacing, rigour and the labs, with checklists for the script, the render and the release.
 
 ## Writing pages
 

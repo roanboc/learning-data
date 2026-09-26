@@ -26,4 +26,4 @@ A six-minute film that follows one enrolment at a fictional university, from a t
 
 ## How it was made
 
-The film is generated entirely from code; the source and a step-by-step rebuild guide are in [source/](source/). The story of how it was made, with the analogies explored, the pushback and the lessons learned, is in [the making-of journey](../../journey/index.md).
+The film is generated entirely from code; the source and a step-by-step rebuild guide are in [source/](source/). The plan for the next version, with pauses to let each idea land, is in [breathing-cut.md](breathing-cut.md), and what to reuse for future films is in the [playbook](../../PLAYBOOK.md). The story of how it was made, with the analogies explored, the pushback and the lessons learned, is in [the making-of journey](../../journey/index.md).

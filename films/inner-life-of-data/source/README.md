@@ -47,6 +47,8 @@ Spanish: the same five commands with `FILM_LANG=es` in front of each, for exampl
 | `build.py` again | Embeds the soundtrack in the player. |
 | `render.py` | Renders 1080p frames at 30 fps and writes the MP4. |
 
+To see how dense the narration is, run `python tools/pace.py` (or with `FILM_LANG=es`) after `tts.py`: it reports words per minute, how much of the time the voice speaks, and the longest quiet moment in each chapter. [PLAYBOOK.md](../../../PLAYBOOK.md) explains the targets.
+
 About `render.py`:
 
 - **Speed.** `--workers` sets how many browsers render at the same time. Use about one per CPU core. With 4 workers, a film takes about 7 minutes; with 1 (the default), about 20 to 25.
@@ -84,6 +86,6 @@ To add a language, copy `src/i18n/es/`, translate the four files, and run the st
 
 - Narration lives in `src/narration.js` (and `src/i18n/<lang>/narration.js`). The film re-times itself to the voice, so after changing a line, run the steps again.
 - Scenes live in `src/scA.js` to `src/scD.js`; shared visual components are in `src/style2.js` and `src/ui3.js`. The site's labs (`site/assets/learn/`) draw with these same components, so a change here also shows up there: check the labs after changing a component's signature.
-- The player sets `window.FILM` (`ready`, `seek`, `play`, `pause`, `playScene`, `sceneStart`), which the site uses for its "Watch this part" buttons.
+- The player sets `window.FILM` (`ready`, `seek`, `play`, `pause`, `playScene`, `sceneStart`; `playScene(id, true)` stops at the end of that chapter), which the site uses for its "Watch this part" buttons.
 - `src/logos.js` embeds the official Databricks and dbt logos, unaltered, to identify those products (see `NOTICE.md` at the repository root).
 - `fonts/` holds Manrope and IBM Plex Mono (SIL Open Font License 1.1, see the `OFL-*.txt` files there).

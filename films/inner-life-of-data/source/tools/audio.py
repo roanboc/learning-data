@@ -82,10 +82,24 @@ bell(G('out','events',0.8),0.16);[tick(G('out','sql')+k*0.15,0.05,(k%3-1)*0.5) f
 tone(tw,0.24);hum(G('out','projector'),G('out','one',2)-G('out','projector'),0.07);whoosh(G('out','share',0.2),1.0,0.08);whoosh(G('out','mirror',0.2),1.0,0.08);sweep(G('out','fed',0.2),1.2,0.05,2400,600)
 sweep(G('people','app',0.2),1.0,0.05);[click(G('people','fix',0.8)+k*0.1,0.06) for k in range(16)];whoosh(G('people','fix',2.6),1.2,0.08);shimmer(G('people','genie',0.1),0.07);pop(G('people','ask'),0.12);pop(G('people','answer'),0.14);click(G('people','perms',0.2),0.12)
 whoosh(G('end','recap',0.3),2.0,0.08);chime(G('end','seats',0.1),0.14,1046);shimmer(G('end','tag',0.0),0.06)
+# the breathing cut: each wordless chapter ending gets its own sound, placed on its "breath" cue (the music already rises when the voice rests)
+def B(sid,off=0):return G(sid,'breath',off) if ST[sid].get('breathe') else None
+if B('in'):shimmer(B('in',0.2),0.04);thud(B('in',1.6),0.12);sweep(B('in',2.4),1.2,0.05);tick(B('in',2.5),0.16);chime(B('in',4.0),0.08,587)
+if B('sketch'):
+    for d in(1.0,3.0):pop(B('sketch',d+1.0),0.12);glitch(B('sketch',d+1.1),0.05);chime(B('sketch',d+1.1),0.08,1046)
+if B('refine'):sweep(B('refine',0.6),1.4,0.04,600,2400);[pop(B('refine',d+0.9),0.1) for d in(1.2,2.6,4.0)];sweep(B('refine',2.0),2.0,0.05,3000,600,-0.3);sweep(B('refine',4.6),2.0,0.04,3000,600,-0.3)
+if B('gold'):whoosh(B('gold',0.4),2.6,0.07);pop(B('gold',2.2),0.12);pop(B('gold',3.4),0.1)
+if B('layers'):sweep(B('layers',0.4),max(1.0,ST['layers']['breathe']-1.6),0.05,400,2400);chime(B('layers',ST['layers']['breathe']-1.1),0.1,784)
+if B('meaning'):
+    for k in range(6):chime(B('meaning',0.3+k*0.9),0.04,[1318,1175,1568,1318,1760,1568][k])
+if B('speeds'):[pop(B('speeds',d),0.12) for d in(0.4,1.9,3.4)];sweep(B('speeds',0.3),ST['speeds']['breathe']-0.9,0.04,500,1500)
+if B('out'):
+    for d in(1.0,3.6):tone(B('out',d),0.1);shimmer(B('out',d+0.15),0.06);buzz(B('out',d+0.4),0.06)
+if B('people'):shimmer(B('people',0.2),0.06);[pop(B('people',0.8+i*1.2),0.09) for i in range(3)]
 t=np.arange(n,dtype=np.float32)/SR;duck=np.ones(n,np.float32)
 for c in info['caps']:duck[int(max(0,c['s']-0.15)*SR):int((c['e']+0.25)*SR)]=0.42
 k=int(0.25*SR);duck=np.convolve(duck,np.ones(k,np.float32)/k,'same')
-mute=np.ones(n,np.float32);mute[int((tw-1.05)*SR):int(tw*SR)]=0;mute=np.convolve(mute,np.ones(2205,np.float32)/2205,'same');fade=np.clip((TOT-t)/3.5,0,1).astype(np.float32)
+tpz=ST['out'].get('pauses',{}).get('twist',1.0);mute=np.ones(n,np.float32);mute[int((tw-tpz-0.05)*SR):int(tw*SR)]=0;mute=np.convolve(mute,np.ones(2205,np.float32)/2205,'same');fade=np.clip((TOT-t)/3.5,0,1).astype(np.float32)
 L=vo*0.95+(ML*0.55*duck+XL*0.6)*mute*fade;R=vo*0.95+(MR*0.55*duck+XR*0.6)*mute*fade
 pk=max(np.abs(L).max(),np.abs(R).max());L/=pk/0.9;R/=pk/0.9
 sf.write(str(BUILD/'mix.wav'),np.stack([L,R],1),SR,subtype='PCM_16')

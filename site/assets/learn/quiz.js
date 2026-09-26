@@ -80,17 +80,17 @@ LD.buildQuiz=()=>{
     body.append(feed);
     const ft=h("div",{class:"qfoot"});body.append(ft);
     function foot(){ft.textContent="";const last=Object.keys(S.ans).length===QS.length;
-      ft.append(h("button",{type:"button",class:"link",onclick:()=>LD.openStop(q.stop,true)},fill(Q.ui.explore,{n:s.n,name:s.name})));
+      ft.append(h("a",{class:"link",href:LD.labsHref(q.stop)},fill(Q.ui.explore,{n:s.n,name:s.name})));
       if(S.ans[i]){const nx=QS.findIndex((_,j)=>j>i&&!S.ans[j]),nx2=nx<0?QS.findIndex((_,j)=>!S.ans[j]):nx;
         ft.append(h("button",{type:"button",class:"btn primary",onclick:()=>{if(last){S.sum=true;}else S.cur=nx2;save();render();root.scrollIntoView({block:"start"});}},last?Q.ui.results+" →":Q.ui.next+" →"));}}
     foot();}
   function summary(){const n=QS.length,ok=Object.values(S.ans).filter(a=>a.ok).length,p=Math.round(ok/n*100);
     const band=Q.bands.find(b=>ok>=b[0]);const mast=h("div",{class:"mastery"});
     LD.STOPS.forEach(s=>{const qs=QS.map((q,i)=>[q,i]).filter(([q])=>q.stop===s.id);if(!qs.length)return;const good=qs.filter(([q,i])=>S.ans[i]&&S.ans[i].ok).length;
-      mast.append(h("button",{type:"button",class:good===qs.length?"ok":"no",style:{"--c":css(s.c)},onclick:()=>LD.openStop(s.id,true),title:Q.ui.review},h("i"),s.name+" "+good+"/"+qs.length));});
+      mast.append(h("a",{class:good===qs.length?"ok":"no",style:{"--c":css(s.c)},href:LD.labsHref(s.id),title:Q.ui.review},h("i"),s.name+" "+good+"/"+qs.length));});
     const miss=LD.STOPS.filter(s=>QS.some((q,i)=>q.stop===s.id&&!(S.ans[i]&&S.ans[i].ok)));
     host.append(h("div",{class:"qdone"},h("div",{class:"ring",style:{"--p":p}},h("b",null,ok+"/"+n)),
       h("div",null,h("h3",null,band[1]),h("p",null,band[2]),h("p",{style:{fontWeight:700,color:"var(--fg)",marginBottom:"6px"}},Q.ui.byStop),mast,
-        h("div",{class:"cta"},miss.length?h("button",{type:"button",class:"btn primary",onclick:()=>LD.openStop(miss[0].id,true)},fill(Q.ui.reviewFirst,{name:miss[0].name})):null,h("button",{type:"button",class:"btn",onclick:()=>{S.ans={};S.cur=0;S.sum=false;save();render();}},"↺ "+Q.ui.restart)))));}
+        h("div",{class:"cta"},miss.length?h("a",{class:"btn primary",href:LD.labsHref(miss[0].id)},fill(Q.ui.reviewFirst,{name:miss[0].name})):null,h("button",{type:"button",class:"btn",onclick:()=>{S.ans={};S.cur=0;S.sum=false;save();render();}},"↺ "+Q.ui.restart)))));}
   render();};
 })();

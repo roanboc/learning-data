@@ -1,7 +1,7 @@
 import base64,json,re
 from lang import *
 S=ROOT/'src';D=DIST
-FILES=['core.js','logos.js','style2.js','narration.js','vodur.js','ui3.js','scA.js','scB.js','scC.js','scD.js','engine3.js']
+FILES=['core.js','logos.js','style2.js','narration.js','vodur.js','breath.js','ui3.js','scA.js','scB.js','scC.js','scD.js','engine3.js']
 # another language swaps in its narration and voice timings, and adds its on-screen text ahead of the i18n hook that applies it
 if not EN:FILES=['i18n/%s/strings.js'%LANG,'i18n.js']+[f if f not in('narration.js','vodur.js') else 'i18n/%s/%s'%(LANG,f) for f in FILES]
 js='\n'.join((S/f).read_text() for f in FILES if (S/f).exists())

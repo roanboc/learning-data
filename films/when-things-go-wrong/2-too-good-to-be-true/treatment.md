@@ -1,6 +1,6 @@
 # When things go wrong · 2. Too good to be true
 
-*Treatment for the second episode of [When things go wrong](../README.md), v0.2: rewritten around the author's direction (see [Decisions](#decisions)). Status: proposal.*
+*Treatment for the second episode of [When things go wrong](../README.md), v0.3: the main decisions are made (see [Decisions](#decisions)). Status: agreed; next, add the new characters to the character sheet.*
 
 **Series tagline:** Fail safely. Fix once.
 
@@ -33,7 +33,7 @@ The contract for this number includes an expectation agreed with the admissions 
 | **4. Choosing the level** | Why not make every test an error? A spike on a closing date is real, and stopping it would hold back good data and teach people to ignore alarms. So the same test has two bands: amber for "worth a look", red for "must not reach a decision". Warnings go to someone who reads them, and there are few enough that they do. | Severity chosen by consequence. Thresholds based on what's normal, including seasons. Alert fatigue. |
 | **5. Follow the thread** | Sam follows the thread upstream from the painting to bronze. There, 3,100 pairs of rows are identical except for their ID and the time they were created. The uniqueness test checked the ID, and every ID was unique. What makes an application unique in the real world is the applicant, the course and the intake. | Duplicates in the source system itself. Test uniqueness on the business key, not only the system's ID. |
 | **6. Fix at the source, then reload** | Tomás's team removes the copies in the admissions system and makes the sync safe to run twice. The platform can't simply delete rows from its own copy: it reloads the affected week from the corrected source, and rebuilds silver and gold. Time travel compares before and after: 11,340 becomes 8,240. On Wednesday, the committee plans with the right number. | Fix the cause at the source, then re-ingest the affected period. Why the platform's copy should match the source rather than be patched by hand. Time travel to verify. |
-| **7. Pull back** | A new test stays behind: one application per applicant, course and intake. The gauge on the painting settles at green. The camera pulls back to the whole platform. The last line: "A day late beats wrong." | Every incident leaves a test behind. Fail safely: when in doubt, keep the last good number, and say so. |
+| **7. Pull back** | A new test stays behind: one application per applicant, course and intake. The gauge on the painting settles at green. The camera pulls back to the whole platform. The last line: "Stale and labelled beats fresh and wrong." | Every incident leaves a test behind. Fail safely: when in doubt, keep the last good number, and say so. |
 
 ## The people
 
@@ -98,16 +98,13 @@ Made by the author on 26 September 2026:
 1. **The incident:** not a new category (that's the first episode's territory), but a crucial number that jumps and deviates from expectations, caused by duplicates in the source system, which requires re-ingesting the data.
 2. **What it must show:** warning and error test levels, and that having no test would have been worse: wrong data versus stale data.
 3. **The device:** three versions side by side, as in the first draft. They are now no test, a warning and an error.
-
-## Decisions for the author
-
-1. **The crucial number.** Applications for next year (recommended: easy to picture, and it drives a big decision). Alternatives: tuition revenue before a council meeting, or demand for one course, which echoes the new class at the end of the first film.
-2. **The title.** *Too good to be true* (recommended: a jump that looks like good news) or *Out of range*.
-3. **The last line.** "A day late beats wrong." (recommended) or "Stale and labelled beats fresh and wrong."
+4. **The crucial number:** applications for next year, before the committee plans first-year places.
+5. **The title:** *Too good to be true* (in Spanish, *Demasiado bueno para ser verdad*).
+6. **The last line:** "Stale and labelled beats fresh and wrong."
 
 ## Next checkpoints
 
-1. Agree this treatment.
+1. ~~Agree this treatment.~~ Done.
 2. Reuse the character sheet from the first episode, and add the new characters.
 3. Script with a rigour sheet and pacing report.
 4. Style frames: the gauge on the painting, the row checks passing while the gauge goes red, the three Tuesdays, and the reload.

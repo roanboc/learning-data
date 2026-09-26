@@ -4,6 +4,8 @@
 
 **Series tagline:** Fail safely. Fix once.
 
+**The story, fragment by fragment:** see [story.md](story.md), which refines the chapters below.
+
 ## The promise
 
 Same two audiences as the first film: a newcomer understands it, and a data engineer agrees with it. Same university, same platform, same visual world, and this time the people who work in it. The first film showed how data should flow; this one shows what happens when it doesn't, and how a good platform notices, contains the damage, fixes the cause and learns from it.
@@ -127,7 +129,8 @@ Made by the author on 26 September 2026:
 
 1. ~~Agree this treatment.~~ Done.
 2. **A character sheet:** the four characters in three poses and three expressions each, plus one shot moving through Sam's screen into the platform. This decides whether full characters work in code. First pass done: see [the character sheet](../characters/README.md). Next, three-quarter views for conversations, and sitting.
-3. Script with a rigour sheet and pacing report.
-4. Six style frames: the red thread, the quarantine tray, the version panes, the banner, the contract card at the door, and the review wall.
-5. A voice test.
-6. The first cut.
+3. ~~A story outline, fragment by fragment.~~ [First version](story.md), for review.
+4. Script with a rigour sheet and pacing report.
+5. Six style frames: the red thread, the quarantine tray, the version panes, the banner, the contract card at the door, and the review wall.
+6. A voice test.
+7. The first cut.

@@ -10,7 +10,7 @@
 
 | # | Episode | What goes wrong | What it teaches | Status |
 |---|---|---|---|---|
-| 1 | [Silent change](1-silent-change/treatment.md) | A new enrolment status that the business and the student system team each saw only half of | A change needs visibility on both the technical and the business side; data contracts, checked constantly | Treatment agreed; character sheet, first pass |
+| 1 | [Silent change](1-silent-change/treatment.md) | A new enrolment status that the business and the student system team each saw only half of | A change needs visibility on both the technical and the business side; data contracts, checked constantly | Treatment agreed; [story outline](1-silent-change/story.md) for review |
 | 2 | [Too good to be true](2-too-good-to-be-true/treatment.md) | Applications jump 38% overnight because a sync copied a week of them twice in the source system | Expectations on numbers, warning and error levels, and why stale and labelled beats fresh and wrong; re-ingesting from a fixed source | Treatment agreed |
 
 **Candidates for later episodes**, each with one mechanism:

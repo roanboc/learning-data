@@ -5,8 +5,8 @@ A six-minute film that follows one enrolment at a fictional university, from a t
 - **Watch, with chapters:** [https://roanboc.github.io/learning-data/films/inner-life-of-data/](https://roanboc.github.io/learning-data/films/inner-life-of-data/)
 - **Download the video (MP4, 1080p):** [https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.mp4](https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.mp4)
 - **Script, with rigour notes and sources:** [script.md](script.md)
-- **Captions:** [captions.en.vtt](captions.en.vtt), [captions.en.srt](captions.en.srt)
-- **En español (Latin American Spanish, 6:55):** [watch](https://roanboc.github.io/learning-data/es/films/inner-life-of-data/), [download](https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.es.mp4), captions [captions.es.vtt](captions.es.vtt) and [captions.es.srt](captions.es.srt)
+- **Captions:** [en.vtt](captions/en.vtt), [en.srt](captions/en.srt)
+- **En español (Latin American Spanish, 6:55):** [watch](https://roanboc.github.io/learning-data/es/films/inner-life-of-data/), [download](https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.es.mp4), captions [es.vtt](captions/es.vtt) and [es.srt](captions/es.srt)
 
 ## Chapters
 

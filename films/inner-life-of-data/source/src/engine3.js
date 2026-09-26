@@ -1,5 +1,5 @@
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
-const GAP=0.3,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause"},typeof L10N!=="undefined"&&L10N.ui||{});
+const GAP=0.3,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});
 function buildTimeline(){let g=0;const caps=[];
   SCENES.forEach(sc=>{sc.start=g;sc.cues={};let t=sc.lead||0.6;
     sc.vo.forEach(ch=>{if(ch.pause)t+=ch.pause;const d=(typeof VODUR!=="undefined"&&VODUR[sc.id+"/"+ch.id])||Math.max(1.3,ch.text.split(/\s+/).length/2.7);sc.cues[ch.id]=t;caps.push({s:g+t,e:g+t+d,text:ch.text,sid:sc.id,id:ch.id});t+=d+(ch.gap!=null?ch.gap:GAP);});
@@ -30,6 +30,11 @@ else{window.addEventListener("DOMContentLoaded",async()=>{
   function draw(){size();renderFrame(ctx,cv.width/W,t);scrub.value=t.toFixed(2);time.textContent=fmt(t)+" / "+fmt(TL.total);const i=sceneIndex(t);[...chap.children].forEach((b,k)=>b.classList.toggle("on",k===i));}
   function loop(ts){if(playing){if(hasAu&&!au.paused)t=au.currentTime;else{const dt=Math.min(0.1,(ts-last)/1000);t+=dt;}if(t>=TL.total-0.02){t=TL.total;playing=false;play.textContent=UI.play;if(hasAu)au.pause();}}last=ts;draw();requestAnimationFrame(loop);}
   play.onclick=()=>{if(t>=TL.total-0.05)seek(0);playing=!playing;play.textContent=playing?UI.pause:UI.play;if(hasAu){if(playing){au.currentTime=t;au.play().catch(()=>{});}else au.pause();}};
-  scrub.oninput=()=>seek(parseFloat(scrub.value));cc.onclick=()=>{CAPS_ON=!CAPS_ON;cc.classList.toggle("on",CAPS_ON);cc.setAttribute("aria-pressed",CAPS_ON);};
-  window.addEventListener("keydown",e=>{if(e.code==="Space"&&e.target.tagName!=="BUTTON"){e.preventDefault();play.click();}});window.addEventListener("resize",draw);
+  scrub.oninput=()=>seek(parseFloat(scrub.value));
+  // full screen covers the player (film and controls); browsers that only allow it for <video>, such as Safari on iPhone, hide the button
+  const fsb=document.getElementById("fs"),box=cv.closest(".player"),fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement,fsReq=box.requestFullscreen||box.webkitRequestFullscreen;
+  function fsToggle(){if(fsEl())(document.exitFullscreen||document.webkitExitFullscreen).call(document);else{const r=fsReq.call(box);if(r&&r.catch)r.catch(()=>{});}}
+  if(fsb){if(!fsReq)fsb.hidden=true;else{fsb.onclick=fsToggle;cv.ondblclick=fsToggle;["fullscreenchange","webkitfullscreenchange"].forEach(ev=>document.addEventListener(ev,()=>{fsb.textContent=fsEl()?UI.fsExit:UI.fs;draw();}));}}
+  cc.onclick=()=>{CAPS_ON=!CAPS_ON;cc.classList.toggle("on",CAPS_ON);cc.setAttribute("aria-pressed",CAPS_ON);};
+  window.addEventListener("keydown",e=>{if(e.code==="Space"&&e.target.tagName!=="BUTTON"){e.preventDefault();play.click();}else if(e.code==="KeyF"&&fsReq&&!e.ctrlKey&&!e.metaKey&&!e.altKey)fsToggle();});window.addEventListener("resize",draw);
   await prepAssets();const hm=location.hash.match(/t=([0-9:.]+)/);if(hm){const q=hm[1].split(":").map(Number);seek(q.length>1?q[0]*60+q[1]:q[0]);}else draw();requestAnimationFrame(loop);});}

@@ -1,17 +1,16 @@
-import pathlib,imageio_ffmpeg
-ROOT=pathlib.Path(__file__).resolve().parents[1]
-for _d in ['build/vo','build/chunks','dist']:(ROOT/_d).mkdir(parents=True,exist_ok=True)
+import imageio_ffmpeg
+from lang import *
 import json,numpy as np,soundfile as sf,subprocess
 from scipy.signal import resample_poly
 from playwright.sync_api import sync_playwright
 with sync_playwright() as p:
-    b=p.chromium.launch(args=["--allow-file-access-from-files"]);pg=b.new_page();pg.goto((ROOT/'dist/render.html').as_uri());pg.wait_for_function("window.__READY__===true",timeout=90000);info=pg.evaluate("filmInfo()");b.close()
-json.dump(info,open(ROOT/'build/timeline.json','w'))
+    b=p.chromium.launch(args=["--allow-file-access-from-files"]);pg=b.new_page();pg.goto((DIST/'render.html').as_uri());pg.wait_for_function("window.__READY__===true",timeout=90000);info=pg.evaluate("filmInfo()");b.close()
+json.dump(info,open(BUILD/'timeline.json','w'))
 SR=44100;TOT=info['total'];n=int(TOT*SR)+SR;ST={s['id']:s for s in info['scenes']}
 def G(sid,cid,off=0):return ST[sid]['start']+ST[sid]['cues'][cid]+off
 vo=np.zeros(n,np.float32)
 for c in info['caps']:
-    x,sr=sf.read(str(ROOT/'build/vo'/('%s__%s.wav'%(c['sid'],c['id']))),dtype='float32');x=resample_poly(x,147,80).astype(np.float32);i=int(c['s']*SR);vo[i:i+len(x)]+=x[:n-i]
+    x,sr=sf.read(str(BUILD/'vo'/('%s__%s.wav'%(c['sid'],c['id']))),dtype='float32');x=resample_poly(x,147,80).astype(np.float32);i=int(c['s']*SR);vo[i:i+len(x)]+=x[:n-i]
 ML=np.zeros(n,np.float32);MR=np.zeros(n,np.float32);XL=np.zeros(n,np.float32);XR=np.zeros(n,np.float32)
 def tt(sec):return np.arange(int(sec*SR),dtype=np.float32)/SR
 def put(L,R,sig,start,g=1.0,pan=0.0):
@@ -89,7 +88,7 @@ k=int(0.25*SR);duck=np.convolve(duck,np.ones(k,np.float32)/k,'same')
 mute=np.ones(n,np.float32);mute[int((tw-1.05)*SR):int(tw*SR)]=0;mute=np.convolve(mute,np.ones(2205,np.float32)/2205,'same');fade=np.clip((TOT-t)/3.5,0,1).astype(np.float32)
 L=vo*0.95+(ML*0.55*duck+XL*0.6)*mute*fade;R=vo*0.95+(MR*0.55*duck+XR*0.6)*mute*fade
 pk=max(np.abs(L).max(),np.abs(R).max());L/=pk/0.9;R/=pk/0.9
-sf.write(str(ROOT/'build/mix.wav'),np.stack([L,R],1),SR,subtype='PCM_16')
+sf.write(str(BUILD/'mix.wav'),np.stack([L,R],1),SR,subtype='PCM_16')
 FF=imageio_ffmpeg.get_ffmpeg_exe()
-subprocess.run([FF,'-y','-loglevel','error','-i',str(ROOT/'build/mix.wav'),'-af','loudnorm=I=-16:TP=-1.5:LRA=11','-ar','44100','-c:a','libmp3lame','-b:a','112k',str(ROOT/'dist/soundtrack.mp3')],check=True)
+subprocess.run([FF,'-y','-loglevel','error','-i',str(BUILD/'mix.wav'),'-af','loudnorm=I=-16:TP=-1.5:LRA=11','-ar','44100','-c:a','libmp3lame','-b:a','112k',str(DIST/'soundtrack.mp3')],check=True)
 print('total %.1fs, vo peak ok, mix written'%TOT)

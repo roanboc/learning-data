@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A Sharper Sketch</title>
+<!--FONTS-->
+<style>
+:root{--bg:#f4f2ee;--fg:#16181d;--muted:#555b69;--card:#ffffff;--line:rgba(0,0,0,.12);--accent:#2f6fd6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#07090d;--fg:#eef2f8;--muted:#9aa4b5;--card:#10141c;--line:rgba(255,255,255,.12);--accent:#4d8fea;}}
+:root[data-theme="dark"]{--bg:#07090d;--fg:#eef2f8;--muted:#9aa4b5;--card:#10141c;--line:rgba(255,255,255,.12);--accent:#4d8fea;}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Manrope,'Segoe UI',system-ui,sans-serif;}
+main{max-width:1180px;margin:0 auto;padding:28px 16px 48px;}
+h1{font-family:'Source Serif 4',Georgia,serif;font-weight:600;font-size:clamp(28px,4vw,44px);margin:0 0 6px;}
+.sub{color:var(--muted);margin:0 0 18px;font-size:16px;line-height:1.5;}
+.player{background:#02050b;border-radius:14px;overflow:hidden;border:1px solid var(--line);}
+canvas{display:block;width:100%;aspect-ratio:16/9;max-width:100%;}
+.bar{display:flex;gap:10px;align-items:center;padding:10px 12px;background:#0b0f16;color:#e8eef8;flex-wrap:wrap;}
+button{font:inherit;font-weight:700;font-size:14px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:#1a2130;color:#e8eef8;padding:8px 14px;cursor:pointer;}
+.bar button.on{background:#2f6fd6;border-color:#2f6fd6;}
+.player:fullscreen{display:flex;flex-direction:column;border:0;border-radius:0;}
+.player:fullscreen canvas{flex:1 1 0;min-height:0;height:auto;aspect-ratio:auto;object-fit:contain;}
+input[type=range]{flex:1;min-width:140px;accent-color:#6aa8ff;}
+#time{font-family:'IBM Plex Mono',Menlo,monospace;font-size:13px;min-width:92px;text-align:right;}
+.chapters{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0;}
+.chapters button{background:var(--card);color:var(--fg);border:1px solid var(--line);font-weight:600;}
+.chapters button.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+.chapters .tc{font-family:'IBM Plex Mono',Menlo,monospace;font-size:12px;opacity:.7;margin-right:8px;}
+.notes{margin-top:22px;color:var(--muted);font-size:15px;line-height:1.6;max-width:760px;}
+.notes b{color:var(--fg);}
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
+.lang{display:inline-flex;flex:none;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-top:8px;}
+.lang a{padding:5px 11px;font-size:13px;font-weight:700;text-decoration:none;color:var(--muted);}
+.lang a[aria-current]{background:var(--accent);color:#fff;}
+</style>
+</head>
+<body>
+<main>
+<div class="head"><h1>A Sharper Sketch</h1></div>
+<p class="sub">Learning Data · film three. A six-minute film with narration, music and sound. Press Play, or jump to a chapter.</p>
+<div class="player">
+<!--AUDIO--><canvas id="film" width="1280" height="720" aria-label="Animated explainer film: A Sharper Sketch"></canvas>
+<div class="bar"><button id="play">Play</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Seek"><span id="time">0:00</span><button id="cc" class="on" aria-pressed="true">Captions</button><button id="fs">Full screen</button></div>
+</div>
+<div class="chapters" id="chapters"></div>
+<p class="notes"><b>How to read it.</b> The sketch is the conceptual model, in the first film's blue ink. The reference model, TCSI, is drawn in warm ink on tracing paper. Blue pins mark what the sketch adopts from the reference; amber pins mark what the university adds. The narration is a synthetic voice.</p>
+</main>
+<script>
+/*JS*/
+</script>
+</body>
+</html>

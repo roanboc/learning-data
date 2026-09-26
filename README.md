@@ -8,9 +8,12 @@ Learning artifacts for data: short, visual explanations of how modern data platf
 
 ```
 site/                          the website, published to GitHub Pages as it is
-  index.html                   home page
+  index.html                   one page: Watch (the film), Take it apart (eight labs) and Make the call (twelve scenarios)
   assets/                      styles, icon and poster images (English and Spanish)
-  films/inner-life-of-data/    the film player (chapters, captions, full screen, embedded soundtrack)
+    film/                      the film's player code and soundtrack, per language (built in films/inner-life-of-data/source/)
+    learn/                     the labs and scenarios: learn.js (map and stops), labs.js and labs2.js (the eight labs),
+                               quiz.js (the scenarios), and their words in learn.en.js and learn.es.js
+  films/inner-life-of-data/    redirects the old player address to the home page
   journey/                     the making-of story: index.md (source) and index.html (generated)
   es/                          the Spanish site, with the same layout as the English above
 films/inner-life-of-data/      the first film: everything used to make it
@@ -30,6 +33,12 @@ The site's English pages sit at its root and the Spanish ones under `es/`, at th
 
 1. **Turn on GitHub Pages (once):** Settings → Pages → Build and deployment → Source: *GitHub Actions*. From then on, every push to `main` publishes `site/`. You can also run it by hand from the Actions tab (*Publish site* → *Run workflow*).
 2. **Attach the videos to a release:** create a release (for example `v1.0`) and upload the MP4s as `inner-life-of-data.mp4` and `inner-life-of-data.es.mp4`. The site's download buttons point to the latest release, so they work as soon as the release exists. Keeping videos out of the repository keeps clones small. To render them, see [the film's build guide](films/inner-life-of-data/source/README.md).
+
+## The labs and scenarios
+
+*Take it apart* has eight stops, one per part of the film, each with a hands-on lab. *Make the call* has twelve scenarios in four formats: choose, sort, order and spot the row. Both draw with the film's own components (vaults, data tiles, the sketch, paintings, Genie), which `assets/film/film.js` provides, and both take their words from `assets/learn/learn.en.js` and `learn.es.js`. To change a text, edit both language files and keep their keys the same. To add a scenario, add it to `quiz.qs` in both files; `vis` picks one of the small scenes in `quiz.js`.
+
+The labs remember the last stop and the scenario answers in the browser only (local storage), so each visitor keeps their own progress.
 
 ## Writing pages
 

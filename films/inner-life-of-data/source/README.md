@@ -42,7 +42,7 @@ Spanish: the same five commands with `FILM_LANG=es` in front of each, for exampl
 | Step | What it does |
 |---|---|
 | `tts.py` | Voices each narration line into `build/vo/` and writes the timings to `src/vodur.js`. Lines that already exist are skipped, so delete a line's file to re-voice it. |
-| `build.py` | Builds `dist/render.html` (used for rendering) and `dist/film.html` (the player, with chapters, captions and full screen). |
+| `build.py` | Builds `dist/render.html` (used for rendering), `dist/film.html` (a standalone player, with chapters, captions and full screen) and `dist/film.js` (the same player code, which the site loads). |
 | `audio.py` | Mixes narration, music and effects into `build/mix.wav` and `dist/soundtrack.mp3`. |
 | `build.py` again | Embeds the soundtrack in the player. |
 | `render.py` | Renders 1080p frames at 30 fps and writes the MP4. |
@@ -55,12 +55,16 @@ About `render.py`:
 
 ## Publish
 
-1. **The players.** Copy each player into the site:
+1. **The player.** The film plays on the site's home page, and its labs draw with the same code. Copy the code and the soundtrack of each language into the site:
 
    ```
-   cp dist/film.html ../../../site/films/inner-life-of-data/index.html
-   cp dist/es/film.html ../../../site/es/films/inner-life-of-data/index.html
+   cp dist/film.js ../../../site/assets/film/film.js
+   cp dist/soundtrack.mp3 ../../../site/assets/film/soundtrack.mp3
+   cp dist/es/film.js ../../../site/assets/film/film.es.js
+   cp dist/es/soundtrack.mp3 ../../../site/assets/film/soundtrack.es.mp3
    ```
+
+   `dist/film.html` is a standalone player with the soundtrack embedded, for sharing or watching offline. The old player addresses, `films/inner-life-of-data/` and `es/films/inner-life-of-data/`, now redirect to the home page and keep `#t=` chapter links working.
 
 2. **The captions.** `python tools/captions.py` writes `../captions/en.srt` and `en.vtt`, and `FILM_LANG=es python tools/captions.py` writes the Spanish ones.
 3. **The videos.** Upload them to a GitHub release (Releases → Draft a new release), named exactly `inner-life-of-data.mp4` and `inner-life-of-data.es.mp4`. The site's download buttons point to these names in the latest release. Don't commit videos to the repository: GitHub rejects files over 100 MB, and the release keeps clones small.
@@ -79,6 +83,7 @@ To add a language, copy `src/i18n/es/`, translate the four files, and run the st
 ## Editing
 
 - Narration lives in `src/narration.js` (and `src/i18n/<lang>/narration.js`). The film re-times itself to the voice, so after changing a line, run the steps again.
-- Scenes live in `src/scA.js` to `src/scD.js`; shared visual components are in `src/style2.js` and `src/ui3.js`.
+- Scenes live in `src/scA.js` to `src/scD.js`; shared visual components are in `src/style2.js` and `src/ui3.js`. The site's labs (`site/assets/learn/`) draw with these same components, so a change here also shows up there: check the labs after changing a component's signature.
+- The player sets `window.FILM` (`ready`, `seek`, `play`, `pause`, `playScene`, `sceneStart`), which the site uses for its "Watch this part" buttons.
 - `src/logos.js` embeds the official Databricks and dbt logos, unaltered, to identify those products (see `NOTICE.md` at the repository root).
 - `fonts/` holds Manrope and IBM Plex Mono (SIL Open Font License 1.1, see the `OFL-*.txt` files there).

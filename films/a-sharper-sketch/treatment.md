@@ -4,7 +4,7 @@
 
 ## The promise
 
-Same two audiences as the first two films: a newcomer understands it, and a data modeller agrees with it. Same university, same platform, same visual world. The first film drew the sketch in five boxes and said "get it right, and every piece has its place". This film asks what "right" means, and when a simple sketch stops being precise enough.
+Same two audiences as the first two films: a newcomer understands it, and a data modeller agrees with it. This film is about modelling only: what the model says, not how the pipelines build it. The tools stay in the background. Same university, same platform, same visual world. The first film drew the sketch in five boxes and said "get it right, and every piece has its place". This film asks what "right" means, and when a simple sketch stops being precise enough.
 
 **Logline.** Two trusted numbers disagree about how many students are enrolled in Data Science 101. To find out why, we go back to the sketch from the first film and sharpen it, one question at a time.
 
@@ -81,13 +81,13 @@ The first film moved downstream, the second upstream. This one moves *inward*: t
 | **3. Whose census date?** | The reference shows the census date on each unit enrolment. The census date slides off Term and onto Unit offering. A summer intensive of the same unit has its own census date, weeks from the semester's. | Put an attribute on the thing it truly describes. Teaching period and census date are related but not the same. Adopt the reference where it fits. |
 | **4. One student, two courses** | A double-degree student appears twice in one count. The reference already has the answer: a course admission. The box appears between Student and Course, and each unit enrolment points to the course it counts towards. | Many-to-many relationships need their own entity. Identity and keys: one person, one student ID, several course admissions. |
 | **5. Enrolled when?** | Film 2's `WAITLISTED` student returns. The enrolment gains a status history: enrolled, waitlisted, withdrawn, each with a date. The census count is a snapshot at census date; Genie was counting today. The reference keeps the current status; the business needs the history, so the model extends it. | Time in models: current state versus history, effective dates, and snapshots. The definition "still enrolled on census date" now has something precise to point at. |
-| **6. Three levels of precision** | The same sketch shown three ways: the conceptual model (boxes for the business), the logical model (keys, attributes, cardinality), and the physical tables in silver and gold. In gold, a star: a fact table at one row per student per unit offering, with student, unit offering, course and date around it. | Conceptual, logical, physical. Normalised integration models in silver; dimensional models in gold, built for questions. |
+| **6. Three levels of precision** | The same sketch shown three ways, like a map zooming in: the conceptual model (boxes and relationships, for the business), the logical model (each entity's identifier, attributes and cardinality), and the physical model (tables in the lakehouse). A brief glimpse at the end: the physical tables can take different shapes for different uses, such as a star, or one wide row per student. "How to build those is a story for another film." | Conceptual, logical, physical: the same meaning at three levels of detail. The business owns the first; engineers own the last; all three must agree. |
 | **7. Check, adopt, extend, record** | The tracing paper lifts away, and we see the whole fit: most boxes match the reference (TCSI), a few are ours, each with a note. Local words (class, subject, module, paper) are mapped to the reference's: "unit of study", "course admission", "unit enrolment". Code sets for status and mode come from reference data, not free text. The fit register and the sharper sketch feed the catalog and Genie Ontology. | Check a reference model before you draw; adopt it where it fits the business, extend it where it doesn't, and record every difference. A bonus: reporting to government gets easier when the model already speaks its language. |
 | **8. Pull back** | Genie now asks back: "Enrolled on census date, in the Semester 1 offering?" It answers 118, and shows its definition. The version stamp turns to *sketch v2*, with a short change note. Then a new question arrives on the Head of School's phone, about short courses and microcredentials, and the stamp flickers: v3 is coming, some day. | Precision where the question needs it, and no more. Models evolve: not often, but always. Version them, and record why they changed. |
 
 ## Visual language
 
-Reuse the world and components of the first two films: the sketch, tiles, vaults, the dbt line, paintings, Genie. The sketch becomes the stage. New objects, each with a single job:
+Reuse the world and components of the first two films: the sketch, tiles, vaults, paintings, Genie. The sketch becomes the stage. New objects, each with a single job:
 
 | New object | Stands for |
 |---|---|
@@ -95,7 +95,7 @@ Reuse the world and components of the first two films: the sketch, tiles, vaults
 | A magnifier that adds detail to the sketch | Moving from conceptual to logical to physical |
 | An attribute tag that slides between boxes | Putting an attribute where it belongs (the census date) |
 | A thin film strip behind an enrolment | Status history over time |
-| A glass star in the gold vault | A dimensional model: a fact with its dimensions |
+| Two faint shapes in the gold vault, a star and a single wide row | Physical models can take different shapes (a teaser for the engineers' film) |
 | Tracing paper that slides over the sketch | The reference model, checked before each change |
 | Small pins on the sketch: blue for adopted, amber for extended | What came from the reference and what is ours |
 | A bilingual dictionary on a lectern | Mapping local words to the reference's words |
@@ -122,9 +122,19 @@ About 115 words a minute, a hold after each new idea, and a wordless breather at
 To confirm against current documentation, and record in the rigour sheet with the date checked:
 
 - **TCSI:** recheck the rules in the reference model table against the current year's packet specifications; confirm the licence for reuse of TCSI text on gov.au; confirm the E355 codes shown on screen.
-- **Modelling:** conceptual, logical and physical models; versioning a model and its change log (for example, dbt model versions and contracts); Kimball's grain and dimensional modelling; slowly changing dimensions; dbt snapshots for status history.
-- **Databricks:** Unity Catalog primary and foreign key constraints (informational), metric views or semantic definitions, and Genie Ontology's current name and scope.
+- **Modelling:** conceptual, logical and physical models; grain; identifiers and relationships; effective dating for history; versioning a model and keeping a change log.
+- **Databricks:** Genie Ontology's current name and scope (it appears in chapter 7).
 - **HERM:** film 1 names domains after HERM capability areas; check the two fit together in chapter 7.
+
+## Parked for the engineers' film
+
+This film stays with the business-facing model. A later deep dive for engineers can take the same sharper sketch and show how it becomes tables. Candidates, all using this film's university and entities:
+
+- **Dimensional modelling:** a star with one fact row per student per unit offering at census date, and dimensions around it; slowly changing dimensions for history.
+- **Entity-centric modelling:** one wide table per entity (Student, Unit offering) that holds its attributes and its time-bound measures as columns, so most questions about an entity are one lookup. For example, one row per student with `current_course`, `units_enrolled_this_term`, `credit_points_passed_total`, `census_enrolments_last_4_terms` (an array) and `withdrawals_last_12_months`. It's easy for people and AI assistants such as Genie to query, and it pairs well with a star underneath. Trade-offs to show: wide tables to maintain, measures defined in two places if you're not careful, and the grain of each time window.
+- **The build:** keys and constraints, tests, contracts, model versions, and how status history is captured (for example, with dbt snapshots).
+
+Rigour for that film: the origin and current practice of entity-centric modelling (popularised by Maxime Beauchemin), and Kimball's dimensional techniques.
 
 ## Decisions for the author
 
@@ -133,11 +143,12 @@ To confirm against current documentation, and record in the rigour sheet with th
 3. **Name TCSI on screen?** Naming it grounds the film in a real, public standard; keeping it generic ("a national data standard") travels better outside Australia. Recommended: name it in chapter 7 and in the sources only.
 4. **The title.** *A sharper sketch* is clear. Alternatives: *What is a class?*, *One row per what?*, *Two numbers*.
 5. **The tagline.** Options: "Every model is a first draft." · "Sharpen the sketch when the question needs it." · "Say exactly what you mean, once." · "Check the reference. Fit it to the business."
+6. **Entity-centric modelling in this film?** Recommended: no, beyond the one-shot glimpse in chapter 6. Explaining it well needs physical detail (columns, time windows, arrays) that pulls this film away from the business model; it gets its full example in the engineers' film.
 
 ## Next checkpoints
 
 1. Agree this treatment and decision 1.
 2. Recheck the TCSI rules for the current year.
 3. Script with a rigour sheet and pacing report.
-4. Five style frames: the splitting box, the tracing paper with its pins, the sliding census date, the film strip, the glass star.
+4. Five style frames: the splitting box, the tracing paper with its pins, the sliding census date, the film strip, the three levels of precision.
 5. A voice test, then the first cut.

@@ -17,7 +17,7 @@ The film was made over two days, 25 and 26 September 2026, in one long working c
 | 7. The big review | System of record, style, dbt, the sketch, logos, exposures | A new design language |
 | 8. Checkpoints | Five style frames, a sound sketch, four voice tests | Agreement before the rebuild |
 | 9. The second cut | 6:17 with narration, music and sound, timed to the voice | Varied data products, a brain, live updates |
-| 10. Publishing | A site, the source and this story | This repository |
+| 10. Publishing | A site that draws the film live, videos rendered from the same code, and this story | The site, this repository and its releases |
 
 ## 1. The brief
 
@@ -156,7 +156,36 @@ The last round of feedback was about richness and honesty:
 
 ![The whole platform in one view: from source systems through bronze, silver and gold to business domains and consumption](img/08-final-overview.jpg)
 
-## 10. What went wrong along the way
+## 10. One film, two ways to play
+
+On the site, the film isn't a video. When you press Play, your browser downloads the film's code (about 230 KB) and its soundtrack (about 7 MB). Then it draws the film itself, on a canvas, each time the screen refreshes: usually 60 times a second. No server runs anything. GitHub Pages only hands out the files, and your own device does the drawing.
+
+This works because every frame is a function of time. Give the code a moment, such as 2:31, and it knows where the camera is, which tiles glow and which caption shows. The soundtrack is the clock: at each refresh, the code asks the audio how far it has played and draws that moment, so picture and sound can't drift apart.
+
+Drawing live gives the site things a video file can't:
+
+- **It's small.** About 7 MB instead of 165 MB, so it starts at once, even on a slow connection.
+- **It's sharp at any size.** Each frame is drawn for your screen, from a phone to a 4K monitor.
+- **It can respond.** Chapters jump straight to a scene. *Pause and think* holds the last frame of a chapter and asks one question. The labs draw with the same components and play one chapter at a time. Captions switch on and off.
+- **One fix lands everywhere.** Rename a product, and the player, the labs and the scenarios change together.
+
+![Pause and think on the live player: the film holds on the last frame of The sketch and asks why a class shows 312% full](img/09-pause-and-think.jpg)
+
+So why make a video file at all? The same code also renders an MP4. A browser with no window draws every frame at 1080p, about 14,400 of them, and ffmpeg joins them to the soundtrack. The file still matters:
+
+- **Platforms take files, not web pages.** LinkedIn, YouTube, Teams, a university's learning platform and messaging apps all want a video file.
+- **It plays anywhere, even offline.** In a lecture hall with poor Wi-Fi, in a slide deck, on a plane or on a TV.
+- **It looks the same for everyone.** The live film depends on the viewer's browser and device: an old phone may drop frames, and a browser we haven't tested may draw differently. A video is fixed, frame by frame.
+- **It keeps each version.** The site always plays the latest film; each release keeps the video exactly as it was published.
+- **It's easy to quote.** Anyone can pause on a frame, cut a clip or put a moment in a presentation.
+
+Rendering is also the film's strictest test. The site only draws the moments someone watches; a render draws every one. A render once stopped halfway because one moment of the film failed to draw. On the site, that moment would have frozen the player for whoever reached it. Now a quick check draws every tenth of a second before each render.
+
+The videos are released by a GitHub workflow. It renders both languages from the committed source on GitHub's machines, and stops early if the site's player isn't built from that same source. What people download is what the site plays.
+
+> **Lesson:** draw it live for learning, and render a file for sharing. Build both from one source, so they never disagree.
+
+## 11. What went wrong along the way
 
 Mistakes were part of the process, and most of them taught something:
 
@@ -181,6 +210,7 @@ Mistakes were part of the process, and most of them taught something:
 11. **Build media as code.** When scenes are timed to the narration, changing a line re-times the whole film.
 12. **Validate by looking and measuring,** and say plainly what you can't check. Claude couldn't hear the audio, so the author judged the balance.
 13. **Pushback is the engine.** Nearly every improvement started with "that's not quite right".
+14. **Draw it live for learning, and render a file for sharing,** both from one source.
 
 ## Reuse it
 

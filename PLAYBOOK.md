@@ -69,6 +69,7 @@ What made *The Inner Life of Data* work, written so the next film, lab or course
 - **Use cheap checkpoints before expensive rebuilds:** style frames, a five-second voice test, a forty-second sound sketch.
 - **Render in resumable chunks,** and run one heavy job at a time.
 - **Use one source for every output.** The same code makes the MP4, the web player, the labs, the scenario pictures and the posters.
+- **Draw it live for learning, and render a file for sharing.** The live player is small, sharp at any size and interactive (chapters, questions, labs). The video file is what platforms accept, plays offline and looks the same everywhere. A full render is also the strictest test: it draws every frame, not just the ones someone watched.
 - **Release from a clean machine.** A workflow renders every language from the committed source, and refuses if the site's player or the voice timings don't match it. What people download is then what the site plays, and anyone can make it again.
 - **Design for other languages from day one.** Keep words in language packs, let boxes size to the translated text, and check the longest language.
 

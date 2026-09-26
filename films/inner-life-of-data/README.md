@@ -6,22 +6,23 @@ A six-minute film that follows one enrolment at a fictional university, from a t
 - **Download the video (MP4, 1080p):** [https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.mp4](https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.mp4)
 - **Script, with rigour notes and sources:** [script.md](script.md)
 - **Captions:** [captions.en.vtt](captions.en.vtt), [captions.en.srt](captions.en.srt)
+- **En español (Latin American Spanish, 6:55):** [watch](https://roanboc.github.io/learning-data/es/films/inner-life-of-data/), [download](https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.es.mp4), captions [captions.es.vtt](captions.es.vtt) and [captions.es.srt](captions.es.srt)
 
 ## Chapters
 
 | Time | Chapter |
 |---|---|
 | 0:00 | [The tap](https://roanboc.github.io/learning-data/films/inner-life-of-data/#t=0) |
-| 0:22 | [Into the platform](https://roanboc.github.io/learning-data/films/inner-life-of-data/#t=22) |
-| 1:03 | [The sketch](https://roanboc.github.io/learning-data/films/inner-life-of-data/#t=63) |
-| 1:28 | [Refining with dbt](https://roanboc.github.io/learning-data/films/inner-life-of-data/#t=88) |
-| 2:19 | [Gold](https://roanboc.github.io/learning-data/films/inner-life-of-data/#t=139) |
-| 3:01 | [The layers together](https://roanboc.github.io/learning-data/films/inner-life-of-data/#t=181) |
-| 3:29 | [Meaning](https://roanboc.github.io/learning-data/films/inner-life-of-data/#t=209) |
-| 4:18 | [Two speeds](https://roanboc.github.io/learning-data/films/inner-life-of-data/#t=258) |
-| 4:42 | [Ways out](https://roanboc.github.io/learning-data/films/inner-life-of-data/#t=282) |
-| 5:34 | [Apps and Genie](https://roanboc.github.io/learning-data/films/inner-life-of-data/#t=334) |
-| 6:02 | [Pull back](https://roanboc.github.io/learning-data/films/inner-life-of-data/#t=362) |
+| 0:22 | [Into the platform](https://roanboc.github.io/learning-data/films/inner-life-of-data/#t=23) |
+| 1:03 | [The sketch](https://roanboc.github.io/learning-data/films/inner-life-of-data/#t=64) |
+| 1:28 | [Refining with dbt](https://roanboc.github.io/learning-data/films/inner-life-of-data/#t=89) |
+| 2:19 | [Gold](https://roanboc.github.io/learning-data/films/inner-life-of-data/#t=140) |
+| 3:01 | [The layers together](https://roanboc.github.io/learning-data/films/inner-life-of-data/#t=182) |
+| 3:29 | [Meaning](https://roanboc.github.io/learning-data/films/inner-life-of-data/#t=210) |
+| 4:18 | [Two speeds](https://roanboc.github.io/learning-data/films/inner-life-of-data/#t=259) |
+| 4:42 | [Ways out](https://roanboc.github.io/learning-data/films/inner-life-of-data/#t=283) |
+| 5:34 | [Apps and Genie](https://roanboc.github.io/learning-data/films/inner-life-of-data/#t=335) |
+| 6:02 | [Pull back](https://roanboc.github.io/learning-data/films/inner-life-of-data/#t=363) |
 
 ## How it was made
 

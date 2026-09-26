@@ -31,7 +31,7 @@ First pass of the character sheet for [When things go wrong](../README.md), the 
 - **Only front views.** Conversations, such as Sam asking Ben or Mei, need three-quarter views so two people can face each other.
 - **No sitting, typing or walking yet.** The shot avoids this by filming Sam from behind.
 - **Simple hands.** Enough at a distance; close-ups of gestures would need fingers.
-- **A busy middle to the dissolve.** For a moment, the dashboard and the platform overlap. A cleaner version would fade the dashboard's panels one by one.
+- **The red thread is too busy.** It cuts diagonally across the dashboard and the platform, and the dashboard and the platform overlap for a moment. In the [story outline](../1-silent-change/story.md), the screen turns to glass instead, and the thread only follows the lineage, one step at a time.
 
 **Suggested verdict:** full characters work in code at this level of simplicity. Next come three-quarter views and sitting, then the scripts.
 

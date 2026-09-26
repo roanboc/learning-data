@@ -21,6 +21,7 @@ site/                          the website, published to GitHub Pages as it is
   es/                          the Spanish site, with the same layout as the English above
 films/inner-life-of-data/      the first film: everything used to make it, and breathing-cut.md, how its pauses work
 films/when-things-go-wrong/    the second film, in development: its treatment
+films/a-sharper-sketch/        the third film, in development: its treatment, a deep dive on data modelling
   script.md                    narration, pictures, rigour notes and sources
   captions/                    captions for video platforms: en.srt, en.vtt, es.srt, es.vtt
   source/                      the code that generates the film in each language, and how to rebuild it

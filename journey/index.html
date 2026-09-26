@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The making of The Inner Life of Data · Learning Data</title>
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="top"><a class="brand" href="../">Learning Data</a><nav><a href="../#film">Film</a><a href="../journey/">Making of</a><a href="https://github.com/roanboc/learning-data">GitHub</a></nav></header>
+<main class="prose">
+<h1 id="the-making-of-the-inner-life-of-data">The making of <em>The Inner Life of Data</em></h1>
+<p><em>A learning journey: what we explored, argued about, got wrong and learned while making a six-minute film about data platforms.</em></p>
+<p>The film was made over two days, 25 and 26 September 2026, in one long working conversation between the author and Claude, an AI model made by Anthropic. The author brought the brief, the platform knowledge and most of the pushback. Claude proposed options, checked facts, wrote the code and rendered every frame. This page tells the story from the first question to the published site, with the lessons worth reusing.</p>
+<h2 id="at-a-glance">At a glance</h2>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>What happened</th>
+<th>What it produced</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. The brief</td>
+<td>Explain a Databricks and dbt data platform so a teenager understands and a data engineer agrees</td>
+<td>A list of components the film must show</td>
+</tr>
+<tr>
+<td>2. The analogy</td>
+<td>Rivers, libraries, cyberpunk, industrial pipes and the human body were tested</td>
+<td>A documentary fly-through where data travels as light</td>
+</tr>
+<tr>
+<td>3. The facts</td>
+<td>Every product claim was checked against current sources</td>
+<td>A rigour sheet, and several renamed products</td>
+</tr>
+<tr>
+<td>4. The style</td>
+<td>Four style boards, then "there is no better light than other"</td>
+<td>Light that carries pictures, two zooms, paintings for audiences</td>
+</tr>
+<tr>
+<td>5. The metaphor map</td>
+<td>Printing, scanning, projectors, a sketch, a brain</td>
+<td>One consistent world</td>
+</tr>
+<tr>
+<td>6. The first cut</td>
+<td>A silent 4:56 film, built entirely in code</td>
+<td>Frame-by-frame review and fixes</td>
+</tr>
+<tr>
+<td>7. The big review</td>
+<td>System of record, style, dbt, the sketch, logos, exposures</td>
+<td>A new design language</td>
+</tr>
+<tr>
+<td>8. Checkpoints</td>
+<td>Five style frames, a sound sketch, four voice tests</td>
+<td>Agreement before the rebuild</td>
+</tr>
+<tr>
+<td>9. The second cut</td>
+<td>6:17 with narration, music and sound, timed to the voice</td>
+<td>Varied data products, a brain, live updates</td>
+</tr>
+<tr>
+<td>10. Publishing</td>
+<td>A site, the source and this story</td>
+<td>This repository</td>
+</tr>
+</tbody>
+</table>
+<h2 id="1-the-brief">1. The brief</h2>
+<p>The first message asked for three things:</p>
+<ul>
+<li><strong>What to show:</strong> events through Zerobus Ingest, files through Auto Loader, transformation with dbt, meaning and modelling, transactional and analytical work side by side, and every way data leaves the platform: events, SQL endpoints, integration platforms and zero-copy sharing (sharing, mirroring, federation). Plus Databricks Apps, Genie Agents and Genie Ontology.</li>
+<li><strong>Who for:</strong> "anyone can understand, even a teenager", without losing data engineering rigour.</li>
+<li><strong>One constraint:</strong> inspired by a real university platform, but never naming it, so it can be shared.</li>
+</ul>
+<p>A second message set the story in higher education, so other universities could use it, and asked to show the platform reaching the organisation's wider knowledge (intranet pages, portals, definitions and processes) through MCP.</p>
+<h2 id="2-finding-the-analogy">2. Finding the analogy</h2>
+<p>The first question was the analogy: rivers, libraries, cyberpunk, industrial pipes or the human body? Each was tested against the hardest idea in the film, zero-copy sharing.</p>
+<ul>
+<li><strong>Rivers:</strong> familiar, but water can't be in two places at once, so it teaches zero-copy wrongly.</li>
+<li><strong>Libraries:</strong> good for catalogues and definitions, but static. No events, no flow.</li>
+<li><strong>Cyberpunk:</strong> a look, not an analogy, and it signals surveillance and chaos, the opposite of governed data.</li>
+<li><strong>Industrial pipes:</strong> good for refining, but cold, and pipes suggest copying.</li>
+<li><strong>Human body:</strong> the best camera style, but mapping organs to tools gets forced.</li>
+</ul>
+<p>The answer was none of them: a documentary fly-through of the real platform, in the spirit of <em>The Inner Life of the Cell</em> and <em>Powers of Ten</em>, with data travelling as light. The key insight was that every physical analogy breaks at zero-copy, so that break became the film's dramatic twist.</p>
+<blockquote>
+<p><strong>Lesson:</strong> test an analogy against the mechanism that is hardest to explain, not the easiest one.</p>
+</blockquote>
+<h2 id="3-getting-the-facts-right">3. Getting the facts right</h2>
+<p>Before any animation, every product claim was checked against current sources. Several things had changed that year:</p>
+<ul>
+<li>Delta Sharing had been renamed <strong>OpenSharing</strong>, dbt Cloud had become the <strong>dbt platform</strong>, and dbt Explorer is now <strong>Catalog</strong>.</li>
+<li><strong>Genie Ontology</strong> and Lakebase's <strong>Lakehouse Sync</strong> (changes flowing back to Delta) were in Public Preview, so the film presents them as new.</li>
+<li><strong>Lakebase synced tables are a managed copy</strong>, not zero-copy, and the script says so.</li>
+<li><strong>Fabric mirroring of Azure Databricks</strong> mirrors metadata and reads data through shortcuts, without a copy. Mirroring other sources does copy.</li>
+</ul>
+<p>Everything the film simplifies is written down in a <strong>rigour sheet</strong> in the <a href="https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/script.md">script</a>: what each scene shows, the real technology, and what an expert would add.</p>
+<blockquote>
+<p><strong>Lesson:</strong> names and maturity change fast. Check them when you publish, and say "preview" when something is in preview.</p>
+</blockquote>
+<h2 id="4-from-light-to-pictures">4. From light to pictures</h2>
+<p>Four style boards came first: living light, a glass factory, a blueprint and a miniature campus.</p>
+<p><img alt="The four early style boards: living light, glass factory, blueprint and miniature campus" src="img/01-style-boards.jpg" /></p>
+<p>The pushback that changed the film came next: "the light doesn't really have a refinement process, like there is no better light than other", and "none of these options show the idea of different data with different service methods for different audiences". A first attempt added a bench of filters and lenses to refine the light, but it still didn't show different data for different audiences.</p>
+<p>The breakthrough came from the author's ideas, a few exchanges later:</p>
+<ul>
+<li><strong>Data as packages, not dots:</strong> fragmented pictures that become sharper and more complete as they're refined.</li>
+<li><strong>Zooming in and out,</strong> like <em>The Inner Life of the Cell</em>: light moving through the platform in the wide shot, and the pictures it carries in the close-up. Physics and art together.</li>
+<li><strong>Paintings at the end:</strong> the subject is the business domain, and the style depends on who it's for.</li>
+</ul>
+<p>Claude validated the idea with one change. The first version tied styles to delivery channels, for example Renaissance for SQL endpoints. A channel is how a picture reaches you, not how it's painted, and experts would find the link arbitrary. So style became the <strong>audience's need</strong>: realism gives analysts every detail, a modern style gives executives the essence, strict rules produce government reports such as census-date counts, and a live impression serves operations. Claude also pointed out that the art world already speaks the language of data governance: catalogue, provenance, restoration, authentication and curators.</p>
+<p>The guardrails agreed at this stage: at most three zooms, original paintings only, and no dot-based painting styles, which in Australia can read as Aboriginal dot painting and are protected by cultural protocols.</p>
+<blockquote>
+<p><strong>Lesson:</strong> give each layer of a metaphor one job. Here, light explains movement and pictures explain meaning.</p>
+</blockquote>
+<h2 id="5-the-metaphor-map">5. The metaphor map</h2>
+<p>Most of the world was built by asking one question of every object: what does this mean in the platform? The author's additions were often the best: printing a picture as writing data, scanning it as reading, and projectors for zero-copy. Later came the sketch and the brain.</p>
+<table>
+<thead>
+<tr>
+<th>In the film</th>
+<th>In the platform</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A tap written into the student system</td>
+<td>A write to the system of record, before the platform sees it</td>
+</tr>
+<tr>
+<td>A colour of light per source system</td>
+<td>Application domains (source-aligned data)</td>
+</tr>
+<tr>
+<td>The integration platform hub</td>
+<td>Message routing, retries and security</td>
+</tr>
+<tr>
+<td>The Zerobus Ingest lane</td>
+<td>Events streamed into Delta tables in seconds</td>
+</tr>
+<tr>
+<td>The landing zone and Auto Loader</td>
+<td>Files in cloud storage, each loaded exactly once</td>
+</tr>
+<tr>
+<td>Glass vaults: bronze, silver, gold</td>
+<td>Delta tables in each medallion layer</td>
+</tr>
+<tr>
+<td>Glitched, duplicated, mistimed tiles</td>
+<td>Real raw-data problems</td>
+</tr>
+<tr>
+<td>The sketch</td>
+<td>The conceptual model: entities and relationships</td>
+</tr>
+<tr>
+<td>dbt housings with check marks</td>
+<td>Sources, staging and intermediate models, with tests</td>
+</tr>
+<tr>
+<td>The SQL warehouse underneath</td>
+<td>Databricks compute running the SQL that dbt compiles</td>
+</tr>
+<tr>
+<td>A prism into business-domain colours</td>
+<td>From source-aligned to domain-aligned data</td>
+</tr>
+<tr>
+<td>Paintings and their plaques</td>
+<td>Data products (marts with contracts) and dbt exposures</td>
+</tr>
+<tr>
+<td>The Catalog panel</td>
+<td>dbt Catalog: definitions, sources, lineage, exposures</td>
+</tr>
+<tr>
+<td>The Unity Catalog panel</td>
+<td>Certification, access control and masking</td>
+</tr>
+<tr>
+<td>The organisational brain</td>
+<td>Genie Ontology</td>
+</tr>
+<tr>
+<td>A desk card index</td>
+<td>Lakebase, a fast copy for apps</td>
+</tr>
+<tr>
+<td>A bell, a reading room, copies, a projector</td>
+<td>Events, SQL endpoints, integration copies, zero-copy sharing</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-the-first-cut">6. The first cut</h2>
+<p>The first cut was built entirely in code: a canvas animation engine, one function per scene, and a camera that pans and zooms through a single world. Every frame is a pure function of time, so the film could be rendered frame by frame in a headless browser and checked like software.</p>
+<p><img alt="The refinery in the first cut: rough prints labelled as errors, duplicates and different clocks" src="img/02-first-cut-refinery.jpg" /></p>
+<p>The review loop was simple: render frames at the moments the narration mentions something, look at them, fix, repeat. It caught a crowded refinery, labels colliding with captions, a camera that never held still on a painting, archives that looked like bookshelves, and a render that stopped when a session ended (solved by rendering in resumable chunks). The first cut ran 4:56, silent, with captions.</p>
+<p><img alt="The gold gallery in the first cut, with Renaissance, modern and impressionist paintings" src="img/03-first-cut-gold.jpg" /></p>
+<h2 id="7-the-big-review">7. The big review</h2>
+<p>The author's review of the first cut was the turning point. Each point made the film more accurate or more coherent:</p>
+<ul>
+<li><strong>Start at the system of record.</strong> The first cut had the phone writing straight into the platform. In reality the student system stores the enrolment first, and the platform takes it in afterwards.</li>
+<li><strong>One design language.</strong> Old-fashioned drawings next to crystal-clear lenses looked mixed. Everything moved to dark glass, luminous edges, thin line icons and one font, including the painting frames.</li>
+<li><strong>Make dbt visible, and show the layers together.</strong> The lineage got lost between the steps. A new overview shows bronze, silver and gold on the Databricks Lakehouse, with the dbt lineage graph above.</li>
+<li><strong>Show whose component is whose,</strong> with the official Databricks and dbt logos, unaltered.</li>
+<li><strong>The sketch comes first.</strong> The conceptual model is the raw sketch of the world, and without it the picture never makes sense. The film now shows the wrong sketch too: nothing fits, and a downstream number reads 312%.</li>
+<li><strong>Paintings as data products.</strong> Claude added a precision here. In dbt, an <strong>exposure</strong> declares a downstream use, such as a dashboard, report or app. The data product itself is a mart with a contract and an owner. So the painting became the data product, and its plaque the exposure.</li>
+<li><strong>From application domains to business domains,</strong> events through an integration platform, and tiles that look digital rather than like paper. In the author's words, the old ones looked "more like napkins".</li>
+</ul>
+<blockquote>
+<p><strong>Lesson:</strong> a picture can be beautiful and still wrong. The question behind every review point was "is this how it really works?"</p>
+</blockquote>
+<h2 id="8-checkpoints-before-the-rebuild">8. Checkpoints before the rebuild</h2>
+<p>Rebuilding everything was expensive, so the new look was agreed on five <strong>style frames</strong> first.</p>
+<p><img alt="Style frame: from the system of record into the platform" src="img/04-style-frame-sources.jpg" /></p>
+<p>The frames drew one more round of pushback. Two gates were both labelled "staging models", which was confusing, and tests appeared as a single step when in practice they run everywhere. The fix was one housing per dbt layer (sources, staging, intermediate), each with its own tests, and two failures stopped exactly where they would really be caught.</p>
+<p><img alt="Style frame: dbt layers with tests at every step, running on a Databricks SQL warehouse" src="img/05-style-frame-dbt.jpg" /></p>
+<p>Audio went through the same checkpoints. The first cut was silent because Claude had said it couldn't produce a voice, and the author challenged that. Music and sound effects could be synthesised in code, and an open-source voice model (<a href="https://huggingface.co/hexgrad/Kokoro-82M">Kokoro</a>, Apache 2.0) could run offline. A 40-second sound sketch and four five-second voice tests followed, and the American female voice was chosen.</p>
+<blockquote>
+<p><strong>Lesson:</strong> cheap checkpoints, like a still frame or a five-second clip, save expensive rebuilds.</p>
+</blockquote>
+<h2 id="9-the-second-cut">9. The second cut</h2>
+<p>The rebuilt film is timed to its narration. Each of its 82 lines is voiced separately, and every scene places its animation on the moment its line is spoken. The music ducks under the voice, about 60 sound effects land on story cues, and the mix is normalised for the web.</p>
+<p><img alt="The sketch, wrong versus right: pieces that never fit, and pieces that snap into place" src="img/06-final-sketch.jpg" /></p>
+<p>The last round of feedback was about richness and honesty:</p>
+<ul>
+<li><strong>Variety, not copies.</strong> Each domain now shows six different, named data products instead of repeated crops of one painting.</li>
+<li><strong>Consumption is part of the platform.</strong> Databricks Apps, Genie, and dashboards and SQL joined the end-to-end view.</li>
+<li><strong>An organisational brain.</strong> Genie Ontology became a neural network shaped like a brain, with the sketch's entities as its hubs.</li>
+<li><strong>Live should look live.</strong> The live data products now update, with lights switching on and off.</li>
+<li><strong>Intentional pauses must look intentional.</strong> A dramatic pause that faded to near-black read as a glitch, so it became a bright one-second pause with the projector warming up.</li>
+</ul>
+<p><img alt="Genie Ontology as the organisational brain, fed by university knowledge through MCP" src="img/07-final-brain.jpg" /></p>
+<p><img alt="The whole platform in one view: from source systems through bronze, silver and gold to business domains and consumption" src="img/08-final-overview.jpg" /></p>
+<h2 id="10-what-went-wrong-along-the-way">10. What went wrong along the way</h2>
+<p>Mistakes were part of the process, and most of them taught something:</p>
+<ul>
+<li>Claude dismissed audio too quickly at first. The fix was an offline voice model and synthesised sound.</li>
+<li>Voice clips were described as attached when they weren't, and the author had to ask where they were.</li>
+<li>Background renders stopped when a session ended, and a voice job ran out of memory next to the renderer. Both became resumable jobs, run one at a time.</li>
+<li>A relationship diagram was first drawn with its crow's-foot marks backwards.</li>
+<li>Labels collided with captions until every scene was checked against the caption area.</li>
+</ul>
+<h2 id="lessons-learned">Lessons learned</h2>
+<ol>
+<li><strong>Test analogies against the hardest mechanism.</strong> Zero-copy ruled out rivers and pipes.</li>
+<li><strong>Give each layer of a metaphor one job.</strong> Light moves; pictures carry meaning.</li>
+<li><strong>Map every object to a mechanism,</strong> and keep a rigour sheet for what the picture simplifies.</li>
+<li><strong>Show refinement on one record.</strong> The same fragment is rough in bronze, clean in silver and shaped for an audience in gold.</li>
+<li><strong>Start where data is born,</strong> in the system of record.</li>
+<li><strong>Show the conceptual model, and show it failing.</strong> The wrong sketch teaches more than the right one.</li>
+<li><strong>Keep roles clear.</strong> dbt writes and tests the recipes; Databricks runs, stores and governs.</li>
+<li><strong>Check names and maturity when you publish.</strong> Products get renamed, and previews aren't generally available.</li>
+<li><strong>Coherence beats flourish.</strong> Use one design language, and vary the content instead of repeating it.</li>
+<li><strong>Use cheap checkpoints.</strong> Style frames and five-second voice tests come before full rebuilds.</li>
+<li><strong>Build media as code.</strong> When scenes are timed to the narration, changing a line re-times the whole film.</li>
+<li><strong>Validate by looking and measuring,</strong> and say plainly what you can't check. Claude couldn't hear the audio, so the author judged the balance.</li>
+<li><strong>Pushback is the engine.</strong> Nearly every improvement started with "that's not quite right".</li>
+</ol>
+<h2 id="reuse-it">Reuse it</h2>
+<p>The film's <a href="https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/source/README.md">source and rebuild guide</a> are in this repository. To adapt the film for another university, change the narration in <code>src/narration.js</code> (for example "class", "census date" and the domain names), regenerate the voice, and render again.</p>
+</main>
+<footer><p>Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
+</body>
+</html>

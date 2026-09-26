@@ -25,4 +25,4 @@ A six-minute film that follows one enrolment at a fictional university, from a t
 
 ## How it was made
 
-The film is generated entirely from code. The source and a step-by-step rebuild guide are in [source/](source/).
+The film is generated entirely from code; the source and a step-by-step rebuild guide are in [source/](source/). The story of how it was made, with the analogies explored, the pushback and the lessons learned, is in [the making-of journey](../../journey/index.md).

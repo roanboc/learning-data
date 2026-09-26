@@ -11,14 +11,13 @@
 | # | Episode | What goes wrong | What it teaches | Status |
 |---|---|---|---|---|
 | 1 | [Silent change](1-silent-change/treatment.md) | A new enrolment status that the business and the student system team each saw only half of | A change needs visibility on both the technical and the business side; data contracts, checked constantly | Treatment agreed; next, a character sheet |
-| 2 | [Out of range](2-out-of-range/treatment.md) | Marks of −1 that would tell 38 students they're failing | Data expectations, and deciding in advance what happens when a row breaks a rule | Treatment proposed |
+| 2 | [Too good to be true](2-too-good-to-be-true/treatment.md) | Applications jump 38% overnight because a sync copied a week of them twice in the source system | Expectations on numbers, warning and error levels, and why stale and labelled beats fresh and wrong; re-ingesting from a fixed source | Treatment proposed |
 
 **Candidates for later episodes**, each with one mechanism:
 
 | Working title | What goes wrong | What it would teach |
 |---|---|---|
 | Late | A nightly file doesn't arrive, and a report goes out on yesterday's data | Freshness checks, service levels, and saying how old data is |
-| Twice | A retry sends the same enrolments again, and a class counts every student twice | At-least-once delivery, unique keys, and merging instead of appending |
 | Overwritten | A table is replaced by mistake on a Friday afternoon | Delta versions, time travel and `RESTORE`, and who can write where |
 | Broken promise | A data product changes shape, and a dashboard downstream breaks | Model contracts and versions on the side that publishes data, and exposures that say who depends on it |
 | Wrong eyes | A column with personal data becomes visible to people who shouldn't see it | Access control, masking and audit in Unity Catalog |

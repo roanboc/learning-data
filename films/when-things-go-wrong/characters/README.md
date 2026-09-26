@@ -19,7 +19,7 @@ First pass of the character sheet for [When things go wrong](../README.md), the 
 
 - **The outline's colour carries meaning,** like every colour in the films: cyan for the technical side, gold for the business side. Together with the role, it places each person in the square of the series: technical or business, producing or using the data.
 - **A simple, original style.** Rounded forms, soft light from the upper left, and faces made of a few lines: eyes, brows, a nose and a mouth are enough for calm, concerned and relieved. Characters blink and breathe, so they stay alive when still.
-- **A varied cast, without stereotypes.** Different ages, skin tones and hair; Leila wears a hijab. The technical side isn't all men: in the second episode, Rosa Díaz runs the admissions system.
+- **A varied cast, without stereotypes.** Different ages, skin tones and hair. The technical side isn't all men: in the second episode, Rosa Díaz runs the admissions system.
 - **One world.** The platform seen through Sam's screen is the first film's own code, drawn live, so the two worlds match exactly.
 
 ## What this checkpoint shows

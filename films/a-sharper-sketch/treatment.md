@@ -8,11 +8,36 @@ Same two audiences as the first two films: a newcomer understands it, and a data
 
 **Logline.** Two trusted numbers disagree about how many students are enrolled in Data Science 101. To find out why, we go back to the sketch from the first film and sharpen it, one question at a time.
 
-**Why it's worth making.** Data modelling decides whether every number downstream is right, yet most people never see it, and most material about it is either abstract notation or tool tutorials. Feedback on the first film showed its sketch is simpler than sector standards such as the MortarCAPS Higher Learning Data Standard (MCDS). That's not a mistake to hide. It's the start of this story: every sketch is a simplification, and good modellers add precision when a real question needs it, not before.
+**Why it's worth making.** Data modelling decides whether every number downstream is right, yet most people never see it, and most material about it is either abstract notation or tool tutorials. Feedback on the first film showed its sketch is simpler than published sector models. That's not a mistake to hide. It's the start of this story: every sketch is a simplification, and good modellers add precision when a real question needs it, not before.
 
 ## The idea at the heart of it
 
 **Add precision when a question can't be answered in only one way.** The first film's sketch was fine for "which classes fill up first?". It stops being fine the moment two people read it and count differently. Each chapter is one of those moments, and each one changes the sketch in a visible way.
+
+## The reference model: TCSI
+
+The film checks its sketch against one public, well-known model: the Australian Government's **Tertiary Collection of Student Information (TCSI)**, the data every Australian university reports about its students. It's free to read at [tcsisupport.gov.au](https://www.tcsisupport.gov.au/), and it fits the story, because the census date sits at its centre, as it does in film 1.
+
+TCSI is a reporting standard, not a full institutional model, so the film uses it for the core shape and adds the one thing it leaves out (the timetabled class). The rules the film relies on, checked on 26 September 2026:
+
+| TCSI rule | Element | Used in |
+|---|---|---|
+| A **course admission** is one student in one course from one commencement date: student, course and commencement date are unique together | Course admission packet; E313, E307, E534 | Chapter 4 |
+| A **unit enrolment** is unique by course admission, unit of study code and census date | Unit enrolment packet; E354, E489 | Chapters 2 and 3 |
+| The **census date belongs to the unit of study**, not to a term | E489, Unit of study census date | Chapter 3 |
+| Every unit enrolment links to a course admission, and must count towards that course | Unit enrolment packet | Chapter 4 |
+| A unit enrolment has a **status**, such as withdrew without penalty, which is amended when a student withdraws | E355, Unit of study status code | Chapter 5 |
+
+**The sharper sketch, in plain words** (what the film ends on):
+
+- **Student** 1–\* **Course admission** \*–1 **Course**
+- **Course admission** 1–\* **Unit enrolment** \*–1 **Unit offering** (unit of study + census date) \*–1 **Unit**
+- **Unit offering** 1–\* **Class** (timetabled activity: institutional, not in TCSI)
+- **Unit enrolment** has a status, with a history of changes
+
+The film names TCSI in chapter 7 and in the sources, and uses everyday words on screen ("course admission", "unit enrolment") with the element codes kept to the rigour sheet.
+
+**Customising for internal videos.** The chapters don't depend on TCSI. To use your own model, replace the table above with your entity names and rules, change the on-screen labels in chapters 2 to 7 and the "Map the words" lab, and keep the same four questions: what is one row, where does each attribute live, which relationships need their own entity, and what changes over time. Other public models that would work the same way: CEDS in the United States (public domain), HESA Data Futures in the UK, and 1EdTech OneRoster for learning systems.
 
 ## Where film 1's sketch falls short
 
@@ -23,9 +48,9 @@ This is the starting point, and the reason for the film. Film 1's "right sketch"
 | Simplification in film 1 | What sector practice does | Chapter |
 |---|---|---|
 | "Class" means the subject, its run in a term, and the Tuesday 9 am session, all at once | Unit (the curriculum), unit offering (a unit in one teaching period, place and mode), and class (a timetabled activity) are separate | 2 |
-| The census date sits on Term | Each unit offering has its own census date, recorded with each unit enrolment | 3 |
-| A student belongs to one course | A student can hold several course enrolments (double degrees, transfers, a second course); each unit enrolment counts towards one of them | 4 |
-| Enrolment has no history | Enrolments change status over time; the census count is a snapshot at a date, not today's state | 5 |
+| The census date sits on Term | The census date belongs to the unit of study, and is part of what identifies each unit enrolment (TCSI E489) | 3 |
+| A student belongs to one course | A student can hold several course admissions (double degrees, transfers, a second course); each unit enrolment links to one of them (TCSI course admission packet) | 4 |
+| Enrolment has no history | Unit enrolments carry a status that changes, for example on withdrawal (TCSI E355); the census count is a snapshot at a date, not today's state | 5 |
 
 ## The structure: zooming into the sketch
 
@@ -39,10 +64,10 @@ The first film moved downstream, the second upstream. This one moves *inward*: t
 | **1. Two numbers** | Genie says 131; the census report says 118. Both certified, both tested. The tests pass because each is correct for its own reading of the sketch. | Clean data can still disagree. Tests check rules, not meaning. |
 | **2. What is a class?** | The Class box splits into three: Unit (Data Science 101, the curriculum), Unit offering (Data Science 101, Semester 1, city campus, on site), and Class (Tuesday 9 am tutorial). Genie counted tutorial places; some students sit in two. | Grain: say exactly what one row stands for. Enrolment belongs to the offering; class allocation is separate. |
 | **3. Whose census date?** | The census date slides off Term and onto Unit offering. A summer intensive of the same unit has its own census date, weeks from the semester's. | Put an attribute on the thing it truly describes. Teaching period and census date are related but not the same. |
-| **4. One student, two courses** | A double-degree student appears twice in one count. A Course enrolment box appears between Student and Course, and each unit enrolment points to the course it counts towards. | Many-to-many relationships need their own entity. Identity and keys: one person, one student ID, several course enrolments. |
+| **4. One student, two courses** | A double-degree student appears twice in one count. A Course admission box appears between Student and Course, and each unit enrolment points to the course it counts towards. | Many-to-many relationships need their own entity. Identity and keys: one person, one student ID, several course admissions. |
 | **5. Enrolled when?** | Film 2's `WAITLISTED` student returns. The enrolment gains a status history: enrolled, waitlisted, withdrawn, each with a date. The census count is a snapshot at census date; Genie was counting today. | Time in models: current state versus history, effective dates, and snapshots. The definition "still enrolled on census date" now has something precise to point at. |
 | **6. Three levels of precision** | The same sketch shown three ways: the conceptual model (boxes for the business), the logical model (keys, attributes, cardinality), and the physical tables in silver and gold. In gold, a star: a fact table at one row per student per unit offering, with student, unit offering, course and date around it. | Conceptual, logical, physical. Normalised integration models in silver; dimensional models in gold, built for questions. |
-| **7. Words we share** | Our local words (class, subject, module, paper) are mapped to a sector standard, MCDS. Code sets for status and mode come from reference data, not free text. The sharper sketch feeds the catalog and Genie Ontology. | Don't invent a model the sector already agreed. Map local terms to a standard; keep reference data governed. |
+| **7. Words we share** | Our local words (class, subject, module, paper) are mapped to a public standard, TCSI: "unit of study", "course admission", "unit enrolment". Code sets for status and mode come from reference data, not free text. The sharper sketch feeds the catalog and Genie Ontology. | Don't invent a model the sector already agreed. Map local terms to a standard; keep reference data governed. |
 | **8. Pull back** | Genie now asks back: "Enrolled on census date, in the Semester 1 offering?" It answers 118, and shows its definition. The sketch is sharper, and still fits on one screen. | Precision where the question needs it, and no more. |
 
 ## Visual language
@@ -77,24 +102,23 @@ About 115 words a minute, a hold after each new idea, and a wordless breather at
 
 To confirm against current documentation, and record in the rigour sheet with the date checked:
 
-- **MCDS:** the exact entity and relationship names for student, course, course enrolment, unit, unit offering, class or activity, teaching period, census date and enrolment status, in the current version (V1.2 at the time of writing), from infocaps.mortarcaps.org. The names in this treatment are generic and have **not** yet been checked against MCDS.
-- **Australian reporting (TCSI):** where the census date is recorded, and how course admissions and unit enrolments relate.
+- **TCSI:** recheck the rules in the reference model table against the current year's packet specifications; confirm the licence for reuse of TCSI text on gov.au; confirm the E355 codes shown on screen.
 - **Modelling:** conceptual, logical and physical models; Kimball's grain and dimensional modelling; slowly changing dimensions; dbt snapshots for status history.
 - **Databricks:** Unity Catalog primary and foreign key constraints (informational), metric views or semantic definitions, and Genie Ontology's current name and scope.
-- **HERM:** how its capability areas relate to MCDS domains, since film 1 already points to HERM.
+- **HERM:** film 1 names domains after HERM capability areas; check the two fit together in chapter 7.
 
 ## Decisions for the author
 
 1. **Fix film 1, or let film 3 correct it?** Options: (a) leave film 1 as it is and let this film name it as a deliberate simplification (recommended: it's honest and makes the story); (b) also make a small fix in film 1, such as moving the census date to the class, and add a note on its rigour sheet. Either way, film 1's rigour sheet should say the sketch is simplified and point to this film.
 2. **How much notation?** Plain boxes and crow's feet only (recommended), or show a real ERD for a moment in chapter 6.
-3. **Name MCDS on screen?** Naming it makes the film more useful in Australia, New Zealand, Canada and the UK; keeping it generic ("a sector data standard") ages better. A middle path: name it in chapter 7 and in the sources.
+3. **Name TCSI on screen?** Naming it grounds the film in a real, public standard; keeping it generic ("a national data standard") travels better outside Australia. Recommended: name it in chapter 7 and in the sources only.
 4. **The title.** *A sharper sketch* is clear. Alternatives: *What is a class?*, *One row per what?*, *Two numbers*.
 5. **The tagline.** Options: "Sharpen the sketch when the question needs it." · "Say exactly what you mean, once."
 
 ## Next checkpoints
 
 1. Agree this treatment and decision 1.
-2. Get access to the MCDS dictionary and check every name in chapters 2 to 7.
+2. Recheck the TCSI rules for the current year.
 3. Script with a rigour sheet and pacing report.
 4. Five style frames: the splitting box, the sliding census date, the film strip, the glass star, the dictionary.
 5. A voice test, then the first cut.

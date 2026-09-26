@@ -47,14 +47,16 @@ scene("in",(ctx,S,t,sc)=>{
   const zA=fin(t,cZb-0.2);withA(ctx,zA,()=>{lane(ctx,IN2.ZL,[255,255,255],0.8);chip(ctx,1200,268,"databricks","Zerobus Ingest","into Delta tables in seconds",{align:"center"});});
   if(t>cZb)flowTiles(ctx,t,IN2.ZL,0.55,1.5,cZb,k=>({cell:(k*11+1)%24,q:0,app:k%2?"lms":"sis"}),32,zA);
   const fA=fin(t,cFi-0.3);withA(ctx,fA,()=>{lane(ctx,IN2.F1,APP.hr.c);lane(ctx,IN2.F2,APP.fin.c);glass(ctx,772,640,190,110,16,[200,215,240],{glow:10,ea:0.5});chip(ctx,867,792,null,"Landing zone","nightly files in cloud storage",{align:"center",ss:16});});
-  const aA=fin(t,cAu-0.3),N=8,scan0=cAu+0.3;let done=0,scanning=false;
+  const aA=fin(t,cAu-0.3),N=8,scan0=cAu+0.3,B=c("breath"),nx=sc.breathe?1:0;let done=0,scanning=false;
   withA(ctx,aA,()=>lane(ctx,IN2.AL,APP.fin.c));
-  for(let i=N-1;i>=0;i--){const drop=cFi+0.4+i*0.09,land=drop+0.6;if(t<drop)continue;const leave=scan0+i*0.55,sp={cell:(i*5+1)%24,q:0,app:i%2?"hr":"fin"},ix=820+(i%6)*18,iy=700-(i%6)*4;
+  // the breather: the next night, one new file lands, and Auto Loader reads only that one
+  if(nx&&t>B){const a=fin(t,B,0.8)*(1-sstep(sc.dur-0.6,sc.dur,t)),mx=800,my=600;withA(ctx,a,()=>{glow(ctx,mx,my,44,[220,230,255],0.35);ctx.fillStyle="rgba(236,242,255,0.95)";ctx.beginPath();ctx.arc(mx,my,15,0,TAU);ctx.arc(mx+7,my-5,13,0,TAU,true);ctx.fill("evenodd");T(ctx,"02:00",mx+24,my+7,{f:"mono",w:500,size:17,color:rgba(SOFT,0.95)});});}
+  for(let i=N-1+nx;i>=0;i--){const late=i>=N,drop=late?B+1.0:cFi+0.4+i*0.09,land=drop+0.6;if(t<drop)continue;const leave=late?B+2.4:scan0+i*0.55,sp={cell:(i*5+1)%24,q:0,app:i%2?"hr":"fin"},ix=820+(i%6)*18,iy=700-(i%6)*4;
     if(t<land){const u=ease((t-drop)/0.6);dtile(ctx,ix,lerp(560,iy,u),40,(hash(i,4)-0.5)*0.3,sp,1);}
     else if(t<leave){dtile(ctx,ix,iy,40,(hash(i,4)-0.5)*0.3,sp,1);}
     else{const u=(t-leave)/1.6;if(u>0.12)done++;if(u>0.05&&u<0.2)scanning=true;if(u<=1){const q=at(IN2.ALm,u);dtile(ctx,q.x,q.y,30,0.1,sp,1-sstep(0.9,1,u));}}}
   withA(ctx,aA,()=>{glass(ctx,1118,622,34,156,17,[255,209,140],{glow:20});ctx.save();ctx.shadowColor="rgba(255,220,150,1)";ctx.shadowBlur=scanning?30:14;ctx.fillStyle=scanning?"rgba(255,246,220,1)":"rgba(255,226,170,0.8)";ctx.fillRect(1122,694,26,5);ctx.restore();
-    chip(ctx,1268,806,"databricks","Auto Loader","each new file once · checkpoint "+done+" of "+N,{align:"center",ss:16});});
+    chip(ctx,1268,806,"databricks","Auto Loader","each new file once · checkpoint "+done+" of "+(nx&&t>B+1.6?N+1:N),{align:"center",ss:16});});
   const bA=0.55*fin(t,cZb-0.1)+0.45*fin(t,cBr-0.2),lvl=0.25+0.55*sstep(cZb,cHo,t);
   withA(ctx,bA,()=>vault(ctx,1460,196,380,690,LAYER.bronze,(r,cc)=>hash(r*31+cc,5)>lvl?null:APP[["sis","lms","hr","fin"][(hash(r*7+cc,6)*4)|0]].c,t>cBr-0.4?"Bronze":null,"Delta tables, as they arrived"));
   withA(ctx,fin(t,cBr+0.6)*(1-sstep(cHo+2.5,cHo+3.2,t)),()=>magnifier(ctx,1245,488,80,{cell:14,q:0,app:"lms",hi:true},1208,352,"raw: glitches, mixed clocks",APP.lms.c));
@@ -65,6 +67,8 @@ scene("in",(ctx,S,t,sc)=>{
 /* ---------- 2. The sketch ---------- */
 scene("sketch",(ctx,S,t,sc)=>{
   const c=id=>cue(sc,id),cF=c("first"),cM=c("model"),cC=c("concept"),cW=c("wrong"),cD=c("downstream"),cR=c("right"),dM=cC-cM;
+  // the breather: two new enrolments arrive; the right sketch gives each its place, the wrong one lets the error grow
+  const B=c("breath"),arr=sc.breathe?[1.0,3.0].map(x=>B+x):[],nIn=arr.filter(a=>t>a+1.0).length;
   const cam=camAt([[0,960,520,1],[sc.dur+2,960,520,1.04]],t);bgW(ctx,S,cam);
   const p1=1-sstep(cW-0.7,cW+0.1,t),p2=sstep(cW-0.4,cW+0.4,t);
   withA(ctx,p1,()=>{glass(ctx,300,250,1320,580,22,[150,225,255],{glow:18,ea:0.4,fill:"rgba(10,18,36,0.5)"});
@@ -78,10 +82,15 @@ scene("sketch",(ctx,S,t,sc)=>{
     withA(ctx,wA,()=>{tag(ctx,480,140,"Wrong sketch",BAD,{align:"center",size:22});sketchA(ctx,80,180,800,280,true,1,{});
       glass(ctx,100,510,480,320,12,BAD,{glow:16,ea:0.6});for(let i=0;i<24;i++){if(hash(i,6)<0.18)continue;const k=(i*7+5)%24,ox=(hash(i,3)-0.5)*38+Math.sin(t*1.6+i)*4,oy=(hash(i,4)-0.5)*30,rot=(hash(i,5)-0.5)*0.5;ctx.save();ctx.translate(100+(i%6)*80+40+ox,510+((i/6)|0)*80+40+oy);ctx.rotate(rot);ctx.drawImage(master2(1),(k%6)*TCELL,((k/6)|0)*TCELL,TCELL,TCELL,-40,-40,80,80);if(hash(i,7)<0.35){ctx.strokeStyle=rgba(BAD,0.95);ctx.lineWidth=3;ctx.strokeRect(-40,-40,80,80);}ctx.restore();}});
     withA(ctx,dA,()=>{ctx.save();ctx.strokeStyle=rgba(BAD,0.7);ctx.lineWidth=2;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(582,670);ctx.lineTo(640,670);ctx.stroke();ctx.restore();ledFrame(ctx,650,590,240,160,BAD,painting2("modern"),{pad:8});ctx.save();ctx.globalCompositeOperation="difference";ctx.fillStyle="rgba(120,0,40,0.5)";ctx.fillRect(650,590,240,160);ctx.restore();
-      for(let k=0;k<5;k++){const gy=590+hash(k,Math.floor(t*8))*150;ctx.fillStyle=rgba(BAD,0.5);ctx.fillRect(650,gy,240,3);}tag(ctx,770,790,"Class fill: 312%",BAD,{align:"center",size:20});});
+      for(let k=0;k<5;k++){const gy=590+hash(k,Math.floor(t*8))*150;ctx.fillStyle=rgba(BAD,0.5);ctx.fillRect(650,gy,240,3);}tag(ctx,770,790,"Class fill: "+Math.ceil((374+nIn)/1.2)+"%",BAD,{align:"center",size:20});});
     withA(ctx,rA,()=>{tag(ctx,1440,140,"Right sketch",GOOD,{align:"center",size:22});sketchA(ctx,1040,180,800,280,false,1,{});
       glass(ctx,1060,510,480,320,12,GOOD,{glow:16,ea:0.6});for(let i=0;i<24;i++){const k=i,sx=(hash(i,13)-0.5)*300,sy=(hash(i,14)-0.5)*200,rot=(hash(i,15)-0.5)*0.8*(1-snap);const px=1060+(i%6)*80+40+sx*(1-snap),py=510+((i/6)|0)*80+40+sy*(1-snap);ctx.save();ctx.translate(px,py);ctx.rotate(rot);ctx.drawImage(master2(1),(k%6)*TCELL,((k/6)|0)*TCELL,TCELL,TCELL,-40,-40,80.5,80.5);ctx.restore();}
       if(snap>=1){glow(ctx,1300,670,200,GOOD,0.25*(1-sstep(cR+1.9,cR+2.6,t)));}
-      withA(ctx,fin(t,cR+1.5),()=>{ctx.save();ctx.strokeStyle=rgba(GOOD,0.7);ctx.lineWidth=2;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(1542,670);ctx.lineTo(1600,670);ctx.stroke();ctx.restore();ledFrame(ctx,1610,590,240,160,DOM.teaching.c,painting2("modern"),{pad:8});tag(ctx,1730,790,"Class fill: 98%",GOOD,{align:"center",size:20});});});});
+      withA(ctx,fin(t,cR+1.5),()=>{ctx.save();ctx.strokeStyle=rgba(GOOD,0.7);ctx.lineWidth=2;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(1542,670);ctx.lineTo(1600,670);ctx.stroke();ctx.restore();ledFrame(ctx,1610,590,240,160,DOM.teaching.c,painting2("modern"),{pad:8});tag(ctx,1730,790,"Class fill: "+Math.round((118+nIn)/1.2)+"%",GOOD,{align:"center",size:20});});
+    arr.forEach((a,i)=>{if(t<a)return;const u=clamp((t-a)/1.0,0,1),e=ease(u),arc=Math.sin(u*Math.PI)*90,sp={cell:(i*7+4)%24,q:0,app:["sis","lms"][i]};
+      const wx=200+i*220+(hash(i,21)-0.5)*40,wy=600+hash(i,22)*160,rc=[9,16][i],rx=1060+(rc%6)*80+40,ry=510+((rc/6)|0)*80+40;
+      if(u<0.08)glow(ctx,960,470,60,C.white,1-u/0.08);
+      if(u<1){dtile(ctx,lerp(960,wx,e),lerp(470,wy,e)-arc,48,u*2.4,sp,1);dtile(ctx,lerp(960,rx,e),lerp(470,ry,e)-arc,48,0,{cell:rc,q:2},1);}
+      else{const k=t-a-1.0;dtile(ctx,wx+Math.sin(t*3+i)*6,wy+Math.cos(t*2.4+i)*5,48,Math.sin(t*1.7+i)*0.4,{...sp,err:true},1);if(k<0.9)glow(ctx,rx,ry,70,GOOD,0.8*(1-k/0.9));}});});});
   vign(ctx,S);
 });

@@ -1,12 +1,12 @@
 # Proposal: the breathing cut
 
-*A plan for the next version of* The Inner Life of Data*: the same narration, with room to think. Status: proposal, not built yet.*
+*The third cut of* The Inner Life of Data*: the same narration, with room to think. Status: built. The film is now 8:01 in English and 8:38 in Spanish, at about 115 words a minute, with the voice speaking two-thirds of the time. The timing lives in `source/src/breath.js`, shared by both languages; each chapter's wordless ending starts at the scene's `breath` cue.*
 
 ## Why
 
 The film is accurate, but it doesn't stop talking. `tools/pace.py` measures it:
 
-| | Now | Target |
+| | The v4 cut | Target |
 |---|---|---|
 | Length | 6:17 (Spanish 6:55) | about 8:00 (Spanish about 8:40) |
 | Narration speed | 147 words a minute | about 115 |
@@ -27,7 +27,7 @@ Good documentaries let the picture keep talking after the narrator stops. The vi
 
 ## Chapter by chapter
 
-"Hold" is extra silence after a line, set as that line's `gap` in `src/narration.js`. "Breather" is the wordless end of a chapter, set as the scene's `tail`. Its picture starts at the scene's `voEnd`, which the engine already computes.
+"Hold" is extra silence after a line, and "breather" is the wordless end of a chapter. Both live in `source/src/breath.js`, shared by every language, and the engine adds them on top of the narration's own timing. A breather's picture starts at the scene's `breath` cue.
 
 | Chapter | Holds (line: seconds, what the picture does) | Breather (seconds: the wordless variation) | Added |
 |---|---|---|---|
@@ -45,16 +45,16 @@ Good documentaries let the picture keep talking after the narrator stops. The vi
 
 That adds about 1 minute 44 seconds: 6:17 becomes about 8:00, at about 115 words a minute, with the voice speaking about two-thirds of the time.
 
-## How to build it
+## How it was built
 
-1. **Timing.** Set the holds as `gap` and the breathers as `tail` in `src/narration.js` and `src/i18n/es/narration.js`. The engine re-times every scene on its own. Check with `python tools/pace.py`: no chapter above 130 words a minute, and each has a quiet moment of at least 4 seconds.
+1. **Timing.** Set the holds and breathers in `src/breath.js`, once for every language. The engine re-times every scene on its own. Check with `python tools/pace.py`: no chapter above 130 words a minute, and each has a quiet moment of at least 4 seconds.
 2. **Pictures.** Write the ten variations in `src/scA.js` to `src/scD.js`, each starting at the scene's `voEnd`, using the existing components. Check that every camera key still ends at `sc.dur`.
 3. **Sound.** In `tools/audio.py`, lift the music bed by a few dB when the voice rests, and add one effect cue per variation.
 4. **Rebuild.** Run `tools/tts.py` once to restore the voice files (the words don't change, so the timings in `vodur.js` stay the same), then `build.py`, `audio.py`, `build.py`, `captions.py` and `render.py`, in both languages. Publish the player and soundtrack to the site, and the MP4s to a release.
 5. **Review.** Render stills in the middle of every hold and breather, and watch it once at full speed. A pause should feel like a moment to look, not like waiting.
 
-## Options to decide
+## Decisions made
 
-- **One cut or two.** The site could use the breathing cut, while the current 6:17 cut stays for sharing on social media. Both can come from one source if holds and breathers only apply when a `FILM_CUT=breathing` setting is on.
-- **Chapter bumpers.** A one-second chapter title between chapters helps people know where they are, but it adds text. Worth a still-frame test first.
-- **Pause and think, on the site only.** An optional player mode that stops at the end of each chapter and asks one question from *Make the call* before continuing. It turns the pause into a prediction, which helps people remember, and leaves the film itself unchanged.
+- **One cut.** The breathing cut replaces the 6:17 cut on the site and in the downloads. The LinkedIn ranges in `script.md` now point into it.
+- **No chapter bumpers.** The player's chapter buttons already show where you are, so no extra text on screen.
+- **Pause and think, on the site.** An optional player mode stops at the end of each chapter (except the opening, the overview and the ending) and asks one question, matching the lab for that part. Its questions live in `site/assets/learn/learn.en.js` and `learn.es.js` under `think`, and `site/assets/learn/think.js` shows them.

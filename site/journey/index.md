@@ -184,4 +184,4 @@ Mistakes were part of the process, and most of them taught something:
 
 ## Reuse it
 
-The film's [source and rebuild guide](https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/source/README.md) are in this repository. To adapt the film for another university, change the narration in `src/narration.js` (for example "class", "census date" and the domain names), regenerate the voice, and render again.
+The film's [source and rebuild guide](https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/source/README.md) are in this repository, and the [playbook](https://github.com/roanboc/learning-data/blob/main/PLAYBOOK.md) collects what to reuse for the next film or course. To adapt the film for another university, change the narration in `src/narration.js` (for example "class", "census date" and the domain names), regenerate the voice, and render again.

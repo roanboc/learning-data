@@ -184,4 +184,4 @@ Los errores fueron parte del proceso, y casi todos enseñaron algo:
 
 ## Reutilízala
 
-El [código fuente y la guía para reconstruir la película](https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/source/README.md) (en inglés) están en este repositorio. Para adaptar la película a otra universidad, cambia la narración en `src/narration.js`, o en `src/i18n/es/narration.js` para la versión en español (por ejemplo "clase", "fecha de corte" y los nombres de los dominios), vuelve a generar la voz y renderiza de nuevo.
+El [código fuente y la guía para reconstruir la película](https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/source/README.md) (en inglés) están en este repositorio, y la [guía práctica](https://github.com/roanboc/learning-data/blob/main/PLAYBOOK.md) (en inglés) reúne lo que conviene reutilizar en la próxima película o curso. Para adaptar la película a otra universidad, cambia la narración en `src/narration.js`, o en `src/i18n/es/narration.js` para la versión en español (por ejemplo "clase", "fecha de corte" y los nombres de los dominios), vuelve a generar la voz y renderiza de nuevo.

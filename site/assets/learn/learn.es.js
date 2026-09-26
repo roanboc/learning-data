@@ -1,7 +1,7 @@
 /* Learning Data: textos en español (Latinoamérica) de "Desarma la plataforma" y "Tú decides". Mantén las claves iguales a learn.en.js.
    Los nombres de productos y componentes (Databricks, dbt, Unity Catalog, Genie, Lakebase, marts, exposures, staging) y el código quedan en inglés, como en la película. */
 window.LEARN={lang:"es",
-ui:{stop:"Parada",of:"de",stops:"Paradas",lab:"Lab",watch:"Ver esta parte",next:"Siguiente",again:"Volver al inicio",real:"En la película y en la vida real",mapNote:"Haz clic en cualquier parte de la plataforma"},
+ui:{stop:"Parada",of:"de",stops:"Paradas",lab:"Lab",watch:"Ver esta parte",next:"Siguiente",again:"Volver al inicio",toQuiz:"¿Listo? Tú decides",close:"Cerrar",real:"En la película y en la vida real",mapNote:"Haz clic en cualquier parte de la plataforma"},
 map:{sources:"Sistemas de origen",bronze:"Bronce",dbt:"dbt",silver:"Plata",gold:"Oro",domains:"Dominios de negocio",sqlwh:"SQL warehouses",uc:"Unity Catalog",apps:"Databricks Apps",genie:"Genie",dash:"Dashboards y SQL"},
 stops:{
 capture:{name:"Captura",title:"Donde nacen los datos",

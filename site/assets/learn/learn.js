@@ -1,4 +1,4 @@
-/* Learning Data: the core of "Take it apart" (the map, the stops and the stages the labs draw on).
+/* Learning Data: the core of "Take it apart" (labs/: the map, the stops and the stages the labs draw on), shared with "Make the call" (scenarios/).
    Everything is drawn with the film's own components from assets/film/film.js, and the words come from the page's language pack (learn.<lang>.js).
    labs.js adds the eight labs and quiz.js the scenarios of "Make the call". */
 (()=>{"use strict";
@@ -80,20 +80,22 @@ function buildExplore(){
   RAIL.addEventListener("keydown",e=>{const i=STOPS.findIndex(s=>s.id===CUR);let j=null;if(e.key==="ArrowRight")j=(i+1)%STOPS.length;else if(e.key==="ArrowLeft")j=(i+STOPS.length-1)%STOPS.length;else if(e.key==="Home")j=0;else if(e.key==="End")j=STOPS.length-1;if(j!=null){e.preventDefault();openStop(STOPS[j].id);$("#tab-"+STOPS[j].id).focus();}});
   PANEL=h("div",{class:"stop",id:"stop-panel",role:"tabpanel"});
   root.append(RAIL,PANEL);
-  const want=(location.hash.match(/^#explore[-/](\w+)/)||[])[1];
+  const want=(location.hash.match(/^#(?:explore[-/])?(\w+)$/)||[])[1];
   openStop(LD.stop(want)?want:store.get("stop","capture"),false);
-  if(want)requestAnimationFrame(()=>$("#explore").scrollIntoView());}
+  if(LD.stop(want))requestAnimationFrame(()=>RAIL.scrollIntoView());
+  window.addEventListener("hashchange",()=>{const id=location.hash.slice(1);if(LD.stop(id)&&id!==CUR)openStop(id,true);});}
 function openStop(id,scroll){
   const s=LD.stop(id)||STOPS[0];id=s.id;
   KILL.forEach(f=>{try{f();}catch(e){}});KILL=[];CUR=id;
   [...RAIL.children].forEach(b=>{const on=b.id==="tab-"+id;b.setAttribute("aria-selected",on);b.tabIndex=on?0:-1;});
   PANEL.setAttribute("aria-labelledby","tab-"+id);
+  const tab=$("#tab-"+id);if(RAIL.scrollWidth>RAIL.clientWidth)RAIL.scrollTo({left:tab.offsetLeft-RAIL.offsetLeft-(RAIL.clientWidth-tab.offsetWidth)/2,behavior:RM?"auto":"smooth"});
   MAP.querySelectorAll(".hot").forEach(b=>b.classList.toggle("on",b.dataset.stop===id));
   const visited=store.get("visited",[]);if(!visited.includes(id)){visited.push(id);store.set("visited",visited);}$("#tab-"+id).classList.add("done");store.set("stop",id);
   PANEL.textContent="";PANEL.style.setProperty("--c",css(s.c));
   const i=STOPS.indexOf(s),nx=STOPS[(i+1)%STOPS.length];
-  const watch=h("button",{type:"button",class:"btn",onclick:()=>{FILM.playScene(s.scene);$("#watch").scrollIntoView();}},"▶ "+X.ui.watch+" · "+fmt(FILM.sceneStart(s.scene)));
-  const next=h("button",{type:"button",class:"btn",onclick:()=>{openStop(nx.id,true);}},(i<STOPS.length-1?X.ui.next+": "+nx.name:X.ui.again)+" →");
+  const watch=h("button",{type:"button",class:"btn",onclick:()=>clip(s)},"▶ "+X.ui.watch+" · "+fmt(FILM.sceneStart(s.scene)));
+  const next=i<STOPS.length-1?h("button",{type:"button",class:"btn",onclick:()=>{openStop(nx.id,true);}},X.ui.next+": "+nx.name+" →"):h("a",{class:"btn primary",href:LD.quizHref},X.ui.toQuiz+" →");
   const text=h("div",{class:"stop-text"},
     h("p",{class:"kicker",html:"<b>"+esc(X.ui.stop+" "+s.n)+"</b> "+esc(X.ui.of)+" "+STOPS.length+" · "+esc(s.name)}),
     h("h3",null,s.title),h("p",{class:"idea"},s.idea),
@@ -103,8 +105,15 @@ function openStop(id,scroll){
   const labHost=h("div",{class:"stop-lab"});
   PANEL.append(text,labHost);
   const lab=LD.LABS[id];if(lab){const k=lab(labHost,s);if(k)KILL.push(k);}
-  if(scroll)$("#explore").scrollIntoView();}
+  if(location.hash.slice(1)!==id)history.replaceState(null,"","#"+id);
+  if(scroll)RAIL.scrollIntoView();}
 LD.openStop=(id,scroll)=>{openStop(id,scroll);};
+/* "Watch this part": the film plays that chapter in a pop-up player, and stops at its end */
+function clip(s){const d=$("#clip");if(!d||!d.showModal){location.href=LD.homeHref+"#t="+Math.floor(FILM.sceneStart(s.scene));return;}
+  $("#clip-h").textContent=s.name+" · "+fmt(FILM.sceneStart(s.scene));if(!d.open)d.showModal();FILM.playScene(s.scene,true);}
+function clipSetup(){const d=$("#clip");if(!d)return;d.addEventListener("close",()=>{if(FILM.pause)FILM.pause();});d.addEventListener("click",e=>{if(e.target===d||e.target.closest("[data-close]"))d.close();});}
+/* the labs and the scenarios are sibling pages, in each language */
+LD.labsHref=id=>"../labs/"+(id?"#"+id:"");LD.quizHref="../scenarios/";LD.homeHref="../";
 
 /* the frame every lab shares: a title, a hint, a stage, controls and what just happened */
 LD.shell=(host,s,o)=>{o=o||{};const lab=s.lab;
@@ -121,7 +130,7 @@ LD.shell=(host,s,o)=>{o=o||{};const lab=s.lab;
   return{box,tabs,stage,controls,read,say,btn,toggle,seg,readout,setSay};};
 
 /* ---------- start ---------- */
-function start(){buildExplore();if(LD.buildQuiz)LD.buildQuiz();if(/^#t=/.test(location.hash)){const w=$("#watch");if(w)requestAnimationFrame(()=>w.scrollIntoView());}}
+function start(){clipSetup();buildExplore();if(LD.buildQuiz)LD.buildQuiz();}
 FILM.ready.then(()=>{READY=true;STAGES.forEach(s=>s.resize());});
 requestAnimationFrame(tick);
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();

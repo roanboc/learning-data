@@ -10,7 +10,7 @@
 
 | # | Episode | What goes wrong | What it teaches | Status |
 |---|---|---|---|---|
-| 1 | [Silent change](1-silent-change/treatment.md) | A new enrolment status that the business and the student system team each saw only half of | A change needs visibility on both the technical and the business side; data contracts, checked constantly | Treatment agreed; next, a character sheet |
+| 1 | [Silent change](1-silent-change/treatment.md) | A new enrolment status that the business and the student system team each saw only half of | A change needs visibility on both the technical and the business side; data contracts, checked constantly | Treatment agreed; character sheet, first pass |
 | 2 | [Too good to be true](2-too-good-to-be-true/treatment.md) | Applications jump 38% overnight because a sync copied a week of them twice in the source system | Expectations on numbers, warning and error levels, and why stale and labelled beats fresh and wrong; re-ingesting from a fixed source | Treatment agreed |
 
 **Candidates for later episodes**, each with one mechanism:
@@ -25,7 +25,7 @@
 ## What every episode shares
 
 - **The same world.** The fictional university and the platform of light from the first film, with its components: vaults, tiles, the dbt line, the sketch, the paintings.
-- **The same square of people.** Four characters: technical and business, on the side that produces the data and the side that uses it. A change is only safe when all four corners can see it. Sam Okafor, the data engineer, is the guide in every episode; the other corners change with the part of the university where things go wrong.
+- **The same square of people.** Four characters: technical and business, on the side that produces the data and the side that uses it. A change is only safe when all four corners can see it. Sam Okafor, the data engineer, is the guide in every episode; the other corners change with the part of the university where things go wrong. See [the character sheet](characters/README.md).
 - **The same way in.** A person meets the problem first, then the camera goes through Sam's screen into the platform and follows the lineage to the cause.
 - **The same objects.** The data contract card at the platform's door, the quarantine tray, status lights, and the version panes behind each vault. An object introduced in one episode means the same in every other.
 - **The same craft.** Narration only, with characters who act but don't speak; room to think at about 115 words a minute; "Pause and think" questions; labs and scenarios on Learning Data; English and Spanish from the same code. See [PLAYBOOK.md](../../PLAYBOOK.md).

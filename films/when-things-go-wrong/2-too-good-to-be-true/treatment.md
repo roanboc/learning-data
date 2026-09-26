@@ -1,6 +1,6 @@
 # When things go wrong · 2. Too good to be true
 
-*Treatment for the second episode of [When things go wrong](../README.md), v0.3: the main decisions are made (see [Decisions](#decisions)). Status: agreed; next, add the new characters to the character sheet.*
+*Treatment for the second episode of [When things go wrong](../README.md), v0.3: the main decisions are made (see [Decisions](#decisions)). Status: agreed; its characters are in the [character sheet](../characters/README.md).*
 
 **Series tagline:** Fail safely. Fix once.
 
@@ -32,7 +32,7 @@ The contract for this number includes an expectation agreed with the admissions 
 | **3. Three Tuesdays** | The screen splits into three, and the same night runs three ways. **No test:** 11,340 reaches the painting; the committee approves 600 places. Three weeks later the offers go unanswered, the decision is reversed, and nobody trusts the dashboard. **Warning:** the test fires amber, the build carries on, and the number is published. The warning lands in a channel with forty others that nobody reads before 10 am, and the same decision is made. **Error:** the test stops the build before gold. The painting keeps yesterday's 8,200 with a banner: "Last good data as of Monday 23:00. Checking an unusual change." The committee moves the decision to Wednesday. | No test lets wrong data through. A warning is a note, not a brake. An error keeps the last good number, clearly labelled. Stale and labelled beats fresh and wrong. |
 | **4. Choosing the level** | Why not make every test an error? A spike on a closing date is real, and stopping it would hold back good data and teach people to ignore alarms. So the same test has two bands: amber for "worth a look", red for "must not reach a decision". Warnings go to someone who reads them, and there are few enough that they do. | Severity chosen by consequence. Thresholds based on what's normal, including seasons. Alert fatigue. |
 | **5. Follow the thread** | Sam follows the thread upstream from the painting to bronze. There, 3,100 pairs of rows are identical except for their ID and the time they were created. The uniqueness test checked the ID, and every ID was unique. What makes an application unique in the real world is the applicant, the course and the intake. | Duplicates in the source system itself. Test uniqueness on the business key, not only the system's ID. |
-| **6. Fix at the source, then reload** | Tomás's team removes the copies in the admissions system and makes the sync safe to run twice. The platform can't simply delete rows from its own copy: it reloads the affected week from the corrected source, and rebuilds silver and gold. Time travel compares before and after: 11,340 becomes 8,240. On Wednesday, the committee plans with the right number. | Fix the cause at the source, then re-ingest the affected period. Why the platform's copy should match the source rather than be patched by hand. Time travel to verify. |
+| **6. Fix at the source, then reload** | Rosa's team removes the copies in the admissions system and makes the sync safe to run twice. The platform can't simply delete rows from its own copy: it reloads the affected week from the corrected source, and rebuilds silver and gold. Time travel compares before and after: 11,340 becomes 8,240. On Wednesday, the committee plans with the right number. | Fix the cause at the source, then re-ingest the affected period. Why the platform's copy should match the source rather than be patched by hand. Time travel to verify. |
 | **7. Pull back** | A new test stays behind: one application per applicant, course and intake. The gauge on the painting settles at green. The camera pulls back to the whole platform. The last line: "Stale and labelled beats fresh and wrong." | Every incident leaves a test behind. Fail safely: when in doubt, keep the last good number, and say so. |
 
 ## The people
@@ -42,7 +42,7 @@ The series' square: technical and business, on the side that produces the data a
 | Character | Corner | Role | What they show |
 |---|---|---|---|
 | **Leila Haddad** | Business, produces | Admissions office manager | Knows what a normal day looks like, including closing-date spikes, and helps set the limits. |
-| **Tomás Díaz** | Technical, produces | Admissions system team | Runs a sync that wasn't safe to restart. Fixes it at the source, without blame. |
+| **Rosa Díaz** | Technical, produces | Admissions system team | Runs a sync that wasn't safe to restart. Fixes it at the source, without blame. |
 | **Sam Okafor** | Technical, uses | Data engineer, the series' guide | Chooses test levels with the business, follows the thread, and reloads the data. |
 | **Professor David Mensah** | Business, uses | Deputy Vice-Chancellor, chairs the planning committee | The person about to act on the number. In the error version, he's the one who chooses to wait a day. |
 
@@ -105,7 +105,7 @@ Made by the author on 26 September 2026:
 ## Next checkpoints
 
 1. ~~Agree this treatment.~~ Done.
-2. Reuse the character sheet from the first episode, and add the new characters.
+2. ~~Reuse the character sheet from the first episode, and add the new characters.~~ First pass done: see [the character sheet](../characters/README.md).
 3. Script with a rigour sheet and pacing report.
 4. Style frames: the gauge on the painting, the row checks passing while the gauge goes red, the three Tuesdays, and the reload.
 5. A voice test, and the first cut.

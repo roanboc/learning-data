@@ -1,0 +1,10 @@
+[["<html lang=\"en\">","<html lang=\"es\">"],
+["<title>The Inner Life of Data</title>","<title>La vida interior de los datos</title>"],
+["<h1>The Inner Life of Data</h1>","<h1>La vida interior de los datos</h1>"],
+["aria-label=\"Language\"><a href=\"./\" aria-current=\"true\" lang=\"en\">EN</a><a href=\"../../es/films/inner-life-of-data/\" lang=\"es\" hreflang=\"es\">ES</a>","aria-label=\"Idioma\"><a href=\"../../../films/inner-life-of-data/\" lang=\"en\" hreflang=\"en\">EN</a><a href=\"./\" aria-current=\"true\" lang=\"es\">ES</a>"],
+["A six-minute film with narration, music and sound. Press Play, or jump to a chapter.","Una película de siete minutos con narración, música y sonido. Presiona Reproducir, o salta a un capítulo."],
+["aria-label=\"Animated explainer film: The Inner Life of Data\"","aria-label=\"Película animada explicativa: La vida interior de los datos\""],
+["<button id=\"play\">Play</button>","<button id=\"play\">Reproducir</button>"],
+["aria-label=\"Seek\"","aria-label=\"Buscar\""],
+["aria-pressed=\"true\">Captions</button>","aria-pressed=\"true\">Subtítulos</button>"],
+["<b>How to read it.</b> Light is data, and each source system has its own colour. The sketch (the conceptual model) gives every piece its place. dbt holds the recipes and tests; Databricks runs them. Gold paintings are data products, and their labels are dbt exposures. Projectors share the original without making copies. The narration is a synthetic voice.","<b>Cómo leerla.</b> La luz son los datos, y cada sistema de origen tiene su propio color. El boceto (el modelo conceptual) le da a cada pieza su lugar. dbt guarda las recetas y las pruebas; Databricks las ejecuta. Las pinturas de oro son productos de datos, y sus etiquetas son exposures de dbt. Los proyectores comparten el original sin hacer copias. La narración es una voz sintética."]]

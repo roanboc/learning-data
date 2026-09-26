@@ -1,5 +1,5 @@
 /* Latin American Spanish on-screen text. Product and component names (Databricks, dbt, Unity Catalog, Genie, SQL warehouse, marts, exposures, staging) and code stay in English. */
-const L10N={map:{
+const L10N={ui:{play:"Reproducir",pause:"Pausa"},map:{
 "The Inner Life of Data":"La vida interior de los datos","How a university's data flows, from one tap to one decision":"Cómo fluyen los datos de una universidad, de un toque a una decisión","University edition":"Edición universitaria",
 "Data Science 101":"Datos 101","Tue 9:00 · B204":"Mar 9:00 · B204","Enrol":"Inscribir","Seat free?":"¿Hay cupo?","Tue 9 am · DS101":"Mar 9 am · DS101","seat left":"cupo libre","confirmed":"confirmada",
 "Student system":"Sistema académico","Learning platform":"Aula virtual","HR and payroll":"RH y nómina","Finance system":"Sistema financiero","Research grants system":"Sistema de fondos I+D","Older system":"Sistema antiguo",

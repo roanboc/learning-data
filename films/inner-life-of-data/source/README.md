@@ -47,7 +47,7 @@ Spanish: the same five commands with `FILM_LANG=es` in front of each, for exampl
 | `build.py` again | Embeds the soundtrack in the player. |
 | `render.py` | Renders 1080p frames at 30 fps and writes the MP4. |
 
-To see how dense the narration is, run `python tools/pace.py` (or with `FILM_LANG=es`) after `tts.py`: it reports words per minute, how much of the time the voice speaks, and the longest quiet moment in each chapter. [PLAYBOOK.md](../../../PLAYBOOK.md) explains the targets.
+Before a long render, run `python tools/check.py` (or with `FILM_LANG=es`): it draws every tenth of a second on a small canvas, in about half a minute, and lists any moment that fails. To see how dense the narration is, run `python tools/pace.py` (or with `FILM_LANG=es`) after `tts.py`: it reports words per minute, how much of the time the voice speaks, and the longest quiet moment in each chapter. [PLAYBOOK.md](../../../PLAYBOOK.md) explains the targets.
 
 About `render.py`:
 

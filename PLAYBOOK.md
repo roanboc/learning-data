@@ -103,6 +103,7 @@ A film makes people feel they understand; learning comes from using the ideas. T
 - [ ] Style frames and a short voice test are approved.
 - [ ] `tools/pace.py`: every chapter is under 130 words a minute, with a quiet moment of at least 4 seconds.
 - [ ] Stills are checked at every named moment, with nothing under the captions.
+- [ ] `tools/check.py`: every moment of the film draws without an error. Stills only sample a few moments.
 
 **Before publishing**
 - [ ] Product names, maturity and sources are checked on the day.

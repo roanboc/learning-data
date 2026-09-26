@@ -42,7 +42,7 @@ Spanish: the same five commands with `FILM_LANG=es` in front of each, for exampl
 | Step | What it does |
 |---|---|
 | `tts.py` | Voices each narration line into `build/vo/` and writes the timings to `src/vodur.js`. Lines that already exist are skipped, so delete a line's file to re-voice it. |
-| `build.py` | Builds `dist/render.html` (used for rendering) and `dist/film.html` (the player). |
+| `build.py` | Builds `dist/render.html` (used for rendering) and `dist/film.html` (the player, with chapters, captions and full screen). |
 | `audio.py` | Mixes narration, music and effects into `build/mix.wav` and `dist/soundtrack.mp3`. |
 | `build.py` again | Embeds the soundtrack in the player. |
 | `render.py` | Renders 1080p frames at 30 fps and writes the MP4. |
@@ -58,11 +58,11 @@ About `render.py`:
 1. **The players.** Copy each player into the site:
 
    ```
-   cp dist/film.html ../index.html
-   cp dist/es/film.html ../../../es/films/inner-life-of-data/index.html
+   cp dist/film.html ../../../site/films/inner-life-of-data/index.html
+   cp dist/es/film.html ../../../site/es/films/inner-life-of-data/index.html
    ```
 
-2. **The captions.** `python tools/captions.py` writes `../captions.en.srt` and `.vtt`, and `FILM_LANG=es python tools/captions.py` writes the Spanish ones.
+2. **The captions.** `python tools/captions.py` writes `../captions/en.srt` and `en.vtt`, and `FILM_LANG=es python tools/captions.py` writes the Spanish ones.
 3. **The videos.** Upload them to a GitHub release (Releases → Draft a new release), named exactly `inner-life-of-data.mp4` and `inner-life-of-data.es.mp4`. The site's download buttons point to these names in the latest release. Don't commit videos to the repository: GitHub rejects files over 100 MB, and the release keeps clones small.
 
 ## Other languages
@@ -74,7 +74,7 @@ A language lives in `src/i18n/<lang>/`, and `FILM_LANG=<lang>` builds it into `b
 - `strings.js`: the on-screen text, as English → translation pairs, plus pattern rules for text built from numbers, and the player's Play and Pause labels. `src/i18n.js` swaps every string drawn on the canvas, so boxes size to the translated text.
 - `page.json`: the player page's text, as English → translation pairs.
 
-To add a language, copy `src/i18n/es/`, translate the four files, and run the steps with the new `FILM_LANG`. Then look at frames from every scene: text in fixed-size boxes (the phone, the Genie question bubble, the knowledge cards and the chart captions) may need shorter wording. For the site, add pages under `<lang>/` next to `es/`, and a link in each page's language toggle.
+To add a language, copy `src/i18n/es/`, translate the four files, and run the steps with the new `FILM_LANG`. Then look at frames from every scene: text in fixed-size boxes (the phone, the Genie question bubble, the knowledge cards and the chart captions) may need shorter wording. For the site, add pages under `site/<lang>/` next to `site/es/`, and a link in each page's language toggle.
 
 ## Editing
 

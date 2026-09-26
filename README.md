@@ -26,6 +26,7 @@ films/when-things-go-wrong/    the second film, in development: its treatment
   source/                      the code that generates the film in each language, and how to rebuild it
 site-tools/                    turns the Markdown pages in site/ into site pages
 .github/workflows/pages.yml    publishes site/ on every push to main
+.github/workflows/release.yml  renders both videos and publishes them to a release, when you run it
 PLAYBOOK.md                    what made the film work, and how to reuse it for the next film or course
 LICENSE                        MIT licence for the code
 LICENSE-CONTENT.md             CC BY 4.0 for the film, script and text, with exclusions
@@ -37,7 +38,7 @@ The site's English pages sit at its root and the Spanish ones under `es/`, at th
 ## Publishing
 
 1. **Turn on GitHub Pages (once):** Settings → Pages → Build and deployment → Source: *GitHub Actions*. From then on, every push to `main` publishes `site/`. You can also run it by hand from the Actions tab (*Publish site* → *Run workflow*).
-2. **Attach the videos to a release:** create a release (for example `v1.0`) and upload the MP4s as `inner-life-of-data.mp4` and `inner-life-of-data.es.mp4`. The site's download buttons point to the latest release, so they work as soon as the release exists. Keeping videos out of the repository keeps clones small. To render them, see [the film's build guide](films/inner-life-of-data/source/README.md).
+2. **Release the videos:** in the Actions tab, open *Render and release the film* → *Run workflow*, and give a tag such as `v1.0`. It renders both languages from the committed source, in about 30 to 45 minutes, and publishes `inner-life-of-data.mp4`, `inner-life-of-data.es.mp4` and the captions to a release with that tag. The site's download buttons point to the latest release, so they work as soon as it's published. Tick *draft* to watch the videos before they go live. Keeping videos out of the repository keeps clones small. To render on your own computer instead, see [the film's build guide](films/inner-life-of-data/source/README.md).
 
 ## The labs and scenarios
 

@@ -14,4 +14,6 @@ page=(S/'page.html').read_text()
 if not EN and (PACK/'page.json').exists():
     for x,y in json.loads((PACK/'page.json').read_text()):assert x in page,'page.json: not found: '+x;page=page.replace(x,y)
 (D/'film.html').write_text(page.replace('<!--FONTS-->',GF).replace('<!--AUDIO-->',tag).replace('/*JS*/',js))
-print('built',D.relative_to(ROOT)/'render.html','and',D.relative_to(ROOT)/'film.html','(with soundtrack)' if tag else '(no soundtrack yet: run tools/audio.py, then build again)')
+# the site loads the same code as a script, next to the soundtrack as its own file (see README: Publish)
+(D/'film.js').write_text(js)
+print('built',D.relative_to(ROOT)/'render.html',',',D.relative_to(ROOT)/'film.js','and',D.relative_to(ROOT)/'film.html','(with soundtrack)' if tag else '(no soundtrack yet: run tools/audio.py, then build again)')

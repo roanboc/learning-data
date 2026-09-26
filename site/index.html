@@ -2,52 +2,55 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Learning Data</title>
-<meta name="description" content="Short, visual explanations of how modern data platforms work, from capture to decision.">
-<meta property="og:title" content="Learning Data"><meta property="og:description" content="Short, visual explanations of how modern data platforms work."><meta property="og:image" content="https://roanboc.github.io/learning-data/assets/poster.jpg">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Learning Data · The Inner Life of Data</title>
+<meta name="description" content="Watch a six-minute film about how a modern data platform works, take the platform apart in eight hands-on labs, then test yourself on real situations.">
+<meta property="og:title" content="Learning Data · The Inner Life of Data"><meta property="og:description" content="Watch the film, take the platform apart, then make the call."><meta property="og:image" content="https://roanboc.github.io/learning-data/assets/poster.jpg">
 <link rel="alternate" hreflang="en" href="https://roanboc.github.io/learning-data/"><link rel="alternate" hreflang="es" href="https://roanboc.github.io/learning-data/es/">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<header class="top"><a class="brand" href="./">Learning Data</a><nav><a href="#film">Film</a><a href="#chapters">Chapters</a><a href="journey/">Making of</a><a href="#next">Coming next</a><a href="https://github.com/roanboc/learning-data">GitHub</a><span class="lang" role="group" aria-label="Language"><a href="./" aria-current="true" lang="en">EN</a><a href="es/" lang="es" hreflang="es">ES</a></span></nav></header>
+<header class="top"><div class="top-in"><a class="brand" href="./"><img src="assets/favicon.svg" alt="">Learning Data</a><nav><a href="#watch">Watch</a><a href="#explore">Take it apart</a><a href="#practise">Make the call</a><a class="nav-extra" href="journey/">Making of</a><a class="nav-extra" href="https://github.com/roanboc/learning-data">GitHub</a><span class="lang" role="group" aria-label="Language"><a href="./" aria-current="true" lang="en">EN</a><a href="es/" lang="es" hreflang="es">ES</a></span></nav></div></header>
 <main>
 <section class="hero">
-<p class="eyebrow">Learning Data</p>
+<p class="eyebrow">Learning Data · University edition</p>
 <h1>How data really moves, and why meaning matters</h1>
-<p class="lead">Short, visual explanations of modern data platforms: clear enough for someone starting out, rigorous enough for data engineers. We begin with one enrolment at a fictional university and follow it all the way to a decision.</p>
-<div class="cta"><a class="btn primary" href="films/inner-life-of-data/">Watch the film</a><a class="btn" href="#chapters">Browse chapters</a></div>
+<p class="lead">Follow one enrolment at a fictional university, from a tap on a phone to a decision. Clear enough for someone starting out, rigorous enough for data engineers.</p>
+<ol class="path">
+<li><a href="#watch"><span class="n">1</span><b>Watch</b><span>A six-minute film</span></a></li>
+<li><a href="#explore"><span class="n">2</span><b>Take it apart</b><span>Eight hands-on labs</span></a></li>
+<li><a href="#practise"><span class="n">3</span><b>Make the call</b><span>Twelve real situations</span></a></li>
+</ol>
 </section>
-<section class="feature" id="film">
-<a class="poster" href="films/inner-life-of-data/"><img src="assets/poster.jpg" alt="The whole data platform in one view: source systems flow into bronze, silver and gold, then out to business domains and to apps, Genie and dashboards." width="1280" height="720"><span class="play">▶ Play the film · 6 min</span></a>
-<div>
-<h2>The Inner Life of Data</h2>
-<p>A six-minute film with narration, music and sound. It shows how data is captured in the systems where it's born, refined through bronze, silver and gold with dbt on Databricks, given meaning through a shared conceptual model, and shared without making copies.</p>
-<div class="cta"><a class="btn primary" href="films/inner-life-of-data/">Watch, with chapters</a><a class="btn" href="https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.mp4">Download the video</a><a class="btn" href="https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/script.md">Read the script</a></div>
+
+<section class="module" id="watch" aria-labelledby="watch-h">
+<div class="mhead"><div><p class="step"><i>1</i>Watch</p><h2 id="watch-h">The Inner Life of Data</h2><p>A six-minute film with narration, music and sound. Press Play, or jump to a chapter.</p></div></div>
+<div class="player">
+<audio id="snd" preload="metadata" src="assets/film/soundtrack.mp3"></audio><button class="poster" type="button" aria-label="Play the film"><img src="assets/poster.jpg" alt="" width="1280" height="720"><span class="play-badge">▶ Play the film · 6 min</span></button><canvas id="film" width="1280" height="720" aria-label="Animated explainer film: The Inner Life of Data"></canvas>
+<div class="bar"><button id="play">Play</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Seek"><span id="time">0:00</span><button id="cc" class="on" aria-pressed="true">Captions</button><button id="fs">Full screen</button></div>
+</div>
+<div class="chapters" id="chapters" aria-label="Chapters"></div>
+<div class="watch-foot">
+<p class="notes"><b>How to read it.</b> Light is data, and each source system has its own colour. The sketch (the conceptual model) gives every piece its place. dbt holds the recipes and tests; Databricks runs them. Gold paintings are data products, and their labels are dbt exposures. Projectors share the original without making copies. The narration is a synthetic voice.</p>
+<div class="cta"><a class="btn" href="https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.mp4">Download the video</a><a class="btn" href="https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/script.md">Read the script</a></div>
 </div>
 </section>
-<section id="chapters">
-<h2>Chapters</h2>
-<ul class="chapters">
-<li><a href="films/inner-life-of-data/#t=0"><span class="tc">0:00</span>The tap</a></li>
-<li><a href="films/inner-life-of-data/#t=23"><span class="tc">0:22</span>Into the platform</a></li>
-<li><a href="films/inner-life-of-data/#t=64"><span class="tc">1:03</span>The sketch</a></li>
-<li><a href="films/inner-life-of-data/#t=89"><span class="tc">1:28</span>Refining with dbt</a></li>
-<li><a href="films/inner-life-of-data/#t=140"><span class="tc">2:19</span>Gold</a></li>
-<li><a href="films/inner-life-of-data/#t=182"><span class="tc">3:01</span>The layers together</a></li>
-<li><a href="films/inner-life-of-data/#t=210"><span class="tc">3:29</span>Meaning</a></li>
-<li><a href="films/inner-life-of-data/#t=259"><span class="tc">4:18</span>Two speeds</a></li>
-<li><a href="films/inner-life-of-data/#t=283"><span class="tc">4:42</span>Ways out</a></li>
-<li><a href="films/inner-life-of-data/#t=335"><span class="tc">5:34</span>Apps and Genie</a></li>
-<li><a href="films/inner-life-of-data/#t=363"><span class="tc">6:02</span>Pull back</a></li>
-</ul>
+
+<section class="module" id="explore" aria-labelledby="explore-h">
+<div class="mhead"><div><p class="step"><i>2</i>Take it apart</p><h2 id="explore-h">Take the platform apart</h2><p>Eight stops, in the order of the film. Click any part of the platform, then play with each lab: break things, change things, and see what happens.</p></div></div>
+<div id="explore-app"><noscript><p class="noscript">The labs need JavaScript.</p></noscript></div>
 </section>
-<section id="making-of">
-<h2>The making of: a learning journey</h2>
-<p class="muted">How the film went from a question about analogies to a finished, narrated film in two days, made in conversation with Claude, an AI model by Anthropic. The story covers what we explored, what we argued about, what went wrong, and what we learned.</p>
+
+<section class="module" id="practise" aria-labelledby="practise-h">
+<div class="mhead"><div><p class="step"><i>3</i>Make the call</p><h2 id="practise-h">Make the call</h2><p>Twelve situations a university data team really faces. Decide what you'd do; each answer explains why, and points you back to the lab that covers it.</p></div></div>
+<div id="quiz-app"><noscript><p class="noscript">The scenarios need JavaScript.</p></noscript></div>
+</section>
+
+<section class="module" id="making-of" aria-labelledby="making-h">
+<div class="mhead"><div><p class="step">Behind the film</p><h2 id="making-h">The making of: a learning journey</h2><p>How the film went from a question about analogies to a finished, narrated film in two days, made in conversation with Claude, an AI model by Anthropic. The story covers what we explored, what we argued about, what went wrong, and what we learned.</p></div></div>
 <div class="cards">
 <div class="card"><h3>Explored</h3><p>Rivers, libraries, pipes and the human body; four style boards; and why light carrying pictures won.</p></div>
 <div class="card"><h3>Discussed</h3><p>How each component really works: events, zero-copy, dbt layers and tests, data products and exposures.</p></div>
@@ -56,11 +59,18 @@
 </div>
 <div class="cta"><a class="btn primary" href="journey/">Read the full story</a><a class="btn" href="https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/source/README.md">See the source</a></div>
 </section>
-<section id="next">
-<h2>Coming next</h2>
+
+<section class="module" id="next" aria-labelledby="next-h">
+<h2 id="next-h">Coming next</h2>
 <div class="cards"><div class="card"><h3>Learning paths</h3><p>Guided routes through the ideas in the film, one topic at a time.</p></div></div>
 </section>
 </main>
-<footer><p>The university, people, numbers and records in the film are fictional. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
+<footer><p>The university, people, numbers and records in the film and the labs are fictional. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
+<script src="assets/film/film.js"></script>
+<script src="assets/learn/learn.en.js"></script>
+<script src="assets/learn/learn.js"></script>
+<script src="assets/learn/labs.js"></script>
+<script src="assets/learn/labs2.js"></script>
+<script src="assets/learn/quiz.js"></script>
 </body>
 </html>

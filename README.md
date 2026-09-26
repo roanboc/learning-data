@@ -8,14 +8,15 @@ Learning artifacts for data: short, visual explanations of how modern data platf
 
 ```
 index.html                     landing page (GitHub Pages)
+es/                            the Spanish site: landing page, player and making-of (EN/ES toggle on every page)
 journey/                       the making-of story: index.md (source) and index.html (generated)
 site-tools/                    turns Markdown pages into site pages
-assets/                        site styles, icon and poster image
+assets/                        site styles, icon and poster images (English and Spanish)
 films/inner-life-of-data/      the first film: interactive player, script, captions
   index.html                   the player (chapters, captions, embedded soundtrack)
   script.md                    narration, pictures, rigour notes and sources
-  captions.en.vtt / .srt       captions for video platforms
-  source/                      the code that generates the film, and how to rebuild it
+  captions.en.vtt / .srt       captions for video platforms (captions.es.* in Spanish)
+  source/                      the code that generates the film in each language, and how to rebuild it
 LICENSE                        MIT licence for the code
 LICENSE-CONTENT.md             CC BY 4.0 for the film, script and text, with exclusions
 NOTICE.md                      credits and trademarks
@@ -24,11 +25,11 @@ NOTICE.md                      credits and trademarks
 ## Publishing
 
 1. **Turn on GitHub Pages:** Settings → Pages → Build and deployment → Source: *Deploy from a branch* → Branch: `main`, folder `/ (root)`.
-2. **Attach the video to a release:** create a release (for example `v1.0`) and upload the MP4 as `inner-life-of-data.mp4`. The site's download link points to the latest release, so it works as soon as the release exists. Keeping the video out of the repository itself keeps clones small.
+2. **Attach the video to a release:** create a release (for example `v1.0`) and upload the MP4 as `inner-life-of-data.mp4`, and the Spanish one as `inner-life-of-data.es.mp4`. The site's download link points to the latest release, so it works as soon as the release exists. Keeping the video out of the repository itself keeps clones small.
 
 ## Writing pages
 
-Write pages in Markdown and turn them into site pages with `python site-tools/build_pages.py` (it needs `pip install markdown`). It builds every `index.md` under `journey/` and `paths/`.
+Write pages in Markdown and turn them into site pages with `python site-tools/build_pages.py` (it needs `pip install markdown`). It builds every `index.md` under `journey/` and `paths/`, and the Spanish pages under `es/journey/` and `es/paths/`. Keep a Spanish page at the same path under `es/` so the language toggle finds it.
 
 ## Adding learning paths
 

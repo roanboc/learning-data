@@ -26,3 +26,4 @@ footer{max-width:1120px;margin:0 auto;padding:22px 20px 44px;color:var(--muted);
 .prose table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px;display:block;overflow-x:auto}.prose th,.prose td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}.prose th{background:var(--card)}
 .prose blockquote{margin:18px 0;padding:10px 16px;border-left:4px solid var(--accent);background:var(--card);border-radius:8px}.prose blockquote p{margin:4px 0}
 .prose img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--line);margin:16px 0}.prose code{font-size:.92em;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:1px 5px}
+.lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}.lang a{padding:3px 10px;font-size:13px;font-weight:700}.lang a[aria-current]{background:var(--accent);color:#fff}

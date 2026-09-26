@@ -1,8 +1,8 @@
-# When things go wrong
+# When things go wrong · 1. Silent change
 
-*Treatment for the second film, v0.3: the main decisions are made, and the theme is set (see [Decisions](#decisions)). Status: agreed; the next step is a character sheet.*
+*Treatment for the first episode of [When things go wrong](../README.md), v0.4: the main decisions are made, and the theme is set (see [Decisions](#decisions)). Status: agreed; the next step is a character sheet.*
 
-**Tagline:** Fail safely. Fix once.
+**Series tagline:** Fail safely. Fix once.
 
 ## The promise
 
@@ -31,9 +31,9 @@ The first film followed a record downstream, from the tap to the decision. This 
 | **6. Recover** | The fix is replayed over the affected nights. Time travel compares the numbers before and after, so nobody has to trust a guess. At 8:40 am the banner is gone, and Ana sends the census report on time. | Backfills, incremental models, Delta versions and time travel, and RESTORE when a table itself is damaged. |
 | **7. The contract** | Later that week, the four of them agree a data contract for enrolments. One card holds the columns and types, the allowed statuses and what each one means, how fresh the data must be, and four owners: technical and business, on the side that produces the data and the side that uses it. Changing the card needs a technical and a business sign-off. The platform checks every load against it at the door, and the student system tests every proposed change against it before release. A new test stays behind, and the team writes a short, blameless review. | What a data contract holds and who signs it. Contracts are versioned, and validated constantly: on every load, and on every change before it ships. No blame. |
 | **8. Three weeks later** | Ben's team proposes another status, `DEFERRED`. Before it ships, the contract check fails in their test environment, and all four owners are told at once. Mei defines what it means, Sam's team adds it to the platform, and the contract becomes version 1.1. The change goes live that week. No banner, no alert, nobody woken up. | Visibility before the change, not after. A contract turns a surprise into a conversation. |
-| **9. Pull back** | The whole platform, calm, with the contract glowing at its door. The last line: "Every incident leaves a test behind." | The platform's job is not to never fail, but to fail safely, and to make the next change visible to everyone it touches. |
+| **9. Pull back** | The whole platform, calm, with the contract glowing at its door. The last line: "Every incident leaves a test behind." In the final seconds, a single mark of −1 arrives at a gate and turns amber: a hint of the next episode. | The platform's job is not to never fail, but to fail safely, and to make the next change visible to everyone it touches. |
 
-**Other incidents, shown briefly** (one image each, in chapter 1 or as a closing montage): a late file (freshness), a duplicate from a retry (at-least-once delivery, fixed by merging on a key), a table overwritten by mistake (time travel and RESTORE), and a report that breaks because a mart changed shape (contracts and exposures, the same idea on the side that uses the data).
+Other ways things go wrong, such as a late file, a duplicate from a retry or a table overwritten by mistake, get their own episodes (see [the series](../README.md)), so this one stays on a single story.
 
 ## The people
 
@@ -76,7 +76,7 @@ Reuse the first film's world and components: the vaults, tiles, the dbt line, th
 
 ## Pacing
 
-Built with room to think from the start: about 115 words a minute, a hold after each new idea, and a wordless breather at the end of each chapter (see [PLAYBOOK.md](../../PLAYBOOK.md) and `tools/pace.py`). Target length: 8 to 9 minutes. If it runs long, the montage of other incidents goes first; the contract and the change three weeks later stay. "Pause and think" questions for each chapter come with the script.
+Built with room to think from the start: about 115 words a minute, a hold after each new idea, and a wordless breather at the end of each chapter (see [PLAYBOOK.md](../../../PLAYBOOK.md) and `tools/pace.py`). Target length: 7 to 8 minutes, now that other incidents have their own episodes. The contract and the change three weeks later are the heart of it, and stay whatever else is cut. "Pause and think" questions for each chapter come with the script.
 
 ## Labs and scenarios (for Learning Data)
 
@@ -119,8 +119,8 @@ Made by the author on 26 September 2026:
 
 1. **The spine:** a new status value after an upgrade (`WAITLISTED`), because the fix starts with meaning and connects back to the sketch in the first film.
 2. **People on screen:** full characters, with faces (see [The people](#the-people)).
-3. **The title:** *When things go wrong* (in Spanish, *Cuando algo sale mal*).
-4. **The tagline:** "Fail safely. Fix once." The film's last line is "Every incident leaves a test behind."
+3. **The title:** *When things go wrong* became the series title (in Spanish, *Cuando algo sale mal*). This episode is *Silent change* (*Cambio silencioso*).
+4. **The tagline:** "Fail safely. Fix once.", now for the whole series. This episode's last line is "Every incident leaves a test behind."
 5. **The theme:** changes need visibility on both the technical and the business side. That's why data contracts matter, and why they're checked constantly. The change starts as a business decision and a technical build that never met; the film ends with a contract catching the next change before it ships.
 
 ## Next checkpoints

@@ -22,7 +22,7 @@ site/                          the website, published to GitHub Pages as it is
   journey/                     the making-of story: index.md (source) and index.html (generated)
   es/                          the Spanish site, with the same layout as the English above
 films/inner-life-of-data/      the first film: everything used to make it, breathing-cut.md, how its pauses work, and pacing-review.md, how they were tuned
-films/when-things-go-wrong/    the second film, in development: its treatment
+films/when-things-go-wrong/    a series in development: one treatment per episode
 films/a-sharper-sketch/        the third film, on data modelling: its treatment, script, captions and source
   script.md                    narration, pictures, rigour notes and sources
   captions/                    captions for video platforms: en.srt, en.vtt, es.srt, es.vtt

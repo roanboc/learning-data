@@ -14,9 +14,11 @@ Same two audiences as the first two films: a newcomer understands it, and a data
 
 **Add precision when a question can't be answered in only one way.** The first film's sketch was fine for "which classes fill up first?". It stops being fine the moment two people read it and count differently. Each chapter is one of those moments, and each one changes the sketch in a visible way.
 
+**And before you draw, check a reference model.** Most questions a university asks of its data, others have already modelled. A good modeller doesn't start from a blank page: they check a published reference model, adopt it where it fits the actual business, extend it where the business differs, and write down each difference and why. This is the film's second thread. In every chapter, before the sketch changes, the team lays the reference model over it and asks: has someone already solved this?
+
 ## The reference model: TCSI
 
-The film checks its sketch against one public, well-known model: the Australian Government's **Tertiary Collection of Student Information (TCSI)**, the data every Australian university reports about its students. It's free to read at [tcsisupport.gov.au](https://www.tcsisupport.gov.au/), and it fits the story, because the census date sits at its centre, as it does in film 1.
+The film uses one public, well-known model as its reference: the Australian Government's **Tertiary Collection of Student Information (TCSI)**, the data every Australian university reports about its students. It's free to read at [tcsisupport.gov.au](https://www.tcsisupport.gov.au/), and it fits the story, because the census date sits at its centre, as it does in film 1.
 
 TCSI is a reporting standard, not a full institutional model, so the film uses it for the core shape and adds the one thing it leaves out (the timetabled class). The rules the film relies on, checked on 26 September 2026:
 
@@ -35,9 +37,20 @@ TCSI is a reporting standard, not a full institutional model, so the film uses i
 - **Unit offering** 1–\* **Class** (timetabled activity: institutional, not in TCSI)
 - **Unit enrolment** has a status, with a history of changes
 
+**How the film fits it to the business.** The practice has four steps, and the film shows each one:
+
+| Step | What it means | In the film |
+|---|---|---|
+| **Check** | Before inventing a concept, look for it in the reference model | Each chapter lays the reference over the sketch before it changes |
+| **Adopt** | Where the reference fits the business, use its concepts, rules and names | Course admission, unit enrolment, census date on the unit, unit status (chapters 2 to 5) |
+| **Extend** | Where the business needs more than the reference holds, add it, in the reference's style | Class, the timetabled activity (chapter 2); a full status history, where TCSI reports the current status (chapter 5); Unit offering as a named entity, where TCSI identifies it by unit code and census date |
+| **Record** | Write down every difference and why, so the next person can see what is standard and what is ours | A short fit register in the catalog (chapter 7) |
+
+A reference model is a starting point, not a cage: adopting it blindly is as risky as ignoring it. It fits here because TCSI describes the same business the university runs. Where the business is genuinely different, the business wins, and the difference is recorded.
+
 The film names TCSI in chapter 7 and in the sources, and uses everyday words on screen ("course admission", "unit enrolment") with the element codes kept to the rigour sheet.
 
-**Customising for internal videos.** The chapters don't depend on TCSI. To use your own model, replace the table above with your entity names and rules, change the on-screen labels in chapters 2 to 7 and the "Map the words" lab, and keep the same four questions: what is one row, where does each attribute live, which relationships need their own entity, and what changes over time. Other public models that would work the same way: CEDS in the United States (public domain), HESA Data Futures in the UK, and 1EdTech OneRoster for learning systems.
+**Customising for internal videos.** The chapters don't depend on TCSI. To use your own model, replace the table above with your entity names and rules, change the on-screen labels in chapters 2 to 7 and the "Map the words" lab, keep the same four questions (what is one row, where does each attribute live, which relationships need their own entity, and what changes over time), and keep the check, adopt, extend and record steps, with your own fit register. Other public models that would work the same way: CEDS in the United States (public domain), HESA Data Futures in the UK, and 1EdTech OneRoster for learning systems.
 
 ## Where film 1's sketch falls short
 
@@ -54,7 +67,7 @@ This is the starting point, and the reason for the film. Film 1's "right sketch"
 
 ## The structure: zooming into the sketch
 
-The first film moved downstream, the second upstream. This one moves *inward*: the camera stays on the sketch and zooms in, like a map that gains detail as you get closer. Each zoom is triggered by a disagreement and ends with the two numbers closer together.
+The first film moved downstream, the second upstream. This one moves *inward*: the camera stays on the sketch and zooms in, like a map that gains detail as you get closer. Each zoom is triggered by a disagreement. Before the sketch changes, the reference model slides over it like tracing paper; the team adopts what fits, extends what doesn't, and the two numbers move closer together.
 
 **The spine: one question, two answers.** The Head of School asks Genie how many students were enrolled in Data Science 101 on census date. Genie says 131. The certified census report says 118. Both are built from clean, tested data. The difference is meaning.
 
@@ -62,12 +75,12 @@ The first film moved downstream, the second upstream. This one moves *inward*: t
 |---|---|---|
 | **0. The sketch we drew** | A short recap of film 1: five boxes, the wrong sketch and the right one, 98% class fill. A voice says: "That sketch was right. It just wasn't finished." | A conceptual model is a simplification by design. |
 | **1. Two numbers** | Genie says 131; the census report says 118. Both certified, both tested. The tests pass because each is correct for its own reading of the sketch. | Clean data can still disagree. Tests check rules, not meaning. |
-| **2. What is a class?** | The Class box splits into three: Unit (Data Science 101, the curriculum), Unit offering (Data Science 101, Semester 1, city campus, on site), and Class (Tuesday 9 am tutorial). Genie counted tutorial places; some students sit in two. | Grain: say exactly what one row stands for. Enrolment belongs to the offering; class allocation is separate. |
-| **3. Whose census date?** | The census date slides off Term and onto Unit offering. A summer intensive of the same unit has its own census date, weeks from the semester's. | Put an attribute on the thing it truly describes. Teaching period and census date are related but not the same. |
-| **4. One student, two courses** | A double-degree student appears twice in one count. A Course admission box appears between Student and Course, and each unit enrolment points to the course it counts towards. | Many-to-many relationships need their own entity. Identity and keys: one person, one student ID, several course admissions. |
-| **5. Enrolled when?** | Film 2's `WAITLISTED` student returns. The enrolment gains a status history: enrolled, waitlisted, withdrawn, each with a date. The census count is a snapshot at census date; Genie was counting today. | Time in models: current state versus history, effective dates, and snapshots. The definition "still enrolled on census date" now has something precise to point at. |
+| **2. What is a class?** | The reference is laid over the sketch: it has no "class", only units of study and unit enrolments. The Class box splits into three: Unit (Data Science 101, the curriculum), Unit offering (Data Science 101, Semester 1, city campus, on site), and Class (Tuesday 9 am tutorial). Genie counted tutorial places; some students sit in two. Class is ours: an extension, recorded. | Grain: say exactly what one row stands for. Enrolment belongs to the offering; class allocation is separate. Check the reference first. |
+| **3. Whose census date?** | The reference shows the census date on each unit enrolment. The census date slides off Term and onto Unit offering. A summer intensive of the same unit has its own census date, weeks from the semester's. | Put an attribute on the thing it truly describes. Teaching period and census date are related but not the same. Adopt the reference where it fits. |
+| **4. One student, two courses** | A double-degree student appears twice in one count. The reference already has the answer: a course admission. The box appears between Student and Course, and each unit enrolment points to the course it counts towards. | Many-to-many relationships need their own entity. Identity and keys: one person, one student ID, several course admissions. |
+| **5. Enrolled when?** | Film 2's `WAITLISTED` student returns. The enrolment gains a status history: enrolled, waitlisted, withdrawn, each with a date. The census count is a snapshot at census date; Genie was counting today. The reference keeps the current status; the business needs the history, so the model extends it. | Time in models: current state versus history, effective dates, and snapshots. The definition "still enrolled on census date" now has something precise to point at. |
 | **6. Three levels of precision** | The same sketch shown three ways: the conceptual model (boxes for the business), the logical model (keys, attributes, cardinality), and the physical tables in silver and gold. In gold, a star: a fact table at one row per student per unit offering, with student, unit offering, course and date around it. | Conceptual, logical, physical. Normalised integration models in silver; dimensional models in gold, built for questions. |
-| **7. Words we share** | Our local words (class, subject, module, paper) are mapped to a public standard, TCSI: "unit of study", "course admission", "unit enrolment". Code sets for status and mode come from reference data, not free text. The sharper sketch feeds the catalog and Genie Ontology. | Don't invent a model the sector already agreed. Map local terms to a standard; keep reference data governed. |
+| **7. Check, adopt, extend, record** | The tracing paper lifts away, and we see the whole fit: most boxes match the reference (TCSI), a few are ours, each with a note. Local words (class, subject, module, paper) are mapped to the reference's: "unit of study", "course admission", "unit enrolment". Code sets for status and mode come from reference data, not free text. The fit register and the sharper sketch feed the catalog and Genie Ontology. | Check a reference model before you draw; adopt it where it fits the business, extend it where it doesn't, and record every difference. A bonus: reporting to government gets easier when the model already speaks its language. |
 | **8. Pull back** | Genie now asks back: "Enrolled on census date, in the Semester 1 offering?" It answers 118, and shows its definition. The sketch is sharper, and still fits on one screen. | Precision where the question needs it, and no more. |
 
 ## Visual language
@@ -81,7 +94,9 @@ Reuse the world and components of the first two films: the sketch, tiles, vaults
 | An attribute tag that slides between boxes | Putting an attribute where it belongs (the census date) |
 | A thin film strip behind an enrolment | Status history over time |
 | A glass star in the gold vault | A dimensional model: a fact with its dimensions |
-| A bilingual dictionary on a lectern | Mapping local words to a sector standard |
+| Tracing paper that slides over the sketch | The reference model, checked before each change |
+| Small pins on the sketch: blue for adopted, amber for extended | What came from the reference and what is ours |
+| A bilingual dictionary on a lectern | Mapping local words to the reference's words |
 
 **Tone.** Curious and precise, like a good puzzle. No one was wrong: each number was right for its own reading. Music: the first film's palette, lighter and more playful, resolving as the two numbers agree.
 
@@ -96,7 +111,8 @@ About 115 words a minute, a hold after each new idea, and a wordless breather at
   - *Where does it live?* Drag attributes (census date, room, credit points, mode) onto the entity they describe.
   - *Grain check:* pick the grain of a fact table and see which questions it can and can't answer.
   - *Map the words:* match local terms to standard ones.
-- **Scenarios:** modelling calls. Is this a new entity or an attribute? One row per what? Current state or history? Adopt the standard's name, or keep ours with a mapping?
+  - *Fit check:* lay the reference over a sketch, then mark each difference as adopt, extend or keep, with a reason.
+- **Scenarios:** modelling calls. Is this a new entity or an attribute? One row per what? Current state or history? Adopt the reference's name, or keep ours with a mapping? The reference doesn't match how we work: change the business, or extend the model?
 
 ## Rigour to check when scripting
 
@@ -113,12 +129,12 @@ To confirm against current documentation, and record in the rigour sheet with th
 2. **How much notation?** Plain boxes and crow's feet only (recommended), or show a real ERD for a moment in chapter 6.
 3. **Name TCSI on screen?** Naming it grounds the film in a real, public standard; keeping it generic ("a national data standard") travels better outside Australia. Recommended: name it in chapter 7 and in the sources only.
 4. **The title.** *A sharper sketch* is clear. Alternatives: *What is a class?*, *One row per what?*, *Two numbers*.
-5. **The tagline.** Options: "Sharpen the sketch when the question needs it." · "Say exactly what you mean, once."
+5. **The tagline.** Options: "Sharpen the sketch when the question needs it." · "Say exactly what you mean, once." · "Check the reference. Fit it to the business."
 
 ## Next checkpoints
 
 1. Agree this treatment and decision 1.
 2. Recheck the TCSI rules for the current year.
 3. Script with a rigour sheet and pacing report.
-4. Five style frames: the splitting box, the sliding census date, the film strip, the glass star, the dictionary.
+4. Five style frames: the splitting box, the tracing paper with its pins, the sliding census date, the film strip, the glass star.
 5. A voice test, then the first cut.

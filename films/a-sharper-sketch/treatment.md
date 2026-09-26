@@ -1,6 +1,6 @@
 # A sharper sketch
 
-*Treatment for the third film, v0.1: a draft for review before any script or picture. Status: proposal.*
+*Treatment for the third film, v0.1. Status: made. The film follows this treatment; see [script.md](script.md) for what changed in the making.*
 
 ## The promise
 

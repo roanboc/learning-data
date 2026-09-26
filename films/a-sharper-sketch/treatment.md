@@ -8,11 +8,13 @@ Same two audiences as the first two films: a newcomer understands it, and a data
 
 **Logline.** Two trusted numbers disagree about how many students are enrolled in Data Science 101. To find out why, we go back to the sketch from the first film and sharpen it, one question at a time.
 
-**Why it's worth making.** Data modelling decides whether every number downstream is right, yet most people never see it, and most material about it is either abstract notation or tool tutorials. Feedback on the first film showed its sketch is simpler than published sector models. That's not a mistake to hide. It's the start of this story: every sketch is a simplification, and good modellers add precision when a real question needs it, not before.
+**Why it's worth making.** Data modelling decides whether every number downstream is right, yet most people never see it, and most material about it is either abstract notation or tool tutorials. Feedback on the first film showed its sketch is an oversimplification compared with published sector models. The film says so openly. It's the start of this story: every sketch is a simplification, good modellers add precision when a real question needs it, not before, and no model is ever finished.
 
 ## The idea at the heart of it
 
 **Add precision when a question can't be answered in only one way.** The first film's sketch was fine for "which classes fill up first?". It stops being fine the moment two people read it and count differently. Each chapter is one of those moments, and each one changes the sketch in a visible way.
+
+**Models evolve, naturally and constantly, even if not often.** A data model isn't drawn once and framed. It changes when the business asks a new question, when the business itself changes (a new status after a system upgrade, as in film 2; a new kind of course), and when the reference model is updated (TCSI publishes its specifications for each reporting year). Most weeks nothing changes; then one question shows the model is out of date. That's normal, not failure. A healthy model is versioned like code, reviewed with the business, and every change is recorded.
 
 **And before you draw, check a reference model.** Most questions a university asks of its data, others have already modelled. A good modeller doesn't start from a blank page: they check a published reference model, adopt it where it fits the actual business, extend it where the business differs, and write down each difference and why. This is the film's second thread. In every chapter, before the sketch changes, the team lays the reference model over it and asks: has someone already solved this?
 
@@ -73,7 +75,7 @@ The first film moved downstream, the second upstream. This one moves *inward*: t
 
 | Chapter | What happens | What it teaches |
 |---|---|---|
-| **0. The sketch we drew** | A short recap of film 1: five boxes, the wrong sketch and the right one, 98% class fill. A voice says: "That sketch was right. It just wasn't finished." | A conceptual model is a simplification by design. |
+| **0. The sketch we drew** | A short recap of film 1: five boxes, the wrong sketch and the right one, 98% class fill. The voice says it plainly: "That sketch was an oversimplification. Good enough to start, not good enough to count." A small version stamp appears in the corner: *sketch v1*. | A conceptual model is a simplification by design, and oversimplifying is easy. Say so when it happens. |
 | **1. Two numbers** | Genie says 131; the census report says 118. Both certified, both tested. The tests pass because each is correct for its own reading of the sketch. | Clean data can still disagree. Tests check rules, not meaning. |
 | **2. What is a class?** | The reference is laid over the sketch: it has no "class", only units of study and unit enrolments. The Class box splits into three: Unit (Data Science 101, the curriculum), Unit offering (Data Science 101, Semester 1, city campus, on site), and Class (Tuesday 9 am tutorial). Genie counted tutorial places; some students sit in two. Class is ours: an extension, recorded. | Grain: say exactly what one row stands for. Enrolment belongs to the offering; class allocation is separate. Check the reference first. |
 | **3. Whose census date?** | The reference shows the census date on each unit enrolment. The census date slides off Term and onto Unit offering. A summer intensive of the same unit has its own census date, weeks from the semester's. | Put an attribute on the thing it truly describes. Teaching period and census date are related but not the same. Adopt the reference where it fits. |
@@ -81,7 +83,7 @@ The first film moved downstream, the second upstream. This one moves *inward*: t
 | **5. Enrolled when?** | Film 2's `WAITLISTED` student returns. The enrolment gains a status history: enrolled, waitlisted, withdrawn, each with a date. The census count is a snapshot at census date; Genie was counting today. The reference keeps the current status; the business needs the history, so the model extends it. | Time in models: current state versus history, effective dates, and snapshots. The definition "still enrolled on census date" now has something precise to point at. |
 | **6. Three levels of precision** | The same sketch shown three ways: the conceptual model (boxes for the business), the logical model (keys, attributes, cardinality), and the physical tables in silver and gold. In gold, a star: a fact table at one row per student per unit offering, with student, unit offering, course and date around it. | Conceptual, logical, physical. Normalised integration models in silver; dimensional models in gold, built for questions. |
 | **7. Check, adopt, extend, record** | The tracing paper lifts away, and we see the whole fit: most boxes match the reference (TCSI), a few are ours, each with a note. Local words (class, subject, module, paper) are mapped to the reference's: "unit of study", "course admission", "unit enrolment". Code sets for status and mode come from reference data, not free text. The fit register and the sharper sketch feed the catalog and Genie Ontology. | Check a reference model before you draw; adopt it where it fits the business, extend it where it doesn't, and record every difference. A bonus: reporting to government gets easier when the model already speaks its language. |
-| **8. Pull back** | Genie now asks back: "Enrolled on census date, in the Semester 1 offering?" It answers 118, and shows its definition. The sketch is sharper, and still fits on one screen. | Precision where the question needs it, and no more. |
+| **8. Pull back** | Genie now asks back: "Enrolled on census date, in the Semester 1 offering?" It answers 118, and shows its definition. The version stamp turns to *sketch v2*, with a short change note. Then a new question arrives on the Head of School's phone, about short courses and microcredentials, and the stamp flickers: v3 is coming, some day. | Precision where the question needs it, and no more. Models evolve: not often, but always. Version them, and record why they changed. |
 
 ## Visual language
 
@@ -97,6 +99,7 @@ Reuse the world and components of the first two films: the sketch, tiles, vaults
 | Tracing paper that slides over the sketch | The reference model, checked before each change |
 | Small pins on the sketch: blue for adopted, amber for extended | What came from the reference and what is ours |
 | A bilingual dictionary on a lectern | Mapping local words to the reference's words |
+| A version stamp in the sketch's corner (v1, v2) | The model evolves, and each version is recorded |
 
 **Tone.** Curious and precise, like a good puzzle. No one was wrong: each number was right for its own reading. Music: the first film's palette, lighter and more playful, resolving as the two numbers agree.
 
@@ -119,17 +122,17 @@ About 115 words a minute, a hold after each new idea, and a wordless breather at
 To confirm against current documentation, and record in the rigour sheet with the date checked:
 
 - **TCSI:** recheck the rules in the reference model table against the current year's packet specifications; confirm the licence for reuse of TCSI text on gov.au; confirm the E355 codes shown on screen.
-- **Modelling:** conceptual, logical and physical models; Kimball's grain and dimensional modelling; slowly changing dimensions; dbt snapshots for status history.
+- **Modelling:** conceptual, logical and physical models; versioning a model and its change log (for example, dbt model versions and contracts); Kimball's grain and dimensional modelling; slowly changing dimensions; dbt snapshots for status history.
 - **Databricks:** Unity Catalog primary and foreign key constraints (informational), metric views or semantic definitions, and Genie Ontology's current name and scope.
 - **HERM:** film 1 names domains after HERM capability areas; check the two fit together in chapter 7.
 
 ## Decisions for the author
 
-1. **Fix film 1, or let film 3 correct it?** Options: (a) leave film 1 as it is and let this film name it as a deliberate simplification (recommended: it's honest and makes the story); (b) also make a small fix in film 1, such as moving the census date to the class, and add a note on its rigour sheet. Either way, film 1's rigour sheet should say the sketch is simplified and point to this film.
+1. **Fix film 1, or let film 3 correct it?** Options: (a) leave film 1 as it is and let this film call it an oversimplification, and a natural first version of a model that will keep evolving (recommended: it's honest, and it models the behaviour the film teaches); (b) also make a small fix in film 1, such as moving the census date to the class, and add a note on its rigour sheet. Either way, film 1's rigour sheet should say the sketch is simplified and point to this film.
 2. **How much notation?** Plain boxes and crow's feet only (recommended), or show a real ERD for a moment in chapter 6.
 3. **Name TCSI on screen?** Naming it grounds the film in a real, public standard; keeping it generic ("a national data standard") travels better outside Australia. Recommended: name it in chapter 7 and in the sources only.
 4. **The title.** *A sharper sketch* is clear. Alternatives: *What is a class?*, *One row per what?*, *Two numbers*.
-5. **The tagline.** Options: "Sharpen the sketch when the question needs it." · "Say exactly what you mean, once." · "Check the reference. Fit it to the business."
+5. **The tagline.** Options: "Every model is a first draft." · "Sharpen the sketch when the question needs it." · "Say exactly what you mean, once." · "Check the reference. Fit it to the business."
 
 ## Next checkpoints
 

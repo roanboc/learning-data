@@ -51,7 +51,7 @@ function copyStack(c,x,y,stale,n){for(let i=(n||4)-1;i>=0;i--){c.fillStyle=i?"rg
 Object.assign(LD,{textBlock,fileIcon,miniCard,stateCol,lockBadge,copyStack});
 
 /* ---------- the stops ---------- */
-const STOPS=[["capture","tap",[255,176,64]],["sketch","sketch",[150,225,255]],["refine","refine",[255,105,75]],["gold","gold",[255,209,102]],["meaning","meaning",[176,123,255]],["speeds","speeds",[47,211,192]],["out","out",[77,163,255]],["people","people",[120,240,170]]]
+const STOPS=[["capture","in",[255,176,64]],["sketch","sketch",[150,225,255]],["refine","refine",[255,105,75]],["gold","gold",[255,209,102]],["meaning","meaning",[176,123,255]],["speeds","speeds",[47,211,192]],["out","out",[77,163,255]],["people","people",[120,240,170]]]
   .map(([id,scene,c],i)=>Object.assign({id,scene,c,n:i+1},X.stops[id]));
 LD.STOPS=STOPS;LD.stop=id=>STOPS.find(s=>s.id===id);
 

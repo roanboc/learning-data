@@ -56,12 +56,34 @@ footer{max-width:1120px;margin:0 auto;padding:22px 20px 44px;color:var(--muted);
 .player canvas{display:block;width:100%;aspect-ratio:16/9;max-width:100%;cursor:pointer}
 .player{position:relative}.poster{position:absolute;left:0;top:0;width:100%;aspect-ratio:16/9;padding:0;border:0;background:#02050b;cursor:pointer;display:block;z-index:1}
 .poster img{display:block;width:100%;height:100%;object-fit:cover}
-.play-badge{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.74);color:#fff;padding:14px 24px;border-radius:999px;font-weight:800;font-size:clamp(15px,2vw,19px);white-space:nowrap;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:transform .2s}
-.poster:hover .play-badge{transform:translate(-50%,-50%) scale(1.05)}
+.poster img{cursor:pointer}
+.poster-cta{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:10px}
+.play-badge{background:rgba(0,0,0,.76);color:#fff;border:0;padding:14px 24px;border-radius:999px;font-weight:800;font-size:clamp(15px,2vw,19px);white-space:nowrap;box-shadow:0 10px 30px rgba(0,0,0,.4);cursor:pointer;transition:transform .2s}
+.play-badge:hover{transform:scale(1.05)}
+.think-badge{background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.4);padding:8px 16px;border-radius:999px;font-weight:700;font-size:clamp(13px,1.5vw,15px);white-space:nowrap;cursor:pointer}
+.think-badge:hover{border-color:#fff}
+@media (max-width:420px){.poster-cta{gap:6px}.play-badge{padding:10px 18px}.think-badge{padding:6px 12px}}
+/* pause and think: a question on the paused frame (below the film on small screens) */
+.think{position:absolute;left:0;top:0;width:100%;aspect-ratio:16/9;z-index:2;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(3,5,11,.66);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+.think-card{width:min(600px,100%);background:rgba(10,16,34,.96);color:#ecf3ff;border:1px solid rgba(170,200,245,.3);border-radius:18px;padding:18px 20px;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.think-k{margin:0 0 4px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#ffd166}
+.think-card h3{margin:0 0 12px;font-size:clamp(17px,2vw,21px)}
+.think-opts{display:grid;gap:8px}
+.think-opt{text-align:left;border-radius:12px;border:1px solid rgba(170,200,245,.35);background:rgba(16,26,50,.9);color:#ecf3ff;padding:10px 13px;font-weight:600;font-size:15px;cursor:pointer}
+.think-opt:hover:not([disabled]){border-color:#fff}.think-opt[disabled]{cursor:default}
+.think-opt.ok{border-color:#7ff0b4;background:rgba(40,120,80,.35)}.think-opt.no{border-color:#ff8f86;background:rgba(140,40,40,.3)}
+.think-why{margin:10px 0 0;min-height:1.4em;color:#c7d4ea;font-size:14px}.think-why b{color:#fff}
+.think-foot{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:12px}
+.think-lab{color:#8ec0ff;font-weight:700;font-size:14px}
+.think-off{background:none;border:0;color:#a0b2cd;font-size:13px;text-decoration:underline;cursor:pointer;margin-left:auto}
+#think.on{background:#b7791f;border-color:#b7791f}
+@media (max-width:700px){.think{position:static;aspect-ratio:auto;padding:12px;background:#0b0f16;backdrop-filter:none}.think-card{padding:14px}}
+.player:fullscreen .think{position:absolute;inset:0;aspect-ratio:auto;bottom:60px;height:auto}
 .player.started .poster,.player:fullscreen .poster{display:none}
 .bar{display:flex;gap:10px;align-items:center;padding:10px 12px;background:#0b0f16;color:#e8eef8;flex-wrap:wrap}
 .bar button{font-weight:700;font-size:14px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:#1a2130;color:#e8eef8;padding:8px 14px;cursor:pointer}
 .bar button.on,#play{background:#2f6fd6;border-color:#2f6fd6}
+#think[aria-pressed=false]{background:#1a2130;border-color:rgba(255,255,255,.2)}
 .bar input[type=range]{flex:1;min-width:120px;accent-color:#6aa8ff}
 #time{font-family:var(--mono);font-size:13px;min-width:92px;text-align:right}
 .player:fullscreen{display:flex;flex-direction:column;border:0;border-radius:0}

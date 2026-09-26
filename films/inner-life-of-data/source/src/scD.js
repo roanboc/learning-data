@@ -16,6 +16,9 @@ scene("people",(ctx,S,t,sc)=>{
     ctx.fillStyle="rgba(120,240,170,0.16)";rr(ctx,1462,y0+146,426,46,8);ctx.fill();T(ctx,"Suggestion: open a second class",1480,y0+177,{size:22,w:700,color:rgba(GOOD,1)});T(ctx,"Sources",1466,y0+232,{size:18,w:700,color:rgba(SOFT,0.8)});
     ["Enrolments (certified)","Census-date policy","New-class approval process"].forEach((s,i)=>withA(ctx,fin(t,cAn+0.8+i*0.4,0.3),()=>tag(ctx,1466,y0+264+i*40,s,LAYER.gold,{size:15})));
     const pm=fin(t,cPe,0.5);if(pm>0)withA(ctx,pm,()=>{ctx.fillStyle="rgba(120,130,150,0.94)";rr(ctx,1790,y0+248,100,112,10);ctx.fill();ctx.strokeStyle="#fff";ctx.lineWidth=3;rr(ctx,1826,y0+292,28,22,4);ctx.stroke();ctx.beginPath();ctx.arc(1840,y0+292,9,Math.PI,0);ctx.stroke();T(ctx,"names",1840,y0+344,{size:16,w:700,align:"center",color:"#fff"});});});
+  // the breather: Genie keeps consulting Genie Ontology, and the answer's sources light up one by one
+  const B=c("breath");if(sc.breathe&&t>B){spawn(t,0.9,1.0,B,u=>glow(ctx,lerp(1230,1258,u),lerp(330,486,u),16,LAYER.gold,1));glow(ctx,1260,520,100,[255,226,160],0.2*(0.5+0.5*Math.sin((t-B)*3)));
+    ["Enrolments (certified)","Census-date policy","New-class approval process"].forEach((s2,i)=>{const v=(t-B-0.8-i*1.2)/1.0;if(v>0&&v<1){const w=tw(ctx,s2,15,700)+26;glow(ctx,1466+w/2,y0+264+i*40,w*0.6,LAYER.gold,0.55*Math.sin(v*Math.PI));}});}
   vign(ctx,S);
 });
 scene("end",(ctx,S,t,sc)=>{

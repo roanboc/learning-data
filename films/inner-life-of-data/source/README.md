@@ -85,6 +85,7 @@ To add a language, copy `src/i18n/es/`, translate the four files, and run the st
 ## Editing
 
 - Narration lives in `src/narration.js` (and `src/i18n/<lang>/narration.js`). The film re-times itself to the voice, so after changing a line, run the steps again.
+- Pauses live in `src/breath.js`, shared by every language: a `hold` after a line, a `pause` before one, and a wordless `breathe` at the end of a chapter, whose picture starts at the scene's `breath` cue. See [breathing-cut.md](../breathing-cut.md).
 - Scenes live in `src/scA.js` to `src/scD.js`; shared visual components are in `src/style2.js` and `src/ui3.js`. The site's labs (`site/assets/learn/`) draw with these same components, so a change here also shows up there: check the labs after changing a component's signature.
 - The player sets `window.FILM` (`ready`, `seek`, `play`, `pause`, `playScene`, `sceneStart`; `playScene(id, true)` stops at the end of that chapter), which the site uses for its "Watch this part" buttons.
 - `src/logos.js` embeds the official Databricks and dbt logos, unaltered, to identify those products (see `NOTICE.md` at the repository root).

@@ -502,6 +502,23 @@ const NARR={
 
 const VODUR={"tap/enrolled": 2.778, "tap/tap": 2.283, "tap/stored": 6.082, "tap/travel": 3.744, "tap/follow": 0.917, "in/systems": 5.719, "in/colours": 2.326, "in/events": 3.16, "in/integ": 4.288, "in/zerobus": 3.639, "in/files": 4.793, "in/auto": 4.651, "in/bronze": 3.156, "in/hot": 4.638, "sketch/first": 4.533, "sketch/model": 3.767, "sketch/concept": 4.092, "sketch/wrong": 2.447, "sketch/downstream": 4.305, "sketch/right": 2.334, "refine/recipes": 8.066, "refine/runs": 2.557, "refine/closer": 2.581, "refine/rough": 3.646, "refine/sources": 3.621, "refine/staging": 5.463, "refine/tests": 3.151, "refine/inter": 3.964, "refine/orphan": 2.523, "refine/silver": 4.716, "refine/trace": 4.601, "gold/split": 6.249, "gold/products": 3.937, "gold/subject": 3.734, "gold/analysts": 1.631, "gold/execs": 2.895, "gold/reports": 5.553, "gold/live": 2.933, "gold/marts": 5.333, "gold/exposure": 4.513, "gold/gold": 0.775, "layers/back": 2.502, "layers/appdom": 2.254, "layers/bsg": 4.77, "layers/busdom": 4.302, "layers/dbtgov": 6.003, "layers/dbx": 4.62, "meaning/noise": 2.371, "meaning/bricks": 3.296, "meaning/catalog": 6.353, "meaning/define": 5.266, "meaning/uc": 6.809, "meaning/knowledge": 6.988, "meaning/mcp": 4.724, "meaning/reads": 3.59, "meaning/onto": 4.061, "speeds/now": 5.696, "speeds/years": 3.751, "speeds/jobs": 1.828, "speeds/lake": 6.096, "speeds/sync": 3.198, "out/four": 2.062, "out/events": 7.636, "out/sql": 5.499, "out/copies": 6.198, "out/stale": 2.901, "out/twist": 1.899, "out/projector": 3.898, "out/share": 4.233, "out/mirror": 3.932, "out/fed": 4.782, "out/one": 2.646, "people/two": 1.788, "people/app": 3.117, "people/fix": 4.847, "people/genie": 1.66, "people/ask": 3.472, "people/answer": 6.318, "people/perms": 2.249, "end/recap": 4.312, "end/seats": 3.798, "end/tag": 1.278};
 
+/* The breathing cut: room to think, shared by every language (see ../breathing-cut.md).
+   hold: extra seconds of silence after a line, while the picture keeps moving. breathe: a wordless end to the chapter, whose picture starts at the scene's "breath" cue.
+   pause: extra seconds of silence before a line. The narration itself lives in narration.js. */
+const BREATH={
+"tap":{"hold":{"stored":2}},
+"in":{"hold":{"colours":2.5,"zerobus":2,"auto":2},"breathe":6},
+"sketch":{"hold":{"model":2.5,"wrong":2.5},"breathe":6},
+"refine":{"hold":{"rough":2,"tests":2,"orphan":2},"breathe":7},
+"gold":{"hold":{"products":3,"subject":2},"breathe":6},
+"layers":{"breathe":8},
+"meaning":{"hold":{"define":3,"uc":2},"breathe":6},
+"speeds":{"hold":{"now":2,"years":2},"breathe":5},
+"out":{"hold":{"events":2,"stale":3},"pause":{"twist":1},"breathe":6},
+"people":{"hold":{"fix":2,"ask":2},"breathe":5},
+"end":{"hold":{"seats":3},"breathe":2}
+};
+
 /* ===== Shared components for the v4 film ===== */
 function withA(ctx,a,fn){if(a<=0.002)return;ctx.save();ctx.globalAlpha*=Math.min(1,a);fn();ctx.restore();}
 const fin=(t,a,d)=>sstep(a,a+(d||0.6),t);
@@ -645,14 +662,16 @@ scene("in",(ctx,S,t,sc)=>{
   const zA=fin(t,cZb-0.2);withA(ctx,zA,()=>{lane(ctx,IN2.ZL,[255,255,255],0.8);chip(ctx,1200,268,"databricks","Zerobus Ingest","into Delta tables in seconds",{align:"center"});});
   if(t>cZb)flowTiles(ctx,t,IN2.ZL,0.55,1.5,cZb,k=>({cell:(k*11+1)%24,q:0,app:k%2?"lms":"sis"}),32,zA);
   const fA=fin(t,cFi-0.3);withA(ctx,fA,()=>{lane(ctx,IN2.F1,APP.hr.c);lane(ctx,IN2.F2,APP.fin.c);glass(ctx,772,640,190,110,16,[200,215,240],{glow:10,ea:0.5});chip(ctx,867,792,null,"Landing zone","nightly files in cloud storage",{align:"center",ss:16});});
-  const aA=fin(t,cAu-0.3),N=8,scan0=cAu+0.3;let done=0,scanning=false;
+  const aA=fin(t,cAu-0.3),N=8,scan0=cAu+0.3,B=c("breath"),nx=sc.breathe?1:0;let done=0,scanning=false;
   withA(ctx,aA,()=>lane(ctx,IN2.AL,APP.fin.c));
-  for(let i=N-1;i>=0;i--){const drop=cFi+0.4+i*0.09,land=drop+0.6;if(t<drop)continue;const leave=scan0+i*0.55,sp={cell:(i*5+1)%24,q:0,app:i%2?"hr":"fin"},ix=820+(i%6)*18,iy=700-(i%6)*4;
+  // the breather: the next night, one new file lands, and Auto Loader reads only that one
+  if(nx&&t>B){const a=fin(t,B,0.8)*(1-sstep(sc.dur-0.6,sc.dur,t)),mx=800,my=600;withA(ctx,a,()=>{glow(ctx,mx,my,44,[220,230,255],0.35);ctx.fillStyle="rgba(236,242,255,0.95)";ctx.beginPath();ctx.arc(mx,my,15,0,TAU);ctx.arc(mx+7,my-5,13,0,TAU,true);ctx.fill("evenodd");T(ctx,"02:00",mx+24,my+7,{f:"mono",w:500,size:17,color:rgba(SOFT,0.95)});});}
+  for(let i=N-1+nx;i>=0;i--){const late=i>=N,drop=late?B+1.0:cFi+0.4+i*0.09,land=drop+0.6;if(t<drop)continue;const leave=late?B+2.4:scan0+i*0.55,sp={cell:(i*5+1)%24,q:0,app:i%2?"hr":"fin"},ix=820+(i%6)*18,iy=700-(i%6)*4;
     if(t<land){const u=ease((t-drop)/0.6);dtile(ctx,ix,lerp(560,iy,u),40,(hash(i,4)-0.5)*0.3,sp,1);}
     else if(t<leave){dtile(ctx,ix,iy,40,(hash(i,4)-0.5)*0.3,sp,1);}
     else{const u=(t-leave)/1.6;if(u>0.12)done++;if(u>0.05&&u<0.2)scanning=true;if(u<=1){const q=at(IN2.ALm,u);dtile(ctx,q.x,q.y,30,0.1,sp,1-sstep(0.9,1,u));}}}
   withA(ctx,aA,()=>{glass(ctx,1118,622,34,156,17,[255,209,140],{glow:20});ctx.save();ctx.shadowColor="rgba(255,220,150,1)";ctx.shadowBlur=scanning?30:14;ctx.fillStyle=scanning?"rgba(255,246,220,1)":"rgba(255,226,170,0.8)";ctx.fillRect(1122,694,26,5);ctx.restore();
-    chip(ctx,1268,806,"databricks","Auto Loader","each new file once · checkpoint "+done+" of "+N,{align:"center",ss:16});});
+    chip(ctx,1268,806,"databricks","Auto Loader","each new file once · checkpoint "+done+" of "+(nx&&t>B+1.6?N+1:N),{align:"center",ss:16});});
   const bA=0.55*fin(t,cZb-0.1)+0.45*fin(t,cBr-0.2),lvl=0.25+0.55*sstep(cZb,cHo,t);
   withA(ctx,bA,()=>vault(ctx,1460,196,380,690,LAYER.bronze,(r,cc)=>hash(r*31+cc,5)>lvl?null:APP[["sis","lms","hr","fin"][(hash(r*7+cc,6)*4)|0]].c,t>cBr-0.4?"Bronze":null,"Delta tables, as they arrived"));
   withA(ctx,fin(t,cBr+0.6)*(1-sstep(cHo+2.5,cHo+3.2,t)),()=>magnifier(ctx,1245,488,80,{cell:14,q:0,app:"lms",hi:true},1208,352,"raw: glitches, mixed clocks",APP.lms.c));
@@ -663,6 +682,8 @@ scene("in",(ctx,S,t,sc)=>{
 /* ---------- 2. The sketch ---------- */
 scene("sketch",(ctx,S,t,sc)=>{
   const c=id=>cue(sc,id),cF=c("first"),cM=c("model"),cC=c("concept"),cW=c("wrong"),cD=c("downstream"),cR=c("right"),dM=cC-cM;
+  // the breather: two new enrolments arrive; the right sketch gives each its place, the wrong one lets the error grow
+  const B=c("breath"),arr=sc.breathe?[1.0,3.0].map(x=>B+x):[],nIn=arr.filter(a=>t>a+1.0).length;
   const cam=camAt([[0,960,520,1],[sc.dur+2,960,520,1.04]],t);bgW(ctx,S,cam);
   const p1=1-sstep(cW-0.7,cW+0.1,t),p2=sstep(cW-0.4,cW+0.4,t);
   withA(ctx,p1,()=>{glass(ctx,300,250,1320,580,22,[150,225,255],{glow:18,ea:0.4,fill:"rgba(10,18,36,0.5)"});
@@ -676,18 +697,23 @@ scene("sketch",(ctx,S,t,sc)=>{
     withA(ctx,wA,()=>{tag(ctx,480,140,"Wrong sketch",BAD,{align:"center",size:22});sketchA(ctx,80,180,800,280,true,1,{});
       glass(ctx,100,510,480,320,12,BAD,{glow:16,ea:0.6});for(let i=0;i<24;i++){if(hash(i,6)<0.18)continue;const k=(i*7+5)%24,ox=(hash(i,3)-0.5)*38+Math.sin(t*1.6+i)*4,oy=(hash(i,4)-0.5)*30,rot=(hash(i,5)-0.5)*0.5;ctx.save();ctx.translate(100+(i%6)*80+40+ox,510+((i/6)|0)*80+40+oy);ctx.rotate(rot);ctx.drawImage(master2(1),(k%6)*TCELL,((k/6)|0)*TCELL,TCELL,TCELL,-40,-40,80,80);if(hash(i,7)<0.35){ctx.strokeStyle=rgba(BAD,0.95);ctx.lineWidth=3;ctx.strokeRect(-40,-40,80,80);}ctx.restore();}});
     withA(ctx,dA,()=>{ctx.save();ctx.strokeStyle=rgba(BAD,0.7);ctx.lineWidth=2;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(582,670);ctx.lineTo(640,670);ctx.stroke();ctx.restore();ledFrame(ctx,650,590,240,160,BAD,painting2("modern"),{pad:8});ctx.save();ctx.globalCompositeOperation="difference";ctx.fillStyle="rgba(120,0,40,0.5)";ctx.fillRect(650,590,240,160);ctx.restore();
-      for(let k=0;k<5;k++){const gy=590+hash(k,Math.floor(t*8))*150;ctx.fillStyle=rgba(BAD,0.5);ctx.fillRect(650,gy,240,3);}tag(ctx,770,790,"Class fill: 312%",BAD,{align:"center",size:20});});
+      for(let k=0;k<5;k++){const gy=590+hash(k,Math.floor(t*8))*150;ctx.fillStyle=rgba(BAD,0.5);ctx.fillRect(650,gy,240,3);}tag(ctx,770,790,"Class fill: "+Math.ceil((374+nIn)/1.2)+"%",BAD,{align:"center",size:20});});
     withA(ctx,rA,()=>{tag(ctx,1440,140,"Right sketch",GOOD,{align:"center",size:22});sketchA(ctx,1040,180,800,280,false,1,{});
       glass(ctx,1060,510,480,320,12,GOOD,{glow:16,ea:0.6});for(let i=0;i<24;i++){const k=i,sx=(hash(i,13)-0.5)*300,sy=(hash(i,14)-0.5)*200,rot=(hash(i,15)-0.5)*0.8*(1-snap);const px=1060+(i%6)*80+40+sx*(1-snap),py=510+((i/6)|0)*80+40+sy*(1-snap);ctx.save();ctx.translate(px,py);ctx.rotate(rot);ctx.drawImage(master2(1),(k%6)*TCELL,((k/6)|0)*TCELL,TCELL,TCELL,-40,-40,80.5,80.5);ctx.restore();}
       if(snap>=1){glow(ctx,1300,670,200,GOOD,0.25*(1-sstep(cR+1.9,cR+2.6,t)));}
-      withA(ctx,fin(t,cR+1.5),()=>{ctx.save();ctx.strokeStyle=rgba(GOOD,0.7);ctx.lineWidth=2;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(1542,670);ctx.lineTo(1600,670);ctx.stroke();ctx.restore();ledFrame(ctx,1610,590,240,160,DOM.teaching.c,painting2("modern"),{pad:8});tag(ctx,1730,790,"Class fill: 98%",GOOD,{align:"center",size:20});});});});
+      withA(ctx,fin(t,cR+1.5),()=>{ctx.save();ctx.strokeStyle=rgba(GOOD,0.7);ctx.lineWidth=2;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(1542,670);ctx.lineTo(1600,670);ctx.stroke();ctx.restore();ledFrame(ctx,1610,590,240,160,DOM.teaching.c,painting2("modern"),{pad:8});tag(ctx,1730,790,"Class fill: "+Math.round((118+nIn)/1.2)+"%",GOOD,{align:"center",size:20});});
+    arr.forEach((a,i)=>{if(t<a)return;const u=clamp((t-a)/1.0,0,1),e=ease(u),arc=Math.sin(u*Math.PI)*90,sp={cell:(i*7+4)%24,q:0,app:["sis","lms"][i]};
+      const wx=200+i*220+(hash(i,21)-0.5)*40,wy=600+hash(i,22)*160,rc=[9,16][i],rx=1060+(rc%6)*80+40,ry=510+((rc/6)|0)*80+40;
+      if(u<0.08)glow(ctx,960,470,60,C.white,1-u/0.08);
+      if(u<1){dtile(ctx,lerp(960,wx,e),lerp(470,wy,e)-arc,48,u*2.4,sp,1);dtile(ctx,lerp(960,rx,e),lerp(470,ry,e)-arc,48,0,{cell:rc,q:2},1);}
+      else{const k=t-a-1.0;dtile(ctx,wx+Math.sin(t*3+i)*6,wy+Math.cos(t*2.4+i)*5,48,Math.sin(t*1.7+i)*0.4,{...sp,err:true},1);if(k<0.9)glow(ctx,rx,ry,70,GOOD,0.8*(1-k/0.9));}});});});
   vign(ctx,S);
 });
 
 /* ===== v4 scenes, part B ===== */
 function Iss(x,a,r){if(x<=a)return 0;if(x>=a+r)return x-a-r/2;const u=(x-a)/r;return r*(u*u*u-u*u*u*u/2);}
 const RF2={X0:222,X1:1330,Y:560,V:65,INT:1.1,STG:548,DED:610,LEN:770,INTG:958,JOIN:1070};
-function rfT(sc,t){const a=cue(sc,"rough")-0.3,b=cue(sc,"rough")+4.6,r=0.6;return t-(Iss(t,a,r)-Iss(t,b-r,r));}
+function rfT(sc,t){const a=cue(sc,"rough")-0.3,b=Math.max(cue(sc,"rough")+4.6,cue(sc,"sources")+0.7),r=0.6;return t-(Iss(t,a,r)-Iss(t,b-r,r));}
 function rfKeys(sc){if(sc._k)return sc._k;const te=x=>rfT(sc,x),V=RF2.V,I=RF2.INT;
   const kE=Math.round((te(cue(sc,"tests")+0.9)-(RF2.STG-RF2.X0)/V)/I),kO=Math.round((te(cue(sc,"orphan")+0.7)-(RF2.INTG-RF2.X0)/V)/I);
   const tf=te(cue(sc,"rough")+1),kmin=Math.ceil((tf-(520-RF2.X0)/V)/I),kmax=Math.floor((tf-(300-RF2.X0)/V)/I),EX=[];for(let k=kmin;k<=kmax;k++)EX.push(k);
@@ -699,7 +725,7 @@ function rfProps(k,sc){const K=rfKeys(sc);let err=hash(k,51)<0.06,dup=!err&&hash
   return{cell:((hash(k,54)*24)|0),app:["sis","lms","hr","fin"][((k%4)+4)%4],err,dup,orphan,tag,rot:(hash(k,55)-0.5)*0.7,t0:k*RF2.INT};}
 scene("refine",(ctx,S,t,sc)=>{
   const c=id=>cue(sc,id),cRe=c("recipes"),cRu=c("runs"),cCl=c("closer"),cRo=c("rough"),cSo=c("sources"),cSt=c("staging"),cTe=c("tests"),cIn=c("inter"),cOr=c("orphan"),cSi=c("silver"),cTr=c("trace");
-  const cam=camAt([[0,820,520,0.95],[cCl-0.2,820,520,0.95],[cCl+1.3,400,560,2.4],[cRo+3.8,420,560,2.4],[cSo+0.3,420,540,1.5],[cSt-0.2,420,540,1.5],[cSt+0.5,690,520,1.55],[cTe-0.1,690,520,1.55],[cTe+0.6,610,560,1.9],[cIn-0.2,610,560,1.9],[cIn+0.5,1070,520,1.55],[cOr-0.1,1070,520,1.55],[cOr+0.6,1000,560,1.9],[cSi-0.2,1000,560,1.9],[cSi+0.8,1560,480,1.35],[cTr-0.1,1560,480,1.35],[cTr+1.2,960,540,0.95],[sc.dur+2,960,540,0.97]],t);
+  const cam=camAt([[0,820,520,0.95],[cCl-0.2,820,520,0.95],[cCl+1.3,400,560,2.4],[Math.max(cRo+3.8,cSo-0.1),420,560,2.4],[cSo+0.3,420,540,1.5],[cSt-0.2,420,540,1.5],[cSt+0.5,690,520,1.55],[cTe-0.1,690,520,1.55],[cTe+0.6,610,560,1.9],[cIn-0.2,610,560,1.9],[cIn+0.5,1070,520,1.55],[cOr-0.1,1070,520,1.55],[cOr+0.6,1000,560,1.9],[cSi-0.2,1000,560,1.9],[cSi+0.8,1560,480,1.35],[cTr-0.1,1560,480,1.35],[cTr+1.2,960,540,0.95],[sc.dur+2,960,540,0.97]],t);
   bgW(ctx,S,cam);const te=rfT(sc,t),Y=RF2.Y;
   vault(ctx,30,440,190,330,LAYER.bronze,(r,cc)=>hash(r*31+cc,5)>0.7?null:APP[["sis","lms","hr","fin"][(hash(r*7+cc,6)*4)|0]].c,null);T(ctx,"Bronze",125,482,{w:800,size:22,align:"center",color:rgba(LAYER.bronze,1)});
   beam(ctx,[P(222,Y),P(1330,Y)],[210,225,255],[[40,0.03],[14,0.06]]);
@@ -726,10 +752,16 @@ scene("refine",(ctx,S,t,sc)=>{
     const sp={cell:p.cell,q,app:p.app,err:p.err||(p.orphan&&x>RF2.LEN+30)};
     if(p.dup&&x<RF2.DED+40){const m=sstep(RF2.DED-6,RF2.DED+36,x);dtile(ctx,x-38*(1-m),y+14*(1-m),46,p.rot*1.2*sm,sp,al*(1-m));}
     dtile(ctx,x,y,q===2?50:46,p.rot*sm,sp,al);if(p.tag)tags.push([x,y+p.tag[2],p.tag[0],p.tag[1]]);}
-  const exA=fin(t,cRo-0.2)*(1-sstep(cRo+4.2,cRo+4.8,t));if(exA>0)withA(ctx,exA,()=>tags.forEach(g=>tag(ctx,g[0],g[1],g[2],g[3],{align:"center",size:15})));
+  const exA=fin(t,cRo-0.2)*(1-sstep(Math.max(cRo+4.2,cSo+0.3),Math.max(cRo+4.8,cSo+0.9),t));if(exA>0)withA(ctx,exA,()=>tags.forEach(g=>tag(ctx,g[0],g[1],g[2],g[3],{align:"center",size:15})));
   if(failE>0)withA(ctx,Math.min(1,failE*4),()=>tag(ctx,512,505,"✗ not_null",BAD,{align:"center",size:15}));if(failO>0)tag(ctx,912,505,"✗ relationships",BAD,{align:"center",size:15});
   withA(ctx,fin(t,cSt+1.2),()=>{dtile(ctx,1520,790,120,-0.05,{cell:14,q:0,app:"lms",hi:true});dtile(ctx,1730,790,120,0,{cell:14,q:2,hi:true});T(ctx,"raw",1520,870,{w:700,size:18,align:"center",color:rgba(APP.lms.c,1)});T(ctx,"clean",1730,870,{w:700,size:18,align:"center"});ctx.save();ctx.strokeStyle=rgba(INK,0.7);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(1600,790);ctx.lineTo(1648,790);ctx.moveTo(1636,778);ctx.lineTo(1650,790);ctx.lineTo(1636,802);ctx.stroke();ctx.restore();});
   if(t>cTr){const u=ease(clamp((t-cTr-0.2)/2.2,0,1)),L=mk([P(1400,478),P(1330,Y),P(RF2.JOIN,Y),P(RF2.LEN,Y),P(RF2.DED,Y),P(330,Y),P(125,Y),P(-400,Y)]),n=60,sub=[];for(let i=0;i<=n;i++)sub.push(at(L,u*i/n));beam(ctx,sub,LAYER.gold,[[16,0.08],[6,0.25],[2.2,0.95]]);withA(ctx,fin(t,cTr+1.4),()=>tag(ctx,700,630,"lineage: every step recorded",LAYER.gold,{align:"center",size:17}));}
+  // the breather: a fresh batch runs clean, the checks ripple, new pieces land in silver, and light runs back along the lineage to bronze
+  const B=c("breath");if(sc.breathe&&t>B){
+    [B+0.6,B+3.8].forEach(s0=>{const v=(t-s0)/1.4;if(v>0&&v<1){glow(ctx,lerp(300,1190,v),662,60,GOOD,0.8*Math.sin(v*Math.PI));glow(ctx,lerp(300,1190,v),712,40,GOOD,0.4*Math.sin(v*Math.PI));}});
+    const ex=1404,ey=330,cw=444/6,chh=294/4;[1.2,2.6,4.0].forEach((d,i)=>{const s0=B+d,v=(t-s0)/0.9;if(v<0)return;const cc=ORDER24[(i*7+3)%24],tx=ex+(cc%6)*cw+cw/2,ty=ey+((cc/6)|0)*chh+chh/2;
+      if(v<1){const q=at(mk(bez(P(1300,Y),P(1360,Y),P(tx-100,ty),P(tx,ty),12)),ease(v));dtile(ctx,q.x,q.y,lerp(46,cw,v),0,{cell:cc,q:2},1);}else if(v<1.8)glow(ctx,tx,ty,60,LAYER.silver,0.6*(1-(v-1)/0.8));});
+    const Lm=mk([P(1400,478),P(1330,Y),P(RF2.JOIN,Y),P(RF2.LEN,Y),P(RF2.DED,Y),P(330,Y),P(125,Y)]);[B+2.0,B+4.6].forEach(s0=>{const v=(t-s0)/2.0;if(v>0&&v<1){const q=at(Lm,ease(v));glow(ctx,q.x,q.y,26,C.white,0.9);glow(ctx,q.x,q.y,90,LAYER.gold,0.45);}});}
   vign(ctx,S);
 });
 
@@ -737,7 +769,7 @@ scene("refine",(ctx,S,t,sc)=>{
 const GW=[{d:"teaching",k:"live",x:1000},{d:"students",k:"rules",x:1480},{d:"research",k:"modern",x:1960},{d:"finance",k:"realism",x:2440}];
 scene("gold",(ctx,S,t,sc)=>{
   const c=id=>cue(sc,id),cSp=c("split"),cPr=c("products"),cSu=c("subject"),cAn=c("analysts"),cEx=c("execs"),cRp=c("reports"),cLi=c("live"),cMa=c("marts"),cXp=c("exposure"),cGo=c("gold");
-  const cam=camAt([[0,380,540,1.2],[cSp+0.3,380,540,1.2],[cSp+2.6,1470,540,0.62],[cSu-0.2,1470,540,0.62],[cAn+0.4,2660,470,1.9],[cEx-0.3,2660,470,1.9],[cEx+0.4,2180,470,1.9],[cRp-0.3,2180,470,1.9],[cRp+0.4,1700,470,1.9],[cLi-0.3,1700,470,1.9],[cLi+0.4,1220,470,1.9],[cMa-0.3,1220,470,1.9],[cMa+0.6,1700,560,1.3],[cGo-0.2,1700,560,1.3],[cGo+1.0,1470,540,0.62],[sc.dur+2,1470,540,0.64]],t);
+  const cam=camAt([[0,380,540,1.2],[cSp+0.3,380,540,1.2],[cSp+2.6,1470,540,0.62],[cSu-0.2,1470,540,0.62],[cAn+0.4,2660,470,1.9],[cEx-0.3,2660,470,1.9],[cEx+0.4,2180,470,1.9],[cRp-0.3,2180,470,1.9],[cRp+0.4,1700,470,1.9],[cLi-0.3,1700,470,1.9],[cLi+0.4,1220,470,1.9],[cMa-0.3,1220,470,1.9],[cMa+0.6,1700,560,1.3],[cGo-0.2,1700,560,1.3],[cGo+1.0,1470,540,0.62]].concat(sc.breathe?[[c("breath")+0.4,1470,540,0.62],[c("breath")+3.0,1230,560,1.45],[sc.dur+2,1250,560,1.5]]:[[sc.dur+2,1470,540,0.64]]),t);
   bgW(ctx,S,cam);
   glass(ctx,46,366,508,348,16,LAYER.silver,{glow:24});ctx.drawImage(master2(1),60,380,480,320);chip(ctx,300,330,"databricks","Silver","one consistent picture",{align:"center",edge:LAYER.silver});
   const scanX=60+((t*0.35)%1)*480;ctx.save();ctx.globalCompositeOperation="lighter";ctx.fillStyle="rgba(200,230,255,0.5)";ctx.fillRect(scanX-2,380,4,320);ctx.restore();
@@ -752,6 +784,9 @@ scene("gold",(ctx,S,t,sc)=>{
   aud.forEach(([cc,a1,a2,i])=>withA(ctx,fin(t,cc+0.3)*(1-sstep(cMa-0.3,cMa+0.2,t)),()=>{const w=GW[i];tag(ctx,w.x+220,586,a1+" · "+a2,DOM[w.d].c,{align:"center",size:17});}));
   withA(ctx,fin(t,cMa+0.2)*(1-sstep(cGo+0.6,cGo+1.2,t)),()=>{const h=plaque(ctx,1500,600,400,[["DATA PRODUCT","Census enrolments"],["DBT MART","fct_census_enrolments · contract","dbt"],["DBT EXPOSURE","Government census report","dbt"],["OWNER","Student services"]],DOM.students.c);
     const xa=fin(t,cXp);if(xa>0){ctx.save();ctx.globalAlpha*=xa;ctx.shadowColor=rgba(DBT,0.9);ctx.shadowBlur=18;ctx.strokeStyle=rgba(DBT,0.95);ctx.lineWidth=2.5;rr(ctx,1508,600+16+2*52-6,384,52,10);ctx.stroke();ctx.restore();}});
+  // the breather: in the Teaching wing, a live data product shows its plaque, and its exposure lights up
+  const B=c("breath");if(sc.breathe&&t>B+2.2)withA(ctx,fin(t,B+2.2,0.6)*(1-sstep(sc.dur-0.5,sc.dur,t)),()=>{plaque(ctx,1012,604,416,[["DATA PRODUCT","Rooms in use now"],["DBT MART","fct_rooms_live · contract","dbt"],["DBT EXPOSURE","Campus operations screen","dbt"],["OWNER","Timetabling"]],DOM.teaching.c);
+    const xa=fin(t,B+3.4);if(xa>0){ctx.save();ctx.globalAlpha*=xa;ctx.shadowColor=rgba(DBT,0.9);ctx.shadowBlur=18;ctx.strokeStyle=rgba(DBT,0.95);ctx.lineWidth=2.5;rr(ctx,1020,604+16+2*52-6,400,52,10);ctx.stroke();ctx.restore();}});
   vign(ctx,S);
 });
 
@@ -783,6 +818,9 @@ scene("layers",(ctx,S,t,sc)=>{
   withA(ctx,coA,()=>{T(ctx,"CONSUMPTION",1932,456,{w:800,size:15,color:rgba(SOFT,0.9)});[513,613,713,813].forEach(y=>lane(ctx,[P(1882,y),P(1908,y)],[235,240,255],0.7));lane(ctx,[P(1908,513),P(1908,813)],[235,240,255],0.6);
     const ys=[530,650,770];ys.forEach(y=>lane(ctx,[P(1908,y),P(1934,y)],[235,240,255],0.8));spawn(t,0.8,0.8,0.3,u=>{glow(ctx,1908,lerp(513,813,u),10,C.white,0.9);});
     [["Databricks Apps","for staff and students"],["Genie","ask in plain words"],["Dashboards and SQL","for analysts and leaders"]].forEach(([a,b],k)=>{if(cp>0)glow(ctx,2080,ys[k],170,LAYER.gold,0.35*cp);chip(ctx,1934,ys[k],"databricks",a,b,{ts:19,ss:15,lh:28});});});
+  // the breather: one pulse of light travels through the whole platform, from a source system to Genie
+  const Bb=cue(sc,"breath");if(sc.breathe&&t>Bb){const path=mk([P(190,513),P(400,617),P(540,617),P(900,617),P(1260,617),P(1440,560),P(1675,513),P(1908,513),P(1908,650),P(2090,650)]),u=ease(clamp((t-Bb-0.4)/(sc.breathe-1.6),0,1)),q=at(path,u),fa=1-sstep(sc.dur-0.8,sc.dur,t);
+    glow(ctx,q.x,q.y,50,C.white,0.95*fa);glow(ctx,q.x,q.y,160,LAYER.gold,0.45*fa);const sub=[];for(let i=0;i<=40;i++)sub.push(at(path,u*i/40));beam(ctx,sub,LAYER.gold,[[14,0.06*fa],[5,0.22*fa],[2,0.9*fa]]);}
   vign(ctx,S);
 });
 
@@ -809,6 +847,8 @@ scene("meaning",(ctx,S,t,sc)=>{
   withA(ctx,sky,()=>{KSRC.forEach((s,i)=>withA(ctx,fin(t,cKn+0.4+i*0.5),()=>sysCard(ctx,s.x,-1000,300,110,s.n,null,[120,180,255],ICON[s.ic])));
     const BX=960,BY=-565,BS=0.78,act=0.15+0.35*fin(t,cMc)+0.5*fin(t,cOn),ents=[0,1,2,3,4].map(i=>brainHub(BX,BY,BS,i));
     brainNet(ctx,BX,BY,BS,t,act,{});
+    // the breather: snippets keep arriving, and new connections light up across the brain
+    const Bm=c("breath");if(sc.breathe&&t>Bm){spawn(t,0.45,1.6,Bm,(u,k)=>{const e=BRAIN.E[(k*53+7)%BRAIN.E.length],a=BRAIN.N[e[0]],b=BRAIN.N[e[1]],f=Math.sin(u*Math.PI);ctx.save();ctx.strokeStyle=rgba(LAYER.gold,0.8*f);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(BX+a[0]*BS,BY+a[1]*BS);ctx.lineTo(BX+b[0]*BS,BY+b[1]*BS);ctx.stroke();ctx.restore();glow(ctx,BX+a[0]*BS,BY+a[1]*BS,30,LAYER.gold,0.8*f);glow(ctx,BX+b[0]*BS,BY+b[1]*BS,30,LAYER.gold,0.8*f);});}
     const mA=fin(t,cMc);KSRC.forEach((s,i)=>{if(mA<=0)return;const gx=s.x+150,gy=-860,tg=ents[[0,1,2,3][i]];withA(ctx,mA,()=>{ctx.save();ctx.lineWidth=6;ctx.strokeStyle=metal(ctx,gx-20,0,gx+20,0,MET.silver);ctx.beginPath();ctx.ellipse(gx,gy,20,11,0,0,TAU);ctx.stroke();ctx.restore();});
       const L=[P(gx,gy+10),P(lerp(gx,tg.x,0.5),gy+70),P(tg.x,tg.y-30)];beam(ctx,L,C.mcp,[[12,0.05*mA],[4,0.2*mA],[1.6,0.9*mA]]);
       if(t>cRd)spawn(t,2.0,1.6,cRd+i*0.35,u=>{const q=at(mk(L),u);withA(ctx,1-sstep(0.85,1,u),()=>{ctx.fillStyle="#f4f1ea";rr(ctx,q.x-40,q.y-14,80,28,5);ctx.fill();ctx.fillStyle="#6b7280";ctx.fillRect(q.x-30,q.y-5,50,4);ctx.fillRect(q.x-30,q.y+3,34,4);});glow(ctx,q.x,q.y,36,C.mcp,0.35);});});
@@ -824,13 +864,17 @@ scene("speeds",(ctx,S,t,sc)=>{
   ctx.save();ctx.strokeStyle="rgba(170,200,245,0.16)";ctx.lineWidth=2;ctx.setLineDash([10,12]);ctx.beginPath();ctx.moveTo(960,190);ctx.lineTo(960,660);ctx.stroke();ctx.restore();
   withA(ctx,fin(t,cNo),()=>T(ctx,"One answer, right now",480,150,{w:800,size:40,align:"center"}));withA(ctx,fin(t,cYe),()=>T(ctx,"Every record, over years",1440,150,{w:800,size:40,align:"center"}));
   const ans=fin(t,q0+0.35,0.25);phone3(ctx,280,470,1.5,{screen:"seat",ans});
+  // the breather: three more seat checks answer at once, while one long scan crosses the whole history
+  const B=c("breath"),Q=sc.breathe?[0.4,1.9,3.4].map(x=>B+x):[];let flash=0;
+  Q.forEach(q=>{if(t>q-0.3&&t<q)glow(ctx,lerp(370,540,(t-q+0.3)/0.3),470,24,C.hot,1);if(t>q+0.05&&t<q+0.35)glow(ctx,lerp(540,370,(t-q-0.05)/0.3),470,24,GOOD,1);if(t>q&&t<q+0.8)flash=Math.max(flash,1-(t-q)/0.8);});
   if(t>q0-0.3&&t<q0){glow(ctx,lerp(370,540,(t-q0+0.3)/0.3),470,24,C.hot,1);}if(t>q0+0.3&&t<q0+0.6){glow(ctx,lerp(540,370,(t-q0-0.3)/0.3),470,24,GOOD,1);}
   glass(ctx,540,330,380,290,18,DBX,{glow:16,ea:0.5,fill:"rgba(7,12,24,0.92)"});withA(ctx,fin(t,cLa-0.2),()=>{logo(ctx,"databricks",560,346,32);T(ctx,"Lakebase",602,372,{w:800,size:24});T(ctx,"a fast desk copy for apps",602,396,{w:500,size:16,color:rgba(SOFT,0.95)});});
   for(let r=0;r<5;r++){const hl=r===2?ans:0;ctx.fillStyle=hl>0?rgba(mix([40,60,100],GOOD,hl),0.9):"rgba(120,150,200,0.18)";rr(ctx,564,420+r*36,332,26,6);ctx.fill();if(r===2&&hl>0.5)T(ctx,"DS101 · Tue 9 am · 1 seat left",580,438+r*36,{w:700,size:15,color:"#08140c"});}
-  withA(ctx,fin(t,q0+0.5,0.3),()=>tag(ctx,730,652,"8 ms",GOOD,{align:"center",size:18}));
+  withA(ctx,fin(t,q0+0.5,0.3),()=>tag(ctx,730,652,"8 ms",GOOD,{align:"center",size:18}));if(flash>0){glow(ctx,730,505,170,GOOD,0.35*flash);glow(ctx,730,652,60,GOOD,0.5*flash);}
   withA(ctx,fin(t,cYe-0.2),()=>{for(let s2=0;s2<7;s2++){ctx.fillStyle=rgba(mix(APP[["sis","lms","hr","fin"][s2%4]].c,[30,40,60],0.55),1);rr(ctx,1030+s2*14,300-s2*6,110,330+s2*6,8);ctx.fill();}
     ctx.save();ctx.globalCompositeOperation="lighter";const sy=300+((t*0.8)%1)*330;ctx.fillStyle=rgba(C.hot,0.8);ctx.fillRect(1030,sy,210,4);ctx.restore();glow(ctx,1135,sy,60,C.hot,0.5);
     const hm=sstep(cYe+0.6,cYe+3.6,t);for(let r=0;r<8;r++)for(let k=0;k<14;k++){const v=0.25+0.75*Math.abs(Math.sin(r*1.7+k*0.6)*Math.cos(k*0.3+r));ctx.fillStyle=hm*14>k?rgba(mix([40,60,110],[255,140,90],v),0.95):"rgba(40,50,70,0.35)";rr(ctx,1280+k*40,300+r*40,34,34,6);ctx.fill();}
+    if(sc.breathe&&t>B+0.3&&t<sc.dur-0.2){const v=clamp((t-B-0.3)/(sc.breathe-0.9),0,1),sx=1280+v*560;ctx.save();ctx.globalCompositeOperation="lighter";ctx.fillStyle=rgba(C.hot,0.55);ctx.fillRect(sx-2,292,4,334);ctx.restore();glow(ctx,sx,460,90,C.hot,0.35);}
     T(ctx,"weeks →",1280,650,{w:600,size:18,color:rgba(SOFT,0.85)});T(ctx,"classes ↓",1280,286,{w:600,size:18,color:rgba(SOFT,0.85)});});
   withA(ctx,fin(t,cJo),()=>chip(ctx,1560,720,"databricks","Lakehouse","history at scale",{align:"center"}));
   const sa=fin(t,cSy-0.1);withA(ctx,sa,()=>{vault(ctx,820,690,280,150,LAYER.gold,(r,k)=>hash(r*9+k,4)>0.7?null:DOM[["students","teaching","research","finance"][(r+k)%4]].c,null);
@@ -841,10 +885,13 @@ scene("speeds",(ctx,S,t,sc)=>{
 
 scene("out",(ctx,S,t,sc)=>{
   const c=id=>cue(sc,id),cFo=c("four"),cEv=c("events"),cSq=c("sql"),cCp=c("copies"),cSt=c("stale"),cTw=c("twist"),cPr=c("projector"),cSh=c("share"),cMi=c("mirror"),cFe=c("fed"),cOn=c("one");
-  const cam=camAt([[0,1500,540,0.6],[cEv-0.3,1500,540,0.6],[cEv+0.6,960,330,1.3],[cSq-0.2,960,330,1.3],[cSq+0.6,1700,260,1.3],[cCp-0.2,1700,260,1.3],[cCp+0.6,1150,440,1.3],[cTw-2.1,1150,440,1.3],[cTw-0.9,1500,540,0.6],[cPr+0.4,1050,790,1.05],[cSh+0.4,1300,790,1.3],[cMi+0.4,1790,790,1.3],[cFe+0.5,2440,800,1.25],[cOn+0.4,1500,560,0.6],[sc.dur+2,1500,560,0.62]],t);
+  const pzT=(sc.pauses&&sc.pauses.twist)||1;
+  const cam=camAt([[0,1500,540,0.6],[cEv-0.3,1500,540,0.6],[cEv+0.6,960,330,1.3],[cSq-0.2,960,330,1.3],[cSq+0.6,1700,260,1.3],[cCp-0.2,1700,260,1.3],[cCp+0.6,1150,440,1.3],[cTw-pzT-1.1,1150,440,1.3],[cTw-pzT*0.4-0.5,1500,540,0.6],[cPr+0.4,1050,790,1.05],[cSh+0.4,1300,790,1.3],[cMi+0.4,1790,790,1.3],[cFe+0.5,2440,800,1.25],[cOn+0.4,1500,560,0.6],[sc.dur+2,1500,560,0.62]],t);
   bgW(ctx,S,cam);const dim=(a,b)=>0.35+0.65*fin(t,a,b||0.6);
   vault(ctx,120,280,300,560,LAYER.gold,(r,k)=>hash(r*13+k,3)>0.8?null:DOM[["students","teaching","research","finance"][(hash(r*7+k,2)*4)|0]].c,"Gold","data products");
   const chg=cSt+0.2;if(t>chg&&t<chg+1.2)glow(ctx,270,560,240,LAYER.gold,0.6*(1-(t-chg)/1.2));
+  // during the hold, the original changes again, and the copies fall behind again
+  const chg2=(sc.ends.stale||cSt)+0.8;if(t>chg2&&t<chg2+1.2)glow(ctx,270,560,240,LAYER.gold,0.6*(1-(t-chg2)/1.2));if(t>chg2+0.3&&t<chg2+2.0)glow(ctx,1470,520,110,BAD,0.5*Math.sin((t-chg2-0.3)/1.7*Math.PI));
   withA(ctx,dim(cEv-0.3),()=>{lane(ctx,[P(422,420),P(680,360)],LAYER.gold,0.9);hub(ctx,760,360,78,t*0.6);chip(ctx,760,478,null,"Integration platform",null,{align:"center",edge:CYAN,ts:18});
     const ring=clamp((t-cEv-0.8)/2.4,0,1);bellGlyph(ctx,760,212,1,ring>0&&ring<1?1-ring*0.3:0);
     sysCard(ctx,1000,190,300,86,"Learning platform",null,[150,190,255],ICON.lms);sysCard(ctx,1000,296,300,86,"Library",null,[150,190,255],ICON.lib);
@@ -859,7 +906,10 @@ scene("out",(ctx,S,t,sc)=>{
     [{x:1100,c:fin(t,cSh),n:"OpenSharing",s:"partner university",ic:ICON.uni},{x:1600,c:fin(t,cMi),n:"Mirroring",s:"Microsoft Fabric",ic:null}].forEach(o=>{screen2(ctx,o.x,690,380,210,DOM.research.c);if(o.c>0){cone(ctx,760,790,o.x,690,o.x,900,LAYER.gold,o.c);withA(ctx,o.c,()=>{if(o.n==="OpenSharing")ctx.drawImage(pv("research",0),o.x+8,698,364,194);else[["teaching",0],["students",0],["research",3],["finance",1]].forEach(([dk,vi],k)=>{ctx.drawImage(pv(dk,vi),o.x+10+(k%2)*182,700+((k/2)|0)*97,178,93);pvLive(ctx,dk,vi,o.x+10+(k%2)*182,700+((k/2)|0)*97,178,93,t);ctx.strokeStyle=rgba(DOM[dk].c,0.9);ctx.lineWidth=2;ctx.strokeRect(o.x+10+(k%2)*182,700+((k/2)|0)*97,178,93);});glow(ctx,o.x+190+130*Math.sin(t*1.3),795,40,DOM.research.c,0.6);});}withA(ctx,o.c,()=>chip(ctx,o.x+190,950,null,o.n,o.s,{align:"center",edge:DOM.research.c,ts:20,ss:16}));});
     const fe=fin(t,cFe);withA(ctx,fe,()=>{screen2(ctx,2150,710,280,180,C.mcp);cone(ctx,2520,800,2430,710,2430,890,C.mcp,1);projector2(ctx,2560,800,1.1,true);sysCard(ctx,2640,740,320,110,"Research grants system","stays where it lives",[150,230,190],ICON.doc);for(let r=0;r<5;r++){ctx.fillStyle=rgba(C.mcp,0.85);rr(ctx,2170,730+r*30,120+((r*37)%80),14,4);ctx.fill();}chip(ctx,2290,950,null,"Federation","their data, where it lives",{align:"center",edge:C.mcp,ts:20,ss:16});});});
   withA(ctx,fin(t,cOn),()=>chip(ctx,1500,1040,null,"Zero-copy","projected, never copied",{align:"center",edge:LAYER.gold}));
-  if(t>cTw-1.1&&t<cTw+0.6){const a=clamp((t-cTw+1.1)/1.1,0,1)*(1-sstep(cTw+0.2,cTw+0.6,t));glow(ctx,756,790,40+70*a,[255,236,190],0.7*a);}vign(ctx,S);
+  if(t>cTw-pzT-0.1&&t<cTw+0.6){const a=clamp((t-cTw+pzT+0.1)/(pzT+0.1),0,1)*(1-sstep(cTw+0.2,cTw+0.6,t));glow(ctx,756,790,40+70*a,[255,236,190],0.7*a);}
+  // the breather: the original changes; both projected screens show it in the same instant, while the copy falls behind
+  const B=c("breath");if(sc.breathe&&t>B){[1.0,3.6].forEach(d=>{const u=t-B-d;if(u>0&&u<1.4){const a=1-u/1.4;glow(ctx,270,560,260,LAYER.gold,0.6*a);if(u>0.15)[[1290,795],[1790,795]].forEach(([x,y])=>glow(ctx,x,y,240,[255,245,220],0.5*(1-(u-0.15)/1.25)));}if(u>0.3&&u<2.3)glow(ctx,1470,520,120,BAD,0.5*Math.sin((u-0.3)/2*Math.PI));});}
+  vign(ctx,S);
 });
 
 /* ===== v4 scenes, part D ===== */
@@ -880,6 +930,9 @@ scene("people",(ctx,S,t,sc)=>{
     ctx.fillStyle="rgba(120,240,170,0.16)";rr(ctx,1462,y0+146,426,46,8);ctx.fill();T(ctx,"Suggestion: open a second class",1480,y0+177,{size:22,w:700,color:rgba(GOOD,1)});T(ctx,"Sources",1466,y0+232,{size:18,w:700,color:rgba(SOFT,0.8)});
     ["Enrolments (certified)","Census-date policy","New-class approval process"].forEach((s,i)=>withA(ctx,fin(t,cAn+0.8+i*0.4,0.3),()=>tag(ctx,1466,y0+264+i*40,s,LAYER.gold,{size:15})));
     const pm=fin(t,cPe,0.5);if(pm>0)withA(ctx,pm,()=>{ctx.fillStyle="rgba(120,130,150,0.94)";rr(ctx,1790,y0+248,100,112,10);ctx.fill();ctx.strokeStyle="#fff";ctx.lineWidth=3;rr(ctx,1826,y0+292,28,22,4);ctx.stroke();ctx.beginPath();ctx.arc(1840,y0+292,9,Math.PI,0);ctx.stroke();T(ctx,"names",1840,y0+344,{size:16,w:700,align:"center",color:"#fff"});});});
+  // the breather: Genie keeps consulting Genie Ontology, and the answer's sources light up one by one
+  const B=c("breath");if(sc.breathe&&t>B){spawn(t,0.9,1.0,B,u=>glow(ctx,lerp(1230,1258,u),lerp(330,486,u),16,LAYER.gold,1));glow(ctx,1260,520,100,[255,226,160],0.2*(0.5+0.5*Math.sin((t-B)*3)));
+    ["Enrolments (certified)","Census-date policy","New-class approval process"].forEach((s2,i)=>{const v=(t-B-0.8-i*1.2)/1.0;if(v>0&&v<1){const w=tw(ctx,s2,15,700)+26;glow(ctx,1466+w/2,y0+264+i*40,w*0.6,LAYER.gold,0.55*Math.sin(v*Math.PI));}});}
   vign(ctx,S);
 });
 scene("end",(ctx,S,t,sc)=>{
@@ -894,10 +947,11 @@ scene("end",(ctx,S,t,sc)=>{
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});
-function buildTimeline(){let g=0;const caps=[];
-  SCENES.forEach(sc=>{sc.start=g;sc.cues={};let t=sc.lead||0.6;
-    sc.vo.forEach(ch=>{if(ch.pause)t+=ch.pause;const d=(typeof VODUR!=="undefined"&&VODUR[sc.id+"/"+ch.id])||Math.max(1.3,ch.text.split(/\s+/).length/2.7);sc.cues[ch.id]=t;caps.push({s:g+t,e:g+t+d,text:ch.text,sid:sc.id,id:ch.id});t+=d+(ch.gap!=null?ch.gap:GAP);});
-    sc.voEnd=t;sc.dur=t+(sc.tail||1.2);g+=sc.dur;});return{total:g,caps};}
+// BREATH (breath.js) adds room to think: a hold after a line, a pause before one, and a wordless end to each chapter from the "breath" cue
+function buildTimeline(){let g=0;const caps=[],BR=typeof BREATH!=="undefined"?BREATH:{};
+  SCENES.forEach(sc=>{const b=BR[sc.id]||{},hold=b.hold||{},pz=b.pause||{};sc.start=g;sc.cues={};sc.ends={};sc.pauses={};let t=sc.lead||0.6;
+    sc.vo.forEach(ch=>{const p=(ch.pause||0)+(pz[ch.id]||0);if(p){t+=p;sc.pauses[ch.id]=p;}const d=(typeof VODUR!=="undefined"&&VODUR[sc.id+"/"+ch.id])||Math.max(1.3,ch.text.split(/\s+/).length/2.7);sc.cues[ch.id]=t;sc.ends[ch.id]=t+d;caps.push({s:g+t,e:g+t+d,text:ch.text,sid:sc.id,id:ch.id});t+=d+(ch.gap!=null?ch.gap:GAP)+(hold[ch.id]||0);});
+    sc.voEnd=t;sc.breathe=b.breathe||0;sc.cues.breath=t+(sc.tail||1.2);sc.dur=sc.cues.breath+sc.breathe;g+=sc.dur;});return{total:g,caps};}
 const TL=buildTimeline();let CAPS_ON=true,OFF=null;
 function sceneIndex(t){for(let i=SCENES.length-1;i>=0;i--)if(t>=SCENES[i].start)return i;return 0;}
 function wrapLines(ctx,s,maxW){const words=s.split(" "),lines=[];let cur="";words.forEach(w=>{const tr=cur?cur+" "+w:w;if(ctx.measureText(tr).width>maxW&&cur){lines.push(cur);cur=w;}else cur=tr;});if(cur)lines.push(cur);
@@ -913,7 +967,7 @@ async function fontsReady3(){try{await Promise.all(["600 40px Manrope","700 22px
 async function prepAssets(){await fontsReady3();await loadLogos();master2(1);master2(2);["realism","modern","rules","live"].forEach(painting2);}
 if(window.__RENDER__){const cv=mkCanvas(W,H),ctx=cv.getContext("2d");document.body.appendChild(cv);
   window.renderAt=function(t,q){renderFrame(ctx,1,t);return cv.toDataURL("image/jpeg",q||0.9);};
-  window.filmInfo=function(){return{total:TL.total,scenes:SCENES.map(s=>({id:s.id,name:s.name,start:s.start,dur:s.dur,cues:s.cues})),caps:TL.caps};};
+  window.filmInfo=function(){return{total:TL.total,scenes:SCENES.map(s=>({id:s.id,name:s.name,start:s.start,dur:s.dur,cues:s.cues,pauses:s.pauses,breathe:s.breathe})),caps:TL.caps};};
   prepAssets().then(()=>{window.__READY__=true;});}
 else{
 /* the player; window.FILM lets the rest of a page wait for the film's assets, and seek or play it */
@@ -928,9 +982,12 @@ window.addEventListener("DOMContentLoaded",async()=>{
   function label(){play.textContent=playing?(waiting?UI.load:UI.pause):UI.play;}
   function draw(){size();renderFrame(ctx,cv.width/W,t);scrub.value=t.toFixed(2);time.textContent=fmt(t)+" / "+fmt(TL.total);const i=sceneIndex(t);[...chap.children].forEach((b,k)=>b.classList.toggle("on",k===i));}
   // draws only while playing or after a change, and only while the player is on screen
-  function loop(ts){if(playing){if(hasAu&&!au.paused)t=au.currentTime;else{const dt=Math.min(0.1,(ts-last)/1000);t+=dt;}if(t>=TL.total-0.02){t=TL.total;playing=false;label();if(hasAu)au.pause();}if(stopAt!=null&&t>=stopAt){t=stopAt;stopAt=null;playing=false;label();if(hasAu)au.pause();}dirty=true;}last=ts;if(dirty&&inView){draw();dirty=false;}requestAnimationFrame(loop);}
+  // FILM.onChapterEnd(id) can hold the film on the last frame of a chapter, for "pause and think": return true to pause there
+  function loop(ts){if(playing){const i0=sceneIndex(t);if(hasAu&&!au.paused)t=au.currentTime;else{const dt=Math.min(0.1,(ts-last)/1000);t+=dt;}
+    if(FILM.onChapterEnd&&sceneIndex(t)>i0){const s=SCENES[i0];if(FILM.onChapterEnd(s.id)===true){t=s.start+s.dur-0.03;playing=false;label();if(hasAu){au.pause();try{au.currentTime=t;}catch(e){}}}}
+    if(t>=TL.total-0.02){t=TL.total;playing=false;label();if(hasAu)au.pause();}if(stopAt!=null&&t>=stopAt){t=stopAt;stopAt=null;playing=false;label();if(hasAu)au.pause();}dirty=true;}last=ts;if(dirty&&inView){draw();dirty=false;}requestAnimationFrame(loop);}
   function toggle(){box.classList.add("started");if(t>=TL.total-0.05)seek(0);playing=!playing;label();if(hasAu){if(playing){au.currentTime=t;au.play().catch(()=>{});}else au.pause();}dirty=true;}
-  play.onclick=toggle;const pst=box.querySelector(".poster");if(pst)pst.onclick=()=>{if(!playing)toggle();};
+  play.onclick=toggle;box.querySelectorAll("[data-play]").forEach(b=>{b.onclick=()=>{if(!playing)toggle();};});
   if(hasAu){au.addEventListener("waiting",()=>{waiting=true;label();});au.addEventListener("playing",()=>{waiting=false;label();});}
   scrub.oninput=()=>seek(parseFloat(scrub.value));
   // full screen covers the player (film and controls); browsers that only allow it for <video>, such as Safari on iPhone, hide the button

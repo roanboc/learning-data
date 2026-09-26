@@ -14,12 +14,13 @@ site/                          the website, published to GitHub Pages as it is
   assets/                      styles, icon and poster images (English and Spanish)
     film/                      the film's player code and soundtrack, per language (built in films/inner-life-of-data/source/)
     learn/                     the labs and scenarios: learn.js (map and stops), labs.js and labs2.js (the eight labs),
-                               quiz.js (the scenarios), path.js (the three-step path on every page, with progress),
+                               quiz.js (the scenarios), think.js ("Pause and think" in the film), path.js (the three-step path on every page, with progress),
                                and their words in learn.en.js and learn.es.js
   films/inner-life-of-data/    redirects the old player address to the home page
   journey/                     the making-of story: index.md (source) and index.html (generated)
   es/                          the Spanish site, with the same layout as the English above
-films/inner-life-of-data/      the first film: everything used to make it, and breathing-cut.md, the plan for its next version
+films/inner-life-of-data/      the first film: everything used to make it, and breathing-cut.md, how its pauses work
+films/when-things-go-wrong/    the second film, in development: its treatment
   script.md                    narration, pictures, rigour notes and sources
   captions/                    captions for video platforms: en.srt, en.vtt, es.srt, es.vtt
   source/                      the code that generates the film in each language, and how to rebuild it

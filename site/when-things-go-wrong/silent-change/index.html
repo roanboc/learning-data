@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Silent change · When things go wrong · Learning Data</title>
+<meta name="description" content="A 5½-minute film about a change that each side of a university saw only half of, and how a test, lineage and a data contract make the next change visible to both sides.">
+<meta property="og:title" content="Silent change · When things go wrong · Learning Data"><meta property="og:description" content="A new enrolment status reaches the data overnight, and each side of the university saw only half of the change."><meta property="og:image" content="https://roanboc.github.io/learning-data/assets/silent-change-poster.jpg">
+<link rel="alternate" hreflang="en" href="https://roanboc.github.io/learning-data/when-things-go-wrong/silent-change/"><link rel="alternate" hreflang="es" href="https://roanboc.github.io/learning-data/es/when-things-go-wrong/silent-change/">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../../"><img src="../../assets/favicon.svg" alt="">Learning Data</a><nav aria-label="Site"><a href="../../">Start here</a><a href="../../topics/" aria-current="true">Topics</a><a class="nav-extra" href="../../journey/">Making of</a><a class="nav-extra" href="https://github.com/roanboc/learning-data">GitHub</a><span class="lang" role="group" aria-label="Language"><a href="./" aria-current="true" lang="en">EN</a><a href="../../es/when-things-go-wrong/silent-change/" lang="es" hreflang="es">ES</a></span></nav></div></header>
+<main>
+<section class="hero">
+<p class="eyebrow crumbs"><a href="../../topics/">Topics</a> › <a href="../">When things go wrong</a></p>
+<h1>Silent change: why a change needs both sides</h1>
+<p class="lead">A new enrolment status reaches the data overnight. The business side and the technical side each saw only half of the change. A test keeps a wrong number away from a decision, and a data contract, checked on every load and on every proposed change, makes the next change visible to both sides.</p>
+<p class="meta-row"><span>5½ min</span><span>Pause and think</span><span>English captions</span></p>
+<p class="builds-on">Builds on <i>The Inner Life of Data</i> · <a href="../../#t=108">Refining with dbt</a> and <a href="../../#t=168">Gold</a></p>
+</section>
+
+<section class="module" id="watch" data-store="ld-silent-change" aria-labelledby="watch-h">
+<div class="mhead"><div><p class="step">Watch</p><h2 id="watch-h">Silent change</h2><p>A 5½-minute film with narration, music and sound. Press Play, or jump to a chapter. With <b>Pause and think</b> on, the film stops at the end of four chapters and asks you one question each time.</p></div></div>
+<div class="player" data-labs="../../labs/">
+<audio id="snd" preload="metadata" src="../../assets/silent-change/soundtrack.mp3"></audio><div class="poster"><img src="../../assets/silent-change-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Play the film · 5½ min</button><button type="button" class="think-badge" data-think>Play with pauses to think</button></div></div><canvas id="film" width="1280" height="720" aria-label="Animated film: Silent change"></canvas>
+<div class="bar"><button id="play">Play</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Seek"><span id="time">0:00</span><button id="think" aria-pressed="false" title="Stop at the end of four chapters, with one question each">Pause and think</button><button id="cc" class="on" aria-pressed="true">Captions</button><button id="fs">Full screen</button></div>
+</div>
+<div class="chapters" id="chapters" aria-label="Chapters"></div>
+<div class="watch-foot">
+<div class="notes"><p><b>How to read it.</b> Light is data, as in <i>The Inner Life of Data</i>. Each person's outline shows their side: cyan for technical, gold for business. Amber marks a warning, or something new that waits for a decision; red marks a test that stopped the build. The university, people and numbers are fictional. The narration is a synthetic voice.</p>
+<p>English captions are on by default; turn them off with Captions. Caption files for other players: <a href="https://github.com/roanboc/learning-data/tree/main/films/when-things-go-wrong/1-silent-change/captions">en.srt and en.vtt</a>.</p></div>
+<div class="cta"><a class="btn" href="https://github.com/roanboc/learning-data/blob/main/films/when-things-go-wrong/1-silent-change/story.md">Read the story outline</a></div>
+</div>
+<template id="next-panel"><div class="think-card"><p class="think-k">Where next?</p><h3>You've seen one change from both sides. Now take it further.</h3>
+<div class="next-opts"><a class="btn primary" href="#think-it-through">Think it through: 4 questions</a><a class="btn" href="../../sketch/labs/#time">Data modelling · A Sharper Sketch: the <i>Enrolled when?</i> lab</a><a class="btn" href="../">More from When things go wrong</a></div>
+<div class="think-foot"><button type="button" class="btn" data-again>Watch again</button><a class="think-lab" href="../../topics/">All topics →</a></div></div></template>
+</section>
+
+<section class="module" id="think-it-through" aria-labelledby="think-h">
+<div class="mhead"><div><h2 id="think-h">Think it through</h2><p>The four Pause and think questions, for a class or a team. Open one to see the answer.</p></div></div>
+<div id="think-list"></div>
+</section>
+
+<section class="module" id="further" aria-labelledby="further-h">
+<div class="mhead"><div><h2 id="further-h">Go further</h2></div></div>
+<div class="topic-grid" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
+<article class="topic-card">
+<img src="../../assets/sketch-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Data modelling</p>
+<h3><a href="../../sketch/">A Sharper Sketch</a></h3>
+<p>Two trusted numbers disagree. When does a simple model need more precision, and how do you use a reference model without copying it?</p>
+<p class="meta">5½ min · 6 labs · 12 scenarios</p>
+<p class="builds">Builds on the chapter <i>The sketch</i>. Its <i>Enrolled when?</i> chapter picks up the waitlisted status.</p>
+<p class="tc-progress" data-progress="ld3" data-labs="6" data-quiz="12" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Start here</p>
+<h3><a href="../../">The Inner Life of Data</a></h3>
+<p>Follow one enrolment from a tap on a phone to a decision, through Databricks and dbt.</p>
+<p class="meta">7½ min · 8 labs · 12 scenarios · English and Spanish</p>
+<p class="tc-progress" data-progress="ld" data-labs="8" data-quiz="12" hidden></p>
+</div>
+</article>
+</div>
+<div class="cta"><a class="btn" href="../">More from When things go wrong →</a><a class="btn" href="../../topics/">All topics →</a></div>
+</section>
+</main>
+<footer><p class="foot-links"><a href="../../">Start here</a> · <a href="../../topics/">Topics</a> · <a href="../../journey/">Making of</a> · <a href="https://github.com/roanboc/learning-data">GitHub</a></p><p>The university, people, numbers and records in the film are fictional. The narration is a synthetic voice. Code: MIT licence. Film, story, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
+<script src="../../assets/silent-change/film.js"></script>
+<script src="../../assets/silent-change/think.en.js"></script>
+<script src="../../assets/learn/think.js"></script>
+<script src="../../assets/learn/path.js"></script>
+<script src="../../assets/learn/next.js"></script>
+</body>
+</html>

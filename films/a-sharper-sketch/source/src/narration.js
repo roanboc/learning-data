@@ -1,7 +1,7 @@
 // "gap": the beat after each line, a natural breath between sentences; longer stops are in breath.js
 const NARR={
 "drawn":{"name":"The sketch we drew","lead":3.8,"tail":1.4,"vo":[
- {"id":"recap","gap":0.8,"text":"In the first film, we drew a sketch of the university: a student, a class, an enrolment, a term and a course."},
+ {"id":"recap","gap":0.8,"text":"In The Inner Life of Data, we drew a sketch of the university: a student, a class, an enrolment, a term and a course."},
  {"id":"over","gap":0.8,"text":"It was an oversimplification. Good enough to start, not good enough to count."},
  {"id":"normal","gap":0.8,"text":"That's normal. Every model starts simple, and gets sharper when a real question needs it."}]},
 "two":{"name":"Two numbers","lead":0.6,"tail":1.2,"vo":[

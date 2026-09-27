@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A Sharper Sketch · Modelado de datos · Learning Data</title>
+<meta name="description" content="Una película de 5½ minutos, en inglés, sobre modelado de datos: cuándo un modelo necesita más precisión y cómo usar un modelo de referencia sin copiarlo.">
+<meta property="og:title" content="A Sharper Sketch · Modelado de datos · Learning Data"><meta property="og:description" content="Una película de 5½ minutos, en inglés, sobre modelado de datos: cuándo un modelo necesita más precisión y cómo usar un modelo de referencia sin copiarlo."><meta property="og:image" content="https://roanboc.github.io/learning-data/assets/sketch-poster.jpg"><meta property="og:locale" content="es_419">
+<link rel="alternate" hreflang="en" href="https://roanboc.github.io/learning-data/sketch/"><link rel="alternate" hreflang="es" href="https://roanboc.github.io/learning-data/es/sketch/">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/sketch/sketch.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../"><img src="../../assets/favicon.svg" alt="">Learning Data</a><nav aria-label="Sitio"><a href="../">Empieza aquí</a><a href="../topics/" aria-current="true">Temas</a><a class="nav-extra" href="../journey/">Cómo se hizo</a><a class="nav-extra" href="https://github.com/roanboc/learning-data">GitHub</a><span class="lang" role="group" aria-label="Idioma"><a href="../../sketch/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span></nav></div></header>
+<main>
+<section class="hero">
+<p class="eyebrow crumbs"><a href="../topics/">Temas</a> › Modelado de datos</p>
+<h1>Un boceto más preciso: cuándo un modelo de datos necesita más detalle</h1>
+<p class="lead">Dos cifras confiables no coinciden. Vuelve al boceto sencillo de <i>La vida interior de los datos</i>, compáralo con un modelo de referencia y hazlo más preciso, una pregunta a la vez. Para quien trabaja con datos, y con la precisión que pide quien modela datos.</p>
+<p class="meta-row"><span>5½ min</span><span>6 labs</span><span>12 situaciones</span><span>En inglés</span></p>
+<p class="note">La película, los labs y las situaciones están en inglés, con subtítulos en inglés. Esta página, los capítulos y los controles están en español.</p>
+<p class="builds-on">Amplía <a href="../#t=84"><i>El boceto</i></a> de <i>La vida interior de los datos</i></p>
+<ol class="path" data-store="ld3" data-labs="6" data-quiz="12" data-text='{"watched":"Vista","labs":"{n} de 6 labs explorados","quiz":"{n} de 12 respondidas · {ok} correctas"}'>
+<li><a href="./#watch" aria-current="step"><span class="n"><b>1</b></span><b>Mira</b><span>Una película de 5½ minutos</span></a></li>
+<li><a href="../../sketch/labs/" hreflang="en"><span class="n"><b>2</b></span><b>Afínalo</b><span>Seis labs (en inglés)</span></a></li>
+<li><a href="../../sketch/scenarios/" hreflang="en"><span class="n"><b>3</b></span><b>Tú decides</b><span>Doce situaciones (en inglés)</span></a></li>
+</ol>
+</section>
+
+<section class="module" id="watch" aria-labelledby="watch-h">
+<div class="mhead"><div><p class="step"><i>1</i>Mira</p><h2 id="watch-h" lang="en">A Sharper Sketch</h2><p>Una película de 5½ minutos, en inglés, con narración, música y sonido. Presiona Reproducir, o salta a un capítulo.</p></div></div>
+<div class="player">
+<audio id="snd" preload="metadata" src="../../assets/film3/soundtrack.mp3"></audio><div class="poster"><img src="../../assets/sketch-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Ver la película · 5½ min</button></div></div><canvas id="film" width="1280" height="720" aria-label="Película animada explicativa, en inglés: A Sharper Sketch"></canvas>
+<div class="bar"><button id="play">Reproducir</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="time">0:00</span><button id="cc" class="on" aria-pressed="true">Subtítulos</button><button id="fs">Pantalla completa</button></div>
+</div>
+<div class="chapters" id="chapters" aria-label="Capítulos"></div>
+<div class="watch-foot">
+<p class="notes"><b>Cómo leerla.</b> El boceto es el modelo conceptual de la universidad, en tinta azul. El modelo de referencia, TCSI, está dibujado en tinta cálida sobre papel de calco. Los alfileres azules marcan lo que el boceto adopta de la referencia; los ámbar, lo que agrega la universidad. La comparación de la esquina se cierra a medida que el modelo gana precisión. La narración es una voz sintética.</p>
+<div class="cta"><a class="btn" href="https://github.com/roanboc/learning-data/blob/main/films/a-sharper-sketch/script.md" hreflang="en">Leer el guion (en inglés)</a></div>
+</div>
+<template id="next-panel"><div class="think-card"><p class="think-k">¿Y ahora?</p><h3>Ya viste cómo el boceto gana precisión. Ahora afínalo tú.</h3>
+<div class="next-opts"><a class="btn primary" href="../../sketch/labs/" hreflang="en">Afínalo: 6 labs (en inglés) →</a><a class="btn" href="../when-things-go-wrong/silent-change/">Cambios y contratos de datos · Cambio silencioso</a></div>
+<div class="think-foot"><button type="button" class="btn" data-again>Ver otra vez</button><a class="think-lab" href="../topics/">Todos los temas →</a></div></div></template>
+</section>
+
+<section class="next-band" aria-labelledby="next-step-h">
+<img src="../../assets/sketch-labs.jpg" alt="El boceto divide la clase en materia, oferta de materia y clase, con la granularidad de cada conteo." width="1280" height="720" loading="lazy">
+<div class="txt"><p class="step"><i>2</i>Siguiente</p><h2 id="next-step-h">Afina el modelo tú mismo</h2><p>Seis labs interactivos, en inglés: haz conteos con distintas granularidades, ubica cada dato en la caja correcta, une a través de una admisión a una carrera, recorre el semestre, elige un modelo de referencia y revisa si encaja.</p><p>Luego, <a href="../../sketch/scenarios/" hreflang="en">decide</a> en doce situaciones (en inglés).</p><div class="cta"><a class="btn primary" href="../../sketch/labs/" hreflang="en">Abrir los labs (en inglés) →</a></div></div>
+</section>
+
+<section class="module" id="further" aria-labelledby="further-h">
+<div class="mhead"><div><h2 id="further-h">Ve más allá</h2></div></div>
+<div class="topic-grid" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}'>
+<article class="topic-card">
+<img src="../../assets/silent-change-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Cambios y contratos de datos</p>
+<h3><a href="../when-things-go-wrong/silent-change/">Cambio silencioso</a></h3>
+<p>Un nuevo estado de inscripción llega a los datos durante la noche, y cada lado de la universidad vio solo la mitad del cambio.</p>
+<p class="meta">5½ min · Pausa para pensar · Cuando algo sale mal · En inglés</p>
+<p class="builds">Amplía <i>Refinando con dbt</i> y <i>Oro</i></p>
+<p class="tc-progress" data-progress="ld-silent-change" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/poster.es.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Empieza aquí</p>
+<h3><a href="../">La vida interior de los datos</a></h3>
+<p>Sigue una inscripción desde un toque en el teléfono hasta una decisión, pasando por Databricks y dbt.</p>
+<p class="meta">8½ min · 8 labs · 12 situaciones · En español e inglés</p>
+<p class="tc-progress" data-progress="ld" data-labs="8" data-quiz="12" hidden></p>
+</div>
+</article>
+</div>
+<div class="cta"><a class="btn" href="../topics/">Todos los temas →</a><a class="btn" href="../when-things-go-wrong/">La serie: Cuando algo sale mal →</a></div>
+</section>
+</main>
+<footer><p class="foot-links"><a href="../">Empieza aquí</a> · <a href="../topics/">Temas</a> · <a href="../journey/">Cómo se hizo</a> · <a href="https://github.com/roanboc/learning-data">GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película, los labs y las situaciones son ficticios. TCSI, HESA Data Futures, CEDS y MCDS se mencionan para describir modelos de referencia reales; este proyecto no está afiliado a sus dueños. Código: licencia MIT. Película, guion, subtítulos, imágenes y texto: CC BY 4.0. Los logotipos y marcas de empresas, incluido el de Databricks, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños. Consulta los <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a>.</p></footer>
+<script>window.L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla completa",fsExit:"Salir de pantalla completa"}};</script>
+<script src="../../assets/film3/film.js"></script>
+<script>/* the film is in English; its chapter buttons use these Spanish names */
+{const N={drawn:"El boceto que dibujamos",two:"Dos cifras",cls:"¿Qué es una clase?",census:"¿La fecha de corte de quién?",courses:"Un estudiante, dos carreras",time:"¿Inscrito cuándo?",levels:"Tres niveles de precisión",fit:"Revisar, adoptar, extender, registrar",end:"Vista completa"};SCENES.forEach(s=>{if(N[s.id])s.name=N[s.id];});}</script>
+<script src="../../assets/sketch/sketch.js"></script>
+<script src="../../assets/learn/next.js"></script>
+</body>
+</html>

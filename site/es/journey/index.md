@@ -1,6 +1,6 @@
 # Cómo se hizo *La vida interior de los datos*
 
-*Un viaje de aprendizaje: lo que exploramos, discutimos, hicimos mal y aprendimos al crear una película de seis minutos sobre plataformas de datos.*
+*Un viaje de aprendizaje: lo que exploramos, discutimos, hicimos mal y aprendimos al crear una película corta sobre plataformas de datos.*
 
 La película se hizo en dos días, el 25 y el 26 de septiembre de 2026, en una sola conversación de trabajo larga entre el autor y Claude, un modelo de IA creado por Anthropic. El autor aportó el encargo, el conocimiento de la plataforma y la mayoría de las objeciones. Claude propuso opciones, verificó datos, escribió el código y renderizó cada cuadro. Esta página cuenta la historia desde la primera pregunta hasta el sitio publicado, con las lecciones que vale la pena reutilizar.
 
@@ -17,7 +17,7 @@ La película se hizo en dos días, el 25 y el 26 de septiembre de 2026, en una s
 | 7. La gran revisión | Sistema de registro, estilo, dbt, el boceto, logotipos, exposures | Un nuevo lenguaje de diseño |
 | 8. Puntos de control | Cinco cuadros de estilo, un boceto de sonido, cuatro pruebas de voz | Acuerdo antes de reconstruir |
 | 9. El segundo corte | 6:17 con narración, música y sonido, sincronizados con la voz | Productos de datos variados, un cerebro, actualizaciones en vivo |
-| 10. La publicación | Un sitio, el código fuente y esta historia | Este repositorio |
+| 10. La publicación | Un sitio que dibuja la película en vivo, videos renderizados con el mismo código, y esta historia | El sitio, este repositorio y sus releases |
 
 ## 1. El encargo
 
@@ -156,7 +156,36 @@ La última ronda de comentarios fue sobre riqueza y honestidad:
 
 ![Toda la plataforma en una vista: de los sistemas de origen, pasando por bronce, plata y oro, a los dominios de negocio y el consumo](../../journey/img/08-final-overview.jpg)
 
-## 10. Lo que salió mal en el camino
+## 10. Una película, dos formas de verla
+
+En el sitio, la película no es un video. Cuando presionas Reproducir, tu navegador descarga el código de la película (unos 240 KB) y su banda sonora (unos 7 MB). Luego dibuja la película él mismo, en un canvas, cada vez que se actualiza la pantalla: normalmente 60 veces por segundo. Ningún servidor ejecuta nada. GitHub Pages solo entrega los archivos, y tu propio dispositivo hace el dibujo.
+
+Esto funciona porque cada cuadro es una función del tiempo. Dale al código un momento, como 2:31, y sabe dónde está la cámara, qué mosaicos brillan y qué subtítulo se ve. La banda sonora es el reloj: en cada actualización, el código le pregunta al audio cuánto lleva reproducido y dibuja ese momento, así que imagen y sonido no pueden desfasarse.
+
+Dibujar en vivo le da al sitio cosas que un archivo de video no puede:
+
+- **Es liviano.** Unos 7 MB en lugar de 173 MB, así que empieza de inmediato, incluso con una conexión lenta.
+- **Se ve nítido en cualquier tamaño.** Cada cuadro se dibuja para tu pantalla, desde un teléfono hasta un monitor 4K.
+- **Puede responder.** Los capítulos saltan directo a una escena. *Pausa para pensar* se detiene en el último cuadro de un capítulo y hace una pregunta. Los labs dibujan con los mismos componentes y reproducen un capítulo a la vez. Los subtítulos se activan y se desactivan.
+- **Una corrección llega a todas partes.** Si un producto cambia de nombre, el reproductor, los labs y las situaciones cambian juntos.
+
+![Pausa para pensar en el reproductor en vivo: la película se detiene en el último cuadro de El boceto y pregunta por qué una clase aparece al 312%](../../journey/img/09-pause-and-think.es.jpg)
+
+Entonces, ¿para qué hacer un archivo de video? El mismo código también renderiza un MP4. Un navegador sin ventana dibuja cada cuadro en 1080p, unos 15,500, y ffmpeg los une con la banda sonora. El archivo sigue siendo importante:
+
+- **Las plataformas aceptan archivos, no páginas web.** LinkedIn, YouTube, Teams, la plataforma de aprendizaje de una universidad y las apps de mensajería piden un archivo de video.
+- **Se reproduce en cualquier lugar, incluso sin conexión.** En un aula con mal Wi-Fi, en una presentación, en un avión o en un televisor.
+- **Se ve igual para todos.** La película en vivo depende del navegador y del dispositivo de quien la mira: un teléfono antiguo puede saltarse cuadros, y un navegador que no probamos puede dibujar distinto. Un video es fijo, cuadro por cuadro.
+- **Guarda cada versión.** El sitio siempre muestra la película más reciente; cada release guarda el video tal como se publicó.
+- **Es fácil de citar.** Cualquiera puede pausar en un cuadro, recortar un clip o poner un momento en una presentación.
+
+Renderizar también es la prueba más estricta de la película. El sitio solo dibuja los momentos que alguien mira; un render los dibuja todos. Una vez, un render se detuvo a mitad de camino porque un momento de la película no se podía dibujar. En el sitio, ese momento habría congelado el reproductor de quien llegara a él. Ahora, una revisión rápida dibuja cada décima de segundo antes de cada render.
+
+Los videos se publican con un workflow de GitHub. Renderiza los dos idiomas a partir del código del repositorio, en las máquinas de GitHub, y se detiene antes si el reproductor del sitio no está construido con ese mismo código. Lo que la gente descarga es lo que el sitio reproduce.
+
+> **Lección:** dibuja en vivo para aprender, y renderiza un archivo para compartir. Construye ambos desde una sola fuente, para que nunca se contradigan.
+
+## 11. Lo que salió mal en el camino
 
 Los errores fueron parte del proceso, y casi todos enseñaron algo:
 
@@ -181,6 +210,7 @@ Los errores fueron parte del proceso, y casi todos enseñaron algo:
 11. **Crea contenido multimedia como código.** Cuando las escenas están sincronizadas con la narración, cambiar una línea vuelve a sincronizar toda la película.
 12. **Valida mirando y midiendo,** y di claramente lo que no puedes verificar. Claude no podía escuchar el audio, así que el autor juzgó el balance.
 13. **Las objeciones son el motor.** Casi todas las mejoras empezaron con "eso no es del todo correcto".
+14. **Dibuja en vivo para aprender, y renderiza un archivo para compartir,** ambos desde una sola fuente.
 
 ## Reutilízala
 

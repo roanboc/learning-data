@@ -51,7 +51,7 @@ What made *The Inner Life of Data* work, written so the next film, lab or course
 - **Leave room to think, and spread it out.** Aim for about 115 to 130 words a minute, with the voice speaking about 70 to 75% of the time. Leave about 0.7 s after every sentence, and 0.5 to 1 s more after each new named idea. Keep stops inside a chapter under about 2 s, and end each chapter with a wordless breather of 3.5 to 4.5 s that applies the idea to a new case. The picture keeps moving during every pause. See [the breathing cut](films/inner-life-of-data/breathing-cut.md) and [its review](films/inner-life-of-data/pacing-review.md).
 - **Keep the camera calm.** Camera moves glide (a sine ease) and take at least about 1.4 s. Whip pans under a talking voice feel rushed; a frame that freezes in a pause feels stopped.
 - **Let the film flow; pause only where it matters.** *A Sharper Sketch* gives every sentence a beat of about 0.8 s, holds longer only after the ideas that need to land, and keeps three short wordless endings in the whole film: viewers found a breather in every chapter too many stops.
-- **Give each film its own music.** Match the mood to the subject: the first film's pads and pulses suit a journey through a platform; a film about modelling and design gets a slower, warmer ambience.
+- **Give each film its own music.** Match the mood to the subject: the pads and pulses of *The Inner Life of Data* suit a journey through a platform; a film about modelling and design gets a slower, warmer ambience.
 - **Say it and show it at the same time.** Narration and picture together beat narration plus a wall of on-screen text. Keep on-screen words to labels.
 - **Name things before explaining them.** A new term lands better if the picture shows it a moment before the narration explains what it does.
 - **Make intentional pauses look intentional.** A silence needs light and motion, or it reads as a glitch.
@@ -69,6 +69,7 @@ What made *The Inner Life of Data* work, written so the next film, lab or course
 - **Use cheap checkpoints before expensive rebuilds:** style frames, a five-second voice test, a forty-second sound sketch.
 - **Render in resumable chunks,** and run one heavy job at a time.
 - **Use one source for every output.** The same code makes the MP4, the web player, the labs, the scenario pictures and the posters.
+- **Draw it live for learning, and render a file for sharing.** The live player is small, sharp at any size and interactive (chapters, questions, labs). The video file is what platforms accept, plays offline and looks the same everywhere. A full render is also the strictest test: it draws every frame, not just the ones someone watched.
 - **Release from a clean machine.** A workflow renders every language from the committed source, and refuses if the site's player or the voice timings don't match it. What people download is then what the site plays, and anyone can make it again.
 - **Design for other languages from day one.** Keep words in language packs, let boxes size to the translated text, and check the longest language.
 

@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Make the call · A Sharper Sketch</title>
+<title>Make the call · A Sharper Sketch · Learning Data</title>
 <meta name="description" content="Twelve situations about data modelling and reference models. Decide, then see why.">
-<meta property="og:title" content="Make the call · A Sharper Sketch"><meta property="og:description" content="Twelve situations about data modelling and reference models. Decide, then see why."><meta property="og:image" content="https://roanboc.github.io/learning-data/assets/sketch-scenarios.jpg">
+<meta property="og:title" content="Make the call · A Sharper Sketch · Learning Data"><meta property="og:description" content="Twelve situations about data modelling and reference models. Decide, then see why."><meta property="og:image" content="https://roanboc.github.io/learning-data/assets/sketch-scenarios.jpg">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
@@ -13,29 +13,54 @@
 <link rel="stylesheet" href="../../assets/sketch/sketch.css">
 </head>
 <body>
-<header class="top"><div class="top-in"><a class="brand" href="../../"><img src="../../assets/favicon.svg" alt="">Learning Data</a><nav><a href="../#watch">Watch</a><a href="../labs/">Sharpen it</a><a href="../scenarios/" aria-current="page">Make the call</a><a class="nav-extra" href="../../">All films</a><a class="nav-extra" href="https://github.com/roanboc/learning-data/tree/main/films/a-sharper-sketch">GitHub</a></nav></div></header>
+<header class="top"><div class="top-in"><a class="brand" href="../../"><img src="../../assets/favicon.svg" alt="">Learning Data</a><nav aria-label="Site"><a href="../../">Start here</a><a href="../../topics/" aria-current="true">Topics</a><a class="nav-extra" href="../../journey/">Making of</a><a class="nav-extra" href="https://github.com/roanboc/learning-data">GitHub</a><span class="lang" role="group" aria-label="Language"><a href="./" aria-current="true" lang="en">EN</a><a href="../../es/sketch/" lang="es">ES</a></span></nav></div></header>
 <main>
 <section class="page-head">
-<p class="step"><i>3</i>Make the call</p>
+<p class="eyebrow crumbs"><a href="../../topics/">Topics</a> › <a href="../">Data modelling</a></p>
 <h1>Make the call</h1>
 <p class="lead">Twelve situations about sharpening a data model and choosing a reference. Decide what you'd do; each answer explains why, and points you to the lab that covers it. Your answers stay in this browser.</p>
-<ol class="path" data-text='{"watched":"Watched","labs":"{n} of 6 labs explored","quiz":"{n} of 12 answered · {ok} right"}'>
-<li><a href="../#watch"><span class="n"><b>1</b></span><b>Watch</b><span>A five-minute film</span></a></li>
+<ol class="path" data-store="ld3" data-labs="6" data-quiz="12" data-text='{"watched":"Watched","labs":"{n} of 6 labs explored","quiz":"{n} of 12 answered · {ok} right"}'>
+<li><a href="../#watch"><span class="n"><b>1</b></span><b>Watch</b><span>A 5½-minute film</span></a></li>
 <li><a href="../labs/"><span class="n"><b>2</b></span><b>Sharpen it</b><span>Six hands-on labs</span></a></li>
 <li><a href="../scenarios/" aria-current="step"><span class="n"><b>3</b></span><b>Make the call</b><span>Twelve real situations</span></a></li>
 </ol>
 </section>
 
-<section aria-label="Scenarios" style="margin-top:22px">
+<section aria-labelledby="scenarios-h" class="section-gap">
+<h2 class="sr" id="scenarios-h">Scenarios</h2>
 <div id="quiz3-app"><noscript><p class="noscript">The scenarios need JavaScript.</p></noscript></div>
 </section>
 
-<section class="next-band" aria-labelledby="next-step-h">
-<img src="../../assets/sketch-labs.jpg" alt="The sketch splitting the class into unit, unit offering and class." width="1280" height="720" loading="lazy">
-<div class="txt"><p class="step">Keep going</p><h2 id="next-step-h">Go back to any part</h2><p>Each scenario links to the lab that covers it. Or watch the film again: it lands differently once you've made the calls.</p><div class="cta"><a class="btn primary" href="../labs/">Open the labs</a><a class="btn" href="../#watch">Watch the film again</a></div></div>
+<section class="module" id="where-next" aria-labelledby="next-step-h">
+<div class="mhead"><div><p class="step">Keep going</p><h2 id="next-step-h">Where next</h2></div></div>
+<div class="topic-grid" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
+<article class="topic-card">
+<img src="../../assets/silent-change-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Changes and data contracts</p>
+<h3><a href="../../when-things-go-wrong/silent-change/">Silent change</a></h3>
+<p>A new enrolment status reaches the data overnight, and each side of the university saw only half of the change.</p>
+<p class="meta">5½ min · Pause and think · When things go wrong</p>
+<p class="builds">Builds on <i>Refining with dbt</i> and <i>Gold</i></p>
+<p class="tc-progress" data-progress="ld-silent-change" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Start here</p>
+<h3><a href="../../">The Inner Life of Data</a></h3>
+<p>Follow one enrolment from a tap on a phone to a decision, through Databricks and dbt.</p>
+<p class="meta">7½ min · 8 labs · 12 scenarios · English and Spanish</p>
+<p class="tc-progress" data-progress="ld" data-labs="8" data-quiz="12" hidden></p>
+</div>
+</article>
+</div>
+<div class="cta"><a class="btn" href="../../topics/">All topics →</a></div>
+<p class="muted">Or go back: <a href="../labs/">Open the labs</a> · <a href="../#watch">Watch the film again</a></p>
 </section>
 </main>
-<footer><p>The university, people, numbers and records in the film, the labs and the scenarios are fictional. TCSI, HESA Data Futures, CEDS and MCDS are named to describe real reference models; this project is not affiliated with their owners. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks logo, are not covered by either licence and belong to their owners. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
+<footer><p class="foot-links"><a href="../../">Start here</a> · <a href="../../topics/">Topics</a> · <a href="../../journey/">Making of</a> · <a href="https://github.com/roanboc/learning-data">GitHub</a></p><p>The university, people, numbers and records in the film, the labs and the scenarios are fictional. TCSI, HESA Data Futures, CEDS and MCDS are named to describe real reference models; this project is not affiliated with their owners. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks logo, are not covered by either licence and belong to their owners. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
 <script src="../../assets/film3/film.js"></script>
 <script src="../../assets/sketch/sketch.js"></script>
 </body>

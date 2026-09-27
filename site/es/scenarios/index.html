@@ -13,29 +13,55 @@
 <link rel="stylesheet" href="../../assets/site.css">
 </head>
 <body>
-<header class="top"><div class="top-in"><a class="brand" href="../"><img src="../../assets/favicon.svg" alt="">Learning Data</a><nav><a href="../#watch">Mira</a><a href="../labs/">Desarma</a><a href="./" aria-current="page">Tú decides</a><a class="nav-extra" href="../journey/">Cómo se hizo</a><a class="nav-extra" href="https://github.com/roanboc/learning-data">GitHub</a><span class="lang" role="group" aria-label="Idioma"><a href="../../scenarios/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span></nav></div></header>
+<header class="top"><div class="top-in"><a class="brand" href="../"><img src="../../assets/favicon.svg" alt="">Learning Data</a><nav aria-label="Sitio"><a href="../" aria-current="true">Empieza aquí</a><a href="../topics/">Temas</a><a class="nav-extra" href="../journey/">Cómo se hizo</a><a class="nav-extra" href="https://github.com/roanboc/learning-data">GitHub</a><span class="lang" role="group" aria-label="Idioma"><a href="../../scenarios/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span></nav></div></header>
 <main>
 <section class="page-head">
-<p class="step"><i>3</i>Tú decides</p>
+<p class="eyebrow crumbs"><a href="../">Empieza aquí</a> › La vida interior de los datos</p>
 <h1>Tú decides</h1>
 <p class="lead">Doce situaciones que un equipo de datos universitario enfrenta de verdad. Decide qué harías; cada respuesta explica por qué y te lleva al lab que lo cubre. Tus respuestas se quedan en este navegador.</p>
 <ol class="path" data-text='{"watched":"Vista","labs":"{n} de 8 paradas exploradas","quiz":"{n} de 12 respondidas · {ok} correctas"}'>
-<li><a href="../#watch"><span class="n"><b>1</b></span><b>Mira</b><span>Una película de nueve minutos</span></a></li>
+<li><a href="../#watch"><span class="n"><b>1</b></span><b>Mira</b><span>Una película de 8½ minutos</span></a></li>
 <li><a href="../labs/"><span class="n"><b>2</b></span><b>Desarma</b><span>Ocho labs interactivos</span></a></li>
 <li><a href="./" aria-current="step"><span class="n"><b>3</b></span><b>Tú decides</b><span>Doce situaciones reales</span></a></li>
 </ol>
 </section>
 
-<section id="practise" aria-label="Situaciones" style="margin-top:22px">
+<section id="practise" aria-labelledby="practise-h" class="section-gap">
+<h2 class="sr" id="practise-h">Situaciones</h2>
 <div id="quiz-app"><noscript><p class="noscript">Las situaciones necesitan JavaScript.</p></noscript></div>
 </section>
 
-<section class="next-band" aria-labelledby="next-step-h">
-<img src="../../assets/labs.es.jpg" alt="El lab de dbt: un build que se detuvo en una prueba fallida, con los modelos siguientes saltados." width="1226" height="576" loading="lazy">
-<div class="txt"><p class="step">Sigue</p><h2 id="next-step-h">Vuelve a cualquier parte</h2><p>Cada situación te lleva al lab que la cubre. O mira la película otra vez: se entiende distinto después de decidir.</p><div class="cta"><a class="btn primary" href="../labs/">Abrir los labs</a><a class="btn" href="../#watch">Ver la película otra vez</a></div></div>
+<section class="module" id="go-deeper" aria-labelledby="next-step-h">
+<div class="mhead"><div><p class="step">Sigue</p><h2 id="next-step-h">Profundiza, un tema a la vez</h2></div></div>
+<div class="topic-grid" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}'>
+<article class="topic-card">
+<img src="../../assets/sketch-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Modelado de datos</p>
+<h3><a href="../sketch/" lang="en">A Sharper Sketch</a></h3>
+<p>Dos cifras confiables no coinciden. ¿Cuándo necesita más precisión un modelo sencillo, y cómo se usa un modelo de referencia sin copiarlo?</p>
+<p class="meta">5½ min · 6 labs · 12 situaciones · En inglés</p>
+<p class="builds">Amplía el capítulo <i>El boceto</i></p>
+<p class="tc-progress" data-progress="ld3" data-labs="6" data-quiz="12" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/silent-change-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Cambios y contratos de datos</p>
+<h3><a href="../when-things-go-wrong/silent-change/">Cambio silencioso</a></h3>
+<p>Un nuevo estado de inscripción llega a los datos durante la noche, y cada lado de la universidad vio solo la mitad del cambio.</p>
+<p class="meta">5½ min · Pausa para pensar · Cuando algo sale mal · En inglés</p>
+<p class="builds">Amplía <i>Refinando con dbt</i> y <i>Oro</i></p>
+<p class="tc-progress" data-progress="ld-silent-change" hidden></p>
+</div>
+</article>
+</div>
+<div class="cta"><a class="btn" href="../topics/">Todos los temas →</a></div>
+<p class="muted">O vuelve: <a href="../labs/">Abrir los labs</a> · <a href="../#watch">Ver la película otra vez</a></p>
 </section>
 </main>
-<footer><p>La universidad, las personas, las cifras y los registros de la película, los labs y las situaciones son ficticios. Código: licencia MIT. Película, guion, subtítulos, imágenes y texto: CC BY 4.0. Los logotipos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Consulta los <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a>.</p></footer>
+<footer><p class="foot-links"><a href="../">Empieza aquí</a> · <a href="../topics/">Temas</a> · <a href="../journey/">Cómo se hizo</a> · <a href="https://github.com/roanboc/learning-data">GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película, los labs y las situaciones son ficticios. Código: licencia MIT. Película, guion, subtítulos, imágenes y texto: CC BY 4.0. Los logotipos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Consulta los <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a>.</p></footer>
 <script src="../../assets/film/film.es.js"></script>
 <script src="../../assets/learn/learn.es.js"></script>
 <script src="../../assets/learn/learn.js"></script>

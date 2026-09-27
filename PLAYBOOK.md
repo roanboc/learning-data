@@ -1,6 +1,6 @@
 # Playbook: making learning films and material
 
-What made *The Inner Life of Data* work, written so the next film, lab or course can start from it. [The making-of story](site/journey/index.md) tells how the film came to be; this page keeps what to reuse. Each section ends with the question to ask of your own work.
+What made the Learning Data films work, starting with *The Inner Life of Data*, written so the next film, lab or course can start from it. [The making-of story](site/journey/index.md) tells how the films came to be; this page keeps what to reuse. Each section ends with the question to ask of your own work.
 
 ## 1. Promise and audience
 
@@ -95,6 +95,24 @@ A film makes people feel they understand; learning comes from using the ideas. T
 - **Make every picture operable without a mouse.** Every canvas interaction also has a button.
 
 *Ask: what will someone be able to decide after this that they couldn't before?*
+
+## 8. From one film to a series
+
+What *A Sharper Sketch* and *When things go wrong* added once there was more than one film.
+
+- **Turn feedback into the next film.** *A Sharper Sketch* says openly that the earlier sketch was an oversimplification, and sharpens it. Correcting in the open teaches the very habit the film is about.
+- **One film, one mechanism.** Park what doesn't fit (the physical build went to a later film for engineers), and keep a list of candidates for the series.
+- **Choose a reference deliberately.** When there is more than one standard, name the one you use and why, then adopt, extend and record the differences.
+- **Put people on every side of the problem.** Technical and business, producing and using the data: one person in each corner, the same guide in every film, and outline colours that say the side.
+- **Test characters in code before the script,** with a character sheet of poses and expressions, and write the script within what it shows works.
+- **Blameless and believable.** No villains, and small, plausible numbers: the dangerous wrong number is the one nobody questions.
+- **Show the alternatives side by side,** so the one thing that differs between them is the lesson.
+- **Draw what the audience already knows.** A dashboard in a familiar style beats an abstract picture that needs explaining.
+- **Write each decision down with its date,** in the treatment or the story outline, so the next session starts from it.
+- **Films stand alone.** No numbers on screen or on the site; open with a one-line recap, and place each film under the part of the overview it goes deeper on.
+- **Turn every review finding into a check** (`site-tools/check_site.py`, `site-tools/smoke.py`, `tools/check.py`), so it can't come back.
+
+*Ask: what did the last film teach us, and where is it written down?*
 
 ## Checklists
 

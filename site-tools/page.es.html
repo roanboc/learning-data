@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{title}} · Learning Data</title>
+<title>Cómo se hizo · Learning Data</title>
+<meta name="description" content="{{description}}">
 <link rel="alternate" hreflang="en" href="{{site}}{{en}}"><link rel="alternate" hreflang="es" href="{{site}}{{es}}">
 <link rel="icon" href="{{base}}assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,9 +13,17 @@
 </head>
 <body>
 <header class="top"><div class="top-in"><a class="brand" href="{{base}}es/"><img src="{{base}}assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="{{base}}es/">Empieza aquí</a><a href="{{base}}es/topics/">Temas</a><a href="{{base}}es/journey/" aria-current="page">Cómo se hizo</a><span class="lang" role="group" aria-label="Idioma"><a href="{{base}}{{en}}" lang="en" hreflang="en">EN</a><a href="{{base}}{{es}}" aria-current="true" lang="es">ES</a></span></nav></div></header>
-<main class="prose">
+<main>
+<section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="{{base}}journey/img/01-style-boards.jpg" alt=""><img src="{{base}}journey/img/05-style-frame-dbt.jpg" alt=""><img src="{{base}}journey/img/10-characters.jpg" alt=""><img src="{{base}}journey/img/11-three-tuesdays.jpg" alt=""><img src="{{base}}journey/img/08-final-overview.jpg" alt=""><img src="{{base}}journey/img/04-style-frame-sources.jpg" alt=""><img src="{{base}}journey/img/07-final-brain.jpg" alt=""><img src="{{base}}journey/img/06-final-sketch.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow">Cómo se hizo</p>
+{{h1}}
+<p class="lead">{{lead}}</p>
+</section>
+<div class="prose">
 {{body}}
+</div>
 </main>
 <footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película, los labs y las situaciones son ficticios. Código: licencia MIT. Película, guion, subtítulos, imágenes y texto: CC BY 4.0. Los logotipos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias. Consulta los <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a>.</p></footer>
+<script src="{{base}}assets/ambient.js"></script>
 </body>
 </html>

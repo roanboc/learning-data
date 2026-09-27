@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cómo se hizo La vida interior de los datos · Learning Data</title>
+<title>Cómo se hizo · Learning Data</title>
+<meta name="description" content="Un viaje de aprendizaje: lo que exploramos, discutimos, hicimos mal y aprendimos al crear películas cortas sobre plataformas de datos.">
 <link rel="alternate" hreflang="en" href="https://roanboc.github.io/learning-data/journey/"><link rel="alternate" hreflang="es" href="https://roanboc.github.io/learning-data/es/journey/">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,11 +12,36 @@
 <link rel="stylesheet" href="../../assets/site.css">
 </head>
 <body>
-<header class="top"><div class="top-in"><a class="brand" href="../../es/"><img src="../../assets/favicon.svg" alt="">Learning Data</a><nav aria-label="Sitio"><a href="../../es/">Empieza aquí</a><a href="../../es/topics/">Temas</a><a class="nav-extra" href="../../es/journey/" aria-current="page">Cómo se hizo</a><a class="nav-extra" href="https://github.com/roanboc/learning-data">GitHub</a><span class="lang" role="group" aria-label="Idioma"><a href="../../journey/" lang="en" hreflang="en">EN</a><a href="../../es/journey/" aria-current="true" lang="es">ES</a></span></nav></div></header>
-<main class="prose">
-<h1 id="como-se-hizo-la-vida-interior-de-los-datos">Cómo se hizo <em>La vida interior de los datos</em></h1>
-<p><em>Un viaje de aprendizaje: lo que exploramos, discutimos, hicimos mal y aprendimos al crear una película corta sobre plataformas de datos.</em></p>
-<p>La película se hizo en dos días, el 25 y el 26 de septiembre de 2026, en una sola conversación de trabajo larga entre el autor y Claude, un modelo de IA creado por Anthropic. El autor aportó el encargo, el conocimiento de la plataforma y la mayoría de las objeciones. Claude propuso opciones, verificó datos, escribió el código y renderizó cada cuadro. Esta página cuenta la historia desde la primera pregunta hasta el sitio publicado, con las lecciones que vale la pena reutilizar.</p>
+<header class="top"><div class="top-in"><a class="brand" href="../../es/"><img src="../../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../../es/">Empieza aquí</a><a href="../../es/topics/">Temas</a><a href="../../es/journey/" aria-current="page">Cómo se hizo</a><span class="lang" role="group" aria-label="Idioma"><a href="../../journey/" lang="en" hreflang="en">EN</a><a href="../../es/journey/" aria-current="true" lang="es">ES</a></span></nav></div></header>
+<main>
+<section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="../../journey/img/01-style-boards.jpg" alt=""><img src="../../journey/img/05-style-frame-dbt.jpg" alt=""><img src="../../journey/img/10-characters.jpg" alt=""><img src="../../journey/img/11-three-tuesdays.jpg" alt=""><img src="../../journey/img/08-final-overview.jpg" alt=""><img src="../../journey/img/04-style-frame-sources.jpg" alt=""><img src="../../journey/img/07-final-brain.jpg" alt=""><img src="../../journey/img/06-final-sketch.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow">Cómo se hizo</p>
+<h1 id="como-se-hizo-learning-data">Cómo se hizo Learning Data</h1>
+<p class="lead">Un viaje de aprendizaje: lo que exploramos, discutimos, hicimos mal y aprendimos al crear películas cortas sobre plataformas de datos.</p>
+</section>
+<div class="prose">
+<p>Todo empezó con una película. <em>La vida interior de los datos</em> se hizo en dos días, el 25 y el 26 de septiembre de 2026, en una sola conversación de trabajo larga entre el autor y Claude, un modelo de IA creado por Anthropic. El autor aportó el encargo, el conocimiento de la plataforma y la mayoría de las objeciones. Claude propuso opciones, verificó datos, escribió el código y renderizó cada cuadro. Las secciones 1 a 10 cuentan esa historia, desde la primera pregunta hasta el sitio publicado.</p>
+<p>Después, los comentarios convirtieron una película en cuatro: <em>A Sharper Sketch</em>, sobre modelado de datos, y una serie, <em>Cuando algo sale mal</em>, con <em>Cambio silencioso</em> y <em>Demasiado bueno para ser verdad</em>. La sección 11 cuenta qué cambió al hacer más de una, y las lecciones del final cubren las cuatro.</p>
+<p><strong>En esta página</strong></p>
+<div class="toc">
+<ul>
+<li><a href="#de-un-vistazo">De un vistazo</a></li>
+<li><a href="#1-el-encargo">1. El encargo</a></li>
+<li><a href="#2-encontrar-la-analogia">2. Encontrar la analogía</a></li>
+<li><a href="#3-verificar-los-hechos">3. Verificar los hechos</a></li>
+<li><a href="#4-de-la-luz-a-las-imagenes">4. De la luz a las imágenes</a></li>
+<li><a href="#5-el-mapa-de-metaforas">5. El mapa de metáforas</a></li>
+<li><a href="#6-el-primer-corte">6. El primer corte</a></li>
+<li><a href="#7-la-gran-revision">7. La gran revisión</a></li>
+<li><a href="#8-puntos-de-control-antes-de-reconstruir">8. Puntos de control antes de reconstruir</a></li>
+<li><a href="#9-el-segundo-corte">9. El segundo corte</a></li>
+<li><a href="#10-una-pelicula-dos-formas-de-verla">10. Una película, dos formas de verla</a></li>
+<li><a href="#11-de-una-pelicula-a-cuatro">11. De una película a cuatro</a></li>
+<li><a href="#12-lo-que-salio-mal-en-el-camino">12. Lo que salió mal en el camino</a></li>
+<li><a href="#lecciones-aprendidas">Lecciones aprendidas</a></li>
+<li><a href="#reutilizala">Reutilízala</a></li>
+</ul>
+</div>
 <h2 id="de-un-vistazo">De un vistazo</h2>
 <table>
 <thead>
@@ -75,6 +101,11 @@
 <td>10. La publicación</td>
 <td>Un sitio que dibuja la película en vivo, videos renderizados con el mismo código, y esta historia</td>
 <td>El sitio, este repositorio y sus releases</td>
+</tr>
+<tr>
+<td>11. Más películas</td>
+<td>Un comentario se volvió película, las películas se volvieron serie, y cada revisión se volvió una verificación</td>
+<td><em>A Sharper Sketch</em>, <em>Cambio silencioso</em>, <em>Demasiado bueno para ser verdad</em>, y un sitio organizado por temas</td>
 </tr>
 </tbody>
 </table>
@@ -271,7 +302,36 @@
 <blockquote>
 <p><strong>Lección:</strong> dibuja en vivo para aprender, y renderiza un archivo para compartir. Construye ambos desde una sola fuente, para que nunca se contradigan.</p>
 </blockquote>
-<h2 id="11-lo-que-salio-mal-en-el-camino">11. Lo que salió mal en el camino</h2>
+<h2 id="11-de-una-pelicula-a-cuatro">11. De una película a cuatro</h2>
+<h3 id="un-comentario-se-volvio-la-siguiente-pelicula">Un comentario se volvió la siguiente película</h3>
+<p>Los comentarios sobre <em>La vida interior de los datos</em> señalaron que su boceto (estudiante, clase, inscripción, periodo, carrera) era una simplificación excesiva. Podíamos corregir el boceto en silencio, o dejar que una película nueva lo dijera. Elegimos lo segundo. <em>A Sharper Sketch</em> empieza llamando al boceto por lo que era, y luego lo hace más preciso, una pregunta a la vez, cada vez que una pregunta admite más de una respuesta. Un sello de versión lleva el boceto de v1 a v2, y la última toma sugiere una v3: los modelos cambian, no a menudo, pero siempre.</p>
+<ul>
+<li><strong>Cada película, un solo tema.</strong> Los primeros borradores se desviaban hacia cómo dbt construye las tablas físicas. Ese detalle quedó guardado para una película futura para ingenieros, y esta se queda en lo que el modelo significa.</li>
+<li><strong>Elige un modelo de referencia a conciencia.</strong> La película compara el boceto con TCSI porque es público, y dice que muchas universidades usan en realidad MortarCAPS. Suele haber más de un estándar: elige uno y di por qué; luego adóptalo donde encaja, extiéndelo donde no, y registra cada diferencia.</li>
+</ul>
+<h3 id="una-serie-con-personas-en-pantalla">Una serie, con personas en pantalla</h3>
+<p><em>La vida interior de los datos</em> sigue los datos cuando todo sale bien. La siguiente idea fue mostrar qué pasa cuando no, y creció hasta ser una serie, <em>Cuando algo sale mal</em>, con un solo lema: «Falla de forma segura. Corrige una vez». Cada película toma una forma en que algo sale mal, empieza por la persona a quien le llega, sigue el linaje río arriba hasta la causa, y vuelve con la solución. Una lista de candidatas (un archivo que llega tarde, una tabla sobrescrita, una promesa rota, miradas indebidas sobre datos personales) mantiene cada película en un solo mecanismo.</p>
+<ul>
+<li><strong>Un cuadrado de cuatro personas.</strong> Todo cambio tiene un lado técnico y uno de negocio, y un lado que produce los datos y otro que los usa. Cada película pone a una persona en cada esquina, y Sam, el ingeniero de datos, guía todas las películas. El color del contorno de cada persona muestra su lado: cian para el técnico, dorado para el de negocio.</li>
+<li><strong>Prueba los personajes en código antes de escribir un guion.</strong> Una hoja de personajes dibujó siete personas en tres poses y tres expresiones. Mostró que las caras funcionan con este nivel de sencillez, y lo que todavía no: solo vistas de frente, nadie sentado, manos simples. Los guiones se escribieron dentro de esos límites.</li>
+<li><strong>Sin culpables, y creíble.</strong> No hay villanos: una buena idea, una actualización bien hecha y una sincronización que falló por tiempo de espera, como pasa. Las cifras son pequeñas y plausibles: una clase al 108% en lugar de al 96% es justo el tipo de cifra equivocada que nadie cuestiona.</li>
+<li><strong>Muestra las alternativas lado a lado.</strong> <em>Demasiado bueno para ser verdad</em> muestra el mismo martes de tres maneras: sin prueba, con una advertencia y con un error. Lo único que cambia entre las tres es el indicador, y esa es la lección.</li>
+</ul>
+<p><img alt="Los personajes de Cuando algo sale mal, dibujados con código, con Sam, el ingeniero de datos, en el centro" src="../../journey/img/10-characters.jpg" /></p>
+<p><img alt="Tres versiones del mismo martes: sin prueba, con una advertencia y con un error, lado a lado" src="../../journey/img/11-three-tuesdays.jpg" /></p>
+<h3 id="puntos-de-control-mas-pequenos-y-antes">Puntos de control más pequeños, y antes</h3>
+<p>Las películas siguientes sumaron puntos de control que cuestan menos que un render: un tratamiento con las decisiones que el autor debe tomar, un esquema de la historia escrito fragmento a fragmento, la hoja de personajes, cuadros de estilo dibujados con los propios componentes de la película, y un guion con hoja de rigor e informe de ritmo. Cada decisión quedó por escrito con su fecha, para que la siguiente sesión partiera de ella en lugar de discutirla otra vez.</p>
+<h3 id="revisiones-que-midieron-el-ritmo">Revisiones que midieron el ritmo</h3>
+<p>Una revisión del corte con respiraciones de <em>La vida interior de los datos</em> encontró que la duración era correcta y el ritmo no. Los promedios parecían sanos, 115 palabras por minuto, pero la voz seguía apurada, a 171 palabras por minuto, entre 32 paradas largas, y la música subía 7,5 dB en un cuarto de segundo en cada parada. También encontró un error presente desde el principio: el capítulo inicial no tenía música. La corrección marcó el ritmo de todas las películas siguientes: una pausa natural de unos 0,8 s después de cada oración, pausas más largas solo donde una idea necesita asentarse, muy pocos momentos sin palabras, y música que sube despacio. Cada película tuvo además su propia música.</p>
+<p>La voz recibió el mismo trato. Subir el tono de la voz en español la hizo sonar robótica: un modelo de naturalidad le dio 3,24 sobre 5. Mezclarla con la voz del narrador en inglés subió la nota a 4,33, e hizo que los dos idiomas sonaran como un mismo narrador.</p>
+<h3 id="que-se-parezca-a-lo-que-la-gente-conoce">Que se parezca a lo que la gente conoce</h3>
+<p>En <em>Cambio silencioso</em>, la pintura moderna que representaba un producto de datos se leía como un gráfico de torta tachado. Se convirtió en un dashboard al estilo de Databricks, con una tarjeta de KPI y una nota ámbar que dice qué tan viejos son los datos. Quien mira reconoce un dashboard al instante, y la historia puede dedicar su tiempo al problema. Una revisión cuadro por cuadro de la misma película encontró 72 problemas, desde cajas cortadas en el borde del cuadro hasta texto debajo de los subtítulos; 71 se corrigieron antes de publicarla.</p>
+<h3 id="peliculas-independientes-y-un-sitio-organizado-por-temas">Películas independientes, y un sitio organizado por temas</h3>
+<p>Con cuatro películas, numerarlas sugeriría un orden que no existe. Por eso las películas no llevan número: cada una empieza con un resumen de una línea, y el sitio cuelga cada tema del capítulo de <em>La vida interior de los datos</em> que profundiza. Todas las películas tienen los mismos tres pasos (Mira, Desarma y Tú decides), y el progreso se guarda por película. Cada problema que una revisión encontró en el sitio, como poco contraste, el foco del teclado perdido o un panel que tapaba los controles del reproductor, se volvió una verificación automática, para que no vuelva.</p>
+<blockquote>
+<p><strong>Lección:</strong> hacer más de una película es lo que convierte un proceso en un método. Escribe lo que funcionó, convierte cada revisión en una verificación, y deja que la siguiente película parta de ambas.</p>
+</blockquote>
+<h2 id="12-lo-que-salio-mal-en-el-camino">12. Lo que salió mal en el camino</h2>
 <p>Los errores fueron parte del proceso, y casi todos enseñaron algo:</p>
 <ul>
 <li>Al principio, Claude descartó el audio demasiado rápido. La solución fue un modelo de voz sin conexión y sonido sintetizado.</li>
@@ -279,6 +339,10 @@
 <li>Los renders en segundo plano se detenían al terminar una sesión, y un trabajo de voz se quedó sin memoria junto al renderizador. Ambos se volvieron trabajos reanudables, ejecutados de uno en uno.</li>
 <li>Un diagrama de relaciones se dibujó primero con las patas de gallo al revés.</li>
 <li>Las etiquetas chocaban con los subtítulos hasta que cada escena se revisó contra el área de subtítulos.</li>
+<li>La primera corrección del ritmo confió en los promedios. Una película puede cumplir todos los promedios y aun así sonar como «apuro, parada, apuro, parada».</li>
+<li>El capítulo inicial no tuvo música desde la primera versión, y nadie lo notó hasta que una revisión midió el sonido.</li>
+<li>El hilo rojo que sigue el linaje en <em>Cambio silencioso</em> cruzaba al principio el dashboard y la plataforma, y resultaba recargado. Ahora avanza un paso del linaje a la vez.</li>
+<li>Una voz con el tono subido sonaba robótica, y una pintura abstracta se leía como un gráfico tachado. Ambas se reemplazaron por algo conocido: una voz mezclada, y un dashboard realista.</li>
 </ul>
 <h2 id="lecciones-aprendidas">Lecciones aprendidas</h2>
 <ol>
@@ -296,10 +360,20 @@
 <li><strong>Valida mirando y midiendo,</strong> y di claramente lo que no puedes verificar. Claude no podía escuchar el audio, así que el autor juzgó el balance.</li>
 <li><strong>Las objeciones son el motor.</strong> Casi todas las mejoras empezaron con "eso no es del todo correcto".</li>
 <li><strong>Dibuja en vivo para aprender, y renderiza un archivo para compartir,</strong> ambos desde una sola fuente.</li>
+<li><strong>Convierte los comentarios en la siguiente pieza.</strong> Decir, en una película nueva, que el boceto era una simplificación excesiva enseñó más que corregirlo en silencio.</li>
+<li><strong>Una película, un mecanismo.</strong> Guarda lo que no encaja, y lleva una lista de candidatas para películas futuras.</li>
+<li><strong>Pon personas en todos los lados de un problema.</strong> Técnico y de negocio, quien produce y quien usa: un cambio solo es seguro cuando los cuatro pueden verlo.</li>
+<li><strong>Muestra las alternativas lado a lado,</strong> para que lo único que cambia sea la lección.</li>
+<li><strong>Los promedios esconden el ritmo.</strong> Mide dónde caen las pausas, no solo cuánto silencio hay.</li>
+<li><strong>Usa lo que el público ya conoce.</strong> Un dashboard conocido le gana a una imagen abstracta que hay que explicar.</li>
+<li><strong>Escribe las decisiones, con su fecha.</strong> La siguiente sesión parte de ellas en lugar de discutirlas otra vez.</li>
+<li><strong>Convierte cada hallazgo de una revisión en una verificación,</strong> para que el mismo problema no vuelva.</li>
 </ol>
 <h2 id="reutilizala">Reutilízala</h2>
-<p>El <a href="https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/source/README.md">código fuente y la guía para reconstruir la película</a> (en inglés) están en este repositorio, y la <a href="https://github.com/roanboc/learning-data/blob/main/PLAYBOOK.md">guía práctica</a> (en inglés) reúne lo que conviene reutilizar en la próxima película o curso. Para adaptar la película a otra universidad, cambia la narración en <code>src/narration.js</code>, o en <code>src/i18n/es/narration.js</code> para la versión en español (por ejemplo "clase", "fecha de corte" y los nombres de los dominios), vuelve a generar la voz y renderiza de nuevo.</p>
+<p>El código fuente y la guía para reconstruir cada película están en este repositorio (en inglés): <a href="https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/source/README.md"><em>La vida interior de los datos</em></a>, <a href="https://github.com/roanboc/learning-data/blob/main/films/a-sharper-sketch/README.md"><em>A Sharper Sketch</em></a> y <a href="https://github.com/roanboc/learning-data/blob/main/films/when-things-go-wrong/README.md">la serie <em>Cuando algo sale mal</em></a>, con sus tratamientos, su hoja de personajes y sus cuadros de estilo. La <a href="https://github.com/roanboc/learning-data/blob/main/PLAYBOOK.md">guía práctica</a> (en inglés) reúne lo que conviene reutilizar en la próxima película o curso. Para adaptar <em>La vida interior de los datos</em> a otra universidad, cambia la narración en <code>src/narration.js</code>, o en <code>src/i18n/es/narration.js</code> para la versión en español (por ejemplo "clase", "fecha de corte" y los nombres de los dominios), vuelve a generar la voz y renderiza de nuevo.</p>
+</div>
 </main>
-<footer><p class="foot-links"><a href="../../es/">Empieza aquí</a> · <a href="../../es/topics/">Temas</a> · <a href="../../es/journey/">Cómo se hizo</a> · <a href="https://github.com/roanboc/learning-data">GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película, los labs y las situaciones son ficticios. Código: licencia MIT. Película, guion, subtítulos, imágenes y texto: CC BY 4.0. Los logotipos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias. Consulta los <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a>.</p></footer>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película, los labs y las situaciones son ficticios. Código: licencia MIT. Película, guion, subtítulos, imágenes y texto: CC BY 4.0. Los logotipos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias. Consulta los <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a>.</p></footer>
+<script src="../../assets/ambient.js"></script>
 </body>
 </html>

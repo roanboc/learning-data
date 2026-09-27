@@ -22,7 +22,7 @@ scene("drawn",(ctx,S,t,sc)=>{
   const c=id=>cue(sc,id),cR=c("recap"),cO=c("over"),cN=c("normal"),B=c("breath");
   const cam=camAt([[0,960,540,1.08],[cR,960,540,1.08],[cO,960,530,1.0],[sc.dur+2,960,530,0.98]],t);
   clearTo(ctx,S);const bgA=sstep(3.1,3.9,t);
-  if(bgA>0){ctx.save();ctx.globalAlpha=bgA;bgW(ctx,S,cam);board(ctx,1,"Conceptual model · from the first film");
+  if(bgA>0){ctx.save();ctx.globalAlpha=bgA;bgW(ctx,S,cam);board(ctx,1,"Conceptual model · the sketch we drew");
     // the recap names each box as it appears: student, class, enrolment, term, course
     const d=c("over")-cR,order=["Student","Class","Enrolment","Term","Course"],ap=k=>fin(t,cR+0.4+order.indexOf(k)*d*0.16,0.5);
     const E={};Object.keys(V1).forEach(k=>{E[k]={x:V1[k][0],y:V1[k][1],name:k,s:1.25,a:ap(k)};});E.Term.sub="census date";
@@ -233,5 +233,5 @@ scene("end",(ctx,S,t,sc)=>{
       withA(ctx,fin(t,cE+0.4),()=>{glass(ctx,1460,520,400,150,18,EXT,{glow:18+8*Math.sin(t*4),ea:0.8,fill:"rgba(7,12,24,0.94)"});T(ctx,"A new question",1486,562,{w:800,size:20,color:rgba(EXT,1)});T(ctx,"How do we count short courses",1486,600,{w:600,size:18});T(ctx,"and microcredentials?",1486,630,{w:600,size:18});});});
     vign(ctx,S);}
   else{clearTo(ctx,S);withA(ctx,fin(t,cTg-0.25,0.8),()=>T(ctx,"Check the reference. Fit it to the business.",W/2,H/2-6,{w:800,size:72,align:"center"}));
-    withA(ctx,fin(t,cTg+1.2,0.8),()=>{T(ctx,"A Sharper Sketch",W/2,H/2+76,{w:700,size:32,align:"center",color:rgba(SOFT,1)});T(ctx,"Learning Data · film three",W/2,H/2+118,{w:500,size:22,align:"center",color:rgba(SOFT,0.7)});});}
+    withA(ctx,fin(t,cTg+1.2,0.8),()=>{T(ctx,"A Sharper Sketch",W/2,H/2+76,{w:700,size:32,align:"center",color:rgba(SOFT,1)});T(ctx,"Learning Data · Data modelling",W/2,H/2+118,{w:500,size:22,align:"center",color:rgba(SOFT,0.7)});});}
 });

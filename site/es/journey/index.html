@@ -11,10 +11,10 @@
 <link rel="stylesheet" href="../../assets/site.css">
 </head>
 <body>
-<header class="top"><div class="top-in"><a class="brand" href="../../es/"><img src="../../assets/favicon.svg" alt="">Learning Data</a><nav><a href="../../es/#watch">Mira</a><a href="../../es/labs/">Desarma</a><a href="../../es/scenarios/">Tú decides</a><a class="nav-extra" href="../../es/journey/" aria-current="page">Cómo se hizo</a><a class="nav-extra" href="https://github.com/roanboc/learning-data">GitHub</a><span class="lang" role="group" aria-label="Idioma"><a href="../../journey/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span></nav></div></header>
+<header class="top"><div class="top-in"><a class="brand" href="../../es/"><img src="../../assets/favicon.svg" alt="">Learning Data</a><nav aria-label="Sitio"><a href="../../es/">Empieza aquí</a><a href="../../es/topics/">Temas</a><a class="nav-extra" href="../../es/journey/" aria-current="page">Cómo se hizo</a><a class="nav-extra" href="https://github.com/roanboc/learning-data">GitHub</a><span class="lang" role="group" aria-label="Idioma"><a href="../../journey/" lang="en" hreflang="en">EN</a><a href="../../es/journey/" aria-current="true" lang="es">ES</a></span></nav></div></header>
 <main class="prose">
 <h1 id="como-se-hizo-la-vida-interior-de-los-datos">Cómo se hizo <em>La vida interior de los datos</em></h1>
-<p><em>Un viaje de aprendizaje: lo que exploramos, discutimos, hicimos mal y aprendimos al crear una película de seis minutos sobre plataformas de datos.</em></p>
+<p><em>Un viaje de aprendizaje: lo que exploramos, discutimos, hicimos mal y aprendimos al crear una película corta sobre plataformas de datos.</em></p>
 <p>La película se hizo en dos días, el 25 y el 26 de septiembre de 2026, en una sola conversación de trabajo larga entre el autor y Claude, un modelo de IA creado por Anthropic. El autor aportó el encargo, el conocimiento de la plataforma y la mayoría de las objeciones. Claude propuso opciones, verificó datos, escribió el código y renderizó cada cuadro. Esta página cuenta la historia desde la primera pregunta hasta el sitio publicado, con las lecciones que vale la pena reutilizar.</p>
 <h2 id="de-un-vistazo">De un vistazo</h2>
 <table>
@@ -73,8 +73,8 @@
 </tr>
 <tr>
 <td>10. La publicación</td>
-<td>Un sitio, el código fuente y esta historia</td>
-<td>Este repositorio</td>
+<td>Un sitio que dibuja la película en vivo, videos renderizados con el mismo código, y esta historia</td>
+<td>El sitio, este repositorio y sus releases</td>
 </tr>
 </tbody>
 </table>
@@ -247,7 +247,31 @@
 </ul>
 <p><img alt="Genie Ontology como el cerebro de la organización, alimentado con el conocimiento de la universidad a través de MCP" src="../../journey/img/07-final-brain.jpg" /></p>
 <p><img alt="Toda la plataforma en una vista: de los sistemas de origen, pasando por bronce, plata y oro, a los dominios de negocio y el consumo" src="../../journey/img/08-final-overview.jpg" /></p>
-<h2 id="10-lo-que-salio-mal-en-el-camino">10. Lo que salió mal en el camino</h2>
+<h2 id="10-una-pelicula-dos-formas-de-verla">10. Una película, dos formas de verla</h2>
+<p>En el sitio, la película no es un video. Cuando presionas Reproducir, tu navegador descarga el código de la película (unos 240 KB) y su banda sonora (unos 7 MB). Luego dibuja la película él mismo, en un canvas, cada vez que se actualiza la pantalla: normalmente 60 veces por segundo. Ningún servidor ejecuta nada. GitHub Pages solo entrega los archivos, y tu propio dispositivo hace el dibujo.</p>
+<p>Esto funciona porque cada cuadro es una función del tiempo. Dale al código un momento, como 2:31, y sabe dónde está la cámara, qué mosaicos brillan y qué subtítulo se ve. La banda sonora es el reloj: en cada actualización, el código le pregunta al audio cuánto lleva reproducido y dibuja ese momento, así que imagen y sonido no pueden desfasarse.</p>
+<p>Dibujar en vivo le da al sitio cosas que un archivo de video no puede:</p>
+<ul>
+<li><strong>Es liviano.</strong> Unos 7 MB en lugar de 173 MB, así que empieza de inmediato, incluso con una conexión lenta.</li>
+<li><strong>Se ve nítido en cualquier tamaño.</strong> Cada cuadro se dibuja para tu pantalla, desde un teléfono hasta un monitor 4K.</li>
+<li><strong>Puede responder.</strong> Los capítulos saltan directo a una escena. <em>Pausa para pensar</em> se detiene en el último cuadro de un capítulo y hace una pregunta. Los labs dibujan con los mismos componentes y reproducen un capítulo a la vez. Los subtítulos se activan y se desactivan.</li>
+<li><strong>Una corrección llega a todas partes.</strong> Si un producto cambia de nombre, el reproductor, los labs y las situaciones cambian juntos.</li>
+</ul>
+<p><img alt="Pausa para pensar en el reproductor en vivo: la película se detiene en el último cuadro de El boceto y pregunta por qué una clase aparece al 312%" src="../../journey/img/09-pause-and-think.es.jpg" /></p>
+<p>Entonces, ¿para qué hacer un archivo de video? El mismo código también renderiza un MP4. Un navegador sin ventana dibuja cada cuadro en 1080p, unos 15,500, y ffmpeg los une con la banda sonora. El archivo sigue siendo importante:</p>
+<ul>
+<li><strong>Las plataformas aceptan archivos, no páginas web.</strong> LinkedIn, YouTube, Teams, la plataforma de aprendizaje de una universidad y las apps de mensajería piden un archivo de video.</li>
+<li><strong>Se reproduce en cualquier lugar, incluso sin conexión.</strong> En un aula con mal Wi-Fi, en una presentación, en un avión o en un televisor.</li>
+<li><strong>Se ve igual para todos.</strong> La película en vivo depende del navegador y del dispositivo de quien la mira: un teléfono antiguo puede saltarse cuadros, y un navegador que no probamos puede dibujar distinto. Un video es fijo, cuadro por cuadro.</li>
+<li><strong>Guarda cada versión.</strong> El sitio siempre muestra la película más reciente; cada release guarda el video tal como se publicó.</li>
+<li><strong>Es fácil de citar.</strong> Cualquiera puede pausar en un cuadro, recortar un clip o poner un momento en una presentación.</li>
+</ul>
+<p>Renderizar también es la prueba más estricta de la película. El sitio solo dibuja los momentos que alguien mira; un render los dibuja todos. Una vez, un render se detuvo a mitad de camino porque un momento de la película no se podía dibujar. En el sitio, ese momento habría congelado el reproductor de quien llegara a él. Ahora, una revisión rápida dibuja cada décima de segundo antes de cada render.</p>
+<p>Los videos se publican con un workflow de GitHub. Renderiza los dos idiomas a partir del código del repositorio, en las máquinas de GitHub, y se detiene antes si el reproductor del sitio no está construido con ese mismo código. Lo que la gente descarga es lo que el sitio reproduce.</p>
+<blockquote>
+<p><strong>Lección:</strong> dibuja en vivo para aprender, y renderiza un archivo para compartir. Construye ambos desde una sola fuente, para que nunca se contradigan.</p>
+</blockquote>
+<h2 id="11-lo-que-salio-mal-en-el-camino">11. Lo que salió mal en el camino</h2>
 <p>Los errores fueron parte del proceso, y casi todos enseñaron algo:</p>
 <ul>
 <li>Al principio, Claude descartó el audio demasiado rápido. La solución fue un modelo de voz sin conexión y sonido sintetizado.</li>
@@ -271,10 +295,11 @@
 <li><strong>Crea contenido multimedia como código.</strong> Cuando las escenas están sincronizadas con la narración, cambiar una línea vuelve a sincronizar toda la película.</li>
 <li><strong>Valida mirando y midiendo,</strong> y di claramente lo que no puedes verificar. Claude no podía escuchar el audio, así que el autor juzgó el balance.</li>
 <li><strong>Las objeciones son el motor.</strong> Casi todas las mejoras empezaron con "eso no es del todo correcto".</li>
+<li><strong>Dibuja en vivo para aprender, y renderiza un archivo para compartir,</strong> ambos desde una sola fuente.</li>
 </ol>
 <h2 id="reutilizala">Reutilízala</h2>
 <p>El <a href="https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/source/README.md">código fuente y la guía para reconstruir la película</a> (en inglés) están en este repositorio, y la <a href="https://github.com/roanboc/learning-data/blob/main/PLAYBOOK.md">guía práctica</a> (en inglés) reúne lo que conviene reutilizar en la próxima película o curso. Para adaptar la película a otra universidad, cambia la narración en <code>src/narration.js</code>, o en <code>src/i18n/es/narration.js</code> para la versión en español (por ejemplo "clase", "fecha de corte" y los nombres de los dominios), vuelve a generar la voz y renderiza de nuevo.</p>
 </main>
-<footer><p>Código: licencia MIT. Película, guion, subtítulos, imágenes y texto: CC BY 4.0. Los logotipos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias. Consulta los <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a>.</p></footer>
+<footer><p class="foot-links"><a href="../../es/">Empieza aquí</a> · <a href="../../es/topics/">Temas</a> · <a href="../../es/journey/">Cómo se hizo</a> · <a href="https://github.com/roanboc/learning-data">GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película, los labs y las situaciones son ficticios. Código: licencia MIT. Película, guion, subtítulos, imágenes y texto: CC BY 4.0. Los logotipos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias. Consulta los <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a>.</p></footer>
 </body>
 </html>

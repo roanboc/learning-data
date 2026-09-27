@@ -1,8 +1,8 @@
 # The Inner Life of Data
 
-An eight-minute film that follows one enrolment at a fictional university, from a tap on a phone to a decision. It shows how data is captured, refined through bronze, silver and gold with dbt on Databricks, given meaning through a shared conceptual model, and shared without copies. It is written for anyone aged 14 and up, with nothing a data engineer would need to correct.
+A 7½-minute film that follows one enrolment at a fictional university, from a tap on a phone to a decision. It shows how data is captured, refined through bronze, silver and gold with dbt on Databricks, given meaning through a shared conceptual model, and shared without copies. It is written for anyone aged 14 and up, with nothing a data engineer would need to correct.
 
-- **Watch, with chapters:** [https://roanboc.github.io/learning-data/#watch](https://roanboc.github.io/learning-data/#watch). Turn on *Pause and think* to stop after each chapter for one question. Then try the [hands-on labs](https://roanboc.github.io/learning-data/labs/) and the [scenarios](https://roanboc.github.io/learning-data/scenarios/).
+- **Watch, with chapters:** [https://roanboc.github.io/learning-data/#watch](https://roanboc.github.io/learning-data/#watch). Turn on *Pause and think* to stop after most chapters for one question. Then try the [hands-on labs](https://roanboc.github.io/learning-data/labs/) and the [scenarios](https://roanboc.github.io/learning-data/scenarios/).
 - **Download the video (MP4, 1080p):** [https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.mp4](https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.mp4)
 - **Script, with rigour notes and sources:** [script.md](script.md)
 - **Captions:** [en.vtt](captions/en.vtt), [en.srt](captions/en.srt)
@@ -26,4 +26,4 @@ An eight-minute film that follows one enrolment at a fictional university, from 
 
 ## How it was made
 
-The film is generated entirely from code; the source and a step-by-step rebuild guide are in [source/](source/). This is the breathing cut: the pauses that let each idea land, and why, are described in [breathing-cut.md](breathing-cut.md), and how they were tuned so the film flows instead of stopping is in [pacing-review.md](pacing-review.md), and what to reuse for future films is in the [playbook](../../PLAYBOOK.md). The story of how it was made, with the analogies explored, the pushback and the lessons learned, is in [the making-of journey](../../journey/index.md).
+The film is generated entirely from code; the source and a step-by-step rebuild guide are in [source/](source/). This is the breathing cut: the pauses that let each idea land, and why, are described in [breathing-cut.md](breathing-cut.md), and how they were tuned so the film flows instead of stopping is in [pacing-review.md](pacing-review.md), and what to reuse for future films is in the [playbook](../../PLAYBOOK.md). The story of how it was made, with the analogies explored, the pushback and the lessons learned, is in [the making-of journey](../../site/journey/index.md).

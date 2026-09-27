@@ -109,7 +109,7 @@ function openStop(id,scroll){
   if(scroll)RAIL.scrollIntoView();}
 LD.openStop=(id,scroll)=>{openStop(id,scroll);};
 /* "Watch this part": the film plays that chapter in a pop-up player, and stops at its end */
-function clip(s){const d=$("#clip");if(!d||!d.showModal){location.href=LD.homeHref+"#t="+Math.floor(FILM.sceneStart(s.scene));return;}
+function clip(s){const d=$("#clip");if(!d||!d.showModal){location.href=LD.homeHref+"#t="+Math.ceil(FILM.sceneStart(s.scene));return;}
   $("#clip-h").textContent=s.name+" · "+fmt(FILM.sceneStart(s.scene));if(!d.open)d.showModal();FILM.playScene(s.scene,true);}
 function clipSetup(){const d=$("#clip");if(!d)return;d.addEventListener("close",()=>{if(FILM.pause)FILM.pause();});d.addEventListener("click",e=>{if(e.target===d||e.target.closest("[data-close]"))d.close();});}
 /* the labs and the scenarios are sibling pages, in each language */

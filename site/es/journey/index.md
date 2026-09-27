@@ -1,8 +1,10 @@
-# Cómo se hizo *La vida interior de los datos*
+# Cómo se hizo Learning Data
 
-*Un viaje de aprendizaje: lo que exploramos, discutimos, hicimos mal y aprendimos al crear una película corta sobre plataformas de datos.*
+*Un viaje de aprendizaje: lo que exploramos, discutimos, hicimos mal y aprendimos al crear películas cortas sobre plataformas de datos.*
 
-La película se hizo en dos días, el 25 y el 26 de septiembre de 2026, en una sola conversación de trabajo larga entre el autor y Claude, un modelo de IA creado por Anthropic. El autor aportó el encargo, el conocimiento de la plataforma y la mayoría de las objeciones. Claude propuso opciones, verificó datos, escribió el código y renderizó cada cuadro. Esta página cuenta la historia desde la primera pregunta hasta el sitio publicado, con las lecciones que vale la pena reutilizar.
+Todo empezó con una película. *La vida interior de los datos* se hizo en dos días, el 25 y el 26 de septiembre de 2026, en una sola conversación de trabajo larga entre el autor y Claude, un modelo de IA creado por Anthropic. El autor aportó el encargo, el conocimiento de la plataforma y la mayoría de las objeciones. Claude propuso opciones, verificó datos, escribió el código y renderizó cada cuadro. Las secciones 1 a 10 cuentan esa historia, desde la primera pregunta hasta el sitio publicado.
+
+Después, los comentarios convirtieron una película en cuatro: *A Sharper Sketch*, sobre modelado de datos, y una serie, *Cuando algo sale mal*, con *Cambio silencioso* y *Demasiado bueno para ser verdad*. La sección 11 cuenta qué cambió al hacer más de una, y las lecciones del final cubren las cuatro.
 
 ## De un vistazo
 
@@ -18,6 +20,7 @@ La película se hizo en dos días, el 25 y el 26 de septiembre de 2026, en una s
 | 8. Puntos de control | Cinco cuadros de estilo, un boceto de sonido, cuatro pruebas de voz | Acuerdo antes de reconstruir |
 | 9. El segundo corte | 6:17 con narración, música y sonido, sincronizados con la voz | Productos de datos variados, un cerebro, actualizaciones en vivo |
 | 10. La publicación | Un sitio que dibuja la película en vivo, videos renderizados con el mismo código, y esta historia | El sitio, este repositorio y sus releases |
+| 11. Más películas | Un comentario se volvió película, las películas se volvieron serie, y cada revisión se volvió una verificación | *A Sharper Sketch*, *Cambio silencioso*, *Demasiado bueno para ser verdad*, y un sitio organizado por temas |
 
 ## 1. El encargo
 
@@ -185,7 +188,49 @@ Los videos se publican con un workflow de GitHub. Renderiza los dos idiomas a pa
 
 > **Lección:** dibuja en vivo para aprender, y renderiza un archivo para compartir. Construye ambos desde una sola fuente, para que nunca se contradigan.
 
-## 11. Lo que salió mal en el camino
+## 11. De una película a cuatro
+
+### Un comentario se volvió la siguiente película
+
+Los comentarios sobre *La vida interior de los datos* señalaron que su boceto (estudiante, clase, inscripción, periodo, carrera) era una simplificación excesiva. Podíamos corregir el boceto en silencio, o dejar que una película nueva lo dijera. Elegimos lo segundo. *A Sharper Sketch* empieza llamando al boceto por lo que era, y luego lo hace más preciso, una pregunta a la vez, cada vez que una pregunta admite más de una respuesta. Un sello de versión lleva el boceto de v1 a v2, y la última toma sugiere una v3: los modelos cambian, no a menudo, pero siempre.
+
+- **Cada película, un solo tema.** Los primeros borradores se desviaban hacia cómo dbt construye las tablas físicas. Ese detalle quedó guardado para una película futura para ingenieros, y esta se queda en lo que el modelo significa.
+- **Elige un modelo de referencia a conciencia.** La película compara el boceto con TCSI porque es público, y dice que muchas universidades usan en realidad MortarCAPS. Suele haber más de un estándar: elige uno y di por qué; luego adóptalo donde encaja, extiéndelo donde no, y registra cada diferencia.
+
+### Una serie, con personas en pantalla
+
+*La vida interior de los datos* sigue los datos cuando todo sale bien. La siguiente idea fue mostrar qué pasa cuando no, y creció hasta ser una serie, *Cuando algo sale mal*, con un solo lema: «Falla de forma segura. Corrige una vez». Cada película toma una forma en que algo sale mal, empieza por la persona a quien le llega, sigue el linaje río arriba hasta la causa, y vuelve con la solución. Una lista de candidatas (un archivo que llega tarde, una tabla sobrescrita, una promesa rota, miradas indebidas sobre datos personales) mantiene cada película en un solo mecanismo.
+
+- **Un cuadrado de cuatro personas.** Todo cambio tiene un lado técnico y uno de negocio, y un lado que produce los datos y otro que los usa. Cada película pone a una persona en cada esquina, y Sam, el ingeniero de datos, guía todas las películas. El color del contorno de cada persona muestra su lado: cian para el técnico, dorado para el de negocio.
+- **Prueba los personajes en código antes de escribir un guion.** Una hoja de personajes dibujó siete personas en tres poses y tres expresiones. Mostró que las caras funcionan con este nivel de sencillez, y lo que todavía no: solo vistas de frente, nadie sentado, manos simples. Los guiones se escribieron dentro de esos límites.
+- **Sin culpables, y creíble.** No hay villanos: una buena idea, una actualización bien hecha y una sincronización que falló por tiempo de espera, como pasa. Las cifras son pequeñas y plausibles: una clase al 108% en lugar de al 96% es justo el tipo de cifra equivocada que nadie cuestiona.
+- **Muestra las alternativas lado a lado.** *Demasiado bueno para ser verdad* muestra el mismo martes de tres maneras: sin prueba, con una advertencia y con un error. Lo único que cambia entre las tres es el indicador, y esa es la lección.
+
+![Los personajes de Cuando algo sale mal, dibujados con código, con Sam, el ingeniero de datos, en el centro](../../journey/img/10-characters.jpg)
+
+![Tres versiones del mismo martes: sin prueba, con una advertencia y con un error, lado a lado](../../journey/img/11-three-tuesdays.jpg)
+
+### Puntos de control más pequeños, y antes
+
+Las películas siguientes sumaron puntos de control que cuestan menos que un render: un tratamiento con las decisiones que el autor debe tomar, un esquema de la historia escrito fragmento a fragmento, la hoja de personajes, cuadros de estilo dibujados con los propios componentes de la película, y un guion con hoja de rigor e informe de ritmo. Cada decisión quedó por escrito con su fecha, para que la siguiente sesión partiera de ella en lugar de discutirla otra vez.
+
+### Revisiones que midieron el ritmo
+
+Una revisión del corte con respiraciones de *La vida interior de los datos* encontró que la duración era correcta y el ritmo no. Los promedios parecían sanos, 115 palabras por minuto, pero la voz seguía apurada, a 171 palabras por minuto, entre 32 paradas largas, y la música subía 7,5 dB en un cuarto de segundo en cada parada. También encontró un error presente desde el principio: el capítulo inicial no tenía música. La corrección marcó el ritmo de todas las películas siguientes: una pausa natural de unos 0,8 s después de cada oración, pausas más largas solo donde una idea necesita asentarse, muy pocos momentos sin palabras, y música que sube despacio. Cada película tuvo además su propia música.
+
+La voz recibió el mismo trato. Subir el tono de la voz en español la hizo sonar robótica: un modelo de naturalidad le dio 3,24 sobre 5. Mezclarla con la voz del narrador en inglés subió la nota a 4,33, e hizo que los dos idiomas sonaran como un mismo narrador.
+
+### Que se parezca a lo que la gente conoce
+
+En *Cambio silencioso*, la pintura moderna que representaba un producto de datos se leía como un gráfico de torta tachado. Se convirtió en un dashboard al estilo de Databricks, con una tarjeta de KPI y una nota ámbar que dice qué tan viejos son los datos. Quien mira reconoce un dashboard al instante, y la historia puede dedicar su tiempo al problema. Una revisión cuadro por cuadro de la misma película encontró 72 problemas, desde cajas cortadas en el borde del cuadro hasta texto debajo de los subtítulos; 71 se corrigieron antes de publicarla.
+
+### Películas independientes, y un sitio organizado por temas
+
+Con cuatro películas, numerarlas sugeriría un orden que no existe. Por eso las películas no llevan número: cada una empieza con un resumen de una línea, y el sitio cuelga cada tema del capítulo de *La vida interior de los datos* que profundiza. Todas las películas tienen los mismos tres pasos (Mira, Desarma y Tú decides), y el progreso se guarda por película. Cada problema que una revisión encontró en el sitio, como poco contraste, el foco del teclado perdido o un panel que tapaba los controles del reproductor, se volvió una verificación automática, para que no vuelva.
+
+> **Lección:** hacer más de una película es lo que convierte un proceso en un método. Escribe lo que funcionó, convierte cada revisión en una verificación, y deja que la siguiente película parta de ambas.
+
+## 12. Lo que salió mal en el camino
 
 Los errores fueron parte del proceso, y casi todos enseñaron algo:
 
@@ -194,6 +239,10 @@ Los errores fueron parte del proceso, y casi todos enseñaron algo:
 - Los renders en segundo plano se detenían al terminar una sesión, y un trabajo de voz se quedó sin memoria junto al renderizador. Ambos se volvieron trabajos reanudables, ejecutados de uno en uno.
 - Un diagrama de relaciones se dibujó primero con las patas de gallo al revés.
 - Las etiquetas chocaban con los subtítulos hasta que cada escena se revisó contra el área de subtítulos.
+- La primera corrección del ritmo confió en los promedios. Una película puede cumplir todos los promedios y aun así sonar como «apuro, parada, apuro, parada».
+- El capítulo inicial no tuvo música desde la primera versión, y nadie lo notó hasta que una revisión midió el sonido.
+- El hilo rojo que sigue el linaje en *Cambio silencioso* cruzaba al principio el dashboard y la plataforma, y resultaba recargado. Ahora avanza un paso del linaje a la vez.
+- Una voz con el tono subido sonaba robótica, y una pintura abstracta se leía como un gráfico tachado. Ambas se reemplazaron por algo conocido: una voz mezclada, y un dashboard realista.
 
 ## Lecciones aprendidas
 
@@ -211,7 +260,15 @@ Los errores fueron parte del proceso, y casi todos enseñaron algo:
 12. **Valida mirando y midiendo,** y di claramente lo que no puedes verificar. Claude no podía escuchar el audio, así que el autor juzgó el balance.
 13. **Las objeciones son el motor.** Casi todas las mejoras empezaron con "eso no es del todo correcto".
 14. **Dibuja en vivo para aprender, y renderiza un archivo para compartir,** ambos desde una sola fuente.
+15. **Convierte los comentarios en la siguiente pieza.** Decir, en una película nueva, que el boceto era una simplificación excesiva enseñó más que corregirlo en silencio.
+16. **Una película, un mecanismo.** Guarda lo que no encaja, y lleva una lista de candidatas para películas futuras.
+17. **Pon personas en todos los lados de un problema.** Técnico y de negocio, quien produce y quien usa: un cambio solo es seguro cuando los cuatro pueden verlo.
+18. **Muestra las alternativas lado a lado,** para que lo único que cambia sea la lección.
+19. **Los promedios esconden el ritmo.** Mide dónde caen las pausas, no solo cuánto silencio hay.
+20. **Usa lo que el público ya conoce.** Un dashboard conocido le gana a una imagen abstracta que hay que explicar.
+21. **Escribe las decisiones, con su fecha.** La siguiente sesión parte de ellas en lugar de discutirlas otra vez.
+22. **Convierte cada hallazgo de una revisión en una verificación,** para que el mismo problema no vuelva.
 
 ## Reutilízala
 
-El [código fuente y la guía para reconstruir la película](https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/source/README.md) (en inglés) están en este repositorio, y la [guía práctica](https://github.com/roanboc/learning-data/blob/main/PLAYBOOK.md) (en inglés) reúne lo que conviene reutilizar en la próxima película o curso. Para adaptar la película a otra universidad, cambia la narración en `src/narration.js`, o en `src/i18n/es/narration.js` para la versión en español (por ejemplo "clase", "fecha de corte" y los nombres de los dominios), vuelve a generar la voz y renderiza de nuevo.
+El código fuente y la guía para reconstruir cada película están en este repositorio (en inglés): [*La vida interior de los datos*](https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/source/README.md), [*A Sharper Sketch*](https://github.com/roanboc/learning-data/blob/main/films/a-sharper-sketch/README.md) y [la serie *Cuando algo sale mal*](https://github.com/roanboc/learning-data/blob/main/films/when-things-go-wrong/README.md), con sus tratamientos, su hoja de personajes y sus cuadros de estilo. La [guía práctica](https://github.com/roanboc/learning-data/blob/main/PLAYBOOK.md) (en inglés) reúne lo que conviene reutilizar en la próxima película o curso. Para adaptar *La vida interior de los datos* a otra universidad, cambia la narración en `src/narration.js`, o en `src/i18n/es/narration.js` para la versión en español (por ejemplo "clase", "fecha de corte" y los nombres de los dominios), vuelve a generar la voz y renderiza de nuevo.

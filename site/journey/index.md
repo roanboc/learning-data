@@ -1,6 +1,6 @@
 # The making of *The Inner Life of Data*
 
-*A learning journey: what we explored, argued about, got wrong and learned while making a six-minute film about data platforms.*
+*A learning journey: what we explored, argued about, got wrong and learned while making a short film about data platforms.*
 
 The film was made over two days, 25 and 26 September 2026, in one long working conversation between the author and Claude, an AI model made by Anthropic. The author brought the brief, the platform knowledge and most of the pushback. Claude proposed options, checked facts, wrote the code and rendered every frame. This page tells the story from the first question to the published site, with the lessons worth reusing.
 

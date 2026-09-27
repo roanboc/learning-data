@@ -1,6 +1,6 @@
 # When things go wrong · 1. Silent change
 
-*Treatment for the first episode of [When things go wrong](../README.md), v0.4: the main decisions are made, and the theme is set (see [Decisions](#decisions)). Status: agreed; the [character sheet](../characters/README.md) has a first pass.*
+*Treatment for Silent change, in [When things go wrong](../README.md), v0.4: the main decisions are made, and the theme is set (see [Decisions](#decisions)). Status: agreed; the [character sheet](../characters/README.md) has a first pass.*
 
 **Series tagline:** Fail safely. Fix once.
 
@@ -8,17 +8,17 @@
 
 ## The promise
 
-Same two audiences as the first film: a newcomer understands it, and a data engineer agrees with it. Same university, same platform, same visual world, and this time the people who work in it. The first film showed how data should flow; this one shows what happens when it doesn't, and how a good platform notices, contains the damage, fixes the cause and learns from it.
+Same two audiences as *The Inner Life of Data*: a newcomer understands it, and a data engineer agrees with it. Same university, same platform, same visual world, and this time the people who work in it. *The Inner Life of Data* showed how data should flow; this one shows what happens when it doesn't, and how a good platform notices, contains the damage, fixes the cause and learns from it.
 
 **The theme: a change is only safe when both sides can see it.** Every change to data has a technical side (what the system now stores) and a business side (what it means). The incident happens because each side saw only its own half. A **data contract** puts both halves on one page, with a technical and a business owner on each side, and the platform checks it constantly: on every load, and on every proposed change before it ships.
 
 **Logline.** The night before census date, the enrolment numbers stop. Follow one broken number upstream to a change that each side of the university saw only half of, and back down again, with a contract that keeps the next change in plain sight.
 
-**Why it's worth making.** Failure teaches the mechanism better than success does: the first film's strongest moments were the wrong sketch and the stale copy. Most people only see a platform when it breaks, and most material about data quality is either scary or abstract. This film can be calm, specific and useful, and it shows that the fix is as much about people agreeing as about code.
+**Why it's worth making.** Failure teaches the mechanism better than success does: *The Inner Life of Data*'s strongest moments were the wrong sketch and the stale copy. Most people only see a platform when it breaks, and most material about data quality is either scary or abstract. This film can be calm, specific and useful, and it shows that the fix is as much about people agreeing as about code.
 
 ## The structure: a detective story that runs upstream
 
-The first film followed a record downstream, from the tap to the decision. This one inverts it: it starts at the symptom and follows the lineage upstream to the cause, like a detective following a red thread. Then it comes back down with the fix, and ends by showing the next change arriving safely. The viewer already knows the map from the first film, so the reversal feels like a payoff.
+*The Inner Life of Data* followed a record downstream, from the tap to the decision. This one inverts it: it starts at the symptom and follows the lineage upstream to the cause, like a detective following a red thread. Then it comes back down with the fix, and ends by showing the next change arriving safely. The viewer already knows the map from *The Inner Life of Data*, so the reversal feels like a payoff.
 
 **The spine: one change, seen in halves.** The registrar's office introduces waitlists for full classes: a business decision, announced to every School by email. The student system team builds it: enrolments gain a new status, `waitlisted`, listed in their release notes. Both sides did their part well. Nobody told the platform, or the people who rely on its numbers. Everything else follows from that gap.
 
@@ -50,16 +50,16 @@ Four characters. Together they make a square: technical and business, on the sid
 
 How they fit the film:
 
-- **Two places, one world.** The people work in a small, quiet campus at dawn: an office, a kitchen table, a meeting room. The platform is the world of light from the first film. Sam's screen is the door between them: the camera moves through it into the platform, and back out again.
+- **Two places, one world.** The people work in a small, quiet campus at dawn: an office, a kitchen table, a meeting room. The platform is the world of light from *The Inner Life of Data*. Sam's screen is the door between them: the camera moves through it into the platform, and back out again.
 - **Two notices that never meet.** Mei's email and Ben's release notes each travel their own way through the campus and never reach the platform. In chapter 7, the contract card is where the two paths finally cross.
 - **The narrator tells the story; the characters don't speak.** One voice keeps the film timed to its narration, and makes it easy to translate. The characters act and react: faces, gestures, what they type and what their phones show.
-- **Drawn in code, in the film's design language.** An original, simple style made from the same shapes as the first film: rounded forms, luminous edges and a few expressive lines for faces. They blink, breathe and shift their weight, so they feel alive when they're still.
+- **Drawn in code, in the film's design language.** An original, simple style made from the same shapes as *The Inner Life of Data*: rounded forms, luminous edges and a few expressive lines for faces. They blink, breathe and shift their weight, so they feel alive when they're still.
 - **Guardrails.** Original designs only, not imitating any studio's style. A varied cast without stereotypes, for example about who is the engineer. No one looks foolish: the tone stays blameless, because each side did its own half right.
 - **An honest risk.** Expressive characters are new ground for this code-drawn pipeline. A character sheet comes before anything else (see Next checkpoints). If the characters don't hold up at close range, the fallback is line-figure silhouettes in the same style.
 
 ## Visual language
 
-Reuse the first film's world and components: the vaults, tiles, the dbt line, the sketch, the paintings, Genie. Add the people above, and a few new objects, each with a single job:
+Reuse *The Inner Life of Data*'s world and components: the vaults, tiles, the dbt line, the sketch, the paintings, Genie. Add the people above, and a few new objects, each with a single job:
 
 | New object | Stands for |
 |---|---|
@@ -74,11 +74,11 @@ Reuse the first film's world and components: the vaults, tiles, the dbt line, th
 | The card appearing in the student system team's test environment | The contract checked on every proposed change, before release |
 | A pinned card on a wall of notes | The blameless review, and the test left behind |
 
-**Tone.** Calm and procedural, never alarming. No sirens and no villains: the waitlist was a good idea, the upgrade was well built, the platform did its job, and people made good decisions. The characters carry the stakes, so the pictures don't need to. Music: the first film's palette in a minor key, resolving to major at the contract, and staying there for the quiet change three weeks later.
+**Tone.** Calm and procedural, never alarming. No sirens and no villains: the waitlist was a good idea, the upgrade was well built, the platform did its job, and people made good decisions. The characters carry the stakes, so the pictures don't need to. Music: *The Inner Life of Data*'s palette in a minor key, resolving to major at the contract, and staying there for the quiet change three weeks later.
 
 ## Pacing
 
-Built to flow, with room to think: about 125 to 135 words a minute, a natural beat of about 0.8 s after every sentence, a longer pause only where an idea needs to land, and very few wordless moments. The first film's breathing cut felt stop-start with a hold after every idea (see [its pacing review](../../inner-life-of-data/pacing-review.md) and [PLAYBOOK.md](../../../PLAYBOOK.md)). Target length: 7 to 8 minutes, now that other incidents have their own episodes. The contract and the change three weeks later are the heart of it, and stay whatever else is cut. "Pause and think" questions for each chapter come with the script.
+Built to flow, with room to think: about 125 to 135 words a minute, a natural beat of about 0.8 s after every sentence, a longer pause only where an idea needs to land, and very few wordless moments. *The Inner Life of Data*'s breathing cut felt stop-start with a hold after every idea (see [its pacing review](../../inner-life-of-data/pacing-review.md) and [PLAYBOOK.md](../../../PLAYBOOK.md)). Target length: 7 to 8 minutes, now that other incidents have their own episodes. The contract and the change three weeks later are the heart of it, and stay whatever else is cut. "Pause and think" questions for each chapter come with the script.
 
 ## Labs and scenarios (for Learning Data)
 
@@ -117,7 +117,7 @@ To confirm against current documentation, and record in the rigour sheet with th
 
 Made by the author on 26 September 2026:
 
-1. **The spine:** a new status value after an upgrade (`waitlisted`), because the fix starts with meaning and connects back to the sketch in the first film.
+1. **The spine:** a new status value after an upgrade (`waitlisted`), because the fix starts with meaning and connects back to the sketch in *The Inner Life of Data*.
 2. **People on screen:** full characters, with faces (see [The people](#the-people)).
 3. **The title:** *When things go wrong* became the series title (in Spanish, *Cuando algo sale mal*). This episode is *Silent change* (*Cambio silencioso*).
 4. **The tagline:** "Fail safely. Fix once.", now for the whole series. This episode's last line is "Seen by both sides, before it ships."

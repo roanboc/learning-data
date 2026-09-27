@@ -1,12 +1,12 @@
 # When things go wrong · 2. Too good to be true
 
-*Treatment for the second episode of [When things go wrong](../README.md), v0.3: the main decisions are made (see [Decisions](#decisions)). Status: agreed; its characters are in the [character sheet](../characters/README.md).*
+*Treatment for Too good to be true, in [When things go wrong](../README.md), v0.3: the main decisions are made (see [Decisions](#decisions)). Status: agreed; its characters are in the [character sheet](../characters/README.md).*
 
 **Series tagline:** Fail safely. Fix once.
 
 ## The promise
 
-Same two audiences, same university, same platform, and Sam, the data engineer from the first episode, as the guide.
+Same two audiences, same university, same platform, and Sam, the data engineer from *Silent change*, as the guide.
 
 **The theme: stale and labelled beats fresh and wrong.** Some failures don't break any rule a row can see. Every value is valid, every ID is unique, and yet a crucial number is wrong. Expectations on the numbers themselves, such as how much a total can change overnight, catch what row checks miss. Those tests have two levels: a **warning** says "worth a look" and lets data through; an **error** says "don't publish this" and stops it. Without a test, wrong data reaches people who act on it, and that costs far more than data that's a day old and says so.
 
@@ -16,7 +16,7 @@ Same two audiences, same university, same platform, and Sam, the data engineer f
 
 ## The spine: one number, three mornings
 
-It's Tuesday during admissions season. The Vice-Chancellor's gold painting from the first film shows one big number: applications for next year, 8,200 so far. At 10 am, the planning committee meets to decide how many first-year places to offer.
+It's Tuesday during admissions season. The Vice-Chancellor's gold painting from *The Inner Life of Data* shows one big number: applications for next year, 8,200 so far. At 10 am, the planning committee meets to decide how many first-year places to offer.
 
 On Monday night, the admissions system's nightly sync to the application portal times out and restarts. On restart it copies the whole week's applications again, 3,100 of them, and gives every copy a new ID. The admissions system now holds each of those applications twice. The platform copies what the source holds, faithfully.
 
@@ -48,7 +48,7 @@ The series' square: technical and business, on the side that produces the data a
 
 ## Visual language
 
-Everything from the first episode (the square of characters, Sam's screen as the door, the contract card, the version panes), plus:
+Everything from *Silent change* (the square of characters, Sam's screen as the door, the contract card, the version panes), plus:
 
 | New object | Stands for |
 |---|---|
@@ -63,7 +63,7 @@ Everything from the first episode (the square of characters, Sam's screen as the
 
 ## Pacing
 
-About 125 to 135 words a minute, a natural beat of about 0.8 s after every sentence, and longer pauses only where an idea needs to land, as the first film's [pacing review](../../inner-life-of-data/pacing-review.md) recommends. The three Tuesdays need time: each version holds long enough to see what was decided and what it cost. Target length: 6 to 7 minutes.
+About 125 to 135 words a minute, a natural beat of about 0.8 s after every sentence, and longer pauses only where an idea needs to land, as the [pacing review](../../inner-life-of-data/pacing-review.md) of *The Inner Life of Data* recommends. The three Tuesdays need time: each version holds long enough to see what was decided and what it cost. Target length: 6 to 7 minutes.
 
 ## Labs and scenarios (for Learning Data)
 
@@ -95,7 +95,7 @@ To confirm against current documentation, and record in the rigour sheet with th
 
 Made by the author on 26 September 2026:
 
-1. **The incident:** not a new category (that's the first episode's territory), but a crucial number that jumps and deviates from expectations, caused by duplicates in the source system, which requires re-ingesting the data.
+1. **The incident:** not a new category (that's *Silent change*'s territory), but a crucial number that jumps and deviates from expectations, caused by duplicates in the source system, which requires re-ingesting the data.
 2. **What it must show:** warning and error test levels, and that having no test would have been worse: wrong data versus stale data.
 3. **The device:** three versions side by side, as in the first draft. They are now no test, a warning and an error.
 4. **The crucial number:** applications for next year, before the committee plans first-year places.
@@ -105,7 +105,7 @@ Made by the author on 26 September 2026:
 ## Next checkpoints
 
 1. ~~Agree this treatment.~~ Done.
-2. ~~Reuse the character sheet from the first episode, and add the new characters.~~ First pass done: see [the character sheet](../characters/README.md).
+2. ~~Reuse the character sheet from *Silent change*, and add the new characters.~~ First pass done: see [the character sheet](../characters/README.md).
 3. Script with a rigour sheet and pacing report.
 4. Style frames: the gauge on the painting, the row checks passing while the gauge goes red, the three Tuesdays, and the reload.
 5. A voice test, and the first cut.

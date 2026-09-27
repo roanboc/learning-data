@@ -54,18 +54,18 @@ scene("two",(ctx,S,t,sc)=>{
     withA(ctx,fin(t,cC+0.2),()=>{tag(ctx,1590,430,"every test passed",GOOD,{size:16});tag(ctx,1590,680,"every test passed",GOOD,{size:16});});
     withA(ctx,fin(t,cM),()=>{glow(ctx,1500,470,160,BAD,0.18+0.06*Math.sin(t*3));tag(ctx,1500,775,"same data, different meaning",BAD,{align:"center",size:20});});});
   // before changing anything, a wider question: how does this kind of business generally work? Many industries have published models, a first template
-  const cI=c("industry"),cF=c("fit");
+  const cI=c("industry"),cF=c("fit"),cMc=c("mcds");
   const bA=fin(t,cK+0.2,0.8);withA(ctx,bA,()=>{board(ctx,1,"Conceptual model");const E={};Object.keys(V1).forEach(k=>{E[k]={x:V1[k][0],y:V1[k][1],name:k};});E.Term.sub="census date";diagram(ctx,E,V1R.map(r=>r.concat([{}])));stamp(ctx,1790,845,"sketch v1",SK,1);
     withA(ctx,fin(t,cK+0.9),()=>tag(ctx,960,280,"how does this kind of business generally work?",C.white,{align:"center",size:24}));
     // first the industries, then, for higher education, several candidate models: which one, and why, is a choice
     const cCh=c("choose"),ind=fin(t,cI+0.2)*(1-sstep(cCh-0.2,cCh+0.4,t)),cand=fin(t,cCh+0.3);
     withA(ctx,ind,()=>{T(ctx,"published industry models: a first template",960,772,{w:600,size:18,align:"center",color:rgba(SOFT,1)});
       ["Banking","Insurance","Retail","Health","Higher education"].forEach((n,i)=>withA(ctx,fin(t,cI+0.6+i*0.35),()=>{const x=440+i*260;tag(ctx,x,820,n,i===4?REF:SOFT,{align:"center",size:18});}));});
-    withA(ctx,cand,()=>{T(ctx,t>cT+0.4?"our choice: TCSI, because it matches what we already report":"reference models for higher education: which one, and why?",960,772,{w:600,size:18,align:"center",color:rgba(t>cT+0.4?REF:SOFT,1)});
-      [["TCSI","Australia"],["HESA Data Futures","United Kingdom"],["CEDS","United States"],["MCDS","sector standard"]].forEach(([n,r],i)=>withA(ctx,fin(t,cCh+0.5+i*0.35),()=>{const x=480+i*320,on=i===0?fin(t,cT+0.3):0,dim=t>cT+0.3&&i>0?0.45:1;
+    withA(ctx,cand,()=>{T(ctx,t>cMc+0.4?"widely used by universities: MCDS · here we check against TCSI":t>cT+0.4?"one of the choices: TCSI, public, and what universities report":"reference models for higher education: which one, and why?",960,772,{w:600,size:18,align:"center",color:rgba(t>cT+0.4?REF:SOFT,1)});
+      [["TCSI","Australia"],["HESA Data Futures","United Kingdom"],["CEDS","United States"],["MCDS","MortarCAPS"]].forEach(([n,r],i)=>withA(ctx,fin(t,cCh+0.5+i*0.35),()=>{const x=480+i*320,on=i===0?fin(t,cT+0.3):i===3?fin(t,cMc+0.3):0,dim=t>cT+0.3&&on<=0?0.45:1;
         if(on>0)glow(ctx,x,820,130,REF,0.5*on);withA(ctx,dim,()=>tag(ctx,x,820,n+" · "+r,on>0?REF:SOFT,{align:"center",size:17}));}));});});
-  const pA=fin(t,cT+2.0,0.5);if(pA>0){const hi={};if(sc.breathe&&t>B)["Student","Admission","Course","Enrolment","Unit"].forEach((k,i)=>{hi[k]=pulse(t,B+0.2,2.4);});
-    paper(ctx,pA,slideIn(t,cT+2.0),t,hi);withA(ctx,fin(t,cF+0.2),()=>tag(ctx,1400,835,"a reference to check against, not a model to copy",REF,{align:"center",size:18}));}
+  const pA=fin(t,cMc+4.2,0.5);if(pA>0){const hi={};if(sc.breathe&&t>B)["Student","Admission","Course","Enrolment","Unit"].forEach((k,i)=>{hi[k]=pulse(t,B+0.3+i*0.5,1.2);});// each box lights on its own chime (tools/audio.py)
+    paper(ctx,pA,slideIn(t,cMc+4.2),t,hi);withA(ctx,fin(t,cF+0.2),()=>tag(ctx,1400,835,"a reference to check against, not a model to copy",REF,{align:"center",size:18}));}
   hud(ctx,S,fin(t,cK+0.4),131);
   setCam(ctx,S,CAM0);vign(ctx,S);
 });

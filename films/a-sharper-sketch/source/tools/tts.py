@@ -5,7 +5,7 @@ ap=argparse.ArgumentParser(description='Voice every narration line into build/vo
 ap.add_argument('--keep-timings',action='store_true',help='keep the committed timings, and fail if a voiced line is more than 0.05 s off them (the release workflow uses this, so the video matches the site)');A=ap.parse_args()
 from kokoro_onnx import Kokoro
 src=open(NARR).read();N=json.loads(src[src.index('{'):src.rindex('}')+1])
-SAY=[(r'\bTCSI\b','T C S I'),(r'\b9 am\b','nine A M'),(r'\b131\b','a hundred and thirty-one'),(r'\b118\b','a hundred and eighteen'),(r'\b101\b','one oh one')]
+SAY=[(r'\bTCSI\b','T C S I'),(r'\bMortarCAPS\b','Mortar Caps'),(r'\b9 am\b','nine A M'),(r'\b131\b','a hundred and thirty-one'),(r'\b118\b','a hundred and eighteen'),(r'\b101\b','one oh one')]
 V={'voice':'af_heart','lang':'en-us','speed':0.95,'say':SAY} if EN else json.load(open(PACK/'voice.json'))
 k=Kokoro(str(MODELS/'kokoro-v1.0.onnx'),str(MODELS/'voices-v1.0.bin'));dur={};t0=time.time()
 for sid,sc in N.items():

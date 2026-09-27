@@ -4,6 +4,7 @@ A 5½-minute film from Learning Data about data modelling. Two trusted numbers d
 
 - **Watch, with labs and scenarios:** [https://roanboc.github.io/learning-data/sketch/](https://roanboc.github.io/learning-data/sketch/)
 - **In Spanish, around the English film:** [https://roanboc.github.io/learning-data/es/sketch/](https://roanboc.github.io/learning-data/es/sketch/)
+- **Download the video (MP4, 1080p):** [https://github.com/roanboc/learning-data/releases/latest/download/a-sharper-sketch.mp4](https://github.com/roanboc/learning-data/releases/latest/download/a-sharper-sketch.mp4)
 - **Script, with rigour notes and sources:** [script.md](script.md)
 - **Treatment:** [treatment.md](treatment.md)
 - **Captions:** [en.vtt](captions/en.vtt), [en.srt](captions/en.srt)

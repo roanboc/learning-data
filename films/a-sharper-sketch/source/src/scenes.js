@@ -53,10 +53,14 @@ scene("two",(ctx,S,t,sc)=>{
     withA(ctx,fin(t,cN+1.6),()=>numCard(ctx,1220,500,560,"Census report","118","sent to government",LAYER.gold,{badge:"certified",badgeCol:LAYER.gold}));
     withA(ctx,fin(t,cC+0.2),()=>{tag(ctx,1590,430,"every test passed",GOOD,{size:16});tag(ctx,1590,680,"every test passed",GOOD,{size:16});});
     withA(ctx,fin(t,cM),()=>{glow(ctx,1500,470,160,BAD,0.18+0.06*Math.sin(t*3));tag(ctx,1500,775,"same data, different meaning",BAD,{align:"center",size:20});});});
-  // the reference model slides over the simple sketch: someone has already modelled this
-  const bA=fin(t,cK+0.2,0.8);withA(ctx,bA,()=>{board(ctx,1,"Conceptual model");const E={};Object.keys(V1).forEach(k=>{E[k]={x:V1[k][0],y:V1[k][1],name:k};});E.Term.sub="census date";diagram(ctx,E,V1R.map(r=>r.concat([{}])));stamp(ctx,1790,845,"sketch v1",SK,1);});
-  const pA=fin(t,cK+1.2,0.5);if(pA>0){const hi={};if(sc.breathe&&t>B)["Student","Admission","Course","Enrolment","Unit"].forEach((k,i)=>{hi[k]=pulse(t,B+0.4+i*0.8,1.6);});
-    paper(ctx,pA,slideIn(t,cK+1.2),t,hi);withA(ctx,fin(t,cT+0.2),()=>tag(ctx,1480,835,"someone has already modelled this",REF,{align:"center",size:18}));}
+  // before changing anything, a wider question: how does this kind of business generally work? Many industries have published models, a first template
+  const cI=c("industry"),cF=c("fit");
+  const bA=fin(t,cK+0.2,0.8);withA(ctx,bA,()=>{board(ctx,1,"Conceptual model");const E={};Object.keys(V1).forEach(k=>{E[k]={x:V1[k][0],y:V1[k][1],name:k};});E.Term.sub="census date";diagram(ctx,E,V1R.map(r=>r.concat([{}])));stamp(ctx,1790,845,"sketch v1",SK,1);
+    withA(ctx,fin(t,cK+0.9),()=>tag(ctx,960,280,"how does this kind of business generally work?",C.white,{align:"center",size:24}));
+    withA(ctx,fin(t,cI+0.2),()=>{T(ctx,"published industry models: a first template",960,772,{w:600,size:18,align:"center",color:rgba(SOFT,1)});
+      ["Banking","Insurance","Retail","Health","Higher education"].forEach((n,i)=>withA(ctx,fin(t,cI+0.6+i*0.35),()=>{const he=i===4,on=he?fin(t,cT):0,x=440+i*260;if(on>0)glow(ctx,x,820,120,REF,0.45*on);tag(ctx,x,820,n,he&&on>0?REF:SOFT,{align:"center",size:18});}));});});
+  const pA=fin(t,cT+2.0,0.5);if(pA>0){const hi={};if(sc.breathe&&t>B)["Student","Admission","Course","Enrolment","Unit"].forEach((k,i)=>{hi[k]=pulse(t,B+0.2,2.4);});
+    paper(ctx,pA,slideIn(t,cT+2.0),t,hi);withA(ctx,fin(t,cF+0.2),()=>tag(ctx,1400,835,"a reference to check against, not a model to copy",REF,{align:"center",size:18}));}
   hud(ctx,S,fin(t,cK+0.4),131);
   setCam(ctx,S,CAM0);vign(ctx,S);
 });

@@ -105,7 +105,7 @@ Reuse the world and components of the first two films: the sketch, tiles, vaults
 
 ## Pacing
 
-About 115 words a minute, a hold after each new idea, and a wordless breather at the end of each chapter (see [PLAYBOOK.md](../../PLAYBOOK.md) and `tools/pace.py`). Target length: 7 to 8 minutes. "Pause and think" questions come with the script, for example: "Before the box splits: what do *you* mean by a class?"
+About 130 words a minute, with a natural beat after each sentence and a pause only where an idea needs to land (see [PLAYBOOK.md](../../PLAYBOOK.md) and `tools/pace.py`). Target length: 5 to 6 minutes. "Pause and think" questions come with the script, for example: "Before the box splits: what do *you* mean by a class?"
 
 ## Labs and scenarios (for Learning Data)
 

@@ -1,6 +1,6 @@
 # A Sharper Sketch
 
-A six-minute film, the third from Learning Data, about data modelling. Two trusted numbers disagree about how many students were enrolled in Data Science 101 on census date. To find out why, the film goes back to the first film's sketch, calls it what it was, an oversimplification, and sharpens it one question at a time, checking each change against a public reference model, TCSI. It is written for anyone aged 14 and up, with nothing a data modeller would need to correct, and it is about modelling only: what the model says, not how the pipelines build it.
+A five-minute film, the third from Learning Data, about data modelling. Two trusted numbers disagree about how many students were enrolled in Data Science 101 on census date. To find out why, the film goes back to the first film's sketch, calls it what it was, an oversimplification, and sharpens it one question at a time, checking each change against a public reference model, TCSI. It is written for anyone aged 14 and up, with nothing a data modeller would need to correct, and it is about modelling only: what the model says, not how the pipelines build it.
 
 - **Script, with rigour notes and sources:** [script.md](script.md)
 - **Treatment:** [treatment.md](treatment.md)
@@ -11,19 +11,19 @@ A six-minute film, the third from Learning Data, about data modelling. Two trust
 | Time | Chapter |
 |---|---|
 | 0:00 | The sketch we drew |
-| 0:29 | Two numbers |
-| 1:16 | What is a class? |
-| 2:03 | Whose census date? |
-| 2:36 | One student, two courses |
-| 3:14 | Enrolled when? |
-| 3:48 | Three levels of precision |
-| 4:33 | Check, adopt, extend, record |
-| 5:13 | Pull back |
+| 0:24 | Two numbers |
+| 1:21 | What is a class? |
+| 2:05 | Whose census date? |
+| 2:34 | One student, two courses |
+| 3:08 | Enrolled when? |
+| 3:37 | Three levels of precision |
+| 4:17 | Check, adopt, extend, record |
+| 4:51 | Pull back |
 
 ## What it teaches
 
 - **Add precision when a question can't be answered in only one way.** Each chapter is one disagreement, and one change to the sketch: the class splits into unit, unit offering and class; the census date moves to the offering; a course admission joins student and course; enrolments keep their history.
-- **Check a reference model before you draw.** Adopt it where it fits the business, extend it where it doesn't, and record every difference in a fit register.
+- **Ask how this kind of business generally works, and check a reference model before you draw.** Many industries have published models that make a good first template. Check it, don't copy it: adopt it where it fits the business, extend it where it doesn't, and record every difference in a fit register.
 - **Models evolve: not often, but always.** The sketch carries a version stamp, from v1 to v2, and a new question hints at v3.
 - **Conceptual, logical, physical:** the same meaning at three levels of detail.
 

@@ -1,14 +1,14 @@
-/* The breathing cut: room to think (see ../../inner-life-of-data/breathing-cut.md).
+/* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds of silence after a line, while the picture keeps moving. breathe: a wordless end to the chapter, whose picture starts at the scene's "breath" cue.
    pause: extra seconds of silence before a line. The narration itself lives in narration.js. */
 const BREATH={
-"drawn":{"hold":{"over":2.5},"breathe":5},
-"two":{"hold":{"q":1.5,"nums":2.5,"meaning":2},"breathe":5},
-"cls":{"hold":{"hiding":1.5,"offering":1.5,"grain":2},"breathe":6},
-"census":{"hold":{"summer":2},"breathe":5},
-"courses":{"hold":{"admission":2,"link":1},"breathe":5},
-"time":{"hold":{"change":1.5,"extend":1.5},"breathe":6},
-"levels":{"hold":{"concept":1.5,"logical":2,"physical":2},"breathe":5},
-"fit":{"hold":{"check":1,"adopt":1,"extend":1,"record":1.5,"cage":1},"breathe":6},
-"end":{"hold":{"answer":2,"evolve":2},"breathe":3}
+"drawn":{"hold":{"over":1}},
+"two":{"hold":{"nums":1.5,"fit":0.8},"breathe":3},
+"cls":{"hold":{"hiding":0.8},"breathe":3},
+"census":{"hold":{"summer":1}},
+"courses":{"hold":{"admission":1.2}},
+"time":{"hold":{"snap":1}},
+"levels":{"hold":{"logical":1,"physical":1,"agree":0.8}},
+"fit":{"hold":{"adopt":0.6,"extend":0.6,"record":1}},
+"end":{"hold":{"answer":1.2},"breathe":2.5}
 };

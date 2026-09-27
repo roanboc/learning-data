@@ -63,7 +63,7 @@ Everything from the first episode (the square of characters, Sam's screen as the
 
 ## Pacing
 
-About 115 words a minute, holds after each new idea, and a breather at the end of each chapter. The three Tuesdays need time: each version holds long enough to see what was decided and what it cost. Target length: 6 to 7 minutes.
+About 125 to 135 words a minute, a natural beat of about 0.8 s after every sentence, and longer pauses only where an idea needs to land, as the first film's [pacing review](../../inner-life-of-data/pacing-review.md) recommends. The three Tuesdays need time: each version holds long enough to see what was decided and what it cost. Target length: 6 to 7 minutes.
 
 ## Labs and scenarios (for Learning Data)
 

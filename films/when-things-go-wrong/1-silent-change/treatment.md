@@ -78,7 +78,7 @@ Reuse the first film's world and components: the vaults, tiles, the dbt line, th
 
 ## Pacing
 
-Built with room to think from the start: about 115 words a minute, a hold after each new idea, and a wordless breather at the end of each chapter (see [PLAYBOOK.md](../../../PLAYBOOK.md) and `tools/pace.py`). Target length: 7 to 8 minutes, now that other incidents have their own episodes. The contract and the change three weeks later are the heart of it, and stay whatever else is cut. "Pause and think" questions for each chapter come with the script.
+Built to flow, with room to think: about 125 to 135 words a minute, a natural beat of about 0.8 s after every sentence, a longer pause only where an idea needs to land, and very few wordless moments. The first film's breathing cut felt stop-start with a hold after every idea (see [its pacing review](../../inner-life-of-data/pacing-review.md) and [PLAYBOOK.md](../../../PLAYBOOK.md)). Target length: 7 to 8 minutes, now that other incidents have their own episodes. The contract and the change three weeks later are the heart of it, and stay whatever else is cut. "Pause and think" questions for each chapter come with the script.
 
 ## Labs and scenarios (for Learning Data)
 

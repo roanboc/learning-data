@@ -28,7 +28,7 @@
 - **The same square of people.** Four characters: technical and business, on the side that produces the data and the side that uses it. A change is only safe when all four corners can see it. Sam Okafor, the data engineer, is the guide in every episode; the other corners change with the part of the university where things go wrong. See [the character sheet](characters/README.md).
 - **The same way in.** A person meets the problem first, then the camera goes through Sam's screen into the platform and follows the lineage to the cause.
 - **The same objects.** The data contract card at the platform's door, the quarantine tray, status lights, and the version panes behind each vault. An object introduced in one episode means the same in every other.
-- **The same craft.** Narration only, with characters who act but don't speak; room to think at about 115 words a minute; "Pause and think" questions; labs and scenarios on Learning Data; English and Spanish from the same code. See [PLAYBOOK.md](../../PLAYBOOK.md).
+- **The same craft.** Narration only, with characters who act but don't speak; a flowing pace of about 125 to 135 words a minute, with a natural beat after every sentence and few long stops; "Pause and think" questions; labs and scenarios on Learning Data; English and Spanish from the same code. See [PLAYBOOK.md](../../PLAYBOOK.md).
 - **The same tone.** Calm, specific and blameless: in every episode, each person did something reasonable, and the platform's job is to fail safely.
 
 Each episode ends with a few seconds that hint at the next one. Episodes stand on their own, and make most sense after *The Inner Life of Data*.

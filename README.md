@@ -21,7 +21,7 @@ site/                          the website, published to GitHub Pages as it is
                                its player is assets/film3/, and its labs and scenarios are assets/sketch/
   journey/                     the making-of story: index.md (source) and index.html (generated)
   es/                          the Spanish site, with the same layout as the English above
-films/inner-life-of-data/      the first film: everything used to make it, and breathing-cut.md, how its pauses work
+films/inner-life-of-data/      the first film: everything used to make it, breathing-cut.md, how its pauses work, and pacing-review.md, how they were tuned
 films/when-things-go-wrong/    the second film, in development: its treatment
 films/a-sharper-sketch/        the third film, on data modelling: its treatment, script, captions and source
   script.md                    narration, pictures, rigour notes and sources

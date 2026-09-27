@@ -1,16 +1,17 @@
-/* The breathing cut: room to think, shared by every language (see ../breathing-cut.md).
+/* Room to think, shared by every language (see ../breathing-cut.md and ../pacing-review.md).
+   The engine already leaves 0.7 s after each sentence, and 0.3 s where a sentence runs on into the next line (engine3.js).
    hold: extra seconds of silence after a line, while the picture keeps moving. breathe: a wordless end to the chapter, whose picture starts at the scene's "breath" cue.
    pause: extra seconds of silence before a line. The narration itself lives in narration.js. */
 const BREATH={
-"tap":{"hold":{"stored":2}},
-"in":{"hold":{"colours":2.5,"zerobus":2,"auto":2},"breathe":6},
-"sketch":{"hold":{"model":2.5,"wrong":2.5},"breathe":6},
-"refine":{"hold":{"rough":2,"tests":2,"orphan":2},"breathe":7},
-"gold":{"hold":{"products":3,"subject":2},"breathe":6},
-"layers":{"breathe":8},
-"meaning":{"hold":{"define":3,"uc":2},"breathe":6},
-"speeds":{"hold":{"now":2,"years":2},"breathe":5},
-"out":{"hold":{"events":2,"stale":3},"pause":{"twist":1},"breathe":6},
-"people":{"hold":{"fix":2,"ask":2},"breathe":5},
-"end":{"hold":{"seats":3},"breathe":2}
+"tap":{"hold":{"stored":0.8}},
+"in":{"hold":{"colours":0.3,"zerobus":0.8,"auto":0.8},"breathe":4},
+"sketch":{"hold":{"model":1.0,"concept":0.5},"breathe":4},
+"refine":{"hold":{"rough":0.5,"tests":0.8,"orphan":0.8},"breathe":4.5},
+"gold":{"breathe":4},
+"layers":{"breathe":4.5},
+"meaning":{"hold":{"define":1.0,"uc":0.5},"breathe":4},
+"speeds":{"hold":{"years":0.8},"breathe":3.5},
+"out":{"hold":{"stale":0.3},"breathe":4},
+"people":{"hold":{"fix":0.5,"ask":1.0},"breathe":3.5},
+"end":{"hold":{"seats":1.3},"breathe":1}
 };

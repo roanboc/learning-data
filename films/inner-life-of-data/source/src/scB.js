@@ -13,7 +13,7 @@ function rfProps(k,sc){const K=rfKeys(sc);let err=hash(k,51)<0.06,dup=!err&&hash
   return{cell:((hash(k,54)*24)|0),app:["sis","lms","hr","fin"][((k%4)+4)%4],err,dup,orphan,tag,rot:(hash(k,55)-0.5)*0.7,t0:k*RF2.INT};}
 scene("refine",(ctx,S,t,sc)=>{
   const c=id=>cue(sc,id),cRe=c("recipes"),cRu=c("runs"),cCl=c("closer"),cRo=c("rough"),cSo=c("sources"),cSt=c("staging"),cTe=c("tests"),cIn=c("inter"),cOr=c("orphan"),cSi=c("silver"),cTr=c("trace");
-  const cam=camAt([[0,820,520,0.95],[cCl-0.2,820,520,0.95],[cCl+1.3,400,560,2.4],[Math.max(cRo+3.8,cSo-0.1),420,560,2.4],[cSo+0.3,420,540,1.5],[cSt-0.2,420,540,1.5],[cSt+0.5,690,520,1.55],[cTe-0.1,690,520,1.55],[cTe+0.6,610,560,1.9],[cIn-0.2,610,560,1.9],[cIn+0.5,1070,520,1.55],[cOr-0.1,1070,520,1.55],[cOr+0.6,1000,560,1.9],[cSi-0.2,1000,560,1.9],[cSi+0.8,1560,480,1.35],[cTr-0.1,1560,480,1.35],[cTr+1.2,960,540,0.95],[sc.dur+2,960,540,0.97]],t);
+  const cam=camAt([[0,820,520,0.95],[cCl-0.6,820,520,0.95],[cCl+2.2,400,560,2.4],[Math.max(cRo+3.8,cSo-0.5),420,560,2.4],[cSo+0.9,420,540,1.5],[cSt-0.6,420,540,1.5],[cSt+0.9,690,520,1.55],[cTe-0.5,690,520,1.55],[cTe+0.9,610,560,1.9],[cIn-0.6,610,560,1.9],[cIn+1.0,1070,520,1.55],[cOr-0.5,1070,520,1.55],[cOr+0.9,1000,560,1.9],[cSi-0.6,1000,560,1.9],[cSi+1.2,1560,480,1.35],[cTr-0.5,1560,480,1.35],[cTr+1.6,960,540,0.95],[sc.dur+2,960,540,0.97]],t);
   bgW(ctx,S,cam);const te=rfT(sc,t),Y=RF2.Y;
   vault(ctx,30,440,190,330,LAYER.bronze,(r,cc)=>hash(r*31+cc,5)>0.7?null:APP[["sis","lms","hr","fin"][(hash(r*7+cc,6)*4)|0]].c,null);T(ctx,"Bronze",125,482,{w:800,size:22,align:"center",color:rgba(LAYER.bronze,1)});
   beam(ctx,[P(222,Y),P(1330,Y)],[210,225,255],[[40,0.03],[14,0.06]]);
@@ -46,10 +46,10 @@ scene("refine",(ctx,S,t,sc)=>{
   if(t>cTr){const u=ease(clamp((t-cTr-0.2)/2.2,0,1)),L=mk([P(1400,478),P(1330,Y),P(RF2.JOIN,Y),P(RF2.LEN,Y),P(RF2.DED,Y),P(330,Y),P(125,Y),P(-400,Y)]),n=60,sub=[];for(let i=0;i<=n;i++)sub.push(at(L,u*i/n));beam(ctx,sub,LAYER.gold,[[16,0.08],[6,0.25],[2.2,0.95]]);withA(ctx,fin(t,cTr+1.4),()=>tag(ctx,700,630,"lineage: every step recorded",LAYER.gold,{align:"center",size:17}));}
   // the breather: a fresh batch runs clean, the checks ripple, new pieces land in silver, and light runs back along the lineage to bronze
   const B=c("breath");if(sc.breathe&&t>B){
-    [B+0.6,B+3.8].forEach(s0=>{const v=(t-s0)/1.4;if(v>0&&v<1){glow(ctx,lerp(300,1190,v),662,60,GOOD,0.8*Math.sin(v*Math.PI));glow(ctx,lerp(300,1190,v),712,40,GOOD,0.4*Math.sin(v*Math.PI));}});
-    const ex=1404,ey=330,cw=444/6,chh=294/4;[1.2,2.6,4.0].forEach((d,i)=>{const s0=B+d,v=(t-s0)/0.9;if(v<0)return;const cc=ORDER24[(i*7+3)%24],tx=ex+(cc%6)*cw+cw/2,ty=ey+((cc/6)|0)*chh+chh/2;
+    [B+0.4].forEach(s0=>{const v=(t-s0)/1.4;if(v>0&&v<1){glow(ctx,lerp(300,1190,v),662,60,GOOD,0.8*Math.sin(v*Math.PI));glow(ctx,lerp(300,1190,v),712,40,GOOD,0.4*Math.sin(v*Math.PI));}});
+    const ex=1404,ey=330,cw=444/6,chh=294/4;[0.9,1.7,2.5].forEach((d,i)=>{const s0=B+d,v=(t-s0)/0.9;if(v<0)return;const cc=ORDER24[(i*7+3)%24],tx=ex+(cc%6)*cw+cw/2,ty=ey+((cc/6)|0)*chh+chh/2;
       if(v<1){const q=at(mk(bez(P(1300,Y),P(1360,Y),P(tx-100,ty),P(tx,ty),12)),ease(v));dtile(ctx,q.x,q.y,lerp(46,cw,v),0,{cell:cc,q:2},1);}else if(v<1.8)glow(ctx,tx,ty,60,LAYER.silver,0.6*(1-(v-1)/0.8));});
-    const Lm=mk([P(1400,478),P(1330,Y),P(RF2.JOIN,Y),P(RF2.LEN,Y),P(RF2.DED,Y),P(330,Y),P(125,Y)]);[B+2.0,B+4.6].forEach(s0=>{const v=(t-s0)/2.0;if(v>0&&v<1){const q=at(Lm,ease(v));glow(ctx,q.x,q.y,26,C.white,0.9);glow(ctx,q.x,q.y,90,LAYER.gold,0.45);}});}
+    const Lm=mk([P(1400,478),P(1330,Y),P(RF2.JOIN,Y),P(RF2.LEN,Y),P(RF2.DED,Y),P(330,Y),P(125,Y)]);[B+2.1].forEach(s0=>{const v=(t-s0)/2.0;if(v>0&&v<1){const q=at(Lm,ease(v));glow(ctx,q.x,q.y,26,C.white,0.9);glow(ctx,q.x,q.y,90,LAYER.gold,0.45);}});}
   vign(ctx,S);
 });
 
@@ -57,7 +57,7 @@ scene("refine",(ctx,S,t,sc)=>{
 const GW=[{d:"teaching",k:"live",x:1000},{d:"students",k:"rules",x:1480},{d:"research",k:"modern",x:1960},{d:"finance",k:"realism",x:2440}];
 scene("gold",(ctx,S,t,sc)=>{
   const c=id=>cue(sc,id),cSp=c("split"),cPr=c("products"),cSu=c("subject"),cAn=c("analysts"),cEx=c("execs"),cRp=c("reports"),cLi=c("live"),cMa=c("marts"),cXp=c("exposure"),cGo=c("gold");
-  const cam=camAt([[0,380,540,1.2],[cSp+0.3,380,540,1.2],[cSp+2.6,1470,540,0.62],[cSu-0.2,1470,540,0.62],[cAn+0.4,2660,470,1.9],[cEx-0.3,2660,470,1.9],[cEx+0.4,2180,470,1.9],[cRp-0.3,2180,470,1.9],[cRp+0.4,1700,470,1.9],[cLi-0.3,1700,470,1.9],[cLi+0.4,1220,470,1.9],[cMa-0.3,1220,470,1.9],[cMa+0.6,1700,560,1.3],[cGo-0.2,1700,560,1.3],[cGo+1.0,1470,540,0.62]].concat(sc.breathe?[[c("breath")+0.4,1470,540,0.62],[c("breath")+3.0,1230,560,1.45],[sc.dur+2,1250,560,1.5]]:[[sc.dur+2,1470,540,0.64]]),t);
+  const cam=camAt([[0,380,540,1.2],[cSp+0.3,380,540,1.2],[cSp+2.6,1470,540,0.62],[cSu-0.2,1470,540,0.62],[cAn+0.4,2660,470,1.9],[cEx-0.7,2660,470,1.9],[cEx+0.9,2180,470,1.9],[cRp-0.7,2180,470,1.9],[cRp+0.9,1700,470,1.9],[cLi-0.7,1700,470,1.9],[cLi+0.9,1220,470,1.9],[cMa-0.6,1220,470,1.9],[cMa+1.2,1700,560,1.3],[cGo-0.6,1700,560,1.3],[cGo+1.6,1470,540,0.62]].concat(sc.breathe?[[c("breath")+0.3,1470,540,0.62],[c("breath")+2.8,1230,560,1.45],[sc.dur+2,1250,560,1.5]]:[[sc.dur+2,1470,540,0.64]]),t);
   bgW(ctx,S,cam);
   glass(ctx,46,366,508,348,16,LAYER.silver,{glow:24});ctx.drawImage(master2(1),60,380,480,320);chip(ctx,300,330,"databricks","Silver","one consistent picture",{align:"center",edge:LAYER.silver});
   const scanX=60+((t*0.35)%1)*480;ctx.save();ctx.globalCompositeOperation="lighter";ctx.fillStyle="rgba(200,230,255,0.5)";ctx.fillRect(scanX-2,380,4,320);ctx.restore();
@@ -73,15 +73,15 @@ scene("gold",(ctx,S,t,sc)=>{
   withA(ctx,fin(t,cMa+0.2)*(1-sstep(cGo+0.6,cGo+1.2,t)),()=>{const h=plaque(ctx,1500,600,400,[["DATA PRODUCT","Census enrolments"],["DBT MART","fct_census_enrolments · contract","dbt"],["DBT EXPOSURE","Government census report","dbt"],["OWNER","Student services"]],DOM.students.c);
     const xa=fin(t,cXp);if(xa>0){ctx.save();ctx.globalAlpha*=xa;ctx.shadowColor=rgba(DBT,0.9);ctx.shadowBlur=18;ctx.strokeStyle=rgba(DBT,0.95);ctx.lineWidth=2.5;rr(ctx,1508,600+16+2*52-6,384,52,10);ctx.stroke();ctx.restore();}});
   // the breather: in the Teaching wing, a live data product shows its plaque, and its exposure lights up
-  const B=c("breath");if(sc.breathe&&t>B+2.2)withA(ctx,fin(t,B+2.2,0.6)*(1-sstep(sc.dur-0.5,sc.dur,t)),()=>{plaque(ctx,1012,604,416,[["DATA PRODUCT","Rooms in use now"],["DBT MART","fct_rooms_live · contract","dbt"],["DBT EXPOSURE","Campus operations screen","dbt"],["OWNER","Timetabling"]],DOM.teaching.c);
-    const xa=fin(t,B+3.4);if(xa>0){ctx.save();ctx.globalAlpha*=xa;ctx.shadowColor=rgba(DBT,0.9);ctx.shadowBlur=18;ctx.strokeStyle=rgba(DBT,0.95);ctx.lineWidth=2.5;rr(ctx,1020,604+16+2*52-6,400,52,10);ctx.stroke();ctx.restore();}});
+  const B=c("breath");if(sc.breathe&&t>B+1.3)withA(ctx,fin(t,B+1.3,0.6)*(1-sstep(sc.dur-0.5,sc.dur,t)),()=>{plaque(ctx,1012,604,416,[["DATA PRODUCT","Rooms in use now"],["DBT EXPOSURE","Campus operations screen","dbt"]],DOM.teaching.c);
+    const xa=fin(t,B+2.3);if(xa>0){ctx.save();ctx.globalAlpha*=xa;ctx.shadowColor=rgba(DBT,0.9);ctx.shadowBlur=18;ctx.strokeStyle=rgba(DBT,0.95);ctx.lineWidth=2.5;rr(ctx,1020,604+16+1*52-6,400,52,10);ctx.stroke();ctx.restore();}});
   vign(ctx,S);
 });
 
 /* ---------- 5. The layers together ---------- */
 scene("layers",(ctx,S,t,sc)=>{
   const c=id=>cue(sc,id),cBa=c("back"),cAp=c("appdom"),cBs=c("bsg"),cBu=c("busdom"),cDg=c("dbtgov"),cDx=c("dbx"),dB=nextCue(sc,"bsg")-cBs;
-  const cam=sc._cam||camAt([[0,1135,560,1.1],[cBa+2.2,1135,540,0.88],[cBu-0.2,1135,540,0.88],[cBu+0.8,1700,600,1.2],[cDg-0.3,1700,600,1.2],[cDg+0.8,860,320,1.35],[cDx-0.2,860,320,1.35],[cDx+0.8,1000,690,1.1],[sc.dur+2,1135,560,0.9]],t);
+  const cam=sc._cam||camAt([[0,1135,560,1.1],[cBa+2.2,1135,540,0.88],[cBu-0.6,1135,540,0.88],[cBu+1.2,1700,600,1.2],[cDg-0.7,1700,600,1.2],[cDg+1.3,860,320,1.35],[cDx-0.6,860,320,1.35],[cDx+1.2,1000,690,1.1],[sc.dur+2,1135,560,0.9]],t);
   bgW(ctx,S,cam);
   withA(ctx,fin(t,cBa),()=>{glass(ctx,120,190,1480,236,20,DBT,{glow:18,ea:0.5});logo(ctx,"dbt",146,214,46);T(ctx,"dbt",146,302,{w:800,size:34});T(ctx,"recipes, tests,",146,334,{w:500,size:19,color:rgba(SOFT,0.95)});T(ctx,"docs, lineage",146,358,{w:500,size:19,color:rgba(SOFT,0.95)});
     [[540,"sources"],[860,"staging"],[1060,"intermediate"],[1260,"marts"],[1470,"exposures"]].forEach(([x,n])=>T(ctx,n.toUpperCase(),x,226,{w:800,size:14,align:"center",color:rgba(DBT,0.85)}));
@@ -107,7 +107,7 @@ scene("layers",(ctx,S,t,sc)=>{
     const ys=[530,650,770];ys.forEach(y=>lane(ctx,[P(1908,y),P(1934,y)],[235,240,255],0.8));spawn(t,0.8,0.8,0.3,u=>{glow(ctx,1908,lerp(513,813,u),10,C.white,0.9);});
     [["Databricks Apps","for staff and students"],["Genie","ask in plain words"],["Dashboards and SQL","for analysts and leaders"]].forEach(([a,b],k)=>{if(cp>0)glow(ctx,2080,ys[k],170,LAYER.gold,0.35*cp);chip(ctx,1934,ys[k],"databricks",a,b,{ts:19,ss:15,lh:28});});});
   // the breather: one pulse of light travels through the whole platform, from a source system to Genie
-  const Bb=cue(sc,"breath");if(sc.breathe&&t>Bb){const path=mk([P(190,513),P(400,617),P(540,617),P(900,617),P(1260,617),P(1440,560),P(1675,513),P(1908,513),P(1908,650),P(2090,650)]),u=ease(clamp((t-Bb-0.4)/(sc.breathe-1.6),0,1)),q=at(path,u),fa=1-sstep(sc.dur-0.8,sc.dur,t);
+  const Bb=cue(sc,"breath");if(sc.breathe&&t>Bb){const path=mk([P(190,513),P(400,617),P(540,617),P(900,617),P(1260,617),P(1440,560),P(1675,513),P(1908,513),P(1908,650),P(2090,650)]),u=ease(clamp((t-Bb-0.3)/(sc.breathe-1.0),0,1)),q=at(path,u),fa=1-sstep(sc.dur-0.8,sc.dur,t);
     glow(ctx,q.x,q.y,50,C.white,0.95*fa);glow(ctx,q.x,q.y,160,LAYER.gold,0.45*fa);const sub=[];for(let i=0;i<=40;i++)sub.push(at(path,u*i/40));beam(ctx,sub,LAYER.gold,[[14,0.06*fa],[5,0.22*fa],[2,0.9*fa]]);}
   vign(ctx,S);
 });

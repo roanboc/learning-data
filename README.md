@@ -17,10 +17,13 @@ site/                          the website, published to GitHub Pages as it is
                                quiz.js (the scenarios), think.js ("Pause and think" in the film), path.js (the three-step path on every page, with progress),
                                and their words in learn.en.js and learn.es.js
   films/inner-life-of-data/    redirects the old player address to the home page
+  sketch/                      film three, A Sharper Sketch: Watch, Sharpen it (labs/, six labs) and Make the call (scenarios/, twelve scenarios);
+                               its player is assets/film3/, and its labs and scenarios are assets/sketch/
   journey/                     the making-of story: index.md (source) and index.html (generated)
   es/                          the Spanish site, with the same layout as the English above
 films/inner-life-of-data/      the first film: everything used to make it, breathing-cut.md, how its pauses work, and pacing-review.md, how they were tuned
 films/when-things-go-wrong/    the second film, in development: its treatment
+films/a-sharper-sketch/        the third film, on data modelling: its treatment, script, captions and source
   script.md                    narration, pictures, rigour notes and sources
   captions/                    captions for video platforms: en.srt, en.vtt, es.srt, es.vtt
   source/                      the code that generates the film in each language, and how to rebuild it

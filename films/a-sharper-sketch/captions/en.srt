@@ -1,0 +1,223 @@
+1
+00:00:03,800 --> 00:00:10,554
+In the first film, we drew a sketch of the university: a student, a class, an enrolment, a term and a course.
+
+2
+00:00:11,254 --> 00:00:15,831
+It was an oversimplification. Good enough to start, not good enough to count.
+
+3
+00:00:17,531 --> 00:00:22,775
+That's normal. Every model starts simple, and gets sharper when a real question needs it.
+
+4
+00:00:25,475 --> 00:00:29,789
+The day after census date, the Head of School asks Genie a simple question.
+
+5
+00:00:30,489 --> 00:00:34,999
+How many students were enrolled in Data Science 101 on census date?
+
+6
+00:00:35,699 --> 00:00:41,272
+Genie says 131. The certified census report says 118.
+
+7
+00:00:43,472 --> 00:00:46,428
+Both come from clean data. Every test passed.
+
+8
+00:00:47,128 --> 00:00:49,925
+The difference isn't in the data. It's in the meaning.
+
+9
+00:00:50,625 --> 00:00:56,518
+So before we change anything, we ask a wider question: how does this kind of business generally work?
+
+10
+00:00:57,218 --> 00:01:02,657
+In many industries, someone has already modelled it, and their model makes a good first template.
+
+11
+00:01:03,357 --> 00:01:08,213
+Often there's more than one to choose from, so which one you pick, and why, matters too.
+
+12
+00:01:08,913 --> 00:01:16,998
+TCSI could be one of the choices: it's public, and it describes the data Australian universities report to government.
+
+13
+00:01:17,698 --> 00:01:25,937
+Many universities actually use MortarCAPS, the sector's own data standard. Here, we'll check our sketch against TCSI.
+
+14
+00:01:26,637 --> 00:01:32,953
+It's a reference to check against, not a model to copy. We'll see where it fits our business, and where it doesn't.
+
+15
+00:01:39,253 --> 00:01:41,249
+First question: what is a class?
+
+16
+00:01:41,949 --> 00:01:48,091
+Lay the reference over our sketch, and it has no class at all. It has units of study, and enrolments in them.
+
+17
+00:01:48,791 --> 00:01:50,909
+Our one box was hiding three things.
+
+18
+00:01:52,409 --> 00:01:56,020
+The unit: Data Science 101, the subject itself.
+
+19
+00:01:56,720 --> 00:02:02,994
+The offering: that unit, in one teaching period, at one campus. This is what students enrol in.
+
+20
+00:02:03,694 --> 00:02:08,328
+And the class: the Tuesday 9 am tutorial, a place in the timetable.
+
+21
+00:02:09,028 --> 00:02:12,990
+Genie counted places in tutorials, and some students sit in two.
+
+22
+00:02:13,690 --> 00:02:17,628
+So say exactly what one row stands for. That's called the grain.
+
+23
+00:02:23,128 --> 00:02:25,393
+Next: where does the census date live?
+
+24
+00:02:26,093 --> 00:02:29,057
+Our sketch put it on the term: one date for everyone.
+
+25
+00:02:29,757 --> 00:02:35,752
+The reference records it with each unit enrolment, because each unit of study has its own census date.
+
+26
+00:02:36,452 --> 00:02:42,810
+A summer intensive of Data Science 101 has a census date weeks away from the semester's.
+
+27
+00:02:44,510 --> 00:02:49,419
+Put each detail on the thing it truly describes. Here, we adopt the reference.
+
+28
+00:02:51,919 --> 00:02:54,388
+Now, two students appear twice in the count.
+
+29
+00:02:55,088 --> 00:02:58,710
+Each is studying a double degree: data science, and business.
+
+30
+00:02:59,410 --> 00:03:04,220
+Our sketch said a student belongs to one course. That's not how the university works.
+
+31
+00:03:04,920 --> 00:03:11,230
+The reference already has the answer: a course admission. One student, in one course, from one start date.
+
+32
+00:03:13,130 --> 00:03:18,599
+Each unit enrolment counts towards one course admission, so each student is counted once.
+
+33
+00:03:19,299 --> 00:03:23,695
+When two things connect many to many, the link often deserves its own box.
+
+34
+00:03:26,195 --> 00:03:28,198
+Last question: enrolled when?
+
+35
+00:03:28,898 --> 00:03:33,146
+Genie counted today. The census report counted on census date.
+
+36
+00:03:33,846 --> 00:03:39,061
+Enrolments change. A student is waitlisted, then enrolled, and later withdraws.
+
+37
+00:03:39,761 --> 00:03:45,437
+The reference keeps each enrolment's current status. We need its history, so we extend the model.
+
+38
+00:03:46,137 --> 00:03:51,386
+Each change is kept with its date, and the census count becomes a snapshot of one day.
+
+39
+00:03:54,886 --> 00:03:57,573
+The sketch is sharper now. But it's still a sketch.
+
+40
+00:03:58,273 --> 00:04:03,916
+This is the conceptual model: the things that matter, and how they connect, agreed with the business.
+
+41
+00:04:04,616 --> 00:04:11,683
+Zoom in, and it becomes the logical model: what identifies each thing, its details, and how many of each.
+
+42
+00:04:13,383 --> 00:04:18,560
+Zoom in again, and it becomes the physical model: the actual tables in the platform.
+
+43
+00:04:20,260 --> 00:04:27,720
+Same meaning, three levels of detail. The business owns the first, engineers own the last, and all three must agree.
+
+44
+00:04:29,220 --> 00:04:32,364
+How to build those tables is a story for another film.
+
+45
+00:04:34,864 --> 00:04:37,899
+Lift the reference away, and you can see the whole fit.
+
+46
+00:04:38,599 --> 00:04:42,177
+Check: before you invent something, look for it in a reference model.
+
+47
+00:04:42,877 --> 00:04:46,667
+Adopt: where it fits the business, use its ideas and its words.
+
+48
+00:04:47,967 --> 00:04:51,666
+Extend: where the business needs more, add it, in the same style.
+
+49
+00:04:52,966 --> 00:04:59,168
+Record: write down every difference and why, so the next person knows what is standard and what is ours.
+
+50
+00:05:00,868 --> 00:05:06,774
+A reference is a starting point, not a cage. Where the business is truly different, the business wins.
+
+51
+00:05:09,274 --> 00:05:10,764
+The Head of School asks again.
+
+52
+00:05:11,464 --> 00:05:16,724
+This time, Genie asks back: enrolled on census date, in the Semester 1 offering?
+
+53
+00:05:17,424 --> 00:05:20,957
+Then it answers: 118, and shows how it counted.
+
+54
+00:05:22,857 --> 00:05:26,478
+The sketch has a new version, and a note that says why it changed.
+
+55
+00:05:27,178 --> 00:05:30,884
+It won't be the last. Models evolve: not often, but always.
+
+56
+00:05:31,584 --> 00:05:33,795
+Check the reference. Fit it to the business.

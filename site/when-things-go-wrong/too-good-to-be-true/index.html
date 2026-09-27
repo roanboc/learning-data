@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Too good to be true · When things go wrong · Learning Data</title>
+<meta name="description" content="A 6-minute film about a number that jumps 38% overnight, what a warning and an error do about it, and why stale and labelled beats fresh and wrong.">
+<meta property="og:title" content="Too good to be true · When things go wrong · Learning Data"><meta property="og:description" content="Applications jump 38% overnight. A test on the total decides whether anyone acts on the number."><meta property="og:image" content="https://roanboc.github.io/learning-data/assets/too-good-to-be-true-poster.jpg">
+<link rel="alternate" hreflang="en" href="https://roanboc.github.io/learning-data/when-things-go-wrong/too-good-to-be-true/"><link rel="alternate" hreflang="es" href="https://roanboc.github.io/learning-data/es/when-things-go-wrong/too-good-to-be-true/">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../../"><img src="../../assets/favicon.svg" alt="">Learning Data</a><nav aria-label="Site"><a href="../../">Start here</a><a href="../../topics/" aria-current="true">Topics</a><a class="nav-extra" href="../../journey/">Making of</a><a class="nav-extra" href="https://github.com/roanboc/learning-data">GitHub</a><span class="lang" role="group" aria-label="Language"><a href="./" aria-current="true" lang="en">EN</a><a href="../../es/when-things-go-wrong/too-good-to-be-true/" lang="es" hreflang="es">ES</a></span></nav></div></header>
+<main>
+<section class="hero">
+<p class="eyebrow crumbs"><a href="../../topics/">Topics</a> › <a href="../">When things go wrong</a></p>
+<h1>Too good to be true: what a test on a number is for</h1>
+<p class="lead">Applications for next year jump 38% overnight, and a committee is about to plan 600 extra places. Every row check passes. Watch three versions of the same Tuesday, with no test, a warning and an error, then follow the jump back to a sync that copied a week of applications twice.</p>
+<p class="meta-row"><span>6 min</span><span>3 labs</span><span>10 scenarios</span><span>Pause and think</span><span>English captions</span></p>
+<p class="builds-on">Builds on <i>The Inner Life of Data</i> · <a href="../../#t=108">Refining with dbt</a> and <a href="../../#t=168">Gold</a></p>
+<ol class="path" data-store="ld-too-good-to-be-true" data-labs="3" data-quiz="10" data-text='{"watched":"Watched","labs":"{n} of 3 labs explored","quiz":"{n} of 10 answered · {ok} right"}'>
+<li><a href="./#watch" aria-current="step"><span class="n"><b>1</b></span><b>Watch</b><span>A 6 min film</span></a></li>
+<li><a href="./labs/"><span class="n"><b>2</b></span><b>Take it apart</b><span>Three hands-on labs</span></a></li>
+<li><a href="./scenarios/"><span class="n"><b>3</b></span><b>Make the call</b><span>Ten real situations</span></a></li>
+</ol>
+</section>
+
+<section class="module" id="watch" data-store="ld-too-good-to-be-true" aria-labelledby="watch-h">
+<div class="mhead"><div><p class="step">Watch</p><h2 id="watch-h">Too good to be true</h2><p>A 6-minute film with narration, music and sound. Press Play, or jump to a chapter. With <b>Pause and think</b> on, the film stops at the end of four chapters and asks you one question each time.</p></div></div>
+<div class="player" data-labs="labs/">
+<audio id="snd" preload="metadata" src="../../assets/too-good-to-be-true/soundtrack.mp3"></audio><div class="poster"><img src="../../assets/too-good-to-be-true-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Play the film · 6 min</button><button type="button" class="think-badge" data-think>Play with pauses to think</button></div></div><canvas id="film" width="1280" height="720" aria-label="Animated film: Too good to be true"></canvas>
+<div class="bar"><button id="play">Play</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Seek"><span id="time">0:00</span><button id="think" aria-pressed="false" title="Stop at the end of four chapters, with one question each">Pause and think</button><button id="cc" class="on" aria-pressed="true">Captions</button><button id="fs">Full screen</button></div>
+</div>
+<div class="chapters" id="chapters" aria-label="Chapters"></div>
+<div class="watch-foot">
+<div class="notes"><p><b>How to read it.</b> Light is data, as in <i>The Inner Life of Data</i>. Each person's outline shows their side: cyan for technical, gold for business. The gauge beside a number is a test on it: amber is a warning, which lets the data through; red is an error, which stops the build. Lilac is the admissions system. The university, people and numbers are fictional. The narration is a synthetic voice.</p>
+<p>English captions are on by default; turn them off with Captions. Caption files for other players: <a href="https://github.com/roanboc/learning-data/tree/main/films/when-things-go-wrong/2-too-good-to-be-true/captions">en.srt and en.vtt</a>.</p></div>
+<div class="cta"><a class="btn" href="https://github.com/roanboc/learning-data/releases/latest/download/too-good-to-be-true.mp4">Download the video</a><a class="btn" href="https://github.com/roanboc/learning-data/blob/main/films/when-things-go-wrong/2-too-good-to-be-true/script.md">Read the script</a></div>
+</div>
+<template id="next-panel"><div class="think-card"><p class="think-k">Where next?</p><h3>You've seen what a test on a number is for. Now try it yourself.</h3>
+<div class="next-opts"><a class="btn primary" href="labs/">Take it apart: 3 hands-on labs →</a><a class="btn" href="scenarios/">Make the call: 10 situations</a><a class="btn" href="../silent-change/">Changes and data contracts · Silent change</a></div>
+<div class="think-foot"><button type="button" class="btn" data-again>Watch again</button><a class="think-lab" href="../../topics/">All topics →</a></div></div></template>
+</section>
+
+<section class="module" id="think-it-through" aria-labelledby="think-h">
+<div class="mhead"><div><h2 id="think-h">Think it through</h2><p>The four Pause and think questions, for a class or a team. Open one to see the answer.</p></div></div>
+<div id="think-list"></div>
+</section>
+
+<section class="module" id="further" aria-labelledby="further-h">
+<div class="mhead"><div><h2 id="further-h">Go further</h2></div></div>
+<div class="topic-grid" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
+<article class="topic-card">
+<img src="../../assets/silent-change-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Changes and data contracts</p>
+<h3><a href="../silent-change/">Silent change</a></h3>
+<p>A new enrolment status reaches the data overnight, and each side of the university saw only half of the change.</p>
+<p class="meta">5½ min · Pause and think · When things go wrong</p>
+<p class="tc-progress" data-progress="ld-silent-change" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Start here</p>
+<h3><a href="../../">The Inner Life of Data</a></h3>
+<p>Follow one enrolment from a tap on a phone to a decision, through Databricks and dbt.</p>
+<p class="meta">7½ min · 8 labs · 12 scenarios · English and Spanish</p>
+<p class="tc-progress" data-progress="ld" data-labs="8" data-quiz="12" hidden></p>
+</div>
+</article>
+</div>
+<div class="cta"><a class="btn" href="../">More from When things go wrong →</a><a class="btn" href="../../topics/">All topics →</a></div>
+</section>
+</main>
+<footer><p class="foot-links"><a href="../../">Start here</a> · <a href="../../topics/">Topics</a> · <a href="../../journey/">Making of</a> · <a href="https://github.com/roanboc/learning-data">GitHub</a></p><p>The university, people, numbers and records in the film, the labs and the scenarios are fictional. The narration is a synthetic voice. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
+<script src="../../assets/too-good-to-be-true/film.js"></script>
+<script src="../../assets/too-good-to-be-true/think.en.js"></script>
+<script src="../../assets/learn/think.js"></script>
+<script src="../../assets/learn/path.js"></script>
+<script src="../../assets/learn/next.js"></script>
+</body>
+</html>

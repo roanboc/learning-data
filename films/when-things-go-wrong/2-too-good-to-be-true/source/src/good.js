@@ -1,22 +1,26 @@
 /* ===== When things go wrong · Too good to be true: this episode's components =====
-   Drawn with the first film's style (glass, luminous edges, one typeface), Silent change's components (silent.js: the dashboard's
+   Drawn with The Inner Life of Data's style (glass, luminous edges, one typeface), Silent change's components (silent.js: the dashboard's
    palette DB and dbCard, messages, video-call tiles, the clock chip) and the series' characters (people.js).
    The style frames in ../../frames/ draw with these, so what they show is what the film will use. */
 const ADM=[190,150,255];                  // the admissions system's colour, like each source system's in The Inner Life of Data
 const RED=BAD,AMB=[255,190,90],GRN=GOOD;
 const WARN_AT=10,ERR_AT=25,G_MAX=40;      // the contract's limits on the overnight change, in %, and the gauge's full scale
-const fmt=n=>Math.round(n).toLocaleString("en-US");
+const fmtN=n=>Math.round(n).toLocaleString("en-US");
 const bandCol=(v,o)=>{o=o||{};const a=Math.abs(v);return a>ERR_AT&&!o.warnOnly&&!o.noRed?RED:a>WARN_AT?AMB:GRN;};
+
+// the week's applications in bronze: tiles in pairs where the sync copied them twice
+const pairCells=(dup,k)=>(r,c)=>{const h=hash(r*29+c,4);if(h>0.82)return null;return dup&&c%2===1&&r<k?[235,215,255]:ADM;};
 
 /* the gauge: a test on a number, with a warning band (amber) and an error band (red). v is the overnight change in %.
    o.warnOnly: the test is only a warning, so there is no red band; o.none: no test at all, an empty dashed dial */
 function gauge(ctx,cx,cy,r,v,o){o=o||{};const a0=Math.PI,a1=2*Math.PI,ang=p=>a0+(a1-a0)*clamp(p/G_MAX,0,1),lw=r*0.16;
   if(o.none){ctx.save();ctx.setLineDash([10,10]);ctx.strokeStyle=rgba(SOFT,0.45);ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,cy,r,a0,a1);ctx.stroke();ctx.restore();
-    T(ctx,"no test",cx,cy-r*0.25,{w:700,size:r*0.2,align:"center",color:rgba(SOFT,0.8)});return;}
+    T(ctx,o.noneText||"no test",cx,cy-r*0.25,{w:700,size:r*0.2,align:"center",color:rgba(SOFT,0.8)});return;}
   const bands=o.warnOnly?[[0,WARN_AT,GRN],[WARN_AT,G_MAX,AMB]]:[[0,WARN_AT,GRN],[WARN_AT,ERR_AT,AMB],[ERR_AT,G_MAX,RED]];
   ctx.save();ctx.lineCap="butt";
-  bands.forEach(([p0,p1,c])=>{const on=Math.abs(v)>=p0&&(Math.abs(v)<p1||p1===G_MAX);ctx.shadowColor=rgba(c,0.9);ctx.shadowBlur=on?22:6;ctx.strokeStyle=rgba(c,on?0.95:0.4);ctx.lineWidth=lw;
-    ctx.beginPath();ctx.arc(cx,cy,r,ang(p0)+0.012,ang(p1)-0.012);ctx.stroke();});
+  // o.reveal (0 to 3): the bands draw in one after another, as the narration names them
+  bands.forEach(([p0,p1,c],i)=>{const on=Math.abs(v)>=p0&&(Math.abs(v)<p1||p1===G_MAX),ra=o.reveal==null?1:clamp(o.reveal-i,0,1);if(ra<=0)return;ctx.globalAlpha=ra;ctx.shadowColor=rgba(c,0.9);ctx.shadowBlur=on?22:6;ctx.strokeStyle=rgba(c,on?0.95:0.4);ctx.lineWidth=lw;
+    ctx.beginPath();ctx.arc(cx,cy,r,ang(p0)+0.012,ang(p0)+(ang(p1)-ang(p0))*ease(ra)-0.012);ctx.stroke();ctx.globalAlpha=1;});
   ctx.shadowBlur=0;
   // ticks at the two limits
   [WARN_AT].concat(o.warnOnly?[]:[ERR_AT]).forEach(p=>{const q=ang(p);ctx.strokeStyle=rgba(INK,0.8);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(cx+Math.cos(q)*(r-lw*0.9),cy+Math.sin(q)*(r-lw*0.9));ctx.lineTo(cx+Math.cos(q)*(r+lw*0.9),cy+Math.sin(q)*(r+lw*0.9));ctx.stroke();
@@ -39,7 +43,7 @@ function numberPainting(ctx,x,y,w,h,o){o=o||{};const k=h/440;
     T(ctx,o.noteText||"Last good data as of Mon 02:00 · Checking an unusual change",x+72*k,y+59*k,{w:700,size:20*k,color:"rgba(255,226,170,1)"});});
   const gw=o.gauge===false?0:w*0.36,nx=x+40*k;
   T(ctx,o.title||"Applications for next year",nx,top+44*k,{w:700,size:30*k,color:"rgba(255,236,190,0.98)"});
-  T(ctx,fmt(o.num==null?8200:o.num),nx,top+190*k,{w:800,size:132*k,color:o.wrong?"rgba(255,244,214,1)":"rgba(255,244,214,1)"});
+  T(ctx,fmtN(o.num==null?8200:o.num),nx,top+190*k,{w:800,size:132*k,color:o.wrong?"rgba(255,244,214,1)":"rgba(255,244,214,1)"});
   if(o.delta!=null){const s=(o.delta>=0?"▲ ":"▼ ")+Math.abs(o.delta).toFixed(Math.abs(o.delta)<10?1:0)+"% overnight";T(ctx,s,nx+4*k,top+240*k,{w:700,size:26*k,color:rgba(o.deltaCol||(Math.abs(o.delta)>WARN_AT?AMB:GRN),1)});}
   T(ctx,o.stamp||"so far · intake 2027",nx+4*k,top+(o.delta!=null?280:240)*k,{w:500,size:21*k,color:"rgba(230,210,160,0.85)"});
   // a sparkline of the last fourteen nights
@@ -60,9 +64,9 @@ function appContract(ctx,x,y,w,o){o=o||{};const h=o.h||330,hi=o.hi||0;glass(ctx,
     key("Overnight change",y+188);led(ctx,vx,y+176,14,14,AMB);T(ctx,"warn above "+WARN_AT+"%",vx+24,y+190,{w:700,size:20});
     led(ctx,vx+210,y+176,14,14,RED);T(ctx,"error above "+ERR_AT+"%",vx+234,y+190,{w:700,size:20});
     T(ctx,"closing dates: real spikes up to about 15%",vx,y+220,{w:500,size:16,color:rgba(SOFT,0.95)});});
-  ctx.strokeStyle="rgba(170,200,245,0.18)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+20,y+250);ctx.lineTo(x+w-20,y+250);ctx.stroke();
-  key("Owners",y+284);[["leila","produces"],["rosa","produces"],["sam","uses"],["david","uses"]].forEach(([id,does],i)=>{const P=PEOPLE[id],px=vx+i*((w-250)/4);
-    led(ctx,px,y+272,12,12,P.edge);T(ctx,P.name.replace("Prof. ","").split(" ")[0],px+20,y+284,{w:700,size:19,color:rgba(P.edge,0.95)});T(ctx,does,px+20,y+308,{w:500,size:14,color:rgba(SOFT,0.9)});});}
+  ctx.strokeStyle="rgba(170,200,245,0.18)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+20,y+h-58);ctx.lineTo(x+w-20,y+h-58);ctx.stroke();
+  key("Owners",y+h-36);[["leila","produces"],["rosa","produces"],["sam","uses"],["david","uses"]].forEach(([id,does],i)=>{const P=PEOPLE[id],px=vx+i*((w-250)/4);
+    led(ctx,px,y+h-48,12,12,P.edge);T(ctx,P.name.replace("Prof. ","").split(" ")[0],px+20,y+h-36,{w:700,size:19,color:rgba(P.edge,0.95)});T(ctx,does,px+20,y+h-12,{w:500,size:14,color:rgba(SOFT,0.9)});});}
 
 /* a row check: a small pill with a tick or a cross. state: "pass", "fail" or "idle" */
 function checkPill(ctx,x,y,s,state,o){o=o||{};const c=state==="pass"?GRN:state==="fail"?RED:SOFT,size=o.size||19,w=tw(ctx,s,size,700,o.mono?"mono":undefined)+64,h=size+22;
@@ -84,8 +88,8 @@ function committeeDash(ctx,x,y,w,h,o){o=o||{};const s=o.s||1;glass(ctx,x-10,y-10
     T(ctx,"⚠  "+(o.noteText||"Last good data as of Mon 02:00 · Checking an unusual change"),x+30*s,cy+28*s,{w:600,size:15*s,color:DB.warn});cy+=56*s;}
   const cw=w-28*s,ch=y+h-cy-14*s;dbCard(ctx,x+14*s,cy,cw,ch);const p=18*s,num=o.num==null?8200:o.num;
   T(ctx,"Applications for next year",x+14*s+p,cy+p+16*s,{w:700,size:18*s,color:DB.text});T(ctx,"gold.applications_daily",x+14*s+p,cy+p+38*s,{w:500,size:13*s,f:"mono",color:DB.muted});
-  T(ctx,fmt(num),x+14*s+p,cy+p+112*s,{w:700,size:74*s,color:DB.text});
-  if(o.delta!=null){const up=o.delta>=0,dc=Math.abs(o.delta)>WARN_AT?DB.green:DB.muted;T(ctx,(up?"▲ ":"▼ ")+Math.abs(o.delta).toFixed(Math.abs(o.delta)<10?1:0)+"% vs yesterday",x+14*s+p+tw(ctx,fmt(num),74*s,700)+16*s,cy+p+106*s,{w:700,size:17*s,color:dc});}
+  T(ctx,fmtN(num),x+14*s+p,cy+p+112*s,{w:700,size:74*s,color:DB.text});
+  if(o.delta!=null){const up=o.delta>=0,dc=Math.abs(o.delta)>WARN_AT?DB.green:DB.muted;T(ctx,(up?"▲ ":"▼ ")+Math.abs(o.delta).toFixed(Math.abs(o.delta)<10?1:0)+"% vs yesterday",x+14*s+p+tw(ctx,fmtN(num),74*s,700)+16*s,cy+p+106*s,{w:700,size:17*s,color:dc});}
   // the last fourteen days; a jump at the end when the number is wrong
   const tr=o.trend||[7240,7310,7390,7460,7520,7610,7700,7760,7840,7910,7990,8060,8130,num],sx=x+14*s+p,sy=cy+ch-p-10*s,sw=cw-2*p,sh=Math.max(20,ch-150*s-p),lo=6800,hi=Math.max(...tr)*1.04;
   if(sh>24){ctx.beginPath();tr.forEach((q,i)=>{const px=sx+sw*i/(tr.length-1),py=sy-sh*(q-lo)/(hi-lo);i?ctx.lineTo(px,py):ctx.moveTo(px,py);});ctx.lineTo(sx+sw,sy);ctx.lineTo(sx,sy);ctx.closePath();ctx.fillStyle="rgba(7,122,157,0.10)";ctx.fill();
@@ -95,7 +99,7 @@ function committeeDash(ctx,x,y,w,h,o){o=o||{};const s=o.s||1;glass(ctx,x-10,y-10
     const pts=[[0.08,0.1],[0.3,0.34],[0.26,0.46],[0.52,0.62],[0.49,0.74],[0.8,0.96]];pts.forEach(([u,v],i)=>{const px=x+u*w,py=y+v*h;i?ctx.lineTo(px,py):ctx.moveTo(px,py);});ctx.moveTo(x+0.3*w,y+0.34*h);ctx.lineTo(x+0.44*w,y+0.28*h);ctx.moveTo(x+0.52*w,y+0.62*h);ctx.lineTo(x+0.64*w,y+0.58*h);ctx.stroke();ctx.restore();});}
 
 /* the planner's board: what the committee decided */
-function board(ctx,x,y,w,lines,c){const h=28+lines.length*40;glass(ctx,x,y,w,h,16,c,{glow:12,ea:0.7,fill:"rgba(8,14,28,0.9)"});
+function planBoard(ctx,x,y,w,lines,c){const h=28+lines.length*40;glass(ctx,x,y,w,h,16,c,{glow:12,ea:0.7,fill:"rgba(8,14,28,0.9)"});
   lines.forEach((l,i)=>{const [s,strike]=Array.isArray(l)?l:[l];T(ctx,s,x+22,y+44+i*40,{w:i?600:800,size:i?20:26,color:i?rgba(INK,0.95):rgba(c,1)});
     if(strike){const lw=tw(ctx,s,i?20:26,i?600:800);ctx.strokeStyle=rgba(RED,0.95);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x+18,y+37+i*40);ctx.lineTo(x+26+lw,y+37+i*40);ctx.stroke();}});return h;}
 
@@ -110,4 +114,4 @@ function alertChannel(ctx,x,y,w,h,n,o){o=o||{};glass(ctx,x,y,w,h,18,[170,205,255
 /* a version pane: the table at one moment, as time travel shows it */
 function versionPane(ctx,x,y,w,h,ver,when,num,c,note){glass(ctx,x,y,w,h,18,c,{glow:16,ea:0.8,fill:"rgba(8,14,28,0.92)"});
   T(ctx,"version "+ver,x+22,y+36,{w:700,size:18,f:"mono",color:rgba(c,1)});T(ctx,when,x+w-22,y+36,{w:600,size:18,align:"right",color:rgba(SOFT,0.95)});
-  T(ctx,fmt(num),x+22,y+h*0.62,{w:800,size:Math.min(64,h*0.36)});if(note)T(ctx,note,x+22,y+h-20,{w:600,size:17,color:rgba(SOFT,0.95)});}
+  T(ctx,fmtN(num),x+22,y+h*0.62,{w:800,size:Math.min(64,h*0.36)});if(note)T(ctx,note,x+22,y+h-20,{w:600,size:17,color:rgba(SOFT,0.95)});}

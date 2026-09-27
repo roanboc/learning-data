@@ -7,7 +7,7 @@
    - A chapter link (#t=89) scrolls to #watch, with or without a stepper.
    - On the home page only (data-home), old one-page links (#explore, #practise) go to their own pages.
    Prefixes: "ld" The Inner Life of Data; "ld3" A Sharper Sketch (a historical name: renaming it would erase visitors' progress);
-   "ld-silent-change" Silent change. */
+   "ld-silent-change" Silent change; "ld-too-good-to-be-true" Too good to be true (its labs and scenarios are in assets/too-good-to-be-true/learn.js). */
 (()=>{"use strict";
 const store=p=>({get:(k,d)=>{try{const v=localStorage.getItem(p+":"+k);return v==null?d:JSON.parse(v);}catch(e){return d;}},
   set:(k,v)=>{try{localStorage.setItem(p+":"+k,JSON.stringify(v));}catch(e){}}});

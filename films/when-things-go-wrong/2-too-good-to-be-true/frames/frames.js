@@ -9,8 +9,6 @@ const FRAMES=[["gauge","The gauge on the painting","chapter 2 · The number and 
 const sc1=ctx=>{ctx.setTransform(1,0,0,1,0,0);};
 // a clock chip like Silent change's, without its camera
 function clock(ctx,s,sub){sc1(ctx);clockChip(ctx,1,s,sub,1);}
-// the week's applications in bronze: tiles in pairs where the sync copied them twice
-const pairCells=(dup,k)=>(r,c)=>{const h=hash(r*29+c,4);if(h>0.82)return null;return dup&&c%2===1&&r<k?[235,215,255]:ADM;};
 
 /* 1 · the gauge on the painting: Monday afternoon, through Sam's screen */
 function frameGauge(ctx,t){bg2(ctx);clock(ctx,"Mon 15:10","through Sam's screen");
@@ -23,7 +21,7 @@ function frameGauge(ctx,t){bg2(ctx);clock(ctx,"Mon 15:10","through Sam's screen"
   numberPainting(ctx,560,150,880,440,{num:8200,gauge:{},gaugeV:0.9});
   plaque(ctx,560,630,420,[["Data product","gold.applications_daily"],["Used by","Planning committee"]],LAYER.gold);
   // the contract card, with the line that matters lit
-  appContract(ctx,1010,600,830,{hi:1,h:320});}
+  appContract(ctx,1010,580,830,{hi:1,h:300});}
 
 /* 2 · Monday night: the row checks light green one after another, while the total's gauge swings into red */
 function frameRows(ctx,t){bg2(ctx);clock(ctx,"Tue 02:00","the nightly build");const y=470;
@@ -62,20 +60,20 @@ function frameTuesdays(ctx,t){bg2(ctx);
   // 1 · no test: the wrong number is acted on, and three weeks later undone
   gauge(ctx,40+cw/2,300,70,38.3,{none:true});
   committeeDash(ctx,70,360,520,250,{num:11340,delta:38.3,s:0.9,crack:0.9,trend:[7240,7310,7390,7460,7520,7610,7700,7760,7840,7910,7990,8060,8200,11340]});
-  board(ctx,70,640,250,["+600 places","rooms booked","tutors to hire"],GRN);
-  board(ctx,340,640,250,["3 weeks later","copies found","−600 places","rooms released"],RED);
+  planBoard(ctx,70,640,250,["+600 places","rooms booked","tutors to hire"],GRN);
+  planBoard(ctx,340,640,250,["3 weeks later","copies found","−600 places","rooms released"],RED);
   T(ctx,"acted on a wrong number",40+cw/2,900,{w:700,size:21,align:"center",color:rgba(SOFT,1)});
   // 2 · a warning: amber, published anyway, lost among forty others
   gauge(ctx,670+cw/2,300,70,38.3,{warnOnly:true});
   committeeDash(ctx,700,360,520,250,{num:11340,delta:38.3,s:0.9,trend:[7240,7310,7390,7460,7520,7610,7700,7760,7840,7910,7990,8060,8200,11340]});
   alertChannel(ctx,700,640,300,234,40,{hi:4});
-  board(ctx,1020,640,200,["+600 places","same decision"],GRN);
+  planBoard(ctx,1020,640,200,["+600 places","same decision"],GRN);
   T(ctx,"a note, not a brake",670+cw/2,900,{w:700,size:21,align:"center",color:"rgba(255,220,160,1)"});
   // 3 · an error: the painting keeps Monday's number, labelled; David moves the decision
   gauge(ctx,1300+cw/2,300,70,38.3,{});
   committeeDash(ctx,1330,360,520,250,{num:8200,note:true,s:0.9,noteText:"Last good data as of Mon 02:00"});
   callTile(ctx,"david",1330,640,230,230,{t,expr:"calm"});
-  board(ctx,1580,640,270,["Decision","moved to Wednesday"],BIZ);
+  planBoard(ctx,1580,640,270,["Decision","moved to Wednesday"],BIZ);
   T(ctx,"a day late, and right",1300+cw/2,900,{w:700,size:21,align:"center",color:rgba(GRN,1)});}
 
 /* 4 · the reload: fixed at the source, the week loaded again, silver and gold rebuilt, checked with time travel */

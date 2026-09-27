@@ -49,6 +49,7 @@ PUBLIC = "https://roanboc.github.io/learning-data/"
 FILMS = {
     "": 11, "es/": 11, "sketch/": 9, "es/sketch/": 9,
     "when-things-go-wrong/silent-change/": 11, "es/when-things-go-wrong/silent-change/": 11,
+    "when-things-go-wrong/too-good-to-be-true/": 8, "es/when-things-go-wrong/too-good-to-be-true/": 8,
 }
 ES_NAMES = {
     "es/sketch/": {"drawn": "El boceto que dibujamos", "two": "Dos cifras", "cls": "¿Qué es una clase?",
@@ -59,6 +60,10 @@ ES_NAMES = {
         "banner": "Las cifras de ayer", "night": "Seis horas antes", "sam": "Sam", "thread": "Sigue el hilo",
         "bronze": "La causa", "halves": "Dos mitades de un cambio", "fix": "La corrección",
         "recover": "La recuperación", "contract": "El contrato", "later": "Tres semanas después",
+        "end": "Vista completa"},
+    "es/when-things-go-wrong/too-good-to-be-true/": {
+        "open": "Una versión del martes", "limits": "La cifra y sus límites", "night": "La noche del lunes",
+        "tuesdays": "Tres martes", "level": "Elegir el nivel", "thread": "Sigue el hilo", "reload": "Corregir en el origen",
         "end": "Vista completa"},
 }
 # Silent change as re-cut: 336.9 s, and its chapter starts

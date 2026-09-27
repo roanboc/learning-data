@@ -20,14 +20,14 @@ Same two audiences as the first film: a newcomer understands it, and a data engi
 
 The first film followed a record downstream, from the tap to the decision. This one inverts it: it starts at the symptom and follows the lineage upstream to the cause, like a detective following a red thread. Then it comes back down with the fix, and ends by showing the next change arriving safely. The viewer already knows the map from the first film, so the reversal feels like a payoff.
 
-**The spine: one change, seen in halves.** The registrar's office introduces waitlists for full classes: a business decision, announced to every School by email. The student system team builds it: enrolments gain a new status, `WAITLISTED`, and a new column, `waitlist_position`, listed in their release notes. Both sides did their part well. Nobody told the platform, or the people who rely on its numbers. Everything else follows from that gap.
+**The spine: one change, seen in halves.** The registrar's office introduces waitlists for full classes: a business decision, announced to every School by email. The student system team builds it: enrolments gain a new status, `WAITLISTED`, listed in their release notes. Both sides did their part well. Nobody told the platform, or the people who rely on its numbers. Everything else follows from that gap.
 
 | Chapter | What happens | What it teaches |
 |---|---|---|
 | **0. 7:58 am** | The day before census, Ana, the Head of School, opens the dashboard. Class fill for Data Science 101 shows a banner: data as of yesterday, 23:02. | A good platform fails loudly, and keeps the last good numbers instead of showing wrong ones. |
 | **1. Signals** | We see what fired overnight: an `accepted_values` test failed in staging, the build skipped everything downstream, and the dashboard's owner was alerted through its exposure. Sam, the data engineer on call, reads the alert on their phone. The only thing that noticed the change was a test. | Tests, severity (warn or error), skipping downstream, alerts, and who gets told. |
 | **2. Follow the thread** | Sam pulls a red thread from their screen, and the camera follows it into the platform, upstream through the lineage: exposure, mart, intermediate, staging, source, bronze. The failing rows are kept aside, so we can look at them. | Lineage as a diagnostic tool, and keeping failing rows for inspection rather than deleting them. |
-| **3. The cause** | In bronze we find the new status, and the new column, which Auto Loader rescued into `_rescued_data` rather than dropping it. | New values and schema drift; why bronze keeps what arrived. |
+| **3. The cause** | In bronze we find the new status, exactly as the student system sent it. | New values; why bronze keeps what arrived. |
 | **4. Two halves of one change** | Sam asks Ben: yes, the new status was in the release notes. Sam asks Mei: yes, her office introduced waitlists, and emailed every School. Ben knew what changed but not what it meant for the numbers; Mei knew what it meant but not that the platform counts by status. Then the meaning: is a waitlisted student enrolled? Sam doesn't guess. Mei decides no: enrolled still means holding a seat on census date. The sketch gains the new status. | A change has a technical side and a business side, and each needs an owner. Meaning is a business decision. Fixes start with meaning, not code. |
 | **5. The fix** | The rule is updated in dbt, reviewed like any code change, and tested in CI on only what changed. | Version control, review, and testing a change before it reaches production. |
 | **6. Recover** | The fix is replayed over the affected nights. Time travel compares the numbers before and after, so nobody has to trust a guess. At 8:40 am the banner is gone, and Ana sends the census report on time. | Backfills, incremental models, Delta versions and time travel, and RESTORE when a table itself is damaged. |
@@ -84,7 +84,6 @@ Built with room to think from the start: about 115 words a minute, a hold after 
 
 - **Labs:**
   - *Follow the thread:* click upstream through the lineage to find a cause.
-  - *Schema drift:* send a new column through Auto Loader's schema evolution modes and see where it lands.
   - *Contract check:* as Ben, propose a change to the student system. See which checks fail, which of the four owners are told, and which questions need a business answer before it can ship.
   - *Time travel:* move a slider across a table's versions and restore one.
   - *Backfill:* replay a date range and compare the numbers before and after.
@@ -102,7 +101,6 @@ To confirm against current documentation, and record in the rigour sheet with th
   - what a contract holds (schema, allowed values, meaning, freshness, owners, versions), and the Open Data Contract Standard (ODCS)
   - where each part is enforced, and what the film's single card simplifies
   - checking a producer's change against the contract in its CI, before release
-- **Auto Loader:** schema inference and evolution modes, and the rescued data column.
 - **dbt:**
   - test severity and `store_failures`
   - `dbt build --select state:modified+` for testing only what changed
@@ -130,7 +128,7 @@ Made by the author on 26 September 2026:
 1. ~~Agree this treatment.~~ Done.
 2. **A character sheet:** the four characters in three poses and three expressions each, plus one shot moving through Sam's screen into the platform. This decides whether full characters work in code. First pass done: see [the character sheet](../characters/README.md). Next, three-quarter views for conversations, and sitting.
 3. ~~A story outline, fragment by fragment.~~ [Agreed](story.md): it opens at 7:58, and its decisions are recorded there.
-4. Script with a rigour sheet and pacing report.
-5. Six style frames: the red thread, the quarantine tray, the version panes, the banner, the contract card at the door, and the review wall.
-6. A voice test.
+4. ~~A draft video.~~ Built from [the source](source/README.md): the narration, timed to the voice, at about 130 words a minute, with its own music. For review.
+5. Script with a rigour sheet, from the draft's narration.
+6. Style frames and a voice test, if the draft's look and voice need them.
 7. The first cut.

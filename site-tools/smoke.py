@@ -10,7 +10,8 @@ It stops the server at the end. It prints what each check found, and exits with 
 Needs: pip install playwright, Chromium for Playwright, and Node (for npx http-server).
 Options:
   --port N          serve on another port (default 8110)
-  --base URL        test a site that is already served, for example https://roanboc.github.io/learning-data/
+  --base URL        test a copy of this checkout that is already served, such as https://roanboc.github.io/learning-data/
+                    after a push (the pages and links to test still come from site/ here)
   --only a,b        run only these checks (see --list)
   --shots DIR       also save screenshots for a visual review
   --list            list the checks
@@ -38,6 +39,7 @@ import urllib.request
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 WEB = ROOT / "site"
 sys.path.insert(0, str(ROOT / "site-tools"))
+sys.dont_write_bytecode = True  # no __pycache__ in site-tools/
 import check_site  # noqa: E402  (the same page parser and rules as the static checks)
 
 WIDTHS = [320, 360, 390, 768, 1280]

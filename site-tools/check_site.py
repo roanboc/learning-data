@@ -811,6 +811,9 @@ def main():
                     s["fails"].append(f"{pg.file}: no {what}, and the English page has one")
                 elif a and a == b:
                     s["fails"].append(f"{pg.file}: the {what} is the same as the English page's")
+            ft = lambda d: " ".join(p.text() for p in d.first("footer").all("p") if "foot-links" not in p.cls) if d.first("footer") else ""
+            if ft(pg.dom) == ft(en.dom):
+                s["fails"].append(f"{pg.file}: the footer text is the same as the English page's")
 
     # -- generated pages
     s = rep.check("Journey pages: the same as site-tools/build_pages.py makes from their Markdown")

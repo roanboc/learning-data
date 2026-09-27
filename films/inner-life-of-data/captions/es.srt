@@ -3,11 +3,11 @@
 Acabas de inscribirte en tu primera clase de la universidad.
 
 2
-00:00:07,284 --> 00:00:09,472
+00:00:07,684 --> 00:00:09,872
 Un toque. Parece que no pasó nada.
 
 3
-00:00:09,672 --> 00:00:15,939
+00:00:10,472 --> 00:00:16,739
 Pero ese toque se escribió directo en el sistema académico, el sistema de registro: una foto de ese momento.
 
 4
@@ -15,313 +15,313 @@ Pero ese toque se escribió directo en el sistema académico, el sistema de regi
 Ahora está por viajar a través de una plataforma que casi nadie ve.
 
 5
-00:00:22,214 --> 00:00:23,439
+00:00:22,614 --> 00:00:23,839
 Vamos a seguirlo.
 
 6
-00:00:26,039 --> 00:00:32,689
+00:00:26,439 --> 00:00:33,089
 Cada sistema de la universidad guarda sus propios registros: estudiantes, aprendizaje, personal y finanzas.
 
 7
-00:00:32,889 --> 00:00:35,894
+00:00:33,689 --> 00:00:36,694
 Piensa en cada uno como su propio color de luz.
 
 8
-00:00:38,594 --> 00:00:42,327
+00:00:37,594 --> 00:00:41,327
 Algunos cambios viajan como eventos, en el momento en que ocurren.
 
 9
-00:00:42,527 --> 00:00:47,311
+00:00:41,927 --> 00:00:46,711
 Una plataforma de integración los enruta, los reintenta y los mantiene seguros,
 
 10
-00:00:47,511 --> 00:00:51,464
+00:00:46,911 --> 00:00:50,864
 y Zerobus Ingest los deja en el lakehouse en cuestión de segundos.
 
 11
-00:00:53,664 --> 00:00:59,872
+00:00:52,264 --> 00:00:58,472
 Otros datos llegan en lote, como archivos, por ejemplo el archivo nocturno de nuevas ofertas de admisión.
 
 12
-00:01:00,072 --> 00:01:04,973
+00:00:59,072 --> 00:01:03,973
 Auto Loader lee cada archivo nuevo exactamente una vez, y recuerda dónde se quedó.
 
 13
-00:01:07,173 --> 00:01:09,583
+00:01:05,373 --> 00:01:07,783
 Todo aterriza en bronce, tal cual llegó.
 
 14
-00:01:09,783 --> 00:01:15,408
+00:01:08,383 --> 00:01:14,008
 Solo lo que importa ahora mismo viaja en caliente. Lo demás puede esperar a la siguiente entrega.
 
 15
-00:01:23,408 --> 00:01:29,140
+00:01:20,008 --> 00:01:25,740
 Para que todo esto tenga sentido, primero necesitamos un boceto del mundo que queremos entender.
 
 16
-00:01:29,340 --> 00:01:33,422
+00:01:26,340 --> 00:01:30,422
 ¿Qué es un estudiante? ¿Una clase? ¿Una inscripción? ¿Y cómo se conectan?
 
 17
-00:01:36,122 --> 00:01:41,006
+00:01:32,022 --> 00:01:36,906
 Ese es el modelo conceptual: acordado con el negocio, y escrito una sola vez.
 
 18
-00:01:41,206 --> 00:01:44,214
+00:01:38,006 --> 00:01:41,014
 Si el boceto está mal, las piezas nunca encajan.
 
 19
-00:01:46,914 --> 00:01:52,643
+00:01:41,614 --> 00:01:47,343
 Y cada imagen construida encima también está mal, sin importar qué tan limpios estén los datos.
 
 20
-00:01:52,843 --> 00:01:55,331
+00:01:47,943 --> 00:01:50,431
 Si está bien, cada pieza tiene su lugar.
 
 21
-00:02:03,531 --> 00:02:10,934
+00:01:56,631 --> 00:02:04,034
 Ahora empieza el refinado. dbt guarda las recetas: modelos, pruebas y documentación, todo con control de versiones.
 
 22
-00:02:11,134 --> 00:02:14,073
+00:02:04,634 --> 00:02:07,573
 Databricks las ejecuta, en un SQL warehouse.
 
 23
-00:02:14,273 --> 00:02:17,930
+00:02:08,173 --> 00:02:11,830
 Mira de cerca el bronce, y verás que las piezas están en bruto:
 
 24
-00:02:18,130 --> 00:02:22,456
+00:02:12,030 --> 00:02:16,356
 fallas, duplicados, errores, formatos distintos, relojes distintos.
 
 25
-00:02:24,656 --> 00:02:29,001
+00:02:17,456 --> 00:02:21,801
 Primero, dbt declara cada fuente, y verifica que esté actualizada.
 
 26
-00:02:29,201 --> 00:02:35,080
+00:02:22,401 --> 00:02:28,280
 Los modelos de staging limpian cada fuente: nombres claros, un formato, un reloj, sin duplicados.
 
 27
-00:02:35,280 --> 00:02:39,381
+00:02:28,880 --> 00:02:32,981
 Las pruebas corren en cada paso. Un valor faltante se detiene aquí.
 
 28
-00:02:41,581 --> 00:02:45,458
+00:02:34,381 --> 00:02:38,258
 Los modelos intermedios unen las fuentes, tal como dice el boceto.
 
 29
-00:02:45,658 --> 00:02:49,321
+00:02:38,858 --> 00:02:42,521
 Una inscripción sin una clase que le corresponda se detiene aquí.
 
 30
-00:02:51,521 --> 00:02:56,029
+00:02:43,921 --> 00:02:48,429
 Lo que sale es plata: una imagen limpia y consistente de la universidad.
 
 31
-00:02:56,229 --> 00:03:02,121
+00:02:49,029 --> 00:02:54,921
 Y cada paso queda registrado, así que cualquier pieza se puede rastrear hasta el toque que la originó.
 
 32
-00:03:11,321 --> 00:03:18,067
+00:03:01,621 --> 00:03:08,367
 Luego la luz se divide otra vez, ahora en dominios de negocio: docencia, estudiantes, investigación y finanzas.
 
 33
-00:03:18,267 --> 00:03:22,945
+00:03:08,967 --> 00:03:13,645
 Cada dominio tiene muchos productos de datos. Piensa en ellos como pinturas.
 
 34
-00:03:26,145 --> 00:03:30,154
+00:03:14,245 --> 00:03:18,254
 El tema es el dominio. El estilo es lo que necesita el público.
 
 35
-00:03:32,354 --> 00:03:34,831
+00:03:18,854 --> 00:03:21,331
 Los analistas reciben cada detalle.
 
 36
-00:03:35,031 --> 00:03:39,060
+00:03:21,931 --> 00:03:25,960
 Los directivos reciben lo esencial, en unos pocos trazos marcados.
 
 37
-00:03:39,260 --> 00:03:46,488
+00:03:26,560 --> 00:03:33,788
 Los reportes al gobierno reciben una pintura hecha con reglas estrictas, como contar estudiantes en la fecha de corte.
 
 38
-00:03:46,688 --> 00:03:50,639
+00:03:34,388 --> 00:03:38,339
 Las operaciones en vivo reciben una impresión rápida del momento.
 
 39
-00:03:50,839 --> 00:03:56,152
+00:03:38,939 --> 00:03:44,252
 En dbt, cada pintura es un mart con un contrato y un responsable: un producto de datos.
 
 40
-00:03:56,352 --> 00:04:01,038
+00:03:44,852 --> 00:03:49,538
 Y su etiqueta es un exposure, que registra dónde se muestra la pintura, y a quién.
 
 41
-00:04:01,238 --> 00:04:02,325
+00:03:50,138 --> 00:03:51,225
 Eso es oro.
 
 42
-00:04:10,525 --> 00:04:13,459
+00:03:57,425 --> 00:04:00,359
 Aléjate un poco, y aparece el sistema completo.
 
 43
-00:04:13,659 --> 00:04:16,484
+00:04:00,959 --> 00:04:03,784
 Los dominios de aplicación entran por un lado.
 
 44
-00:04:16,684 --> 00:04:20,967
+00:04:04,384 --> 00:04:08,667
 Bronce guarda lo que llegó. Plata lo hace consistente. Oro lo hace útil.
 
 45
-00:04:21,167 --> 00:04:25,392
+00:04:09,267 --> 00:04:13,492
 Los dominios de negocio salen por el otro, hacia dashboards, apps y Genie.
 
 46
-00:04:25,592 --> 00:04:30,954
+00:04:14,092 --> 00:04:19,454
 dbt gobierna cada paso, de la fuente al exposure, y su linaje traza cada conexión.
 
 47
-00:04:31,154 --> 00:04:35,912
+00:04:20,054 --> 00:04:24,812
 Y el lakehouse de Databricks ejecuta y guarda todo, gobernado por Unity Catalog.
 
 48
-00:04:46,112 --> 00:04:49,209
+00:04:31,512 --> 00:04:34,609
 Pero las imágenes sin significado son solo ruido.
 
 49
-00:04:49,409 --> 00:04:53,984
+00:04:35,209 --> 00:04:39,784
 La plataforma son los ladrillos. El significado es el idioma compartido.
 
 50
-00:04:54,184 --> 00:05:00,386
+00:04:40,384 --> 00:04:46,586
 En el dbt Catalog, cualquiera puede leer qué muestra cada imagen, de dónde viene y quién es su responsable.
 
 51
-00:05:00,586 --> 00:05:06,220
+00:04:47,186 --> 00:04:52,820
 Las palabras se definen una vez: un estudiante inscrito es el que sigue inscrito en la fecha de corte.
 
 52
-00:05:09,420 --> 00:05:16,773
+00:04:54,420 --> 00:05:01,773
 Unity Catalog marca los datos confiables como certificados, decide quién puede ver qué, y enmascara los datos personales.
 
 53
-00:05:18,973 --> 00:05:27,001
+00:05:02,873 --> 00:05:10,901
 Y el conocimiento de una universidad vive en todas partes: la intranet, las bibliotecas de políticas, el manual, los mapas de procesos.
 
 54
-00:05:27,201 --> 00:05:32,735
+00:05:11,501 --> 00:05:17,035
 A través de MCP, un conector estándar que permite a la IA conectarse con otros sistemas,
 
 55
-00:05:32,935 --> 00:05:36,494
+00:05:17,235 --> 00:05:20,794
 la plataforma lee esas fuentes donde viven, con tus permisos.
 
 56
-00:05:36,694 --> 00:05:41,027
+00:05:21,394 --> 00:05:25,727
 Junto con el boceto, forman un solo mapa de significado: Genie Ontology.
 
 57
-00:05:49,427 --> 00:05:55,991
+00:05:32,127 --> 00:05:38,691
 Algunas preguntas necesitan una respuesta, ahora mismo: ¿todavía hay cupo en la clase del martes a las 9?
 
 58
-00:05:58,191 --> 00:06:03,167
+00:05:39,291 --> 00:05:44,267
 Otras necesitan todos los registros, de varios años: ¿qué clases se llenan primero?
 
 59
-00:06:05,367 --> 00:06:07,976
+00:05:45,667 --> 00:05:48,276
 Trabajos distintos, motores distintos.
 
 60
-00:06:08,176 --> 00:06:15,611
+00:05:48,876 --> 00:05:56,311
 Lakebase, una base de datos Postgres integrada en la plataforma, les da a las apps una copia rápida y a la mano de lo que necesitan,
 
 61
-00:06:15,811 --> 00:06:19,712
+00:05:56,511 --> 00:06:00,412
 sincronizada automáticamente, con los cambios fluyendo de vuelta.
 
 62
-00:06:26,912 --> 00:06:29,472
+00:06:06,112 --> 00:06:08,672
 Ahora las imágenes salen, por cuatro caminos.
 
 63
-00:06:29,672 --> 00:06:37,823
+00:06:09,272 --> 00:06:17,423
 Eventos: cuando algo cambia, la plataforma de integración toca una campana, y cada sistema regresa por exactamente lo que necesita.
 
 64
-00:06:40,023 --> 00:06:47,651
+00:06:18,023 --> 00:06:25,651
 SQL endpoints: una sala de lectura donde las herramientas pueden recorrer millones de registros para responder grandes preguntas.
 
 65
-00:06:47,851 --> 00:06:54,553
+00:06:26,251 --> 00:06:32,953
 Copias: para los sistemas antiguos que no pueden leer los originales, la plataforma de integración entrega copias.
 
 66
-00:06:54,753 --> 00:06:58,204
+00:06:33,553 --> 00:06:37,004
 Son útiles, pero cada copia se tiene que mantener al día.
 
 67
-00:07:03,404 --> 00:07:05,567
+00:06:38,904 --> 00:06:41,067
 Y el cuarto camino lo cambia todo.
 
 68
-00:07:05,767 --> 00:07:09,643
+00:06:41,667 --> 00:06:45,543
 Un proyector muestra el original en otro lugar, sin hacer una copia.
 
 69
-00:07:09,843 --> 00:07:14,719
+00:06:46,143 --> 00:06:51,019
 OpenSharing proyecta datos de investigación en vivo a una universidad aliada.
 
 70
-00:07:14,919 --> 00:07:19,547
+00:06:51,619 --> 00:06:56,247
 Mirroring permite que Microsoft Fabric vea las mismas imágenes, sin moverlas.
 
 71
-00:07:19,747 --> 00:07:24,633
+00:06:56,847 --> 00:07:01,733
 La federación voltea el proyector, para que podamos ver otros sistemas donde viven.
 
 72
-00:07:24,833 --> 00:07:27,843
+00:07:02,333 --> 00:07:05,343
 Un solo original. Ninguna copia que sincronizar.
 
 73
-00:07:36,243 --> 00:07:39,347
+00:07:11,743 --> 00:07:14,847
 Las personas se encuentran con los datos de dos formas.
 
 74
-00:07:39,547 --> 00:07:44,155
+00:07:15,447 --> 00:07:20,055
 Apps: una Databricks App le muestra a una funcionaria el registro de un estudiante,
 
 75
-00:07:44,355 --> 00:07:50,056
+00:07:20,255 --> 00:07:25,956
 ella corrige un código de carrera equivocado, y la corrección fluye directo de vuelta a la plataforma.
 
 76
-00:07:52,256 --> 00:07:53,784
+00:07:27,056 --> 00:07:28,584
 Y conversación: Genie.
 
 77
-00:07:53,984 --> 00:07:58,629
+00:07:29,184 --> 00:07:33,829
 Pregunta: ¿qué clases de primer año necesitan más cupos el próximo semestre?
 
 78
-00:08:00,829 --> 00:08:06,618
+00:07:35,429 --> 00:07:41,218
 Un Genie Agent responde con cifras certificadas y muestra sus fuentes, guiado por Genie Ontology.
 
 79
-00:08:06,818 --> 00:08:09,751
+00:07:41,818 --> 00:07:44,751
 Y solo te muestra lo que tienes permiso de ver.
 
 80
-00:08:17,251 --> 00:08:21,745
+00:07:50,751 --> 00:07:55,245
 Un toque se volvió una foto, luego una imagen clara, y al final una decisión:
 
 81
-00:08:21,945 --> 00:08:26,497
+00:07:55,445 --> 00:07:59,997
 se abre una clase nueva, y 140 estudiantes más consiguen cupo.
 
 82
-00:08:29,697 --> 00:08:31,956
+00:08:01,897 --> 00:08:04,156
 Menos movimiento. Más significado.

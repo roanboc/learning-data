@@ -2,9 +2,9 @@
 
 **Video script v5, university edition** · Matches the third cut of the film, the breathing cut
 
-Runtime 8:01, with 922 words of narration (about 115 words a minute) read by a synthetic voice (Kokoro, American female, open source under Apache 2.0). The master is 16:9, 1080p, 30 fps, with narration, music and sound effects mixed to about -16 LUFS for the web, and burned-in captions. Every name, place and number is fictional, and no real institution is shown.
+Runtime 7:32, with 922 words of narration (about 122 words a minute) read by a synthetic voice (Kokoro, American female, open source under Apache 2.0). The master is 16:9, 1080p, 30 fps, with narration, music and sound effects mixed to about -16 LUFS for the web, and burned-in captions. Every name, place and number is fictional, and no real institution is shown.
 
-New in v5, the breathing cut: the same narration with room to think. Each new idea gets a hold of 2 to 3 seconds, and each chapter ends with a wordless breather that applies its idea to a new case (see [breathing-cut.md](breathing-cut.md)). The timing lives in `source/src/breath.js`. On the site, **Pause and think** can stop the film after each chapter to ask one question.
+New in v5, the breathing cut: the same narration with room to think. The voice breathes after every sentence, each new idea gets a short beat, and each chapter ends with a wordless breather that applies its idea to a new case (see [breathing-cut.md](breathing-cut.md), revised after [a review](pacing-review.md)). The timing lives in `source/src/breath.js`. On the site, **Pause and think** can stop the film after each chapter to ask one question.
 
 New in v4: the tap is stored first in the system of record; events go through an integration platform; the sketch (conceptual model) gets its own scene, including what goes wrong without it; dbt is visible at every layer, with tests everywhere, and runs on Databricks; gold paintings are data products defined as dbt marts with contracts, shown through dbt exposures; a new overview shows all layers together, including consumption through Databricks Apps, Genie, and dashboards and SQL; and every component carries its platform logo. The look is one modern design language throughout.
 
@@ -36,7 +36,7 @@ New in v4: the tap is stored first in the system of record; events go through an
 
 **On screen.** written first, in the system of record
 
-### Scene 1 · Into the platform · 0:25–1:18
+### Scene 1 · Into the platform · 0:25–1:15
 
 **Narration.** Every system at the university keeps its own records: students, learning, people and finance. Think of each one as its own colour of light. Some changes travel as events, the moment they happen. An integration platform routes them, retries them and keeps them secure, and Zerobus Ingest lands them in the lakehouse within seconds. Other data arrives in bulk, as files, like the nightly file of new offers. Auto Loader reads each new file exactly once, and remembers where it stopped. Everything lands in bronze, exactly as it arrived. Only what matters right now travels hot. The rest can wait for the next delivery.
 
@@ -44,7 +44,7 @@ New in v4: the tap is stored first in the system of record; events go through an
 
 **On screen.** Integration platform · Zerobus Ingest · Landing zone · Auto Loader · Bronze · hot · seconds · warm or cold · minutes to days
 
-### Scene 2 · The sketch · 1:18–1:54
+### Scene 2 · The sketch · 1:15–1:47
 
 **Narration.** Before any of this can make sense, we need a sketch of the world we're trying to understand. What is a student? A class? An enrolment? And how do they connect? That's the conceptual model: agreed with the business, and written down once. Get the sketch wrong, and the pieces never fit. Every picture built on top of it is wrong too, no matter how clean the data is. Get it right, and every piece has its place.
 
@@ -52,7 +52,7 @@ New in v4: the tap is stored first in the system of record; events go through an
 
 **On screen.** Conceptual model · Wrong sketch · Right sketch · Class fill: 312% · Class fill: 98%
 
-### Scene 3 · Refining with dbt · 1:54–2:58
+### Scene 3 · Refining with dbt · 1:47–2:48
 
 **Narration.** Now the refining starts. dbt holds the recipes: models, tests and documentation, all in version control. Databricks runs them, on a SQL warehouse. Look closer at bronze, and the pieces are rough: glitches, duplicates, errors, different formats, different clocks. First, dbt declares each source, and checks that it's fresh. Staging models clean each source: clear names, one format, one clock, no duplicates. Tests run at every step. A missing value stops here. Intermediate models join the sources, exactly as the sketch says. An enrolment with no matching class stops here. What comes out is silver: one clean, consistent picture of the university. And every step is recorded, so any piece can be traced back to the tap that started it.
 
@@ -60,7 +60,7 @@ New in v4: the tap is stored first in the system of record; events go through an
 
 **On screen.** dbt · SQL warehouse · sources · staging models · intermediate models · tests · not_null · relationships · Silver · lineage
 
-### Scene 4 · Gold · 2:58–3:51
+### Scene 4 · Gold · 2:48–3:38
 
 **Narration.** Then the light is split again, this time into business domains: teaching, students, research and finance. Each domain holds many data products. Think of them as paintings. The subject is the domain. The style is what the audience needs. Analysts get every detail. Executives get the essence, in a few bold shapes. Government reports get a painting made by strict rules, like counting students on census date. Live operations get a quick impression of right now. In dbt, each painting is a mart with a contract and an owner: a data product. And its label is an exposure, recording where the painting is shown, and to whom. That's gold.
 
@@ -68,7 +68,7 @@ New in v4: the tap is stored first in the system of record; events go through an
 
 **On screen.** for analysts · for executives · for government reports · for live operations · DATA PRODUCT · DBT MART · DBT EXPOSURE · OWNER
 
-### Scene 5 · The layers together · 3:51–4:27
+### Scene 5 · The layers together · 3:38–4:13
 
 **Narration.** Step back, and the whole system comes into view. Application domains flow in on one side. Bronze keeps what arrived. Silver makes it consistent. Gold makes it useful. Business domains flow out on the other, into dashboards, apps and Genie. dbt governs every step, from source to exposure, and its lineage maps every connection. And the Databricks lakehouse runs and stores it all, governed by Unity Catalog.
 
@@ -76,7 +76,7 @@ New in v4: the tap is stored first in the system of record; events go through an
 
 **On screen.** dbt · sources · staging · intermediate · marts · exposures · Bronze keeps what arrived · Silver makes it consistent · Gold makes it useful · Databricks Lakehouse · Consumption: Databricks Apps, Genie, Dashboards and SQL
 
-### Scene 6 · Meaning · 4:27–5:27
+### Scene 6 · Meaning · 4:13–5:09
 
 **Narration.** But pictures without meaning are just noise. The platform is the bricks. Meaning is the shared language. In the dbt Catalog, anyone can read what each picture shows, where it came from, and who owns it. Words are defined once: an enrolled student is one still enrolled on census date. Unity Catalog marks trusted data as certified, decides who can see what, and masks personal details. And a university's knowledge lives everywhere: intranet pages, policy libraries, the handbook, process maps. Through MCP, a standard plug that lets AI connect to other systems, the platform reads those sources where they live, with your permissions. Together with the sketch, they become one map of meaning: Genie Ontology.
 
@@ -84,7 +84,7 @@ New in v4: the tap is stored first in the system of record; events go through an
 
 **On screen.** Catalog in dbt · Unity Catalog · certified · MCP · Genie Ontology
 
-### Scene 7 · Two speeds · 5:27–6:00
+### Scene 7 · Two speeds · 5:09–5:39
 
 **Narration.** Some questions need one answer, right now: is there still a seat in Tuesday's 9 am class? Others need every record, over years: which classes fill up first? Different jobs, different engines. Lakebase, a Postgres database built into the platform, gives apps a fast desk copy of what they need, kept in sync automatically, with changes flowing back.
 
@@ -92,7 +92,7 @@ New in v4: the tap is stored first in the system of record; events go through an
 
 **On screen.** One answer, right now · Every record, over years · Lakebase · Lakehouse · synced automatically · changes flow back
 
-### Scene 8 · Ways out · 6:00–7:04
+### Scene 8 · Ways out · 5:39–6:39
 
 **Narration.** Now the pictures go out, four ways. Events: when something changes, the integration platform rings a bell, and each system comes back for exactly what it needs. SQL endpoints: a reading room where tools can scan millions of records for big questions. Copies: for older systems that can't read the originals, the integration platform delivers copies. Useful, but every copy has to be kept up to date. [two-second pause] And the fourth way changes everything. A projector shows the original somewhere else, without making a copy. OpenSharing projects live research data to a partner university. Mirroring lets Microsoft Fabric see the same pictures in place. Federation turns the projector around, so we can see other systems where they live. One original. No copies to keep in sync.
 
@@ -100,7 +100,7 @@ New in v4: the tap is stored first in the system of record; events go through an
 
 **On screen.** Integration platform · SQL endpoint · Older system · out of date · Projector · OpenSharing · Mirroring · Federation · Zero-copy
 
-### Scene 9 · Apps and Genie · 7:04–7:41
+### Scene 9 · Apps and Genie · 6:39–7:14
 
 **Narration.** People meet the data in two ways. Apps: a Databricks App shows an officer a student's record, she fixes a wrong degree code, and the correction flows straight back into the platform. And conversation: Genie. Ask: which first-year classes need more seats next semester? A Genie Agent answers with certified numbers and shows its sources, guided by Genie Ontology. And it only shows you what you're allowed to see.
 
@@ -108,7 +108,7 @@ New in v4: the tap is stored first in the system of record; events go through an
 
 **On screen.** Databricks App · Lakebase · back into the platform · Genie
 
-### Scene 10 · Pull back · 7:41–8:01
+### Scene 10 · Pull back · 7:14–7:32
 
 **Narration.** One tap became a snapshot, then a clear picture, and finally a decision: a new class opens, and 140 more students get a seat. Move less. Mean more.
 
@@ -133,11 +133,11 @@ New in v4: the tap is stored first in the system of record; events go through an
 
 ## LinkedIn cut (about 2 minutes)
 
-Take these ranges from the master, in order: 0:03–0:22, 0:36–0:51, 1:34–1:48, 2:24–2:44, 3:32–3:44, 6:28–6:48, 7:20–7:32, 7:54–8:01. They include a few of the new holds; trim those for a brisker social cut. Some labels sit near the frame edges, so square or 4:5 crops need a reframing pass.
+Take these ranges from the master, in order: 0:03–0:22, 0:35–0:50, 1:30–1:43, 2:17–2:36, 3:20–3:33, 6:07–6:25, 6:55–7:07, 7:26–7:32. The pauses are short, so they need little trimming. Some labels sit near the frame edges, so square or 4:5 crops need a reframing pass.
 
 ## Production notes
 
-Narration is generated per line and the film is timed to it, so any line can be re-recorded (for example by a human narrator) and the film re-timed automatically. Music and sound effects are synthesised in code and placed on the same cues; the only full silence, two seconds before the twist, is deliberate. The paintings are code-drawn evocations of each style; an illustrator can replace them. Keep any replacement art original, and avoid dot-painting styles, which are protected by Aboriginal cultural protocols in Australia.
+Narration is generated per line and the film is timed to it, so any line can be re-recorded (for example by a human narrator) and the film re-timed automatically. Music and sound effects are synthesised in code and placed on the same cues. The music never stops; before the twist it dips for a second. The paintings are code-drawn evocations of each style; an illustrator can replace them. Keep any replacement art original, and avoid dot-painting styles, which are protected by Aboriginal cultural protocols in Australia.
 
 For other universities, localise "class" (unit, subject, course or module), "census date", and the domain names; naming domains after the Higher Education Reference Model (HERM) capability areas makes the map familiar across the sector.
 

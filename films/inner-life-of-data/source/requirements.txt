@@ -4,3 +4,4 @@ numpy
 scipy
 playwright
 imageio-ffmpeg
+praat-parselmouth

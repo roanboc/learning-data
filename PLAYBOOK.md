@@ -48,7 +48,8 @@ What made *The Inner Life of Data* work, written so the next film, lab or course
 
 - **One idea per line, in short sentences.** Voice each line separately, and time the pictures to the voice, not the voice to the pictures.
 - **Measure density, don't guess it.** `films/inner-life-of-data/source/tools/pace.py` reports words per minute, how much of the time the voice speaks, and the longest quiet moment in each chapter. This film runs at 147 words a minute with the voice speaking 86% of the time. It's accurate, and it's relentless.
-- **Leave room to think.** Aim for about 115 to 130 words a minute and a voice that speaks less than 70% of the time. Hold 1.5 to 3 seconds after each new named idea, and end each chapter with a wordless breather that applies the idea to a new case. The picture keeps moving during every pause. See [the breathing cut](films/inner-life-of-data/breathing-cut.md).
+- **Leave room to think, but let it flow.** Aim for about 125 to 135 words a minute. Give every sentence a natural beat (about 0.8 seconds), and pause longer only where an idea really needs to land. Viewers of the first film's breathing cut found a hold after every idea and a breather in every chapter too many stops; *A Sharper Sketch* keeps three short wordless endings in the whole film. The picture keeps moving during every pause. See [the breathing cut](films/inner-life-of-data/breathing-cut.md) for how pauses work.
+- **Give each film its own music.** Match the mood to the subject: the first film's pads and pulses suit a journey through a platform; a film about modelling and design gets a slower, warmer ambience.
 - **Say it and show it at the same time.** Narration and picture together beat narration plus a wall of on-screen text. Keep on-screen words to labels.
 - **Name things before explaining them.** A new term lands better if the picture shows it a moment before the narration explains what it does.
 - **Make intentional pauses look intentional.** A silence needs light and motion, or it reads as a glitch.
@@ -102,7 +103,7 @@ A film makes people feel they understand; learning comes from using the ideas. T
 **Before rendering**
 - [ ] The rigour sheet covers every scene.
 - [ ] Style frames and a short voice test are approved.
-- [ ] `tools/pace.py`: every chapter is under 130 words a minute, with a quiet moment of at least 4 seconds.
+- [ ] `tools/pace.py`: the film runs at about 125 to 135 words a minute, and no chapter feels rushed or stop-start when watched.
 - [ ] Stills are checked at every named moment, with nothing under the captions.
 - [ ] `tools/check.py`: every moment of the film draws without an error. Stills only sample a few moments.
 

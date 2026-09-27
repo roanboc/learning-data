@@ -19,31 +19,43 @@ def put(L,R,sig,start,g=1.0,pan=0.0):
     s=sig[:j-i]*g;L[i:j]+=s*np.float32(np.sqrt(0.5*(1-pan)));R[i:j]+=s*np.float32(np.sqrt(0.5*(1+pan)))
 def env(sec,a,r):m=int(sec*SR);e=np.ones(m,np.float32);ai,ri=max(1,int(a*SR)),max(1,int(r*SR));e[:ai]=np.linspace(0,1,ai);e[m-ri:]*=np.linspace(1,0,ri);return e
 mf=lambda m:440*2**((m-69)/12)
-def pad(ch,start,sec,g=0.05):
-    x=tt(sec);e=env(sec,1.6,2.0);lfo=1+0.15*np.sin(2*np.pi*0.18*x)
-    for pan,det in((-0.7,0.998),(0.7,1.002)):
+# music: a drawing-table ambience, its own and not the first film's. Warm, slow and open: soft pads in major and Lydian colours,
+# a felt-piano motif that places notes sparsely, like a pencil on paper, and no beat. It darkens a little while the numbers disagree,
+# and resolves to D major when they match.
+def pad(ch,start,sec,g=0.04):
+    x=tt(sec);e=env(sec,2.5,3.0);sw=1+0.08*np.sin(2*np.pi*0.07*x)
+    for pan,det in((-0.8,0.997),(0.8,1.003),(0.0,1.0)):
         s=np.zeros_like(x)
         for m in ch:
             f=mf(m)*det
-            for k in range(1,5):s+=np.sin(2*np.pi*f*k*x+k).astype(np.float32)*(1/k**1.7)
-        put(ML,MR,s*e*lfo,start,g,pan)
-A9=[45,57,60,64,67,71];F9=[41,53,57,60,64,67];C9=[48,55,59,62,64,67];G9=[43,55,59,62,64,69];D9=[50,57,60,64,65,69];X9=[46,57,58,64,65,70]
-def prog(sid,chords,a=None,b=None,g=0.05):
+            s+=(np.sin(2*np.pi*f*x+m)+0.18*np.sin(4*np.pi*f*x+m)).astype(np.float32)
+        put(ML,MR,s*e*sw/len(ch),start,g*(0.7 if pan==0 else 1),pan)
+def felt(m,start,g=0.05,pan=0.0):
+    x=tt(3.2);f=mf(m);a=np.minimum(1,x/0.008)
+    s=sum(np.sin(2*np.pi*f*k*x)*np.exp(-x*(1.1+0.9*k))*w for k,w in((1,1),(2,0.35),(3,0.12),(4,0.05)))
+    put(ML,MR,(s*a).astype(np.float32),start,g,pan)
+def drone(m,start,sec,g=0.025):x=tt(sec);put(ML,MR,(np.sin(2*np.pi*mf(m)*x)*env(sec,3,3)).astype(np.float32),start,g,0)
+DM9=[50,57,61,64,66];BM9=[47,54,57,61,62];GL=[43,50,54,57,61];AA9=[45,52,57,59,61];EM9=[40,47,54,55,62];FSM=[42,49,54,57,61]
+def prog(sid,chords,a=None,b=None,g=0.04):
     s0=ST[sid]['start']+(a or 0);s1=ST[sid]['start']+(b if b is not None else ST[sid]['dur']);d=(s1-s0)/len(chords)
-    for i,ch in enumerate(chords):pad(ch,s0+i*d-0.8,d+1.6,g)
-# music: one chord progression per chapter, lighter than the first film's; the gap closing resolves to a major chord
-prog('drawn',[A9],0,ST['drawn']['cues']['over']);prog('drawn',[F9,C9],ST['drawn']['cues']['over'])
-prog('two',[A9,F9],0,ST['two']['cues']['check']);prog('two',[C9,G9],ST['two']['cues']['check'],g=0.045)
-prog('cls',[A9,F9,C9,G9]);prog('census',[F9,C9,G9]);prog('courses',[A9,F9,C9]);prog('time',[D9,X9,C9],g=0.045)
-prog('levels',[C9,G9,A9,F9]);prog('fit',[F9,C9,G9,C9]);prog('end',[A9,F9],0,ST['end']['cues']['version']);prog('end',[C9],ST['end']['cues']['version'],g=0.06)
-def pulse(a,b,g=0.3):
-    k=0
-    while a+k*0.6667<b:x=tt(0.35);put(ML,MR,np.sin(2*np.pi*55*x)*np.exp(-x*11),a+k*0.6667,g);k+=1
-def arp(a,b,g=0.045):
-    seq=[69,72,76,79,83,79,76,72];k=0
-    while a+k*0.3333<b:x=tt(0.6);f=mf(seq[k%8]+12*(k//16%2));put(ML,MR,(np.sin(2*np.pi*f*x)+0.3*np.sin(4*np.pi*f*x))*np.exp(-x*7),a+k*0.3333,g,0.5 if k%2 else -0.5);k+=1
-pulse(G('cls','hiding'),G('cls','grain',2),0.2);pulse(G('courses','admission'),G('courses','link',2),0.18)
-arp(G('levels','concept'),G('levels','agree',3),0.035);arp(G('fit','check'),G('fit','cage'),0.035)
+    for i,ch in enumerate(chords):pad(ch,s0+i*d-1.2,d+2.4,g);drone(ch[0]-12,s0+i*d-1.2,d+2.4)
+mrng=np.random.default_rng(11)
+def motif(sid,chords,a=None,b=None,every=1.5,g=0.045):
+    # sparse notes from each chord, an octave up, drifting across the stereo field
+    s0=ST[sid]['start']+(a or 0);s1=ST[sid]['start']+(b if b is not None else ST[sid]['dur']);d=(s1-s0)/len(chords);k=0;t0=s0+0.4
+    while t0<s1-0.5:
+        ch=chords[min(len(chords)-1,int((t0-s0)/d))];m=ch[int(mrng.integers(1,len(ch)))]+12+(12 if mrng.random()<0.25 else 0)
+        felt(m,t0,g*(0.8+0.4*mrng.random()),float(mrng.uniform(-0.6,0.6)));t0+=every*(0.75+0.5*mrng.random());k+=1
+cq=lambda sid,cid:ST[sid]['cues'][cid]
+prog('drawn',[DM9,GL]);motif('drawn',[DM9,GL],every=1.7)
+prog('two',[BM9,EM9],0,cq('two','check'));prog('two',[GL,AA9,DM9],cq('two','check'));motif('two',[GL,AA9,DM9],cq('two','check'),every=1.8)
+prog('cls',[GL,DM9,BM9,AA9]);motif('cls',[GL,DM9,BM9,AA9],every=1.6)
+prog('census',[EM9,AA9,DM9]);motif('census',[EM9,AA9,DM9],every=1.7)
+prog('courses',[BM9,GL,AA9]);motif('courses',[BM9,GL,AA9],every=1.7)
+prog('time',[FSM,BM9,DM9]);motif('time',[FSM,BM9,DM9],cq('time','snap'),every=1.2)
+prog('levels',[GL,DM9,GL,AA9]);motif('levels',[GL,DM9,GL,AA9],every=1.4,g=0.05)
+prog('fit',[DM9,GL,EM9,AA9]);motif('fit',[DM9,GL,EM9,AA9],every=1.5)
+prog('end',[BM9,GL],0,cq('end','answer'));prog('end',[DM9,GL,DM9],cq('end','answer'),g=0.05);motif('end',[DM9,GL,DM9],cq('end','answer'),every=1.3,g=0.05)
 rng=np.random.default_rng(3)
 def X(sig,start,g=0.3,pan=0.0):put(XL,XR,sig.astype(np.float32),start,g,pan)
 def click(s,g=0.3):x=tt(0.08);X(rng.standard_normal(len(x))*np.exp(-x*120)*0.5+np.sin(2*np.pi*1800*x)*np.exp(-x*50),s,g)
@@ -63,7 +75,7 @@ def tone(s,g=0.24):x=tt(3.2);X((np.sin(2*np.pi*660*x)+0.2*np.sin(2*np.pi*1320*x)
 def pop(s,g=0.14):x=tt(0.12);X(np.sin(2*np.pi*(900+2000*x)*x)*np.exp(-x*30),s,g)
 # the tracing paper: a soft sweep each time the reference slides over the sketch
 def paper_in(s):whoosh(s,1.2,0.07);sweep(s+0.2,1.0,0.03,900,1800,0.4)
-paper_in(G('two','check',1.2));paper_in(G('cls','ref',-0.1));paper_in(G('census','ref',-0.1));paper_in(G('courses','admission',-0.1))
+paper_in(G('two','tcsi',2.0));paper_in(G('cls','ref',-0.1));paper_in(G('census','ref',-0.1));paper_in(G('courses','admission',-0.1))
 chime(G('two','tcsi',0.4),0.1,784)
 for i,k in enumerate(['Student','Class','Enrolment','Term','Course']):pop(G('drawn','recap',0.4+i*(G('drawn','over')-G('drawn','recap'))*0.16),0.1)
 for i in range(3):pop(G('drawn','over',0.8+i*0.5),0.08)

@@ -7,8 +7,8 @@ import json
 from lang import *
 
 GAP,LEAD,TAIL=0.3,0.6,1.2
-# guides for a film that gives people room to think (see PLAYBOOK.md, "Narration, sound and pace")
-MAX_WPM,MAX_VOICE,MIN_BREATH=130,0.70,4.0
+# guides for a film that flows, pausing only where it matters (see PLAYBOOK.md, "Narration, sound and pace")
+MAX_WPM,MAX_VOICE,MIN_BREATH=140,0.82,1.5
 load=lambda p:(lambda s:json.loads(s[s.index('{'):s.rindex('}')+1]))(open(p).read())
 N,V=load(NARR),load(VODUR)
 B=load(ROOT/'src/breath.js') if (ROOT/'src/breath.js').exists() else {}

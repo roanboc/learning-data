@@ -60,6 +60,13 @@ jobs:
             player: dist/film.js
             site_player: site/assets/silent-change/film.js
             video: dist/silent-change.mp4
+          - name: Too good to be true
+            key: too-good-to-be-true-en
+            dir: films/when-things-go-wrong/2-too-good-to-be-true/source
+            lang: en
+            player: dist/film.js
+            site_player: site/assets/too-good-to-be-true/film.js
+            video: dist/too-good-to-be-true.mp4
     defaults:
       run:
         working-directory: ${{ matrix.dir }}
@@ -167,6 +174,7 @@ jobs:
           cp films/inner-life-of-data/captions/es.srt out/inner-life-of-data.es.srt
           cp films/a-sharper-sketch/captions/en.srt out/a-sharper-sketch.en.srt
           cp films/when-things-go-wrong/1-silent-change/captions/en.srt out/silent-change.en.srt
+          cp films/when-things-go-wrong/2-too-good-to-be-true/captions/en.srt out/too-good-to-be-true.en.srt
           ls -l out
           cat > notes.md <<EOF
           The Learning Data films, rendered from commit $GITHUB_SHA. Each video is 1080p, with captions as a separate \`.srt\` file for platforms that take them.
@@ -174,6 +182,7 @@ jobs:
           - *The Inner Life of Data*, how a modern data platform works: \`inner-life-of-data.mp4\` (English) and \`inner-life-of-data.es.mp4\` (Latin American Spanish, *La vida interior de los datos*).
           - *A Sharper Sketch*, data modelling: \`a-sharper-sketch.mp4\` (English).
           - *Silent change*, from the series *When things go wrong*, on changes and data contracts: \`silent-change.mp4\` (English).
+          - *Too good to be true*, from the series *When things go wrong*, on data quality checks: \`too-good-to-be-true.mp4\` (English).
 
           Watch them with chapters, then try the hands-on labs and scenarios: https://roanboc.github.io/learning-data/
 

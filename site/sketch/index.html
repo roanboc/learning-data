@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A Sharper Sketch · Learning Data</title>
+<meta name="description" content="A five-minute film about data modelling: when a simple sketch needs more precision, how to choose and check a reference model, and how to fit it to the business. Then sharpen a model in six labs, and make the call on twelve situations.">
+<meta property="og:title" content="A Sharper Sketch · Learning Data"><meta property="og:description" content="A five-minute film about data modelling: when a simple sketch needs more precision, how to choose and check a reference model, and how to fit it to the business. Then sharpen a model in six labs, and make the call on twelve situations."><meta property="og:image" content="https://roanboc.github.io/learning-data/assets/sketch-poster.jpg">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/sketch/sketch.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../"><img src="../assets/favicon.svg" alt="">Learning Data</a><nav><a href="./#watch" aria-current="page">Watch</a><a href="./labs/">Sharpen it</a><a href="./scenarios/">Make the call</a><a class="nav-extra" href="../">All films</a><a class="nav-extra" href="https://github.com/roanboc/learning-data/tree/main/films/a-sharper-sketch">GitHub</a></nav></div></header>
+<main>
+<section class="hero">
+<p class="eyebrow">Learning Data · Film three</p>
+<h1>A sharper sketch: when a data model needs more precision</h1>
+<p class="lead">Two trusted numbers disagree. Go back to the first film's simple sketch, check it against a reference model, and sharpen it one question at a time. For anyone who works with data, and precise enough for data modellers.</p>
+<ol class="path" data-text='{"watched":"Watched","labs":"{n} of 6 labs explored","quiz":"{n} of 12 answered · {ok} right"}'>
+<li><a href="./#watch" aria-current="step"><span class="n"><b>1</b></span><b>Watch</b><span>A five-minute film</span></a></li>
+<li><a href="./labs/"><span class="n"><b>2</b></span><b>Sharpen it</b><span>Six hands-on labs</span></a></li>
+<li><a href="./scenarios/"><span class="n"><b>3</b></span><b>Make the call</b><span>Twelve real situations</span></a></li>
+</ol>
+</section>
+
+<section class="module" id="watch" aria-labelledby="watch-h">
+<div class="mhead"><div><p class="step"><i>1</i>Watch</p><h2 id="watch-h">A Sharper Sketch</h2><p>A five-minute film with narration, music and sound. Press Play, or jump to a chapter.</p></div></div>
+<div class="player">
+<audio id="snd" preload="metadata" src="../assets/film3/soundtrack.mp3"></audio><div class="poster"><img src="../assets/sketch-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Play the film · 5 min</button></div></div><canvas id="film" width="1280" height="720" aria-label="Animated explainer film: A Sharper Sketch"></canvas>
+<div class="bar"><button id="play">Play</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Seek"><span id="time">0:00</span><button id="cc" class="on" aria-pressed="true">Captions</button><button id="fs">Full screen</button></div>
+</div>
+<div class="chapters" id="chapters" aria-label="Chapters"></div>
+<div class="watch-foot">
+<p class="notes"><b>How to read it.</b> The sketch is the university's conceptual model, in blue ink. The reference model, TCSI, is drawn in warm ink on tracing paper. Blue pins mark what the sketch adopts from the reference; amber pins mark what the university adds. The comparison in the corner closes as the model sharpens. The narration is a synthetic voice.</p>
+<div class="cta"><a class="btn" href="https://github.com/roanboc/learning-data/blob/main/films/a-sharper-sketch/script.md">Read the script</a></div>
+</div>
+</section>
+
+<section class="next-band" aria-labelledby="next-step-h">
+<img src="../assets/sketch-labs.jpg" alt="The sketch splitting the class into unit, unit offering and class, with the grain of each count." width="1280" height="720" loading="lazy">
+<div class="txt"><p class="step"><i>2</i>Next</p><h2 id="next-step-h">Sharpen the model yourself</h2><p>Six hands-on labs: count at different grains, place details on the right box, join through a course admission, slide through the semester, choose a reference model, and run a fit check.</p><p>Then <a href="scenarios/">make the call</a> on twelve situations.</p><div class="cta"><a class="btn primary" href="labs/">Open the labs →</a></div></div>
+</section>
+</main>
+<footer><p>The university, people, numbers and records in the film, the labs and the scenarios are fictional. TCSI, HESA Data Futures, CEDS and MCDS are named to describe real reference models; this project is not affiliated with their owners. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks logo, are not covered by either licence and belong to their owners. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
+<script src="../assets/film3/film.js"></script>
+<script src="../assets/sketch/sketch.js"></script>
+</body>
+</html>

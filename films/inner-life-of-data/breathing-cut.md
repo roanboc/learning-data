@@ -1,6 +1,6 @@
 # Proposal: the breathing cut
 
-*The third cut of* The Inner Life of Data*: the same narration, with room to think. Status: built. The film is now 8:01 in English and 8:38 in Spanish, at about 115 words a minute, with the voice speaking two-thirds of the time. The timing lives in `source/src/breath.js`, shared by both languages; each chapter's wordless ending starts at the scene's `breath` cue.*
+*The third cut of* The Inner Life of Data*: the same narration, with room to think. Status: built, then revised after [a review](pacing-review.md): the first build put all the extra time into long stops, so the film felt stop-start. The revised cut is 7:32 in English and 8:38 in Spanish, at about 120 words a minute, with the voice speaking 71% (Spanish 75%) of the time. The timing lives in `source/src/breath.js`, shared by both languages; each chapter's wordless ending starts at the scene's `breath` cue.*
 
 ## Why
 
@@ -19,13 +19,15 @@ Good documentaries let the picture keep talking after the narrator stops. The vi
 
 ## Principles
 
-1. **Pause after the idea, not before.** Hold 1.5 to 3 seconds after a line that names something new, so the eye can find it on screen. Don't pause after connecting lines like "Let's follow it."
-2. **End each chapter with a breather of 5 to 8 seconds, with no words.** The scene keeps moving and applies the chapter's idea to a new case: a variation, not a repeat. Nothing new is written on screen.
+1. **Breathe after every sentence, and pause a little longer after the idea.** The engine leaves 0.7 s after each sentence, and 0.3 s where a sentence runs on into the next line. A line that names something new gets 0.5 to 1 s more, so the eye can find it on screen. Don't pause after connecting lines like "Let's follow it." Keep stops inside a chapter under about 2 s: the first build held 2 to 3 s after 20 lines, and the film felt stop-start.
+2. **End each chapter with a breather of 3.5 to 4.5 seconds, with no words.** The scene keeps moving and applies the chapter's idea to a new case: a variation, not a repeat. Nothing new is written on screen.
 3. **Keep the picture alive.** Nothing freezes during a pause: the camera drifts, loops continue, light keeps flowing. The film already taught this: a pause that faded to near-black read as a glitch.
-4. **Let the sound carry the pause.** The music bed lifts a little when the voice rests, and one sound effect marks the variation.
+4. **Let the sound carry the pause.** The music bed lifts a little (about 4 dB) when the voice rests, slowly, and never cuts to silence. One sound effect marks the variation.
 5. **Keep the narration.** The words stay the same, so nothing needs re-voicing or re-translating. Only the timing and the pictures change.
 
 ## Chapter by chapter
+
+This table is the plan as first built. The revision kept every picture but removed 8 holds, shortened the others to 0.3 to 1.3 s, and shortened the breathers to 3.5 to 4.5 s; `source/src/breath.js` has the current values.
 
 "Hold" is extra silence after a line, and "breather" is the wordless end of a chapter. Both live in `source/src/breath.js`, shared by every language, and the engine adds them on top of the narration's own timing. A breather's picture starts at the scene's `breath` cue.
 
@@ -47,7 +49,7 @@ That adds about 1 minute 44 seconds: 6:17 becomes about 8:00, at about 115 words
 
 ## How it was built
 
-1. **Timing.** Set the holds and breathers in `src/breath.js`, once for every language. The engine re-times every scene on its own. Check with `python tools/pace.py`: no chapter above 130 words a minute, and each has a quiet moment of at least 4 seconds.
+1. **Timing.** Set the holds and breathers in `src/breath.js`, once for every language. The engine re-times every scene on its own. Check with `python tools/pace.py`: no chapter far above 130 words a minute, each with a quiet moment of at least 4 seconds, no sentence followed by less than 0.5 s, and no stop of 2.5 s or more inside a chapter.
 2. **Pictures.** Write the ten variations in `src/scA.js` to `src/scD.js`, each starting at the scene's `voEnd`, using the existing components. Check that every camera key still ends at `sc.dur`.
 3. **Sound.** In `tools/audio.py`, lift the music bed by a few dB when the voice rests, and add one effect cue per variation.
 4. **Rebuild.** Run `tools/tts.py` once to restore the voice files (the words don't change, so the timings in `vodur.js` stay the same), then `build.py`, `audio.py`, `build.py`, `captions.py` and `render.py`, in both languages. Publish the player and soundtrack to the site, and the MP4s to a release.

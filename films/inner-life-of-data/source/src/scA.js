@@ -11,7 +11,7 @@ const nextCue=(sc,id)=>{const ks=sc.vo.map(v=>v.id),i=ks.indexOf(id);return i<ks
 /* ---------- 0. The tap, stored first in the system of record ---------- */
 scene("tap",(ctx,S,t,sc)=>{
   const tapT=cue(sc,"tap")-0.3,cS=cue(sc,"stored"),cT=cue(sc,"travel"),cF=cue(sc,"follow");
-  const cam=camAt([[0,640,560,1.2],[cS,640,560,1.2],[cS+1.8,1000,560,0.95],[cT-0.1,1000,560,0.95],[cT+1.8,1300,592,3.3],[cF+0.2,1300,592,3.3],[cF+2.8,1800,600,1.2]],t);
+  const cam=camAt([[0,640,560,1.2],[cS,640,560,1.2],[cS+1.8,1000,560,0.95],[cT-0.3,1030,556,0.99],[cT+2.9,1300,592,3.3],[cF+0.1,1300,592,3.3],[cF+3.0,1800,600,1.2]],t);
   clearTo(ctx,S);const bgA=sstep(3.0,3.9,t);
   if(bgA>0){ctx.save();ctx.globalAlpha=bgA;bgW(ctx,S,cam);
     phone3(ctx,640,560,2.1,{screen:"enrol",press:t>tapT&&t<tapT+0.3});
@@ -36,7 +36,7 @@ const IN2={L1:[P(592,256),P(690,256),P(722,306),P(780,318)],L2:[P(592,416),P(690
 IN2.ALm=mk(IN2.AL);
 scene("in",(ctx,S,t,sc)=>{
   const c=id=>cue(sc,id),cSy=c("systems"),cCo=c("colours"),cEv=c("events"),cIn=c("integ"),cZb=c("zerobus"),cFi=c("files"),cAu=c("auto"),cBr=c("bronze"),cHo=c("hot");
-  const cam=camAt([[0,425,500,1.2],[cCo+0.6,425,500,1.2],[cEv+0.5,700,360,1.25],[cIn+0.3,830,380,1.3],[cZb+0.5,1150,380,1.05],[cFi-0.3,1150,380,1.05],[cFi+0.7,760,650,1.2],[cAu+0.5,1080,670,1.2],[cBr+0.4,1480,520,1.0],[cHo+0.3,960,520,0.98],[sc.dur+2,960,520,1.0]],t);
+  const cam=camAt([[0,425,500,1.2],[cCo+0.6,425,500,1.2],[cEv+0.5,700,360,1.25],[cIn+0.3,830,380,1.3],[cZb+0.5,1150,380,1.05],[cFi-0.6,1150,380,1.05],[cFi+0.9,760,650,1.2],[cAu+0.5,1080,670,1.2],[cBr+0.4,1480,520,1.0],[cHo+0.3,960,520,0.98],[sc.dur+2,960,520,1.0]],t);
   bgW(ctx,S,cam);
   const apps=["sis","lms","hr","fin"],ay=[196,356,516,676];
   apps.forEach((a,i)=>withA(ctx,fin(t,cSy+0.2+i*0.45),()=>appCard(ctx,260,ay[i],330,120,a)));
@@ -51,12 +51,12 @@ scene("in",(ctx,S,t,sc)=>{
   withA(ctx,aA,()=>lane(ctx,IN2.AL,APP.fin.c));
   // the breather: the next night, one new file lands, and Auto Loader reads only that one
   if(nx&&t>B){const a=fin(t,B,0.8)*(1-sstep(sc.dur-0.6,sc.dur,t)),mx=800,my=600;withA(ctx,a,()=>{glow(ctx,mx,my,44,[220,230,255],0.35);ctx.fillStyle="rgba(236,242,255,0.95)";ctx.beginPath();ctx.arc(mx,my,15,0,TAU);ctx.arc(mx+7,my-5,13,0,TAU,true);ctx.fill("evenodd");T(ctx,"02:00",mx+24,my+7,{f:"mono",w:500,size:17,color:rgba(SOFT,0.95)});});}
-  for(let i=N-1+nx;i>=0;i--){const late=i>=N,drop=late?B+1.0:cFi+0.4+i*0.09,land=drop+0.6;if(t<drop)continue;const leave=late?B+2.4:scan0+i*0.55,sp={cell:(i*5+1)%24,q:0,app:i%2?"hr":"fin"},ix=820+(i%6)*18,iy=700-(i%6)*4;
+  for(let i=N-1+nx;i>=0;i--){const late=i>=N,drop=late?B+0.7:cFi+0.4+i*0.09,land=drop+0.6;if(t<drop)continue;const leave=late?B+1.9:scan0+i*0.55,sp={cell:(i*5+1)%24,q:0,app:i%2?"hr":"fin"},ix=820+(i%6)*18,iy=700-(i%6)*4;
     if(t<land){const u=ease((t-drop)/0.6);dtile(ctx,ix,lerp(560,iy,u),40,(hash(i,4)-0.5)*0.3,sp,1);}
     else if(t<leave){dtile(ctx,ix,iy,40,(hash(i,4)-0.5)*0.3,sp,1);}
     else{const u=(t-leave)/1.6;if(u>0.12)done++;if(u>0.05&&u<0.2)scanning=true;if(u<=1){const q=at(IN2.ALm,u);dtile(ctx,q.x,q.y,30,0.1,sp,1-sstep(0.9,1,u));}}}
   withA(ctx,aA,()=>{glass(ctx,1118,622,34,156,17,[255,209,140],{glow:20});ctx.save();ctx.shadowColor="rgba(255,220,150,1)";ctx.shadowBlur=scanning?30:14;ctx.fillStyle=scanning?"rgba(255,246,220,1)":"rgba(255,226,170,0.8)";ctx.fillRect(1122,694,26,5);ctx.restore();
-    chip(ctx,1268,806,"databricks","Auto Loader","each new file once · checkpoint "+done+" of "+(nx&&t>B+1.6?N+1:N),{align:"center",ss:16});});
+    chip(ctx,1268,806,"databricks","Auto Loader","each new file once · checkpoint "+done+" of "+(nx&&t>B+1.3?N+1:N),{align:"center",ss:16});});
   const bA=0.55*fin(t,cZb-0.1)+0.45*fin(t,cBr-0.2),lvl=0.25+0.55*sstep(cZb,cHo,t);
   withA(ctx,bA,()=>vault(ctx,1460,196,380,690,LAYER.bronze,(r,cc)=>hash(r*31+cc,5)>lvl?null:APP[["sis","lms","hr","fin"][(hash(r*7+cc,6)*4)|0]].c,t>cBr-0.4?"Bronze":null,"Delta tables, as they arrived"));
   withA(ctx,fin(t,cBr+0.6)*(1-sstep(cHo+2.5,cHo+3.2,t)),()=>magnifier(ctx,1245,488,80,{cell:14,q:0,app:"lms",hi:true},1208,352,"raw: glitches, mixed clocks",APP.lms.c));
@@ -68,7 +68,7 @@ scene("in",(ctx,S,t,sc)=>{
 scene("sketch",(ctx,S,t,sc)=>{
   const c=id=>cue(sc,id),cF=c("first"),cM=c("model"),cC=c("concept"),cW=c("wrong"),cD=c("downstream"),cR=c("right"),dM=cC-cM;
   // the breather: two new enrolments arrive; the right sketch gives each its place, the wrong one lets the error grow
-  const B=c("breath"),arr=sc.breathe?[1.0,3.0].map(x=>B+x):[],nIn=arr.filter(a=>t>a+1.0).length;
+  const B=c("breath"),arr=sc.breathe?[0.6,2.0].map(x=>B+x):[],nIn=arr.filter(a=>t>a+1.0).length;
   const cam=camAt([[0,960,520,1],[sc.dur+2,960,520,1.04]],t);bgW(ctx,S,cam);
   const p1=1-sstep(cW-0.7,cW+0.1,t),p2=sstep(cW-0.4,cW+0.4,t);
   withA(ctx,p1,()=>{glass(ctx,300,250,1320,580,22,[150,225,255],{glow:18,ea:0.4,fill:"rgba(10,18,36,0.5)"});

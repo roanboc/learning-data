@@ -3,7 +3,7 @@ const ORDER24=(()=>{const a=[...Array(24).keys()];for(let i=a.length-1;i>0;i--){
 const KSRC=[{n:"Intranet",x:150,ic:"doc"},{n:"Policy library",x:560,ic:"books"},{n:"Handbook",x:1060,ic:"hand"},{n:"Process maps",x:1470,ic:"flow"}];
 scene("meaning",(ctx,S,t,sc)=>{
   const c=id=>cue(sc,id),cNo=c("noise"),cBr=c("bricks"),cCa=c("catalog"),cDe=c("define"),cUc=c("uc"),cKn=c("knowledge"),cMc=c("mcp"),cRd=c("reads"),cOn=c("onto");
-  const cam=camAt([[0,960,540,1.0],[cKn-0.3,960,540,1.0],[cKn+2.0,960,-560,1.0],[sc.dur+2,960,-560,1.03]],t);bgW(ctx,S,cam);
+  const cam=camAt([[0,960,540,1.0],[cKn-0.3,975,545,1.03],[cKn+2.0,960,-560,1.0],[sc.dur+2,960,-560,1.03]],t);bgW(ctx,S,cam);
   const nz=(1-sstep(cNo+0.5,cBr,t))*0.9;
   for(let r=0;r<3;r++)for(let k=0;k<4;k++){const n=r*4+k,dk=["students","teaching","research","finance"][(n+r)%4],vi=(n*5+r)%6,d=DOM[dk].c,X=90+k*245,Y=220+r*200;ledFrame(ctx,X,Y,190,126,d,pv(dk,vi),{pad:5,lw:2,glow:12});pvLive(ctx,dk,vi,X,Y,190,126,t);T(ctx,pvTitle(dk,vi),X-2,Y+152,{w:600,size:15,color:rgba(SOFT,0.95)});
     if(nz>0){for(let j=0;j<70;j++){ctx.fillStyle=hash(j,n+Math.floor(t*14))>0.5?"rgba(255,255,255,"+0.6*nz+")":"rgba(0,0,0,"+0.6*nz+")";ctx.fillRect(X+hash(j,n*3+Math.floor(t*12))*190,Y+hash(j+50,n*5+Math.floor(t*12))*126,5,5);}}}
@@ -39,7 +39,7 @@ scene("speeds",(ctx,S,t,sc)=>{
   withA(ctx,fin(t,cNo),()=>T(ctx,"One answer, right now",480,150,{w:800,size:40,align:"center"}));withA(ctx,fin(t,cYe),()=>T(ctx,"Every record, over years",1440,150,{w:800,size:40,align:"center"}));
   const ans=fin(t,q0+0.35,0.25);phone3(ctx,280,470,1.5,{screen:"seat",ans});
   // the breather: three more seat checks answer at once, while one long scan crosses the whole history
-  const B=c("breath"),Q=sc.breathe?[0.4,1.9,3.4].map(x=>B+x):[];let flash=0;
+  const B=c("breath"),Q=sc.breathe?[0.3,1.2,2.1].map(x=>B+x):[];let flash=0;
   Q.forEach(q=>{if(t>q-0.3&&t<q)glow(ctx,lerp(370,540,(t-q+0.3)/0.3),470,24,C.hot,1);if(t>q+0.05&&t<q+0.35)glow(ctx,lerp(540,370,(t-q-0.05)/0.3),470,24,GOOD,1);if(t>q&&t<q+0.8)flash=Math.max(flash,1-(t-q)/0.8);});
   if(t>q0-0.3&&t<q0){glow(ctx,lerp(370,540,(t-q0+0.3)/0.3),470,24,C.hot,1);}if(t>q0+0.3&&t<q0+0.6){glow(ctx,lerp(540,370,(t-q0-0.3)/0.3),470,24,GOOD,1);}
   glass(ctx,540,330,380,290,18,DBX,{glow:16,ea:0.5,fill:"rgba(7,12,24,0.92)"});withA(ctx,fin(t,cLa-0.2),()=>{logo(ctx,"databricks",560,346,32);T(ctx,"Lakebase",602,372,{w:800,size:24});T(ctx,"a fast desk copy for apps",602,396,{w:500,size:16,color:rgba(SOFT,0.95)});});
@@ -60,7 +60,7 @@ scene("speeds",(ctx,S,t,sc)=>{
 scene("out",(ctx,S,t,sc)=>{
   const c=id=>cue(sc,id),cFo=c("four"),cEv=c("events"),cSq=c("sql"),cCp=c("copies"),cSt=c("stale"),cTw=c("twist"),cPr=c("projector"),cSh=c("share"),cMi=c("mirror"),cFe=c("fed"),cOn=c("one");
   const pzT=(sc.pauses&&sc.pauses.twist)||1;
-  const cam=camAt([[0,1500,540,0.6],[cEv-0.3,1500,540,0.6],[cEv+0.6,960,330,1.3],[cSq-0.2,960,330,1.3],[cSq+0.6,1700,260,1.3],[cCp-0.2,1700,260,1.3],[cCp+0.6,1150,440,1.3],[cTw-pzT-1.1,1150,440,1.3],[cTw-pzT*0.4-0.5,1500,540,0.6],[cPr+0.4,1050,790,1.05],[cSh+0.4,1300,790,1.3],[cMi+0.4,1790,790,1.3],[cFe+0.5,2440,800,1.25],[cOn+0.4,1500,560,0.6],[sc.dur+2,1500,560,0.62]],t);
+  const cam=camAt([[0,1500,540,0.6],[cEv-0.7,1500,540,0.6],[cEv+1.5,960,330,1.3],[cSq-0.7,960,330,1.3],[cSq+1.1,1700,260,1.3],[cCp-0.7,1700,260,1.3],[cCp+1.1,1150,440,1.3],[cTw-pzT-1.5,1150,440,1.3],[cTw-0.2,1500,540,0.6],[cPr+0.4,1050,790,1.05],[cSh+0.4,1300,790,1.3],[cMi+0.4,1790,790,1.3],[cFe+0.5,2440,800,1.25],[cOn+0.4,1500,560,0.6],[sc.dur+2,1500,560,0.62]],t);
   bgW(ctx,S,cam);const dim=(a,b)=>0.35+0.65*fin(t,a,b||0.6);
   vault(ctx,120,280,300,560,LAYER.gold,(r,k)=>hash(r*13+k,3)>0.8?null:DOM[["students","teaching","research","finance"][(hash(r*7+k,2)*4)|0]].c,"Gold","data products");
   const chg=cSt+0.2;if(t>chg&&t<chg+1.2)glow(ctx,270,560,240,LAYER.gold,0.6*(1-(t-chg)/1.2));
@@ -82,6 +82,6 @@ scene("out",(ctx,S,t,sc)=>{
   withA(ctx,fin(t,cOn),()=>chip(ctx,1500,1040,null,"Zero-copy","projected, never copied",{align:"center",edge:LAYER.gold}));
   if(t>cTw-pzT-0.1&&t<cTw+0.6){const a=clamp((t-cTw+pzT+0.1)/(pzT+0.1),0,1)*(1-sstep(cTw+0.2,cTw+0.6,t));glow(ctx,756,790,40+70*a,[255,236,190],0.7*a);}
   // the breather: the original changes; both projected screens show it in the same instant, while the copy falls behind
-  const B=c("breath");if(sc.breathe&&t>B){[1.0,3.6].forEach(d=>{const u=t-B-d;if(u>0&&u<1.4){const a=1-u/1.4;glow(ctx,270,560,260,LAYER.gold,0.6*a);if(u>0.15)[[1290,795],[1790,795]].forEach(([x,y])=>glow(ctx,x,y,240,[255,245,220],0.5*(1-(u-0.15)/1.25)));}if(u>0.3&&u<2.3)glow(ctx,1470,520,120,BAD,0.5*Math.sin((u-0.3)/2*Math.PI));});}
+  const B=c("breath");if(sc.breathe&&t>B){[0.6,2.2].forEach(d=>{const u=t-B-d;if(u>0&&u<1.4){const a=1-u/1.4;glow(ctx,270,560,260,LAYER.gold,0.6*a);if(u>0.15)[[1290,795],[1790,795]].forEach(([x,y])=>glow(ctx,x,y,240,[255,245,220],0.5*(1-(u-0.15)/1.25)));}if(u>0.3&&u<2.3)glow(ctx,1470,520,120,BAD,0.5*Math.sin((u-0.3)/2*Math.PI));});}
   vign(ctx,S);
 });

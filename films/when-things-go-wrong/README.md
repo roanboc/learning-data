@@ -13,7 +13,7 @@
 | Film | Topic | What goes wrong | What it teaches | Status |
 |---|---|---|---|---|
 | [Silent change](1-silent-change/treatment.md) | Changes and data contracts | A new enrolment status that the business and the student system team each saw only half of | A change needs visibility on both the technical and the business side; data contracts, checked constantly | Published at [/when-things-go-wrong/silent-change/](https://roanboc.github.io/learning-data/when-things-go-wrong/silent-change/) |
-| [Too good to be true](2-too-good-to-be-true/treatment.md) | Data quality checks | Applications jump 38% overnight because a sync copied a week of them twice in the source system | Expectations on numbers, warning and error levels, and why stale and labelled beats fresh and wrong; re-ingesting from a fixed source | Treatment agreed; in the works |
+| [Too good to be true](2-too-good-to-be-true/treatment.md) | Data quality checks | Applications jump 38% overnight because a sync copied a week of them twice in the source system | Expectations on numbers, warning and error levels, and why stale and labelled beats fresh and wrong; re-ingesting from a fixed source | Script draft 1, with a rigour sheet and pacing report: [script.md](2-too-good-to-be-true/script.md). Next: style frames |
 
 Each film has a folder here. The number in a folder's name only keeps the folders in order. The release workflow and the site's links to GitHub use these names, so don't rename a folder, and never show the number to visitors.
 

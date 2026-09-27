@@ -47,7 +47,7 @@ Reuse the first film's world and components: the vaults, tiles, the dbt line, th
 
 ## Pacing
 
-Built with room to think from the start: about 115 words a minute, a hold after each new idea, and a wordless breather at the end of each chapter (see [PLAYBOOK.md](../../PLAYBOOK.md) and `tools/pace.py`). Target length: 7 to 8 minutes. "Pause and think" questions for each chapter come with the script.
+Built with room to think from the start: about 120 words a minute, a breath after every sentence, a short beat after each new idea, and a short wordless breather at the end of each chapter (see [PLAYBOOK.md](../../PLAYBOOK.md) and `tools/pace.py`). Target length: 7 to 8 minutes. "Pause and think" questions for each chapter come with the script.
 
 ## Labs and scenarios (for Learning Data)
 

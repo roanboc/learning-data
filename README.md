@@ -45,7 +45,7 @@ films/                           one folder per film: script or story, captions/
   a-sharper-sketch/              A Sharper Sketch, on data modelling
   when-things-go-wrong/          the series When things go wrong: its README, the characters it shares, and one folder per film
     1-silent-change/             Silent change: treatment, story outline, captions and source
-    2-too-good-to-be-true/       Too good to be true, in the works: treatment, script, and the start of its source
+    2-too-good-to-be-true/       Too good to be true, in the works: treatment, script, style frames, and the start of its source
 site-tools/                      build_pages.py turns the Markdown pages into site pages; check_site.py and smoke.py check the site
 .github/workflows/pages.yml      publishes site/ on every push to main
 .github/workflows/release.yml    renders every film and publishes the videos to a release, when you run it

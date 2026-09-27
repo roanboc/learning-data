@@ -170,6 +170,6 @@ Within the series' guides: about 125 to 135 words a minute, a beat of 0.8 s afte
 ## Next checkpoints
 
 1. ~~Script with a rigour sheet and pacing report.~~ This draft.
-2. Style frames: the gauge on the painting, the row checks passing while the gauge goes red, the three Tuesdays, and the reload.
+2. ~~Style frames: the gauge on the painting, the row checks passing while the gauge goes red, the three Tuesdays, and the reload.~~ See [the style frames](frames/README.md).
 3. A voice test, then `tts.py` and a pacing report on the real voice.
 4. The first cut.

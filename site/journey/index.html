@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The making of The Inner Life of Data · Learning Data</title>
+<title>Making of · Learning Data</title>
+<meta name="description" content="A learning journey: what we explored, argued about, got wrong and learned while making short films about data platforms.">
 <link rel="alternate" hreflang="en" href="https://roanboc.github.io/learning-data/journey/"><link rel="alternate" hreflang="es" href="https://roanboc.github.io/learning-data/es/journey/">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,11 +12,36 @@
 <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
-<header class="top"><div class="top-in"><a class="brand" href="../"><img src="../assets/favicon.svg" alt="">Learning Data</a><nav aria-label="Site"><a href="../">Start here</a><a href="../topics/">Topics</a><a class="nav-extra" href="../journey/" aria-current="page">Making of</a><a class="nav-extra" href="https://github.com/roanboc/learning-data">GitHub</a><span class="lang" role="group" aria-label="Language"><a href="../journey/" aria-current="true" lang="en">EN</a><a href="../es/journey/" lang="es" hreflang="es">ES</a></span></nav></div></header>
-<main class="prose">
-<h1 id="the-making-of-the-inner-life-of-data">The making of <em>The Inner Life of Data</em></h1>
-<p><em>A learning journey: what we explored, argued about, got wrong and learned while making a short film about data platforms.</em></p>
-<p>The film was made over two days, 25 and 26 September 2026, in one long working conversation between the author and Claude, an AI model made by Anthropic. The author brought the brief, the platform knowledge and most of the pushback. Claude proposed options, checked facts, wrote the code and rendered every frame. This page tells the story from the first question to the published site, with the lessons worth reusing.</p>
+<header class="top"><div class="top-in"><a class="brand" href="../"><img src="../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Site"><a href="../">Start here</a><a href="../topics/">Topics</a><a href="../journey/" aria-current="page">Making of</a><span class="lang" role="group" aria-label="Language"><a href="../journey/" aria-current="true" lang="en">EN</a><a href="../es/journey/" lang="es" hreflang="es">ES</a></span></nav></div></header>
+<main>
+<section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="../journey/img/01-style-boards.jpg" alt=""><img src="../journey/img/05-style-frame-dbt.jpg" alt=""><img src="../journey/img/10-characters.jpg" alt=""><img src="../journey/img/11-three-tuesdays.jpg" alt=""><img src="../journey/img/08-final-overview.jpg" alt=""><img src="../journey/img/04-style-frame-sources.jpg" alt=""><img src="../journey/img/07-final-brain.jpg" alt=""><img src="../journey/img/06-final-sketch.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow">Making of</p>
+<h1 id="the-making-of-learning-data">The making of Learning Data</h1>
+<p class="lead">A learning journey: what we explored, argued about, got wrong and learned while making short films about data platforms.</p>
+</section>
+<div class="prose">
+<p>It started with one film. <em>The Inner Life of Data</em> was made over two days, 25 and 26 September 2026, in one long working conversation between the author and Claude, an AI model made by Anthropic. The author brought the brief, the platform knowledge and most of the pushback. Claude proposed options, checked facts, wrote the code and rendered every frame. Sections 1 to 10 tell that story, from the first question to the published site.</p>
+<p>Then feedback turned one film into four: <em>A Sharper Sketch</em>, on data modelling, and a series, <em>When things go wrong</em>, with <em>Silent change</em> and <em>Too good to be true</em>. Section 11 tells what changed when we made more than one, and the lessons at the end cover all four.</p>
+<p><strong>On this page</strong></p>
+<div class="toc">
+<ul>
+<li><a href="#at-a-glance">At a glance</a></li>
+<li><a href="#1-the-brief">1. The brief</a></li>
+<li><a href="#2-finding-the-analogy">2. Finding the analogy</a></li>
+<li><a href="#3-getting-the-facts-right">3. Getting the facts right</a></li>
+<li><a href="#4-from-light-to-pictures">4. From light to pictures</a></li>
+<li><a href="#5-the-metaphor-map">5. The metaphor map</a></li>
+<li><a href="#6-the-first-cut">6. The first cut</a></li>
+<li><a href="#7-the-big-review">7. The big review</a></li>
+<li><a href="#8-checkpoints-before-the-rebuild">8. Checkpoints before the rebuild</a></li>
+<li><a href="#9-the-second-cut">9. The second cut</a></li>
+<li><a href="#10-one-film-two-ways-to-play">10. One film, two ways to play</a></li>
+<li><a href="#11-from-one-film-to-four">11. From one film to four</a></li>
+<li><a href="#12-what-went-wrong-along-the-way">12. What went wrong along the way</a></li>
+<li><a href="#lessons-learned">Lessons learned</a></li>
+<li><a href="#reuse-it">Reuse it</a></li>
+</ul>
+</div>
 <h2 id="at-a-glance">At a glance</h2>
 <table>
 <thead>
@@ -75,6 +101,11 @@
 <td>10. Publishing</td>
 <td>A site that draws the film live, videos rendered from the same code, and this story</td>
 <td>The site, this repository and its releases</td>
+</tr>
+<tr>
+<td>11. More films</td>
+<td>Feedback became a film, the films became a series, and every review became a check</td>
+<td><em>A Sharper Sketch</em>, <em>Silent change</em>, <em>Too good to be true</em>, and a site organised by topic</td>
 </tr>
 </tbody>
 </table>
@@ -271,7 +302,36 @@
 <blockquote>
 <p><strong>Lesson:</strong> draw it live for learning, and render a file for sharing. Build both from one source, so they never disagree.</p>
 </blockquote>
-<h2 id="11-what-went-wrong-along-the-way">11. What went wrong along the way</h2>
+<h2 id="11-from-one-film-to-four">11. From one film to four</h2>
+<h3 id="feedback-became-the-next-film">Feedback became the next film</h3>
+<p>Feedback on <em>The Inner Life of Data</em> said its sketch (student, class, enrolment, term, course) was an oversimplification. We could quietly fix the sketch, or let a new film say so. We chose the second. <em>A Sharper Sketch</em> opens by calling the sketch what it was, then sharpens it one question at a time, whenever a question can't be answered in only one way. A version stamp takes the sketch from v1 to v2, and the last shot hints at v3: models change, not often, but always.</p>
+<ul>
+<li><strong>Keep each film on one topic.</strong> Early drafts drifted into how dbt builds the physical tables. That detail was parked for a later film for engineers, so this one stays on what the model means.</li>
+<li><strong>Choose a reference model deliberately.</strong> The film checks the sketch against TCSI because it is public, and says that many universities actually use MortarCAPS. There is often more than one standard: pick one and say why, then adopt it where it fits, extend it where it doesn't, and record every difference.</li>
+</ul>
+<h3 id="a-series-with-people-on-screen">A series, with people on screen</h3>
+<p><em>The Inner Life of Data</em> follows data when things go right. The next idea was to show what happens when they don't, and it grew into a series, <em>When things go wrong</em>, with one tagline: "Fail safely. Fix once." Each film takes one way things go wrong, starts with the person it reaches, follows the lineage upstream to the cause, and comes back down with the fix. A list of candidates (a late file, an overwritten table, a broken promise, the wrong eyes on personal data) keeps each film to one mechanism.</p>
+<ul>
+<li><strong>A square of four people.</strong> Every change has a technical side and a business side, and a side that produces the data and a side that uses it. Each film puts one person in each corner, and Sam, the data engineer, guides every film. The colour of a person's outline shows their side: cyan for technical, gold for business.</li>
+<li><strong>Test the characters in code before writing a script.</strong> A character sheet drew seven people in three poses and three expressions. It showed that faces work at this simple level, and what didn't yet: front views only, no sitting, simple hands. The scripts were written around those limits.</li>
+<li><strong>Blameless and believable.</strong> No villains: a good idea, a well-built upgrade, and a sync that timed out, as syncs do. The numbers are small and plausible: a class shown at 108% instead of 96% is exactly the kind of wrong number nobody questions.</li>
+<li><strong>Show the alternatives side by side.</strong> <em>Too good to be true</em> plays the same Tuesday three ways: with no test, with a warning and with an error. The only thing that differs between the three is the gauge, and that is the lesson.</li>
+</ul>
+<p><img alt="The characters of When things go wrong, drawn in code, with Sam, the data engineer, in the middle" src="img/10-characters.jpg" /></p>
+<p><img alt="Three versions of the same Tuesday: no test, a warning and an error, side by side" src="img/11-three-tuesdays.jpg" /></p>
+<h3 id="smaller-checkpoints-earlier">Smaller checkpoints, earlier</h3>
+<p>The later films added checkpoints that cost less than a render: a treatment that lists the decisions the author must make, a story outline written fragment by fragment, the character sheet, style frames drawn with the film's own components, and a script with a rigour sheet and a pacing report. Each decision was written down with its date, so the next session could start from it instead of arguing it again.</p>
+<h3 id="reviews-that-measured-rhythm">Reviews that measured rhythm</h3>
+<p>A review of <em>The Inner Life of Data</em>'s breathing cut found the length right and the rhythm wrong. The averages looked healthy, at 115 words a minute, but the voice still rushed at 171 words a minute between 32 long stops, and the music jumped up 7.5 dB in a quarter of a second at every stop. It also found a bug that had been there from the start: no music at all in the opening chapter. The fix set the pace for every later film: a natural beat of about 0.8 s after every sentence, longer pauses only where an idea must land, very few wordless moments, and music that rises slowly. Each film also got its own music.</p>
+<p>The voice got the same treatment. Raising the Spanish voice's pitch made it sound robotic: a naturalness model scored it 3.24 out of 5. Blending it with the English narrator's voice raised the score to 4.33, and made the two languages sound like one narrator.</p>
+<h3 id="make-it-look-like-what-people-know">Make it look like what people know</h3>
+<p>In <em>Silent change</em>, the modern painting that stood for a data product read as a pie chart that had been crossed out. It became a dashboard in the style of a Databricks dashboard, with a KPI card and an amber note that says how old the data is. Viewers recognise a dashboard at once, so the story can spend its time on the problem. A frame-by-frame review of the same film found 72 problems, from boxes cut off at the edge of the frame to text under the captions; 71 were fixed before it was published.</p>
+<h3 id="films-that-stand-alone-and-a-site-organised-by-topic">Films that stand alone, and a site organised by topic</h3>
+<p>With four films, numbering them would suggest an order that doesn't exist. So the films carry no numbers: each opens with a one-line recap, and the site hangs every topic off the chapter of <em>The Inner Life of Data</em> it goes deeper on. Every film has the same three steps (Watch, Take it apart, Make the call), and progress is kept per film. Every problem a review found on the site, such as low contrast, lost keyboard focus or a panel covering the player's controls, became an automated check, so it can't come back.</p>
+<blockquote>
+<p><strong>Lesson:</strong> making more than one film is where a process becomes a method. Write down what worked, turn each review into a check, and let the next film start from both.</p>
+</blockquote>
+<h2 id="12-what-went-wrong-along-the-way">12. What went wrong along the way</h2>
 <p>Mistakes were part of the process, and most of them taught something:</p>
 <ul>
 <li>Claude dismissed audio too quickly at first. The fix was an offline voice model and synthesised sound.</li>
@@ -279,6 +339,10 @@
 <li>Background renders stopped when a session ended, and a voice job ran out of memory next to the renderer. Both became resumable jobs, run one at a time.</li>
 <li>A relationship diagram was first drawn with its crow's-foot marks backwards.</li>
 <li>Labels collided with captions until every scene was checked against the caption area.</li>
+<li>The first pacing fix trusted averages. A film can meet every average and still play as "rush, stop, rush, stop".</li>
+<li>The opening chapter had no music from the very first version, and nobody noticed until a review measured the sound.</li>
+<li>The red thread that follows the lineage in <em>Silent change</em> first cut across the dashboard and the platform, and was too busy. Now it moves one lineage step at a time.</li>
+<li>A pitch-shifted voice sounded robotic, and an abstract painting read as a crossed-out chart. Both were replaced by something familiar: a blended voice, and a real-looking dashboard.</li>
 </ul>
 <h2 id="lessons-learned">Lessons learned</h2>
 <ol>
@@ -296,10 +360,20 @@
 <li><strong>Validate by looking and measuring,</strong> and say plainly what you can't check. Claude couldn't hear the audio, so the author judged the balance.</li>
 <li><strong>Pushback is the engine.</strong> Nearly every improvement started with "that's not quite right".</li>
 <li><strong>Draw it live for learning, and render a file for sharing,</strong> both from one source.</li>
+<li><strong>Turn feedback into the next piece.</strong> Saying, in a new film, that the sketch was an oversimplification taught more than fixing it quietly.</li>
+<li><strong>One film, one mechanism.</strong> Park what doesn't fit, and keep a list of candidates for later films.</li>
+<li><strong>Put people on every side of a problem.</strong> Technical and business, producing and using: a change is only safe when all four can see it.</li>
+<li><strong>Show the alternatives side by side,</strong> so that the one thing that differs is the lesson.</li>
+<li><strong>Averages hide rhythm.</strong> Measure where the pauses fall, not just how much silence there is.</li>
+<li><strong>Use what the audience already knows.</strong> A familiar dashboard beats an abstract picture that needs explaining.</li>
+<li><strong>Write decisions down, with the date.</strong> The next session starts from them instead of arguing them again.</li>
+<li><strong>Turn every review finding into a check,</strong> so the same problem can't come back.</li>
 </ol>
 <h2 id="reuse-it">Reuse it</h2>
-<p>The film's <a href="https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/source/README.md">source and rebuild guide</a> are in this repository, and the <a href="https://github.com/roanboc/learning-data/blob/main/PLAYBOOK.md">playbook</a> collects what to reuse for the next film or course. To adapt the film for another university, change the narration in <code>src/narration.js</code> (for example "class", "census date" and the domain names), regenerate the voice, and render again.</p>
+<p>Each film's source and rebuild guide are in this repository: <a href="https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/source/README.md"><em>The Inner Life of Data</em></a>, <a href="https://github.com/roanboc/learning-data/blob/main/films/a-sharper-sketch/README.md"><em>A Sharper Sketch</em></a> and <a href="https://github.com/roanboc/learning-data/blob/main/films/when-things-go-wrong/README.md">the series <em>When things go wrong</em></a>, with its treatments, character sheet and style frames. The <a href="https://github.com/roanboc/learning-data/blob/main/PLAYBOOK.md">playbook</a> collects what to reuse for the next film or course. To adapt <em>The Inner Life of Data</em> for another university, change the narration in <code>src/narration.js</code> (for example "class", "census date" and the domain names), regenerate the voice, and render again.</p>
+</div>
 </main>
-<footer><p class="foot-links"><a href="../">Start here</a> · <a href="../topics/">Topics</a> · <a href="../journey/">Making of</a> · <a href="https://github.com/roanboc/learning-data">GitHub</a></p><p>The university, people, numbers and records in the film, the labs and the scenarios are fictional. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Source on GitHub</a></p><p>The university, people, numbers and records in the film, the labs and the scenarios are fictional. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
+<script src="../assets/ambient.js"></script>
 </body>
 </html>

@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{title}} · Learning Data</title>
+<title>Making of · Learning Data</title>
+<meta name="description" content="{{description}}">
 <link rel="alternate" hreflang="en" href="{{site}}{{en}}"><link rel="alternate" hreflang="es" href="{{site}}{{es}}">
 <link rel="icon" href="{{base}}assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,10 +12,18 @@
 <link rel="stylesheet" href="{{base}}assets/site.css">
 </head>
 <body>
-<header class="top"><div class="top-in"><a class="brand" href="{{base}}"><img src="{{base}}assets/favicon.svg" alt="">Learning Data</a><nav aria-label="Site"><a href="{{base}}">Start here</a><a href="{{base}}topics/">Topics</a><a class="nav-extra" href="{{base}}journey/" aria-current="page">Making of</a><a class="nav-extra" href="https://github.com/roanboc/learning-data">GitHub</a><span class="lang" role="group" aria-label="Language"><a href="{{base}}{{en}}" aria-current="true" lang="en">EN</a><a href="{{base}}{{es}}" lang="es" hreflang="es">ES</a></span></nav></div></header>
-<main class="prose">
+<header class="top"><div class="top-in"><a class="brand" href="{{base}}"><img src="{{base}}assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Site"><a href="{{base}}">Start here</a><a href="{{base}}topics/">Topics</a><a href="{{base}}journey/" aria-current="page">Making of</a><span class="lang" role="group" aria-label="Language"><a href="{{base}}{{en}}" aria-current="true" lang="en">EN</a><a href="{{base}}{{es}}" lang="es" hreflang="es">ES</a></span></nav></div></header>
+<main>
+<section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="{{base}}journey/img/01-style-boards.jpg" alt=""><img src="{{base}}journey/img/05-style-frame-dbt.jpg" alt=""><img src="{{base}}journey/img/10-characters.jpg" alt=""><img src="{{base}}journey/img/11-three-tuesdays.jpg" alt=""><img src="{{base}}journey/img/08-final-overview.jpg" alt=""><img src="{{base}}journey/img/04-style-frame-sources.jpg" alt=""><img src="{{base}}journey/img/07-final-brain.jpg" alt=""><img src="{{base}}journey/img/06-final-sketch.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow">Making of</p>
+{{h1}}
+<p class="lead">{{lead}}</p>
+</section>
+<div class="prose">
 {{body}}
+</div>
 </main>
-<footer><p class="foot-links"><a href="{{base}}">Start here</a> · <a href="{{base}}topics/">Topics</a> · <a href="{{base}}journey/">Making of</a> · <a href="https://github.com/roanboc/learning-data">GitHub</a></p><p>The university, people, numbers and records in the film, the labs and the scenarios are fictional. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Source on GitHub</a></p><p>The university, people, numbers and records in the film, the labs and the scenarios are fictional. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
+<script src="{{base}}assets/ambient.js"></script>
 </body>
 </html>

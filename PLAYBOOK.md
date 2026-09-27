@@ -54,6 +54,7 @@ What made *The Inner Life of Data* work, written so the next film, lab or course
 - **Name things before explaining them.** A new term lands better if the picture shows it a moment before the narration explains what it does.
 - **Make intentional pauses look intentional.** A silence needs light and motion, or it reads as a glitch.
 - **Let sound support meaning.** Music sits under the voice and lifts about 4 dB in pauses, slowly, so it doesn't pump; never cut the sound to silence, which reads as a fault. About sixty effects land on story cues. Mix to about -16 LUFS for the web.
+- **Check a synthetic voice by ear and by numbers.** A naturalness model (such as UTMOS) and a speech recognizer catch what a pitch reading misses. Pitch-shifting a synthetic voice made it robotic; blending two voice styles made the Spanish voice more natural and closer to the English one.
 - **Be open about the voice.** A synthetic voice is fine; say so. Captions come from the same script as the narration, so they always match.
 
 *Ask: where does the viewer get a moment to catch up?*

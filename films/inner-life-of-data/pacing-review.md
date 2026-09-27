@@ -132,8 +132,8 @@ The fixes are built, in both languages, with even fewer stops than the plan. Mea
 
 | | Before | Now |
 |---|---|---|
-| Length | 8:01 (Spanish 8:38) | 7:32 (Spanish 8:09) |
-| Words a minute | 115 | 122 (Spanish 124) |
+| Length | 8:01 (Spanish 8:38) | 7:32 (Spanish 8:38, with a calmer voice) |
+| Words a minute | 115 | 122 (Spanish 118) |
 | Silence after a full sentence | 0.3 s for 45 of 65 sentences | 0.7 s or more for all of them |
 | Stops inside chapters | 20, of 2.3 to 5.3 s | none longer than 2 s; 11 beats of 1.5 to 2 s |
 | Chapter endings | 7.3 to 10.3 s | 5.8 to 6.8 s (the first stays 2.7 s) |
@@ -147,7 +147,7 @@ The fixes are built, in both languages, with even fewer stops than the plan. Mea
 - **Sound** (`tools/audio.py`): sounds that start before 0:00 now play, so the first chapter has its music. Before the twist the music dips instead of cutting to silence, and the pause is back to 1 s. The music lifts 4 dB when the voice rests, slowly, and stays down through short pauses. The beats fade out. *Into the platform* and *The sketch* have half the ticks.
 - **Timing** (`src/engine3.js`, `src/breath.js`): 0.7 s after every sentence, and 0.3 s where a sentence runs on into the next line. Five of the 8 stops marked ✗ are gone; the other three (0:15, 6:28 and 7:15) are now beats of 1.2 to 2 s, with sound and motion. The remaining holds add 0.3 to 1.3 s to the sentence gap, including a new short beat after "That's the conceptual model…". Chapter endings last 3.5 to 4.5 s.
 - **Picture** (`src/core.js`, `src/scA.js` to `src/scD.js`): camera moves glide (a sine ease), and the ones that darted now take 1.4 to 3.2 s. Holds that froze now drift slowly. Each chapter ending's variation is re-timed to fit, and the plaque in the *Gold* ending shows two lines instead of four.
-- **Spanish voice** (`src/i18n/es/voice.json`, `tools/tts.py`): the same voice, raised from a median pitch of 174 Hz to 200 Hz, like the English voice (201 Hz), and slightly brighter. Speech recognition still reads every word of the test lines correctly. The timing is unchanged.
+- **Spanish voice** (`src/i18n/es/voice.json`, `tools/tts.py`): a blend of 40% of the Spanish voice (`ef_dora`) and 60% of the English narrator's (`af_heart`). A naturalness model (UTMOS, 1 to 5) rates it 4.33, against 3.69 for the Spanish voice alone and 4.51 for the English film. Its median pitch rises from 174 Hz to 187 Hz, and it speaks a little more slowly (157 words a minute while speaking, from 169), so the Spanish film is 8:38. Speech recognition misses the same words as before, all of them product names. A first attempt raised the Spanish voice's pitch with Praat instead; it sounded robotic and scored 3.24, so it was dropped.
 - **Guard** (`tools/pace.py`): it now counts sentences followed by less than 0.5 s and stops of 2.5 s or more inside a chapter. Both are 0.
 
 *The sketch* is now the densest chapter, at 143 words a minute, because its lines are voiced fast. Slowing it means re-voicing those lines.

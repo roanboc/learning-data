@@ -8,11 +8,9 @@ src=open(NARR).read();N=json.loads(src[src.index('{'):src.rindex('}')+1])
 SAY=[(r'\bdbt\b','D B T'),(r'\bSQL\b','sequel'),(r'\bMCP\b','M C P'),(r'\bZerobus\b','Zero-bus'),(r'\bOpenSharing\b','Open Sharing'),(r'\bLakebase\b','Lake-base'),(r'\b9 am\b','nine A M'),(r'\b140\b','a hundred and forty')]
 V={'voice':'af_heart','lang':'en-us','speed':0.95,'say':SAY} if EN else json.load(open(PACK/'voice.json'))
 k=Kokoro(str(ROOT/'models/kokoro-v1.0.onnx'),str(ROOT/'models/voices-v1.0.bin'));dur={};t0=time.time()
-# an optional "lift" in a language's voice.json, {"pitch": new median in Hz, "formant": ratio}, raises the voice's pitch and formants
-# and keeps its timing (Praat's "Change gender", through Parselmouth); the Spanish voice uses it to sound brighter and more clearly female
-def lift(s,sr,pitch,formant):
-    import parselmouth;from parselmouth.praat import call
-    return call(parselmouth.Sound(s.astype(np.float64),sampling_frequency=sr),"Change gender",75,600,formant,pitch,1.0,1.0).values[0].astype(np.float32)
+# a voice is one Kokoro voice, or a blend of several as {"name": weight}: the Spanish voice blends ef_dora (Spanish) with af_heart
+# (the English narrator), which sounds more natural and more like the English film than ef_dora alone
+VC=V['voice'] if isinstance(V['voice'],str) else sum(w*k.get_voice_style(n) for n,w in V['voice'].items()).astype(np.float32)
 for sid,sc in N.items():
     for ch in sc['vo']:
         fn=str(BUILD/'vo'/('%s__%s.wav'%(sid,ch['id'])))
@@ -21,9 +19,8 @@ for sid,sc in N.items():
             info=sf.info(fn);dur[sid+'/'+ch['id']]=round(info.frames/info.samplerate,3);continue
         txt=ch['text']
         for a,b in V['say']:txt=re.sub(a,b,txt)
-        s,sr=k.create(txt,voice=V['voice'],speed=V['speed'],lang=V['lang'])
+        s,sr=k.create(txt,voice=VC,speed=V['speed'],lang=V['lang'])
         nz=np.where(np.abs(s)>0.01)[0];s=s[max(0,nz[0]-240):nz[-1]+480] if len(nz) else s
-        if V.get('lift'):s=lift(s,sr,**V['lift'])
         sf.write(str(BUILD/'vo'/('%s__%s.wav'%(sid,ch['id']))),s,sr);dur[sid+'/'+ch['id']]=round(len(s)/sr,3)
         print(sid,ch['id'],dur[sid+'/'+ch['id']],'%.0fs'%(time.time()-t0),flush=True)
 if A.keep_timings:

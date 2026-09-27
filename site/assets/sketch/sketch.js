@@ -1,6 +1,7 @@
-/* Learning Data, film three: A Sharper Sketch.
+/* Learning Data: A Sharper Sketch.
    The three-step path (Watch, Sharpen it, Make the call), six training labs and twelve evaluation scenarios.
-   It draws with the film's own components (assets/film3/film.js) and keeps progress in this browser only, under "ld3:". */
+   It draws with the film's own components (assets/film3/film.js) and keeps progress in this browser only, under "ld3:".
+   "ld3:" is a historical prefix; never rename it, or visitors lose their progress. */
 (()=>{"use strict";
 const get=(k,d)=>{try{const v=localStorage.getItem("ld3:"+k);return v==null?d:JSON.parse(v);}catch(e){return d;}};
 const set=(k,v)=>{try{localStorage.setItem("ld3:"+k,JSON.stringify(v));}catch(e){}};
@@ -8,7 +9,8 @@ const $=(s,r)=>(r||document).querySelector(s);
 function h(tag,attrs,...kids){const e=document.createElement(tag);for(const k in attrs||{}){const v=attrs[k];if(v==null||v===false)continue;if(k.startsWith("on"))e.addEventListener(k.slice(2),v);else if(k==="html")e.innerHTML=v;else if(k==="style"&&typeof v==="object")Object.assign(e.style,v);else e.setAttribute(k,v===true?"":v);}
   kids.flat().forEach(c=>{if(c!=null&&c!==false)e.append(c.nodeType?c:document.createTextNode(c));});return e;}
 const fill=(s,o)=>String(s).replace(/\{(\w+)\}/g,(m,k)=>o[k]!=null?o[k]:m);
-const chapterStart=id=>{try{const s=SCENES.find(x=>x.id===id);return s?Math.floor(s.start):0;}catch(e){return 0;}};
+// rounded up: rounding down lands on the last frame of the chapter before
+const chapterStart=id=>{try{const s=SCENES.find(x=>x.id===id);return s?Math.ceil(s.start):0;}catch(e){return 0;}};
 const watchLink=(id,pre)=>(pre||"../")+"#t="+chapterStart(id);
 
 /* ---------- a canvas that draws with the film's components, at any width ---------- */

@@ -409,7 +409,7 @@ function plaque(ctx,x,y,w,rows,c){const h=20+rows.length*52;glass(ctx,x,y,w,h,14
 // "gap": the beat after each line, a natural breath between sentences; longer stops are in breath.js
 const NARR={
 "drawn":{"name":"The sketch we drew","lead":3.8,"tail":1.4,"vo":[
- {"id":"recap","gap":0.8,"text":"In the first film, we drew a sketch of the university: a student, a class, an enrolment, a term and a course."},
+ {"id":"recap","gap":0.8,"text":"In The Inner Life of Data, we drew a sketch of the university: a student, a class, an enrolment, a term and a course."},
  {"id":"over","gap":0.8,"text":"It was an oversimplification. Good enough to start, not good enough to count."},
  {"id":"normal","gap":0.8,"text":"That's normal. Every model starts simple, and gets sharper when a real question needs it."}]},
 "two":{"name":"Two numbers","lead":0.6,"tail":1.2,"vo":[
@@ -475,7 +475,7 @@ const NARR={
  {"id":"tag","gap":0.8,"text":"Check the reference. Fit it to the business."}]}
 };
 
-const VODUR={"drawn/recap": 6.654, "drawn/over": 4.477, "drawn/normal": 5.144, "two/ask": 4.214, "two/q": 4.41, "two/nums": 5.473, "two/clean": 2.856, "two/meaning": 2.697, "two/check": 5.793, "two/industry": 5.339, "two/choose": 4.756, "two/tcsi": 7.985, "two/mcds": 8.139, "two/fit": 6.216, "cls/q": 1.896, "cls/ref": 6.042, "cls/hiding": 2.018, "cls/unit": 3.511, "cls/offering": 6.174, "cls/classes": 4.534, "cls/genie": 3.862, "cls/grain": 3.838, "census/q": 2.165, "census/term": 2.864, "census/ref": 5.895, "census/summer": 6.258, "census/adopt": 4.809, "courses/twice": 2.369, "courses/double": 3.522, "courses/one": 4.71, "courses/admission": 6.21, "courses/once": 5.369, "courses/link": 4.296, "time/q": 1.903, "time/today": 4.148, "time/change": 5.115, "time/extend": 5.576, "time/snap": 5.149, "levels/still": 2.587, "levels/concept": 5.543, "levels/logical": 6.967, "levels/physical": 5.077, "levels/agree": 7.36, "levels/another": 3.044, "fit/lift": 2.935, "fit/check": 3.478, "fit/adopt": 3.69, "fit/extend": 3.599, "fit/record": 6.102, "fit/cage": 5.806, "end/again": 1.39, "end/asks": 5.16, "end/answer": 3.433, "end/version": 3.521, "end/evolve": 3.606, "end/tag": 2.111};
+const VODUR={"drawn/recap": 7.233, "drawn/over": 4.477, "drawn/normal": 5.144, "two/ask": 4.214, "two/q": 4.41, "two/nums": 5.473, "two/clean": 2.856, "two/meaning": 2.697, "two/check": 5.793, "two/industry": 5.339, "two/choose": 4.756, "two/tcsi": 7.985, "two/mcds": 8.139, "two/fit": 6.216, "cls/q": 1.896, "cls/ref": 6.042, "cls/hiding": 2.018, "cls/unit": 3.511, "cls/offering": 6.174, "cls/classes": 4.534, "cls/genie": 3.862, "cls/grain": 3.838, "census/q": 2.165, "census/term": 2.864, "census/ref": 5.895, "census/summer": 6.258, "census/adopt": 4.809, "courses/twice": 2.369, "courses/double": 3.522, "courses/one": 4.71, "courses/admission": 6.21, "courses/once": 5.369, "courses/link": 4.296, "time/q": 1.903, "time/today": 4.148, "time/change": 5.115, "time/extend": 5.576, "time/snap": 5.149, "levels/still": 2.587, "levels/concept": 5.543, "levels/logical": 6.967, "levels/physical": 5.077, "levels/agree": 7.36, "levels/another": 3.044, "fit/lift": 2.935, "fit/check": 3.478, "fit/adopt": 3.69, "fit/extend": 3.599, "fit/record": 6.102, "fit/cage": 5.806, "end/again": 1.39, "end/asks": 5.16, "end/answer": 3.433, "end/version": 3.521, "end/evolve": 3.606, "end/tag": 2.111};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds of silence after a line, while the picture keeps moving. breathe: a wordless end to the chapter, whose picture starts at the scene's "breath" cue.
@@ -728,7 +728,7 @@ scene("drawn",(ctx,S,t,sc)=>{
   const c=id=>cue(sc,id),cR=c("recap"),cO=c("over"),cN=c("normal"),B=c("breath");
   const cam=camAt([[0,960,540,1.08],[cR,960,540,1.08],[cO,960,530,1.0],[sc.dur+2,960,530,0.98]],t);
   clearTo(ctx,S);const bgA=sstep(3.1,3.9,t);
-  if(bgA>0){ctx.save();ctx.globalAlpha=bgA;bgW(ctx,S,cam);board(ctx,1,"Conceptual model · from the first film");
+  if(bgA>0){ctx.save();ctx.globalAlpha=bgA;bgW(ctx,S,cam);board(ctx,1,"Conceptual model · the sketch we drew");
     // the recap names each box as it appears: student, class, enrolment, term, course
     const d=c("over")-cR,order=["Student","Class","Enrolment","Term","Course"],ap=k=>fin(t,cR+0.4+order.indexOf(k)*d*0.16,0.5);
     const E={};Object.keys(V1).forEach(k=>{E[k]={x:V1[k][0],y:V1[k][1],name:k,s:1.25,a:ap(k)};});E.Term.sub="census date";
@@ -939,7 +939,7 @@ scene("end",(ctx,S,t,sc)=>{
       withA(ctx,fin(t,cE+0.4),()=>{glass(ctx,1460,520,400,150,18,EXT,{glow:18+8*Math.sin(t*4),ea:0.8,fill:"rgba(7,12,24,0.94)"});T(ctx,"A new question",1486,562,{w:800,size:20,color:rgba(EXT,1)});T(ctx,"How do we count short courses",1486,600,{w:600,size:18});T(ctx,"and microcredentials?",1486,630,{w:600,size:18});});});
     vign(ctx,S);}
   else{clearTo(ctx,S);withA(ctx,fin(t,cTg-0.25,0.8),()=>T(ctx,"Check the reference. Fit it to the business.",W/2,H/2-6,{w:800,size:72,align:"center"}));
-    withA(ctx,fin(t,cTg+1.2,0.8),()=>{T(ctx,"A Sharper Sketch",W/2,H/2+76,{w:700,size:32,align:"center",color:rgba(SOFT,1)});T(ctx,"Learning Data · film three",W/2,H/2+118,{w:500,size:22,align:"center",color:rgba(SOFT,0.7)});});}
+    withA(ctx,fin(t,cTg+1.2,0.8),()=>{T(ctx,"A Sharper Sketch",W/2,H/2+76,{w:700,size:32,align:"center",color:rgba(SOFT,1)});T(ctx,"Learning Data · Data modelling",W/2,H/2+118,{w:500,size:22,align:"center",color:rgba(SOFT,0.7)});});}
 });
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */

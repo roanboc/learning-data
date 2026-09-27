@@ -1,6 +1,6 @@
 # Cómo se hizo *La vida interior de los datos*
 
-*Un viaje de aprendizaje: lo que exploramos, discutimos, hicimos mal y aprendimos al crear una película de seis minutos sobre plataformas de datos.*
+*Un viaje de aprendizaje: lo que exploramos, discutimos, hicimos mal y aprendimos al crear una película corta sobre plataformas de datos.*
 
 La película se hizo en dos días, el 25 y el 26 de septiembre de 2026, en una sola conversación de trabajo larga entre el autor y Claude, un modelo de IA creado por Anthropic. El autor aportó el encargo, el conocimiento de la plataforma y la mayoría de las objeciones. Claude propuso opciones, verificó datos, escribió el código y renderizó cada cuadro. Esta página cuenta la historia desde la primera pregunta hasta el sitio publicado, con las lecciones que vale la pena reutilizar.
 

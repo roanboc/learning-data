@@ -20,7 +20,7 @@ Same two audiences as the first film: a newcomer understands it, and a data engi
 
 The first film followed a record downstream, from the tap to the decision. This one inverts it: it starts at the symptom and follows the lineage upstream to the cause, like a detective following a red thread. Then it comes back down with the fix, and ends by showing the next change arriving safely. The viewer already knows the map from the first film, so the reversal feels like a payoff.
 
-**The spine: one change, seen in halves.** The registrar's office introduces waitlists for full classes: a business decision, announced to every School by email. The student system team builds it: enrolments gain a new status, `WAITLISTED`, listed in their release notes. Both sides did their part well. Nobody told the platform, or the people who rely on its numbers. Everything else follows from that gap.
+**The spine: one change, seen in halves.** The registrar's office introduces waitlists for full classes: a business decision, announced to every School by email. The student system team builds it: enrolments gain a new status, `waitlisted`, listed in their release notes. Both sides did their part well. Nobody told the platform, or the people who rely on its numbers. Everything else follows from that gap.
 
 | Chapter | What happens | What it teaches |
 |---|---|---|
@@ -32,7 +32,7 @@ The first film followed a record downstream, from the tap to the decision. This 
 | **5. The fix** | The rule is updated in dbt, reviewed like any code change, and tested in CI on only what changed. | Version control, review, and testing a change before it reaches production. |
 | **6. Recover** | The fix is replayed over the affected nights. Time travel compares the numbers before and after, so nobody has to trust a guess. At 8:40 am the banner is gone, and Ana sends the census report on time. | Backfills, incremental models, Delta versions and time travel, and RESTORE when a table itself is damaged. |
 | **7. The contract** | Later that week, the four of them agree a data contract for enrolments. One card holds the columns and types, the allowed statuses and what each one means, how fresh the data must be, and four owners: technical and business, on the side that produces the data and the side that uses it. Changing the card needs a technical and a business sign-off. The platform checks every load against it at the door, and the student system tests every proposed change against it before release. A new test stays behind, and the team writes a short, blameless review. | What a data contract holds and who signs it. Contracts are versioned, and validated constantly: on every load, and on every change before it ships. No blame. |
-| **8. Three weeks later** | Ben's team proposes another status, `DEFERRED`. Before it ships, the contract check fails in their test environment, and all four owners are told at once. Mei defines what it means, Sam's team adds it to the platform, and the contract becomes version 1.1. The change goes live that week. No banner, no alert, nobody woken up. | Visibility before the change, not after. A contract turns a surprise into a conversation. |
+| **8. Three weeks later** | Ben's team proposes another status, `deferred`. Before it ships, the contract check fails in their test environment, and all four owners are told at once. Mei defines what it means, Sam's team adds it to the platform, and the contract becomes version 1.1. The change goes live that week. No banner, no alert, nobody woken up. | Visibility before the change, not after. A contract turns a surprise into a conversation. |
 | **9. Pull back** | The whole platform, calm, with the contract glowing at its door. The last line: "Seen by both sides, before it ships." In the final seconds, another KPI card's trend line starts to climb too steeply: a hint of the next episode. | The platform's job is not to never fail, but to fail safely, and to make the next change visible to everyone it touches. |
 
 Other ways things go wrong, such as a late file, a duplicate from a retry or a table overwritten by mistake, get their own episodes (see [the series](../README.md)), so this one stays on a single story.
@@ -117,7 +117,7 @@ To confirm against current documentation, and record in the rigour sheet with th
 
 Made by the author on 26 September 2026:
 
-1. **The spine:** a new status value after an upgrade (`WAITLISTED`), because the fix starts with meaning and connects back to the sketch in the first film.
+1. **The spine:** a new status value after an upgrade (`waitlisted`), because the fix starts with meaning and connects back to the sketch in the first film.
 2. **People on screen:** full characters, with faces (see [The people](#the-people)).
 3. **The title:** *When things go wrong* became the series title (in Spanish, *Cuando algo sale mal*). This episode is *Silent change* (*Cambio silencioso*).
 4. **The tagline:** "Fail safely. Fix once.", now for the whole series. This episode's last line is "Seen by both sides, before it ships."

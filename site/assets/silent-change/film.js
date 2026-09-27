@@ -707,7 +707,7 @@ function calCard(ctx,x,y,title,date,col,a,hi){withA(ctx,a,()=>{glass(ctx,x,y,300
    Needs the film's helpers (rgba, mix, clamp, lerp, TAU), from site/assets/film/film.js.
 
    person(ctx,id,x,y,s,o)      draws a character facing us, feet at (x,y); s=1 is 560 px tall.
-                               o.pose: "stand" | "phone" | "explain"; o.expr: "calm" | "concerned" | "relieved"; o.t: seconds, for breathing and blinking.
+                               o.pose: "stand" | "phone" | "explain" (o.pose2 and o.mix blend towards a second pose); o.expr: "calm" | "concerned" | "relieved"; o.t: seconds, for breathing and blinking.
    personBack(ctx,id,x,y,s,o)  draws a character from behind, from the waist up, for over-the-shoulder shots. */
 
 const TECH=[120,200,255],BIZ=[255,209,102];
@@ -900,7 +900,10 @@ function outlined(ctx,draw,x,y,s,edge,box,glowA){ // draws into a spare canvas, 
   o.save();o.shadowColor=rgba(edge,glowA==null?0.4:glowA);o.shadowBlur=12*Math.max(0.7,s);o.globalAlpha=0.65;o.drawImage(tc,0,0);o.restore();
   o.save();o.globalAlpha=0.85;for(let i=0;i<8;i++){const a=i/8*TAU;o.drawImage(tc,Math.cos(a)*r,Math.sin(a)*r);}o.restore();
   o.drawImage(c,0,0);ctx.drawImage(oc,ox,oy);}
-function person(ctx,id,x,y,s,o){o=o||{};const P=PEOPLE[id],po=POSE[o.pose||"stand"],E=EXPR[o.expr||"calm"],t=o.t||0,k=s*P.build.h;
+// a pose between two poses: o.pose2 and o.mix (0 to 1) move the limbs smoothly; what the hand holds switches halfway
+function blendPose(a,b,m){if(!b||!(m>0))return a;if(m>=1)return b;const L=(u,v)=>u+(v-u)*m,out={};
+  Object.keys(Object.assign({},a,b)).forEach(k=>{const u=a[k],v=b[k];out[k]=Array.isArray(u)&&Array.isArray(v)?u.map((q,i)=>L(q,v[i])):typeof u==="number"&&typeof v==="number"?L(u,v):(m<0.5?u:v);});return out;}
+function person(ctx,id,x,y,s,o){o=o||{};const P=PEOPLE[id],po=blendPose(POSE[o.pose||"stand"],POSE[o.pose2],o.mix),E=EXPR[o.expr||"calm"],t=o.t||0,k=s*P.build.h;
   const br=Math.sin(t*1.7+P.seed)*1.4;
   ctx.save();ctx.translate(x,y);ctx.scale(k,k);const g=ctx.createRadialGradient(0,-4,4,0,-4,100);g.addColorStop(0,"rgba(0,0,0,0.45)");g.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=g;ell(ctx,0,-4,100,16);ctx.fill();ctx.restore();
   const front=a=>a[1]>Math.PI*0.8;
@@ -933,23 +936,28 @@ function personBack(ctx,id,x,y,s,o){o=o||{};const P=PEOPLE[id],k=s*P.build.h,sw=
 const fout=(t,a,d)=>1-sstep(a,a+(d||0.6),t);
 const brief=(t,a,d)=>fin(t,a,0.4)*fout(t,a+(d||3));
 const AMBER=[255,190,90],GOLDC=LAYER.gold;
+const mixc=(a,b,f)=>a.map((v,i)=>Math.round(v+(b[i]-v)*clamp(f,0,1)));
+// packets along a lane: small glowing cells, like the cells in the vaults; those that set off after "until" never start, the rest finish their trip
+function packets(ctx,t,pts,every,dur,off,col,size,al,until){const L=mk(pts);spawn(t,every,dur,off,(u,k)=>{if(until!=null&&off+k*every>until)return;const q=at(L,u),a=(al==null?1:al)*sstep(0,0.1,u)*(1-sstep(0.85,1,u));if(a<=0.01)return;
+  withA(ctx,a,()=>{glow(ctx,q.x,q.y,size*1.4,col,0.45);ctx.fillStyle=rgba(col,0.95);rr(ctx,q.x-size/2,q.y-size/2,size,size,4);ctx.fill();ctx.fillStyle="rgba(255,255,255,0.35)";rr(ctx,q.x-size/2+3,q.y-size/2+3,size*0.4,size*0.25,2);ctx.fill();});});}
 function camKeys(ctx,S,keys,t){const cam=camAt(keys,t);setCam(ctx,S,cam);return cam;}
 // the background of the platform world, or of a room at dawn (warm light from a window on the left)
 function world(ctx,S){setScreen(ctx,S);bg2(ctx);}
-function room(ctx,S,t,o){o=o||{};setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,o.top||"#0c1428");g.addColorStop(1,"#05080f");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-  const wx=o.wx==null?90:o.wx,wy=90,ww=380,wh=520;ctx.save();rr(ctx,wx,wy,ww,wh,10);ctx.clip();
+function room(ctx,S,t,o){o=o||{};if(o.cam){const q=o.cam;ctx.setTransform(S*q.z,0,0,S*q.z,S*(W/2-q.x*q.z),S*(H/2-q.y*q.z));}else setScreen(ctx,S);
+  const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,o.top||"#0c1428");g.addColorStop(1,"#05080f");ctx.fillStyle=g;ctx.fillRect(-W,-H,3*W,3*H);
+  const wx=o.wx==null?90:o.wx,wy=150,ww=380,wh=470;ctx.save();rr(ctx,wx,wy,ww,wh,10);ctx.clip();
   const sky=ctx.createLinearGradient(0,wy,0,wy+wh);sky.addColorStop(0,"#16264c");sky.addColorStop(0.55,"#5b4a78");sky.addColorStop(0.85,"#e0876a");sky.addColorStop(1,"#f6c37e");ctx.fillStyle=sky;ctx.fillRect(wx,wy,ww,wh);
   glow(ctx,wx+ww*0.6,wy+wh*0.95,180+10*Math.sin(t*0.4),[255,190,120],0.5);
   ctx.fillStyle="#0d1020";[[0,110,70],[60,70,120],[170,140,50],[210,90,80],[300,120,80]].forEach(([x,h2,w2])=>ctx.fillRect(wx+x,wy+wh-h2,w2,h2));
-  ctx.fillStyle="rgba(255,214,150,0.8)";for(let i=0;i<14;i++){if(hash(i,3)>0.5)ctx.fillRect(wx+hash(i,1)*ww,wy+wh-hash(i,2)*100,4,5);}
+  ctx.fillStyle="rgba(255,214,150,0.8)";for(let i=0;i<14;i++){const lx=hash(i,1)*ww;if(hash(i,3)>0.5&&(lx<200||lx>330))ctx.fillRect(wx+lx,wy+wh-hash(i,2)*100,4,5);}
   ctx.restore();ctx.strokeStyle="rgba(20,26,44,0.95)";ctx.lineWidth=8;ctx.beginPath();ctx.moveTo(wx+ww/2,wy);ctx.lineTo(wx+ww/2,wy+wh);ctx.moveTo(wx,wy+wh*0.45);ctx.lineTo(wx+ww,wy+wh*0.45);ctx.stroke();
   glass(ctx,wx,wy,ww,wh,10,[255,200,150],{glow:24,ga:0.2,fill:"rgba(0,0,0,0)",ea:0.4});
-  const spill=ctx.createRadialGradient(wx+ww*0.6,wy+wh,40,wx+ww*0.6,wy+wh,900);spill.addColorStop(0,"rgba(255,170,110,0.16)");spill.addColorStop(1,"rgba(255,170,110,0)");ctx.fillStyle=spill;ctx.fillRect(0,0,W,H);}
+  const spill=ctx.createRadialGradient(wx+ww*0.6,wy+wh,40,wx+ww*0.6,wy+wh,900);spill.addColorStop(0,"rgba(255,170,110,0.16)");spill.addColorStop(1,"rgba(255,170,110,0)");ctx.fillStyle=spill;ctx.fillRect(-W,-H,3*W,3*H);}
 // a small clock chip, top left
-function clockChip(ctx,S,s,sub,a){setScreen(ctx,S);withA(ctx,a==null?1:a,()=>{glass(ctx,64,52,sub?300:150,64,18,[170,205,255],{glow:10,ea:0.5,fill:"rgba(8,14,28,0.85)"});
+function clockChip(ctx,S,s,sub,a){setScreen(ctx,S);withA(ctx,a==null?1:a,()=>{const w=28+tw(ctx,s,32,800,"mono")+(sub?18+tw(ctx,sub,20,600):0)+28;glass(ctx,64,52,w,64,18,[170,205,255],{glow:10,ea:0.5,fill:"rgba(8,14,28,0.85)"});
   T(ctx,s,92,96,{w:800,size:32,f:"mono"});if(sub)T(ctx,sub,92+tw(ctx,s,32,800,"mono")+18,94,{w:600,size:20,color:rgba(SOFT,0.95)});});}
 // a message bubble: who, what, and a colour for the sender's side; typing dots before it appears
-function msg(ctx,x,y,w,who,text,c,a,typing){if(a<=0.01&&!typing)return;const lines=[];ctx.save();ctx.font=font(600,26);let cur="";text.split(" ").forEach(s=>{const tr=cur?cur+" "+s:s;if(ctx.measureText(tr).width>w-48&&cur){lines.push(cur);cur=s;}else cur=tr;});if(cur)lines.push(cur);ctx.restore();
+function msg(ctx,x,y,w,who,text,c,a,typing){if(a<=0.01&&!typing)return;const lines=[];ctx.save();ctx.font=font(600,26);let cur="";text.split("\n").forEach(par=>{cur="";par.split(" ").forEach(s=>{const tr=cur?cur+" "+s:s;if(ctx.measureText(tr).width>w-48&&cur){lines.push(cur);cur=s;}else cur=tr;});if(cur)lines.push(cur);});ctx.restore();
   const h=52+lines.length*36;withA(ctx,Math.max(a,typing?1:0),()=>{glass(ctx,x,y,w,typing&&a<0.5?84:h,20,c,{glow:12,ea:0.65,fill:"rgba(9,15,30,0.92)"});T(ctx,who,x+24,y+32,{w:800,size:18,color:rgba(c,0.95)});
     if(a<0.5&&typing){for(let i=0;i<3;i++){ctx.fillStyle=rgba(INK,0.4+0.5*Math.max(0,Math.sin(typing*6-i*0.8)));ctx.beginPath();ctx.arc(x+34+i*20,y+60,5,0,TAU);ctx.fill();}}
     else withA(ctx,a,()=>lines.forEach((l,i)=>T(ctx,l,x+24,y+72+i*36,{w:600,size:26})));});return h;}
@@ -957,46 +965,54 @@ function msg(ctx,x,y,w,who,text,c,a,typing){if(a<=0.01&&!typing)return;const lin
 // a counter (KPI) widget for class fill with its comparison and a capacity bar, and a bar chart of every class. No pie charts.
 const DB={canvas:"#f5f6f8",card:"#ffffff",line:"#d8dee4",text:"#11171c",muted:"#5f7281",blue:"#077a9d",green:"#277c43",greenBg:"#e3f4ea",red:"#c82d4c",warn:"#8a5300",warnBg:"#fcefd9",warnLine:"#f0a33a",track:"#e8ecf0"};
 function dbCard(ctx,x,y,w,h){ctx.save();ctx.shadowColor="rgba(0,0,0,0.18)";ctx.shadowBlur=10;ctx.shadowOffsetY=2;ctx.fillStyle=DB.card;rr(ctx,x,y,w,h,8);ctx.fill();ctx.restore();ctx.strokeStyle=DB.line;ctx.lineWidth=1.2;rr(ctx,x,y,w,h,8);ctx.stroke();}
-// a counter widget: title, source table, the value, a comparison, a capacity bar and seats; s scales the type for small copies
-function kpiCard(ctx,x,y,w,h,o){o=o||{};const s=o.s||1,v=o.value==null?94:o.value,pad=20*s;
-  if(h/s<250){dbCard(ctx,x,y,w,h);const bw=w-2*pad,ty=y+pad+14*s,vy=ty+58*s,by=y+h-pad-26*s;T(ctx,o.title||"Places filled · Data Science 101",x+pad,ty,{w:700,size:16*s,color:DB.text});
-    T(ctx,(o.shown||v)+"%",x+pad,vy,{w:700,size:52*s,color:o.ghost?DB.red:DB.text});ctx.fillStyle=DB.track;rr(ctx,x+pad,by,bw,10*s,5*s);ctx.fill();ctx.fillStyle=o.ghost?DB.red:DB.blue;rr(ctx,x+pad,by,bw*Math.min(1,v/100),10*s,5*s);ctx.fill();
-    T(ctx,Math.round(v*1.2)+" of 120 places",x+pad,y+h-pad,{w:500,size:13*s,color:DB.muted});return;}
+// a counter widget: title, source table, the value, a comparison, a 14-day trend, a capacity bar and places; s scales the type for small copies.
+// numA fades the value and comparison (so one number can make way for another)
+function kpiCard(ctx,x,y,w,h,o){o=o||{};const s=o.s||1,v=o.value==null?94:o.value,pad=20*s,shown=(o.shown||Math.round(v))+"%",nA=o.numA==null?1:o.numA,col=o.ghost?DB.red:DB.blue;
+  if(h/s<250){dbCard(ctx,x,y,w,h);const bw=w-2*pad,by=y+h-pad-30*s;T(ctx,o.title||"Data Science 101",x+pad,y+pad+17*s,{w:700,size:18*s,color:DB.text});
+    T(ctx,o.sub||"places filled",x+pad,y+pad+38*s,{w:500,size:15*s,color:DB.muted});withA(ctx,nA,()=>T(ctx,shown,x+pad,y+pad+90*s,{w:700,size:48*s,color:o.ghost?DB.red:DB.text}));
+    ctx.fillStyle=DB.track;rr(ctx,x+pad,by,bw,10*s,5*s);ctx.fill();ctx.fillStyle=col;rr(ctx,x+pad,by,bw*Math.min(1,v/100),10*s,5*s);ctx.fill();
+    T(ctx,Math.round(v*1.2)+" of 120 places",x+pad,y+h-pad,{w:500,size:16*s,color:DB.muted});return;}
   dbCard(ctx,x,y,w,h);
   T(ctx,o.title||"Places filled · Data Science 101",x+pad,y+pad+16*s,{w:700,size:19*s,color:DB.text});T(ctx,o.source||"fct_offering_fill",x+pad,y+pad+40*s,{w:500,size:14*s,f:"mono",color:DB.muted});
-  T(ctx,(o.shown||v)+"%",x+pad,y+pad+122*s,{w:700,size:78*s,color:o.ghost?DB.red:DB.text});
-  if(o.delta)T(ctx,o.delta,x+pad+tw(ctx,(o.shown||v)+"%",78*s,700)+16*s,y+pad+118*s,{w:700,size:17*s,color:o.deltaCol||DB.green});
+  withA(ctx,nA,()=>{T(ctx,shown,x+pad,y+pad+122*s,{w:700,size:78*s,color:o.ghost?DB.red:DB.text});
+    if(o.delta)T(ctx,o.delta,x+pad+tw(ctx,shown,78*s,700)+16*s,y+pad+118*s,{w:700,size:17*s,color:o.deltaCol||DB.green});});
   const by=y+h-pad-44*s,bw=w-2*pad,sy0=y+pad+150*s,sy1=by-30*s;
-  if(sy1-sy0>40*s){const tr=o.trend||[71,74,76,79,81,83,85,86,88,90,91,92,93,v],lo=60,hi=100,px=i=>x+pad+bw*i/(tr.length-1),py=q=>sy1-(sy1-sy0)*(q-lo)/(hi-lo);
-    ctx.beginPath();tr.forEach((q,i)=>i?ctx.lineTo(px(i),py(q)):ctx.moveTo(px(i),py(q)));ctx.lineTo(px(tr.length-1),sy1);ctx.lineTo(px(0),sy1);ctx.closePath();ctx.fillStyle="rgba(7,122,157,0.10)";ctx.fill();
-    ctx.beginPath();tr.forEach((q,i)=>i?ctx.lineTo(px(i),py(q)):ctx.moveTo(px(i),py(q)));ctx.strokeStyle=o.ghost?DB.red:DB.blue;ctx.lineWidth=2.5*s;ctx.stroke();
-    ctx.fillStyle=o.ghost?DB.red:DB.blue;ctx.beginPath();ctx.arc(px(tr.length-1),py(tr[tr.length-1]),4*s,0,TAU);ctx.fill();T(ctx,"last 14 days",x+pad,sy0-4*s,{w:500,size:13*s,color:DB.muted});}
+  if(sy1-sy0>40*s){const tr=o.trend||[71,74,76,79,81,83,85,86,88,90,91,92,93,v],lo=60,hi=Math.max(100,...tr)+4,px=i=>x+pad+bw*i/(tr.length-1),py=q=>sy1-(sy1-sy0)*(q-lo)/(hi-lo);
+    ctx.beginPath();tr.forEach((q,i)=>i?ctx.lineTo(px(i),py(q)):ctx.moveTo(px(i),py(q)));ctx.lineTo(px(tr.length-1),sy1);ctx.lineTo(px(0),sy1);ctx.closePath();ctx.fillStyle=o.ghost?"rgba(200,45,76,0.10)":"rgba(7,122,157,0.10)";ctx.fill();
+    ctx.beginPath();tr.forEach((q,i)=>i?ctx.lineTo(px(i),py(q)):ctx.moveTo(px(i),py(q)));ctx.strokeStyle=col;ctx.lineWidth=2.5*s;ctx.stroke();
+    ctx.fillStyle=col;ctx.beginPath();ctx.arc(px(tr.length-1),py(tr[tr.length-1]),4*s,0,TAU);ctx.fill();T(ctx,"last 14 days",x+pad,sy0-4*s,{w:500,size:13*s,color:DB.muted});}
   ctx.fillStyle=DB.track;rr(ctx,x+pad,by,bw,12*s,6*s);ctx.fill();
-  ctx.fillStyle=o.ghost?DB.red:DB.blue;rr(ctx,x+pad,by,bw*Math.min(1,v/100),12*s,6*s);ctx.fill();
+  ctx.fillStyle=col;rr(ctx,x+pad,by,bw*Math.min(1,v/100),12*s,6*s);ctx.fill();
   if(v>100){ctx.fillStyle=DB.red;rr(ctx,x+pad+bw-4*s,by-6*s,8*s,24*s,3*s);ctx.fill();}
   ctx.strokeStyle=DB.text;ctx.lineWidth=2*s;ctx.beginPath();ctx.moveTo(x+pad+bw,by-8*s);ctx.lineTo(x+pad+bw,by+20*s);ctx.stroke();
   T(ctx,o.foot||Math.round(v*1.2)+" of 120 places",x+pad,y+h-pad,{w:500,size:15*s,color:DB.muted});T(ctx,"capacity",x+pad+bw,y+h-pad,{w:500,size:13*s,align:"right",color:DB.muted});}
 // a small copy of the counter, for the platform views: the data product the dashboard shows, with a gold edge for the gold layer
 function kpiMini(ctx,x,y,w,h,v,a){withA(ctx,a==null?1:a,()=>{ctx.save();ctx.shadowColor=rgba(GOLDC,0.7);ctx.shadowBlur=18;ctx.strokeStyle=rgba(GOLDC,0.9);ctx.lineWidth=2.5;rr(ctx,x-4,y-4,w+8,h+8,11);ctx.stroke();ctx.restore();
   kpiCard(ctx,x,y,w,h,{s:w/300,value:v||94});});}
-function dashboard(ctx,x,y,w,h,o){o=o||{};
+// o.num: the value (a number, or text such as "96%"); o.banner and o.ok: the amber note and the green all-clear (0 to 1);
+// o.ghost (0 to 1): the number it would have shown, had the waitlist counted
+function dashboard(ctx,x,y,w,h,o){o=o||{};const num=o.num==null?94:parseFloat(o.num),g=o.ghost||0,gIn=sstep(0.45,1,g);
   // the screen: a dark bezel around a light dashboard
   glass(ctx,x-12,y-12,w+24,h+24,22,[170,205,255],{glow:18,ea:0.45,fill:"rgba(8,14,28,0.95)"});ctx.save();rr(ctx,x,y,w,h,12);ctx.clip();ctx.fillStyle=DB.canvas;ctx.fillRect(x,y,w,h);
   ctx.fillStyle=DB.card;ctx.fillRect(x,y,w,64);ctx.fillStyle=DB.line;ctx.fillRect(x,y+64,w,1.2);const lw=logo(ctx,"databricks",x+20,y+18,28);
-  T(ctx,"Enrolments · census date tomorrow",x+34+lw,y+41,{w:700,size:21,color:DB.text});T(ctx,o.day||"Tuesday",x+w-22,y+40,{w:500,size:16,align:"right",color:DB.muted});
+  T(ctx,o.title||"Enrolments · census date tomorrow",x+34+lw,y+41,{w:700,size:21,color:DB.text});T(ctx,o.day||"Tuesday",x+w-22,y+40,{w:500,size:16,align:"right",color:DB.muted});
   let cy=y+84;const alert=(bg,line,col,icon,text,a)=>withA(ctx,a,()=>{ctx.fillStyle=bg;rr(ctx,x+20,cy,w-40,52,6);ctx.fill();ctx.fillStyle=line;rr(ctx,x+20,cy,6,52,3);ctx.fill();
     ctx.fillStyle=col;ctx.font=font(800,20);ctx.fillText(icon,x+40,cy+34);T(ctx,text,x+72,cy+33,{w:600,size:19,color:col});});
-  const ba=Math.max(o.banner||0,o.ok||0);if(o.banner>0)alert(DB.warnBg,DB.warnLine,DB.warn,"⚠","Last good data: yesterday, 23:02 · a test stopped today's refresh",o.banner*(1-(o.ok||0)));
+  // the note makes room for itself: the cards slide down as it fades in
+  const room=ease(clamp((o.banner||0)+(o.ok||0),0,1));if(o.banner>0)alert(DB.warnBg,DB.warnLine,DB.warn,"⚠","Last good data: yesterday, 23:02 · a test stopped today's refresh",o.banner*(1-(o.ok||0))*sstep(0.3,1,room));
   if(o.ok>0)alert(DB.greenBg,DB.green,DB.green,"✓",o.okText||"Up to date: today, 08:40",o.ok);
-  cy+=ba>0.01?72:0;const gh=y+h-cy-20,kw=w*0.46;
-  kpiCard(ctx,x+20,cy,kw,gh,{value:o.num?parseInt(o.num):94,delta:o.delta||"▲ 2 pts vs last week",foot:o.foot});
-  if(o.ghost>0)withA(ctx,o.ghost,()=>{ctx.save();ctx.fillStyle="rgba(255,255,255,0.92)";rr(ctx,x+20,cy,kw,gh,8);ctx.fill();ctx.setLineDash([10,8]);ctx.strokeStyle=DB.red;ctx.lineWidth=3;rr(ctx,x+20,cy,kw,gh,8);ctx.stroke();ctx.restore();
-    kpiCard(ctx,x+20,cy,kw,gh,{value:108,ghost:1,delta:"if the waitlist had counted",deltaCol:DB.red,foot:"130 of 120 places",trend:[71,74,76,79,81,83,85,86,88,90,91,92,94,108]});});
-  // a bar chart of every first-year class: Data Science 101 highlighted
+  cy+=72*room;const gh=y+h-cy-20,kw=w*0.46;
+  kpiCard(ctx,x+20,cy,kw,gh,{value:num,delta:o.delta||("▲ "+(Math.round(num)-92)+" pts vs last week"),foot:o.foot,numA:1-sstep(0,0.5,g)});
+  if(o.flash>0)withA(ctx,o.flash,()=>{ctx.strokeStyle=DB.blue;ctx.lineWidth=3;rr(ctx,x+20,cy,kw,gh,8);ctx.stroke();});
+  if(g>0){withA(ctx,g,()=>{ctx.save();ctx.fillStyle="rgba(255,255,255,0.92)";rr(ctx,x+20,cy,kw,gh,8);ctx.fill();ctx.setLineDash([10,8]);ctx.strokeStyle=DB.red;ctx.lineWidth=3;rr(ctx,x+20,cy,kw,gh,8);ctx.stroke();ctx.restore();});
+    withA(ctx,gIn,()=>kpiCard(ctx,x+20,cy,kw,gh,{value:108,ghost:1,delta:"incl. waitlist",deltaCol:DB.red,foot:"130 of 120 places",trend:[71,74,76,79,81,83,85,86,88,90,91,92,94,108]}));}
+  // a bar chart of every first-year unit: Data Science 101 highlighted
   const bx=x+40+kw,bwid=w-60-kw;dbCard(ctx,bx,cy,bwid,gh);T(ctx,"Places filled by unit",bx+20,cy+36,{w:700,size:19,color:DB.text});T(ctx,"first-year units · semester 2",bx+20,cy+60,{w:500,size:14,color:DB.muted});
-  const rows=[["Data Science 101",parseInt(o.num||"94")],["Statistics 110",88],["Programming 100",76],["Data Ethics 120",64]],lx=bx+20,bw2=bwid-190,rh=Math.min(56,(gh-100)/rows.length);
-  rows.forEach(([n,v],i)=>{const yy=cy+90+i*rh;T(ctx,n,lx,yy+14,{w:i?500:700,size:15,color:DB.text});ctx.fillStyle=DB.track;rr(ctx,lx,yy+22,bw2,14,4);ctx.fill();
-    ctx.fillStyle=i?"#8bcae7":DB.blue;rr(ctx,lx,yy+22,bw2*Math.min(1,v/100),14,4);ctx.fill();T(ctx,v+"%",lx+bw2+14,yy+34,{w:700,size:16,color:DB.text});});
+  const rows=[["Data Science 101",num],["Statistics 110",88],["Programming 100",76],["Data Ethics 120",64]],lx=bx+20,bw2=bwid-190,rh=Math.min(56,(gh-100)/rows.length);
+  const row=(n,v,i,c,vc)=>{const yy=cy+90+i*rh;T(ctx,n,lx,yy+14,{w:i?500:700,size:15,color:DB.text});ctx.fillStyle=DB.track;rr(ctx,lx,yy+22,bw2,14,4);ctx.fill();
+    ctx.fillStyle=c;rr(ctx,lx,yy+22,bw2*Math.min(1,v/100),14,4);ctx.fill();if(v>100){ctx.fillStyle=DB.red;rr(ctx,lx+bw2-3,yy+17,6,24,2);ctx.fill();}T(ctx,Math.round(v)+"%",lx+bw2+14,yy+34,{w:700,size:16,color:vc||DB.text});};
+  rows.forEach(([n,v],i)=>row(n,v,i,i?"#8bcae7":DB.blue));
+  if(gIn>0)withA(ctx,gIn,()=>{ctx.fillStyle=DB.card;ctx.fillRect(lx-4,cy+90,bwid-36,rh-4);row("Data Science 101",108,0,DB.red,DB.red);});
   ctx.strokeStyle=DB.muted;ctx.setLineDash([4,4]);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(lx+bw2,cy+96);ctx.lineTo(lx+bw2,cy+96+rows.length*rh);ctx.stroke();ctx.setLineDash([]);
   ctx.restore();}
 // a person in a video-call tile: head and shoulders, name and role
@@ -1015,23 +1031,40 @@ function lineage(ctx,x0,y,dx,o){o=o||{};const pts=LIN.map((_,i)=>[x0-i*dx,y]);
     beam(ctx,[{x:pts[0][0],y},{x:end[0],y}],BAD,[[22,0.08],[9,0.22],[3,0.85],[1.5,1]]);glow(ctx,end[0],y,36,BAD,0.7);}
   pts.forEach((p,i)=>{const [n,sub]=LIN[i],bad=i===3&&o.bad,on=o.k>=i-0.05,c=bad?BAD:i===4?LAYER.bronze:i===0?GOLDC:[170,205,255];const w=Math.max(tw(ctx,n,22,700,"mono"),tw(ctx,sub,17,500))+44;
     glass(ctx,p[0]-w/2,y-48,w,96,18,c,{glow:on?22:8,ea:on?0.95:0.45,fill:"rgba(8,14,28,0.92)"});T(ctx,n,p[0],y-6,{w:700,size:22,f:"mono",align:"center"});T(ctx,sub,p[0],y+26,{w:500,size:17,align:"center",color:rgba(SOFT,0.95)});
-    if(i===3)gate(ctx,p[0],y-110,70,bad?BAD:GOOD,"tests");});return pts;}
+    if(i===3){const gc=bad?BAD:GOOD;ctx.strokeStyle=rgba(gc,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(p[0],y-75);ctx.lineTo(p[0],y-48);ctx.stroke();gate(ctx,p[0],y-110,70,gc,"tests");
+      T(ctx,bad?"test failed":"tests pass",p[0]+42,y-104,{w:700,size:18,color:rgba(gc,1)});}});return pts;}
 // the sharper conceptual model from A Sharper Sketch, drawn with that film's components: enrolment status is its own entity,
 // "Status change", with a date, and it gains the new status. newA reveals "waitlisted"; hi lights the Status change box.
 function sharperSketch(ctx,o){o=o||{};const E={};Object.keys(L3).forEach(k=>{E[k]={x:L3[k][0],y:L3[k][1],name:NAME[k],s:1,a:o.a==null?1:o.a};});
   E.Offering.sub="census date";E.Unit.sub="Data Science 101";E.Class.sub="Tue 9 am tutorial";E.Status.sub="status · date";
   E.Status.attrs=[["enrolled",""],["withdrawn",""],["waitlisted",""]];E.Status.attrA=(2+(o.newA||0))/3;E.Status.hi=o.hi||0;E.Status.hiCol=AMBER;
-  const B=diagram(ctx,E,L3R.map(r=>r.concat([{}])));const b=B.Status,yy=b.y-b.h/2+80+28+2*30;
-  withA(ctx,o.newA||0,()=>{glow(ctx,b.x,yy-6,80,AMBER,0.35*(o.glowNew||1));tag(ctx,b.x+b.w/2+80,yy-6,"new",AMBER,{align:"center",size:18});});return B;}
+  const B=diagram(ctx,E,L3R.filter(r=>!(r[0]==="Offering"&&r[1]==="Term")).map(r=>r.concat([{}])));
+  elbowRel(ctx,B.Offering,B.Term,B.Class);
+  const b=B.Status,top=b.y-b.h/2,yy=top+80+28+2*30,lx=b.x-b.w/2;
+  withA(ctx,o.newA||0,()=>{ctx.save();rr(ctx,lx+4,yy-26,b.w-8,34,8);ctx.clip();glow(ctx,lx+90,yy-6,70,AMBER,0.45*(o.glowNew||1));ctx.restore();
+    tag(ctx,lx+b.w+14,yy-6,"new",AMBER,{size:18});});return B;}
+// a one-to-many line drawn with right angles: down from Unit offering, across below it, and down into Teaching period
+function elbowRel(ctx,A,B,below){const x0=A.x+A.w/2-44,y0=A.y+A.h/2,ym=(y0+(below.y-below.h/2))/2,x1=B.x,y1=B.y-B.h/2;
+  ctx.save();ctx.shadowColor=rgba(SK,0.8);ctx.shadowBlur=10;ctx.strokeStyle=rgba(SK,0.95);ctx.lineWidth=2.4;ctx.lineJoin="round";
+  ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x0,ym);ctx.lineTo(x1,ym);ctx.lineTo(x1,y1);ctx.stroke();
+  // many offerings (crow's foot at Unit offering), one teaching period (bar at Teaching period)
+  ctx.beginPath();ctx.moveTo(x0-13,y0);ctx.lineTo(x0,y0+20);ctx.lineTo(x0+13,y0);ctx.moveTo(x1-11,y1-14);ctx.lineTo(x1+11,y1-14);ctx.stroke();ctx.restore();}
 // the data contract for enrolments: what arrives, what's allowed and what it means, how fresh, and an owner in each corner
-function contract(ctx,x,y,w,h,o){o=o||{};const ver=o.ver||"1.0";glass(ctx,x,y,w,h,24,[236,243,255],{glow:24+10*(o.glow||0),ea:0.9,fill:"rgba(10,16,32,0.95)"});
+function contract(ctx,x,y,w,h,o){o=o||{};const ver=o.ver||"1.0",dA=o.deferred||0;glass(ctx,x,y,w,h,24,[236,243,255],{glow:24+10*(o.glow||0),ea:0.9,fill:"rgba(10,16,32,0.95)"});
   T(ctx,"Data contract · enrolments",x+36,y+60,{w:800,size:34});stampV(ctx,x+w-40,y+50,"v"+ver,o.verFlash||0);
-  const rows=[["Fields","student, offering, status, date"],["Statuses","enrolled · withdrawn · waitlisted"+(o.deferred?" · deferred":"")],["Meaning","enrolled = holds a place on census date"],["Freshness","by 06:00 every day"]];
-  rows.forEach(([k,v],i)=>withA(ctx,o.rows==null?1:clamp(o.rows*rows.length-i,0,1),()=>{const yy=y+118+i*66;T(ctx,k,x+36,yy+24,{w:700,size:21,color:rgba(SOFT,0.95)});T(ctx,v,x+196,yy+24,{w:600,size:25,f:k==="Statuses"?"mono":undefined});}));
-  const C=[["mei",x+26,y+h-108,"produces"],["ben",x+w/2+8,y+h-108,"produces"],["ana",x+26,y+h-58,"uses"],["sam",x+w/2+8,y+h-58,"uses"]];
-  ctx.strokeStyle="rgba(170,200,245,0.18)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+26,y+h-136);ctx.lineTo(x+w-26,y+h-136);ctx.stroke();
-  C.forEach(([id,cx,cy,does],i)=>{const P=PEOPLE[id],a=o.sign?clamp(o.sign*4-i,0,1):0,n=o.notice?o.notice:0;withA(ctx,0.35+0.65*Math.max(a,n),()=>{led(ctx,cx+8,cy+12,12,12,P.edge);
-    T(ctx,P.name.split(" ")[0]+" · "+P.side.toLowerCase()+" · "+does,cx+30,cy+24,{w:700,size:21,color:rgba(P.edge,0.95)});});});}
+  const key=(k,yy)=>T(ctx,k,x+36,yy,{w:700,size:21,color:rgba(SOFT,0.95)}),vx=x+196,base="enrolled · withdrawn · waitlisted";
+  const rows=[[136,()=>{key("Fields",y+136);T(ctx,"student, offering, status, date",vx,y+136,{w:600,size:23});}],
+    [192,()=>{key("Statuses",y+192);T(ctx,base,vx,y+192,{w:600,size:22,f:"mono"});if(dA>0)withA(ctx,dA,()=>T(ctx," · deferred",vx+tw(ctx,base,22,600,"mono"),y+192,{w:600,size:22,f:"mono",color:rgba(mixc(INK,GOLDC,o.defHi||0),1)}));}],
+    [248,()=>{key("Meaning",y+248);T(ctx,"enrolled = holds a place on census date",vx,y+248,{w:600,size:22});T(ctx,"waitlisted = no place yet · withdrawn = left",vx,y+280,{w:600,size:22});
+      if(dA>0)withA(ctx,dA,()=>T(ctx,"deferred = starts in a later term",vx,y+312,{w:600,size:22,color:rgba(mixc(INK,GOLDC,o.defHi||0),1)}));}],
+    [364,()=>{key("Freshness",y+364);T(ctx,"by 06:00 every day",vx,y+364,{w:600,size:23});}]];
+  rows.forEach(([,draw],i)=>withA(ctx,o.rows==null?1:clamp(o.rows*rows.length-i,0,1),draw));
+  // the owners: one on each side of the change, technical and business, producing and using the data
+  ctx.strokeStyle="rgba(170,200,245,0.18)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+26,y+398);ctx.lineTo(x+w-26,y+398);ctx.stroke();
+  const cx1=x+w*0.44,cx2=x+w*0.7;key("Owners",y+432);T(ctx,"business",cx1,y+432,{w:700,size:18,color:rgba(BIZ,0.95)});T(ctx,"technical",cx2,y+432,{w:700,size:18,color:rgba(TECH,0.95)});
+  T(ctx,"produce",vx,y+474,{w:600,size:19,color:rgba(SOFT,0.95)});T(ctx,"use",vx,y+516,{w:600,size:19,color:rgba(SOFT,0.95)});
+  [["mei",cx1,y+474],["ben",cx2,y+474],["ana",cx1,y+516],["sam",cx2,y+516]].forEach(([id,cx,cy],i)=>{const P=PEOPLE[id],a=o.sign?clamp(o.sign*4-i,0,1):0,n=o.notice?o.notice:0;
+    withA(ctx,0.35+0.65*Math.max(a,n),()=>{led(ctx,cx,cy-15,12,12,P.edge);T(ctx,P.name.split(" ")[0],cx+22,cy,{w:700,size:22,color:rgba(P.edge,0.95)});});});}
 function stampV(ctx,x,y,s,flash){const w=tw(ctx,s,22,800,"mono")+26;glass(ctx,x-w,y-22,w,40,12,GOOD,{glow:8+20*flash,ea:0.8,fill:"rgba(10,30,20,0.8)"});T(ctx,s,x-w/2,y+6,{w:800,size:22,f:"mono",align:"center",color:"rgba(200,255,220,1)"});}
 // the platform in one row: the student system, the contract at the door, bronze, the dbt test gate, silver, gold and the data product
 function platformRow(ctx,t,o){o=o||{};const y=o.y||470;
@@ -1043,91 +1076,95 @@ function platformRow(ctx,t,o){o=o||{};const y=o.y||470;
   const cells=(err)=>(r,c)=>{const k=hash(r*13+c,7);return k<0.08&&err?AMBER:k<0.8?APP.sis.c:null;};
   vault(ctx,560,y-150,240,300,LAYER.bronze,cells(o.err),"Bronze","as it arrived");
   const g=o.gate||GOOD;lane(ctx,[{x:800,y},{x:900,y}],APP.sis.c,0.6);gate(ctx,900,y,150,g,"tests");chip(ctx,900,y-130,"dbt","tests","",{align:"center",edge:g});
-  const dim=o.skip?0.35:1;withA(ctx,dim,()=>{lane(ctx,[{x:930,y},{x:1000,y}],[214,228,255],0.6);vault(ctx,1000,y-150,240,300,LAYER.silver,(r,c)=>hash(r*7+c,3)<0.7?[214,228,255]:null,"Silver","consistent");
-    lane(ctx,[{x:1240,y},{x:1300,y}],GOLDC,0.6);vault(ctx,1300,y-150,240,300,LAYER.gold,(r,c)=>hash(r*5+c,2)<0.6?GOLDC:null,"Gold","class fill");lane(ctx,[{x:1540,y},{x:1600,y}],GOLDC,0.6);});
+  const sk=o.skip||0,lit=o.lit||0,dS=sk*(1-sstep(0.22,0.4,lit)),dG=sk*(1-sstep(0.55,0.72,lit));
+  withA(ctx,1-0.65*dS,()=>{lane(ctx,[{x:930,y},{x:1000,y}],[214,228,255],0.6);vault(ctx,1000,y-150,240,300,LAYER.silver,(r,c)=>hash(r*7+c,3)<0.7?[214,228,255]:null,"Silver","consistent");});
+  withA(ctx,1-0.65*dG,()=>{lane(ctx,[{x:1240,y},{x:1300,y}],GOLDC,0.6);vault(ctx,1300,y-150,240,300,LAYER.gold,(r,c)=>hash(r*5+c,2)<0.6?GOLDC:null,"Gold","class fill");lane(ctx,[{x:1540,y},{x:1600,y}],GOLDC,0.6);});
   kpiMini(ctx,1590,y-95,270,190,parseInt(o.num||"94"));
-  if(o.skip)withA(ctx,o.skip,()=>{tag(ctx,1120,y+200,"skipped",SOFT,{align:"center",size:17});tag(ctx,1420,y+200,"skipped",SOFT,{align:"center",size:17});});
+  if(dS>0)withA(ctx,dS,()=>tag(ctx,1120,y+182,"skipped",SOFT,{align:"center",size:17}));if(dG>0)withA(ctx,dG,()=>tag(ctx,1420,y+182,"skipped",SOFT,{align:"center",size:17}));
   if(o.banner>0)withA(ctx,o.banner,()=>tag(ctx,1725,y-150,"last good data · yesterday 23:02",AMBER,{align:"center",size:16}));}
 
 /* ===== When things go wrong · Silent change: scenes =====
    Eleven chapters, as in ../story.md. People scenes happen in rooms at dawn; the platform is the first film's world of light.
    Every shot keeps moving, gently: the camera drifts, people breathe and blink, and light flows along the lanes. */
 const pulse=(t,t0,d)=>t>t0&&t<t0+(d||2.2)?Math.sin(Math.PI*(t-t0)/(d||2.2)):0;
-const sis=k=>({app:"sis",q:1,err:false});
 
-/* ---------- 1. 7:58 am · The banner ---------- */
+/* ---------- 1. 7:58 am · Yesterday's numbers ---------- */
 scene("banner",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");
   room(ctx,S,t);camKeys(ctx,S,[[0,960,540,1.0],[B,985,528,1.04],[sc.dur+1,995,522,1.06]],t);
-  person(ctx,"ana",400,1225,1.42,{pose:t>c("asks")-0.4?"phone":"stand",expr:t>c("old")-0.5&&t<c("asks")+1.5?"concerned":t>c("note")+0.8?"concerned":"calm",t});
+  person(ctx,"ana",400,1180,1.34,{pose:"stand",pose2:"phone",mix:fin(t,c("asks")-0.6,0.5),expr:t>c("old")-0.5&&t<c("asks")+1.5?"concerned":t>c("note")+0.8?"concerned":"calm",t});
   dashboard(ctx,860,150,960,580,{banner:fin(t,c("note")+0.2),pulse:pulse(t,c("note")+0.2,2.4)+pulse(t,c("old")+1.2,2.4)});
-  msg(ctx,520,236,330,"Ana → Sam","Are these numbers safe to use?",BIZ,fin(t,c("asks")+0.9,0.4),t>c("asks")-0.1?t:0);
+  msg(ctx,490,236,330,"Ana → Sam","Are these numbers safe to use?",BIZ,fin(t,c("asks")+0.9,0.4),t>c("asks")-0.1?t:0);
   clockChip(ctx,S,"7:58","the morning before census date",fin(t,0.3));
   setScreen(ctx,S);withA(ctx,fin(t,c("ana")+0.6),()=>{glass(ctx,1560,52,296,64,18,BIZ,{glow:10,ea:0.6,fill:"rgba(8,14,28,0.85)"});T(ctx,"9:00 · confirm classes",1586,94,{w:700,size:22});});
   // the title, over a darker frame
-  const tA=fin(t,B+0.1,0.9);if(tA>0){setScreen(ctx,S);ctx.fillStyle="rgba(3,5,11,"+tA+")";ctx.fillRect(0,0,W,H);
+  // the frame darkens first; the title comes in only once the dashboard has gone
+  const oA=fin(t,B+0.1,0.6),tA=fin(t,B+0.6,0.7);if(oA>0){setScreen(ctx,S);ctx.fillStyle="rgba(3,5,11,"+oA+")";ctx.fillRect(0,0,W,H);
     withA(ctx,tA,()=>{glow(ctx,960,500,420,SK,0.12);T(ctx,"WHEN THINGS GO WRONG",960,450,{w:800,size:26,align:"center",color:rgba(SK,0.95)});T(ctx,"Silent change",960,540,{w:800,size:88,align:"center"});
       T(ctx,"why a change needs both sides",960,600,{w:600,size:26,align:"center",color:rgba(SOFT,0.95)});});}
   if(t<1.4){setScreen(ctx,S);ctx.fillStyle="rgba(0,0,0,"+(1-ease(t/1.4))+")";ctx.fillRect(0,0,W,H);}});
 
 /* ---------- 2. Six hours earlier ---------- */
 scene("night",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
-  world(ctx,S);const cam=camKeys(ctx,S,[[0,760,500,1.12],[c("events")+1,860,480,1.04],[c("test"),920,470,1.12],[c("unknown")+0.4,920,460,1.3],[c("stops"),1180,480,1.0],[c("alert")+0.5,1040,520,1.02],[sc.dur+1,1000,520,1.0]],t);
-  glow(ctx,1700,120,120,[200,220,255],0.25);
-  const bad=t>c("unknown")+0.3,skip=fin(t,c("stops")+0.8,1.0),y=470;
-  platformRow(ctx,t,{err:t>c("events"),gate:bad?BAD:GOOD,skip,banner:fin(t,c("stops")+2.2),y});
-  // enrolments arrive all day as events; tonight's build carries them through the tests, until the test fails and the build stops
-  flowTiles(ctx,t,[{x:360,y},{x:470,y},{x:560,y}],0.45,1.2,0,sis,20,0.9);
-  if(t>c("test")-0.5&&!bad)flowTiles(ctx,t,[{x:800,y},{x:900,y},{x:1000,y},{x:1240,y},{x:1300,y}],0.6,1.8,c("test"),sis,18,fin(t,c("test")-0.5));
-  if(bad){for(let i=0;i<6;i++){const a=fin(t,c("unknown")+0.3+i*0.12);withA(ctx,a,()=>{ctx.fillStyle=rgba(AMBER,0.85);rr(ctx,842-(i%3)*22,y-30+Math.floor(i/3)*30+Math.sin(t*2+i)*2,18,18,4);ctx.fill();});}
-    withA(ctx,fin(t,c("unknown")+0.5),()=>{glow(ctx,900,y,110,BAD,0.35+0.15*Math.sin(t*3));tag(ctx,900,y+130,"status: WAITLISTED · never seen",BAD,{align:"center",size:21});});}
-  setScreen(ctx,S);clockChip(ctx,S,"2:40","the nightly build",fin(t,0.4));
+  // the whole row stays in frame: from the student system to the data product
+  world(ctx,S);camKeys(ctx,S,[[0,965,500,1.0],[c("events")+1,965,490,1.02],[c("test"),955,485,1.04],[c("stops"),965,500,1.02],[c("alert")+0.5,965,540,1.0],[sc.dur+1,965,545,1.0]],t);
+  const bad=fin(t,c("unknown")+0.3,0.35),skip=fin(t,c("stops")+0.8,1.0),y=470;
+  platformRow(ctx,t,{err:t>c("events"),gate:mixc(GOOD,BAD,bad),skip,banner:fin(t,c("stops")+2.2),y});
+  // enrolment changes arrive all day, as events or in files; tonight's build takes them to the tests, until a test fails and nothing more goes through
+  packets(ctx,t,[{x:360,y},{x:470,y},{x:560,y}],0.45,1.2,0,APP.sis.c,16,0.9);
+  packets(ctx,t,[{x:800,y},{x:884,y}],0.6,1.0,c("test")-0.5,APP.sis.c,16,1,c("unknown")+0.2);
+  if(bad>0){for(let i=0;i<6;i++){const a=fin(t,c("unknown")+0.3+i*0.12);withA(ctx,a,()=>{ctx.fillStyle=rgba(AMBER,0.85);rr(ctx,812+(i%2)*24,y-40+Math.floor(i/2)*26+Math.sin(t*2+i)*2,16,16,4);ctx.fill();});}
+    withA(ctx,fin(t,c("unknown")+0.5),()=>{glow(ctx,900,y,110,BAD,0.35+0.15*Math.sin(t*3));tag(ctx,820,y+182,"status: waitlisted · never seen",BAD,{align:"center",size:21});});}
   // the alert waits for the morning: nothing wrong was published
-  withA(ctx,fin(t,c("alert")+0.2),()=>{const x=720,yy=700;glass(ctx,x,yy,480,96,20,AMBER,{glow:12,ea:0.7,fill:"rgba(30,22,8,0.85)"});glow(ctx,x+52,yy+48,34,[255,210,120],0.6+0.2*Math.sin(t*2));
-    ctx.fillStyle="rgba(255,214,140,1)";ctx.beginPath();ctx.arc(x+52,yy+48,14,0,TAU);ctx.fill();T(ctx,"Alert · for the morning",x+92,yy+42,{w:800,size:24});T(ctx,"nothing wrong was published",x+92,yy+72,{w:500,size:18,color:rgba(SOFT,0.95)});});});
+  withA(ctx,fin(t,c("alert")+0.2),()=>{const x=720,yy=740;glass(ctx,x,yy,480,96,20,AMBER,{glow:12,ea:0.7,fill:"rgba(30,22,8,0.85)"});glow(ctx,x+52,yy+48,34,[255,210,120],0.6+0.2*Math.sin(t*2));
+    ctx.fillStyle="rgba(255,214,140,1)";ctx.beginPath();ctx.arc(x+52,yy+48,14,0,TAU);ctx.fill();T(ctx,"Alert · for the morning",x+92,yy+42,{w:800,size:24});T(ctx,"nothing wrong was published",x+92,yy+72,{w:500,size:18,color:rgba(SOFT,0.95)});});
+  clockChip(ctx,S,"2:40","the nightly build",fin(t,0.4));});
 
 /* ---------- 3. 7:59 am · Sam ---------- */
 scene("sam",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
   room(ctx,S,t,{top:"#0d162c"});camKeys(ctx,S,[[0,960,540,1.0],[sc.dur+1,940,530,1.05]],t);
-  person(ctx,"sam",430,1225,1.42,{pose:"phone",expr:t<c("reply")?"concerned":"calm",t});
+  person(ctx,"sam",430,1180,1.34,{pose:"phone",expr:t<c("reply")?"concerned":"calm",t});
   glass(ctx,880,110,640,640,28,[170,205,255],{glow:16,ea:0.5,fill:"rgba(8,14,28,0.9)"});T(ctx,"Messages",912,160,{w:800,size:26});
   withA(ctx,1,()=>{glass(ctx,904,188,592,118,18,BAD,{glow:10,ea:0.7,fill:"rgba(40,10,14,0.6)"});led(ctx,928,214,12,12,BAD);T(ctx,"Test failed · 02:40",952,226,{w:800,size:22});
     T(ctx,"stg_enrolments · accepted_values",928,264,{w:500,size:19,f:"mono",color:rgba(INK,0.9)});T(ctx,"downstream skipped · last good data kept",928,292,{w:500,size:17,color:rgba(SOFT,0.95)});});
-  msg(ctx,904,326,420,"Ana","Are these numbers safe to use?",BIZ,fin(t,0.6,0.4));
-  msg(ctx,1036,478,460,"Sam → Ana","Yesterday's numbers are safe. Checking today's; back to you by 8:45.",TECH,fin(t,c("reply")+0.6,0.4),t>c("reply")-0.3?t:0);
-  setScreen(ctx,S);clockChip(ctx,S,"7:59","",fin(t,0.2));
-  withA(ctx,fin(t,c("trust")+0.3),()=>{tag(ctx,1700,300,"known: yesterday is safe",GOOD,{align:"center",size:21});tag(ctx,1700,370,"not yet: today",AMBER,{align:"center",size:21});});});
+  msg(ctx,904,326,500,"Ana","Are these numbers safe to use?",BIZ,fin(t,0.6,0.4));
+  msg(ctx,1036,430,460,"Sam → Ana","Yesterday's numbers are safe.\nI'm checking today's.\nBack to you by 8:45.",TECH,fin(t,c("reply")+0.6,0.4),t>c("reply")-0.3?t:0);
+  // what Sam knows, and what not yet: inside the panel, under the reply
+  withA(ctx,fin(t,c("trust")+0.3),()=>{const k="known: yesterday is safe";tag(ctx,904,660,k,GOOD,{size:21});tag(ctx,904+tw(ctx,k,21,700)+26+16,660,"not yet: today",AMBER,{size:21});});
+  setScreen(ctx,S);clockChip(ctx,S,"7:59","",fin(t,0.2));});
 
 /* ---------- 4. Follow the thread ---------- */
 // the lineage world: the steps that built the number on Ana's dashboard, from the dashboard back to bronze
-function lineWorld(ctx,t,k,trayA){const y=540;
-  kpiMini(ctx,1520,252,240,152,94);
-  lineage(ctx,1640,y,350,{k,bad:true});tray(ctx,425,650,330,15,t,trayA);
-  const d=Math.floor(k);if(k>0)glow(ctx,1640-Math.min(4,k)*350,y,60,BAD,0.2+0.1*Math.sin(t*3));}
-scene("thread",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),T0=c("lineage");
-  // the thread moves back one step at a time: to the data product, to the model that joins enrolments to classes, then to staging
-  const k=t<c("steps")?0:t<c("staging")?ease(clamp((t-c("steps")-0.2)/1.4,0,1))+ease(clamp((t-c("steps")-2.9)/1.4,0,1)):2+ease(clamp((t-c("staging")-0.1)/1.4,0,1));
-  // through the screen: over Sam's shoulder, the laptop turns to glass, and the camera passes through it
+function lineWorld(ctx,t,k,trayA,kpiA){const y=540;
+  if(k>0)glow(ctx,1640-Math.min(4,k)*350,y,70,BAD,0.2+0.1*Math.sin(t*3));
+  kpiMini(ctx,1500,236,280,190,94,kpiA==null?1:kpiA);
+  lineage(ctx,1640,y,350,{k,bad:true});tray(ctx,425,650,330,15,t,trayA);}
+scene("thread",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
+  // the thread waits at the dashboard while Sam starts, then moves back one step at a time: to the data product, to the model that joins enrolments to units, then to staging
+  const k=t<c("back")+0.4?0:t<c("steps")?0.001:t<c("staging")?ease(clamp((t-c("steps")-0.2)/1.4,0,1))+ease(clamp((t-c("steps")-2.9)/1.4,0,1)):2+ease(clamp((t-c("staging")-0.1)/1.4,0,1));
+  // through the screen: over Sam's shoulder, the laptop turns to glass, and the camera passes through it; the room moves in too, more slowly
   const SR={x:760,y:250,w:560,h:315},u=ease(clamp((t-0.9)/2.0,0,1)),z1=W/SR.w;
-  if(u<1){room(ctx,S,t,{top:"#0d162c"});const z=lerp(1,z1,u),cx=lerp(W/2,SR.x+SR.w/2,u),cy=lerp(H/2,SR.y+SR.h/2,u);ctx.setTransform(S*z,0,0,S*z,S*(W/2-cx*z),S*(H/2-cy*z));
+  if(u<1){const z=lerp(1,z1,u),cx=lerp(W/2,SR.x+SR.w/2,u),cy=lerp(H/2,SR.y+SR.h/2,u);room(ctx,S,t,{top:"#0d162c",cam:{z:lerp(1,1.35,u),x:cx,y:cy}});ctx.setTransform(S*z,0,0,S*z,S*(W/2-cx*z),S*(H/2-cy*z));
     ctx.save();ctx.shadowColor="rgba(120,200,255,0.5)";ctx.shadowBlur=50;ctx.fillStyle="#0e1526";rr(ctx,SR.x-18,SR.y-18,SR.w+36,SR.h+36,14);ctx.fill();ctx.restore();
     ctx.save();rr(ctx,SR.x,SR.y,SR.w,SR.h,6);ctx.clip();ctx.translate(SR.x,SR.y);ctx.scale(SR.w/W,SR.h/H);bg2(ctx);lineWorld(ctx,t,0,0);ctx.restore();
     ctx.fillStyle="#1a2338";ctx.beginPath();ctx.moveTo(SR.x-50,SR.y+SR.h+18);ctx.lineTo(SR.x+SR.w+50,SR.y+SR.h+18);ctx.lineTo(SR.x+SR.w+90,SR.y+SR.h+44);ctx.lineTo(SR.x-90,SR.y+SR.h+44);ctx.closePath();ctx.fill();
     const zf=1+(z-1)*1.5;if(zf<3.2){ctx.setTransform(S*zf,0,0,S*zf,S*(W/2-cx*zf),S*(H/2-cy*zf));personBack(ctx,"sam",420,1745,2.3,{t});}
     return;}
-  world(ctx,S);camKeys(ctx,S,[[2.9,960,540,1.0],[c("back"),1400,520,1.12],[c("steps"),1250,520,1.1],[c("steps")+1.8,1000,520,1.1],[c("staging"),700,540,1.12],[sc.dur+1,640,560,1.16]],t);
-  lineWorld(ctx,t,k,fin(t,c("staging")+1.6));});
+  // every framing holds whole boxes: the whole lineage; then the dashboard's end; then staging and the rows kept aside
+  world(ctx,S);camKeys(ctx,S,[[2.9,945,540,1.0],[c("back")+0.2,945,540,1.0],[c("back")+1.6,1275,520,1.17],[c("staging")-0.2,1275,520,1.17],[c("staging")+2.0,750,560,1.3],[sc.dur+1,750,560,1.3]],t);
+  lineWorld(ctx,t,k,fin(t,c("staging")+1.6),1-fin(t,c("staging")-0.2,1.0));});
 
 /* ---------- 5. The cause, in bronze ---------- */
-const ROWS=[["S-2231","DS101","ENROLLED"],["S-4410","DS101","WAITLISTED"],["S-1187","DS101","ENROLLED"],["S-5092","DS101","WAITLISTED"],["S-3368","DS101","ENROLLED"],["S-6120","DS101","WAITLISTED"]];
+// the rows in bronze as they arrived: the columns the contract will later name
+const ROWS=[["S-2231","DS101-S2","enrolled","2026-07-28"],["S-4410","DS101-S2","waitlisted","2026-08-24"],["S-1187","DS101-S2","enrolled","2026-08-02"],["S-5092","DS101-S2","waitlisted","2026-08-24"],["S-3368","DS101-S2","enrolled","2026-08-05"],["S-6120","DS101-S2","waitlisted","2026-08-24"]],COLX=[24,130,270,420];
 scene("bronze",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
-  world(ctx,S);camKeys(ctx,S,[[0,640,560,1.16],[1.8,470,400,1.12],[c("new"),520,380,1.1],[sc.dur+1,540,390,1.08]],t);
-  lineWorld(ctx,t,3+ease(clamp((t-0.2)/1.4,0,1)),1);
-  // the rows in bronze, exactly as they arrived
-  const a=fin(t,c("arrived")+0.6,0.8);withA(ctx,a,()=>{const x=0,y=40,w=548;glass(ctx,x,y,w,330,20,LAYER.bronze,{glow:16,ea:0.8,fill:"rgba(20,12,6,0.9)"});
-    T(ctx,"bronze.enrolments",x+24,y+40,{w:700,size:20,f:"mono",color:rgba(LAYER.bronze,1)});["student","unit","status"].forEach((h,i)=>T(ctx,h,x+24+i*170,y+78,{w:700,size:16,color:rgba(SOFT,0.9)}));
-    ROWS.forEach((r,i)=>{const yy=y+112+i*36,wl=r[2]==="WAITLISTED",hi=wl?fin(t,c("new")+0.3+i*0.1):0;if(hi>0){ctx.fillStyle=rgba(AMBER,0.16*hi);rr(ctx,x+12,yy-24,w-24,32,8);ctx.fill();}
-      r.forEach((v,j)=>T(ctx,v,x+24+j*170,yy,{w:600,size:19,f:"mono",color:wl&&j===2&&hi>0?rgba(AMBER,1):rgba(INK,0.9)}));});});
-  withA(ctx,fin(t,c("new")+0.8),()=>tag(ctx,274,408,"15 in Data Science 101: WAITLISTED",AMBER,{align:"center",size:21}));
+  world(ctx,S);camKeys(ctx,S,[[0,750,560,1.3],[1.8,712,440,1.2],[c("new"),712,430,1.22],[sc.dur+1,712,430,1.24]],t);
+  lineWorld(ctx,t,3+ease(clamp((t-0.2)/1.4,0,1)),1-fin(t,c("arrived")+0.3,0.8),0);
+  const a=fin(t,c("arrived")+0.6,0.8);withA(ctx,a,()=>{const x=0,y=40,w=560;glass(ctx,x,y,w,344,20,LAYER.bronze,{glow:16,ea:0.8,fill:"rgba(20,12,6,0.9)"});
+    T(ctx,"bronze.enrolments",x+24,y+40,{w:700,size:20,f:"mono",color:rgba(LAYER.bronze,1)});["student","offering","status","date"].forEach((h,i)=>T(ctx,h,x+COLX[i],y+78,{w:700,size:16,color:rgba(SOFT,0.9)}));
+    ROWS.forEach((r,i)=>{const yy=y+112+i*36,wl=r[2]==="waitlisted",hi=wl?fin(t,c("new")+0.3+i*0.1):0;if(hi>0){ctx.fillStyle=rgba(AMBER,0.16*hi);rr(ctx,x+12,yy-24,w-24,32,8);ctx.fill();}
+      r.forEach((v,j)=>T(ctx,v,x+COLX[j],yy,{w:600,size:19,f:"mono",color:wl&&j===2&&hi>0?rgba(AMBER,1):rgba(INK,0.9)}));});
+    T(ctx,"showing 6 of 134 rows",x+24,y+326,{w:500,size:16,color:rgba(SOFT,0.85)});});
+  withA(ctx,fin(t,c("new")+0.8),()=>tag(ctx,280,424,"15 in Data Science 101: waitlisted",AMBER,{align:"center",size:21}));
   withA(ctx,fin(t,c("kept")+2.2),()=>{tag(ctx,850,300,"nothing lost",GOOD,{align:"center",size:22});tag(ctx,850,360,"something new",AMBER,{align:"center",size:22});});});
 
 /* ---------- 6. Two halves of one change ---------- */
@@ -1139,7 +1176,7 @@ function campus(ctx,t,sc,c){ // the flashback: two notices, each on its own path
   bld(300,300,300,90,"Registrar's office",BIZ);bld(300,700,300,90,"Student system team",TECH);
   ["School of Computing","School of Business","School of Health"].forEach((s,i)=>bld(900,190+i*110,300,70,s,BIZ));bld(900,700,300,70,"release notes",TECH);
   glass(ctx,1440,340,380,300,24,[170,205,255],{glow:14,ea:0.5,fill:"rgba(8,14,28,0.9)"});T(ctx,"Data platform",1630,390,{w:800,size:24,align:"center"});
-  kpiMini(ctx,1520,420,220,139,94);T(ctx,"and the people who use its numbers",1630,600,{w:500,size:16,align:"center",color:rgba(SOFT,0.95)});
+  kpiMini(ctx,1490,408,280,180,94);T(ctx,"and the people who use its numbers",1630,624,{w:500,size:16,align:"center",color:rgba(SOFT,0.95)});
   const branch=y=>{const P=[];for(let i=0;i<=14;i++){const u=i/14,a=1-u;P.push({x:a*a*a*560+3*a*a*u*660+3*a*u*u*650+u*u*u*750,y:a*a*a*300+3*a*a*u*300+3*a*u*u*y+u*u*u*y});}return P;};
   path([{x:450,y:300},{x:560,y:300}],BIZ,clamp(pA*2.2,0,1));const pb=clamp(pA*2.2-1.2,0,1);let e1=null;[190,300,410].forEach(y=>{const e=path(branch(y),BIZ,pb);if(y===300)e1=e;});if(pA<0.45)e1={x:lerp(450,560,clamp(pA*2.2,0,1)),y:300};
   const e2=path([{x:450,y:700},{x:750,y:700}],TECH,pB);
@@ -1153,22 +1190,22 @@ scene("halves",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
   const fb=fin(t,c("weeks")-0.4,0.9)*fout(t,c("knew")-0.6,0.9),present=1-fb;
   // present: messages, then a call
   if(t<c("weeks")+0.6){room(ctx,S,t,{top:"#0d162c"});camKeys(ctx,S,[[0,960,540,1.0],[c("weeks"),940,530,1.04]],t);
-    person(ctx,"sam",380,1225,1.38,{pose:t<c("mei")?"phone":"stand",expr:"concerned",t});
+    person(ctx,"sam",380,1180,1.32,{pose:"phone",pose2:"stand",mix:fin(t,c("mei")-0.1,0.45),expr:"concerned",t});
     const mA=fout(t,c("mei")-0.2,0.6);msg(ctx,780,170,560,"Sam → Ben","Did enrolments change last night?",TECH,fin(t,c("ask")+1.0,0.4)*mA,t>c("ask")+0.2&&t<c("mei")?t:0);
-    msg(ctx,1240,330,560,"Ben","Yes, waitlists went live. It's in our release notes.",TECH,fin(t,c("ben")+0.2,0.4)*mA,t>c("ben")-0.6&&t<c("mei")?t:0);
+    msg(ctx,1240,330,560,"Ben","Yes, waitlists went live.\nIt's in our release notes.",TECH,fin(t,c("ben")+0.2,0.4)*mA,t>c("ben")-0.6&&t<c("mei")?t:0);
     const cA=fin(t,c("mei")+0.2,0.8);withA(ctx,cA,()=>{callTile(ctx,"sam",780,150,480,300,{t,expr:"concerned"});callTile(ctx,"mei",1300,150,480,300,{t,hi:1});
-      msg(ctx,1040,490,740,"Mei","Yes, we introduced waitlists, and we emailed every School.",BIZ,fin(t,c("mei")+1.6,0.4));});}
+      msg(ctx,1040,490,620,"Mei","Yes, we introduced waitlists,\nand we emailed every School.",BIZ,fin(t,c("mei")+1.6,0.4));});}
   // two weeks earlier
   if(fb>0){setScreen(ctx,S);withA(ctx,fb,()=>{bg2(ctx);ctx.save();camKeys(ctx,S,[[c("weeks")-0.4,960,500,1.02],[c("knew"),940,480,1.06]],t);campus(ctx,t,sc,c);ctx.restore();
     setScreen(ctx,S);clockChip(ctx,S,"two weeks earlier","",1);ctx.fillStyle="rgba(255,220,170,0.04)";ctx.fillRect(0,0,W,H);});}
   // the two halves meet: Ben knew what changed, Mei knew what it meant
-  if(t>c("knew")-0.7){const p=fin(t,c("knew")-0.7,0.9),q=fin(t,c("question")-0.4,0.8),sk=fin(t,c("sketch")-0.4,0.9);
+  if(t>c("knew")-0.7){const p=fin(t,c("knew")-0.7,0.9),q=fin(t,c("question")-0.5,0.5),q2=fin(t,c("question"),0.6),sk=fin(t,c("sketch")-0.4,0.9);
     if(sk<1)withA(ctx,p*(1-sk),()=>{setScreen(ctx,S);bg2(ctx);camKeys(ctx,S,[[c("knew"),960,520,1.0],[c("sketch"),960,520,1.04]],t);
       if(q<1)withA(ctx,1-q,()=>{callTile(ctx,"ben",140,170,440,300,{t,hi:1});callTile(ctx,"sam",740,420,440,300,{t});callTile(ctx,"mei",1340,170,440,300,{t,hi:1});
         const m=ease(clamp((t-c("knew")-0.2)/1.8,0,1));beam(ctx,[{x:580,y:320},{x:lerp(580,740,m),y:lerp(320,570,m)}],TECH,[[16,0.08],[6,0.2],[2.4,0.85],[1.2,1]]);beam(ctx,[{x:1340,y:320},{x:lerp(1340,1180,m),y:lerp(320,570,m)}],BIZ,[[16,0.08],[6,0.2],[2.4,0.85],[1.2,1]]);
         withA(ctx,fin(t,c("knew")+0.4),()=>tag(ctx,360,520,"knew what changed",TECH,{align:"center",size:21}));withA(ctx,fin(t,c("knew")+1.6),()=>tag(ctx,1560,520,"knew what it meant",BIZ,{align:"center",size:21}));
         withA(ctx,fin(t,c("knew")+3.2),()=>tag(ctx,960,780,"the numbers depend on it",SOFT,{align:"center",size:21}));});
-      if(q>0)withA(ctx,q,()=>{callTile(ctx,"mei",160,200,560,360,{t,expr:t>c("decides")+0.5?"calm":"calm",hi:1});
+      if(q2>0)withA(ctx,q2,()=>{callTile(ctx,"mei",160,200,560,360,{t,expr:t>c("decides")+0.5?"calm":"calm",hi:1});
         glass(ctx,820,220,940,300,24,BIZ,{glow:16,ea:0.8,fill:"rgba(12,16,30,0.92)"});T(ctx,"Is a waitlisted student enrolled?",860,290,{w:800,size:34});T(ctx,"a business question",860,334,{w:600,size:20,color:rgba(SOFT,0.95)});
         withA(ctx,fin(t,c("decides")+0.3),()=>{T(ctx,"No.",860,410,{w:800,size:40,color:rgba(BIZ,1)});T(ctx,"Enrolled means holding a seat on census date.",940,410,{w:600,size:26});T(ctx,"A waitlisted student doesn't hold one yet.",940,452,{w:500,size:22,color:rgba(SOFT,0.95)});});});});
     if(sk>0){setScreen(ctx,S);withA(ctx,sk,()=>{bg2(ctx);camKeys(ctx,S,[[c("sketch")-0.4,960,470,0.98],[sc.dur+1,960,470,1.06]],t);
@@ -1176,66 +1213,91 @@ scene("halves",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
       sharperSketch(ctx,{newA:fin(t,c("sketch")+0.9,1.0),glowNew:0.6+0.4*Math.sin(t*1.6),hi:0.5+0.5*fin(t,c("sketch")+0.4)});});}}});
 
 /* ---------- 7. The fix ---------- */
-const CODE=[["models/staging/_stg.yml",1],["- name: status",0],["  tests:",0],["    - accepted_values:",0],["        values: [enrolled, withdrawn,",0],["                 waitlisted]",2],["",0],["models/marts/fct_offering_fill.sql",1],["count(*) filter (",0],["  where status = 'enrolled')",0],["-- waitlisted doesn't hold a seat",3]];
+// the change as a diff: 0 unchanged, 1 file name, 2 added, 3 added comment, 4 removed; the last number says which half of the fix (the test, then the model)
+const CODE=[["models/staging/_stg.yml",1],["- name: status",0],["  tests:",0],["    - accepted_values:",0],["        values: [enrolled, withdrawn]",4,0],["        values: [enrolled, withdrawn, waitlisted]",2,0],["",0],
+  ["models/marts/fct_offering_fill.sql",1],["count(*) filter (",0],["  where status != 'withdrawn')",4,1],["  where status = 'enrolled')",2,1],["-- waitlisted doesn't hold a seat",3,1]];
 scene("fix",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
-  world(ctx,S);camKeys(ctx,S,[[0,960,540,1.06],[sc.dur+1,980,530,1.0]],t);
+  world(ctx,S);camKeys(ctx,S,[[0,960,470,1.0],[sc.dur+1,968,466,1.02]],t);
   glass(ctx,120,140,1000,640,24,DBT,{glow:16,ea:0.7,fill:"rgba(10,12,22,0.94)"});chip(ctx,200,196,"dbt","one rule","",{edge:DBT});
-  CODE.forEach(([s,kind],i)=>{const y=270+i*44,a=kind===2||kind===3?fin(t,c("small")+1.4+(kind===3?1.0:0)):1;if(kind===2&&a>0){ctx.fillStyle=rgba(GOOD,0.14*a);rr(ctx,150,y-30,940,40,8);ctx.fill();}
-    withA(ctx,a,()=>T(ctx,(kind===2?"+ ":"  ")+s,160,y,{w:500,size:24,f:"mono",color:kind===1?rgba(SOFT,0.9):kind===2?rgba(GOOD,1):kind===3?rgba(AMBER,0.95):rgba(INK,0.95)}));});
-  withA(ctx,fin(t,c("review")+0.2),()=>{glass(ctx,1200,150,600,150,22,GOOD,{glow:14,ea:0.8,fill:"rgba(10,26,20,0.9)"});led(ctx,1230,212,16,16,GOOD);T(ctx,"Review · approved",1264,226,{w:800,size:28});T(ctx,"by a colleague, like any code",1264,262,{w:500,size:19,color:rgba(SOFT,0.95)});});
-  withA(ctx,fin(t,c("review")+1.8),()=>{glass(ctx,1200,330,600,300,22,[170,205,255],{glow:12,ea:0.6,fill:"rgba(8,14,28,0.92)"});T(ctx,"CI · tests on what changed",1230,378,{w:800,size:24});
-    ["stg_enrolments","int_offering_enrolments","fct_offering_fill"].forEach((m,i)=>{const a=fin(t,c("review")+2.4+i*0.5);withA(ctx,a,()=>{led(ctx,1232,424+i*58,14,14,GOOD);T(ctx,m,1264,438+i*58,{w:600,size:22,f:"mono"});T(ctx,"pass",1770,438+i*58,{w:700,size:20,align:"right",color:rgba(GOOD,1)});});});});});
+  // added lines open a space and fade in; the lines they replace turn red
+  const ch=(h,d)=>fin(t,c("small")+1.4+h*1.2+(d||0),0.7);let y=270;
+  CODE.forEach(([s,kind,h])=>{const f=kind>=2&&kind<=4?ch(h||0,kind===3?0.6:0):1,add=kind===2||kind===3;if(add&&f<=0.01)return;const yy=y;y+=44*(add?ease(f):1);
+    if(kind===4&&f>0){ctx.fillStyle=rgba(BAD,0.14*f);rr(ctx,150,yy-30,940,40,8);ctx.fill();}
+    if(add){ctx.fillStyle=rgba(GOOD,0.14*f);rr(ctx,150,yy-30,940,40*ease(f),8);ctx.fill();}
+    const col=kind===1?rgba(SOFT,0.9):kind===2?rgba(GOOD,1):kind===3?rgba(AMBER,0.95):kind===4&&f>0.5?rgba(mixc(INK,[255,150,150],f),0.95):rgba(INK,0.95);
+    withA(ctx,add?sstep(0.55,1,f):1,()=>T(ctx,(add?"+ ":kind===4&&f>0.5?"- ":"  ")+s,160,yy,{w:500,size:24,f:"mono",color:col}));});
+  // on the right, from the start: the decision the fix follows; then the review and CI
+  glass(ctx,1200,140,600,130,22,BIZ,{glow:12,ea:0.7,fill:"rgba(20,16,8,0.9)"});T(ctx,"Decision · registrar's office",1230,192,{w:800,size:24});T(ctx,"waitlisted doesn't count as enrolled",1230,232,{w:500,size:20,color:rgba(SOFT,0.95)});
+  withA(ctx,fin(t,c("review")+0.2),()=>{glass(ctx,1200,300,600,130,22,GOOD,{glow:14,ea:0.8,fill:"rgba(10,26,20,0.9)"});led(ctx,1230,352,16,16,GOOD);T(ctx,"Review · approved",1264,366,{w:800,size:28});T(ctx,"by a colleague, like any code",1264,400,{w:500,size:19,color:rgba(SOFT,0.95)});});
+  withA(ctx,fin(t,c("review")+1.8),()=>{glass(ctx,1200,460,600,320,22,[170,205,255],{glow:12,ea:0.6,fill:"rgba(8,14,28,0.92)"});T(ctx,"CI · tests on what changed",1230,510,{w:800,size:24});
+    ["stg_enrolments","int_offering_enrolments","fct_offering_fill"].forEach((m,i)=>{const a=fin(t,c("review")+2.4+i*0.5);withA(ctx,a,()=>{led(ctx,1232,566+i*70,14,14,GOOD);T(ctx,m,1264,580+i*70,{w:600,size:22,f:"mono"});T(ctx,"pass",1770,580+i*70,{w:700,size:20,align:"right",color:rgba(GOOD,1)});});});});});
 
 /* ---------- 8. Recover ---------- */
-scene("recover",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
-  world(ctx,S);camKeys(ctx,S,[[0,960,520,1.0],[c("would")-0.4,980,520,1.0],[c("would")+1.4,960,1470,1.0],[sc.dur+1,990,1460,1.04]],t);
-  const run=ease(clamp((t-c("rerun")-0.2)/2.0,0,1));platformRow(ctx,t,{skip:1-run,gate:GOOD,y:470,num:run>0.95?"96%":"94%"});
-  if(run>0&&run<1){const x=lerp(900,1725,run);glow(ctx,x,470,80,GOOD,0.5);}
-  const v=fin(t,c("versions")+0.4),ok=fin(t,c("confirm")+0.2);
-  dashboard(ctx,480,1180,960,580,{num:ok>0.5?"96%":"94%",banner:1-ok,ok,ghost:fin(t,c("would")+1.8)*fout(t,c("versions")-0.2),day:"Tuesday"});
-  withA(ctx,v,()=>{[["version 41","yesterday 23:02","94%"],["version 42","today 08:31","96%"]].forEach(([n,w2,p],i)=>{const x=1480+i*22,y=1230+i*190;glass(ctx,x,y,400,160,18,[214,228,255],{glow:12,ea:0.7,fill:"rgba(10,16,32,0.9)"});
-    T(ctx,n,x+24,y+44,{w:800,size:22,f:"mono"});T(ctx,w2,x+24,y+76,{w:500,size:18,color:rgba(SOFT,0.95)});T(ctx,p,x+376,y+128,{w:800,size:44,align:"right",color:i?rgba(GOOD,1):rgba(INK,0.9)});});
-    T(ctx,"time travel",1680,1200,{w:700,size:20,align:"center",color:rgba(SOFT,0.95)});});
-  withA(ctx,fin(t,c("believable")+0.4)*fout(t,c("versions")),()=>{tag(ctx,1650,1330,"a bigger room?",BAD,{align:"center",size:20});});
-  withA(ctx,ok,()=>{callTile(ctx,"ana",60,1300,380,260,{t,expr:"relieved",hi:1});tag(ctx,250,1610,"9:00 · classes confirmed",GOOD,{align:"center",size:21});});
-  setScreen(ctx,S);clockChip(ctx,S,t<c("confirm")?"8:3"+Math.min(9,Math.floor(t/3)):"8:40","",fin(t,0.2));});
+scene("recover",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),nine=c("confirm")+2.1;
+  // first the platform: the skipped models run again, silver then gold light up, and the data product turns to 96%
+  const X=fin(t,c("would")+0.1,0.8);
+  if(X<1){world(ctx,S);camKeys(ctx,S,[[0,965,500,1.0],[c("would")+1,965,505,1.02]],t);
+    const run=ease(clamp((t-c("rerun")-0.1)/1.6,0,1));platformRow(ctx,t,{skip:1,lit:run,gate:GOOD,y:470,num:run>0.97?"96%":"94%"});
+    if(run>0&&run<1)glow(ctx,lerp(900,1725,run),470,80,GOOD,0.5);}
+  // then, in a dissolve, the dashboard: what it would have shown, time travel, and Ana
+  if(X>0)withA(ctx,X,()=>{world(ctx,S);camKeys(ctx,S,[[c("would"),960,480,1.0],[sc.dur+1,960,470,1.02]],t);
+    const v=fin(t,c("versions")+0.4),ok=fin(t,c("confirm")+0.2),ghost=fin(t,c("would")+1.8)*fout(t,c("versions")-0.2);
+    dashboard(ctx,480,170,960,580,{num:ok>0.5?96:94,banner:1-ok,ok,ghost,day:"Tuesday"});
+    withA(ctx,v,()=>{[["version 41","yesterday 23:02","94%"],["version 42","today 08:31","96%"]].forEach(([n,w2,p],i)=>{const x=1480,y=220+i*190;glass(ctx,x,y,380,160,18,[214,228,255],{glow:12,ea:0.7,fill:"rgba(10,16,32,0.9)"});
+      T(ctx,n,x+24,y+44,{w:800,size:22,f:"mono"});T(ctx,w2,x+24,y+76,{w:500,size:18,color:rgba(SOFT,0.95)});T(ctx,p,x+356,y+128,{w:800,size:44,align:"right",color:i?rgba(GOOD,1):rgba(INK,0.9)});});
+      T(ctx,"time travel",1670,196,{w:700,size:20,align:"center",color:rgba(SOFT,0.95)});});
+    // Ana: a bigger room she might have booked, then, at nine, the classes confirmed
+    const room=fin(t,c("believable")+4.0)*fout(t,c("versions")-0.3),conf=fin(t,nine);
+    withA(ctx,Math.max(room,conf),()=>callTile(ctx,"ana",110,300,330,240,{t,expr:conf>0.5?"relieved":"concerned",hi:1}));
+    withA(ctx,fin(t,c("believable")+4.6)*fout(t,c("versions")-0.3),()=>tag(ctx,275,580,"a bigger room?",BAD,{align:"center",size:20}));
+    withA(ctx,fin(t,nine+0.2),()=>tag(ctx,275,580,"9:00 · classes confirmed",GOOD,{align:"center",size:21}));});
+  setScreen(ctx,S);clockChip(ctx,S,t<c("confirm")?"8:3"+Math.min(9,Math.floor(t/3)):t<nine?"8:40":"9:00","",fin(t,0.2));});
 
 /* ---------- 9. The contract ---------- */
 scene("contract",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
   world(ctx,S);camKeys(ctx,S,[[0,960,470,1.02],[sc.dur+1,960,470,1.0]],t);
-  const tiles=[["mei",60,60],["ben",1460,60],["ana",60,560],["sam",1460,560]];
-  tiles.forEach(([id,x,y],i)=>{const a=fin(t,0.3+i*0.35),sig=clamp((t-c("owners")-0.4)/2.0*4-i,0,1);withA(ctx,a,()=>callTile(ctx,id,x,y,400,240,{t,hi:sig>0.5,expr:t>c("checks")?"relieved":"calm"}));});
-  withA(ctx,fin(t,c("meet")+0.6),()=>{T(ctx,"produce the data",960,56,{w:700,size:24,align:"center",color:rgba(SOFT,0.95)});T(ctx,"use the data",960,866,{w:700,size:24,align:"center",color:rgba(SOFT,0.95)});
-    T(ctx,"business",260,334,{w:700,size:22,align:"center",color:rgba(BIZ,0.95)});T(ctx,"technical",1660,334,{w:700,size:22,align:"center",color:rgba(TECH,0.95)});});
-  // the two paths from the flashback become one card
-  const m=ease(clamp((t-c("agree")+0.2)/1.8,0,1));if(m>0&&m<1){beam(ctx,[{x:460,y:180},{x:lerp(460,760,m),y:lerp(180,300,m)}],BIZ,[[16,0.08],[6,0.2],[2.4,0.85],[1.2,1]]);beam(ctx,[{x:1460,y:180},{x:lerp(1460,1160,m),y:lerp(180,300,m)}],TECH,[[16,0.08],[6,0.2],[2.4,0.85],[1.2,1]]);}
+  // four people, each on one side of the change: business or technical, producing or using the data
+  const tiles=[["mei",60,60,"business · produces",BIZ,334],["ben",1460,60,"technical · produces",TECH,334],["ana",60,560,"business · uses",BIZ,536],["sam",1460,560,"technical · uses",TECH,536]];
+  tiles.forEach(([id,x,y,role,col,ly],i)=>{const a=fin(t,0.3+i*0.35),sig=clamp((t-c("owners")-0.4)/2.0*4-i,0,1);withA(ctx,a,()=>callTile(ctx,id,x,y,400,240,{t,hi:sig>0.5,expr:t>c("checks")+0.3+i*0.15?"relieved":"calm"}));
+    withA(ctx,a*fin(t,c("meet")+0.6+i*0.2),()=>T(ctx,role,x+200,ly,{w:700,size:21,align:"center",color:rgba(col,0.95)}));});
+  // the two paths from the flashback become one card: they reach its edges, then fade into it
+  const m=ease(clamp((t-c("agree")+0.2)/1.8,0,1)),bA=fout(t,c("agree")+1.6,0.5);if(m>0&&bA>0)withA(ctx,bA,()=>{beam(ctx,[{x:460,y:180},{x:lerp(460,560,m),y:lerp(180,200,m)}],BIZ,[[16,0.08],[6,0.2],[2.4,0.85],[1.2,1]]);beam(ctx,[{x:1460,y:180},{x:lerp(1460,1360,m),y:lerp(180,200,m)}],TECH,[[16,0.08],[6,0.2],[2.4,0.85],[1.2,1]]);});
   const cA=fin(t,c("agree")+1.2,0.8);withA(ctx,cA,()=>contract(ctx,560,120,800,560,{rows:clamp((t-c("says")-0.2)/3.2,0,1),sign:clamp((t-c("owners")-0.4)/2.0,0,1),glow:pulse(t,c("checks"),3)}));
   // checked all the time: at the platform's door on every load, and in the student system's tests on every proposed change
-  withA(ctx,fin(t,c("checks")+1.2),()=>tag(ctx,960,740,"checked on every load, at the platform's door",[236,243,255],{align:"center",size:22}));
-  withA(ctx,fin(t,c("checks")+2.8),()=>tag(ctx,960,800,"and on every proposed change, before it ships",TECH,{align:"center",size:22}));});
+  withA(ctx,fin(t,c("checks")+1.2),()=>tag(ctx,960,716,"checked on every load, at the platform's door",[236,243,255],{align:"center",size:22}));
+  withA(ctx,fin(t,c("checks")+2.8),()=>tag(ctx,960,768,"and on every proposed change, before it ships",TECH,{align:"center",size:22}));});
 
 /* ---------- 10. Three weeks later ---------- */
 scene("later",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
   world(ctx,S);const mon=fin(t,c("monday")-0.3,0.9);camKeys(ctx,S,[[0,960,500,1.0],[sc.dur+1,960,500,1.04]],t);
+  const am=fin(t,c("amber")+0.4,0.4),v11=fin(t,c("define")+3.4,0.6),gc=v11>0?mixc(AMBER,GOOD,v11):mixc([236,243,255],AMBER,am);
   withA(ctx,1-mon,()=>{glass(ctx,80,150,820,560,24,TECH,{glow:14,ea:0.6,fill:"rgba(8,14,28,0.92)"});T(ctx,"Student system · test environment",112,204,{w:800,size:24});T(ctx,"a proposed release",112,238,{w:500,size:18,color:rgba(SOFT,0.95)});
-    const p=ease(clamp((t-c("weeks")-0.6)/2.2,0,1)),am=t>c("amber")+0.4;glass(ctx,lerp(130,470,p),400,210,60,16,AMBER,{glow:12,ea:0.8,fill:"rgba(30,22,8,0.9)"});T(ctx,"DEFERRED",lerp(130,470,p)+105,438,{w:800,size:22,f:"mono",align:"center"});
-    glass(ctx,720,320,110,220,18,am?AMBER:[236,243,255],{glow:am?22+10*Math.sin(t*3):10,ea:0.85,fill:"rgba(12,18,34,0.92)"});T(ctx,"contract",775,570,{w:700,size:17,align:"center"});T(ctx,"check",775,592,{w:700,size:17,align:"center"});
-    withA(ctx,fin(t,c("amber")+0.8),()=>tag(ctx,490,640,"DEFERRED isn't in the contract yet",AMBER,{align:"center",size:21}));
-    contract(ctx,980,150,860,560,{notice:am?0.6+0.4*Math.sin(t*4):0,deferred:t>c("define")+2.2,ver:t>c("define")+3.4?"1.1":"1.0",verFlash:pulse(t,c("define")+3.4,1.6)});
-    withA(ctx,fin(t,c("define")+0.3)*fout(t,c("monday")-0.5),()=>msg(ctx,1080,720,720,"Mei","Deferred: starts in a later term. Not enrolled now.",BIZ,1));});
-  withA(ctx,mon,()=>{dashboard(ctx,480,170,960,580,{num:"97%",ok:1,okText:"Up to date: Monday, 06:00",day:"Monday"});setScreen(ctx,S);clockChip(ctx,S,"Monday","",1);});
+    // the new status travels to the contract check, which turns amber, then green once the contract knows it
+    const p=ease(clamp((t-c("weeks")-0.6)/2.2,0,1)),cx=lerp(130,500,p);glass(ctx,cx,400,210,60,16,v11>0?gc:AMBER,{glow:12,ea:0.8,fill:"rgba(30,22,8,0.9)"});T(ctx,"deferred",cx+105,438,{w:800,size:22,f:"mono",align:"center"});
+    glass(ctx,720,320,110,220,18,gc,{glow:am>0.5&&v11<1?22+10*Math.sin(t*3):10,ea:0.85,fill:"rgba(12,18,34,0.92)"});T(ctx,"contract",775,570,{w:700,size:17,align:"center"});T(ctx,"check",775,592,{w:700,size:17,align:"center"});
+    const glyph=v11>0.5?"✓":am>0.5?"!":"✓";T(ctx,glyph,775,452,{w:800,size:56,align:"center",color:rgba(v11>0.5?GOOD:am>0.5?AMBER:SOFT,am>0.5||v11>0.5?1:0.6)});
+    withA(ctx,fin(t,c("amber")+0.8)*(1-v11),()=>tag(ctx,490,640,"deferred isn't in the contract yet",AMBER,{align:"center",size:21}));
+    withA(ctx,v11,()=>tag(ctx,490,640,"deferred is in contract v1.1",GOOD,{align:"center",size:21}));
+    contract(ctx,980,150,860,560,{notice:am>0.5?(0.6+0.4*Math.sin(t*4))*(1-v11):0,deferred:fin(t,c("define")+2.2,0.5),defHi:brief(t,c("define")+2.2,1.8),ver:t>c("define")+3.4?"1.1":"1.0",verFlash:pulse(t,c("define")+3.4,1.6)});
+    withA(ctx,fin(t,c("define")+0.3)*fout(t,c("monday")-0.5),()=>msg(ctx,1080,734,720,"Mei","Deferred: starts in a later term. Not enrolled now.",BIZ,1));});
+  // Monday: the dashboard simply updates, a point up, with nothing to explain
+  withA(ctx,mon,()=>{const up=fin(t,c("monday")+1.4,1.2);dashboard(ctx,480,170,960,580,{num:lerp(96,97,up),ok:1,okText:up<0.5?"Up to date: Sunday, 06:00":"Up to date: Monday, 06:00",day:"Monday",title:"Enrolments · semester 2",delta:"▲ 1 pt vs last week",flash:brief(t,c("monday")+1.4,1.4)});
+    setScreen(ctx,S);clockChip(ctx,S,"Monday","",1);});
   setScreen(ctx,S);withA(ctx,1-mon,()=>clockChip(ctx,S,"three weeks later","",fin(t,0.2)));});
 
 /* ---------- 11. Pull back ---------- */
 scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");
   world(ctx,S);camKeys(ctx,S,[[0,482,470,1.7],[5.5,960,520,0.94],[sc.dur+1,960,520,0.9]],t);
-  platformRow(ctx,t,{door:1,gate:GOOD,y:470,num:"97%"});flowTiles(ctx,t,[{x:360,y:470},{x:470,y:470},{x:560,y:470}],0.5,1.2,0,sis,20,0.9);
-  flowTiles(ctx,t,[{x:800,y:470},{x:900,y:470},{x:1000,y:470},{x:1240,y:470},{x:1300,y:470},{x:1540,y:470},{x:1600,y:470}],0.7,2.6,0,sis,16,0.8);
-  // a hint of the next episode: another number, and its gauge starts to swing
-  withA(ctx,fin(t,B+0.6),()=>{const x=1650,y=740,v=clamp((t-B-1.0)/2.2,0,1);ctx.save();ctx.translate(x,y);ctx.scale(1.8,1.8);ctx.translate(-x,-y);glass(ctx,x-140,y-60,280,120,18,[170,205,255],{glow:10,ea:0.5,fill:"rgba(8,14,28,0.9)"});T(ctx,"Applications",x,y-24,{w:700,size:18,align:"center",color:rgba(SOFT,0.95)});
-    ctx.lineWidth=10;[[GOOD,Math.PI,Math.PI*1.45],[AMBER,Math.PI*1.45,Math.PI*1.72],[BAD,Math.PI*1.72,Math.PI*2]].forEach(([col,a0,a1])=>{ctx.strokeStyle=rgba(col,0.8);ctx.beginPath();ctx.arc(x,y+40,50,a0,a1);ctx.stroke();});
-    const ang=Math.PI*(1.2+0.42*ease(v)+0.02*Math.sin(t*6)*v);ctx.strokeStyle="#fff";ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(x,y+40);ctx.lineTo(x+Math.cos(ang)*46,y+40+Math.sin(ang)*46);ctx.stroke();ctx.restore();});
-  setScreen(ctx,S);withA(ctx,fin(t,c("tag")-0.2,0.8),()=>{T(ctx,"Seen by both sides, before it ships.",960,150,{w:800,size:50,align:"center"});T(ctx,"When things go wrong · Silent change",960,196,{w:600,size:22,align:"center",color:rgba(SOFT,0.95)});});});
+  // changes keep arriving, as events or in files, through the contract at the door; the numbers are built once a night
+  platformRow(ctx,t,{door:1,gate:GOOD,y:470,num:"97%"});packets(ctx,t,[{x:360,y:470},{x:470,y:470},{x:560,y:470}],0.5,1.2,0,APP.sis.c,16,0.9);
+  // a hint of the next film in the series: another number jumps overnight
+  withA(ctx,fin(t,B-0.4,0.8),()=>{const x=1590,y=660,w=270,h=150,v=ease(clamp((t-B)/2.0,0,1));dbCard(ctx,x,y,w,h);T(ctx,"Applications",x+18,y+32,{w:700,size:17,color:DB.text});T(ctx,"overnight",x+18,y+52,{w:500,size:14,color:DB.muted});
+    withA(ctx,sstep(0.6,1,v),()=>T(ctx,"+38%",x+w-18,y+44,{w:700,size:28,align:"right",color:DB.red}));
+    const tr=[40,41,40,42,41,42,43,42,43,42+17*v],px=i=>x+18+(w-36)*i/(tr.length-1),py=q=>y+h-18-(q-38)*3.2;
+    ctx.beginPath();tr.forEach((q,i)=>i?ctx.lineTo(px(i),py(q)):ctx.moveTo(px(i),py(q)));ctx.strokeStyle=v>0.6?DB.red:DB.blue;ctx.lineWidth=2.5;ctx.stroke();
+    ctx.fillStyle=v>0.6?DB.red:DB.blue;ctx.beginPath();ctx.arc(px(tr.length-1),py(tr[tr.length-1]),4,0,TAU);ctx.fill();});
+  // the last line, once it has been said
+  setScreen(ctx,S);withA(ctx,fin(t,c("tag")+2.2,0.8),()=>{T(ctx,"Seen by both sides, before it ships.",960,150,{w:800,size:50,align:"center"});T(ctx,"When things go wrong · Silent change",960,196,{w:600,size:22,align:"center",color:rgba(SOFT,0.95)});});});
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

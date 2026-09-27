@@ -1,6 +1,6 @@
 # Silent change · the story, fragment by fragment
 
-*Story outline v2.1 (events or files; the dashboard; the sharper model), with the author's decisions of 26 September (see [Decisions](#decisions)). It refines the chapters in the [treatment](treatment.md); where the two differ, this outline is the newer version. Timings are estimates, for about 7:30 in total.*
+*Story outline v2.1 (events or files; the dashboard; the sharper model), with the author's decisions of 26 September (see [Decisions](#decisions)). It refines the chapters in the [treatment](treatment.md); where the two differ, this outline is the newer version. The timings below are this outline's estimates, for about 7:30 in total; the finished film runs 5:36, in eleven chapters.*
 
 ## The story in one paragraph
 
@@ -23,8 +23,8 @@ The film opens on the symptom and keeps the cause hidden, like the viewer, until
 
 ### Act 1 · The morning
 
-**1. 7:58 am · The banner** · 0:00–0:35 · Ana's office
-- **We see:** Ana, coffee in hand, opens the dashboard before her 9:00 meeting, where she confirms which classes run before census date tomorrow. Her Databricks dashboard shows a KPI card for Data Science 101, 94% of places filled, with an amber note: "Last good data, as of 23:02 yesterday." She messages Sam: "Are these numbers safe to use?"
+**1. 7:58 am · Yesterday's numbers** · 0:00–0:35 · Ana's office
+- **We see:** Ana, coffee in hand, opens the dashboard before her 9:00 meeting, where she confirms which classes run before census date tomorrow. Her Databricks dashboard shows a KPI card for Data Science 101, 94% of places filled, with an amber note: "Last good data, as of 11:02 last night." She messages Sam: "Are these numbers safe to use?"
 - **Narration, in spirit:** the numbers aren't wrong; they're yesterday's, and the dashboard says so.
 - **Teaches:** a good platform keeps the last good data and labels it, rather than showing wrong data.
 
@@ -50,7 +50,7 @@ The film opens on the symptom and keeps the cause hidden, like the viewer, until
 - **Picture note:** the thread only ever follows the lineage, never crosses the screen, and only one step moves at a time. This replaces the busy lines in the first preview.
 
 **6. The cause, in bronze** · 2:25–2:55 · the bronze vault
-- **We see:** the rows are exactly as the student system sent them, whether they came as events or in files: fifteen enrolments in Data Science 101 have a new status, `WAITLISTED`.
+- **We see:** the rows are exactly as the student system sent them, whether they came as events or in files: fifteen enrolments in Data Science 101 have a new status, `waitlisted`.
 - **Narration, in spirit:** nothing was lost; something was new.
 - **Teaches:** why bronze keeps what arrived, even a value nothing downstream understands yet.
 - **Pause and think:** "Bronze kept the rows with the new status. Why is that better than dropping them?"
@@ -66,7 +66,7 @@ The film opens on the symptom and keeps the cause hidden, like the viewer, until
 ### Act 3 · Seen by both sides
 
 **8. The fix** · 4:15–4:45 · the dbt line
-- **We see:** one rule changes in dbt: `WAITLISTED` is an accepted status, and it doesn't count as enrolled. A colleague reviews it like any code change, and CI tests only what changed. Green.
+- **We see:** one rule changes in dbt: `waitlisted` is an accepted status, and it doesn't count as enrolled. A colleague reviews it like any code change, and CI tests only what changed. Green.
 - **Teaches:** fixes go through version control, review and tests, even in a hurry.
 
 **9. Recover** · 4:45–5:25 · the vaults, then Ana
@@ -81,22 +81,22 @@ The film opens on the symptom and keeps the cause hidden, like the viewer, until
 - **Pause and think:** "When is a data contract checked?"
 
 **11. Three weeks later** · 6:25–7:05 · Ben's test environment, then the dashboard
-- **We see:** Ben's team proposes another status, `DEFERRED`. In their test environment, before release, the contract check turns amber, and all four corners of the card light up with a notice. Mei defines what it means; Sam's team adds it to the platform; the card becomes version 1.1. On Monday, the dashboard simply updates. No note.
+- **We see:** Ben's team proposes another status, `deferred`. In their test environment, before release, the contract check turns amber, and all four corners of the card light up with a notice. Mei defines what it means; Sam's team adds it to the platform; the card becomes version 1.1. On Monday, the dashboard simply updates. No note.
 - **Narration, in spirit:** no note, no alert, nobody woken up: the change arrived as a conversation, not a surprise.
 - **Pays off:** the note from fragment 1, by its absence.
 
 **12. Pull back** · 7:05–7:30 · the whole platform
-- **We see:** the platform, calm, with the contract glowing at its door. The last line: **"Seen by both sides, before it ships."** In the final seconds, another KPI card's trend line starts to climb too steeply: a hint of the next episode.
+- **We see:** the platform, calm, with the contract glowing at its door. The last line: **"Seen by both sides, before it ships."** In the final seconds, another KPI card's trend line starts to climb too steeply: a hint of *Too good to be true*.
 
 ## How the characters talk without speaking
 
-The narrator carries the story, and the characters don't speak. Their conversations happen the way they would at work: **messages on screen** (fragments 1, 4 and 7) and **video calls in tiles** (fragments 7 and 10). This keeps one voice for timing and translation, and it means every character can face the camera, so front views are enough for this episode.
+The narrator carries the story, and the characters don't speak. Their conversations happen the way they would at work: **messages on screen** (fragments 1, 4 and 7) and **video calls in tiles** (fragments 7 and 10). This keeps one voice for timing and translation, and it means every character can face the camera, so front views are enough for this film.
 
 ## Decisions
 
 Made by the author on 26 September 2026:
 
-1. **The opening:** start at 7:58 with Ana and the banner. The two announcements are revealed only in fragment 7, as a flashback, so the cause stays hidden until Sam finds it.
+1. **The opening:** start at 7:58 with Ana and the note. The two announcements are revealed only in fragment 7, as a flashback, so the cause stays hidden until Sam finds it.
 2. **The alert:** it waits for the morning. Nothing wrong was published, so nobody is woken.
 3. **The last line:** "Seen by both sides, before it ships."
 4. **The numbers:** a small, believable gap. Yesterday 94%; counting the 15 waitlisted students, 108%; the right number, 96%.

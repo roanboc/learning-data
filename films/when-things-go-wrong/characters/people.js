@@ -4,7 +4,7 @@
    Needs the film's helpers (rgba, mix, clamp, lerp, TAU), from site/assets/film/film.js.
 
    person(ctx,id,x,y,s,o)      draws a character facing us, feet at (x,y); s=1 is 560 px tall.
-                               o.pose: "stand" | "phone" | "explain"; o.expr: "calm" | "concerned" | "relieved"; o.t: seconds, for breathing and blinking.
+                               o.pose: "stand" | "phone" | "explain" (o.pose2 and o.mix blend towards a second pose); o.expr: "calm" | "concerned" | "relieved"; o.t: seconds, for breathing and blinking.
    personBack(ctx,id,x,y,s,o)  draws a character from behind, from the waist up, for over-the-shoulder shots. */
 
 const TECH=[120,200,255],BIZ=[255,209,102];
@@ -197,7 +197,10 @@ function outlined(ctx,draw,x,y,s,edge,box,glowA){ // draws into a spare canvas, 
   o.save();o.shadowColor=rgba(edge,glowA==null?0.4:glowA);o.shadowBlur=12*Math.max(0.7,s);o.globalAlpha=0.65;o.drawImage(tc,0,0);o.restore();
   o.save();o.globalAlpha=0.85;for(let i=0;i<8;i++){const a=i/8*TAU;o.drawImage(tc,Math.cos(a)*r,Math.sin(a)*r);}o.restore();
   o.drawImage(c,0,0);ctx.drawImage(oc,ox,oy);}
-function person(ctx,id,x,y,s,o){o=o||{};const P=PEOPLE[id],po=POSE[o.pose||"stand"],E=EXPR[o.expr||"calm"],t=o.t||0,k=s*P.build.h;
+// a pose between two poses: o.pose2 and o.mix (0 to 1) move the limbs smoothly; what the hand holds switches halfway
+function blendPose(a,b,m){if(!b||!(m>0))return a;if(m>=1)return b;const L=(u,v)=>u+(v-u)*m,out={};
+  Object.keys(Object.assign({},a,b)).forEach(k=>{const u=a[k],v=b[k];out[k]=Array.isArray(u)&&Array.isArray(v)?u.map((q,i)=>L(q,v[i])):typeof u==="number"&&typeof v==="number"?L(u,v):(m<0.5?u:v);});return out;}
+function person(ctx,id,x,y,s,o){o=o||{};const P=PEOPLE[id],po=blendPose(POSE[o.pose||"stand"],POSE[o.pose2],o.mix),E=EXPR[o.expr||"calm"],t=o.t||0,k=s*P.build.h;
   const br=Math.sin(t*1.7+P.seed)*1.4;
   ctx.save();ctx.translate(x,y);ctx.scale(k,k);const g=ctx.createRadialGradient(0,-4,4,0,-4,100);g.addColorStop(0,"rgba(0,0,0,0.45)");g.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=g;ell(ctx,0,-4,100,16);ctx.fill();ctx.restore();
   const front=a=>a[1]>Math.PI*0.8;

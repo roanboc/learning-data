@@ -52,7 +52,8 @@ films/                           one folder per film: script or story, captions/
     2-too-good-to-be-true/       Too good to be true: treatment, script (with the rigour sheet), style frames, captions and source
 site-tools/                      build_pages.py turns the Markdown pages into site pages; check_site.py and smoke.py check the site
 .github/workflows/pages.yml      publishes site/ on every push to main
-.github/workflows/release.yml    renders every film and publishes the videos to a release, when you run it
+.github/workflows/release.yml    renders the films (all, the changed ones, or a list) and publishes every video to a release, when you run it
+.github/scripts/plan.py          chooses which films the release renders
 PLAYBOOK.md                      what made the films work, and how to reuse it for the next film or course
 LICENSE                          MIT licence for the code
 LICENSE-CONTENT.md               CC BY 4.0 for the films, scripts and text, with exclusions
@@ -84,7 +85,7 @@ A film's page sets its prefix with `data-store` on `section#watch`, and `path.js
 ## Publishing
 
 1. **Turn on GitHub Pages (once):** Settings → Pages → Build and deployment → Source: *GitHub Actions*. From then on, every push to `main` publishes `site/`. You can also run it by hand from the Actions tab (*Publish site* → *Run workflow*).
-2. **Release the videos:** in the Actions tab, open *Render and release the films* → *Run workflow*, and give a tag such as `v2.0`. It renders every film from the committed source at the same time, in about 30 to 45 minutes, and publishes `inner-life-of-data.mp4`, `inner-life-of-data.es.mp4`, `a-sharper-sketch.mp4`, `silent-change.mp4`, `too-good-to-be-true.mp4` and their `.srt` captions to a release with that tag. Before rendering, it checks that each film's player on the site is byte for byte the one its source builds. The site's download buttons point to the latest release, so they work as soon as it's published, and every release carries every film. Tick *draft* to watch the videos before they go live. Keeping videos out of the repository keeps clones small. To render on your own computer instead, see each film's `source/README.md`, starting with [the build guide of *The Inner Life of Data*](films/inner-life-of-data/source/README.md).
+2. **Release the videos:** in the Actions tab, open *Render and release the films* → *Run workflow*, and give a tag such as `v2.0`, and which films to render: `changed` (the default: only the films whose source, or the shared code they draw with, changed since the latest release), `all`, or a list of keys such as `silent-change-en,too-good-to-be-true-en`. It renders them from the committed source at the same time, in about 30 to 45 minutes for all of them, and publishes `inner-life-of-data.mp4`, `inner-life-of-data.es.mp4`, `a-sharper-sketch.mp4`, `silent-change.mp4`, `too-good-to-be-true.mp4` and their `.srt` captions to a release with that tag. Before rendering, it checks that each film's player on the site is byte for byte the one its source builds. The videos it doesn't render are copied from the latest release, so every release carries every film, and the site's download buttons, which point to the latest release, work as soon as it's published. The run's summary lists which films changed, which were rendered and which were carried over, and warns about a film that changed but wasn't rendered. Tick *draft* to watch the videos before they go live. Keeping videos out of the repository keeps clones small. To render on your own computer instead, see each film's `source/README.md`, starting with [the build guide of *The Inner Life of Data*](films/inner-life-of-data/source/README.md).
 
 ## The labs and scenarios
 

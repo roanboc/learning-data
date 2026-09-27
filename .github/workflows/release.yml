@@ -1,7 +1,13 @@
-# Renders every film and publishes the videos and captions to one GitHub release:
-# The Inner Life of Data (English and Spanish), A Sharper Sketch and Silent change.
-# Run it by hand: Actions → Render and release the films → Run workflow. It takes about 30 to 45 minutes; the films render at the same time.
-# The site's download buttons point to the files in the latest release, so every release carries every film.
+# Renders the films and publishes the videos and captions to one GitHub release.
+# Run it by hand: Actions → Render and release the films → Run workflow.
+#
+# Which films to render (the "films" input):
+#   changed  (the default) only the films whose source changed since the latest release, including shared code
+#            such as the first film's engine, which every film draws with. Nothing changed: nothing is rendered.
+#   all      every film, in about 30 to 45 minutes; the films render at the same time.
+#   a list   keys separated by commas, such as silent-change-en,too-good-to-be-true-en (the keys are in FILMS below).
+# Every release still carries every film: the videos that aren't rendered are copied from the latest release,
+# so the site's download buttons, which point to the latest release, always find each file.
 # See films/inner-life-of-data/source/README.md, section Publish.
 name: Render and release the films
 
@@ -12,6 +18,10 @@ on:
         description: Release tag. Use a new tag for a new version; running again with the same tag replaces its files.
         required: true
         default: v2.0
+      films:
+        description: "Which films to render: changed (since the latest release), all, or keys separated by commas, such as silent-change-en"
+        required: true
+        default: changed
       draft:
         description: Save a new release as a draft, to watch the videos before the download buttons point to them.
         type: boolean
@@ -25,48 +35,83 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  plan:
+    name: Choose the films to render
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+      count: ${{ steps.plan.outputs.count }}
+      films: ${{ steps.plan.outputs.films }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Plan
+        id: plan
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHOICE: ${{ inputs.films }}
+        # FILMS: one entry per video. "paths" lists everything the video is built from: its own source and captions,
+        # and the shared code it draws with. A change under any of them means the video needs rendering again.
+        run: |
+          cat > films.json <<'EOF'
+          [
+            {"name": "The Inner Life of Data, English", "key": "inner-life-of-data-en",
+             "dir": "films/inner-life-of-data/source", "lang": "en",
+             "player": "dist/film.js", "site_player": "site/assets/film/film.js",
+             "video": "dist/inner-life-of-data.mp4", "file": "inner-life-of-data.mp4",
+             "captions": "films/inner-life-of-data/captions/en.srt", "srt": "inner-life-of-data.en.srt",
+             "paths": ["films/inner-life-of-data/source", "films/inner-life-of-data/captions/en.srt"]},
+            {"name": "The Inner Life of Data, Spanish", "key": "inner-life-of-data-es",
+             "dir": "films/inner-life-of-data/source", "lang": "es",
+             "player": "dist/es/film.js", "site_player": "site/assets/film/film.es.js",
+             "video": "dist/es/inner-life-of-data.es.mp4", "file": "inner-life-of-data.es.mp4",
+             "captions": "films/inner-life-of-data/captions/es.srt", "srt": "inner-life-of-data.es.srt",
+             "paths": ["films/inner-life-of-data/source", "films/inner-life-of-data/captions/es.srt"]},
+            {"name": "A Sharper Sketch", "key": "a-sharper-sketch-en",
+             "dir": "films/a-sharper-sketch/source", "lang": "en",
+             "player": "dist/film.js", "site_player": "site/assets/film3/film.js",
+             "video": "dist/a-sharper-sketch.mp4", "file": "a-sharper-sketch.mp4",
+             "captions": "films/a-sharper-sketch/captions/en.srt", "srt": "a-sharper-sketch.en.srt",
+             "paths": ["films/a-sharper-sketch/source", "films/a-sharper-sketch/captions",
+                       "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
+            {"name": "Silent change", "key": "silent-change-en",
+             "dir": "films/when-things-go-wrong/1-silent-change/source", "lang": "en",
+             "player": "dist/film.js", "site_player": "site/assets/silent-change/film.js",
+             "video": "dist/silent-change.mp4", "file": "silent-change.mp4",
+             "captions": "films/when-things-go-wrong/1-silent-change/captions/en.srt", "srt": "silent-change.en.srt",
+             "paths": ["films/when-things-go-wrong/1-silent-change/source", "films/when-things-go-wrong/1-silent-change/captions",
+                       "films/when-things-go-wrong/characters",
+                       "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
+            {"name": "Too good to be true", "key": "too-good-to-be-true-en",
+             "dir": "films/when-things-go-wrong/2-too-good-to-be-true/source", "lang": "en",
+             "player": "dist/film.js", "site_player": "site/assets/too-good-to-be-true/film.js",
+             "video": "dist/too-good-to-be-true.mp4", "file": "too-good-to-be-true.mp4",
+             "captions": "films/when-things-go-wrong/2-too-good-to-be-true/captions/en.srt", "srt": "too-good-to-be-true.en.srt",
+             "paths": ["films/when-things-go-wrong/2-too-good-to-be-true/source", "films/when-things-go-wrong/2-too-good-to-be-true/captions",
+                       "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
+                       "films/a-sharper-sketch/source/src",
+                       "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]}
+          ]
+          EOF
+          python3 .github/scripts/plan.py films.json "$CHOICE"
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: films
+          path: films.json
+          retention-days: 3
+
   render:
     name: Render (${{ matrix.name }})
+    needs: plan
+    if: needs.plan.outputs.count != '0'
     runs-on: ubuntu-latest
     timeout-minutes: 150
     strategy:
       matrix:
-        include:
-          - name: The Inner Life of Data, English
-            key: inner-life-of-data-en
-            dir: films/inner-life-of-data/source
-            lang: en
-            player: dist/film.js
-            site_player: site/assets/film/film.js
-            video: dist/inner-life-of-data.mp4
-          - name: The Inner Life of Data, Spanish
-            key: inner-life-of-data-es
-            dir: films/inner-life-of-data/source
-            lang: es
-            player: dist/es/film.js
-            site_player: site/assets/film/film.es.js
-            video: dist/es/inner-life-of-data.es.mp4
-          - name: A Sharper Sketch
-            key: a-sharper-sketch-en
-            dir: films/a-sharper-sketch/source
-            lang: en
-            player: dist/film.js
-            site_player: site/assets/film3/film.js
-            video: dist/a-sharper-sketch.mp4
-          - name: Silent change
-            key: silent-change-en
-            dir: films/when-things-go-wrong/1-silent-change/source
-            lang: en
-            player: dist/film.js
-            site_player: site/assets/silent-change/film.js
-            video: dist/silent-change.mp4
-          - name: Too good to be true
-            key: too-good-to-be-true-en
-            dir: films/when-things-go-wrong/2-too-good-to-be-true/source
-            lang: en
-            player: dist/film.js
-            site_player: site/assets/too-good-to-be-true/film.js
-            video: dist/too-good-to-be-true.mp4
+        include: ${{ fromJSON(needs.plan.outputs.matrix) }}
     defaults:
       run:
         working-directory: ${{ matrix.dir }}
@@ -151,7 +196,9 @@ jobs:
 
   release:
     name: Publish the release
-    needs: render
+    needs: [plan, render]
+    # runs when the renders all passed, or when there was nothing to render (a new tag still gets every film)
+    if: always() && needs.plan.result == 'success' && (needs.render.result == 'success' || needs.render.result == 'skipped')
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -159,6 +206,12 @@ jobs:
       - uses: actions/checkout@v7
 
       - uses: actions/download-artifact@v8
+        with:
+          name: films
+          path: .
+
+      - uses: actions/download-artifact@v8
+        if: needs.plan.outputs.count != '0'
         with:
           pattern: video-*
           path: out
@@ -169,26 +222,42 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ inputs.tag }}
           DRAFT: ${{ inputs.draft }}
+          RENDERED: ${{ needs.plan.outputs.films }}
         run: |
-          cp films/inner-life-of-data/captions/en.srt out/inner-life-of-data.en.srt
-          cp films/inner-life-of-data/captions/es.srt out/inner-life-of-data.es.srt
-          cp films/a-sharper-sketch/captions/en.srt out/a-sharper-sketch.en.srt
-          cp films/when-things-go-wrong/1-silent-change/captions/en.srt out/silent-change.en.srt
-          cp films/when-things-go-wrong/2-too-good-to-be-true/captions/en.srt out/too-good-to-be-true.en.srt
+          mkdir -p out
+          latest=$(gh release view --json tagName --jq .tagName 2>/dev/null || true)
+          target=$(gh release view "$TAG" --json tagName --jq .tagName 2>/dev/null || true)
+          # every video: rendered now, or else carried over from this tag (running it again) or from the latest release
+          while IFS=$'\t' read -r key file captions srt; do
+            cp "$captions" "out/$srt"
+            [ -f "out/$file" ] && { echo "- $file: rendered from this commit" >> summary.md; continue; }
+            for from in $target $latest; do
+              if gh release download "$from" -p "$file" -D out --clobber 2>/dev/null; then
+                echo "- $file: carried over from release $from" >> summary.md; break
+              fi
+            done
+            if [ ! -f "out/$file" ]; then
+              echo "::error title=No video for $key::$file wasn't rendered and isn't in an earlier release. Run this again with films set to $key, or to all."
+              exit 1
+            fi
+          done < <(jq -r '.[] | [.key, .file, .captions, .srt] | @tsv' films.json)
           ls -l out
+          { echo "### Videos in release $TAG"; cat summary.md; } >> "$GITHUB_STEP_SUMMARY"
           cat > notes.md <<EOF
-          The Learning Data films, rendered from commit $GITHUB_SHA. Each video is 1080p, with captions as a separate \`.srt\` file for platforms that take them.
+          The Learning Data films. Each video is 1080p, with captions as a separate \`.srt\` file for platforms that take them.
 
           - *The Inner Life of Data*, how a modern data platform works: \`inner-life-of-data.mp4\` (English) and \`inner-life-of-data.es.mp4\` (Latin American Spanish, *La vida interior de los datos*).
           - *A Sharper Sketch*, data modelling: \`a-sharper-sketch.mp4\` (English).
           - *Silent change*, from the series *When things go wrong*, on changes and data contracts: \`silent-change.mp4\` (English).
           - *Too good to be true*, from the series *When things go wrong*, on data quality checks: \`too-good-to-be-true.mp4\` (English).
 
+          Rendered for this release, from commit $GITHUB_SHA: ${RENDERED:-none; every video is carried over from the previous release}.
+
           Watch them with chapters, then try the hands-on labs and scenarios: https://roanboc.github.io/learning-data/
 
           The narration is a synthetic voice. The university, people and numbers are fictional. The films are licensed CC BY 4.0; the Databricks and dbt logos belong to their owners (see NOTICE.md).
           EOF
-          if gh release view "$TAG" >/dev/null 2>&1; then
+          if [ -n "$target" ]; then
             gh release upload "$TAG" out/* --clobber
             echo "Replaced the files of release $TAG." >> "$GITHUB_STEP_SUMMARY"
           else

@@ -6,6 +6,10 @@ It started with one film. *The Inner Life of Data* was made over two days, 25 an
 
 Then feedback turned one film into four: *A Sharper Sketch*, on data modelling, and a series, *When things go wrong*, with *Silent change* and *Too good to be true*. Section 11 tells what changed when we made more than one, and the lessons at the end cover all four.
 
+**On this page**
+
+[TOC]
+
 ## At a glance
 
 | Stage | What happened | What it produced |

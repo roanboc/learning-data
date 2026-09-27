@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cómo se hizo Learning Data · Learning Data</title>
+<title>Cómo se hizo · Learning Data</title>
+<meta name="description" content="Un viaje de aprendizaje: lo que exploramos, discutimos, hicimos mal y aprendimos al crear películas cortas sobre plataformas de datos.">
 <link rel="alternate" hreflang="en" href="https://roanboc.github.io/learning-data/journey/"><link rel="alternate" hreflang="es" href="https://roanboc.github.io/learning-data/es/journey/">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,11 +13,35 @@
 </head>
 <body>
 <header class="top"><div class="top-in"><a class="brand" href="../../es/"><img src="../../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../../es/">Empieza aquí</a><a href="../../es/topics/">Temas</a><a href="../../es/journey/" aria-current="page">Cómo se hizo</a><span class="lang" role="group" aria-label="Idioma"><a href="../../journey/" lang="en" hreflang="en">EN</a><a href="../../es/journey/" aria-current="true" lang="es">ES</a></span></nav></div></header>
-<main class="prose">
+<main>
+<section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="../../journey/img/01-style-boards.jpg" alt=""><img src="../../journey/img/05-style-frame-dbt.jpg" alt=""><img src="../../journey/img/10-characters.jpg" alt=""><img src="../../journey/img/11-three-tuesdays.jpg" alt=""><img src="../../journey/img/08-final-overview.jpg" alt=""><img src="../../journey/img/04-style-frame-sources.jpg" alt=""><img src="../../journey/img/07-final-brain.jpg" alt=""><img src="../../journey/img/06-final-sketch.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow">Cómo se hizo</p>
 <h1 id="como-se-hizo-learning-data">Cómo se hizo Learning Data</h1>
-<p><em>Un viaje de aprendizaje: lo que exploramos, discutimos, hicimos mal y aprendimos al crear películas cortas sobre plataformas de datos.</em></p>
+<p class="lead">Un viaje de aprendizaje: lo que exploramos, discutimos, hicimos mal y aprendimos al crear películas cortas sobre plataformas de datos.</p>
+</section>
+<div class="prose">
 <p>Todo empezó con una película. <em>La vida interior de los datos</em> se hizo en dos días, el 25 y el 26 de septiembre de 2026, en una sola conversación de trabajo larga entre el autor y Claude, un modelo de IA creado por Anthropic. El autor aportó el encargo, el conocimiento de la plataforma y la mayoría de las objeciones. Claude propuso opciones, verificó datos, escribió el código y renderizó cada cuadro. Las secciones 1 a 10 cuentan esa historia, desde la primera pregunta hasta el sitio publicado.</p>
 <p>Después, los comentarios convirtieron una película en cuatro: <em>A Sharper Sketch</em>, sobre modelado de datos, y una serie, <em>Cuando algo sale mal</em>, con <em>Cambio silencioso</em> y <em>Demasiado bueno para ser verdad</em>. La sección 11 cuenta qué cambió al hacer más de una, y las lecciones del final cubren las cuatro.</p>
+<p><strong>En esta página</strong></p>
+<div class="toc">
+<ul>
+<li><a href="#de-un-vistazo">De un vistazo</a></li>
+<li><a href="#1-el-encargo">1. El encargo</a></li>
+<li><a href="#2-encontrar-la-analogia">2. Encontrar la analogía</a></li>
+<li><a href="#3-verificar-los-hechos">3. Verificar los hechos</a></li>
+<li><a href="#4-de-la-luz-a-las-imagenes">4. De la luz a las imágenes</a></li>
+<li><a href="#5-el-mapa-de-metaforas">5. El mapa de metáforas</a></li>
+<li><a href="#6-el-primer-corte">6. El primer corte</a></li>
+<li><a href="#7-la-gran-revision">7. La gran revisión</a></li>
+<li><a href="#8-puntos-de-control-antes-de-reconstruir">8. Puntos de control antes de reconstruir</a></li>
+<li><a href="#9-el-segundo-corte">9. El segundo corte</a></li>
+<li><a href="#10-una-pelicula-dos-formas-de-verla">10. Una película, dos formas de verla</a></li>
+<li><a href="#11-de-una-pelicula-a-cuatro">11. De una película a cuatro</a></li>
+<li><a href="#12-lo-que-salio-mal-en-el-camino">12. Lo que salió mal en el camino</a></li>
+<li><a href="#lecciones-aprendidas">Lecciones aprendidas</a></li>
+<li><a href="#reutilizala">Reutilízala</a></li>
+</ul>
+</div>
 <h2 id="de-un-vistazo">De un vistazo</h2>
 <table>
 <thead>
@@ -346,7 +371,9 @@
 </ol>
 <h2 id="reutilizala">Reutilízala</h2>
 <p>El código fuente y la guía para reconstruir cada película están en este repositorio (en inglés): <a href="https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/source/README.md"><em>La vida interior de los datos</em></a>, <a href="https://github.com/roanboc/learning-data/blob/main/films/a-sharper-sketch/README.md"><em>A Sharper Sketch</em></a> y <a href="https://github.com/roanboc/learning-data/blob/main/films/when-things-go-wrong/README.md">la serie <em>Cuando algo sale mal</em></a>, con sus tratamientos, su hoja de personajes y sus cuadros de estilo. La <a href="https://github.com/roanboc/learning-data/blob/main/PLAYBOOK.md">guía práctica</a> (en inglés) reúne lo que conviene reutilizar en la próxima película o curso. Para adaptar <em>La vida interior de los datos</em> a otra universidad, cambia la narración en <code>src/narration.js</code>, o en <code>src/i18n/es/narration.js</code> para la versión en español (por ejemplo "clase", "fecha de corte" y los nombres de los dominios), vuelve a generar la voz y renderiza de nuevo.</p>
+</div>
 </main>
 <footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película, los labs y las situaciones son ficticios. Código: licencia MIT. Película, guion, subtítulos, imágenes y texto: CC BY 4.0. Los logotipos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias. Consulta los <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a>.</p></footer>
+<script src="../../assets/ambient.js"></script>
 </body>
 </html>

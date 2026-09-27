@@ -6,6 +6,10 @@ Todo empezó con una película. *La vida interior de los datos* se hizo en dos d
 
 Después, los comentarios convirtieron una película en cuatro: *A Sharper Sketch*, sobre modelado de datos, y una serie, *Cuando algo sale mal*, con *Cambio silencioso* y *Demasiado bueno para ser verdad*. La sección 11 cuenta qué cambió al hacer más de una, y las lecciones del final cubren las cuatro.
 
+**En esta página**
+
+[TOC]
+
 ## De un vistazo
 
 | Etapa | Qué pasó | Qué produjo |

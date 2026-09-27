@@ -1,1 +1,5 @@
 __pycache__/
+# film builds: voice lines, frames and videos; the release workflow renders them from the committed source
+films/**/source/build/
+films/**/source/dist/
+films/**/source/models/

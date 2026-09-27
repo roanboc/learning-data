@@ -6,7 +6,7 @@ An eight-minute film that follows one enrolment at a fictional university, from 
 - **Download the video (MP4, 1080p):** [https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.mp4](https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.mp4)
 - **Script, with rigour notes and sources:** [script.md](script.md)
 - **Captions:** [en.vtt](captions/en.vtt), [en.srt](captions/en.srt)
-- **En español (Latin American Spanish, 8:09):** [watch](https://roanboc.github.io/learning-data/es/#watch), [download](https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.es.mp4), captions [es.vtt](captions/es.vtt) and [es.srt](captions/es.srt)
+- **En español (Latin American Spanish, 8:38):** [watch](https://roanboc.github.io/learning-data/es/#watch), [download](https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.es.mp4), captions [es.vtt](captions/es.vtt) and [es.srt](captions/es.srt)
 
 ## Chapters
 

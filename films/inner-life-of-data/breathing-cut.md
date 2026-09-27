@@ -1,6 +1,6 @@
 # Proposal: the breathing cut
 
-*The third cut of* The Inner Life of Data*: the same narration, with room to think. Status: built, then revised after [a review](pacing-review.md): the first build put all the extra time into long stops, so the film felt stop-start. The revised cut is 7:32 in English and 8:09 in Spanish, at about 122 words a minute, with the voice speaking 71% of the time. The timing lives in `source/src/breath.js`, shared by both languages; each chapter's wordless ending starts at the scene's `breath` cue.*
+*The third cut of* The Inner Life of Data*: the same narration, with room to think. Status: built, then revised after [a review](pacing-review.md): the first build put all the extra time into long stops, so the film felt stop-start. The revised cut is 7:32 in English and 8:38 in Spanish, at about 120 words a minute, with the voice speaking 71% (Spanish 75%) of the time. The timing lives in `source/src/breath.js`, shared by both languages; each chapter's wordless ending starts at the scene's `breath` cue.*
 
 ## Why
 

@@ -80,7 +80,7 @@ About `render.py`:
 A language lives in `src/i18n/<lang>/`, and `FILM_LANG=<lang>` builds it into `build/<lang>/` and `dist/<lang>/`:
 
 - `narration.js`: the narration, with the same line ids as the English, so the film re-times itself to the new voice.
-- `voice.json`: the Kokoro voice, language and speed, plus `say` rules that respell words for the voice only (for example product names), and an optional `lift` that raises the voice's pitch and formants while keeping its timing. The Spanish voice uses it to sound brighter and more clearly female.
+- `voice.json`: the Kokoro voice, language and speed, plus `say` rules that respell words for the voice only (for example product names). The voice can be a blend of Kokoro voices, such as `{"ef_dora": 0.4, "af_heart": 0.6}`: the Spanish film blends the Spanish voice with the English narrator's, which sounds more natural than the Spanish voice alone.
 - `strings.js`: the on-screen text, as English → translation pairs, plus pattern rules for text built from numbers, and the player's Play and Pause labels. `src/i18n.js` swaps every string drawn on the canvas, so boxes size to the translated text.
 - `page.json`: the player page's text, as English → translation pairs.
 

@@ -1,4 +1,4 @@
-{"voice":"ef_dora","lang":"es-419","speed":0.95,"lift":{"pitch":200,"formant":1.05},
+{"voice":{"ef_dora":0.4,"af_heart":0.6},"lang":"es-419","speed":0.95,
 "say":[["\\bdbt\\b","di bi ti"],["\\bSQL\\b","ese cu ele"],["\\bMCP\\b","eme ce pe"],["\\bla IA\\b","la i a"],["\\bwarehouse\\b","uérjaus"],["\\bendpoints\\b","éndpoints"],["\\bstaging\\b","estéiyin"],["\\bexposure\\b","expóuyer"],["\\bdashboards\\b","dáshbords"],
 ["\\bDatabricks App\\b","Dátabrics Ap"],["\\bDatabricks\\b","Dátabrics"],["\\bZerobus Ingest\\b","Sírobus Ín yest"],["\\bAuto Loader\\b","Áuto Lóuder"],["\\blakehouse\\b","léikjaus"],["\\bLakebase\\b","Léikbeis"],["\\bPostgres\\b","Póstgres"],
 ["\\bUnity Catalog\\b","Iúniti Cátalog"],["\\bCatalog\\b","Cátalog"],["\\bGenie Ontology\\b","Yíni Ontóloyi"],["\\bGenie Agent\\b","Yíni Éiyent"],["\\bGenie\\b","Yíni"],["\\bapps\\b","aps"],["\\bApps\\b","Aps"],

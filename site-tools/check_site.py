@@ -41,7 +41,8 @@ RELEASE_YML = ROOT / ".github/workflows/release.yml"
 # ---------------------------------------------------------------- the site's rules, in one place
 # pages with a real twin in the other language (§3.2); everything else has no hreflang
 TWINS = ["", "labs/", "scenarios/", "journey/", "topics/", "sketch/", "when-things-go-wrong/",
-         "when-things-go-wrong/silent-change/"]
+         "when-things-go-wrong/silent-change/", "when-things-go-wrong/too-good-to-be-true/",
+         "when-things-go-wrong/too-good-to-be-true/labs/", "when-things-go-wrong/too-good-to-be-true/scenarios/"]
 # English-only pages and where their ES toggle goes
 ES_TOGGLE = {"sketch/labs/": "es/sketch/", "sketch/scenarios/": "es/sketch/"}
 NAV = {"en": ["Start here", "Topics", "Making of", "GitHub"], "es": ["Empieza aquí", "Temas", "Cómo se hizo", "GitHub"]}
@@ -59,25 +60,35 @@ CRUMBS = {  # page: (text, the pages its links go to, in order)
     "es/when-things-go-wrong/": ("Temas › Cuando algo sale mal", ["es/topics/"]),
     "when-things-go-wrong/silent-change/": ("Topics › When things go wrong", ["topics/", "when-things-go-wrong/"]),
     "es/when-things-go-wrong/silent-change/": ("Temas › Cuando algo sale mal", ["es/topics/", "es/when-things-go-wrong/"]),
+    **{f"{lg}when-things-go-wrong/too-good-to-be-true/{sub}": crumb
+       for lg, crumb in (("", ("Topics › When things go wrong", ["topics/", "when-things-go-wrong/"])),
+                         ("es/", ("Temas › Cuando algo sale mal", ["es/topics/", "es/when-things-go-wrong/"])))
+       for sub in ("", "labs/", "scenarios/")},
 }
 # the film bundles (one per page: they declare the same top-level names) and the progress prefix of each film
 BUNDLES = {"assets/film/film.js": "ld", "assets/film/film.es.js": "ld",
-           "assets/film3/film.js": "ld3", "assets/silent-change/film.js": "ld-silent-change"}
+           "assets/film3/film.js": "ld3", "assets/silent-change/film.js": "ld-silent-change",
+           "assets/too-good-to-be-true/film.js": "ld-too-good-to-be-true"}
 PACKS = {"assets/learn/learn.en.js", "assets/learn/learn.es.js",
-         "assets/silent-change/think.en.js", "assets/silent-change/think.es.js"}
+         "assets/silent-change/think.en.js", "assets/silent-change/think.es.js",
+         "assets/too-good-to-be-true/think.en.js", "assets/too-good-to-be-true/think.es.js"}
+# "Pause and think" packs whose stops are the film's own labs (the rest point to The Inner Life of Data's): the labs page, and the pack that names its labs
+OWN_LABS = {"assets/too-good-to-be-true/think.en.js": ("when-things-go-wrong/too-good-to-be-true/labs/index.html", "assets/too-good-to-be-true/learn.en.js"),
+            "assets/too-good-to-be-true/think.es.js": ("es/when-things-go-wrong/too-good-to-be-true/labs/index.html", "assets/too-good-to-be-true/learn.es.js")}
 # a film's labs and scenarios, as its stepper and topic cards count them (None: it has none)
-COUNTS = {"ld": ("8", "12"), "ld3": ("6", "12"), "ld-silent-change": (None, None)}
+COUNTS = {"ld": ("8", "12"), "ld3": ("6", "12"), "ld-silent-change": (None, None), "ld-too-good-to-be-true": ("3", "10")}
 # no film numbering (§8); only these code comments may match, and film3/film.js's recap line if it was never re-voiced
 NUMBERING = re.compile(r"film (one|two|three|[123])\b|(first|second|third) film|(primera|segunda|tercera) película|"
                        r"episod(e|io) [0-9]|\b(first|second|third) (video|episode)\b|"
                        r"\b(primer|segundo|tercer)[oa]? (video|episodio)\b|película (uno|dos|tres|[123])\b", re.I)
-COMMENT_OK = {"assets/film3/film.js", "assets/silent-change/film.js"}
+COMMENT_OK = {"assets/film3/film.js", "assets/silent-change/film.js", "assets/too-good-to-be-true/film.js"}
 LENGTHS = re.compile(r"eight-minute|five-minute|six-minute|nueve minutos|seis minutos|· 8 min|· 9 min|· 5 min|"
                      r"\b(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)-minute\b|"
                      r"\b(un|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez) minutos\b|"
                      r"(?<![\d½.,:])\d+ ?(min|minute|minutes|minuto|minutos)\b", re.I)
-# the stated lengths: 7½ (intro, EN), 8½ (intro, ES), 5½ (A Sharper Sketch, Silent change)
+# the stated lengths: 7½ (intro, EN), 8½ (intro, ES), 5½ (A Sharper Sketch, Silent change), and 6 min (Too good to be true)
 HALVES = {"en": {"5½", "7½"}, "es": {"5½", "8½"}}
+WHOLE = {"6 min"}
 WORDS = {"en": "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen "
                "seventeen eighteen nineteen twenty".split(),
          "es": "uno dos tres cuatro cinco seis siete ocho nueve diez once doce trece catorce quince dieciséis "
@@ -443,11 +454,14 @@ def main():
                 labs = player.attrs.get("data-labs", "labs/") if player is not None else "labs/"
                 if labs:
                     f = check_link(pg, labs, f"{pg.file} (.player data-labs, via {pk})")
-                    want = "es/labs/index.html" if pg.es else "labs/index.html"
+                    want = OWN_LABS[pk][0] if pk in OWN_LABS else "es/labs/index.html" if pg.es else "labs/index.html"
                     if f and f != want:
                         s["fails"].append(f"{pg.file}: \"Pause and think\" lab links go to site/{f}, expected site/{want}")
+                    own = re.findall(r'\{id:"(\w+)"', (WEB / OWN_LABS[pk][1]).read_text()) if pk in OWN_LABS else None
                     for stop in sorted(set(re.findall(r'stop:"([a-z]\w*)"', src))):
-                        if stop not in intro_stops:
+                        if own is not None and stop not in own:
+                            s["fails"].append(f"{pk}: stop \"{stop}\" is not one of this film's labs ({', '.join(own)})")
+                        elif own is None and stop not in intro_stops:
                             s["fails"].append(f"{pk}: stop \"{stop}\" is not a lab of The Inner Life of Data ({', '.join(intro_stops)})")
     s["notes"].append(f"{checked} links on {len(pages)} pages")
 
@@ -629,7 +643,7 @@ def main():
 
     # -- numbering and lengths
     s = rep.check("No film numbering anywhere on the site (only allowlisted code comments)")
-    t = rep.check("No stale film lengths (7½, 8½, 5½ and 5½ min; the journey says \"short film\")")
+    t = rep.check("No stale film lengths (7½, 8½, 5½, 5½ and 6 min; the journey says \"short film\")")
     allowed = []
     for p in sorted(WEB.rglob("*")):
         if not p.is_file() or p.suffix not in TEXT_EXT:
@@ -646,6 +660,8 @@ def main():
         if rel in BUNDLES:
             continue  # the players' own code (timings, comments) is not site copy
         for m in LENGTHS.finditer(src):
+            if m.group(0) in WHOLE:
+                continue
             t["fails"].append(f"site/{rel}:{src.count(chr(10), 0, m.start()) + 1}: \"{m.group(0)}\"")
         if p.suffix == ".html":
             lg = "es" if rel.startswith("es/") else "en"

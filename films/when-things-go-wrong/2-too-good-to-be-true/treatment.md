@@ -108,4 +108,4 @@ Made by the author on 26 September 2026:
 2. ~~Reuse the character sheet from *Silent change*, and add the new characters.~~ First pass done: see [the character sheet](../characters/README.md).
 3. ~~Script with a rigour sheet and pacing report.~~ Draft 1: see [the script](script.md).
 4. ~~Style frames: the gauge on the painting, the row checks passing while the gauge goes red, the three Tuesdays, and the reload.~~ See [the style frames](frames/README.md).
-5. A voice test, and the first cut.
+5. ~~A voice test, and the first cut.~~ The film, its labs and its scenarios are on the site: [/when-things-go-wrong/too-good-to-be-true/](https://roanboc.github.io/learning-data/when-things-go-wrong/too-good-to-be-true/).

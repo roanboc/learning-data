@@ -6,6 +6,8 @@ ROOT=pathlib.Path(__file__).resolve().parents[1];LANG=os.environ.get('FILM_LANG'
 SHARED=ROOT.parents[2]/'inner-life-of-data'/'source';CHARS=ROOT.parents[1]/'characters'
 # the sharper conceptual model is drawn with A Sharper Sketch's own components
 SKETCH=ROOT.parents[2]/'a-sharper-sketch'/'source'/'src'
+# Silent change's components: the dashboard in the style of Databricks, messages, video-call tiles and the clock chip
+EP1=ROOT.parents[1]/'1-silent-change'/'source'/'src'
 BUILD=ROOT/'build' if EN else ROOT/'build'/LANG;DIST=ROOT/'dist' if EN else ROOT/'dist'/LANG
 NARR=ROOT/'src/narration.js' if EN else PACK/'narration.js';VODUR=ROOT/'src/vodur.js' if EN else PACK/'vodur.js'
 MODELS=ROOT/'models' if (ROOT/'models').exists() else SHARED/'models'

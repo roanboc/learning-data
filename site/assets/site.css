@@ -221,7 +221,7 @@ details.real summary{cursor:pointer;font-weight:700}details.real p{margin:8px 0 
 .qopt.ok{border-color:var(--good);background:color-mix(in srgb,var(--good) 10%,var(--card))}.qopt.ok .k{background:var(--good);color:var(--on-accent);border-color:var(--good)}
 .qopt.no{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 8%,var(--card))}.qopt.no .k{background:var(--bad);color:var(--on-accent);border-color:var(--bad)}
 .qopt[disabled]{cursor:default}
-.qopt small{display:block;font-weight:500;color:var(--muted);margin-top:4px}
+.qopt small{display:block;grid-column:2;font-weight:500;color:var(--muted);margin-top:4px}
 .qsort{display:grid;gap:8px;margin:0 0 12px}
 .qsort .row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--line);background:var(--card2);border-radius:12px;padding:8px 10px}
 @media (max-width:560px){.qsort .row{grid-template-columns:1fr}}

@@ -1,6 +1,6 @@
 # When things go wrong · 2. Too good to be true: script
 
-*Script draft 1 for [Too good to be true](treatment.md), in [When things go wrong](../README.md). About 6 minutes, in eight chapters, in English. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. Not voiced yet: the timings are estimates (see [Pacing report](#pacing-report)).*
+*The script of [Too good to be true](treatment.md), in [When things go wrong](../README.md), as filmed: 6:10, in eight chapters, in English. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The timings are the voiced ones (see [Pacing report](#pacing-report)). The film plays at [/when-things-go-wrong/too-good-to-be-true/](https://roanboc.github.io/learning-data/when-things-go-wrong/too-good-to-be-true/).*
 
 ## The promise
 
@@ -29,7 +29,7 @@ Everything from *Silent change* (Sam's screen as the door, the contract card, th
 
 ## Script
 
-Timings are estimates from `tools/pace.py`, before voicing.
+Timings are the voiced film's, from `tools/pace.py`.
 
 ### 1 · One version of Tuesday · 0:00–0:34
 
@@ -39,7 +39,7 @@ Timings are estimates from `tools/pace.py`, before voicing.
 
 **On screen.** Tuesday 10:05 · Planning committee · Applications for next year 11,340 ▲38% · +600 places · Version 1 of Tuesday · *Too good to be true*
 
-### 2 · The number and its limits · 0:34–1:26
+### 2 · The number and its limits · 0:34–1:28
 
 **Narration.** Sam, the data engineer, looks after the platform behind that number. Through Sam's screen, it's a gold painting: applications for next year. On Monday, 8,200 so far. Beside it sits its contract card. One line matters this week: how much the total may change overnight. Leila, who manages the admissions office, helped set it. On a closing date, applications really do jump, by up to about 15%. So above 10%, a test raises a warning: worth a look, but the data goes through. Above 25%, it raises an error: this must not reach a decision, so the build stops. A test on the number itself, not just on each row, with levels the business helped choose.
 
@@ -47,7 +47,7 @@ Timings are estimates from `tools/pace.py`, before voicing.
 
 **On screen.** Applications for next year 8,200 · contract: applications · overnight change · Leila Haddad, admissions office · closing date +15% · warn > 10% · error > 25%
 
-### 3 · Monday night · 1:26–2:20
+### 3 · Monday night · 1:28–2:25
 
 **Narration.** At eleven on Monday night, the admissions system syncs with the application portal. Tonight, the sync times out and restarts. It copies the whole week's applications again, 3,100 of them, and gives every copy a new ID. The admissions system now holds each of those applications twice. The platform copies what the source holds, faithfully. At two, the nightly build begins, and the checks run, one row at a time. Every ID is unique. No field is empty. Every course exists. Then the total reaches its test: 11,340. Up 38% in one night, when the real growth was forty. The needle swings past amber, into red. Every row was valid. Only a test on the total could see that there were too many.
 
@@ -55,7 +55,7 @@ Timings are estimates from `tools/pace.py`, before voicing.
 
 **On screen.** Mon 23:00 · admissions system → application portal · timeout · restart · 3,100 copied again · Tue 02:00 nightly build · ✓ unique ID · ✓ not empty · ✓ course exists · total 11,340 · +38% · real growth: 40
 
-### 4 · Three Tuesdays · 2:20–3:36
+### 4 · Three Tuesdays · 2:25–3:41
 
 **Narration.** What happens next depends on that test. Here are three versions of the same Tuesday. In the first, there's no test. 11,340 reaches the painting, and the committee approves six hundred places. Three weeks later, the copies are found. The places are cut again, the rooms released, and nobody trusts the dashboard. In the second, the test is only a warning. It turns amber, and the number is published anyway. The warning lands in a channel with forty others. Nobody reads it before ten, and the committee makes the same decision. In the third, the test is an error. The build stops before gold. The painting keeps Monday's 8,200, with a note: last good data, as of 2 am on Monday. Checking an unusual change. David, who chairs the committee, moves the decision to Wednesday. A day late, and right. A wrong number gets acted on. A late number, clearly labelled, simply waits. At our university, this test is an error. So this is the Tuesday that happens.
 
@@ -68,15 +68,15 @@ Wordless breather: the three columns side by side, the first two fading, the thi
 
 **On screen.** Version 1: no test · Version 2: warning · Version 3: error · +600 places · 3 weeks later: −600 · #data-alerts (40 unread) · Last good data as of Mon 02:00. Checking an unusual change. · Decision: Wednesday
 
-### 5 · Choosing the level · 3:36–4:22
+### 5 · Choosing the level · 3:41–4:25
 
-**Narration.** So why not make every test an error? Because on a closing date, a jump of 14% is real. Stopping it would hold back good data, and teach people to ignore alarms. So this number has two levels. Amber, for worth a look. Red, for must not reach a decision. A warning only helps if someone reads it. So each one has an owner, and there are few enough to read. Choose the level by what a wrong number would cost. That cost is easy to count once something goes wrong. The value of a right number, on an ordinary day, is much harder to see.
+**Narration.** So why not make every test an error? Because on a closing date, a jump of 14% is real. Stopping it would hold back good data, and teach people to ignore alarms. So this number has two levels. Amber, for worth a look. Red, for must not reach a decision. A warning only helps if someone reads it, so each one has an owner. Choose the level by what a wrong number would cost. That cost is easy to count once something goes wrong. The value of a right number, on an ordinary day, is much harder to see.
 
 **Picture.** The gauge, large. A closing date on the calendar: the total rises 14%, the needle sits in amber and the data flows on; one amber note goes to Leila, who reads it, nods and closes it: "closing date, expected". Then a wall of red alarms for every small change fades out, crossed through. The channel of forty unread notes shrinks to three, each with an owner's face. Last, two cards side by side: the first Tuesday's incident, with a date, a decision and a cost to add up; and an ordinary Tuesday, the gauge in green, with nothing written on it.
 
 **On screen.** closing date +14% · warn: worth a look · error: must not reach a decision · owner: Leila Haddad · choose the level by the cost of a wrong number · incident: 600 places, reversed · an ordinary day: nothing to count
 
-### 6 · Follow the thread · 4:22–4:58
+### 6 · Follow the thread · 4:25–5:02
 
 **Narration.** At 8:15 on Tuesday, Sam follows the thread upstream, from the painting, through silver, to bronze. In bronze, 3,100 pairs of rows are identical, except for their ID and when they were created. The uniqueness test checked the ID, and every ID was unique. But in the real world, an application is one applicant, for one course, in one intake. That's its business key. Test uniqueness on what makes a thing unique in the real world, not only on the system's ID.
 
@@ -84,7 +84,7 @@ Wordless breather: the three columns side by side, the first two fading, the thi
 
 **On screen.** Tue 08:15 · gold → silver → bronze · application_id A-40211 · A-47988 · same applicant, course, intake · unique ID ✓ · business key: applicant + course + intake ✗
 
-### 7 · Fix at the source · 4:58–5:42
+### 7 · Fix at the source · 5:02–5:48
 
 **Narration.** Sam messages Rosa, on the admissions system team. Her team finds the restart within the hour. The copies are in the admissions system itself, so that's where they're removed. And the sync is changed, so it's safe to run twice. The platform doesn't patch its copy by hand. It loads the affected week again, from the corrected system, so its copy matches the source. Silver and gold are rebuilt from it. Time travel lays Monday night's total beside today's: 11,340 then, 8,240 now. Forty more than Monday, as it should be. On Wednesday, the committee plans with the right number.
 
@@ -92,7 +92,7 @@ Wordless breather: the three columns side by side, the first two fading, the thi
 
 **On screen.** Rosa Díaz, admissions system · copies removed · sync: safe to run twice · reload: one week · version 41: 11,340 · version 43: 8,240 · +40 since Monday · Wednesday
 
-### 8 · Pull back · 5:42–6:04
+### 8 · Pull back · 5:48–6:10
 
 **Narration.** The incident leaves a new test behind: one application per applicant, course and intake. Syncs will time out again. When in doubt, keep the last good number, and say so. Stale and labelled beats fresh and wrong.
 
@@ -113,7 +113,7 @@ Four stops, one question each, as in *Silent change*. Each links to a lab of *Th
 
 ## Changes from the treatment
 
-- **Length:** about 6:04, at the short end of the treatment's 6 to 7 minutes, in step with *Silent change* (5:36) and the series' pace. The three Tuesdays still get the most time, 76 seconds, and a wordless breather.
+- **Length:** 6:10, at the short end of the treatment's 6 to 7 minutes, in step with *Silent change* (5:36) and the series' pace. The three Tuesdays still get the most time, 76 seconds, and a wordless breather.
 - **Chapters:** "Fix at the source, then reload" is called *Fix at the source*; the title comes at the end of the first chapter, as in *Silent change*.
 - **The note on the painting:** "Last good data as of Mon 02:00. Checking an unusual change.", in the same style as Ana's note in *Silent change*, so the object means the same in both films.
 - **The ending hint:** a missing nightly file, for the candidate film *Late*.
@@ -189,30 +189,29 @@ The cost of a failure has a date, a decision and often a price. The value of dat
 
 ## Pacing report
 
-`python tools/pace.py`, run from `source/`, on draft 1. The lines aren't voiced yet, so it estimates each at 171 words a minute, *Silent change*'s voiced rate; run it again after `tts.py`.
+`python tools/pace.py`, run from `source/`, on the voiced film.
 
 ```
-no src/vodur.js yet: line lengths are estimated at 171 words a minute, as voiced in Silent change
-
 scene      duration   wpm  voice  longest quiet  notes
-open          34.0s   122    71%           5.0s  
-limits        52.3s   133    78%           1.8s  
-night         53.6s   138    81%           1.8s  
-tuesdays      75.9s   133    78%           5.3s  
-level         45.9s   139    81%           1.8s  
-thread        36.2s   136    80%           1.8s  
-reload        43.8s   137    80%           1.8s  
-end           22.0s   101    59%           6.0s  
+open          34.5s   120    72%           5.0s  
+limits        54.3s   128    79%           1.8s  
+night         56.8s   130    82%           1.8s  
+tuesdays      76.1s   133    78%           5.3s  
+level         43.7s   136    68%           5.0s  
+thread        37.1s   133    80%           1.8s  
+reload        46.4s   129    81%           1.8s  
+end           21.3s   104    58%           6.0s  
 
-total 6:03.7, 801 words, 132 wpm, voice 77% of the time, 171 wpm while speaking
+total 6:10.3, 794 words, 129 wpm, voice 76% of the time, 169 wpm while speaking
 sentences with under 0.5 s after them: 0; stops of 2.5 s or more inside chapters: 0
 ```
 
-Within the series' guides: about 125 to 135 words a minute, a beat of 0.8 s after every sentence, no stop of 2.5 s or more inside a chapter, and three wordless moments (the title, the three Tuesdays, the ending). The densest chapters, *Choosing the level* and *Fix at the source*, are at 139 and 137 words a minute; if the voice runs slower than the estimate, they're the first to trim.
+Within the series' guides: about 125 to 135 words a minute, a beat of 0.8 s after every sentence, no stop of 2.5 s or more inside a chapter, and four wordless moments: the title, the three Tuesdays, the two cards at the end of *Choosing the level* (a wrong number's cost beside a right one's value), and the ending. On the real voice, *Choosing the level* first ran at 157 words a minute; one line was shortened and the two cards got their wordless moment.
 
-## Next checkpoints
+## Checkpoints
 
-1. ~~Script with a rigour sheet and pacing report.~~ This draft.
+1. ~~Script with a rigour sheet and pacing report.~~
 2. ~~Style frames: the gauge on the painting, the row checks passing while the gauge goes red, the three Tuesdays, and the reload.~~ See [the style frames](frames/README.md).
-3. A voice test, then `tts.py` and a pacing report on the real voice.
-4. The first cut.
+3. ~~A voice test, then `tts.py` and a pacing report on the real voice.~~
+4. ~~The first cut, and the site: the film page with Pause and think, three labs (Take it apart) and ten scenarios (Make the call), in English and Spanish.~~
+5. Before publishing: open the sources in the rigour sheet and in [The cost of a wrong number](#the-cost-of-a-wrong-number) again, and run the release workflow.

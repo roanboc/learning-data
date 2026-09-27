@@ -13,7 +13,8 @@ const NARR={
  {"id":"check","gap":0.8,"text":"So before we change anything, we ask a wider question: how does this kind of business generally work?"},
  {"id":"industry","gap":0.8,"text":"In many industries, someone has already modelled it, and their model makes a good first template."},
  {"id":"choose","gap":0.8,"text":"Often there's more than one to choose from, so which one you pick, and why, matters too."},
- {"id":"tcsi","gap":0.8,"text":"For an Australian university, TCSI is a good choice: it describes the data we already report to government."},
+ {"id":"tcsi","gap":0.8,"text":"TCSI could be one of the choices: it's public, and it describes the data Australian universities report to government."},
+ {"id":"mcds","gap":0.8,"text":"Many universities actually use MortarCAPS, the sector's own data standard. Here, we'll check our sketch against TCSI."},
  {"id":"fit","gap":0.8,"text":"It's a reference to check against, not a model to copy. We'll see where it fits our business, and where it doesn't."}]},
 "cls":{"name":"What is a class?","lead":0.6,"tail":1.2,"vo":[
  {"id":"q","gap":0.8,"text":"First question: what is a class?"},

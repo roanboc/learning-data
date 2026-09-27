@@ -1,6 +1,6 @@
 # A Sharper Sketch
 
-A five-minute film, the third from Learning Data, about data modelling. Two trusted numbers disagree about how many students were enrolled in Data Science 101 on census date. To find out why, the film goes back to the first film's sketch, calls it what it was, an oversimplification, and sharpens it one question at a time, checking each change against a public reference model, TCSI. It is written for anyone aged 14 and up, with nothing a data modeller would need to correct, and it is about modelling only: what the model says, not how the pipelines build it.
+A five-minute film, the third from Learning Data, about data modelling. Two trusted numbers disagree about how many students were enrolled in Data Science 101 on census date. To find out why, the film goes back to the first film's sketch, calls it what it was, an oversimplification, and sharpens it one question at a time, checking each change against a reference model. It notes that MortarCAPS (MCDS) is the standard many universities actually use, and checks against TCSI, one of the choices, because it is public. It is written for anyone aged 14 and up, with nothing a data modeller would need to correct, and it is about modelling only: what the model says, not how the pipelines build it.
 
 - **Watch, with labs and scenarios:** [https://roanboc.github.io/learning-data/sketch/](https://roanboc.github.io/learning-data/sketch/)
 - **Script, with rigour notes and sources:** [script.md](script.md)
@@ -13,13 +13,13 @@ A five-minute film, the third from Learning Data, about data modelling. Two trus
 |---|---|
 | 0:00 | The sketch we drew |
 | 0:24 | Two numbers |
-| 1:29 | What is a class? |
-| 2:13 | Whose census date? |
-| 2:41 | One student, two courses |
-| 3:16 | Enrolled when? |
-| 3:44 | Three levels of precision |
-| 4:24 | Check, adopt, extend, record |
-| 4:59 | Pull back |
+| 1:38 | What is a class? |
+| 2:22 | Whose census date? |
+| 2:51 | One student, two courses |
+| 3:25 | Enrolled when? |
+| 3:54 | Three levels of precision |
+| 4:34 | Check, adopt, extend, record |
+| 5:08 | Pull back |
 
 ## What it teaches
 

@@ -75,7 +75,7 @@ def tone(s,g=0.24):x=tt(3.2);X((np.sin(2*np.pi*660*x)+0.2*np.sin(2*np.pi*1320*x)
 def pop(s,g=0.14):x=tt(0.12);X(np.sin(2*np.pi*(900+2000*x)*x)*np.exp(-x*30),s,g)
 # the tracing paper: a soft sweep each time the reference slides over the sketch
 def paper_in(s):whoosh(s,1.2,0.07);sweep(s+0.2,1.0,0.03,900,1800,0.4)
-paper_in(G('two','tcsi',2.0));paper_in(G('cls','ref',-0.1));paper_in(G('census','ref',-0.1));paper_in(G('courses','admission',-0.1))
+paper_in(G('two','mcds',4.2));paper_in(G('cls','ref',-0.1));paper_in(G('census','ref',-0.1));paper_in(G('courses','admission',-0.1))
 chime(G('two','tcsi',0.4),0.1,784)
 for i,k in enumerate(['Student','Class','Enrolment','Term','Course']):pop(G('drawn','recap',0.4+i*(G('drawn','over')-G('drawn','recap'))*0.16),0.1)
 for i in range(3):pop(G('drawn','over',0.8+i*0.5),0.08)
@@ -100,7 +100,7 @@ pop(G('end','asks',0.0),0.12);chime(G('end','answer',0.2),0.14,1046);shimmer(G('
 # the breathing cut: each wordless chapter ending gets its own sound, on its "breath" cue
 def B(sid,off=0):return G(sid,'breath',off) if ST[sid].get('breathe') else None
 if B('drawn'):[pop(B('drawn',1.9+k*0.8),0.07) for k in range(5)]
-if B('two'):[chime(B('two',0.4+k*0.8),0.05,[784,880,988,1046,1175][k]) for k in range(5)]
+if B('two'):[chime(B('two',0.3+k*0.5),0.05,[784,880,988,1046,1175][k]) for k in range(5)]  # one chime per reference box, as it lights (scenes.js)
 if B('cls'):[tick(B('cls',1.8+k*0.8),0.1) for k in range(6)]
 if B('census'):chime(B('census',0.5),0.06,988);chime(B('census',1.7),0.06,784);chime(B('census',2.9),0.06,988);chime(B('census',4.1),0.06,784)
 if B('courses'):sweep(B('courses',0.5),2.0,0.04,600,1800);sweep(B('courses',2.9),2.0,0.04,600,1800)

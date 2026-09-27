@@ -47,13 +47,16 @@ What made *The Inner Life of Data* work, written so the next film, lab or course
 ## 5. Narration, sound and pace
 
 - **One idea per line, in short sentences.** Voice each line separately, and time the pictures to the voice, not the voice to the pictures.
-- **Measure density, don't guess it.** `films/inner-life-of-data/source/tools/pace.py` reports words per minute, how much of the time the voice speaks, and the longest quiet moment in each chapter. This film runs at 147 words a minute with the voice speaking 86% of the time. It's accurate, and it's relentless.
-- **Leave room to think, but let it flow.** Aim for about 125 to 135 words a minute. Give every sentence a natural beat (about 0.8 seconds), and pause longer only where an idea really needs to land. Viewers of the first film's breathing cut found a hold after every idea and a breather in every chapter too many stops; *A Sharper Sketch* keeps three short wordless endings in the whole film. The picture keeps moving during every pause. See [the breathing cut](films/inner-life-of-data/breathing-cut.md) for how pauses work.
+- **Measure density, don't guess it.** `films/inner-life-of-data/source/tools/pace.py` reports words per minute, how much of the time the voice speaks and the longest quiet moment in each chapter. It also counts sentences that run into the next without a breath, and long stops inside a chapter. The v4 cut ran at 147 words a minute with the voice speaking 86% of the time: accurate, and relentless. The first breathing cut fixed the averages with 32 long stops, and felt stop-start. Averages hide rhythm.
+- **Leave room to think, and spread it out.** Aim for about 115 to 130 words a minute, with the voice speaking about 70 to 75% of the time. Leave about 0.7 s after every sentence, and 0.5 to 1 s more after each new named idea. Keep stops inside a chapter under about 2 s, and end each chapter with a wordless breather of 3.5 to 4.5 s that applies the idea to a new case. The picture keeps moving during every pause. See [the breathing cut](films/inner-life-of-data/breathing-cut.md) and [its review](films/inner-life-of-data/pacing-review.md).
+- **Keep the camera calm.** Camera moves glide (a sine ease) and take at least about 1.4 s. Whip pans under a talking voice feel rushed; a frame that freezes in a pause feels stopped.
+- **Let the film flow; pause only where it matters.** *A Sharper Sketch* gives every sentence a beat of about 0.8 s, holds longer only after the ideas that need to land, and keeps three short wordless endings in the whole film: viewers found a breather in every chapter too many stops.
 - **Give each film its own music.** Match the mood to the subject: the first film's pads and pulses suit a journey through a platform; a film about modelling and design gets a slower, warmer ambience.
 - **Say it and show it at the same time.** Narration and picture together beat narration plus a wall of on-screen text. Keep on-screen words to labels.
 - **Name things before explaining them.** A new term lands better if the picture shows it a moment before the narration explains what it does.
 - **Make intentional pauses look intentional.** A silence needs light and motion, or it reads as a glitch.
-- **Let sound support meaning.** Music ducks under the voice and rises in pauses; about sixty effects land on story cues. Mix to about -16 LUFS for the web.
+- **Let sound support meaning.** Music sits under the voice and lifts about 4 dB in pauses, slowly, so it doesn't pump; never cut the sound to silence, which reads as a fault. About sixty effects land on story cues. Mix to about -16 LUFS for the web.
+- **Check a synthetic voice by ear and by numbers.** A naturalness model (such as UTMOS) and a speech recognizer catch what a pitch reading misses. Pitch-shifting a synthetic voice made it robotic; blending two voice styles made the Spanish voice more natural and closer to the English one.
 - **Be open about the voice.** A synthetic voice is fine; say so. Captions come from the same script as the narration, so they always match.
 
 *Ask: where does the viewer get a moment to catch up?*
@@ -103,7 +106,7 @@ A film makes people feel they understand; learning comes from using the ideas. T
 **Before rendering**
 - [ ] The rigour sheet covers every scene.
 - [ ] Style frames and a short voice test are approved.
-- [ ] `tools/pace.py`: the film runs at about 125 to 135 words a minute, and no chapter feels rushed or stop-start when watched.
+- [ ] `tools/pace.py`: about 115 to 130 words a minute, a quiet moment of at least 4 seconds in each chapter, no sentence followed by less than 0.5 s, and no stop of 2.5 s or more inside a chapter.
 - [ ] Stills are checked at every named moment, with nothing under the captions.
 - [ ] `tools/check.py`: every moment of the film draws without an error. Stills only sample a few moments.
 

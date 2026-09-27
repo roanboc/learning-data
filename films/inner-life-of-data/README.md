@@ -13,17 +13,17 @@ An eight-minute film that follows one enrolment at a fictional university, from 
 | Time | Chapter |
 |---|---|
 | 0:00 | [The tap](https://roanboc.github.io/learning-data/#t=0) |
-| 0:25 | [Into the platform](https://roanboc.github.io/learning-data/#t=25) |
-| 1:18 | [The sketch](https://roanboc.github.io/learning-data/#t=79) |
-| 1:54 | [Refining with dbt](https://roanboc.github.io/learning-data/#t=115) |
-| 2:58 | [Gold](https://roanboc.github.io/learning-data/#t=178) |
-| 3:51 | [The layers together](https://roanboc.github.io/learning-data/#t=232) |
-| 4:27 | [Meaning](https://roanboc.github.io/learning-data/#t=268) |
-| 5:27 | [Two speeds](https://roanboc.github.io/learning-data/#t=327) |
-| 6:00 | [Ways out](https://roanboc.github.io/learning-data/#t=360) |
-| 7:04 | [Apps and Genie](https://roanboc.github.io/learning-data/#t=424) |
-| 7:41 | [Pull back](https://roanboc.github.io/learning-data/#t=461) |
+| 0:25 | [Into the platform](https://roanboc.github.io/learning-data/#t=26) |
+| 1:15 | [The sketch](https://roanboc.github.io/learning-data/#t=75) |
+| 1:47 | [Refining with dbt](https://roanboc.github.io/learning-data/#t=108) |
+| 2:48 | [Gold](https://roanboc.github.io/learning-data/#t=168) |
+| 3:38 | [The layers together](https://roanboc.github.io/learning-data/#t=218) |
+| 4:13 | [Meaning](https://roanboc.github.io/learning-data/#t=253) |
+| 5:09 | [Two speeds](https://roanboc.github.io/learning-data/#t=310) |
+| 5:39 | [Ways out](https://roanboc.github.io/learning-data/#t=339) |
+| 6:39 | [Apps and Genie](https://roanboc.github.io/learning-data/#t=400) |
+| 7:14 | [Pull back](https://roanboc.github.io/learning-data/#t=435) |
 
 ## How it was made
 
-The film is generated entirely from code; the source and a step-by-step rebuild guide are in [source/](source/). This is the breathing cut: the pauses that let each idea land, and why, are described in [breathing-cut.md](breathing-cut.md), and what to reuse for future films is in the [playbook](../../PLAYBOOK.md). The story of how it was made, with the analogies explored, the pushback and the lessons learned, is in [the making-of journey](../../journey/index.md).
+The film is generated entirely from code; the source and a step-by-step rebuild guide are in [source/](source/). This is the breathing cut: the pauses that let each idea land, and why, are described in [breathing-cut.md](breathing-cut.md), and how they were tuned so the film flows instead of stopping is in [pacing-review.md](pacing-review.md), and what to reuse for future films is in the [playbook](../../PLAYBOOK.md). The story of how it was made, with the analogies explored, the pushback and the lessons learned, is in [the making-of journey](../../journey/index.md).

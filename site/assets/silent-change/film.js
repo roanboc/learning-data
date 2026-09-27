@@ -409,7 +409,7 @@ function plaque(ctx,x,y,w,rows,c){const h=20+rows.length*52;glass(ctx,x,y,w,h,14
 // When things go wrong · 1. Silent change. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line, a natural breath between sentences. The few longer stops are in breath.js.
 const NARR={
-"banner":{"name":"The banner","lead":1.6,"tail":1.0,"vo":[
+"banner":{"name":"Yesterday's numbers","lead":1.6,"tail":1.0,"vo":[
  {"id":"morning","gap":0.8,"text":"It's 7:58 on the morning before census date."},
  {"id":"ana","gap":0.8,"text":"Ana, the Head of School, has a meeting at nine to confirm which classes will run."},
  {"id":"note","gap":0.8,"text":"Her dashboard shows yesterday's numbers, with a note: last good data, as of 11:02 last night."},
@@ -417,7 +417,7 @@ const NARR={
  {"id":"asks","gap":0.8,"text":"Ana messages Sam: are these numbers safe to use?"}]},
 "night":{"name":"Six hours earlier","lead":0.8,"tail":1.0,"vo":[
  {"id":"earlier","gap":0.8,"text":"Six hours earlier, at 2:40 in the morning, the nightly build begins."},
- {"id":"events","gap":0.8,"text":"All day, the student system has sent every enrolment to the platform, as events."},
+ {"id":"events","gap":0.8,"text":"Enrolment changes reach the platform all day, as events or in files. Once a night, dbt builds the numbers from them."},
  {"id":"test","gap":0.8,"text":"Before anything is built on them, dbt tests them. One test checks that every enrolment has a status it knows."},
  {"id":"unknown","gap":0.8,"text":"Tonight, some have a status it has never seen."},
  {"id":"stops","gap":0.8,"text":"So the build stops there. Everything downstream is skipped, and the dashboard keeps the last good numbers, with that note."},
@@ -430,7 +430,7 @@ const NARR={
 "thread":{"name":"Follow the thread","lead":2.9,"tail":1.0,"vo":[
  {"id":"lineage","gap":0.8,"text":"Every number on the dashboard has a lineage: the steps that built it."},
  {"id":"back","gap":0.8,"text":"Sam follows it backwards, one step at a time."},
- {"id":"steps","gap":0.8,"text":"From the dashboard, to the data product behind it. Then to the model that joins enrolments to classes."},
+ {"id":"steps","gap":0.8,"text":"From the dashboard, to the data product behind it. Then to the model that joins enrolments to their units."},
  {"id":"staging","gap":0.8,"text":"Then to staging, where the test failed. The rows that failed it were kept aside, so they can be looked at."}]},
 "bronze":{"name":"The cause","lead":0.8,"tail":1.0,"vo":[
  {"id":"arrived","gap":0.8,"text":"Upstream, in bronze, the rows are exactly as the student system sent them."},
@@ -473,7 +473,7 @@ const NARR={
  {"id":"tag","gap":0.8,"text":"Seen by both sides, before it ships."}]}
 };
 
-const VODUR={"banner/morning": 2.939, "banner/ana": 4.492, "banner/note": 6.031, "banner/old": 3.572, "banner/asks": 3.044, "night/earlier": 4.119, "night/events": 4.651, "night/test": 7.096, "night/unknown": 2.336, "night/stops": 6.907, "night/alert": 5.6, "night/safely": 2.511, "sam/reading": 5.344, "sam/reply": 6.939, "sam/trust": 4.266, "thread/lineage": 3.64, "thread/back": 2.766, "thread/steps": 6.417, "thread/staging": 6.185, "bronze/arrived": 4.526, "bronze/new": 4.77, "bronze/kept": 6.673, "halves/ask": 4.002, "halves/ben": 4.13, "halves/mei": 6.876, "halves/weeks": 2.368, "halves/notices": 5.515, "halves/reached": 6.156, "halves/knew": 4.543, "halves/question": 4.954, "halves/decides": 7.288, "halves/sketch": 3.326, "fix/small": 7.07, "fix/review": 5.181, "recover/rerun": 1.424, "recover/would": 6.636, "recover/believable": 7.569, "recover/versions": 6.989, "recover/confirm": 4.647, "contract/meet": 6.103, "contract/agree": 2.256, "contract/says": 5.721, "contract/owners": 5.839, "contract/checks": 6.28, "later/weeks": 3.357, "later/amber": 5.94, "later/define": 6.212, "later/monday": 4.983, "end/coming": 3.808, "end/visible": 4.846, "end/tag": 2.158};
+const VODUR={"banner/morning": 2.939, "banner/ana": 4.492, "banner/note": 6.031, "banner/old": 3.572, "banner/asks": 3.044, "night/earlier": 4.119, "night/events": 8.155, "night/test": 7.096, "night/unknown": 2.336, "night/stops": 6.907, "night/alert": 5.6, "night/safely": 2.511, "sam/reading": 5.344, "sam/reply": 6.939, "sam/trust": 4.266, "thread/lineage": 3.64, "thread/back": 2.766, "thread/steps": 6.615, "thread/staging": 6.185, "bronze/arrived": 4.526, "bronze/new": 4.77, "bronze/kept": 6.673, "halves/ask": 4.002, "halves/ben": 4.13, "halves/mei": 6.876, "halves/weeks": 2.368, "halves/notices": 5.515, "halves/reached": 6.156, "halves/knew": 4.543, "halves/question": 4.954, "halves/decides": 7.288, "halves/sketch": 3.326, "fix/small": 7.07, "fix/review": 5.181, "recover/rerun": 1.424, "recover/would": 6.636, "recover/believable": 7.569, "recover/versions": 6.989, "recover/confirm": 4.647, "contract/meet": 6.103, "contract/agree": 2.256, "contract/says": 5.721, "contract/owners": 5.839, "contract/checks": 6.28, "later/weeks": 3.357, "later/amber": 5.94, "later/define": 6.212, "later/monday": 4.983, "end/coming": 3.808, "end/visible": 4.846, "end/tag": 2.158};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the scene's "breath" cue.
@@ -582,6 +582,124 @@ function liveOverlay(ctx,x,y,w,h,t){ctx.save();ctx.beginPath();ctx.rect(x,y,w,h)
 function pvLive(ctx,d,i,x,y,w,h,t){const v=DVAR[d][i][0];if(v==="live"){liveOverlay(ctx,x,y,w,h,t);return;}if(v!=="floor")return;ctx.save();
   for(let r=0;r<3;r++)for(let k=0;k<5;k++){const n=r*5+k,X=x+w*(0.08+k*0.172)+1,Y=y+h*(0.13+r*0.25)+1,on=Math.sin(t*(0.5+hash(n,71))+hash(n,72)*9)>0;ctx.fillStyle="#0d1430";ctx.fillRect(X,Y,w*0.16-2,h*0.22-2);if(on){ctx.fillStyle=rgba(DOM[d].c,0.6);ctx.fillRect(X+1,Y+1,w*0.16-4,h*0.22-4);}}
   const pr=(t*1.2)%1;ctx.fillStyle="rgba(255,70,80,0.95)";ctx.beginPath();ctx.arc(x+w*0.05,y+h*0.06,Math.max(2,w*0.012),0,TAU);ctx.fill();ctx.strokeStyle="rgba(255,80,90,"+(0.9*(1-pr))+")";ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(x+w*0.05,y+h*0.06,Math.max(2,w*0.012)+pr*w*0.03,0,TAU);ctx.stroke();ctx.restore();}
+
+/* ===== A Sharper Sketch: components =====
+   Everything here draws with the first film's primitives (glass, T, tag, chip, glow, dtile, orb) so the two films look like one world. */
+const SCENES=[];const cue=(sc,id)=>sc.cues[id];
+function scene(id,draw){const n=NARR[id];SCENES.push({id,name:n.name,lead:n.lead,tail:n.tail,vo:n.vo,draw});}
+function clearTo(ctx,S){setScreen(ctx,S);ctx.fillStyle="#03050b";ctx.fillRect(0,0,W,H);}
+function bgW(ctx,S,cam){setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"#070b17");g.addColorStop(1,"#03050b");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  setCam(ctx,S,cam);const x0=cam.x-W/2/cam.z,x1=cam.x+W/2/cam.z,y0=cam.y-H/2/cam.z,y1=cam.y+H/2/cam.z;ctx.strokeStyle="rgba(120,160,230,0.045)";ctx.lineWidth=1/cam.z;
+  for(let x=Math.floor(x0/48)*48;x<=x1;x+=48){ctx.beginPath();ctx.moveTo(x,y0);ctx.lineTo(x,y1);ctx.stroke();}for(let y=Math.floor(y0/48)*48;y<=y1;y+=48){ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x1,y);ctx.stroke();}}
+function vign(ctx,S){setScreen(ctx,S);const v=ctx.createRadialGradient(W/2,H/2,H*0.3,W/2,H/2,W*0.75);v.addColorStop(0,"rgba(0,0,0,0)");v.addColorStop(1,"rgba(0,0,0,0.55)");ctx.fillStyle=v;ctx.fillRect(0,0,W,H);}
+const CAM0={x:960,y:540,z:1};
+
+// the sketch's ink is the first film's; the reference model is drawn in a warm ink on tracing paper
+const SK=[150,225,255],REF=[255,214,160],ADOPT=[90,170,255],EXT=[255,176,64];
+const lerpP=(a,b,u)=>[lerp(a[0],b[0],u),lerp(a[1],b[1],u)];
+
+/* the sketch at each version: positions of the box centres (the board is 1920 × 1080) */
+const V1={Student:[576,413],Enrolment:[972,413],Class:[1368,413],Term:[1368,657],Course:[576,657]};
+const V1R=[["Student","Enrolment","1","*"],["Enrolment","Class","*","1"],["Class","Term","*","1"],["Student","Course","*","1"]];
+const L2={Student:[330,510],Enrolment:[760,510],Offering:[1200,510],Unit:[1620,510],Class:[1200,730],Term:[1620,730],Course:[330,290]};
+const L3={Student:[330,290],Admission:[760,290],Course:[1200,290],Enrolment:[760,510],Offering:[1200,510],Unit:[1620,510],Status:[760,730],Class:[1200,730],Term:[1620,730]};
+const L3R=[["Student","Admission","1","*"],["Admission","Course","*","1"],["Admission","Enrolment","1","*"],["Enrolment","Offering","*","1"],["Offering","Unit","*","1"],["Offering","Class","1","*"],["Offering","Term","*","1"],["Enrolment","Status","1","*"]];
+const NAME={Student:"Student",Admission:"Course admission",Course:"Course",Enrolment:"Unit enrolment",Offering:"Unit offering",Unit:"Unit",Status:"Status change",Class:"Class",Term:"Teaching period"};
+// blue pins: adopted from the reference; amber pins: our extensions
+const PINS={Student:"adopt",Admission:"adopt",Course:"adopt",Enrolment:"adopt",Unit:"adopt",Offering:"extend",Class:"extend",Status:"extend",Term:"extend"};
+
+/* one entity: a glass box with its name, an optional line under it, an optional list of attributes, and an optional pin */
+function entBox(ctx,e){const s=e.s||1,ts=24*s,sub=e.sub,at=e.attrs||[];
+  let w=Math.max(200*s,tw(ctx,e.name,ts,700)+52*s);if(sub)w=Math.max(w,tw(ctx,sub,16*s,600)+44*s);at.forEach(r=>{w=Math.max(w,tw(ctx,r[0],17*s,500,"mono")+84*s);});
+  const h=(sub?80:58)*s+(at.length?at.length*30*s+14*s:0);return{x:e.x,y:e.y,w,h};}
+function ent(ctx,e){const a=e.a==null?1:e.a;if(a<=0.01)return;const s=e.s||1,col=e.col||SK,b=entBox(ctx,e),x=b.x-b.w/2,y=b.y-b.h/2,hi=e.hi||0;
+  ctx.save();ctx.globalAlpha*=a;
+  if(hi>0)glow(ctx,b.x,b.y,Math.max(b.w,b.h)*0.9,e.hiCol||col,0.35*hi);
+  ctx.fillStyle=e.fill||"rgba(8,14,30,0.94)";rr(ctx,x,y,b.w,b.h,10*s);ctx.fill();
+  ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=12+10*hi;ctx.strokeStyle=rgba(e.edge||col,0.95);ctx.lineWidth=(2.2+1.2*hi)*s;if(e.dash)ctx.setLineDash([9*s,7*s]);rr(ctx,x,y,b.w,b.h,10*s);ctx.stroke();ctx.setLineDash([]);ctx.shadowBlur=0;
+  const ny=e.sub?y+34*s:y+37*s;T(ctx,e.name,b.x,ny,{w:700,size:24*s,align:"center",color:rgba(col,1)});
+  if(e.sub)withA(ctx,e.subA==null?1:e.subA,()=>T(ctx,e.sub,b.x,y+62*s,{w:600,size:16*s,align:"center",color:rgba(e.subCol||SOFT,1)}));
+  if(e.attrs&&e.attrs.length){const y0=y+(e.sub?80:58)*s;ctx.strokeStyle=rgba(col,0.35);ctx.lineWidth=1.2*s;ctx.beginPath();ctx.moveTo(x+12*s,y0);ctx.lineTo(x+b.w-12*s,y0);ctx.stroke();
+    e.attrs.forEach((r,i)=>withA(ctx,e.attrA==null?1:clamp(e.attrA*e.attrs.length-i,0,1),()=>{const yy=y0+28*s+i*30*s;
+      if(r[1]==="id"){ctx.fillStyle=rgba(REF,1);ctx.beginPath();ctx.arc(x+24*s,yy-6*s,5*s,0,TAU);ctx.fill();}
+      T(ctx,r[0],x+40*s,yy,{f:"mono",w:500,size:17*s,color:r[1]==="id"?rgba(REF,1):rgba(INK,0.9)});}));}
+  if(e.pin&&(e.pinA==null||e.pinA>0))withA(ctx,e.pinA==null?1:e.pinA,()=>{const pc=e.pin==="adopt"?ADOPT:EXT,px=x+b.w-4*s,py=y+4*s,pr=(9+4*(e.pinP||0))*s;glow(ctx,px,py,34*s,pc,0.5+0.5*(e.pinP||0));
+    ctx.fillStyle=rgba(pc,1);ctx.beginPath();ctx.arc(px,py,pr,0,TAU);ctx.fill();ctx.fillStyle="rgba(255,255,255,0.85)";ctx.beginPath();ctx.arc(px-pr*0.3,py-pr*0.3,pr*0.32,0,TAU);ctx.fill();});
+  ctx.restore();return b;}
+
+/* one relationship: a line between two boxes, with a bar (one) or a crow's foot (many) at each end */
+function relLine(ctx,A,B,ca,cb,o){o=o||{};const f=o.f==null?1:o.f,a=o.a==null?1:o.a,s=o.s||1,col=o.col||SK;if(f<=0||a<=0.01)return;
+  const dx=B.x-A.x,dy=B.y-A.y,L=Math.hypot(dx,dy);if(L<1)return;const ux=dx/L,uy=dy/L;
+  const cut=(b)=>Math.min(Math.abs(ux)>1e-6?b.w/2/Math.abs(ux):1e9,Math.abs(uy)>1e-6?b.h/2/Math.abs(uy):1e9);
+  const sA=[A.x+ux*cut(A),A.y+uy*cut(A)],sB=[B.x-ux*cut(B),B.y-uy*cut(B)];
+  ctx.save();ctx.globalAlpha*=a;ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=10;ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=(o.lw||2.4)*s;if(o.dash)ctx.setLineDash([9*s,7*s]);
+  ctx.beginPath();ctx.moveTo(sA[0],sA[1]);ctx.lineTo(lerp(sA[0],sB[0],f),lerp(sA[1],sB[1],f));ctx.stroke();ctx.setLineDash([]);
+  if(f>=1){const foot=(p,sx,sy)=>{const nx=-sy,ny=sx,q=[p[0]-sx*20*s,p[1]-sy*20*s];ctx.beginPath();ctx.moveTo(p[0]+nx*13*s,p[1]+ny*13*s);ctx.lineTo(q[0],q[1]);ctx.lineTo(p[0]-nx*13*s,p[1]-ny*13*s);ctx.moveTo(p[0],p[1]);ctx.lineTo(q[0],q[1]);ctx.stroke();};
+    const bar=(p,sx,sy)=>{const nx=-sy,ny=sx;ctx.beginPath();ctx.moveTo(p[0]-sx*14*s+nx*11*s,p[1]-sy*14*s+ny*11*s);ctx.lineTo(p[0]-sx*14*s-nx*11*s,p[1]-sy*14*s-ny*11*s);ctx.stroke();};
+    (cb==="*"?foot:bar)(sB,ux,uy);(ca==="*"?foot:bar)(sA,-ux,-uy);
+    if(o.words){ctx.shadowBlur=0;const wd=c=>c==="*"?"many":"one",off=(p,sx,sy)=>[p[0]-sx*44*s-sy*22*s,p[1]-sy*44*s+sx*22*s+6*s];
+      const pa=off(sA,-ux,-uy),pb=off(sB,ux,uy);withA(ctx,o.words,()=>{T(ctx,wd(ca),pa[0],pa[1],{f:"mono",w:500,size:15*s,align:"center",color:rgba(REF,1)});T(ctx,wd(cb),pb[0],pb[1],{f:"mono",w:500,size:15*s,align:"center",color:rgba(REF,1)});});}}
+  if(o.bad)glow(ctx,(sA[0]+sB[0])/2,(sA[1]+sB[1])/2,90,BAD,0.5*o.bad);
+  ctx.restore();}
+
+/* a whole diagram: E maps a key to {x,y,name,...}, R lists [from,to,one-or-many,one-or-many,{options}] */
+function diagram(ctx,E,R){const B={};Object.keys(E).forEach(k=>{if(E[k])B[k]=entBox(ctx,E[k]);});
+  R.forEach(r=>{const o=r[4]||{};if(B[r[0]]&&B[r[1]])relLine(ctx,B[r[0]],B[r[1]],r[2],r[3],Object.assign({},o,{a:(o.a==null?1:o.a)*Math.min(E[r[0]].a==null?1:E[r[0]].a,E[r[1]].a==null?1:E[r[1]].a),s:o.s||E[r[0]].s}));});
+  Object.keys(E).forEach(k=>{if(E[k])ent(ctx,E[k]);});return B;}
+function board(ctx,a,label){withA(ctx,a,()=>{glass(ctx,110,170,1700,720,22,SK,{glow:18,ea:0.35,fill:"rgba(10,18,36,0.5)"});if(label)tag(ctx,150,170,label,SK,{size:18});});}
+
+/* the reference model, TCSI, on a sheet of tracing paper that slides over the sketch */
+const REFE={Student:[330,300,"Student"],Admission:[760,300,"Course admission"],Course:[1200,300,"Course"],Enrolment:[760,560,"Unit enrolment","census date · status"],Unit:[1200,560,"Unit of study"]};
+const REFR=[["Student","Admission","1","*"],["Admission","Course","*","1"],["Admission","Enrolment","1","*"],["Enrolment","Unit","*","1"]];
+function paper(ctx,a,dx,t,hi,o){if(a<=0.01)return;o=o||{};hi=hi||{};const x=110+dx,y=160+(o.dy||0);
+  ctx.save();ctx.globalAlpha*=a;ctx.fillStyle="rgba(3,5,11,0.55)";ctx.fillRect(-400,-400,W+800,H+800);ctx.restore();
+  ctx.save();ctx.globalAlpha*=a;ctx.translate(x,y);ctx.rotate((o.rot||-0.006));
+  const pw=1700,ph=730;ctx.shadowColor="rgba(0,0,0,0.6)";ctx.shadowBlur=30;ctx.fillStyle="rgba(58,48,36,0.72)";ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(pw,0);ctx.lineTo(pw,ph-60);ctx.lineTo(pw-60,ph);ctx.lineTo(0,ph);ctx.closePath();ctx.fill();ctx.shadowBlur=0;
+  ctx.fillStyle="rgba(255,236,200,0.16)";ctx.beginPath();ctx.moveTo(pw,ph-60);ctx.lineTo(pw-60,ph-60);ctx.lineTo(pw-60,ph);ctx.closePath();ctx.fill();
+  ctx.strokeStyle="rgba(255,226,180,0.07)";ctx.lineWidth=1;for(let yy=36;yy<ph;yy+=36){ctx.beginPath();ctx.moveTo(20,yy);ctx.lineTo(pw-20,yy);ctx.stroke();}
+  ctx.strokeStyle=rgba(REF,0.5);ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(pw,0);ctx.lineTo(pw,ph-60);ctx.lineTo(pw-60,ph);ctx.lineTo(0,ph);ctx.closePath();ctx.stroke();
+  T(ctx,"REFERENCE MODEL",36,50,{w:800,size:18,color:rgba(REF,0.9)});T(ctx,"TCSI · Tertiary Collection of Student Information",36,80,{w:600,size:18,color:rgba(REF,0.7)});
+  ctx.translate(-110,-160);const E={};Object.keys(REFE).forEach(k=>{const r=REFE[k];E[k]={x:r[0],y:r[1],name:r[2],sub:r[3],col:REF,dash:true,fill:"rgba(40,32,24,0.9)",hi:hi[k]||0,subCol:REF};});
+  diagram(ctx,E,REFR.map(r=>r.concat([{col:REF,dash:true}])));if(o.extra)o.extra(ctx);ctx.restore();}
+
+/* the comparison in the corner: Genie's number against the certified census report */
+function hud(ctx,S,a,v,t0,t){if(a<=0.01)return;setScreen(ctx,S);const ok=Math.round(v)===118;withA(ctx,a,()=>{const x=1470,y=34,w=410,h=112;glass(ctx,x,y,w,h,16,ok?GOOD:CYAN,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.92)"});
+  T(ctx,"Genie",x+24,y+44,{w:700,size:20,color:rgba(SOFT,1)});T(ctx,""+Math.round(v),x+24,y+92,{w:800,size:42,color:rgba(ok?GOOD:CYAN,1)});
+  T(ctx,"Census report",x+200,y+44,{w:700,size:20,color:rgba(SOFT,1)});T(ctx,"118",x+200,y+92,{w:800,size:42,color:rgba(LAYER.gold,1)});
+  const gap=Math.round(v)-118;T(ctx,ok?"match":"gap "+gap,x+w-20,y+92,{w:700,size:18,align:"right",color:rgba(ok?GOOD:BAD,1)});
+  if(t0!=null&&t>t0&&t<t0+1.4)glow(ctx,x+60,y+80,90,ok?GOOD:CYAN,0.5*(1-(t-t0)/1.4));});}
+// the number counts down from a to b between t0 and t0+1
+const countTo=(t,t0,a,b)=>lerp(a,b,ease(clamp((t-t0)/1.0,0,1)));
+
+/* a speech bubble, with its text wrapped */
+function bubble(ctx,x,y,w,s,col,o){o=o||{};const sz=o.size||28;ctx.save();ctx.font=font(700,sz);const words=s.split(" "),lines=[];let cur="";words.forEach(wd=>{const tr=cur?cur+" "+wd:wd;if(ctx.measureText(tr).width>w-56&&cur){lines.push(cur);cur=wd;}else cur=tr;});if(cur)lines.push(cur);ctx.restore();
+  const h=lines.length*sz*1.35+40;glass(ctx,x,y,w,h,18,col,{glow:16,ea:0.7,fill:"rgba(7,12,24,0.92)"});
+  ctx.fillStyle="rgba(7,12,24,0.92)";ctx.strokeStyle=rgba(col,0.7);ctx.lineWidth=1.6;ctx.beginPath();const tx=o.tail==="right"?x+w-60:x+50;ctx.moveTo(tx,y+h-1);ctx.lineTo(tx+(o.tail==="right"?22:-8),y+h+26);ctx.lineTo(tx+30,y+h-1);ctx.fill();ctx.stroke();
+  lines.forEach((l,i)=>T(ctx,l,x+28,y+20+sz*1.05+i*sz*1.35,{w:700,size:sz,color:o.color||rgba(INK,1)}));return h;}
+
+/* a number card: a title, a big number and a line under it */
+function numCard(ctx,x,y,w,title,num,sub,col,o){o=o||{};glass(ctx,x,y,w,200,18,col,{glow:18,ea:0.7,fill:"rgba(7,12,24,0.92)"});T(ctx,title,x+28,y+46,{w:700,size:24,color:rgba(SOFT,1)});T(ctx,num,x+28,y+140,{w:800,size:88,color:rgba(col,1)});if(sub)T(ctx,sub,x+28,y+180,{w:600,size:18,color:rgba(SOFT,0.95)});
+  if(o.badge)tag(ctx,x+w-28-(tw(ctx,o.badge,16,700)+26),y+40,o.badge,o.badgeCol||GOOD,{size:16});}
+
+/* the version stamp in the sketch's corner */
+function stamp(ctx,x,y,s,col,a,flick){withA(ctx,a*(flick?0.55+0.45*Math.abs(Math.sin(flick*9)):1),()=>{const w=tw(ctx,s,20,500,"mono")+34;glass(ctx,x-w,y-20,w,40,10,col,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.92)"});T(ctx,s,x-w/2,y+7,{f:"mono",w:500,size:20,align:"center",color:rgba(col,1)});});}
+
+/* a small table of rows, for the physical model */
+function table(ctx,x,y,name,cols,rows,o){o=o||{};const cw=o.cw||cols.map(c=>Math.max(tw(ctx,c,16,500,"mono"),...rows.map(r=>tw(ctx,r[cols.indexOf(c)],16,500,"mono")))+30),w=cw.reduce((a,b)=>a+b,0),rh=40,h=46+rh*(rows.length+1);
+  glass(ctx,x,y,w,h,12,o.col||SK,{glow:14,ea:0.7,fill:"rgba(7,12,24,0.94)"});T(ctx,name,x+16,y+31,{f:"mono",w:500,size:18,color:rgba(o.col||SK,1)});
+  let cx=x;cols.forEach((c,i)=>{T(ctx,c,cx+15,y+46+27,{f:"mono",w:500,size:16,color:rgba(REF,1)});rows.forEach((r,j)=>withA(ctx,o.rowA?o.rowA(j):1,()=>T(ctx,r[i],cx+15,y+46+rh*(j+1)+27,{f:"mono",w:500,size:16,color:rgba(INK,0.9)})));cx+=cw[i];});
+  ctx.strokeStyle="rgba(170,200,245,0.18)";ctx.lineWidth=1;for(let j=0;j<=rows.length+1;j++){ctx.beginPath();ctx.moveTo(x,y+46+rh*j);ctx.lineTo(x+w,y+46+rh*j);ctx.stroke();}
+  return{w,h};}
+
+/* a strip of film: one frame per change of status, each with its date */
+function filmStrip(ctx,x,y,frames,a,snap,t){withA(ctx,a,()=>{const fw=176,fh=92,w=frames.length*fw+24;ctx.fillStyle="rgba(14,18,28,0.95)";rr(ctx,x,y,w,fh+40,8);ctx.fill();ctx.strokeStyle="rgba(170,200,245,0.3)";ctx.lineWidth=1.4;rr(ctx,x,y,w,fh+40,8);ctx.stroke();
+  for(let k=0;k<w/22-1;k++){ctx.fillStyle="rgba(200,215,240,0.18)";rr(ctx,x+12+k*22,y+6,11,8,2);ctx.fill();rr(ctx,x+12+k*22,y+fh+26,11,8,2);ctx.fill();}
+  frames.forEach((f,i)=>withA(ctx,f.a==null?1:f.a,()=>{const fx=x+12+i*fw,fy=y+20,c=f.col||SK;ctx.fillStyle="rgba(8,14,30,0.95)";rr(ctx,fx+4,fy,fw-8,fh,6);ctx.fill();ctx.strokeStyle=rgba(c,f.hi?1:0.6);ctx.lineWidth=f.hi?2.6:1.4;rr(ctx,fx+4,fy,fw-8,fh,6);ctx.stroke();
+    if(f.hi)glow(ctx,fx+fw/2,fy+fh/2,90,c,0.35*f.hi);T(ctx,f.s,fx+fw/2,fy+40,{w:700,size:20,align:"center",color:rgba(c,1)});T(ctx,f.d,fx+fw/2,fy+70,{f:"mono",w:500,size:16,align:"center",color:rgba(SOFT,1)});}));});}
+
+/* a small calendar card with one marked date */
+function calCard(ctx,x,y,title,date,col,a,hi){withA(ctx,a,()=>{glass(ctx,x,y,300,112,14,col,{glow:12+14*(hi||0),ea:0.7,fill:"rgba(7,12,24,0.94)"});ctx.fillStyle=rgba(col,0.9);rr(ctx,x,y,300,30,14);ctx.fill();ctx.fillStyle="rgba(7,12,24,0.94)";ctx.fillRect(x,y+22,300,10);
+  T(ctx,title,x+150,y+22,{w:800,size:16,align:"center",color:"#0a1020"});T(ctx,date,x+150,y+80,{w:800,size:28,align:"center",color:rgba(col,1)});T(ctx,"census date",x+150,y+104,{w:600,size:14,align:"center",color:rgba(SOFT,1)});});}
 
 /* When things go wrong: the people. Characters drawn in code, in the first film's design language:
    rounded forms, soft light from the upper left, a luminous outline, and a few expressive lines for faces.
@@ -811,11 +929,10 @@ function personBack(ctx,id,x,y,s,o){o=o||{};const P=PEOPLE[id],k=s*P.build.h,sw=
 
 /* ===== When things go wrong · Silent change: this episode's components =====
    Drawn with the first film's style (glass, luminous edges, one typeface) and the series' characters (people.js). */
-const SCENES=[];const cue=(sc,id)=>sc.cues[id];
-function scene(id,draw){const n=NARR[id];SCENES.push({id,name:n.name,lead:n.lead,tail:n.tail,vo:n.vo,draw});}
+// SCENES, cue(), scene(), the sketch's ink (SK) and the diagram components (entBox, ent, relLine, diagram) come from A Sharper Sketch's sketch3.js
 const fout=(t,a,d)=>1-sstep(a,a+(d||0.6),t);
 const brief=(t,a,d)=>fin(t,a,0.4)*fout(t,a+(d||3));
-const AMBER=[255,190,90],SK=[150,225,255],GOLDC=LAYER.gold;
+const AMBER=[255,190,90],GOLDC=LAYER.gold;
 function camKeys(ctx,S,keys,t){const cam=camAt(keys,t);setCam(ctx,S,cam);return cam;}
 // the background of the platform world, or of a room at dawn (warm light from a window on the left)
 function world(ctx,S){setScreen(ctx,S);bg2(ctx);}
@@ -841,8 +958,12 @@ function msg(ctx,x,y,w,who,text,c,a,typing){if(a<=0.01&&!typing)return;const lin
 const DB={canvas:"#f5f6f8",card:"#ffffff",line:"#d8dee4",text:"#11171c",muted:"#5f7281",blue:"#077a9d",green:"#277c43",greenBg:"#e3f4ea",red:"#c82d4c",warn:"#8a5300",warnBg:"#fcefd9",warnLine:"#f0a33a",track:"#e8ecf0"};
 function dbCard(ctx,x,y,w,h){ctx.save();ctx.shadowColor="rgba(0,0,0,0.18)";ctx.shadowBlur=10;ctx.shadowOffsetY=2;ctx.fillStyle=DB.card;rr(ctx,x,y,w,h,8);ctx.fill();ctx.restore();ctx.strokeStyle=DB.line;ctx.lineWidth=1.2;rr(ctx,x,y,w,h,8);ctx.stroke();}
 // a counter widget: title, source table, the value, a comparison, a capacity bar and seats; s scales the type for small copies
-function kpiCard(ctx,x,y,w,h,o){o=o||{};const s=o.s||1,v=o.value==null?94:o.value,pad=20*s;dbCard(ctx,x,y,w,h);
-  T(ctx,o.title||"Class fill · Data Science 101",x+pad,y+pad+16*s,{w:700,size:19*s,color:DB.text});T(ctx,o.source||"fct_class_fill",x+pad,y+pad+40*s,{w:500,size:14*s,f:"mono",color:DB.muted});
+function kpiCard(ctx,x,y,w,h,o){o=o||{};const s=o.s||1,v=o.value==null?94:o.value,pad=20*s;
+  if(h/s<250){dbCard(ctx,x,y,w,h);const bw=w-2*pad,ty=y+pad+14*s,vy=ty+58*s,by=y+h-pad-26*s;T(ctx,o.title||"Places filled · Data Science 101",x+pad,ty,{w:700,size:16*s,color:DB.text});
+    T(ctx,(o.shown||v)+"%",x+pad,vy,{w:700,size:52*s,color:o.ghost?DB.red:DB.text});ctx.fillStyle=DB.track;rr(ctx,x+pad,by,bw,10*s,5*s);ctx.fill();ctx.fillStyle=o.ghost?DB.red:DB.blue;rr(ctx,x+pad,by,bw*Math.min(1,v/100),10*s,5*s);ctx.fill();
+    T(ctx,Math.round(v*1.2)+" of 120 places",x+pad,y+h-pad,{w:500,size:13*s,color:DB.muted});return;}
+  dbCard(ctx,x,y,w,h);
+  T(ctx,o.title||"Places filled · Data Science 101",x+pad,y+pad+16*s,{w:700,size:19*s,color:DB.text});T(ctx,o.source||"fct_offering_fill",x+pad,y+pad+40*s,{w:500,size:14*s,f:"mono",color:DB.muted});
   T(ctx,(o.shown||v)+"%",x+pad,y+pad+122*s,{w:700,size:78*s,color:o.ghost?DB.red:DB.text});
   if(o.delta)T(ctx,o.delta,x+pad+tw(ctx,(o.shown||v)+"%",78*s,700)+16*s,y+pad+118*s,{w:700,size:17*s,color:o.deltaCol||DB.green});
   const by=y+h-pad-44*s,bw=w-2*pad,sy0=y+pad+150*s,sy1=by-30*s;
@@ -854,7 +975,7 @@ function kpiCard(ctx,x,y,w,h,o){o=o||{};const s=o.s||1,v=o.value==null?94:o.valu
   ctx.fillStyle=o.ghost?DB.red:DB.blue;rr(ctx,x+pad,by,bw*Math.min(1,v/100),12*s,6*s);ctx.fill();
   if(v>100){ctx.fillStyle=DB.red;rr(ctx,x+pad+bw-4*s,by-6*s,8*s,24*s,3*s);ctx.fill();}
   ctx.strokeStyle=DB.text;ctx.lineWidth=2*s;ctx.beginPath();ctx.moveTo(x+pad+bw,by-8*s);ctx.lineTo(x+pad+bw,by+20*s);ctx.stroke();
-  T(ctx,o.foot||Math.round(v*1.2)+" of 120 seats",x+pad,y+h-pad,{w:500,size:15*s,color:DB.muted});T(ctx,"capacity",x+pad+bw,y+h-pad,{w:500,size:13*s,align:"right",color:DB.muted});}
+  T(ctx,o.foot||Math.round(v*1.2)+" of 120 places",x+pad,y+h-pad,{w:500,size:15*s,color:DB.muted});T(ctx,"capacity",x+pad+bw,y+h-pad,{w:500,size:13*s,align:"right",color:DB.muted});}
 // a small copy of the counter, for the platform views: the data product the dashboard shows, with a gold edge for the gold layer
 function kpiMini(ctx,x,y,w,h,v,a){withA(ctx,a==null?1:a,()=>{ctx.save();ctx.shadowColor=rgba(GOLDC,0.7);ctx.shadowBlur=18;ctx.strokeStyle=rgba(GOLDC,0.9);ctx.lineWidth=2.5;rr(ctx,x-4,y-4,w+8,h+8,11);ctx.stroke();ctx.restore();
   kpiCard(ctx,x,y,w,h,{s:w/300,value:v||94});});}
@@ -870,9 +991,9 @@ function dashboard(ctx,x,y,w,h,o){o=o||{};
   cy+=ba>0.01?72:0;const gh=y+h-cy-20,kw=w*0.46;
   kpiCard(ctx,x+20,cy,kw,gh,{value:o.num?parseInt(o.num):94,delta:o.delta||"▲ 2 pts vs last week",foot:o.foot});
   if(o.ghost>0)withA(ctx,o.ghost,()=>{ctx.save();ctx.fillStyle="rgba(255,255,255,0.92)";rr(ctx,x+20,cy,kw,gh,8);ctx.fill();ctx.setLineDash([10,8]);ctx.strokeStyle=DB.red;ctx.lineWidth=3;rr(ctx,x+20,cy,kw,gh,8);ctx.stroke();ctx.restore();
-    kpiCard(ctx,x+20,cy,kw,gh,{value:108,ghost:1,delta:"if the waitlist had counted",deltaCol:DB.red,foot:"130 of 120 seats",trend:[71,74,76,79,81,83,85,86,88,90,91,92,94,108]});});
+    kpiCard(ctx,x+20,cy,kw,gh,{value:108,ghost:1,delta:"if the waitlist had counted",deltaCol:DB.red,foot:"130 of 120 places",trend:[71,74,76,79,81,83,85,86,88,90,91,92,94,108]});});
   // a bar chart of every first-year class: Data Science 101 highlighted
-  const bx=x+40+kw,bwid=w-60-kw;dbCard(ctx,bx,cy,bwid,gh);T(ctx,"Class fill by class",bx+20,cy+36,{w:700,size:19,color:DB.text});T(ctx,"first year · census date tomorrow",bx+20,cy+60,{w:500,size:14,color:DB.muted});
+  const bx=x+40+kw,bwid=w-60-kw;dbCard(ctx,bx,cy,bwid,gh);T(ctx,"Places filled by unit",bx+20,cy+36,{w:700,size:19,color:DB.text});T(ctx,"first-year units · semester 2",bx+20,cy+60,{w:500,size:14,color:DB.muted});
   const rows=[["Data Science 101",parseInt(o.num||"94")],["Statistics 110",88],["Programming 100",76],["Data Ethics 120",64]],lx=bx+20,bw2=bwid-190,rh=Math.min(56,(gh-100)/rows.length);
   rows.forEach(([n,v],i)=>{const yy=cy+90+i*rh;T(ctx,n,lx,yy+14,{w:i?500:700,size:15,color:DB.text});ctx.fillStyle=DB.track;rr(ctx,lx,yy+22,bw2,14,4);ctx.fill();
     ctx.fillStyle=i?"#8bcae7":DB.blue;rr(ctx,lx,yy+22,bw2*Math.min(1,v/100),14,4);ctx.fill();T(ctx,v+"%",lx+bw2+14,yy+34,{w:700,size:16,color:DB.text});});
@@ -886,7 +1007,7 @@ function callTile(ctx,id,x,y,w,h,o){o=o||{};const P=PEOPLE[id];glass(ctx,x,y,w,h
 function tray(ctx,x,y,w,n,t,a){withA(ctx,a,()=>{glass(ctx,x,y,w,86,16,BAD,{glow:12,ea:0.6,fill:"rgba(40,10,14,0.55)"});T(ctx,"kept aside · "+n+" rows",x+18,y+28,{w:700,size:19,color:"rgba(255,180,170,1)"});
   for(let i=0;i<Math.min(n,15);i++){const bx=x+18+i*((w-36)/15),by=y+42+Math.sin(t*1.3+i)*2;ctx.fillStyle=rgba(AMBER,0.75);rr(ctx,bx,by,(w-36)/15-6,26,5);ctx.fill();}});}
 // the lineage, as a row of steps: each step can light up as the red thread reaches it
-const LIN=[["exposure","dashboard"],["fct_class_fill","data product"],["int_class_enrolments","joins enrolments to classes"],["stg_enrolments","staging · tested"],["bronze.enrolments","as it arrived"]];
+const LIN=[["exposure","dashboard"],["fct_offering_fill","data product"],["int_offering_enrolments","joins enrolments to units"],["stg_enrolments","staging · tested"],["bronze.enrolments","as it arrived"]];
 function lineage(ctx,x0,y,dx,o){o=o||{};const pts=LIN.map((_,i)=>[x0-i*dx,y]);
   ctx.strokeStyle="rgba(170,200,245,0.35)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);pts.forEach(p=>ctx.lineTo(p[0],p[1]));ctx.stroke();
   // the red thread, moving back along the lineage one step at a time
@@ -895,19 +1016,17 @@ function lineage(ctx,x0,y,dx,o){o=o||{};const pts=LIN.map((_,i)=>[x0-i*dx,y]);
   pts.forEach((p,i)=>{const [n,sub]=LIN[i],bad=i===3&&o.bad,on=o.k>=i-0.05,c=bad?BAD:i===4?LAYER.bronze:i===0?GOLDC:[170,205,255];const w=Math.max(tw(ctx,n,22,700,"mono"),tw(ctx,sub,17,500))+44;
     glass(ctx,p[0]-w/2,y-48,w,96,18,c,{glow:on?22:8,ea:on?0.95:0.45,fill:"rgba(8,14,28,0.92)"});T(ctx,n,p[0],y-6,{w:700,size:22,f:"mono",align:"center"});T(ctx,sub,p[0],y+26,{w:500,size:17,align:"center",color:rgba(SOFT,0.95)});
     if(i===3)gate(ctx,p[0],y-110,70,bad?BAD:GOOD,"tests");});return pts;}
-// the conceptual sketch: student, enrolment and class, with the enrolment's statuses
-function sketch(ctx,x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.scale(s,s);
-  const box=(bx,by,name,sub)=>{glass(ctx,bx-110,by-44,220,88,16,SK,{glow:14,ea:0.8,fill:"rgba(10,20,40,0.9)"});T(ctx,name,bx,by+(sub?-2:9),{w:800,size:26,align:"center"});if(sub)T(ctx,sub,bx,by+26,{w:500,size:16,align:"center",color:rgba(SOFT,0.95)});};
-  ctx.strokeStyle=rgba(SK,0.7);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-230,0);ctx.lineTo(-110,0);ctx.moveTo(110,0);ctx.lineTo(230,0);ctx.stroke();
-  box(-340,0,"Student");box(0,0,"Enrolment","status · date");box(340,0,"Class","Data Science 101");
-  const st=[["enrolled","holds a seat",GOOD,1],["withdrawn","left before census",SOFT,1],["waitlisted","waiting for a seat · not enrolled",AMBER,o.newA||0]];
-  st.forEach(([n,m,c,a],i)=>withA(ctx,a,()=>{const yy=96+i*62;ctx.strokeStyle=rgba(SK,0.45);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,44);ctx.lineTo(0,yy-2);ctx.stroke();
-    glass(ctx,-150,yy-24,300,50,14,c,{glow:i===2?14+10*(o.glowNew||0):8,ea:0.8,fill:"rgba(8,14,28,0.92)"});T(ctx,n,-128,yy+9,{w:700,size:20,f:"mono"});T(ctx,m,168,yy+8,{w:500,size:17,color:rgba(c,0.95)});}));
-  ctx.restore();}
+// the sharper conceptual model from A Sharper Sketch, drawn with that film's components: enrolment status is its own entity,
+// "Status change", with a date, and it gains the new status. newA reveals "waitlisted"; hi lights the Status change box.
+function sharperSketch(ctx,o){o=o||{};const E={};Object.keys(L3).forEach(k=>{E[k]={x:L3[k][0],y:L3[k][1],name:NAME[k],s:1,a:o.a==null?1:o.a};});
+  E.Offering.sub="census date";E.Unit.sub="Data Science 101";E.Class.sub="Tue 9 am tutorial";E.Status.sub="status · date";
+  E.Status.attrs=[["enrolled",""],["withdrawn",""],["waitlisted",""]];E.Status.attrA=(2+(o.newA||0))/3;E.Status.hi=o.hi||0;E.Status.hiCol=AMBER;
+  const B=diagram(ctx,E,L3R.map(r=>r.concat([{}])));const b=B.Status,yy=b.y-b.h/2+80+28+2*30;
+  withA(ctx,o.newA||0,()=>{glow(ctx,b.x,yy-6,80,AMBER,0.35*(o.glowNew||1));tag(ctx,b.x+b.w/2+80,yy-6,"new",AMBER,{align:"center",size:18});});return B;}
 // the data contract for enrolments: what arrives, what's allowed and what it means, how fresh, and an owner in each corner
 function contract(ctx,x,y,w,h,o){o=o||{};const ver=o.ver||"1.0";glass(ctx,x,y,w,h,24,[236,243,255],{glow:24+10*(o.glow||0),ea:0.9,fill:"rgba(10,16,32,0.95)"});
   T(ctx,"Data contract · enrolments",x+36,y+60,{w:800,size:34});stampV(ctx,x+w-40,y+50,"v"+ver,o.verFlash||0);
-  const rows=[["Fields","student, class, status, date"],["Statuses","enrolled · withdrawn · waitlisted"+(o.deferred?" · deferred":"")],["Meaning","enrolled = holds a seat on census date"],["Freshness","by 06:00 every day"]];
+  const rows=[["Fields","student, offering, status, date"],["Statuses","enrolled · withdrawn · waitlisted"+(o.deferred?" · deferred":"")],["Meaning","enrolled = holds a place on census date"],["Freshness","by 06:00 every day"]];
   rows.forEach(([k,v],i)=>withA(ctx,o.rows==null?1:clamp(o.rows*rows.length-i,0,1),()=>{const yy=y+118+i*66;T(ctx,k,x+36,yy+24,{w:700,size:21,color:rgba(SOFT,0.95)});T(ctx,v,x+196,yy+24,{w:600,size:25,f:k==="Statuses"?"mono":undefined});}));
   const C=[["mei",x+26,y+h-108,"produces"],["ben",x+w/2+8,y+h-108,"produces"],["ana",x+26,y+h-58,"uses"],["sam",x+w/2+8,y+h-58,"uses"]];
   ctx.strokeStyle="rgba(170,200,245,0.18)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+26,y+h-136);ctx.lineTo(x+w-26,y+h-136);ctx.stroke();
@@ -916,7 +1035,7 @@ function contract(ctx,x,y,w,h,o){o=o||{};const ver=o.ver||"1.0";glass(ctx,x,y,w,
 function stampV(ctx,x,y,s,flash){const w=tw(ctx,s,22,800,"mono")+26;glass(ctx,x-w,y-22,w,40,12,GOOD,{glow:8+20*flash,ea:0.8,fill:"rgba(10,30,20,0.8)"});T(ctx,s,x-w/2,y+6,{w:800,size:22,f:"mono",align:"center",color:"rgba(200,255,220,1)"});}
 // the platform in one row: the student system, the contract at the door, bronze, the dbt test gate, silver, gold and the data product
 function platformRow(ctx,t,o){o=o||{};const y=o.y||470;
-  sysCard(ctx,70,y-60,290,120,"Student system","enrolment events",APP.sis.c);
+  sysCard(ctx,70,y-60,290,120,"Student system","events and files",APP.sis.c);
   const lanes=[[360,y],[520,y]],d=o.door||0;
   lane(ctx,[{x:360,y},{x:560,y}],APP.sis.c,0.8);
   if(d>0)withA(ctx,d,()=>{glass(ctx,440,y-92,84,184,16,[236,243,255],{glow:14+8*Math.sin(t*1.5),ea:0.8,fill:"rgba(12,18,34,0.9)"});T(ctx,"contract",482,y+118,{w:700,size:16,align:"center",color:rgba(INK,0.9)});
@@ -945,9 +1064,10 @@ scene("banner",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");
   clockChip(ctx,S,"7:58","the morning before census date",fin(t,0.3));
   setScreen(ctx,S);withA(ctx,fin(t,c("ana")+0.6),()=>{glass(ctx,1560,52,296,64,18,BIZ,{glow:10,ea:0.6,fill:"rgba(8,14,28,0.85)"});T(ctx,"9:00 · confirm classes",1586,94,{w:700,size:22});});
   // the title, over a darker frame
-  const tA=fin(t,B+0.1,0.9);if(tA>0){setScreen(ctx,S);ctx.fillStyle="rgba(3,5,11,"+(0.93*tA)+")";ctx.fillRect(0,0,W,H);
+  const tA=fin(t,B+0.1,0.9);if(tA>0){setScreen(ctx,S);ctx.fillStyle="rgba(3,5,11,"+tA+")";ctx.fillRect(0,0,W,H);
     withA(ctx,tA,()=>{glow(ctx,960,500,420,SK,0.12);T(ctx,"WHEN THINGS GO WRONG",960,450,{w:800,size:26,align:"center",color:rgba(SK,0.95)});T(ctx,"Silent change",960,540,{w:800,size:88,align:"center"});
-      T(ctx,"why a change needs both sides",960,600,{w:600,size:26,align:"center",color:rgba(SOFT,0.95)});});}});
+      T(ctx,"why a change needs both sides",960,600,{w:600,size:26,align:"center",color:rgba(SOFT,0.95)});});}
+  if(t<1.4){setScreen(ctx,S);ctx.fillStyle="rgba(0,0,0,"+(1-ease(t/1.4))+")";ctx.fillRect(0,0,W,H);}});
 
 /* ---------- 2. Six hours earlier ---------- */
 scene("night",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
@@ -1004,7 +1124,7 @@ scene("bronze",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
   lineWorld(ctx,t,3+ease(clamp((t-0.2)/1.4,0,1)),1);
   // the rows in bronze, exactly as they arrived
   const a=fin(t,c("arrived")+0.6,0.8);withA(ctx,a,()=>{const x=0,y=40,w=548;glass(ctx,x,y,w,330,20,LAYER.bronze,{glow:16,ea:0.8,fill:"rgba(20,12,6,0.9)"});
-    T(ctx,"bronze.enrolments",x+24,y+40,{w:700,size:20,f:"mono",color:rgba(LAYER.bronze,1)});["student","class","status"].forEach((h,i)=>T(ctx,h,x+24+i*170,y+78,{w:700,size:16,color:rgba(SOFT,0.9)}));
+    T(ctx,"bronze.enrolments",x+24,y+40,{w:700,size:20,f:"mono",color:rgba(LAYER.bronze,1)});["student","unit","status"].forEach((h,i)=>T(ctx,h,x+24+i*170,y+78,{w:700,size:16,color:rgba(SOFT,0.9)}));
     ROWS.forEach((r,i)=>{const yy=y+112+i*36,wl=r[2]==="WAITLISTED",hi=wl?fin(t,c("new")+0.3+i*0.1):0;if(hi>0){ctx.fillStyle=rgba(AMBER,0.16*hi);rr(ctx,x+12,yy-24,w-24,32,8);ctx.fill();}
       r.forEach((v,j)=>T(ctx,v,x+24+j*170,yy,{w:600,size:19,f:"mono",color:wl&&j===2&&hi>0?rgba(AMBER,1):rgba(INK,0.9)}));});});
   withA(ctx,fin(t,c("new")+0.8),()=>tag(ctx,274,408,"15 in Data Science 101: WAITLISTED",AMBER,{align:"center",size:21}));
@@ -1020,7 +1140,9 @@ function campus(ctx,t,sc,c){ // the flashback: two notices, each on its own path
   ["School of Computing","School of Business","School of Health"].forEach((s,i)=>bld(900,190+i*110,300,70,s,BIZ));bld(900,700,300,70,"release notes",TECH);
   glass(ctx,1440,340,380,300,24,[170,205,255],{glow:14,ea:0.5,fill:"rgba(8,14,28,0.9)"});T(ctx,"Data platform",1630,390,{w:800,size:24,align:"center"});
   kpiMini(ctx,1520,420,220,139,94);T(ctx,"and the people who use its numbers",1630,600,{w:500,size:16,align:"center",color:rgba(SOFT,0.95)});
-  const e1=path([{x:450,y:300},{x:600,y:300},{x:750,y:190},{x:750,y:410}],BIZ,pA),e2=path([{x:450,y:700},{x:750,y:700}],TECH,pB);
+  const branch=y=>{const P=[];for(let i=0;i<=14;i++){const u=i/14,a=1-u;P.push({x:a*a*a*560+3*a*a*u*660+3*a*u*u*650+u*u*u*750,y:a*a*a*300+3*a*a*u*300+3*a*u*u*y+u*u*u*y});}return P;};
+  path([{x:450,y:300},{x:560,y:300}],BIZ,clamp(pA*2.2,0,1));const pb=clamp(pA*2.2-1.2,0,1);let e1=null;[190,300,410].forEach(y=>{const e=path(branch(y),BIZ,pb);if(y===300)e1=e;});if(pA<0.45)e1={x:lerp(450,560,clamp(pA*2.2,0,1)),y:300};
+  const e2=path([{x:450,y:700},{x:750,y:700}],TECH,pB);
   if(pA>0.05&&pA<0.98){ctx.fillStyle=rgba(BIZ,1);rr(ctx,e1.x-14,e1.y-10,28,20,3);ctx.fill();}
   if(pB>0.05&&pB<0.98){ctx.fillStyle=rgba(TECH,1);rr(ctx,e2.x-10,e2.y-13,20,26,3);ctx.fill();}
   // the paths that never were: from each audience towards the platform, fading out halfway
@@ -1050,10 +1172,11 @@ scene("halves",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
         glass(ctx,820,220,940,300,24,BIZ,{glow:16,ea:0.8,fill:"rgba(12,16,30,0.92)"});T(ctx,"Is a waitlisted student enrolled?",860,290,{w:800,size:34});T(ctx,"a business question",860,334,{w:600,size:20,color:rgba(SOFT,0.95)});
         withA(ctx,fin(t,c("decides")+0.3),()=>{T(ctx,"No.",860,410,{w:800,size:40,color:rgba(BIZ,1)});T(ctx,"Enrolled means holding a seat on census date.",940,410,{w:600,size:26});T(ctx,"A waitlisted student doesn't hold one yet.",940,452,{w:500,size:22,color:rgba(SOFT,0.95)});});});});
     if(sk>0){setScreen(ctx,S);withA(ctx,sk,()=>{bg2(ctx);camKeys(ctx,S,[[c("sketch")-0.4,960,470,0.98],[sc.dur+1,960,470,1.06]],t);
-      T(ctx,"The sketch · the conceptual model",960,170,{w:700,size:22,align:"center",color:rgba(SK,0.95)});sketch(ctx,960,360,1.25,{newA:fin(t,c("sketch")+0.9,1.0),glowNew:0.5+0.5*Math.sin(t*1.6)});});}}});
+      T(ctx,"The conceptual model · from A Sharper Sketch",960,170,{w:700,size:22,align:"center",color:rgba(SK,0.95)});
+      sharperSketch(ctx,{newA:fin(t,c("sketch")+0.9,1.0),glowNew:0.6+0.4*Math.sin(t*1.6),hi:0.5+0.5*fin(t,c("sketch")+0.4)});});}}});
 
 /* ---------- 7. The fix ---------- */
-const CODE=[["models/staging/_stg.yml",1],["- name: status",0],["  tests:",0],["    - accepted_values:",0],["        values: [enrolled, withdrawn,",0],["                 waitlisted]",2],["",0],["models/marts/fct_class_fill.sql",1],["count(*) filter (",0],["  where status = 'enrolled')",0],["-- waitlisted doesn't hold a seat",3]];
+const CODE=[["models/staging/_stg.yml",1],["- name: status",0],["  tests:",0],["    - accepted_values:",0],["        values: [enrolled, withdrawn,",0],["                 waitlisted]",2],["",0],["models/marts/fct_offering_fill.sql",1],["count(*) filter (",0],["  where status = 'enrolled')",0],["-- waitlisted doesn't hold a seat",3]];
 scene("fix",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
   world(ctx,S);camKeys(ctx,S,[[0,960,540,1.06],[sc.dur+1,980,530,1.0]],t);
   glass(ctx,120,140,1000,640,24,DBT,{glow:16,ea:0.7,fill:"rgba(10,12,22,0.94)"});chip(ctx,200,196,"dbt","one rule","",{edge:DBT});
@@ -1061,7 +1184,7 @@ scene("fix",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
     withA(ctx,a,()=>T(ctx,(kind===2?"+ ":"  ")+s,160,y,{w:500,size:24,f:"mono",color:kind===1?rgba(SOFT,0.9):kind===2?rgba(GOOD,1):kind===3?rgba(AMBER,0.95):rgba(INK,0.95)}));});
   withA(ctx,fin(t,c("review")+0.2),()=>{glass(ctx,1200,150,600,150,22,GOOD,{glow:14,ea:0.8,fill:"rgba(10,26,20,0.9)"});led(ctx,1230,212,16,16,GOOD);T(ctx,"Review · approved",1264,226,{w:800,size:28});T(ctx,"by a colleague, like any code",1264,262,{w:500,size:19,color:rgba(SOFT,0.95)});});
   withA(ctx,fin(t,c("review")+1.8),()=>{glass(ctx,1200,330,600,300,22,[170,205,255],{glow:12,ea:0.6,fill:"rgba(8,14,28,0.92)"});T(ctx,"CI · tests on what changed",1230,378,{w:800,size:24});
-    ["stg_enrolments","int_class_enrolments","fct_class_fill"].forEach((m,i)=>{const a=fin(t,c("review")+2.4+i*0.5);withA(ctx,a,()=>{led(ctx,1232,424+i*58,14,14,GOOD);T(ctx,m,1264,438+i*58,{w:600,size:22,f:"mono"});T(ctx,"pass",1770,438+i*58,{w:700,size:20,align:"right",color:rgba(GOOD,1)});});});});});
+    ["stg_enrolments","int_offering_enrolments","fct_offering_fill"].forEach((m,i)=>{const a=fin(t,c("review")+2.4+i*0.5);withA(ctx,a,()=>{led(ctx,1232,424+i*58,14,14,GOOD);T(ctx,m,1264,438+i*58,{w:600,size:22,f:"mono"});T(ctx,"pass",1770,438+i*58,{w:700,size:20,align:"right",color:rgba(GOOD,1)});});});});});
 
 /* ---------- 8. Recover ---------- */
 scene("recover",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);

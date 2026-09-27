@@ -1,7 +1,7 @@
 // When things go wrong · 1. Silent change. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line, a natural breath between sentences. The few longer stops are in breath.js.
 const NARR={
-"banner":{"name":"The banner","lead":1.6,"tail":1.0,"vo":[
+"banner":{"name":"Yesterday's numbers","lead":1.6,"tail":1.0,"vo":[
  {"id":"morning","gap":0.8,"text":"It's 7:58 on the morning before census date."},
  {"id":"ana","gap":0.8,"text":"Ana, the Head of School, has a meeting at nine to confirm which classes will run."},
  {"id":"note","gap":0.8,"text":"Her dashboard shows yesterday's numbers, with a note: last good data, as of 11:02 last night."},

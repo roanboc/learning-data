@@ -23,181 +23,181 @@ Ana messages Sam: are these numbers safe to use?
 Six hours earlier, at 2:40 in the morning, the nightly build begins.
 
 7
-00:00:35,597 --> 00:00:40,348
-All day, the student system has sent every enrolment to the platform, as events.
+00:00:35,597 --> 00:00:43,852
+Enrolment changes reach the platform all day, as events or in files. Once a night, dbt builds the numbers from them.
 
 8
-00:00:41,048 --> 00:00:48,244
+00:00:44,552 --> 00:00:51,748
 Before anything is built on them, dbt tests them. One test checks that every enrolment has a status it knows.
 
 9
-00:00:49,444 --> 00:00:51,880
+00:00:52,948 --> 00:00:55,384
 Tonight, some have a status it has never seen.
 
 10
-00:00:53,180 --> 00:01:00,187
+00:00:56,684 --> 00:01:03,691
 So the build stops there. Everything downstream is skipped, and the dashboard keeps the last good numbers, with that note.
 
 11
-00:01:00,887 --> 00:01:06,587
+00:01:04,391 --> 00:01:10,091
 An alert is filed for the morning. Nothing wrong reached anyone, so nobody needs to be woken.
 
 12
-00:01:07,287 --> 00:01:09,898
+00:01:10,791 --> 00:01:13,402
 A good platform fails loudly, and safely.
 
 13
-00:01:13,198 --> 00:01:18,642
+00:01:16,702 --> 00:01:22,146
 At 7:59, Sam, the data engineer on call, is already reading the alert.
 
 14
-00:01:19,342 --> 00:01:26,381
+00:01:22,846 --> 00:01:29,885
 Sam replies: yesterday's numbers are safe. I'm checking today's, and I'll be back to you by 8:45.
 
 15
-00:01:27,081 --> 00:01:31,447
+00:01:30,585 --> 00:01:34,951
 Say what you know, and what you don't. That's how trust survives a bad morning.
 
 16
-00:01:36,047 --> 00:01:39,787
+00:01:39,551 --> 00:01:43,291
 Every number on the dashboard has a lineage: the steps that built it.
 
 17
-00:01:40,487 --> 00:01:43,353
+00:01:43,991 --> 00:01:46,857
 Sam follows it backwards, one step at a time.
 
 18
-00:01:44,553 --> 00:01:51,070
-From the dashboard, to the data product behind it. Then to the model that joins enrolments to classes.
+00:01:48,057 --> 00:01:54,772
+From the dashboard, to the data product behind it. Then to the model that joins enrolments to their units.
 
 19
-00:01:52,270 --> 00:01:58,555
+00:01:55,972 --> 00:02:02,257
 Then to staging, where the test failed. The rows that failed it were kept aside, so they can be looked at.
 
 20
-00:02:01,055 --> 00:02:05,681
+00:02:04,757 --> 00:02:09,383
 Upstream, in bronze, the rows are exactly as the student system sent them.
 
 21
-00:02:06,381 --> 00:02:11,251
+00:02:10,083 --> 00:02:14,953
 Fifteen enrolments in Data Science 101 have a new status: waitlisted.
 
 22
-00:02:12,551 --> 00:02:19,324
+00:02:16,253 --> 00:02:23,026
 Bronze keeps what arrived, even what nothing downstream understands yet. Nothing was lost. Something was new.
 
 23
-00:02:21,824 --> 00:02:25,926
+00:02:25,526 --> 00:02:29,628
 Sam asks the student system team: did enrolments change last night?
 
 24
-00:02:26,626 --> 00:02:30,856
+00:02:30,328 --> 00:02:34,558
 Ben replies: yes, waitlists went live. It's in our release notes.
 
 25
-00:02:31,556 --> 00:02:38,532
+00:02:35,258 --> 00:02:42,234
 Then Sam calls the registrar's office. Mei says: yes, we introduced waitlists, and we emailed every School.
 
 26
-00:02:39,232 --> 00:02:41,700
+00:02:42,934 --> 00:02:45,402
 Two weeks earlier, both had announced the change.
 
 27
-00:02:42,400 --> 00:02:48,015
+00:02:46,102 --> 00:02:51,717
 The registrar's office emailed every School. The student system team published release notes.
 
 28
-00:02:48,715 --> 00:02:54,971
+00:02:52,417 --> 00:02:58,673
 Each notice reached its own people. Neither reached the platform, or the people who rely on its numbers.
 
 29
-00:02:56,271 --> 00:03:00,914
+00:02:59,973 --> 00:03:04,616
 Ben knew what changed. Mei knew what it meant. Neither knew the numbers depended on it.
 
 30
-00:03:02,414 --> 00:03:07,468
+00:03:06,116 --> 00:03:11,170
 So, is a waitlisted student enrolled? Sam doesn't guess. It's a business question.
 
 31
-00:03:08,168 --> 00:03:15,556
+00:03:11,870 --> 00:03:19,258
 Mei decides: no. Enrolled means holding a seat on census date, and a waitlisted student doesn't hold one yet.
 
 32
-00:03:16,256 --> 00:03:19,682
+00:03:19,958 --> 00:03:23,384
 The sketch, our model of what things mean, gains a new status.
 
 33
-00:03:25,182 --> 00:03:32,352
+00:03:28,884 --> 00:03:36,054
 Now the fix is small. In dbt, waitlisted becomes a known status, one that doesn't count as enrolled.
 
 34
-00:03:33,052 --> 00:03:38,333
+00:03:36,754 --> 00:03:42,035
 A colleague reviews it, like any code. Tests run on just what changed, and they pass.
 
 35
-00:03:40,833 --> 00:03:42,357
+00:03:44,535 --> 00:03:46,059
 The skipped models run again.
 
 36
-00:03:43,057 --> 00:03:49,793
+00:03:46,759 --> 00:03:53,495
 Had the waitlist been counted, the dashboard would have shown Data Science 101 at 108% full.
 
 37
-00:03:51,093 --> 00:03:58,762
+00:03:54,795 --> 00:04:02,464
 That's believable. Classes do fill up. Nobody would have questioned it, and Ana might have booked a bigger room for students without a seat.
 
 38
-00:03:59,462 --> 00:04:06,551
+00:04:03,164 --> 00:04:10,253
 Time travel lays last night's table beside this morning's: 94% yesterday, 96% today.
 
 39
-00:04:07,251 --> 00:04:11,998
+00:04:10,953 --> 00:04:15,700
 At 8:40, the note disappears. At nine, Ana confirms the classes.
 
 40
-00:04:15,498 --> 00:04:21,701
+00:04:19,200 --> 00:04:25,403
 Later that week, the four of them meet: Mei and Ben, who produce the data, and Sam and Ana, who use it.
 
 41
-00:04:22,801 --> 00:04:25,157
+00:04:26,503 --> 00:04:28,859
 They agree a data contract for enrolments.
 
 42
-00:04:26,357 --> 00:04:32,178
+00:04:30,059 --> 00:04:35,880
 It lists the fields, the allowed statuses and what each one means, and how fresh the data must be.
 
 43
-00:04:32,878 --> 00:04:38,817
+00:04:36,580 --> 00:04:42,519
 It names an owner on each side, technical and business. Changing it needs both sides to agree.
 
 44
-00:04:40,117 --> 00:04:46,497
+00:04:43,819 --> 00:04:50,199
 And the platform keeps checking it: on every load, at the door, and on every proposed change, before it ships.
 
 45
-00:04:49,797 --> 00:04:53,254
+00:04:53,499 --> 00:04:56,956
 Three weeks later, Ben's team adds another status: deferred.
 
 46
-00:04:53,954 --> 00:04:59,994
+00:04:57,656 --> 00:05:03,696
 In their test environment, before release, the contract check turns amber, and all four owners are told.
 
 47
-00:05:00,694 --> 00:05:07,006
+00:05:04,396 --> 00:05:10,708
 Mei defines what deferred means. Sam's team adds it. The contract becomes version 1.1.
 
 48
-00:05:07,706 --> 00:05:12,789
+00:05:11,408 --> 00:05:16,491
 On Monday, the dashboard simply updates. No note, no alert, and nobody woken.
 
 49
-00:05:15,289 --> 00:05:19,197
+00:05:18,991 --> 00:05:22,899
 Changes will keep coming. That's a university doing its job.
 
 50
-00:05:19,897 --> 00:05:24,843
+00:05:23,599 --> 00:05:28,545
 The platform's job is to make each one visible, to everyone it touches, in time.
 
 51
-00:05:25,543 --> 00:05:27,801
+00:05:29,245 --> 00:05:31,503
 Seen by both sides, before it ships.

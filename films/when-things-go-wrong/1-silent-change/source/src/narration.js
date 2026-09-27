@@ -9,7 +9,7 @@ const NARR={
  {"id":"asks","gap":0.8,"text":"Ana messages Sam: are these numbers safe to use?"}]},
 "night":{"name":"Six hours earlier","lead":0.8,"tail":1.0,"vo":[
  {"id":"earlier","gap":0.8,"text":"Six hours earlier, at 2:40 in the morning, the nightly build begins."},
- {"id":"events","gap":0.8,"text":"All day, the student system has sent every enrolment to the platform, as events."},
+ {"id":"events","gap":0.8,"text":"Enrolment changes reach the platform all day, as events or in files. Once a night, dbt builds the numbers from them."},
  {"id":"test","gap":0.8,"text":"Before anything is built on them, dbt tests them. One test checks that every enrolment has a status it knows."},
  {"id":"unknown","gap":0.8,"text":"Tonight, some have a status it has never seen."},
  {"id":"stops","gap":0.8,"text":"So the build stops there. Everything downstream is skipped, and the dashboard keeps the last good numbers, with that note."},
@@ -22,7 +22,7 @@ const NARR={
 "thread":{"name":"Follow the thread","lead":2.9,"tail":1.0,"vo":[
  {"id":"lineage","gap":0.8,"text":"Every number on the dashboard has a lineage: the steps that built it."},
  {"id":"back","gap":0.8,"text":"Sam follows it backwards, one step at a time."},
- {"id":"steps","gap":0.8,"text":"From the dashboard, to the data product behind it. Then to the model that joins enrolments to classes."},
+ {"id":"steps","gap":0.8,"text":"From the dashboard, to the data product behind it. Then to the model that joins enrolments to their units."},
  {"id":"staging","gap":0.8,"text":"Then to staging, where the test failed. The rows that failed it were kept aside, so they can be looked at."}]},
 "bronze":{"name":"The cause","lead":0.8,"tail":1.0,"vo":[
  {"id":"arrived","gap":0.8,"text":"Upstream, in bronze, the rows are exactly as the student system sent them."},

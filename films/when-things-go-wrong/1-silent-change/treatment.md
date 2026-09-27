@@ -33,7 +33,7 @@ The first film followed a record downstream, from the tap to the decision. This 
 | **6. Recover** | The fix is replayed over the affected nights. Time travel compares the numbers before and after, so nobody has to trust a guess. At 8:40 am the banner is gone, and Ana sends the census report on time. | Backfills, incremental models, Delta versions and time travel, and RESTORE when a table itself is damaged. |
 | **7. The contract** | Later that week, the four of them agree a data contract for enrolments. One card holds the columns and types, the allowed statuses and what each one means, how fresh the data must be, and four owners: technical and business, on the side that produces the data and the side that uses it. Changing the card needs a technical and a business sign-off. The platform checks every load against it at the door, and the student system tests every proposed change against it before release. A new test stays behind, and the team writes a short, blameless review. | What a data contract holds and who signs it. Contracts are versioned, and validated constantly: on every load, and on every change before it ships. No blame. |
 | **8. Three weeks later** | Ben's team proposes another status, `DEFERRED`. Before it ships, the contract check fails in their test environment, and all four owners are told at once. Mei defines what it means, Sam's team adds it to the platform, and the contract becomes version 1.1. The change goes live that week. No banner, no alert, nobody woken up. | Visibility before the change, not after. A contract turns a surprise into a conversation. |
-| **9. Pull back** | The whole platform, calm, with the contract glowing at its door. The last line: "Seen by both sides, before it ships." In the final seconds, the gauge beside another painting's number starts to swing towards amber: a hint of the next episode. | The platform's job is not to never fail, but to fail safely, and to make the next change visible to everyone it touches. |
+| **9. Pull back** | The whole platform, calm, with the contract glowing at its door. The last line: "Seen by both sides, before it ships." In the final seconds, another KPI card's trend line starts to climb too steeply: a hint of the next episode. | The platform's job is not to never fail, but to fail safely, and to make the next change visible to everyone it touches. |
 
 Other ways things go wrong, such as a late file, a duplicate from a retry or a table overwritten by mistake, get their own episodes (see [the series](../README.md)), so this one stays on a single story.
 
@@ -67,7 +67,7 @@ Reuse the first film's world and components: the vaults, tiles, the dbt line, th
 | A red thread through the lineage | Tracing a problem upstream |
 | A quarantine tray beside the refinery | Failing rows kept aside for inspection |
 | Stacked glass panes behind each vault | Delta versions, for time travel and RESTORE |
-| A banner on a painting's frame | A data product showing "last good data as of…" |
+| A note on a dashboard's KPI card | A data product showing "last good data as of…" |
 | An email and a release note on separate paths | A change each side saw only half of |
 | A contract card at the platform's door, with a signature in each corner and a version number | The data contract: shape, allowed values, meaning, freshness and owners |
 | Each arrival lighting up line by line against the card | The contract checked on every load |

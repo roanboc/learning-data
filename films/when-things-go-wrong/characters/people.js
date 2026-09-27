@@ -190,13 +190,13 @@ function head(ctx,P,E,po,t){
 const PCV={};
 function pcanvas(k,w,h){const c=PCV[k]||(PCV[k]=document.createElement("canvas"));if(c.width!==w||c.height!==h){c.width=w;c.height=h;}const x=c.getContext("2d");x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,w,h);return[c,x];}
 function outlined(ctx,draw,x,y,s,edge,box,glowA){ // draws into a spare canvas, then adds a thin glowing outline around the silhouette
-  const [x0,y0,x1,y1]=box,pad=12,w=Math.ceil((x1-x0)*s+pad*2),h=Math.ceil((y1-y0)*s+pad*2);
+  const [x0,y0,x1,y1]=box,pad=24,w=Math.ceil((x1-x0)*s+pad*2),h=Math.ceil((y1-y0)*s+pad*2);
   const [c,cx]=pcanvas("p",w,h);cx.translate(pad-x0*s,pad-y0*s);cx.scale(s,s);draw(cx);
   const [tc,tx]=pcanvas("t",w,h);tx.drawImage(c,0,0);tx.globalCompositeOperation="source-in";tx.fillStyle=rgba(edge,1);tx.fillRect(0,0,w,h);tx.globalCompositeOperation="source-over";
-  const ox=x+x0*s-pad,oy=y+y0*s-pad,r=Math.max(1,1.25*s);
-  ctx.save();ctx.shadowColor=rgba(edge,glowA==null?0.4:glowA);ctx.shadowBlur=12*Math.max(0.7,s);ctx.globalAlpha=0.65;ctx.drawImage(tc,ox,oy);ctx.restore();
-  ctx.save();ctx.globalAlpha=0.85;for(let i=0;i<8;i++){const a=i/8*TAU;ctx.drawImage(tc,ox+Math.cos(a)*r,oy+Math.sin(a)*r);}ctx.restore();
-  ctx.drawImage(c,ox,oy);}
+  const ox=x+x0*s-pad,oy=y+y0*s-pad,r=Math.max(1,1.25*s),[oc,o]=pcanvas("o",w,h);
+  o.save();o.shadowColor=rgba(edge,glowA==null?0.4:glowA);o.shadowBlur=12*Math.max(0.7,s);o.globalAlpha=0.65;o.drawImage(tc,0,0);o.restore();
+  o.save();o.globalAlpha=0.85;for(let i=0;i<8;i++){const a=i/8*TAU;o.drawImage(tc,Math.cos(a)*r,Math.sin(a)*r);}o.restore();
+  o.drawImage(c,0,0);ctx.drawImage(oc,ox,oy);}
 function person(ctx,id,x,y,s,o){o=o||{};const P=PEOPLE[id],po=POSE[o.pose||"stand"],E=EXPR[o.expr||"calm"],t=o.t||0,k=s*P.build.h;
   const br=Math.sin(t*1.7+P.seed)*1.4;
   ctx.save();ctx.translate(x,y);ctx.scale(k,k);const g=ctx.createRadialGradient(0,-4,4,0,-4,100);g.addColorStop(0,"rgba(0,0,0,0.45)");g.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=g;ell(ctx,0,-4,100,16);ctx.fill();ctx.restore();

@@ -50,10 +50,10 @@ The film opens on the symptom and keeps the cause hidden, like the viewer, until
 - **Picture note:** the thread only ever follows the lineage, never crosses the screen, and only one step moves at a time. This replaces the busy lines in the first preview.
 
 **6. The cause, in bronze** · 2:25–2:55 · the bronze vault
-- **We see:** the rows are exactly as the student system sent them: a new status, `WAITLISTED`, and a new column, `waitlist_position`, which Auto Loader set aside in the rescued data column rather than dropping it.
+- **We see:** the rows are exactly as the student system sent them, as events through Zerobus, as in the first film: fifteen enrolments in Data Science 101 have a new status, `WAITLISTED`.
 - **Narration, in spirit:** nothing was lost; something was new.
-- **Teaches:** why bronze keeps what arrived; new values and new columns.
-- **Pause and think:** "Bronze kept the new status and the new column. Why is that better than dropping them?"
+- **Teaches:** why bronze keeps what arrived, even a value nothing downstream understands yet.
+- **Pause and think:** "Bronze kept the rows with the new status. Why is that better than dropping them?"
 
 **7. Two halves of one change** · 2:55–4:15 · the people, a flashback, then the decision
 - **We see:** Sam messages Ben: "Did enrolments change last night?" Ben: "Yes, waitlists went live. It's in our release notes." Sam video-calls Mei, and they appear side by side in two tiles: "Yes, we introduced waitlists. We emailed every School."

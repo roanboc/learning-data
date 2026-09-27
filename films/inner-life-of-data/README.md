@@ -2,7 +2,7 @@
 
 A 7½-minute film that follows one enrolment at a fictional university, from a tap on a phone to a decision. It shows how data is captured, refined through bronze, silver and gold with dbt on Databricks, given meaning through a shared conceptual model, and shared without copies. It is written for anyone aged 14 and up, with nothing a data engineer would need to correct.
 
-- **Watch, with chapters:** [https://roanboc.github.io/learning-data/#watch](https://roanboc.github.io/learning-data/#watch). Turn on *Pause and think* to stop after each chapter for one question. Then try the [hands-on labs](https://roanboc.github.io/learning-data/labs/) and the [scenarios](https://roanboc.github.io/learning-data/scenarios/).
+- **Watch, with chapters:** [https://roanboc.github.io/learning-data/#watch](https://roanboc.github.io/learning-data/#watch). Turn on *Pause and think* to stop after most chapters for one question. Then try the [hands-on labs](https://roanboc.github.io/learning-data/labs/) and the [scenarios](https://roanboc.github.io/learning-data/scenarios/).
 - **Download the video (MP4, 1080p):** [https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.mp4](https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.mp4)
 - **Script, with rigour notes and sources:** [script.md](script.md)
 - **Captions:** [en.vtt](captions/en.vtt), [en.srt](captions/en.srt)

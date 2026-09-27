@@ -6,9 +6,9 @@ Learning artifacts for data: short, visual explanations of how modern data platf
 
 ## The films
 
-Start with *The Inner Life of Data*, the overview. Then go deeper, one topic at a time, in any order. Each topic picks up one chapter of the overview.
+Start with *The Inner Life of Data*, the overview. Then go deeper, one topic at a time, in any order. Each topic builds on part of the overview.
 
-| Topic | Film | Builds on the chapter |
+| Topic | Film | Builds on |
 |---|---|---|
 | How a data platform works | [The Inner Life of Data](https://roanboc.github.io/learning-data/), in English and Spanish | Start here |
 | Data modelling | [A Sharper Sketch](https://roanboc.github.io/learning-data/sketch/) | *The sketch* |
@@ -74,7 +74,7 @@ Internal names never appear as text on the site. The numbers in the series' fold
 | `ld3:` | A Sharper Sketch | `watched`, `visited`, `quiz`. A historical name: never rename it, or visitors lose their progress. |
 | `ld-silent-change:` | Silent change | `watched` |
 
-A film's page sets its prefix with `data-store` on `section#watch`, and `path.js` marks the film as watched once 85% has played. A page without `data-store` records nothing, so one film's page never marks another film as watched. Topic cards show each film's progress from `data-progress="<prefix>"`. The Sketch pages don't load `path.js`: `sketch.js` paints their stepper and records `ld3:watched`, so the topic cards on those pages show no progress.
+A film's page sets its prefix with `data-store` on `section#watch`, and `path.js` marks the film as watched once 85% of its length has actually played (seconds of playback, so a seek or one late chapter doesn't count). A page without `data-store` records nothing, so one film's page never marks another film as watched. Topic cards show each film's progress from `data-progress="<prefix>"`. The Sketch pages don't load `path.js`: `sketch.js` paints their stepper, records `ld3:watched` by the same rule, and fills the topic cards' progress there.
 
 ## Publishing
 
@@ -104,7 +104,7 @@ The site is plain HTML, published as it is. For a new film:
 3. **Progress.** A `data-store` prefix `ld-<film>`, such as `ld-silent-change`, on `section#watch`, and the same prefix in `data-progress` on its topic cards.
 4. **Cards.** A topic card on the home page and at the end of the scenarios of *The Inner Life of Data* ("Go deeper"), on `topics/` under the chapter it builds on, and on its series page if it has one, in both languages. Spanish cards link to Spanish pages.
 5. **Where next.** A `<template id="next-panel">` on its own page, and a link to it in the panel of the page it builds on.
-6. **Check.** Run `python site-tools/check_site.py` and `python site-tools/smoke.py`, and fix what they find. `check_site.py` only reads the files, in a second: links, header, `hreflang`, breadcrumbs, film numbering and stated lengths. `smoke.py` opens every page in Chromium, in about five minutes: it serves `site/` on port 8110 with `npx http-server` and checks the players, chapter links, panels, progress and phone layouts. It needs `pip install playwright` and Node. Both exit with an error when something fails. A new film page needs its chapter count in `FILMS` in `smoke.py`, and a new page under a topic needs its breadcrumb in `CRUMBS` in `check_site.py`.
+6. **Check.** Run `python site-tools/check_site.py` and `python site-tools/smoke.py`, and fix what they find. `check_site.py` only reads the files, in a second: links, header, `hreflang`, breadcrumbs, film numbering and stated lengths. `smoke.py` opens every page in Chromium, in about five minutes: it serves `site/` on port 8110 with `npx http-server` and checks the players, chapter links, panels, keyboard focus, progress, phone and tablet layouts, heading levels and text contrast in both themes. It needs `pip install playwright` and Node. Both exit with an error when something fails. A new film page needs its chapter count in `FILMS` in `smoke.py`, and a new page under a topic needs its breadcrumb in `CRUMBS` in `check_site.py`.
 
 ## Licence
 

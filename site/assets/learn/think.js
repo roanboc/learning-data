@@ -2,7 +2,8 @@
    and asks one short question about it, then carries on. The questions come from the page's language pack (window.LEARN.think).
    - Each question's lab link goes to <.player data-labs>#<stop> (default "labs/"); data-labs="" leaves it out.
    - A question's optional "more" ({href,label}) shows a "Go deeper" link once the viewer has answered.
-   - #think-list, if the page has one, lists every question with its answer, for a class or a team. */
+   - #think-list, if the page has one, lists every question with its answer, for a class or a team.
+   Keyboard: a question takes focus only if focus was on the film (or nowhere), and gives it back to the Play button when it closes. */
 (()=>{"use strict";
 const X=window.LEARN,F=window.FILM,box=document.querySelector(".player"),btn=document.getElementById("think");
 if(!X||!X.think||!F||!box)return;
@@ -11,6 +12,7 @@ const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"
 const labs=box.dataset.labs!=null?box.dataset.labs:"labs/";
 const labLink=q=>q.stop&&labs?'<a class="think-lab" href="'+esc(labs+"#"+q.stop)+'">'+esc(Q.ui.lab)+' →</a>':"";
 const cname=id=>typeof SCENES!=="undefined"&&(SCENES.find(s=>s.id===id)||{}).name||"";
+const area=document.getElementById("watch")||box,toPlay=()=>{const p=document.getElementById("play");if(p)p.focus({preventScroll:true});};
 // the questions as a list outside the player, from the same pack, so they live in one place only
 const list=document.getElementById("think-list");
 if(list){Object.keys(Q.qs).forEach(id=>{const q=Q.qs[id],d=document.createElement("details");d.className="tq";
@@ -18,7 +20,10 @@ if(list){Object.keys(Q.qs).forEach(id=>{const q=Q.qs[id],d=document.createElemen
       q.opts.map(o=>'<li'+(o.ok?' class="ok"><b>'+esc(Q.ui.right)+'</b> ':'>')+esc(o.t)+'</li>').join("")+
       '</ul><p class="tq-why"><b>'+esc(Q.ui.answer||"")+'</b> '+esc(q.why)+'</p><p class="tq-foot"><button type="button" class="btn" data-scene="'+esc(id)+'">'+esc(Q.ui.watch||"")+'</button>'+labLink(q)+'</p>';
     list.appendChild(d);});
-  list.addEventListener("click",e=>{const b=e.target.closest("[data-scene]");if(!b||!F.playScene)return;const w=document.getElementById("watch")||box;w.scrollIntoView();F.playScene(b.dataset.scene,true);});}
+  // "Watch this part" plays that chapter and hands focus to the Play button, so Space pauses it
+  list.addEventListener("click",e=>{const b=e.target.closest("[data-scene]");if(!b||!F.playScene)return;area.scrollIntoView();F.playScene(b.dataset.scene,true);toPlay();});
+  // Space on a question opens it; without this, the player (listening on window) would take it as play/pause
+  list.addEventListener("keydown",e=>{if(e.target.closest("summary"))e.stopPropagation();});}
 if(!btn)return;
 let on=get("think",false),last=null,panel=null;
 function setOn(v){on=v;btn.setAttribute("aria-pressed",v?"true":"false");btn.classList.toggle("on",v);put("think",v);}
@@ -26,7 +31,7 @@ setOn(on);btn.textContent=Q.ui.toggle;
 btn.addEventListener("click",()=>setOn(!on));
 // the poster offers "Play with pauses to think" next to "Play the film"
 box.querySelectorAll("[data-think]").forEach(b=>b.addEventListener("click",()=>{setOn(true);F.play();}));
-function close(go){if(!panel)return;panel.remove();panel=null;if(go)F.play();}
+function close(go){if(!panel)return;const had=panel.contains(document.activeElement);panel.remove();panel=null;if(had)toPlay();if(go)F.play();}
 F.onChapterEnd=id=>{
   if(!on||id===last)return false;const q=Q.qs[id];if(!q)return false;
   last=id;show(id,q);return true;};
@@ -42,8 +47,11 @@ function show(id,q){close(false);
       go.textContent=Q.ui.cont+" ▶";go.focus();};opts.appendChild(b);});
   go.onclick=()=>close(true);
   panel.querySelector(".think-off").onclick=()=>{setOn(false);close(true);};
-  panel.addEventListener("keydown",e=>{if(e.key==="Escape"){e.stopPropagation();close(true);}});
-  box.insertBefore(panel,box.querySelector(".bar"));opts.firstChild.focus({preventScroll:true});}
+  panel.addEventListener("keydown",e=>{if(e.key==="Escape"){e.stopPropagation();close(true);}
+    // Space on a link would reach the player and start the film again; links open with Enter
+    else if(e.key===" "&&e.target.closest("a"))e.stopPropagation();});
+  box.insertBefore(panel,box.querySelector(".bar"));
+  const a=document.activeElement;if(!a||a===document.body||area.contains(a))opts.firstChild.focus({preventScroll:true});}
 // if the film starts again some other way (the Play button, a chapter), the question steps aside
 (function watch(){if(panel&&F.playing())close(false);requestAnimationFrame(watch);})();
 })();

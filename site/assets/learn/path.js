@@ -1,7 +1,8 @@
 /* Learning Data: progress, kept in this browser only. One script for every film page except A Sharper Sketch's (sketch.js does it there).
    - A film's three-step path (.path[data-text]): the store prefix comes from data-store (default "ld"), the counts from data-labs and data-quiz (default 8 and 12).
-   - "Watched" for the film in section#watch[data-store], once 85% of it has played. A page without it records nothing,
-     so one film's page can never mark another film as watched.
+   - "Watched" for the film in section#watch[data-store], once 85% of its length has actually played (seconds of playback,
+     not where the playhead is: one late chapter isn't the film), or once it reaches the end after half of it has played.
+     A page without it records nothing, so one film's page can never mark another film as watched.
    - Progress on topic cards: [data-progress="<prefix>"] (optional data-labs, data-quiz) inside [data-progress-text].
    - A chapter link (#t=89) scrolls to #watch, with or without a stepper.
    - On the home page only (data-home), old one-page links (#explore, #practise) go to their own pages.
@@ -31,7 +32,13 @@ function paint(){
     if(st.n&&el.dataset.quiz)out.push(fill(T.quiz,{n:st.n,of:el.dataset.quiz,ok:st.ok}));
     el.textContent=out.join(" · ");el.hidden=!out.length;});}
 paint();window.addEventListener("storage",paint);window.addEventListener("pageshow",paint);
-// the film on this page counts as watched once most of it has played
-if(watch&&watch.dataset.store&&watch.querySelector("#film")&&window.FILM&&typeof TL!=="undefined"){const s=store(watch.dataset.store),iv=setInterval(()=>{
-  if(s.get("watched",false)){clearInterval(iv);return;}if(FILM.time&&FILM.time()>TL.total*0.85){s.set("watched",true);paint();clearInterval(iv);}},3000);}
+// the film on this page counts as watched once most of it has played. Each second, the playhead's progress counts
+// only while the film plays, and only up to the time that passed, so a seek or a chapter jump adds nothing
+if(watch&&watch.dataset.store&&watch.querySelector("#film")&&window.FILM&&typeof TL!=="undefined"){const s=store(watch.dataset.store);
+  let played=0,prev=null;const iv=setInterval(()=>{
+    if(s.get("watched",false)){clearInterval(iv);return;}if(!FILM.time)return;
+    const now={t:FILM.time(),at:performance.now()/1000,on:FILM.playing()};
+    if(prev&&prev.on&&now.on){const d=now.t-prev.t;if(d>0&&d<=now.at-prev.at+0.5)played+=d;}
+    prev=now;
+    if(played>=TL.total*0.85||(played>=TL.total*0.5&&now.t>=TL.total-1)){s.set("watched",true);paint();clearInterval(iv);}},1000);}
 })();

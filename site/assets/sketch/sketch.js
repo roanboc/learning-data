@@ -26,8 +26,25 @@ const NLAB=6,NQ=12;
 function paintPath(){const p=$(".path[data-text]");if(!p)return;const T=JSON.parse(p.dataset.text),li=p.querySelectorAll("li"),seen=get("visited",[]).length,ans=get("quiz",{}),n=Object.keys(ans).length,ok=Object.values(ans).filter(a=>a&&a.ok).length,w=get("watched",false);
   const put=(i,done,txt)=>{if(!li[i])return;li[i].classList.toggle("done",!!done);if(txt)li[i].querySelector("span:last-child").textContent=txt;};
   put(0,w,w?T.watched:null);put(1,seen>=NLAB,seen?fill(T.labs,{n:seen}):null);put(2,n>=NQ,n?fill(T.quiz,{n,ok}):null);}
-paintPath();window.addEventListener("storage",paintPath);window.addEventListener("pageshow",paintPath);
-if(document.getElementById("film")&&typeof TL!=="undefined"){const iv=setInterval(()=>{if(get("watched",false)){clearInterval(iv);return;}if(FILM.time&&FILM.time()>TL.total*0.85){set("watched",true);paintPath();clearInterval(iv);}},3000);
+// progress on the topic cards of other films ([data-progress="<prefix>"] inside [data-progress-text]), read as path.js reads it
+// on every other page: path.js isn't loaded here, because it would paint this stepper too
+function paintChips(){document.querySelectorAll("[data-progress]").forEach(el=>{const box=el.closest("[data-progress-text]");if(!box)return;
+  const p=el.dataset.progress,g=(k,d)=>{try{const v=localStorage.getItem(p+":"+k);return v==null?d:JSON.parse(v);}catch(e){return d;}};
+  const q=g("quiz",{})||{},a=q.ans||q,ans=Object.keys(a).filter(k=>/^\d+$/.test(k)&&a[k]).map(k=>a[k]),v=g("visited",[]),labs=Array.isArray(v)?v.length:0;
+  const T=JSON.parse(box.dataset.progressText),out=[];
+  if(g("watched",false))out.push(T.watched);
+  if(labs&&el.dataset.labs)out.push(fill(T.labs,{n:labs,of:el.dataset.labs}));
+  if(ans.length&&el.dataset.quiz)out.push(fill(T.quiz,{n:ans.length,of:el.dataset.quiz,ok:ans.filter(x=>x.ok).length}));
+  el.textContent=out.join(" · ");el.hidden=!out.length;});}
+const paintAll=()=>{paintPath();paintChips();};
+paintAll();window.addEventListener("storage",paintAll);window.addEventListener("pageshow",paintAll);
+// the film counts as watched once 85% of its length has actually played (seconds of playback, not where the playhead is),
+// or once it reaches the end after half of it has played; the same rule as path.js
+if(document.getElementById("film")&&typeof TL!=="undefined"){let played=0,prev=null;const iv=setInterval(()=>{if(get("watched",false)){clearInterval(iv);return;}if(!FILM.time)return;
+    const now={t:FILM.time(),at:performance.now()/1000,on:FILM.playing()};
+    if(prev&&prev.on&&now.on){const d=now.t-prev.t;if(d>0&&d<=now.at-prev.at+0.5)played+=d;}
+    prev=now;
+    if(played>=TL.total*0.85||(played>=TL.total*0.5&&now.t>=TL.total-1)){set("watched",true);paintPath();clearInterval(iv);}},1000);
   if(/^#t=/.test(location.hash)){const w=document.getElementById("watch");if(w)window.addEventListener("load",()=>w.scrollIntoView());}}
 
 /* ---------- shared drawing helpers ---------- */

@@ -565,7 +565,7 @@ async def check_players(run):
 
 # ---------------------------------------------------------------- 6. "Where next?" when a film ends
 async def check_next(run):
-    sec = run.rep.sec("nextpanel", "\"Where next?\": appears when a film ends, with the page's links; Watch again and Escape work")
+    sec = run.rep.sec("nextpanel", "\"Where next?\": appears when a film ends, with the page's links; Watch again and Escape work; keyboard focus behaves")
     ctx = await run.context(1280)
     try:
         for key in FILMS:
@@ -602,12 +602,32 @@ async def check_next(run):
                 again = False
             expect(sec, again, f"{where}: Watch again doesn't hide the panel and start from 0")
             await pg.evaluate("() => FILM.pause()")
-            await pg.evaluate("() => { FILM.seek(TL.total - 0.3); FILM.play(); }")
-            await pg.wait_for_selector(".player .think.next", timeout=5000)
+            await end_panel(pg)
+            # Space on a link in the panel is the link's, not the player's: the film doesn't start again
+            await pg.focus(".player .think.next a")
+            await pg.keyboard.press("Space")
+            await pg.wait_for_timeout(400)
+            r = await pg.evaluate("() => ({panel: !!document.querySelector('.player .think.next'), playing: FILM.playing()})")
+            expect(sec, r["panel"] and not r["playing"], f"{where}: Space on a panel link starts the film again ({r})")
+            await pg.focus(".player .think.next a")
             await pg.keyboard.press("Escape")
             await pg.wait_for_timeout(700)
-            gone = await pg.evaluate("() => !document.querySelector('.player .think.next')")
-            expect(sec, gone, f"{where}: Escape doesn't close the panel, or it comes back while the film is stopped")
+            r = await pg.evaluate("() => ({gone: !document.querySelector('.player .think.next'), focus: document.activeElement.id})")
+            expect(sec, r["gone"], f"{where}: Escape doesn't close the panel, or it comes back while the film is stopped")
+            expect(sec, r["focus"] == "play", f"{where}: after Escape, focus is on {'#' + r['focus'] if r['focus'] else 'the page body'}, expected the Play button")
+            # "Watch again" from the keyboard hands focus to the Play button too
+            await end_panel(pg)
+            await pg.focus(".player .think.next [data-again]")
+            await pg.keyboard.press("Enter")
+            await pg.wait_for_timeout(300)
+            r = await pg.evaluate("() => ({focus: document.activeElement.id, playing: FILM.playing()})")
+            expect(sec, r["focus"] == "play" and r["playing"], f"{where}: after Watch again, focus is on {'#' + r['focus'] if r['focus'] else 'the page body'} (playing {r['playing']}), expected the Play button")
+            await pg.evaluate("() => FILM.pause()")
+            # someone reading elsewhere on the page keeps their place when the film ends
+            await pg.evaluate("() => document.querySelector('footer a').focus({preventScroll: true})")
+            await end_panel(pg)
+            r = await pg.evaluate("() => document.activeElement.closest('footer') !== null")
+            expect(sec, r, f"{where}: the end of the film took focus from the footer link into the panel")
             for p in log_problems(log):
                 expect(sec, False, f"{where}: {p}")
             await pg.close()
@@ -615,9 +635,17 @@ async def check_next(run):
         await ctx.close()
 
 
+async def end_panel(pg):
+    """plays the last 0.3 s of the film and waits for the "Where next?" panel of that ending (not one left from before)"""
+    await pg.evaluate("() => { FILM.seek(TL.total - 0.3); FILM.play(); }")
+    await pg.wait_for_function("() => FILM.playing() && !document.querySelector('.player .think.next')", timeout=4000, polling=20)
+    await pg.wait_for_selector(".player .think.next", timeout=5000)
+    await pg.wait_for_timeout(100)
+
+
 # ---------------------------------------------------------------- 7. "Pause and think" on Silent change
 async def check_think_silent(run):
-    sec = run.rep.sec("think-silent", "\"Pause and think\" on Silent change: the pause, its lab link, the answer, the question list")
+    sec = run.rep.sec("think-silent", "\"Pause and think\" on Silent change: the pause, its lab link, the answer, the question list, the keyboard")
     ctx = await run.context(1280)
     en_q = None
     try:
@@ -628,6 +656,9 @@ async def check_think_silent(run):
             await run.ready(pg)
             X = await pg.evaluate("() => ({lang: LEARN.lang, ui: LEARN.think.ui, qs: LEARN.think.qs, names: Object.fromEntries(SCENES.map(s => [s.id, s.name]))})")
             expect(sec, X["lang"] == lang, f"{where}: the question pack is in {X['lang']!r}")
+            pos = {k: [i for i, o in enumerate(q["opts"]) if o.get("ok")] for k, q in X["qs"].items()}
+            expect(sec, all(len(v) == 1 for v in pos.values()) and len({v[0] for v in pos.values()}) > 1,
+                   f"{where}: the right answers sit at {pos}; each question needs one, and not always in the same place")
             if lang == "en":
                 en_q = X["qs"]
             elif en_q:
@@ -661,6 +692,20 @@ async def check_think_silent(run):
             await pg.click(".player .think [data-go]")
             await pg.wait_for_timeout(500)
             expect(sec, await pg.evaluate("() => FILM.playing() && !document.querySelector('.player .think:not(.next)')"), f"{where}: Continue doesn't carry on")
+            expect(sec, await pg.evaluate("() => document.activeElement.id") == "play", f"{where}: after Continue, focus isn't on the Play button")
+            await pg.evaluate("() => FILM.pause()")
+            # Space on the panel's lab link is the link's; Escape hands focus back to the Play button
+            await pg.evaluate("() => { const s = SCENES.find(x => x.id === 'bronze'); FILM.seek(s.start + s.dur - 1.2); FILM.play(); }")
+            await pg.wait_for_selector(".player .think:not(.next)", timeout=8000)
+            await pg.focus(".player .think a.think-lab")
+            await pg.keyboard.press("Space")
+            await pg.wait_for_timeout(300)
+            r = await pg.evaluate("() => ({panel: !!document.querySelector('.player .think:not(.next)'), playing: FILM.playing()})")
+            expect(sec, r["panel"] and not r["playing"], f"{where}: Space on the lab link starts the film ({r})")
+            await pg.focus(".player .think a.think-lab")
+            await pg.keyboard.press("Escape")
+            await pg.wait_for_timeout(300)
+            expect(sec, await pg.evaluate("() => document.activeElement.id") == "play", f"{where}: after Escape on a question, focus isn't on the Play button")
             await pg.evaluate("() => FILM.pause()")
             # the question list, from the same pack
             L = await pg.evaluate("""() => [...document.querySelectorAll('#think-list details')].map(d => ({
@@ -671,14 +716,27 @@ async def check_think_silent(run):
                 expect(sec, x["k"] == X["names"][x["id"]], f"{where}: the list names {x['id']} {x['k']!r}, expected {X['names'][x['id']]!r}")
                 want = run.url(("es/" if lang == "es" else "") + "labs/#" + X["qs"][x["id"]]["stop"])
                 expect(sec, x["lab"] == want, f"{where}: {x['id']}'s lab link goes to {x['lab']}, expected {want}")
-            # "Watch this part" plays that chapter only (the soundtrack runs fast to get there quickly)
+            # the +/− sign isn't part of a question's name
+            snap = await pg.accessibility.snapshot(root=await pg.query_selector("#think-list summary"))
+            name = (snap or {}).get("name", "")
+            expect(sec, name and not name.rstrip().endswith(("+", "−")), f"{where}: the first question's name is {name!r}")
             await run.think(pg, False)
+            # Space on a question opens it, and doesn't reach the player (which listens for Space while it is on screen)
+            await pg.evaluate("() => { document.querySelector('#think-list summary').focus({preventScroll: true}); document.querySelector('.player').scrollIntoView({block: 'center', behavior: 'instant'}); }")
+            await pg.wait_for_timeout(500)
+            await pg.keyboard.press("Space")
+            await pg.wait_for_timeout(300)
+            r = await pg.evaluate("() => ({open: document.querySelector('#think-list details').open, playing: FILM.playing()})")
+            expect(sec, r["open"] and not r["playing"], f"{where}: Space on a question {r}; expected it to open, with the film still")
+            await pg.evaluate("() => { FILM.pause(); document.querySelector('#think-list details').open = false; }")
+            # "Watch this part" plays that chapter only (the soundtrack runs fast to get there quickly), and hands focus to Play
             await pg.evaluate("() => { const d = [...document.querySelectorAll('#think-list details')].find(d => d.querySelector('[data-scene=halves]')); d.open = true; }")
             await pg.click("#think-list [data-scene=halves]")
             await run.settle(pg)
             r = await pg.evaluate("() => { const s = SCENES.find(x => x.id === 'halves'); return {t: FILM.time(), start: s.start, end: s.start + s.dur, playing: FILM.playing(), top: document.getElementById('watch').getBoundingClientRect().top}; }")
             expect(sec, r["playing"] and r["start"] <= r["t"] < r["start"] + 3, f"{where}: \"Watch this part\" doesn't play \"halves\" from its start ({r})")
             expect(sec, -2 <= r["top"] <= 160, f"{where}: \"Watch this part\" doesn't bring the film into view")
+            expect(sec, await pg.evaluate("() => document.activeElement.id") == "play", f"{where}: after \"Watch this part\", focus isn't on the Play button")
             await pg.evaluate("() => { document.getElementById('snd').playbackRate = 16; }")
             try:
                 await pg.wait_for_function("() => !FILM.playing()", timeout=90000)
@@ -731,7 +789,11 @@ async def check_think_home(run):
 # ---------------------------------------------------------------- 9. progress, kept in this browser
 async def check_progress(run):
     sec = run.rep.sec("progress", "Progress: steppers and topic-card chips from seeded storage; \"watched\" goes to the right film only")
-    chip_pages = [k for k, pg in run.static.items() if not pg.redirect and pg.dom.first(cls="tc-progress") and "assets/learn/path.js" in pg.local_scripts]
+    # path.js fills the chips; on A Sharper Sketch's pages, sketch.js does
+    chip_pages = [k for k, pg in run.static.items() if not pg.redirect and pg.dom.first(cls="tc-progress")
+                  and ("assets/learn/path.js" in pg.local_scripts or "assets/sketch/sketch.js" in pg.local_scripts)]
+    missing = [k for k, pg in run.static.items() if not pg.redirect and pg.dom.first(cls="tc-progress") and k not in chip_pages]
+    expect(sec, not missing, f"topic cards whose progress no script fills: {missing}")
     stepper = {k: pg for k, pg in run.static.items() if pg.dom.first("ol", cls="path")}
 
     async def chips(pg):
@@ -826,31 +888,55 @@ async def check_progress(run):
             await pg.close()
     finally:
         await ctx.close()
-    # "watched" goes to the film on the page, and to no other
-    for key, store, others in (("", "ld", ["ld3", "ld-silent-change"]), ("sketch/", "ld3", ["ld", "ld-silent-change"]),
-                               ("when-things-go-wrong/silent-change/", "ld-silent-change", ["ld", "ld3"]),
-                               ("es/when-things-go-wrong/silent-change/", "ld-silent-change", ["ld", "ld3"])):
-        ctx = await seeded({})
-        try:
-            pg, _ = await run.page(ctx, key)
-            await run.ready(pg)
-            await pg.evaluate("() => FILM.seek(TL.total * 0.9)")
+    # "watched" counts seconds actually played: a seek to the end, or one late chapter, isn't the film.
+    # To play most of a film quickly, the soundtrack runs 16 times faster and the page's clock (performance.now) 20 times.
+    fast = "{ const pn = performance.now.bind(performance); performance.now = () => pn() * 20; }"
+    sec["notes"].append("\"watched\": each film played at 16× with the page clock at 20×")
+
+    async def watch_film(key, store, others):
+        async with run.sem:
+            ctx = await seeded({})
             try:
-                await pg.wait_for_function(f"() => localStorage.getItem({json.dumps(store + ':watched')}) === 'true'", timeout=8000)
-            except Exception:  # noqa: BLE001
-                pass
-            r = await pg.evaluate("ks => ks.map(k => localStorage.getItem(k + ':watched'))", [store] + others)
-            expect(sec, r[0] == "true", f"/{key}: at 90% of the film, {store}:watched is {r[0]}")
-            expect(sec, all(x is None for x in r[1:]), f"/{key}: at 90% of the film, another film was marked watched: {dict(zip(others, r[1:]))}")
-            await pg.close()
-            if store == "ld-silent-change":
-                tk = ("es/" if key.startswith("es/") else "") + "topics/"
-                pg, _ = await run.page(ctx, tk)
-                c = [c for c in await chips(pg) if c["p"] == store]
-                expect(sec, c and not c[0]["hidden"] and c[0]["t"] == c[0]["T"]["watched"], f"/{tk}: the Silent change chip reads {c and c[0]['t']!r} after watching")
+                pg, _ = await run.page(ctx, key)
+                await run.ready(pg)
+                await pg.evaluate("() => FILM.seek(TL.total * 0.9)")
+                await pg.wait_for_timeout(3500)
+                r = await pg.evaluate("k => localStorage.getItem(k)", store + ":watched")
+                expect(sec, r is None, f"/{key}: a seek to 90% of the film marked it watched")
                 await pg.close()
-        finally:
-            await ctx.close()
+                await ctx.close()
+                ctx = await seeded({})
+                await ctx.add_init_script(fast)
+                pg, _ = await run.page(ctx, key)
+                await run.ready(pg)
+                late = await pg.evaluate("() => SCENES[SCENES.length - 2].id")
+                await pg.evaluate("id => { FILM.playScene(id, true); document.getElementById('snd').playbackRate = 16; }", late)
+                await pg.wait_for_function("() => !FILM.playing()", timeout=30000)
+                await pg.wait_for_timeout(2500)
+                r = await pg.evaluate("k => localStorage.getItem(k)", store + ":watched")
+                expect(sec, r is None, f"/{key}: playing only the chapter {late!r} marked the film watched")
+                await pg.evaluate("() => { FILM.seek(0); FILM.play(); document.getElementById('snd').playbackRate = 16; }")
+                try:
+                    await pg.wait_for_function(f"() => localStorage.getItem({json.dumps(store + ':watched')}) === 'true'", timeout=90000)
+                except Exception:  # noqa: BLE001
+                    pass
+                r = await pg.evaluate("ks => ks.map(k => localStorage.getItem(k + ':watched'))", [store] + others)
+                t = await pg.evaluate("() => [FILM.time(), TL.total]")
+                expect(sec, r[0] == "true", f"/{key}: after playing {t[0]:.0f} of {t[1]:.0f} s, {store}:watched is {r[0]}")
+                expect(sec, all(x is None for x in r[1:]), f"/{key}: watching this film marked another one watched: {dict(zip(others, r[1:]))}")
+                await pg.close()
+                if store == "ld-silent-change":
+                    tk = ("es/" if key.startswith("es/") else "") + "topics/"
+                    pg, _ = await run.page(ctx, tk)
+                    c = [c for c in await chips(pg) if c["p"] == store]
+                    expect(sec, c and not c[0]["hidden"] and c[0]["t"] == c[0]["T"]["watched"], f"/{tk}: the Silent change chip reads {c and c[0]['t']!r} after watching")
+                    await pg.close()
+            finally:
+                await ctx.close()
+
+    await asyncio.gather(*(watch_film(*a) for a in (("", "ld", ["ld3", "ld-silent-change"]), ("sketch/", "ld3", ["ld", "ld-silent-change"]),
+                                                    ("when-things-go-wrong/silent-change/", "ld-silent-change", ["ld", "ld3"]),
+                                                    ("es/when-things-go-wrong/silent-change/", "ld-silent-change", ["ld", "ld3"]))))
     # the pop-up player on /labs/ never marks the intro as watched
     ctx = await seeded({})
     try:
@@ -897,7 +983,7 @@ async def check_nostorage(run):
 
 # ---------------------------------------------------------------- 11. phones
 async def check_mobile(run):
-    sec = run.rep.sec("mobile", "Phones: cards stack and the whole card is a link, anchors clear the header, panels sit below the film")
+    sec = run.rep.sec("mobile", "Phones and tablets: cards stack and the whole card is a link, anchors clear the header, panels sit below the film up to 900 px and inside it above")
     grids = [k for k, pg in run.static.items() if not pg.redirect and pg.dom.first(cls="topic-grid")]
     ctx = await run.context(390)
     try:
@@ -943,30 +1029,102 @@ async def check_mobile(run):
                     await pg.close()
             finally:
                 await c2.close()
-        # at phone width, the panels sit below the film and their buttons wrap
-        for key in ("", "when-things-go-wrong/silent-change/", "es/when-things-go-wrong/silent-change/", "sketch/"):
-            pg, _ = await run.page(ctx, key)
-            await run.ready(pg)
-            await pg.evaluate("() => { FILM.seek(TL.total - 0.3); FILM.play(); }")
-            await pg.wait_for_selector(".player .think.next", timeout=5000)
-            r = await pg.evaluate("""() => { const p = document.querySelector('.player .think.next'), c = document.getElementById('film').getBoundingClientRect(), b = p.getBoundingClientRect();
-              return {below: b.top >= c.bottom - 1, fits: p.scrollWidth <= p.clientWidth + 1, page: document.documentElement.scrollWidth <= innerWidth}; }""")
-            expect(sec, r["below"] and r["fits"] and r["page"], f"/{key} @390: the \"Where next?\" panel {r}")
-            if await pg.evaluate("() => !!document.getElementById('think') && !!(window.LEARN && LEARN.think)"):
-                await pg.keyboard.press("Escape")
-                await pg.evaluate("() => { if (document.getElementById('think').getAttribute('aria-pressed') !== 'true') document.getElementById('think').click(); const s = SCENES[1]; FILM.seek(s.start + s.dur - 1); FILM.play(); }")
-                try:
-                    await pg.wait_for_selector(".player .think:not(.next)", timeout=6000)
-                    r = await pg.evaluate("""() => { const p = document.querySelector('.player .think:not(.next)'), c = document.getElementById('film').getBoundingClientRect(), b = p.getBoundingClientRect();
-                      return {below: b.top >= c.bottom - 1, fits: p.scrollWidth <= p.clientWidth + 1, page: document.documentElement.scrollWidth <= innerWidth}; }""")
-                    expect(sec, r["below"] and r["fits"] and r["page"], f"/{key} @390: the \"Pause and think\" panel {r}")
-                except Exception:  # noqa: BLE001
-                    sid = await pg.evaluate("() => SCENES[1].id")
-                    if await pg.evaluate("id => !!LEARN.think.qs[id]", sid):
-                        expect(sec, False, f"/{key} @390: no \"Pause and think\" panel after {sid}")
-            await pg.close()
+        # up to 900 px the panels sit below the film (the longer questions are taller than the frame there), and their buttons wrap;
+        # wider, the panel sits on the frame and never covers the controls
+        BOX = """sel => { const p = document.querySelector(sel), c = document.getElementById('film').getBoundingClientRect(), b = p.getBoundingClientRect(),
+              bar = document.querySelector('.player .bar').getBoundingClientRect();
+              return {below: b.top >= c.bottom - 1, inside: b.top >= c.top - 1 && b.bottom <= bar.top + 1, fits: p.scrollWidth <= p.clientWidth + 1,
+                      page: document.documentElement.scrollWidth <= innerWidth}; }"""
+        for width in (390, 768, 1024):
+            c2 = await run.context(width)
+            try:
+                for key in ("", "when-things-go-wrong/silent-change/", "es/when-things-go-wrong/silent-change/", "sketch/"):
+                    pg, _ = await run.page(c2, key)
+                    await run.ready(pg)
+                    ok = (lambda r: r["below"] and r["fits"] and r["page"]) if width <= 900 else (lambda r: r["inside"] and r["page"])
+                    await pg.evaluate("() => { FILM.seek(TL.total - 0.3); FILM.play(); }")
+                    await pg.wait_for_selector(".player .think.next", timeout=5000)
+                    r = await pg.evaluate(BOX, ".player .think.next")
+                    expect(sec, ok(r), f"/{key} @{width}: the \"Where next?\" panel {r}")
+                    if await pg.evaluate("() => !!document.getElementById('think') && !!(window.LEARN && LEARN.think)"):
+                        await pg.keyboard.press("Escape")
+                        await run.think(pg, True)
+                        # the longest question, answered (the answer makes the card tallest)
+                        sid = await pg.evaluate("() => Object.keys(LEARN.think.qs).sort((a, b) => { const n = q => q.q.length + q.why.length + q.opts.map(o => o.t).join('').length; return n(LEARN.think.qs[b]) - n(LEARN.think.qs[a]); })[0]")
+                        await pg.evaluate("id => { const s = SCENES.find(x => x.id === id); FILM.seek(s.start + s.dur - 1); FILM.play(); }", sid)
+                        try:
+                            await pg.wait_for_selector(".player .think:not(.next)", timeout=6000)
+                            await pg.click(".player .think .think-opt >> nth=0")
+                            await pg.wait_for_timeout(100)
+                            r = await pg.evaluate(BOX, ".player .think:not(.next)")
+                            expect(sec, ok(r), f"/{key} @{width}: the \"Pause and think\" panel ({sid}, answered) {r}")
+                        except Exception:  # noqa: BLE001
+                            expect(sec, False, f"/{key} @{width}: no \"Pause and think\" panel after {sid}")
+                        await run.think(pg, False)
+                    await pg.close()
+            finally:
+                await c2.close()
     finally:
         await ctx.close()
+
+
+# ---------------------------------------------------------------- 11b. headings and text contrast
+CONTRAST_JS = """() => {
+  // text on the page (not on the films' dark stages, which have their own colours), against the colour behind it
+  const skip = '.player, .stage, .lab, .map, .qvis, canvas, dialog, .think, noscript, .sr, [hidden]';
+  const rgba = c => { let m = c.match(/^rgba?\\(([^)]+)\\)/); if (m) { const p = m[1].split(/[\\s,\\/]+/).filter(Boolean).map(Number); return [p[0], p[1], p[2], p.length > 3 ? p[3] : 1]; }
+    m = c.match(/^color\\(srgb ([^)]+)\\)/); if (m) { const p = m[1].split(/[\\s\\/]+/).filter(Boolean).map(Number); return [p[0] * 255, p[1] * 255, p[2] * 255, p.length > 3 ? p[3] : 1]; }
+    return null; };
+  const over = (top, under) => { const a = top[3]; return [0, 1, 2].map(i => top[i] * a + under[i] * (1 - a)).concat([1]); };
+  const lum = c => { const f = v => { v /= 255; return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }; return 0.2126 * f(c[0]) + 0.7152 * f(c[1]) + 0.0722 * f(c[2]); };
+  const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+  function behind(el) {  // the backgrounds from el up to the first opaque one, composited; null over an image or a gradient
+    const layers = [];
+    for (let n = el; n; n = n.parentElement) { const cs = getComputedStyle(n); if (cs.backgroundImage !== 'none') return null;
+      const c = rgba(cs.backgroundColor); if (c && c[3] > 0) { layers.push(c); if (c[3] >= 1) break; } }
+    let bg = [255, 255, 255, 1]; for (let i = layers.length - 1; i >= 0; i--) bg = over(layers[i], bg); return bg; }
+  const out = [];
+  for (const el of document.querySelectorAll('body *')) {
+    if (el.closest(skip) || !el.getClientRects().length) continue;
+    const own = [...el.childNodes].some(n => n.nodeType === 3 && n.textContent.trim());
+    if (!own) continue;
+    const cs = getComputedStyle(el); if (cs.visibility !== 'visible') continue;
+    let op = 1; for (let n = el; n; n = n.parentElement) op *= +getComputedStyle(n).opacity;
+    if (op < 0.5) continue;  // a disabled control, faded on purpose
+    const bg = behind(el), fg = rgba(cs.color); if (!bg || !fg) continue;
+    const r = ratio(over([fg[0], fg[1], fg[2], fg[3] * op], bg), bg), size = parseFloat(cs.fontSize), bold = +cs.fontWeight >= 700;
+    const need = size >= 24 || (size >= 18.66 && bold) ? 3 : 4.5;
+    if (r < need) out.push({t: el.textContent.trim().slice(0, 40), sel: el.tagName.toLowerCase() + (el.className && typeof el.className === 'string' ? '.' + el.className.trim().split(/\\s+/).join('.') : ''), r: Math.round(r * 100) / 100, need});
+  }
+  return out; }"""
+
+
+async def check_a11y(run):
+    sec = run.rep.sec("a11y", "Headings never skip a level, and page text meets WCAG AA contrast, in light and dark")
+    keys = [k for k, pg in run.static.items() if not pg.redirect]
+    # some progress, so the cards' chips show too
+    seed = "try { localStorage.setItem('ld:watched', 'true'); localStorage.setItem('ld3:visited', '[\"grain\"]'); localStorage.setItem('ld-silent-change:watched', 'true'); } catch (e) {}"
+
+    async def one(key, theme):
+        async with run.sem:
+            ctx = await run.context(1280, theme, init=seed)
+            try:
+                pg, _ = await run.page(ctx, key)
+                await run.ready(pg)
+                await pg.wait_for_timeout(300)
+                await pg.evaluate("() => document.querySelectorAll('details').forEach(d => { d.open = true; })")
+                if theme == "light":
+                    hs = await pg.evaluate("() => [...document.querySelectorAll('h1,h2,h3,h4,h5,h6')].filter(h => !h.closest('template')).map(h => [+h.tagName[1], h.textContent.trim().slice(0, 40)])")
+                    expect(sec, sum(1 for h in hs if h[0] == 1) == 1, f"/{key}: {sum(1 for h in hs if h[0] == 1)} h1 headings")
+                    for a, b in zip(hs, hs[1:]):
+                        expect(sec, b[0] <= a[0] + 1, f"/{key}: h{a[0]} {a[1]!r} is followed by h{b[0]} {b[1]!r}")
+                for x in await pg.evaluate(CONTRAST_JS):
+                    expect(sec, False, f"/{key} {theme}: {x['sel']} {x['t']!r} is {x['r']}:1 (needs {x['need']}:1)")
+            finally:
+                await ctx.close()
+
+    await asyncio.gather(*(one(k, t) for k in keys for t in THEMES))
+    sec["notes"].append(f"{len(keys)} pages × 2 themes, after their scripts ran")
 
 
 # ---------------------------------------------------------------- 12. the words drawn in the films
@@ -1026,7 +1184,7 @@ async def take_shots(run):
 CHECKS = {"pages": check_pages, "notfound": check_404, "deeplinks": check_deeplinks, "chapters": check_chapter_links,
           "players": check_players, "nextpanel": check_next, "think-silent": check_think_silent,
           "think-home": check_think_home, "progress": check_progress, "nostorage": check_nostorage,
-          "mobile": check_mobile, "drawn": check_drawn}
+          "mobile": check_mobile, "a11y": check_a11y, "drawn": check_drawn}
 
 
 async def amain(args):

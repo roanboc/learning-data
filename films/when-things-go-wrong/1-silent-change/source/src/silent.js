@@ -25,17 +25,48 @@ function msg(ctx,x,y,w,who,text,c,a,typing){if(a<=0.01&&!typing)return;const lin
   const h=52+lines.length*36;withA(ctx,Math.max(a,typing?1:0),()=>{glass(ctx,x,y,w,typing&&a<0.5?84:h,20,c,{glow:12,ea:0.65,fill:"rgba(9,15,30,0.92)"});T(ctx,who,x+24,y+32,{w:800,size:18,color:rgba(c,0.95)});
     if(a<0.5&&typing){for(let i=0;i<3;i++){ctx.fillStyle=rgba(INK,0.4+0.5*Math.max(0,Math.sin(typing*6-i*0.8)));ctx.beginPath();ctx.arc(x+34+i*20,y+60,5,0,TAU);ctx.fill();}}
     else withA(ctx,a,()=>lines.forEach((l,i)=>T(ctx,l,x+24,y+72+i*36,{w:600,size:26})));});return h;}
-// the Head of School's dashboard: the class-fill data product, a gold painting, with the "last good data" banner
-function dashboard(ctx,x,y,w,h,o){o=o||{};glass(ctx,x,y,w,h,24,[170,205,255],{glow:18,ea:0.5,fill:"rgba(8,14,28,0.9)"});
-  T(ctx,"Enrolments · census date tomorrow",x+32,y+52,{w:800,size:26});T(ctx,o.day||"Tuesday",x+w-32,y+52,{w:600,size:20,align:"right",color:rgba(SOFT,0.95)});
-  const px=x+32,py=y+86,pw=w*0.42,ph=pw*0.7;ledFrame(ctx,px,py,pw,ph,GOLDC,painting2("modern"),{glow:18});
-  T(ctx,"Class fill",px+pw+36,py+34,{w:700,size:22,color:rgba(SOFT,0.95)});T(ctx,"Data Science 101",px+pw+36,py+70,{w:800,size:30});
-  T(ctx,o.num||"94%",px+pw+36,py+188,{w:800,size:108,color:o.numCol||rgba(INK,0.98)});T(ctx,"of 120 seats",px+pw+40,py+228,{w:500,size:22,color:rgba(SOFT,0.95)});
-  if(o.ghost>0)withA(ctx,o.ghost,()=>{ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(BAD,0.9);ctx.lineWidth=3;rr(ctx,px+pw+24,py+86,w-pw-88,170,16);ctx.stroke();ctx.restore();
-    T(ctx,"108%",px+pw+44,py+196,{w:800,size:108,color:rgba(BAD,0.95)});T(ctx,"if the waitlist had counted",px+pw+44,py+236,{w:600,size:20,color:rgba(BAD,0.95)});});
-  const by=y+h-96;if(o.banner>0)withA(ctx,o.banner,()=>{glass(ctx,x+24,by,w-48,70,18,AMBER,{glow:14+8*(o.pulse||0),fill:"rgba(80,54,12,0.6)"});led(ctx,x+50,by+28,14,14,AMBER);
-    T(ctx,"Last good data: yesterday, 23:02",x+80,by+45,{w:700,size:26,color:"rgba(255,228,176,1)"});});
-  if(o.ok>0)withA(ctx,o.ok,()=>{glass(ctx,x+24,by,w-48,70,18,GOOD,{glow:12,fill:"rgba(12,50,32,0.5)"});led(ctx,x+50,by+28,14,14,GOOD);T(ctx,o.okText||"Up to date: today, 08:40",x+80,by+45,{w:700,size:26,color:"rgba(200,255,220,1)"});});}
+// Ana's dashboard, in the style of a Databricks AI/BI dashboard: a light canvas, a header with the logo, an alert banner when the data is old,
+// a counter (KPI) widget for class fill with its comparison and a capacity bar, and a bar chart of every class. No pie charts.
+const DB={canvas:"#f5f6f8",card:"#ffffff",line:"#d8dee4",text:"#11171c",muted:"#5f7281",blue:"#077a9d",green:"#277c43",greenBg:"#e3f4ea",red:"#c82d4c",warn:"#8a5300",warnBg:"#fcefd9",warnLine:"#f0a33a",track:"#e8ecf0"};
+function dbCard(ctx,x,y,w,h){ctx.save();ctx.shadowColor="rgba(0,0,0,0.18)";ctx.shadowBlur=10;ctx.shadowOffsetY=2;ctx.fillStyle=DB.card;rr(ctx,x,y,w,h,8);ctx.fill();ctx.restore();ctx.strokeStyle=DB.line;ctx.lineWidth=1.2;rr(ctx,x,y,w,h,8);ctx.stroke();}
+// a counter widget: title, source table, the value, a comparison, a capacity bar and seats; s scales the type for small copies
+function kpiCard(ctx,x,y,w,h,o){o=o||{};const s=o.s||1,v=o.value==null?94:o.value,pad=20*s;dbCard(ctx,x,y,w,h);
+  T(ctx,o.title||"Class fill · Data Science 101",x+pad,y+pad+16*s,{w:700,size:19*s,color:DB.text});T(ctx,o.source||"fct_class_fill",x+pad,y+pad+40*s,{w:500,size:14*s,f:"mono",color:DB.muted});
+  T(ctx,(o.shown||v)+"%",x+pad,y+pad+122*s,{w:700,size:78*s,color:o.ghost?DB.red:DB.text});
+  if(o.delta)T(ctx,o.delta,x+pad+tw(ctx,(o.shown||v)+"%",78*s,700)+16*s,y+pad+118*s,{w:700,size:17*s,color:o.deltaCol||DB.green});
+  const by=y+h-pad-44*s,bw=w-2*pad,sy0=y+pad+150*s,sy1=by-30*s;
+  if(sy1-sy0>40*s){const tr=o.trend||[71,74,76,79,81,83,85,86,88,90,91,92,93,v],lo=60,hi=100,px=i=>x+pad+bw*i/(tr.length-1),py=q=>sy1-(sy1-sy0)*(q-lo)/(hi-lo);
+    ctx.beginPath();tr.forEach((q,i)=>i?ctx.lineTo(px(i),py(q)):ctx.moveTo(px(i),py(q)));ctx.lineTo(px(tr.length-1),sy1);ctx.lineTo(px(0),sy1);ctx.closePath();ctx.fillStyle="rgba(7,122,157,0.10)";ctx.fill();
+    ctx.beginPath();tr.forEach((q,i)=>i?ctx.lineTo(px(i),py(q)):ctx.moveTo(px(i),py(q)));ctx.strokeStyle=o.ghost?DB.red:DB.blue;ctx.lineWidth=2.5*s;ctx.stroke();
+    ctx.fillStyle=o.ghost?DB.red:DB.blue;ctx.beginPath();ctx.arc(px(tr.length-1),py(tr[tr.length-1]),4*s,0,TAU);ctx.fill();T(ctx,"last 14 days",x+pad,sy0-4*s,{w:500,size:13*s,color:DB.muted});}
+  ctx.fillStyle=DB.track;rr(ctx,x+pad,by,bw,12*s,6*s);ctx.fill();
+  ctx.fillStyle=o.ghost?DB.red:DB.blue;rr(ctx,x+pad,by,bw*Math.min(1,v/100),12*s,6*s);ctx.fill();
+  if(v>100){ctx.fillStyle=DB.red;rr(ctx,x+pad+bw-4*s,by-6*s,8*s,24*s,3*s);ctx.fill();}
+  ctx.strokeStyle=DB.text;ctx.lineWidth=2*s;ctx.beginPath();ctx.moveTo(x+pad+bw,by-8*s);ctx.lineTo(x+pad+bw,by+20*s);ctx.stroke();
+  T(ctx,o.foot||Math.round(v*1.2)+" of 120 seats",x+pad,y+h-pad,{w:500,size:15*s,color:DB.muted});T(ctx,"capacity",x+pad+bw,y+h-pad,{w:500,size:13*s,align:"right",color:DB.muted});}
+// a small copy of the counter, for the platform views: the data product the dashboard shows, with a gold edge for the gold layer
+function kpiMini(ctx,x,y,w,h,v,a){withA(ctx,a==null?1:a,()=>{ctx.save();ctx.shadowColor=rgba(GOLDC,0.7);ctx.shadowBlur=18;ctx.strokeStyle=rgba(GOLDC,0.9);ctx.lineWidth=2.5;rr(ctx,x-4,y-4,w+8,h+8,11);ctx.stroke();ctx.restore();
+  kpiCard(ctx,x,y,w,h,{s:w/300,value:v||94});});}
+function dashboard(ctx,x,y,w,h,o){o=o||{};
+  // the screen: a dark bezel around a light dashboard
+  glass(ctx,x-12,y-12,w+24,h+24,22,[170,205,255],{glow:18,ea:0.45,fill:"rgba(8,14,28,0.95)"});ctx.save();rr(ctx,x,y,w,h,12);ctx.clip();ctx.fillStyle=DB.canvas;ctx.fillRect(x,y,w,h);
+  ctx.fillStyle=DB.card;ctx.fillRect(x,y,w,64);ctx.fillStyle=DB.line;ctx.fillRect(x,y+64,w,1.2);const lw=logo(ctx,"databricks",x+20,y+18,28);
+  T(ctx,"Enrolments · census date tomorrow",x+34+lw,y+41,{w:700,size:21,color:DB.text});T(ctx,o.day||"Tuesday",x+w-22,y+40,{w:500,size:16,align:"right",color:DB.muted});
+  let cy=y+84;const alert=(bg,line,col,icon,text,a)=>withA(ctx,a,()=>{ctx.fillStyle=bg;rr(ctx,x+20,cy,w-40,52,6);ctx.fill();ctx.fillStyle=line;rr(ctx,x+20,cy,6,52,3);ctx.fill();
+    ctx.fillStyle=col;ctx.font=font(800,20);ctx.fillText(icon,x+40,cy+34);T(ctx,text,x+72,cy+33,{w:600,size:19,color:col});});
+  const ba=Math.max(o.banner||0,o.ok||0);if(o.banner>0)alert(DB.warnBg,DB.warnLine,DB.warn,"⚠","Last good data: yesterday, 23:02 · a test stopped today's refresh",o.banner*(1-(o.ok||0)));
+  if(o.ok>0)alert(DB.greenBg,DB.green,DB.green,"✓",o.okText||"Up to date: today, 08:40",o.ok);
+  cy+=ba>0.01?72:0;const gh=y+h-cy-20,kw=w*0.46;
+  kpiCard(ctx,x+20,cy,kw,gh,{value:o.num?parseInt(o.num):94,delta:o.delta||"▲ 2 pts vs last week",foot:o.foot});
+  if(o.ghost>0)withA(ctx,o.ghost,()=>{ctx.save();ctx.fillStyle="rgba(255,255,255,0.92)";rr(ctx,x+20,cy,kw,gh,8);ctx.fill();ctx.setLineDash([10,8]);ctx.strokeStyle=DB.red;ctx.lineWidth=3;rr(ctx,x+20,cy,kw,gh,8);ctx.stroke();ctx.restore();
+    kpiCard(ctx,x+20,cy,kw,gh,{value:108,ghost:1,delta:"if the waitlist had counted",deltaCol:DB.red,foot:"130 of 120 seats",trend:[71,74,76,79,81,83,85,86,88,90,91,92,94,108]});});
+  // a bar chart of every first-year class: Data Science 101 highlighted
+  const bx=x+40+kw,bwid=w-60-kw;dbCard(ctx,bx,cy,bwid,gh);T(ctx,"Class fill by class",bx+20,cy+36,{w:700,size:19,color:DB.text});T(ctx,"first year · census date tomorrow",bx+20,cy+60,{w:500,size:14,color:DB.muted});
+  const rows=[["Data Science 101",parseInt(o.num||"94")],["Statistics 110",88],["Programming 100",76],["Data Ethics 120",64]],lx=bx+20,bw2=bwid-190,rh=Math.min(56,(gh-100)/rows.length);
+  rows.forEach(([n,v],i)=>{const yy=cy+90+i*rh;T(ctx,n,lx,yy+14,{w:i?500:700,size:15,color:DB.text});ctx.fillStyle=DB.track;rr(ctx,lx,yy+22,bw2,14,4);ctx.fill();
+    ctx.fillStyle=i?"#8bcae7":DB.blue;rr(ctx,lx,yy+22,bw2*Math.min(1,v/100),14,4);ctx.fill();T(ctx,v+"%",lx+bw2+14,yy+34,{w:700,size:16,color:DB.text});});
+  ctx.strokeStyle=DB.muted;ctx.setLineDash([4,4]);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(lx+bw2,cy+96);ctx.lineTo(lx+bw2,cy+96+rows.length*rh);ctx.stroke();ctx.setLineDash([]);
+  ctx.restore();}
 // a person in a video-call tile: head and shoulders, name and role
 function callTile(ctx,id,x,y,w,h,o){o=o||{};const P=PEOPLE[id];glass(ctx,x,y,w,h,20,P.edge,{glow:o.hi?22:12,ea:o.hi?0.9:0.55,fill:"rgba(14,22,42,0.92)"});
   ctx.save();rr(ctx,x+3,y+3,w-6,h-6,18);ctx.clip();const s=o.s||h/190,k=s*P.build.h;person(ctx,id,x+w/2,y+h*0.52+505*k,s,{pose:"stand",expr:o.expr||"calm",t:o.t||0,glow:0.3});ctx.restore();
@@ -84,6 +115,6 @@ function platformRow(ctx,t,o){o=o||{};const y=o.y||470;
   const g=o.gate||GOOD;lane(ctx,[{x:800,y},{x:900,y}],APP.sis.c,0.6);gate(ctx,900,y,150,g,"tests");chip(ctx,900,y-130,"dbt","tests","",{align:"center",edge:g});
   const dim=o.skip?0.35:1;withA(ctx,dim,()=>{lane(ctx,[{x:930,y},{x:1000,y}],[214,228,255],0.6);vault(ctx,1000,y-150,240,300,LAYER.silver,(r,c)=>hash(r*7+c,3)<0.7?[214,228,255]:null,"Silver","consistent");
     lane(ctx,[{x:1240,y},{x:1300,y}],GOLDC,0.6);vault(ctx,1300,y-150,240,300,LAYER.gold,(r,c)=>hash(r*5+c,2)<0.6?GOLDC:null,"Gold","class fill");lane(ctx,[{x:1540,y},{x:1600,y}],GOLDC,0.6);});
-  ledFrame(ctx,1600,y-110,250,175,GOLDC,painting2("modern"),{glow:18});T(ctx,o.num||"94%",1725,y+118,{w:800,size:44,align:"center"});
+  kpiMini(ctx,1590,y-95,270,190,parseInt(o.num||"94"));
   if(o.skip)withA(ctx,o.skip,()=>{tag(ctx,1120,y+200,"skipped",SOFT,{align:"center",size:17});tag(ctx,1420,y+200,"skipped",SOFT,{align:"center",size:17});});
   if(o.banner>0)withA(ctx,o.banner,()=>tag(ctx,1725,y-150,"last good data · yesterday 23:02",AMBER,{align:"center",size:16}));}

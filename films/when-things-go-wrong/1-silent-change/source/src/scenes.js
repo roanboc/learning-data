@@ -15,7 +15,7 @@ scene("banner",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");
   // the title, over a darker frame
   const tA=fin(t,B+0.1,0.9);if(tA>0){setScreen(ctx,S);ctx.fillStyle="rgba(3,5,11,"+(0.93*tA)+")";ctx.fillRect(0,0,W,H);
     withA(ctx,tA,()=>{glow(ctx,960,500,420,SK,0.12);T(ctx,"WHEN THINGS GO WRONG",960,450,{w:800,size:26,align:"center",color:rgba(SK,0.95)});T(ctx,"Silent change",960,540,{w:800,size:88,align:"center"});
-      T(ctx,"Episode 1",960,600,{w:600,size:24,align:"center",color:rgba(SOFT,0.95)});});}});
+      T(ctx,"why a change needs both sides",960,600,{w:600,size:26,align:"center",color:rgba(SOFT,0.95)});});}});
 
 /* ---------- 2. Six hours earlier ---------- */
 scene("night",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
@@ -48,7 +48,7 @@ scene("sam",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
 /* ---------- 4. Follow the thread ---------- */
 // the lineage world: the steps that built the number on Ana's dashboard, from the dashboard back to bronze
 function lineWorld(ctx,t,k,trayA){const y=540;
-  ledFrame(ctx,1545,262,190,133,GOLDC,painting2("modern"),{glow:16});T(ctx,"94%",1640,236,{w:800,size:30,align:"center"});
+  kpiMini(ctx,1520,252,240,152,94);
   lineage(ctx,1640,y,350,{k,bad:true});tray(ctx,425,650,330,15,t,trayA);
   const d=Math.floor(k);if(k>0)glow(ctx,1640-Math.min(4,k)*350,y,60,BAD,0.2+0.1*Math.sin(t*3));}
 scene("thread",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),T0=c("lineage");
@@ -87,7 +87,7 @@ function campus(ctx,t,sc,c){ // the flashback: two notices, each on its own path
   bld(300,300,300,90,"Registrar's office",BIZ);bld(300,700,300,90,"Student system team",TECH);
   ["School of Computing","School of Business","School of Health"].forEach((s,i)=>bld(900,190+i*110,300,70,s,BIZ));bld(900,700,300,70,"release notes",TECH);
   glass(ctx,1440,340,380,300,24,[170,205,255],{glow:14,ea:0.5,fill:"rgba(8,14,28,0.9)"});T(ctx,"Data platform",1630,390,{w:800,size:24,align:"center"});
-  ledFrame(ctx,1545,420,170,119,GOLDC,painting2("modern"),{glow:12});T(ctx,"and the people who use its numbers",1630,600,{w:500,size:16,align:"center",color:rgba(SOFT,0.95)});
+  kpiMini(ctx,1520,420,220,139,94);T(ctx,"and the people who use its numbers",1630,600,{w:500,size:16,align:"center",color:rgba(SOFT,0.95)});
   const e1=path([{x:450,y:300},{x:600,y:300},{x:750,y:190},{x:750,y:410}],BIZ,pA),e2=path([{x:450,y:700},{x:750,y:700}],TECH,pB);
   if(pA>0.05&&pA<0.98){ctx.fillStyle=rgba(BIZ,1);rr(ctx,e1.x-14,e1.y-10,28,20,3);ctx.fill();}
   if(pB>0.05&&pB<0.98){ctx.fillStyle=rgba(TECH,1);rr(ctx,e2.x-10,e2.y-13,20,26,3);ctx.fill();}
@@ -134,10 +134,10 @@ scene("fix",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
 /* ---------- 8. Recover ---------- */
 scene("recover",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
   world(ctx,S);camKeys(ctx,S,[[0,960,520,1.0],[c("would")-0.4,980,520,1.0],[c("would")+1.4,960,1470,1.0],[sc.dur+1,990,1460,1.04]],t);
-  const run=ease(clamp((t-c("rerun")-0.2)/2.0,0,1));platformRow(ctx,t,{skip:1-run,gate:GOOD,y:470,num:"96%"});
+  const run=ease(clamp((t-c("rerun")-0.2)/2.0,0,1));platformRow(ctx,t,{skip:1-run,gate:GOOD,y:470,num:run>0.95?"96%":"94%"});
   if(run>0&&run<1){const x=lerp(900,1725,run);glow(ctx,x,470,80,GOOD,0.5);}
   const v=fin(t,c("versions")+0.4),ok=fin(t,c("confirm")+0.2);
-  dashboard(ctx,480,1180,960,580,{num:v>0.5?"96%":"94%",banner:1-ok,ok,ghost:fin(t,c("would")+1.8)*fout(t,c("versions")-0.2),day:"Tuesday"});
+  dashboard(ctx,480,1180,960,580,{num:ok>0.5?"96%":"94%",banner:1-ok,ok,ghost:fin(t,c("would")+1.8)*fout(t,c("versions")-0.2),day:"Tuesday"});
   withA(ctx,v,()=>{[["version 41","yesterday 23:02","94%"],["version 42","today 08:31","96%"]].forEach(([n,w2,p],i)=>{const x=1480+i*22,y=1230+i*190;glass(ctx,x,y,400,160,18,[214,228,255],{glow:12,ea:0.7,fill:"rgba(10,16,32,0.9)"});
     T(ctx,n,x+24,y+44,{w:800,size:22,f:"mono"});T(ctx,w2,x+24,y+76,{w:500,size:18,color:rgba(SOFT,0.95)});T(ctx,p,x+376,y+128,{w:800,size:44,align:"right",color:i?rgba(GOOD,1):rgba(INK,0.9)});});
     T(ctx,"time travel",1680,1200,{w:700,size:20,align:"center",color:rgba(SOFT,0.95)});});

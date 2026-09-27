@@ -1,6 +1,6 @@
 # Too good to be true: source
 
-*Too good to be true*, the second film in *When things go wrong*, will be generated from code like [*Silent change*](../../1-silent-change/source/README.md), sharing its engine, components and characters. So far it holds the script's narration, the tools to measure it, and the film's own components, which the [style frames](../frames/README.md) draw with; the scenes come next.
+*Too good to be true*, a film in the series *When things go wrong*, on data quality checks, will be generated from code like [*Silent change*](../../1-silent-change/source/README.md), sharing its engine, components and characters. So far it holds the script's narration, the tools to measure it, and the film's own components, which the [style frames](../frames/README.md) draw with; the scenes come next.
 
 | File | What it holds |
 |---|---|

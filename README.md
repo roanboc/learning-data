@@ -19,7 +19,7 @@ site/                          the website, published to GitHub Pages as it is
   films/inner-life-of-data/    redirects the old player address to the home page
   journey/                     the making-of story: index.md (source) and index.html (generated)
   es/                          the Spanish site, with the same layout as the English above
-films/inner-life-of-data/      the first film: everything used to make it, and breathing-cut.md, how its pauses work
+films/inner-life-of-data/      the first film: everything used to make it, breathing-cut.md, how its pauses work, and pacing-review.md, how they were tuned
 films/when-things-go-wrong/    the second film, in development: its treatment
   script.md                    narration, pictures, rigour notes and sources
   captions/                    captions for video platforms: en.srt, en.vtt, es.srt, es.vtt

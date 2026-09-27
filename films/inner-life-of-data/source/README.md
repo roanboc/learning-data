@@ -47,7 +47,7 @@ Spanish: the same five commands with `FILM_LANG=es` in front of each, for exampl
 | `build.py` again | Embeds the soundtrack in the player. |
 | `render.py` | Renders 1080p frames at 30 fps and writes the MP4. |
 
-Before a long render, run `python tools/check.py` (or with `FILM_LANG=es`): it draws every tenth of a second on a small canvas, in about half a minute, and lists any moment that fails. To see how dense the narration is, run `python tools/pace.py` (or with `FILM_LANG=es`) after `tts.py`: it reports words per minute, how much of the time the voice speaks, and the longest quiet moment in each chapter. [PLAYBOOK.md](../../../PLAYBOOK.md) explains the targets.
+Before a long render, run `python tools/check.py` (or with `FILM_LANG=es`): it draws every tenth of a second on a small canvas, in about half a minute, and lists any moment that fails. To see how dense the narration is, run `python tools/pace.py` (or with `FILM_LANG=es`) after `tts.py`: it reports words per minute, how much of the time the voice speaks, and the longest quiet moment in each chapter, and it flags sentences with no breath after them and long stops inside a chapter. [PLAYBOOK.md](../../../PLAYBOOK.md) explains the targets.
 
 About `render.py`:
 
@@ -80,7 +80,7 @@ About `render.py`:
 A language lives in `src/i18n/<lang>/`, and `FILM_LANG=<lang>` builds it into `build/<lang>/` and `dist/<lang>/`:
 
 - `narration.js`: the narration, with the same line ids as the English, so the film re-times itself to the new voice.
-- `voice.json`: the Kokoro voice, language and speed, plus `say` rules that respell words for the voice only (for example product names).
+- `voice.json`: the Kokoro voice, language and speed, plus `say` rules that respell words for the voice only (for example product names), and an optional `lift` that raises the voice's pitch and formants while keeping its timing. The Spanish voice uses it to sound brighter and more clearly female.
 - `strings.js`: the on-screen text, as English → translation pairs, plus pattern rules for text built from numbers, and the player's Play and Pause labels. `src/i18n.js` swaps every string drawn on the canvas, so boxes size to the translated text.
 - `page.json`: the player page's text, as English → translation pairs.
 
@@ -89,7 +89,7 @@ To add a language, copy `src/i18n/es/`, translate the four files, and run the st
 ## Editing
 
 - Narration lives in `src/narration.js` (and `src/i18n/<lang>/narration.js`). The film re-times itself to the voice, so after changing a line, run the steps again.
-- Pauses live in `src/breath.js`, shared by every language: a `hold` after a line, a `pause` before one, and a wordless `breathe` at the end of a chapter, whose picture starts at the scene's `breath` cue. See [breathing-cut.md](../breathing-cut.md).
+- The engine leaves 0.7 s after each sentence, and 0.3 s where a sentence runs on into the next line (`src/engine3.js`). Other pauses live in `src/breath.js`, shared by every language: a `hold` after a line, a `pause` before one, and a wordless `breathe` at the end of a chapter, whose picture starts at the scene's `breath` cue. See [breathing-cut.md](../breathing-cut.md).
 - Scenes live in `src/scA.js` to `src/scD.js`; shared visual components are in `src/style2.js` and `src/ui3.js`. The site's labs (`site/assets/learn/`) draw with these same components, so a change here also shows up there: check the labs after changing a component's signature.
 - The player sets `window.FILM` (`ready`, `seek`, `play`, `pause`, `playScene`, `sceneStart`; `playScene(id, true)` stops at the end of that chapter), which the site uses for its "Watch this part" buttons.
 - `src/logos.js` embeds the official Databricks and dbt logos, unaltered, to identify those products (see `NOTICE.md` at the repository root).

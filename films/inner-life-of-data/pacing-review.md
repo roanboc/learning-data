@@ -1,5 +1,7 @@
 # Review: pauses, sound and motion in the breathing cut
 
+*Status: fixed on 27 September 2026, in both languages; see [What changed](#what-changed) at the end.*
+
 *A review of* The Inner Life of Data *(English, 8:01), made on 26 September 2026 from the committed source. The source matches the site's player and soundtrack exactly, so this is the film people watch. The Spanish film shares the same pauses and sound code, and has the same problems.*
 
 ## Verdict
@@ -123,3 +125,29 @@ The film also opens on a 3.6 s title card with no sound (it fits once the music 
 - **Timeline:** from the engine's own `filmInfo()`, the same call `audio.py` makes.
 - **Sound:** `build/mix.wav` was rebuilt from the committed source, and it matches the published `soundtrack.mp3` exactly. Voice, music and effects were measured separately, and the published English and Spanish soundtracks were checked for silence.
 - **Picture:** the film was drawn every 0.1 s, measuring how much of the image changes. The camera path was recorded from each scene's camera keys, and stills were checked across every hold.
+
+## What changed
+
+The fixes are built, in both languages, with even fewer stops than the plan. Measured the same way as above:
+
+| | Before | Now |
+|---|---|---|
+| Length | 8:01 (Spanish 8:38) | 7:32 (Spanish 8:09) |
+| Words a minute | 115 | 122 (Spanish 124) |
+| Silence after a full sentence | 0.3 s for 45 of 65 sentences | 0.7 s or more for all of them |
+| Stops inside chapters | 20, of 2.3 to 5.3 s | none longer than 2 s; 11 beats of 1.5 to 2 s |
+| Chapter endings | 7.3 to 10.3 s | 5.8 to 6.8 s (the first stays 2.7 s) |
+| Dead air | 3.6 s at the start, 2.3 s at 0:15, 2 s at 6:31 | none |
+| Music in the first chapter | missing | playing |
+| Music lift when the voice rests | 7.5 dB in 0.25 s, 32 times | 4 dB over 1.2 s, and only in pauses longer than about 1.3 s |
+| Frozen pauses | 3, and 4 more nearly still | none: every pause moves |
+| Fast camera moves | 27 | none |
+| Sound effects | 216 | 191 |
+
+- **Sound** (`tools/audio.py`): sounds that start before 0:00 now play, so the first chapter has its music. Before the twist the music dips instead of cutting to silence, and the pause is back to 1 s. The music lifts 4 dB when the voice rests, slowly, and stays down through short pauses. The beats fade out. *Into the platform* and *The sketch* have half the ticks.
+- **Timing** (`src/engine3.js`, `src/breath.js`): 0.7 s after every sentence, and 0.3 s where a sentence runs on into the next line. Five of the 8 stops marked ✗ are gone; the other three (0:15, 6:28 and 7:15) are now beats of 1.2 to 2 s, with sound and motion. The remaining holds add 0.3 to 1.3 s to the sentence gap, including a new short beat after "That's the conceptual model…". Chapter endings last 3.5 to 4.5 s.
+- **Picture** (`src/core.js`, `src/scA.js` to `src/scD.js`): camera moves glide (a sine ease), and the ones that darted now take 1.4 to 3.2 s. Holds that froze now drift slowly. Each chapter ending's variation is re-timed to fit, and the plaque in the *Gold* ending shows two lines instead of four.
+- **Spanish voice** (`src/i18n/es/voice.json`, `tools/tts.py`): the same voice, raised from a median pitch of 174 Hz to 200 Hz, like the English voice (201 Hz), and slightly brighter. Speech recognition still reads every word of the test lines correctly. The timing is unchanged.
+- **Guard** (`tools/pace.py`): it now counts sentences followed by less than 0.5 s and stops of 2.5 s or more inside a chapter. Both are 0.
+
+*The sketch* is now the densest chapter, at 143 words a minute, because its lines are voiced fast. Slowing it means re-voicing those lines.

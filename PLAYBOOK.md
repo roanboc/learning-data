@@ -47,12 +47,13 @@ What made *The Inner Life of Data* work, written so the next film, lab or course
 ## 5. Narration, sound and pace
 
 - **One idea per line, in short sentences.** Voice each line separately, and time the pictures to the voice, not the voice to the pictures.
-- **Measure density, don't guess it.** `films/inner-life-of-data/source/tools/pace.py` reports words per minute, how much of the time the voice speaks, and the longest quiet moment in each chapter. This film runs at 147 words a minute with the voice speaking 86% of the time. It's accurate, and it's relentless.
-- **Leave room to think.** Aim for about 115 to 130 words a minute and a voice that speaks less than 70% of the time. Hold 1.5 to 3 seconds after each new named idea, and end each chapter with a wordless breather that applies the idea to a new case. The picture keeps moving during every pause. See [the breathing cut](films/inner-life-of-data/breathing-cut.md).
+- **Measure density, don't guess it.** `films/inner-life-of-data/source/tools/pace.py` reports words per minute, how much of the time the voice speaks and the longest quiet moment in each chapter. It also counts sentences that run into the next without a breath, and long stops inside a chapter. The v4 cut ran at 147 words a minute with the voice speaking 86% of the time: accurate, and relentless. The first breathing cut fixed the averages with 32 long stops, and felt stop-start. Averages hide rhythm.
+- **Leave room to think, and spread it out.** Aim for about 115 to 130 words a minute, with the voice speaking about 70 to 75% of the time. Leave about 0.7 s after every sentence, and 0.5 to 1 s more after each new named idea. Keep stops inside a chapter under about 2 s, and end each chapter with a wordless breather of 3.5 to 4.5 s that applies the idea to a new case. The picture keeps moving during every pause. See [the breathing cut](films/inner-life-of-data/breathing-cut.md) and [its review](films/inner-life-of-data/pacing-review.md).
+- **Keep the camera calm.** Camera moves glide (a sine ease) and take at least about 1.4 s. Whip pans under a talking voice feel rushed; a frame that freezes in a pause feels stopped.
 - **Say it and show it at the same time.** Narration and picture together beat narration plus a wall of on-screen text. Keep on-screen words to labels.
 - **Name things before explaining them.** A new term lands better if the picture shows it a moment before the narration explains what it does.
 - **Make intentional pauses look intentional.** A silence needs light and motion, or it reads as a glitch.
-- **Let sound support meaning.** Music ducks under the voice and rises in pauses; about sixty effects land on story cues. Mix to about -16 LUFS for the web.
+- **Let sound support meaning.** Music sits under the voice and lifts about 4 dB in pauses, slowly, so it doesn't pump; never cut the sound to silence, which reads as a fault. About sixty effects land on story cues. Mix to about -16 LUFS for the web.
 - **Be open about the voice.** A synthetic voice is fine; say so. Captions come from the same script as the narration, so they always match.
 
 *Ask: where does the viewer get a moment to catch up?*
@@ -102,7 +103,7 @@ A film makes people feel they understand; learning comes from using the ideas. T
 **Before rendering**
 - [ ] The rigour sheet covers every scene.
 - [ ] Style frames and a short voice test are approved.
-- [ ] `tools/pace.py`: every chapter is under 130 words a minute, with a quiet moment of at least 4 seconds.
+- [ ] `tools/pace.py`: about 115 to 130 words a minute, a quiet moment of at least 4 seconds in each chapter, no sentence followed by less than 0.5 s, and no stop of 2.5 s or more inside a chapter.
 - [ ] Stills are checked at every named moment, with nothing under the captions.
 - [ ] `tools/check.py`: every moment of the film draws without an error. Stills only sample a few moments.
 

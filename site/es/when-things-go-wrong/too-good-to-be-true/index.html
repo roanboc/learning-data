@@ -14,37 +14,34 @@
 <link rel="stylesheet" href="../../../assets/site.css">
 </head>
 <body>
-<header class="top"><div class="top-in"><a class="brand" href="../../"><img src="../../../assets/favicon.svg" alt="">Learning Data</a><nav aria-label="Sitio"><a href="../../">Empieza aquí</a><a href="../../topics/" aria-current="true">Temas</a><a class="nav-extra" href="../../journey/">Cómo se hizo</a><a class="nav-extra" href="https://github.com/roanboc/learning-data">GitHub</a><span class="lang" role="group" aria-label="Idioma"><a href="../../../when-things-go-wrong/too-good-to-be-true/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span></nav></div></header>
+<header class="top"><div class="top-in"><a class="brand" href="../../"><img src="../../../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../../">Empieza aquí</a><a href="../../topics/" aria-current="true">Temas</a><a href="../../journey/">Cómo se hizo</a><span class="lang" role="group" aria-label="Idioma"><a href="../../../when-things-go-wrong/too-good-to-be-true/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span></nav></div></header>
 <main>
-<section class="hero">
+<section class="hero cine"><div class="bg" aria-hidden="true"><img src="../../../assets/too-good-to-be-true-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
 <p class="eyebrow crumbs"><a href="../../topics/">Temas</a> › <a href="../">Cuando algo sale mal</a></p>
 <h1>Demasiado bueno para ser verdad: para qué sirve una prueba sobre una cifra</h1>
-<p class="lead">Las solicitudes para el próximo año suben 38% de un día para otro, y un comité está por planificar 600 vacantes más. Todas las pruebas de filas pasan. Mira tres versiones del mismo martes, sin prueba, con una advertencia y con un error, y sigue el salto hasta una sincronización que copió dos veces una semana de solicitudes.</p>
+<p class="lead">Las solicitudes suben 38% de un día para otro, y un comité está por planificar 600 vacantes más. Todas las pruebas de filas pasan. ¿Qué debería hacer una prueba sobre el total?</p>
 <p class="meta-row"><span>6 min</span><span>3 labs</span><span>10 situaciones</span><span>Pausa para pensar</span><span>En inglés, con subtítulos en inglés</span></p>
 <p class="note">La película está en inglés. Esta página, los capítulos, las preguntas, los labs y las situaciones están en español.</p>
 <p class="builds-on">Amplía <i>La vida interior de los datos</i> · <a href="../../#t=122">Refinando con dbt</a> y <a href="../../#t=191">Oro</a></p>
-<ol class="path" data-store="ld-too-good-to-be-true" data-labs="3" data-quiz="10" data-text='{"watched":"Vista","labs":"{n} de 3 labs explorados","quiz":"{n} de 10 respondidas · {ok} correctas"}'>
+</section>
+<nav class="course" aria-label="Curso: Demasiado bueno para ser verdad"><div class="course-in"><p class="course-t"><small>Controles de calidad de datos</small>Demasiado bueno para ser verdad</p><ol class="path" data-store="ld-too-good-to-be-true" data-labs="3" data-quiz="10" data-text='{"watched":"Vista","labs":"{n} de 3 labs explorados","quiz":"{n} de 10 respondidas · {ok} correctas"}'>
 <li><a href="./#watch" aria-current="step"><span class="n"><b>1</b></span><b>Mira</b><span>Una película de 6 min</span></a></li>
 <li><a href="./labs/"><span class="n"><b>2</b></span><b>Desarma</b><span>Tres labs interactivos</span></a></li>
 <li><a href="./scenarios/"><span class="n"><b>3</b></span><b>Tú decides</b><span>Diez situaciones reales</span></a></li>
-</ol>
-</section>
-
+</ol></div></nav>
 <section class="module" id="watch" data-store="ld-too-good-to-be-true" aria-labelledby="watch-h">
-<div class="mhead"><div><p class="step">Mira</p><h2 id="watch-h">Demasiado bueno para ser verdad</h2><p>Una película de 6 min, en inglés (<i lang="en">Too good to be true</i>), con narración, música y sonido. Presiona Reproducir, o salta a un capítulo. Con <b>Pausa para pensar</b> activada, la película se detiene al final de cuatro capítulos y te hace una pregunta cada vez.</p></div></div>
+<div class="mhead"><div><h2 id="watch-h">Mira la película</h2><p>Presiona Reproducir, o salta a un capítulo. Activa <b>Pausa para pensar</b> y la película se detiene con una pregunta al final de los capítulos.</p></div></div>
 <div class="player" data-labs="labs/">
 <audio id="snd" preload="metadata" src="../../../assets/too-good-to-be-true/soundtrack.mp3"></audio><div class="poster"><img src="../../../assets/too-good-to-be-true-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Ver la película · 6 min</button><button type="button" class="think-badge" data-think>Ver con pausas para pensar</button></div></div><canvas id="film" width="1280" height="720" aria-label="Película animada, en inglés: Too good to be true"></canvas>
 <div class="bar"><button id="play">Reproducir</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="time">0:00</span><button id="think" aria-pressed="false" title="Detenerse al final de cuatro capítulos, con una pregunta cada vez">Pausa para pensar</button><button id="cc" class="on" aria-pressed="true">Subtítulos</button><button id="fs">Pantalla completa</button></div>
 </div>
 <div class="chapters" id="chapters" aria-label="Capítulos"></div>
-<div class="watch-foot">
-<div class="notes"><p><b>Cómo leerla.</b> La luz son los datos, como en <i>La vida interior de los datos</i>. El contorno de cada persona muestra su lado: cian para el técnico, dorado para el de negocio. El indicador junto a una cifra es una prueba sobre ella: el ámbar es una advertencia, que deja pasar los datos; el rojo es un error, que detiene la actualización. El lila es el sistema de admisión. La universidad, las personas y las cifras son ficticias. La narración es una voz sintética.</p>
-<p>Los subtítulos en inglés están activados; puedes quitarlos con Subtítulos. Archivos de subtítulos para otros reproductores: <a href="https://github.com/roanboc/learning-data/tree/main/films/when-things-go-wrong/2-too-good-to-be-true/captions">en.srt y en.vtt</a> (en inglés).</p></div>
-<div class="cta"><a class="btn" href="https://github.com/roanboc/learning-data/releases/latest/download/too-good-to-be-true.mp4">Descargar el video (en inglés)</a><a class="btn" href="https://github.com/roanboc/learning-data/blob/main/films/when-things-go-wrong/2-too-good-to-be-true/script.md">Leer el guion (en inglés)</a></div>
-</div>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/too-good-to-be-true.mp4">Descargar el video (en inglés)</a><a href="https://github.com/roanboc/learning-data/blob/main/films/when-things-go-wrong/2-too-good-to-be-true/script.md">Leer el guion (en inglés)</a></p>
+<details class="howto"><summary>Cómo leer la película</summary><div class="notes"><p>La luz son los datos, como en <i>La vida interior de los datos</i>. El contorno de cada persona muestra su lado: cian para el técnico, dorado para el de negocio. El indicador junto a una cifra es una prueba sobre ella: el ámbar es una advertencia, que deja pasar los datos; el rojo es un error, que detiene la actualización. El lila es el sistema de admisión. La universidad, las personas y las cifras son ficticias. La narración es una voz sintética.</p>
+<p>Los subtítulos en inglés están activados; puedes quitarlos con Subtítulos. Archivos de subtítulos para otros reproductores: <a href="https://github.com/roanboc/learning-data/tree/main/films/when-things-go-wrong/2-too-good-to-be-true/captions">en.srt y en.vtt</a> (en inglés).</p></div></details>
 <template id="next-panel"><div class="think-card"><p class="think-k">¿Y ahora?</p><h3>Viste para qué sirve una prueba sobre una cifra. Ahora pruébalo tú.</h3>
 <div class="next-opts"><a class="btn primary" href="labs/">Desarma: 3 labs interactivos →</a><a class="btn" href="scenarios/">Tú decides: 10 situaciones</a><a class="btn" href="../silent-change/">Cambios y contratos de datos · Cambio silencioso</a></div>
-<div class="think-foot"><button type="button" class="btn" data-again>Ver de nuevo</button><a class="think-lab" href="../../topics/">Todos los temas →</a></div></div></template>
+<div class="think-foot"><button type="button" class="btn" data-again>Ver de nuevo</button></div></div></template>
 </section>
 
 <section class="module" id="think-it-through" aria-labelledby="think-h">
@@ -76,10 +73,9 @@
 </div>
 </article>
 </div>
-<div class="cta"><a class="btn" href="../">Más de Cuando algo sale mal →</a><a class="btn" href="../../topics/">Todos los temas →</a></div>
 </section>
 </main>
-<footer><p class="foot-links"><a href="../../">Empieza aquí</a> · <a href="../../topics/">Temas</a> · <a href="../../journey/">Cómo se hizo</a> · <a href="https://github.com/roanboc/learning-data">GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película, los labs y las situaciones son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película, los labs y las situaciones son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
 <script>window.L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla completa",fsExit:"Salir de pantalla completa"}};</script>
 <script src="../../../assets/too-good-to-be-true/film.js"></script>
 <script>/* the film is in English; its chapter buttons and the Pause and think kicker use these Spanish names */
@@ -88,5 +84,6 @@
 <script src="../../../assets/learn/think.js"></script>
 <script src="../../../assets/learn/path.js"></script>
 <script src="../../../assets/learn/next.js"></script>
+<script src="../../../assets/ambient.js"></script>
 </body>
 </html>

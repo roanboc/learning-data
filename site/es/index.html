@@ -13,39 +13,32 @@
 <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
-<header class="top"><div class="top-in"><a class="brand" href="./"><img src="../assets/favicon.svg" alt="">Learning Data</a><nav aria-label="Sitio"><a href="./" aria-current="page">Empieza aquí</a><a href="topics/">Temas</a><a class="nav-extra" href="journey/">Cómo se hizo</a><a class="nav-extra" href="https://github.com/roanboc/learning-data">GitHub</a><span class="lang" role="group" aria-label="Idioma"><a href="../" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span></nav></div></header>
+<header class="top"><div class="top-in"><a class="brand" href="./"><img src="../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="./" aria-current="page">Empieza aquí</a><a href="topics/">Temas</a><a href="journey/">Cómo se hizo</a><span class="lang" role="group" aria-label="Idioma"><a href="../" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span></nav></div></header>
 <main>
-<section class="hero">
-<p class="eyebrow">Learning Data · Empieza aquí</p>
+<section class="hero cine"><div class="bg" aria-hidden="true"><img src="../assets/poster.es.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow">Empieza aquí</p>
 <h1>Cómo se mueven de verdad los datos, y por qué importa el significado</h1>
-<p class="lead">Sigue una inscripción en una universidad ficticia, desde un toque en el teléfono hasta una decisión. Empieza con esta película y luego profundiza, un tema a la vez. Lo bastante claro para quien empieza, y lo bastante riguroso para ingenieros de datos.</p>
-<ol class="path" data-home data-text='{"watched":"Vista","labs":"{n} de 8 paradas exploradas","quiz":"{n} de 12 respondidas · {ok} correctas"}'>
+<p class="lead">Sigue una inscripción en una universidad ficticia, desde un toque en el teléfono hasta una decisión. Mira la película, desarma la plataforma y luego decide tú.</p>
+</section>
+<nav class="course" aria-label="Curso: La vida interior de los datos"><div class="course-in"><p class="course-t"><small>Empieza aquí</small>La vida interior de los datos</p><ol class="path" data-home data-text='{"watched":"Vista","labs":"{n} de 8 paradas exploradas","quiz":"{n} de 12 respondidas · {ok} correctas"}'>
 <li><a href="#watch" aria-current="step"><span class="n"><b>1</b></span><b>Mira</b><span>Una película de 8½ minutos</span></a></li>
 <li><a href="labs/"><span class="n"><b>2</b></span><b>Desarma</b><span>Ocho labs interactivos</span></a></li>
 <li><a href="scenarios/"><span class="n"><b>3</b></span><b>Tú decides</b><span>Doce situaciones reales</span></a></li>
-</ol>
-</section>
-
+</ol></div></nav>
 <section class="module" id="watch" data-store="ld" aria-labelledby="watch-h">
-<div class="mhead"><div><p class="step"><i>1</i>Mira</p><h2 id="watch-h">La vida interior de los datos</h2><p>Una película de 8½ minutos con narración, música, sonido y tiempo para pensar. Presiona Reproducir, o salta a un capítulo. Con <b>Pausa para pensar</b> activada, la película se detiene al final de casi todos los capítulos para hacerte una pregunta.</p></div></div>
+<div class="mhead"><div><h2 id="watch-h">Mira la película</h2><p>Presiona Reproducir, o salta a un capítulo. Activa <b>Pausa para pensar</b> y la película se detiene con una pregunta al final de los capítulos.</p></div></div>
 <div class="player">
 <audio id="snd" preload="metadata" src="../assets/film/soundtrack.es.mp3"></audio><div class="poster"><img src="../assets/poster.es.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Ver la película · 8½ min</button><button type="button" class="think-badge" data-think>Ver con pausas para pensar</button></div></div><canvas id="film" width="1280" height="720" aria-label="Película animada explicativa: La vida interior de los datos"></canvas>
 <div class="bar"><button id="play">Reproducir</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="time">0:00</span><button id="think" aria-pressed="false" title="Detenerse al final de casi todos los capítulos, con una pregunta cada vez">Pausa para pensar</button><button id="cc" class="on" aria-pressed="true">Subtítulos</button><button id="fs">Pantalla completa</button></div>
 </div>
 <div class="chapters" id="chapters" aria-label="Capítulos"></div>
-<div class="watch-foot">
-<p class="notes"><b>Cómo leerla.</b> La luz son los datos, y cada sistema de origen tiene su propio color. El boceto (el modelo conceptual) le da a cada pieza su lugar. dbt guarda las recetas y las pruebas; Databricks las ejecuta. Las pinturas de oro son productos de datos, y sus etiquetas son exposures de dbt. Los proyectores comparten el original sin hacer copias. La narración es una voz sintética.</p>
-<div class="cta"><a class="btn" href="https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.es.mp4">Descargar el video</a><a class="btn" href="https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/script.md">Leer el guion (en inglés)</a></div>
-</div>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.es.mp4">Descargar el video</a><a href="https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/script.md">Leer el guion (en inglés)</a></p>
+<details class="howto"><summary>Cómo leer la película</summary><div class="notes"><p>La luz son los datos, y cada sistema de origen tiene su propio color. El boceto (el modelo conceptual) le da a cada pieza su lugar. dbt guarda las recetas y las pruebas; Databricks las ejecuta. Las pinturas de oro son productos de datos, y sus etiquetas son exposures de dbt. Los proyectores comparten el original sin hacer copias. La narración es una voz sintética.</p></div></details>
 <template id="next-panel"><div class="think-card"><p class="think-k">¿Y ahora?</p><h3>Ya viste cómo se mueven los datos. Ahora ve más allá.</h3>
 <div class="next-opts"><a class="btn primary" href="labs/">Desarma: 8 labs interactivos →</a><a class="btn" href="sketch/">Modelado de datos · <span lang="en">A Sharper Sketch</span></a><a class="btn" href="when-things-go-wrong/silent-change/">Cambios y contratos de datos · Cambio silencioso</a><a class="btn" href="when-things-go-wrong/too-good-to-be-true/">Controles de calidad de datos · Demasiado bueno para ser verdad</a></div>
-<div class="think-foot"><button type="button" class="btn" data-again>Ver otra vez</button><a class="think-lab" href="topics/">Todos los temas →</a></div></div></template>
+<div class="think-foot"><button type="button" class="btn" data-again>Ver otra vez</button></div></div></template>
 </section>
 
-<section class="next-band" aria-labelledby="next-step-h">
-<img src="../assets/labs.es.jpg" alt="El lab de dbt: un build que se detuvo en una prueba fallida, con los modelos siguientes saltados." width="1226" height="576" loading="lazy">
-<div class="txt"><p class="step"><i>2</i>Siguiente</p><h2 id="next-step-h">Desarma la plataforma</h2><p>Ocho labs interactivos, uno por capítulo. Desconecta Zerobus, rompe un build de dbt, cambia un registro y mira quién se entera.</p><p>Luego, <a href="scenarios/">decide</a> en doce situaciones reales. ¿Quieres saber qué sabes ya? Pruébalas primero.</p><div class="cta"><a class="btn primary" href="labs/">Abrir los labs →</a></div></div>
-</section>
 
 <section class="module" id="go-deeper" aria-labelledby="go-deeper-h"><span id="film-three"></span>
 <div class="mhead"><div><p class="step">Profundiza</p><h2 id="go-deeper-h">Elige un tema</h2><p>Cada tema profundiza en una parte de la película que acabas de ver. Puedes verlos en cualquier orden.</p></div></div>
@@ -57,7 +50,6 @@
 <h3><a href="sketch/" lang="en">A Sharper Sketch</a></h3>
 <p>Dos cifras confiables no coinciden. ¿Cuándo necesita más precisión un modelo sencillo, y cómo se usa un modelo de referencia sin copiarlo?</p>
 <p class="meta">5½ min · 6 labs · 12 situaciones · En inglés</p>
-<p class="builds">Amplía el capítulo <i>El boceto</i></p>
 <p class="tc-progress" data-progress="ld3" data-labs="6" data-quiz="12" hidden></p>
 </div>
 </article>
@@ -68,7 +60,6 @@
 <h3><a href="when-things-go-wrong/silent-change/">Cambio silencioso</a></h3>
 <p>Un nuevo estado de inscripción llega a los datos durante la noche, y cada lado de la universidad vio solo la mitad del cambio.</p>
 <p class="meta">5½ min · Pausa para pensar · Cuando algo sale mal · En inglés</p>
-<p class="builds">Amplía <i>Refinando con dbt</i> y <i>Oro</i></p>
 <p class="tc-progress" data-progress="ld-silent-change" hidden></p>
 </div>
 </article>
@@ -79,30 +70,19 @@
 <h3><a href="when-things-go-wrong/too-good-to-be-true/">Demasiado bueno para ser verdad</a></h3>
 <p>Las solicitudes suben un 38&nbsp;% de un día para otro. Una prueba sobre el total decide si alguien actúa con esa cifra.</p>
 <p class="meta">6 min · 3 labs · 10 situaciones · Cuando algo sale mal · En inglés</p>
-<p class="builds">Amplía <i>Refinando con dbt</i> y <i>Oro</i></p>
 <p class="tc-progress" data-progress="ld-too-good-to-be-true" data-labs="3" data-quiz="10" hidden></p>
 </div>
 </article>
 </div>
-<div class="cta"><a class="btn" href="topics/">Todos los temas →</a></div>
 </section>
 
-<section class="module" id="making-of" aria-labelledby="making-h">
-<div class="mhead"><div><p class="step">Detrás de la película</p><h2 id="making-h">Cómo se hizo: un viaje de aprendizaje</h2><p>Cómo la película pasó de una pregunta sobre analogías a una película terminada y narrada en dos días, hecha en conversación con Claude, un modelo de IA de Anthropic. La historia cuenta lo que exploramos, lo que discutimos, lo que salió mal y lo que aprendimos.</p></div></div>
-<div class="cards">
-<div class="card"><h3>Exploramos</h3><p>Ríos, bibliotecas, tuberías y el cuerpo humano; cuatro tableros de estilo; y por qué ganó la luz que lleva imágenes.</p></div>
-<div class="card"><h3>Discutimos</h3><p>Cómo funciona de verdad cada componente: eventos, zero-copy, capas y pruebas de dbt, productos de datos y exposures.</p></div>
-<div class="card"><h3>Cuestionamos</h3><p>Precisión, diseño y errores simples, desde "no hay una luz mejor que otra" hasta mosaicos que parecían servilletas.</p></div>
-<div class="card"><h3>Aprendimos</h3><p>Catorce lecciones para explicar plataformas de datos y para crear contenido multimedia como código.</p></div>
-</div>
-<div class="cta"><a class="btn primary" href="journey/">Leer la historia completa</a><a class="btn" href="https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/source/README.md">Ver el código fuente</a></div>
-</section>
 </main>
-<footer><p class="foot-links"><a href="./">Empieza aquí</a> · <a href="topics/">Temas</a> · <a href="journey/">Cómo se hizo</a> · <a href="https://github.com/roanboc/learning-data">GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película, los labs y las situaciones son ficticios. Código: licencia MIT. Película, guion, subtítulos, imágenes y texto: CC BY 4.0. Los logotipos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Consulta los <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a>.</p></footer>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película, los labs y las situaciones son ficticios. Código: licencia MIT. Película, guion, subtítulos, imágenes y texto: CC BY 4.0. Los logotipos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Consulta los <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a>.</p></footer>
 <script src="../assets/film/film.es.js"></script>
 <script src="../assets/learn/learn.es.js"></script>
 <script src="../assets/learn/think.js"></script>
 <script src="../assets/learn/path.js"></script>
 <script src="../assets/learn/next.js"></script>
+<script src="../assets/ambient.js"></script>
 </body>
 </html>

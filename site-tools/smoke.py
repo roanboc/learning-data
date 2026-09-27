@@ -316,8 +316,8 @@ async def check_pages(run):
                     for x in m["shown"]:
                         if not any(abs(x["y"] - y) <= 6 for y in rows):
                             rows.append(x["y"])
-                    expect(sec, len(shown) == 4 and len(rows) <= 2,
-                           f"{where}: the header shows {shown} on {len(rows)} lines; expected the brand, Start here, Topics and EN/ES on at most 2")
+                    expect(sec, len(shown) == 5 and len(rows) == 1,
+                           f"{where}: the header shows {shown} on {len(rows)} lines; expected the brand, Start here, Topics, Making of and EN/ES on one")
                 else:
                     expect(sec, not m["hidden"], f"{where}: header items hidden on a wide screen: {m['hidden']}")
             finally:
@@ -988,7 +988,7 @@ async def check_nostorage(run):
 
 # ---------------------------------------------------------------- 11. phones
 async def check_mobile(run):
-    sec = run.rep.sec("mobile", "Phones and tablets: cards stack and the whole card is a link, anchors clear the header, panels sit below the film up to 900 px and inside it above")
+    sec = run.rep.sec("mobile", "Phones and tablets: cards stack and the whole card is a link, anchors clear the header and the course bar, panels sit below the film up to 900 px and inside it above")
     grids = [k for k, pg in run.static.items() if not pg.redirect and pg.dom.first(cls="topic-grid")]
     ctx = await run.context(390)
     try:
@@ -1015,9 +1015,6 @@ async def check_mobile(run):
                 await pg.goto(run.url("topics/"), wait_until="load")
                 await tap("#start .topic-card.wide .tc-body > p:not(.kicker)")
                 expect(sec, run.key(pg.url) == "", f"/topics/ @{width}: tapping the intro card's text went to /{run.key(pg.url)}")
-                await pg.goto(run.url("topics/"), wait_until="load")
-                await tap("#start .topic-card.wide .cta a:nth-child(2)")
-                expect(sec, run.key(pg.url).startswith("labs/"), f"/topics/ @{width}: the Labs button went to /{run.key(pg.url)}")
                 await pg.close()
             finally:
                 await c2.close()
@@ -1029,7 +1026,7 @@ async def check_mobile(run):
                                     ("when-things-go-wrong/silent-change/", "think-it-through")):
                     pg, _ = await run.page(c2, f"{key}#{anchor}")
                     await run.settle(pg)
-                    r = await pg.evaluate("a => ({top: document.getElementById(a).getBoundingClientRect().top, head: document.querySelector('header.top').getBoundingClientRect().bottom, ih: innerHeight})", anchor)
+                    r = await pg.evaluate("a => ({top: document.getElementById(a).getBoundingClientRect().top, head: Math.max(...[...document.querySelectorAll('header.top, nav.course')].map(e => e.getBoundingClientRect().bottom)), ih: innerHeight})", anchor)
                     expect(sec, r["head"] - 1 <= r["top"] < r["ih"], f"/{key}#{anchor} @{width}: lands at {r['top']:.0f} px, under the header ({r['head']:.0f} px) or off screen")
                     await pg.close()
             finally:

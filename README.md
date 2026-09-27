@@ -32,7 +32,7 @@ site/                            the website, published to GitHub Pages as it is
   404.html                       "Page not found", in English and Spanish
   es/                            the Spanish site, at the same paths. es/sketch/ and the pages of When things go wrong
                                  are Spanish pages around English films; Too good to be true's labs and scenarios are in Spanish too; A Sharper Sketch's labs and scenarios are in English only
-  assets/                        styles (site.css), the icon, and a poster per film: poster.jpg, poster.es.jpg,
+  assets/                        styles (site.css), ambient.js (the moving light behind each page's hero), the icon, and a poster per film: poster.jpg, poster.es.jpg,
                                  sketch-poster.jpg, silent-change-poster.jpg and too-good-to-be-true-poster.jpg
     film/                        The Inner Life of Data's player and soundtrack, per language (built in films/inner-life-of-data/source/)
     film3/                       A Sharper Sketch's player and soundtrack (built in films/a-sharper-sketch/source/)

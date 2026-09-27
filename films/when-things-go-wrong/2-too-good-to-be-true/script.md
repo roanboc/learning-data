@@ -70,7 +70,7 @@ Wordless breather: the three columns side by side, the first two fading, the thi
 
 ### 5 · Choosing the level · 3:36–4:14
 
-**Narration.** So why not make every test an error? Because on a closing date, a jump of 14% is real. Stopping it would hold back good data, and teach people to ignore alarms. So this number has two levels. Amber, for worth a look. Red, for must not reach a decision. And a warning only helps if someone reads it. So each one goes to a person who owns it, and there are few enough that they do. Choose the level by what a wrong number would cost.
+**Narration.** So why not make every test an error? Because on a closing date, a jump of 14% is real. Stopping it would hold back good data, and teach people to ignore alarms. So this number has two levels. Amber, for worth a look. Red, for must not reach a decision. A warning only helps if someone reads it. So each one has an owner, and there are few enough to read. Choose the level by what a wrong number would cost. That cost is easy to count once something goes wrong. The value of a right number, on an ordinary day, is much harder to see.
 
 **Picture.** The gauge, large. A closing date on the calendar: the total rises 14%, the needle sits in amber and the data flows on; one amber note goes to Leila, who reads it, nods and closes it: "closing date, expected". Then a wall of red alarms for every small change fades out, crossed through. The channel of forty unread notes shrinks to three, each with an owner's face.
 

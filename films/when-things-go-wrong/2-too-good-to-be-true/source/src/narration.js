@@ -39,8 +39,9 @@ const NARR={
  {"id":"why","gap":0.8,"text":"So why not make every test an error?"},
  {"id":"real","gap":0.8,"text":"Because on a closing date, a jump of 14% is real. Stopping it would hold back good data, and teach people to ignore alarms."},
  {"id":"two","gap":0.8,"text":"So this number has two levels. Amber, for worth a look. Red, for must not reach a decision."},
- {"id":"reads","gap":0.8,"text":"And a warning only helps if someone reads it. So each one goes to a person who owns it, and there are few enough that they do."},
- {"id":"cost","gap":0.8,"text":"Choose the level by what a wrong number would cost."}]},
+ {"id":"reads","gap":0.8,"text":"A warning only helps if someone reads it. So each one has an owner, and there are few enough to read."},
+ {"id":"cost","gap":0.8,"text":"Choose the level by what a wrong number would cost."},
+ {"id":"count","gap":0.8,"text":"That cost is easy to count once something goes wrong. The value of a right number, on an ordinary day, is much harder to see."}]},
 "thread":{"name":"Follow the thread","lead":0.8,"tail":1.0,"vo":[
  {"id":"upstream","gap":0.8,"text":"At 8:15 on Tuesday, Sam follows the thread upstream, from the painting, through silver, to bronze."},
  {"id":"pairs","gap":0.8,"text":"In bronze, 3,100 pairs of rows are identical, except for their ID and when they were created."},

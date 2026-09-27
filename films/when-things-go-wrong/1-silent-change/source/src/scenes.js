@@ -13,9 +13,10 @@ scene("banner",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");
   clockChip(ctx,S,"7:58","the morning before census date",fin(t,0.3));
   setScreen(ctx,S);withA(ctx,fin(t,c("ana")+0.6),()=>{glass(ctx,1560,52,296,64,18,BIZ,{glow:10,ea:0.6,fill:"rgba(8,14,28,0.85)"});T(ctx,"9:00 · confirm classes",1586,94,{w:700,size:22});});
   // the title, over a darker frame
-  const tA=fin(t,B+0.1,0.9);if(tA>0){setScreen(ctx,S);ctx.fillStyle="rgba(3,5,11,"+(0.93*tA)+")";ctx.fillRect(0,0,W,H);
+  const tA=fin(t,B+0.1,0.9);if(tA>0){setScreen(ctx,S);ctx.fillStyle="rgba(3,5,11,"+tA+")";ctx.fillRect(0,0,W,H);
     withA(ctx,tA,()=>{glow(ctx,960,500,420,SK,0.12);T(ctx,"WHEN THINGS GO WRONG",960,450,{w:800,size:26,align:"center",color:rgba(SK,0.95)});T(ctx,"Silent change",960,540,{w:800,size:88,align:"center"});
-      T(ctx,"why a change needs both sides",960,600,{w:600,size:26,align:"center",color:rgba(SOFT,0.95)});});}});
+      T(ctx,"why a change needs both sides",960,600,{w:600,size:26,align:"center",color:rgba(SOFT,0.95)});});}
+  if(t<1.4){setScreen(ctx,S);ctx.fillStyle="rgba(0,0,0,"+(1-ease(t/1.4))+")";ctx.fillRect(0,0,W,H);}});
 
 /* ---------- 2. Six hours earlier ---------- */
 scene("night",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
@@ -72,7 +73,7 @@ scene("bronze",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
   lineWorld(ctx,t,3+ease(clamp((t-0.2)/1.4,0,1)),1);
   // the rows in bronze, exactly as they arrived
   const a=fin(t,c("arrived")+0.6,0.8);withA(ctx,a,()=>{const x=0,y=40,w=548;glass(ctx,x,y,w,330,20,LAYER.bronze,{glow:16,ea:0.8,fill:"rgba(20,12,6,0.9)"});
-    T(ctx,"bronze.enrolments",x+24,y+40,{w:700,size:20,f:"mono",color:rgba(LAYER.bronze,1)});["student","class","status"].forEach((h,i)=>T(ctx,h,x+24+i*170,y+78,{w:700,size:16,color:rgba(SOFT,0.9)}));
+    T(ctx,"bronze.enrolments",x+24,y+40,{w:700,size:20,f:"mono",color:rgba(LAYER.bronze,1)});["student","unit","status"].forEach((h,i)=>T(ctx,h,x+24+i*170,y+78,{w:700,size:16,color:rgba(SOFT,0.9)}));
     ROWS.forEach((r,i)=>{const yy=y+112+i*36,wl=r[2]==="WAITLISTED",hi=wl?fin(t,c("new")+0.3+i*0.1):0;if(hi>0){ctx.fillStyle=rgba(AMBER,0.16*hi);rr(ctx,x+12,yy-24,w-24,32,8);ctx.fill();}
       r.forEach((v,j)=>T(ctx,v,x+24+j*170,yy,{w:600,size:19,f:"mono",color:wl&&j===2&&hi>0?rgba(AMBER,1):rgba(INK,0.9)}));});});
   withA(ctx,fin(t,c("new")+0.8),()=>tag(ctx,274,408,"15 in Data Science 101: WAITLISTED",AMBER,{align:"center",size:21}));
@@ -88,7 +89,9 @@ function campus(ctx,t,sc,c){ // the flashback: two notices, each on its own path
   ["School of Computing","School of Business","School of Health"].forEach((s,i)=>bld(900,190+i*110,300,70,s,BIZ));bld(900,700,300,70,"release notes",TECH);
   glass(ctx,1440,340,380,300,24,[170,205,255],{glow:14,ea:0.5,fill:"rgba(8,14,28,0.9)"});T(ctx,"Data platform",1630,390,{w:800,size:24,align:"center"});
   kpiMini(ctx,1520,420,220,139,94);T(ctx,"and the people who use its numbers",1630,600,{w:500,size:16,align:"center",color:rgba(SOFT,0.95)});
-  const e1=path([{x:450,y:300},{x:600,y:300},{x:750,y:190},{x:750,y:410}],BIZ,pA),e2=path([{x:450,y:700},{x:750,y:700}],TECH,pB);
+  const branch=y=>{const P=[];for(let i=0;i<=14;i++){const u=i/14,a=1-u;P.push({x:a*a*a*560+3*a*a*u*660+3*a*u*u*650+u*u*u*750,y:a*a*a*300+3*a*a*u*300+3*a*u*u*y+u*u*u*y});}return P;};
+  path([{x:450,y:300},{x:560,y:300}],BIZ,clamp(pA*2.2,0,1));const pb=clamp(pA*2.2-1.2,0,1);let e1=null;[190,300,410].forEach(y=>{const e=path(branch(y),BIZ,pb);if(y===300)e1=e;});if(pA<0.45)e1={x:lerp(450,560,clamp(pA*2.2,0,1)),y:300};
+  const e2=path([{x:450,y:700},{x:750,y:700}],TECH,pB);
   if(pA>0.05&&pA<0.98){ctx.fillStyle=rgba(BIZ,1);rr(ctx,e1.x-14,e1.y-10,28,20,3);ctx.fill();}
   if(pB>0.05&&pB<0.98){ctx.fillStyle=rgba(TECH,1);rr(ctx,e2.x-10,e2.y-13,20,26,3);ctx.fill();}
   // the paths that never were: from each audience towards the platform, fading out halfway
@@ -118,10 +121,11 @@ scene("halves",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
         glass(ctx,820,220,940,300,24,BIZ,{glow:16,ea:0.8,fill:"rgba(12,16,30,0.92)"});T(ctx,"Is a waitlisted student enrolled?",860,290,{w:800,size:34});T(ctx,"a business question",860,334,{w:600,size:20,color:rgba(SOFT,0.95)});
         withA(ctx,fin(t,c("decides")+0.3),()=>{T(ctx,"No.",860,410,{w:800,size:40,color:rgba(BIZ,1)});T(ctx,"Enrolled means holding a seat on census date.",940,410,{w:600,size:26});T(ctx,"A waitlisted student doesn't hold one yet.",940,452,{w:500,size:22,color:rgba(SOFT,0.95)});});});});
     if(sk>0){setScreen(ctx,S);withA(ctx,sk,()=>{bg2(ctx);camKeys(ctx,S,[[c("sketch")-0.4,960,470,0.98],[sc.dur+1,960,470,1.06]],t);
-      T(ctx,"The sketch · the conceptual model",960,170,{w:700,size:22,align:"center",color:rgba(SK,0.95)});sketch(ctx,960,360,1.25,{newA:fin(t,c("sketch")+0.9,1.0),glowNew:0.5+0.5*Math.sin(t*1.6)});});}}});
+      T(ctx,"The conceptual model · from A Sharper Sketch",960,170,{w:700,size:22,align:"center",color:rgba(SK,0.95)});
+      sharperSketch(ctx,{newA:fin(t,c("sketch")+0.9,1.0),glowNew:0.6+0.4*Math.sin(t*1.6),hi:0.5+0.5*fin(t,c("sketch")+0.4)});});}}});
 
 /* ---------- 7. The fix ---------- */
-const CODE=[["models/staging/_stg.yml",1],["- name: status",0],["  tests:",0],["    - accepted_values:",0],["        values: [enrolled, withdrawn,",0],["                 waitlisted]",2],["",0],["models/marts/fct_class_fill.sql",1],["count(*) filter (",0],["  where status = 'enrolled')",0],["-- waitlisted doesn't hold a seat",3]];
+const CODE=[["models/staging/_stg.yml",1],["- name: status",0],["  tests:",0],["    - accepted_values:",0],["        values: [enrolled, withdrawn,",0],["                 waitlisted]",2],["",0],["models/marts/fct_offering_fill.sql",1],["count(*) filter (",0],["  where status = 'enrolled')",0],["-- waitlisted doesn't hold a seat",3]];
 scene("fix",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
   world(ctx,S);camKeys(ctx,S,[[0,960,540,1.06],[sc.dur+1,980,530,1.0]],t);
   glass(ctx,120,140,1000,640,24,DBT,{glow:16,ea:0.7,fill:"rgba(10,12,22,0.94)"});chip(ctx,200,196,"dbt","one rule","",{edge:DBT});
@@ -129,7 +133,7 @@ scene("fix",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
     withA(ctx,a,()=>T(ctx,(kind===2?"+ ":"  ")+s,160,y,{w:500,size:24,f:"mono",color:kind===1?rgba(SOFT,0.9):kind===2?rgba(GOOD,1):kind===3?rgba(AMBER,0.95):rgba(INK,0.95)}));});
   withA(ctx,fin(t,c("review")+0.2),()=>{glass(ctx,1200,150,600,150,22,GOOD,{glow:14,ea:0.8,fill:"rgba(10,26,20,0.9)"});led(ctx,1230,212,16,16,GOOD);T(ctx,"Review · approved",1264,226,{w:800,size:28});T(ctx,"by a colleague, like any code",1264,262,{w:500,size:19,color:rgba(SOFT,0.95)});});
   withA(ctx,fin(t,c("review")+1.8),()=>{glass(ctx,1200,330,600,300,22,[170,205,255],{glow:12,ea:0.6,fill:"rgba(8,14,28,0.92)"});T(ctx,"CI · tests on what changed",1230,378,{w:800,size:24});
-    ["stg_enrolments","int_class_enrolments","fct_class_fill"].forEach((m,i)=>{const a=fin(t,c("review")+2.4+i*0.5);withA(ctx,a,()=>{led(ctx,1232,424+i*58,14,14,GOOD);T(ctx,m,1264,438+i*58,{w:600,size:22,f:"mono"});T(ctx,"pass",1770,438+i*58,{w:700,size:20,align:"right",color:rgba(GOOD,1)});});});});});
+    ["stg_enrolments","int_offering_enrolments","fct_offering_fill"].forEach((m,i)=>{const a=fin(t,c("review")+2.4+i*0.5);withA(ctx,a,()=>{led(ctx,1232,424+i*58,14,14,GOOD);T(ctx,m,1264,438+i*58,{w:600,size:22,f:"mono"});T(ctx,"pass",1770,438+i*58,{w:700,size:20,align:"right",color:rgba(GOOD,1)});});});});});
 
 /* ---------- 8. Recover ---------- */
 scene("recover",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);

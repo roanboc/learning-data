@@ -1,10 +1,9 @@
 /* ===== When things go wrong · Silent change: this episode's components =====
    Drawn with the first film's style (glass, luminous edges, one typeface) and the series' characters (people.js). */
-const SCENES=[];const cue=(sc,id)=>sc.cues[id];
-function scene(id,draw){const n=NARR[id];SCENES.push({id,name:n.name,lead:n.lead,tail:n.tail,vo:n.vo,draw});}
+// SCENES, cue(), scene(), the sketch's ink (SK) and the diagram components (entBox, ent, relLine, diagram) come from A Sharper Sketch's sketch3.js
 const fout=(t,a,d)=>1-sstep(a,a+(d||0.6),t);
 const brief=(t,a,d)=>fin(t,a,0.4)*fout(t,a+(d||3));
-const AMBER=[255,190,90],SK=[150,225,255],GOLDC=LAYER.gold;
+const AMBER=[255,190,90],GOLDC=LAYER.gold;
 function camKeys(ctx,S,keys,t){const cam=camAt(keys,t);setCam(ctx,S,cam);return cam;}
 // the background of the platform world, or of a room at dawn (warm light from a window on the left)
 function world(ctx,S){setScreen(ctx,S);bg2(ctx);}
@@ -30,8 +29,12 @@ function msg(ctx,x,y,w,who,text,c,a,typing){if(a<=0.01&&!typing)return;const lin
 const DB={canvas:"#f5f6f8",card:"#ffffff",line:"#d8dee4",text:"#11171c",muted:"#5f7281",blue:"#077a9d",green:"#277c43",greenBg:"#e3f4ea",red:"#c82d4c",warn:"#8a5300",warnBg:"#fcefd9",warnLine:"#f0a33a",track:"#e8ecf0"};
 function dbCard(ctx,x,y,w,h){ctx.save();ctx.shadowColor="rgba(0,0,0,0.18)";ctx.shadowBlur=10;ctx.shadowOffsetY=2;ctx.fillStyle=DB.card;rr(ctx,x,y,w,h,8);ctx.fill();ctx.restore();ctx.strokeStyle=DB.line;ctx.lineWidth=1.2;rr(ctx,x,y,w,h,8);ctx.stroke();}
 // a counter widget: title, source table, the value, a comparison, a capacity bar and seats; s scales the type for small copies
-function kpiCard(ctx,x,y,w,h,o){o=o||{};const s=o.s||1,v=o.value==null?94:o.value,pad=20*s;dbCard(ctx,x,y,w,h);
-  T(ctx,o.title||"Class fill · Data Science 101",x+pad,y+pad+16*s,{w:700,size:19*s,color:DB.text});T(ctx,o.source||"fct_class_fill",x+pad,y+pad+40*s,{w:500,size:14*s,f:"mono",color:DB.muted});
+function kpiCard(ctx,x,y,w,h,o){o=o||{};const s=o.s||1,v=o.value==null?94:o.value,pad=20*s;
+  if(h/s<250){dbCard(ctx,x,y,w,h);const bw=w-2*pad,ty=y+pad+14*s,vy=ty+58*s,by=y+h-pad-26*s;T(ctx,o.title||"Places filled · Data Science 101",x+pad,ty,{w:700,size:16*s,color:DB.text});
+    T(ctx,(o.shown||v)+"%",x+pad,vy,{w:700,size:52*s,color:o.ghost?DB.red:DB.text});ctx.fillStyle=DB.track;rr(ctx,x+pad,by,bw,10*s,5*s);ctx.fill();ctx.fillStyle=o.ghost?DB.red:DB.blue;rr(ctx,x+pad,by,bw*Math.min(1,v/100),10*s,5*s);ctx.fill();
+    T(ctx,Math.round(v*1.2)+" of 120 places",x+pad,y+h-pad,{w:500,size:13*s,color:DB.muted});return;}
+  dbCard(ctx,x,y,w,h);
+  T(ctx,o.title||"Places filled · Data Science 101",x+pad,y+pad+16*s,{w:700,size:19*s,color:DB.text});T(ctx,o.source||"fct_offering_fill",x+pad,y+pad+40*s,{w:500,size:14*s,f:"mono",color:DB.muted});
   T(ctx,(o.shown||v)+"%",x+pad,y+pad+122*s,{w:700,size:78*s,color:o.ghost?DB.red:DB.text});
   if(o.delta)T(ctx,o.delta,x+pad+tw(ctx,(o.shown||v)+"%",78*s,700)+16*s,y+pad+118*s,{w:700,size:17*s,color:o.deltaCol||DB.green});
   const by=y+h-pad-44*s,bw=w-2*pad,sy0=y+pad+150*s,sy1=by-30*s;
@@ -43,7 +46,7 @@ function kpiCard(ctx,x,y,w,h,o){o=o||{};const s=o.s||1,v=o.value==null?94:o.valu
   ctx.fillStyle=o.ghost?DB.red:DB.blue;rr(ctx,x+pad,by,bw*Math.min(1,v/100),12*s,6*s);ctx.fill();
   if(v>100){ctx.fillStyle=DB.red;rr(ctx,x+pad+bw-4*s,by-6*s,8*s,24*s,3*s);ctx.fill();}
   ctx.strokeStyle=DB.text;ctx.lineWidth=2*s;ctx.beginPath();ctx.moveTo(x+pad+bw,by-8*s);ctx.lineTo(x+pad+bw,by+20*s);ctx.stroke();
-  T(ctx,o.foot||Math.round(v*1.2)+" of 120 seats",x+pad,y+h-pad,{w:500,size:15*s,color:DB.muted});T(ctx,"capacity",x+pad+bw,y+h-pad,{w:500,size:13*s,align:"right",color:DB.muted});}
+  T(ctx,o.foot||Math.round(v*1.2)+" of 120 places",x+pad,y+h-pad,{w:500,size:15*s,color:DB.muted});T(ctx,"capacity",x+pad+bw,y+h-pad,{w:500,size:13*s,align:"right",color:DB.muted});}
 // a small copy of the counter, for the platform views: the data product the dashboard shows, with a gold edge for the gold layer
 function kpiMini(ctx,x,y,w,h,v,a){withA(ctx,a==null?1:a,()=>{ctx.save();ctx.shadowColor=rgba(GOLDC,0.7);ctx.shadowBlur=18;ctx.strokeStyle=rgba(GOLDC,0.9);ctx.lineWidth=2.5;rr(ctx,x-4,y-4,w+8,h+8,11);ctx.stroke();ctx.restore();
   kpiCard(ctx,x,y,w,h,{s:w/300,value:v||94});});}
@@ -59,9 +62,9 @@ function dashboard(ctx,x,y,w,h,o){o=o||{};
   cy+=ba>0.01?72:0;const gh=y+h-cy-20,kw=w*0.46;
   kpiCard(ctx,x+20,cy,kw,gh,{value:o.num?parseInt(o.num):94,delta:o.delta||"▲ 2 pts vs last week",foot:o.foot});
   if(o.ghost>0)withA(ctx,o.ghost,()=>{ctx.save();ctx.fillStyle="rgba(255,255,255,0.92)";rr(ctx,x+20,cy,kw,gh,8);ctx.fill();ctx.setLineDash([10,8]);ctx.strokeStyle=DB.red;ctx.lineWidth=3;rr(ctx,x+20,cy,kw,gh,8);ctx.stroke();ctx.restore();
-    kpiCard(ctx,x+20,cy,kw,gh,{value:108,ghost:1,delta:"if the waitlist had counted",deltaCol:DB.red,foot:"130 of 120 seats",trend:[71,74,76,79,81,83,85,86,88,90,91,92,94,108]});});
+    kpiCard(ctx,x+20,cy,kw,gh,{value:108,ghost:1,delta:"if the waitlist had counted",deltaCol:DB.red,foot:"130 of 120 places",trend:[71,74,76,79,81,83,85,86,88,90,91,92,94,108]});});
   // a bar chart of every first-year class: Data Science 101 highlighted
-  const bx=x+40+kw,bwid=w-60-kw;dbCard(ctx,bx,cy,bwid,gh);T(ctx,"Class fill by class",bx+20,cy+36,{w:700,size:19,color:DB.text});T(ctx,"first year · census date tomorrow",bx+20,cy+60,{w:500,size:14,color:DB.muted});
+  const bx=x+40+kw,bwid=w-60-kw;dbCard(ctx,bx,cy,bwid,gh);T(ctx,"Places filled by unit",bx+20,cy+36,{w:700,size:19,color:DB.text});T(ctx,"first-year units · semester 2",bx+20,cy+60,{w:500,size:14,color:DB.muted});
   const rows=[["Data Science 101",parseInt(o.num||"94")],["Statistics 110",88],["Programming 100",76],["Data Ethics 120",64]],lx=bx+20,bw2=bwid-190,rh=Math.min(56,(gh-100)/rows.length);
   rows.forEach(([n,v],i)=>{const yy=cy+90+i*rh;T(ctx,n,lx,yy+14,{w:i?500:700,size:15,color:DB.text});ctx.fillStyle=DB.track;rr(ctx,lx,yy+22,bw2,14,4);ctx.fill();
     ctx.fillStyle=i?"#8bcae7":DB.blue;rr(ctx,lx,yy+22,bw2*Math.min(1,v/100),14,4);ctx.fill();T(ctx,v+"%",lx+bw2+14,yy+34,{w:700,size:16,color:DB.text});});
@@ -75,7 +78,7 @@ function callTile(ctx,id,x,y,w,h,o){o=o||{};const P=PEOPLE[id];glass(ctx,x,y,w,h
 function tray(ctx,x,y,w,n,t,a){withA(ctx,a,()=>{glass(ctx,x,y,w,86,16,BAD,{glow:12,ea:0.6,fill:"rgba(40,10,14,0.55)"});T(ctx,"kept aside · "+n+" rows",x+18,y+28,{w:700,size:19,color:"rgba(255,180,170,1)"});
   for(let i=0;i<Math.min(n,15);i++){const bx=x+18+i*((w-36)/15),by=y+42+Math.sin(t*1.3+i)*2;ctx.fillStyle=rgba(AMBER,0.75);rr(ctx,bx,by,(w-36)/15-6,26,5);ctx.fill();}});}
 // the lineage, as a row of steps: each step can light up as the red thread reaches it
-const LIN=[["exposure","dashboard"],["fct_class_fill","data product"],["int_class_enrolments","joins enrolments to classes"],["stg_enrolments","staging · tested"],["bronze.enrolments","as it arrived"]];
+const LIN=[["exposure","dashboard"],["fct_offering_fill","data product"],["int_offering_enrolments","joins enrolments to units"],["stg_enrolments","staging · tested"],["bronze.enrolments","as it arrived"]];
 function lineage(ctx,x0,y,dx,o){o=o||{};const pts=LIN.map((_,i)=>[x0-i*dx,y]);
   ctx.strokeStyle="rgba(170,200,245,0.35)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);pts.forEach(p=>ctx.lineTo(p[0],p[1]));ctx.stroke();
   // the red thread, moving back along the lineage one step at a time
@@ -84,19 +87,17 @@ function lineage(ctx,x0,y,dx,o){o=o||{};const pts=LIN.map((_,i)=>[x0-i*dx,y]);
   pts.forEach((p,i)=>{const [n,sub]=LIN[i],bad=i===3&&o.bad,on=o.k>=i-0.05,c=bad?BAD:i===4?LAYER.bronze:i===0?GOLDC:[170,205,255];const w=Math.max(tw(ctx,n,22,700,"mono"),tw(ctx,sub,17,500))+44;
     glass(ctx,p[0]-w/2,y-48,w,96,18,c,{glow:on?22:8,ea:on?0.95:0.45,fill:"rgba(8,14,28,0.92)"});T(ctx,n,p[0],y-6,{w:700,size:22,f:"mono",align:"center"});T(ctx,sub,p[0],y+26,{w:500,size:17,align:"center",color:rgba(SOFT,0.95)});
     if(i===3)gate(ctx,p[0],y-110,70,bad?BAD:GOOD,"tests");});return pts;}
-// the conceptual sketch: student, enrolment and class, with the enrolment's statuses
-function sketch(ctx,x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.scale(s,s);
-  const box=(bx,by,name,sub)=>{glass(ctx,bx-110,by-44,220,88,16,SK,{glow:14,ea:0.8,fill:"rgba(10,20,40,0.9)"});T(ctx,name,bx,by+(sub?-2:9),{w:800,size:26,align:"center"});if(sub)T(ctx,sub,bx,by+26,{w:500,size:16,align:"center",color:rgba(SOFT,0.95)});};
-  ctx.strokeStyle=rgba(SK,0.7);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-230,0);ctx.lineTo(-110,0);ctx.moveTo(110,0);ctx.lineTo(230,0);ctx.stroke();
-  box(-340,0,"Student");box(0,0,"Enrolment","status · date");box(340,0,"Class","Data Science 101");
-  const st=[["enrolled","holds a seat",GOOD,1],["withdrawn","left before census",SOFT,1],["waitlisted","waiting for a seat · not enrolled",AMBER,o.newA||0]];
-  st.forEach(([n,m,c,a],i)=>withA(ctx,a,()=>{const yy=96+i*62;ctx.strokeStyle=rgba(SK,0.45);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,44);ctx.lineTo(0,yy-2);ctx.stroke();
-    glass(ctx,-150,yy-24,300,50,14,c,{glow:i===2?14+10*(o.glowNew||0):8,ea:0.8,fill:"rgba(8,14,28,0.92)"});T(ctx,n,-128,yy+9,{w:700,size:20,f:"mono"});T(ctx,m,168,yy+8,{w:500,size:17,color:rgba(c,0.95)});}));
-  ctx.restore();}
+// the sharper conceptual model from A Sharper Sketch, drawn with that film's components: enrolment status is its own entity,
+// "Status change", with a date, and it gains the new status. newA reveals "waitlisted"; hi lights the Status change box.
+function sharperSketch(ctx,o){o=o||{};const E={};Object.keys(L3).forEach(k=>{E[k]={x:L3[k][0],y:L3[k][1],name:NAME[k],s:1,a:o.a==null?1:o.a};});
+  E.Offering.sub="census date";E.Unit.sub="Data Science 101";E.Class.sub="Tue 9 am tutorial";E.Status.sub="status · date";
+  E.Status.attrs=[["enrolled",""],["withdrawn",""],["waitlisted",""]];E.Status.attrA=(2+(o.newA||0))/3;E.Status.hi=o.hi||0;E.Status.hiCol=AMBER;
+  const B=diagram(ctx,E,L3R.map(r=>r.concat([{}])));const b=B.Status,yy=b.y-b.h/2+80+28+2*30;
+  withA(ctx,o.newA||0,()=>{glow(ctx,b.x,yy-6,80,AMBER,0.35*(o.glowNew||1));tag(ctx,b.x+b.w/2+80,yy-6,"new",AMBER,{align:"center",size:18});});return B;}
 // the data contract for enrolments: what arrives, what's allowed and what it means, how fresh, and an owner in each corner
 function contract(ctx,x,y,w,h,o){o=o||{};const ver=o.ver||"1.0";glass(ctx,x,y,w,h,24,[236,243,255],{glow:24+10*(o.glow||0),ea:0.9,fill:"rgba(10,16,32,0.95)"});
   T(ctx,"Data contract · enrolments",x+36,y+60,{w:800,size:34});stampV(ctx,x+w-40,y+50,"v"+ver,o.verFlash||0);
-  const rows=[["Fields","student, class, status, date"],["Statuses","enrolled · withdrawn · waitlisted"+(o.deferred?" · deferred":"")],["Meaning","enrolled = holds a seat on census date"],["Freshness","by 06:00 every day"]];
+  const rows=[["Fields","student, offering, status, date"],["Statuses","enrolled · withdrawn · waitlisted"+(o.deferred?" · deferred":"")],["Meaning","enrolled = holds a place on census date"],["Freshness","by 06:00 every day"]];
   rows.forEach(([k,v],i)=>withA(ctx,o.rows==null?1:clamp(o.rows*rows.length-i,0,1),()=>{const yy=y+118+i*66;T(ctx,k,x+36,yy+24,{w:700,size:21,color:rgba(SOFT,0.95)});T(ctx,v,x+196,yy+24,{w:600,size:25,f:k==="Statuses"?"mono":undefined});}));
   const C=[["mei",x+26,y+h-108,"produces"],["ben",x+w/2+8,y+h-108,"produces"],["ana",x+26,y+h-58,"uses"],["sam",x+w/2+8,y+h-58,"uses"]];
   ctx.strokeStyle="rgba(170,200,245,0.18)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+26,y+h-136);ctx.lineTo(x+w-26,y+h-136);ctx.stroke();
@@ -105,7 +106,7 @@ function contract(ctx,x,y,w,h,o){o=o||{};const ver=o.ver||"1.0";glass(ctx,x,y,w,
 function stampV(ctx,x,y,s,flash){const w=tw(ctx,s,22,800,"mono")+26;glass(ctx,x-w,y-22,w,40,12,GOOD,{glow:8+20*flash,ea:0.8,fill:"rgba(10,30,20,0.8)"});T(ctx,s,x-w/2,y+6,{w:800,size:22,f:"mono",align:"center",color:"rgba(200,255,220,1)"});}
 // the platform in one row: the student system, the contract at the door, bronze, the dbt test gate, silver, gold and the data product
 function platformRow(ctx,t,o){o=o||{};const y=o.y||470;
-  sysCard(ctx,70,y-60,290,120,"Student system","enrolment events",APP.sis.c);
+  sysCard(ctx,70,y-60,290,120,"Student system","events and files",APP.sis.c);
   const lanes=[[360,y],[520,y]],d=o.door||0;
   lane(ctx,[{x:360,y},{x:560,y}],APP.sis.c,0.8);
   if(d>0)withA(ctx,d,()=>{glass(ctx,440,y-92,84,184,16,[236,243,255],{glow:14+8*Math.sin(t*1.5),ea:0.8,fill:"rgba(12,18,34,0.9)"});T(ctx,"contract",482,y+118,{w:700,size:16,align:"center",color:rgba(INK,0.9)});

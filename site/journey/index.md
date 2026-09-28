@@ -6,9 +6,33 @@ It started with one film. *The Inner Life of Data* was made over two days, 25 an
 
 Then feedback turned one film into four: *A Sharper Sketch*, on data modelling, and a series, *When things go wrong*, with *Silent change* and *Too good to be true*. Section 11 tells what changed when we made more than one, and the lessons at the end cover all four.
 
-**On this page**
+Start with two short films: how the films are drawn, and how they are made.
 
-[TOC]
+<div class="making-films">
+<section class="making-film" id="data-for-films" aria-labelledby="dff-h">
+<h2 id="dff-h">Data for Films</h2>
+<p>How the films are drawn: one frame of <i>The Inner Life of Data</i>, taken apart from a single pixel and built back up, with shapes, layers, components, a camera and time.</p>
+<div class="player">
+<audio id="dff-snd" preload="metadata" src="../assets/making-of/data-for-films.mp3"></audio><div class="poster"><img src="../assets/making-of/data-for-films-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Play the film · 5 min</button></div></div><canvas id="dff-film" width="1280" height="720" aria-label="Animated film: Data for Films"></canvas>
+<div class="bar"><button id="dff-play">Play</button><input id="dff-scrub" type="range" min="0" step="0.01" value="0" aria-label="Seek"><span id="dff-time">0:00</span><button id="dff-cc" class="on" aria-pressed="true">Captions</button><button id="dff-fs">Full screen</button></div>
+</div>
+<div class="chapters" id="dff-chapters" aria-label="Chapters"></div>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/data-for-films.mp4">Download the video</a><a href="https://github.com/roanboc/learning-data/blob/main/films/making-of/1-data-for-films/script.md">Read the script</a></p>
+<details class="howto"><summary>How to read the film</summary><div class="notes"><p>The film stops <i>The Inner Life of Data</i> at 2:31 and takes that frame apart; every number it shows is read from the real frame. The narration is a synthetic voice.</p><p>English captions are on by default; turn them off with Captions. Caption files for other players: <a href="https://github.com/roanboc/learning-data/tree/main/films/making-of/1-data-for-films/captions">en.srt and en.vtt</a>.</p></div></details>
+</section>
+<section class="making-film" id="thats-not-quite-right" aria-labelledby="nqr-h">
+<h2 id="nqr-h">That's not quite right</h2>
+<p>How the films are made: what the person drives, what Claude does, and why a cheap next version makes room for more pushback.</p>
+<div class="player">
+<audio id="nqr-snd" preload="metadata" src="../assets/making-of/thats-not-quite-right.mp3"></audio><div class="poster"><img src="../assets/making-of/thats-not-quite-right-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Play the film · 4½ min</button></div></div><canvas id="nqr-film" width="1280" height="720" aria-label="Animated film: That's not quite right"></canvas>
+<div class="bar"><button id="nqr-play">Play</button><input id="nqr-scrub" type="range" min="0" step="0.01" value="0" aria-label="Seek"><span id="nqr-time">0:00</span><button id="nqr-cc" class="on" aria-pressed="true">Captions</button><button id="nqr-fs">Full screen</button></div>
+</div>
+<div class="chapters" id="nqr-chapters" aria-label="Chapters"></div>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/thats-not-quite-right.mp4">Download the video</a><a href="https://github.com/roanboc/learning-data/blob/main/films/making-of/2-the-process/script.md">Read the script</a></p>
+<details class="howto"><summary>How to read the film</summary><div class="notes"><p>Warm light is the author; cool light is Claude, an AI model by Anthropic. The pictures from the making of are real; the author's words in quotation marks are theirs, and the other messages are paraphrased. The narration is a synthetic voice.</p><p>English captions are on by default; turn them off with Captions. Caption files for other players: <a href="https://github.com/roanboc/learning-data/tree/main/films/making-of/2-the-process/captions">en.srt and en.vtt</a>.</p></div></details>
+</section>
+</div>
+
 
 ## At a glance
 
@@ -171,7 +195,7 @@ This works because every frame is a function of time. Give the code a moment, su
 
 Drawing live gives the site things a video file can't:
 
-- **It's small.** About 7 MB instead of 165 MB, so it starts at once, even on a slow connection.
+- **It's small.** About 7 MB instead of about 200 MB, so it starts at once, even on a slow connection.
 - **It's sharp at any size.** Each frame is drawn for your screen, from a phone to a 4K monitor.
 - **It can respond.** Chapters jump straight to a scene. *Pause and think* holds the last frame of a chapter and asks one question. The labs draw with the same components and play one chapter at a time. Captions switch on and off.
 - **One fix lands everywhere.** Rename a product, and the player, the labs and the scenarios change together.
@@ -276,3 +300,6 @@ Mistakes were part of the process, and most of them taught something:
 ## Reuse it
 
 Each film's source and rebuild guide are in this repository: [*The Inner Life of Data*](https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/source/README.md), [*A Sharper Sketch*](https://github.com/roanboc/learning-data/blob/main/films/a-sharper-sketch/README.md) and [the series *When things go wrong*](https://github.com/roanboc/learning-data/blob/main/films/when-things-go-wrong/README.md), with its treatments, character sheet and style frames. The [playbook](https://github.com/roanboc/learning-data/blob/main/PLAYBOOK.md) collects what to reuse for the next film or course. To adapt *The Inner Life of Data* for another university, change the narration in `src/narration.js` (for example "class", "census date" and the domain names), regenerate the voice, and render again.
+
+<script src="../assets/making-of/data-for-films.js"></script>
+<script src="../assets/making-of/thats-not-quite-right.js"></script>

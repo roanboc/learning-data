@@ -19,29 +19,37 @@
 <h1 id="como-se-hizo-learning-data">Cómo se hizo Learning Data</h1>
 <p class="lead">Un viaje de aprendizaje: lo que exploramos, discutimos, hicimos mal y aprendimos al crear películas cortas sobre plataformas de datos.</p>
 </section>
+<div class="doc">
+<nav class="doc-nav" aria-label="En esta página"><button type="button" class="doc-nav-btn" aria-expanded="false" aria-controls="doc-toc" hidden><span class="doc-k">En esta página</span><span class="doc-now"></span></button><div class="doc-toc" id="doc-toc"><p class="doc-k">Las películas</p><ol><li><a href="#data-for-films">Data for Films</a></li><li><a href="#thats-not-quite-right">Eso no está del todo bien</a></li></ol><p class="doc-k">La historia</p><ol><li><a href="#de-un-vistazo">De un vistazo</a></li><li><a href="#1-el-encargo">1. El encargo</a></li><li><a href="#2-encontrar-la-analogia">2. Encontrar la analogía</a></li><li><a href="#3-verificar-los-hechos">3. Verificar los hechos</a></li><li><a href="#4-de-la-luz-a-las-imagenes">4. De la luz a las imágenes</a></li><li><a href="#5-el-mapa-de-metaforas">5. El mapa de metáforas</a></li><li><a href="#6-el-primer-corte">6. El primer corte</a></li><li><a href="#7-la-gran-revision">7. La gran revisión</a></li><li><a href="#8-puntos-de-control-antes-de-reconstruir">8. Puntos de control antes de reconstruir</a></li><li><a href="#9-el-segundo-corte">9. El segundo corte</a></li><li><a href="#10-una-pelicula-dos-formas-de-verla">10. Una película, dos formas de verla</a></li><li><a href="#11-de-una-pelicula-a-cuatro">11. De una película a cuatro</a></li><li><a href="#12-lo-que-salio-mal-en-el-camino">12. Lo que salió mal en el camino</a></li><li><a href="#lecciones-aprendidas">Lecciones aprendidas</a></li><li><a href="#reutilizala">Reutilízala</a></li></ol></div></nav>
 <div class="prose">
 <p>Todo empezó con una película. <em>La vida interior de los datos</em> se hizo en dos días, el 25 y el 26 de septiembre de 2026, en una sola conversación de trabajo larga entre el autor y Claude, un modelo de IA creado por Anthropic. El autor aportó el encargo, el conocimiento de la plataforma y la mayoría de las objeciones. Claude propuso opciones, verificó datos, escribió el código y renderizó cada cuadro. Las secciones 1 a 10 cuentan esa historia, desde la primera pregunta hasta el sitio publicado.</p>
 <p>Después, los comentarios convirtieron una película en cuatro: <em>A Sharper Sketch</em>, sobre modelado de datos, y una serie, <em>Cuando algo sale mal</em>, con <em>Cambio silencioso</em> y <em>Demasiado bueno para ser verdad</em>. La sección 11 cuenta qué cambió al hacer más de una, y las lecciones del final cubren las cuatro.</p>
-<p><strong>En esta página</strong></p>
-<div class="toc">
-<ul>
-<li><a href="#de-un-vistazo">De un vistazo</a></li>
-<li><a href="#1-el-encargo">1. El encargo</a></li>
-<li><a href="#2-encontrar-la-analogia">2. Encontrar la analogía</a></li>
-<li><a href="#3-verificar-los-hechos">3. Verificar los hechos</a></li>
-<li><a href="#4-de-la-luz-a-las-imagenes">4. De la luz a las imágenes</a></li>
-<li><a href="#5-el-mapa-de-metaforas">5. El mapa de metáforas</a></li>
-<li><a href="#6-el-primer-corte">6. El primer corte</a></li>
-<li><a href="#7-la-gran-revision">7. La gran revisión</a></li>
-<li><a href="#8-puntos-de-control-antes-de-reconstruir">8. Puntos de control antes de reconstruir</a></li>
-<li><a href="#9-el-segundo-corte">9. El segundo corte</a></li>
-<li><a href="#10-una-pelicula-dos-formas-de-verla">10. Una película, dos formas de verla</a></li>
-<li><a href="#11-de-una-pelicula-a-cuatro">11. De una película a cuatro</a></li>
-<li><a href="#12-lo-que-salio-mal-en-el-camino">12. Lo que salió mal en el camino</a></li>
-<li><a href="#lecciones-aprendidas">Lecciones aprendidas</a></li>
-<li><a href="#reutilizala">Reutilízala</a></li>
-</ul>
+<p>Empieza con dos películas cortas, en inglés: cómo se dibujan las películas y cómo se hacen.</p>
+<div class="making-films">
+<section class="making-film" id="data-for-films" aria-labelledby="dff-h">
+<h2 id="dff-h">Data for Films</h2>
+<p>Cómo se dibujan las películas: un cuadro de <i>La vida interior de los datos</i>, desarmado desde un solo píxel y armado de nuevo, con formas, capas, componentes, una cámara y el tiempo.</p>
+<div class="player">
+<audio id="dff-snd" preload="metadata" src="../../assets/making-of/data-for-films.mp3"></audio><div class="poster"><img src="../../assets/making-of/data-for-films-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Reproducir la película · 5 min</button></div></div><canvas id="dff-film" width="1280" height="720" aria-label="Película animada: Data for Films"></canvas>
+<div class="bar"><button id="dff-play">Reproducir</button><input id="dff-scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="dff-time">0:00</span><button id="dff-cc" class="on" aria-pressed="true">Subtítulos</button><button id="dff-fs">Pantalla completa</button></div>
 </div>
+<div class="chapters" id="dff-chapters" aria-label="Capítulos"></div>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/data-for-films.mp4">Descargar el video (en inglés)</a><a href="https://github.com/roanboc/learning-data/blob/main/films/making-of/1-data-for-films/script.md" hreflang="en">Leer el guion (en inglés)</a></p>
+<details class="howto"><summary>Cómo leer la película</summary><div class="notes"><p>La película detiene <i>The Inner Life of Data</i> (en inglés) en el 2:31 y desarma ese cuadro; cada número que muestra se lee del cuadro real. La película está en inglés, con subtítulos en inglés, y la narración es una voz sintética.</p></div></details>
+</section>
+<section class="making-film" id="thats-not-quite-right" aria-labelledby="nqr-h">
+<h2 id="nqr-h">Eso no está del todo bien</h2>
+<p>Cómo se hacen las películas: lo que decide la persona, lo que hace Claude, y por qué una nueva versión barata deja lugar para más objeciones.</p>
+<div class="player">
+<audio id="nqr-snd" preload="metadata" src="../../assets/making-of/thats-not-quite-right.mp3"></audio><div class="poster"><img src="../../assets/making-of/thats-not-quite-right-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Reproducir la película · 4½ min</button></div></div><canvas id="nqr-film" width="1280" height="720" aria-label="Película animada: Eso no está del todo bien"></canvas>
+<div class="bar"><button id="nqr-play">Reproducir</button><input id="nqr-scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="nqr-time">0:00</span><button id="nqr-cc" class="on" aria-pressed="true">Subtítulos</button><button id="nqr-fs">Pantalla completa</button></div>
+</div>
+<div class="chapters" id="nqr-chapters" aria-label="Capítulos"></div>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/thats-not-quite-right.mp4">Descargar el video (en inglés)</a><a href="https://github.com/roanboc/learning-data/blob/main/films/making-of/2-the-process/script.md" hreflang="en">Leer el guion (en inglés)</a></p>
+<details class="howto"><summary>Cómo leer la película</summary><div class="notes"><p>La luz cálida es el autor; la fría, Claude, un modelo de IA de Anthropic. Las imágenes del proceso son reales; las palabras del autor entre comillas son suyas, y los demás mensajes están parafraseados. La película está en inglés (su título original es <i>That's not quite right</i>), y la narración es una voz sintética.</p></div></details>
+</section>
+</div>
+
 <h2 id="de-un-vistazo">De un vistazo</h2>
 <table>
 <thead>
@@ -283,7 +291,7 @@
 <p>Esto funciona porque cada cuadro es una función del tiempo. Dale al código un momento, como 2:31, y sabe dónde está la cámara, qué mosaicos brillan y qué subtítulo se ve. La banda sonora es el reloj: en cada actualización, el código le pregunta al audio cuánto lleva reproducido y dibuja ese momento, así que imagen y sonido no pueden desfasarse.</p>
 <p>Dibujar en vivo le da al sitio cosas que un archivo de video no puede:</p>
 <ul>
-<li><strong>Es liviano.</strong> Unos 7 MB en lugar de 173 MB, así que empieza de inmediato, incluso con una conexión lenta.</li>
+<li><strong>Es liviano.</strong> Unos 7 MB en lugar de unos 210 MB, así que empieza de inmediato, incluso con una conexión lenta.</li>
 <li><strong>Se ve nítido en cualquier tamaño.</strong> Cada cuadro se dibuja para tu pantalla, desde un teléfono hasta un monitor 4K.</li>
 <li><strong>Puede responder.</strong> Los capítulos saltan directo a una escena. <em>Pausa para pensar</em> se detiene en el último cuadro de un capítulo y hace una pregunta. Los labs dibujan con los mismos componentes y reproducen un capítulo a la vez. Los subtítulos se activan y se desactivan.</li>
 <li><strong>Una corrección llega a todas partes.</strong> Si un producto cambia de nombre, el reproductor, los labs y las situaciones cambian juntos.</li>
@@ -371,9 +379,17 @@
 </ol>
 <h2 id="reutilizala">Reutilízala</h2>
 <p>El código fuente y la guía para reconstruir cada película están en este repositorio (en inglés): <a href="https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/source/README.md"><em>La vida interior de los datos</em></a>, <a href="https://github.com/roanboc/learning-data/blob/main/films/a-sharper-sketch/README.md"><em>A Sharper Sketch</em></a> y <a href="https://github.com/roanboc/learning-data/blob/main/films/when-things-go-wrong/README.md">la serie <em>Cuando algo sale mal</em></a>, con sus tratamientos, su hoja de personajes y sus cuadros de estilo. La <a href="https://github.com/roanboc/learning-data/blob/main/PLAYBOOK.md">guía práctica</a> (en inglés) reúne lo que conviene reutilizar en la próxima película o curso. Para adaptar <em>La vida interior de los datos</em> a otra universidad, cambia la narración en <code>src/narration.js</code>, o en <code>src/i18n/es/narration.js</code> para la versión en español (por ejemplo "clase", "fecha de corte" y los nombres de los dominios), vuelve a generar la voz y renderiza de nuevo.</p>
+<script>window.L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla completa",fsExit:"Salir de pantalla completa"}};
+/* the films are in English; their chapter buttons use these Spanish names */
+window.SCENE_NAMES={dff:{frame:"Un cuadro",data:"Una imagen son datos",draw:"Instrucciones, no píxeles",layers:"Capas",parts:"Componentes",camera:"La cámara",time:"El tiempo",play:"Dos formas de verla",again:"El 2:31, otra vez"},
+ nqr:{message:"Un mensaje",lanes:"Dos lados",options:"Opciones, no respuestas",facts:"Los datos",push:"Eso no está del todo bien",cheap:"Una nota, no volver a empezar",wrong:"Lo que salió mal",publish:"Publicar",split:"Quién hace qué"}};</script>
+<script src="../../assets/making-of/data-for-films.js"></script>
+<script src="../../assets/making-of/thats-not-quite-right.js"></script>
+</div>
 </div>
 </main>
 <footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película, los labs y las situaciones son ficticios. Código: licencia MIT. Película, guion, subtítulos, imágenes y texto: CC BY 4.0. Los logotipos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias. Consulta los <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a>.</p></footer>
 <script src="../../assets/ambient.js"></script>
+<script src="../../assets/doc-nav.js"></script>
 </body>
 </html>

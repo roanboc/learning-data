@@ -19,29 +19,37 @@
 <h1 id="the-making-of-learning-data">The making of Learning Data</h1>
 <p class="lead">A learning journey: what we explored, argued about, got wrong and learned while making short films about data platforms.</p>
 </section>
+<div class="doc">
+<nav class="doc-nav" aria-label="On this page"><button type="button" class="doc-nav-btn" aria-expanded="false" aria-controls="doc-toc" hidden><span class="doc-k">On this page</span><span class="doc-now"></span></button><div class="doc-toc" id="doc-toc"><p class="doc-k">The films</p><ol><li><a href="#data-for-films">Data for Films</a></li><li><a href="#thats-not-quite-right">That's not quite right</a></li></ol><p class="doc-k">The story</p><ol><li><a href="#at-a-glance">At a glance</a></li><li><a href="#1-the-brief">1. The brief</a></li><li><a href="#2-finding-the-analogy">2. Finding the analogy</a></li><li><a href="#3-getting-the-facts-right">3. Getting the facts right</a></li><li><a href="#4-from-light-to-pictures">4. From light to pictures</a></li><li><a href="#5-the-metaphor-map">5. The metaphor map</a></li><li><a href="#6-the-first-cut">6. The first cut</a></li><li><a href="#7-the-big-review">7. The big review</a></li><li><a href="#8-checkpoints-before-the-rebuild">8. Checkpoints before the rebuild</a></li><li><a href="#9-the-second-cut">9. The second cut</a></li><li><a href="#10-one-film-two-ways-to-play">10. One film, two ways to play</a></li><li><a href="#11-from-one-film-to-four">11. From one film to four</a></li><li><a href="#12-what-went-wrong-along-the-way">12. What went wrong along the way</a></li><li><a href="#lessons-learned">Lessons learned</a></li><li><a href="#reuse-it">Reuse it</a></li></ol></div></nav>
 <div class="prose">
 <p>It started with one film. <em>The Inner Life of Data</em> was made over two days, 25 and 26 September 2026, in one long working conversation between the author and Claude, an AI model made by Anthropic. The author brought the brief, the platform knowledge and most of the pushback. Claude proposed options, checked facts, wrote the code and rendered every frame. Sections 1 to 10 tell that story, from the first question to the published site.</p>
 <p>Then feedback turned one film into four: <em>A Sharper Sketch</em>, on data modelling, and a series, <em>When things go wrong</em>, with <em>Silent change</em> and <em>Too good to be true</em>. Section 11 tells what changed when we made more than one, and the lessons at the end cover all four.</p>
-<p><strong>On this page</strong></p>
-<div class="toc">
-<ul>
-<li><a href="#at-a-glance">At a glance</a></li>
-<li><a href="#1-the-brief">1. The brief</a></li>
-<li><a href="#2-finding-the-analogy">2. Finding the analogy</a></li>
-<li><a href="#3-getting-the-facts-right">3. Getting the facts right</a></li>
-<li><a href="#4-from-light-to-pictures">4. From light to pictures</a></li>
-<li><a href="#5-the-metaphor-map">5. The metaphor map</a></li>
-<li><a href="#6-the-first-cut">6. The first cut</a></li>
-<li><a href="#7-the-big-review">7. The big review</a></li>
-<li><a href="#8-checkpoints-before-the-rebuild">8. Checkpoints before the rebuild</a></li>
-<li><a href="#9-the-second-cut">9. The second cut</a></li>
-<li><a href="#10-one-film-two-ways-to-play">10. One film, two ways to play</a></li>
-<li><a href="#11-from-one-film-to-four">11. From one film to four</a></li>
-<li><a href="#12-what-went-wrong-along-the-way">12. What went wrong along the way</a></li>
-<li><a href="#lessons-learned">Lessons learned</a></li>
-<li><a href="#reuse-it">Reuse it</a></li>
-</ul>
+<p>Start with two short films: how the films are drawn, and how they are made.</p>
+<div class="making-films">
+<section class="making-film" id="data-for-films" aria-labelledby="dff-h">
+<h2 id="dff-h">Data for Films</h2>
+<p>How the films are drawn: one frame of <i>The Inner Life of Data</i>, taken apart from a single pixel and built back up, with shapes, layers, components, a camera and time.</p>
+<div class="player">
+<audio id="dff-snd" preload="metadata" src="../assets/making-of/data-for-films.mp3"></audio><div class="poster"><img src="../assets/making-of/data-for-films-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Play the film · 5 min</button></div></div><canvas id="dff-film" width="1280" height="720" aria-label="Animated film: Data for Films"></canvas>
+<div class="bar"><button id="dff-play">Play</button><input id="dff-scrub" type="range" min="0" step="0.01" value="0" aria-label="Seek"><span id="dff-time">0:00</span><button id="dff-cc" class="on" aria-pressed="true">Captions</button><button id="dff-fs">Full screen</button></div>
 </div>
+<div class="chapters" id="dff-chapters" aria-label="Chapters"></div>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/data-for-films.mp4">Download the video</a><a href="https://github.com/roanboc/learning-data/blob/main/films/making-of/1-data-for-films/script.md">Read the script</a></p>
+<details class="howto"><summary>How to read the film</summary><div class="notes"><p>The film stops <i>The Inner Life of Data</i> at 2:31 and takes that frame apart; every number it shows is read from the real frame. The narration is a synthetic voice.</p><p>English captions are on by default; turn them off with Captions. Caption files for other players: <a href="https://github.com/roanboc/learning-data/tree/main/films/making-of/1-data-for-films/captions">en.srt and en.vtt</a>.</p></div></details>
+</section>
+<section class="making-film" id="thats-not-quite-right" aria-labelledby="nqr-h">
+<h2 id="nqr-h">That's not quite right</h2>
+<p>How the films are made: what the person drives, what Claude does, and why a cheap next version makes room for more pushback.</p>
+<div class="player">
+<audio id="nqr-snd" preload="metadata" src="../assets/making-of/thats-not-quite-right.mp3"></audio><div class="poster"><img src="../assets/making-of/thats-not-quite-right-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Play the film · 4½ min</button></div></div><canvas id="nqr-film" width="1280" height="720" aria-label="Animated film: That's not quite right"></canvas>
+<div class="bar"><button id="nqr-play">Play</button><input id="nqr-scrub" type="range" min="0" step="0.01" value="0" aria-label="Seek"><span id="nqr-time">0:00</span><button id="nqr-cc" class="on" aria-pressed="true">Captions</button><button id="nqr-fs">Full screen</button></div>
+</div>
+<div class="chapters" id="nqr-chapters" aria-label="Chapters"></div>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/thats-not-quite-right.mp4">Download the video</a><a href="https://github.com/roanboc/learning-data/blob/main/films/making-of/2-the-process/script.md">Read the script</a></p>
+<details class="howto"><summary>How to read the film</summary><div class="notes"><p>Warm light is the author; cool light is Claude, an AI model by Anthropic. The pictures from the making of are real; the author's words in quotation marks are theirs, and the other messages are paraphrased. The narration is a synthetic voice.</p><p>English captions are on by default; turn them off with Captions. Caption files for other players: <a href="https://github.com/roanboc/learning-data/tree/main/films/making-of/2-the-process/captions">en.srt and en.vtt</a>.</p></div></details>
+</section>
+</div>
+
 <h2 id="at-a-glance">At a glance</h2>
 <table>
 <thead>
@@ -283,7 +291,7 @@
 <p>This works because every frame is a function of time. Give the code a moment, such as 2:31, and it knows where the camera is, which tiles glow and which caption shows. The soundtrack is the clock: at each refresh, the code asks the audio how far it has played and draws that moment, so picture and sound can't drift apart.</p>
 <p>Drawing live gives the site things a video file can't:</p>
 <ul>
-<li><strong>It's small.</strong> About 7 MB instead of 165 MB, so it starts at once, even on a slow connection.</li>
+<li><strong>It's small.</strong> About 7 MB instead of about 200 MB, so it starts at once, even on a slow connection.</li>
 <li><strong>It's sharp at any size.</strong> Each frame is drawn for your screen, from a phone to a 4K monitor.</li>
 <li><strong>It can respond.</strong> Chapters jump straight to a scene. <em>Pause and think</em> holds the last frame of a chapter and asks one question. The labs draw with the same components and play one chapter at a time. Captions switch on and off.</li>
 <li><strong>One fix lands everywhere.</strong> Rename a product, and the player, the labs and the scenarios change together.</li>
@@ -371,9 +379,13 @@
 </ol>
 <h2 id="reuse-it">Reuse it</h2>
 <p>Each film's source and rebuild guide are in this repository: <a href="https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/source/README.md"><em>The Inner Life of Data</em></a>, <a href="https://github.com/roanboc/learning-data/blob/main/films/a-sharper-sketch/README.md"><em>A Sharper Sketch</em></a> and <a href="https://github.com/roanboc/learning-data/blob/main/films/when-things-go-wrong/README.md">the series <em>When things go wrong</em></a>, with its treatments, character sheet and style frames. The <a href="https://github.com/roanboc/learning-data/blob/main/PLAYBOOK.md">playbook</a> collects what to reuse for the next film or course. To adapt <em>The Inner Life of Data</em> for another university, change the narration in <code>src/narration.js</code> (for example "class", "census date" and the domain names), regenerate the voice, and render again.</p>
+<script src="../assets/making-of/data-for-films.js"></script>
+<script src="../assets/making-of/thats-not-quite-right.js"></script>
+</div>
 </div>
 </main>
 <footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Source on GitHub</a></p><p>The university, people, numbers and records in the film, the labs and the scenarios are fictional. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
 <script src="../assets/ambient.js"></script>
+<script src="../assets/doc-nav.js"></script>
 </body>
 </html>

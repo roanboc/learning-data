@@ -95,8 +95,12 @@ function committeeDash(ctx,x,y,w,h,o){o=o||{};const s=o.s||1;glass(ctx,x-10,y-10
   if(sh>24){ctx.beginPath();tr.forEach((q,i)=>{const px=sx+sw*i/(tr.length-1),py=sy-sh*(q-lo)/(hi-lo);i?ctx.lineTo(px,py):ctx.moveTo(px,py);});ctx.lineTo(sx+sw,sy);ctx.lineTo(sx,sy);ctx.closePath();ctx.fillStyle="rgba(7,122,157,0.10)";ctx.fill();
     ctx.beginPath();tr.forEach((q,i)=>{const px=sx+sw*i/(tr.length-1),py=sy-sh*(q-lo)/(hi-lo);i?ctx.lineTo(px,py):ctx.moveTo(px,py);});ctx.strokeStyle=DB.blue;ctx.lineWidth=2.5*s;ctx.stroke();}
   ctx.restore();
-  if(o.crack)withA(ctx,o.crack,()=>{ctx.save();ctx.strokeStyle="rgba(40,48,60,0.85)";ctx.shadowColor="rgba(255,255,255,0.9)";ctx.shadowBlur=3;ctx.lineWidth=2.5;ctx.beginPath();
-    const pts=[[0.08,0.1],[0.3,0.34],[0.26,0.46],[0.52,0.62],[0.49,0.74],[0.8,0.96]];pts.forEach(([u,v],i)=>{const px=x+u*w,py=y+v*h;i?ctx.lineTo(px,py):ctx.moveTo(px,py);});ctx.moveTo(x+0.3*w,y+0.34*h);ctx.lineTo(x+0.44*w,y+0.28*h);ctx.moveTo(x+0.52*w,y+0.62*h);ctx.lineTo(x+0.64*w,y+0.58*h);ctx.stroke();ctx.restore();});}
+  // three weeks later, the number is known to be wrong: the card dims, the number is struck through, and a stamp says why
+  if(o.crack)withA(ctx,o.crack,()=>{const ny=cy+p+112*s,nx=x+14*s+p,nw=tw(ctx,fmtN(num),74*s,700);ctx.save();rr(ctx,x,y,w,h,10);ctx.fillStyle="rgba(14,18,28,0.38)";ctx.fill();
+    ctx.strokeStyle=rgba(RED,0.95);ctx.lineWidth=5*s;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(nx-6*s,ny-24*s);ctx.lineTo(nx+nw+6*s,ny-30*s);ctx.stroke();
+    const st="WRONG · COUNTED TWICE",fs=15*s,sw2=tw(ctx,st,fs,800)+28*s,sx2=x+w-sw2/2-26*s,sy2=cy+p+64*s;ctx.translate(sx2,sy2);ctx.rotate(-0.07);
+    ctx.fillStyle="rgba(255,255,255,0.92)";rr(ctx,-sw2/2,-17*s,sw2,34*s,6*s);ctx.fill();ctx.strokeStyle=rgba(RED,1);ctx.lineWidth=2.5*s;rr(ctx,-sw2/2,-17*s,sw2,34*s,6*s);ctx.stroke();
+    T(ctx,st,0,fs*0.36,{w:800,size:fs,align:"center",color:rgba(RED,1)});ctx.restore();});}
 
 /* the planner's board: what the committee decided */
 function planBoard(ctx,x,y,w,lines,c){const h=28+lines.length*40;glass(ctx,x,y,w,h,16,c,{glow:12,ea:0.7,fill:"rgba(8,14,28,0.9)"});

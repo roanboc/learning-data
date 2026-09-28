@@ -69,6 +69,8 @@ CRUMBS = {  # page: (text, the pages its links go to, in order)
 BUNDLES = {"assets/film/film.js": "ld", "assets/film/film.es.js": "ld",
            "assets/film3/film.js": "ld3", "assets/silent-change/film.js": "ld-silent-change",
            "assets/too-good-to-be-true/film.js": "ld-too-good-to-be-true"}
+# the Making of films, sealed in a function each with their own element prefix, so both can play on one page; they record no progress
+SEALED = {"assets/making-of/data-for-films.js": "dff", "assets/making-of/thats-not-quite-right.js": "nqr"}
 PACKS = {"assets/learn/learn.en.js", "assets/learn/learn.es.js",
          "assets/silent-change/think.en.js", "assets/silent-change/think.es.js",
          "assets/too-good-to-be-true/think.en.js", "assets/too-good-to-be-true/think.es.js"}
@@ -89,6 +91,8 @@ LENGTHS = re.compile(r"eight-minute|five-minute|six-minute|nueve minutos|seis mi
 # the stated lengths: 7½ (intro, EN), 8½ (intro, ES), 5½ (A Sharper Sketch, Silent change), and 6 min (Too good to be true)
 HALVES = {"en": {"5½", "7½"}, "es": {"5½", "8½"}}
 WHOLE = {"6 min"}
+# the Making of page states its two films' lengths: 5 min (Data for Films) and 4½ min (That's not quite right)
+MAKING_OF_PAGES = {"journey/index.html", "es/journey/index.html", "journey/index.md", "es/journey/index.md"}
 WORDS = {"en": "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen "
                "seventeen eighteen nineteen twenty".split(),
          "es": "uno dos tres cuatro cinco seis siete ocho nueve diez once doce trece catorce quince dieciséis "
@@ -221,6 +225,7 @@ class Page:
                 if kind == "site":
                     self.local_scripts.append(target)
         self.bundles = [s for s in self.local_scripts if s in BUNDLES]
+        self.sealed = [s for s in self.local_scripts if s in SEALED]
 
     @property
     def es(self):
@@ -657,16 +662,17 @@ def main():
                 allowed.append(f"site/{rel}:{line}")
                 continue
             s["fails"].append(f"site/{rel}:{line}: \"{m.group(0)}\"")
-        if rel in BUNDLES:
+        if rel in BUNDLES or rel in SEALED:
             continue  # the players' own code (timings, comments) is not site copy
+        mk = rel in MAKING_OF_PAGES
         for m in LENGTHS.finditer(src):
-            if m.group(0) in WHOLE:
+            if m.group(0) in WHOLE or mk and m.group(0).lstrip("· ") == "5 min":
                 continue
             t["fails"].append(f"site/{rel}:{src.count(chr(10), 0, m.start()) + 1}: \"{m.group(0)}\"")
         if p.suffix == ".html":
             lg = "es" if rel.startswith("es/") else "en"
             for m in re.finditer(r"\d½", src):
-                if m.group(0) not in HALVES[lg]:
+                if m.group(0) not in HALVES[lg] and not (mk and m.group(0) == "4½"):
                     t["fails"].append(f"site/{rel}:{src.count(chr(10), 0, m.start()) + 1}: \"{m.group(0)}\" (this language's films are {' and '.join(sorted(HALVES[lg]))} min)")
     if allowed:
         s["notes"].append("allowed, in code comments: " + ", ".join(allowed))
@@ -739,6 +745,19 @@ def main():
             ds = path.attrs.get("data-store", "ld")
             if film and ds != BUNDLES[film]:
                 s["fails"].append(f"{pg.file}: .path data-store=\"{ds}\", but the film here is {BUNDLES[film]}")
+
+    # -- the Making of films: sealed players, each with its own prefixed elements
+    s = rep.check("Sealed films: each player's prefixed elements, and no unsealed film bundle beside them")
+    for pg in normal:
+        for sb in pg.sealed:
+            p = SEALED[sb]
+            for el in ("film", "play", "scrub", "time", "cc", "fs", "chapters", "snd"):
+                if pg.ids.get(f"{p}-{el}", 0) != 1:
+                    s["fails"].append(f"{pg.file}: loads {sb}, but has no #{p}-{el}")
+            if pg.bundles:
+                s["fails"].append(f"{pg.file}: a sealed film beside {', '.join(pg.bundles)}: that film would take the ids its player needs")
+        if pg.sealed:
+            s["notes"].append(f"{pg.file}: {len(pg.sealed)} sealed films")
 
     # -- topic cards
     s = rep.check("Topic cards: one link each, the linked film's progress prefix and counts, a real poster")

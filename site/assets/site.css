@@ -92,10 +92,10 @@ footer{max-width:1120px;margin:0 auto;padding:22px 20px 44px;color:var(--muted);
 .player.started .poster,.player:fullscreen .poster{display:none}
 .bar{display:flex;gap:10px;align-items:center;padding:10px 12px;background:#0b0f16;color:#e8eef8;flex-wrap:wrap}
 .bar button{font-weight:700;font-size:14px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:#1a2130;color:#e8eef8;padding:8px 14px;cursor:pointer}
-.bar button.on,#play{background:#2f6fd6;border-color:#2f6fd6}
+.bar button.on,#play,#dff-play,#nqr-play{background:#2f6fd6;border-color:#2f6fd6}
 #think[aria-pressed=false]{background:#1a2130;border-color:rgba(255,255,255,.2)}
 .bar input[type=range]{flex:1;min-width:120px;accent-color:#6aa8ff}
-#time{font-family:var(--mono);font-size:13px;min-width:92px;text-align:right}
+#time,#dff-time,#nqr-time{font-family:var(--mono);font-size:13px;min-width:92px;text-align:right}
 .player:fullscreen{display:flex;flex-direction:column;border:0;border-radius:0}
 .player:fullscreen canvas{flex:1 1 0;min-height:0;height:auto;aspect-ratio:auto;object-fit:contain}
 .chapters{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}
@@ -325,3 +325,7 @@ dialog.clip .player{border-radius:0;border-left:0;border-right:0;box-shadow:none
 .prose table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px;display:block;overflow-x:auto}.prose th,.prose td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}.prose th{background:var(--card)}
 .prose blockquote{margin:18px 0;padding:10px 16px;border-left:4px solid var(--accent);background:var(--card);border-radius:8px}.prose blockquote p{margin:4px 0}
 .prose img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--line);margin:16px 0}.prose code{font-size:.92em;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:1px 5px}
+/* the Making of page: two films at the top, each sealed with its own element prefix (dff-, nqr-) */
+.prose .making-films{margin:22px 0 8px}.prose .making-film+.making-film{margin-top:40px}
+.prose .making-film h2{margin-top:0}.prose .player img{margin:0;border:0;border-radius:0}
+.prose .watch-foot .notes p{font-size:15px}

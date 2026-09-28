@@ -1,6 +1,6 @@
-# The process (working title)
+# That's not quite right
 
-*Treatment for the second of [two films on the Making of page](../README.md), v0.1: a first proposal. Status: for discussion; see [Decisions to make](#decisions-to-make).*
+*Treatment for the second of [two films on the Making of page](../README.md), v0.2. Status: first cut made, with the open decisions answered provisionally in [the script](script.md#decisions-taken-for-this-draft).*
 
 ## The promise
 
@@ -56,6 +56,8 @@ Honest and specific, never a sales pitch. Claude is shown as a capable collabora
 
 ## Decisions to make
 
+*Answered provisionally in the first cut: the title is* That's not quite right, *only published words are quoted, it follows* The Inner Life of Data *with one line on the later films, it plays second, and its last line is its title. See [the script](script.md#decisions-taken-for-this-draft).*
+
 1. **The title.** Proposals: *Two hands*, *That's not quite right*, *Who drives*. In Spanish, the same idea.
 2. **The conversation on screen.** Real excerpts (more honest; they need the author's approval line by line) or rewritten ones (easier to read, but then the film says so).
 3. **Which film it follows.** Only *The Inner Life of Data* (a clean story), or also how the later films went faster with the playbook.
@@ -64,7 +66,7 @@ Honest and specific, never a sales pitch. Claude is shown as a capable collabora
 
 ## Next checkpoints
 
-1. Agree this treatment.
-2. Script with a rigour sheet and pacing report.
-3. Style frames: the two lanes, the analogies failing, a note becoming a change, and the split.
-4. A voice test, and the first cut.
+1. ~~Agree this treatment.~~ Asked for by the author on 27 September 2026, with the decisions below left to Claude.
+2. ~~Script with a rigour sheet and pacing report.~~ Draft 1: see [the script](script.md).
+3. ~~Style frames and the first cut.~~ The first cut plays on the Making of page.
+4. The author's review of the first cut, and of the provisional decisions.

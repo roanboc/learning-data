@@ -7,7 +7,7 @@ ui:{lab:"Lab",of:"de",inPractice:"En la práctica",watch:"Ver esta parte",next:"
   explore:"Explóralo en el lab:",nextQ:"Siguiente situación",results:"Ver tus resultados",again:"Empezar de nuevo",check:"Comprobar",
   up:"Subir",down:"Bajar",labsLabel:"Labs",qsLabel:"Situaciones",right:"Correcto.",wrong:"No del todo:",belongs:"va en «{b}».",
   placed:"{n} de {of} ubicados.",ready:"Todos ubicados: comprueba tus respuestas.",back:"Atrás",nextStep:"Siguiente paso",stepOf:"Paso {n} de {of}."},
-vis:{q:"¿Qué aprendices están cerca de un certificado de posgrado?",joins:"uniones",filter:"filtro, sin uniones",
+vis:{q:"¿Qué aprendices están cerca de un diplomado de posgrado?",joins:"uniones",filter:"filtro, sin uniones",
   bronze:"Bronce",silver:"Plata",gold:"Oro",sem:"capa semántica",core:"núcleo normalizado",vault:"data vault",star:"estrella",wide:"tabla ancha",
   coreRes:"cambian tablas",vaultRes:"solo agrega",starRes:"filas nuevas",wideRes:"columnas nuevas",
   learner:"Aprendiz",awards:"Títulos",fees:"Cuotas",learners:"aprendices",courseProgress:"avance del curso",creditSoFar:"créditos hasta hoy",of:"de",

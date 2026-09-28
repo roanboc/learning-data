@@ -19,7 +19,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "But the stacking rules live in a policy document that no tool can read. Genie guesses, and it's wrong.":
 "Pero las reglas de apilamiento viven en un documento de política que ninguna herramienta lee. Genie adivina, y se equivoca.",
 "An AI assistant answers from what it can read. Meaning kept in documents is invisible to it.":
-"Un asistente de IA responde con lo que puede leer. El significado guardado en documentos es invisible para él.",
+"Un asistente de IA responde con lo que puede leer. El significado guardado en documentos le es invisible.",
 "There are four common ways to write meaning down, and they stack. A glossary: words and their definitions, for people.":
 "Hay cuatro formas comunes de escribir el significado, y se apilan. Un glosario: palabras y sus definiciones, para personas.",
 "A taxonomy: kinds of things in a hierarchy, like Linnaeus's.":
@@ -35,7 +35,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Connect the university's data to these statements, and it becomes a knowledge graph: learners, credentials and courses, linked by what they mean.":
 "Conecta los datos de la universidad con estas afirmaciones, y se vuelven un grafo de conocimiento: aprendices, credenciales y cursos, unidos por lo que significan.",
 "It's Aristotle's recipe made formal: the kind of thing, and what sets it apart, in a form a machine can use.":
-"Es la receta de Aristóteles, formalizada: la clase de cosa, y lo que la distingue, en una forma que una máquina puede usar.",
+"Es la receta de Aristóteles, formalizada: la clase de cosa, y lo que la distingue, en una forma que una máquina pueda usar.",
 "In the semantic layer, credentials awarded this year is defined once: what's counted, what's left out, which date, and at what grain.":
 "En la capa semántica, «credenciales otorgadas este año» se define una sola vez: qué se cuenta, qué se deja fuera, qué fecha y con qué grano.",
 "Dashboards, spreadsheets and Genie all ask it, instead of each writing its own version.":
@@ -43,7 +43,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Open formats for sharing these definitions between tools are starting to appear.":
 "Empiezan a aparecer formatos abiertos para compartir estas definiciones entre herramientas.",
 "You don't have to start from a blank page. Finance, health, insurance and retail all publish shared models, and so does education.":
-"No tienes que empezar con una hoja en blanco. Finanzas, salud, seguros y comercio minorista publican modelos compartidos, y la educación también.",
+"No tienes que partir de una hoja en blanco. Finanzas, salud, seguros y comercio minorista publican modelos compartidos, y la educación también.",
 "Digital credentials have open standards too, with issuer, holder and evidence in them.":
 "Las credenciales digitales también tienen estándares abiertos, con emisor, titular y evidencia.",
 "Even microcredential has official definitions: from Australia, from the European Union, and from UNESCO. They don't quite match.":
@@ -55,7 +55,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Then it answers, and shows the definition it used.":
 "Luego responde, y muestra la definición que usó.",
 "Studies have found that grounding an assistant in explicit meaning makes its answers measurably more accurate. The difference is the meaning it can read.":
-"Varios estudios muestran que basar un asistente en significado explícito hace sus respuestas más precisas, de forma medible. La diferencia es el significado que puede leer.",
+"Varios estudios han encontrado que basar un asistente en significado explícito aumenta de forma medible sus aciertos. La diferencia es el significado que puede leer.",
 "The triangle from the start of the series returns: the word, in English and in Spanish; the idea, now written in the ontology; and the data it points to.":
 "Vuelve el triángulo del comienzo de la serie: la palabra, en inglés y en español; la idea, ahora escrita en la ontología; y los datos a los que apunta.",
 "Next: keeping all of it true, while everything changes.":

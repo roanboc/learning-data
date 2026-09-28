@@ -1,0 +1,131 @@
+1
+00:00:01,600 --> 00:00:08,689
+En 1755, Samuel Johnson publicó su diccionario. Esperaba fijar la lengua inglesa para siempre.
+
+2
+00:00:09,789 --> 00:00:17,824
+En el prefacio, admitió que ningún diccionario puede embalsamar una lengua. El Oxford English Dictionary se sigue revisando hasta hoy.
+
+3
+00:00:18,524 --> 00:00:27,063
+En 2006, los astrónomos acordaron una definición de planeta. Nada cambió en el cielo, y la cuenta pasó de nueve a ocho.
+
+4
+00:00:28,363 --> 00:00:31,847
+En 2019, hasta el kilogramo recibió una nueva definición.
+
+5
+00:00:32,547 --> 00:00:36,880
+El significado se mueve. Toda definición necesita responsable, fecha y versión.
+
+6
+00:00:43,180 --> 00:00:46,313
+En la universidad, llegan tres cambios en un mismo mes.
+
+7
+00:00:47,013 --> 00:00:52,181
+El gobierno agrega un campo nuevo a lo que las universidades informan sobre microcredenciales.
+
+8
+00:00:53,381 --> 00:00:56,754
+Una credencial se emitió por error, y hay que revocarla.
+
+9
+00:00:57,854 --> 00:01:03,339
+Y una medida nueva, la tasa de finalización, aparece en tres tableros, con tres definiciones distintas.
+
+10
+00:01:06,039 --> 00:01:08,664
+Los modelos rara vez se rompen de golpe. Se desvían.
+
+11
+00:01:09,764 --> 00:01:20,133
+Un valor que nadie anunció, como en Cambio silencioso. Una columna cuyo significado cambia poco a poco. Una medida, definida dos veces. Un estándar, actualizado para un año nuevo.
+
+12
+00:01:21,633 --> 00:01:25,544
+La deriva es la brecha entre lo que está escrito y lo que se usa.
+
+13
+00:01:28,244 --> 00:01:36,386
+Aquí la IA ayuda primero. Un agente puede leer el catálogo, el linaje, las consultas que hace la gente, y los datos nuevos al llegar.
+
+14
+00:01:37,786 --> 00:01:44,024
+Compara cada definición del glosario con el código que la calcula, y detecta dónde se separaron los dos.
+
+15
+00:01:45,324 --> 00:01:51,806
+Señala cada deriva, con evidencia: tres definiciones de la tasa de finalización, y los tableros que usan cada una.
+
+16
+00:01:53,106 --> 00:01:56,535
+Notar es tedioso para las personas, y barato para las máquinas.
+
+17
+00:01:59,235 --> 00:02:00,612
+Luego redacta el cambio.
+
+18
+00:02:01,712 --> 00:02:13,504
+Una entrada nueva para el glosario. Una afirmación nueva en la ontología. El modelo lógico, la correspondencia con el campo del gobierno, la capa semántica, el contrato, las pruebas, y una nota que dice por qué.
+
+19
+00:02:15,004 --> 00:02:18,435
+Redactar ya es barato. El trabajo sigue siendo evaluar el borrador.
+
+20
+00:02:21,135 --> 00:02:28,720
+Mei, de Registro académico, aprueba el significado. Noor, la arquitecta, aprueba el modelo. Los equipos aprueban la construcción.
+
+21
+00:02:30,020 --> 00:02:37,488
+El borrador del agente se revisa igual que el de cualquiera. Las pruebas se ejecutan sobre el cambio propuesto, antes de publicar nada.
+
+22
+00:02:38,788 --> 00:02:42,379
+El agente recomienda. Las personas aprueban. Todo queda versionado.
+
+23
+00:02:45,079 --> 00:02:48,994
+Un borrador seguro de sí puede inventar una definición que nadie acordó.
+
+24
+00:02:50,294 --> 00:02:57,864
+Puede colarse un cambio que nadie revisó. Y un agente que aprende de informes antiguos puede proponer de nuevo un significado antiguo.
+
+25
+00:02:59,164 --> 00:03:04,073
+Por eso las pruebas y los contratos también comprueban el trabajo del agente, como el nuestro.
+
+26
+00:03:06,773 --> 00:03:08,846
+Sigue un cambio de punta a punta.
+
+27
+00:03:09,546 --> 00:03:18,117
+La tasa de finalización recibe una sola definición en el glosario, una afirmación en la ontología, una medida en la capa semántica, y una prueba.
+
+28
+00:03:19,417 --> 00:03:23,581
+Los tres tableros coinciden. Genie da la misma cifra, y muestra por qué.
+
+29
+00:03:24,781 --> 00:03:32,515
+El informe del año pasado aún se lee con la definición de ese año, versión dos, sin cambios. Cada cifra conserva el significado que tenía.
+
+30
+00:03:33,815 --> 00:03:36,951
+Y el sello del boceto por fin dice: versión tres.
+
+31
+00:03:42,651 --> 00:03:47,376
+De vuelta al inicio de la serie: una palabra, una idea, una cosa, y una marca en arcilla.
+
+32
+00:03:48,676 --> 00:03:53,508
+Una credencial es una afirmación que otros pueden comprobar. También cada cifra de un informe.
+
+33
+00:03:54,808 --> 00:04:00,313
+Las herramientas cambiaron. El trabajo no: acordar qué son las cosas, escribirlo, y que siga siendo verdad.

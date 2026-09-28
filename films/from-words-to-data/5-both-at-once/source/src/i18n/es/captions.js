@@ -3,7 +3,7 @@
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "In 1879, a saloon keeper in Ohio patented a machine to keep track of every sale at his bar: the cash register.":
-"En 1879, el dueño de una cantina de Ohio patentó una máquina para llevar la cuenta de cada venta: la caja registradora.",
+"En 1879, el dueño de un bar de Ohio patentó una máquina para llevar la cuenta de cada venta: la caja registradora.",
 "Within a few years, registers rang up each sale as it happened, and kept a running total, ready to read at closing time.":
 "En pocos años, las cajas registraban cada venta en el momento, y llevaban un total acumulado, listo para leer al cierre.",
 "Recording and counting in one place. It's an old wish.":
@@ -13,7 +13,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "The app writes to its own database. Overnight, a copy travels to the lakehouse and gets refined, and the answer is ready tomorrow.":
 "La app escribe en su propia base de datos. Por la noche, una copia viaja al lakehouse y se refina, y la respuesta está lista mañana.",
 "But some questions can't wait. An employer wants to check a credential now. A learner's wallet wants to show, now, how close she is to a graduate certificate.":
-"Pero algunas preguntas no pueden esperar. Un empleador quiere verificar una credencial ya. La billetera de una aprendiz quiere mostrar, ya, cuánto le falta para un certificado de posgrado.",
+"Pero hay preguntas que no esperan. Un empleador quiere verificar una credencial ya. La billetera de una aprendiz quiere mostrar, ya, cuánto le falta para un diplomado de posgrado.",
 "That distance is why hybrid databases appeal.":
 "Esa distancia hace atractivas las bases de datos híbridas.",
 "A hybrid database writes and reads in one place.":
@@ -31,15 +31,15 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Apply an award's revocation before its issue, and the award comes back to life. Order matters as much as content.":
 "Aplica la revocación de un título antes que su emisión, y el título vuelve a la vida. El orden importa tanto como el contenido.",
 "What goes? The nightly copy, the pipelines that move it, the wait, and a second set of permissions to keep in step.":
-"¿Qué se va? La copia nocturna, los pipelines que la mueven, la espera, y un segundo juego de permisos que mantener al paso.",
+"¿Qué se va? La copia nocturna, los pipelines que la mueven, la espera y un segundo conjunto de permisos que mantener al paso.",
 "Those are real gains.":
 "Son beneficios reales.",
 "Now count awards straight from the app's own tables.":
-"Ahora cuenta los títulos directamente desde las tablas de la app.",
+"Ahora cuenta títulos directo de las tablas de la app.",
 "Revoked awards are still in there, with a status. Last year's faculty has been overwritten. The count comes out wrong.":
 "Los títulos revocados siguen ahí, con un estado. La facultad del año pasado se sobrescribió. El conteo sale mal.",
 "It's the same mistake as counting enrolments today, instead of on census date.":
-"Es el mismo error que contar las inscripciones hoy, en lugar de en la fecha de censo.",
+"Es el mismo error que contar las inscripciones hoy y no en la fecha de censo.",
 "History, shared dimensions and definitions still need modelling. Hybrid removes the copy, not the model.":
 "La historia, las dimensiones compartidas y las definiciones aún necesitan modelarse. Lo híbrido quita la copia, no el modelo.",
 "Data flows the other way now, too. Gold data is served back to the app: the next microcredential to suggest, or a learner who may need help.":
@@ -51,7 +51,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "So the modeller has new questions. For each idea, which shape is the source of truth?":
 "Así que quien modela tiene preguntas nuevas. Para cada idea, ¿qué forma es la fuente de verdad?",
 "Which way does each table sync, and who owns it?":
-"¿Hacia dónde se sincroniza cada tabla, y quién es su dueño?",
+"¿Hacia dónde se sincroniza cada tabla, y de quién es?",
 "How fresh must each answer be? Seconds for a wallet. A day for a plan.":
 "¿Qué tan al día debe estar cada respuesta? Segundos para una billetera. Un día para un plan.",
 "Where do the definitions live, so the app and the report agree? In one place, not two.":

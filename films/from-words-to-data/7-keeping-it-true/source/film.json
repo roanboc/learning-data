@@ -1,0 +1,16 @@
+{
+  "key": "keeping-it-true",
+  "title": "Keeping it true",
+  "sub": "From words to data: how models drift, how AI can watch and draft, and why people still decide.",
+  "howto": "Teal is the AI agent's work; gold is a person's approval. A red mark is drift between what's written and what's used.",
+  "src": [
+    "true.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "e2e",
+    "breath",
+    1.0
+  ],
+  "say": []
+}

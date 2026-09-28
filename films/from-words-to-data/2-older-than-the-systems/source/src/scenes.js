@@ -1,5 +1,5 @@
 /* ===== Older than the systems: scenes =====
-   Eight chapters, as in ../script.md. A museum shelf of credentials, four thousand years long; the same five parts in every one of them;
+   Eight chapters, as in ../script.md. A museum shelf of learning and its credentials, four thousand years long; the same five parts in every credential;
    the conceptual model underneath, and today's standard using its words. Then the university's five systems, each with its own model
    inside; the translations between them; one learner with four IDs; the logical model as a yardstick; who owns each part; and the
    short-course platform, still saying "customer", joined to the shared meaning. */
@@ -41,7 +41,7 @@ scene("materials",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath"),cS=c("seal
 
 /* ---------- 2. The model underneath ---------- */
 // five exhibits, and the same parts in each
-const OT_COLS=[["lock","Guild masterpiece",["the guild's masters","a journeyman","master locksmith","the masterpiece","1523","the guild's mark"]],
+const OT_COLS=[["lock","Guild masterpiece",["the guild's masters","a journeyman","master locksmith","the masterpiece","1468","the guild's mark"]],
   ["scroll","Imperial examination",["the examiners","the candidate","passed, with a rank","the examination","1706","the official list"]],
   ["licence","Licence to teach",["the chancellor","a new master","may teach","an examination","1290","the wax seal"]],
   ["diploma","Diploma",["a university","a graduate","Bachelor of Arts","assessments","1950","a signature"]],
@@ -84,13 +84,13 @@ scene("model",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");histBg(ctx,S,t
       ot_pill(ctx,340,y,"valid",GOOD,{size:22});withA(ctx,fin(t,cV+5.4,0.4),()=>ot_pill(ctx,500,y,"expired",SOFT,{size:22}));withA(ctx,fin(t,cV+6.3,0.4),()=>{ot_pill(ctx,680,y,"revoked",BAD,{size:22});T(ctx,"some expire · a few are revoked",790,y+8,{w:600,size:22,color:rgba(SOFT,1)});});});});
   // the materials, kept small at the top while the model forms; they fade, and the model stays
   const fade=fin(t,cO+1.0,2.2);
-  if(m>0){withA(ctx,m*(1-fade),()=>{ctx.fillStyle="rgba(90,62,40,0.7)";ctx.fillRect(380,170,1160,6);OT_EX.forEach((e,i)=>{const x=440+i*148,d=clamp((t-cO-1.0-i*0.12)/1.4,0,1);
+  if(m>0){withA(ctx,m*(1-fade),()=>{ctx.fillStyle="rgba(90,62,40,0.7)";ctx.fillRect(360,170,1045,6);OT_EX.forEach((e,i)=>{const x=420+i*132,d=clamp((t-cO-1.0-i*0.12)/1.4,0,1);
       withA(ctx,1-d,()=>ot_ex(ctx,e[0],x,170-d*30,0.3,{t}));if(d>0&&d<1)for(let k=0;k<10;k++){ctx.fillStyle=rgba(OT_MATCOL[i],0.6*(1-d));ctx.beginPath();ctx.arc(x+(hash(k,i)-0.5)*90,150-d*80*hash(k,i+3)-hash(k,9)*60,2+hash(k,5)*2,0,TAU);ctx.fill();}});});
     // the model grows from the rows of the table
     const from=q=>[222,OT_RY(OT_CM[q][3])];const lit=fin(t,cO+0.6,1.2)+0.35*Math.sin(t*1.6)*fin(t,B,1);
-    const Bx=ot_concept(ctx,t,{a:m,m,from,hi:{cred:lit*0.8,issuer:lit*0.5,holder:lit*0.5,evidence:lit*0.5,verifier:lit*0.5}});
+    const Bx=ot_concept(ctx,t,{a:m*fin(m,0.45,0.4),m,from,hi:{cred:lit*0.8,issuer:lit*0.5,holder:lit*0.5,evidence:lit*0.5,verifier:lit*0.5}});
     // today's standard, word for word
-    withA(ctx,fin(t,cSt+0.6,0.6),()=>{tag(ctx,1510,110,"W3C Verifiable Credentials",OT_STD,{size:20});T(ctx,"today's standard for digital credentials",1510,160,{w:600,size:17,color:rgba(SOFT,1)});});
+    withA(ctx,fin(t,cSt+0.6,0.6),()=>{tag(ctx,1460,110,"W3C Verifiable Credentials",OT_STD,{size:20});T(ctx,"today's standard for digital credentials",1460,162,{w:600,size:19,color:rgba(SOFT,1)});});
     const W3=[["issuer","issuer",-1,4.2],["holder","holder",-1,4.8],["verifier","verifier",1,5.4],["cred","claims",1,6.1],["evidence","evidence",1,6.8]];
     if(Bx)W3.forEach(([q,s_,sd,d])=>{const b=Bx[q],a=fin(t,cSt+d,0.4),hot=pulseAt(t,cSt+d,1.2);if(a<=0)return;const x=q==="cred"?b.x+b.w/2+96:b.x+sd*(b.w/2+92),y=q==="cred"?b.y+b.h/2-122:b.y;
       withA(ctx,a,()=>{if(hot)glow(ctx,x,y,70,OT_STD,0.5*hot);ctx.strokeStyle=rgba(OT_STD,0.6);ctx.lineWidth=1.6;ctx.setLineDash([4,6]);ctx.beginPath();ctx.moveTo(x-sd*48,y);ctx.lineTo(q==="cred"?b.x+b.w/2-8:b.x+sd*b.w/2,y);ctx.stroke();ctx.setLineDash([]);ot_pill(ctx,x,y,s_,OT_STD,{size:23});});});
@@ -156,12 +156,20 @@ scene("meet",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     const q=path(18,up),q2=path(18,Math.min(1,up+0.02)),lost=fin(t,cM+2.7,0.5);ot_craft(ctx,q[0],q[1],1.1,Math.atan2(q2[1]-q[1],q2[0]-q[0]),1-lost);
     if(t>cM+2.6&&t<cM+3.6)glow(ctx,q[0],q[1],90,[255,160,120],0.8*(1-fin(t,cM+2.8,0.8)));
     withA(ctx,fin(t,cM+3.0,0.5),()=>{const e=path(18,1);ot_pill(ctx,e[0]+96,e[1]+6,"signal lost",BAD,{size:21});const pl=path(95,0.45,0.1);ot_pill(ctx,pl[0]+60,pl[1]-34,"planned",[220,230,255],{size:21});const ac=path(18,0.42);ot_pill(ctx,ac[0]-40,ac[1]+46,"actual: too low",BAD,{size:21});});
-    // two teams, two units
-    const card=(y,a,title,verb,unit,col,ok)=>withA(ctx,a,()=>{glass(ctx,110,y,600,160,18,col,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.94)"});T(ctx,title,140,y+44,{w:700,size:22,color:rgba(SOFT,1)});T(ctx,verb,140,y+80,{w:600,size:20,color:rgba(SOFT,1)});T(ctx,unit,140,y+132,{w:800,size:40,color:rgba(col,1)});ot_mark(ctx,670,y+40,true,ok,20);});
+    // two teams, two units; each program ran without an error
+    const card=(y,a,title,verb,unit,col,run)=>withA(ctx,a,()=>{glass(ctx,110,y,600,160,18,col,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.94)"});T(ctx,title,140,y+44,{w:700,size:22,color:rgba(SOFT,1)});T(ctx,verb,140,y+80,{w:600,size:20,color:rgba(SOFT,1)});T(ctx,unit,140,y+132,{w:800,size:40,color:rgba(col,1)});
+      withA(ctx,run,()=>{ctx.fillStyle=rgba(GOOD,1);ctx.beginPath();ctx.arc(500,y+38,6,0,TAU);ctx.fill();T(ctx,"ran · no errors",516,y+45,{f:"mono",w:500,size:18,color:rgba(GOOD,0.95)});});});
     card(230,fin(t,cM+3.7,0.5),"One team's software","gave the thrusters' push in","pound-force seconds",[255,190,110],fin(t,cB+0.4,0.4));
     card(520,fin(t,cM+7.9,0.5),"The navigation software","expected","newton-seconds",CYAN,fin(t,cB+0.9,0.4));
-    const lk=fin(t,cM+8.3,0.5),br=fin(t,cB+1.9,0.4);withA(ctx,lk,()=>{const col=mix(SOFT,BAD,br);arrowTo(ctx,410,398,410,512,col,0.9,{lw:3+2*br,head:14});
-      if(br>0){glow(ctx,410,455,80,BAD,0.6*br*(0.7+0.3*Math.sin(t*6)));withA(ctx,br,()=>{T(ctx,"≠",448,468,{w:800,size:40,color:rgba(BAD,1)});ot_pill(ctx,610,456,"the meaning broke here",BAD,{size:19});});}});
+    // the interface specification already said newton-seconds: the meaning was written down, and one side wasn't held to it
+    const chk=fin(t,cB+4.3,0.5);withA(ctx,fin(t,cM+8.3,0.5),()=>{glass(ctx,780,395,300,120,16,OT_GOLD,{glow:14+12*pulseAt(t,cB+4.3,1.4),ea:0.85,fill:"rgba(7,12,24,0.95)"});
+      ctx.fillStyle=rgba(OT_GOLD,0.5);ctx.beginPath();ctx.moveTo(1052,395);ctx.lineTo(1080,395);ctx.lineTo(1080,423);ctx.closePath();ctx.fill();
+      T(ctx,"interface spec",806,433,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});T(ctx,"newton-seconds",806,487,{w:800,size:30,color:rgba(OT_GOLD,1)});});
+    withA(ctx,chk,()=>{ctx.save();ctx.strokeStyle=rgba(OT_GOLD,0.75);ctx.lineWidth=2;ctx.setLineDash([6,7]);ctx.beginPath();ctx.moveTo(780,420);ctx.lineTo(728,324);ctx.moveTo(780,490);ctx.lineTo(728,586);ctx.stroke();ctx.restore();});
+    ot_mark(ctx,710,310,false,fin(t,cB+4.5,0.4),20);ot_mark(ctx,710,600,true,fin(t,cB+4.9,0.4),20);
+    const lk=fin(t,cM+8.3,0.5),br=fin(t,cB+2.6,0.4);withA(ctx,lk,()=>{const col=mix(SOFT,BAD,br);arrowTo(ctx,410,398,410,512,col,0.9,{lw:3+2*br,head:14});
+      if(br>0){glow(ctx,410,455,80,BAD,0.6*br*(0.7+0.3*Math.sin(t*6)));withA(ctx,br,()=>T(ctx,"≠",356,468,{w:800,size:40,color:rgba(BAD,1)}));}
+      withA(ctx,fin(t,cB+4.6,0.4),()=>ot_pill(ctx,592,456,"not checked against the spec",BAD,{size:19}));});
     withA(ctx,fin(t,cM+9.4,0.5),()=>T(ctx,"1 pound-force second = 4.45 newton-seconds",410,728,{w:600,size:19,align:"center",color:rgba(SOFT,1)}));});
   vign(ctx,S);});
 
@@ -185,14 +193,14 @@ scene("person",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const fA=fin(t,cF+0.1,0.6),mA=fin(t,cM+0.2,0.6),mx=950,my=140,mw=470;
   withA(ctx,fA,()=>{glass(ctx,mx,my,mw,440,18,mA>0?mix(KIND,OT_GOLD,mA):KIND,{glow:14+10*mA,ea:0.85,fill:"rgba(7,12,24,0.95)"});
     T(ctx,ln>0.5?"one learner · L-000418":"Aisha's facts",mx+24,my+44,{w:800,size:24,color:rgba(ln>0.5?OT_GOLD:KIND,1)});
-    T(ctx,"credentials",mx+24,my+222,{f:"mono",w:500,size:16,color:rgba(SOFT,1)});});
+    T(ctx,"credentials",mx+24,my+222,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});});
   const fT=[cF+0.5,cF+2.5,cF+3.9,cF+4.4,cF+4.9];
-  OT_FACTS.forEach(([k,v,src],i)=>{const y=my+(i<2?96+i*64:258+(i-2)*58),a=fin(t,fT[i],0.5);withA(ctx,a,()=>{T(ctx,k,mx+24,y,{f:"mono",w:500,size:16,color:rgba(SOFT,1)});T(ctx,v,mx+24,y+28,{w:700,size:22});});
+  OT_FACTS.forEach(([k,v,src],i)=>{const y=my+(i<2?96+i*64:258+(i-2)*58),a=fin(t,fT[i],0.5);withA(ctx,a,()=>{T(ctx,k,mx+24,y,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});T(ctx,v,mx+24,y+28,{w:700,size:22});});
     const P=OT_SRC[src],sx=1670-(src===1?118:src===2?158:src===3?92:120),p=clamp((t-fT[i]+0.3)/0.6,0,1);if(p>0){const col=src===1?OT_IT:OT_SYS[P[0]].c;arrowTo(ctx,sx,P[1],mx+mw+6,y+10,col,0.85,{p,bend:0.08,lw:2.4,head:12});
       withA(ctx,fin(t,cM+0.4+i*0.25,0.4),()=>ot_mark(ctx,mx+mw-30,y+10,true,1,14));}});
   OT_SRC.forEach(([k,y],i)=>ot_node(ctx,k,1670,y,fin(t,cF+(i===0?0.2:i===1?2.2:3.7+i*0.3),0.5),0,k==="it"?{sys:{c:OT_IT,n:"IT directory"}}:{}));
   withA(ctx,fin(t,cM+0.6,0.5),()=>ot_pill(ctx,1670,110,"one source for each fact",OT_GOLD,{size:19}));
-  withA(ctx,fin(t,cM+5.0,0.6),()=>ot_tag(ctx,1185,640,"master data",OT_GOLD,1,{size:26}));
+  withA(ctx,fin(t,cM+5.6,0.6),()=>ot_tag(ctx,890,652,"master data",OT_GOLD,1,{size:26}));
   // one list of values, used by every system
   const cl=fin(t,cC+1.6,0.6),ch=pulseAt(t,cC+3.6,2.0);ot_codeList(ctx,480,728,cl,ch);
   withA(ctx,cl*fin(t,cC+3.4,0.8),()=>{ctx.save();ctx.strokeStyle=rgba(OT_STD,0.55);ctx.lineWidth=1.6;ctx.setLineDash([4,6]);OT_SRC.forEach(([k,y])=>{if(k==="it")return;ctx.beginPath();ctx.moveTo(1120,760);ctx.quadraticCurveTo(1480,720,1670-110,y+30);ctx.stroke();});
@@ -201,7 +209,7 @@ scene("person",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   vign(ctx,S);});
 
 /* ---------- 6. Precise, but not yet technical ---------- */
-const OT_VEND=[["learner","customer",1],["credential id","certificate no.",1],["claim","course name",1],["level","level",1],["volume","hours",1],["status","—",0],["evidence","—",0],["counts towards","—",0]];
+const OT_VEND=[["learner","customer",1],["credential id","certificate no.",1],["claim","course name",1],["level","level",1],["volume","hours",1],["status","revoked flag",1],["evidence","—",0],["counts towards","—",0]];
 scene("logical",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const cS=c("sketch"),cI=c("id"),cA=c("attrs"),cC=c("card"),cR=c("rules"),cT=c("still"),Z=1.2;
   // the sketch on paper, from What's in a word
@@ -216,9 +224,9 @@ scene("logical",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     const rel=(a,b,ca,cb,t0,verb,dx,dy)=>{const on=fin(t,t0,0.5),aa=Math.min(E[a].a,E[b].a);if(aa<=0.01)return;withA(ctx,aa,()=>{if(on<1){const s_=ot_edge(B[a],B[b].x,B[b].y),e_=ot_edge(B[b],B[a].x,B[a].y);ctx.save();ctx.strokeStyle=rgba(OT_GOLD,0.45*(1-on));ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(s_[0],s_[1]);ctx.lineTo(e_[0],e_[1]);ctx.stroke();ctx.restore();}
       if(on>0){relLine(ctx,B[a],B[b],ca,cb,{col:OT_GOLD,a:on,words:on,s:Z});if(verb)withA(ctx,on,()=>ot_pill(ctx,(B[a].x+B[b].x)/2+(dx||0),(B[a].y+B[b].y)/2+(dy||0),verb,OT_GOLD,{size:20}));}
       const hot=pulseAt(t,t0,1.6);if(hot)glow(ctx,(B[a].x+B[b].x)/2,(B[a].y+B[b].y)/2,100,OT_GOLD,0.5*hot);});};
-    rel("learner","cred","1","*",cC+2.2,"holds",0,-30);rel("issuer","cred","1","*",cC+3.0,"issues",-50,34);rel("cred","evidence","1","*",cC+3.6,"rests on",0,-30);
+    rel("learner","cred","1","*",cC+2.2,"holds",-34,-40);rel("issuer","cred","1","*",cC+3.0,"issues",-47,-22);rel("cred","evidence","1","*",cC+3.6,"rests on",45,24);
     ["micro","award"].forEach(k=>withA(ctx,E[k].a,()=>isa(ctx,B[k].x,B[k].y-B[k].h/2,B.cred.x+B.cred.w/2-(k==="award"?30:110),B.cred.y+B.cred.h/2+4,1,OT_GOLD,{fill:"#0a1020"})));
-    rel("micro","award","*","*",cC+5.0,"counts towards",0,-34);
+    rel("micro","award","*","*",cC+5.0,"counts towards",0,-54);
     Object.keys(E).forEach(k=>ent(ctx,E[k]));
     // the rows of the credential, lit as the narration names them
     const bx=B.cred,x0=bx.x-bx.w/2,y0=bx.y-bx.h/2+58*Z,rowY=i=>y0+28*Z+i*30*Z,row=(i,a,col)=>{if(a<=0.01)return;withA(ctx,a,()=>{ctx.fillStyle=rgba(col,0.2);rr(ctx,x0+8,rowY(i)-23*Z,bx.w-16,30*Z,6);ctx.fill();ctx.fillStyle=rgba(col,0.95);rr(ctx,x0+8,rowY(i)-23*Z,5,30*Z,3);ctx.fill();});};
@@ -236,7 +244,7 @@ scene("logical",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
       OT_VEND.forEach(([m,v],i)=>T(ctx,v,x0+(i+0.5)*cw,550,{w:700,size:22,align:"center",color:v==="—"?rgba(SOFT,0.7):rgba(INK,1)}));});
     OT_VEND.forEach(([m,v,ok],i)=>ot_mark(ctx,x0+(i+0.5)*cw,420,!!ok,fin(t,cT+3.8+i*0.2,0.3),18));
     withA(ctx,fin(t,cT+5.6,0.4),()=>{const br=(i0,i1,col,s_)=>{const a=x0+i0*cw+14,b=x0+i1*cw-14;ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(a,606);ctx.lineTo(a,618);ctx.lineTo(b,618);ctx.lineTo(b,606);ctx.stroke();ot_pill(ctx,(a+b)/2,640,s_,col,{size:22});};
-      br(0,5,GOOD,"fit");br(5,8,BAD,"gap");});
+      br(0,6,GOOD,"fit");br(6,8,BAD,"gap");});
     [["choose a package",520,cT+5.9],["map its fields",960,cT+7.2],["move to a new one",1400,cT+8.5]].forEach(([s_,x,t0])=>withA(ctx,fin(t,t0,0.4),()=>ot_tag(ctx,x,760,s_,OT_GOLD,1,{size:26})));});
   vign(ctx,S);});
 
@@ -249,14 +257,14 @@ scene("owners",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const card=(x,y,w,word,owner,col,a)=>withA(ctx,a,()=>{glass(ctx,x,y,w,124,16,col,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(ctx,word,x+24,y+52,{w:800,size:32,color:rgba(col,1)});T(ctx,owner,x+24,y+94,{w:600,size:20,color:rgba(SOFT,1)});});
   // the words, and their owners
   const y1=OT_BAND[0][0],y2=OT_BAND[1][0],y3=OT_BAND[2][0],mA=fin(t,cW+1.9,0.5),tA=fin(t,cW+4.3,0.5);
-  withA(ctx,mA,()=>person(ctx,"mei",470,y1+OT_BH-6,0.4,{t,pose:t>cW+2&&t<cW+4.2?"explain":"stand",expr:"calm"}));card(560,y1+50,360,"award","owner: Registrar · Mei",TRUST,mA);
-  withA(ctx,tA,()=>person(ctx,"tom",1020,y1+OT_BH-6,0.4,{t,pose:t>cW+4.4&&t<cW+6.6?"explain":"stand",expr:"calm"}));card(1100,y1+50,400,"microcredential","owner: Short courses · Tom",OFFICE.short.c,tA);
+  withA(ctx,mA,()=>person(ctx,"mei",470,y1+OT_BH-10,0.34,{t,pose:t>cW+2&&t<cW+4.2?"explain":"stand",expr:"calm"}));card(560,y1+50,360,"award","owner: Registrar · Mei",TRUST,mA);
+  withA(ctx,tA,()=>person(ctx,"tom",1020,y1+OT_BH-10,0.34,{t,pose:t>cW+4.4&&t<cW+6.6?"explain":"stand",expr:"calm"}));card(1100,y1+50,400,"microcredential","owner: Short courses · Tom",OFFICE.short.c,tA);
   // the model, and its owner
-  const nA=fin(t,cA+0.3,0.5);withA(ctx,nA,()=>{person(ctx,"noor",470,y2+OT_BH-6,0.4,{t,pose:t>cA+0.4&&t<cA+3?"explain":"stand"});
+  const nA=fin(t,cA+0.3,0.5);withA(ctx,nA,()=>{person(ctx,"noor",470,y2+OT_BH-10,0.34,{t,pose:t>cA+0.4&&t<cA+3?"explain":"stand"});
     const yy=y2+88,E={l:{x:700,y:yy,name:"Learner",col:OT_GOLD,s:0.95},c_:{x:1010,y:yy,name:"Credential",col:OT_GOLD,s:0.95},e:{x:1320,y:yy,name:"Evidence",col:OT_GOLD,s:0.95}};diagram(ctx,E,[["l","c_","1","*",{col:OT_GOLD}],["c_","e","1","*",{col:OT_GOLD}]]);
     ot_pill(ctx,1010,y2+170,"owner: Noor, data architect",OT_GOLD,{size:21});});
   // the tables, and their teams
-  const bA=fin(t,cA+3.4,0.5);withA(ctx,bA,()=>{person(ctx,"ben",470,y3+OT_BH-6,0.4,{t});
+  const bA=fin(t,cA+3.4,0.5);withA(ctx,bA,()=>{person(ctx,"ben",470,y3+OT_BH-10,0.34,{t});
     [["awards","sis","student system team"],["certificates","short","platform team"],["badges","careers","careers team"]].forEach(([n,k,own],i)=>{const x=560+i*322,y=y3+42,col=OT_SYS[k].c;glass(ctx,x,y,300,140,14,col,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});
       T(ctx,n,x+22,y+42,{f:"mono",w:500,size:24,color:rgba(col,1)});for(let r=0;r<2;r++){ctx.fillStyle=rgba(col,0.22);ctx.fillRect(x+22,y+58+r*18,256,11);}T(ctx,"owner: "+own,x+22,y+122,{w:600,size:19,color:rgba(SOFT,1)});});});
   // a change of meaning travels down; news of a change in a system travels up, before it ships
@@ -292,7 +300,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,S)
     T(ctx,"⋯",ot_yx(1955)-10,y+88,{w:800,size:24,align:"center",color:rgba(SOFT,0.8)});
     OT_ERA.forEach(([a,b,n],i)=>{const t0=cO+0.3+i*0.55,on=fin(t,t0,0.4),gone=i<4?fin(t,cO+0.3+(i+1)*0.55,0.4):0;if(on<=0)return;const xa=ot_yx(a)+4,xb=ot_yx(b)-4,yy=i%2?520:440;
       withA(ctx,on*(1-0.55*gone),()=>{glass(ctx,xa,yy,xb-xa,64,12,CYAN,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.94)"});T(ctx,n,(xa+xb)/2,yy+40,{w:700,size:21,align:"center"});});
-      if(gone>0)withA(ctx,gone,()=>T(ctx,"replaced",(xa+xb)/2,yy-10,{f:"mono",w:500,size:16,align:"center",color:rgba(SOFT,0.9)}));
+      if(gone>0)withA(ctx,gone,()=>T(ctx,"replaced",(xa+xb)/2,yy-10,{f:"mono",w:500,size:18,align:"center",color:rgba(SOFT,0.9)}));
       // hold every system up to the model
       const h=fin(t,cL+2.0+i*0.2,0.4);if(h>0)withA(ctx,h,()=>{ctx.save();ctx.strokeStyle=rgba(OT_GOLD,0.6);ctx.lineWidth=1.8;ctx.setLineDash([4,6]);ctx.beginPath();ctx.moveTo(1230,300);ctx.lineTo((xa+xb)/2,yy);ctx.stroke();ctx.restore();ot_mark(ctx,xb-14,yy+2,true,h,13);});});
     withA(ctx,fin(t,cO+0.4,0.5),()=>ot_pill(ctx,1580,360,"a new system every decade or so",CYAN,{size:21}));

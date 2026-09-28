@@ -24,12 +24,12 @@ const NARR={
 "meet":{"name":"Where meanings meet","lead":1.0,"tail":1.0,"vo":[
  {"id":"pairs","gap":0.8,"text":"Connect five systems in pairs, and you need up to ten translations. Each one is a place where meaning can slip."},
  {"id":"mars","gap":0.8,"text":"In 1999, a spacecraft was lost at Mars. One team's software gave the thrusters' push in pound-force seconds. The navigation software expected newton-seconds.","say":"In nineteen ninety-nine, a spacecraft was lost at Mars. One team's software gave the thrusters' push in pound-force seconds. The navigation software expected newton-seconds."},
- {"id":"both","gap":0.8,"text":"Each side made sense on its own. The meaning broke between them."},
+ {"id":"both","gap":0.8,"text":"Each program ran without an error. The meaning broke between them, and nobody held it to the spec."},
  {"id":"hub","gap":0.8,"text":"So translate each system once, to a shared model. Five translations instead of ten, and one place where the meaning is written down."}]},
 "person":{"name":"One person, many records","lead":1.0,"tail":1.0,"vo":[
  {"id":"ids","gap":0.8,"text":"Take one learner, Aisha. She has four IDs: a student number, a platform login, a customer number and a wallet address."},
  {"id":"facts","gap":0.8,"text":"Her name comes from the student system, her email from IT, and her credentials from three different places."},
- {"id":"master","gap":0.8,"text":"Choosing which system is the source of each fact, and linking the records that are the same person, is master data."},
+ {"id":"master","gap":0.8,"text":"Choosing which system is the source of each fact, and linking the records that are the same person, is master data management."},
  {"id":"codes","gap":0.8,"text":"And shared lists of values, such as the kinds of credential, keep a word meaning the same thing in every system. That's reference data."}]},
 "logical":{"name":"Precise, but not yet technical","lead":1.0,"tail":1.0,"vo":[
  {"id":"sketch","gap":0.8,"text":"The sketch on paper says what matters. The logical model says it precisely."},

@@ -41,9 +41,9 @@ scene("materials",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath"),cS=c("seal
 
 /* ---------- 2. The model underneath ---------- */
 // five exhibits, and the same parts in each
-const OT_COLS=[["lock","Guild masterpiece",["the guild's masters","the apprentice","master locksmith","the masterpiece","1523","the guild's mark"]],
+const OT_COLS=[["lock","Guild masterpiece",["the guild's masters","a journeyman","master locksmith","the masterpiece","1523","the guild's mark"]],
   ["scroll","Imperial examination",["the examiners","the candidate","passed, with a rank","the examination","1706","the official list"]],
-  ["licence","Licence to teach",["a university","a new master","may teach","an examination","1290","the wax seal"]],
+  ["licence","Licence to teach",["the chancellor","a new master","may teach","an examination","1290","the wax seal"]],
   ["diploma","Diploma",["a university","a graduate","Bachelor of Arts","assessments","1950","a signature"]],
   ["signed","Signed credential",["a university","a learner","Data Visualisation","an assessed project","2026","the digital key"]]];
 const OT_PARTS=["issuer","holder","claim","evidence","date","checked by"],OT_CX=i=>390+i*330,OT_RY=r=>r<5?412+r*60:728;

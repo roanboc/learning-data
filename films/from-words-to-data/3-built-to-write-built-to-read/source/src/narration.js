@@ -3,7 +3,7 @@
 const NARR={
 "ledger":{"name":"Journal and ledger","lead":1.6,"tail":1.0,"vo":[
  {"id":"venice","gap":0.8,"text":"In 1494, Luca Pacioli set down how Venetian merchants kept their books.","say":"In fourteen ninety-four, Luca Pacioli set down how Venetian merchants kept their books."},
- {"id":"journal","gap":0.8,"text":"Every transaction went first into the journal, as it happened, one after another."},
+ {"id":"journal","gap":0.8,"text":"Every transaction was written into the journal, as it happened, one after another."},
  {"id":"post","gap":0.8,"text":"Then each entry was posted to the ledger, grouped by account, where it could be read, and balanced."},
  {"id":"two","gap":0.8,"text":"One set of facts, kept in two shapes: one for writing, and one for reading. And if the two sides didn't balance, something was wrong."},
  {"id":"today","gap":0.8,"text":"Five centuries later, the university has the same two jobs. On graduation day, thousands of awards are issued, each one complete and right. On planning day, someone reads ten years of them at once."}]},

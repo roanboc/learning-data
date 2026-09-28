@@ -406,72 +406,66 @@ function ledFrame(ctx,x,y,w,h,c,img,o){o=o||{};const p=o.pad==null?Math.max(4,w*
 function plaque(ctx,x,y,w,rows,c){const h=20+rows.length*52;glass(ctx,x,y,w,h,14,c,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.9)"});
   rows.forEach((r,i)=>{const yy=y+16+i*52;let tx=x+18;if(r[2]){const lw=logo(ctx,r[2],tx,yy+8,28);tx+=Math.max(lw,26)+10;}T(ctx,r[0],tx,yy+16,{size:15,w:700,color:rgba(SOFT,0.95)});T(ctx,r[1],tx,yy+40,{size:21,w:700});});return h;}
 
-// From words to data · Older than the systems. One line per id; the film re-times itself to the voice.
+// From words to data · Both at once. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
 const NARR={
-"materials":{"name":"Same idea, new materials","lead":1.6,"tail":1.0,"vo":[
- {"id":"clay","gap":0.8,"text":"Almost four thousand years ago, student scribes in Mesopotamia practised on clay. Some of their school tablets hold a teacher's model, with the student's copy beside it."},
- {"id":"guild","gap":0.8,"text":"In medieval Europe, a journeyman became a master by making a masterpiece: one piece of work, judged by the masters of the guild."},
- {"id":"exams","gap":0.8,"text":"In China, imperial examinations tested candidates for thirteen centuries, and the rank they earned opened the way to office."},
- {"id":"seal","gap":0.8,"text":"At medieval universities, a chancellor granted the licence to teach, under a wax seal. Then came the diploma, the transcript, the digital badge, and today, a credential signed with a digital key."},
- {"id":"idea","gap":0.8,"text":"The materials changed every few centuries. The idea didn't."}]},
-"model":{"name":"The model underneath","lead":1.0,"tail":1.0,"vo":[
- {"id":"parts","gap":0.8,"text":"Look closely, and every one of them has the same parts."},
- {"id":"issuer","gap":0.8,"text":"Someone trusted issues it: a guild, the examiners, a university."},
- {"id":"holder","gap":0.8,"text":"It names a holder, and makes a claim about them: this person can do this."},
- {"id":"evidence","gap":0.8,"text":"It rests on evidence: a masterpiece, an examination, an assessment. And it has a date."},
- {"id":"verify","gap":0.8,"text":"Someone else can check it: by the seal, by the signature, or today, by the digital key. Some expire. A few are revoked."},
- {"id":"standard","gap":0.8,"text":"Today's standard for digital credentials uses almost the same words: issuer, holder, verifier, claims and evidence."},
- {"id":"outlast","gap":0.8,"text":"A conceptual model can outlast every material it was ever written on."}]},
-"inside":{"name":"Every system has a model inside","lead":1.0,"tail":1.0,"vo":[
- {"id":"five","gap":0.8,"text":"At the university, credentials now live in five systems."},
- {"id":"list","gap":0.8,"text":"The student system holds awards. The learning platform, completions. Careers, badges. A digital wallet, the signed copies."},
- {"id":"bought","gap":0.8,"text":"And the new short-course platform, bought off the shelf, holds the microcredentials. It calls learners customers."},
- {"id":"adopt","gap":0.8,"text":"Buying a system means adopting its model, whether you look at it or not."},
- {"id":"vendors","gap":0.8,"text":"If you don't model your business, your vendors will do it for you."}]},
-"meet":{"name":"Where meanings meet","lead":1.0,"tail":1.0,"vo":[
- {"id":"pairs","gap":0.8,"text":"Connect five systems in pairs, and you need up to ten translations. Each one is a place where meaning can slip."},
- {"id":"mars","gap":0.8,"text":"In 1999, a spacecraft was lost at Mars. One team's software gave the thrusters' push in pound-force seconds. The navigation software expected newton-seconds.","say":"In nineteen ninety-nine, a spacecraft was lost at Mars. One team's software gave the thrusters' push in pound-force seconds. The navigation software expected newton-seconds."},
- {"id":"both","gap":0.8,"text":"Each side made sense on its own. The meaning broke between them."},
- {"id":"hub","gap":0.8,"text":"So translate each system once, to a shared model. Five translations instead of ten, and one place where the meaning is written down."}]},
-"person":{"name":"One person, many records","lead":1.0,"tail":1.0,"vo":[
- {"id":"ids","gap":0.8,"text":"Take one learner, Aisha. She has four IDs: a student number, a platform login, a customer number and a wallet address."},
- {"id":"facts","gap":0.8,"text":"Her name comes from the student system, her email from IT, and her credentials from three different places."},
- {"id":"master","gap":0.8,"text":"Choosing which system is the source of each fact, and linking the records that are the same person, is master data."},
- {"id":"codes","gap":0.8,"text":"And shared lists of values, such as the kinds of credential, keep a word meaning the same thing in every system. That's reference data."}]},
-"logical":{"name":"Precise, but not yet technical","lead":1.0,"tail":1.0,"vo":[
- {"id":"sketch","gap":0.8,"text":"The sketch on paper says what matters. The logical model says it precisely."},
- {"id":"id","gap":0.8,"text":"What identifies a credential? Who issued it, to whom, for what, and when."},
- {"id":"attrs","gap":0.8,"text":"Its attributes, and the values each may take: the level, the volume of learning, the status."},
- {"id":"card","gap":0.8,"text":"How many of one relate to another: one learner holds many credentials, and one microcredential can count towards several awards."},
- {"id":"rules","gap":0.8,"text":"And the rules: a revoked credential is never counted."},
- {"id":"still","gap":0.8,"text":"Still no technology. That's what makes it useful: it's the yardstick every system is held against, to choose a package, to map its fields, or to move to a new one."}]},
-"owners":{"name":"Who owns what","lead":1.0,"tail":1.0,"vo":[
- {"id":"words","gap":0.8,"text":"Every part has an owner. The registrar owns the word award. The short-courses team owns microcredential."},
- {"id":"arch","gap":0.8,"text":"Noor, the data architect, owns the logical model, and each team owns its own tables."},
- {"id":"down","gap":0.8,"text":"A change of meaning travels down, from the words to the systems. News of a change in a system travels up, before it ships."},
- {"id":"stewards","gap":0.8,"text":"Owners decide. Stewards keep it written down, and up to date."}]},
+"till":{"name":"The till that kept the total","lead":1.6,"tail":1.0,"vo":[
+ {"id":"ritty","gap":0.8,"text":"In 1879, a saloon keeper in Ohio patented a machine to keep track of every sale at his bar: the cash register.","say":"In eighteen seventy-nine, a saloon keeper in Ohio patented a machine to keep track of every sale at his bar: the cash register."},
+ {"id":"total","gap":0.8,"text":"Within a few years, registers rang up each sale as it happened, and kept a running total, ready to read at closing time."},
+ {"id":"wish","gap":0.8,"text":"Recording and counting in one place. It's an old wish."}]},
+"distance":{"name":"The distance","lead":1.0,"tail":1.0,"vo":[
+ {"id":"apart","gap":0.8,"text":"At the university, writing and reading still live apart."},
+ {"id":"path","gap":0.8,"text":"The app writes to its own database. Overnight, a copy travels to the lakehouse and gets refined, and the answer is ready tomorrow."},
+ {"id":"now","gap":0.8,"text":"But some questions can't wait. An employer wants to check a credential now. A learner's wallet wants to show, now, how close she is to a graduate certificate."},
+ {"id":"appeal","gap":0.8,"text":"That distance is why hybrid databases appeal."}]},
+"engines":{"name":"Two engines, one place","lead":1.0,"tail":1.0,"vo":[
+ {"id":"one","gap":0.8,"text":"A hybrid database writes and reads in one place."},
+ {"id":"two","gap":0.8,"text":"Some keep two copies inside: rows for writing, and columns for reading, kept in step by the database itself."},
+ {"id":"lake","gap":0.8,"text":"Others put an operational database inside the lakehouse, with tables synced in both directions."},
+ {"id":"htap","gap":0.8,"text":"The idea has a name: HTAP, hybrid transactional and analytical processing."}]},
+"sync":{"name":"Keeping two shapes in step","lead":1.0,"tail":1.0,"vo":[
+ {"id":"capture","gap":0.8,"text":"Keeping two shapes in step means capturing each change as it happens, and applying it on the other side, in the same order."},
+ {"id":"keys","gap":0.8,"text":"That only works if every row has a stable key, so an update finds the row it changes, and a delete finds the row it removes."},
+ {"id":"order","gap":0.8,"text":"Apply an award's revocation before its issue, and the award comes back to life. Order matters as much as content."}]},
+"removes":{"name":"What it removes","lead":1.0,"tail":1.0,"vo":[
+ {"id":"gone","gap":0.8,"text":"What goes? The nightly copy, the pipelines that move it, the wait, and a second set of permissions to keep in step."},
+ {"id":"real","gap":0.8,"text":"Those are real gains."}]},
+"doesnt":{"name":"What it doesn't","lead":1.0,"tail":1.0,"vo":[
+ {"id":"direct","gap":0.8,"text":"Now count awards straight from the app's own tables."},
+ {"id":"revoked","gap":0.8,"text":"Revoked awards are still in there, with a status. Last year's faculty has been overwritten. The count comes out wrong."},
+ {"id":"same","gap":0.8,"text":"It's the same mistake as counting enrolments today, instead of on census date."},
+ {"id":"model","gap":0.8,"text":"History, shared dimensions and definitions still need modelling. Hybrid removes the copy, not the model."}]},
+"back":{"name":"Data flowing back","lead":1.0,"tail":1.0,"vo":[
+ {"id":"serve","gap":0.8,"text":"Data flows the other way now, too. Gold data is served back to the app: the next microcredential to suggest, or a learner who may need help."},
+ {"id":"features","gap":0.8,"text":"Features for machine learning travel the same way: calculated in gold, served in milliseconds."},
+ {"id":"agents","gap":0.8,"text":"And AI agents need both shapes at once: they read what's known, and write down what they did."}]},
+"questions":{"name":"New questions for the modeller","lead":1.0,"tail":1.0,"vo":[
+ {"id":"truth","gap":0.8,"text":"So the modeller has new questions. For each idea, which shape is the source of truth?"},
+ {"id":"sync","gap":0.8,"text":"Which way does each table sync, and who owns it?"},
+ {"id":"fresh","gap":0.8,"text":"How fresh must each answer be? Seconds for a wallet. A day for a plan."},
+ {"id":"defs","gap":0.8,"text":"Where do the definitions live, so the app and the report agree? In one place, not two."},
+ {"id":"contract","gap":0.8,"text":"And the data contracts from Silent change now run in both directions."}]},
 "end":{"name":"Pull back","lead":1.0,"tail":1.0,"vo":[
- {"id":"same","gap":0.8,"text":"The short-course platform still calls them customers. Nothing inside it changed."},
- {"id":"joined","gap":0.8,"text":"But its customer now maps to learner, and its certificate to microcredential. The meaning is joined."},
- {"id":"outlive","gap":0.8,"text":"Systems come and go every decade or so. The ideas underneath them are centuries old."},
- {"id":"last","gap":0.8,"text":"Model them once, precisely, and hold every system up to that. Next: one model, many shapes."}]}
+ {"id":"one","gap":0.8,"text":"One logical model. A shape for writing, and a shape for reading, on one platform, with a shorter distance between them."},
+ {"id":"tag","gap":0.8,"text":"Hybrid removes the copy, not the model."},
+ {"id":"next","gap":0.8,"text":"Next: making the meaning itself something a machine can read."}]}
 };
 
-const VODUR={"materials/clay": 10.279, "materials/guild": 7.947, "materials/exams": 8.131, "materials/seal": 12.338, "materials/idea": 3.636, "model/parts": 3.055, "model/issuer": 4.299, "model/holder": 4.042, "model/evidence": 5.311, "model/verify": 7.277, "model/standard": 7.72, "model/outlast": 4.119, "inside/five": 3.431, "inside/list": 7.934, "inside/bought": 6.625, "inside/adopt": 4.173, "inside/vendors": 3.206, "meet/pairs": 6.832, "meet/mars": 11.55, "meet/both": 3.51, "meet/hub": 8.146, "person/ids": 7.636, "person/facts": 6.423, "person/master": 6.6, "person/codes": 7.994, "logical/sketch": 4.537, "logical/id": 4.211, "logical/attrs": 5.281, "logical/card": 8.123, "logical/rules": 3.142, "logical/still": 10.148, "owners/words": 6.712, "owners/arch": 5.578, "owners/down": 7.6, "owners/stewards": 3.608, "end/same": 4.639, "end/joined": 5.894, "end/outlive": 5.317, "end/last": 5.973};
+const VODUR={"till/ritty": 8.194, "till/total": 7.04, "till/wish": 3.23, "distance/apart": 3.29, "distance/path": 8.135, "distance/now": 9.485, "distance/appeal": 2.871, "engines/one": 3.035, "engines/two": 7.044, "engines/lake": 5.686, "engines/htap": 5.072, "sync/capture": 7.208, "sync/keys": 7.883, "sync/order": 7.067, "removes/gone": 6.729, "removes/real": 1.284, "doesnt/direct": 2.515, "doesnt/revoked": 7.044, "doesnt/same": 4.63, "doesnt/model": 6.968, "back/serve": 8.996, "back/features": 5.675, "back/agents": 5.398, "questions/truth": 4.86, "questions/sync": 2.575, "questions/fresh": 4.283, "questions/defs": 4.969, "questions/contract": 4.172, "end/one": 7.106, "end/tag": 2.386, "end/next": 3.48};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
-   Three wordless moments: the title, the model left standing when its materials fade, and the ending. */
+   Three wordless moments: the title, the change log applied in the right order, and the ending. */
 const BREATH={
-"materials":{"hold":{"clay":0.6,"exams":0.5,"seal":0.6},"breathe":3.6},
-"model":{"hold":{"issuer":0.4,"holder":0.4,"evidence":0.5,"verify":0.6,"standard":0.7},"breathe":2.6},
-"inside":{"hold":{"list":0.5,"bought":0.5,"adopt":0.4}},
-"meet":{"hold":{"pairs":0.6,"mars":0.8,"both":0.6}},
-"person":{"hold":{"ids":0.8,"facts":0.7,"master":0.8}},
-"logical":{"hold":{"sketch":0.5,"id":0.6,"attrs":0.6,"card":0.7,"rules":0.8}},
-"owners":{"hold":{"words":0.5,"arch":0.4,"down":0.7}},
-"end":{"hold":{"joined":0.6,"outlive":0.6},"breathe":4.2}
+"till":{"hold":{"ritty":0.5,"total":0.6},"breathe":3.6},
+"distance":{"hold":{"path":0.6,"now":0.7}},
+"engines":{"hold":{"two":0.7,"lake":0.5}},
+"sync":{"hold":{"capture":0.8,"keys":0.7,"order":0.5},"breathe":2.0},
+"removes":{"hold":{"gone":0.6}},
+"doesnt":{"hold":{"revoked":0.7,"same":0.5}},
+"back":{"hold":{"serve":0.6,"features":0.5,"agents":0.4}},
+"questions":{"hold":{"truth":0.7,"sync":0.7,"fresh":0.7,"defs":0.6,"contract":0.5}},
+"end":{"hold":{"one":0.6,"tag":0.6},"breathe":4.2}
 };
 
 /* ===== Shared components for the v4 film ===== */
@@ -1218,590 +1212,587 @@ function credKinds(ctx,o){o=o||{};const p=o.p||{},ox=o.ox||0,oy=o.oy||0,s=o.s||1
   ["award","micro","badge"].forEach(k=>{if(E[k].a>0.01){const b=entBox(ctx,E[k]),c=entBox(ctx,E.cred);isa(ctx,b.x,b.y-b.h/2,c.x+(b.x-c.x)*0.25,c.y+c.h/2,1,KIND,{a:E[k].a,fill:"#0a1020"});}});
   Object.values(E).forEach(e=>ent(ctx,e));}
 
-/* ===== Older than the systems: the film's own pictures =====
-   A museum shelf of credentials, from a clay school tablet to a credential signed with a digital key; the model underneath them;
-   the five systems that each hold their own model of it; one learner with four IDs; the logical model as a yardstick; its owners.
-   The past is drawn warm (clay, iron, parchment and the film's wax red); the present is the films' dark glass, each system in its colour,
-   and the shared model in the credential's gold. The labs and the scenarios draw with these too (LV, at the end). */
-const OT_WAX=[228,120,90],OT_GOLD=TRUST,OT_STD=KIND,OT_IT=[150,176,215],OT_PAPER=[238,226,200];
-// the five systems at the university, each with its own model of a credential: [who holds it, what is held]
-const OT_SYS={sis:{n:"Student system",c:APP.sis.c,holds:"awards",m:["Graduand","Award"]},
-  lms:{n:"Learning platform",c:APP.lms.c,holds:"completions",m:["User","Completion"]},
-  careers:{n:"Careers",c:OFFICE.careers.c,holds:"badges",m:["Member","Badge"]},
-  wallet:{n:"Digital wallet",c:[90,220,205],holds:"signed copies",m:["Holder","Credential"]},
-  short:{n:"Short-course platform",c:OFFICE.short.c,holds:"microcredentials",m:["Customer","Certificate"]}};
-const OT_KEYS=["sis","lms","careers","wallet","short"];
+/* ===== Both at once: the film's own pictures =====
+   A brass cash register from 1879; the app's database and the lakehouse, with the night between them; a store of rows (horizontal
+   stripes, blue: built to write) and a store of columns (vertical stripes, green: built to read); a change log whose entries carry
+   the key of the row they change; data flowing back to the app (magenta). The labs and the scenarios draw with these too. */
+const BO_W=[110,190,255],BO_R=[120,225,170],BO_M=[255,120,210],BO_ACC=[120,212,220],BO_BRASS=[226,184,104],BO_AMB=[255,190,90];
+const BO_BR=[[250,220,150],[150,104,44]];
+// each row's key has its own colour and teeth, so a change can be matched to the row it changes
+const BO_KEYC={"A-1042":[255,209,102],"L-207":[190,160,255],"A-1041":[255,160,120],"A-0981":[140,220,255]};
+const bo_kc=id=>BO_KEYC[id]||[200,215,235];
 
-// Aisha, the learner the film follows through five systems (drawn like the series' other people)
-if(!PEOPLE.aisha)PEOPLE.aisha={name:"Aisha Khan",role:"Learner",side:"Learner",does:"uses",edge:KIND,seed:10,
-  skin:[168,116,84],hair:{style:"long",c:[30,22,20]},earrings:[230,236,250],
-  top:{kind:"sweater",c:[64,128,132]},bottom:{c:[48,52,70]},shoe:[230,230,236],build:{sh:64,hip:58,h:0.94}};
+/* ---------- small shapes ---------- */
+// a key: a round bow, a shaft and teeth cut to the key's id
+function bo_key(ctx,x,y,s,id,a,hi){if(a!=null&&a<=0.01)return;const col=bo_kc(id);withA(ctx,a==null?1:a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(s,s);
+  if(hi)glow(ctx,0,0,30,col,0.6*hi);ctx.strokeStyle=rgba(col,1);ctx.fillStyle=rgba(col,1);ctx.lineWidth=2.6;ctx.lineCap="round";ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=6;
+  ctx.beginPath();ctx.arc(-9,0,6.5,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(-2.5,0);ctx.lineTo(14,0);ctx.stroke();
+  let hsh=0;for(let i=0;i<id.length;i++)hsh+=id.charCodeAt(i)*(i+1);ctx.lineWidth=2.2;[0,1,2].forEach(k=>{const hh=2.5+((hsh>>(k*2))%3)*1.6;ctx.beginPath();ctx.moveTo(5+k*4,0);ctx.lineTo(5+k*4,hh);ctx.stroke();});
+  ctx.restore();});}
+// a crescent moon (cached), a sun, an hourglass
+const BO_SPR={};
+// the moon: lit on one side, shadowed towards its inner curve, with faint seas (cached); its halo breathes
+function bo_moon(ctx,x,y,r,a,t){if(a<=0.01)return;if(!BO_SPR.moon){const c=mkCanvas(160,160),m=c.getContext("2d"),g=m.createRadialGradient(46,58,6,72,80,70);g.addColorStop(0,"#fbfdff");g.addColorStop(0.55,"#dfe6f6");g.addColorStop(1,"#9aa6c4");
+    m.fillStyle=g;m.beginPath();m.arc(80,80,66,0,TAU);m.fill();m.fillStyle="rgba(150,160,190,0.28)";[[46,70,10],[60,108,8],[38,98,6],[70,46,7]].forEach(([cx,cy,cr])=>{m.beginPath();m.ellipse(cx,cy,cr,cr*0.8,0.4,0,TAU);m.fill();});
+    m.globalCompositeOperation="destination-out";const h=m.createRadialGradient(114,62,50,114,62,62);h.addColorStop(0,"rgba(0,0,0,1)");h.addColorStop(1,"rgba(0,0,0,0)");m.fillStyle=h;m.beginPath();m.arc(114,62,62,0,TAU);m.fill();BO_SPR.moon=c;}
+  withA(ctx,a,()=>{glow(ctx,x,y,r*(2.6+0.15*Math.sin((t||0)*1.1)),[170,190,255],0.35);ctx.drawImage(BO_SPR.moon,x-r*1.21,y-r*1.21,r*2.42,r*2.42);});}
+// the sun: a warm core and soft, tapered rays that turn and breathe
+function bo_sun(ctx,x,y,r,t,a){if(a<=0.01)return;withA(ctx,a,()=>{glow(ctx,x,y,r*(3.1+0.2*Math.sin(t*1.3)),[255,210,120],0.5);ctx.save();ctx.translate(x,y);ctx.rotate(t*0.08);
+  for(let i=0;i<12;i++){const an=i/12*TAU,L=r*(1.75+0.18*Math.sin(t*1.6+i*1.7)),w=r*0.16;ctx.save();ctx.rotate(an);const g=ctx.createLinearGradient(r*1.1,0,L,0);g.addColorStop(0,"rgba(255,214,130,0.95)");g.addColorStop(1,"rgba(255,190,90,0)");ctx.fillStyle=g;
+    ctx.beginPath();ctx.moveTo(r*1.12,-w);ctx.bezierCurveTo(r*1.4,-w*0.9,L*0.85,-w*0.25,L,0);ctx.bezierCurveTo(L*0.85,w*0.25,r*1.4,w*0.9,r*1.12,w);ctx.quadraticCurveTo(r*1.05,0,r*1.12,-w);ctx.fill();ctx.restore();}
+  const g=ctx.createRadialGradient(-r*0.35,-r*0.35,r*0.08,0,0,r);g.addColorStop(0,"#fffaea");g.addColorStop(0.55,"#ffd98a");g.addColorStop(1,"#f5a948");ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,r,0,TAU);ctx.fill();ctx.restore();});}
+/* an hourglass: turned wooden caps and posts, two curved glass bulbs, and sand falling in a thin stream.
+   u: how much of the sand has fallen (0..1); t moves the grains */
+function bo_hourglass(ctx,x,y,s,u,col,a,t){if(a<=0.01)return;const c=col||BO_AMB;u=clamp(u,0.02,0.98);withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(s,s);
+  const bulb=(sg)=>{ctx.beginPath();ctx.moveTo(-14,sg*-22);ctx.bezierCurveTo(-15,sg*-10,-4,sg*-4,-2,0);ctx.lineTo(2,0);ctx.bezierCurveTo(4,sg*-4,15,sg*-10,14,sg*-22);ctx.closePath();};
+  [1,-1].forEach(sg=>{bulb(sg);const g=ctx.createLinearGradient(-14,0,14,0);g.addColorStop(0,"rgba(200,225,255,0.22)");g.addColorStop(0.35,"rgba(230,244,255,0.10)");g.addColorStop(1,"rgba(160,190,230,0.2)");ctx.fillStyle=g;ctx.fill();});
+  const sandG=ctx.createLinearGradient(0,-22,0,22);sandG.addColorStop(0,rgba(mix(c,[255,255,255],0.25),1));sandG.addColorStop(1,rgba(mix(c,[0,0,0],0.2),1));ctx.fillStyle=sandG;
+  ctx.save();bulb(1);ctx.clip();const top=-22+20*u;ctx.beginPath();ctx.moveTo(-16,top+3);ctx.quadraticCurveTo(0,top+7*(1-u),16,top+3);ctx.lineTo(16,2);ctx.lineTo(-16,2);ctx.closePath();ctx.fill();ctx.restore();
+  ctx.save();bulb(-1);ctx.clip();const hgt=18*u;ctx.beginPath();ctx.moveTo(-16,22);ctx.lineTo(-16,22-hgt*0.35);ctx.quadraticCurveTo(0,22-hgt*1.35,16,22-hgt*0.35);ctx.lineTo(16,22);ctx.closePath();ctx.fill();ctx.restore();
+  if(u<0.97){ctx.strokeStyle=rgba(c,0.9);ctx.lineWidth=1.3;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(0,22-hgt*0.9);ctx.stroke();for(let k=0;k<4;k++){const f=((t||0)*1.6+k/4)%1;ctx.fillStyle=rgba(c,0.9);ctx.beginPath();ctx.arc(k%2?0.8:-0.8,f*(22-hgt*0.9),0.9,0,TAU);ctx.fill();}}
+  ctx.strokeStyle="rgba(210,230,255,0.75)";ctx.lineWidth=1.4;[1,-1].forEach(sg=>{bulb(sg);ctx.stroke();});ctx.strokeStyle="rgba(255,255,255,0.55)";ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(-10,-18);ctx.quadraticCurveTo(-10,-10,-5,-6);ctx.stroke();
+  const wood=ctx.createLinearGradient(0,-30,0,-22);wood.addColorStop(0,"#b07a48");wood.addColorStop(1,"#5c361c");
+  [-1,1].forEach(sg=>{ctx.fillStyle=wood;ctx.beginPath();ctx.moveTo(-20,sg*24);ctx.quadraticCurveTo(-22,sg*29,-18,sg*31);ctx.lineTo(18,sg*31);ctx.quadraticCurveTo(22,sg*29,20,sg*24);ctx.closePath();ctx.fill();ctx.fillStyle="rgba(255,225,190,0.35)";ctx.fillRect(-17,sg>0?24:-25.2,34,1.2);});
+  [-17,17].forEach(px=>{const pg=ctx.createLinearGradient(px-2,0,px+2,0);pg.addColorStop(0,"#c18a55");pg.addColorStop(1,"#5c361c");ctx.fillStyle=pg;ctx.beginPath();ctx.moveTo(px-1.4,-24);ctx.bezierCurveTo(px-3,-12,px-3,12,px-1.4,24);ctx.lineTo(px+1.4,24);ctx.bezierCurveTo(px+3,12,px+3,-12,px+1.4,-24);ctx.closePath();ctx.fill();});
+  ctx.restore();});}
+// a flag on a pole
+function bo_flag(ctx,x,y,s,col,t){ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.strokeStyle=rgba(INK,0.9);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(0,20);ctx.lineTo(0,-24);ctx.stroke();
+  const w=Math.sin((t||0)*3)*2;ctx.fillStyle=rgba(col,0.95);ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=10;ctx.beginPath();ctx.moveTo(1,-24);ctx.quadraticCurveTo(12,-28+w,24,-22);ctx.lineTo(24,-6);ctx.quadraticCurveTo(12,-12+w,1,-8);ctx.closePath();ctx.fill();ctx.restore();}
+// a padlock
+function bo_lock(ctx,x,y,s,col){ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.strokeStyle=rgba(col,1);ctx.lineWidth=3;ctx.shadowColor=rgba(col,0.7);ctx.shadowBlur=8;ctx.beginPath();ctx.arc(0,-8,9,Math.PI,0);ctx.lineTo(9,0);ctx.moveTo(-9,0);ctx.lineTo(-9,-8);ctx.stroke();
+  rr(ctx,-14,0,28,22,4);ctx.fillStyle=rgba(col,0.25);ctx.fill();ctx.stroke();ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(0,10,3,0,TAU);ctx.fill();ctx.restore();}
+// a strike through a thing that goes away
+function bo_strike(ctx,x0,y0,x1,y1,p,col,a){if(p<=0||a<=0.01)return;withA(ctx,a,()=>{ctx.strokeStyle=rgba(col||INK,0.95);ctx.lineWidth=5;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(lerp(x0,x1,clamp(p,0,1)),lerp(y0,y1,clamp(p,0,1)));ctx.stroke();});}
+// a dimension line: two end ticks and a label, for a distance
+function bo_span(ctx,x0,x1,y,col,label,a,p){if(a<=0.01)return;const q=p==null?1:p,xm=(x0+x1)/2,hw=(x1-x0)/2*q;withA(ctx,a,()=>{ctx.save();ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=2.6;ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=10;
+  ctx.beginPath();ctx.moveTo(xm-hw,y);ctx.lineTo(xm+hw,y);[xm-hw,xm+hw].forEach(x=>{ctx.moveTo(x,y-16);ctx.lineTo(x,y+16);});ctx.stroke();
+  ctx.fillStyle=rgba(col,1);[[xm-hw,1],[xm+hw,-1]].forEach(([x,d])=>{ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+d*16,y-8);ctx.lineTo(x+d*16,y+8);ctx.closePath();ctx.fill();});ctx.restore();
+  if(label&&q>0.9)tag(ctx,xm,y,label,col,{align:"center",size:24});});}
 
-/* ---------- small helpers ---------- */
-const ot_ease=(t,a,d)=>fin(t,a,d||0.6);
-function ot_tag(ctx,x,y,s,col,a,o){if(a<=0.01)return;withA(ctx,a,()=>tag(ctx,x,y,s,col,Object.assign({align:"center",size:20},o||{})));}
-// a label under a line, on a dark pill, so it reads over anything
-function ot_pill(ctx,x,y,s,col,o){o=o||{};const sz=o.size||18,w=tw(ctx,s,sz,700,o.f)+22;ctx.save();ctx.fillStyle=o.fill||"rgba(7,12,24,0.92)";rr(ctx,x-w/2,y-sz*0.8,w,sz*1.6,sz*0.8);ctx.fill();
-  if(o.edge!==false){ctx.strokeStyle=rgba(col,0.6);ctx.lineWidth=1.2;rr(ctx,x-w/2,y-sz*0.8,w,sz*1.6,sz*0.8);ctx.stroke();}ctx.restore();T(ctx,s,x,y+sz*0.36,{w:700,size:sz,align:"center",color:rgba(col,1),f:o.f});return w;}
-// a line from box edge to box edge (b = {x,y,w,h}), with an arrowhead and a verb in the middle
-function ot_edge(b,tx,ty){const dx=tx-b.x,dy=ty-b.y,L=Math.hypot(dx,dy)||1,ux=dx/L,uy=dy/L,k=Math.min(Math.abs(ux)>1e-6?b.w/2/Math.abs(ux):1e9,Math.abs(uy)>1e-6?b.h/2/Math.abs(uy):1e9);return[b.x+ux*(k+8),b.y+uy*(k+8)];}
-function ot_verb(ctx,A,B,verb,col,a,p,o){o=o||{};if(a<=0.01)return;const s=ot_edge(A,B.x,B.y),e=ot_edge(B,A.x,A.y);arrowTo(ctx,s[0],s[1],e[0],e[1],col,a,{p:p==null?1:p,lw:o.lw||2.6,head:16,dash:o.dash});
-  if(verb&&(p==null||p>0.6))withA(ctx,a*(p==null?1:fin(p,0.6,0.4)),()=>ot_pill(ctx,(s[0]+e[0])/2+(o.dx||0),(s[1]+e[1])/2+(o.dy||0),verb,col,{size:o.size||19}));}
-// a tick or a cross in a dark disc
-function ot_mark(ctx,x,y,ok,a,r){if(a<=0.01)return;r=r||18;withA(ctx,a,()=>{ctx.fillStyle="rgba(7,12,24,0.95)";ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();ring(ctx,x,y,r,ok?GOOD:BAD,1,2);(ok?tick_:cross_)(ctx,x,y+(ok?1:0),r*1.3,ok?GOOD:BAD,1);});}
-// a magnifying glass, held over a point
-function ot_lens(ctx,x,y,r,col,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.fillStyle="rgba(200,230,255,0.08)";ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=5;ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=12;ctx.stroke();
-  ctx.lineCap="round";ctx.lineWidth=10;ctx.beginPath();ctx.moveTo(x+r*0.72,y+r*0.72);ctx.lineTo(x+r*1.5,y+r*1.5);ctx.stroke();ctx.restore();});}
-// a key, the modern seal
-function ot_key(ctx,x,y,s,col,a){withA(ctx,a==null?1:a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.strokeStyle=rgba(col,1);ctx.lineWidth=4;ctx.lineCap="round";ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=10;
-  ctx.beginPath();ctx.arc(-16,0,11,0,TAU);ctx.moveTo(-5,0);ctx.lineTo(24,0);ctx.moveTo(14,0);ctx.lineTo(14,9);ctx.moveTo(22,0);ctx.lineTo(22,7);ctx.stroke();ctx.restore();});}
+/* ---------- 1879: the saloon, the register and the hand that rings it up ----------
+   Organic things are drawn soft: curved outlines, a light side and a shadow side, wood grain, brass sheen, lamplight that flickers. */
+// a wood texture (cached): a warm gradient with flowing grain and a knot or two; dir "v" runs the grain up and down
+function bo_woodTex(w,h,seed,dir){const k="wood"+w+"x"+h+"_"+seed+(dir||"h");if(BO_SPR[k])return BO_SPR[k];const c=mkCanvas(w,h),m=c.getContext("2d"),v=dir==="v";
+  const g=m.createLinearGradient(0,0,v?w:0,v?0:h);g.addColorStop(0,"#9a6438");g.addColorStop(0.5,"#7c4a26");g.addColorStop(1,"#5a3218");m.fillStyle=g;m.fillRect(0,0,w,h);
+  const span=v?w:h,L=v?h:w,n=Math.max(6,Math.round(span/7));for(let i=0;i<n;i++){const off=(i+hash(i,seed))*span/n,amp=2+hash(i,seed+1)*6,ph=hash(i,seed+2)*TAU,fr=1+hash(i,seed+6);
+    m.strokeStyle="rgba("+(hash(i,seed+4)>0.5?"50,26,10,":"190,130,80,")+(0.18+0.25*hash(i,seed+5))+")";m.lineWidth=0.6+hash(i,seed+3)*1.8;m.beginPath();
+    for(let s=0;s<=24;s++){const q=s/24*L,o=off+Math.sin(s/24*TAU*fr+ph)*amp;if(v){s?m.lineTo(o,q):m.moveTo(o,q);}else{s?m.lineTo(q,o):m.moveTo(q,o);}}m.stroke();}
+  for(let q=0;q<2;q++){const kx=hash(q,seed+9)*w,ky=hash(q,seed+10)*h;for(let r=1;r<5;r++){m.strokeStyle="rgba(50,26,10,"+(0.35-r*0.06)+")";m.lineWidth=1;m.beginPath();m.ellipse(kx,ky,r*(v?2.5:7),r*(v?7:2.5),0,0,TAU);m.stroke();}}
+  const sh=m.createLinearGradient(0,0,0,h);sh.addColorStop(0,"rgba(255,230,190,0.08)");sh.addColorStop(1,"rgba(0,0,0,0.15)");m.fillStyle=sh;m.fillRect(0,0,w,h);BO_SPR[k]=c;return c;}
+// a bottle: shoulders curving into the neck, coloured glass with a highlight that catches the lamp, a label and a cork
+function bo_bottle(ctx,x,y,s,col,t,i){ctx.save();ctx.translate(x,y);ctx.scale(s,s);const path=()=>{ctx.beginPath();ctx.moveTo(-13,0);ctx.bezierCurveTo(-14,-20,-14,-44,-13,-52);ctx.bezierCurveTo(-12,-64,-4,-66,-4,-78);ctx.lineTo(-4,-96);ctx.lineTo(4,-96);ctx.lineTo(4,-78);ctx.bezierCurveTo(4,-66,12,-64,13,-52);ctx.bezierCurveTo(14,-44,14,-20,13,0);ctx.quadraticCurveTo(0,3,-13,0);ctx.closePath();};
+  const g=ctx.createLinearGradient(-14,0,14,0);g.addColorStop(0,rgba(mix(col,[0,0,0],0.55),0.9));g.addColorStop(0.35,rgba(col,0.85));g.addColorStop(1,rgba(mix(col,[0,0,0],0.65),0.9));ctx.fillStyle=g;path();ctx.fill();
+  ctx.fillStyle="rgba(236,222,190,0.75)";ctx.beginPath();ctx.moveTo(-12,-40);ctx.quadraticCurveTo(0,-37,12,-40);ctx.lineTo(12,-22);ctx.quadraticCurveTo(0,-19,-12,-22);ctx.closePath();ctx.fill();
+  ctx.fillStyle="#8a5a32";rr(ctx,-4.5,-104,9,10,2);ctx.fill();ctx.strokeStyle="rgba(255,240,210,"+(0.3+0.15*Math.sin(t*1.3+i))+")";ctx.lineWidth=2.4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(-8,-10);ctx.quadraticCurveTo(-10,-30,-8,-48);ctx.stroke();ctx.restore();}
+const bo_flicker=t=>0.5+0.35*Math.sin(t*3.1)*Math.sin(t*1.7+1)+0.15*Math.sin(t*7.3);
+function bo_saloon(ctx,t){const fl=bo_flicker(t);
+  // a mirror behind the bar, in a wooden frame
+  ctx.save();const mg=ctx.createLinearGradient(880,120,1480,560);mg.addColorStop(0,"rgba(70,54,40,0.6)");mg.addColorStop(0.5,"rgba(40,30,24,0.55)");mg.addColorStop(1,"rgba(26,18,14,0.6)");ctx.fillStyle=mg;rr(ctx,880,120,600,450,26);ctx.fill();
+  ctx.drawImage(bo_woodTex(640,24,3),860,100,640,24);ctx.drawImage(bo_woodTex(640,24,4),860,566,640,24);ctx.drawImage(bo_woodTex(24,490,5,"v"),860,100,24,490);ctx.drawImage(bo_woodTex(24,490,6,"v"),1476,100,24,490);
+  ctx.strokeStyle="rgba(40,20,8,0.6)";ctx.lineWidth=2;rr(ctx,884,124,592,442,20);ctx.stroke();ctx.strokeStyle="rgba(255,220,170,"+(0.05+0.04*fl)+")";ctx.lineWidth=18;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(960,540);ctx.quadraticCurveTo(1000,300,1120,150);ctx.stroke();ctx.restore();
+  // a shelf of bottles on the left wall
+  ctx.drawImage(bo_woodTex(700,16,7),50,384,700,16);ctx.fillStyle="rgba(0,0,0,0.3)";ctx.fillRect(50,400,700,8);
+  const bc=[[110,160,100],[170,100,50],[200,160,90],[100,110,160],[150,60,50],[120,170,130]];for(let i=0;i<9;i++)bo_bottle(ctx,90+i*72,384,0.9+0.25*hash(i,3),bc[i%6],t,i);
+  // the lamp over the register: a brass shade, its light flickering
+  ctx.save();ctx.strokeStyle="rgba(120,90,60,0.8)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(1180,0);ctx.lineTo(1180,18);ctx.stroke();const lg=ctx.createLinearGradient(1140,0,1220,0);lg.addColorStop(0,"#7a5424");lg.addColorStop(0.4,"#f0cc88");lg.addColorStop(1,"#6a4418");
+  ctx.fillStyle=lg;ctx.beginPath();ctx.moveTo(1170,18);ctx.bezierCurveTo(1150,22,1146,40,1138,56);ctx.quadraticCurveTo(1180,64,1222,56);ctx.bezierCurveTo(1214,40,1210,22,1190,18);ctx.closePath();ctx.fill();
+  ctx.fillStyle="rgba(255,244,210,"+(0.75+0.25*fl)+")";ctx.beginPath();ctx.ellipse(1180,58,22,5,0,0,TAU);ctx.fill();glow(ctx,1180,70,130+14*fl,[255,210,140],0.36+0.16*fl);ctx.restore();}
+// the bar: a polished top with a rounded edge, a panelled front, and a brass foot rail with a slow gleam
+function bo_counter(ctx,t){ctx.save();ctx.drawImage(bo_woodTex(W,48,11),0,690,W,48);const e=ctx.createLinearGradient(0,690,0,738);e.addColorStop(0,"rgba(255,226,180,0.35)");e.addColorStop(0.12,"rgba(255,226,180,0.05)");e.addColorStop(0.7,"rgba(0,0,0,0)");e.addColorStop(1,"rgba(0,0,0,0.45)");ctx.fillStyle=e;ctx.fillRect(0,690,W,48);
+  ctx.drawImage(bo_woodTex(W,H-738,12),0,738,W,H-738);ctx.fillStyle="rgba(0,0,0,0.35)";ctx.fillRect(0,738,W,H-738);const sh=ctx.createLinearGradient(0,738,0,770);sh.addColorStop(0,"rgba(0,0,0,0.55)");sh.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=sh;ctx.fillRect(0,738,W,32);
+  for(let x=40;x<W;x+=240){ctx.save();rr(ctx,x,780,200,250,14);ctx.clip();ctx.drawImage(bo_woodTex(200,250,20+(x/240|0)%5,"v"),x,780);ctx.restore();ctx.lineWidth=3;ctx.strokeStyle="rgba(255,220,170,0.16)";ctx.beginPath();ctx.moveTo(x+4,1026);ctx.lineTo(x+4,794);ctx.quadraticCurveTo(x+4,784,x+14,784);ctx.lineTo(x+196,784);ctx.stroke();
+    ctx.strokeStyle="rgba(0,0,0,0.45)";ctx.beginPath();ctx.moveTo(x+196,786);ctx.lineTo(x+196,1026);ctx.stroke();}
+  const rg=ctx.createLinearGradient(0,1008,0,1030);rg.addColorStop(0,"#f6dca0");rg.addColorStop(0.45,"#c49040");rg.addColorStop(1,"#5c3c14");ctx.fillStyle=rg;rr(ctx,0,1008,W,20,10);ctx.fill();
+  const sx=((t||0)*60)%(W+400)-200,sg=ctx.createLinearGradient(sx-120,0,sx+120,0);sg.addColorStop(0,"rgba(255,250,230,0)");sg.addColorStop(0.5,"rgba(255,250,230,0.35)");sg.addColorStop(1,"rgba(255,250,230,0)");ctx.fillStyle=sg;ctx.fillRect(sx-120,1010,240,8);ctx.restore();}
+// a wall clock in a round wooden case; its hands taper; h: the hour (0..12, fractional)
+function bo_clock(ctx,x,y,r,h){ctx.save();const cg=ctx.createRadialGradient(x-r*0.4,y-r*0.4,r*0.2,x,y,r+14);cg.addColorStop(0,"#b27a48");cg.addColorStop(1,"#4a2a12");ctx.fillStyle=cg;ctx.beginPath();ctx.arc(x,y,r+12,0,TAU);ctx.fill();
+  const fg=ctx.createRadialGradient(x-r*0.3,y-r*0.3,r*0.1,x,y,r);fg.addColorStop(0,"#fbf4e2");fg.addColorStop(1,"#d9c9a6");ctx.fillStyle=fg;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();
+  ctx.fillStyle="rgba(60,40,24,0.85)";for(let i=0;i<12;i++){const an=i/12*TAU;ctx.beginPath();ctx.arc(x+Math.cos(an)*r*0.84,y+Math.sin(an)*r*0.84,i%3?1.8:3.2,0,TAU);ctx.fill();}
+  const hand=(an,L,w)=>{ctx.save();ctx.translate(x,y);ctx.rotate(an);ctx.fillStyle="rgba(40,26,14,0.95)";ctx.beginPath();ctx.moveTo(-w,-L*0.15);ctx.quadraticCurveTo(-w*1.2,L*0.4,0,L);ctx.quadraticCurveTo(w*1.2,L*0.4,w,-L*0.15);ctx.closePath();ctx.fill();ctx.restore();};
+  hand(h/12*TAU+Math.PI,r*0.52,4.2);hand((h%1)*TAU+Math.PI,r*0.78,3);ctx.fillStyle="#8a6a3a";ctx.beginPath();ctx.arc(x,y,4.5,0,TAU);ctx.fill();ctx.restore();}
+/* the cash register, drawn with its base centred at (x,y). o.press: [key index, 0..1]; o.tab: the amount shown in the window, o.pop 0..1;
+   o.total: the day's total in cents, shown by the dial's hands and the counter below it; o.hi: a glow round the whole machine; o.t: the brass's sheen */
+const BO_KEYS=["5¢","10¢","15¢","25¢","50¢","$1"];
+function bo_brass(ctx,x0,y0,x1,y1,t){const g=ctx.createLinearGradient(x0,y0,x1,y1),p=0.42+0.2*Math.sin((t||0)*0.5);g.addColorStop(0,"#fbe2a4");g.addColorStop(p-0.2,"#d9a856");g.addColorStop(p,"#fff0c4");g.addColorStop(p+0.18,"#c08a3c");g.addColorStop(1,"#6e4818");return g;}
+function bo_register(ctx,x,y,s,o){o=o||{};const t=o.t||0;ctx.save();ctx.translate(x,y);ctx.scale(s,s);
+  if(o.hi)glow(ctx,0,-250,360,BO_BRASS,0.25*o.hi);
+  const sh=ctx.createRadialGradient(0,0,20,0,0,240);sh.addColorStop(0,"rgba(0,0,0,0.45)");sh.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=sh;ctx.beginPath();ctx.ellipse(0,0,240,24,0,0,TAU);ctx.fill();
+  // the drawer, in wood with a brass trim and a keyhole
+  ctx.save();rr(ctx,-190,-100,380,100,12);ctx.clip();ctx.drawImage(bo_woodTex(380,100,31),-190,-100);ctx.restore();ctx.strokeStyle="rgba(255,220,170,0.25)";ctx.lineWidth=2;rr(ctx,-160,-82,320,64,10);ctx.stroke();ctx.strokeStyle="rgba(0,0,0,0.45)";ctx.beginPath();ctx.moveTo(-156,-18);ctx.lineTo(156,-18);ctx.stroke();
+  ctx.fillStyle=bo_brass(ctx,-196,-112,196,-98,t);rr(ctx,-198,-112,396,14,7);ctx.fill();const kg=ctx.createRadialGradient(-4,-54,2,0,-50,13);kg.addColorStop(0,"#fff0c4");kg.addColorStop(1,"#8a5c20");ctx.fillStyle=kg;ctx.beginPath();ctx.arc(0,-50,12,0,TAU);ctx.fill();ctx.fillStyle="#2a1a0c";ctx.beginPath();ctx.arc(0,-53,2.4,0,TAU);ctx.fill();ctx.fillRect(-1.2,-53,2.4,8);
+  // the body: curved, cabinet-like sides in brass, a light side and a shadow side, embossed scrolls
+  const body=()=>{ctx.beginPath();ctx.moveTo(-176,-110);ctx.bezierCurveTo(-190,-170,-146,-220,-152,-270);ctx.bezierCurveTo(-158,-318,-176,-336,-150,-362);ctx.quadraticCurveTo(0,-372,150,-362);ctx.bezierCurveTo(176,-336,158,-318,152,-270);ctx.bezierCurveTo(146,-220,190,-170,176,-110);ctx.closePath();};
+  body();ctx.fillStyle=bo_brass(ctx,-180,-370,180,-110,t);ctx.fill();body();const shade=ctx.createLinearGradient(-180,0,180,0);shade.addColorStop(0,"rgba(255,250,230,0.18)");shade.addColorStop(0.5,"rgba(0,0,0,0)");shade.addColorStop(1,"rgba(60,30,0,0.35)");ctx.fillStyle=shade;ctx.fill();
+  body();ctx.strokeStyle="rgba(90,56,18,0.7)";ctx.lineWidth=2.4;ctx.stroke();
+  const scroll=(d,o_)=>{ctx.beginPath();ctx.moveTo(d*120+o_,-340+o_);ctx.bezierCurveTo(d*150+o_,-300+o_,d*96+o_,-282+o_,d*128+o_,-236+o_);ctx.bezierCurveTo(d*148+o_,-206+o_,d*112+o_,-184+o_,d*132+o_,-156+o_);ctx.quadraticCurveTo(d*140+o_,-140+o_,d*124+o_,-142+o_);ctx.quadraticCurveTo(d*116+o_,-150+o_,d*124+o_,-154+o_);};
+  ctx.lineCap="round";[-1,1].forEach(d=>{ctx.strokeStyle="rgba(255,244,210,0.55)";ctx.lineWidth=2;scroll(d,-1.2);ctx.stroke();ctx.strokeStyle="rgba(100,62,20,0.6)";ctx.lineWidth=3;scroll(d,1.2);ctx.stroke();});
+  // the dial: a clock face for the total, cents on the long hand, dollars on the short one
+  const tot=o.total||0,cx=0,cy=-272,R=54,fg=ctx.createRadialGradient(cx-18,cy-18,4,cx,cy,R);fg.addColorStop(0,"#fffaf0");fg.addColorStop(1,"#dccba6");ctx.fillStyle=fg;ctx.beginPath();ctx.arc(cx,cy,R,0,TAU);ctx.fill();
+  ctx.strokeStyle=bo_brass(ctx,-R,cy-R,R,cy+R,t);ctx.lineWidth=8;ctx.stroke();ctx.fillStyle="rgba(60,40,20,0.85)";for(let i=0;i<20;i++){const an=i/20*TAU-Math.PI/2;ctx.beginPath();ctx.arc(cx+Math.cos(an)*R*0.8,cy+Math.sin(an)*R*0.8,i%5?1.6:3,0,TAU);ctx.fill();}
+  const hand=(an,L,w,col)=>{ctx.save();ctx.translate(cx,cy);ctx.rotate(an);ctx.fillStyle=col;ctx.beginPath();ctx.moveTo(-w,-L*0.12);ctx.quadraticCurveTo(-w*1.1,L*0.45,0,L);ctx.quadraticCurveTo(w*1.1,L*0.45,w,-L*0.12);ctx.closePath();ctx.fill();ctx.restore();};
+  hand((tot/100)/50*TAU+Math.PI,R*0.48,4,"rgba(40,26,14,0.95)");hand((tot%100)/100*TAU+Math.PI,R*0.8,2.6,"rgba(170,40,30,0.95)");const pg=ctx.createRadialGradient(cx-2,cy-2,1,cx,cy,6);pg.addColorStop(0,"#fff0c4");pg.addColorStop(1,"#8a5c20");ctx.fillStyle=pg;ctx.beginPath();ctx.arc(cx,cy,6,0,TAU);ctx.fill();
+  if(o.dialHi)glow(ctx,cx,cy,90,BO_R,0.35*o.dialHi);
+  // the counter under the dial: the day's total so far
+  rr(ctx,-76,-208,152,36,8);ctx.fillStyle="#1c120a";ctx.fill();ctx.strokeStyle=bo_brass(ctx,-76,-208,76,-172,t);ctx.lineWidth=3.5;ctx.stroke();
+  T(ctx,"$"+(tot/100).toFixed(2),0,-181,{f:"mono",w:500,size:25,align:"center",color:o.totHi?"rgba(160,255,200,1)":"rgba(255,226,170,0.95)"});
+  // the keys: ivory caps on brass stems
+  BO_KEYS.forEach((k,i)=>{const kx=-125+i*50,pr=o.press&&o.press[0]===i?o.press[1]:0,ky=-138+8*pr;ctx.strokeStyle="rgba(96,62,22,0.95)";ctx.lineWidth=5;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(kx,ky);ctx.quadraticCurveTo(kx+2,-124,kx,-112);ctx.stroke();
+    if(pr>0)glow(ctx,kx,ky,40,BO_W,0.6*pr);const ig=ctx.createRadialGradient(kx-6,ky-7,2,kx,ky,20);ig.addColorStop(0,"#fffdf4");ig.addColorStop(1,"#d8ccb0");ctx.fillStyle=ig;ctx.beginPath();ctx.arc(kx,ky,19,0,TAU);ctx.fill();
+    ctx.strokeStyle=bo_brass(ctx,kx-19,ky-19,kx+19,ky+19,t);ctx.lineWidth=4;ctx.stroke();T(ctx,k,kx,ky+5,{w:800,size:k.length>2?13:15,align:"center",color:"rgba(40,26,14,0.95)"});});
+  if(o.keysHi)glow(ctx,0,-138,170,BO_W,0.3*o.keysHi);
+  // the window on top, where each sale pops up
+  ctx.fillStyle=bo_brass(ctx,-114,-448,114,-356,t);rr(ctx,-114,-448,228,92,14);ctx.fill();rr(ctx,-96,-434,192,68,8);ctx.fillStyle="#140c06";ctx.fill();
+  if(o.tab){ctx.save();rr(ctx,-96,-434,192,68,8);ctx.clip();const ty=lerp(-360,-428,ease(clamp(o.pop==null?1:o.pop,0,1))),tg=ctx.createLinearGradient(0,ty,0,ty+56);tg.addColorStop(0,"#fffdf4");tg.addColorStop(1,"#e8dcc0");ctx.fillStyle=tg;rr(ctx,-58,ty,116,56,6);ctx.fill();ctx.fillStyle="rgba(170,40,30,0.9)";ctx.fillRect(-58,ty,116,6);
+    T(ctx,o.tab,0,ty+42,{w:800,size:30,align:"center",color:"rgba(30,20,12,0.95)"});ctx.restore();}
+  const gl=ctx.createLinearGradient(-96,-434,96,-366);gl.addColorStop(0,"rgba(255,255,255,0.12)");gl.addColorStop(0.4,"rgba(255,255,255,0)");ctx.fillStyle=gl;rr(ctx,-96,-434,192,68,8);ctx.fill();
+  if(o.tabHi)glow(ctx,0,-400,130,BO_W,0.35*o.tabHi);
+  // the crown
+  ctx.fillStyle=bo_brass(ctx,-120,-524,120,-446,t);ctx.beginPath();ctx.moveTo(-126,-446);ctx.bezierCurveTo(-112,-492,-52,-500,0,-524);ctx.bezierCurveTo(52,-500,112,-492,126,-446);ctx.quadraticCurveTo(0,-452,-126,-446);ctx.closePath();ctx.fill();ctx.strokeStyle="rgba(90,56,18,0.7)";ctx.lineWidth=2;ctx.stroke();
+  ctx.strokeStyle="rgba(255,244,210,0.5)";ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(-82,-460);ctx.bezierCurveTo(-60,-488,-20,-492,0,-506);ctx.bezierCurveTo(20,-492,60,-488,82,-460);ctx.stroke();
+  T(ctx,"CASH",0,-462,{w:800,size:18,align:"center",color:"rgba(90,56,18,0.95)"});ctx.restore();}
+/* the bartender's hand, pointing down to press a key: a cuffed shirt sleeve with a garter, the back of the hand, curled fingers,
+   a thumb along them and one extended index finger, its tip at (x,y). It comes in from the left and breathes gently. */
+function bo_hand(ctx,x,y,s,t,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.rotate(-0.06+0.02*Math.sin(t*1.3));
+  const sl=ctx.createLinearGradient(0,-150,0,-36);sl.addColorStop(0,"#f4efe4");sl.addColorStop(0.6,"#d8d0c0");sl.addColorStop(1,"#a89e8c");ctx.fillStyle=sl;
+  ctx.beginPath();ctx.moveTo(-104,-106);ctx.bezierCurveTo(-200,-118,-320,-136,-560,-160);ctx.lineTo(-560,-36);ctx.bezierCurveTo(-320,-40,-200,-40,-104,-46);ctx.bezierCurveTo(-98,-62,-98,-90,-104,-106);ctx.closePath();ctx.fill();
+  ctx.strokeStyle="rgba(120,108,90,0.5)";ctx.lineWidth=2;ctx.lineCap="round";[[-150,-110,-172,-62],[-214,-118,-236,-70],[-300,-128,-316,-80],[-380,-138,-392,-88]].forEach(([x0,y0,x1,y1])=>{ctx.beginPath();ctx.moveTo(x0,y0);ctx.quadraticCurveTo((x0+x1)/2+12,(y0+y1)/2,x1,y1);ctx.stroke();});
+  ctx.fillStyle="#7a2a26";ctx.beginPath();ctx.moveTo(-262,-128);ctx.quadraticCurveTo(-256,-84,-262,-40);ctx.lineTo(-246,-40);ctx.quadraticCurveTo(-240,-84,-246,-126);ctx.closePath();ctx.fill();
+  const cf=ctx.createLinearGradient(0,-110,0,-42);cf.addColorStop(0,"#fffdf8");cf.addColorStop(1,"#c9c0b0");ctx.fillStyle=cf;ctx.beginPath();ctx.moveTo(-100,-110);ctx.bezierCurveTo(-92,-86,-92,-66,-100,-42);ctx.lineTo(-134,-42);ctx.bezierCurveTo(-126,-66,-126,-88,-134,-112);ctx.closePath();ctx.fill();
+  ctx.fillStyle="#caa24c";ctx.beginPath();ctx.arc(-117,-76,3.2,0,TAU);ctx.fill();
+  const skin=ctx.createLinearGradient(0,-104,0,0);skin.addColorStop(0,"#f1c9a6");skin.addColorStop(0.55,"#dca47e");skin.addColorStop(1,"#b27a58");
+  const handPath=()=>{ctx.beginPath();ctx.moveTo(0,2);ctx.quadraticCurveTo(8,1,8,-10);ctx.bezierCurveTo(9,-30,8,-48,6,-60);ctx.bezierCurveTo(4,-76,-12,-94,-38,-99);ctx.bezierCurveTo(-60,-103,-82,-100,-100,-98);
+    ctx.bezierCurveTo(-104,-80,-104,-62,-100,-48);ctx.bezierCurveTo(-84,-44,-66,-40,-54,-38);ctx.bezierCurveTo(-44,-37,-38,-31,-34,-26);ctx.bezierCurveTo(-30,-21,-22,-22,-20,-29);ctx.bezierCurveTo(-18,-36,-16,-44,-14,-50);
+    ctx.bezierCurveTo(-13,-36,-11,-18,-8,-6);ctx.quadraticCurveTo(-6,2,0,2);ctx.closePath();};
+  ctx.save();ctx.shadowColor="rgba(0,0,0,0.45)";ctx.shadowBlur=14;ctx.shadowOffsetY=6;handPath();ctx.fillStyle=skin;ctx.fill();ctx.restore();
+  handPath();const side=ctx.createLinearGradient(-100,0,10,0);side.addColorStop(0,"rgba(120,70,40,0.25)");side.addColorStop(0.6,"rgba(255,230,210,0.08)");side.addColorStop(1,"rgba(120,70,40,0.2)");ctx.fillStyle=side;ctx.fill();
+  handPath();ctx.strokeStyle="rgba(120,70,44,0.3)";ctx.lineWidth=4;ctx.stroke();handPath();ctx.strokeStyle="rgba(96,54,32,0.75)";ctx.lineWidth=1.4;ctx.stroke();
+  ctx.strokeStyle="rgba(120,70,44,0.6)";ctx.lineCap="round";ctx.lineWidth=1.6;[[-24,-46,-30,-32],[-36,-50,-44,-38],[-48,-54,-56,-42]].forEach(([x0,y0,x1,y1])=>{ctx.beginPath();ctx.moveTo(x0,y0);ctx.quadraticCurveTo(x0-2,(y0+y1)/2+4,x1,y1);ctx.stroke();});
+  ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(-8,-32);ctx.quadraticCurveTo(-1,-30,5,-33);ctx.moveTo(-10,-50);ctx.quadraticCurveTo(-2,-47,5,-50);ctx.stroke();
+  ctx.fillStyle="rgba(250,220,205,0.9)";ctx.beginPath();ctx.moveTo(2,-6);ctx.quadraticCurveTo(7,-9,6,-17);ctx.quadraticCurveTo(2,-19,0,-14);ctx.quadraticCurveTo(-1,-8,2,-6);ctx.fill();
+  const th=ctx.createLinearGradient(0,-66,0,-40);th.addColorStop(0,"#e8b690");th.addColorStop(1,"#b27a58");ctx.fillStyle=th;ctx.beginPath();ctx.moveTo(-88,-66);ctx.bezierCurveTo(-68,-66,-48,-61,-36,-53);ctx.quadraticCurveTo(-27,-47,-33,-42);ctx.bezierCurveTo(-48,-44,-68,-48,-88,-50);ctx.closePath();ctx.fill();
+  ctx.strokeStyle="rgba(96,54,32,0.6)";ctx.lineWidth=1.3;ctx.stroke();ctx.fillStyle="rgba(255,236,220,0.6)";ctx.beginPath();ctx.ellipse(-37,-48,3.5,2.4,0.3,0,TAU);ctx.fill();
+  ctx.restore();});}
+// a patent, on paper, with a line drawing of the machine and a curling corner
+function bo_patent(ctx,x,y,w,h,a,rot){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(rot||-0.03);ctx.translate(-w/2,-h/2);
+  ctx.shadowColor="rgba(0,0,0,0.6)";ctx.shadowBlur=26;const pg=ctx.createLinearGradient(0,0,w,h);pg.addColorStop(0,"#f4ead0");pg.addColorStop(1,"#dccaa4");ctx.fillStyle=pg;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(w,0);ctx.lineTo(w,h-22);ctx.quadraticCurveTo(w-4,h-4,w-26,h);ctx.lineTo(0,h);ctx.closePath();ctx.fill();ctx.shadowBlur=0;
+  ctx.fillStyle="rgba(170,140,90,0.45)";ctx.beginPath();ctx.moveTo(w,h-22);ctx.quadraticCurveTo(w-12,h-14,w-26,h);ctx.quadraticCurveTo(w-20,h-18,w,h-22);ctx.fill();ctx.strokeStyle="rgba(120,90,50,0.5)";ctx.lineWidth=2;ctx.strokeRect(10,10,w-20,h-34);
+  T(ctx,"PATENT · 1879",w/2,54,{w:800,size:26,align:"center",color:"rgba(60,40,24,0.95)"});T(ctx,"a machine to record each sale",w/2,88,{w:600,size:21,align:"center",color:"rgba(90,66,40,0.95)"});
+  ctx.save();ctx.translate(w/2,h-40);ctx.scale(0.4,0.4);ctx.strokeStyle="rgba(60,44,30,0.8)";ctx.lineWidth=3;ctx.strokeRect(-190,-100,380,100);ctx.beginPath();ctx.moveTo(-176,-110);ctx.bezierCurveTo(-190,-170,-146,-220,-152,-270);ctx.bezierCurveTo(-158,-318,-176,-336,-150,-362);ctx.quadraticCurveTo(0,-372,150,-362);ctx.bezierCurveTo(176,-336,158,-318,152,-270);ctx.bezierCurveTo(146,-220,190,-170,176,-110);ctx.stroke();
+  ctx.beginPath();ctx.arc(0,-272,54,0,TAU);ctx.stroke();for(let i=0;i<6;i++){ctx.beginPath();ctx.arc(-125+i*50,-138,19,0,TAU);ctx.stroke();}ctx.strokeRect(-112,-446,224,86);
+  ctx.beginPath();ctx.moveTo(-250,-300);ctx.lineTo(-160,-272);ctx.moveTo(250,-400);ctx.lineTo(112,-400);ctx.stroke();T(ctx,"A",-270,-300,{w:700,size:30,align:"center",color:"rgba(60,44,30,0.9)"});T(ctx,"B",276,-392,{w:700,size:30,align:"center",color:"rgba(60,44,30,0.9)"});ctx.restore();
+  ctx.restore();});}
 
-/* ---------- organic matter: clay, iron, paper, parchment, wood ----------
-   Natural materials are drawn with smooth, slightly irregular bezier edges, a light side and a shadow side, and a gentle
-   continuous motion (a drifting light, a slow wobble of an edge); the systems of today stay crisp glass. */
-// a smooth, slightly irregular outline around a rounded box (a superellipse of half-sizes a and b), which breathes gently with t
-function ot_organic(ctx,cx,cy,a,b,o){o=o||{};const n=o.n||6,N=o.N||56,amp=o.amp||2,sd=o.seed||1,t=o.t||0,pts=[];
-  for(let i=0;i<N;i++){const th=i/N*TAU,c=Math.cos(th),sn=Math.sin(th),px=a*Math.sign(c)*Math.pow(Math.abs(c),2/n),py=b*Math.sign(sn)*Math.pow(Math.abs(sn),2/n),L=Math.hypot(px,py)||1;
-    const w=amp*(0.55*Math.sin(th*3+sd)+0.3*Math.sin(th*7+sd*2.3)+0.25*(hash(i,sd)-0.5)+0.18*Math.sin(t*0.6+th*2+sd));pts.push([cx+px+px/L*w,cy+py+py/L*w]);}
-  const m=(p,q)=>[(p[0]+q[0])/2,(p[1]+q[1])/2];ctx.beginPath();const s0=m(pts[N-1],pts[0]);ctx.moveTo(s0[0],s0[1]);
-  for(let i=0;i<N;i++){const p=pts[i],q=pts[(i+1)%N],mm=m(p,q);ctx.quadraticCurveTo(p[0],p[1],mm[0],mm[1]);}ctx.closePath();}
-// fill the current path as a material lit from the upper left: a light side, a shadow side, and a soft light that drifts with t
-function ot_matter(ctx,x0,y0,x1,y1,base,o){o=o||{};const t=o.t||0,lt=o.light==null?0.22:o.light;ctx.save();
-  if(o.shadow!==false){ctx.shadowColor="rgba(0,0,0,0.6)";ctx.shadowBlur=24;ctx.shadowOffsetY=8;}ctx.fillStyle=rgba(base,1);ctx.fill();ctx.shadowBlur=0;ctx.shadowOffsetY=0;
-  const g=ctx.createLinearGradient(x0,y0,x1,y1);g.addColorStop(0,"rgba(255,246,226,"+lt+")");g.addColorStop(0.5,"rgba(255,255,255,0)");g.addColorStop(1,"rgba(30,16,6,"+(lt*1.5)+")");ctx.fillStyle=g;ctx.fill();
-  ctx.clip();const lx=lerp(x0,x1,0.35+0.25*Math.sin(t*0.25+(o.seed||0))),ly=lerp(y0,y1,0.3+0.1*Math.cos(t*0.2)),r=Math.max(x1-x0,y1-y0)*0.6,rg=ctx.createRadialGradient(lx,ly,2,lx,ly,r);
-  rg.addColorStop(0,"rgba(255,236,200,0.16)");rg.addColorStop(1,"rgba(255,236,200,0)");ctx.fillStyle=rg;ctx.fillRect(x0-20,y0-20,x1-x0+40,y1-y0+40);ctx.restore();}
-// the edge of a material: heavier and darker on the shadow side, fine and light on the lit side (the path must still be current)
-function ot_rim(ctx,dark,light,w){ctx.save();ctx.lineJoin="round";ctx.translate(1.4,1.8);ctx.strokeStyle=dark;ctx.lineWidth=w||3;ctx.stroke();ctx.translate(-2.4,-2.8);ctx.strokeStyle=light;ctx.lineWidth=(w||3)*0.45;ctx.stroke();ctx.restore();}
-// a tapered stroke along a smooth line of points: thin at both tips, full in the middle, like ink from a brush or a reed
-function ot_taper(ctx,pts,w,col,o){o=o||{};const n=pts.length;if(n<2)return;const L=[],R=[];
-  for(let i=0;i<n;i++){const p=pts[i],q=pts[Math.min(n-1,i+1)],r=pts[Math.max(0,i-1)],dx=q[0]-r[0],dy=q[1]-r[1],d=Math.hypot(dx,dy)||1,u=i/(n-1),ww=w*(o.tip==null?0.12:o.tip)+w*Math.pow(Math.sin(Math.PI*(o.half?u*0.5+0.5:u)),o.k||0.7)*(1-(o.tip==null?0.12:o.tip));
-    L.push([p[0]-dy/d*ww/2,p[1]+dx/d*ww/2]);R.push([p[0]+dy/d*ww/2,p[1]-dx/d*ww/2]);}
-  ctx.beginPath();ctx.moveTo(L[0][0],L[0][1]);for(let i=1;i<n;i++)ctx.lineTo(L[i][0],L[i][1]);for(let i=n-1;i>=0;i--)ctx.lineTo(R[i][0],R[i][1]);ctx.closePath();ctx.fillStyle=col;ctx.fill();}
-// points along a quadratic curve
-const ot_curve=(x0,y0,cx,cy,x1,y1,n)=>{const o=[];for(let i=0;i<=(n||12);i++){const u=i/(n||12),v=1-u;o.push([v*v*x0+2*v*u*cx+u*u*x1,v*v*y0+2*v*u*cy+u*u*y1]);}return o;};
-// a corner of a sheet lifting slightly: a soft curl whose size breathes with t
-function ot_curl(ctx,x,y,sz,paper,t){const k=sz*(0.9+0.1*Math.sin(t*0.8));ctx.save();ctx.beginPath();ctx.moveTo(x-k,y);ctx.quadraticCurveTo(x-k*0.35,y-k*0.2,x,y-k);ctx.quadraticCurveTo(x-k*0.55,y-k*0.55,x-k,y);ctx.closePath();
-  const g=ctx.createLinearGradient(x-k,y-k,x,y);g.addColorStop(0,rgba(mix(paper,[255,255,255],0.3),1));g.addColorStop(1,rgba(mix(paper,[0,0,0],0.25),1));ctx.fillStyle=g;ctx.shadowColor="rgba(0,0,0,0.35)";ctx.shadowBlur=6;ctx.fill();ctx.restore();}
+/* ---------- the present: stores, the app, the lakehouse ---------- */
+/* a store of data: kind "rows" draws horizontal stripes (built to write), "cols" vertical stripes (built to read).
+   o: col, title, sub, a, hi, n (stripes), p (how many are filled, 0..1), t (for a gentle shimmer), lab (a label per stripe) */
+function bo_store(ctx,x,y,w,h,kind,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||(kind==="rows"?BO_W:BO_R),hi=o.hi||0,t=o.t||0;
+  withA(ctx,a,()=>{if(hi)glow(ctx,x+w/2,y+h/2,Math.max(w,h)*0.75,col,0.22*hi);glass(ctx,x,y,w,h,18,col,{glow:16+14*hi,ea:0.75+0.25*hi,fill:"rgba(7,12,24,0.93)"});
+    let top=y+22;if(o.title){T(ctx,o.title,x+22,y+42,{w:800,size:o.ts||26,color:rgba(col,1)});top=y+60;}if(o.sub){T(ctx,o.sub,x+22,y+44+(o.ss||18)*1.4,{w:600,size:o.ss||18,color:rgba(SOFT,1)});top=y+60+(o.ss||18)*1.5;}
+    const pad=18,n=o.n||(kind==="rows"?6:6),p=o.p==null?1:o.p;
+    if(kind==="rows"){const gap=8,sh=Math.min(34,(y+h-pad-top-(n-1)*gap)/n);for(let i=0;i<n;i++){const yy=top+i*(sh+gap),f=clamp(p*n-i,0,1);if(f<=0){ctx.strokeStyle=rgba(col,0.14);ctx.lineWidth=1;rr(ctx,x+pad,yy,w-2*pad,sh,6);ctx.stroke();continue;}
+        withA(ctx,f,()=>{ctx.fillStyle=rgba(col,0.16+0.06*Math.sin(t*1.5+i));rr(ctx,x+pad,yy,w-2*pad,sh,6);ctx.fill();const cells=4,cw=(w-2*pad-16)/cells;for(let k=0;k<cells;k++){ctx.fillStyle=rgba(col,0.45+0.4*hash(i*7+k,kind.length));rr(ctx,x+pad+8+k*cw,yy+sh*0.3,cw-10,sh*0.4,3);ctx.fill();}});}}
+    else{const gap=10,sw=Math.min(40,(w-2*pad-(n-1)*gap)/n),span=n*sw+(n-1)*gap,x0=x+(w-span)/2;for(let i=0;i<n;i++){const xx=x0+i*(sw+gap),f=clamp(p*n-i,0,1);if(f<=0){ctx.strokeStyle=rgba(col,0.14);ctx.lineWidth=1;rr(ctx,xx,top,sw,y+h-pad-top,6);ctx.stroke();continue;}
+        withA(ctx,f,()=>{ctx.fillStyle=rgba(col,0.16+0.06*Math.sin(t*1.5+i));rr(ctx,xx,top,sw,y+h-pad-top,6);ctx.fill();const cells=Math.max(3,Math.floor((y+h-pad-top)/30)),ch=(y+h-pad-top-12)/cells;for(let k=0;k<cells;k++){ctx.fillStyle=rgba(col,0.45+0.4*hash(i*7+k,kind.length+3));rr(ctx,xx+sw*0.28,top+8+k*ch,sw*0.44,ch-8,3);ctx.fill();}});}}});}
+// the app, on a phone: o.screen "issue" (issuing an award), "wallet" (progress towards a certificate), "suggest" (the next microcredential)
+function bo_phone(ctx,x,y,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(s,s);
+  glass(ctx,-62,-120,124,240,22,o.edge||[170,205,255],{fill:"rgba(10,18,36,0.95)",glow:18,ea:0.75});rr(ctx,-52,-102,104,200,12);ctx.fillStyle="rgba(40,70,130,0.3)";ctx.fill();ctx.beginPath();ctx.arc(0,-110,3.5,0,TAU);ctx.fillStyle="rgba(200,220,255,0.8)";ctx.fill();
+  const scr=o.screen||"issue";
+  if(scr==="issue"){T(ctx,"Awards",0,-74,{w:800,size:15,align:"center"});ctx.fillStyle="rgba(160,190,240,0.22)";for(let i=0;i<3;i++){rr(ctx,-40,-54+i*20,80,12,4);ctx.fill();}
+    rr(ctx,-40,30,80,30,15);ctx.fillStyle=o.press?rgba(mix(BO_W,[255,255,255],0.4),1):rgba(BO_W,0.9);ctx.fill();T(ctx,"Issue",0,50,{w:800,size:14,align:"center",color:"#0a1020"});}
+  else if(scr==="wallet"){T(ctx,"My wallet",0,-76,{w:800,size:14,align:"center"});T(ctx,"Graduate certificate",0,-52,{w:600,size:10.5,align:"center",color:rgba(SOFT,1)});
+    for(let i=0;i<4;i++){const on=i<(o.n==null?2:o.n);ctx.fillStyle=on?rgba(TRUST,0.9):"rgba(160,190,240,0.12)";rr(ctx,-42+i*22,-36,18,26,4);ctx.fill();if(!on){ctx.strokeStyle="rgba(160,190,240,0.4)";ctx.lineWidth=1;rr(ctx,-42+i*22,-36,18,26,4);ctx.stroke();}}
+    T(ctx,(o.n==null?2:o.n)+" of 4",0,16,{w:800,size:20,align:"center",color:rgba(TRUST,1)});T(ctx,"microcredentials",0,34,{w:600,size:10.5,align:"center",color:rgba(SOFT,1)});}
+  else if(scr==="suggest"){T(ctx,"Next for you",0,-76,{w:800,size:13,align:"center",color:rgba(SOFT,1)});const sa=o.sa==null?1:o.sa;
+    withA(ctx,sa,()=>{glass(ctx,-46,-60,92,96,10,BO_M,{glow:10+8*(o.hi||0),ea:0.9,fill:"rgba(30,10,30,0.9)"});T(ctx,"Data",0,-30,{w:800,size:16,align:"center"});T(ctx,"Ethics",0,-12,{w:800,size:16,align:"center"});T(ctx,"micro-",0,10,{w:600,size:10.5,align:"center",color:rgba(BO_M,1)});T(ctx,"credential",0,24,{w:600,size:10.5,align:"center",color:rgba(BO_M,1)});});
+    rr(ctx,-40,52,80,28,14);ctx.fillStyle=rgba(BO_M,0.85*sa);ctx.fill();T(ctx,"Enrol",0,71,{w:800,size:13,align:"center",color:"#1a0a18"});}
+  ctx.restore();});}
+// the lakehouse: bronze, silver and gold vaults in one frame. o.a, o.lit (0..1 each, how refined the data has become), o.frame (label)
+function bo_lake(ctx,x,y,vw,vh,gap,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const lit=o.lit||[1,1,1],K=["bronze","silver","gold"],N=["Bronze","Silver","Gold"],S=["as it arrived","cleaned, joined","ready to read"];
+  withA(ctx,a,()=>{const fw=3*vw+2*gap+40;if(o.frame!==false){ctx.save();ctx.strokeStyle="rgba(170,200,245,0.28)";ctx.lineWidth=1.6;ctx.setLineDash([10,8]);rr(ctx,x-20,y-44,fw,vh+64,24);ctx.stroke();ctx.setLineDash([]);ctx.restore();
+      tag(ctx,x+fw/2-20,y-44,o.frame||"the lakehouse",[214,228,255],{align:"center",size:20});}
+    K.forEach((k,i)=>{const vx=x+i*(vw+gap),l=clamp(lit[i],0,1),col=LAYER[k];withA(ctx,0.35+0.65*l,()=>{vault(ctx,vx,y,vw,vh,col,(r,c)=>l*((r*7+c)%5)<0.5?null:(hash(r*9+c,i+2)<0.4+0.5*l?col:null),null);
+      chip(ctx,vx+vw/2,y+62,null,N[i],o.subs===false?null:S[i],{align:"center",edge:col});});});});}
+// an answer, for someone who reads: a small chart on a card
+function bo_answer(ctx,x,y,w,h,title,sub,col,t,a){if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,col,{glow:16,ea:0.8,fill:"rgba(7,12,24,0.93)"});T(ctx,title,x+22,y+40,{w:800,size:24,color:rgba(col,1)});if(sub)T(ctx,sub,x+22,y+68,{w:600,size:18,color:rgba(SOFT,1)});
+  bars(ctx,x+24,y+84,w-48,h-104,t,col,6);});}
+// a change in the log: its place in the order, what it does, and the key of the row it changes
+function bo_change(ctx,x,y,w,n,text,id,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||[214,228,255],hi=o.hi||0;
+  withA(ctx,a,()=>{if(hi)glow(ctx,x+w/2,y+28,w*0.6,col,0.3*hi);glass(ctx,x,y,w,56,14,o.bad?BAD:col,{glow:10+12*hi,ea:0.6+0.4*hi,fill:"rgba(7,12,24,0.94)",lw:o.dash?1.2:1.6});
+    ctx.fillStyle=rgba(o.bad?BAD:col,0.9);ctx.beginPath();ctx.arc(x+30,y+28,17,0,TAU);ctx.fill();T(ctx,String(n),x+30,y+36,{w:800,size:21,align:"center",color:"#0a1020"});
+    T(ctx,text,x+58,y+37,{w:700,size:o.fs||25,color:rgba(o.bad?BAD:INK,1)});if(id)bo_key(ctx,x+w-36,y+28,1.3,id,1,o.keyHi||0);});}
+// a table row, as the app stores it: a key and its values, drawn as one horizontal stripe
+function bo_row(ctx,x,y,w,id,vals,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||BO_W,fs=o.fs||21,h=o.h||44;withA(ctx,a,()=>{if(o.hi)glow(ctx,x+w/2,y+h/2,Math.min(w*0.4,150),o.hiCol||col,0.22*Math.min(1,o.hi));
+  ctx.fillStyle=rgba(o.bad?BAD:col,0.14+0.1*(o.hi||0));rr(ctx,x,y,w,h,8);ctx.fill();ctx.strokeStyle=rgba(o.bad?BAD:col,0.35+0.5*(o.hi||0));ctx.lineWidth=1.4;rr(ctx,x,y,w,h,8);ctx.stroke();
+  const ty=y+h/2+fs*0.36;bo_key(ctx,x+24,y+h/2,1.15,id,1,o.keyHi||0);T(ctx,id,x+48,ty,{f:"mono",w:500,size:fs,color:rgba(bo_kc(id),1)});let cx=x+48+tw(ctx,id,fs,500,"mono")+20;
+  vals.forEach((v,i)=>{const vc=o.vc&&o.vc[i];T(ctx,v,cx,ty,{f:"mono",w:500,size:fs,color:vc?rgba(vc,1):rgba(INK,0.9)});cx+=tw(ctx,v,fs,500,"mono")+20;});});}
+// a column, as the reading side stores it: a name and its values, stacked in one vertical stripe
+function bo_colStripe(ctx,x,y,w,h,name,vals,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||BO_R,fs=o.fs||19,gap=o.gap||52;withA(ctx,a,()=>{ctx.fillStyle=rgba(col,0.12);rr(ctx,x,y,w,h,8);ctx.fill();ctx.strokeStyle=rgba(col,0.35);ctx.lineWidth=1.4;rr(ctx,x,y,w,h,8);ctx.stroke();
+  T(ctx,name,x+w/2,y+30,{w:700,size:20,align:"center",color:rgba(col,1)});vals.forEach((v,i)=>{if(!v)return;const vy=y+54+i*gap,va=v.a==null?1:v.a;if(va<=0.01)return;withA(ctx,va,()=>{if(v.hi)glow(ctx,x+w/2,vy+14,w*0.7,v.hc||col,0.35*v.hi);
+    if(v.key){bo_key(ctx,x+20,vy+14,1.1,v.key,1,v.keyHi||0);T(ctx,v.key,x+40,vy+21,{f:"mono",w:500,size:fs-1,color:rgba(bo_kc(v.key),1)});}else T(ctx,v.t,x+w/2,vy+21,{f:"mono",w:500,size:fs,align:"center",color:v.c?rgba(v.c,1):rgba(INK,0.92)});});});});}
+// a ghost: an award that should be gone, back to life
+function bo_ghost(ctx,x,y,w,h,t,a,text,sub){if(a<=0.01)return;withA(ctx,a,()=>{const wob=Math.sin(t*5)*3;glow(ctx,x+w/2,y+h/2,w*0.8,BAD,0.35+0.1*Math.sin(t*4));ctx.save();ctx.translate(0,wob);
+  ctx.fillStyle="rgba(60,10,16,0.75)";ctx.beginPath();ctx.moveTo(x,y+h);ctx.lineTo(x,y+20);ctx.quadraticCurveTo(x,y,x+20,y);ctx.lineTo(x+w-20,y);ctx.quadraticCurveTo(x+w,y,x+w,y+20);ctx.lineTo(x+w,y+h);
+  for(let i=0;i<5;i++){const xx=x+w-(i+0.5)*w/5;ctx.quadraticCurveTo(xx+w/20,y+h-14,xx,y+h+(i%2?0:-8));}ctx.closePath();ctx.fill();ctx.strokeStyle=rgba(BAD,0.95);ctx.lineWidth=2.4;ctx.setLineDash([8,6]);ctx.stroke();ctx.setLineDash([]);
+  T(ctx,text||"A-1042 · issued",x+w/2,y+h/2+(sub?-2:8),{w:800,size:23,align:"center",color:rgba([255,200,200],1)});if(sub)T(ctx,sub,x+w/2,y+h/2+28,{w:600,size:19,align:"center",color:rgba(BAD,1)});ctx.restore();});}
+// a calendar card: a title band, a date, and what the date is
+function bo_cal(ctx,x,y,title,date,sub,col,a,hi){withA(ctx,a==null?1:a,()=>{glass(ctx,x,y,300,112,14,col,{glow:12+14*(hi||0),ea:0.7,fill:"rgba(7,12,24,0.94)"});ctx.fillStyle=rgba(col,0.9);rr(ctx,x,y,300,30,14);ctx.fill();ctx.fillStyle="rgba(7,12,24,0.94)";ctx.fillRect(x,y+22,300,10);
+  T(ctx,title,x+150,y+22,{w:800,size:16,align:"center",color:"#0a1020"});T(ctx,date,x+150,y+76,{w:800,size:30,align:"center",color:rgba(col,1)});if(sub)T(ctx,sub,x+150,y+102,{w:600,size:15,align:"center",color:rgba(SOFT,1)});});}
+// a card with a question on it, numbered
+function bo_qcard(ctx,x,y,w,n,text,col,a,hi){if(a<=0.01)return;withA(ctx,a,()=>{const lines=wrapT(ctx,text,0,0,w-90,{size:24,w:700,measure:true}),h=Math.max(78,lines.length*31+34);
+  if(hi)glow(ctx,x+w/2,y+h/2,w*0.6,col,0.22*hi);glass(ctx,x,y,w,h,16,col,{glow:10+12*(hi||0),ea:0.45+0.5*(hi||0),fill:"rgba(7,12,24,0.93)"});
+  ctx.fillStyle=rgba(col,0.9);ctx.beginPath();ctx.arc(x+36,y+h/2,18,0,TAU);ctx.fill();T(ctx,String(n),x+36,y+h/2+7,{w:800,size:20,align:"center",color:"#0a1020"});
+  lines.forEach((l,i)=>T(ctx,l,x+68,y+h/2-(lines.length-1)*15.5+8+i*31,{w:700,size:24,color:rgba(INK,0.6+0.4*(hi||0))}));});}
+// a freshness scale: seconds, minutes, overnight, a date; o.marks: [[position 0..3, label, colour, row]]
+const BO_FRESH=["seconds","minutes","overnight","a date"];
+function bo_fresh(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{const g=ctx.createLinearGradient(x,0,x+w,0);g.addColorStop(0,rgba(BO_M,0.9));g.addColorStop(0.5,rgba(BO_ACC,0.8));g.addColorStop(1,rgba(BO_R,0.9));
+  ctx.fillStyle=g;rr(ctx,x,y-5,w,10,5);ctx.fill();(o.labels||BO_FRESH).forEach((s,i,arr)=>{const xx=x+w*i/(arr.length-1);ctx.fillStyle=rgba(INK,0.9);ctx.beginPath();ctx.arc(xx,y,8,0,TAU);ctx.fill();T(ctx,s,xx,y+44,{w:700,size:o.ls||22,align:"center",color:rgba(SOFT,1)});});
+  const N=(o.labels||BO_FRESH).length,sp=o.sp||50,pos=m=>[x+w*m[0]/(N-1),y-46-(m[3]||0)*sp];
+  (o.marks||[]).forEach(m=>{const[xx,yy]=pos(m);ctx.strokeStyle=rgba(m[2],0.8);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(xx,y-10);ctx.lineTo(xx,yy+14);ctx.stroke();ctx.fillStyle=rgba(m[2],1);ctx.beginPath();ctx.arc(xx,y,12,0,TAU);ctx.fill();});
+  (o.marks||[]).forEach(m=>{const[xx,yy]=pos(m);tag(ctx,xx,yy,m[1],m[2],{align:"center",size:o.ms||20});});});}
 
-/* ---------- the museum's exhibits: each drawn standing on the shelf, (x,y) at its foot, s its scale ---------- */
-// a wedge pressed into clay: a dark triangular head with a tail, and a lit lower edge where the clay was pushed up
-function ot_wedge(ctx,x,y,s,vert,col){ctx.save();ctx.translate(x,y);if(vert)ctx.rotate(Math.PI/2);ctx.scale(s,s);ctx.fillStyle=col;ctx.beginPath();ctx.moveTo(-7,-5.5);ctx.quadraticCurveTo(-3,0,-7,5.5);ctx.quadraticCurveTo(-2,1.5,1,0.4);ctx.lineTo(11,0.6);ctx.lineTo(11,-0.6);ctx.lineTo(1,-0.4);ctx.quadraticCurveTo(-2,-1.5,-7,-5.5);ctx.fill();
-  ctx.strokeStyle="rgba(255,226,180,0.3)";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(-6,6.5);ctx.quadraticCurveTo(-1,2.6,11,1.8);ctx.stroke();ctx.restore();}
-// a school tablet: the teacher's model on the left, the student's copy on the right, pressed in as p goes from 0 to 1
-function ot_tablet(ctx,x,y,s,o){o=o||{};const p=o.p==null?1:o.p,t=o.t||0;ctx.save();ctx.translate(x,y);ctx.scale(s,s);
-  ot_organic(ctx,0,-126,152,108,{n:4.2,amp:4,seed:3,t});ot_matter(ctx,-150,-234,150,-18,[160,118,80],{t,seed:1});ot_organic(ctx,0,-126,152,108,{n:4.2,amp:4,seed:3,t});ot_rim(ctx,"rgba(70,40,18,0.55)","rgba(255,226,180,0.4)",4);
-  ot_taper(ctx,ot_curve(-2,-224,4,-126,-1,-30,14),5,"rgba(70,44,24,0.55)",{tip:0.3});
-  const ink="rgba(58,34,16,0.88)";let n=0;const total=20,shown=Math.floor(total*clamp(p,0,1));
-  for(let r=0;r<4;r++)for(let k=0;k<5;k++){const vert=hash(r*5+k,4)>0.6,bx=-128+k*23,by=-196+r*44;ot_wedge(ctx,bx,by,1.05,vert,ink);if(hash(r*5+k,6)>0.55)ot_wedge(ctx,bx+8,by+14,0.8,!vert,ink);
-    if(n<shown){const jx=(hash(n,8)-0.5)*7,jy=(hash(n,9)-0.5)*7;ot_wedge(ctx,bx+150+jx,by+jy,1.15,vert,"rgba(58,34,16,0.8)");if(hash(r*5+k,6)>0.55)ot_wedge(ctx,bx+158+jx,by+14+jy,0.9,!vert,"rgba(58,34,16,0.75)");}n++;}
-  // a smoothed patch where the student rubbed out a mistake
-  const pg=ctx.createRadialGradient(76,-104,2,76,-104,30);pg.addColorStop(0,"rgba(214,176,126,0.55)");pg.addColorStop(1,"rgba(214,176,126,0)");ctx.fillStyle=pg;ctx.beginPath();ctx.ellipse(76,-104,32,16,0.2,0,TAU);ctx.fill();
-  // the reed stylus, pressing the next wedge
-  if(p>0&&p<1){const k=shown%5,r=Math.floor(shown/5),sx=22+k*23+6,sy=-196+r*44,wob=Math.sin(t*9)*2;ot_taper(ctx,ot_curve(sx,sy,sx+44+wob,sy-80,sx+96+wob,sy-156,12),9,"rgba(206,180,128,0.97)",{tip:0.25,half:true,k:0.5});
-    ot_taper(ctx,ot_curve(sx+3,sy-4,sx+46+wob,sy-82,sx+97+wob,sy-154,12),3,"rgba(255,240,200,0.5)",{tip:0.2});}
-  ctx.restore();}
-// a guild masterpiece: a hand-forged iron lock with a key, and the guild's mark struck once the masters accept it (mark 0..1)
-function ot_lock(ctx,x,y,s,o){o=o||{};const t=o.t||0;ctx.save();ctx.translate(x,y);ctx.scale(s,s);
-  ot_organic(ctx,0,-138,121,99,{n:7,amp:1.6,seed:5,t});ot_matter(ctx,-120,-236,120,-40,[84,82,90],{t,seed:2,light:0.28});ot_organic(ctx,0,-138,121,99,{n:7,amp:1.6,seed:5,t});ot_rim(ctx,"rgba(10,10,14,0.7)","rgba(230,226,236,0.4)",3.5);
-  ot_organic(ctx,0,-138,108,86,{n:7,amp:1.2,seed:6,t});ctx.strokeStyle="rgba(210,200,190,0.35)";ctx.lineWidth=2;ctx.stroke();
-  [[-100,-216],[100,-216],[-100,-60],[100,-60]].forEach(([rx,ry])=>{const rg=ctx.createRadialGradient(rx-2,ry-2,1,rx,ry,7);rg.addColorStop(0,"#d6d2d8");rg.addColorStop(1,"#5a575e");ctx.fillStyle=rg;ctx.beginPath();ctx.arc(rx,ry,6.5,0,TAU);ctx.fill();});
-  // scrollwork, filed by hand: strokes that swell and thin
-  const scr="rgba(232,216,192,0.75)";[-1,1].forEach(sd=>{ot_taper(ctx,[...ot_curve(0,-200,sd*40,-216,sd*58,-186,8),...ot_curve(sd*58,-186,sd*50,-160,sd*36,-176,6).slice(1)],6,scr);
-    ot_taper(ctx,ot_curve(sd*84,-120,sd*104,-156,sd*64,-142,10),5,scr);ot_taper(ctx,ot_curve(sd*84,-120,sd*104,-84,sd*64,-98,10),5,scr);});
-  // the keyhole
-  ctx.fillStyle="#0c0b10";ctx.beginPath();ctx.arc(0,-134,13,0,TAU);ctx.fill();ctx.beginPath();ctx.moveTo(-7,-130);ctx.quadraticCurveTo(-9,-110,-11,-92);ctx.lineTo(11,-92);ctx.quadraticCurveTo(9,-110,7,-130);ctx.closePath();ctx.fill();
-  // the key, lying in front
-  const kg=ctx.createLinearGradient(-50,-30,60,-6);kg.addColorStop(0,"#e0cf9c");kg.addColorStop(1,"#8a7446");ctx.strokeStyle=kg;ctx.lineWidth=6;ctx.lineCap="round";ctx.beginPath();ctx.ellipse(-40,-18,15,13,0,0,TAU);ctx.stroke();
-  ot_taper(ctx,ot_curve(-25,-18,15,-17,60,-18,8),8,"#b8a882",{tip:0.7});ctx.lineWidth=5;ctx.strokeStyle="#b8a882";ctx.beginPath();ctx.moveTo(46,-18);ctx.lineTo(46,-6);ctx.moveTo(56,-18);ctx.lineTo(56,-8);ctx.stroke();
-  // the guild's mark, struck into the plate: a small shield with a key
-  const m=o.mark==null?1:o.mark;if(m>0){const mx=78,my=-194;if(m<1)glow(ctx,mx,my,60,OT_WAX,0.8*Math.sin(Math.PI*m));
-    ctx.save();ctx.globalAlpha*=clamp(m*1.5,0,1);ctx.strokeStyle=rgba(mix(OT_WAX,[255,230,200],0.3),1);ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(mx-15,my-17);ctx.quadraticCurveTo(mx,my-20,mx+15,my-17);ctx.lineTo(mx+15,my-2);ctx.quadraticCurveTo(mx+13,my+14,mx,my+20);ctx.quadraticCurveTo(mx-13,my+14,mx-15,my-2);ctx.closePath();ctx.stroke();
-    ctx.beginPath();ctx.arc(mx,my-7,4.5,0,TAU);ctx.moveTo(mx,my-2.5);ctx.lineTo(mx,my+11);ctx.moveTo(mx,my+6);ctx.lineTo(mx+5,my+6);ctx.moveTo(mx,my+10);ctx.lineTo(mx+4,my+10);ctx.stroke();ctx.restore();}
-  ctx.restore();}
-// wooden rollers for a scroll
-function ot_roller(ctx,rx,y0,y1){const rg=ctx.createLinearGradient(rx-10,0,rx+10,0);rg.addColorStop(0,"#4a2e1a");rg.addColorStop(0.45,"#a8804e");rg.addColorStop(1,"#3c2414");ctx.fillStyle=rg;ctx.beginPath();ctx.moveTo(rx-9,y0);ctx.quadraticCurveTo(rx-11,(y0+y1)/2,rx-9,y1);ctx.lineTo(rx+9,y1);ctx.quadraticCurveTo(rx+11,(y0+y1)/2,rx+9,y0);ctx.closePath();ctx.fill();
-  [y0-4,y1+4].forEach(ky=>{const kg=ctx.createRadialGradient(rx-3,ky-3,1,rx,ky,9);kg.addColorStop(0,"#f0d49a");kg.addColorStop(1,"#8a6a3a");ctx.fillStyle=kg;ctx.beginPath();ctx.ellipse(rx,ky,9,8,0,0,TAU);ctx.fill();});}
-// an examination scroll: columns of writing, read right to left, in brush strokes, and a red seal; rank (0..1) lights the seal
-function ot_scroll(ctx,x,y,s,o){o=o||{};const t=o.t||0;ctx.save();ctx.translate(x,y);ctx.scale(s,s);
-  ot_organic(ctx,0,-129,142,94,{n:12,amp:1.6,seed:7,t});ot_matter(ctx,-140,-222,140,-36,[234,220,184],{t,seed:3,light:0.18});
-  ctx.save();ot_organic(ctx,0,-129,142,94,{n:12,amp:1.6,seed:7,t});ctx.clip();ctx.fillStyle="rgba(120,90,50,0.16)";ctx.fillRect(-150,-230,20,200);ctx.fillRect(130,-230,20,200);ctx.restore();
-  ot_organic(ctx,0,-129,142,94,{n:12,amp:1.6,seed:7,t});ot_rim(ctx,"rgba(110,80,40,0.35)","rgba(255,250,235,0.5)",2.5);
-  ot_roller(ctx,-150,-236,-22);ot_roller(ctx,150,-236,-22);
-  // columns of text, as brush strokes of different lengths (not real characters)
-  for(let c=0;c<10;c++){const cx=112-c*22;let yy=-206,k=0;while(yy<-60){const L=10+hash(c*13+k,2)*26,y1=Math.min(-56,yy+L);ot_taper(ctx,ot_curve(cx,yy,cx+(hash(c+k,5)-0.5)*4,(yy+y1)/2,cx,y1,6),6.5,"rgba(36,28,24,0.82)",{tip:0.25});yy+=L+7+hash(c+k,3)*8;k++;}}
-  const r=o.rank==null?1:o.rank;if(r>0){if(r<1)glow(ctx,-104,-86,60,[230,60,50],0.7*Math.sin(Math.PI*r));ctx.save();ctx.globalAlpha*=clamp(r*1.5,0,1);ot_organic(ctx,-104,-88,22,22,{n:8,amp:1.2,seed:9,t:0});ctx.fillStyle="rgba(196,40,36,0.92)";ctx.fill();
-    ctx.strokeStyle="rgba(250,220,200,0.85)";ctx.lineWidth=2.5;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(-112,-96);ctx.lineTo(-96,-96);ctx.moveTo(-104,-96);ctx.lineTo(-104,-78);ctx.moveTo(-113,-80);ctx.lineTo(-95,-80);ctx.stroke();ctx.restore();}
-  ctx.restore();}
-// a licence to teach: parchment, lines of script, a cord and a wax seal (press 0..1), the cord swaying slightly
-function ot_licence(ctx,x,y,s,o){o=o||{};const t=o.t||0,P=[226,207,166];ctx.save();ctx.translate(x,y);ctx.scale(s,s);
-  ot_organic(ctx,0,-171,114,77,{n:9,amp:3.2,seed:11,t});ot_matter(ctx,-114,-248,114,-94,P,{t,seed:4});
-  ctx.save();ot_organic(ctx,0,-171,114,77,{n:9,amp:3.2,seed:11,t});ctx.clip();[[-60,-210,40],[70,-150,34]].forEach(([sx,sy,sr])=>{const sg=ctx.createRadialGradient(sx,sy,2,sx,sy,sr);sg.addColorStop(0,"rgba(150,110,60,0.18)");sg.addColorStop(1,"rgba(150,110,60,0)");ctx.fillStyle=sg;ctx.fillRect(sx-sr,sy-sr,sr*2,sr*2);});
-    ctx.fillStyle="rgba(150,110,60,0.2)";ctx.fillRect(-120,-122,240,30);ctx.restore();
-  ot_organic(ctx,0,-171,114,77,{n:9,amp:3.2,seed:11,t});ot_rim(ctx,"rgba(120,86,44,0.45)","rgba(255,246,222,0.55)",2.6);
-  ot_taper(ctx,ot_curve(-112,-121,0,-123,112,-120,10),2.2,"rgba(120,90,50,0.55)");
-  ot_taper(ctx,[...ot_curve(-70,-222,-40,-236,-10,-222,6),...ot_curve(-10,-222,30,-212,72,-224,6).slice(1)],5.5,"rgba(60,40,26,0.88)",{tip:0.2});
-  for(let i=0;i<7;i++){const yy=-196+i*13,x1=90-(i===6?70:hash(i,5)*20),pts=[];for(let xx=-92;xx<x1;xx+=6)pts.push([xx,yy+Math.sin(xx*0.9+i)*2]);ot_taper(ctx,pts,2.6,"rgba(60,40,26,0.8)",{tip:0.4,k:0.3});}
-  ot_curl(ctx,112,-96,20,P,t);
-  const sw=Math.sin(t*1.1)*3;ot_taper(ctx,ot_curve(-8,-100,-15+sw*0.5,-72,-5+sw,-54,10),4,"rgba(150,40,34,0.92)",{tip:0.6});ot_taper(ctx,ot_curve(8,-100,15+sw*0.5,-72,5+sw,-54,10),4,"rgba(150,40,34,0.92)",{tip:0.6});
-  waxSeal(ctx,sw,-36,28,WAX,1,o.press==null?1:o.press);ctx.restore();}
-// a diploma: a sheet folded in two, standing open, its panels gently bowed
-function ot_diploma(ctx,x,y,s,o){o=o||{};const t=o.t||0,bw=Math.sin(t*0.7)*2;ctx.save();ctx.translate(x,y);ctx.scale(s,s);
-  const panel=(pts,base,seed)=>{ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);for(let i=0;i<4;i++){const a=pts[i],b=pts[(i+1)%4],mx=(a[0]+b[0])/2+(i%2?bw:0),my=(a[1]+b[1])/2+(i%2?0:2+bw*0.5);ctx.quadraticCurveTo(mx,my,b[0],b[1]);}ctx.closePath();ot_matter(ctx,-130,-218,120,-44,base,{t,seed,light:0.16});};
-  panel([[-130,-214],[0,-200],[0,-44],[-130,-56]],[239,230,210],5);panel([[0,-200],[120,-218],[120,-54],[0,-44]],[222,210,184],6);
-  ot_taper(ctx,ot_curve(0,-200,-1.5,-122,0,-44,10),2.4,"rgba(120,90,50,0.6)",{tip:0.5});
-  ot_taper(ctx,ot_curve(-104,-178,-65,-177,-26,-172,8),4,"rgba(60,50,40,0.75)");for(let i=0;i<5;i++)ot_taper(ctx,ot_curve(-110,-150+i*16,-65,-147+i*16,-20,-143+i*16,8),2.2,"rgba(60,50,40,0.6)",{tip:0.4});
-  ot_taper(ctx,ot_curve(20,-176,60,-183,100,-186,8),2.6,"rgba(60,50,40,0.6)");ot_taper(ctx,ot_curve(20,-156,55,-162,90,-164,8),2.2,"rgba(60,50,40,0.55)");
-  // a signature in ink, and a gold foil seal with a ribbon
-  ot_taper(ctx,[...ot_curve(24,-96,36,-122,44,-96,6),...ot_curve(44,-96,52,-78,58,-104,6).slice(1),...ot_curve(58,-104,66,-120,86,-104,6).slice(1)],3.2,"rgba(30,40,90,0.85)",{tip:0.2});
-  ctx.fillStyle="rgba(170,40,40,0.9)";ctx.beginPath();ctx.moveTo(-72,-80);ctx.quadraticCurveTo(-78,-60,-80+bw,-40);ctx.lineTo(-70,-48);ctx.lineTo(-62+bw,-40);ctx.quadraticCurveTo(-64,-60,-66,-80);ctx.closePath();ctx.fill();
-  const gg=ctx.createRadialGradient(-74,-90,2,-70,-86,20);gg.addColorStop(0,"#fff0b0");gg.addColorStop(1,"#c89a2a");ctx.fillStyle=gg;ctx.beginPath();for(let i=0;i<=24;i++){const an=i/24*TAU,r=i%2?16:19;ctx.lineTo(-70+Math.cos(an)*r,-86+Math.sin(an)*r);}ctx.fill();ctx.restore();}
-// a transcript: every unit, and its grade
-function ot_transcript(ctx,x,y,s,o){o=o||{};const t=o.t||0,P=[244,240,232];ctx.save();ctx.translate(x,y);ctx.scale(s,s);
-  ot_organic(ctx,0,-140,101,101,{n:14,amp:1.2,seed:13,t});ot_matter(ctx,-100,-240,100,-40,P,{t,seed:6,light:0.14});ot_organic(ctx,0,-140,101,101,{n:14,amp:1.2,seed:13,t});ot_rim(ctx,"rgba(120,120,130,0.35)","rgba(255,255,255,0.5)",2);
-  ctx.fillStyle="rgba(40,60,110,0.85)";ctx.fillRect(-92,-232,184,26);ctx.fillStyle="rgba(255,255,255,0.8)";ctx.fillRect(-80,-222,90,6);
-  const gr=["A","B+","A","C","B","A-","B+","A"];for(let i=0;i<8;i++){const yy=-196+i*19;ctx.fillStyle="rgba(60,60,70,0.55)";ctx.fillRect(-86,yy,80+hash(i,4)*40,6);T(ctx,gr[i],72,yy+8,{f:"mono",w:500,size:13,align:"center",color:"rgba(40,40,50,0.9)"});
-    ctx.strokeStyle="rgba(100,110,130,0.2)";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(-90,yy+12);ctx.lineTo(90,yy+12);ctx.stroke();}
-  ot_curl(ctx,100,-40,18,P,t+1);ctx.restore();}
-// a digital badge: a glowing medal of glass
-function ot_badge(ctx,x,y,s,o){o=o||{};const col=o.col||OFFICE.careers.c;ctx.save();ctx.translate(x,y);ctx.scale(s,s);
-  ctx.fillStyle=rgba(mix(col,[0,0,0],0.3),0.9);ctx.beginPath();ctx.moveTo(-40,-80);ctx.lineTo(-56,-24);ctx.lineTo(-36,-36);ctx.lineTo(-24,-18);ctx.lineTo(-10,-80);ctx.fill();ctx.beginPath();ctx.moveTo(40,-80);ctx.lineTo(56,-24);ctx.lineTo(36,-36);ctx.lineTo(24,-18);ctx.lineTo(10,-80);ctx.fill();
-  glow(ctx,0,-150,130,col,0.35);ctx.beginPath();for(let i=0;i<6;i++){const an=i/6*TAU-Math.PI/2;ctx.lineTo(Math.cos(an)*82,-150+Math.sin(an)*82);}ctx.closePath();ctx.fillStyle="rgba(10,14,30,0.94)";ctx.fill();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=4;ctx.shadowColor=rgba(col,0.9);ctx.shadowBlur=16;ctx.stroke();ctx.shadowBlur=0;
-  ctx.beginPath();for(let i=0;i<6;i++){const an=i/6*TAU-Math.PI/2;ctx.lineTo(Math.cos(an)*64,-150+Math.sin(an)*64);}ctx.closePath();ctx.strokeStyle=rgba(col,0.45);ctx.lineWidth=2;ctx.stroke();
-  T(ctx,"★",0,-132,{w:800,size:52,align:"center",color:rgba(col,1)});ctx.restore();}
-// a credential signed with a digital key: a glass card, and its signature
-function ot_signed(ctx,x,y,s,o){o=o||{};const col=o.col||OT_GOLD;ctx.save();ctx.translate(x,y);ctx.scale(s,s);glow(ctx,0,-140,150,col,0.2);
-  glass(ctx,-104,-244,208,200,20,col,{glow:18,ea:0.9,fill:"rgba(8,13,28,0.95)"});ctx.fillStyle=rgba(col,0.9);ctx.fillRect(-80,-216,110,8);ctx.fillStyle="rgba(200,215,240,0.5)";for(let i=0;i<4;i++)ctx.fillRect(-80,-190+i*18,120-i*18,5);
-  ot_key(ctx,-42,-86,1.3,col,1);const sx=58,sy=-86;ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=2.6;ctx.beginPath();for(let i=0;i<6;i++){const an=i/6*TAU+Math.PI/6;ctx.lineTo(sx+Math.cos(an)*24,sy+Math.sin(an)*24);}ctx.closePath();ctx.stroke();T(ctx,"✓",sx,sy+8,{w:800,size:24,align:"center",color:rgba(col,1)});ctx.restore();}
-const OT_DRAW={tablet:ot_tablet,lock:ot_lock,scroll:ot_scroll,licence:ot_licence,diploma:ot_diploma,transcript:ot_transcript,badge:ot_badge,signed:ot_signed};
-function ot_ex(ctx,k,x,y,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>OT_DRAW[k](ctx,x,y,s,o));}
-// the exhibits, in the order the film shows them: [drawing, name, what it is, when and where, its material]
-const OT_EX=[["tablet","School tablet","teacher's model · student's copy","c. 1800 BCE · Mesopotamia","clay"],
-  ["lock","Guild masterpiece","judged by the masters of the guild","medieval Europe","iron"],
-  ["scroll","Imperial examination","a rank that opened the way to office","605–1905 · China","paper and ink"],
-  ["licence","Licence to teach","granted under a wax seal","medieval universities","parchment · wax"],
-  ["diploma","Diploma","a sheet folded in two","","paper"],["transcript","Transcript","every unit, every grade","","paper"],
-  ["badge","Digital badge","","","pixels"],["signed","Signed credential","checked with a digital key","today","a digital key"]];
-const OT_MATCOL=[CLAY,[170,170,180],[236,220,180],[228,120,90],PARCH,[220,226,236],OFFICE.careers.c,TRUST];
-
-/* ---------- the museum: a long shelf, lit from above ---------- */
-function ot_shelf(ctx,x0,x1,y){const g=ctx.createLinearGradient(0,y,0,y+34);g.addColorStop(0,"#5a3f2a");g.addColorStop(1,"#2a1c12");ctx.fillStyle=g;ctx.fillRect(x0,y,x1-x0,34);
-  ctx.fillStyle="rgba(255,220,170,0.35)";ctx.fillRect(x0,y,x1-x0,2);const sh=ctx.createLinearGradient(0,y+34,0,y+120);sh.addColorStop(0,"rgba(0,0,0,0.5)");sh.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=sh;ctx.fillRect(x0,y+34,x1-x0,86);}
-// a museum label on the shelf's edge
-function ot_label(ctx,x,y,title,sub,a){if(a<=0.01)return;withA(ctx,a,()=>{const w=Math.max(260,tw(ctx,title,22,800)+40,sub?tw(ctx,sub,16,600)+40:0);ctx.fillStyle="rgba(30,20,14,0.92)";rr(ctx,x-w/2,y,w,sub?70:46,8);ctx.fill();ctx.strokeStyle=rgba(CLAY,0.6);ctx.lineWidth=1.4;rr(ctx,x-w/2,y,w,sub?70:46,8);ctx.stroke();
-  T(ctx,title,x,y+30,{w:800,size:22,align:"center",color:rgba(PARCH,1)});if(sub)T(ctx,sub,x,y+56,{w:600,size:16,align:"center",color:rgba(CLAY,1)});});}
-
-/* ---------- today: the systems, each with a model inside ---------- */
-// a system's card: its name, what it holds, and its own little model (who holds what); o.open lifts it out of the vendor's box
-function ot_sysCard(ctx,k,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return null;const S_=OT_SYS[k],c=S_.c,ma=o.modelA==null?1:o.modelA,hi=o.hi||0;
-  const nm=o.names||S_.m;let B=null;
-  withA(ctx,a,()=>{if(hi>0)glow(ctx,x+w/2,y+h/2,w*0.8,c,0.25*hi);glass(ctx,x,y,w,h,18,c,{glow:16+10*hi,ea:0.75,fill:"rgba(7,12,24,0.93)"});led(ctx,x+20,y+18,w-40,4,c);
-    T(ctx,o.title||S_.n,x+w/2,y+62,{w:800,size:o.ts||(w<300?21:24),align:"center"});
-    withA(ctx,o.holdsA==null?1:o.holdsA,()=>T(ctx,o.holdsText||"holds "+S_.holds,x+w/2,y+94,{w:600,size:19,align:"center",color:rgba(c,1)}));
-    withA(ctx,ma,()=>{const s=o.ms||0.9,top={x:x+w/2,y:y+h*0.47,name:nm[0],col:c,s,hi:o.hiTop||0},bot={x:x+w/2,y:y+h*0.8,name:nm[1],col:c,s,hi:o.hiBot||0};
-      ctx.strokeStyle=rgba(c,0.25);ctx.lineWidth=1;ctx.setLineDash([4,6]);rr(ctx,x+18,y+116,w-36,h-134,12);ctx.stroke();ctx.setLineDash([]);
-      T(ctx,o.modelLabel==null?"its model":o.modelLabel,x+32,y+140,{f:"mono",w:500,size:14,color:rgba(SOFT,0.9)});
-      const b1=entBox(ctx,top),b2=entBox(ctx,bot);relLine(ctx,b1,b2,"1","*",{col:c,s});ent(ctx,top);ent(ctx,bot);B={top:b1,bot:b2};});});
-  return B;}
-// the vendor's box: a closed carton that slides in, then opens (op 0..1)
-function ot_crate(ctx,x,y,w,h,op,col,a,o){o=o||{};if(a<=0.01)return;withA(ctx,a,()=>{const lid=ease(op);ctx.save();
-  ctx.fillStyle="rgba(122,92,64,0.96)";rr(ctx,x,y+h*0.18,w,h*0.82,10);ctx.fill();ctx.strokeStyle="rgba(230,200,160,0.5)";ctx.lineWidth=2;rr(ctx,x,y+h*0.18,w,h*0.82,10);ctx.stroke();
-  ctx.fillStyle="rgba(210,180,130,0.6)";ctx.fillRect(x+w/2-18,y+h*0.18,36,h*0.82);
-  T(ctx,o.title||"off the shelf",x+w/2,y+h*0.62,{w:800,size:24,align:"center",color:"rgba(40,26,16,0.9)"});T(ctx,o.sub||"vendor",x+w/2,y+h*0.62+32,{f:"mono",w:500,size:18,align:"center",color:"rgba(40,26,16,0.8)"});
-  // the lid, folding back as it opens
-  ctx.translate(x,y+h*0.18);ctx.rotate(-1.9*lid);ctx.fillStyle="rgba(150,114,80,0.97)";rr(ctx,0,-h*0.18,w,h*0.18,8);ctx.fill();ctx.strokeStyle="rgba(230,200,160,0.5)";rr(ctx,0,-h*0.18,w,h*0.18,8);ctx.stroke();ctx.restore();});}
-// a system as a node in a ring: a pill with its colour and name
-function ot_node(ctx,k,x,y,a,hi,o){o=o||{};if(a<=0.01)return;const S_=OT_SYS[k]||o.sys,c=S_.c,n=o.name||S_.n,w=tw(ctx,n,22,800)+70;withA(ctx,a,()=>{if(hi)glow(ctx,x,y,w*0.7,c,0.3*hi);glass(ctx,x-w/2,y-32,w,64,32,c,{glow:14+10*(hi||0),ea:0.85,fill:"rgba(7,12,24,0.94)"});
-  ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x-w/2+30,y,8,0,TAU);ctx.fill();T(ctx,n,x-w/2+48,y+8,{w:800,size:22});});return{x,y,w,h:64};}
-// the shared model, as a hub: a gold disc with three small boxes inside
-function ot_hub(ctx,x,y,r,t,a,o){o=o||{};if(a<=0.01)return;withA(ctx,a,()=>{glow(ctx,x,y,r*2.4,OT_GOLD,0.28+0.08*Math.sin(t*2));ctx.save();ctx.fillStyle="rgba(10,14,28,0.95)";ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();
-  ctx.strokeStyle=rgba(OT_GOLD,1);ctx.lineWidth=3.5;ctx.shadowColor=rgba(OT_GOLD,0.9);ctx.shadowBlur=18;ctx.stroke();ctx.restore();
-  T(ctx,o.title||"shared model",x,y-r*0.36,{w:800,size:o.size||24,align:"center",color:rgba(OT_GOLD,1)});
-  const bx=[[x-r*0.5,y+r*0.2],[x+r*0.5,y+r*0.2],[x,y+r*0.58]];ctx.save();ctx.strokeStyle=rgba(OT_GOLD,0.7);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(bx[0][0],bx[0][1]);ctx.lineTo(bx[2][0],bx[2][1]);ctx.lineTo(bx[1][0],bx[1][1]);ctx.stroke();
-  bx.forEach(([px,py])=>{ctx.fillStyle="rgba(10,14,28,1)";rr(ctx,px-24,py-12,48,24,5);ctx.fill();ctx.strokeStyle=rgba(OT_GOLD,1);ctx.lineWidth=2;rr(ctx,px-24,py-12,48,24,5);ctx.stroke();});ctx.restore();});}
-
-/* ---------- the lost spacecraft, 1999 ---------- */
-function ot_mars(ctx,x,y,r,t){glow(ctx,x,y,r*1.5,[255,140,100],0.25);ctx.save();ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.clip();
-  const g=ctx.createRadialGradient(x-r*0.35,y-r*0.35,r*0.1,x,y,r*1.05);g.addColorStop(0,"#e8966e");g.addColorStop(0.6,"#b0543a");g.addColorStop(1,"#4a1c14");ctx.fillStyle=g;ctx.fillRect(x-r,y-r,2*r,2*r);
-  // surface features, drifting slowly as the planet turns
-  ctx.fillStyle="rgba(90,36,24,0.3)";[[0.2,-0.3,0.25],[-0.3,0.2,0.18],[0.35,0.35,0.12],[-0.1,-0.55,0.1],[0.7,0.1,0.16],[-0.75,-0.2,0.14]].forEach(([dx,dy,rr_],i)=>{let fx=((dx+t*0.012+1.2)%2.4)-1.2;const sq=Math.sqrt(Math.max(0,1-fx*fx));
-    ctx.beginPath();ctx.moveTo(x+fx*r+rr_*r*1.3*sq,y+dy*r);ctx.bezierCurveTo(x+fx*r+rr_*r*sq,y+dy*r-rr_*r*0.9,x+fx*r-rr_*r*1.2*sq,y+dy*r-rr_*r*0.7,x+fx*r-rr_*r*1.4*sq,y+dy*r+rr_*r*0.1);ctx.bezierCurveTo(x+fx*r-rr_*r*sq,y+dy*r+rr_*r*0.9,x+fx*r+rr_*r*0.9*sq,y+dy*r+rr_*r*0.8,x+fx*r+rr_*r*1.3*sq,y+dy*r);ctx.fill();});
-  const sh=ctx.createRadialGradient(x-r*0.55,y-r*0.5,r*0.6,x-r*0.2,y-r*0.2,r*1.55);sh.addColorStop(0,"rgba(0,0,0,0)");sh.addColorStop(1,"rgba(8,2,2,0.72)");ctx.fillStyle=sh;ctx.fillRect(x-r,y-r,2*r,2*r);ctx.restore();
-  const ag=ctx.createRadialGradient(x,y,r*0.96,x,y,r*1.12);ag.addColorStop(0,"rgba(255,190,150,0.0)");ag.addColorStop(0.35,"rgba(255,190,150,"+(0.3+0.05*Math.sin(t*1.3))+")");ag.addColorStop(1,"rgba(255,190,150,0)");ctx.fillStyle=ag;ctx.beginPath();ctx.arc(x,y,r*1.12,0,TAU);ctx.fill();}
-function ot_craft(ctx,x,y,s,rot,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);ctx.scale(s,s);ctx.fillStyle="#c8ccd6";rr(ctx,-12,-10,24,20,3);ctx.fill();ctx.fillStyle="#4a6aa8";ctx.fillRect(-46,-6,30,12);ctx.fillRect(16,-6,30,12);
-  ctx.strokeStyle="rgba(255,255,255,0.5)";ctx.lineWidth=1;for(let i=-40;i<-16;i+=6){ctx.beginPath();ctx.moveTo(i,-6);ctx.lineTo(i,6);ctx.stroke();}for(let i=22;i<46;i+=6){ctx.beginPath();ctx.moveTo(i,-6);ctx.lineTo(i,6);ctx.stroke();}
-  ctx.fillStyle="#e8e2c8";ctx.beginPath();ctx.arc(0,-14,7,Math.PI,TAU);ctx.fill();ctx.restore();});}
-function ot_stars(ctx,t,n){for(let i=0;i<(n||90);i++){const x=hash(i,11)*W,y=hash(i,12)*H*0.9,tw_=0.4+0.6*Math.abs(Math.sin(t*0.8+i));ctx.fillStyle="rgba(230,236,255,"+(0.15+0.45*hash(i,13))*tw_+")";ctx.fillRect(x,y,1.8,1.8);}}
-
-/* ---------- one learner, many records ---------- */
-// a record in one system: its colour, the system, the kind of ID and the ID
-function ot_idCard(ctx,x,y,w,k,kind,id,a,o){o=o||{};if(a<=0.01)return;const c=(OT_SYS[k]||{c:OT_IT}).c,n=(OT_SYS[k]||{n:"IT directory"}).n,h=o.h||92;withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,c,{glow:12+10*(o.hi||0),ea:0.75,fill:"rgba(7,12,24,0.94)"});led(ctx,x+14,y+16,5,h-32,c);
-  T(ctx,(o.sysName||n)+" · "+kind,x+34,y+34,{w:700,size:18,color:rgba(c,1)});T(ctx,id,x+34,y+72,{f:"mono",w:500,size:27,color:rgba(INK,1)});});}
-// a code list: one set of values every system uses
-function ot_codeList(ctx,x,y,a,hi){if(a<=0.01)return;withA(ctx,a,()=>{const w=640,h=104;if(hi)glow(ctx,x+w/2,y+h/2,380,OT_STD,0.2*hi);glass(ctx,x,y,w,h,16,OT_STD,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.95)"});
-  T(ctx,"credential kind",x+24,y+36,{f:"mono",w:500,size:20,color:rgba(OT_STD,1)});T(ctx,"one shared list",x+w-24,y+36,{w:600,size:17,align:"right",color:rgba(SOFT,1)});
-  ["award","microcredential","badge"].forEach((s,i)=>ot_pill(ctx,x+104+i*196,y+74,s,OT_STD,{size:21}));});}
-
-/* ---------- the logical model, and the yardstick ---------- */
-const OT_LM={learner:[360,330],issuer:[360,600],cred:[930,450],evidence:[1560,270],micro:[1180,770],award:[1700,770]};
-const OT_CRED_ATTRS=[["credential id","id"],["issuer id",""],["learner id",""],["claim",""],["awarded on: date",""],["level: 1–10",""],["volume of learning: hours",""],["status: valid | expired | revoked",""]];
-// the ruler: our logical model's parts, marked along a gold bar
-function ot_ruler(ctx,x0,x1,y,marks,a,p,sz){if(a<=0.01)return;withA(ctx,a,()=>{const w=x1-x0,q=p==null?1:p;ctx.save();ctx.shadowColor=rgba(OT_GOLD,0.8);ctx.shadowBlur=18;const g=ctx.createLinearGradient(0,y-30,0,y+30);g.addColorStop(0,"#f6d98a");g.addColorStop(1,"#b8862e");ctx.fillStyle=g;rr(ctx,x0,y-30,w*q,60,8);ctx.fill();ctx.restore();
-  ctx.strokeStyle="rgba(60,40,10,0.8)";ctx.lineWidth=2;for(let i=0;i<=80;i++){const xx=x0+i*w/80;if(xx>x0+w*q)break;ctx.beginPath();ctx.moveTo(xx,y-30);ctx.lineTo(xx,y-30+(i%10===0?26:i%5===0?18:10));ctx.stroke();}
-  marks.forEach((m,i)=>{const xx=x0+(i+0.5)*w/marks.length;if(xx>x0+w*q)return;T(ctx,m,xx,y+(sz||19)*0.4+12,{w:800,size:sz||19,align:"center",color:"rgba(50,32,8,0.95)"});});});}
-
-/* ---------- pictures for the labs and the scenarios (site/assets/older-than-the-systems/learn.*.js name them in "vis") ----------
-   Each draws on a canvas of w × h, with the lab's state and the page's words (window.FW); every word it draws comes from FW.vis. */
-const ot_hex=h_=>h_.match(/\w\w/g).map(q=>parseInt(q,16));
-const OT_PARTPOS={issuer:[190,92],verifier:[770,92],claim:[480,206],holder:[190,320],evidence:[770,320]};
-const OT_SRCCOL={sis:APP.sis.c,it:OT_IT,short:OFFICE.short.c,careers:OFFICE.careers.c};
+/* ---------- pictures for the labs and the scenarios (site/assets/both-at-once/learn.*.js name them in "vis") ----------
+   Each draws on a canvas of w × h, with the lab's state and the page's words (window.FW). Every word they show comes from FW.vis,
+   so the Spanish pages show Spanish; IDs, numbers and dates stay as they are. Lab pictures use text of 22 px or more, scenario pictures 18 px or more. */
+// a small card: a title, and optional lines under it
+function bo_lvCard(c,x,y,w,h,col,title,lines,o){o=o||{};glass(c,x,y,w,h,16,col,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.95)"});if(title)T(c,title,x+18,y+(o.ty||34),{w:800,size:o.ts||22,color:rgba(col,1)});
+  (lines||[]).forEach((l,i)=>T(c,l[0],x+18,y+(o.ly||70)+i*(o.lh||32),{w:l[2]||600,size:l[1]||20,color:l[3]||rgba(INK,0.92),f:l[4]}));}
 const LV={
-  // Same idea, new materials: the model's five parts, with what you placed in each
-  parts:(c,w,h,st,L)=>{const lab=L.labs.find(x=>x.id==="parts"),V=L.vis.parts,it=lab.w.items,B={};
-    Object.keys(OT_PARTPOS).forEach(k=>{const[x,y]=OT_PARTPOS[k];B[k]={x,y,w:230,h:66};});
-    [["issuer","claim"],["holder","claim"],["claim","evidence"],["verifier","claim"]].forEach(([a,b])=>{const s_=ot_edge(B[a],B[b].x,B[b].y),e_=ot_edge(B[b],B[a].x,B[a].y);arrowTo(c,s_[0],s_[1],e_[0],e_[1],OT_GOLD,0.5,{lw:2,head:12});});
-    Object.keys(OT_PARTPOS).forEach(k=>{const b=B[k],n=it.filter((q,i)=>st.pick[i]===k),ok=st.checked&&it.every((q,i)=>(st.pick[i]===k)===(q.b===k));const col=k==="claim"?OT_GOLD:OT_WAX;
-      glass(c,b.x-b.w/2,b.y-b.h/2,b.w,b.h,14,col,{glow:12,ea:0.9,fill:"rgba(7,12,24,0.95)"});T(c,V.names[k],b.x-b.w/2+20,b.y+9,{w:800,size:26,color:rgba(col,1)});
-      n.forEach((q,j)=>{c.fillStyle=rgba(col,0.95);c.beginPath();c.arc(b.x+b.w/2-24-j*20,b.y,7,0,TAU);c.fill();});
-      if(st.checked)ot_mark(c,b.x+b.w/2+4,b.y-b.h/2+2,ok,1,16);});},
-  // Who is the source? One learner's facts, each drawn from the system you chose
-  source:(c,w,h,st,L)=>{const lab=L.labs.find(x=>x.id==="source"),V=L.vis.source,it=lab.w.items,bk=lab.w.buckets,x0=24,y0=20,cw=500;
-    glass(c,x0,y0,cw,h-40,16,OT_GOLD,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(c,V.title,x0+22,y0+40,{w:800,size:24,color:rgba(OT_GOLD,1)});
-    const sy=k=>70+bk.findIndex(b=>b[0]===k)*((h-110)/(bk.length-1));
-    bk.forEach(([k,n])=>{const col=OT_SRCCOL[k]||SOFT,y=sy(k),ww=tw(c,V.src[k],22,800)+48;glass(c,w-24-ww,y-24,ww,48,24,col,{glow:10,ea:0.85,fill:"rgba(7,12,24,0.95)"});c.fillStyle=rgba(col,1);c.beginPath();c.arc(w-24-ww+22,y,7,0,TAU);c.fill();T(c,V.src[k],w-24-ww+36,y+8,{w:800,size:22});});
-    V.rows.forEach((r,i)=>{const y=y0+84+i*((h-120)/V.rows.length),k=st.pick[i];T(c,r,x0+22,y+8,{w:700,size:22,color:rgba(INK,0.95)});
-      if(k){const col=OT_SRCCOL[k]||SOFT,ww=tw(c,V.src[k],22,800)+48;arrowTo(c,w-24-ww-6,sy(k),x0+cw+8,y,col,0.8,{lw:2.2,head:11,bend:0.04});}
-      if(st.checked)ot_mark(c,x0+cw-28,y,k===it[i].b,1,14);});},
-  // Fit and gap: our logical model, the yardstick, held against the platform you picked
-  fit:(c,w,h,st,L)=>{const lab=L.labs.find(x=>x.id==="fit"),V=L.vis.fit,r=lab.w.res[st.pick],x0=30,x1=w-30,cw=(x1-x0)/V.marks.length;
-    T(c,V.ours,x0,40,{w:800,size:24,color:rgba(OT_GOLD,1)});ot_ruler(c,x0,x1,100,V.marks,1,1,22);
-    r.forEach((v,i)=>{const x=x0+(i+0.5)*cw;if(v===0.5){c.fillStyle="rgba(7,12,24,0.95)";c.beginPath();c.arc(x,172,18,0,TAU);c.fill();ring(c,x,172,18,[255,196,92],1,2);T(c,"~",x,181,{w:800,size:26,align:"center",color:rgba([255,196,92],1)});}else ot_mark(c,x,172,!!v,1,18);});
-    T(c,V.names[st.pick],x0,236,{w:800,size:24,color:rgba(OFFICE.short.c,1)});glass(c,x0,252,x1-x0,86,14,OFFICE.short.c,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});
-    V.vend[st.pick].forEach((v,i)=>T(c,v,x0+(i+0.5)*cw,303,{w:700,size:22,align:"center",color:v==="—"?rgba(SOFT,0.7):rgba(INK,1)}));},
-  // scenarios, on 600 × 320
-  vendor:(c,w,h,st,L)=>{const V=L.vis.vendor;ot_crate(c,40,110,220,180,0,OFFICE.short.c,1,{title:V.crate,sub:V.vendor});bubble(c,270,30,300,V.says,OFFICE.short.c,{size:22});ot_ruler(c,300,570,250,V.marks,1,1,18);T(c,V.ours,300,300,{w:700,size:18,color:rgba(OT_GOLD,1)});},
-  ten:(c,w,h,st,L)=>{const V=L.vis.ten,cx=170,cy=160,R=110,P=i=>[cx+R*Math.cos(-Math.PI/2+i*TAU/6),cy+R*Math.sin(-Math.PI/2+i*TAU/6)],cols=[APP.sis.c,APP.lms.c,OFFICE.careers.c,[90,220,205],OFFICE.short.c,[255,236,160]];
-    for(let i=0;i<6;i++)for(let j=i+1;j<6;j++){const a=P(i),b=P(j);c.strokeStyle=rgba(i===5||j===5?BAD:SOFT,i===5||j===5?0.8:0.4);c.lineWidth=2;c.beginPath();c.moveTo(a[0],a[1]);c.lineTo(b[0],b[1]);c.stroke();}
-    for(let i=0;i<6;i++){const p=P(i);c.fillStyle="rgba(7,12,24,1)";c.beginPath();c.arc(p[0],p[1],16,0,TAU);c.fill();ring(c,p[0],p[1],16,cols[i],1,3);}
-    T(c,"15",430,140,{w:800,size:72,align:"center",color:rgba(BAD,1)});T(c,V.pairs,430,176,{w:700,size:20,align:"center",color:rgba(SOFT,1)});T(c,"6",430,258,{w:800,size:52,align:"center",color:rgba(OT_GOLD,1)});T(c,V.hub,430,290,{w:700,size:20,align:"center",color:rgba(SOFT,1)});},
-  email:(c,w,h,st,L)=>{const V=L.vis.email;ot_idCard(c,30,50,540,"lms",V.email,"aisha.k@mail.example",1,{h:96,sysName:V.lms});ot_idCard(c,30,190,540,"it",V.email,"aisha.khan@uni.example",1,{h:96,sysName:V.it});T(c,"≠",550,172,{w:800,size:44,align:"center",color:rgba(BAD,1)});},
-  customer:(c,w,h,st,L)=>{const V=L.vis.customer;const B1=ot_sysCard(c,"short",10,20,290,290,{ms:0.85,ts:19,title:V.platform,holdsText:V.holds,modelLabel:"",names:V.names});const Lx={x:480,y:130,name:V.learner,col:OT_GOLD,s:0.95};const bL=entBox(c,Lx);ent(c,Lx);
-    if(B1)arrowTo(c,B1.top.x+B1.top.w/2+8,B1.top.y,bL.x-bL.w/2-10,bL.y,OT_GOLD,0.9,{bend:0.08,lw:3,head:14,dash:[9,7]});T(c,V.maps,400,96,{w:700,size:20,align:"center",color:rgba(OT_GOLD,1)});T(c,V.shared,470,214,{w:700,size:19,align:"center",color:rgba(SOFT,1)});},
-  revoked:(c,w,h,st,L)=>{const V=L.vis.revoked;glass(c,30,40,300,150,16,OT_GOLD,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,V.count,54,84,{w:700,size:20,color:rgba(SOFT,1)});T(c,V.n,54,160,{w:800,size:56,color:rgba(OT_GOLD,1)});
-    glass(c,370,40,200,150,16,OFFICE.short.c,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,V.cert,470,82,{w:800,size:22,align:"center",color:rgba(OFFICE.short.c,1)});glass(c,395,108,150,44,10,BAD,{glow:10,ea:0.95,fill:"rgba(40,8,8,0.9)"});T(c,V.rev,470,137,{w:800,size:20,align:"center",color:rgba(BAD,1)});
-    glass(c,70,230,460,60,14,BAD,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,V.rule,300,268,{w:800,size:22,align:"center"});},
-  migrate:(c,w,h,st,L)=>{const V=L.vis.migrate;glass(c,10,60,200,170,16,SOFT,{glow:8,ea:0.6,fill:"rgba(7,12,24,0.95)"});T(c,V.old,110,152,{w:800,size:20,align:"center",color:rgba(SOFT,1)});
-    glass(c,390,60,200,170,16,APP.sis.c,{glow:14,ea:0.9,fill:"rgba(7,12,24,0.95)"});T(c,V.nw,490,152,{w:800,size:20,align:"center",color:rgba(APP.sis.c,1)});
-    ot_ruler(c,220,380,145,[V.model],1,1,18);arrowTo(c,190,252,410,252,OT_GOLD,0.8,{lw:3,head:14,bend:0.12});T(c,V.through,300,300,{w:700,size:18,align:"center",color:rgba(OT_GOLD,1)});},
-  notice:(c,w,h,st,L)=>{const V=L.vis.notice;glass(c,20,50,270,160,14,SOFT,{glow:8,ea:0.6,fill:"rgba(7,12,24,0.95)"});c.strokeStyle=rgba(SOFT,0.8);c.lineWidth=2;c.beginPath();c.moveTo(20,56);c.lineTo(155,140);c.lineTo(290,56);c.stroke();T(c,V.email,155,196,{w:700,size:18,align:"center",color:rgba(SOFT,1)});
-    glass(c,310,50,270,160,14,OFFICE.short.c,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(c,V.word,328,96,{w:800,size:24,color:rgba(OFFICE.short.c,1)});T(c,V.owner,328,130,{w:600,size:18,color:rgba(SOFT,1)});stamp(c,566,180,"v1.1 · 28 Sep",TRUST,1);
-    T(c,V.q,300,270,{w:700,size:20,align:"center",color:rgba(INK,1)});},
-  connect:(c,w,h,st,L)=>{const V=L.vis.connect;ot_hub(c,300,160,92,1.2,1,{title:V.model,size:18});const ks=["sis","lms","careers","wallet","short"];ks.forEach((k,i)=>{const an=-Math.PI/2+i*TAU/6,x=300+200*Math.cos(an)*1.3,y=160+120*Math.sin(an);c.strokeStyle=rgba(OT_GOLD,0.8);c.lineWidth=2.5;c.beginPath();c.moveTo(300+80*Math.cos(an),160+80*Math.sin(an));c.lineTo(x,y);c.stroke();c.fillStyle="rgba(7,12,24,1)";c.beginPath();c.arc(x,y,15,0,TAU);c.fill();ring(c,x,y,15,OT_SYS[k].c,1,3);});
-    const an=-Math.PI/2+5*TAU/6,x=300+200*Math.cos(an)*1.3,y=160+120*Math.sin(an);c.save();c.setLineDash([7,6]);c.strokeStyle=rgba(OT_GOLD,0.8);c.lineWidth=2.5;c.beginPath();c.moveTo(300+80*Math.cos(an),160+80*Math.sin(an));c.lineTo(x,y);c.stroke();c.restore();ring(c,x,y,15,[255,236,160],1,3,[5,4]);T(c,V.nw,x,y-26,{w:800,size:18,align:"center",color:rgba([255,236,160],1)});}
+  // Where does it live? Three places an idea's source of truth can be; each item sits where it was put
+  where:(c,w,h,st,L)=>{const V=L.vis,lab=L.labs.find(x=>x.id==="where"),items=lab.w.items,zw=296;
+    [["write",BO_W,V.zWrite],["read",BO_R,V.zRead],["gold",BO_M,V.zGold]].forEach(([k,col,name],i)=>{const x=16+i*(zw+16);
+      glass(c,x,14,zw,h-28,18,col,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.9)"});
+      if(k==="write")for(let r=0;r<3;r++){c.fillStyle=rgba(col,0.4);rr(c,x+18,26+r*12,60,7,3);c.fill();}
+      if(k==="read")for(let r=0;r<5;r++){c.fillStyle=rgba(col,0.45);rr(c,x+18+r*12,24,7,36,3);c.fill();}
+      if(k==="gold"){c.fillStyle=rgba(LAYER.gold,0.9);rr(c,x+18,26,28,32,5);c.fill();arrowTo(c,x+52,42,x+84,42,col,1,{head:10,lw:2.5});}
+      T(c,name,x+96,50,{w:800,size:22,color:rgba(col,1)});
+      items.map((it,j)=>[it,j]).filter(([it,j])=>st.pick[j]===k).forEach(([it,j],n)=>{const yy=80+n*50,ok=st.checked?it.b===k:null,ec=ok===null?col:ok?GOOD:BAD;
+        glass(c,x+12,yy,zw-24,42,12,ec,{glow:8,ea:0.95,fill:"rgba(7,12,24,0.96)"});T(c,it.s,x+26,yy+29,{w:700,size:22});if(ok===true)tick_(c,x+zw-34,yy+21,24,GOOD,1);if(ok===false)cross_(c,x+zw-34,yy+21,20,BAD,1);});});},
+  // Apply the changes in order: the log on the left, the reading side's two rows on the right
+  log:(c,w,h,st,L)=>{const V=L.vis,s=st.step||0,wrong=s>=4,E=[[1,V.c1,"A-1042"],[2,V.c2,"L-207"],[3,V.c3,"A-1042"]];
+    T(c,wrong?V.wrong:V.log,30,44,{w:800,size:26,color:rgba(wrong?BAD:BO_ACC,1)});
+    (wrong?[2,0,1]:[0,1,2]).forEach((k,i)=>{const e=E[k],done=wrong||i<s,bad=wrong&&k===2;bo_change(c,30,70+i*72,400,e[0],e[1],e[2],{hi:!wrong&&i===s-1?1:0,bad,col:done?BO_ACC:[150,165,190],fs:24});
+      if(done&&!bad)tick_(c,456,98+i*72,28,GOOD,1);if(bad)cross_(c,456,98+i*72,24,BAD,1);});
+    glass(c,500,24,436,h-48,20,BO_R,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.93)"});T(c,V.reading,524,64,{w:800,size:26,color:rgba(BO_R,1)});
+    const stT=wrong?V.issued:s>=3?V.revoked:s>=1?V.issued:V.none,stC=wrong?BAD:s>=3?BAD:s>=1?INK:SOFT;
+    bo_key(c,540,122,1.3,"A-1042",1,s===1||s===3?1:0);T(c,"A-1042",566,130,{f:"mono",w:500,size:24,color:rgba(bo_kc("A-1042"),1)});T(c,V.status,720,130,{w:600,size:22,color:rgba(SOFT,1)});T(c,stT,720,166,{w:800,size:28,color:rgba(stC,1)});
+    if(s===3)tick_(c,896,156,30,GOOD,1);
+    bo_key(c,540,236,1.3,"L-207",1,s===2?1:0);T(c,"L-207",566,244,{f:"mono",w:500,size:24,color:rgba(bo_kc("L-207"),1)});T(c,V.email,720,244,{w:600,size:22,color:rgba(SOFT,1)});T(c,s>=2&&!wrong?"aisha@work":"aisha@mail",720,280,{f:"mono",w:500,size:24,color:rgba(s===2?GOOD:INK,1)});
+    if(wrong)bo_ghost(c,560,300,320,64,1.2,1,V.back,null);},
+  // How fresh? The scale, with each use where it was put
+  fresh:(c,w,h,st,L)=>{const V=L.vis,lab=L.labs.find(x=>x.id==="fresh"),W_=lab.w,keys=W_.buckets.map(b=>b[0]),cnt={};
+    const marks=W_.items.map((it,j)=>{const k=st.pick[j];if(!k)return null;const i=keys.indexOf(k),row=cnt[k]=(cnt[k]||0)+1,ok=st.checked?it.b===k:null;return[i,it.s,ok===null?BO_ACC:ok?GOOD:BAD,row-1];}).filter(Boolean);
+    const maxRow=Math.max(1,...Object.values(cnt));bo_fresh(c,130,h-70,700,{labels:[V.fSec,V.fMin,V.fNight,V.fDate],ls:22,ms:22,sp:Math.min(48,(h-110)/maxRow),marks});},
+  // scenarios
+  census:(c,w,h,st,L)=>{const V=L.vis;bo_store(c,24,30,240,260,"rows",{title:V.enrolments,sub:V.live,ts:24,ss:19,n:4,p:1});
+    bo_lvCard(c,300,36,276,112,BAD,V.today,[[V.dToday,34,800,rgba(BAD,1)]],{ly:92});bo_lvCard(c,300,172,276,112,GOOD,V.census,[[V.dCensus,34,800,rgba(GOOD,1)]],{ly:92});tick_(c,544,236,30,GOOD,1);},
+  ghost:(c,w,h,st,L)=>{const V=L.vis;bo_change(c,16,40,300,3,V.sRevoke,"A-1042",{bad:true,fs:22});bo_change(c,16,112,300,1,V.sIssue,"A-1042",{fs:22});
+    bo_ghost(c,340,60,244,100,1,1,V.sGhost,V.back);T(c,V.outOfOrder,300,262,{w:700,size:22,align:"center",color:rgba(BAD,1)});},
+  delete:(c,w,h,st,L)=>{const V=L.vis;bo_store(c,20,24,270,220,"rows",{title:V.rows,ts:24,n:3,p:0.67});bo_store(c,310,24,270,220,"cols",{title:V.cols,ts:24,n:5,p:1});
+    T(c,V.delHere,155,284,{w:700,size:20,align:"center",color:rgba(BO_W,1)});T(c,V.stillHere,445,284,{w:700,size:20,align:"center",color:rgba(BAD,1)});},
+  owners:(c,w,h,st,L)=>{const V=L.vis;bo_store(c,20,40,210,210,"rows",{title:V.awards,ts:24,n:4});bo_store(c,370,40,210,210,"cols",{title:V.awards,ts:24,n:4});
+    arrowTo(c,240,120,360,120,BO_W,1,{head:14,lw:3});arrowTo(c,360,190,240,190,BO_M,1,{head:14,lw:3});T(c,"?",300,172,{w:800,size:40,align:"center",color:rgba(BAD,1)});T(c,V.twoTeams,300,294,{w:700,size:22,align:"center",color:rgba(SOFT,1)});},
+  wallet:(c,w,h,st,L)=>{const V=L.vis;glass(c,24,50,330,200,20,TRUST,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(c,V.wallet,48,94,{w:800,size:24});
+    for(let i=0;i<4;i++){const on=i<3;c.fillStyle=on?rgba(TRUST,0.9):"rgba(160,190,240,0.1)";rr(c,48+i*56,120,44,54,8);c.fill();if(!on){c.strokeStyle="rgba(160,190,240,0.5)";c.lineWidth=1.5;rr(c,48+i*56,120,44,54,8);c.stroke();}}
+    T(c,V.of4,48,222,{w:800,size:26,color:rgba(TRUST,1)});bo_moon(c,470,96,40,1,0);bo_hourglass(c,470,196,1.6,0.35,BO_AMB,1,0);T(c,V.fedNight,470,286,{w:700,size:22,align:"center",color:rgba(BO_AMB,1)});},
+  twodefs:(c,w,h,st,L)=>{const V=L.vis;[[V.app,18,BO_W,24],[V.report,15,BO_R,336]].forEach(([n,v,col,x])=>{glass(c,x,40,240,240,18,col,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(c,n,x+20,80,{w:800,size:24,color:rgba(col,1)});
+      wrapT(c,V.credits,x+20,116,200,{w:600,size:19,lh:24,color:rgba(SOFT,1)});T(c,String(v),x+20,256,{w:800,size:60,color:rgba(col,1)});});T(c,"≠",300,176,{w:800,size:48,align:"center",color:rgba(BAD,1)});},
+  tagline:(c,w,h,st,L)=>{const V=L.vis;T(c,V.t1,300,112,{w:800,size:36,align:"center"});const w2=tw(c,V.t2,36,800);T(c,V.t2,300,172,{w:800,size:36,align:"center",color:rgba(SOFT,0.7)});bo_strike(c,300-w2/2-4,160,300+w2/2+4,160,1,SOFT,0.8);T(c,V.t3,300,232,{w:800,size:36,align:"center",color:rgba(BO_ACC,1)});},
+  serve:(c,w,h,st,L)=>{const V=L.vis;vault(c,380,24,196,272,LAYER.gold,(r,cc)=>hash(r*5+cc,4)<0.6?LAYER.gold:null,null);chip(c,478,86,null,V.gold,null,{align:"center",edge:LAYER.gold,ts:22});
+    glass(c,16,70,256,190,18,BO_M,{glow:14,ea:0.9,fill:"rgba(24,8,24,0.92)"});bo_flag(c,48,128,1.3,BO_M,0);T(c,"L-311",96,128,{f:"mono",w:500,size:22,color:rgba(BO_M,1)});wrapT(c,V.flag,36,194,220,{w:700,size:20,lh:26});
+    for(let i=0;i<3;i++)arrowTo(c,372,110+i*50,262,110+i*50,BO_M,0.9,{head:12,lw:2.5});}
 };
 
-/* ===== Older than the systems: scenes =====
-   Eight chapters, as in ../script.md. A museum shelf of credentials, four thousand years long; the same five parts in every one of them;
-   the conceptual model underneath, and today's standard using its words. Then the university's five systems, each with its own model
-   inside; the translations between them; one learner with four IDs; the logical model as a yardstick; who owns each part; and the
-   short-course platform, still saying "customer", joined to the shared meaning. */
+/* ===== Both at once: scenes =====
+   Nine chapters, as in ../script.md. In 1879, a cash register records each sale and keeps the day's total: recording and counting
+   in one place. Today, the app writes and the lakehouse reads a day later; hybrid databases close that distance, with two shapes
+   kept in step inside one system, or an operational database inside the lakehouse. They remove the copy. They don't remove the model. */
+// a moment inside a narration line: f = 0 at its first word, 1 at its last
+const bo_at=(sc,id,f)=>sc.cues[id]+(sc.ends[id]-sc.cues[id])*f;
 
-/* ---------- 1. Same idea, new materials ---------- */
-const OT_SX=i=>380+i*400,OT_SHELF=700;
-// what each exhibit points out while the camera is on it: [text, x and y from the exhibit's foot, the cue and the delay it appears at]
-const OT_NOTES=[[["teacher's model",-76,-268,"clay",5.8],["student's copy",76,-268,"clay",7.4]],
-  [["a masterpiece",-40,-272,"guild",3.4],["the guild's mark",150,-230,"guild",6.2]],
-  [["a rank",-104,-10,"exams",4.6],["the way to office",120,-270,"exams",6.2]],
-  [["a licence to teach",0,-278,"seal",1.4],["a wax seal",120,-40,"seal",3.2]]];
-scene("materials",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath"),cS=c("seal");histBg(ctx,S,t,{light:0.12});
-  const rev=[c("clay")+0.3,c("guild")+0.2,c("exams")+0.2,cS+0.2,cS+4.2,cS+5.7,cS+6.8,cS+8.3],pull=cS+3.4,z0=2.0,y0=590;
-  const cam=camAt([[0,OT_SX(0),y0,z0],[c("guild")-0.9,OT_SX(0),y0,z0],[c("guild")+0.8,OT_SX(1),y0,z0],[c("exams")-0.9,OT_SX(1),y0,z0],[c("exams")+0.8,OT_SX(2),y0,z0],
-    [cS-0.9,OT_SX(2),y0,z0],[cS+0.8,OT_SX(3),y0,z0],[pull,OT_SX(3),y0,z0],[pull+2.6,(OT_SX(0)+OT_SX(7))/2,533,0.6]],t);
-  const zo=clamp((z0-cam.z)/(z0-0.6),0,1);
-  setCam(ctx,S,cam);
-  ot_shelf(ctx,-400,3800,OT_SHELF);
-  OT_EX.forEach((e,i)=>{const a=fin(t,rev[i],0.7);if(a<=0)return;const x=OT_SX(i);glow(ctx,x,OT_SHELF-140,240,[255,214,160],0.16*a);
-    const o={a,t};if(i===0)o.p=clamp((t-c("clay")-4.4)/4.6,0,1);if(i===1)o.mark=fin(t,c("guild")+6.3,0.6);if(i===2)o.rank=fin(t,c("exams")+4.5,0.6);if(i===3)o.press=fin(t,cS+3.0,0.5);
-    ot_ex(ctx,e[0],x,OT_SHELF-(i===6?20:0),1+0.2*zo,o);
-    const gone=i<3?1-fin(t,rev[i+1]+0.3,0.8):1;if(i<4)OT_NOTES[i].forEach(([s,dx,dy,cid,d])=>withA(ctx,fin(t,c(cid)+d,0.5)*(1-zo)*gone,()=>ot_pill(ctx,x+dx,OT_SHELF+dy,s,i===3&&dx>0?OT_WAX:PARCH,{size:17})));
-    // the masters of the guild: three approvals, before the mark
-    if(i===1)[0,1,2].forEach(k=>withA(ctx,fin(t,c("guild")+5.2+k*0.3,0.3)*(1-zo)*gone,()=>{const mx=x-60+k*60,my=OT_SHELF-300;ctx.fillStyle="rgba(26,16,10,0.92)";ctx.beginPath();ctx.arc(mx,my,16,0,TAU);ctx.fill();ring(ctx,mx,my,16,OT_WAX,1,2);tick_(ctx,mx,my+1,20,OT_WAX,1);}));});
-  setScreen(ctx,S);
-  // where and when, while the camera is close
-  const tags=[[0,c("guild")-0.6],[c("guild")+0.4,c("exams")-0.6],[c("exams")+0.4,cS-0.6],[cS+0.4,pull]];
-  tags.forEach(([a0,a1],i)=>yearTag(ctx,110,110,OT_EX[i][3],CLAY,fin(t,a0,0.5)*(1-fin(t,a1,0.4))));
-  // the overview: every material is different; one idea runs through them all
-  if(zo>0){const sx=i=>W/2+(OT_SX(i)-cam.x)*cam.z,iT=c("idea");
-    OT_EX.forEach((e,i)=>{if(i>=4)withA(ctx,fin(t,rev[i]+0.2,0.5)*(1-fin(t,iT,0.4)),()=>ot_pill(ctx,sx(i),708,e[1],PARCH,{size:22}));
-      withA(ctx,fin(t,iT+0.3+i*0.12,0.4),()=>{const fl=0.75+0.25*Math.sin(t*3+i*1.7);ot_pill(ctx,sx(i),708,e[4],OT_MATCOL[i].map(v=>v*fl+255*(1-fl)*0.1),{size:22});});});
-    const th=clamp((t-iT-2.0)/1.3,0,1);if(th>0){const y=440,x0=sx(0)-60,x1=sx(7)+60;ctx.save();ctx.strokeStyle=rgba(OT_WAX,0.95);ctx.lineWidth=4;ctx.shadowColor=rgba(OT_WAX,0.9);ctx.shadowBlur=16;
-      ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(lerp(x0,x1,th),y);ctx.stroke();for(let i=0;i<8;i++){if(sx(i)<lerp(x0,x1,th)){ctx.beginPath();ctx.moveTo(sx(i),y);ctx.lineTo(sx(i),y+36);ctx.stroke();ctx.fillStyle=rgba(OT_WAX,1);ctx.beginPath();ctx.arc(sx(i),y,6,0,TAU);ctx.fill();}}ctx.restore();
-      const pu=((t-iT)*0.35)%1;if(th>=1)glow(ctx,lerp(x0,x1,pu),y,40,OT_WAX,0.8);
-      withA(ctx,fin(t,iT+2.6,0.5),()=>{ot_tag(ctx,960,360,"the same idea",OT_WAX,1,{size:26});ot_tag(ctx,960,790,"the materials changed",PARCH,1,{size:22});});}}
-  seriesTitle(ctx,S,t,B,"Older than the systems","why the concepts outlive every system",OT_WAX);
+/* ---------- 1. The till that kept the total ---------- */
+// the register's keys, in the picture: where the bartender's finger lands
+const bo_KX=i=>1180+(-125+i*50)*1.1,BO_KY=527;
+scene("till",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f),B=c("breath");histBg(ctx,S,t,{light:0.13});
+  bo_saloon(ctx,t);
+  // the evening passes: the wall clock runs on to closing time
+  const ffS=at("total",0.62),ff=fin(t,ffS,1.3);bo_clock(ctx,1700,150,58,(8.3+t*0.01+ff*2.6)%12);
+  withA(ctx,fin(t,at("total",0.8),0.5),()=>tag(ctx,1700,262,"closing time",BO_AMB,{align:"center",size:24}));
+  bo_counter(ctx,t);
+  // bottles and a glass on the bar
+  bo_bottle(ctx,1690,700,1.05,[110,160,100],t,1);bo_bottle(ctx,1770,700,1.15,[170,100,50],t,2);
+  ctx.save();const gg=ctx.createLinearGradient(1830,0,1880,0);gg.addColorStop(0,"rgba(220,235,255,0.35)");gg.addColorStop(0.5,"rgba(220,235,255,0.1)");gg.addColorStop(1,"rgba(220,235,255,0.3)");ctx.fillStyle=gg;ctx.beginPath();ctx.moveTo(1832,640);ctx.quadraticCurveTo(1834,690,1840,700);ctx.lineTo(1874,700);ctx.quadraticCurveTo(1880,690,1882,640);ctx.closePath();ctx.fill();
+  ctx.fillStyle="rgba(210,150,60,0.55)";ctx.beginPath();ctx.moveTo(1835,668);ctx.quadraticCurveTo(1857,672+2*Math.sin(t*2),1879,668);ctx.quadraticCurveTo(1878,690,1872,698);ctx.lineTo(1842,698);ctx.quadraticCurveTo(1836,690,1835,668);ctx.fill();ctx.restore();
+  yearTag(ctx,120,90,"1879 · Dayton, Ohio",CLAY,fin(t,0.4,0.6));
+  // the patent
+  bo_patent(ctx,1450,300,420,290,fin(t,at("ritty",0.42),0.7)*(1-fin(t,c("total")+0.4,0.8)),0.03);
+  // the sales, rung up one by one; then the rest of the evening, faster; then the day's total, read at closing time
+  const sales=[[at("ritty",0.8),0,5],[at("total",0.22),1,10],[at("total",0.33),3,25],[at("total",0.44),2,15],[at("total",0.55),4,50]];
+  let last=null,tot=0;sales.forEach(sl=>{if(t>=sl[0]-0.12){last=sl;}if(t>=sl[0]+0.25)tot+=sl[2];});
+  let press=last?[last[1],pulseAt(t,last[0]-0.08,0.36)]:null,tab=last&&t>=last[0]?BO_KEYS[last[1]]:(last&&sales.indexOf(last)>0?BO_KEYS[sales[sales.indexOf(last)-1][1]]:null),pop=last?fin(t,last[0],0.3):0;
+  let fk=-1;if(ff>0&&ff<1){const j=Math.floor(t*9),u=t*9-j;fk=j%6;press=[fk,u>0.35&&u<0.85?Math.sin(Math.PI*(u-0.35)/0.5):0];tab=BO_KEYS[fk];pop=1;}
+  tot+=Math.round((3845-105)*ease(ff));
+  const wT=c("wish"),rec=fin(t,wT,0.5),cnt=fin(t,at("wish",0.22),0.5),one=fin(t,at("wish",0.34),0.6);
+  bo_register(ctx,1180,700,1.1,{t,press,tab,pop,total:tot,hi:pulseAt(t,at("ritty",0.84),1.4)+0.6*one,keysHi:rec,tabHi:rec,dialHi:Math.max(cnt,pulseAt(t,at("total",0.8),1.6)),totHi:cnt+fin(t,at("total",0.8),0.4)*(1-fin(t,wT-0.2,0.4))});
+  // the bartender's hand: it comes in, rings up each sale, taps through the evening, and leaves at closing
+  // between presses it drops back, below the total, so the running total stays in view
+  const wp=[[sales[0][0]-1.4,-160,600]];sales.forEach(([ts,k])=>{wp.push([ts-0.28,bo_KX(k),BO_KY-14]);wp.push([ts+0.12,bo_KX(k),BO_KY-10]);wp.push([ts+0.5,bo_KX(k)-90,BO_KY+100]);});
+  wp.push([ffS-0.25,bo_KX(1),BO_KY-14]);wp.push([ffS+1.35,bo_KX(3),BO_KY-14]);wp.push([ffS+1.9,bo_KX(1)-90,BO_KY+110]);wp.push([wT-0.6,bo_KX(1)-96,BO_KY+112]);wp.push([wT+0.3,-220,620]);
+  let hx=wp[0][1],hy=wp[0][2];for(let i=0;i<wp.length-1;i++){if(t>=wp[i][0]&&t<wp[i+1][0]){const u=ease((t-wp[i][0])/(wp[i+1][0]-wp[i][0]));hx=lerp(wp[i][1],wp[i+1][1],u);hy=lerp(wp[i][2],wp[i+1][2],u);}}if(t>=wp[wp.length-1][0]){hx=wp[wp.length-1][1];hy=wp[wp.length-1][2];}
+  if(fk>=0){const j=Math.floor(t*9),u=t*9-j,kp=(j+5)%6;hx=lerp(bo_KX(kp),bo_KX(fk),ease(Math.min(1,u*3)));hy=BO_KY-14;}
+  if(press&&press[1]>0&&Math.abs(hx-bo_KX(press[0]))<30)hy=BO_KY-2+9*press[1];else if(press&&press[1]>0)hy+=0;
+  hy+=Math.sin(t*1.7)*2.5;bo_hand(ctx,hx,hy,1.1,t,1);
+  withA(ctx,fin(t,at("ritty",0.84),0.5)*(1-fin(t,c("total"),0.6)),()=>tag(ctx,1180,790,"the cash register",BO_BRASS,{align:"center",size:28}));
+  // recording and counting, in one place
+  withA(ctx,rec,()=>{tag(ctx,470,470,"recording: each sale",BO_W,{size:28});arrowTo(ctx,830,462,1050,300,BO_W,0.9,{bend:-0.15,head:16});arrowTo(ctx,830,482,1030,550,BO_W,0.9,{bend:0.1,head:16});});
+  withA(ctx,cnt,()=>{tag(ctx,1400,470,"counting: the day's total",BO_R,{size:28});arrowTo(ctx,1390,466,1250,420,BO_R,0.9,{head:16});});
+  withA(ctx,one,()=>{ctx.save();ctx.strokeStyle=rgba(BO_ACC,0.9);ctx.lineWidth=3;ctx.shadowColor=rgba(BO_ACC,0.9);ctx.shadowBlur=16;ctx.setLineDash([12,10]);ctx.lineDashOffset=-t*20;rr(ctx,970,110,420,606,26);ctx.stroke();ctx.restore();
+    tag(ctx,1180,110,"in one place",BO_ACC,{align:"center",size:26});});
+  seriesTitle(ctx,S,t,B,"Both at once","one database that writes and reads",BO_ACC);
   fadeIn(ctx,S,t);vign(ctx,S);});
 
-/* ---------- 2. The model underneath ---------- */
-// five exhibits, and the same parts in each
-const OT_COLS=[["lock","Guild masterpiece",["the guild's masters","a journeyman","master locksmith","the masterpiece","1523","the guild's mark"]],
-  ["scroll","Imperial examination",["the examiners","the candidate","passed, with a rank","the examination","1706","the official list"]],
-  ["licence","Licence to teach",["the chancellor","a new master","may teach","an examination","1290","the wax seal"]],
-  ["diploma","Diploma",["a university","a graduate","Bachelor of Arts","assessments","1950","a signature"]],
-  ["signed","Signed credential",["a university","a learner","Data Visualisation","an assessed project","2026","the digital key"]]];
-const OT_PARTS=["issuer","holder","claim","evidence","date","checked by"],OT_CX=i=>390+i*330,OT_RY=r=>r<5?412+r*60:728;
-// the conceptual model: where each box sits, and the row it grows from
-const OT_CM={issuer:[470,310,"Issuer",0],holder:[470,740,"Holder",1],cred:[960,510,"Credential",2],evidence:[1450,740,"Evidence",3],verifier:[1450,310,"Verifier",5]};
-function ot_concept(ctx,t,o){o=o||{};const a=o.a==null?1:o.a,m=o.m==null?1:o.m,s=o.s||1.35,sp=o.sp||{},hi=o.hi||{};if(a<=0.01)return;const ox=o.ox||0,oy=o.oy||0,k=o.k||1;
-  const P=q=>{const e=OT_CM[q],fx=o.from?o.from(q):[e[0],e[1]];return[lerp(fx[0],ox+e[0]*k+(1-k)*960,ease(m)),lerp(fx[1],oy+e[1]*k+(1-k)*540,ease(m))];};
-  const E={};Object.keys(OT_CM).forEach(q=>{const[x,y]=P(q);E[q]={x,y,name:OT_CM[q][2],col:OT_GOLD,s:s*k,a:a*(sp[q]==null?1:sp[q]),hi:hi[q]||0};});
-  E.cred.attrs=[["claim",""],["date",""],["status",""]];E.cred.attrA=o.attrA==null?1:o.attrA;
-  const B={};Object.keys(E).forEach(q=>B[q]=entBox(ctx,E[q]));const vA=a*fin(m,0.7,0.3)*(o.vA==null?1:o.vA);
-  if(vA>0.01){ot_verb(ctx,B.issuer,B.cred,"issues",OT_GOLD,vA*Math.min(E.issuer.a,E.cred.a),1,{size:21*k});ot_verb(ctx,B.holder,B.cred,"holds",OT_GOLD,vA*Math.min(E.holder.a,E.cred.a),1,{size:21*k});
-    ot_verb(ctx,B.cred,B.evidence,"rests on",OT_GOLD,vA*Math.min(E.evidence.a,E.cred.a),1,{size:21*k});ot_verb(ctx,B.verifier,B.cred,"checks",OT_GOLD,vA*Math.min(E.verifier.a,E.cred.a),1,{size:21*k});}
-  Object.keys(E).forEach(q=>ent(ctx,E[q]));
-  // the status's three values, under the credential
-  const st=a*(o.stA==null?1:o.stA);if(st>0.01){const b=B.cred,y=b.y+b.h/2+30*k;withA(ctx,st,()=>{[["valid",GOOD],["expired",SOFT],["revoked",BAD]].forEach(([s_,col],i)=>ot_pill(ctx,b.x+(i-1)*124*k,y,s_,col,{size:20*k}));});}
-  return B;}
-scene("model",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");histBg(ctx,S,t,{light:0.1});
-  const cI=c("issuer"),cH=c("holder"),cE=c("evidence"),cV=c("verify"),cSt=c("standard"),cO=c("outlast");
-  const m=fin(t,cSt-1.5,1.9),bgm=fin(t,cSt-1.2,2.0);withA(ctx,bgm,()=>{setScreen(ctx,S);bg2(ctx);});setScreen(ctx,S);
-  // when each row lights, and when each value appears (column by column, as the narration names them)
-  const rowT=[cI+0.3,cH+0.3,cH+1.5,cE+0.3,cE+4.1,cV+0.3],valT=[[cI+1.6,cI+2.3,cI+3.3,cI+3.5,cI+3.7],[cH+0.5,cH+0.6,cH+0.7,cH+0.8,cH+0.9],[cH+1.7,cH+1.8,cH+1.9,cH+2.0,cH+2.1],
-    [cE+1.4,cE+2.2,cE+2.4,cE+2.6,cE+3.1],[cE+4.2,cE+4.3,cE+4.4,cE+4.5,cE+4.6],[cV+0.9,cV+1.1,cV+1.8,cV+2.6,cV+4.2]];
-  const tbl=1-fin(t,cSt-1.6,1.0);
-  if(tbl>0)withA(ctx,tbl,()=>{
-    ctx.fillStyle="rgba(24,15,9,0.55)";rr(ctx,60,366,1810,470,18);ctx.fill();
-    OT_COLS.forEach(([k,name],i)=>{const x=OT_CX(i),a=fin(t,0.2+i*0.18,0.6);glow(ctx,x,200,150,[255,214,160],0.12*a);ot_ex(ctx,k,x,300-(k==="signed"?6:0),0.66,{a,t});
-      withA(ctx,fin(t,c("parts")+0.4+i*0.15,0.5),()=>T(ctx,name,x,346,{w:800,size:23,align:"center",color:rgba(k==="signed"?OT_GOLD:PARCH,1)}));});
-    OT_PARTS.forEach((p,r)=>{const y=OT_RY(r),on=fin(t,rowT[r],0.4),hot=pulseAt(t,rowT[r],1.6);
-      if(on>0){withA(ctx,on,()=>{ctx.fillStyle=rgba(OT_WAX,0.10+0.14*hot);rr(ctx,70,y-28,1790,50,10);ctx.fill();ctx.strokeStyle=rgba(OT_WAX,0.35+0.5*hot);ctx.lineWidth=1.5;rr(ctx,70,y-28,1790,50,10);ctx.stroke();});}
-      T(ctx,p,222,y+9,{w:800,size:26,align:"right",color:on>0?rgba(mix(PARCH,OT_WAX,on),0.6+0.4*on):rgba(PARCH,0.22*fin(t,c("parts")+1.4,0.8))});
-      OT_COLS.forEach((col,i)=>withA(ctx,fin(t,valT[r][i],0.4),()=>T(ctx,col[2][r],OT_CX(i),y+8,{w:700,size:23,align:"center",color:r===5?rgba(OT_WAX,1):rgba(INK,0.95)})));});
-    // "look closely": a lens drifts over the columns
-    const lu=clamp((t-c("parts")-0.6)/3.2,0,1);if(lu>0&&lu<1)ot_lens(ctx,lerp(300,1760,ease(lu)),210+Math.sin(lu*9)*20,56,PARCH,Math.sin(Math.PI*lu));
-    // checking: by the seal, by the signature, by the key
-    [[2,cV+1.8],[3,cV+2.6],[4,cV+4.2]].forEach(([i,t0])=>{const u=clamp((t-t0+0.4)/1.0,0,1);if(u>0&&u<1)ot_lens(ctx,OT_CX(i)+40,236,44,OT_WAX,Math.sin(Math.PI*u));ot_mark(ctx,OT_CX(i)+118,252,true,fin(t,t0+0.4,0.4),16);});
-    // status: valid, expired, revoked
-    const sa=fin(t,cV+5.2,0.4);withA(ctx,sa,()=>{const y=800;T(ctx,"status",222,y+9,{w:800,size:26,align:"right",color:rgba(mix(PARCH,OT_WAX,0.7),1)});
-      ot_pill(ctx,340,y,"valid",GOOD,{size:22});withA(ctx,fin(t,cV+5.4,0.4),()=>ot_pill(ctx,500,y,"expired",SOFT,{size:22}));withA(ctx,fin(t,cV+6.3,0.4),()=>{ot_pill(ctx,680,y,"revoked",BAD,{size:22});T(ctx,"some expire · a few are revoked",790,y+8,{w:600,size:22,color:rgba(SOFT,1)});});});});
-  // the materials, kept small at the top while the model forms; they fade, and the model stays
-  const fade=fin(t,cO+1.0,2.2);
-  if(m>0){withA(ctx,m*(1-fade),()=>{ctx.fillStyle="rgba(90,62,40,0.7)";ctx.fillRect(380,170,1160,6);OT_EX.forEach((e,i)=>{const x=440+i*148,d=clamp((t-cO-1.0-i*0.12)/1.4,0,1);
-      withA(ctx,1-d,()=>ot_ex(ctx,e[0],x,170-d*30,0.3,{t}));if(d>0&&d<1)for(let k=0;k<10;k++){ctx.fillStyle=rgba(OT_MATCOL[i],0.6*(1-d));ctx.beginPath();ctx.arc(x+(hash(k,i)-0.5)*90,150-d*80*hash(k,i+3)-hash(k,9)*60,2+hash(k,5)*2,0,TAU);ctx.fill();}});});
-    // the model grows from the rows of the table
-    const from=q=>[222,OT_RY(OT_CM[q][3])];const lit=fin(t,cO+0.6,1.2)+0.35*Math.sin(t*1.6)*fin(t,B,1);
-    const Bx=ot_concept(ctx,t,{a:m,m,from,hi:{cred:lit*0.8,issuer:lit*0.5,holder:lit*0.5,evidence:lit*0.5,verifier:lit*0.5}});
-    // today's standard, word for word
-    withA(ctx,fin(t,cSt+0.6,0.6),()=>{tag(ctx,1510,110,"W3C Verifiable Credentials",OT_STD,{size:20});T(ctx,"today's standard for digital credentials",1510,160,{w:600,size:17,color:rgba(SOFT,1)});});
-    const W3=[["issuer","issuer",-1,4.2],["holder","holder",-1,4.8],["verifier","verifier",1,5.4],["cred","claims",1,6.1],["evidence","evidence",1,6.8]];
-    if(Bx)W3.forEach(([q,s_,sd,d])=>{const b=Bx[q],a=fin(t,cSt+d,0.4),hot=pulseAt(t,cSt+d,1.2);if(a<=0)return;const x=q==="cred"?b.x+b.w/2+96:b.x+sd*(b.w/2+92),y=q==="cred"?b.y+b.h/2-122:b.y;
-      withA(ctx,a,()=>{if(hot)glow(ctx,x,y,70,OT_STD,0.5*hot);ctx.strokeStyle=rgba(OT_STD,0.6);ctx.lineWidth=1.6;ctx.setLineDash([4,6]);ctx.beginPath();ctx.moveTo(x-sd*48,y);ctx.lineTo(q==="cred"?b.x+b.w/2-8:b.x+sd*b.w/2,y);ctx.stroke();ctx.setLineDash([]);ot_pill(ctx,x,y,s_,OT_STD,{size:23});});});
-    withA(ctx,fin(t,cO+3.1,0.8),()=>ot_tag(ctx,960,120,"a conceptual model: no material, no technology",OT_GOLD,1,{size:24}));}
+/* ---------- 2. The distance ---------- */
+scene("distance",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f);setScreen(ctx,S);bg2(ctx);
+  const ap=fin(t,c("apart")+0.1,0.7),wr=clamp((t-c("path")-0.2)/2.2,0,1);
+  // writing: the app and its own database
+  withA(ctx,ap,()=>{tag(ctx,350,196,"writing",BO_W,{align:"center",size:26});bo_phone(ctx,105,370,1.0,{screen:"issue",press:Math.sin(t*6)>0.6&&wr>0&&wr<1});
+    bo_store(ctx,205,240,290,260,"rows",{title:"the app's database",ts:23,n:6,p:0.4+0.6*wr,t,hi:pulseAt(t,c("path")+0.2,1.4)});
+    if(wr>0)packets(ctx,t,[P(165,370),P(210,370)],0.45,0.5,c("path"),BO_W,13,1,c("path")+2.3);});
+  // reading: the answer, far away
+  const sunA=fin(t,at("path",0.86),0.8);
+  withA(ctx,ap,()=>{tag(ctx,1650,196,"reading",BO_R,{align:"center",size:26});bo_answer(ctx,1460,240,380,260,"the answer",sunA>0.5?"ready tomorrow":"…",BO_R,t,0.35+0.65*sunA);});
+  withA(ctx,ap*(1-fin(t,c("path"),0.8)),()=>{ctx.save();ctx.strokeStyle=rgba(SOFT,0.45);ctx.lineWidth=2;ctx.setLineDash([6,12]);ctx.beginPath();ctx.moveTo(510,370);ctx.lineTo(1445,370);ctx.stroke();ctx.restore();tag(ctx,975,370,"apart",SOFT,{align:"center",size:24});});
+  // overnight, a copy travels to the lakehouse and gets refined
+  const mo=fin(t,at("path",0.3),0.8);bo_moon(ctx,605,118,40,mo*(1-0.5*sunA),t);
+  withA(ctx,mo,()=>T(ctx,"overnight",605,206,{w:700,size:22,align:"center",color:rgba([190,205,255],1)}));
+  const cp0=at("path",0.36);if(t>cp0-0.1)packets(ctx,t,bez(P(495,370),P(560,250),P(660,250),P(722,370),24),0.3,1.2,cp0,BO_W,17,1,cp0+2.2);
+  const lit=[fin(t,at("path",0.5),0.6),fin(t,at("path",0.62),0.6),fin(t,at("path",0.74),0.6)],la=fin(t,at("path",0.4),0.7);
+  bo_lake(ctx,742,262,200,260,24,{a:la,lit});
+  if(t>at("path",0.55))packets(ctx,t,[P(942,440),P(966,440)],0.35,0.4,at("path",0.55),LAYER.bronze,11,la,at("path",0.72));
+  if(t>at("path",0.67))packets(ctx,t,[P(1166,440),P(1190,440)],0.35,0.4,at("path",0.67),LAYER.silver,11,la,at("path",0.84));
+  bo_sun(ctx,1650,104,32,t,sunA);
+  // but some questions can't wait
+  const eA=fin(t,at("now",0.18),0.6),wA=fin(t,at("now",0.44),0.6),wait=fin(t,at("now",0.05),0.6);
+  withA(ctx,wait,()=>{glow(ctx,1650,370,220,BO_AMB,0.12+0.06*Math.sin(t*3));T(ctx,"tomorrow, 06:00",1650,538,{f:"mono",w:500,size:24,align:"center",color:rgba(BO_AMB,1)});});
+  withA(ctx,eA,()=>{glass(ctx,160,642,620,170,20,BO_AMB,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.94)"});ICON.uni(ctx,208,688);T(ctx,"An employer",250,696,{w:800,size:28});T(ctx,"Is award A-1042 still valid?",190,744,{w:600,size:24,color:rgba(SOFT,1)});
+    T(ctx,"now?",190,792,{w:800,size:30,color:rgba(BO_AMB,1)});bo_hourglass(ctx,720,726,1.5,(t-at("now",0.18))/13,BO_AMB,1,t);
+    arrowTo(ctx,780,690,1540,560,BO_AMB,0.55,{bend:-0.12,dash:[8,10],p:fin(t,at("now",0.24),0.8),nohead:true});});
+  withA(ctx,wA,()=>{glass(ctx,860,642,740,170,20,TRUST,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.94)"});T(ctx,"Aisha's wallet",890,696,{w:800,size:28});
+    for(let i=0;i<4;i++){const on=i<2;ctx.fillStyle=on?rgba(TRUST,0.9):"rgba(160,190,240,0.1)";rr(ctx,1120+i*46,668,38,42,6);ctx.fill();if(!on){ctx.strokeStyle="rgba(160,190,240,0.45)";ctx.lineWidth=1.4;rr(ctx,1120+i*46,668,38,42,6);ctx.stroke();}}
+    T(ctx,"2 of 4 microcredentials towards a graduate certificate",890,746,{w:600,size:23,color:rgba(SOFT,1)});T(ctx,"now?",890,794,{w:800,size:30,color:rgba(BO_AMB,1)});bo_hourglass(ctx,1540,690,1.5,(t-at("now",0.44))/13,BO_AMB,1,t);
+    arrowTo(ctx,1480,642,1620,560,BO_AMB,0.55,{bend:0.1,dash:[8,10],p:fin(t,at("now",0.5),0.8),nohead:true});});
+  // that distance
+  bo_span(ctx,350,1650,600,BO_ACC,"the distance",fin(t,c("appeal")+0.2,0.6),fin(t,c("appeal")+0.2,1.2));
   vign(ctx,S);});
 
-/* ---------- 3. Every system has a model inside ---------- */
-const OT_CARD=i=>[85+i*355,130],OT_CW=330,OT_CH=470;
-scene("inside",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
-  const cF=c("five"),cL=c("list"),cB=c("bought"),cA=c("adopt"),cV=c("vendors");
-  const holdT=[cL+1.4,cL+3.4,cL+5.0,cL+6.6,cB+3.3],openT=cB+2.4;
-  withA(ctx,fin(t,cF+0.2,0.6),()=>tag(ctx,85,96,"At the university",CYAN,{size:20}));
-  const tops=[];
-  OT_KEYS.forEach((k,i)=>{const[x,y]=OT_CARD(i);
-    if(i<4){const a=fin(t,cF+0.5+i*0.3,0.5),ha=fin(t,holdT[i],0.5),hot=pulseAt(t,cA+0.3+i*0.3,1.4);
-      tops[i]=ot_sysCard(ctx,k,x,y,OT_CW,OT_CH,{a,holdsA:ha,modelA:fin(t,holdT[i]+0.3,0.6),hi:hot,ms:1.05});}
-    else{// the fifth: an empty place, then a vendor's box that slides in and opens
-      withA(ctx,fin(t,cF+1.8,0.5)*(1-fin(t,cB,0.4)),()=>{ctx.strokeStyle=rgba(SOFT,0.4);ctx.lineWidth=2;ctx.setLineDash([8,8]);rr(ctx,x,y,OT_CW,OT_CH,18);ctx.stroke();ctx.setLineDash([]);T(ctx,"?",x+OT_CW/2,y+OT_CH/2+20,{w:800,size:60,align:"center",color:rgba(SOFT,0.5)});});
-      const sl=ease(clamp((t-cB)/1.3,0,1)),bx=lerp(2000,x+15,sl),op=clamp((t-openT)/0.9,0,1),ca=fin(t,openT+0.4,0.6),hot=pulseAt(t,cA+1.5,1.4);
-      tops[i]=ot_sysCard(ctx,k,x,y,OT_CW,OT_CH,{a:ca,holdsA:fin(t,holdT[4],0.5),modelA:fin(t,holdT[4]+0.3,0.6),hi:hot,hiTop:pulseAt(t,cB+5.2,1.6),ms:1.05});
-      ot_crate(ctx,bx,y+OT_CH-260,OT_CW-30,260,op,OT_SYS.short.c,fin(t,cB,0.3)*(1-fin(t,openT+0.5,0.6)));
-      withA(ctx,fin(t,cB+5.0,0.5),()=>{ot_pill(ctx,x+OT_CW/2,y+OT_CH+34,"learners, called “customers”",OT_SYS.short.c,{size:20});});}});
-  // whether you look at it or not: five models, and none of them ours
-  const ourA=fin(t,cA+2.0,0.6),fill=fin(t,cV+0.6,1.2);withA(ctx,ourA,()=>{ctx.save();ctx.strokeStyle=rgba(mix(OT_GOLD,OT_WAX,fill),0.75);ctx.lineWidth=2.4;ctx.setLineDash([10,8]);rr(ctx,640,660,640,130,16);ctx.stroke();ctx.restore();
-    withA(ctx,1-fill,()=>{T(ctx,"our own model",960,716,{w:800,size:28,align:"center",color:rgba(OT_GOLD,0.9)});T(ctx,"not written down",960,752,{w:600,size:20,align:"center",color:rgba(SOFT,1)});});});
-  // if you don't, the vendors' words fill it
-  const land=[[760,712,-0.06],[960,706,0.04],[1160,714,-0.03],[860,760,0.05],[1060,762,-0.05]];
-  OT_KEYS.forEach((k,i)=>{const u=ease(clamp((t-cV-0.2-i*0.18)/1.1,0,1));if(u<=0||!tops[i])return;const b=tops[i].top,[tx,ty,rot]=land[i];
-    withA(ctx,u,()=>{ctx.save();ctx.translate(lerp(b.x,tx,u),lerp(b.y,ty,u));ctx.rotate(rot*u);T(ctx,OT_SYS[k].m[0],0,9,{w:800,size:26,align:"center",color:rgba(OT_SYS[k].c,1)});ctx.restore();});});
-  withA(ctx,fin(t,cV+1.6,0.6),()=>ot_tag(ctx,960,836,"If you don't model your business, your vendors will.",OT_WAX,1,{size:26}));
+/* ---------- 3. Two engines, one place ---------- */
+scene("engines",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f);setScreen(ctx,S);bg2(ctx);
+  const L=c("lake"),aA=1-fin(t,L-0.6,0.7),bA=fin(t,L-0.2,0.8);
+  // one database, two stores inside it: rows for writing, columns for reading, kept in step
+  withA(ctx,aA,()=>{const oa=fin(t,c("one")-0.2,0.8),sp=fin(t,at("two",0.1),1.1);
+    withA(ctx,oa,()=>{glow(ctx,960,480,520,BO_ACC,0.08);glass(ctx,510,150,900,660,34,BO_ACC,{glow:30,ea:0.85,fill:"rgba(8,16,30,0.7)"});dbGlyph(ctx,590,210,BO_ACC,0.9);T(ctx,"one database",630,222,{w:800,size:34,color:rgba(BO_ACC,1)});
+      tag(ctx,230,300,"the app writes",BO_W,{align:"center",size:26});bo_phone(ctx,230,470,1.1,{screen:"issue",press:Math.sin(t*5)>0.5});
+      tag(ctx,1680,300,"a report reads",BO_R,{align:"center",size:26});bo_answer(ctx,1520,370,320,210,"the report",null,BO_R,t,1);});
+    const rx=lerp(760,560,sp),cx=lerp(760,1010,sp),rH=pulseAt(t,at("two",0.34),1.4),cH=pulseAt(t,at("two",0.52),1.4);
+    bo_store(ctx,rx,270,350,470,"rows",{a:oa,n:8,t,hi:rH,title:sp>0.5?"rows":null,sub:sp>0.5?"for writing":null,ts:34,ss:24});
+    bo_store(ctx,cx,270,350,470,"cols",{a:oa*(0.55+0.45*sp),n:7,t,hi:cH,title:sp>0.5?"columns":null,sub:sp>0.5?"for reading":null,ts:34,ss:24});
+    withA(ctx,fin(t,at("two",0.08),0.6),()=>tag(ctx,1250,212,"two copies inside",BO_ACC,{align:"center",size:24}));
+    if(oa>0.5){packets(ctx,t,[P(300,470),P(rx+4,470)],0.5,0.9,0,BO_W,13,oa);packets(ctx,t,[P(cx+346,480),P(1516,480)],0.6,0.9,0.3,BO_R,13,oa);}
+    const ks=fin(t,at("two",0.62),0.6);if(ks>0){arrowTo(ctx,914,470,1004,470,BO_ACC,ks,{head:16,lw:3});[560,620,680].forEach((y,i)=>packets(ctx,t,[P(912,y),P(1008,y)],0.7,0.6,at("two",0.62)+i*0.23,BO_ACC,11,ks));
+      withA(ctx,ks,()=>tag(ctx,960,770,"kept in step, by the database",BO_ACC,{align:"center",size:26}));}});
+  // or: an operational database inside the lakehouse, tables synced both ways
+  withA(ctx,bA,()=>{ctx.save();ctx.strokeStyle="rgba(170,200,245,0.3)";ctx.lineWidth=1.8;ctx.setLineDash([10,8]);rr(ctx,450,270,1400,560,28);ctx.stroke();ctx.restore();tag(ctx,1150,270,"the lakehouse",[214,228,255],{align:"center",size:26});
+    bo_phone(ctx,220,540,1.1,{screen:"issue",press:Math.sin(t*5)>0.5});tag(ctx,220,380,"the app writes",BO_W,{align:"center",size:26});packets(ctx,t,[P(290,540),P(484,540)],0.5,0.8,0,BO_W,13,1);
+    const oa=fin(t,at("lake",0.12),0.7);bo_store(ctx,490,340,300,400,"rows",{a:oa,title:"operational",sub:"database",ts:30,ss:24,n:6,t,hi:pulseAt(t,at("lake",0.2),1.4)});
+    bo_lake(ctx,910,380,284,320,30,{a:fin(t,at("lake",0.3),0.7),frame:false});
+    const sy=fin(t,at("lake",0.7),0.6);if(sy>0){arrowTo(ctx,796,420,900,420,BO_W,sy,{head:14});packets(ctx,t,[P(796,440),P(906,440)],0.5,0.6,at("lake",0.7),BO_W,12,sy);
+      ctx.save();ctx.globalAlpha*=sy;ctx.strokeStyle=rgba(BO_M,0.8);ctx.lineWidth=2.4;ctx.setLineDash([8,8]);ctx.lineDashOffset=t*30;ctx.beginPath();ctx.moveTo(1678,704);ctx.lineTo(1678,770);ctx.lineTo(640,770);ctx.lineTo(640,746);ctx.stroke();ctx.restore();
+      arrowTo(ctx,640,768,640,748,BO_M,sy,{head:14});packets(ctx,t,[P(1678,704),P(1678,770),P(640,770),P(640,748)],0.45,1.6,at("lake",0.72),BO_M,12,sy);
+      withA(ctx,fin(t,at("lake",0.78),0.5),()=>tag(ctx,1160,770,"synced both ways",BO_ACC,{align:"center",size:26}));}});
+  // the name
+  const hA=fin(t,at("htap",0.3),0.6);withA(ctx,hA,()=>{glass(ctx,560,70,800,150,24,BO_ACC,{glow:22,ea:0.9,fill:"rgba(7,12,24,0.95)"});T(ctx,"HTAP",960,140,{w:800,size:60,align:"center",color:rgba(BO_ACC,1)});
+    const ex=fin(t,at("htap",0.45),0.8),parts=[["hybrid ",INK],["transactional",BO_W],[" and ",INK],["analytical",BO_R],[" processing",INK]],full=parts.map(p=>p[0]).join(""),wT=tw(ctx,full,26,700);
+    withA(ctx,ex,()=>{let x=960-wT/2;parts.forEach(([s,col])=>{T(ctx,s,x,192,{w:700,size:26,color:rgba(col,1)});x+=tw(ctx,s,26,700);});});});
   vign(ctx,S);});
 
-/* ---------- 4. Where meanings meet ---------- */
-const OT_RING=i=>{const an=(-90+72*i)*Math.PI/180;return[960+520*Math.cos(an),450+285*Math.sin(an)];};
-const OT_PAIRS=[[0,1],[1,2],[2,3],[3,4],[4,0],[0,2],[0,3],[1,3],[1,4],[2,4]],OT_SLIP=[3,6,8];
-function ot_counter(ctx,x,y,n,a,o){o=o||{};if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,300,128,18,o.col||CYAN,{glow:14,ea:0.75,fill:"rgba(7,12,24,0.94)"});T(ctx,"translations",x+24,y+40,{w:700,size:20,color:rgba(SOFT,1)});
-  T(ctx,String(n),x+24,y+106,{w:800,size:60,color:rgba(o.col||CYAN,1)});if(o.was)withA(ctx,o.wasA,()=>{T(ctx,o.was,x+170,y+100,{w:800,size:40,color:rgba(BAD,0.9)});ctx.strokeStyle=rgba(BAD,1);ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(x+160,y+86);ctx.lineTo(x+226,y+76);ctx.stroke();});});}
-scene("meet",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
-  const cP=c("pairs"),cM=c("mars"),cB=c("both"),cH=c("hub");
-  const ringA=Math.max(1-fin(t,cM-0.4,0.6),fin(t,cH-0.8,0.8)),marsA=fin(t,cM-0.2,0.7)*(1-fin(t,cH-0.9,0.7));
-  if(marsA>0)withA(ctx,marsA,()=>{ot_stars(ctx,t,110);});
-  // the ring: five systems, joined pair by pair
-  if(ringA>0)withA(ctx,ringA,()=>{const pa=1-fin(t,cH+0.4,0.9);let n=0;
-    OT_PAIRS.forEach(([i,j],q)=>{const t0=cP+0.6+q*0.32,p=clamp((t-t0)/0.35,0,1);if(p<=0)return;n++;const A=OT_RING(i),Bp=OT_RING(j),slip=OT_SLIP.includes(q)&&t>cP+4.6,fl=slip?0.5+0.5*Math.abs(Math.sin(t*7+q)):0;
-      const col=slip?mix(SOFT,BAD,fl):SOFT;withA(ctx,pa,()=>{ctx.save();ctx.strokeStyle=rgba(col,0.55+0.4*fl);ctx.lineWidth=2+1.5*fl;ctx.beginPath();ctx.moveTo(A[0],A[1]);ctx.lineTo(lerp(A[0],Bp[0],p),lerp(A[1],Bp[1],p));ctx.stroke();ctx.restore();
-        if(p>=1){const mx=(A[0]+Bp[0])/2,my=(A[1]+Bp[1])/2;ctx.save();ctx.translate(mx,my);ctx.rotate(Math.PI/4);ctx.fillStyle="rgba(7,12,24,0.95)";ctx.fillRect(-9,-9,18,18);ctx.strokeStyle=rgba(slip?BAD:CYAN,0.9);ctx.lineWidth=2;ctx.strokeRect(-9,-9,18,18);ctx.restore();
-          if(slip&&fl>0.2)withA(ctx,fl,()=>T(ctx,"≠",mx+18,my-12,{w:800,size:30,color:rgba(BAD,1)}));}});});
-    // five spokes to one shared model
-    const hubA=fin(t,cH+0.8,0.7);OT_KEYS.forEach((k,i)=>{const P=OT_RING(i),p=clamp((t-cH-1.2-i*0.3)/0.5,0,1);if(p<=0)return;arrowTo(ctx,P[0]+(960-P[0])*0.12,P[1]+(450-P[1])*0.12,lerp(P[0],960,0.78),lerp(P[1],450,0.78),OT_GOLD,0.95,{p,lw:3.2,nohead:true});
-      if(p>=1){const mx=lerp(P[0],960,0.46),my=lerp(P[1],450,0.46);ctx.save();ctx.translate(mx,my);ctx.rotate(Math.PI/4);ctx.fillStyle="rgba(7,12,24,0.95)";ctx.fillRect(-9,-9,18,18);ctx.strokeStyle=rgba(OT_GOLD,1);ctx.lineWidth=2;ctx.strokeRect(-9,-9,18,18);ctx.restore();}});
-    ot_hub(ctx,960,450,118,t,hubA);
-    OT_KEYS.forEach((k,i)=>{const P=OT_RING(i);ot_node(ctx,k,P[0],P[1],fin(t,0.2+i*0.12,0.5),pulseAt(t,cP+0.2,1.2)*0.5);});
-    const nPairs=OT_PAIRS.filter((q,j)=>t>cP+0.6+j*0.32+0.2).length,drop=fin(t,cH+3.5,0.6);
-    ot_counter(ctx,1580,58,drop>0.5?5:nPairs,fin(t,cP+0.5,0.5),{col:drop>0.5?OT_GOLD:CYAN,was:"10",wasA:drop});
-    withA(ctx,fin(t,cP+4.8,0.5)*(1-fin(t,cM-0.6,0.4)),()=>ot_tag(ctx,960,812,"each translation: a place where meaning can slip",BAD,1,{size:22}));
-    withA(ctx,fin(t,cH+5.8,0.6),()=>ot_tag(ctx,960,812,"one place where the meaning is written down",OT_GOLD,1,{size:24}));});
-  // 1999: the spacecraft lost at Mars
-  if(marsA>0)withA(ctx,marsA,()=>{yearTag(ctx,110,110,"1999 · Mars",CLAY,1);const mx=1420,my=540,r=200;ot_mars(ctx,mx,my,r,t);
-    // the paths: planned, at a safe height, and actual, too low
-    const path=(alt,u,end)=>{const an=lerp(-2.6,end||-0.7,u),rr_=r+(alt<50?alt-20*u*u:alt)+(1-u)*260*(1-u);return[mx+Math.cos(an)*rr_,my+Math.sin(an)*rr_];};
-    const drawPath=(alt,col,dash,p,end)=>{ctx.save();ctx.strokeStyle=col;ctx.lineWidth=3;if(dash)ctx.setLineDash([10,9]);ctx.beginPath();for(let k=0;k<=40*p;k++){const q=path(alt,k/40,end);k?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]);}ctx.stroke();ctx.restore();};
-    drawPath(95,"rgba(220,230,255,0.6)",true,fin(t,cM+0.2,1.0),0.1);const up=clamp((t-cM-0.3)/2.6,0,1);drawPath(18,rgba(BAD,0.9),false,up);
-    const q=path(18,up),q2=path(18,Math.min(1,up+0.02)),lost=fin(t,cM+2.7,0.5);ot_craft(ctx,q[0],q[1],1.1,Math.atan2(q2[1]-q[1],q2[0]-q[0]),1-lost);
-    if(t>cM+2.6&&t<cM+3.6)glow(ctx,q[0],q[1],90,[255,160,120],0.8*(1-fin(t,cM+2.8,0.8)));
-    withA(ctx,fin(t,cM+3.0,0.5),()=>{const e=path(18,1);ot_pill(ctx,e[0]+96,e[1]+6,"signal lost",BAD,{size:21});const pl=path(95,0.45,0.1);ot_pill(ctx,pl[0]+60,pl[1]-34,"planned",[220,230,255],{size:21});const ac=path(18,0.42);ot_pill(ctx,ac[0]-40,ac[1]+46,"actual: too low",BAD,{size:21});});
-    // two teams, two units
-    const card=(y,a,title,verb,unit,col,ok)=>withA(ctx,a,()=>{glass(ctx,110,y,600,160,18,col,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.94)"});T(ctx,title,140,y+44,{w:700,size:22,color:rgba(SOFT,1)});T(ctx,verb,140,y+80,{w:600,size:20,color:rgba(SOFT,1)});T(ctx,unit,140,y+132,{w:800,size:40,color:rgba(col,1)});ot_mark(ctx,670,y+40,true,ok,20);});
-    card(230,fin(t,cM+3.7,0.5),"One team's software","gave the thrusters' push in","pound-force seconds",[255,190,110],fin(t,cB+0.4,0.4));
-    card(520,fin(t,cM+7.9,0.5),"The navigation software","expected","newton-seconds",CYAN,fin(t,cB+0.9,0.4));
-    const lk=fin(t,cM+8.3,0.5),br=fin(t,cB+1.9,0.4);withA(ctx,lk,()=>{const col=mix(SOFT,BAD,br);arrowTo(ctx,410,398,410,512,col,0.9,{lw:3+2*br,head:14});
-      if(br>0){glow(ctx,410,455,80,BAD,0.6*br*(0.7+0.3*Math.sin(t*6)));withA(ctx,br,()=>{T(ctx,"≠",448,468,{w:800,size:40,color:rgba(BAD,1)});ot_pill(ctx,610,456,"the meaning broke here",BAD,{size:19});});}});
-    withA(ctx,fin(t,cM+9.4,0.5),()=>T(ctx,"1 pound-force second = 4.45 newton-seconds",410,728,{w:600,size:19,align:"center",color:rgba(SOFT,1)}));});
+/* ---------- 4. Keeping two shapes in step ---------- */
+const BO_LOG=[[1,"issue A-1042","A-1042"],[2,"update email","L-207"],[3,"revoke A-1042","A-1042"]];
+scene("sync",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f),B=c("breath");setScreen(ctx,S);bg2(ctx);
+  const sa=fin(t,0.3,0.8),ch=[at("capture",0.26),at("capture",0.36),at("capture",0.46)],ap=[at("capture",0.44),at("capture",0.56),at("capture",0.68)];
+  const kT=c("keys"),oT=c("order"),kh=fin(t,at("keys",0.24),0.5),upd=pulseAt(t,at("keys",0.4),2.4),del=at("keys",0.62),delA=at("keys",0.78),keyHi=kh*(0.6+0.4*Math.sin(t*3))*(1-fin(t,oT,0.8));
+  // the three boxes sit in the middle, and rise to make room for the two orders
+  const dy=lerp(130,0,ease(fin(t,oT-0.9,1.2)));ctx.save();ctx.translate(0,dy);
+  // the rows: where the app writes
+  withA(ctx,sa,()=>{glass(ctx,40,130,580,380,20,BO_W,{glow:16,ea:0.8,fill:"rgba(7,12,24,0.93)"});T(ctx,"rows",68,182,{w:800,size:32,color:rgba(BO_W,1)});T(ctx,"the app writes here",162,182,{w:600,size:22,color:rgba(SOFT,1)});
+    T(ctx,"learners",68,230,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});T(ctx,"awards",68,322,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});
+    const em=t>ch[1]?"aisha@work":"aisha@mail";bo_row(ctx,60,242,540,"L-207",["Aisha K.",em],{hi:pulseAt(t,ch[1],1.0)+upd,keyHi:keyHi+upd});
+    bo_row(ctx,60,334,540,"A-1041",["L-150","issued"],{a:1-fin(t,del+0.3,0.6),hi:pulseAt(t,del,1.0),bad:t>del,keyHi});bo_strike(ctx,68,356,592,356,fin(t,del,0.4),BAD,1-fin(t,del+0.3,0.6));
+    const rv=t>ch[2];bo_row(ctx,60,388,540,"A-1042",["L-207",rv?"revoked":"issued"],{a:fin(t,ch[0],0.4),hi:pulseAt(t,ch[0],1.0)+pulseAt(t,ch[2],1.0),keyHi,vc:[null,rv?BAD:null]});});
+  // the columns: the reading side
+  withA(ctx,sa,()=>{glass(ctx,1300,130,580,380,20,BO_R,{glow:16,ea:0.8,fill:"rgba(7,12,24,0.93)"});T(ctx,"columns",1328,182,{w:800,size:32,color:rgba(BO_R,1)});T(ctx,"the reading side",1478,182,{w:600,size:22,color:rgba(SOFT,1)});
+    const a1=fin(t,ap[0],0.4),gone=1-fin(t,delA,0.6),st=t>ap[2]?"revoked":"issued",em=t>ap[1]?"aisha@work":"aisha@mail";
+    bo_colStripe(ctx,1316,206,134,290,"award",[{key:"A-1041",a:gone,hi:pulseAt(t,delA-0.2,0.8),hc:BAD,keyHi},{key:"A-1042",a:a1,keyHi}]);
+    bo_colStripe(ctx,1458,206,112,290,"status",[{t:"issued",a:gone},{t:st,a:a1,c:t>ap[2]?BAD:null,hi:pulseAt(t,ap[0],1)+pulseAt(t,ap[2],1)}]);
+    bo_colStripe(ctx,1578,206,126,290,"learner",[{key:"L-207",keyHi:keyHi+upd}]);
+    bo_colStripe(ctx,1712,206,152,290,"email",[{t:em,hi:pulseAt(t,ap[1],1)+upd*0.6}]);});
+  // the change log, in order
+  withA(ctx,sa,()=>{glass(ctx,660,130,600,380,20,BO_ACC,{glow:14,ea:0.7,fill:"rgba(7,12,24,0.9)"});T(ctx,"change log",686,182,{w:800,size:32,color:rgba(BO_ACC,1)});T(ctx,"in order",870,182,{w:600,size:22,color:rgba(SOFT,1)});
+    BO_LOG.forEach(([n,s,id],i)=>{const a=fin(t,ch[i]+0.25,0.4),x=lerp(610,680,ease(fin(t,ch[i]+0.25,0.5))),y=210+i*70,ord=pulseAt(t,at("capture",0.8)+i*0.35,0.8);
+      if(a>0.02&&a<0.98)arrowTo(ctx,600,y+28,x,y+28,BO_W,a,{nohead:true,lw:3});
+      bo_change(ctx,x,y,500,n,s,id,{a,hi:ord+pulseAt(t,ap[i],0.9)+(i===1?upd:0),keyHi:keyHi+(i===1?upd:0)});
+      if(t>ap[i]){tick_(ctx,x+535,y+28,30,GOOD,fin(t,ap[i],0.3));const u=clamp((t-ap[i])/0.5,0,1);if(u<1)arrowTo(ctx,1200,y+28,1310,y+28,BO_R,1-u,{p:u*2,head:12});}});
+    const dA=fin(t,del+0.2,0.4)*(1-fin(t,oT-0.4,0.6));if(dA>0){bo_change(ctx,680,420,500,4,"delete A-1041","A-1041",{a:dA,dash:true,keyHi,hi:pulseAt(t,delA-0.3,0.9)});if(t>delA)tick_(ctx,1215,448,30,GOOD,fin(t,delA,0.3));}
+    withA(ctx,fin(t,at("capture",0.8),0.6)*(1-fin(t,kT,0.5)),()=>tag(ctx,960,470,"1, 2, 3: the same order on both sides",BO_ACC,{align:"center",size:22}));});
+  // a stable key: an update and a delete find their rows
+  withA(ctx,kh*(1-fin(t,oT-0.9,0.6)),()=>tag(ctx,960,580,"every row has a stable key",TRUST,{align:"center",size:26}));
+  if(upd>0.02){ctx.save();ctx.globalAlpha*=upd;ctx.strokeStyle=rgba(bo_kc("L-207"),0.9);ctx.lineWidth=2.6;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(1144,308);ctx.bezierCurveTo(900,250,500,300,84,264);ctx.moveTo(1144,308);ctx.bezierCurveTo(1300,330,1560,300,1598,274);ctx.stroke();ctx.restore();
+    withA(ctx,upd,()=>tag(ctx,960,646,"an update finds the row it changes",bo_kc("L-207"),{align:"center",size:24}));}
+  const dp=pulseAt(t,del,2.2);if(dp>0.02){ctx.save();ctx.globalAlpha*=dp;ctx.strokeStyle=rgba(bo_kc("A-1041"),0.9);ctx.lineWidth=2.6;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(1144,448);ctx.bezierCurveTo(900,430,400,420,84,356);ctx.moveTo(1144,448);ctx.bezierCurveTo(1250,430,1300,300,1336,274);ctx.stroke();ctx.restore();
+    withA(ctx,dp,()=>tag(ctx,960,712,"a delete finds the row it removes",bo_kc("A-1041"),{align:"center",size:24}));}
+  ctx.restore();
+  // the wrong order, then the right one
+  const wA=fin(t,oT+0.1,0.6),w1=fin(t,at("order",0.1),0.4),w2=fin(t,at("order",0.26),0.4),gh=fin(t,at("order",0.42),0.5),rA=fin(t,at("order",0.62),0.6),r1=fin(t,at("order",0.66),0.4),r2=fin(t,at("order",0.76),0.4),ok=fin(t,at("order",0.86),0.5);
+  withA(ctx,wA,()=>{glass(ctx,110,540,830,300,22,BAD,{glow:14,ea:0.7,fill:"rgba(20,8,12,0.9)"});T(ctx,"wrong order",140,590,{w:800,size:30,color:rgba(BAD,1)});
+    bo_change(ctx,140,618,380,3,"revoke A-1042","A-1042",{a:w1,bad:true});bo_change(ctx,140,692,380,1,"issue A-1042","A-1042",{a:w2});
+    withA(ctx,w1*(1-w2),()=>T(ctx,"no row to revoke yet",736,690,{w:600,size:22,align:"center",color:rgba(SOFT,1)}));
+    bo_ghost(ctx,570,630,340,110,t,gh,"A-1042 · issued","back to life");
+    withA(ctx,gh,()=>T(ctx,"a revoked award, valid again",525,812,{w:700,size:22,align:"center",color:rgba(BAD,1)}));});
+  withA(ctx,rA,()=>{glass(ctx,980,540,830,300,22,GOOD,{glow:14,ea:0.7,fill:"rgba(7,20,14,0.9)"});T(ctx,"right order",1010,590,{w:800,size:30,color:rgba(GOOD,1)});
+    bo_change(ctx,1010,618,380,1,"issue A-1042","A-1042",{a:r1});bo_change(ctx,1010,692,380,3,"revoke A-1042","A-1042",{a:r2});
+    withA(ctx,ok,()=>{glass(ctx,1430,630,340,110,16,GOOD,{glow:18+8*Math.sin(t*2.4),ea:0.9,fill:"rgba(7,12,24,0.95)"});T(ctx,"A-1042 · revoked",1600,676,{w:800,size:25,align:"center"});T(ctx,"order matters",1600,714,{w:600,size:21,align:"center",color:rgba(GOOD,1)});tick_(ctx,1752,648,30,GOOD,1);});});
+  withA(ctx,fin(t,B,0.6),()=>glow(ctx,1600,685,230,GOOD,0.12+0.06*Math.sin(t*2)));
   vign(ctx,S);});
 
-/* ---------- 5. One person, many records ---------- */
-const OT_IDS=[["sis","student number","S1048221"],["lms","platform login","aisha.k"],["short","customer number","C-77310"],["wallet","wallet address","did:key:z6Mk…4f2a"]];
-const OT_SRC=[["sis",190],["it",300],["short",410],["careers",520]];
-const OT_FACTS=[["name","Aisha Khan",0],["email","aisha.khan@uni.example",1],["award","BSc, Data Science",0],["microcredential","Data Visualisation",2],["badge","data ethics, assessed",3]];
-scene("person",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
-  const cI=c("ids"),cF=c("facts"),cM=c("master"),cC=c("codes");
-  // Aisha
-  person(ctx,"aisha",210,862,0.7,{t,pose:t>cI+3.0&&t<cI+8.2?"explain":"stand",expr:t>cM+3?"relieved":"calm"});
-  withA(ctx,fin(t,cI+0.4,0.5),()=>ot_tag(ctx,210,478,"Aisha",KIND,1,{size:24}));
-  // four IDs, four records
-  const idT=[cI+3.1,cI+4.2,cI+5.2,cI+6.4];
-  OT_IDS.forEach(([k,kind,id],i)=>{const a=fin(t,idT[i],0.5),y=150+i*112;withA(ctx,a*0.6,()=>{ctx.strokeStyle=rgba(KIND,0.45);ctx.lineWidth=1.6;ctx.setLineDash([5,7]);ctx.beginPath();ctx.moveTo(290,580);ctx.lineTo(400,y+46);ctx.stroke();ctx.setLineDash([]);});
-    ot_idCard(ctx,400,y,470,k,kind,id,a,{hi:pulseAt(t,idT[i],1.2)+pulseAt(t,cM+2.8+i*0.15,1.2)});});
-  // the same person: the four records linked into one learner
-  const ln=fin(t,cM+2.7,0.8);withA(ctx,ln,()=>{ctx.save();ctx.strokeStyle=rgba(OT_GOLD,0.95);ctx.lineWidth=4;ctx.shadowColor=rgba(OT_GOLD,0.8);ctx.shadowBlur=12;ctx.beginPath();ctx.moveTo(884,196);ctx.lineTo(904,196);ctx.lineTo(904,532);ctx.lineTo(884,532);ctx.stroke();ctx.restore();
-    arrowTo(ctx,906,364,944,364,OT_GOLD,1,{lw:4,head:14});ot_pill(ctx,904,596,"same person",OT_GOLD,{size:19});});
-  // her facts, each from one source
-  const fA=fin(t,cF+0.1,0.6),mA=fin(t,cM+0.2,0.6),mx=950,my=140,mw=470;
-  withA(ctx,fA,()=>{glass(ctx,mx,my,mw,440,18,mA>0?mix(KIND,OT_GOLD,mA):KIND,{glow:14+10*mA,ea:0.85,fill:"rgba(7,12,24,0.95)"});
-    T(ctx,ln>0.5?"one learner · L-000418":"Aisha's facts",mx+24,my+44,{w:800,size:24,color:rgba(ln>0.5?OT_GOLD:KIND,1)});
-    T(ctx,"credentials",mx+24,my+222,{f:"mono",w:500,size:16,color:rgba(SOFT,1)});});
-  const fT=[cF+0.5,cF+2.5,cF+3.9,cF+4.4,cF+4.9];
-  OT_FACTS.forEach(([k,v,src],i)=>{const y=my+(i<2?96+i*64:258+(i-2)*58),a=fin(t,fT[i],0.5);withA(ctx,a,()=>{T(ctx,k,mx+24,y,{f:"mono",w:500,size:16,color:rgba(SOFT,1)});T(ctx,v,mx+24,y+28,{w:700,size:22});});
-    const P=OT_SRC[src],sx=1670-(src===1?118:src===2?158:src===3?92:120),p=clamp((t-fT[i]+0.3)/0.6,0,1);if(p>0){const col=src===1?OT_IT:OT_SYS[P[0]].c;arrowTo(ctx,sx,P[1],mx+mw+6,y+10,col,0.85,{p,bend:0.08,lw:2.4,head:12});
-      withA(ctx,fin(t,cM+0.4+i*0.25,0.4),()=>ot_mark(ctx,mx+mw-30,y+10,true,1,14));}});
-  OT_SRC.forEach(([k,y],i)=>ot_node(ctx,k,1670,y,fin(t,cF+(i===0?0.2:i===1?2.2:3.7+i*0.3),0.5),0,k==="it"?{sys:{c:OT_IT,n:"IT directory"}}:{}));
-  withA(ctx,fin(t,cM+0.6,0.5),()=>ot_pill(ctx,1670,110,"one source for each fact",OT_GOLD,{size:19}));
-  withA(ctx,fin(t,cM+5.0,0.6),()=>ot_tag(ctx,1185,640,"master data",OT_GOLD,1,{size:26}));
-  // one list of values, used by every system
-  const cl=fin(t,cC+1.6,0.6),ch=pulseAt(t,cC+3.6,2.0);ot_codeList(ctx,480,728,cl,ch);
-  withA(ctx,cl*fin(t,cC+3.4,0.8),()=>{ctx.save();ctx.strokeStyle=rgba(OT_STD,0.55);ctx.lineWidth=1.6;ctx.setLineDash([4,6]);OT_SRC.forEach(([k,y])=>{if(k==="it")return;ctx.beginPath();ctx.moveTo(1120,760);ctx.quadraticCurveTo(1480,720,1670-110,y+30);ctx.stroke();});
-    ctx.beginPath();ctx.moveTo(1000,728);ctx.lineTo(1000,my+440);ctx.stroke();ctx.restore();});
-  withA(ctx,fin(t,cC+6.5,0.6),()=>ot_tag(ctx,1420,800,"reference data",OT_STD,1,{size:26}));
+/* ---------- 5. What it removes ---------- */
+const BO_GONE=[["the nightly copy","moon"],["the pipelines","pipe"],["the wait","wait"],["a second set of permissions","lock"]];
+scene("removes",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f);setScreen(ctx,S);bg2(ctx);
+  const named=[at("gone",0.1),at("gone",0.28),at("gone",0.5),at("gone",0.62)],e0=at("gone",1.0),go=fin(t,e0+0.1,0.6),col_=fin(t,e0+0.5,1.3),rl=fin(t,c("real")+0.1,0.6);
+  // the two ends come together as what sat between them goes
+  const lx=lerp(90,560,ease(col_)),rx=lerp(1570,1100,ease(col_)),sa=fin(t,0.2,0.7);
+  withA(ctx,fin(t,e0+1.0,0.8),()=>{glow(ctx,960,480,460,BO_ACC,0.08);glass(ctx,520,230,880,480,30,BO_ACC,{glow:26,ea:0.85,fill:"rgba(8,16,30,0.6)"});T(ctx,"one place",960,284,{w:800,size:34,align:"center",color:rgba(BO_ACC,1)});});
+  bo_store(ctx,lx,320,260,360,"rows",{a:sa,title:"writing",ts:30,n:6,t,col:BO_W});bo_store(ctx,rx,320,260,360,"cols",{a:sa,title:"reading",ts:30,n:6,t,col:BO_R});
+  BO_GONE.forEach(([s,k],i)=>{const x=400+i*285,y=340,a=fin(t,named[i],0.5)*(1-go),st=fin(t,named[i]+0.9,0.4);if(a<=0.01)return;
+    withA(ctx,a,()=>{glass(ctx,x,y,250,320,20,[200,215,240],{glow:10,ea:0.6,fill:"rgba(7,12,24,0.93)"});const cx=x+125,cy=y+110;
+      withA(ctx,1-0.4*st,()=>{if(k==="moon"){bo_moon(ctx,cx-30,cy-10,32,1,t);for(let j=0;j<3;j++){ctx.fillStyle=rgba(BO_W,0.9);rr(ctx,cx+12+j*20,cy+6-j*12,14,14,3);ctx.fill();}}
+        if(k==="pipe"){ctx.save();ctx.strokeStyle=rgba(INK,0.9);ctx.lineWidth=10;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(cx-75,cy+22);ctx.lineTo(cx-22,cy+22);ctx.lineTo(cx-22,cy-22);ctx.lineTo(cx+32,cy-22);ctx.lineTo(cx+32,cy+22);ctx.lineTo(cx+75,cy+22);ctx.stroke();ctx.restore();packets(ctx,t,[P(cx-75,cy+22),P(cx-22,cy+22),P(cx-22,cy-22),P(cx+32,cy-22),P(cx+32,cy+22),P(cx+75,cy+22)],0.4,1.4,0,BO_W,11,1);}
+        if(k==="wait")bo_hourglass(ctx,cx,cy,2.1,(t-named[2]+1)/7,BO_AMB,1,t);
+        if(k==="lock"){bo_lock(ctx,cx-32,cy,1.8,BO_W);bo_lock(ctx,cx+32,cy,1.8,BO_R);}});
+      wrapT(ctx,s,cx,y+236,220,{w:700,size:25,align:"center",lh:31});
+      cross_(ctx,cx,cy,84*ease(st),SOFT,0.7*st);});});
+  withA(ctx,rl,()=>{tag(ctx,940,790,"real gains",GOOD,{align:"center",size:36});tick_(ctx,1070,790,40,GOOD,1);});
   vign(ctx,S);});
 
-/* ---------- 6. Precise, but not yet technical ---------- */
-const OT_VEND=[["learner","customer",1],["credential id","certificate no.",1],["claim","course name",1],["level","level",1],["volume","hours",1],["status","—",0],["evidence","—",0],["counts towards","—",0]];
-scene("logical",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
-  const cS=c("sketch"),cI=c("id"),cA=c("attrs"),cC=c("card"),cR=c("rules"),cT=c("still"),Z=1.2;
-  // the sketch on paper, from What's in a word
-  const sk=fin(t,0.1,0.6)*(1-fin(t,cS+2.4,1.0));if(sk>0)withA(ctx,sk,()=>{sheet(ctx,330,140,1260,600,{rot:-0.01});credKinds(ctx,{paper:true,ox:0,oy:40,s:1,p:{cred:1,award:1,micro:1,badge:1}});
-    pencilText(ctx,"what matters",400,210,{size:26});stamp(ctx,1560,190,"sketch v3 · draft",[150,90,30],1,0);});
-  const lm=fin(t,cS+2.6,1.1),yard=fin(t,cT+2.6,1.0),mA=lm*(1-yard);
-  if(mA>0.01)withA(ctx,mA,()=>{const E={learner:{name:"Learner",attrs:[["learner id","id"],["name",""]]},issuer:{name:"Issuer",attrs:[["issuer id","id"],["name",""]]},
-      cred:{name:"Credential",attrs:OT_CRED_ATTRS},evidence:{name:"Evidence",attrs:[["evidence id","id"],["kind",""]]},micro:{name:"Microcredential",sub:"a kind of credential"},award:{name:"Award",sub:"a kind of credential"}};
-    Object.keys(E).forEach(k=>Object.assign(E[k],{x:OT_LM[k][0],y:OT_LM[k][1],col:OT_GOLD,s:Z,a:k==="cred"?1:fin(t,cS+3.0+(k==="micro"||k==="award"?0.5:0.2),0.6)}));
-    const B={};Object.keys(E).forEach(k=>B[k]=entBox(ctx,E[k]));
-    // relationships: plain lines first, then how many of one relate to another
-    const rel=(a,b,ca,cb,t0,verb,dx,dy)=>{const on=fin(t,t0,0.5),aa=Math.min(E[a].a,E[b].a);if(aa<=0.01)return;withA(ctx,aa,()=>{if(on<1){const s_=ot_edge(B[a],B[b].x,B[b].y),e_=ot_edge(B[b],B[a].x,B[a].y);ctx.save();ctx.strokeStyle=rgba(OT_GOLD,0.45*(1-on));ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(s_[0],s_[1]);ctx.lineTo(e_[0],e_[1]);ctx.stroke();ctx.restore();}
-      if(on>0){relLine(ctx,B[a],B[b],ca,cb,{col:OT_GOLD,a:on,words:on,s:Z});if(verb)withA(ctx,on,()=>ot_pill(ctx,(B[a].x+B[b].x)/2+(dx||0),(B[a].y+B[b].y)/2+(dy||0),verb,OT_GOLD,{size:20}));}
-      const hot=pulseAt(t,t0,1.6);if(hot)glow(ctx,(B[a].x+B[b].x)/2,(B[a].y+B[b].y)/2,100,OT_GOLD,0.5*hot);});};
-    rel("learner","cred","1","*",cC+2.2,"holds",0,-30);rel("issuer","cred","1","*",cC+3.0,"issues",-50,34);rel("cred","evidence","1","*",cC+3.6,"rests on",0,-30);
-    ["micro","award"].forEach(k=>withA(ctx,E[k].a,()=>isa(ctx,B[k].x,B[k].y-B[k].h/2,B.cred.x+B.cred.w/2-(k==="award"?30:110),B.cred.y+B.cred.h/2+4,1,OT_GOLD,{fill:"#0a1020"})));
-    rel("micro","award","*","*",cC+5.0,"counts towards",0,-34);
-    Object.keys(E).forEach(k=>ent(ctx,E[k]));
-    // the rows of the credential, lit as the narration names them
-    const bx=B.cred,x0=bx.x-bx.w/2,y0=bx.y-bx.h/2+58*Z,rowY=i=>y0+28*Z+i*30*Z,row=(i,a,col)=>{if(a<=0.01)return;withA(ctx,a,()=>{ctx.fillStyle=rgba(col,0.2);rr(ctx,x0+8,rowY(i)-23*Z,bx.w-16,30*Z,6);ctx.fill();ctx.fillStyle=rgba(col,0.95);rr(ctx,x0+8,rowY(i)-23*Z,5,30*Z,3);ctx.fill();});};
-    const idA=fin(t,cI+0.3,0.4)*(1-fin(t,cA,0.5));row(0,idA,OT_WAX);[[1,cI+1.9],[2,cI+2.7],[3,cI+3.2],[4,cI+3.7]].forEach(([i,t0])=>row(i,fin(t,t0,0.3)*(1-fin(t,cA,0.5)),OT_WAX));
-    [[5,cA+2.8],[6,cA+3.5],[7,cA+4.5]].forEach(([i,t0])=>row(i,fin(t,t0,0.3)*(1-fin(t,cC+0.5,0.6)),OT_STD));row(7,pulseAt(t,cR+1.2,2.0),BAD);
-    withA(ctx,fin(t,cI+4.0,0.4)*(1-fin(t,cA,0.5)),()=>{ctx.strokeStyle=rgba(OT_WAX,0.9);ctx.lineWidth=3;const b0=x0+bx.w+12,ya=rowY(0)-22*Z,yb=rowY(4)+8;ctx.beginPath();ctx.moveTo(b0,ya);ctx.lineTo(b0+14,ya);ctx.lineTo(b0+14,yb);ctx.lineTo(b0,yb);ctx.stroke();ot_pill(ctx,b0+120,(ya+yb)/2,"identifies it",OT_WAX,{size:22});});
-    withA(ctx,fin(t,cA+2.6,0.4)*(1-fin(t,cC+0.5,0.6)),()=>{ctx.strokeStyle=rgba(OT_STD,0.9);ctx.lineWidth=3;const b0=x0+bx.w+12,ya=rowY(5)-22*Z,yb=rowY(7)+8;ctx.beginPath();ctx.moveTo(b0,ya);ctx.lineTo(b0+14,ya);ctx.lineTo(b0+14,yb);ctx.lineTo(b0,yb);ctx.stroke();ot_pill(ctx,b0+130,(ya+yb)/2,"allowed values",OT_STD,{size:22});});
-    // the rule
-    withA(ctx,fin(t,cR+0.3,0.5),()=>{const rx=200,ry=720;glass(ctx,rx,ry,460,112,16,BAD,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(ctx,"rule",rx+24,ry+38,{f:"mono",w:500,size:20,color:rgba(BAD,1)});
-      T(ctx,"revoked → never counted",rx+24,ry+84,{w:800,size:30});arrowTo(ctx,rx+440,ry+30,x0+14,rowY(7)-6,BAD,0.8,{lw:2.4,head:12,bend:-0.15});});});
-  // still no technology: the model becomes a yardstick, held against a vendor's model
-  withA(ctx,fin(t,cT+0.2,0.5),()=>{const x=1560,y=110;dbGlyph(ctx,x-150,y,SOFT,0.8);cross_(ctx,x-150,y,44,BAD,0.9);ot_tag(ctx,x+20,y,"no technology",OT_GOLD,1,{size:24});});
-  if(yard>0)withA(ctx,yard,()=>{const x0=160,x1=1760,cw=(x1-x0)/8;T(ctx,"our logical model: the yardstick",x0,290,{w:800,size:26,color:rgba(OT_GOLD,1)});ot_ruler(ctx,x0,x1,350,OT_VEND.map(v=>v[0]),1,clamp((t-cT-2.7)/1.0,0,1));
-    const va=fin(t,cT+3.4,0.6);withA(ctx,va,()=>{T(ctx,"a vendor's model · short-course platform",x0,470,{w:700,size:22,color:rgba(OT_SYS.short.c,1)});glass(ctx,x0,490,x1-x0,100,16,OT_SYS.short.c,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.94)"});
-      OT_VEND.forEach(([m,v],i)=>T(ctx,v,x0+(i+0.5)*cw,550,{w:700,size:22,align:"center",color:v==="—"?rgba(SOFT,0.7):rgba(INK,1)}));});
-    OT_VEND.forEach(([m,v,ok],i)=>ot_mark(ctx,x0+(i+0.5)*cw,420,!!ok,fin(t,cT+3.8+i*0.2,0.3),18));
-    withA(ctx,fin(t,cT+5.6,0.4),()=>{const br=(i0,i1,col,s_)=>{const a=x0+i0*cw+14,b=x0+i1*cw-14;ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(a,606);ctx.lineTo(a,618);ctx.lineTo(b,618);ctx.lineTo(b,606);ctx.stroke();ot_pill(ctx,(a+b)/2,640,s_,col,{size:22});};
-      br(0,5,GOOD,"fit");br(5,8,BAD,"gap");});
-    [["choose a package",520,cT+5.9],["map its fields",960,cT+7.2],["move to a new one",1400,cT+8.5]].forEach(([s_,x,t0])=>withA(ctx,fin(t,t0,0.4),()=>ot_tag(ctx,x,760,s_,OT_GOLD,1,{size:26})));});
+/* ---------- 6. What it doesn't ---------- */
+const BO_AW=[["A-0977","Science","issued"],["A-0981","Science","revoked"],["A-0990","Science","issued"],["A-1002","Science","issued"],["A-1042","Science","revoked"],["A-1057","Arts","issued"]];
+scene("doesnt",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f);setScreen(ctx,S);bg2(ctx);
+  const ta=fin(t,0.3,0.7),rvT=at("revoked",0.02),rv=fin(t,rvT,0.5),owT=at("revoked",0.42),ow=fin(t,owT,0.6),wr=at("revoked",0.74),mT=c("model"),dimT=at("model",0.48),dim=fin(t,dimT,0.6),tg=fin(t,dimT+0.4,0.7);
+  withA(ctx,1-0.85*dim,()=>{
+    // the app's own table
+    withA(ctx,ta,()=>{glass(ctx,60,110,800,450,20,BO_W,{glow:16,ea:0.8,fill:"rgba(7,12,24,0.93)"});T(ctx,"awards",88,160,{w:800,size:32,color:rgba(BO_W,1)});T(ctx,"the app's own table, today",214,160,{w:600,size:22,color:rgba(SOFT,1)});
+      T(ctx,"award",146,202,{f:"mono",w:500,size:17,color:rgba(SOFT,1)});T(ctx,"faculty",246,202,{f:"mono",w:500,size:17,color:rgba(SOFT,1)});T(ctx,"status",362,202,{f:"mono",w:500,size:17,color:rgba(SOFT,1)});
+      BO_AW.forEach(([id,f,st],i)=>{const y=214+i*54,isR=st==="revoked",isO=id==="A-0990";
+        bo_row(ctx,80,y,760,id,[f,st],{hi:isR?pulseAt(t,rvT,1.2):isO?pulseAt(t,owT,1.2):0,hiCol:isR?BAD:BO_AMB,bad:isR&&rv>0.5,vc:[isO&&ow>0.3?BO_AMB:null,isR&&rv>0.3?BAD:null]});
+        if(isR)withA(ctx,rv,()=>tag(ctx,560,y+22,"revoked, still in there",BAD,{size:19}));
+        if(isO)withA(ctx,ow,()=>{T(ctx,"Health",530,y+29,{f:"mono",w:500,size:21,color:rgba(SOFT,0.85)});bo_strike(ctx,526,y+22,612,y+22,1,SOFT,0.85);tag(ctx,630,y+22,"overwritten",BO_AMB,{size:19});});});});
+    // counted straight from it
+    const qa=fin(t,at("direct",0.4),0.6);arrowTo(ctx,870,330,1080,330,BO_W,qa,{dash:[8,8],head:14,p:fin(t,at("direct",0.4),0.9)});
+    withA(ctx,qa,()=>T(ctx,"count",975,312,{f:"mono",w:500,size:21,align:"center",color:rgba(SOFT,1)}));
+    withA(ctx,fin(t,at("direct",0.6),0.6),()=>{glass(ctx,1090,110,640,420,22,[200,215,240],{glow:14,ea:0.7,fill:"rgba(7,12,24,0.94)"});T(ctx,"Science awards, last year",1120,164,{w:700,size:28,color:rgba(SOFT,1)});
+      const n=t<wr?"…":fmtNum(countTo(t,wr,0,131)),gl=t>wr+1?pulseAt(t,wr+1,0.5):0;ctx.save();ctx.translate(gl*6*Math.sin(t*60),0);T(ctx,n,1120,294,{w:800,size:116,color:rgba(t>wr+0.9?BAD:INK,1)});ctx.restore();
+      withA(ctx,fin(t,wr+1.0,0.4),()=>{cross_(ctx,1430,254,54,BAD,1);T(ctx,"counted straight from the app",1120,336,{w:600,size:22,color:rgba(BAD,1)});});
+      withA(ctx,fin(t,wr+1.8,0.5),()=>{ctx.strokeStyle="rgba(170,200,245,0.2)";ctx.beginPath();ctx.moveTo(1116,366);ctx.lineTo(1704,366);ctx.stroke();T(ctx,"118",1120,448,{w:800,size:70,color:rgba(GOOD,1)});tick_(ctx,1282,424,38,GOOD,1);
+        T(ctx,"the right count",1330,420,{w:700,size:24,color:rgba(GOOD,1)});T(ctx,"131 − 9 revoked",1330,456,{f:"mono",w:500,size:19,color:rgba(SOFT,1)});T(ctx,"− 4 not Science then",1330,484,{f:"mono",w:500,size:19,color:rgba(SOFT,1)});});});
+    // the same mistake: counting today, instead of on census date
+    const sA=fin(t,at("same",0.1),0.6);withA(ctx,sA,()=>{bo_cal(ctx,1090,570,"counted","28 Sep","today",BAD,1,pulseAt(t,at("same",0.4),1.2));bo_cal(ctx,1430,570,"counted","31 Mar","census date",GOOD,1,pulseAt(t,at("same",0.8),1.2));
+      T(ctx,"≠",1410,640,{w:800,size:40,align:"center",color:rgba(BAD,1)});T(ctx,"enrolments: counted today,",1410,728,{w:700,size:23,align:"center",color:rgba(SOFT,1)});T(ctx,"not on census date",1410,758,{w:700,size:23,align:"center",color:rgba(SOFT,1)});});});
+  // what still needs modelling
+  [["history","status and faculty, with their dates"],["shared dimensions","Faculty, Time"],["definitions","an award: issued, not revoked"]].forEach(([s_,sub],i)=>{const a=fin(t,mT+[0.1,0.7,1.9][i],0.5);
+    withA(ctx,a,()=>chip(ctx,[70,70,70][i],[620,706,792][i],null,s_,sub,{edge:KIND,ts:26,ss:20}));});
+  // the lesson
+  withA(ctx,tg,()=>{glow(ctx,960,430,520,BO_ACC,0.1);const y=440;
+    const p1="Hybrid removes ",p2="the copy",p3=", not the model.",w1=tw(ctx,p1,62,800),w2=tw(ctx,p2,62,800),w3=tw(ctx,p3,62,800),x0=960-(w1+w2+w3)/2;
+    T(ctx,p1,x0,y,{w:800,size:62});T(ctx,p2,x0+w1,y,{w:800,size:62,color:rgba(SOFT,0.75)});bo_strike(ctx,x0+w1-4,y-20,x0+w1+w2+4,y-20,fin(t,at("model",0.72),0.5),SOFT,0.9);T(ctx,p3,x0+w1+w2,y,{w:800,size:62,color:rgba(BO_ACC,1)});});
   vign(ctx,S);});
 
-/* ---------- 7. Who owns what ---------- */
-const OT_BAND=[[64,"the words","the business decides"],[304,"the logical model","one model for all"],[544,"the systems","each team, its tables"]],OT_BH=222;
-scene("owners",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
-  const cW=c("words"),cA=c("arch"),cD=c("down"),cS=c("stewards");
-  OT_BAND.forEach(([y,n,sub],i)=>withA(ctx,fin(t,0.3+i*0.25,0.6),()=>{const hot=pulseAt(t,cD+0.6+i*1.0,1.2)+pulseAt(t,cD+5.6-i*0.8,1.2),col=i===2?CYAN:OT_GOLD;glass(ctx,60,y,1460,OT_BH,20,col,{glow:10+14*hot,ea:0.35+0.4*hot,fill:"rgba(10,16,32,0.55)"});
-    T(ctx,n,90,y+56,{w:800,size:30,color:rgba(col,1)});T(ctx,sub,90,y+92,{w:600,size:20,color:rgba(SOFT,1)});}));
-  const card=(x,y,w,word,owner,col,a)=>withA(ctx,a,()=>{glass(ctx,x,y,w,124,16,col,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(ctx,word,x+24,y+52,{w:800,size:32,color:rgba(col,1)});T(ctx,owner,x+24,y+94,{w:600,size:20,color:rgba(SOFT,1)});});
-  // the words, and their owners
-  const y1=OT_BAND[0][0],y2=OT_BAND[1][0],y3=OT_BAND[2][0],mA=fin(t,cW+1.9,0.5),tA=fin(t,cW+4.3,0.5);
-  withA(ctx,mA,()=>person(ctx,"mei",470,y1+OT_BH-6,0.4,{t,pose:t>cW+2&&t<cW+4.2?"explain":"stand",expr:"calm"}));card(560,y1+50,360,"award","owner: Registrar · Mei",TRUST,mA);
-  withA(ctx,tA,()=>person(ctx,"tom",1020,y1+OT_BH-6,0.4,{t,pose:t>cW+4.4&&t<cW+6.6?"explain":"stand",expr:"calm"}));card(1100,y1+50,400,"microcredential","owner: Short courses · Tom",OFFICE.short.c,tA);
-  // the model, and its owner
-  const nA=fin(t,cA+0.3,0.5);withA(ctx,nA,()=>{person(ctx,"noor",470,y2+OT_BH-6,0.4,{t,pose:t>cA+0.4&&t<cA+3?"explain":"stand"});
-    const yy=y2+88,E={l:{x:700,y:yy,name:"Learner",col:OT_GOLD,s:0.95},c_:{x:1010,y:yy,name:"Credential",col:OT_GOLD,s:0.95},e:{x:1320,y:yy,name:"Evidence",col:OT_GOLD,s:0.95}};diagram(ctx,E,[["l","c_","1","*",{col:OT_GOLD}],["c_","e","1","*",{col:OT_GOLD}]]);
-    ot_pill(ctx,1010,y2+170,"owner: Noor, data architect",OT_GOLD,{size:21});});
-  // the tables, and their teams
-  const bA=fin(t,cA+3.4,0.5);withA(ctx,bA,()=>{person(ctx,"ben",470,y3+OT_BH-6,0.4,{t});
-    [["awards","sis","student system team"],["certificates","short","platform team"],["badges","careers","careers team"]].forEach(([n,k,own],i)=>{const x=560+i*322,y=y3+42,col=OT_SYS[k].c;glass(ctx,x,y,300,140,14,col,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});
-      T(ctx,n,x+22,y+42,{f:"mono",w:500,size:24,color:rgba(col,1)});for(let r=0;r<2;r++){ctx.fillStyle=rgba(col,0.22);ctx.fillRect(x+22,y+58+r*18,256,11);}T(ctx,"owner: "+own,x+22,y+122,{w:600,size:19,color:rgba(SOFT,1)});});});
-  // a change of meaning travels down; news of a change in a system travels up, before it ships
-  const dA=fin(t,cD+0.1,0.5),uA=fin(t,cD+3.6,0.5),ax=1620,ux=1810;
-  withA(ctx,dA,()=>{arrowTo(ctx,ax,110,ax,760,OT_WAX,0.85,{lw:4,head:18});ot_pill(ctx,ax,74,"meaning",OT_WAX,{size:21});});
-  withA(ctx,uA,()=>{arrowTo(ctx,ux,760,ux,110,CYAN,0.85,{lw:4,head:18});ot_pill(ctx,ux,796,"news",CYAN,{size:21});});
-  const du=clamp((t-cD-0.3)/3.2,0,1);if(du>0&&du<1)withA(ctx,Math.min(1,Math.sin(Math.PI*du)*2),()=>{const y=lerp(150,720,ease(du));glow(ctx,ax,y,60,OT_WAX,0.6);ot_pill(ctx,ax,y,"v1.1",OT_WAX,{size:20});});
-  const uu=clamp((t-cD-3.8)/2.6,0,1);if(uu>0&&uu<1)withA(ctx,Math.min(1,Math.sin(Math.PI*uu)*2),()=>{const y=lerp(720,150,ease(uu));glow(ctx,ux,y,60,CYAN,0.6);ot_pill(ctx,ux,y,"upgrade",CYAN,{size:20});});
-  withA(ctx,fin(t,cD+6.0,0.5),()=>{ot_pill(ctx,ux,440,"before it ships",CYAN,{size:21});});
-  // owners decide; stewards keep it written down
-  withA(ctx,fin(t,cS+0.2,0.5),()=>ot_tag(ctx,560,828,"Owners decide.",OT_GOLD,1,{size:26}));
-  withA(ctx,fin(t,cS+1.3,0.5),()=>{ot_tag(ctx,1090,828,"Stewards keep it written down.",CYAN,1,{size:26});stamp(ctx,1500,y1+OT_BH-22,"glossary v1."+(t>cS+2.2?"5 · 28 Sep":"4 · 12 Aug"),TRUST,1,t>cS+2.2&&t<cS+3.0?t-cS:0);});
+/* ---------- 7. Data flowing back ---------- */
+const BO_FEAT=[["credits so far","18"],["days since last login","12"],["may need help","0.72"]];
+scene("back",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f);setScreen(ctx,S);bg2(ctx);
+  const sa=fin(t,0.2,0.7),fl=fin(t,c("serve")+0.3,0.8),gs=pulseAt(t,at("serve",0.3),2.0),sg=fin(t,at("serve",0.56),0.6),fg=fin(t,at("serve",0.78),0.6);
+  const fT=c("features"),fc=fin(t,at("features",0.62),0.6),fs=at("features",0.72),aT=c("agents"),oa=fin(t,aT+0.2,0.7),rd=fin(t,at("agents",0.42),0.6),wr=fin(t,at("agents",0.66),0.6),dim=1-0.55*oa;
+  // gold, where the answers are calculated
+  withA(ctx,sa,()=>{if(gs)glow(ctx,1590,400,300,LAYER.gold,0.25*gs);vault(ctx,1400,150,380,520,LAYER.gold,(r,cc)=>hash(r*11+cc,5)<0.62?LAYER.gold:null,null);chip(ctx,1590,212,null,"Gold","ready to read",{align:"center",edge:LAYER.gold});});
+  // the app, and its own database
+  bo_phone(ctx,330,380,1.55,{a:sa,screen:sg>0?"suggest":"issue",sa:sg,hi:pulseAt(t,at("serve",0.58),1.2),edge:sg>0?BO_M:null});
+  withA(ctx,sa,()=>{glass(ctx,110,620,560,190,18,BO_W,{glow:14+10*pulseAt(t,at("agents",0.3),1.4),ea:0.8,fill:"rgba(7,12,24,0.93)"});T(ctx,"the app's database",134,662,{w:800,size:26,color:rgba(BO_W,1)});
+    bo_row(ctx,130,680,520,"L-207",["Aisha K.","2 of 4"],{});bo_row(ctx,130,726,520,"A-1042",["revoked"],{a:1-wr});
+    if(wr>0)bo_row(ctx,130,726,520,"L-207",["agent: suggested Data Ethics"],{a:wr,hi:pulseAt(t,at("agents",0.7),1.2),col:BO_W});});
+  // data flowing back to the app
+  withA(ctx,fl*dim,()=>{arrowTo(ctx,1390,300,440,300,BO_M,0.5,{head:18,lw:3,bend:0.06});packets(ctx,t,bez(P(1390,300),P(1100,250),P(740,250),P(446,300),20),0.35,1.4,c("serve"),BO_M,14,1);
+    tag(ctx,915,214,t>fs+0.4?"served in 8 ms":"data flowing back",BO_M,{align:"center",size:28});});
+  withA(ctx,sg*dim,()=>tag(ctx,360,110,"next: Data Ethics microcredential",BO_M,{align:"center",size:26}));
+  withA(ctx,fg*dim,()=>{glass(ctx,540,410,500,130,18,BO_M,{glow:14,ea:0.85,fill:"rgba(24,8,24,0.9)"});bo_flag(ctx,590,482,1.6,BO_M,t);T(ctx,"a learner who may need help",646,464,{w:700,size:26});T(ctx,"L-311 · for an adviser",646,504,{w:600,size:21,color:rgba(SOFT,1)});
+    arrowTo(ctx,1000,320,900,414,BO_M,0.8,{head:12,bend:-0.2,p:fin(t,at("serve",0.78),0.6)});});
+  // features, calculated in gold and served in milliseconds
+  BO_FEAT.forEach(([k,v],i)=>{const a=fin(t,fT+0.2+i*0.3,0.4),u=ease(clamp((t-fs-i*0.12)/0.55,0,1)),x=lerp(1430,420,u),y=lerp(420+i*62,300,u),fa=a*(1-fin(t,fs+0.5+i*0.12,0.25))*dim;if(fa<=0.01)return;
+    withA(ctx,fa,()=>{if(fc>0)glow(ctx,x+160,y+24,120,LAYER.gold,0.3*fc*(1-u));glass(ctx,x,y,330,54,12,u>0?BO_M:LAYER.gold,{glow:10,ea:0.9,fill:"rgba(7,12,24,0.95)"});T(ctx,k,x+18,y+35,{w:600,size:22});T(ctx,v,x+312,y+35,{f:"mono",w:500,size:22,align:"right",color:rgba(LAYER.gold,1)});});});
+  withA(ctx,fin(t,fT+0.2,0.5)*(1-fin(t,fs,0.4))*dim,()=>tag(ctx,1590,716,fc>0.5?"calculated in gold":"features, for machine learning",LAYER.gold,{align:"center",size:24}));
+  // an AI agent reads what's known and writes down what it did
+  withA(ctx,oa,()=>{orb(ctx,1080,640,30,t);tag(ctx,1080,570,"an AI agent",[255,226,160],{align:"center",size:24});
+    withA(ctx,rd,()=>{arrowTo(ctx,1396,560,1124,630,BO_R,1,{head:16,lw:3,bend:-0.1});packets(ctx,t,[P(1396,560),P(1124,630)],0.4,0.8,at("agents",0.42),BO_R,11,1);tag(ctx,1250,500,"reads what's known",BO_R,{align:"center",size:24});});
+    withA(ctx,wr,()=>{arrowTo(ctx,1040,660,676,740,BO_W,1,{head:16,lw:3,bend:0.1});packets(ctx,t,[P(1040,660),P(676,740)],0.4,0.8,at("agents",0.66),BO_W,11,1);tag(ctx,900,800,"writes what it did",BO_W,{align:"center",size:24});});});
   vign(ctx,S);});
 
-/* ---------- 8. Pull back ---------- */
-const OT_ERA=[[1970,1985,"mainframe"],[1985,1998,"client–server"],[1998,2010,"web portal"],[2010,2021,"cloud suite"],[2021,2032,"platforms"]];
-const ot_yx=y=>y<1955?120+(y-1150)/805*480:640+(y-1955)/80*1180;
-scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,S);bg2(ctx);
-  const cS=c("same"),cJ=c("joined"),cO=c("outlive"),cL=c("last"),tl=fin(t,cO-0.3,1.1);
-  if(tl<1)withA(ctx,1-tl,()=>{// the platform, unchanged; its words mapped to ours
-    const B1=ot_sysCard(ctx,"short",140,160,480,540,{a:fin(t,0.1,0.6),ms:1.3,hiTop:pulseAt(t,cS+0.8,1.6),hiBot:pulseAt(t,cJ+2.6,1.4)});
-    withA(ctx,fin(t,cS+3.3,0.5),()=>ot_pill(ctx,380,742,"nothing inside it changed",OT_SYS.short.c,{size:22}));
-    const gA=fin(t,cJ+0.2,0.6);withA(ctx,gA,()=>{ctx.save();ctx.strokeStyle=rgba(OT_GOLD,0.5);ctx.lineWidth=1.6;ctx.setLineDash([6,8]);rr(ctx,1180,160,600,540,20);ctx.stroke();ctx.restore();T(ctx,"the shared model",1480,214,{w:800,size:28,align:"center",color:rgba(OT_GOLD,1)});});
-    const L={x:1480,y:414,name:"Learner",col:OT_GOLD,s:1.3,a:gA},M={x:1480,y:606,name:"Microcredential",col:OT_GOLD,s:1.3,a:gA};const bL=entBox(ctx,L),bM=entBox(ctx,M);relLine(ctx,bL,bM,"1","*",{col:OT_GOLD,a:gA,s:1.3});ent(ctx,L);ent(ctx,M);
-    if(B1){const jn=fin(t,cJ+4.6,0.6);[[B1.top,bL,cJ+0.8],[B1.bot,bM,cJ+2.8]].forEach(([a,b,t0])=>{const p=clamp((t-t0)/1.0,0,1);if(p<=0)return;const s_=[a.x+a.w/2+10,a.y],e_=[b.x-b.w/2-12,b.y];
-      arrowTo(ctx,s_[0],s_[1],e_[0],e_[1],OT_GOLD,0.9,{p,bend:0.06,lw:3+1.5*jn,dash:jn>0.5?null:[10,8],head:16});if(p>=1)withA(ctx,fin(t,t0+0.8,0.4),()=>ot_pill(ctx,(s_[0]+e_[0])/2,(s_[1]+e_[1])/2-34,"maps to",OT_GOLD,{size:21}));});
-      if(jn>0)withA(ctx,jn,()=>{glow(ctx,900,500,300,OT_GOLD,0.12);ot_tag(ctx,960,806,"mapped, not renamed: the meaning is joined",OT_GOLD,1,{size:26});});}});
-  if(tl>0)withA(ctx,tl,()=>{// systems come and go; the ideas stay
-    const y=660,x0=ot_yx(1150),x1=ot_yx(2032);ctx.fillStyle=rgba(OT_WAX,0.18);rr(ctx,x0,y-36,x1-x0,72,36);ctx.fill();ctx.save();ctx.strokeStyle=rgba(OT_WAX,0.9);ctx.lineWidth=2.4;ctx.shadowColor=rgba(OT_WAX,0.8);ctx.shadowBlur=14;rr(ctx,x0,y-36,x1-x0,72,36);ctx.stroke();ctx.restore();
-    T(ctx,"students · courses · degrees, since the Middle Ages",(x0+x1)/2,y+10,{w:700,size:28,align:"center",color:rgba(PARCH,1)});
-    ctx.strokeStyle=rgba(SOFT,0.4);ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x0,y+52);ctx.lineTo(x1,y+52);ctx.stroke();
-    [[1200,"1200s"],[1500,"1500s"],[1800,"1800s"],[1970,"1970"],[1990,"1990"],[2010,"2010"],[2030,"2030"]].forEach(([yr,s_])=>{const x=ot_yx(yr);ctx.fillStyle=rgba(SOFT,0.8);ctx.fillRect(x-1,y+46,2,12);T(ctx,s_,x,y+86,{f:"mono",w:500,size:20,align:"center",color:rgba(SOFT,1)});});
-    T(ctx,"⋯",ot_yx(1955)-10,y+88,{w:800,size:24,align:"center",color:rgba(SOFT,0.8)});
-    OT_ERA.forEach(([a,b,n],i)=>{const t0=cO+0.3+i*0.55,on=fin(t,t0,0.4),gone=i<4?fin(t,cO+0.3+(i+1)*0.55,0.4):0;if(on<=0)return;const xa=ot_yx(a)+4,xb=ot_yx(b)-4,yy=i%2?520:440;
-      withA(ctx,on*(1-0.55*gone),()=>{glass(ctx,xa,yy,xb-xa,64,12,CYAN,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.94)"});T(ctx,n,(xa+xb)/2,yy+40,{w:700,size:21,align:"center"});});
-      if(gone>0)withA(ctx,gone,()=>T(ctx,"replaced",(xa+xb)/2,yy-10,{f:"mono",w:500,size:16,align:"center",color:rgba(SOFT,0.9)}));
-      // hold every system up to the model
-      const h=fin(t,cL+2.0+i*0.2,0.4);if(h>0)withA(ctx,h,()=>{ctx.save();ctx.strokeStyle=rgba(OT_GOLD,0.6);ctx.lineWidth=1.8;ctx.setLineDash([4,6]);ctx.beginPath();ctx.moveTo(1230,300);ctx.lineTo((xa+xb)/2,yy);ctx.stroke();ctx.restore();ot_mark(ctx,xb-14,yy+2,true,h,13);});});
-    withA(ctx,fin(t,cO+0.4,0.5),()=>ot_pill(ctx,1580,360,"a new system every decade or so",CYAN,{size:21}));
-    withA(ctx,fin(t,cL+0.2,0.7),()=>{ot_hub(ctx,1230,210,92,t,1,{title:"the model"});});
-    withA(ctx,fin(t,cO+3.0,0.6),()=>ot_pill(ctx,360,560,"the ideas: centuries old",OT_WAX,{size:24}));
-    withA(ctx,fin(t,cL+4.0,0.6),()=>ot_tag(ctx,960,812,"Next: one model, many shapes",OT_GOLD,1,{size:26}));});
-  endCard(ctx,S,t,B+0.3,"Older than the systems",OT_WAX,"The concepts outlive the systems.");
+/* ---------- 8. New questions for the modeller ---------- */
+const BO_Q=[["truth","For each idea, which shape is the source of truth?"],["sync","Which way does each table sync, and who owns it?"],["fresh","How fresh must each answer be?"],["defs","Where do the definitions live?"],["contract","Contracts, in both directions"]];
+scene("questions",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f);setScreen(ctx,S);bg2(ctx);
+  const starts=BO_Q.map(([id])=>id==="truth"?at("truth",0.36):c(id)),cur=starts.reduce((k,s,i)=>t>=s-0.2?i:k,-1);
+  let y=100;BO_Q.forEach(([id,q],i)=>{const a=fin(t,starts[i]-0.2,0.5),hi=i===cur?1:0;bo_qcard(ctx,40,y,660,i+1,q,[BO_ACC,BO_ACC,BO_M,TRUST,[236,243,255]][i],a,hi);y+=(wrapT(ctx,q,0,0,570,{size:24,w:700,measure:true}).length>1?112:92)+16;});
+  const vis=i=>fin(t,i?starts[i]-0.1:0.5,0.6)*(i<4?1-fin(t,starts[i+1]-0.4,0.4):1);
+  // 1: the source of truth, per idea
+  withA(ctx,vis(0),()=>{bo_store(ctx,760,110,520,400,"rows",{title:"rows",sub:"built to write",ts:34,ss:24,n:5,t});bo_store(ctx,1340,110,520,400,"cols",{title:"columns",sub:"built to read",ts:34,ss:24,n:7,t});
+    withA(ctx,fin(t,at("truth",0.5),0.5),()=>T(ctx,"the source of truth for…",1310,566,{w:600,size:24,align:"center",color:rgba(SOFT,1)}));
+    [[1020,630,"an award's status",BO_W,0.5],[1020,706,"a learner's email",BO_W,0.66],[1600,630,"awards by faculty, ten years",BO_R,0.82]].forEach(([x,y,s_,col,f])=>withA(ctx,fin(t,at("truth",f),0.4),()=>tag(ctx,x,y,"★ "+s_,col,{align:"center",size:26})));});
+  // 2: which way each table syncs, and who owns it
+  withA(ctx,vis(1),()=>{[[160,"awards",BO_W,"rows","columns","registrar's team"],[430,"next suggestion",BO_M,"gold","the app","data team"]].forEach(([y,n,col,a_,b_,own],i)=>{const a=fin(t,c("sync")+i*0.9,0.5);withA(ctx,a,()=>{
+      glass(ctx,760,y,1100,230,22,col,{glow:12,ea:0.7,fill:"rgba(7,12,24,0.93)"});T(ctx,n,794,y+58,{w:800,size:34,color:rgba(col,1)});
+      tag(ctx,794,y+150,a_,a_==="gold"?LAYER.gold:BO_W,{size:28});arrowTo(ctx,960,y+150,1170,y+150,col,1,{head:18,lw:3.5});tag(ctx,1190,y+150,b_,a_==="gold"?BO_W:BO_R,{size:28});
+      T(ctx,"one direction",1065,y+124,{w:600,size:21,align:"center",color:rgba(SOFT,1)});tag(ctx,1450,y+150,"owner: "+own,TRUST,{size:26});});});});
+  // 3: how fresh
+  withA(ctx,vis(2),()=>{const w1=fin(t,at("fresh",0.42),0.5),p1=fin(t,at("fresh",0.72),0.5);
+    bo_fresh(ctx,860,640,940,{labels:["seconds","minutes","hours","a day"],ls:26,ms:26,marks:[w1>0.02?[0,"a wallet",BO_M,0]:null,p1>0.02?[3,"a plan",BO_R,0]:null].filter(Boolean)});
+    const kx=860+940*clamp(ease(clamp((t-c("fresh"))/1.4,0,1))*0.5+0.5*ease(fin(t,at("fresh",0.5),1.2))-0.0,0,1)*(1-w1)*(1-p1);withA(ctx,(1-w1)*fin(t,c("fresh"),0.4),()=>{glow(ctx,kx,640,44,BO_ACC,0.6);ctx.fillStyle=rgba(INK,1);ctx.beginPath();ctx.arc(kx,640,13,0,TAU);ctx.fill();});
+    withA(ctx,w1,()=>bo_phone(ctx,860,330,1.35,{screen:"wallet"}));withA(ctx,p1,()=>bo_answer(ctx,1480,170,360,280,"a plan","ten years of awards",BO_R,t,1));});
+  // 4: definitions in one place
+  withA(ctx,vis(3),()=>{const o1=fin(t,at("defs",0.3),0.5),nt=fin(t,at("defs",0.78),0.5);
+    glass(ctx,1060,190,540,270,22,TRUST,{glow:20,ea:0.9,fill:"rgba(7,12,24,0.95)"});T(ctx,"credits towards a certificate",1090,242,{w:800,size:27,color:rgba(TRUST,1)});
+    wrapT(ctx,"approved microcredentials only, counted when issued, not revoked",1090,290,480,{w:600,size:23,lh:31,color:rgba(INK,0.9)});T(ctx,"one definition · owner: registrar",1090,428,{w:600,size:20,color:rgba(SOFT,1)});
+    withA(ctx,o1,()=>{bo_store(ctx,740,210,250,230,"rows",{title:"the app",n:3,ts:28});bo_store(ctx,1660,210,220,230,"cols",{title:"the report",n:4,ts:28});arrowTo(ctx,1054,325,996,325,TRUST,1,{head:16,lw:3});arrowTo(ctx,1606,325,1654,325,TRUST,1,{head:16,lw:3});});
+    withA(ctx,nt,()=>{ctx.save();ctx.setLineDash([8,8]);ctx.strokeStyle=rgba(SOFT,0.6);ctx.lineWidth=2;rr(ctx,1140,510,380,130,18);ctx.stroke();ctx.restore();T(ctx,"a second copy",1330,584,{w:700,size:26,align:"center",color:rgba(SOFT,0.7)});cross_(ctx,1330,575,96,BAD,0.9);
+      tag(ctx,1330,716,"one place, not two",GOOD,{align:"center",size:30});});});
+  // 5: data contracts, in both directions
+  withA(ctx,vis(4),()=>{const cA=fin(t,c("contract")+0.1,0.6),bw=fin(t,at("contract",0.7),0.6);
+    ctx.save();ctx.translate(1040,110);ctx.scale(0.74,0.74);contract(ctx,0,0,760,560,{rows:1,sign:1});ctx.restore();
+    withA(ctx,cA,()=>{bo_store(ctx,740,150,270,230,"rows",{title:"the app",n:3,ts:28});vault(ctx,1640,130,230,300,LAYER.gold,(r,cc)=>hash(r*5+cc,6)<0.6?LAYER.gold:null,null);chip(ctx,1755,192,null,"Gold",null,{align:"center",edge:LAYER.gold});});
+    withA(ctx,bw,()=>{ctx.save();ctx.strokeStyle=rgba(SOFT,0.4);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(875,384);ctx.lineTo(875,650);ctx.moveTo(1755,434);ctx.lineTo(1755,650);ctx.stroke();ctx.restore();
+      arrowTo(ctx,880,586,1750,586,BO_W,1,{head:18,lw:3.5});arrowTo(ctx,1750,640,880,640,BO_M,1,{head:18,lw:3.5});T(ctx,"what the app writes",1315,574,{w:600,size:21,align:"center",color:rgba(BO_W,1)});T(ctx,"what gold serves back",1315,672,{w:600,size:21,align:"center",color:rgba(BO_M,1)});
+      tag(ctx,1315,746,"both directions",BO_ACC,{align:"center",size:30});});});
+  vign(ctx,S);});
+
+/* ---------- 9. Pull back ---------- */
+scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f),B=c("breath");setScreen(ctx,S);bg2(ctx);
+  const m=fin(t,0.4,0.8),sh=fin(t,at("one",0.3),0.7),pl=fin(t,at("one",0.55),0.6),ds=fin(t,at("one",0.78),0.6),tg=fin(t,c("tag")+0.1,0.6),nx=fin(t,c("next")+0.2,0.7);
+  // one logical model
+  withA(ctx,m,()=>{tag(ctx,900,70,"one logical model",KIND,{align:"center",size:26});const E={l:{x:540,y:180,name:"Learner",col:KIND,s:1.25},a:{x:900,y:180,name:"Award",col:KIND,s:1.25},k:{x:1300,y:180,name:"Credential type",col:KIND,s:1.25}};
+    const b=k=>entBox(ctx,E[k]);relLine(ctx,b("l"),b("a"),"1","*",{col:KIND,s:1.25});relLine(ctx,b("a"),b("k"),"*","1",{col:KIND,s:1.25});Object.values(E).forEach(e=>ent(ctx,e));});
+  // a shape for writing, a shape for reading, on one platform, a short distance apart
+  withA(ctx,sh,()=>{ctx.save();ctx.strokeStyle=rgba(KIND,0.45);ctx.lineWidth=2;ctx.setLineDash([6,8]);ctx.beginPath();ctx.moveTo(900,220);ctx.lineTo(640,340);ctx.moveTo(900,220);ctx.lineTo(1160,340);ctx.stroke();ctx.restore();
+    bo_store(ctx,420,340,420,300,"rows",{title:"for writing",ts:32,n:6,t});bo_store(ctx,960,340,420,300,"cols",{title:"for reading",ts:32,n:8,t});});
+  withA(ctx,pl,()=>{glass(ctx,360,660,1080,76,20,BO_ACC,{glow:20,ea:0.85,fill:"rgba(8,16,30,0.9)"});T(ctx,"one platform",900,708,{w:800,size:28,align:"center",color:rgba(BO_ACC,1)});});
+  withA(ctx,ds,()=>{arrowTo(ctx,846,500,954,500,BO_ACC,1,{head:14,lw:3});arrowTo(ctx,954,524,846,524,BO_ACC,0.6,{head:12,lw:3});});
+  withA(ctx,tg,()=>{const y=816,p1="Hybrid removes the copy, ",p2="not the model.",w1=tw(ctx,p1,46,800),w2=tw(ctx,p2,46,800),x0=900-(w1+w2)/2;T(ctx,p1,x0,y,{w:800,size:46});T(ctx,p2,x0+w1,y,{w:800,size:46,color:rgba(BO_ACC,1)});});
+  // next: meaning a machine can read
+  withA(ctx,nx,()=>{orb(ctx,1690,330,28,t);glass(ctx,1510,400,360,140,16,KIND,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.94)"});T(ctx,"award",1536,446,{w:800,size:26,color:rgba(KIND,1)});T(ctx,"is a kind of credential",1536,486,{w:600,size:22});
+    arrowTo(ctx,1690,394,1690,370,KIND,0.8,{head:10});tag(ctx,1690,600,"next: meaning",KIND,{align:"center",size:24});tag(ctx,1690,650,"a machine can read",KIND,{align:"center",size:24});});
+  endCard(ctx,S,t,B+0.3,"Both at once",BO_ACC,"Hybrid removes the copy, not the model.");
   vign(ctx,S);});
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */

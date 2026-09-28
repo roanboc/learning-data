@@ -6,25 +6,37 @@
 const bo_at=(sc,id,f)=>sc.cues[id]+(sc.ends[id]-sc.cues[id])*f;
 
 /* ---------- 1. The till that kept the total ---------- */
+// the register's keys, in the picture: where the bartender's finger lands
+const bo_KX=i=>1180+(-125+i*50)*1.1,BO_KY=527;
 scene("till",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f),B=c("breath");histBg(ctx,S,t,{light:0.13});
   bo_saloon(ctx,t);
   // the evening passes: the wall clock runs on to closing time
-  const ffS=at("total",0.62),ff=fin(t,ffS,1.3);bo_clock(ctx,300,190,62,(8.3+t*0.01+ff*2.6)%12);
-  withA(ctx,fin(t,at("total",0.8),0.5),()=>tag(ctx,300,305,"closing time",BO_AMB,{align:"center",size:24}));
-  bo_counter(ctx);
-  // glasses and bottles on the bar
-  [[1640,0],[1720,1],[1800,0],[1860,2]].forEach(([x,k],i)=>{ctx.fillStyle=rgba([[150,200,140],[200,140,80],[220,200,150]][k],0.6);if(k===2){rr(ctx,x-14,640,28,60,6);ctx.fill();}else{rr(ctx,x-13,610,26,90,6);ctx.fill();ctx.fillRect(x-5,580,10,34);}glow(ctx,x-4,650,18,[255,220,160],0.2+0.05*Math.sin(t*1.7+i));});
+  const ffS=at("total",0.62),ff=fin(t,ffS,1.3);bo_clock(ctx,1700,150,58,(8.3+t*0.01+ff*2.6)%12);
+  withA(ctx,fin(t,at("total",0.8),0.5),()=>tag(ctx,1700,262,"closing time",BO_AMB,{align:"center",size:24}));
+  bo_counter(ctx,t);
+  // bottles and a glass on the bar
+  bo_bottle(ctx,1690,700,1.05,[110,160,100],t,1);bo_bottle(ctx,1770,700,1.15,[170,100,50],t,2);
+  ctx.save();const gg=ctx.createLinearGradient(1830,0,1880,0);gg.addColorStop(0,"rgba(220,235,255,0.35)");gg.addColorStop(0.5,"rgba(220,235,255,0.1)");gg.addColorStop(1,"rgba(220,235,255,0.3)");ctx.fillStyle=gg;ctx.beginPath();ctx.moveTo(1832,640);ctx.quadraticCurveTo(1834,690,1840,700);ctx.lineTo(1874,700);ctx.quadraticCurveTo(1880,690,1882,640);ctx.closePath();ctx.fill();
+  ctx.fillStyle="rgba(210,150,60,0.55)";ctx.beginPath();ctx.moveTo(1835,668);ctx.quadraticCurveTo(1857,672+2*Math.sin(t*2),1879,668);ctx.quadraticCurveTo(1878,690,1872,698);ctx.lineTo(1842,698);ctx.quadraticCurveTo(1836,690,1835,668);ctx.fill();ctx.restore();
   yearTag(ctx,120,90,"1879 · Dayton, Ohio",CLAY,fin(t,0.4,0.6));
   // the patent
-  bo_patent(ctx,110,360,440,300,fin(t,at("ritty",0.42),0.7)*(1-fin(t,c("total")+0.4,0.8)),-0.035);
+  bo_patent(ctx,1450,300,420,290,fin(t,at("ritty",0.42),0.7)*(1-fin(t,c("total")+0.4,0.8)),0.03);
   // the sales, rung up one by one; then the rest of the evening, faster; then the day's total, read at closing time
   const sales=[[at("ritty",0.8),0,5],[at("total",0.22),1,10],[at("total",0.33),3,25],[at("total",0.44),2,15],[at("total",0.55),4,50]];
-  let last=null,tot=0;sales.forEach(sl=>{if(t>=sl[0]){last=sl;}if(t>=sl[0]+0.25)tot+=sl[2];});
-  let press=last?[last[1],pulseAt(t,last[0]-0.08,0.36)]:null,tab=last?BO_KEYS[last[1]]:null,pop=last?fin(t,last[0],0.3):0;
-  if(ff>0&&ff<1){const k=Math.floor(t*9)%6;press=[k,Math.abs(Math.sin(t*28))];tab=BO_KEYS[k];pop=0.6+0.4*Math.abs(Math.sin(t*28));}
+  let last=null,tot=0;sales.forEach(sl=>{if(t>=sl[0]-0.12){last=sl;}if(t>=sl[0]+0.25)tot+=sl[2];});
+  let press=last?[last[1],pulseAt(t,last[0]-0.08,0.36)]:null,tab=last&&t>=last[0]?BO_KEYS[last[1]]:(last&&sales.indexOf(last)>0?BO_KEYS[sales[sales.indexOf(last)-1][1]]:null),pop=last?fin(t,last[0],0.3):0;
+  let fk=-1;if(ff>0&&ff<1){const j=Math.floor(t*9),u=t*9-j;fk=j%6;press=[fk,u>0.35&&u<0.85?Math.sin(Math.PI*(u-0.35)/0.5):0];tab=BO_KEYS[fk];pop=1;}
   tot+=Math.round((3845-105)*ease(ff));
   const wT=c("wish"),rec=fin(t,wT,0.5),cnt=fin(t,at("wish",0.22),0.5),one=fin(t,at("wish",0.34),0.6);
-  bo_register(ctx,1180,700,1.1,{press,tab,pop,total:tot,hi:pulseAt(t,at("ritty",0.84),1.4)+0.6*one,keysHi:rec,tabHi:rec,dialHi:Math.max(cnt,pulseAt(t,at("total",0.8),1.6)),totHi:cnt+fin(t,at("total",0.8),0.4)*(1-fin(t,wT-0.2,0.4))});
+  bo_register(ctx,1180,700,1.1,{t,press,tab,pop,total:tot,hi:pulseAt(t,at("ritty",0.84),1.4)+0.6*one,keysHi:rec,tabHi:rec,dialHi:Math.max(cnt,pulseAt(t,at("total",0.8),1.6)),totHi:cnt+fin(t,at("total",0.8),0.4)*(1-fin(t,wT-0.2,0.4))});
+  // the bartender's hand: it comes in, rings up each sale, taps through the evening, and leaves at closing
+  // between presses it drops back, below the total, so the running total stays in view
+  const wp=[[sales[0][0]-1.4,-160,600]];sales.forEach(([ts,k])=>{wp.push([ts-0.28,bo_KX(k),BO_KY-14]);wp.push([ts+0.12,bo_KX(k),BO_KY-10]);wp.push([ts+0.5,bo_KX(k)-90,BO_KY+100]);});
+  wp.push([ffS-0.25,bo_KX(1),BO_KY-14]);wp.push([ffS+1.35,bo_KX(3),BO_KY-14]);wp.push([ffS+1.9,bo_KX(1)-90,BO_KY+110]);wp.push([wT-0.6,bo_KX(1)-96,BO_KY+112]);wp.push([wT+0.3,-220,620]);
+  let hx=wp[0][1],hy=wp[0][2];for(let i=0;i<wp.length-1;i++){if(t>=wp[i][0]&&t<wp[i+1][0]){const u=ease((t-wp[i][0])/(wp[i+1][0]-wp[i][0]));hx=lerp(wp[i][1],wp[i+1][1],u);hy=lerp(wp[i][2],wp[i+1][2],u);}}if(t>=wp[wp.length-1][0]){hx=wp[wp.length-1][1];hy=wp[wp.length-1][2];}
+  if(fk>=0){const j=Math.floor(t*9),u=t*9-j,kp=(j+5)%6;hx=lerp(bo_KX(kp),bo_KX(fk),ease(Math.min(1,u*3)));hy=BO_KY-14;}
+  if(press&&press[1]>0&&Math.abs(hx-bo_KX(press[0]))<30)hy=BO_KY-2+9*press[1];else if(press&&press[1]>0)hy+=0;
+  hy+=Math.sin(t*1.7)*2.5;bo_hand(ctx,hx,hy,1.1,t,1);
   withA(ctx,fin(t,at("ritty",0.84),0.5)*(1-fin(t,c("total"),0.6)),()=>tag(ctx,1180,790,"the cash register",BO_BRASS,{align:"center",size:28}));
   // recording and counting, in one place
   withA(ctx,rec,()=>{tag(ctx,470,470,"recording: each sale",BO_W,{size:28});arrowTo(ctx,830,462,1050,300,BO_W,0.9,{bend:-0.15,head:16});arrowTo(ctx,830,482,1030,550,BO_W,0.9,{bend:0.1,head:16});});
@@ -46,7 +58,7 @@ scene("distance",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f)
   withA(ctx,ap,()=>{tag(ctx,1650,196,"reading",BO_R,{align:"center",size:26});bo_answer(ctx,1460,240,380,260,"the answer",sunA>0.5?"ready tomorrow":"…",BO_R,t,0.35+0.65*sunA);});
   withA(ctx,ap*(1-fin(t,c("path"),0.8)),()=>{ctx.save();ctx.strokeStyle=rgba(SOFT,0.45);ctx.lineWidth=2;ctx.setLineDash([6,12]);ctx.beginPath();ctx.moveTo(510,370);ctx.lineTo(1445,370);ctx.stroke();ctx.restore();tag(ctx,975,370,"apart",SOFT,{align:"center",size:24});});
   // overnight, a copy travels to the lakehouse and gets refined
-  const mo=fin(t,at("path",0.3),0.8);bo_moon(ctx,605,118,40,mo*(1-0.5*sunA));
+  const mo=fin(t,at("path",0.3),0.8);bo_moon(ctx,605,118,40,mo*(1-0.5*sunA),t);
   withA(ctx,mo,()=>T(ctx,"overnight",605,206,{w:700,size:22,align:"center",color:rgba([190,205,255],1)}));
   const cp0=at("path",0.36);if(t>cp0-0.1)packets(ctx,t,bez(P(495,370),P(560,250),P(660,250),P(722,370),24),0.3,1.2,cp0,BO_W,17,1,cp0+2.2);
   const lit=[fin(t,at("path",0.5),0.6),fin(t,at("path",0.62),0.6),fin(t,at("path",0.74),0.6)],la=fin(t,at("path",0.4),0.7);
@@ -58,11 +70,11 @@ scene("distance",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f)
   const eA=fin(t,at("now",0.18),0.6),wA=fin(t,at("now",0.44),0.6),wait=fin(t,at("now",0.05),0.6);
   withA(ctx,wait,()=>{glow(ctx,1650,370,220,BO_AMB,0.12+0.06*Math.sin(t*3));T(ctx,"tomorrow, 06:00",1650,538,{f:"mono",w:500,size:24,align:"center",color:rgba(BO_AMB,1)});});
   withA(ctx,eA,()=>{glass(ctx,160,642,620,170,20,BO_AMB,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.94)"});ICON.uni(ctx,208,688);T(ctx,"An employer",250,696,{w:800,size:28});T(ctx,"Is award A-1042 still valid?",190,744,{w:600,size:24,color:rgba(SOFT,1)});
-    T(ctx,"now?",190,792,{w:800,size:30,color:rgba(BO_AMB,1)});bo_hourglass(ctx,720,726,1.4,t,BO_AMB,1);
+    T(ctx,"now?",190,792,{w:800,size:30,color:rgba(BO_AMB,1)});bo_hourglass(ctx,720,726,1.5,(t-at("now",0.18))/13,BO_AMB,1,t);
     arrowTo(ctx,780,690,1540,560,BO_AMB,0.55,{bend:-0.12,dash:[8,10],p:fin(t,at("now",0.24),0.8),nohead:true});});
   withA(ctx,wA,()=>{glass(ctx,860,642,740,170,20,TRUST,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.94)"});T(ctx,"Aisha's wallet",890,696,{w:800,size:28});
     for(let i=0;i<4;i++){const on=i<2;ctx.fillStyle=on?rgba(TRUST,0.9):"rgba(160,190,240,0.1)";rr(ctx,1120+i*46,668,38,42,6);ctx.fill();if(!on){ctx.strokeStyle="rgba(160,190,240,0.45)";ctx.lineWidth=1.4;rr(ctx,1120+i*46,668,38,42,6);ctx.stroke();}}
-    T(ctx,"2 of 4 microcredentials towards a graduate certificate",890,746,{w:600,size:23,color:rgba(SOFT,1)});T(ctx,"now?",890,794,{w:800,size:30,color:rgba(BO_AMB,1)});bo_hourglass(ctx,1540,690,1.4,t+1.3,BO_AMB,1);
+    T(ctx,"2 of 4 microcredentials towards a graduate certificate",890,746,{w:600,size:23,color:rgba(SOFT,1)});T(ctx,"now?",890,794,{w:800,size:30,color:rgba(BO_AMB,1)});bo_hourglass(ctx,1540,690,1.5,(t-at("now",0.44))/13,BO_AMB,1,t);
     arrowTo(ctx,1480,642,1620,560,BO_AMB,0.55,{bend:0.1,dash:[8,10],p:fin(t,at("now",0.5),0.8),nohead:true});});
   // that distance
   bo_span(ctx,350,1650,600,BO_ACC,"the distance",fin(t,c("appeal")+0.2,0.6),fin(t,c("appeal")+0.2,1.2));
@@ -156,9 +168,9 @@ scene("removes",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f);
   bo_store(ctx,lx,320,260,360,"rows",{a:sa,title:"writing",ts:30,n:6,t,col:BO_W});bo_store(ctx,rx,320,260,360,"cols",{a:sa,title:"reading",ts:30,n:6,t,col:BO_R});
   BO_GONE.forEach(([s,k],i)=>{const x=400+i*285,y=340,a=fin(t,named[i],0.5)*(1-go),st=fin(t,named[i]+0.9,0.4);if(a<=0.01)return;
     withA(ctx,a,()=>{glass(ctx,x,y,250,320,20,[200,215,240],{glow:10,ea:0.6,fill:"rgba(7,12,24,0.93)"});const cx=x+125,cy=y+110;
-      withA(ctx,1-0.4*st,()=>{if(k==="moon"){bo_moon(ctx,cx-30,cy-10,32,1);for(let j=0;j<3;j++){ctx.fillStyle=rgba(BO_W,0.9);rr(ctx,cx+12+j*20,cy+6-j*12,14,14,3);ctx.fill();}}
+      withA(ctx,1-0.4*st,()=>{if(k==="moon"){bo_moon(ctx,cx-30,cy-10,32,1,t);for(let j=0;j<3;j++){ctx.fillStyle=rgba(BO_W,0.9);rr(ctx,cx+12+j*20,cy+6-j*12,14,14,3);ctx.fill();}}
         if(k==="pipe"){ctx.save();ctx.strokeStyle=rgba(INK,0.9);ctx.lineWidth=10;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(cx-75,cy+22);ctx.lineTo(cx-22,cy+22);ctx.lineTo(cx-22,cy-22);ctx.lineTo(cx+32,cy-22);ctx.lineTo(cx+32,cy+22);ctx.lineTo(cx+75,cy+22);ctx.stroke();ctx.restore();packets(ctx,t,[P(cx-75,cy+22),P(cx-22,cy+22),P(cx-22,cy-22),P(cx+32,cy-22),P(cx+32,cy+22),P(cx+75,cy+22)],0.4,1.4,0,BO_W,11,1);}
-        if(k==="wait")bo_hourglass(ctx,cx,cy,2.0,t,BO_AMB,1);
+        if(k==="wait")bo_hourglass(ctx,cx,cy,2.1,(t-named[2]+1)/7,BO_AMB,1,t);
         if(k==="lock"){bo_lock(ctx,cx-32,cy,1.8,BO_W);bo_lock(ctx,cx+32,cy,1.8,BO_R);}});
       wrapT(ctx,s,cx,y+236,220,{w:700,size:25,align:"center",lh:31});
       cross_(ctx,cx,cy,84*ease(st),SOFT,0.7*st);});});
@@ -229,8 +241,8 @@ scene("back",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f);set
 const BO_Q=[["truth","For each idea, which shape is the source of truth?"],["sync","Which way does each table sync, and who owns it?"],["fresh","How fresh must each answer be?"],["defs","Where do the definitions live?"],["contract","Contracts, in both directions"]];
 scene("questions",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f);setScreen(ctx,S);bg2(ctx);
   const starts=BO_Q.map(([id])=>id==="truth"?at("truth",0.36):c(id)),cur=starts.reduce((k,s,i)=>t>=s-0.2?i:k,-1);
-  let y=100;BO_Q.forEach(([id,q],i)=>{const a=fin(t,starts[i]-0.2,0.5),hi=i===cur?1:0;bo_qcard(ctx,50,y,640,i+1,q,[BO_ACC,BO_ACC,BO_M,TRUST,[236,243,255]][i],a,hi);y+=(wrapT(ctx,q,0,0,550,{size:22,w:700,measure:true}).length>1?110:90)+16;});
-  const vis=i=>fin(t,starts[i]-0.1,0.5)*(i<4?1-fin(t,starts[i+1]-0.4,0.4):1);
+  let y=100;BO_Q.forEach(([id,q],i)=>{const a=fin(t,starts[i]-0.2,0.5),hi=i===cur?1:0;bo_qcard(ctx,40,y,660,i+1,q,[BO_ACC,BO_ACC,BO_M,TRUST,[236,243,255]][i],a,hi);y+=(wrapT(ctx,q,0,0,570,{size:24,w:700,measure:true}).length>1?112:92)+16;});
+  const vis=i=>fin(t,i?starts[i]-0.1:0.5,0.6)*(i<4?1-fin(t,starts[i+1]-0.4,0.4):1);
   // 1: the source of truth, per idea
   withA(ctx,vis(0),()=>{bo_store(ctx,760,110,520,400,"rows",{title:"rows",sub:"built to write",ts:34,ss:24,n:5,t});bo_store(ctx,1340,110,520,400,"cols",{title:"columns",sub:"built to read",ts:34,ss:24,n:7,t});
     withA(ctx,fin(t,at("truth",0.5),0.5),()=>T(ctx,"the source of truth for…",1310,566,{w:600,size:24,align:"center",color:rgba(SOFT,1)}));
@@ -256,7 +268,9 @@ scene("questions",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f
   withA(ctx,vis(4),()=>{const cA=fin(t,c("contract")+0.1,0.6),bw=fin(t,at("contract",0.7),0.6);
     ctx.save();ctx.translate(1040,110);ctx.scale(0.74,0.74);contract(ctx,0,0,760,560,{rows:1,sign:1});ctx.restore();
     withA(ctx,cA,()=>{bo_store(ctx,740,150,270,230,"rows",{title:"the app",n:3,ts:28});vault(ctx,1640,130,230,300,LAYER.gold,(r,cc)=>hash(r*5+cc,6)<0.6?LAYER.gold:null,null);chip(ctx,1755,192,null,"Gold",null,{align:"center",edge:LAYER.gold});});
-    withA(ctx,bw,()=>{arrowTo(ctx,880,400,1740,440,BO_W,1,{head:18,lw:3.5,bend:0.14});arrowTo(ctx,1740,470,880,420,BO_M,1,{head:18,lw:3.5,bend:0.2});tag(ctx,1310,760,"both directions",BO_ACC,{align:"center",size:30});});});
+    withA(ctx,bw,()=>{ctx.save();ctx.strokeStyle=rgba(SOFT,0.4);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(875,384);ctx.lineTo(875,650);ctx.moveTo(1755,434);ctx.lineTo(1755,650);ctx.stroke();ctx.restore();
+      arrowTo(ctx,880,586,1750,586,BO_W,1,{head:18,lw:3.5});arrowTo(ctx,1750,640,880,640,BO_M,1,{head:18,lw:3.5});T(ctx,"what the app writes",1315,574,{w:600,size:21,align:"center",color:rgba(BO_W,1)});T(ctx,"what gold serves back",1315,672,{w:600,size:21,align:"center",color:rgba(BO_M,1)});
+      tag(ctx,1315,746,"both directions",BO_ACC,{align:"center",size:30});});});
   vign(ctx,S);});
 
 /* ---------- 9. Pull back ---------- */

@@ -11,12 +11,11 @@ What it checks, page by page (every .html under site/):
   https://roanboc.github.io/learning-data/... map to site/), every #id exists on its target page (except #t=,
   and the lab and old home hashes that scripts read), GitHub blob/tree links name a file in this repo, and
   download links name a file the release workflow publishes. Links inside the "Pause and think" packs count too.
-- header: Start here, Topics, Making of, GitHub, then EN and ES, with the right targets and the right current page.
+- header: Start here, Topics, Making of, then EN and ES, with the right targets and the right current page.
 - no leftover labels in the nav (Watch, Take it apart, Sharpen it, All films, Mira, Desarma).
 - hreflang: exactly the pairs of real twins, each pointing back.
-- footer row and breadcrumbs.
+- the footer's one link (the source on GitHub), breadcrumbs, and the course bar (the sticky Watch · Labs · Scenarios steps).
 - no film numbering (on the site and in the Markdown docs), and no stale film lengths.
-- the home pages' lesson count matches the journey pages.
 - one film bundle per page, scripts in order, and each film's progress prefix where it belongs.
 - Spanish pages: in Spanish, linking to Spanish pages when a twin exists, and marking links to English-only pages.
 - the journey pages are what site-tools/build_pages.py makes from their Markdown.
@@ -45,7 +44,9 @@ TWINS = ["", "labs/", "scenarios/", "journey/", "topics/", "sketch/", "when-thin
          "when-things-go-wrong/too-good-to-be-true/labs/", "when-things-go-wrong/too-good-to-be-true/scenarios/"]
 # English-only pages and where their ES toggle goes
 ES_TOGGLE = {"sketch/labs/": "es/sketch/", "sketch/scenarios/": "es/sketch/"}
-NAV = {"en": ["Start here", "Topics", "Making of", "GitHub"], "es": ["Empieza aquí", "Temas", "Cómo se hizo", "GitHub"]}
+NAV = {"en": ["Start here", "Topics", "Making of"], "es": ["Empieza aquí", "Temas", "Cómo se hizo"]}
+# the footer holds no second navigation, only the source
+FOOT = {"en": "Source on GitHub", "es": "Código en GitHub"}
 OLD_NAV = {"Watch", "Take it apart", "Sharpen it", "All films", "Mira", "Desarma", "Labs", "Scenarios", "Situaciones"}
 CRUMBS = {  # page: (text, the pages its links go to, in order)
     "labs/": ("Start here › The Inner Life of Data", [""]),
@@ -471,7 +472,7 @@ def main():
     s["notes"].append(f"{checked} links on {len(pages)} pages")
 
     # -- header
-    s = rep.check("Header: Start here · Topics · Making of · GitHub · EN/ES on every page, with the right current page")
+    s = rep.check("Header: Start here · Topics · Making of · EN/ES on every page, with the right current page")
     for pg in normal:
         lang = "es" if pg.es else "en"
         head = pg.dom.first("header", cls="top")
@@ -484,7 +485,7 @@ def main():
         lang_box = [k for k in kids if k.tag == "span" and "lang" in k.cls]
         labels = [a.text() for a in links]
         want = NAV[lang]
-        if labels != want or [k.tag for k in kids] != ["a"] * 4 + ["span"] or not lang_box:
+        if labels != want or [k.tag for k in kids] != ["a"] * 3 + ["span"] or not lang_box:
             s["fails"].append(f"{pg.file}: nav reads {labels + ['EN/ES' if lang_box else '(no .lang)']}, expected {want + ['EN/ES']}")
             continue
         home = "es/" if pg.es else ""
@@ -494,14 +495,8 @@ def main():
             f, _ = file_of(target) if kind == "site" else (None, None)
             if f != t + "index.html":
                 s["fails"].append(f"{pg.file}: nav \"{a.text()}\" → {a.attrs.get('href')}, expected site/{t}")
-        if links[3].attrs.get("href", "").rstrip("/") != REPO:
-            s["fails"].append(f"{pg.file}: nav GitHub → {links[3].attrs.get('href')}, expected {REPO}")
-        for a in links[2:4]:
-            if "nav-extra" not in a.cls:
-                s["fails"].append(f"{pg.file}: nav \"{a.text()}\" needs class nav-extra (hidden on phones, in the footer row)")
-        for a in links[:2]:
-            if "nav-extra" in a.cls:
-                s["fails"].append(f"{pg.file}: nav \"{a.text()}\" must stay visible on phones (no nav-extra)")
+        if any("nav-extra" in a.cls for a in links):
+            s["fails"].append(f"{pg.file}: every nav link stays visible on phones (no nav-extra)")
         brand = head.first("a", cls="brand")
         bk, bt, _ = resolve(pg, brand.attrs.get("href", "")) if brand is not None else (None, None, None)
         if bk != "site" or file_of(bt)[0] != home + "index.html":
@@ -593,27 +588,35 @@ def main():
     s["notes"].append(f"{len(TWINS)} pairs expected")
 
     # -- footer
-    s = rep.check("Footer row: Start here · Topics · Making of · GitHub, in the page's language")
+    s = rep.check("Footer: one link, to the source on GitHub, in the page's language; no second navigation row")
     for pg in normal:
         rows = [p for p in pg.dom.all("p", cls="foot-links") if p.up(lambda n: n.tag == "footer")]
-        langs = ["en", "es"] if pg.is404 else ["es" if pg.es else "en"]
-        if len(rows) != len(langs):
-            s["fails"].append(f"{pg.file}: {len(rows)} footer rows, expected {len(langs)}")
+        lg = "es" if pg.es else "en"
+        if len(rows) != 1:
+            s["fails"].append(f"{pg.file}: {len(rows)} footer rows, expected 1")
             continue
-        for row, lg in zip(rows, langs):
-            links = row.all("a")
-            if [a.text() for a in links] != NAV[lg]:
-                s["fails"].append(f"{pg.file}: footer row reads {[a.text() for a in links]}, expected {NAV[lg]}")
-                continue
-            home = "es/" if lg == "es" else ""
-            for a, t in zip(links[:3], [home, home + "topics/", home + "journey/"]):
-                kind, target, _ = resolve(pg, a.attrs.get("href", ""))
-                if kind != "site" or file_of(target)[0] != t + "index.html":
-                    s["fails"].append(f"{pg.file}: footer \"{a.text()}\" → {a.attrs.get('href')}, expected site/{t}")
-            if links[3].attrs.get("href", "").rstrip("/") != REPO:
-                s["fails"].append(f"{pg.file}: footer GitHub → {links[3].attrs.get('href')}")
+        links = rows[0].all("a")
+        if [a.text() for a in links] != [FOOT[lg]] or links[0].attrs.get("href", "").rstrip("/") != REPO:
+            s["fails"].append(f"{pg.file}: footer row reads {[a.text() for a in links]}, expected [{FOOT[lg]!r}] → {REPO}")
         if not pg.is404 and len(pg.dom.first("footer").all("p")) < 2:
             s["fails"].append(f"{pg.file}: the footer needs its licence text under the row")
+
+    # -- course bar
+    s = rep.check("Course bar: a film's steps sit in nav.course, right after the hero, never inside it")
+    for pg in normal:
+        path = pg.dom.first("ol", cls="path")
+        if path is None:
+            continue
+        bar = path.up(lambda n: n.tag == "nav" and "course" in n.cls)
+        if bar is None:
+            s["fails"].append(f"{pg.file}: ol.path outside a nav.course")
+            continue
+        sibs = bar.parent.elements()
+        k = sibs.index(bar)
+        if k == 0 or not ({"hero", "page-head"} & set(sibs[k - 1].cls)):
+            s["fails"].append(f"{pg.file}: nav.course should come right after the hero")
+        if not bar.attrs.get("aria-label"):
+            s["fails"].append(f"{pg.file}: nav.course needs an aria-label naming the film")
 
     # -- breadcrumbs
     s = rep.check("Breadcrumbs: on every page except home, topics and the journey, in place of the eyebrow")
@@ -687,26 +690,6 @@ def main():
             for m in NUMBERING.finditer(line):
                 s["fails"].append(f"{md.relative_to(ROOT)}:{i}: \"{m.group(0)}\"")
     s["notes"].append(f"{docs} Markdown files")
-
-    # -- lessons
-    s = rep.check("Lesson count: the home pages' number matches the journey pages")
-    for lg, home, jr, pat in (("en", "index.html", "journey/index.md", r"\b(\w+) lessons\b"),
-                              ("es", "es/index.html", "es/journey/index.md", r"\b(\w+) lecciones\b")):
-        md = (WEB / jr).read_text()
-        sec = re.split(r"^## ", md, flags=re.M)
-        lessons = [x for x in sec if re.match(r"(Lessons learned|Lecciones aprendidas|Lecciones|Lo que aprendimos)", x)]
-        if not lessons:
-            s["fails"].append(f"site/{jr}: no lessons section found")
-            continue
-        n = len(re.findall(r"^\d+\. ", lessons[0], re.M))
-        words = re.findall(pat, pages[home].dom.text(), re.I)
-        if not words:
-            s["fails"].append(f"site/{home}: no \"… {'lessons' if lg == 'en' else 'lecciones'}\" found")
-        for w in words:
-            num = WORDS[lg].index(w.lower()) + 1 if w.lower() in WORDS[lg] else (int(w) if w.isdigit() else None)
-            if num != n:
-                s["fails"].append(f"site/{home}: says \"{w}\", site/{jr} lists {n}")
-        s["notes"].append(f"{lg}: {n} lessons")
 
     # -- scripts and progress
     s = rep.check("Scripts: one film bundle per page, in order, and each film's progress prefix")

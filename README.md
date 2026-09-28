@@ -29,13 +29,12 @@ site/                            the website, published to GitHub Pages as it is
   when-things-go-wrong/          the series When things go wrong: a page for the series, and a folder per film
     silent-change/               Changes and data contracts: Silent change, with "Pause and think" questions
     too-good-to-be-true/         Data quality checks: Too good to be true, with "Pause and think", labs/ (three labs) and scenarios/ (ten)
-  journey/                       Making of: two films (Data for Films, That's not quite right), then how The Inner Life of Data was made;
-                                 index.md (source) and index.html (generated)
+  journey/                       Making of: two films (Data for Films, That's not quite right), then how the films were made; index.md (source) and index.html (generated)
   films/                         redirects: films/ goes to topics/, and the old player address films/inner-life-of-data/ to the home page
   404.html                       "Page not found", in English and Spanish
   es/                            the Spanish site, at the same paths. es/sketch/ and the pages of When things go wrong
                                  are Spanish pages around English films; Too good to be true's labs and scenarios are in Spanish too; A Sharper Sketch's labs and scenarios are in English only
-  assets/                        styles (site.css), the icon, and a poster per film: poster.jpg, poster.es.jpg,
+  assets/                        styles (site.css), ambient.js (the moving light behind each page's hero), the icon, and a poster per film: poster.jpg, poster.es.jpg,
                                  sketch-poster.jpg, silent-change-poster.jpg and too-good-to-be-true-poster.jpg
     film/                        The Inner Life of Data's player and soundtrack, per language (built in films/inner-life-of-data/source/)
     film3/                       A Sharper Sketch's player and soundtrack (built in films/a-sharper-sketch/source/)
@@ -104,7 +103,7 @@ A film's page sets its prefix with `data-store` on `section#watch`, and `path.js
 
 ## Writing pages
 
-Write pages in Markdown and turn them into site pages with `python site-tools/build_pages.py` (it needs `pip install markdown`). It builds `site/journey/index.md` and `site/es/journey/index.md` with the templates `site-tools/page.html` and `page.es.html`, which hold the header and footer. Never edit the generated `index.html` by hand. Keep each Spanish page at the same path under `site/es/`, so the language toggle finds it.
+Write pages in Markdown and turn them into site pages with `python site-tools/build_pages.py` (it needs `pip install markdown`). It builds `site/journey/index.md` and `site/es/journey/index.md` with the templates `site-tools/page.html` and `page.es.html`, which hold the header, the hero and the footer: the first heading and the italic line under it become the hero, and [TOC] lists the sections. Never edit the generated `index.html` by hand. Keep each Spanish page at the same path under `site/es/`, so the language toggle finds it.
 
 ## Adding a topic
 

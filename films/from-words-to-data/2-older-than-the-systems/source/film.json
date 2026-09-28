@@ -1,0 +1,16 @@
+{
+  "key": "older-than-the-systems",
+  "title": "Older than the systems",
+  "sub": "From words to data: the idea of a credential is centuries older than any system that stores it, and why conceptual and logical models matter.",
+  "howto": "Parchment, clay and wax are the past; glass is today's systems. Each system has its own colour; the gold outline is the shared model.",
+  "src": [
+    "older.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "model",
+    "verify",
+    7.2
+  ],
+  "say": []
+}

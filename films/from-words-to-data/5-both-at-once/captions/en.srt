@@ -1,0 +1,123 @@
+1
+00:00:01,600 --> 00:00:09,894
+In 1879, a saloon keeper in Ohio patented a machine to keep track of every sale at his bar: the cash register.
+
+2
+00:00:11,094 --> 00:00:18,234
+Within a few years, registers rang up each sale as it happened, and kept a running total, ready to read at closing time.
+
+3
+00:00:19,534 --> 00:00:22,864
+Recording and counting in one place. It's an old wish.
+
+4
+00:00:29,164 --> 00:00:32,554
+At the university, writing and reading still live apart.
+
+5
+00:00:33,254 --> 00:00:41,489
+The app writes to its own database. Overnight, a copy travels to the lakehouse and gets refined, and the answer is ready tomorrow.
+
+6
+00:00:42,789 --> 00:00:52,374
+But some questions can't wait. An employer wants to check a credential now. A learner's wallet wants to show, now, how close she is to a graduate certificate.
+
+7
+00:00:53,774 --> 00:00:56,745
+That distance is why hybrid databases appeal.
+
+8
+00:00:59,445 --> 00:01:02,580
+A hybrid database writes and reads in one place.
+
+9
+00:01:03,280 --> 00:01:10,424
+Some keep two copies inside: rows for writing, and columns for reading, kept in step by the database itself.
+
+10
+00:01:11,824 --> 00:01:17,610
+Others put an operational database inside the lakehouse, with tables synced in both directions.
+
+11
+00:01:18,810 --> 00:01:23,982
+The idea has a name: HTAP, hybrid transactional and analytical processing.
+
+12
+00:01:26,682 --> 00:01:33,990
+Keeping two shapes in step means capturing each change as it happens, and applying it on the other side, in the same order.
+
+13
+00:01:35,490 --> 00:01:43,473
+That only works if every row has a stable key, so an update finds the row it changes, and a delete finds the row it removes.
+
+14
+00:01:44,873 --> 00:01:52,040
+Apply an award's revocation before its issue, and the award comes back to life. Order matters as much as content.
+
+15
+00:01:57,240 --> 00:02:04,069
+What goes? The nightly copy, the pipelines that move it, the wait, and a second set of permissions to keep in step.
+
+16
+00:02:05,369 --> 00:02:06,753
+Those are real gains.
+
+17
+00:02:09,453 --> 00:02:12,068
+Now count awards straight from the app's own tables.
+
+18
+00:02:12,768 --> 00:02:19,912
+Revoked awards are still in there, with a status. Last year's faculty has been overwritten. The count comes out wrong.
+
+19
+00:02:21,312 --> 00:02:26,042
+It's the same mistake as counting enrolments today, instead of on census date.
+
+20
+00:02:27,242 --> 00:02:34,310
+History, shared dimensions and definitions still need modelling. Hybrid removes the copy, not the model.
+
+21
+00:02:37,010 --> 00:02:46,106
+Data flows the other way now, too. Gold data is served back to the app: the next microcredential to suggest, or a learner who may need help.
+
+22
+00:02:47,406 --> 00:02:53,181
+Features for machine learning travel the same way: calculated in gold, served in milliseconds.
+
+23
+00:02:54,381 --> 00:02:59,879
+And AI agents need both shapes at once: they read what's known, and write down what they did.
+
+24
+00:03:02,979 --> 00:03:07,939
+So the modeller has new questions. For each idea, which shape is the source of truth?
+
+25
+00:03:09,339 --> 00:03:12,014
+Which way does each table sync, and who owns it?
+
+26
+00:03:13,414 --> 00:03:17,797
+How fresh must each answer be? Seconds for a wallet. A day for a plan.
+
+27
+00:03:19,197 --> 00:03:24,266
+Where do the definitions live, so the app and the report agree? In one place, not two.
+
+28
+00:03:25,566 --> 00:03:29,838
+And the data contracts from Silent change now run in both directions.
+
+29
+00:03:33,038 --> 00:03:40,244
+One logical model. A shape for writing, and a shape for reading, on one platform, with a shorter distance between them.
+
+30
+00:03:41,544 --> 00:03:44,030
+Hybrid removes the copy, not the model.
+
+31
+00:03:45,330 --> 00:03:48,910
+Next: making the meaning itself something a machine can read.

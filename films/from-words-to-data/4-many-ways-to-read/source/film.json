@@ -1,0 +1,16 @@
+{
+  "key": "many-ways-to-read",
+  "title": "Many ways to read",
+  "sub": "From words to data: a normalised core, a data vault, conformed stars and wide tables, and where each lives on the platform.",
+  "howto": "Each shape has its colour: violet for the vault, green for the stars, amber for the wide tables. Bronze, silver and gold are the platform's layers.",
+  "src": [
+    "many.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "where",
+    "breath",
+    1.6
+  ],
+  "say": []
+}

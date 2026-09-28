@@ -43,13 +43,13 @@ scene("kinds",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     const order=PHOTOS.filter(q=>q[1]).indexOf(PHOTOS[i]),mk=has&&order>=0&&order<=pk?fin(t,c("pigeons")+1.5+order*1.1,0.3):0;
     photoTile(ctx,x,y,w,h,k,has,fin(t,0.4+i*0.08,0.4),mk*(1-nw));});
   withA(ctx,1-nw,()=>{const tgt=PHOTOS.filter(q=>q[1])[Math.min(5,pk)]||PHOTOS[0],ti=PHOTOS.indexOf(tgt),px=150+(ti%4)*175+75,py=180+Math.floor(ti/4)*135+140,bob=Math.abs(Math.sin((t-c("pigeons"))*5.7))*14;
-    pigeon(ctx,lerp(420,px,fin(t,c("pigeons")+0.8,0.8)),lerp(760,py+50,fin(t,c("pigeons")+0.8,0.8))+bob,2.0,[210,220,240],{a:fin(t,0.6,0.6)});
+    {const c0=c("pigeons"),LIT=PHOTOS.filter(q=>q[1]),st=k=>{const i=PHOTOS.indexOf(LIT[k]);return[c0+1.38+k*1.1,190+(i%4)*175,350+Math.floor(i/4)*135,1];},R=bd_route(t,[[c0-0.55,120,350,0],st(0),st(3),st(5),[c0+11.1,630,620,0],[c0+16.05,700,620,0]],1.45);pigeon(ctx,R.x,R.y,1.45,[210,220,240],Object.assign({a:fin(t,0.6,0.6),t},R));}
     withA(ctx,fin(t,c("pigeons")+4.0,0.6),()=>tag(ctx,450,640,"people? peck",GOOD,{align:"center",size:20}));});
   // right: the bee, choosing the same
   const bT=c("bees"),ph2=fin(t,bT+3.4,0.3),sample=ph2>0.5?"hstripes":"blue",opts=ph2>0.5?["vstripes","hstripes"]:["blue","yellow"],ok=ph2>0.5?1:0;
   withA(ctx,fin(t,bT-0.2,0.6)*(1-nw),()=>{T(ctx,"the sample",1450,210,{w:700,size:20,align:"center",color:rgba(SOFT,1)});beeCard(ctx,1450,300,130,sample,1,false);
     opts.forEach((k,i)=>beeCard(ctx,1300+i*300,560,130,k,1,i===ok&&t>bT+(ph2>0.5?5.2:2.2)));
-    const u=ph2>0.5?fin(t,bT+3.8,1.4):fin(t,bT+0.6,1.4),bx=lerp(1450,1300+ok*300,u),by=lerp(300,560,u)-Math.sin(u*Math.PI)*120;bee(ctx,bx+Math.sin(t*3)*6,by-110,2.4,t,{a:1});
+    {const F=bd_flight(t,[[bT-0.4,1590,285,-1],[bT+0.5,1588,292,-1],[bT+1.1,1560,405,-1],[bT+1.5,1450,430,-1],[bT+2,1305,426,-1],[bT+2.7,1300,428,-1],[bT+3,1330,440,1],[bT+3.4,1525,445,1],[bT+3.8,1596,300,1],[bT+4.2,1590,292,-1],[bT+5.1,1605,426,-1]]);bee(ctx,F.x,F.y,2.4,t,{a:1,vx:F.vx,vy:F.vy,face:F.face});}
     withA(ctx,fin(t,bT+(ph2>0.5?5.4:2.4),0.3),()=>tag(ctx,1300+ok*300,665,"same",GOOD,{align:"center",size:20}));});
   // no words: two kinds, sorted without a single word
   withA(ctx,nw,()=>{bubble(ctx,760,110,400,"no words",BAD,{size:30});cross_(ctx,1100,150,40,BAD,1);
@@ -74,7 +74,7 @@ scene("calls",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     yearTag(ctx,120,120,"vervet monkeys · alarm calls",CLAY,fin(t,0.3,0.6));
     // the hunters, each with its own call
     leopard(ctx,lerp(2000,1500,fin(t,cL-0.5,3.4)),700,2.2,LEO,{a:fin(t,cL-0.4,0.5)*(1-fin(t,cE,0.6)),t,flip:1,walk:-500*(1-fin(t,cL-0.5,3.4))});
-    eagle(ctx,lerp(1900,1350,fin(t,cE-0.2,1.8)),240+Math.sin(t*1.2)*10,1.3,EAG,{a:fin(t,cE-0.3,0.5)*(1-fin(t,cS,0.6))});
+    {const u=fin(t,cE-0.7,4.4);eagle(ctx,lerp(1990,1060,u)-Math.max(0,t-cE-3.7)*12,lerp(440,360,u)+Math.sin(t*1.2)*6,1.3,EAG,{a:fin(t,cE-0.3,0.5)*(1-fin(t,cS,0.6)),t,yaw:lerp(-0.95,-0.6,u),bank:0.15,elev:1.2});}
     snake(ctx,1420,748,1.3,SNK,{a:fin(t,cS-0.2,0.5)*(1-fin(t,c("kind")+2,0.8)),t,flip:1,crawl:t-cS});
     [[cL,LEO],[cE,EAG],[cS,SNK]].forEach(([c0,col])=>{const u=clamp((t-c0-0.3)/1.4,0,1);if(u>0&&u<1)for(let k=0;k<3;k++){const r=40+u*260+k*40;ring(ctx,MONK[1][0]+30,MONK[1][1]-40,r,col,(1-u)*0.7,3);}});
     MONK.forEach((m,i)=>{let x=m[0],y=m[1];x+=(TREE_SPOTS[i][0]-m[0])*wL+(BUSH_SPOTS[i][0]-m[0])*wE;y+=(TREE_SPOTS[i][1]-m[1])*wL+(BUSH_SPOTS[i][1]-m[1])*wE-30*wS;
@@ -102,7 +102,7 @@ const PHRASES=[[4,1,0],[2,3],[5,6]];
 scene("words",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const cb=fin(t,c("combine")-0.2,0.8),kn=fin(t,c("know")-0.2,0.8),fo=fin(t,c("fossil")-0.2,0.8);
   // pointing: a baby, a bird, and someone looking where the baby looks
-  withA(ctx,1-cb,()=>{const bx=1040,by=330;robin(ctx,bx,by,1.6,{a:1});perch(ctx,bx,by+36,320,t);
+  withA(ctx,1-cb,()=>{const bx=1040,by=330;robin(ctx,bx,by,1.6,{a:1,t});perch(ctx,bx,by+36,320,t);
     baby(ctx,520,720,2.0,fin(t,0.3,0.6),fin(t,c("point")+0.4,0.9));person(ctx,"mei",1500,900,0.62,{t,expr:"calm"});
     const ja=fin(t,c("point")+2.0,0.8);withA(ctx,ja,()=>{[[680,640],[1500,560]].forEach(([x,y])=>{ctx.strokeStyle=rgba(WA_INK,0.8);ctx.lineWidth=2.2;ctx.setLineDash([6,9]);ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(bx,by+10);ctx.stroke();ctx.setLineDash([]);});tag(ctx,1060,520,"shared attention",WA_INK,{align:"center",size:22});});
     withA(ctx,fin(t,c("root")+0.6,0.6),()=>{[["this one",850,220],["here",1230,210],["that",1300,380]].forEach(([s,x,y],i)=>withA(ctx,fin(t,c("root")+0.8+i*0.5,0.4),()=>tag(ctx,x,y,s,KIND,{align:"center",size:24})));});});
@@ -156,13 +156,13 @@ scene("gavagai",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   vign(ctx,S);});
 
 /* ---------- 7. Fuzzy edges ---------- */
-const BIRDS=[[(c,x,y,s,a)=>robin(c,x,y,s,{a}),0,0,1.3],[(c,x,y,s,a)=>sparrow(c,x,y,s,{a}),-110,40,1.1],[(c,x,y,s,a)=>pigeon(c,x,y,s,undefined,{a}),190,-120,0.9],[(c,x,y,s,a)=>eagle(c,x,y,s,undefined,{a}),-230,-150,0.8],[(c,x,y,s,a)=>penguin(c,x,y,s,{a}),290,150,1.2],[(c,x,y,s,a)=>ostrich(c,x,y,s,{a}),-300,160,1.1]];
+const BIRDS=[[(c,x,y,s,a,t)=>robin(c,x,y,s,{a,t}),0,0,1.3],[(c,x,y,s,a,t)=>sparrow(c,x,y,s,{a,t}),-110,40,1.1],[(c,x,y,s,a,t)=>pigeon(c,x,y,s,undefined,{a,t}),190,-120,0.9],[(c,x,y,s,a,t)=>eagle(c,x,y,s,undefined,{a,t}),-230,-150,0.8],[(c,x,y,s,a,t)=>penguin(c,x,y,s,{a,t}),290,150,1.2],[(c,x,y,s,a,t)=>ostrich(c,x,y,s,{a,t}),-300,160,1.1]];
 const CREDS=[["degree",-40,-18,0],["diploma",45,32,0],["microcredential",-135,-105,1],["badge · assessed",175,-135,2],["badge · turned up",180,150,3],["certificate of completion",-235,200,4]];
 const RINGS=[["reg",95],["short",185],["careers",262],["lms",345]];
 scene("edges",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,S);bg2(ctx);
   const cx=900,cy=450,cr=fin(t,c("cred")-0.2,0.9);
   withA(ctx,1-cr,()=>{fuzzyRing(ctx,cx,cy,330,KIND,fin(t,c("typical"),0.8),70);glow(ctx,cx,cy,200,TRUST,0.2*fin(t,c("typical"),0.8));
-    BIRDS.forEach(([f,dx,dy,s],i)=>{const a=fin(t,0.4+i*0.5,0.5),edge=Math.hypot(dx,dy)>250;f(ctx,cx+dx,cy+dy,s,a*(edge?0.75:1));});
+    BIRDS.forEach(([f,dx,dy,s],i)=>{const a=fin(t,0.4+i*0.5,0.5),edge=Math.hypot(dx,dy)>250;f(ctx,cx+dx+Math.sin(t*0.45+i*1.9)*4,cy+dy+Math.sin(t*0.6+i*2.7)*5,s,a*(edge?0.75:1),t+i*7);});
     T(ctx,"bird",cx,180,{w:800,size:30,align:"center",color:rgba(KIND,1)});
     withA(ctx,fin(t,c("typical")+0.6,0.5),()=>{tag(ctx,cx,cy+90,"typical",TRUST,{align:"center",size:20});tag(ctx,cx+330,cy-20,"fuzzy edge",KIND,{align:"center",size:20});});
     withA(ctx,fin(t,c("agree")+0.2,0.5),()=>{tag(ctx,1500,380,"agree in the middle",GOOD,{align:"center",size:24});tag(ctx,1500,470,"argue at the edges",EDGE_,{align:"center",size:24});});});

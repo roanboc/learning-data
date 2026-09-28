@@ -62,7 +62,7 @@ const LV={
   trio:(c,w,h,st,L)=>{const V=L.vis,wx=w/2,wy=h-40;
     [[200,V.ideaUK,[140,200,255],200],[w-200,V.ideaUS,[255,170,120],w-200]].forEach(([ix,lab,col,bx],i)=>{c.strokeStyle=rgba(col,0.9);c.lineWidth=3;c.beginPath();c.moveTo(wx,wy-30);c.lineTo(ix,90);c.stroke();
       glow(c,ix,90,70,col,0.5);c.fillStyle=rgba(mix(col,[255,255,255],0.5),1);c.beginPath();c.arc(ix,90,16,0,TAU);c.fill();T(c,lab,ix,48,{w:800,size:26,align:"center",color:rgba(col,1)});
-      c.beginPath();c.moveTo(ix,106);c.lineTo(bx+(i?-150:150),h-110);c.stroke();robin(c,bx+(i?-150:150),h-90,i?1.5:1.2,{col:i?[200,150,120]:undefined});});
+      c.beginPath();c.moveTo(ix,106);c.lineTo(bx+(i?-150:150),h-110);c.stroke();robin(c,bx+(i?-150:150),h-90,i?1.5:1.2,i?{col:[200,150,120],american:true}:{});});
     const ww=tw(c,V.word,34,800)+50;glass(c,wx-ww/2,wy-30,ww,56,14,KIND,{glow:12,ea:0.9,fill:"rgba(7,12,24,0.95)"});T(c,V.word,wx,wy+9,{w:800,size:34,align:"center"});},
   // What counts as one? Three rabbits, and what one row stands for
   grain:(c,w,h,st,L)=>{const g=c.createLinearGradient(0,h*0.62,0,h);g.addColorStop(0,"rgba(40,56,34,0.9)");g.addColorStop(1,"rgba(8,12,8,0.9)");c.fillStyle=g;c.fillRect(0,h*0.62,w,h*0.38);grass(c,0,w,h*0.62+4,1,0.8);

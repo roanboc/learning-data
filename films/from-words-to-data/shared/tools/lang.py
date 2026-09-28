@@ -4,7 +4,8 @@ Every tool of the series runs from a film's source folder, films/from-words-to-d
 the film's key, title and subtitle, its own source files, the words the voice respells, and the moment its poster shows.
 The films draw with The Inner Life of Data's engine and components, A Sharper Sketch's diagrams, the series' people
 (When things go wrong), Silent change's messages and dashboards, and this series' own components in shared/src/words.js.
-The series is in English: the Spanish pages on the site wrap the English films."""
+The series is in English. Spanish is captions only: the Spanish pages play the English film with Spanish captions,
+from the film's src/i18n/es/captions.js, so FILM_LANG=es works only for tools/captions.py."""
 import json, os, pathlib, sys
 
 ROOT = pathlib.Path.cwd()
@@ -20,9 +21,11 @@ EP1 = FILMS / 'when-things-go-wrong' / '1-silent-change' / 'source' / 'src'
 WORDS = SERIES / 'shared' / 'src'
 META = json.loads((ROOT / 'film.json').read_text())
 LANG = os.environ.get('FILM_LANG', 'en')
-if LANG != 'en':
-    raise SystemExit('The films of From words to data are in English; the Spanish pages wrap the English film.')
-EN = True
+EN = LANG == 'en'
+PACK = ROOT / 'src' / 'i18n' / LANG
+if not EN and (pathlib.Path(sys.argv[0]).name != 'captions.py' or not (PACK / 'captions.js').exists()):
+    raise SystemExit('The films of From words to data are in English. Another language is captions only: '
+                     'write src/i18n/%s/captions.js, then run FILM_LANG=%s python tools/captions.py' % (LANG, LANG))
 BUILD, DIST = ROOT / 'build', ROOT / 'dist'
 NARR, VODUR = ROOT / 'src' / 'narration.js', ROOT / 'src' / 'vodur.js'
 MODELS = ROOT / 'models' if (ROOT / 'models').exists() else SHARED / 'models'
@@ -36,10 +39,12 @@ def load_obj(path):
     return json.loads(s[s.index('{'):s.rindex('}') + 1])
 
 
-def render_page(p):
-    """Open dist/render.html in Chromium and wait until the film's assets are ready."""
+def render_page(p, init=None):
+    """Open dist/render.html in Chromium and wait until the film's assets are ready; init is a script to run first, such as captions."""
     b = p.chromium.launch(args=["--allow-file-access-from-files"])
     pg = b.new_page(viewport={"width": 1920, "height": 1080})
+    if init:
+        pg.add_init_script(path=str(init))
     pg.goto((DIST / 'render.html').as_uri())
     pg.wait_for_function("window.__READY__===true", timeout=120000)
     return b, pg

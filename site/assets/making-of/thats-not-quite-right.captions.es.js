@@ -1,5 +1,5 @@
 /* That's not quite right: Latin American Spanish captions, over the English film. Each English narration line (the key, exactly as in src/narration.js) maps to its caption.
-   Only the captions change: the picture, the voice and the timings stay English, so the site plays the same film.
+   Only the captions change: the picture, the voice and the timings stay English, so the site plays the same film, and the video, which has no captions on its picture, takes es.srt.
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Every film on this site started the same way: one person, and one message.":

@@ -2,7 +2,7 @@
 
 **Video script v5, university edition** · Matches the third cut of the film, the breathing cut
 
-Runtime 7:32, with 922 words of narration (about 122 words a minute) read by a synthetic voice (Kokoro, American female, open source under Apache 2.0). The master is 16:9, 1080p, 30 fps, with narration, music and sound effects mixed to about -16 LUFS for the web, and burned-in captions. Every name, place and number is fictional, and no real institution is shown.
+Runtime 7:32, with 922 words of narration (about 122 words a minute) read by a synthetic voice (Kokoro, American female, open source under Apache 2.0). The master is 16:9, 1080p, 30 fps, with narration, music and sound effects mixed to about -16 LUFS for the web. Captions are separate `.srt` files, in English and Spanish, not burned into the picture. Every name, place and number is fictional, and no real institution is shown.
 
 New in v5, the breathing cut: the same narration with room to think. The voice breathes after every sentence, each new idea gets a short beat, and each chapter ends with a wordless breather that applies its idea to a new case (see [breathing-cut.md](breathing-cut.md), revised after [a review](pacing-review.md)). The timing lives in `source/src/breath.js`. On the site, **Pause and think** can stop the film after each chapter to ask one question.
 

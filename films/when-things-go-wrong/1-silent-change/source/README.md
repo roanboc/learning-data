@@ -54,7 +54,7 @@ The film plays on the site at `site/when-things-go-wrong/silent-change/`, and on
 4. **The poster.** `site/assets/silent-change-poster.jpg`, 1280×720, is a frame from the first chapter: Ana at 7:58, with her dashboard and its note. It is the page's poster and `og:image`, and the picture on this film's topic cards. If that moment changes, make a new one: open `dist/render.html` in Playwright, wait for `window.__READY__`, and `renderAt(seconds, 0.93)` returns that frame as a 1920×1080 JPEG data URL; resize it to 1280×720.
 5. **Progress.** The page's `section#watch` has `data-store="ld-silent-change"`, and the topic cards use `data-progress="ld-silent-change"`. Keep this prefix: visitors' "watched" mark is stored under it.
 6. **If a chapter changes:** the player lists the chapters from `SCENES` by itself. By hand, update the Spanish chapter names in `site/es/when-things-go-wrong/silent-change/index.html` (by scene id), the "Pause and think" questions in `site/assets/silent-change/think.en.js` and `think.es.js` (they stop after `night`, `bronze`, `halves` and `contract`), and the chapter table in [the series README](../../README.md). A chapter link uses the chapter's start rounded up, such as `#t=145` for a start at 144.7 s.
-7. **The video.** Commit and merge, then run *Render and release the films* in the Actions tab. It renders every film, and publishes `silent-change.mp4` and `silent-change.en.srt` with the others.
+7. **The video.** Commit and merge, then run *Render and release the films* in the Actions tab. It renders every film, and publishes `silent-change.mp4` and its captions, `silent-change.en.srt` and `silent-change.es.srt`, with the others.
 
 ## Pace and sound
 

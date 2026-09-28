@@ -45,7 +45,7 @@ Spanish: the same five commands with `FILM_LANG=es` in front of each, for exampl
 | `build.py` | Builds `dist/render.html` (used for rendering), `dist/film.html` (a standalone player, with chapters, captions and full screen) and `dist/film.js` (the same player code, which the site loads). |
 | `audio.py` | Mixes narration, music and effects into `build/mix.wav` and `dist/soundtrack.mp3`. |
 | `build.py` again | Embeds the soundtrack in the player. |
-| `render.py` | Renders 1080p frames at 30 fps and writes the MP4. |
+| `render.py` | Renders 1080p frames at 30 fps and writes the MP4, with no captions on the picture: they go beside it as `.srt` files (`captions.py`), so platforms and players show the language a viewer picks. |
 
 Before a long render, run `python tools/check.py` (or with `FILM_LANG=es`): it draws every tenth of a second on a small canvas, in about half a minute, and lists any moment that fails. To see how dense the narration is, run `python tools/pace.py` (or with `FILM_LANG=es`) after `tts.py`: it reports words per minute, how much of the time the voice speaks, and the longest quiet moment in each chapter, and it flags sentences with no breath after them and long stops inside a chapter. [PLAYBOOK.md](../../../PLAYBOOK.md) explains the targets.
 

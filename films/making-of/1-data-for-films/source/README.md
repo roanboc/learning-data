@@ -54,7 +54,7 @@ The film plays at the top of the Making of page, `site/journey/`, and on its Spa
    ```
 
    `site-tools/check_site.py` checks that the copy matches, and that the Spanish page loads it before the film.
-4. **The video.** Commit and merge, then run *Render and release the films* in the Actions tab. It publishes `data-for-films.mp4` and `data-for-films.en.srt` with the others.
+4. **The video.** Commit and merge, then run *Render and release the films* in the Actions tab. It publishes `data-for-films.mp4` and its captions, `data-for-films.en.srt` and `data-for-films.es.srt`, with the others.
 
 ## When The Inner Life of Data changes
 

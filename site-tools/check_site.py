@@ -17,6 +17,7 @@ What it checks, page by page (every .html under site/):
 - the footer's one link (the source on GitHub), breadcrumbs, and the course bar (the sticky Watch · Labs · Scenarios steps).
 - no film numbering (on the site and in the Markdown docs), and no stale film lengths.
 - one film bundle per page, scripts in order, and each film's progress prefix where it belongs.
+- Spanish captions: a Spanish page that plays an English film loads the film's captions first, each a copy of its source.
 - Spanish pages: in Spanish, linking to Spanish pages when a twin exists, and marking links to English-only pages.
 - the journey pages are what site-tools/build_pages.py makes from their Markdown.
 """
@@ -72,6 +73,12 @@ BUNDLES = {"assets/film/film.js": "ld", "assets/film/film.es.js": "ld",
            "assets/too-good-to-be-true/film.js": "ld-too-good-to-be-true"}
 # the Making of films, sealed in a function each with their own element prefix, so both can play on one page; they record no progress
 SEALED = {"assets/making-of/data-for-films.js": "dff", "assets/making-of/thats-not-quite-right.js": "nqr"}
+# English films with Spanish captions: a Spanish page that plays one loads its captions first, a copy of src/i18n/es/captions.js in the film's source
+CAPTIONS_ES = {"assets/film3/film.js": ("assets/film3/captions.es.js", "films/a-sharper-sketch/source"),
+               "assets/silent-change/film.js": ("assets/silent-change/captions.es.js", "films/when-things-go-wrong/1-silent-change/source"),
+               "assets/too-good-to-be-true/film.js": ("assets/too-good-to-be-true/captions.es.js", "films/when-things-go-wrong/2-too-good-to-be-true/source"),
+               "assets/making-of/data-for-films.js": ("assets/making-of/data-for-films.captions.es.js", "films/making-of/1-data-for-films/source"),
+               "assets/making-of/thats-not-quite-right.js": ("assets/making-of/thats-not-quite-right.captions.es.js", "films/making-of/2-the-process/source")}
 PACKS = {"assets/learn/learn.en.js", "assets/learn/learn.es.js",
          "assets/silent-change/think.en.js", "assets/silent-change/think.es.js",
          "assets/too-good-to-be-true/think.en.js", "assets/too-good-to-be-true/think.es.js"}
@@ -765,6 +772,27 @@ def main():
                 s["fails"].append(f"{pg.file}: a sealed film beside {', '.join(pg.bundles)}: that film would take the ids its player needs")
         if pg.sealed:
             s["notes"].append(f"{pg.file}: {len(pg.sealed)} sealed films")
+
+    # -- Spanish captions over the English films
+    s = rep.check("Spanish captions: each English film on a Spanish page loads its captions first, and each copy matches its film's source")
+    for film, (cap, src) in CAPTIONS_ES.items():
+        mine, theirs = WEB / cap, ROOT / src / "src/i18n/es/captions.js"
+        if not mine.exists() or not theirs.exists() or mine.read_bytes() != theirs.read_bytes():
+            s["fails"].append(f"site/{cap}: not a copy of {src}/src/i18n/es/captions.js; copy it, as the film's source README says")
+    for pg in normal:
+        ls = pg.local_scripts
+        for film, (cap, _) in CAPTIONS_ES.items():
+            if cap in ls and not pg.es:
+                s["fails"].append(f"{pg.file}: an English page loads {cap}")
+            player = f"{SEALED[film]}-film" if film in SEALED else "film"
+            if film not in ls or not pg.es or not pg.ids.get(player):
+                continue  # a lab or scenario page draws with the film's code, but never plays it
+            if cap not in ls:
+                s["fails"].append(f"{pg.file}: plays {film} without its Spanish captions: load {cap} before it")
+            elif ls.index(cap) > ls.index(film):
+                s["fails"].append(f"{pg.file}: loads {cap} after {film}; the captions must come first")
+            else:
+                s["notes"].append(f"{pg.file}: {cap}")
 
     # -- topic cards
     s = rep.check("Topic cards: one link each, the linked film's progress prefix and counts, a real poster")

@@ -119,6 +119,7 @@ for _f in SERIES_FILMS:
         PACKS.add(f"assets/{_k}/think.{_lg}.js")
         OWN_LABS[f"assets/{_k}/think.{_lg}.js"] = (("es/" if _lg == "es" else "") + f"from-words-to-data/{_k}/labs/index.html", f"assets/{_k}/learn.{_lg}.js")
     COUNTS[f"ld-{_k}"] = (str(_f["labs"]), str(_f["quiz"]))
+    CAPTIONS_ES[f"assets/{_k}/film.js"] = (f"assets/{_k}/captions.es.js", f"films/from-words-to-data/{_f['dir']}/source")
     if "½" in _f["len"]:
         HALVES["en"].add(_f["len"]); HALVES["es"].add(_f["len"])
     else:

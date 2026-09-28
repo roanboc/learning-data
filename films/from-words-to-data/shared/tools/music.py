@@ -213,7 +213,7 @@ def brush(start, g=0.03, pan=0.0, sec=0.28):
     x = tt(sec); X(filt(noise(sec), 'band', (1500, 7000)) * np.sin(np.pi * x / sec) ** 1.5, start, g, pan)
 
 
-def kick(start, g=0.06):
+def kick(start, g=0.06, pan=0.0):  # pan is accepted so pulse() can play it, but a kick stays centred
     x = tt(0.4); ph = 2 * np.pi * np.cumsum(50 + 90 * np.exp(-x * 30)) / SR; X(norm(np.sin(ph) * np.exp(-x * 8)), start, g, 0)
 
 

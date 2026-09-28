@@ -1,0 +1,115 @@
+1
+00:00:01,600 --> 00:00:09,957
+En la década de 1750, Linneo dio a cada especie un nombre de dos partes, y un lugar en una jerarquía. La ciencia aún usa su sistema.
+
+2
+00:00:10,657 --> 00:00:17,584
+Un siglo antes, John Wilkins diseñó una lengua para clasificar todo lo que hay en el universo. Nunca prosperó.
+
+3
+00:00:18,784 --> 00:00:26,772
+En 1860, Florence Nightingale pidió a los hospitales registrar lo mismo, de la misma manera, para poder compararlos.
+
+4
+00:00:27,472 --> 00:00:35,740
+Le siguió, en 1893, una lista internacional de causas de muerte. Hoy es la Clasificación Internacional de Enfermedades.
+
+5
+00:00:36,940 --> 00:00:43,473
+Las definiciones compartidas permiten que desconocidos comparen. Las que perduran se hacen para un propósito, no para todo.
+
+6
+00:00:50,373 --> 00:00:57,966
+En la universidad, la directora de la escuela le pregunta a Genie: ¿qué aprendices están a una microcredencial de un diplomado de posgrado?
+
+7
+00:00:58,666 --> 00:01:04,377
+Genie encuentra las tablas. Encuentra una columna llamada is_micro, y otra llamada stack_ok.
+
+8
+00:01:05,477 --> 00:01:11,738
+Pero las reglas de apilamiento viven en un documento de política que ninguna herramienta lee. Genie adivina, y se equivoca.
+
+9
+00:01:13,238 --> 00:01:19,038
+Un asistente de IA responde con lo que puede leer. El significado guardado en documentos es invisible para él.
+
+10
+00:01:22,038 --> 00:01:29,174
+Hay cuatro formas comunes de escribir el significado, y se apilan. Un glosario: palabras y sus definiciones, para personas.
+
+11
+00:01:30,174 --> 00:01:34,101
+Una taxonomía: clases de cosas en una jerarquía, como la de Linneo.
+
+12
+00:01:34,801 --> 00:01:41,432
+Una ontología: conceptos, las relaciones entre ellos, y reglas que una máquina puede comprobar y usar para razonar.
+
+13
+00:01:42,532 --> 00:01:46,771
+Y una capa semántica: cómo se calcula cada cifra, definida una sola vez.
+
+14
+00:01:47,471 --> 00:01:50,673
+No son rivales. Cada una responde una pregunta distinta.
+
+15
+00:01:56,373 --> 00:02:08,596
+En la ontología, las reglas se escriben como afirmaciones. Una microcredencial es una clase de credencial. Un diplomado de posgrado acepta hasta cuatro microcredenciales aprobadas para sus créditos.
+
+16
+00:02:10,096 --> 00:02:18,979
+Conecta los datos de la universidad con estas afirmaciones, y se vuelven un grafo de conocimiento: aprendices, credenciales y cursos, unidos por lo que significan.
+
+17
+00:02:20,479 --> 00:02:27,249
+Es la receta de Aristóteles, formalizada: la clase de cosa, y lo que la distingue, en una forma que una máquina puede usar.
+
+18
+00:02:30,349 --> 00:02:38,561
+En la capa semántica, «credenciales otorgadas este año» se define una sola vez: qué se cuenta, qué se deja fuera, qué fecha y con qué grano.
+
+19
+00:02:39,861 --> 00:02:45,035
+Tableros, planillas y Genie le preguntan a ella, en lugar de escribir cada uno su propia versión.
+
+20
+00:02:46,135 --> 00:02:51,112
+Empiezan a aparecer formatos abiertos para compartir estas definiciones entre herramientas.
+
+21
+00:02:53,812 --> 00:03:01,927
+No tienes que empezar con una hoja en blanco. Finanzas, salud, seguros y comercio minorista publican modelos compartidos, y la educación también.
+
+22
+00:03:03,127 --> 00:03:08,358
+Las credenciales digitales también tienen estándares abiertos, con emisor, titular y evidencia.
+
+23
+00:03:09,458 --> 00:03:17,651
+Hasta «microcredencial» tiene definiciones oficiales: de Australia, de la Unión Europea y de la UNESCO. No coinciden del todo.
+
+24
+00:03:19,151 --> 00:03:25,403
+Así que elige a propósito. Revisa, adopta, extiende y registra, como en Un boceto más preciso, en cada capa.
+
+25
+00:03:28,103 --> 00:03:34,950
+La directora vuelve a preguntar. Esta vez, Genie repregunta: ¿aprobadas para apilar, o todas las microcredenciales?
+
+26
+00:03:36,050 --> 00:03:38,893
+Luego responde, y muestra la definición que usó.
+
+27
+00:03:40,193 --> 00:03:49,288
+Varios estudios muestran que basar un asistente en significado explícito hace sus respuestas más precisas, de forma medible. La diferencia es el significado que puede leer.
+
+28
+00:03:51,988 --> 00:04:01,984
+Vuelve el triángulo del comienzo de la serie: la palabra, en inglés y en español; la idea, ahora escrita en la ontología; y los datos a los que apunta.
+
+29
+00:04:03,484 --> 00:04:06,795
+Siguiente: que todo siga siendo verdad, mientras todo cambia.

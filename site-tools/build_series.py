@@ -160,9 +160,9 @@ def film_page(lg, f, films_, series):
     nxt = next((x for x in films_ if x["index"] == f["index"] + 1), None)
     prv = next((x for x in films_ if x["index"] == f["index"] - 1), None)
     script = f'{REPO}/blob/main/films/from-words-to-data/{f["dir"]}/script.md'; caps = f'{REPO}/tree/main/films/from-words-to-data/{f["dir"]}/captions'
-    note = ('' if lg == "en" else '<p class="note">La película está en inglés. Esta página, los capítulos, las preguntas, los labs y las situaciones están en español.</p>\n')
+    note = ('' if lg == "en" else '<p class="note">La película está en inglés, con subtítulos en español. Esta página, los capítulos, las preguntas, los labs y las situaciones están en español.</p>\n')
     meta = (f'<p class="meta-row"><span>{f["len"]} min</span><span>{f["labs"]} labs</span><span>{f["quiz"]} scenarios</span><span>Pause and think</span><span>English captions</span></p>' if lg == "en" else
-            f'<p class="meta-row"><span>{f["len"]} min</span><span>{f["labs"]} labs</span><span>{f["quiz"]} situaciones</span><span>Pausa para pensar</span><span>En inglés, con subtítulos en inglés</span></p>')
+            f'<p class="meta-row"><span>{f["len"]} min</span><span>{f["labs"]} labs</span><span>{f["quiz"]} situaciones</span><span>Pausa para pensar</span><span>En inglés, con subtítulos en español</span></p>')
     nm = lambda x: E(x["title"] if lg == "en" else x["site"]["title_es"])
     third = (f'<a class="btn" href="../{nxt["key"]}/">{T(lg, "Next in the series", "Sigue en la serie")}: {nm(nxt)}</a>' if nxt else
              f'<a class="btn" href="../">{T(lg, "The whole series", "Toda la serie")}: {T(lg, "From words to data", "De las palabras a los datos")}</a>')
@@ -175,12 +175,12 @@ def film_page(lg, f, films_, series):
               + (f'<div class="bar"><button id="play">Play</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Seek"><span id="time">0:00</span><button id="think" aria-pressed="false" title="Stop at the end of four chapters, with one question each">Pause and think</button><button id="cc" class="on" aria-pressed="true">Captions</button><button id="fs">Full screen</button></div>' if lg == "en" else
                  f'<div class="bar"><button id="play">Reproducir</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="time">0:00</span><button id="think" aria-pressed="false" title="Detenerse al final de cuatro capítulos, con una pregunta cada vez">Pausa para pensar</button><button id="cc" class="on" aria-pressed="true">Subtítulos</button><button id="fs">Pantalla completa</button></div>')
               + '\n</div>')
-    links = (f'<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/{key}.mp4">Download the video</a><a href="{script}">Read the script</a></p>' if lg == "en" else
-             f'<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/{key}.mp4">Descargar el video (en inglés)</a><a href="{script}">Leer el guion (en inglés)</a></p>')
+    links = (f'<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/{key}.mp4">Download the video</a><a href="{caps}">Caption files</a><a href="{script}">Read the script</a></p>' if lg == "en" else
+             f'<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/{key}.mp4">Descargar el video (en inglés)</a><a href="{caps}">Archivos de subtítulos</a><a href="{script}" hreflang="en">Leer el guion (en inglés)</a></p>')
     howto = (f'<details class="howto"><summary>How to read the film</summary><div class="notes"><p>{E(s["howto"])} The university, people and numbers are fictional. The narration is a synthetic voice.</p>\n'
-             f'<p>English captions are on by default; turn them off with Captions. Caption files for other players: <a href="{caps}">en.srt and en.vtt</a>.</p></div></details>' if lg == "en" else
+             f'<p>English captions are on by default; turn them off with Captions. The video you download has none on the picture: play it with its caption file, in English or Spanish.</p></div></details>' if lg == "en" else
              f'<details class="howto"><summary>Cómo leer la película</summary><div class="notes"><p>{E(s["howto_es"])} La universidad, las personas y las cifras son ficticias. La narración es una voz sintética.</p>\n'
-             f'<p>Los subtítulos en inglés están activados; puedes quitarlos con Subtítulos. Archivos de subtítulos para otros reproductores: <a href="{caps}">en.srt y en.vtt</a> (en inglés).</p></div></details>')
+             f'<p>Los subtítulos en español están activados; puedes quitarlos con Subtítulos. El video que descargas no los tiene en la imagen: reprodúcelo con su archivo de subtítulos, en español o en inglés.</p></div></details>')
     nextp = (f'<template id="next-panel"><div class="think-card"><p class="think-k">{T(lg, "Where next?", "¿Y ahora?")}</p><h3>{E(s[T(lg, "next_h", "next_h_es")])}</h3>\n'
              f'<div class="next-opts"><a class="btn primary" href="labs/">{T(lg, "Take it apart", "Desarma")}: {f["labs"]} {T(lg, "hands-on labs", "labs interactivos")} →</a><a class="btn" href="scenarios/">{T(lg, "Make the call", "Tú decides")}: {f["quiz"]} {T(lg, "situations", "situaciones")}</a>{third}</div>\n'
              f'<div class="think-foot"><button type="button" class="btn" data-again>{T(lg, "Watch again", "Ver de nuevo")}</button></div></div></template>')
@@ -196,6 +196,7 @@ def film_page(lg, f, films_, series):
             f'<div class="topic-grid" data-progress-text=\'{PT[lg]}\'>\n' + "\n".join(further) + '\n</div>\n</section>\n</main>\n'
             f'{FOOT[lg]}\n'
             + ('' if lg == "en" else '<script>window.L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla completa",fsExit:"Salir de pantalla completa"}};</script>\n')
+            + ('' if lg == "en" else f'<script src="{R}assets/{key}/captions.es.js"></script>\n')
             + f'<script src="{R}assets/{key}/film.js"></script>\n' + ('' if lg == "en" else es_scenes(f) + "\n")
             + f'<script src="{R}assets/{key}/think.{lg}.js"></script>\n<script src="{R}assets/learn/think.js"></script>\n<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/learn/next.js"></script>\n<script src="{R}assets/ambient.js"></script>\n</body>\n</html>\n')
     return h + "</head>\n" + body
@@ -258,7 +259,7 @@ def series_page(lg, series, films_):
     body = (f'<body>\n{header(lg, path, R)}\n<main>\n<section class="hero cine"><div class="bg mosaic" aria-hidden="true">' + "".join(posters[:8]) + '</div><canvas class="fx" aria-hidden="true"></canvas>\n'
             f'<p class="eyebrow crumbs"><a href="{R if lg == "en" else R[3:]}topics/">{T(lg, "Topics", "Temas")}</a> › {T(lg, "From words to data", "De las palabras a los datos")}</p>\n'
             f'<h1>{T(lg, "From words to data", "De las palabras a los datos")}</h1>\n<p class="lead">{E(series[T(lg, "lead", "lead_es")])}</p>\n'
-            + ('' if lg == "en" else '<p class="note">Las películas están en inglés, con subtítulos en inglés. Estas páginas, los capítulos, las preguntas, los labs y las situaciones están en español.</p>\n')
+            + ('' if lg == "en" else '<p class="note">Las películas están en inglés, con subtítulos en español. Estas páginas, los capítulos, las preguntas, los labs y las situaciones están en español.</p>\n')
             + '</section>\n\n'
             f'<section class="module" id="films" aria-labelledby="films-h">\n<div class="mhead"><div><h2 id="films-h">{T(lg, "The films", "Las películas")}</h2><p>{E(series[T(lg, "order", "order_es")])}</p></div></div>\n'
             f'<div class="topic-grid" data-progress-text=\'{PT[lg]}\'>\n' + "\n".join(card(lg, x, "", R) for x in films_) + '\n</div>\n</section>\n\n'

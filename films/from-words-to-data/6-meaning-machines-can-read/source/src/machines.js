@@ -67,7 +67,7 @@ const MM_FCOLS=["disease","admitted","recovered","died","days"];
 function mm_form(ctx,x,y,w,h,name,seed,o){o=o||{};mm_parch(ctx,x,y,w,h,{a:o.a,rot:o.rot,t:o.t,seed:seed+3,draw:(c,W_,H_)=>{
   T(c,name,24,44,{w:800,size:24,color:MM_SEP});T(c,"return for the year",24,70,{f:"mono",w:500,size:14,color:MM_SEP2});
   const cw=(W_-40)/MM_FCOLS.length,hy=112;if(o.band>0){c.fillStyle="rgba(230,160,50,"+(0.38*o.band)+")";c.beginPath();c.moveTo(12,hy-24);c.quadraticCurveTo(W_/2,hy-27,W_-12,hy-24);c.lineTo(W_-12,hy+10);c.quadraticCurveTo(W_/2,hy+13,12,hy+10);c.closePath();c.fill();}
-  MM_FCOLS.forEach((s,i)=>T(c,s,20+i*cw+(i?cw/2:0),hy,{f:"mono",w:500,size:16,align:i?"center":"left",color:MM_SEP}));
+  MM_FCOLS.forEach((s,i)=>T(c,s,20+i*cw+(i?cw/2:0),hy,{w:700,size:16,align:i?"center":"left",color:MM_SEP}));
   c.strokeStyle="rgba(90,66,40,0.55)";c.lineWidth=1.4;c.beginPath();c.moveTo(16,hy+10);c.quadraticCurveTo(W_/2,hy+12+hash(seed,2)*3,W_-16,hy+10);c.stroke();
   for(let i=1;i<MM_FCOLS.length;i++){c.beginPath();c.moveTo(20+i*cw,hy-22);c.quadraticCurveTo(20+i*cw+(hash(i,seed)-0.5)*5,(hy+H_)/2,20+i*cw,H_-20);c.strokeStyle="rgba(90,66,40,0.22)";c.stroke();}
   // the same diseases in the same order on every form, and every row adds up: those who died and those who recovered come out of

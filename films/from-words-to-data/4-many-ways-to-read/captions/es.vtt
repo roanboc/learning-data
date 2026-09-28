@@ -4,7 +4,7 @@ WEBVTT
 Durante casi todo el siglo XX, el fichero de una biblioteca archivaba cada libro tres veces: por autor, por título y por tema.
 
 00:00:10.970 --> 00:00:13.158
-Un libro en el estante. Tres formas de llegar.
+Un libro en el estante. Tres caminos.
 
 00:00:14.458 --> 00:00:19.031
 Cada ficha debía mantenerse al día con el libro, o los lectores iban al estante equivocado.
@@ -13,10 +13,10 @@ Cada ficha debía mantenerse al día con el libro, o los lectores iban al estant
 Los datos para leer funcionan igual: copias ordenadas para las preguntas que hace la gente.
 
 00:00:31.836 --> 00:00:41.668
-Pregunta a cuatro ingenieros de datos qué forma dar a los datos para leer, y quizá oigas cuatro respuestas: un núcleo normalizado, un data vault, una estrella o una tabla ancha.
+Pregunta a cuatro ingenieros de datos qué forma usar para leer, y quizá oigas cuatro respuestas: un núcleo normalizado, un data vault, una estrella o una sola tabla ancha.
 
 00:00:42.968 --> 00:00:49.930
-Cada postura tiene nombre: el núcleo integrado de Inmon, las estrellas de Kimball, el data vault de Linstedt, y una gran tabla.
+Cada postura tiene nombre: el núcleo integrado de Inmon, las estrellas de Kimball, el data vault de Linstedt y una sola gran tabla.
 
 00:00:51.330 --> 00:00:55.989
 Esta semana hay una fuente nueva que agregar: credenciales de la plataforma de cursos cortos.
@@ -49,7 +49,7 @@ Para las personas, está la estrella: una de títulos, una de inscripciones, una
 Comparten el mismo aprendiz y el mismo calendario, así que una pregunta puede cruzarlas: títulos y cuotas, de los mismos aprendices, en el mismo año.
 
 00:02:01.405 --> 00:02:06.208
-Estas dimensiones compartidas se llaman conformadas. Hacen que las estrellas coincidan entre sí.
+Estas dimensiones compartidas se llaman conformadas. Hacen que las estrellas coincidan.
 
 00:02:07.508 --> 00:02:15.360
 Los ingenieros las planean en una cuadrícula llamada matriz de bus: procesos de negocio en las filas, dimensiones compartidas en las columnas.
@@ -58,13 +58,13 @@ Los ingenieros las planean en una cuadrícula llamada matriz de bus: procesos de
 Algunas preguntas siempre tratan de una sola cosa: un aprendiz.
 
 00:02:21.940 --> 00:02:28.570
-Entonces, construye una fila ancha por aprendiz: su curso actual, sus créditos hasta hoy, cada credencial, y lo que sigue.
+Así que arma una fila ancha por aprendiz: su curso actual, sus créditos hasta hoy, cada credencial y lo que sigue.
 
 00:02:29.970 --> 00:02:36.549
-Es fácil para personas, aprendizaje automático y asistentes de IA. Casi toda pregunta se vuelve una sola búsqueda.
+Es fácil para personas, aprendizaje automático y asistentes de IA. La mayoría de las preguntas se reducen a una búsqueda.
 
 00:02:37.649 --> 00:02:44.252
-¿Qué aprendices están cerca de un certificado de posgrado? Con una tabla ancha, es un filtro, no cinco uniones.
+¿Qué aprendices están cerca de un diplomado de posgrado? Con una tabla ancha, es un filtro, no cinco uniones.
 
 00:02:45.752 --> 00:02:51.520
 El costo: muchas columnas que mantener, y la misma medida definida dos veces, si no tienes cuidado.
@@ -88,7 +88,7 @@ Muchas fuentes que no dejan de cambiar, y auditores que preguntan de dónde vino
 Muchos procesos que comparten el mismo contexto: estrellas conformadas.
 
 00:03:31.051 --> 00:03:36.025
-Una entidad, sobre la que personas e IA preguntan de muchas formas: tablas anchas.
+Una entidad, consultada de muchas formas, por personas y por IA: tablas anchas.
 
 00:03:37.325 --> 00:03:43.536
 Y no copies por copiar. Cada forma es otra copia que mantener al día, como las fichas de la biblioteca.
@@ -100,7 +100,7 @@ Elige según la pregunta, no según la moda. La mayoría de las plataformas usa 
 Las credenciales de cursos cortos llegaron esta semana. El vault las recibió sin cambiar nada.
 
 00:03:57.876 --> 00:04:02.397
-La estrella de títulos sumó filas nuevas, y la fila ancha de cada aprendiz sumó una columna.
+La estrella de títulos sumó filas, y la fila ancha de cada aprendiz, una columna.
 
 00:04:03.697 --> 00:04:07.429
 Siguiente: ¿y si la app y los analistas usaran la misma base de datos?

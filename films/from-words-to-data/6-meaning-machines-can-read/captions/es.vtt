@@ -25,7 +25,7 @@ Genie encuentra las tablas. Encuentra una columna llamada is_micro, y otra llama
 Pero las reglas de apilamiento viven en un documento de política que ninguna herramienta lee. Genie adivina, y se equivoca.
 
 00:01:13.238 --> 00:01:19.038
-Un asistente de IA responde con lo que puede leer. El significado guardado en documentos es invisible para él.
+Un asistente de IA responde con lo que puede leer. El significado guardado en documentos le es invisible.
 
 00:01:22.038 --> 00:01:29.174
 Hay cuatro formas comunes de escribir el significado, y se apilan. Un glosario: palabras y sus definiciones, para personas.
@@ -49,7 +49,7 @@ En la ontología, las reglas se escriben como afirmaciones. Una microcredencial 
 Conecta los datos de la universidad con estas afirmaciones, y se vuelven un grafo de conocimiento: aprendices, credenciales y cursos, unidos por lo que significan.
 
 00:02:20.479 --> 00:02:27.249
-Es la receta de Aristóteles, formalizada: la clase de cosa, y lo que la distingue, en una forma que una máquina puede usar.
+Es la receta de Aristóteles, formalizada: la clase de cosa, y lo que la distingue, en una forma que una máquina pueda usar.
 
 00:02:30.349 --> 00:02:38.561
 En la capa semántica, «credenciales otorgadas este año» se define una sola vez: qué se cuenta, qué se deja fuera, qué fecha y con qué grano.
@@ -61,7 +61,7 @@ Tableros, planillas y Genie le preguntan a ella, en lugar de escribir cada uno s
 Empiezan a aparecer formatos abiertos para compartir estas definiciones entre herramientas.
 
 00:02:53.812 --> 00:03:01.927
-No tienes que empezar con una hoja en blanco. Finanzas, salud, seguros y comercio minorista publican modelos compartidos, y la educación también.
+No tienes que partir de una hoja en blanco. Finanzas, salud, seguros y comercio minorista publican modelos compartidos, y la educación también.
 
 00:03:03.127 --> 00:03:08.358
 Las credenciales digitales también tienen estándares abiertos, con emisor, titular y evidencia.
@@ -79,7 +79,7 @@ La directora vuelve a preguntar. Esta vez, Genie repregunta: ¿aprobadas para ap
 Luego responde, y muestra la definición que usó.
 
 00:03:40.193 --> 00:03:49.288
-Varios estudios muestran que basar un asistente en significado explícito hace sus respuestas más precisas, de forma medible. La diferencia es el significado que puede leer.
+Varios estudios han encontrado que basar un asistente en significado explícito aumenta de forma medible sus aciertos. La diferencia es el significado que puede leer.
 
 00:03:51.988 --> 00:04:01.984
 Vuelve el triángulo del comienzo de la serie: la palabra, en inglés y en español; la idea, ahora escrita en la ontología; y los datos a los que apunta.

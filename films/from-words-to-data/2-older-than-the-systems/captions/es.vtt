@@ -13,10 +13,10 @@ En China, los exámenes imperiales evaluaron a candidatos durante trece siglos, 
 En las universidades medievales, un canciller otorgaba la licencia para enseñar, bajo un sello de cera. Luego llegaron el diploma, el certificado de notas, la insignia digital y, hoy, una credencial firmada con una clave digital.
 
 00:00:45.195 --> 00:00:48.931
-Los materiales cambiaban cada tantos siglos. La idea, no.
+Los materiales cambiaban cada pocos siglos. La idea, no.
 
 00:00:55.231 --> 00:00:58.386
-Mira de cerca, y todas tienen las mismas partes.
+Míralas de cerca: cada una tiene las mismas partes.
 
 00:00:59.086 --> 00:01:03.485
 Alguien de confianza la emite: un gremio, los examinadores, una universidad.
@@ -52,10 +52,10 @@ Comprar un sistema es adoptar su modelo, lo mires o no.
 Si no modelas tu negocio, tus proveedores lo harán por ti.
 
 00:02:16.623 --> 00:02:23.555
-Conecta cinco sistemas de a pares, y necesitas hasta diez traducciones. En cada una, el significado puede desviarse.
+Si conectas cinco sistemas de a pares, necesitas hasta diez traducciones. En cada una, el significado puede desviarse.
 
 00:02:24.855 --> 00:02:36.505
-En 1999, una nave espacial se perdió en Marte. El software de un equipo daba el empuje de los propulsores en libras-fuerza-segundo. El de navegación esperaba newtons-segundo.
+En 1999, una nave espacial se perdió al llegar a Marte. El software de un equipo daba el empuje de los propulsores en libras-fuerza-segundo. El de navegación esperaba newtons-segundo.
 
 00:02:38.005 --> 00:02:41.615
 Cada lado tenía sentido por sí solo. El significado se rompió entre los dos.
@@ -67,7 +67,7 @@ Así que traduce cada sistema una vez, a un modelo compartido. Cinco traduccione
 Tomemos a una aprendiz: Aisha. Tiene cuatro ID: número de estudiante, usuario de la plataforma, número de cliente y dirección de billetera.
 
 00:03:03.097 --> 00:03:09.620
-Su nombre viene del sistema de estudiantes, su correo de TI, y sus credenciales de tres lugares distintos.
+Su nombre viene del sistema de estudiantes; su correo, de TI; y sus credenciales, de tres lugares distintos.
 
 00:03:11.020 --> 00:03:17.720
 Elegir qué sistema es la fuente de cada dato, y unir los registros que son la misma persona, es gestionar datos maestros.
@@ -85,7 +85,7 @@ El boceto en papel dice qué importa. El modelo lógico lo dice con precisión.
 Sus atributos, y los valores que puede tomar cada uno: el nivel, el volumen de aprendizaje, el estado.
 
 00:03:48.143 --> 00:03:56.366
-Cuántos de una cosa se relacionan con otra: un aprendiz tiene muchas credenciales, y una microcredencial puede contar para varios títulos.
+Cuántos de uno se relacionan con otro: un aprendiz tiene muchas credenciales, y una microcredencial puede contar para varios títulos.
 
 00:03:57.766 --> 00:04:01.008
 Y las reglas: una credencial revocada nunca se cuenta.

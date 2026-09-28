@@ -4,8 +4,8 @@
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "In 1494, Luca Pacioli set down how Venetian merchants kept their books.":
 "En 1494, Luca Pacioli describió cómo llevaban sus libros los mercaderes venecianos.",
-"Every transaction went first into the journal, as it happened, one after another.":
-"Cada operación se anotaba primero en el diario, cuando ocurría, una tras otra.",
+"Every transaction was written into the journal, as it happened, one after another.":
+"Cada operación se anotaba en el diario, cuando ocurría, una tras otra.",
 "Then each entry was posted to the ledger, grouped by account, where it could be read, and balanced.":
 "Después cada asiento se pasaba al libro mayor, agrupado por cuenta, donde se podía leer y cuadrar.",
 "One set of facts, kept in two shapes: one for writing, and one for reading. And if the two sides didn't balance, something was wrong.":
@@ -31,13 +31,13 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "These are called update and delete anomalies. Keeping each fact once is how a shape built to write avoids them.":
 "Se llaman anomalías de actualización y de borrado. Una forma hecha para escribir las evita guardando cada dato una sola vez.",
 "Some systems write a whole thing at once, as one document: a digital credential, with its claim and its evidence inside, signed as a single piece.":
-"Algunos sistemas escriben una cosa entera de una vez, como un documento: una credencial digital, con su afirmación y su evidencia dentro, firmada como una sola pieza.",
+"Algunos sistemas escriben algo completo de una vez, como un documento: una credencial digital, con su afirmación y su evidencia dentro, firmada como una sola pieza.",
 "Keep together what's written, and signed, together.":
 "Mantén junto lo que se escribe, y se firma, junto.",
 "Document databases are built for this. They shine when a whole thing is written, and read, at once.":
-"Para eso están las bases de datos de documentos. Brillan cuando una cosa entera se escribe, y se lee, de una vez.",
+"Para eso están las bases de datos de documentos. Brillan cuando algo completo se escribe, y se lee, de una vez.",
 "One document is easy to write and easy to check. Counting across a million of them is harder.":
-"Un documento es fácil de escribir y fácil de verificar. Contar a través de un millón de ellos es más difícil.",
+"Un documento es fácil de escribir y de verificar. Contar sobre un millón de ellos es más difícil.",
 "Planning day. How many awards, by faculty and by year, for the last ten years?":
 "Día de planificación. ¿Cuántos títulos, por facultad y por año, en los últimos diez años?",
 "A shape built to read starts with the grain: one row per credential awarded.":
@@ -49,7 +49,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "A simple test: the facts are what you add up; the dimensions are the words after by, in the question.":
 "Una prueba simple: los hechos son lo que sumas; las dimensiones, las palabras que van después de «por» en la pregunta.",
 "It's called a star. Reading it takes two steps, not seven.":
-"Se llama estrella. Leerla toma dos pasos, no siete.",
+"Se llama estrella. Leerla requiere dos pasos, no siete.",
 "A learner moved faculty in the middle of the year. Do her awards count for the old faculty, or the new?":
 "Una aprendiz cambió de facultad a mitad de año. ¿Sus títulos cuentan para la facultad anterior, o para la nueva?",
 "Keep both, each with the dates it was true. Awards before the move count for the old faculty, and after it, for the new.":
@@ -57,7 +57,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "An award that's revoked and reissued keeps its history too. Nothing is overwritten. Each change has a date.":
 "Un título revocado y reemitido también guarda su historia. Nada se sobrescribe. Cada cambio tiene fecha.",
 "Not every change needs history. Correcting a typo can simply overwrite. A move between faculties can't. Decide for each attribute, and write it down.":
-"No todo cambio necesita historia. Corregir un error de tipeo puede simplemente sobrescribir. Un cambio de facultad, no. Decídelo para cada atributo, y déjalo por escrito.",
+"No todo cambio necesita historia. Para corregir un error de tipeo, basta con sobrescribir. Un cambio de facultad, no. Decídelo para cada atributo, y déjalo por escrito.",
 "Engineers call this a slowly changing dimension.":
 "Los ingenieros lo llaman dimensión lentamente cambiante.",
 "Now ask both shapes the same question.":
@@ -67,7 +67,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "The shape built to read answers in two.":
 "La forma hecha para leer responde con dos.",
 "Then correct a name. Easy where it's stored once. Awkward in a shape that repeats it on purpose.":
-"Después corrige un nombre. Fácil donde se guarda una vez. Incómodo en una forma que lo repite a propósito.",
+"Después corrige un nombre. Fácil donde se guarda una vez. Engorroso en una forma que lo repite a propósito.",
 "Each shape is fast at its own job.":
 "Cada forma es rápida en su propio trabajo.",
 "One sketch. Two shapes, both built from the same logical model.":
@@ -77,5 +77,5 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Many platforms keep a normalised shape in silver, close to the sources, and stars in gold. That's a choice, not a rule.":
 "Muchas plataformas guardan una forma normalizada en plata, cerca de las fuentes, y estrellas en oro. Es una decisión, no una regla.",
 "Any layer can hold either shape. The next question is which shapes to use for reading. There are several.":
-"Cualquier capa puede tener cualquiera de las dos formas. Lo siguiente: qué formas usar para leer. Hay varias."
+"Cualquier capa puede tener cualquiera de las dos formas. La próxima pregunta: qué formas usar para leer. Hay varias."
 });

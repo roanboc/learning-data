@@ -32,7 +32,7 @@ Pero las reglas de apilamiento viven en un documento de política que ninguna he
 
 9
 00:01:13,238 --> 00:01:19,038
-Un asistente de IA responde con lo que puede leer. El significado guardado en documentos es invisible para él.
+Un asistente de IA responde con lo que puede leer. El significado guardado en documentos le es invisible.
 
 10
 00:01:22,038 --> 00:01:29,174
@@ -64,7 +64,7 @@ Conecta los datos de la universidad con estas afirmaciones, y se vuelven un graf
 
 17
 00:02:20,479 --> 00:02:27,249
-Es la receta de Aristóteles, formalizada: la clase de cosa, y lo que la distingue, en una forma que una máquina puede usar.
+Es la receta de Aristóteles, formalizada: la clase de cosa, y lo que la distingue, en una forma que una máquina pueda usar.
 
 18
 00:02:30,349 --> 00:02:38,561
@@ -80,7 +80,7 @@ Empiezan a aparecer formatos abiertos para compartir estas definiciones entre he
 
 21
 00:02:53,812 --> 00:03:01,927
-No tienes que empezar con una hoja en blanco. Finanzas, salud, seguros y comercio minorista publican modelos compartidos, y la educación también.
+No tienes que partir de una hoja en blanco. Finanzas, salud, seguros y comercio minorista publican modelos compartidos, y la educación también.
 
 22
 00:03:03,127 --> 00:03:08,358
@@ -104,7 +104,7 @@ Luego responde, y muestra la definición que usó.
 
 27
 00:03:40,193 --> 00:03:49,288
-Varios estudios muestran que basar un asistente en significado explícito hace sus respuestas más precisas, de forma medible. La diferencia es el significado que puede leer.
+Varios estudios han encontrado que basar un asistente en significado explícito aumenta de forma medible sus aciertos. La diferencia es el significado que puede leer.
 
 28
 00:03:51,988 --> 00:04:01,984

@@ -1,0 +1,16 @@
+{
+  "key": "built-to-write-built-to-read",
+  "title": "Built to write, built to read",
+  "sub": "From words to data: why the same award is stored in one shape for writing and another for reading.",
+  "howto": "Blue is the shape built to write; green is the shape built to read. Warm ink is the merchants' books of 1494.",
+  "src": [
+    "write.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "side",
+    "read",
+    2.0
+  ],
+  "say": []
+}

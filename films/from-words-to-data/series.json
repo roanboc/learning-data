@@ -1,0 +1,49 @@
+{
+  "title": "From words to data",
+  "title_es": "De las palabras a los datos",
+  "films": ["1-whats-in-a-word", "2-older-than-the-systems", "3-built-to-write-built-to-read", "4-many-ways-to-read", "5-both-at-once", "6-meaning-machines-can-read", "7-keeping-it-true"],
+  "lead": "Seven short films on data modelling, from how minds turn the world into words, to how AI can help keep meaning true. They follow one idea, older than any system: the credential, how people prove what they know.",
+  "lead_es": "Siete películas cortas sobre modelado de datos, desde cómo la mente convierte el mundo en palabras hasta cómo la IA puede ayudar a mantener el significado al día. Siguen una idea más antigua que cualquier sistema: la credencial, cómo las personas demuestran lo que saben.",
+  "description": "Seven short films on data modelling: language and meaning, conceptual and logical models, shapes for writing and reading, hybrid databases, semantic layers and ontologies, and keeping it all true with AI.",
+  "description_es": "Siete películas cortas sobre modelado de datos: lenguaje y significado, modelos conceptuales y lógicos, formas para escribir y para leer, bases de datos híbridas, capas semánticas y ontologías, y cómo mantenerlo todo al día con IA.",
+  "order": "Watch them in order: each film stands alone, and each builds on the ones before it. They make most sense after The Inner Life of Data and A Sharper Sketch.",
+  "order_es": "Míralas en orden: cada película se entiende sola, y cada una amplía las anteriores. Se entienden mejor después de La vida interior de los datos y Un boceto más preciso.",
+  "thread_h": "One thread: the credential",
+  "thread_h_es": "Un hilo: la credencial",
+  "thread": "People have always needed to show what they know to someone who wasn't there to see them learn it. The answer has barely changed in centuries: someone trusted makes a claim about someone, in a way that others can check. The university's new microcredentials are its newest form, and each film takes them one step further.",
+  "thread_es": "Las personas siempre han necesitado mostrar lo que saben a alguien que no estuvo allí para verlas aprender. La respuesta casi no ha cambiado en siglos: alguien de confianza afirma algo sobre alguien, de un modo que otros pueden comprobar. Las nuevas microcredenciales de la universidad son su forma más reciente, y cada película las lleva un paso más allá.",
+  "past_h": "Every film starts in the past",
+  "past_h_es": "Cada película empieza en el pasado",
+  "past": [
+    ["Vervet monkeys' alarm calls", "A signal can stand for a kind of thing."],
+    ["A guild's masterpiece, a sealed licence to teach", "Someone trusted makes a claim about someone, in a way others can check."],
+    ["Pacioli's journal and ledger, 1494", "One set of facts: a shape for writing, a shape for reading."],
+    ["A library's card catalogue", "The same thing, reached many ways."],
+    ["The cash register, 1879", "Recording and counting in one place."],
+    ["Linnaeus, Wilkins and Nightingale", "Shared definitions let strangers compare. Universal ones fail."],
+    ["Johnson's dictionary, 1755", "Meaning moves. Someone has to keep up."]
+  ],
+  "past_es": [
+    ["Las llamadas de alarma de los monos vervet", "Una señal puede representar una clase de cosas."],
+    ["La obra maestra de un gremio, una licencia para enseñar con sello", "Alguien de confianza afirma algo sobre alguien, de un modo que otros pueden comprobar."],
+    ["El diario y el libro mayor de Pacioli, 1494", "Un conjunto de hechos: una forma para escribir, una forma para leer."],
+    ["El fichero de una biblioteca", "La misma cosa, alcanzada de muchas maneras."],
+    ["La caja registradora, 1879", "Registrar y contar en un solo lugar."],
+    ["Linneo, Wilkins y Nightingale", "Las definiciones compartidas permiten comparar entre desconocidos. Las universales fracasan."],
+    ["El diccionario de Johnson, 1755", "El significado se mueve. Alguien tiene que seguirle el paso."]
+  ],
+  "people_h": "Four sides of every word",
+  "people_h_es": "Cuatro lados de cada palabra",
+  "people": [
+    ["biz", "Owns a word", "Mei, registrar's office: award and student"],
+    ["biz", "Brings a new word", "Tom, short courses: microcredential"],
+    ["tech", "Owns the model", "Noor, data architect, the series' guide"],
+    ["biz", "Asks the questions", "Ana, Head of School, and David, Deputy Vice-Chancellor"]
+  ],
+  "people_es": [
+    ["biz", "Es dueña de una palabra", "Mei, registro académico: título y estudiante"],
+    ["biz", "Trae una palabra nueva", "Tom, cursos cortos: microcredencial"],
+    ["tech", "Es dueña del modelo", "Noor, arquitecta de datos, la guía de la serie"],
+    ["biz", "Hace las preguntas", "Ana, directora de escuela, y David, vicerrector"]
+  ]
+}

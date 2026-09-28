@@ -47,7 +47,14 @@ The film plays at the top of the Making of page, `site/journey/`, and on its Spa
    ```
 
    Never edit the site's copy by hand: the release workflow builds `dist/film.js` from the committed source and stops unless it is byte for byte the site's copy.
-3. **The video.** Commit and merge, then run *Render and release the films* in the Actions tab. It publishes `data-for-films.mp4` and `data-for-films.en.srt` with the others.
+3. **Spanish captions.** The Spanish page shows this English film with Spanish captions, from `src/i18n/es/captions.js`: each English narration line, exactly as in `src/narration.js`, and its caption. After changing a line, update its entry, run `FILM_LANG=es python tools/captions.py` (it writes `../captions/es.srt` and `es.vtt`, and stops if a line has no caption), and copy the file into the site:
+
+   ```
+   cp src/i18n/es/captions.js ../../../../site/assets/making-of/data-for-films.captions.es.js
+   ```
+
+   `site-tools/check_site.py` checks that the copy matches, and that the Spanish page loads it before the film.
+4. **The video.** Commit and merge, then run *Render and release the films* in the Actions tab. It publishes `data-for-films.mp4` and its captions, `data-for-films.en.srt` and `data-for-films.es.srt`, with the others.
 
 ## When The Inner Life of Data changes
 

@@ -52,6 +52,7 @@ What made the Learning Data films work, starting with *The Inner Life of Data*, 
 - **Keep the camera calm.** Camera moves glide (a sine ease) and take at least about 1.4 s. Whip pans under a talking voice feel rushed; a frame that freezes in a pause feels stopped.
 - **Let the film flow; pause only where it matters.** *A Sharper Sketch* gives every sentence a beat of about 0.8 s, holds longer only after the ideas that need to land, and keeps three short wordless endings in the whole film: viewers found a breather in every chapter too many stops.
 - **Give each film its own music.** Match the mood to the subject: the pads and pulses of *The Inner Life of Data* suit a journey through a platform; a film about modelling and design gets a slower, warmer ambience.
+- **Vary the sound itself, not only the mood.** Viewers who watched more than one film found the sound repetitive after the first. Every film so far builds its music and effects from the same few synthesised sounds (pads, drones, and the same chimes, whooshes, ticks and bells in each `tools/audio.py`), so a new key or tempo still sounds like the last film. For the next film, change the palette: other instruments and timbres, another rhythm, a new set of effects, or a recorded or licensed score. Check by listening to two films back to back.
 - **Say it and show it at the same time.** Narration and picture together beat narration plus a wall of on-screen text. Keep on-screen words to labels.
 - **Name things before explaining them.** A new term lands better if the picture shows it a moment before the narration explains what it does.
 - **Make intentional pauses look intentional.** A silence needs light and motion, or it reads as a glitch.
@@ -69,9 +70,10 @@ What made the Learning Data films work, starting with *The Inner Life of Data*, 
 - **Use cheap checkpoints before expensive rebuilds:** style frames, a five-second voice test, a forty-second sound sketch.
 - **Render in resumable chunks,** and run one heavy job at a time.
 - **Use one source for every output.** The same code makes the MP4, the web player, the labs, the scenario pictures and the posters.
-- **Draw it live for learning, and render a file for sharing.** The live player is small, sharp at any size and interactive (chapters, questions, labs). The video file is what platforms accept, plays offline and looks the same everywhere. A full render is also the strictest test: it draws every frame, not just the ones someone watched.
+- **Draw it live for learning, and render a file for sharing.** The live player is small, sharp at any size and interactive (chapters, questions, labs). The video file is what platforms accept, plays offline and looks the same everywhere. Keep captions off its picture and ship them as `.srt` files beside it: one video then serves every language, and a caption fix needs no new render. A full render is also the strictest test: it draws every frame, not just the ones someone watched.
 - **Release from a clean machine.** A workflow renders every language from the committed source, and refuses if the site's player or the voice timings don't match it. What people download is then what the site plays, and anyone can make it again.
 - **Design for other languages from day one.** Keep words in language packs, let boxes size to the translated text, and check the longest language.
+- **Start a language with captions.** A full version needs a new voice, new on-screen text and a new video. Captions alone keep the same film and the same video, and take one file: every film after *The Inner Life of Data* has Spanish captions this way. Keep each caption about as long as the English line, so it reads in the time the voice takes.
 
 *Ask: if a product is renamed tomorrow, how long does the fix take?*
 

@@ -1,4 +1,4 @@
-# Renders the films and publishes the videos and captions to one GitHub release.
+# Renders the films (the topic films and the two Making of films) and publishes the videos and captions to one GitHub release.
 # Run it by hand: Actions → Render and release the films → Run workflow.
 #
 # Which films to render (the "films" input):
@@ -92,6 +92,21 @@ jobs:
              "paths": ["films/when-things-go-wrong/2-too-good-to-be-true/source", "films/when-things-go-wrong/2-too-good-to-be-true/captions",
                        "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
                        "films/a-sharper-sketch/source/src",
+                       "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
+            {"name": "Data for Films", "key": "data-for-films-en",
+             "dir": "films/making-of/1-data-for-films/source", "lang": "en",
+             "player": "dist/film.js", "site_player": "site/assets/making-of/data-for-films.js",
+             "video": "dist/data-for-films.mp4", "file": "data-for-films.mp4",
+             "captions": "films/making-of/1-data-for-films/captions/en.srt", "srt": "data-for-films.en.srt",
+             "paths": ["films/making-of/1-data-for-films/source", "films/making-of/1-data-for-films/captions",
+                       "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
+            {"name": "That's not quite right", "key": "thats-not-quite-right-en",
+             "dir": "films/making-of/2-the-process/source", "lang": "en",
+             "player": "dist/film.js", "site_player": "site/assets/making-of/thats-not-quite-right.js",
+             "video": "dist/thats-not-quite-right.mp4", "file": "thats-not-quite-right.mp4",
+             "captions": "films/making-of/2-the-process/captions/en.srt", "srt": "thats-not-quite-right.en.srt",
+             "paths": ["films/making-of/2-the-process/source", "films/making-of/2-the-process/captions",
+                       "films/making-of/1-data-for-films/source/src",
                        "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]}
           ]
           EOF
@@ -250,6 +265,7 @@ jobs:
           - *A Sharper Sketch*, data modelling: \`a-sharper-sketch.mp4\` (English).
           - *Silent change*, from the series *When things go wrong*, on changes and data contracts: \`silent-change.mp4\` (English).
           - *Too good to be true*, from the series *When things go wrong*, on data quality checks: \`too-good-to-be-true.mp4\` (English).
+          - *Data for Films* and *That's not quite right*, the Making of films, on how the films are drawn and how they're made: \`data-for-films.mp4\` and \`thats-not-quite-right.mp4\` (English).
 
           Rendered for this release, from commit $GITHUB_SHA: ${RENDERED:-none; every video is carried over from the previous release}.
 

@@ -53,7 +53,7 @@ About `render.py`:
 
 - **Speed.** `--workers` sets how many browsers render at the same time. Use about one per CPU core. With 4 workers, a film takes about 7 minutes; with 1 (the default), about 20 to 25.
 - **Resuming.** It renders in chunks of 20 seconds. If it stops, run it again and it continues from the finished chunks. After you change the film and run `build.py`, it starts again from scratch on its own.
-- **Quality.** H.264 at CRF 18, AAC audio at 192 kbps, loudness normalised to -16 LUFS for the web. The file is about 150 MB, which LinkedIn and most platforms accept as it is.
+- **Quality.** H.264 at CRF 18, AAC audio at 192 kbps, loudness normalised to -16 LUFS for the web. The file is about 200 MB, which LinkedIn and most platforms accept as it is.
 
 ## Publish
 
@@ -72,6 +72,8 @@ About `render.py`:
 3. **The videos.** Commit and merge steps 1 and 2 first. Then, in the Actions tab, run *Render and release the films* ([`.github/workflows/release.yml`](../../../.github/workflows/release.yml)) with a new tag, such as `v2.1`. Leave *films* at `changed` to render only the films whose source changed since the latest release, or set it to `all`, or to keys such as `inner-life-of-data-en,inner-life-of-data-es`. It runs the steps above on GitHub's machines, in about 30 to 45 minutes, and publishes the videos and the `.srt` captions to a release with that tag; the videos it didn't render are copied from the latest release, so every release carries every film. Tick *draft* to watch the videos before the site's download buttons point to them; running again with the same tag replaces its files.
 
    The workflow keeps the committed timings (`tts.py --keep-timings`), so the video, the site's player and the captions share one timeline. It stops early if a line's voice no longer matches `vodur.js` (run `tts.py` and commit it), or if the site's `film.js` isn't built from this source (do step 1). It also draws every moment first (`check.py`), and puts the pacing report in the run's summary.
+
+   The two Making of films carry this film's English source inside their players (they stop it at 2:31, and draw its frames live). After changing `src/`, build them too and copy their players, as [their READMEs](../../making-of/README.md) say, or the release stops at their check.
 
    To publish a video you rendered yourself, upload it to a release (Releases → Draft a new release), named exactly `inner-life-of-data.mp4` or `inner-life-of-data.es.mp4`: the download buttons point to these names in the latest release. Don't commit videos to the repository: GitHub rejects files over 100 MB, and the release keeps clones small.
 

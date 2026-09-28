@@ -1,6 +1,6 @@
 # Data for Films
 
-*Treatment for the first of [two films on the Making of page](../README.md), v0.2: the main decisions are made (see [Decisions](#decisions)). Status: agreed in outline; next, the script.*
+*Treatment for the first of [two films on the Making of page](../README.md), v0.3: the main decisions are made (see [Decisions](#decisions)). Status: first cut made; see [the script](script.md).*
 
 ## The promise
 
@@ -36,7 +36,7 @@ It's also the chapter where the film shows code, so the film about code starts f
 | **4. Components** | The tile becomes a function: give it a picture, a sharpness and a timestamp, and it draws itself. Call it with ten rows of data, and a queue of tiles fills the housing. The same for the check marks: one per test result. A glimpse of the real function. | Components, fed by data. The same function draws the film, the labs and the scenarios, so a fix lands everywhere. |
 | **5. The camera** | The whole platform is drawn once, far larger than the screen. The camera is one instruction applied before everything else: move and scale. Change two numbers, and we fly from the platform overview into the housing at 2:31. | A camera is a transformation, not a lens. Zooms are numbers changing over time. |
 | **6. Time** | A slider appears under the frame, labelled `t`. Drag it, and the tiles move through the lenses and sharpen, the check marks tick, the red tile stops. Two curves side by side: linear motion looks mechanical; an eased curve looks calm. The glitches on raw tiles look random, yet are the same every time. | Every frame is a function of time: give the code a moment, and it draws that moment. Easing makes motion feel natural. "Random" is a formula, so any frame can be drawn again, exactly. |
-| **7. Two ways to play** | Split in two. **Live:** at every screen refresh, the browser asks the soundtrack "where are we?" and draws that moment. **Video:** a browser with no window draws every 1/30 of a second, and the frames go into a video file, which mostly stores what changed between them. The numbers side by side: raw frames about 80 GB, the video about 150 MB, the code and sound about 7 MB. | A recipe and a meal. The live film is small, sharp at any size and interactive; the video plays anywhere. Both come from one source. |
+| **7. Two ways to play** | Split in two. **Live:** at every screen refresh, the browser asks the soundtrack "where are we?" and draws that moment. **Video:** a browser with no window draws every 1/30 of a second, and the frames go into a video file, which mostly stores what changed between them. The numbers side by side: raw frames about 84 GB, the video about 200 MB, the code and sound about 7 MB. | A recipe and a meal. The live film is small, sharp at any size and interactive; the video plays anywhere. Both come from one source. |
 | **8. 2:31 again** | Every layer returns in order, in a few seconds: numbers, shapes, layers, components, camera, time. The frame is whole, and the film plays on from 2:31. | Everything together, once, fast, so the viewer sees how much happens in every frame. |
 
 ## The hardest mechanism, and the twist
@@ -59,7 +59,7 @@ The idea that's hardest to explain is **"every frame is a function of time"**. T
 - `requestAnimationFrame`: it follows the screen's refresh rate (60 Hz on most screens, 120 Hz on some), not a fixed 60.
 - The audio clock: how precise `currentTime` is, and why the film follows it.
 - The render: frames drawn by headless Chromium, passed to ffmpeg as JPEG, encoded as H.264 with keyframes and difference frames, and colour stored at a quarter of the resolution (`yuv420p`).
-- Exact figures on the day: the film is 7:32 today (13,566 frames at 30 fps, about 84 GB as raw frames); the code and soundtrack sizes; the video size; the pixel values at 2:31.
+- Exact figures on the day: the film is 7:32 today (13,566 frames at 30 fps, about 84 GB as raw frames); the code and soundtrack sizes; the video size; the pixel values at 2:31. Checked in [the script's rigour sheet](script.md#rigour-sheet): the video is about 200 MB, not 150.
 
 ## Decisions
 
@@ -71,11 +71,11 @@ Made by the author on 27 September 2026:
 4. **The title:** *Data for Films*.
 5. **Labs:** none.
 
-Still open: the last line. A proposal: "A picture is data. A film is a function."
+6. **The last line:** "A picture is data. A film is a function." (Claude's proposal, used in the first cut.)
 
 ## Next checkpoints
 
 1. ~~Agree this treatment.~~ Done in outline.
-2. Script with a rigour sheet and pacing report.
-3. Style frames: one pixel's three numbers, the split screen of code and result, the tile's layers pulled apart, and the `t` slider.
-4. A voice test, and the first cut.
+2. ~~Script with a rigour sheet and pacing report.~~ Draft 1: see [the script](script.md).
+3. ~~Style frames and the first cut.~~ Made together, since the look is the other films' own: the first cut plays on the Making of page.
+4. The author's review of the first cut.

@@ -50,7 +50,7 @@ films/                           one folder per film: script or story, captions/
                                  and how to rebuild and publish it)
   inner-life-of-data/            The Inner Life of Data, plus breathing-cut.md (how its pauses work) and pacing-review.md (how they were tuned)
   a-sharper-sketch/              A Sharper Sketch, on data modelling
-  data-modelling-series/         proposal.md: an advanced series on data modelling, from language to AI (not made yet)
+  from-words-to-data/            From words to data: proposal.md, for an advanced series on data modelling, from language to AI (not made yet)
   when-things-go-wrong/          the series When things go wrong: its README, the characters it shares, and one folder per film
     1-silent-change/             Silent change: treatment, story outline, captions and source
     2-too-good-to-be-true/       Too good to be true: treatment, script (with the rigour sheet), style frames, captions and source

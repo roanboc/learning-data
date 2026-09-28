@@ -1141,7 +1141,8 @@ function waxSeal(ctx,x,y,r,col,a,press,mark){if(a<=0.01)return;const c=col||WAX,
   ctx.strokeStyle=rgba(mix(c,[0,0,0],0.45),0.9);ctx.lineWidth=r*0.06;ctx.beginPath();ctx.arc(0,0,r*0.66,0,TAU);ctx.stroke();
   T(ctx,mark||"✦",0,r*0.18,{w:800,size:r*0.62,align:"center",color:rgba(mix(c,[0,0,0],0.5),0.95)});ctx.restore();});}
 /* a credential, as each age made it: o.era is "tablet" (clay), "wax" (a sealed letter), "paper" (a diploma), "transcript", "badge" or "digital".
-   Its parts are the series' model: who issued it, who holds it, what it claims, the evidence, the date. */
+   Its parts are the series' model: who issued it, who holds it, what it claims, the evidence, the date.
+   A digital card says "signed" under its seal: o.signed gives that word in another language, or false leaves it out. */
 function credCard(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return 0;const era=o.era||"digital",h=o.h||Math.round(w*0.68),hl=o.hl||{};
   const rowsF=[["issuer",o.issuer],["holder",o.holder],["claim",o.claim],["evidence",o.evidence],["date",o.date]].filter(r=>r[1]);
   withA(ctx,a,()=>{ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot||0);ctx.translate(-w/2,-h/2);
@@ -1151,10 +1152,10 @@ function credCard(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return
       if(era==="paper"){ctx.strokeStyle="rgba(150,120,60,0.5)";ctx.lineWidth=2;rr(ctx,10,10,w-20,h-20,4);ctx.stroke();}}
     const dk=era==="digital"||era==="badge",ink=dk?rgba(INK,0.95):(era==="tablet"?"rgba(60,36,20,0.9)":"rgba(52,40,30,0.92)"),lab=dk?rgba(SOFT,1):(era==="tablet"?"rgba(70,44,26,0.7)":"rgba(110,86,54,0.9)");
     let yy=o.title?58:42;if(o.title)T(ctx,o.title,w/2,40,{w:800,size:o.ts||22,align:"center",color:dk?rgba(o.col||TRUST,1):ink});
-    rowsF.forEach(([k,v],i)=>{const on=hl[k]||0,ry=yy+i*(o.rh||34);if(on>0){ctx.fillStyle=dk?rgba(o.col||TRUST,0.16*on):"rgba(200,140,40,"+(0.22*on)+")";rr(ctx,12,ry-24,w-24,32,8);ctx.fill();}
+    rowsF.forEach(([k,v],i)=>{const on=hl[k]||0,ry=yy+i*(o.rh||34);if(on>0){const top=o.title?Math.max(ry-24,50):ry-24;ctx.fillStyle=dk?rgba(o.col||TRUST,0.16*on):"rgba(200,140,40,"+(0.22*on)+")";rr(ctx,12,top,w-24,ry+8-top,8);ctx.fill();}
       T(ctx,k,24,ry,{f:"mono",w:500,size:15,color:lab});T(ctx,v,120,ry,{w:700,size:18,color:ink});});
     if(era==="wax"||era==="paper")waxSeal(ctx,w-50,h-46,28,WAX,1,o.press==null?1:o.press);
-    if(era==="digital"){const sx=w-46,sy=h-40;ctx.strokeStyle=rgba(o.col||TRUST,0.9);ctx.lineWidth=2;ctx.beginPath();for(let i=0;i<6;i++){const an=i/6*TAU+Math.PI/6;ctx.lineTo(sx+Math.cos(an)*20,sy+Math.sin(an)*20);}ctx.closePath();ctx.stroke();T(ctx,"✓",sx,sy+7,{w:800,size:20,align:"center",color:rgba(o.col||TRUST,1)});T(ctx,"signed",sx,sy+36,{f:"mono",w:500,size:12,align:"center",color:rgba(SOFT,1)});}
+    if(era==="digital"){const sx=w-46,sy=h-40;ctx.strokeStyle=rgba(o.col||TRUST,0.9);ctx.lineWidth=2;ctx.beginPath();for(let i=0;i<6;i++){const an=i/6*TAU+Math.PI/6;ctx.lineTo(sx+Math.cos(an)*20,sy+Math.sin(an)*20);}ctx.closePath();ctx.stroke();T(ctx,"✓",sx,sy+7,{w:800,size:20,align:"center",color:rgba(o.col||TRUST,1)});if(o.signed!==false)T(ctx,o.signed||"signed",sx,sy+36,{f:"mono",w:500,size:12,align:"center",color:rgba(SOFT,1)});}
     if(era==="badge"){const bx=w-60,by=46;ctx.fillStyle=rgba(o.col||TRUST,0.9);ctx.beginPath();for(let i=0;i<6;i++){const an=i/6*TAU;ctx.lineTo(bx+Math.cos(an)*26,by+Math.sin(an)*26);}ctx.closePath();ctx.fill();T(ctx,"★",bx,by+8,{w:800,size:22,align:"center",color:"#0a1020"});}
     if(era==="tablet"){ctx.fillStyle="rgba(60,36,20,0.35)";for(let i=0;i<18;i++){const px=20+hash(i,2)*(w-40),py=h-30-hash(i,3)*20;ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(px+10,py+4);ctx.lineTo(px,py+8);ctx.fill();}}
     ctx.restore();});return h;}
@@ -1220,11 +1221,11 @@ function credKinds(ctx,o){o=o||{};const p=o.p||{},ox=o.ox||0,oy=o.oy||0,s=o.s||1
    The labs and the scenarios draw with these too (LV, at the end). */
 const KT_AI=[130,230,215],KT_BLUE=[60,110,210],KT_PLAN=[120,190,255];
 // the three dashboards that each count completion rate their own way, and the numbers they show
-const KT_DASH=[{name:"Short courses",col:OFFICE.short.c,num:"71%",f:"completed ÷ enrolled at census",v:"their own"},
+const KT_DASH=[{name:"Short courses",col:OFFICE.short.c,num:"71%",f:"completed ÷ enrolled at census date",v:"their own"},
   {name:"Planning",col:KT_PLAN,num:"64%",f:"completed ÷ all who started",v:"glossary v2"},
   {name:"Learning platform",col:OFFICE.lms.c,num:"58%",f:"finished all modules ÷ logged in",v:"v1, 2019"}];
 // the change package the agent drafts: the layer, and one line of what changes in it
-const KT_PKG=[["Glossary","completion rate v3","completed ÷ enrolled at census"],["Ontology","revoked is not completed","a statement"],["Logical model","Enrolment + outcome","an attribute"],
+const KT_PKG=[["Glossary","completion rate v3","completed ÷ enrolled at census date"],["Ontology","revoked is not completed","a statement"],["Logical model","Enrolment + outcome","an attribute"],
   ["Mapping","outcome → gov. field","MC_OUTCOME"],["Semantic layer","completion_rate","one measure"],["Contract","outcome: 3 values","completed · withdrawn · enrolled"],
   ["Tests","revoked not counted","and 2025 unchanged"],["Change note","why","new field · 3 formulas"]];
 // one change, end to end: each layer, and what it says about completion rate
@@ -1278,7 +1279,7 @@ function kt_paper(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)re
     if(cu>0.8){ctx.beginPath();ctx.moveTo(w,h-cu);ctx.quadraticCurveTo(w-cu*0.35,h-cu*0.35,w-cu,h);ctx.quadraticCurveTo(w-cu*0.8,h-cu*0.6,w-cu*0.92,h-cu*0.92);ctx.quadraticCurveTo(w-cu*0.6,h-cu*0.8,w,h-cu);ctx.closePath();
       const fg=ctx.createLinearGradient(w,h,w-cu,h-cu);fg.addColorStop(0,rgba(mix(base,[255,255,255],0.35),1));fg.addColorStop(1,rgba(mix(base,[120,90,50],0.2),1));ctx.fillStyle=fg;ctx.fill();ctx.strokeStyle="rgba(110,84,50,0.3)";ctx.lineWidth=1;ctx.stroke();}
     ctx.restore();});}
-const KT_WORDS=[[["CREDENTIAL",3],["CREDIT",4]],[["CURRICULUM",3],["DEGREE",4]],[["DIPLOMA",4],["ENROL",3]],[["NICE",5],["STUDENT",3]]];
+const KT_WORDS=[[["CREDENTIAL",3],["CREDIT",4]],[["DEAN",3],["DEGREE",4]],[["DIPLOMA",4],["ENROL",3]],[["NICE",5],["STUDENT",3]]];
 // a heavy book: closed (a leather cover with a rounded spine, gilt, its page block showing its weight), or open on two curved pages of entries
 function kt_book(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a,op=clamp(o.open||0,0,1);if(a<=0.01)return;
   withA(ctx,a,()=>{
@@ -1327,7 +1328,7 @@ function kt_oed(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a,p=o.p||0;if(a<=
   [2,1].forEach(k=>{ctx.save();ctx.translate(x+w/2+k*7,y+h/2+k*6);ctx.rotate(0.018*k);kt_paper(ctx,-w/2,-h/2,w,h,t,{seed:k+4,col:k===2?[222,215,200]:[232,226,214],curl:0,age:0.1});ctx.restore();});
   kt_paper(ctx,x,y,w,h,t,{seed:3,col:[246,242,233],age:0.08});
   T(ctx,"OXFORD ENGLISH DICTIONARY",x+w/2,y+36,{w:800,size:14,align:"center",color:"rgba(40,50,70,0.7)"});ctx.fillStyle="rgba(40,50,70,0.25)";ctx.fillRect(x+30,y+48,w-60,1.5);
-  const E=[["credential, n.",4],["credit, n.",3],["curriculum, n.",3]];let yy=y+86;const ink="rgba(34,36,44,0.95)",blue=rgba(KT_BLUE,1),rev=k=>fin(p,k*0.18,0.2);
+  const E=[["credential, adj. & n.",4],["credit, n.",3],["curriculum, n.",3]];let yy=y+86;const ink="rgba(34,36,44,0.95)",blue=rgba(KT_BLUE,1),rev=k=>fin(p,k*0.18,0.2);
   const pencil=(pts,lw)=>{ctx.strokeStyle=blue;ctx.lineCap="round";ctx.lineJoin="round";ctx.lineWidth=lw;ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length-1;i++)ctx.quadraticCurveTo(pts[i][0],pts[i][1],(pts[i][0]+pts[i+1][0])/2,(pts[i][1]+pts[i+1][1])/2);const L=pts[pts.length-1];ctx.lineTo(L[0],L[1]);ctx.stroke();};
   E.forEach(([hw,n],i)=>{T(ctx,hw,x+30,yy,{w:800,size:24,color:ink});yy+=18;for(let k=0;k<n;k++){const bw=(w-60)*(0.55+0.4*hash(i*5+k,7));ctx.fillStyle="rgba(60,64,76,0.3)";ctx.fillRect(x+30+(k?16:0),yy+k*18,bw-(k?16:0),6);
       // the editor's marks: a sense struck out by hand, a new one written in, a circled word
@@ -1349,7 +1350,7 @@ function kt_sky(ctx,cx,cy,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return
   const sg=ctx.createRadialGradient(cx-8*sc,cy-8*sc,2,cx,cy,28*sc);sg.addColorStop(0,"#fffbe8");sg.addColorStop(0.6,"#ffe19a");sg.addColorStop(1,"#ffb45a");ctx.fillStyle=sg;ctx.beginPath();for(let q=0;q<=36;q++){const an=q/36*TAU,rr_=26*sc*(1+0.03*Math.sin(an*5+t*2));ctx.lineTo(cx+Math.cos(an)*rr_,cy+Math.sin(an)*rr_);}ctx.fill();
   KT_PLANETS.forEach(([n,col,r],i)=>{const rx=(110+i*108)*sc,ry=rx*0.24,pl=i===8,ox=pl?40*sc:0,rot=pl?0.09:0;ctx.save();ctx.translate(cx+ox,cy);ctx.rotate(rot);ctx.strokeStyle=rgba(pl?[200,190,180]:[230,220,200],pl?0.22:0.16);ctx.lineWidth=1.2;if(pl)ctx.setLineDash([6,6]);ctx.beginPath();ctx.ellipse(0,0,rx,ry,0,0,TAU);ctx.stroke();ctx.setLineDash([]);
     const an=pl?0.32+t*0.01:(o.ang||0.6)+t*0.5/Math.pow(i+1,1.1)+i*1.9,px=Math.cos(an)*rx,py=Math.sin(an)*ry;kt_body(ctx,px,py,r*sc*1.15,col,-px-ox,-py,{ring:i===5,bands:i===4});
-    if(pl&&o.dwarf)withA(ctx,o.dwarf,()=>tag(ctx,px,py-38,"dwarf planet",CLAY,{align:"center",size:17}));ctx.restore();});});}
+    if(pl&&o.dwarf)withA(ctx,o.dwarf,()=>tag(ctx,px,py-40,"dwarf planet",CLAY,{align:"center",size:19}));ctx.restore();});});}
 // the kilogram, 1889 to 2019: a metal cylinder under a glass bell jar, on a wooden base; light slides slowly over the metal and the glass
 function kt_kilo(ctx,x,y,s,a,t){t=t||0;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(s,s);
   const wb=ctx.createLinearGradient(0,66,0,96);wb.addColorStop(0,"#8a5a36");wb.addColorStop(1,"#3e2414");ctx.fillStyle=wb;ctx.beginPath();ctx.moveTo(-112,74);ctx.quadraticCurveTo(0,62,112,74);ctx.quadraticCurveTo(118,86,108,94);ctx.quadraticCurveTo(0,102,-108,94);ctx.quadraticCurveTo(-118,86,-112,74);ctx.fill();
@@ -1386,7 +1387,7 @@ function kt_form(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;
     T(ctx,"Government",x+24,y+30,{w:700,size:15,color:rgba(SOFT,1)});T(ctx,"Microcredential report · 2027",x+24,y+54,{w:800,size:21});
     F.forEach((f,i)=>{const yy=y+100+i*rh;T(ctx,f,x+24,yy,{w:600,size:16,color:rgba(SOFT,1)});ctx.strokeStyle="rgba(170,200,245,0.35)";ctx.lineWidth=1.5;rr(ctx,x+24,yy+8,w-48,26,6);ctx.stroke();});
     const hi=o.hi||0,yy=y+100+F.length*rh;withA(ctx,0.3+0.7*hi,()=>{ctx.fillStyle=rgba(AMBER,0.14*hi);rr(ctx,x+12,yy-24,w-24,rh+14,10);ctx.fill();ctx.strokeStyle=rgba(AMBER,0.9);ctx.lineWidth=2.5;rr(ctx,x+12,yy-24,w-24,rh+14,10);ctx.stroke();
-      T(ctx,"Outcome",x+24,yy,{w:800,size:17,color:rgba(AMBER,1)});T(ctx,"completed · withdrawn · enrolled",x+34,yy+27,{f:"mono",w:500,size:14,color:rgba(INK,0.9)});});
+      T(ctx,"Outcome",x+24,yy,{w:800,size:17,color:rgba(AMBER,1)});T(ctx,"completed · withdrawn · enrolled",x+24,yy+30,{f:"mono",w:500,size:18,color:rgba(INK,0.9)});});
     if(hi>0.5)withA(ctx,fin(hi,0.5,0.5),()=>tag(ctx,x+w-80,yy-6,"new",AMBER,{align:"center",size:16}));});return h;}
 // a dashboard, in the style of Silent change's (a light canvas in a dark bezel): one number, its name, and optionally its formula
 function kt_dash(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||[7,122,157],s=h/230,hi=o.hi||0;
@@ -1395,7 +1396,7 @@ function kt_dash(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)retur
     T(ctx,o.name||"Dashboard",x+20*s,y+30*s,{w:700,size:18*s,color:DB.text});
     T(ctx,o.title||"Completion rate",x+20*s,y+82*s,{w:600,size:18*s,color:DB.muted});
     T(ctx,o.num||"71%",x+18*s,y+152*s,{w:800,size:62*s,color:o.numCol||DB.text});
-    if(o.formula)withA(ctx,o.fA==null?1:o.fA,()=>{T(ctx,o.formula,x+20*s,y+h-22*s,{f:"mono",w:500,size:Math.min(14*s,(w-40*s)/o.formula.length*1.62),color:o.fCol||DB.muted});});
+    if(o.formula)withA(ctx,o.fA==null?1:o.fA,()=>{T(ctx,o.formula,x+20*s,y+h-22*s,{f:"mono",w:500,size:Math.min(18,(w-40*s)/o.formula.length*1.62),color:o.fCol||DB.muted});});
     else{const v=parseFloat(o.num)||0,bw=w-40*s;ctx.fillStyle=DB.track;rr(ctx,x+20*s,y+h-34*s,bw,12*s,6*s);ctx.fill();ctx.fillStyle=rgba(col,1);rr(ctx,x+20*s,y+h-34*s,bw*v/100,12*s,6*s);ctx.fill();}
     ctx.restore();if(o.flag)kt_flag(ctx,x+w-26,y-4,1,o.flag);});}
 // a glossary entry: the term, its version and owner, and its definition (lines given, so a phrase can be highlighted)
@@ -1434,7 +1435,7 @@ function kt_folder(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)ret
 // the stack of versions: v1 at the back, the newest in front
 function kt_versions(ctx,x,y,n,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{for(let i=0;i<n;i++){const k=clamp((o.p==null?n:o.p)-i,0,1);if(k<=0)continue;const top=i===n-1,xx=x+i*16,yy=y-i*26;
   withA(ctx,k,()=>{glass(ctx,xx,yy,220,110,14,top?(o.col||TRUST):[150,165,190],{glow:top?16:6,ea:top?0.9:0.5,fill:"rgba(8,12,24,0.96)"});T(ctx,"v"+(i+1),xx+22,yy+44,{f:"mono",w:500,size:26,color:top?rgba(o.col||TRUST,1):rgba(SOFT,1)});
-    T(ctx,(o.dates||["2019","2025","2027"])[i]||"",xx+198,yy+42,{f:"mono",w:500,size:16,align:"right",color:rgba(SOFT,0.9)});if(top&&o.sub)T(ctx,o.sub,xx+22,yy+84,{w:600,size:16,color:rgba(INK,0.85)});});}});}
+    T(ctx,(o.dates||["2019","2025","2026"])[i]||"",xx+198,yy+42,{f:"mono",w:500,size:18,align:"right",color:rgba(SOFT,0.9)});if(top&&o.sub)T(ctx,o.sub,xx+22,yy+86,{w:600,size:18,color:rgba(INK,0.85)});});}});}
 // one change, end to end: seven layers in a row, lit up to "lit" (0..7); a light travels along them
 function kt_chain(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const n=KT_CHAIN.length,gap=o.gap||16,bw=(w-gap*(n-1))/n,bh=o.h||110,lit=o.lit||0,sz=o.size||1;
   withA(ctx,a,()=>{const cy=y+bh/2;ctx.strokeStyle="rgba(170,200,245,0.25)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x+bw/2,cy);ctx.lineTo(x+w-bw/2,cy);ctx.stroke();
@@ -1452,7 +1453,14 @@ function kt_report(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)retur
   if(o.big)T(ctx,o.big,30,120+(o.rows||[0,0]).length*52+24,{w:800,size:48,color:"rgba(40,36,34,0.95)"});
   if(h>220&&!o.big)for(let i=0;i<3;i++){const lw=(w-60)*(0.5+0.4*hash(i,4)),ly=h-86+i*22;ctx.strokeStyle="rgba(80,76,70,0.22)";ctx.lineWidth=6;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(30,ly);ctx.quadraticCurveTo(30+lw/2,ly+1.5,30+lw,ly);ctx.stroke();}
   if(o.stamp)stamp(ctx,w-16,h-18,o.stamp,o.stampCol||KIND,o.stampA==null?1:o.stampA,0);ctx.restore();});}
-// a clay tablet: a soft pillow of clay, speckled and lit from the upper left, with ruled grooves and wedges pressed in (p presses them)
+// a clay tablet from Uruk, c. 3300 BCE: a soft pillow of clay, speckled and lit from the upper left, ruled into cases. In each case,
+// numbers pressed in with the round end of a stylus (notches and circles) and a sign drawn with its point: a jar, an ear of grain,
+// a sheep (a circle with a cross), a bowl. Stylised, not a real text; the wedges of cuneiform came centuries later. p presses them
+function kt_signPath(ctx,k,s){const P=(pts)=>{ctx.moveTo(pts[0][0]*s,pts[0][1]*s);for(let i=1;i<pts.length;i++)ctx.lineTo(pts[i][0]*s,pts[i][1]*s);};ctx.beginPath();
+  if(k===0){ctx.moveTo(-0.45*s,-0.75*s);ctx.lineTo(0.45*s,-0.75*s);ctx.moveTo(-0.33*s,-0.75*s);ctx.lineTo(-0.33*s,-0.45*s);ctx.quadraticCurveTo(-0.66*s,-0.3*s,-0.56*s,0.2*s);ctx.quadraticCurveTo(-0.4*s,0.75*s,0,0.85*s);ctx.quadraticCurveTo(0.4*s,0.75*s,0.56*s,0.2*s);ctx.quadraticCurveTo(0.66*s,-0.3*s,0.33*s,-0.45*s);ctx.lineTo(0.33*s,-0.75*s);}
+  else if(k===1){P([[0,0.85],[0,-0.85]]);for(let q=0;q<3;q++){const y=-0.55+q*0.45;P([[0,y+0.18],[-0.36,y-0.12]]);P([[0,y+0.18],[0.36,y-0.12]]);}}
+  else if(k===2){ctx.moveTo(0.6*s,0);ctx.arc(0,0,0.6*s,0,TAU);P([[-0.6,0],[0.6,0]]);P([[0,-0.6],[0,0.6]]);}
+  else{P([[-0.66,-0.4],[0.66,-0.4],[0.3,0.6],[-0.3,0.6],[-0.66,-0.4]]);}}
 function kt_tablet(ctx,x,y,w,h,p,a,t){t=t||0;withA(ctx,a==null?1:a,()=>{ctx.save();ctx.translate(x,y);
   const shape=()=>{const n=96,P=[];for(let i=0;i<n;i++){const an=i/n*TAU,c=Math.cos(an),s_=Math.sin(an),e=0.38,wob=1+0.01*Math.sin(an*3+1.3)+0.006*Math.sin(an*7);P.push([w/2+w/2*Math.sign(c)*Math.pow(Math.abs(c),e)*wob,h/2+h/2*Math.sign(s_)*Math.pow(Math.abs(s_),e)*wob]);}
     ctx.beginPath();ctx.moveTo((P[0][0]+P[n-1][0])/2,(P[0][1]+P[n-1][1])/2);for(let i=0;i<n;i++){const q=P[i],r=P[(i+1)%n];ctx.quadraticCurveTo(q[0],q[1],(q[0]+r[0])/2,(q[1]+r[1])/2);}ctx.closePath();};
@@ -1462,9 +1470,17 @@ function kt_tablet(ctx,x,y,w,h,p,a,t){t=t||0;withA(ctx,a==null?1:a,()=>{ctx.save
     for(let i=0;i<Math.floor(w*h/260);i++){const px=hash(i,31)*w,py=hash(i,32)*h,r=0.5+hash(i,33)*1.8;ctx.fillStyle=hash(i,34)>0.55?"rgba(60,36,18,0.22)":"rgba(255,225,185,0.14)";ctx.beginPath();ctx.ellipse(px,py,r*1.4,r,hash(i,35)*3,0,TAU);ctx.fill();}
     ctx.strokeStyle="rgba(60,36,18,0.28)";ctx.lineWidth=1;[[0.1,0.7,0.3,0.95],[0.82,0.05,0.93,0.3]].forEach(([a0,b0,a1,b1])=>{ctx.beginPath();ctx.moveTo(w*a0,h*b0);ctx.bezierCurveTo(w*(a0+0.03),h*(b0+0.08),w*(a1-0.04),h*(b1-0.06),w*a1,h*b1);ctx.stroke();});
     for(let r=1;r<4;r++){const yy=r*h/4;ctx.strokeStyle="rgba(58,34,16,0.4)";ctx.lineWidth=2.2;ctx.beginPath();ctx.moveTo(w*0.05,yy);ctx.bezierCurveTo(w*0.35,yy-2,w*0.65,yy+2,w*0.95,yy);ctx.stroke();ctx.strokeStyle="rgba(255,226,180,0.22)";ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(w*0.05,yy+2);ctx.bezierCurveTo(w*0.35,yy,w*0.65,yy+4,w*0.95,yy+2);ctx.stroke();}
-    const n=32,sh=Math.floor(n*clamp(p,0,1)),sz=Math.min(w/26,h/9);for(let i=0;i<sh;i++){const row=Math.floor(i/8),c=i%8,px=w*0.09+c*(w*0.84)/8+hash(i,2)*5,py=row*h/4+h/8+(hash(i,6)-0.5)*4,k=hash(i,3),rot=k<0.55?0:Math.PI/2*(k<0.8?1:0.5);
-      ctx.save();ctx.translate(px,py);ctx.rotate(rot);ctx.beginPath();ctx.moveTo(0,-sz*0.45);ctx.quadraticCurveTo(sz*0.18,0,0,sz*0.45);ctx.quadraticCurveTo(sz*0.5,sz*0.12,sz*1.5,sz*0.04);ctx.quadraticCurveTo(sz*0.5,-sz*0.1,0,-sz*0.45);ctx.closePath();
-      ctx.fillStyle="rgba(56,32,14,0.82)";ctx.fill();ctx.strokeStyle="rgba(255,226,180,0.32)";ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(0,sz*0.45);ctx.quadraticCurveTo(sz*0.5,sz*0.14,sz*1.5,sz*0.06);ctx.stroke();ctx.restore();}
+    const sz=Math.min(w/26,h/9),pp=clamp(p,0,1),dark="rgba(56,32,14,0.82)",lite="rgba(255,226,180,0.32)";
+    for(let q=0;q<8;q++){const row=q>>1,col=q&1,dv=w*(0.5+0.12*(hash(row,51)-0.5)),x0=col?dv:w*0.05,x1=col?w*0.95:dv,cy=row*h/4+h/8,u=clamp(pp*8-q,0,1);
+      if(col){ctx.strokeStyle="rgba(58,34,16,0.4)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(dv,row*h/4+h*0.02);ctx.quadraticCurveTo(dv+2,cy,dv-1,(row+1)*h/4-h*0.02);ctx.stroke();}
+      if(u<=0)continue;const nC=hash(q,52)<0.45?1:0,nD=1+Math.floor(hash(q,53)*4),items=nC+nD+1;let px=x0+sz*0.9;
+      for(let m=0;m<items;m++){if(u<=m/items)break;const jy=(hash(q*7+m,54)-0.5)*sz*0.12;ctx.save();
+        if(m<nC){ctx.translate(px+sz*0.35,cy+jy);ctx.fillStyle=dark;ctx.beginPath();ctx.arc(0,0,sz*0.52,0,TAU);ctx.fill();ctx.strokeStyle=lite;ctx.lineWidth=Math.max(0.8,sz*0.07);ctx.beginPath();ctx.arc(0,0,sz*0.5,-0.15*Math.PI,0.75*Math.PI);ctx.stroke();px+=sz*1.35;}
+        else if(m<nC+nD){ctx.translate(px,cy+jy);ctx.rotate((hash(q*5+m,55)-0.5)*0.12);ctx.fillStyle=dark;ctx.beginPath();ctx.moveTo(-sz*0.26,-sz*0.62);ctx.lineTo(-sz*0.26,sz*0.62);ctx.bezierCurveTo(sz*0.46,sz*0.64,sz*0.46,-sz*0.64,-sz*0.26,-sz*0.62);ctx.fill();
+          ctx.strokeStyle=lite;ctx.lineWidth=Math.max(0.8,sz*0.07);ctx.beginPath();ctx.moveTo(sz*0.28,-sz*0.1);ctx.bezierCurveTo(sz*0.3,sz*0.3,sz*0.15,sz*0.55,-sz*0.2,sz*0.6);ctx.stroke();px+=sz*0.78;}
+        else{const sx=Math.min(x1-sz*1.1,px+sz*1.2);ctx.translate(sx,cy);ctx.lineCap="round";ctx.lineJoin="round";kt_signPath(ctx,[0,3,1,2,3,0,2,1][q],sz);ctx.strokeStyle=dark;ctx.lineWidth=Math.max(1,sz*0.13);ctx.stroke();
+          ctx.translate(sz*0.05,sz*0.06);kt_signPath(ctx,[0,3,1,2,3,0,2,1][q],sz);ctx.strokeStyle="rgba(255,226,180,0.22)";ctx.lineWidth=Math.max(0.6,sz*0.05);ctx.stroke();}
+        ctx.restore();}}
   ctx.restore();ctx.restore();});}
 // a diploma: a sheet with softly rolled ends, a few lines of script, and a ribbon with a wax seal that sways
 function kt_diploma(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{const rh=Math.max(8,h*0.09);
@@ -1487,8 +1503,8 @@ function kt_lines(c,s,x,y,o){String(s).split("\n").forEach((l,i)=>T(c,l,x,y+i*(o
 // a sort lab: its buckets as three trays, with a numbered chip for each item placed (green or red once checked)
 function kt_trays(c,w,h,st,L,id,cols,icons){const lab=L.labs.find(x=>x.id===id),B=lab.w.buckets,n=B.length,tw_=(w-40-(n-1)*20)/n,pick=st.pick||{};
   B.forEach(([k,name],i)=>{const x=20+i*(tw_+20),y=20,col=cols[i];glass(c,x,y,tw_,h-40,18,col,{glow:12,ea:0.75,fill:"rgba(7,12,24,0.94)"});icons[i](c,x+36,y+44);
-    wrapT(c,name,x+68,y+52,tw_-84,{w:800,size:24,color:rgba(col,1)});
-    const inB=lab.w.items.map((it,j)=>[it,j]).filter(([it,j])=>pick[j]===k);inB.forEach(([it,j],q)=>{const cx=x+44+(q%4)*((tw_-60)/4),cy=y+130+Math.floor(q/4)*66,ok=it.b===k,cc=st.checked?(ok?GOOD:BAD):[190,205,230];
+    const nl=wrapT(c,name,x+68,y+52,tw_-84,{w:800,size:24,lh:30,color:rgba(col,1)}).length;
+    const inB=lab.w.items.map((it,j)=>[it,j]).filter(([it,j])=>pick[j]===k);inB.forEach(([it,j],q)=>{const cx=x+44+(q%4)*((tw_-60)/4),cy=y+130+Math.max(0,nl-2)*30+Math.floor(q/4)*66,ok=it.b===k,cc=st.checked?(ok?GOOD:BAD):[190,205,230];
       glow(c,cx,cy,34,cc,0.25);c.fillStyle="rgba(10,16,30,0.95)";c.beginPath();c.arc(cx,cy,25,0,TAU);c.fill();ring(c,cx,cy,25,cc,1,3);T(c,String(j+1),cx,cy+9,{w:800,size:26,align:"center",color:rgba(cc,1)});});});}
 // the chain for the steps lab: eight steps in two rows, the second running back, lit up to the step you're on
 function kt_chain2(c,w,h,step,labels){const bw=206,bh=100,gx=(w-4*bw)/5,P=i=>i<4?[gx+i*(bw+gx),30]:[gx+(7-i)*(bw+gx),30+bh+60];
@@ -1501,7 +1517,7 @@ function kt_chain2(c,w,h,step,labels){const bw=206,bh=100,gx=(w-4*bw)/5,P=i=>i<4
 function kt_dashRow(c,x,y,w,name,num,col){glass(c,x-6,y-6,w+12,72,14,[170,205,255],{glow:8,ea:0.4,fill:"rgba(8,14,28,0.95)"});c.save();rr(c,x,y,w,60,10);c.clip();c.fillStyle=DB.card;c.fillRect(x,y,w,60);c.fillStyle=rgba(col,1);c.fillRect(x,y,8,60);c.restore();
   T(c,name,x+24,y+38,{w:700,size:22,color:DB.text});T(c,num,x+w-20,y+44,{w:800,size:38,align:"right",color:DB.text});}
 const LV={
-  // Spot the drift: drift, fine as agreed, or a new version
+  // Spot the drift: what each change needs (close the gap, nothing to change, or a new version of the meaning)
   drift:(c,w,h,st,L)=>kt_trays(c,w,h,st,L,"drift",[EDGE_,GOOD,TRUST],[(c,x,y)=>{T(c,"≈",x,y+12,{w:800,size:40,align:"center",color:rgba(EDGE_,1)});},(c,x,y)=>tick_(c,x,y,32,GOOD,1),(c,x,y)=>{glass(c,x-22,y-18,48,36,9,TRUST,{glow:8,ea:0.9,fill:"rgba(7,12,24,0.95)"});T(c,"v3",x+2,y+8,{f:"mono",w:500,size:22,align:"center",color:rgba(TRUST,1)});}]),
   // Approve or reject: the agent's proposals, sorted by the people who decide
   review:(c,w,h,st,L)=>kt_trays(c,w,h,st,L,"review",[TRUST,BAD,AMBER],[(c,x,y)=>kt_gtick(c,x,y,18,1),(c,x,y)=>kt_rcross(c,x,y,18,1),(c,x,y)=>{ring(c,x,y,18,AMBER,1,3);T(c,"?",x,y+9,{w:800,size:24,align:"center",color:rgba(AMBER,1)});}]),
@@ -1516,12 +1532,12 @@ const LV={
     const cw=tw(c,V.change,20,700)+30;glass(c,40,146,cw,48,12,BAD,{glow:12,ea:0.9,fill:"rgba(20,8,10,0.95)"});T(c,V.change,40+cw/2,177,{w:700,size:20,align:"center",color:rgba(BAD,1)});
     T(c,V.notReviewed,280,236,{w:700,size:20,align:"center",color:rgba(BAD,1)});gate(c,470,165,190,BAD,"tests");kt_rcross(c,430,170,18,1);T(c,V.gate,470,296,{w:700,size:20,align:"center",color:rgba(BAD,1)});},
   lastyear:(c,w,h,st,L)=>{const V=L.vis;kt_report(c,24,30,290,{h:250,title:V.report,rows:[[V.rateL,""]],big:"62%",stamp:V.readV2,rot:-0.02});
-    glass(c,340,50,240,210,18,TRUST,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(c,V.v3,360,86,{w:800,size:18,color:rgba(TRUST,1)});T(c,"71%",360,150,{w:800,size:48});wrapT(c,V.v3f,360,192,200,{f:"mono",w:500,size:18});},
+    glass(c,340,34,240,262,18,TRUST,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.95)"});kt_lines(c,tw(c,V.v3,18,800)>200?V.v3.replace(/ · (\S+)$/,"\n$1"):V.v3,360,70,{w:800,size:18,lh:22,color:rgba(TRUST,1)});T(c,"71%",360,160,{w:800,size:48});wrapT(c,V.v3f,360,200,200,{f:"mono",w:500,size:18,lh:23});},
   spec:(c,w,h,st,L)=>{const V=L.vis;[["2026",0.55],["2027",1]].forEach(([y_,a],i)=>withA(c,a,()=>{const x=50+i*270;glass(c,x,40,230,240,18,[200,215,240],{glow:10,ea:0.6,fill:"rgba(8,14,28,0.94)"});kt_lines(c,V.spec,x+22,80,{w:700,size:19,lh:24,color:rgba(SOFT,1)});T(c,y_,x+22,176,{w:800,size:52});
     if(i)tag(c,x+115,236,V.outcome,AMBER,{align:"center",size:20});}));arrowTo(c,286,160,316,160,SOFT,0.8,{head:10});},
   who:(c,w,h,st,L)=>{const V=L.vis;[["mei",V.meaning,"Mei"],["noor",V.model,"Noor"],["team",V.build,V.teams]].forEach(([id,s,n],i)=>{const x=110+i*190;if(id==="team"){person(c,"sam",x-34,306,0.33,{t:1});person(c,"ben",x+34,306,0.33,{t:2});}else person(c,id,x,306,0.35,{t:1});
     tag(c,x,34,s,TRUST,{align:"center",size:20});T(c,n,x,80,{w:700,size:19,align:"center",color:rgba(SOFT,1)});});},
-  ghost:(c,w,h,st,L)=>{const V=L.vis;kt_report(c,20,70,250,{h:210,title:V.report2019,rows:[[V.completion,"58%"]],rot:-0.03,curl:0});
+  ghost:(c,w,h,st,L)=>{const V=L.vis;kt_report(c,20,70,250,{h:210,title:V.report2019,rows:[[V.completion,""]],big:"58%",rot:-0.03,curl:0});
     const wob=Math.sin(1.3)*3;withA(c,0.6,()=>{glass(c,296,30,290,170,18,[200,210,230],{glow:22,ea:0.6,fill:"rgba(10,14,26,0.7)"});T(c,V.v1,316,72,{w:700,size:20,color:rgba(SOFT,1)});wrapT(c,V.v1f,316,118+wob,254,{f:"mono",w:500,size:20,lh:28});});
     kt_agent(c,520,250,34,1);arrowTo(c,270,150,296,120,[200,210,230],0.7,{head:10,dash:[5,5]});},
   order:(c,w,h,st,L)=>{const V=L.vis;kt_folder(c,40,40,520,250,{title:V.pkg,ts:20});[[70,110,-0.06],[250,150,0.05],[360,96,-0.03]].forEach(([x,y,r],i)=>{c.save();c.translate(x,y);c.rotate(r);glass(c,0,0,200,70,12,KT_AI,{glow:10,ea:0.8,fill:"rgba(6,16,20,0.96)"});T(c,V.cards[i],100,44,{w:800,size:21,align:"center",color:rgba(KT_AI,1)});c.restore();});
@@ -1536,15 +1552,15 @@ const LV={
 /* ---------- 1. A dictionary is never finished ---------- */
 scene("dict",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");histBg(ctx,S,t);
   const cA=c("admit"),cP=c("planet"),cK=c("kilo"),cM=c("moves");
-  const bookA=1-fin(t,cP-0.7,0.8),plA=fin(t,cP-0.4,0.8)*(1-fin(t,cK-0.6,0.7)),kgA=fin(t,cK-0.5,0.7)*(1-fin(t,cM+0.1,0.7)),mvA=fin(t,cM+0.3,0.8);
+  const bookA=1-fin(t,cP-0.7,0.8),plA=fin(t,cP,0.8)*(1-fin(t,cK-0.6,0.7)),kgA=fin(t,cK-0.5,0.7)*(1-fin(t,cM+0.1,0.7)),mvA=fin(t,cM+0.3,0.8);
   // 1755: a heavy book, opened; Johnson hoped to fix the language. Then the words lift off the page, and the OED is still being revised
-  withA(ctx,bookA,()=>{const oA=fin(t,kt_w(sc,"admit","The Oxford")-0.4,0.9),bw=lerp(900,780,oA),bh=bw*0.58,bx=lerp(510,130,oA),by=lerp(200,236,oA);
+  withA(ctx,bookA,()=>{const oT=kt_w(sc,"admit","The Oxford"),oA=fin(t,oT-0.4,0.9),oeA=fin(t,oT+0.4,0.6),bw=lerp(900,780,oA),bh=bw*0.58,bx=lerp(510,130,oA),by=lerp(200,236,oA);
     yearTag(ctx,120,120,"1755 · Johnson",CLAY,fin(t,0.4,0.6));
     kt_book(ctx,bx,by,bw,bh,t,{a:fin(t,0.5,0.8),open:fin(t,c("johnson")+2.4,1.0),drift:fin(t,cA+0.8,1.4),hi:"CREDENTIAL"});
     const fx=kt_w(sc,"johnson","fix"),lk=fin(t,fx-0.3,0.5)*(1-fin(t,cA+2.2,0.8));kt_lock(ctx,bx+bw/2,by+bh/2-10,1.3,[232,192,112],lk,fin(t,cA+1.0,0.8));
     withA(ctx,fin(t,fx,0.5)*(1-fin(t,cA+0.6,0.5)),()=>tag(ctx,bx+bw/2,by+bh+46,"hoped: to fix the language in place",CLAY,{align:"center",size:22}));
     withA(ctx,fin(t,kt_w(sc,"admit","no dictionary"),0.6),()=>tag(ctx,bx+bw/2,by+bh+46,"no dictionary can embalm a language",PARCH,{align:"center",size:22}));
-    withA(ctx,oA,()=>{yearTag(ctx,1060,120,"today · Oxford English Dictionary",CLAY,1);kt_oed(ctx,1060,190,640,520,t,{p:clamp((t-kt_w(sc,"admit","still"))/2.2,0,1)});
+    withA(ctx,oeA,()=>{yearTag(ctx,1060,120,"today · Oxford English Dictionary",CLAY,1);kt_oed(ctx,1060,190,640,520,t,{p:clamp((t-kt_w(sc,"admit","still"))/2.2,0,1)});
       withA(ctx,fin(t,kt_w(sc,"admit","still"),0.5),()=>tag(ctx,1380,776,"still revised",[150,185,255],{align:"center",size:22}));});});
   // 2006: a definition of planet; nothing in the sky changed, and the count went from nine to eight
   withA(ctx,plA,()=>{yearTag(ctx,120,120,"2006 · Prague",CLAY,1);const st=fin(t,kt_w(sc,"planet","nine"),0.7),n8=t>kt_w(sc,"planet","eight")-0.2;
@@ -1582,9 +1598,9 @@ scene("arrives",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const slide=a=>(1-ease(a))*120;
   kt_form(ctx,640+slide(gA),126,500,{a:gA,hi:fin(t,kt_w(sc,"gov","new field"),0.8)});
   // a credential issued in error, revoked
-  withA(ctx,eA,()=>{credCard(ctx,1200+slide(eA),150,560,{era:"digital",title:"Microcredential",issuer:"the university",holder:"Jordan Lee",claim:"Data Visualisation",date:"14 Oct 2026",col:TRUST});
+  withA(ctx,eA,()=>{T(ctx,"Microcredential",1204+slide(eA),152,{w:800,size:24,color:rgba(TRUST,1)});credCard(ctx,1200+slide(eA),170,560,{era:"digital",issuer:"the university",holder:"Jordan Lee",claim:"Data Visualisation",date:"14 Oct 2026",col:TRUST,rh:40,h:360});
     withA(ctx,fin(t,kt_w(sc,"error","issued in error"),0.5),()=>tag(ctx,1480,122,"issued in error",BAD,{align:"center",size:18}));
-    kt_rstamp(ctx,1500,390,"REVOKED",BAD,1,fin(t,kt_w(sc,"error","revoked")-0.1,0.35),{size:40,rot:-0.16});});
+    kt_rstamp(ctx,1500,400,"REVOKED",BAD,1,fin(t,kt_w(sc,"error","revoked")-0.1,0.35),{size:40,rot:-0.16});});
   // a new measure on three dashboards, with three definitions
   KT_DASH.forEach((d,i)=>{const a=fin(t,kt_w(sc,"rate","three dashboards")-0.2+i*0.3,0.5);kt_dash(ctx,640+i*380,610,350,210,{a,name:d.name,col:d.col,num:d.num,hi:pulseAt(t,kt_w(sc,"rate","three different")+i*0.35,1.2)});});
   withA(ctx,fin(t,kt_w(sc,"rate","completion rate")-0.2,0.6),()=>{[815,1195,1575].forEach(x=>{ctx.strokeStyle=rgba(EDGE_,0.45);ctx.lineWidth=1.5;ctx.setLineDash([6,8]);ctx.beginPath();ctx.moveTo(1195,578);ctx.lineTo(x,604);ctx.stroke();ctx.setLineDash([]);});
@@ -1593,14 +1609,16 @@ scene("arrives",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
 
 /* ---------- 3. How models go stale ---------- */
 scene("stale",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
-  const cK=c("kinds"),cG=c("gap"),dr=ease(clamp((t-0.8)/(sc.dur-1.5),0,1)),bx=380+dr*50,by=96-dr*26,bw=1100,bh=320,gp=fin(t,cG-0.2,0.8);
+  // the board starts to drift as the word is said, and keeps drifting, up and away, a little smaller and turned, through the chapter
+  const cK=c("kinds"),cG=c("gap"),d0=kt_w(sc,"drift","They drift")-0.3,dr=1-Math.pow(1-clamp((t-d0)/(sc.dur-d0-0.6),0,1),3),gp=fin(t,cG-0.2,0.8);
+  const bk=1-0.1*dr,bw=1100*bk,bh=320*bk,bcx=930+140*dr,bcy=256-20*dr,bx=bcx-bw/2,by=bcy-bh/2,brot=-0.03*dr,onB=(dx,dy)=>[bcx+(dx*Math.cos(brot)-dy*Math.sin(brot))*bk,bcy+(dx*Math.sin(brot)+dy*Math.cos(brot))*bk];
   const TX=444,TY=590,TS=1.2,col=i=>TX+kt_cellX(0,i)*TS,colW=i=>KT_CW[i]*TS,rowY=j=>TY+(46+40*(j+1)+20)*TS;
   // the gap between what's written and what's used, opening slowly
   if(dr>0.05){const g=ctx.createLinearGradient(0,by+bh,0,TY);g.addColorStop(0,rgba(EDGE_,0));g.addColorStop(0.5,rgba(EDGE_,0.05+0.1*gp));g.addColorStop(1,rgba(EDGE_,0));ctx.fillStyle=g;ctx.fillRect(0,by+bh,W,TY-by-bh);}
   // what's written: the model on its board, stamped v3, still a draft
-  kt_board(ctx,bx,by,bw,bh,t,{a:fin(t,0.2,0.6),s:0.8,label:"the model · what's written",stamp:"sketch v3 · draft",rot:-0.012*dr});
+  kt_board(ctx,bx,by,bw,bh,t,{a:fin(t,0.2,0.6),s:0.8*bk,label:"the model · what's written",stamp:"sketch v3 · draft",rot:brot});
   // what's used: the data. Dashed lines join what each box means to the columns that carry it, and stretch as the model drifts
-  [[bx+bw/2-256,by+bh/2+92+30,1],[bx+bw/2,by+bh/2-92+22,2],[bx+bw/2+256,by+bh/2+92+30,4]].forEach(([x0,y0,ci],k)=>{const x1=col(ci)+colW(ci)/2,y1=TY-4,red=clamp(dr*1.6-0.3,0,1);
+  [[...onB(-256,122),1],[...onB(0,-70),2],[...onB(256,122),4]].forEach(([x0,y0,ci],k)=>{const x1=col(ci)+colW(ci)/2,y1=TY-4,red=clamp(dr*1.6-0.3,0,1);
     ctx.save();ctx.setLineDash([7,9]);ctx.strokeStyle=rgba(mix(SK,EDGE_,red),0.55);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x0,y0);ctx.bezierCurveTo(x0,y0+100,x1,y1-100,x1,y1);ctx.stroke();ctx.restore();});
   withA(ctx,fin(t,0.4,0.6),()=>{tag(ctx,TX,560,"the data · what's used",[170,205,255],{size:17});ctx.save();ctx.translate(TX,TY);ctx.scale(TS,TS);table(ctx,0,0,"enrolments",KT_COLS,KT_ROWS,{cw:KT_CW,col:[170,205,255]});ctx.restore();});
   const k1=fin(t,kt_w(sc,"kinds","A value"),0.5),k2=fin(t,kt_w(sc,"kinds","A column"),0.5),k3=fin(t,kt_w(sc,"kinds","One measure"),0.5),k4=fin(t,kt_w(sc,"kinds","A standard"),0.5),lab=1-gp;
@@ -1611,7 +1629,7 @@ scene("stale",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   if(k2>0){const x=col(3),y=TY+66*TS,m=0.5+0.5*Math.sin(t*2.2);withA(ctx,k2,()=>{ctx.strokeStyle=rgba(EDGE_,0.5+0.5*m);ctx.lineWidth=2.5;rr(ctx,x+3,y-22,colW(3)-6,40,8);ctx.stroke();
     withA(ctx,lab,()=>tag(ctx,x+colW(3)/2+40,498,"meaning shifts: recorded → live",EDGE_,{align:"center",size:18}));});}
   // 3. one measure, defined twice
-  withA(ctx,k3,()=>{[["dashboard A","completed / census"],["dashboard B","completed / started"]].forEach(([n,f],i)=>{const y=600+i*110;glass(ctx,1520,y,340,90,12,EDGE_,{glow:10,ea:0.7,fill:"rgba(6,10,20,0.95)"});T(ctx,n+" · completion_rate",1538,y+32,{f:"mono",w:500,size:14,color:rgba(SOFT,1)});T(ctx,"= "+f,1538,y+66,{f:"mono",w:500,size:18,color:rgba(INK,0.95)});});
+  withA(ctx,k3,()=>{[["dashboard A","completed / census"],["dashboard B","completed / started"]].forEach(([n,f],i)=>{const y=600+i*110;glass(ctx,1500,y,380,90,12,EDGE_,{glow:10,ea:0.7,fill:"rgba(6,10,20,0.95)"});T(ctx,n+" · completion_rate",1520,y+34,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});T(ctx,"= "+f,1520,y+70,{f:"mono",w:500,size:19,color:rgba(INK,0.95)});});
     T(ctx,"≠",1690,707,{w:800,size:30,align:"center",color:rgba(EDGE_,1)});withA(ctx,lab,()=>tag(ctx,1690,538,"one measure, defined twice",EDGE_,{align:"center",size:18}));});
   // 4. a standard, updated for a new year
   withA(ctx,k4,()=>{const f=fin(t,kt_w(sc,"kinds","new year"),0.6);glass(ctx,70,600,330,200,16,[200,215,240],{glow:10,ea:0.6,fill:"rgba(8,14,28,0.94)"});T(ctx,"Government spec",94,640,{w:700,size:18,color:rgba(SOFT,1)});
@@ -1651,8 +1669,8 @@ scene("watch",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     withA(ctx,fin(t,cF,0.5),()=>tag(ctx,380,118,"evidence · completion rate, defined three ways",KT_AI,{size:20}));
     KT_DASH.forEach((d,i)=>{const y=160+i*176,a=fin(t,dT-0.2+i*0.45,0.5),b=fin(t,bT-0.2+i*0.3,0.5);
       withA(ctx,a,()=>{ctx.strokeStyle=rgba(KT_AI,0.4);ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(230,410);ctx.lineTo(380,y+66);ctx.stroke();
-        glass(ctx,380,y,660,132,16,EDGE_,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.95)"});T(ctx,"definition "+(i+1)+" · "+d.v,406,y+40,{w:700,size:17,color:rgba(SOFT,1)});T(ctx,d.f,406,y+92,{f:"mono",w:500,size:24});kt_flag(ctx,1010,y+34,1,fin(t,dT+0.4+i*0.45,0.4));});
-      withA(ctx,b,()=>{arrowTo(ctx,1050,y+66,1150,y+66,EDGE_,0.8,{head:12});kt_dash(ctx,1170,y+4,300,124,{name:d.name,col:d.col,num:d.num});T(ctx,"uses definition "+(i+1),1500,y+74,{w:600,size:18,color:rgba(SOFT,1)});});});
+        glass(ctx,380,y,660,132,16,EDGE_,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.95)"});T(ctx,"definition "+(i+1)+" · "+d.v,406,y+40,{w:700,size:19,color:rgba(SOFT,1)});T(ctx,d.f,406,y+92,{f:"mono",w:500,size:24});kt_flag(ctx,1010,y+34,1,fin(t,dT+0.4+i*0.45,0.4));});
+      withA(ctx,b,()=>{arrowTo(ctx,1050,y+66,1150,y+66,EDGE_,0.8,{head:12});kt_dash(ctx,1170,y+4,300,124,{name:d.name,col:d.col,num:d.num});T(ctx,d.name,1500,y+60,{w:700,size:23,color:rgba(d.col,1)});T(ctx,"uses definition "+(i+1),1500,y+94,{w:600,size:19,color:rgba(SOFT,1)});});});
     // noticing: tedious for people, cheap for machines
     withA(ctx,fin(t,cN,0.6),()=>{const n=countTo(t,cN+0.2,0,12480)+(t>cN+1.2?(t-cN-1.2)*37:0);[[fmtNum(n),"queries read tonight"],["214","definitions compared"],["3","drifts flagged"]].forEach(([v,s],i)=>{const x=380+i*430;
       T(ctx,v,x,740,{w:800,size:40,color:rgba(KT_AI,1)});T(ctx,s,x+tw(ctx,v,40,800)+14,738,{w:600,size:20,color:rgba(SOFT,1)});});});});
@@ -1674,7 +1692,7 @@ scene("draft",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
 /* ---------- 6. People decide ---------- */
 const KT_WHO=[["mei","the meaning","Mei · registrar's office",[0,1],"meaning"],["noor","the model","Noor · data architect",[2,3],"model"],["team","the build","the teams",[4,5,6],"build"]];
 scene("decide",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
-  const cR=c("review"),cU=c("rule"),wA=1-fin(t,cR-0.5,0.7),pA=fin(t,cR-0.3,0.7);
+  const cR=c("review"),cU=c("rule"),wA=1-fin(t,cR-0.5,0.7),pA=fin(t,cR+0.2,0.6);
   // who approves what: the meaning, the model, the build
   withA(ctx,wA,()=>{KT_WHO.forEach(([id,what,who,ks,key],i)=>{const x=380+i*580,tk=kt_w(sc,"who",key),a=fin(t,0.3+i*0.3,0.6),on=fin(t,tk,0.5),col=mix(KT_AI,TRUST,on);
     withA(ctx,a,()=>{glass(ctx,x-250,170,500,280,20,TRUST,{glow:10+14*on,ea:0.4+0.5*on,fill:"rgba(7,12,24,0.94)"});T(ctx,what,x-222,226,{w:800,size:32,color:rgba(TRUST,0.5+0.5*on)});T(ctx,who,x-222,262,{w:600,size:20,color:rgba(SOFT,1)});
@@ -1683,8 +1701,11 @@ scene("decide",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
       if(id==="team"){person(ctx,"sam",x-70,870,0.5,{t});person(ctx,"ben",x+70,870,0.5,{t:t+1});}else person(ctx,id,x,870,0.52,{t,pose:t>tk-0.5&&t<tk+2.4?"explain":"stand",expr:on>0.5?"relieved":"calm"});});});});
   // the same review as anyone's, and tests on the proposed change, before anything ships
   withA(ctx,pA,()=>{const mT=kt_w(sc,"review","same review"),tT=kt_w(sc,"review","The tests"),sT=kt_w(sc,"review","ships"),u=ease(clamp((t-mT+0.6)/1.4,0,1)),Y=560;
-    [["#214 · from: the agent",KT_AI,Y-100],["#213 · from: Sam",TECH,Y+100]].forEach(([s,col,y],i)=>{const x=lerp(250,560,u),yy=lerp(y,Y,u);ctx.strokeStyle=rgba(col,0.4);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(250,y);ctx.bezierCurveTo(420,y,420,Y,560,Y);ctx.stroke();kt_prop(ctx,x,yy+(i?22:-22)*u,s,col,1-0.2*u);});
-    glass(ctx,560,Y-90,280,180,18,TRUST,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(ctx,"review",700,Y-40,{w:800,size:28,align:"center",color:rgba(TRUST,1)});T(ctx,"by people",700,Y-8,{w:600,size:19,align:"center",color:rgba(SOFT,1)});
+    // the agent's proposal and Sam's arrive side by side, stacked, and stop just short of the same review
+    const PR=[["#214 · from: the agent",KT_AI,Y-100],["#213 · from: Sam",TECH,Y+100]];
+    PR.forEach(([s,col,y])=>{ctx.strokeStyle=rgba(col,0.4);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(250,y);ctx.bezierCurveTo(420,y,420,Y,560,Y);ctx.stroke();});
+    glass(ctx,560,Y-90,280,180,18,TRUST,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.95)"});
+    PR.forEach(([s,col,y],i)=>kt_prop(ctx,lerp(250,430,u),lerp(y,Y,u)+(i?30:-30)*u,s,col,1));T(ctx,"review",700,Y-40,{w:800,size:28,align:"center",color:rgba(TRUST,1)});T(ctx,"by people",700,Y-8,{w:600,size:19,align:"center",color:rgba(SOFT,1)});
     ["mei","noor","sam"].forEach((id,i)=>{ctx.fillStyle=rgba(PEOPLE[id].edge,0.9);ctx.beginPath();ctx.arc(650+i*50,Y+40,12,0,TAU);ctx.fill();ctx.beginPath();ctx.arc(650+i*50,Y+70,18,Math.PI,0);ctx.fill();});
     withA(ctx,fin(t,mT,0.5),()=>tag(ctx,700,Y-128,"the same review as anyone's",TRUST,{align:"center",size:22}));
     arrowTo(ctx,850,Y,900,Y,SOFT,0.8,{head:12});
@@ -1701,11 +1722,14 @@ scene("decide",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
 /* ---------- 7. What can go wrong ---------- */
 scene("wrong",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const cS=c("slip"),cK=c("check"),GX=1360,GY=470,stop=fin(t,cK+0.3,0.5),oursT=kt_w(sc,"check","just as");
+  // Sam's change, later, passes the same gate: it turns green while the change goes through
+  const su=ease(clamp((t-oursT)/1.8,0,1)),sx=lerp(1060,1620,su),pass=t>oursT?clamp(1-Math.abs(sx-GX)/140,0,1):0,gc=mix(BAD,GOOD,pass);
   // the gate: the contract and the tests, in front of the dashboards
-  gate(ctx,GX,GY,440,stop>0.5?BAD:[170,205,255],"tests");withA(ctx,0.6+0.4*stop,()=>T(ctx,"contract · tests",GX,730,{w:800,size:22,align:"center",color:stop>0.5?rgba(BAD,1):rgba(SOFT,1)}));
-  kt_dash(ctx,1500,300,300,190,{name:"Dashboards",col:KT_PLAN,num:"71%"});T(ctx,"unchanged",1650,540,{w:600,size:18,align:"center",color:rgba(SOFT,1)});
+  gate(ctx,GX,GY,440,stop>0.5?gc:[170,205,255],"tests");withA(ctx,0.6+0.4*stop,()=>T(ctx,"contract · tests",GX,730,{w:800,size:22,align:"center",color:stop>0.5?rgba(gc,1):rgba(SOFT,1)}));
+  kt_dash(ctx,1540,112,300,190,{name:"Dashboards",col:KT_PLAN,num:"71%"});T(ctx,"unchanged",1690,346,{w:600,size:18,align:"center",color:rgba(SOFT,1)});
   const lane=(y,col,a,dash,x0)=>withA(ctx,a,()=>{x0=x0||760;ctx.save();if(dash)ctx.setLineDash([12,10]);ctx.strokeStyle=rgba(col,0.85);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x0,y);ctx.bezierCurveTo(Math.max(x0+120,1000),y,1100,GY+(y-GY)*0.3,lerp(760,GX-40,1),GY+(y-GY)*0.3);ctx.stroke();ctx.restore();});
-  const stopAt=(y,a)=>withA(ctx,a,()=>{kt_rcross(ctx,GX-70,GY+(y-GY)*0.3,24,1);});
+  // each proposal is stopped by a check it breaks, named beside its cross
+  const stopAt=(y,a,why)=>withA(ctx,a,()=>{const yy=GY+(y-GY)*0.3;kt_rcross(ctx,GX-70,yy,24,1);tag(ctx,GX+50,yy,why,BAD,{size:18});});
   // a confident draft that invents a definition nobody agreed
   const iA=fin(t,0.3,0.6),nT=kt_w(sc,"invent","nobody");withA(ctx,iA,()=>{kt_agent(ctx,90,220,40,t,{busy:0.3});glass(ctx,150,120,600,220,18,KT_AI,{glow:20,ea:0.9,fill:"rgba(6,16,20,0.96)"});T(ctx,"draft · glossary",176,158,{w:700,size:19,color:rgba(KT_AI,1)});tag(ctx,650,152,"confident",KT_AI,{align:"center",size:18});
     T(ctx,"completion rate =",176,206,{w:800,size:28});T(ctx,"passed ÷ enrolled on day one",176,250,{f:"mono",w:500,size:24});kt_rstamp(ctx,560,300,"nobody agreed",EDGE_,1,fin(t,nT,0.35),{size:26,rot:-0.05});
@@ -1719,34 +1743,36 @@ scene("wrong",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     const u=ease(clamp((t-gT)/2.2,0,1)),gx=lerp(300,500,u),gy=lerp(700,690,u),wob=Math.sin(t*3)*4;withA(ctx,0.35+0.35*u,()=>{glass(ctx,gx,gy-60+wob,380,120,16,[200,210,230],{glow:22,ea:0.6,fill:"rgba(12,16,28,0.6)"});T(ctx,"completion rate (v1)",gx+22,gy-24+wob,{w:700,size:19,color:rgba(SOFT,1)});T(ctx,"finished ÷ logged in",gx+22,gy+18+wob,{f:"mono",w:500,size:21});});
     withA(ctx,fin(t,kt_w(sc,"slip","old meaning"),0.6),()=>tag(ctx,gx+190,gy+86,"an old meaning, proposed back",[200,210,230],{align:"center",size:18}));lane(700,[200,210,230],fin(t,gT+1.6,0.6),true,gx+390);});
   // the tests and the contracts check the agent's work too, just as they check ours
-  if(stop>0){glow(ctx,GX,GY,200,BAD,0.2*stop);stopAt(225,fin(t,cK+0.3,0.4));stopAt(480,fin(t,cK+0.6,0.4));stopAt(700,fin(t,cK+0.9,0.4));withA(ctx,stop,()=>tag(ctx,GX,196,"stopped",BAD,{align:"center",size:20}));}
-  withA(ctx,fin(t,oursT,0.5),()=>{const u=ease(clamp((t-oursT)/1.8,0,1)),x=lerp(1060,1620,u),y=lerp(560,640,u);kt_prop(ctx,x,y,"from: Sam",TECH,1);if(u>0.99)kt_gtick(ctx,1620+80,640,16,fin(t,oursT+1.8,0.4));
+  if(stop>0){glow(ctx,GX,GY,200,gc,0.2*stop);stopAt(225,fin(t,cK+0.3,0.4),"fails: one definition, one measure");stopAt(480,fin(t,cK+0.6,0.4),"fails: revoked not counted");stopAt(700,fin(t,cK+0.9,0.4),"fails: 2025 report unchanged");withA(ctx,stop,()=>tag(ctx,GX,196,"stopped",BAD,{align:"center",size:20}));}
+  withA(ctx,fin(t,oursT,0.5),()=>{const y=lerp(560,640,su);kt_prop(ctx,sx,y,"from: Sam",TECH,1);if(su>0.99)kt_gtick(ctx,1620+80,640,16,fin(t,oursT+1.8,0.4));
     tag(ctx,1100,800,"everyone's work, the same checks",TRUST,{align:"center",size:20});});
   vign(ctx,S);});
 
 /* ---------- 8. End to end ---------- */
-const KT_DETAIL=[["Glossary · completion rate v3","completed ÷ enrolled at census; revoked excluded"],["Ontology","a revoked credential is not a completion"],["Logical model","Enrolment gains outcome: completed · withdrawn · enrolled"],
-  ["Shapes for writing and reading","the enrolment table · the completions star"],["Semantic layer","completion_rate = completed / enrolled_at_census"],["Contract · test","outcome has 3 values · revoked never counted"]];
+// what changes in the layers the voice names: [layer, heading, line]. The logical model and the shapes for writing and reading
+// light in passing, between the ontology and the semantic layer, without a card of their own: the voice doesn't stop on them
+const KT_DETAIL=[[0,"Glossary · completion rate v3","completed ÷ enrolled at census date; revoked excluded"],[1,"Ontology","a revoked credential is not a completion"],
+  [4,"Semantic layer","completion_rate = completed / enrolled_at_census"],[5,"Contract · test","outcome has 3 values · revoked never counted"]];
 scene("e2e",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,S);bg2(ctx);
-  const cA=c("agree"),cO=c("old"),cV=c("v3"),oT=kt_w(sc,"chain","one statement"),T6=[kt_w(sc,"chain","one definition")-0.1,oT-0.1,oT+1.0,oT+1.8,kt_w(sc,"chain","one measure")-0.1,kt_w(sc,"chain","one test")-0.1,cA+0.2];
+  const cA=c("agree"),cO=c("old"),cV=c("v3"),oT=kt_w(sc,"chain","one statement"),mT=kt_w(sc,"chain","one measure")-0.1,T6=[kt_w(sc,"chain","one definition")-0.1,oT-0.1,oT+1.2,oT+1.55,mT,kt_w(sc,"chain","one test")-0.1,cA+0.2],DT=[T6[0],T6[1],T6[4],T6[5]];
   let lit=0;T6.forEach(q=>{lit+=fin(t,q,0.5);});
   withA(ctx,fin(t,0.3,0.6),()=>tag(ctx,960,100,"one change, end to end",TRUST,{align:"center",size:24}));
   kt_chain(ctx,90,150,1740,{lit,h:120,ticks:true});
   if(t>B){const u=((t-B)/2.4)%1;glow(ctx,90+1740*u,210,90,TRUST,0.4*Math.sin(Math.PI*u));}
   // under each layer as it lights: what changes in it
-  const dA=fin(t,T6[0],0.5)*(1-fin(t,cA-0.5,0.6));if(dA>0){const k=Math.max(0,Math.min(5,Math.floor(lit-0.3))),nx=90+k*(1740+16)/7+(1740-6*16)/14,x=clamp(nx-330,90,1830-660);
+  const dA=fin(t,T6[0],0.5)*(1-fin(t,cA-0.5,0.6));if(dA>0){const d=Math.max(0,DT.filter(q=>t>=q).length-1),[k,h1,l1]=KT_DETAIL[d],nx=90+k*(1740+16)/7+(1740-6*16)/14,x=clamp(nx-330,90,1830-660);
     withA(ctx,dA,()=>{ctx.strokeStyle=rgba(TRUST,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(nx,272);ctx.lineTo(nx,360);ctx.stroke();glass(ctx,x,360,660,150,18,TRUST,{glow:16,ea:0.85,fill:"rgba(7,12,24,0.95)"});
-      T(ctx,KT_DETAIL[k][0],x+28,408,{w:700,size:20,color:rgba(TRUST,1)});wrapT(ctx,KT_DETAIL[k][1],x+28,452,604,{f:"mono",w:500,size:21});});}
+      T(ctx,h1,x+28,408,{w:700,size:20,color:rgba(TRUST,1)});wrapT(ctx,l1,x+28,452,604,{f:"mono",w:500,size:21});});}
   // the three dashboards agree; Genie gives the same number, and shows why
   const gA=fin(t,cA-0.3,0.6)*(1-fin(t,cO-0.5,0.6));withA(ctx,gA,()=>{const sw=fin(t,cA+0.6,0.6);KT_DASH.forEach((d,i)=>kt_dash(ctx,110+i*370,380,340,220,{name:d.name,col:d.col,num:sw>0.5?"71%":d.num,hi:pulseAt(t,cA+0.6+i*0.2,1.2),formula:"completion_rate · v3",fA:sw}));
     withA(ctx,fin(t,cA+0.8,0.6),()=>tag(ctx,650,660,"three dashboards, one number",TRUST,{align:"center",size:22}));
     const gT=kt_w(sc,"agree","Genie");withA(ctx,fin(t,gT-0.2,0.6),()=>{orb(ctx,1290,470,38,t);T(ctx,"Genie",1290,560,{w:700,size:18,align:"center",color:rgba([255,226,160],1)});
       bubble(ctx,1360,330,470,"71% of microcredential learners completed.",[255,226,160],{size:22});
-      withA(ctx,fin(t,kt_w(sc,"agree","shows why"),0.5),()=>{glass(ctx,1360,480,470,120,14,TRUST,{glow:12,ea:0.7,fill:"rgba(7,12,24,0.95)"});T(ctx,"why: completion rate v3",1382,516,{w:700,size:17,color:rgba(TRUST,1)});
-        T(ctx,"completed ÷ enrolled at census",1382,552,{f:"mono",w:500,size:17});T(ctx,"from the semantic layer",1382,582,{w:600,size:15,color:rgba(SOFT,1)});});});});
+      withA(ctx,fin(t,kt_w(sc,"agree","shows why"),0.5),()=>{glass(ctx,1360,480,530,136,14,TRUST,{glow:12,ea:0.7,fill:"rgba(7,12,24,0.95)"});T(ctx,"why: completion rate v3",1384,518,{w:700,size:20,color:rgba(TRUST,1)});
+        T(ctx,"completed ÷ enrolled at census date",1384,556,{f:"mono",w:500,size:18});T(ctx,"from the semantic layer",1384,594,{w:600,size:18,color:rgba(SOFT,1)});});});});
   // last year's report still reads with last year's definition
   const oA=fin(t,cO-0.3,0.6)*(1-fin(t,cV-0.5,0.6));withA(ctx,oA,()=>{kt_report(ctx,180,360,520,{h:330,t,stamp:"read with v2",stampA:fin(t,kt_w(sc,"old","version two")-0.3,0.5)});
-    [["completion rate · v2 · 2025","completed ÷ all who started",SOFT,380,"version two"],["completion rate · v3 · 2027","completed ÷ enrolled at census",TRUST,560,"Each number"]].forEach(([h1,f,col,y,k],i)=>withA(ctx,fin(t,kt_w(sc,"old",k)-0.3,0.6),()=>{
+    [["completion rate · v2 · 2025","completed ÷ all who started",SOFT,380,"version two"],["completion rate · v3 · 2026","completed ÷ enrolled at census date",TRUST,560,"Each number"]].forEach(([h1,f,col,y,k],i)=>withA(ctx,fin(t,kt_w(sc,"old",k)-0.3,0.6),()=>{
       glass(ctx,880,y,600,140,16,col,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(ctx,h1,906,y+44,{w:700,size:19,color:rgba(col,1)});T(ctx,f,906,y+96,{f:"mono",w:500,size:22});
       arrowTo(ctx,i?1640:720,i?y+70:y+120,i?1500:870,y+70,col,0.8,{head:12,bend:i?0:0.1});}));
     withA(ctx,fin(t,kt_w(sc,"old","Each number")-0.1,0.6),()=>{kt_dash(ctx,1650,570,210,140,{name:"This year",col:TRUST,num:"71%"});tag(ctx,1180,770,"each number keeps the meaning it had",TRUST,{align:"center",size:22});});});
@@ -1764,12 +1790,12 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");histBg(ctx,S,t,{
   withA(ctx,sA,()=>{const wT=kt_w(sc,"start","a word"),iT=kt_w(sc,"start","an idea"),hT=kt_w(sc,"start","a thing"),mT=kt_w(sc,"start","a mark");
     trio(ctx,640,440,0.85,{t,word:"credential",idea:"a trusted, checkable claim",thing:(cx,x,y,s)=>kt_diploma(cx,x-90,y-96,180,150,t,{title:"Diploma"}),thingLab:"a credential",thingDy:92,
       a:fin(t,0.2,0.8),wa:0.25+0.75*fin(t,wT-0.2,0.5),ia:0.25+0.75*fin(t,iT-0.2,0.5),ha:0.25+0.75*fin(t,hT-0.2,0.5),e1:0.3+0.7*fin(t,iT,0.8),e2:0.3+0.7*fin(t,hT,0.8),e3:0});
-    withA(ctx,fin(t,mT-0.3,0.6),()=>{yearTag(ctx,1200,250,"c. 3300 BCE · Uruk",CLAY,1);kt_tablet(ctx,1200,300,520,300,clamp((t-mT)/3,0,1),1,t);});
+    withA(ctx,fin(t,mT-0.3,0.6),()=>{yearTag(ctx,1200,250,"c. 3300 BCE · Uruk",CLAY,1);kt_tablet(ctx,1200,300,520,300,clamp((t-mT+0.2)/2,0,1),1,t);});
     withA(ctx,fin(t,0.3,0.6),()=>T(ctx,"What's in a word",640,150,{w:700,size:22,align:"center",color:rgba(KIND,0.9)}));});
   // a credential is a claim that others can check; so is every number in a report
   withA(ctx,mA,()=>{const nT=kt_w(sc,"claim","So is"),hl=fin(t,nT+0.6,0.6);
-    withA(ctx,fin(t,cC,0.6),()=>{T(ctx,"Older than the systems",540,150,{w:700,size:20,align:"center",color:rgba(TRUST,0.9)});credCard(ctx,240,190,600,{era:"digital",title:"Microcredential",issuer:"the university",holder:"Aisha K.",claim:"Data Visualisation",evidence:"project, assessed",date:"2027",h:300,rh:44,hl:{issuer:hl,claim:hl,evidence:hl}});});
-    withA(ctx,fin(t,nT-0.2,0.6),()=>{T(ctx,"a number in a report",1380,150,{w:700,size:20,align:"center",color:rgba(TRUST,0.9)});credCard(ctx,1080,190,600,{era:"digital",title:"Completion rate · 71%",issuer:"the university",claim:"71% completed",evidence:"definition v3 · tests",date:"2027 report",h:300,rh:44,hl:{issuer:hl,claim:hl,evidence:hl}});});
+    withA(ctx,fin(t,cC,0.6),()=>{T(ctx,"a credential",540,158,{w:700,size:24,align:"center",color:rgba(TRUST,0.95)});credCard(ctx,240,190,600,{era:"digital",issuer:"the university",holder:"Aisha K.",claim:"Microcredential, Data Visualisation",evidence:"project, assessed",date:"2026",h:300,rh:48,hl:{issuer:hl,claim:hl,evidence:hl}});});
+    withA(ctx,fin(t,nT-0.2,0.6),()=>{T(ctx,"a number in a report",1380,158,{w:700,size:24,align:"center",color:rgba(TRUST,0.95)});credCard(ctx,1080,190,600,{era:"digital",issuer:"the university",claim:"completion rate, 71%",evidence:"definition v3 · tests",date:"2026 report",h:300,rh:48,hl:{issuer:hl,claim:hl,evidence:hl}});});
     withA(ctx,fin(t,nT+1.0,0.6),()=>tag(ctx,960,620,"a claim that others can check",TRUST,{align:"center",size:28}));});
   // the tools have changed; the job hasn't
   withA(ctx,jA,()=>{const hT=kt_w(sc,"job","The job"),X=[400,960,1520],ph=[["agree what things are","agree"],["write it down","write"],["keep it true","keep"]];

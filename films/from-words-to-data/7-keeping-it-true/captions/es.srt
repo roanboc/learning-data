@@ -88,7 +88,7 @@ El agente recomienda. Las personas aprueban. Todo queda versionado.
 
 23
 00:02:45,079 --> 00:02:48,994
-Un borrador seguro de sí puede inventar una definición que nadie acordó.
+Un borrador muy convincente puede inventar una definición que nadie acordó.
 
 24
 00:02:50,294 --> 00:02:57,864

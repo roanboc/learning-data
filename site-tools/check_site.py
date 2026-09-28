@@ -701,7 +701,7 @@ def main():
             continue  # the players' own code (timings, comments) is not site copy
         mk = rel in MAKING_OF_PAGES
         for m in LENGTHS.finditer(src):
-            if m.group(0) in WHOLE or mk and m.group(0).lstrip("· ") == "5 min":
+            if m.group(0).lstrip("· ") in WHOLE or mk and m.group(0).lstrip("· ") == "5 min":
                 continue
             t["fails"].append(f"site/{rel}:{src.count(chr(10), 0, m.start()) + 1}: \"{m.group(0)}\"")
         if p.suffix == ".html":

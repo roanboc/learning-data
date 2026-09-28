@@ -37,18 +37,18 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "If you don't model your business, your vendors will do it for you.":
 "Si no modelas tu negocio, tus proveedores lo harán por ti.",
 "Connect five systems in pairs, and you need up to ten translations. Each one is a place where meaning can slip.":
-"Si conectas cinco sistemas de a pares, necesitas hasta diez traducciones. En cada una, el significado puede desviarse.",
+"Si conectas cinco sistemas por pares, necesitas hasta diez traducciones. En cada una, el significado puede desviarse.",
 "In 1999, a spacecraft was lost at Mars. One team's software gave the thrusters' push in pound-force seconds. The navigation software expected newton-seconds.":
 "En 1999, una nave espacial se perdió al llegar a Marte. El software de un equipo daba el empuje de los propulsores en libras-fuerza-segundo. El de navegación esperaba newtons-segundo.",
-"Each side made sense on its own. The meaning broke between them.":
-"Cada lado tenía sentido por sí solo. El significado se rompió entre los dos.",
+"Each program ran without an error. The meaning broke between them, and nobody held it to the spec.":
+"Cada programa funcionó sin errores. El significado se rompió entre los dos, y nadie lo comprobó con la especificación.",
 "So translate each system once, to a shared model. Five translations instead of ten, and one place where the meaning is written down.":
 "Así que traduce cada sistema una vez, a un modelo compartido. Cinco traducciones, no diez, y un solo lugar donde el significado queda escrito.",
 "Take one learner, Aisha. She has four IDs: a student number, a platform login, a customer number and a wallet address.":
 "Tomemos a una aprendiz: Aisha. Tiene cuatro ID: número de estudiante, usuario de la plataforma, número de cliente y dirección de billetera.",
 "Her name comes from the student system, her email from IT, and her credentials from three different places.":
 "Su nombre viene del sistema de estudiantes; su correo, de TI; y sus credenciales, de tres lugares distintos.",
-"Choosing which system is the source of each fact, and linking the records that are the same person, is master data.":
+"Choosing which system is the source of each fact, and linking the records that are the same person, is master data management.":
 "Elegir qué sistema es la fuente de cada dato, y unir los registros que son la misma persona, es gestionar datos maestros.",
 "And shared lists of values, such as the kinds of credential, keep a word meaning the same thing in every system. That's reference data.":
 "Y las listas de valores compartidas, como los tipos de credencial, hacen que una palabra signifique lo mismo en cada sistema. Eso son datos de referencia.",
@@ -65,13 +65,13 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Still no technology. That's what makes it useful: it's the yardstick every system is held against, to choose a package, to map its fields, or to move to a new one.":
 "Todavía sin tecnología. Eso es lo que lo hace útil: es la vara con la que se mide cada sistema, para elegir un paquete, relacionar sus campos o mudarse a uno nuevo.",
 "Every part has an owner. The registrar owns the word award. The short-courses team owns microcredential.":
-"Cada parte tiene un responsable. La palabra título es de Registro académico. Microcredencial, de Cursos cortos.",
+"Cada parte tiene un responsable. La palabra «título» es responsabilidad de Registro académico; «microcredencial», de Cursos cortos.",
 "Noor, the data architect, owns the logical model, and each team owns its own tables.":
 "Noor, la arquitecta de datos, es responsable del modelo lógico, y cada equipo, de sus tablas.",
 "A change of meaning travels down, from the words to the systems. News of a change in a system travels up, before it ships.":
 "Un cambio de significado baja, de las palabras a los sistemas. El aviso de un cambio en un sistema sube, antes de que salga.",
 "Owners decide. Stewards keep it written down, and up to date.":
-"Los responsables deciden. Los custodios lo mantienen escrito, y al día.",
+"Los responsables deciden. Los administradores de datos lo mantienen escrito, y al día.",
 "The short-course platform still calls them customers. Nothing inside it changed.":
 "La plataforma de cursos cortos todavía los llama clientes. Por dentro, nada cambió.",
 "But its customer now maps to learner, and its certificate to microcredential. The meaning is joined.":

@@ -52,8 +52,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           CHOICE: ${{ inputs.films }}
-        # FILMS: one entry per video. "paths" lists everything the video is built from: its own source and captions,
-        # and the shared code it draws with. A change under any of them means the video needs rendering again.
+        # FILMS: one entry per video. "captions" are its caption files, published beside it: the video has no captions on the picture.
+        # "paths" lists everything the video is built from: its own source, and the shared code it draws with. A change under any of
+        # them means the video needs rendering again; captions only (the files, and src/i18n/<lang>/captions.js) never change the picture.
         run: |
           cat > films.json <<'EOF'
           [
@@ -61,35 +62,35 @@ jobs:
              "dir": "films/inner-life-of-data/source", "lang": "en",
              "player": "dist/film.js", "site_player": "site/assets/film/film.js",
              "video": "dist/inner-life-of-data.mp4", "file": "inner-life-of-data.mp4",
-             "captions": "films/inner-life-of-data/captions/en.srt", "srt": "inner-life-of-data.en.srt",
-             "paths": ["films/inner-life-of-data/source", "films/inner-life-of-data/captions/en.srt"]},
+             "captions": [["films/inner-life-of-data/captions/en.srt", "inner-life-of-data.en.srt"]],
+             "paths": ["films/inner-life-of-data/source"]},
             {"name": "The Inner Life of Data, Spanish", "key": "inner-life-of-data-es",
              "dir": "films/inner-life-of-data/source", "lang": "es",
              "player": "dist/es/film.js", "site_player": "site/assets/film/film.es.js",
              "video": "dist/es/inner-life-of-data.es.mp4", "file": "inner-life-of-data.es.mp4",
-             "captions": "films/inner-life-of-data/captions/es.srt", "srt": "inner-life-of-data.es.srt",
-             "paths": ["films/inner-life-of-data/source", "films/inner-life-of-data/captions/es.srt"]},
+             "captions": [["films/inner-life-of-data/captions/es.srt", "inner-life-of-data.es.srt"]],
+             "paths": ["films/inner-life-of-data/source"]},
             {"name": "A Sharper Sketch", "key": "a-sharper-sketch-en",
              "dir": "films/a-sharper-sketch/source", "lang": "en",
              "player": "dist/film.js", "site_player": "site/assets/film3/film.js",
              "video": "dist/a-sharper-sketch.mp4", "file": "a-sharper-sketch.mp4",
-             "captions": "films/a-sharper-sketch/captions/en.srt", "srt": "a-sharper-sketch.en.srt",
-             "paths": ["films/a-sharper-sketch/source", "films/a-sharper-sketch/captions",
+             "captions": [["films/a-sharper-sketch/captions/en.srt", "a-sharper-sketch.en.srt"], ["films/a-sharper-sketch/captions/es.srt", "a-sharper-sketch.es.srt"]],
+             "paths": ["films/a-sharper-sketch/source", ":(exclude)films/a-sharper-sketch/source/src/i18n/es/captions.js",
                        "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
             {"name": "Silent change", "key": "silent-change-en",
              "dir": "films/when-things-go-wrong/1-silent-change/source", "lang": "en",
              "player": "dist/film.js", "site_player": "site/assets/silent-change/film.js",
              "video": "dist/silent-change.mp4", "file": "silent-change.mp4",
-             "captions": "films/when-things-go-wrong/1-silent-change/captions/en.srt", "srt": "silent-change.en.srt",
-             "paths": ["films/when-things-go-wrong/1-silent-change/source", "films/when-things-go-wrong/1-silent-change/captions",
+             "captions": [["films/when-things-go-wrong/1-silent-change/captions/en.srt", "silent-change.en.srt"], ["films/when-things-go-wrong/1-silent-change/captions/es.srt", "silent-change.es.srt"]],
+             "paths": ["films/when-things-go-wrong/1-silent-change/source", ":(exclude)films/when-things-go-wrong/1-silent-change/source/src/i18n/es/captions.js",
                        "films/when-things-go-wrong/characters",
                        "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
             {"name": "Too good to be true", "key": "too-good-to-be-true-en",
              "dir": "films/when-things-go-wrong/2-too-good-to-be-true/source", "lang": "en",
              "player": "dist/film.js", "site_player": "site/assets/too-good-to-be-true/film.js",
              "video": "dist/too-good-to-be-true.mp4", "file": "too-good-to-be-true.mp4",
-             "captions": "films/when-things-go-wrong/2-too-good-to-be-true/captions/en.srt", "srt": "too-good-to-be-true.en.srt",
-             "paths": ["films/when-things-go-wrong/2-too-good-to-be-true/source", "films/when-things-go-wrong/2-too-good-to-be-true/captions",
+             "captions": [["films/when-things-go-wrong/2-too-good-to-be-true/captions/en.srt", "too-good-to-be-true.en.srt"], ["films/when-things-go-wrong/2-too-good-to-be-true/captions/es.srt", "too-good-to-be-true.es.srt"]],
+             "paths": ["films/when-things-go-wrong/2-too-good-to-be-true/source", ":(exclude)films/when-things-go-wrong/2-too-good-to-be-true/source/src/i18n/es/captions.js",
                        "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
                        "films/a-sharper-sketch/source/src",
                        "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
@@ -97,23 +98,23 @@ jobs:
              "dir": "films/making-of/1-data-for-films/source", "lang": "en",
              "player": "dist/film.js", "site_player": "site/assets/making-of/data-for-films.js",
              "video": "dist/data-for-films.mp4", "file": "data-for-films.mp4",
-             "captions": "films/making-of/1-data-for-films/captions/en.srt", "srt": "data-for-films.en.srt",
-             "paths": ["films/making-of/1-data-for-films/source", "films/making-of/1-data-for-films/captions",
+             "captions": [["films/making-of/1-data-for-films/captions/en.srt", "data-for-films.en.srt"], ["films/making-of/1-data-for-films/captions/es.srt", "data-for-films.es.srt"]],
+             "paths": ["films/making-of/1-data-for-films/source", ":(exclude)films/making-of/1-data-for-films/source/src/i18n/es/captions.js",
                        "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
             {"name": "That's not quite right", "key": "thats-not-quite-right-en",
              "dir": "films/making-of/2-the-process/source", "lang": "en",
              "player": "dist/film.js", "site_player": "site/assets/making-of/thats-not-quite-right.js",
              "video": "dist/thats-not-quite-right.mp4", "file": "thats-not-quite-right.mp4",
-             "captions": "films/making-of/2-the-process/captions/en.srt", "srt": "thats-not-quite-right.en.srt",
-             "paths": ["films/making-of/2-the-process/source", "films/making-of/2-the-process/captions",
+             "captions": [["films/making-of/2-the-process/captions/en.srt", "thats-not-quite-right.en.srt"], ["films/making-of/2-the-process/captions/es.srt", "thats-not-quite-right.es.srt"]],
+             "paths": ["films/making-of/2-the-process/source", ":(exclude)films/making-of/2-the-process/source/src/i18n/es/captions.js",
                        "films/making-of/1-data-for-films/source/src",
                        "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
             {"name": "What's in a word", "key": "whats-in-a-word-en",
              "dir": "films/from-words-to-data/1-whats-in-a-word/source", "lang": "en",
              "player": "dist/film.js", "site_player": "site/assets/whats-in-a-word/film.js",
              "video": "dist/whats-in-a-word.mp4", "file": "whats-in-a-word.mp4",
-             "captions": "films/from-words-to-data/1-whats-in-a-word/captions/en.srt", "srt": "whats-in-a-word.en.srt",
-             "paths": ["films/from-words-to-data/1-whats-in-a-word/source", "films/from-words-to-data/1-whats-in-a-word/captions", "films/from-words-to-data/shared",
+             "captions": [["films/from-words-to-data/1-whats-in-a-word/captions/en.srt", "whats-in-a-word.en.srt"], ["films/from-words-to-data/1-whats-in-a-word/captions/es.srt", "whats-in-a-word.es.srt"]],
+             "paths": ["films/from-words-to-data/1-whats-in-a-word/source", ":(exclude)films/from-words-to-data/1-whats-in-a-word/source/src/i18n/es/captions.js", "films/from-words-to-data/shared",
                        "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
                        "films/a-sharper-sketch/source/src",
                        "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
@@ -121,8 +122,8 @@ jobs:
              "dir": "films/from-words-to-data/2-older-than-the-systems/source", "lang": "en",
              "player": "dist/film.js", "site_player": "site/assets/older-than-the-systems/film.js",
              "video": "dist/older-than-the-systems.mp4", "file": "older-than-the-systems.mp4",
-             "captions": "films/from-words-to-data/2-older-than-the-systems/captions/en.srt", "srt": "older-than-the-systems.en.srt",
-             "paths": ["films/from-words-to-data/2-older-than-the-systems/source", "films/from-words-to-data/2-older-than-the-systems/captions", "films/from-words-to-data/shared",
+             "captions": [["films/from-words-to-data/2-older-than-the-systems/captions/en.srt", "older-than-the-systems.en.srt"], ["films/from-words-to-data/2-older-than-the-systems/captions/es.srt", "older-than-the-systems.es.srt"]],
+             "paths": ["films/from-words-to-data/2-older-than-the-systems/source", ":(exclude)films/from-words-to-data/2-older-than-the-systems/source/src/i18n/es/captions.js", "films/from-words-to-data/shared",
                        "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
                        "films/a-sharper-sketch/source/src",
                        "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
@@ -130,8 +131,8 @@ jobs:
              "dir": "films/from-words-to-data/3-built-to-write-built-to-read/source", "lang": "en",
              "player": "dist/film.js", "site_player": "site/assets/built-to-write-built-to-read/film.js",
              "video": "dist/built-to-write-built-to-read.mp4", "file": "built-to-write-built-to-read.mp4",
-             "captions": "films/from-words-to-data/3-built-to-write-built-to-read/captions/en.srt", "srt": "built-to-write-built-to-read.en.srt",
-             "paths": ["films/from-words-to-data/3-built-to-write-built-to-read/source", "films/from-words-to-data/3-built-to-write-built-to-read/captions", "films/from-words-to-data/shared",
+             "captions": [["films/from-words-to-data/3-built-to-write-built-to-read/captions/en.srt", "built-to-write-built-to-read.en.srt"], ["films/from-words-to-data/3-built-to-write-built-to-read/captions/es.srt", "built-to-write-built-to-read.es.srt"]],
+             "paths": ["films/from-words-to-data/3-built-to-write-built-to-read/source", ":(exclude)films/from-words-to-data/3-built-to-write-built-to-read/source/src/i18n/es/captions.js", "films/from-words-to-data/shared",
                        "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
                        "films/a-sharper-sketch/source/src",
                        "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
@@ -139,8 +140,8 @@ jobs:
              "dir": "films/from-words-to-data/4-many-ways-to-read/source", "lang": "en",
              "player": "dist/film.js", "site_player": "site/assets/many-ways-to-read/film.js",
              "video": "dist/many-ways-to-read.mp4", "file": "many-ways-to-read.mp4",
-             "captions": "films/from-words-to-data/4-many-ways-to-read/captions/en.srt", "srt": "many-ways-to-read.en.srt",
-             "paths": ["films/from-words-to-data/4-many-ways-to-read/source", "films/from-words-to-data/4-many-ways-to-read/captions", "films/from-words-to-data/shared",
+             "captions": [["films/from-words-to-data/4-many-ways-to-read/captions/en.srt", "many-ways-to-read.en.srt"], ["films/from-words-to-data/4-many-ways-to-read/captions/es.srt", "many-ways-to-read.es.srt"]],
+             "paths": ["films/from-words-to-data/4-many-ways-to-read/source", ":(exclude)films/from-words-to-data/4-many-ways-to-read/source/src/i18n/es/captions.js", "films/from-words-to-data/shared",
                        "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
                        "films/a-sharper-sketch/source/src",
                        "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
@@ -148,8 +149,8 @@ jobs:
              "dir": "films/from-words-to-data/5-both-at-once/source", "lang": "en",
              "player": "dist/film.js", "site_player": "site/assets/both-at-once/film.js",
              "video": "dist/both-at-once.mp4", "file": "both-at-once.mp4",
-             "captions": "films/from-words-to-data/5-both-at-once/captions/en.srt", "srt": "both-at-once.en.srt",
-             "paths": ["films/from-words-to-data/5-both-at-once/source", "films/from-words-to-data/5-both-at-once/captions", "films/from-words-to-data/shared",
+             "captions": [["films/from-words-to-data/5-both-at-once/captions/en.srt", "both-at-once.en.srt"], ["films/from-words-to-data/5-both-at-once/captions/es.srt", "both-at-once.es.srt"]],
+             "paths": ["films/from-words-to-data/5-both-at-once/source", ":(exclude)films/from-words-to-data/5-both-at-once/source/src/i18n/es/captions.js", "films/from-words-to-data/shared",
                        "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
                        "films/a-sharper-sketch/source/src",
                        "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
@@ -157,8 +158,8 @@ jobs:
              "dir": "films/from-words-to-data/6-meaning-machines-can-read/source", "lang": "en",
              "player": "dist/film.js", "site_player": "site/assets/meaning-machines-can-read/film.js",
              "video": "dist/meaning-machines-can-read.mp4", "file": "meaning-machines-can-read.mp4",
-             "captions": "films/from-words-to-data/6-meaning-machines-can-read/captions/en.srt", "srt": "meaning-machines-can-read.en.srt",
-             "paths": ["films/from-words-to-data/6-meaning-machines-can-read/source", "films/from-words-to-data/6-meaning-machines-can-read/captions", "films/from-words-to-data/shared",
+             "captions": [["films/from-words-to-data/6-meaning-machines-can-read/captions/en.srt", "meaning-machines-can-read.en.srt"], ["films/from-words-to-data/6-meaning-machines-can-read/captions/es.srt", "meaning-machines-can-read.es.srt"]],
+             "paths": ["films/from-words-to-data/6-meaning-machines-can-read/source", ":(exclude)films/from-words-to-data/6-meaning-machines-can-read/source/src/i18n/es/captions.js", "films/from-words-to-data/shared",
                        "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
                        "films/a-sharper-sketch/source/src",
                        "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
@@ -166,8 +167,8 @@ jobs:
              "dir": "films/from-words-to-data/7-keeping-it-true/source", "lang": "en",
              "player": "dist/film.js", "site_player": "site/assets/keeping-it-true/film.js",
              "video": "dist/keeping-it-true.mp4", "file": "keeping-it-true.mp4",
-             "captions": "films/from-words-to-data/7-keeping-it-true/captions/en.srt", "srt": "keeping-it-true.en.srt",
-             "paths": ["films/from-words-to-data/7-keeping-it-true/source", "films/from-words-to-data/7-keeping-it-true/captions", "films/from-words-to-data/shared",
+             "captions": [["films/from-words-to-data/7-keeping-it-true/captions/en.srt", "keeping-it-true.en.srt"], ["films/from-words-to-data/7-keeping-it-true/captions/es.srt", "keeping-it-true.es.srt"]],
+             "paths": ["films/from-words-to-data/7-keeping-it-true/source", ":(exclude)films/from-words-to-data/7-keeping-it-true/source/src/i18n/es/captions.js", "films/from-words-to-data/shared",
                        "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
                        "films/a-sharper-sketch/source/src",
                        "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]}
@@ -305,9 +306,10 @@ jobs:
           mkdir -p out
           latest=$(gh release view --json tagName --jq .tagName 2>/dev/null || true)
           target=$(gh release view "$TAG" --json tagName --jq .tagName 2>/dev/null || true)
+          # every caption file, from this commit: they sit beside the videos, which have no captions on the picture
+          jq -r '.[] | .captions[] | @tsv' films.json | while IFS=$'\t' read -r captions srt; do cp "$captions" "out/$srt"; done
           # every video: rendered now, or else carried over from this tag (running it again) or from the latest release
-          while IFS=$'\t' read -r key file captions srt; do
-            cp "$captions" "out/$srt"
+          while IFS=$'\t' read -r key file; do
             [ -f "out/$file" ] && { echo "- $file: rendered from this commit" >> summary.md; continue; }
             for from in $target $latest; do
               if gh release download "$from" -p "$file" -D out --clobber 2>/dev/null; then
@@ -318,18 +320,18 @@ jobs:
               echo "::error title=No video for $key::$file wasn't rendered and isn't in an earlier release. Run this again with films set to $key, or to all."
               exit 1
             fi
-          done < <(jq -r '.[] | [.key, .file, .captions, .srt] | @tsv' films.json)
+          done < <(jq -r '.[] | [.key, .file] | @tsv' films.json)
           ls -l out
           { echo "### Videos in release $TAG"; cat summary.md; } >> "$GITHUB_STEP_SUMMARY"
           cat > notes.md <<EOF
-          The Learning Data films. Each video is 1080p, with captions as a separate \`.srt\` file for platforms that take them.
+          The Learning Data films. Each video is 1080p, with no captions on the picture: its captions come beside it as \`.srt\` files, one per language, for the platform or player to show. Upload the one you want with the video.
 
           - *The Inner Life of Data*, how a modern data platform works: \`inner-life-of-data.mp4\` (English) and \`inner-life-of-data.es.mp4\` (Latin American Spanish, *La vida interior de los datos*).
-          - *A Sharper Sketch*, data modelling: \`a-sharper-sketch.mp4\` (English).
-          - *Silent change*, from the series *When things go wrong*, on changes and data contracts: \`silent-change.mp4\` (English).
-          - *Too good to be true*, from the series *When things go wrong*, on data quality checks: \`too-good-to-be-true.mp4\` (English).
-          - *Data for Films* and *That's not quite right*, the Making of films, on how the films are drawn and how they're made: \`data-for-films.mp4\` and \`thats-not-quite-right.mp4\` (English).
-          - *From words to data*, seven films on data modelling, from language and meaning to keeping it true with AI: \`whats-in-a-word.mp4\`, \`older-than-the-systems.mp4\`, \`built-to-write-built-to-read.mp4\`, \`many-ways-to-read.mp4\`, \`both-at-once.mp4\`, \`meaning-machines-can-read.mp4\`, \`keeping-it-true.mp4\` (English).
+          - *A Sharper Sketch*, data modelling: \`a-sharper-sketch.mp4\` (English, with English and Spanish captions).
+          - *Silent change*, from the series *When things go wrong*, on changes and data contracts: \`silent-change.mp4\` (English, with English and Spanish captions).
+          - *Too good to be true*, from the series *When things go wrong*, on data quality checks: \`too-good-to-be-true.mp4\` (English, with English and Spanish captions).
+          - *Data for Films* and *That's not quite right*, the Making of films, on how the films are drawn and how they're made: \`data-for-films.mp4\` and \`thats-not-quite-right.mp4\` (English, with English and Spanish captions).
+          - *From words to data*, seven films on data modelling, from language and meaning to keeping it true with AI: \`whats-in-a-word.mp4\`, \`older-than-the-systems.mp4\`, \`built-to-write-built-to-read.mp4\`, \`many-ways-to-read.mp4\`, \`both-at-once.mp4\`, \`meaning-machines-can-read.mp4\`, \`keeping-it-true.mp4\` (English, with English and Spanish captions).
 
           Rendered for this release, from commit $GITHUB_SHA: ${RENDERED:-none; every video is carried over from the previous release}.
 

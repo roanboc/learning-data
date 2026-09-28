@@ -45,7 +45,7 @@ Spanish: the same five commands with `FILM_LANG=es` in front of each, for exampl
 | `build.py` | Builds `dist/render.html` (used for rendering), `dist/film.html` (a standalone player, with chapters, captions and full screen) and `dist/film.js` (the same player code, which the site loads). |
 | `audio.py` | Mixes narration, music and effects into `build/mix.wav` and `dist/soundtrack.mp3`. |
 | `build.py` again | Embeds the soundtrack in the player. |
-| `render.py` | Renders 1080p frames at 30 fps and writes the MP4. |
+| `render.py` | Renders 1080p frames at 30 fps and writes the MP4, with no captions on the picture: they go beside it as `.srt` files (`captions.py`), so platforms and players show the language a viewer picks. |
 
 Before a long render, run `python tools/check.py` (or with `FILM_LANG=es`): it draws every tenth of a second on a small canvas, in about half a minute, and lists any moment that fails. To see how dense the narration is, run `python tools/pace.py` (or with `FILM_LANG=es`) after `tts.py`: it reports words per minute, how much of the time the voice speaks, and the longest quiet moment in each chapter, and it flags sentences with no breath after them and long stops inside a chapter. [PLAYBOOK.md](../../../PLAYBOOK.md) explains the targets.
 
@@ -87,6 +87,8 @@ A language lives in `src/i18n/<lang>/`, and `FILM_LANG=<lang>` builds it into `b
 - `page.json`: the player page's text, as English → translation pairs.
 
 To add a language, copy `src/i18n/es/`, translate the four files, and run the steps with the new `FILM_LANG`. Then look at frames from every scene: text in fixed-size boxes (the phone, the Genie question bubble, the knowledge cards and the chart captions) may need shorter wording. For the site, add pages under `site/<lang>/` next to `site/es/`, and a link in each page's language toggle.
+
+The other films take a lighter route: captions only. Their `src/i18n/<lang>/captions.js` maps each English narration line to its caption, and a page that loads it before the film (as `CAPTIONS`) gets the same picture, voice and timings, captioned in that language (`src/engine3.js`, `capText`). `FILM_LANG=<lang> python tools/captions.py` then writes that language's `.srt` and `.vtt` from the English timeline.
 
 ## Editing
 

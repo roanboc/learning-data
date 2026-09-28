@@ -3,9 +3,9 @@
 const NARR={
 "materials":{"name":"Same idea, new materials","lead":1.6,"tail":1.0,"vo":[
  {"id":"clay","gap":0.8,"text":"Almost four thousand years ago, student scribes in Mesopotamia practised on clay. Some of their school tablets hold a teacher's model, with the student's copy beside it."},
- {"id":"guild","gap":0.8,"text":"In medieval Europe, an apprentice became a master by making a masterpiece: one piece of work, judged by the masters of the guild."},
+ {"id":"guild","gap":0.8,"text":"In medieval Europe, a journeyman became a master by making a masterpiece: one piece of work, judged by the masters of the guild."},
  {"id":"exams","gap":0.8,"text":"In China, imperial examinations tested candidates for thirteen centuries, and the rank they earned opened the way to office."},
- {"id":"seal","gap":0.8,"text":"Medieval universities granted a licence to teach, under a wax seal. Then came the diploma, the transcript, the digital badge, and today, a credential signed with a digital key."},
+ {"id":"seal","gap":0.8,"text":"At medieval universities, a chancellor granted the licence to teach, under a wax seal. Then came the diploma, the transcript, the digital badge, and today, a credential signed with a digital key."},
  {"id":"idea","gap":0.8,"text":"The materials changed every few centuries. The idea didn't."}]},
 "model":{"name":"The model underneath","lead":1.0,"tail":1.0,"vo":[
  {"id":"parts","gap":0.8,"text":"Look closely, and every one of them has the same parts."},

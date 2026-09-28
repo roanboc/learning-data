@@ -50,67 +50,113 @@ function kt_rstamp(ctx,x,y,s,col,a,press,o){if(a<=0.01)return;o=o||{};const sz=o
   withA(ctx,a*pr,()=>{ctx.save();ctx.translate(x,y);ctx.rotate(o.rot==null?-0.12:o.rot);ctx.scale(1.5-0.5*pr,1.5-0.5*pr);ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=4;ctx.shadowColor=rgba(col,0.7);ctx.shadowBlur=10;rr(ctx,-w/2,-h/2,w,h,8);ctx.stroke();
     ctx.lineWidth=1.5;rr(ctx,-w/2+6,-h/2+6,w-12,h-12,5);ctx.stroke();ctx.shadowBlur=0;T(ctx,s,0,sz*0.36,{w:800,size:sz,align:"center",color:rgba(col,1)});ctx.restore();});}
 
-/* ---------- the past: Johnson's dictionary, the OED, the planets, the kilogram ---------- */
-const KT_WORDS=[["CREDENTIAL",3],["CREDIT",2],["DEGREE",3],["DIPLOMA",3],["ENROL",2],["NICE",4]];
-// a heavy book: closed (a leather cover, gilt, with the page edges showing its weight), or open on two pages of entries
+/* ---------- the past: drawn organically (soft curves, light and shadow, grain, and always a little motion) ---------- */
+// a sheet of paper whose edges aren't quite straight, lit from the upper left, with fibres in it and a corner that lifts and settles
+function kt_paper(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const sd=o.seed||1,base=o.col||[239,230,210],cu=(o.curl==null?1:o.curl)*(0.55+0.45*Math.sin(t*0.9+sd))*Math.min(w,h)*0.08;
+  withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);
+    const edge=(x0,y0,x1,y1,k)=>{const n=4,nx=-(y1-y0),ny=x1-x0,L=Math.hypot(nx,ny)||1;for(let i=1;i<=n;i++){const um=(i-0.5)/n,u1=i/n,b=(hash(sd*7+k*5+i,3)-0.5)*3.4;ctx.quadraticCurveTo(lerp(x0,x1,um)+nx/L*b,lerp(y0,y1,um)+ny/L*b,lerp(x0,x1,u1),lerp(y0,y1,u1));}};
+    const path=()=>{ctx.beginPath();ctx.moveTo(0,0);edge(0,0,w,0,0);edge(w,0,w,h-cu,1);ctx.quadraticCurveTo(w-cu*0.35,h-cu*0.35,w-cu,h);edge(w-cu,h,0,h,2);edge(0,h,0,0,3);ctx.closePath();};
+    ctx.shadowColor="rgba(0,0,0,0.55)";ctx.shadowBlur=28;ctx.shadowOffsetY=10;path();ctx.fillStyle=rgba(base,1);ctx.fill();ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+    const g=ctx.createLinearGradient(0,0,w,h);g.addColorStop(0,"rgba(255,252,240,0.5)");g.addColorStop(0.55,"rgba(255,250,235,0)");g.addColorStop(1,"rgba(90,66,36,0.24)");path();ctx.fillStyle=g;ctx.fill();
+    ctx.save();path();ctx.clip();const n=Math.min(160,Math.floor(w*h/1700));for(let i=0;i<n;i++){const px=hash(i+sd*31,2)*w,py=hash(i+sd*31,5)*h,l=2+hash(i,7)*7,an=hash(i+sd,9)*Math.PI;ctx.strokeStyle="rgba(120,92,56,"+(0.05+0.08*hash(i,11))+")";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(px,py);ctx.quadraticCurveTo(px+Math.cos(an+0.4)*l*0.6,py+Math.sin(an+0.4)*l*0.6,px+Math.cos(an)*l,py+Math.sin(an)*l);ctx.stroke();}
+    const r=ctx.createRadialGradient(w*0.45,h*0.4,Math.min(w,h)*0.25,w/2,h/2,Math.max(w,h)*0.75);r.addColorStop(0,"rgba(0,0,0,0)");r.addColorStop(1,"rgba(110,78,40,"+(o.age==null?0.14:o.age)+")");ctx.fillStyle=r;ctx.fillRect(0,0,w,h);ctx.restore();
+    if(cu>0.8){ctx.beginPath();ctx.moveTo(w,h-cu);ctx.quadraticCurveTo(w-cu*0.35,h-cu*0.35,w-cu,h);ctx.quadraticCurveTo(w-cu*0.8,h-cu*0.6,w-cu*0.92,h-cu*0.92);ctx.quadraticCurveTo(w-cu*0.6,h-cu*0.8,w,h-cu);ctx.closePath();
+      const fg=ctx.createLinearGradient(w,h,w-cu,h-cu);fg.addColorStop(0,rgba(mix(base,[255,255,255],0.35),1));fg.addColorStop(1,rgba(mix(base,[120,90,50],0.2),1));ctx.fillStyle=fg;ctx.fill();ctx.strokeStyle="rgba(110,84,50,0.3)";ctx.lineWidth=1;ctx.stroke();}
+    ctx.restore();});}
+const KT_WORDS=[[["CREDENTIAL",3],["CREDIT",4]],[["CURRICULUM",3],["DEGREE",4]],[["DIPLOMA",4],["ENROL",3]],[["NICE",5],["STUDENT",3]]];
+// a heavy book: closed (a leather cover with a rounded spine, gilt, its page block showing its weight), or open on two curved pages of entries
 function kt_book(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a,op=clamp(o.open||0,0,1);if(a<=0.01)return;
   withA(ctx,a,()=>{
-    if(op<1)withA(ctx,1-op,()=>{const bw=w*0.5,bx=x+w*0.25;ctx.save();ctx.shadowColor="rgba(0,0,0,0.7)";ctx.shadowBlur=30;
-      for(let k=4;k>=1;k--){ctx.fillStyle=k%2?"#d9c8a4":"#c9b58c";rr(ctx,bx+k*3,y+k*5,bw,h,6);ctx.fill();}ctx.restore();
-      const g=ctx.createLinearGradient(bx,y,bx+bw,y+h);g.addColorStop(0,"#6a3c24");g.addColorStop(1,"#35190e");ctx.fillStyle=g;rr(ctx,bx,y,bw,h,8);ctx.fill();
-      ctx.strokeStyle="rgba(222,178,98,0.85)";ctx.lineWidth=3;rr(ctx,bx+18,y+18,bw-36,h-36,4);ctx.stroke();ctx.lineWidth=1.2;rr(ctx,bx+28,y+28,bw-56,h-56,3);ctx.stroke();
-      const gold="rgba(232,192,112,0.95)";[["A",0.24,22],["DICTIONARY",0.33,30],["OF THE",0.42,18],["ENGLISH",0.5,26],["LANGUAGE",0.58,26],["SAMUEL JOHNSON",0.74,17],["1755",0.82,17]].forEach(([s,fy,sz])=>T(ctx,s,bx+bw/2,y+h*fy,{w:800,size:sz*(w/800),align:"center",color:gold}));});
-    if(op>0)withA(ctx,op,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.7)";ctx.shadowBlur=34;ctx.fillStyle="#5a3220";rr(ctx,x-12,y-10,w+24,h+22,10);ctx.fill();ctx.restore();
-      [0,1].forEach(side=>{const px=x+side*w/2,g=ctx.createLinearGradient(px,y,px+w/2,y);g.addColorStop(side?0:1,"#cdb98f");g.addColorStop(side?0.12:0.88,"#ece0c2");g.addColorStop(side?1:0,"#f1e7cf");ctx.fillStyle=g;ctx.fillRect(px,y,w/2,h);
-        // two columns of entries on each page: a headword, then its definition, as lines of type
-        const cw=w/4-40;[[0,1],[2]].forEach((ks,col)=>{let yy=y+54;const cx0=px+24+col*(w/4-6);ks.forEach(k=>{const [hw,n]=KT_WORDS[side*3+k],hi=o.hi===hw,hwW=tw(ctx,hw,15,800);
-          T(ctx,hw,cx0,yy,{w:800,size:15,color:hi?"rgba(150,70,20,1)":"rgba(52,40,30,0.95)"});
-          for(let q=0;q<n*2+2;q++){const lx=q?cx0:cx0+hwW+8,lw=(q?cw:cw-hwW-8)*(q===n*2+1?0.5:0.85+0.15*hash(k*9+q+side*31+col*7,3));ctx.fillStyle="rgba(80,64,46,0.3)";ctx.fillRect(lx,yy-9+q*15,Math.max(10,lw),5);}
-          yy+=(n*2+2)*15+26;});});});
-      const gx=x+w/2,gg=ctx.createLinearGradient(gx-26,0,gx+26,0);gg.addColorStop(0,"rgba(0,0,0,0)");gg.addColorStop(0.5,"rgba(60,40,20,0.35)");gg.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=gg;ctx.fillRect(gx-26,y,52,h);
+    if(op<1)withA(ctx,1-op,()=>{const bw=w*0.5,bx=x+w*0.25,s=w/800;
+      // the page block, seen at the fore-edge and the foot: curved, cream, with fine lines
+      ctx.save();ctx.shadowColor="rgba(0,0,0,0.7)";ctx.shadowBlur=30*s;ctx.shadowOffsetY=12*s;ctx.fillStyle="#d9c7a0";ctx.beginPath();ctx.moveTo(bx+10*s,y+h);ctx.quadraticCurveTo(bx+bw*0.5,y+h+22*s,bx+bw+14*s,y+h+10*s);ctx.lineTo(bx+bw+16*s,y+12*s);ctx.quadraticCurveTo(bx+bw+6*s,y,bx+bw-8*s,y+6*s);ctx.closePath();ctx.fill();ctx.restore();
+      ctx.strokeStyle="rgba(150,120,80,0.45)";ctx.lineWidth=1;for(let i=1;i<6;i++){ctx.beginPath();ctx.moveTo(bx+20*s,y+h+i*2.6*s);ctx.quadraticCurveTo(bx+bw*0.5,y+h+(4+i*3.4)*s,bx+bw+(4+i*2)*s,y+h+(2+i*1.4)*s);ctx.stroke();ctx.beginPath();ctx.moveTo(bx+bw+(2+i*2.4)*s,y+h);ctx.lineTo(bx+bw+(2+i*2.4)*s,y+14*s);ctx.stroke();}
+      // the cover: leather, lit from the upper left, with a rounded spine on the left and a little wear
+      const cover=()=>{ctx.beginPath();ctx.moveTo(bx+14*s,y);ctx.lineTo(bx+bw-10*s,y);ctx.quadraticCurveTo(bx+bw,y,bx+bw,y+10*s);ctx.lineTo(bx+bw,y+h-10*s);ctx.quadraticCurveTo(bx+bw,y+h,bx+bw-10*s,y+h);ctx.lineTo(bx+14*s,y+h);ctx.bezierCurveTo(bx-8*s,y+h-4*s,bx-8*s,y+4*s,bx+14*s,y);ctx.closePath();};
+      const g=ctx.createLinearGradient(bx,y,bx+bw,y+h);g.addColorStop(0,"#7a4629");g.addColorStop(0.5,"#55301b");g.addColorStop(1,"#2e170c");cover();ctx.fillStyle=g;ctx.fill();
+      ctx.save();cover();ctx.clip();for(let i=0;i<120;i++){const px=bx+hash(i,21)*bw,py=y+hash(i,22)*h,r=(0.6+hash(i,23)*1.6)*s;ctx.fillStyle=hash(i,24)>0.5?"rgba(20,8,2,0.25)":"rgba(160,110,70,0.12)";ctx.beginPath();ctx.ellipse(px,py,r*1.6,r,hash(i,25)*3,0,TAU);ctx.fill();}
+        const sp=ctx.createLinearGradient(bx-4*s,0,bx+34*s,0);sp.addColorStop(0,"rgba(0,0,0,0.35)");sp.addColorStop(0.45,"rgba(255,210,160,0.16)");sp.addColorStop(1,"rgba(0,0,0,0)");ctx.fillStyle=sp;ctx.fillRect(bx-10*s,y,50*s,h);
+        const sh=ctx.createRadialGradient(bx+bw*(0.3+0.1*Math.sin(t*0.4)),y+h*0.25,10,bx+bw*0.4,y+h*0.35,bw*0.9);sh.addColorStop(0,"rgba(255,220,170,0.14)");sh.addColorStop(1,"rgba(255,220,170,0)");ctx.fillStyle=sh;ctx.fillRect(bx,y,bw,h);ctx.restore();
+      ctx.strokeStyle="rgba(222,178,98,0.85)";ctx.lineWidth=3*s;rr(ctx,bx+30*s,y+18*s,bw-48*s,h-36*s,6*s);ctx.stroke();ctx.lineWidth=1.2*s;rr(ctx,bx+40*s,y+28*s,bw-68*s,h-56*s,4*s);ctx.stroke();
+      [0.2,0.8].forEach(fy=>{ctx.strokeStyle="rgba(222,178,98,0.6)";ctx.lineWidth=2*s;ctx.beginPath();ctx.moveTo(bx+2*s,y+h*fy);ctx.quadraticCurveTo(bx+12*s,y+h*fy-4*s,bx+22*s,y+h*fy);ctx.stroke();});
+      const gold="rgba(232,192,112,0.95)";[["A",0.24,22],["DICTIONARY",0.33,30],["OF THE",0.42,18],["ENGLISH",0.5,26],["LANGUAGE",0.58,26],["SAMUEL JOHNSON",0.74,17],["1755",0.82,17]].forEach(([q,fy,sz])=>T(ctx,q,bx+bw/2+6*s,y+h*fy,{w:800,size:sz*s,align:"center",color:gold}));});
+    if(op>0)withA(ctx,op,()=>{const gx=x+w/2;
+      // the boards under the pages
+      ctx.save();ctx.shadowColor="rgba(0,0,0,0.7)";ctx.shadowBlur=34;ctx.shadowOffsetY=12;const bg=ctx.createLinearGradient(x,y,x+w,y+h);bg.addColorStop(0,"#6a3a22");bg.addColorStop(1,"#3a1d0f");ctx.fillStyle=bg;ctx.beginPath();ctx.moveTo(x-14,y-4);ctx.quadraticCurveTo(gx,y+10,x+w+14,y-4);ctx.lineTo(x+w+14,y+h+14);ctx.quadraticCurveTo(gx,y+h+26,x-14,y+h+14);ctx.closePath();ctx.fill();ctx.restore();
+      // two pages that curve down into the gutter, light at the outer edge and shadowed at the fold; the right page's corner lifts a little
+      [0,1].forEach(side=>{const ox=side?x+w:x,dir=side?-1:1,lift=side?(5+4*Math.sin(t*1.1)):0;
+        const page=()=>{ctx.beginPath();ctx.moveTo(ox,y+6-lift*0.4);ctx.bezierCurveTo(ox+dir*w*0.2,y-6,gx-dir*w*0.12,y+2,gx,y+18);ctx.lineTo(gx,y+h-4);ctx.bezierCurveTo(gx-dir*w*0.12,y+h+6,ox+dir*w*0.2,y+h+14,ox+dir*2,y+h+6);ctx.quadraticCurveTo(ox-dir*3,y+h/2,ox,y+6-lift*0.4);ctx.closePath();};
+        const g=ctx.createLinearGradient(ox,y,gx,y);g.addColorStop(0,"#f3e9d1");g.addColorStop(0.7,"#ead9b6");g.addColorStop(1,"#c2aa7c");page();ctx.fillStyle=g;ctx.fill();
+        ctx.save();page();ctx.clip();
+        for(let i=0;i<90;i++){const px=Math.min(ox,gx)+hash(i+side*97,2)*w/2,py=y+hash(i+side*97,5)*h,l=2+hash(i,7)*6,an=hash(i+side,9)*Math.PI;ctx.strokeStyle="rgba(120,92,56,"+(0.05+0.07*hash(i,11))+")";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(px+Math.cos(an)*l,py+Math.sin(an)*l);ctx.stroke();}
+        // two columns of entries: a headword, then its definition as lines of type that bend with the page
+        const cw=w/4-40;[0,1].forEach(col=>{let yy=y+58;const cx0=Math.min(ox,gx)+(side?44:28)+col*(w/4-10),line=(lx,ly,lw)=>{const bend=(side?1:-1)*0.02;ctx.strokeStyle="rgba(80,64,46,0.32)";ctx.lineWidth=4.5;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(lx,ly);ctx.quadraticCurveTo(lx+lw/2,ly+lw*bend,lx+lw,ly+lw*bend*1.5);ctx.stroke();};
+          KT_WORDS[side*2+col].forEach(([hw,n],k)=>{const hi=o.hi===hw,hwW=tw(ctx,hw,15,800);T(ctx,hw,cx0,yy,{w:800,size:15,color:hi?"rgba(150,70,20,1)":"rgba(52,40,30,0.95)"});
+            for(let q=0;q<n*2+2;q++)line(q?cx0:cx0+hwW+8,yy-7+q*15,Math.max(10,(q?cw:cw-hwW-8)*(q===n*2+1?0.5:0.85+0.15*hash(k*9+q+side*31+col*7,3))));yy+=(n*2+2)*15+26;});
+          // the column runs on to the foot of the page
+          for(let q=0;yy+q*15<y+h-26;q++)line(cx0,yy-7+q*15,cw*(0.8+0.2*hash(q+col*17+side*41,4)));});
+        const gs=ctx.createLinearGradient(gx-dir*60,0,gx,0);gs.addColorStop(0,"rgba(80,50,20,0)");gs.addColorStop(1,"rgba(80,50,20,0.35)");ctx.fillStyle=gs;ctx.fillRect(Math.min(gx,gx-dir*60),y-10,60,h+30);ctx.restore();
+        ctx.strokeStyle="rgba(120,90,50,0.35)";ctx.lineWidth=1.2;page();ctx.stroke();});
       // letters lifting off the page: a language won't stay pinned down
-      const dr=o.drift||0;if(dr>0)for(let i=0;i<34;i++){const u=((t*0.22+hash(i,4))%1),px=x+30+hash(i,2)*(w-60),py=y+60+hash(i,3)*(h-90),ch="aeinorstlcdumphgbfywkv"[i%22];
-        withA(ctx,dr*Math.sin(Math.PI*u)*0.9,()=>T(ctx,ch,px+u*120*(hash(i,5)-0.3),py-u*220,{w:700,size:16+hash(i,6)*10,color:"rgba(90,64,40,1)"}));}});});}
+      const dr=o.drift||0;if(dr>0)for(let i=0;i<34;i++){const u=((t*0.22+hash(i,4))%1),px=x+30+hash(i,2)*(w-60),py=y+60+hash(i,3)*(h-90),ch="aeinorstlcdumphgbfywkv"[i%22],sw=Math.sin(t*1.3+i)*14;
+        withA(ctx,dr*Math.sin(Math.PI*u)*0.9,()=>{ctx.save();ctx.translate(px+u*120*(hash(i,5)-0.3)+sw*u,py-u*220);ctx.rotate((hash(i,8)-0.5)*u*2);T(ctx,ch,0,0,{w:700,size:16+hash(i,6)*10,color:"rgba(90,64,40,1)"});ctx.restore();});}});});}
 // a padlock over the page: fixing the language in place; open (0..1) lifts its shackle
-function kt_lock(ctx,x,y,s,col,a,open){withA(ctx,a,()=>{const u=ease(clamp(open||0,0,1));ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.strokeStyle=rgba(col,1);ctx.lineWidth=7;ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=14;
-  ctx.beginPath();ctx.arc(0,-22-u*22,22,Math.PI,0);ctx.lineTo(22,-22+(u>0.5?-22*u:0));ctx.moveTo(-22,-22-u*22);ctx.lineTo(-22,-4);ctx.stroke();ctx.shadowBlur=0;
-  ctx.fillStyle="rgba(40,26,14,0.95)";rr(ctx,-34,-6,68,52,8);ctx.fill();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=3;rr(ctx,-34,-6,68,52,8);ctx.stroke();ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(0,14,6,0,TAU);ctx.fill();ctx.fillRect(-2.5,16,5,14);ctx.restore();});}
-// the Oxford English Dictionary: a modern page, with an editor's revisions in blue pencil (p reveals them)
+function kt_lock(ctx,x,y,s,col,a,open){withA(ctx,a,()=>{const u=ease(clamp(open||0,0,1));ctx.save();ctx.translate(x,y);ctx.scale(s,s);
+  const sg=ctx.createLinearGradient(-26,0,26,0);sg.addColorStop(0,rgba(mix(col,[80,50,20],0.4),1));sg.addColorStop(0.4,rgba(mix(col,[255,255,255],0.4),1));sg.addColorStop(1,rgba(mix(col,[80,50,20],0.5),1));
+  ctx.strokeStyle=sg;ctx.lineWidth=8;ctx.lineCap="round";ctx.shadowColor=rgba(col,0.7);ctx.shadowBlur=12;ctx.beginPath();ctx.moveTo(-22,-2);ctx.lineTo(-22,-22-u*22);ctx.bezierCurveTo(-22,-54-u*22,22,-54-u*22,22,-22-u*22);ctx.lineTo(22,-22-u*22+(u>0.3?0:18));ctx.stroke();ctx.shadowBlur=0;
+  const bg=ctx.createLinearGradient(-34,-6,34,46);bg.addColorStop(0,rgba(mix(col,[255,255,255],0.3),1));bg.addColorStop(0.5,rgba(col,1));bg.addColorStop(1,rgba(mix(col,[60,30,10],0.55),1));ctx.fillStyle=bg;ctx.beginPath();ctx.moveTo(-30,-6);ctx.quadraticCurveTo(0,-10,30,-6);ctx.quadraticCurveTo(36,20,30,46);ctx.quadraticCurveTo(0,52,-30,46);ctx.quadraticCurveTo(-36,20,-30,-6);ctx.fill();
+  ctx.fillStyle="rgba(40,24,10,0.9)";ctx.beginPath();ctx.arc(0,14,6,0,TAU);ctx.fill();ctx.beginPath();ctx.moveTo(-3,16);ctx.lineTo(3,16);ctx.lineTo(4,32);ctx.lineTo(-4,32);ctx.closePath();ctx.fill();
+  ctx.fillStyle="rgba(255,255,255,0.3)";ctx.beginPath();ctx.ellipse(-14,4,5,12,0.3,0,TAU);ctx.fill();ctx.restore();});}
+// the Oxford English Dictionary: modern pages, with an editor's revisions in blue pencil (p reveals them)
 function kt_oed(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a,p=o.p||0;if(a<=0.01)return;withA(ctx,a,()=>{
-  [2,1].forEach(k=>{ctx.fillStyle=k===2?"#d9d2c4":"#e6e0d4";ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(0.02*k);ctx.fillRect(-w/2+k*6,-h/2+k*6,w,h);ctx.restore();});
-  ctx.save();ctx.shadowColor="rgba(0,0,0,0.5)";ctx.shadowBlur=24;ctx.fillStyle="#f6f2ea";ctx.fillRect(x,y,w,h);ctx.restore();
+  [2,1].forEach(k=>{ctx.save();ctx.translate(x+w/2+k*7,y+h/2+k*6);ctx.rotate(0.018*k);kt_paper(ctx,-w/2,-h/2,w,h,t,{seed:k+4,col:k===2?[222,215,200]:[232,226,214],curl:0,age:0.1});ctx.restore();});
+  kt_paper(ctx,x,y,w,h,t,{seed:3,col:[246,242,233],age:0.08});
   T(ctx,"OXFORD ENGLISH DICTIONARY",x+w/2,y+36,{w:800,size:14,align:"center",color:"rgba(40,50,70,0.7)"});ctx.fillStyle="rgba(40,50,70,0.25)";ctx.fillRect(x+30,y+48,w-60,1.5);
   const E=[["credential, n.",4],["credit, n.",3],["curriculum, n.",3]];let yy=y+86;const ink="rgba(34,36,44,0.95)",blue=rgba(KT_BLUE,1),rev=k=>fin(p,k*0.18,0.2);
+  const pencil=(pts,lw)=>{ctx.strokeStyle=blue;ctx.lineCap="round";ctx.lineJoin="round";ctx.lineWidth=lw;ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length-1;i++)ctx.quadraticCurveTo(pts[i][0],pts[i][1],(pts[i][0]+pts[i+1][0])/2,(pts[i][1]+pts[i+1][1])/2);const L=pts[pts.length-1];ctx.lineTo(L[0],L[1]);ctx.stroke();};
   E.forEach(([hw,n],i)=>{T(ctx,hw,x+30,yy,{w:800,size:24,color:ink});yy+=18;for(let k=0;k<n;k++){const bw=(w-60)*(0.55+0.4*hash(i*5+k,7));ctx.fillStyle="rgba(60,64,76,0.3)";ctx.fillRect(x+30+(k?16:0),yy+k*18,bw-(k?16:0),6);
-      // the editor's marks: a sense struck out, a new one written in, and a date in the margin
-      if(i===0&&k===1){const r=rev(0);ctx.strokeStyle=blue;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x+46,yy+k*18+3);ctx.lineTo(x+46+(bw-16)*r,yy+k*18+3);ctx.stroke();}
-      if(i===0&&k===2)withA(ctx,rev(1),()=>{ctx.strokeStyle=blue;ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(x+40,yy+k*18+10);ctx.lineTo(x+48,yy+k*18-2);ctx.lineTo(x+56,yy+k*18+10);ctx.stroke();T(ctx,"digital, too",x+62,yy+k*18-4,{w:700,size:21,color:blue});});
-      if(i===1&&k===0)withA(ctx,rev(2),()=>{ctx.strokeStyle=blue;ctx.lineWidth=2.5;ctx.beginPath();ctx.ellipse(x+30+bw*0.6,yy+3,bw*0.22,11,0,0,TAU);ctx.stroke();});}
-    if(i===2)withA(ctx,rev(3),()=>{ctx.fillStyle=rgba(KT_BLUE,0.12);ctx.fillRect(x+26,yy-34,w-52,n*18+38);T(ctx,"new sense",x+w-34,yy-40,{w:700,size:19,align:"right",color:blue});});
+      // the editor's marks: a sense struck out by hand, a new one written in, a circled word
+      if(i===0&&k===1){const r=rev(0);if(r>0){const x0=x+44,x1=x+44+(bw-14)*r,yl=yy+k*18+3;pencil([[x0,yl+1],[lerp(x0,x1,0.3),yl-1.5],[lerp(x0,x1,0.7),yl+1.5],[x1,yl-0.5]],3);}}
+      if(i===0&&k===2)withA(ctx,rev(1),()=>{const yl=yy+k*18;pencil([[x+40,yl+10],[x+46,yl+2],[x+48,yl-3],[x+52,yl+3],[x+57,yl+10]],2.5);T(ctx,"digital, too",x+62,yl-4,{w:700,size:21,color:blue});});
+      if(i===1&&k===0)withA(ctx,rev(2),()=>{const cx=x+30+bw*0.6,cy=yy+3,rx=bw*0.22;ctx.strokeStyle=blue;ctx.lineWidth=2.5;ctx.beginPath();for(let q=0;q<=40;q++){const an=q/40*TAU*1.08-0.3,rr_=1+0.05*Math.sin(q*1.3);ctx.lineTo(cx+Math.cos(an)*rx*rr_,cy+Math.sin(an)*11*rr_);}ctx.stroke();});}
+    if(i===2)withA(ctx,rev(3),()=>{ctx.fillStyle=rgba(KT_BLUE,0.1);ctx.beginPath();ctx.moveTo(x+24,yy-36);ctx.quadraticCurveTo(x+w/2,yy-42,x+w-26,yy-34);ctx.quadraticCurveTo(x+w-20,yy+n*9-10,x+w-28,yy+n*18+4);ctx.quadraticCurveTo(x+w/2,yy+n*18+10,x+26,yy+n*18+2);ctx.quadraticCurveTo(x+18,yy+n*9-14,x+24,yy-36);ctx.fill();T(ctx,"new sense",x+w-34,yy-40,{w:700,size:19,align:"right",color:blue});});
     yy+=n*18+30;});
   withA(ctx,rev(1.5),()=>{ctx.save();ctx.translate(x+w-24,y+120);ctx.rotate(-Math.PI/2);T(ctx,"revised",0,0,{w:700,size:19,align:"center",color:blue});ctx.restore();});});}
-// the solar system: the sun, and nine bodies on their orbits; Pluto's orbit is tilted and off-centre
+// the solar system: a glowing sun, and nine bodies on their orbits, each lit on the side that faces the sun; Pluto's orbit is tilted and off-centre
 const KT_PLANETS=[["Mercury",[200,180,160],5],["Venus",[240,210,150],7],["Earth",[110,170,240],7],["Mars",[230,120,80],6],["Jupiter",[230,190,140],14],["Saturn",[235,210,150],12],["Uranus",[160,220,230],10],["Neptune",[100,140,240],10],["Pluto",[210,190,170],4]];
-function kt_sky(ctx,cx,cy,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const sc=o.s||1;withA(ctx,a,()=>{glow(ctx,cx,cy,90*sc,[255,200,110],0.9);ctx.fillStyle="#ffe7a8";ctx.beginPath();ctx.arc(cx,cy,26*sc,0,TAU);ctx.fill();
-  KT_PLANETS.forEach(([n,col,r],i)=>{const rx=(110+i*108)*sc,ry=rx*0.24,pl=i===8,ox=pl?40*sc:0,rot=pl?0.09:0;ctx.save();ctx.translate(cx+ox,cy);ctx.rotate(rot);ctx.strokeStyle=rgba(pl?[200,190,180]:[230,220,200],pl?0.22:0.18);ctx.lineWidth=1.2;if(pl)ctx.setLineDash([6,6]);ctx.beginPath();ctx.ellipse(0,0,rx,ry,0,0,TAU);ctx.stroke();ctx.setLineDash([]);
-    const an=pl?0.32+t*0.01:(o.ang||0.6)+t*0.5/Math.pow(i+1,1.1)+i*1.9,px=Math.cos(an)*rx,py=Math.sin(an)*ry;glow(ctx,px,py,r*2.2*sc,col,0.4);ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(px,py,r*sc,0,TAU);ctx.fill();
+function kt_body(ctx,px,py,r,col,lx,ly,o){o=o||{};const L=Math.hypot(lx,ly)||1,dx=lx/L,dy=ly/L;glow(ctx,px,py,r*2.4,col,0.35);
+  if(o.ring){ctx.save();ctx.strokeStyle=rgba(mix(col,[255,255,255],0.3),0.7);ctx.lineWidth=r*0.35;ctx.beginPath();ctx.ellipse(px,py,r*2.1,r*0.6,-0.3,Math.PI,TAU);ctx.stroke();ctx.restore();}
+  const g=ctx.createRadialGradient(px+dx*r*0.45,py+dy*r*0.45,r*0.1,px,py,r*1.05);g.addColorStop(0,rgba(mix(col,[255,255,255],0.45),1));g.addColorStop(0.6,rgba(col,1));g.addColorStop(1,rgba(mix(col,[10,10,20],0.7),1));ctx.fillStyle=g;ctx.beginPath();ctx.arc(px,py,r,0,TAU);ctx.fill();
+  if(o.bands){ctx.save();ctx.beginPath();ctx.arc(px,py,r,0,TAU);ctx.clip();ctx.strokeStyle=rgba(mix(col,[120,70,40],0.4),0.45);ctx.lineWidth=r*0.14;[-0.4,0.05,0.45].forEach(k=>{ctx.beginPath();ctx.moveTo(px-r,py+k*r);ctx.quadraticCurveTo(px,py+k*r+r*0.12,px+r,py+k*r);ctx.stroke();});ctx.restore();}
+  if(o.ring){ctx.save();ctx.strokeStyle=rgba(mix(col,[255,255,255],0.3),0.85);ctx.lineWidth=r*0.35;ctx.beginPath();ctx.ellipse(px,py,r*2.1,r*0.6,-0.3,0,Math.PI);ctx.stroke();ctx.restore();}}
+function kt_sky(ctx,cx,cy,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const sc=o.s||1;withA(ctx,a,()=>{
+  for(let k=0;k<3;k++)glow(ctx,cx,cy,(70+k*40+6*Math.sin(t*1.3+k))*sc,[255,190-k*20,100],0.55-k*0.12);
+  const sg=ctx.createRadialGradient(cx-8*sc,cy-8*sc,2,cx,cy,28*sc);sg.addColorStop(0,"#fffbe8");sg.addColorStop(0.6,"#ffe19a");sg.addColorStop(1,"#ffb45a");ctx.fillStyle=sg;ctx.beginPath();for(let q=0;q<=36;q++){const an=q/36*TAU,rr_=26*sc*(1+0.03*Math.sin(an*5+t*2));ctx.lineTo(cx+Math.cos(an)*rr_,cy+Math.sin(an)*rr_);}ctx.fill();
+  KT_PLANETS.forEach(([n,col,r],i)=>{const rx=(110+i*108)*sc,ry=rx*0.24,pl=i===8,ox=pl?40*sc:0,rot=pl?0.09:0;ctx.save();ctx.translate(cx+ox,cy);ctx.rotate(rot);ctx.strokeStyle=rgba(pl?[200,190,180]:[230,220,200],pl?0.22:0.16);ctx.lineWidth=1.2;if(pl)ctx.setLineDash([6,6]);ctx.beginPath();ctx.ellipse(0,0,rx,ry,0,0,TAU);ctx.stroke();ctx.setLineDash([]);
+    const an=pl?0.32+t*0.01:(o.ang||0.6)+t*0.5/Math.pow(i+1,1.1)+i*1.9,px=Math.cos(an)*rx,py=Math.sin(an)*ry;kt_body(ctx,px,py,r*sc*1.15,col,-px-ox,-py,{ring:i===5,bands:i===4});
     if(pl&&o.dwarf)withA(ctx,o.dwarf,()=>tag(ctx,px,py-38,"dwarf planet",CLAY,{align:"center",size:17}));ctx.restore();});});}
-// the kilogram, 1889 to 2019: a metal cylinder under a glass bell jar
-function kt_kilo(ctx,x,y,s,a){withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(s,s);
-  ctx.fillStyle="rgba(60,48,40,0.95)";rr(ctx,-110,70,220,22,8);ctx.fill();
-  const g=ctx.createLinearGradient(-40,0,40,0);g.addColorStop(0,"#8c8a86");g.addColorStop(0.35,"#f0ede6");g.addColorStop(0.6,"#bdb9b0");g.addColorStop(1,"#6e6b66");ctx.fillStyle=g;ctx.fillRect(-40,-10,80,80);
-  ctx.fillStyle="#e4e0d8";ctx.beginPath();ctx.ellipse(0,-10,40,9,0,0,TAU);ctx.fill();ctx.fillStyle="#7a7772";ctx.beginPath();ctx.ellipse(0,70,40,9,0,0,Math.PI);ctx.fill();
-  ctx.strokeStyle="rgba(210,230,255,0.55)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-90,70);ctx.lineTo(-90,-60);ctx.bezierCurveTo(-90,-150,90,-150,90,-60);ctx.lineTo(90,70);ctx.stroke();
-  ctx.fillStyle="rgba(210,230,255,0.07)";ctx.fill();ctx.strokeStyle="rgba(255,255,255,0.4)";ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(-68,40);ctx.lineTo(-68,-58);ctx.quadraticCurveTo(-66,-100,-30,-116);ctx.stroke();
-  ctx.fillStyle="rgba(210,230,255,0.6)";ctx.beginPath();ctx.arc(0,-133,9,0,TAU);ctx.fill();ctx.restore();});}
+// the kilogram, 1889 to 2019: a metal cylinder under a glass bell jar, on a wooden base; light slides slowly over the metal and the glass
+function kt_kilo(ctx,x,y,s,a,t){t=t||0;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(s,s);
+  const wb=ctx.createLinearGradient(0,66,0,96);wb.addColorStop(0,"#8a5a36");wb.addColorStop(1,"#3e2414");ctx.fillStyle=wb;ctx.beginPath();ctx.moveTo(-112,74);ctx.quadraticCurveTo(0,62,112,74);ctx.quadraticCurveTo(118,86,108,94);ctx.quadraticCurveTo(0,102,-108,94);ctx.quadraticCurveTo(-118,86,-112,74);ctx.fill();
+  ctx.strokeStyle="rgba(40,20,8,0.35)";ctx.lineWidth=1;[80,86].forEach(yy=>{ctx.beginPath();ctx.moveTo(-100,yy);ctx.bezierCurveTo(-40,yy-3,30,yy+3,100,yy-1);ctx.stroke();});
+  ctx.fillStyle="rgba(0,0,0,0.3)";ctx.beginPath();ctx.ellipse(0,72,52,8,0,0,TAU);ctx.fill();
+  const m=ctx.createLinearGradient(-40,0,40,0),gl=0.3+0.25*Math.sin(t*0.6);m.addColorStop(0,"#6e6b66");m.addColorStop(Math.max(0.05,gl-0.12),"#b9b5ad");m.addColorStop(gl,"#fbf9f4");m.addColorStop(Math.min(0.95,gl+0.14),"#c4c0b7");m.addColorStop(1,"#5f5c57");
+  ctx.fillStyle=m;ctx.beginPath();ctx.moveTo(-40,-10);ctx.lineTo(-40,68);ctx.bezierCurveTo(-40,80,40,80,40,68);ctx.lineTo(40,-10);ctx.closePath();ctx.fill();
+  const tp=ctx.createLinearGradient(-40,-18,40,-2);tp.addColorStop(0,"#d8d4cc");tp.addColorStop(gl,"#ffffff");tp.addColorStop(1,"#b5b1a8");ctx.fillStyle=tp;ctx.beginPath();ctx.ellipse(0,-10,40,9,0,0,TAU);ctx.fill();
+  // the glass jar: a soft body of light, its edge brighter where it turns, and a highlight that drifts
+  ctx.beginPath();ctx.moveTo(-90,72);ctx.bezierCurveTo(-92,20,-94,-40,-88,-70);ctx.bezierCurveTo(-78,-148,78,-148,88,-70);ctx.bezierCurveTo(94,-40,92,20,90,72);
+  ctx.fillStyle="rgba(210,230,255,0.06)";ctx.fill();ctx.strokeStyle="rgba(210,230,255,0.5)";ctx.lineWidth=2.5;ctx.stroke();
+  const hx=-66+6*Math.sin(t*0.5);ctx.strokeStyle="rgba(255,255,255,0.42)";ctx.lineWidth=6;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(hx,36);ctx.bezierCurveTo(hx-4,-10,hx-2,-60,hx+30,-112);ctx.stroke();
+  ctx.strokeStyle="rgba(255,255,255,0.18)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(70,30);ctx.bezierCurveTo(76,-10,74,-50,60,-90);ctx.stroke();
+  const kb=ctx.createRadialGradient(-3,-136,1,0,-133,10);kb.addColorStop(0,"rgba(255,255,255,0.9)");kb.addColorStop(1,"rgba(170,200,240,0.5)");ctx.fillStyle=kb;ctx.beginPath();ctx.arc(0,-133,9,0,TAU);ctx.fill();ctx.restore();});}
 // the Planck constant, written with a raised exponent
 function kt_planck(ctx,x,y,sz,col){const a="h = 6.626 070 15 × 10",b="−34",c=" J s",wa=tw(ctx,a,sz,700,"mono"),wb=tw(ctx,b,sz*0.6,700,"mono"),wc=tw(ctx,c,sz,700,"mono"),x0=x-(wa+wb+wc)/2;
   T(ctx,a,x0,y,{f:"mono",w:700,size:sz,color:col});T(ctx,b,x0+wa+2,y-sz*0.45,{f:"mono",w:700,size:sz*0.6,color:col});T(ctx,c,x0+wa+wb+4,y,{f:"mono",w:700,size:sz,color:col});}
-// a parchment card with a list of names, some struck through
-function kt_list(ctx,x,y,w,title,items,o){o=o||{};const a=o.a==null?1:o.a,rh=o.rh||50;if(a<=0.01)return;withA(ctx,a,()=>{const h=80+items.length*rh+(o.foot||0);ctx.save();ctx.shadowColor="rgba(0,0,0,0.6)";ctx.shadowBlur=24;ctx.fillStyle="#ece2cc";ctx.fillRect(x,y,w,h);ctx.restore();
-  T(ctx,title,x+30,y+50,{w:800,size:26,color:"rgba(60,44,30,0.95)"});ctx.fillStyle="rgba(120,90,50,0.35)";ctx.fillRect(x+30,y+64,w-60,2);
+// a parchment list of names, some struck through by hand
+function kt_list(ctx,x,y,w,title,items,o){o=o||{};const a=o.a==null?1:o.a,rh=o.rh||50,t=o.t||0;if(a<=0.01)return;withA(ctx,a,()=>{const h=80+items.length*rh+(o.foot||0);kt_paper(ctx,x,y,w,h,t,{seed:9,col:[236,226,202]});
+  T(ctx,title,x+30,y+50,{w:800,size:26,color:"rgba(60,44,30,0.95)"});ctx.strokeStyle="rgba(120,90,50,0.35)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+30,y+64);ctx.quadraticCurveTo(x+w/2,y+62,x+w-30,y+65);ctx.stroke();
   items.forEach((s,i)=>{const yy=y+80+i*rh+rh*0.62,st=(o.strike||{})[i]||0;T(ctx,s,x+44,yy,{w:600,size:24,color:st>0.5?"rgba(60,44,30,0.5)":"rgba(52,40,30,0.95)"});
-    if(st>0){const sw=tw(ctx,s,24,600);ctx.strokeStyle=rgba([190,50,40],0.95);ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x+38,yy-8);ctx.lineTo(x+38+(sw+14)*st,yy-9);ctx.stroke();}});});}
+    if(st>0){const sw=(tw(ctx,s,24,600)+14)*st;ctx.strokeStyle=rgba([180,48,36],0.95);ctx.lineCap="round";ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(x+38,yy-7);ctx.bezierCurveTo(x+38+sw*0.3,yy-11,x+38+sw*0.6,yy-5,x+38+sw,yy-10);ctx.stroke();}});});}
 
 /* ---------- the present: the calendar, the government's form, the dashboards ---------- */
 function kt_cal(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const cw=(w-40)/7,rh=52,h=130+5*rh;withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,[170,205,255],{glow:12,ea:0.5,fill:"rgba(8,14,28,0.92)"});
@@ -168,7 +214,7 @@ function kt_pcard(ctx,x,y,w,h,k,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)re
     if(o.tick)kt_gtick(ctx,x+w-22,y+22,13,o.tick);});}
 function kt_folder(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||KT_AI;withA(ctx,a,()=>{
   ctx.save();ctx.shadowColor=rgba(col,0.5);ctx.shadowBlur=24;ctx.fillStyle="rgba(8,20,24,0.9)";ctx.beginPath();ctx.moveTo(x,y+24);ctx.lineTo(x,y+h-16);ctx.quadraticCurveTo(x,y+h,x+16,y+h);ctx.lineTo(x+w-16,y+h);ctx.quadraticCurveTo(x+w,y+h,x+w,y+h-16);ctx.lineTo(x+w,y+40);ctx.quadraticCurveTo(x+w,y+24,x+w-16,y+24);ctx.lineTo(x+260,y+24);ctx.lineTo(x+236,y);ctx.lineTo(x+16,y);ctx.quadraticCurveTo(x,y,x,y+16);ctx.closePath();ctx.fill();ctx.restore();
-  ctx.strokeStyle=rgba(col,0.85);ctx.lineWidth=2;ctx.stroke();T(ctx,o.title||"change package",x+24,y+17,{w:800,size:16,color:rgba(col,1)});
+  ctx.strokeStyle=rgba(col,0.85);ctx.lineWidth=2;ctx.stroke();T(ctx,o.title||"change package",x+24,y+17,{w:800,size:o.ts||16,color:rgba(col,1)});
   if(o.stamp)stamp(ctx,x+w-18,y+60,o.stamp,o.stampCol||col,o.stampA==null?1:o.stampA,0);});}
 // the stack of versions: v1 at the back, the newest in front
 function kt_versions(ctx,x,y,n,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{for(let i=0;i<n;i++){const k=clamp((o.p==null?n:o.p)-i,0,1);if(k<=0)continue;const top=i===n-1,xx=x+i*16,yy=y-i*26;
@@ -182,49 +228,87 @@ function kt_chain(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return
       glass(ctx,bx,y,bw,bh,14,col,{glow:6+16*on+10*hi,ea:0.35+0.6*on,fill:"rgba(8,12,24,0.95)"});
       T(ctx,t1,bx+bw/2,y+bh*0.44,{w:800,size:Math.min(22*sz,(bw-16)/t1.length*1.9),align:"center",color:on>0.5?rgba(INK,1):rgba(SOFT,0.8)});
       withA(ctx,0.4+0.6*on,()=>T(ctx,(o.sub||[])[i]||t2,bx+bw/2,y+bh*0.74,{w:600,size:Math.min(18*sz,(bw-12)/((o.sub||[])[i]||t2).length*1.75),align:"center",color:on>0.5?rgba(TRUST,1):rgba(SOFT,0.8)}));
-      if(o.ticks&&on>0.98)kt_gtick(ctx,bx+bw-14,y+2,11,fin(lit-i,1,0.4));});});}
+      if(o.ticks&&on>0.9)kt_gtick(ctx,bx+bw-14,y+2,11,fin(on,0.9,0.1));});});}
 // a report from an earlier year, read with the definitions it was written with
-function kt_report(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const h=o.h||300;withA(ctx,a,()=>{sheet(ctx,x,y,w,h,{plain:true,rot:o.rot||-0.015});
-  T(ctx,o.title||"Annual report 2025",x+30,y+54,{w:800,size:26,color:"rgba(40,36,34,0.95)"});ctx.fillStyle="rgba(80,76,70,0.3)";ctx.fillRect(x+30,y+70,w-60,2);
-  (o.rows||[["microcredentials issued","2,960"],["completion rate","62%"]]).forEach(([k,v],i)=>{T(ctx,k,x+30,y+120+i*52,{w:600,size:21,color:"rgba(60,56,52,0.9)"});T(ctx,v,x+w-30,y+120+i*52,{w:800,size:26,align:"right",color:"rgba(40,36,34,0.95)"});});
-  for(let i=0;i<3;i++){ctx.fillStyle="rgba(80,76,70,0.2)";ctx.fillRect(x+30,y+h-86+i*22,(w-60)*(0.5+0.4*hash(i,4)),7);}
-  if(o.stamp)stamp(ctx,x+w-16,y+h-18,o.stamp,o.stampCol||KIND,o.stampA==null?1:o.stampA,0);});}
-// a clay tablet with a few wedges pressed in: the series' first marks
-function kt_tablet(ctx,x,y,w,h,p,a){withA(ctx,a==null?1:a,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.7)";ctx.shadowBlur=30;ctx.fillStyle="#9a7650";rr(ctx,x,y,w,h,26);ctx.fill();ctx.shadowBlur=0;
-  const g=ctx.createLinearGradient(x,y,x+w,y+h);g.addColorStop(0,"rgba(255,230,190,0.25)");g.addColorStop(1,"rgba(40,20,10,0.35)");ctx.fillStyle=g;rr(ctx,x,y,w,h,26);ctx.fill();
-  ctx.strokeStyle="rgba(70,44,24,0.5)";ctx.lineWidth=2;for(let r=1;r<4;r++){ctx.beginPath();ctx.moveTo(x+22,y+r*h/4);ctx.lineTo(x+w-22,y+r*h/4);ctx.stroke();}
-  const n=32,sh=Math.floor(n*clamp(p,0,1));for(let i=0;i<sh;i++){const row=Math.floor(i/8),c=i%8,px=x+34+c*(w-68)/8+hash(i,2)*6,py=y+row*h/4+h/8+6,k=hash(i,3);ctx.fillStyle="rgba(60,36,18,0.85)";ctx.beginPath();
-    if(k<0.5){ctx.moveTo(px,py-9);ctx.lineTo(px+15,py-5);ctx.lineTo(px,py-1);}else{ctx.moveTo(px,py-11);ctx.lineTo(px+5,py+8);ctx.lineTo(px+10,py-11);}ctx.closePath();ctx.fill();}ctx.restore();});}
+function kt_report(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const h=o.h||300,t=o.t||0;withA(ctx,a,()=>{ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot==null?-0.015:o.rot);ctx.translate(-w/2,-h/2);
+  kt_paper(ctx,0,0,w,h,t,{seed:o.seed||2,col:[240,233,218],curl:o.curl});
+  T(ctx,o.title||"Annual report 2025",30,54,{w:800,size:26,color:"rgba(40,36,34,0.95)"});ctx.strokeStyle="rgba(80,76,70,0.3)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(30,70);ctx.quadraticCurveTo(w/2,68,w-30,71);ctx.stroke();
+  (o.rows||[["microcredentials issued","2,960"],["completion rate","62%"]]).forEach(([k,v],i)=>{T(ctx,k,30,120+i*52,{w:600,size:21,color:"rgba(60,56,52,0.9)"});T(ctx,v,w-30,120+i*52,{w:800,size:26,align:"right",color:"rgba(40,36,34,0.95)"});});
+  if(o.big)T(ctx,o.big,30,120+(o.rows||[0,0]).length*52+24,{w:800,size:48,color:"rgba(40,36,34,0.95)"});
+  if(h>220&&!o.big)for(let i=0;i<3;i++){const lw=(w-60)*(0.5+0.4*hash(i,4)),ly=h-86+i*22;ctx.strokeStyle="rgba(80,76,70,0.22)";ctx.lineWidth=6;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(30,ly);ctx.quadraticCurveTo(30+lw/2,ly+1.5,30+lw,ly);ctx.stroke();}
+  if(o.stamp)stamp(ctx,w-16,h-18,o.stamp,o.stampCol||KIND,o.stampA==null?1:o.stampA,0);ctx.restore();});}
+// a clay tablet: a soft pillow of clay, speckled and lit from the upper left, with ruled grooves and wedges pressed in (p presses them)
+function kt_tablet(ctx,x,y,w,h,p,a,t){t=t||0;withA(ctx,a==null?1:a,()=>{ctx.save();ctx.translate(x,y);
+  const shape=()=>{const n=96,P=[];for(let i=0;i<n;i++){const an=i/n*TAU,c=Math.cos(an),s_=Math.sin(an),e=0.38,wob=1+0.01*Math.sin(an*3+1.3)+0.006*Math.sin(an*7);P.push([w/2+w/2*Math.sign(c)*Math.pow(Math.abs(c),e)*wob,h/2+h/2*Math.sign(s_)*Math.pow(Math.abs(s_),e)*wob]);}
+    ctx.beginPath();ctx.moveTo((P[0][0]+P[n-1][0])/2,(P[0][1]+P[n-1][1])/2);for(let i=0;i<n;i++){const q=P[i],r=P[(i+1)%n];ctx.quadraticCurveTo(q[0],q[1],(q[0]+r[0])/2,(q[1]+r[1])/2);}ctx.closePath();};
+  ctx.shadowColor="rgba(0,0,0,0.7)";ctx.shadowBlur=30;ctx.shadowOffsetY=12;shape();ctx.fillStyle="#977250";ctx.fill();ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+  const g=ctx.createLinearGradient(0,0,w,h);g.addColorStop(0,"rgba(255,226,180,0.32)");g.addColorStop(0.5,"rgba(255,226,180,0)");g.addColorStop(1,"rgba(40,20,8,0.42)");shape();ctx.fillStyle=g;ctx.fill();
+  ctx.save();shape();ctx.clip();const lx=w*(0.35+0.15*Math.sin(t*0.35)),lg=ctx.createRadialGradient(lx,h*0.3,4,lx,h*0.35,w*0.6);lg.addColorStop(0,"rgba(255,230,190,0.16)");lg.addColorStop(1,"rgba(255,230,190,0)");ctx.fillStyle=lg;ctx.fillRect(0,0,w,h);
+    for(let i=0;i<Math.floor(w*h/260);i++){const px=hash(i,31)*w,py=hash(i,32)*h,r=0.5+hash(i,33)*1.8;ctx.fillStyle=hash(i,34)>0.55?"rgba(60,36,18,0.22)":"rgba(255,225,185,0.14)";ctx.beginPath();ctx.ellipse(px,py,r*1.4,r,hash(i,35)*3,0,TAU);ctx.fill();}
+    ctx.strokeStyle="rgba(60,36,18,0.28)";ctx.lineWidth=1;[[0.1,0.7,0.3,0.95],[0.82,0.05,0.93,0.3]].forEach(([a0,b0,a1,b1])=>{ctx.beginPath();ctx.moveTo(w*a0,h*b0);ctx.bezierCurveTo(w*(a0+0.03),h*(b0+0.08),w*(a1-0.04),h*(b1-0.06),w*a1,h*b1);ctx.stroke();});
+    for(let r=1;r<4;r++){const yy=r*h/4;ctx.strokeStyle="rgba(58,34,16,0.4)";ctx.lineWidth=2.2;ctx.beginPath();ctx.moveTo(w*0.05,yy);ctx.bezierCurveTo(w*0.35,yy-2,w*0.65,yy+2,w*0.95,yy);ctx.stroke();ctx.strokeStyle="rgba(255,226,180,0.22)";ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(w*0.05,yy+2);ctx.bezierCurveTo(w*0.35,yy,w*0.65,yy+4,w*0.95,yy+2);ctx.stroke();}
+    const n=32,sh=Math.floor(n*clamp(p,0,1)),sz=Math.min(w/26,h/9);for(let i=0;i<sh;i++){const row=Math.floor(i/8),c=i%8,px=w*0.09+c*(w*0.84)/8+hash(i,2)*5,py=row*h/4+h/8+(hash(i,6)-0.5)*4,k=hash(i,3),rot=k<0.55?0:Math.PI/2*(k<0.8?1:0.5);
+      ctx.save();ctx.translate(px,py);ctx.rotate(rot);ctx.beginPath();ctx.moveTo(0,-sz*0.45);ctx.quadraticCurveTo(sz*0.18,0,0,sz*0.45);ctx.quadraticCurveTo(sz*0.5,sz*0.12,sz*1.5,sz*0.04);ctx.quadraticCurveTo(sz*0.5,-sz*0.1,0,-sz*0.45);ctx.closePath();
+      ctx.fillStyle="rgba(56,32,14,0.82)";ctx.fill();ctx.strokeStyle="rgba(255,226,180,0.32)";ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(0,sz*0.45);ctx.quadraticCurveTo(sz*0.5,sz*0.14,sz*1.5,sz*0.06);ctx.stroke();ctx.restore();}
+  ctx.restore();ctx.restore();});}
+// a diploma: a sheet with softly rolled ends, a few lines of script, and a ribbon with a wax seal that sways
+function kt_diploma(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{const rh=Math.max(8,h*0.09);
+  kt_paper(ctx,x,y+rh*0.5,w,h-rh,t,{seed:o.seed||5,col:[242,233,212],curl:0,age:0.12});
+  [y+rh*0.5,y+h-rh*0.5].forEach((ry,k)=>{const g=ctx.createLinearGradient(0,ry-rh/2,0,ry+rh/2);g.addColorStop(0,"#b99a6c");g.addColorStop(0.45,"#f6ead0");g.addColorStop(1,"#8e7048");ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(x-rh*0.3,ry-rh/2);ctx.bezierCurveTo(x+w/3,ry-rh/2-1.5,x+2*w/3,ry-rh/2+1.5,x+w+rh*0.3,ry-rh/2);ctx.quadraticCurveTo(x+w+rh*0.9,ry,x+w+rh*0.3,ry+rh/2);ctx.bezierCurveTo(x+2*w/3,ry+rh/2+1.5,x+w/3,ry+rh/2-1.5,x-rh*0.3,ry+rh/2);ctx.quadraticCurveTo(x-rh*0.9,ry,x-rh*0.3,ry-rh/2);ctx.fill();});
+  if(o.title)T(ctx,o.title,x+w/2,y+rh+h*0.2,{w:800,size:Math.max(12,h*0.13),align:"center",color:"rgba(70,50,30,0.95)"});
+  for(let i=0;i<3;i++){const ly=y+rh+h*(0.36+i*0.13),lw=w*(0.62-i*0.12),lx=x+(w-lw)/2;ctx.strokeStyle="rgba(80,60,40,0.4)";ctx.lineWidth=Math.max(1,h*0.018);ctx.beginPath();ctx.moveTo(lx,ly);for(let q=1;q<=6;q++)ctx.quadraticCurveTo(lx+lw*(q-0.5)/6,ly+((q%2)?-1:1)*h*0.015,lx+lw*q/6,ly);ctx.stroke();}
+  const sx=x+w*0.72,sy=y+h*0.8,sw=Math.sin(t*1.4)*h*0.03,rw=Math.max(3,h*0.05);ctx.fillStyle="rgba(150,30,36,0.95)";[-1,1].forEach(d=>{ctx.beginPath();ctx.moveTo(sx+d*rw*0.4,sy);ctx.quadraticCurveTo(sx+d*rw+sw,sy+h*0.14,sx+d*rw*1.6+sw*1.4,sy+h*0.26);ctx.lineTo(sx+d*rw*0.6+sw*1.4,sy+h*0.24);ctx.quadraticCurveTo(sx+sw*0.8,sy+h*0.12,sx-d*rw*0.4,sy);ctx.fill();});
+  waxSeal(ctx,sx,sy,Math.max(8,h*0.1),WAX,1,1);});}
 // a proposal on its way: a small card carried along a path, for the review and the gate
 function kt_prop(ctx,x,y,s,col,a,o){o=o||{};withA(ctx,a,()=>{const w=tw(ctx,s,17,700)+36;glass(ctx,x-w/2,y-22,w,44,12,col,{glow:14,ea:0.85,fill:"rgba(8,12,24,0.95)",lw:o.dash?2:1.6});if(o.dash){ctx.save();ctx.setLineDash([6,5]);ctx.strokeStyle=rgba(col,1);ctx.lineWidth=2;rr(ctx,x-w/2,y-22,w,44,12);ctx.stroke();ctx.restore();}
   T(ctx,s,x,y+6,{w:700,size:17,align:"center",color:rgba(col,1)});});}
 
 /* ---------- pictures for the labs and the scenarios (site/assets/keeping-it-true/learn.*.js name them in "vis") ----------
-   Each draws on a canvas of w × h, with the lab's state and the page's words (window.FW). */
+   Each draws on a canvas of w × h, with the lab's state and the page's words (window.FW); any text it draws comes from FW.vis
+   or the lab's own words, so the Spanish pages show Spanish. Lab pictures are shown at about half size, so their text is 22 px
+   or more; scenario pictures at about 70%, so theirs is 18 px or more. */
+// several lines of text, split on "\n"
+function kt_lines(c,s,x,y,o){String(s).split("\n").forEach((l,i)=>T(c,l,x,y+i*(o.lh||o.size*1.2),o));}
 // a sort lab: its buckets as three trays, with a numbered chip for each item placed (green or red once checked)
 function kt_trays(c,w,h,st,L,id,cols,icons){const lab=L.labs.find(x=>x.id===id),B=lab.w.buckets,n=B.length,tw_=(w-40-(n-1)*20)/n,pick=st.pick||{};
-  B.forEach(([k,name],i)=>{const x=20+i*(tw_+20),y=56,col=cols[i];glass(c,x,y,tw_,h-76,16,col,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.94)"});icons[i](c,x+30,y-18);
-    wrapT(c,name,x+60,y-10,tw_-70,{w:700,size:17,color:rgba(col,1)});
-    const inB=lab.w.items.map((it,j)=>[it,j]).filter(([it,j])=>pick[j]===k);inB.forEach(([it,j],q)=>{const cx=x+30+(q%4)*((tw_-40)/4)+10,cy=y+54+Math.floor(q/4)*62,ok=it.b===k,cc=st.checked?(ok?GOOD:BAD):[190,205,230];
-      glow(c,cx+14,cy+14,30,cc,0.25);c.fillStyle="rgba(10,16,30,0.95)";c.beginPath();c.arc(cx+14,cy+14,22,0,TAU);c.fill();ring(c,cx+14,cy+14,22,cc,1,2.5);T(c,String(j+1),cx+14,cy+21,{w:800,size:20,align:"center",color:rgba(cc,1)});});});}
+  B.forEach(([k,name],i)=>{const x=20+i*(tw_+20),y=20,col=cols[i];glass(c,x,y,tw_,h-40,18,col,{glow:12,ea:0.75,fill:"rgba(7,12,24,0.94)"});icons[i](c,x+36,y+44);
+    wrapT(c,name,x+68,y+52,tw_-84,{w:800,size:24,color:rgba(col,1)});
+    const inB=lab.w.items.map((it,j)=>[it,j]).filter(([it,j])=>pick[j]===k);inB.forEach(([it,j],q)=>{const cx=x+44+(q%4)*((tw_-60)/4),cy=y+130+Math.floor(q/4)*66,ok=it.b===k,cc=st.checked?(ok?GOOD:BAD):[190,205,230];
+      glow(c,cx,cy,34,cc,0.25);c.fillStyle="rgba(10,16,30,0.95)";c.beginPath();c.arc(cx,cy,25,0,TAU);c.fill();ring(c,cx,cy,25,cc,1,3);T(c,String(j+1),cx,cy+9,{w:800,size:26,align:"center",color:rgba(cc,1)});});});}
+// the chain for the steps lab: eight steps in two rows, the second running back, lit up to the step you're on
+function kt_chain2(c,w,h,step,labels){const bw=206,bh=100,gx=(w-4*bw)/5,P=i=>i<4?[gx+i*(bw+gx),30]:[gx+(7-i)*(bw+gx),30+bh+60];
+  c.strokeStyle="rgba(170,200,245,0.25)";c.lineWidth=3;c.beginPath();for(let i=0;i<8;i++){const [x,y]=P(i);i?c.lineTo(x+bw/2,y+bh/2):c.moveTo(x+bw/2,y+bh/2);}c.stroke();
+  const lit=Math.min(8,step+1);if(lit>1){const pts=[];for(let i=0;i<lit;i++){const [x,y]=P(i);pts.push({x:x+bw/2,y:y+bh/2});}beam(c,pts,TRUST,[[16,0.06],[6,0.2],[2.6,0.85]]);}
+  labels.forEach((s,i)=>{const [x,y]=P(i),on=i<lit,cur=i===step,col=on?TRUST:[150,165,190];if(cur)glow(c,x+bw/2,y+bh/2,140,TRUST,0.25);
+    glass(c,x,y,bw,bh,16,col,{glow:on?(cur?26:12):4,ea:on?0.95:0.4,fill:"rgba(8,12,24,0.96)"});const ls=String(s).split("\n");kt_lines(c,s,x+bw/2,y+bh/2+9-(ls.length-1)*13,{w:800,size:22,lh:27,align:"center",color:on?rgba(INK,1):rgba(SOFT,0.75)});
+    if(on&&!cur)kt_gtick(c,x+bw-8,y+6,14,1);});}
+// a small light dashboard row: its name and its number
+function kt_dashRow(c,x,y,w,name,num,col){glass(c,x-6,y-6,w+12,72,14,[170,205,255],{glow:8,ea:0.4,fill:"rgba(8,14,28,0.95)"});c.save();rr(c,x,y,w,60,10);c.clip();c.fillStyle=DB.card;c.fillRect(x,y,w,60);c.fillStyle=rgba(col,1);c.fillRect(x,y,8,60);c.restore();
+  T(c,name,x+24,y+38,{w:700,size:22,color:DB.text});T(c,num,x+w-20,y+44,{w:800,size:38,align:"right",color:DB.text});}
 const LV={
   // Spot the drift: drift, fine as agreed, or a new version
-  drift:(c,w,h,st,L)=>kt_trays(c,w,h,st,L,"drift",[EDGE_,GOOD,TRUST],[(c,x,y)=>{c.fillStyle=rgba(EDGE_,1);c.font=font(800,26);c.fillText("≈",x-10,y+14);},(c,x,y)=>tick_(c,x,y+6,26,GOOD,1),(c,x,y)=>stamp(c,x+24,y+6,"v3",TRUST,1,0)]),
-  // Approve or reject: the agent's proposals, sorted by the people who own them
-  review:(c,w,h,st,L)=>kt_trays(c,w,h,st,L,"review",[TRUST,BAD,AMBER],[(c,x,y)=>kt_gtick(c,x,y+4,13,1),(c,x,y)=>kt_rcross(c,x,y+4,13,1),(c,x,y)=>{ring(c,x,y+4,13,AMBER,1,2.5);T(c,"?",x,y+11,{w:800,size:18,align:"center",color:rgba(AMBER,1)});}]),
+  drift:(c,w,h,st,L)=>kt_trays(c,w,h,st,L,"drift",[EDGE_,GOOD,TRUST],[(c,x,y)=>{T(c,"≈",x,y+12,{w:800,size:40,align:"center",color:rgba(EDGE_,1)});},(c,x,y)=>tick_(c,x,y,32,GOOD,1),(c,x,y)=>{glass(c,x-22,y-18,48,36,9,TRUST,{glow:8,ea:0.9,fill:"rgba(7,12,24,0.95)"});T(c,"v3",x+2,y+8,{f:"mono",w:500,size:22,align:"center",color:rgba(TRUST,1)});}]),
+  // Approve or reject: the agent's proposals, sorted by the people who decide
+  review:(c,w,h,st,L)=>kt_trays(c,w,h,st,L,"review",[TRUST,BAD,AMBER],[(c,x,y)=>kt_gtick(c,x,y,18,1),(c,x,y)=>kt_rcross(c,x,y,18,1),(c,x,y)=>{ring(c,x,y,18,AMBER,1,3);T(c,"?",x,y+9,{w:800,size:24,align:"center",color:rgba(AMBER,1)});}]),
   // Follow one change: the chain, lit up to the step you're on; the last step is the version note
-  chain:(c,w,h,st)=>{const k=st.step||0;kt_chain(c,20,90,w-40,{lit:Math.min(7,k+1),h:120,size:0.9,gap:10,hiK:Math.min(6,k)});
-    kt_agent(c,70,290,26,1.2,{a:k<1?1:0.5});T(c,"agent drafts",110,298,{w:700,size:16,color:rgba(KT_AI,1)});
-    if(k>=7){kt_versions(c,w-300,330,3,{sub:"completion rate v3"});kt_report(c,330,215,300,{h:180,rows:[["completion rate","62%"]],stamp:"read with v2"});}
-    else T(c,["Mei approves the meaning","Mei approves the meaning","Noor approves the model","the teams build both shapes","the teams build the measure","the tests run first","every tool asks the same measure"][k],w/2,320,{w:700,size:22,align:"center",color:rgba(TRUST,1)});},
-  // scenarios
-  three:(c,w,h)=>{KT_DASH.forEach((d,i)=>kt_dash(c,24+i*194,70,178,150,{name:d.name,col:d.col,num:d.num}));T(c,"“completion rate”",300,270,{w:700,size:22,align:"center",color:rgba(EDGE_,1)});},
-  invent:(c,w,h)=>{kt_agent(c,80,120,34,1);glass(c,150,60,420,150,16,KT_AI,{glow:14,ea:0.8,fill:"rgba(6,16,20,0.95)"});T(c,"draft · glossary",176,94,{w:700,size:16,color:rgba(KT_AI,1)});T(c,"completion rate =",176,134,{w:800,size:22});T(c,"passed ÷ enrolled on day one",176,168,{f:"mono",w:500,size:18});kt_rstamp(c,390,250,"nobody agreed",EDGE_,1,1,{size:26});},
-  skip:(c,w,h)=>{glass(c,210,40,180,90,14,TRUST,{glow:10,ea:0.6,fill:"rgba(7,12,24,0.94)"});T(c,"review",300,94,{w:700,size:20,align:"center",color:rgba(TRUST,1)});c.save();c.setLineDash([9,8]);c.strokeStyle=rgba(BAD,0.9);c.lineWidth=3;c.beginPath();c.moveTo(60,230);c.lineTo(430,230);c.stroke();c.restore();
-    kt_prop(c,120,230,"change #219",BAD,1,{dash:true});gate(c,460,220,150,BAD,"tests");T(c,"contract · tests",460,310,{w:700,size:16,align:"center",color:rgba(BAD,1)});kt_dash(c,500,170,90,90,{name:"",num:"71%",col:KT_PLAN});},
-  lastyear:(c,w,h)=>{kt_report(c,40,30,300,{h:230,stamp:"read with v2"});kt_gloss(c,370,50,210,{term:"v3",lines:["÷ enrolled","at census"],ver:"2027",h:210,kind:"completion rate"});},
-  spec:(c,w,h)=>{[["2026",0.5],["2027",1]].forEach(([y_,a],i)=>withA(c,a,()=>{glass(c,60+i*270,50,240,220,16,[200,215,240],{glow:10,ea:0.6,fill:"rgba(8,14,28,0.94)"});T(c,"Government spec",80+i*270,88,{w:700,size:16,color:rgba(SOFT,1)});T(c,y_,80+i*270,140,{w:800,size:44});if(i)tag(c,180+i*270,210,"+ outcome",AMBER,{align:"center",size:16});}));},
-  who:(c,w,h)=>{[["mei","the meaning"],["noor","the model"],["sam","the build"]].forEach(([id,s],i)=>{person(c,id,110+i*190,300,0.36,{t:1});tag(c,110+i*190,50,s,TRUST,{align:"center",size:17});});},
-  ghost:(c,w,h)=>{kt_report(c,30,60,230,{h:200,title:"Report 2019",rows:[["completion","58%"]]});withA(c,0.55,()=>{glass(c,290,70,280,130,16,[200,210,230],{glow:18,ea:0.6,fill:"rgba(10,14,26,0.7)"});T(c,"completion rate (v1)",310,108,{w:700,size:18,color:rgba(SOFT,1)});T(c,"finished ÷ logged in",310,146,{f:"mono",w:500,size:17});});kt_agent(c,500,250,28,1);},
-  order:(c,w,h)=>{kt_chain(c,20,110,w-40,{lit:7,h:100,size:0.62,gap:6});}
+  chain:(c,w,h,st,L)=>kt_chain2(c,w,h,st.step||0,L.vis.chain),
+  // scenarios (600 × 320)
+  three:(c,w,h,st,L)=>{const V=L.vis;T(c,V.rateQ,300,44,{w:800,size:26,align:"center",color:rgba(EDGE_,1)});KT_DASH.forEach((d,i)=>kt_dashRow(c,60,80+i*80,480,V.dash[i],d.num,d.col));},
+  invent:(c,w,h,st,L)=>{const V=L.vis;kt_agent(c,64,96,34,1);glass(c,120,30,460,190,18,KT_AI,{glow:16,ea:0.85,fill:"rgba(6,16,20,0.95)"});T(c,V.draft,146,70,{w:700,size:20,color:rgba(KT_AI,1)});T(c,V.rateEq,146,118,{w:800,size:26});T(c,V.invented,146,166,{f:"mono",w:500,size:19});
+    kt_rstamp(c,360,262,V.nobody,EDGE_,1,1,{size:28,rot:-0.06});},
+  skip:(c,w,h,st,L)=>{const V=L.vis;glass(c,180,30,200,70,14,TRUST,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.94)"});T(c,V.review,280,73,{w:800,size:24,align:"center",color:rgba(TRUST,1)});
+    c.save();c.setLineDash([12,9]);c.strokeStyle=rgba(BAD,0.9);c.lineWidth=3.5;c.beginPath();c.moveTo(40,170);c.bezierCurveTo(200,170,250,190,420,170);c.stroke();c.restore();
+    const cw=tw(c,V.change,20,700)+30;glass(c,40,146,cw,48,12,BAD,{glow:12,ea:0.9,fill:"rgba(20,8,10,0.95)"});T(c,V.change,40+cw/2,177,{w:700,size:20,align:"center",color:rgba(BAD,1)});
+    T(c,V.notReviewed,280,236,{w:700,size:20,align:"center",color:rgba(BAD,1)});gate(c,470,165,190,BAD,"tests");kt_rcross(c,430,170,18,1);T(c,V.gate,470,296,{w:700,size:20,align:"center",color:rgba(BAD,1)});},
+  lastyear:(c,w,h,st,L)=>{const V=L.vis;kt_report(c,24,30,290,{h:250,title:V.report,rows:[[V.rateL,""]],big:"62%",stamp:V.readV2,rot:-0.02});
+    glass(c,340,50,240,210,18,TRUST,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(c,V.v3,360,86,{w:800,size:18,color:rgba(TRUST,1)});T(c,"71%",360,150,{w:800,size:48});wrapT(c,V.v3f,360,192,200,{f:"mono",w:500,size:18});},
+  spec:(c,w,h,st,L)=>{const V=L.vis;[["2026",0.55],["2027",1]].forEach(([y_,a],i)=>withA(c,a,()=>{const x=50+i*270;glass(c,x,40,230,240,18,[200,215,240],{glow:10,ea:0.6,fill:"rgba(8,14,28,0.94)"});kt_lines(c,V.spec,x+22,80,{w:700,size:19,lh:24,color:rgba(SOFT,1)});T(c,y_,x+22,176,{w:800,size:52});
+    if(i)tag(c,x+115,236,V.outcome,AMBER,{align:"center",size:20});}));arrowTo(c,286,160,316,160,SOFT,0.8,{head:10});},
+  who:(c,w,h,st,L)=>{const V=L.vis;[["mei",V.meaning,"Mei"],["noor",V.model,"Noor"],["team",V.build,V.teams]].forEach(([id,s,n],i)=>{const x=110+i*190;if(id==="team"){person(c,"sam",x-34,306,0.33,{t:1});person(c,"ben",x+34,306,0.33,{t:2});}else person(c,id,x,306,0.35,{t:1});
+    tag(c,x,34,s,TRUST,{align:"center",size:20});T(c,n,x,80,{w:700,size:19,align:"center",color:rgba(SOFT,1)});});},
+  ghost:(c,w,h,st,L)=>{const V=L.vis;kt_report(c,20,70,250,{h:210,title:V.report2019,rows:[[V.completion,"58%"]],rot:-0.03,curl:0});
+    const wob=Math.sin(1.3)*3;withA(c,0.6,()=>{glass(c,296,30,290,170,18,[200,210,230],{glow:22,ea:0.6,fill:"rgba(10,14,26,0.7)"});T(c,V.v1,316,72,{w:700,size:20,color:rgba(SOFT,1)});wrapT(c,V.v1f,316,118+wob,254,{f:"mono",w:500,size:20,lh:28});});
+    kt_agent(c,520,250,34,1);arrowTo(c,270,150,296,120,[200,210,230],0.7,{head:10,dash:[5,5]});},
+  order:(c,w,h,st,L)=>{const V=L.vis;kt_folder(c,40,40,520,250,{title:V.pkg,ts:20});[[70,110,-0.06],[250,150,0.05],[360,96,-0.03]].forEach(([x,y,r],i)=>{c.save();c.translate(x,y);c.rotate(r);glass(c,0,0,200,70,12,KT_AI,{glow:10,ea:0.8,fill:"rgba(6,16,20,0.96)"});T(c,V.cards[i],100,44,{w:800,size:21,align:"center",color:rgba(KT_AI,1)});c.restore();});
+    T(c,"?",170,262,{w:800,size:50,align:"center",color:rgba(TRUST,1)});}
 };

@@ -1,0 +1,118 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:11.979
+Hace casi cuatro mil años, en Mesopotamia, los aprendices de escriba practicaban en arcilla. Algunas tablillas escolares tienen el modelo del maestro, con la copia del alumno al lado.
+
+00:00:13.279 --> 00:00:21.326
+En la Europa medieval, un aprendiz se convertía en maestro haciendo una obra maestra: una sola pieza, juzgada por los maestros del gremio.
+
+00:00:22.026 --> 00:00:30.257
+En China, los exámenes imperiales evaluaron a candidatos durante trece siglos, y el rango obtenido abría el camino a los cargos públicos.
+
+00:00:31.457 --> 00:00:43.895
+Las universidades medievales otorgaban una licencia para enseñar, bajo un sello de cera. Luego llegaron el diploma, el certificado de notas, la insignia digital y, hoy, una credencial firmada con una clave digital.
+
+00:00:45.195 --> 00:00:48.931
+Los materiales cambiaban cada tantos siglos. La idea, no.
+
+00:00:55.231 --> 00:00:58.386
+Mira de cerca, y todas tienen las mismas partes.
+
+00:00:59.086 --> 00:01:03.485
+Alguien de confianza la emite: un gremio, los examinadores, una universidad.
+
+00:01:04.585 --> 00:01:08.727
+Nombra a un titular, y hace una afirmación sobre él: esta persona sabe hacer esto.
+
+00:01:09.827 --> 00:01:15.238
+Se apoya en evidencia: una obra maestra, un examen, una evaluación. Y tiene una fecha.
+
+00:01:16.438 --> 00:01:23.815
+Otra persona puede comprobarla: por el sello, por la firma o, hoy, por la clave digital. Algunas vencen. Unas pocas se revocan.
+
+00:01:25.115 --> 00:01:32.935
+El estándar actual de credenciales digitales usa casi las mismas palabras: emisor, titular, verificador, afirmaciones y evidencia.
+
+00:01:34.335 --> 00:01:38.554
+Un modelo conceptual puede durar más que cualquier material en que se haya escrito.
+
+00:01:43.854 --> 00:01:47.385
+En la universidad, las credenciales hoy viven en cinco sistemas.
+
+00:01:48.085 --> 00:01:56.119
+El sistema de estudiantes guarda títulos. La plataforma de aprendizaje, cursos completados. Empleabilidad, insignias. Una billetera digital, las copias firmadas.
+
+00:01:57.319 --> 00:02:04.044
+Y la nueva plataforma de cursos cortos, comprada lista para usar, guarda las microcredenciales. A los aprendices los llama clientes.
+
+00:02:05.244 --> 00:02:09.517
+Comprar un sistema es adoptar su modelo, lo mires o no.
+
+00:02:10.617 --> 00:02:13.923
+Si no modelas tu negocio, tus proveedores lo harán por ti.
+
+00:02:16.623 --> 00:02:23.555
+Conecta cinco sistemas de a pares, y necesitas hasta diez traducciones. En cada una, el significado puede desviarse.
+
+00:02:24.855 --> 00:02:36.505
+En 1999, una nave espacial se perdió en Marte. El software de un equipo daba el empuje de los propulsores en libras-fuerza-segundo. El de navegación esperaba newtons-segundo.
+
+00:02:38.005 --> 00:02:41.615
+Cada lado tenía sentido por sí solo. El significado se rompió entre los dos.
+
+00:02:42.915 --> 00:02:51.161
+Así que traduce cada sistema una vez, a un modelo compartido. Cinco traducciones, no diez, y un solo lugar donde el significado queda escrito.
+
+00:02:53.861 --> 00:03:01.597
+Tomemos a una aprendiz: Aisha. Tiene cuatro ID: número de estudiante, usuario de la plataforma, número de cliente y dirección de billetera.
+
+00:03:03.097 --> 00:03:09.620
+Su nombre viene del sistema de estudiantes, su correo de TI, y sus credenciales de tres lugares distintos.
+
+00:03:11.020 --> 00:03:17.720
+Elegir qué sistema es la fuente de cada dato, y unir los registros que son la misma persona, es gestionar datos maestros.
+
+00:03:19.220 --> 00:03:27.314
+Y las listas de valores compartidas, como los tipos de credencial, hacen que una palabra signifique lo mismo en cada sistema. Eso son datos de referencia.
+
+00:03:30.014 --> 00:03:34.651
+El boceto en papel dice qué importa. El modelo lógico lo dice con precisión.
+
+00:03:35.851 --> 00:03:40.162
+¿Qué identifica a una credencial? Quién la emitió, a quién, qué afirma y cuándo.
+
+00:03:41.462 --> 00:03:46.843
+Sus atributos, y los valores que puede tomar cada uno: el nivel, el volumen de aprendizaje, el estado.
+
+00:03:48.143 --> 00:03:56.366
+Cuántos de una cosa se relacionan con otra: un aprendiz tiene muchas credenciales, y una microcredencial puede contar para varios títulos.
+
+00:03:57.766 --> 00:04:01.008
+Y las reglas: una credencial revocada nunca se cuenta.
+
+00:04:02.508 --> 00:04:12.756
+Todavía sin tecnología. Eso es lo que lo hace útil: es la vara con la que se mide cada sistema, para elegir un paquete, relacionar sus campos o mudarse a uno nuevo.
+
+00:04:15.456 --> 00:04:22.268
+Cada parte tiene un responsable. La palabra título es de Registro académico. Microcredencial, de Cursos cortos.
+
+00:04:23.468 --> 00:04:29.146
+Noor, la arquitecta de datos, es responsable del modelo lógico, y cada equipo, de sus tablas.
+
+00:04:30.246 --> 00:04:37.946
+Un cambio de significado baja, de las palabras a los sistemas. El aviso de un cambio en un sistema sube, antes de que salga.
+
+00:04:39.346 --> 00:04:43.054
+Los responsables deciden. Los custodios lo mantienen escrito, y al día.
+
+00:04:45.754 --> 00:04:50.493
+La plataforma de cursos cortos todavía los llama clientes. Por dentro, nada cambió.
+
+00:04:51.193 --> 00:04:57.187
+Pero ahora su cliente corresponde a aprendiz, y su certificado, a microcredencial. El significado queda unido.
+
+00:04:58.487 --> 00:05:03.904
+Los sistemas van y vienen cada década, más o menos. Las ideas de fondo tienen siglos.
+
+00:05:05.204 --> 00:05:11.277
+Modélalas una vez, con precisión, y mide cada sistema con ellas. Siguiente: un modelo, muchas formas.

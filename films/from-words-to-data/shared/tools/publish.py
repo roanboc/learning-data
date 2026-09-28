@@ -15,8 +15,10 @@ if (DIST / 'soundtrack.mp3').exists():
     shutil.copyfile(DIST / 'soundtrack.mp3', dst / 'soundtrack.mp3')
 else:
     print('no dist/soundtrack.mp3 yet: run tools/audio.py first')
+copied = ['film.js', 'soundtrack.mp3'] if (DIST / 'soundtrack.mp3').exists() else ['film.js']
 if (ROOT / 'src' / 'i18n' / 'es' / 'captions.js').exists():
     shutil.copyfile(ROOT / 'src' / 'i18n' / 'es' / 'captions.js', dst / 'captions.es.js')
+    copied.append('captions.es.js')
 else:
     print('no src/i18n/es/captions.js yet: the Spanish page needs it')
 sid, cid, off = META['poster']
@@ -29,4 +31,4 @@ with sync_playwright() as p:
     d = pg.evaluate("""(t)=>{const c=document.createElement('canvas');c.width=1280;c.height=720;renderFrame(c.getContext('2d'),1280/1920,t);return c.toDataURL('image/jpeg',0.88);}""", t)
     b.close()
 (REPO / 'site' / 'assets' / (META['key'] + '-poster.jpg')).write_bytes(base64.b64decode(d[23:]))
-print('copied film.js, soundtrack.mp3 and captions.es.js to site/assets/%s/, and drew the poster at %.1f s' % (META['key'], t))
+print('copied %s to site/assets/%s/, and drew the poster at %.1f s' % (', '.join(copied), META['key'], t))

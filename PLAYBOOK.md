@@ -114,6 +114,20 @@ What *A Sharper Sketch* and *When things go wrong* added once there was more tha
 
 *Ask: what did the last film teach us, and where is it written down?*
 
+## 9. From a series to a course
+
+What *From words to data*, seven films made together, added.
+
+- **Follow one idea through every film.** The credential runs through all seven, from four offices' four numbers to an AI agent's draft, so each film picks up where the last one left it. A thread keeps a course from becoming a row of lectures.
+- **Start each film in the past, with something still true.** A monkey's alarm call, a merchant's ledger, a library's card catalogue, a cash register: each opens a film with an idea that outlived its materials. History carries the concept; the present tests it.
+- **Give every film its own sound.** One shared motif (four notes, in each film's key and on its own instrument) ties them together; everything else differs: a kalimba and a choir, an organ and a lute, a marimba against strings, library jazz, synth arpeggios, glass bells, strings and a clock. Seven films with one palette would sound like one long film.
+- **Share tools, not copies.** One set of tools and one instrument library serve every film; each film keeps only its own words, pictures and score. A fix lands everywhere at once.
+- **Write the narration first, for all the films.** Voicing every script before drawing any picture fixes the timeline, shows which films are too thin, and lets the pictures be made in parallel.
+- **Generate what repeats, and check it's current.** With forty pages in two languages, the pages come from each film's data (`site-tools/build_series.py`), and the site check fails if a page isn't what the generator makes.
+- **Build labs from a few kinds.** Sort, count, pick, compose and step through cover most ideas; each lab is words plus one picture drawn with the film's own components. Every word a picture draws comes from the language pack, and text is sized for the lab's real width.
+
+*Ask: if someone watched only one film, would they still want the next?*
+
 ## Checklists
 
 **Before the script**

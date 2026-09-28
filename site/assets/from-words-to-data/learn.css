@@ -1,0 +1,36 @@
+/* From words to data: the few lab pieces site.css doesn't have. Labs are always dark, like the films (site.css: .lab). */
+.fw-rows{display:grid;gap:8px;padding:0 16px 12px}
+.fw-row{padding:10px 12px;border-radius:12px;background:rgba(16,26,50,.7);border:1px solid var(--sline);display:grid;gap:8px}
+.fw-row.ok{border-color:rgba(127,240,180,.6)}.fw-row.no{border-color:rgba(255,143,134,.65)}
+.fw-item{margin:0;font-weight:700;font-size:15px;color:var(--sfg)}
+.fw-why{margin:0;font-size:14px;color:var(--smuted)}.fw-why b{color:var(--sfg)}
+.fw-row.ok .fw-why b{color:#7ff0b4}.fw-row.no .fw-why b{color:#ff8f86}
+.fw-row .seg button{padding:6px 11px;font-size:13px}
+.fw-toggles{display:grid;gap:6px;padding:0 16px 12px}
+.fw-toggles label{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:center;padding:8px 12px;border-radius:10px;background:rgba(16,26,50,.7);border:1px solid var(--sline);font-size:14px;color:var(--sfg);cursor:pointer}
+.fw-toggles input{accent-color:#ffd166;width:18px;height:18px}
+.fw-toggles b{font-family:var(--mono);font-weight:500;color:var(--smuted)}
+.fw-total{margin:0;padding:4px 16px 10px;display:flex;align-items:baseline;gap:12px;color:var(--smuted);font-size:14px}
+.fw-total b{font-size:40px;line-height:1.1;color:#ffd166;font-weight:800}
+.fw-targets{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;padding:0 16px 12px}
+.fw-target{margin:0;padding:8px 12px;border-radius:12px;background:rgba(16,26,50,.7);border:1px solid var(--sline);display:grid;grid-template-columns:10px 1fr auto;gap:8px;align-items:center;font-size:13px;color:var(--smuted)}
+.fw-target i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.fw-target b{font-family:var(--mono);font-weight:500;color:var(--sfg)}
+.fw-target.hit{border-color:var(--c);box-shadow:0 0 14px color-mix(in srgb,var(--c) 45%,transparent);color:var(--sfg)}
+.fw-list{list-style:none;margin:0;padding:0 16px 12px;display:grid;gap:6px}
+.fw-list li{padding:8px 12px 8px 36px;border-radius:10px;background:rgba(16,26,50,.7);border:1px solid var(--sline);position:relative;font-size:14px;color:var(--sfg)}
+.fw-list li::before{position:absolute;left:12px;top:7px;font-weight:800}
+.fw-list li.ok{border-color:rgba(127,240,180,.55)}.fw-list li.ok::before{content:"✓";color:#7ff0b4}
+.fw-list li.no{border-color:rgba(255,143,134,.6)}.fw-list li.no::before{content:"✗";color:#ff8f86}
+.fw-list li.warn{border-color:rgba(255,210,122,.6)}.fw-list li.warn::before{content:"~";color:#ffd27a}
+.fw-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;padding:0 16px 12px}
+.fw-stats:empty{display:none}
+.fw-stats p{margin:0;padding:10px 12px;border-radius:12px;background:rgba(16,26,50,.7);border:1px solid var(--sline);display:grid;gap:2px}
+.fw-stats b{font-size:24px;line-height:1.1;color:var(--sfg)}.fw-stats span{font-size:13px;color:var(--smuted)}
+.fw-slot{border-top:0;padding-top:4px}
+.fw-sentence{margin:4px 16px 12px;padding:14px 16px;border-radius:12px;background:#f1eadb;color:#2a2622;font-size:18px;line-height:1.5}
+.fw-sentence .gap{color:#8a8278}.fw-sentence .ok{text-decoration:underline 3px rgba(40,150,90,.7);text-underline-offset:4px}.fw-sentence .no{text-decoration:underline wavy 2px rgba(200,60,50,.8);text-underline-offset:4px}
+.fw-steps{margin:0;padding:0 16px 12px 42px;display:grid;gap:6px;color:var(--smuted)}
+.fw-steps li{padding:4px 0}.fw-steps li b{color:var(--smuted);font-weight:700}
+.fw-steps li.done b{color:var(--sfg)}.fw-steps li.on b{color:#ffd166}
+.fw-steps li span{display:block;margin-top:4px;color:var(--sfg);font-size:14px}

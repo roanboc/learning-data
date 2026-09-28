@@ -1,6 +1,6 @@
 # From words to data
 
-*Proposal for an advanced series on data modelling, v0.2. In Spanish: De las palabras a los datos. Status: the shape is agreed; nothing is scripted or made yet. The film titles are working titles.*
+*Proposal for an advanced series on data modelling, v0.2. In Spanish: De las palabras a los datos. Status: made, on 28 September 2026; the [series README](README.md) describes the films as they are. This page is the plan they were made from, kept as it was agreed.*
 
 ## Decided
 

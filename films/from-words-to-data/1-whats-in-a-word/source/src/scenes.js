@@ -70,15 +70,17 @@ scene("calls",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   withA(ctx,1-nm,()=>{
     // the grassland at dusk
     ground(ctx,760,t);
-    tree(ctx,300,770,1.5,1);bush(ctx,1085,770,1.5,1);grass(ctx,0,1920,770,t,0.9);
+    tree(ctx,300,770,1.5,1,t);bush(ctx,1085,770,1.5,1,t);grass(ctx,0,1920,770,t,0.9);
     yearTag(ctx,120,120,"vervet monkeys · alarm calls",CLAY,fin(t,0.3,0.6));
     // the hunters, each with its own call
-    leopard(ctx,lerp(2000,1500,fin(t,cL-0.2,1.6)),700,2.2,LEO,{a:fin(t,cL-0.4,0.5)*(1-fin(t,cE,0.6))});
+    leopard(ctx,lerp(2000,1500,fin(t,cL-0.5,3.4)),700,2.2,LEO,{a:fin(t,cL-0.4,0.5)*(1-fin(t,cE,0.6)),t,flip:1,walk:-500*(1-fin(t,cL-0.5,3.4))});
     eagle(ctx,lerp(1900,1350,fin(t,cE-0.2,1.8)),240+Math.sin(t*1.2)*10,1.3,EAG,{a:fin(t,cE-0.3,0.5)*(1-fin(t,cS,0.6))});
-    snake(ctx,1420,748,1.3,SNK,{a:fin(t,cS-0.2,0.5)*(1-fin(t,c("kind")+2,0.8))});
+    snake(ctx,1420,748,1.3,SNK,{a:fin(t,cS-0.2,0.5)*(1-fin(t,c("kind")+2,0.8)),t,flip:1,crawl:t-cS});
     [[cL,LEO],[cE,EAG],[cS,SNK]].forEach(([c0,col])=>{const u=clamp((t-c0-0.3)/1.4,0,1);if(u>0&&u<1)for(let k=0;k<3;k++){const r=40+u*260+k*40;ring(ctx,MONK[1][0]+30,MONK[1][1]-40,r,col,(1-u)*0.7,3);}});
     MONK.forEach((m,i)=>{let x=m[0],y=m[1];x+=(TREE_SPOTS[i][0]-m[0])*wL+(BUSH_SPOTS[i][0]-m[0])*wE;y+=(TREE_SPOTS[i][1]-m[1])*wL+(BUSH_SPOTS[i][1]-m[1])*wE-30*wS;
-      monkey(ctx,x,y-44,1.4,[225,205,175],{a:1});if(wE>0.2&&wE<0.99)withA(ctx,wE,()=>T(ctx,"↑",x,y-100,{w:800,size:26,align:"center",color:rgba(EAG,1)}));if(wS>0.2)withA(ctx,wS,()=>T(ctx,"↓",x+16,y-96,{w:800,size:24,align:"center",color:rgba(SNK,1)}));});
+      monkey(ctx,x,y-44+30*wS,1.4,[225,205,175],{a:1,t,i,tree:wL,bush:wE,tall:wS,calls:[cL,cE,cS],path:[m,TREE_SPOTS[i],BUSH_SPOTS[i]]});if(wE>0.2&&wE<0.99)withA(ctx,wE,()=>T(ctx,"↑",x,y-100,{w:800,size:26,align:"center",color:rgba(EAG,1)}));if(wS>0.2)withA(ctx,wS,()=>T(ctx,"↓",x+16,y-96,{w:800,size:24,align:"center",color:rgba(SNK,1)}));});
+    // the low front of the bush, over the monkeys that dive into it
+    bush(ctx,1085,770,1.5,wE,t,{front:1});
     // the three calls, and what each one means
     [[cL,LEO,"leopard call","up into the trees"],[cE,EAG,"eagle call","look up, into the bushes"],[cS,SNK,"snake call","stand tall, search the grass"]].forEach(([c0,col,a1,a2],i)=>
       withA(ctx,fin(t,c0+0.4,0.5),()=>{glass(ctx,1240,110+i*96,560,76,16,col,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.92)"});ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(1276,148+i*96,9,0,TAU);ctx.fill();
@@ -86,11 +88,11 @@ scene("calls",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     withA(ctx,fin(t,c("kind")+0.6,0.6),()=>{ctx.strokeStyle=rgba(KIND,0.9);ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(1812,112);ctx.lineTo(1830,112);ctx.lineTo(1830,378);ctx.lineTo(1812,378);ctx.stroke();tag(ctx,1640,420,"each call: a kind of thing",KIND,{align:"center",size:20});});});
   // names: one particular animal
   withA(ctx,nm*(1-idA),()=>{[[dolphin,"dolphins",330],[elephant,"elephants",960],[marmoset,"marmosets",1590]].forEach(([f,s,x],i)=>{const a=fin(t,c("names")+0.4+i*0.7,0.6);
-    withA(ctx,a,()=>{glass(ctx,x-250,230,500,440,22,NAMEC,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.9)"});f(ctx,x,420,1.7,undefined,{a:1});T(ctx,s,x,300,{w:800,size:28,align:"center",color:rgba(NAMEC,1)});
+    withA(ctx,a,()=>{glass(ctx,x-250,230,500,440,22,NAMEC,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.9)"});f(ctx,x,420,1.7,undefined,{a:1,t:t+i*1.3});T(ctx,s,x,300,{w:800,size:28,align:"center",color:rgba(NAMEC,1)});
       nameWave(ctx,x-160,560,320,70,i,NAMEC,1,clamp((t-c("names")-0.7-i*0.7)/1.4,0,1));T(ctx,"a call like a name",x,640,{w:600,size:19,align:"center",color:rgba(SOFT,1)});});});});
   // categories and identifiers
-  withA(ctx,idA,()=>{glass(ctx,240,220,660,440,24,LEO,{glow:16,ea:0.75,fill:"rgba(7,12,24,0.92)"});leopard(ctx,570,420,1.5,LEO,{a:1});T(ctx,"a kind of thing",570,300,{w:800,size:30,align:"center",color:rgba(LEO,1)});T(ctx,"category",570,580,{f:"mono",w:500,size:26,align:"center",color:rgba(INK,0.95)});
-    glass(ctx,1020,220,660,440,24,NAMEC,{glow:16,ea:0.75,fill:"rgba(7,12,24,0.92)"});dolphin(ctx,1350,410,1.5,NAMEC,{a:1});nameWave(ctx,1230,500,240,40,0,NAMEC,1,1);T(ctx,"one particular thing",1350,300,{w:800,size:30,align:"center",color:rgba(NAMEC,1)});T(ctx,"identifier",1350,580,{f:"mono",w:500,size:26,align:"center",color:rgba(INK,0.95)});
+  withA(ctx,idA,()=>{glass(ctx,240,220,660,440,24,LEO,{glow:16,ea:0.75,fill:"rgba(7,12,24,0.92)"});leopard(ctx,570,420,1.5,LEO,{a:1,t});T(ctx,"a kind of thing",570,300,{w:800,size:30,align:"center",color:rgba(LEO,1)});T(ctx,"category",570,580,{f:"mono",w:500,size:26,align:"center",color:rgba(INK,0.95)});
+    glass(ctx,1020,220,660,440,24,NAMEC,{glow:16,ea:0.75,fill:"rgba(7,12,24,0.92)"});dolphin(ctx,1350,410,1.5,NAMEC,{a:1,t});nameWave(ctx,1230,500,240,40,0,NAMEC,1,1);T(ctx,"one particular thing",1350,300,{w:800,size:30,align:"center",color:rgba(NAMEC,1)});T(ctx,"identifier",1350,580,{f:"mono",w:500,size:26,align:"center",color:rgba(INK,0.95)});
     withA(ctx,fin(t,c("ids")+3.2,0.6),()=>tag(ctx,960,740,"every data model needs both",KIND,{align:"center",size:26}));});
   vign(ctx,S);});
 
@@ -138,7 +140,7 @@ scene("forms",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
 scene("gavagai",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   ground(ctx,700,t);grass(ctx,0,1920,710,t,0.8);
   yearTag(ctx,120,120,"1960 · a philosopher's puzzle",CLAY,fin(t,0.3,0.6));
-  const run=fin(t,0.6,4.0),rx=lerp(200,900,run),ry=660;rabbit(ctx,rx,ry,1.9,[235,225,205],t,{run:1});
+  const run=fin(t,0.6,4.0),rx=lerp(200,900,run),ry=660;rabbit(ctx,rx,ry,1.9,[235,225,205],t,{run:1,dist:rx-200+(t>2.6?175*Math.pow(Math.min(1,(t-2.6)/2),3)+262.5*Math.max(0,t-4.6):0)});
   // the stranger's pointing arm, and the word
   pointArm(ctx,-60,560,230,480,1.1,fin(t,c("rabbit")+0.8,0.6));
   withA(ctx,fin(t,c("rabbit")+3.2,0.4),()=>bubble(ctx,300,250,340,"gavagai!",WA_INK,{size:44}));

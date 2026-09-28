@@ -6,12 +6,15 @@
 
 The series starts before technology, with how minds turn the world into words, and ends with how AI can help keep a business's meaning true, end to end. In between: why conceptual and logical models matter to systems, the shapes data takes for writing and for reading, hybrid databases, and the semantic layers, ontologies and industry standards that make meaning something a machine can read. It follows one idea through all seven films, older than any system: the credential, how people prove what they know. The university's new microcredentials are its newest form, and the "sketch v3?" that ends *A Sharper Sketch* is where the series begins. The promise, as for every Learning Data film: a newcomer follows it, and an expert agrees with every line; *What's in a word* also answers to linguists and cognitive scientists.
 
-**On the site:** [From words to data](https://roanboc.github.io/learning-data/from-words-to-data/), in Spanish [De las palabras a los datos](https://roanboc.github.io/learning-data/es/from-words-to-data/). The films are in English, with English captions; their pages, chapters, Pause and think questions, labs and scenarios are in English and Spanish. Each film stands alone, and each builds on the ones before it.
+**On the site:** [From words to data](https://roanboc.github.io/learning-data/from-words-to-data/), in Spanish [De las palabras a los datos](https://roanboc.github.io/learning-data/es/from-words-to-data/). The films are in English, with English and Spanish captions; their pages, chapters, Pause and think questions, labs and scenarios are in English and Spanish. Each film stands alone, and each builds on the ones before it.
 
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Labs and scenarios | Script |
 |---|---|---|---|---|---|
 | [What's in a word](https://roanboc.github.io/learning-data/from-words-to-data/whats-in-a-word/) | Language and meaning | 6 min | 10 | 4 labs, 8 scenarios | [script](1-whats-in-a-word/script.md) · [source](1-whats-in-a-word/source/README.md) |
+| [Older than the systems](https://roanboc.github.io/learning-data/from-words-to-data/older-than-the-systems/) | Models and systems | 5½ min | 8 | 3 labs, 8 scenarios | [script](2-older-than-the-systems/script.md) · [source](2-older-than-the-systems/source/README.md) |
+| [Meaning machines can read](https://roanboc.github.io/learning-data/from-words-to-data/meaning-machines-can-read/) | Meaning and AI | 4 min | 8 | 3 labs, 8 scenarios | [script](6-meaning-machines-can-read/script.md) · [source](6-meaning-machines-can-read/source/README.md) |
+| [Keeping it true](https://roanboc.github.io/learning-data/from-words-to-data/keeping-it-true/) | Keeping meaning current | 4 min | 9 | 3 labs, 8 scenarios | [script](7-keeping-it-true/script.md) · [source](7-keeping-it-true/source/README.md) |
 <!-- /films -->
 
 The [proposal](proposal.md) records how the series was planned and the decisions taken on 28 September 2026: seven films, the title, the credential as the thread, and an opening film that starts before writing.
@@ -74,14 +77,15 @@ films/from-words-to-data/
   <n>-<film>/
     script.md                  the script, with its rigour sheet, sources and pacing report
     site.json                  the words of the film's pages, in English and Spanish
-    captions/                  en.srt and en.vtt, from the film's timeline
+    captions/                  en.srt, en.vtt, es.srt and es.vtt, from the film's timeline (the video has no captions on its picture)
     source/
       film.json                its key, title, source files, poster moment and the words the voice respells
-      src/                     narration.js, breath.js, vodur.js, its own pictures (<film>.js, with LV for the labs) and scenes.js
+      src/                     narration.js, breath.js, vodur.js, its own pictures (<film>.js, with LV for the labs), scenes.js,
+                               and i18n/es/captions.js, the Spanish captions (each English line, and its caption)
       tools/                   one line each, running the shared tools on this film; score.py is its music
 ```
 
-Each film's `source/README.md` says how to rebuild it. The short version, from a film's `source/` folder: `python tools/tts.py`, `python tools/build.py`, `python tools/audio.py`, `python tools/build.py`, `python tools/check.py`, then `python tools/render.py --workers 4` for the video or `python tools/publish.py` for the site. The release workflow renders every film from the committed source, like the other films.
+Each film's `source/README.md` says how to rebuild it. The short version, from a film's `source/` folder: `python tools/tts.py`, `python tools/build.py`, `python tools/audio.py`, `python tools/build.py`, `python tools/check.py`, then `python tools/render.py --workers 4` for the video or `python tools/publish.py` for the site. `python tools/captions.py` writes the English captions, and `FILM_LANG=es python tools/captions.py` the Spanish ones. The release workflow renders every film from the committed source, like the other films.
 
 On the site, [`site-tools/build_series.py`](../../site-tools/build_series.py) makes every page of the series, in both languages, from `series.json` and each film's `site.json`, source and words, and keeps the series' cards up to date on the home page, the topics page, *A Sharper Sketch*'s page and the overview's scenarios. Never edit those pages or blocks by hand; `site-tools/check_site.py` fails if they aren't what the generator makes. The labs and scenarios of all seven films run on one engine, [`site/assets/from-words-to-data/learn.js`](../../site/assets/from-words-to-data/learn.js), from each film's words in `site/assets/<film>/learn.en.js` and `learn.es.js`.
 
@@ -91,5 +95,5 @@ On the site, [`site-tools/build_series.py`](../../site-tools/build_series.py) ma
 2. Write the narration first, and voice it (`tools/tts.py`); check the pace (`tools/pace.py`).
 3. Draw the film's own pictures and scenes, reviewing stills (`tools/stills.py`) at every cue, until `tools/check.py` says every moment draws.
 4. Give it its own sound in `tools/score.py`, with the series' motif at the title and the end.
-5. Write its labs, scenarios and Pause and think questions in English and Spanish, with its `site.json`.
+5. Write its labs, scenarios and Pause and think questions in English and Spanish, with its `site.json`, and its Spanish captions in `src/i18n/es/captions.js`.
 6. Publish it (`tools/publish.py`), run `python site-tools/build_series.py`, then `python site-tools/check_site.py` and `python site-tools/smoke.py`.

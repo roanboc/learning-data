@@ -1,0 +1,123 @@
+1
+00:00:01,600 --> 00:00:09,894
+En 1879, el dueño de una cantina de Ohio patentó una máquina para llevar la cuenta de cada venta: la caja registradora.
+
+2
+00:00:11,094 --> 00:00:18,234
+En pocos años, las cajas registraban cada venta en el momento, y llevaban un total acumulado, listo para leer al cierre.
+
+3
+00:00:19,534 --> 00:00:22,864
+Registrar y contar en un solo lugar. Es un deseo antiguo.
+
+4
+00:00:29,164 --> 00:00:32,554
+En la universidad, escribir y leer todavía viven separados.
+
+5
+00:00:33,254 --> 00:00:41,489
+La app escribe en su propia base de datos. Por la noche, una copia viaja al lakehouse y se refina, y la respuesta está lista mañana.
+
+6
+00:00:42,789 --> 00:00:52,374
+Pero algunas preguntas no pueden esperar. Un empleador quiere verificar una credencial ya. La billetera de una aprendiz quiere mostrar, ya, cuánto le falta para un certificado de posgrado.
+
+7
+00:00:53,774 --> 00:00:56,745
+Esa distancia hace atractivas las bases de datos híbridas.
+
+8
+00:00:59,445 --> 00:01:02,580
+Una base de datos híbrida escribe y lee en un solo lugar.
+
+9
+00:01:03,280 --> 00:01:10,424
+Algunas guardan dos copias adentro: filas para escribir y columnas para leer, que la propia base de datos mantiene al paso.
+
+10
+00:01:11,824 --> 00:01:17,610
+Otras ponen una base de datos operacional dentro del lakehouse, con tablas sincronizadas en ambas direcciones.
+
+11
+00:01:18,810 --> 00:01:23,982
+La idea tiene nombre: HTAP, procesamiento híbrido transaccional y analítico.
+
+12
+00:01:26,682 --> 00:01:33,990
+Mantener dos formas al paso significa capturar cada cambio cuando ocurre, y aplicarlo del otro lado, en el mismo orden.
+
+13
+00:01:35,490 --> 00:01:43,473
+Eso solo funciona si cada fila tiene una clave estable: así una actualización encuentra la fila que cambia, y un borrado, la que quita.
+
+14
+00:01:44,873 --> 00:01:52,040
+Aplica la revocación de un título antes que su emisión, y el título vuelve a la vida. El orden importa tanto como el contenido.
+
+15
+00:01:57,240 --> 00:02:04,069
+¿Qué se va? La copia nocturna, los pipelines que la mueven, la espera, y un segundo juego de permisos que mantener al paso.
+
+16
+00:02:05,369 --> 00:02:06,753
+Son beneficios reales.
+
+17
+00:02:09,453 --> 00:02:12,068
+Ahora cuenta los títulos directamente desde las tablas de la app.
+
+18
+00:02:12,768 --> 00:02:19,912
+Los títulos revocados siguen ahí, con un estado. La facultad del año pasado se sobrescribió. El conteo sale mal.
+
+19
+00:02:21,312 --> 00:02:26,042
+Es el mismo error que contar las inscripciones hoy, en lugar de en la fecha de censo.
+
+20
+00:02:27,242 --> 00:02:34,310
+La historia, las dimensiones compartidas y las definiciones aún necesitan modelarse. Lo híbrido quita la copia, no el modelo.
+
+21
+00:02:37,010 --> 00:02:46,106
+Ahora los datos también fluyen al revés. Oro sirve datos de vuelta a la app: la próxima microcredencial para sugerir, o un aprendiz que puede necesitar ayuda.
+
+22
+00:02:47,406 --> 00:02:53,181
+Las variables para aprendizaje automático viajan igual: calculadas en oro, servidas en milisegundos.
+
+23
+00:02:54,381 --> 00:02:59,879
+Y los agentes de IA necesitan las dos formas a la vez: leen lo que se sabe, y anotan lo que hicieron.
+
+24
+00:03:02,979 --> 00:03:07,939
+Así que quien modela tiene preguntas nuevas. Para cada idea, ¿qué forma es la fuente de verdad?
+
+25
+00:03:09,339 --> 00:03:12,014
+¿Hacia dónde se sincroniza cada tabla, y quién es su dueño?
+
+26
+00:03:13,414 --> 00:03:17,797
+¿Qué tan al día debe estar cada respuesta? Segundos para una billetera. Un día para un plan.
+
+27
+00:03:19,197 --> 00:03:24,266
+¿Dónde viven las definiciones, para que la app y el informe coincidan? En un solo lugar, no en dos.
+
+28
+00:03:25,566 --> 00:03:29,838
+Y los contratos de datos de Cambio silencioso ahora van en ambas direcciones.
+
+29
+00:03:33,038 --> 00:03:40,244
+Un modelo lógico. Una forma para escribir y una forma para leer, en una sola plataforma, con menos distancia entre ellas.
+
+30
+00:03:41,544 --> 00:03:44,030
+Lo híbrido quita la copia, no el modelo.
+
+31
+00:03:45,330 --> 00:03:48,910
+Siguiente: hacer del significado mismo algo que una máquina pueda leer.

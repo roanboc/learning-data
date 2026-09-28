@@ -39,6 +39,7 @@ What made the Learning Data films work, starting with *The Inner Life of Data*, 
 - **Let colour carry meaning, and never break it.** Each source system has its colour; each business domain has its own; bronze, silver and gold are materials; red means stopped; green means passed.
 - **Vary the content, not the style.** Six different, named data products per domain look like a real organisation. Six crops of one picture look like a template.
 - **Make things look as they behave.** Live data should visibly change. Raw data should look rough: glitched, duplicated and mistimed. Clean data should look crisp.
+- **Draw living things like living things.** Animals, plants, hands and the materials of the past (clay, paper, wood) made of circles, straight strokes and rectangles look rigid next to people drawn with care: viewers of *What's in a word* noticed at once. Give them tapering bezier outlines, overlapping forms, weight, a light side and a shadow side, and a little life from time: breath, wind, a gait. Keep data, systems and diagrams crisp; the contrast says which is which.
 - **Keep text clear of captions,** and check every scene against the caption area.
 - **Build components, not drawings.** The same vault, data tile, sketch and plaque drawn by one function appear in the film, the labs and the scenarios. Viewers recognise them, and a fix lands everywhere.
 
@@ -126,6 +127,7 @@ What *From words to data*, seven films made together, added.
 - **Share tools, not copies.** One set of tools and one instrument library serve every film; each film keeps only its own words, pictures and score. A fix lands everywhere at once.
 - **Write the narration first, for all the films.** Voicing every script before drawing any picture fixes the timeline, shows which films are too thin, and lets the pictures be made in parallel.
 - **Generate what repeats, and check it's current.** With forty pages in two languages, the pages come from each film's data (`site-tools/build_series.py`), and the site check fails if a page isn't what the generator makes.
+- **Check every frame, not every tenth of a second.** A ring whose radius dipped below zero for one frame stopped a full render; the checker now draws every frame the video will.
 - **Build labs from a few kinds.** Sort, count, pick, compose and step through cover most ideas; each lab is words plus one picture drawn with the film's own components. Every word a picture draws comes from the language pack, and text is sized for the lab's real width.
 
 *Ask: if someone watched only one film, would they still want the next?*

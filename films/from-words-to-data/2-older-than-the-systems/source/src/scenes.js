@@ -20,10 +20,10 @@ scene("materials",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath"),cS=c("seal
   ot_shelf(ctx,-400,3800,OT_SHELF);
   OT_EX.forEach((e,i)=>{const a=fin(t,rev[i],0.7);if(a<=0)return;const x=OT_SX(i);glow(ctx,x,OT_SHELF-140,240,[255,214,160],0.16*a);
     const o={a,t};if(i===0)o.p=clamp((t-c("clay")-4.4)/4.6,0,1);if(i===1)o.mark=fin(t,c("guild")+6.3,0.6);if(i===2)o.rank=fin(t,c("exams")+4.5,0.6);if(i===3)o.press=fin(t,cS+3.0,0.5);
-    ot_ex(ctx,e[0],x,OT_SHELF-(i===6?20:0),1,o);
-    if(i<4)OT_NOTES[i].forEach(([s,dx,dy,cid,d])=>withA(ctx,fin(t,c(cid)+d,0.5)*(1-zo),()=>ot_pill(ctx,x+dx,OT_SHELF+dy,s,i===3&&dx>0?OT_WAX:PARCH,{size:17})));
+    ot_ex(ctx,e[0],x,OT_SHELF-(i===6?20:0),1+0.2*zo,o);
+    const gone=i<3?1-fin(t,rev[i+1]+0.3,0.8):1;if(i<4)OT_NOTES[i].forEach(([s,dx,dy,cid,d])=>withA(ctx,fin(t,c(cid)+d,0.5)*(1-zo)*gone,()=>ot_pill(ctx,x+dx,OT_SHELF+dy,s,i===3&&dx>0?OT_WAX:PARCH,{size:17})));
     // the masters of the guild: three approvals, before the mark
-    if(i===1)[0,1,2].forEach(k=>withA(ctx,fin(t,c("guild")+5.2+k*0.3,0.3)*(1-zo),()=>{const mx=x-60+k*60,my=OT_SHELF-300;ctx.fillStyle="rgba(26,16,10,0.92)";ctx.beginPath();ctx.arc(mx,my,16,0,TAU);ctx.fill();ring(ctx,mx,my,16,OT_WAX,1,2);tick_(ctx,mx,my+1,20,OT_WAX,1);}));});
+    if(i===1)[0,1,2].forEach(k=>withA(ctx,fin(t,c("guild")+5.2+k*0.3,0.3)*(1-zo)*gone,()=>{const mx=x-60+k*60,my=OT_SHELF-300;ctx.fillStyle="rgba(26,16,10,0.92)";ctx.beginPath();ctx.arc(mx,my,16,0,TAU);ctx.fill();ring(ctx,mx,my,16,OT_WAX,1,2);tick_(ctx,mx,my+1,20,OT_WAX,1);}));});
   setScreen(ctx,S);
   // where and when, while the camera is close
   const tags=[[0,c("guild")-0.6],[c("guild")+0.4,c("exams")-0.6],[c("exams")+0.4,cS-0.6],[cS+0.4,pull]];
@@ -172,7 +172,7 @@ const OT_FACTS=[["name","Aisha Khan",0],["email","aisha.khan@uni.example",1],["a
 scene("person",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const cI=c("ids"),cF=c("facts"),cM=c("master"),cC=c("codes");
   // Aisha
-  person(ctx,"aisha",210,862,0.7,{t,pose:t>cI+1.6&&t<cI+7.5?"explain":"stand",expr:t>cM+3?"relieved":"calm"});
+  person(ctx,"aisha",210,862,0.7,{t,pose:t>cI+3.0&&t<cI+8.2?"explain":"stand",expr:t>cM+3?"relieved":"calm"});
   withA(ctx,fin(t,cI+0.4,0.5),()=>ot_tag(ctx,210,478,"Aisha",KIND,1,{size:24}));
   // four IDs, four records
   const idT=[cI+3.1,cI+4.2,cI+5.2,cI+6.4];
@@ -216,7 +216,7 @@ scene("logical",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     const rel=(a,b,ca,cb,t0,verb,dx,dy)=>{const on=fin(t,t0,0.5),aa=Math.min(E[a].a,E[b].a);if(aa<=0.01)return;withA(ctx,aa,()=>{if(on<1){const s_=ot_edge(B[a],B[b].x,B[b].y),e_=ot_edge(B[b],B[a].x,B[a].y);ctx.save();ctx.strokeStyle=rgba(OT_GOLD,0.45*(1-on));ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(s_[0],s_[1]);ctx.lineTo(e_[0],e_[1]);ctx.stroke();ctx.restore();}
       if(on>0){relLine(ctx,B[a],B[b],ca,cb,{col:OT_GOLD,a:on,words:on,s:Z});if(verb)withA(ctx,on,()=>ot_pill(ctx,(B[a].x+B[b].x)/2+(dx||0),(B[a].y+B[b].y)/2+(dy||0),verb,OT_GOLD,{size:20}));}
       const hot=pulseAt(t,t0,1.6);if(hot)glow(ctx,(B[a].x+B[b].x)/2,(B[a].y+B[b].y)/2,100,OT_GOLD,0.5*hot);});};
-    rel("learner","cred","1","*",cC+2.2,"holds",0,-30);rel("issuer","cred","1","*",cC+3.0,"issues",0,30);rel("cred","evidence","1","*",cC+3.6,"rests on",0,-30);
+    rel("learner","cred","1","*",cC+2.2,"holds",0,-30);rel("issuer","cred","1","*",cC+3.0,"issues",-50,34);rel("cred","evidence","1","*",cC+3.6,"rests on",0,-30);
     ["micro","award"].forEach(k=>withA(ctx,E[k].a,()=>isa(ctx,B[k].x,B[k].y-B[k].h/2,B.cred.x+B.cred.w/2-(k==="award"?30:110),B.cred.y+B.cred.h/2+4,1,OT_GOLD,{fill:"#0a1020"})));
     rel("micro","award","*","*",cC+5.0,"counts towards",0,-34);
     Object.keys(E).forEach(k=>ent(ctx,E[k]));
@@ -227,7 +227,7 @@ scene("logical",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     withA(ctx,fin(t,cI+4.0,0.4)*(1-fin(t,cA,0.5)),()=>{ctx.strokeStyle=rgba(OT_WAX,0.9);ctx.lineWidth=3;const b0=x0+bx.w+12,ya=rowY(0)-22*Z,yb=rowY(4)+8;ctx.beginPath();ctx.moveTo(b0,ya);ctx.lineTo(b0+14,ya);ctx.lineTo(b0+14,yb);ctx.lineTo(b0,yb);ctx.stroke();ot_pill(ctx,b0+120,(ya+yb)/2,"identifies it",OT_WAX,{size:22});});
     withA(ctx,fin(t,cA+2.6,0.4)*(1-fin(t,cC+0.5,0.6)),()=>{ctx.strokeStyle=rgba(OT_STD,0.9);ctx.lineWidth=3;const b0=x0+bx.w+12,ya=rowY(5)-22*Z,yb=rowY(7)+8;ctx.beginPath();ctx.moveTo(b0,ya);ctx.lineTo(b0+14,ya);ctx.lineTo(b0+14,yb);ctx.lineTo(b0,yb);ctx.stroke();ot_pill(ctx,b0+130,(ya+yb)/2,"allowed values",OT_STD,{size:22});});
     // the rule
-    withA(ctx,fin(t,cR+0.3,0.5),()=>{const rx=250,ry=700;glass(ctx,rx,ry,460,112,16,BAD,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(ctx,"rule",rx+24,ry+38,{f:"mono",w:500,size:20,color:rgba(BAD,1)});
+    withA(ctx,fin(t,cR+0.3,0.5),()=>{const rx=200,ry=720;glass(ctx,rx,ry,460,112,16,BAD,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(ctx,"rule",rx+24,ry+38,{f:"mono",w:500,size:20,color:rgba(BAD,1)});
       T(ctx,"revoked → never counted",rx+24,ry+84,{w:800,size:30});arrowTo(ctx,rx+440,ry+30,x0+14,rowY(7)-6,BAD,0.8,{lw:2.4,head:12,bend:-0.15});});});
   // still no technology: the model becomes a yardstick, held against a vendor's model
   withA(ctx,fin(t,cT+0.2,0.5),()=>{const x=1560,y=110;dbGlyph(ctx,x-150,y,SOFT,0.8);cross_(ctx,x-150,y,44,BAD,0.9);ot_tag(ctx,x+20,y,"no technology",OT_GOLD,1,{size:24});});

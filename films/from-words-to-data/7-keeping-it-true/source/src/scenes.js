@@ -19,14 +19,14 @@ scene("dict",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");histBg(ctx,S,t)
   // 2006: a definition of planet; nothing in the sky changed, and the count went from nine to eight
   withA(ctx,plA,()=>{yearTag(ctx,120,120,"2006 · Prague",CLAY,1);const st=fin(t,kt_w(sc,"planet","nine"),0.7),n8=t>kt_w(sc,"planet","eight")-0.2;
     kt_sky(ctx,700,470,t,{dwarf:fin(t,kt_w(sc,"planet","eight"),0.6)});
-    kt_list(ctx,150,170,330,"planets",KT_PLANETS.map(p=>p[0]),{rh:44,strike:{8:st},foot:84});
-    ctx.fillStyle="rgba(120,90,50,0.35)";ctx.fillRect(180,660,270,2);T(ctx,"count",180,712,{w:700,size:22,color:"rgba(90,70,48,0.9)"});T(ctx,n8?"8":"9",450,722,{w:800,size:56,align:"right",color:n8?"rgba(150,60,30,1)":"rgba(60,44,30,0.95)"});
+    kt_list(ctx,150,170,330,"planets",KT_PLANETS.map(p=>p[0]),{rh:44,strike:{8:st},foot:84,t});
+    ctx.strokeStyle="rgba(120,90,50,0.35)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(180,660);ctx.quadraticCurveTo(315,662,450,659);ctx.stroke();T(ctx,"count",180,712,{w:700,size:22,color:"rgba(90,70,48,0.9)"});T(ctx,n8?"8":"9",450,722,{w:800,size:56,align:"right",color:n8?"rgba(150,60,30,1)":"rgba(60,44,30,0.95)"});
     withA(ctx,fin(t,kt_w(sc,"planet","agreed")-0.2,0.6),()=>{glass(ctx,1250,100,580,210,18,CLAY,{glow:14,ea:0.8,fill:"rgba(26,16,10,0.94)"});T(ctx,"planet · IAU, 2006",1278,144,{w:800,size:27,color:rgba(CLAY,1)});
       ["orbits the Sun","is nearly round","has cleared its orbit"].forEach((s,i)=>T(ctx,(i+1)+". "+s,1282,194+i*38,{w:600,size:25,color:rgba(PARCH,1)}));});
     withA(ctx,fin(t,kt_w(sc,"planet","Nothing"),0.6),()=>tag(ctx,1180,790,"nothing in the sky changed",CLAY,{align:"center",size:22}));});
   // 2019: the kilogram, from a metal cylinder to a constant of nature
   withA(ctx,kgA,()=>{yearTag(ctx,120,120,"2019 · the kilogram",CLAY,1);const rp=fin(t,kt_w(sc,"kilo","kilogram")-0.2,0.8);
-    kt_kilo(ctx,600,480,1.6,1-0.55*rp);T(ctx,"a metal cylinder, 1889 to 2019",600,700,{w:700,size:22,align:"center",color:rgba(PARCH,0.9-0.4*rp)});
+    kt_kilo(ctx,600,480,1.6,1-0.55*rp,t);T(ctx,"a metal cylinder, 1889 to 2019",600,700,{w:700,size:22,align:"center",color:rgba(PARCH,0.9-0.4*rp)});
     arrowTo(ctx,800,440,1000,440,CLAY,rp,{p:rp,head:14});
     withA(ctx,rp,()=>{glass(ctx,1020,350,700,190,20,CLAY,{glow:18,ea:0.85,fill:"rgba(26,16,10,0.94)"});kt_planck(ctx,1370,448,34,rgba(PARCH,1));T(ctx,"the Planck constant, fixed exactly",1370,500,{w:600,size:20,align:"center",color:rgba(CLAY,1)});
       tag(ctx,1370,610,"defined by a constant of nature",CLAY,{align:"center",size:22});});});
@@ -106,18 +106,18 @@ function kt_source(ctx,k,x,y,t,a,hi){withA(ctx,a,()=>{const w=400,h=250;glass(ct
 scene("watch",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const cC=c("compare"),cF=c("flags"),cN=c("notice"),rA=1-fin(t,cC-0.5,0.7),cA=fin(t,cC-0.3,0.7)*(1-fin(t,cF-0.5,0.7)),fA=fin(t,cF-0.3,0.7);
   // the agent reads the catalog, the lineage, the queries people run, and new data as it arrives
-  withA(ctx,rA,()=>{const aT=kt_w(sc,"reads","An agent")-0.4;kt_agent(ctx,960,440,72,t,{a:fin(t,aT,0.7),label:"agent",busy:fin(t,kt_w(sc,"reads","catalog"),1)});
+  withA(ctx,rA,()=>{const aT=kt_w(sc,"reads","An agent")-0.4;kt_agent(ctx,960,440,72,t,{a:0.3*fin(t,0.2,0.8)+0.7*fin(t,aT,0.7),label:"agent",labelA:fin(t,aT,0.7),busy:fin(t,kt_w(sc,"reads","catalog"),1)});
     withA(ctx,fin(t,0.4,0.6)*(1-fin(t,c("reads")+3.6,0.6)),()=>tag(ctx,960,250,"where AI helps first",KT_AI,{align:"center",size:28}));
     KT_SRC.forEach(([w_,x,y],k)=>{const t0=kt_w(sc,"reads",w_==="queries"?"the queries":w_),a=fin(t,t0-0.3,0.5),on=pulseAt(t,t0,2.2),cx=x+200,cy=y+125;
       kt_scan(ctx,960,440,cx,cy,a*(0.35+0.65*on),t,{w:90,ph:k});kt_source(ctx,k,x,y,t,a,on);});});
   // it compares each definition in the glossary with the code that calculates it
-  withA(ctx,cA,()=>{const gT=kt_w(sc,"compare","glossary"),dT=kt_w(sc,"compare","code"),pT=kt_w(sc,"compare","parted");kt_agent(ctx,960,196,54,t,{busy:0.6});
+  withA(ctx,cA,()=>{const gT=kt_w(sc,"compare","definition"),dT=kt_w(sc,"compare","code"),pT=kt_w(sc,"compare","parted");kt_agent(ctx,960,196,54,t,{busy:0.6});
     kt_scan(ctx,960,196,500,380,fin(t,gT,0.5)*0.8,t,{w:120});kt_scan(ctx,960,196,1420,380,fin(t,dT,0.5)*0.8,t,{w:120,ph:2});
     withA(ctx,fin(t,gT-0.3,0.5),()=>{tag(ctx,500,318,"what's written",KIND,{align:"center",size:18});kt_gloss(ctx,150,350,700,{term:"completion rate",ver:"v2 · 2025",lines:["learners who completed","÷ all who started"],owner:"owner: Registrar's office",h:270,hi:[1,"all who started"],hiA:fin(t,pT,0.5)});});
     withA(ctx,fin(t,dT-0.3,0.5),()=>{tag(ctx,1420,318,"what's used",[170,205,255],{align:"center",size:18});kt_code(ctx,1070,350,700,"learning_platform_dashboard.sql",["SELECT sum(finished_all_modules)","     / count(logged_in)","FROM platform.progress"],{h:270,hi:[1,"count(logged_in)"],hiA:fin(t,pT,0.5)});});
     withA(ctx,fin(t,pT+0.3,0.5),()=>{glow(ctx,960,485,60,EDGE_,0.4);T(ctx,"≠",960,505,{w:800,size:56,align:"center",color:rgba(EDGE_,1)});tag(ctx,960,690,"the two have parted",EDGE_,{align:"center",size:24});});});
   // it flags each drift, with evidence: three definitions, and the dashboards that use each
-  withA(ctx,fA,()=>{const dT=kt_w(sc,"flags","three definitions"),bT=kt_w(sc,"flags","the dashboards");kt_agent(ctx,170,410,56,t,{busy:fin(t,cN,1),label:"agent"});
+  withA(ctx,fA,()=>{const dT=kt_w(sc,"flags","each drift"),bT=kt_w(sc,"flags","the dashboards");kt_agent(ctx,170,410,56,t,{busy:fin(t,cN,1),label:"agent"});
     withA(ctx,fin(t,cF,0.5),()=>tag(ctx,380,118,"evidence · completion rate, defined three ways",KT_AI,{size:20}));
     KT_DASH.forEach((d,i)=>{const y=160+i*176,a=fin(t,dT-0.2+i*0.45,0.5),b=fin(t,bT-0.2+i*0.3,0.5);
       withA(ctx,a,()=>{ctx.strokeStyle=rgba(KT_AI,0.4);ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(230,410);ctx.lineTo(380,y+66);ctx.stroke();
@@ -185,7 +185,7 @@ scene("wrong",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     ctx.save();ctx.setLineDash([12,10]);ctx.strokeStyle=rgba(BAD,0.85);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(300,480);ctx.lineTo(700,480);ctx.bezierCurveTo(800,480,800,500,1000,490);ctx.lineTo(GX-40,GY);ctx.stroke();ctx.restore();
     const u=ease(clamp((t-cS-0.4)/3.4,0,1)),px=lerp(300,GX-150,u);kt_prop(ctx,px,480+(px>800?4:0),"change #219",BAD,1,{dash:true});T(ctx,"not reviewed",860,530,{w:700,size:19,align:"center",color:rgba(BAD,1)});});
   // an agent that learns from old reports proposes an old meaning back
-  const gT=kt_w(sc,"slip","And an agent"),hA=fin(t,gT-0.3,0.6);withA(ctx,hA,()=>{[2,1,0].forEach(k=>kt_report(ctx,140+k*18,610-k*14,260,{h:200,title:"Report "+[2019,2020,2021][k],rows:[["completion","58%"]],rot:-0.02+k*0.01}));
+  const gT=kt_w(sc,"slip","And an agent"),hA=fin(t,gT-0.3,0.6);withA(ctx,hA,()=>{[2,1,0].forEach(k=>kt_report(ctx,140+k*18,610-k*14,260,{h:200,t,seed:k+11,curl:k?0:1,title:"Report "+[2019,2020,2021][k],rows:[["completion","58%"]],rot:-0.02+k*0.01}));
     const u=ease(clamp((t-gT)/2.2,0,1)),gx=lerp(300,500,u),gy=lerp(700,690,u),wob=Math.sin(t*3)*4;withA(ctx,0.35+0.35*u,()=>{glass(ctx,gx,gy-60+wob,380,120,16,[200,210,230],{glow:22,ea:0.6,fill:"rgba(12,16,28,0.6)"});T(ctx,"completion rate (v1)",gx+22,gy-24+wob,{w:700,size:19,color:rgba(SOFT,1)});T(ctx,"finished ÷ logged in",gx+22,gy+18+wob,{f:"mono",w:500,size:21});});
     withA(ctx,fin(t,kt_w(sc,"slip","old meaning"),0.6),()=>tag(ctx,gx+190,gy+86,"an old meaning, proposed back",[200,210,230],{align:"center",size:18}));lane(700,[200,210,230],fin(t,gT+1.6,0.6),true,gx+390);});
   // the tests and the contracts check the agent's work too, just as they check ours
@@ -198,7 +198,7 @@ scene("wrong",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
 const KT_DETAIL=[["Glossary · completion rate v3","completed ÷ enrolled at census; revoked excluded"],["Ontology","a revoked credential is not a completion"],["Logical model","Enrolment gains outcome: completed · withdrawn · enrolled"],
   ["Shapes for writing and reading","the enrolment table · the completions star"],["Semantic layer","completion_rate = completed / enrolled_at_census"],["Contract · test","outcome has 3 values · revoked never counted"]];
 scene("e2e",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,S);bg2(ctx);
-  const cA=c("agree"),cO=c("old"),cV=c("v3"),oT=kt_w(sc,"chain","ontology"),T6=[kt_w(sc,"chain","glossary")-0.2,oT-0.1,oT+1.0,oT+1.8,kt_w(sc,"chain","semantic")-0.1,kt_w(sc,"chain","test")-0.1,cA+0.2];
+  const cA=c("agree"),cO=c("old"),cV=c("v3"),oT=kt_w(sc,"chain","one statement"),T6=[kt_w(sc,"chain","one definition")-0.1,oT-0.1,oT+1.0,oT+1.8,kt_w(sc,"chain","one measure")-0.1,kt_w(sc,"chain","one test")-0.1,cA+0.2];
   let lit=0;T6.forEach(q=>{lit+=fin(t,q,0.5);});
   withA(ctx,fin(t,0.3,0.6),()=>tag(ctx,960,100,"one change, end to end",TRUST,{align:"center",size:24}));
   kt_chain(ctx,90,150,1740,{lit,h:120,ticks:true});
@@ -215,7 +215,7 @@ scene("e2e",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,S)
       withA(ctx,fin(t,kt_w(sc,"agree","shows why"),0.5),()=>{glass(ctx,1360,480,470,120,14,TRUST,{glow:12,ea:0.7,fill:"rgba(7,12,24,0.95)"});T(ctx,"why: completion rate v3",1382,516,{w:700,size:17,color:rgba(TRUST,1)});
         T(ctx,"completed ÷ enrolled at census",1382,552,{f:"mono",w:500,size:17});T(ctx,"from the semantic layer",1382,582,{w:600,size:15,color:rgba(SOFT,1)});});});});
   // last year's report still reads with last year's definition
-  const oA=fin(t,cO-0.3,0.6)*(1-fin(t,cV-0.5,0.6));withA(ctx,oA,()=>{kt_report(ctx,180,360,520,{h:330,stamp:"read with v2",stampA:fin(t,kt_w(sc,"old","version two")-0.3,0.5)});
+  const oA=fin(t,cO-0.3,0.6)*(1-fin(t,cV-0.5,0.6));withA(ctx,oA,()=>{kt_report(ctx,180,360,520,{h:330,t,stamp:"read with v2",stampA:fin(t,kt_w(sc,"old","version two")-0.3,0.5)});
     [["completion rate · v2 · 2025","completed ÷ all who started",SOFT,380,"version two"],["completion rate · v3 · 2027","completed ÷ enrolled at census",TRUST,560,"Each number"]].forEach(([h1,f,col,y,k],i)=>withA(ctx,fin(t,kt_w(sc,"old",k)-0.3,0.6),()=>{
       glass(ctx,880,y,600,140,16,col,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(ctx,h1,906,y+44,{w:700,size:19,color:rgba(col,1)});T(ctx,f,906,y+96,{f:"mono",w:500,size:22});
       arrowTo(ctx,i?1640:720,i?y+70:y+120,i?1500:870,y+70,col,0.8,{head:12,bend:i?0:0.1});}));
@@ -232,9 +232,9 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");histBg(ctx,S,t,{
   const cC=c("claim"),cJ=c("job"),sA=1-fin(t,cC-0.5,0.7),mA=fin(t,cC-0.3,0.7)*(1-fin(t,cJ-0.5,0.7)),jA=fin(t,cJ-0.3,0.7);
   // back to the start: a word, an idea, a thing, and a mark in clay
   withA(ctx,sA,()=>{const wT=kt_w(sc,"start","a word"),iT=kt_w(sc,"start","an idea"),hT=kt_w(sc,"start","a thing"),mT=kt_w(sc,"start","a mark");
-    trio(ctx,640,440,0.85,{t,word:"credential",idea:"a trusted, checkable claim",thing:(cx,x,y,s)=>credCard(cx,x-100,y-86,200,{era:"paper",title:"Diploma",h:136,ts:20}),thingLab:"a credential",thingDy:92,
+    trio(ctx,640,440,0.85,{t,word:"credential",idea:"a trusted, checkable claim",thing:(cx,x,y,s)=>kt_diploma(cx,x-90,y-96,180,150,t,{title:"Diploma"}),thingLab:"a credential",thingDy:92,
       a:fin(t,0.2,0.8),wa:0.25+0.75*fin(t,wT-0.2,0.5),ia:0.25+0.75*fin(t,iT-0.2,0.5),ha:0.25+0.75*fin(t,hT-0.2,0.5),e1:0.3+0.7*fin(t,iT,0.8),e2:0.3+0.7*fin(t,hT,0.8),e3:0});
-    withA(ctx,fin(t,mT-0.3,0.6),()=>{yearTag(ctx,1200,250,"c. 3300 BCE · Uruk",CLAY,1);kt_tablet(ctx,1200,300,520,300,clamp((t-mT)/3,0,1),1);});
+    withA(ctx,fin(t,mT-0.3,0.6),()=>{yearTag(ctx,1200,250,"c. 3300 BCE · Uruk",CLAY,1);kt_tablet(ctx,1200,300,520,300,clamp((t-mT)/3,0,1),1,t);});
     withA(ctx,fin(t,0.3,0.6),()=>T(ctx,"What's in a word",640,150,{w:700,size:22,align:"center",color:rgba(KIND,0.9)}));});
   // a credential is a claim that others can check; so is every number in a report
   withA(ctx,mA,()=>{const nT=kt_w(sc,"claim","So is"),hl=fin(t,nT+0.6,0.6);
@@ -243,12 +243,12 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");histBg(ctx,S,t,{
     withA(ctx,fin(t,nT+1.0,0.6),()=>tag(ctx,960,620,"a claim that others can check",TRUST,{align:"center",size:28}));});
   // the tools have changed; the job hasn't
   withA(ctx,jA,()=>{const hT=kt_w(sc,"job","The job"),X=[400,960,1520],ph=[["agree what things are","agree"],["write it down","write"],["keep it true","keep"]];
-    const tools=[(x,y)=>kt_tablet(ctx,x-70,y-40,140,84,1,1),(x,y)=>waxSeal(ctx,x,y,34,WAX,1,1),(x,y)=>credCard(ctx,x-70,y-48,140,{era:"paper",h:96}),(x,y)=>credCard(ctx,x-70,y-48,140,{era:"digital",h:96}),(x,y)=>kt_agent(ctx,x,y,34,t)];
+    const tools=[(x,y)=>kt_tablet(ctx,x-70,y-40,140,84,1,1,t),(x,y)=>waxSeal(ctx,x,y,34,WAX,1,1),(x,y)=>kt_diploma(ctx,x-60,y-46,120,92,t,{title:"Diploma"}),(x,y)=>credCard(ctx,x-70,y-48,140,{era:"digital",h:96}),(x,y)=>kt_agent(ctx,x,y,34,t)];
     tools.forEach((f,i)=>withA(ctx,fin(t,cJ+0.1+i*0.3,0.4)*(1-0.55*fin(t,hT,0.6)),()=>f(560+i*200,230)));
     ph.forEach(([s,k],i)=>{const a=fin(t,kt_w(sc,"job",k)-0.2,0.5),x=X[i];withA(ctx,a,()=>{glass(ctx,x-240,400,480,230,22,TRUST,{glow:16,ea:0.85,fill:"rgba(20,14,8,0.92)"});T(ctx,s,x,590,{w:800,size:30,align:"center",color:rgba(TRUST,1)});
       if(i===0){const P=[[x-70,530],[x,440],[x+70,530]];ctx.strokeStyle=rgba(KIND,0.9);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(P[0][0],P[0][1]);ctx.lineTo(P[1][0],P[1][1]);ctx.lineTo(P[2][0],P[2][1]);ctx.stroke();
         ctx.save();ctx.setLineDash([6,7]);ctx.strokeStyle=rgba(EDGE_,0.7);ctx.beginPath();ctx.moveTo(P[0][0]+14,P[0][1]);ctx.lineTo(P[2][0]-14,P[2][1]);ctx.stroke();ctx.restore();P.forEach(([px,py])=>{glow(ctx,px,py,22,KIND,0.5);ctx.fillStyle=rgba(mix(KIND,[255,255,255],0.5),1);ctx.beginPath();ctx.arc(px,py,9,0,TAU);ctx.fill();});}
-      if(i===1){sheet(ctx,x-90,428,180,110,{rot:-0.03});pencilText(ctx,"completion rate:",x-70,470,{size:16});pencilText(ctx,"completed ÷ …",x-70,500,{size:16});}
+      if(i===1){ctx.save();ctx.translate(x,483);ctx.rotate(-0.03);kt_paper(ctx,-90,-55,180,110,t,{seed:7});ctx.restore();pencilText(ctx,"completion rate:",x-70,470,{size:16});pencilText(ctx,"completed ÷ …",x-70,500,{size:16});}
       if(i===2){stamp(ctx,x+40,480,"v3",TRUST,1,0);kt_agent(ctx,x-80,478,26,t);kt_gtick(ctx,x+90,478,16,1);}});});});
   endCard(ctx,S,t,B+0.3,"Keeping it true",KT_AI,"Agree what things are, write it down, and keep it true.");
   vign(ctx,S);});

@@ -36,4 +36,12 @@ cp dist/film.js ../../../../site/assets/making-of/thats-not-quite-right.js
 cp dist/soundtrack.mp3 ../../../../site/assets/making-of/thats-not-quite-right.mp3
 ```
 
+**Spanish captions.** The Spanish page shows this English film with Spanish captions, from `src/i18n/es/captions.js`: each English narration line, exactly as in `src/narration.js`, and its caption. After changing a line, update its entry, run `FILM_LANG=es python tools/captions.py` (it writes `../captions/es.srt` and `es.vtt`, and stops if a line has no caption), and copy the file into the site:
+
+```
+cp src/i18n/es/captions.js ../../../../site/assets/making-of/thats-not-quite-right.captions.es.js
+```
+
+`site-tools/check_site.py` checks that the copy matches, and that the Spanish page loads it before the film.
+
 Then commit, merge, and run *Render and release the films*. A change to `../../1-data-for-films/source/src/frames.js`, or to *The Inner Life of Data*'s source, also changes this film: build and copy it again.

@@ -31,4 +31,12 @@ python tools/render.py --workers 4
 
 The video is `dist/a-sharper-sketch.mp4`, and `dist/film.html` is a standalone player with the soundtrack embedded. `python tools/pace.py` reports the pacing, and `python tools/captions.py` writes `../captions/en.srt` and `en.vtt`. The steps are the same as for *The Inner Life of Data*, described there.
 
+**Spanish captions.** The Spanish page shows this English film with Spanish captions, from `src/i18n/es/captions.js`: each English narration line, exactly as in `src/narration.js`, and its caption. After changing a line, update its entry, run `FILM_LANG=es python tools/captions.py` (it writes `../captions/es.srt` and `es.vtt`, and stops if a line has no caption), and copy the file into the site:
+
+```
+cp src/i18n/es/captions.js ../../../site/assets/film3/captions.es.js
+```
+
+`site-tools/check_site.py` checks that the copy matches, and that the Spanish page loads it before the film.
+
 A change to a shared component in `../../inner-life-of-data/source/src/` also changes this film: run `tools/check.py` here after changing one.

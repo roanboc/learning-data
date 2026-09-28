@@ -33,14 +33,14 @@ site/                            the website, published to GitHub Pages as it is
   films/                         redirects: films/ goes to topics/, and the old player address films/inner-life-of-data/ to the home page
   404.html                       "Page not found", in English and Spanish
   es/                            the Spanish site, at the same paths. es/sketch/ and the pages of When things go wrong
-                                 are Spanish pages around English films; Too good to be true's labs and scenarios are in Spanish too; A Sharper Sketch's labs and scenarios are in English only
+                                 are Spanish pages around English films, with Spanish captions; Too good to be true's labs and scenarios are in Spanish too; A Sharper Sketch's labs and scenarios are in English only
   assets/                        styles (site.css), ambient.js (the moving light behind each page's hero), doc-nav.js (the Making of page's "On this page"), the icon, and a poster per film: poster.jpg, poster.es.jpg,
                                  sketch-poster.jpg, silent-change-poster.jpg and too-good-to-be-true-poster.jpg
     film/                        The Inner Life of Data's player and soundtrack, per language (built in films/inner-life-of-data/source/)
-    film3/                       A Sharper Sketch's player and soundtrack (built in films/a-sharper-sketch/source/)
-    silent-change/               Silent change's player and soundtrack (built in its source/), and its questions in think.en.js and think.es.js
-    making-of/                   the Making of films' players, soundtracks and posters (built in films/making-of/*/source/)
-    too-good-to-be-true/         Too good to be true's player and soundtrack, its questions (think.en.js, think.es.js), and its labs and
+    film3/                       A Sharper Sketch's player and soundtrack (built in films/a-sharper-sketch/source/), and its Spanish captions (captions.es.js)
+    silent-change/               Silent change's player and soundtrack (built in its source/), its Spanish captions (captions.es.js), and its questions in think.en.js and think.es.js
+    making-of/                   the Making of films' players, soundtracks, posters and Spanish captions (*.captions.es.js; built in films/making-of/*/source/)
+    too-good-to-be-true/         Too good to be true's player and soundtrack, its Spanish captions (captions.es.js), its questions (think.en.js, think.es.js), and its labs and
                                  scenarios: learn.js, drawn with the film's own components, with their words in learn.en.js and learn.es.js
     learn/                       for every film page: path.js (the stepper and progress), think.js ("Pause and think")
                                  and next.js ("Where next?" when a film ends); for The Inner Life of Data: learn.js (map and stops),
@@ -73,7 +73,7 @@ Internal names never appear as text on the site. The numbers in the series' fold
 - **Breadcrumbs:** every film, labs, scenarios and series page starts with one, such as *Topics › Data modelling*.
 - **Guidance after a film:** a "Where next?" panel when the film ends (`next.js` shows the page's `<template id="next-panel">`), "Go deeper" on the home page and at the end of the scenarios of *The Inner Life of Data*, and "Go further" on each topic's page.
 - **No film numbers.** Each film is shown by its topic, then its title. The order comes from the chapter of *The Inner Life of Data* that each topic builds on, never from when it was made.
-- **English and Spanish:** English pages sit at the root and Spanish ones under `es/`, at the same paths. Every page has an EN/ES toggle to the same page in the other language; A Sharper Sketch's labs and scenarios, which are in English only, toggle to `es/sketch/`. A film that exists only in English gets a Spanish page around it, with Spanish chapter names and controls; links from there to English pages say "(en inglés)".
+- **English and Spanish:** English pages sit at the root and Spanish ones under `es/`, at the same paths. Every page has an EN/ES toggle to the same page in the other language; A Sharper Sketch's labs and scenarios, which are in English only, toggle to `es/sketch/`. A film that exists only in English gets a Spanish page around it, with Spanish chapter names, controls and captions: the same film and video, captioned in Spanish (see the film's source README); links from there to English pages say "(en inglés)".
 
 **Progress** stays in the visitor's browser (local storage), under one prefix per film:
 

@@ -9,12 +9,12 @@ think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar
     opts:[{t:"Nada: las fichas eran baratas."},{t:"Cada ficha debía mantenerse al día con el libro, o los lectores iban al estante equivocado.",ok:true},{t:"Los lectores necesitaban tres visitas para encontrar un libro."}],
     why:"Las copias facilitan la lectura y complican mantenerse al día. Cada forma para leer es una copia como esas fichas: ordenada para una pregunta, y mantenida al día."},
   "integrate":{stop:"source",q:"Llega la plataforma de cursos cortos. ¿Qué cambia en un data vault?",
-    opts:[{t:"Los hubs se rediseñan para que calce."},{t:"Se agregan satélites nuevos; las tablas que existen quedan como están.",ok:true},{t:"Todos los satélites se vuelven a cargar desde cero."}],
+    opts:[{t:"Los hubs se rediseñan para que encaje."},{t:"Se agregan satélites y filas nuevas; ninguna tabla existente se modifica.",ok:true},{t:"Todos los satélites se vuelven a cargar desde cero."}],
     why:"Un vault recibe una fuente nueva agregando. Los hubs guardan las claves de negocio, y las descripciones de cada fuente llegan como satélites, con su fuente y su hora de carga."},
-  "present":{stop:"shapes",q:"¿Por qué la estrella de títulos y la de cuotas comparten una dimensión Aprendiz?",
+  "present":{stop:"shapes",q:"¿Por qué la estrella de credenciales otorgadas y la de cuotas comparten una dimensión Aprendiz?",
     opts:[{t:"Para ahorrar espacio."},{t:"Para que una pregunta cruce las dos estrellas, y sus respuestas coincidan.",ok:true},{t:"Porque un data vault lo exige."}],
     why:"Dimensiones conformadas: las mismas claves y atributos, para que las estrellas se alineen en los mismos aprendices y las mismas fechas."},
-  "serve":{stop:"where",q:"Una tabla ancha de aprendices convierte «¿cerca de un certificado?» en un filtro. ¿Cuál es el costo?",
+  "serve":{stop:"where",q:"Una tabla ancha de aprendices convierte «¿cerca de un diplomado?» en un filtro. ¿Cuál es el costo?",
     opts:[{t:"Los asistentes de IA no pueden leer tablas anchas."},{t:"Muchas columnas que mantener, y medidas que pueden terminar definidas dos veces.",ok:true},{t:"Solo puede guardar un aprendiz."}],
     why:"Las tablas anchas repiten a propósito. Define cada medida una vez, antes o en una capa semántica, y que cada tabla la lea de ahí."}
   }}};

@@ -11,7 +11,7 @@ vis:{q:"Which learners are close to a graduate certificate?",joins:"joins",filte
   bronze:"Bronze",silver:"Silver",gold:"Gold",sem:"semantic layer",core:"normalised core",vault:"data vault",star:"star",wide:"wide table",
   coreRes:"tables change",vaultRes:"only adds",starRes:"new rows",wideRes:"new columns",
   learner:"Learner",awards:"Awards",fees:"Fees",learners:"learners",courseProgress:"course progress",creditSoFar:"credit so far",of:"of",
-  whoWhen:"Which system said so, and when?",query:"40 lines · 9 joins",months:["Jan","Feb","Mar","Apr","May"],
+  whoWhen:"Which system said so, and when?",statusNew:"status: awarded",statusOld:"status: pending",query:"40 lines · 9 joins",months:["Jan","Feb","Mar","Apr","May"],
   faculties:["Science","Arts","Health","Business"],copy:"copy",fourStars:"four awards stars, four totals",modern:"“what modern teams do”",srcName:"Short-course platform",isNew:"new",srcShort:"short courses"},
 labs:[
  {id:"shapes",c:"#ba96ff",chapter:"argue",name:"Same question, four shapes",kind:"pick",vis:"shapes",vw:960,vh:420,
@@ -53,8 +53,8 @@ labs:[
    sayAll:"All {of} right. Silver integrates, gold presents and serves, and the semantic layer says what each number means.",saySome:"{n} of {of} right. Look again at the ones in red: does it integrate, present, serve, or define?"}}
 ],
 qs:[
- {type:"choice",lab:"shapes",vis:"audit",title:"Who said so, and when?",sit:"An auditor asks why Aisha's “credit so far” changed on 3 March, and which system sent the change.",
-  opts:[{t:"Rerun last month's report and compare it with this month's.",why:"That shows the number changed, not which system changed it, or when the change arrived."},{t:"Look it up in the vault's satellites: every version keeps its source and the time it arrived.",ok:true},{t:"Check the learner star: it holds the current value.",why:"A star holds what's true now, and maybe its history, but not which system sent each value."}],
+ {type:"choice",lab:"shapes",vis:"audit",title:"Who said so, and when?",sit:"An auditor asks why Aisha's Data viz microcredential went from pending to awarded on 3 March, and which system sent the change.",
+  opts:[{t:"Rerun last month's report and compare it with this month's.",why:"That shows the status changed, not which system changed it, or when the change arrived."},{t:"Look it up in the vault's satellites: every version keeps its source and the time it arrived.",ok:true},{t:"Check the awards star: it holds each award's current status.",why:"A star holds what's true now, and maybe its history, but not which system sent each value."}],
   why:"Satellites keep every version of a description with its record source and load time. That's what auditors ask for, and what a data vault is built to answer."},
  {type:"choice",lab:"shapes",vis:"twostars",title:"Two learners, one person",sit:"A report joins the awards star and the fees star by learner, and a third of the rows don't match. Each team built its own learner table, with its own IDs.",
   opts:[{t:"Match learners by name instead.",why:"Names change, and two learners can share one. It swaps a missing key for a wrong one."},{t:"Conform the learner: one Learner dimension, with one key, shared by both stars.",ok:true},{t:"Move fees into the awards star.",why:"Awards and fees are different processes, with different grains. The problem is the learner, not the facts."}],

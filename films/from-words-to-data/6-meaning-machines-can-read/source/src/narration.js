@@ -3,7 +3,7 @@
 const NARR={
 "before":{"name":"They tried before","lead":1.6,"tail":1.0,"vo":[
  {"id":"linn","gap":0.8,"text":"In the 1750s, Linnaeus gave each species a two-part name, and a place in a hierarchy. Scientists still use his system.","say":"In the seventeen fifties, Linnaeus gave each species a two-part name, and a place in a hierarchy. Scientists still use his system."},
- {"id":"wilkins","gap":0.8,"text":"A century earlier, John Wilkins designed a language to classify everything in the universe. It never took hold."},
+ {"id":"wilkins","gap":0.8,"text":"Nearly a century earlier, John Wilkins designed a language to classify everything in the universe. It never took hold."},
  {"id":"night","gap":0.8,"text":"In 1860, Florence Nightingale asked hospitals to record the same things, in the same way, so that they could be compared.","say":"In eighteen sixty, Florence Nightingale asked hospitals to record the same things, in the same way, so that they could be compared."},
  {"id":"icd","gap":0.8,"text":"An international list of causes of death followed in 1893. Today, it's the International Classification of Diseases.","say":"An international list of causes of death followed in eighteen ninety-three. Today, it's the International Classification of Diseases."},
  {"id":"lesson","gap":0.8,"text":"Shared definitions let strangers compare. The ones that last are made for a purpose, not for everything."}]},
@@ -11,7 +11,7 @@ const NARR={
  {"id":"ask","gap":0.8,"text":"At the university, the Head of School asks Genie: which learners are one microcredential away from a graduate certificate?"},
  {"id":"finds","gap":0.8,"text":"Genie finds the tables. It finds a column called is_micro, and another called stack_ok.","say":"Genie finds the tables. It finds a column called is micro, and another called stack okay."},
  {"id":"wrong","gap":0.8,"text":"But the stacking rules live in a policy document that no tool can read. Genie guesses, and it's wrong."},
- {"id":"read","gap":0.8,"text":"An AI assistant answers from what it can read. Meaning kept in documents is invisible to it."}]},
+ {"id":"read","gap":0.8,"text":"An AI assistant answers from what it can read. Meaning kept only in documents is out of its reach."}]},
 "four":{"name":"Four ways to write meaning down","lead":1.0,"tail":1.0,"vo":[
  {"id":"gloss","gap":0.8,"text":"There are four common ways to write meaning down, and they stack. A glossary: words and their definitions, for people."},
  {"id":"tax","gap":0.8,"text":"A taxonomy: kinds of things in a hierarchy, like Linnaeus's."},

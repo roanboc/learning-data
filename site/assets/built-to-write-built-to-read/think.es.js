@@ -7,7 +7,7 @@ think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar
   qs:{
   "ledger":{stop:"faster",q:"El diario anota cada asiento en orden de tiempo; el mayor guarda los mismos asientos, agrupados por cuenta. ¿Por qué llevar los dos?",
     opts:[{t:"Por si se pierde uno de los libros."},{t:"Cada forma facilita un trabajo: el diario, escribir cada asiento cuando ocurre; el mayor, leer y cuadrar una cuenta.",ok:true},{t:"El mayor es una copia más ordenada, y el diario se podría tirar."}],
-    why:"Un conjunto de hechos, dos formas, dos trabajos. Y como cada asiento está en los dos, el balance puede comprobar que nada se perdió ni se copió mal."},
+    why:"Un conjunto de hechos, dos formas, dos trabajos. Y como cada asiento se pasa dos veces, el balance detecta una cifra mal copiada en un lado (aunque no un asiento que falte por completo)."},
   "wrong":{stop:"update",q:"Su nombre estaba guardado en tres filas de títulos, y solo se corrigieron dos. ¿Qué habría evitado la copia que se pasó por alto?",
     opts:[{t:"Revisar cada fila con más cuidado después de un cambio."},{t:"Guardar el nombre una sola vez, en el registro del aprendiz, con cada título apuntando al aprendiz.",ok:true},{t:"Corregir las filas en otro orden."}],
     why:"Cuando un dato vive en un solo lugar, no hay copia que pasar por alto. Para eso sirve la normalización, en una forma hecha para escribir."},

@@ -11,7 +11,7 @@ scene("ledger",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");histBg(ctx,S,
   const postT=q=>cP+0.7+q.i*1.1+q.side*0.18;
   if(tp<1)withA(ctx,1-tp,()=>{bw_venice(ctx,830,0.55,t);
     yearTag(ctx,110,96,"1494 · Venice",CLAY,fin(t,0.3,0.6));
-    const pm=fin(t,cJ-0.6,1.2);bw_plate(ctx,lerp(960,1305,pm),lerp(470,96,pm),"Summa de arithmetica","Luca Pacioli · Venice, 1494",fin(t,c("venice")+0.3,0.8),lerp(1.3,0.78,pm),t);
+    const pm=fin(t,cJ-0.6,1.2);bw_plate(ctx,lerp(960,1305,pm),lerp(470,96,pm),"Summa de arithmetica","Luca Pacioli · Venice, 1494",fin(t,c("venice")+0.3,0.8),lerp(1.3,0.8,pm),t);
     // the journal: every transaction, as it happened, one after another
     const jA=fin(t,cJ-0.4,0.8);bw_book(ctx,BW_JX,BW_JY,BW_JW,BW_JH,{a:jA,t,title:"Journal",top:100,lh:37,margin:84});
     let qx=null,qy=null;
@@ -74,8 +74,8 @@ const BW_AWARD={name:"award",cols:[["award_id","pk"],["learner_id","fk"],["cours
 scene("write",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const cO=c("once"),cK=c("keys"),cA=c("all"),cN=c("name");
   bw_label(ctx,t,"built to write",BW_W);
-  // the tables, which move up to make room for the transaction
-  const g=fin(t,cA-0.2,1.2),k=lerp(1,0.55,g);ctx.save();ctx.translate(960,lerp(150,96,g));ctx.scale(k,k);ctx.translate(-960,-150);
+  // the tables, which move up to make room for the transaction, and fade back behind it
+  const g=fin(t,cA-0.2,1.2),k=lerp(1,0.55,g);ctx.save();ctx.translate(960,lerp(150,96,g));ctx.scale(k,k);ctx.translate(-960,-150);ctx.globalAlpha*=1-0.72*fin(t,cA+0.3,0.6);
   const nameHi=fin(t,cO+3.4,0.5)*(1-fin(t,cK-0.4,0.8)),keyP=pulseAt(t,cK+0.4,1.6),fkA=fin(t,cK+2.4,0.5),relP=clamp((t-cK-2.5)/1.0,0,1);
   const kA=0.55+0.45*fin(t,cK,0.4);
   const Lg=bw_tbl(ctx,110,150,Object.assign({a:fin(t,cO+0.2,0.6),keyA:kA,hi:keyP*0.5,cell:(j,i)=>j===0&&i===1&&nameHi>0.01?{hi:nameHi,col:mix(INK,BW_W,nameHi)}:null},BW_LEARN));
@@ -98,17 +98,18 @@ scene("write",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     ["A-9009","L-999","MC-ML","2026-09-28"].forEach((v,i)=>T(ctx,v,Ag.cx[i]+14,y+34,{f:"mono",w:500,size:22,color:i===1&&bad>0.5?rgba(BAD,1):rgba(INK,0.8)}));
     if(bad>0.01)withA(ctx,bad,()=>{cross_(ctx,Ag.x+Ag.w+34,y+26,38,BAD,1);tag(ctx,Ag.x+Ag.w+66,y+26,"no learner L-999: rejected",BAD,{size:24});});});}
   ctx.restore();
-  // a transaction: three writes that all happen, or none do
+  // a transaction: three writes that all happen, or none do; each writes a different fact, in its own place
   const bx=230,bw=1460,wA=fin(t,cA+0.3,0.6)*(1-0.86*fin(t,cN+0.1,0.6));
-  const W3=[["1 · award","+ row A-9004"],["2 · learner record","credit points 312 → 324"],["3 · transcript","+ Data visualisation"]];
-  const box=(y,label,st,res,resCol,a)=>withA(ctx,a,()=>{glass(ctx,bx,y,bw,176,18,BW_W,{glow:8,ea:0.01,fill:"rgba(10,18,36,0.55)"});ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(BW_W,0.75);ctx.lineWidth=2;rr(ctx,bx,y,bw,176,18);ctx.stroke();ctx.restore();
+  const W3=[[["1 · award","+ row A-9004"],["2 · learner record","enrolment MC-VIS: completed"],["3 · transcript","+ Data visualisation: passed"]],
+    [["1 · award","+ row A-9005"],["2 · learner record","enrolment MC-ETH: completed"],["3 · transcript","+ Data ethics: passed"]]];
+  const box=(y,label,W,st,res,resCol,a)=>withA(ctx,a,()=>{glass(ctx,bx,y,bw,176,18,BW_W,{glow:8,ea:0.01,fill:"rgba(10,18,36,0.55)"});ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(BW_W,0.75);ctx.lineWidth=2;rr(ctx,bx,y,bw,176,18);ctx.stroke();ctx.restore();
     T(ctx,label,bx+24,y+36,{f:"mono",w:500,size:22,color:rgba(BW_W,1)});
-    st.forEach((s,i)=>{if(s)bw_write(ctx,bx+24+i*476,y+56,460,106,W3[i][0],W3[i][1],s,1);});
+    st.forEach((s,i)=>{if(s)bw_write(ctx,bx+24+i*476,y+56,460,106,W[i][0],W[i][1],s,1);});
     if(res)withA(ctx,res[1],()=>tag(ctx,bx+bw-18-(tw(ctx,res[0],24,700)+26),y+30,res[0],resCol,{size:24}));});
   if(wA>0.01){const a0=cA,s1=[t>a0+2.7?"pend":null,t>a0+3.5?"pend":null,t>a0+4.4?"pend":null].map(s=>s&&t>a0+5.7?"done":s);
-    box(452,"transaction · issue award A-9004",s1,["commit ✓",fin(t,a0+5.7,0.4)],GOOD,wA);
+    box(452,"transaction · issue award A-9004",W3[0],s1,["commit ✓",fin(t,a0+5.7,0.4)],GOOD,wA);
     const b2=fin(t,a0+6.3,0.5);if(b2>0){const s2=[t>a0+6.6?"pend":null,t>a0+6.9?"pend":null,t>a0+7.3?"fail":null].map((s,i)=>s&&i<2&&t>a0+7.9?"back":s);
-      box(648,"transaction · issue award A-9005",s2,["roll back · nothing saved",fin(t,a0+8.2,0.4)],BAD,wA*b2);}}
+      box(648,"transaction · issue award A-9005",W3[1],s2,["roll back · nothing saved",fin(t,a0+8.2,0.4)],BAD,wA*b2);}}
   // what it's called
   const NM=[["normalisation",BW_W,0.5],["keys",REF,1.5],["constraints",BW_W,2.1],["transactions",BW_W,2.8]],ws=NM.map(q=>tw(ctx,q[0],34,700)+26),tot=ws.reduce((p,v)=>p+v,0)+3*44;
   NM.forEach(([s,col,d],i)=>{const a=fin(t,cN+d,0.4);if(a<=0)return;let x=960-tot/2;for(let k2=0;k2<i;k2++)x+=ws[k2]+44;
@@ -190,20 +191,21 @@ scene("docs",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   vign(ctx,S);});
 
 /* ---------- 5. Built to read ---------- */
-const BW_SX=1000,BW_SY=500,BW_SP={learner:[-370,-250],kind:[370,-250],faculty:[-370,250],date:[370,250]};
+const BW_SX=1000,BW_SY=500,BW_SP={course:[-370,-250],kind:[370,-250],learner:[-370,250],date:[370,250]};
 scene("read",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,S);bg2(ctx);
   const cQ=c("q"),cG=c("grain"),cF=c("facts"),cD=c("dims"),cW=c("words"),cS=c("star");
   bw_label(ctx,t,"Planning day · built to read",BW_R);
   person(ctx,"ana",170,886,0.5,{t,pose:t>cQ&&t<cG?"explain":"stand",expr:t>cS?"relieved":"calm"});
   const wA=fin(t,cW+3.4,0.5),fA=fin(t,cW+1.8,0.5);
   bw_qBubble(ctx,40,312,470,BW_QW,{a:fin(t,cQ+0.3,0.5),size:31,hi:i=>i===2?fA:(i===4||i===7)?wA:(i===3||i===6)?wA*0.6:0,hiCol:i=>i===2?GOOD:TRUST});
-  // the star: the grain first, the facts in the middle, the dimensions around them
-  const fa=fin(t,cG+0.2,0.6),dimA={learner:fin(t,cD+3.0,0.5),kind:fin(t,cD+3.8,0.5),faculty:fin(t,cD+4.6,0.5),date:fin(t,cD+5.3,0.5)};
-  const sj=fin(t,cS+1.2,0.5),jn={faculty:sj,date:sj},dimHi={faculty:Math.max(wA,sj),date:Math.max(wA,sj)};
+  // the star: the grain first, the facts in the middle, the dimensions around them; the faculty is kept on the learner, with its dates
+  const fa=fin(t,cG+0.2,0.6),dimA={learner:fin(t,cD+3.0,0.5),kind:fin(t,cD+3.8,0.5),course:fin(t,cD+4.1,0.5),date:fin(t,cD+5.3,0.5)};
+  const sj=fin(t,cS+1.2,0.5),jn={learner:sj,date:sj},facHi=Math.max(pulseAt(t,cD+4.6,1.6),wA),dimHi={learner:Math.max(wA,sj,0.7*pulseAt(t,cD+4.6,1.6)),date:Math.max(wA,sj)};
   if(sj>0)Object.keys(dimA).forEach(k=>{if(!jn[k])dimA[k]*=1-0.5*sj;});
   const starP=pulseAt(t,cS+0.2,1.4);
   if(starP>0.01)withA(ctx,starP,()=>{Object.values(BW_SP).forEach(([dx,dy])=>{ctx.save();ctx.strokeStyle=rgba(BW_R,0.6);ctx.lineWidth=10;ctx.shadowColor=rgba(BW_R,1);ctx.shadowBlur=30;ctx.beginPath();ctx.moveTo(BW_SX,BW_SY);ctx.lineTo(BW_SX+dx,BW_SY+dy);ctx.stroke();ctx.restore();});});
   bw_star(ctx,BW_SX,BW_SY,1,{P:BW_SP,ds:1.2,dimA,join:jn,dimHi,fact:{a:fa,g:fin(t,cG+1.8,0.5),gHi:pulseAt(t,cG+2.0,2.0),m:clamp((t-cF-1.8)/1.6,0,1),k:fin(t,cD+2.6,0.5),hi:fin(t,cF+1.6,0.5)*(1-fin(t,cD+2.2,0.6))+pulseAt(t,cS+0.2,1.4)}});
+  bw_dimWord(ctx,BW_SX+BW_SP.learner[0],BW_SY+BW_SP.learner[1],1.2,"learner","faculty",TRUST,facHi*dimA.learner);
   // one row per credential awarded
   const rw=fin(t,cG+2.2,0.5)*(1-fin(t,cD+2.2,0.6));if(rw>0)withA(ctx,rw,()=>{for(let i=0;i<4;i++){const x=BW_SX-222+i*114,y=666;bw_awardTile(ctx,x,y,102,56,fin(t,cG+2.2+i*0.2,0.3),pulseAt(t,cG+2.2+i*0.2,0.6));}
     T(ctx,"each credential awarded = one row",BW_SX,770,{w:700,size:26,align:"center",color:rgba(TRUST,1)});});
@@ -211,8 +213,8 @@ scene("read",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,S
   withA(ctx,fin(t,cF+1.8,0.5)*(1-fin(t,cS,0.5)),()=>tag(ctx,BW_SX,318,"facts · the numbers you add up",BW_R,{align:"center",size:24}));
   withA(ctx,fin(t,cD+2.0,0.5)*(1-fin(t,cS,0.5)),()=>tag(ctx,BW_SX,140,"dimensions · what you filter or group by",BW_R,{align:"center",size:24}));
   withA(ctx,fin(t,cS+0.3,0.5),()=>tag(ctx,BW_SX,318,"a star",BW_R,{align:"center",size:28}));
-  withA(ctx,wA,()=>{tag(ctx,BW_SX+BW_SP.faculty[0],BW_SY+BW_SP.faculty[1]-82,"by faculty",TRUST,{align:"center",size:22});tag(ctx,BW_SX+BW_SP.date[0],BW_SY+BW_SP.date[1]-82,"by year",TRUST,{align:"center",size:22});});
-  if(sj>0)withA(ctx,sj,()=>{[["faculty","1"],["date","2"]].forEach(([k,n])=>{const x=BW_SX+BW_SP[k][0]*0.52,y=BW_SY+BW_SP[k][1]*0.52;ctx.fillStyle="rgba(7,14,18,0.95)";ctx.beginPath();ctx.arc(x,y,22,0,TAU);ctx.fill();ring(ctx,x,y,22,BW_R,1,2.6);T(ctx,n,x,y+9,{w:800,size:24,align:"center",color:rgba(BW_R,1)});});
+  withA(ctx,wA,()=>{tag(ctx,BW_SX+BW_SP.learner[0],BW_SY+BW_SP.learner[1]-82,"by faculty",TRUST,{align:"center",size:22});tag(ctx,BW_SX+BW_SP.date[0],BW_SY+BW_SP.date[1]-82,"by year",TRUST,{align:"center",size:22});});
+  if(sj>0)withA(ctx,sj,()=>{[["learner","1"],["date","2"]].forEach(([k,n])=>{const x=BW_SX+BW_SP[k][0]*0.68,y=BW_SY+BW_SP[k][1]*0.68;ctx.fillStyle="rgba(7,14,18,0.95)";ctx.beginPath();ctx.arc(x,y,22,0,TAU);ctx.fill();ring(ctx,x,y,22,BW_R,1,2.6);T(ctx,n,x,y+9,{w:800,size:24,align:"center",color:rgba(BW_R,1)});});
     tag(ctx,BW_SX,140,"two joins, not seven",BW_R,{align:"center",size:26});});
   // the test: facts are what you add up; dimensions are the words after "by"
   const tc=fin(t,cW+0.3,0.5);if(tc>0)withA(ctx,tc,()=>{const x=1540,y=140,w=350;glass(ctx,x,y,w,262,18,BW_R,{glow:14,ea:0.8,fill:"rgba(7,14,18,0.94)"});T(ctx,"a simple test",x+24,y+42,{w:800,size:24,color:rgba(BW_R,1)});
@@ -269,14 +271,16 @@ scene("history",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     withA(ctx,t2,()=>T(ctx,"a new row; the old one closed",1024,500,{w:700,size:26,color:rgba(GOOD,1)}));
     withA(ctx,ty,()=>tag(ctx,1730,204,"type 2",BW_R,{size:24,align:"center"}));
     const sp=fin(t,cC+6.4,0.6);if(sp>0){bw_paper(ctx,560,566,800,270,{a:sp,t,rot:-0.01,seed:9,lines:70,lh:40,base:"#efe8da"});pencilText(ctx,"decided, and written down:",610,622,{size:28,p:clamp((t-cC-6.6)/0.6,0,1)});
-      [["name","overwrite"],["email","overwrite"],["faculty","keep history"],["award status","keep history"]].forEach(([a,b],i)=>{const p=clamp((t-cC-7.0-i*0.45)/0.5,0,1);pencilText(ctx,a,630,670+i*40,{size:26,p});pencilText(ctx,b,1000,670+i*40,{size:26,p,color:b==="overwrite"?"rgba(40,90,170,0.95)":"rgba(30,120,80,0.95)"});});}});
+      [["name","overwrite"],["email","overwrite"],["faculty","keep history"],["programme","keep history"]].forEach(([a,b],i)=>{const p=clamp((t-cC-7.0-i*0.45)/0.5,0,1);pencilText(ctx,a,630,670+i*40,{size:26,p});pencilText(ctx,b,1000,670+i*40,{size:26,p,color:b==="overwrite"?"rgba(40,90,170,0.95)":"rgba(30,120,80,0.95)"});});}});
   withA(ctx,fin(t,cS+0.2,0.5),()=>tag(ctx,960,100,"slowly changing dimension",BW_R,{align:"center",size:34}));
   vign(ctx,S);});
 
 /* ---------- 7. Side by side ---------- */
-// the shape built to write: eight tables, seven joins, and a history table to puzzle over
-const BW_NE={award:[490,500,"award"],status:[490,330,"award_status"],learner:[215,410,"learner"],lf:[215,580,"learner_faculty"],faculty:[215,745,"faculty"],course:[765,410,"course"],kind:[765,580,"credential_kind"],cal:[490,690,"calendar"]};
-const BW_NJ=[["award","status","1","*"],["award","learner","*","1"],["learner","lf","1","*"],["lf","faculty","*","1"],["award","course","*","1"],["course","kind","*","1"],["award","cal","*","1"]];
+// the shape built to write: eight tables, and the seven joins the question needs, following the keys. The status leaves out revoked
+// awards; the enrolment leads to the learner, and the learner to the faculty that was true on the award date (the history puzzle);
+// the calendar gives the academic year.
+const BW_NE={award:[490,500,"award"],status:[490,330,"award_status"],enrol:[215,330,"enrolment"],learner:[215,470,"learner"],lf:[215,610,"learner_faculty"],faculty:[215,750,"faculty"],cal:[765,500,"calendar"],year:[765,670,"academic_year"]};
+const BW_NJ=[["award","status","1","*"],["award","enrol","*","1"],["enrol","learner","*","1"],["learner","lf","1","*"],["lf","faculty","*","1"],["award","cal","*","1"],["cal","year","*","1"]];
 scene("side",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const cQ=c("q"),cW=c("write"),cR=c("read"),cN=c("name"),cJ=c("job");
   const nm=fin(t,cN+0.2,0.6)*(1-fin(t,cJ-1.0,0.7)),dg=1-0.9*nm;
@@ -295,8 +299,9 @@ scene("side",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     withA(ctx,fin(t,cW+1.8,0.4),()=>tag(ctx,765,300,"7 joins",BW_W,{align:"center",size:26}));});
   // right: two joins
   const ra=lerp(0.4,1,fin(t,cR-0.3,0.5))*fin(t,cQ+0.4,0.6)*dg,rj=fin(t,cR+0.5,0.5),ss=0.85;
-  withA(ctx,ra,()=>{bw_star(ctx,1430,500,ss,{nosub:true,small:true,fw:390,fh:190,join:{faculty:rj,date:rj},dimA:{learner:1-0.55*rj,kind:1-0.55*rj,faculty:1,date:1},dimHi:{faculty:rj,date:rj}});
-    if(rj>0)withA(ctx,rj,()=>{[["faculty","1",-340,240],["date","2",340,240]].forEach(([k,n,dx,dy])=>{const x=1430+dx*ss*0.55,y=500+dy*ss*0.55;ctx.fillStyle="rgba(7,14,18,0.95)";ctx.beginPath();ctx.arc(x,y,19,0,TAU);ctx.fill();ring(ctx,x,y,19,BW_R,1,2.2);T(ctx,n,x,y+8,{w:800,size:22,align:"center",color:rgba(BW_R,1)});});
+  withA(ctx,ra,()=>{bw_star(ctx,1430,500,ss,{nosub:true,small:true,fw:390,fh:190,join:{learner:rj,date:rj},dimA:{course:1-0.55*rj,kind:1-0.55*rj,learner:1,date:1},dimHi:{learner:rj,date:rj}});
+    if(rj>0)withA(ctx,rj,()=>{[["by faculty",-340],["by year",340]].forEach(([s_,dx])=>tag(ctx,1430+dx*ss,772,s_,TRUST,{align:"center",size:20}));
+      [["learner","1",-340,240],["date","2",340,240]].forEach(([k,n,dx,dy])=>{const x=1430+dx*ss*0.55,y=500+dy*ss*0.55;ctx.fillStyle="rgba(7,14,18,0.95)";ctx.beginPath();ctx.arc(x,y,19,0,TAU);ctx.fill();ring(ctx,x,y,19,BW_R,1,2.2);T(ctx,n,x,y+8,{w:800,size:22,align:"center",color:rgba(BW_R,1)});});
       tag(ctx,1430,806,"2 joins",BW_R,{align:"center",size:26});});});
   // a name correction: one cell on the left, many rows on the right
   if(nm>0.01)withA(ctx,nm,()=>{const fx=fin(t,cN+1.4,0.4);

@@ -1,6 +1,6 @@
 # Rebuilding Both at once
 
-*Both at once*, a film in [From words to data](../../README.md) on hybrid databases, is generated from code like the other Learning Data films. It draws with *The Inner Life of Data*'s engine and components (the vaults, the glass, Genie's orb), *A Sharper Sketch*'s diagrams, *Silent change*'s contract card, and the series' own components in [`../../shared/src/words.js`](../../shared/src/words.js). Its tools are the series' shared tools ([`../../shared/tools/`](../../shared/tools/)); the scripts in `tools/` here run them on this film. Only what is this film's own lives here:
+*Both at once*, a film in [From words to data](../../README.md) on hybrid databases, is generated from code like the other Learning Data films. It draws with *The Inner Life of Data*'s engine and components (the vaults, the glass, Genie's orb), *A Sharper Sketch*'s diagrams, *Silent change*'s version stamp (for a contract card of its own, drawn in that card's manner), and the series' own components in [`../../shared/src/words.js`](../../shared/src/words.js). Its tools are the series' shared tools ([`../../shared/tools/`](../../shared/tools/)); the scripts in `tools/` here run them on this film. Only what is this film's own lives here:
 
 | File | What it holds |
 |---|---|
@@ -8,7 +8,7 @@
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). The film re-times itself to the voice. |
 | `src/breath.js` | The few longer pauses: the title, the change log applied in the right order, and the ending. Every sentence already gets a beat of 0.8 s from `narration.js`. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
-| `src/both.js` | The film's pictures. 1879, drawn soft and warm: wood with grain, a brass register with a sheen, bottles, a lamp that flickers, a wall clock, the patent and the bartender's hand. The present, drawn as crisp glass: a store of rows and a store of columns, the phone, the lakehouse, keys that match rows, change cards, the red ghost, calendar cards, question cards and the freshness scale. The moon, the sun and the hourglass. And `LV`, the pictures its labs and scenarios draw, with every word taken from the words pack. |
+| `src/both.js` | The film's pictures. 1879, drawn soft and warm: wood with grain, a brass register with a sheen, bottles, a lamp that flickers, a wall clock, the patent, and the bartender's hand, its sleeve running out of the frame. The present, drawn as crisp glass: a store of rows and a store of columns, the phone, the lakehouse, keys that match rows, change cards, the red ghost, calendar cards, question cards, the freshness scale, a small one-database capsule and the awards' data contract. The moon, the sun and the hourglass. And `LV`, the pictures its labs and scenarios draw, with every word taken from the words pack. |
 | `src/scenes.js` | The nine chapters. The title is part of the first one. |
 | `tools/score.py` | The music and the sound effects, played with the series' instruments (`../../shared/tools/music.py`): synth-pluck arpeggios at 100 bpm over a soft kick and hi-hat, in E minor, turning to E major at the end, with two interlocking arpeggios (three against two) for the two engines; and, for 1879, a felt-piano oom-pah in C with the cash register's keys, bell and drawer. |
 

@@ -5,7 +5,7 @@
    The labs and the scenarios draw with these too (LV, at the end). Every helper here starts with mw_, to keep clear of the shared files. */
 const MW_V=[186,150,255],MW_S=[120,225,170],MW_W=[255,190,90],MW_C=[140,196,255],MW_SC=OFFICE.short.c,MW_WARM=[238,214,176];
 // the sources, each in its system's colour (short courses keeps its office's pink)
-const MW_SRC={sis:["Student system",APP.sis.c,"SIS"],lms:["Learning platform",APP.lms.c,"LMS"],fin:["Finance system",APP.fin.c,"FIN"],short:["Short-course platform",MW_SC,"short courses"]};
+const MW_SRC={sis:["Student system",APP.sis.c,"SIS"],lms:["Learning platform",APP.lms.c,"LMS"],fin:["Finance system",APP.fin.c,"FIN"],short:["Short-course platform",MW_SC,"SCP"]};
 
 /* ---------- the card catalogue: drawn organic, like the past (wood with grain, paper with fibres, soft light that drifts) ---------- */
 const MW_DRAWERS=["A–Al","Am–Ba","Be–Bo","Br–Ca","Ce–Co","Cr–De","Di–Er","Es–Fo","Fr–Go","Gr–Ha","He–Hu","I–Ju","Ka–La","Le–Ma","Me–Mu","N–Pa","Pe–Ri","Ro–Sm","Sn–Th","Ti–Z"];
@@ -27,14 +27,16 @@ function mw_brass(ctx,x,y,w,h,r){const g=ctx.createLinearGradient(x,y,x,y+h);g.a
 // a drawer pull: a brass loop that thickens in the middle and thins at its ends
 function mw_pull(ctx,cx,cy,r){ctx.beginPath();ctx.moveTo(cx-r,cy);ctx.bezierCurveTo(cx-r,cy+r*1.25,cx+r,cy+r*1.25,cx+r,cy);ctx.bezierCurveTo(cx+r*0.8,cy+r*0.8,cx-r*0.8,cy+r*0.8,cx-r,cy);ctx.closePath();
   const g=ctx.createLinearGradient(cx,cy,cx,cy+r);g.addColorStop(0,"#f6dc98");g.addColorStop(1,"#8c6428");ctx.fillStyle=g;ctx.fill();[-1,1].forEach(sd=>{ctx.fillStyle="#e2c27a";ctx.beginPath();ctx.ellipse(cx+sd*r,cy,2.8,2.2,0,0,TAU);ctx.fill();});}
-// a wooden cabinet of drawers; o.open is the drawer pulled out, by o.p (0..1); a warm light drifts across it. Returns where the open drawer is
-function mw_cabinet(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,t=o.t||0;let at=null;if(a<=0.01)return at;const WOOD=[122,80,46];
+// a wooden cabinet of drawers; o.open lists the drawers pulled out, as [index, p (0..1)] (or one index, pulled by o.p); a warm light drifts across it.
+// Returns where each open drawer is, in the order of o.open
+function mw_cabinet(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,t=o.t||0,open=Array.isArray(o.open)?o.open:(o.open==null?[]:[[o.open,o.p]]),at=[];if(a<=0.01)return null;const WOOD=[122,80,46];
   withA(ctx,a,()=>{const rows=5,cols=4,px=24,top=80,gp=10,dw=(w-px*2-(cols-1)*gp)/cols,dh=(h-top-px-(rows-1)*gp)/rows;
     ctx.save();ctx.shadowColor="rgba(0,0,0,0.75)";ctx.shadowBlur=44;ctx.shadowOffsetY=16;ctx.fillStyle="#3a2313";mw_soft(ctx,x,y,w,h,12,2);ctx.fill();ctx.restore();
     mw_wood(ctx,x,y,w,h,12,WOOD,21,{lines:34});
     mw_wood(ctx,x-16,y-22,w+32,34,8,[150,100,58],23,{lines:5,knot:false});ctx.fillStyle="#24150a";mw_soft(ctx,x+14,y+h-2,w-28,18,5,4);ctx.fill();
     mw_brass(ctx,x+w/2-105,y+28,210,32,6);T(ctx,"CATALOGUE",x+w/2,y+51,{f:"mono",w:500,size:18,align:"center",color:"rgba(60,40,16,0.95)"});
-    for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){const i=r*cols+c,dx=x+px+c*(dw+gp),dy=y+top+r*(dh+gp),op=i===o.open?ease(clamp(o.p||0,0,1)):0;
+    const opened=open.map(q=>q[0]),order=[...Array(rows*cols).keys()].filter(i=>!opened.includes(i)).concat(opened);
+    order.forEach(i=>{const r=Math.floor(i/cols),c=i%cols,k=opened.indexOf(i),dx=x+px+c*(dw+gp),dy=y+top+r*(dh+gp),op=k>=0?ease(clamp(open[k][1]||0,0,1)):0;
       const sc=1+0.14*op,fw=dw*sc,fh=dh*sc,fx=dx+dw/2-fw/2,fy=dy+op*dh*0.62;
       ctx.fillStyle="rgba(20,10,4,0.75)";mw_soft(ctx,dx-2,dy-2,dw+4,dh+4,6,i);ctx.fill();
       if(op>0){ctx.fillStyle="#120904";mw_soft(ctx,dx,dy,dw,dh,5,i);ctx.fill();
@@ -44,7 +46,7 @@ function mw_cabinet(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,t=o.t||0;let 
       const lw=fw*0.6,lh=fh*0.27,lx=fx+fw/2-lw/2,ly=fy+fh*0.16;mw_brass(ctx,lx-3,ly-3,lw+6,lh+6,3);ctx.fillStyle="#f2e8d0";ctx.fillRect(lx,ly,lw,lh);
       T(ctx,MW_DRAWERS[i],fx+fw/2,ly+lh*0.8,{f:"mono",w:500,size:Math.round(lh*0.78),align:"center",color:"rgba(50,36,24,0.95)"});
       mw_pull(ctx,fx+fw/2,fy+fh*0.62,fh*0.15);
-      if(i===o.open)at={x:fx+fw/2,y:fy,dy,w:fw,h:fh};}
+      if(k>=0)at[k]={x:fx+fw/2,y:fy,dy,w:fw,h:fh};});
     // the reading-room light drifting slowly over the wood
     ctx.save();mw_soft(ctx,x-16,y-22,w+32,h+22,12,2);ctx.clip();glow(ctx,x+w*(0.35+0.25*Math.sin(t*0.23)),y+h*(0.3+0.12*Math.sin(t*0.17+1)),w*0.7,[255,214,160],0.16);ctx.restore();});
   return at;}
@@ -112,7 +114,7 @@ function mw_libLight(ctx,t,a){if(a<=0.01)return;ctx.save();ctx.globalCompositeOp
 function mw_panel(ctx,x,y,w,h,col,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{if(o.hi)glow(ctx,x+w/2,y+h/2,Math.max(w,h)*0.6,col,0.22*o.hi);glass(ctx,x,y,w,h,20,col,{glow:14+12*(o.hi||0),ea:0.55+0.4*(o.hi||0),fill:"rgba(7,12,24,0.9)"});});}
 // a source system: its colour, its name
 function mw_source(ctx,x,y,k,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const c=MW_SRC[k][1],n=o.name||MW_SRC[k][0],w=o.w||320,h=o.h||76;
-  withA(ctx,a,()=>{if(o.hi)glow(ctx,x+w/2,y+h/2,w*0.6,c,0.3*o.hi);const room=tw(ctx,n,22,700)+32+62<w;sysCard(ctx,x,y,w,h,n,o.sub||"",c,room?(cx,xx,yy)=>dbGlyph(cx,xx,yy+4,c,0.8):null);if(o.isNew)tag(ctx,x+w-10,y-4,o.newLabel||"new",c,{size:o.newSize||15});});}
+  withA(ctx,a,()=>{if(o.hi)glow(ctx,x+w/2,y+h/2,w*0.6,c,0.3*o.hi);const room=tw(ctx,n,22,700)+32+74<w;sysCard(ctx,x,y,w,h,n,o.sub||"",c,room?(cx,xx,yy)=>dbGlyph(cx,xx,yy+4,c,0.8):null);if(o.isNew)tag(ctx,x+w-10,y-4,o.newLabel||"new",c,{size:o.newSize||15});});}
 // a tick in a small dark disc, for "unchanged" and "agrees"
 function mw_ok(ctx,x,y,r,col,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.fillStyle="rgba(7,12,24,0.95)";ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();ring(ctx,x,y,r,col,1,2);tick_(ctx,x,y+1,r*1.3,col,1);});}
 function mw_no(ctx,x,y,r,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.fillStyle="rgba(7,12,24,0.95)";ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();ring(ctx,x,y,r,BAD,1,2);cross_(ctx,x,y,r*1.2,BAD,1);});}
@@ -125,11 +127,14 @@ function mw_dot(ctx,x0,y0,x1,y1,u,col,a,r){if(a<=0.01||u<0||u>1)return;const x=l
 /* ---------- the data vault: hubs, links and satellites ---------- */
 function mw_key(ctx,x,y,s,col){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=2.4*s;ctx.lineCap="round";ctx.beginPath();ctx.arc(x-7*s,y,6*s,0,TAU);ctx.moveTo(x-1*s,y);ctx.lineTo(x+12*s,y);ctx.moveTo(x+8*s,y);ctx.lineTo(x+8*s,y+5*s);ctx.moveTo(x+12*s,y);ctx.lineTo(x+12*s,y+5*s);ctx.stroke();ctx.restore();}
 // a hub: one row per business key, the thing that identifies a learner or a credential
-function mw_hub(ctx,x,y,name,key,o){o=o||{};const a=o.a==null?1:o.a,w=o.w||280,h=106;if(a<=0.01)return{x,y,w,h};
-  withA(ctx,a,()=>{const hi=o.hi||0;if(hi)glow(ctx,x,y,w*0.7,MW_V,0.3*hi);glass(ctx,x-w/2,y-h/2,w,h,14,MW_V,{glow:16+10*hi,ea:0.95,lw:2.6,fill:"rgba(30,20,56,0.94)"});
-    T(ctx,"HUB",x-w/2+16,y-h/2+24,{f:"mono",w:500,size:14,color:rgba(MW_V,0.9)});T(ctx,name,x,y-4,{w:800,size:28,align:"center",color:rgba(mix(MW_V,[255,255,255],0.35),1)});
+// o.key2 {key, a, label}: a second business key, a new row, grows in under the first (in the new source's pink); the hub's top stays put
+function mw_hub(ctx,x,y,name,key,o){o=o||{};const a=o.a==null?1:o.a,w=o.w||280,k2=o.key2,g=k2?ease(clamp(k2.a||0,0,1)):0,h=106+32*g,top=y-53;if(a<=0.01)return{x,y,w,h,top};
+  withA(ctx,a,()=>{const hi=o.hi||0;if(hi)glow(ctx,x,y,w*0.7,MW_V,0.3*hi);glass(ctx,x-w/2,top,w,h,14,MW_V,{glow:16+10*hi,ea:0.95,lw:2.6,fill:"rgba(30,20,56,0.94)"});
+    T(ctx,"HUB",x-w/2+16,top+24,{f:"mono",w:500,size:14,color:rgba(MW_V,0.9)});T(ctx,name,x,y-4,{w:800,size:28,align:"center",color:rgba(mix(MW_V,[255,255,255],0.35),1)});
     mw_key(ctx,x-w/2+30,y+30,1,MW_V);T(ctx,key,x-w/2+52,y+36,{f:"mono",w:500,size:17,color:rgba(INK,0.9)});
-    if(o.ok)mw_ok(ctx,x+w/2-6,y-h/2+6,15,GOOD,o.ok);});return{x,y,w,h};}
+    if(g>0.01)withA(ctx,g,()=>{ctx.strokeStyle=rgba(MW_SC,0.35);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x-w/2+16,y+49);ctx.lineTo(x+w/2-16,y+49);ctx.stroke();
+      mw_key(ctx,x-w/2+30,y+64,1,MW_SC);T(ctx,k2.key,x-w/2+52,y+70,{f:"mono",w:500,size:17,color:rgba(MW_SC,1)});if(k2.label)T(ctx,k2.label,x+w/2-14,y+70,{f:"mono",w:500,size:14,align:"right",color:rgba(MW_SC,0.9)});});
+    if(o.ok)mw_ok(ctx,x+w/2-6,top+6,15,GOOD,o.ok);});return{x,y,w,h,top};}
 // a link: one row per relationship between hubs
 function mw_link(ctx,x,y,name,o){o=o||{};const a=o.a==null?1:o.a,w=o.w||250,h=84;if(a<=0.01)return{x,y,w,h};
   withA(ctx,a,()=>{const hi=o.hi||0,c=mix(MW_V,[255,255,255],0.2);if(hi)glow(ctx,x,y,w*0.6,MW_V,0.28*hi);ctx.save();ctx.shadowColor=rgba(MW_V,0.8);ctx.shadowBlur=14+10*hi;ctx.beginPath();
@@ -150,7 +155,7 @@ function mw_starShape(ctx,x,y,r,col,a){withA(ctx,a==null?1:a,()=>{ctx.beginPath(
 function mw_fact(ctx,x,y,name,grain,o){o=o||{};const a=o.a==null?1:o.a,w=o.w||300,h=o.h||112;if(a<=0.01)return{x,y,w,h};
   withA(ctx,a,()=>{const hi=o.hi||0;if(hi)glow(ctx,x,y,w*0.75,MW_S,0.35*hi);glass(ctx,x-w/2,y-h/2,w,h,16,MW_S,{glow:16+12*hi,ea:0.85+0.15*hi,lw:2.4,fill:"rgba(8,30,24,0.94)"});
     mw_starShape(ctx,x-w/2+38,y-(o.bare?0:14),18,MW_S,1);if(!o.bare)T(ctx,"FACT",x-w/2+38,y+26,{f:"mono",w:500,size:14,align:"center",color:rgba(MW_S,0.9)});
-    T(ctx,name,x-w/2+72,y+(o.bare?11:-4),{w:800,size:31,color:rgba(mix(MW_S,[255,255,255],0.3),1)});if(grain)T(ctx,grain,x-w/2+72,y+28,{w:600,size:17,color:rgba(SOFT,1)});
+    T(ctx,name,x-w/2+72,y+(o.bare?11:-4),{w:800,size:mw_fs(ctx,name,31,800,w-86,20),color:rgba(mix(MW_S,[255,255,255],0.3),1)});if(grain)T(ctx,grain,x-w/2+72,y+28,{w:600,size:17,color:rgba(SOFT,1)});
     if(o.num)T(ctx,o.num,x+w/2-16,y-6,{f:"mono",w:500,size:18,align:"right",color:rgba(MW_S,1)});});return{x,y,w,h};}
 function mw_dim(ctx,x,y,name,o){o=o||{};const a=o.a==null?1:o.a,sh=!!o.shared,w=o.w||(sh?290:220),h=sh?86:60;if(a<=0.01)return{x,y,w,h};
   withA(ctx,a,()=>{const hi=o.hi||0,c=sh?mix(MW_S,[255,255,255],0.25):mix(MW_S,[150,170,190],0.45);if(hi)glow(ctx,x,y,w*0.7,MW_S,0.3*hi);
@@ -224,7 +229,8 @@ function mw_wideGlyph(ctx,cx,cy,s,o){o=o||{};const a=o.a==null?1:o.a,p=o.p==null
     for(let j=1;j<nc;j++){const q=clamp(p*nc-j,0,1);ctx.strokeStyle=rgba(col,0.25*q+0.05);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x+j*cw,y+2);ctx.lineTo(x+j*cw,y+h-2);ctx.stroke();}
     for(let r=0;r<3;r++)for(let j=0;j<nc;j++){const q=clamp(p*nc-j,0,1);if(q<=0)continue;ctx.fillStyle=rgba(j===(o.newCol==null?-1:o.newCol)?MW_SC:col,(0.35+0.4*hash(r*13+j,2))*q);ctx.fillRect(x+j*cw+5*s,y+28*s+r*18*s,cw-10*s,6*s);}
     if(o.hiRow!=null){ctx.strokeStyle=rgba(col,0.95*o.hiRow);ctx.lineWidth=2;rr(ctx,x+2,y+22*s+0*18*s,w-4,17*s,4);ctx.stroke();}
-    const g=ctx.createLinearGradient(x+w-40*s,0,x+w+26*s,0);g.addColorStop(0,"rgba(7,11,23,0)");g.addColorStop(1,"rgba(7,11,23,0.9)");ctx.fillStyle=g;ctx.fillRect(x+w-40*s,y-4,66*s,h+8);});}
+    // more columns, off to the right: a fade inside the glyph's own edge (none when a new column is the point)
+    if(o.newCol==null){ctx.save();rr(ctx,x,y,w,h,8*s);ctx.clip();const g=ctx.createLinearGradient(x+w-44*s,0,x+w,0);g.addColorStop(0,"rgba(20,14,6,0)");g.addColorStop(1,"rgba(20,14,6,0.92)");ctx.fillStyle=g;ctx.fillRect(x+w-44*s,y-4,44*s+4,h+8);ctx.restore();}});}
 const MW_SHAPES={core:["normalised core",MW_C,mw_coreGlyph],vault:["data vault",MW_V,mw_vaultGlyph],star:["star",MW_S,mw_starGlyph],wide:["wide table",MW_W,mw_wideGlyph]};
 
 /* ---------- tools that ask questions ---------- */
@@ -276,6 +282,7 @@ function mw_platform(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;
    (600 wide) show at about 70%, so theirs is 18 px or more. */
 const mw_fit=(c,w,h,bw,bh)=>{const k=Math.min(w/bw,h/bh);c.translate((w-bw*k)/2,(h-bh*k)/2);c.scale(k,k);return k;};
 const mwV=L=>(L&&L.vis)||{};
+const mw_fs=(c,s,size,wt,max,min)=>{let z=size;while(z>(min||16)&&tw(c,s||"",z,wt)>max)z--;return z;};
 const LV={
   // Same question, four shapes: the chosen shape, large, and how much work the question takes in it
   shapes:(c,w,h,st,L)=>{const V=mwV(L),k=st.pick||"core",sh=MW_SHAPES[k],lab=(L.labs.find(x=>x.kind==="pick")||{w:{opts:[]}}).w.opts.find(o=>o[0]===k);c.save();mw_fit(c,w,h,960,420);
@@ -293,22 +300,23 @@ const LV={
     withA(c,s===0?1:0.45,()=>{arrowTo(c,440,56,540,56,MW_SC,0.8,{head:12});glass(c,550,18,210,76,16,LAYER.bronze,{glow:s===0?20:8,ea:0.9,fill:"rgba(26,16,10,0.92)"});T(c,V.bronze||"",655,66,{w:800,size:26,align:"center",color:rgba(LAYER.bronze,1)});});
     items.forEach(([k,col,f,x,res,rc],i)=>{const act=on===k||(s===5&&k==="vault"),shown=s>=i+1;withA(c,act?1:(s===5?0.55:0.4),()=>{mw_panel(c,x-112,126,224,210,col,{hi:act?0.8:0});
       f(c,x,222,0.74,{extra:k==="vault"&&shown?1:0,newCol:k==="wide"&&shown?9:null,cols:k==="wide"&&shown?10:9});
-      T(c,V[k]||"",x,322,{w:800,size:22,align:"center",color:rgba(col,1)});
+      T(c,V[k]||"",x,322,{w:800,size:mw_fs(c,V[k],22,800,200),align:"center",color:rgba(col,1)});
       if(shown){tag(c,x,372,res||"",rc,{align:"center",size:22});if(k==="vault")mw_ok(c,x+100,138,16,GOOD,1);}});});
     c.restore();},
   // Where does each shape live? Four places, and the items put in each
   where:(c,w,h,st,L)=>{const V=mwV(L),lab=L.labs.find(x=>x.kind==="sort"),pick=st.pick||{};c.save();mw_fit(c,w,h,960,420);
     const Z={bronze:[20,150,220,LAYER.bronze,V.bronze],silver:[256,150,330,LAYER.silver,V.silver],gold:[602,150,338,LAYER.gold,V.gold]};
     Object.keys(Z).forEach(k=>{const[x,y,zw,col,nm]=Z[k];glass(c,x,y,zw,258,18,col,{glow:14,ea:0.8,fill:"rgba(8,12,22,0.9)"});T(c,nm||"",x+zw/2,y+36,{w:800,size:26,align:"center",color:rgba(col,1)});});
-    mw_sem(c,602,72,338,1.2,1,{h:110,col:[200,236,255]});T(c,V.sem||"",771,44,{w:800,size:22,align:"center",color:"rgba(230,246,255,0.98)"});
+    const nSem=lab.w.items.filter((it,i)=>pick[i]==="sem").length,semH=Math.max(110,87+42*(nSem-1));
+    mw_sem(c,602,14+semH/2,338,1.2,1,{h:semH,col:[200,236,255]});T(c,V.sem||"",771,42,{w:800,size:22,align:"center",color:"rgba(230,246,255,0.98)"});
     const by={};lab.w.items.forEach((it,i)=>{const b=pick[i];if(!b)return;const n=by[b]=(by[b]||0)+1,ok=it.b===b,col=st.checked?(ok?GOOD:BAD):INK,txt=it.s||it.t;
-      let x,y;if(b==="sem"){x=771;y=70+(n-1)*44;}else{const[zx,zy,zw]=Z[b];x=zx+zw/2;y=zy+80+(n-1)*50;}
-      const tw_=Math.min(b==="bronze"?210:320,tw(c,txt,22,700)+30);glass(c,x-tw_/2,y-19,tw_,38,19,col,{glow:8,ea:0.9,fill:"rgba(7,12,24,0.96)"});T(c,txt,x,y+8,{w:700,size:22,align:"center",color:rgba(col,1)});});
+      let x,y;if(b==="sem"){x=771;y=72+(n-1)*42;}else{const[zx,zy,zw]=Z[b];x=zx+zw/2;y=zy+80+(n-1)*50;}
+      const cw=b==="bronze"?210:320,fz=mw_fs(c,txt,22,700,cw-30),tw_=Math.min(cw,tw(c,txt,fz,700)+30);glass(c,x-tw_/2,y-19,tw_,38,19,col,{glow:8,ea:0.9,fill:"rgba(7,12,24,0.96)"});T(c,txt,x,y+fz*0.36,{w:700,size:fz,align:"center",color:rgba(col,1)});});
     c.restore();},
   // scenarios
   audit:(c,w,h,st,L)=>{const V=mwV(L);tag(c,300,34,V.whoWhen||"",TRUST,{align:"center",size:20});c.save();c.translate(95,70);c.scale(1.3,1.3);
-    mw_sat(c,0,0,320,(V.creditSoFar||"")+": 45","sis","2026-03-03 02:10",{srcHi:1,hi:0.5});mw_sat(c,0,86,320,(V.creditSoFar||"")+": 40","sis","2026-02-10 02:08",{});c.restore();},
-  twostars:(c,w,h,st,L)=>{const V=mwV(L);mw_fact(c,150,70,V.awards||"","",{w:250,h:84,bare:true});mw_fact(c,450,70,V.fees||"","",{w:250,h:84,bare:true});
+    mw_sat(c,0,0,320,V.statusNew||"","sis","2026-03-03 02:10",{srcHi:1,hi:0.5});mw_sat(c,0,86,320,V.statusOld||"","sis","2026-02-10 02:08",{});c.restore();},
+  twostars:(c,w,h,st,L)=>{const V=mwV(L);mw_fact(c,150,70,V.awards||"","",{w:270,h:84,bare:true});mw_fact(c,450,70,V.fees||"","",{w:270,h:84,bare:true});
     mw_line(c,150,112,150,190,MW_S,0.7);mw_line(c,450,112,450,190,MW_S,0.7);
     mw_dim(c,150,236,V.learner||"",{shared:true,w:250,sub:"L-20417",subSize:20});mw_dim(c,450,236,V.learner||"",{shared:true,w:250,sub:"F-88213",subSize:20,subCol:EDGE_});T(c,"≠",300,252,{w:800,size:44,align:"center",color:rgba(BAD,1)});},
   twice:(c,w,h,st,L)=>{const V=mwV(L),cols=[[V.learner||"",150],[V.creditSoFar||"",250]];

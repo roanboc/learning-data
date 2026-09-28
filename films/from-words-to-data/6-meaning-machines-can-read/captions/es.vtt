@@ -3,86 +3,86 @@ WEBVTT
 00:00:01.600 --> 00:00:09.957
 En la década de 1750, Linneo dio a cada especie un nombre de dos partes, y un lugar en una jerarquía. La ciencia aún usa su sistema.
 
-00:00:10.657 --> 00:00:17.584
-Un siglo antes, John Wilkins diseñó una lengua para clasificar todo lo que hay en el universo. Nunca prosperó.
+00:00:10.657 --> 00:00:18.011
+Casi un siglo antes, John Wilkins diseñó una lengua para clasificar todo lo que hay en el universo. Nunca prosperó.
 
-00:00:18.784 --> 00:00:26.772
+00:00:19.211 --> 00:00:27.199
 En 1860, Florence Nightingale pidió a los hospitales registrar lo mismo, de la misma manera, para poder compararlos.
 
-00:00:27.472 --> 00:00:35.740
+00:00:27.899 --> 00:00:36.167
 Le siguió, en 1893, una lista internacional de causas de muerte. Hoy es la Clasificación Internacional de Enfermedades.
 
-00:00:36.940 --> 00:00:43.473
+00:00:37.367 --> 00:00:43.900
 Las definiciones compartidas permiten que desconocidos comparen. Las que perduran se hacen para un propósito, no para todo.
 
-00:00:50.373 --> 00:00:57.966
+00:00:50.800 --> 00:00:58.393
 En la universidad, la directora de la escuela le pregunta a Genie: ¿qué aprendices están a una microcredencial de un diplomado de posgrado?
 
-00:00:58.666 --> 00:01:04.377
+00:00:59.093 --> 00:01:04.804
 Genie encuentra las tablas. Encuentra una columna llamada is_micro, y otra llamada stack_ok.
 
-00:01:05.477 --> 00:01:11.738
+00:01:05.904 --> 00:01:12.165
 Pero las reglas de apilamiento viven en un documento de política que ninguna herramienta lee. Genie adivina, y se equivoca.
 
-00:01:13.238 --> 00:01:19.038
-Un asistente de IA responde con lo que puede leer. El significado guardado en documentos le es invisible.
+00:01:13.665 --> 00:01:19.836
+Un asistente de IA responde con lo que puede leer. El significado guardado solo en documentos queda fuera de su alcance.
 
-00:01:22.038 --> 00:01:29.174
+00:01:22.836 --> 00:01:29.972
 Hay cuatro formas comunes de escribir el significado, y se apilan. Un glosario: palabras y sus definiciones, para personas.
 
-00:01:30.174 --> 00:01:34.101
+00:01:30.972 --> 00:01:34.899
 Una taxonomía: clases de cosas en una jerarquía, como la de Linneo.
 
-00:01:34.801 --> 00:01:41.432
+00:01:35.599 --> 00:01:42.230
 Una ontología: conceptos, las relaciones entre ellos, y reglas que una máquina puede comprobar y usar para razonar.
 
-00:01:42.532 --> 00:01:46.771
+00:01:43.330 --> 00:01:47.569
 Y una capa semántica: cómo se calcula cada cifra, definida una sola vez.
 
-00:01:47.471 --> 00:01:50.673
+00:01:48.269 --> 00:01:51.471
 No son rivales. Cada una responde una pregunta distinta.
 
-00:01:56.373 --> 00:02:08.596
+00:01:57.171 --> 00:02:09.394
 En la ontología, las reglas se escriben como afirmaciones. Una microcredencial es una clase de credencial. Un diplomado de posgrado acepta hasta cuatro microcredenciales aprobadas para sus créditos.
 
-00:02:10.096 --> 00:02:18.979
+00:02:10.894 --> 00:02:19.777
 Conecta los datos de la universidad con estas afirmaciones, y se vuelven un grafo de conocimiento: aprendices, credenciales y cursos, unidos por lo que significan.
 
-00:02:20.479 --> 00:02:27.249
+00:02:21.277 --> 00:02:28.047
 Es la receta de Aristóteles, formalizada: la clase de cosa, y lo que la distingue, en una forma que una máquina pueda usar.
 
-00:02:30.349 --> 00:02:38.561
+00:02:31.147 --> 00:02:39.359
 En la capa semántica, «credenciales otorgadas este año» se define una sola vez: qué se cuenta, qué se deja fuera, qué fecha y con qué grano.
 
-00:02:39.861 --> 00:02:45.035
+00:02:40.659 --> 00:02:45.833
 Tableros, planillas y Genie le preguntan a ella, en lugar de escribir cada uno su propia versión.
 
-00:02:46.135 --> 00:02:51.112
+00:02:46.933 --> 00:02:51.910
 Empiezan a aparecer formatos abiertos para compartir estas definiciones entre herramientas.
 
-00:02:53.812 --> 00:03:01.927
+00:02:54.610 --> 00:03:02.725
 No tienes que partir de una hoja en blanco. Finanzas, salud, seguros y comercio minorista publican modelos compartidos, y la educación también.
 
-00:03:03.127 --> 00:03:08.358
+00:03:03.925 --> 00:03:09.156
 Las credenciales digitales también tienen estándares abiertos, con emisor, titular y evidencia.
 
-00:03:09.458 --> 00:03:17.651
+00:03:10.256 --> 00:03:18.449
 Hasta «microcredencial» tiene definiciones oficiales: de Australia, de la Unión Europea y de la UNESCO. No coinciden del todo.
 
-00:03:19.151 --> 00:03:25.403
+00:03:19.949 --> 00:03:26.201
 Así que elige a propósito. Revisa, adopta, extiende y registra, como en Un boceto más preciso, en cada capa.
 
-00:03:28.103 --> 00:03:34.950
+00:03:28.901 --> 00:03:35.748
 La directora vuelve a preguntar. Esta vez, Genie repregunta: ¿aprobadas para apilar, o todas las microcredenciales?
 
-00:03:36.050 --> 00:03:38.893
+00:03:36.848 --> 00:03:39.691
 Luego responde, y muestra la definición que usó.
 
-00:03:40.193 --> 00:03:49.288
+00:03:40.991 --> 00:03:50.086
 Varios estudios han encontrado que basar un asistente en significado explícito aumenta de forma medible sus aciertos. La diferencia es el significado que puede leer.
 
-00:03:51.988 --> 00:04:01.984
+00:03:52.786 --> 00:04:02.782
 Vuelve el triángulo del comienzo de la serie: la palabra, en inglés y en español; la idea, ahora escrita en la ontología; y los datos a los que apunta.
 
-00:04:03.484 --> 00:04:06.795
+00:04:04.282 --> 00:04:07.593
 Siguiente: que todo siga siendo verdad, mientras todo cambia.

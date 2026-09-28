@@ -32,7 +32,7 @@ Una base de datos híbrida escribe y lee en un solo lugar.
 
 9
 00:01:03,280 --> 00:01:10,424
-Algunas guardan dos copias adentro: filas para escribir y columnas para leer, que la propia base de datos mantiene al paso.
+Algunas guardan dos copias adentro: filas para escribir y columnas para leer, que la propia base de datos mantiene sincronizadas.
 
 10
 00:01:11,824 --> 00:01:17,610
@@ -44,7 +44,7 @@ La idea tiene nombre: HTAP, procesamiento híbrido transaccional y analítico.
 
 12
 00:01:26,682 --> 00:01:33,990
-Mantener dos formas al paso significa capturar cada cambio cuando ocurre, y aplicarlo del otro lado, en el mismo orden.
+Mantener dos formas sincronizadas significa capturar cada cambio cuando ocurre, y aplicarlo del otro lado, en el mismo orden.
 
 13
 00:01:35,490 --> 00:01:43,473
@@ -56,7 +56,7 @@ Aplica la revocación de un título antes que su emisión, y el título vuelve a
 
 15
 00:01:57,240 --> 00:02:04,069
-¿Qué se va? La copia nocturna, los pipelines que la mueven, la espera y un segundo conjunto de permisos que mantener al paso.
+¿Qué se va? La copia nocturna, los pipelines que la mueven, la espera y un segundo conjunto de permisos que mantener sincronizado.
 
 16
 00:02:05,369 --> 00:02:06,753

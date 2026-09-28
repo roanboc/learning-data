@@ -17,7 +17,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Every row has a key that identifies it, and rules the data must meet: every award belongs to a learner who exists.":
 "Cada fila tiene una clave que la identifica, y reglas que los datos deben cumplir: cada título pertenece a un aprendiz que existe.",
 "And issuing an award touches three things at once: the award, the learner's record, and the transcript. All three change, or none of them do. Half an award is never saved.":
-"Y otorgar un título toca tres cosas a la vez: el título, el registro del aprendiz y el certificado analítico. Cambian las tres, o ninguna. Nunca se guarda medio título.",
+"Y otorgar un título toca tres cosas a la vez: el título, el registro del aprendiz y el historial académico. Cambian las tres, o ninguna. Nunca se guarda medio título.",
 "This is normalisation, with keys, constraints and transactions.":
 "Esto es la normalización, con claves, restricciones y transacciones.",
 "Store the learner's name on every award instead, and it lives in three places.":

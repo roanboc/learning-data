@@ -189,6 +189,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 150
     strategy:
+      # one film's lost runner shouldn't cancel the others' renders: the release still waits for every film,
+      # and "Re-run failed jobs" then renders only the one that failed
+      fail-fast: false
       matrix:
         include: ${{ fromJSON(needs.plan.outputs.matrix) }}
     defaults:

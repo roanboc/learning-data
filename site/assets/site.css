@@ -373,3 +373,31 @@ dialog.clip .player{border-radius:0;border-left:0;border-right:0;box-shadow:none
 .prose .making-films{margin:22px 0 8px}.prose .making-film+.making-film{margin-top:40px}
 .prose .making-film h2{margin-top:0}.prose .player img{margin:0;border:0;border-radius:0}
 .prose .watch-foot .notes p{font-size:15px}
+/* "On this page" (the Making of page): a sidebar beside the text on wide screens, a bar under the header on narrower ones.
+   assets/doc-nav.js marks the section being read with aria-current="location". */
+.doc-nav{font-size:14px}
+.doc-k{margin:0;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.doc-toc .doc-k{margin:18px 0 6px 14px}.doc-toc .doc-k:first-child{margin-top:0}
+.doc-toc ol{list-style:none;margin:0;padding:0}
+.doc-toc a{display:block;padding:6px 12px;border-left:2px solid var(--line);color:var(--muted);text-decoration:none;line-height:1.35;transition:color .15s,border-color .15s,background .15s}
+.doc-toc a:hover{color:var(--fg);border-left-color:var(--muted)}
+.doc-toc a[aria-current]{color:var(--fg);font-weight:700;border-left-color:var(--accent);background:var(--card);border-radius:0 8px 8px 0}
+.doc-nav-btn{display:none}
+@media (min-width:1100px){
+  .doc:has(.doc-nav){display:grid;grid-template-columns:236px minmax(0,1fr);gap:52px;align-items:start}
+  .doc .doc-nav{position:sticky;top:calc(var(--top-h) + 22px);max-height:calc(100vh - var(--top-h) - 44px);overflow-y:auto;overscroll-behavior:contain;padding:30px 4px 16px 0;scrollbar-width:thin}
+  .doc:has(.doc-nav) .prose{max-width:none}
+}
+@media (max-width:1099px){
+  html:has(.doc-nav){scroll-padding-top:calc(var(--top-h) + 60px)}
+  .doc-nav{position:sticky;top:var(--top-h);z-index:20;margin:0 calc(50% - 50vw);background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 6px 16px rgba(15,25,45,.06)}
+  .doc-nav-btn{display:flex;align-items:center;gap:10px;width:100%;max-width:1160px;margin:0 auto;padding:12px 20px;border:0;background:none;cursor:pointer;text-align:left;min-height:48px}
+  .doc-nav-btn .doc-now{flex:1;min-width:0;font-weight:700;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .doc-nav-btn::after{content:"";width:9px;height:9px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg) translateY(-3px);transition:transform .2s;flex:none}
+  .doc-nav.open .doc-nav-btn::after{transform:rotate(-135deg) translateY(-2px)}
+  .doc-toc{max-width:1160px;margin:0 auto;padding:4px 20px 16px;max-height:min(62vh,560px);overflow-y:auto;overscroll-behavior:contain}
+  .doc-nav.js:not(.open) .doc-toc{display:none}
+  .doc-nav:not(.js){position:static;margin:16px 0 0;background:none;backdrop-filter:none;-webkit-backdrop-filter:none;border:1px solid var(--line);border-radius:12px}
+  .doc-nav:not(.js) .doc-toc{padding:14px 16px;max-height:none}
+}
+@media (max-width:640px){.doc-nav-btn,.doc-toc{padding-left:16px;padding-right:16px}}

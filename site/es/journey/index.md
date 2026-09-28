@@ -33,9 +33,6 @@ Empieza con dos películas cortas, en inglés: cómo se dibujan las películas y
 </section>
 </div>
 
-**En esta página**
-
-[TOC]
 
 ## De un vistazo
 

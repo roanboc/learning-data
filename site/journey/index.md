@@ -33,9 +33,6 @@ Start with two short films: how the films are drawn, and how they are made.
 </section>
 </div>
 
-**On this page**
-
-[TOC]
 
 ## At a glance
 

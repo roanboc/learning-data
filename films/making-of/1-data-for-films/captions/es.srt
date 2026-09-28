@@ -1,0 +1,191 @@
+1
+00:00:04,200 --> 00:00:08,123
+Esta es La vida interior de los datos, en el minuto 2:31.
+
+2
+00:00:08,823 --> 00:00:10,731
+Detengámosla aquí, y miremos de cerca.
+
+3
+00:00:11,431 --> 00:00:12,141
+Más cerca.
+
+4
+00:00:13,441 --> 00:00:18,830
+La imagen se divide en cuadritos: píxeles. Y cada píxel es solo tres números.
+
+5
+00:00:20,030 --> 00:00:25,797
+Cuánto rojo, cuánto verde y cuánto azul, cada uno de 0 a 255.
+
+6
+00:00:32,297 --> 00:00:39,171
+Un cuadro es una cuadrícula de estos números: 1,920 píxeles a lo ancho, y 1,080 a lo alto.
+
+7
+00:00:39,871 --> 00:00:44,107
+Son unos dos millones de píxeles, y seis millones de números, en un solo cuadro.
+
+8
+00:00:45,407 --> 00:00:47,753
+La película muestra treinta cuadros por segundo.
+
+9
+00:00:48,453 --> 00:00:51,485
+Nadie escribió esos números. Entonces, ¿de dónde vienen?
+
+10
+00:00:54,185 --> 00:00:58,892
+Del código. Y el código no dice qué píxeles pintar. Describe formas.
+
+11
+00:00:59,592 --> 00:01:02,154
+Rellena un rectángulo aquí, de este ancho, de este color.
+
+12
+00:01:03,454 --> 00:01:05,857
+Un círculo. Una línea. Una curva. Una palabra.
+
+13
+00:01:07,557 --> 00:01:10,397
+El navegador calcula qué píxeles cubre cada forma.
+
+14
+00:01:11,497 --> 00:01:17,699
+Donde un borde corta un píxel, ese píxel recibe parte del color, así el borde se ve suave y no dentado.
+
+15
+00:01:19,599 --> 00:01:25,079
+El código real de la película es más denso, pero la idea es la misma: formas, posiciones y colores.
+
+16
+00:01:27,779 --> 00:01:31,545
+Toma una de las piezas de datos de la película. Se dibuja en cinco capas.
+
+17
+00:01:32,245 --> 00:01:36,803
+Una tarjeta oscura, un trozo de imagen, un marco, marcas de esquina y una marca de tiempo.
+
+18
+00:01:38,303 --> 00:01:42,798
+El orden importa. Lo que se dibuja después tapa lo anterior, como la pintura.
+
+19
+00:01:43,898 --> 00:01:47,029
+Dibuja la imagen al final, y la marca de tiempo desaparece.
+
+20
+00:01:48,329 --> 00:01:54,372
+La luz es distinta. Donde dos brillos se superponen, el código suma sus números, como hace la luz real.
+
+21
+00:01:55,472 --> 00:01:56,933
+Así brillan los lentes.
+
+22
+00:01:58,233 --> 00:02:04,689
+Y la falla de una pieza en bruto también se hace con números: el código corre el rojo y el azul unos píxeles hacia un lado.
+
+23
+00:02:07,989 --> 00:02:11,669
+Nadie dibuja cada pieza a mano. La pieza es una función.
+
+24
+00:02:12,369 --> 00:02:17,952
+Dale una posición, un tamaño, un trozo de la imagen y qué tan limpia está, y se dibuja sola.
+
+25
+00:02:19,252 --> 00:02:22,186
+Dale diez filas de datos, y obtienes diez piezas.
+
+26
+00:02:23,686 --> 00:02:28,001
+Aquí está la real: dos líneas, llamadas en casi cada cuadro de la película.
+
+27
+00:02:30,101 --> 00:02:36,382
+La película, los labs y las situaciones llaman a las mismas funciones. Corrige una, y la corrección llega a todas partes.
+
+28
+00:02:39,482 --> 00:02:43,530
+Toda la plataforma se dibuja a su propio tamaño, mucho más grande que la pantalla.
+
+29
+00:02:44,230 --> 00:02:50,123
+Así que la cámara no es un lente. Son tres números: adónde mirar, a lo ancho y a lo alto, y cuánto acercarse.
+
+30
+00:02:50,823 --> 00:02:54,218
+Una instrucción los aplica antes de dibujar nada.
+
+31
+00:02:55,718 --> 00:03:00,281
+Cambia los números suavemente, y volamos de la plataforma entera a una sola carcasa.
+
+32
+00:03:04,481 --> 00:03:07,080
+Hasta ahora, un cuadro. Pero una película se mueve.
+
+33
+00:03:07,780 --> 00:03:12,713
+Cada cuadro es una función del tiempo. Dale al código un momento, y dibuja ese momento.
+
+34
+00:03:14,013 --> 00:03:18,945
+¿Dónde está esta pieza ahora? Salió de aquí, a esta velocidad, hace este tiempo. Así que está ahí.
+
+35
+00:03:20,245 --> 00:03:24,457
+Retrocede, o salta hacia adelante, y el código simplemente dibuja ese otro momento.
+
+36
+00:03:25,757 --> 00:03:31,637
+El movimiento necesita cuidado. A velocidad constante, se ve mecánico. Suavizado al inicio y al final, se ve tranquilo.
+
+37
+00:03:33,337 --> 00:03:38,832
+Incluso lo que parece aleatorio no lo es. Qué piezas tienen fallas o se duplican sale de una fórmula.
+
+38
+00:03:39,932 --> 00:03:44,131
+Así, el mismo momento se dibuja igual, cada vez, en cualquier computadora.
+
+39
+00:03:47,431 --> 00:03:49,437
+Eso da dos formas de ver las películas.
+
+40
+00:03:50,437 --> 00:04:00,475
+En el sitio, tu navegador descarga el código y la banda sonora. Cada vez que tu pantalla se actualiza, le pregunta a la banda sonora cuánto avanzó, y dibuja ese momento.
+
+41
+00:04:01,975 --> 00:04:09,154
+Para un archivo de video, un navegador sin ventana dibuja cada cuadro, treinta por segundo, y se los pasa a un codificador.
+
+42
+00:04:10,254 --> 00:04:13,852
+El codificador guarda sobre todo lo que cambió de un cuadro al siguiente.
+
+43
+00:04:15,352 --> 00:04:25,714
+Guardada como números en bruto, La vida interior de los datos ocuparía unos 80 gigabytes. El video ocupa unos 200 megabytes. El código y el sonido, unos siete.
+
+44
+00:04:28,014 --> 00:04:35,809
+Un folioscopio guarda cada página. La película en vivo no guarda ninguna: es la receta. El video es un folioscopio, hecho con esa receta.
+
+45
+00:04:39,109 --> 00:04:41,072
+Ahora, volvamos a armar el cuadro.
+
+46
+00:04:41,772 --> 00:04:45,124
+Números. Formas. Capas. Componentes. Una cámara. Y el tiempo.
+
+47
+00:04:46,424 --> 00:04:47,735
+Y la película sigue.
+
+48
+00:04:48,835 --> 00:04:51,551
+Una imagen son datos. Una película es una función.

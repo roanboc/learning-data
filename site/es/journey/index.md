@@ -17,8 +17,8 @@ Empieza con dos películas cortas, en inglés: cómo se dibujan las películas y
 <div class="bar"><button id="dff-play">Reproducir</button><input id="dff-scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="dff-time">0:00</span><button id="dff-cc" class="on" aria-pressed="true">Subtítulos</button><button id="dff-fs">Pantalla completa</button></div>
 </div>
 <div class="chapters" id="dff-chapters" aria-label="Capítulos"></div>
-<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/data-for-films.mp4">Descargar el video (en inglés)</a><a href="https://github.com/roanboc/learning-data/blob/main/films/making-of/1-data-for-films/script.md" hreflang="en">Leer el guion (en inglés)</a></p>
-<details class="howto"><summary>Cómo leer la película</summary><div class="notes"><p>La película detiene <i>The Inner Life of Data</i> (en inglés) en el 2:31 y desarma ese cuadro; cada número que muestra se lee del cuadro real. La película está en inglés, con subtítulos en inglés, y la narración es una voz sintética.</p></div></details>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/data-for-films.mp4">Descargar el video (en inglés)</a><a href="https://github.com/roanboc/learning-data/tree/main/films/making-of/1-data-for-films/captions">Archivos de subtítulos</a><a href="https://github.com/roanboc/learning-data/blob/main/films/making-of/1-data-for-films/script.md" hreflang="en">Leer el guion (en inglés)</a></p>
+<details class="howto"><summary>Cómo leer la película</summary><div class="notes"><p>La película detiene <i>The Inner Life of Data</i> (en inglés) en el 2:31 y desarma ese cuadro; cada número que muestra se lee del cuadro real. La película está en inglés, con subtítulos en español, y la narración es una voz sintética. El video que descargas no los tiene en la imagen: reprodúcelo con su archivo de subtítulos, en español o en inglés.</p></div></details>
 </section>
 <section class="making-film" id="thats-not-quite-right" aria-labelledby="nqr-h">
 <h2 id="nqr-h">Eso no está del todo bien</h2>
@@ -28,8 +28,8 @@ Empieza con dos películas cortas, en inglés: cómo se dibujan las películas y
 <div class="bar"><button id="nqr-play">Reproducir</button><input id="nqr-scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="nqr-time">0:00</span><button id="nqr-cc" class="on" aria-pressed="true">Subtítulos</button><button id="nqr-fs">Pantalla completa</button></div>
 </div>
 <div class="chapters" id="nqr-chapters" aria-label="Capítulos"></div>
-<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/thats-not-quite-right.mp4">Descargar el video (en inglés)</a><a href="https://github.com/roanboc/learning-data/blob/main/films/making-of/2-the-process/script.md" hreflang="en">Leer el guion (en inglés)</a></p>
-<details class="howto"><summary>Cómo leer la película</summary><div class="notes"><p>La luz cálida es el autor; la fría, Claude, un modelo de IA de Anthropic. Las imágenes del proceso son reales; las palabras del autor entre comillas son suyas, y los demás mensajes están parafraseados. La película está en inglés (su título original es <i>That's not quite right</i>), y la narración es una voz sintética.</p></div></details>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/thats-not-quite-right.mp4">Descargar el video (en inglés)</a><a href="https://github.com/roanboc/learning-data/tree/main/films/making-of/2-the-process/captions">Archivos de subtítulos</a><a href="https://github.com/roanboc/learning-data/blob/main/films/making-of/2-the-process/script.md" hreflang="en">Leer el guion (en inglés)</a></p>
+<details class="howto"><summary>Cómo leer la película</summary><div class="notes"><p>La luz cálida es el autor; la fría, Claude, un modelo de IA de Anthropic. Las imágenes del proceso son reales; las palabras del autor entre comillas son suyas, y los demás mensajes están parafraseados. La película está en inglés, con subtítulos en español (su título original es <i>That's not quite right</i>), y la narración es una voz sintética. El video que descargas no los tiene en la imagen: reprodúcelo con su archivo de subtítulos, en español o en inglés.</p></div></details>
 </section>
 </div>
 
@@ -305,5 +305,7 @@ El código fuente y la guía para reconstruir cada película están en este repo
 /* the films are in English; their chapter buttons use these Spanish names */
 window.SCENE_NAMES={dff:{frame:"Un cuadro",data:"Una imagen son datos",draw:"Instrucciones, no píxeles",layers:"Capas",parts:"Componentes",camera:"La cámara",time:"El tiempo",play:"Dos formas de verla",again:"El 2:31, otra vez"},
  nqr:{message:"Un mensaje",lanes:"Dos lados",options:"Opciones, no respuestas",facts:"Los datos",push:"Eso no está del todo bien",cheap:"Una nota, no volver a empezar",wrong:"Lo que salió mal",publish:"Publicar",split:"Quién hace qué"}};</script>
+<script src="../../assets/making-of/data-for-films.captions.es.js"></script>
+<script src="../../assets/making-of/thats-not-quite-right.captions.es.js"></script>
 <script src="../../assets/making-of/data-for-films.js"></script>
 <script src="../../assets/making-of/thats-not-quite-right.js"></script>

@@ -13,6 +13,9 @@ The series starts before technology, with how minds turn the world into words, a
 |---|---|---|---|---|---|
 | [What's in a word](https://roanboc.github.io/learning-data/from-words-to-data/whats-in-a-word/) | Language and meaning | 6 min | 10 | 4 labs, 8 scenarios | [script](1-whats-in-a-word/script.md) · [source](1-whats-in-a-word/source/README.md) |
 | [Older than the systems](https://roanboc.github.io/learning-data/from-words-to-data/older-than-the-systems/) | Models and systems | 5½ min | 8 | 3 labs, 8 scenarios | [script](2-older-than-the-systems/script.md) · [source](2-older-than-the-systems/source/README.md) |
+| [Built to write, built to read](https://roanboc.github.io/learning-data/from-words-to-data/built-to-write-built-to-read/) | Shapes for data | 5 min | 8 | 3 labs, 8 scenarios | [script](3-built-to-write-built-to-read/script.md) · [source](3-built-to-write-built-to-read/source/README.md) |
+| [Many ways to read](https://roanboc.github.io/learning-data/from-words-to-data/many-ways-to-read/) | Shapes for reading | 4 min | 8 | 3 labs, 8 scenarios | [script](4-many-ways-to-read/script.md) · [source](4-many-ways-to-read/source/README.md) |
+| [Both at once](https://roanboc.github.io/learning-data/from-words-to-data/both-at-once/) | Hybrid databases | 4 min | 9 | 3 labs, 8 scenarios | [script](5-both-at-once/script.md) · [source](5-both-at-once/source/README.md) |
 | [Meaning machines can read](https://roanboc.github.io/learning-data/from-words-to-data/meaning-machines-can-read/) | Meaning and AI | 4 min | 8 | 3 labs, 8 scenarios | [script](6-meaning-machines-can-read/script.md) · [source](6-meaning-machines-can-read/source/README.md) |
 | [Keeping it true](https://roanboc.github.io/learning-data/from-words-to-data/keeping-it-true/) | Keeping meaning current | 4 min | 9 | 3 labs, 8 scenarios | [script](7-keeping-it-true/script.md) · [source](7-keeping-it-true/source/README.md) |
 <!-- /films -->

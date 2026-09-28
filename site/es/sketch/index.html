@@ -21,7 +21,7 @@
 <h1>Un boceto más preciso: cuándo un modelo de datos necesita más detalle</h1>
 <p class="lead">Dos cifras confiables no coinciden. Compara el boceto sencillo con un modelo de referencia y hazlo más preciso, una pregunta a la vez.</p>
 <p class="meta-row"><span>5½ min</span><span>6 labs</span><span>12 situaciones</span><span>En inglés</span></p>
-<p class="note">La película, los labs y las situaciones están en inglés, con subtítulos en inglés. Esta página, los capítulos y los controles están en español.</p>
+<p class="note">La película está en inglés, con subtítulos en español; los labs y las situaciones, en inglés. Esta página, los capítulos y los controles están en español.</p>
 <p class="builds-on">Amplía <a href="../#t=84"><i>El boceto</i></a> de <i>La vida interior de los datos</i></p>
 </section>
 <nav class="course" aria-label="Curso: A Sharper Sketch"><div class="course-in"><p class="course-t"><small>Modelado de datos</small>A Sharper Sketch</p><ol class="path" data-store="ld3" data-labs="6" data-quiz="12" data-text='{"watched":"Vista","labs":"{n} de 6 labs explorados","quiz":"{n} de 12 respondidas · {ok} correctas"}'>
@@ -30,7 +30,7 @@
 <li><a href="../../sketch/scenarios/" hreflang="en"><span class="n"><b>3</b></span><b>Tú decides</b><span>Doce situaciones (en inglés)</span></a></li>
 </ol></div></nav>
 <section class="module" id="watch" aria-labelledby="watch-h">
-<div class="mhead"><div><h2 id="watch-h">Mira la película</h2><p>En inglés, con subtítulos en inglés. Presiona Reproducir, o salta a un capítulo.</p></div></div>
+<div class="mhead"><div><h2 id="watch-h">Mira la película</h2><p>En inglés, con subtítulos en español. Presiona Reproducir, o salta a un capítulo.</p></div></div>
 <div class="player">
 <audio id="snd" preload="metadata" src="../../assets/film3/soundtrack.mp3"></audio><div class="poster"><img src="../../assets/sketch-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Ver la película · 5½ min</button></div></div><canvas id="film" width="1280" height="720" aria-label="Película animada explicativa, en inglés: A Sharper Sketch"></canvas>
 <div class="bar"><button id="play">Reproducir</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="time">0:00</span><button id="cc" class="on" aria-pressed="true">Subtítulos</button><button id="fs">Pantalla completa</button></div>
@@ -73,6 +73,7 @@
 </main>
 <footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película, los labs y las situaciones son ficticios. TCSI, HESA Data Futures, CEDS y MCDS se mencionan para describir modelos de referencia reales; este proyecto no está afiliado a sus dueños. Código: licencia MIT. Película, guion, subtítulos, imágenes y texto: CC BY 4.0. Los logotipos y marcas de empresas, incluido el de Databricks, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños. Consulta los <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a>.</p></footer>
 <script>window.L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla completa",fsExit:"Salir de pantalla completa"}};</script>
+<script src="../../assets/film3/captions.es.js"></script>
 <script src="../../assets/film3/film.js"></script>
 <script>/* the film is in English; its chapter buttons use these Spanish names */
 {const N={drawn:"El boceto que dibujamos",two:"Dos cifras",cls:"¿Qué es una clase?",census:"¿La fecha de corte de quién?",courses:"Un estudiante, dos carreras",time:"¿Inscrito cuándo?",levels:"Tres niveles de precisión",fit:"Revisar, adoptar, extender, registrar",end:"Vista completa"};SCENES.forEach(s=>{if(N[s.id])s.name=N[s.id];});}</script>

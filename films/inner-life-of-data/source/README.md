@@ -88,6 +88,8 @@ A language lives in `src/i18n/<lang>/`, and `FILM_LANG=<lang>` builds it into `b
 
 To add a language, copy `src/i18n/es/`, translate the four files, and run the steps with the new `FILM_LANG`. Then look at frames from every scene: text in fixed-size boxes (the phone, the Genie question bubble, the knowledge cards and the chart captions) may need shorter wording. For the site, add pages under `site/<lang>/` next to `site/es/`, and a link in each page's language toggle.
 
+The other films take a lighter route: captions only. Their `src/i18n/<lang>/captions.js` maps each English narration line to its caption, and a page that loads it before the film (as `CAPTIONS`) gets the same picture, voice and timings, captioned in that language (`src/engine3.js`, `capText`). `FILM_LANG=<lang> python tools/captions.py` then writes that language's `.srt` and `.vtt` from the English timeline.
+
 ## Editing
 
 - Narration lives in `src/narration.js` (and `src/i18n/<lang>/narration.js`). The film re-times itself to the voice, so after changing a line, run the steps again.

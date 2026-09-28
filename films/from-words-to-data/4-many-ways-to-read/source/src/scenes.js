@@ -6,12 +6,14 @@
 const MW_OLD="657 HAL",MW_NEW="657.2 HAL",MW_ONE=[255,214,150];
 
 /* ---------- 1. One book, three cards ---------- */
-const MW_CARDY=[170,400,630];
+const MW_CARDY=[170,400,630],MW_FILED=[9,19,2];
 scene("cards",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath"),cC=c("catalogue"),cS=c("same"),cK=c("step"),cT=c("today");
   const now=fin(t,cT-0.1,1.1);setScreen(ctx,S);
   if(now<1){histBg(ctx,S,t);
     yearTag(ctx,120,120,"1900s · the card catalogue",CLAY,fin(t,0.3,0.6));
-    mw_libLight(ctx,t,1);const at=mw_cabinet(ctx,110,240,480,560,{a:fin(t,0.4,0.8),open:9,p:fin(t,cC+2.6,0.9),t})||{x:350,dy:500};
+    // three cards, three drawers: each card rises from the drawer it's filed in, one after another
+    const tIn=[cC+5.2,cC+6.2,cC+7.2],oT=[cC+2.6,tIn[1]-1.0,tIn[2]-1.0];
+    mw_libLight(ctx,t,1);const at=mw_cabinet(ctx,110,240,480,560,{a:fin(t,0.4,0.8),open:MW_FILED.map((d,i)=>[d,fin(t,oT[i],0.8)]),t})||[],from=i=>at[i]||{x:350,dy:500};
     // the bookcase: the book stands on the upper shelf, then moves to the lower one
     const bA=fin(t,cC+3.4,0.8),top=mw_shelf(ctx,1200,440,600,"650–657",{a:bA,gaps:[6],seed:3,t}),bot=mw_shelf(ctx,1200,760,600,"657.1–659",{a:bA,gaps:[9],seed:7,t});
     const oldX=top[6],newX=bot[9],mv=ease(fin(t,cK+0.3,1.3)),bx=lerp(oldX,newX,mv),by=lerp(440,760,mv)-Math.sin(mv*Math.PI)*70;
@@ -21,10 +23,9 @@ scene("cards",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath"),cC=c("catalogu
     if(wrong>0){glow(ctx,oldX,340,120,BAD,0.35*wrong);withA(ctx,wrong,()=>{ctx.strokeStyle=rgba(BAD,0.95);ctx.lineWidth=3;ctx.setLineDash([8,6]);ctx.strokeRect(oldX-30,250,60,188);ctx.setLineDash([]);});
       cross_(ctx,oldX,344,44,BAD,wrong);withA(ctx,fin(t,cK+3.1,0.5),()=>tag(ctx,oldX,212,"wrong shelf",BAD,{align:"center",size:20}));}
     mw_book(ctx,bx,by,{a:bA,mark:relab?MW_NEW:MW_OLD,hi:pulseAt(t,cS+0.1,1.6)+0.6*pulseAt(t,cK+1.4,1.2),flash:relab&&t<cK+2.6,labA:1-0.8*(fin(t,cK+0.3,0.2)-fin(t,cK+1.3,0.3))});
-    // three cards, out of the open drawer, one after another
-    const kinds=["author","title","subject"],tIn=[cC+5.2,cC+6.0,cC+6.8],reT=[cK+1.6,cK+2.0,1e9];
-    kinds.forEach((k,i)=>{const e=ease(fin(t,tIn[i],1.0)),ty=MW_CARDY[i];if(e<=0)return;
-      const x=lerp(at.x-40,700,e),y=lerp(at.dy-10,ty,e),w=lerp(80,340,e),fl=clamp((t-reT[i])/0.5,0,1),mark=fl>0.5?MW_NEW:MW_OLD;
+    const kinds=["author","title","subject"],reT=[cK+1.6,cK+2.0,1e9];
+    kinds.forEach((k,i)=>{const e=ease(fin(t,tIn[i],1.0)),ty=MW_CARDY[i],d=from(i);if(e<=0)return;
+      const x=lerp(d.x-40,700,e),y=lerp(d.dy-10,ty,e),w=lerp(80,340,e),fl=clamp((t-reT[i])/0.5,0,1),mark=fl>0.5?MW_NEW:MW_OLD;
       // an arrow from the card's shelf mark to where it sends the reader
       const pa=clamp((t-cS-1.2-i*0.3)/0.6,0,1),to=mark===MW_NEW?newLab:(mv>0.5?[oldX+26,330]:oldLab),bad=k==="subject"?wrong:0,col=bad>0.5?BAD:(fl>=1&&k!=="subject"?GOOD:PARCH);
       if(pa>0&&e>=1)arrowTo(ctx,1050,ty+30,to[0]-60,to[1]+(to===newLab||to===oldLab?(i-1)*8:0),col,0.75+0.25*bad,{p:pa,bend:-0.06+i*0.03,head:12,lw:2.2});
@@ -60,8 +61,8 @@ scene("argue",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),cF=c("four"),cN=c("names"),c
     withA(ctx,fin(t,cF+0.3+i*0.25,0.6),()=>person(ctx,pid,x,878,0.6,{t,pose:talk?"explain":"stand",expr:t>cJ+1.3?"relieved":(t>cW+1.5&&t<cJ?"concerned":"calm")}));});
   // the sources: two known, and a new one arriving
   [["sis",280],["lms",790]].forEach(([k,x],i)=>mw_source(ctx,x,52,k,{a:fin(t,cW+0.1+i*0.2,0.5)*0.85,w:340,h:76,sub:"credentials"}));
-  const nx=lerp(1960,1300,ease(fin(t,cW+1.0,1.2)));mw_source(ctx,nx,52,"short",{a:fin(t,cW+0.9,0.4),w:340,h:76,sub:"microcredentials",isNew:t>cW+2.2,hi:pulseAt(t,cW+2.6,1.6)});
-  MW_ARG.forEach((r,i)=>mw_line(ctx,1470,132,300+i*440,160,MW_SC,0.55*fin(t,cW+3.0,0.5)*(1-0.6*job),{p:clamp((t-cW-3.0-i*0.15)/0.6,0,1),dash:[6,8],lw:1.8,blur:0}));
+  const nx=lerp(1960,1300,ease(fin(t,cW+1.0,1.2)));mw_source(ctx,nx,52,"short",{a:fin(t,cW+0.9,0.4),w:360,h:76,sub:"microcredentials",isNew:t>cW+2.2,hi:pulseAt(t,cW+2.6,1.6)});
+  MW_ARG.forEach((r,i)=>mw_line(ctx,1480,132,300+i*440,160,MW_SC,0.55*fin(t,cW+3.0,0.5)*(1-0.6*job),{p:clamp((t-cW-3.0-i*0.15)/0.6,0,1),dash:[6,8],lw:1.8,blur:0}));
   vign(ctx,S);});
 
 /* ---------- 3. Integrate first ---------- */
@@ -72,7 +73,7 @@ const MW_CORER=[["Learner","Enrolment","1","*"],["Enrolment","Course","*","1"],[
 const MW_VX={lh:[760,280],ln:[1150,280],ch:[1540,280]},MW_SATX={l:610,n:1000,c:1390},MW_SATY=[392,468,544],MW_VK=1.2;
 const mw_V=(x,y)=>[(x-1150)*MW_VK+1150,(y-280)*MW_VK+318];
 scene("integrate",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),cM=c("many"),cC=c("core"),cV=c("vault"),cS=c("sat"),cN=c("new"),cA=c("audit");setScreen(ctx,S);bg2(ctx);
-  const coreA=fin(t,cC+0.4,0.8)*(1-fin(t,cV+0.1,0.8)),vA=fin(t,cV+0.6,0.6),ringA=fin(t,cM+2.1,0.6)*(1-fin(t,cC+0.2,0.7)),srcOut=fin(t,cA+1.7,0.6),ana=fin(t,cA+1.9,0.7);
+  const coreA=fin(t,cC+0.4,0.8)*(1-fin(t,cV+0.1,0.8)),vA=fin(t,cV+0.6,0.6),ringA=fin(t,cM+2.1,0.6)*(1-fin(t,cC+0.2,0.7)),srcOut=fin(t,cA+1.3,0.5),ana=fin(t,cA+1.9,0.7);
   // the sources, on the left, each in its colour
   ["sis","lms","fin"].forEach((k,i)=>{const y=MW_SRCY[k],a=fin(t,0.3+i*0.25,0.5)*(1-srcOut);mw_source(ctx,50,y,k,{a,w:350,h:76});
     const tx=ringA>0.5?[890,440]:vA>0.5?mw_V(620,262+i*18):[610,280+i*130],la=a*(0.35+0.4*fin(t,cM+1.2,0.4)-0.25*vA);
@@ -93,24 +94,27 @@ scene("integrate",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),cM=c("many"),cC=c("core"
     const hA=fin(t,cV+1.8,0.5),cHA=fin(t,cV+2.2,0.5),lA=fin(t,cV+6.6,0.5),keyHi=pulseAt(t,cV+2.5,1.4);
     const L=MW_VX.lh,N=MW_VX.ln,C=MW_VX.ch;
     if(lA>0){mw_line(ctx,L[0]+140,L[1],N[0]-125,N[1],MW_V,lA,{p:clamp((t-cV-6.6)/0.6,0,1),lw:2.6});mw_line(ctx,C[0]-140,C[1],N[0]+125,N[1],MW_V,lA,{p:clamp((t-cV-6.6)/0.6,0,1),lw:2.6});}
-    mw_hub(ctx,L[0],L[1],"Learner","learner_id  L-20417",{a:hA,hi:keyHi+pulseAt(t,cV+4.8,1.3),ok:okA(0)});
-    mw_hub(ctx,C[0],C[1],"Credential","code  GC-DS",{a:cHA,hi:keyHi+pulseAt(t,cV+5.5,1.3),ok:okA(1)});
+    const k2A=fin(t,cN+1.1,0.6),hubL=mw_hub(ctx,L[0],L[1],"Learner","learner_id  L-20417",{a:hA,hi:keyHi+pulseAt(t,cV+4.8,1.3),ok:okA(0)}),
+      hubC=mw_hub(ctx,C[0],C[1],"Credential","code  GC-DS",{a:cHA,hi:keyHi+pulseAt(t,cV+5.5,1.3)+pulseAt(t,cN+1.1,1.4),ok:okA(1),key2:{key:"code  SC-SQL",a:k2A,label:"new row"}});
     mw_link(ctx,N[0],N[1],"Learner–Credential",{a:lA,hi:pulseAt(t,cV+7.3,1.4),ok:okA(2)});
     // satellites stack up: descriptions, one version per change, each with its source and load time
     const srcHi=fin(t,cS+3.6,0.5)*(1-fin(t,cN,0.5)),sats=[
       [MW_SATX.l,MW_SATY[0],"email: a.khan@uni.edu","sis","2024-02-10 02:14",cS+0.1],
       [MW_SATX.c,MW_SATY[0],"Grad Cert · 60 credits","sis","2023-11-02 02:03",cS+0.5],
-      [MW_SATX.n,MW_SATY[0],"status: awarded","sis","2026-06-30 02:05",cS+0.9],
+      [MW_SATX.n,MW_SATY[0],"status: enrolled","sis","2025-02-17 02:05",cS+0.9],
       [MW_SATX.l,MW_SATY[1],"email: aisha@mail.com","sis","2025-07-01 02:11",cS+2.1]];
     sats.forEach(([x,y,at_,src,tm,t0],i)=>{const a=fin(t,t0,0.5);if(a<=0)return;const drop=(1-ease(fin(t,t0,0.6)))*-40;
-      if(y===MW_SATY[0])mw_line(ctx,x+150,y-56,x+150,y+drop,MW_V,0.55*a,{lw:1.6,blur:0});
+      const hb=x===MW_SATX.l?hubL:x===MW_SATX.c?hubC:null,y0=hb?Math.max(y-56,hb.top+hb.h+3):y-56;
+      if(y===MW_SATY[0])mw_line(ctx,x+150,y0,x+150,y+drop,MW_V,0.55*a,{lw:1.6,blur:0});
       mw_sat(ctx,x,y+drop,300,at_,src,tm,{a,hi:pulseAt(t,t0,1.2)+(i===3?pulseAt(t,cA+0.3,1.2):0),srcHi:Math.max(srcHi,i===3?fin(t,cA+1.4,0.4)*(1-fin(t,cA+2.6,0.5)):0),ok:okA(3+i)});});
-    // the new source: new satellites, and nothing else changes
+    // the new source: a new satellite on the learner, a new row in the Credential hub with its own satellite, and nothing that exists changes
     mw_sat(ctx,MW_SATX.l,MW_SATY[2],300,"customer no: SC-8841","short","2026-09-21 02:00",{a:fin(t,cN+1.0,0.5),hi:pulseAt(t,cN+1.0,1.4),edge:MW_SC});
-    mw_sat(ctx,MW_SATX.c,MW_SATY[1],300,"microcredential: SQL","short","2026-09-21 02:00",{a:fin(t,cN+1.35,0.5),hi:pulseAt(t,cN+1.35,1.4),edge:MW_SC});
+    {const sa=fin(t,cN+1.5,0.5),ky=C[1]+64,sy=MW_SATY[1]+33,rx=C[0]+168;
+      if(sa>0){[[C[0]+140,ky,rx,ky],[rx,ky,rx,sy],[rx,sy,C[0]+150,sy]].forEach(([a0,b0,a1,b1])=>mw_line(ctx,a0,b0,a1,b1,MW_SC,0.8*sa,{lw:1.8,blur:4}));}
+      mw_sat(ctx,MW_SATX.c,MW_SATY[1],300,"SQL · 5 credits","short","2026-09-21 02:00",{a:sa,hi:pulseAt(t,cN+1.5,1.4),edge:MW_SC});}
     ctx.restore();
     withA(ctx,fin(t,cS+4.2,0.5)*(1-fin(t,cN,0.5)),()=>tag(ctx,1150,790,"each change: its source, and when it arrived",TRUST,{align:"center",size:24}));
-    withA(ctx,nv*(1-fin(t,cA+0.2,0.5)),()=>tag(ctx,1150,790,"new satellites · nothing that exists changes",GOOD,{align:"center",size:24}));});}
+    withA(ctx,nv*(1-fin(t,cA+0.2,0.5)),()=>tag(ctx,1150,790,"new rows and satellites · nothing that exists changes",GOOD,{align:"center",size:24}));});}
   // the new source, arriving
   const ns=fin(t,cN+0.1,0.5)*(1-srcOut);if(ns>0){mw_source(ctx,lerp(-360,50,ease(fin(t,cN,0.8))),MW_SRCY.short,"short",{a:ns,w:350,h:76,isNew:true,hi:pulseAt(t,cN+0.6,1.4)});
     const p=clamp((t-cN-0.6)/0.6,0,1),y0=MW_SRCY.short+38,A_=mw_V(MW_SATX.l,MW_SATY[2]+33),C_=mw_V(MW_SATX.c,MW_SATY[1]+40);
@@ -118,8 +122,8 @@ scene("integrate",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),cM=c("many"),cC=c("core"
   // audit: one value, its source and its time
   const au=fin(t,cA+1.4,0.4)*(1-fin(t,cA+2.6,0.5));if(au>0){const q=mw_V(MW_SATX.l+150,MW_SATY[1]+48);ring(ctx,q[0],q[1],94,TRUST,0.9*au,2.5,[6,6]);withA(ctx,au,()=>tag(ctx,q[0]-40,q[1]+146,"audit: which system said so, and when",TRUST,{size:22}));}
   // built for audit, not for people to query: a question wanders through every table
-  if(ana>0){person(ctx,"ana",220,862,0.58,{t,expr:"concerned",glow:ana});withA(ctx,ana,()=>bubble(ctx,30,150,430,"Awards by faculty, this year?",EDGE_,{size:28}));
-    const V_=[[620,280],[640,425],[640,500],[880,580],[1030,425],[1150,300],[1290,430],[1540,300],[1420,425],[1420,500],[1690,560]].map(q=>mw_V(q[0],q[1])),pts=[[460,200]].concat(V_),p=clamp((t-cA-2.3)/1.4,0,1);
+  if(ana>0){withA(ctx,ana,()=>{person(ctx,"ana",220,862,0.58,{t,expr:"concerned",glow:ana});bubble(ctx,30,150,520,"Awards by faculty, this year?",EDGE_,{size:28});});
+    const V_=[[620,280],[640,425],[640,500],[880,580],[1030,425],[1150,300],[1290,430],[1540,300],[1420,425],[1420,500],[1690,560]].map(q=>mw_V(q[0],q[1])),pts=[[550,189]].concat(V_),p=clamp((t-cA-2.3)/1.4,0,1);
     withA(ctx,ana,()=>{ctx.save();ctx.strokeStyle=rgba(EDGE_,0.9);ctx.lineWidth=3;ctx.setLineDash([9,7]);ctx.shadowColor=rgba(EDGE_,0.7);ctx.shadowBlur=8;ctx.beginPath();const n=Math.floor(p*(pts.length-1));
       for(let i=0;i<=n;i++){const q=pts[i];i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]);}if(n<pts.length-1){const f=p*(pts.length-1)-n,a0=pts[n],a1=pts[n+1];ctx.lineTo(lerp(a0[0],a1[0],f),lerp(a0[1],a1[1],f));}ctx.stroke();ctx.restore();
       withA(ctx,fin(t,cA+3.4,0.5),()=>tag(ctx,1690,700,"+ 6 more joins",EDGE_,{align:"center",size:22}));});
@@ -127,7 +131,7 @@ scene("integrate",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),cM=c("many"),cC=c("core"
   vign(ctx,S);});
 
 /* ---------- 4. Present for people ---------- */
-const MW_FX={Awards:[370,380],Enrolments:[960,380],Fees:[1550,380]},MW_OWN={Awards:"Credential type",Enrolments:"Course",Fees:"Fee type"},MW_SH={Learner:[680,665],Date:[1240,665]};
+const MW_FX={Awards:[370,380],Enrolments:[960,380],Fees:[1550,380]},MW_OWN={Awards:"Credential type",Enrolments:"Unit",Fees:"Fee type"},MW_SH={Learner:[680,665],Date:[1240,665]};
 const MW_GRAIN={Awards:"one row per credential awarded",Enrolments:"one row per unit enrolment",Fees:"one row per fee charged"};
 const MW_BUSR=["Awards","Enrolments","Fees","Completions"],MW_BUSC=["Learner","Date","Course","Credential","Faculty","Fee type"];
 const MW_BUST=[[1,1,1,1,1,0],[1,1,1,0,1,0],[1,1,1,0,1,1],[1,1,1,0,1,0]];
@@ -154,7 +158,7 @@ scene("present",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),cS=c("star"),cH=c("share")
   if(busA>0)withA(ctx,busA,()=>{tag(ctx,960,110,"bus matrix",MW_S,{align:"center",size:24});
     mw_bus(ctx,330,200,MW_BUSR,MW_BUSC,MW_BUST,{lw:300,cw:160,hh:110,rh:100,rowA:i=>fin(t,cB+3.0+i*0.35,0.4),colA:j=>fin(t,cB+5.0+j*0.3,0.4),tickA:(i,j)=>fin(t,cB+5.6+i*0.25+j*0.08,0.25),hiCols:[0,1,2,4],hiA:fin(t,cB+6.8,0.6)});
     withA(ctx,fin(t,cB+3.0,0.4)*(1-fin(t,cB+5.2,0.4)),()=>T(ctx,"business processes ↓",330,176,{w:700,size:18,color:rgba(SOFT,1)}));
-    withA(ctx,fin(t,cB+7.2,0.5),()=>tag(ctx,960,790,"a column ticked in every row: one conformed dimension",MW_S,{align:"center",size:20}));});
+    withA(ctx,fin(t,cB+7.2,0.5),()=>tag(ctx,960,790,"a column ticked in more than one row: a conformed dimension",MW_S,{align:"center",size:20}));});
   vign(ctx,S);});
 
 /* ---------- 5. Serve an entity ---------- */
@@ -187,12 +191,12 @@ scene("serve",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),cO=c("one"),cR=c("row"),cE=c
       withA(ctx,fin(t,cG+5.2,0.4),()=>{T(ctx,"not five joins",1280,212,{w:700,size:22,color:rgba(SOFT,1)});for(let k=0;k<5;k++){const x=1290+k*96;ctx.strokeStyle=rgba(SOFT,0.6);ctx.lineWidth=1.6;rr(ctx,x,236,70,40,6);ctx.stroke();if(k<4){ctx.beginPath();ctx.moveTo(x+70,256);ctx.lineTo(x+96,256);ctx.stroke();}}
         ctx.strokeStyle=rgba(BAD,0.9);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(1280,256);ctx.lineTo(1760,256);ctx.stroke();});});});
   // the cost: many columns, and one measure defined twice
-  const cA=fin(t,cX+0.6,0.5);if(cA>0)withA(ctx,cA,()=>{const MC=["current course","credit so far","credentials","next step","email","faculty","fees owing","last active","risk score","advisor","visa","…"];
+  const cA=fin(t,cX+0.6,0.5);if(cA>0)withA(ctx,cA,()=>{const MC=["current course","credit so far","credentials","next step","email","fees owing","risk score","advisor","…"];
     glass(ctx,1250,110,560,190,18,MW_W,{glow:14,ea:0.8,fill:"rgba(20,14,6,0.93)"});T(ctx,Math.round(countTo(t,cX+0.8,6,124))+" columns",1280,168,{w:800,size:34,color:rgba(MW_W,1)});T(ctx,"to name, fill, test and keep",1280,208,{w:600,size:20,color:rgba(SOFT,1)});
-    MC.forEach((s,i)=>withA(ctx,fin(t,cX+1.0+i*0.08,0.3),()=>T(ctx,s,1280+(i%4)*130,244+Math.floor(i/4)*20,{f:"mono",w:500,size:13,color:rgba(MW_W,0.7)})));});
-  if(cost2>0){withA(ctx,cost2,()=>{mw_wide(ctx,MW_TX,720,{cols:[["learner",180],["course",320],["credit so far",190]],rows:[["Aisha K.","Grad Cert Data Science","50 of 60"]],name:"course progress",colHi:j=>j===2?1:0,hiCol:BAD});
-    const x=mw_colX(2)+95;T(ctx,"≠",x+150,716,{w:800,size:56,align:"center",color:rgba(BAD,1)});
-    withA(ctx,fin(t,cX+3.2,0.5),()=>tag(ctx,1060,780,"“credit so far”, defined twice: 45 or 50?",BAD,{size:24}));});}
+    MC.forEach((s,i)=>withA(ctx,fin(t,cX+1.0+i*0.1,0.3),()=>T(ctx,s,1280+(i%3)*172,242+Math.floor(i/3)*23,{f:"mono",w:500,size:16,color:rgba(MW_W,0.8)})));});
+  if(cost2>0){withA(ctx,cost2,()=>{mw_wide(ctx,MW_TX,748,{cols:[["learner",180],["course",320],["credit so far",190]],rows:[["Aisha K.","Grad Cert Data Science","50 of 60"]],name:"course progress",colHi:j=>j===2?1:0,hiCol:BAD});
+    const x=mw_colX(2)+95;T(ctx,"≠",x+150,744,{w:800,size:56,align:"center",color:rgba(BAD,1)});
+    withA(ctx,fin(t,cX+3.2,0.5),()=>tag(ctx,1060,808,"“credit so far”, defined twice: 45 or 50?",BAD,{size:24}));});}
   vign(ctx,S);});
 
 /* ---------- 6. Where each lives ---------- */
@@ -222,13 +226,14 @@ scene("choose",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),cV=c("vault"),cS=c("star"),
       D.forEach(([d,dx],j)=>withA(ctx,fin(t,t0[i]+0.9+j*0.2,0.4),()=>mw_dim(ctx,dx,y+214,d,{shared:true,w:176})));}
     if(k==="wide"){mw_learner(ctx,x+76,y+250,1.0,MW_W,1);mw_wideGlyph(ctx,x+320,y+170,1.0,{p:clamp((t-t0[i]-0.2)/1.2,0,1)});orb(ctx,x+486,y+62,20,t);
       [["close to a certificate?",x+190,y+56],["what's next?",x+370,y+56]].forEach(([q,qx,qy],j)=>withA(ctx,fin(t,t0[i]+0.8+j*0.4,0.4),()=>tag(ctx,qx,qy,q,INK,{align:"center",size:18})));}
-    wrapT(ctx,cond,x+30,y+306,480,{size:24,w:600,color:rgba(INK,0.92)});
+    wrapT(ctx,cond,x+30,y+306,480,{size:22,w:600,color:rgba(INK,0.92)});
     withA(ctx,fin(t,rT[i],0.5),()=>T(ctx,"→ "+res,x+30,y+428,{w:800,size:38,color:rgba(col,1)}));});});
   // every shape is another copy to keep in step, like the library's cards
   withA(ctx,fin(t,cC+0.3,0.5)*(1-fin(t,cF,0.4)),()=>tag(ctx,960,96,"don't copy for its own sake",EDGE_,{align:"center",size:24}));
   if(cp>0){const heads=["DATA VAULT.","STARS.","WIDE TABLES."],flick=pulseAt(t,cC+4.6,1.2);
     withA(ctx,cp,()=>{mw_line(ctx,380,736,1540,736,PARCH,0.6,{dash:[6,8],lw:2.4,blur:0});});
-    heads.forEach((h,i)=>{const e=ease(fin(t,cC+1.9+i*0.3,0.7)),x=215+i*580;mw_card(ctx,x,lerp(1100,636,e),330,{a:cp*Math.min(1,e*1.6),t,seed:11+i,mark:"copy "+(i+1),head:h,lines:["a copy of the facts","rebuilt every night"],rot:(i-1)*0.02,bad:i===1?flick:0});});
+    const lines=[["a copy of every version","added to every night"],["a copy of the facts","rebuilt every night"],["a copy of the facts","rebuilt every night"]];
+    heads.forEach((h,i)=>{const e=ease(fin(t,cC+1.9+i*0.3,0.7)),x=215+i*580;mw_card(ctx,x,lerp(1100,636,e),330,{a:cp*Math.min(1,e*1.6),t,seed:11+i,mark:"copy "+(i+1),head:h,lines:lines[i],rot:(i-1)*0.02,bad:i===1?flick:0});});
     withA(ctx,cp*fin(t,cC+2.8,0.5),()=>{tag(ctx,675,736,"keep in step",PARCH,{align:"center",size:20});tag(ctx,1255,736,"keep in step",PARCH,{align:"center",size:20});});}
   withA(ctx,fin(t,cF+0.2,0.5),()=>tag(ctx,960,96,"choose per question, not per fashion",TRUST,{align:"center",size:28}));
   withA(ctx,all,()=>{ctx.strokeStyle=rgba(INK,0.5);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(130,636);ctx.lineTo(130,656);ctx.lineTo(1790,656);ctx.lineTo(1790,636);ctx.stroke();tag(ctx,960,704,"most platforms use more than one",INK,{align:"center",size:24});});

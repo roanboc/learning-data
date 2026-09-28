@@ -9,7 +9,8 @@ ui:{lab:"Lab",of:"of",inPractice:"In practice",watch:"Watch this part",next:"Nex
   placed:"{n} of {of} placed.",ready:"All placed: check your answers.",back:"Back",nextStep:"Next step",stepOf:"Step {n} of {of}."},
 vis:{
   update:{one:"1 edit",three:"3 edits, 1 missed",docs:"3 documents to reissue"},
-  grain:{cred:"one row per credential awarded",year:"one row per learner per year",learner:"one row per learner",kinds:{award:"award",micro:"micro"}},
+  grain:{cred:"one row per credential awarded",year:"one row per learner per year",learner:"one row per learner",kinds:{award:"degree",micro:"micro"}},
+  fac:{sci:"Science",eng:"Engineering",arts:"Arts"},
   shapes:{write:"built to write",read:"built to read"},
   anomaly:{note:"the newsletter goes to the old address"},
   half:{parts:["1 · award saved","2 · learner record saved","3 · transcript: crashed"],saved:"2 of 3 saved"},
@@ -18,7 +19,7 @@ vis:{
   docstack:{note:"counting: 212,000 of 1,000,000 opened"},
   overwrite:{over:"overwritten",report:"Science, awards in 2025",then:"published: 1,204",now:"today: 1,187"},
   medal:{layers:["Bronze","Silver","Gold"],note:"how refined, not what shape"},
-  star:{dims:{learner:"Learner",kind:"Credential kind",faculty:"Faculty",date:"Date"},fact:"credential awarded",sub:"Σ count · credit points"}},
+  star:{dims:{learner:"Learner",kind:"Credential kind",course:"Course",date:"Date"},fact:"credential awarded",sub:"Σ count · credit points"}},
 labs:[
  {id:"update",c:"#6ebeff",chapter:"wrong",name:"Break the update",kind:"pick",vis:"update",vw:960,vh:380,
   idea:"Where a fact is stored decides how a change to it goes. Stored once, a change is one edit. Stored on every row, every copy has to be found.",
@@ -52,7 +53,7 @@ labs:[
     {t:"Correct a learner's email",b:"write",why:"The email is stored once, in the learner record: one edit, and nothing else to find."},
     {t:"Average credit points by kind of credential",b:"read",why:"A measure, grouped by a dimension: exactly what a star is built for."},
     {t:"Revoke one award, today",b:"write",why:"One award's status changes, now, safely: a small write to the system that issues awards. The reading shape records the change on its next load."},
-    {t:"Learners who moved faculty last year",b:"read",why:"A question about history: the learner dimension keeps a row for each faculty, with its dates."}],
+    {t:"Awards by faculty, this year against last year",b:"read",why:"Two years of rows, grouped and compared: a star answers with two joins."}],
    sayAll:"All {of} right. Each shape is fast at its own job.",saySome:"{n} of {of} right. For the ones in red: does the task change one thing now, or read many things at once?"}}
 ],
 qs:[
@@ -78,7 +79,7 @@ qs:[
   opts:[{t:"Agree: that's what the three layers mean.",why:"The layers say how refined data is: raw, cleaned and joined, ready to use. They don't say what shape it has."},{t:"Explain that the layers say how refined the data is, that any layer can hold either shape, and agree where each shape lives.",ok:true},{t:"Rename the layers normalised, star and dashboard.",why:"Then a star in silver, or a normalised table in gold, has nowhere to go: the names would bake the confusion in."}],
   why:"Bronze, silver and gold describe refinement, not modelling. Many platforms keep a normalised shape in silver and stars in gold: a choice, not a rule."},
  {type:"order",lab:"grain",vis:"star",title:"Design a star",sit:"Put the steps for designing the awards star in order.",
-  items:["Choose the business process: credentials awarded","Declare the grain: one row per credential awarded","Choose the dimensions: learner, kind of credential, faculty, date","Choose the facts: the award, counted, and its credit points"],
+  items:["Choose the business process: credentials awarded","Declare the grain: one row per credential awarded","Choose the dimensions: learner (with their faculty), kind of credential, course, date","Choose the facts: the award, counted, and its credit points"],
   why:"Process, grain, dimensions, facts: Kimball's four steps. The grain comes before everything else, because it decides what the dimensions and facts can be."}
 ],
 done:[["Every call made well.","You can tell which shape does which job, and why the same award is stored twice."],["Nearly all.","Look again at the scenarios you missed, and the labs they point to."],["A good start.","Try the labs again: the grain and the update are where most designs go wrong."],["Worth another look.","Watch the film again, then try the labs before the scenarios."]]

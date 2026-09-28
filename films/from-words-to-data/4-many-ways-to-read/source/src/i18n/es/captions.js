@@ -31,9 +31,9 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "It's built for change, and for audit. It isn't built for people to query.":
 "Está hecho para el cambio y la auditoría. No para que la gente lo consulte.",
 "For people, there's the star: one for awards, one for enrolments, one for fees.":
-"Para las personas, está la estrella: una de títulos, una de inscripciones, una de cuotas.",
+"Para las personas, está la estrella: una de credenciales otorgadas, una de inscripciones, una de cuotas.",
 "They share the same learner and the same calendar, so one question can cross them: awards and fees, for the same learners, in the same year.":
-"Comparten el mismo aprendiz y el mismo calendario, así que una pregunta puede cruzarlas: títulos y cuotas, de los mismos aprendices, en el mismo año.",
+"Comparten el mismo aprendiz y el mismo calendario, así que una pregunta puede cruzarlas: credenciales y cuotas, de los mismos aprendices, en el mismo año.",
 "These shared dimensions are called conformed. They make the stars agree with each other.":
 "Estas dimensiones compartidas se llaman conformadas. Hacen que las estrellas coincidan.",
 "Engineers plan them on a grid called a bus matrix: the business processes down the side, the shared dimensions across the top.":
@@ -69,7 +69,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "The short-course credentials arrived this week. The vault took them without changing a thing.":
 "Las credenciales de cursos cortos llegaron esta semana. El vault las recibió sin cambiar nada.",
 "The award star gained new rows, and each learner's wide row gained a column.":
-"La estrella de títulos sumó filas, y la fila ancha de cada aprendiz, una columna.",
+"La estrella de credenciales sumó filas, y la fila ancha de cada aprendiz, una columna.",
 "Next: what if the app and the analysts used the same database?":
 "Siguiente: ¿y si la app y los analistas usaran la misma base de datos?"
 });

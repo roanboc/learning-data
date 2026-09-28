@@ -4,8 +4,8 @@
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "In the 1750s, Linnaeus gave each species a two-part name, and a place in a hierarchy. Scientists still use his system.":
 "En la década de 1750, Linneo dio a cada especie un nombre de dos partes, y un lugar en una jerarquía. La ciencia aún usa su sistema.",
-"A century earlier, John Wilkins designed a language to classify everything in the universe. It never took hold.":
-"Un siglo antes, John Wilkins diseñó una lengua para clasificar todo lo que hay en el universo. Nunca prosperó.",
+"Nearly a century earlier, John Wilkins designed a language to classify everything in the universe. It never took hold.":
+"Casi un siglo antes, John Wilkins diseñó una lengua para clasificar todo lo que hay en el universo. Nunca prosperó.",
 "In 1860, Florence Nightingale asked hospitals to record the same things, in the same way, so that they could be compared.":
 "En 1860, Florence Nightingale pidió a los hospitales registrar lo mismo, de la misma manera, para poder compararlos.",
 "An international list of causes of death followed in 1893. Today, it's the International Classification of Diseases.":
@@ -18,8 +18,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Genie encuentra las tablas. Encuentra una columna llamada is_micro, y otra llamada stack_ok.",
 "But the stacking rules live in a policy document that no tool can read. Genie guesses, and it's wrong.":
 "Pero las reglas de apilamiento viven en un documento de política que ninguna herramienta lee. Genie adivina, y se equivoca.",
-"An AI assistant answers from what it can read. Meaning kept in documents is invisible to it.":
-"Un asistente de IA responde con lo que puede leer. El significado guardado en documentos le es invisible.",
+"An AI assistant answers from what it can read. Meaning kept only in documents is out of its reach.":
+"Un asistente de IA responde con lo que puede leer. El significado guardado solo en documentos queda fuera de su alcance.",
 "There are four common ways to write meaning down, and they stack. A glossary: words and their definitions, for people.":
 "Hay cuatro formas comunes de escribir el significado, y se apilan. Un glosario: palabras y sus definiciones, para personas.",
 "A taxonomy: kinds of things in a hierarchy, like Linnaeus's.":

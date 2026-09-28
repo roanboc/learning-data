@@ -22,7 +22,7 @@ Una forma hecha para escribir guarda cada dato en un solo lugar. El nombre del a
 Cada fila tiene una clave que la identifica, y reglas que los datos deben cumplir: cada título pertenece a un aprendiz que existe.
 
 00:01:05.163 --> 00:01:15.771
-Y otorgar un título toca tres cosas a la vez: el título, el registro del aprendiz y el certificado analítico. Cambian las tres, o ninguna. Nunca se guarda medio título.
+Y otorgar un título toca tres cosas a la vez: el título, el registro del aprendiz y el historial académico. Cambian las tres, o ninguna. Nunca se guarda medio título.
 
 00:01:17.271 --> 00:01:21.234
 Esto es la normalización, con claves, restricciones y transacciones.

@@ -19,19 +19,19 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "A hybrid database writes and reads in one place.":
 "Una base de datos híbrida escribe y lee en un solo lugar.",
 "Some keep two copies inside: rows for writing, and columns for reading, kept in step by the database itself.":
-"Algunas guardan dos copias adentro: filas para escribir y columnas para leer, que la propia base de datos mantiene al paso.",
+"Algunas guardan dos copias adentro: filas para escribir y columnas para leer, que la propia base de datos mantiene sincronizadas.",
 "Others put an operational database inside the lakehouse, with tables synced in both directions.":
 "Otras ponen una base de datos operacional dentro del lakehouse, con tablas sincronizadas en ambas direcciones.",
 "The idea has a name: HTAP, hybrid transactional and analytical processing.":
 "La idea tiene nombre: HTAP, procesamiento híbrido transaccional y analítico.",
 "Keeping two shapes in step means capturing each change as it happens, and applying it on the other side, in the same order.":
-"Mantener dos formas al paso significa capturar cada cambio cuando ocurre, y aplicarlo del otro lado, en el mismo orden.",
+"Mantener dos formas sincronizadas significa capturar cada cambio cuando ocurre, y aplicarlo del otro lado, en el mismo orden.",
 "That only works if every row has a stable key, so an update finds the row it changes, and a delete finds the row it removes.":
 "Eso solo funciona si cada fila tiene una clave estable: así una actualización encuentra la fila que cambia, y un borrado, la que quita.",
 "Apply an award's revocation before its issue, and the award comes back to life. Order matters as much as content.":
 "Aplica la revocación de un título antes que su emisión, y el título vuelve a la vida. El orden importa tanto como el contenido.",
 "What goes? The nightly copy, the pipelines that move it, the wait, and a second set of permissions to keep in step.":
-"¿Qué se va? La copia nocturna, los pipelines que la mueven, la espera y un segundo conjunto de permisos que mantener al paso.",
+"¿Qué se va? La copia nocturna, los pipelines que la mueven, la espera y un segundo conjunto de permisos que mantener sincronizado.",
 "Those are real gains.":
 "Son beneficios reales.",
 "Now count awards straight from the app's own tables.":

@@ -9,7 +9,7 @@ think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",ski
     opts:[{t:"Nothing: cards were cheap."},{t:"Every card had to be kept in step with the book, or readers went to the wrong shelf.",ok:true},{t:"Readers needed three visits to find a book."}],
     why:"Copies make reading easy and keeping up hard. Every shape for reading is a copy like those cards: arranged for a question, and kept in step."},
   "integrate":{stop:"source",q:"The short-course platform arrives. What changes in a data vault?",
-    opts:[{t:"The hubs are redesigned to fit it."},{t:"New satellites are added; the tables that exist stay as they are.",ok:true},{t:"Every satellite is reloaded from scratch."}],
+    opts:[{t:"The hubs are redesigned to fit it."},{t:"New satellites and new rows are added; no existing table is altered.",ok:true},{t:"Every satellite is reloaded from scratch."}],
     why:"A vault takes a new source by adding. Hubs keep the business keys, and each source's descriptions arrive as satellites, with their source and load time."},
   "present":{stop:"shapes",q:"Why do the awards star and the fees star share one Learner dimension?",
     opts:[{t:"To save storage."},{t:"So one question can cross both stars, and their answers agree.",ok:true},{t:"Because a data vault requires it."}],

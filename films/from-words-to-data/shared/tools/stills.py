@@ -17,8 +17,8 @@ out = BUILD / 'stills'; out.mkdir(exist_ok=True)
 with sync_playwright() as p:
     b, pg = render_page(p)
     info = pg.evaluate("filmInfo()")
-    if A.nocaps:
-        pg.evaluate("CAPS_ON=false")
+    # the video has no captions on its picture, but the site's player shows them: review with them on, unless --nocaps
+    pg.evaluate("CAPS_ON=%s" % ('false' if A.nocaps else 'true'))
     shots = []
     if A.at:
         shots = [('t%06.1f' % t, t) for t in A.at]

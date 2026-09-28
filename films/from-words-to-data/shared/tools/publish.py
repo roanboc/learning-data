@@ -1,5 +1,6 @@
 """Copy the film into the site: python tools/publish.py
-The player (dist/film.js) and the soundtrack (dist/soundtrack.mp3) go to site/assets/<key>/, and the poster,
+The player (dist/film.js), the soundtrack (dist/soundtrack.mp3) and the Spanish captions (src/i18n/es/captions.js,
+as captions.es.js, which the Spanish page loads before the film) go to site/assets/<key>/, and the poster,
 drawn at the moment film.json names ("poster": [chapter, cue, seconds after it]) without captions, goes to
 site/assets/<key>-poster.jpg at 1280×720. Never edit the site's copies by hand: the release workflow checks that
 the site's film.js is byte for byte the one this source builds."""
@@ -14,6 +15,10 @@ if (DIST / 'soundtrack.mp3').exists():
     shutil.copyfile(DIST / 'soundtrack.mp3', dst / 'soundtrack.mp3')
 else:
     print('no dist/soundtrack.mp3 yet: run tools/audio.py first')
+if (ROOT / 'src' / 'i18n' / 'es' / 'captions.js').exists():
+    shutil.copyfile(ROOT / 'src' / 'i18n' / 'es' / 'captions.js', dst / 'captions.es.js')
+else:
+    print('no src/i18n/es/captions.js yet: the Spanish page needs it')
 sid, cid, off = META['poster']
 with sync_playwright() as p:
     b, pg = render_page(p)
@@ -24,4 +29,4 @@ with sync_playwright() as p:
     d = pg.evaluate("""(t)=>{const c=document.createElement('canvas');c.width=1280;c.height=720;renderFrame(c.getContext('2d'),1280/1920,t);return c.toDataURL('image/jpeg',0.88);}""", t)
     b.close()
 (REPO / 'site' / 'assets' / (META['key'] + '-poster.jpg')).write_bytes(base64.b64decode(d[23:]))
-print('copied film.js and soundtrack.mp3 to site/assets/%s/, and drew the poster at %.1f s' % (META['key'], t))
+print('copied film.js, soundtrack.mp3 and captions.es.js to site/assets/%s/, and drew the poster at %.1f s' % (META['key'], t))

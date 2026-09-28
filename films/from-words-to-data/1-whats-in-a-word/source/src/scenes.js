@@ -69,7 +69,7 @@ scene("calls",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const wL=fin(t,cL+1.0,1.2)*(1-fin(t,cE+0.3,0.8)),wE=fin(t,cE+1.4,1.1)*(1-fin(t,cS+0.3,0.8)),wS=fin(t,cS+0.8,0.8);
   withA(ctx,1-nm,()=>{
     // the grassland at dusk
-    const g=ctx.createLinearGradient(0,760,0,1080);g.addColorStop(0,"rgba(40,56,34,0.9)");g.addColorStop(1,"rgba(10,14,10,0.9)");ctx.fillStyle=g;ctx.fillRect(0,760,1920,320);
+    ground(ctx,760,t);
     tree(ctx,300,770,1.5,1);bush(ctx,1085,770,1.5,1);grass(ctx,0,1920,770,t,0.9);
     yearTag(ctx,120,120,"vervet monkeys · alarm calls",CLAY,fin(t,0.3,0.6));
     // the hunters, each with its own call
@@ -100,7 +100,7 @@ const PHRASES=[[4,1,0],[2,3],[5,6]];
 scene("words",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const cb=fin(t,c("combine")-0.2,0.8),kn=fin(t,c("know")-0.2,0.8),fo=fin(t,c("fossil")-0.2,0.8);
   // pointing: a baby, a bird, and someone looking where the baby looks
-  withA(ctx,1-cb,()=>{const bx=1040,by=330;robin(ctx,bx,by,1.6,{a:1});ctx.fillStyle="rgba(80,60,40,0.9)";ctx.fillRect(bx-160,by+36,320,10);
+  withA(ctx,1-cb,()=>{const bx=1040,by=330;robin(ctx,bx,by,1.6,{a:1});perch(ctx,bx,by+36,320,t);
     baby(ctx,520,720,2.0,fin(t,0.3,0.6),fin(t,c("point")+0.4,0.9));person(ctx,"mei",1500,900,0.62,{t,expr:"calm"});
     const ja=fin(t,c("point")+2.0,0.8);withA(ctx,ja,()=>{[[680,640],[1500,560]].forEach(([x,y])=>{ctx.strokeStyle=rgba(WA_INK,0.8);ctx.lineWidth=2.2;ctx.setLineDash([6,9]);ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(bx,by+10);ctx.stroke();ctx.setLineDash([]);});tag(ctx,1060,520,"shared attention",WA_INK,{align:"center",size:22});});
     withA(ctx,fin(t,c("root")+0.6,0.6),()=>{[["this one",850,220],["here",1230,210],["that",1300,380]].forEach(([s,x,y],i)=>withA(ctx,fin(t,c("root")+0.8+i*0.5,0.4),()=>tag(ctx,x,y,s,KIND,{align:"center",size:24})));});});
@@ -117,9 +117,7 @@ scene("words",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     credCard(ctx,1050,280,560,{a:rA,era:"paper",title:"Diploma of Languages",issuer:"the university",holder:"Mei Tanaka",claim:"Spanish, advanced",date:"2019",press:fin(t,c("know")+4.2,0.5)});
     withA(ctx,fin(t,c("know")+4.8,0.6),()=>tag(ctx,1330,700,"a record shows it",TRUST,{align:"center",size:22}));});
   // no fossils
-  withA(ctx,fo,()=>{const cols=["#3b2a1c","#4a3422","#5a4130","#3f2e22","#2e2118"];cols.forEach((cl,i)=>{ctx.fillStyle=cl;ctx.beginPath();ctx.moveTo(0,300+i*110);for(let x=0;x<=1920;x+=60)ctx.lineTo(x,300+i*110+Math.sin(x*0.004+i)*16);ctx.lineTo(1920,1080);ctx.lineTo(0,1080);ctx.fill();});
-    [[380,430],[1480,560],[860,690]].forEach(([x,y],i)=>{ctx.strokeStyle="rgba(240,226,200,0.55)";ctx.lineWidth=3;ctx.beginPath();for(let k=0;k<5;k++)ctx.arc(x,y,8+k*8,Math.PI*(0.1+k*0.3),Math.PI*(0.9+k*0.3));ctx.stroke();});
-    ctx.strokeStyle="rgba(240,226,200,0.45)";ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(1100,420);ctx.lineTo(1260,440);ctx.moveTo(1120,440);ctx.lineTo(1240,420);ctx.stroke();
+  withA(ctx,fo,()=>{strata(ctx,t);
     const qa=fin(t,c("fossil")+2.4,0.6);withA(ctx,qa,()=>{ctx.save();ctx.setLineDash([10,10]);ctx.strokeStyle=rgba(KIND,0.9);ctx.lineWidth=3;ctx.beginPath();ctx.ellipse(1000,560,120,70,0,0,TAU);ctx.stroke();ctx.restore();T(ctx,"?",1000,582,{w:800,size:64,align:"center",color:rgba(KIND,1)});});
     withA(ctx,fin(t,c("fossil")+3.2,0.6),()=>tag(ctx,960,180,"words leave no fossils",CLAY,{align:"center",size:26}));});
   vign(ctx,S);});
@@ -138,7 +136,7 @@ scene("forms",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
 
 /* ---------- 6. Which part do you mean? ---------- */
 scene("gavagai",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
-  const g=ctx.createLinearGradient(0,700,0,1080);g.addColorStop(0,"rgba(40,56,34,0.8)");g.addColorStop(1,"rgba(8,12,8,0.9)");ctx.fillStyle=g;ctx.fillRect(0,700,1920,380);grass(ctx,0,1920,710,t,0.8);
+  ground(ctx,700,t);grass(ctx,0,1920,710,t,0.8);
   yearTag(ctx,120,120,"1960 · a philosopher's puzzle",CLAY,fin(t,0.3,0.6));
   const run=fin(t,0.6,4.0),rx=lerp(200,900,run),ry=660;rabbit(ctx,rx,ry,1.9,[235,225,205],t,{run:1});
   // the stranger's pointing arm, and the word
@@ -170,7 +168,7 @@ scene("edges",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,
     CREDS.forEach(([s,dx,dy,lv],i)=>{const a=fin(t,c("cred")+0.4+i*0.35,0.5);withA(ctx,a,()=>{const w=tw(ctx,s,20,700)+36;glass(ctx,cx+dx-w/2,cy+dy-22,w,44,22,lv<1?TRUST:lv<2?OFFICE.short.c:lv<4?OFFICE.careers.c:OFFICE.lms.c,{glow:10,ea:0.8,fill:"rgba(7,12,24,0.92)"});T(ctx,s,cx+dx,cy+dy+7,{w:700,size:20,align:"center"});});});
     T(ctx,"credential",cx-520,120,{w:800,size:34,align:"center",color:rgba(TRUST,1)});T(ctx,"one word, and what it takes in",cx-520,156,{w:600,size:19,align:"center",color:rgba(SOFT,1)});
     // each office draws its own boundary
-    RINGS.forEach(([k,r],i)=>{const a=fin(t,c("cred")+6.5+i*0.9,0.7),col=OFFICE[k].c;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=3;ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=10;ctx.beginPath();ctx.arc(cx,cy,r*clamp(a*1.2,0,1)+Math.sin(t*1.5+i)*2,0,TAU);ctx.stroke();ctx.restore();
+    RINGS.forEach(([k,r],i)=>{const a=fin(t,c("cred")+6.5+i*0.9,0.7),col=OFFICE[k].c;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=3;ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=10;ctx.beginPath();ctx.arc(cx,cy,Math.max(0,r*clamp(a*1.2,0,1)+Math.sin(t*1.5+i)*2),0,TAU);ctx.stroke();ctx.restore();
       withA(ctx,a,()=>{const ly=cy-r-6,w=tw(ctx,OFFICE[k].n,17,700)+24;ctx.fillStyle="rgba(7,12,24,0.9)";rr(ctx,cx-w/2,ly-16,w,30,15);ctx.fill();T(ctx,OFFICE[k].n,cx,ly+5,{w:700,size:17,align:"center",color:rgba(col,1)});
         T(ctx,fmtNum(ANS[i][1]),1560,300+i*110,{w:800,size:48,color:rgba(col,1)});T(ctx,OFFICE[k].n,1560,330+i*110,{w:600,size:18,color:rgba(SOFT,1)});});});});
   withA(ctx,fin(t,B+0.4,0.8),()=>tag(ctx,1500,760,"four boundaries, one word",TRUST,{align:"center",size:22}));
@@ -250,7 +248,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");const cl=fin(t,c
     // a meeting, against everything else
     withA(ctx,fin(t,c("cost")+0.2,0.6),()=>{tag(ctx,700,720,"agreeing: a meeting",GOOD,{size:24});tag(ctx,1120,720,"disagreeing: disputes, rework, wrong decisions",BAD,{size:24});});});}
   if(cl>0){histBg(ctx,S,t,{light:0.14});withA(ctx,cl*(1-la*0.6),()=>{const p=clamp((t-c("clay")-0.6)/5,0,1);tablet(ctx,660,230,600,380,p,1);
-      const k=Math.floor(p*48),sx=660+40+(k%12)*(600-80)/12,sy=230+Math.floor(k/12)*76+46;if(p<1){ctx.strokeStyle="rgba(200,170,120,0.95)";ctx.lineWidth=7;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(sx+8,sy-6);ctx.lineTo(sx+120,sy-180);ctx.stroke();}
+      const k=Math.floor(p*48),sx=660+40+(k%12)*(600-80)/12,sy=230+Math.floor(k/12)*76+46;if(p<1)stylus(ctx,sx+8,sy-6,t,1);
       yearTag(ctx,120,120,"c. 3300 BCE · Uruk",CLAY,1);});
     withA(ctx,la,()=>{[["minds",560],["marks",960],["systems",1360]].forEach(([s,x],i)=>withA(ctx,fin(t,c("last")+0.4+i*0.6,0.5),()=>{const col=[KIND,CLAY,CYAN][i];glass(ctx,x-150,690,300,110,20,col,{glow:16,ea:0.85,fill:"rgba(7,12,24,0.93)"});T(ctx,s,x,758,{w:800,size:34,align:"center",color:rgba(col,1)});if(i<2)arrowTo(ctx,x+160,745,x+240,745,SOFT,0.8,{head:12});}));});}
   endCard(ctx,S,t,B+0.3,"What's in a word",WA_INK,"Before you can count anything, you have to agree what it is.");

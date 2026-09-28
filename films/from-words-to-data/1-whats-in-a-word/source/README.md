@@ -12,7 +12,7 @@
 | `src/land.js` | The land: the savanna's ground, grass, acacia and bush, a branch for the robin, layers of rock with fossils, and the clay tablet. |
 | `src/beasts.js` | The vervet monkeys and their hunters, the animals with names (a dolphin, an elephant, a marmoset), and the gavagai rabbit. |
 | `src/birds.js` | The pigeon, the honeybee, the eagle, and the birds of the category "bird": a robin, a sparrow, a penguin, an ostrich. |
-| `src/body.js` | Bodies and minds: the pointing baby, a grown-up's arm (pointing, or handing over a letter), a hand with a reed stylus, and the brain's concept cell. |
+| `src/body.js` | Bodies and minds: the pointing baby and her grandmother, drawn as early humans; a stranger's bare arm pointing, and today's ambassadors handing over a letter; a scribe's hand with a reed stylus; and the brain's concept cell. In nature and the ancient past, nobody wears modern clothes. |
 | `src/scenes.js` | The ten chapters. The title is part of the first one. |
 | `src/i18n/es/captions.js` | The Spanish captions: each English narration line, and its caption. |
 | `tools/score.py` | The music and the sound effects, played with the series' instruments (`../../shared/tools/music.py`): a kalimba, a breathy flute, a choir and a frame drum, in D. |

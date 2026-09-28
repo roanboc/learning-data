@@ -102,8 +102,8 @@ const PHRASES=[[4,1,0],[2,3],[5,6]];
 scene("words",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const cb=fin(t,c("combine")-0.2,0.8),kn=fin(t,c("know")-0.2,0.8),fo=fin(t,c("fossil")-0.2,0.8);
   // pointing: a baby, a bird, and someone looking where the baby looks
-  withA(ctx,1-cb,()=>{const bx=1040,by=330;robin(ctx,bx,by,1.6,{a:1,t});perch(ctx,bx,by+36,320,t);
-    baby(ctx,520,720,2.0,fin(t,0.3,0.6),fin(t,c("point")+0.4,0.9));person(ctx,"mei",1500,900,0.62,{t,expr:"calm"});
+  withA(ctx,1-cb,()=>{ground(ctx,600,t);grass(ctx,0,1920,610,t,0.8);const bx=1040,by=330;robin(ctx,bx,by,1.6,{a:1,t});perch(ctx,bx,by+36,320,t);
+    baby(ctx,565,701,1.5,fin(t,0.3,0.6),fin(t,c("point")+0.4,0.9),t,{at:[bx,by+10]});withA(ctx,fin(t,0.3,0.6),()=>by_elder(ctx,1487,925,1.02,t,{look:[bx,by+10]}));
     const ja=fin(t,c("point")+2.0,0.8);withA(ctx,ja,()=>{[[680,640],[1500,560]].forEach(([x,y])=>{ctx.strokeStyle=rgba(WA_INK,0.8);ctx.lineWidth=2.2;ctx.setLineDash([6,9]);ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(bx,by+10);ctx.stroke();ctx.setLineDash([]);});tag(ctx,1060,520,"shared attention",WA_INK,{align:"center",size:22});});
     withA(ctx,fin(t,c("root")+0.6,0.6),()=>{[["this one",850,220],["here",1230,210],["that",1300,380]].forEach(([s,x,y],i)=>withA(ctx,fin(t,c("root")+0.8+i*0.5,0.4),()=>tag(ctx,x,y,s,KIND,{align:"center",size:24})));});});
   // combining without limit, and reaching what isn't here
@@ -142,7 +142,7 @@ scene("gavagai",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   yearTag(ctx,120,120,"1960 · a philosopher's puzzle",CLAY,fin(t,0.3,0.6));
   const run=fin(t,0.6,4.0),rx=lerp(200,900,run),ry=660;rabbit(ctx,rx,ry,1.9,[235,225,205],t,{run:1,dist:rx-200+(t>2.6?175*Math.pow(Math.min(1,(t-2.6)/2),3)+262.5*Math.max(0,t-4.6):0)});
   // the stranger's pointing arm, and the word
-  pointArm(ctx,-60,560,230,480,1.1,fin(t,c("rabbit")+0.8,0.6));
+  pointArm(ctx,-60,560,236,500,1.35,fin(t,c("rabbit")+0.8,0.6),{at:[rx,ry-30],t});
   withA(ctx,fin(t,c("rabbit")+3.2,0.4),()=>bubble(ctx,300,250,340,"gavagai!",WA_INK,{size:44}));
   // three things the word could mean
   const mT=c("mean"),opt=[["the rabbit",mT+0.4],["its ears",mT+1.6],["this moment of running",mT+2.8]];
@@ -150,7 +150,7 @@ scene("gavagai",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     if(i===0)ring(ctx,rx,ry-10,120,KIND,0.5+0.5*hi,3);if(i===1){ring(ctx,rx+56,ry-96,44,KIND,0.5+0.5*hi,3);}if(i===2){ctx.strokeStyle=rgba(KIND,0.5+0.5*hi);ctx.lineWidth=3;ctx.strokeRect(rx-150,ry-150,300,230);for(let k=0;k<4;k++){ctx.beginPath();ctx.moveTo(rx-200-k*30,ry-80+k*30);ctx.lineTo(rx-160-k*30,ry-80+k*30);ctx.stroke();}}
     glass(ctx,1240,230+i*120,560,86,18,KIND,{glow:10+10*hi,ea:0.6+0.4*hi,fill:"rgba(7,12,24,0.92)"});T(ctx,s,1270,283+i*120,{w:700,size:28});});});
   // children guess the whole thing
-  withA(ctx,fin(t,c("kids")+1.0,0.6),()=>{baby(ctx,1120,780,1.3,1,0.9);tick_(ctx,1770,273,34,GOOD,1);tag(ctx,1500,190,"children: the whole thing",GOOD,{align:"center",size:22});});
+  withA(ctx,fin(t,c("kids")+1.0,0.6),()=>{baby(ctx,1120,780,1.3,1,0.8,t,{at:[rx+10,ry+10]});tick_(ctx,1770,273,34,GOOD,1);tag(ctx,1500,190,"children: the whole thing",GOOD,{align:"center",size:22});});
   // the grain
   withA(ctx,fin(t,c("grain")+1.8,0.6),()=>{glass(ctx,1240,630,560,150,20,TRUST,{glow:16,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(ctx,"the grain",1270,680,{w:800,size:28,color:rgba(TRUST,1)});T(ctx,"what counts as one?",1270,722,{w:600,size:24});T(ctx,"1 row = 1 rabbit? 1 ear? 1 moment?",1270,758,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});});
   vign(ctx,S);});
@@ -189,8 +189,10 @@ scene("drift",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);histBg(ctx,S,t);
     const fd=clamp((t-cT-5.4)/1.2,0,1);withA(ctx,fin(t,cT+4.9,0.5),()=>{ctx.save();ctx.translate(1540,700);ctx.fillStyle="#efe6d2";ctx.fillRect(-150,-90,150,180);ctx.save();ctx.scale(Math.cos(fd*Math.PI*0.96),1);ctx.fillStyle=fd>0.5?"#d8ccb2":"#efe6d2";ctx.fillRect(0,-90,150,180);ctx.restore();ctx.strokeStyle="rgba(120,90,50,0.5)";ctx.beginPath();ctx.moveTo(0,-90);ctx.lineTo(0,90);ctx.stroke();ctx.restore();});});
   // an ambassador's letters of credence
   withA(ctx,st*(1-mv),()=>{yearTag(ctx,120,120,"today · letters of credence",CLAY,1);const u=ease(clamp((t-c("still")-0.6)/1.8,0,1));
-    const lx=700+u*140;pointArm(ctx,-80,560,lx-150,540,1.2,1);pointArm(ctx,2000,600,lx+560,560,1.2,u);
+    const lx=700+u*140;
     credCard(ctx,700+u*140,380,420,{a:1,era:"wax",title:"Letter of credence",issuer:"a head of state",holder:"the ambassador",claim:"trust this person",rot:-0.03,rh:40});
+    // the letter changes hands: the envoy's fingers behind it and thumb on its face; the host's hand comes in open and closes on it
+    pointArm(ctx,lx-900,680,lx-100,598,2.0,1,{pose:"give",dress:"coat",card:[lx,380,420,286,-0.03],t});const rx_=lx+520+(1-u)*900;pointArm(ctx,rx_+760,680,rx_,556,2.0,1,{pose:"take",dress:"coat",k:clamp(u*1.6-0.6,0,1),card:[lx,380,420,286,-0.03],t});
     withA(ctx,fin(t,c("still")+2.6,0.6),()=>tag(ctx,960,800,"credential: the letter that asks for trust",TRUST,{align:"center",size:24}));});
   // meaning moves along a line of years
   withA(ctx,mv,()=>{const x0=200,x1=1720,y=560;ctx.strokeStyle=rgba(CLAY,0.7);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x1,y);ctx.stroke();
@@ -250,7 +252,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");const cl=fin(t,c
     // a meeting, against everything else
     withA(ctx,fin(t,c("cost")+0.2,0.6),()=>{tag(ctx,700,720,"agreeing: a meeting",GOOD,{size:24});tag(ctx,1120,720,"disagreeing: disputes, rework, wrong decisions",BAD,{size:24});});});}
   if(cl>0){histBg(ctx,S,t,{light:0.14});withA(ctx,cl*(1-la*0.6),()=>{const p=clamp((t-c("clay")-0.6)/5,0,1);tablet(ctx,660,230,600,380,p,1);
-      const k=Math.floor(p*48),sx=660+40+(k%12)*(600-80)/12,sy=230+Math.floor(k/12)*76+46;if(p<1)stylus(ctx,sx+8,sy-6,t,1);
+      const k=Math.floor(p*48),sx=660+40+(k%12)*(600-80)/12,sy=230+Math.floor(k/12)*76+46;{const W_=by_scribe(t-c("clay")-0.6,660,230,600,380);if(W_)stylus(ctx,W_.x,W_.y,t,W_.a,W_);}
       yearTag(ctx,120,120,"c. 3300 BCE · Uruk",CLAY,1);});
     withA(ctx,la,()=>{[["minds",560],["marks",960],["systems",1360]].forEach(([s,x],i)=>withA(ctx,fin(t,c("last")+0.4+i*0.6,0.5),()=>{const col=[KIND,CLAY,CYAN][i];glass(ctx,x-150,690,300,110,20,col,{glow:16,ea:0.85,fill:"rgba(7,12,24,0.93)"});T(ctx,s,x,758,{w:800,size:34,align:"center",color:rgba(col,1)});if(i<2)arrowTo(ctx,x+160,745,x+240,745,SOFT,0.8,{head:12});}));});}
   endCard(ctx,S,t,B+0.3,"What's in a word",WA_INK,"Before you can count anything, you have to agree what it is.");

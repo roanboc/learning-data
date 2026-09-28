@@ -389,7 +389,7 @@ function sketch(ctx,ox,oy,w,h,wrong,a){a=a==null?1:a;const col=wrong?[255,140,90
 function paintRealism2(x,w,h){x.drawImage(master2(1),0,0,w,h);const pts=[[0.16,0.36,"Tower L9 · 118 of 120 seats",1],[0.46,0.6,"Learning hub · 1,240 people",1],[0.8,0.68,"Labs · 3 booked",-1]];
   pts.forEach(([px,py,s,d])=>{const X=px*w,Y=py*h,LX=X+d*70,LY=Y-70;x.strokeStyle="rgba(255,255,255,0.9)";x.lineWidth=2;x.beginPath();x.arc(X,Y,7,0,TAU);x.stroke();x.beginPath();x.moveTo(X+d*5,Y-5);x.lineTo(LX,LY);x.stroke();x.font=font(700,20);const tw3=x.measureText(s).width;const bx=d>0?LX:LX-tw3-20;rr(x,bx,LY-18,tw3+20,32,6);x.fillStyle="rgba(6,10,22,0.8)";x.fill();x.fillStyle="#fff";x.fillText(s,bx+10,LY+5);});}
 function paintModern2(x,w,h){x.fillStyle="#0b1126";x.fillRect(0,0,w,h);let g=x.createRadialGradient(w*0.34,h*0.5,0,w*0.34,h*0.5,h*0.36);g.addColorStop(0,"#6ae6d4");g.addColorStop(1,"#178a80");x.fillStyle=g;x.beginPath();x.arc(w*0.34,h*0.5,h*0.34,0,TAU);x.fill();
-  x.fillStyle="#f2f5fb";x.fillRect(w*0.62,h*0.16,w*0.09,h*0.66);x.fillStyle="#ff8a5c";x.fillRect(w*0.76,h*0.54,w*0.15,h*0.28);x.strokeStyle="#f2f5fb";x.lineWidth=6;x.beginPath();x.moveTo(w*0.05,h*0.9);x.lineTo(w*0.95,h*0.1);x.stroke();
+  x.fillStyle="#f2f5fb";x.fillRect(w*0.62,h*0.16,w*0.09,h*0.66);x.fillStyle="#ff8a5c";x.fillRect(w*0.76,h*0.54,w*0.15,h*0.28);
   x.fillStyle="#08202a";x.font=font(800,h*0.17);x.textAlign="center";x.fillText("94%",w*0.34,h*0.56);x.textAlign="left";}
 function paintRules2(x,w,h){x.fillStyle="#08122a";x.fillRect(0,0,w,h);const vx=w/2,vy=h*0.42;x.strokeStyle="rgba(120,190,255,0.25)";x.lineWidth=1.2;for(let i=0;i<=16;i++){x.beginPath();x.moveTo(vx,vy);x.lineTo(i*w/16,h);x.stroke();}for(let k=1;k<10;k++){const f=Math.pow(k/10,1.7),y=vy+(h-vy)*f;x.beginPath();x.moveTo(0,y);x.lineTo(w,y);x.stroke();}
   x.strokeStyle="rgba(255,209,102,0.95)";x.lineWidth=2.5;for(let s=-1;s<=1;s+=2)for(let k=0;k<5;k++){const f=1-k*0.18,cx=vx+s*w*0.44*f,top=lerp(vy,h*0.14,f),bot=lerp(vy,h*0.95,f);x.beginPath();x.moveTo(cx,bot);x.lineTo(cx,top);x.stroke();if(k<4){const nf=f-0.18,nx=vx+s*w*0.44*nf,nt=lerp(vy,h*0.14,nf);x.beginPath();x.moveTo(cx,top);x.quadraticCurveTo((cx+nx)/2,top-h*0.1*f,nx,nt);x.stroke();}}
@@ -1157,7 +1157,8 @@ function waxSeal(ctx,x,y,r,col,a,press,mark){if(a<=0.01)return;const c=col||WAX,
   ctx.strokeStyle=rgba(mix(c,[0,0,0],0.45),0.9);ctx.lineWidth=r*0.06;ctx.beginPath();ctx.arc(0,0,r*0.66,0,TAU);ctx.stroke();
   T(ctx,mark||"✦",0,r*0.18,{w:800,size:r*0.62,align:"center",color:rgba(mix(c,[0,0,0],0.5),0.95)});ctx.restore();});}
 /* a credential, as each age made it: o.era is "tablet" (clay), "wax" (a sealed letter), "paper" (a diploma), "transcript", "badge" or "digital".
-   Its parts are the series' model: who issued it, who holds it, what it claims, the evidence, the date. */
+   Its parts are the series' model: who issued it, who holds it, what it claims, the evidence, the date.
+   A digital card says "signed" under its seal: o.signed gives that word in another language, or false leaves it out. */
 function credCard(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return 0;const era=o.era||"digital",h=o.h||Math.round(w*0.68),hl=o.hl||{};
   const rowsF=[["issuer",o.issuer],["holder",o.holder],["claim",o.claim],["evidence",o.evidence],["date",o.date]].filter(r=>r[1]);
   withA(ctx,a,()=>{ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot||0);ctx.translate(-w/2,-h/2);
@@ -1166,11 +1167,11 @@ function credCard(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return
       const g=ctx.createLinearGradient(0,0,w,h);g.addColorStop(0,"rgba(255,255,255,0.10)");g.addColorStop(1,"rgba(0,0,0,0.16)");ctx.fillStyle=g;rr(ctx,0,0,w,h,era==="tablet"?22:6);ctx.fill();
       if(era==="paper"){ctx.strokeStyle="rgba(150,120,60,0.5)";ctx.lineWidth=2;rr(ctx,10,10,w-20,h-20,4);ctx.stroke();}}
     const dk=era==="digital"||era==="badge",ink=dk?rgba(INK,0.95):(era==="tablet"?"rgba(60,36,20,0.9)":"rgba(52,40,30,0.92)"),lab=dk?rgba(SOFT,1):(era==="tablet"?"rgba(70,44,26,0.7)":"rgba(110,86,54,0.9)");
-    let yy=o.title?58:42;if(o.title)T(ctx,o.title,w/2,40,{w:800,size:o.ts||22,align:"center",color:dk?rgba(o.col||TRUST,1):ink});
-    rowsF.forEach(([k,v],i)=>{const on=hl[k]||0,ry=yy+i*(o.rh||34);if(on>0){ctx.fillStyle=dk?rgba(o.col||TRUST,0.16*on):"rgba(200,140,40,"+(0.22*on)+")";rr(ctx,12,ry-24,w-24,32,8);ctx.fill();}
-      T(ctx,k,24,ry,{f:"mono",w:500,size:15,color:lab});T(ctx,v,120,ry,{w:700,size:18,color:ink});});
+    let yy=o.title?70:42;if(o.title)T(ctx,o.title,w/2,40,{w:800,size:o.ts||22,align:"center",color:dk?rgba(o.col||TRUST,1):ink});
+    rowsF.forEach(([k,v],i)=>{const on=hl[k]||0,ry=yy+i*(o.rh||34);if(on>0){const top=o.title?Math.max(ry-24,50):ry-24;ctx.fillStyle=dk?rgba(o.col||TRUST,0.16*on):"rgba(200,140,40,"+(0.22*on)+")";rr(ctx,12,top,w-24,ry+8-top,8);ctx.fill();}
+      T(ctx,k,24,ry,{f:"mono",w:500,size:17,color:lab});T(ctx,v,120,ry,{w:700,size:18,color:ink});});
     if(era==="wax"||era==="paper")waxSeal(ctx,w-50,h-46,28,WAX,1,o.press==null?1:o.press);
-    if(era==="digital"){const sx=w-46,sy=h-40;ctx.strokeStyle=rgba(o.col||TRUST,0.9);ctx.lineWidth=2;ctx.beginPath();for(let i=0;i<6;i++){const an=i/6*TAU+Math.PI/6;ctx.lineTo(sx+Math.cos(an)*20,sy+Math.sin(an)*20);}ctx.closePath();ctx.stroke();T(ctx,"✓",sx,sy+7,{w:800,size:20,align:"center",color:rgba(o.col||TRUST,1)});T(ctx,"signed",sx,sy+36,{f:"mono",w:500,size:12,align:"center",color:rgba(SOFT,1)});}
+    if(era==="digital"){const sx=w-46,sy=h-40;ctx.strokeStyle=rgba(o.col||TRUST,0.9);ctx.lineWidth=2;ctx.beginPath();for(let i=0;i<6;i++){const an=i/6*TAU+Math.PI/6;ctx.lineTo(sx+Math.cos(an)*20,sy+Math.sin(an)*20);}ctx.closePath();ctx.stroke();T(ctx,"✓",sx,sy+7,{w:800,size:20,align:"center",color:rgba(o.col||TRUST,1)});if(o.signed!==false)T(ctx,o.signed||"signed",sx,sy+36,{f:"mono",w:500,size:12,align:"center",color:rgba(SOFT,1)});}
     if(era==="badge"){const bx=w-60,by=46;ctx.fillStyle=rgba(o.col||TRUST,0.9);ctx.beginPath();for(let i=0;i<6;i++){const an=i/6*TAU;ctx.lineTo(bx+Math.cos(an)*26,by+Math.sin(an)*26);}ctx.closePath();ctx.fill();T(ctx,"★",bx,by+8,{w:800,size:22,align:"center",color:"#0a1020"});}
     if(era==="tablet"){ctx.fillStyle="rgba(60,36,20,0.35)";for(let i=0;i<18;i++){const px=20+hash(i,2)*(w-40),py=h-30-hash(i,3)*20;ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(px+10,py+4);ctx.lineTo(px,py+8);ctx.fill();}}
     ctx.restore();});return h;}
@@ -1230,9 +1231,10 @@ function credKinds(ctx,o){o=o||{};const p=o.p||{},ox=o.ox||0,oy=o.oy||0,s=o.s||1
   Object.values(E).forEach(e=>ent(ctx,e));}
 
 /* ===== What's in a word: the film's own pictures =====
-   Animals, a baby's pointing hand, a brain's concept cell, a rabbit and a cloud of birds, drawn as luminous icons in the films'
-   design language: a dark fill, a soft light from the upper left, and a glowing outline in the colour that carries the meaning.
-   The labs and the scenarios draw with these too. */
+   The icon every creature is drawn with, the pigeons' photos, the bees' cards, a dolphin's whistle, three portraits, a roll of names,
+   and LV, the pictures of the labs and scenarios. The living world has files of its own: land.js (the ground, plants, rock and clay),
+   beasts.js (the mammals and the snake), birds.js (the birds and the bee) and body.js (a baby, a pointing arm, a hand with a stylus, a brain).
+   The labs and the scenarios draw with all of them. */
 const WA_INK=[255,190,110],LEO=[255,176,64],EAG=[120,190,255],SNK=[120,230,140],NAMEC=[190,150,255];
 
 // an icon: a path in its own units (about 100 tall), drawn at (x,y) and size s, filled dark and outlined in light
@@ -1243,45 +1245,7 @@ function icon(ctx,x,y,s,path,col,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)r
   if(o.eye){ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(o.eye[0],o.eye[1],o.eye[2]||2.6,0,TAU);ctx.fill();}
   ctx.restore();}
 
-/* ---------- animals ---------- */
-const P_PIGEON=c=>{c.ellipse(0,6,34,22,-0.15,0,TAU);c.moveTo(38,-22);c.arc(28,-22,12,0,TAU);c.moveTo(-30,4);c.lineTo(-58,-2);c.lineTo(-54,16);c.lineTo(-28,14);};
-const D_PIGEON=c=>{c.moveTo(38,-24);c.lineTo(48,-20);c.lineTo(38,-17);c.moveTo(-6,-4);c.quadraticCurveTo(10,10,-14,18);c.moveTo(0,26);c.lineTo(-2,42);c.moveTo(10,26);c.lineTo(12,42);};
-const pigeon=(ctx,x,y,s,col,o)=>icon(ctx,x,y,s,P_PIGEON,col||[200,215,240],Object.assign({detail:D_PIGEON,eye:[31,-24,2.4]},o));
-const P_BEE=c=>{c.ellipse(0,0,26,15,0,0,TAU);c.moveTo(38,0);c.arc(30,0,9,0,TAU);};
-const D_BEE=c=>{[-10,0,10].forEach(x=>{c.moveTo(x,-14);c.lineTo(x,14);});c.moveTo(34,-7);c.quadraticCurveTo(40,-20,46,-22);c.moveTo(36,-6);c.quadraticCurveTo(46,-14,52,-12);};
-function bee(ctx,x,y,s,t,o){o=o||{};const col=o.col||[255,214,90];withA(ctx,o.a==null?1:o.a,()=>{ctx.save();ctx.translate(x,y);const fl=Math.sin(t*60)*0.35;ctx.fillStyle="rgba(200,230,255,0.28)";ctx.strokeStyle="rgba(200,230,255,0.7)";ctx.lineWidth=1.4;
-  [[-6,-18],[6,-20]].forEach(([wx,wy],i)=>{ctx.save();ctx.translate(wx*s,wy*s);ctx.rotate(-0.5+fl*(i?1:-1)*0.5);ctx.beginPath();ctx.ellipse(0,-6*s,9*s,16*s,0,0,TAU);ctx.fill();ctx.stroke();ctx.restore();});ctx.restore();
-  icon(ctx,x,y,s,P_BEE,col,{detail:D_BEE,eye:[33,-2,2]});});}
-const P_MONKEY=c=>{c.ellipse(0,20,20,28,0,0,TAU);c.moveTo(16,-18);c.arc(0,-18,16,0,TAU);c.moveTo(-16,40);c.bezierCurveTo(-46,52,-58,20,-40,6);};
-const D_MONKEY=c=>{c.ellipse(0,-15,9,8,0,0,TAU);c.moveTo(-16,-22);c.arc(-17,-22,4,0,TAU);c.moveTo(20,-22);c.arc(17,-22,4,0,TAU);};
-const monkey=(ctx,x,y,s,col,o)=>icon(ctx,x,y,s,P_MONKEY,col||[220,200,170],Object.assign({detail:D_MONKEY,eye:[4,-18,2.2]},o));
-const P_LEOPARD=c=>{c.moveTo(-50,-4);c.bezierCurveTo(-30,-20,20,-22,42,-12);c.lineTo(52,-22);c.bezierCurveTo(60,-30,76,-28,80,-18);c.bezierCurveTo(84,-10,76,-4,68,-4);c.lineTo(56,0);c.lineTo(50,10);c.lineTo(52,42);c.lineTo(44,42);c.lineTo(40,14);c.lineTo(36,14);c.lineTo(34,42);c.lineTo(27,42);c.lineTo(26,12);c.bezierCurveTo(0,16,-20,16,-34,12);c.lineTo(-36,42);c.lineTo(-44,42);c.lineTo(-46,10);c.bezierCurveTo(-60,6,-70,-10,-90,-20);c.bezierCurveTo(-72,-4,-60,-2,-50,-4);};
-const D_SPOTS=c=>{for(let i=0;i<12;i++){const x=-40+(i%6)*14+(i>5?6:0),y=-10+(i>5?10:0);c.moveTo(x+3,y);c.arc(x,y,3,0,TAU);}};
-const leopard=(ctx,x,y,s,col,o)=>icon(ctx,x,y,s,P_LEOPARD,col||LEO,Object.assign({detail:D_SPOTS,eye:[72,-18,2]},o));
-const P_EAGLE=c=>{c.moveTo(0,-8);c.bezierCurveTo(-20,-30,-60,-34,-86,-20);c.lineTo(-70,-12);c.lineTo(-80,-2);c.lineTo(-60,0);c.lineTo(-66,10);c.bezierCurveTo(-40,4,-14,6,-6,14);c.lineTo(-8,34);c.lineTo(0,28);c.lineTo(8,34);c.lineTo(6,14);c.bezierCurveTo(14,6,40,4,66,10);c.lineTo(60,0);c.lineTo(80,-2);c.lineTo(70,-12);c.lineTo(86,-20);c.bezierCurveTo(60,-34,20,-30,0,-8);};
-const eagle=(ctx,x,y,s,col,o)=>icon(ctx,x,y,s,P_EAGLE,col||EAG,Object.assign({detail:c=>{c.moveTo(0,-8);c.arc(0,-14,6,0,TAU);}},o));
-const P_SNAKE=c=>{c.moveTo(-70,10);c.bezierCurveTo(-50,-20,-30,30,-10,0);c.bezierCurveTo(10,-30,30,20,50,-4);c.bezierCurveTo(58,-12,70,-12,74,-4);c.bezierCurveTo(70,4,60,6,52,4);c.bezierCurveTo(32,30,10,-18,-6,10);c.bezierCurveTo(-26,40,-48,-6,-66,16);c.closePath();};
-const snake=(ctx,x,y,s,col,o)=>icon(ctx,x,y,s,P_SNAKE,col||SNK,Object.assign({eye:[64,-6,2]},o));
-const P_DOLPHIN=c=>{c.moveTo(-70,8);c.bezierCurveTo(-40,-26,20,-30,54,-8);c.lineTo(80,-2);c.lineTo(56,4);c.bezierCurveTo(30,18,-10,16,-40,10);c.lineTo(-62,24);c.lineTo(-58,10);c.lineTo(-80,0);c.closePath();c.moveTo(-6,-22);c.lineTo(-18,-44);c.lineTo(8,-24);};
-const dolphin=(ctx,x,y,s,col,o)=>icon(ctx,x,y,s,P_DOLPHIN,col||[120,210,255],Object.assign({eye:[46,-8,2.2]},o));
-const P_ELEPHANT=c=>{c.moveTo(-60,-20);c.bezierCurveTo(-60,-50,20,-54,30,-28);c.bezierCurveTo(44,-44,70,-36,68,-10);c.bezierCurveTo(68,8,70,26,78,34);c.lineTo(70,36);c.bezierCurveTo(60,24,56,10,54,0);c.lineTo(40,4);c.lineTo(40,40);c.lineTo(26,40);c.lineTo(24,10);c.lineTo(-30,10);c.lineTo(-32,40);c.lineTo(-46,40);c.lineTo(-48,8);c.bezierCurveTo(-62,4,-64,-8,-60,-20);};
-const elephant=(ctx,x,y,s,col,o)=>icon(ctx,x,y,s,P_ELEPHANT,col||[190,200,220],Object.assign({detail:c=>{c.moveTo(34,-28);c.bezierCurveTo(24,-10,34,6,46,0);},eye:[52,-20,2]},o));
-const marmoset=(ctx,x,y,s,col,o)=>icon(ctx,x,y,s,P_MONKEY,col||[230,210,180],Object.assign({detail:c=>{D_MONKEY(c);c.moveTo(-14,-30);c.lineTo(-24,-42);c.moveTo(14,-30);c.lineTo(24,-42);},eye:[4,-18,2]},o));
-const P_RABBIT=c=>{c.ellipse(0,8,34,20,-0.1,0,TAU);c.moveTo(44,-10);c.arc(34,-12,13,0,TAU);c.moveTo(30,-22);c.ellipse(24,-44,6,20,-0.45,0,TAU);c.moveTo(40,-22);c.ellipse(36,-46,6,20,-0.2,0,TAU);c.moveTo(-30,4);c.arc(-36,4,7,0,TAU);};
-function rabbit(ctx,x,y,s,col,t,o){o=o||{};const h=Math.abs(Math.sin(t*6))*18*(o.run==null?1:o.run);icon(ctx,x,y-h*s,s,P_RABBIT,col||[230,220,200],Object.assign({eye:[38,-14,2.2],detail:c=>{c.moveTo(-14,22);c.lineTo(-30,34+(h>8?-6:4));c.moveTo(18,22);c.lineTo(30,34+(h>8?4:-6));}},o));}
-const P_ROBIN=c=>{c.ellipse(0,4,26,22,0,0,TAU);c.moveTo(30,-16);c.arc(22,-16,11,0,TAU);c.moveTo(-22,0);c.lineTo(-44,-8);c.lineTo(-40,8);};
-function robin(ctx,x,y,s,o){o=o||{};icon(ctx,x,y,s,P_ROBIN,o.col||[255,160,110],Object.assign({eye:[25,-18,2],detail:c=>{c.moveTo(33,-17);c.lineTo(40,-15);c.lineTo(33,-13);}},o));
-  if(o.breast!==false)withA(ctx,o.a==null?1:o.a,()=>{ctx.fillStyle="rgba(255,120,70,0.75)";ctx.beginPath();ctx.ellipse(x+14*s,y+2*s,11*s,13*s,0,0,TAU);ctx.fill();});}
-const sparrow=(ctx,x,y,s,o)=>icon(ctx,x,y,s,P_ROBIN,[210,170,120],Object.assign({eye:[25,-18,2],detail:c=>{c.moveTo(33,-17);c.lineTo(40,-15);c.lineTo(33,-13);c.moveTo(-10,-6);c.lineTo(4,4);c.moveTo(-14,4);c.lineTo(0,12);}},o));
-const P_PENGUIN=c=>{c.ellipse(0,6,22,36,0,0,TAU);c.moveTo(14,-36);c.arc(0,-36,14,0,TAU);c.moveTo(-20,0);c.lineTo(-30,18);c.lineTo(-20,14);c.moveTo(20,0);c.lineTo(30,18);c.lineTo(20,14);};
-const penguin=(ctx,x,y,s,o)=>icon(ctx,x,y,s,P_PENGUIN,[200,220,245],Object.assign({eye:[5,-38,2],detail:c=>{c.ellipse(0,10,12,26,0,0,TAU);c.moveTo(12,-36);c.lineTo(20,-33);c.lineTo(12,-30);}},o));
-const P_OSTRICH=c=>{c.ellipse(-6,0,30,20,0,0,TAU);c.moveTo(16,-8);c.bezierCurveTo(24,-30,20,-50,24,-62);c.arc(28,-64,6,Math.PI,TAU+1);c.lineTo(38,-62);c.moveTo(-10,18);c.lineTo(-14,54);c.moveTo(4,18);c.lineTo(8,54);};
-const ostrich=(ctx,x,y,s,o)=>icon(ctx,x,y,s,P_OSTRICH,[220,200,180],Object.assign({eye:[28,-65,1.8]},o));
 
-/* ---------- places ---------- */
-function tree(ctx,x,y,s,a){withA(ctx,a==null?1:a,()=>{ctx.fillStyle="rgba(60,44,30,0.95)";ctx.fillRect(x-10*s,y-150*s,20*s,150*s);[[0,-190,80],[-60,-160,56],[60,-160,56],[-30,-230,52],[36,-226,50]].forEach(([dx,dy,r])=>{const g=ctx.createRadialGradient(x+dx*s-r*s*0.3,y+dy*s-r*s*0.3,4,x+dx*s,y+dy*s,r*s);g.addColorStop(0,"rgba(90,150,90,0.95)");g.addColorStop(1,"rgba(30,60,40,0.95)");ctx.fillStyle=g;ctx.beginPath();ctx.arc(x+dx*s,y+dy*s,r*s,0,TAU);ctx.fill();});});}
-function bush(ctx,x,y,s,a){withA(ctx,a==null?1:a,()=>{[[-40,-20,36],[0,-34,44],[40,-22,34]].forEach(([dx,dy,r])=>{const g=ctx.createRadialGradient(x+dx*s,y+dy*s-r*s*0.4,4,x+dx*s,y+dy*s,r*s);g.addColorStop(0,"rgba(80,140,80,0.95)");g.addColorStop(1,"rgba(26,54,36,0.95)");ctx.fillStyle=g;ctx.beginPath();ctx.arc(x+dx*s,y+dy*s,r*s,0,TAU);ctx.fill();});});}
-function grass(ctx,x0,x1,y,t,a){withA(ctx,a==null?1:a,()=>{ctx.strokeStyle="rgba(110,180,110,0.55)";ctx.lineWidth=2;for(let x=x0;x<x1;x+=9){const h=14+hash(x,2)*20,sw=Math.sin(t*1.3+x*0.05)*4;ctx.beginPath();ctx.moveTo(x,y);ctx.quadraticCurveTo(x+sw*0.5,y-h*0.6,x+sw,y-h);ctx.stroke();}});}
 // a photo in a pigeon experiment: a landscape, with or without a person in it
 function photoTile(ctx,x,y,w,h,k,person_,a,mark){withA(ctx,a,()=>{ctx.save();rr(ctx,x,y,w,h,8);ctx.clip();const sky=[[92,130,190],[200,150,110],[110,160,170],[150,140,200]][k%4],gr=[[70,110,70],[120,96,70],[80,120,110],[96,110,70]][k%4];
   let g=ctx.createLinearGradient(x,y,x,y+h);g.addColorStop(0,rgba(sky,1));g.addColorStop(0.62,rgba(mix(sky,[255,255,255],0.3),1));g.addColorStop(0.62,rgba(gr,1));g.addColorStop(1,rgba(mix(gr,[0,0,0],0.4),1));ctx.fillStyle=g;ctx.fillRect(x,y,w,h);
@@ -1298,31 +1262,6 @@ function beeCard(ctx,x,y,s,kind,a,hi){withA(ctx,a,()=>{glass(ctx,x-s/2,y-s/2,s,s
 function nameWave(ctx,x,y,w,h,seed,col,a,p){if(a<=0.01)return;withA(ctx,a,()=>{ctx.strokeStyle=rgba(col,1);ctx.lineWidth=3;ctx.shadowColor=rgba(col,0.9);ctx.shadowBlur=10;ctx.beginPath();const n=60,q=p==null?1:p;
   for(let i=0;i<=n*q;i++){const u=i/n,v=Math.sin(u*Math.PI*(2+seed))*Math.sin(u*Math.PI)*0.8+0.2*Math.sin(u*Math.PI*9*(1+seed*0.3));const px=x+u*w,py=y-v*h/2;i?ctx.lineTo(px,py):ctx.moveTo(px,py);}ctx.stroke();ctx.shadowBlur=0;});}
 
-/* ---------- people and minds ---------- */
-// a baby, sitting, pointing: the root of reference. pt (0..1) raises the pointing arm
-function baby(ctx,x,y,s,a,pt){withA(ctx,a==null?1:a,()=>{const col=[255,214,170],skin=[240,196,160],r=ease(clamp(pt==null?1:pt,0,1));
-  const limb_=(pts,w)=>{ctx.save();ctx.strokeStyle=rgba(skin,1);ctx.lineWidth=w*s;ctx.lineCap="round";ctx.lineJoin="round";ctx.shadowColor=rgba(col,0.7);ctx.shadowBlur=10;ctx.beginPath();pts.forEach((q,i)=>i?ctx.lineTo(x+q[0]*s,y+q[1]*s):ctx.moveTo(x+q[0]*s,y+q[1]*s));ctx.stroke();ctx.restore();};
-  // legs, stretched out in front
-  limb_([[-6,36],[26,52],[44,50]],15);limb_([[-14,40],[14,60],[34,62]],15);
-  icon(ctx,x,y,s,c=>{c.moveTo(20,10);c.bezierCurveTo(22,40,10,52,-8,52);c.bezierCurveTo(-30,52,-36,34,-32,12);c.bezierCurveTo(-28,-6,16,-8,20,10);c.moveTo(22,-34);c.arc(-2,-34,26,0,TAU);},[200,220,250],{fill:"rgba(120,150,200,0.9)",eye:[8,-36,2.6],detail:c=>{c.moveTo(-6,-24);c.quadraticCurveTo(2,-18,10,-24);c.moveTo(-8,-58);c.quadraticCurveTo(-2,-66,6,-60);}});
-  // the face and hair, over the head
-  ctx.save();ctx.fillStyle=rgba(skin,1);ctx.beginPath();ctx.arc(x-2*s,y-34*s,23*s,0,TAU);ctx.fill();ctx.fillStyle="rgba(40,30,30,0.95)";ctx.beginPath();ctx.arc(x+8*s,y-38*s,2.6*s,0,TAU);ctx.arc(x-8*s,y-38*s,2.6*s,0,TAU);ctx.fill();
-  ctx.strokeStyle="rgba(120,60,50,0.9)";ctx.lineWidth=2*s;ctx.beginPath();ctx.arc(x,y-28*s,6*s,0.2,Math.PI-0.2);ctx.stroke();ctx.strokeStyle="rgba(90,60,40,0.95)";ctx.lineWidth=3*s;ctx.beginPath();ctx.moveTo(x-8*s,y-56*s);ctx.quadraticCurveTo(x-2*s,y-66*s,x+6*s,y-58*s);ctx.stroke();ctx.restore();
-  // the other arm resting, and the pointing arm, rising to the thing it shares
-  limb_([[-24,10],[-30,30],[-22,40]],11);
-  const ex=18+lerp(10,46,r),ey=lerp(26,-18,r);limb_([[14,8],[ex,ey]],11);
-  ctx.save();ctx.fillStyle=rgba(skin,1);ctx.beginPath();ctx.arc(x+ex*s,y+ey*s,7*s,0,TAU);ctx.fill();ctx.strokeStyle=rgba(skin,1);ctx.lineWidth=4.5*s;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x+ex*s,y+ey*s);ctx.lineTo(x+(ex+16*r+4)*s,y+(ey-12*r)*s);ctx.stroke();ctx.restore();});}
-// a grown-up's arm, pointing: a sleeve, a hand and one finger, from (x0,y0) towards (x1,y1)
-function pointArm(ctx,x0,y0,x1,y1,s,a){withA(ctx,a==null?1:a,()=>{const an=Math.atan2(y1-y0,x1-x0),L=Math.hypot(x1-x0,y1-y0);ctx.save();ctx.translate(x0,y0);ctx.rotate(an);
-  const g=ctx.createLinearGradient(0,-20*s,0,20*s);g.addColorStop(0,"#5a6f96");g.addColorStop(1,"#2c3a58");ctx.fillStyle=g;ctx.shadowColor="rgba(120,160,230,0.6)";ctx.shadowBlur=12;rr(ctx,-40*s,-22*s,L+40*s,44*s,20*s);ctx.fill();ctx.shadowBlur=0;
-  ctx.fillStyle="#d9e2f0";ctx.fillRect(L-8*s,-22*s,12*s,44*s);ctx.fillStyle="#d8a884";ctx.beginPath();ctx.ellipse(L+26*s,2*s,26*s,18*s,0,0,TAU);ctx.fill();
-  ctx.strokeStyle="#d8a884";ctx.lineWidth=11*s;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(L+36*s,-6*s);ctx.lineTo(L+80*s,-10*s);ctx.stroke();ctx.lineWidth=9*s;ctx.beginPath();ctx.moveTo(L+30*s,-12*s);ctx.lineTo(L+46*s,-22*s);ctx.stroke();ctx.restore();});}
-// a side-view brain, with one concept cell that lights up
-const P_BRAIN=c=>{c.moveTo(-100,20);c.bezierCurveTo(-120,-20,-100,-70,-50,-80);c.bezierCurveTo(-20,-110,40,-104,70,-80);c.bezierCurveTo(110,-70,124,-30,110,0);c.bezierCurveTo(120,30,96,56,60,54);c.bezierCurveTo(50,70,20,74,4,62);c.lineTo(10,96);c.lineTo(-8,96);c.lineTo(-12,58);c.bezierCurveTo(-50,62,-90,50,-100,20);c.closePath();};
-const D_BRAIN=c=>{c.moveTo(-70,-40);c.bezierCurveTo(-50,-60,-20,-40,0,-60);c.moveTo(10,-40);c.bezierCurveTo(30,-60,60,-40,80,-50);c.moveTo(-80,0);c.bezierCurveTo(-50,-10,-30,20,0,0);c.moveTo(20,10);c.bezierCurveTo(40,-10,70,20,96,0);c.moveTo(-40,40);c.bezierCurveTo(-20,30,0,50,30,36);};
-function brain(ctx,x,y,s,t,act,a){withA(ctx,a==null?1:a,()=>{icon(ctx,x,y,s,P_BRAIN,[200,170,255],{detail:D_BRAIN,glow:10});const cx=x+14*s,cy=y+26*s,k=act||0;
-  glow(ctx,cx,cy,(40+60*k)*s,[255,236,160],0.25+0.6*k);ctx.save();ctx.strokeStyle="rgba(255,236,160,"+(0.4+0.6*k)+")";ctx.lineWidth=1.6;for(let i=0;i<7;i++){const an=i/7*TAU+0.3;ctx.beginPath();ctx.moveTo(cx,cy);ctx.quadraticCurveTo(cx+Math.cos(an+0.4)*14*s,cy+Math.sin(an+0.4)*14*s,cx+Math.cos(an)*26*s,cy+Math.sin(an)*26*s);ctx.stroke();}
-  ctx.fillStyle="rgba(255,244,200,"+(0.6+0.4*k)+")";ctx.beginPath();ctx.arc(cx,cy,5*s+3*k,0,TAU);ctx.fill();ctx.restore();});}
 // three forms of one person: a photo, a drawing, a written name
 const PORTRAIT={};
 function portraitBmp(kind){if(PORTRAIT[kind])return PORTRAIT[kind];const c=mkCanvas(240,280),x=c.getContext("2d");
@@ -1334,14 +1273,6 @@ function portrait(ctx,x,y,kind,a,hi){withA(ctx,a,()=>{ctx.save();ctx.shadowColor
   if(hi)glow(ctx,x+100,y+117,150,[255,236,160],0.2*hi);});}
 
 /* ---------- things for the end ---------- */
-// a clay tablet, with rows of wedge marks pressed in as p goes from 0 to 1
-function tablet(ctx,x,y,w,h,p,a){withA(ctx,a==null?1:a,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.7)";ctx.shadowBlur=30;ctx.fillStyle="#9a7650";rr(ctx,x,y,w,h,28);ctx.fill();ctx.shadowBlur=0;
-  const g=ctx.createLinearGradient(x,y,x+w,y+h);g.addColorStop(0,"rgba(255,230,190,0.25)");g.addColorStop(1,"rgba(40,20,10,0.35)");ctx.fillStyle=g;rr(ctx,x,y,w,h,28);ctx.fill();
-  ctx.strokeStyle="rgba(70,44,24,0.5)";ctx.lineWidth=2;for(let r=1;r<5;r++){ctx.beginPath();ctx.moveTo(x+24,y+r*h/5);ctx.lineTo(x+w-24,y+r*h/5);ctx.stroke();}
-  const n=48,shown=Math.floor(n*clamp(p,0,1));for(let i=0;i<shown;i++){const row=Math.floor(i/12),col_=i%12,px=x+40+col_*(w-80)/12+hash(i,2)*6,py=y+row*h/5+h/10+8,k=hash(i,3);
-    ctx.fillStyle="rgba(60,36,18,0.85)";ctx.beginPath();if(k<0.5){ctx.moveTo(px,py-10);ctx.lineTo(px+16,py-6);ctx.lineTo(px,py-2);}else{ctx.moveTo(px,py-12);ctx.lineTo(px+5,py+8);ctx.lineTo(px+10,py-12);}ctx.closePath();ctx.fill();
-    if(hash(i,5)>0.7){ctx.beginPath();ctx.arc(px+8,py+10,4,0,TAU);ctx.fill();}}
-  ctx.restore();});}
 // a scroll with names on it: to enrol was to write a name on the roll
 function roll(ctx,x,y,w,h,names,p,a){withA(ctx,a,()=>{ctx.fillStyle="#e8dcc0";ctx.fillRect(x,y,w,h);[y,y+h].forEach(yy=>{const g=ctx.createLinearGradient(x,yy-10,x,yy+10);g.addColorStop(0,"#b89a6a");g.addColorStop(0.5,"#f0e2c4");g.addColorStop(1,"#8a6c44");ctx.fillStyle=g;rr(ctx,x-12,yy-12,w+24,24,12);ctx.fill();});
   names.forEach((nm,i)=>withA(ctx,clamp(p*names.length-i,0,1),()=>T(ctx,nm,x+28,y+44+i*34,{w:600,size:22,color:"rgba(60,44,30,0.92)"})));});}
@@ -1363,7 +1294,7 @@ const LV={
   trio:(c,w,h,st,L)=>{const V=L.vis,wx=w/2,wy=h-40;
     [[200,V.ideaUK,[140,200,255],200],[w-200,V.ideaUS,[255,170,120],w-200]].forEach(([ix,lab,col,bx],i)=>{c.strokeStyle=rgba(col,0.9);c.lineWidth=3;c.beginPath();c.moveTo(wx,wy-30);c.lineTo(ix,90);c.stroke();
       glow(c,ix,90,70,col,0.5);c.fillStyle=rgba(mix(col,[255,255,255],0.5),1);c.beginPath();c.arc(ix,90,16,0,TAU);c.fill();T(c,lab,ix,48,{w:800,size:26,align:"center",color:rgba(col,1)});
-      c.beginPath();c.moveTo(ix,106);c.lineTo(bx+(i?-150:150),h-110);c.stroke();robin(c,bx+(i?-150:150),h-90,i?1.5:1.2,{col:i?[200,150,120]:undefined});});
+      c.beginPath();c.moveTo(ix,106);c.lineTo(bx+(i?-150:150),h-110);c.stroke();robin(c,bx+(i?-150:150),h-90,i?1.5:1.2,i?{col:[200,150,120],american:true}:{});});
     const ww=tw(c,V.word,34,800)+50;glass(c,wx-ww/2,wy-30,ww,56,14,KIND,{glow:12,ea:0.9,fill:"rgba(7,12,24,0.95)"});T(c,V.word,wx,wy+9,{w:800,size:34,align:"center"});},
   // What counts as one? Three rabbits, and what one row stands for
   grain:(c,w,h,st,L)=>{const g=c.createLinearGradient(0,h*0.62,0,h);g.addColorStop(0,"rgba(40,56,34,0.9)");g.addColorStop(1,"rgba(8,12,8,0.9)");c.fillStyle=g;c.fillRect(0,h*0.62,w,h*0.38);grass(c,0,w,h*0.62+4,1,0.8);
@@ -1382,6 +1313,2312 @@ const LV={
   drift:(c,w,h,st,L)=>{const V=L.vis.drift;c.strokeStyle=rgba(CLAY,0.7);c.lineWidth=4;c.beginPath();c.moveTo(80,200);c.lineTo(520,200);c.stroke();[[80,"2015",V[1]],[520,"2026",V[2]]].forEach(([x,y_,m])=>{c.fillStyle=rgba(CLAY,1);c.beginPath();c.arc(x,200,9,0,TAU);c.fill();T(c,y_,x,246,{f:"mono",w:500,size:22,align:"center",color:rgba(CLAY,1)});wrapT(c,m,x-110,130,220,{w:700,size:20,align:"left"});});tag(c,300,64,V[0],KIND,{align:"center",size:28});},
   paper:(c,w,h,st,L)=>{sheet(c,60,16,480,290,{rot:-0.02});L.vis.paper.forEach((s,i)=>pencilText(c,(i+1)+". "+s,96,66+i*50,{size:21}));}
 };
+
+/* ===== What's in a word: the land =====
+   The ground of the grassland, its grass, trees and bushes, a branch for a bird, layers of rock with fossils in them, and a clay tablet.
+   Scenes place these; each draws in the frame's own units (1920 × 1080), and moves with t where the world would move.
+   Whatever holds still (bark, leaves, rock, clay) is painted once into offscreen canvases, and each frame only places them, on whole
+   pixels when the frame is drawn 1:1; leaves and grass bend with one breeze, ln_wind(x,t), whose gusts roll across from the left. */
+
+/* ---------- shared: caches, noise, the breeze ---------- */
+const LN_C=new Map();
+function ln_cv(w,h){return mkCanvas(Math.max(1,Math.ceil(w)),Math.max(1,Math.ceil(h)));}
+// smooth noise in -1..1, in one and two dimensions, and a few octaves of it
+function ln_n1(x,s){const i=Math.floor(x),f=x-i;return lerp(hash(i,s),hash(i+1,s),f*f*(3-2*f))*2-1;}
+function ln_fbm(x,s,o){let v=0,a=0.5,f=1;for(let k=0;k<(o||4);k++){v+=a*ln_n1(x*f+k*13.1,s+k);f*=2.03;a*=0.5;}return v;}
+function ln_n2(x,y,s){const i=Math.floor(x),j=Math.floor(y),u=x-i,v=y-j,su=u*u*(3-2*u),sv=v*v*(3-2*v),h=(a,b)=>hash(a*57.31+b*131.7,s);
+  return lerp(lerp(h(i,j),h(i+1,j),su),lerp(h(i,j+1),h(i+1,j+1),su),sv)*2-1;}
+// the breeze at x, about 0.3 to 1.2: a steady lean, and gusts that roll across from the left at uneven speed
+function ln_wind(x,t){const g=0.5+0.5*Math.sin(x*0.0062-t*1.15+1.3*Math.sin(t*0.21)),h=0.5+0.5*Math.sin(x*0.0023-t*0.47+1.7);return 0.3+0.9*g*g*(0.3+0.7*h);}
+// a point on the cubic p=[x0,y0,x1,y1,x2,y2,x3,y3]
+function ln_bz(p,u){const m=1-u,a=m*m*m,b=3*m*m*u,c=3*m*u*u,d=u*u*u;return[a*p[0]+b*p[2]+c*p[4]+d*p[6],a*p[1]+b*p[3]+c*p[5]+d*p[7]];}
+// adds to the path a tapering tube along the cubic p, w0 wide at its start and w1 at its end, its end rounded
+function ln_tube(c,p,w0,w1,n){n=n||18;const L=[],R=[];for(let i=0;i<=n;i++){const u=i/n,a=ln_bz(p,Math.max(0,u-0.02)),b=ln_bz(p,Math.min(1,u+0.02)),q=ln_bz(p,u);
+    let tx=b[0]-a[0],ty=b[1]-a[1];const l=Math.hypot(tx,ty)||1;tx/=l;ty/=l;const w=lerp(w0,w1,Math.pow(u,0.85))/2;L.push([q[0]+ty*w,q[1]-tx*w]);R.push([q[0]-ty*w,q[1]+tx*w]);}
+  const e=ln_bz(p,1);c.moveTo(L[0][0],L[0][1]);for(let i=1;i<=n;i++)c.lineTo(L[i][0],L[i][1]);c.quadraticCurveTo(e[0]+(e[0]-ln_bz(p,0.97)[0])*w1*0.3,e[1]+(e[1]-ln_bz(p,0.97)[1])*w1*0.3,R[n][0],R[n][1]);
+  for(let i=n-1;i>=0;i--)c.lineTo(R[i][0],R[i][1]);c.closePath();}
+// draws V[k] (the same picture shifted k/V.length px right) with its corner at (x,y): on whole device pixels when drawn 1:1, where it is sharpest and fastest
+function ln_put(ctx,V,x,y,m){m=m||ctx.getTransform();if(m.a===1&&m.d===1&&m.b===0&&m.c===0){const n=V.length,q=Math.round((x+m.e)*n),ix=Math.floor(q/n);ctx.drawImage(V[q-ix*n],ix-m.e,Math.round(y+m.f)-m.f);}else ctx.drawImage(V[0],x,y);}
+// the rim of a mask M (same size as c's canvas): its edges that face (-dx,-dy), in colour col, with a soft glow
+function ln_rim(c,M,dx,dy,col,a,blur){const R=ln_cv(M.width,M.height),r=R.getContext("2d");r.drawImage(M,0,0);r.globalCompositeOperation="destination-out";r.drawImage(M,dx,dy);
+  r.globalCompositeOperation="source-in";r.fillStyle=col;r.fillRect(0,0,R.width,R.height);c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=a;if(blur){c.shadowColor=col;c.shadowBlur=blur;}c.drawImage(R,0,0);c.restore();}
+// a mask painted in colour: the shapes of M filled with fill (a colour or gradient), drawn onto c
+function ln_tint(c,M,fill,a){const R=ln_cv(M.width,M.height),r=R.getContext("2d");r.drawImage(M,0,0);r.globalCompositeOperation="source-in";r.fillStyle=fill;r.fillRect(0,0,R.width,R.height);
+  c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=a==null?1:a;c.drawImage(R,0,0);c.restore();return R;}
+
+/* ---------- leaves: clumps of puffs, lit from the upper left ---------- */
+// the puffs of a cluster of leaves sp {rx,ry,clumps,seed,r,dens,flat}: a few clumps side by side, domed above and (if flat) cut flat below
+function ln_puffs(sp){const P=[],nc=sp.clumps;for(let k=0;k<nc;k++){const q=j=>hash(k+sp.seed*17,sp.seed+j),u=nc>1?-1+2*(k+0.5)/nc:0,cx=(u*0.74+(q(1)-0.5)*0.2)*sp.rx,e=Math.sqrt(Math.max(0.05,1-(cx/sp.rx)*(cx/sp.rx))),
+    crx=sp.rx/nc*(1.1+0.45*q(2)),cry=sp.ry*(0.55+0.4*e)*(0.8+0.35*q(3)),cy=-sp.ry*0.22*e+(q(4)-0.5)*sp.ry*0.4,n=Math.round((sp.dens||1)*3.4*crx*cry/(sp.r*sp.r))+6;
+    for(let i=0;i<n;i++){const h=j=>hash(i+k*131+sp.seed*7,sp.seed*3+j),a=h(5)*TAU,d=Math.sqrt(h(6));let x=cx+Math.cos(a)*d*crx,y=cy+Math.sin(a)*d*cry;
+      if(sp.flat)y=Math.min(y,cy+cry*(0.35+0.2*h(8)));P.push({x,y,r:sp.r*(0.5+0.6*h(7))*(1.15-0.45*d),k,cx,cy,crx,cry});}}
+  return P;}
+// a cluster of leaves painted into its own canvas, sub px right of centre; returns {c,ox,oy}, (ox,oy) being where its centre lies.
+// Each clump is one mass, shaded as a whole from its lit upper left to its dark lower right, with a lobe or two showing, and fine leaves on it
+function ln_leaves(sp,s,sub){const pal=sp.pal,sq=sp.sq||0.78,m=Math.ceil((14+0.35*sp.rx)*s),W=Math.ceil(2*sp.rx*s)+2*m+2,H=Math.ceil(2*sp.ry*s)+2*m,ox=m+Math.ceil(sp.rx*s),oy=m+Math.ceil(sp.ry*s);
+  const c=ln_cv(W,H),x=c.getContext("2d"),M=ln_cv(W,H),mx=M.getContext("2d"),P=ln_puffs(sp),T=q=>q.setTransform(s,0,0,s,ox+(sub||0),oy);
+  const blob=(q,p,dx,dy,k)=>{const r=p.r*k;q.moveTo(p.x+dx+r,p.y+dy);q.ellipse(p.x+dx,p.y+dy,r,r*sq,0,0,TAU);};
+  T(mx);mx.fillStyle="#fff";mx.beginPath();P.forEach(p=>blob(mx,p,0,0,1));mx.fill();
+  T(x);const ks=[];P.forEach(p=>{if(!ks.includes(p.k))ks.push(p.k);});ks.sort((a,b)=>P.find(p=>p.k===a).cy-P.find(p=>p.k===b).cy);
+  ks.forEach(k=>{const Q=P.filter(p=>p.k===k),p0=Q[0],path=(dx,dy)=>{x.beginPath();Q.forEach(p=>blob(x,p,dx,dy,1));};
+    // its shadow on what lies behind, then the mass
+    path(0.8,1.8);x.fillStyle=rgba(pal.dark,0.85);x.fill();
+    path(0,0);const g=x.createLinearGradient(p0.cx-p0.crx*0.55,p0.cy-p0.cry*1.1,p0.cx+p0.crx*0.45,p0.cy+p0.cry*0.9);g.addColorStop(0,rgba(pal.lit,1));g.addColorStop(0.42,rgba(pal.body,1));g.addColorStop(1,rgba(pal.dark,1));x.fillStyle=g;x.fill();
+    x.save();x.clip();
+    // lobes: the lit upper edge of some puffs inside the mass
+    x.lineWidth=0.9;Q.forEach((p,i)=>{if(hash(i,sp.seed+50)>0.3)return;const l=(p.x-p.cx)/p.crx*0.7+(p.y-p.cy)/p.cry;x.strokeStyle=rgba(l<0.2?pal.hi:pal.lit,l<0.2?0.35:0.3);x.beginPath();x.ellipse(p.x,p.y,p.r*0.95,p.r*sq*0.95,0,Math.PI*1.02,Math.PI*1.6);x.stroke();
+      x.strokeStyle=rgba(pal.dark,0.45);x.beginPath();x.ellipse(p.x,p.y,p.r*0.95,p.r*sq*0.95,0,Math.PI*0.05,Math.PI*0.6);x.stroke();});
+    // the leaves: fine flecks, pale where the light falls, dark in the shade
+    const nf=Math.round(p0.crx*p0.cry*(sp.leaf?0.55:0.9));for(let i=0;i<nf;i++){const h=j=>hash(i+k*997+sp.seed*13,j+40),a=h(0)*TAU,d=Math.sqrt(h(1)),fx=p0.cx+Math.cos(a)*d*p0.crx*1.1,fy=p0.cy+Math.sin(a)*d*p0.cry*1.1,
+      l=(fx-p0.cx)/p0.crx*0.7+(fy-p0.cy)/p0.cry+(h(2)-0.5)*0.9;x.fillStyle=l<-0.1?rgba(pal.hi,0.35+0.4*h(3)):l>0.5?rgba(pal.dark,0.55):rgba(pal.lit,0.35);x.beginPath();
+      if(sp.leaf)x.ellipse(fx,fy,sp.leaf*(0.7+0.5*h(4)),sp.leaf*0.42,h(5)*3,0,TAU);else x.ellipse(fx,fy,0.5+0.6*h(4),0.35+0.3*h(4),h(5)*3,0,TAU);x.fill();}
+    x.restore();});
+  ln_rim(x,M,-1.4*s,-1.8*s,rgba(pal.deep||[4,8,8],1),0.6,0);
+  ln_rim(x,M,1.2*s,1.4*s,rgba(pal.rim,1),pal.ra||0.6,3*s);
+  return{c,ox,oy};}
+// the same cluster in four sub-pixel shifts, so that it can sway smoothly on whole pixels
+function ln_cluster(key,sp,s){let F=LN_C.get(key);if(F)return F;const V=[0,1,2,3].map(k=>ln_leaves(sp,s,k/4));F={V:V.map(v=>v.c),ox:V[0].ox,oy:V[0].oy};LN_C.set(key,F);return F;}
+
+/* ---------- the ground ---------- */
+const LN_FAR=[[1300,0.56],[1742,0.64],[64,0.46],[586,0.4]];
+// a far acacia on the horizon, k its size: a short trunk forking under a flat crown, dark against the hills, its top catching the last light
+function ln_farTree(c,x,y,k,col){c.fillStyle=col;c.strokeStyle=col;c.lineCap="round";c.lineWidth=2.4*k;c.beginPath();c.moveTo(x,y);c.quadraticCurveTo(x-1*k,y-9*k,x+1*k,y-15*k);c.moveTo(x,y-6*k);c.quadraticCurveTo(x-6*k,y-11*k,x-10*k,y-15*k);c.moveTo(x+0.5*k,y-8*k);c.quadraticCurveTo(x+7*k,y-12*k,x+12*k,y-15.5*k);c.stroke();
+  const P=[];for(let i=0;i<11;i++){const u=i/10-0.5;P.push([x+u*46*k+(hash(i,x)-0.5)*4*k,y-18*k-(1-4*u*u)*2.6*k+(hash(i,x+1)-0.5)*2*k,(4.6+2.4*hash(i,x+2))*k]);}
+  c.beginPath();P.forEach(([px,py,r])=>{c.moveTo(px+r,py);c.ellipse(px,py,r,r*0.5,0,0,TAU);});c.fill();
+  c.strokeStyle="rgba(255,196,140,0.3)";c.lineWidth=0.9;c.beginPath();P.forEach(([px,py,r])=>{c.moveTo(px-r*0.8,py-r*0.3);c.ellipse(px,py,r,r*0.5,0,Math.PI*1.12,Math.PI*1.88);});c.stroke();}
+function ln_groundKit(y){const key="gd"+y;let G=LN_C.get(key);if(G)return G;const top=Math.floor(y-120),c=ln_cv(1920,1080-top),x=c.getContext("2d");x.translate(0,-top);
+  // the last warmth of the day, low over the land
+  let g=x.createLinearGradient(0,y-120,0,y+4);g.addColorStop(0,"rgba(255,170,110,0)");g.addColorStop(0.7,"rgba(255,160,100,0.035)");g.addColorStop(1,"rgba(255,150,96,0.08)");x.fillStyle=g;x.fillRect(0,y-120,1920,124);
+  // far hills, a nearer ridge, and a line of bush with acacias on it; the farther, the paler and bluer
+  const hill=(X,c,w,h)=>h*Math.exp(-((X-c)/w)*((X-c)/w)),far=X=>y-10-hill(X,300,220,30)-hill(X,820,300,20)-hill(X,1180,260,44)-hill(X,1560,190,26)-hill(X,1890,260,36)-12*(0.5+0.5*ln_fbm(X*0.004,11,4))-2.5*ln_fbm(X*0.02,12,2),
+    mid=X=>y-5-hill(X,620,240,13)-hill(X,1420,320,17)-5*(0.5+0.5*ln_fbm(X*0.006,13,3)),near=X=>y-2-6*(0.5+0.5*ln_fbm(X*0.0042,23,3));
+  const ridge=(f,c0,c1,h)=>{x.beginPath();x.moveTo(0,y+6);for(let X=0;X<=1920;X+=4)x.lineTo(X,f(X));x.lineTo(1920,y+6);x.closePath();g=x.createLinearGradient(0,y-h,0,y);g.addColorStop(0,c0);g.addColorStop(1,c1);x.fillStyle=g;x.fill();};
+  ridge(far,"rgb(28,34,52)","rgb(18,22,34)",70);x.beginPath();for(let X=0;X<=1920;X+=4)X?x.lineTo(X,far(X)):x.moveTo(X,far(X));x.strokeStyle="rgba(160,168,210,0.16)";x.lineWidth=1.1;x.stroke();
+  ridge(mid,"rgb(21,26,38)","rgb(16,20,28)",30);x.beginPath();for(let X=0;X<=1920;X+=4)X?x.lineTo(X,mid(X)):x.moveTo(X,mid(X));x.strokeStyle="rgba(150,150,170,0.08)";x.lineWidth=1;x.stroke();
+  LN_FAR.forEach(([X,k])=>ln_farTree(x,X,near(X)+1,k,"rgb(8,11,14)"));
+  x.beginPath();x.moveTo(0,y+6);for(let X=0;X<=1920;X+=4)x.lineTo(X,near(X));x.lineTo(1920,y+6);x.closePath();x.fillStyle="rgb(14,18,20)";x.fill();
+  // the plain: a gently rolling edge, lit a little from the upper left, darker toward us
+  const edge=X=>y+2.6*ln_fbm(X*0.005,5,3);x.beginPath();x.moveTo(0,1080);for(let X=0;X<=1920;X+=4)x.lineTo(X,edge(X));x.lineTo(1920,1080);x.closePath();
+  g=x.createLinearGradient(0,y-4,0,1080);g.addColorStop(0,"rgb(50,58,38)");g.addColorStop(0.1,"rgb(34,42,28)");g.addColorStop(0.45,"rgb(19,24,17)");g.addColorStop(1,"rgb(7,9,8)");x.fillStyle=g;x.fill();
+  x.save();x.clip();
+  g=x.createLinearGradient(0,0,1920,0);g.addColorStop(0,"rgba(255,220,160,0.05)");g.addColorStop(0.5,"rgba(255,220,160,0)");g.addColorStop(1,"rgba(0,0,0,0.12)");x.fillStyle=g;x.fillRect(0,y-10,1920,1090-y);
+  // patches of darker and paler grass, seen in perspective: noise laid on the plain, stretched with distance
+  const tw=480,th=Math.max(1,Math.ceil((1080-y)/4)),N=ln_cv(tw,th),nx=N.getContext("2d"),D=nx.createImageData(tw,th);
+  for(let j=0;j<th;j++){const dy=j*4+2,z=900/(dy+6),fade=Math.min(1,dy/50);for(let i=0;i<tw;i++){const wx=(i*4+2-960)/(dy+6),v=ln_n2(wx*1.1,z*1.1,7)*0.65+ln_n2(wx*3.1,z*3.1,8)*0.35,o=(j*tw+i)*4;
+    if(v<0){D.data[o]=0;D.data[o+1]=0;D.data[o+2]=0;D.data[o+3]=Math.round(255*fade*Math.min(0.22,-v*0.5));}else{D.data[o]=150;D.data[o+1]=150;D.data[o+2]=92;D.data[o+3]=Math.round(255*fade*Math.min(0.06,Math.max(0,v-0.12)*0.22));}}}
+  nx.putImageData(D,0,0);x.imageSmoothingEnabled=true;x.drawImage(N,0,y,1920,th*4);
+  // grass all over the plain, seen in perspective: tapered blades, tiny near the horizon, taller and warmer toward us; the nearest in shade
+  const bl=(px,py,h,w,lean,col)=>{x.fillStyle=col;x.beginPath();x.moveTo(px-w/2,py);x.quadraticCurveTo(px-w*0.2+lean*h*0.4,py-h*0.55,px+lean*h,py-h);x.quadraticCurveTo(px+w*0.2+lean*h*0.4,py-h*0.55,px+w/2,py);x.closePath();x.fill();};
+  for(let i=0;i<9000;i++){const d=Math.pow(hash(i,311),1.5),px=hash(i,312)*1940-10,py=y+5+d*(1085-y),h=(0.8+1.6*hash(i,313))*(1+14*Math.pow(d,1.4)),w=0.6+2.4*d,lean=(hash(i,314)-0.4)*0.55,q=hash(i,315),
+      lt=clamp(1.1-0.9*d,0.25,1),a=(0.1+0.22*d)*(0.6+0.4*hash(i,316));
+    bl(px,py,h,w,lean,q<0.45?rgba(mix([96,100,60],[164,144,96],d),a*lt):q<0.75?rgba([4,6,4],0.35+0.25*d):rgba(mix([60,70,44],[120,100,66],d),a*1.3*lt));}
+  // a few stones, lit from the upper left
+  for(let i=0;i<16;i++){const d=0.35+0.65*hash(i,321),px=hash(i,322)*1920,py=y+10+d*(1080-y-20),r=(1.5+3*hash(i,323))*(0.5+1.4*d);
+    x.fillStyle="rgba(3,4,3,0.5)";x.beginPath();x.ellipse(px+r*0.3,py+r*0.25,r*1.1,r*0.5,0,0,TAU);x.fill();x.fillStyle="rgba(46,50,40,0.8)";x.beginPath();x.ellipse(px,py,r,r*0.5,0,0,TAU);x.fill();
+    x.fillStyle="rgba(150,150,120,0.16)";x.beginPath();x.ellipse(px-r*0.3,py-r*0.16,r*0.5,r*0.2,0,0,TAU);x.fill();}
+  x.restore();
+  // the rim of the land, where the light catches it
+  x.save();x.beginPath();for(let X=0;X<=1920;X+=4)X?x.lineTo(X,edge(X)):x.moveTo(X,edge(X));g=x.createLinearGradient(0,0,1920,0);g.addColorStop(0,"rgba(190,205,140,0.42)");g.addColorStop(1,"rgba(160,180,130,0.22)");
+  x.strokeStyle=g;x.lineWidth=1.3;x.shadowColor="rgba(170,200,120,0.6)";x.shadowBlur=6;x.stroke();x.restore();
+  G={c,top};LN_C.set(key,G);return G;}
+// the ground of a scene, from y down to the bottom of the frame: a grassland at dusk, with hills and acacias far off
+function ground(ctx,y,t,a){const G=ln_groundKit(Math.round(y));withA(ctx,a==null?1:a,()=>ln_put(ctx,[G.c],0,G.top));}
+
+/* ---------- grass ---------- */
+// three depths of grass, back to front: spacing of clumps, blade heights, blades a clump, blade widths, sway (px at the tip), rooting depth,
+// spread of a clump, share of empty places, and how many kinds of clump
+const LN_GR=[{d:6,h:[5,12],n:[6,10],w:[1.0,1.6],A:1.4,dy:[-6,-1],sp:9,skip:0.03,V:8,dim:0.5},
+  {d:11,h:[10,24],n:[6,10],w:[1.4,2.3],A:4,dy:[-1,4],sp:13,skip:0.08,V:10,dim:0.76},
+  {d:20,h:[16,38],n:[5,10],w:[1.8,3.0],A:7,dy:[3,13],sp:16,skip:0.22,V:12,dim:1}];
+// tones of blades, from the base (in shade) to the tip (in the last light): olive, straw, rust, grey-green
+const LN_GT=[[[20,24,16],[62,70,40],[134,136,80]],[[26,24,16],[98,86,50],[184,164,104]],[[24,20,16],[94,70,46],[160,122,82]],[[16,24,20],[54,72,54],[104,128,92]]];
+// a blade: its centre line bends by its lean, its own curl, and the wind D, most near the tip; it tapers to a point
+function ln_blade(c,b,D,hr,lit){const f=Math.pow(b.h/hr,1.5),bend=b.cu*b.h+D*f,tip=b.lean*b.h+bend,k=1-0.14*Math.min(1,(tip/b.h)*(tip/b.h)),n=7,L=[],R=[];
+  for(let i=0;i<=n;i++){const u=i/n,x=b.bx+b.lean*b.h*u+bend*u*u,y=-b.h*k*u,dx=b.lean*b.h+2*bend*u,dy=-b.h*k,l=Math.hypot(dx,dy),nx=-dy/l,ny=dx/l,hw=b.w/2*Math.pow(1-u,0.75);
+    L.push([x-nx*hw,y-ny*hw]);R.push([x+nx*hw,y+ny*hw]);}
+  c.beginPath();c.moveTo(L[0][0],L[0][1]);for(let i=1;i<=n;i++)c.lineTo(L[i][0],L[i][1]);for(let i=n-1;i>=0;i--)c.lineTo(R[i][0],R[i][1]);c.closePath();c.fill();
+  if(lit){c.beginPath();c.moveTo(L[2][0],L[2][1]);for(let i=3;i<n;i++)c.lineTo(L[i][0],L[i][1]);c.stroke();}
+  return[b.bx+tip,-b.h*k,b.lean*b.h+2*bend,-b.h*k];}
+// cuts the cells [x,y,w,h] of the atlas c into canvases of their own, each trimmed to what shows in it, with its offset (ox,oy) in the cell:
+// a whole small canvas is drawn several times faster than a piece of a big one
+function ln_cut(c,cells){const W=c.width,D=c.getContext("2d").getImageData(0,0,W,c.height).data;return cells.map(([x,y,w,h])=>{let a=w,b=h,e=-1,f=-1;
+  for(let j=0;j<h;j++){const r=((y+j)*W+x)*4+3;for(let i=0;i<w;i++)if(D[r+i*4]>1){if(i<a)a=i;if(i>e)e=i;if(j<b)b=j;f=j;}}
+  if(e<0){a=0;b=0;e=0;f=0;}const q=ln_cv(e-a+1,f-b+1);q.getContext("2d").drawImage(c,x+a,y+b,e-a+1,f-b+1,0,0,e-a+1,f-b+1);return{c:q,ox:a,oy:b};});}
+// the clumps of each depth, painted once at every lean the breeze can give them (0.5 px apart at the tip), into one atlas a depth
+function ln_grassKit(){let K=LN_C.get("gr");if(K)return K;
+  K=LN_GR.map((G,li)=>{const hr=G.h[1],D0=G.A*0.12,NL=Math.ceil((G.A*1.35-D0)*2)+1,vars=[];
+    for(let v=0;v<G.V;v++){const q=j=>hash(v+li*50,j),n=G.n[0]+Math.floor(q(1)*(G.n[1]-G.n[0]+1)),B=[];
+      for(let i=0;i<n;i++){const r=j=>hash(v*31+i+li*977,j+10),bx=(r(2)-0.5)*G.sp*(0.35+0.65*r(3));B.push({bx,h:lerp(G.h[0],hr,Math.pow(r(4),0.75)),lean:bx/G.sp*0.55+(r(5)-0.5)*0.3,cu:(r(6)-0.4)*0.28,w:lerp(G.w[0],G.w[1],r(7)),tone:Math.floor(r(8)*4)});}
+      B.mean=B.reduce((s,b)=>s+b.h,0)/n;B.sort((a,b)=>b.h-a.h);vars.push(B);}
+    vars.sort((a,b)=>a.mean-b.mean);  // shortest clumps first, so that a scene can pick taller ones where the grass grows lush
+    // how far any blade reaches, at the least and the most wind
+    let x0=0,x1=0;vars.forEach(B=>B.forEach(b=>[D0,D0+(NL-1)*0.5].forEach(D=>{const f=Math.pow(b.h/hr,1.5),tip=b.bx+b.lean*b.h+b.cu*b.h+D*f;x0=Math.min(x0,tip-4,b.bx-3);x1=Math.max(x1,tip+4,b.bx+3);})));
+    const cw=Math.ceil(x1-x0)+4,ax=Math.ceil(-x0)+2,rows=[];let yy=0;vars.forEach(B=>{const h=Math.ceil(B[0].h)+7;rows.push({y:yy,h,ay:h-2});yy+=h;});
+    const c=ln_cv(cw*NL,yy),x=c.getContext("2d"),dimC=col=>mix([10,14,22],col,G.dim);
+    const grads=LN_GT.map(T=>{const g=x.createLinearGradient(0,0,0,-hr*1.15);g.addColorStop(0,rgba(dimC(T[0]),1));g.addColorStop(0.45,rgba(dimC(T[1]),1));g.addColorStop(1,rgba(dimC(T[2]),1));return g;});
+    x.lineWidth=0.6;x.strokeStyle=rgba(dimC([220,214,160]),0.32);
+    vars.forEach((B,v)=>{for(let l=0;l<NL;l++){x.setTransform(1,0,0,1,l*cw+ax,rows[v].y+rows[v].ay);B.forEach(b=>{x.fillStyle=grads[b.tone];ln_blade(x,b,D0+l*0.5,hr,li>0);});}});
+    const sp=li<2?null:ln_cut(c,rows.flatMap(r=>Array.from({length:NL},(_,l)=>[l*cw,r.y,cw,r.h])));
+    return{c:li<2?c:null,cw,ax,rows,NL,D0,hr,sp};});
+  LN_C.set("gr",K);return K;}
+
+/* seed stems, standing above the clumps here and there: a culm with a leaf or two, and a head */
+// an airy panicle (Panicum): a nodding axis with hair-thin branches in whorls, longest below, drooping, a spikelet at each tip
+function ln_panicle(c,tip,sd){const [x,y,dx,dy]=tip,dr=dx>=0?1:-1,L=22+8*hash(sd,1),n=8,ax=[];let px=x,py=y,a=Math.atan2(dy,dx);
+  for(let i=0;i<=n;i++){ax.push([px,py,a]);a+=dr*0.17;px+=Math.cos(a)*L/n;py+=Math.sin(a)*L/n;}
+  const sp=(qx,qy,e)=>{c.fillStyle="rgba(196,178,132,0.95)";c.beginPath();c.ellipse(qx,qy,1.5,0.65,e,0,TAU);c.fill();c.fillStyle="rgba(240,228,190,0.55)";c.beginPath();c.ellipse(qx-0.3,qy-0.35,0.7,0.3,e,0,TAU);c.fill();};
+  c.lineCap="round";c.strokeStyle="rgba(156,140,102,0.8)";c.lineWidth=0.6;c.beginPath();ax.forEach((p,i)=>i?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1]));c.stroke();
+  for(let i=1;i<n;i++)for(let k=0;k<(i<4?2:1);k++){const [bx,by,ba]=ax[i],sde=(i+k)%2?1:-1,bl=(5+13*(1-i/n))*(0.75+0.5*hash(i*2+k,sd+2));let qx=bx,qy=by,qa=ba+sde*(0.85+0.4*hash(i*2+k,sd+3));const P=[[qx,qy]];
+    for(let j=0;j<5;j++){qx+=Math.cos(qa)*bl/5;qy+=Math.sin(qa)*bl/5+0.02*j*j*bl;P.push([qx,qy]);}
+    c.strokeStyle="rgba(156,140,102,0.55)";c.lineWidth=0.42;c.beginPath();P.forEach((p,j)=>j?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1]));c.stroke();
+    const e=Math.atan2(P[5][1]-P[4][1],P[5][0]-P[4][0]);sp(P[5][0]+Math.cos(e)*1.2,P[5][1]+Math.sin(e)*1.2,e);if(bl>9&&hash(i*2+k,sd+4)<0.7){const m=P[3],e2=e+sde*0.7;c.beginPath();c.moveTo(m[0],m[1]);c.lineTo(m[0]+Math.cos(e2)*2.5,m[1]+Math.sin(e2)*2.5);c.stroke();sp(m[0]+Math.cos(e2)*3.6,m[1]+Math.sin(e2)*3.6,e2);}}
+  const e=ax[n];sp(e[0],e[1],e[2]);}
+// red oat grass (Themeda): clusters of rusty spikelets in narrow sheaths, nodding from the top of the culm on short stalks,
+// each with a long dark awn, twisted, bent at the knee
+function ln_themeda(c,S,sd){c.lineCap="round";[[0.66,-1],[0.82,1],[1,-1]].forEach(([u,sde],j)=>{const p=S(u),q=S(Math.max(0,u-0.02)),ta=Math.atan2(p[1]-q[1],p[0]-q[0]),
+    pa=ta+sde*(j===2?0.5:1.0),pl=j===2?2.5:4,x=p[0]+Math.cos(pa)*pl,y=p[1]+Math.sin(pa)*pl,ha=Math.PI/2-sde*0.35;  // the cluster hangs, a little outward
+    c.strokeStyle="rgba(100,76,50,0.9)";c.lineWidth=0.5;c.beginPath();c.moveTo(p[0],p[1]);c.quadraticCurveTo(p[0]+Math.cos(pa)*pl*1.2,p[1]+Math.sin(pa)*pl*1.2-1,x,y);c.stroke();
+    // the sheath (a spathe), then the spikelets in its mouth
+    c.fillStyle="rgba(84,56,40,0.95)";c.beginPath();c.ellipse(x+Math.cos(ha)*3.4,y+Math.sin(ha)*3.4,3.8,0.9,ha,0,TAU);c.fill();
+    for(let k=0;k<3;k++){const a=ha+(k-1)*0.28,cx=x+Math.cos(a)*5,cy=y+Math.sin(a)*5;c.fillStyle="rgba(116,74,50,0.95)";c.beginPath();c.ellipse(cx,cy,2.3,0.75,a,0,TAU);c.fill();
+      c.fillStyle="rgba(170,114,78,0.45)";c.beginPath();c.ellipse(cx-0.3,cy-0.3,1.2,0.35,a,0,TAU);c.fill();}
+    // the awn of the fertile spikelet
+    const ex=x+Math.cos(ha)*7,ey=y+Math.sin(ha)*7,a1=ha-sde*0.5,l1=5+2*hash(j,sd),kx=ex+Math.cos(a1)*l1,ky=ey+Math.sin(a1)*l1,b2=a1-sde*(0.9+0.3*hash(j,sd+5)),l2=7+4*hash(j,sd+6);
+    c.strokeStyle="rgba(50,36,26,0.95)";c.lineWidth=0.5;c.beginPath();c.moveTo(ex,ey);for(let s=1;s<=4;s++){const w=s%2?0.45:-0.45;c.lineTo(lerp(ex,kx,s/4)+w*Math.sin(a1),lerp(ey,ky,s/4)-w*Math.cos(a1));}c.lineTo(kx+Math.cos(b2)*l2,ky+Math.sin(b2)*l2);c.stroke();
+    c.strokeStyle="rgba(150,110,76,0.4)";c.lineWidth=0.4;c.beginPath();c.moveTo(kx,ky);c.lineTo(kx+Math.cos(b2)*l2,ky+Math.sin(b2)*l2);c.stroke();});}
+const LN_ST={V:6,A:6,hr:38};
+function ln_stemKit(){let K=LN_C.get("gs");if(K)return K;const G=LN_ST,D0=G.A*0.12,NL=Math.ceil((G.A*1.35-D0)*2)+1,vars=[];
+  for(let v=0;v<G.V;v++){const q=j=>hash(v,j+60),h=G.hr*1.55*(0.72+0.56*q(1)),kind=v%2;
+    vars.push({h,kind,lean:(q(2)-0.45)*0.22,cu:0.05+0.08*q(3),w:1.25,tone:1,bx:0,leaves:[[0.18+0.12*q(4),q(5)<0.5?-1:1,12+8*q(6)],[0.42+0.1*q(7),q(5)<0.5?1:-1,9+6*q(8)]]});}
+  const cw=110,ax=48,ch=Math.ceil(G.hr*1.55*1.28)+34,c=ln_cv(cw*NL,ch*G.V),x=c.getContext("2d");
+  vars.forEach((b,v)=>{for(let l=0;l<NL;l++){x.setTransform(1,0,0,1,l*cw+ax,v*ch+ch-3);const D=D0+l*0.5,f=1,bend=b.cu*b.h+D*f,k=1-0.1*Math.min(1,((b.lean*b.h+bend)/b.h)**2);
+      const S=u=>[b.lean*b.h*u+bend*u*u,-b.h*k*u],Sd=u=>[b.lean*b.h+2*bend*u,-b.h*k];
+      // the leaves at its nodes, arching away
+      b.leaves.forEach(([u,sde,L])=>{const p=S(u),d=Sd(u),a=Math.atan2(d[1],d[0])+sde*0.55,ex=p[0]+Math.cos(a)*L*0.55+sde*L*0.35+D*0.3,ey=p[1]+Math.sin(a)*L*0.55+L*0.25;
+        x.fillStyle="rgb(56,58,34)";x.beginPath();x.moveTo(p[0]-0.6,p[1]);x.quadraticCurveTo(p[0]+Math.cos(a)*L*0.5,p[1]+Math.sin(a)*L*0.5-1,ex,ey);x.quadraticCurveTo(p[0]+Math.cos(a)*L*0.45+0.8,p[1]+Math.sin(a)*L*0.45+0.4,p[0]+0.6,p[1]+0.6);x.fill();});
+      // the culm, straw-coloured toward its top
+      const g=x.createLinearGradient(0,0,0,-b.h);g.addColorStop(0,"rgb(40,40,26)");g.addColorStop(0.5,"rgb(112,100,62)");g.addColorStop(1,"rgb(170,152,104)");x.fillStyle=g;
+      x.beginPath();for(let i=0;i<=12;i++){const p=S(i/12),hw=0.65*(1-i/14);i?x.lineTo(p[0]-hw,p[1]):x.moveTo(p[0]-hw,p[1]);}for(let i=12;i>=0;i--){const p=S(i/12),hw=0.65*(1-i/14);x.lineTo(p[0]+hw,p[1]);}x.closePath();x.fill();
+      const e=S(1),d=Sd(1);if(b.kind===0)ln_panicle(x,[e[0],e[1],d[0],d[1]],v*7+3);else ln_themeda(x,S,v*7+3);}});
+  K={cw,ax,ch,NL,D0,vars,sp:ln_cut(c,vars.flatMap((_,v)=>Array.from({length:NL},(_,l)=>[l*cw,v*ch,cw,ch])))};LN_C.set("gs",K);return K;}
+
+/* where the clumps and stems of one stretch of grass stand; the back two depths are baked into strips, one per lean, cut into slices each frame */
+function ln_grassLay(x0,x1,y){const key=x0+"_"+x1+"_"+y,LC=LN_C.get("gl")||new Map();LN_C.set("gl",LC);let P=LC.get(key);if(P){LC.delete(key);LC.set(key,P);return P;}
+  const K=ln_grassKit();
+  P=K.map((L,li)=>{const G=LN_GR[li],s=li*7,cl=[];
+    for(let i=Math.floor((x0-40)/G.d),i1=Math.ceil((x1+40)/G.d);i<=i1;i++){const cx=(i+0.15+0.7*hash(i,s+4))*G.d,lush=0.5+0.5*ln_fbm(cx*0.0045+li*2.3,91,2);
+      if(hash(i,s+3)<G.skip+(0.5-lush)*0.3||cx<x0-24||cx>x1+24)continue;
+      const v=Math.floor(clamp(lush*0.9+(hash(i,s+5)-0.5)*0.7,0,0.999)*G.V);cl.push({cx,v,R:L.rows[v],dy:lerp(G.dy[0],G.dy[1],hash(i,s+6)),ph:hash(i,s+7)*TAU});}
+    if(li===2)return{cl};
+    // a strip: every clump of this depth at each lean, stacked
+    const X0=Math.floor(x0-40-L.cw),W=Math.ceil(x1+40+L.cw)-X0;let top=1e9,bot=-1e9;cl.forEach(k=>{const yy=Math.round(y+k.dy-k.R.ay);top=Math.min(top,yy);bot=Math.max(bot,yy+k.R.h);});
+    const SH=bot-top,cs=[];
+    for(let l=0;l<L.NL;l++){const c=ln_cv(W,SH),x=c.getContext("2d");cl.forEach(k=>x.drawImage(L.c,l*L.cw,k.R.y,L.cw,k.R.h,Math.round(k.cx-L.ax)-X0,Math.round(y+k.dy-k.R.ay)-top,L.cw,k.R.h));cs.push(c);}
+    return{cs,X0,W,top,SH};});
+  // the stems: a few, in loose groups where the grass grows lush
+  const SK=ln_stemKit(),st=[];for(let i=Math.floor(x0/70)-1,i1=Math.ceil(x1/70)+1;i<=i1;i++){const lush=0.5+0.5*ln_fbm(i*70*0.0045+4.6,91,2);if(hash(i,501)>0.22+0.5*lush)continue;
+    const n=1+Math.floor(hash(i,502)*3);for(let j=0;j<n;j++){const cx=(i+hash(i*5+j,503))*70;if(cx<x0-10||cx>x1+10)continue;st.push({cx,v:Math.floor(hash(i*5+j,504)*SK.vars.length),dy:6+8*hash(i*5+j,505),ph:hash(i*5+j,506)*TAU});}}
+  P.st=st;LC.set(key,P);if(LC.size>4)LC.delete(LC.keys().next().value);return P;}
+// grass along y from x0 to x1: tapered blades of many heights, leans and tones, in clumps, at three depths, with a few seed heads;
+// gusts roll across from the left, the near blades moving most
+function grass(ctx,x0,x1,y,t,a){const K=ln_grassKit(),P=ln_grassLay(x0,x1,y),SK=ln_stemKit();withA(ctx,a==null?1:a,()=>{const m=ctx.getTransform(),un=m.a===1&&m.d===1&&m.b===0&&m.c===0,flat=m.b===0&&m.c===0&&m.a>0&&m.d>0;
+  // drawn 1:1 on whole pixels, the sprites need no resampling
+  if(un)ctx.imageSmoothingEnabled=false;const X=v=>flat?(Math.round(m.a*v+m.e)-m.e)/m.a:v,Y=v=>flat?(Math.round(m.d*v+m.f)-m.f)/m.d:v;  // on whole device pixels
+  // the back depths: slices 16 px wide, each at the lean of the breeze at its middle, neighbouring slices of one lean drawn as one,
+  // each a strip seen through a clip whose edges lie on whole device pixels
+  [0,1].forEach(li=>{const L=K[li],S=P[li],A=LN_GR[li].A,n=Math.ceil(S.W/16),lv=[];
+    for(let k=0;k<n;k++){const xc=S.X0+k*16+8,w=ln_wind(xc,t)+0.05*Math.sin(t*2.3+xc*0.043);lv.push(clamp(Math.round((w*A-L.D0)*2),0,L.NL-1));}
+    const ox=X(S.X0),oy=Y(S.top),dv=(u,sy)=>flat?(Math.round(sy?m.d*u+m.f:m.a*u+m.e)-(sy?m.f:m.e))/(sy?m.d:m.a):u;
+    for(let k=0;k<n;){let j=k+1;while(j<n&&lv[j]===lv[k])j++;if(k===0&&j===n)ctx.drawImage(S.cs[lv[k]],ox,oy);
+      else{const u0=dv(ox+k*16,0),u1=dv(ox+Math.min(S.W,j*16),0),v0=dv(oy,1),v1=dv(oy+S.SH,1);ctx.save();ctx.beginPath();ctx.rect(u0,v0,u1-u0,v1-v0);ctx.clip();ctx.drawImage(S.cs[lv[k]],ox,oy);ctx.restore();}k=j;}});
+  // the stems, then the nearest clumps over their feet, each clump with its own flutter
+  P.st.forEach(s=>{const w=ln_wind(s.cx,t)+0.08*Math.sin(t*1.9+s.ph)+0.04*Math.sin(t*3.1+s.ph*1.7),l=clamp(Math.round((w*LN_ST.A-SK.D0)*2),0,SK.NL-1),r=SK.sp[s.v*SK.NL+l];
+    ctx.drawImage(r.c,X(s.cx-SK.ax+r.ox),Y(y+s.dy-SK.ch+3+r.oy));});
+  const L=K[2],G=LN_GR[2];P[2].cl.forEach(k=>{const w=ln_wind(k.cx,t)+0.07*Math.sin(t*2.3+k.ph)+0.035*Math.sin(t*3.7+k.ph*1.7),lv=clamp(Math.round((w*G.A-L.D0)*2),0,L.NL-1),r=L.sp[k.v*L.NL+lv];
+    ctx.drawImage(r.c,X(k.cx-L.ax+r.ox),Y(y+k.dy-k.R.ay+r.oy));});});}
+
+/* ---------- an umbrella thorn acacia ---------- */
+// in its own units (about 380 wide, 265 tall), its foot at (0,0): a short trunk forks into limbs that rise steeply, fork again, and fan out
+// in thin branches under a broad flat crown, with a lower tier on each side and a raised one on top. Monkeys climbing it sit on the limbs at
+// (-47,-140), (27,-167), (-20,-200) and (60,-120), so the limbs pass just under those points
+const LN_TREE={
+  limbs:[[[0,4,-3,-18,3,-36,1,-54],26,17],
+    [[-3,-50,-18,-84,-34,-116,-62,-154],12,8],[[-62,-154,-76,-170,-90,-186,-106,-204],8,4.5],[[-100,-198,-116,-200,-132,-202,-156,-209],3.4,1.4],[[-90,-186,-88,-200,-84,-212,-80,-228],3.6,1.6],
+    [[-1,-52,-6,-110,-14,-170,-24,-228],10,4],[[-16,-180,-30,-196,-44,-208,-62,-224],3.2,1.3],
+    [[2,-52,12,-100,24,-148,40,-226],10,4],[[30,-180,44,-196,58,-208,76,-224],3.2,1.3],[[36,-205,34,-220,31,-236,30,-250],2.4,1.2],
+    [[5,-50,22,-76,42,-104,76,-132],11,7],[[76,-132,96,-150,116,-172,140,-194],7,3.2],[[96,-150,100,-170,102,-192,100,-226],3.6,1.6],[[124,-176,140,-182,156,-186,178,-196],2,1],
+    [[-128,-202,-140,-202,-152,-204,-168,-210],1.6,0.8]],
+  // the crown's tiers, back to front: the far side in shade, a raised tier on top, the broad main mat, and a lower tier each side
+  back:{x:22,y:-244,rx:138,ry:14},
+  pads:[{x:36,y:-255,rx:80,ry:9,sw:1.15},{x:-4,y:-236,rx:152,ry:17,sw:1},{x:-142,y:-213,rx:50,ry:10,sw:0.8},{x:142,y:-196,rx:52,ry:10,sw:0.75}]};
+const LN_LEAF_TREE={dark:[16,20,14],body:[40,47,29],lit:[80,86,52],hi:[150,148,94],rim:[200,186,124],ra:0.55,deep:[6,8,7]};
+const LN_LEAF_BACK={dark:[7,10,11],body:[16,22,20],lit:[30,36,30],hi:[62,70,54],rim:[108,112,86],ra:0.32,deep:[3,4,5]};
+// a flat mat of fine leaves (an acacia's crown tier) {rx,ry,seed,pal}, sub px right of centre: a gently domed, lobed top of many small
+// leaf clusters, a flat underside in deep shade, fine leaflets over it; returns {c,ox,oy}, (ox,oy) where its centre lies
+function ln_mat(sp,s,sub){const {rx,ry,pal}=sp,sd=sp.seed,m=Math.ceil(12*s),W=Math.ceil(2*rx*s)+2*m+2,H=Math.ceil(2.4*ry*s)+2*m,ox=m+Math.ceil(rx*s),oy=m+Math.ceil(1.4*ry*s);
+  const c=ln_cv(W,H),x=c.getContext("2d"),M=ln_cv(W,H),mx=M.getContext("2d"),T=q=>q.setTransform(s,0,0,s,ox+(sub||0),oy);
+  const lob=X=>0.5+0.5*ln_fbm(X*0.028+sd*1.7,sd,3),e=X=>Math.sqrt(Math.max(0,1-(X/rx)*(X/rx))),top=X=>-ry*(0.3+0.7*Math.pow(e(X),0.55))*(0.7+0.55*lob(X)),bot=X=>ry*(0.5+0.08*ln_n1(X*0.06,sd+3))*Math.min(1,e(X)*2.6);
+  const P=[],N=Math.round(2.3*rx*ry/3);for(let i=0;i<N;i++){const h=j=>hash(i+sd*1013,sd+j),X=(2*h(1)-1)*rx*0.98,tp=top(X),bt=bot(X),v=Math.pow(h(2),0.8);if(lob(X)<0.3&&v<0.35&&h(6)<0.7)continue;
+    const Y=lerp(tp,bt,v),r=(2.2+2.6*h(3))*(0.75+0.35*e(X));P.push({x:X,y:Y+r*0.3,r,v});}
+  // the mask: the core, and the clusters round it
+  T(mx);mx.fillStyle="#fff";mx.beginPath();for(let X=-rx*0.97;X<=rx*0.97;X+=3)mx.lineTo(X,top(X)*0.55);for(let X=rx*0.97;X>=-rx*0.97;X-=3)mx.lineTo(X,bot(X)-1);mx.closePath();mx.fill();
+  mx.beginPath();P.forEach(p=>{mx.moveTo(p.x+p.r,p.y);mx.ellipse(p.x,p.y,p.r,p.r*0.6,0,0,TAU);});mx.fill();
+  // shaded as one mass: lit on top, darkening down to a flat underside in deep shade; a little brighter to the left, where the light comes from
+  let g=x.createLinearGradient(0,oy-ry*s*1.1,0,oy+ry*0.6*s);g.addColorStop(0,rgba(pal.lit,1));g.addColorStop(0.42,rgba(pal.body,1));g.addColorStop(0.78,rgba(pal.dark,1));g.addColorStop(1,rgba(pal.deep,1));ln_tint(x,M,g,1);
+  const L=ln_cv(W,H),lx=L.getContext("2d");T(lx);
+  g=lx.createLinearGradient(-rx,0,rx,0);g.addColorStop(0,rgba(pal.hi,0.16));g.addColorStop(0.45,rgba(pal.hi,0));g.addColorStop(1,"rgba(0,0,0,0.22)");lx.fillStyle=g;lx.fillRect(-rx-20,-ry*3,2*rx+40,ry*5);
+  // each cluster: a lit crescent on its upper left, a shadow on its lower right; fine leaflets over them
+  lx.lineWidth=0.8/s*1.2;P.forEach((p,i)=>{if(p.v>0.75||hash(i,sd+40)>0.55)return;lx.strokeStyle=rgba(pal.hi,0.14+0.2*(1-p.v));lx.beginPath();lx.ellipse(p.x,p.y,p.r*0.9,p.r*0.54,0,Math.PI*1.05,Math.PI*1.7);lx.stroke();
+    lx.strokeStyle=rgba(pal.dark,0.35);lx.beginPath();lx.ellipse(p.x,p.y,p.r*0.9,p.r*0.54,0,Math.PI*0.1,Math.PI*0.7);lx.stroke();});
+  const nf=Math.round(rx*ry*1.3);for(let i=0;i<nf;i++){const h=j=>hash(i+sd*577,j+70),X=(2*h(0)-1)*rx,tp=top(X),bt=bot(X),v=h(1),Y=lerp(tp,bt,v),l=v-0.35*(X/rx)+(h(2)-0.5)*0.6;
+    lx.fillStyle=l<0.2?rgba(pal.hi,0.22+0.3*h(3)):l>0.62?rgba(pal.deep,0.5):rgba(pal.lit,0.28);lx.beginPath();lx.ellipse(X,Y,0.7+0.5*h(4),0.3+0.2*h(4),h(5)*3,0,TAU);lx.fill();}
+  lx.setTransform(1,0,0,1,0,0);lx.globalCompositeOperation="destination-in";lx.drawImage(M,0,0);x.drawImage(L,0,0);
+  // a few leaflets hanging below the underside, so that its edge is soft
+  T(x);for(let i=0;i<rx*0.5;i++){const h=j=>hash(i+sd*331,j+90),X=(2*h(0)-1)*rx*0.9,Y=bot(X)+0.3+1.2*h(1);if(bot(X)<1)continue;x.fillStyle=rgba(pal.dark,0.8);x.beginPath();x.ellipse(X,Y,0.9,0.4,0.3+h(2),0,TAU);x.fill();}
+  ln_rim(x,M,-1.2*s,-1.6*s,rgba(pal.deep,1),0.6,0);ln_rim(x,M,1.0*s,1.3*s,rgba(pal.rim,1),pal.ra,2.5*s);
+  return{c,ox,oy};}
+function ln_treeKit(s){const key="tr"+s;let K=LN_C.get(key);if(K)return K;
+  const m=24,X0=Math.floor(-196*s-m),Y0=Math.floor(-270*s-m),W=Math.ceil(392*s+2*m),H=Math.ceil(282*s+2*m),c=ln_cv(W,H),x=c.getContext("2d"),T=q=>q.setTransform(s,0,0,s,-X0,-Y0);
+  // its shadow on the ground
+  T(x);x.save();x.translate(10,1);x.scale(1,0.06);let g=x.createRadialGradient(0,0,0,0,0,160);g.addColorStop(0,"rgba(0,0,0,0.5)");g.addColorStop(1,"rgba(0,0,0,0)");x.fillStyle=g;x.beginPath();x.arc(0,0,160,0,TAU);x.fill();x.restore();
+  // the crown's far side, in shade
+  const b=LN_TREE.back,BL=ln_mat(Object.assign({seed:80,pal:LN_LEAF_BACK},b),s,0);x.setTransform(1,0,0,1,0,0);x.drawImage(BL.c,Math.round(-X0+b.x*s-BL.ox),Math.round(-Y0+b.y*s-BL.oy));
+  // trunk and limbs: dark grey-brown bark, fissured, lit from the upper left
+  const M=ln_cv(W,H),mx=M.getContext("2d");T(mx);mx.fillStyle="#fff";mx.beginPath();LN_TREE.limbs.forEach(l=>ln_tube(mx,l[0],l[1],l[2]));
+  mx.moveTo(-21,4);mx.quadraticCurveTo(-12,0,-11,-16);mx.lineTo(11,-16);mx.quadraticCurveTo(12,0,23,4);mx.closePath();mx.fill();
+  g=x.createLinearGradient(-X0-150*s,-Y0-250*s,-X0+150*s,-Y0);g.addColorStop(0,"rgb(66,58,50)");g.addColorStop(1,"rgb(34,30,28)");ln_tint(x,M,g,1);
+  const F=ln_cv(W,H),fx=F.getContext("2d");T(fx);fx.lineCap="round";
+  LN_TREE.limbs.forEach((l,li)=>{if(l[1]<4)return;[-0.3,-0.05,0.22,0.4].forEach((o,j)=>{fx.beginPath();let on=false;for(let i=0;i<=30;i++){const u=i/30,q=ln_bz(l[0],u),q2=ln_bz(l[0],Math.min(1,u+0.03)),tx=q2[0]-q[0],ty=q2[1]-q[1],tl=Math.hypot(tx,ty)||1,w=lerp(l[1],l[2],u),px=q[0]-ty/tl*o*w,py=q[1]+tx/tl*o*w,vis=ln_n1(u*9+j*3,li*5+j)>-0.2;
+      if(vis&&on)fx.lineTo(px,py);else if(vis)fx.moveTo(px,py);on=vis;}fx.strokeStyle=j===3?"rgba(130,118,100,0.42)":"rgba(14,11,10,0.75)";fx.lineWidth=j===3?0.6:0.8;fx.stroke();});});
+  const Fr=F.getContext("2d");Fr.globalCompositeOperation="destination-in";Fr.setTransform(1,0,0,1,0,0);Fr.drawImage(M,0,0);x.save();x.setTransform(1,0,0,1,0,0);x.drawImage(F,0,0);x.restore();
+  ln_rim(x,M,-1.6*s,-1.2*s,"rgb(8,6,5)",0.6,0);ln_rim(x,M,1.1*s,1.2*s,"rgb(210,180,136)",0.55,2.5*s);
+  // pale thorns in pairs on the thin branches
+  T(x);x.strokeStyle="rgba(232,224,204,0.5)";x.lineWidth=0.45;LN_TREE.limbs.forEach((l,li)=>{if(l[2]>1.7)return;for(let k=1;k<4;k++){const q=ln_bz(l[0],k/4.4);x.beginPath();x.moveTo(q[0],q[1]);x.lineTo(q[0]-2.2,q[1]-1.9);x.moveTo(q[0],q[1]);x.lineTo(q[0]+1.9,q[1]-2.3);x.stroke();}});
+  const pads=LN_TREE.pads.map((p,j)=>{const key="tp"+s+"_"+j;let F=LN_C.get(key);if(!F){const V=[0,1,2,3].map(k=>ln_mat(Object.assign({seed:20+j*3,pal:LN_LEAF_TREE},p),s,k/4));F={V:V.map(v=>v.c),ox:V[0].ox,oy:V[0].oy};LN_C.set(key,F);}
+    return{V:F.V,ox:F.ox,oy:F.oy,x:p.x*s,y:p.y*s,h:-p.y/250*p.sw,ph:hash(j,5)*TAU};});
+  K={c,X0,Y0,pads};LN_C.set(key,K);return K;}
+// an umbrella thorn acacia, its foot at (x,y), s its size; with t, its crown sways in the breeze (its tiers each a little differently), its trunk and limbs hold still
+function tree(ctx,x,y,s,a,t){t=t||0;const K=ln_treeKit(s);withA(ctx,a==null?1:a,()=>{const m=ctx.getTransform();ln_put(ctx,[K.c],x+K.X0,y+K.Y0,m);const w=ln_wind(x,t)-0.7;
+  K.pads.forEach(p=>{const dx=s*p.h*(3.2*w+0.9*Math.sin(t*1.1+p.ph)+0.45*Math.sin(t*2.1+p.ph*2));ln_put(ctx,p.V,x+p.x-p.ox+dx,y+p.y-p.oy,m);});});}
+
+/* ---------- a bush ---------- */
+// its clusters of leaves, back to front: the upper ones behind, then the low ones in front (f), which can also be drawn alone, over whatever hides in the bush
+const LN_BUSH={clumps:[{x:-58,y:-26,rx:28,ry:20,clumps:3},{x:52,y:-40,rx:30,ry:22,clumps:3},{x:-24,y:-44,rx:32,ry:24,clumps:3},{x:14,y:-52,rx:34,ry:24,clumps:3},
+    {x:-80,y:-12,rx:15,ry:12,clumps:2,f:1},{x:84,y:-22,rx:19,ry:16,clumps:2,f:1},{x:30,y:-18,rx:38,ry:16,clumps:3,f:1},{x:-30,y:-13,rx:34,ry:14,clumps:3,f:1}],
+  twigs:[[[-8,-50,-10,-62,-13,-74,-18,-86],2,0.8],[[38,-52,42,-62,47,-72,55,-82],1.8,0.8],[[-66,-36,-72,-44,-78,-50,-86,-58],1.8,0.8],[[88,-28,94,-32,99,-36,106,-42],1.6,0.7],
+    [[-4,0,-6,-12,-4,-22,-8,-34],3.2,1.6],[[12,0,14,-10,18,-20,16,-30],3,1.4],[[-36,0,-38,-8,-42,-14,-46,-22],2.6,1.2]]};
+const LN_LEAF_BUSH={dark:[11,17,12],body:[32,45,28],lit:[66,84,48],hi:[136,152,90],rim:[180,196,118],ra:0.55,deep:[4,7,5]};
+function ln_bushKit(s){const key="bu"+s;let K=LN_C.get(key);if(K)return K;
+  const m=20,X0=Math.floor(-112*s-m),Y0=Math.floor(-96*s-m),W=Math.ceil(226*s+2*m),H=Math.ceil(104*s+2*m),c=ln_cv(W,H),x=c.getContext("2d"),T=q=>q.setTransform(s,0,0,s,-X0,-Y0);
+  T(x);x.save();x.translate(4,0);x.scale(1,0.08);let g=x.createRadialGradient(0,0,0,0,0,110);g.addColorStop(0,"rgba(0,0,0,0.5)");g.addColorStop(1,"rgba(0,0,0,0)");x.fillStyle=g;x.beginPath();x.arc(0,0,110,0,TAU);x.fill();x.restore();
+  const L=ln_leaves({x:0,y:-32,rx:86,ry:30,clumps:5,seed:61,r:6,pal:LN_LEAF_BACK,leaf:1.6},s,0);x.setTransform(1,0,0,1,0,0);x.drawImage(L.c,Math.round(-X0-L.ox),Math.round(-Y0-32*s-L.oy));
+  // stems and bare twigs
+  T(x);x.fillStyle="rgb(40,32,26)";x.beginPath();LN_BUSH.twigs.forEach(l=>ln_tube(x,l[0],l[1],l[2],10));x.fill();
+  LN_BUSH.twigs.slice(0,4).forEach((l,i)=>{for(let k=0;k<5;k++){const q=ln_bz(l[0],0.5+k*0.12),a=(k%2?1:-1)*1.0-1.45+(hash(k,i)-0.5)*0.5;x.fillStyle=k%2?"rgb(24,38,24)":"rgb(40,58,34)";x.beginPath();x.ellipse(q[0]+Math.cos(a)*2.4,q[1]+Math.sin(a)*2.4,2.4,1.05,a,0,TAU);x.fill();
+    x.strokeStyle="rgba(150,190,110,0.45)";x.lineWidth=0.4;x.beginPath();x.ellipse(q[0]+Math.cos(a)*2.4,q[1]+Math.sin(a)*2.4,2.4,1.05,a,Math.PI*1.1,Math.PI*1.9);x.stroke();}});
+  const sd=[5,15,20,25,0,10,30,35],clumps=LN_BUSH.clumps.map((p,j)=>{const F=ln_cluster("bc"+s+"_"+j,Object.assign({seed:40+sd[j],r:5.2,pal:LN_LEAF_BUSH,leaf:1.5,sq:0.85},p),s);return{V:F.V,ox:F.ox,oy:F.oy,x:p.x*s,y:p.y*s,h:0.4-p.y/80,ph:hash(j,9)*TAU,f:p.f};});
+  K={c,X0,Y0,clumps};LN_C.set(key,K);return K;}
+// a bush: an uneven mound of leaf clusters with a few bare twigs, its foot at (x,y); with t, its leaves stir in the breeze.
+// o.front: only its low front clusters, to draw over animals that dive into it
+function bush(ctx,x,y,s,a,t,o){t=t||0;const K=ln_bushKit(s),fr=o&&o.front;withA(ctx,a==null?1:a,()=>{const m=ctx.getTransform();if(!fr)ln_put(ctx,[K.c],x+K.X0,y+K.Y0,m);const w=ln_wind(x,t)-0.7;
+  K.clumps.forEach(p=>{if(fr&&!p.f)return;const dx=s*p.h*(1.3*w+0.6*Math.sin(t*1.7+p.ph)+0.28*Math.sin(t*3.1+p.ph*1.3));ln_put(ctx,p.V,x+p.x-p.ox+dx,y+p.y-p.oy,m);});});}
+
+/* ---------- a branch for a bird ---------- */
+// relative to the foothold (0,0) and the length w: a limb running in from the upper right, a thinning end with a tip, twigs with leaves, a knot, a stub
+function ln_perchGeo(w){const S1=[3.0*w,-0.66*w,2.0*w,-0.5*w,0.75*w,-0.06*w,0,0.025*w],S2=[0,0.025*w,-0.18*w,0.035*w,-0.34*w,0.02*w,-0.47*w,-0.04*w],
+    at=(p,u)=>ln_bz(p,u),b1=at(S1,0.42),b2=at(S1,0.2),b3=at(S1,0.8),tip=at(S2,1);
+  return{limbs:[[S1,0.1*w,0.047*w],[S2,0.047*w,0.01*w],[[b1[0],b1[1],b1[0]+0.05*w,b1[1]-0.1*w,b1[0]+0.12*w,b1[1]-0.18*w,b1[0]+0.2*w,b1[1]-0.25*w],0.022*w,0.005*w],
+      [[b2[0],b2[1],b2[0]+0.08*w,b2[1]+0.05*w,b2[0]+0.15*w,b2[1]+0.12*w,b2[0]+0.2*w,b2[1]+0.22*w],0.02*w,0.005*w],
+      [[b3[0],b3[1]-0.01*w,b3[0]-0.01*w,b3[1]-0.03*w,b3[0]-0.02*w,b3[1]-0.045*w,b3[0]-0.03*w,b3[1]-0.06*w],0.022*w,0.017*w]],
+    stub:[b3[0]-0.03*w,b3[1]-0.06*w],knot:at(S1,0.56),
+    leaves:[[b1[0]+0.2*w,b1[1]-0.25*w,-0.6,1],[b1[0]+0.2*w,b1[1]-0.25*w,0.5,0.9],[b1[0]+0.12*w,b1[1]-0.18*w,-1.9,0.85],[b1[0]+0.06*w,b1[1]-0.11*w,0.2,0.8],
+      [b2[0]+0.2*w,b2[1]+0.22*w,1.9,1],[b2[0]+0.2*w,b2[1]+0.22*w,0.9,0.9],[b2[0]+0.15*w,b2[1]+0.12*w,0.4,0.85],[b2[0]+0.1*w,b2[1]+0.07*w,2.3,0.8],
+      [tip[0],tip[1],-2.9,0.8],[tip[0]+0.03*w,tip[1]+0.01*w,2.6,0.7]]};}
+const LN_BARK={body:[[70,54,42],[40,31,25]],rim:[214,172,124],dark:[16,12,10]};
+function ln_leafSprite(L,Wd){const key="lf"+L+"_"+Wd;let F=LN_C.get(key);if(F)return F;const c=ln_cv(L+10,Wd*2+10),x=c.getContext("2d"),o=[4,Wd+5];x.translate(o[0],o[1]);
+  const shape=()=>{x.beginPath();x.moveTo(3,0);x.bezierCurveTo(3+L*0.22,-Wd*0.95,3+L*0.72,-Wd*0.72,L+3,0);x.bezierCurveTo(3+L*0.72,Wd*0.6,3+L*0.22,Wd*0.9,3,0);x.closePath();};
+  x.strokeStyle="rgb(46,56,36)";x.lineWidth=1;x.beginPath();x.moveTo(0,0);x.lineTo(4,0);x.stroke();
+  shape();let g=x.createLinearGradient(0,-Wd,0,Wd);g.addColorStop(0,"rgb(64,88,52)");g.addColorStop(1,"rgb(22,34,24)");x.fillStyle=g;x.fill();
+  x.strokeStyle="rgba(150,184,112,0.55)";x.lineWidth=0.7;x.beginPath();x.moveTo(3,0);x.quadraticCurveTo(L*0.5,-0.6,L+2,0);for(let k=1;k<5;k++){const u=3+L*k/5.4;x.moveTo(u,0);x.quadraticCurveTo(u+L*0.08,-Wd*0.3,u+L*0.16,-Wd*0.55);x.moveTo(u,0);x.quadraticCurveTo(u+L*0.08,Wd*0.25,u+L*0.15,Wd*0.48);}x.stroke();
+  x.save();shape();x.clip();x.strokeStyle="rgba(176,214,128,0.75)";x.lineWidth=1.4;x.beginPath();x.moveTo(3,0);x.bezierCurveTo(3+L*0.22,-Wd*0.95,3+L*0.72,-Wd*0.72,L+3,0);x.stroke();x.restore();
+  F={c,o};LN_C.set(key,F);return F;}
+function ln_perchKit(w){const key="pc"+w;let K=LN_C.get(key);if(K)return K;const G=ln_perchGeo(w),m=16,X0=Math.floor(-0.62*w-m),Y0=Math.floor(-0.95*w-m);
+  const c=ln_cv(3.2*w-X0+m,0.35*w-Y0+m),x=c.getContext("2d"),T=q=>q.setTransform(1,0,0,1,-X0,-Y0);
+  const M=ln_cv(c.width,c.height),mx=M.getContext("2d");T(mx);mx.fillStyle="#fff";mx.beginPath();G.limbs.forEach(l=>ln_tube(mx,l[0],l[1],l[2],30));mx.fill();
+  T(x);let g=x.createLinearGradient(0,-0.7*w,0,0.1*w);g.addColorStop(0,rgba(LN_BARK.body[0],1));g.addColorStop(1,rgba(LN_BARK.body[1],1));ln_tint(x,M,g,1);
+  // bark: fine fissures along the limb, lenticels across it
+  const F=ln_cv(c.width,c.height),fx=F.getContext("2d");T(fx);fx.lineCap="round";
+  G.limbs.slice(0,2).forEach((l,li)=>{for(let j=0;j<7;j++){const o=-0.42+j*0.14;fx.beginPath();let on=false;for(let i=0;i<=80;i++){const u=i/80,q=ln_bz(l[0],u),q2=ln_bz(l[0],Math.min(1,u+0.01)),tx=q2[0]-q[0],ty=q2[1]-q[1],tl=Math.hypot(tx,ty)||1,wd=lerp(l[1],l[2],Math.pow(u,0.85)),px=q[0]-ty/tl*o*wd,py=q[1]+tx/tl*o*wd,vis=ln_n1(u*26+j*5,li*9+j)>0.05;
+      if(vis&&on)fx.lineTo(px,py);else if(vis)fx.moveTo(px,py);on=vis;}fx.strokeStyle=o<0?"rgba(150,124,96,0.35)":"rgba(18,13,10,0.6)";fx.lineWidth=0.7;fx.stroke();}
+    // lenticels: short lens-shaped pores across the limb, in loose clusters, of varied length, fading on the shaded underside
+    for(let i=0;i<23;i++){const cu=hash(Math.floor(i/4),li+72),u=clamp(cu+(hash(i,li+70)-0.5)*0.09,0.02,0.98),q=ln_bz(l[0],u),q2=ln_bz(l[0],Math.min(1,u+0.01)),tx=q2[0]-q[0],ty=q2[1]-q[1],tl=Math.hypot(tx,ty)||1,wd=lerp(l[1],l[2],Math.pow(u,0.85)),
+        ov=(hash(i,li+71)-0.5)*0.72,o=ov*wd,px=q[0]-ty/tl*o,py=q[1]+tx/tl*o,ll=(0.05+0.1*hash(i,li+73))*wd,lit=ov<0?1:0.35,an=Math.atan2(ty,tx)+Math.PI/2;
+      fx.fillStyle="rgba(186,160,122,"+(0.25+0.3*hash(i,li+74))*lit+")";fx.beginPath();fx.ellipse(px,py,ll,Math.max(0.45,ll*0.22),an,0,TAU);fx.fill();
+      fx.fillStyle="rgba(20,14,10,"+0.35*lit+")";fx.beginPath();fx.ellipse(px+tx/tl*0.6,py+ty/tl*0.6,ll*0.8,0.35,an,0,TAU);fx.fill();}});
+  // a knot, with rings of grain round it, and the cut end of a broken twig
+  const [kx,ky]=G.knot;fx.save();fx.translate(kx,ky+0.004*w);fx.rotate(-0.33);fx.fillStyle="rgba(22,15,11,0.85)";fx.beginPath();fx.ellipse(0,0,0.034*w,0.02*w,0,0,TAU);fx.fill();
+  fx.strokeStyle="rgba(150,120,90,0.5)";fx.lineWidth=0.8;for(let k=1;k<4;k++){fx.beginPath();fx.ellipse(0.002*w,0.002*w,0.034*w+k*2.6,0.02*w+k*1.7,0,Math.PI*1.05,Math.PI*1.95);fx.stroke();}
+  fx.strokeStyle="rgba(10,7,5,0.6)";for(let k=1;k<3;k++){fx.beginPath();fx.ellipse(0,0,0.034*w+k*2.6,0.02*w+k*1.7,0,0.05*Math.PI,0.95*Math.PI);fx.stroke();}fx.restore();
+  fx.setTransform(1,0,0,1,0,0);fx.globalCompositeOperation="destination-in";fx.drawImage(M,0,0);x.save();x.setTransform(1,0,0,1,0,0);x.drawImage(F,0,0);x.restore();
+  ln_rim(x,M,-1.6,-2.2,rgba(LN_BARK.dark,1),0.7,0);ln_rim(x,M,1.1,1.6,rgba(LN_BARK.rim,1),0.7,4);
+  T(x);const [sx,sy]=G.stub;x.fillStyle="rgb(150,120,86)";x.beginPath();x.ellipse(sx,sy,0.008*w,0.005*w,-0.5,0,TAU);x.fill();
+  K={c,X0,Y0,G};LN_C.set(key,K);return K;}
+// a branch for a bird to sit on: the bird's foothold at x, its top at y; w sets its size; it runs in from the upper right and thins to a tip at the left
+function perch(ctx,x,y,w,t,a){t=t||0;const K=ln_perchKit(Math.round(w));withA(ctx,a==null?1:a,()=>{const m=ctx.getTransform(),y0=y-0.0015*w;ln_put(ctx,[K.c],x+K.X0,y0+K.Y0,m);
+  const L=ln_leafSprite(Math.round(0.085*w),Math.round(0.03*w));K.G.leaves.forEach(([lx,ly,an,k],i)=>{const f=0.06*Math.sin(t*1.9+i*1.7)+0.04*Math.sin(t*3.3+i*2.9)+0.05*(ln_wind(x+lx,t)-0.7);
+    ctx.save();ctx.translate(x+lx,y0+ly);ctx.rotate(an+f);ctx.scale(k,k);ctx.drawImage(L.c,-L.o[0],-L.o[1]);ctx.restore();});});}
+
+/* ---------- layers of rock ---------- */
+// the tops of the layers, from the ground down: soil, a cross-bedded sandstone, a dark shale (it pinches out to the left and swells into a lens
+// where a fern lies in it), a pale limestone with shells, a conglomerate whose base cuts channels into the red mudstone under it, a dark siltstone.
+// Each contact has its own lie and its own roughness, so the layers thicken and thin
+function ln_bedY(k,X){const F=(f,s,o)=>ln_fbm(X*f,s,o||2);
+  if(k===0)return 300+4*Math.sin(X*0.004+0.7)+2*F(0.02,2);
+  if(k===1)return 344+6*Math.sin(X*0.0031+2.0)+3.5*F(0.021,5,3);
+  if(k===2)return Math.max(ln_bedY(1,X)+30,402+22*Math.sin(X*0.0019+1.1)+8*F(0.006,7,3)+3*F(0.022,8));
+  if(k===3)return ln_bedY(2,X)+Math.max(0,(34+6*F(0.01,9))*sstep(40,420,X)+52*Math.exp(-((X-1510)/190)*((X-1510)/190))+2*F(0.03,16));
+  if(k===4)return 684+12*Math.sin(X*0.0024+0.3)+6*F(0.007,10,3)+3*F(0.02,11);
+  if(k===5)return ln_bedY(4,X)+40+8*F(0.01,12)+64*Math.exp(-((X-520)/150)*((X-520)/150))+38*Math.exp(-((X-1680)/110)*((X-1680)/110))+4*F(0.025,13);
+  if(k===6)return 922+14*Math.sin(X*0.0028+2.2)+6*F(0.008,14,3)+3*F(0.02,15);
+  return 1090;}
+// kept clear, for the question the scene asks there
+const LN_QZ=(x,y)=>Math.abs(x-1000)<190&&Math.abs(y-560)<110,LN_QF=(x,y)=>sstep(1.25,0.85,Math.hypot((x-1000)/230,(y-560)/140));  // LN_QF: 1 in the middle of it, fading to 0 round it
+// an ammonite, embossed in the rock and lit from the upper left: a coil that grows W times a whorl, turns whorls showing, its ribs splitting in two
+// on the outer whorl if fork
+function ln_ammonite(c,cx,cy,R,rot,o){o=o||{};const W=o.W||1.7,b=Math.log(W)/TAU,TH=(o.turns||5)*TAU,r=th=>R*Math.exp(b*(th-TH)),P=(th,rr)=>[cx+Math.cos(th+rot)*rr,cy+Math.sin(th+rot)*rr],nr=o.ribs||44;
+  const outline=(dx,dy)=>{c.beginPath();for(let th=TH-TAU;th<=TH+0.001;th+=0.04){const p=P(th,r(th));c.lineTo(p[0]+dx,p[1]+dy);}const e=P(TH-TAU,r(TH-TAU));c.lineTo(e[0]+dx,e[1]+dy);c.closePath();};
+  c.save();c.fillStyle="rgba(10,6,4,0.55)";outline(2.2,2.6);c.fill();
+  outline(0,0);const g=c.createRadialGradient(cx-R*0.4,cy-R*0.45,R*0.1,cx,cy,R*1.1);g.addColorStop(0,"rgb(234,220,190)");g.addColorStop(0.6,"rgb(194,176,144)");g.addColorStop(1,"rgb(126,108,84)");c.fillStyle=g;c.fill();c.clip();
+  c.lineCap="round";
+  // ribs across each whorl, leaning a little forward; on the outer whorl each splits in two two-thirds of the way out
+  for(let i=0;;i++){const th=TH-i*TAU/nr+0.03*Math.sin(i*1.7),ro=r(th),ri=r(th-TAU),hw=ro-ri;if(hw<1.6||th<0.5)break;const lw=Math.max(0.45,hw*0.075),fk=o.fork&&th>TH-TAU*1.05,st=TAU/nr;
+    const seg=(u0,u1,a0,a1)=>{const pts=[];for(let j=0;j<=5;j++){const u=lerp(u0,u1,j/5),rr=lerp(ri+0.5,ro-0.3,u);pts.push(P(th+lerp(a0,a1,j/5)+0.05*u*u,rr));}return pts;};
+    const L=fk?[seg(0,0.58,0,0),seg(0.58,1,0,-st*0.3),seg(0.58,1,0,st*0.3)]:[seg(0,1,0,0)];
+    L.forEach(pts=>{c.strokeStyle="rgba(78,60,42,0.62)";c.lineWidth=lw*1.3;c.beginPath();pts.forEach((p,j)=>j?c.lineTo(p[0]+lw*0.6,p[1]+lw*0.7):c.moveTo(p[0]+lw*0.6,p[1]+lw*0.7));c.stroke();
+      c.strokeStyle="rgba(252,242,218,0.6)";c.lineWidth=lw;c.beginPath();pts.forEach((p,j)=>j?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1]));c.stroke();});}
+  // the seams between the whorls, each a groove with a lit lip
+  for(let w=1;w<8;w++){if(r(TH-TAU*w)<1.5)break;c.beginPath();for(let th=TH-TAU*w;th>0.3;th-=0.05){const p=P(th,r(th));c.lineTo(p[0],p[1]);}c.strokeStyle="rgba(66,50,36,0.75)";c.lineWidth=Math.max(0.8,1.4-w*0.12);c.stroke();
+    c.beginPath();for(let th=TH-TAU*w;th>0.3;th-=0.05){const p=P(th,r(th)+0.9);c.lineTo(p[0]-0.5,p[1]-0.6);}c.strokeStyle="rgba(250,238,210,0.45)";c.lineWidth=0.7;c.stroke();}
+  // the tiny first whorls, and the mouth of the shell
+  const p0=P(0.3,r(0.3));c.fillStyle="rgba(70,54,38,0.7)";c.beginPath();c.arc(p0[0],p0[1],Math.max(0.8,r(0.3)*0.9),0,TAU);c.fill();
+  c.restore();c.lineWidth=1.2;const g2=c.createLinearGradient(cx-R,cy-R,cx+R,cy+R);g2.addColorStop(0,"rgba(255,246,222,0.7)");g2.addColorStop(1,"rgba(40,28,18,0.7)");c.strokeStyle=g2;outline(0,0);c.stroke();}
+// a thigh bone, seen from the front, in the rock: a ball of a head on a neck set at an angle to the shaft, the great trochanter squared off beside it,
+// the lesser one a knob below; a shaft thickening toward its ends; two unequal condyles at the knee with a shallow notch between them.
+// Its shapes are merged, blurred and shaded as one relief, so that they flow into each other as bone does
+function ln_bone(c,cx,cy,k,rot){const PW=Math.ceil(330*k),PH=Math.ceil(190*k),M=ln_cv(PW,PH),mx=M.getContext("2d");mx.setTransform(1,0,0,1,PW/2,PH/2);mx.rotate(rot);mx.scale(k,k);mx.fillStyle="#fff";
+  mx.beginPath();ln_tube(mx,[-92,-3,-60,0,-30,2,4,2],30,25);ln_tube(mx,[4,2,40,3,70,2,100,0],25,33);ln_tube(mx,[-90,-3,-97,-11,-105,-20,-113,-28],21,18);mx.fill();
+  mx.beginPath();mx.arc(-117,-32,15.5,0,TAU);mx.fill();                                    // the head
+  mx.beginPath();mx.ellipse(-104,8,18,13,-0.15,0,TAU);mx.fill();rr(mx,-123,-5,32,24,7);mx.fill();  // the great trochanter
+  mx.beginPath();mx.ellipse(-71,-15,8,5,-0.6,0,TAU);mx.fill();                              // the lesser trochanter
+  rr(mx,82,-25,36,48,9);mx.fill();mx.beginPath();mx.ellipse(112,-12,11,12.5,0.1,0,TAU);mx.fill();mx.beginPath();mx.ellipse(109,12,10,10.5,-0.1,0,TAU);mx.fill();  // the knee: epicondyles and two unequal condyles
+  mx.beginPath();mx.ellipse(96,-23,9,6,0.3,0,TAU);mx.fill();mx.beginPath();mx.ellipse(96,21,8,5.5,-0.3,0,TAU);mx.fill();
+  mx.globalCompositeOperation="destination-out";mx.beginPath();mx.ellipse(122,1,4.5,3.5,0,0,TAU);mx.fill();
+  const D=mx.getImageData(0,0,PW,PH).data,A=new Float32Array(PW*PH);for(let i=0;i<PW*PH;i++)A[i]=D[i*4+3]/255;
+  const B=ln_blur(A,PW,PH,Math.max(1,Math.round(3*k))),Ms=new Float32Array(PW*PH);for(let i=0;i<PW*PH;i++)Ms[i]=sstep(0.38,0.62,B[i]);
+  const B2=ln_blur(Ms,PW,PH,Math.max(1,Math.round(6*k))),Hh=new Float32Array(PW*PH);for(let i=0;i<PW*PH;i++)Hh[i]=11*Math.sqrt(B2[i])*Ms[i];
+  const S=ln_shade(Hh,PW,PH),O=ln_cv(PW,PH),ox=O.getContext("2d"),I=ox.createImageData(PW,PH);
+  for(let j=0;j<PH;j++)for(let i=0;i<PW;i++){const q=j*PW+i,m=Ms[q];if(m<=0)continue;const n=ln_n2(i*0.05,j*0.05,33),sh=clamp(0.36+0.78*S[q],0.25,1.22),o=q*4;
+    I.data[o]=Math.min(255,(192+10*n)*sh);I.data[o+1]=Math.min(255,(172+8*n)*sh);I.data[o+2]=Math.min(255,(138+4*n)*sh);I.data[o+3]=Math.round(255*m);}
+  ox.putImageData(I,0,0);
+  // grain along the shaft, a crack across it, and a few pits
+  ox.globalCompositeOperation="source-atop";ox.setTransform(1,0,0,1,PW/2,PH/2);ox.rotate(rot);ox.scale(k,k);ox.lineCap="round";
+  for(let i=0;i<9;i++){const yy=-8+i*2+hash(i,41)-0.5;ox.strokeStyle=i%2?"rgba(110,90,66,0.22)":"rgba(255,246,224,0.12)";ox.lineWidth=0.7;ox.beginPath();ox.moveTo(-70+hash(i,42)*20,yy);ox.bezierCurveTo(-20,yy+1,30,yy+1,80-hash(i,43)*20,yy*1.2);ox.stroke();}
+  ox.strokeStyle="rgba(46,32,22,0.85)";ox.lineWidth=1.3;ox.beginPath();ox.moveTo(24,-12);ox.lineTo(27,-6);ox.lineTo(23,-1);ox.lineTo(28,4);ox.lineTo(25,9);ox.lineTo(27,14);ox.stroke();
+  ox.strokeStyle="rgba(255,244,220,0.45)";ox.lineWidth=0.6;ox.beginPath();ox.moveTo(25.6,-12);ox.lineTo(28.6,-6);ox.lineTo(24.6,-1);ox.lineTo(29.6,4);ox.lineTo(26.6,9);ox.stroke();
+  for(let i=0;i<14;i++){ox.fillStyle="rgba(80,60,42,0.35)";ox.beginPath();ox.arc(-110+hash(i,44)*225,-10+hash(i,45)*20,0.5+0.7*hash(i,46),0,TAU);ox.fill();}
+  // its shadow in its bed, then the bone
+  const Sd=ln_cv(PW,PH),sx=Sd.getContext("2d");sx.drawImage(O,0,0);sx.globalCompositeOperation="source-in";sx.fillStyle="rgba(10,6,4,0.55)";sx.fillRect(0,0,PW,PH);
+  c.drawImage(Sd,Math.round(cx-PW/2+2.5),Math.round(cy-PH/2+3));c.drawImage(O,Math.round(cx-PW/2),Math.round(cy-PH/2));}
+// a scallop: a fan of ribs from its beak, growth lines across them, and at the hinge two low flat ears, the front one the larger
+function ln_shell(c,cx,cy,R,rot){c.save();c.translate(cx,cy);c.rotate(rot);const hy=-0.74*R,sh=(dx,dy)=>{c.beginPath();c.moveTo(dx-0.54*R,dy+hy);c.lineTo(dx+0.42*R,dy+hy);
+    c.quadraticCurveTo(dx+0.43*R,dy+hy+0.12*R,dx+0.36*R,dy+hy+0.2*R);c.bezierCurveTo(dx+0.86*R,dy-0.2*R,dx+0.84*R,dy+0.5*R,dx,dy+0.62*R);c.bezierCurveTo(dx-0.84*R,dy+0.5*R,dx-0.9*R,dy-0.2*R,dx-0.36*R,dy+hy+0.22*R);
+    c.quadraticCurveTo(dx-0.46*R,dy+hy+0.2*R,dx-0.5*R,dy+hy+0.25*R);c.quadraticCurveTo(dx-0.56*R,dy+hy+0.1*R,dx-0.54*R,dy+hy);c.closePath();};
+  c.fillStyle="rgba(10,6,4,0.5)";sh(1.8,2.2);c.fill();sh(0,0);const g=c.createLinearGradient(-R,-R,R,R);g.addColorStop(0,"rgb(228,214,184)");g.addColorStop(1,"rgb(140,120,92)");c.fillStyle=g;c.fill();c.save();c.clip();
+  // the ribs of the disc
+  for(let i=-8;i<=8;i++){const a=Math.PI/2+i*0.15,ex=Math.cos(a)*R*1.5,ey=hy+Math.sin(a)*R*1.5;c.strokeStyle="rgba(90,70,50,0.55)";c.lineWidth=1;c.beginPath();c.moveTo(0.6,hy+0.6);c.lineTo(ex+0.6,ey+0.6);c.stroke();
+    c.strokeStyle="rgba(255,246,222,0.5)";c.lineWidth=0.7;c.beginPath();c.moveTo(0,hy);c.lineTo(ex,ey);c.stroke();}
+  // growth lines round the beak, and fine lines along the ears
+  for(let k=1;k<5;k++){c.strokeStyle="rgba(90,70,50,0.3)";c.lineWidth=0.7;c.beginPath();c.ellipse(0,hy,R*0.28*k,R*0.33*k,0,0.12*Math.PI,0.88*Math.PI);c.stroke();}
+  c.strokeStyle="rgba(90,70,50,0.35)";c.lineWidth=0.6;for(let k=1;k<3;k++){const yy=hy+k*0.07*R;c.beginPath();c.moveTo(-0.5*R,yy);c.lineTo(-0.12*R,yy+0.02*R);c.moveTo(0.1*R,yy+0.02*R);c.lineTo(0.38*R,yy);c.stroke();}
+  c.restore();c.strokeStyle="rgba(255,246,222,0.35)";c.lineWidth=0.8;sh(0,0);c.stroke();c.restore();}
+// a fern frond (Pecopteris) pressed flat in the shale: a thin film, pale on the dark rock; a rachis tapering to a curled tip, with narrow pinnae
+// on both sides, each a row of small rounded pinnules
+function ln_fern(c,x0,y0,x1,y1,bend){const p=[x0,y0,lerp(x0,x1,0.33),lerp(y0,y1,0.33)-bend,lerp(x0,x1,0.7),lerp(y0,y1,0.7)-bend*0.8,x1,y1];c.save();c.lineCap="round";c.lineJoin="round";
+  const tan=u=>{const a=ln_bz(p,Math.max(0,u-0.01)),b=ln_bz(p,Math.min(1,u+0.01));return Math.atan2(b[1]-a[1],b[0]-a[0]);},n=38,film="rgba(172,174,162,0.72)",lit="rgba(236,236,222,0.3)",vein="rgba(34,34,32,0.6)";
+  for(let i=1;i<n;i++){const u=i/n,q=ln_bz(p,u),sd=i%2?1:-1,Lp=(3+21*Math.pow(1-u,0.8))*(u<0.1?0.82+u*1.8:1)*(0.94+0.12*hash(i,78)),a=tan(u)+sd*(1.02+0.08*hash(i,79)),pw=Math.min(4.3,1.6+Lp*0.16),sp=2.9;
+    c.save();c.translate(q[0],q[1]);c.rotate(a);
+    // the pinna: a strip whose edges swell into rounded pinnules, those of one side between those of the other
+    const hw=(X,ph)=>pw*(1-0.45*X/Lp)*(0.62+0.38*Math.abs(Math.sin(Math.PI*(X+ph)/sp)));c.beginPath();c.moveTo(0,-pw*0.5);
+    for(let X=0;X<=Lp;X+=0.5)c.lineTo(X,-hw(X,0));c.arc(Lp,0,hw(Lp,0)*0.9,-Math.PI/2,Math.PI/2);for(let X=Lp;X>=0;X-=0.5)c.lineTo(X,hw(X,sp/2));c.closePath();c.fillStyle=film;c.fill();
+    c.strokeStyle=lit;c.lineWidth=0.5;c.beginPath();for(let X=0.5;X<=Lp;X+=0.5)c.lineTo(X,-hw(X,0)+0.3);c.stroke();
+    c.strokeStyle=vein;c.lineWidth=0.45;c.beginPath();c.moveTo(0.5,0);c.lineTo(Lp,0);for(let X=sp*0.5;X<Lp-1;X+=sp){c.moveTo(X,0);c.lineTo(X+1.2,-pw*0.6);c.moveTo(X+sp/2,0);c.lineTo(X+sp/2+1.2,pw*0.6);}c.stroke();c.restore();}
+  // the rachis, thinning to a crozier at its tip
+  for(let i=0;i<n;i++){const u0=i/n,u1=(i+1)/n,a=ln_bz(p,u0),b=ln_bz(p,u1);c.strokeStyle=film;c.lineWidth=Math.max(0.7,3.2*(1-u0));c.beginPath();c.moveTo(a[0],a[1]);c.lineTo(b[0],b[1]);c.stroke();}
+  const e=ln_bz(p,1),ta=tan(1);c.lineWidth=0.8;c.beginPath();for(let j=0;j<=12;j++){const an=ta+j*0.45,rr=4.5*(1-j/16);const cx=e[0]+Math.cos(ta+Math.PI/2)*4.5,cy=e[1]+Math.sin(ta+Math.PI/2)*4.5;const px=cx+Math.cos(an-Math.PI/2)*rr,py=cy+Math.sin(an-Math.PI/2)*rr;j?c.lineTo(px,py):c.moveTo(px,py);}c.stroke();
+  c.restore();}
+function ln_strataKit(){let K=LN_C.get("st");if(K)return K;const Y0=280,c=ln_cv(1920,1080-Y0),x=c.getContext("2d");x.translate(0,-Y0);
+  const LAY=[[34,26,20],[112,86,58],[52,48,47],[124,114,96],[96,78,58],[100,58,44],[40,34,30]],N=7,top=(k,X)=>k<N?ln_bedY(k,X):1090;
+  // the contacts, sampled every 4 px
+  const XS=[];for(let X=-12;X<=1932;X+=4)XS.push(X);const TOP=[];for(let k=0;k<=N;k++)TOP.push(XS.map(X=>top(k,X)));const at=(k,X)=>{const f=(X+12)/4,i=clamp(Math.floor(f),0,XS.length-2),u=f-i;return lerp(TOP[k][i],TOP[k][i+1],u);};
+  const band=k=>{x.beginPath();XS.forEach((X,i)=>i?x.lineTo(X,TOP[k][i]):x.moveTo(X,TOP[k][i]));for(let i=XS.length-1;i>=0;i--)x.lineTo(XS[i],TOP[k+1][i]);x.closePath();};
+  for(let k=0;k<N;k++){band(k);x.fillStyle=rgba(LAY[k],1);x.fill();x.save();band(k);x.clip();const y0=Math.min(...TOP[k])-4,y1=Math.max(...TOP[k+1])+4;
+    // grains
+    const n=k===1?5200:k===0?1500:k===3?2000:2600;for(let i=0;i<n;i++){const px=hash(i,k*10+5)*1920,py=lerp(y0,y1,hash(i,k*10+6)),r=0.4+(k===1?0.7:1)*hash(i,k*10+7);if(k===3&&hash(i,k*10+4)<0.6*LN_QF(px,py))continue;
+      x.fillStyle=hash(i,k*10+8)<0.5?"rgba(255,236,200,"+(0.08+0.12*hash(i,k*10+9))+")":"rgba(10,6,4,"+(0.1+0.18*hash(i,k*10+9))+")";x.fillRect(px,py,r*1.6,r);}
+    if(k===1){// trough cross-bedding: scoops cut into each other, each later one erasing what it cuts, each filled with laminae that follow its curved floor
+      for(let i=0;i<16;i++){const cx=-80+i*132+hash(i,31)*70,w=230+190*hash(i,32),t1=at(1,cx),t2=at(2,cx),d=(t2-t1)*(0.45+0.4*hash(i,33)),y0s=t1+(t2-t1)*(0.05+0.4*hash(i,34))-d*0.15,sc=X=>{const u=(X-cx)/(w/2);return y0s+d*(1-u*u);};
+        x.save();x.beginPath();for(let X=cx-w/2;X<=cx+w/2;X+=6)x.lineTo(X,sc(X));x.lineTo(cx+w/2,y0s-60);x.lineTo(cx-w/2,y0s-60);x.closePath();x.clip();
+        if(i){x.fillStyle=rgba(mix(LAY[1],[90,66,42],0.3*hash(i,35)),0.55);x.fillRect(cx-w/2,y0s-60,w,d+62);}
+        const nl=5+Math.floor(4*hash(i,36));for(let j=1;j<=nl;j++){const f=j/(nl+1);x.beginPath();for(let X=cx-w/2;X<=cx+w/2;X+=6){const u=(X-cx)/(w/2);x.lineTo(X,y0s+d*(1-f)*(1-u*u)+d*0.02*ln_n1(X*0.05+j,i*9+j));}
+          x.strokeStyle=j%2?"rgba(60,40,22,0.34)":"rgba(186,154,108,0.16)";x.lineWidth=j%2?1:0.8;x.stroke();}
+        x.beginPath();for(let X=cx-w/2;X<=cx+w/2;X+=6)x.lineTo(X,sc(X));x.strokeStyle="rgba(46,30,18,0.45)";x.lineWidth=1.1;x.stroke();x.restore();}}
+    if(k===2){// shale: fine laminae, a few paler silty ones
+      for(let j=1;j<22;j++){x.beginPath();for(let X=0;X<=1920;X+=8){const yy=lerp(at(2,X),at(3,X),j/22+0.012*ln_n1(X*0.01+j,j+40))+0.7*ln_n1(X*0.03+j,j);X?x.lineTo(X,yy):x.moveTo(X,yy);}
+        x.strokeStyle=hash(j,44)<0.2?"rgba(150,142,132,0.22)":j%2?"rgba(18,16,16,0.32)":"rgba(140,132,124,0.12)";x.lineWidth=0.8;x.stroke();}}
+    if(k===3){// limestone: two stylolites, broken shells, crinoid ossicles
+      [0.35,0.72].forEach((f,si)=>{x.beginPath();let on=false;for(let X=0;X<=1920;X+=3){const yy=lerp(at(3,X),at(4,X),f)+4*ln_fbm(X*0.004,50+si,2)+(hash(X,51+si)-0.5)*2.6;const ok=LN_QF(X,yy)<0.02&&ln_n1(X*0.006+si*7,52+si)>-0.35;if(ok&&on)x.lineTo(X,yy);else if(ok)x.moveTo(X,yy);on=ok;}
+        x.strokeStyle="rgba(40,34,28,0.35)";x.lineWidth=0.8;x.stroke();});
+      for(let i=0;i<70;i++){const px=hash(i,91)*1920,py=lerp(at(3,px)+12,at(4,px)-12,hash(i,92));if(LN_QZ(px,py))continue;x.strokeStyle="rgba(236,224,200,0.3)";x.lineWidth=1;x.beginPath();x.arc(px,py,2+4*hash(i,93),hash(i,94)*6,hash(i,94)*6+1.4+hash(i,95));x.stroke();}
+      for(let i=0;i<24;i++){const px=hash(i,96)*1920,py=lerp(at(3,px)+14,at(4,px)-14,hash(i,97));if(LN_QZ(px,py))continue;x.strokeStyle="rgba(236,224,200,0.4)";x.lineWidth=1;x.beginPath();x.arc(px,py,2.4,0,TAU);x.stroke();x.fillStyle="rgba(40,30,20,0.5)";x.beginPath();x.arc(px,py,0.8,0,TAU);x.fill();}}
+    if(k===4){// conglomerate: pebbles packed against each other, of many rocks and sizes, rounded but not round, their long sides tilted the same way
+      const G=new Map(),CL=[[196,190,176],[74,70,68],[128,78,62],[128,124,118],[164,140,108],[108,112,96],[182,166,140]],pl=[];
+      for(let i=0;i<5200&&pl.length<900;i++){const px=hash(i,101)*1950-15,t4=at(4,px),t5=at(5,px);const r=2.6+11*Math.pow(hash(i,103),2.2),py=lerp(t4+r*0.5,t5-r*0.4,hash(i,102));if(t5-t4<6)continue;
+        const gx=Math.floor(px/24),gy=Math.floor(py/24);let ok=true;for(let a=-1;a<=1&&ok;a++)for(let b=-1;b<=1&&ok;b++)(G.get((gx+a)+","+(gy+b))||[]).forEach(q=>{if(Math.hypot(q[0]-px,(q[1]-py)*1.3)<(q[2]+r)*0.82)ok=false;});
+        if(!ok)continue;const key=gx+","+gy;G.set(key,(G.get(key)||[]).concat([[px,py,r]]));pl.push([px,py,r,i]);}
+      pl.forEach(([px,py,r,i])=>{const rot=-0.3+(hash(i,104)-0.5)*0.7,e=0.6+0.35*hash(i,106),cl=CL[Math.floor(hash(i,105)*CL.length)],pts=[];
+        for(let j=0;j<9;j++){const a=j/9*TAU,rr=r*(1+0.16*(hash(i*9+j,107)-0.5));pts.push([px+Math.cos(a)*rr*Math.cos(rot)-Math.sin(a)*rr*e*Math.sin(rot),py+Math.cos(a)*rr*Math.sin(rot)+Math.sin(a)*rr*e*Math.cos(rot)]);}
+        const path=(dx,dy)=>{x.beginPath();for(let j=0;j<9;j++){const a=pts[j],b=pts[(j+1)%9],m=[(a[0]+b[0])/2+dx,(a[1]+b[1])/2+dy];j?x.quadraticCurveTo(a[0]+dx,a[1]+dy,m[0],m[1]):x.moveTo(m[0],m[1]);}const a=pts[0],b=pts[1];x.quadraticCurveTo(a[0]+dx,a[1]+dy,(a[0]+b[0])/2+dx,(a[1]+b[1])/2+dy);x.closePath();};
+        path(r*0.16,r*0.2);x.fillStyle="rgba(14,10,8,0.55)";x.fill();path(0,0);x.fillStyle=rgba(cl,1);x.fill();
+        x.save();x.clip();x.fillStyle="rgba(0,0,0,0.22)";x.beginPath();x.ellipse(px+r*0.35,py+r*0.35,r,r*0.8,0,0,TAU);x.fill();x.fillStyle="rgba(255,246,226,0.26)";x.beginPath();x.ellipse(px-r*0.3,py-r*0.3,r*0.45,r*0.28,rot,0,TAU);x.fill();x.restore();});}
+    if(k===5){// red mudstone, with pale green spots where the iron was reduced, soft-edged
+      for(let i=0;i<50;i++){const px=hash(i,111)*1920,py=lerp(at(5,px)+10,at(6,px)-10,hash(i,112)),r=2+7*hash(i,113);x.fillStyle="rgba(150,160,120,0.1)";x.beginPath();x.ellipse(px,py,r*1.5,r*1.2,0,0,TAU);x.fill();
+        x.fillStyle="rgba(150,160,120,0.14)";x.beginPath();x.ellipse(px,py,r,r*0.8,0,0,TAU);x.fill();}}
+    if(k===6){for(let i=0;i<16;i++){const px=hash(i,121)*1920;x.strokeStyle="rgba(0,0,0,0.3)";x.lineWidth=1;x.beginPath();x.moveTo(px,at(6,px)+4);for(let j=1;j<8;j++)x.lineTo(px+(hash(i*8+j,122)-0.5)*16,at(6,px)+j*24);x.stroke();}}
+    x.restore();}
+  // mottling: soft patches of darker and paler rock, stretched along the beds
+  {const tw=480,th=Math.ceil((1080-Y0)/4),Nc=ln_cv(tw,th),nx=Nc.getContext("2d"),D=nx.createImageData(tw,th),AMP=[0.5,0.7,0.4,0.55,0.35,0.7,0.5];
+    for(let i=0;i<tw;i++){const X=i*4+2,tp=[];for(let k=0;k<=N;k++)tp.push(at(k,X));for(let j=0;j<th;j++){const Y=Y0+j*4+2;let k=0;while(k<N-1&&Y>=tp[k+1])k++;if(Y<tp[0])continue;
+      const v=(ln_n2(X*0.006,Y*0.02,60+k)*0.65+ln_n2(X*0.018,Y*0.05,70+k)*0.35)*AMP[k]*(k===3?1-0.6*LN_QF(X,Y):1),o=(j*tw+i)*4;
+      if(v<0){D.data[o+3]=Math.round(255*Math.min(0.2,-v*0.4));}else{D.data[o]=255;D.data[o+1]=232;D.data[o+2]=196;D.data[o+3]=Math.round(255*Math.min(0.08,v*0.16));}}}
+    nx.putImageData(D,0,0);x.imageSmoothingEnabled=true;x.drawImage(Nc,0,Y0,tw*4,th*4);}
+  // bedding planes: a dark seam, and a lit lip just under it; the contacts are rough, a few px up and down
+  for(let k=1;k<N;k++){x.beginPath();XS.forEach((X,i)=>i?x.lineTo(X,TOP[k][i]):x.moveTo(X,TOP[k][i]));x.strokeStyle="rgba(8,5,4,0.6)";x.lineWidth=1.6;x.stroke();
+    x.beginPath();XS.forEach((X,i)=>i?x.lineTo(X,TOP[k][i]+2):x.moveTo(X,TOP[k][i]+2));x.strokeStyle="rgba(255,232,196,0.14)";x.lineWidth=1.2;x.stroke();}
+  // roots reaching down from the soil
+  x.lineCap="round";for(let i=0;i<30;i++){let px=hash(i,131)*1920,py=at(0,px)+14;const L=20+60*hash(i,132);x.strokeStyle="rgba(150,120,90,0.3)";x.lineWidth=1.2;x.beginPath();x.moveTo(px,py);for(let j=0;j<8;j++){px+=(hash(i*9+j,133)-0.5)*8;py+=L/8;x.lineTo(px,py);}x.stroke();}
+  // the surface: soil, tufts of grass along it, lit at its edge
+  x.beginPath();XS.forEach((X,i)=>i?x.lineTo(X,TOP[0][i]):x.moveTo(X,TOP[0][i]));x.strokeStyle="rgba(190,205,140,0.4)";x.lineWidth=1.3;x.shadowColor="rgba(170,200,120,0.6)";x.shadowBlur=6;x.stroke();x.shadowBlur=0;
+  for(let i=0;i<150;i++){const px=hash(i,141)*1930,py=at(0,px)+1,n=3+Math.floor(hash(i,142)*4);for(let j=0;j<n;j++){const h=4+9*hash(i*7+j,143),l=(hash(i*7+j,144)-0.5)*7;x.strokeStyle=hash(i*7+j,145)<0.5?"rgba(98,110,64,0.8)":"rgba(40,48,30,0.9)";x.lineWidth=1;x.beginPath();x.moveTo(px+j*1.4,py);x.quadraticCurveTo(px+j*1.4+l*0.3,py-h*0.6,px+j*1.4+l,py-h);x.stroke();}}
+  // the fossils: ammonites and scallops in the limestone, a fern in the shale, a thigh bone in the mudstone
+  ln_ammonite(x,350,574,50,0.4,{W:1.7,turns:5,ribs:46,fork:1});ln_ammonite(x,1560,600,32,2.2,{W:1.85,turns:4,ribs:34});ln_ammonite(x,1262,630,16,4.1,{W:1.9,turns:3.5,ribs:26});
+  ln_shell(x,660,590,22,-0.3);ln_shell(x,1792,562,15,0.45);
+  ln_fern(x,1398,440,1622,420,10);
+  ln_bone(x,1150,834,1.0,-0.08);
+  // light from the upper left, over everything
+  let g=x.createLinearGradient(0,280,1500,1300);g.addColorStop(0,"rgba(255,226,180,0.08)");g.addColorStop(0.5,"rgba(0,0,0,0)");g.addColorStop(1,"rgba(0,0,0,0.35)");x.fillStyle=g;x.fillRect(0,280,1920,800);
+  g=x.createLinearGradient(0,300,0,1080);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,"rgba(0,0,0,0.3)");x.fillStyle=g;x.fillRect(0,280,1920,800);
+  K={c,top:Y0};LN_C.set("st",K);return K;}
+// layers of rock filling the frame from y ≈ 300 down, with shells and bones in them, but no words
+function strata(ctx,t){const K=ln_strataKit();ln_put(ctx,[K.c],0,K.top);}
+
+/* ---------- a clay tablet ---------- */
+// the numerals, row by row: O a round hole (the round end of the stylus pressed straight in), D a notch (pressed in at a slant);
+// three cases of four in each row, the bigger units first
+const LN_MARKS="OODDODDDOOOD"+"ODDDOODDDDDD"+"OOODODDDOODD"+"OODDOOODODDD";
+const LN_LIGHT=(()=>{const l=Math.hypot(-0.5,-0.62,0.6);return[-0.5/l,-0.62/l,0.6/l];})();
+// the outline of the tablet's face, in its own units (the rows of numerals are laid out in w × h; the clay reaches a little above them):
+// a softened, slightly uneven rectangle that bulges at its sides, with a nick or two knocked out of its edge
+const LN_NICKS=[[1.62,0.022,0.06],[2.95,0.018,0.05],[0.52,0.014,0.07]];
+function ln_slab(w,h){const P=[],n=200,t0=-18,H=h-t0-8;for(let i=0;i<n;i++){const th=i/n*TAU,ct=Math.cos(th),st=Math.sin(th),e=4.4,px=Math.sign(ct)*Math.pow(Math.abs(ct),2/e),py=Math.sign(st)*Math.pow(Math.abs(st),2/e);
+    let wob=1+0.011*ln_n1(th*2.2,71)+0.005*ln_n1(th*7,72);LN_NICKS.forEach(([c,d,s])=>{const dt=Math.atan2(Math.sin(th-c),Math.cos(th-c));wob-=d*Math.exp(-(dt/s)*(dt/s));});
+    P.push([w/2+(px*w/2+0.012*w*st*(1+ct))*wob,t0+H/2+(py*H/2-0.01*H*ct)*wob]);}return P;}
+function ln_path(c,P,dx,dy){c.moveTo(P[0][0]+dx,P[0][1]+dy);for(let i=1;i<P.length;i++)c.lineTo(P[i][0]+dx,P[i][1]+dy);c.closePath();}
+// relief shading: the light a surface of heights H (W×H2, row by row) catches from the upper left
+function ln_shade(H,W,H2){const L=LN_LIGHT,out=new Float32Array(W*H2);for(let j=0;j<H2;j++)for(let i=0;i<W;i++){const k=j*W+i,gx=(H[j*W+Math.min(W-1,i+1)]-H[j*W+Math.max(0,i-1)])/2,gy=(H[Math.min(H2-1,j+1)*W+i]-H[Math.max(0,j-1)*W+i])/2,
+    l=Math.hypot(gx,gy,1);out[k]=(-gx*L[0]-gy*L[1]+L[2])/l;}return out;}
+// a box blur of radius r over the array A (W×H), three times, which is close to a gaussian: the same in every browser, unlike a canvas filter
+function ln_blur(A,W,H,r,n){let a=Float32Array.from(A),b=new Float32Array(W*H);const d=2*r+1;
+  for(let p=0;p<(n||3);p++){for(let j=0;j<H;j++){const o=j*W;let s=0;for(let i=-r;i<=r;i++)s+=a[o+clamp(i,0,W-1)];for(let i=0;i<W;i++){b[o+i]=s/d;s+=a[o+Math.min(W-1,i+r+1)]-a[o+Math.max(0,i-r)];}}
+    for(let i=0;i<W;i++){let s=0;for(let j=-r;j<=r;j++)s+=b[clamp(j,0,H-1)*W+i];for(let j=0;j<H;j++){a[j*W+i]=s/d;s+=b[Math.min(H-1,j+r+1)*W+i]-b[Math.max(0,j-r)*W+i];}}}
+  return a;}
+// fingerprints left in the clay by the hands that held it: where (in parts of w × h), how big (a fingertip, about 1.3 cm), turned how far
+const LN_PRINTS=[[0.015,0.8,40,-0.35],[0.985,0.22,36,0.5],[0.62,1.0,34,0.1]];
+// the frieze of a cylinder seal rolled along the bottom band: cattle walking, and the ring-post of Inanna between them
+function ln_seal(c,x0,y0,len){c.fillStyle="#fff";for(let X=x0;X<x0+len;X+=132){const cow=(x,s)=>{c.beginPath();c.ellipse(x,y0+1,15*s,6.5*s,0,0,TAU);c.fill();
+      c.beginPath();c.ellipse(x+15*s,y0-3*s,5*s,3.4*s,-0.5,0,TAU);c.fill();c.lineCap="round";c.lineWidth=2.6*s;c.strokeStyle="#fff";c.beginPath();
+      [[-11,5,-12,17],[-7,5,-6,17],[8,5,9,17],[12,5,13,17]].forEach(([a,b,cc,d])=>{c.moveTo(x+a*s,y0+b*s);c.lineTo(x+cc*s,y0+d*s);});c.moveTo(x-15*s,y0);c.quadraticCurveTo(x-20*s,y0+3*s,x-19*s,y0+11*s);
+      c.moveTo(x+16*s,y0-6*s);c.quadraticCurveTo(x+14*s,y0-14*s,x+8*s,y0-16*s);c.moveTo(x+18*s,y0-5*s);c.quadraticCurveTo(x+22*s,y0-13*s,x+27*s,y0-14*s);c.stroke();};
+    cow(X+26,1);cow(X+82,0.92);
+    // the ring-post: a reed bundle with a loop at its top and a streamer
+    c.lineWidth=3;c.beginPath();c.moveTo(X+118,y0+17);c.lineTo(X+118,y0-8);c.stroke();c.lineWidth=2.4;c.beginPath();c.arc(X+118,y0-12,4,0,TAU);c.stroke();
+    c.lineWidth=1.8;c.beginPath();c.moveTo(X+120,y0-12);c.quadraticCurveTo(X+127,y0-8,X+126,y0+2);c.stroke();}}
+function ln_tabletKit(w,h){const key="tb"+w+"x"+h;let K=LN_C.get(key);if(K)return K;const M=56,CW=w+2*M,CH=h+2*M,c=ln_cv(CW,CH),x=c.getContext("2d"),P=ln_slab(w,h);
+  // the face's shape; blurred a little it rounds the edges, blurred a lot it gives the pillow its dome
+  const Fm=ln_cv(CW,CH),fm=Fm.getContext("2d");fm.translate(M,M);fm.fillStyle="#fff";fm.beginPath();ln_path(fm,P,0,0);fm.fill();
+  const mA=fm.getImageData(0,0,CW,CH).data,A0=new Float32Array(CW*CH);for(let k=0;k<CW*CH;k++)A0[k]=mA[k*4+3]/255;
+  const B1=ln_blur(A0,CW,CH,6),B2=ln_blur(A0,CW,CH,24);
+  // the seal's rolling: raised figures, softened as clay is
+  const Sm=ln_cv(CW,CH),sm=Sm.getContext("2d");sm.translate(M,M);sm.save();sm.beginPath();sm.rect(18,h-68,w-36,54);sm.clip();ln_seal(sm,-40+hash(w,7)*30,h-44,w+80);sm.restore();
+  const sA=sm.getImageData(0,0,CW,CH).data,S0=new Float32Array(CW*CH);for(let k=0;k<CW*CH;k++)S0[k]=sA[k*4+3]/255;const SB=ln_blur(S0,CW,CH,1,2);
+  const Hh=new Float32Array(CW*CH);
+  for(let j=0;j<CH;j++)for(let i=0;i<CW;i++){const k=j*CW+i,X=i-M,Y=j-M,b=B1[k];if(b<0.01){Hh[k]=0;continue;}
+    // rounded edges, a low dome, the unevenness of hand-pressed clay, and the seal's figures standing a little proud
+    let H=10*Math.pow(clamp((b-0.3)/0.7,0,1),0.6)+14*Math.pow(B2[k],1.6)+1.3*ln_n2(X*0.011,Y*0.011,5)+0.5*ln_n2(X*0.03,Y*0.03,6)+0.18*ln_n2(X*0.1,Y*0.1,7)+0.7*ln_n2(X*0.004,Y*0.03,11)+1.1*SB[k]*(0.75+0.25*ln_n2(X*0.05,Y*0.05,12))+18*(1-Math.min(1,((X-w/2)/(w/2))**2*0.8+((Y-h/2+14)/(h/2+10))**2*0.8));
+    // fingerprints: a shallow dimple, and faint ridges in whorls, only partly there
+    for(const [pu,pv,R,rot] of LN_PRINTS){const dx=X-pu*w,dy=Y-pv*h;if(dx*dx+dy*dy>R*R*1.7)continue;const cs=Math.cos(rot),sn=Math.sin(rot),a=(dx*cs+dy*sn)/1.25,bb=-dx*sn+dy*cs,d=Math.hypot(a,bb),f=Math.max(0,1-d/R);
+      const vis=clamp(0.5+0.9*ln_n2(X*0.035+pu*9,Y*0.035,13),0,1);H+=-1.2*f*f+0.2*vis*Math.sin(d*TAU/3.1+0.35*Math.sin(Math.atan2(bb,a)*2))*Math.min(1,f*3)*Math.min(1,d/6);}
+    Hh[k]=H;}
+  const S=ln_shade(Hh,CW,CH),F=ln_cv(CW,CH),fx=F.getContext("2d"),D=fx.createImageData(CW,CH);
+  for(let j=0;j<CH;j++)for(let i=0;i<CW;i++){const k=j*CW+i,a=mA[k*4+3];if(!a)continue;const X=i-M,Y=j-M,tone=ln_n2(X*0.006,Y*0.006,9),red=ln_n2(X*0.02,Y*0.02,10),sh=clamp(0.42+0.72*S[k],0.2,1.25),
+    r=(168+10*tone+5*red)*sh,g=(128+6*tone-2*red)*sh,bl=(90+2*tone-5*red)*sh,o=k*4;D.data[o]=Math.min(255,r);D.data[o+1]=Math.min(255,g);D.data[o+2]=Math.min(255,bl);D.data[o+3]=a;}
+  fx.putImageData(D,0,0);
+  // its shadow, and the thickness of the slab showing at its lower edge
+  x.translate(M,M);x.save();x.shadowColor="rgba(0,0,0,0.55)";x.shadowBlur=34;x.shadowOffsetX=10;x.shadowOffsetY=18;x.fillStyle="rgb(64,42,28)";x.beginPath();ln_path(x,P,3,10);x.fill();x.restore();
+  x.fillStyle="rgb(80,54,36)";x.beginPath();ln_path(x,P,3,10);x.fill();x.fillStyle="rgb(104,72,48)";x.beginPath();ln_path(x,P,1.5,5);x.fill();
+  x.drawImage(F,-M,-M);
+  // clay: grit and pores
+  x.save();x.beginPath();ln_path(x,P,0,0);x.clip();
+  for(let i=0;i<4200;i++){const px=hash(i,201)*w,py=-18+hash(i,202)*(h+10),r=0.5+1.0*hash(i,203);x.fillStyle=hash(i,204)<0.5?"rgba(255,236,206,"+(0.05+0.12*hash(i,205))+")":"rgba(60,34,18,"+(0.06+0.14*hash(i,205))+")";x.fillRect(px,py,r,r);}
+  for(let i=0;i<150;i++){const px=hash(i,206)*w,py=-18+hash(i,207)*(h+10),r=0.6+1.1*hash(i,208);x.fillStyle="rgba(58,32,16,0.4)";x.beginPath();x.arc(px,py,r,0,TAU);x.fill();x.fillStyle="rgba(255,240,214,0.3)";x.beginPath();x.arc(px+r*0.7,py+r*0.7,r*0.55,0,TAU);x.fill();}
+  // ruled lines between the rows and round the cases, drawn with the edge of the stylus: a groove, dark on its upper side, lit on its lower lip
+  const rule=(x0,y0,x1,y1,sd)=>{const n=30,hz=y0===y1,pt=(i,o)=>{const u=i/n,j=ln_n1(u*6,sd)*1.3;return[lerp(x0,x1,u)+(hz?0:j)+o[0],lerp(y0,y1,u)+(hz?j:0)+o[1]];};
+    [[[-0.4,-0.6],"rgba(58,32,14,0.55)",2.1],[[0.9,1.2],"rgba(255,236,206,0.32)",1.1]].forEach(([o,col,lw])=>{x.strokeStyle=col;x.lineWidth=lw;x.beginPath();for(let i=0;i<=n;i++){const p=pt(i,o),wv=0.75+0.35*ln_n1(i*0.7,sd+5);if(i){x.lineWidth=lw*wv;x.lineTo(p[0],p[1]);}else x.moveTo(p[0],p[1]);}x.stroke();});};
+  x.lineCap="round";for(let r=1;r<5;r++){const yy=r*h/5+2+(hash(r,302)-0.5)*3;rule(24+hash(r,301)*8,yy,w-24-hash(r,303)*8,yy,300+r);}
+  [3.5,7.5].forEach((cc,i)=>{const cx=40+cc*(w-80)/12+11;rule(cx,2,cx+2,4*h/5+2,310+i);});
+  x.restore();
+  K={c,M};LN_C.set(key,K);return K;}
+// one pressed mark, as a shading to lay over the clay: O a round hole, D a notch pressed at a slant, deepest at its round end where the stylus went in,
+// shallowing to a point where it came out; the clay it pushed aside stands as a low lip round it. Dark where its walls turn from the light,
+// pale where they face it, darker with depth; the sprite fades to nothing well inside its edges
+function ln_markKit(kind,v){const key="mk"+kind+v;let F=LN_C.get(key);if(F)return F;const S=64,o=S/2,sz=0.93+0.14*hash(v,3),an=-1.22+(hash(v,4)-0.5)*0.22,ca=Math.cos(an),sa=Math.sin(an),Hh=new Float32Array(S*S),dep=new Float32Array(S*S);
+  const R=8.4*sz,r0=5.4*sz,Lt=17*sz;
+  for(let j=0;j<S;j++)for(let i=0;i<S;i++){const X=i+0.5-o,Y=j+0.5-o;let d=0,sd,lip=0.9;
+    if(kind==="O"){const r=Math.hypot(X,Y);sd=r-R;if(r<R)d=5.2*Math.pow(1-(r/R)*(r/R),0.6);}
+    else{const a=X*ca+Y*sa,b=-X*sa+Y*ca;
+      if(a<0){const r=Math.hypot(a,b);sd=r-r0;if(r<r0)d=4.8*Math.sqrt(1-(r/r0)*(r/r0));}
+      else{const f=(a/Lt)*(a/Lt)+(b/r0)*(b/r0)-1,gx=2*a/(Lt*Lt),gy=2*b/(r0*r0);sd=f/Math.max(0.08,Math.hypot(gx,gy));const u=Math.min(1,a/Lt),wd=r0*Math.sqrt(Math.max(0,1-u*u));
+        if(wd>0&&Math.abs(b)<wd)d=4.8*Math.pow(1-u,0.8)*Math.sqrt(1-(b/wd)*(b/wd));lip=0.7*(1-0.55*u);}}
+    const win=1-sstep(o-14,o-4,Math.hypot(X,Y)),rim=lip*Math.exp(-((sd-1.3)/1.5)*((sd-1.3)/1.5));Hh[j*S+i]=(rim-d)*win;dep[j*S+i]=d;}
+  const Sh=ln_shade(Hh,S,S),c=ln_cv(S,S),x=c.getContext("2d"),D=x.createImageData(S,S),flat=LN_LIGHT[2];
+  for(let k=0;k<S*S;k++){const s=Sh[k]-flat-0.06*dep[k],q=k*4;if(s<0){D.data[q]=46;D.data[q+1]=24;D.data[q+2]=10;D.data[q+3]=Math.min(255,-s*420);}else{D.data[q]=255;D.data[q+1]=238;D.data[q+2]=208;D.data[q+3]=Math.min(255,s*300);}}
+  x.putImageData(D,0,0);F={c,o};LN_C.set(key,F);return F;}
+// a clay tablet from Uruk, c. 3300 BCE, with rows of numerals pressed in as p goes from 0 to 1: mark k lies at
+// x+40+(k%12)*(w-80)/12 (+ a little), y+row*h/5+h/10+8; each is pressed in while the stylus rests on it
+function tablet(ctx,x,y,w,h,p,a){const K=ln_tabletKit(Math.round(w),Math.round(h));withA(ctx,a==null?1:a,()=>{const m=ctx.getTransform();ln_put(ctx,[K.c],x-K.M,y-K.M,m);
+  const n=48,q=clamp(p,0,1)*n;for(let i=0;i<n&&i<q;i++){const row=Math.floor(i/12),col_=i%12,px=x+40+col_*(w-80)/12+hash(i,2)*6,py=y+row*h/5+h/10+8,d=clamp(q-i,0,1),F=ln_markKit(LN_MARKS[i]||"D",i%5);
+    ctx.save();ctx.globalAlpha*=d;ln_put(ctx,[F.c],px+8-F.o,py-6-F.o,m);ctx.restore();}});}
+
+/* ---------- warming the caches ---------- */
+// The pictures that take long to paint the first time (the acacia, the rocks, the tablet...) are painted soon after the film's page loads,
+// one at a time with pauses between, so that playing or seeking into their scenes never stalls. Only on a page with the film's player:
+// not while rendering the video, and not on the labs' pages
+(function(){if(typeof window==="undefined"||typeof document==="undefined"||typeof setTimeout!=="function")return;
+  const jobs=[()=>ln_groundKit(760),()=>ln_groundKit(700),()=>ln_grassKit(),()=>ln_stemKit(),()=>ln_grassLay(0,1920,770),()=>ln_grassLay(0,1920,710),()=>ln_treeKit(1.5),()=>ln_bushKit(1.5),
+    ()=>ln_perchKit(320),()=>ln_leafSprite(27,10),()=>ln_strataKit(),()=>ln_tabletKit(600,380)];
+  for(let v=0;v<5;v++)["O","D"].forEach(k=>jobs.push(()=>ln_markKit(k,v)));
+  const next=()=>{const f=jobs.shift();if(!f)return;try{f();}catch(e){}setTimeout(next,40);};
+  const go=()=>{if(window.__RENDER__||!document.getElementById("film"))return;setTimeout(next,300);};
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go);else go();})();
+
+/* ===== What's in a word: the beasts =====
+   The vervet monkeys and their hunters (a leopard, a snake), the animals with names (a dolphin, an elephant, a marmoset), and the gavagai rabbit.
+   Each takes (ctx, x, y, size, colour, options) (the rabbit takes t before its options); options.a fades it, options.t (seconds) brings it to
+   life (breath, blinks, a turning head, a swaying tail), options.flip turns it to face left. They keep icon()'s look: a dark body lit from the
+   upper left, a glowing rim in the colour that carries the meaning (thicker on the shadow side), fine inner details in that colour and a small
+   bright eye; but their shapes come from their anatomy: smooth contours, tapering limbs, a darker far leg behind the body. Every pose and gait is
+   a function of t and the options, so any frame draws alone. */
+
+/* ---------- the drawing kit ---------- */
+const BS_INK=[20,26,40],BS_ST={f:1,s:1,z:1},BS_LAY={},BS_CACHE={};
+// while a beast fades (its own a, or the scene's alpha), draw it whole on a layer first, so its overlapping parts don't show through each other;
+// b is its reach in its own units [left, top, right, bottom] (as it faces, before o.flip); o.bs_mask(c), drawn in the beast's own units, wipes part of it (a monkey half
+// hidden in a bush). True when it's done (or there's nothing to draw).
+function bs_layered(ctx,x,y,s,o,b,fn){const a=o.a==null?1:o.a,ga=ctx.globalAlpha*Math.min(1,a);if(a<=0.01||ga<=0.004||!(s>0))return true;if(o.bs_in||(ga>0.985&&!o.bs_mask))return false;
+  const m=ctx.getTransform(),fl=o.flip?-1:1,X=[],Y=[];for(const u of [b[0]*fl,b[2]*fl])for(const v of [b[1],b[3]]){const px=x+s*u,py=y+s*v;X.push(m.a*px+m.c*py+m.e);Y.push(m.b*px+m.d*py+m.f);}
+  const x0=Math.floor(Math.min(...X)-14),y0=Math.floor(Math.min(...Y)-14),w=Math.ceil(Math.max(...X)+14)-x0,h=Math.ceil(Math.max(...Y)+14)-y0;if(w<1||h<1||w*h>9e6)return false;
+  // a few layers, taken in turn, so a layer is never redrawn while the frame still holds its last picture
+  BS_LAY.i=((BS_LAY.i||0)+1)%6;let L=BS_LAY[BS_LAY.i];if(!L||L.c.width<w||L.c.height<h){const c=mkCanvas(Math.max(w,L?L.c.width:0),Math.max(h,L?L.c.height:0));L=BS_LAY[BS_LAY.i]={c,x:c.getContext("2d")};}
+  const c=L.x;c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation="source-over";c.clearRect(0,0,w,h);c.setTransform(m.a,m.b,m.c,m.d,m.e-x0,m.f-y0);fn(c,Object.assign({},o,{a:1,bs_in:1}));
+  if(o.bs_mask){c.save();c.translate(x,y);c.scale(s,s);c.globalCompositeOperation="destination-out";o.bs_mask(c);c.restore();}
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ga;ctx.drawImage(L.c,0,0,w,h,x0,y0,w,h);ctx.restore();return true;}
+// begin a beast: fade, place, scale, flip (fx narrows it while it turns round, never below 0.35); false if there's nothing to draw
+function bs_begin(ctx,x,y,s,o,fx){const a=o.a==null?1:o.a;if(a<=0.01||!(s>0))return false;ctx.save();ctx.globalAlpha*=Math.min(1,a);ctx.translate(x,y);
+  fx=fx==null?1:fx;fx=fx<0?Math.min(-0.35,fx):Math.max(0.35,fx);BS_ST.f=(o.flip?-1:1)*fx;BS_ST.s=s;ctx.scale(s*BS_ST.f,s);if(o.rot)ctx.rotate(o.rot);ctx.lineJoin="round";ctx.lineCap="round";return true;}
+// a closed smooth curve through points (Catmull-Rom, as beziers); every loop winds the same way as the tubes, so the parts of a form fill as one
+function bs_loop(c,p){const n=p.length;let A=0;for(let i=0;i<n;i++){const a=p[i],b=p[(i+1)%n];A+=a[0]*b[1]-b[0]*a[1];}if(A>0)p=p.slice().reverse();c.moveTo(p[0][0],p[0][1]);
+  for(let i=0;i<n;i++){const a=p[(i+n-1)%n],b=p[i],d=p[(i+1)%n],e=p[(i+2)%n];c.bezierCurveTo(b[0]+(d[0]-a[0])/6,b[1]+(d[1]-a[1])/6,d[0]-(e[0]-b[0])/6,d[1]-(e[1]-b[1])/6,d[0],d[1]);}c.closePath();}
+// an open smooth curve through points; m===false carries on the current subpath
+function bs_line(c,p,m){const n=p.length;if(m===false)c.lineTo(p[0][0],p[0][1]);else c.moveTo(p[0][0],p[0][1]);for(let i=0;i<n-1;i++){const a=p[i?i-1:0],b=p[i],d=p[i+1],e=p[i+2<n?i+2:n-1];
+  c.bezierCurveTo(b[0]+(d[0]-a[0])/6,b[1]+(d[1]-a[1])/6,d[0]-(e[0]-b[0])/6,d[1]-(e[1]-b[1])/6,d[0],d[1]);}}
+// a limb, tail, trunk or ear: a smooth tube along points p, w its half-width at each point, rounded at both ends
+function bs_tube(c,p,w){const n=p.length,L=[],R=[];let a0=0,a1=0;for(let i=0;i<n;i++){const a=p[i?i-1:0],b=p[i<n-1?i+1:n-1];let dx=b[0]-a[0],dy=b[1]-a[1];const d=Math.hypot(dx,dy)||1;dx/=d;dy/=d;
+    const r=Math.max(0.05,w[i]);L.push([p[i][0]-dy*r,p[i][1]+dx*r]);R.push([p[i][0]+dy*r,p[i][1]-dx*r]);if(!i)a0=Math.atan2(dy,dx);if(i===n-1)a1=Math.atan2(dy,dx);}
+  bs_line(c,L);c.arc(p[n-1][0],p[n-1][1],Math.max(0.05,w[n-1]),a1+Math.PI/2,a1-Math.PI/2,true);bs_line(c,R.reverse(),false);c.arc(p[0][0],p[0][1],Math.max(0.05,w[0]),a0-Math.PI/2,a0+Math.PI/2,true);c.closePath();}
+// a tapering stroke, w0 to w1 (half-widths)
+function bs_taper(c,p,w0,w1){const n=p.length,w=[];for(let i=0;i<n;i++)w.push(lerp(w0,w1,n>1?i/(n-1):0));bs_tube(c,p,w);}
+// a body along a spine (rump to neck): dw, vw its depth on the back and on the belly side at each spine point, re and fe how far it rounds off at each end
+function bs_torso(c,sp,dw,vw,re,fe){const n=sp.length,D=[],V=[],T=[];for(let i=0;i<n;i++){const a=sp[i?i-1:0],b=sp[i<n-1?i+1:n-1];let dx=b[0]-a[0],dy=b[1]-a[1];const d=Math.hypot(dx,dy)||1;dx/=d;dy/=d;T.push([dx,dy]);
+    D.push([sp[i][0]+dy*dw[i],sp[i][1]-dx*dw[i]]);V.push([sp[i][0]-dy*vw[i],sp[i][1]+dx*vw[i]]);}
+  bs_loop(c,[[sp[0][0]-T[0][0]*re,sp[0][1]-T[0][1]*re]].concat(D,[[sp[n-1][0]+T[n-1][0]*fe,sp[n-1][1]+T[n-1][1]*fe]],V.reverse()));}
+// the dark fill of a form, lit from the upper left of the screen whichever way the beast faces; k darkens it (the far legs); b [x0,y0,x1,y1] its
+// reach; lo (0..1) keeps a little of its colour in the shadow
+function bs_fill(ctx,col,k,b,lo){const g=BS_ST.f<0?-1:1,G=ctx.createLinearGradient(b[0]*g,b[1],b[2]*g,b[3]),d=lo?mix(col,[8,12,22],lo):[8,12,22];
+  G.addColorStop(0,rgba(mix(mix(col,BS_INK,0.55),[6,9,16],k),1));G.addColorStop(1,rgba(mix(d,[4,6,12],k),1));return G;}
+// one form: build(p) adds its parts to a path. Its rim, in col, is heavier on the shadow side: the silhouette in the rim's colour nudged down and
+// right (glowing, gl the blur in px, 0 for none) and, thinner, up and left (not for the dim far limbs), a fine line all round, and the dark body
+// over them. Returns the path.
+function bs_form(ctx,build,col,fill,ra,lw,gl){const s=BS_ST.s,f=BS_ST.f,P=new Path2D(),z=(lw||2.6)/2.6;ra=ra==null?1:ra;build(P);
+  ctx.save();ctx.translate(1.05*z/(s*f),1.45*z/s);ctx.fillStyle=rgba(col,0.92*ra);if(gl){ctx.shadowColor=rgba(col,0.72*ra);ctx.shadowBlur=gl*BS_ST.z;}ctx.fill(P);ctx.restore();
+  if(ra>0.5){ctx.save();ctx.translate(-0.6*z/(s*f),-0.6*z/s);ctx.fillStyle=rgba(col,0.85*ra);ctx.fill(P);ctx.restore();}
+  ctx.lineWidth=1/s;ctx.strokeStyle=rgba(col,ra);ctx.stroke(P);ctx.fillStyle=fill;ctx.fill(P);return P;}
+// a still part of a beast, drawn once at 2x into its own canvas (with room for its glow) and then placed: key names it, b [x0,y0,x1,y1] is its
+// reach in the beast's own units and draw(c) draws it there (at the beast's scale and facing, which the key includes)
+function bs_still(ctx,key,b,draw){const s=BS_ST.s,f=BS_ST.f;key+=":"+s.toFixed(3)+":"+f.toFixed(3);let S=BS_CACHE[key];
+  if(!S){const Z=2*s,pad=16,W=Math.ceil((b[2]-b[0])*Z+2*pad),H=Math.ceil((b[3]-b[1])*Z+2*pad),c=mkCanvas(W,H),g=c.getContext("2d");
+    g.translate(pad-b[0]*Z,pad-b[1]*Z);g.scale(Z,Z);g.lineJoin="round";g.lineCap="round";BS_ST.z=2;draw(g);BS_ST.z=1;BS_ST.s=s;BS_ST.f=f;
+    S=BS_CACHE[key]={c,x:b[0]-pad/Z,y:b[1]-pad/Z,w:W/Z,h:H/Z};}
+  ctx.drawImage(S.c,S.x,S.y,S.w,S.h);}
+// fine inner lines: each a list of points, a tapering stroke of w0 → w1 screen pixels (half-widths), drawn as one light polygon per line
+function bs_lines(ctx,list,col,a,w0,w1){if(a<=0.01||!list.length)return;const s=BS_ST.s;ctx.beginPath();
+  for(const p of list){const n=p.length,L=[],R=[];for(let i=0;i<n;i++){const q=p[i?i-1:0],r=p[i<n-1?i+1:n-1];let dx=r[0]-q[0],dy=r[1]-q[1];const d=Math.hypot(dx,dy)||1,w=lerp(w0,w1,n>1?i/(n-1):0)/s;
+      L.push(p[i][0]-dy/d*w,p[i][1]+dx/d*w);R.push(p[i][0]+dy/d*w,p[i][1]-dx/d*w);}
+    const e=p[n-1],b=p[0],d0=Math.hypot(p[1][0]-b[0],p[1][1]-b[1])||1,d1=Math.hypot(e[0]-p[n-2][0],e[1]-p[n-2][1])||1,k0=w0/s/d0,k1=w1/s/d1;
+    ctx.moveTo(b[0]-(p[1][0]-b[0])*k0,b[1]-(p[1][1]-b[1])*k0);for(let i=0;i<n;i++)ctx.lineTo(L[2*i],L[2*i+1]);ctx.lineTo(e[0]+(e[0]-p[n-2][0])*k1,e[1]+(e[1]-p[n-2][1])*k1);
+    for(let i=n-1;i>=0;i--)ctx.lineTo(R[2*i],R[2*i+1]);ctx.closePath();}
+  ctx.fillStyle=rgba(col,a);ctx.fill();}
+// a bright eye with a soft glow round it; op 1 open, 0 shut
+function bs_eye(ctx,x,y,r,col,op,a){if(a!=null&&a<=0.02)return;const k=a==null?1:a;glow(ctx,x,y,r*2.4,col,0.24*k);ctx.save();ctx.globalAlpha*=k;ctx.translate(x,y);ctx.scale(1,Math.max(0.12,op==null?1:op));
+  ctx.fillStyle=rgba(mix(col,[255,255,255],0.45),1);ctx.beginPath();ctx.arc(0,0,r,0,TAU);ctx.fill();ctx.restore();}
+// a joint between a and b (bones l1, l2); bend 1 or -1 picks the side it bends to
+function bs_ik(a,b,l1,l2,bend){const dx=b[0]-a[0],dy=b[1]-a[1],d0=Math.hypot(dx,dy)||1e-6,d=clamp(d0,Math.abs(l1-l2)+0.01,l1+l2-0.01),x=(l1*l1-l2*l2+d*d)/(2*d),h=Math.sqrt(Math.max(0,l1*l1-x*x)),ux=dx/d0,uy=dy/d0;
+  return [a[0]+ux*x-uy*h*bend,a[1]+uy*x+ux*h*bend];}
+const bs_mid=(a,b,k)=>[a[0]+(b[0]-a[0])*(k==null?0.5:k),a[1]+(b[1]-a[1])*(k==null?0.5:k)];
+// a side of a limb: the points of p pushed out by w on one side (1 or -1)
+function bs_side(p,w,sd){const o=[];for(let i=0;i<p.length;i++){const a=p[i?i-1:0],b=p[i<p.length-1?i+1:p.length-1];let dx=b[0]-a[0],dy=b[1]-a[1];const d=Math.hypot(dx,dy)||1;o.push([p[i][0]-dy/d*w[i]*sd,p[i][1]+dx/d*w[i]*sd]);}return o;}
+// two poses blended (numbers, points and lists of points)
+function bs_blend(A,B,k){if(k<=0)return A;if(k>=1)return B;const o={};for(const q in A){const a=A[q],b=B[q];
+  o[q]=typeof a==="number"?a+(b-a)*k:a.map((v,i)=>typeof v==="number"?v+(b[i]-v)*k:[v[0]+(b[i][0]-v[0])*k,v[1]+(b[i][1]-v[1])*k]);}return o;}
+// four poses through a smooth (Catmull-Rom) curve, at u between the middle two
+function bs_cr(A,B,C,D,u){const u2=u*u,u3=u2*u,wa=-0.5*u3+u2-0.5*u,wb=1.5*u3-2.5*u2+1,wc=-1.5*u3+2*u2+0.5*u,wd=0.5*u3-0.5*u2,f=(a,b,c,d)=>wa*a+wb*b+wc*c+wd*d,o={};
+  for(const q in A){const a=A[q];o[q]=typeof a==="number"?f(a,B[q],C[q],D[q]):a.map((v,i)=>typeof v==="number"?f(v,B[q][i],C[q][i],D[q][i]):[f(v[0],B[q][i][0],C[q][i][0],D[q][i][0]),f(v[1],B[q][i][1],C[q][i][1],D[q][i][1])]);}return o;}
+// a looping gait: keys [[phase, pose], ...] sorted, phase in 0..1
+function bs_gait(keys,ph){ph-=Math.floor(ph);const n=keys.length;let k=n-1;for(let i=0;i<n;i++)if(keys[i][0]<=ph)k=i;const k1=(k+1)%n,p0=keys[k][0],p1=k1?keys[k1][0]:1,u=(ph-p0)/((p1-p0)||1);
+  return bs_cr(keys[(k+n-1)%n][1],keys[k][1],keys[k1][1],keys[(k+2)%n][1],clamp(u,0,1));}
+// a smooth value through keys [[u, v], ...] (a Hermite curve whose slopes follow the neighbouring keys)
+function bs_curve(K,u){let k=0;while(k<K.length-2&&K[k+1][0]<u)k++;const a=K[Math.max(0,k-1)],b=K[k],c=K[k+1],d=K[Math.min(K.length-1,k+2)],h=(c[0]-b[0])||1,f=clamp((u-b[0])/h,0,1);
+  const m1=(c[1]-a[1])/((c[0]-a[0])||1)*h,m2=(d[1]-b[1])/((d[0]-b[0])||1)*h,f2=f*f,f3=f2*f;return(2*f3-3*f2+1)*b[1]+(f3-2*f2+f)*m1+(3*f2-2*f3)*c[1]+(f3-f2)*m2;}
+// a blink now and then (1 open, 0 shut), and a slow wandering value in -1..1 that rests, then eases to the next
+function bs_blink(t,k){if(t==null)return 1;const P=3.3+hash(k,7)*2.6,u=((t+hash(k,8)*P)%P+P)%P;return u<0.2?1-0.92*Math.sin(Math.PI*u/0.2):1;}
+function bs_drift(t,k,per){if(t==null)return 0;const u=t/per+hash(k,9)*7,i=Math.floor(u);return lerp(hash(i,k)*2-1,hash(i+1,k)*2-1,sstep(0.55,1,u-i));}
+// a chain of points bent a little along its length (a tail swaying, a trunk curling): amp radians, ph the wave's phase
+function bs_bend(p,amp,ph,sp){const o=[p[0]];let ang=0;for(let k=1;k<p.length;k++){const dx=p[k][0]-p[k-1][0],dy=p[k][1]-p[k-1][1];ang+=amp*Math.sin(ph-k*(sp||0.9))*k/p.length;
+  const c=Math.cos(ang),s=Math.sin(ang),q=o[k-1];o.push([q[0]+dx*c-dy*s,q[1]+dx*s+dy*c]);}return o;}
+// points turned by a and moved to o: the frame of a head, a paw
+const bs_rot=(o,a,sc)=>{const c=Math.cos(a)*(sc||1),s=Math.sin(a)*(sc||1);return p=>[o[0]+p[0]*c-p[1]*s,o[1]+p[0]*s+p[1]*c];};
+
+
+/* ---------- vervet monkey (Chlorocebus): slender, grizzled grey-olive, a black face with a short muzzle, framed by a thin white brow band and
+   white cheek whiskers, small dark ears; a long tail with a dark tip; sitting on its haunches. Options: t, i (which monkey: each sits its own
+   way, and is a little bigger or smaller), tree / bush / tall (0..1: perched in a tree, crouched in a bush looking up, standing tall), look (0..1,
+   head up); dir (-1 while its next move is to the left: it turns and leaps that way). In the calls scene, calls [leopard, eagle, snake cue] and
+   path [home, tree spot, bush spot] let each monkey keep the troop's moves a moment early or late, and turn round before it leaps ---------- */
+const BS_MK={
+  sit:{P:[-6,35],M:[-9,16],S:[3,-2],N:[8,-7],H:[13,-15],hp:0.1,K:[16,22],A:[10,44],T:[22,47.5],K2:[19,24],A2:[14,45],T2:[26,48],E:[8,22],Hn:[19,45.5],E2:[13,21],Hn2:[24,46.5],
+    tl:[[-12,40],[-20,46.5],[-28,47.5],[-35,46.5],[-39,43],[-40,38.5]],dw:[12,10,8,5],vw:[10,10,9,5]},
+  perch:{P:[-6,35],M:[-9,16],S:[3,-2],N:[8,-7],H:[13,-15],hp:0.18,K:[16,24],A:[12,43],T:[19,50],K2:[19,26],A2:[16,44],T2:[22,50.5],E:[8,22],Hn:[18,46],E2:[13,21],Hn2:[23,47],
+    tl:[[-12,40],[-15,53],[-16,66],[-15,79],[-16,91],[-19,101]],dw:[12,10,8,5],vw:[10,10,9,5]},
+  crouch:{P:[-8,38],M:[-7,22],S:[7,11],N:[12,6],H:[18,-1],hp:-0.62,K:[12,30],A:[6,45],T:[17,47.5],K2:[15,32],A2:[10,46],T2:[21,48],E:[15,28],Hn:[23,46.5],E2:[19,28],Hn2:[28,47],
+    tl:[[-14,42],[-23,47],[-32,47.5],[-39,45.5],[-42,41],[-42,36]],dw:[11,9,8,5],vw:[10,10,9,5]},
+  tall:{P:[0,11],M:[-4,-7],S:[2,-27],N:[6,-33],H:[10,-41],hp:0.5,K:[7,29],A:[1,45],T:[13,47.5],K2:[4,30],A2:[-3,46],T2:[9,48],E:[5,-9],Hn:[11,7],E2:[1,-8],Hn2:[8,9],
+    tl:[[-7,15],[-13,27],[-16,38],[-22,46.5],[-31,47.5],[-37,44]],dw:[10,8,8,5],vw:[9,7.5,8,5]},
+  leap:{P:[-16,16],M:[0,5],S:[16,11],N:[22,9],H:[30,3],hp:0.05,K:[-6,28],A:[-24,31],T:[-35,35],K2:[-10,30],A2:[-28,35],T2:[-39,39],E:[24,25],Hn:[36,35],E2:[20,27],Hn2:[30,39],
+    tl:[[-22,13],[-34,11],[-47,13],[-58,17],[-67,24],[-72,32]],dw:[10,9,8,5],vw:[9,9,8,5]}};
+// each monkey's own way of sitting: its size, and a change to the sitting pose (one upright with its tail curled round its feet, a youngster hunched
+// over, grooming, one with its face turned toward us); d staggers its moves (s); pr: in the tree it reaches up to hold a branch above
+const BS_MKI=[{sc:1.03,d:0.04,fa:1},
+  {sc:1.07,d:0.16,fa:1,tf:1,pr:1,P:[-5,35],M:[-7,15],S:[5,-5],N:[9,-10],H:[13,-18],hp:0.06,E:[10,17],Hn:[16,25],E2:[15,16],Hn2:[21,26],
+    tl:[[-10,42],[-8,47.5],[2,49],[14,49.5],[26,48.5],[31,44.5]]},
+  {sc:0.85,d:0.09,fa:1,gr:1,S:[5,1],M:[-8,18],N:[10,-2],H:[16,-8],hp:0.62,E:[13,24],Hn:[15,17],tl:[[-12,40],[-20,46.5],[-27,47.5],[-33,45.5],[-35,41],[-34,36.5]]},
+  {sc:0.97,d:0.22,fa:0.4,pr:1,H:[12,-15],hp:0.04}];
+function monkey(ctx,x,y,s,col,o){o=o||{};col=col||[220,200,170];const t=o.t,live=t!=null,i=o.i||0,V=BS_MKI[((i%4)+4)%4];
+  // the troop's moves, a moment early or late for each monkey; its size; the way it faces
+  let tr=o.tree||0,bu=o.bush||0,ta=o.tall||0,F=null,dx=0,dy=0;const sc=V.sc,sv=s*sc;
+  if(o.calls&&o.path&&live&&!o.bs_in){const [cL,cE,cS]=o.calls,d=V.d,m=o.path[0],T=o.path[1],B=o.path[2],trI=fin(t,cL+1+d,1.2)*(1-fin(t,cE+0.3+d*0.7,0.8)),buI=fin(t,cE+1.4+d*0.35,1.1)*(1-fin(t,cS+0.3+d*0.45,0.8));
+    dx=(T[0]-m[0])*(trI-tr)+(B[0]-m[0])*(buI-bu);dy=(T[1]-m[1])*(trI-tr)+(B[1]-m[1])*(buI-bu);tr=trI;bu=buI;ta=fin(t,cS+0.8+d*1.2,0.8);
+    const L1=fin(t,cL+0.35+d*1.4,0.55),R1=fin(t,cL+2.15+d*1.5,0.6),L2=fin(t,cS-0.2+d*0.8,0.45),R2=fin(t,cS+1.05+d*1.2,0.6);F=1-2*(L1*(1-R1)+L2*(1-R2));}
+  if(F==null){const turn=w=>sstep(0,0.14,w)*(1-sstep(0.86,1,w));F=(o.dir||1)<0?1-2*Math.max(turn(tr),turn(bu)):1;}
+  if(o.face!=null)F=o.face;
+  x+=dx;y+=dy+47.5*s*(1-sc);
+  const oo=Object.assign({},o,{face:F,tree:tr,bush:bu,tall:ta,calls:null,dir:1});
+  // in the bush: its legs among the leaves
+  const hid=bu>0.9&&!o.bs_in&&o.bs_mask==null?sstep(0.9,1,bu)*(1-sstep(0.9,1,ta)):0;
+  if(hid>0.01)oo.bs_mask=c=>{const g=c.createLinearGradient(0,6,0,34);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,"rgba(0,0,0,"+(0.62*hid)+")");c.fillStyle=g;c.fillRect(-60,6,120,80);};
+  // turning round: a narrower body, the two facings blended through the middle of the turn
+  if(!o.bs_in&&Math.abs(F)<0.55){const k=(0.55-F)/1.1,a=o.a==null?1:o.a;
+    bs_mkDraw(ctx,x,y,sv,col,Object.assign({},oo,{face:0.55,turning:1,a:a*(1-k)}),t,i,V);bs_mkDraw(ctx,x,y,sv,col,Object.assign({},oo,{face:-0.55,turning:1,a:a*k}),t,i,V);return;}
+  bs_mkDraw(ctx,x,y,sv,col,oo,t,i,V);}
+function bs_mkDraw(ctx,x,y,s,col,o,t,i,V){const tr=o.tree||0,bu=o.bush||0,ta=o.tall||0,F=o.face==null?1:o.face,hop=w=>w>0&&w<1?Math.sin(Math.PI*w):0,lp=clamp(1.7*Math.max(hop(tr),hop(bu)),0,1);
+  const bx=[-54-34*lp,-42-16*ta-24*lp,46+8*lp,58+50*sstep(0.3,1,tr)];
+  if(bs_layered(ctx,x,y,s,o,F<0?[-bx[2],bx[1],-bx[0],bx[3]]:bx,(c,oo)=>bs_mkDraw(c,x,y,s,col,oo,t,i,V)))return;
+  const live=t!=null;
+  let sit=BS_MK.sit;if(V.P||V.tl||V.H)sit=Object.assign({},sit,V);
+  let q=bs_blend(sit,V.pr?Object.assign({},BS_MK.perch,{E:[12,-9],Hn:[15,-25]}):BS_MK.perch,sstep(0.75,1,tr));q=bs_blend(q,BS_MK.crouch,Math.max(sstep(0.65,1,bu),o.look||0));q=bs_blend(q,BS_MK.tall,ta);q=bs_blend(q,BS_MK.leap,lp);
+  // while it turns round, it lifts a little and its face comes round toward us
+  const tu=o.turning?1:clamp((1-Math.abs(F))/0.45,0,1);
+  if(!bs_begin(ctx,x,y-(16*Math.max(hop(tr),hop(bu))+2.5*tu)*s,s,o,F))return;
+  const rot=0.35*(F<0?-1:1)*clamp(1.7*hop(tr),0,1);if(rot){ctx.translate(0,20);ctx.rotate(rot);ctx.translate(0,-20);}
+  // life: breath, a head that turns and tilts (now and then toward the leopard's side, or toward us), blinks, a grooming hand, the tail
+  const idle=(1-lp)*(1-ta*0.5),br=live?1+0.035*Math.sin(TAU*t/(3.1+0.4*i)+i*1.9):1,bl=bs_blink(t,5+i);
+  const yd=live?bs_drift(t,21+i,1.9+0.37*i):0,fa0=V.fa,yaw=lerp(clamp(fa0+(fa0<0.8?0.3*yd:0.5*Math.min(0,yd)+0.12*Math.max(0,yd))*idle,0.12,1),0.15,tu);
+  const pt=live?0.2*bs_drift(t,41+i,2.5+0.3*i)*idle:0,gr=V.gr&&live?(1-sstep(0,0.3,tr+bu+ta))*Math.max(0,Math.sin(TAU*t/2.3)):0;
+  if(gr>0)q=Object.assign({},q,{Hn:[q.Hn[0]-1.5*gr,q.Hn[1]+2.5*gr*Math.sin(TAU*t*1.6)]});
+  const hang=sstep(0.75,1,tr)*(1-lp),tl=live?bs_bend(q.tl,(V.tf?0.07:0.14)+0.1*hang,TAU*t/(3.1+0.4*i)+i*2,0.8):q.tl;
+  const box=[-30,-40,40,60],cf=mix(col,[130,140,105],0.4),dw=q.dw.map(v=>v*br),vw=q.vw.map(v=>v*br);
+  const arm=[[q.S[0]-1,q.S[1]+2],bs_mid(q.S,q.E,0.55),q.E,bs_mid(q.E,q.Hn,0.5),q.Hn],aw=[5.9,5,4.4,3.3,2.9],leg=[q.P,q.K,q.A,q.T],lw=[9.5,5.4,3.1,2.6];
+  const arm2=[q.S,q.E2,q.Hn2],leg2=[q.P,q.K2,q.A2,q.T2];
+  // the head's frame: yaw 1 in profile, less as it turns toward us (the muzzle shortens, the face comes round, the far eye and cheek show)
+  const hp=bs_rot(q.H,q.hp+pt,0.88),m=0.25+0.75*yaw,fx=-(1-yaw)*6;
+  const skull=[[-8.5,6],[-10,0],[-8.8,-6],[-3.5,-9.8],[2.5,-10.3],[7,-8.6],[9.8+0.8*m,-6.4],[10.2+1.6*m,-4.7],[11+3.2*m,-3.7],[11.4+4.4*m,-1.4],[11.2+4.2*m,1.2],[9.8+3.2*m,2.8],[8.8+2.4*m,5],[6,7.4],[1,8.8],[-4,8.6]].map(hp);
+  const nape=[bs_mid(q.S,q.N,0.2),q.N,hp([-6.8,-1.5])];
+  // the far arm and leg (and a tail curled round the feet), behind
+  bs_form(ctx,c=>{bs_tube(c,arm2,[4.6,3.4,2.8]);bs_tube(c,leg2,[8,5,2.8,2.4]);if(V.tf)bs_tube(c,tl,[3.2,2.9,2.6,2.2,1.9,1.5]);},col,bs_fill(ctx,cf,0.6,box),0.42,2.2,0);
+  // body, head and nape, near leg, near arm and the tail, as one form
+  bs_form(ctx,c=>{bs_torso(c,[q.P,q.M,q.S,q.N],dw,vw,7,3);bs_tube(c,nape,[7,6.6,6.2]);bs_loop(c,skull);bs_tube(c,leg,lw);bs_tube(c,arm,aw);
+    bs_loop(c,[bs_mid(q.Hn,q.E,0.12),[q.Hn[0]+2.4,q.Hn[1]-1.2],[q.Hn[0]+3.4,q.Hn[1]+1.2],[q.Hn[0]+0.6,q.Hn[1]+2.2]]);if(!V.tf)bs_tube(c,tl,[3.4,3,2.6,2.2,1.8,1.4]);},col,bs_fill(ctx,cf,0,box),1,2.5,8);
+  // the tail's dark tip; the grizzled back; the arm against the body; the thigh
+  ctx.beginPath();bs_tube(ctx,[bs_mid(tl[4],tl[5],0.05),tl[5]],V.tf?[1.6,1.2]:[1.7,1.35]);ctx.fillStyle="rgba(3,4,8,0.9)";ctx.fill();
+  const back=bs_side([q.P,q.M,q.S],[dw[0]*0.7,dw[1]*0.7,dw[2]*0.7],1),fl=[];for(let k=0;k<7;k++){const u=0.12+k*0.12,p=bs_mid(back[u<0.5?0:1],back[u<0.5?1:2],u<0.5?u*2:u*2-1),a=0.9+0.5*hash(k+i*7,3);fl.push([p,[p[0]-2.2*Math.cos(a),p[1]+2.2*Math.sin(a)]]);}
+  bs_lines(ctx,fl,mix(col,[255,255,255],0.2),0.28,0.35,0.15);
+  const armB=bs_side(arm,aw,1),legT=bs_side(leg,lw,-1);bs_lines(ctx,[[bs_mid(armB[1],armB[2],0.2),armB[2],bs_mid(armB[2],armB[3],0.6)],[bs_mid(legT[0],legT[1],0.45),legT[1],bs_mid(legT[1],legT[2],0.3)]],col,0.38,0.2,0.6);
+  // the face: black skin round the eyes and over the short muzzle, a thin white brow band above it, white whiskers down the cheek, and a small
+  // dark ear half hidden behind them
+  const wh=mix(col,[255,255,255],0.62),fe=fx*0.8;
+  const ear=[[-3.8+fx*0.4,-3.2],[-1.6+fx*0.4,-4],[-0.3+fx*0.4,-1.6],[-1+fx*0.4,1.4],[-3.2+fx*0.4,1]].map(hp);ctx.beginPath();bs_loop(ctx,ear);ctx.fillStyle="rgba(10,12,16,0.9)";ctx.fill();bs_lines(ctx,[[ear[4],ear[0],ear[1],ear[2]]],col,0.45,0.35,0.2);
+  ctx.beginPath();bs_loop(ctx,[[4.4+fe,-5.4],[7.6+fx*0.4,-6.5],[9.7+0.8*m,-6.1],[10+1.6*m,-4.6],[10.8+3.2*m,-3.6],[11.2+4.4*m,-1.4],[11+4.2*m,1.2],[9.7+3.2*m,2.8],[8.6+2.4*m,4.9],[6.2+fx*0.5,5.2],[4.4+fe,3],[3.8+fe,-1.2]].map(hp));ctx.fillStyle="rgba(3,4,7,0.82)";ctx.fill();bs_lines(ctx,[[hp([10.6+4.2*m,-1.2]),hp([9.8+3.8*m,0.2])]],col,0.35,0.35,0.2);ctx.beginPath();bs_loop(ctx,[[5.6+fx*0.5,5.8],[8.6+2.2*m,5.2],[6.8,7.4],[3.6,8.4],[2.8,6.8]].map(hp));ctx.fillStyle=rgba(wh,0.42);ctx.fill();
+  ctx.beginPath();bs_loop(ctx,[[3.6+fe,-5.4],[2.4+fe,-2],[2+fe,2],[3.3+fe,5.6],[5.6+fx*0.5,7.2],[6+fx*0.5,6.2],[4.2+fe,4],[3.6+fe,0],[4+fe,-4.4]].map(hp));ctx.fillStyle=rgba(wh,0.72);ctx.fill();
+  const fr=[];for(let k=0;k<5;k++){const u=k/4,p=[lerp(2.8,2.2,u)+fe-0.6*Math.sin(Math.PI*u),lerp(-4.2,6.4,u)],a=Math.PI*0.95-0.9*u;fr.push([hp(p),hp([p[0]+2.2*Math.cos(a),p[1]+2.2*Math.sin(a)])]);}
+  bs_lines(ctx,fr,wh,0.5,0.35,0.1);
+  bs_lines(ctx,[[hp([3.4+fe,-5.9]),hp([6+fx*0.5,-6.9]),hp([9.2+fx*0.3,-6.2])]],wh,0.85,0.55,0.25);
+  if(yaw<0.75){const k=clamp((0.75-yaw)*3,0,1);ctx.beginPath();bs_loop(ctx,[[10.2+m,-4.6],[11.4+2.6*m,-2.4],[12+3.2*m,1.2],[11+2.4*m,4.6],[10.4+2*m,3.4],[10.8+2.4*m,0]].map(hp));ctx.fillStyle=rgba(wh,0.6*k);ctx.fill();}
+  bs_lines(ctx,[[hp([10+3.2*m,2.6]),hp([8.2+2.2*m,3.4])]],col,0.3,0.4,0.25);
+  const e1=hp([6.4+fx*0.85,-3.4]),e2=hp([9.8+fx*0.25+m*0.6,-3.2]);bs_eye(ctx,e1[0],e1[1],1.2,col,bl);bs_eye(ctx,e2[0],e2[1],1,col,bl,clamp((0.9-yaw)*3.5,0,1));
+  ctx.restore();}
+/* ---------- leopard (Panthera pardus): a slow stalking walk (a lateral-sequence walk, the diagonal legs nearly together), head low, shoulder
+   blades rolling, the long tail low with its tip curled up. Options: t, walk (px walked, negative until the spot where it stops: the feet keep
+   time with the ground and it stops with all four planted), flip ---------- */
+const BS_LEO={S:74,D:0.78,off:[0,0.3,0.5,0.8],stand:0.54};
+function bs_leoFoot(ph,lift){const S=BS_LEO.S,D=BS_LEO.D;ph-=Math.floor(ph);if(ph<D)return[S*D*(0.5-ph/D),0,0];const u=(ph-D)/(1-D),e=u*u*(3-2*u);return[S*D*(e-0.5),-lift*Math.sin(Math.PI*u)*(1-0.25*u),u];}
+// the coat, drawn once at 2x for each size and colour, in the body's own units: rosettes (open, broken rings of three or four blotches round a
+// tawny centre; large on the flank, smaller and closer toward the spine and the shoulder), small solid spots along the spine and low on the belly
+const BS_LEO_TOP=[[-54,-4],[-46,-9.5],[-30,-9.5],[-12,-7.5],[6,-8],[22,-11.4],[31,-12],[42,-8],[52,-4]],BS_LEO_BOT=[[-57,2],[-48,10],[-34,14],[-22,12.5],[-10,14.5],[6,18],[24,22],[38,21],[48,14],[60,11]];
+function bs_leoEdge(E,x){for(let k=0;k<E.length-1;k++)if(x<=E[k+1][0])return lerp(E[k][1],E[k+1][1],clamp((x-E[k][0])/(E[k+1][0]-E[k][0]),0,1));return E[E.length-1][1];}
+function bs_leoCoat(col,s){const key="leo"+s.toFixed(3)+col.join();if(BS_CACHE[key])return BS_CACHE[key];
+  const X0=-56,Y0=-14,W=110,H=38,Z=2*s,c=mkCanvas(Math.ceil(W*Z),Math.ceil(H*Z)),g=c.getContext("2d");g.scale(Z,Z);g.translate(-X0,-Y0);g.lineCap="round";
+  const cen=[],arcs=[],spots=[];let n=0;
+  for(let j=0;j<6;j++)for(let i=0;i<14;i++){n++;const x=-50+i*7.3+(j%2)*3.65+(hash(n,1)-0.5)*3.2,top=bs_leoEdge(BS_LEO_TOP,x),bot=bs_leoEdge(BS_LEO_BOT,x),y=top+2.2+j*4.7+(hash(n,2)-0.5)*2.6,d=(y-top)/(bot-top);
+    if(x<-51||x>45)continue;const sz=(x>24?0.7:x<-42?0.8:1)*(0.8+0.4*hash(n,3));
+    if(d<0.13){if(hash(n,4)<0.8)spots.push([x,y+0.6,(0.55+0.35*hash(n,5))*sz]);continue;}
+    if(d>0.8){if(d<0.94&&hash(n,4)<0.75)spots.push([x,y,(0.6+0.45*hash(n,5))*sz]);continue;}
+    const r=(1.3+2*sstep(0.1,0.5,d))*sz;if(y-r*1.2<top+1.3)continue;
+    cen.push([x,y,r*0.62]);const k=hash(n,6)>0.4?4:3,a0=hash(n,7)*TAU;
+    for(let q=0;q<k;q++){if(k===4&&hash(n,20+q)<0.15)continue;const rr=r*(0.8+0.42*hash(n,8+q)),a=a0+q*TAU/k+(hash(n,12+q)-0.5)*0.5,sp=TAU/k*(0.5+0.25*hash(n,16+q));arcs.push([x,y,rr,a,a+sp,0.22*r+0.28]);}}
+  g.fillStyle=rgba(col,0.12);g.beginPath();for(const [x,y,r] of cen){g.moveTo(x+r,y);g.arc(x,y,r,0,TAU);}g.fill();
+  g.strokeStyle=rgba(col,0.66);for(const [x,y,r,a0,a1,w] of arcs){g.beginPath();g.arc(x,y,r,a0,a1);g.lineWidth=w;g.stroke();}
+  g.fillStyle=rgba(col,0.62);g.beginPath();for(const [x,y,r] of spots){g.moveTo(x+r,y);g.arc(x,y,r,0,TAU);}g.fill();
+  return BS_CACHE[key]={c,X0,Y0,W,H};}
+function leopard(ctx,x,y,s,col,o){o=o||{};if(bs_layered(ctx,x,y,s,o,[-128,-30,96,50],(c,oo)=>leopard(c,x,y,s,col,oo)))return;
+  col=col||LEO;const t=o.t,live=t!=null,walk=o.walk==null?0:o.walk;if(!bs_begin(ctx,x,y,s,o))return;
+  const ph=BS_LEO.stand+walk/(BS_LEO.S*s),mov=clamp(Math.abs(walk)/(0.4*BS_LEO.S*s),0,1),br=live?Math.sin(TAU*t/3.6):0,bl=bs_blink(t,3);
+  const feet=BS_LEO.off.map((d,k)=>bs_leoFoot(ph-d,k%2?6:7)),sc=k=>{const f=((ph-BS_LEO.off[k])%1+1)%1;return f<BS_LEO.D?Math.sin(Math.PI*f/BS_LEO.D):0;};
+  const bob=0.9*Math.cos(TAU*2*ph)*mov,sb=1.4+2.2*Math.max(sc(1),sc(3)*0.8),hb=bob*0.3+(live?0.5*bs_drift(t,5,3.2):0);
+  const Sj=[34,2+bob*0.6],Hj=[-38,0+bob],box=[-100,-36,80,50],fill=bs_fill(ctx,col,0,box,0.84);
+  const fore=(f,dx,gy)=>{const P=[Sj[0]+2+dx+f[0],42+gy+f[1]],sw=Math.sin(Math.PI*f[2]),W=[P[0]-1-4*sw,P[1]-6.5+1.5*sw],E=bs_ik(Sj,W,17,20,1);return{P,W,E,toe:[P[0]+5-3*sw,P[1]+1.4*sw]};};
+  const hind=(f,dx,gy)=>{const P=[Hj[0]+4+dx+f[0],42+gy+f[1]],al=f[2]?lerp(0.65,0.2,f[2])+0.35*Math.sin(Math.PI*f[2]):0.2+0.45*clamp(0.5-f[0]/(BS_LEO.S*BS_LEO.D),0,1),
+    J=[P[0]-14*Math.sin(al),P[1]-14*Math.cos(al)],K=bs_ik(Hj,J,20,21,-1);return{P,J,K,toe:[P[0]+4.5,P[1]]};};
+  const LF=fore(feet[1],0,0),RF=fore(feet[3],3,-1.5),LH=hind(feet[0],0,0),RH=hind(feet[2],3,-1.5);
+  const foreT=L=>[[Sj[0]-3,Sj[1]-7],Sj,L.E,L.W,L.P,L.toe],foreW=[8,8.8,6.2,4.4,4.6,4.1],hindT=L=>[[Hj[0]+2,Hj[1]-1],Hj,bs_mid(Hj,L.K,0.5),L.K,L.J,L.P,L.toe],hindW=[10,10.5,9.5,5.8,3.6,4.3,3.9];
+  const tw=live?0.12+0.1*(1-mov):0.1,tlp=live?TAU*t/4.2+ph*TAU*0.5:1.2,tail=bs_bend([[-54,-3],[-62,6],[-70,15],[-82,21],[-96,22],[-108,18],[-116,10],[-118,1]],tw,tlp,0.7);
+  const hd=[68,4.5+hb],ha=0.08+(live?0.06*bs_drift(t,9,3.8):0),hs=1.08,hp=p=>[hd[0]+hs*(p[0]*Math.cos(ha)-p[1]*Math.sin(ha)),hd[1]+hs*(p[0]*Math.sin(ha)+p[1]*Math.cos(ha))],ef=live?0.4*Math.max(0,bs_drift(t,17,1.7)):0;
+  // the far legs, darker, behind the body
+  bs_form(ctx,c=>{bs_tube(c,foreT(RF),foreW);bs_tube(c,hindT(RH),hindW);},col,bs_fill(ctx,col,0.6,box,0.85),0.4,2.2,0);
+  // body (a deep chest, a tucked flank), near legs, tail and head as one form
+  const ey=br*0.5,top=[[-54,-4],[-46,-9.5],[-30,-9.5+bob*0.4],[-12,-7.5+bob*0.6-ey],[6,-8+bob*0.6-ey],[22,-10-sb+bob*0.6],[31,-11-sb*0.8+bob*0.6],[42,-8+bob*0.5],[52,-4+hb*0.6]];
+  const bot=[[60,11+hb],[48,14+bob*0.5],[38,21+bob*0.6+ey],[24,22+bob*0.6+ey],[6,18+bob*0.6+ey],[-10,14.5+bob*0.7],[-22,12.5+bob*0.8],[-34,14+bob],[-48,10+bob],[-57,2+bob]];
+  const head=[[-11,-2],[-6,-8.5],[3,-9.2],[10,-6.6],[15.5,-3.6],[18.6,-0.3],[18.4,3],[16.6,5.2],[14.6,8.2],[8,10.6],[0,11],[-7,9]].map(hp),ear=[[-8,-7],[-7.6-ef,-11.6],[-5-ef,-13.6],[-2.4,-12.2],[-1.8,-8.4]].map(hp);
+  bs_form(ctx,c=>{bs_loop(c,top.concat(bot));bs_tube(c,foreT(LF),foreW);bs_tube(c,hindT(LH),hindW);bs_tube(c,tail,[5,4.4,3.9,3.6,3.4,3.3,3.2,3.1]);bs_loop(c,head);bs_loop(c,ear);},col,fill,1,2.8,8);
+  // rosettes on the body (each a broken ring round a tawny centre), solid spots on the legs, belly and head, rings toward the tail's tip
+  const coat=bs_leoCoat(col,s);ctx.drawImage(coat.c,coat.X0,coat.Y0+bob*0.6,coat.W,coat.H);
+  const dots=[],dot=(p,r)=>{dots.push(p,r);};
+  [[0.25,0.3],[0.5,0.55],[0.75,0.45]].forEach(([u,v])=>{dot(bs_mid(Sj,LF.E,u),0.9);dot(bs_mid(LF.E,LF.W,v),0.75);dot(bs_mid(Hj,LH.K,u*0.9),1);dot(bs_mid(LH.K,LH.J,v),0.75);});
+  [[-2,-6],[2,-7],[5.5,-6],[-4,-3],[1,-4.5],[4,3],[7,2],[13,3.8],[14.8,2.8],[12.2,5.2]].forEach(p=>dot(hp(p),0.5));
+  ctx.beginPath();for(let k=0;k<dots.length;k+=2){const p=dots[k],r=dots[k+1];ctx.moveTo(p[0]+r,p[1]);ctx.arc(p[0],p[1],r,0,TAU);}ctx.fillStyle=rgba(col,0.66);ctx.fill();
+  const rings=[];for(let k=2;k<7;k++){const a=tail[k],b=tail[k+1],dx=b[0]-a[0],dy=b[1]-a[1],d=Math.hypot(dx,dy)||1,nx=-dy/d,ny=dx/d,m=bs_mid(a,b,0.5),w=3.2;
+    if(k<4)rings.push([[m[0]+nx*w*0.6,m[1]+ny*w*0.6],[m[0]+nx*w*0.1+dx/d*1.2,m[1]+ny*w*0.1+dy/d*1.2]]);else rings.push([[m[0]+nx*w*0.95,m[1]+ny*w*0.95],[m[0]+dx/d*1.1,m[1]+dy/d*1.1],[m[0]-nx*w*0.95,m[1]-ny*w*0.95]]);}
+  bs_lines(ctx,rings,col,0.66,0.9,0.5);
+  // the shoulder blade and the thigh rolling under the skin; mouth, chin, cheek and nose
+  bs_lines(ctx,[[[Sj[0]-6,Sj[1]-11-sb*0.5],[Sj[0]-6.5,Sj[1]-4],[Sj[0]-3,Sj[1]+5]],[[Hj[0]+10,Hj[1]+13],[Hj[0]+12.5,Hj[1]+3],[Hj[0]+9,Hj[1]-7]]],col,0.4,0.2,0.7);
+  bs_lines(ctx,[[hp([16.6,5]),hp([13.8,5.9]),hp([11,5.4])],[hp([14.3,8]),hp([11.5,7.3])],[hp([8,10.4]),hp([2,7.4]),hp([-3,3])]],col,0.5,0.55,0.25);
+  const ns=[hp([18.8,-0.6]),hp([16.8,-0.8]),hp([17.8,1.4])];ctx.beginPath();ctx.moveTo(ns[0][0],ns[0][1]);ctx.lineTo(ns[1][0],ns[1][1]);ctx.lineTo(ns[2][0],ns[2][1]);ctx.closePath();ctx.fillStyle=rgba(col,0.75);ctx.fill();
+  const ep=hp([8.2,-3.4]);bs_eye(ctx,ep[0],ep[1],1.65,col,bl);
+  ctx.restore();}
+
+/* ---------- snake: a heavy python-like snake in the grass, the front of its body raised, its head broader than its neck, tasting the air with a
+   forked tongue (snakes have no eyelids: the eye stays open); its body lies along its own winding track and tapers to a fine tail. Options: t, crawl (seconds it has been gliding forward along that track), flip ---------- */
+function bs_snkPath(){if(BS_CACHE.snk)return BS_CACHE.snk;const P=[];let x=0,y=0;for(let k=0;k<=400;k++){const th=1.05*Math.sin(k*2*TAU/74+0.6);P.push([x,y]);x+=2*Math.cos(th);y+=2*Math.sin(th)*0.62;}return BS_CACHE.snk=P;}
+function snake(ctx,x,y,s,col,o){o=o||{};if(bs_layered(ctx,x,y,s,o,[-100,-40,150,32],(c,oo)=>snake(c,x,y,s,col,oo)))return;
+  col=col||SNK;const t=o.t,live=t!=null;if(!bs_begin(ctx,x,y,s,o))return;
+  const P=bs_snkPath(),L=150,h0=420+clamp(o.crawl||0,-4,40)*4.5,at=g=>{const k=clamp(g/2,0,P.length-1.001),i=Math.floor(k),f=k-i;return[P[i][0]+(P[i+1][0]-P[i][0])*f,P[i][1]+(P[i+1][1]-P[i][1])*f];};
+  const H=at(420),N=36,sp=[],w=[],br=live?1+0.03*Math.sin(TAU*t/3.4):1,wob=live?0.9*Math.sin(TAU*t/5.2):0,nod=live?1.5*bs_drift(t,31,2.2):0;
+  const k9=Math.round(N*0.86),p9=at(h0-0.86*L),p8=at(h0-0.84*L),g9=[p9[0]-p8[0],p9[1]-p8[1]];
+  for(let k=0;k<=N;k++){const u=k/N,e=sstep(0.86,1,u);let p=at(h0-u*L);if(e>0){const q=[p9[0]+g9[0]*(u-0.86)/0.02,p9[1]+g9[1]*(u-0.86)/0.02*0.4];p=bs_mid(p,q,e);}
+    const lift=u<0.24?Math.pow(1-u/0.24,2)*(12+nod):0;sp.push([p[0]-H[0]+66,p[1]-H[1]+4-lift+wob*Math.sin(u*9)*u*(1-e)]);
+    w.push(Math.max(0.3,(u<0.08?3.3+u*18.75:u<0.4?4.8+(u-0.08)*8.4:u<0.7?7.5-(u-0.4)*3:0.3+6.3*Math.pow(1-(u-0.7)/0.3,1.25))*br));}
+  const hd=sp[0],nk=sp[2],ang=Math.atan2(hd[1]-nk[1],hd[0]-nk[0])*0.5+(live?0.06*bs_drift(t,33,1.9):0),hp=p=>[hd[0]+p[0]*Math.cos(ang)-p[1]*Math.sin(ang),hd[1]+p[0]*Math.sin(ang)+p[1]*Math.cos(ang)];
+  const head=[[-7.5,-3.6],[-2.5,-5.4],[3.5,-5.6],[9.5,-4.2],[14,-1.6],[14.8,0.9],[13,3.2],[6.5,4.9],[-1.5,5.6],[-7.5,3.8]].map(hp),box=[-40,-30,40,30];
+  bs_form(ctx,c=>{bs_tube(c,sp.slice(1),w.slice(1));bs_loop(c,head);},col,bs_fill(ctx,col,0,box),1,2.5,9);
+  // the pattern: irregular dark saddles across the back, each with a fine pale edge, smaller blotches low on the flank, the edge of the belly scales
+  const sad=new Path2D();for(let k=4;k<N-4;k+=3){const j=k+Math.round(hash(k,44)-0.5),a=sp[j-1],b=sp[j+1],dx=b[0]-a[0],dy=b[1]-a[1],d=Math.hypot(dx,dy)||1,tx=dx/d,ty=dy/d,nx=-ty,ny=tx,ww=w[j],m=sp[j];
+    const ln=ww*(0.45+0.25*hash(k,41)),dp=ww*(0.52+0.22*hash(k,42)),q=[];for(let i=0;i<7;i++){const a2=i/7*TAU,r=0.75+0.4*hash(k*7+i,43);q.push([m[0]+nx*ww*0.3+(tx*Math.cos(a2)*ln+nx*Math.sin(a2)*dp)*r,m[1]+ny*ww*0.3+(ty*Math.cos(a2)*ln+ny*Math.sin(a2)*dp)*r]);}
+    bs_loop(sad,q);if(k+5<N-4&&hash(k,45)>0.3){const c=bs_mid(sp[j+1],sp[j+2]),r=ww*(0.2+0.12*hash(k,46)),q2=[];for(let i=0;i<5;i++){const a2=i/5*TAU;q2.push([c[0]-nx*ww*0.5+Math.cos(a2)*r*1.5*(0.8+0.4*hash(i,k)),c[1]-ny*ww*0.5+Math.sin(a2)*r]);}bs_loop(sad,q2);}}
+  ctx.fillStyle=rgba(mix(col,[0,0,0],0.72),0.45);ctx.fill(sad);ctx.lineWidth=1/s;ctx.strokeStyle=rgba(col,0.34);ctx.stroke(sad);
+  bs_lines(ctx,[bs_side(sp.slice(4,N-2),w.slice(4,N-2).map(v=>v*0.62),-1)],col,0.3,0.5,0.3);
+  // brow ridge, mouth, eye
+  bs_lines(ctx,[[hp([5,-3.9]),hp([8,-4.1]),hp([10.8,-3.2])],[hp([13.6,2.2]),hp([9,2.9]),hp([4.5,2.6])]],col,0.5,0.5,0.25);
+  // the forked tongue, flicking now and then
+  if(live){const P2=2.3,u=((t+0.7)%P2+P2)%P2;if(u<0.55){const e=Math.sin(Math.PI*u/0.55),f=Math.sin(u*TAU*5)*0.9,b=hp([14.4,1.2]),m=hp([14.4+6*e,1.2+f*0.6]),f1=hp([14.4+9.5*e,-0.5+f]),f2=hp([14.4+9.5*e,2.9+f]);
+    bs_lines(ctx,[[b,m,f1],[m,f2]],mix(col,[255,120,140],0.55),0.95,0.7,0.3);}}
+  const ep=hp([7.8,-2.2]);bs_eye(ctx,ep[0],ep[1],1.35,col,1);
+  ctx.restore();}
+
+/* ---------- bottlenose dolphin (Tursiops): a short thick rostrum, a rounded melon, a tall curved dorsal fin, long swept-back flippers, a
+   narrow tail stock and horizontal flukes, seen almost edge-on, that beat up and down; a darker cape. Options: t (a slow swimming stroke, the
+   body bobbing and bending with it) ---------- */
+// along the body from the beak's tip (0) to the flukes' root (1): the depth above and below the midline
+const BS_DOL=[[0,1.3,1.3],[0.03,2.7,2.6],[0.062,3.6,3.8],[0.09,8,5.6],[0.125,13.5,8.7],[0.17,17.5,12],[0.24,20.5,15.6],[0.34,22,18.2],[0.44,21.2,17.9],[0.52,19.4,16.4],
+  [0.6,16.2,13.6],[0.68,12.2,10.4],[0.76,8.4,7.2],[0.84,5.4,4.6],[0.92,3.6,3],[1,2.7,2.3]];
+function dolphin(ctx,x,y,s,col,o){o=o||{};if(bs_layered(ctx,x,y,s,o,o.flip?[-90,-48,104,50]:[-104,-48,90,50],(c,oo)=>dolphin(c,x,y,s,col,oo)))return;
+  col=col||[120,210,255];const t=o.t,live=t!=null;if(!bs_begin(ctx,x,y,s,o))return;
+  const ph=live?t*TAU/2.8:0.9,bob=live?1.6*Math.sin(ph+1.1):0,X=u=>80-158*u,C=u=>-4*Math.sin(Math.PI*u)+0.8+bob+(0.6+5.5*Math.pow(u,2.4))*Math.sin(ph-2.3*u);
+  const top=BS_DOL.map(([u,a])=>[X(u),C(u)-a]),bot=BS_DOL.map(([u,a,b])=>[X(u),C(u)+b]).reverse(),R=[X(1)+0.5,C(1)],box=[-96,-32,82,34],fill=bs_fill(ctx,col,0,box,0.88);
+  // the flukes: a thin blade behind the tail stock, tilting with the stroke; as it tilts we see a little more of it, and of the far fluke under it
+  const st=Math.sin(ph-2.3),fa=-0.42*Math.cos(ph-2.3)-0.05,th=0.55+0.6*Math.abs(Math.cos(ph-2.3)),fp=p=>[R[0]+p[0]*Math.cos(fa)-p[1]*th*Math.sin(fa),R[1]+p[0]*Math.sin(fa)+p[1]*th*Math.cos(fa)];
+  const flk=[[1,-2.4],[-5,-3.4],[-11.5,-4.6],[-17.5,-5],[-22,-3.8],[-20.4,-1.2],[-16.2,0.4],[-12.6,1],[-7,1.9],[1,2.2]].map(fp),flk2=[[-6,1.4],[-12,2.8],[-17.5,4.2],[-20,4.4],[-17.2,2.6],[-12,1.6]].map(fp);
+  const tp=u=>{let k=0;while(k<BS_DOL.length-2&&BS_DOL[k+1][0]<u)k++;const a=BS_DOL[k],b=BS_DOL[k+1],f=(u-a[0])/(b[0]-a[0]);return[lerp(a[1],b[1],f),lerp(a[2],b[2],f)];},T=u=>C(u)-tp(u)[0];
+  const dorsal=[[X(0.39),T(0.39)+1.5],[X(0.44),T(0.44)-6],[X(0.49),T(0.5)-13],[X(0.555),T(0.56)-17.5],[X(0.585),T(0.58)-16],[X(0.575),T(0.58)-9],[X(0.58),T(0.6)-3],[X(0.6),T(0.6)+1.5]];
+  // the flippers: long, swept back about 35 degrees, hanging well below the belly; the stroke sways them a little
+  const y0=C(0.23)+tp(0.23)[1]*0.35,sw=0.08*st,fl=(r,ln,wd)=>{const a=0.61+sw,d=[-Math.sin(a),Math.cos(a)],n=[Math.cos(a),Math.sin(a)],P=(u,v)=>[r[0]+d[0]*u+n[0]*v,r[1]+d[1]*u+n[1]*v];
+    return[P(-2,wd),P(ln*0.42,wd*0.9),P(ln*0.8,wd*0.5),P(ln,-0.05*wd),P(ln*0.8,-0.62*wd),P(ln*0.4,-0.9*wd),P(-2,-wd)];};
+  // the far flipper and the far fluke, behind
+  bs_form(ctx,c=>{bs_loop(c,fl([X(0.25),y0+1.2],19,3.4));bs_loop(c,flk2);},col,bs_fill(ctx,col,0.6,box,0.9),0.4,2,0);
+  // body, dorsal fin and flukes as one form; the near flipper lies over the flank
+  bs_form(ctx,c=>{bs_loop(c,top.concat(flk.slice(1,9),bot));bs_loop(c,dorsal);},col,fill,1,2.6,9);
+  const f0=fl([X(0.215),y0-1.5],25,4.2);bs_form(ctx,c=>bs_loop(c,f0),col,fill,0.9,2.3,0);
+  // mouth line, melon crease, blowhole, the cape of the back, the flipper against the flank, the fluke's leading edge
+  bs_lines(ctx,[[[X(0.012),C(0.012)+0.3],[X(0.05),C(0.05)+0.9],[X(0.085),C(0.085)+1.6],[X(0.105),C(0.105)+0.6]]],col,0.75,0.75,0.35);
+  bs_lines(ctx,[[[X(0.066),C(0.066)-3.4],[X(0.075),C(0.075)-1.6]],[[X(0.165),T(0.165)+1.2],[X(0.178),T(0.178)+1]]],col,0.5,0.5,0.3);
+  bs_lines(ctx,[[[X(0.13),C(0.13)-7],[X(0.2),C(0.2)-4.3],[X(0.32),C(0.32)-1.6],[X(0.46),C(0.46)+1.6],[X(0.62),C(0.62)+0.8],[X(0.76),C(0.76)-0.8],[X(0.88),C(0.88)-0.3]]],col,0.42,0.25,0.6);
+  bs_lines(ctx,[[bs_mid(f0[0],f0[6],0.5),bs_mid(f0[1],f0[5],0.5),bs_mid(f0[2],f0[4],0.5)],[flk[1],flk[3],flk[4]]],col,0.45,0.2,0.5);
+  bs_eye(ctx,X(0.118),C(0.118)-1.2,1.5,col,bs_blink(t,4));
+  ctx.restore();}
+
+/* ---------- African elephant (Loxodonta africana): great ears shaped like the continent, a high shoulder and a dipping back, pillar legs on broad
+   flat soles with toenails, a long wrinkled trunk, tusks; options: t (the ear fans, the trunk sways and curls, the tail swishes, it blinks). With t,
+   the body and legs, which don't move, are drawn once and kept ---------- */
+function elephant(ctx,x,y,s,col,o){o=o||{};if(bs_layered(ctx,x,y,s,o,o.flip?[-82,-62,76,46]:[-76,-62,82,46],(c,oo)=>elephant(c,x,y,s,col,oo)))return;
+  col=col||[190,200,220];const t=o.t,live=t!=null;if(!bs_begin(ctx,x,y,s,o))return;
+  const ef=live?0.5-0.5*Math.cos(TAU*t/4.6):0.3,bl=bs_blink(t,6),box=[-64,-56,64,42],fill=bs_fill(ctx,col,0,box,0.9);
+  const trunk=bs_bend([[57,-26],[61.5,-12],[63,3],[62,17],[63,28],[66.5,35],[71,34]],live?0.16:0.1,live?TAU*t/5.3:1,0.7),tw=[7.4,6.1,5.1,4.3,3.7,3.2,2.7];
+  const tail=bs_bend([[-60,-25],[-65,-12],[-66.5,1],[-66,9]],live?0.28:0.15,live?TAU*t/3.1:1,0.9);
+  // the tail and the trunk, under the body and head (their roots hide there)
+  bs_form(ctx,c=>{bs_tube(c,tail,[1.8,1.4,1.15,1]);bs_loop(c,[[tail[3][0]-1.6,tail[3][1]-1],[tail[3][0]+1.8,tail[3][1]-0.6],[tail[3][0]+1.3,tail[3][1]+4.6],[tail[3][0]-0.9,tail[3][1]+5.4]]);bs_tube(c,trunk,tw);},col,fill,1,2.6,6);
+  const wr=[];for(let k=2;k<trunk.length-1;k++)for(const f of [0.15,0.45,0.75]){const a=bs_mid(trunk[k-1],trunk[k],f),b=trunk[k],dx=b[0]-trunk[k-1][0],dy=b[1]-trunk[k-1][1],d=Math.hypot(dx,dy)||1,nx=-dy/d,ny=dx/d,ww=lerp(tw[k-1],tw[k],f)*0.82;
+    wr.push([[a[0]+nx*ww,a[1]+ny*ww],[a[0]+dx/d*0.9,a[1]+dy/d*0.9],[a[0]-nx*ww*0.55,a[1]-ny*ww*0.55]]);}
+  bs_lines(ctx,wr,col,0.38,0.5,0.2);
+  // body, legs, head and tusk: still, so drawn once
+  const draw=live&&!o.bs_nostill?(c,fn)=>bs_still(c,"ele"+col.join(),[-72,-58,76,43],fn):(c,fn)=>fn(c);
+  draw(ctx,g=>bs_eleBody(g,col,box));
+  // the ear, fanning out from the side of the head, and its veins
+  ctx.save();ctx.translate(35,0);ctx.scale(1-0.16*ef,1);ctx.rotate(-0.03*ef);ctx.translate(-35,0);
+  bs_form(ctx,c=>bs_loop(c,[[35,-51],[24,-57.5],[9,-55.5],[-1,-47],[-3.5,-32],[0.5,-18],[6.5,-6],[12.5,7.5],[18.5,1.5],[25,-9],[31,-20],[35,-36]]),col,bs_fill(ctx,col,0,[-10,-58,40,8],0.9),1,2.6,7);
+  bs_lines(ctx,[[[31,-46],[22,-44],[12,-40],[6,-30]],[[30,-34],[20,-28],[12,-16],[13,-2]],[[22,-44],[17,-34],[10,-26]],[[24,-50],[14,-51],[5,-46]]],col,0.34,0.5,0.2);
+  bs_lines(ctx,[[[34,-48],[33,-34],[30,-22],[24,-9]]],col,0.5,0.8,0.3);
+  ctx.restore();
+  // eye, with its fold, and the mouth under the trunk
+  bs_eye(ctx,50.5,-34,1.45,col,bl);bs_lines(ctx,[[[46.5,-37.5],[50.5,-38.8],[54,-37]],[[56,-14],[52,-13],[48,-14]]],col,0.5,0.5,0.25);
+  ctx.restore();}
+// the still part: far legs; body (high shoulder, dipping back, rounded rump, the belly sagging a little), near legs on broad flat soles, the head;
+// the tusk; wrinkles at the knees and ankles, folds on the shoulder, behind the elbow and on the belly; toenails
+function bs_eleBody(ctx,col,box){
+  const leg=(c,p,w,fx)=>{bs_tube(c,p,w);bs_loop(c,[[fx-8.8,31.5],[fx+8.8,31.5],[fx+10.6,37.2],[fx+9.8,40],[fx-9.8,40],[fx-10.6,37.2]]);};
+  const legs=[[[18,-12],[20,8],[21,20],[21.3,30.5]],[[-44,-14],[-42,8],[-43.5,20],[-43,30.5]]],lw=[[12,9.4,8.6,9.6],[13,9.8,8.6,9.6]];
+  bs_form(ctx,c=>{leg(c,[[8,-10],[9,10],[10,21],[9.8,30]],[10,8.2,7.6,8.6],9.8);leg(c,[[-52,-12],[-51,10],[-53,21],[-52.2,30]],[11,8.4,7.6,8.6],-52.2);},col,bs_fill(ctx,col,0.6,box,0.95),0.4,2.2,0);
+  const body=[[-62,-12],[-60,-28],[-50,-41],[-32,-44],[-14,-41],[2,-45],[16,-50],[28,-49],[37,-43],[40,-12],[32,3],[20,8.5],[4,11.5],[-12,11.5],[-32,7],[-50,2],[-60,-4]];
+  const head=[[30,-50],[40,-54],[50,-51],[56.5,-42],[59.5,-32],[60,-22],[55,-13],[45,-12],[37,-17],[32,-32]];
+  bs_form(ctx,c=>{bs_loop(c,body);legs.forEach((p,k)=>leg(c,p,lw[k],p[3][0]));bs_loop(c,head);},col,bs_fill(ctx,col,0,box,0.9),1,2.6,10);
+  ctx.beginPath();bs_tube(ctx,[[55,-16],[59.5,-9],[65.5,-5],[71,-6.5]],[2.3,2.1,1.6,0.5]);glow(ctx,64,-7,7,col,0.25);ctx.fillStyle=rgba(mix(col,[255,248,230],0.7),0.95);ctx.fill();
+  const wr=[];legs.forEach(p=>{const a=bs_mid(p[1],p[2],0.7),b=bs_mid(p[2],p[3],0.55);wr.push([[a[0]-6.5,a[1]+0.5],[a[0],a[1]+1.3],[a[0]+6,a[1]+0.3]],[[a[0]-5.5,a[1]+3.2],[a[0],a[1]+3.8],[a[0]+5,a[1]+3]],[[b[0]-6.5,b[1]],[b[0],b[1]+0.8],[b[0]+6,b[1]+0.2]]);});
+  wr.push([[-4,-34],[-2,-22],[-5,-10]],[[-18,8.5],[-8,7],[4,8]],[[34,-40],[35,-30],[33,-20]],[[28,-3],[25,2.5],[24.5,8]],[[-36,-2],[-38,4]]);
+  bs_lines(ctx,wr,col,0.38,0.55,0.2);
+  ctx.beginPath();legs.forEach(p=>{const f=p[3][0];for(let k=0;k<3;k++){const nx=f+0.5+k*3.6,r=1.5+0.2*k;ctx.moveTo(nx+r,39);ctx.arc(nx,39,r,0,Math.PI,true);}});ctx.lineWidth=0.9/BS_ST.s;ctx.strokeStyle=rgba(col,0.45);ctx.stroke();}
+
+/* ---------- common marmoset (Callithrix jacchus): a small monkey hunched on a branch, its head (a little wider than tall, sunk into the
+   shoulders) turned toward us: a dark brown face with paler rings round the eyes, a white blaze on the forehead, fans of white fur round the ears;
+   a grizzled, barred back; a long tail ringed pale and dark; claws gripping the branch. Options: t (breath, a head that tilts and turns, blinks,
+   the ear tufts stirring, the tail swaying) ---------- */
+function marmoset(ctx,x,y,s,col,o){o=o||{};if(bs_layered(ctx,x,y,s,o,[-80,-50,80,62],(c,oo)=>marmoset(c,x,y,s,col,oo)))return;
+  col=col||[230,210,180];const t=o.t,live=t!=null;if(!bs_begin(ctx,x,y,s,o))return;
+  const Z=1.16;ctx.translate(0,40);ctx.scale(Z,Z);ctx.translate(0,-40);BS_ST.s=s*Z;
+  const br=live?1+0.04*Math.sin(TAU*t/2.6):1,tilt=live?0.16*bs_drift(t,51,1.9):0.06,turn=live?0.5+0.5*bs_drift(t,53,2.6):0.5,bl=bs_blink(t,9),box=[-40,-40,40,50],fill=bs_fill(ctx,col,0,box,0.85);
+  // the branch, with a twig: still
+  const brn=c=>bs_form(c,g=>{bs_tube(g,[[-66,45],[-36,41.5],[-6,40.5],[26,42],[62,39.5]],[2.6,3.6,4,3.6,2.8]);bs_tube(g,[[34,41.5],[44,34],[50,31]],[2,1.4,0.9]);},col,bs_fill(c,col,0.5,box),0.4,2,0);
+  if(live&&!o.bs_in)bs_still(ctx,"mbr"+col.join(),[-70,28,66,50],brn);else brn(ctx);
+  const tl=bs_bend([[-11,32],[-17,40.5],[-25,46.5],[-35,50],[-45.5,50.5],[-54.5,47.5],[-59.5,41.5],[-58,35.5]],live?0.08:0.04,live?TAU*t/3.7:0.5,0.8),tw=[3.4,3.3,3.2,3.1,3,2.8,2.5,2.1];
+  const P=[-6,31],M=[-11,16],S=[-2,1],N=[3,-3],leg=[P,[10,23],[4.5,35.5],[11.5,38.5]],arm=[[S[0]+1,S[1]+2],[5,16],[11.5,32.5],[15.5,37.5]],aw=[4.4,3.3,2.3,2.2];
+  const H=[8.5,-12],hp=bs_rot(H,tilt),fx=(turn-0.5)*2.4;
+  const skull=[[-10.8,1.5],[-10,-4.6],[-6.2,-8.3],[0,-9],[6.2,-8.3],[10,-4.6],[10.8,1.5],[8.6,5.8],[4.4,8.4],[1.4+fx*0.3,10.2],[-1.4+fx*0.3,10.2],[-4.4,8.4],[-8.6,5.8]].map(hp);
+  // the white fans of fur round the ears, behind the head, stirring a little
+  const tu=live?0.07*Math.sin(TAU*t/2.2):0,wh=mix(col,[255,255,255],0.72),fan=sd=>{const q=[[7.6,-6.8],[11.6,-12.2],[14+tu*16,-14.6],[16.2,-12.8],[18.6,-12.4+tu*10],[19.4,-9.4],[21,-7],[20.4,-4.2+tu*6],[21,-1.2],[18.8,1.2],[17.6,3.6],[14.2,3],[10,3.4]].map(p=>hp([sd*(p[0]+(sd>0?fx:-fx)*0.3),p[1]]));return q;};
+  for(const sd of [-1,1]){const q=fan(sd);ctx.beginPath();bs_loop(ctx,q);ctx.fillStyle=rgba(wh,0.7);ctx.fill();
+    const c0=hp([sd*9,-2]),L=[];for(let k=0;k<4;k++){const a=-1.1+k*0.62,r=8.5+2*Math.sin(k*1.7);L.push([c0,[c0[0]+sd*Math.cos(a)*r*0.55,c0[1]+Math.sin(a)*r*0.55],[c0[0]+sd*Math.cos(a)*r,c0[1]+Math.sin(a)*r]]);}bs_lines(ctx,L,wh,0.9,0.35,0.12);}
+  // the far arm and leg, behind
+  bs_form(ctx,c=>{bs_tube(c,[[S[0]+3,S[1]+3],[12,17],[18,34],[21,38.5]],[4,2.9,2.1,2]);bs_tube(c,[P,[12.5,26],[8,36.5],[15,39.5]],[7,4,2.3,2]);},col,bs_fill(ctx,col,0.6,box),0.4,2,0);
+  // body, head, near limbs and the tail, as one form
+  bs_form(ctx,c=>{bs_torso(c,[P,M,S,N],[10*br,8.5*br,7,5.5],[9*br,9*br,8,6],6,3);bs_loop(c,skull);bs_tube(c,leg,[7.5,4.4,2.6,2.1]);bs_tube(c,arm,aw);bs_tube(c,tl,tw);},col,fill,1,2.4,8);
+  // pale rings round the dark tail, bars across the back, the arm and thigh against the body, claws over the branch
+  const bands=[];for(let k=0;k<tl.length-1;k++)for(const f of [0.2,0.7]){const a=bs_mid(tl[k],tl[k+1],f),dx=tl[k+1][0]-tl[k][0],dy=tl[k+1][1]-tl[k][1],d=Math.hypot(dx,dy)||1,nx=-dy/d,ny=dx/d,ww=lerp(tw[k],tw[k+1],f)*0.88;
+    bands.push([[a[0]+nx*ww,a[1]+ny*ww],[a[0]+dx/d*0.7,a[1]+dy/d*0.7],[a[0]-nx*ww,a[1]-ny*ww]]);}
+  bs_lines(ctx,bands,wh,0.62,1.05,0.8);
+  const bars=[];for(let k=0;k<5;k++){const a=bs_mid(P,M,0.12+k*0.2),dx=M[0]-P[0],dy=M[1]-P[1],d=Math.hypot(dx,dy),nx=dy/d,ny=-dx/d;bars.push([[a[0]+nx*9,a[1]+ny*9],[a[0]+nx*5+dx/d,a[1]+ny*5+dy/d],[a[0]+nx*1.5,a[1]+ny*1.5]]);}
+  bs_lines(ctx,bars,mix(col,[255,255,255],0.25),0.42,0.6,0.2);
+  const lt=bs_side(leg,[7.5,4.4,2.6,2.1],-1),ab=bs_side(arm,aw,1);bs_lines(ctx,[[bs_mid(lt[0],lt[1],0.4),lt[1]],[bs_mid(ab[0],ab[1],0.35),ab[1],bs_mid(ab[1],ab[2],0.5)],
+    [[16.5,37.8],[18,39.6],[17.4,41.6]],[[12.6,38.9],[13.8,40.8],[13,42.4]]],col,0.5,0.3,0.25);
+  // the face: dark brown, paler round the eyes, a white blaze above, a small dark muzzle with its nostrils
+  ctx.beginPath();bs_loop(ctx,[[-7.4+fx,-2.6],[-3.6+fx,-5.2],[0+fx,-4.4],[3.6+fx,-5.2],[7.4+fx,-2.6],[7.8+fx,2.2],[4.6+fx,6.8],[0+fx,8.6],[-4.6+fx,6.8],[-7.8+fx,2.2]].map(hp));ctx.fillStyle="rgba(24,16,12,0.8)";ctx.fill();
+  ctx.beginPath();for(const sd of [-1,1]){const e=hp([sd*3.5+fx,-1.2]);ctx.moveTo(e[0]+2.5,e[1]);ctx.arc(e[0],e[1],2.5,0,TAU);}ctx.fillStyle=rgba(mix(col,[120,90,60],0.4),0.26);ctx.fill();
+  ctx.beginPath();bs_loop(ctx,[[0+fx*0.8,-8.6],[1.4+fx*0.8,-6.4],[0.9+fx*0.9,-3.6],[0+fx,-2.8],[-0.9+fx*0.9,-3.6],[-1.4+fx*0.8,-6.4]].map(hp));ctx.fillStyle=rgba(wh,0.92);ctx.fill();
+  ctx.beginPath();bs_loop(ctx,[[-2.2+fx,3.2],[2.2+fx,3.2],[1.6+fx,5.6],[-1.6+fx,5.6]].map(hp));ctx.fillStyle="rgba(8,6,6,0.75)";ctx.fill();
+  ctx.beginPath();for(const sd of [-1,1]){const n=hp([sd*0.8+fx,3.9]);ctx.moveTo(n[0]+0.45,n[1]);ctx.arc(n[0],n[1],0.45,0,TAU);}ctx.fillStyle=rgba(col,0.55);ctx.fill();
+  for(const sd of [-1,1]){const e=hp([sd*3.5+fx,-1.2]);bs_eye(ctx,e[0],e[1],1.1,col,bl);}
+  ctx.restore();}
+/* ---------- European rabbit (Oryctolagus cuniculus): options.run 0 sits alert, 1 runs a half-bound (the hind feet land together ahead of the
+   front feet's prints, the back rounds and stretches, the ears lie back, the white scut shows); in between it lollops. options.dist, the px it
+   has travelled, keeps its feet in step with the ground (it gets up from sitting over its first stride); without it the gait keeps time with t ---------- */
+const BS_RB={S:96,hd:0.36,fd:0.3,fo:0.44,hl:4,fl:34,f0:1.44};
+// hip and shoulder joints, the back's arch, the neck (the head's centre from the shoulder), the head's tilt, the ears (tilt back; the far one's
+// spread forward), the tail cocked
+const BS_RB_SIT={H:[-10,6],S:[14,-4],ar:8,nk:[15,-17],ha:0.3,ea:0.16,es:0.42,tu:0};
+const BS_RB_RUN=[ // phase 0: the hind feet land
+  [0,   {H:[-6,-1], S:[16,-6], ar:7, nk:[15,-15],ha:0.42,ea:0.72,es:0.3,tu:1}],
+  [0.18,{H:[-8,-8], S:[21,-10],ar:3, nk:[15,-15],ha:0.38,ea:0.78,es:0.3,tu:1}],
+  [0.36,{H:[-9,-14],S:[25,-13],ar:-1,nk:[14,-14],ha:0.32,ea:0.84,es:0.3,tu:1}],
+  [0.43,{H:[-10,-16],S:[25,-12],ar:-1,nk:[14,-14],ha:0.36,ea:0.82,es:0.3,tu:1}],
+  [0.52,{H:[-10,-13],S:[23,-8], ar:1, nk:[15,-15],ha:0.44,ea:0.78,es:0.3,tu:1}],
+  [0.66,{H:[-8,-8], S:[20,-6], ar:4, nk:[15,-16],ha:0.48,ea:0.74,es:0.3,tu:1}],
+  [0.78,{H:[-6,-7], S:[18,-8], ar:6, nk:[15,-16],ha:0.46,ea:0.72,es:0.3,tu:1}],
+  [0.89,{H:[-6,-8], S:[17,-10],ar:8, nk:[15,-16],ha:0.44,ea:0.72,es:0.3,tu:1}]];
+// a foot through one cycle (ph from its touchdown): planted for d of it and sliding back at the ground's speed, then a swing that trails, swings
+// through, reaches and settles back; returns [x, y, stance progress (0..1) or swing progress (-1..0)]
+function bs_rbFoot(ph,d,land,h){ph-=Math.floor(ph);const S=BS_RB.S;if(ph<d)return[land-S*ph,24,ph/d];const u=(ph-d)/(1-d),lift=land-S*d,B=S*(1-d)/Math.PI,sn=Math.sin(Math.PI*u);
+  return[lift+(land-lift)*u*u*(3-2*u)-B*sn*(1-u)*(1-u)+B*sn*u*u,24-h*sn,-Math.max(1e-4,u)];}
+const BS_RB_HA=[[0,2.05],[0.25,2.45],[0.45,2],[0.65,0.9],[0.85,0.3],[1,0.1]],BS_RB_FA=[[0,1.9],[0.2,2.3],[0.5,1.75],[0.8,0.55],[1,0.2]];
+function rabbit(ctx,x,y,s,col,t,o){o=o||{};if(bs_layered(ctx,x,y,s,o,[-56,-80,62,32],(c,oo)=>rabbit(c,x,y,s,col,t,oo)))return;
+  col=col||[230,220,200];const R=BS_RB,tt=t||0,live=t!=null,hasD=o.dist!=null;let run=clamp(o.run==null?1:o.run,0,1);if(hasD)run*=sstep(0,0.4*R.S*s,o.dist);
+  if(!bs_begin(ctx,x,y,s,o))return;
+  const ph=hasD?o.dist/(R.S*s):tt*R.f0+0.05,q=run>0?bs_blend(BS_RB_SIT,bs_gait(BS_RB_RUN,ph),run):BS_RB_SIT;
+  const sniff=live?(1-run)*Math.max(0,Math.sin(TAU*tt*2.4))*Math.max(0,bs_drift(tt,63,1.3)):0,ew=live?0.07*bs_drift(tt,61,1.6)*(1-run)+0.05*Math.sin(TAU*(ph-0.15))*run:0,bl=bs_blink(live?tt:null,14);
+  const br=live?(1-run)*0.6*Math.sin(TAU*tt/1.7):0;
+  const H=q.H,S=q.S,th=Math.atan2(S[1]-H[1],S[0]-H[0]),L=Math.hypot(S[0]-H[0],S[1]-H[1]),lp=bs_rot(H,th),ar=q.ar;
+  // the body: a round haunch behind, a deep chest in front, the back rounded (more when it bunches)
+  const torso=[[-3,15+br*0.3],[-13,8],[-15.5,-2],[-10,-10.5-br*0.3],[L*0.36,-12.5-ar-br],[L*0.72,-12-ar*0.5-br*0.6],[L+2,-9.5],[L+7.5,-3],[L+8,5],[L+2,11],[L*0.55,12.5-ar*0.2+br*0.5],[L*0.18,15.5]].map(lp);
+  // the head: a blunt muzzle, a rounded brow, the cheek full; the neck is part of the body
+  const Hd=[S[0]+q.nk[0],S[1]+q.nk[1]],hp=bs_rot(Hd,q.ha),head=[[-10.5,0],[-8,-6.5],[-1.5,-9],[5,-8],[10.5,-5.2],[13.8,-1.6],[14.3,1.4],[12.6,3.8],[8.5,6.6],[1,8.4],[-6,7]].map(hp);
+  const neck=[lp([L-4,-4]),bs_mid(lp([L-2,-6]),hp([-5,3]),0.5),hp([-4,3])];
+  // the ears, from the top of the head: long (a little longer than the head), rounded at the tips; they tilt back as it runs
+  const ear=(b,e,ln)=>{const B=hp(b),dx=-Math.sin(e),dy=-Math.cos(e),bw=0.2;return[B,[B[0]+dx*ln*0.3-dy*bw,B[1]+dy*ln*0.3+dx*bw],[B[0]+dx*ln*0.68-dy*1.2,B[1]+dy*ln*0.68+dx*1.2],[B[0]+dx*ln,B[1]+dy*ln]];},ewd=[2.8,4.7,4.6,2.8];
+  const eN=ear([-3,-7.8],q.ea+ew,30),eF=ear([0.5,-8.5],q.ea-q.es-ew*0.6,29);
+  // legs: the sitting pose's and the gait's, blended
+  const hSit=dx=>[[1+dx,24],0.04],fSit=dx=>[[S[0]+8+dx,24],0.12];
+  const hRun=k=>{const f=bs_rbFoot(ph-k*0.035,R.hd,R.hl+k*2,9);return[[f[0],f[1]],f[2]>=0?lerp(0.1,2.05,sstep(0.3,1,f[2])):bs_curve(BS_RB_HA,-f[2])];};
+  const fRun=k=>{const f=bs_rbFoot(ph-R.fo-k*0.05,R.fd,R.fl+k*2.5,9);return[[f[0],f[1]],f[2]>=0?lerp(0.2,1.9,sstep(0.35,1,f[2])):bs_curve(BS_RB_FA,-f[2])];};
+  const mixL=(a,b)=>run<=0?a:run>=1?b:[bs_mid(a[0],b[0],run),lerp(a[1],b[1],run)];
+  const hindLeg=(root,f)=>{const T=f[0],J=[T[0]-15*Math.cos(f[1]),T[1]-15*Math.sin(f[1])],K=bs_ik(root,J,15,18,-1);return[root,K,J,T];};
+  const foreLeg=(root,f)=>{const P=f[0],W=[P[0]-6*Math.cos(f[1]),P[1]-6*Math.sin(f[1])],E=bs_ik(root,W,11,13,1);return[root,E,W,P];};
+  const hN=hindLeg(lp([0,3]),mixL(hSit(0),hRun(0))),hF=hindLeg(lp([2,2]),mixL(hSit(4),hRun(1))),fN=foreLeg(lp([L-3,7]),mixL(fSit(0),fRun(0))),fF=foreLeg(lp([L-1,6]),mixL(fSit(4),fRun(1)));
+  const hw=[12.5,6.4,3,2.5],fw=[5.4,3.4,2.5,2.4],box=[-40,-40,40,30];
+  // the far legs and far ear, darker, behind
+  bs_form(ctx,c=>{bs_tube(c,hF,[9,5.4,2.6,2.2]);bs_tube(c,fF,[4.6,3,2.2,2.2]);bs_tube(c,eF,ewd);},col,bs_fill(ctx,col,0.6,box),0.4,2.2,0);
+  // body, neck, head, near ear and near legs, as one form
+  bs_form(ctx,c=>{bs_loop(c,torso);bs_tube(c,neck,[8.5,8,7]);bs_loop(c,head);bs_tube(c,eN,ewd);bs_tube(c,hN,hw);bs_tube(c,fN,fw);},col,bs_fill(ctx,col,0,box),1,2.6,9);
+  // the white scut: a soft puff over the rump
+  const sc=lp([-13.5,-2-3.5*q.tu]),sr=2.8+1.4*q.tu,puff=[];for(let k=0;k<7;k++){const a=k/7*TAU+0.3,r=sr*(0.82+0.3*hash(k,71));puff.push([sc[0]+r*Math.cos(a),sc[1]+r*Math.sin(a)]);}
+  glow(ctx,sc[0],sc[1],sr*2.2,col,0.18*q.tu);ctx.beginPath();bs_loop(ctx,puff);ctx.fillStyle=rgba(mix(col,[255,255,255],0.3+0.3*q.tu),0.8+0.15*q.tu);ctx.fill();
+  // the haunch and the near foreleg against the body, the ear's inner edge, the cheek
+  const th2=bs_side(hN,hw,-1),fr=bs_side(fN,fw,1);
+  bs_lines(ctx,[[bs_mid(th2[0],th2[1],0.25),bs_mid(th2[0],th2[1],0.7),th2[1]],[bs_mid(fr[0],fr[1],0.35),fr[1],bs_mid(fr[1],fr[2],0.5)],[bs_mid(eN[0],eN[1],0.7),eN[1],eN[2],bs_mid(eN[2],eN[3],0.55)],
+    [hp([-3.5,6.6]),hp([-6,2.2]),hp([-4.8,-2.4])]],col,0.45,0.25,0.7);
+  // nose, mouth, whiskers, eye
+  const n0=hp([14,0.4+sniff*0.5]);bs_lines(ctx,[[hp([13.4,-0.8]),n0,hp([12.6,2.4])],[hp([12.8,2.6]),hp([10.4,4.4]),hp([8,4.6])]],col,0.6,0.5,0.3);
+  bs_lines(ctx,[[hp([11.5,1.6]),hp([16.5,0.4+sniff]),hp([21,0+sniff])],[hp([11.5,2.2]),hp([16.5,3]),hp([20.5,4.4])]],col,0.22,0.3,0.12);
+  const ep=hp([2,-2.6]);bs_eye(ctx,ep[0],ep[1],1.6,col,bl);
+  ctx.restore();}
+
+/* ===== What's in a word: the birds =====
+   The pigeons that sorted photos, a honeybee, the eagle the vervets fear, and the birds of the category "bird": a robin, a sparrow, a penguin and an ostrich.
+   They keep icon()'s look (a dark body lit from the upper left, a glowing rim in the colour that carries the meaning, fine inner details
+   and a small bright eye), but their shapes come from their anatomy: smooth contours, tapering legs and toes, feathers that overlap,
+   a darker far leg behind the body. options.a fades one; options.t (seconds) brings it to life: breath, blinks, a head that tilts and turns,
+   a tail that flicks, wings that beat. Every pose is a function of t and the options, so any frame draws alone.
+   A blur is the costliest thing a canvas draws, so a bird's soft glow is blurred once into a sprite (kept by what the bird is, its pose
+   and how big it is on screen) and drawn under it: the eagle's for each heading it soars at, the pigeon's wings' for each moment of a wingbeat,
+   two neighbours blended so the glow moves smoothly. */
+
+/* ---------- the drawing kit ---------- */
+const BD_INK=[20,26,40],BD_S={f:1,s:1},BD_LAY={c:null,x:null},BD_GL=new Map(),BD_GR=new Map();
+// a smooth closed curve through points (Catmull-Rom, as beziers); a point [x,y,1] is a sharp corner (a bill tip, a feather tip)
+function bd_loop(c,p){const n=p.length;c.moveTo(p[0][0],p[0][1]);
+  for(let i=0;i<n;i++){const a=p[(i+n-1)%n],b=p[i],d=p[(i+1)%n],e=p[(i+2)%n],kb=b[2]?0:1/6,kd=d[2]?0:1/6;
+    c.bezierCurveTo(b[0]+(d[0]-a[0])*kb,b[1]+(d[1]-a[1])*kb,d[0]-(e[0]-b[0])*kd,d[1]-(e[1]-b[1])*kd,d[0],d[1]);}c.closePath();}
+// a stretch of the closed curve bd_loop draws through p: its segments from point i0 to point i1 (indices past the end wrap round), as an open path
+function bd_seg(c,p,i0,i1){const n=p.length,P=i=>p[((i%n)+n)%n];c.moveTo(P(i0)[0],P(i0)[1]);
+  for(let i=i0;i<i1;i++){const a=P(i-1),b=P(i),d=P(i+1),e=P(i+2),kb=b[2]?0:1/6,kd=d[2]?0:1/6;
+    c.bezierCurveTo(b[0]+(d[0]-a[0])*kb,b[1]+(d[1]-a[1])*kb,d[0]-(e[0]-b[0])*kd,d[1]-(e[1]-b[1])*kd,d[0],d[1]);}}
+// a smooth open curve through points; m===false carries on the current subpath
+function bd_path(c,p,m){const n=p.length;if(m===false)c.lineTo(p[0][0],p[0][1]);else c.moveTo(p[0][0],p[0][1]);
+  for(let i=0;i<n-1;i++){const a=p[i?i-1:0],b=p[i],d=p[i+1],e=p[i+2<n?i+2:n-1],kb=b[2]?0:1/6,kd=d[2]?0:1/6;
+    c.bezierCurveTo(b[0]+(d[0]-a[0])*kb,b[1]+(d[1]-a[1])*kb,d[0]-(e[0]-b[0])*kd,d[1]-(e[1]-b[1])*kd,d[0],d[1]);}}
+// a tube along points p with half-widths w, rounded at both ends: legs, toes, necks, feather lines
+function bd_tube(c,p,w){const n=p.length,L=[],R=[];let a0=0,a1=0;for(let i=0;i<n;i++){const a=p[i?i-1:0],b=p[i<n-1?i+1:n-1];let dx=b[0]-a[0],dy=b[1]-a[1];const d=Math.hypot(dx,dy)||1;dx/=d;dy/=d;
+    const r=Math.max(0.02,w[i]);L.push([p[i][0]-dy*r,p[i][1]+dx*r]);R.push([p[i][0]+dy*r,p[i][1]-dx*r]);if(!i)a0=Math.atan2(dy,dx);if(i===n-1)a1=Math.atan2(dy,dx);}
+  bd_path(c,L);c.arc(p[n-1][0],p[n-1][1],Math.max(0.02,w[n-1]),a1+Math.PI/2,a1-Math.PI/2,true);bd_path(c,R.reverse(),false);c.arc(p[0][0],p[0][1],Math.max(0.02,w[0]),a0-Math.PI/2,a0+Math.PI/2,true);c.closePath();}
+function bd_taper(c,p,w0,w1){const n=p.length,w=[];for(let i=0;i<n;i++)w.push(lerp(w0,w1,n>1?i/(n-1):0));bd_tube(c,p,w);}
+// points turned by a about (px,py), then moved by (dx,dy); corner flags kept
+function bd_rot(p,px,py,a,dx,dy){const c=Math.cos(a),s=Math.sin(a);dx=dx||0;dy=dy||0;return p.map(q=>{const x=q[0]-px,y=q[1]-py,r=[px+x*c-y*s+dx,py+x*s+y*c+dy];if(q[2])r.push(q[2]);return r;});}
+const bd_mv=(p,dx,dy)=>p.map(q=>q[2]?[q[0]+dx,q[1]+dy,q[2]]:[q[0]+dx,q[1]+dy]);
+// a gradient made once and kept (its coordinates are in the bird's own units, so it serves every frame)
+function bd_g(ctx,key,make){let g=BD_GR.get(key);if(!g){g=make(ctx);if(BD_GR.size>300)BD_GR.clear();BD_GR.set(key,g);}return g;}
+function bd_lin(ctx,key,x0,y0,x1,y1,stops){return bd_g(ctx,key,c=>{const g=c.createLinearGradient(x0,y0,x1,y1);stops.forEach(s=>g.addColorStop(s[0],s[1]));return g;});}
+function bd_rad(ctx,key,x,y,r,stops){return bd_g(ctx,key,c=>{const g=c.createRadialGradient(x,y,0,x,y,r);stops.forEach(s=>g.addColorStop(s[0],s[1]));return g;});}
+// the dark fill of a bird, lit from the upper left of the screen whichever way it faces; k darkens it (a far leg, a far wing)
+function bd_fill(ctx,col,k,b){k=k||0;return bd_g(ctx,"f"+col+"|"+k+"|"+b+"|"+BD_S.f,c=>{const g=c.createLinearGradient(b[0]*BD_S.f,b[1],b[2]*BD_S.f,b[3]);
+  g.addColorStop(0,rgba(mix(mix(col,BD_INK,0.55),[6,9,16],k),0.97));g.addColorStop(1,rgba(mix([8,12,22],[3,5,10],k),0.97));return g;});}
+// one form, from its outline (points of a closed smooth curve): its rim in col, thin where the light falls (upper left) and thicker in shadow,
+// made as two fills, the outline in col and then its body inset from it (a wide stroke costs a canvas several times more)
+function bd_formP(ctx,p,col,fill,lw,ra){const s=BD_S.s,n=p.length,w=(lw||2.2)/s,lx=0.6*BD_S.f,ins=[];ra=ra==null?1:ra;let A=0;
+  for(let i=0;i<n;i++){const a=p[i],b=p[(i+1)%n];A+=a[0]*b[1]-b[0]*a[1];}const sg=A>0?1:-1;
+  for(let i=0;i<n;i++){const a=p[(i+n-1)%n],b=p[(i+1)%n];let dx=b[0]-a[0],dy=b[1]-a[1];const d=Math.hypot(dx,dy)||1,nx=sg*dy/d,ny=-sg*dx/d,k=w*(0.3+0.75*Math.max(0,nx*lx+ny*0.8));
+    const kk=p[i][3]==null?k:k*p[i][3],q=[p[i][0]-nx*kk,p[i][1]-ny*kk];if(p[i][2])q.push(1);ins.push(q);}
+  if(ra>0.01){ctx.beginPath();bd_loop(ctx,p);ctx.fillStyle=rgba(col,ra);ctx.fill();}
+  if(fill){ctx.beginPath();bd_loop(ctx,ra>0.01?ins:p);ctx.fillStyle=fill;ctx.fill();}}
+// a bird's glow: its outlines (builds, in its own units, within box, or a function giving it) stroked once with a blur onto a sprite, kept by key and by its size on
+// screen, and drawn under the bird (al: how much). Drawn with the bird's transform, it follows the bird wherever it goes.
+function bd_glow(ctx,key,box,builds,col,lw,al,soft){const m=ctx.getTransform(),ds=Math.hypot(m.c,m.d);if(!(ds>0.02)||al<=0.01)return;
+  const q=Math.max(0.02,Math.round(ds*24)/24),k=key+"|"+q+"|"+BD_S.s.toFixed(2)+"|"+col;let G=BD_GL.get(k);
+  if(!G){if(typeof box==="function")box=box();const x0=box[0]-22/q,y0=box[1]-22/q,W=Math.max(2,Math.ceil((box[2]-box[0])*q+44)),Hh=Math.max(2,Math.ceil((box[3]-box[1])*q+44)),cv=mkCanvas(W,Hh),g=cv.getContext("2d");
+    const off=soft?W+64:0;g.setTransform(q,0,0,q,-x0*q+0.5-off,-y0*q+0.7);g.lineJoin="round";g.beginPath();builds.forEach(b=>b(g));g.lineWidth=(lw||2.2)*1.3/BD_S.s;
+    // (soft: only the blur, no line at its heart, for a bird whose pose strays from the sprite's: a halo that's a pixel or two off shows no seam)
+    if(soft){g.shadowOffsetX=off;g.strokeStyle=rgba(col,1);g.shadowColor=rgba(col,0.5);g.shadowBlur=5;g.stroke();g.shadowColor=rgba(col,0.6);g.shadowBlur=13;g.stroke();}
+    else{g.strokeStyle=rgba(col,0.5);g.shadowColor=rgba(col,0.85);g.shadowBlur=11;g.stroke();}G={cv,x0,y0,w:W/q,h:Hh/q};if(BD_GL.size>240)BD_GL.delete(BD_GL.keys().next().value);BD_GL.set(k,G);}
+  // (sampled nearest while it lands pixel for pixel, upright and at its own size: a canvas resamples a sprite several times faster that way;
+  // turned (a cocked tail, a tilted head, a pitched bird) or squeezed (a bird turning), smoothed, or its edges would step and crawl)
+  const sm=Math.abs(m.b)>1e-4||Math.abs(m.c)>1e-4||Math.abs(Math.abs(m.a)/q-1)>0.04||Math.abs(Math.abs(m.d)/q-1)>0.04;
+  ctx.save();if(al!=null&&al<1)ctx.globalAlpha*=al;ctx.imageSmoothingEnabled=sm;ctx.drawImage(G.cv,G.x0,G.y0,G.w,G.h);ctx.restore();}
+// a glow made fresh each frame, for a bird whose whole shape keeps changing (the soaring eagle, a pigeon beating its wings or turning): its
+// outlines blurred once, at a quarter of their size on screen (a blur costs by the pixel, and a glow is soft anyway), onto a small canvas kept
+// for it, then drawn under the bird, smoothed
+const BD_LG={c:null,x:null};
+function bd_glowLive(ctx,box,builds,col,lw,al){const m=ctx.getTransform(),ds=Math.hypot(m.c,m.d);if(!(ds>0.02)||al<=0.01)return;
+  const k=4,q=ds/k,pad=26/ds,x0=box[0]-pad,y0=box[1]-pad,W=Math.max(2,Math.ceil((box[2]-box[0]+2*pad)*q)),Hh=Math.max(2,Math.ceil((box[3]-box[1]+2*pad)*q));if(W*Hh>4e6)return;
+  if(!BD_LG.c||BD_LG.c.width<W||BD_LG.c.height<Hh){BD_LG.c=mkCanvas(Math.max(W,BD_LG.c?BD_LG.c.width:0),Math.max(Hh,BD_LG.c?BD_LG.c.height:0));BD_LG.x=BD_LG.c.getContext("2d");}
+  const g=BD_LG.x,off=W+32;g.save();g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,W+3,Hh+3);g.setTransform(q,0,0,q,-x0*q-off,-y0*q);g.lineJoin="round";g.beginPath();builds.forEach(b=>b(g));
+  g.lineWidth=(lw||2.2)*1.6/BD_S.s;g.strokeStyle=rgba(col,1);g.shadowOffsetX=off;g.shadowColor=rgba(col,0.7);g.shadowBlur=9/k;g.stroke();g.restore();
+  ctx.save();if(al!=null&&al<1)ctx.globalAlpha*=al;ctx.imageSmoothingEnabled=true;ctx.drawImage(BD_LG.c,0,0,W,Hh,x0,y0,W/q,Hh/q);ctx.restore();}
+// fine lines drawn as plain strokes (for the smallest details): w in screen pixels
+function bd_strk(ctx,list,col,a,w){if(a<=0.01||!list.length)return;ctx.beginPath();for(const p of list)bd_path(ctx,p);ctx.lineWidth=w/BD_S.s;ctx.strokeStyle=rgba(col,a);ctx.stroke();}
+// fine inner lines, tapering: each a list of points, from w0 to w1 screen pixels (half-widths)
+function bd_lines(ctx,list,col,a,w0,w1){if(a<=0.01||!list.length)return;const s=BD_S.s;ctx.beginPath();for(const p of list)bd_taper(ctx,p,w0/s,w1/s);ctx.fillStyle=rgba(col,a);ctx.fill();}
+// an eye: a bright bead (or a dark one with a glint and a fine ring, on a pale face); op 1 open, 0 shut
+function bd_eye(ctx,x,y,r,col,op,dark){op=op==null?1:op;ctx.save();ctx.translate(x,y);ctx.scale(1,Math.max(0.1,op));
+  if(dark){ctx.fillStyle="rgb(12,9,8)";ctx.beginPath();ctx.arc(0,0,r,0,TAU);ctx.fill();ctx.lineWidth=0.7/BD_S.s;ctx.strokeStyle=rgba(col,0.6);ctx.stroke();
+    if(op>0.4){ctx.fillStyle=rgba(mix(col,[255,255,255],0.7),0.95);ctx.beginPath();ctx.arc(r*0.32*BD_S.f,-r*0.36,r*0.34,0,TAU);ctx.fill();}}
+  else{ctx.fillStyle=rgba(col,0.35);ctx.beginPath();ctx.arc(0,0,r*1.7,0,TAU);ctx.fill();ctx.fillStyle=rgba(mix(col,[255,255,255],0.45),1);ctx.beginPath();ctx.arc(0,0,r,0,TAU);ctx.fill();}
+  ctx.restore();}
+// draw a bird fn(c) at (x,y), size s, facing o.face (1 right, -1 left; in between it squeezes as it turns) or o.flip; box its reach in its units.
+// While it's see-through (a fade), it's drawn whole on a layer first, so its overlapping parts don't show through each other.
+function bd_draw(ctx,x,y,s,o,box,fn){const a=o.a==null?1:o.a,ga=ctx.globalAlpha*Math.min(1,a);if(a<=0.01||ga<=0.004||!(s>0))return;
+  let fx=(o.flip?-1:1)*(o.face==null?1:o.face);fx=(fx<0?-1:1)*Math.max(0.2,Math.abs(fx));BD_S.f=fx<0?-1:1;BD_S.s=s;
+  const put=c=>{c.translate(x,y);c.scale(s*fx,s);if(o.rot)c.rotate(o.rot);c.lineJoin="round";c.lineCap="round";};
+  if(o.rot){const r=Math.hypot(Math.max(-box[0],box[2]),Math.max(-box[1],box[3]));box=[-r,-r,r,r];}
+  if(ga<0.985){const m=ctx.getTransform(),X=[],Y=[];
+    for(const u of [box[0]*fx,box[2]*fx])for(const v of [box[1],box[3]]){const px=x+s*u,py=y+s*v;X.push(m.a*px+m.c*py+m.e);Y.push(m.b*px+m.d*py+m.f);}
+    const x0=Math.floor(Math.min(...X)-24),y0=Math.floor(Math.min(...Y)-24),w=Math.ceil(Math.max(...X)+24)-x0,h=Math.ceil(Math.max(...Y)+24)-y0;
+    if(w>=1&&h>=1&&w*h<9e6){if(!BD_LAY.c||BD_LAY.c.width<w||BD_LAY.c.height<h){BD_LAY.c=mkCanvas(Math.max(w,BD_LAY.c?BD_LAY.c.width:0),Math.max(h,BD_LAY.c?BD_LAY.c.height:0));BD_LAY.x=BD_LAY.c.getContext("2d");}
+      const c=BD_LAY.x;c.save();c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.clearRect(0,0,w,h);c.setTransform(m.a,m.b,m.c,m.d,m.e-x0,m.f-y0);put(c);fn(c);c.restore();
+      ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ga;ctx.imageSmoothingEnabled=false;ctx.drawImage(BD_LAY.c,0,0,w,h,x0,y0,w,h);ctx.restore();return;}}
+  ctx.save();put(ctx);fn(ctx);ctx.restore();}
+// a joint between a and b (bones l1, l2); bend 1 or -1 picks the side it bends to
+function bd_ik(a,b,l1,l2,bend){const dx=b[0]-a[0],dy=b[1]-a[1],d0=Math.hypot(dx,dy)||1e-6,d=clamp(d0,Math.abs(l1-l2)+0.01,l1+l2-0.01),x=(l1*l1-l2*l2+d*d)/(2*d),h=Math.sqrt(Math.max(0,l1*l1-x*x)),ux=dx/d0,uy=dy/d0;
+  return [a[0]+ux*x-uy*h*bend,a[1]+uy*x+ux*h*bend];}
+
+/* ---------- life: every value a smooth function of t (null t: a still pose) ---------- */
+// a value in -1..1 that holds, then moves quickly (over dur seconds) to the next, about every per seconds: a bird's head
+function bd_hold(t,k,per,dur){if(t==null)return 0;const u=t/per+hash(k,5)*13,i=Math.floor(u),si=i+0.7*hash(i,k),v=j=>hash(j,k+0.37)*2-1;
+  return u>=si?lerp(v(i-1),v(i),ease(clamp((u-si)*per/dur,0,1))):v(i-1);}
+// a flick now and then (0 → 1 → 0): up in rise seconds, back in fall; about every per seconds
+// (the rise starts at once and slows to a stop: a Hermite curve whose speed never tops 4/3 of the average, so no frame jumps)
+function bd_pulse(t,k,per,rise,fall){if(t==null)return 0;const u=t/per+hash(k,6)*11,i=Math.floor(u);let m=0;
+  for(let j=i-1;j<=i;j++){const d=(u-j-0.15-0.7*hash(j,k+0.71))*per;if(d>0){const v=clamp(d/rise,0,1);m=Math.max(m,d<rise?v*(1-v)*(1-v)+v*v*(3-2*v):1-sstep(0,1,(d-rise)/fall));}}return m;}
+// a blink now and then: 1 open, 0 shut
+function bd_blink(t,k){if(t==null)return 1;const P=2.9+hash(k,7)*2.2,u=((t+hash(k,8)*P)%P+P)%P;return u<0.16?1-0.95*Math.sin(Math.PI*u/0.16):1;}
+
+/* ---------- a small songbird, perched: one contour for the head and body, a tail and a folded wing that overlap it, slender legs whose toes
+   curl over a branch. G holds its shape (head points turn with the head about G.pv), paint(c,H,Bm,dip) its plumage inside the contour
+   (H(p) places head points, Bm(p) body points). L is its life: br breath, ha head tilt, hx head reach, fl a flick of tail and wings, bl blink ---------- */
+function bd_perchGeo(G,L){const dip=(L.dp==null?L.fl:L.dp)*1.1,ha=L.ha-L.fl*0.05,pv=G.pv,H=p=>bd_rot(p,pv[0],pv[1],ha,L.hx,dip),Bm=p=>bd_mv(p,0,dip);
+  const B=Bm(G.body),hd=H(G.head);B[0][0]+=L.br*0.45;B[1][0]+=L.br*0.65;B[2][1]+=L.br*0.35;
+  const ta=G.ta+L.fl*0.36,tb=[G.tb[0],G.tb[1]+dip],tl=G.tail[4][0],bw=(G.tbow||0.9)*(1-L.fl*0.6);
+  const T=p=>bd_rot(p.map(q=>{const u=q[0]/tl,r=[q[0],q[1]+bw*u*(1-u)*4];if(q[2])r.push(1);return r;}),0,0,ta,tb[0],tb[1]);
+  return{dip,H,Bm,sil:hd.slice(0,G.nf).concat(B,hd.slice(G.nf)),T};}
+const BD_L0={br:0.5,ha:0.03,hx:0,fl:0,bl:1},BD_LH={br:0.5,ha:0,hx:0,fl:0,bl:1};
+function bd_perch(c,col,G,L,paint,key){const{dip,H,Bm,sil,T}=bd_perchGeo(G,L),bx=G.box,fill=bd_fill(c,col,0,bx);
+  // the glow, blurred once: the body's, the head's apart (it follows the head as it tilts and reaches), and the tail's (it turns with the tail as it's cocked)
+  // (each an open stretch of the resting outline, so the two meet at the throat and the nape without a seam)
+  const nb=G.body.length,rs=()=>bd_perchGeo(G,BD_LH).sil;
+  c.save();c.translate(0,dip);bd_glow(c,key,[bx[0]-6,bx[1]-4,bx[2]+2,bx[3]+2],[q=>bd_seg(q,rs(),G.nf,G.nf+nb-1)],col,2.3);c.restore();
+  c.save();c.translate(G.pv[0]+L.hx,G.pv[1]+dip);c.rotate(L.ha-L.fl*0.05);c.translate(-G.pv[0],-G.pv[1]);
+  bd_glow(c,key+"h",()=>{const X=G.head.map(q=>q[0]),Y=G.head.map(q=>q[1]);return[Math.min(...X)-4,Math.min(...Y)-4,Math.max(...X)+4,Math.max(...Y)+4];},
+    [q=>{const S=rs();bd_seg(q,S,G.nf+nb-1,S.length+G.nf);}],col,2.3);c.restore();
+  c.save();c.translate(G.tb[0],G.tb[1]+dip);c.rotate(L.fl*0.36);c.translate(-G.tb[0],-G.tb[1]);
+  bd_glow(c,key+"t",()=>{const P=bd_perchGeo(G,BD_L0).T(G.tail),X=P.map(q=>q[0]),Y=P.map(q=>q[1]);return[Math.min(...X)-3,Math.min(...Y)-3,Math.max(...X)+3,Math.max(...Y)+3];},
+    [q=>bd_loop(q,bd_perchGeo(G,BD_L0).T(G.tail))],col,2.3);c.restore();
+  // the legs, behind the belly: the far one darker; three toes forward, one back
+  const legc=G.leg||mix(col,[190,140,120],0.55),lg=G.legs;
+  const legs=(dx,dy,dim)=>{const kn=[lg[0][0]+dx,lg[0][1]+dip+dy],md=[lg[1][0]+dx,lg[1][1]+dip*0.5+dy],ft=[lg[2][0]+dx,lg[2][1]+dy];c.beginPath();bd_tube(c,[kn,md,ft],[0.95,0.6,0.52]);
+    const tt=(q,w)=>bd_taper(c,[ft].concat(q.map(v=>[v[0]+dx,v[1]+dy])),w,0.2);tt(G.toes[0],0.48);tt(G.toes[1],0.44);tt(G.toes[2],0.48);
+    c.fillStyle=rgba(mix(legc,[10,12,20],dim),0.96);c.fill();};
+  legs(-3.2,-0.35,0.55);legs(0,0,0);
+  // the tail, behind the body, flicked up now and then
+  bd_formP(c,T(G.tail),col,fill,1.8,0.9);
+  bd_strk(c,G.tlines.map(T),col,0.28,0.55);
+  // head and body: one contour; then the plumage inside it
+  bd_formP(c,sil,col,fill,2.3,1);
+  c.save();c.beginPath();bd_loop(c,sil);c.clip();paint(c,H,Bm,dip);c.restore();
+  // the folded wing: coverts, then the flight feathers to a tip over the tail; a flick lifts it a little
+  const wd=L.fl*0.5,Wg=p=>bd_rot(Bm(p),G.wp[0],G.wp[1],-wd*0.08,0,wd);
+  bd_formP(c,Wg(G.wing),col,bd_fill(c,col,0.18,bx),1.5,0.85);
+  if(G.wpaint)G.wpaint(c,Wg);
+  bd_lines(c,G.wlines.map(Wg),col,0.42,0.4,0.1);
+  // the bill and the eye
+  bd_formP(c,H(G.bill),col,G.billc||"rgb(24,19,17)",1,0.6);
+  if(G.gape)bd_strk(c,[H(G.gape)],[10,8,8],0.8,0.5);
+  const e=H([G.eye])[0];bd_eye(c,e[0],e[1],G.er,col,L.bl,G.darkEye);}
+// a songbird's life: slow breath, a head that tilts and reaches in quick moves, a flick of tail and wings now and then, a blink
+function bd_perchLife(t,k){return{br:t==null?0.5:0.5+0.5*Math.sin(t*TAU*0.5+k),ha:0.13*bd_hold(t,11+k,2.4,0.2)+0.03,hx:0.5*bd_hold(t,13+k,3.1,0.4),
+  fl:bd_pulse(t,21+k,4.6,0.18,0.9),dp:bd_pulse(t==null?t:t+0.04,21+k,4.6,0.18,0.9),bl:bd_blink(t,31+k)};}
+
+/* ---------- a European robin (Erithacus rubecula), perched: plump and round-headed, an orange-red face and breast edged with blue-grey,
+   olive-brown above, a pale belly, a thin dark bill, a big dark eye, slender legs; its toes at y 22.5 (a branch's top).
+   Options: t, col (its rim), breast (false: no orange), american (true: the American robin instead), seed ---------- */
+const BD_RB={pv:[5,-15],nf:7,box:[-24,-32,20,24],darkEye:true,er:1.75,eye:[11.9,-24.6],ta:2.26,tb:[-8.4,5.4],wp:[3,-14],
+  head:[[1.5,-29.8],[7.5,-30.6],[13.6,-28.2],[16.9,-25.1],[18,-22.9,1],[17.8,-20.3,1],[16.3,-17.3],[-3.6,-25.2]],
+  body:[[17.2,-11.6],[17.2,-3.2],[11.8,6.4],[3.2,11.6],[-6.4,10.2],[-11.4,2.6],[-9.6,-8.8],[-6.6,-17.8]],
+  wing:[[3.4,-16.2],[-3,-15.4],[-9.6,-8.4],[-15.2,-0.6],[-18.8,6.2,1],[-13.4,4.2],[-5.2,2.4],[1.8,-2],[5.4,-9.2]],
+  wlines:[[[3.6,-9.4],[-1.6,-6.8],[-7,-4.6],[-10.6,-3]],[[-9.6,-3.4],[-13.2,0.6],[-16.6,4.8]],[[-7,-2.6],[-10.6,1.4],[-14.2,4.6]],[[-3.4,-1.6],[-6.8,1.4],[-10.6,3.6]]],
+  bill:[[17.6,-23.2],[20.6,-22.5],[23.6,-21.35,1],[20.4,-20.75],[17.5,-20.5]],gape:[[18.4,-21.3],[20.4,-21.3],[22.2,-21.2]],
+  tail:[[0,-1.6],[6,-2.4],[12.6,-3.1],[18,-3.7],[20.3,-3.3],[21.3,-2.1],[21.4,-0.8],[21.1,0.1],[21.4,1],[21.2,2.4],[20.1,3.4],[17.6,3.6],[12.2,2.9],[5.6,2.1],[0,1.6]],
+  tlines:[[[3,0.1],[11,0.05],[19.6,0.1]],[[4,-1.1],[12,-2],[19.6,-2.7]],[[4,1.1],[12,1.9],[19.4,2.6]]],
+  legs:[[4.4,8],[3.9,15],[3.1,21.8]],toes:[[[5.8,22],[8,22.8],[9,24.2]],[[5.4,22.5],[6.8,24.1]],[[0.6,22.2],[-1.2,23.2],[-1.8,24.4]]]};
+function robin(ctx,x,y,s,o){o=o||{};if(o.american)return bd_amRobin(ctx,x,y,s,o);const col=o.col||[255,160,110],L=bd_perchLife(o.t,o.seed||1);
+  bd_draw(ctx,x,y,s,o,[-30,-36,30,28],c=>bd_perch(c,col,BD_RB,L,(c,H,Bm,dip)=>{if(o.breast===false)return;
+    // a pale belly, the blue-grey border, then the orange-red face and breast
+    c.save();c.translate(0,dip);c.fillStyle=bd_rad(c,"rb-belly",6.4,6.4,11.5,[[0,"rgba(238,234,224,0.6)"],[0.55,"rgba(236,230,218,0.44)"],[1,"rgba(236,230,218,0)"]]);c.fillRect(-7,-6,28,24);c.restore();
+    c.beginPath();bd_tube(c,H([[17.5,-29.6],[14.6,-29.2],[10.6,-29.4],[6.4,-27],[3.7,-22],[3.8,-15.6]]).concat(Bm([[5.6,-7.5],[8.4,-0.6],[12.2,3.3]])),[0.4,1,1.25,1.35,1.35,1.3,1.05,0.7,0.25]);
+    c.fillStyle="rgba(146,166,194,0.6)";c.fill();c.beginPath();
+    bd_loop(c,H([[17.6,-28.4],[14.8,-28.2],[10.9,-28.1],[7.1,-25.8],[4.9,-21.5]]).concat(Bm([[5,-15.2],[6.8,-7.2],[9.6,-0.4],[14,3.6],[24,6],[26,-14]]),H([[24,-33]])));
+    c.fillStyle=bd_lin(c,"rb-breast",8,-26,16,6,[[0,"rgba(255,130,72,0.88)"],[1,"rgba(230,94,46,0.82)"]]);c.fill();},"rb"));}
+/* the American robin (Turdus migratorius), for robin(..., {american: true}): the other bird English calls a robin, a thrush half as long again:
+   slimmer and longer-tailed, a blackish head with broken white eye-rings, a yellow bill, a white-streaked throat, a brick-orange breast
+   and a white vent, grey-brown above */
+const BD_AR=(()=>{const X=(p,k)=>p.map(q=>{const r=[q[0]*k,q[1]];if(q[2])r.push(1);return r;}),R=BD_RB;
+  return Object.assign({},R,{body:X(R.body,1.12),head:X(R.head,1.05),wing:X(R.wing,1.14),wlines:R.wlines.map(p=>X(p,1.14)),ta:2.36,tb:[-9.6,5],eye:[12.4,-24.6],er:1.6,
+    tail:R.tail.map(q=>{const r=[q[0]*1.3,q[1]*1.05];if(q[2])r.push(1);return r;}),tlines:R.tlines.map(p=>p.map(q=>[q[0]*1.3,q[1]])),
+    bill:[[18.4,-23.3],[21.8,-22.7],[25.4,-21.5,1],[21.6,-20.7],[18.3,-20.4]],billc:"rgb(222,178,56)",gape:null,box:[-26,-32,22,24],leg:[120,96,84]});})();
+function bd_amRobin(ctx,x,y,s,o){const col=o.col||[200,150,120],L=bd_perchLife(o.t,(o.seed||1)+9);
+  bd_draw(ctx,x,y,s,o,[-34,-36,32,28],c=>bd_perch(c,col,BD_AR,L,(c,H,Bm,dip)=>{
+    // brick-orange from throat to belly, a white vent, a blackish head
+    c.beginPath();bd_loop(c,H([[17.4,-17.6],[11.6,-18.6]]).concat(Bm([[6.4,-15],[5.6,-6],[8.6,2.6],[14,7.4],[24,8],[26,-14]]),H([[24,-20]])));
+    c.fillStyle=bd_lin(c,"ar-breast",8,-18,16,8,[[0,"rgba(214,104,52,0.86)"],[1,"rgba(186,80,40,0.82)"]]);c.fill();
+    c.save();c.translate(0,dip);c.fillStyle=bd_rad(c,"ar-vent",2,11,8,[[0,"rgba(240,236,228,0.6)"],[1,"rgba(240,236,228,0)"]]);c.fillRect(-8,2,20,14);c.restore();
+    c.beginPath();bd_loop(c,H([[19,-19.4],[15.4,-17.6],[11,-18.8],[6.6,-20.4],[2.4,-22.6],[-2,-24],[-6,-33],[20,-33]]));c.fillStyle="rgba(14,14,18,0.8)";c.fill();
+    // white arcs above and below the eye, white streaks on the throat
+    const e=H([BD_AR.eye])[0];c.save();c.translate(e[0],e[1]);c.lineWidth=0.75;c.strokeStyle="rgba(244,242,236,0.95)";c.beginPath();c.arc(0,0,2.5,-2.7,-0.5);c.stroke();c.beginPath();c.arc(0,0,2.5,0.5,2.6);c.stroke();c.restore();
+    bd_strk(c,[H([[16.4,-18.4],[15.6,-16]]),H([[14.6,-18.6],[13.8,-16.2]]),H([[12.8,-18.8],[12.2,-16.6]])],[244,242,236],0.75,0.6);},"ar"));}
+
+/* ---------- a house sparrow (Passer domesticus), a male: chunky and big-headed, a grey crown, a chestnut band from the eye round the nape,
+   pale cheeks, a black bib and lores, a stout conical bill, a streaked brown back, a white wing bar, pale grey below, short legs.
+   Options: t, col (its rim), female (plain: no bib, a buff stripe over the eye), seed ---------- */
+const BD_SP={pv:[4,-14],nf:7,box:[-26,-30,20,24],er:1.45,eye:[10.4,-21.9],darkEye:true,tbow:-0.5,ta:2.72,tb:[-10.6,3.6],wp:[2,-12],
+  head:[[0.4,-26.6],[6.6,-28],[12.6,-26.3],[15.2,-23.8],[16.4,-22.4,1],[16.2,-17.6,1],[14.6,-15],[-4.6,-22.4]],
+  body:[[16.2,-9.4],[16.4,-1.8],[11.6,6.6],[2.6,10.8],[-7.4,8.6],[-13.6,0.8],[-11.6,-9],[-7.2,-16.6]],
+  wing:[[2.8,-14.2],[-4,-14.2],[-11,-7.8],[-16.4,-1.6],[-20.4,3.6,1],[-14,4.4],[-6,3.6],[1,-0.6],[4.6,-7.6]],
+  wlines:[[[-9.4,-3.6],[-13.8,0.2],[-18,3.2]],[[-7.2,-2.6],[-11.2,1.2],[-15.2,3.9]],[[-4.6,-1.8],[-8.2,1.6],[-12,3.8]]],
+  bill:[[16.3,-22.7],[19.4,-21.7],[22.4,-19.9,1],[19.4,-18.6],[16.2,-17.7]],gape:[[16.8,-19.9],[19,-19.8],[21.2,-19.8]],
+  tail:[[0,-1.8],[5.5,-2.4],[11,-3],[15.2,-3.5],[17.3,-3.1],[18.1,-1.9],[17.9,-0.7],[17.45,0.1],[17.9,0.9],[18.1,2],[17.2,3.2],[15.2,3.5],[11,3],[5.5,2.3],[0,1.8]],
+  tlines:[[[3,0.1],[10,0.05],[16.4,0.1]],[[4,-1.2],[10,-2],[16.6,-2.6]],[[4,1.2],[10,2],[16.4,2.6]]],
+  legs:[[3.6,8],[3.3,12.6],[2.8,18.2]],toes:[[[5.2,18.4],[7.3,19.1],[8.2,20.4]],[[4.9,18.9],[6.1,20.3]],[[0.4,18.6],[-1.4,19.5],[-2,20.7]]],
+  leg:[196,150,128],
+  // the wing: chestnut coverts, a white bar, dark centres to the tertials edged buff, the scapulars streaked black and buff
+  wpaint:(c,W)=>{c.save();c.beginPath();bd_loop(c,W(BD_SP.wing));c.clip();
+    c.fillStyle=bd_lin(c,"sp-cov",-6,-14,2,2,[[0,"rgba(150,86,46,0.55)"],[1,"rgba(120,70,38,0.35)"]]);c.beginPath();bd_loop(c,W([[3,-15],[-5,-15],[-8,-9],[-6,-7.2],[-2,-8.4],[2,-9.4],[5,-10]]));c.fill();
+    c.beginPath();bd_loop(c,W([[-6.4,-5.8],[-9.6,-3],[-13,1],[-15,3.6],[-10,3.4],[-6,1.8],[-3.2,-1.8],[-2.6,-5]]));c.fillStyle="rgba(10,8,8,0.55)";c.fill();c.restore();
+    c.beginPath();bd_tube(c,W([[3.2,-9.6],[0.4,-8.6],[-3.2,-7.6],[-6.6,-6.6]]),[0.45,0.8,0.8,0.35]);c.fillStyle="rgba(244,240,230,0.9)";c.fill();
+    bd_lines(c,[W([[-2.4,-6],[-5.6,-1.4],[-9.4,2.4]]),W([[-5.2,-6.4],[-8.6,-2.4],[-12.4,1.4]])],[222,190,140],0.7,0.35,0.15);
+    bd_lines(c,[W([[-1,-13.4],[-5.2,-11.4],[-9.4,-8]]),W([[-3.4,-12.2],[-7.6,-9.4]])],[10,8,8],0.85,0.55,0.2);bd_lines(c,[W([[-0.6,-12.2],[-4.6,-10.2],[-8.6,-7.2]])],[230,196,146],0.75,0.4,0.15);}};
+function sparrow(ctx,x,y,s,o){o=o||{};const col=o.col||[210,170,120],L=bd_perchLife(o.t,(o.seed||2)+3),fem=!!o.female;
+  bd_draw(ctx,x,y,s,o,[-30,-32,26,28],c=>bd_perch(c,col,BD_SP,L,(c,H,Bm,dip)=>{
+    // pale grey below, the mantle streaked
+    c.save();c.translate(0,dip);c.fillStyle=bd_rad(c,"sp-belly",9,2,14,[[0,"rgba(214,210,200,0.34)"],[1,"rgba(214,210,200,0)"]]);c.fillRect(-6,-14,30,34);c.restore();
+    bd_lines(c,[Bm([[-6.2,-15.6],[-8.6,-12.4],[-10.4,-9.2]]),Bm([[-3.6,-15.8],[-6.2,-12.2],[-8.2,-9.8]])],[12,9,8],0.8,0.55,0.2);
+    bd_lines(c,[Bm([[-4.8,-16.2],[-7.4,-12.6],[-9.4,-9.6]])],[226,190,140],0.7,0.4,0.15);
+    if(fem){c.beginPath();bd_loop(c,H([[16,-24.6],[12,-25.6],[6,-25],[0,-24],[-6,-22],[-6,-32],[18,-32]]));c.fillStyle="rgba(120,96,70,0.5)";c.fill();
+      c.beginPath();bd_tube(c,H([[12.2,-23.4],[8.6,-23.6],[4.4,-23.2],[0.6,-22]]),[0.3,0.75,0.75,0.3]);c.fillStyle="rgba(226,204,160,0.7)";c.fill();return;}
+    // grey crown, chestnut band behind the eye, pale cheek
+    c.beginPath();bd_loop(c,H([[16.6,-24.4],[12.6,-24.6],[8.4,-24.2],[3.4,-23.6],[-1.2,-23.8],[-6.4,-22.6],[-8,-32],[18,-32]]));c.fillStyle="rgba(146,154,168,0.62)";c.fill();
+    c.beginPath();bd_loop(c,H([[11.6,-23.3],[6.2,-24.2],[1,-23.6],[-3.4,-21.6],[-5.2,-17.8],[-4.4,-14.8],[-1.4,-16.8],[2.8,-19.6],[7.4,-21.2]]));c.fillStyle="rgba(150,82,42,0.9)";c.fill();
+    c.beginPath();bd_loop(c,H([[11.4,-20.4],[7.4,-20.6],[3.6,-19.2],[2.2,-15.6],[5.4,-13],[10.4,-13.8],[13.2,-17]]));c.fillStyle="rgba(216,212,204,0.6)";c.fill();
+    // the black bib and lores, a white spot behind the eye
+    c.beginPath();bd_loop(c,H([[16.2,-18],[13.6,-17.2]]).concat(Bm([[11.8,-12.4],[10.4,-7.4],[10.8,-3],[13.6,-1.6],[16.6,-3.4],[20,-8]]),H([[20,-18.6]])));
+    bd_tube(c,H([[16.2,-21],[13.8,-21.3],[11.6,-21.7]]),[0.95,0.9,0.6]);c.fillStyle="rgba(5,5,7,0.95)";c.fill();
+    const sp=H([[8,-23.4]])[0];c.beginPath();c.ellipse(sp[0],sp[1],0.9,0.6,-0.3,0,TAU);c.fillStyle="rgba(240,238,232,0.85)";c.fill();},"sp"+(fem?"f":"")));}
+
+/* ---------- a rock dove (Columba livia), the pigeon of the photo experiments: plump, a small head, a short dark bill with a pale cere,
+   an orange eye, a green and purple sheen on the neck, pale grey wings with two black bars, a dark band at the tail's tip, short coral-pink legs.
+   It stands, walks (its head holding still while its body walks past, then darting forward), pecks, and flies short hops: its wing unfolds
+   from its side into a beating wing (a small 3D model, seen a little from above). It turns as a round bird: each part is foreshortened by its
+   own depth, so face on its body and head stay round, its bill points at us, both eyes and both legs show. Options: a, t, face (1 right,
+   -1 left, between: turning, by way of facing us), and the pose, usually from bd_route(): walk (0..1) and step (its gait, in strides),
+   fly (0..1) and flap (wingbeats), peck (0..1), pitch. Its origin is the middle of its body; its toes rest at y 36 ---------- */
+const BD_PI={head:[[17.6,-31.8],[22.6,-34.8],[28.6,-33.4],[32,-29.9,1],[31.8,-27.5,1],[29.4,-25.8],[25.6,-23.4]],pv:[22,-26],
+  body:[[30.4,-7.4],[29,3.6],[22,12.4],[10,18.4],[-4,19.2],[-14,16.4],[-21,11],[-24.6,3.4],[-21,-4.6],[-10.6,-12.6],[2,-19.4]],
+  bill:[[31.6,-30.2],[34.6,-29.6],[37.6,-28.6],[38.6,-27.6,1],[36.6,-27.4],[34,-27.3],[31.6,-27.4]],
+  wingF:[[15,-7],[12,-1],[5,5],[-5,8.6],[-17,8.6],[-29,6.4],[-37,4.4],[-42.4,2.4,1],[-33,-1.2],[-21,-5.8],[-8,-11],[4,-14.6],[13,-13]],
+  wingE:[[12,0],[13.6,14],[13.2,29],[10,43],[4,57],[-4,70.5],[-11,81.5],[-16.6,89.5,1],[-20.2,80.5],[-20.8,67],[-22.6,53],[-22,36],[-16.6,6]],
+  barF:[[[-4,-10.6],[-9.6,-8.6],[-15.2,-6.2],[-20.6,-3.6]],[[-6.4,-5.2],[-12,-3.2],[-17.6,-0.8],[-22.8,1.8]]],
+  barE:[[[-3.6,6],[-5.6,16],[-6.6,26],[-6.2,36]],[[-9.6,6],[-11.8,16],[-12.8,26],[-12.4,36]]]};
+function pigeon(ctx,x,y,s,col,o){o=o||{};col=col||[200,215,240];const t=o.t,k=o.seed||6,fc=(o.flip?-1:1)*(o.face==null?1:o.face);
+  const L={t,br:t==null?0.5:0.5+0.5*Math.sin(t*TAU*0.45+k),ha:0.1*bd_hold(t,71+k,2.2,0.22),bl:bd_blink(t,77+k),walk:o.walk||0,step:o.step||0,fly:o.fly||0,flap:o.flap||0,
+    peck:o.peck||0,pitch:o.pitch||0,sheen:t==null?0:Math.sin(t*0.8+k),cz:Math.min(1,Math.abs(fc))};
+  bd_draw(ctx,x,y,s,Object.assign({},o,{flip:false,face:fc<0?-1:1,rot:(o.rot||0)-L.pitch}),[-60,-80,50,46],c=>bd_pigeon(c,col,L));}
+// its tail, in its own frame (x from its base along it): the feathers fanned by f (0 folded, 1 spread in flight) from a narrow base under the
+// coverts, the outer ones a little shorter so the tip is rounded, a shallow notch between the feathers' ends
+function bd_piFe(f,u,r){const A=0.04+0.58*f,th=u*A,l=r*(1-0.035*u*u);return[l*Math.cos(th),(3*u+l*Math.sin(th))*(1-0.25*f)];}
+function bd_piTailPts(f){const vs=1-0.25*f,b=3,len=30,nd=0.3+0.8*f,fe=(u,r)=>bd_piFe(f,u,r);
+  return[[0,-b*vs],fe(-1,len*0.5),fe(-1,len*0.86)].concat([-1,-0.5,0,0.5,1].map((u,i)=>fe(u,i%2?len-nd:len)),[fe(1,len*0.86),fe(1,len*0.5),[0,b*vs]]);}
+function bd_pigeon(c,col,L){const G=BD_PI,fly=clamp(L.fly,0,1),wk=clamp(L.walk,0,1),el=0.42*fly;
+  // turning (cz: how much of its side we see), each part keeps its girth: seen end on, a part of length l and girth g shows sqrt(cz²l² + (1-cz²)g²)
+  const cz=L.cz==null?1:clamp(L.cz,0,1),tn=cz<0.999,sn=Math.sqrt(Math.max(0,1-cz*cz)),K=r=>Math.sqrt(cz*cz+r*r*sn*sn);
+  // the gait: each leg planted for 60% of a stride, then swung forward; the head holds still (moving back against the body) then darts ahead
+  const sl=11,ph=L.step,hb=(()=>{const q=((ph*2)%1+1)%1;return q<0.6?1-2*q/0.6:-1+2*ease((q-0.6)/0.4);})()*wk*5.2;
+  const bob=wk*0.7*Math.abs(Math.sin(ph*TAU)),pk=L.peck,hx=hb+pk*8.6,hy=-pk*13.6+bob*0.4,ha=L.ha*(1-pk)-pk*0.34+fly*0.08;
+  const H=p=>bd_rot(p,G.pv[0],G.pv[1],ha,hx,hy+bob),Bm=p=>bd_mv(p,0,bob);
+  // each part's own foreshortening, about its middle (x0 goes to x0·cz, the rest squeezed by k): body, head, bill, tail
+  const hc=H([[24.8,-29]])[0][0],bc=3,tb=[-21,3.4+bob],kB=K(0.62),kH=K(0.85),kT=K(0.3),mB=x=>bc*cz+(x-bc)*kB,mH=x=>hc*cz+(x-hc)*kH,mT=x=>tb[0]*cz+(x-tb[0])*kT,
+    MP=(p,m)=>tn?p.map(q=>{const r=[m(q[0]),q[1]];if(q[2])r.push(1);return r;}):p,mN=(q,w)=>tn?[lerp(mB(q[0]),mH(q[0]),w),q[1]]:q,
+    at=(x0,k,fn)=>{if(!tn)return fn();c.save();c.translate(x0*cz,0);c.scale(k,1);c.translate(-x0,0);fn();c.restore();};
+  const B=Bm(G.body);B[0][0]+=L.br*0.6;B[1][0]+=L.br*0.8;if(tn){B[2][1]+=1.2*sn;B[3][1]+=2*sn;B[4][1]+=2*sn;B[5][1]+=1.4*sn;}
+  const nf=[lerp(27.4,27.4+hx,0.55)+L.br*0.3,lerp(-17,-17+hy,0.5)+bob],nb=[lerp(12,12+hx,0.45),lerp(-25,-25+hy,0.6)+bob];
+  const sil=MP(H(G.head),mH).concat([mN(nf,0.6)],MP(B,mB),[mN(nb,0.45)]),fill=bd_fill(c,col,0.25,[-40,-40,36,30]);
+  const Tp=bd_rot(bd_piTailPts(fly),0,0,2.92+0.1*fly-L.br*0.01,tb[0],tb[1]);
+  // the wings: folded against its side, or spread and beating (down fast, up flexed); the far one behind the body
+  const qf=((L.flap%1)+1)%1,th=fly>0.01?(qf<0.5?lerp(1.2,-0.55,ease(qf/0.5)):lerp(-0.55,1.2,ease((qf-0.5)/0.5))):0,fx=fly>0.01&&qf>=0.5?Math.sin(Math.PI*(qf-0.5)/0.5):0;
+  const zb=8.4,y0=-11.4,se=Math.sin(el),wc=-14,kW=lerp(K(0.2),cz,fly);
+  const wpt=(F,E,side)=>{const sp=E[1]*(1-0.3*fx),ex=E[0]-fx*sp*0.16,ey=y0-sp*Math.sin(th),ez=zb+sp*Math.cos(th),fz=zb+1;
+    let X=lerp(F[0],ex,fly);const Y=lerp(F[1]+bob,ey+bob,fly),Z=lerp(fz,ez,fly)*side;if(tn)X=wc*cz+(X-wc)*kW-Z*sn;
+    const r=[X,Y+Z*se];if(F[2]&&E[2])r.push(1);return r;};
+  const wing=side=>G.wingF.map((F,i)=>wpt(F,G.wingE[i],side)),bars=side=>G.barF.map((bf,j)=>bf.map((F,i)=>wpt(F,G.barE[j][i],side)));
+  const Wn=wing(1),Wf=fly>0.01?wing(-1):null,gf=sstep(0,0.3,fly),gs=tn?sstep(0.9,0.999,cz):1;
+  // the glow, blurred once into sprites while it stands side on: the body, the folded tail and, apart, the head, which moves on its own;
+  // turning, and in flight for the beating wings and the fanned tail, it glows as it is, drawn fresh each frame (the two cross-fade)
+  if(gs>0.01){c.save();c.translate(0,bob);bd_glow(c,"pi-b",[-30,-30,34,24],[q=>bd_loop(q,[[27.4,-17]].concat(G.body,[[12,-25]]))],col,2.3,gs);
+    if(gf<0.99)bd_glow(c,"pi-t",[-54,-4,-17,16],[q=>bd_loop(q,bd_rot(bd_piTailPts(0),0,0,2.915,-21,3.4))],col,2.3,(1-gf)*gs);c.restore();
+    c.save();c.translate(G.pv[0]+hx,G.pv[1]+hy+bob);c.rotate(ha);c.translate(-G.pv[0],-G.pv[1]);bd_glow(c,"pi-h",[14,-38,36,-20],[q=>bd_loop(q,G.head)],col,2.3,gs);c.restore();}
+  const gl=Math.max(gf,1-gs);if(gl>0.01){const TpM=MP(Tp,mT),P=[].concat(gs<0.99?sil:[],gf>0.01?Wn:[],Wf||[],TpM),X=P.map(q=>q[0]),Y=P.map(q=>q[1]);
+    bd_glowLive(c,[Math.min(...X),Math.min(...Y),Math.max(...X),Math.max(...Y)],[q=>{if(gs<0.99)bd_loop(q,sil);if(gf>0.01)bd_loop(q,Wn);if(Wf)bd_loop(q,Wf);bd_loop(q,TpM);}],col,gs<0.99?2.3:1.9,gl);}
+  // legs: a knee hidden in the belly, the heel bending back, the foot planted, stepping or tucked in flight; set apart across its body
+  // (seen face on, both show, side by side)
+  const leg=(j,dim)=>{const q=((ph+j*0.5)%1+1)%1,d=sl*0.6*wk,hip=[5-3*j,15+bob],z=j?-5.2:5.2,M=(p,dz)=>tn?[p[0]*cz-(z+(dz||0)*Math.sign(z))*sn,p[1]]:p;let fx,fy,lift=0;
+    if(q<0.6){fx=d-2*d*q/0.6;fy=0;}else{const v=(q-0.6)/0.4;fx=-d+2*d*ease(v);lift=Math.sin(Math.PI*v)*wk;fy=-3.4*lift;}
+    const ft=[hip[0]+fx-1-fly*12,36+fy-fly*15],kn=bd_ik(hip,ft,11.8,11.4,1),cl=lift*0.8+fly;
+    c.beginPath();bd_tube(c,[hip,kn,ft].map(M),[1.6,1.05,0.95]);
+    const Tt=(dx,dy,w,dz)=>{const tx=ft[0]+dx*(1-cl*0.7),ty=ft[1]+dy+cl*3.2*Math.sign(dx);bd_taper(c,[M(ft),M([lerp(ft[0],tx,0.55),lerp(ft[1],ty,0.5)-0.4],dz*0.55),M([tx,ty],dz)],w,0.3);};
+    Tt(8.6,0.4,0.85,0.4);Tt(6.4,1.2,0.75,3.4);Tt(6.2,1,0.7,-2.6);Tt(-4.4,0.3,0.7,0);c.fillStyle=rgba(mix([236,120,120],[12,10,16],dim),0.96);c.fill();};
+  const wtop=mix(mix(mix(col,BD_INK,0.55),[6,9,16],0.1),[190,202,222],0.26),wbot=mix(mix([8,12,22],[3,5,10],0.1),[190,202,222],0.26);
+  const drawWing=(W,side,far)=>{const d=far?0.3:0;
+    bd_formP(c,W,col,bd_lin(c,"pi-w"+col+far+BD_S.f,-40*BD_S.f,-40,36*BD_S.f,30,[[0,rgba(mix(wtop,[4,6,10],d),0.97)],[1,rgba(mix(wbot,[4,6,10],d),0.97)]]),1.6,far?0.62:0.9);
+    const tg=c.createLinearGradient(W[2][0],W[2][1],W[7][0],W[7][1]);tg.addColorStop(0.55,"rgba(8,10,18,0)");tg.addColorStop(1,"rgba(8,10,18,"+(far?0.55:0.72)+")");
+    c.fillStyle=tg;c.fill();if(far)return;bd_lines(c,bars(side),[4,5,8],0.9,1.25*BD_S.s,0.95*BD_S.s);
+    bd_strk(c,[[W[7],W[9]],[W[6],W[10]],[W[5],W[11]]].map(([a,b])=>[a,[lerp(a[0],b[0],0.34),lerp(a[1],b[1],0.34)]]),mix(col,[255,255,255],0.2),0.3,0.6);};
+  if(Wf)drawWing(Wf,-1,1);
+  leg(1,0.5*cz);
+  // the tail: grey, darkening softly to a band at its tip; fanned in flight, its feathers' shafts showing
+  at(-21,kT,()=>{bd_formP(c,Tp,col,fill,1.8,0.95);c.save();c.beginPath();bd_loop(c,Tp);c.clip();
+    const g=c.createRadialGradient(tb[0],tb[1],0,tb[0],tb[1],30);g.addColorStop(0.62,"rgba(6,8,14,0)");g.addColorStop(0.8,"rgba(6,8,14,0.58)");g.addColorStop(1,"rgba(6,8,14,0.74)");
+    c.fillStyle=g;c.fillRect(tb[0]-34,tb[1]-34,68,68);c.restore();
+    if(fly>0.05)bd_strk(c,[-0.6,-0.2,0.2,0.6].map(u=>bd_rot([bd_piFe(fly,u,3),bd_piFe(fly,u,15),bd_piFe(fly,u,26)],0,0,2.92+0.1*fly-L.br*0.01,tb[0],tb[1])),mix(col,[255,255,255],0.2),0.3*fly,0.55);});
+  leg(0,0);
+  // body and head: one contour; the head darker; the neck's sheen, green above and purple below, shifting as it moves; a paler breast
+  bd_formP(c,sil,col,fill,2.3,1);
+  c.save();c.beginPath();bd_loop(c,sil);c.clip();
+  at(hc,kH,()=>{c.save();c.translate(hx,hy+bob);c.fillStyle=bd_lin(c,"pi-hd",16,-34,24,-20,[[0,"rgba(120,134,160,0.28)"],[1,"rgba(120,134,160,0)"]]);c.fillRect(8,-42,30,26);c.restore();});
+  const sh=L.sheen*0.5+0.5,g0=mN([18,-26+hy*0.5],0.6),g1=mN([24,-6],0),ng=c.createLinearGradient(g0[0],g0[1],g1[0],g1[1]);ng.addColorStop(0,"rgba(70,200,150,0)");ng.addColorStop(0.25,"rgba(80,206,160,"+(0.34+0.2*sh)+")");
+  ng.addColorStop(0.62,"rgba(170,96,210,"+(0.46-0.18*sh)+")");ng.addColorStop(1,"rgba(170,96,210,0)");c.beginPath();
+  bd_loop(c,[mN([lerp(13,13+hx,0.6),lerp(-25,-25+hy,0.6)+bob],0.6),mN([lerp(22,22+hx,0.8),lerp(-22,-22+hy,0.8)+bob],0.8),mN([nf[0]+2,nf[1]],0.55),mN([31,-6+bob],0),mN([22,-3+bob],0),mN([10,-10+bob],0.1),mN([7,-17+bob],0.3)]);c.fillStyle=ng;c.fill();
+  at(bc,kB,()=>{c.translate(0,bob);c.fillStyle=bd_rad(c,"pi-br",24,2,13,[[0,"rgba(190,196,214,0.2)"],[1,"rgba(190,196,214,0)"]]);c.fillRect(8,-12,30,30);});c.restore();
+  // the folded wing over its side (turning to face us, it goes edge on at the flank, and fades there)
+  if(fly<=0.01){const wv=tn?sstep(0.05,0.45,cz):1;if(wv>0.01){c.save();c.globalAlpha*=wv;drawWing(Wn,1,0);c.restore();}}
+  // the bill with its pale cere (face on, a stub pointing at us), the orange eyes (face on, one each side of the head)
+  const bcx=H([[35,-28.6]])[0][0],kBl=K(0.4),mBl=x=>bcx*cz+(x-bcx)*kBl;
+  bd_formP(c,MP(H(G.bill),mBl),col,"rgb(30,32,40)",1,0.6);
+  const ce=H([[33.2,-29.9]])[0];c.beginPath();c.ellipse(tn?mBl(ce[0]):ce[0],ce[1],1.7*Math.max(0.55,kBl),0.95,-0.12+ha,0,TAU);c.fillStyle="rgba(236,236,230,0.92)";c.fill();
+  const e=H([[27.4,-30.6]])[0],ek=tn?Math.sqrt(cz*cz+0.3*sn*sn):1,eye=(ex,al)=>{c.save();c.globalAlpha*=al;c.translate(ex,e[1]);c.scale(ek,Math.max(0.1,L.bl));
+    c.fillStyle="rgba(255,150,60,0.35)";c.beginPath();c.arc(0,0,2.8,0,TAU);c.fill();c.fillStyle="rgb(255,138,40)";c.beginPath();c.arc(0,0,1.9,0,TAU);c.fill();
+    c.fillStyle="rgb(14,10,8)";c.beginPath();c.arc(0.1,0,1,0,TAU);c.fill();c.fillStyle="rgba(255,250,240,0.9)";c.beginPath();c.arc(0.55*BD_S.f,-0.55,0.38,0,TAU);c.fill();c.restore();};
+  eye(tn?e[0]*cz-4.2*sn:e[0],1);if(tn&&cz<0.5)eye(e[0]*cz+4.2*sn,1-sstep(0,0.5,cz));
+  if(fly>0.01)drawWing(Wn,1,0);}
+/* a flight through timed points, for a scene: keys [[time, x, y, face], ...]; a smooth curve through them (Catmull-Rom), hovering with a
+   little wander where it's slow. Returns {x, y, vx, vy, face} (vx, vy in px a second) */
+function bd_flight(t,keys){const n=keys.length,K=i=>keys[clamp(i,0,n-1)],R={x:keys[0][1],y:keys[0][2],vx:0,vy:0,face:keys[0][3]==null?1:keys[0][3]};if(t==null)return R;
+  let k=0;while(k<n-2&&t>keys[k+1][0])k++;const a=K(k-1),b=K(k),c=K(k+1),d=K(k+2),T0=b[0],T1=c[0],dt=(T1-T0)||1,u=clamp((t-T0)/dt,0,1);
+  const cr=(p0,p1,p2,p3)=>0.5*(2*p1+(-p0+p2)*u+(2*p0-5*p1+4*p2-p3)*u*u+(-p0+3*p1-3*p2+p3)*u*u*u),dcr=(p0,p1,p2,p3)=>0.5*((-p0+p2)+2*(2*p0-5*p1+4*p2-p3)*u+3*(-p0+3*p1-3*p2+p3)*u*u);
+  if(t<=keys[0][0]||t>=keys[n-1][0]){const e=t<=keys[0][0]?keys[0]:keys[n-1];R.x=e[1];R.y=e[2];R.face=e[3]==null?1:e[3];}
+  else{R.x=cr(a[1],b[1],c[1],d[1]);R.y=cr(a[2],b[2],c[2],d[2]);R.vx=dcr(a[1],b[1],c[1],d[1])/dt;R.vy=dcr(a[2],b[2],c[2],d[2])/dt;
+    R.face=lerp(b[3]==null?1:b[3],c[3]==null?1:c[3],sstep(0,1,u));}
+  const w=1-clamp(Math.hypot(R.vx,R.vy)/220,0,1);R.x+=w*(4*Math.sin(t*2.3)+2*Math.sin(t*5.1+1));R.y+=w*(5*Math.sin(t*3.1+1)+2*Math.sin(t*6.7));
+  R.vx+=w*(9.2*Math.cos(t*2.3));R.vy+=w*(15.5*Math.cos(t*3.1+1));return R;}
+/* a bird's errands, for a scene: keys [[time, x, y, peck], ...], the times it arrives. Between two keys it walks (short, level moves, at a
+   pigeon's pace: about three steps a second) or flies a hop (long or steep ones: a second or more, low), in the last moments before it's due;
+   if it must turn to go, it turns first, on the ground, by way of facing us; it pecks on arriving if peck. s is its size (for its stride).
+   Returns its place and pose, for pigeon(): {x, y, face, walk, step, fly, flap, peck, pitch} */
+function bd_route(t,keys,s){s=s||1;const n=keys.length,R={x:keys[0][1],y:keys[0][2],face:1,walk:0,step:0,fly:0,flap:0,peck:0,pitch:0};if(t==null||n<2)return R;
+  const seg=[];let face=1;{const d0=keys[1][1]-keys[0][1];if(Math.abs(d0)>24&&d0<0)face=-1;}
+  for(let k=1;k<n;k++){const A=keys[k-1],B=keys[k],dx=B[1]-A[1],dy=B[2]-A[2],dist=Math.hypot(dx,dy),fl=dist>150||Math.abs(dy)>40,f0=face;
+    if(Math.abs(dx)>24)face=dx<0?-1:1;const tu=f0!==face?0.45:0,room=B[0]-A[0]-(A[3]?0.38:0.05)-tu;
+    const D=Math.max(0.05,Math.min(fl?clamp(0.75+dist/800,1,1.4):Math.max(0.4,dist/(s*33)),room));seg.push({A,B,dx,dy,dist,fl,T0:B[0]-D,T1:B[0],f0,f1:face,tu});}
+  let j=0;while(j<seg.length-1&&t>=seg[j+1].T0-seg[j+1].tu-0.02)j++;const S=seg[j];
+  R.face=S.tu?lerp(S.f0,S.f1,sstep(S.T0-S.tu,S.T0-0.05,t)):S.f1;
+  // pecking just after arriving somewhere it meant to peck: a quick jab, the bill striking about 0.13 s in, and back
+  keys.forEach(K=>{if(K[3]){const d=t-K[0];if(d>-0.02&&d<0.38)R.peck=Math.max(R.peck,d<0.13?sstep(-0.02,0.13,d):1-sstep(0.15,0.38,d));}});
+  if(t<=S.T0){R.x=S.A[1];R.y=S.A[2];return R;}
+  if(t>=S.T1){R.x=S.B[1];R.y=S.B[2];return R;}
+  const u=(t-S.T0)/(S.T1-S.T0);
+  if(S.fl){const e=ease(u),arc=0.1*S.dist;R.x=lerp(S.A[1],S.B[1],e);R.y=lerp(S.A[2],S.B[2],e)-Math.sin(Math.PI*u)*arc;
+    R.fly=sstep(0,0.2,u)*(1-sstep(0.8,1,u));R.flap=(t-S.T0)*4.6;R.pitch=0.2*sstep(0,0.12,u)*(1-sstep(0.12,0.45,u))-0.16*sstep(0.7,0.9,u)*(1-sstep(0.9,1,u));}
+  else{const e=u-Math.sin(TAU*u)/TAU;R.x=lerp(S.A[1],S.B[1],e);R.y=lerp(S.A[2],S.B[2],e);R.walk=sstep(0,0.12,u)*(1-sstep(0.88,1,u));R.step=S.dist*e/(22*s);}
+  return R;}
+
+/* ---------- a honeybee (Apis mellifera), a forager in flight: head with a big compound eye and elbowed antennae, a round furry thorax,
+   a narrow waist, a banded abdomen tapering to its tip, legs hanging (the hind ones carry pollen), and two pairs of wings beating too fast
+   to see: a blur, with the wing caught now here, now there. Options: a, col (its rim), face (1 right, -1 left, between: turning),
+   pitch (radians, nose up), vx and vy (its speed, px a second: it leans into its flight) ---------- */
+const BD_BEE={thx:[[-6.4,-2.4],[-4.4,-6.2],[0.4,-7.4],[4.8,-5.6],[6.8,-1],[5.8,3.8],[1.2,6.2],[-4.2,4.8]],
+  head:[[7.2,-1.8],[8.8,-4],[11,-4.2],[13,-2],[13.8,1.4],[12.8,4.6],[10.2,5.6],[8,3.6]],
+  eye:[[8.6,-2.8],[10,-3.6],[11.2,-2.4],[11.2,0.6],[10.6,3.2],[9.4,3.4],[8.8,0.6]],
+  abd:[[-6.2,-1.6],[-10.2,-5.4],[-16.4,-6.8],[-22.2,-5.4],[-26.4,-1.8],[-28.8,3.2,1],[-25.2,6.4],[-19,8],[-12.6,7.4],[-8,4]],
+  fw:[[0,0],[5,-1.9],[11,-2.7],[16.6,-2.2],[20.2,-0.4],[20.4,1.4],[17,2.6],[10,2.7],[4,2]],hw:[[0,0],[4,-1.2],[9,-1.6],[12.6,-0.8],[13,0.8],[9,1.8],[3,1.4]],
+  fuzz:[[-5.4,-4],[-3.6,-6.6],[-0.8,-7.8],[2,-7.6],[4.4,-6.2],[6.2,-3.6],[-6.8,0.8],[6.6,1.6],[3.8,5.6]].map(([px,py],i)=>{const a=Math.atan2(py+0.5,px),r=0.9+0.5*hash(i,3);
+    return[[px,py],[px+Math.cos(a+0.3)*r,py+Math.sin(a+0.3)*r]];})};
+function bee(ctx,x,y,s,t,o){o=o||{};const col=o.col||[255,214,90];t=t||0;
+  const vx=o.vx||0,vy=o.vy||0,fc=o.face==null?(vx<0?-1:1):o.face,sp=Math.hypot(vx,vy);
+  // it hovers nose up, abdomen low; flying fast it levels out and leans into the climb or the dive
+  const pitch=o.pitch!=null?o.pitch:0.34*(1-clamp(sp/260,0,1))+clamp(-vy/420,-0.3,0.3)+0.04*Math.sin(t*2.3);
+  // turning (face between -1 and 1), it's foreshortened part by part, so its round head and thorax stay round as it faces us
+  bd_draw(ctx,x,y,s,Object.assign({},o,{face:fc<0?-1:1,rot:-pitch}),[-32,-26,28,24],c=>bd_bee(c,col,t,Math.min(1,Math.abs(fc))));}
+function bd_bee(c,col,t,cz){const G=BD_BEE,fill=bd_fill(c,col,0.45,[-26,-10,16,10]);cz=cz==null?1:clamp(cz,0,1);
+  // (the wing caught by the eye: somewhere new each frame of the film, as a strobe would catch a beat of 230 a second)
+  const wb=[-0.4,-7],fr=Math.floor(t*30+1e-6),A0=-2.45,A1=-0.5,wa=lerp(A0+0.12,A1-0.12,hash(fr,9)),wf=lerp(A0+0.12,A1-0.12,hash(fr,13));
+  // turned from us by the angle whose cosine is cz, each part keeps its girth: seen end on, a part of length l and girth g shows sqrt(cz²l² + (1-cz²)g²)
+  // and its paired limbs, set out at an angle b to either side, swing apart: the near one's reach is cos(ph+b), the far one's cos(ph-b) (sg 1, -1),
+  // so face on its wings, legs and antennae spread to both sides
+  // (a limb pointing back, a hind leg or a wing at the back of its beat, swings the other way from one pointing forward: sg flips for it)
+  const sn=1-cz*cz,K=r=>Math.max(0.04,Math.sqrt(cz*cz+r*r*sn)),kH=K(1.3),kT=K(0.92),kA=K(0.58),ph=Math.acos(cz),
+    sk=(b,sg)=>{const k=Math.cos(ph+sg*b)/Math.cos(b);return(k<0?-1:1)*Math.max(0.04,Math.abs(k));};
+  const at=(x0,x1,k,fn)=>{if(cz>0.999)return fn();c.save();c.translate(x1,0);c.scale(k,1);c.translate(-x0,0);fn();c.restore();};
+  const HD=f=>at(10.5,10.5*cz,kH,f),TX=f=>at(0.2,0.2*cz,kT,f),AB=f=>at(-17.5,-17.5*cz,kA,f),
+    WG=(sg,an,f)=>at(wb[0],0.2*cz+(wb[0]-0.2)*kT,sk(0.7,Math.cos(an)>=0?sg:-sg),f),LG=(sg,f)=>at(0.2,0.2*cz,sk(0.6,sg),f),AN=(sg,f)=>at(11.8,10.5*cz+1.3*kH,sk(0.5,sg),f);
+  // the beat, too fast to see: a faint fan where the wings sweep, the wing at the end of its beat, and caught once between
+  const fan=(sg,dim)=>[[A0-0.1,-Math.PI/2],[-Math.PI/2,A1+0.1]].forEach(([a0,a1])=>WG(sg,(a0+a1)/2,()=>{c.save();c.translate(wb[0],wb[1]);c.globalAlpha*=dim;c.fillStyle=bd_g(c,"bee-fan",q=>{const g=q.createRadialGradient(0,0,3,0,0,20.5);g.addColorStop(0,"rgba(210,232,255,0)");
+      g.addColorStop(0.55,"rgba(210,232,255,0.035)");g.addColorStop(1,"rgba(210,232,255,0.075)");return g;});c.beginPath();c.moveTo(0,0);c.arc(0,0,20.5,a0,a1);c.closePath();c.fill();c.restore();}));
+  const wing=(sg,pts,an,a)=>WG(sg,an,()=>{c.save();c.translate(wb[0],wb[1]);c.rotate(an);c.beginPath();bd_loop(c,pts);c.fillStyle="rgba(214,236,255,"+0.14*a+")";c.fill();
+    c.lineWidth=0.8/BD_S.s;c.strokeStyle="rgba(222,240,255,"+0.7*a+")";c.stroke();c.beginPath();bd_path(c,[[1.6,-0.4],[8,-1.3],[14,-1]]);bd_path(c,[[2.4,0.7],[8,0.7],[12.4,1.6]]);
+    c.lineWidth=0.45/BD_S.s;c.strokeStyle="rgba(222,240,255,"+0.45*a+")";c.stroke();c.restore();});
+  fan(-1,0.35);wing(-1,G.fw,wf,0.3);
+  // the legs, slender and hanging: the far ones darker; the hind leg's broad shin carries a ball of pollen
+  // (the fore and middle legs reach forward, the hind leg back: face on, each side's legs spread to its own side)
+  const legs=(sg,dx,dy,dim)=>{const fs=rgba(mix(mix(col,[70,50,24],0.55),[6,8,12],dim),0.96);
+    LG(sg,()=>{c.beginPath();bd_tube(c,[[3.2+dx,4.6+dy],[5.4+dx,7.6+dy],[8+dx,8+dy],[9.6+dx,9.6+dy]],[0.5,0.42,0.32,0.22]);
+      bd_tube(c,[[0.8+dx,5.4+dy],[1.6+dx,9.4+dy],[0.2+dx,12.6+dy],[0.8+dx,15.4+dy]],[0.5,0.42,0.32,0.22]);c.fillStyle=fs;c.fill();});
+    LG(-sg,()=>{c.beginPath();bd_tube(c,[[-2.4+dx,4.6+dy],[-4.8+dx,9+dy],[-7.4+dx,13.6+dy],[-8.8+dx,17.2+dy],[-9.4+dx,19.6+dy]],[0.55,0.5,0.95,0.4,0.22]);c.fillStyle=fs;c.fill();});};
+  // (both hind legs carry a load of pollen, a lump that stays round however the leg turns: the far one's darker)
+  const pol=(sg,x,y,fs)=>{const k=cz>0.999?1:sk(0.6,-sg);c.beginPath();c.ellipse(0.2*cz+(x-0.2)*k,y,1.5*Math.max(0.75,Math.abs(k)),2.1,0.5*Math.sign(k),0,TAU);c.fillStyle=fs;c.fill();};
+  legs(-1,-1.8,-0.4,0.6);pol(-1,-8.8,13,"rgba(128,86,34,0.95)");
+  AB(()=>bd_glow(c,"bee-a",[-30,-9,-5,9],[q=>bd_loop(q,G.abd)],col,1.8));TX(()=>bd_glow(c,"bee-t",[-8,-9,8,8],[q=>bd_loop(q,G.thx)],col,1.8));
+  HD(()=>bd_glow(c,"bee-h",[6,-6,15,7],[q=>bd_loop(q,G.head)],col,1.8));
+  // the abdomen: each band amber in front, dark behind, a line of pale hair at its front edge
+  AB(()=>{bd_formP(c,G.abd,col,fill,1.8,1);
+    c.save();c.beginPath();bd_loop(c,G.abd);c.clip();c.beginPath();
+    [[-9.4,1],[-13.2,0.85],[-17,0.55],[-20.8,0.3],[-24.4,0.14]].forEach(([bx,k])=>{c.beginPath();bd_tube(c,[[bx+0.4,-8],[bx-0.6,-3],[bx-0.9,1.6],[bx-0.4,6],[bx+0.4,9]],[1,1.05,1.1,1.05,1]);
+      c.fillStyle="rgba(226,150,58,"+0.7*k+")";c.fill();});
+    bd_strk(c,[[[-8,-7],[-9.2,-2],[-9.5,2.4],[-8.8,7]],[[-11.8,-7],[-13,-2],[-13.3,2.4],[-12.6,7]],[[-15.6,-7],[-16.8,-2],[-17.1,2.4],[-16.4,7]]],[255,232,180],0.3,0.55);
+    c.fillStyle=bd_lin(c,"bee-hl",-18,-7,-18,8,[[0,"rgba(255,240,200,0.16)"],[0.45,"rgba(255,240,200,0)"]]);c.fillRect(-30,-8,26,18);c.restore();});
+  // the thorax: round and furry, lit ginger at the top; the near legs, the pollen
+  TX(()=>{bd_formP(c,G.thx,col,fill,1.8,1);
+    c.beginPath();bd_loop(c,G.thx);c.fillStyle=bd_rad(c,"bee-thx",-1,-5,9,[[0,"rgba(214,160,86,0.72)"],[1,"rgba(214,160,86,0)"]]);c.fill();
+    bd_strk(c,G.fuzz,[240,200,130],0.6,0.4);});
+  legs(1,0,0,0);pol(1,-7,13.4,"rgb(246,182,70)");c.beginPath();const pk=cz>0.999?1:sk(0.6,-1);c.ellipse(0.2*cz+(-7.4-0.2)*pk,12.7,0.6,0.8,0.5,0,TAU);c.fillStyle="rgba(255,236,150,0.85)";c.fill();
+  // the head: a big compound eye, elbowed antennae (the far one darker), mouthparts folded under
+  const aw=0.12*Math.sin(t*1.9)+0.06*Math.sin(t*3.7),ant=(dx,dy,ph,cl)=>{c.beginPath();bd_tube(c,[[11.8+dx,-2.4+dy],[13+dx,-5+dy],[14+dx,-7.2+dy]],[0.36,0.32,0.3]);
+    bd_tube(c,bd_rot([[14+dx,-7.2+dy],[16.6+dx,-7.4+dy],[19+dx,-6+dy],[20.4+dx,-3.8+dy]],14+dx,-7.2+dy,aw+ph),[0.32,0.3,0.28,0.26]);c.fillStyle=cl;c.fill();};
+  AN(-1,()=>ant(-1.2,0.2,0.25,rgba(mix(col,[20,16,10],0.6),1)));
+  const Hq=cz>0.999?G.head:G.head.map(q=>[10.5+(q[0]-10.5)*(1-0.34*(1-cz)*clamp((q[1]+1)/6.5,0,1)),q[1]]),Sn=Math.sqrt(sn),ek=Math.sqrt(cz*cz+0.3*sn),
+    eye=(ex,al)=>{if(al<=0.01)return;c.save();c.globalAlpha*=al;c.translate(ex,0);c.scale(ek,1);c.translate(-10,0);c.beginPath();bd_loop(c,G.eye);
+      c.fillStyle=bd_lin(c,"bee-eye",9,-4,13,4,[[0,"rgba(92,80,64,0.95)"],[1,"rgba(26,22,20,0.95)"]]);c.fill();c.fillStyle="rgba(255,244,210,0.5)";c.beginPath();c.ellipse(9.9,-2,0.6,0.4,-0.5,0,TAU);c.fill();c.restore();};
+  HD(()=>{bd_formP(c,Hq,col,fill,1.7,1);bd_strk(c,[[[11.8,-2.6],[12.9,-3.2]],[[12.6,-0.4],[13.8,-0.6]],[[12.4,2.4],[13.4,2.8]]],[240,200,130],0.55,0.35);
+    // (face on, the hairy face between the eyes)
+    if(cz<0.6){c.save();c.globalAlpha*=1-sstep(0.05,0.6,cz);c.beginPath();bd_loop(c,Hq);c.clip();c.fillStyle=bd_rad(c,"bee-face",10.8,0.4,4.4,[[0,"rgba(214,160,86,0.5)"],[1,"rgba(214,160,86,0)"]]);c.fillRect(5,-6,12,13);c.restore();}});
+  eye(10*cz-3.1*Sn,1);if(cz<0.6)eye(10*cz+3.1*Sn,1-sstep(0.05,0.6,cz));
+  AN(1,()=>ant(0,0,0,rgba(mix(col,[40,30,16],0.3),1)));
+  HD(()=>bd_lines(c,[[[11.6,5.2],[12.2,7],[11.4,8.4]]],mix(col,[40,30,16],0.45),0.9,0.4,0.2));
+  // the near wings over the body: at the back of the beat, and caught
+  fan(1,0.45);wing(1,G.fw,A0,0.24);wing(1,G.fw,lerp(A0,A1,0.5),0.16);wing(1,G.fw,A1,0.22);wing(1,G.hw,wa+0.2,0.35);wing(1,G.fw,wa,0.55);}
+
+/* ---------- a martial eagle (Polemaetus bellicosus), soaring, seen from below as the vervets see it: long broad wings with six slotted
+   "fingers" at each tip curling up, a short broad tail, a big head with a hooked bill; a dark head and bib, a white belly with dark spots,
+   a dark underwing (coverts darkest) with barred flight feathers. It's a small 3D model (x forward, y to its right wing, z up), turned and
+   banked, projected for a viewer looking up; the wings flex, the tail twists to steer, the head turns. Options: a, t, yaw (its heading:
+   0 toward us, negative to our left), bank (radians, right wing down), elev (how steeply we look up), seed ---------- */
+// a wing, in its own frame (x forward, y out along it): long and broad, the leading edge nearly straight out to a broad hand, the trailing edge
+// held back, bulging a little at the secondaries and pinched at the body; six slotted primaries ("fingers") spread across the hand's whole
+// width, the middle ones longest, fanned by sp
+function bd_eagleWing(sp){const o=[[7,6.2],[10.4,16],[12,27],[12.4,38],[11.8,48],[10.8,56],[9.4,62]],F=[],n=6;
+  // the six emarginated primaries (P10, the outermost, first), their roots across the hand
+  for(let i=0;i<n;i++){const u=i/(n-1),rx=lerp(7.4,-19.6,u),ry=lerp(63.4,66.2,u)+2.4*u*(1-u),an=(-0.34+u*0.98)*sp,l=[13.4,18.6,21,20.4,17.2,12.6][i],
+    w0=[2.45,2.85,3.05,3.05,2.95,2.85][i],dx=-Math.sin(an),dy=Math.cos(an),nx=dy,ny=-dx,q=(k,v)=>{const b=-0.1*l*k*k;return[rx+dx*l*k+nx*(v+b),ry+dy*l*k+ny*(v+b),k*k*l];};
+    F.push({f:[q(0.02,w0),q(0.45,w0*0.93),q(0.8,w0*0.72)],tip:[q(0.95,w0*0.4),q(1,-w0*0.06),q(0.94,-w0*0.52)],b:[q(0.5,-w0*0.9),q(0.1,-w0)],axis:[q(0.1,0),q(0.55,0),q(0.9,0)],dk:[q(0.62,0),q(0.8,0),q(0.96,0)],
+      tp:q(1.02,-w0*0.1),l});}
+  const tr=[[-22.2,66],[-23.2,58],[-24,48],[-24.4,37],[-23.4,25],[-19.8,14],[-14.4,6.4]];return{lead:o,F,tr};}
+const BD_EG={body:[[30.8,0,1],[29,3.4],[25,6],[19.8,7.6],[12.6,9.8],[3,11.2],[-7,10.6],[-14.4,8.4],[-19.2,6.6],[-19.2,-6.6],[-14.4,-8.4],[-7,-10.6],[3,-11.2],[12.6,-9.8],[19.8,-7.6],[25,-6],[29,-3.4]],
+  tail:[[-16.6,6.6],[-26,8.2],[-34.6,9],[-39,7.2],[-40.8,3.4],[-41.2,0],[-40.8,-3.4],[-39,-7.2],[-34.6,-9],[-26,-8.2],[-16.6,-6.6]],
+  spots:[[-3,3.4],[-6,-4],[-9.6,1.2],[-12.6,4.6],[-12,-3],[-2,-2],[-15.2,-0.8],[-7.6,6.4],[-5,-7],[0.6,5.8]],
+  cov:[[6.6,7],[9.8,17],[11.2,28],[11.6,39],[11,49],[9.8,57],[7.2,62],[-1.4,60.4],[-7.6,47],[-9,28],[-6.8,8]],W1:bd_eagleWing(1),
+  belly:[[7,-9.4],[1.6,-5.4],[0.4,0],[1.6,5.4],[7,9.4],[3,10.4],[-7,9.9],[-14,7.9],[-18.4,6],[-18.4,-6],[-14,-7.9],[-7,-9.9],[3,-10.4]]};
+function eagle(ctx,x,y,s,col,o){o=o||{};col=col||EAG;const t=o.t,k=o.seed||5,tt=t==null?0:t,b0=o.bank==null?0.12:o.bank;
+  const L={yaw:(o.yaw==null?-0.62:o.yaw)*(o.flip?-1:1)+(t==null?0:0.07*Math.sin(tt*0.31+k)),bank:b0+(t==null?0:0.05*Math.sin(tt*0.47+k)),b0,
+    elev:o.elev==null?1.2:o.elev,pitch:0.08,dih:0.11+(t==null?0:0.022*Math.sin(tt*0.74+k)),curl:0.018+(t==null?0:0.0045*Math.sin(tt*0.74+k+0.9)),
+    sp:1+(t==null?0:0.05*Math.sin(tt*0.93+k)),flex:t==null?0:0.035*Math.sin(tt*0.61+k),tw:t==null?0:0.14*Math.sin(tt*0.57+k*2),hd:t==null?0.1:0.34*bd_hold(t,61+k,2.8,0.5)};
+  // (its pose first, so it's drawn within its actual reach: a fading eagle is drawn whole on a layer, and a smaller layer costs less)
+  const E=bd_eagleGeo(L),P=[].concat(...E.wings.map(w=>w.Q),E.tl,E.bb),X=P.map(q=>q[0]),Y=P.map(q=>q[1]);
+  bd_draw(ctx,x,y,s,Object.assign({},o,{flip:false,face:1}),[Math.min(...X)-6,Math.min(...Y)-6,Math.max(...X)+6,Math.max(...Y)+6],c=>bd_eagle(c,col,L,E));}
+// the eagle in 3D, for a pose L: its projection P, its wings (outline, feather lines), tail and body (with the turned head), each on screen
+function bd_eagleGeo(L){
+  // the frame: heading, pitch, bank; then a viewer looking up at elev
+  const cy=Math.cos(L.yaw),sy=Math.sin(L.yaw),f0=[sy,0,cy],r0=[-cy,0,sy],u0=[0,1,0],cp=Math.cos(L.pitch),spp=Math.sin(L.pitch);
+  const f1=[f0[0]*cp+u0[0]*spp,f0[1]*cp+u0[1]*spp,f0[2]*cp+u0[2]*spp],u1=[u0[0]*cp-f0[0]*spp,u0[1]*cp-f0[1]*spp,u0[2]*cp-f0[2]*spp];
+  const cb=Math.cos(L.bank),sb=Math.sin(L.bank),r2=[r0[0]*cb-u1[0]*sb,r0[1]*cb-u1[1]*sb,r0[2]*cb-u1[2]*sb],u2=[u1[0]*cb+r0[0]*sb,u1[1]*cb+r0[1]*sb,u1[2]*cb+r0[2]*sb];
+  const ce=Math.cos(L.elev),se=Math.sin(L.elev);
+  const P=(x,y,z)=>{const X=x*f1[0]+y*r2[0]+z*u2[0],Y=x*f1[1]+y*r2[1]+z*u2[1],Z=x*f1[2]+y*r2[2]+z*u2[2];return[X,-(Y*ce+Z*se),Y*se-Z*ce];};
+  const PP=(pts,z,side)=>pts.map(q=>{const r=P(q[0],q[1]*(side||1),(q[2]||0)+(z||0));const o=[r[0],r[1]];if(q[3])o.push(1);return o;});
+  // a wing: its outline in 3D, lifted in a shallow V (dih) and curling up toward the tips; side 1 right, -1 left
+  const W=Math.abs(L.sp-1)<1e-6?BD_EG.W1:bd_eagleWing(L.sp),wz=y=>L.dih*y+L.curl*Math.max(0,y-44)*Math.max(0,y-44)*0.5,fx=(x,y)=>x-L.flex*Math.max(0,y-30);
+  const lift=q=>[fx(q[0],q[1]),q[1],wz(q[1])+(q[2]||0)*L.curl*14],on=(q,sd)=>{const r=P(q[0],q[1]*sd,q[2]);return[r[0],r[1]];};
+  const wing=side=>{const pts=[],bars=[];
+    W.lead.forEach(q=>pts.push(lift([q[0],q[1]])));
+    W.F.forEach(F=>{F.f.forEach(q=>{const v=lift(q);v.push(0.5,0);pts.push(v);});F.tip.forEach((q,j)=>{const v=lift(q);v.push(0.45,j===1?1:0);pts.push(v);});F.b.forEach(q=>{const v=lift(q);v.push(0.5,0);pts.push(v);});bars.push(F.axis.map(lift));});
+    W.tr.forEach(q=>pts.push(lift([q[0],q[1]])));
+    const hull=[].concat(W.lead,W.F.map(F=>F.tp),W.tr).map(q=>on(lift(q),side));
+    return{Q:pts.map(q=>{const o=on(q,side);if(q[4]||q[3])o.push(q[4]?1:0,q[3]||1);return o;}),hull,bars:bars.map(b=>b.map(q=>on(q,side))),dk:W.F.map(F=>F.dk.map(q=>on(lift(q),side))),
+      cov:PP(BD_EG.cov.map(lift),-0.2,side),bl:[0.35,0.62,0.88].map(v=>PP([[lerp(-9,-13.6,v),9],[lerp(-9,-22.2,v),24],[lerp(-9,-23.2,v),40],[lerp(-8.4,-22.6,v),54],[lerp(-6,-21,v),64]].map(lift),0,side)),
+      side,depth:P(-4,40*side,wz(40))[2]};};
+  const hr=L.hd,c2=Math.cos(hr),s2=Math.sin(hr),R=q=>{const x0=q[0]-13,r=[13+x0*c2-q[1]*s2,x0*s2+q[1]*c2];if(q[2])r.push(0,1);return r;};
+  return{P,PP,wings:[wing(1),wing(-1)].sort((a,b)=>b.depth-a.depth),tl:PP(BD_EG.tail.map(q=>[q[0],q[1]*(1+0.08*Math.abs(L.tw)),L.tw*4*q[1]/9]),-1.2),
+    bb:PP(BD_EG.body.map(q=>q[0]<13?q:R(q)),-3.2),bodyDepth:P(0,0,-3.2)[2],c2,s2};}
+function bd_eagle(c,col,L,E){E=E||bd_eagleGeo(L);const{P,PP,wings,tl,bb,bodyDepth,c2,s2}=E;
+  const fill=bd_fill(c,col,0.3,[-60,-60,60,60]),dk=rgba(mix(mix(col,BD_INK,0.55),[6,9,16],0.72),0.95),
+    wf=bd_lin(c,"eg-w"+col,-60,-60,60,60,[[0,rgba(mix(mix(mix(col,BD_INK,0.55),[6,9,16],0.3),[180,198,222],0.2),0.97)],[1,rgba(mix([8,12,22],[180,198,222],0.2),0.97)]]),
+    tf=bd_lin(c,"eg-t"+col,-60,-60,60,60,[[0,rgba(mix(mix(mix(col,BD_INK,0.55),[6,9,16],0.3),[200,218,240],0.26),0.97)],[1,rgba(mix([8,12,22],[200,218,240],0.26),0.97)]]);
+  // its glow, made fresh from its pose each frame (it flexes, banks and turns its head, so no kept sprite would fit it)
+  {const P=[].concat(...wings.map(w=>w.Q),tl,bb),X=P.map(q=>q[0]),Y=P.map(q=>q[1]);
+    bd_glowLive(c,[Math.min(...X),Math.min(...Y),Math.max(...X),Math.max(...Y)],[q=>{wings.forEach(w=>bd_loop(q,w.hull));bd_loop(q,tl);bd_loop(q,bb);}],col,2.1,1);}
+  // a wing: coverts darkest, the flight feathers barred, a dark band near the trailing edge; the fingers darken to their tips
+  const drawWings=ws=>{if(!ws.length)return;ws.forEach(w=>{bd_formP(c,w.Q,col,wf,2.1,1);c.beginPath();bd_loop(c,w.cov);c.fillStyle=dk;c.fill();});
+    bd_strk(c,[].concat(...ws.map(w=>w.bl.slice(0,2).concat(w.bars))),[20,30,48],0.45,0.8);bd_lines(c,[].concat(...ws.map(w=>[w.bl[2]].concat(w.dk))),[10,16,28],0.66,1.1,0.8);};
+  drawWings(wings.filter(w=>w.depth>=bodyDepth-2));
+  // the tail, barred, twisting as it steers
+  bd_formP(c,tl,col,tf,1.9,1);
+  bd_strk(c,[[-24,7.4],[-30,8],[-36,7.6]].map(([xx,h])=>PP([[xx,-h],[xx-0.6,0],[xx,h]].map(q=>[q[0],q[1],L.tw*4*q[1]/9]),-1.2)),[20,30,48],0.55,0.9);
+  // the body and head: a dark hood and bib, a white belly with dark spots; the head turns
+  bd_formP(c,bb,col,fill,2.1,1);
+  c.beginPath();bd_loop(c,PP(BD_EG.belly,-3.2));c.fillStyle="rgba(214,228,246,0.5)";c.fill();
+  c.beginPath();BD_EG.spots.forEach(q=>{const p=P(q[0],q[1],-3.4);c.moveTo(p[0]+0.9,p[1]);c.ellipse(p[0],p[1],0.9,0.75,0,0,TAU);});c.fillStyle="rgba(12,18,30,0.8)";c.fill();
+  drawWings(wings.filter(w=>w.depth<bodyDepth-2));
+  // the hooked bill; the eye on the side it shows
+  const R=q=>{const x0=q[0]-13;return[13+x0*c2-q[1]*s2,x0*s2+q[1]*c2,q[2]];};
+  const B=PP([[26.6,1.8,0],[30.2,1.1,-0.4],[32.2,0,-1.7],[30.2,-1.1,-0.4],[26.6,-1.8,0]].map(R),-3.2);c.beginPath();bd_loop(c,B);c.fillStyle="rgba(24,28,36,0.95)";c.fill();
+  c.lineWidth=0.9/BD_S.s;c.strokeStyle=rgba(col,0.8);c.stroke();
+  const Ey=[1,-1].map(sd=>{const x0=23.6-13,yy=4.8*sd;return P(13+x0*c2-yy*s2,x0*s2+yy*c2,-1.4);}).sort((a,b)=>a[2]-b[2])[0];bd_eye(c,Ey[0],Ey[1],0.95,col,1);}
+
+/* ---------- an emperor penguin (Aptenodytes forsteri), standing: upright and heavy-bellied, black head and back, a white front washed yellow on
+   the upper breast, a bright orange-yellow patch at the side of the neck, a long slender down-curved bill with an orange-pink plate below,
+   narrow flippers, a short stiff tail propping it, short black feet. It sways on its feet, turns its head, stirs a flipper.
+   Options: t, col (its rim), seed ---------- */
+const BD_PG={head:[[-6,-50.4],[0,-53.2],[6,-52.2],[10.4,-49.6],[12.6,-47.3,1],[12.2,-44.1,1],[10,-41.4],[-8.8,-44.8]],
+  body:[[9.2,-37],[12.4,-28.6],[16,-15],[19.8,0.6],[21.6,17.2],[18.4,32.4],[11.8,40.8],[1,42.8],[-8.8,41.4],[-16.6,31],[-19,12.6],[-16.6,-10],[-12.2,-27.4],[-9.6,-39]],
+  flip:[[-2.6,-27.4],[0.6,-22],[3.4,-12.6],[5.4,-2],[6.8,7.6],[7.2,13.6,1],[4.6,9.4],[0.8,1],[-2.6,-8.4],[-4.8,-17.8],[-5,-24.6]],
+  bill:[[12,-47.9],[16.8,-47.5],[21.8,-46.1],[26.6,-43.4,1],[21.8,-44.1],[16.8,-44.3],[12,-44.4]],
+  tail:[[-8.6,36.6],[-13.4,41.2],[-18.2,45.2,1],[-14.2,44.6],[-9.4,42.6]],
+  foot:[[0,40],[6,41.4],[11,43],[14.2,44.8,1],[10,45.4],[4,45.6],[-1,44.8]]};
+function penguin(ctx,x,y,s,o){o=o||{};const col=o.col||[200,220,245],t=o.t,k=o.seed||3;
+  const L={br:t==null?0.5:0.5+0.5*Math.sin(t*TAU*0.3+k),sw:t==null?0:0.022*Math.sin(t*0.9+k)+0.008*Math.sin(t*2.1),ha:0.1*bd_hold(t,41+k,3.2,0.45),hy:bd_hold(t,43+k,4.1,0.6),
+    fl:t==null?0:0.06*Math.sin(t*1.3+k)+0.1*bd_pulse(t,45+k,5.5,0.3,1.2),bl:bd_blink(t,47+k)};
+  bd_draw(ctx,x,y,s,o,[-22,-58,30,50],c=>bd_penguin(c,col,L));}
+function bd_penguin(c,col,L){const G=BD_PG;
+  // it sways on its feet (the whole bird turns about them); its head turns toward us (hy>0) or away, the bill shortening as it does
+  c.translate(2,44);c.rotate(L.sw);c.translate(-2,-44);
+  const yw=L.hy*0.35,Hf=p=>bd_rot(p.map(q=>{const r=[q[0]>4?4+(q[0]-4)*(1-Math.abs(yw)*0.35):q[0],q[1]];if(q[2])r.push(1);return r;}),2,-40,L.ha,yw*1.5,0);
+  const B=G.body.map((q,i)=>i>=1&&i<=4?[q[0]+L.br*0.6*(i===3?1:0.6),q[1]]:q),hd=Hf(G.head),sil=hd.slice(0,7).concat(B,hd.slice(7));
+  const fill=bd_fill(c,col,0.35,[-20,-50,20,40]),inkF=bd_fill(c,col,0.6,[-20,-50,20,40]),Fp=p=>bd_rot(p,-3.6,-25.4,-L.fl,0,0);
+  bd_glow(c,"pg",[-20,-56,24,47],[q=>{bd_loop(q,G.tail);bd_loop(q,G.head.slice(0,7).concat(G.body,G.head.slice(7)));}],col,2.3);
+  // the far foot, the tail, the near foot
+  const ft=(dx,dim)=>{c.beginPath();bd_loop(c,bd_mv(G.foot,dx,0));c.fillStyle=rgba(mix([40,44,56],[6,8,12],dim),1);c.fill();
+    c.lineWidth=0.9/BD_S.s;c.strokeStyle=rgba(col,0.55*(1-dim));c.stroke();};
+  ft(-5,0.6);bd_formP(c,G.tail,col,inkF,1.4,0.7);
+  bd_formP(c,sil,col,fill,2.3,1);ft(1,0);
+  c.save();c.beginPath();bd_loop(c,sil);c.clip();
+  // the white front, lit from the upper left, shadowed toward the lower right
+  c.beginPath();bd_loop(c,Hf([[9,-39.4],[4.4,-38.6]]).concat([[1.4,-30],[0.6,-18],[2.4,-2],[3.2,14],[1.6,30],[-1.6,40],[4,48],[30,48],[30,-38]]));
+  c.fillStyle=bd_lin(c,"pg-front",0,-30,24,40,[[0,"rgba(244,247,252,0.95)"],[0.55,"rgba(214,224,238,0.92)"],[1,"rgba(150,166,190,0.9)"]]);c.fill();
+  // a wash of pale yellow on the upper breast, and the ear patch, yellow-orange behind the eye, paling as it runs down into it
+  c.fillStyle=bd_rad(c,"pg-yel",11,-29,13,[[0,"rgba(255,222,140,0.72)"],[0.6,"rgba(255,226,150,0.3)"],[1,"rgba(255,226,150,0)"]]);c.fillRect(-10,-46,36,36);
+  c.beginPath();bd_loop(c,Hf([[-1.8,-46.6],[2,-47.6],[4.8,-44.4],[7.2,-40.4]]).concat([[10,-35.4],[11.8,-30.6],[8.6,-32],[4.6,-35.6]],Hf([[0.8,-40.2],[-1.4,-43.2]])));
+  c.fillStyle=bd_lin(c,"pg-ear",0,-46,10,-31,[[0,"rgba(255,190,84,0.92)"],[0.55,"rgba(255,212,120,0.78)"],[1,"rgba(255,228,160,0.2)"]]);c.fill();
+  // a dark line down the flank, where the black back meets the white
+  bd_lines(c,[[[0.8,-26],[0.2,-12],[1.8,4],[2.2,20],[0.6,34]]],[4,6,10],0.8,0.9,0.4);c.restore();
+  // the near flipper, hanging a little away from the body
+  bd_formP(c,Fp(G.flip),col,inkF,1.6,0.9);
+  bd_lines(c,[Fp([[-3.8,-20],[-1.4,-9],[1.8,0.6],[4.8,8.4],[6.8,12.6]])],[226,234,248],0.55,0.45,0.2);
+  // the bill (an orange-pink plate along the lower mandible) and the eye
+  const bl=Hf(G.bill);bd_formP(c,bl,col,"rgb(14,14,18)",1,0.6);
+  c.beginPath();bd_taper(c,Hf([[13.6,-44.9],[17.2,-44.8],[20.6,-44.7]]),0.75,0.3);c.fillStyle="rgba(255,140,104,0.95)";c.fill();
+  const e=Hf([[5.6,-46.8]])[0];bd_eye(c,e[0],e[1],0.95,mix(col,[120,130,150],0.4),L.bl,true);}
+
+/* ---------- an ostrich (Struthio camelus), a male, standing: a big body of loose, shaggy black plumage, white plumes at the wings and the tail,
+   a long bare neck, a small flat head with a big lashed eye and a broad flat bill, long bare legs: thick thighs, the heel high, scaled shanks,
+   two toes (a big one with a stout claw, a small one outside). Its neck sways, its head turns, its plumes stir. Options: t, col (its rim), seed ---------- */
+const BD_OS={body:(()=>{const yb=x=>x>-6?16.5-6.5*((x+6)/24)**2:16.5-11*((x+6)/27)**2,P=[[14.6,-14.2],[19.6,-9],[22.4,-2.4],[21.2,4.8],[18.6,9.6]];
+    // lobes hanging from the plumage's lower edge, each its own length and width, their tips drooping back
+    let x=16.4;for(let i=0;x>-29;i++){const w=5+2.6*hash(i,41),d=1.3+2.2*hash(i,43)+(i===2||i===4?1.4:0);
+      P.push([x-w*0.08,yb(x-w*0.08)-0.2]);P.push([x-w*0.42,yb(x-w*0.42)+d*0.8]);P.push([x-w*0.7,yb(x-w*0.7)+d]);x-=w;}
+    return P.concat([[-31.4,5.6],[-33.8,0.4],[-36.2,-4.4],[-34,-9.6],[-28.6,-13.8],[-19.4,-17],[-8.6,-18.8],[1.6,-18.4],[9.4,-16.8]]);})()};
+function ostrich(ctx,x,y,s,o){o=o||{};const col=o.col||[220,200,180],t=o.t,k=o.seed||4;
+  const L={br:t==null?0.5:0.5+0.5*Math.sin(t*TAU*0.22+k),nk:t==null?0:Math.sin(t*0.55+k)*0.7+0.3*Math.sin(t*1.3+k*2),ha:0.1*bd_hold(t,51+k,3,0.5),
+    hy:bd_hold(t,53+k,3.7,0.5),bl:bd_blink(t,57+k),pl:t==null?0:Math.sin(t*1.1+k)};
+  bd_draw(ctx,x,y,s,o,[-48,-78,42,60],c=>bd_ostrich(c,col,L));}
+function bd_ostrich(c,col,L){const G=BD_OS,nk=L.nk,pl=L.pl,skin=[206,170,160],fill=bd_fill(c,col,0.5,[-40,-30,30,20]);
+  const br=L.br*0.6,nb=G.body.length,body=G.body.map((q,i)=>i>=nb-4&&i<=nb-2?[q[0],q[1]-br]:q);
+  bd_glow(c,"os",[-40,-24,26,22],[q=>bd_loop(q,G.body)],col,2.2);
+  // legs: the far one first, darker; thigh, heel, shank, two toes
+  const leg=(dx,dy,dim)=>{const hip=[4+dx,8+dy],heel=[-3.2+dx,28.4+dy],ft=[2.6+dx,52.6+dy],sk=rgba(mix(skin,[12,12,18],dim),0.97),ln=rgba(mix(col,[10,12,20],dim),0.5*(1-dim));
+    c.beginPath();bd_tube(c,[hip,[1.8+dx,16.4+dy],[-1.2+dx,23.4+dy],heel],[7.5,6,3.8,2.4]);bd_tube(c,[heel,[-1.4+dx,34+dy],[0.9+dx,43+dy],ft],[2.3,1.8,1.55,1.6]);c.fillStyle=sk;c.fill();c.lineWidth=0.9/BD_S.s;c.strokeStyle=ln;c.stroke();
+    c.beginPath();bd_taper(c,[[ft[0]-1,ft[1]],[ft[0]+4,ft[1]+0.4],[ft[0]+9.4,ft[1]+1]],1.7,0.8);bd_taper(c,[[ft[0],ft[1]-0.6],[ft[0]+3,ft[1]-0.5],[ft[0]+5.2,ft[1]-0.1]],1.1,0.6);c.fillStyle=sk;c.fill();
+    c.beginPath();bd_taper(c,[[ft[0]+9,ft[1]+0.6],[ft[0]+11,ft[1]+1.2]],0.8,0.3);c.fillStyle=rgba(mix([50,40,36],[8,8,10],dim),1);c.fill();
+    if(dim<0.5)bd_strk(c,[0,1,2,3,4,5].map(i=>{const u=0.14+i*0.14,px=lerp(heel[0],ft[0],u)+0.2,py=lerp(heel[1],ft[1],u);return[[px+0.5,py],[px+1.8,py+0.3]];}),col,0.45,0.45);};
+  leg(-7,-1.5,0.6);
+  // the neck: bare, S-curved, swaying gently; the head turns and tilts at its top
+  const N=[[12.6,-6],[19.4,-19],[22,-32],[20.4+nk*0.8,-45],[21+nk*1.5,-56],[24.2+nk*2,-64.4]],hp=N[5],yw=L.hy*0.4;
+  c.beginPath();bd_tube(c,N,[6.6,4.6,3.6,3.2,3,3.1]);c.fillStyle=bd_lin(c,"os-neck",12,-60,26,-10,[[0,rgba(mix(skin,[240,220,215],0.2),0.97)],[1,rgba(mix(skin,[40,30,34],0.5),0.97)]]);
+  c.fill();c.lineWidth=1/BD_S.s;c.strokeStyle=rgba(col,0.85);c.stroke();
+  bd_lines(c,[[[16.2,-15],[19.6,-25]],[[19.6,-30],[19.4,-40]],[[18.6,-45],[19+nk*1.2,-53]]],[250,240,236],0.35,0.35,0.12);
+  const Hd=p=>bd_rot(p.map(q=>{const r=[q[0]>hp[0]?hp[0]+(q[0]-hp[0])*(1-Math.abs(yw)*0.3):q[0],q[1]];if(q[2])r.push(1);return r;}),hp[0],hp[1],L.ha,hp[0]-24.6+yw*1.2,hp[1]+64.6);
+  const head=Hd([[21.4,-66.4],[23.2,-69.4],[27,-70.6],[30.4,-69.2],[32,-67.4],[31.4,-64.6],[27,-63],[23,-63.2]]),bill=Hd([[30.6,-67.6],[34.8,-67],[37.8,-66.1],[38.4,-64.9],[37,-64],[33,-63.6],[30.2,-63.8]]);
+  bd_formP(c,head,col,rgba(mix(skin,[60,50,56],0.35),0.97),1.4,0.9);bd_formP(c,bill,col,"rgba(222,196,176,0.95)",1,0.7);
+  bd_strk(c,[Hd([[31,-65.3],[34.4,-65.2],[37.6,-65]])],[70,50,48],0.7,0.5);
+  const e=Hd([[27.2,-67.4]])[0];bd_eye(c,e[0],e[1],1.55,col,L.bl,true);if(L.bl>0.5)bd_strk(c,[Hd([[25.6,-68.9],[27.2,-69.5],[28.9,-69]])],[20,14,14],0.9,0.45);
+  // a plume: soft white feathers, each a drooping tapered wisp from a common base, swaying a little
+  const plume=(x0,y0,ang,len,n,spread,a)=>{c.beginPath();const tips=[];for(let i=0;i<n;i++){const u=n>1?i/(n-1):0.5,an=ang+(u-0.5)*spread+pl*0.05*(1+u),l=len*(0.8+0.3*Math.sin(i*2.3+1)),dr=0.28+0.1*u;
+      const p=[[x0,y0]];for(let j=1;j<=4;j++){const v=j/4,aa=an+dr*v*v;p.push([x0+Math.cos(aa)*l*v,y0+Math.sin(aa)*l*v]);}bd_tube(c,p,[1.6,2.6,2.8,2.2,0.6]);tips.push(p.slice(0,4));}
+    c.fillStyle=bd_lin(c,"os-pl"+a,x0,y0,x0-len,y0+len*0.5,[[0,"rgba(236,232,224,"+a*0.9+")"],[1,"rgba(250,248,242,"+a+")"]]);c.fill();c.lineWidth=0.7/BD_S.s;c.strokeStyle=rgba(col,0.5*a);c.stroke();
+    bd_strk(c,tips,[150,144,136],0.45*a,0.3);};
+  plume(-31,-8,2.72,15,5,0.9,0.92);
+  // the near leg, its bare drumstick coming out from under the plumage
+  leg(0,0,0);
+  // the body: loose black plumage, its lower edge hanging in soft, shaggy lobes
+  bd_formP(c,body,col,fill,2.2,1);
+  c.save();c.beginPath();bd_loop(c,body);c.clip();
+  bd_strk(c,[[[4,-16],[-2,-12.6],[-9,-11]],[[-4,-6],[-11,-3],[-18,-1.4]],[[8,2],[1,6],[-6,8.4]],[[-14,6],[-20,8.4],[-25,6.2]],[[12,-8],[6,-5],[0,-4.4]]],col,0.26,0.6);
+  c.restore();
+  {const sw=pl*0.5;c.beginPath();[[8.6,10,3.2,9.5,2.6],[3.2,12.2,2.4,7.5,2.2],[-20,9.4,2.6,8,2.2]].forEach(([x0,y0,dx,l,w])=>bd_taper(c,[[x0,y0],[x0-dx*0.3+sw*0.3,y0+l*0.55],[x0-dx+sw,y0+l]],w,0.35));
+    c.fillStyle=fill;c.fill();c.lineWidth=0.6/BD_S.s;c.strokeStyle=rgba(col,0.3);c.stroke();}
+  plume(-15,1,2.62,17,6,0.7,0.95);}
+
+/* ===== What's in a word: bodies and minds =====
+   A baby who points before she can talk, and the grandmother who looks where she looks; a hand that points (or hands over a letter);
+   a scribe's hand pressing a reed into clay; and a brain with one concept cell that lights up.
+   People follow the series' character style (people.js: litFill, seam, outlined); the brain is an icon, like the film's creatures.
+   Everything moves with t alone, and static detail is drawn once into offscreen canvases. */
+
+/* ---------- shapes: smooth outlines, tapering tubes ---------- */
+// a smooth curve through points (Catmull-Rom, as beziers); closed or open
+function by_curve(ctx,pts,closed){const n=pts.length;if(n<2)return;const Q=i=>closed?pts[(i+n)%n]:pts[Math.max(0,Math.min(n-1,i))];
+  ctx.moveTo(pts[0][0],pts[0][1]);const m=closed?n:n-1;
+  for(let i=0;i<m;i++){const p0=Q(i-1),p1=Q(i),p2=Q(i+1),p3=Q(i+2);
+    ctx.bezierCurveTo(p1[0]+(p2[0]-p0[0])/6,p1[1]+(p2[1]-p0[1])/6,p2[0]-(p3[0]-p1[0])/6,p2[1]-(p3[1]-p1[1])/6,p2[0],p2[1]);}
+  if(closed)ctx.closePath();}
+// samples of a smooth centreline, with widths eased between the given ones: [[x,y,w],...]
+function by_samples(pts,ws,k){const n=pts.length,out=[],Q=i=>pts[Math.max(0,Math.min(n-1,i))];k=k||6;
+  for(let i=0;i<n-1;i++){const p0=Q(i-1),p1=Q(i),p2=Q(i+1),p3=Q(i+2);
+    for(let j=0;j<k;j++){const u=j/k,u2=u*u,u3=u2*u,f=(a,b,c,d)=>0.5*(2*b+(c-a)*u+(2*a-5*b+4*c-d)*u2+(3*b-a-3*c+d)*u3),e=0.5-0.5*Math.cos(Math.PI*u);
+      out.push([f(p0[0],p1[0],p2[0],p3[0]),f(p0[1],p1[1],p2[1],p3[1]),Math.max(0.01,lerp(ws[i],ws[i+1],e))]);}}
+  out.push([pts[n-1][0],pts[n-1][1],Math.max(0.01,ws[n-1])]);return out;}
+// a limb, a finger or a tail: the outline around a centreline with half-widths ws, and round ends
+function by_tube(ctx,pts,ws,k){const S=by_samples(pts,ws,k),n=S.length,L=[],R=[];
+  for(let i=0;i<n;i++){const a=S[Math.max(0,i-1)],b=S[Math.min(n-1,i+1)];let dx=b[0]-a[0],dy=b[1]-a[1];const d=Math.hypot(dx,dy)||1;dx/=d;dy/=d;
+    L.push([S[i][0]-dy*S[i][2],S[i][1]+dx*S[i][2]]);R.push([S[i][0]+dy*S[i][2],S[i][1]-dx*S[i][2]]);}
+  const e=S[n-1],e0=S[n-2],ae=Math.atan2(e[1]-e0[1],e[0]-e0[0]),s0=S[0],s1=S[1],a0=Math.atan2(s1[1]-s0[1],s1[0]-s0[0]);
+  ctx.moveTo(L[0][0],L[0][1]);for(let i=1;i<n;i++)ctx.lineTo(L[i][0],L[i][1]);
+  ctx.arc(e[0],e[1],e[2],ae+Math.PI/2,ae-Math.PI/2,true);
+  for(let i=n-1;i>=0;i--)ctx.lineTo(R[i][0],R[i][1]);
+  ctx.arc(s0[0],s0[1],s0[2],a0-Math.PI/2,a0+Math.PI/2,true);ctx.closePath();}
+// a stroke that swells in the middle and tapers to fine points: a crease, a fold, a sulcus
+function by_taper(ctx,pts,w,k){const S=by_samples(pts,pts.map(()=>1),k||5),n=S.length,L=[],R=[];
+  for(let i=0;i<n;i++){const a=S[Math.max(0,i-1)],b=S[Math.min(n-1,i+1)];let dx=b[0]-a[0],dy=b[1]-a[1];const d=Math.hypot(dx,dy)||1,q=w*Math.pow(Math.sin(Math.PI*(0.04+0.92*i/(n-1))),0.6);
+    L.push([S[i][0]-dy/d*q,S[i][1]+dx/d*q]);R.push([S[i][0]+dy/d*q,S[i][1]-dx/d*q]);}
+  ctx.moveTo(L[0][0],L[0][1]);for(let i=1;i<n;i++)ctx.lineTo(L[i][0],L[i][1]);for(let i=n-1;i>=0;i--)ctx.lineTo(R[i][0],R[i][1]);ctx.closePath();}
+// fill the current path lit from the upper left, like the series' people, with a soft darker seam
+
+/* ---------- sprites: drawn once, then placed pixel for pixel ---------- */
+// Static detail is drawn once into an offscreen canvas, already turned and scaled to the pixels it lands on, so a frame only copies pictures
+// (a copy that lands on whole pixels is many times cheaper than one that is turned or scaled). Slow movements stay smooth: a sprite is kept
+// for each quarter-pixel offset. A part can carry the luminous edge of the series' people: a figure puts down all its parts' edges first,
+// then all their fills, so the edge shows only round the whole silhouette, as outlined() does.
+// The cache is bounded by the pixels it holds (about 48 MB of canvases): the least recently used pictures are dropped first, and their memory
+// is given back at once (width 0), which matters on phones, where the browser caps the memory of all canvases together.
+const BY_CACHE=new Map(),BY_TMP=new Map(),BY_BUDGET=12e6;let BY_PX=0,BY_SCR=null;
+function by_evict(keep){for(const [k,sp] of BY_CACHE){if(BY_PX<=BY_BUDGET)break;if(k===keep)continue;BY_CACHE.delete(k);BY_PX-=sp.px;sp.cv.width=sp.cv.height=0;if(sp.rim)sp.rim.width=sp.rim.height=0;}}
+// one scratch canvas, reused for every tinting pass (it only grows)
+function by_scratch(W,H){if(!BY_SCR||BY_SCR.width<W||BY_SCR.height<H)BY_SCR=mkCanvas(Math.max(W,BY_SCR?BY_SCR.width:0),Math.max(H,BY_SCR?BY_SCR.height:0));
+  const c=BY_SCR.getContext("2d");c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation="source-over";c.clearRect(0,0,W,H);return c;}
+// draw(c,D) in local units (D: device pixels per unit) inside box, anchored at (x,y) of the context's units and turned by rot.
+// o: rim {col,glow,ring,blur} (sizes in units), edge (put down the edge, not the fill: simply drawn over, a blend mode costs three times as much), op (a compositing mode), rq (the turning step), sub:false (whole pixels only),
+// live (one picture, drawn unturned, then placed and turned as it is copied: for parts that keep moving, so the cache doesn't fill with near-copies;
+// a turned copy costs about 0.1 ms for a small part, 0.4 ms for a long limb), merge and rimCut (below)
+function by_blit(ctx,key,x,y,rot,box,draw,o){o=o||{};const m=ctx.getTransform(),d=Math.hypot(m.a,m.b)||1,base=Math.atan2(m.b,m.a),D=Math.round(d*32)/32,live=!!o.live;
+  const px=m.a*x+m.c*y+m.e,py=m.b*x+m.d*y+m.f;let R=0,fx=0,fy=0,ix=0,iy=0,k;
+  if(live)k=key+"|"+D+"|L";
+  else{const rq=o.rq||0.004;R=Math.round((rot+base)/rq)*rq;ix=Math.floor(px);iy=Math.floor(py);if(o.sub!==false){fx=Math.round((px-ix)*4)/4;fy=Math.round((py-iy)*4)/4;}k=key+"|"+D+"|"+R.toFixed(4)+"|"+fx+"|"+fy;}
+  let sp=BY_CACHE.get(k);
+  if(sp&&sp.cv.width){BY_CACHE.delete(k);BY_CACHE.set(k,sp);}
+  else{const rim=o.rim,g=rim?rim.blur*1.05+rim.ring+1:1,cs=Math.cos(R)*D,sn=Math.sin(R)*D;
+    const C=[[box[0]-g,box[1]-g],[box[2]+g,box[1]-g],[box[0]-g,box[3]+g],[box[2]+g,box[3]+g]].map(([u,v])=>[u*cs-v*sn+fx,u*sn+v*cs+fy]);
+    const X0=Math.floor(Math.min(...C.map(q=>q[0]))),Y0=Math.floor(Math.min(...C.map(q=>q[1]))),W=Math.max(1,Math.ceil(Math.max(...C.map(q=>q[0])))-X0),H=Math.max(1,Math.ceil(Math.max(...C.map(q=>q[1])))-Y0);
+    const cv=mkCanvas(W,H),c=cv.getContext("2d");c.setTransform(cs,sn,-sn,cs,fx-X0,fy-Y0);c.lineJoin="round";c.lineCap="round";draw(c,D);sp={cv,X0,Y0,px:W*H};
+    if(rim){const tx=by_scratch(W,H);tx.drawImage(cv,0,0);tx.globalCompositeOperation="source-in";tx.fillStyle=rgba(rim.col,1);tx.fillRect(0,0,W,H);
+      const rc=mkCanvas(W,H),rx=rc.getContext("2d");rx.save();rx.shadowColor=rgba(rim.col,rim.glow);rx.shadowBlur=rim.blur*D;rx.globalAlpha=0.65;rx.drawImage(BY_SCR,0,0,W,H,0,0,W,H);rx.restore();
+      rx.globalAlpha=0.85;const r=Math.max(0.6,rim.ring*D);for(let i=0;i<8;i++){const a=i/8*TAU;rx.drawImage(BY_SCR,0,0,W,H,Math.cos(a)*r,Math.sin(a)*r,W,H);}
+      // only outside the part itself: its fill covers the rest anyway, and while fading nothing tinted shows through it
+      rx.globalAlpha=1;rx.globalCompositeOperation="destination-out";rx.drawImage(cv,0,0);
+      // o.rimCut: where the part joins another, its edge is taken away (in the part's units)
+      if(o.rimCut){rx.save();rx.setTransform(cs,sn,-sn,cs,fx-X0,fy-Y0);rx.fillStyle="#000";o.rimCut(rx);rx.restore();}
+      // o.merge: the edge and the fill in one picture, copied once (for a part drawn over the others)
+      if(o.merge){rx.globalCompositeOperation="source-over";rx.drawImage(cv,0,0);cv.width=cv.height=0;sp.cv=rc;}else{sp.rim=rc;sp.px*=2;}}
+    BY_CACHE.set(k,sp);BY_PX+=sp.px;by_evict(k);}
+  if(o.edge&&o.merge)return;const img=o.edge?sp.rim:sp.cv;if(!img||!img.width)return;ctx.save();
+  if(live){ctx.setTransform(1,0,0,1,px,py);ctx.rotate(rot+base);}else ctx.setTransform(1,0,0,1,ix,iy);
+  if(o.op)ctx.globalCompositeOperation=o.op;ctx.drawImage(img,sp.X0,sp.Y0);ctx.restore();}
+// the luminous edge of a part drawn live (a path, not a picture): a soft glow and a fine line in the edge's colour, outside the silhouette once
+// the fills go on. The glow is a wide, faint stroke rather than a blur: a blur of a long limb costs about 0.4 ms, a stroke a fifth of that
+function by_liveRim(c,path,rim){c.save();c.beginPath();path(c);c.lineJoin="round";const b=rim.blur,k=rim.glow/0.4;
+  c.strokeStyle=rgba(rim.col,0.12*k);c.lineWidth=b*1.2;c.stroke();
+  c.strokeStyle=rgba(rim.col,0.85);c.lineWidth=2*rim.ring;c.stroke();c.restore();}
+// a figure of parts: draw(c,edge) is called for the edges, then for the fills. While it is see-through (fading), it is composed apart first,
+// so its parts don't show through each other (unless direct: for figures whose parts barely overlap). box: its extent, in the context's current units.
+function by_figure(ctx,box,draw,direct){const a=ctx.globalAlpha;if(a<=0.002)return;if(a>0.985||direct){draw(ctx,true);draw(ctx,false);return;}
+  const m=ctx.getTransform(),P=[[box[0],box[1]],[box[2],box[1]],[box[0],box[3]],[box[2],box[3]]].map(([u,v])=>[m.a*u+m.c*v+m.e,m.b*u+m.d*v+m.f]),cw=ctx.canvas.width,ch=ctx.canvas.height;
+  const X0=Math.max(0,Math.floor(Math.min(...P.map(p=>p[0])))),Y0=Math.max(0,Math.floor(Math.min(...P.map(p=>p[1])))),X1=Math.min(cw,Math.ceil(Math.max(...P.map(p=>p[0])))),Y1=Math.min(ch,Math.ceil(Math.max(...P.map(p=>p[1]))));
+  // a spare canvas close to the figure's size: copying a canvas costs by its whole area, so each size keeps its own
+  if(X1<=X0||Y1<=Y0)return;const w=X1-X0,h=Y1-Y0,tk=Math.ceil(w/48)*48+"x"+Math.ceil(h/48)*48;let T=BY_TMP.get(tk);
+  if(T){BY_TMP.delete(tk);BY_TMP.set(tk,T);}else{T=mkCanvas(Math.ceil(w/48)*48,Math.ceil(h/48)*48);BY_TMP.set(tk,T);if(BY_TMP.size>3){const [k0,T0]=BY_TMP.entries().next().value;BY_TMP.delete(k0);T0.width=T0.height=0;}}
+  const c=T.getContext("2d");c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;c.globalCompositeOperation="source-over";c.clearRect(0,0,w,h);c.setTransform(m.a,m.b,m.c,m.d,m.e-X0,m.f-Y0);
+  draw(c,true);draw(c,false);ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(T,0,0,w,h,X0,Y0,w,h);ctx.restore();}
+// lit from the upper left of the picture, like the series' people (mir = -1 when the drawing is mirrored)
+function by_L(mir,kd){return(c,col,cx,cy,rad,k)=>{const g=c.createLinearGradient(cx-rad*0.8*mir,cy-rad,cx+rad*0.8*mir,cy+rad);g.addColorStop(0,rgba(lighten(col,0.17*(k||1)),1));g.addColorStop(0.55,rgba(col,1));g.addColorStop(1,rgba(darken(col,(kd||0.3)*(k||1)),1));c.fillStyle=g;c.fill();};}
+
+/* ---------- hands ---------- */
+// a hand in its own units: the wrist at (0,0), the fingers towards +x, the thumb side towards -y; about 100 from the wrist to the middle fingertip.
+// We see its back. pose: "point" (the index out, the others curled under the thumb), "grip" (holding a sheet: the fingers behind it, the thumb on its face),
+// "open" (reaching to take something), "rest" (relaxed). o.L: the direction of the light in these units ([-0.7,-0.7] when the hand is upright);
+// o.chub: a baby's hand; o.part: "back" (all but the thumb), "thumb" (the thumb alone), or everything
+const BY_HANDS={
+  point:{palm:[[0,-14],[16,-15],[32,-16],[44,-16],[52,-14],[56,-8],[57,0],[55,8],[51,15],[44,19.5],[30,20.2],[16,18.8],[5,16],[0,13.5]],
+    fingers:[{p:[[40,13],[50,15],[55,18]],w:[4.4,4.2,4]},{p:[[43,6],[55,7],[61,10]],w:[4.8,4.7,4.4]},{p:[[45,-2],[58,-2],[65,1]],w:[5.2,5,4.7]},
+      {p:[[42,-10],[56,-11],[72,-11],[84,-10.4],[95,-9.2]],w:[5.8,5.4,4.9,4.5,4.1],nail:true,joints:[72,84]}],
+    thumb:{p:[[11,-7],[21,-13.5],[31,-17],[42,-17.5],[51,-14.8],[56,-10.5]],w:[5.6,5.3,5,4.7,4.4,4.1],nail:true}},
+  grip:{palm:[[0,-14],[16,-15],[32,-16],[44,-16],[53,-14],[57,-8],[58,0],[56,8],[52,15],[45,19.5],[30,20.2],[16,18.8],[5,16],[0,13.5]],
+    fingers:[{p:[[41,14],[56,17],[68,19],[76,20]],w:[4.2,3.9,3.6,3.3]},{p:[[44,7],[62,9],[78,11],[88,12]],w:[4.8,4.4,4,3.7]},{p:[[46,-1],[66,0],[84,2],[96,3]],w:[5.2,4.9,4.4,4]},
+      {p:[[44,-10],[62,-10],[80,-8],[92,-6]],w:[5.6,5.1,4.6,4.2]}],
+    thumb:{p:[[11,-7],[22,-13.5],[35,-16.5],[49,-16],[60,-12],[68,-7]],w:[5.6,5.3,5,4.8,4.6,4.3],nail:true}},
+  open:{palm:[[0,-14],[16,-15],[32,-16],[44,-16],[53,-14],[57,-8],[58,0],[56,8],[52,15],[45,19.5],[30,20.2],[16,18.8],[5,16],[0,13.5]],
+    fingers:[{p:[[41,14],[56,19],[68,23],[76,26]],w:[4.2,3.9,3.6,3.3]},{p:[[44,7],[62,10],[78,14],[88,16]],w:[4.8,4.4,4,3.7]},{p:[[46,-1],[66,0],[84,1],[96,2]],w:[5.2,4.9,4.4,4]},
+      {p:[[44,-10],[62,-12],[80,-12],[92,-11]],w:[5.6,5.1,4.6,4.2]}],
+    thumb:{p:[[11,-7],[20,-15],[29,-22],[40,-26.5],[50,-28],[58,-27]],w:[5.6,5.3,5,4.8,4.6,4.3],nail:true}},
+  rest:{palm:[[0,-14],[16,-15],[32,-16],[44,-16],[52,-14],[56,-8],[57,0],[55,8],[51,15],[44,19.5],[30,20.2],[16,18.8],[5,16],[0,13.5]],
+    fingers:[{p:[[40,14],[54,18],[63,24],[67,30]],w:[4.2,3.9,3.6,3.3]},{p:[[43,7],[59,10],[70,16],[76,23]],w:[4.8,4.4,4,3.7]},{p:[[45,-1],[63,1],[76,7],[84,14]],w:[5.2,4.9,4.4,4]},
+      {p:[[43,-10],[61,-10],[76,-6],[86,1]],w:[5.6,5.1,4.6,4.2],nail:true,joints:[61,76]}],
+    thumb:{p:[[11,-7],[21,-13],[31,-16.5],[42,-16.5],[51,-13.5],[56,-9]],w:[5.6,5.3,5,4.7,4.4,4.1],nail:true}}};
+// a loose fist: the pointing hand with its index curled too (a baby's hand at rest, before it points: only the index moves between the two)
+BY_HANDS.fist=Object.assign({},BY_HANDS.point,{fingers:BY_HANDS.point.fingers.slice(0,3).concat([{p:[[42,-10],[50,-10.8],[56,-10.4],[59.5,-8.4],[60,-5.2]],w:[5.8,5.6,5.3,5,4.7]}])});
+// a scribe's grip: the reed between the thumb and the curled index, resting on the middle finger; BY_PEN is the reed's line in the hand's units
+BY_HANDS.pen={palm:BY_HANDS.point.palm,
+  fingers:[{p:[[40,13],[50,15.5],[55,19]],w:[4.4,4.2,4]},{p:[[43,6],[55,8],[61,12]],w:[4.8,4.7,4.4]},{p:[[45,-2],[60,0],[70,5],[75,10]],w:[5.2,5,4.7,4.4]},
+    {p:[[42,-10],[58,-11],[71,-7],[79,0],[82,5]],w:[5.8,5.4,4.9,4.5,4.1],nail:true,joints:[71]}],
+  thumb:{p:[[11,-7],[22,-13],[35,-15],[48,-12],[59,-6],[66,0]],w:[5.6,5.3,5,4.7,4.4,4.1],nail:true}};
+const BY_PEN={pinch:[74,3],dir:[0.84,0.54]};
+// a pose between two poses of the same shape (k from 0 to 1)
+function by_handMix(a,b,k){if(!b||k<=0)return a;if(k>=1)return b;const P2=(p,q)=>p.map((v,i)=>[lerp(v[0],q[i][0],k),lerp(v[1],q[i][1],k)]),F=(f,g)=>Object.assign({},k>0.5?g:f,{p:P2(f.p,g.p),w:f.w.map((w,i)=>lerp(w,g.w[i],k))});
+  return{palm:P2(a.palm,b.palm),fingers:a.fingers.map((f,i)=>F(f,b.fingers[i])),thumb:F(a.thumb,b.thumb)};}
+function by_hand(ctx,pose,skin,o){o=o||{};const H=typeof pose==="object"?pose:(BY_HANDS[pose]||BY_HANDS.point),L=o.L||[-0.7,-0.7],ch=o.chub?1:0,part=o.part||"all";
+  const shape=pts=>ch?pts.map(([x,y])=>[x<40?x:40+(x-40)*0.78,y*1.08]):pts,wide=ws=>ch?ws.map(w=>w*1.22):ws;
+  const lit=(cx,cy,r,c,k)=>{const g=ctx.createLinearGradient(cx+L[0]*r,cy+L[1]*r,cx-L[0]*r,cy-L[1]*r);g.addColorStop(0,rgba(lighten(c,0.18*(k||1)),1));g.addColorStop(0.5,rgba(c,1));g.addColorStop(1,rgba(darken(c,0.3*(k||1)),1));ctx.fillStyle=g;ctx.fill();};
+  const line=rgba(darken(skin,0.5),0.5),crease=rgba(darken(skin,0.45),0.45);
+  const finger=(f,dim)=>{const p=shape(f.p),w=wide(f.w),c=dim?darken(skin,dim):skin;ctx.beginPath();by_tube(ctx,p,w,4);
+    const m=p[Math.floor(p.length/2)];lit(m[0],m[1],9,c);ctx.strokeStyle=line;ctx.lineWidth=1.1;ctx.stroke();
+    if(f.nail){const e=p[p.length-1],e0=p[p.length-2],an=Math.atan2(e[1]-e0[1],e[0]-e0[0]),wn=w[w.length-1];ctx.save();ctx.translate(e[0],e[1]);ctx.rotate(an);
+      ctx.beginPath();ctx.ellipse(-wn*0.7,-wn*0.12,wn*1.05,wn*0.62,0,0,TAU);ctx.fillStyle=rgba(mix(skin,[255,226,214],0.45),0.9);ctx.fill();ctx.strokeStyle=rgba(darken(skin,0.35),0.5);ctx.lineWidth=0.8;ctx.stroke();ctx.restore();}
+    if(f.joints)f.joints.forEach(jx=>{const q=p.reduce((b,v)=>Math.abs(v[0]-jx)<Math.abs(b[0]-jx)?v:b,p[0]);ctx.beginPath();ctx.moveTo(q[0]-1.5,q[1]-w[0]*0.5);ctx.quadraticCurveTo(q[0]+1,q[1],q[0]-1.5,q[1]+w[0]*0.45);ctx.strokeStyle=crease;ctx.lineWidth=0.9;ctx.stroke();});};
+  if(part!=="thumb"){
+    // the curled or trailing fingers first, a touch darker, then the back of the hand, then the index
+    const F=H.fingers;for(let i=0;i<F.length-1;i++)finger(F[i],0.05*(F.length-1-i));
+    ctx.beginPath();by_curve(ctx,shape(H.palm),false);ctx.closePath();lit(28,0,26,skin,1);ctx.strokeStyle=line;ctx.lineWidth=1.1;ctx.stroke();
+    // tendons and knuckles on the back of the hand, very faint
+    ctx.lineWidth=1.3;[-10,-2,6,13].forEach((y1,i)=>{ctx.beginPath();ctx.moveTo(8,y1*0.25);ctx.quadraticCurveTo(28,y1*0.6,46-i*2,y1);ctx.strokeStyle=rgba(lighten(skin,0.3),0.13);ctx.stroke();});
+    ctx.fillStyle=rgba(lighten(skin,0.35),0.09);[[50,-11],[52,-2],[50,7],[46,15]].forEach(([x,y])=>{ctx.beginPath();ctx.ellipse(x,y,3.2,2.4,0,0,TAU);ctx.fill();});
+    if(o.mid)o.mid(ctx);
+    if(!o.thumbUnder)finger(F[F.length-1],0);}
+  if(part!=="back")finger(H.thumb,0);
+  if(o.thumbUnder&&part!=="thumb")finger(H.fingers[H.fingers.length-1],0);}
+
+/* ---------- arms ---------- */
+const BY_SKIN={stranger:[134,90,62],envoy:[228,186,152],host:[146,98,70],scribe:[170,118,80]};
+const BY_HOFF=[-4,-2],BY_WEAVE=[192,160,116],BY_CORD=[176,88,58],BY_WARMRIM=[255,214,170];
+// pointArm(ctx,x0,y0,x1,y1,s,a[,o]): an arm from (x0,y0), off the picture's edge, to the wrist at (x1,y1); s = 1 for a hand about 90 px long.
+// The arm has an elbow: a forearm of about 1.3 hands, then the upper arm, bent a little (o.bend, in radians) so that the elbow hangs below the
+// line from (x0,y0) to the wrist. o.pose: "point" | "give" | "take" (a hand holding out a sheet, or closing on it); o.dress: "bare" (the edge of
+// a coarse woven sleeve, a cord at the wrist) or "coat" (a dark sleeve and a shirt cuff). o.at: a point the index aims at (the wrist bends
+// towards it); o.k: how far a "take" hand has closed (0 to 1); o.card: [x,y,w,h,rot] of the sheet it holds, so the fingers pass behind it; o.t: seconds.
+// A hand coming from the right is mirrored, so its thumb stays on top.
+function pointArm(ctx,x0,y0,x1,y1,s,a,o){o=o||{};withA(ctx,a==null?1:a,()=>by_arm(ctx,x0,y0,x1,y1,s,o));}
+// a path round a centreline (pts, half-widths ws), cut straight at its far end and at its near end, the near cut slanted by sl
+function by_band(c,pts,ws,sl){const S=by_samples(pts,ws,6),n=S.length,L=[],R=[];
+  for(let i=0;i<n;i++){const a=S[Math.max(0,i-1)],b=S[Math.min(n-1,i+1)];let dx=b[0]-a[0],dy=b[1]-a[1];const d=Math.hypot(dx,dy)||1;dx/=d;dy/=d;L.push([S[i][0]-dy*S[i][2],S[i][1]+dx*S[i][2]]);R.push([S[i][0]+dy*S[i][2],S[i][1]-dx*S[i][2]]);}
+  const e=S[n-1],e0=S[n-2],tx=(e[0]-e0[0]),ty=(e[1]-e0[1]),td=Math.hypot(tx,ty)||1;
+  c.moveTo(L[0][0],L[0][1]);for(let i=1;i<n;i++)c.lineTo(L[i][0]-(i===n-1?tx/td*sl:0),L[i][1]-(i===n-1?ty/td*sl:0));
+  c.lineTo(R[n-1][0]+tx/td*sl,R[n-1][1]+ty/td*sl);for(let i=n-2;i>=0;i--)c.lineTo(R[i][0],R[i][1]);c.closePath();}
+// the arm, in units with the wrist at (0,0), the forearm along -x to the elbow at (-Fa,0), and the upper arm leaving the elbow towards angle dir, Ua long
+function by_armShape(c,Fa,Ua,dir,coat,skin,cloth,La,o){const E=[-Fa,0],U=a=>[E[0]+Math.cos(dir)*a,E[1]+Math.sin(dir)*a],inn=Math.sin(dir)<0?-1:1;
+  const lit=(c,col,k,w)=>{const g=c.createLinearGradient(La[0]*w,La[1]*w,-La[0]*w,-La[1]*w);g.addColorStop(0,rgba(lighten(col,0.16*(k||1)),1));g.addColorStop(0.55,rgba(col,1));g.addColorStop(1,rgba(darken(col,0.34*(k||1)),1));c.fillStyle=g;c.fill();};
+  const tap=(q,w,col,a)=>{c.beginPath();by_taper(c,q,w);c.fillStyle=col;c.globalAlpha=a;c.fill();c.globalAlpha=1;};
+  if(coat){// the coat's sleeve: the forearm, the elbow with its folds on the inside of the bend, the upper arm; its hem cut straight, a little slanted
+    const pts=[U(Ua),U(Ua*0.5),E,[-Fa*0.45,0],[-4,0]],ws=[29,28.6,27.4,25,23.2];
+    c.beginPath();by_band(c,pts,ws,2.6);lit(c,cloth,1.3,28);seam(c,cloth,0.55,1.4);
+    c.save();c.beginPath();by_band(c,pts,ws,2.6);c.clip();
+    // folds: fanning from the inside of the elbow, a soft one along the forearm, a sheen along the lit edge
+    const ie=[E[0]+6,E[1]+inn*22];[[0,-1],[18,-0.4],[-16,0.5]].forEach(([dx_,k],i)=>{const a0=[ie[0]+dx_*0.3,ie[1]],a1=[ie[0]+dx_+26*(i===0?1:0.8),ie[1]-inn*(10+4*i)],a2=[ie[0]+dx_*1.6+40,ie[1]-inn*(14+6*i)];
+      tap([a0,a1,a2],2.4-0.4*i,rgba(darken(cloth,0.55),1),0.5);c.save();c.translate(-0.8,-1.2);tap([a0,a1,a2],1.1,rgba(lighten(cloth,0.28),1),0.32);c.restore();});
+    [U(18),U(40)].forEach((p,i)=>{const q=[[p[0]+6,p[1]+inn*18],[p[0]-4,p[1]+inn*6],[p[0]-10,p[1]-inn*4]];tap(q,1.6,rgba(darken(cloth,0.5),1),0.35);});
+    tap([[-Fa*0.9,-inn*14],[-Fa*0.5,-inn*16],[-18,-inn*14]],3,rgba(lighten(cloth,0.22),1),0.18);
+    // the lining's shadow just inside the hem
+    c.beginPath();c.moveTo(-6.5,-22);c.lineTo(-1.5,22);c.strokeStyle=rgba(darken(cloth,0.6),0.55);c.lineWidth=1.6;c.stroke();c.restore();
+return;}
+  // a bare arm: the forearm swelling below the elbow and slim at the wrist, the elbow, the upper arm going out of the picture
+  const pts=[U(Ua),U(Ua*0.6),U(22),E,[-Fa*0.72,0],[-Fa*0.35,0],[0,0]],ws=[21,20.2,17.6,16.4,18.6,15.4,12.8];
+  c.beginPath();by_tube(c,pts,ws,6);lit(c,skin,1.1,20);seam(c,skin,0.4,1.3);
+  c.save();c.beginPath();by_tube(c,pts,ws,6);c.clip();
+  tap([[-Fa*0.82,-13],[-Fa*0.5,-11],[-18,-8]],3.2,rgba(lighten(skin,0.3),1),0.28);
+  tap([[E[0]+4,E[1]+inn*8],[E[0]+10,E[1]+inn*12],[E[0]+18,E[1]+inn*13]],1.3,rgba(darken(skin,0.5),1),0.4);
+  c.beginPath();c.ellipse(E[0]-2,E[1]-inn*10,5,3.6,0,0,TAU);c.fillStyle=rgba(lighten(skin,0.2),0.18);c.fill();c.restore();
+  // the sleeve: a coarse, undyed cloth woven by hand, its threads uneven, a few thick slubs, loose threads at its edge
+  if(o.sleeve!==false){const h0=18,a=dir;c.save();c.translate(E[0],E[1]);c.rotate(a);const X1=Ua+40,wv=BY_WEAVE,edge=[];
+    for(let i=0;i<=16;i++){const v=i/16;edge.push([h0+Math.sin(v*9+1)*1.8+(hash(i,7)-0.5)*4.4,-26+v*52]);}
+    c.beginPath();c.moveTo(X1,-27);c.lineTo(edge[0][0],-26);edge.forEach(p=>c.lineTo(p[0],p[1]));c.lineTo(X1,27);c.closePath();
+    const g=c.createLinearGradient(0,-26*inn,0,26*inn);g.addColorStop(0,rgba(lighten(wv,0.14),1));g.addColorStop(0.55,rgba(wv,1));g.addColorStop(1,rgba(darken(wv,0.36),1));c.fillStyle=g;c.fill();seam(c,wv,0.5,1.3);
+    c.save();c.clip();let x=h0-2;for(let i=0;x<X1;i++){x+=2.2+hash(i,11)*2.2;const k=hash(i,12);c.beginPath();c.moveTo(x+hash(i,13)*1.5,-28);c.quadraticCurveTo(x+1.2*(hash(i,14)-0.5)*2,0,x+hash(i,15)*1.5,28);
+      c.strokeStyle=k<0.5?rgba(darken(wv,0.38),0.34):rgba(lighten(wv,0.28),0.3);c.lineWidth=0.7+k*0.6;c.stroke();}
+    let y=-27;for(let i=0;y<27;i++){y+=3+hash(i,21)*3.4;c.beginPath();c.moveTo(h0,y);c.lineTo(X1,y+(hash(i,22)-0.5)*1.4);c.strokeStyle=rgba(darken(wv,0.3),0.14);c.lineWidth=0.6;c.stroke();}
+    for(let i=0;i<5;i++){const sx=h0+8+hash(i,31)*(X1-h0-20),sy=-20+hash(i,32)*40;c.beginPath();by_taper(c,[[sx,sy-4],[sx+0.6,sy],[sx,sy+4]],1.1);c.fillStyle=rgba(lighten(wv,0.25),0.5);c.fill();}c.restore();
+    // loose threads hanging from the edge, pale against the arm
+    c.lineWidth=0.9;edge.forEach((p,i)=>{if(i===0||i===16)return;const l=3+hash(i,41)*5,an=(hash(i,42)-0.5)*0.9;c.strokeStyle=rgba(lighten(wv,0.1+0.2*hash(i,44)),0.85);c.beginPath();c.moveTo(p[0]+1.5,p[1]);c.quadraticCurveTo(p[0]-l*0.5,p[1]+an*2,p[0]-l*Math.cos(an),p[1]+l*Math.sin(an)+1.5);c.stroke();
+      if(hash(i,43)>0.55){c.beginPath();c.moveTo(p[0]+1.5,p[1]+1.6);c.lineTo(p[0]-l*0.55,p[1]+2.6+an*3);c.stroke();}});c.restore();}
+  // a plain twisted cord at the wrist
+  if(o.cord!==false){c.save();c.translate(-11,0);c.beginPath();c.moveTo(-3,-14.4);c.quadraticCurveTo(1,0,-3,14.4);c.lineTo(2.4,14);c.quadraticCurveTo(6.4,0,2.4,-14);c.closePath();lit(c,BY_CORD,1.2,6);seam(c,BY_CORD,0.6,1);
+    c.strokeStyle=rgba(darken(BY_CORD,0.45),0.6);c.lineWidth=0.8;for(let i=0;i<7;i++){const yy=-12+i*4;c.beginPath();c.moveTo(-2.2+Math.abs(yy)*0.05,yy);c.lineTo(3+Math.abs(yy)*0.05,yy+2.6);c.stroke();}c.restore();}}
+// the shirt's cuff, showing below the coat's sleeve and over the wrist, with a cufflink: in units with the wrist at (0,0), the hand towards +x
+function by_cuff(c,silver){c.beginPath();c.moveTo(-4,-17.5);c.quadraticCurveTo(-2,0,-1,17.5);c.lineTo(9.5,16.6);c.quadraticCurveTo(12,0,10.8,-16.8);c.closePath();
+  const g=c.createLinearGradient(0,-17,0,17);g.addColorStop(0,"rgba(246,248,252,1)");g.addColorStop(1,"rgba(190,196,210,1)");c.fillStyle=g;c.fill();seam(c,[200,206,216],0.6,1);
+  c.beginPath();c.moveTo(4.2,-16.8);c.quadraticCurveTo(6.2,0,6.6,16.8);c.strokeStyle="rgba(150,158,176,0.4)";c.lineWidth=0.8;c.stroke();
+  c.beginPath();c.ellipse(4.5,-9,2.3,2.3,0,0,TAU);c.fillStyle=silver?"rgba(214,214,222,1)":"rgba(222,190,110,1)";c.fill();c.strokeStyle="rgba(90,80,60,0.5)";c.lineWidth=0.6;c.stroke();}
+// the arm itself, from (x0,y0) to the wrist at (x1,y1)
+function by_arm(ctx,x0,y0,x1,y1,s,o){
+  const pose=o.pose||"point",coat=(o.dress||(pose==="point"||pose==="pen"?"bare":"coat"))==="coat",t=o.t||0,fl=x1<x0?-1:1;o=Object.assign({silver:fl<0},o);
+  const skin=o.skin||(coat?(fl<0?BY_SKIN.host:BY_SKIN.envoy):BY_SKIN.stranger),cloth=o.cloth||(fl<0?[62,62,70]:[42,54,84]);
+  // the elbow: the forearm Fa units long, bent by beta at the elbow, which hangs below the line from the shoulder's side to the wrist
+  const Fa=coat?132:120,beta=o.bend!=null?o.bend:(coat?0.24:0.08),D=Math.hypot(x1-x0,y1-y0),th=Math.atan2(y1-y0,x1-x0),aS=Math.asin(clamp(Fa*s*Math.sin(beta)/D,-1,1)),aW=beta-aS;
+  const an=th-fl*aW,E=[x1-Math.cos(an)*Fa*s,y1-Math.sin(an)*Fa*s],thu=Math.atan2(y0-E[1],x0-E[0]);let rel=thu-an;rel=Math.atan2(Math.sin(rel),Math.cos(rel));
+  const dir=fl<0?-rel:rel,Ua=Math.hypot(x0-E[0],y0-E[1])/s+60;
+  // the light comes from the upper left of the picture: the same direction, in the arm's own turned (and perhaps mirrored) units
+  const rot=(v,r)=>[v[0]*Math.cos(r)-v[1]*Math.sin(r),v[0]*Math.sin(r)+v[1]*Math.cos(r)],La=rot([-0.7,-0.7],-an);La[1]*=fl;
+  const calm=o.still||o.card;let bend=0;
+  if(o.at){const d=Math.atan2(o.at[1]-y1,o.at[0]-x1)-an;bend=clamp(Math.atan2(Math.sin(d),Math.cos(d))*fl,-0.5,0.5);}
+  if(!calm)bend+=Math.sin(t*0.7+x0)*0.012;
+  // a hand closing on a sheet: 16 steps, each faded into the next (smooth, and the cache holds only 17 pictures of it)
+  const kk=pose==="take"?clamp(o.k==null?1:o.k,0,1)*16:16,k0=Math.floor(kk),kf=kk-k0,HK=q=>BY_HANDS[pose]||(pose==="give"?BY_HANDS.grip:by_handMix(BY_HANDS.open,BY_HANDS.grip,ease(q)));
+  const hs=0.9,off=BY_HOFF[coat?1:0],rim={col:o.edge||BY_WARMRIM,glow:0.35,ring:1.2/s,blur:10/s};
+  const id=[coat?"coat":"bare",skin.join(","),cloth.join(","),o.sleeve!==false,o.cord!==false,o.silver,fl].join("|"),gid=[Fa,Math.round(Ua),dir.toFixed(3),an.toFixed(3)].join("|");
+  const lq=Math.round(bend/0.25),Lh=rot(La,-lq*0.25),hk0="hand|"+pose+"|"+id+"|"+an.toFixed(3)+"|"+lq,hb0=[-8,-44,116,36],hb=(fl<0?[hb0[0],-hb0[3],hb0[2],-hb0[1]]:hb0).map(v=>v*hs);hb[0]=Math.min(hb[0],-8);
+  const hx=x1+Math.cos(an)*off*s,hy=y1+Math.sin(an)*off*s;
+  // the arm is one picture (its shape does not change), placed on whole pixels; the hand is turned into place when it follows something
+  const armPut=(c,e)=>{c.save();c.translate(Math.round(x1),Math.round(y1));c.scale(s,s);by_blit(c,"arm|"+id+"|"+gid,0,0,an,[-Fa-Ua-40,-34,12,34].map((v,i)=>i%2?v:v),cc=>{if(fl<0)cc.scale(1,-1);by_armShape(cc,Fa,Ua,dir,coat,skin,cloth,La,o);},{rim,edge:e,sub:false});c.restore();};
+  const handPut=(c,e,part)=>{for(const [kq,al] of [[k0/16,1],[Math.min(16,k0+1)/16,kf]]){if(al<0.01)continue;const H=HK(kq);c.save();c.globalAlpha*=al;c.translate(calm?Math.round(hx):hx,calm?Math.round(hy):hy);c.scale(s,s);by_blit(c,hk0+"|"+kq+"|"+part,0,0,an+fl*bend,hb,(cc,D)=>{
+    if(part==="thumb"){cc.shadowColor="rgba(40,24,10,0.35)";cc.shadowBlur=3*hs*D;cc.shadowOffsetY=1.6*hs*D;}cc.save();cc.scale(hs,hs*fl);by_hand(cc,H,skin,{L:Lh,part,thumbUnder:false});cc.restore();if(coat&&part!=="thumb"){cc.scale(1,fl);by_cuff(cc,o.silver);}},
+    {rim:part==="thumb"?null:rim,edge:e,sub:false,live:!calm,merge:!calm,rimCut:q=>q.fillRect(-60,-60,64,120)});c.restore();}};
+  const mg=48*s,X=[x0,E[0],x1+Math.cos(an)*110*s],Y=[y0,E[1],y1+Math.sin(an)*110*s];
+  // fingers behind the sheet: the hand is cut away where the sheet is (the clip spans only the hand's reach), and the thumb lies on its face
+  const hr=120*s,near=o.card&&Math.abs(hx-(o.card[0]+o.card[2]/2))<o.card[2]/2+hr&&Math.abs(hy-(o.card[1]+o.card[3]/2))<o.card[3]/2+hr;
+  by_figure(ctx,[Math.min(...X)-mg,Math.min(...Y)-mg,Math.max(...X)+mg,Math.max(...Y)+mg],(c,e)=>{armPut(c,e);c.save();
+    if(near){const [cx_,cy_,cw,ch,cr]=o.card;c.beginPath();c.rect(hx-hr,hy-hr,2*hr,2*hr);c.save();c.translate(cx_+cw/2,cy_+ch/2);c.rotate(cr||0);c.rect(-cw/2,-ch/2,cw,ch);c.restore();c.clip("evenodd");}
+    handPut(c,e,o.card?"back":"all");c.restore();
+    if(!e&&o.card)handPut(c,false,"thumb");},true);}
+
+/* ---------- the brain: a side view, facing left, with one concept cell ---------- */
+const BY_VIOLET=[200,170,255],BY_WARM=[255,236,160];
+// outlines in brain units (the brain is about 240 wide and 200 tall; s scales it): the cortex, the cerebellum tucked under its back, the brainstem
+const BY_CORTEX=[[-114,-8],[-111,-30],[-104,-50],[-90,-70],[-72,-84],[-52,-94],[-32,-100],[-12,-102],[10,-102],[21,-100.5],[32,-99],[52,-93],[70,-84],[87,-72],[101,-58],[112,-43],[119,-27],[123,-10],[124,6],[116,26],[102,34],[88,40],[74,45],[60,50],[44,56],[28,60],[10,62],[-6,63],[-22,62],[-36,58],[-48,53],[-58,45],[-65,34],[-62,23],[-70,22],[-80,24],[-92,21],[-104,13]];
+const BY_CEREB=[[34,48],[52,39],[76,33],[100,33],[117,41],[123,55],[120,72],[104,86],[80,91],[58,88],[42,76]];
+const BY_STEM=[[16,46],[44,46],[49,58],[47,74],[42,88],[38,102],[37,124],[25,124],[25,104],[22,92],[12,86],[7,74],[9,60]];
+// the sulci: [weight, points]. The lateral (Sylvian) and central sulci are deepest; then the frontal, parietal and temporal sulci; then small folds
+const BY_SULCI=[
+  [3.1,[[-62,23],[-44,15],[-26,11],[-8,8],[10,5],[26,1],[42,-5],[52,-13],[58,-23],[60,-33]]],[1.6,[[-44,15],[-45,6],[-49,-2]]],[1.6,[[-48,16],[-58,10],[-66,9]]],
+  [2.8,[[21,-100],[16,-90],[15,-80],[18,-72],[12,-64],[8,-54],[4,-44],[0,-34],[-4,-24],[-8,-15],[-10,-7]]],
+  [2.1,[[-5,-100],[-9,-90],[-12,-80],[-15,-70],[-16,-62]]],[2.1,[[-20,-58],[-24,-48],[-28,-38],[-30,-26],[-33,-15],[-34,-7]]],
+  [2.1,[[44,-95],[40,-84],[39,-74],[35,-64],[33,-52],[30,-40],[27,-29],[25,-18]]],
+  [2,[[-17,-80],[-30,-81],[-44,-77],[-58,-74],[-72,-66],[-84,-58],[-96,-46]]],[2,[[-24,-46],[-38,-50],[-52,-46],[-66,-42],[-80,-35],[-94,-26],[-104,-16]]],
+  [2.1,[[33,-54],[46,-58],[58,-56],[72,-54],[86,-48],[98,-40],[110,-32]]],
+  // the superior temporal sulcus runs below the concept cell, which sits in the superior temporal gyrus; the inferior one lower, broken in pieces
+  [2.4,[[-54,41],[-40,38.5],[-26,41],[-12,39],[2,41.5],[16,40],[30,37.5],[44,31],[56,24],[64,15],[70,5],[75,-5],[78,-18]]],
+  [1.7,[[-46,53],[-34,51.5],[-22,53.5],[-14,52]]],[1.6,[[-6,57],[6,55.5],[16,57]]],[1.8,[[26,52],[38,49.5],[50,46],[60,40],[70,35],[82,30]]],[1.1,[[38,49.5],[42,43],[40,37]]],[1.1,[[-34,51.5],[-30,46]]],
+  [1.7,[[103,-12],[108,-2],[110,8],[106,20]]],[1.4,[[93,-70],[97,-62],[98,-54]]],[1.5,[[86,-6],[94,-12],[100,-24],[104,-38]]],
+  // small folds and dimples, giving each gyrus its wander
+  [1.2,[[-34,-92],[-46,-90],[-60,-86]]],[1.2,[[-68,-80],[-78,-74],[-88,-66]]],[1.2,[[-40,-64],[-50,-62],[-58,-58],[-68,-52]]],[1.2,[[-80,-48],[-90,-42],[-100,-34]]],[1.1,[[-6,-70],[-2,-62]]],
+  [1.2,[[-56,-26],[-64,-22],[-74,-18]]],[1.2,[[-82,-12],[-90,-6],[-100,-2]]],[1.2,[[-78,10],[-88,12],[-98,8]]],[1.1,[[-50,-30],[-48,-20],[-46,-12]]],[1.1,[[-60,-6],[-68,2]]],
+  [1.2,[[46,-32],[52,-40],[60,-44],[68,-38]]],[1.2,[[80,-22],[88,-30],[94,-24]]],[1.2,[[56,-82],[66,-78],[78,-72]]],[1.1,[[50,-72],[60,-68],[66,-66]]],[1.1,[[80,-62],[88,-58]]],
+  [1.1,[[112,-44],[116,-36],[118,-26]]],[1.1,[[94,14],[102,20],[110,24]]],[1.1,[[84,6],[92,4],[98,-2]]],[1.1,[[70,14],[80,12]]],
+  [1.1,[[-40,47],[-30,46.5],[-22,47.5]]],[1.1,[[34,20],[42,17],[48,12]]],[1.1,[[54,36],[62,32]]],[1.1,[[-36,22],[-26,21]]],[1.1,[[-16,48],[-6,47]]]];
+(function(){for(const q of BY_SULCI){if(q[0]<1.9||q[0]>2.7)continue;const P=q[1],out=[P[0]];for(let i=1;i<P.length;i++){const a=P[i-1],b=P[i],dx=b[0]-a[0],dy=b[1]-a[1],d=Math.hypot(dx,dy)||1,m=(hash(i,77+P.length)-0.5)*Math.min(6,d*0.3);
+  out.push([(a[0]+b[0])/2-dy/d*m,(a[1]+b[1])/2+dx/d*m],b);}q[1]=out;}})();
+const BY_BMP={};
+function by_brainBmp(q){const s=q/2,key="brain"+q;if(BY_BMP[key])return BY_BMP[key];
+  const X0=-140,Y0=-126,X1=146,Y1=134,Wc=Math.ceil((X1-X0)*q),Hc=Math.ceil((Y1-Y0)*q),cv=mkCanvas(Wc,Hc),c=cv.getContext("2d"),col=BY_VIOLET;
+  const tf=cx=>{cx.setTransform(q,0,0,q,-X0*q,-Y0*q);cx.lineJoin="round";cx.lineCap="round";};tf(c);
+  const layer=()=>{const l=mkCanvas(Wc,Hc).getContext("2d");tf(l);return l;},put=(l,op,a,dx,dy)=>{c.save();c.setTransform(1,0,0,1,0,0);c.globalCompositeOperation=op||"source-over";c.globalAlpha=a==null?1:a;c.drawImage(l.canvas,(dx||0)*q,(dy||0)*q);c.restore();};
+  const body=(x,pts,g0,g1,x0,y0,x1,y1)=>{x.beginPath();by_curve(x,pts,true);const g=x.createLinearGradient(x0,y0,x1,y1);g.addColorStop(0,g0);g.addColorStop(1,g1);x.fillStyle=g;x.fill();};
+  const rim=(pts,a,lw)=>{c.save();c.beginPath();by_curve(c,pts,true);c.shadowColor=rgba(col,0.9);c.shadowBlur=10*s;c.strokeStyle=rgba(col,a);c.lineWidth=lw;c.stroke();c.restore();};
+  // the shadow side of an outline: a crescent inside the edge, away from the light, so the rim is heavier at the lower right
+  const crescent=(pts,d,a)=>{const l=layer();l.beginPath();by_curve(l,pts,true);l.fillStyle=rgba(col,a);l.fill();
+    l.globalCompositeOperation="destination-out";l.translate(-d,-d*0.9);l.beginPath();by_curve(l,pts,true);l.fill();put(l);};
+  const dark=a=>rgba(mix(col,[20,26,40],a),0.96);
+  // the brainstem: the pons swelling in front, the medulla narrowing, fading as it leaves the picture
+  let l=layer();body(l,BY_STEM,dark(0.74),"rgba(8,12,22,0.96)",0,46,50,110);
+  l.save();l.beginPath();by_curve(l,BY_STEM,true);l.clip();l.strokeStyle=rgba(col,0.2);l.lineWidth=0.6;
+  for(let i=0;i<6;i++){l.beginPath();l.moveTo(4,58+i*5);l.quadraticCurveTo(24,63+i*5.2,52,57+i*4.4);l.stroke();}
+  l.strokeStyle=rgba(col,0.4);l.lineWidth=0.9;l.beginPath();l.moveTo(22,88);l.bezierCurveTo(28,94,31,104,31,124);l.stroke();l.restore();
+  l.save();l.beginPath();by_curve(l,BY_STEM,true);l.shadowColor=rgba(col,0.9);l.shadowBlur=10*s;l.strokeStyle=rgba(col,0.85);l.lineWidth=1;l.stroke();l.restore();
+  let g=l.createLinearGradient(0,92,0,122);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,"rgba(0,0,0,1)");l.globalCompositeOperation="destination-out";l.fillStyle=g;l.fillRect(-10,90,80,50);put(l);
+  // the cerebellum, with its fine folia and the deep horizontal fissure
+  body(c,BY_CEREB,dark(0.72),"rgba(8,12,22,0.97)",40,30,110,95);
+  c.save();c.beginPath();by_curve(c,BY_CEREB,true);c.clip();
+  for(let k=0;k<15;k++){const r=k/14,deep=k===7;c.strokeStyle=rgba(col,deep?0.75:0.3+0.1*hash(k,3));c.lineWidth=deep?1.2:0.55;c.beginPath();
+    for(let i=0;i<=30;i++){const u=i/30,an=lerp(0.02,1.0,u)*Math.PI,x=84+Math.cos(an)*(16+r*42),y=28+Math.sin(an)*(9+r*60)+Math.sin(u*11+k*1.7)*0.7;i?c.lineTo(x,y):c.moveTo(x,y);}c.stroke();}
+  c.restore();crescent(BY_CEREB,1.6,0.55);rim(BY_CEREB,0.9,1.1);
+  // the cortex: lit from the upper left
+  body(c,BY_CORTEX,dark(0.74),"rgba(9,11,24,0.97)",-90,-100,100,70);
+  c.save();c.beginPath();by_curve(c,BY_CORTEX,true);c.clip();
+  g=c.createRadialGradient(-56,-66,4,-40,-44,130);g.addColorStop(0,rgba(mix(col,[255,255,255],0.2),0.18));g.addColorStop(1,rgba(col,0));c.fillStyle=g;c.fillRect(-130,-120,260,200);
+  // the folds, in relief: each groove is shadowed on its upper-left wall and lit on its lower-right one, so the gyri between them round out
+  const grooves=layer();BY_SULCI.forEach(([w,pts])=>{grooves.beginPath();by_taper(grooves,pts,w*1.5);grooves.fillStyle="#000";grooves.fill();});
+  const soft=layer();soft.setTransform(1,0,0,1,0,0);soft.filter="blur("+(4.2*q).toFixed(1)+"px)";soft.drawImage(grooves.canvas,0,0);soft.filter="none";
+  const tint=(src,cc)=>{const t_=layer();t_.setTransform(1,0,0,1,0,0);t_.drawImage(src.canvas,0,0);t_.globalCompositeOperation="source-in";t_.fillStyle=cc;t_.fillRect(0,0,Wc,Hc);return t_;};
+  c.restore();
+  const clipTo=(lay)=>{lay.globalCompositeOperation="destination-in";lay.setTransform(q,0,0,q,-X0*q,-Y0*q);lay.beginPath();by_curve(lay,BY_CORTEX,true);lay.fill();return lay;};
+  const sh=tint(soft,"rgb(2,3,10)"),hi=tint(soft,rgba(mix(col,[255,255,255],0.35),1));
+  const shL=layer();shL.setTransform(1,0,0,1,0,0);shL.drawImage(sh.canvas,-2*q,-2*q);put(clipTo(shL),"source-over",1);put(clipTo(shL),"source-over",0.5);
+  const hiL=layer();hiL.setTransform(1,0,0,1,0,0);hiL.drawImage(hi.canvas,2.2*q,2.2*q);put(clipTo(hiL),"source-over",0.24);
+  c.save();c.beginPath();by_curve(c,BY_CORTEX,true);c.clip();
+  BY_SULCI.forEach(([w,pts])=>{c.beginPath();by_taper(c,pts,w*0.95);c.fillStyle="rgba(4,6,14,0.7)";c.fill();});
+  BY_SULCI.forEach(([w,pts])=>{c.beginPath();by_taper(c,pts,w*0.4);c.fillStyle=rgba(col,w>2?0.95:0.72);c.fill();});
+  c.restore();
+  crescent(BY_CORTEX,2,0.6);rim(BY_CORTEX,1,1.05);
+  // round the concept cell the folds recede, so that the cell reads first
+  c.save();c.beginPath();by_curve(c,BY_CORTEX,true);c.clip();g=c.createRadialGradient(14,24,0,14,24,32);g.addColorStop(0,"rgba(6,8,18,0.42)");g.addColorStop(0.6,"rgba(6,8,18,0.26)");g.addColorStop(1,"rgba(6,8,18,0)");c.fillStyle=g;c.fillRect(-20,-10,70,70);c.restore();
+  return BY_BMP[key]={cv,X0,Y0,q};}
+// the concept cell: a pyramidal neuron, its apical dendrite rising, basal dendrites spreading, an axon leaving below
+function by_neuronPaths(){if(BY_BMP.npaths)return BY_BMP.npaths;const out=[];
+  // each path keeps its route from the soma (base + its points), so that a spark can run along it all the way in, or out
+  const grow=(x,y,a,len,w,depth,seed,wig,kind,base)=>{const n=5,pts=[[x,y]];let an=a;for(let i=1;i<=n;i++){an+=(hash(seed,i)-0.5)*(wig||0.5);const p=pts[i-1];pts.push([p[0]+Math.cos(an)*len/n,p[1]+Math.sin(an)*len/n]);}
+    const route=base.concat(pts.slice(1));out.push({pts,w0:w,w1:Math.max(0.18,w*0.55),d:depth,kind,route});if(depth>0){const e=pts[n],sp=0.32+0.3*hash(seed,9),lean=(hash(seed,11)-0.5)*0.3;
+      grow(e[0],e[1],an-sp+lean,len*(0.62+0.12*hash(seed,12)),w*0.62,depth-1,seed*3+1,wig,kind,route);grow(e[0],e[1],an+sp+lean,len*(0.58+0.12*hash(seed,13)),w*0.6,depth-1,seed*3+2,wig,kind,route);}};
+  // the apical dendrite, with oblique branches and a tuft
+  const ap=[[0,-5]];for(let i=1;i<=6;i++)ap.push([Math.sin(i*0.9)*1.2,-5-i*4.4]);out.push({pts:ap,w0:1.25,w1:0.6,d:3,kind:"apical",route:ap});
+  [[2,-0.5,7,5],[3,Math.PI+0.6,6,6],[4,-0.35,6,7],[5,Math.PI+0.4,5,8]].forEach(([i,a,l,sd])=>grow(ap[i][0],ap[i][1],a-Math.PI*0.08,l,0.5,1,sd,0.5,"apical",ap.slice(0,i+1)));
+  [-0.6,-0.1,0.45].forEach((d,i)=>grow(ap[6][0],ap[6][1],-Math.PI/2+d,6,0.5,1,20+i,0.5,"apical",ap));
+  // basal dendrites
+  [[-3.4,2.6,Math.PI*0.86,11],[-2.4,3.6,Math.PI*0.66,12],[2.6,3.6,Math.PI*0.33,13],[3.4,2.4,Math.PI*0.1,14],[0.6,4,Math.PI*0.52,15]].forEach(([x,y,a,sd])=>grow(x,y,a,8+hash(sd,1)*3,0.8,2,sd,0.5,"basal",[[0,0]]));
+  // the axon, thin and long, with a collateral
+  const ax=[[0.4,4.4]];for(let i=1;i<=7;i++)ax.push([0.4+Math.sin(i*0.7)*1.6,4.4+i*3.4]);out.push({pts:ax,w0:0.5,w1:0.3,d:0,kind:"axon",route:ax});grow(ax[4][0],ax[4][1],Math.PI*0.2,7,0.3,0,31,0.3,"axon",ax.slice(0,5));
+  // the routes the sparks take while the cell fires: in along two apical and two basal dendrites, from their far tips, and out along the axon
+  const tipOf=k=>out.filter(b=>b.kind===k&&b.d===0),A=tipOf("apical"),B=tipOf("basal");
+  out.sparks=[[A[A.length-2].route,-1],[A[1].route,-1],[B[1].route,-1],[B[B.length-3].route,-1],[ax,1]];
+  return BY_BMP.npaths=out;}
+function by_neuronBmp(q){const s=q/2,key="cell"+q;if(BY_BMP[key])return BY_BMP[key];const R=36,cv=mkCanvas(Math.ceil(2*R*q),Math.ceil(2*R*q)),c=cv.getContext("2d");
+  c.setTransform(q,0,0,q,R*q,R*q);c.lineJoin="round";c.lineCap="round";c.shadowColor=rgba(BY_WARM,0.9);c.shadowBlur=4*s;c.fillStyle=rgba(BY_WARM,1);
+  by_neuronPaths().forEach(b=>{c.beginPath();by_tube(c,b.pts,b.pts.map((_,i)=>lerp(b.w0,b.w1,i/(b.pts.length-1))),3);c.fill();});
+  // the soma: a rounded pyramid
+  c.beginPath();by_curve(c,[[0,-8],[3.4,-1],[4.6,3.6],[0,5],[-4.6,3.6],[-3.4,-1]],true);c.fill();
+  return BY_BMP[key]={cv,R,q};}
+function brain(ctx,x,y,s,t,act,a){withA(ctx,a==null?1:a,()=>{const k=clamp(act||0,0,1);t=t||0;
+  ctx.save();ctx.translate(x,y);ctx.scale(s,s);by_blit(ctx,"brain",0,0,0,[-140,-126,146,134],(c,D)=>{const B=by_brainBmp(D);c.drawImage(B.cv,B.X0,B.Y0,B.cv.width/D,B.cv.height/D);});
+  // the concept cell at (x+14s, y+26s): a warm halo, the neuron, and while it fires, sparks running in along its dendrites and out along its axon
+  const cx=14,cy=26,halo=(0.16+0.04*Math.sin(t*1.2))*(1-k)+0.75*k;
+  if(halo>0.01)withA(ctx,halo,()=>by_blit(ctx,"cellhalo",cx,cy,0,[-72,-72,72,72],c=>{const g=c.createRadialGradient(0,0,0,0,0,72);g.addColorStop(0,rgba(BY_WARM,0.55));g.addColorStop(0.25,rgba(BY_WARM,0.22));g.addColorStop(0.6,rgba(BY_WARM,0.06));g.addColorStop(1,rgba(BY_WARM,0));c.fillStyle=g;c.fillRect(-72,-72,144,144);},{op:"lighter"}));
+  withA(ctx,0.42+0.58*k,()=>by_blit(ctx,"cell",cx,cy,0,[-36,-36,36,36],(c,D)=>{const N=by_neuronBmp(D);c.drawImage(N.cv,-N.R,-N.R,N.cv.width/D,N.cv.height/D);}));
+  ctx.restore();
+  const gx=x+cx*s,gy=y+cy*s;
+  if(k>0.02){const R=by_neuronPaths().sparks;R.forEach(([r,dirn],j)=>{const u=((t*0.8+j*0.37+hash(j,5)*0.2)%1),f=dirn>0?u:1-u,n=r.length-1,i=Math.min(n-1,Math.floor(f*n)),q=f*n-i,pa=r[i],pb=r[i+1];
+      glow(ctx,gx+lerp(pa[0],pb[0],q)*s,gy+lerp(pa[1],pb[1],q)*s,5*s,BY_WARM,k*0.85*Math.sin(Math.PI*u));});}
+  glow(ctx,gx,gy-s,(9+5*k)*s,[255,250,225],0.35+0.6*k);});}
+
+/* ---------- a baby ---------- */
+// a baby of about a year, sitting on the ground in a cloth wrap, pointing: the root of reference. pt (0 to 1) raises the pointing arm.
+// t: seconds (a breath, a blink, the head turning up to what she points at); o.at: the point she points at (default: up and to the right; to the left, she is mirrored).
+// At s = 2, sitting at (520,720), her fingertip reaches about (680,640) when pt = 1.
+const BY_BABY={skin:[176,122,88],hair:[44,30,26],wrap:[226,208,176],edge:[255,214,170]},BY_LEAN=0.07;
+const by_line=(c,col,al,w)=>seam(c,col,al==null?0.4:al,w||1.1);
+// her parts, each in her own units, facing right (mirrored by the caller)
+function by_babyFar(c,skin,L){const line=by_line;
+    // the far leg, behind: thigh, knee, a chubby calf, the foot with its toes up
+    c.beginPath();by_tube(c,[[8,60],[26,55],[40,54],[54,58],[63,59]],[12,9.5,8.2,7.4,5.2],5);L(c,darken(skin,0.14),36,56,14);line(c,skin);
+    c.beginPath();by_curve(c,[[58,62],[66,65],[74,60],[78,50],[76,43],[71,42],[66,50],[60,55]],true);L(c,darken(skin,0.12),68,54,10);line(c,skin);
+}
+function by_babyTorso(c,skin,B,L){const line=by_line;c.translate(4,76);c.rotate(BY_LEAN);c.translate(-4,-76);
+    // the body: round belly, rounded back, sitting firmly (leaning a little towards what she points at)
+    c.beginPath();by_curve(c,[[6,0],[22,4],[30,18],[34,38],[32,56],[22,70],[4,78],[-12,76],[-21,64],[-23,44],[-18,22],[-9,6]],true);L(c,skin,4,36,40);line(c,skin);
+    // the wrap: a cloth round the body and over one shoulder, knotted there
+    c.save();c.beginPath();by_curve(c,[[-14,6],[-6,2],[2,6],[10,12],[20,16],[30,22],[35,42],[32,60],[22,72],[4,80],[-14,78],[-24,64],[-25,42],[-21,20]],true);L(c,B.wrap,0,40,42,1.2);line(c,B.wrap,0.5);
+    c.clip();[[[-20,40],[2,33],[27,36]],[[-22,57],[4,50],[31,53]],[[-8,12],[8,20],[26,26]],[[-16,26],[4,24],[24,30]]].forEach(q=>{c.beginPath();by_taper(c,q,0.9);c.fillStyle=rgba(darken(B.wrap,0.35),0.45);c.fill();});
+    c.strokeStyle=rgba(darken(B.wrap,0.15),0.16);c.lineWidth=0.5;for(let i=-4;i<10;i++){c.beginPath();c.moveTo(-30,8+i*7);c.lineTo(40,4+i*7);c.stroke();}c.restore();
+    c.beginPath();c.ellipse(-9,7,4.4,3.4,0.4,0,TAU);L(c,darken(B.wrap,0.06),-9,7,4,1.2);line(c,B.wrap,0.6);
+    c.beginPath();by_taper(c,[[-11,9],[-14,15],[-13,21]],1.3);c.fillStyle=rgba(darken(B.wrap,0.1),0.95);c.fill();
+}
+function by_babyNear(c,skin,L){const line=by_line;
+    // the near leg, stretched out in front: a fat thigh with its crease, the knee, the calf, the foot
+    c.beginPath();by_tube(c,[[-4,70],[16,70],[32,72],[46,75],[58,78],[64,78]],[13,12,9.6,9,7.8,5.6],5);L(c,skin,30,72,16);line(c,skin);
+    c.beginPath();by_taper(c,[[14,61],[17,70],[15,80]],1);c.fillStyle=rgba(darken(skin,0.45),0.45);c.fill();
+    c.beginPath();by_taper(c,[[58,71],[60,78],[58,85]],0.8);c.fillStyle=rgba(darken(skin,0.45),0.4);c.fill();
+    c.beginPath();by_curve(c,[[60,72],[68,72],[78,70],[84,62],[84,54],[79,52],[74,59],[66,64],[60,64]],true);L(c,skin,72,64,12);line(c,skin);
+    c.fillStyle=rgba(lighten(skin,0.25),0.9);[[84,55,2.4],[83,59.5,2],[81,63.4,1.8],[78,66.6,1.6]].forEach(([tx,ty,tr])=>{c.beginPath();c.ellipse(tx,ty,tr*0.8,tr,0.3,0,TAU);c.fill();});
+}
+function by_babyArm(c,skin,L,mir){const line=by_line;c.translate(4,76);c.rotate(BY_LEAN);c.translate(-4,-76);
+    // the near arm, resting on her leg
+    const NS=[-8,12],NE=[-10,32],NW=[6,46];c.beginPath();by_tube(c,[NS,[-10,22],NE,[-2,41],NW],[7.8,7.4,6.2,6.2,4.8],5);L(c,skin,-6,30,14);line(c,skin);
+    c.beginPath();by_taper(c,[[-15,32],[-10,34],[-5,32]],0.7);c.fillStyle=rgba(darken(skin,0.45),0.4);c.fill();
+    c.save();c.translate(NW[0],NW[1]);c.rotate(0.5);c.scale(0.27,0.27);by_hand(c,"rest",skin,{chub:1,L:[-0.7*mir*Math.cos(0.5)-0.7*Math.sin(0.5),0.7*mir*Math.sin(0.5)-0.7*Math.cos(0.5)]});c.restore();
+}
+function by_babyHead(c,skin,B,L){const line=by_line;
+    // the head: a big round skull, the face small and low, full cheeks
+    const HP=[[-2,-24],[10,-21],[18,-13],[21,-4],[22,4],[22.5,9],[19,15],[12,19],[4,20],[-6,18],[-15,12],[-21,2],[-22,-8],[-17,-18]];
+    c.beginPath();by_curve(c,HP,true);L(c,skin,2,-4,24);line(c,skin,0.35);
+    c.beginPath();by_curve(c,[[-22,-8],[-2,-24],[18,-13],[21,-4],[15,-12],[4,-15],[-6,-12],[-14,-6],[-16,4],[-20,4]],true);c.fillStyle=rgba(B.hair,0.28);c.fill();
+    // a little soft, curly hair, above the ear
+    c.save();c.beginPath();by_curve(c,HP,true);c.clip();c.beginPath();bumpy(c,-1,-7,21.5,19,Math.PI*0.97,Math.PI*1.93,24,0.09,3);c.quadraticCurveTo(10,-15,0,-14);c.quadraticCurveTo(-11,-12,-15,-6);c.quadraticCurveTo(-19,-4,-22,-5);c.closePath();
+    const hg=c.createLinearGradient(-14,-24,8,-6);hg.addColorStop(0,rgba(lighten(B.hair,0.12),0.8));hg.addColorStop(1,rgba(B.hair,0.62));c.fillStyle=hg;c.fill();
+    c.fillStyle=rgba(lighten(B.hair,0.3),0.28);for(let i=0;i<34;i++){const ha_=Math.PI*(1.02+0.86*hash(i,4)),hr_=11+hash(i,5)*10;c.beginPath();c.arc(-1+Math.cos(ha_)*hr_,-7+Math.sin(ha_)*hr_*0.95,0.75,0,TAU);c.fill();}c.restore();
+    // the near ear, on the side of the head
+    c.beginPath();by_curve(c,[[-9,-6],[-4,-7.5],[-2.5,-1],[-4,5],[-8.5,5.5],[-10.5,0]],true);L(c,skin,-6,-1,6);line(c,skin,0.45);c.beginPath();c.arc(-6,-0.5,2.4,-1.3,1.7);c.strokeStyle=rgba(darken(skin,0.4),0.5);c.lineWidth=0.9;c.stroke();
+    // cheeks, nose, mouth
+    c.fillStyle="rgba(214,110,96,0.16)";c.beginPath();c.ellipse(13,8,5,3.6,0,0,TAU);c.fill();
+    c.beginPath();c.moveTo(21.5,1);c.quadraticCurveTo(25,4,21.6,6.2);c.strokeStyle=rgba(darken(skin,0.45),0.7);c.lineWidth=1.2;c.stroke();
+}
+// where her arm and hand are: the shoulder S, elbow E, wrist W (her units, facing right) and the angles of the upper arm, forearm and hand
+function by_babyArm2(dx,dy,r,br,t){const lean=BY_LEAN,rotP=(p_)=>{const c_=Math.cos(lean),s_=Math.sin(lean),X=p_[0]-4,Y=p_[1]-76;return[4+X*c_-Y*s_,76+X*s_+Y*c_];};
+  const S=rotP([24,6+br*0.3]),aim=Math.atan2(dy-S[1],dx-S[0])+Math.sin(t*1.3)*0.015,ua=lerp(1.25,aim-0.14,r),fa=lerp(0.2,aim+0.04,r),ha=lerp(0.05,aim,r);
+  const E=[S[0]+Math.cos(ua)*23.5,S[1]+Math.sin(ua)*23.5],W=[E[0]+Math.cos(fa)*20.5,E[1]+Math.sin(fa)*20.5];return{S,E,W,ua,fa,ha,rotP};}
+// the tip of her index finger, in the picture (for placing her): the same arguments as baby()
+function by_babyTip(x,y,s,pt,t,o){o=o||{};t=t||0;const r=clamp(pt==null?1:pt,0,1),at=o.at||[x+260*s,y-190*s],mir=at[0]<x?-1:1,A=by_babyArm2((at[0]-x)*mir/s,(at[1]-y)/s,r,Math.sin(t*2.1)*0.6,t);
+  const tip=[24.05,-2.88],c=Math.cos(A.ha),sn=Math.sin(A.ha),X=A.W[0]+tip[0]*c-tip[1]*sn,Y=A.W[1]+tip[0]*sn+tip[1]*c;return[x+X*s*mir,y+Y*s];}
+function baby(ctx,x,y,s,a,pt,t,o){o=o||{};withA(ctx,a==null?1:a,()=>{t=t||0;const B=BY_BABY,skin=o.skin||B.skin,r=clamp(pt==null?1:pt,0,1);
+  const at=o.at||[x+260*s,y-190*s],mir=at[0]<x?-1:1,dx=(at[0]-x)*mir/s,dy=(at[1]-y)/s,L=by_L(mir),line=by_line;
+  const br=Math.sin(t*2.1)*0.6,bl=(t+0.8)%3.7,blink=bl<0.18?Math.abs(bl-0.09)/0.09:1;
+  // the pointing arm, from the far shoulder, aimed at the target as it rises
+  const A=by_babyArm2(dx,dy,r,br,t),S=A.S,E=A.E,Wr=A.W,ha=A.ha,lean=BY_LEAN;
+  // the head turns up towards the target as the arm rises
+  const look=clamp(Math.atan2(dy+22,dx-8)*0.5,-0.45,0.1),tilt=lerp(0.02,look,r)+Math.sin(t*0.9)*0.02,NP=A.rotP([8,-4+br*0.4]);
+  // her edge is as fine as the grown-ups': about a pixel, with a soft glow of 10
+  const key="baby|"+mir+"|"+skin.join(","),rim={col:o.edge||B.edge,glow:0.45,ring:1.2/s,blur:10/s},mb=b=>mir<0?[-b[2],b[1],-b[0],b[3]]:b;
+  const part=(c,e,name,box,fn)=>{c.save();c.translate(x,y);c.scale(s,s);by_blit(c,key+"|"+name,0,0,0,mb(box),cc=>{cc.scale(mir,1);fn(cc);},{rim,edge:e});c.restore();};
+  // the hand opens from a loose fist to a point as the arm rises: only the index moves
+  const kq=Math.round(clamp((r-0.2)/0.3,0,1)*16)/16,lq=Math.round(ha/0.3),Lh=(()=>{const q=lq*0.3;return[-0.7*mir*Math.cos(-q)+0.7*Math.sin(-q),-0.7*mir*Math.sin(-q)-0.7*Math.cos(-q)];})();
+  const armPath=cc=>by_tube(cc,[S,[(S[0]+E[0])/2,(S[1]+E[1])/2],E,[(E[0]+Wr[0])/2,(E[1]+Wr[1])/2],Wr],[8.8,8.4,7.2,7.2,5.6],4);
+  by_figure(ctx,[x-(mir<0?110:50)*s,y-72*s,x+(mir<0?50:110)*s,y+100*s],(c,e)=>{
+    part(c,e,"far",[4,38,84,72],cc=>by_babyFar(cc,skin,L));
+    // the pointing arm is drawn as it is (it keeps moving), its hand is a picture turned into place
+    c.save();c.translate(x,y);c.scale(s*mir,s);
+    if(e)by_liveRim(c,armPath,rim);
+    else{c.beginPath();armPath(c);L(c,skin,E[0],E[1],16);line(c,skin);
+      const d=Math.atan2(Wr[1]-E[1],Wr[0]-E[0]);c.beginPath();c.arc(Wr[0]-Math.cos(d)*2.4,Wr[1]-Math.sin(d)*2.4,5.8,d+1.2,d-1.2,true);c.strokeStyle=rgba(darken(skin,0.45),0.35);c.lineWidth=0.9;c.stroke();}
+    c.restore();
+    c.save();c.translate(x+Wr[0]*s*mir,y+Wr[1]*s);c.scale(s,s);by_blit(c,key+"|hand|"+kq+"|"+lq,0,0,mir*ha,mir<0?[-30,-16,10,16]:[-10,-16,30,16],cc=>{cc.scale(mir,1);cc.scale(0.29,0.29);by_hand(cc,by_handMix(BY_HANDS.fist,BY_HANDS.point,kq),skin,{chub:1,L:Lh});},{rim,edge:e,live:true,merge:true,rimCut:q=>q.fillRect(mir<0?-3:-40,-40,43,80)});c.restore();
+    part(c,e,"front",[-30,-4,90,92],cc=>{cc.save();by_babyTorso(cc,skin,B,L);cc.restore();by_babyNear(cc,skin,L);cc.save();by_babyArm(cc,skin,L,mir);cc.restore();});
+    // the head, tilted up to what she sees; her eyes and mouth are drawn live
+    const R=mir*(lean+tilt);c.save();c.translate(x+NP[0]*s*mir,y+NP[1]*s);c.scale(s,s);by_blit(c,key+"|head",0,0,R,[-27,-46,27,6],cc=>{cc.scale(mir,1);cc.translate(0,-18);by_babyHead(cc,skin,B,L);},{rim,edge:e,live:true});
+    if(!e){c.rotate(R);c.scale(mir,1);c.translate(0,-18);
+      c.beginPath();c.ellipse(17,11.6,2.1,1.5+0.3*r,0.2,0,TAU);c.fillStyle="rgba(110,44,46,0.85)";c.fill();
+      // the eyes: big and dark, the iris filling most of the opening, looking where the finger points; a lid of skin comes down as she blinks
+      const gz=[lerp(0.15,0.42,r),lerp(-0.05,-0.3,r)],lid=rgba(darken(skin,0.04),1);
+      [[7.5,-1,3.3],[17.5,-1.5,2.4]].forEach(([ex,ey,er])=>{c.save();c.beginPath();c.ellipse(ex,ey,er*1.1,er*0.96,0,0,TAU);c.fillStyle="rgba(236,226,218,0.95)";c.fill();c.clip();
+        const ix=ex+gz[0]*er*0.55,iy=ey+gz[1]*er*0.5;c.beginPath();c.arc(ix,iy,er*0.86,0,TAU);c.fillStyle="rgba(40,24,18,1)";c.fill();
+        if(blink>0.5){c.beginPath();c.arc(ix+er*0.28,iy-er*0.32,er*0.28,0,TAU);c.fillStyle="rgba(255,255,255,0.92)";c.fill();}
+        if(blink<1){c.fillStyle=lid;c.fillRect(ex-er*1.3,ey-er*1.1,er*2.6,er*2.12*(1-blink));}c.restore();
+        // the lashes: along the top of the open eye, or along the closed lid
+        const ly=ey-er*0.96+er*1.92*(1-blink);c.beginPath();c.moveTo(ex-er*1.15,ey-er*0.1+(1-blink)*er*0.2);c.quadraticCurveTo(ex,blink<1?ly+er*0.35:ey-er*1.3,ex+er*1.15,ey-er*0.2+(1-blink)*er*0.2);
+        c.strokeStyle=rgba(darken(skin,0.6),blink<1?0.85:0.6);c.lineWidth=blink<1?1:0.8;c.stroke();
+        c.beginPath();c.moveTo(ex-er*1.1,ey-er*1.5);c.quadraticCurveTo(ex,ey-er*2.2,ex+er*1.1,ey-er*1.6);c.strokeStyle=rgba(darken(skin,0.4),0.5);c.lineWidth=0.9;c.stroke();});
+    }
+    c.restore();});});}
+
+/* ---------- an elder of the first speakers ---------- */
+// A grandmother, one of the first people who spoke: a modern human of long ago, resting at the child's level, sitting back on one heel with
+// the other knee raised and her forearm across it, in a wrap of soft hide over one shoulder, a cord belt, a string of shell beads; bare arms
+// and feet, short grey coiled hair. She turns her head up to look at o.look. Drawn like the series' people (s = 1 would be about 560 px
+// standing); her foot, knee and shin rest on y; her eye is about 340*s above it, near x. t: seconds, for her breath, blinks and a slow sway of the head.
+const BY_ELDER={skin:[140,94,66],hide:[182,142,98],hair:[196,192,188],cord:[184,150,98],beads:[240,230,212],edge:[255,206,150]};
+function by_elderBody(c,skin,E){const hide=E.hide,L=by_L(1,0.32),line=(c,col,al,w)=>seam(c,col,al==null?0.45:al,w||1.3),
+    crease=(c,q,w,al,col)=>{c.beginPath();by_taper(c,q,w);c.fillStyle=rgba(darken(col||skin,0.45),al||0.4);c.fill();},
+    shine=(c,q,w,al,col)=>{c.beginPath();by_taper(c,q,w);c.fillStyle=rgba(lighten(col||skin,0.3),al||0.3);c.fill();},dk=darken(skin,0.16);
+  // the kneeling leg, furthest: the knee on the ground, the shin rising a little to the ankle, the foot upright under her with the toes bent on the ground
+  c.beginPath();by_curve(c,[[-94,-6],[-86,-26],[-56,-38],[-14,-46],[24,-54],[42,-60],[54,-60],[60,-46],[61,-26],[64,-10],[74,-4],[86,-2],[84,1],[60,1],[48,-6],[34,-20],[10,-16],[-30,-8],[-70,-1],[-90,1]],true);L(c,dk,0,-30,50);line(c,dk);
+  shine(c,[[-80,-28],[-50,-38],[-14,-44]],1.4,0.22,dk);c.strokeStyle=rgba(darken(skin,0.5),0.4);c.lineWidth=1;[[74,-2.5],[80,-2]].forEach(([a,b])=>{c.beginPath();c.moveTo(a,b);c.lineTo(a-2,b-4.5);c.stroke();});
+  // the raised leg: the shin standing, the calf round at the back, the ankle, the foot flat on the ground with its arch and toes
+  c.beginPath();by_curve(c,[[-116,-168],[-119,-120],[-117,-70],[-113,-36],[-118,-18],[-134,-10],[-156,-6],[-170,-3],[-167,1],[-128,1],[-96,1],[-86,-3],[-88,-14],[-92,-30],[-90,-62],[-80,-104],[-76,-136],[-84,-164]],true);
+  L(c,skin,-100,-90,70);line(c,skin);
+  shine(c,[[-113,-156],[-115,-110],[-113,-62]],1.6,0.3);crease(c,[[-86,-30],[-90,-18],[-88,-8]],0.9,0.35);
+  c.strokeStyle=rgba(darken(skin,0.5),0.4);c.lineWidth=1.1;[[-164,-2],[-157,-4],[-150,-5.5]].forEach(([a,b])=>{c.beginPath();c.moveTo(a,b);c.lineTo(a+1,b-5);c.stroke();});
+  // the neck, stretched a little as she looks up: the throat in front, the nape and the slope of the shoulders behind
+  const NK=[[-14,-262],[-10,-282],[-4,-300],[10,-315],[28,-311],[38,-296],[48,-278],[46,-262],[20,-256]];
+  c.beginPath();by_curve(c,NK,true);L(c,darken(skin,0.05),16,-286,34);line(c,skin);
+  c.save();c.beginPath();by_curve(c,NK,true);c.clip();shine(c,[[22,-306],[8,-290],[-6,-272]],2.2,0.24);crease(c,[[-4,-296],[-8,-284],[-10,-270]],1,0.3);crease(c,[[36,-300],[42,-284],[46,-270]],1.2,0.3);c.restore();
+  // the body under the wrap: a back rounded with the years, the waist, the hips resting on the heel; the chest and the collarbone
+  c.beginPath();by_curve(c,[[12,-292],[36,-280],[54,-258],[58,-228],[52,-196],[48,-182],[54,-150],[62,-112],[65,-76],[60,-50],[40,-40],[-10,-86],[-38,-132],[-44,-170],[-46,-200],[-42,-228],[-30,-250],[-12,-266],[2,-280]],true);L(c,skin,6,-200,80);line(c,skin);
+  shine(c,[[-24,-260],[-10,-268],[4,-270]],1.2,0.28);
+  // the raised thigh, from the hip to the knee
+  c.beginPath();by_tube(c,[[26,-88],[-30,-124],[-72,-150],[-100,-164]],[27,25,22,19.5],5);L(c,skin,-40,-130,50);line(c,skin);
+  c.beginPath();c.ellipse(-106,-166,12,10,-0.5,0,TAU);c.fillStyle=rgba(lighten(skin,0.22),0.25);c.fill();
+  // the wrap of soft hide: over the far shoulder, across the breast under the near arm, round the hips and over the thigh. It follows the round
+  // of the back, is drawn in at the waist by the belt and bunches there, lies over the thigh and breaks towards the knee, and hangs in soft points
+  // below the thigh and behind her, where she sits on it
+  const W=[[20,-292],[40,-286],[56,-266],[63,-236],[57,-202],[50,-184],[57,-160],[64,-126],[70,-94],[72,-64],[69,-42],[62,-28],[50,-31],[38,-25],[22,-40],[6,-56],[-12,-72],[-28,-86],[-42,-98],[-54,-104],[-60,-118],[-61,-138],[-55,-156],[-48,-168],[-48,-184],[-50,-204],[-48,-224],[-40,-240],[-26,-252],[-10,-264],[6,-282]];
+  c.beginPath();by_curve(c,W,true);L(c,hide,4,-160,120,1.1);line(c,hide,0.55,1.4);
+  c.save();c.beginPath();by_curve(c,W,true);c.clip();
+  // the round of the thigh under the hide, lit along its top
+  c.beginPath();by_taper(c,[[10,-104],[-26,-136],[-56,-154]],5);c.fillStyle=rgba(lighten(hide,0.25),0.22);c.fill();
+  // folds: from the far shoulder across the breast and down the back; from the belt's knot over the thigh, down its side, round the hips; where she sits
+  const folds=[[2.2,[[24,-286],[8,-272],[-8,-258],[-24,-248]]],[1.8,[[32,-282],[22,-264],[10,-244],[-4,-228]]],[1.5,[[44,-278],[50,-258],[52,-232]]],[1.2,[[18,-268],[20,-246],[18,-222]]],
+    [1.8,[[-30,-176],[-42,-166],[-54,-160]]],[1.9,[[-24,-174],[-32,-150],[-42,-128],[-50,-112]]],[1.5,[[-16,-174],[-14,-148],[-16,-118],[-22,-94]]],[1.7,[[-8,-176],[6,-150],[16,-124],[20,-98]]],
+    [1.6,[[2,-178],[22,-162],[40,-140],[52,-114]]],[1.4,[[34,-172],[50,-150],[60,-120],[63,-90]]],[1.4,[[58,-66],[48,-50],[32,-42]]],[1.2,[[-36,-104],[-42,-98],[-48,-96]]],
+    [1.5,[[-50,-152],[-57,-140],[-58,-124]]],[1.1,[[-4,-84],[-10,-72],[-16,-66]]],[1.1,[[40,-92],[36,-64],[40,-42]]]];
+  folds.forEach(([w,q])=>{c.beginPath();by_taper(c,q,w);c.fillStyle=rgba(darken(hide,0.45),0.42);c.fill();c.save();c.translate(-2,-1.4);c.beginPath();by_taper(c,q,w*0.55);c.fillStyle=rgba(lighten(hide,0.3),0.28);c.fill();c.restore();});
+  // the hide bunched above and below the belt
+  [[-42,-188],[-28,-191],[-10,-192],[8,-191],[26,-189],[42,-186]].forEach(([px,py],i)=>{crease(c,[[px-4,py-8],[px,py-2],[px+3,py+2]],0.9,0.35,hide);crease(c,[[px+2,py+10],[px+4+hash(i,7)*3,py+17],[px+3,py+24]],0.9,0.3,hide);});
+  // the grain and the marks of the skin
+  c.fillStyle=rgba(darken(hide,0.3),0.1);for(let i=0;i<26;i++){c.beginPath();c.ellipse(-60+hash(i,21)*130,-280+hash(i,22)*240,3+hash(i,23)*6,2+hash(i,24)*3,hash(i,25)*3,0,TAU);c.fill();}
+  c.restore();
+  // stitches of sinew where two skins were sewn, and a thin edge of fur along the hem
+  c.fillStyle=rgba(lighten(hide,0.45),0.7);for(let i=0;i<9;i++){const u=i/8,px=lerp(6,-36,u),py=lerp(-274,-242,u);c.beginPath();c.ellipse(px+1,py+6,1.3,1,0.6,0,TAU);c.fill();}
+  const hm=by_samples(W.slice(10,23),W.slice(10,23).map(()=>1),5);c.strokeStyle=rgba(mix(hide,[236,222,196],0.35),0.5);c.lineWidth=1;
+  for(let i=1;i<hm.length-1;i++){const A=hm[i-1],B=hm[i+1],nx=-(B[1]-A[1]),ny=B[0]-A[0],d=Math.hypot(nx,ny)||1,l=1.2+1.4*hash(i,52);for(let k=0;k<2;k++){const px=lerp(hm[i][0],B[0],k*0.5),py=lerp(hm[i][1],B[1],k*0.5);
+    c.beginPath();c.moveTo(px-nx/d*1.2,py-ny/d*1.2);c.lineTo(px+nx/d*l+(hash(i,53+k)-0.5)*1.2,py+ny/d*l);c.stroke();}}
+  // the belt: a cord of twisted plant fibre round the waist, knotted, its ends hanging
+  c.beginPath();by_tube(c,[[52,-182],[24,-188],[-10,-190],[-48,-186]],[3.4,3.6,3.6,3.2],4);L(c,E.cord,0,-188,10,1.2);line(c,E.cord,0.6,1);
+  c.strokeStyle=rgba(darken(E.cord,0.45),0.55);c.lineWidth=0.8;for(let i=0;i<18;i++){const px=50-i*5.6,py=-183-5*Math.sin(Math.PI*(i/17));c.beginPath();c.moveTo(px,py-3);c.lineTo(px-2.4,py+3);c.stroke();}
+  c.beginPath();by_tube(c,[[-30,-186],[-35,-170],[-32,-154]],[2.6,2.3,2],3);L(c,E.cord,-33,-170,8);line(c,E.cord,0.6,1);
+  c.beginPath();by_tube(c,[[-24,-186],[-21,-172],[-24,-161]],[2.6,2.3,2],3);L(c,E.cord,-22,-172,8);line(c,E.cord,0.6,1);
+  c.beginPath();c.ellipse(-27,-188,6,5,0,0,TAU);L(c,E.cord,-27,-188,6,1.2);line(c,E.cord,0.6,1);
+  // shell beads on a string, round the neck
+  c.strokeStyle=rgba(darken(E.cord,0.3),0.8);c.lineWidth=1;c.beginPath();c.moveTo(24,-284);c.quadraticCurveTo(4,-250,-26,-258);c.stroke();
+  for(let i=0;i<9;i++){const u=(i+0.5)/9,bx=(1-u)*(1-u)*24+2*u*(1-u)*4+u*u*-26,by=(1-u)*(1-u)*(-284)+2*u*(1-u)*(-250)+u*u*(-258);c.beginPath();c.ellipse(bx,by+1,2.6,3.2,0.2,0,TAU);L(c,E.beads,bx,by,3,1.2);line(c,E.beads,0.5,0.8);}
+  // the near arm, bare: the round of the shoulder, the upper arm dropping to the elbow over the thigh (its point showing), the forearm across the knee,
+  // bent at about 110 degrees, the hand hanging over it
+  c.beginPath();by_tube(c,[[-50,-186],[-78,-191],[-106,-195],[-134,-199]],[12.8,12,10.6,8.8],5);L(c,skin,-90,-194,26);line(c,skin);
+  shine(c,[[-64,-200],[-92,-204],[-120,-206]],1.6,0.3);
+  const UA=[[-4,-282],[12,-283],[25,-272],[27,-254],[18,-236],[4,-222],[-16,-204],[-32,-190],[-40,-178],[-50,-174],[-58,-180],[-58,-192],[-48,-204],[-32,-222],[-18,-242],[-12,-260],[-10,-274]];
+  c.beginPath();by_curve(c,UA,true);L(c,skin,-10,-236,50);line(c,skin);
+  c.save();c.beginPath();by_curve(c,UA,true);c.clip();
+  // the deltoid's round, lit; the line where it meets the arm; the triceps in shade; the point of the elbow, and the crease inside it
+  shine(c,[[-4,-276],[12,-274],[22,-260]],2.4,0.36);crease(c,[[20,-246],[10,-236],[-2,-232]],1,0.3);
+  crease(c,[[8,-236],[-12,-212],[-30,-194]],1.8,0.22);c.beginPath();c.ellipse(-46,-179,6,5,0.3,0,TAU);c.fillStyle=rgba(lighten(skin,0.2),0.22);c.fill();
+  crease(c,[[-50,-198],[-55,-193],[-58,-188]],0.8,0.4);c.restore();
+  c.save();c.translate(-134,-200);c.rotate(1.8);c.scale(0.62,-0.62);by_hand(c,"rest",skin,{L:[0.5,0.85]});c.restore();}
+// her head, in its own units: turned three-quarters to the left, the eyes up and to the left
+function by_elderHead(c,skin,E,blink,L,line){
+  const HD=[[4,-50],[-16,-48],[-30,-38],[-37,-24],[-39,-13],[-38,-7],[-44,3],[-48,9],[-43,13],[-41,15],[-42,19],[-39,23],[-40,27],[-36,36],[-27,44],[-12,45],[4,40],[16,28],[26,12],[36,-6],[37,-28],[26,-44]];
+  c.beginPath();by_curve(c,HD,true);L(c,skin,-8,-4,52);line(c,skin,0.4);
+  // the ear, behind the cheek
+  c.beginPath();by_curve(c,[[12,-14],[18,-16],[23,-8],[22,4],[18,12],[13,10],[11,0]],true);L(c,darken(skin,0.05),16,-2,10);line(c,skin,0.5);
+  c.beginPath();c.moveTo(19,-8);c.quadraticCurveTo(13,-2,18,6);c.strokeStyle=rgba(darken(skin,0.45),0.5);c.lineWidth=1.2;c.stroke();
+  // short grey hair, tightly coiled: an uneven cap of coils of every size, a few breaking its outline; at the hairline it thins and the scalp shows
+  const hr=E.hair,C=[2,-19],cap=[];for(let i=0;i<=34;i++){const a=Math.PI*(1.0+1.08*i/34),k=1+0.05*(hash(i,41)-0.5)+(hash(i,42)>0.7?0.05*hash(i,43):0);cap.push([C[0]+Math.cos(a)*39*k,C[1]+Math.sin(a)*34*k]);}
+  cap.push([36,-12],[30,-9],[24,-16],[16,-23],[4,-28],[-10,-31],[-22,-31],[-32,-29]);
+  c.save();c.beginPath();by_curve(c,cap,true);const hg=c.createLinearGradient(-30,-54,30,-10);hg.addColorStop(0,rgba(darken(hr,0.12),1));hg.addColorStop(1,rgba(darken(hr,0.42),1));c.fillStyle=hg;c.fill();
+  c.restore();
+  // at the hairline: a thin, soft fringe of coils on the skin, the scalp showing between them
+  for(let i=0;i<26;i++){const u=i/25,px=lerp(-36,32,u)+hash(i,61)*3,py=(u<0.5?lerp(-27,-32,u*2):lerp(-32,-8,(u-0.5)*2))+hash(i,62)*3.5;c.beginPath();c.arc(px,py,1.3+hash(i,63)*1.2,0,TAU);c.fillStyle=rgba(darken(hr,0.3),0.55);c.fill();}
+  // coils over the whole cap, and some just beyond its edge; each a small curl, lit on its upper left, shadowed on its lower right
+  const coil=(px,py,r,a)=>{c.lineWidth=Math.max(0.9,r*0.55);c.beginPath();c.arc(px,py,r,Math.PI*0.85+a,Math.PI*1.75+a);c.strokeStyle=rgba(lighten(hr,0.22),0.6);c.stroke();
+    c.beginPath();c.arc(px,py,r,Math.PI*1.9+a,Math.PI*2.7+a);c.strokeStyle=rgba(darken(hr,0.55),0.6);c.stroke();};
+  for(let i=0;i<150;i++){const a=Math.PI*(1.0+1.08*hash(i,31)),rr=0.25+0.8*Math.sqrt(hash(i,32)),px=C[0]+Math.cos(a)*38*rr,py=C[1]+Math.sin(a)*33*rr;if(py>-24+(px>20?(px-20)*1.0:0)&&px<30)continue;coil(px,py,1.3+hash(i,34)*1.6,hash(i,35)*2);}
+  for(let i=0;i<22;i++){const a=Math.PI*(1.02+1.02*i/21+0.02*hash(i,36)),k=1.0+0.04*hash(i,37),px=C[0]+Math.cos(a)*39*k,py=C[1]+Math.sin(a)*34*k,r=2+hash(i,38)*1.8;
+    c.beginPath();c.arc(px,py,r,0,TAU);c.fillStyle=rgba(darken(hr,0.25),1);c.fill();coil(px,py,r*0.75,hash(i,39)*2);}
+  // brow, lines of a long life, the eyes looking up at the bird
+  c.strokeStyle=rgba(darken(skin,0.4),0.3);c.lineWidth=1;[[-30,-25,-12,-26],[-28,-21,-14,-22]].forEach(([a,b,d,e])=>{c.beginPath();c.moveTo(a,b);c.quadraticCurveTo((a+d)/2,b-2,d,e);c.stroke();});
+  c.strokeStyle=rgba(mix(E.hair,skin,0.35),0.9);c.lineWidth=2.4;c.lineCap="round";c.beginPath();c.moveTo(-29,-17);c.quadraticCurveTo(-20,-21,-9,-17);c.stroke();c.lineWidth=2;c.beginPath();c.moveTo(-40,-15);c.quadraticCurveTo(-37,-18,-34,-17);c.stroke();
+  [[-19,-9,7.4,1],[-37,-9.5,3.4,0.6]].forEach(([ex,ey,ew,k])=>{const op=Math.max(0.08,blink);c.save();c.beginPath();c.moveTo(ex-ew,ey);c.quadraticCurveTo(ex,ey-6*op,ex+ew,ey+0.4);c.quadraticCurveTo(ex,ey+3.6*op,ex-ew,ey);c.closePath();c.fillStyle="rgba(236,226,214,0.95)";c.fill();c.clip();
+    c.beginPath();c.arc(ex-ew*0.32,ey-1.4,3.9*Math.min(1,k+0.3),0,TAU);c.fillStyle="rgba(46,28,20,1)";c.fill();c.beginPath();c.arc(ex-ew*0.32-1,ey-2.6,1.1,0,TAU);c.fillStyle="rgba(255,255,255,0.9)";c.fill();c.restore();
+    c.beginPath();c.moveTo(ex-ew-0.5,ey);c.quadraticCurveTo(ex,ey-6.4*op,ex+ew+0.5,ey+0.2);c.strokeStyle=rgba(darken(skin,0.55),0.9);c.lineWidth=1.7;c.stroke();});
+  c.strokeStyle=rgba(darken(skin,0.4),0.4);c.lineWidth=0.9;[[-9,-9,-5,-11],[-9,-7,-4,-6],[-10,-5,-6,-2]].forEach(([a,b,d,e])=>{c.beginPath();c.moveTo(a,b);c.lineTo(d,e);c.stroke();});
+  // nose, the fold beside it, a quiet smile
+  c.strokeStyle=rgba(darken(skin,0.45),0.55);c.lineWidth=1.3;c.beginPath();c.moveTo(-38,8);c.quadraticCurveTo(-33,6,-34,11);c.stroke();
+  c.beginPath();by_taper(c,[[-33,9],[-30,17],[-31,27]],1.1);c.fillStyle=rgba(darken(skin,0.4),0.45);c.fill();
+  c.beginPath();c.moveTo(-41,20.5);c.quadraticCurveTo(-35,21.5,-29,18.5);c.strokeStyle=rgba(darken(skin,0.55),0.85);c.lineWidth=1.6;c.stroke();
+  c.fillStyle="rgba(200,110,90,0.14)";c.beginPath();c.ellipse(-22,8,8,5,0,0,TAU);c.fill();}
+// the head's pivot (at the top of the neck), in her units, and her eye relative to it
+const BY_EHEAD=[18,-302];
+function by_elder(ctx,x,y,s,t,o){o=o||{};t=t||0;const E=BY_ELDER,skin=o.skin||E.skin,L=by_L(1,0.32),line=(c,col,al,w)=>seam(c,col,al==null?0.45:al,w||1.4);
+  const breath=Math.sin(t*1.5+0.7),bl=(t+2.1)%4.6,blink=bl<0.15?Math.abs(bl-0.075)/0.075:1;
+  // where she looks: the head turns up towards it
+  const look=o.look||[x-460*s,y-560*s],hx=x+BY_EHEAD[0]*s,hy=y+BY_EHEAD[1]*s,la=Math.atan2(look[1]-hy,-(look[0]-hx)),R=clamp(-la*0.6,-0.12,0.4)+Math.sin(t*0.6)*0.012;
+  const key="elder|"+skin.join(","),rim={col:o.edge||E.edge,glow:0.4,ring:1.2/s,blur:10.5/s},nx=BY_EHEAD[0],ny=BY_EHEAD[1]-breath*1.2;
+  by_figure(ctx,[x-190*s,y-420*s,x+110*s,y+20*s],(c,e)=>{
+    c.save();c.translate(x,y);c.scale(s,s);by_blit(c,key+"|body",0,0,0,[-180,-300,96,6],cc=>by_elderBody(cc,skin,E),{rim,edge:e});c.restore();
+    c.save();c.translate(x+nx*s,y+ny*s);c.scale(s,s);by_blit(c,key+"|head",0,0,R,[-62,-106,50,8],cc=>{cc.translate(-4,-44);by_elderHead(cc,skin,E,1,L,line);},{rim,edge:e,live:true});
+    // a blink: the lids close over the eyes
+    if(!e&&blink<0.75){c.rotate(R);c.translate(-4,-44);[[-19,-9,7.4],[-37,-9.5,3.4]].forEach(([ex,ey,ew])=>{c.beginPath();c.moveTo(ex-ew-0.6,ey+0.2);c.quadraticCurveTo(ex,ey-6.8,ex+ew+0.6,ey+0.6);c.quadraticCurveTo(ex,ey+4.2,ex-ew-0.6,ey+0.2);c.closePath();c.fillStyle=rgba(darken(skin,0.08),1);c.fill();
+      c.beginPath();c.moveTo(ex-ew-0.5,ey+0.6);c.quadraticCurveTo(ex,ey+2.4,ex+ew+0.5,ey+0.8);c.strokeStyle=rgba(darken(skin,0.55),0.85);c.lineWidth=1.5;c.stroke();});}
+    c.restore();});}
+
+/* ---------- a scribe's arm ---------- */
+// A scribe's bare forearm and hand from the upper right, holding a cut reed. The arm has two bones: the shoulder is off the picture, and the elbow
+// is found each frame from where the reed's tip must be (the upper arm about 1.15 times the forearm, the forearm about 1.45 times the hand),
+// so the arm pivots at the shoulder and bends at the elbow as the hand moves along the rows.
+const BY_REED=[204,176,118],BY_SCR_F=130,BY_SCR_U=150,BY_SCR_X=70;
+// the reed, in the hand's units: a length of reed, tapering a little to a tip cut straight across (pressed upright it leaves a round hole,
+// at a slant a notch), with two nodes and fine fibres along it
+function by_reed(c){const P0=[BY_PEN.pinch[0]+BY_PEN.dir[0]*36,BY_PEN.pinch[1]+BY_PEN.dir[1]*36],d=BY_PEN.dir,len=128;
+  c.save();c.translate(P0[0],P0[1]);c.rotate(Math.atan2(d[1],d[0])+Math.PI);
+  c.beginPath();c.moveTo(0.4,-2.5);c.quadraticCurveTo(0,0,0.4,2.5);c.lineTo(20,3.1);c.lineTo(len,3.5);c.quadraticCurveTo(len+2.4,0,len,-3.5);c.lineTo(20,-3.1);c.closePath();
+  const g=c.createLinearGradient(0,-3.5,0,3.5);g.addColorStop(0,rgba(lighten(BY_REED,0.3),1));g.addColorStop(0.5,rgba(BY_REED,1));g.addColorStop(1,rgba(darken(BY_REED,0.35),1));c.fillStyle=g;c.fill();c.strokeStyle=rgba(darken(BY_REED,0.55),0.6);c.lineWidth=0.7;c.stroke();
+  // the cut end: the pale ring of the reed's wall
+  c.beginPath();c.ellipse(1.1,0,1.1,2.4,0,0,TAU);c.fillStyle=rgba(mix(BY_REED,[244,232,200],0.55),1);c.fill();
+  [58,112].forEach(nx=>{c.beginPath();c.ellipse(nx,0,1.6,3.8,0,0,TAU);c.fillStyle=rgba(darken(BY_REED,0.3),0.9);c.fill();c.beginPath();c.moveTo(nx+1.4,-3.3);c.lineTo(nx+1.4,3.3);c.strokeStyle=rgba(lighten(BY_REED,0.35),0.7);c.lineWidth=0.6;c.stroke();});
+  c.strokeStyle=rgba(darken(BY_REED,0.3),0.35);c.lineWidth=0.4;[-1.6,0.4,2].forEach(yy=>{c.beginPath();c.moveTo(6,yy*0.8);c.lineTo(len-2,yy*1.1);c.stroke();});c.restore();}
+// the reed's tip in the forearm's frame: the elbow at (0,0), the wrist at (F,0), the thumb's side towards +y (the hand is mirrored)
+const BY_SCRT=[BY_SCR_F-4+(BY_PEN.pinch[0]+BY_PEN.dir[0]*36)*0.9,-(BY_PEN.pinch[1]+BY_PEN.dir[1]*36)*0.9];
+// The two bones are drawn as they are each frame (their outlines are simple, and a long picture turned into place would cost more), each with
+// its luminous edge put down first; the hand and the reed are one picture, turned with the forearm.
+// the forearm's outline, in its frame (the elbow at 0,0, the wrist at (F,0)); its back end, round the elbow, lies under the upper arm
+const BY_SCRF=[[BY_SCR_F+2,-13.4],[BY_SCR_F-12,-14.6],[104,-15.6],[76,-18],[48,-20.4],[22,-22],[4,-20.5],[-10,-12],[-15,0],[-9,12],[6,20],[26,25.5],[52,23.5],[80,18.8],[106,15.2],[BY_SCR_F+2,13.6]];
+// the upper arm's outline, in its frame (the elbow at 0,0, the shoulder at (U,0) and beyond, off the picture). Over the forearm at the elbow:
+// its round end makes the elbow's point (+y, away from the bend), and where it crosses the forearm, the crease inside the elbow
+const BY_SCRU=[[-6,-13],[8,-20],[BY_SCR_U*0.3,-24.6],[BY_SCR_U*0.62,-23.8],[BY_SCR_U,-24.6],[BY_SCR_U+BY_SCR_X,-28],[BY_SCR_U+BY_SCR_X,28],[BY_SCR_U,25],[BY_SCR_U*0.55,23.4],[BY_SCR_U*0.2,21.6],[8,20.5],[-7,16.5],[-15.5,6],[-14,-5]];
+// the light comes from the thumb's side of the forearm (+y), and from the biceps' side of the upper arm (-y), when the arm lies as in the end scene
+function by_scribeFore(c,skin){const F=BY_SCR_F,out=BY_SCRF;
+  c.beginPath();by_curve(c,out,true);const g=c.createLinearGradient(0,25,0,-21);g.addColorStop(0,rgba(lighten(skin,0.2),1));g.addColorStop(0.45,rgba(skin,1));g.addColorStop(1,rgba(darken(skin,0.34),1));c.fillStyle=g;c.fill();seam(c,skin,0.42,1.2);
+  // the long muscle on the thumb's side catching the light; the ulna's ridge in shadow
+  c.beginPath();by_taper(c,[[10,15],[36,18],[72,13.5],[108,9.5]],3.6);c.fillStyle=rgba(lighten(skin,0.3),0.3);c.fill();
+  c.beginPath();by_taper(c,[[34,-14],[74,-13.4],[120,-11.2]],1.8);c.fillStyle=rgba(darken(skin,0.5),0.26);c.fill();
+}
+function by_scribeUpper(c,skin){const U=BY_SCR_U,out=BY_SCRU;
+  c.beginPath();by_curve(c,out,true);const g=c.createLinearGradient(0,-25,0,25);g.addColorStop(0,rgba(lighten(skin,0.17),1));g.addColorStop(0.5,rgba(skin,1));g.addColorStop(1,rgba(darken(skin,0.36),1));c.fillStyle=g;c.fill();seam(c,skin,0.4,1.2);
+  c.beginPath();by_taper(c,[[16,-15],[U*0.38,-18],[U*0.8,-17]],3.8);c.fillStyle=rgba(lighten(skin,0.28),0.26);c.fill();
+  c.beginPath();by_taper(c,[[22,13],[U*0.5,15.5],[U*0.9,16.5]],2.2);c.fillStyle=rgba(darken(skin,0.5),0.24);c.fill();
+  c.beginPath();by_taper(c,[[-8,-10],[0,-15],[10,-19]],1.2);c.fillStyle=rgba(darken(skin,0.5),0.4);c.fill();
+  c.beginPath();c.ellipse(-7,9,6,4.4,-0.6,0,TAU);c.fillStyle=rgba(lighten(skin,0.22),0.14);c.fill();
+  c.beginPath();by_taper(c,[[-12,2],[-9,11],[-2,16]],1);c.fillStyle=rgba(darken(skin,0.5),0.3);c.fill();}
+// the hand and the reed, mirrored so that the thumb lies on the lit side; in units with the wrist at (0,0)
+function by_scribeHand(c,skin){c.scale(0.9,-0.9);by_hand(c,"pen",skin,{L:[0.09,-0.99],mid:by_reed,thumbUnder:true});}
+// the shadow on the clay of the hand, the reed and the forearm, soft, from the reed's tip (where the reed touches, its shadow meets it): the reed's
+// drawn as it is, the hand's and the forearm's a blurred picture placed on whole pixels (turned in steps of 2 degrees: a soft shadow hides them)
+function by_scribeShadow(c,x,y,phi,s,lift){const T=BY_SCRT,px=x+lift*0.3,py=y+lift*1.3,cs=Math.cos(phi)*s,sn=Math.sin(phi)*s,P=(u,v)=>[px+(u-T[0])*cs-(v-T[1])*sn,py+(u-T[0])*sn+(v-T[1])*cs];
+  const r1=P(124+1.5,40-30);c.save();c.lineCap="round";[[7,0.07],[2.6,0.12]].forEach(([w,a])=>{c.strokeStyle="rgba(24,12,4,"+a+")";c.lineWidth=w*s;c.beginPath();c.moveTo(px,py);c.lineTo(r1[0],r1[1]);c.stroke();});c.restore();
+  const q=Math.round(phi/0.035)*0.035;c.save();c.translate(px,py);c.scale(s,s);by_blit(c,"scrshadow",0,0,q,[-130,-50,10,20],(cc,D)=>{cc.translate(-T[0],-T[1]);cc.fillStyle="#000";
+    cc.beginPath();cc.ellipse(166,-13,46,18,0.05,0,TAU);cc.fill();cc.globalAlpha=0.4;cc.beginPath();cc.ellipse(118,-22,36,14,-0.1,0,TAU);cc.fill();cc.globalAlpha=1;
+    const W=cc.canvas.width,H=cc.canvas.height,sc=by_scratch(W,H);sc.drawImage(cc.canvas,0,0);cc.setTransform(1,0,0,1,0,0);cc.clearRect(0,0,W,H);cc.filter="blur("+(7*D).toFixed(1)+"px)";cc.globalAlpha=0.3;cc.drawImage(BY_SCR,0,0,W,H,0,0,W,H);cc.filter="none";cc.globalAlpha=1;},{sub:false,rq:0.035});c.restore();}
+// Where the scribe's reed is, u seconds after the writing on a tablet(ctx,x,y,w,h,p) began (p going from 0 to 1 in 5 s): mark i forms while
+// u*9.6 goes from i to i+1 (see tablet() in land.js). The hand glides along each row, dipping the reed into every mark as it starts to form,
+// swings back in an eased arc of 0.3 s between rows, and after the last mark lifts away up and to the right (0.7 s). Returns what stylus()
+// takes (x, y, alpha, and the options: the shoulder S and the lift), or null once the hand has gone.
+function by_scribe(u,x,y,w,h){const q=u*9.6,c=0.82,d0=0.4,run=11*c,mk=i=>[x+48+(i%12)*(w-80)/12+hash(i,2)*6,y+Math.floor(i/12)*h/5+h/10+2];
+  const at=m=>{const i=Math.floor(m),f=m-i,A=mk(i),B=mk(Math.min(47,i+1));return[lerp(A[0],B[0],f),lerp(A[1],B[1],f)];};
+  let P,lift=0,leave=0;
+  if(q<d0){P=mk(0);lift=7*(1-ease(clamp((q+5)/(5+d0),0,1)));}
+  else{const r=Math.min(3,Math.floor((q-d0)/12)),ql=q-d0-12*r;
+    if(ql<=run){const m=ql/c,f=m-Math.floor(m);P=at(12*r+Math.min(11,m));lift=1.5*(0.5-0.5*Math.cos(TAU*f));}
+    else if(r<3){const v=(ql-run)/(12-run),e=v*v*(3-2*v),A=mk(12*r+11),B=mk(12*r+12);P=[lerp(A[0],B[0],e),lerp(A[1],B[1],e)-26*Math.sin(Math.PI*v)];lift=16*Math.sin(Math.PI*v);}
+    else{P=mk(47);leave=clamp((ql-run)/6.72,0,1);lift=4*Math.sin(Math.PI*0.5*clamp((ql-run)/1.5,0,1));}}
+  if(leave>=1)return null;
+  // the shoulder: off the picture above, following the row, and part of the way along it, so that the arm pivots and bends as the hand travels
+  const S=[x+370+0.42*(P[0]-x-48),P[1]-460],lv=leave*leave*(3-2*leave),L=[0.29,-0.96];
+  const D=[lv*760,-lv*560];
+  return{x:P[0]+L[0]*lift+D[0],y:P[1]+L[1]*lift+D[1],a:1-lv*lv,S:[S[0]+D[0],S[1]+D[1]],lift};}
+// stylus(ctx,x,y,t,a[,o]): the reed's tip at (x,y) (exactly, whenever it presses). o.S: the shoulder (default: up and a little to the right),
+// o.lift: how high the tip is above the clay, in px (for the shadow), o.s: the size (1.6: a hand about 145 px long), o.skin
+function stylus(ctx,x,y,t,a,o){o=o||{};withA(ctx,a==null?1:a,()=>{const s=o.s||1.6,lift=o.lift||0,U=BY_SCR_U*s,T=BY_SCRT,B2=Math.hypot(T[0],T[1])*s,al=Math.atan2(T[1],T[0]),skin=o.skin||BY_SKIN.scribe;
+  let S=o.S||[x+190*s/1.6,y-460*s/1.6];const dx=x-S[0],dy=y-S[1],D=Math.hypot(dx,dy)||1,ux=dx/D,uy=dy/D,Dc=clamp(D,Math.abs(U-B2)+1,U+B2-1);
+  // out of reach (or too close), the shoulder comes along the line to the tip
+  S=[x-ux*Dc,y-uy*Dc];const aa=(U*U-B2*B2+Dc*Dc)/(2*Dc),hh=Math.sqrt(Math.max(0,U*U-aa*aa)),E1=[S[0]+aa*ux+hh*uy,S[1]+aa*uy-hh*ux],E2=[S[0]+aa*ux-hh*uy,S[1]+aa*uy+hh*ux],E=E1[0]>E2[0]?E1:E2;
+  const phi=Math.atan2(y-E[1],x-E[0])-al,thu=Math.atan2(S[1]-E[1],S[0]-E[0]),rim={col:BY_WARMRIM,glow:0.35,ring:1.2/s,blur:10/s};
+  // the shadow first, on the clay
+  by_scribeShadow(ctx,x,y,phi,s,lift);
+  const X=[S[0],E[0],x],Y=[S[1],E[1],y],mg=70*s,W=[E[0]+Math.cos(phi)*(BY_SCR_F-4)*s,E[1]+Math.sin(phi)*(BY_SCR_F-4)*s];
+  const bone=(c,ang,fn)=>{c.save();c.translate(E[0],E[1]);c.rotate(ang);c.scale(s,s);fn(c);c.restore();};
+  by_figure(ctx,[Math.min(...X)-mg,Math.min(...Y)-mg,Math.max(...X)+mg+BY_SCR_X*s,Math.max(...Y)+mg],(c,e)=>{
+    // both bones' edges in one go: their outlines, placed in the picture, as one path
+    if(e){const pl=(P,a)=>{const cs=Math.cos(a)*s,sn=Math.sin(a)*s;return P.map(([u,v])=>[E[0]+u*cs-v*sn,E[1]+u*sn+v*cs]);};
+      by_liveRim(c,q=>{by_curve(q,pl(BY_SCRF,phi),true);by_curve(q,pl(BY_SCRU,thu),true);},{col:rim.col,glow:rim.glow,ring:rim.ring*s,blur:rim.blur*s});return;}
+    bone(c,phi,cc=>by_scribeFore(cc,skin));
+    // the hand and the reed: its edge left out at the wrist, where it lies on the forearm
+    c.save();c.translate(W[0],W[1]);c.scale(s,s);by_blit(c,"scrH|"+skin,0,0,phi,[-8,-26,100,46],cc=>by_scribeHand(cc,skin),{live:true,merge:true,rim,rimCut:q=>q.fillRect(-60,-60,64,120)});c.restore();
+    bone(c,thu,cc=>by_scribeUpper(cc,skin));});});}
+
+/* ---------- warming the caches ---------- */
+// The pictures of these figures take 5 to 60 ms each to draw the first time (the brain, the baby's hand as it opens, the host's hand as it closes,
+// the scribe's shadow at each angle...). Soon after the film's page loads they are drawn once, off screen, at the player's size, one small batch
+// at a time with pauses between, so that playing or seeking into their scenes never stalls. Only on a page with the film's player: not while
+// rendering the video, and not on the labs' pages.
+(function(){if(typeof window==="undefined"||typeof document==="undefined"||typeof setTimeout!=="function")return;
+  const ctx=()=>{const cv=document.getElementById("film"),S=clamp(((cv&&cv.width)||1280)/1920,0.2,1),c=mkCanvas(8,8).getContext("2d");c.setTransform(S,0,0,S,0,0);return c;};
+  const card=[840,380,420,286,-0.03],jobs=[c=>by_elder(c,1487,925,1.02,1,{look:[1040,340]}),c=>brain(c,1380,470,2.4,1,0.5,1),c=>baby(c,1120,780,1.3,1,0.8,1,{at:[910,670]}),
+    c=>pointArm(c,-60,560,236,500,1.35,1,{at:[900,630],t:1}),c=>pointArm(c,-60,680,740,598,2.0,1,{pose:"give",dress:"coat",card,t:1}),
+    c=>{ground(c,600,1);grass(c,0,1920,610,1,0.8);}];
+  for(let j=0;j<5;j++)jobs.push(c=>{for(let k=j*4;k<=Math.min(16,j*4+3);k++)baby(c,565,701,1.5,1,k<16?0.2+0.3*k/16:1,1,{at:[1040,340]});});
+  for(let j=0;j<5;j++)jobs.push(c=>{for(let k=j*4;k<=Math.min(16,j*4+3);k++)pointArm(c,1360+760,680,1360,556,2.0,1,{pose:"take",dress:"coat",k:k/16,card,t:1});});
+  for(let j=0;j<6;j++)jobs.push(c=>{for(let k=0;k<5;k++){const W=by_scribe((j*5+k)*0.19,660,230,600,380);if(W)stylus(c,W.x,W.y,1,W.a,W);}});
+  const next=()=>{const f=jobs.shift();if(!f)return;try{f(ctx());}catch(e){}setTimeout(next,40);};
+  const go=()=>{if(window.__RENDER__||!document.getElementById("film"))return;setTimeout(next,900);};
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go);else go();})();
 
 /* ===== What's in a word: scenes =====
    Ten chapters, as in ../script.md. Graduation week: four offices give four answers to "how many credentials did we award?".
@@ -1428,13 +3665,13 @@ scene("kinds",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     const order=PHOTOS.filter(q=>q[1]).indexOf(PHOTOS[i]),mk=has&&order>=0&&order<=pk?fin(t,c("pigeons")+1.5+order*1.1,0.3):0;
     photoTile(ctx,x,y,w,h,k,has,fin(t,0.4+i*0.08,0.4),mk*(1-nw));});
   withA(ctx,1-nw,()=>{const tgt=PHOTOS.filter(q=>q[1])[Math.min(5,pk)]||PHOTOS[0],ti=PHOTOS.indexOf(tgt),px=150+(ti%4)*175+75,py=180+Math.floor(ti/4)*135+140,bob=Math.abs(Math.sin((t-c("pigeons"))*5.7))*14;
-    pigeon(ctx,lerp(420,px,fin(t,c("pigeons")+0.8,0.8)),lerp(760,py+50,fin(t,c("pigeons")+0.8,0.8))+bob,2.0,[210,220,240],{a:fin(t,0.6,0.6)});
+    {const c0=c("pigeons"),LIT=PHOTOS.filter(q=>q[1]),st=k=>{const i=PHOTOS.indexOf(LIT[k]);return[c0+1.38+k*1.1,190+(i%4)*175,350+Math.floor(i/4)*135,1];},R=bd_route(t,[[c0-0.55,120,350,0],st(0),st(3),st(5),[c0+11.1,630,620,0],[c0+16.05,700,620,0]],1.45);pigeon(ctx,R.x,R.y,1.45,[210,220,240],Object.assign({a:fin(t,0.6,0.6),t},R));}
     withA(ctx,fin(t,c("pigeons")+4.0,0.6),()=>tag(ctx,450,640,"people? peck",GOOD,{align:"center",size:20}));});
   // right: the bee, choosing the same
   const bT=c("bees"),ph2=fin(t,bT+3.4,0.3),sample=ph2>0.5?"hstripes":"blue",opts=ph2>0.5?["vstripes","hstripes"]:["blue","yellow"],ok=ph2>0.5?1:0;
   withA(ctx,fin(t,bT-0.2,0.6)*(1-nw),()=>{T(ctx,"the sample",1450,210,{w:700,size:20,align:"center",color:rgba(SOFT,1)});beeCard(ctx,1450,300,130,sample,1,false);
     opts.forEach((k,i)=>beeCard(ctx,1300+i*300,560,130,k,1,i===ok&&t>bT+(ph2>0.5?5.2:2.2)));
-    const u=ph2>0.5?fin(t,bT+3.8,1.4):fin(t,bT+0.6,1.4),bx=lerp(1450,1300+ok*300,u),by=lerp(300,560,u)-Math.sin(u*Math.PI)*120;bee(ctx,bx+Math.sin(t*3)*6,by-110,2.4,t,{a:1});
+    {const F=bd_flight(t,[[bT-0.4,1590,285,-1],[bT+0.5,1588,292,-1],[bT+1.1,1560,405,-1],[bT+1.5,1450,430,-1],[bT+2,1305,426,-1],[bT+2.7,1300,428,-1],[bT+3,1330,440,1],[bT+3.4,1525,445,1],[bT+3.8,1596,300,1],[bT+4.2,1590,292,-1],[bT+5.1,1605,426,-1]]);bee(ctx,F.x,F.y,2.4,t,{a:1,vx:F.vx,vy:F.vy,face:F.face});}
     withA(ctx,fin(t,bT+(ph2>0.5?5.4:2.4),0.3),()=>tag(ctx,1300+ok*300,665,"same",GOOD,{align:"center",size:20}));});
   // no words: two kinds, sorted without a single word
   withA(ctx,nw,()=>{bubble(ctx,760,110,400,"no words",BAD,{size:30});cross_(ctx,1100,150,40,BAD,1);
@@ -1454,16 +3691,18 @@ scene("calls",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const wL=fin(t,cL+1.0,1.2)*(1-fin(t,cE+0.3,0.8)),wE=fin(t,cE+1.4,1.1)*(1-fin(t,cS+0.3,0.8)),wS=fin(t,cS+0.8,0.8);
   withA(ctx,1-nm,()=>{
     // the grassland at dusk
-    const g=ctx.createLinearGradient(0,760,0,1080);g.addColorStop(0,"rgba(40,56,34,0.9)");g.addColorStop(1,"rgba(10,14,10,0.9)");ctx.fillStyle=g;ctx.fillRect(0,760,1920,320);
-    tree(ctx,300,770,1.5,1);bush(ctx,1085,770,1.5,1);grass(ctx,0,1920,770,t,0.9);
+    ground(ctx,760,t);
+    tree(ctx,300,770,1.5,1,t);bush(ctx,1085,770,1.5,1,t);grass(ctx,0,1920,770,t,0.9);
     yearTag(ctx,120,120,"vervet monkeys · alarm calls",CLAY,fin(t,0.3,0.6));
     // the hunters, each with its own call
-    leopard(ctx,lerp(2000,1500,fin(t,cL-0.2,1.6)),700,2.2,LEO,{a:fin(t,cL-0.4,0.5)*(1-fin(t,cE,0.6))});
-    eagle(ctx,lerp(1900,1350,fin(t,cE-0.2,1.8)),240+Math.sin(t*1.2)*10,1.3,EAG,{a:fin(t,cE-0.3,0.5)*(1-fin(t,cS,0.6))});
-    snake(ctx,1420,748,1.3,SNK,{a:fin(t,cS-0.2,0.5)*(1-fin(t,c("kind")+2,0.8))});
+    leopard(ctx,lerp(2000,1500,fin(t,cL-0.5,3.4)),700,2.2,LEO,{a:fin(t,cL-0.4,0.5)*(1-fin(t,cE,0.6)),t,flip:1,walk:-500*(1-fin(t,cL-0.5,3.4))});
+    {const u=fin(t,cE-0.7,4.4);eagle(ctx,lerp(1990,1060,u)-Math.max(0,t-cE-3.7)*12,lerp(440,360,u)+Math.sin(t*1.2)*6,1.3,EAG,{a:fin(t,cE-0.3,0.5)*(1-fin(t,cS,0.6)),t,yaw:lerp(-0.95,-0.6,u),bank:0.15,elev:1.2});}
+    snake(ctx,1420,748,1.3,SNK,{a:fin(t,cS-0.2,0.5)*(1-fin(t,c("kind")+2,0.8)),t,flip:1,crawl:t-cS});
     [[cL,LEO],[cE,EAG],[cS,SNK]].forEach(([c0,col])=>{const u=clamp((t-c0-0.3)/1.4,0,1);if(u>0&&u<1)for(let k=0;k<3;k++){const r=40+u*260+k*40;ring(ctx,MONK[1][0]+30,MONK[1][1]-40,r,col,(1-u)*0.7,3);}});
     MONK.forEach((m,i)=>{let x=m[0],y=m[1];x+=(TREE_SPOTS[i][0]-m[0])*wL+(BUSH_SPOTS[i][0]-m[0])*wE;y+=(TREE_SPOTS[i][1]-m[1])*wL+(BUSH_SPOTS[i][1]-m[1])*wE-30*wS;
-      monkey(ctx,x,y-44,1.4,[225,205,175],{a:1});if(wE>0.2&&wE<0.99)withA(ctx,wE,()=>T(ctx,"↑",x,y-100,{w:800,size:26,align:"center",color:rgba(EAG,1)}));if(wS>0.2)withA(ctx,wS,()=>T(ctx,"↓",x+16,y-96,{w:800,size:24,align:"center",color:rgba(SNK,1)}));});
+      monkey(ctx,x,y-44+30*wS,1.4,[225,205,175],{a:1,t,i,tree:wL,bush:wE,tall:wS,calls:[cL,cE,cS],path:[m,TREE_SPOTS[i],BUSH_SPOTS[i]]});if(wE>0.2&&wE<0.99)withA(ctx,wE,()=>T(ctx,"↑",x,y-100,{w:800,size:26,align:"center",color:rgba(EAG,1)}));if(wS>0.2)withA(ctx,wS,()=>T(ctx,"↓",x+16,y-96,{w:800,size:24,align:"center",color:rgba(SNK,1)}));});
+    // the low front of the bush, over the monkeys that dive into it
+    bush(ctx,1085,770,1.5,wE,t,{front:1});
     // the three calls, and what each one means
     [[cL,LEO,"leopard call","up into the trees"],[cE,EAG,"eagle call","look up, into the bushes"],[cS,SNK,"snake call","stand tall, search the grass"]].forEach(([c0,col,a1,a2],i)=>
       withA(ctx,fin(t,c0+0.4,0.5),()=>{glass(ctx,1240,110+i*96,560,76,16,col,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.92)"});ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(1276,148+i*96,9,0,TAU);ctx.fill();
@@ -1471,11 +3710,11 @@ scene("calls",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     withA(ctx,fin(t,c("kind")+0.6,0.6),()=>{ctx.strokeStyle=rgba(KIND,0.9);ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(1812,112);ctx.lineTo(1830,112);ctx.lineTo(1830,378);ctx.lineTo(1812,378);ctx.stroke();tag(ctx,1640,420,"each call: a kind of thing",KIND,{align:"center",size:20});});});
   // names: one particular animal
   withA(ctx,nm*(1-idA),()=>{[[dolphin,"dolphins",330],[elephant,"elephants",960],[marmoset,"marmosets",1590]].forEach(([f,s,x],i)=>{const a=fin(t,c("names")+0.4+i*0.7,0.6);
-    withA(ctx,a,()=>{glass(ctx,x-250,230,500,440,22,NAMEC,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.9)"});f(ctx,x,420,1.7,undefined,{a:1});T(ctx,s,x,300,{w:800,size:28,align:"center",color:rgba(NAMEC,1)});
+    withA(ctx,a,()=>{glass(ctx,x-250,230,500,440,22,NAMEC,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.9)"});f(ctx,x,420,1.7,undefined,{a:1,t:t+i*1.3});T(ctx,s,x,300,{w:800,size:28,align:"center",color:rgba(NAMEC,1)});
       nameWave(ctx,x-160,560,320,70,i,NAMEC,1,clamp((t-c("names")-0.7-i*0.7)/1.4,0,1));T(ctx,"a call like a name",x,640,{w:600,size:19,align:"center",color:rgba(SOFT,1)});});});});
   // categories and identifiers
-  withA(ctx,idA,()=>{glass(ctx,240,220,660,440,24,LEO,{glow:16,ea:0.75,fill:"rgba(7,12,24,0.92)"});leopard(ctx,570,420,1.5,LEO,{a:1});T(ctx,"a kind of thing",570,300,{w:800,size:30,align:"center",color:rgba(LEO,1)});T(ctx,"category",570,580,{f:"mono",w:500,size:26,align:"center",color:rgba(INK,0.95)});
-    glass(ctx,1020,220,660,440,24,NAMEC,{glow:16,ea:0.75,fill:"rgba(7,12,24,0.92)"});dolphin(ctx,1350,410,1.5,NAMEC,{a:1});nameWave(ctx,1230,500,240,40,0,NAMEC,1,1);T(ctx,"one particular thing",1350,300,{w:800,size:30,align:"center",color:rgba(NAMEC,1)});T(ctx,"identifier",1350,580,{f:"mono",w:500,size:26,align:"center",color:rgba(INK,0.95)});
+  withA(ctx,idA,()=>{glass(ctx,240,220,660,440,24,LEO,{glow:16,ea:0.75,fill:"rgba(7,12,24,0.92)"});leopard(ctx,570,420,1.5,LEO,{a:1,t});T(ctx,"a kind of thing",570,300,{w:800,size:30,align:"center",color:rgba(LEO,1)});T(ctx,"category",570,580,{f:"mono",w:500,size:26,align:"center",color:rgba(INK,0.95)});
+    glass(ctx,1020,220,660,440,24,NAMEC,{glow:16,ea:0.75,fill:"rgba(7,12,24,0.92)"});dolphin(ctx,1350,410,1.5,NAMEC,{a:1,t});nameWave(ctx,1230,500,240,40,0,NAMEC,1,1);T(ctx,"one particular thing",1350,300,{w:800,size:30,align:"center",color:rgba(NAMEC,1)});T(ctx,"identifier",1350,580,{f:"mono",w:500,size:26,align:"center",color:rgba(INK,0.95)});
     withA(ctx,fin(t,c("ids")+3.2,0.6),()=>tag(ctx,960,740,"every data model needs both",KIND,{align:"center",size:26}));});
   vign(ctx,S);});
 
@@ -1485,8 +3724,8 @@ const PHRASES=[[4,1,0],[2,3],[5,6]];
 scene("words",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const cb=fin(t,c("combine")-0.2,0.8),kn=fin(t,c("know")-0.2,0.8),fo=fin(t,c("fossil")-0.2,0.8);
   // pointing: a baby, a bird, and someone looking where the baby looks
-  withA(ctx,1-cb,()=>{const bx=1040,by=330;robin(ctx,bx,by,1.6,{a:1});ctx.fillStyle="rgba(80,60,40,0.9)";ctx.fillRect(bx-160,by+36,320,10);
-    baby(ctx,520,720,2.0,fin(t,0.3,0.6),fin(t,c("point")+0.4,0.9));person(ctx,"mei",1500,900,0.62,{t,expr:"calm"});
+  withA(ctx,1-cb,()=>{ground(ctx,600,t);grass(ctx,0,1920,610,t,0.8);const bx=1040,by=330;robin(ctx,bx,by,1.6,{a:1,t});perch(ctx,bx,by+36,320,t);
+    baby(ctx,565,701,1.5,fin(t,0.3,0.6),fin(t,c("point")+0.4,0.9),t,{at:[bx,by+10]});withA(ctx,fin(t,0.3,0.6),()=>by_elder(ctx,1487,925,1.02,t,{look:[bx,by+10]}));
     const ja=fin(t,c("point")+2.0,0.8);withA(ctx,ja,()=>{[[680,640],[1500,560]].forEach(([x,y])=>{ctx.strokeStyle=rgba(WA_INK,0.8);ctx.lineWidth=2.2;ctx.setLineDash([6,9]);ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(bx,by+10);ctx.stroke();ctx.setLineDash([]);});tag(ctx,1060,520,"shared attention",WA_INK,{align:"center",size:22});});
     withA(ctx,fin(t,c("root")+0.6,0.6),()=>{[["this one",850,220],["here",1230,210],["that",1300,380]].forEach(([s,x,y],i)=>withA(ctx,fin(t,c("root")+0.8+i*0.5,0.4),()=>tag(ctx,x,y,s,KIND,{align:"center",size:24})));});});
   // combining without limit, and reaching what isn't here
@@ -1502,9 +3741,7 @@ scene("words",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     credCard(ctx,1050,280,560,{a:rA,era:"paper",title:"Diploma of Languages",issuer:"the university",holder:"Mei Tanaka",claim:"Spanish, advanced",date:"2019",press:fin(t,c("know")+4.2,0.5)});
     withA(ctx,fin(t,c("know")+4.8,0.6),()=>tag(ctx,1330,700,"a record shows it",TRUST,{align:"center",size:22}));});
   // no fossils
-  withA(ctx,fo,()=>{const cols=["#3b2a1c","#4a3422","#5a4130","#3f2e22","#2e2118"];cols.forEach((cl,i)=>{ctx.fillStyle=cl;ctx.beginPath();ctx.moveTo(0,300+i*110);for(let x=0;x<=1920;x+=60)ctx.lineTo(x,300+i*110+Math.sin(x*0.004+i)*16);ctx.lineTo(1920,1080);ctx.lineTo(0,1080);ctx.fill();});
-    [[380,430],[1480,560],[860,690]].forEach(([x,y],i)=>{ctx.strokeStyle="rgba(240,226,200,0.55)";ctx.lineWidth=3;ctx.beginPath();for(let k=0;k<5;k++)ctx.arc(x,y,8+k*8,Math.PI*(0.1+k*0.3),Math.PI*(0.9+k*0.3));ctx.stroke();});
-    ctx.strokeStyle="rgba(240,226,200,0.45)";ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(1100,420);ctx.lineTo(1260,440);ctx.moveTo(1120,440);ctx.lineTo(1240,420);ctx.stroke();
+  withA(ctx,fo,()=>{strata(ctx,t);
     const qa=fin(t,c("fossil")+2.4,0.6);withA(ctx,qa,()=>{ctx.save();ctx.setLineDash([10,10]);ctx.strokeStyle=rgba(KIND,0.9);ctx.lineWidth=3;ctx.beginPath();ctx.ellipse(1000,560,120,70,0,0,TAU);ctx.stroke();ctx.restore();T(ctx,"?",1000,582,{w:800,size:64,align:"center",color:rgba(KIND,1)});});
     withA(ctx,fin(t,c("fossil")+3.2,0.6),()=>tag(ctx,960,180,"words leave no fossils",CLAY,{align:"center",size:26}));});
   vign(ctx,S);});
@@ -1523,11 +3760,11 @@ scene("forms",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
 
 /* ---------- 6. Which part do you mean? ---------- */
 scene("gavagai",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
-  const g=ctx.createLinearGradient(0,700,0,1080);g.addColorStop(0,"rgba(40,56,34,0.8)");g.addColorStop(1,"rgba(8,12,8,0.9)");ctx.fillStyle=g;ctx.fillRect(0,700,1920,380);grass(ctx,0,1920,710,t,0.8);
+  ground(ctx,700,t);grass(ctx,0,1920,710,t,0.8);
   yearTag(ctx,120,120,"1960 · a philosopher's puzzle",CLAY,fin(t,0.3,0.6));
-  const run=fin(t,0.6,4.0),rx=lerp(200,900,run),ry=660;rabbit(ctx,rx,ry,1.9,[235,225,205],t,{run:1});
+  const run=fin(t,0.6,4.0),rx=lerp(200,900,run),ry=660;rabbit(ctx,rx,ry,1.9,[235,225,205],t,{run:1,dist:rx-200+(t>2.6?175*Math.pow(Math.min(1,(t-2.6)/2),3)+262.5*Math.max(0,t-4.6):0)});
   // the stranger's pointing arm, and the word
-  pointArm(ctx,-60,560,230,480,1.1,fin(t,c("rabbit")+0.8,0.6));
+  pointArm(ctx,-60,560,236,500,1.35,fin(t,c("rabbit")+0.8,0.6),{at:[rx,ry-30],t});
   withA(ctx,fin(t,c("rabbit")+3.2,0.4),()=>bubble(ctx,300,250,340,"gavagai!",WA_INK,{size:44}));
   // three things the word could mean
   const mT=c("mean"),opt=[["the rabbit",mT+0.4],["its ears",mT+1.6],["this moment of running",mT+2.8]];
@@ -1535,19 +3772,19 @@ scene("gavagai",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     if(i===0)ring(ctx,rx,ry-10,120,KIND,0.5+0.5*hi,3);if(i===1){ring(ctx,rx+56,ry-96,44,KIND,0.5+0.5*hi,3);}if(i===2){ctx.strokeStyle=rgba(KIND,0.5+0.5*hi);ctx.lineWidth=3;ctx.strokeRect(rx-150,ry-150,300,230);for(let k=0;k<4;k++){ctx.beginPath();ctx.moveTo(rx-200-k*30,ry-80+k*30);ctx.lineTo(rx-160-k*30,ry-80+k*30);ctx.stroke();}}
     glass(ctx,1240,230+i*120,560,86,18,KIND,{glow:10+10*hi,ea:0.6+0.4*hi,fill:"rgba(7,12,24,0.92)"});T(ctx,s,1270,283+i*120,{w:700,size:28});});});
   // children guess the whole thing
-  withA(ctx,fin(t,c("kids")+1.0,0.6),()=>{baby(ctx,1120,780,1.3,1,0.9);tick_(ctx,1770,273,34,GOOD,1);tag(ctx,1500,190,"children: the whole thing",GOOD,{align:"center",size:22});});
+  withA(ctx,fin(t,c("kids")+1.0,0.6),()=>{baby(ctx,1120,780,1.3,1,0.8,t,{at:[rx+10,ry+10]});tick_(ctx,1770,273,34,GOOD,1);tag(ctx,1500,190,"children: the whole thing",GOOD,{align:"center",size:22});});
   // the grain
   withA(ctx,fin(t,c("grain")+1.8,0.6),()=>{glass(ctx,1240,630,560,150,20,TRUST,{glow:16,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(ctx,"the grain",1270,680,{w:800,size:28,color:rgba(TRUST,1)});T(ctx,"what counts as one?",1270,722,{w:600,size:24});T(ctx,"1 row = 1 rabbit? 1 ear? 1 moment?",1270,758,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});});
   vign(ctx,S);});
 
 /* ---------- 7. Fuzzy edges ---------- */
-const BIRDS=[[(c,x,y,s,a)=>robin(c,x,y,s,{a}),0,0,1.3],[(c,x,y,s,a)=>sparrow(c,x,y,s,{a}),-110,40,1.1],[(c,x,y,s,a)=>pigeon(c,x,y,s,undefined,{a}),190,-120,0.9],[(c,x,y,s,a)=>eagle(c,x,y,s,undefined,{a}),-230,-150,0.8],[(c,x,y,s,a)=>penguin(c,x,y,s,{a}),290,150,1.2],[(c,x,y,s,a)=>ostrich(c,x,y,s,{a}),-300,160,1.1]];
+const BIRDS=[[(c,x,y,s,a,t)=>robin(c,x,y,s,{a,t}),0,0,1.3],[(c,x,y,s,a,t)=>sparrow(c,x,y,s,{a,t}),-110,40,1.1],[(c,x,y,s,a,t)=>pigeon(c,x,y,s,undefined,{a,t}),190,-120,0.9],[(c,x,y,s,a,t)=>eagle(c,x,y,s,undefined,{a,t}),-230,-150,0.8],[(c,x,y,s,a,t)=>penguin(c,x,y,s,{a,t}),290,150,1.2],[(c,x,y,s,a,t)=>ostrich(c,x,y,s,{a,t}),-300,160,1.1]];
 const CREDS=[["degree",-40,-18,0],["diploma",45,32,0],["microcredential",-135,-105,1],["badge · assessed",175,-135,2],["badge · turned up",180,150,3],["certificate of completion",-235,200,4]];
 const RINGS=[["reg",95],["short",185],["careers",262],["lms",345]];
 scene("edges",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,S);bg2(ctx);
   const cx=900,cy=450,cr=fin(t,c("cred")-0.2,0.9);
   withA(ctx,1-cr,()=>{fuzzyRing(ctx,cx,cy,330,KIND,fin(t,c("typical"),0.8),70);glow(ctx,cx,cy,200,TRUST,0.2*fin(t,c("typical"),0.8));
-    BIRDS.forEach(([f,dx,dy,s],i)=>{const a=fin(t,0.4+i*0.5,0.5),edge=Math.hypot(dx,dy)>250;f(ctx,cx+dx,cy+dy,s,a*(edge?0.75:1));});
+    BIRDS.forEach(([f,dx,dy,s],i)=>{const a=fin(t,0.4+i*0.5,0.5),edge=Math.hypot(dx,dy)>250;f(ctx,cx+dx+Math.sin(t*0.45+i*1.9)*4,cy+dy+Math.sin(t*0.6+i*2.7)*5,s,a*(edge?0.75:1),t+i*7);});
     T(ctx,"bird",cx,180,{w:800,size:30,align:"center",color:rgba(KIND,1)});
     withA(ctx,fin(t,c("typical")+0.6,0.5),()=>{tag(ctx,cx,cy+90,"typical",TRUST,{align:"center",size:20});tag(ctx,cx+330,cy-20,"fuzzy edge",KIND,{align:"center",size:20});});
     withA(ctx,fin(t,c("agree")+0.2,0.5),()=>{tag(ctx,1500,380,"agree in the middle",GOOD,{align:"center",size:24});tag(ctx,1500,470,"argue at the edges",EDGE_,{align:"center",size:24});});});
@@ -1555,7 +3792,7 @@ scene("edges",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,
     CREDS.forEach(([s,dx,dy,lv],i)=>{const a=fin(t,c("cred")+0.4+i*0.35,0.5);withA(ctx,a,()=>{const w=tw(ctx,s,20,700)+36;glass(ctx,cx+dx-w/2,cy+dy-22,w,44,22,lv<1?TRUST:lv<2?OFFICE.short.c:lv<4?OFFICE.careers.c:OFFICE.lms.c,{glow:10,ea:0.8,fill:"rgba(7,12,24,0.92)"});T(ctx,s,cx+dx,cy+dy+7,{w:700,size:20,align:"center"});});});
     T(ctx,"credential",cx-520,120,{w:800,size:34,align:"center",color:rgba(TRUST,1)});T(ctx,"one word, and what it takes in",cx-520,156,{w:600,size:19,align:"center",color:rgba(SOFT,1)});
     // each office draws its own boundary
-    RINGS.forEach(([k,r],i)=>{const a=fin(t,c("cred")+6.5+i*0.9,0.7),col=OFFICE[k].c;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=3;ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=10;ctx.beginPath();ctx.arc(cx,cy,r*clamp(a*1.2,0,1)+Math.sin(t*1.5+i)*2,0,TAU);ctx.stroke();ctx.restore();
+    RINGS.forEach(([k,r],i)=>{const a=fin(t,c("cred")+6.5+i*0.9,0.7),col=OFFICE[k].c;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=3;ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=10;ctx.beginPath();ctx.arc(cx,cy,Math.max(0,r*clamp(a*1.2,0,1)+Math.sin(t*1.5+i)*2),0,TAU);ctx.stroke();ctx.restore();
       withA(ctx,a,()=>{const ly=cy-r-6,w=tw(ctx,OFFICE[k].n,17,700)+24;ctx.fillStyle="rgba(7,12,24,0.9)";rr(ctx,cx-w/2,ly-16,w,30,15);ctx.fill();T(ctx,OFFICE[k].n,cx,ly+5,{w:700,size:17,align:"center",color:rgba(col,1)});
         T(ctx,fmtNum(ANS[i][1]),1560,300+i*110,{w:800,size:48,color:rgba(col,1)});T(ctx,OFFICE[k].n,1560,330+i*110,{w:600,size:18,color:rgba(SOFT,1)});});});});
   withA(ctx,fin(t,B+0.4,0.8),()=>tag(ctx,1500,760,"four boundaries, one word",TRUST,{align:"center",size:22}));
@@ -1574,8 +3811,10 @@ scene("drift",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);histBg(ctx,S,t);
     const fd=clamp((t-cT-5.4)/1.2,0,1);withA(ctx,fin(t,cT+4.9,0.5),()=>{ctx.save();ctx.translate(1540,700);ctx.fillStyle="#efe6d2";ctx.fillRect(-150,-90,150,180);ctx.save();ctx.scale(Math.cos(fd*Math.PI*0.96),1);ctx.fillStyle=fd>0.5?"#d8ccb2":"#efe6d2";ctx.fillRect(0,-90,150,180);ctx.restore();ctx.strokeStyle="rgba(120,90,50,0.5)";ctx.beginPath();ctx.moveTo(0,-90);ctx.lineTo(0,90);ctx.stroke();ctx.restore();});});
   // an ambassador's letters of credence
   withA(ctx,st*(1-mv),()=>{yearTag(ctx,120,120,"today · letters of credence",CLAY,1);const u=ease(clamp((t-c("still")-0.6)/1.8,0,1));
-    const lx=700+u*140;pointArm(ctx,-80,560,lx-150,540,1.2,1);pointArm(ctx,2000,600,lx+560,560,1.2,u);
+    const lx=700+u*140;
     credCard(ctx,700+u*140,380,420,{a:1,era:"wax",title:"Letter of credence",issuer:"a head of state",holder:"the ambassador",claim:"trust this person",rot:-0.03,rh:40});
+    // the letter changes hands: the envoy's fingers behind it and thumb on its face; the host's hand comes in open and closes on it
+    pointArm(ctx,lx-900,680,lx-100,598,2.0,1,{pose:"give",dress:"coat",card:[lx,380,420,286,-0.03],t});const rx_=lx+520+(1-u)*900;pointArm(ctx,rx_+760,680,rx_,556,2.0,1,{pose:"take",dress:"coat",k:clamp(u*1.6-0.6,0,1),card:[lx,380,420,286,-0.03],t});
     withA(ctx,fin(t,c("still")+2.6,0.6),()=>tag(ctx,960,800,"credential: the letter that asks for trust",TRUST,{align:"center",size:24}));});
   // meaning moves along a line of years
   withA(ctx,mv,()=>{const x0=200,x1=1720,y=560;ctx.strokeStyle=rgba(CLAY,0.7);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x1,y);ctx.stroke();
@@ -1635,7 +3874,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");const cl=fin(t,c
     // a meeting, against everything else
     withA(ctx,fin(t,c("cost")+0.2,0.6),()=>{tag(ctx,700,720,"agreeing: a meeting",GOOD,{size:24});tag(ctx,1120,720,"disagreeing: disputes, rework, wrong decisions",BAD,{size:24});});});}
   if(cl>0){histBg(ctx,S,t,{light:0.14});withA(ctx,cl*(1-la*0.6),()=>{const p=clamp((t-c("clay")-0.6)/5,0,1);tablet(ctx,660,230,600,380,p,1);
-      const k=Math.floor(p*48),sx=660+40+(k%12)*(600-80)/12,sy=230+Math.floor(k/12)*76+46;if(p<1){ctx.strokeStyle="rgba(200,170,120,0.95)";ctx.lineWidth=7;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(sx+8,sy-6);ctx.lineTo(sx+120,sy-180);ctx.stroke();}
+      const k=Math.floor(p*48),sx=660+40+(k%12)*(600-80)/12,sy=230+Math.floor(k/12)*76+46;{const W_=by_scribe(t-c("clay")-0.6,660,230,600,380);if(W_)stylus(ctx,W_.x,W_.y,t,W_.a,W_);}
       yearTag(ctx,120,120,"c. 3300 BCE · Uruk",CLAY,1);});
     withA(ctx,la,()=>{[["minds",560],["marks",960],["systems",1360]].forEach(([s,x],i)=>withA(ctx,fin(t,c("last")+0.4+i*0.6,0.5),()=>{const col=[KIND,CLAY,CYAN][i];glass(ctx,x-150,690,300,110,20,col,{glow:16,ea:0.85,fill:"rgba(7,12,24,0.93)"});T(ctx,s,x,758,{w:800,size:34,align:"center",color:rgba(col,1)});if(i<2)arrowTo(ctx,x+160,745,x+240,745,SOFT,0.8,{head:12});}));});}
   endCard(ctx,S,t,B+0.3,"What's in a word",WA_INK,"Before you can count anything, you have to agree what it is.");
@@ -1645,10 +3884,12 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");const cl=fin(t,c
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});
 // the voice breathes between sentences: SGAP after a line that ends a sentence, GAP where the sentence runs on into the next line, and GAP after a chapter's last line (its tail follows)
 const gapAfter=(ch,last)=>ch.gap!=null?ch.gap:(!last&&/[.?!…]["'”’»)]*$/.test(ch.text.trim())?SGAP:GAP);
+// a page can caption the film in another language over the same picture and voice: CAPTIONS maps each English line to its caption (src/i18n/<lang>/captions.js), loaded before the film
+const capText=s=>typeof CAPTIONS!=="undefined"&&CAPTIONS[s]||s;
 // BREATH (breath.js) adds room to think: a hold after a line, a pause before one, and a wordless end to each chapter from the "breath" cue
 function buildTimeline(){let g=0;const caps=[],BR=typeof BREATH!=="undefined"?BREATH:{};
   SCENES.forEach(sc=>{const b=BR[sc.id]||{},hold=b.hold||{},pz=b.pause||{};sc.start=g;sc.cues={};sc.ends={};sc.pauses={};let t=sc.lead||0.6;
-    sc.vo.forEach((ch,i)=>{const p=(ch.pause||0)+(pz[ch.id]||0);if(p){t+=p;sc.pauses[ch.id]=p;}const d=(typeof VODUR!=="undefined"&&VODUR[sc.id+"/"+ch.id])||Math.max(1.3,ch.text.split(/\s+/).length/2.7);sc.cues[ch.id]=t;sc.ends[ch.id]=t+d;caps.push({s:g+t,e:g+t+d,text:ch.text,sid:sc.id,id:ch.id});t+=d+gapAfter(ch,i===sc.vo.length-1)+(hold[ch.id]||0);});
+    sc.vo.forEach((ch,i)=>{const p=(ch.pause||0)+(pz[ch.id]||0);if(p){t+=p;sc.pauses[ch.id]=p;}const d=(typeof VODUR!=="undefined"&&VODUR[sc.id+"/"+ch.id])||Math.max(1.3,ch.text.split(/\s+/).length/2.7);sc.cues[ch.id]=t;sc.ends[ch.id]=t+d;caps.push({s:g+t,e:g+t+d,text:capText(ch.text),sid:sc.id,id:ch.id});t+=d+gapAfter(ch,i===sc.vo.length-1)+(hold[ch.id]||0);});
     sc.voEnd=t;sc.breathe=b.breathe||0;sc.cues.breath=t+(sc.tail||1.2);sc.dur=sc.cues.breath+sc.breathe;g+=sc.dur;});return{total:g,caps};}
 const TL=buildTimeline();let CAPS_ON=true,OFF=null;
 function sceneIndex(t){for(let i=SCENES.length-1;i>=0;i--)if(t>=SCENES[i].start)return i;return 0;}
@@ -1663,7 +3904,8 @@ function renderFrame(ctx,S,t){t=clamp(t,0,TL.total-0.001);const i=sceneIndex(t),
 function fmt(s){s=Math.max(0,s);const m=Math.floor(s/60),x=Math.floor(s%60);return m+":"+(x<10?"0":"")+x;}
 async function fontsReady3(){try{await Promise.all(["600 40px Manrope","700 22px Manrope","800 34px Manrope","500 18px Manrope","500 15px 'IBM Plex Mono'"].map(f=>document.fonts.load(f)));await document.fonts.ready;}catch(e){}}
 async function prepAssets(){await fontsReady3();await loadLogos();master2(1);master2(2);["realism","modern","rules","live"].forEach(painting2);}
-if(window.__RENDER__){const cv=mkCanvas(W,H),ctx=cv.getContext("2d");document.body.appendChild(cv);
+// the video carries no captions on the picture: they ship beside it as .srt files, one per language, so one video serves every language
+if(window.__RENDER__){CAPS_ON=false;const cv=mkCanvas(W,H),ctx=cv.getContext("2d");document.body.appendChild(cv);
   window.renderAt=function(t,q){renderFrame(ctx,1,t);return cv.toDataURL("image/jpeg",q||0.9);};
   window.filmInfo=function(){return{total:TL.total,scenes:SCENES.map(s=>({id:s.id,name:s.name,start:s.start,dur:s.dur,cues:s.cues,pauses:s.pauses,breathe:s.breathe})),caps:TL.caps};};
   prepAssets().then(()=>{window.__READY__=true;});}

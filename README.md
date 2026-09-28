@@ -15,6 +15,8 @@ Start with *The Inner Life of Data*, the overview. Then go deeper, one topic at 
 | Changes and data contracts | [Silent change](https://roanboc.github.io/learning-data/when-things-go-wrong/silent-change/), from the series *When things go wrong* | *Refining with dbt* and *Gold* |
 | Data quality checks | [Too good to be true](https://roanboc.github.io/learning-data/when-things-go-wrong/too-good-to-be-true/), from the series *When things go wrong*, with labs and scenarios | *Refining with dbt* and *Gold* |
 
+And on the [Making of page](https://roanboc.github.io/learning-data/journey/), two short films about the films themselves: *Data for Films*, how they're drawn, and *That's not quite right*, how they're made, by a person and Claude.
+
 ## What's here
 
 ```
@@ -27,16 +29,17 @@ site/                            the website, published to GitHub Pages as it is
   when-things-go-wrong/          the series When things go wrong: a page for the series, and a folder per film
     silent-change/               Changes and data contracts: Silent change, with "Pause and think" questions
     too-good-to-be-true/         Data quality checks: Too good to be true, with "Pause and think", labs/ (three labs) and scenarios/ (ten)
-  journey/                       Making of: how the films were made; index.md (source) and index.html (generated)
+  journey/                       Making of: two films (Data for Films, That's not quite right), then how the films were made; index.md (source) and index.html (generated)
   films/                         redirects: films/ goes to topics/, and the old player address films/inner-life-of-data/ to the home page
   404.html                       "Page not found", in English and Spanish
   es/                            the Spanish site, at the same paths. es/sketch/ and the pages of When things go wrong
                                  are Spanish pages around English films; Too good to be true's labs and scenarios are in Spanish too; A Sharper Sketch's labs and scenarios are in English only
-  assets/                        styles (site.css), ambient.js (the moving light behind each page's hero), the icon, and a poster per film: poster.jpg, poster.es.jpg,
+  assets/                        styles (site.css), ambient.js (the moving light behind each page's hero), doc-nav.js (the Making of page's "On this page"), the icon, and a poster per film: poster.jpg, poster.es.jpg,
                                  sketch-poster.jpg, silent-change-poster.jpg and too-good-to-be-true-poster.jpg
     film/                        The Inner Life of Data's player and soundtrack, per language (built in films/inner-life-of-data/source/)
     film3/                       A Sharper Sketch's player and soundtrack (built in films/a-sharper-sketch/source/)
     silent-change/               Silent change's player and soundtrack (built in its source/), and its questions in think.en.js and think.es.js
+    making-of/                   the Making of films' players, soundtracks and posters (built in films/making-of/*/source/)
     too-good-to-be-true/         Too good to be true's player and soundtrack, its questions (think.en.js, think.es.js), and its labs and
                                  scenarios: learn.js, drawn with the film's own components, with their words in learn.en.js and learn.es.js
     learn/                       for every film page: path.js (the stepper and progress), think.js ("Pause and think")
@@ -50,9 +53,11 @@ films/                           one folder per film: script or story, captions/
   when-things-go-wrong/          the series When things go wrong: its README, the characters it shares, and one folder per film
     1-silent-change/             Silent change: treatment, story outline, captions and source
     2-too-good-to-be-true/       Too good to be true: treatment, script (with the rigour sheet), style frames, captions and source
+  making-of/                     the two Making of films: 1-data-for-films and 2-the-process, each with treatment, script, captions and source
 site-tools/                      build_pages.py turns the Markdown pages into site pages; check_site.py and smoke.py check the site
 .github/workflows/pages.yml      publishes site/ on every push to main
-.github/workflows/release.yml    renders every film and publishes the videos to a release, when you run it
+.github/workflows/release.yml    renders the films (all, the changed ones, or a list) and publishes every video to a release, when you run it
+.github/scripts/plan.py          chooses which films the release renders
 PLAYBOOK.md                      what made the films work, and how to reuse it for the next film or course
 LICENSE                          MIT licence for the code
 LICENSE-CONTENT.md               CC BY 4.0 for the films, scripts and text, with exclusions
@@ -84,7 +89,7 @@ A film's page sets its prefix with `data-store` on `section#watch`, and `path.js
 ## Publishing
 
 1. **Turn on GitHub Pages (once):** Settings → Pages → Build and deployment → Source: *GitHub Actions*. From then on, every push to `main` publishes `site/`. You can also run it by hand from the Actions tab (*Publish site* → *Run workflow*).
-2. **Release the videos:** in the Actions tab, open *Render and release the films* → *Run workflow*, and give a tag such as `v2.0`. It renders every film from the committed source at the same time, in about 30 to 45 minutes, and publishes `inner-life-of-data.mp4`, `inner-life-of-data.es.mp4`, `a-sharper-sketch.mp4`, `silent-change.mp4`, `too-good-to-be-true.mp4` and their `.srt` captions to a release with that tag. Before rendering, it checks that each film's player on the site is byte for byte the one its source builds. The site's download buttons point to the latest release, so they work as soon as it's published, and every release carries every film. Tick *draft* to watch the videos before they go live. Keeping videos out of the repository keeps clones small. To render on your own computer instead, see each film's `source/README.md`, starting with [the build guide of *The Inner Life of Data*](films/inner-life-of-data/source/README.md).
+2. **Release the videos:** in the Actions tab, open *Render and release the films* → *Run workflow*, and give a tag such as `v2.0`, and which films to render: `changed` (the default: only the films whose source, or the shared code they draw with, changed since the latest release), `all`, or a list of keys such as `silent-change-en,too-good-to-be-true-en`. It renders them from the committed source at the same time, in about 30 to 45 minutes for all of them, and publishes `inner-life-of-data.mp4`, `inner-life-of-data.es.mp4`, `a-sharper-sketch.mp4`, `silent-change.mp4`, `too-good-to-be-true.mp4`, the Making of films `data-for-films.mp4` and `thats-not-quite-right.mp4`, and their `.srt` captions to a release with that tag. Before rendering, it checks that each film's player on the site is byte for byte the one its source builds. The videos it doesn't render are copied from the latest release, so every release carries every film, and the site's download buttons, which point to the latest release, work as soon as it's published. The run's summary lists which films changed, which were rendered and which were carried over, and warns about a film that changed but wasn't rendered. Tick *draft* to watch the videos before they go live. Keeping videos out of the repository keeps clones small. To render on your own computer instead, see each film's `source/README.md`, starting with [the build guide of *The Inner Life of Data*](films/inner-life-of-data/source/README.md).
 
 ## The labs and scenarios
 
@@ -98,7 +103,7 @@ A film's page sets its prefix with `data-store` on `section#watch`, and `path.js
 
 ## Writing pages
 
-Write pages in Markdown and turn them into site pages with `python site-tools/build_pages.py` (it needs `pip install markdown`). It builds `site/journey/index.md` and `site/es/journey/index.md` with the templates `site-tools/page.html` and `page.es.html`, which hold the header, the hero and the footer: the first heading and the italic line under it become the hero, and [TOC] lists the sections. Never edit the generated `index.html` by hand. Keep each Spanish page at the same path under `site/es/`, so the language toggle finds it.
+Write pages in Markdown and turn them into site pages with `python site-tools/build_pages.py` (it needs `pip install markdown`). It builds `site/journey/index.md` and `site/es/journey/index.md` with the templates `site-tools/page.html` and `page.es.html`, which hold the header, the hero and the footer: the first heading and the italic line under it become the hero, and every section (each `##` heading, and the films at the top of the Making of page) goes into "On this page": a sidebar beside the text on wide screens, and a bar under the header on phones that names the section being read and opens the list (`assets/doc-nav.js`). Never edit the generated `index.html` by hand. Keep each Spanish page at the same path under `site/es/`, so the language toggle finds it.
 
 ## Adding a topic
 

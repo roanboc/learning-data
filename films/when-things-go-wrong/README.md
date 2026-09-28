@@ -35,6 +35,7 @@ At 7:58 on the morning before census date, Ana, the Head of School, opens her da
 - **Watch, with chapters:** [https://roanboc.github.io/learning-data/when-things-go-wrong/silent-change/](https://roanboc.github.io/learning-data/when-things-go-wrong/silent-change/). Turn on *Pause and think* to stop after four chapters for one question each; every question links to the lab of *The Inner Life of Data* that teaches the idea.
 - **In Spanish, around the English film:** [https://roanboc.github.io/learning-data/es/when-things-go-wrong/silent-change/](https://roanboc.github.io/learning-data/es/when-things-go-wrong/silent-change/). The page, the chapter names and the questions are in Spanish.
 - **Story outline:** [story.md](1-silent-change/story.md). **Treatment:** [treatment.md](1-silent-change/treatment.md).
+- **Download the video (MP4, 1080p):** [https://github.com/roanboc/learning-data/releases/latest/download/silent-change.mp4](https://github.com/roanboc/learning-data/releases/latest/download/silent-change.mp4)
 - **Captions:** [en.vtt](1-silent-change/captions/en.vtt), [en.srt](1-silent-change/captions/en.srt)
 - **Source, and how to rebuild and publish it:** [source/](1-silent-change/source/README.md)
 
@@ -62,6 +63,7 @@ On a Tuesday in admissions season, the planning committee sees applications for 
 - **Take it apart:** three labs: *Set the levels*, *Which test catches it?* and *Fix it once*. **Make the call:** ten scenarios.
 - **In Spanish, around the English film:** [https://roanboc.github.io/learning-data/es/when-things-go-wrong/too-good-to-be-true/](https://roanboc.github.io/learning-data/es/when-things-go-wrong/too-good-to-be-true/). The page, the chapter names, the questions, the labs and the scenarios are in Spanish.
 - **Script, with the rigour sheet and sources on the cost of a wrong number:** [script.md](2-too-good-to-be-true/script.md). **Treatment:** [treatment.md](2-too-good-to-be-true/treatment.md). **Style frames:** [frames/](2-too-good-to-be-true/frames/README.md).
+- **Download the video (MP4, 1080p):** [https://github.com/roanboc/learning-data/releases/latest/download/too-good-to-be-true.mp4](https://github.com/roanboc/learning-data/releases/latest/download/too-good-to-be-true.mp4)
 - **Captions:** [en.vtt](2-too-good-to-be-true/captions/en.vtt), [en.srt](2-too-good-to-be-true/captions/en.srt)
 - **Source, and how to rebuild and publish it:** [source/](2-too-good-to-be-true/source/README.md)
 

@@ -568,6 +568,51 @@ async def check_players(run):
         await ctx.close()
 
 
+# the Making of page's two sealed players: their elements carry a prefix, so both can play on one page
+SEALED = {"dff": 9, "nqr": 9}
+ES_SEALED = {"dff": ["Un cuadro", "Una imagen son datos", "Instrucciones, no píxeles", "Capas", "Componentes", "La cámara", "El tiempo",
+                     "Dos formas de verla", "El 2:31, otra vez"],
+             "nqr": ["Un mensaje", "Dos lados", "Opciones, no respuestas", "Los datos", "Eso no está del todo bien",
+                     "Una nota, no volver a empezar", "Lo que salió mal", "Publicar", "Quién hace qué"]}
+
+
+async def check_sealed(run):
+    sec = run.rep.sec("sealed", "Making of: both films play on one page, each with its own chapters, sound, captions and labels")
+    ctx = await run.context(1280)
+    try:
+        for key in ("journey/", "es/journey/"):
+            lang = "es" if key.startswith("es/") else "en"
+            pg, log = await run.page(ctx, key)
+            await pg.wait_for_function("() => ['dff', 'nqr'].every(p => document.querySelectorAll('#' + p + '-chapters button').length)", timeout=30000)
+            for p, count in SEALED.items():
+                where = f"/{key} ({p})"
+                info = await pg.evaluate("""p => ({buttons: [...document.querySelectorAll('#' + p + '-chapters button')].map(b => b.lastChild.textContent),
+                  badge: document.getElementById(p + '-film').closest('.player').querySelector('.play-badge').textContent})""", p)
+                expect(sec, len(info["buttons"]) == count, f"{where}: {len(info['buttons'])} chapter buttons, expected {count}")
+                if lang == "es":
+                    expect(sec, info["buttons"] == ES_SEALED[p], f"{where}: chapter names {info['buttons']}")
+                await pg.evaluate("p => document.getElementById(p + '-film').closest('.player').scrollIntoView()", p)
+                await pg.click(f"#{p}-film >> xpath=.. >> .play-badge")
+                try:
+                    await pg.wait_for_function("p => document.getElementById(p + '-snd').currentTime > 0.5", arg=p, timeout=10000)
+                except Exception:  # noqa: BLE001
+                    pass
+                r = await pg.evaluate("p => ({au: document.getElementById(p + '-snd').currentTime, label: document.getElementById(p + '-play').textContent})", p)
+                expect(sec, r["au"] > 0.5 and r["label"] == UI[lang]["pause"], f"{where}: Play doesn't play with sound ({r})")
+                await pg.click(f"#{p}-play")
+                label = await pg.text_content(f"#{p}-play")
+                expect(sec, label == UI[lang]["play"], f"{where}: when paused the button reads {label!r}")
+                await pg.click(f"#{p}-cc")
+                off = await pg.get_attribute(f"#{p}-cc", "aria-pressed")
+                await pg.click(f"#{p}-cc")
+                expect(sec, off == "false" and await pg.get_attribute(f"#{p}-cc", "aria-pressed") == "true", f"{where}: Captions doesn't toggle")
+            for prob in log_problems(log):
+                expect(sec, False, f"/{key}: {prob}")
+            await pg.close()
+    finally:
+        await ctx.close()
+
+
 # ---------------------------------------------------------------- 6. "Where next?" when a film ends
 async def check_next(run):
     sec = run.rep.sec("nextpanel", "\"Where next?\": appears when a film ends, with the page's links; Watch again and Escape work; keyboard focus behaves")
@@ -1184,7 +1229,7 @@ async def take_shots(run):
 
 
 CHECKS = {"pages": check_pages, "notfound": check_404, "deeplinks": check_deeplinks, "chapters": check_chapter_links,
-          "players": check_players, "nextpanel": check_next, "think-silent": check_think_silent,
+          "players": check_players, "sealed": check_sealed, "nextpanel": check_next, "think-silent": check_think_silent,
           "think-home": check_think_home, "progress": check_progress, "nostorage": check_nostorage,
           "mobile": check_mobile, "a11y": check_a11y, "drawn": check_drawn}
 

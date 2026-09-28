@@ -6,9 +6,33 @@ Todo empezó con una película. *La vida interior de los datos* se hizo en dos d
 
 Después, los comentarios convirtieron una película en cuatro: *A Sharper Sketch*, sobre modelado de datos, y una serie, *Cuando algo sale mal*, con *Cambio silencioso* y *Demasiado bueno para ser verdad*. La sección 11 cuenta qué cambió al hacer más de una, y las lecciones del final cubren las cuatro.
 
-**En esta página**
+Empieza con dos películas cortas, en inglés: cómo se dibujan las películas y cómo se hacen.
 
-[TOC]
+<div class="making-films">
+<section class="making-film" id="data-for-films" aria-labelledby="dff-h">
+<h2 id="dff-h">Data for Films</h2>
+<p>Cómo se dibujan las películas: un cuadro de <i>La vida interior de los datos</i>, desarmado desde un solo píxel y armado de nuevo, con formas, capas, componentes, una cámara y el tiempo.</p>
+<div class="player">
+<audio id="dff-snd" preload="metadata" src="../../assets/making-of/data-for-films.mp3"></audio><div class="poster"><img src="../../assets/making-of/data-for-films-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Reproducir la película · 5 min</button></div></div><canvas id="dff-film" width="1280" height="720" aria-label="Película animada: Data for Films"></canvas>
+<div class="bar"><button id="dff-play">Reproducir</button><input id="dff-scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="dff-time">0:00</span><button id="dff-cc" class="on" aria-pressed="true">Subtítulos</button><button id="dff-fs">Pantalla completa</button></div>
+</div>
+<div class="chapters" id="dff-chapters" aria-label="Capítulos"></div>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/data-for-films.mp4">Descargar el video (en inglés)</a><a href="https://github.com/roanboc/learning-data/blob/main/films/making-of/1-data-for-films/script.md" hreflang="en">Leer el guion (en inglés)</a></p>
+<details class="howto"><summary>Cómo leer la película</summary><div class="notes"><p>La película detiene <i>The Inner Life of Data</i> (en inglés) en el 2:31 y desarma ese cuadro; cada número que muestra se lee del cuadro real. La película está en inglés, con subtítulos en inglés, y la narración es una voz sintética.</p></div></details>
+</section>
+<section class="making-film" id="thats-not-quite-right" aria-labelledby="nqr-h">
+<h2 id="nqr-h">Eso no está del todo bien</h2>
+<p>Cómo se hacen las películas: lo que decide la persona, lo que hace Claude, y por qué una nueva versión barata deja lugar para más objeciones.</p>
+<div class="player">
+<audio id="nqr-snd" preload="metadata" src="../../assets/making-of/thats-not-quite-right.mp3"></audio><div class="poster"><img src="../../assets/making-of/thats-not-quite-right-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Reproducir la película · 4½ min</button></div></div><canvas id="nqr-film" width="1280" height="720" aria-label="Película animada: Eso no está del todo bien"></canvas>
+<div class="bar"><button id="nqr-play">Reproducir</button><input id="nqr-scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="nqr-time">0:00</span><button id="nqr-cc" class="on" aria-pressed="true">Subtítulos</button><button id="nqr-fs">Pantalla completa</button></div>
+</div>
+<div class="chapters" id="nqr-chapters" aria-label="Capítulos"></div>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/thats-not-quite-right.mp4">Descargar el video (en inglés)</a><a href="https://github.com/roanboc/learning-data/blob/main/films/making-of/2-the-process/script.md" hreflang="en">Leer el guion (en inglés)</a></p>
+<details class="howto"><summary>Cómo leer la película</summary><div class="notes"><p>La luz cálida es el autor; la fría, Claude, un modelo de IA de Anthropic. Las imágenes del proceso son reales; las palabras del autor entre comillas son suyas, y los demás mensajes están parafraseados. La película está en inglés (su título original es <i>That's not quite right</i>), y la narración es una voz sintética.</p></div></details>
+</section>
+</div>
+
 
 ## De un vistazo
 
@@ -171,7 +195,7 @@ Esto funciona porque cada cuadro es una función del tiempo. Dale al código un 
 
 Dibujar en vivo le da al sitio cosas que un archivo de video no puede:
 
-- **Es liviano.** Unos 7 MB en lugar de 173 MB, así que empieza de inmediato, incluso con una conexión lenta.
+- **Es liviano.** Unos 7 MB en lugar de unos 210 MB, así que empieza de inmediato, incluso con una conexión lenta.
 - **Se ve nítido en cualquier tamaño.** Cada cuadro se dibuja para tu pantalla, desde un teléfono hasta un monitor 4K.
 - **Puede responder.** Los capítulos saltan directo a una escena. *Pausa para pensar* se detiene en el último cuadro de un capítulo y hace una pregunta. Los labs dibujan con los mismos componentes y reproducen un capítulo a la vez. Los subtítulos se activan y se desactivan.
 - **Una corrección llega a todas partes.** Si un producto cambia de nombre, el reproductor, los labs y las situaciones cambian juntos.
@@ -276,3 +300,10 @@ Los errores fueron parte del proceso, y casi todos enseñaron algo:
 ## Reutilízala
 
 El código fuente y la guía para reconstruir cada película están en este repositorio (en inglés): [*La vida interior de los datos*](https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/source/README.md), [*A Sharper Sketch*](https://github.com/roanboc/learning-data/blob/main/films/a-sharper-sketch/README.md) y [la serie *Cuando algo sale mal*](https://github.com/roanboc/learning-data/blob/main/films/when-things-go-wrong/README.md), con sus tratamientos, su hoja de personajes y sus cuadros de estilo. La [guía práctica](https://github.com/roanboc/learning-data/blob/main/PLAYBOOK.md) (en inglés) reúne lo que conviene reutilizar en la próxima película o curso. Para adaptar *La vida interior de los datos* a otra universidad, cambia la narración en `src/narration.js`, o en `src/i18n/es/narration.js` para la versión en español (por ejemplo "clase", "fecha de corte" y los nombres de los dominios), vuelve a generar la voz y renderiza de nuevo.
+
+<script>window.L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla completa",fsExit:"Salir de pantalla completa"}};
+/* the films are in English; their chapter buttons use these Spanish names */
+window.SCENE_NAMES={dff:{frame:"Un cuadro",data:"Una imagen son datos",draw:"Instrucciones, no píxeles",layers:"Capas",parts:"Componentes",camera:"La cámara",time:"El tiempo",play:"Dos formas de verla",again:"El 2:31, otra vez"},
+ nqr:{message:"Un mensaje",lanes:"Dos lados",options:"Opciones, no respuestas",facts:"Los datos",push:"Eso no está del todo bien",cheap:"Una nota, no volver a empezar",wrong:"Lo que salió mal",publish:"Publicar",split:"Quién hace qué"}};</script>
+<script src="../../assets/making-of/data-for-films.js"></script>
+<script src="../../assets/making-of/thats-not-quite-right.js"></script>

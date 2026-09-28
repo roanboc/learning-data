@@ -40,6 +40,7 @@ What made the Learning Data films work, starting with *The Inner Life of Data*, 
 - **Vary the content, not the style.** Six different, named data products per domain look like a real organisation. Six crops of one picture look like a template.
 - **Make things look as they behave.** Live data should visibly change. Raw data should look rough: glitched, duplicated and mistimed. Clean data should look crisp.
 - **Draw living things like living things.** Animals, plants, hands and the materials of the past (clay, paper, wood) made of circles, straight strokes and rectangles look rigid next to people drawn with care: viewers of *What's in a word* noticed at once. Give them tapering bezier outlines, overlapping forms, weight, a light side and a shadow side, and a little life from time: breath, wind, a gait. Keep data, systems and diagrams crisp; the contrast says which is which.
+- **Dress people for their time.** In scenes about nature, prehistory and the ancient world, people could be the first humans developing language: draw them as early humans, in hide or woven clothing, bare-armed, with dignity and without caveman clichés. A suit sleeve pointing across a grassland breaks the spell. Modern clothes belong to present-day scenes.
 - **Keep text clear of captions,** and check every scene against the caption area.
 - **Build components, not drawings.** The same vault, data tile, sketch and plaque drawn by one function appear in the film, the labs and the scenarios. Viewers recognise them, and a fix lands everywhere.
 

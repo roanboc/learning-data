@@ -47,7 +47,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "The agent recommends. People approve. Everything is versioned.":
 "El agente recomienda. Las personas aprueban. Todo queda versionado.",
 "A confident draft can invent a definition that nobody agreed.":
-"Un borrador seguro de sí puede inventar una definición que nadie acordó.",
+"Un borrador muy convincente puede inventar una definición que nadie acordó.",
 "A change can slip through that nobody reviewed. And an agent that learns from old reports can propose an old meaning back.":
 "Puede colarse un cambio que nadie revisó. Y un agente que aprende de informes antiguos puede proponer de nuevo un significado antiguo.",
 "So the tests and the contracts check the agent's work too, just as they check ours.":

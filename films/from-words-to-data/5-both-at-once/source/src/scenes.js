@@ -121,7 +121,7 @@ scene("sync",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f),B=c
   withA(ctx,sa,()=>{glass(ctx,40,130,580,380,20,BO_W,{glow:16,ea:0.8,fill:"rgba(7,12,24,0.93)"});T(ctx,"rows",68,182,{w:800,size:32,color:rgba(BO_W,1)});T(ctx,"the app writes here",162,182,{w:600,size:22,color:rgba(SOFT,1)});
     T(ctx,"learners",68,230,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});T(ctx,"awards",68,322,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});
     const em=t>ch[1]?"aisha@work":"aisha@mail";bo_row(ctx,60,242,540,"L-207",["Aisha K.",em],{hi:pulseAt(t,ch[1],1.0)+upd,keyHi:keyHi+upd});
-    bo_row(ctx,60,334,540,"A-1041",["L-150","issued"],{a:1-fin(t,del+0.3,0.6),hi:pulseAt(t,del,1.0),bad:t>del,keyHi});bo_strike(ctx,68,356,592,356,fin(t,del,0.4),BAD,1-fin(t,del+0.3,0.6));
+    bo_row(ctx,60,334,540,"A-1041",["L-150","issued"],{a:1-fin(t,del+0.8,0.5),hi:pulseAt(t,del,1.0),bad:t>del,keyHi});bo_strike(ctx,68,356,592,356,fin(t,del,0.4),BAD,1-fin(t,del+0.8,0.5));
     const rv=t>ch[2];bo_row(ctx,60,388,540,"A-1042",["L-207",rv?"revoked":"issued"],{a:fin(t,ch[0],0.4),hi:pulseAt(t,ch[0],1.0)+pulseAt(t,ch[2],1.0),keyHi,vc:[null,rv?BAD:null]});});
   // the columns: the reading side
   withA(ctx,sa,()=>{glass(ctx,1300,130,580,380,20,BO_R,{glow:16,ea:0.8,fill:"rgba(7,12,24,0.93)"});T(ctx,"columns",1328,182,{w:800,size:32,color:rgba(BO_R,1)});T(ctx,"the reading side",1478,182,{w:600,size:22,color:rgba(SOFT,1)});
@@ -142,11 +142,12 @@ scene("sync",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f),B=c
       if(t>ap[i]){tick_(ctx,x+535,y+28,30,GOOD,fin(t,ap[i],0.3));const u=clamp((t-ap[i])/0.5,0,1);if(u<1)arrowTo(ctx,1200,y+28,1310,y+28,BO_R,1-u,{p:u*2,head:12});}});
     const dA=fin(t,del+0.2,0.4)*(1-fin(t,oT-0.4,0.6));if(dA>0){bo_change(ctx,680,420,500,4,"delete A-1041","A-1041",{a:dA,dash:true,keyHi,hi:pulseAt(t,delA-0.3,0.9)});if(t>delA)tick_(ctx,1215,448,30,GOOD,fin(t,delA,0.3));}
     withA(ctx,fin(t,at("capture",0.8),0.6)*(1-fin(t,kT,0.5)),()=>tag(ctx,960,470,"1, 2, 3: the same order on both sides",BO_ACC,{align:"center",size:22}));});
-  // a stable key: an update and a delete find their rows
+  // a stable key: an update and a delete find their rows. Each link leaves the change's key through the gap above its card,
+  // and meets the row on the rows side at its right-hand end, so it never runs through another row's words
   withA(ctx,kh*(1-fin(t,oT-0.9,0.6)),()=>tag(ctx,960,580,"every row has a stable key",TRUST,{align:"center",size:26}));
-  if(upd>0.02){ctx.save();ctx.globalAlpha*=upd;ctx.strokeStyle=rgba(bo_kc("L-207"),0.9);ctx.lineWidth=2.6;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(1144,308);ctx.bezierCurveTo(900,250,500,300,84,264);ctx.moveTo(1144,308);ctx.bezierCurveTo(1230,320,1290,302,1326,302);ctx.stroke();ctx.restore();
+  if(upd>0.02){ctx.save();ctx.globalAlpha*=upd;ctx.strokeStyle=rgba(bo_kc("L-207"),0.9);ctx.lineWidth=2.6;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(1144,308);ctx.bezierCurveTo(1010,274,760,273,660,273);ctx.bezierCurveTo(630,273,622,264,604,264);ctx.moveTo(1144,308);ctx.bezierCurveTo(1230,320,1290,302,1326,302);ctx.stroke();ctx.restore();
     withA(ctx,upd,()=>tag(ctx,960,646,"an update finds the row it changes",bo_kc("L-207"),{align:"center",size:24}));}
-  const dp=pulseAt(t,del,2.2);if(dp>0.02){ctx.save();ctx.globalAlpha*=dp;ctx.strokeStyle=rgba(bo_kc("A-1041"),0.9);ctx.lineWidth=2.6;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(1144,448);ctx.bezierCurveTo(900,430,400,420,84,356);ctx.moveTo(1144,448);ctx.bezierCurveTo(1230,452,1290,432,1326,432);ctx.stroke();ctx.restore();
+  const dp=pulseAt(t,del,2.2);if(dp>0.02){ctx.save();ctx.globalAlpha*=dp;ctx.strokeStyle=rgba(bo_kc("A-1041"),0.9);ctx.lineWidth=2.6;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(1144,448);ctx.bezierCurveTo(1010,414,760,413,660,413);ctx.bezierCurveTo(628,413,624,356,604,356);ctx.moveTo(1144,448);ctx.bezierCurveTo(1230,452,1290,432,1326,432);ctx.stroke();ctx.restore();
     withA(ctx,dp,()=>tag(ctx,960,712,"a delete finds the row it removes",bo_kc("A-1041"),{align:"center",size:24}));}
   ctx.restore();
   // the wrong order, then the right one

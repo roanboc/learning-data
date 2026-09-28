@@ -1,0 +1,16 @@
+{
+  "key": "meaning-machines-can-read",
+  "title": "Meaning machines can read",
+  "sub": "From words to data: glossaries, taxonomies, ontologies and semantic layers, industry standards, and what an AI assistant needs to answer right.",
+  "howto": "Each way of writing meaning down has its colour: gold for the glossary, green for the taxonomy, violet for the ontology, blue for the semantic layer.",
+  "src": [
+    "machines.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "four",
+    "stack",
+    2.0
+  ],
+  "say": []
+}

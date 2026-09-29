@@ -13,6 +13,8 @@
 | 29 September 2026 | Enterprise (core) models are `public`; consumer marts are `protected`. Domains and dbt Mesh get their own film. |
 | 29 September 2026 | Known modelling approaches are named once, in the opening film. After that, the series teaches mechanisms (key sets, hashing, grain, timelines) without saying which approach each came from. |
 | 29 September 2026 | Ingestion is out of scope: data arrives with every version kept (SCD2) and system keys identified. Ingestion can be its own series. |
+| 29 September 2026 | Film 1 opens in the past, with a blueprint; alternatives to dbt get generic labels; it ends by showing what the series covers. |
+| 29 September 2026 | A new character, Jun, the analytics engineer, builds what Noor, the architect, owns. |
 
 ## The brief
 
@@ -120,11 +122,13 @@ Nine films of 4 to 6 minutes, each built around one step or one idea. The agent 
 | The name that misleads | dbt calls each query a model. | A dbt model is a transformation. |
 | 300 models | A lineage graph. Most nodes are steps; a few are entities. | Only some transformations produce an entity. |
 | Where the model lives | Grain, keys, relationships, contract, meaning: in YAML and Markdown. | The data model is declared, then produced. |
-| The ten steps | The process, drawn as a loop. | The map for the rest of the series. |
+| Ten steps | The process, drawn as a loop; an agent helps at each step, a person approves each. | The map for the rest of the series. |
+| The series | The next eight films arrive on the loop, beside the steps they cover. | What the series covers. |
+| Pull back | The blueprint and the building; the model and dbt. | Declare it. Then build it. |
 
 **Labs.** *Which of these are entities?* (sort a lineage graph).
 
-The opening, chapter by chapter, with narration: [1-opening-plan.md](1-opening-plan.md).
+The script, chapter by chapter, with narration and rigour sheet: [1-a-model-is-not-a-transformation/script.md](1-a-model-is-not-a-transformation/script.md).
 
 ### Start from a question
 
@@ -285,13 +289,12 @@ Confirm against current documentation, and record in each film's rigour sheet wi
 
 1. **The title.** *Model, then build* · *From meaning to marts* · *Declared, then built*.
 2. **The tagline.** "Declare it. Then build it." · "The model is what you promise." · "Tests first, meaning first."
-3. **The guide.** Noor, the architect from *From words to data*, or a new analytics engineer.
-4. **Nine films or eight.** Merge *Written once* into *An agent on the team*, or *Who owns what* into *Promises and proofs*.
-5. **Your agent skills and guidelines.** Share them, so film 8 and its labs show them, not a generic version.
-6. **Language.** English with Spanish pages and captions, as for *From words to data*.
+3. **Nine films or eight.** Merge *Written once* into *An agent on the team*, or *Who owns what* into *Promises and proofs*.
+4. **Your agent skills and guidelines.** Share them, so film 8 and its labs show them, not a generic version.
+5. **Language.** English with Spanish pages and captions, as for *From words to data*.
 
 ## Next checkpoints
 
 1. The author's answers to the decisions above.
-2. A script and rigour sheet for the opening film.
+2. ~~A script and rigour sheet for the opening film.~~ Draft 1 written, 29 September 2026: [script](1-a-model-is-not-a-transformation/script.md). Next for it: the author's review, Jun's character card, then style frames.
 3. The example dbt project the films draw from: the credential model, sources, YAML and tests, so every on-screen snippet is real code that runs.

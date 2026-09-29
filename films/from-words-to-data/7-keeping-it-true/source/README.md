@@ -1,6 +1,6 @@
 # Rebuilding Keeping it true
 
-*Keeping it true*, the film of the series *From words to data* on keeping meaning current (drift, an AI agent that watches and drafts, people who decide, and versions end to end), is generated from code like the rest of the series. It shares the engine, components, fonts and voice model of *The Inner Life of Data*, draws with *A Sharper Sketch*'s diagrams, *Silent change*'s dashboards, the series' people and the series' own components in [`../../shared/src/words.js`](../../shared/src/words.js). Only what is new lives here:
+*Keeping it true*, the film of the series *From words to data* on keeping meaning current (drift, an AI agent that watches and drafts, people who decide, versions end to end, and what remains as the shapes of data keep changing), is generated from code like the rest of the series. It shares the engine, components, fonts and voice model of *The Inner Life of Data*, draws with *A Sharper Sketch*'s diagrams, *Silent change*'s dashboards, the series' people and the series' own components in [`../../shared/src/words.js`](../../shared/src/words.js). Only what is new lives here:
 
 | File | What it holds |
 |---|---|
@@ -8,8 +8,8 @@
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). The film re-times itself to the voice. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/breath.js` | The few longer pauses: a handful of holds, and three wordless moments (the title, the chain once v3 is approved, and the end card). |
-| `src/true.js` | This film's pictures (prefixed `kt_`): the agent (a teal, geometric orb), Johnson's book, the OED page, the planets, the kilogram, the calendar, the government's form, the dashboards, the glossary and code cards, the change package, the chain of layers, the old report, the clay tablet and the diploma. The history is drawn organically (soft curves, light and shadow, paper grain, gentle motion); the systems stay crisp glass. It also holds `LV`, the pictures of the labs and the scenarios, whose words come from `FW.vis`. |
-| `src/scenes.js` | The nine chapters. The title card is part of the first one. |
+| `src/true.js` | This film's pictures (prefixed `kt_`): the agent (a teal, geometric orb), Johnson's book, the OED page, the planets, the kilogram, the calendar, the government's form, the dashboards, the glossary and code cards, the change package, the chain of layers, the modelling patterns (data vault, anchor, hook, Puppini bridge, activity stream) with the four answers each holds, the old report, the clay tablet and the diploma. The history is drawn organically (soft curves, light and shadow, paper grain, gentle motion); the systems stay crisp glass. It also holds `LV`, the pictures of the labs and the scenarios, whose words come from `FW.vis`. |
+| `src/scenes.js` | The ten chapters. The title card is part of the first one. |
 | `tools/score.py` | The film's music and sounds: strings over a clock at 60 beats a minute and a felt piano, in C major, leaning into A minor where the model drifts, and ending on the series' motif on the kalimba in D, answered by a tubular bell. |
 | `tools/` | The series' shared tools (`../../shared/tools/`), each run on this film. |
 

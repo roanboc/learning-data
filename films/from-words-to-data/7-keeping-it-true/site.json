@@ -6,8 +6,8 @@
   "h1_es": "Que siga siendo verdad: quién mantiene el significado al día",
   "lead": "The meaning is written down end to end, from a word to a number. Then the world changes again, and an AI agent can watch, draft and check, while people decide.",
   "lead_es": "El significado está escrito de punta a punta, de una palabra a una cifra. Luego el mundo vuelve a cambiar, y un agente de IA puede vigilar, redactar y comprobar, mientras las personas deciden.",
-  "description": "A film about how data models drift, how an AI agent can notice drift and draft the change, why people still approve it, and how one change is versioned end to end, from the glossary to the dashboards.",
-  "description_es": "Una película sobre cómo se desvían los modelos de datos, cómo un agente de IA puede notar la deriva y redactar el cambio, por qué las personas siguen aprobándolo, y cómo un cambio se versiona de punta a punta, del glosario a los tableros.",
+  "description": "A film about how data models drift, how an AI agent can notice drift and draft the change, why people still approve it, and how one change is versioned end to end, from the glossary to the dashboards, and what remains as new ways to shape data keep arriving.",
+  "description_es": "Una película sobre cómo se desvían los modelos de datos, cómo un agente de IA puede notar la deriva y redactar el cambio, por qué las personas siguen aprobándolo, y cómo un cambio se versiona de punta a punta, del glosario a los tableros, y lo que permanece mientras siguen llegando nuevas formas de dar forma a los datos.",
   "card": "Three dashboards, three numbers for one measure. The agent recommends, people approve, and everything is versioned.",
   "card_es": "Tres tableros, tres cifras para una medida. El agente recomienda, las personas aprueban, y todo queda versionado.",
   "chapters_es": {
@@ -19,6 +19,7 @@
     "decide": "Las personas deciden",
     "wrong": "Qué puede salir mal",
     "e2e": "De punta a punta",
+    "remains": "Lo que permanece",
     "end": "Vista completa"
   },
   "next_h": "You've seen one change followed from a word to a number. Now try it yourself.",

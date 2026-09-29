@@ -39,6 +39,13 @@ const NARR={
  {"id":"agree","gap":0.8,"text":"The three dashboards agree. Genie gives the same number, and shows why."},
  {"id":"old","gap":0.8,"text":"Last year's report still reads with last year's definition, version two, unchanged. Each number keeps the meaning it had."},
  {"id":"v3","gap":0.8,"text":"And the sketch's stamp finally reads: version three."}]},
+"remains":{"name":"What remains","lead":1.0,"tail":1.6,"vo":[
+ {"id":"shapes","gap":0.8,"text":"New ways to shape data keep arriving: data vaults, anchors, hooks, bridges, activity streams. More will come."},
+ {"id":"same","gap":0.9,"text":"Look inside any of them, and you find the same four answers."},
+ {"id":"four","gap":0.9,"text":"What a credential is. What makes it the same one everywhere. What one row holds. And when each thing was true."},
+ {"id":"change","gap":0.9,"text":"What changes is the shape. Engines change, and an agent can draft a vault or a star from the model in minutes."},
+ {"id":"alike","gap":0.9,"text":"A search can find two credentials that look alike. Only the model can say whether they're the same one."},
+ {"id":"last","gap":0.8,"text":"Learn the part that lasts: meaning, identity, grain and time. Every new shape is another way to write them down."}]},
 "end":{"name":"Pull back","lead":1.0,"tail":1.0,"vo":[
  {"id":"start","gap":0.8,"text":"Back to the start of the series: a word, an idea, a thing, and a mark in clay."},
  {"id":"claim","gap":0.8,"text":"A credential is a claim that others can check. So is every number in a report."},

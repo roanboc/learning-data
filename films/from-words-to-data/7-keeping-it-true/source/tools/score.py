@@ -63,7 +63,12 @@ motif('e2e', [FMAJ9, G6, AM9, G6, CMAJ9], every=1.2, g=0.035, inst=felt)
 _ot = W('e2e', 'chain', 'one statement')
 for i, (m, s_) in enumerate(zip([60, 64, 67, 72, 76, 79, 84], [W('e2e', 'chain', 'one definition', -0.1), _ot - 0.1, _ot + 1.0, _ot + 1.8, W('e2e', 'chain', 'one measure', -0.1), W('e2e', 'chain', 'one test', -0.1), G('e2e', 'agree', 0.2)])):
     felt(m, s_ + 0.2, 0.045, (i - 3) * 0.15)
-# 9. Pull back: the series comes home, in D; the kalimba and the bell answer each other, and the end card rests on D major
+# 9. What remains: back in C, calm, as the shapes arrive; a felt piano, and no clock (this chapter looks past the month's changes);
+# it leans on G at the end, so the pull back's G major arrives as a step home
+prog('remains', [CMAJ9, AM9, FMAJ9, G6], 0, cq('remains', 'last'), g=0.05, tone='strings')
+prog('remains', [FMAJ9, GSUS], cq('remains', 'last'), g=0.05, tone='strings')
+motif('remains', [CMAJ9, AM9, FMAJ9, G6, FMAJ9, GSUS], every=1.5, g=0.03, inst=felt)
+# 10. Pull back: the series comes home, in D; the kalimba and the bell answer each other, and the end card rests on D major
 prog('end', [GMAJ7, A6, BM7, A6], 0, cq('end', 'breath'), g=0.05, tone='strings')
 motif('end', [GMAJ7, A6, BM7, A6], 0, cq('end', 'breath'), every=1.4, g=0.035, inst=kalimba)
 prog('end', [DMAJ9], cq('end', 'breath'), g=0.06, tone='warm', bassg=0.04)
@@ -112,7 +117,13 @@ whoosh(G('wrong', 'slip', 0.4), 3.4, 0.04, 0.2); whoosh(W('wrong', 'slip', 'And 
 page(G('e2e', 'old', -0.3), 0.05, -0.4); stamp(W('e2e', 'old', 'version two', -0.1), 0.06, -0.4)
 seal(W('e2e', 'v3', 'version three'), 0.12); bell(W('e2e', 'v3', 'version three', 0.1), 0.07, 523); [stamp(W('e2e', 'v3', 'version three', 0.6 + k * 0.2), 0.05, 0.5) for k in range(3)]
 shimmer(G('e2e', 'breath', 0.3), 0.04, 1047)
-# 9. the triangle, the clay, the two cards, the tools and the job; the end
+# 9. the shapes arrive as they're named, the four answers light in each, the agent drafts, two look-alikes are told apart, the four cards settle
+[card(W('remains', 'shapes', w, -0.1), 0.05, (k - 2) * 0.35) for k, w in enumerate(('vaults', 'anchors', 'hooks', 'bridges', 'activity'))]; whoosh(W('remains', 'shapes', 'More'), 0.8, 0.03, 0.7)
+[node(W('remains', 'four', w), 0.045, (k - 1.5) * 0.4, f) for k, (w, f) in enumerate((('What a', 1047), ('What makes', 1175), ('What one', 1319), ('when each', 1568)))]
+link(W('remains', 'change', 'draft', 0.2), 0.04, 0.2); [card(W('remains', 'change', 'draft', 0.7 + k * 0.5), 0.05, 0.3 + k * 0.3) for k in range(2)]
+ping(G('remains', 'alike', 0.6), 0.05, 0); buzz(W('remains', 'alike', 'Only the model', 0.1), 0.04)
+[stamp(W('remains', 'last', w, -0.1), 0.05, (k - 1.5) * 0.4) for k, w in enumerate(('meaning', 'identity', 'grain', 'time'))]; shimmer(W('remains', 'last', 'Every new'), 0.035, 1175)
+# 10. the triangle, the clay, the two cards, the tools and the job; the end
 [node(W('end', 'start', w), 0.045, p, 1175) for w, p in (('a word', -0.5), ('an idea', 0), ('a thing', 0.4))]; [stone(W('end', 'start', 'a mark', k * 0.4), 0.05, 0.5) for k in range(7)]
 seal(G('end', 'claim', 0.3), 0.08, -0.4); card(W('end', 'claim', 'So is'), 0.05, 0.4)
 [pop(G('end', 'job', 0.1 + k * 0.3), 0.04, (k - 2) * 0.3) for k in range(5)]; scratch(W('end', 'job', 'write'), 0.04, 0, 0.6); stamp(W('end', 'job', 'keep'), 0.08, 0.4)

@@ -20,7 +20,7 @@ The series starts before technology, with how minds turn the world into words, a
 | [Keeping it true](https://roanboc.github.io/learning-data/from-words-to-data/keeping-it-true/) | Keeping meaning current | 4 min | 9 | 3 labs, 8 scenarios | [script](7-keeping-it-true/script.md) · [source](7-keeping-it-true/source/README.md) |
 <!-- /films -->
 
-The [proposal](proposal.md) records how the series was planned and the decisions taken on 28 September 2026: seven films, the title, the credential as the thread, and an opening film that starts before writing.
+The [proposal](proposal.md) records how the series was planned and the decisions taken on 28 September 2026: seven films, the title, the credential as the thread, and an opening film that starts before writing. A closing film on what remains and what changes, *What remains*, is [proposed](proposal-what-remains.md) and waits for the author's decisions.
 
 ## The thread: the credential
 

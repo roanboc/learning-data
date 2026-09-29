@@ -334,8 +334,15 @@ details.real summary{cursor:pointer;font-weight:700}details.real p{margin:8px 0 
 /* topics hang off the chapter of the overview film they go deeper on */
 .branches{list-style:none;padding:0;margin:0;display:grid;gap:26px}
 .branches>li{padding-left:16px;border-left:3px solid var(--line)}.branches>li>p{margin:0 0 8px;font-weight:700}
-/* wide screens: the two branches side by side, one card and two cards, all the same size */
-@media (min-width:1040px){.branches{grid-template-columns:minmax(0,1fr) minmax(0,2fr);align-items:start}}
+/* one branch under another, each as wide as the page, so the cards of a series read in order, left to right */
+.branches>li.series{border-left-color:var(--accent)}
+/* a film's place in its series: the previous and the next film, then every film, numbered, with this one marked */
+.series-pn{grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),380px))}
+.series-list{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.series-list a{display:flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--fg);text-decoration:none;font-weight:600;font-size:14px}
+.series-list a:hover{border-color:var(--accent)}
+.series-list .n{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--line);font-size:12px;font-weight:800}
+.series-list a[aria-current]{border-color:var(--accent);box-shadow:0 0 0 2px var(--glow)}.series-list a[aria-current] .n{background:var(--accent);color:var(--on-accent)}
 #by-role .cards{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
 .four{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}@media (max-width:560px){.four{grid-template-columns:1fr}}
 /* the four sides, outlined as in the films: cyan for technical, gold for business */

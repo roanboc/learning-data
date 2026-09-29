@@ -60,6 +60,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Los niños resuelven esto todos los días. Primero suponen la cosa entera.",
 "But every word hides a choice: what counts as one. Data modellers call it the grain.":
 "Pero toda palabra esconde una decisión: qué cuenta como uno. En modelado de datos se le llama el grano.",
+"Credentials have a grain, too. Mei has a degree and two microcredentials. Count graduates, and she's one. Count credentials, and she's three.":
+"Las credenciales también tienen grano. Mei tiene un título y dos microcredenciales. Si cuentas egresados, es una. Si cuentas credenciales, son tres.",
 "Ask people to picture a bird, and most will think of a robin or a sparrow. Hardly anyone thinks of a penguin.":
 "Pide a la gente que imagine un pájaro, y casi todos pensarán en un petirrojo o un gorrión. Casi nadie piensa en un pingüino.",
 "Categories have typical members in the middle, and fuzzy edges.":
@@ -86,12 +88,14 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La receta es de Aristóteles: nombra la clase de cosa, y luego di qué la distingue.",
 "Each word gets an owner and a date, and the sketch gains a box, in pencil. Version three, draft.":
 "Cada palabra recibe un responsable y una fecha, y el boceto gana una caja, a lápiz. Versión tres, borrador.",
-"The answer for the speech is 11,890. And each of the four numbers now has a name. None was wrong: they answered four different questions.":
-"La respuesta para el discurso es 11.890. Y cada una de las cuatro cifras ahora tiene nombre. Ninguna estaba mal: respondían cuatro preguntas distintas.",
+"The answer for the speech is 11,890. And each of the four numbers now has a name.":
+"La respuesta para el discurso es 11.890. Y cada una de las cuatro cifras ahora tiene nombre.",
+"Two of them counted things that aren't credentials: badges for turning up, and certificates of completion. Nobody lied. Until today, there was no agreed question.":
+"Dos de ellas contaron cosas que no son credenciales: insignias por asistir y certificados de finalización. Nadie mintió. Hasta hoy, no había una pregunta acordada.",
 "None of this needed a computer. Contracts open with their definitions. Mergers stall on what counts as a customer. Funding depends on who is counted.":
 "Nada de esto necesitó una computadora. Los contratos empiezan con sus definiciones. Las fusiones se traban en qué cuenta como cliente. El financiamiento depende de a quién se cuenta.",
-"Agreeing on words costs a meeting. Disagreeing costs far more.":
-"Ponerse de acuerdo en las palabras cuesta una reunión. No hacerlo cuesta mucho más.",
+"Agreeing on words is real work: people with different needs, trade-offs, and time. Disagreeing costs far more.":
+"Ponerse de acuerdo en las palabras es trabajo de verdad: personas con necesidades distintas, concesiones y tiempo. No hacerlo cuesta mucho más.",
 "About five thousand years ago, people began pressing marks into clay, to keep records that outlast memory.":
 "Hace unos cinco mil años, la gente empezó a marcar la arcilla, para guardar registros que duraran más que la memoria.",
 "From minds, to marks, to systems. But before you can count anything, you have to agree what it is.":

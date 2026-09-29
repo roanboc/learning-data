@@ -88,9 +88,10 @@ OWN_LABS = {"assets/too-good-to-be-true/think.en.js": ("when-things-go-wrong/too
 # a film's labs and scenarios, as its stepper and topic cards count them (None: it has none)
 COUNTS = {"ld": ("8", "12"), "ld3": ("6", "12"), "ld-silent-change": (None, None), "ld-too-good-to-be-true": ("3", "10")}
 # no film numbering (§8); only these code comments may match, and film3/film.js's recap line if it was never re-voiced
-NUMBERING = re.compile(r"film (one|two|three|[123])\b|(first|second|third) film|(primera|segunda|tercera) película|"
+# a series numbers its own films, always as "Film 2 of 7" ("Película 2 de 7"): that's allowed; numbering the site's films isn't
+NUMBERING = re.compile(r"film (one|two|three|[123])\b(?! of \d)|(first|second|third) film|(primera|segunda|tercera) película|"
                        r"episod(e|io) [0-9]|\b(first|second|third) (video|episode)\b|"
-                       r"\b(primer|segundo|tercer)[oa]? (video|episodio)\b|película (uno|dos|tres|[123])\b", re.I)
+                       r"\b(primer|segundo|tercer)[oa]? (video|episodio)\b|película (uno|dos|tres|[123])\b(?! de \d)", re.I)
 COMMENT_OK = {"assets/film3/film.js", "assets/silent-change/film.js", "assets/too-good-to-be-true/film.js"}
 LENGTHS = re.compile(r"eight-minute|five-minute|six-minute|nueve minutos|seis minutos|· 8 min|· 9 min|· 5 min|"
                      r"\b(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)-minute\b|"

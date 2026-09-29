@@ -89,6 +89,7 @@ A film makes people feel they understand; learning comes from using the ideas. T
 
 - **Give each page one job.** Keeping practice apart from the labs makes people recall rather than look up, and the change of page is a natural pause.
 - **Give each lab one mechanism, and let people break it.** Take Zerobus offline, plant a missing ID, rename a mart column, change the original record. The consequence teaches; the explanation confirms it.
+- **Keep the page to what people use.** Notes on how to read a film's colours and conventions went unread next to the film itself: the film has to explain itself.
 - **Say what just happened, in words.** Every lab has a line under the picture that describes the result, which also serves people using screen readers.
 - **Reuse the film's pictures in the labs,** so recognition carries over from watching to doing.
 - **Write scenarios as situations, not definitions.** "Every test passed, yet the class is 312% full. Why?" teaches more than "What is a conceptual model?"
@@ -113,7 +114,7 @@ What *A Sharper Sketch* and *When things go wrong* added once there was more tha
 - **Show the alternatives side by side,** so the one thing that differs between them is the lesson.
 - **Draw what the audience already knows.** A dashboard in a familiar style beats an abstract picture that needs explaining.
 - **Write each decision down with its date,** in the treatment or the story outline, so the next session starts from it.
-- **Films stand alone.** No numbers on screen or on the site; open with a one-line recap, and place each film under the part of the overview it goes deeper on.
+- **Films stand alone.** No numbers on screen, and none for the site's standalone films; open with a one-line recap, and place each film under the part of the overview it goes deeper on. A series is the exception: its films are numbered, always as "Film 2 of 7", and each film's page ends with *In the series*: the previous and the next film, and the whole series in order. Seven films without numbers were hard to keep track of.
 - **Turn every review finding into a check** (`site-tools/check_site.py`, `site-tools/smoke.py`, `tools/check.py`), so it can't come back.
 
 *Ask: what did the last film teach us, and where is it written down?*
@@ -129,6 +130,8 @@ What *From words to data*, seven films made together, added.
 - **Write the narration first, for all the films.** Voicing every script before drawing any picture fixes the timeline, shows which films are too thin, and lets the pictures be made in parallel.
 - **Generate what repeats, and check it's current.** With forty pages in two languages, the pages come from each film's data (`site-tools/build_series.py`), and the site check fails if a page isn't what the generator makes.
 - **Check every frame, not every tenth of a second.** A ring whose radius dipped below zero for one frame stopped a full render; the checker now draws every frame the video will.
+- **Bridge every detour back to the thread.** A philosopher's rabbit made "the grain" land out of nowhere until the next line brought it home: Mei's degree and two microcredentials are one graduate, or three credentials. Every excursion into the past ends on the credential.
+- **Let the resolution follow the model.** Once the offices agree a definition, say which numbers counted things it leaves out; "none was wrong" contradicts the diagram on screen. And don't make agreement sound cheap: it takes people, trade-offs and time.
 - **Build labs from a few kinds.** Sort, count, pick, compose and step through cover most ideas; each lab is words plus one picture drawn with the film's own components. Every word a picture draws comes from the language pack, and text is sized for the lab's real width.
 
 *Ask: if someone watched only one film, would they still want the next?*

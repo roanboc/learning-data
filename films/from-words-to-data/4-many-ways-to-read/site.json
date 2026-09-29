@@ -10,8 +10,6 @@
   "description_es": "Una película sobre las formas para leer datos: un núcleo normalizado o un data vault para integrar fuentes, estrellas conformadas para presentarlas, tablas anchas para servir una entidad, y dónde vive cada una en un lakehouse.",
   "card": "Star, vault or one wide table? Each shape has a job and a place. Choose per question, not per fashion.",
   "card_es": "¿Estrella, vault o una sola tabla ancha? Cada forma tiene un trabajo y un lugar. Elige según la pregunta, no según la moda.",
-  "howto": "The library's past is drawn warm, in wood and paper; the present is the films' dark glass. Each shape keeps its colour: pale blue for the normalised core, violet for the data vault, green for the stars, amber for the wide tables. Bronze, silver and gold are the platform's layers, and pink is the new source, the short-course platform.",
-  "howto_es": "El pasado de la biblioteca se dibuja cálido, en madera y papel; el presente es el vidrio oscuro de las películas. Cada forma tiene su color: celeste para el núcleo normalizado, violeta para el data vault, verde para las estrellas, ámbar para las tablas anchas. Bronce, plata y oro son las capas de la plataforma, y el rosado es la fuente nueva, la plataforma de cursos cortos.",
   "chapters_es": {"cards": "Un libro, tres fichas", "argue": "La discusión", "integrate": "Primero, integrar", "present": "Presentar para las personas", "serve": "Servir una entidad", "where": "Dónde vive cada una", "choose": "Elegir", "end": "Vista completa"},
   "next_h": "You've seen a shape for each job, and where each lives. Now try it yourself.",
   "next_h_es": "Viste una forma para cada trabajo, y dónde vive cada una. Ahora pruébalo tú.",

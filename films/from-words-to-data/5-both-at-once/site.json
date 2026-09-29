@@ -10,8 +10,6 @@
   "description_es": "Una película sobre las bases de datos híbridas (HTAP): dos formas sincronizadas, cambios aplicados por clave y en orden, datos que vuelven de oro a la app, y por qué la historia, las dimensiones compartidas y las definiciones todavía necesitan un modelo.",
   "card": "One database that writes and reads. It removes the copy, not the model.",
   "card_es": "Una base de datos que escribe y lee. Quita la copia, no el modelo.",
-  "howto": "The past is drawn warm, in brass and wood; the present is the films' dark glass. Blue is writing, in rows; green is reading, in columns; magenta is data flowing back to the app. Each row's key has its own colour, so a change can be matched to the row it changes.",
-  "howto_es": "El pasado se dibuja cálido, en bronce y madera; el presente es el vidrio oscuro de las películas. El azul es la escritura, en filas; el verde es la lectura, en columnas; el magenta son los datos que vuelven a la app. La clave de cada fila tiene su propio color, para que un cambio se pueda unir a la fila que cambia.",
   "chapters_es": {"till": "La caja que llevaba el total", "distance": "La distancia", "engines": "Dos motores, un lugar", "sync": "Dos formas a la par", "removes": "Lo que quita", "doesnt": "Lo que no quita", "back": "Datos de vuelta", "questions": "Preguntas nuevas para quien modela", "end": "Vista completa"},
   "next_h": "You've seen what a hybrid database removes, and what it doesn't. Now try it yourself.",
   "next_h_es": "Viste lo que quita una base de datos híbrida, y lo que no. Ahora pruébalo tú.",

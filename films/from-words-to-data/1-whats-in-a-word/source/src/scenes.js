@@ -5,6 +5,7 @@
 const CRED_Q="How many credentials did we award this year?";
 const ANS=[["reg",7420],["short",10600],["careers",14650],["lms",26900]];
 const ANS_MEANING={reg:"awards: degrees and diplomas",short:"awards and microcredentials",careers:"plus every badge, even for turning up",lms:"plus every certificate of completion"};
+const ANS_GAP={careers:"✗ 2,760 aren't credentials",lms:"✗ 15,010 aren't credentials"};
 
 /* ---------- 1. Four answers ---------- */
 scene("answers",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,S);bg2(ctx);
@@ -138,7 +139,8 @@ scene("forms",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
 
 /* ---------- 6. Which part do you mean? ---------- */
 scene("gavagai",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
-  ground(ctx,700,t);grass(ctx,0,1920,710,t,0.8);
+  const mz=fin(t,c("mei")-0.2,0.9);
+  withA(ctx,1-mz,()=>{ground(ctx,700,t);grass(ctx,0,1920,710,t,0.8);
   yearTag(ctx,120,120,"1960 · a philosopher's puzzle",CLAY,fin(t,0.3,0.6));
   const run=fin(t,0.6,4.0),rx=lerp(200,900,run),ry=660;rabbit(ctx,rx,ry,1.9,[235,225,205],t,{run:1,dist:rx-200+(t>2.6?175*Math.pow(Math.min(1,(t-2.6)/2),3)+262.5*Math.max(0,t-4.6):0)});
   // the stranger's pointing arm, and the word
@@ -152,7 +154,22 @@ scene("gavagai",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   // children guess the whole thing
   withA(ctx,fin(t,c("kids")+1.0,0.6),()=>{baby(ctx,1120,780,1.3,1,0.8,t,{at:[rx+10,ry+10]});tick_(ctx,1770,273,34,GOOD,1);tag(ctx,1500,190,"children: the whole thing",GOOD,{align:"center",size:22});});
   // the grain
-  withA(ctx,fin(t,c("grain")+1.8,0.6),()=>{glass(ctx,1240,630,560,150,20,TRUST,{glow:16,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(ctx,"the grain",1270,680,{w:800,size:28,color:rgba(TRUST,1)});T(ctx,"what counts as one?",1270,722,{w:600,size:24});T(ctx,"1 row = 1 rabbit? 1 ear? 1 moment?",1270,758,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});});
+  withA(ctx,fin(t,c("grain")+1.8,0.6),()=>{glass(ctx,1240,630,560,150,20,TRUST,{glow:16,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(ctx,"the grain",1270,680,{w:800,size:28,color:rgba(TRUST,1)});T(ctx,"what counts as one?",1270,722,{w:600,size:24});T(ctx,"one rabbit? one ear? one moment?",1270,758,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});});});
+  // back at the university: the same choice, for credentials
+  if(mz>0)withA(ctx,mz,()=>{const mT=c("mei");
+    tag(ctx,960,110,"the grain: what counts as one?",TRUST,{align:"center",size:24});
+    person(ctx,"mei",330,940,0.6,{t,pose:t>mT+2.4&&t<mT+5.6?"explain":"stand",expr:"calm"});
+    [["Degree","BA, Languages",OFFICE.reg.c],["Microcredential","Data ethics",OFFICE.short.c],["Microcredential","SQL basics",OFFICE.short.c]].forEach(([ti,cl,col],i)=>
+      credCard(ctx,600+i*370,190,330,{a:fin(t,mT+2.2+i*0.5,0.5),title:ti,holder:"Mei Tanaka",claim:cl,col,signed:false}));
+    // one person, or three credentials: two counts of the same cards
+    const g1=fin(t,mT+5.0,0.5),g2=fin(t,mT+7.0,0.5);
+    withA(ctx,g1,()=>{glass(ctx,600,520,520,170,20,KIND,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.94)"});T(ctx,"count graduates",630,568,{w:700,size:24,color:rgba(SOFT,1)});T(ctx,"1",630,660,{w:800,size:72,color:rgba(KIND,1)});T(ctx,"one row per person",760,650,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});
+      // one person
+      arrowTo(ctx,440,640,586,605,KIND,0.8,{head:10});});
+    withA(ctx,g2,()=>{glass(ctx,1180,520,520,170,20,TRUST,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.94)"});T(ctx,"count credentials",1210,568,{w:700,size:24,color:rgba(SOFT,1)});T(ctx,"3",1210,660,{w:800,size:72,color:rgba(TRUST,1)});T(ctx,"one row per credential",1340,650,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});
+      // a line from each card: three credentials
+      [0,1,2].forEach(i=>arrowTo(ctx,765+i*370,424,1380+i*60,512,TRUST,0.8,{head:10}));});
+    withA(ctx,fin(t,mT+9.0,0.6),()=>tag(ctx,1150,760,"the same person, a different grain",TRUST,{align:"center",size:22}));});
   vign(ctx,S);});
 
 /* ---------- 7. Fuzzy edges ---------- */
@@ -223,7 +240,7 @@ scene("paper",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);
   // the kinds, in pencil
   const kT=c("kinds"),ox=52,oy=136,s=0.8;
   credKinds(ctx,{paper:true,ox,oy,s,p:{cred:clamp((t-kT-0.2)/0.9,0,1),award:clamp((t-kT-0.8)/0.9,0,1),micro:clamp((t-kT-1.8)/0.9,0,1),badge:clamp((t-kT-3.2)/0.9,0,1)}});
-  const ca=clamp((t-kT-5.2)/0.9,0,1);pencilBox(ctx,940,690,320,64,"Certificate of attendance",ca,{size:22});if(ca>0.9){cross_(ctx,1290,722,40,[190,50,40],fin(t,kT+6.0,0.3));withA(ctx,fin(t,kT+6.3,0.4),()=>pencilText(ctx,"shows you were there, not what you learned",940,788,{size:19}));}
+  const ca=clamp((t-kT-5.2)/0.9,0,1);pencilBox(ctx,940,690,320,64,"Certificate of completion",ca,{size:22});if(ca>0.9){cross_(ctx,1290,722,40,[190,50,40],fin(t,kT+6.0,0.3));withA(ctx,fin(t,kT+6.3,0.4),()=>pencilText(ctx,"shows you finished, not what you learned",940,788,{size:19}));}
   // owners, and a new version of the sketch
   const oT=c("owner");withA(ctx,fin(t,oT+0.4,0.5),()=>{pencilText(ctx,"owner: Registrar",564,650,{size:19,align:"center",color:"rgba(150,100,20,0.95)"});pencilText(ctx,"owner: Short courses",820,650,{size:19,align:"center",color:"rgba(170,60,90,0.95)"});pencilText(ctx,"agreed 28 Sep",480,760,{size:19,color:"rgba(80,80,80,0.95)"});});
   withA(ctx,fin(t,oT+2.4,0.5),()=>stamp(ctx,sx+1010,sy+40,"sketch v3 · draft",[150,90,30],1,t<oT+3.2?t-oT:0));
@@ -234,7 +251,9 @@ scene("paper",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);
   // the answer, and a name for each number
   withA(ctx,ans,()=>{glass(ctx,1380,90,480,170,20,TRUST,{glow:18,ea:0.9,fill:"rgba(7,12,24,0.95)"});T(ctx,"credentials awarded",1408,138,{w:700,size:22,color:rgba(SOFT,1)});T(ctx,fmtNum(countTo(t,c("answer")+1.0,0,11890)),1408,222,{w:800,size:72,color:rgba(TRUST,1)});
     T(ctx,"7,420 awards + 3,180 microcredentials + 1,290 assessed badges",1408,250,{f:"mono",w:500,size:12,color:rgba(SOFT,1)});
-    ANS.forEach(([k,v],i)=>withA(ctx,fin(t,c("answer")+4.0+i*0.5,0.5),()=>{const y=300+i*120;glass(ctx,1380,y,480,100,16,OFFICE[k].c,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.93)"});T(ctx,fmtNum(v),1404,y+50,{w:800,size:36,color:rgba(OFFICE[k].c,1)});T(ctx,ANS_MEANING[k],1404,y+80,{w:600,size:17});}));});
+    ANS.forEach(([k,v],i)=>withA(ctx,fin(t,c("answer")+4.0+i*0.5,0.5),()=>{const y=300+i*120;glass(ctx,1380,y,480,100,16,OFFICE[k].c,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.93)"});T(ctx,fmtNum(v),1404,y+50,{w:800,size:36,color:rgba(OFFICE[k].c,1)});T(ctx,ANS_MEANING[k],1404,y+80,{w:600,size:17});
+      // the two that counted things the definition leaves out
+      if(ANS_GAP[k])withA(ctx,fin(t,c("gap")+(k==="careers"?3.2:4.9),0.5),()=>{const gw=tw(ctx,ANS_GAP[k],17,700)+24;ctx.fillStyle="rgba(40,10,14,0.95)";rr(ctx,1844-gw,y+12,gw,32,16);ctx.fill();ctx.strokeStyle=rgba(BAD,0.9);ctx.lineWidth=1.5;rr(ctx,1844-gw,y+12,gw,32,16);ctx.stroke();T(ctx,ANS_GAP[k],1844-gw/2,y+34,{w:700,size:17,align:"center",color:rgba(BAD,1)});});}));});
   fadeIn(ctx,S,t,0.8);vign(ctx,S);});
 
 /* ---------- 10. Pull back ---------- */
@@ -249,8 +268,8 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");const cl=fin(t,c
     // funding, by who is counted
     withA(ctx,fin(t,wT+4.6,0.6),()=>{glass(ctx,1400,260,380,400,18,TRUST,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.92)"});T(ctx,"funding",1430,306,{w:800,size:24,color:rgba(TRUST,1)});
       [0.55,0.8,0.68].forEach((h,i)=>{ctx.fillStyle=rgba(TRUST,0.75);rr(ctx,1450+i*100,620-h*240,70,h*240,8);ctx.fill();});T(ctx,"depends on who is counted",1590,650,{w:600,size:17,align:"center",color:rgba(SOFT,1)});});
-    // a meeting, against everything else
-    withA(ctx,fin(t,c("cost")+0.2,0.6),()=>{tag(ctx,700,720,"agreeing: a meeting",GOOD,{size:24});tag(ctx,1120,720,"disagreeing: disputes, rework, wrong decisions",BAD,{size:24});});});}
+    // the work of agreeing, against the cost of not
+    withA(ctx,fin(t,c("cost")+0.2,0.6),()=>{tag(ctx,700,720,"agreeing: people, trade-offs, time",GOOD,{size:24});tag(ctx,1160,720,"disagreeing: disputes, rework, wrong decisions",BAD,{size:24});});});}
   if(cl>0){histBg(ctx,S,t,{light:0.14});withA(ctx,cl*(1-la*0.6),()=>{const p=clamp((t-c("clay")-0.6)/5,0,1);tablet(ctx,660,230,600,380,p,1);
       const k=Math.floor(p*48),sx=660+40+(k%12)*(600-80)/12,sy=230+Math.floor(k/12)*76+46;{const W_=by_scribe(t-c("clay")-0.6,660,230,600,380);if(W_)stylus(ctx,W_.x,W_.y,t,W_.a,W_);}
       yearTag(ctx,120,120,"c. 3300 BCE · Uruk",CLAY,1);});

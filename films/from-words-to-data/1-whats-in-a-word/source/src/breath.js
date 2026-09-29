@@ -7,9 +7,9 @@ const BREATH={
 "calls":{"hold":{"leopard":0.4,"eagle":0.4,"snake":0.3,"kind":0.6,"names":0.6}},
 "words":{"hold":{"point":0.5,"root":0.6,"combine":0.7,"know":0.7}},
 "forms":{"hold":{"cell":0.4,"one":0.6,"tri":0.5}},
-"gavagai":{"hold":{"mean":0.8,"grain":0.5}},
+"gavagai":{"hold":{"mean":0.8,"grain":0.5,"mei":0.6}},
 "edges":{"hold":{"agree":0.4},"breathe":3.0},
 "drift":{"hold":{"cred":0.5}},
-"paper":{"hold":{"back":0.4,"def":0.9,"kinds":0.8,"recipe":0.6,"owner":0.5}},
+"paper":{"hold":{"back":0.4,"def":0.9,"kinds":0.8,"recipe":0.6,"owner":0.5,"answer":0.4}},
 "end":{"hold":{"cost":0.6,"clay":0.8},"breathe":4.2}
 };

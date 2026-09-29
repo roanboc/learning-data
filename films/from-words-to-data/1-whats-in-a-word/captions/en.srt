@@ -115,73 +115,81 @@ Children solve this every day. They guess the whole thing first.
 But every word hides a choice: what counts as one. Data modellers call it the grain.
 
 30
-00:03:22,737 --> 00:03:29,463
-Ask people to picture a bird, and most will think of a robin or a sparrow. Hardly anyone thinks of a penguin.
+00:03:20,737 --> 00:03:29,551
+Credentials have a grain, too. Mei has a degree and two microcredentials. Count graduates, and she's one. Count credentials, and she's three.
 
 31
-00:03:30,163 --> 00:03:33,797
-Categories have typical members in the middle, and fuzzy edges.
+00:03:32,851 --> 00:03:39,577
+Ask people to picture a bird, and most will think of a robin or a sparrow. Hardly anyone thinks of a penguin.
 
 32
-00:03:34,497 --> 00:03:37,259
-We agree about the middle. We argue at the edges.
+00:03:40,277 --> 00:03:43,911
+Categories have typical members in the middle, and fuzzy edges.
 
 33
-00:03:38,359 --> 00:03:47,501
-Is a degree a credential? Of course. A microcredential? Probably. A badge for turning up to a workshop? That's where the four offices part ways.
+00:03:44,611 --> 00:03:47,373
+We agree about the middle. We argue at the edges.
 
 34
-00:03:53,201 --> 00:03:55,811
-Words move, too. Nice once meant foolish.
+00:03:48,473 --> 00:03:57,615
+Is a degree a credential? Of course. A microcredential? Probably. A badge for turning up to a workshop? That's where the four offices part ways.
 
 35
-00:03:56,511 --> 00:04:04,890
-Credential comes from the Latin for belief. Enrol meant writing a name on a roll. A diploma was a sheet of paper, folded in two.
+00:04:03,315 --> 00:04:05,925
+Words move, too. Nice once meant foolish.
 
 36
-00:04:06,090 --> 00:04:12,531
-Ambassadors still present their credentials: letters asking their host to trust the person who carries them.
+00:04:06,625 --> 00:04:15,004
+Credential comes from the Latin for belief. Enrol meant writing a name on a roll. A diploma was a sheet of paper, folded in two.
 
 37
-00:04:13,231 --> 00:04:17,319
-Meaning moves slowly, and a word's history often explains its edges.
+00:04:16,204 --> 00:04:22,645
+Ambassadors still present their credentials: letters asking their host to trust the person who carries them.
 
 38
-00:04:20,019 --> 00:04:25,681
-Back at the university, there's no system in sight. Just four offices, and a sheet of paper.
+00:04:23,345 --> 00:04:27,433
+Meaning moves slowly, and a word's history often explains its edges.
 
 39
-00:04:26,781 --> 00:04:33,809
-First, what is a credential? A trusted statement, that others can check, that someone has shown what they know or can do.
+00:04:30,133 --> 00:04:35,795
+Back at the university, there's no system in sight. Just four offices, and a sheet of paper.
 
 40
-00:04:35,409 --> 00:04:43,227
-Awards and microcredentials are credentials. So are badges, when the learning was assessed. A badge for turning up isn't one.
+00:04:36,895 --> 00:04:43,923
+First, what is a credential? A trusted statement, that others can check, that someone has shown what they know or can do.
 
 41
-00:04:44,727 --> 00:04:49,488
-The recipe is Aristotle's: name the kind of thing, then say what sets it apart.
+00:04:45,523 --> 00:04:53,341
+Awards and microcredentials are credentials. So are badges, when the learning was assessed. A badge for turning up isn't one.
 
 42
-00:04:50,788 --> 00:04:56,989
-Each word gets an owner and a date, and the sketch gains a box, in pencil. Version three, draft.
+00:04:54,841 --> 00:04:59,602
+The recipe is Aristotle's: name the kind of thing, then say what sets it apart.
 
 43
-00:04:58,189 --> 00:05:08,407
-The answer for the speech is 11,890. And each of the four numbers now has a name. None was wrong: they answered four different questions.
+00:05:00,902 --> 00:05:07,103
+Each word gets an owner and a date, and the sketch gains a box, in pencil. Version three, draft.
 
 44
-00:05:11,107 --> 00:05:20,877
-None of this needed a computer. Contracts open with their definitions. Mergers stall on what counts as a customer. Funding depends on who is counted.
+00:05:08,303 --> 00:05:14,930
+The answer for the speech is 11,890. And each of the four numbers now has a name.
 
 45
-00:05:21,577 --> 00:05:25,331
-Agreeing on words costs a meeting. Disagreeing costs far more.
+00:05:16,030 --> 00:05:26,110
+Two of them counted things that aren't credentials: badges for turning up, and certificates of completion. Nobody lied. Until today, there was no agreed question.
 
 46
-00:05:26,631 --> 00:05:33,289
-About five thousand years ago, people began pressing marks into clay, to keep records that outlast memory.
+00:05:28,810 --> 00:05:38,580
+None of this needed a computer. Contracts open with their definitions. Mergers stall on what counts as a customer. Funding depends on who is counted.
 
 47
-00:05:34,789 --> 00:05:40,601
+00:05:39,280 --> 00:05:46,189
+Agreeing on words is real work: people with different needs, trade-offs, and time. Disagreeing costs far more.
+
+48
+00:05:47,489 --> 00:05:54,147
+About five thousand years ago, people began pressing marks into clay, to keep records that outlast memory.
+
+49
+00:05:55,647 --> 00:06:01,459
 From minds, to marks, to systems. But before you can count anything, you have to agree what it is.

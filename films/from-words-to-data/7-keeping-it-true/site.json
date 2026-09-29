@@ -10,8 +10,6 @@
   "description_es": "Una película sobre cómo se desvían los modelos de datos, cómo un agente de IA puede notar la deriva y redactar el cambio, por qué las personas siguen aprobándolo, y cómo un cambio se versiona de punta a punta, del glosario a los tableros.",
   "card": "Three dashboards, three numbers for one measure. The agent recommends, people approve, and everything is versioned.",
   "card_es": "Tres tableros, tres cifras para una medida. El agente recomienda, las personas aprueban, y todo queda versionado.",
-  "howto": "The past is drawn warm, like parchment and clay; the present is the films' dark glass. Teal is the AI agent's work, a geometric orb unlike Genie's round one; gold is a person's approval; red marks drift, the gap between what's written and what's used.",
-  "howto_es": "El pasado se dibuja cálido, como el pergamino y la arcilla; el presente es el vidrio oscuro de las películas. El turquesa es el trabajo del agente de IA, un orbe geométrico distinto del orbe redondo de Genie; el dorado es la aprobación de una persona; el rojo marca la deriva, la brecha entre lo que está escrito y lo que se usa.",
   "chapters_es": {
     "dict": "Un diccionario nunca está terminado",
     "arrives": "Llega el cambio",

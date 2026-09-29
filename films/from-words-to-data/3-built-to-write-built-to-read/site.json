@@ -10,8 +10,6 @@
   "description_es": "Una película sobre tablas normalizadas, claves y transacciones para escribir, estrellas con grano, hechos y dimensiones para leer, la historia guardada con fechas, y por qué bronce, plata y oro no son formas.",
   "card": "One set of facts, two shapes: one built to write each award, one built to read ten years of them.",
   "card_es": "Un conjunto de hechos, dos formas: una hecha para escribir cada título, otra hecha para leer diez años de ellos.",
-  "howto": "Blue is the shape built to write: tables with keys, and transactions. Green is the shape built to read: the star, its facts and dimensions. Warm ink is the merchants' books of 1494; red marks a copy that went wrong.",
-  "howto_es": "El azul es la forma hecha para escribir: tablas con claves, y transacciones. El verde es la forma hecha para leer: la estrella, sus hechos y sus dimensiones. La tinta cálida son los libros de los mercaderes de 1494; el rojo marca una copia que salió mal.",
   "chapters_es": {"ledger": "Diario y mayor", "write": "Hecha para escribir", "wrong": "Qué sale mal sin ella", "docs": "Otra forma de escribir", "read": "Hecha para leer", "history": "Guardar la historia para leer", "side": "Lado a lado", "end": "Vista completa"},
   "next_h": "You've seen why the same award is stored in two shapes. Now try it yourself.",
   "next_h_es": "Viste por qué el mismo título se guarda en dos formas. Ahora pruébalo tú.",

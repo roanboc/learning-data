@@ -10,8 +10,6 @@
   "description_es": "Una película sobre lo que un asistente de IA necesita para responder bien: glosarios, taxonomías, ontologías y capas semánticas, cómo se apilan, y cómo ayudan los estándares de la industria y las definiciones oficiales, de Linneo a la CIE.",
   "card": "An assistant answers from the meaning it can read. Glossary, taxonomy, ontology and semantic layer stack.",
   "card_es": "Un asistente responde con el significado que puede leer. Glosario, taxonomía, ontología y capa semántica se apilan.",
-  "howto": "The past is drawn warm and alive, on paper and branches; the present is the films' dark glass. Each way of writing meaning down has its colour: gold for the glossary, green for the taxonomy, violet for the ontology, blue for the semantic layer. Genie is the golden orb; red numbers are guesses, green ones match the registrar's list.",
-  "howto_es": "El pasado se dibuja cálido y vivo, en papel y ramas; el presente es el vidrio oscuro de las películas. Cada forma de escribir el significado tiene su color: dorado para el glosario, verde para la taxonomía, violeta para la ontología, azul para la capa semántica. Genie es la esfera dorada; las cifras en rojo son conjeturas, las verdes coinciden con la lista del registro académico.",
   "chapters_es": {"before": "Ya lo intentaron", "guesses": "Genie adivina", "four": "Cuatro formas de escribir el significado", "ontology": "La ontología", "semantic": "La capa semántica", "standards": "Estándares", "again": "Genie, otra vez", "end": "Vista completa"},
   "next_h": "You've seen why Genie guessed, and what it needs to read. Now try it yourself.",
   "next_h_es": "Viste por qué Genie adivinó, y lo que necesita leer. Ahora pruébalo tú.",

@@ -35,7 +35,8 @@ const NARR={
  {"id":"rabbit","gap":0.8,"text":"A philosopher imagined a stranger pointing at a running rabbit, and saying: gavagai!"},
  {"id":"mean","gap":0.8,"text":"Does it mean the rabbit? Its ears? This moment of running?"},
  {"id":"kids","gap":0.8,"text":"Children solve this every day. They guess the whole thing first."},
- {"id":"grain","gap":0.8,"text":"But every word hides a choice: what counts as one. Data modellers call it the grain."}]},
+ {"id":"grain","gap":0.8,"text":"But every word hides a choice: what counts as one. Data modellers call it the grain."},
+ {"id":"mei","gap":0.8,"text":"Credentials have a grain, too. Mei has a degree and two microcredentials. Count graduates, and she's one. Count credentials, and she's three."}]},
 "edges":{"name":"Fuzzy edges","lead":1.0,"tail":1.0,"vo":[
  {"id":"robin","gap":0.8,"text":"Ask people to picture a bird, and most will think of a robin or a sparrow. Hardly anyone thinks of a penguin."},
  {"id":"typical","gap":0.8,"text":"Categories have typical members in the middle, and fuzzy edges."},
@@ -52,10 +53,11 @@ const NARR={
  {"id":"kinds","gap":0.8,"text":"Awards and microcredentials are credentials. So are badges, when the learning was assessed. A badge for turning up isn't one."},
  {"id":"recipe","gap":0.8,"text":"The recipe is Aristotle's: name the kind of thing, then say what sets it apart."},
  {"id":"owner","gap":0.8,"text":"Each word gets an owner and a date, and the sketch gains a box, in pencil. Version three, draft."},
- {"id":"answer","gap":0.8,"text":"The answer for the speech is 11,890. And each of the four numbers now has a name. None was wrong: they answered four different questions.","say":"The answer for the speech is eleven thousand, eight hundred and ninety. And each of the four numbers now has a name. None was wrong: they answered four different questions."}]},
+ {"id":"answer","gap":0.8,"text":"The answer for the speech is 11,890. And each of the four numbers now has a name.","say":"The answer for the speech is eleven thousand, eight hundred and ninety. And each of the four numbers now has a name."},
+ {"id":"gap","gap":0.8,"text":"Two of them counted things that aren't credentials: badges for turning up, and certificates of completion. Nobody lied. Until today, there was no agreed question."}]},
 "end":{"name":"Pull back","lead":1.0,"tail":1.0,"vo":[
  {"id":"why","gap":0.8,"text":"None of this needed a computer. Contracts open with their definitions. Mergers stall on what counts as a customer. Funding depends on who is counted."},
- {"id":"cost","gap":0.8,"text":"Agreeing on words costs a meeting. Disagreeing costs far more."},
+ {"id":"cost","gap":0.8,"text":"Agreeing on words is real work: people with different needs, trade-offs, and time. Disagreeing costs far more."},
  {"id":"clay","gap":0.8,"text":"About five thousand years ago, people began pressing marks into clay, to keep records that outlast memory."},
  {"id":"last","gap":0.8,"text":"From minds, to marks, to systems. But before you can count anything, you have to agree what it is."}]}
 };

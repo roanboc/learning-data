@@ -1,5 +1,5 @@
 /* Learning Data: "Pausa para pensar" de Keeping it true, en español. Mantén las claves iguales a think.en.js.
-   La película se detiene al final de cuatro capítulos (arrives, watch, decide, e2e), con una pregunta cada vez. think.js las muestra,
+   La película se detiene al final de cinco capítulos (arrives, watch, decide, e2e, remains), con una pregunta cada vez. think.js las muestra,
    y las lista otra vez en "Piénsalo" (#think-list). Cada "stop" es un lab de esta película que enseña la misma idea;
    el .player data-labs de la página dice dónde están esos labs. */
 window.LEARN={lang:"es",
@@ -16,5 +16,8 @@ think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar
     why:"El agente recomienda; las personas aprueban; las pruebas comprueban el resultado. Cada capa tiene un responsable que aprueba su parte."},
   "e2e":{stop:"chain",q:"Este año se redefinió la tasa de finalización. ¿Qué pasa con el informe del año pasado?",
     opts:[{t:"Se recalcula con la nueva definición, y se reemplaza."},{t:"Conserva su cifra, que se lee con la versión de la definición del año pasado.",ok:true},{t:"Se retira, porque ya no coincide."}],
-    why:"Cada cifra conserva el significado que tenía. Las versiones mantienen verdaderos los informes antiguos, y permiten recalcularlos al lado de los nuevos cuando hace falta comparar."}
+    why:"Cada cifra conserva el significado que tenía. Las versiones mantienen verdaderos los informes antiguos, y permiten recalcularlos al lado de los nuevos cuando hace falta comparar."},
+  "remains":{stop:"remains",q:"Llega un patrón de modelado nuevo, que promete cambiarlo todo. ¿Qué deberías preguntarle primero?",
+    opts:[{t:"Si es más nuevo que lo que usamos ahora."},{t:"Cómo guarda el significado, la identidad, el grano y el tiempo.",ok:true},{t:"Si un agente de IA puede generarlo por nosotros."}],
+    why:"Cada forma es otra manera de escribir las mismas cuatro respuestas. Cómo las guarda un patrón te dice qué conserva bien y qué sacrifica."}
   }}};

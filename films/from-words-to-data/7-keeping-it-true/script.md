@@ -127,7 +127,7 @@ Timings are the voiced film's, from `tools/pace.py`.
 
 ## Pause and think
 
-Four stops, one question each, at the ends of *Change arrives*, *AI as a watcher*, *People decide* and *End to end*. Each links to the film's own lab.
+Five stops, one question each, at the ends of *Change arrives*, *AI as a watcher*, *People decide*, *End to end* and *What remains*. Each links to the film's own lab.
 
 | After | Question | Answer, in short |
 |---|---|---|
@@ -135,6 +135,7 @@ Four stops, one question each, at the ends of *Change arrives*, *AI as a watcher
 | 4 · AI as a watcher | Why is noticing drift a good first job for an AI agent? | It can read every query, definition and new value tirelessly, and show the evidence; deciding stays with people. |
 | 6 · People decide | The agent's draft changes the glossary, the model and the tests. Who approves it? | The owners: of the meaning, of the model and of the build. The agent recommends; tests check the result. |
 | 8 · End to end | Completion rate was redefined this year. What happens to last year's report? | It keeps its number, read with last year's version; restate it beside the new one if you need to compare. |
+| 9 · What remains | A new modelling pattern arrives, and promises to change everything. What should you ask of it first? | How it stores the meaning, the identity, the grain and the time: that tells you what it keeps well and what it gives up. |
 
 ## Rigour sheet
 

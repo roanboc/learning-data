@@ -115,73 +115,81 @@ Los niños resuelven esto todos los días. Primero suponen la cosa entera.
 Pero toda palabra esconde una decisión: qué cuenta como uno. En modelado de datos se le llama el grano.
 
 30
-00:03:22,737 --> 00:03:29,463
-Pide a la gente que imagine un pájaro, y casi todos pensarán en un petirrojo o un gorrión. Casi nadie piensa en un pingüino.
+00:03:20,737 --> 00:03:29,551
+Las credenciales también tienen grano. Mei tiene un título y dos microcredenciales. Si cuentas egresados, es una. Si cuentas credenciales, son tres.
 
 31
-00:03:30,163 --> 00:03:33,797
-Las categorías tienen miembros típicos en el centro, y bordes difusos.
+00:03:32,851 --> 00:03:39,577
+Pide a la gente que imagine un pájaro, y casi todos pensarán en un petirrojo o un gorrión. Casi nadie piensa en un pingüino.
 
 32
-00:03:34,497 --> 00:03:37,259
-En el centro estamos de acuerdo. En los bordes discutimos.
+00:03:40,277 --> 00:03:43,911
+Las categorías tienen miembros típicos en el centro, y bordes difusos.
 
 33
-00:03:38,359 --> 00:03:47,501
-¿Un título es una credencial? Claro. ¿Una microcredencial? Probablemente. ¿Una insignia por asistir a un taller? Ahí las cuatro oficinas se separan.
+00:03:44,611 --> 00:03:47,373
+En el centro estamos de acuerdo. En los bordes discutimos.
 
 34
-00:03:53,201 --> 00:03:55,811
-Las palabras también se mueven. En inglés, nice antes quería decir tonto.
+00:03:48,473 --> 00:03:57,615
+¿Un título es una credencial? Claro. ¿Una microcredencial? Probablemente. ¿Una insignia por asistir a un taller? Ahí las cuatro oficinas se separan.
 
 35
-00:03:56,511 --> 00:04:04,890
-Credencial viene del latín creer. Enrolar era escribir un nombre en un rollo. Un diploma era una hoja de papel doblada en dos.
+00:04:03,315 --> 00:04:05,925
+Las palabras también se mueven. En inglés, nice antes quería decir tonto.
 
 36
-00:04:06,090 --> 00:04:12,531
-Los embajadores aún presentan sus cartas credenciales: cartas que piden al anfitrión confiar en quien las lleva.
+00:04:06,625 --> 00:04:15,004
+Credencial viene del latín creer. Enrolar era escribir un nombre en un rollo. Un diploma era una hoja de papel doblada en dos.
 
 37
-00:04:13,231 --> 00:04:17,319
-El significado se mueve despacio, y la historia de una palabra suele explicar sus bordes.
+00:04:16,204 --> 00:04:22,645
+Los embajadores aún presentan sus cartas credenciales: cartas que piden al anfitrión confiar en quien las lleva.
 
 38
-00:04:20,019 --> 00:04:25,681
-De vuelta en la universidad, no hay ningún sistema a la vista. Solo cuatro oficinas y una hoja de papel.
+00:04:23,345 --> 00:04:27,433
+El significado se mueve despacio, y la historia de una palabra suele explicar sus bordes.
 
 39
-00:04:26,781 --> 00:04:33,809
-Primero, ¿qué es una credencial? Una declaración confiable, que otros pueden verificar, de que alguien demostró lo que sabe o sabe hacer.
+00:04:30,133 --> 00:04:35,795
+De vuelta en la universidad, no hay ningún sistema a la vista. Solo cuatro oficinas y una hoja de papel.
 
 40
-00:04:35,409 --> 00:04:43,227
-Los títulos y las microcredenciales son credenciales. También las insignias, si el aprendizaje se evaluó. Una insignia por asistir no lo es.
+00:04:36,895 --> 00:04:43,923
+Primero, ¿qué es una credencial? Una declaración confiable, que otros pueden verificar, de que alguien demostró lo que sabe o sabe hacer.
 
 41
-00:04:44,727 --> 00:04:49,488
-La receta es de Aristóteles: nombra la clase de cosa, y luego di qué la distingue.
+00:04:45,523 --> 00:04:53,341
+Los títulos y las microcredenciales son credenciales. También las insignias, si el aprendizaje se evaluó. Una insignia por asistir no lo es.
 
 42
-00:04:50,788 --> 00:04:56,989
-Cada palabra recibe un responsable y una fecha, y el boceto gana una caja, a lápiz. Versión tres, borrador.
+00:04:54,841 --> 00:04:59,602
+La receta es de Aristóteles: nombra la clase de cosa, y luego di qué la distingue.
 
 43
-00:04:58,189 --> 00:05:08,407
-La respuesta para el discurso es 11.890. Y cada una de las cuatro cifras ahora tiene nombre. Ninguna estaba mal: respondían cuatro preguntas distintas.
+00:05:00,902 --> 00:05:07,103
+Cada palabra recibe un responsable y una fecha, y el boceto gana una caja, a lápiz. Versión tres, borrador.
 
 44
-00:05:11,107 --> 00:05:20,877
-Nada de esto necesitó una computadora. Los contratos empiezan con sus definiciones. Las fusiones se traban en qué cuenta como cliente. El financiamiento depende de a quién se cuenta.
+00:05:08,303 --> 00:05:14,930
+La respuesta para el discurso es 11.890. Y cada una de las cuatro cifras ahora tiene nombre.
 
 45
-00:05:21,577 --> 00:05:25,331
-Ponerse de acuerdo en las palabras cuesta una reunión. No hacerlo cuesta mucho más.
+00:05:16,030 --> 00:05:26,110
+Dos de ellas contaron cosas que no son credenciales: insignias por asistir y certificados de finalización. Nadie mintió. Hasta hoy, no había una pregunta acordada.
 
 46
-00:05:26,631 --> 00:05:33,289
-Hace unos cinco mil años, la gente empezó a marcar la arcilla, para guardar registros que duraran más que la memoria.
+00:05:28,810 --> 00:05:38,580
+Nada de esto necesitó una computadora. Los contratos empiezan con sus definiciones. Las fusiones se traban en qué cuenta como cliente. El financiamiento depende de a quién se cuenta.
 
 47
-00:05:34,789 --> 00:05:40,601
+00:05:39,280 --> 00:05:46,189
+Ponerse de acuerdo en las palabras es trabajo de verdad: personas con necesidades distintas, concesiones y tiempo. No hacerlo cuesta mucho más.
+
+48
+00:05:47,489 --> 00:05:54,147
+Hace unos cinco mil años, la gente empezó a marcar la arcilla, para guardar registros que duraran más que la memoria.
+
+49
+00:05:55,647 --> 00:06:01,459
 De las mentes a las marcas, y a los sistemas. Pero antes de contar algo, hay que acordar qué es.

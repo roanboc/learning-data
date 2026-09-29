@@ -106,12 +106,20 @@ def T(lg, en, es):
     return en if lg == "en" else es
 
 
+def num(lg, f):
+    """A film's place in the series, always as "Film 2 of 7": site-tools/check_site.py allows numbering only in this form."""
+    n = len(json.loads((SER / "series.json").read_text())["films"])
+    return T(lg, "Film", "Película") + f' {f["index"] + 1} {T(lg, "of", "de")} {n}'
+
+
 def card(lg, f, rel, R, kicker=None):
-    """A topic card for a film of the series, linking to it from a page whose path to the series folder is rel."""
+    """A topic card for a film of the series, linking to it from a page whose path to the series folder is rel.
+    Its kicker says the film's number in the series, unless the card stands for the whole series (kicker)."""
     s = f["site"]
+    kicker = kicker or f'{num(lg, f)} · {s[T(lg, "kicker", "kicker_es")]}'
     meta = f'{f["len"]} min · {f["labs"]} labs · {f["quiz"]} {T(lg, "scenarios", "situaciones")} · {T(lg, "From words to data", "De las palabras a los datos")}' + T(lg, "", " · En inglés")
     return (f'<article class="topic-card">\n<img src="{R}assets/{f["key"]}-poster.jpg" alt="" width="1280" height="720" loading="lazy">\n<div class="tc-body">\n'
-            f'<p class="kicker">{E(kicker or s[T(lg, "kicker", "kicker_es")])}</p>\n<h3><a href="{rel}{f["key"]}/">{E(f["title"] if lg == "en" else s["title_es"])}</a></h3>\n'
+            f'<p class="kicker">{E(kicker)}</p>\n<h3><a href="{rel}{f["key"]}/">{E(f["title"] if lg == "en" else s["title_es"])}</a></h3>\n'
             f'<p>{E(s[T(lg, "card", "card_es")])}</p>\n<p class="meta">{meta}</p>\n'
             f'<p class="tc-progress" data-progress="{f["prefix"]}" data-labs="{f["labs"]}" data-quiz="{f["quiz"]}" hidden></p>\n</div>\n</article>')
 
@@ -126,7 +134,7 @@ def course(lg, f, step):
     steps = ([("#watch", "Watch", f'A {f["len"]} min film'), ("labs/", "Take it apart", f"{w[nl-1].capitalize()} hands-on labs"), ("scenarios/", "Make the call", f"{w[nq-1].capitalize()} real situations")] if lg == "en" else
              [("#watch", "Mira", f'Una película de {f["len"]} min'), ("labs/", "Desarma", f"{w[nl-1].capitalize()} labs interactivos"), ("scenarios/", "Tú decides", f"{w[nq-1].capitalize()} situaciones reales")])
     lis = "\n".join(f'<li><a href="{up}{h}"{here(i)}><span class="n"><b>{i+1}</b></span><b>{a}</b><span>{b}</span></a></li>' for i, (h, a, b) in enumerate(steps))
-    return (f'<nav class="course" aria-label="{T(lg, "Course", "Curso")}: {E(name)}"><div class="course-in"><p class="course-t"><small>{E(s[T(lg, "kicker", "kicker_es")])}</small>{E(name)}</p>'
+    return (f'<nav class="course" aria-label="{T(lg, "Course", "Curso")}: {E(name)}"><div class="course-in"><p class="course-t"><small>{num(lg, f)} · {E(s[T(lg, "kicker", "kicker_es")])}</small>{E(name)}</p>'
             f'<ol class="path" data-store="{f["prefix"]}" data-labs="{nl}" data-quiz="{nq}" data-text=\'{txt}\'>\n{lis}\n</ol></div></nav>')
 
 
@@ -145,6 +153,20 @@ def builds_on(lg, f, all_films, R):
     return f'<p class="builds-on">{T(lg, "Builds on", "Amplía")} {links}</p>' if got else ""
 
 
+def series_nav(lg, f, films_, R, rel):
+    """In the series: the previous and the next film, as cards, and every film of the series, numbered, with this one marked.
+    rel is the path from the page to the series folder."""
+    by = {x["index"]: x for x in films_}; prv, nxt = by.get(f["index"] - 1), by.get(f["index"] + 1)
+    nm = lambda x: E(x["title"] if lg == "en" else x["site"]["title_es"])
+    cards = ([card(lg, prv, rel, R, kicker=f'← {T(lg, "Previous", "Anterior")} · {num(lg, prv)}')] if prv else []) + \
+            ([card(lg, nxt, rel, R, kicker=f'{T(lg, "Next", "Siguiente")} · {num(lg, nxt)} →')] if nxt else [])
+    lis = "\n".join(f'<li><a href="{rel}{x["key"]}/"' + (' aria-current="page"' if x is f else "") + f'><span class="n">{x["index"] + 1}</span>{nm(x)}</a></li>' for x in films_)
+    return (f'<section class="module" id="in-the-series" aria-labelledby="series-h">\n<div class="mhead"><div><h2 id="series-h">{T(lg, "In the series", "En la serie")}: <a href="{rel}">{T(lg, "From words to data", "De las palabras a los datos")}</a></h2>'
+            f'<p>{num(lg, f)}.</p></div></div>\n'
+            f'<div class="topic-grid series-pn" data-progress-text=\'{PT[lg]}\'>\n' + "\n".join(cards) + '\n</div>\n'
+            f'<ol class="series-list" aria-label="{T(lg, "Every film of the series", "Todas las películas de la serie")}">\n{lis}\n</ol>\n</section>\n')
+
+
 def es_scenes(f):
     names = f["site"]["chapters_es"]
     return ('<script>/* the film is in English; its chapter buttons and the Pause and think kicker use these Spanish names */\n'
@@ -158,7 +180,6 @@ def film_page(lg, f, films_, series):
     title = f'{name} · {T(lg, "From words to data", "De las palabras a los datos")} · Learning Data'
     h, R = head(lg, path, title, s[T(lg, "description", "description_es")], s[T(lg, "card", "card_es")], f"{key}-poster.jpg")
     nxt = next((x for x in films_ if x["index"] == f["index"] + 1), None)
-    prv = next((x for x in films_ if x["index"] == f["index"] - 1), None)
     script = f'{REPO}/blob/main/films/from-words-to-data/{f["dir"]}/script.md'; caps = f'{REPO}/tree/main/films/from-words-to-data/{f["dir"]}/captions'
     note = ('' if lg == "en" else '<p class="note">La película está en inglés, con subtítulos en español. Esta página, los capítulos, las preguntas, los labs y las situaciones están en español.</p>\n')
     meta = (f'<p class="meta-row"><span>{f["len"]} min</span><span>{f["labs"]} labs</span><span>{f["quiz"]} scenarios</span><span>Pause and think</span><span>English captions</span></p>' if lg == "en" else
@@ -166,9 +187,6 @@ def film_page(lg, f, films_, series):
     nm = lambda x: E(x["title"] if lg == "en" else x["site"]["title_es"])
     third = (f'<a class="btn" href="../{nxt["key"]}/">{T(lg, "Next in the series", "Sigue en la serie")}: {nm(nxt)}</a>' if nxt else
              f'<a class="btn" href="../">{T(lg, "The whole series", "Toda la serie")}: {T(lg, "From words to data", "De las palabras a los datos")}</a>')
-    further = [card(lg, x, "../", R) for x in (nxt, prv) if x]
-    if f["index"] == 0:
-        further.append(sketch_card(lg, R))
     player = (f'<div class="player" data-labs="labs/">\n<audio id="snd" preload="metadata" src="{R}assets/{key}/soundtrack.mp3"></audio><div class="poster"><img src="{R}assets/{key}-poster.jpg" alt="" width="1280" height="720" data-play>'
               f'<div class="poster-cta"><button type="button" class="play-badge" data-play>{T(lg, "▶ Play the film", "▶ Ver la película")} · {f["len"]} min</button><button type="button" class="think-badge" data-think>{T(lg, "Play with pauses to think", "Ver con pausas para pensar")}</button></div></div>'
               f'<canvas id="film" width="1280" height="720" aria-label="{T(lg, "Animated film", "Película animada, en inglés")}: {E(f["title"])}"></canvas>\n'
@@ -177,10 +195,6 @@ def film_page(lg, f, films_, series):
               + '\n</div>')
     links = (f'<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/{key}.mp4">Download the video</a><a href="{caps}">Caption files</a><a href="{script}">Read the script</a></p>' if lg == "en" else
              f'<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/{key}.mp4">Descargar el video (en inglés)</a><a href="{caps}">Archivos de subtítulos</a><a href="{script}" hreflang="en">Leer el guion (en inglés)</a></p>')
-    howto = (f'<details class="howto"><summary>How to read the film</summary><div class="notes"><p>{E(s["howto"])} The university, people and numbers are fictional. The narration is a synthetic voice.</p>\n'
-             f'<p>English captions are on by default; turn them off with Captions. The video you download has none on the picture: play it with its caption file, in English or Spanish.</p></div></details>' if lg == "en" else
-             f'<details class="howto"><summary>Cómo leer la película</summary><div class="notes"><p>{E(s["howto_es"])} La universidad, las personas y las cifras son ficticias. La narración es una voz sintética.</p>\n'
-             f'<p>Los subtítulos en español están activados; puedes quitarlos con Subtítulos. El video que descargas no los tiene en la imagen: reprodúcelo con su archivo de subtítulos, en español o en inglés.</p></div></details>')
     nextp = (f'<template id="next-panel"><div class="think-card"><p class="think-k">{T(lg, "Where next?", "¿Y ahora?")}</p><h3>{E(s[T(lg, "next_h", "next_h_es")])}</h3>\n'
              f'<div class="next-opts"><a class="btn primary" href="labs/">{T(lg, "Take it apart", "Desarma")}: {f["labs"]} {T(lg, "hands-on labs", "labs interactivos")} →</a><a class="btn" href="scenarios/">{T(lg, "Make the call", "Tú decides")}: {f["quiz"]} {T(lg, "situations", "situaciones")}</a>{third}</div>\n'
              f'<div class="think-foot"><button type="button" class="btn" data-again>{T(lg, "Watch again", "Ver de nuevo")}</button></div></div></template>')
@@ -190,26 +204,15 @@ def film_page(lg, f, films_, series):
             f'{course(lg, f, 0)}\n'
             f'<section class="module" id="watch" data-store="{f["prefix"]}" aria-labelledby="watch-h">\n'
             f'<div class="mhead"><div><h2 id="watch-h">{T(lg, "Watch the film", "Mira la película")}</h2><p>{T(lg, "Press Play, or pick a chapter. Turn on <b>Pause and think</b> to stop for one question at the end of chapters.", "Presiona Reproducir, o salta a un capítulo. Activa <b>Pausa para pensar</b> y la película se detiene con una pregunta al final de los capítulos.")}</p></div></div>\n'
-            f'{player}\n<div class="chapters" id="chapters" aria-label="{T(lg, "Chapters", "Capítulos")}"></div>\n{links}\n{howto}\n{nextp}\n</section>\n\n'
+            f'{player}\n<div class="chapters" id="chapters" aria-label="{T(lg, "Chapters", "Capítulos")}"></div>\n{links}\n{nextp}\n</section>\n\n'
             f'<section class="module" id="think-it-through" aria-labelledby="think-h">\n<div class="mhead"><div><h2 id="think-h">{T(lg, "Think it through", "Piénsalo")}</h2><p>{T(lg, "The four Pause and think questions, for a class or a team. Open one to see the answer.", "Las cuatro preguntas de Pausa para pensar, para una clase o un equipo. Abre una para ver la respuesta.")}</p></div></div>\n<div id="think-list"></div>\n</section>\n\n'
-            f'<section class="module" id="further" aria-labelledby="further-h">\n<div class="mhead"><div><h2 id="further-h">{T(lg, "Go further", "Sigue")}</h2></div></div>\n'
-            f'<div class="topic-grid" data-progress-text=\'{PT[lg]}\'>\n' + "\n".join(further) + '\n</div>\n</section>\n</main>\n'
+            + series_nav(lg, f, films_, R, "../") + '</main>\n'
             f'{FOOT[lg]}\n'
             + ('' if lg == "en" else '<script>window.L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla completa",fsExit:"Salir de pantalla completa"}};</script>\n')
             + ('' if lg == "en" else f'<script src="{R}assets/{key}/captions.es.js"></script>\n')
             + f'<script src="{R}assets/{key}/film.js"></script>\n' + ('' if lg == "en" else es_scenes(f) + "\n")
             + f'<script src="{R}assets/{key}/think.{lg}.js"></script>\n<script src="{R}assets/learn/think.js"></script>\n<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/learn/next.js"></script>\n<script src="{R}assets/ambient.js"></script>\n</body>\n</html>\n')
     return h + "</head>\n" + body
-
-
-def sketch_card(lg, R):
-    if lg == "en":
-        return ('<article class="topic-card">\n' f'<img src="{R}assets/sketch-poster.jpg" alt="" width="1280" height="720" loading="lazy">\n<div class="tc-body">\n<p class="kicker">Data modelling</p>\n'
-                f'<h3><a href="{R}sketch/">A Sharper Sketch</a></h3>\n<p>Two trusted numbers disagree. When does a simple model need more precision, and how do you use a reference model without copying it?</p>\n'
-                '<p class="meta">5½ min · 6 labs · 12 scenarios</p>\n<p class="tc-progress" data-progress="ld3" data-labs="6" data-quiz="12" hidden></p>\n</div>\n</article>')
-    return ('<article class="topic-card">\n' f'<img src="{R}assets/sketch-poster.jpg" alt="" width="1280" height="720" loading="lazy">\n<div class="tc-body">\n<p class="kicker">Modelado de datos</p>\n'
-            f'<h3><a href="{R[3:]}sketch/">Un boceto más preciso</a></h3>\n<p>Dos cifras confiables no coinciden. ¿Cuándo un modelo simple necesita más precisión, y cómo se usa un modelo de referencia sin copiarlo?</p>\n'
-            '<p class="meta">5½ min · 6 labs (en inglés) · 12 situaciones (en inglés) · En inglés</p>\n<p class="tc-progress" data-progress="ld3" data-labs="6" data-quiz="12" hidden></p>\n</div>\n</article>')
 
 
 def learn_page(lg, f, which):
@@ -232,13 +235,10 @@ def learn_page(lg, f, which):
                + T(lg, f"{NUM['en'][nq-1].capitalize()} situations a data team really faces. Decide what you'd do; each answer explains why and points back to the lab that covers it.",
                    f"{NUM['es'][nq-1].capitalize()} situaciones que un equipo de datos enfrenta de verdad. Decide qué harías; cada respuesta explica por qué y te lleva al lab que lo trata.") + '</p></div></section>\n')
     else:
-        films_ = films()[1]; nxt = next((x for x in films_ if x["index"] == f["index"] + 1), None)
-        cards = [card(lg, nxt, "../../", R)] if nxt else []
-        cards.append(card(lg, next(x for x in films_ if x["index"] == 0), "../../", R) if f["index"] else sketch_card(lg, R))
+        films_ = films()[1]
         mid = (f'<section aria-labelledby="scenarios-h" class="section-gap">\n<h2 class="sr" id="scenarios-h">{T(lg, "Scenarios", "Situaciones")}</h2>\n'
                f'<div id="fw-quiz"><noscript><p class="noscript">{T(lg, "The scenarios need JavaScript.", "Las situaciones necesitan JavaScript.")}</p></noscript></div>\n</section>\n\n'
-               f'<section class="module" id="where-next" aria-labelledby="next-step-h">\n<div class="mhead"><div><p class="step">{T(lg, "Keep going", "Sigue")}</p><h2 id="next-step-h">{T(lg, "Where next", "¿Y ahora?")}</h2></div></div>\n'
-               f'<div class="topic-grid" data-progress-text=\'{PT[lg]}\'>\n' + "\n".join(cards) + '\n</div>\n</section>\n')
+               + series_nav(lg, f, films_, R, "../../"))
     body = (f'<body>\n{header(lg, path, R)}\n<main>\n<section class="page-head cine"><div class="bg" aria-hidden="true"><img src="{R}assets/{key}-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>\n'
             f'<p class="eyebrow crumbs"><a href="{R if lg == "en" else R[3:]}topics/">{T(lg, "Topics", "Temas")}</a> › <a href="../../">{T(lg, "From words to data", "De las palabras a los datos")}</a></p>\n'
             f'<h1>{E(h1)}</h1>\n<p class="lead">{E(lead)}</p>\n</section>\n{course(lg, f, 1 if which == "labs" else 2)}\n{mid}</main>\n{FOOT[lg]}\n'
@@ -286,8 +286,8 @@ def block(lg, what, R, rel, films_):
         return ""
     if what == "card":
         return card(lg, films_[0], rel, R, kicker=T(lg, "From words to data: seven films", "De las palabras a los datos: siete películas")) + "\n"
-    head_ = (f'<li><p>From <a href="{R}#t=75"><i>The sketch</i></a>, in depth: the series <a href="{rel}"><i>From words to data</i></a></p>' if lg == "en" else
-             f'<li><p>Desde <a href="{R[3:]}#t=84"><i>El boceto</i></a>, en profundidad: la serie <a href="{rel}"><i>De las palabras a los datos</i></a></p>')
+    head_ = (f'<li class="series"><p>From <a href="{R}#t=75"><i>The sketch</i></a>, in depth: the series <a href="{rel}"><i>From words to data</i></a>, {NUM["en"][len(films_) - 1]} films, in order</p>' if lg == "en" else
+             f'<li class="series"><p>Desde <a href="{R[3:]}#t=84"><i>El boceto</i></a>, en profundidad: la serie <a href="{rel}"><i>De las palabras a los datos</i></a>, {NUM["es"][len(films_) - 1]} películas, en orden</p>')
     return (head_ + f'\n<div class="topic-grid" data-progress-text=\'{PT[lg]}\'>\n' + "\n".join(card(lg, x, rel, R) for x in films_) + '\n</div></li>\n')
 
 

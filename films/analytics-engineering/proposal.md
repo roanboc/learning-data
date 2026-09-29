@@ -108,18 +108,23 @@ Nine films of 4 to 6 minutes, each built around one step or one idea. The agent 
 
 ### A model is not a transformation
 
-**Logline.** Four engineers, four favourite approaches, and a dbt project with 300 models. Which of them is the data model? None of them, and all of the YAML.
+**Logline.** The credential model is approved: a blueprint. Now it has to be built from three messy sources, with a tool that calls every query a model. Which of them is the data model? None of them, and all of the YAML.
 
 | Chapter | What happens | What it teaches |
 |---|---|---|
-| Recap | The shapes from *Many ways to read*. The known approaches, named once: normalised core, dimensional, data vault, anchor, hook, entity-centric, unified star, activity stream. | The landscape, named here and only here. |
-| What they share | Every approach answers four questions: meaning, identity, grain, time. | The series teaches the answers, not the approaches. |
-| The middle ground | Integrate on business keys, keep history, serve entities as wide rows and facts as stars. | The series' own pattern, without a full vault. |
-| 300 models | A lineage graph. Most nodes are steps; a few are entities. | A dbt model is a transformation. |
+| A plan is not a building | 1870s: a blueprint says exactly what a building will be, and lays no bricks. | A model says what data must be; it doesn't build it. |
+| Where we left off | Four offices, four answers, one agreed model; meaning, identity, grain and time; v3 approved. | The recap, complete for anyone who hasn't seen *From words to data*. |
+| Many shapes, one model | The known approaches, named once, and the middle way this series takes. | The landscape, named here and only here. |
+| Someone has to build it | The model as a blueprint over three messy sources. | The analytics engineer's job. |
+| The building work | Notebooks, stored procedures, pipeline tools, dbt: queries in files, ordered by `ref()`, built as tables and views, with tests and docs. | dbt, one tool among several. |
+| The name that misleads | dbt calls each query a model. | A dbt model is a transformation. |
+| 300 models | A lineage graph. Most nodes are steps; a few are entities. | Only some transformations produce an entity. |
 | Where the model lives | Grain, keys, relationships, contract, meaning: in YAML and Markdown. | The data model is declared, then produced. |
 | The ten steps | The process, drawn as a loop. | The map for the rest of the series. |
 
 **Labs.** *Which of these are entities?* (sort a lineage graph).
+
+The opening, chapter by chapter, with narration: [1-opening-plan.md](1-opening-plan.md).
 
 ### Start from a question
 

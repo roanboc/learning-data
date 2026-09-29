@@ -62,6 +62,18 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "El informe del año pasado aún se lee con la definición de ese año, versión dos, sin cambios. Cada cifra conserva el significado que tenía.",
 "And the sketch's stamp finally reads: version three.":
 "Y el sello del boceto por fin dice: versión tres.",
+"New ways to shape data keep arriving: data vaults, anchors, hooks, bridges, activity streams. More will come.":
+"Siguen llegando nuevas formas de dar forma a los datos: data vaults, anclas, hooks, puentes, flujos de actividad. Vendrán más.",
+"Look inside any of them, and you find the same four answers.":
+"Mira dentro de cualquiera y encontrarás las mismas cuatro respuestas.",
+"What a credential is. What makes it the same one everywhere. What one row holds. And when each thing was true.":
+"Qué es una credencial. Qué la hace la misma en todas partes. Qué contiene una fila. Y cuándo fue cierta cada cosa.",
+"What changes is the shape. Engines change, and an agent can draft a vault or a star from the model in minutes.":
+"Lo que cambia es la forma. Cambian los motores, y un agente puede redactar un vault o una estrella a partir del modelo en minutos.",
+"A search can find two credentials that look alike. Only the model can say whether they're the same one.":
+"Una búsqueda puede encontrar dos credenciales parecidas. Solo el modelo puede decir si son la misma.",
+"Learn the part that lasts: meaning, identity, grain and time. Every new shape is another way to write them down.":
+"Aprende lo que perdura: significado, identidad, grano y tiempo. Cada nueva forma es otra manera de escribirlos.",
 "Back to the start of the series: a word, an idea, a thing, and a mark in clay.":
 "De vuelta al inicio de la serie: una palabra, una idea, una cosa, y una marca en arcilla.",
 "A credential is a claim that others can check. So is every number in a report.":

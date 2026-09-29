@@ -1,5 +1,5 @@
 /* Learning Data: "Pause and think" for Keeping it true, in English. Keep the keys in step with think.es.js.
-   The film stops at the end of four chapters (arrives, watch, decide, e2e), with one question each. think.js shows them,
+   The film stops at the end of five chapters (arrives, watch, decide, e2e, remains), with one question each. think.js shows them,
    and lists them again under "Think it through" (#think-list). Each "stop" is this film's own lab that teaches the same idea;
    the page's .player data-labs says where those labs are. */
 window.LEARN={lang:"en",
@@ -16,5 +16,8 @@ think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",ski
     why:"The agent recommends; people approve; the tests check the result. Each layer has an owner who approves their part."},
   "e2e":{stop:"chain",q:"Completion rate was redefined this year. What happens to last year's report?",
     opts:[{t:"It's recalculated with the new definition, and replaced."},{t:"It keeps its number, read with last year's version of the definition.",ok:true},{t:"It's withdrawn, because it no longer matches."}],
-    why:"Every number keeps the meaning it had. Versions keep old reports true, and let you restate them beside the new ones when you need to compare."}
+    why:"Every number keeps the meaning it had. Versions keep old reports true, and let you restate them beside the new ones when you need to compare."},
+  "remains":{stop:"remains",q:"A new modelling pattern arrives, and promises to change everything. What should you ask of it first?",
+    opts:[{t:"Whether it's newer than what we use now."},{t:"How it stores the meaning, the identity, the grain and the time.",ok:true},{t:"Whether an AI agent can generate it for us."}],
+    why:"Every shape is another way to write down the same four answers. How a pattern stores them tells you what it keeps well, and what it gives up."}
   }}};

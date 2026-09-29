@@ -17,7 +17,7 @@ The series starts before technology, with how minds turn the world into words, a
 | [Many ways to read](https://roanboc.github.io/learning-data/from-words-to-data/many-ways-to-read/) | Shapes for reading | 4 min | 8 | 3 labs, 8 scenarios | [script](4-many-ways-to-read/script.md) · [source](4-many-ways-to-read/source/README.md) |
 | [Both at once](https://roanboc.github.io/learning-data/from-words-to-data/both-at-once/) | Hybrid databases | 4 min | 9 | 3 labs, 8 scenarios | [script](5-both-at-once/script.md) · [source](5-both-at-once/source/README.md) |
 | [Meaning machines can read](https://roanboc.github.io/learning-data/from-words-to-data/meaning-machines-can-read/) | Meaning and AI | 4 min | 8 | 3 labs, 8 scenarios | [script](6-meaning-machines-can-read/script.md) · [source](6-meaning-machines-can-read/source/README.md) |
-| [Keeping it true](https://roanboc.github.io/learning-data/from-words-to-data/keeping-it-true/) | Keeping meaning current | 4 min | 9 | 3 labs, 8 scenarios | [script](7-keeping-it-true/script.md) · [source](7-keeping-it-true/source/README.md) |
+| [Keeping it true](https://roanboc.github.io/learning-data/from-words-to-data/keeping-it-true/) | Keeping meaning current | 5 min | 10 | 4 labs, 10 scenarios | [script](7-keeping-it-true/script.md) · [source](7-keeping-it-true/source/README.md) |
 <!-- /films -->
 
 The [proposal](proposal.md) records how the series was planned and the decisions taken on 28 September 2026: seven films, the title, the credential as the thread, and an opening film that starts before writing.
@@ -32,7 +32,7 @@ The [proposal](proposal.md) records how the series was planned and the decisions
 | Many ways to read | Credentials from a new platform are integrated, presented and served as one learner record. |
 | Both at once | An employer checks a credential live; a learner's wallet shows, now, how close she is to a graduate certificate. |
 | Meaning machines can read | Genie is asked who is one microcredential away from a certificate, and must read the stacking rules, not guess them. |
-| Keeping it true | The government adds a reporting rule, and a credential issued in error is revoked. AI spots both and drafts the change; people approve sketch v3. |
+| Keeping it true | The government adds a reporting rule, and a credential issued in error is revoked. AI spots both and drafts the change; people approve sketch v3. New shapes for data will keep coming; the credential's meaning, identity, grain and time are what remain. |
 
 ## Every film starts in the past
 
@@ -64,7 +64,7 @@ The [proposal](proposal.md) records how the series was planned and the decisions
 | Meaning machines can read | Glass bells, glass pads and a celesta in C Lydian; a harp and strings for the eighteenth and nineteenth centuries |
 | Keeping it true | Strings over a ticking clock and a felt piano, in C, drifting to A minor and back; *What's in a word*'s kalimba and *Older than the systems*' bell return at the end |
 
-- **The same craft.** Narration only; a flowing pace of about 125 to 135 words a minute; four Pause and think questions per film; labs and scenarios on the site, in English and Spanish. See [PLAYBOOK.md](../../PLAYBOOK.md), and its section on what this series added.
+- **The same craft.** Narration only; a flowing pace of about 125 to 135 words a minute; four Pause and think questions per film (five in *Keeping it true*, for its chapter on what remains); labs and scenarios on the site, in English and Spanish. See [PLAYBOOK.md](../../PLAYBOOK.md), and its section on what this series added.
 
 ## How it's built
 

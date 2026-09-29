@@ -10,5 +10,6 @@ const BREATH={
 "decide":{"hold":{"who":0.6,"review":0.6}},
 "wrong":{"hold":{"invent":0.6,"slip":0.6}},
 "e2e":{"hold":{"chain":0.6,"agree":0.5,"old":0.6},"breathe":3.0},
+"remains":{"hold":{"shapes":1.0,"same":0.5,"four":1.0,"change":0.9,"alike":1.0}},
 "end":{"hold":{"start":0.6,"claim":0.6},"breathe":4.2}
 };

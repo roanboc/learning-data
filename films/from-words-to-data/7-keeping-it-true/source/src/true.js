@@ -107,21 +107,41 @@ function kt_lock(ctx,x,y,s,col,a,open){withA(ctx,a,()=>{const u=ease(clamp(open|
   const bg=ctx.createLinearGradient(-34,-6,34,46);bg.addColorStop(0,rgba(mix(col,[255,255,255],0.3),1));bg.addColorStop(0.5,rgba(col,1));bg.addColorStop(1,rgba(mix(col,[60,30,10],0.55),1));ctx.fillStyle=bg;ctx.beginPath();ctx.moveTo(-30,-6);ctx.quadraticCurveTo(0,-10,30,-6);ctx.quadraticCurveTo(36,20,30,46);ctx.quadraticCurveTo(0,52,-30,46);ctx.quadraticCurveTo(-36,20,-30,-6);ctx.fill();
   ctx.fillStyle="rgba(40,24,10,0.9)";ctx.beginPath();ctx.arc(0,14,6,0,TAU);ctx.fill();ctx.beginPath();ctx.moveTo(-3,16);ctx.lineTo(3,16);ctx.lineTo(4,32);ctx.lineTo(-4,32);ctx.closePath();ctx.fill();
   ctx.fillStyle="rgba(255,255,255,0.3)";ctx.beginPath();ctx.ellipse(-14,4,5,12,0.3,0,TAU);ctx.fill();ctx.restore();});}
-// the Oxford English Dictionary: modern pages, with an editor's revisions in blue pencil (p reveals them)
+// the Oxford English Dictionary: a modern page of entries (paraphrased), with an editor's revisions in blue pencil (p reveals them):
+// "on paper" struck out and "digital, too" written in above a caret, "a unit of study" circled, and a new sense added to "curriculum"
 function kt_oed(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a,p=o.p||0;if(a<=0.01)return;withA(ctx,a,()=>{
   [2,1].forEach(k=>{ctx.save();ctx.translate(x+w/2+k*7,y+h/2+k*6);ctx.rotate(0.018*k);kt_paper(ctx,-w/2,-h/2,w,h,t,{seed:k+4,col:k===2?[222,215,200]:[232,226,214],curl:0,age:0.1});ctx.restore();});
   kt_paper(ctx,x,y,w,h,t,{seed:3,col:[246,242,233],age:0.08});
   T(ctx,"OXFORD ENGLISH DICTIONARY",x+w/2,y+36,{w:800,size:14,align:"center",color:"rgba(40,50,70,0.7)"});ctx.fillStyle="rgba(40,50,70,0.25)";ctx.fillRect(x+30,y+48,w-60,1.5);
-  const E=[["credential, adj. & n.",4],["credit, n.",3],["curriculum, n.",3]];let yy=y+86;const ink="rgba(34,36,44,0.95)",blue=rgba(KT_BLUE,1),rev=k=>fin(p,k*0.18,0.2);
-  const pencil=(pts,lw)=>{ctx.strokeStyle=blue;ctx.lineCap="round";ctx.lineJoin="round";ctx.lineWidth=lw;ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length-1;i++)ctx.quadraticCurveTo(pts[i][0],pts[i][1],(pts[i][0]+pts[i+1][0])/2,(pts[i][1]+pts[i+1][1])/2);const L=pts[pts.length-1];ctx.lineTo(L[0],L[1]);ctx.stroke();};
-  E.forEach(([hw,n],i)=>{T(ctx,hw,x+30,yy,{w:800,size:24,color:ink});yy+=18;for(let k=0;k<n;k++){const bw=(w-60)*(0.55+0.4*hash(i*5+k,7));ctx.fillStyle="rgba(60,64,76,0.3)";ctx.fillRect(x+30+(k?16:0),yy+k*18,bw-(k?16:0),6);
-      // the editor's marks: a sense struck out by hand, a new one written in, a circled word
-      if(i===0&&k===1){const r=rev(0);if(r>0){const x0=x+44,x1=x+44+(bw-14)*r,yl=yy+k*18+3;pencil([[x0,yl+1],[lerp(x0,x1,0.3),yl-1.5],[lerp(x0,x1,0.7),yl+1.5],[x1,yl-0.5]],3);}}
-      if(i===0&&k===2)withA(ctx,rev(1),()=>{const yl=yy+k*18;pencil([[x+40,yl+10],[x+46,yl+2],[x+48,yl-3],[x+52,yl+3],[x+57,yl+10]],2.5);T(ctx,"digital, too",x+62,yl-4,{w:700,size:21,color:blue});});
-      if(i===1&&k===0)withA(ctx,rev(2),()=>{const cx=x+30+bw*0.6,cy=yy+3,rx=bw*0.22;ctx.strokeStyle=blue;ctx.lineWidth=2.5;ctx.beginPath();for(let q=0;q<=40;q++){const an=q/40*TAU*1.08-0.3,rr_=1+0.05*Math.sin(q*1.3);ctx.lineTo(cx+Math.cos(an)*rx*rr_,cy+Math.sin(an)*11*rr_);}ctx.stroke();});}
-    if(i===2)withA(ctx,rev(3),()=>{ctx.fillStyle=rgba(KT_BLUE,0.1);ctx.beginPath();ctx.moveTo(x+24,yy-36);ctx.quadraticCurveTo(x+w/2,yy-42,x+w-26,yy-34);ctx.quadraticCurveTo(x+w-20,yy+n*9-10,x+w-28,yy+n*18+4);ctx.quadraticCurveTo(x+w/2,yy+n*18+10,x+26,yy+n*18+2);ctx.quadraticCurveTo(x+18,yy+n*9-14,x+24,yy-36);ctx.fill();T(ctx,"new sense",x+w-34,yy-40,{w:700,size:19,align:"right",color:blue});});
-    yy+=n*18+30;});
-  withA(ctx,rev(1.5),()=>{ctx.save();ctx.translate(x+w-24,y+120);ctx.rotate(-Math.PI/2);T(ctx,"revised",0,0,{w:700,size:19,align:"center",color:blue});ctx.restore();});});}
+  const ink="rgba(34,36,44,0.95)",gray="rgba(52,56,68,0.82)",blue=rgba(KT_BLUE,1),rev=k=>fin(p,k*0.18,0.2),L=x+34,S=17;
+  const pencil=(pts,lw)=>{ctx.strokeStyle=blue;ctx.lineCap="round";ctx.lineJoin="round";ctx.lineWidth=lw;ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length-1;i++)ctx.quadraticCurveTo(pts[i][0],pts[i][1],(pts[i][0]+pts[i+1][0])/2,(pts[i][1]+pts[i+1][1])/2);const E=pts[pts.length-1];ctx.lineTo(E[0],E[1]);ctx.stroke();};
+  const head=(s,yy)=>T(ctx,s,x+30,yy,{w:800,size:24,color:ink});
+  const sense=(s,yy)=>T(ctx,s,L,yy,{w:500,size:S,color:gray});
+  const bars=(yy,n,sd)=>{for(let k=0;k<n;k++){ctx.fillStyle="rgba(60,64,76,0.26)";ctx.fillRect(L,yy+k*16-5,(w-68)*(0.6+0.35*hash(sd*5+k,7)),5);}};
+  // credential: sense 2 ends "on paper"; the editor strikes it and writes "digital, too" above a caret
+  let yy=y+90;head("credential, n.",yy);
+  sense("1. a letter or paper that vouches for its bearer",yy+30);
+  const s2="2. evidence of what someone has learned, ",s2b="on paper",wA=tw(ctx,s2,S,500),wB=tw(ctx,s2b,S,500),l2=yy+74;
+  sense(s2+s2b,l2);
+  const r0=rev(0);if(r0>0){const x0=L+wA-3,x1=x0+(wB+6)*r0;pencil([[x0,l2-6],[lerp(x0,x1,0.35),l2-7.5],[lerp(x0,x1,0.7),l2-4.5],[x1,l2-6.5]],3);}
+  withA(ctx,rev(1),()=>{const cx=L+wA+wB+10;pencil([[cx-6,l2+6],[cx,l2-4],[cx+6,l2+6]],2.5);T(ctx,"digital, too",cx,l2-26,{w:700,size:21,align:"center",color:blue});});
+  bars(l2+22,2,1);
+  // credit: the editor circles "a unit of study"
+  yy=l2+84;head("credit, n.",yy);
+  sense("1. belief in what someone says; trust",yy+30);
+  const c1="2.",c2="a unit of study",c3="counted toward a qualification",G=18,wc1=tw(ctx,c1,S,500),wc2=tw(ctx,c2,S,500),l3=yy+58;
+  sense(c1,l3);T(ctx,c2,L+wc1+G,l3,{w:500,size:S,color:gray});T(ctx,c3,L+wc1+wc2+2*G,l3,{w:500,size:S,color:gray});
+  withA(ctx,rev(2),()=>{const cx=L+wc1+G+wc2/2,cy=l3-5,rx=wc2/2+12,ry=15,q=clamp(rev(2)*1.2,0,1);ctx.strokeStyle=blue;ctx.lineWidth=2.5;ctx.lineCap="round";ctx.beginPath();
+    for(let k=0;k<=48*q;k++){const an=-2.4+k/48*TAU*1.04,rr=1+0.03*Math.sin(k*0.9);ctx.lineTo(cx+Math.cos(an)*rx*rr,cy+Math.sin(an)*ry*rr+k*0.04);}ctx.stroke();});
+  bars(l3+22,2,2);
+  // curriculum: a new sense, written in and highlighted
+  yy=l3+84;head("curriculum, n.",yy);
+  sense("1. the subjects that make up a course of study",yy+30);
+  const l4=yy+56;bars(l4,1,3);const l5=l4+30;
+  withA(ctx,rev(3),()=>{ctx.fillStyle=rgba(KT_BLUE,0.1);ctx.beginPath();ctx.moveTo(L-10,l5-24);ctx.quadraticCurveTo(x+w/2,l5-28,x+w-30,l5-23);ctx.quadraticCurveTo(x+w-24,l5-6,x+w-30,l5+11);ctx.quadraticCurveTo(x+w/2,l5+15,L-10,l5+10);ctx.quadraticCurveTo(L-15,l5-7,L-10,l5-24);ctx.fill();
+    T(ctx,"3. a pathway of short, stackable courses",L,l5,{w:700,size:S+1,color:blue});T(ctx,"new sense",x+w-38,l5-34,{w:700,size:18,align:"right",color:blue});});
+  // in the margin, beside the page's revisions
+  withA(ctx,rev(1.5),()=>{ctx.save();ctx.translate(x+w-18,y+150);ctx.rotate(-Math.PI/2);T(ctx,"revised",0,0,{w:700,size:18,align:"center",color:blue});ctx.restore();});});}
 // the solar system: a glowing sun, and nine bodies on their orbits, each lit on the side that faces the sun; Pluto's orbit is tilted and off-centre
 const KT_PLANETS=[["Mercury",[200,180,160],5],["Venus",[240,210,150],7],["Earth",[110,170,240],7],["Mars",[230,120,80],6],["Jupiter",[230,190,140],14],["Saturn",[235,210,150],12],["Uranus",[160,220,230],10],["Neptune",[100,140,240],10],["Pluto",[210,190,170],4]];
 function kt_body(ctx,px,py,r,col,lx,ly,o){o=o||{};const L=Math.hypot(lx,ly)||1,dx=lx/L,dy=ly/L;glow(ctx,px,py,r*2.4,col,0.35);

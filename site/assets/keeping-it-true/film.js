@@ -447,13 +447,20 @@ const NARR={
  {"id":"agree","gap":0.8,"text":"The three dashboards agree. Genie gives the same number, and shows why."},
  {"id":"old","gap":0.8,"text":"Last year's report still reads with last year's definition, version two, unchanged. Each number keeps the meaning it had."},
  {"id":"v3","gap":0.8,"text":"And the sketch's stamp finally reads: version three."}]},
+"remains":{"name":"What remains","lead":1.0,"tail":1.6,"vo":[
+ {"id":"shapes","gap":0.8,"text":"New ways to shape data keep arriving: data vaults, anchors, hooks, bridges, activity streams. More will come."},
+ {"id":"same","gap":0.9,"text":"Look inside any of them, and you find the same four answers."},
+ {"id":"four","gap":0.9,"text":"What a credential is. What makes it the same one everywhere. What one row holds. And when each thing was true."},
+ {"id":"change","gap":0.9,"text":"What changes is the shape. Engines change, and an agent can draft a vault or a star from the model in minutes."},
+ {"id":"alike","gap":0.9,"text":"A search can find two credentials that look alike. Only the model can say whether they're the same one."},
+ {"id":"last","gap":0.8,"text":"Learn the part that lasts: meaning, identity, grain and time. Every new shape is another way to write them down."}]},
 "end":{"name":"Pull back","lead":1.0,"tail":1.0,"vo":[
  {"id":"start","gap":0.8,"text":"Back to the start of the series: a word, an idea, a thing, and a mark in clay."},
  {"id":"claim","gap":0.8,"text":"A credential is a claim that others can check. So is every number in a report."},
  {"id":"job","gap":0.8,"text":"The tools have changed. The job hasn't: agree what things are, write it down, and keep it true."}]}
 };
 
-const VODUR={"dict/johnson": 6.989, "dict/admit": 7.935, "dict/planet": 8.439, "dict/kilo": 3.384, "dict/moves": 4.233, "arrives/month": 3.033, "arrives/gov": 5.068, "arrives/error": 3.273, "arrives/rate": 5.385, "stale/drift": 2.525, "stale/kinds": 10.269, "stale/gap": 3.811, "watch/reads": 8.042, "watch/compare": 6.138, "watch/flags": 6.382, "watch/notice": 3.329, "draft/drafts": 1.277, "draft/list": 11.692, "draft/cheap": 3.331, "decide/who": 7.485, "decide/review": 7.368, "decide/rule": 3.491, "wrong/invent": 3.815, "wrong/slip": 7.47, "wrong/check": 4.809, "e2e/follow": 1.973, "e2e/chain": 8.471, "e2e/agree": 4.064, "e2e/old": 7.634, "e2e/v3": 3.036, "end/start": 4.625, "end/claim": 4.732, "end/job": 5.405};
+const VODUR={"dict/johnson": 6.989, "dict/admit": 7.935, "dict/planet": 8.439, "dict/kilo": 3.384, "dict/moves": 4.233, "arrives/month": 3.033, "arrives/gov": 5.068, "arrives/error": 3.273, "arrives/rate": 5.385, "stale/drift": 2.525, "stale/kinds": 10.269, "stale/gap": 3.811, "watch/reads": 8.042, "watch/compare": 6.138, "watch/flags": 6.382, "watch/notice": 3.329, "draft/drafts": 1.277, "draft/list": 11.692, "draft/cheap": 3.331, "decide/who": 7.485, "decide/review": 7.368, "decide/rule": 3.491, "wrong/invent": 3.815, "wrong/slip": 7.47, "wrong/check": 4.809, "e2e/follow": 1.973, "e2e/chain": 8.471, "e2e/agree": 4.064, "e2e/old": 7.634, "e2e/v3": 3.036, "remains/shapes": 7.114, "remains/same": 3.321, "remains/four": 5.994, "remains/change": 6.863, "remains/alike": 5.629, "remains/last": 6.952, "end/start": 4.625, "end/claim": 4.732, "end/job": 5.405};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -467,6 +474,7 @@ const BREATH={
 "decide":{"hold":{"who":0.6,"review":0.6}},
 "wrong":{"hold":{"invent":0.6,"slip":0.6}},
 "e2e":{"hold":{"chain":0.6,"agree":0.5,"old":0.6},"breathe":3.0},
+"remains":{"hold":{"shapes":1.0,"same":0.5,"four":1.0,"change":0.9,"alike":1.0}},
 "end":{"hold":{"start":0.6,"claim":0.6},"breathe":4.2}
 };
 
@@ -1564,10 +1572,55 @@ const LV={
     T(c,"?",170,262,{w:800,size:50,align:"center",color:rgba(TRUST,1)});}
 };
 
+/* ---------- What remains: the shapes that keep arriving, and the four answers inside each ---------- */
+// each pattern as a small crisp glyph, drawn around (0,0) in a box of about 180 × 110; its colour, name and the people who proposed it
+const KT_PAT=[["data vault","Linstedt",[180,150,255],"vaults"],["anchor","Rönnbäck and others",[120,205,240],"anchors"],["hook","Foad",[240,175,115],"hooks"],
+  ["Puppini bridge","Puppini and Inmon",[140,170,255],"bridges"],["activity stream","Elsamadisi",[250,140,175],"activity"]];
+const KT_STAR=[120,215,155];
+// the four answers every shape stores: meaning, identity, grain, time
+const KT_FOUR=[["meaning","what a credential is",KIND],["identity","what makes it the same one",TRUST],["grain","what one row holds",PARCH],["time","when each thing was true",[200,160,255]]];
+function kt_box(ctx,x,y,w,h,col,lab,o){o=o||{};ctx.fillStyle="rgba(8,14,28,0.95)";rr(ctx,x-w/2,y-h/2,w,h,5);ctx.fill();ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=2;rr(ctx,x-w/2,y-h/2,w,h,5);ctx.stroke();
+  if(lab)T(ctx,lab,x,y+5,{w:700,size:o.size||13,align:"center",color:rgba(col,1)});}
+function kt_ln(ctx,pts,col,a){ctx.strokeStyle=rgba(col,a==null?0.8:a);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length;i++)ctx.lineTo(pts[i][0],pts[i][1]);ctx.stroke();}
+function kt_glyph(ctx,k,x,y,s,t){const col=k==="star"?KT_STAR:KT_PAT[k][2];ctx.save();ctx.translate(x,y);ctx.scale(s,s);
+  if(k===0){// hubs hold the keys, a link joins them, satellites stack the history under each hub
+    kt_ln(ctx,[[-50,-22],[50,-22]],col);[-50,50].forEach(hx=>{[0,1,2].forEach(i=>{kt_ln(ctx,[[hx,-10],[hx,4+i*18]],col,0.4);ctx.fillStyle=rgba(col,0.28+0.12*i);rr(ctx,hx-24,6+i*18,48,12,3);ctx.fill();});kt_box(ctx,hx,-22,56,26,col,"HUB",{size:11});});
+    ctx.fillStyle="rgba(8,14,28,0.95)";ctx.beginPath();for(let i=0;i<6;i++){const an=i/6*TAU;ctx.lineTo(Math.cos(an)*17,-22+Math.sin(an)*17);}ctx.closePath();ctx.fill();ctx.strokeStyle=rgba(col,1);ctx.stroke();}
+  else if(k===1){// an anchor for the identity, and one small table per attribute, each with its own history
+    for(let i=0;i<6;i++){const an=-Math.PI/2+i/6*TAU,ex=Math.cos(an)*66,ey=Math.sin(an)*44;kt_ln(ctx,[[0,0],[ex,ey]],col,0.5);ctx.fillStyle="rgba(8,14,28,0.95)";ctx.beginPath();ctx.arc(ex,ey,9,0,TAU);ctx.fill();ctx.strokeStyle=rgba(col,0.9);ctx.stroke();}
+    ctx.fillStyle=rgba(col,0.95);rr(ctx,-22,-16,44,32,6);ctx.fill();T(ctx,"ID",0,6,{w:800,size:16,align:"center",color:"rgba(8,14,28,1)"});}
+  else if(k===2){// a hook for each business concept, and the source data hung from it in bags
+    ctx.strokeStyle=rgba(col,1);ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(-70,-44);ctx.lineTo(70,-44);ctx.stroke();
+    [-44,0,44].forEach((hx,i)=>{const sw=Math.sin((t||0)*1.4+i)*3;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(hx,-44);ctx.lineTo(hx,-26);ctx.arc(hx-7,-26,7,0,Math.PI*0.9);ctx.stroke();
+      ctx.fillStyle=rgba(col,0.3);ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(hx-14+sw,-12);ctx.quadraticCurveTo(hx-22+sw,26,hx-10+sw,40);ctx.lineTo(hx+10+sw,40);ctx.quadraticCurveTo(hx+22+sw,26,hx+14+sw,-12);ctx.closePath();ctx.fill();ctx.stroke();});}
+  else if(k===3){// one bridge table in the middle: every table joins through it, so no number is counted twice
+    [-1,1].forEach(sd=>[-34,0,34].forEach(yy=>{kt_ln(ctx,[[sd*20,yy*0.6],[sd*62,yy]],col,0.55);kt_box(ctx,sd*70,yy,34,22,col);}));ctx.fillStyle=rgba(col,0.95);rr(ctx,-18,-48,36,96,6);ctx.fill();T(ctx,"bridge",0,4,{w:800,size:11,align:"center",color:"rgba(8,14,28,1)"});}
+  else if(k===4){// one row per thing a learner did, in time order
+    kt_ln(ctx,[[-80,20],[80,20]],col,0.7);const L=["enrolled","passed","awarded"];for(let i=0;i<7;i++){const px=-68+i*22.5,on=i%3===0;ctx.fillStyle=rgba(col,on?1:0.5);ctx.beginPath();ctx.arc(px,20,on?7:4.5,0,TAU);ctx.fill();}
+    L.forEach((l,i)=>T(ctx,l,-68+i*67.5,-2,{w:700,size:12,align:"center",color:rgba(col,1)}));T(ctx,"time →",80,46,{f:"mono",w:500,size:12,align:"right",color:rgba(SOFT,1)});}
+  else if(k==="star"){// a fact at the centre, its dimensions around it
+    [[-62,-30],[62,-30],[-62,30],[62,30]].forEach(([dx,dy])=>{kt_ln(ctx,[[0,0],[dx,dy]],col,0.6);kt_box(ctx,dx,dy,44,24,col);});ctx.fillStyle=rgba(col,0.95);rr(ctx,-26,-18,52,36,6);ctx.fill();T(ctx,"fact",0,5,{w:800,size:12,align:"center",color:"rgba(8,14,28,1)"});}
+  ctx.restore();}
+// the four answers as small icons: a definition, a key, one row, a clock
+function kt_four(ctx,j,x,y,r,a){if(a<=0.01)return;const col=KT_FOUR[j][2];withA(ctx,a,()=>{glow(ctx,x,y,r*1.6,col,0.25);ctx.fillStyle="rgba(8,12,24,0.95)";ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=2;ctx.stroke();
+  const u=r/20;ctx.save();ctx.translate(x,y);ctx.scale(u,u);ctx.strokeStyle=rgba(col,1);ctx.fillStyle=rgba(col,1);ctx.lineWidth=2.2;ctx.lineCap="round";
+  if(j===0){T(ctx,"Aa",0,5,{w:800,size:15,align:"center",color:rgba(col,1)});ctx.beginPath();ctx.moveTo(-9,10);ctx.lineTo(9,10);ctx.stroke();}
+  else if(j===1){ctx.beginPath();ctx.arc(-5,0,6,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(1,0);ctx.lineTo(12,0);ctx.moveTo(8,0);ctx.lineTo(8,5);ctx.moveTo(12,0);ctx.lineTo(12,5);ctx.stroke();}
+  else if(j===2){for(let i=0;i<3;i++){ctx.globalAlpha=i===1?1:0.4;ctx.fillRect(-10,-9+i*7,20,4.5);}ctx.globalAlpha=1;}
+  else{ctx.beginPath();ctx.arc(0,0,10,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(0,-6);ctx.lineTo(0,0);ctx.lineTo(5,3);ctx.stroke();}
+  ctx.restore();});}
+// a pattern's card: its name, who proposed it, its glyph, and (four > 0) the four answers inside it
+function kt_patCard(ctx,k,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const ghost=k<0,col=ghost?SOFT:k==="star"?KT_STAR:KT_PAT[k][2];
+  withA(ctx,a,()=>{if(ghost){ctx.save();ctx.setLineDash([8,8]);ctx.strokeStyle=rgba(SOFT,0.7);ctx.lineWidth=2;rr(ctx,x,y,w,h,18);ctx.stroke();ctx.restore();T(ctx,"next",x+w/2,y+44,{w:800,size:22,align:"center",color:rgba(SOFT,0.9)});T(ctx,"?",x+w/2,y+h/2+22,{w:800,size:64,align:"center",color:rgba(SOFT,0.5)});return;}
+    glass(ctx,x,y,w,h,18,col,{glow:12+10*(o.hi||0),ea:0.75,fill:"rgba(7,12,24,0.93)"});
+    T(ctx,k==="star"?"star":KT_PAT[k][0],x+w/2,y+44,{w:800,size:22,align:"center",color:rgba(col,1)});if(k!=="star")T(ctx,KT_PAT[k][1],x+w/2,y+70,{w:500,size:15,align:"center",color:rgba(SOFT,1)});
+    kt_glyph(ctx,k,x+w/2,y+(o.four?152:162),o.gs||1,t);
+    if(o.four)KT_FOUR.forEach((f,j)=>kt_four(ctx,j,x+w/2+(j-1.5)*48,y+h-38,17,o.four[j]||0));});}
+
 /* ===== Keeping it true: scenes =====
-   Nine chapters, as in ../script.md. A dictionary is never finished; then, at the university, three changes arrive in one month,
+   Ten chapters, as in ../script.md. A dictionary is never finished; then, at the university, three changes arrive in one month,
    and the model starts to drift from the data. An AI agent watches and flags the drift, with evidence, and drafts the change;
-   people decide, and tests and contracts check everyone's work. One change is followed end to end, and the sketch's stamp reads v3. */
+   people decide, and tests and contracts check everyone's work. One change is followed end to end, and the sketch's stamp reads v3. Then what remains as the shapes keep changing: meaning, identity, grain and time. */
 
 /* ---------- 1. A dictionary is never finished ---------- */
 scene("dict",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");histBg(ctx,S,t);
@@ -1803,13 +1856,50 @@ scene("e2e",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,S)
     withA(ctx,fin(t,sT+0.8,0.6),()=>{T(ctx,"approved: Mei, Noor and the teams",960,800,{w:700,size:22,align:"center",color:rgba(TRUST,1)});[0,1,2].forEach(i=>kt_gtick(ctx,1300+i*52,450,18,fin(t,sT+0.4+i*0.2,0.3)));});});
   vign(ctx,S);});
 
-/* ---------- 9. Pull back ---------- */
+/* ---------- 9. What remains ---------- */
+scene("remains",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
+  const cS=c("same"),cC=c("change"),cA=c("alike"),cL=c("last"),FW4=["What a","What makes","What one","when each"],LW4=["meaning","identity","grain","time"];
+  // the patterns arrive one by one as they're named, then a dashed card for the next one; later they shrink to a row above the rest
+  const sh=ease(fin(t,cC-0.2,1.2)),rs=lerp(1,0.62,sh),ry=lerp(190,96,sh),ra=1-0.45*fin(t,cC,0.8)+0.45*fin(t,cL,0.8);
+  const four=j=>Math.max(fin(t,kt_w(sc,"four",FW4[j])-0.1,0.5),fin(t,kt_w(sc,"last",LW4[j])-0.2,0.5));
+  withA(ctx,ra,()=>{ctx.save();ctx.translate(960,ry);ctx.scale(rs,rs);
+    for(let k=0;k<6;k++){const x=-815+k*276,ta=k<5?kt_w(sc,"shapes",KT_PAT[k][3])-0.25:kt_w(sc,"shapes","More")-0.2,u=ease(fin(t,ta,0.6));
+      kt_patCard(ctx,k<5?k:-1,x,(1-u)*40,250,300,t,{a:u,hi:pulseAt(t,ta+0.4,0.9),four:k<5?[0,1,2,3].map(four):null});}
+    ctx.restore();});
+  withA(ctx,fin(t,0.3,0.6)*(1-fin(t,cS-0.2,0.6)),()=>T(ctx,"new shapes keep arriving",960,600,{w:700,size:28,align:"center",color:rgba(INK,0.85)}));
+  // the same four answers, inside every one
+  withA(ctx,1-fin(t,cC-0.3,0.6),()=>KT_FOUR.forEach(([n,sub,col],j)=>{const a=fin(t,kt_w(sc,"four",FW4[j])-0.1,0.5),x=960+(j-1.5)*410;if(a<=0.01)return;
+    withA(ctx,a,()=>{glass(ctx,x-185,560,370,120,18,col,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.93)"});kt_four(ctx,j,x-128,620,26,1);T(ctx,n,x-86,612,{w:800,size:28,color:rgba(col,1)});T(ctx,sub,x-86,642,{w:600,size:17,color:rgba(SOFT,1)});});}));
+  withA(ctx,fin(t,kt_w(sc,"same","the same four"),0.6)*(1-fin(t,cC-0.3,0.6)),()=>T(ctx,"the same four answers, in every shape",960,760,{w:700,size:24,align:"center",color:rgba(INK,0.9)}));
+  // what changes is the shape: the agent drafts a vault and a star from the model
+  withA(ctx,fin(t,cC+0.4,0.7)*(1-fin(t,cA-0.4,0.6)),()=>{const eT=kt_w(sc,"change","Engines"),dT=kt_w(sc,"change","draft");
+    withA(ctx,fin(t,eT-0.2,0.5),()=>tag(ctx,960,370,"the shape changes · engines change",SOFT,{align:"center",size:22}));
+    kt_board(ctx,130,440,560,320,t,{s:0.42,label:"the model",stamp:"sketch v3",stampCol:TRUST});
+    kt_agent(ctx,960,600,56,t,{busy:fin(t,dT,0.6)});arrowTo(ctx,700,600,890,600,KT_AI,0.8*fin(t,dT-0.3,0.5),{p:fin(t,dT-0.3,0.6)});
+    [0,"star"].forEach((k,i)=>{const t0=dT+0.5+i*0.5,u=ease(fin(t,t0,0.8));if(u<=0)return;const tx=1170+i*330,x=lerp(930,tx,u),y=lerp(560,440,u);
+      kt_patCard(ctx,k,x,y,lerp(60,290,u),lerp(60,320,u),t,{a:fin(u,0,0.3),gs:u});withA(ctx,fin(t,t0+0.8,0.4),()=>stamp(ctx,tx+250,y+352,"draft",KT_AI,1,0));});
+    withA(ctx,fin(t,kt_w(sc,"change","in minutes")-0.2,0.5),()=>tag(ctx,960,700,"drafted in minutes",KT_AI,{align:"center",size:22}));});
+  // two credentials that look alike; only the model says they aren't the same one
+  withA(ctx,fin(t,cA-0.1,0.6)*(1-fin(t,cL-0.4,0.6)),()=>{const oT=kt_w(sc,"alike","Only the model"),hl=fin(t,oT,0.6);
+    [["C-88","Aisha K."],["C-91","Aisha R."]].forEach(([id,who],i)=>{const x=i?1070:290;T(ctx,"id "+id,x+280,420,{f:"mono",w:500,size:22,align:"center",color:rgba(mix(SOFT,TRUST,hl),1)});
+      credCard(ctx,x,440,560,{era:"digital",issuer:"the university",holder:who,claim:"Microcredential, Data Visualisation",date:"June 2026",h:250,rh:44,hl:{holder:hl}});});
+    withA(ctx,fin(t,cA+0.6,0.6),()=>{ctx.save();ctx.setLineDash([8,8]);ctx.strokeStyle=rgba(KT_AI,0.8);ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(860,565);ctx.lineTo(1060,565);ctx.stroke();ctx.restore();tag(ctx,960,370,"search: looks alike · 97%",KT_AI,{align:"center",size:22});});
+    withA(ctx,hl,()=>{kt_rcross(ctx,960,565,22,1);tag(ctx,960,760,"the model: two credentials, not one",TRUST,{align:"center",size:24});});});
+  // what lasts: meaning, identity, grain, time; every shape is another way to write them down
+  withA(ctx,fin(t,cL-0.2,0.6),()=>T(ctx,"the part that lasts",960,390,{w:800,size:30,align:"center",color:rgba(TRUST,0.95)}));
+  withA(ctx,fin(t,cL,0.6),()=>{KT_FOUR.forEach(([n,sub,col],j)=>{const a=fin(t,kt_w(sc,"last",LW4[j])-0.2,0.5),x=960+(j-1.5)*420;if(a<=0.01)return;
+      withA(ctx,a,()=>{glass(ctx,x-190,430,380,250,22,col,{glow:18,ea:0.85,fill:"rgba(7,12,24,0.94)"});kt_four(ctx,j,x,500,34,1);T(ctx,n,x,590,{w:800,size:34,align:"center",color:rgba(col,1)});T(ctx,sub,x,630,{w:600,size:18,align:"center",color:rgba(SOFT,1)});
+        ctx.save();ctx.strokeStyle=rgba(col,0.35*fin(t,kt_w(sc,"last","Every new")-0.2,0.8));ctx.lineWidth=1.5;ctx.setLineDash([4,6]);for(let k=0;k<5;k++){const tx=960+(-815+k*276+125)*0.62;ctx.beginPath();ctx.moveTo(tx+(j-1.5)*30*0.62,96+(300-38)*0.62);ctx.lineTo(x,430);ctx.stroke();}ctx.restore();});});
+    withA(ctx,fin(t,kt_w(sc,"last","Every new")-0.2,0.6),()=>tag(ctx,960,760,"every shape: another way to write them down",TRUST,{align:"center",size:24}));});
+  vign(ctx,S);});
+
+/* ---------- 10. Pull back ---------- */
 scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");histBg(ctx,S,t,{light:0.12});
   const cC=c("claim"),cJ=c("job"),sA=1-fin(t,cC-0.5,0.7),mA=fin(t,cC-0.3,0.7)*(1-fin(t,cJ-0.5,0.7)),jA=fin(t,cJ-0.3,0.7);
   // back to the start: a word, an idea, a thing, and a mark in clay
   withA(ctx,sA,()=>{const wT=kt_w(sc,"start","a word"),iT=kt_w(sc,"start","an idea"),hT=kt_w(sc,"start","a thing"),mT=kt_w(sc,"start","a mark");
     trio(ctx,640,440,0.85,{t,word:"credential",idea:"a trusted, checkable claim",thing:(cx,x,y,s)=>kt_diploma(cx,x-90,y-96,180,150,t,{title:"Diploma"}),thingLab:"a credential",thingDy:92,
-      a:fin(t,0.2,0.8),wa:0.25+0.75*fin(t,wT-0.2,0.5),ia:0.25+0.75*fin(t,iT-0.2,0.5),ha:0.25+0.75*fin(t,hT-0.2,0.5),e1:0.3+0.7*fin(t,iT,0.8),e2:0.3+0.7*fin(t,hT,0.8),e3:0});
+      a:fin(t,0.2,0.8),wa:0.55+0.45*fin(t,wT-0.2,0.5),ia:0.55+0.45*fin(t,iT-0.2,0.5),ha:0.55+0.45*fin(t,hT-0.2,0.5),e1:fin(t,0.4,1.2),e2:fin(t,0.8,1.2),e3:0});
     withA(ctx,fin(t,mT-0.3,0.6),()=>{yearTag(ctx,1200,250,"c. 3300 BCE · Uruk",CLAY,1);kt_tablet(ctx,1200,300,520,300,clamp((t-mT+0.2)/2,0,1),1,t);});
     withA(ctx,fin(t,0.3,0.6),()=>T(ctx,"What's in a word",640,150,{w:700,size:22,align:"center",color:rgba(KIND,0.9)}));});
   // a credential is a claim that others can check; so is every number in a report

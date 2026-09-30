@@ -33,7 +33,7 @@ python tools/captions.py   # ../captions/en.srt and en.vtt
 python tools/render.py --workers 4   # dist/a-model-is-not-a-transformation.mp4
 ```
 
-The video adds a finishing pass that stills and the site's player don't show (`../../shared/src/post.js`): motion blur, a soft glow and grain. It takes about half a second a frame, about 20 minutes with four workers. To see one finished frame, open `dist/render.html` in a browser and call `renderAt(seconds)`.
+The video adds a finishing pass that stills and the site's player don't show (`../../shared/src/post.js`): motion blur and a soft glow. It takes about half a second a frame, about 20 minutes with four workers. To see one finished frame, open `dist/render.html` in a browser and call `renderAt(seconds)`.
 
 `tts.py` reuses a line's voice file if it exists: after changing a line's words, delete its file (`build/vo/<chapter>__<id>.wav`) and run it again.
 

@@ -37,7 +37,7 @@ Like the other series, each film is generated from code. The series keeps what's
 | File | What it holds |
 |---|---|
 | `shared/src/weeds.js` | The series' components: its colours, title and end cards, the blueprint (`bpPaper`, `bpModel`), code files (`codeFile`), the lineage graph of a dbt project (`lineageGraph`), the loop of ten steps (`stepLoop`) and small cards, and its motion: a spring (`spring`), entrances that settle (`arrive`), a camera that drifts in every shot (`drift`) and dust for depth (`motes`) |
-| `shared/src/post.js` | The video's finishing pass, used only by `tools/render.py`: motion blur (eight moments averaged into each frame), a soft glow and a fine grain. The site's player draws live, without it |
+| `shared/src/post.js` | The video's finishing pass, used only by `tools/render.py`: motion blur (eight moments averaged into each frame) and a soft glow. The site's player draws live, without it |
 | `shared/src/people.js` | The series' new character, Jun Park, added to the cast of *When things go wrong* |
 | `shared/src/page.html` | The standalone player page |
 | `shared/tools/lang.py`, `build.py` | Where everything lives, and what a film is made of: *The Inner Life of Data*'s engine, *A Sharper Sketch*'s diagrams, the people, *Silent change*'s components, *From words to data*'s `words.js` and *Keeping it true*'s `true.js`, then this series' files |

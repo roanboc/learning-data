@@ -1,0 +1,67 @@
+name: credentials
+version: "1.0.0"
+profile: credentials
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+analysis-paths: ["analyses"]
+macro-paths: ["macros"]
+docs-paths: ["docs"]
+clean-targets: ["target", "logs"]
+
+# Stated once, used everywhere. Override one for a run with --vars.
+vars:
+  census_date: "2026-03-31"          # Planning's census date: the "as at" of the Planning mart
+  near_award_credit_points: 15       # "within 15 credit points" of an award
+  microcredentials_per_award: 4      # an award accepts up to four microcredentials towards its credit
+  passing_grades: ["P", "C", "D", "HD"]
+
+models:
+  credentials:
+    # Databricks only: push descriptions to Unity Catalog. DuckDB leaves them in the docs site.
+    +persist_docs:
+      relation: "{{ target.type == 'databricks' }}"
+      columns: "{{ target.type == 'databricks' }}"
+
+    staging:
+      +materialized: view
+      +schema: staging
+      +group: credential_model
+      +access: private
+
+    intermediate:
+      +materialized: view
+      +schema: intermediate
+      +group: credential_model
+      +access: private
+
+    core:
+      +materialized: table
+      +schema: core
+      +group: credential_model
+      +access: public
+      +contract:
+        enforced: true
+
+    marts:
+      +materialized: table
+      +schema: marts
+      +access: protected
+      +contract:
+        enforced: true
+      planning:
+        +group: planning
+      wallet:
+        +group: wallet
+
+    semantic:
+      +materialized: table
+      +schema: marts
+      +group: planning
+      +access: protected
+
+seeds:
+  credentials:
+    +schema: reference
+    +group: credential_model

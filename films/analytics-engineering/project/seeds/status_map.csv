@@ -1,0 +1,9 @@
+key_set,source_code,source_label,canonical_status
+SIS,ENR,Enrolled,studying
+SIS,LOA,Leave of absence,inactive
+SIS,WD,Withdrawn,withdrawn
+SIS,CMP,Completed,completed
+LMS,active,Active account,studying
+LMS,inactive,Inactive account,inactive
+SC,1,Active customer,studying
+SC,0,Inactive customer,inactive

@@ -1,0 +1,66 @@
+models:
+
+  - name: stg_learning_platform__users
+    description: One row per version of a learning platform account, as the platform recorded it.
+    config:
+      meta: {owner: Learning team, domain: learning}
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [user_bk, recorded_from]
+    columns:
+      - name: user_key
+        description: The hash of user_bk.
+      - name: user_bk
+        description: '{{ doc("qualified_key") }}'
+        data_tests: [not_null]
+      - name: student_bk
+        description: >
+          The student ID the account holds, qualified: SIS|S-20417. Staff type it in, so it's
+          often missing and sometimes wrong (see docs/gaps.md).
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_student_system__learners')
+                field: student_bk
+        config:
+          meta: {personal_data: direct}
+      - name: email
+        description: The account's email, trimmed and lower case.
+        config:
+          meta: {personal_data: direct}
+      - name: display_name
+        config:
+          meta: {personal_data: direct}
+      - name: account_status
+        description: The platform's account status. Mapped to the canonical set in seeds/status_map.csv.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [active, inactive]
+
+  - name: stg_learning_platform__badges
+    description: One row per version of a badge the platform issued, as the platform recorded it.
+    config:
+      meta: {owner: Learning team, domain: learning}
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [badge_bk, recorded_from]
+    columns:
+      - name: badge_key
+        description: The hash of badge_bk.
+      - name: badge_bk
+        description: The badge's key, qualified by its key set, like LMS|B-5010.
+        data_tests: [not_null]
+      - name: user_bk
+        description: The account the badge was issued to.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_learning_platform__users')
+                field: user_bk
+      - name: credit_points
+        description: Credit points the badge carries. Zero for a badge that's not a microcredential.
+        data_tests: [not_null]

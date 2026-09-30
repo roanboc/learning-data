@@ -1,0 +1,244 @@
+models:
+
+  - name: int_learner_keys
+    description: >
+      One row per key of any learner, in any system, qualified by its key set, as its latest
+      version holds it. Keys with no value are left out: they identify no one.
+    columns:
+      - name: qualified_key
+        description: '{{ doc("qualified_key") }}'
+        data_tests: [unique, not_null]
+        config:
+          meta: {personal_data: direct}
+      - name: key_set
+        description: '{{ doc("key_set") }}'
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('key_sets')
+                field: key_set
+      - name: system_key
+        description: The key as the system holds it, trimmed (emails also lower case).
+        config:
+          meta: {personal_data: direct}
+      - name: email
+        description: The email the key's latest version holds, trimmed and lower case.
+        config:
+          meta: {personal_data: direct}
+      - name: student_bk_held
+        description: For a learning platform account, the student ID it holds, qualified. It can be wrong.
+      - name: first_recorded_at
+        description: When a system first recorded this key.
+
+  - name: int_learner_keys_matched
+    description: >
+      One row per key of any learner, with the learner it belongs to, the rule that matched it,
+      and who decided when a person did. {{ doc("learner") }}
+    data_tests:
+      # the stitching in int_learner_timeline assumes one key per system per learner
+      - unique_combination:
+          arguments:
+            columns: [learner_bk, key_set]
+    columns:
+      - name: qualified_key
+        description: '{{ doc("qualified_key") }}'
+        data_tests: [unique, not_null]
+      - name: learner_key
+        description: '{{ doc("learner_key") }}'
+        data_tests: [not_null]
+      - name: learner_bk
+        description: '{{ doc("learner_bk") }}'
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('int_learner_keys')
+                field: qualified_key
+      - name: match_rule
+        description: The rule that matched the key to its learner, or 'recorded decision'.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - recorded decision
+                  - student ID
+                  - student ID held by the learning platform
+                  - same email as one student
+                  - same email as one platform user
+                  - own key
+      - name: decision_id
+        description: The decision in seeds/learner_identity_decisions.csv, when a person decided.
+      - name: decided_by
+        description: '{{ doc("decided_by") }}'
+      - name: decided_on
+        description: '{{ doc("decided_on") }}'
+
+  - name: int_learners
+    description: One row per learner, however many keys they have.
+    columns:
+      - name: learner_key
+        description: '{{ doc("learner_key") }}'
+        data_tests: [unique, not_null]
+      - name: learner_bk
+        description: '{{ doc("learner_bk") }}'
+        data_tests: [unique, not_null]
+      - name: key_set
+        description: '{{ doc("learner_key_set") }}'
+        data_tests: [not_null]
+      - name: keys_held
+        description: '{{ doc("keys_held") }}'
+      - name: has_student_id
+        description: '{{ doc("has_student_id") }}'
+      - name: first_recorded_at
+        description: When any system first recorded the learner.
+
+  - name: int_learner_timeline
+    description: >
+      One row per learner per version, stitched from the three systems' versions: a new version
+      whenever the name, email, status or enrolled award changes.
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [learner_key, valid_from]
+      - versions_do_not_overlap:
+          arguments:
+            key_columns: [learner_key]
+    columns:
+      - name: learner_key
+        description: '{{ doc("learner_key") }}'
+        data_tests: [not_null]
+      - name: valid_from
+        description: '{{ doc("valid_from") }}'
+      - name: valid_to
+        description: '{{ doc("valid_to") }}'
+      - name: recorded_at
+        description: '{{ doc("recorded_at") }}'
+      - name: status
+        description: '{{ doc("learner_status") }}'
+
+  - name: int_credentials_unioned
+    description: >
+      One row per credential issued to a learner, from the three systems in one shape, with its
+      holder and status. Certificates of attendance, and credentials whose holder has no key,
+      are left out.
+    columns:
+      - name: credential_key
+        description: '{{ doc("credential_key") }}'
+        data_tests: [unique, not_null]
+      - name: credential_bk
+        description: '{{ doc("credential_bk") }}'
+      - name: learner_key
+        description: '{{ doc("learner_key") }}'
+        data_tests: [not_null]
+      - name: credential_kind
+        description: '{{ doc("credential_kind") }}'
+      - name: status
+        description: '{{ doc("credential_status") }}'
+      - name: revoked_on
+        description: '{{ doc("revoked_on") }}'
+      - name: loaded_at
+        description: The latest time ingestion wrote any of the credential's source rows.
+
+  - name: int_credit_items
+    description: >
+      One row per learner per award per item that could give credit towards it, per period: a
+      version of a unit result, or a microcredential the award recognises, with the dates it
+      counts between.
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [learner_key, award_key, item_bk, counts_from]
+    columns:
+      - name: item_kind
+        description: unit, or microcredential.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [unit, microcredential]
+      - name: grade
+        description: The unit's grade in this version. Null for a microcredential.
+      - name: counts_from
+        description: The first day the item can count, inclusive.
+      - name: counts_to
+        description: The first day it no longer counts, exclusive. Null while it still does.
+
+  - name: int_credit_towards_award
+    description: >
+      One row per learner per award per version: the credit a learner held towards an award,
+      under the rule. {{ doc("credit_towards_award") }}
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [learner_key, award_key, valid_from]
+      - versions_do_not_overlap:
+          arguments:
+            key_columns: [learner_key, award_key]
+
+unit_tests:
+
+  - name: counts_passed_units_and_first_four_microcredentials
+    description: >
+      A failed unit gives no credit, and an award accepts four microcredentials: the fifth,
+      issued last, doesn't count. Every item has counted since 1 March, so there's one version.
+    model: int_credit_towards_award
+    given:
+      - input: ref('int_credit_items')
+        rows:
+          - {learner_key: L1, award_key: A1, item_kind: unit, item_bk: R1, grade: HD, credit_points: 15, issued_on: 2025-12-05, counts_from: 2026-03-01, counts_to: null}
+          - {learner_key: L1, award_key: A1, item_kind: unit, item_bk: R2, grade: P, credit_points: 15, issued_on: 2025-12-05, counts_from: 2026-03-01, counts_to: null}
+          - {learner_key: L1, award_key: A1, item_kind: unit, item_bk: R3, grade: F, credit_points: 15, issued_on: 2026-02-27, counts_from: 2026-03-01, counts_to: null}
+          - {learner_key: L1, award_key: A1, item_kind: microcredential, item_bk: M1, credit_points: 5, issued_on: 2025-08-20, counts_from: 2026-03-01, counts_to: null}
+          - {learner_key: L1, award_key: A1, item_kind: microcredential, item_bk: M2, credit_points: 5, issued_on: 2025-09-18, counts_from: 2026-03-01, counts_to: null}
+          - {learner_key: L1, award_key: A1, item_kind: microcredential, item_bk: M3, credit_points: 5, issued_on: 2025-10-22, counts_from: 2026-03-01, counts_to: null}
+          - {learner_key: L1, award_key: A1, item_kind: microcredential, item_bk: M4, credit_points: 5, issued_on: 2025-11-19, counts_from: 2026-03-01, counts_to: null}
+          - {learner_key: L1, award_key: A1, item_kind: microcredential, item_bk: M5, credit_points: 5, issued_on: 2026-02-18, counts_from: 2026-03-01, counts_to: null}
+    expect:
+      rows:
+        - {learner_key: L1, award_key: A1, valid_from: 2026-03-01, valid_to: null, credit_points_from_units: 30, credit_points_from_microcredentials: 20, credit_points_earned: 50, microcredentials_counted: 4}
+
+  - name: revoked_microcredential_stops_counting_the_day_it_is_revoked
+    description: >
+      A unit counts from 10 January; a microcredential from 2 February until it's revoked on
+      12 August. Credit changes twice, so there are three versions.
+    model: int_credit_towards_award
+    given:
+      - input: ref('int_credit_items')
+        rows:
+          - {learner_key: L1, award_key: A1, item_kind: unit, item_bk: R1, grade: C, credit_points: 15, issued_on: 2026-01-10, counts_from: 2026-01-10, counts_to: null}
+          - {learner_key: L1, award_key: A1, item_kind: microcredential, item_bk: M1, credit_points: 5, issued_on: 2026-02-02, counts_from: 2026-02-02, counts_to: 2026-08-12}
+    expect:
+      rows:
+        - {learner_key: L1, award_key: A1, valid_from: 2026-01-10, valid_to: 2026-02-02, credit_points_earned: 15}
+        - {learner_key: L1, award_key: A1, valid_from: 2026-02-02, valid_to: 2026-08-12, credit_points_earned: 20}
+        - {learner_key: L1, award_key: A1, valid_from: 2026-08-12, valid_to: null, credit_points_earned: 15}
+
+  - name: decisions_beat_rules_and_keep_look_alikes_apart
+    description: >
+      An account holding student ID S-1 is that student. An account holding S-1 by mistake, with
+      a decision that it's someone else, becomes a learner of its own. An email two students
+      share matches neither, until a decision says whose it is.
+    model: int_learner_keys_matched
+    given:
+      - input: ref('int_learner_keys')
+        rows:
+          - {qualified_key: 'SIS|S-1', key_set: SIS, system_key: S-1, email: a@mail.com}
+          - {qualified_key: 'SIS|S-2', key_set: SIS, system_key: S-2, email: shared@mail.com}
+          - {qualified_key: 'SIS|S-3', key_set: SIS, system_key: S-3, email: shared@mail.com}
+          - {qualified_key: 'LMS|u-1', key_set: LMS, system_key: u-1, email: a@mail.com, student_bk_held: 'SIS|S-1'}
+          - {qualified_key: 'LMS|u-9', key_set: LMS, system_key: u-9, email: b@mail.com, student_bk_held: 'SIS|S-1'}
+          - {qualified_key: 'SC|a@mail.com', key_set: SC, system_key: a@mail.com, email: a@mail.com}
+          - {qualified_key: 'SC|shared@mail.com', key_set: SC, system_key: shared@mail.com, email: shared@mail.com}
+      - input: ref('learner_identity_decisions')
+        rows:
+          - {decision_id: D-1, qualified_key: 'SC|shared@mail.com', same_as_or_not: same, other_qualified_key: 'SIS|S-3', decided_by: Mei Tanaka, decided_on: 2026-10-06}
+          - {decision_id: D-2, qualified_key: 'LMS|u-9', same_as_or_not: different, other_qualified_key: 'SIS|S-1', decided_by: Mei Tanaka, decided_on: 2026-10-07}
+    expect:
+      rows:
+        - {qualified_key: 'SIS|S-1', learner_bk: 'SIS|S-1', match_rule: student ID}
+        - {qualified_key: 'SIS|S-2', learner_bk: 'SIS|S-2', match_rule: student ID}
+        - {qualified_key: 'SIS|S-3', learner_bk: 'SIS|S-3', match_rule: student ID}
+        - {qualified_key: 'LMS|u-1', learner_bk: 'SIS|S-1', match_rule: student ID held by the learning platform}
+        - {qualified_key: 'LMS|u-9', learner_bk: 'LMS|u-9', match_rule: own key}
+        - {qualified_key: 'SC|a@mail.com', learner_bk: 'SIS|S-1', match_rule: same email as one student}
+        - {qualified_key: 'SC|shared@mail.com', learner_bk: 'SIS|S-3', match_rule: recorded decision}

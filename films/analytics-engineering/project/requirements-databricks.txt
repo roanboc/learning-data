@@ -1,0 +1,2 @@
+# For the databricks target with dbt Core. dbt-databricks 1.12.5 brings dbt-core 1.12.3.
+dbt-databricks==1.12.5

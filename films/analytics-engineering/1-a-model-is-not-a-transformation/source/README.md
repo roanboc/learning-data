@@ -37,6 +37,8 @@ The video adds a finishing pass that stills and the site's player don't show (`.
 
 `tts.py` reuses a line's voice file if it exists: after changing a line's words, delete its file (`build/vo/<chapter>__<id>.wav`) and run it again.
 
-## Not yet
+## Publish
 
-The film isn't on the site or in the release workflow yet. Publishing it needs a page for the series and the film, the release workflow's entry, Spanish captions, and Pause and think; `tools/publish.py` already copies the player and poster to `site/assets/a-model-is-not-a-transformation/`.
+`python tools/publish.py` copies `dist/film.js` and `dist/soundtrack.mp3` to `site/assets/a-model-is-not-a-transformation/`, with the Spanish captions (`src/i18n/es/captions.js`, as `captions.es.js`), and draws the poster, `site/assets/a-model-is-not-a-transformation-poster.jpg`, at the moment `film.json` names. Then run `python site-tools/build_series.py`, which makes the series' pages from `../../series.json` and `../site.json`, then `python site-tools/check_site.py` and `python site-tools/smoke.py`. Never edit the site's copies by hand: the release workflow checks that the site's `film.js` is byte for byte the one this source builds, and renders the video from this source.
+
+The labs and scenarios are `site/assets/a-model-is-not-a-transformation/learn.en.js` and `learn.es.js`, drawn by *From words to data*'s engine (`site/assets/from-words-to-data/learn.js`); their pictures are this film's own, the `mt_` entries added to `LV` at the end of `src/plan.js`. "Pause and think" is `think.en.js` and `think.es.js`: it stops after `recap`, `name`, `lives` and `steps`. A change to `src/plan.js` changes the labs' pictures too, so publish again after one.

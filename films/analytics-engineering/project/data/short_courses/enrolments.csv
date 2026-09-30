@@ -1,25 +1,25 @@
 enrolment_id,customer_email,course_code,course_name,enrolment_status,certificate_no,certificate_type,credit_points,completed_on,_valid_from,_valid_to,_is_current,_loaded_at
-E-7001,grace.okafor@mail.com,SC-AGILE,Agile Project Management,enrolled,,,,,2025-09-16 02:00:00,2025-10-21 02:00:00,false,2025-10-21 02:00:00
-E-7001,grace.okafor@mail.com,SC-AGILE,Agile Project Management,completed,C-80,completion,5,2025-10-20,2025-10-21 02:00:00,,true,2025-10-21 02:00:00
-E-7002,grace.okafor@mail.com,SC-FA,First Aid,enrolled,,,,,2025-11-02 02:00:00,2025-11-06 02:00:00,false,2025-11-06 02:00:00
-E-7002,grace.okafor@mail.com,SC-FA,First Aid,completed,C-81,attendance,0,2025-11-05,2025-11-06 02:00:00,,true,2025-11-06 02:00:00
-E-7003,peter.novak@mail.com,SC-EXCEL,Excel for Everyone,enrolled,,,,,2025-10-21 02:00:00,2025-11-29 02:00:00,false,2025-11-29 02:00:00
-E-7003,peter.novak@mail.com,SC-EXCEL,Excel for Everyone,completed,C-82,completion,5,2025-11-28,2025-11-29 02:00:00,,true,2025-11-29 02:00:00
-E-7004,tom.becker@mail.com,SC-AGILE,Agile Project Management,enrolled,,,,,2026-01-13 02:00:00,2026-02-06 02:00:00,false,2026-02-06 02:00:00
-E-7004,tom.becker@mail.com,SC-AGILE,Agile Project Management,completed,C-84,completion,5,2026-02-05,2026-02-06 02:00:00,,true,2026-02-06 02:00:00
-E-7005,Aisha.K@Mail.com,SC-DVE,Data Visualisation Essentials,enrolled,,,,,2026-01-06 02:00:00,2026-02-13 02:00:00,false,2026-02-13 02:00:00
-E-7005,Aisha.K@Mail.com,SC-DVE,Data Visualisation Essentials,completed,C-88,completion,5,2026-02-12,2026-02-13 02:00:00,,true,2026-02-13 02:00:00
-E-7006,aisha.r@mail.com,SC-DVE,Data Visualisation Essentials,enrolled,,,,,2026-01-07 02:00:00,2026-02-13 02:00:00,false,2026-02-13 02:00:00
-E-7006,aisha.r@mail.com,SC-DVE,Data Visualisation Essentials,completed,C-91,completion,5,2026-02-12,2026-02-13 02:00:00,,true,2026-02-13 02:00:00
-E-7007,nguyen.family@mail.com,SC-HLIT,Health Literacy,enrolled,,,,,2026-01-31 02:00:00,2026-02-21 02:00:00,false,2026-02-21 02:00:00
-E-7007,nguyen.family@mail.com,SC-HLIT,Health Literacy,completed,C-86,completion,5,2026-02-20,2026-02-21 02:00:00,,true,2026-02-21 02:00:00
-E-7008,DanielKim.Work@mail.com,SC-CLOUD,Cloud Security Basics,enrolled,,,,,2026-02-21 02:00:00,2026-03-11 02:00:00,false,2026-03-11 02:00:00
-E-7008,DanielKim.Work@mail.com,SC-CLOUD,Cloud Security Basics,completed,C-90,completion,5,2026-03-10,2026-03-11 02:00:00,,true,2026-03-11 02:00:00
-E-7009,omar.haddad@mail.com,SC-DVE,Data Visualisation Essentials,enrolled,,,,,2026-01-16 02:00:00,2026-01-30 02:00:00,false,2026-01-30 02:00:00
-E-7009,omar.haddad@mail.com,SC-DVE,Data Visualisation Essentials,completed,C-85,completion,5,2026-01-29,2026-01-30 02:00:00,,true,2026-01-30 02:00:00
+E-7001,grace.okafor@mail.example,SC-AGILE,Agile Project Management,enrolled,,,,,2025-09-16 02:00:00,2025-10-21 02:00:00,false,2025-10-21 02:00:00
+E-7001,grace.okafor@mail.example,SC-AGILE,Agile Project Management,completed,C-80,completion,5,2025-10-20,2025-10-21 02:00:00,,true,2025-10-21 02:00:00
+E-7002,grace.okafor@mail.example,SC-FA,First Aid,enrolled,,,,,2025-11-02 02:00:00,2025-11-06 02:00:00,false,2025-11-06 02:00:00
+E-7002,grace.okafor@mail.example,SC-FA,First Aid,completed,C-81,attendance,0,2025-11-05,2025-11-06 02:00:00,,true,2025-11-06 02:00:00
+E-7003,peter.novak@mail.example,SC-EXCEL,Excel for Everyone,enrolled,,,,,2025-10-21 02:00:00,2025-11-29 02:00:00,false,2025-11-29 02:00:00
+E-7003,peter.novak@mail.example,SC-EXCEL,Excel for Everyone,completed,C-82,completion,5,2025-11-28,2025-11-29 02:00:00,,true,2025-11-29 02:00:00
+E-7004,tom.becker@mail.example,SC-AGILE,Agile Project Management,enrolled,,,,,2026-01-13 02:00:00,2026-02-06 02:00:00,false,2026-02-06 02:00:00
+E-7004,tom.becker@mail.example,SC-AGILE,Agile Project Management,completed,C-84,completion,5,2026-02-05,2026-02-06 02:00:00,,true,2026-02-06 02:00:00
+E-7005,Aisha.K@Mail.example,SC-DVE,Data Visualisation Essentials,enrolled,,,,,2026-01-06 02:00:00,2026-02-13 02:00:00,false,2026-02-13 02:00:00
+E-7005,Aisha.K@Mail.example,SC-DVE,Data Visualisation Essentials,completed,C-88,completion,5,2026-02-12,2026-02-13 02:00:00,,true,2026-02-13 02:00:00
+E-7006,aisha.r@mail.example,SC-DVE,Data Visualisation Essentials,enrolled,,,,,2026-01-07 02:00:00,2026-02-13 02:00:00,false,2026-02-13 02:00:00
+E-7006,aisha.r@mail.example,SC-DVE,Data Visualisation Essentials,completed,C-91,completion,5,2026-02-12,2026-02-13 02:00:00,,true,2026-02-13 02:00:00
+E-7007,nguyen.family@mail.example,SC-HLIT,Health Literacy,enrolled,,,,,2026-01-31 02:00:00,2026-02-21 02:00:00,false,2026-02-21 02:00:00
+E-7007,nguyen.family@mail.example,SC-HLIT,Health Literacy,completed,C-86,completion,5,2026-02-20,2026-02-21 02:00:00,,true,2026-02-21 02:00:00
+E-7008,DanielKim.Work@mail.example,SC-CLOUD,Cloud Security Basics,enrolled,,,,,2026-02-21 02:00:00,2026-03-11 02:00:00,false,2026-03-11 02:00:00
+E-7008,DanielKim.Work@mail.example,SC-CLOUD,Cloud Security Basics,completed,C-90,completion,5,2026-03-10,2026-03-11 02:00:00,,true,2026-03-11 02:00:00
+E-7009,omar.haddad@mail.example,SC-DVE,Data Visualisation Essentials,enrolled,,,,,2026-01-16 02:00:00,2026-01-30 02:00:00,false,2026-01-30 02:00:00
+E-7009,omar.haddad@mail.example,SC-DVE,Data Visualisation Essentials,completed,C-85,completion,5,2026-01-29,2026-01-30 02:00:00,,true,2026-01-30 02:00:00
 E-7010,  ,SC-EXCEL,Excel for Everyone,enrolled,,,,,2026-02-17 02:00:00,2026-03-03 02:00:00,false,2026-03-03 02:00:00
 E-7010,  ,SC-EXCEL,Excel for Everyone,completed,C-95,completion,5,2026-03-02,2026-03-03 02:00:00,,true,2026-03-03 02:00:00
-E-7011,peter.novak@mail.com,SC-AGILE,Agile Project Management,enrolled,,,,,2026-03-21 02:00:00,2026-04-11 02:00:00,false,2026-04-11 02:00:00
-E-7011,peter.novak@mail.com,SC-AGILE,Agile Project Management,cancelled,,,,,2026-04-11 02:00:00,,true,2026-04-11 02:00:00
-E-7012,grace.okafor@mail.com,SC-DVE,Data Visualisation Essentials,enrolled,,,,,2026-05-26 02:00:00,2026-06-19 02:00:00,false,2026-06-19 02:00:00
-E-7012,grace.okafor@mail.com,SC-DVE,Data Visualisation Essentials,completed,C-97,completion,5,2026-06-18,2026-06-19 02:00:00,,true,2026-06-19 02:00:00
+E-7011,peter.novak@mail.example,SC-AGILE,Agile Project Management,enrolled,,,,,2026-03-21 02:00:00,2026-04-11 02:00:00,false,2026-04-11 02:00:00
+E-7011,peter.novak@mail.example,SC-AGILE,Agile Project Management,cancelled,,,,,2026-04-11 02:00:00,,true,2026-04-11 02:00:00
+E-7012,grace.okafor@mail.example,SC-DVE,Data Visualisation Essentials,enrolled,,,,,2026-05-26 02:00:00,2026-06-19 02:00:00,false,2026-06-19 02:00:00
+E-7012,grace.okafor@mail.example,SC-DVE,Data Visualisation Essentials,completed,C-97,completion,5,2026-06-18,2026-06-19 02:00:00,,true,2026-06-19 02:00:00

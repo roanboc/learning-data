@@ -1,5 +1,5 @@
 decision_id,qualified_key,decision,other_qualified_key,decided_by,decided_on,reason
-D-001,SC|nguyen.family@mail.com,same,SIS|S-20436,"Mei Tanaka, registrar's office",2026-10-06,Two learners share this email. Linh Nguyen confirmed she took Health Literacy; Minh Nguyen took no short courses.
-D-002,SC|danielkim.work@mail.com,same,SIS|S-20427,"Mei Tanaka, registrar's office",2026-10-06,Daniel Kim enrolled with his work email and gave his student ID on the enrolment form.
+D-001,SC|nguyen.family@mail.example,same,SIS|S-20436,"Mei Tanaka, registrar's office",2026-10-06,Two learners share this email. Linh Nguyen confirmed she took Health Literacy; Minh Nguyen took no short courses.
+D-002,SC|danielkim.work@mail.example,same,SIS|S-20427,"Mei Tanaka, registrar's office",2026-10-06,Daniel Kim enrolled with his work email and gave his student ID on the enrolment form.
 D-003,LMS|u-88231,different,SIS|S-20417,"Mei Tanaka, registrar's office",2026-10-07,"Aisha Rahman's account carries Aisha Karimi's student ID, typed by mistake. Two people; the learning team will correct the field."
-D-004,SC|aisha.r@mail.com,different,SIS|S-20417,"Mei Tanaka, registrar's office",2026-10-07,Flagged as look-alikes: the same course on the same day (certificates C-88 and C-91). Two people.
+D-004,SC|aisha.r@mail.example,different,SIS|S-20417,"Mei Tanaka, registrar's office",2026-10-07,Flagged as look-alikes: the same course on the same day (certificates C-88 and C-91). Two people.

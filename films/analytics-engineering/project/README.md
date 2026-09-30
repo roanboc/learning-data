@@ -183,7 +183,7 @@ project/
 
 46 learners, fictional, in four faculties, built to hold the cases the films teach. The
 learner the films follow, Aisha Karimi, arrives three times: `S-20417` in the student system,
-`u-88213` on the learning platform, and `Aisha.K@Mail.com`, with a space before and after, on
+`u-88213` on the learning platform, and `Aisha.K@Mail.example`, with a space before and after, on
 the short-course platform. The
 others include Aisha Rahman, who looks like her; Jordan Lee, whose microcredential was revoked
 without a flag; Priya Nair, whose withdrawal was recorded a week late; and Linh and Minh Nguyen,

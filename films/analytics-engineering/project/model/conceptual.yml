@@ -38,7 +38,7 @@ entities:
       rule: >
         The student ID, qualified by its key set: SIS|S-20417. A learner the student system
         doesn't know keeps the key of the first system that recorded them, the learning platform
-        first on a tie (LMS|u-88260, SC|grace.okafor@mail.com), until they're matched to a
+        first on a tie (LMS|u-88260, SC|grace.okafor@mail.example), until they're matched to a
         student ID.
     identity:
       - A student ID is a learner.

@@ -227,6 +227,8 @@ sentences with under 0.5 s after them: 0; stops of 2.5 s or more inside chapters
 | 29 September 2026 | Alternatives to dbt have generic labels. |
 | 29 September 2026 | The film shows what the series covers: the ten steps, then the eight films that follow. |
 | 30 September 2026 | The series title: *In the weeds of data crafting*, a technical series for analytics engineers. The title card and the narration say who it's for. |
+| 30 September 2026 | After the first cut's review: the sound is quieter and in step with the picture. Nothing loops (no pulse, walking bass, repeated figures or random notes); the music is sustained chords, and every effect is something appearing on screen, at that moment. No high tones: knocks, muffled keys, paper and low felt notes instead of chimes, pings, shimmers and hi-hats. |
+| 30 September 2026 | Motion with weight: things arrive with a spring, every shot drifts, and the model, the code file, the lineage graph and the loop carry across the cuts; the video adds motion blur, a soft glow and grain. The callouts on the 1870s plan, the blueprint Noor hands to Jun, the tags that sat on borders and the title and end cards were made readable, after a review of a still every 2 seconds. |
 
 ## Open
 

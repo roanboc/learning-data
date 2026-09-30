@@ -38,7 +38,7 @@ The key of a learner and an award together: the sha-256 of `learner_bk` and `awa
 {% enddocs %}
 
 {% docs qualified_key %}
-A system key qualified by its key set: `SIS|S-20417`, `LMS|u-88213`, `SC|aisha.k@mail.com`. Two
+A system key qualified by its key set: `SIS|S-20417`, `LMS|u-88213`, `SC|aisha.k@mail.example`. Two
 keys that look alike in different systems stay apart.
 {% enddocs %}
 

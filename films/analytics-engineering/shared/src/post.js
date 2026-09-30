@@ -2,7 +2,8 @@
    Loaded after the engine. Only the rendered video uses it (tools/render.py calls renderAt); the site's player draws live, as before.
    Motion blur: each video frame is the average of MB moments across a third of a frame (a 126-degree shutter), so movement reads as filmed; eight moments keep fast things smooth rather than doubled.
    Then a soft glow on the bright parts. Stills (tools/stills.py) don't show it.
-   No film grain: noise doesn't compress, and a fine grain made the video four and a half times larger (123 MB against 27 MB). */
+   No film grain: noise doesn't compress, and a fine grain made the video more than twice as large (123 MB against 53 MB without it).
+   The drift and the blur themselves double the size of a still-framed cut (53 MB against 27 MB): still small. */
 if(window.__RENDER__){(function(){const MB=8,SHUT=0.35/30,out=document.querySelector("canvas"),ox=out.getContext("2d"),
     M=mkCanvas(W,H),mx=M.getContext("2d"),A=mkCanvas(W,H),ax=A.getContext("2d"),B=mkCanvas(W/4,H/4),bx=B.getContext("2d");
   window.renderAt=function(t,q){

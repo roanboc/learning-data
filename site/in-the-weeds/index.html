@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>In the weeds of data crafting · Learning Data</title>
+<meta name="description" content="A technical series for analytics engineers on data modelling with dbt: why a dbt model is a transformation and not the data model, where the model lives, keys and hashing, grain and time, contracts and tests, layers, domains, and working with an AI agent responsibly.">
+<meta property="og:title" content="In the weeds of data crafting · Learning Data"><meta property="og:description" content="A technical series for analytics engineers: how an agreed data model becomes tables, with dbt, on Databricks. It follows Jun, the university's analytics engineer, from a question to versioned, tested and documented models, with an AI agent that helps at every step and a person who approves each one."><meta property="og:image" content="https://roanboc.github.io/learning-data/assets/a-model-is-not-a-transformation-poster.jpg">
+<link rel="alternate" hreflang="en" href="https://roanboc.github.io/learning-data/in-the-weeds/"><link rel="alternate" hreflang="es" href="https://roanboc.github.io/learning-data/es/in-the-weeds/">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../"><img src="../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Site"><a href="../">Start here</a><a href="../topics/" aria-current="true">Topics</a><a href="../journey/">Making of</a><span class="lang" role="group" aria-label="Language"><a href="./" aria-current="true" lang="en">EN</a><a href="../es/in-the-weeds/" lang="es" hreflang="es">ES</a></span></nav></div></header>
+<main>
+<section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../assets/a-model-is-not-a-transformation-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow crumbs"><a href="../topics/">Topics</a> › In the weeds of data crafting</p>
+<h1>In the weeds of data crafting</h1>
+<p class="lead">A technical series for analytics engineers: how an agreed data model becomes tables, with dbt, on Databricks. It follows Jun, the university's analytics engineer, from a question to versioned, tested and documented models, with an AI agent that helps at every step and a person who approves each one.</p>
+</section>
+
+<section class="module" id="films" aria-labelledby="films-h">
+<div class="mhead"><div><h2 id="films-h">The films</h2><p>Watch them in order. It's technical: it shows real code, YAML and Markdown, and names dbt's features. It makes most sense after From words to data.</p></div></div>
+<div class="topic-grid" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
+<article class="topic-card">
+<img src="../assets/a-model-is-not-a-transformation-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 1 of 9 · Models and transformations</p>
+<h3><a href="a-model-is-not-a-transformation/">A model is not a transformation</a></h3>
+<p>dbt calls every query a model. The data model is the blueprint: declared beside the code, and checked by the tests.</p>
+<p class="meta">5½ min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
+<p class="tc-progress" data-progress="ld-a-model-is-not-a-transformation" data-labs="4" data-quiz="8" hidden></p>
+</div>
+</article>
+</div>
+</section>
+
+<section class="module" id="coming" aria-labelledby="coming-h">
+<div class="mhead"><div><h2 id="coming-h">The films to come</h2><p>Each takes one or two of Jun's ten steps. A model is not a transformation is the map.</p></div></div>
+<ol class="series-list coming">
+<li><span class="n">2</span><span><b>Start from a question</b> · Scope, the conceptual model in YAML, owners; combining or splitting an entity</span></li>
+<li><span class="n">3</span><span><b>What makes it the same one</b> · Profiling, business keys, key sets, identity mapping and hashing</span></li>
+<li><span class="n">4</span><span><b>One row of what, and when</b> · Grain; versions kept at ingestion; as it is and as it was; point-in-time joins</span></li>
+<li><span class="n">5</span><span><b>Promises and proofs</b> · The gap register; enterprise and consumer contracts; tests first</span></li>
+<li><span class="n">6</span><span><b>Built in layers</b> · Staging, intermediate, core and marts; CTE standards; materialisations</span></li>
+<li><span class="n">7</span><span><b>Who owns what</b> · Domains, access, groups and cross-project refs</span></li>
+<li><span class="n">8</span><span><b>An agent on the team</b> · Skills, access, evidence and guardrails; validation, review and shipping</span></li>
+<li><span class="n">9</span><span><b>Written once</b> · Doc blocks, Mermaid and the catalog; versions and deprecation</span></li>
+</ol>
+</section>
+
+<section class="module" id="thread" aria-labelledby="thread-h">
+<div class="mhead"><div><h2 id="thread-h">One thread: the credential, built</h2><p>From words to data ends with version 3 of the credential model approved. This series builds it, from one question asked by planning: how many learners are within 15 credit points of a graduate certificate, as at census date? It needs credentials from three systems, one learner keyed three ways, credit that counts towards awards, and history.</p></div></div>
+</section>
+
+<section class="module" id="four-sides" aria-labelledby="four-sides-h">
+<div class="mhead"><div><h2 id="four-sides-h">Who builds, who decides</h2><p>Cyan outlines are technical; gold outlines are business.</p></div></div>
+<div class="four">
+<div class="card tech"><h3>Builds the model</h3><p>Jun, analytics engineer, the series' guide</p></div>
+<div class="card tech"><h3>Owns the model</h3><p>Noor, data architect</p></div>
+<div class="card biz"><h3>Owns the words</h3><p>Mei, registrar's office</p></div>
+<div class="card biz"><h3>Asks the questions</h3><p>Planning, and the learner's wallet app</p></div>
+</div>
+</section>
+</main>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Source on GitHub</a></p><p>The university, people, numbers and records in the film, the labs and the scenarios are fictional. The narration is a synthetic voice. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
+<script src="../assets/learn/path.js"></script>
+<script src="../assets/ambient.js"></script>
+</body>
+</html>

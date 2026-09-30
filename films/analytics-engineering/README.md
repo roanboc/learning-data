@@ -6,21 +6,19 @@
 
 *From words to data* explained what a data model is and why it matters. This series goes one level deeper, into the weeds: how an analytics engineer turns an agreed model into tables, with dbt. It follows Jun, the university's analytics engineer, building version 3 of the credential model, from a question to versioned, tested and documented models, with an AI agent that helps at every step and a person who approves each one. It's for practitioners: it shows real code, YAML and Markdown, and names dbt's features.
 
-**Status:** the opening film is built and rendered from code; it isn't on the site yet. The plan is in the [proposal](proposal.md).
+**Status:** the opening film is on the site, with four labs, eight scenarios and Pause and think, in English and Spanish. The plan is in the [proposal](proposal.md).
 
 ## The films
 
-| # | Film | Covers | Status |
-|---|---|---|---|
-| 1 | [A model is not a transformation](1-a-model-is-not-a-transformation/script.md) | The series' map: the model is the blueprint, a dbt model is one step of the building work; where the model lives; the ten steps; the films to come | Built, 5:20, English captions; [source](1-a-model-is-not-a-transformation/source/README.md) |
-| 2 | Start from a question | Scope, the conceptual model in YAML, owners; combining or splitting an entity | Planned |
-| 3 | What makes it the same one | Profiling, business keys, key sets, identity mapping, hashing | Planned |
-| 4 | One row of what, and when | Grain; SCD2; as it is and as it was; point-in-time joins | Planned |
-| 5 | Promises and proofs | Gap register; enterprise and consumer contracts; tests first | Planned |
-| 6 | Built in layers | Staging, intermediate, core, marts; CTE standards; materialisations | Planned |
-| 7 | Who owns what | Domains, access, groups, cross-project refs | Planned |
-| 8 | An agent on the team | Skills, access, evidence, guardrails; validation, review and shipping | Planned |
-| 9 | Written once | Doc blocks, Mermaid, `persist_docs`; versions and deprecation | Planned |
+<!-- films: made by site-tools/build_series.py's readme() -->
+| Film | Topic | Length | Chapters | Labs and scenarios | Script |
+|---|---|---|---|---|---|
+| [A model is not a transformation](https://roanboc.github.io/learning-data/in-the-weeds/a-model-is-not-a-transformation/) | Models and transformations | 5½ min | 11 | 4 labs, 8 scenarios | [script](1-a-model-is-not-a-transformation/script.md) · [source](1-a-model-is-not-a-transformation/source/README.md) |
+<!-- /films -->
+
+**On the site:** [In the weeds of data crafting](https://roanboc.github.io/learning-data/in-the-weeds/), in Spanish [En las entrañas del oficio de datos](https://roanboc.github.io/learning-data/es/in-the-weeds/). The films are in English, with English and Spanish captions; their pages, chapters, Pause and think questions, labs and scenarios are in English and Spanish.
+
+**Planned** (see the [proposal](proposal.md)): *Start from a question*, *What makes it the same one*, *One row of what, and when*, *Promises and proofs*, *Built in layers*, *Who owns what*, *An agent on the team* and *Written once*.
 
 ## The same world, one level deeper
 

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>En las entrañas del oficio de datos · Learning Data</title>
+<meta name="description" content="Una serie técnica para analytics engineers sobre modelado de datos con dbt: por qué un modelo de dbt es una transformación y no el modelo de datos, dónde vive el modelo, claves y hashing, granularidad y tiempo, contratos y pruebas, capas, dominios, y cómo trabajar con un agente de IA con responsabilidad.">
+<meta property="og:title" content="En las entrañas del oficio de datos · Learning Data"><meta property="og:description" content="Una serie técnica para analytics engineers: cómo un modelo de datos acordado se convierte en tablas, con dbt, en Databricks. Sigue a Jun, analytics engineer de la universidad, desde una pregunta hasta modelos versionados, probados y documentados, con un agente de IA que ayuda en cada paso y una persona que aprueba cada uno."><meta property="og:image" content="https://roanboc.github.io/learning-data/assets/a-model-is-not-a-transformation-poster.jpg"><meta property="og:locale" content="es_419">
+<link rel="alternate" hreflang="en" href="https://roanboc.github.io/learning-data/in-the-weeds/"><link rel="alternate" hreflang="es" href="https://roanboc.github.io/learning-data/es/in-the-weeds/">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../"><img src="../../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../">Empieza aquí</a><a href="../topics/" aria-current="true">Temas</a><a href="../journey/">Cómo se hizo</a><span class="lang" role="group" aria-label="Idioma"><a href="../../in-the-weeds/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span></nav></div></header>
+<main>
+<section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="../../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../../assets/a-model-is-not-a-transformation-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow crumbs"><a href="../topics/">Temas</a> › En las entrañas del oficio de datos</p>
+<h1>En las entrañas del oficio de datos</h1>
+<p class="lead">Una serie técnica para analytics engineers: cómo un modelo de datos acordado se convierte en tablas, con dbt, en Databricks. Sigue a Jun, analytics engineer de la universidad, desde una pregunta hasta modelos versionados, probados y documentados, con un agente de IA que ayuda en cada paso y una persona que aprueba cada uno.</p>
+<p class="note">Las películas están en inglés, con subtítulos en español. Estas páginas, los capítulos, las preguntas, los labs y las situaciones están en español.</p>
+</section>
+
+<section class="module" id="films" aria-labelledby="films-h">
+<div class="mhead"><div><h2 id="films-h">Las películas</h2><p>Míralas en orden. Es técnica: muestra código, YAML y Markdown reales, y nombra las funciones de dbt. Se entiende mejor después de De las palabras a los datos.</p></div></div>
+<div class="topic-grid" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}'>
+<article class="topic-card">
+<img src="../../assets/a-model-is-not-a-transformation-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 1 de 9 · Modelos y transformaciones</p>
+<h3><a href="a-model-is-not-a-transformation/">Un modelo no es una transformación</a></h3>
+<p>dbt llama modelo a cada consulta. El modelo de datos es el plano: declarado junto al código, y comprobado por las pruebas.</p>
+<p class="meta">5½ min · 4 labs · 8 situaciones · En las entrañas del oficio de datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-a-model-is-not-a-transformation" data-labs="4" data-quiz="8" hidden></p>
+</div>
+</article>
+</div>
+</section>
+
+<section class="module" id="coming" aria-labelledby="coming-h">
+<div class="mhead"><div><h2 id="coming-h">Las películas que vienen</h2><p>Cada una recorre uno o dos de los diez pasos de Jun. Un modelo no es una transformación es el mapa.</p></div></div>
+<ol class="series-list coming">
+<li><span class="n">2</span><span><b>Empezar por una pregunta</b> · El alcance, el modelo conceptual en YAML, los responsables; unir o separar una entidad</span></li>
+<li><span class="n">3</span><span><b>Qué la hace la misma</b> · Perfilado, claves de negocio, conjuntos de claves, correspondencias de identidad y hashing</span></li>
+<li><span class="n">4</span><span><b>Una fila de qué, y cuándo</b> · Granularidad; versiones guardadas al ingerir; como es y como era; uniones en un punto del tiempo</span></li>
+<li><span class="n">5</span><span><b>Promesas y pruebas</b> · El registro de brechas; contratos empresariales y de consumidor; las pruebas primero</span></li>
+<li><span class="n">6</span><span><b>Construido por capas</b> · Staging, intermediate, core y marts; estándares de CTE; materializaciones</span></li>
+<li><span class="n">7</span><span><b>Quién es dueño de qué</b> · Dominios, acceso, grupos y referencias entre proyectos</span></li>
+<li><span class="n">8</span><span><b>Un agente en el equipo</b> · Habilidades, acceso, evidencia y límites; validación, revisión y publicación</span></li>
+<li><span class="n">9</span><span><b>Escrito una sola vez</b> · Bloques de documentación, Mermaid y el catálogo; versiones y retiro</span></li>
+</ol>
+</section>
+
+<section class="module" id="thread" aria-labelledby="thread-h">
+<div class="mhead"><div><h2 id="thread-h">Un hilo: la credencial, construida</h2><p>De las palabras a los datos termina con la versión 3 del modelo de credencial aprobada. Esta serie la construye, a partir de una pregunta de planificación: ¿cuántos estudiantes están a 15 créditos o menos de un diploma de posgrado, a la fecha de censo? Necesita credenciales de tres sistemas, un estudiante con tres claves distintas, créditos que cuentan para títulos, e historia.</p></div></div>
+</section>
+
+<section class="module" id="four-sides" aria-labelledby="four-sides-h">
+<div class="mhead"><div><h2 id="four-sides-h">Quién construye, quién decide</h2><p>Los contornos cian son del lado técnico; los dorados, del lado de negocio.</p></div></div>
+<div class="four">
+<div class="card tech"><h3>Construye el modelo</h3><p>Jun, analytics engineer, guía de la serie</p></div>
+<div class="card tech"><h3>Es dueña del modelo</h3><p>Noor, arquitecta de datos</p></div>
+<div class="card biz"><h3>Es dueña de las palabras</h3><p>Mei, registro académico</p></div>
+<div class="card biz"><h3>Hace las preguntas</h3><p>Planificación, y la billetera del estudiante</p></div>
+</div>
+</section>
+</main>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película, los labs y las situaciones son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
+<script src="../../assets/learn/path.js"></script>
+<script src="../../assets/ambient.js"></script>
+</body>
+</html>

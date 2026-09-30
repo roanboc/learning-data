@@ -25,10 +25,11 @@ def is_latest(node):
     return node.get("version") is None or str(node["version"]) == str(node.get("latest_version"))
 
 
-def first_sentence(text):
-    text = " ".join((text or "").split())
-    match = re.match(r"(.+?[.:])(\s|$)", text)
-    return (match.group(1) if match else text).rstrip(":.") + "."
+def grain(node):
+    meta = node["config"].get("meta") or node.get("meta") or {}
+    if not meta.get("grain"):
+        raise SystemExit(f"{node['unique_id']} has no meta.grain: every core and mart model declares one")
+    return meta["grain"].rstrip(".") + "."
 
 
 def primary_key(node):
@@ -105,7 +106,7 @@ def render(manifest_path):
     table = ["| Model | Grain | Access | Contract |", "|---|---|---|---|"]
     for node in order:
         contract = "enforced" if node["config"].get("contract", {}).get("enforced") else "none"
-        table.append(f"| `{entity_name(node)}` | {first_sentence(node['description'])} | "
+        table.append(f"| `{entity_name(node)}` | {grain(node)} | "
                      f"{node['config'].get('access') or node.get('access')} | {contract} |")
 
     parts = [

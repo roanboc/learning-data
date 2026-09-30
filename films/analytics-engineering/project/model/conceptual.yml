@@ -37,15 +37,16 @@ entities:
       issued_by: Registrar's office
       rule: >
         The student ID, qualified by its key set: SIS|S-20417. A learner the student system
-        doesn't know keeps the key of the first system that knew them, learning platform before
-        short courses (LMS|u-88260, SC|grace.okafor@mail.com), until the registrar's office
-        records a match to a student ID.
+        doesn't know keeps the key of the first system that recorded them, the learning platform
+        first on a tie (LMS|u-88260, SC|grace.okafor@mail.com), until they're matched to a
+        student ID.
     identity:
       - A student ID is a learner.
       - A learning platform account is the learner whose student ID it holds.
       - An account or a short-course customer with no student ID is the learner whose email it shares, if exactly one student has that email.
       - A short-course customer can also be the learner of a platform account with the same email, if exactly one has it.
       - Anything left is a learner of its own.
+      - A learner with no student ID keeps the key of the first system that recorded them, whatever keys join them later.
       - A recorded decision beats every rule; a decision that two keys are different people stops any rule from matching them.
     history: Every version, dated when it took effect where the source says so, and when it was recorded otherwise.
 

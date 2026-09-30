@@ -6,13 +6,7 @@ with
 
 mart as (
 
-    select
-        faculty_code,
-        count(distinct learner_key) as learners_near_graduate_certificate
-    from {{ ref('mart_planning__near_award') }}
-    where is_near_award
-      and award_type = 'graduate certificate'
-    group by faculty_code
+    {{ learners_near_graduate_certificate('faculty_code') }}
 
 ),
 

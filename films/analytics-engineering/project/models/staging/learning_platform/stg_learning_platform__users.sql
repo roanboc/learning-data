@@ -9,8 +9,8 @@ source as (
 renamed as (
 
     select
-        trim(user_id) as user_id,
-        nullif(trim(student_id), '') as student_id,
+        lower(trim(user_id)) as user_id,
+        nullif(upper(trim(student_id)), '') as student_id,
         nullif(lower(trim(email)), '') as email,
         trim(display_name) as display_name,
         lower(trim(account_status)) as account_status,

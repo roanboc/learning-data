@@ -17,21 +17,21 @@ changed against the version before?
 
 ## Diff against the previous version
 
-1. Build the main branch, and keep its database: `git switch main && dbt build --profiles-dir . && cp target/credentials.duckdb target/main.duckdb`. Then switch back to your branch and build it.
-2. Compare each changed model by its key, with the main build attached. For example, for the Planning mart:
+1. Build the main branch, and keep its database; then build your branch with `--full-refresh`:
    ```sh
-   python - <<'PY'
-   import duckdb
-   db = duckdb.connect("target/credentials.duckdb", read_only=True)
-   db.execute("attach 'target/main.duckdb' as main_build (read_only)")
-   for side, a, b in [("only in this branch", "dev_marts", "main_build.dev_marts"),
-                      ("only in main", "main_build.dev_marts", "dev_marts")]:
-       n = db.sql(f"select count(*) from (select learner_award_key, is_near_award from {a}.mart_planning__near_award "
-                  f"except select learner_award_key, is_near_award from {b}.mart_planning__near_award)").fetchone()[0]
-       print(side, n)
-   PY
+   git switch main && dbt build --profiles-dir . && cp target/credentials.duckdb target/main.duckdb
+   git switch - && dbt build --full-refresh --profiles-dir .
    ```
-   Count rows, keys only on one side, and, for keys on both, the columns that changed.
+   `--full-refresh` matters: `core_credential` is incremental, so a plain build merges only
+   credentials whose source rows changed, and a change to the logic never reaches the rows
+   already built. The diff would say nothing changed.
+2. Compare each changed model by its key:
+   ```sh
+   python scripts/diff_against_main.py dev_marts.mart_planning__near_award learner_award_key
+   python scripts/diff_against_main.py dev_core.core_credential_v2 credential_key
+   ```
+   It prints the keys only on one side and, for keys on both, how many rows changed in each
+   column. Counts only: no personal data leaves the database.
 3. Explain each difference: expected (the change intended it) or not. An unexpected difference blocks the change until someone understands it.
 4. Show the as-was and as-is answers side by side with `dbt show --select diff_as_was_as_is --profiles-dir .`; say which one each consumer reads.
 

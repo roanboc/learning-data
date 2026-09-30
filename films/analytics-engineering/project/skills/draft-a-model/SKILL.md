@@ -12,7 +12,7 @@ turns them green, in the right layer.
 
 1. **Find the model's place** in `docs/conventions.md`: which layer, which name, which access. Read the entity in `model/conceptual.yml`.
 2. **Write the YAML first**, in the folder's `_<folder>__models.yml`:
-   - a description whose first sentence is the grain: "One row per ... ";
+   - the grain in one sentence, in `meta.grain`: "One row per ...", and a description of what a row means;
    - the grain as a test: `unique`, or `unique_combination` with `arguments: {columns: [...]}`;
    - `relationships` for every key that points elsewhere, `accepted_values` for closed sets;
    - for core and marts, every column with its `data_type`, and `not_null` constraints on keys;

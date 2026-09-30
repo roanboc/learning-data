@@ -12,7 +12,7 @@ select
     award_bk,
     cast(recorded_from as date) as valid_from,
     cast(recorded_to as date) as valid_to,
-    recorded_to is null as is_current,
+    {{ valid_at(as_is_date(), 'cast(recorded_from as date)', 'cast(recorded_to as date)') }} as is_current,
     award_code,
     award_name,
     award_type,

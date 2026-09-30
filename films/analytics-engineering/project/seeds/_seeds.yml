@@ -39,7 +39,7 @@ seeds:
       column_types:
         decision_id: string
         qualified_key: string
-        same_as_or_not: string
+        decision: string
         other_qualified_key: string
         decided_by: string
         decided_on: date
@@ -59,14 +59,14 @@ seeds:
                 field: qualified_key
         config:
           meta: {personal_data: direct}
-      - name: same_as_or_not
-        description: same, or different.
+      - name: decision
+        description: "same: the two keys are one learner. different: they're two people, whatever the rules say."
         data_tests:
           - accepted_values:
               arguments:
                 values: [same, different]
       - name: other_qualified_key
-        description: The other key. For a "same" decision, the learner's business key.
+        description: The other key. For a "same" decision, the key of the learner this key belongs to.
         data_tests:
           - not_null
           - relationships:
@@ -139,7 +139,8 @@ seeds:
   - name: key_sets
     description: >
       One row per key set: where a key comes from, the system's name and who owns it. Shared by
-      every model and domain, like the hashing macro.
+      every model and domain, like the hashing macro. Generated from model/conceptual.yml by
+      scripts/definitions.py: edit the conceptual model, not this file.
     config:
       column_types: {key_set: string, system_name: string, owner: string}
       meta: {owner: "Noor, data architect", domain: registrar}

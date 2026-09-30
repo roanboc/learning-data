@@ -42,7 +42,10 @@ union all
 
 select
     'learning_platform.users.student_id -> student_system.learners',
-    count(case when students.student_id is null then 1 end),
-    count(case when students.student_id is null then 1 end)
+    count(case when students_as_typed.student_id is null then 1 end),
+    count(case when students_normalised.student_id is null then 1 end)
 from platform_students
-left join students on students.student_id = trim(platform_students.student_id)
+left join students as students_as_typed
+    on students_as_typed.student_id = platform_students.student_id
+left join students as students_normalised
+    on upper(trim(students_normalised.student_id)) = upper(trim(platform_students.student_id))

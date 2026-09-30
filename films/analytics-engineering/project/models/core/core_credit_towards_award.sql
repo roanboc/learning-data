@@ -14,7 +14,7 @@ select
     award_bk,
     valid_from,
     valid_to,
-    valid_to is null as is_current,
+    {{ valid_at(as_is_date()) }} as is_current,
     credit_points_from_units,
     credit_points_from_microcredentials,
     credit_points_earned,

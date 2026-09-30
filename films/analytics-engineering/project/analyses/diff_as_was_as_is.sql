@@ -5,28 +5,28 @@ with
 
 as_was as (
 
-    select faculty_name, count(distinct learner_key) as learners
-    from {{ ref('mart_planning__near_award') }}
-    where is_near_award and award_type = 'graduate certificate'
-    group by faculty_name
+    {{ learners_near_graduate_certificate('faculty_name') }}
 
 ),
 
 learners_now as (
 
-    select * from {{ ref('core_learner') }} where is_current
+    select * from {{ ref('core_learner') }}
+    where {{ valid_at(as_is_date()) }}
 
 ),
 
 awards_now as (
 
-    select * from {{ ref('core_award') }} where is_current
+    select * from {{ ref('core_award') }}
+    where {{ valid_at(as_is_date()) }}
 
 ),
 
 credit_now as (
 
-    select * from {{ ref('core_credit_towards_award') }} where is_current
+    select * from {{ ref('core_credit_towards_award') }}
+    where {{ valid_at(as_is_date()) }}
 
 ),
 
@@ -40,15 +40,14 @@ as_is as (
         and credit_now.award_key = learners_now.enrolled_award_key
     where learners_now.status = 'studying'
       and awards_now.award_type = 'graduate certificate'
-      and awards_now.credit_points_required - coalesce(credit_now.credit_points_earned, 0) > 0
-      and awards_now.credit_points_required - coalesce(credit_now.credit_points_earned, 0) <= {{ var('near_award_credit_points') }}
+      and {{ is_near_award('awards_now.credit_points_required - coalesce(credit_now.credit_points_earned, 0)') }}
     group by awards_now.faculty_name
 
 )
 
 select
     coalesce(as_was.faculty_name, as_is.faculty_name) as faculty_name,
-    coalesce(as_was.learners, 0) as as_at_census,
+    coalesce(as_was.learners_near_graduate_certificate, 0) as as_at_census,
     coalesce(as_is.learners, 0) as now
 from as_was
 full outer join as_is on as_is.faculty_name = as_was.faculty_name

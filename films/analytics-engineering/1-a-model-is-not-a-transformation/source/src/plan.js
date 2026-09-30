@@ -18,18 +18,21 @@ function mt_house(ctx,x,y,s,col,p,o){o=o||{};if(p<=0)return;const hl=o.hl||{},lw
   if(q(3.8)>0){ctx.save();ctx.setLineDash([12,8]);ctx.lineWidth=1.6*lw;seg(-282,-10,40,-10,q(3.8));ctx.restore();}
   // a dimension line along the top
   if(q(4.2)>0){ctx.lineWidth=1*lw;seg(-300,-214,300,-214,q(4.2));seg(-300,-224,-300,-204,1);seg(300,-224,300,-204,q(4.2));T(ctx,"30 ft",0,-224,{f:"mono",w:500,size:18,align:"center",color:rgba(col,0.95)});}
-  ctx.restore();
-  // callouts: every wall, how thick, what it carries
-  const call=(k,px,py,tx,ty,s_)=>{const a=hl[k]||0;if(a<=0)return;withA(ctx,a,()=>{ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(x+px*s,y+py*s);ctx.lineTo(x+tx*s,y+ty*s);ctx.stroke();ctx.beginPath();ctx.arc(x+px*s,y+py*s,4,0,TAU);ctx.fill();
-    T(ctx,s_,x+tx*s+(tx>0?8:-8),y+ty*s+6,{w:700,size:20,align:tx>0?"left":"right",color:rgba(col,1)});});};
-  call("wall",-300,40,-380,110,"every wall");call("thick",291,-80,380,-120,"1½ bricks thick");call("beam",-120,-10,-380,-60,"a beam: carries the floor above");}
+  ctx.restore();}
+// callouts on the plan, drawn over everything (frame included): a dot on the plan, a line out past the sheet's edge, and a label
+// on its own dark pill, so it reads against anything. (x,y,s) is the plan's centre and scale; ex is the sheet's left and right edges
+function mt_callouts(ctx,x,y,s,hl,ex){const C=[["wall",-300,40,"every wall",-1,120],["beam",-120,-10,"a beam: carries the floor above",-1,-10],["thick",291,-80,"1½ bricks thick",1,-110]];
+  C.forEach(([k,px,py,lab,side,dy])=>{const a=hl[k]||0;if(a<=0)return;withA(ctx,a,()=>{const x0=x+px*s,y0=y+py*s,x1=side<0?ex[0]-30:ex[1]+30,y1=y+dy*s;
+    ctx.strokeStyle=rgba(BPL,0.95);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x1,y1);ctx.stroke();ctx.fillStyle=rgba(BPL,1);ctx.beginPath();ctx.arc(x0,y0,5,0,TAU);ctx.fill();
+    tag(ctx,side<0?x1-tw(ctx,lab,22,700)-26:x1,y1,lab,PARCH,{size:22});});});}
 
 // a sheet in a frame, printed in sunlight: u (0..1) is the exposure, from sensitised yellow-green to blue with white lines
 function mt_print(ctx,x,y,w,h,u,t,o){o=o||{};const pap=[mix([214,208,150],BPP,ease(u)),mix([60,70,40],BPL,ease(u))];
   ctx.save();ctx.shadowColor="rgba(0,0,0,0.5)";ctx.shadowBlur=28;ctx.shadowOffsetY=8;ctx.fillStyle=rgba(pap[0],1);ctx.fillRect(x,y,w,h);ctx.restore();
   if(u>0.5)bpPaper(ctx,x,y,w,h,fin(u,0.5,0.5),{title:o.title,sub:o.sub});
-  mt_house(ctx,x+w/2,y+h/2+20,Math.min(w/820,h/520),pap[1],o.p==null?1:o.p,{hl:o.hl,paper:pap[0]});
-  if(o.frame){ctx.strokeStyle="rgba(90,62,36,0.95)";ctx.lineWidth=18;ctx.strokeRect(x-9,y-9,w+18,h+18);ctx.strokeStyle="rgba(150,110,70,0.6)";ctx.lineWidth=3;ctx.strokeRect(x-17,y-17,w+34,h+34);}}
+  const hs=Math.min(w/820,h/520);mt_house(ctx,x+w/2,y+h/2+20,hs,pap[1],o.p==null?1:o.p,{paper:pap[0]});
+  if(o.frame){ctx.strokeStyle="rgba(90,62,36,0.95)";ctx.lineWidth=18;ctx.strokeRect(x-9,y-9,w+18,h+18);ctx.strokeStyle="rgba(150,110,70,0.6)";ctx.lineWidth=3;ctx.strokeRect(x-17,y-17,w+34,h+34);}
+  if(o.hl)mt_callouts(ctx,x+w/2,y+h/2+20,hs,o.hl,[x-20,x+w+20]);}
 // a copy handed to a trade: a small blueprint and the trade's tool
 function mt_copy(ctx,x,y,w,trade,a,t){if(a<=0.01)return;withA(ctx,a,()=>{const h=w*0.64;mt_print(ctx,x,y,w,h,1,t,{});
   const tx=x+w/2,ty=y+h+56;ctx.save();ctx.translate(tx-70,ty-10);ctx.strokeStyle=rgba(CLAY,1);ctx.fillStyle=rgba(CLAY,0.85);ctx.lineWidth=3;ctx.lineCap="round";

@@ -63,6 +63,8 @@ films/                           one folder per film: script or story, captions/
     1-silent-change/             Silent change: treatment, story outline, captions and source
     2-too-good-to-be-true/       Too good to be true: treatment, script (with the rigour sheet), style frames, captions and source
   making-of/                     the two Making of films: 1-data-for-films and 2-the-process, each with treatment, script, captions and source
+  analytics-engineering/         the series In the weeds of data crafting, for analytics engineers (in progress, not on the site yet):
+                                 its README, proposal.md, characters/ (Jun), shared/ and one folder per film
 site-tools/                      build_pages.py turns the Markdown pages into site pages; build_series.py makes the pages of From words to data;
                                  check_site.py and smoke.py check the site
 .github/workflows/pages.yml      publishes site/ on every push to main

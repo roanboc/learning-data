@@ -1,6 +1,6 @@
-# An analytics engineering series
+# In the weeds of data crafting
 
-*Proposal for a technical series on data modelling with dbt, v0.1. The title is still open; the folder is named after the topic so it can stay. Status: proposal, 29 September 2026.*
+*Proposal for a technical series for analytics engineers, on data modelling with dbt, v0.2. The folder is named after the topic. Status: the opening film is built, 30 September 2026; the [series README](README.md) describes the films as they are.*
 
 ## Decided
 
@@ -13,8 +13,10 @@
 | 29 September 2026 | Enterprise (core) models are `public`; consumer marts are `protected`. Domains and dbt Mesh get their own film. |
 | 29 September 2026 | Known modelling approaches are named once, in the opening film. After that, the series teaches mechanisms (key sets, hashing, grain, timelines) without saying which approach each came from. |
 | 29 September 2026 | Ingestion is out of scope: data arrives with every version kept (SCD2) and system keys identified. Ingestion can be its own series. |
-| 29 September 2026 | Film 1 opens in the past, with a blueprint; alternatives to dbt get generic labels; it ends by showing what the series covers. |
+| 29 September 2026 | *A model is not a transformation* opens in the past, with a blueprint; alternatives to dbt get generic labels; it ends by showing what the series covers. |
 | 29 September 2026 | A new character, Jun, the analytics engineer, builds what Noor, the architect, owns. |
+| 30 September 2026 | The series title: *In the weeds of data crafting*. It says the content is technical; the title card and the opening film's narration say it's for analytics engineers. |
+| 30 September 2026 | The series gets its own sound: an electric piano, a plucked bass and a brushed pulse, and its own four-note mark. |
 
 ## The brief
 
@@ -283,18 +285,17 @@ Confirm against current documentation, and record in each film's rigour sheet wi
 - **Databricks:** Unity Catalog grants versus dbt access; informational primary and foreign keys; how SCD2 ingestion records its dates.
 - **Hashing:** the hash functions available, how `dbt_utils.generate_surrogate_key` handles nulls, and collision risk stated honestly.
 - **Mermaid:** where it renders (GitHub does; check dbt's docs site).
-- **Approaches in film 1:** the landscape as it stands, with sources in the rigour sheet only; no attribution of mechanisms to approaches.
+- **Approaches in *A model is not a transformation*:** the landscape as it stands, with sources in the rigour sheet only; no attribution of mechanisms to approaches.
 
 ## Decisions for the author
 
-1. **The title.** *Model, then build* · *From meaning to marts* · *Declared, then built*.
-2. **The tagline.** "Declare it. Then build it." · "The model is what you promise." · "Tests first, meaning first."
-3. **Nine films or eight.** Merge *Written once* into *An agent on the team*, or *Who owns what* into *Promises and proofs*.
-4. **Your agent skills and guidelines.** Share them, so film 8 and its labs show them, not a generic version.
-5. **Language.** English with Spanish pages and captions, as for *From words to data*.
+1. **The tagline.** "Declare it. Then build it." · "The model is what you promise." · "Tests first, meaning first."
+2. **Nine films or eight.** Merge *Written once* into *An agent on the team*, or *Who owns what* into *Promises and proofs*.
+3. **Your agent skills and guidelines.** Share them, so film 8 and its labs show them, not a generic version.
+4. **Language.** English with Spanish pages and captions, as for *From words to data*.
 
 ## Next checkpoints
 
 1. The author's answers to the decisions above.
-2. ~~A script and rigour sheet for the opening film.~~ Draft 1 written, 29 September 2026: [script](1-a-model-is-not-a-transformation/script.md). Next for it: the author's review, Jun's character card, then style frames.
+2. ~~A script and rigour sheet for the opening film.~~ Built, 30 September 2026: [script](1-a-model-is-not-a-transformation/script.md), [source](1-a-model-is-not-a-transformation/source/README.md), [Jun's character card](characters/card-jun.jpg). Next for it: the author's review of the video, then publishing (site page, Spanish captions, Pause and think, labs).
 3. The example dbt project the films draw from: the credential model, sources, YAML and tests, so every on-screen snippet is real code that runs.

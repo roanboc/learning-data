@@ -1,6 +1,6 @@
-# Analytics engineering · A model is not a transformation: script
+# In the weeds of data crafting · A model is not a transformation: script
 
-*Draft 1 of the script of the series' first film, 29 September 2026. The series title and the tagline are still open; "Declare it. Then build it." is a working tagline. Timings are estimates at the series' pace; they'll be replaced by the voiced ones from `tools/pace.py`.*
+*The script of the opening film of In the weeds of data crafting, a technical series for analytics engineers, as built: 5:20, in eleven chapters, in English, 30 September 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The timings are the voiced ones (see [Pacing report](#pacing-report)). "Declare it. Then build it." is a working tagline.*
 
 ## The promise
 
@@ -48,15 +48,15 @@ In the 1870s, architects began copying drawings as blueprints, one for every tra
 
 **On screen.** 1870s · blueprint · every wall · how thick · what it carries · no bricks laid
 
-### 2 · Where we left off · 0:25–1:10
+### 2 · Where we left off · 0:25–1:06
 
 **Narration.** Data has blueprints too. At a university, four offices once gave four different answers to one question: how many credentials did we award? So they agreed what a credential is, and wrote it down as a model. A model answers four questions. What a thing is. What makes it the same one everywhere. What one row holds. And when each thing was true. Meaning, identity, grain and time. Version three of the university's model has just been approved. The series *From words to data* tells that story. This is all you need from it.
 
-**Picture.** The films' dark glass. Four office cards (registrar, short courses, faculty, planning), each with its own count, then one definition card between them. The model sketch draws: Learner, Credential, Award, with the lines between them. The four icons light as they're named. The gold "v3 · approved" stamp lands on the sketch. A small card slides in and out, bottom right: "From words to data · seven films".
+**Picture.** The films' dark glass. "Data has blueprints too." Then the question, and four office cards (registrar 7,420, short courses 10,600, careers 14,650, learning platform 26,900: the numbers from *What's in a word*), then one definition card: "credential: a trusted, checkable claim about what someone knows · one definition · agreed". The model sketch draws: Learner, Credential, Award, with the lines between them. The four icons light as they're named. The gold "v3 · approved" stamp lands on the sketch. A card, bottom right: "The whole story · From words to data · seven films".
 
 **On screen.** how many credentials did we award? · four offices · four answers · one definition · meaning · identity · grain · time · v3 · approved · From words to data · seven films
 
-### 3 · Many shapes, one model · 1:10–1:40
+### 3 · Many shapes, one model · 1:06–1:35
 
 **Narration.** A model can be written down in many shapes: a normalised core, stars, a data vault, anchors, hooks, one wide table per entity. Each has its champions. Look inside any of them, and you find the same four answers. This series takes a middle way. Integrate on business keys, keep every version, and serve each entity as one wide row, with stars where people need them.
 
@@ -66,7 +66,7 @@ In the 1870s, architects began copying drawings as blueprints, one for every tra
 
 *The only place in the series where approaches are named. The middle way is described by what it does, not by where each part came from.*
 
-### 4 · Someone has to build it · 1:40–2:05
+### 4 · Someone has to build it · 1:35–2:00
 
 **Narration.** But an approved model is still a blueprint. The data arrives from three systems, each with its own keys, its own codes, and every version it has ever had. Someone has to turn what arrives into what was agreed, and show that it matches. That's the work of an analytics engineer. At the university, that's Jun.
 
@@ -74,34 +74,35 @@ In the 1870s, architects began copying drawings as blueprints, one for every tra
 
 **On screen.** still a blueprint · student system · learning platform · short-course platform · three keys · three codes · every version · what arrives → what was agreed · show that it matches · analytics engineer · Jun
 
-### 5 · The building work · 2:05–2:45
+### 5 · The building work · 2:00–2:35
 
 **Narration.** The building work is transformation: select, join, clean and reshape. It can be done in notebooks, in stored procedures, or in pipeline tools. Jun's team uses dbt, a widely used tool for it. Each transformation is a SQL query, in its own file. dbt works out the order from how the queries refer to each other, builds each result as a table or a view on the platform, and keeps the tests and documentation beside the code.
 
 **Picture.** Four tool cards: notebooks, stored procedures, pipeline tools, dbt. Three dim; dbt lights. A file opens:
 
 ```sql
--- stg_student_system__learners.sql
+-- models/staging/stg_student_system__learners.sql
+-- one query, in its own file
 select
     student_id,
     lower(trim(email)) as email,
-    ...
+    status_code
 from {{ source('student_system', 'learners') }}
 ```
 
-Two more files arrive, one with `{{ ref('stg_student_system__learners') }}`, and arrows join them left to right. As each file runs, a table or a view appears in silver or gold on the platform. A YAML card sits beside one model; its tests tick green.
+A second file arrives, `models/intermediate/int_learners.sql`, which selects `from {{ ref('stg_student_system__learners') }}` and joins `{{ ref('int_learner_keys') }}`; its `ref()` line lights, and an arrow runs from the first file to it: "ref() sets the order". On the right, "on the platform": the staging model appears as a view and the intermediate one as a table. A YAML card, `_int_models.yml`, writes `learner_key` with `data_tests: [unique, not_null]`, and ticks green.
 
 **On screen.** transformation · select · join · clean · reshape · notebooks · stored procedures · pipeline tools · dbt · one query, one file · ref() · the order · table · view · tests · docs
 
-### 6 · The name that misleads · 2:45–3:05
+### 6 · The name that misleads · 2:35–3:01
 
-**Narration.** dbt calls each of these queries a model. It's a useful name, and a misleading one. A query is one step of the building work. The model is the blueprint. This series is about keeping the two apart, and connecting them.
+**Narration.** dbt calls each of these queries a model. It's a useful name, and a misleading one. A query is one step of the building work. The model is the blueprint. This series is about keeping the two apart, and connecting them. It's for analytics engineers, and it goes into the weeds.
 
-**Picture.** The label "model" sits on the `.sql` file. It lifts off and moves to the blueprint; the file is relabelled "transformation". A thin line runs from the file to the part of the blueprint it builds. Wordless breather: the title card, *A model is not a transformation*.
+**Picture.** The label "model" sits on the `.sql` file. It lifts off and moves to the blueprint; the file is relabelled "transformation". A thin line runs from the file to the part of the blueprint it builds. A tag: "for analytics engineers · into the weeds". Wordless breather: the title card, with the series' mark (three blades of grass): "IN THE WEEDS OF DATA CRAFTING", *A model is not a transformation*, "the model is what you declare; a dbt model is how you make it", and "a technical series for analytics engineers".
 
-**On screen.** model? · transformation · the model · keep them apart · connect them · *A model is not a transformation*
+**On screen.** model? · transformation · one step of the building work · the model · keep them apart · connect them · for analytics engineers · into the weeds · IN THE WEEDS OF DATA CRAFTING · *A model is not a transformation* · a technical series for analytics engineers
 
-### 7 · Three hundred models · 3:05–3:40
+### 7 · Three hundred models · 3:01–3:31
 
 **Narration.** A year from now, Jun's project could hold three hundred of these files, in four layers. Most are steps: one tidies a source, one matches a learner's three keys, one stitches their history into a single timeline. Only the core holds what the blueprint names: a learner, a credential, an award. The marts serve each consumer what it asked for. So which file is the data model? None of them.
 
@@ -109,7 +110,7 @@ Two more files arrive, one with `{{ ref('stg_student_system__learners') }}`, and
 
 **On screen.** 300 files · staging · intermediate · core · marts · tidy a source · match three keys · one timeline · learner · credential · award · for planning · for the wallet · which file is the data model? · none of them
 
-### 8 · Where the model lives · 3:40–4:15
+### 8 · Where the model lives · 3:31–4:01
 
 **Narration.** The model lives beside the code. In YAML: what one row holds, which key makes it unique, how it relates to the rest, and the contract each table promises. In Markdown, with a diagram anyone can read: what each thing means, and why it was decided that way. The queries make the tables. The YAML and the Markdown say what those tables must be, and the tests check that they are.
 
@@ -117,22 +118,26 @@ Two more files arrive, one with `{{ ref('stg_student_system__learners') }}`, and
 
 ```yaml
 models:
-  - name: core_learner
-    description: '{{ doc("learner") }}'
+  - name: core_credential
+    description: '{{ doc("credential") }}'
     config:
       access: public
       contract: {enforced: true}
-      meta: {grain: one row per learner}
+      meta: {grain: one row per credential}
     columns:
-      - name: learner_key
+      - name: credential_key
         data_tests: [unique, not_null]
+      - name: learner_key
+        data_tests:
+          - relationships:
+              arguments: {to: ref('core_learner'), field: learner_key}
 ```
 
-Then a Markdown card with a small diagram (Learner, Credential, Award) and a "Decisions" list with one line: "A microcredential is a kind of credential. Agreed 2026-10-02, Mei." The tables in gold sit between the cards and the graph; the tests tick green, one by one.
+Then a Markdown card, `docs/credential.md`: "# Credential", its definition, a small diagram (Learner, Credential, Award) and a "Decisions" list with one line: "A microcredential is a kind of credential. Agreed 2 Oct 2026 · Mei, registrar's office". The lineage graph sits on the left, its core lit. Four tests tick green, one by one: unique, not_null, relationships, contract.
 
 **On screen.** YAML · one row per learner · the key · relationships · the contract · Markdown · what it means · why · the queries make the tables · the YAML and the Markdown say what they must be · the tests check
 
-### 9 · Ten steps · 4:15–4:50
+### 9 · Ten steps · 4:01–4:34
 
 **Narration.** Jun works in ten steps. Start from a question. Learn what the sources really hold. Define what each consumer needs. Name the gaps, and write the contracts. Write the tests, before any code. Build, layer by layer. Validate against a number people trust. Review and ship. Keep each fact written once. And let the model evolve without breaking anyone. An AI agent can help at every step. At every step, a person approves.
 
@@ -140,7 +145,7 @@ Then a Markdown card with a small diagram (Learner, Credential, Award) and a "De
 
 **On screen.** 1 a question · 2 the sources · 3 the consumers · 4 gaps and contracts · 5 tests first · 6 build in layers · 7 validate · 8 review and ship · 9 written once · 10 evolve · an agent helps · a person approves
 
-### 10 · The series · 4:50–5:15
+### 10 · The series · 4:34–5:00
 
 **Narration.** The next eight films take the steps in turn. Scoping a model from a question. What makes a learner the same one across systems, and how keys and hashes make it explicit. Grain and time. Contracts and tests. Building in layers. Who owns what, across domains. Working with an agent, responsibly. And writing it all down, once.
 
@@ -148,11 +153,11 @@ Then a Markdown card with a small diagram (Learner, Credential, Award) and a "De
 
 **On screen.** 2 · Start from a question · 3 · What makes it the same one · 4 · One row of what, and when · 5 · Promises and proofs · 6 · Built in layers · 7 · Who owns what · 8 · An agent on the team · 9 · Written once
 
-### 11 · Pull back · 5:15–5:35
+### 11 · Pull back · 5:00–5:19
 
 **Narration.** A blueprint says what a building will be. The building work makes it true. In data, the model is the blueprint, and dbt is one way to build it. Declare it. Then build it.
 
-**Picture.** The warm past and the dark glass side by side: the 1870s blueprint over a finished building; the credential blueprint over the lineage graph, its gold core nodes lit. Wordless end card: "Declare it. Then build it." *A model is not a transformation*.
+**Picture.** The warm past and the dark glass side by side: the 1870s blueprint over a finished building; the credential blueprint over the lineage graph, its gold core nodes lit. Wordless end card: "Declare it. Then build it." *A model is not a transformation* · In the weeds of data crafting.
 
 **On screen.** the model · the blueprint · the building work · dbt · Declare it. Then build it.
 
@@ -182,7 +187,7 @@ Four stops, one question each.
 | 5 | Each transformation is a SQL query in its own file; dbt works out the order from references. | dbt also supports Python models. `ref()` and `source()` build the dependency graph (a DAG). Materialisations include view, table, incremental and ephemeral; on Databricks, results are Delta tables and views in Unity Catalog. |
 | 6 | dbt calls each query a model. | dbt's documentation defines a model as a SQL or Python file that holds a `select`; the name is historical, and widely used. |
 | 7 | 300 files, in four layers: staging, intermediate, core, marts. | Illustrative. dbt's guidance uses staging, intermediate and marts; this series adds a core layer for the enterprise contract. Large projects have hundreds to thousands of models. |
-| 8 | YAML holds grain, key, relationships and contract; Markdown holds meaning and decisions; tests check. | `contract: {enforced: true}` checks column names and types at build; on Databricks, `not_null` and `check` constraints are enforced and primary and foreign keys are informational, so tests do the checking. `data_tests` is the current key for tests (dbt 1.8+). Grain has no built-in field; `meta` holds it. Doc blocks keep long text in Markdown. |
+| 8 | YAML holds grain, key, relationships and contract; Markdown holds meaning and decisions; tests check. | `contract: {enforced: true}` checks column names and types at build; on Databricks, `not_null` and `check` constraints are enforced and primary and foreign keys are informational, so tests do the checking. `data_tests` is the current key for tests (dbt 1.8+), and recent versions of dbt expect a generic test's arguments under `arguments:`, as shown; to check against the dbt version in use. Grain has no built-in field; `meta` holds it. Doc blocks (`{% docs credential %}`) keep long text in Markdown. The example is one row per credential, so the learner is a relationship, tested against `core_learner`. |
 | 9 | Ten steps; an agent helps at each, a person approves each. | The process is the series' own, from the author's practice. What agents can do in dbt Cloud (an AI assistant, an MCP server) is checked on the day, and named only in the rigour sheets. |
 
 ## Sources
@@ -191,28 +196,29 @@ Four stops, one question each.
 - dbt documentation: models, `ref()` and `source()`, materialisations, model contracts, constraints on Databricks, `access`, `data_tests`, doc blocks, and the guide "How we structure our dbt projects". To check on the day.
 - dbt Labs: a published figure for how widely dbt is used, or soften "widely used". To check.
 
-## Pacing estimate
+## Pacing report
 
 ```
-chapter      words   est.   notes
-blueprint       50    25s   breather on the empty site
-recap           96    45s   the longest; the recap for newcomers
-shapes          65    30s
-build           57    25s   Noor hands the blueprint to Jun
-dbt             75    40s   code on screen needs time to read
-name            40    20s   breather: title card
-models          72    35s
-lives           72    35s   code on screen
-steps           72    35s
-series          56    25s
-end             33    20s   breather: end card
+chapter      duration   wpm  voice  longest quiet  notes
+plan            25.2s   117    67%           4.2s
+recap           41.6s   136    74%           1.8s
+shapes          28.7s   138    80%           1.8s
+build           25.4s   132    69%           2.4s
+work            34.9s   133    79%           2.6s
+name            25.4s   120    65%           5.4s
+models          30.4s   138    77%           1.8s
+lives           30.3s   141    73%           2.4s  dense (over 140 wpm)
+steps           33.0s   133    78%           3.2s
+series          25.6s   133    80%           2.6s
+end             19.6s   104    50%           6.0s
 
-total about 690 words, about 5:35
+total 5:20.0, 698 words, 131 wpm, voice 73% of the time, 179 wpm while speaking
+sentences with under 0.5 s after them: 0; stops of 2.5 s or more inside chapters: 0
 ```
 
-If it runs long: merge *Ten steps* and *The series* into one chapter, with the film cards arriving as the steps light (saves about 20 seconds).
+*Where the model lives* is one word a minute over the series' limit; it shows code while it speaks, so a longer hold after the YAML line is the first thing to try.
 
-## Decisions taken for this draft
+## Decisions taken
 
 | Date | Decision |
 |---|---|
@@ -220,8 +226,10 @@ If it runs long: merge *Ten steps* and *The series* into one chapter, with the f
 | 29 September 2026 | A new character, Jun, the analytics engineer; Noor, the architect, hands over the blueprint. |
 | 29 September 2026 | Alternatives to dbt have generic labels. |
 | 29 September 2026 | The film shows what the series covers: the ten steps, then the eight films that follow. |
+| 30 September 2026 | The series title: *In the weeds of data crafting*, a technical series for analytics engineers. The title card and the narration say who it's for. |
 
 ## Open
 
-1. **The series title and tagline.** "Declare it. Then build it." is the working tagline.
-2. **Jun's look.** A character card, in the style of the people of *When things go wrong*.
+1. **The tagline.** "Declare it. Then build it." is the working one.
+2. **Jun's look.** First pass: [the character card](../characters/card-jun.jpg).
+3. **Publishing.** A page on the site, Spanish captions, Pause and think, labs and scenarios, and the release workflow's entry.

@@ -1,0 +1,115 @@
+# The conceptual model: the slice of the credential model (v3) that Planning's question touches.
+#
+# Not parsed by dbt (it sits outside model-paths). It's where the meaning is written once:
+# scripts/definitions.py turns each definition into a doc block in docs/definitions.md, which
+# the dbt YAML shows with doc() and Databricks pushes to Unity Catalog.
+#
+# The diagram of it is drawn by hand in docs/conceptual-model.md.
+
+question:
+  asked_by: Planning
+  text: >
+    How many learners are within 15 credit points of a graduate certificate, by faculty,
+    as at census date?
+  decision: >
+    How many places to offer in each faculty's final graduate certificate units next semester.
+  also_served: The learner's wallet app, which needs the same facts as they are now.
+
+key_sets:
+  - code: SIS
+    system: student system
+    owner: Registrar's office
+  - code: LMS
+    system: learning platform
+    owner: Learning team
+  - code: SC
+    system: short-course platform
+    owner: Learning team
+
+entities:
+
+  - name: learner
+    definition: >
+      A person the university has recorded learning with it, in any of its systems: a student
+      of an award, a learning platform user, or a short-course customer.
+    owner: Mei Tanaka, registrar's office
+    business_key:
+      issued_by: Registrar's office
+      rule: >
+        The student ID, qualified by its key set: SIS|S-20417. A learner the student system
+        doesn't know keeps the key of the first system that knew them, learning platform before
+        short courses (LMS|u-88260, SC|grace.okafor@mail.com), until the registrar's office
+        records a match to a student ID.
+    identity:
+      - A student ID is a learner.
+      - A learning platform account is the learner whose student ID it holds.
+      - An account or a short-course customer with no student ID is the learner whose email it shares, if exactly one student has that email.
+      - A short-course customer can also be the learner of a platform account with the same email, if exactly one has it.
+      - Anything left is a learner of its own.
+      - A recorded decision beats every rule; a decision that two keys are different people stops any rule from matching them.
+    history: Every version, dated when it took effect where the source says so, and when it was recorded otherwise.
+
+  - name: credential
+    definition: >
+      A trusted, checkable statement that someone has shown what they know or can do.
+      Awards, microcredentials and badges are kinds of credential; a certificate of attendance
+      isn't one.
+    owner: Mei Tanaka, registrar's office
+    business_key:
+      issued_by: The issuing system
+      rule: >
+        The issuing system's own identifier, qualified by its key set: LMS|B-5010 for a badge,
+        SC|C-88 for a short-course certificate, SIS|S-20417|GCDA for an award conferred.
+    kinds:
+      - name: award
+        owner: Mei Tanaka, registrar's office
+      - name: microcredential
+        definition: A credential for a small, assessed piece of learning, which can carry credit points towards an award.
+        owner: Learning team
+      - name: badge
+        definition: A credential with no credit points.
+        owner: Learning team
+    history: Issued on a date; revoked on a date, if it is. A revoked credential never counts.
+
+  - name: award
+    definition: >
+      A qualification the university confers, such as a graduate certificate or a master, for
+      a set number of credit points. When it's conferred on a learner, it's a credential too.
+    owner: Mei Tanaka, registrar's office
+    business_key:
+      issued_by: Registrar's office
+      rule: The award code, qualified by its key set, SIS|GCDA.
+    history: Every version, dated when it was recorded.
+
+relationships:
+
+  - name: credit_towards_award
+    label: credit towards an award
+    between: [learner, award]
+    cardinality: many learners to many awards
+    definition: >
+      The credit points a learner holds towards an award: from units passed under it, and from
+      the microcredentials it recognises.
+    owner: Mei Tanaka, registrar's office
+    business_key:
+      rule: The learner's business key and the award's, together.
+    # The numbers these rules use live once, as vars in dbt_project.yml.
+    rules:
+      - A unit counts only with a passing grade (var passing_grades).
+      - A microcredential counts towards each award that recognises it; the faculties decide which, in seeds/credit_recognition.csv.
+      - An award accepts a limited number of microcredentials towards its credit, the first ones issued (var microcredentials_per_award).
+      - A revoked credential never counts, from the day it's revoked.
+      - Credit changes over time, and every change is a new version.
+
+  - name: holds
+    between: [learner, credential]
+    cardinality: one learner to many credentials
+    definition: A learner holds a credential when it was issued to one of the learner's keys.
+
+  - name: counts_towards
+    between: [credential, award]
+    cardinality: many microcredentials to many awards
+    definition: A microcredential counts towards an award when the award's faculty recognises it.
+
+decisions: docs/decisions.md
+gaps: docs/gaps.md

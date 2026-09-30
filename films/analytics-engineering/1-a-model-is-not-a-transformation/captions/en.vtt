@@ -1,0 +1,130 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:10.642
+In the 1870s, architects began copying their drawings as blueprints: white lines on blue paper, one copy for every trade on site.
+
+00:00:11.842 --> 00:00:18.169
+A blueprint says exactly what the building will be: where every wall stands, how thick it is, and what it carries.
+
+00:00:19.469 --> 00:00:21.063
+It doesn't lay a single brick.
+
+00:00:26.163 --> 00:00:27.754
+Data has blueprints too.
+
+00:00:28.454 --> 00:00:35.598
+At a university, four offices once gave four different answers to one question: how many credentials did we award?
+
+00:00:37.298 --> 00:00:41.071
+So they agreed what a credential is, and wrote it down as a model.
+
+00:00:42.371 --> 00:00:50.713
+A model answers four questions. What a thing is. What makes it the same one everywhere. What one row holds. And when each thing was true.
+
+00:00:52.113 --> 00:00:54.359
+Meaning, identity, grain and time.
+
+00:00:55.559 --> 00:00:59.422
+Version three of the university's model has just been approved.
+
+00:01:00.722 --> 00:01:05.056
+The series From words to data tells that story. This is all you need from it.
+
+00:01:07.756 --> 00:01:16.421
+A model can be written down in many shapes: a normalised core, stars, a data vault, anchors, hooks, one wide table per entity.
+
+00:01:17.721 --> 00:01:22.769
+Each has its champions. Look inside any of them, and you find the same four answers.
+
+00:01:24.069 --> 00:01:33.716
+This series takes a middle way. Integrate on business keys, keep every version, and serve each entity as one wide row, with stars where people need them.
+
+00:01:36.416 --> 00:01:38.687
+But an approved model is still a blueprint.
+
+00:01:39.987 --> 00:01:46.933
+The data arrives from three systems, each with its own keys, its own codes, and every version it has ever had.
+
+00:01:48.533 --> 00:01:52.888
+Someone has to turn what arrives into what was agreed, and show that it matches.
+
+00:01:54.188 --> 00:01:58.496
+That's the work of an analytics engineer. At the university, that's Jun.
+
+00:02:01.796 --> 00:02:06.363
+The building work is transformation: select, join, clean and reshape.
+
+00:02:07.063 --> 00:02:15.686
+It can be done in notebooks, in stored procedures, or in pipeline tools. Jun's team uses dbt, a widely used tool for it.
+
+00:02:16.886 --> 00:02:20.447
+Each transformation is a SQL query, in its own file.
+
+00:02:21.947 --> 00:02:33.153
+dbt works out the order from how the queries refer to each other, builds each result as a table or a view on the platform, and keeps the tests and documentation beside the code.
+
+00:02:36.653 --> 00:02:42.352
+dbt calls each of these queries a model. It's a useful name, and a misleading one.
+
+00:02:43.452 --> 00:02:47.586
+A query is one step of the building work. The model is the blueprint.
+
+00:02:48.886 --> 00:02:55.765
+This series is about keeping the two apart, and connecting them. It's for analytics engineers, and it goes into the weeds.
+
+00:03:02.065 --> 00:03:07.294
+A year from now, Jun's project could hold three hundred of these files, in four layers.
+
+00:03:08.594 --> 00:03:16.405
+Most are steps: one tidies a source, one matches a learner's three keys, one stitches their history into a single timeline.
+
+00:03:17.705 --> 00:03:25.725
+Only the core holds what the blueprint names: a learner, a credential, an award. The marts serve each consumer what it asked for.
+
+00:03:27.025 --> 00:03:29.799
+So which file is the data model? None of them.
+
+00:03:32.499 --> 00:03:34.338
+The model lives beside the code.
+
+00:03:35.538 --> 00:03:42.880
+In YAML: what one row holds, which key makes it unique, how it relates to the rest, and the contract each table promises.
+
+00:03:44.580 --> 00:03:50.993
+In Markdown, with a diagram anyone can read: what each thing means, and why it was decided that way.
+
+00:03:52.493 --> 00:03:59.477
+The queries make the tables. The YAML and the Markdown say what those tables must be, and the tests check that they are.
+
+00:04:02.777 --> 00:04:04.398
+Jun works in ten steps.
+
+00:04:05.098 --> 00:04:10.578
+Start from a question. Learn what the sources really hold. Define what each consumer needs.
+
+00:04:11.078 --> 00:04:16.926
+Name the gaps, and write the contracts. Write the tests, before any code. Build, layer by layer.
+
+00:04:17.426 --> 00:04:25.999
+Validate against a number people trust. Review and ship. Keep each fact written once. And let the model evolve without breaking anyone.
+
+00:04:27.099 --> 00:04:31.712
+An AI agent can help at every step. At every step, a person approves.
+
+00:04:35.812 --> 00:04:38.152
+The next eight films take the steps in turn.
+
+00:04:38.852 --> 00:04:47.973
+Scoping a model from a question. What makes a learner the same one across systems, and how keys and hashes make it explicit. Grain and time.
+
+00:04:48.573 --> 00:04:57.930
+Contracts and tests. Building in layers. Who owns what, across domains. Working with an agent, responsibly. And writing it all down, once.
+
+00:05:01.430 --> 00:05:05.295
+A blueprint says what a building will be. The building work makes it true.
+
+00:05:06.495 --> 00:05:11.293
+In data, the model is the blueprint, and dbt is one way to build it.
+
+00:05:12.593 --> 00:05:14.095
+Declare it. Then build it.

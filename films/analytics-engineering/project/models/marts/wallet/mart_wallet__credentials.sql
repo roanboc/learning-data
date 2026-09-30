@@ -2,7 +2,7 @@ with
 
 credentials as (
 
-    select * from {{ ref('core_credential') }}
+    select * from {{ ref('core_credential', v=2) }}
 
 ),
 
@@ -12,7 +12,7 @@ key_sets as (
 
 )
 
--- as it is now: the latest version of the credential model holds each credential's current state
+-- as it is now: core_credential, version 2, holds each credential's current status
 select
     credentials.credential_key,
     credentials.learner_key,

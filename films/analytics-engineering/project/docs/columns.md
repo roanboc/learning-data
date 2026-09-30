@@ -44,7 +44,7 @@ keys that look alike in different systems stay apart.
 
 {% docs key_set %}
 Where a key comes from: `SIS` (student system), `LMS` (learning platform) or `SC` (short-course
-platform). The list is in `seeds/key_sets.csv`.
+platform). The list is in `model/conceptual.yml`, and the `key_sets` seed.
 {% enddocs %}
 
 ## Time
@@ -55,11 +55,12 @@ that date; otherwise the day the platform recorded it.
 {% enddocs %}
 
 {% docs valid_to %}
-The first day this version was no longer true, exclusive. Null while it's still true.
+The first day this version was no longer true, exclusive. Null for the last version.
 {% enddocs %}
 
 {% docs is_current %}
-True for the version that holds now: `valid_to` is null.
+True for the version valid on the day of the build (or the `as_is_date` var): as it is now. A
+change dated in the future isn't current until its day.
 {% enddocs %}
 
 {% docs recorded_at %}
@@ -109,7 +110,8 @@ in these sources expires yet.
 
 {% docs revoked_on %}
 The day the credential stopped counting: for a badge, the day the learning platform stopped
-showing it. Null if it wasn't revoked.
+showing it; for a short-course certificate, the day its enrolment stopped being completed; for
+an award, the day a later record of it stopped being completed. Null if it wasn't revoked.
 {% enddocs %}
 
 {% docs credit_points_required %}

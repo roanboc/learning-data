@@ -6,10 +6,11 @@ every step, a person approves. This page says what an agent may and may not do.
 
 ## Read first
 
+- [`docs/process.md`](docs/process.md): the ten steps, what each produces, your part in it, and who approves it.
 - [`docs/conventions.md`](docs/conventions.md): layers, names, SQL, keys, time, tests, metadata.
 - [`model/conceptual.yml`](model/conceptual.yml): what each entity means, its key and its owner.
 - [`docs/gaps.md`](docs/gaps.md) and [`docs/decisions.md`](docs/decisions.md): what's been decided, and why.
-- [`skills/`](skills/): how to do the four jobs agents do most here.
+- [`skills/`](skills/): how to do the five jobs agents do most here: draft the conceptual model, profile a source, draft a model, reconcile and diff, review metadata.
 
 ## What you may do
 
@@ -18,6 +19,22 @@ every step, a person approves. This page says what an agent may and may not do.
 - Read production, if you're given access, **read-only**.
 - Profile data with the queries in `analyses/`, or new ones you add there.
 - Draft models, tests, YAML and docs on a branch, and open a pull request.
+
+## Your access
+
+On Databricks, you work as your own service principal, never as a person. It can read
+production and write only to its own development schema:
+
+```sql
+grant use catalog on catalog <production catalog> to `<agent service principal>`;
+grant use schema, select on schema <production catalog>.<schema>_core to `<agent service principal>`;
+grant use schema, select on schema <production catalog>.<schema>_marts to `<agent service principal>`;
+grant all privileges on schema <development catalog>.<agent's schema> to `<agent service principal>`;
+```
+
+dbt's access levels (`private`, `protected`, `public`) say which models can `ref()` which; they
+don't say who can read a table. Grants do: see `+grants` on the Planning marts in
+`dbt_project.yml`.
 
 ## What you must not do
 

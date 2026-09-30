@@ -6,7 +6,8 @@ sources:
     config:
       # Read by dbt-duckdb only: on DuckDB each table is a CSV file in data/. Databricks reads the ingested table.
       external_location: "read_csv('data/learning_platform/{name}.csv', header = true, all_varchar = true)"
-      loaded_at_field: _loaded_at
+      # on DuckDB the column is text; on Databricks the cast does nothing
+      loaded_at_field: "cast(_loaded_at as timestamp)"
       freshness:
         warn_after: {count: 1, period: day}
         error_after: {count: 3, period: day}

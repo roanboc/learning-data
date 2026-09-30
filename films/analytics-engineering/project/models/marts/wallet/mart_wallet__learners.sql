@@ -20,26 +20,26 @@ credit as (
 
 credentials as (
 
-    select * from {{ ref('core_credential') }}
+    select * from {{ ref('core_credential', v=2) }}
 
 ),
 
--- as it is now: each entity's current version
+-- as it is now: each entity's version valid today, not a change dated in the future
 current_learners as (
 
-    select * from learners where is_current
+    select * from learners where {{ valid_at(as_is_date()) }}
 
 ),
 
 current_awards as (
 
-    select * from awards where is_current
+    select * from awards where {{ valid_at(as_is_date()) }}
 
 ),
 
 current_credit as (
 
-    select * from credit where is_current
+    select * from credit where {{ valid_at(as_is_date()) }}
 
 ),
 

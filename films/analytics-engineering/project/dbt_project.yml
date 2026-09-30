@@ -13,6 +13,7 @@ clean-targets: ["target", "logs"]
 # Stated once, used everywhere. Override one for a run with --vars.
 vars:
   census_date: "2026-03-31"          # Planning's census date: the "as at" of the Planning mart
+  as_is_date: null                   # the "now" of the wallet marts; null means the day of the build
   near_award_credit_points: 15       # "within 15 credit points" of an award
   microcredentials_per_award: 4      # an award accepts up to four microcredentials towards its credit
   passing_grades: ["P", "C", "D", "HD"]
@@ -52,6 +53,9 @@ models:
         enforced: true
       planning:
         +group: planning
+        # Who can read, as opposed to who can ref() (access, above). Databricks only, when the
+        # var planning_readers names Unity Catalog groups: --vars '{planning_readers: [planning_analysts]}'.
+        +grants: "{{ {'select': var('planning_readers')} if target.type == 'databricks' and var('planning_readers', none) else {} }}"
       wallet:
         +group: wallet
 

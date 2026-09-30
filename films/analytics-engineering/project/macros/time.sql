@@ -11,3 +11,17 @@
 {% macro valid_at(as_at, valid_from='valid_from', valid_to='valid_to') -%}
     ({{ valid_from }} <= {{ as_at }} and ({{ valid_to }} is null or {{ valid_to }} > {{ as_at }}))
 {%- endmacro %}
+
+
+{#-
+    The "now" of the as-is models: the day of the build, or the as_is_date var when it's set, so
+    a run can be repeated exactly. "As it is" means the version valid on this date, not the
+    latest version recorded: a change dated in the future isn't true yet.
+-#}
+{% macro as_is_date() -%}
+    {%- if var('as_is_date', none) -%}
+        cast('{{ var("as_is_date") }}' as date)
+    {%- else -%}
+        current_date
+    {%- endif -%}
+{%- endmacro %}

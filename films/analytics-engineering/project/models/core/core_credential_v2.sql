@@ -14,9 +14,21 @@ credentials as (
 
     select * from {{ ref('int_credentials_unioned') }}
 
+),
+
+-- on an incremental run: credentials whose source rows were written since the last run, and
+-- credentials whose holder was matched to another learner since (a new key, a new decision)
+to_merge as (
+
+    select * from credentials
     {% if is_incremental() %}
-    -- only credentials whose source rows were written since the last run
-    where loaded_at > (select max(loaded_at) from {{ this }})
+    where credentials.loaded_at > (select max(loaded_at) from {{ this }})
+       or not exists (
+            select 1
+            from {{ this }} as built
+            where built.credential_key = credentials.credential_key
+              and built.learner_key = credentials.learner_key
+       )
     {% endif %}
 
 )
@@ -25,6 +37,7 @@ select
     credential_key,
     credential_bk,
     learner_key,
+    learner_bk,
     key_set,
     credential_kind,
     credential_code,
@@ -34,4 +47,4 @@ select
     status,
     revoked_on,
     loaded_at
-from credentials
+from to_merge

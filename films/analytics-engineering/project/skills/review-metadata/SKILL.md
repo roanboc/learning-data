@@ -24,7 +24,7 @@ places where that slipped.
    Each one is a candidate for a doc block in `docs/columns.md`, shown with `doc()` in every place. Read near-repeats too: the same meaning in slightly different words is the drift this step exists to catch.
 3. **Definitions outside the conceptual model.** Search the YAML and Markdown for a definition of an entity ("A learner is", "A credential is") that isn't a `doc()` of the generated block. There should be one home: `model/conceptual.yml`.
 4. **Numbers the build uses, written in prose.** The census date, the 15 credit points, the limit of four microcredentials and the passing grades live as vars in `dbt_project.yml`. Docs refer to the var; they don't repeat the value.
-5. **Missing metadata.** Every core and mart model has `meta.owner`, `meta.domain` and a glossary term; every column that holds personal data has `meta.personal_data`; every core and mart column has a description.
+5. **Missing metadata.** Every core and mart model has `meta.grain`, `meta.owner`, `meta.domain` and a glossary term; every column that holds personal data has `meta.personal_data`; every core and mart column has a description.
 6. **Report** each finding with the file and line, the other copies, and a proposed home. Propose the edits in a pull request; the engineer approves them, and the owner when the meaning moves.
 
 ## Don't

@@ -5,13 +5,14 @@
 {% docs learner %}
 **Learner.** A person the university has recorded learning with it, in any of its systems: a student of an award, a learning platform user, or a short-course customer.
 
-- Business key: The student ID, qualified by its key set: SIS|S-20417. A learner the student system doesn't know keeps the key of the first system that knew them, learning platform before short courses (LMS|u-88260, SC|grace.okafor@mail.com), until the registrar's office records a match to a student ID. Issued by: Registrar's office.
+- Business key: The student ID, qualified by its key set: SIS|S-20417. A learner the student system doesn't know keeps the key of the first system that recorded them, the learning platform first on a tie (LMS|u-88260, SC|grace.okafor@mail.com), until they're matched to a student ID. Issued by: Registrar's office.
 - Owner of the meaning: Mei Tanaka, registrar's office.
 - Identity: A student ID is a learner.
 - Identity: A learning platform account is the learner whose student ID it holds.
 - Identity: An account or a short-course customer with no student ID is the learner whose email it shares, if exactly one student has that email.
 - Identity: A short-course customer can also be the learner of a platform account with the same email, if exactly one has it.
 - Identity: Anything left is a learner of its own.
+- Identity: A learner with no student ID keeps the key of the first system that recorded them, whatever keys join them later.
 - Identity: A recorded decision beats every rule; a decision that two keys are different people stops any rule from matching them.
 - History: Every version, dated when it took effect where the source says so, and when it was recorded otherwise.
 {% enddocs %}

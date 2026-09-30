@@ -9,12 +9,12 @@ source as (
 renamed as (
 
     select
-        trim(enrolment_id) as enrolment_id,
+        upper(trim(enrolment_id)) as enrolment_id,
         nullif(lower(trim(customer_email)), '') as email,
         trim(course_code) as course_code,
         trim(course_name) as course_name,
         lower(trim(enrolment_status)) as enrolment_status,
-        nullif(trim(certificate_no), '') as certificate_no,
+        nullif(upper(trim(certificate_no)), '') as certificate_no,
         lower(trim(certificate_type)) as certificate_type,
         cast(credit_points as int) as credit_points,
         cast(completed_on as date) as completed_on,

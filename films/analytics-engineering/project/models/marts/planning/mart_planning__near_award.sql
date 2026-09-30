@@ -104,7 +104,6 @@ select
     credit_points_remaining,
     is_enrolled
         and learner_status = 'studying'
-        and credit_points_remaining > 0
-        and credit_points_remaining <= {{ var('near_award_credit_points') }}
+        and {{ is_near_award('credit_points_remaining') }}
         as is_near_award
 from measured

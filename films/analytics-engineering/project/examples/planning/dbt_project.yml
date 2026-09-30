@@ -1,0 +1,15 @@
+# Planning's own project, once Planning owns its domain: a sketch for dbt Cloud, not run here.
+# It builds on the credential project's public core models, and on nothing else of it.
+name: planning
+version: "1.0.0"
+profile: planning
+
+model-paths: ["models"]
+
+vars:
+  census_date: "2026-03-31"
+
+models:
+  planning:
+    +materialized: table
+    +access: protected

@@ -6,7 +6,7 @@ The core (the enterprise contract) and the marts (the consumer contracts), at th
 
 ```mermaid
 erDiagram
-    core_award {
+    core_award_v1 {
         string award_key PK
         string award_bk
         date valid_from PK
@@ -23,6 +23,7 @@ erDiagram
         string credential_key PK
         string credential_bk
         string learner_key FK
+        string learner_bk
         string key_set
         string credential_kind
         string credential_code
@@ -33,7 +34,7 @@ erDiagram
         date revoked_on
         timestamp loaded_at
     }
-    core_credit_towards_award {
+    core_credit_towards_award_v1 {
         string learner_award_key PK
         string learner_key FK
         string learner_bk
@@ -47,7 +48,7 @@ erDiagram
         int credit_points_earned
         int microcredentials_counted
     }
-    core_learner {
+    core_learner_v1 {
         string learner_key PK
         string learner_bk
         date valid_from PK
@@ -109,22 +110,22 @@ erDiagram
         int badges_held
         int credentials_revoked
     }
-    core_award }|--o{ core_credit_towards_award : "award_key"
-    core_award }|--o{ core_learner : "enrolled_award_key"
-    core_learner }|--o{ core_credential_v2 : "learner_key"
-    core_learner }|--o{ core_credit_towards_award : "learner_key"
-    core_learner }|--o{ mart_planning__near_award : "learner_key"
+    core_award_v1 }|--o{ core_credit_towards_award_v1 : "award_key"
+    core_award_v1 }|--o{ core_learner_v1 : "enrolled_award_key"
+    core_learner_v1 }|--o{ core_credential_v2 : "learner_key"
+    core_learner_v1 }|--o{ core_credit_towards_award_v1 : "learner_key"
+    core_learner_v1 }|--o{ mart_planning__near_award : "learner_key"
     mart_wallet__learners ||--o{ mart_wallet__credentials : "learner_key"
 ```
 
 | Model | Grain | Access | Contract |
 |---|---|---|---|
-| `core_award` | One row per award per version. | public | enforced |
-| `core_credential_v2` | One row per credential issued to a learner, from any of the three systems, with its status as it is now. | public | enforced |
-| `core_credit_towards_award` | One row per learner per award per version. | public | enforced |
-| `core_learner` | One row per learner per version. | public | enforced |
+| `core_award_v1` | One row per award per version. | public | enforced |
+| `core_credential_v2` | One row per credential. | public | enforced |
+| `core_credit_towards_award_v1` | One row per learner per award per version. | public | enforced |
+| `core_learner_v1` | One row per learner per version. | public | enforced |
 | `mart_planning__near_award` | One row per learner per award, as at census date. | protected | enforced |
-| `mart_wallet__credentials` | One row per credential, with its holder, as it is now. | protected | enforced |
+| `mart_wallet__credentials` | One row per credential, as it is now. | protected | enforced |
 | `mart_wallet__learners` | One row per learner, as it is now. | protected | enforced |
 
 Older versions still built, until their deprecation date:

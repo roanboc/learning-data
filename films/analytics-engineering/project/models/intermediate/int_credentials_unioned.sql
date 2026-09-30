@@ -45,10 +45,9 @@ badge_history as (
 
 latest_badges as (
 
-    select
-        *,
-        row_number() over (partition by badge_bk order by recorded_from desc) as newest_first
+    select *
     from badges
+    qualify row_number() over (partition by badge_bk order by recorded_from desc) = 1
 
 ),
 
@@ -67,32 +66,95 @@ platform_credentials as (
         badge_history.loaded_at
     from latest_badges
     inner join badge_history on badge_history.badge_bk = latest_badges.badge_bk
-    where latest_badges.newest_first = 1
 
 ),
 
 -- a certificate of attendance isn't a credential
+completed_courses as (
+
+    select * from enrolments
+    where enrolment_status = 'completed'
+      and certificate_type = 'completion'
+      and certificate_bk is not null
+
+),
+
+-- a certificate is revoked when its enrolment stops being completed: from the day it stopped
+certificate_history as (
+
+    select
+        certificate_bk,
+        min(completed_on) as issued_on,
+        max(case when is_current_version then 1 else 0 end) = 1 as is_still_completed,
+        max(recorded_to) as last_recorded_to,
+        max(loaded_at) as loaded_at
+    from completed_courses
+    group by certificate_bk
+
+),
+
+latest_certificates as (
+
+    select *
+    from completed_courses
+    qualify row_number() over (partition by certificate_bk order by recorded_from desc) = 1
+
+),
+
 course_credentials as (
 
     select
-        certificate_bk as credential_bk,
-        customer_bk as holder_bk,
+        latest_certificates.certificate_bk as credential_bk,
+        latest_certificates.customer_bk as holder_bk,
         'SC' as key_set,
         'microcredential' as credential_kind,
-        course_code as credential_code,
-        course_name as credential_name,
-        credit_points,
-        completed_on as issued_on,
-        cast(null as date) as revoked_on,
-        loaded_at
-    from enrolments
-    where is_current_version
-      and enrolment_status = 'completed'
-      and certificate_type = 'completion'
+        latest_certificates.course_code as credential_code,
+        latest_certificates.course_name as credential_name,
+        latest_certificates.credit_points,
+        certificate_history.issued_on,
+        case
+            when not certificate_history.is_still_completed
+                then cast(certificate_history.last_recorded_to as date)
+        end as revoked_on,
+        certificate_history.loaded_at
+    from latest_certificates
+    inner join certificate_history
+        on certificate_history.certificate_bk = latest_certificates.certificate_bk
 
 ),
 
 -- the student system has no conferral table: an award is conferred when the record turns completed
+student_record_changes as (
+
+    select
+        *,
+        lead(status_code) over (
+            partition by student_bk order by effective_date, recorded_from
+        ) as next_status_code,
+        lead(award_bk) over (
+            partition by student_bk order by effective_date, recorded_from
+        ) as next_award_bk,
+        lead(effective_date) over (
+            partition by student_bk order by effective_date, recorded_from
+        ) as next_effective_date
+    from student_records
+
+),
+
+completed_versions as (
+
+    select
+        *,
+        row_number() over (
+            partition by student_bk, award_bk order by effective_date desc, recorded_from desc
+        ) as newest_first
+    from student_record_changes
+    where status_code = 'CMP'
+
+),
+
+-- conferred the day the first completed version took effect; revoked the day a later version
+-- of the same award stopped being completed
 completions as (
 
     select
@@ -101,9 +163,16 @@ completions as (
         student_bk,
         award_bk,
         min(effective_date) as conferred_on,
+        max(
+            case
+                when newest_first = 1
+                 and next_award_bk = award_bk
+                 and next_status_code <> 'CMP'
+                    then next_effective_date
+            end
+        ) as revoked_on,
         max(loaded_at) as loaded_at
-    from student_records
-    where status_code = 'CMP'
+    from completed_versions
     group by student_id, award_code, student_bk, award_bk
 
 ),
@@ -119,7 +188,7 @@ award_credentials as (
         awards.award_name as credential_name,
         awards.credit_points_required as credit_points,
         completions.conferred_on as issued_on,
-        cast(null as date) as revoked_on,
+        completions.revoked_on,
         completions.loaded_at
     from completions
     inner join awards

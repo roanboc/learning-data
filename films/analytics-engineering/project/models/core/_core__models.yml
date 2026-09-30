@@ -2,10 +2,12 @@ models:
 
   - name: core_learner
     description: >
-      One row per learner per version: what the model knows about a learner from valid_from
-      until valid_to. {{ doc("learner") }}
+      What the model knows about a learner from valid_from until valid_to.
+      {{ doc("learner") }}
+    latest_version: 1
     config:
       meta:
+        grain: One row per learner per version
         owner: Mei Tanaka, registrar's office
         domain: registrar
         glossary_term: learner
@@ -13,6 +15,7 @@ models:
       - type: primary_key
         name: pk_core_learner
         columns: [learner_key, valid_from]
+        warn_unenforced: false
     data_tests:
       - unique_combination:
           arguments:
@@ -84,13 +87,18 @@ models:
       - name: has_student_id
         description: '{{ doc("has_student_id") }}'
         data_type: boolean
+    versions:
+      - v: 1
+        defined_in: core_learner
 
   - name: core_award
     description: >
-      One row per award per version: an award the university offers, as it stood from
-      valid_from until valid_to. {{ doc("award") }}
+      An award the university offers, as it stood from valid_from until valid_to.
+      {{ doc("award") }}
+    latest_version: 1
     config:
       meta:
+        grain: One row per award per version
         owner: Mei Tanaka, registrar's office
         domain: registrar
         glossary_term: award
@@ -98,6 +106,7 @@ models:
       - type: primary_key
         name: pk_core_award
         columns: [award_key, valid_from]
+        warn_unenforced: false
     data_tests:
       - unique_combination:
           arguments:
@@ -154,21 +163,22 @@ models:
       - name: faculty_name
         description: '{{ doc("faculty_name") }}'
         data_type: string
+    versions:
+      - v: 1
+        defined_in: core_award
 
   - name: core_credential
     description: >
-      One row per credential issued to a learner, from any of the three systems, with its
-      status as it is now. {{ doc("credential") }}
+      A credential issued to a learner by any of the three systems, with its history: issued
+      on a date, and revoked on a date if it is. status is as it is now; issued_on and
+      revoked_on say whether it counted on any other day. {{ doc("credential") }}
     latest_version: 2
     config:
       meta:
+        grain: One row per credential
         owner: Mei Tanaka, registrar's office
         domain: registrar
         glossary_term: credential
-    constraints:
-      - type: primary_key
-        name: pk_core_credential
-        columns: [credential_key]
     columns:
       - name: credential_key
         description: '{{ doc("credential_key") }}'
@@ -192,6 +202,12 @@ models:
                 field: learner_key
         config:
           meta: {glossary_term: learner, personal_data: pseudonymous}
+      - name: learner_bk
+        description: '{{ doc("learner_bk") }}'
+        data_type: string
+        constraints: [{type: not_null}]
+        config:
+          meta: {personal_data: direct}
       - name: key_set
         description: '{{ doc("key_set") }}'
         data_type: string
@@ -233,27 +249,41 @@ models:
       - name: loaded_at
         description: '{{ doc("loaded_at") }}'
         data_type: timestamp
+    # Each version is its own table in the same schema, so each names its own primary key:
+    # Unity Catalog wants constraint names unique within a schema.
     versions:
       - v: 2
+        constraints:
+          - type: primary_key
+            name: pk_core_credential_v2
+            columns: [credential_key]
+            warn_unenforced: false
       - v: 1
         deprecation_date: 2027-03-31
         description: >
-          Version 1: one row per credential issued to a learner, with is_revoked in place of
-          status. Deprecated: status replaces is_revoked in version 2, because a credential can
-          also expire. Built from version 2 until 31 March 2027.
+          Version 1: a credential issued to a learner, with is_revoked in place of status.
+          Deprecated: status replaces is_revoked in version 2, because a credential can also
+          expire. Built from version 2 until 31 March 2027.
+        constraints:
+          - type: primary_key
+            name: pk_core_credential_v1
+            columns: [credential_key]
+            warn_unenforced: false
         columns:
           - include: all
-            exclude: [status, revoked_on, loaded_at]
+            exclude: [learner_bk, status, revoked_on, loaded_at]
           - name: is_revoked
             description: True when the credential was revoked. Replaced by status in version 2.
             data_type: boolean
 
   - name: core_credit_towards_award
     description: >
-      One row per learner per award per version: the credit a learner held towards an award
-      from valid_from until valid_to. {{ doc("credit_towards_award") }}
+      The credit a learner held towards an award from valid_from until valid_to.
+      {{ doc("credit_towards_award") }}
+    latest_version: 1
     config:
       meta:
+        grain: One row per learner per award per version
         owner: Mei Tanaka, registrar's office
         domain: registrar
         glossary_term: credit towards an award
@@ -261,6 +291,7 @@ models:
       - type: primary_key
         name: pk_core_credit_towards_award
         columns: [learner_award_key, valid_from]
+        warn_unenforced: false
     data_tests:
       - unique_combination:
           arguments:
@@ -331,3 +362,6 @@ models:
       - name: microcredentials_counted
         description: How many microcredentials count towards this award in this version.
         data_type: int
+    versions:
+      - v: 1
+        defined_in: core_credit_towards_award

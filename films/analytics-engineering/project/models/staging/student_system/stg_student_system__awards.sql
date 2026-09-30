@@ -9,7 +9,7 @@ source as (
 renamed as (
 
     select
-        trim(award_code) as award_code,
+        upper(trim(award_code)) as award_code,
         trim(award_name) as award_name,
         lower(trim(award_type)) as award_type,
         cast(credit_points_required as int) as credit_points_required,

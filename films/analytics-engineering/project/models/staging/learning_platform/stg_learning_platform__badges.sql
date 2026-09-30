@@ -9,8 +9,8 @@ source as (
 renamed as (
 
     select
-        trim(badge_id) as badge_id,
-        trim(user_id) as user_id,
+        upper(trim(badge_id)) as badge_id,
+        lower(trim(user_id)) as user_id,
         trim(badge_code) as badge_code,
         trim(badge_name) as badge_name,
         cast(credit_points as int) as credit_points,

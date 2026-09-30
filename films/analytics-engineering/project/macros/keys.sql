@@ -6,7 +6,29 @@
     hash_key(['learner_bk'])                            ->  sha-256 of 'SIS|S-20417', 64 hex characters
     hash_key(['learner_bk', 'award_bk'])                ->  the key of a relationship between two keys
 
-    The rules are in docs/conventions.md, under "Keys and hashes".
+    The rules are in docs/conventions.md, under "Keys and hashes". Staging writes each system
+    key in one case (IDs and codes upper case, platform user IDs and emails lower case), so a
+    readable key and its hash are one to one.
+
+    What the Jinja below compiles to, on DuckDB (Databricks has sha2(..., 256) for sha256):
+
+    business_key('SIS', 'student_id'):
+
+        case when nullif(trim(cast(student_id as string)), '') is not null
+            then 'SIS|' || trim(cast(student_id as string)) end
+
+    hash_key(['learner_bk', 'award_bk']):
+
+        sha256(
+            case
+                when nullif(upper(trim(cast(learner_bk as string))), '') is null
+                 and nullif(upper(trim(cast(award_bk as string))), '') is null
+                    then null
+                else coalesce(nullif(upper(trim(cast(learner_bk as string))), ''), '<null>')
+                    || '|'
+                    || coalesce(nullif(upper(trim(cast(award_bk as string))), ''), '<null>')
+            end
+        )
 -#}
 
 

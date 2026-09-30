@@ -2,13 +2,14 @@ models:
 
   - name: mart_planning__near_award
     description: >
-      One row per learner per award, as at census date: every award a learner was enrolled in,
-      or held credit towards, on the census date, with the credit they held and how far they
-      were from it. As it was: every entity is read at its version on the census date, so the
-      answer doesn't change when the sources do. No names or emails: Planning counts learners,
-      it doesn't need to know who they are.
+      Every award a learner was enrolled in, or held credit towards, on the census date, with
+      the credit they held and how far they were from it. As it was: every entity is read at
+      its version on the census date, so a change recorded later, dated after census, doesn't
+      change the answer. No names or emails: Planning counts learners, it doesn't need to know
+      who they are.
     config:
       meta:
+        grain: One row per learner per award, as at census date
         owner: Planning
         domain: planning
         consumer: Census dashboard
@@ -16,6 +17,7 @@ models:
       - type: primary_key
         name: pk_mart_planning__near_award
         columns: [learner_award_key]
+        warn_unenforced: false
     data_tests:
       # the grain, tested as a key
       - unique_combination:

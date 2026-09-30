@@ -7,7 +7,7 @@ with
 decisions as (
 
     select * from {{ ref('learner_identity_decisions') }}
-    where same_as_or_not = 'different'
+    where decision = 'different'
 
 ),
 

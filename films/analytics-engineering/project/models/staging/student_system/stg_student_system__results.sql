@@ -9,9 +9,9 @@ source as (
 renamed as (
 
     select
-        trim(result_id) as result_id,
-        trim(student_id) as student_id,
-        trim(award_code) as award_code,
+        upper(trim(result_id)) as result_id,
+        upper(trim(student_id)) as student_id,
+        upper(trim(award_code)) as award_code,
         trim(unit_code) as unit_code,
         upper(trim(grade)) as grade,
         cast(credit_points as int) as credit_points,

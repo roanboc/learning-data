@@ -1,12 +1,15 @@
-"""Writes docs/definitions.md: one dbt doc block per entity and relationship, from model/conceptual.yml.
+"""Writes docs/definitions.md and seeds/key_sets.csv from model/conceptual.yml.
 
 The meaning is written once, in the conceptual model. This script turns it into doc blocks, the
 dbt YAML shows them with doc(), and on Databricks persist_docs pushes them to Unity Catalog.
+The key sets are written once there too; the seed the models join to is generated from them.
 
-    python scripts/definitions.py           # write docs/definitions.md
-    python scripts/definitions.py --check   # fail if docs/definitions.md is out of date
+    python scripts/definitions.py           # write docs/definitions.md and seeds/key_sets.csv
+    python scripts/definitions.py --check   # fail if either is out of date
 """
 import argparse
+import csv
+import io
 import sys
 from pathlib import Path
 
@@ -15,6 +18,7 @@ import yaml
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE = ROOT / "model" / "conceptual.yml"
 TARGET = ROOT / "docs" / "definitions.md"
+KEY_SETS = ROOT / "seeds" / "key_sets.csv"
 
 
 def one_line(text):
@@ -60,19 +64,32 @@ def render():
     return "\n".join(parts)
 
 
+def render_key_sets():
+    model = yaml.safe_load(SOURCE.read_text())
+    out = io.StringIO()
+    writer = csv.writer(out, lineterminator="\n")
+    writer.writerow(["key_set", "system_name", "owner"])
+    for key_set in model["key_sets"]:
+        writer.writerow([one_line(key_set[field]) for field in ("code", "system", "owner")])
+    return out.getvalue()
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--check", action="store_true", help="fail if docs/definitions.md is out of date")
+    parser.add_argument("--check", action="store_true", help="fail if a generated file is out of date")
     args = parser.parse_args()
-    text = render()
+    outputs = {TARGET: render(), KEY_SETS: render_key_sets()}
     if args.check:
-        if not TARGET.exists() or TARGET.read_text() != text:
-            print("docs/definitions.md is out of date: run python scripts/definitions.py", file=sys.stderr)
+        stale = [path for path, text in outputs.items() if not path.exists() or path.read_text() != text]
+        for path in stale:
+            print(f"{path.relative_to(ROOT)} is out of date: run python scripts/definitions.py", file=sys.stderr)
+        if stale:
             return 1
-        print("docs/definitions.md is up to date")
+        print("docs/definitions.md and seeds/key_sets.csv are up to date")
         return 0
-    TARGET.write_text(text)
-    print(f"wrote {TARGET.relative_to(ROOT)}")
+    for path, text in outputs.items():
+        path.write_text(text)
+        print(f"wrote {path.relative_to(ROOT)}")
     return 0
 
 

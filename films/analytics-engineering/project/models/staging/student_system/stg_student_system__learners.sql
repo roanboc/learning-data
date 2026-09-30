@@ -9,12 +9,12 @@ source as (
 renamed as (
 
     select
-        trim(student_id) as student_id,
+        upper(trim(student_id)) as student_id,
         trim(given_name) as given_name,
         trim(family_name) as family_name,
         nullif(lower(trim(email)), '') as email,
         trim(status_code) as status_code,
-        trim(award_code) as award_code,
+        upper(trim(award_code)) as award_code,
         cast(effective_date as date) as effective_date,
         cast(_valid_from as timestamp) as recorded_from,
         cast(_valid_to as timestamp) as recorded_to,

@@ -17,7 +17,7 @@ select
     learners.learner_bk,
     timeline.valid_from,
     timeline.valid_to,
-    timeline.valid_to is null as is_current,
+    {{ valid_at(as_is_date(), 'timeline.valid_from', 'timeline.valid_to') }} as is_current,
     timeline.recorded_at,
     timeline.full_name,
     timeline.email,

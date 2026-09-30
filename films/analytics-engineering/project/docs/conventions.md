@@ -9,23 +9,41 @@ domain, like the key sets and the hashing macro.
 |---|---|---|---|---|
 | Staging | `models/staging/<source>/` | One model per source table: rename, cast, add keys qualified by their key set and their hashes. No joins, no rules. Keeps the source's own words (a "customer" is still a customer). | private | view |
 | Intermediate | `models/intermediate/` | Steps, not products: match keys, stitch timelines, apply business rules. Translates the source's words into the model's. | private | view |
-| Core | `models/core/` | One model per entity and relationship at a declared grain. The enterprise contract. | public | table (incremental where it pays) |
+| Core | `models/core/` | One model per entity and relationship at a declared grain. The enterprise contract, versioned: a breaking change is a new version. | public | table (incremental where it pays) |
 | Marts | `models/marts/<consumer>/` | Built for one consumer. The consumer contract. | protected | table |
 
+Access, contracts and materialisations are set once per folder, in `dbt_project.yml`. Each
+model's YAML holds the rest: `meta.grain`, the columns and their types, the constraints and the
+tests.
+
 An entity with one source and nothing to resolve (the award) needs no intermediate step.
+
+## Access
+
+Access says which models can `ref()` a model. It doesn't say who can read the table: on
+Databricks, grants do that (`+grants` in `dbt_project.yml`).
+
+| Access | Who can `ref()` it |
+|---|---|
+| `private` | Models in the same group only. Staging and intermediate are private to `credential_model`. |
+| `protected` | Any model in the same project. The marts are protected: in this one project, the wallet's marts could `ref()` Planning's, and only review stops it. |
+| `public` | Any model in any project, through a cross-project `ref()` in dbt Cloud. The core is public. |
+
+When Planning and the wallet own their own projects, `protected` keeps each consumer's marts
+to itself, and they meet only on the public core. `examples/planning/` sketches that.
 
 ## Names
 
 | What | Pattern | Example |
 |---|---|---|
 | Staging model | `stg_<source>__<table>` | `stg_short_courses__learners` |
-| Intermediate model | `int_<entity>_<what it does>` | `int_learner_keys_matched` |
+| Intermediate model | `int_<entity>`, or `int_<entity>_<step>` when an entity takes several steps | `int_learners`, `int_learner_keys_matched` |
 | Core model | `core_<entity or relationship>` | `core_credit_towards_award` |
 | Mart | `mart_<consumer>__<what>` | `mart_planning__near_award` |
 | YAML | `_<source>__sources.yml`, `_<folder>__models.yml` | `_core__models.yml` |
 | Readable key | `<thing>_bk`: qualified by its key set | `learner_bk` = `SIS\|S-20417` |
 | Hash key | `<thing>_key`: the hash of `<thing>_bk` | `learner_key` |
-| Versions | `valid_from` (inclusive), `valid_to` (exclusive, null while current), `is_current` | |
+| Versions | `valid_from` (inclusive), `valid_to` (exclusive, null for the last version), `is_current` (valid today) | |
 | When recorded | `recorded_from`, `recorded_to`, `recorded_at` | |
 | Dates, times | `<event>_on` for a date, `<event>_at` for a timestamp | `issued_on`, `loaded_at` |
 | True or false | `is_<state>`, `has_<thing>` | `is_near_award`, `has_student_id` |
@@ -41,7 +59,8 @@ An entity with one source and nothing to resolve (the award) needs no intermedia
 
 ## Keys and hashes
 
-- **Key sets.** Every key is qualified by where it comes from: `SIS` (student system), `LMS` (learning platform), `SC` (short-course platform). The list is `seeds/key_sets.csv`.
+- **Key sets.** Every key is qualified by where it comes from: `SIS` (student system), `LMS` (learning platform), `SC` (short-course platform). The list is written once, in `model/conceptual.yml`; `scripts/definitions.py` generates `seeds/key_sets.csv` from it.
+- **One case per key.** Staging writes each system key in one case: IDs and codes upper case (`S-20417`, `GCDA`), platform user IDs and emails lower case (`u-88213`). So `s-20417` typed into the platform is the same key as `S-20417`, and a readable key and its hash are one to one.
 - **Readable key.** `business_key('SIS', 'student_id')` gives `SIS|S-20417`; null when any part is missing or blank.
 - **Hash.** `hash_key(['learner_bk'])`: sha-256, as 64 hex characters, of the parts trimmed, upper-cased and joined with `|`, with a sentinel for a missing part. Every key in these sources is case-insensitive. The exact rules are in the macro's comment, `macros/keys.sql`. DuckDB's `sha256` and Databricks' `sha2(..., 256)` give the same value.
 - **Collision risk.** Two different keys giving the same sha-256 is negligible. The real risk is two different keys normalising to the same string: keys that differ only by case or spaces (intended), or a key containing `|` (none in these sources).
@@ -49,13 +68,14 @@ An entity with one source and nothing to resolve (the award) needs no intermedia
 
 ## Time
 
-- `valid_from` is inclusive and `valid_to` exclusive; a null `valid_to` means current.
+- `valid_from` is inclusive and `valid_to` exclusive; a null `valid_to` means no later version.
 - A point-in-time join uses `valid_at(date)`: the version valid on that date.
+- **As it was** is `valid_at(census_date())`. **As it is** is `valid_at(as_is_date())`: the version valid today, not the latest one recorded, because a change can be dated in the future. `is_current` is the same test, as at the build.
 - Where a source says when a change took effect, that date dates the version; otherwise, the day the platform recorded it. `recorded_at` keeps when it was recorded.
 
 ## Tests
 
-- Every model's grain is tested as a key: `unique`, or `unique_combination` for several columns.
+- Every model's grain (`meta.grain`) is tested as a key: `unique`, or `unique_combination` for several columns.
 - Every relationship is tested (`relationships`); every closed set of values too (`accepted_values`).
 - A rule with logic gets unit tests, with mock rows (`unit_tests:`).
 - Severity is agreed with the data's owner, and written in the test's description.
@@ -63,6 +83,7 @@ An entity with one source and nothing to resolve (the award) needs no intermedia
 
 ## Metadata
 
+- `meta.grain`: on every core and mart model, the grain in one sentence ("One row per credential"). The diagram in `docs/physical.md` reads it; a test proves it.
 - `meta.owner`: who owns the meaning (models) or the data (sources, seeds).
 - `meta.domain`: registrar, learning, planning or wallet.
 - `meta.glossary_term`: the term in `model/conceptual.yml` a model or key holds.

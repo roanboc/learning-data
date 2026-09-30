@@ -2,11 +2,12 @@ models:
 
   - name: mart_wallet__learners
     description: >
-      One row per learner, as it is now: who they are, what they hold, and how far they are
-      towards the award they're enrolled in. One wide row, so the app reads a learner in one
-      lookup.
+      Who a learner is, what they hold, and how far they are towards the award they're enrolled
+      in, as it is now: each entity's version valid today. One wide row, so the app reads a
+      learner in one lookup.
     config:
       meta:
+        grain: One row per learner, as it is now
         owner: Wallet app team
         domain: wallet
         consumer: Learner wallet app
@@ -14,6 +15,7 @@ models:
       - type: primary_key
         name: pk_mart_wallet__learners
         columns: [learner_key]
+        warn_unenforced: false
     columns:
       - name: learner_key
         description: '{{ doc("learner_key") }}'
@@ -70,10 +72,11 @@ models:
 
   - name: mart_wallet__credentials
     description: >
-      One row per credential, with its holder, as it is now: what the wallet shows, and what a
-      verifier checks. A revoked credential stays, marked revoked.
+      Each credential with its holder, as it is now: what the wallet shows, and what a verifier
+      checks. A revoked credential stays, marked revoked. Reads core_credential version 2.
     config:
       meta:
+        grain: One row per credential, as it is now
         owner: Wallet app team
         domain: wallet
         consumer: Learner wallet app
@@ -81,6 +84,7 @@ models:
       - type: primary_key
         name: pk_mart_wallet__credentials
         columns: [credential_key]
+        warn_unenforced: false
     columns:
       - name: credential_key
         description: '{{ doc("credential_key") }}'
@@ -94,6 +98,7 @@ models:
           - type: not_null
           - type: foreign_key
             name: fk_mart_wallet__credentials_learner
+            warn_unenforced: false
             to: ref('mart_wallet__learners')
             to_columns: [learner_key]
         data_tests:

@@ -129,7 +129,7 @@ function sq_bp(ctx,cx,top,s,o){o=o||{};const a=o.a==null?1:o.a,b=o.b||0,ph=o.ph|
   const cw=330*s,ch=52*s,cy=top+(ph-48)*s,C=[cx-cw/2,cy-ch/2,cw,ch];B.credit=C;if(a<=0.01)return B;
   withA(ctx,a,()=>{if(o.paper!==0)bpPaper(ctx,cx-700*s,top,1400*s,ph*s,(o.paper==null?1:o.paper)*b,{});
     const lc=mix(SK,BPL,b),lab=(s_,x,y)=>T(ctx,s_,x,y,{w:600,size:Math.max(18,17*s),align:"center",color:rgba(mix(SOFT,BPL,b),0.95)});
-    const hl=(k0,k1,txt,q)=>{if(q<=0)return;const A=B[k0],Z=B[k1],x0=A[0]+A[2],x1=Z[0],y0=A[1]+A[3]/2;ctx.save();ctx.strokeStyle=rgba(lc,0.9);ctx.lineWidth=2.4*s;ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(lerp(x0,x1,q),y0);ctx.stroke();ctx.restore();withA(ctx,fin(q,0.6,0.4),()=>lab(txt,(x0+x1)/2,y0-14*s));};
+    const hl=(k0,k1,txt,q)=>{if(q<=0)return;const A=B[k0],Z=B[k1],x0=A[0]+A[2],x1=Z[0],y0=A[1]+A[3]/2;ctx.save();ctx.strokeStyle=rgba(lc,0.9);ctx.lineWidth=2.4*s;ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(lerp(x0,x1,q),y0);ctx.stroke();ctx.restore();const ly=tw(ctx,txt,Math.max(18,17*s),600)>x1-x0-16?A[1]+A[3]+20*s:y0-14*s;withA(ctx,fin(q,0.6,0.4),()=>lab(txt,(x0+x1)/2,ly));};
     const dl=(k,right,q)=>{if(q<=0)return;const A=B[k],x0=A[0]+A[2]*(right?0.15:0.85),y0=A[1]+A[3],x1=right?C[0]+C[2]:C[0],y1=C[1]+C[3]/2;ctx.save();ctx.strokeStyle=rgba(lc,0.8);ctx.lineWidth=2*s;ctx.setLineDash([8*s,6*s]);ctx.beginPath();ctx.moveTo(x0,y0);
       const qx=lerp(x0,x1,q),qy=lerp(y0,y1,q);ctx.quadraticCurveTo(x0,lerp(y0,qy,0.9),qx,qy);ctx.stroke();ctx.restore();};
     if(!o.noLines){hl("learner","cred","holds",clamp(p*3-1.6,0,1));hl("cred","award","counts towards",clamp(p*3-2,0,1));}

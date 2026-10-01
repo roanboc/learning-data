@@ -54,10 +54,10 @@ const SQ_KEYS=[["{% macro duckdb__hash_key(columns) -%}","    sha256({{ credenti
   ["{% macro databricks__hash_key(columns) -%}","    sha2({{ credentials.key_string(columns) }}, 256)","{%- endmacro %}"]];
 const SQ_DEC="How many places to offer in each faculty's final graduate certificate units next semester.";
 // the YAML card of the question, where chapter 2 leaves it and chapter 3 picks it up
-const SQ_YR=[60,250,1010];
+const SQ_YR=[60,300,1120];
 scene("ask",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025});
-  const cT=c("text"),cR=c("real"),cC=c("cloud"),cH=c("hash"),m=ease(fin(t,cR-0.3,1.3));
+  const cT=c("text"),cR=c("real"),cC=c("cloud"),cH=c("hash"),m=ease(fin(t,cR-0.3,1.3)),pA=w("hash","connection")-0.3,yx=lerp(400,SQ_YR[0],ease(fin(t,pA-0.5,1.1)));
   // the loop of ten steps, small, its first station lit
   arrive(ctx,170,125,t,c("step")-0.2,()=>{sq_loop(ctx,170,125,0.21,t,STEPS10.map((_,i)=>i===0?fin(t,w("step","Step one"),0.5):0),1);tag(ctx,330,125,"step 1 · a question",WEED,{size:20});},{from:0.85});
   // who asks, and who else reads the same facts
@@ -65,25 +65,25 @@ scene("ask",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);se
   arrive(ctx,1700,130,t,w("wallet","wallet app")-0.2,()=>{sq_badge(ctx,1700,130,36,"wallet","wallet app",{size:20});withA(ctx,fin(t,w("wallet","as they are today"),0.5),()=>T(ctx,"as they are today",1700,250,{w:600,size:18,align:"center",color:rgba(SQ_CON,1)}));},{dy:20});
   // the question types itself, and its words underline as they're read; then the decision behind it
   const ul=[["learners","learners"],["within 15 credit points","within fifteen"],["graduate certificate","graduate"],["by faculty","by faculty"],["as at census date","as at census"]].map(([s,k])=>[s,fin(t,w("text",k)-0.05,0.5)]);
-  const qx=lerp(260,SQ_YR[0],m),qy=lerp(280,SQ_YR[1],m),qs=lerp(1,SQ_YR[2]/1400,m);
-  arrive(ctx,960,360,t,cT-0.3,()=>{ctx.save();ctx.translate(qx,qy);ctx.scale(qs,qs);sq_qcard(ctx,0,0,1400,{p:clamp((t-cT+0.1)/(sc.ends.text-cT-0.6),0,1),ul,a:1-m});ctx.restore();},{dy:24});
-  const dA=1-m;arrive(ctx,960,553,t,c("decision")-0.2,()=>withA(ctx,dA,()=>{const y=lerp(480,430,m);glass(ctx,360,y,1200,146,18,TRUST,{glow:12,ea:0.75,fill:"rgba(7,12,24,0.95)"});T(ctx,"the decision",390,y+36,{w:700,size:18,color:rgba(TRUST,1)});
+  const qx=lerp(260,yx,m),qy=lerp(330,SQ_YR[1],m),qs=lerp(1,SQ_YR[2]/1400,m);
+  arrive(ctx,960,410,t,cT-0.3,()=>{ctx.save();ctx.translate(qx,qy);ctx.scale(qs,qs);sq_qcard(ctx,0,0,1400,{p:clamp((t-cT+0.1)/(sc.ends.text-cT-0.6),0,1),ul,a:1-m});ctx.restore();},{dy:24});
+  const dA=1-m;arrive(ctx,960,613,t,c("decision")-0.2,()=>withA(ctx,dA,()=>{const y=lerp(540,490,m);glass(ctx,360,y,1200,146,18,TRUST,{glow:12,ea:0.75,fill:"rgba(7,12,24,0.95)"});T(ctx,"the decision",390,y+36,{w:700,size:18,color:rgba(TRUST,1)});
     const n=Math.round(SQ_DEC.length*clamp((t-w("decision","how many"))/(sc.ends.decision-w("decision","how many")-0.4),0,1)),ls=wrapT(ctx,SQ_DEC,0,0,1140,{w:700,size:28,measure:true});let pos=0;
     ls.forEach((l,i)=>{const yy=y+80+i*38;T(ctx,l.slice(0,clamp(n-pos,0,l.length)),390,yy,{w:700,size:28});const k=l.indexOf("places to offer"),ua=fin(t,w("decision","places")-0.05,0.5);
       if(k>=0&&ua>0){const x0=390+tw(ctx,l.slice(0,k),28,700),sw=tw(ctx,"places to offer",28,700);ctx.strokeStyle=rgba(TRUST,0.95);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x0,yy+8);ctx.lineTo(x0+sw*ease(ua),yy+8);ctx.stroke();}pos+=l.length+1;});}),{dy:24});
   // the number to reach, pinned to the card's corner
-  arrive(ctx,1610,290,t,w("done","census report"),()=>withA(ctx,1-m,()=>{ctx.save();ctx.translate(1600,286);ctx.rotate(-0.06);tag(ctx,0,0,"census report · 12",EDGE_,{align:"center",size:22});ctx.fillStyle=rgba([200,70,60],1);ctx.beginPath();ctx.arc(-84,-12,6,0,TAU);ctx.fill();ctx.restore();}),{from:0.6});
+  arrive(ctx,1610,340,t,w("done","census report"),()=>withA(ctx,1-m,()=>{ctx.save();ctx.translate(1600,336);ctx.rotate(-0.06);tag(ctx,0,0,"census report · 12",EDGE_,{align:"center",size:22});ctx.fillStyle=rgba([200,70,60],1);ctx.beginPath();ctx.arc(-84,-12,6,0,TAU);ctx.fill();ctx.restore();}),{from:0.6});
   // the card turns into the project's YAML; the label says where it runs, and where else it runs
   const lg=fin(t,w("real","real"),0.5)*(1-0.5*fin(t,cC+1,1.2));
-  sq_code(ctx,SQ_YR[0],SQ_YR[1],SQ_YR[2],"model/conceptual.yml",SQ_YQ,{a:m,size:18,lh:30,label:SQ_RUN,labelGlow:lg,edge:BPL,lit:{7:fin(t,cR+0.6,0.6)},litCol:SQ_CON});
-  const sl=fin(t,w("cloud","Databricks")-0.1,0.8);withA(ctx,sl*0.75,()=>tag(ctx,lerp(1120,810,ease(sl)),600,"Databricks · dbt Cloud",[150,170,200],{size:20}));
+  sq_code(ctx,yx,SQ_YR[1],SQ_YR[2],"model/conceptual.yml",SQ_YQ,{a:m,size:18,lh:30,label:SQ_RUN,labelGlow:lg,edge:BPL,lit:{7:fin(t,cR+0.6,0.6)},litCol:SQ_CON});
+  const sl=fin(t,w("cloud","Databricks")-0.1,0.8);withA(ctx,sl*0.75,()=>tag(ctx,yx+lerp(1060,850,ease(sl)),660,"Databricks · dbt Cloud",[150,170,200],{size:20}));
   // only the connection changes: two targets; and one function, the hash
-  const pA=w("hash","connection")-0.3,dl=fin(t,w("hash","connection")+0.2,0.5);
-  arrive(ctx,1485,420,t,pA,()=>{const x=1110,y=250;sq_code(ctx,x,y,750,"profiles.yml",SQ_PROF,{size:18,lh:30,edge:[150,190,255],lit:{3:dl,6:dl*0.6},litCol:WEED});
+  const dl=fin(t,w("hash","connection")+0.2,0.5);
+  arrive(ctx,1530,470,t,pA,()=>{const x=1200,y=300;sq_code(ctx,x,y,660,"profiles.yml",SQ_PROF,{size:18,lh:30,edge:[150,190,255],lit:{3:dl,6:dl*0.6},litCol:WEED});
     withA(ctx,dl,()=>tag(ctx,x+22+tw(ctx,"    duckdb: ",18,500,"mono")+16,y+80+3*30-6,SQ_RUN,WEED,{size:18}));},{dy:26});
-  const kh=w("hash","turns a key")-0.2;withA(ctx,fin(t,kh,0.3),()=>{const s="key → hash",n=typeOn(s,clamp((t-kh)/0.6,0,1));T(ctx,n,960,656,{w:800,size:28,align:"center",color:rgba(WEED,1)});});
+  const kh=w("hash","turns a key")-0.2;withA(ctx,fin(t,kh,0.3),()=>{const s="key → hash",n=typeOn(s,clamp((t-kh)/0.6,0,1));T(ctx,n,960,712,{w:800,size:28,align:"center",color:rgba(WEED,1)});});
   const kA=w("hash","into a hash")-0.1,ka=fin(t,w("hash","hash")+0.3,0.5);
-  arrive(ctx,960,773,t,kA,()=>sq_code(ctx,260,690,1400,"macros/keys.sql",null,{cols:SQ_KEYS,size:18,lh:30,label:SQ_RUN+" (and Databricks)",edge:[150,190,255],seg:[[1,"sha256",ka,WEED],[101,"sha2",ka,WEED],[101,", 256",ka,WEED]]}),{dy:26});
+  arrive(ctx,960,813,t,kA,()=>sq_code(ctx,260,730,1400,"macros/keys.sql",null,{cols:SQ_KEYS,size:18,lh:30,label:SQ_RUN+" (and Databricks)",edge:[150,190,255],seg:[[1,"sha256",ka,WEED],[101,"sha2",ka,WEED],[101,", 256",ka,WEED]]}),{dy:26});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 3. The slice ---------- */
@@ -108,8 +108,8 @@ scene("slice",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     arrowTo(ctx,px,py,tgt[0],tgt[1],TRUST,0.7*a*(1-fin(t,cN-0.5,0.8)),{p:a,head:10,lw:1.6,dash:[4,6]});});
   // the four, regrouped: three entities and the credit a learner holds towards an award, between them
   const from={};["learner","cred","award"].forEach(k=>{const i=SQ_GL.findIndex(g=>g[1]===k),[gx,gy]=grid(i);from[k]=[gx,gy,260,110];});
-  if(go>0)sq_bp(ctx,960,270,1,{b:0,ph:250,from,m:go,hi:{learner:1-go,cred:1-go,award:1-go},credit:fin(t,cO+0.8,1.0),noLines:go<0.9,paper:0});
-  else{const ca=fin(t,w("four","the credit")-0.1,0.6);arrive(ctx,960,640,t,w("four","the credit")-0.1,()=>{glass(ctx,795,614,330,52,26,TRUST,{glow:14,ea:0.9,fill:"rgba(7,12,24,0.94)"});T(ctx,"credit towards an award",960,648,{w:700,size:21,align:"center"});},{from:0.8});}
+  if(go>0)sq_bp(ctx,960,270,1,{b:0,ph:250,from,m:go,hi:{learner:1-go,cred:1-go,award:1-go},credit:fin(go,0.75,0.25),noLines:go<0.9,paper:0});
+  {const cy=lerp(640,472,go);arrive(ctx,960,cy,t,w("four","the credit")-0.1,()=>withA(ctx,1-fin(go,0.8,0.2),()=>{glass(ctx,795,cy-26,330,52,26,TRUST,{glow:14,ea:0.9,fill:"rgba(7,12,24,0.94)"});T(ctx,"credit towards an award",960,cy+8,{w:700,size:21,align:"center"});}),{from:0.8});}
   withA(ctx,fin(t,w("out","stays out"),0.5)*(1-fin(t,cN,0.6)),()=>T(ctx,"everything else stays out",960,620,{w:700,size:26,align:"center",color:rgba(SOFT,1)}));
   withA(ctx,fin(t,w("four","touches four")-0.1,0.5)*(1-fin(t,cO,0.5)),()=>tag(ctx,960,250,"the question touches four",TRUST,{align:"center",size:20}));
   // Noor agreed the scope with Planning, and wrote down why
@@ -177,7 +177,7 @@ scene("owners",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   arrive(ctx,780,670,t,cS+1.0,()=>sq_code(ctx,520,480,580,"model/conceptual.yml",SQ_YKS,{size:18,lh:30,p:clamp((t-cS-1.0)/1.6,0,1),label:SQ_RUN,edge:BPL,lit:{1:fin(t,w("sets","student system"),0.4),4:fin(t,w("sets","learning platform"),0.4),7:fin(t,w("sets","short-course"),0.4)}}),{dy:24});
   // each meaning has an owner: Mei on the learner, the credential and the award; the learning team on two kinds of credential
   const mA=fin(t,w("mei","Mei")-0.2,0.5),tA=fin(t,w("mei","learning team")-0.2,0.5),mHi=fin(t,cW,0.6);
-  ["learner","cred","award"].forEach((k,i)=>{const[x,y]=B[k];arrive(ctx,x,y,t,w("mei","owns learner")+i*0.25-0.2,()=>sq_face(ctx,"mei",x,y,30,1,{t,hi:mHi}),{from:0.5});});
+  ["learner","cred","award"].forEach((k,i)=>{const[x0,y,bw]=B[k],x=k==="award"?x0+bw:x0;arrive(ctx,x,y,t,w("mei","owns learner")+i*0.25-0.2,()=>sq_face(ctx,"mei",x,y,30,1,{t,hi:mHi}),{from:0.5});});
   const[cx_,cy_,cw_]=B.cred;arrive(ctx,cx_+cw_-60,cy_-18,t,w("mei","microcredentials")-0.2,()=>{[["microcredential",cx_+60],["badge",cx_+232]].forEach(([s,x])=>{const tw_=tw(ctx,s,18,700)+22;
     glass(ctx,x,cy_-32,tw_,28,8,TRUST,{glow:6,ea:0.8,fill:"rgba(20,50,110,0.95)"});T(ctx,s,x+11,cy_-12,{w:700,size:18,color:rgba(BPL,1)});});sq_face(ctx,"tom",cx_+326,cy_-18,17,1,{t});},{from:0.6});
   // the owners, named
@@ -202,20 +202,20 @@ scene("split",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   arrive(ctx,960,100,t,c("harder")+0.2,()=>withA(ctx,1-fin(t,w("rule","A different")-0.4,0.5),()=>T(ctx,"combine or split?",960,110,{w:800,size:40,align:"center"})),{from:0.9});
   const id1=fin(t,w("compare","what identifies")-0.1,0.5),lc=fin(t,w("compare","its life")-0.1,0.5),cp=fin(t,w("same","credit points")-0.2,0.5);
   const rowsM=[["identity","LMS|B-5010 · issuer's ID",id1],["lifecycle","issued · revoked?",lc],["credit points","5",cp,SQ_AMB]],rowsC=[["identity","the issuer's identifier",id1],["lifecycle","issued · revoked?",lc],["credit points","varies",cp,SQ_AMB]];
-  const cxL=lerp(200,610,mg),cxR=lerp(1060,610,mg),[fx,fy,fw,fh]=B0.cred;
-  arrive(ctx,530,310,t,c("harder")+0.5,()=>sq_cmp(ctx,cxL,170,660,280,"microcredential",SRC3[1][1],rowsM,{a:1-mg}),{dy:30});
-  const crX=lerp(fx,cxR,m),crY=lerp(fy,170,m),crW=lerp(fw,660,m),crH=lerp(fh,280,m);
+  const cxL=lerp(200,610,mg),cxR=lerp(1060,610,mg),[fx,fy,fw,fh]=B0.cred,cy=lerp(280,170,mg);
+  arrive(ctx,530,420,t,c("harder")+0.5,()=>sq_cmp(ctx,cxL,cy,660,280,"microcredential",SRC3[1][1],rowsM,{a:1-mg}),{dy:30});
+  const crX=lerp(fx,cxR,m),crY=lerp(fy,cy,m),crW=lerp(fw,660,m),crH=lerp(fh,280,m);
   sq_cmp(ctx,crX,crY,crW,crH,"credential",TRUST,m<1?[]:rowsC.map(r=>[r[0],r[1],r[2]*(1-mg),r[3]]),{a:1});
   if(m<1)withA(ctx,1-m,()=>bpBox(ctx,crX,crY,crW,crH,"Credential",TRUST,1,{size:26}));
   // the first two rows match; the third stays apart
-  [[id1,w("compare","Compare its life")-0.3],[lc,w("same","Both match")]].forEach(([ra,tt],i)=>{const k=fin(t,tt,0.4)*(1-mg);if(k>0)tick_(ctx,960,272+i*62,44,GOOD,k);});
-  withA(ctx,cp*(1-mg),()=>T(ctx,"≠",960,418,{w:800,size:44,align:"center",color:rgba(SQ_AMB,1)}));
+  [[id1,w("compare","Compare its life")-0.3],[lc,w("same","Both match")]].forEach(([ra,tt],i)=>{const k=fin(t,tt,0.4)*(1-mg);if(k>0)tick_(ctx,960,cy+102+i*62,44,GOOD,k);});
+  withA(ctx,cp*(1-mg),()=>T(ctx,"≠",960,cy+248,{w:800,size:44,align:"center",color:rgba(SQ_AMB,1)}));
   // one entity, with kinds, each with its owner
   withA(ctx,mg,()=>{const x=610,y=170;glass(ctx,x,y,700,280,18,TRUST,{glow:16+12*pulseAt(t,w("attend","can do"),1.4),ea:0.9,fill:"rgba(7,12,24,0.96)"});T(ctx,"credential",x+28,y+50,{w:800,size:30,color:rgba(TRUST,1)});
     T(ctx,"says",x+28,y+110,{w:600,size:18,color:rgba(SOFT,1)});T(ctx,"what someone can do",x+200,y+110,{w:700,size:22,color:rgba(mix(INK,GOOD,pulseAt(t,w("attend","can do"),1.4)),1)});
     [["award","mei"],["microcredential","tom"],["badge","tom"]].forEach(([s,who],i)=>{const kx=x+28+[0,180,440][i],ka=fin(t,w("rule","with kinds")+0.2+i*0.2,0.4);withA(ctx,ka,()=>{const tw_=tw(ctx,s,20,700)+60;glass(ctx,kx,y+170,tw_,52,12,TRUST,{glow:8,ea:0.7,fill:"rgba(30,26,12,0.95)"});
       sq_face(ctx,who,kx+24,y+196,17,1,{t});T(ctx,s,kx+48,y+203,{w:700,size:20});});});});
-  arrive(ctx,960,653,t,w("rule","with kinds")-0.1,()=>sq_code(ctx,290,480,1340,"model/conceptual.yml",SQ_YK,{a:yk>0?1:0,size:18,lh:30,label:SQ_RUN,edge:BPL,lit:{1:yk,3:yk,6:yk}}),{dy:24,a:yk});
+  arrive(ctx,960,653,t,w("rule","with kinds")-0.1,()=>sq_code(ctx,290,480,1340,"model/conceptual.yml",SQ_YK,{a:yk>0?1:0,size:18,lh:30,wrap:104,label:SQ_RUN,edge:BPL,lit:{1:yk,3:yk,6:yk}}),{dy:24,a:yk});
   // the rule, and its other half
   arrive(ctx,960,104,t,w("rule","A different")-0.2,()=>{glass(ctx,250,64,1420,80,18,TRUST,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.96)"});
     const a1="same identity + same lifecycle → one entity, with kinds",sep="  ·  ",a2="different identity, grain or lifecycle → split",W1=tw(ctx,a1,24,700),W2=tw(ctx,sep,24,700),W3=tw(ctx,a2,24,700),x0=960-(W1+W2+W3)/2;
@@ -249,9 +249,9 @@ scene("draft",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     const cw=tw(ctx,"M",18,500,"mono"),miss=fin(t,w("miss","let certificates")-0.2,0.5)*(1-fin(t,w("clause","a certificate"),0.4));
     withA(ctx,miss,()=>{const x0=602+cw*(k3+1);ctx.save();ctx.setLineDash([6,6]);ctx.strokeStyle=rgba(EDGE_,0.9);ctx.lineWidth=2;rr(ctx,x0-6,486,cw*28+12,60,8);ctx.stroke();ctx.restore();});},{dy:24});
   arrive(ctx,1720,780,t,cL-0.5,()=>{person(ctx,"mei",1720,900,0.42,{pose:t>w("clause","one clause")?"explain":"stand",t});},{dy:20,from:0.94});
-  arrive(ctx,1720,650,t,w("clause","one clause"),()=>tag(ctx,1720,650,"Mei adds one clause",TRUST,{align:"center",size:20}),{dy:12});
+  arrive(ctx,1720,624,t,w("clause","one clause"),()=>tag(ctx,1720,624,"Mei adds one clause",TRUST,{align:"center",size:20}),{dy:12});
   // her approval, and the decision in the log, with her name and the date
-  const ap=w("approve","approves");kt_gtick(ctx,1850,352,20,fin(t,ap-0.1,0.4));kt_rstamp(ctx,1720,558,"approved",TRUST,fin(t,ap,0.3),fin(t,ap+0.1,0.35),{size:24,rot:-0.08});
+  const ap=w("approve","approves");kt_gtick(ctx,1590,552,20,fin(t,ap-0.1,0.4));kt_rstamp(ctx,1720,558,"approved",TRUST,fin(t,ap,0.3),fin(t,ap+0.1,0.35),{size:24,rot:-0.08});
   arrive(ctx,1040,728,t,w("approve","in the log")-0.3,()=>sq_code(ctx,580,630,920,"docs/decisions.md",SQ_DD,{size:18,lh:30,wrap:78,edge:KIND,p:clamp((t-w("approve","in the log")+0.1)/1.6,0,1),lit:{0:fin(t,w("approve","the date"),0.5),1:fin(t,w("approve","the date")+0.2,0.5)},litCol:TRUST}),{dy:24});
   arrive(ctx,280,790,t,w("approve","owner approves"),()=>tag(ctx,280,790,"the owner approves the meaning",TRUST,{align:"center",size:20}),{dy:14});
   ctx.restore();vign(ctx,S);});

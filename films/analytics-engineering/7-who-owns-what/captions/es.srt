@@ -1,0 +1,163 @@
+1
+00:00:01,400 --> 00:00:08,874
+Antes de 1858, comprar tierra en Australia del Sur exigía rastrear una cadena de escrituras antiguas, y esperar que no faltara ninguna.
+
+2
+00:00:09,574 --> 00:00:14,523
+Ese año, una ley impulsada por Robert Torrens hizo del registro del gobierno el título.
+
+3
+00:00:15,823 --> 00:00:18,829
+Cualquiera podía confiar en él, sin revisar su historia.
+
+4
+00:00:20,329 --> 00:00:24,093
+Solo una transferencia registrada, firmada por el dueño, podía cambiarlo.
+
+5
+00:00:25,393 --> 00:00:33,765
+Los modelos núcleo de la credencial funcionan igual. Su dueño los publica, todos confían en ellos, y solo su dueño los cambia.
+
+6
+00:00:40,065 --> 00:00:42,332
+Todo está en verde, en un solo proyecto.
+
+7
+00:00:43,832 --> 00:00:53,078
+Pero su significado tiene dueños. La oficina de registro, donde trabaja Mei, es dueña de estudiantes, títulos y credenciales, y de los ID de estudiante que emite.
+
+8
+00:00:54,578 --> 00:01:01,433
+El equipo de aprendizaje es dueño de dos tipos de credencial, microcredenciales e insignias, y de las claves de sus dos plataformas.
+
+9
+00:01:03,133 --> 00:01:06,911
+Cada uno es un dominio: es dueño del significado de los hechos que registra.
+
+10
+00:01:08,411 --> 00:01:13,789
+Planificación y la app de billetera también son dominios. Son dueños de lo que construyen para sí: sus marts.
+
+11
+00:01:15,489 --> 00:01:26,800
+En el proyecto, los modelos se reúnen en grupos, y cada grupo nombra un dueño. Los modelos de staging, núcleo y marts también nombran su dominio. La propiedad sigue al significado, no al código.
+
+12
+00:01:30,500 --> 00:01:34,091
+Entonces, ¿qué publica un dominio? Un modelo núcleo, como producto.
+
+13
+00:01:35,391 --> 00:01:40,245
+Tomemos al estudiante. Su YAML declara su granularidad: una fila por estudiante por versión.
+
+14
+00:01:41,545 --> 00:01:47,342
+Su dueña: Mei, en la oficina de registro. Su dominio. Y su término del glosario: estudiante.
+
+15
+00:01:48,642 --> 00:01:55,618
+Un contrato aplicado. Un número de versión, para que un cambio nunca llegue por sorpresa. Y su documentación.
+
+16
+00:01:57,118 --> 00:02:02,832
+El grupo de Noor lo construye. Mei es dueña de lo que significa. Todos los demás construyen sobre él, no sobre cómo se hizo.
+
+17
+00:02:05,532 --> 00:02:10,389
+¿Quién puede construir sobre qué? En dbt, eso es el acceso, y viene en tres anillos.
+
+18
+00:02:11,889 --> 00:02:16,541
+Dos llegaron con los contratos. Público, para el núcleo: cualquier proyecto puede construir sobre él.
+
+19
+00:02:17,641 --> 00:02:20,318
+Protegido, para los marts: solo este proyecto.
+
+20
+00:02:21,218 --> 00:02:26,338
+El tercero es privado: solo modelos del mismo grupo. Eso es staging e intermedio.
+
+21
+00:02:27,838 --> 00:02:35,209
+El equipo de billetera intenta construir sobre un modelo intermedio. dbt lo rechaza antes de ejecutar nada, y dice por qué.
+
+22
+00:02:36,909 --> 00:02:42,932
+Luego construye sobre el mart de Planificación. dbt lo permite: mismo proyecto, y el mart es protegido.
+
+23
+00:02:44,432 --> 00:02:53,364
+Sigue estando mal. Ese mart está hecho a la medida de Planificación, y cambia cuando Planificación lo necesita. Los consumidores construyen sobre el núcleo, no sobre los marts de otros.
+
+24
+00:02:57,464 --> 00:03:03,260
+El acceso decide qué modelos pueden referirse a un modelo. No decide quién puede leer su tabla.
+
+25
+00:03:04,760 --> 00:03:10,179
+En Databricks, eso lo deciden los permisos. Los marts de Planificación dan lectura a los grupos que ella nombra.
+
+26
+00:03:11,479 --> 00:03:17,013
+Un tablero puede leer una tabla privada de staging, si un permiso lo deja. El acceso no lo impide.
+
+27
+00:03:18,313 --> 00:03:22,655
+Referirse y leer son dos puertas distintas, que abren dos reglas distintas.
+
+28
+00:03:25,355 --> 00:03:30,218
+Hoy, todo es un solo proyecto. Algún día, Planificación podría tener un proyecto propio.
+
+29
+00:03:31,718 --> 00:03:34,941
+Entonces nombra el proyecto del que depende: credentials.
+
+30
+00:03:36,241 --> 00:03:42,071
+Y se refiere al núcleo por proyecto y por nombre, fijado a una versión: el estudiante, versión uno.
+
+31
+00:03:43,771 --> 00:03:51,137
+Solo cruzan los modelos públicos. Planificación no alcanza los marts de la billetera, ni ningún paso interno. Los dominios se encuentran en el núcleo.
+
+32
+00:03:52,837 --> 00:03:59,887
+Esta parte es un boceto. Las referencias entre proyectos necesitan dbt Cloud, así que no corre en DuckDB.
+
+33
+00:04:02,587 --> 00:04:05,525
+Divididos en dominios, algunas cosas aún deben compartirse.
+
+34
+00:04:06,225 --> 00:04:09,340
+Los conjuntos de claves: uno por sistema, cada uno con su dueño.
+
+35
+00:04:10,640 --> 00:04:17,900
+Una macro para cada hash. El ID de estudiante de Aisha da los mismos sesenta y cuatro caracteres, en cada proyecto.
+
+36
+00:04:19,200 --> 00:04:25,527
+Hazle el hash de otra forma, en minúsculas, y ella tiene otra clave. Los joins no hallan nada, y ninguna prueba falla.
+
+37
+00:04:27,227 --> 00:04:34,850
+Las convenciones y el glosario, también. Las macros no cruzan proyectos, así que las compartidas pasarían a un paquete que ambos instalan.
+
+38
+00:04:35,550 --> 00:04:38,395
+Sin claves compartidas, los dominios se vuelven silos.
+
+39
+00:04:42,095 --> 00:04:47,000
+Entonces, ¿por qué no dividir ahora? Cada proyecto es más que desplegar, y más que mantener al paso.
+
+40
+00:04:48,300 --> 00:04:57,708
+El doce de octubre, Noor decidió: primero grupos, en un solo proyecto, mientras un equipo construye el núcleo. Proyectos después, cuando los equipos sean dueños de sus dominios.
+
+41
+00:04:59,208 --> 00:05:02,585
+Muchos dueños, y muchas manos. Una de ellas no es una persona.

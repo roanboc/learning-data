@@ -212,7 +212,7 @@ scene("apart",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const mA=cD-0.2,dk=ease(fin(t,dd,1.2));
   withA(ctx,oA,()=>arrive(ctx,1740,700,t,mA,()=>{person(ctx,"mei",1740,840,0.44,{pose:"explain",t});T(ctx,"Mei Tanaka",1740,556,{w:800,size:22,align:"center"});T(ctx,"registrar's office",1740,580,{w:600,size:17,align:"center",color:rgba(SOFT,1)});},{dy:20,from:0.95}));
   const dy_=lerp(600,90,dk);
-  arrive(ctx,1090,dy_+67,t,w("decide","records"),()=>{sm_file(ctx,600,dy_,980,"seeds/learner_identity_decisions.csv",SM_DEC,{size:18,lh:30,edge:TRUST,p:clamp((t-w("decide","records"))/1.2,0,1),lit:{1:fin(t,w("decide","different people"),0.5)}});
+  arrive(ctx,1090,dy_+67,t,w("decide","records"),()=>{sm_file(ctx,600,dy_,980,"seeds/learner_identity_decisions.csv",SM_DEC,{size:18,lh:30,wrap:true,edge:TRUST,p:clamp((t-w("decide","records"))/1.2,0,1),lit:{1:fin(t,w("decide","different people"),0.5)}});
     kt_rstamp(ctx,1440,dy_+166,"decided · Mei",TRUST,fin(t,w("decide","A person"),0.2)*(1-fin(t,dd-0.3,0.3)),fin(t,w("decide","A person"),0.35),{size:22,rot:-0.06});},{dy:24});
   withA(ctx,fin(t,w("decide","beats"),0.5)*(1-fin(t,dd-0.2,0.5)),()=>T(ctx,"a decision beats every rule",1000,812,{w:700,size:26,align:"center",color:rgba(TRUST,1)}));
   arrive(ctx,1700,157,t,dd+0.6,()=>tag(ctx,1600,157,"the decision is data",TRUST,{size:18}),{from:0.85});
@@ -231,8 +231,9 @@ scene("hash",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   ctx.save();drift(ctx,t,sc,{z:0.03});
   const h0=w("one","hashes"),sp=w("space","trailing space"),cMc=c("macro"),heal=w("macro","joins")+0.4,cE=c("every"),cBs=c("beside");
   // the key, carried from Aisha's circle, and its hash rolling out; the band rises when the macro arrives
-  const up=lerp(240,0,ease(fin(t,cMc-0.7,1.3))),m=ease(fin(t,0,1.3)),kx=lerp(370-66-14,100,m),ky=lerp(314,200+up,m),dot=fin(t,sp,0.3),healed=t>heal;
-  sm_key(ctx,kx,ky,healed||dot<0.5?"SIS|S-20417":"SIS|S-20417·",SRC3[0][1],{size:26,hi:pulseAt(t,sp,1.0)});
+  const up=lerp(240,-40,ease(fin(t,cMc-0.7,1.3))),m=ease(fin(t,0,1.3)),kx=lerp(370-66-14,100,m),ky=lerp(314,200+up,m),dot=fin(t,sp,0.3),healed=t>heal;
+  const inM=t>cMc-0.2,trd=inM?fin(t,w("macro","trims"),0.6):0,upd=t>w("macro","upper case");
+  sm_key(ctx,kx,ky,dot<0.5?"SIS|S-20417":!inM?"SIS|S-20417·":upd?"SIS|S-20417":trd>=1?"sis|s-20417":"sis|s-20417·",SRC3[0][1],{size:26,dots:1-trd,hi:Math.max(pulseAt(t,sp,1.0),pulseAt(t,w("macro","upper case"),1.0))});
   const red=dot>0.5&&!healed,hcol=red?BAD:healed?GOOD:INK;
   ctx.save();ctx.translate(0,up);arrowTo(ctx,350,200,420,200,SOFT,fin(t,h0,0.4),{p:fin(t,h0,0.5),head:12});
   arrive(ctx,715,200,t,h0,()=>{glass(ctx,430,136,570,128,14,hcol,{glow:12+10*pulseAt(t,red?sp:heal,1.2),ea:0.7,fill:"rgba(6,10,20,0.95)"});
@@ -240,3 +241,51 @@ scene("hash",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   arrive(ctx,1030,176,t,w("space","Sixty-four"),()=>tag(ctx,1030,176,"64 hex characters · sha-256",INK,{size:18}),{from:0.85});
   withA(ctx,fin(t,sp,0.4)*(1-fin(t,heal,0.4)),()=>{tag(ctx,1030,228,"one trailing space",SM_AMBER,{size:18});tag(ctx,1236,228,"a different hash",BAD,{size:18});});
   withA(ctx,fin(t,heal,0.4),()=>tag(ctx,1030,228,"the same hash again",GOOD,{size:18}));ctx.restore();
+  // the macro arrives: the key goes through it as typed, loses its space, takes upper case, and the hash heals
+  const mA=fin(t,cMc-0.2,0.6),tr=w("macro","trims"),uc=w("macro","upper case"),mk=w("macro","marks a missing"),jn=w("macro","joins");
+  arrive(ctx,960,362,t,cMc-0.2,()=>sm_file(ctx,100,250,1720,"macros/keys.sql",SM_KC,{size:19,lh:30,edge:[200,170,255],p:clamp((t-cMc)/1.4,0,1),
+    lit:{0:fin(t,tr,0.4)*(1-fin(t,cE-0.4,0.5)),1:fin(t,mk,0.4)*(1-fin(t,cE-0.4,0.5)),2:fin(t,mk,0.4)*(1-fin(t,cE-0.4,0.5)),3:fin(t,jn,0.4)*(1-fin(t,cE-0.4,0.5))},litCol:[200,170,255]}),{dy:30});
+  [["trim",tr,100],["upper case",uc,210],["<null> for a missing part",mk,370],["joined with |",jn,650]].forEach(([s,t0,x])=>arrive(ctx,x+60,512,t,t0,()=>tag(ctx,x,512,s,[200,170,255],{size:20}),{from:0.85}));
+  // the two engines, side by side: both give the same hash
+  const eA=fin(t,cE-0.3,0.6);arrive(ctx,550,680,t,cE-0.3,()=>sm_file(ctx,100,556,900,"macros/keys.sql",SM_EN,{size:19,lh:29,edge:LAYER4[2][1],lit:{1:fin(t,w("every","every engine")-0.2,0.4),5:fin(t,w("every","every engine")+0.2,0.4)}}),{dy:30});
+  const gA=1-fin(t,cBs-0.4,0.5);withA(ctx,gA,()=>{
+    arrive(ctx,1300,600,t,w("every","every engine")-0.2,()=>{T(ctx,"DuckDB  sha256",1060,608,{f:"mono",w:500,size:20,color:rgba(SOFT,1)});T(ctx,"→ 0905e6e2…",1450,608,{f:"mono",w:500,size:20,color:rgba(GOOD,1)});},{from:0.9});
+    arrive(ctx,1300,660,t,w("every","every engine")+0.2,()=>{T(ctx,"Databricks  sha2(…, 256)",1060,668,{f:"mono",w:500,size:20,color:rgba(SOFT,1)});T(ctx,"→ 0905e6e2…",1450,668,{f:"mono",w:500,size:20,color:rgba(GOOD,1)});},{from:0.9});
+    arrive(ctx,1300,730,t,w("every","same hash"),()=>tag(ctx,1060,730,"one macro · the same hash, every model, every engine",GOOD,{size:20}),{from:0.85});});
+  // the readable key stays beside the hash
+  arrive(ctx,1300,630,t,cBs-0.2,()=>{T(ctx,"core_learner",1060,576,{f:"mono",w:500,size:18,color:rgba(SOFT,0.95)});sm_rows(ctx,1060,594,["learner_bk","learner_key"],[["SIS|S-20417","0905e6e2…f76a2"]],{size:22,lh:40,col:TRUST,cellCol:(i,j)=>j===0?SRC3[0][1]:INK});},{dy:24});
+  arrive(ctx,1300,730,t,w("beside","readable key"),()=>tag(ctx,1060,730,"the readable key stays beside the hash",TRUST,{size:20}),{from:0.85});
+  arrive(ctx,1300,790,t,w("beside","can't be read"),()=>T(ctx,"a hash can't be read, or checked by eye",1060,798,{w:600,size:20,color:rgba(SOFT,1)}),{dy:10});
+  ctx.restore();vign(ctx,S);});
+
+/* ---------- 8. Codes, too ---------- */
+const SM_SM=["key_set,source_code,source_label,canonical_status","SIS,ENR,Enrolled,studying","SIS,LOA,Leave of absence,inactive","SIS,WD,Withdrawn,withdrawn","SIS,CMP,Completed,completed","LMS,active,Active account,studying","LMS,inactive,Inactive account,inactive","SC,1,Active customer,studying","SC,0,Inactive customer,inactive"];
+const SM_SY=["      meta: {owner: \"Mei Tanaka, registrar's office\", domain: registrar}"];
+// Aisha's one key, as a row: learner_bk beside learner_key (carried from the last chapter)
+function sm_keyRow(ctx,x,y,s,a){ctx.save();ctx.translate(x,y);ctx.scale(s,s);sm_rows(ctx,0,0,["learner_bk","learner_key"],[["SIS|S-20417","0905e6e2…f76a2"]],{a,size:22,lh:40,col:TRUST,cellCol:(i,j)=>j===0?SRC3[0][1]:INK});ctx.restore();}
+scene("codes",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");setScreen(ctx,S);bg2(ctx);motes(ctx,t);
+  ctx.save();drift(ctx,t,sc,{z:0.03});
+  const cN=c("next"),out=1-fin(t,cN-0.3,0.7),fold=ease(fin(t,w("codes","one meaning")-0.1,1.0));
+  // three codes in their colours fold into one meaning
+  withA(ctx,out,()=>{arrive(ctx,380,110,t,0.4,()=>tag(ctx,380,110,"codes, too",WEED,{align:"center",size:22}),{from:0.85});
+    [["ENR",0],["active",1],["1",2]].forEach(([s,k],i)=>{const t0=w("codes","same care")+i*0.4,y0=220+i*110,x=lerp(140,560,fold),y=lerp(y0,330,fold);
+      withA(ctx,1-fin(fold,0.8,0.2),()=>arrive(ctx,x+60,y,t,t0,()=>{sm_key(ctx,x,y,s,SRC3[k][1],{size:26});T(ctx,SRC3[k][0],x,y+52,{w:600,size:18,color:rgba(SRC3[k][1],0.9*(1-fold))});},{dy:24,from:0.8}));});
+    arrive(ctx,620,330,t,w("codes","studying")-0.1,()=>{glass(ctx,480,290,280,80,40,GOOD,{glow:18,ea:0.9,fill:"rgba(7,12,24,0.95)"});T(ctx,"studying",620,342,{w:800,size:32,align:"center",color:rgba(GOOD,1)});},{from:0.7});
+    // the status map, one row per code; the registrar's office owns it
+    const cM=c("map");arrive(ctx,1340,300,t,cM-0.3,()=>sm_file(ctx,880,130,920,"seeds/status_map.csv",SM_SM,{size:19,lh:30,edge:TRUST,p:clamp((t-cM+0.1)/1.6,0,1),
+      lit:{1:fin(t,w("map","one row"),0.4),5:fin(t,w("map","one row")+0.2,0.4),7:fin(t,w("map","one row")+0.4,0.4)},litCol:GOOD}),{dy:30});
+    arrive(ctx,1340,540,t,w("map","status map"),()=>tag(ctx,880,92,"status map · one row per code",TRUST,{size:20}),{from:0.85});
+    const oT=w("map","registrar's");arrive(ctx,1340,640,t,oT-0.2,()=>sm_file(ctx,880,560,920,"seeds/_seeds.yml",SM_SY,{size:19,lh:30,edge:TRUST}),{dy:24});
+    arrive(ctx,1100,720,t,w("map","approves"),()=>{kt_gtick(ctx,900,722,18,1);T(ctx,"owner: registrar's office · approves every change",930,730,{w:700,size:22,color:rgba(TRUST,1)});},{from:0.85});});
+  // the key from the last chapter waits below, then takes the centre: one key, many rows behind it, and a clock
+  const mv=ease(fin(t,cN-0.3,1.4)),rx=lerp(lerp(1060,140,ease(fin(t,0,1.4))),700,mv),ry=lerp(lerp(594,700,ease(fin(t,0,1.4))),470,mv),rs=lerp(1,1.2,mv);
+  const nR=w("next","many rows"),nV=w("next","many versions");
+  for(let k=4;k>=1;k--){const q=fin(t,nR+k*0.18-0.18,0.5);if(q<=0)continue;withA(ctx,q*(0.75-k*0.12),()=>glass(ctx,rx+k*22,ry-k*22,410*rs,102*rs,12,TRUST,{glow:6,ea:0.4,fill:"rgba(6,10,20,0.9)"}));}
+  sm_keyRow(ctx,rx,ry,rs,1);
+  arrive(ctx,900,420,t,w("next","one key"),()=>tag(ctx,700,420,"one key",TRUST,{size:20}),{from:0.85});
+  arrive(ctx,900,640,t,nR,()=>tag(ctx,700,640,"many rows?",SOFT,{size:20}),{from:0.85});
+  const ck=fin(t,nV,0.8);if(ck>0){const cx=1580,cy=470,r=120;withA(ctx,ck*0.6,()=>{ring(ctx,cx,cy,r,SOFT,0.8,2);for(let k=0;k<12;k++){const an=k/12*TAU;ctx.strokeStyle=rgba(SOFT,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(cx+Math.cos(an)*r*0.85,cy+Math.sin(an)*r*0.85);ctx.lineTo(cx+Math.cos(an)*r*0.95,cy+Math.sin(an)*r*0.95);ctx.stroke();}
+    const ha=t*0.05,ma=t*0.6;ctx.lineCap="round";ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.sin(ha)*r*0.5,cy-Math.cos(ha)*r*0.5);ctx.stroke();ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.sin(ma)*r*0.78,cy-Math.cos(ma)*r*0.78);ctx.stroke();});
+    arrive(ctx,1580,640,t,nV,()=>tag(ctx,1580,640,"many versions?",SOFT,{align:"center",size:20}),{from:0.85});}
+  ctx.restore();weedsEnd(ctx,S,t,B,"What makes it the same one",WEED,"Looking alike isn't being the same. Write down what is.");
+  fadeIn(ctx,S,t,0.01);vign(ctx,S);});

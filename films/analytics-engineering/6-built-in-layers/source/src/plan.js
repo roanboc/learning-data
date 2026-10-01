@@ -161,7 +161,7 @@ function bl_station(ctx,k,t,ev,o){o=o||{};const x=BL_ST[k][1],C=BL_COOKS[k],y=BL
     after=()=>{ctx.save();ctx.strokeStyle="#9a6a3a";ctx.lineWidth=5;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(sx+12,sy-62);ctx.lineTo(sx,sy+6);ctx.stroke();ctx.restore();
       for(let i=0;i<3;i++){const ph=(t*0.4+i/3)%1;withA(ctx,(1-ph)*0.35*(0.4+u),()=>{ctx.strokeStyle="rgba(255,250,240,1)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x+10+i*14,y+12-ph*90);ctx.quadraticCurveTo(x+20+i*14+Math.sin(t+i)*8,y-20-ph*90,x+8+i*14,y-40-ph*90);ctx.stroke();});}};}
   else if(k===1){// roasts: both hands, in a cloth, set the roasting tin down
-    const lift=(1-ease(fin(t,ev-0.7,0.7)))*-46;bl_roast(ctx,x,y+28+lift,1);
+    const lift=(1-ease(fin(t,ev-0.7,0.7)))*-46;after=()=>bl_roast(ctx,x,y+28+lift,1);
     arms=[[[-104,-100],[-70,-6+lift],-0.9,"grip"],[[104,-100],[70,-6+lift],0.9,"grip"]];}
   else{// fish and vegetables: a board, and a knife that comes down once
     bl_board(ctx,x-90,y+10,180,44);if(k===2)bl_fish(ctx,x-14,y+30,0.8);else bl_carrots(ctx,x-70,y+30,4,Math.round(u*4));
@@ -177,9 +177,10 @@ function bl_chef(ctx,t,reach){const x=BL_PASS,y=BL_TOP,r=ease(reach);
 function bl_kitchen(ctx,t,o){o=o||{};bl_room(ctx,t);
   // a warm light on each station when it works, or its layer's colour on the bridge
   BL_ST.forEach(([,x],k)=>{const on=o.on?o.on[k]:0;if(on>0)glow(ctx,x,420,300,[255,190,120],0.22*on);});
+  // the counters first: the cooks stand behind them, and their hands and pans rest on the marble
+  bl_counter(ctx,40,1450,{seed:2});bl_counter(ctx,1540,1890,{seed:5});
   BL_ST.forEach(([,x],k)=>bl_station(ctx,k,t,o.st?o.st[k]:1e9));
   bl_chef(ctx,t,o.reach||0);
-  bl_counter(ctx,40,1450,{seed:2});bl_counter(ctx,1540,1890,{seed:5});
   // the pass: a brass rail along the chef's counter
   ctx.save();ctx.strokeStyle=rgba(BL_BRASS,0.95);ctx.lineWidth=6;ctx.beginPath();ctx.moveTo(1540,712);ctx.lineTo(1890,712);ctx.stroke();ctx.restore();
   // bowls set out ahead: three at each station, at the back of the counter
@@ -220,9 +221,9 @@ const BL_CHIPS=[[["learners",0],["awards",0],["results",0],["users",1],["badges"
   [["near award",3],["wallet learners",3],["wallet credentials",3]]];
 const BL_COUNT=["7 views","8 views","4 tables · 1 incremental","3 tables"];
 // a column's rectangle: full (o.g: x0, cw, gap, y0, h) or folded into the strip at the top (k = 1)
-function bl_colRect(i,k,g){g=g||{};const x0=g.x0==null?60:g.x0,cw=g.cw||210,gap=g.gap==null?14:g.gap,y0=g.y0||140,h=g.h||500,e=ease(k||0);
+function bl_colRect(i,k,g){g=g||{};const x0=g.x0==null?60:g.x0,cw=g.cw||210,gap=g.gap==null?14:g.gap,y0=g.y0||140,h=g.h||620,e=ease(k||0);
   return[lerp(x0+i*(cw+gap),60+i*452,e),lerp(y0,92,e),lerp(cw,436,e),lerp(h,72,e)];}
-function bl_chipRect(i,j,g){const[x,y,w,h]=bl_colRect(i,0,g),n=BL_CHIPS[i].length,sp=(h-74)/n,ch=Math.min(i===2?84:50,sp-8);return[x+12,y+62+j*sp+(sp-8-ch)/2,w-24,ch];}
+function bl_chipRect(i,j,g){const[x,y,w,h]=bl_colRect(i,0,g),n=BL_CHIPS[i].length,sp=(h-104)/n,ch=Math.min(i===2?84:50,sp-8);return[x+12,y+62+j*sp+(sp-8-ch)/2,w-24,ch];}
 // o: k (fold into the strip), lit[i], chips[i] (how many have arrived, 0..n, fractional), hi[i][j], mat (0..1: views become glass, tables stone),
 // a[i], g (geometry), count[i] (alpha of the count), say[i][j] (a label drawn instead of the chip's own), rows (core_credential's rows, in stone)
 function bl_cols(ctx,t,o){o=o||{};const k=o.k||0,lit=o.lit||[1,1,1,1];
@@ -240,7 +241,7 @@ function bl_cols(ctx,t,o){o=o||{};const k=o.k||0,lit=o.lit||[1,1,1,1];
           if(i===2){glass(ctx,cx,cy,cw,chh,12,TRUST,{glow:10+12*hi,ea:0.85,fill:"rgba(26,20,8,0.94)"});const ls=lab==="credit towards award"?["credit towards","an award"]:[lab];ls.forEach((s,m)=>T(ctx,s,cx+cw/2,cy+chh/2+8+(m-(ls.length-1)/2)*26,{w:800,size:20,align:"center",color:rgba(mix(INK,TRUST,0.3),1)}));}
           else{glass(ctx,cx,cy,cw,chh,10,ccol,{glow:6+10*hi,ea:0.5+0.4*hi,fill:"rgba(8,14,28,0.95)"});ctx.fillStyle=rgba(ccol,0.95);rr(ctx,cx+10,cy+chh/2-11,6,22,3);ctx.fill();
             const say=o.say&&o.say[i]?o.say[i][j]:null;if(say&&say[1]>0){withA(ctx,1-say[1],()=>T(ctx,lab,cx+26,cy+chh/2+7,{w:700,size:18,color:rgba(INK,0.95)}));withA(ctx,say[1],()=>tag(ctx,cx+24,cy+chh/2,say[0],say[2]||ccol,{size:18}));}
-            else T(ctx,lab,cx+26,cy+chh/2+7,{w:700,size:18,color:rgba(INK,0.95)});}},{d:1});}));});});}
+            else T(ctx,bl_fit(ctx,lab,18,cw-34,700),cx+26,cy+chh/2+7,{w:700,size:18,color:rgba(INK,0.95)});}},{d:1});}));});});}
 // views as glass panes (light streaks, nothing stored), tables as blocks of stone (with the rows they hold)
 function bl_material(ctx,i,x,y,w,h,t,o){const c=LAYER4[i][1];ctx.save();rr(ctx,x+3,y+3,w-6,h-6,14);ctx.clip();
   if(i<2){const g=ctx.createLinearGradient(x,y,x+w,y+h);g.addColorStop(0,rgba(c,0.16));g.addColorStop(1,rgba(c,0.04));ctx.fillStyle=g;ctx.fillRect(x,y,w,h);
@@ -290,9 +291,9 @@ function bl_wideRow(ctx,x,y,w,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)re
 /* ---------- the CTE outline of Planning's mart ---------- */
 const BL_OUT=[["import",["learners","awards","credit"]],["logical",["learners_at_census","awards_at_census","credit_at_census","learner_awards","joined","measured"]],["final",["final select"]]];
 // positions of each name; o.on[g] lights a group; o.trace {name: a}; o.cols {name: [column, a]}
-function bl_outlinePos(x,y){const P={};let yy=y;BL_OUT.forEach(([g,ns])=>{yy+=36;ns.forEach(n=>{P[n]=[x,yy];yy+=44;});yy+=8;});return P;}
+function bl_outlinePos(x,y){const P={};let yy=y;BL_OUT.forEach(([g,ns])=>{yy+=58;ns.forEach(n=>{P[n]=[x,yy];yy+=44;});yy+=8;});return P;}
 function bl_outline(ctx,x,y,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const P=bl_outlinePos(x,y),HN={import:"import CTEs",logical:"logical CTEs",final:"final select"};
-  withA(ctx,a,()=>{let yy=y;BL_OUT.forEach(([g,ns],gi)=>{const on=o.on?o.on[gi]||0:1;withA(ctx,0.3+0.7*on,()=>{T(ctx,HN[g],x-14,yy+22,{w:800,size:20,color:rgba(mix(SOFT,BL_MART,on),1)});});yy+=36;
+  withA(ctx,a,()=>{let yy=y;BL_OUT.forEach(([g,ns],gi)=>{const on=o.on?o.on[gi]||0:1;withA(ctx,0.3+0.7*on,()=>{T(ctx,HN[g],x-14,yy+22,{w:800,size:20,color:rgba(mix(SOFT,BL_MART,on),1)});});yy+=58;
       ns.forEach((n,i)=>{const[px,py]=P[n],tr=o.trace?o.trace[n]||0:0;withA(ctx,0.3+0.7*on,()=>{if(tr>0)glow(ctx,px+90,py-6,120,TRUST,0.25*tr);ctx.fillStyle=rgba(mix(BL_MART,TRUST,tr),1);ctx.beginPath();ctx.arc(px+6,py-6,5,0,TAU);ctx.fill();
         T(ctx,n,px+22,py,{f:"mono",w:500,size:20,color:rgba(mix(INK,TRUST,tr*0.7),1)});
         const cc=o.cols?o.cols[n]:null;if(cc&&cc[1]>0)withA(ctx,cc[1],()=>T(ctx,cc[0],px+270,py,{f:"mono",w:500,size:18,color:rgba(TRUST,1)}));});yy+=44;});yy+=8;});});

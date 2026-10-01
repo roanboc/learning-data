@@ -163,7 +163,7 @@ function sm_drawer(ctx,x,y,w,h,t,a){if(a<=0.01)return;withA(ctx,a,()=>{const d=h
   ctx.strokeStyle="rgba(60,34,14,0.45)";ctx.lineWidth=1.2;for(let k=0;k<7;k++){ctx.beginPath();ctx.moveTo(x,y+d+8+k*(h-d-12)/6);for(let xx=0;xx<=w;xx+=40)ctx.lineTo(x+xx,y+d+8+k*(h-d-12)/6+Math.sin(xx*0.02+k*1.3)*3);ctx.stroke();}
   ctx.fillStyle="rgba(255,230,190,0.18)";ctx.fillRect(x,y+d,w,3);
   const hx=x+w/2,hy=y+d+(h-d)/2;ctx.fillStyle=rgba(SM_BRASS,1);rr(ctx,hx-50,hy-12,100,24,8);ctx.fill();ctx.strokeStyle="rgba(70,46,16,0.9)";ctx.lineWidth=1.5;rr(ctx,hx-50,hy-12,100,24,8);ctx.stroke();
-  ctx.fillStyle="rgb(240,228,200)";ctx.fillRect(hx-34,hy-44,68,26);ctx.strokeStyle="rgba(70,46,16,0.6)";ctx.strokeRect(hx-34,hy-44,68,26);T(ctx,"19.0–19.9",hx,hy-25,{f:"mono",w:500,size:14,align:"center",color:rgba(SM_INK,1)});});}
+  ctx.fillStyle="rgb(240,228,200)";ctx.fillRect(hx-62,hy-50,124,32);ctx.strokeStyle="rgba(70,46,16,0.6)";ctx.strokeRect(hx-62,hy-50,124,32);T(ctx,"19.0–19.9",hx,hy-27,{f:"mono",w:500,size:18,align:"center",color:rgba(SM_INK,1)});});}
 // a fingerprint in ink, drawn ridge by ridge as p goes 0 to 1: kind 0 is a loop, kind 1 a whorl
 function sm_print(ctx,x,y,r,kind,p,a){if(a<=0.01||p<=0)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.beginPath();ctx.ellipse(0,0,r*0.78,r,0,0,TAU);ctx.clip();
   const g=ctx.createRadialGradient(0,0,r*0.2,0,0,r);g.addColorStop(0,"rgba(40,30,40,0.06)");g.addColorStop(1,"rgba(40,30,40,0)");ctx.fillStyle=g;ctx.fillRect(-r,-r,2*r,2*r);

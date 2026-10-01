@@ -3,11 +3,11 @@
    Two wordless moments: the title, drawn over the comparer's desk and the printed page, and the ending. */
 const BREATH={
 "almanac":{"hold":{"first":0.6,"posted":0.6,"twice":0.8},"breathe":3.6},
-"skills":{"hold":{"agents":0.8,"five":0.6,"process":0.6,"files":0.8}},
-"least":{"hold":{"principal":0.8,"reads":0.6,"samples":0.6}},
-"evidence":{"hold":{"claim":0.8,"four":0.6,"mei":0.6,"guess":0.8}},
-"shortcut":{"hold":{"refactor":0.6,"fails":0.8,"why":0.6,"warn":0.8,"stop":1.4,"news":0.6}},
-"validate":{"hold":{"reconcile":0.6,"diff":0.6,"scratch":0.6,"none":0.8}},
-"ship":{"hold":{"pr":0.6,"cloud":0.6,"people":0.6,"approve":1.0}},
+"skills":{"hold":{"can":0.6,"agents":1.0,"five":1.0,"process":0.8,"files":1.0}},
+"least":{"hold":{"principal":1.0,"reads":0.8,"samples":0.8}},
+"evidence":{"hold":{"claim":1.0,"four":0.8,"more":0.8,"mei":0.8,"guess":0.8}},
+"shortcut":{"hold":{"refactor":0.8,"fails":1.0,"why":0.8,"warn":1.0,"stop":1.4,"news":0.8,"fix":0.6}},
+"validate":{"hold":{"two":0.6,"reconcile":0.8,"diff":0.8,"scratch":0.8,"none":0.8}},
+"ship":{"hold":{"pr":0.8,"ci":1.0,"cloud":0.8,"people":0.8,"approve":1.0}},
 "next":{"hold":{"metadata":0.6},"breathe":4.2}
 };

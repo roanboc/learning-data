@@ -36,7 +36,7 @@ scene("brigade",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   fadeIn(ctx,S,t);vign(ctx,S);});
 
 /* ---------- 2. Staging ---------- */
-const BL_STG=["renamed as (","    select","        nullif(lower(trim(customer_email)), '') as email,","        …","    from source","),","keyed as (","    select","        {{ business_key('SC', 'email') }} as customer_bk,","        *","    from renamed",")","select","    {{ hash_key(['customer_bk']) }} as customer_key,","    *","from keyed"];
+const BL_STGCODE=["renamed as (","    select","        nullif(lower(trim(customer_email)), '') as email,","        …","    from source","),","keyed as (","    select","        {{ business_key('SC', 'email') }} as customer_bk,","        *","    from renamed",")","select","    {{ hash_key(['customer_bk']) }} as customer_key,","    *","from keyed"];
 const BL_DRAFT=["with","source as (","    select * from {{ source('short_courses', 'learners') }}","),","renamed as (","    select","        nullif(lower(trim(customer_email)), '') as email,","        trim(customer_name) as customer_name,","        …"];
 scene("staging",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.03});
@@ -50,7 +50,7 @@ scene("staging",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
     arrive(ctx,620,680,t,cD-0.1,()=>bl_code(ctx,80,600,1100,"skills/draft-a-model/SKILL.md",["The contract and the tests say what done looks like. Write them first, then the least SQL that","turns them green, in the right layer."],{edge:KT_AI,p:clamp((t-cD)/1.4,0,1),lit:{0:fin(t,w("draft","least code"),0.5),1:fin(t,w("draft","least code"),0.5)},litCol:KT_AI}),{dy:30});
     const dA=w("draft","first draft");arrive(ctx,500,350,t,dA-0.2,()=>bl_code(ctx,80,140,860,"models/staging/short_courses/stg_short_courses__learners.sql",BL_DRAFT,{edge:SRC3[2][1],p:clamp((t-dA)/2.2,0,0.55)+0.45*clamp((t-w("draft","least code"))/1.8,0,1),hi:pulseAt(t,w("draft","Jun reviews"),1.4)}),{dy:30});
     kt_agent(ctx,1300,690,26,t,{a:fin(t,cD-0.2,0.5),busy:fin(t,dA,0.5),label:"the agent"});
-    arrive(ctx,1600,880,t,w("draft","Jun reviews")-0.2,()=>{person(ctx,"jun",1600,860,0.48,{pose:"stand",expr:"calm",t});roleTag(ctx,1600,890,"jun");},{dy:20,from:0.94});
+    arrive(ctx,1600,880,t,w("draft","Jun reviews")-0.2,()=>{person(ctx,"jun",1600,830,0.48,{pose:"stand",expr:"calm",t});roleTag(ctx,1600,860,"jun");},{dy:20,from:0.94});
     kt_gtick(ctx,930,150,20,fin(t,w("draft","every line")+0.2,0.35));});
   // the first station: the four layers as columns; staging fills with seven views
   const colA=fin(t,cF-0.3,0.6),chT=w("first","seven");
@@ -66,7 +66,7 @@ scene("staging",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   const tbA=fin(t,w("first","One model")-0.2,0.5)*(1-fin(t,cJ-0.2,0.5));
   if(tbA>0)arrive(ctx,1425,330,t,w("first","One model")-0.2,()=>withA(ctx,tbA,()=>bl_layersTable(ctx,990,140,870,t,{on:[1,0.3,0.3,0.3]})),{dy:30});
   const L=(s,o)=>fin(t,w("job",s,o),0.4);
-  arrive(ctx,1425,430,t,cJ-0.1,()=>bl_code(ctx,990,140,870,"models/staging/short_courses/stg_short_courses__learners.sql",BL_STG,{edge:SRC3[2][1],p:clamp((t-cJ+0.1)/1.6,0,1),
+  arrive(ctx,1425,430,t,cJ-0.1,()=>bl_code(ctx,990,140,870,"models/staging/short_courses/stg_short_courses__learners.sql",BL_STGCODE,{edge:SRC3[2][1],p:clamp((t-cJ+0.1)/1.6,0,1),
     lit:{2:Math.max(L("renames"),L("trims")),3:L("casts")*(1-L("trims")),8:Math.max(L("readable key"),fin(t,w("nojoin","customer"),0.4)),13:L("hash")},litCol:SRC3[2][1]}),{dy:30});
   [["rename · cast",w("job","renames")],["trim · one case",w("job","trims")],["readable key · key set",w("job","readable key")],["hash",w("job","hash")]].forEach(([s,tt],i)=>arrive(ctx,1000,800,t,tt,()=>withA(ctx,1-fin(t,cN-0.3,0.4),()=>tag(ctx,1000+[0,190,400,680][i],790,s,SRC3[2][1],{size:20})),{dy:12}));
   arrive(ctx,1000,800,t,w("nojoin","No joins"),()=>{tag(ctx,1000,790,"no joins",BAD,{size:20});withA(ctx,fin(t,w("nojoin","no rules"),0.4),()=>tag(ctx,1140,790,"no rules",BAD,{size:20}));withA(ctx,fin(t,w("nojoin","still called"),0.4),()=>tag(ctx,1280,790,"still a customer",SRC3[2][1],{size:20}));},{dy:12});
@@ -74,7 +74,7 @@ scene("staging",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
 // the layers table of docs/conventions.md, trimmed and drawn as the table it is; o.on[i] lights a row
 function bl_layersTable(ctx,x,y,w,t,o){o=o||{};const R=[["Staging","One model per source table: rename, cast, add keys qualified by their key set and their hashes. No joins, no rules. …","private","view"],
     ["Intermediate","Steps, not products: match keys, stitch timelines, apply business rules. …","private","view"],["Core","One model per entity and relationship at a declared grain. The enterprise contract, versioned: …","public","table (incremental where it pays)"],
-    ["Marts","Built for one consumer. The consumer contract.","protected","table"]],cx=[x+22,x+168,x+618,x+726],cw=[140,436,100,130];
+    ["Marts","Built for one consumer. The consumer contract.","protected","table"]],cx=[x+22,x+150,x+590,x+692],cw=[120,420,96,160];
   const rows=R.map(r=>[1,3].map(k=>wrapT(ctx,r[k],0,0,cw[k],{size:18,measure:true})));let h=84+44;rows.forEach(r=>{h+=Math.max(r[0].length,r[1].length)*24+18;});
   glass(ctx,x,y,w,h,14,[170,205,255],{glow:12,ea:0.7,fill:"rgba(6,10,20,0.96)"});ctx.fillStyle=rgba([170,205,255],0.9);rr(ctx,x+18,y+18,11,11,3);ctx.fill();
   T(ctx,"docs/conventions.md",x+38,y+30,{f:"mono",w:500,size:18,color:rgba([170,205,255],1)});T(ctx,BL_RUN,x+38,y+58,{w:600,size:18,color:rgba(SOFT,1)});
@@ -125,15 +125,24 @@ scene("core",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
     withA(ctx,1-fin(t,cN+0.6,0.6),()=>{ctx.save();ctx.strokeStyle=rgba(TRUST,0.95);ctx.lineWidth=3;ctx.shadowColor=rgba(TRUST,0.6);ctx.shadowBlur=8;ctx.beginPath();let tot=0;const seg=[];for(let i=1;i<pts.length;i++){const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);seg.push(d);tot+=d;}
       let left=ap*tot;ctx.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length&&left>0;i++){const f=Math.min(1,left/seg[i-1]);ctx.lineTo(lerp(pts[i-1][0],pts[i][0],f),lerp(pts[i-1][1],pts[i][1],f));left-=seg[i-1];}ctx.stroke();ctx.restore();
       if(ap>=0.98){ctx.fillStyle=rgba(TRUST,1);ctx.beginPath();ctx.moveTo(nx,ny+nh/2);ctx.lineTo(nx-14,ny+nh/2-8);ctx.lineTo(nx-14,ny+nh/2+8);ctx.closePath();ctx.fill();}});}
+  // the blueprint, drawn small enough for its labels to stay readable: Learner holds Credential, which counts towards an Award
+function bl_bpModel(ctx,t,t0,hiT){const X=[1100,1425,1750],y=380,bw=180,bh=72,K=["learner","cred","award"];
+  K.forEach((k,i)=>{const q=fin(t,t0-0.2+i*0.3,0.5);bpBox(ctx,X[i]-bw/2,y-bh/2,bw,bh,BPE[k][0],BPE[k][1],1,{a:q,hi:fin(t,hiT[i],0.4)*(1-fin(t,hiT[i]+1.2,0.6)),size:24});});
+  [["holds",0],["counts towards",1]].forEach(([lab,i])=>{const q=fin(t,t0+0.6+i*0.4,0.6);if(q<=0)return;const xa=X[i]+bw/2,xb=X[i+1]-bw/2;ctx.save();ctx.strokeStyle=rgba(BPL,0.9);ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(xa,y);ctx.lineTo(lerp(xa,xb,q),y);ctx.stroke();ctx.restore();
+    withA(ctx,fin(q,0.6,0.4),()=>T(ctx,lab,(xa+xb)/2,y-48,{w:600,size:18,align:"center",color:rgba(BPL,0.95)}));});}
+  // the blueprint behind them: the same entities, white on blue, until the core's config takes its place
+  const bpA=fin(t,w("names","blueprint")-0.3,0.8)*(1-fin(t,cC-0.5,0.5));
+  if(bpA>0)arrive(ctx,1425,370,t,w("names","blueprint")-0.3,()=>withA(ctx,bpA,()=>{bpPaper(ctx,990,160,870,420,1,{});bl_bpModel(ctx,t,w("names","learner"),[w("names","learner"),w("names","a credential"),w("names","an award")]);
+    T(ctx,"the blueprint",1010,560,{w:700,size:20,color:rgba(BPL,0.95)});}),{dy:30});
   // the core's folder config, then the tests, carried from staging: green in a wave
   const pA=1-fin(t,cA-0.2,0.5);
   arrive(ctx,1425,290,t,cC-0.2,()=>withA(ctx,pA,()=>bl_code(ctx,990,140,870,"dbt_project.yml",BL_COREY,{edge:TRUST,p:clamp((t-cC)/1.2,0,1),lit:{4:fin(t,w("contract","public"),0.4),5:fin(t,w("contract","enforced"),0.4),6:fin(t,w("contract","enforced"),0.4)}})),{dy:30});
   arrive(ctx,1425,680,t,cG-0.4,()=>withA(ctx,pA,()=>bl_tests(ctx,990,470,870,{red:BL_TESTS.map(()=>1),green:BL_TESTS.map((s,i)=>fin(t,gW+i*0.16,0.3))})),{dy:30});
-  [["declared grain",w("contract","grain")],["public",w("contract","public")],["contract enforced",w("contract","enforced")]].forEach(([s,tt],i)=>arrive(ctx,560,700,t,tt,()=>withA(ctx,1-fin(t,cA-0.2,0.5),()=>tag(ctx,[60,250,380][i],700,s,TRUST,{size:20})),{dy:12}));
+  [["declared grain",w("contract","grain")],["public",w("contract","public")],["contract enforced",w("contract","enforced")]].forEach(([s,tt],i)=>arrive(ctx,560,820,t,tt,()=>withA(ctx,1-fin(t,cA-0.2,0.5),()=>tag(ctx,[60,250,380][i],820,s,TRUST,{size:20})),{dy:12}));
   arrive(ctx,1425,350,t,cA+0.6,()=>withA(ctx,1-fin(t,cN-0.2,0.5)*0.0,()=>bl_code(ctx,990,140,870,"models/core/core_award.sql",BL_AWARD,{edge:TRUST,p:clamp((t-cA-0.6)/1.4,0,1),lit:{4:fin(t,w("award","nothing to resolve"),0.4),2:fin(t,w("award","staging feeds"),0.4)}})),{dy:30});
-  arrive(ctx,300,700,t,w("award","one source"),()=>withA(ctx,1-fin(t,cN,0.5),()=>tag(ctx,60,700,"the award: one source, nothing to resolve",TRUST,{size:20})),{dy:12});
+  arrive(ctx,300,820,t,w("award","one source"),()=>withA(ctx,1-fin(t,cN,0.5),()=>tag(ctx,60,820,"the award: one source, nothing to resolve",TRUST,{size:20})),{dy:12});
   // Noor reviews the core, and approves it
-  arrive(ctx,1300,860,t,cN-0.2,()=>{person(ctx,"noor",1300,850,0.46,{pose:"explain",expr:"calm",t});roleTag(ctx,1300,880,"noor");},{dy:20,from:0.94});
+  arrive(ctx,1300,860,t,cN-0.2,()=>{person(ctx,"noor",1300,820,0.46,{pose:"explain",expr:"calm",t});roleTag(ctx,1300,850,"noor");},{dy:20,from:0.94});
   kt_gtick(ctx,700,150,20,fin(t,w("noor","her model"),0.35));
   ctx.restore();vign(ctx,S);});
 
@@ -144,8 +153,10 @@ scene("marts",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const cF=c("fact"),cW=c("wide"),cC=c("core"),k=fin(t,w("one","shaped")-0.2,1.3);
   bl_cols(ctx,t,{k,lit:[1,1,1,fin(t,0.2,0.6)*0.75+0.25],chips:[7,8,4,3*clamp((t-w("one","marts")+0.2)/1.0,0,1)],count:[1,1,1,1],say:[{},{3:["learner",1,BL_VIO]}]});
   // the consumers
-  bl_badge(ctx,150,240,"Planning",arrive(ctx,150,240,t,w("one","one consumer")-0.1,()=>{},{})>0?fin(t,w("one","one consumer")-0.1,0.4):0);
-  bl_badge(ctx,790,470,"the wallet",fin(t,w("one","one consumer")+0.3,0.4));
+  // the consumers arrive once the columns have folded out of their way
+  const tB=Math.max(w("one","one consumer"),w("one","shaped")+1.0);
+  arrive(ctx,150,240,t,tB,()=>bl_badge(ctx,150,240,"Planning",1),{dy:14});
+  arrive(ctx,790,470,t,tB+0.3,()=>bl_badge(ctx,790,470,"the wallet",1),{dy:14});
   // Planning's: long and narrow, 73 rows, sorted into faculties
   const tp=clamp((t-cF+0.2)/1.6,0,1);bl_planTable(ctx,140,290,260,570,t,{a:fin(t,cF-0.3,0.4),p:tp,sort:fin(t,w("fact","count by faculty")-0.2,1.2),labels:fin(t,w("fact","count by faculty")+0.6,0.5)});
   arrive(ctx,500,250,t,w("fact","one per learner"),()=>{T(ctx,"One row per learner per award,",330,236,{w:700,size:22});T(ctx,"as at census date",330,266,{w:700,size:22,color:rgba(BL_MART,1)});},{dy:12});
@@ -162,8 +173,8 @@ scene("marts",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     ctx.save();ctx.strokeStyle=rgba(TRUST,0.9);ctx.lineWidth=3;ctx.shadowColor=rgba(TRUST,0.6);ctx.shadowBlur=8;ctx.beginPath();let tot=0,seg=[];for(let k=1;k<4;k++){const d=Math.hypot(pts[k][0]-pts[k-1][0],pts[k][1]-pts[k-1][1]);seg.push(d);tot+=d;}let left=q*tot;ctx.moveTo(x0,y0);
     for(let k=1;k<4&&left>0;k++){const f=Math.min(1,left/seg[k-1]);ctx.lineTo(lerp(pts[k-1][0],pts[k][0],f),lerp(pts[k-1][1],pts[k][1],f));left-=seg[k-1];}ctx.stroke();ctx.restore();
     if(q>0.98){ctx.fillStyle=rgba(TRUST,1);ctx.beginPath();ctx.moveTo(x1,cb);ctx.lineTo(x1-8,cb+14);ctx.lineTo(x1+8,cb+14);ctx.closePath();ctx.fill();}});
-  const xa=fin(t,nv-0.1,0.6);if(xa>0){arrowTo(ctx,760,470,420,470,BAD,0.9,{p:xa,dash:[8,8],head:12});cross_(ctx,590,470,34,BAD,fin(t,nv+0.3,0.3));}
-  arrive(ctx,560,520,t,nv+0.3,()=>tag(ctx,470,516,"never on another mart",BAD,{size:18}),{dy:10});
+  const xa=fin(t,nv-0.1,0.6);if(xa>0){arrowTo(ctx,770,500,420,530,BAD,0.9,{p:xa,dash:[8,8],head:12,bend:0.15});cross_(ctx,600,520,34,BAD,fin(t,nv+0.3,0.3));}
+  arrive(ctx,560,580,t,nv+0.3,()=>tag(ctx,470,574,"never on another mart",BAD,{size:18}),{dy:10});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 6. One CTE, one step ---------- */
@@ -181,10 +192,10 @@ scene("ctes",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   arrive(ctx,200,130,t,w("open","CTE")-0.2,()=>{T(ctx,"CTE",60,140,{w:800,size:44,color:rgba(BL_MART,1)});T(ctx,"common table expression · a named step",170,138,{w:600,size:24,color:rgba(SOFT,1)});},{dy:12});
   // the file, one section at a time; each folds shut as the next opens
   const fI=fin(t,cL-0.3,0.6),fL=fin(t,cF-0.3,0.6),fF=fin(t,cR-0.2,0.6);
-  arrive(ctx,630,380,t,w("open","Open")+0.4,()=>bl_code(ctx,60,200,1150,F,BL_IMP,{edge:MC,sec:"import CTEs",fold:fI,p:clamp((t-w("open","Open")-0.4)/1.6,0,1),lit:{1:fin(t,w("import","one for each"),0.4),4:fin(t,w("import","one for each")+0.2,0.4),7:fin(t,w("import","one for each")+0.4,0.4)},litCol:MC}),{dy:30});
-  arrive(ctx,630,510,t,cL-0.3,()=>bl_code(ctx,60,290,1150,F,BL_LOG,{edge:MC,sec:"logical CTEs",fold:fL,p:clamp((t-cL)/1.6,0,1),lit:{1:fin(t,w("logical","learners at census"),0.4),6:fin(t,w("logical","one step each"),0.4)},litCol:MC,
+  arrive(ctx,630,380,t,w("open","Open")+0.4,()=>bl_code(ctx,60,200,1150,F,BL_IMP,{edge:MC,sec:"import CTEs",size:19,lh:31,fold:fI,p:clamp((t-w("open","Open")-0.4)/1.6,0,1),lit:{1:fin(t,w("import","one for each"),0.4),4:fin(t,w("import","one for each")+0.2,0.4),7:fin(t,w("import","one for each")+0.4,0.4)},litCol:MC}),{dy:30});
+  arrive(ctx,630,510,t,cL-0.3,()=>bl_code(ctx,60,290,1150,F,BL_LOG,{edge:MC,sec:"logical CTEs",size:19,lh:31,fold:fL,p:clamp((t-cL)/1.6,0,1),lit:{1:fin(t,w("logical","learners at census"),0.4),6:fin(t,w("logical","one step each"),0.4)},litCol:MC,
     strike:{1:["cte2",fin(t,w("logical","not CTE two"),0.4)]}}),{dy:30});
-  arrive(ctx,630,590,t,cF-0.3,()=>bl_code(ctx,60,380,1150,F,BL_FIN,{edge:MC,sec:"final select",fold:fF,p:clamp((t-cF)/1.6,0,1),lit:{3:fin(t,w("final","every column"),0.4),4:fin(t,w("final","every column")+0.15,0.4),1:fin(t,w("final","contract's order"),0.4),2:fin(t,w("final","contract's order")+0.15,0.4)},litCol:MC}),{dy:30});
+  arrive(ctx,630,590,t,cF-0.3,()=>bl_code(ctx,60,380,1150,F,BL_FIN,{edge:MC,sec:"final select",size:19,lh:31,fold:fF,p:clamp((t-cF)/1.6,0,1),lit:{3:fin(t,w("final","every column"),0.4),4:fin(t,w("final","every column")+0.15,0.4),1:fin(t,w("final","contract's order"),0.4),2:fin(t,w("final","contract's order")+0.15,0.4)},litCol:MC}),{dy:30});
   arrive(ctx,630,560,t,cR+0.1,()=>bl_code(ctx,60,470,1150,"docs/conventions.md",BL_CONV,{edge:[170,205,255],p:clamp((t-cR-0.1)/1.4,0,1)}),{dy:30});
   // the outline: the names, read top to bottom; then one column traced back to where it comes from
   const tr=w("review","every column"),T1=fin(t,tr-0.2,0.4),T2=fin(t,tr+0.4,0.4),T3=fin(t,tr+1.0,0.4);
@@ -203,13 +214,13 @@ const BL_INC=["{{","    config(","        materialized='incremental',","        
 // core_credential's rows inside the core's stone block: coloured by learner; cl (0..1) gathers them by learner; n how many
 function bl_credRows(ctx,t,o){const[x,y,w,h]=bl_colRect(2,0,BL_G7),n=o.n,cl=ease(o.cl||0),rb=o.rebuild==null?1:o.rebuild;const cols=[[110,170,255],[255,176,96],[126,224,180],[214,150,255],[255,128,168]];
   const lab=Array.from({length:n},(_,i)=>Math.floor(hash(i,61)*5)),sorted=lab.map((l,i)=>i).sort((a,b)=>lab[a]-lab[b]||a-b);
-  for(let i=0;i<n;i++){const r=sorted.indexOf(i),slot=lerp(i,r,cl),yy=y+h-24-slot*15;if((n-slot)/n>rb+0.02&&rb<1)continue;ctx.fillStyle=rgba(cols[lab[i]],0.85);rr(ctx,x+22,yy,w-44,9,4);ctx.fill();}}
+  for(let i=0;i<n;i++){const r=sorted.indexOf(i),slot=lerp(i,r,cl),yy=y+h-46-slot*15;if((n-slot)/n>rb+0.02&&rb<1)continue;ctx.fillStyle=rgba(cols[lab[i]],0.85);rr(ctx,x+22,yy,w-44,9,4);ctx.fill();}}
 scene("physical",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.03,x:500});
   const cV=c("views"),cT=c("tables"),cI=c("incr"),cK=c("cluster"),tw2=w("incr","Run it twice"),tf=w("cluster","in full");
   const mv=fin(t,w("views","views"),0.6),mt=fin(t,w("tables","tables"),0.6);
-  arrive(ctx,430,420,t,0.2,()=>bl_cols(ctx,t,{g:BL_G7,lit:[0.4+0.6*mv,0.4+0.6*mv,0.4+0.6*mt,0.4+0.6*mt],count:[mv,mv,mt,mt],mat:Math.max(mv,mt)}),{d:1,from:0.94});
-  arrive(ctx,430,130,t,0.4,()=>T(ctx,"how it's used → how it's stored",60,140,{w:800,size:30}),{dy:12});
+  arrive(ctx,430,420,t,0.2,()=>bl_cols(ctx,t,{g:BL_G7,lit:[0.4+0.6*mv,0.4+0.6*mv,0.4+0.6*mt,0.4+0.6*mt],count:[mv,mv,mt,mt],mat:Math.max(mv,mt),chips:[7*(1-mv),8*(1-mv),4*(1-mt),3*(1-mt)],say:[{},{3:["learner",1,BL_VIO]}]}),{d:1,from:0.94});
+  arrive(ctx,430,130,t,0.4,()=>T(ctx,"how it's used → how it's stored",60,140,{w:800,size:26}),{dy:12});
   // the agent queries a view, and a few rows show through the glass
   const q=fin(t,w("views","the agent")-0.2,0.5)*(1-fin(t,cI,0.5)),[vx,vy,vw,vh]=bl_colRect(1,0,BL_G7);
   if(q>0){kt_agent(ctx,vx+vw/2,vy+150,22,t,{a:q,busy:1});withA(ctx,q,()=>{for(let i=0;i<4;i++){const rq=fin(t,w("views","query")+0.2+i*0.15,0.3);ctx.fillStyle=rgba(BL_VIO,0.7*rq);rr(ctx,vx+24,vy+220+i*22,vw-48,12,5);ctx.fill();}});}
@@ -220,7 +231,7 @@ scene("physical",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   if(rows>0)withA(ctx,rows,()=>bl_credRows(ctx,t,{n:16+Math.round(4*mg),cl,rebuild:rb}));
   const sl=fin(t,w("incr","merges")-0.6,0.4);if(sl>0&&mg<1)withA(ctx,sl*(1-mg),()=>{const yy=lerp(150,gy+200,ease(mg));for(let i=0;i<4;i++){ctx.fillStyle=rgba(GOOD,0.9);rr(ctx,gx+22,yy+i*12,gw-44,8,4);ctx.fill();}});
   const tw3=fin(t,tw2,0.4)*(1-fin(t,cK,0.5));if(tw3>0)withA(ctx,tw3,()=>{ctx.save();ctx.setLineDash([6,6]);ctx.strokeStyle=rgba(GOOD,0.8);ctx.lineWidth=2;rr(ctx,gx+16,150,gw-32,36,6);ctx.stroke();ctx.restore();});
-  arrive(ctx,gx+gw/2,124,t,w("incr","merges nothing"),()=>withA(ctx,1-fin(t,cK,0.5),()=>tag(ctx,gx+gw/2,116,"0 rows to merge",GOOD,{align:"center",size:18})),{dy:10});
+  arrive(ctx,gx+gw+80,168,t,w("incr","merges nothing"),()=>withA(ctx,1-fin(t,cK,0.5),()=>tag(ctx,gx+gw+8,168,"0 rows to merge",GOOD,{size:18})),{dy:10});
   // the cards
   const yOut=fin(t,cI-0.2,0.5);
   arrive(ctx,1355,330,t,cV-0.2,()=>withA(ctx,1-yOut,()=>bl_code(ctx,850,140,1010,"dbt_project.yml",BL_MATY,{edge:[170,205,255],p:clamp((t-cV)/1.4,0,1),lit:{1:mv,4:mv,7:mt,10:mt}})),{dy:30});
@@ -251,24 +262,24 @@ scene("once",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
     const vA=fin(t,w("rule","fifteen"),0.4);arrive(ctx,1640,280,t,w("rule","fifteen")-0.3,()=>bl_code(ctx,1420,200,440,"dbt_project.yml",["vars:","  near_award_credit_points: 15"],{edge:TRUST,lit:{1:vA},hi:pulseAt(t,w("rule","fifteen"),1.2)}),{dy:20});
     const ln=fin(t,w("rule","fifteen")+0.3,0.6)*(1-fin(t,tM-0.4,0.4));if(ln>0)withA(ctx,ln,()=>{ctx.save();ctx.strokeStyle=rgba(TRUST,0.9);ctx.lineWidth=2.4;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(1420,bl_lineY(200,1));ctx.lineTo(lerp(1420,1340,ln),lerp(bl_lineY(200,1),bl_lineY(200,2),ln));ctx.stroke();ctx.restore();});
     // the flow: the rule writes one column; the count and the metric both read it
-    const f0=tM-0.2,q=[fin(t,f0,0.4),fin(t,f0+0.3,0.4),fin(t,f0+0.6,0.4),fin(t,f0+0.9,0.4),fin(t,w("count","same column")-0.3,0.4)];
-    const wA=bl_pill(ctx,60,340,"is_near_award()",TRUST,q[0]),wB=bl_pill(ctx,400,340,"column · is_near_award",BL_MART,q[1]),wC=bl_pill(ctx,790,340,"learners_near_graduate_certificate()",TRUST,q[2]),wD=bl_pill(ctx,1340,340,"reconcile_planning_with_census_report",GOOD,q[3]),wE=bl_pill(ctx,790,440,"metric · learners_near_graduate_certificate",KIND,q[4]);
-    if(q[1]>0)arrowTo(ctx,60+wA+4,340,396,340,TRUST,q[1],{p:q[1],head:10});if(q[2]>0)arrowTo(ctx,400+wB+4,340,786,340,BL_MART,q[2],{p:q[2],head:10});if(q[3]>0)arrowTo(ctx,790+wC+4,340,1336,340,TRUST,q[3],{p:q[3],head:10});
-    if(q[4]>0)arrowTo(ctx,400+wB-30,366,786,440,BL_MART,q[4],{p:q[4],bend:-0.15,head:10});
-    arrive(ctx,960,710,t,w("count","semantic layer")-0.3,()=>bl_code(ctx,60,500,1800,"models/semantic/_semantic.yml",BL_SEM,{edge:KIND,p:clamp((t-w("count","semantic layer")+0.2)/1.4,0,1),lit:{7:fin(t,w("count","same column"),0.4)},litCol:KIND}),{dy:30});});
+    const f0=tM+0.3,q=[fin(t,f0,0.4),fin(t,f0+0.3,0.4),fin(t,f0+0.6,0.4),fin(t,f0+0.9,0.4),fin(t,w("count","same column")-0.3,0.4)];
+    const wA=bl_pill(ctx,60,400,"is_near_award()",TRUST,q[0]),wB=bl_pill(ctx,400,400,"column · is_near_award",BL_MART,q[1]),wC=bl_pill(ctx,790,400,"learners_near_graduate_certificate()",TRUST,q[2]),wD=bl_pill(ctx,1340,400,"reconcile_planning_with_census_report",GOOD,q[3]),wE=bl_pill(ctx,790,490,"metric · learners_near_graduate_certificate",KIND,q[4]);
+    if(q[1]>0)arrowTo(ctx,60+wA+4,400,396,400,TRUST,q[1],{p:q[1],head:10});if(q[2]>0)arrowTo(ctx,400+wB+4,400,786,400,BL_MART,q[2],{p:q[2],head:10});if(q[3]>0)arrowTo(ctx,790+wC+4,400,1336,400,TRUST,q[3],{p:q[3],head:10});
+    if(q[4]>0)arrowTo(ctx,400+wB-30,426,786,490,BL_MART,q[4],{p:q[4],bend:-0.15,head:10});
+    arrive(ctx,960,700,t,w("count","semantic layer")-0.3,()=>bl_code(ctx,60,536,1800,"models/semantic/_semantic.yml",BL_SEM,{edge:KIND,p:clamp((t-w("count","semantic layer")+0.2)/1.4,0,1),lit:{7:fin(t,w("count","same column"),0.4)},litCol:KIND}),{dy:30});});
   // the pass returns: the reconciliation, faculty by faculty, and the build's line, green
-  const pA=fin(t,cP-0.2,0.6)*(1-fin(t,cE-0.3,0.6));
+  const pA=fin(t,cP-0.2,0.6)*(1-fin(t,cE-0.8,0.5));
   withA(ctx,pA,()=>{const mg=ctx.createLinearGradient(0,640,0,720);mg.addColorStop(0,"#cfc6b6");mg.addColorStop(1,"#8e8678");ctx.fillStyle=mg;ctx.fillRect(100,650,1720,60);ctx.strokeStyle=rgba(BL_BRASS,0.95);ctx.lineWidth=6;ctx.beginPath();ctx.moveTo(100,650);ctx.lineTo(1820,650);ctx.stroke();
     arrive(ctx,960,330,t,cP,()=>bl_code(ctx,160,200,1600,"dbt show --select reconcile_census_report --profiles-dir .",BL_REC,{edge:GOOD,p:clamp((t-cP)/1.0,0,1),litCol:GOOD,lit:{1:fin(t,w("pass","faculty by faculty"),0.3),2:fin(t,w("pass","faculty by faculty")+0.25,0.3),3:fin(t,w("pass","faculty by faculty")+0.5,0.3),4:fin(t,w("pass","faculty by faculty")+0.75,0.3)}}),{dy:24});
     arrive(ctx,560,530,t,w("pass","Green")-0.2,()=>bl_code(ctx,160,470,800,"dbt build --profiles-dir .",["PASS reconcile_planning_with_census_report"],{edge:GOOD,lit:{0:1},litCol:GOOD}),{dy:20});
     const bt=fin(t,w("pass","twelve, and twelve"),0.8);bl_balance(ctx,1400,500,bt,(1-ease(fin(t,w("pass","and twelve"),0.9)))*0.18,{});
     arrive(ctx,1400,760,t,w("pass","Green"),()=>tag(ctx,1400,760,"12 · 12 · green",GOOD,{align:"center",size:22}),{dy:12});});
   // each layer, one job: the four columns beside the Savoy's four stations
-  const eA=fin(t,cE-0.2,0.6)*(1-fin(t,cN-0.2,0.6));
+  const eA=fin(t,cE-0.3,0.6)*(1-fin(t,cN-0.2,0.6));
   if(eA>0)withA(ctx,eA,()=>{ctx.save();rr(ctx,60,170,880,480,18);ctx.clip();ctx.translate(60,150);ctx.scale(0.47,0.47);bl_kitchen(ctx,t,{st:[0,0,0,0],on:[1,1,1,1],tint:1,plate:{x:BL_PASS-30,parts:4,card:1}});ctx.restore();
     ctx.strokeStyle=rgba(CLAY,0.7);ctx.lineWidth=2;rr(ctx,60,170,880,480,18);ctx.stroke();
     BL_ST.forEach(([nm,x],k)=>tag(ctx,60+x*0.47,700,nm,mix(PARCH,LAYER4[k][1],0.6),{align:"center",size:20}));
-    bl_cols(ctx,t,{g:{x0:990,cw:200,gap:20,y0:170,h:480},lit:[1,1,1,1],count:[1,1,1,1]});
+    bl_cols(ctx,t,{g:{x0:990,cw:200,gap:20,y0:170,h:480},lit:[1,1,1,1],count:[1,1,1,1],chips:[7,8,4,3],say:[{},{3:["learner",1,BL_VIO]}]});
     T(ctx,"the Savoy, 1890s",500,140,{w:700,size:22,align:"center",color:rgba(CLAY,1)});T(ctx,"the project",1430,140,{w:700,size:22,align:"center",color:rgba(WEED,1)});
     arrive(ctx,960,800,t,w("each","one step"),()=>tag(ctx,960,800,"each layer, one job · each CTE, one step",WEED,{align:"center",size:22}),{dy:12});});
   // one team, one project; but three own it
@@ -277,11 +288,11 @@ scene("once",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
     arrive(ctx,960,170,t,cN,()=>tag(ctx,700,170,"one team · one project",WEED,{align:"center",size:22}),{dy:12});
     ["learner","award","credential","credit towards award"].forEach((s,i)=>arrive(ctx,nx[i]+120,310,t,cN+0.2+i*0.1,()=>{glass(ctx,nx[i],270,240,80,14,TRUST,{glow:12,ea:0.85,fill:"rgba(26,20,8,0.94)"});T(ctx,s,nx[i]+120,318,{w:800,size:s.length>12?19:22,align:"center",color:rgba(mix(INK,TRUST,0.3),1)});},{dy:16}));
     const mA=fin(t,w("next","registrar")-0.2,0.5),tA=fin(t,w("next","learning team")-0.2,0.5),pA2=fin(t,w("next","Planning wants")-0.2,0.5);
-    withA(ctx,mA,()=>{ctx.strokeStyle=rgba(BIZ,0.6);ctx.lineWidth=2;[[280,352],[550,352]].forEach(([x,y])=>{ctx.beginPath();ctx.moveTo(415,590);ctx.lineTo(x,y);ctx.stroke();});});
-    arrive(ctx,415,860,t,w("next","registrar")-0.2,()=>{person(ctx,"mei",415,850,0.46,{pose:"stand",expr:"calm",t});T(ctx,"Mei",415,880,{w:800,size:24,align:"center"});T(ctx,"the registrar",415,908,{w:600,size:18,align:"center",color:rgba(SOFT,1)});},{dy:20,from:0.94});
-    withA(ctx,tA,()=>{ctx.strokeStyle=rgba(BIZ,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(880,590);ctx.lineTo(880,412);ctx.stroke();});
+    withA(ctx,mA,()=>{ctx.strokeStyle=rgba(BIZ,0.6);ctx.lineWidth=2;[[280,352],[550,352]].forEach(([x,y])=>{ctx.beginPath();ctx.moveTo(415,520);ctx.lineTo(x,y);ctx.stroke();});});
+    arrive(ctx,415,780,t,w("next","registrar")-0.2,()=>{person(ctx,"mei",415,770,0.46,{pose:"stand",expr:"calm",t});T(ctx,"Mei",415,800,{w:800,size:24,align:"center"});T(ctx,"the registrar",415,828,{w:600,size:18,align:"center",color:rgba(SOFT,1)});},{dy:20,from:0.94});
+    withA(ctx,tA,()=>{ctx.strokeStyle=rgba(BIZ,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(880,520);ctx.lineTo(880,412);ctx.stroke();});
     arrive(ctx,880,390,t,w("next","microcredentials")-0.2,()=>tag(ctx,880,390,"microcredentials",TRUST,{align:"center",size:18}),{dy:10});
-    arrive(ctx,880,860,t,w("next","learning team")-0.2,()=>{person(ctx,"tom",880,850,0.46,{pose:"stand",expr:"calm",t});T(ctx,"Tom",880,880,{w:800,size:24,align:"center"});T(ctx,"the learning team",880,908,{w:600,size:18,align:"center",color:rgba(SOFT,1)});},{dy:20,from:0.94});
+    arrive(ctx,880,780,t,w("next","learning team")-0.2,()=>{person(ctx,"tom",880,770,0.46,{pose:"stand",expr:"calm",t});T(ctx,"Tom",880,800,{w:800,size:24,align:"center"});T(ctx,"the learning team",880,828,{w:600,size:18,align:"center",color:rgba(SOFT,1)});},{dy:20,from:0.94});
     // Planning lifts its mart towards a project of its own
     const lf=ease(fin(t,w("next","project of its own")-0.4,1.4));bl_frame(ctx,1440,250,400,420,pA2,"a project of its own");
     withA(ctx,pA2,()=>{const bx=lerp(1360,1520,lf),by=lerp(560,400,lf);bl_badge(ctx,bx,by,"Planning",1);glass(ctx,bx-30,by+50,240,56,10,BL_MART,{glow:10,ea:0.8,fill:"rgba(8,14,28,0.95)"});ctx.fillStyle=rgba(BL_MART,0.95);rr(ctx,bx-20,by+67,6,22,3);ctx.fill();T(ctx,"near award",bx-4,by+85,{w:700,size:18});});});

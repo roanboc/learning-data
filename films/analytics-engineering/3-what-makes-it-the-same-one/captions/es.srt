@@ -1,0 +1,155 @@
+1
+00:00:01,400 --> 00:00:08,541
+En la década de 1880, Alphonse Bertillon, empleado de la policía de París, identificaba a los reincidentes midiéndolos.
+
+2
+00:00:09,741 --> 00:00:12,720
+Cada medida iba a una ficha, archivada por sus números.
+
+3
+00:00:13,420 --> 00:00:21,862
+En 1903, según se cuenta, un preso nuevo en Leavenworth coincidió con la ficha de otro que ya estaba allí. Las huellas los distinguieron.
+
+4
+00:00:23,362 --> 00:00:26,717
+Parecerse no es ser el mismo. Y eso nos lleva a Aisha.
+
+5
+00:00:33,017 --> 00:00:37,237
+Aisha acaba de completar un certificado de posgrado en analítica de datos.
+
+6
+00:00:37,937 --> 00:00:43,276
+El sistema de estudiantes la conoce por su número de estudiante. La plataforma de aprendizaje, por su cuenta.
+
+7
+00:00:43,776 --> 00:00:49,214
+La plataforma de cursos cortos, por el correo que escribió, con un espacio a cada lado y mayúsculas mezcladas.
+
+8
+00:00:50,814 --> 00:00:54,745
+Tres claves. Cada una significa algo solo dentro de su propio sistema.
+
+9
+00:00:56,045 --> 00:00:58,010
+Ninguna dice qué estudiante es.
+
+10
+00:01:00,710 --> 00:01:09,497
+Antes de emparejar nada, Jun averigua qué contienen de verdad las fuentes. El agente las perfila, y cada afirmación trae la consulta que la demuestra.
+
+11
+00:01:10,797 --> 00:01:14,484
+Cuatro de cuarenta y dos cuentas de la plataforma no tienen número de estudiante.
+
+12
+00:01:15,684 --> 00:01:20,029
+Dos estudiantes comparten un correo familiar, y también sus dos cuentas de la plataforma.
+
+13
+00:01:21,229 --> 00:01:29,469
+Dos inscripciones a cursos cortos no apuntan a ningún cliente, tal como se escribieron. Sin espacios y en minúsculas, cada una con correo encuentra su cliente.
+
+14
+00:01:30,769 --> 00:01:32,892
+Una afirmación sin su consulta es una suposición.
+
+15
+00:01:35,592 --> 00:01:38,726
+Primero, los conjuntos de claves del modelo de la pregunta se ponen a trabajar.
+
+16
+00:01:39,826 --> 00:01:44,812
+Cada clave lleva ahora el código corto del sistema del que viene, y el dueño de ese sistema.
+
+17
+00:01:46,112 --> 00:01:52,372
+Dos sistemas pueden usar una clave que parece igual para dos personas distintas. Calificadas, no se pueden confundir.
+
+18
+00:01:53,872 --> 00:02:01,580
+Y staging escribe cada clave de una sola forma: sin espacios y en un solo tipo de letra. El correo de Aisha pierde sus espacios y sus mayúsculas.
+
+19
+00:02:04,880 --> 00:02:11,789
+Luego: ¿qué claves son el mismo estudiante? Jun lo escribe como reglas, la más confiable primero, un bloque de código para cada una.
+
+20
+00:02:12,989 --> 00:02:14,676
+Un número de estudiante es un estudiante.
+
+21
+00:02:15,676 --> 00:02:18,904
+Una cuenta de la plataforma es el estudiante cuyo número guarda.
+
+22
+00:02:19,904 --> 00:02:23,989
+Un correo identifica a un estudiante, pero solo si exactamente un estudiante lo tiene.
+
+23
+00:02:25,089 --> 00:02:27,340
+Lo que queda es un estudiante por sí mismo.
+
+24
+00:02:29,040 --> 00:02:31,618
+Cada clave toma la regla más confiable que le aplica.
+
+25
+00:02:32,918 --> 00:02:40,463
+Las tres claves de Aisha llevan a su número de estudiante. En toda la universidad, noventa claves se vuelven cuarenta y seis estudiantes.
+
+26
+00:02:41,963 --> 00:02:49,357
+Las reglas están escritas en palabras en el modelo, y en código en dos modelos. Mei, dueña de lo que significa estudiante, las aprobó.
+
+27
+00:02:52,457 --> 00:02:59,421
+Pero otra Aisha tiene una cuenta en la plataforma, y su campo de número de estudiante guarda el de nuestra Aisha, escrito por error.
+
+28
+00:03:00,121 --> 00:03:07,748
+Las reglas las fusionan. La billetera de Aisha muestra ahora seis credenciales, una que nunca obtuvo. Y todas las pruebas siguen pasando.
+
+29
+00:03:09,448 --> 00:03:13,236
+Ninguna prueba sabía que eran dos personas, porque nadie lo había escrito.
+
+30
+00:03:14,536 --> 00:03:20,035
+Mei lo revisa y registra una decisión: personas distintas. La decisión de una persona vale más que cualquier regla.
+
+31
+00:03:22,135 --> 00:03:31,374
+La fusión se deshace, y Aisha tiene cinco. La decisión ahora es un dato: el código las mantiene separadas, y una prueba falla si algo vuelve a fusionarlas.
+
+32
+00:03:34,674 --> 00:03:36,985
+Jun calcula el hash de la clave de negocio de cada estudiante.
+
+33
+00:03:38,185 --> 00:03:43,346
+Sesenta y cuatro caracteres. Agrega un espacio al final, y el hash es completamente distinto.
+
+34
+00:03:44,846 --> 00:03:53,088
+Así que una sola macro construye cada hash. Quita los espacios de cada parte, la escribe en mayúsculas, marca la parte que falta y une las partes con una barra.
+
+35
+00:03:54,788 --> 00:03:58,956
+La misma clave da el mismo hash, en cada modelo y en cada motor.
+
+36
+00:04:00,256 --> 00:04:05,361
+Y la clave legible se queda junto al hash. Un hash no se puede leer ni revisar a simple vista.
+
+37
+00:04:08,061 --> 00:04:13,022
+Los códigos necesitan el mismo cuidado. Tres sistemas, tres códigos, un significado: estudiando.
+
+38
+00:04:14,222 --> 00:04:20,765
+Un mapa de estados lo dice, una fila por código. La oficina de registro es su dueña, y aprueba cada cambio.
+
+39
+00:04:22,065 --> 00:04:27,446
+Ahora cada estudiante tiene una clave. Pero una clave todavía puede significar muchas filas, y muchas versiones.

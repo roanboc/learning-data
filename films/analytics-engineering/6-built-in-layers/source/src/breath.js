@@ -3,7 +3,7 @@
    Two wordless moments: the title, drawn over the Savoy's pass, and the ending. */
 const BREATH={
 "brigade":{"hold":{"savoy":0.5,"stations":0.6,"ahead":0.5},"breathe":3.6},
-"staging":{"hold":{"red":0.6,"draft":0.8,"first":0.5,"job":0.8,"nojoin":0.6}},
+"staging":{"hold":{"red":1.0,"draft":1.1,"first":1.0,"job":1.2,"nojoin":0.9}},
 "intermediate":{"hold":{"steps":0.8,"list":0.8,"words":0.6,"recipe":0.6}},
 "core":{"hold":{"names":0.6,"contract":0.6,"green":0.8,"award":0.8,"noor":0.5}},
 "marts":{"hold":{"one":0.5,"fact":0.8,"wide":0.8,"core":0.6}},

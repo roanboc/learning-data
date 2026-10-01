@@ -79,7 +79,7 @@ scene("build",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   // the data as it arrives: three systems into bronze, one learner under three keys, three codes, every version
   SRC3.forEach((s,i)=>{const t0=cA+0.3+i*0.35;arrive(ctx,245,592+i*110,t,t0,()=>srcCard(ctx,80,560+i*110,330,i,{}),{dy:0,from:0.8});arrowTo(ctx,410,592+i*110,520,600+i*100,s[1],fin(t,t0,0.5)*0.8,{p:fin(t,t0,0.5),head:12});});
   arrive(ctx,910,720,t,cA+0.6,()=>{glass(ctx,520,540,780,360,20,[205,140,80],{glow:14,ea:0.7,fill:"rgba(16,10,6,0.9)"});T(ctx,"bronze · as it arrived",550,580,{w:800,size:22,color:rgba([225,165,100],1)});},{from:0.95});
-  const rows=[[SRC3[0][1],"S-20417","ENR",4],[SRC3[1][1],"u-88213","active",3],[SRC3[2][1],"aisha.k@mail.com","1",2]];
+  const rows=[[SRC3[0][1],"S-20417","ENR",4],[SRC3[1][1],"u-88213","active",3],[SRC3[2][1],"aisha.k@mail.example","1",2]];
   rows.forEach(([col,key,code,nv],i)=>{const y=640+i*86;arrive(ctx,910,y,t,w("arrive","its own keys")-0.3+i*0.25,()=>{
     for(let v=nv-1;v>0;v--){withA(ctx,fin(t,w("arrive","every version")+v*0.15,0.4),()=>{ctx.fillStyle="rgba(10,14,24,0.95)";rr(ctx,560+v*10,y-26-v*9,700,52,10);ctx.fill();ctx.strokeStyle=rgba(col,0.3);ctx.lineWidth=1.5;rr(ctx,560+v*10,y-26-v*9,700,52,10);ctx.stroke();});}
     ctx.fillStyle="rgba(10,14,24,0.98)";rr(ctx,560,y-26,700,52,10);ctx.fill();ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=2;rr(ctx,560,y-26,700,52,10);ctx.stroke();
@@ -99,7 +99,7 @@ scene("build",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 5. The building work ---------- */
-const MT_F1=["-- one query, in its own file","select","    student_id,","    lower(trim(email)) as email,","    status_code","from {{ source('student_system', 'learners') }}"];
+const MT_F1=["-- one query, in its own file","select","    upper(trim(student_id)) as student_id,","    nullif(lower(trim(email)), '') as email,","    trim(status_code) as status_code","from {{ source('student_system', 'learners') }}"];
 scene("work",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025});
   const cF=c("file"),cO=c("order");
@@ -111,9 +111,9 @@ scene("work",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
     arrive(ctx,x+190,y+45,t,w("tools",i<3?n:"dbt")-0.2,()=>mt_tool(ctx,x,y,380,90,n,i,{a:1-up*(i<3?1:0),on:i===3?dbtOn:0,dim:i<3?dbtOn:0}),{dy:24});});
   withA(ctx,fin(t,w("tools","widely used"),0.5)*(1-up),()=>T(ctx,"Jun's team: dbt",1600,400,{w:700,size:22,align:"center",color:rgba([255,160,110],1)}));
   // one query, one file; then another that refers to it; dbt works out the order
-  const f2=["select","    l.student_id,","    k.learner_key","from {{ ref('stg_student_system__learners') }} as l","join {{ ref('int_learner_keys') }} as k using (email)"];
+  const f2=["matched_keys as (","    select * from {{ ref('int_learner_keys_matched') }}","),","learner_keys as (","    select * from {{ ref('int_learner_keys') }}"];
   arrive(ctx,480,350,t,cF-0.3,()=>codeFile(ctx,100,240,760,"models/staging/stg_student_system__learners.sql",MT_F1,{p:clamp((t-cF)/2.4,0,1),edge:LAYER4[0][1]}),{dy:30});
-  arrive(ctx,480,640,t,cO-0.2,()=>codeFile(ctx,100,560,760,"models/intermediate/int_learners.sql",f2,{p:clamp((t-cO)/2.0,0,1),edge:LAYER4[1][1],lit:{3:fin(t,w("order","refer to each other"),0.5)}}),{dy:30});
+  arrive(ctx,480,640,t,cO-0.2,()=>codeFile(ctx,100,560,760,"models/intermediate/int_learners.sql",f2,{p:clamp((t-cO)/2.0,0,1),edge:LAYER4[1][1],lit:{1:fin(t,w("order","refer to each other"),0.5),4:fin(t,w("order","refer to each other"),0.5)}}),{dy:30});
   withA(ctx,fin(t,w("order","refer to each other"),0.5),()=>{arrowTo(ctx,880,420,880,640,[255,160,110],1,{p:fin(t,w("order","refer to each other"),0.8),bend:-0.25,head:14});tag(ctx,960,540,"ref() sets the order",[255,160,110],{size:18});});
   // what dbt builds on the platform, and the tests and docs beside the code
   arrive(ctx,1500,460,t,w("order","builds each result"),()=>{glass(ctx,1180,250,640,420,20,[120,160,220],{glow:12,ea:0.6,fill:"rgba(7,12,24,0.9)"});T(ctx,"on the platform",1210,290,{w:800,size:22,color:rgba(SOFT,1)});
@@ -121,7 +121,7 @@ scene("work",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
       glass(ctx,1210,y,580,96,14,col,{glow:10,ea:0.7,fill:"rgba(8,14,28,0.96)"});for(let r=0;r<3;r++){ctx.fillStyle=rgba(col,0.18+0.06*r);rr(ctx,1230,y+44+r*14,300,8,3);ctx.fill();}
       T(ctx,n,1230,y+34,{f:"mono",w:500,size:18,color:rgba(col,1)});tag(ctx,1700,y+48,k,col,{align:"center",size:18});},{from:0.9});});},{dy:30});
   const tY=w("order","tests and documentation");
-  arrive(ctx,1500,790,t,tY,()=>codeFile(ctx,1180,700,640,"models/intermediate/_int_models.yml",["- name: int_learners","  description: '{{ doc(\"learner\") }}'","  columns:","    - name: learner_key","      data_tests: [unique, not_null]"],{p:clamp((t-tY)/1.6,0,1),edge:TRUST,size:17,lh:30}),{dy:30});
+  arrive(ctx,1500,790,t,tY,()=>codeFile(ctx,1180,700,640,"models/intermediate/_int_models.yml",["- name: int_learners","  columns:","    - name: learner_key","      description: '{{ doc(\"learner_key\") }}'","      data_tests: [unique, not_null]"],{p:clamp((t-tY)/1.6,0,1),edge:TRUST,size:17,lh:30}),{dy:30});
   kt_gtick(ctx,1770,870,14,fin(t,w("order","documentation")+0.8,0.3));
   ctx.restore();vign(ctx,S);});
 
@@ -210,6 +210,8 @@ scene("series",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   MT_FILMS.forEach(([n,title,st],i)=>{const t0=w(ids[i],words[i])-0.2,a=fin(t,t0,0.5),an=-Math.PI/2+(st.reduce((s,x)=>s+x,0)/st.length)/10*TAU,px=cx+Math.cos(an)*(rx+300),py=cy+Math.sin(an)*(ry+120);
     st.forEach(k=>{const[sx,sy]=stepPos(k,cx,cy,rx,ry),q=fin(t,t0+0.2,0.6);withA(ctx,a,()=>{ctx.strokeStyle=rgba(WEED,0.5);ctx.lineWidth=1.5;ctx.setLineDash([4,6]);ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(lerp(sx,px,q),lerp(sy,py,q));ctx.stroke();ctx.setLineDash([]);glow(ctx,sx,sy,50,WEED,0.3);});});
     arrive(ctx,px,py,t,t0,()=>mt_filmCard(ctx,px,py,n,title,1,pulseAt(t,t0+0.2,1.2)),{from:0.75});});
+  // the films' code and data are real: the example project runs on dbt Core with DuckDB
+  arrive(ctx,960,150,t,w("real","real code")-0.1,()=>tag(ctx,960,150,"real code · real data · runs on dbt Core · DuckDB",WEED,{align:"center",size:20}),{dy:14});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 11. Pull back ---------- */

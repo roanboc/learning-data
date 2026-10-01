@@ -105,7 +105,7 @@ Object.assign(LV,{
   mt_q_where:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1200,640);lineageGraph(c,60,190,620,420,0,{core:1,dim:0.5,heads:0.8});
     codeFile(c,720,190,440,"_core_models.yml",["meta: {grain: …}","contract: {enforced: true}","data_tests: [unique]"],{edge:TRUST,size:24,lh:46,h:260});
     tag(c,600,70,V.ask,EDGE_,{align:"center",size:30});c.restore();},
-  mt_q_keys:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1200,640);const K=["S-20417","u-88213","aisha.k@mail.com"];
+  mt_q_keys:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1200,640);const K=["S-20417","u-88213","aisha.k@mail.example"];
     SRC3.forEach(([n,col],i)=>{glass(c,60,90+i*160,520,110,16,col,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.94)"});T(c,V.keys[i],90,135+i*160,{w:700,size:26});T(c,K[i],90,178+i*160,{f:"mono",w:500,size:26,color:rgba(col,1)});arrowTo(c,600,145+i*160,820,320,col,0.8,{head:16});});
     bpBox(c,840,270,300,100,V.oneLearner,KIND,0,{size:32});c.restore();},
   mt_q_two:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1200,640);bpBox(c,420,60,360,110,V.core,TRUST,0,{size:30});

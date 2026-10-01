@@ -147,11 +147,11 @@ Then a Markdown card, `docs/credential.md`: "# Credential", its definition, a sm
 
 ### 10 · The series · 4:34–5:00
 
-**Narration.** The next eight films take the steps in turn. Scoping a model from a question. What makes a learner the same one across systems, and how keys and hashes make it explicit. Grain and time. Contracts and tests. Building in layers. Who owns what, across domains. Working with an agent, responsibly. And writing it all down, once.
+**Narration.** The next eight films take the steps in turn. Scoping a model from a question. What makes a learner the same one across systems, and how keys and hashes make it explicit. Grain and time. Contracts and tests. Building in layers. Who owns what, across domains. Working with an agent, responsibly. And writing it all down, once. Everything they show is real code and real data. It runs on dbt Core, with DuckDB, and you can run it yourself.
 
-**Picture.** Eight film cards arrive on the loop, each settling beside the steps it covers, with its working title. The card for this film sits at the centre of the loop, lit.
+**Picture.** Eight film cards arrive on the loop, each settling beside the steps it covers, with its working title. The card for this film sits at the centre of the loop, lit. Then a label under the heading: real code, real data, runs on dbt Core with DuckDB (the example project in `../project/`).
 
-**On screen.** 2 · Start from a question · 3 · What makes it the same one · 4 · One row of what, and when · 5 · Promises and proofs · 6 · Built in layers · 7 · Who owns what · 8 · An agent on the team · 9 · Written once
+**On screen.** 2 · Start from a question · 3 · What makes it the same one · 4 · One row of what, and when · 5 · Promises and proofs · 6 · Built in layers · 7 · Who owns what · 8 · An agent on the team · 9 · Written once · real code · real data · runs on dbt Core · DuckDB
 
 ### 11 · Pull back · 5:00–5:19
 

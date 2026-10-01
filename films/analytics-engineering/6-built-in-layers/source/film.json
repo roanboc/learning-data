@@ -21,6 +21,7 @@
     ["\\bCTEs\\b", "see tee ees"],
     ["\\bCTE\\b", "see tee ee"],
     ["\\bDuckDB\\b", "duck dee bee"],
+    ["\\bAuguste\\b", "oh-goost"],
     ["\\bEscoffier\\b", "ess-coff-ee-ay"]
   ]
 }

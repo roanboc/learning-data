@@ -2,7 +2,7 @@
   "key": "promises-and-proofs",
   "title": "Promises and proofs",
   "sub": "In the weeds of data crafting, a technical series for analytics engineers: contracts say what's promised; tests prove it, and are written first. Every gap between what the business expects and what the sources hold gets a decision.",
-  "howto": "White lines on blue are the model; code on dark glass is the project, and the small label beside it says where it runs. Green is a test that passed, amber a warning, red a test that stopped the build. Teal is an AI agent's work; gold is a person's approval.",
+  "howto": "White lines on blue are the model; code on dark glass is the project, and the small label beside it says where it runs. Green is a test that passed, amber a warning, red a test that stopped the build, and a hollow dot a test not yet run. Teal is an AI agent's work; gold is a person's approval.",
   "src": [
     "plan.js",
     "scenes.js"

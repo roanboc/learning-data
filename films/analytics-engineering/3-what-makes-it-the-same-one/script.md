@@ -1,6 +1,6 @@
 # In the weeds of data crafting · What makes it the same one: script
 
-*The script of a film of In the weeds of data crafting, a technical series for analytics engineers, as planned: about 4:30, in eight chapters, in English, 30 September 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The times below are estimates from the word count (584 narrated words); the voiced ones replace them after `tools/tts.py` and `tools/pace.py`. It covers the second of Jun's ten steps: learn what the sources really hold. "Identity is a decision, written down" is a working subtitle.*
+*The script of a film of In the weeds of data crafting, a technical series for analytics engineers, as planned: about 4:30, in eight chapters, in English, 30 September 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The times below are estimates from the word count (578 narrated words); the voiced ones replace them after `tools/tts.py` and `tools/pace.py`. It covers the second of Jun's ten steps: learn what the sources really hold. "Identity is a decision, written down" is a working subtitle.*
 
 ## The promise
 
@@ -8,7 +8,7 @@ A practitioner follows every line, and a data architect agrees with it. A learne
 
 ## The story in one paragraph
 
-In the 1880s, Alphonse Bertillon, a clerk at the Paris police, identified repeat offenders by measuring them and filing the numbers on cards. The story goes that in 1903, at Leavenworth, a new prisoner matched the card of a man already inside, and fingerprints told them apart. Looking alike isn't being the same. At the university, Aisha arrives three times: under her student ID, her learning platform account, and an email typed with a space either side. Jun asks what the sources really hold; the agent profiles them, and every claim comes with its query and its result. Every key is qualified by its key set and written one way in staging. Rules, most trusted first, resolve Aisha's three keys to her student ID, and 90 keys to 46 learners. But another Aisha's platform account holds our Aisha's student ID by mistake: the rules merge them, Aisha's wallet shows six credentials, and every test passes. Mei records a decision, different people; the merge undoes, and a test now holds the decision. Each learner's key is hashed by one macro that trims, upper-cases and marks missing parts, so it gives the same hash everywhere, and the readable key stays beside it. Status codes from three systems map to one meaning, through a status map the registrar's office owns. Every learner now has one key; the next film asks what one row of them holds, and when.
+In the 1880s, Alphonse Bertillon, a clerk at the Paris police, identified repeat offenders by measuring them and filing the numbers on cards. The story goes that in 1903, at Leavenworth, a new prisoner matched the card of a man already inside, and fingerprints told them apart. Looking alike isn't being the same. At the university, Aisha arrives three times: under her student ID, her learning platform account, and an email typed with a space either side. Jun asks what the sources really hold; the agent profiles them, and every claim comes with its query and its result. Every key is qualified by its key set and written one way in staging. Rules, most trusted first, resolve Aisha's three keys to her student ID, and 90 keys to 46 learners. But another Aisha's platform account holds our Aisha's student ID by mistake: the rules merge them, Aisha's wallet shows six credentials, and every test passes. Mei records a decision, different people; the merge undoes, the code keeps the two apart, and a test fails if anything merges them again. Each learner's key is hashed by one macro that trims, upper-cases and marks missing parts, so it gives the same hash everywhere, and the readable key stays beside it. Status codes from three systems map to one meaning, through a status map the registrar's office owns. Every learner now has one key; the next film asks what one row of them holds, and when.
 
 ## What each object stands for
 
@@ -36,25 +36,25 @@ In the 1880s, Alphonse Bertillon, a clerk at the Paris police, identified repeat
 
 Every code card carries its file name on its tab and the label **`runs on dbt Core · DuckDB`** beside it. Numbers are from `dbt build --profiles-dir . --vars '{as_is_date: 2026-09-30}'` on 30 September 2026 (PASS 143, WARN 1, ERROR 0), and from `dbt show` and DuckDB queries against `target/credentials.duckdb`. Rows on screen show keys, not names.
 
-### 1 · Look-alikes · 0:00–0:34
+### 1 · Look-alikes · 0:00–0:31
 
-**Narration.** In the eighteen-eighties, a Paris police clerk, Alphonse Bertillon, identified repeat offenders by measuring them. The head, the arms, a finger: each measured, written on a card, and filed by its numbers. The story goes that in nineteen-oh-three, at Leavenworth prison, a new prisoner matched the card of a man already inside. Fingerprints told them apart. Looking alike isn't being the same. At the university, the question is Aisha.
+**Narration.** In the 1880s, a Paris police clerk, Alphonse Bertillon, identified repeat offenders by measuring them. Each measure went on a card, filed by its numbers. In 1903, the story goes, a new prisoner at Leavenworth matched the card of a man already inside. Fingerprints told them apart. Looking alike isn't being the same. Which brings us to Aisha.
 
-**Picture.** The warm past, "1880s · Paris" in the corner. Brass calipers close on a sketched profile, once per measurement (head length, arm span, left middle finger), and each number writes itself onto a card. The card slides into a drawer of cards, sorted by its numbers. Cut: "1903 · Leavenworth", with a small tag "as the story is told". Two cards side by side, the same numbers on both, two different names. Below them, two fingerprints draw themselves, loop by loop: different. The two cards fade to one outline, and the outline becomes Aisha's, drawn in the films' dark glass. Wordless breather: the title card over the two cards and their fingerprints: "IN THE WEEDS OF DATA CRAFTING", *What makes it the same one*, "identity is a decision, written down".
+**Picture.** The warm past, "1880s · Paris" in the corner. Brass calipers close on a sketched profile, once per measurement (head length, arm span, left middle finger), and each number writes itself onto a card. The card slides into a drawer of cards, sorted by its numbers. Cut: "1903 · Leavenworth", with a small tag "as the story is told". Two cards side by side, nearly the same numbers on both, and nearly the same names: Will West, William West. Below them, two fingerprints draw themselves, loop by loop: different. The two cards fade to one outline, and the outline becomes Aisha's, drawn in the films' dark glass. Wordless breather: the title card over the two cards and their fingerprints: "IN THE WEEDS OF DATA CRAFTING", *What makes it the same one*, "identity is a decision, written down".
 
-**On screen.** 1880s · Paris · Bertillon · head · arm span · left middle finger · one card, filed by its numbers · 1903 · Leavenworth · as the story is told · the same numbers · different fingerprints · looking alike ≠ being the same · IN THE WEEDS OF DATA CRAFTING · *What makes it the same one* · identity is a decision, written down
+**On screen.** 1880s · Paris · Bertillon · head · arm span · left middle finger · one card, filed by its numbers · 1903 · Leavenworth · as the story is told · Will West · William West · nearly the same numbers · different fingerprints · looking alike ≠ being the same · IN THE WEEDS OF DATA CRAFTING · *What makes it the same one* · identity is a decision, written down
 
-### 2 · Three keys · 0:34–1:01
+### 2 · Three keys · 0:31–0:59
 
-**Narration.** Aisha is studying for a graduate certificate in data analytics. The student system knows her by her student ID. The learning platform, by her account. The short-course platform, by the email she typed, with a space either side, in mixed case. Three keys. Each one means something only inside its own system. None of them says which learner she is.
+**Narration.** Aisha has just completed a graduate certificate in data analytics. The student system knows her by her student ID. The learning platform, by her account. The short-course platform, by the email she typed, with a space either side, in mixed case. Three keys. Each one means something only inside its own system. None of them says which learner she is.
 
-**Picture.** Three streams pour in from the left, each in its colour: blue (student system), green (learning platform), pink (short-course platform). A key lifts out of each as it's named, with a knock: `S-20417`, `u-88213`, and `·Aisha.K@Mail.example·`, its leading and trailing spaces drawn as visible dots. Each key sits inside a faint outline of its own system. Aisha's outline in the centre, with a question mark between her and the three keys.
+**Picture.** Three streams pour in from the left, each in its colour: blue (student system), green (learning platform), pink (short-course platform). Her name and award first, "Graduate Certificate in Data Analytics", with a small "completed" tag. A key lifts out of each stream as it's named, with a knock: `S-20417`, `u-88213`, and `·Aisha.K@Mail.example·`, its leading and trailing spaces drawn as visible dots. Each key sits inside a faint outline of its own system. Aisha's outline in the centre, with a question mark between her and the three keys.
 
-**On screen.** Graduate Certificate in Data Analytics · student system `S-20417` · learning platform `u-88213` · short-course platform `·Aisha.K@Mail.example·` · three keys · each means something only in its own system · which learner?
+**On screen.** Graduate Certificate in Data Analytics · completed · student system `S-20417` · learning platform `u-88213` · short-course platform `·Aisha.K@Mail.example·` · three keys · each means something only in its own system · which learner?
 
-### 3 · Profile first · 1:01–1:33
+### 3 · Profile first · 0:59–1:34
 
-**Narration.** Before matching anything, Jun learns what the sources really hold. The agent profiles them, and every claim comes with the query that shows it. Four of forty-two platform accounts have no student ID. Two students share one family email, and so do their two platform accounts. Two short-course enrolments point at no customer, as typed. Trimmed and in lower case, none do. A claim without its query is a guess.
+**Narration.** Before matching anything, Jun learns what the sources really hold. The agent profiles them, and every claim comes with the query that shows it. Four of forty-two platform accounts have no student ID. Two students share one family email, and so do their two platform accounts. Two short-course enrolments point at no customer, as typed. Trimmed and in lower case, every one with an email finds its customer. A claim without its query is a guess.
 
 **Picture.** Jun, cyan, beside the teal agent orb. The orb opens a query card, `analyses/profile_null_keys.sql`, lines 1-7:
 
@@ -68,13 +68,13 @@ from {{ source('learning_platform', 'users') }}
 where _is_current = 'true'
 ```
 
-Its result row slides out beneath: `learning_platform.users | student_id | 42 | 4`. The three together form an evidence card: claim, query, result. Two more evidence cards stack beside it as they're named: `analyses/profile_shared_emails.sql` → `student_system | nguyen.family@… | 2` and `learning_platform | nguyen.family@… | 2`; `analyses/profile_orphans.sql` → `short_courses.enrolments -> learners | 2 | 0`. A fourth card arrives with no query attached: it greys out and a small tag says "guess".
+Its result row slides out beneath: `learning_platform.users | student_id | 42 | 4`. The three together form an evidence card: claim, query, result. Two more evidence cards stack beside it as they're named: `analyses/profile_shared_emails.sql` → `student_system | nguyen.family@… | 2` and `learning_platform | nguyen.family@… | 2`; `analyses/profile_orphans.sql` → `short_courses.enrolments -> learners | 2 | 0`, with a small note beneath it: "enrolments with an email". A fourth card arrives with no query attached: it greys out and a small tag says "guess".
 
-**On screen.** profile first · claim · query · result · 4 of 42 accounts: no student ID · one email, two students · one email, two accounts · 2 orphans as typed · 0 once trimmed and lower-cased · a claim without its query is a guess
+**On screen.** profile first · claim · query · result · 4 of 42 accounts: no student ID · one email, two students · one email, two accounts · 2 orphans as typed · 0 once trimmed and lower-cased, of those with an email · a claim without its query is a guess
 
-### 4 · Key sets · 1:33–2:02
+### 4 · Key sets · 1:34–2:03
 
-**Narration.** So first, every key says where it comes from. A key set: the student system, the learning platform or short courses, each with a short code, and an owner. Two systems can use the same-looking key for two different people. Qualified, they can't be confused. And staging writes every key one way: trimmed, and in one case. Aisha's email loses its spaces and its capitals.
+**Narration.** First, the key sets from the question's model go to work. Every key now carries the short code of the system it comes from, and that system's owner. Two systems can use the same-looking key for two different people. Qualified, they can't be confused. And staging writes every key one way: trimmed, and in one case. Aisha's email loses its spaces and its capitals.
 
 **Picture.** A small table card, `seeds/key_sets.csv`, lines 1-4:
 
@@ -85,7 +85,7 @@ LMS,learning platform,Learning team
 SC,short-course platform,Learning team
 ```
 
-A tag beside it: "decided 5 Oct 2026 · Noor". A prefix clips onto each of Aisha's keys: `SIS|S-20417`, `LMS|u-88213`, `SC|…`. Then the macro's comment, `macros/keys.sql`, lines 4-7:
+A tag beside it: "decided 5 Oct 2026 · Noor". (The key sets were named in the film before, as part of the conceptual model; here they are put to work, so the narration doesn't define them again.) A prefix clips onto each of Aisha's keys: `SIS|S-20417`, `LMS|u-88213`, `SC|…`. Then the macro's comment, `macros/keys.sql`, lines 4-7:
 
 ```
     business_key('SIS', 'student_id')                  ->  'SIS|S-20417'
@@ -94,7 +94,7 @@ A tag beside it: "decided 5 Oct 2026 · Noor". A prefix clips onto each of Aisha
     hash_key(['learner_bk', 'award_bk'])                ->  the key of a relationship between two keys
 ```
 
-and the line in staging that writes the email one way, `models/staging/short_courses/stg_short_courses__learners.sql`, line 12 and lines 26-28:
+and the line in staging that writes the email one way, `models/staging/short_courses/stg_short_courses__learners.sql`, line 12 and lines 25-27:
 
 ```sql
         nullif(lower(trim(customer_email)), '') as email,
@@ -108,9 +108,9 @@ The visible dots fall off Aisha's email and its capitals drop: `SC|aisha.k@mail.
 
 **On screen.** key set · `SIS` student system · Registrar's office · `LMS` learning platform · `SC` short-course platform · Learning team · same-looking key, different people · qualified · trimmed · one case · `SC|aisha.k@mail.example`
 
-### 5 · Rules, most trusted first · 2:02–2:47
+### 5 · Rules, most trusted first · 2:03–2:51
 
-**Narration.** Then: which keys are the same learner? Jun writes it as rules, most trusted first, one block of the query for each. A student ID is a learner. A platform account is the student whose ID it holds. An email names a student, but only if exactly one student has it. Anything left is a learner of its own. Each key takes the most trusted rule that fits. Aisha's three keys resolve to her student ID. Across the university, ninety keys become forty-six learners. The rules are written in words in the model, and in code in one query. Mei, who owns what a learner means, approved them.
+**Narration.** Then: which keys are the same learner? Jun writes it as rules, most trusted first, one block of code for each. A student ID is a learner. A platform account is the student whose ID it holds. An email names a student, but only if exactly one student has it. Anything left is a learner of its own. Each key takes the most trusted rule that fits. Aisha's three keys resolve to her student ID. Across the university, ninety keys become forty-six learners. The rules are written in words in the model, and in code in two models. Mei, who owns what a learner means, approved them.
 
 **Picture.** A code card, `models/intermediate/int_learner_key_candidates.sql`, lines 34-44 and a trimmed line, as rule cards stack, each with its priority in a circle:
 
@@ -128,7 +128,7 @@ by_student_id as (
 …
 ```
 
-A second card, lines 47-57, trimmed: `-- a platform account is the student whose ID it holds` … `student_bk_held as learner_bk,` / `3 as priority,`. A third, lines 61-71, trimmed: `-- an email identifies a student only if exactly one student has it` … `group by email` / `having count(*) = 1`. A last card, `by_own_key`, priority 9. Aisha's three keys run down the stack; each stops at the first card that fits and takes its learner, shown as a query result from `int_learner_keys_matched`:
+A second card, lines 47-57, trimmed: `-- a platform account is the student whose ID it holds` … `student_bk_held as learner_bk,` / `3 as priority,`. A third, lines 61-71, trimmed: `-- an email identifies a student only if exactly one student has it` … `group by email` / `having count(*) = 1`. A last card, `by_own_key`, priority 9; each of the four rules the narration names lands as its card stacks. Then one more card slides in from a second file, `models/intermediate/int_learner_keys_matched.sql`, lines 51-57, trimmed: `by_platform_email as (` … `5 as priority,` / `'same email as one platform user' as match_rule`. Aisha's three keys run down the stack; each stops at the first card that fits and takes its learner, shown as a query result from `int_learner_keys_matched`:
 
 | qualified_key | match_rule | learner_bk |
 |---|---|---|
@@ -149,13 +149,13 @@ Pull back: 90 key dots (40 blue, 42 green, 8 pink) flow into 46 learner circles;
 
 Mei, in her business outline, and a gold tick: "approved 6 Oct 2026".
 
-**On screen.** rules, most trusted first · 1 a recorded decision · 2 student ID · 3 student ID held by the platform · 4 same email as exactly one student · 9 own key · the most trusted rule that fits · 90 keys → 46 learners · in words: the model · in code: one query · approved · Mei Tanaka, registrar's office
+**On screen.** rules, most trusted first · 1 a recorded decision · 2 student ID · 3 student ID held by the platform · 4 same email as exactly one student · 5 same email as one platform user · 9 own key · the most trusted rule that fits · 90 keys → 46 learners · in words: the model · in code: two models · approved · Mei Tanaka, registrar's office
 
-### 6 · Keep them apart · 2:47–3:25
+### 6 · Keep them apart · 2:51–3:33
 
-**Narration.** But another Aisha has a platform account, and its student ID field holds our Aisha's number, typed by mistake. The rules merge them. Aisha's wallet now shows six credentials, one she never earned. And every test still passes. No test knew they were two people, because nobody had written it down. Mei checks, and records a decision: different people. A person's decision beats every rule. The merge undoes, and Aisha holds five. A test now holds the decision, so no rule can merge them again.
+**Narration.** But another Aisha has a platform account, and its student ID field holds our Aisha's number, typed by mistake. The rules merge them. Aisha's wallet now shows six credentials, one she never earned. And every test still passes. No test knew they were two people, because nobody had written it down. Mei checks, and records a decision: different people. A person's decision beats every rule. The merge undoes, and Aisha holds five. The decision is data now: the code keeps them apart, and a test fails if anything merges them again.
 
-**Picture.** A second Aisha, drawn in outline, green: her account `LMS|u-88231`, holding `SIS|S-20417`. Rule card 3 lights; a dashed line pulls her account into our Aisha's circle. Aisha's wallet card counts up: 5 → 6 credentials, a microcredential sliding in with a faint amber edge. On the right, the test list stays green, tick after tick: "PASS 143 · WARN 1 · ERROR 0". A low held note. Mei arrives and a decision row writes itself, `seeds/learner_identity_decisions.csv`, lines 1 and 4, trimmed:
+**Picture.** A second Aisha, drawn in outline, green: her account `LMS|u-88231`, holding `SIS|S-20417`. Rule card 3 lights; a dashed line pulls her account into our Aisha's circle. Aisha's wallet card counts up: 5 → 6 credentials, a microcredential sliding in with a faint amber edge. On the right, the test list stays green, tick after tick: "every test: green". A low held note. Mei arrives and a decision row writes itself, `seeds/learner_identity_decisions.csv`, lines 1 and 4, trimmed:
 
 ```csv
 decision_id,qualified_key,decision,other_qualified_key,decided_by,decided_on,…
@@ -166,11 +166,13 @@ Her gold stamp lands on it. In the code, the anti-join lights, `int_learner_key_
 
 ```sql
 kept_apart as (
+
     select
         qualified_key,
         other_qualified_key as learner_bk
     from decisions
     where decision = 'different'
+
 )
 …
 from candidates
@@ -187,11 +189,11 @@ The dashed line breaks; the microcredential slides back; the wallet reads 5. A l
 -- Fails with one row per decision that the matching broke.
 ```
 
-**On screen.** another Aisha · her account holds our Aisha's student ID · typed by mistake · merged · 6 credentials · one she never earned · every test passes · no test knew · D-003 · different · Mei Tanaka · 7 Oct 2026 · a decision beats every rule · 5 credentials · a decision became a test
+**On screen.** another Aisha · her account holds our Aisha's student ID · typed by mistake · merged · 6 credentials · one she never earned · every test passes · no test knew · D-003 · different · Mei Tanaka · 7 Oct 2026 · a decision beats every rule · 5 credentials · the decision is data · the code keeps them apart · a test fails if they merge
 
-### 7 · The same hash everywhere · 3:25–4:00
+### 7 · The same hash everywhere · 3:33–4:06
 
-**Narration.** Now every learner has one business key, and Jun hashes it. Sixty-four characters. Add one trailing space, and the hash is completely different. So one macro builds every hash. It trims each part, writes it in upper case, marks a missing part, and joins the parts with a bar. The same key gives the same hash, in every model, and on every engine. And the readable key stays beside the hash. A hash can't be read, or checked by eye.
+**Narration.** Jun hashes each learner's business key. Sixty-four characters. Add one trailing space, and the hash is completely different. So one macro builds every hash. It trims each part, writes it in upper case, marks a missing part, and joins the parts with a bar. The same key gives the same hash, in every model, and on every engine. And the readable key stays beside the hash. A hash can't be read, or checked by eye.
 
 **Picture.** `SIS|S-20417` rolls into `0905e6e2…f76a2`, 64 characters, a short muffled run of keys. A dot appears after the key, `SIS|S-20417·`: the hash rolls again and turns red, `78e86f04…b2ef`. The macro's comment, `macros/keys.sql`, lines 66-70:
 
@@ -219,7 +221,7 @@ Both give `0905e6e2…`. Finally a row: `learner_bk SIS|S-20417` pinned beside `
 
 **On screen.** 64 hex characters · one trailing space · a different hash · trim · upper case · `<null>` for a missing part · joined with `|` · one macro · the same hash, every model, every engine · DuckDB `sha256` · Databricks `sha2(…, 256)` · the readable key stays beside the hash
 
-### 8 · Codes, too · 4:00–4:26
+### 8 · Codes, too · 4:06–4:32
 
 **Narration.** Codes need the same care. Three systems, three codes, one meaning: studying. A status map says so, one row per code. The registrar's office owns it, and approves every change. Now every learner has one key. But one key can still mean many rows, and many versions.
 
@@ -258,22 +260,23 @@ Technical claims checked on 30 September 2026 against a run of the project (dbt 
 
 | Chapter | What the film says | What an expert would add, or what it simplifies |
 |---|---|---|
-| 1 | In the 1880s, Alphonse Bertillon, a Paris police clerk, identified repeat offenders by measuring them. | Bertillon worked at the Paris Prefecture of Police; his anthropometric system (*bertillonage*) was trialled from 1882 and credited with its first identification in February 1883. It used a fixed set of body measurements (eleven is often cited; sources vary), a description and, later, standard photographs; cards were filed by measurement ranges, not alphabetically, because offenders gave false names. The film names three measurements. |
-| 1 | The story goes that in 1903, at Leavenworth, a new prisoner matched the card of a man already inside; fingerprints told them apart. | Told in many textbooks (the Will West and William West case, 1 May 1903). It was first published in 1918 (Wilder and Wentworth, *Personal Identification*), fifteen years later; Leavenworth adopted fingerprints only in 1904; research (Olsen 1987; Cole 2001) finds the records don't support the dramatic meeting as told, and the two men may have been related. Hence "the story goes" in the narration and "as the story is told" on screen. |
+| 1 | In the 1880s, Alphonse Bertillon, a Paris police clerk, identified repeat offenders by measuring them. | Bertillon worked at the Paris Prefecture of Police; his anthropometric system (*bertillonage*) was trialled from 1882 and credited with its first identification in February 1883. It used a fixed set of body measurements (eleven is often cited; sources vary), a description and, later, standard photographs; cards were filed by measurement ranges, not alphabetically, because offenders gave false names. The picture shows three measurements; the narration names none. |
+| 1 | In 1903, the story goes, a new prisoner at Leavenworth matched the card of a man already inside; fingerprints told them apart. | Told in many textbooks (the Will West and William West case, 1 May 1903). As told, the two men's names were nearly identical and their measurements very close, not identical; the picture draws nearly the same numbers and both names. It was first published in 1918 (Wilder and Wentworth, *Personal Identification*), fifteen years later; Leavenworth adopted fingerprints only in 1904; research (Olsen 1987; Cole 2001) finds the records don't support the dramatic meeting as told, and the two men may have been related. Hence "the story goes" in the narration and "as the story is told" on screen. |
+| 2 | Aisha has just completed a graduate certificate in data analytics. | `data/student_system/learners.csv` lines 26-27: `S-20417` moved from `ENR` to `CMP` (effective 2026-07-20); as at 2026-09-30, `mart_wallet__learners` shows her `completed`, Graduate Certificate in Data Analytics, 60 of 60 credit points, 5 credentials (1 award, 3 microcredentials, 1 badge). |
 | 2 | Aisha has three keys: student ID, platform account, an email with a space either side, in mixed case. | `data/student_system/learners.csv` (S-20417), `data/learning_platform/users.csv` line 14 (u-88213), `data/short_courses/learners.csv` line 2 (` Aisha.K@Mail.example `). The university, its people and the data are fictional. |
 | 2 | Each key means something only inside its own system. | A student ID is a business key issued by the registrar's office (`model/conceptual.yml` 36-42); inside one system it's also that system's key. The film's point is that none is yet a key for the learner across systems. |
 | 3 | Four of forty-two platform accounts have no student ID. | `dbt show --select profile_null_keys --profiles-dir .` → `learning_platform.users | student_id | 42 | 4`; the same claim is AGENTS.md's example of evidence (lines 53-54). |
 | 3 | Two students share one family email, and so do their two platform accounts. | `profile_shared_emails` → `student_system | nguyen.family@mail.example | 2`, `learning_platform | nguyen.family@mail.example | 2` (Linh and Minh Nguyen, `S-20435` and `S-20436`). Decision D-001 (6 Oct 2026) says the short-course customer with that email is Linh. |
-| 3 | Two short-course enrolments point at no customer as typed; none once trimmed and lower-cased. | `profile_orphans` → `short_courses.enrolments -> learners | 2 | 0`; platform student IDs → student system: 0 and 0. |
+| 3 | Two short-course enrolments point at no customer as typed; every one with an email finds its customer once trimmed and lower-cased. | `profile_orphans` → `short_courses.enrolments -> learners | 2 | 0`; platform student IDs → student system: 0 and 0. The query counts distinct enrolment emails, not enrolments; here both are two (E-7005, `Aisha.K@Mail.example`, and E-7007, `nguyen.family@mail.example`). It leaves out blank emails (`analyses/profile_orphans.sql` line 14): one more enrolment, E-7010 (`data/short_courses/enrolments.csv` lines 20-21), has no email at all and points at no customer. It is the build's one WARN (`not_null_stg_short_courses__enrolments_customer_bk`, 1 row; `profile_null_keys`: short_courses.enrolments customer_email, 12 rows, 1 missing), a gap the film doesn't resolve, and the one amber tick, if the test list in chapter 6 is drawn in full. |
 | 3 | The agent profiles; every claim comes with its query. | AGENTS.md, "Evidence" (lines 48-56). `dbt show` runs a model or analysis and prints a preview (docs.getdbt.com/reference/commands/show); analyses are compiled but not built (docs.getdbt.com/docs/build/analyses). An agent's access to dbt (the dbt MCP server, dbt Cloud's assistant) is the subject of a later film and named only there. |
 | 4 | Every key is qualified by a key set, with a code and an owner. | `seeds/key_sets.csv` 1-4, generated from `model/conceptual.yml` 18-27 by `scripts/definitions.py`; decided 5 Oct 2026 by Noor (`docs/decisions.md` line 12). `business_key()` in `macros/keys.sql` 36-44 returns null when any part is blank. |
 | 4 | Staging writes every key one way: trimmed, in one case. | `docs/conventions.md` line 63: IDs and codes upper case, platform user IDs and emails lower case. Treating emails as case-insensitive is a choice: RFC 5321 allows the local part to be case-sensitive, though providers rarely treat it so; the project records it as a convention. |
-| 5 | Rules, most trusted first; each key takes the most trusted rule that fits. | `int_learner_key_candidates.sql` (one CTE per rule, priorities 1, 2, 3, 4, 9) and `int_learner_keys_matched.sql` (`qualify row_number() over (partition by qualified_key order by priority) = 1`, and a fifth rule, priority 5, that builds on the others: a short-course customer with the email of exactly one platform learner). The narration lists four rules; the card shows all; the decision rule (priority 1) is introduced in chapter 6. Learners with no student ID keep the key of the first system that recorded them (`first_known_keys`). |
+| 5 | Rules, most trusted first; each key takes the most trusted rule that fits. | The rules are in two models, one CTE per rule: `int_learner_key_candidates.sql` (priorities 1, 2, 3, 4, 9) and `int_learner_keys_matched.sql` (`qualify row_number() over (partition by qualified_key order by priority) = 1`; the rule at priority 5, lines 36-62, which builds on the others: a short-course customer with the email of exactly one platform learner; and the "first key recorded" rule, lines 96-110). Rule 5 is not an edge case: it is how the other Aisha's short-course key resolves (`SC|aisha.r@mail.example` → `LMS|u-88231`, "same email as one platform user"). The narration names four rules; the on-screen list shows the six priorities 1, 2, 3, 4, 5, 9; the decision rule (priority 1) is introduced in chapter 6. Learners with no student ID keep the key of the first system that recorded them (`first_known_keys`). |
 | 5 | Aisha's three keys resolve to her student ID; ninety keys become forty-six learners. | Query of `int_learner_keys_matched`: the three rows as shown, all with `learner_key` `0905e6e2b60bd76bfa5c6d3ed43ac6a4d55cf046c2c0cbce4c590300145f76a2`. 90 keys (SIS 40, LMS 42, SC 8) → 46 distinct `learner_key`. By rule: student ID 40, student ID held by the platform 37, own key 6, same email as one student 4, recorded decision 2, same email as one platform user 1. |
-| 5 | Mei approved the rules. | `docs/decisions.md` line 14 (6 Oct 2026, Mei Tanaka); the rules in words are `model/conceptual.yml` 43-50, owned by Mei (line 35). |
+| 5 | The rules are written in words in the model and in code in two models; Mei approved them. | `docs/decisions.md` line 14 (6 Oct 2026, Mei Tanaka); the rules in words are `model/conceptual.yml` 43-50, owned by Mei (line 35). |
 | 6 | Another Aisha's account holds our Aisha's student ID, typed by mistake; without a decision the rules merge them, Aisha's wallet shows six credentials, and every test passes. | Run on a scratch copy of the project with row D-003 removed from `seeds/learner_identity_decisions.csv`: `LMS|u-88231` matched by "student ID held by the learning platform" to `SIS|S-20417`; `mart_wallet__learners` for Aisha: 6 credentials (1 award, 4 microcredentials, 1 badge) against 5 (1, 3, 1) with it; the build was PASS 143, WARN 1, ERROR 0 both times. The other Aisha's short-course key stays apart in both runs, held by D-004. The experiment isn't committed (see the plan's flags); to repeat it, delete line 4 of the seed and build. |
-| 6 | A person's decision beats every rule. | `int_learner_key_candidates.sql` 21-32 (a "same" decision is priority 1) and 115-134 (a "different" decision removes any candidate it names, whatever the rule); `int_learner_keys_matched.sql` 148-169 applies it to the fifth rule too. The unit test `each_rule_proposes_and_decisions_keep_look_alikes_apart` (`_int_models.yml` 241-264) checks both (docs.getdbt.com/docs/build/unit-tests). |
-| 6 | A test now holds the decision. | `tests/keys_decided_different_stay_apart.sql`, a singular data test (docs.getdbt.com/docs/build/data-tests): it returns a row for any "different" decision whose two keys share a `learner_key`. The seed is reference data owned by the registrar's office (`seeds/_seeds.yml` 34-47; docs.getdbt.com/docs/build/seeds). |
+| 6 | A person's decision beats every rule. | `int_learner_key_candidates.sql` 21-32 (a "same" decision is priority 1) and 115-134 (a "different" decision removes any candidate it names, whatever the rule); `int_learner_keys_matched.sql` 64-86 applies it to the rule at priority 5 too. The unit test `each_rule_proposes_and_decisions_keep_look_alikes_apart` (`_int_models.yml` 241-264) checks both (docs.getdbt.com/docs/build/unit-tests). |
+| 6 | The decision is data now: the code keeps them apart, and a test fails if anything merges them again. | Two separate mechanisms. The anti-join on `kept_apart` (`int_learner_key_candidates.sql` 115-134, `int_learner_keys_matched.sql` 64-86) is what stops any rule from matching the two keys. `tests/keys_decided_different_stay_apart.sql`, a singular data test (docs.getdbt.com/docs/build/data-tests), only fails the build if a merge happens anyway: it returns a row for any "different" decision whose two keys share a `learner_key`. The seed is reference data owned by the registrar's office (`seeds/_seeds.yml` 34-47; docs.getdbt.com/docs/build/seeds). |
 | 7 | Sixty-four characters; one trailing space gives a completely different hash. | DuckDB, 30 Sept 2026: `sha256('SIS|S-20417')` = `0905e6e2…f76a2`; `sha256('SIS|S-20417 ')` = `78e86f0409de0bfa214c7b25a2346d10c541a178bcd7fc875a006de515c1b2ef`; `sha256(upper(trim('sis|s-20417 ')))` = `0905e6e2…` again. SHA-256 gives 256 bits, 64 hex characters (FIPS 180-4). |
 | 7 | One macro trims, upper-cases, marks a missing part, and joins with a bar. | `macros/keys.sql` 65-83 (`key_string`): a blank part counts as missing; a missing part becomes the lower-case sentinel `'<null>'`; all parts missing gives a null hash. Upper-casing is safe here because every key in these sources is case-insensitive (`docs/conventions.md` 65); a case-sensitive key would need its own rule. |
 | 7 | The same hash on every engine. | `macros/keys.sql` 48-62: `adapter.dispatch` picks `duckdb__hash_key` (`sha256`) or `databricks__hash_key` (`sha2(…, 256)`) by target (docs.getdbt.com/reference/dbt-jinja-functions/dispatch). Databricks' `sha2(expr, bitLength)` returns the SHA-2 checksum as a hex string; bit length 256 (or 0) gives SHA-256 (docs.databricks.com/aws/en/sql/language-manual/functions/sha2, checked through its search summary). DuckDB's `sha256` returns lower-case hex (duckdb.org/docs/stable/sql/functions/text). Both hash the UTF-8 bytes of the same string, so the values match. |
@@ -290,12 +293,13 @@ All under `films/analytics-engineering/project/`, lines as the files stand on 30
 | 3 | `analyses/profile_shared_emails.sql`, `analyses/profile_orphans.sql` | results only, from `dbt show` |
 | 4 | `seeds/key_sets.csv` | 1-4 |
 | 4 | `macros/keys.sql` | 4-7 |
-| 4 | `models/staging/short_courses/stg_short_courses__learners.sql` | 12, 26-28 |
+| 4 | `models/staging/short_courses/stg_short_courses__learners.sql` | 12, 25-27 |
 | 5 | `models/intermediate/int_learner_key_candidates.sql` | 34-44, 47-57, 61-71 (trimmed with `…`), 88-98 (`by_own_key`, name and priority only) |
+| 5 | `models/intermediate/int_learner_keys_matched.sql` | 51-57 (trimmed with `…`) |
 | 5 | `model/conceptual.yml` | 43-48 |
 | 5 | query of `int_learner_keys_matched` | — |
 | 6 | `seeds/learner_identity_decisions.csv` | 1, 4 (columns trimmed) |
-| 6 | `models/intermediate/int_learner_key_candidates.sql` | 115-134 (trimmed) |
+| 6 | `models/intermediate/int_learner_key_candidates.sql` | 115-134 (blank lines kept; the select list, 124-129, trimmed with `…`) |
 | 6 | `tests/keys_decided_different_stay_apart.sql` | 1-2 |
 | 7 | `macros/keys.sql` | 66-70, 52-58 |
 | 8 | `seeds/status_map.csv` | 1-9 |
@@ -333,3 +337,9 @@ Eight situations, varied in form, in this order.
 6. **A complaint from the wallet.** Every test passes, and a learner holds a microcredential she never earned. Where do you look first? *(At the keys matched to her learner, their rules, and whether a "different" decision is missing.)*
 7. **A change in a source.** The learning platform issues a new user ID when an account is reopened. What happens to the learner, and what should? *(The new key matches by the student ID it holds, if it holds one; if not, it becomes a learner of its own until a rule or a person joins them.)*
 8. **A request.** Short courses want to send `INACTIVE` instead of `0` from next term. Who approves, and what changes? *(The registrar's office approves a new row in the status map, by pull request; no SQL changes.)*
+
+## Decisions taken
+
+| Date | Decision |
+|---|---|
+| 1 October 2026 | Series read-through: *Key sets* no longer defines the key set again (the film before named key sets and their owners); it puts them to work. The test list in *Keep them apart* shows "every test: green", not the build's count, which the film about tests counts differently (111 data tests and 4 unit tests). |

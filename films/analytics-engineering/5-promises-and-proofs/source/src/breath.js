@@ -2,7 +2,7 @@
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
    Two wordless moments: the title, drawn over the struck hallmark, and the ending. */
 const BREATH={
-"assay":{"hold":{"test":0.6,"hall":0.6,"buyer":0.6},"breathe":3.6},
+"assay":{"hold":{"hall":0.6,"buyer":0.6},"breathe":3.6},
 "gaps":{"hold":{"register":0.6,"revoked":0.8,"three":1.0,"jordan":0.6}},
 "enterprise":{"hold":{"folder":0.6,"columns":0.8,"stops":1.0}},
 "consumer":{"hold":{"grains":0.8,"protected":0.6,"tell":0.8}},

@@ -2,7 +2,7 @@
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
    Two wordless moments: the title, drawn over the Savoy's pass, and the ending. */
 const BREATH={
-"brigade":{"hold":{"savoy":0.6,"stations":0.8,"ahead":0.6},"breathe":3.6},
+"brigade":{"hold":{"savoy":0.5,"stations":0.6,"ahead":0.5},"breathe":3.6},
 "staging":{"hold":{"red":0.6,"draft":0.8,"first":0.5,"job":0.8,"nojoin":0.6}},
 "intermediate":{"hold":{"steps":0.8,"list":0.8,"words":0.6,"recipe":0.6}},
 "core":{"hold":{"names":0.6,"contract":0.6,"green":0.8,"award":0.8,"noor":0.5}},

@@ -1,0 +1,24 @@
+{
+  "key": "what-makes-it-the-same-one",
+  "title": "What makes it the same one",
+  "sub": "In the weeds of data crafting: one learner arrives under three keys, and another looks just like her. Identity is a decision, written down: key sets, rules most trusted first, a person's decisions, and one hash everywhere.",
+  "howto": "Each source keeps its colour: blue the student system, green the learning platform, pink short courses. Code on dark glass runs on dbt Core with DuckDB, in the repository. Teal is an AI agent's work, with its evidence; gold is a person's approval.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "west",
+    "breath",
+    1.6
+  ],
+  "say": [
+    ["\\bYAML\\b", "yammel"],
+    ["\\bJun\\b", "Joon"],
+    ["\\bMei\\b", "May"],
+    ["\\bdbt\\b", "dee bee tee"],
+    ["\\bSQL\\b", "sequel"],
+    ["\\bDuckDB\\b", "duck dee bee"],
+    ["\\bBertillon\\b", "bair-tee-yon"]
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "key": "written-once",
+  "title": "Written once",
+  "sub": "In the weeds of data crafting, a technical series for analytics engineers: one home per fact. Meaning in the conceptual YAML and Markdown, everything the build uses in dbt's YAML, doc blocks and the physical diagram generated, descriptions pushed one way to the catalog; and a breaking change arrives as a new version, with a date.",
+  "howto": "White lines on blue are the model; code on dark glass is the project, and the small label beside it says where it runs. Copies that drift are drawn in amber; a generated file carries a small cog. Teal is an AI agent's work; gold is a person's approval.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "ball",
+    "breath",
+    1.6
+  ],
+  "say": [
+    ["\\bYAML\\b", "yammel"],
+    ["\\bJun\\b", "Joon"],
+    ["\\bMei\\b", "May"],
+    ["\\bdbt\\b", "dee bee tee"],
+    ["\\bDuckDB\\b", "duck dee bee"],
+    ["\\bCI\\b", "see eye"]
+  ]
+}

@@ -159,13 +159,17 @@ Delimitar un modelo a partir de una pregunta. Qué hace que un estudiante sea el
 Contratos y pruebas. Construir por capas. Quién es dueño de qué, entre dominios. Trabajar con un agente, con responsabilidad. Y escribirlo todo, una sola vez.
 
 41
-00:05:01,430 --> 00:05:05,295
-Un plano dice cómo será un edificio. La obra lo hace realidad.
+00:04:59,430 --> 00:05:07,771
+Todo lo que muestran es código real y datos reales. Corre en dbt Core, con DuckDB, y puedes ejecutarlo tú mismo.
 
 42
-00:05:06,495 --> 00:05:11,293
-En los datos, el modelo es el plano, y dbt es una forma de construirlo.
+00:05:11,271 --> 00:05:15,136
+Un plano dice cómo será un edificio. La obra lo hace realidad.
 
 43
-00:05:12,593 --> 00:05:14,095
+00:05:16,336 --> 00:05:21,134
+En los datos, el modelo es el plano, y dbt es una forma de construirlo.
+
+44
+00:05:22,434 --> 00:05:23,936
 Decláralo. Luego constrúyelo.

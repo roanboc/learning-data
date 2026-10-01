@@ -159,13 +159,17 @@ Scoping a model from a question. What makes a learner the same one across system
 Contracts and tests. Building in layers. Who owns what, across domains. Working with an agent, responsibly. And writing it all down, once.
 
 41
-00:05:01,430 --> 00:05:05,295
-A blueprint says what a building will be. The building work makes it true.
+00:04:59,430 --> 00:05:07,771
+Everything they show is real code and real data. It runs on dbt Core, with DuckDB, and you can run it yourself.
 
 42
-00:05:06,495 --> 00:05:11,293
-In data, the model is the blueprint, and dbt is one way to build it.
+00:05:11,271 --> 00:05:15,136
+A blueprint says what a building will be. The building work makes it true.
 
 43
-00:05:12,593 --> 00:05:14,095
+00:05:16,336 --> 00:05:21,134
+In data, the model is the blueprint, and dbt is one way to build it.
+
+44
+00:05:22,434 --> 00:05:23,936
 Declare it. Then build it.

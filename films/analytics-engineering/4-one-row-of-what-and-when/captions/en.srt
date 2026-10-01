@@ -1,0 +1,147 @@
+1
+00:00:01,400 --> 00:00:07,536
+The first of June, 1890. The United States counted its people as they were on that one day.
+
+2
+00:00:08,836 --> 00:00:14,969
+Counting took weeks, but a baby born after the first wasn't counted. Someone who died after it was.
+
+3
+00:00:16,469 --> 00:00:20,927
+Each person became a punched card, counted by Herman Hollerith's machines.
+
+4
+00:00:22,127 --> 00:00:26,463
+One card per person, as at one day. Planning's question needs both.
+
+5
+00:00:32,763 --> 00:00:36,570
+Before any SQL, Jun's table for Planning gets one sentence.
+
+6
+00:00:37,270 --> 00:00:40,328
+One row per learner per award, as at census date.
+
+7
+00:00:42,028 --> 00:00:46,781
+That sentence is the grain. It says what a row is, and which day it describes.
+
+8
+00:00:48,081 --> 00:00:54,544
+The agent drafts it from Planning's question and the census report. Noor, who owns the model, approves it.
+
+9
+00:00:55,844 --> 00:01:00,380
+Then it becomes a test: no two rows with the same learner and the same award.
+
+10
+00:01:03,880 --> 00:01:08,991
+Here's why it matters. In July, a graduate certificate in Health changed its name.
+
+11
+00:01:09,691 --> 00:01:13,085
+So the award has two versions: the old name, and the new one.
+
+12
+00:01:14,285 --> 00:01:19,219
+Join the credit to the award on its key alone, and every learner meets both versions.
+
+13
+00:01:19,919 --> 00:01:26,397
+Eight learners become sixteen rows. A hundred and eighty-five credit points become three hundred and seventy.
+
+14
+00:01:28,097 --> 00:01:33,216
+Nothing errors, and every row looks right. Only the test on the grain notices.
+
+15
+00:01:34,716 --> 00:01:39,084
+Join the version that was valid on census day, and there are eight rows again.
+
+16
+00:01:42,384 --> 00:01:51,169
+Those versions come from the sources. Nothing is overwritten: every change arrives as a new row, with the date it started and the date it ended.
+
+17
+00:01:52,769 --> 00:02:00,675
+But those dates say when the platform saw a change, not when it was true. Where a system says when something happened, the model uses that.
+
+18
+00:02:02,375 --> 00:02:14,285
+The core builds its own versions from those dated facts. Aisha's credit towards her certificate has six. Five points in October, forty-five by the end of February, and sixty in July.
+
+19
+00:02:15,985 --> 00:02:23,471
+So the core's grain is: one row per learner, per award, per version. A test checks that no two versions overlap.
+
+20
+00:02:26,971 --> 00:02:31,216
+Now two consumers read the same versions, and ask about different days.
+
+21
+00:02:31,916 --> 00:02:40,327
+Planning asks about census day, the 31st of March. Aisha held forty-five of sixty points, with fifteen to go. She counts.
+
+22
+00:02:41,827 --> 00:02:47,602
+The wallet app asks about today. Aisha finished in July, and her wallet shows the certificate.
+
+23
+00:02:48,902 --> 00:02:57,236
+Ask Planning's question, learners within fifteen points of a certificate, as it was on census day: twelve. Ask it today: nine.
+
+24
+00:02:58,736 --> 00:03:01,379
+Both are right. They answer about different days.
+
+25
+00:03:03,479 --> 00:03:08,453
+So each output declares its day, and one small macro picks the version valid on it.
+
+26
+00:03:11,753 --> 00:03:15,659
+A learner lives in three systems, and each keeps its own versions.
+
+27
+00:03:16,859 --> 00:03:24,885
+Aisha's platform account came first. Her student record took effect six days later. A short-course account arrived in January.
+
+28
+00:03:26,185 --> 00:03:31,404
+Jun cuts all three at every date on which any of them changed, and stitches one timeline.
+
+29
+00:03:32,904 --> 00:03:38,178
+On each date, the student system's value wins, then the platform's, then the short course's.
+
+30
+00:03:39,478 --> 00:03:45,339
+A change that alters nothing the model holds makes no new version. Four dates give Aisha three.
+
+31
+00:03:48,639 --> 00:03:54,811
+Last, Priya. She withdrew from her certificate on the 27th of March, four days before census.
+
+32
+00:03:56,111 --> 00:03:59,795
+The student system recorded it on the 3rd of April, a week late.
+
+33
+00:04:01,095 --> 00:04:09,182
+Dated by when it was recorded, she'd still be studying on census day, and Business would count four. The census report says three.
+
+34
+00:04:10,882 --> 00:04:19,254
+Dated by when it took effect, Business counts three. As in 1890, the answer describes the day, not the day it was written down.
+
+35
+00:04:20,954 --> 00:04:26,480
+The platforms only say when they recorded a change. That gap is accepted, and written down.
+
+36
+00:04:29,780 --> 00:04:33,710
+One row of what, and when. Declared before any SQL, and tested.
+
+37
+00:04:35,010 --> 00:04:39,948
+Two consumers, one core. Before any more code, write down what each is promised.

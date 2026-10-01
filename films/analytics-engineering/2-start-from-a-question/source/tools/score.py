@@ -132,7 +132,7 @@ bed('slice', [EM7, CADD9, GADD9, DSUS])
 paper(G('slice', 'glossary', 0.2), 0.03, 0.0, 1.6)
 for j, word in enumerate(['a learner', 'a credential', 'an award', 'the credit']):
     pin(W('slice', 'four', word, -0.2), 0.045, -0.4 + j * 0.27)
-soft(55, W('slice', 'four', 'the credit', 0.2), 0.026, 0.0)
+soft(55, W('slice', 'four', 'the credit', -0.1), 0.026, 0.0)
 paper(G('slice', 'out', 0.1), 0.025, -0.5, 1.2); paper(G('slice', 'out', 0.5), 0.022, 0.5, 1.2)
 knock(G('slice', 'never', -0.2), 0.03, 0.5); knock(G('slice', 'never', 0.2), 0.03, 0.75)
 lines(W('slice', 'never', 'wrote down'), 3, 0.85, 0.018, -0.2)
@@ -161,10 +161,10 @@ for i in range(3):
 soft(55, W('owners', 'mei', 'Mei', -0.1), 0.03, 0.3); soft(52, W('owners', 'mei', 'learning team', -0.1), 0.028, 0.3)
 soft(41, W('owners', 'why', 'disagree', -0.2), 0.035, 0.0)
 soft(55, W('owners', 'why', 'decides'), 0.03, 0.2)
-# 6. Combine or split: knocks as the two cards arrive; a muffled key as each row appears; felt notes for the two ticks, a low one for the
+# 6. Combine or split: a knock for the title, one as the microcredential card arrives; a muffled key as each row appears; felt notes for the two ticks, a low one for the
 #    difference; a swell as they merge; knocks for the kinds; the certificate slides in and is turned away with a soft thud
 bed('split', [CADD9, AM7, GADD9, FMAJ7, DSUS])
-knock(G('split', 'harder', 0.5), 0.035, -0.4); knock(G('split', 'harder', 0.6), 0.03, 0.4)
+knock(G('split', 'harder', 0.2), 0.03, 0.0); knock(G('split', 'harder', 0.5), 0.035, -0.4)
 tap(W('split', 'compare', 'what identifies', -0.1), 0.022, 0.0); tap(W('split', 'compare', 'its life', -0.1), 0.022, 0.0)
 soft(59, W('split', 'compare', 'Compare its life', -0.3), 0.028, 0.0); soft(62, W('split', 'same', 'Both match'), 0.028, 0.0)
 soft(46, W('split', 'same', 'credit points', -0.2), 0.03, 0.0)

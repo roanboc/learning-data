@@ -50,8 +50,8 @@ scene("card",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   const adv=fin(t,tD,0.5);arrive(ctx,1700,770,t,cP+0.7,()=>{glow(ctx,1700,770,120,[255,210,140],0.15*pulseAt(t,tD,1.0));rw_dial(ctx,1700,770,80,46+adv,1);},{from:0.9});
   arrive(ctx,1700,640,t,w("punch","Hollerith"),()=>tag(ctx,1700,640,"Hollerith's tabulator",CLAY,{align:"center",size:18}),{dy:10});
   arrive(ctx,1440,640,t,tD,()=>tag(ctx,1440,640,"one card per person",CLAY,{align:"center",size:18}),{dy:10});
-  // the bridge: two phrases lift from the card and drift towards the present
-  const br=ease(fin(t,cR+0.1,1.8));if(t>cR){[["one per person",690,360],["as at June 1",720,440]].forEach(([s,y0,y1],i)=>{const q=ease(fin(t,cR+0.1+i*0.25,1.8)),x=lerp(1440,1460,q),y=lerp(y0,y1,q),sz=lerp(22,34,q),cl=mix(CLAY,i?RW_TIME:WEED,q);
+  // the bridge: two phrases lift from the card and drift right, towards the present, until the cut (they end at x 1460, where chapter 2 picks them up)
+  const br=ease(fin(t,cR+0.1,1.8));if(t>cR){[["one per person",690,360],["as at June 1",720,440]].forEach(([s,y0,y1],i)=>{const q=ease(fin(t,cR+0.1+i*0.25,1.8)),x=lerp(1440,1340,q)+120*ease(fin(t,cR+0.6,sc.dur-cR-0.6)),y=lerp(y0,y1,q),sz=lerp(22,34,q),cl=mix(CLAY,i?RW_TIME:WEED,q);
     withA(ctx,fin(t,cR+i*0.25,0.4),()=>{glow(ctx,x,y-10,sz*3,cl,0.25*q);T(ctx,s,x,y,{w:800,size:sz,align:"center",color:rgba(cl,1)});});});}
   ctx.restore();yearTag(ctx,120,110,"1890 · United States",CLAY,fin(t,0.3,0.6));
   weedsTitle(ctx,S,t,B,"One row of what, and when","grain and time, declared before any SQL",WEED);
@@ -63,8 +63,9 @@ const RW_TEST2=[1080,800,740,56],RW_TEST3=[100,672,660,56];
 const RW_REPORT=["census_date","faculty_code","faculty_name","learners_near_graduate_certificate","published_by","published_on"];
 scene("grain",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025});
-  const cS=c("sentence"),cN=c("name"),cA=c("agent"),cT=c("test"),dS=sc.ends.sentence-cS,SY=320,SZ=44;
-  arrive(ctx,150,120,t,0.3,()=>{rw_loop(ctx,150,120,0.2,t,STEPS10.map((_,i)=>i===2?fin(t,0.8,0.6):0),1);tag(ctx,300,120,"step 3 · what each consumer needs",WEED,{size:20});},{from:0.85});
+  const cS=c("sentence"),cN=c("name"),cA=c("agent"),cT=c("test"),dS=sc.ends.sentence-cS,SZ=44,
+    SY=lerp(420,320,ease(fin(t,w("agent","Planning's question")-1.0,1.1)));  // the sentence sits low while it is alone, and rises as the agent's sources arrive
+  arrive(ctx,190,124,t,0.3,()=>{rw_loop(ctx,190,124,108,58,t,STEPS10.map((_,i)=>i===2?fin(t,0.8,0.6):0),1);tag(ctx,332,124,"step 3 · what each consumer needs",WEED,{size:20});},{from:0.85});
   arrive(ctx,1720,130,t,w("before","for Planning")-0.3,()=>rw_badge(ctx,1720,130,44,"planning","Planning",{hi:pulseAt(t,w("before","for Planning"),1.2)}),{dy:20});
   // the sentence: the two words from 1890 settle into it, then it writes itself
   const cardA=fin(t,w("before","one sentence")-0.2,0.6),p1=clamp((t-cS)/(0.6*dS),0,1),p2=clamp((t-cS-0.6*dS)/(0.4*dS),0,1);
@@ -72,9 +73,9 @@ scene("grain",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   [["one per person",360,WEED],["as at June 1",440,RW_TIME]].forEach(([s,y0,cl],i)=>{const q=ease(fin(t,0.1,1.8)),x=lerp(1460,pos[i][0],q),y=lerp(y0,SY+12,q),a=1-fin(t,cS-0.5,0.4);
     if(a>0)withA(ctx,a,()=>{glow(ctx,x,y-10,90,cl,0.2);T(ctx,s,x,y,{w:800,size:lerp(34,30,q),align:"center",color:rgba(cl,1)});});});
   const cw=tw(ctx,RW_GRAIN+", "+RW_ASAT,SZ,800)+80,cTop=SY-SZ*1.2-SZ*0.3;
-  arrive(ctx,960,222,t,w("name","the grain")-0.1,()=>tag(ctx,960,222,"the grain",WEED,{align:"center",size:20}),{dy:10});
-  arrive(ctx,pos[0][0],400,t,w("name","what a row is")-0.1,()=>tag(ctx,pos[0][0],400,"what a row is",INK,{align:"center",size:20}),{dy:10});
-  arrive(ctx,pos[1][0],400,t,w("name","which day")-0.1,()=>tag(ctx,pos[1][0],400,"which day",RW_TIME,{align:"center",size:20}),{dy:10});
+  arrive(ctx,960,SY-98,t,w("name","the grain")-0.1,()=>tag(ctx,960,SY-98,"the grain",WEED,{align:"center",size:20}),{dy:10});
+  arrive(ctx,pos[0][0],SY+80,t,w("name","what a row is")-0.1,()=>tag(ctx,pos[0][0],SY+80,"what a row is",INK,{align:"center",size:20}),{dy:10});
+  arrive(ctx,pos[1][0],SY+80,t,w("name","which day")-0.1,()=>tag(ctx,pos[1][0],SY+80,"which day",RW_TIME,{align:"center",size:20}),{dy:10});
   // the agent drafts it from Planning's question and the census report; Noor approves it
   const out=1-fin(t,cT-0.5,0.6);withA(ctx,out,()=>{
     arrive(ctx,470,530,t,w("agent","Planning's question")-0.3,()=>{glass(ctx,120,470,700,124,18,RW_CON,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(ctx,"Planning's question",146,504,{w:700,size:18,color:rgba(RW_CON,1)});
@@ -103,33 +104,36 @@ scene("grain",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
 const RW_E1=["every_version as (","    select awards.award_code, credit.learner_key, credit.credit_points_earned","    from credit","    inner join awards on awards.award_key = credit.award_key","),"];
 const RW_E2=["version_at_census as (","    select awards.award_code, credit.learner_key, credit.credit_points_earned","    from credit","    inner join awards","        on awards.award_key = credit.award_key","        and {{ valid_at(census_date(), 'awards.valid_from', 'awards.valid_to') }}",")"];
 // the rows a join returns: each learner meets the old name and the new one; fold (0..1) folds the doubles back
-function rw_joined(ctx,x,y,w,t,o){const on=o.on,fold=o.fold||0,lh=27,n=8+8*(1-fold),h=96+n*lh;let rows=0,cr=0;
-  RW_FAN.forEach(([k,v],i)=>{rows+=(on[2*i]||0)+(on[2*i+1]||0)*(1-fold);cr+=v*((on[2*i]||0)+(on[2*i+1]||0)*(1-fold));});rows=Math.round(rows);cr=Math.round(cr);
+function rw_joined(ctx,x,y,w,t,o){const on=o.on,fold=o.fold||0,fo=clamp(fold*2.5,0,1),fp=ease(clamp((fold-0.4)/0.6,0,1)),lh=27,n=8+8*(1-fp),h=96+n*lh;let rows=0,cr=0;  // the doubles fade out first (fo), then the rows close up (fp)
+  RW_FAN.forEach(([k,v],i)=>{rows+=(on[2*i]||0)+(on[2*i+1]||0)*(1-fo);cr+=v*((on[2*i]||0)+(on[2*i+1]||0)*(1-fo));});rows=Math.round(rows);cr=Math.round(cr);
   const bad=rows>8,col=bad?RW_AMB:fold>0.5?GOOD:[150,180,220];
   glass(ctx,x,y,w,h,14,mix([150,180,220],col,fold>0.5||bad?0.6:0),{glow:10,ea:0.65,fill:"rgba(6,10,20,0.95)"});
   T(ctx,fold<0.5?"joined on the key alone":"joined at the version valid on census day",x+20,y+32,{w:700,size:19,color:rgba(fold<0.5?SOFT:GOOD,1)});
   if(rows>0)T(ctx,rows+" rows · "+cr+" credit points",x+w-20,y+32,{w:800,size:20,align:"right",color:rgba(bad?RW_AMB:fold>0.5?GOOD:INK,1)});
   [["learner_key",0],["award version",250]].forEach(([s,dx])=>T(ctx,s,x+20+dx,y+70,{f:"mono",w:500,size:18,color:rgba(SOFT,0.9)}));T(ctx,"credit",x+w-20,y+70,{f:"mono",w:500,size:18,align:"right",color:rgba(SOFT,0.9)});
   ctx.fillStyle="rgba(170,200,245,0.16)";ctx.fillRect(x+14,y+82,w-28,1.2);
-  RW_FAN.forEach(([k,v],i)=>[0,1].forEach(j=>{const r=2*i+j,q=on[r]||0;if(q<=0.01)return;const a=q*(j?1-fold:1),yi=lerp(r,i+(j?0.5:0),fold),yy=y+96+yi*lh+lh*0.62;if(a<=0.01)return;
+  RW_FAN.forEach(([k,v],i)=>[0,1].forEach(j=>{const r=2*i+j,q=on[r]||0;if(q<=0.01)return;const a=q*(j?1-fo:1),yi=lerp(r,i,fp),yy=y+96+yi*lh+lh*0.62;if(a<=0.01)return;
     withA(ctx,a,()=>{T(ctx,k,x+20,yy,{f:"mono",w:500,size:18,color:rgba(INK,0.95)});T(ctx,RW_GCHI[j][2],x+270,yy,{w:600,size:18,color:rgba(j?mix(KIND,INK,0.3):KIND,1)});T(ctx,String(v),x+w-20,yy,{f:"mono",w:500,size:18,align:"right",color:rgba(INK,0.95)});});}));
   return h;}
 scene("fan",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025,x:1100});
-  const cJ=c("join"),cD=c("double"),cQ=c("quiet"),cF=c("fix"),fx=fin(t,w("fix","valid on census day")-0.2,0.6),fold=ease(fin(t,w("fix","eight rows")-0.3,0.9));
+  const cJ=c("join"),cD=c("double"),cQ=c("quiet"),cF=c("fix"),fx=fin(t,w("fix","valid on census day")-0.2,0.6),fold=ease(fin(t,w("fix","eight rows")-0.3,0.9)),
+    tFx=w("fix","valid on census day")-0.2,eOut=1-fin(t,tFx,0.4),eIn=fin(t,tFx+0.55,0.4),jf=ease(fin(t,tFx,0.9)),jp=ease(clamp((jf-0.4)/0.6,0,1));  // E1 leaves before E2 comes; the doubles fold away as the join changes
   // the award, renamed in July: two versions
   const split=fin(t,w("two","two versions")-0.2,0.8);
-  arrive(ctx,430,150,t,w("why","graduate certificate")-0.3,()=>rw_award(ctx,100,110,660,{split,lit:[fx,0],dim:[0,fx]}),{dy:20});
-  arrive(ctx,430,96,t,w("why","changed its name"),()=>withA(ctx,1-split,()=>tag(ctx,430,96,"renamed · 2 Jul 2026",RW_TIME,{align:"center",size:18})),{dy:8});
+  // first large, in the middle of the frame; it settles into its corner as the join begins
+  const big=1-ease(fin(t,cJ-1.7,1.0)),aS=lerp(1,1.45,big),aX=lerp(100,960-330*aS,big),aY=lerp(110,300,big);
+  arrive(ctx,960,400,t,w("why","graduate certificate")-0.3,()=>{ctx.save();ctx.translate(aX,aY);ctx.scale(aS,aS);rw_award(ctx,0,0,660,{split,lit:[fx,0],dim:[0,fx]});
+    withA(ctx,(1-split)*fin(t,w("why","changed its name"),0.4),()=>tag(ctx,330,-36,"renamed · 2 Jul 2026",RW_TIME,{align:"center",size:18}));ctx.restore();},{dy:20});
   // the credit Health's eight learners held at census
   const rOn=RW_FAN.map((_,i)=>fin(t,cJ-0.6+i*0.08,0.3));
   arrive(ctx,430,480,t,cJ-0.7,()=>rw_table(ctx,100,300,[["learner_key",300,"l"],["credit_points_earned",320,"r"]],RW_FAN.map(([k,v])=>[k,String(v)]),{on:rOn,title:"credit at census · Health",label:"8 learners · 185 points",lh:32}),{dy:20});
   // the join: every learner meets both versions, and the rows double
   const jOn=[];RW_FAN.forEach((_,i)=>{jOn.push(fin(t,w("join","every learner")+i*0.14,0.3));jOn.push(fin(t,w("double","become sixteen")+i*0.16,0.3));});
-  const jy=lerp(360,404,fx),eA=1-fx;
+  const jy=lerp(360,392,clamp(jp*2.5,0,1)),eA=eOut;
   arrive(ctx,1330,220,t,cJ-0.2,()=>{rw_code(ctx,840,110,980,"analyses/fan_out_without_point_in_time.sql",RW_E1,{a:eA,p:clamp((t-cJ)/1.4,0,1),size:18,lh:28,lit:{3:fin(t,w("join","key alone"),0.4)*(1-fx)},litCol:RW_AMB});
-    rw_code(ctx,840,110,980,"analyses/fan_out_without_point_in_time.sql",RW_E2,{a:fx,size:18,lh:28,lit:{5:fin(t,w("fix","valid on census day"),0.5)},litCol:RW_TIME,seg:[[5,"valid_at(census_date()",fin(t,w("fix","valid on census day"),0.5),RW_TIME]]});},{dy:20});
-  arrive(ctx,1330,600,t,w("join","every learner")-0.2,()=>rw_joined(ctx,840,jy,980,t,{on:jOn,fold}),{dy:20});
+    rw_code(ctx,840,110,980,"analyses/fan_out_without_point_in_time.sql",RW_E2,{a:eIn,size:18,lh:28,lit:{5:fin(t,w("fix","valid on census day"),0.5)},litCol:RW_TIME,seg:[[5,"valid_at(census_date()",fin(t,w("fix","valid on census day"),0.5),RW_TIME]]});},{dy:20});
+  arrive(ctx,1330,600,t,w("join","every learner")-0.2,()=>rw_joined(ctx,840,jy,980,t,{on:jOn,fold:jf}),{dy:20});
   // threads from each learner to its rows, while they double
   const th=fin(t,w("join","every learner"),0.4)*(1-fin(t,cQ,0.8));if(th>0)RW_FAN.forEach((_,i)=>{const y0=300+44+56+i*32+16;[0,1].forEach(j=>{const q=jOn[2*i+j];if(q<=0)return;const y1=jy+96+(2*i+j)*27+14;
     ctx.strokeStyle=rgba(j?RW_AMB:KIND,0.45*th*q);ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(762,y0);ctx.bezierCurveTo(800,y0,800,y1,lerp(762,838,q),y1);ctx.stroke();});});
@@ -139,14 +143,18 @@ scene("fan",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);se
   rw_test(ctx,tx,ty,tw_,"unique_combination",m<0.3?"3 rows · 1 learner · 3 awards":red>0.5?"16 rows · 8 learners":green>0.5?"8 rows · 8 learners":"",clamp(st,-1,1),{h:56});
   arrive(ctx,430,764,t,w("quiet","Nothing errors"),()=>withA(ctx,1-fin(t,cF,0.5),()=>tag(ctx,430,764,"no error · every row looks right",SOFT,{align:"center",size:20})),{dy:10});
   // what dbt show returns for the two joins
-  arrive(ctx,458,806,t,w("fix","eight rows")+0.3,()=>rw_table(ctx,100,748,[["joined_to",245,"l"],["rows_returned",160,"r"],["learners",110,"r"],["credit_points",160,"r"]],[["every version","16","8","370"],["the version at census","8","8","185"]],{size:18,lh:30,lit:{0:RW_AMB,1:GOOD}}),{dy:16});
+  arrive(ctx,1198,800,t,w("fix","eight rows")+0.3,()=>rw_table(ctx,840,722,[["joined_to",245,"l"],["rows_returned",160,"r"],["learners",110,"r"],["credit_points",160,"r"]],[["every version","16","8","370"],["the version at census","8","8","185"]],{size:18,lh:29,lit:{0:RW_AMB,1:GOOD},title:"dbt show · fan_out_without_point_in_time",titleMono:true}),{dy:16});
+  // census day on the award's versions: a date line beside them lights the version valid then
+  withA(ctx,fx*(1-big),()=>{const lx=792;ctx.save();ctx.setLineDash([6,6]);ctx.strokeStyle=rgba(RW_TIME,0.9);ctx.lineWidth=2.2;ctx.beginPath();ctx.moveTo(lx,104);ctx.lineTo(lx,282);ctx.stroke();ctx.restore();
+    ctx.strokeStyle=rgba(RW_TIME,0.9);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(lx,147);ctx.lineTo(766,147);ctx.stroke();ctx.fillStyle=rgba(RW_TIME,1);ctx.beginPath();ctx.arc(lx,147,5,0,TAU);ctx.fill();
+    T(ctx,"31 Mar 2026",lx,90,{f:"mono",w:500,size:18,align:"center",color:rgba(RW_TIME,1)});});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 4. Every version kept ---------- */
 const RW_DOC=["| Column | What it records |","|---|---|","| `_valid_from` | When ingestion recorded this version |","| `_valid_to` | When ingestion recorded the next version, or saw the row disappear. … |","| `_is_current` | `true` for the version that holds now |","| `_loaded_at` | When ingestion last wrote this row: … |","",
   "These dates record when the platform saw a change, not when it was true. Where a system says when","something was true (the student system's `effective_date` and `result_date`), the model uses that."];
 const RW_Y4=["  - name: core_credit_towards_award","    …","      meta:","        grain: One row per learner per award per version","    …","    data_tests:","      - unique_combination:","          arguments:","            columns: [learner_key, award_key, valid_from]","      - versions_do_not_overlap:","          arguments:","            key_columns: [learner_key, award_key]"];
-const RW_STAIR4=[200,260,860,440],RW_KC=[255,200,150];
+const RW_STAIR4=[200,260,860,440];
 // when each of Aisha's six versions appears, as the voice counts them
 function rw_stepT(sc,w){const a=w("aisha","Five points"),b=w("aisha","forty-five"),z=w("aisha","sixty");return[a,b-1.1,b-0.75,b-0.4,b,z];}
 scene("versions",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
@@ -157,19 +165,24 @@ scene("versions",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
       rw_eye(ctx,72,y+62,12,[150,190,255],saw);});
     arrive(ctx,100,700,t,w("seen","saw a change"),()=>tag(ctx,100,700,"_valid_from: when the platform saw it",[150,190,255],{size:20}),{dy:10});
     arrive(ctx,100,760,t,w("seen","model uses that"),()=>tag(ctx,100,760,"when it was true: the effective date wins",RW_TIME,{size:20}),{dy:10});
-    arrive(ctx,1310,310,t,w("kept","Nothing is overwritten")-0.3,()=>rw_code(ctx,800,110,1020,"docs/sources.md",RW_DOC,{wrap:84,size:18,lh:30,edge:KIND,p:clamp((t-w("kept","Nothing is overwritten"))/2.4,0,1),
+    arrive(ctx,1310,310,t,w("kept","Nothing is overwritten")-0.3,()=>rw_code(ctx,800,110,1020,"docs/sources.md",RW_DOC,{wrap:88,hang:0,balance:true,size:18,lh:30,edge:KIND,p:clamp((t-w("kept","Nothing is overwritten"))/2.4,0,1),
       lit:{2:saw},litCol:[150,190,255],seg:[[7,"saw a change",saw,[150,190,255]],[7,"when it was true",tru,RW_TIME],[8,"`effective_date`",tru,RW_TIME],[8,"`result_date`",tru,RW_TIME]]}),{dy:24});
     rw_eye(ctx,780,244,12,[150,190,255],saw);rw_clock(ctx,780,454,13,RW_TIME,tru);});
   // the core builds its own versions: Aisha's credit as a staircase, and the rows it makes
   const ts=rw_stepT(sc,w),p=ts.reduce((s,x)=>s+fin(t,x,0.6),0),kinds=ts.map(x=>fin(t,x,0.3));
   arrive(ctx,630,480,t,cA-0.2,()=>{T(ctx,"Aisha · Graduate Certificate in Data Analytics",200,205,{w:800,size:26});tag(ctx,200,150,"built from dated facts",KIND,{size:20});
     rw_stair(ctx,...RW_STAIR4,t,{p,kinds});
+    // the dated facts it builds from: a result (blue) or a credential (amber) drops in at its date; each becomes a step
+    const[sx0,sy0,sw0,sh0]=RW_STAIR4,tb=w("aisha","builds");
+    RW_STEPS.forEach(([f,,v,k],i)=>{const q=ease(fin(t,tb+i*0.22,0.5)),u=ease(fin(t,ts[i]-0.1,0.5));if(q<=0||u>=1)return;const x=sx0+sw0*rw_day(f)/365,y=lerp(lerp(sy0+sh0-120,sy0+sh0-46,q),sy0+sh0-sh0*v/60,u),cl=k==="result"?SRC3[0][1]:RW_KC;
+      withA(ctx,q*(1-u),()=>{ctx.fillStyle="rgba(7,12,24,0.96)";rr(ctx,x-14,y-18,28,36,5);ctx.fill();ctx.strokeStyle=rgba(cl,1);ctx.lineWidth=2;rr(ctx,x-14,y-18,28,36,5);ctx.stroke();
+        if(k==="result"){ctx.fillStyle=rgba(cl,0.8);for(let j=0;j<3;j++)ctx.fillRect(x-8,y-9+j*8,16,2.5);}else{ctx.fillStyle=rgba(cl,1);ctx.beginPath();ctx.arc(x,y-2,6,0,TAU);ctx.fill();ctx.fillRect(x-4,y+4,3,9);ctx.fillRect(x+1,y+4,3,9);}});});
     [["result · +15",SRC3[0][1]],["credential · +5",RW_KC]].forEach(([s,cl],i)=>{ctx.fillStyle=rgba(cl,1);ctx.beginPath();ctx.arc(236,300+i*32,6,0,TAU);ctx.fill();T(ctx,s,252,306+i*32,{w:600,size:18,color:rgba(SOFT,1)});});},{d:1.0,from:0.94});
   const vr=RW_STEPS.map(([f,to,v])=>[f,to,String(v)]);
-  arrive(ctx,1460,316,t,cA+0.3,()=>rw_table(ctx,1120,170,[["valid_from",180,"l"],["valid_to",180,"l"],["credit_points_earned",280,"r"]],vr,{on:ts.map(x=>fin(t,x,0.4)),title:"core_credit_towards_award_v1 · Aisha, GCDA",titleMono:true,lh:32,edge:TRUST}),{dy:20});
+  arrive(ctx,1460,316,t,cA+0.3,()=>rw_table(ctx,1120,160,[["valid_from",180,"l"],["valid_to",180,"l"],["credit_points_earned",280,"r"]],vr,{on:ts.map(x=>fin(t,x,0.4)),title:"core_credit_towards_award_v1 · Aisha, GCDA",titleMono:true,lh:32,edge:TRUST}),{dy:20});
   // the core's grain, and the test that no two versions overlap
   const lg=fin(t,w("core","one row per learner"),0.5),lo=fin(t,w("core","overlap")-0.3,0.5);
-  arrive(ctx,1470,690,t,cC-0.3,()=>rw_code(ctx,1120,490,700,"models/core/_core__models.yml",RW_Y4,{p:clamp((t-cC)/1.4,0,1),size:18,lh:28,edge:TRUST,lit:{3:lg,9:lo,10:lo,11:lo},seg:[[3,"per version",lg,RW_TIME]]}),{dy:24});
+  arrive(ctx,1470,660,t,cC-0.3,()=>rw_code(ctx,1120,468,700,"models/core/_core__models.yml",RW_Y4,{p:clamp((t-cC)/1.4,0,1),size:18,lh:26,edge:TRUST,lit:{3:lg,9:lo,10:lo,11:lo},seg:[[3,"per version",lg,RW_TIME]]}),{dy:24});
   arrive(ctx,630,828,t,w("core","A test"),()=>rw_test(ctx,200,800,860,"versions_do_not_overlap",lo>0.5?"no two versions overlap":"",fin(t,w("core","overlap")+0.3,0.4),{h:56}),{dy:14});
   ctx.restore();vign(ctx,S);});
 
@@ -182,16 +195,16 @@ scene("was",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);se
   ctx.save();drift(ctx,t,sc,{z:0.025});
   const cC=c("census"),cTd=c("today"),cTo=c("totals"),cB=c("both"),cDc=c("declare"),m=ease(fin(t,0,1.3)),close=ease(fin(t,cTo-0.4,1.0)),dc=ease(fin(t,cDc-0.3,1.0)),sp=1-close;
   // the split: Planning on the left, as at census day; the wallet on the right, as at today
-  withA(ctx,sp*fin(t,0.4,0.8),()=>{ctx.strokeStyle=rgba(SOFT,0.3);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(960,110);ctx.lineTo(960,880);ctx.stroke();});
+  withA(ctx,sp*fin(t,0.4,0.8),()=>{ctx.strokeStyle=rgba(SOFT,0.3);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(960,110);ctx.lineTo(960,840);ctx.stroke();});
   const L=[lerp(RW_STAIR4[0],120,m),lerp(RW_STAIR4[1],300,m),lerp(RW_STAIR4[2],740,m),lerp(RW_STAIR4[3],360,m)],atL=fin(t,w("census","census day"),0.6);
   withA(ctx,sp,()=>{rw_stair(ctx,...L,t,{at:"2026-03-31",atA:atL,upTo:atL>0.5?"2026-03-31":null,labels:true,size:19});
     arrive(ctx,1430,480,t,w("days","different days")-0.6,()=>rw_stair(ctx,1060,300,740,360,t,{at:"2026-09-30",atA:fin(t,w("today","about today"),0.6),size:19}),{from:0.92});
-    arrive(ctx,560,160,t,w("census","the 31st"),()=>rw_pin(ctx,560,160,"31 Mar 2026",1),{dy:12});
+    arrive(ctx,560,160,t,w("census","thirty-first"),()=>rw_pin(ctx,560,160,"31 Mar 2026",1),{dy:12});
     arrive(ctx,1500,160,t,w("today","about today"),()=>rw_pin(ctx,1500,160,"30 Sep 2026 · today",1),{dy:12});
     arrive(ctx,490,764,t,w("census","forty-five"),()=>tag(ctx,490,764,"45 of 60 · 15 to go",RW_TIME,{align:"center",size:22}),{dy:12});
     arrive(ctx,490,826,t,w("census","She counts"),()=>{tag(ctx,476,826,"counted",GOOD,{align:"center",size:22});tick_(ctx,560,826,24,GOOD,1);},{dy:12});
-    arrive(ctx,1430,815,t,w("today","finished in July"),()=>{glass(ctx,1060,740,740,150,18,RW_CON,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.96)"});T(ctx,"Aisha · completed",1090,784,{w:800,size:26});
-      T(ctx,"5 credentials: 1 award · 3 microcredentials · 1 badge · 0 revoked",1090,822,{w:600,size:19,color:rgba(INK,0.9)});T(ctx,"not counted: she's there",1090,860,{w:700,size:19,color:rgba(SOFT,1)});},{dy:20});});
+    arrive(ctx,1430,780,t,w("today","finished in July"),()=>{glass(ctx,1060,710,740,140,18,RW_CON,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.96)"});T(ctx,"Aisha · completed",1090,752,{w:800,size:26});
+      T(ctx,"5 credentials: 1 award · 3 microcredentials · 1 badge · 0 revoked",1090,789,{w:600,size:19,color:rgba(INK,0.9)});T(ctx,"not counted: she's there",1090,825,{w:700,size:19,color:rgba(SOFT,1)});},{dy:20});});
   // the two badges: at the top of each half, then beside the table, then over the code
   const bP=[[150,160],[250,430],[130,170]],bW=[[1090,160],[1670,430],[1010,170]],at=(P)=>[lerp(lerp(P[0][0],P[1][0],close),P[2][0],dc),lerp(lerp(P[0][1],P[1][1],close),P[2][1],dc)];
   const[px,py]=at(bP),[wx,wy]=at(bW),ga=fin(t,cB+0.4,0.6);
@@ -205,11 +218,11 @@ scene("was",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);se
   withA(ctx,close*(1-dc),()=>{const tq=w("totals","Ask Planning's question");
     arrive(ctx,960,155,t,tq-0.3,()=>{glass(ctx,360,110,1200,90,20,RW_CON,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(ctx,"learners within 15 points of a graduate certificate, by faculty",960,166,{w:700,size:28,align:"center"});},{dy:16});
     arrive(ctx,960,450,t,tq,()=>{const lit=fin(t,cB,0.5);glass(ctx,560,230,800,440,18,[150,180,220],{glow:10,ea:0.6,fill:"rgba(6,10,20,0.95)"});
-      [[1080,"as at census","31 Mar 2026",w("totals","as it was")],[1260,"now","30 Sep 2026",w("totals","Ask it today")]].forEach(([x,h1,h2,t0],j)=>{if(lit>0)withA(ctx,lit,()=>{glow(ctx,x,450,160,j?RW_CON:RW_TIME,0.12);ctx.fillStyle=rgba(j?RW_CON:RW_TIME,0.07);rr(ctx,x-80,244,160,412,12);ctx.fill();});
+      [[1080,"as at census","31 Mar 2026",tq+0.6],[1260,"now","30 Sep 2026",w("totals","Ask it today")]].forEach(([x,h1,h2,t0],j)=>{if(lit>0)withA(ctx,lit,()=>{glow(ctx,x,450,160,j?RW_CON:RW_TIME,0.12);ctx.fillStyle=rgba(j?RW_CON:RW_TIME,0.07);rr(ctx,x-80,244,160,412,12);ctx.fill();});
         T(ctx,h1,x,270,{w:700,size:20,align:"center",color:rgba(j?RW_CON:RW_TIME,1)});T(ctx,h2,x,298,{f:"mono",w:500,size:18,align:"center",color:rgba(SOFT,1)});
         RW_FACS.forEach((r,i)=>withA(ctx,fin(t,t0+0.3+i*0.3,0.3),()=>T(ctx,r[1+j],x,370+i*58,{f:"mono",w:500,size:30,align:"center"})));
         withA(ctx,fin(t,w("totals",j?"nine":"twelve")-0.1,0.3),()=>T(ctx,j?"9":"12",x,640,{w:800,size:44,align:"center",color:rgba(j?RW_CON:RW_TIME,1)}));});
-      T(ctx,"faculty",600,284,{w:700,size:20,color:rgba(SOFT,1)});RW_FACS.forEach((r,i)=>withA(ctx,fin(t,w("totals","as it was")+0.3+i*0.3,0.3),()=>T(ctx,r[0],600,370+i*58,{w:700,size:24})));
+      T(ctx,"faculty",600,284,{w:700,size:20,color:rgba(SOFT,1)});RW_FACS.forEach((r,i)=>withA(ctx,fin(t,tq+0.6+0.3+i*0.3,0.3),()=>T(ctx,r[0],600,370+i*58,{w:700,size:24})));
       ctx.fillStyle="rgba(170,200,245,0.25)";ctx.fillRect(590,586,750,1.5);T(ctx,"in all",600,640,{w:700,size:22,color:rgba(SOFT,1)});},{dy:20});
     arrive(ctx,960,712,t,w("both","Both are right"),()=>tag(ctx,960,712,"the same question · two days · both right",INK,{align:"center",size:22}),{dy:12});});
   // each output declares its day; one macro picks the version valid on it
@@ -228,23 +241,28 @@ const RW_TLC=["-- every date on which any source changed","change_dates as ("," 
 const RW_SEG=[[[0,1,0],1],[[1,1,0],0],[[1,1,1],0],[[1,1,1],0]],RW_SEGV=["studying","studying · enrolled","no change","completed"];
 scene("stitch",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025,x:700});
-  const cT=c("three"),cDt=c("dates"),cCu=c("cut"),cW=c("wins"),cSa=c("same"),YB=[320,420,520],YW=680;
+  const cT=c("three"),cDt=c("dates"),cCu=c("cut"),cW=c("wins"),cSa=c("same"),YB=[320,420,520],YW=680,mg0=()=>ease(fin(t,w("same","makes no new version"),0.9));
   // the dates on a shared axis (schematic: two of them are six days apart)
   withA(ctx,fin(t,0.3,0.6),()=>{ctx.strokeStyle=rgba(SOFT,0.4);ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(RW_TLX[0],250);ctx.lineTo(RW_TLX[1],250);ctx.stroke();T(ctx,"dates not to scale",RW_TLX[1],200,{w:600,size:18,align:"right",color:rgba(SOFT,0.85)});});
   const dT=[w("dates","platform account"),w("dates","student record"),w("dates","short-course"),w("cut","every date")+0.75];
   RW_TL.forEach(([d,x],i)=>arrive(ctx,x,236,t,dT[i]-0.1,()=>T(ctx,d,x,236,{f:"mono",w:500,size:18,align:"center",color:rgba(INK,0.95)}),{dy:8}));
   // three systems, each with its own versions
   [["student system",0],["learning platform",1],["short-course platform",2]].forEach(([n,k],i)=>arrive(ctx,100,YB[i],t,cT+0.2+i*0.25,()=>T(ctx,n,100,YB[i]+7,{w:700,size:20,color:rgba(SRC3[k][1],1)}),{dy:10}));
-  rw_band(ctx,YB[0],0,[[520,"ENR"],[960,"CMP"]],fin(t,dT[1],1.2),fin(t,dT[1],0.3));
-  rw_band(ctx,YB[1],1,[[360,"active"]],fin(t,dT[0],1.4),fin(t,dT[0],0.3));
-  rw_band(ctx,YB[2],2,[[760,"1"]],fin(t,dT[2],1.0),fin(t,dT[2],0.3));
-  // cut at every change date
-  RW_TL.forEach(([d,x],i)=>{const q=ease(fin(t,w("cut","every date")+i*0.25,0.6));if(q<=0)return;ctx.save();ctx.setLineDash([7,7]);ctx.strokeStyle=rgba(INK,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,256);ctx.lineTo(x,lerp(256,YW+30,q));ctx.stroke();ctx.restore();});
+  withA(ctx,1-fin(t,cCu-0.9,0.6),()=>[0,1,2].forEach(k=>arrive(ctx,1470,312+k*120,t,cT+0.3+k*0.3,()=>rw_srcStack(ctx,1190,270+k*120,560,k,3,t,{p:clamp((t-cT-0.6-k*0.3)/0.8,0,1)}),{dy:16})));
+  // cut at every change date: drawn under the bands, and gapped where a label sits (the tag; the merged segment once 6 Jan folds away)
+  const tgA=fin(t,w("same","makes no new version"),0.4);
+  RW_TL.forEach(([d,x],i)=>{const q=ease(fin(t,w("cut","every date")+i*0.25,0.6));if(q<=0)return;const ye=lerp(256,YW+30,q);
+    const gaps=[];if(x>660&&x<940)gaps.push([576,624,tgA]);if(i===2)gaps.push([YW-30,YW+30,mg0()]);
+    ctx.save();ctx.setLineDash([7,7]);ctx.lineWidth=2;let y0=256;const seg=(ya,yb,al)=>{if(yb<=ya||al<=0.01)return;ctx.strokeStyle=rgba(INK,0.6*al);ctx.beginPath();ctx.moveTo(x,ya);ctx.lineTo(x,yb);ctx.stroke();};
+    gaps.forEach(([ga,gb,ka])=>{seg(y0,Math.min(ga,ye),1);seg(Math.max(ga,y0),Math.min(gb,ye),1-ka);y0=Math.max(y0,gb);});seg(y0,ye,1);ctx.restore();});
+  rw_band(ctx,YB[0],0,[[480,"ENR",590],[900,"CMP"]],fin(t,dT[1],1.2),fin(t,dT[1],0.3));
+  rw_band(ctx,YB[1],1,[[340,"active",590]],fin(t,dT[0],1.4),fin(t,dT[0],0.3));
+  rw_band(ctx,YB[2],2,[[700,"1",800]],fin(t,dT[2],1.0),fin(t,dT[2],0.3));
   // one timeline, stitched segment by segment; the segment of 6 Jan changes nothing the model holds, and merges back
   const mg=ease(fin(t,w("same","makes no new version"),0.9));
   arrive(ctx,100,YW,t,w("cut","stitches")-0.2,()=>T(ctx,"one timeline",100,YW+7,{w:700,size:20}),{dy:10});
   const bx=[RW_TL[0][1],RW_TL[1][1],RW_TL[2][1],RW_TL[3][1],RW_TLX[1]];
-  for(let k=0;k<4;k++){const t0=w("cut","stitches")+k*0.35,q=fin(t,t0,0.5);if(q<=0)continue;const x0=bx[k],x1=Math.max(x0+26,lerp(x0,bx[k+1],ease(q)));
+  for(let k=0;k<4;k++){const t0=w("cut","stitches")+k*0.35,q=fin(t,t0,0.5);if(q<=0)continue;const x0=bx[k],xe=k===1?lerp(bx[2],bx[3],mg):bx[k+1],x1=Math.max(x0+26,lerp(x0,xe,ease(q)));if(k===2&&mg>0.98)continue;
     ctx.fillStyle="rgba(236,243,255,0.16)";rr(ctx,x0+2,YW-28,x1-x0-4,56,10);ctx.fill();ctx.strokeStyle=rgba(INK,k===2?0.9*(1-mg):0.9);ctx.lineWidth=2;rr(ctx,x0+2,YW-28,x1-x0-4,56,10);ctx.stroke();
     // which source's value wins here: a small stack under the segment
     const[has,win]=RW_SEG[k],cx=(x0+bx[k+1])/2,wa=fin(t,w("wins","wins")+k*0.15,0.4);
@@ -254,9 +272,9 @@ scene("stitch",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   withA(ctx,vA(0),()=>T(ctx,"① studying",(bx[0]+bx[1])/2,YW+7,{w:700,size:19,align:"center"}));
   withA(ctx,vA(1)*(1-mg),()=>T(ctx,"② studying · enrolled",(bx[1]+bx[2])/2,YW+7,{w:700,size:19,align:"center"}));
   withA(ctx,vA(2)*(1-mg),()=>T(ctx,"no change",(bx[2]+bx[3])/2,YW+7,{w:600,size:19,align:"center",color:rgba(SOFT,1)}));
-  withA(ctx,mg,()=>{ctx.fillStyle="rgba(236,243,255,0.16)";T(ctx,"② studying · enrolled in the certificate",(bx[1]+bx[3])/2,YW+7,{w:700,size:19,align:"center"});});
+  withA(ctx,mg,()=>T(ctx,"② studying · enrolled",(bx[1]+bx[2])/2,YW+7,{w:700,size:19,align:"center"}));
   withA(ctx,vA(3),()=>T(ctx,"③ completed",(bx[3]+bx[4])/2,YW+7,{w:700,size:19,align:"center"}));
-  arrive(ctx,860,600,t,w("same","makes no new version"),()=>tag(ctx,860,600,"no change, no version",SOFT,{align:"center",size:20}),{dy:10});
+  arrive(ctx,800,600,t,w("same","makes no new version"),()=>tag(ctx,800,600,"no change, no version",SOFT,{align:"center",size:20}),{dy:10});
   arrive(ctx,690,812,t,w("same","Four dates"),()=>tag(ctx,690,812,"four dates → three versions",INK,{align:"center",size:22}),{dy:12});
   // Jun, who stitches it
   arrive(ctx,190,790,t,w("cut","Jun")-0.2,()=>{rw_face(ctx,"jun",190,790,40,1,{t});T(ctx,"Jun",190,860,{w:800,size:22,align:"center"});},{dy:14});
@@ -270,11 +288,12 @@ scene("stitch",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
 /* ---------- 7. Late news ---------- */
 const RW_PROF=["select","    *,","    {{ dbt.datediff('took_effect', 'recorded_on', 'day') }} as days_late","from versions","where {{ dbt.datediff('took_effect', 'recorded_on', 'day') }} > 1","order by days_late desc"];
 const RW_RULE=["-- the student system says when each version took effect: that date, not the date it was recorded","student_versions as (","    select","        …","        student_records.effective_date as valid_from,","        …","        student_records.recorded_from as recorded_at,"];
-const RW_GAP=["| 6 | A change is dated when it happened. |","| The student system records some changes late … The platforms only say when they recorded a change. |","| **Rule in the model:** use the student system's effective date. **Accept** that platform dates are the day the platform recorded the change. |"];
+const RW_GAP=["| 6 | A change is dated when it happened. | The student system records some changes late … The platforms only say when they recorded a change. | **Rule in the model:** use the student system's effective date. **Accept** that platform dates are the day the platform recorded the change. | `int_learner_timeline` |"];  // one row of the file, wrapped
 function rw_lx(d){return 140+d*54;}  // days after 20 March, on the axis
 scene("late",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025,x:700});
-  const cPr=c("priya"),cWk=c("week"),cRe=c("recorded"),cEf=c("effect"),cG=c("gap"),AY=360,dm=ease(fin(t,w("effect","took effect")-0.2,1.1)),rule=fin(t,w("effect","took effect"),0.7);
+  const cPr=c("priya"),cWk=c("week"),cRe=c("recorded"),cEf=c("effect"),cG=c("gap"),AY=360,dm=ease(fin(t,w("effect","took effect")-0.2,1.1)),rule=fin(t,w("effect","took effect"),0.7),
+    tRu=w("effect","took effect"),rOut=1-fin(t,tRu,0.3),rIn=fin(t,tRu+0.35,0.4),dO=1-clamp(dm*2.2,0,1),dI=clamp(dm*2.2-1.2,0,1);  // swaps in sequence: the old leaves before the new comes
   // Priya's row: keys only
   arrive(ctx,600,150,t,cPr,()=>{glass(ctx,100,110,1000,80,18,SRC3[0][1],{glow:12,ea:0.8,fill:"rgba(7,12,24,0.96)"});T(ctx,"SIS|S-20431",124,158,{f:"mono",w:500,size:20,color:rgba(SRC3[0][1],1)});
     T(ctx,"Graduate Certificate in Business Administration",290,158,{w:700,size:20});T(ctx,"45 of 60",1080,158,{f:"mono",w:500,size:20,align:"right",color:rgba(RW_TIME,1)});tag(ctx,1060,110,"Priya",INK,{align:"center",size:18});},{dy:20});
@@ -284,41 +303,41 @@ scene("late",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
     [[0,"20 Mar"],[7,"27 Mar"],[14,"3 Apr"]].forEach(([d,s])=>T(ctx,s,rw_lx(d),AY+34,{f:"mono",w:500,size:18,align:"center",color:rgba(SOFT,1)}));});
   const xc=rw_lx(11);withA(ctx,fin(t,w("priya","before census"),0.6),()=>{ctx.save();ctx.setLineDash([6,6]);ctx.strokeStyle=rgba(RW_TIME,0.9);ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(xc,246);ctx.lineTo(xc,450);ctx.stroke();ctx.restore();tag(ctx,xc,222,"census · 31 Mar",RW_TIME,{align:"center",size:18});});
   // Priya's status along the days: studying until the withdrawal is dated, withdrawn after it
-  const xd=lerp(rw_lx(14),rw_lx(7),dm),stA=fin(t,cRe-0.2,0.6);
-  withA(ctx,stA,()=>{ctx.fillStyle=rgba(SRC3[0][1],0.35);rr(ctx,rw_lx(0),410,xd-rw_lx(0),30,6);ctx.fill();ctx.fillStyle=rgba(SOFT,0.2);rr(ctx,xd,410,rw_lx(17)-xd,30,6);ctx.fill();
+  const tA=w("week","recorded it")-0.3,inn=ease(fin(t,tA,0.9)),xd=lerp(rw_lx(17),lerp(rw_lx(14),rw_lx(7),dm),inn),stA=fin(t,cPr+1.4,0.6),onA=fin(t,cRe-0.2,0.6);
+  withA(ctx,stA,()=>{ctx.fillStyle=rgba(SRC3[0][1],0.35);rr(ctx,rw_lx(0),410,xd-rw_lx(0),30,6);ctx.fill();if(rw_lx(17)-xd>4){ctx.fillStyle=rgba(SOFT,0.2);rr(ctx,xd,410,rw_lx(17)-xd,30,6);ctx.fill();}
     T(ctx,"studying",rw_lx(0)+12,432,{w:700,size:18,color:rgba(INK,0.9)});if(rw_lx(17)-xd>150)T(ctx,"withdrawn",rw_lx(17)-12,432,{w:700,size:18,align:"right",color:rgba(SOFT,1)});
-    withA(ctx,1-dm,()=>tag(ctx,xc,482,"on census day: studying · 15 to go",RW_AMB,{align:"center",size:20}));withA(ctx,dm,()=>tag(ctx,xc,482,"on census day: withdrawn",GOOD,{align:"center",size:20}));});
+    withA(ctx,onA,()=>{withA(ctx,dO,()=>tag(ctx,xc,482,"on census day: studying · 15 to go",RW_AMB,{align:"center",size:20}));withA(ctx,dI,()=>tag(ctx,xc,482,"on census day: withdrawn",GOOD,{align:"center",size:20}));});});
   // the withdrawal arrives late, from the side, and lands where it was recorded; then it moves to when it took effect
-  const tA=w("week","recorded it")-0.3,inn=ease(fin(t,tA,0.9)),cx=lerp(1240,xd,inn)+(1-inn)*0,cy=290;
+  const cx=lerp(980,lerp(rw_lx(14),rw_lx(7),dm),inn),cy=298;
   if(t>tA){withA(ctx,fin(t,tA,0.3),()=>{ctx.save();ctx.translate(cx,cy);ctx.rotate((1-inn)*0.08);
-    glass(ctx,-135,-40,270,80,14,EDGE_,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.97)"});T(ctx,"WD · took effect 27 Mar",0,8,{w:700,size:20,align:"center"});
-    ctx.fillStyle="rgba(7,12,24,0.97)";rr(ctx,-10,-70,140,32,8);ctx.fill();ctx.strokeStyle=rgba(EDGE_,0.7);ctx.lineWidth=1.5;rr(ctx,-10,-70,140,32,8);ctx.stroke();T(ctx,"recorded 3 Apr",60,-48,{w:700,size:18,align:"center",color:rgba(EDGE_,1)});
-    ctx.restore();ctx.strokeStyle=rgba(EDGE_,0.7*inn);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(cx,cy+40);ctx.lineTo(cx,AY);ctx.stroke();ctx.fillStyle=rgba(EDGE_,inn);ctx.beginPath();ctx.arc(cx,AY,5,0,TAU);ctx.fill();});}
-  arrive(ctx,rw_lx(10.5),AY-60,t,w("week","a week late"),()=>withA(ctx,1-dm,()=>tag(ctx,rw_lx(10.5)-160,AY-50,"7 days late",EDGE_,{align:"center",size:18})),{dy:8});
+    glass(ctx,-140,-46,280,92,14,EDGE_,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.97)"});T(ctx,"WD · took effect 27 Mar",0,-8,{w:700,size:20,align:"center"});
+    ctx.fillStyle=rgba(EDGE_,0.35);ctx.fillRect(-120,6,240,1.2);T(ctx,"recorded 3 Apr",0,32,{w:700,size:18,align:"center",color:rgba(EDGE_,1)});
+    ctx.restore();ctx.strokeStyle=rgba(EDGE_,0.7*inn);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(cx,cy+46);ctx.lineTo(cx,AY);ctx.stroke();ctx.fillStyle=rgba(EDGE_,inn);ctx.beginPath();ctx.arc(cx,AY,5,0,TAU);ctx.fill();});}
+  arrive(ctx,rw_lx(10.5),AY-60,t,w("week","a week late"),()=>withA(ctx,1-clamp(dm*4,0,1),()=>tag(ctx,rw_lx(10.5)-160,AY-50,"7 days late",EDGE_,{align:"center",size:18})),{dy:8});
   // Business: our count against the census report
   const tB=w("recorded","Business would count"),tR=w("recorded","census report says");
   arrive(ctx,560,585,t,tB-0.2,()=>{[[160,"Business · our count",tB],[640,"Business · census report",tR]].forEach(([x,s,t0],i)=>withA(ctx,fin(t,t0-0.2,0.5),()=>{const col=i?SOFT:mix(RW_AMB,GOOD,dm);
       glass(ctx,x,530,320,110,16,col,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.95)"});T(ctx,s,x+20,562,{w:700,size:18,color:rgba(SOFT,1)});
-      if(i)T(ctx,"3",x+160,624,{w:800,size:50,align:"center"});else{withA(ctx,1-dm,()=>T(ctx,"4",x+160,624,{w:800,size:50,align:"center",color:rgba(RW_AMB,1)}));withA(ctx,dm,()=>T(ctx,"3",x+160,624,{w:800,size:50,align:"center",color:rgba(GOOD,1)}));}}));
-    cross_(ctx,560,588,30,RW_RED,fin(t,tR+0.3,0.3)*(1-dm));tick_(ctx,560,588,34,GOOD,dm);
+      if(i)T(ctx,"3",x+160,624,{w:800,size:50,align:"center"});else{withA(ctx,dO,()=>T(ctx,"4",x+160,624,{w:800,size:50,align:"center",color:rgba(RW_AMB,1)}));withA(ctx,dI,()=>T(ctx,"3",x+160,624,{w:800,size:50,align:"center",color:rgba(GOOD,1)}));}}));
+    cross_(ctx,560,588,30,RW_RED,fin(t,tR+0.3,0.3)*dO);tick_(ctx,560,588,34,GOOD,dI);
     withA(ctx,fin(t,tB,0.4),()=>{T(ctx,dm<0.5?"dated by when it was recorded":"dated by when it took effect",560,672,{w:700,size:20,align:"center",color:rgba(dm<0.5?RW_AMB:GOOD,1)});});},{dy:16});
   // the evidence, then the rule
-  arrive(ctx,1480,280,t,w("week","recorded it")+0.2,()=>{rw_code(ctx,1140,110,680,"analyses/profile_late_changes.sql",RW_PROF,{a:1-rule,wrap:58,size:18,lh:28,p:clamp((t-w("week","recorded it")-0.2)/1.4,0,1)});
-    rw_table(ctx,1140,460,[["student_id",125,"l"],["status_code",130,"l"],["took_effect",140,"l"],["recorded_on",140,"l"],["days_late",105,"r"]],[["S-20431","WD","2026-03-27","2026-04-03","7"]],{a:fin(t,w("week","a week late"),0.4)*(1-rule),size:18,lh:32});
-    rw_code(ctx,1140,110,680,"models/intermediate/int_learner_timeline.sql",RW_RULE,{a:rule,wrap:58,size:18,lh:28,edge:LAYER4[1][1],lit:{4:fin(t,w("effect","describes the day"),0.5),6:fin(t,w("effect","written down"),0.5)},litCol:RW_TIME});},{dy:24});
+  arrive(ctx,1480,280,t,w("week","recorded it")+0.2,()=>{rw_code(ctx,1140,110,680,"analyses/profile_late_changes.sql",RW_PROF,{a:rOut,wrap:58,size:18,lh:28,p:clamp((t-w("week","recorded it")-0.2)/1.4,0,1)});
+    rw_table(ctx,1140,460,[["student_id",125,"l"],["status_code",130,"l"],["took_effect",140,"l"],["recorded_on",140,"l"],["days_late",105,"r"]],[["S-20431","WD","2026-03-27","2026-04-03","7"]],{a:fin(t,w("week","a week late"),0.4)*rOut,size:18,lh:32});
+    rw_code(ctx,1140,110,680,"models/intermediate/int_learner_timeline.sql",RW_RULE,{a:rIn,wrap:58,size:18,lh:28,edge:LAYER4[1][1],lit:{4:fin(t,w("effect","describes the day"),0.5),6:fin(t,w("effect","written down"),0.5)},litCol:RW_TIME});},{dy:24});
   arrive(ctx,1480,476,t,w("effect","written down"),()=>tag(ctx,1480,476,"when it was true · when it was recorded: both kept",RW_TIME,{align:"center",size:18}),{dy:10});
   // as in 1890: the page of June 1, for a moment
   const fl=pulseAt(t,w("effect","As in")-0.2,2.6);if(fl>0)rw_calendar(ctx,1400,560,190,220,t,{a:0.9*fl});
   // gap 6, written down
-  const tG=w("gap","platforms")-0.3;arrive(ctx,600,790,t,tG,()=>rw_code(ctx,100,680,1000,"docs/gaps.md",RW_GAP,{wrap:86,size:18,lh:28,edge:EDGE_,p:clamp((t-tG)/2.2,0,1),lit:{2:fin(t,w("gap","accepted"),0.5)}}),{dy:20});
-  arrive(ctx,1480,820,t,w("gap","accepted"),()=>{tag(ctx,1480,820,"gap 6 · accepted, and written down",TRUST,{align:"center",size:20});},{dy:10});
+  const tG=w("gap","platforms")-0.3;arrive(ctx,1480,680,t,tG,()=>rw_code(ctx,1140,530,680,"docs/gaps.md",RW_GAP,{wrap:58,size:18,lh:28,edge:EDGE_,p:clamp((t-tG)/2.2,0,1),seg:[[0,"use the student system's effective date.",fin(t,w("gap","accepted"),0.5),TRUST],[0,"**Accept** that platform dates are the day the platform",fin(t,w("gap","accepted"),0.5),TRUST]]}),{dy:20});
+  arrive(ctx,1480,822,t,w("gap","accepted"),()=>{tag(ctx,1480,822,"gap 6 · accepted, and written down",TRUST,{align:"center",size:20});},{dy:10});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 8. A promise to write ---------- */
 scene("next",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.03});
   const cW=c("what"),cP=c("promise"),lp=fin(t,w("promise","write down"),0.6);
-  arrive(ctx,150,120,t,0.3,()=>{rw_loop(ctx,150,120,0.2,t,STEPS10.map((_,i)=>i===2?1:(i===3||i===4)?lp:0),1);tag(ctx,300,120,lp>0.5?"next · steps 4 and 5":"step 3",WEED,{size:20});},{from:0.85});
+  arrive(ctx,190,124,t,0.3,()=>{rw_loop(ctx,190,124,108,58,t,STEPS10.map((_,i)=>i===2?1:(i===3||i===4)?lp:0),1);tag(ctx,332,124,lp>0.5?"next · steps 4 and 5":"step 3",WEED,{size:20});},{from:0.85});
   // the core, with its versions stacked behind it
   arrive(ctx,960,610,t,0.4,()=>{for(let v=3;v>0;v--){withA(ctx,0.5,()=>{ctx.fillStyle="rgba(10,14,24,0.95)";rr(ctx,760+v*12,560-v*12,400,110,14);ctx.fill();ctx.strokeStyle=rgba(TRUST,0.35);ctx.lineWidth=1.5;rr(ctx,760+v*12,560-v*12,400,110,14);ctx.stroke();});}
     glow(ctx,960,615,260,TRUST,0.15);glass(ctx,760,560,400,110,14,TRUST,{glow:18,ea:0.85,fill:"rgba(7,12,24,0.97)"});T(ctx,"core",960,606,{w:800,size:32,align:"center",color:rgba(TRUST,1)});T(ctx,"every version kept",960,644,{w:600,size:20,align:"center",color:rgba(SOFT,1)});},{d:1.0,from:0.9});

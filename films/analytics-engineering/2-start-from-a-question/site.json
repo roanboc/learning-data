@@ -1,0 +1,31 @@
+{
+  "kicker": "Scope and owners",
+  "kicker_es": "Alcance y responsables",
+  "title_es": "Empieza por una pregunta",
+  "h1": "Start from a question: model only what it touches",
+  "h1_es": "Empieza por una pregunta: modela solo lo que toca",
+  "lead": "John Snow's map showed only what his question needed. Jun's model starts the same way: one question from Planning, with a decision behind it, four things to model, and the person who owns each meaning, named before anyone opens a source.",
+  "lead_es": "El mapa de John Snow mostraba solo lo que su pregunta necesitaba. El modelo de Jun empieza igual: una pregunta de Planificación, con una decisión detrás, cuatro cosas que modelar, y la persona responsable de cada significado, nombrada antes de que nadie abra una fuente.",
+  "description": "A film for analytics engineers about step one: start from a question with a decision behind it, model only the entities it touches, write each once in YAML with a hand-drawn diagram, give each a business key and an owner, combine a microcredential into the credential, and let an AI agent draft it for the owner to approve.",
+  "description_es": "Una película para analytics engineers sobre el primer paso: empezar por una pregunta con una decisión detrás, modelar solo las entidades que toca, escribir cada una una sola vez en YAML con un diagrama hecho a mano, darle a cada una una clave del negocio y un responsable, unir la microcredencial a la credencial, y dejar que un agente de IA haga el borrador para que la responsable lo apruebe.",
+  "card": "A model has no edge until a question gives it one. Model only what the question touches, and name who owns each meaning first.",
+  "card_es": "Un modelo no tiene borde hasta que una pregunta se lo da. Modela solo lo que la pregunta toca, y nombra primero al responsable de cada significado.",
+  "chapters_es": {
+    "map": "Una pregunta, un mapa",
+    "ask": "La pregunta",
+    "slice": "La porción",
+    "yaml": "Escrito en YAML, dibujado para personas",
+    "owners": "Claves y responsables",
+    "split": "Unir o separar",
+    "draft": "El borrador del agente",
+    "next": "Ahora, las fuentes"
+  },
+  "next_h": "You've seen one question scope a model. Now scope one yourself.",
+  "next_h_es": "Viste cómo una pregunta acota un modelo. Ahora acota uno tú.",
+  "labs_h1": "Scope the model from a question",
+  "labs_h1_es": "Acota el modelo desde una pregunta",
+  "labs_lead": "Four labs, one idea each, in the order of the film. Pick a question with a decision behind it, sort what's in its slice, decide what's a kind of credential, and give each meaning its owner.",
+  "labs_lead_es": "Cuatro labs, una idea cada uno, en el orden de la película. Elige una pregunta con una decisión detrás, separa lo que entra en su porción, decide qué es un tipo de credencial, y da a cada significado su responsable.",
+  "quiz_lead": "Eight situations an analytics engineer really faces: a request to model everything, a learner defined as a row, fees mid-build, three words for one learner, two definitions of award, credit for attending, reasons to split, and a question with no decision. Decide what you'd do; each answer explains why.",
+  "quiz_lead_es": "Ocho situaciones que un analytics engineer enfrenta de verdad: un pedido de modelarlo todo, un estudiante definido como una fila, aranceles a mitad de camino, tres palabras para un estudiante, dos definiciones de título, créditos por asistir, razones para separar, y una pregunta sin decisión. Decide qué harías; cada respuesta explica por qué."
+}

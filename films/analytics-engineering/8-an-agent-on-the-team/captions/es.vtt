@@ -1,0 +1,115 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:11.019
+En 1766, Nevil Maskelyne, el Astrónomo Real, publicó el primer Almanaque Náutico: tablas para hallar la longitud en el mar.
+
+00:00:12.319 --> 00:00:18.967
+No las calculó él mismo. Envió instrucciones por correo a calculistas: personas que trabajaban en casa, por toda Inglaterra.
+
+00:00:20.267 --> 00:00:28.380
+Cada mes se calculaba dos veces, por dos calculistas lejanos. Un comparador cotejaba uno con otro antes de imprimir nada.
+
+00:00:29.880 --> 00:00:36.977
+Jun siempre ha tenido un calculista en el equipo: un agente de IA, y uno rápido. La verificación tiene que venir incorporada.
+
+00:00:43.277 --> 00:00:48.608
+El agente puede leer todo el proyecto, ejecutar dbt y preparar cambios en una rama.
+
+00:00:49.908 --> 00:00:55.535
+Antes de todo eso, lee una página, escrita para agentes. Lo que puede hacer y lo que no debe hacer.
+
+00:00:57.235 --> 00:01:06.418
+A su lado, cinco skills, un archivo cada una: esbozar el modelo conceptual, perfilar una fuente, esbozar un modelo, conciliar y comparar, revisar los metadatos.
+
+00:01:07.918 --> 00:01:12.501
+Y el proceso: para cada uno de los diez pasos, la parte del agente y quién la aprueba.
+
+00:01:14.001 --> 00:01:21.188
+Archivos en el proyecto, no un prompt largo. Versionados, revisados y leídos igual por personas y por agentes.
+
+00:01:24.888 --> 00:01:29.860
+En Databricks, el agente trabaja como su propia entidad de servicio, nunca como una persona.
+
+00:01:31.560 --> 00:01:38.389
+Lee las fuentes, y el núcleo y los marts en producción. Solo escribe en sus propios esquemas de desarrollo.
+
+00:01:39.889 --> 00:01:46.287
+Trabaja con conteos y muestras pequeñas. Nombres, correos e IDs de estudiante se quedan en la base de datos.
+
+00:01:47.787 --> 00:01:50.915
+Lo que haga mal se queda donde nadie más lo lee.
+
+00:01:53.615 --> 00:01:58.791
+Cada afirmación del agente sobre los datos viene con la consulta que la demuestra, y el resultado.
+
+00:02:00.491 --> 00:02:08.159
+Ya viste sus afirmaciones: cuentas sin ID de estudiante, un correo familiar compartido, una baja registrada una semana tarde.
+
+00:02:09.459 --> 00:02:14.563
+Ahora ese hábito es una regla, escrita en la página del agente, con un ejemplo para copiar.
+
+00:02:16.063 --> 00:02:23.266
+Donde las reglas no deciden, como con ese correo compartido, el agente no adivina. Le pregunta a Mei, y ella registra una decisión.
+
+00:02:24.766 --> 00:02:27.992
+Una afirmación que llega sin su consulta se devuelve, sin leerla.
+
+00:02:31.492 --> 00:02:39.341
+Luego el agente ordena la línea de tiempo del estudiante. Para simplificar, fecha cada versión igual: según cuándo se registró.
+
+00:02:40.841 --> 00:02:47.156
+Falla una prueba: la conciliación con el censo. Negocios cuenta cuatro estudiantes. El informe dice tres.
+
+00:02:48.856 --> 00:02:54.491
+La baja registrada siete días tarde ahora parece un estudiante que seguía estudiando el día del censo.
+
+00:02:55.991 --> 00:02:59.559
+El borrador del agente pone la prueba en advertencia. La compilación pasa.
+
+00:03:01.259 --> 00:03:07.399
+La revisión de Jun del borrador lo detiene. La regla está escrita: nunca debilitar una prueba para que pase.
+
+00:03:09.499 --> 00:03:15.330
+Una prueba que falla es una noticia. Repórtala, con sus filas fallidas, y deja que una persona decida qué está mal.
+
+00:03:16.830 --> 00:03:21.800
+La corrección devuelve la fecha en que cada cambio entró en vigor. Negocios: tres. Verde.
+
+00:03:25.100 --> 00:03:27.190
+Antes de aprobar, dos verificaciones.
+
+00:03:28.490 --> 00:03:35.816
+Conciliar: cada facultad contra el informe del censo. Dos, tres, cinco y dos. La diferencia es cero, en todas.
+
+00:03:37.316 --> 00:03:44.589
+Comparar: compilar main, luego la rama desde cero, y compararlas clave por clave. Solo conteos; no sale ningún dato personal.
+
+00:03:46.089 --> 00:03:51.523
+Desde cero, porque la tabla de credenciales es incremental, y ocultaría un cambio de lógica.
+
+00:03:53.023 --> 00:04:01.371
+En el mart de Planificación, el atajo cambió la fila de un estudiante. En el núcleo, se movieron cincuenta y cinco versiones. Con la corrección, la comparación sale vacía.
+
+00:04:04.871 --> 00:04:11.330
+El agente marca su pull request como lista para revisión: qué cambió, por qué, qué verificó y la evidencia.
+
+00:04:13.030 --> 00:04:24.527
+La CI, las verificaciones que corren en cada pull request, compila el proyecto en DuckDB. Comprueba que la documentación generada esté al día y que la métrica siga dando el número del censo.
+
+00:04:26.027 --> 00:04:34.455
+También analiza el proyecto para Databricks. En dbt Cloud, un job de CI compila solo lo que cambió y lo que depende de ello.
+
+00:04:35.955 --> 00:04:41.245
+Luego, las personas. Jun aprueba el código. Noor aprueba el modelo, y Planificación su número.
+
+00:04:42.945 --> 00:04:48.588
+El agente nunca fusiona ni aprueba su propio trabajo. El agente recomienda; las personas aprueban.
+
+00:04:52.288 --> 00:04:54.324
+Está fusionado, probado y aprobado.
+
+00:04:55.024 --> 00:05:01.128
+Luego el agente revisa los metadatos, en el proyecto y fuera de él, y encuentra algo que ninguna prueba verifica.
+
+00:05:02.428 --> 00:05:07.155
+La definición de un título ahora vive en cuatro lugares. Y tres de ellos están mal.

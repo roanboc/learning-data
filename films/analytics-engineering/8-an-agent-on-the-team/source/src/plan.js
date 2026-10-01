@@ -142,7 +142,7 @@ function ag_press(ctx,x,y,s,down,t,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.sav
 function ag_chip(ctx,x,y,s,col,a,o){o=o||{};if(a<=0.01)return 0;const sz=o.size||18,w=tw(ctx,s,sz,500,"mono")+44,h=sz+20;withA(ctx,a,()=>{if(o.hi)glow(ctx,x+w/2,y,w*0.6,col,0.3*o.hi);glass(ctx,x,y-h/2,w,h,10,col,{glow:8,ea:0.75,fill:"rgba(7,12,24,0.95)"});
   ctx.fillStyle=rgba(col,1);rr(ctx,x+12,y-6,8,12,2);ctx.fill();T(ctx,s,x+30,y+sz*0.36,{f:"mono",w:500,size:sz,color:rgba(mix(INK,col,0.35),1)});});return w;}
 // the process table, as docs/process.md has it: ten rows, three of its columns; o.agent[i] and o.appr[i] light the agent's part (teal) and who approves (gold)
-const AG_PROC=[["Scope and meaning.","Drafts it from the catalog and glossary","Mei Tanaka, registrar's office"],["Source reality.","Profiles, and proposes the mapping …","Jun Park, analytics engineer"],["Consumer output.","Drafts it from the request …","The consumer: Planning, …"],["Gaps and contracts.","Drafts both","The owner and the consumer"],
+const AG_PROC=[["Scope and meaning.","Drafts it from the catalog and glossary","… Mei Tanaka, registrar's office"],["Source reality.","Profiles, and proposes the mapping …","Jun Park, analytics engineer"],["Consumer output.","Drafts it from the request …","The consumer: Planning, …"],["Gaps and contracts.","Drafts both","The owner and the consumer"],
   ["Tests.","Writes them first","Jun Park, in review"],["Build.","Drafts the SQL to pass the tests","Jun Park, in review"],["Validate.","Runs them (skills/reconcile-and-diff/)","Jun Park and the owner"],["Review and ship.","Opens the pull request","A reviewer, never the agent"],["Written once.","Finds duplicated and drifted metadata","Jun Park"],["Operate and evolve.","Flags breaking changes","The owners of what depends on it"]];
 function ag_process(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=o.rh||46,h=74+38+rh*10+14;if(a<=0.01)return h;withA(ctx,a,()=>{const col=[170,205,255];glass(ctx,x,y,w,h,14,col,{glow:12,ea:0.65,fill:"rgba(6,10,20,0.96)"});
   ctx.fillStyle=rgba(col,0.9);rr(ctx,x+18,y+22,10,10,3);ctx.fill();T(ctx,"docs/process.md",x+38,y+34,{f:"mono",w:500,size:18,color:rgba(col,1)});
@@ -167,7 +167,7 @@ function ag_door(ctx,x,y,w,h,name,col,op,t,o){o=o||{};const a=o.a==null?1:o.a;if
   ctx.strokeStyle=rgba(col,1);ctx.lineWidth=3;ctx.strokeRect(x-4,y-4,w+8,h+8);
   T(ctx,name,x+w/2,y-18,{w:800,size:22,align:"center",color:rgba(col,1)});});}
 // a key card on a lanyard: the agent's own identity
-function ag_key(ctx,x,y,s,a,o){o=o||{};if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.rotate(o.rot||0);const w=230*s,h=86*s,col=o.col||KT_AI;
+function ag_key(ctx,x,y,s,a,o){o=o||{};if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.rotate(o.rot||0);const w=270*s,h=86*s,col=o.col||KT_AI;
   glass(ctx,-w/2,-h/2,w,h,10*s,col,{glow:14,ea:0.85,fill:"rgba(7,14,22,0.96)"});ctx.fillStyle=rgba(col,0.9);rr(ctx,-w/2+12*s,-h/2+14*s,30*s,22*s,4);ctx.fill();
   T(ctx,o.title||"service principal",-w/2+52*s,-h/2+32*s,{w:800,size:20*s,color:rgba(col,1)});T(ctx,o.sub||"agent-credentials",-w/2+52*s,-h/2+60*s,{f:"mono",w:500,size:18*s,color:rgba(SOFT,1)});
   if(o.cross)cross_(ctx,w/2-26*s,-h/2+26*s,30*s,AG_RED,o.cross);ctx.restore();});}
@@ -215,3 +215,98 @@ function ag_copy(ctx,x,y,w,kind,txt,col,t,o){o=o||{};const a=o.a==null?1:o.a;if(
   const lines=wrapT(ctx,txt,0,0,w-40,{size:20,w:600,measure:true});lines.forEach((l,i)=>{const jit=dr*(hash(i,(o.seed||0)+3)-0.5)*6*Math.sin(t*1.3+i);T(ctx,l,20+jit,46+i*28+jit*0.4,{w:600,size:20,color:rgba(mix(INK,dr>0?AG_AMB:INK,dr*0.5),1)});});
   if(o.mark)withA(ctx,o.mark,()=>T(ctx,"as it drifts",w-16,h-14,{w:700,size:18,align:"right",color:rgba(AG_AMB,0.95)}));
   ctx.restore();});}
+// the series' loop of ten (stepLoop in weeds.js), without the small step numbers and with smaller stations (o.r), for a loop drawn small in a corner
+function ag_stepLoop(ctx,cx,cy,rx,ry,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{
+  ctx.save();ctx.strokeStyle=rgba(WEED,0.25);ctx.lineWidth=2;ctx.setLineDash([4,10]);ctx.beginPath();ctx.ellipse(cx,cy,rx,ry,0,0,TAU);ctx.stroke();ctx.restore();
+  STEPS10.forEach(([nm,gl],i)=>{const on=o.on?o.on[i]||0:1,[px,py]=stepPos(i,cx,cy,rx,ry),r=o.r||40;withA(ctx,0.25+0.75*on,()=>{if(on>0)glow(ctx,px,py,r*2,WEED,0.2*on);
+      ctx.fillStyle="rgba(7,12,24,0.96)";ctx.beginPath();ctx.arc(px,py,r,0,TAU);ctx.fill();ring(ctx,px,py,r,mix(SOFT,WEED,on),1,2.4);
+      T(ctx,gl,px,py+8,{w:800,size:gl.length>2?19:24,align:"center",color:rgba(mix(SOFT,WEED,on),1)});});
+    if(o.teal&&o.teal[i]>0)withA(ctx,o.teal[i],()=>{ctx.fillStyle=rgba(KT_AI,1);ctx.beginPath();ctx.arc(px+r*0.72,py-r*0.72,8,0,TAU);ctx.fill();});
+    if(o.ticks&&o.ticks[i]>0)kt_gtick(ctx,px+r*0.78,py+r*0.7,13,o.ticks[i]);});});}
+
+/* ---------- the labs' and scenarios' pictures ----------
+   Added to the film bundle's LV registry (Keeping it true's true.js defines it; these keys are prefixed ag_ so they never clash).
+   assets/from-words-to-data/learn.js calls each as f(ctx, w, h, state, L): a lab passes its state (sort: {pick, checked};
+   pick: {pick}; compose: {pick}), a scenario passes {q}. Any words come from L.vis (the page's learn.en.js or learn.es.js),
+   so each language draws its own; code stays as the project has it. */
+function ag_lfit(c,w,h,bw,bh){const k=Math.min(w/bw,h/bh);c.translate((w-bw*k)/2,(h-bh*k)/2);c.scale(k,k);}
+// which of the pull request's five changes each choice rejects
+const AG_LREJ={none:[0,0,0,0,0],warn:[0,0,0,1,0],where:[0,0,1,0,0],both:[0,0,1,1,0],every:[1,1,1,1,1]};
+const AG_LDIFF=["compared as (  →  with_previous_values as (","+ values: [studying, inactive, withdrawn, completed]","+ config: {where: \"learner_status = 'studying'\"}","+ severity: warn","+ -- every date a version starts or ends"];
+// a result card for the labs: a title, then lines in their colours
+function ag_lcard(c,x,y,w,h,col,title,lines){glass(c,x,y,w,h,14,col,{glow:10,ea:0.75,fill:"rgba(6,10,20,0.96)"});T(c,title,x+20,y+36,{w:800,size:21,color:rgba(col,1)});
+  let yy=y+72;lines.forEach(([s,lc,o])=>{o=o||{};const ls=wrapT(c,s,x+20,yy,w-40,{size:o.size||20,w:o.w||700,f:o.f,color:rgba(lc,1),lh:28});yy+=ls.length*28+6;});}
+Object.assign(LV,{
+  // review the agent's pull request: five changes, each approved (gold tick) or rejected (red cross); what the build and the test then do
+  ag_l_review:(c,w,h,st,L)=>{const V=L.vis,rej=AG_LREJ[st.pick]||AG_LREJ.none;c.save();ag_lfit(c,w,h,1000,580);
+    T(c,V.pr,20,36,{w:800,size:26});T(c,V.branch,20,66,{w:700,size:20,color:rgba(AG_RED,1)});
+    V.changes.forEach((nm,i)=>{const y=84+i*72,r=rej[i];glass(c,20,y,960,64,12,KT_AI,{glow:6,ea:0.6,fill:"rgba(6,14,20,0.96)"});
+      T(c,String(i+1),38,y+27,{f:"mono",w:500,size:21,color:rgba(SOFT,1)});T(c,nm,66,y+27,{w:700,size:22});T(c,AG_LDIFF[i],66,y+54,{f:"mono",w:500,size:20,color:rgba(i===0?[205,225,255]:KT_AI,0.95)});
+      if(r)cross_(c,942,y+32,34,AG_RED,1);else kt_gtick(c,942,y+32,16,1);});
+    const warn=!rej[3],where=!rej[2];
+    ag_lcard(c,20,452,470,118,warn?AG_AMB:AG_RED,V.build+": "+(warn?"WARN 1 · ERROR=0":"FAIL 1"),[[warn?V.ships:V.stops,warn?AG_AMB:AG_RED,{size:22}]]);
+    ag_lcard(c,510,452,470,118,where?AG_AMB:AG_GRN,V.rel,where?[[V.skip,AG_AMB,{size:21}],[V.skipped,AG_AMB,{size:19,w:600}]]:[[V.all73,AG_GRN,{size:22}]]);
+    c.restore();},
+  // write a guideline: the must-not's three parts, each missing, right or wrong, and what the agent then does: report, or loop
+  ag_l_rule:(c,w,h,st,L)=>{const V=L.vis,Lb=L.labs.find(x=>x.id==="rule"),S=Lb.w.slots,pk=st.pick||[];c.save();ag_lfit(c,w,h,1000,460);
+    T(c,"AGENTS.md · "+Lb.w.head,30,46,{w:800,size:26,color:rgba(TRUST,1)});
+    S.forEach((sl,i)=>{const p=pk[i],o=p==null?null:sl.opts[p],col=o==null?AG_GREY:o.ok?AG_GRN:AG_RED,y=76+i*122;
+      glass(c,30,y,500,104,14,col,{glow:8,ea:0.7,fill:"rgba(6,10,20,0.96)"});T(c,sl.label,54,y+40,{w:800,size:24,color:rgba(o?INK:SOFT,1)});
+      if(o==null)T(c,"…",54,y+80,{w:800,size:28,color:rgba(AG_GREY,1)});else{const ls=wrapT(c,o.t,54,y+78,380,{w:600,size:19,measure:true});T(c,ls[0]+(ls.length>1?" …":""),54,y+78,{w:600,size:19,color:rgba(SOFT,1)});
+        if(o.ok)tick_(c,490,y+52,36,AG_GRN,1);else cross_(c,490,y+52,34,AG_RED,1);}});
+    const done=pk.every(p=>p!=null),inst=pk[2]==null?null:S[2].opts[pk[2]],good=done&&pk.every((p,i)=>S[i].opts[p].ok);
+    kt_agent(c,770,150,40,0,{});
+    if(inst&&!good){ring(c,770,150,96,AG_AMB,0.9,3,[10,8]);c.fillStyle=rgba(AG_AMB,1);c.beginPath();c.moveTo(866,150);c.lineTo(852,128);c.lineTo(880,128);c.closePath();c.fill();
+      T(c,V.stuck,770,300,{w:800,size:28,align:"center",color:rgba(AG_AMB,1)});T(c,V.loop,770,340,{f:"mono",w:500,size:20,align:"center",color:rgba(AG_AMB,0.9)});}
+    if(good){arrowTo(c,770,198,770,262,KT_AI,0.9,{head:14});ag_lcard(c,580,272,390,170,KT_AI,V.report,[["BUS | 4 | 3",[205,225,255],{f:"mono",w:500,size:22}],[V.to,SOFT,{size:21,w:600}]]);}
+    c.restore();},
+  // claim or guess: each statement, with its query if it has one; checked, each guess shows what running it finds
+  ag_l_claims:(c,w,h,st,L)=>{const V=L.vis,Lb=L.labs.find(x=>x.id==="claims"),pick=st.pick||{};c.save();ag_lfit(c,w,h,1000,500);
+    V.claims.forEach((cl,i)=>{const y=12+i*81,hasQ=!!cl.q,pb=pick[i];glass(c,16,y,740,72,12,hasQ?KT_AI:AG_GREY,{glow:6,ea:0.6,fill:"rgba(6,12,20,0.96)"});
+      T(c,cl.c,34,y+30,{w:700,size:21});
+      if(hasQ)T(c,cl.q+" → "+cl.r.split(" | ").slice(-2).join(" | "),34,y+60,{f:"mono",w:500,size:19,color:rgba(AG_GRN,0.95)});
+      else if(st.checked)T(c,V.run+" "+cl.run,34,y+60,{w:700,size:19,color:rgba(AG_AMB,1)});
+      else T(c,V.q.noquery,34,y+60,{w:600,size:19,color:rgba(SOFT,0.8)});
+      if(pb){const ev=pb==="ev";tag(c,860,y+36,ev?V.evidence:V.guess,ev?AG_GRN:AG_AMB,{align:"center",size:21});
+        if(st.checked){const ok=Lb.w.items[i].b===pb;if(ok)tick_(c,966,y+36,30,AG_GRN,1);else cross_(c,966,y+36,28,AG_RED,1);}}});
+    c.restore();},
+  // least access: production's doors and the agent's own wing, opened for reading or writing; the key it holds; the jobs it can do
+  ag_l_access:(c,w,h,st,L)=>{const V=L.vis,Lb=L.labs.find(x=>x.id==="access"),k=st.pick||"little",lv={little:[0,1,1,2],right:[1,1,1,2],prod:[2,2,2,2],person:[2,2,2,2]}[k]||[0,0,0,0],res=Lb.w.res[k]||[];
+    c.save();ag_lfit(c,w,h,1000,460);
+    c.save();c.setLineDash([8,8]);c.strokeStyle=rgba(SOFT,0.5);c.lineWidth=2;rr(c,16,150,500,290,16);c.stroke();c.restore();tag(c,30,150,V.prod,SOFT,{size:21});
+    [[36,V.doors[0],[150,176,214]],[200,V.doors[1],TRUST],[364,V.doors[2],LAYER4[3][1]],[580,V.doors[3],KT_AI]].forEach(([x,nm,col],i)=>{const s=lv[i],wr=s===2,cc=s===0?AG_GREY:wr&&i<3?AG_RED:col;
+      ag_door(c,x,222,120,160,nm,cc,s===0?0:s===1?0.55:1,0,{});
+      tag(c,x+60,414,s===0?V.none:s===1?V.read:V.write,cc,{align:"center",size:21});});
+    if(k==="prod"||k==="person")ag_scribble(c,424,300,50,1);else if(k==="right")ag_scribble(c,640,300,50,1);
+    const per=k==="person";ag_key(c,180,62,1.25,1,{title:per?V.person:V.key,col:per?TRUST:KT_AI,sub:per?" ":undefined});
+    V.jobs.forEach((j,i)=>{const y=180+i*70,ok=res[i]===1;if(ok)tick_(c,770,y,34,AG_GRN,1);else cross_(c,770,y,30,AG_RED,1);T(c,j,800,y+9,{w:700,size:25,color:rgba(ok?INK:SOFT,1)});});
+    c.restore();},
+  // the scenarios
+  ag_q_warn:(c,w,h,st,L)=>{const V=L.vis;c.save();ag_lfit(c,w,h,1200,640);
+    ag_code(c,50,40,1100,"tests/_singular_tests.yml",["  - name: reconcile_planning_with_census_report","    config:","      meta: {owner: Planning}","+      severity: warn"],{size:28,lh:46,label:AG_DRAFT,lineCol:{3:AG_AMB}});
+    tag(c,600,420,V.q.fail,AG_RED,{align:"center",size:32});T(c,V.q.until,600,520,{w:700,size:30,align:"center",color:rgba(AG_AMB,1)});c.restore();},
+  ag_q_emails:(c,w,h,st,L)=>{const V=L.vis;c.save();ag_lfit(c,w,h,1200,640);glass(c,60,40,1080,560,18,KT_AI,{glow:12,ea:0.7,fill:"rgba(6,12,20,0.96)"});
+    T(c,V.q.emails,100,104,{w:800,size:32});for(let i=0;i<8;i++){const y=150+i*52;c.fillStyle=rgba([205,225,255],0.18);rr(c,100,y,260+180*hash(i,3),22,8);c.fill();c.fillStyle=rgba([205,225,255],0.1);rr(c,560,y,200+160*hash(i,9),22,8);c.fill();}
+    tag(c,980,320,"500",AG_RED,{align:"center",size:40});c.restore();},
+  ag_q_diff:(c,w,h,st,L)=>{const V=L.vis;c.save();ag_lfit(c,w,h,1200,640);ag_db(c,300,230,220,170,"main",[150,176,214],1,{});ag_db(c,900,230,220,170,"branch",KT_AI,1,{});
+    arrowTo(c,430,230,770,230,SOFT,0.8,{head:16});tick_(c,420,500,40,AG_GRN,1);T(c,V.q.pass,450,512,{w:700,size:30,color:rgba(AG_GRN,1)});
+    tag(c,600,580,V.q.rows,AG_AMB,{align:"center",size:30});c.restore();},
+  ag_q_prod:(c,w,h,st,L)=>{const V=L.vis;c.save();ag_lfit(c,w,h,1200,640);ag_door(c,160,170,240,300,V.prod,TRUST,0,0,{});
+    T(c,"?",280,350,{w:800,size:90,align:"center",color:rgba(AG_AMB,1)});ag_key(c,820,240,1.3,1,{title:V.key});
+    wrapT(c,V.q.ask,820,400,600,{w:700,size:30,align:"center",color:rgba(AG_AMB,1)});c.restore();},
+  ag_q_twohomes:(c,w,h,st,L)=>{const V=L.vis;c.save();ag_lfit(c,w,h,1200,640);
+    ag_code(c,40,80,480,V.q.skill,["cte_1 as (","cte_2 as ("],{size:28,lh:48,label:"",edge:AG_AMB});
+    ag_code(c,560,80,600,V.q.conv,["- Then **logical CTEs**,","  one step each, named for","  what they hold","  (`learners_at_census`,","  not `cte2`)."],{size:26,lh:44});
+    cross_(c,280,420,60,AG_RED,1);c.restore();},
+  ag_q_ci:(c,w,h,st,L)=>{const V=L.vis;c.save();ag_lfit(c,w,h,1200,640);for(let i=0;i<5;i++){tick_(c,120+i*90,120,40,AG_GRN,1);}
+    T(c,V.q.ci,80,210,{w:800,size:32,color:rgba(AG_GRN,1)});kt_agent(c,300,430,60,0,{});arrowTo(c,380,430,640,430,KT_AI,0.7,{head:16});
+    glass(c,660,380,380,100,20,AG_GREY,{glow:6,ea:0.6,fill:"rgba(10,12,20,0.94)"});T(c,V.q.approve,850,444,{w:800,size:34,align:"center",color:rgba(AG_GREY,1)});
+    T(c,"?",1100,450,{w:800,size:80,align:"center",color:rgba(AG_AMB,1)});c.restore();},
+  ag_q_inc:(c,w,h,st,L)=>{const V=L.vis;c.save();ag_lfit(c,w,h,1200,640);c.save();c.translate(80,40);c.scale(1.4,1.4);ag_stack(c,0,90,300,0,{});c.restore();
+    tag(c,860,230,V.q.inc,AG_AMB,{align:"center",size:32});T(c,"core_credential_v2",860,360,{f:"mono",w:500,size:30,align:"center",color:rgba(TRUST,1)});
+    T(c,V.q.nochange,860,420,{w:800,size:34,align:"center",color:rgba(AG_GRN,1)});c.restore();},
+  ag_q_aisha:(c,w,h,st,L)=>{const V=L.vis;c.save();ag_lfit(c,w,h,1200,640);kt_agent(c,150,200,50,0,{});
+    glass(c,260,140,880,120,18,AG_GREY,{glow:8,ea:0.7,fill:"rgba(8,12,20,0.96)"});wrapT(c,"“"+V.claims[4].c+"”",290,212,820,{w:700,size:32});
+    c.save();c.setLineDash([12,10]);c.strokeStyle=rgba(AG_GREY,0.8);c.lineWidth=3;rr(c,300,300,800,90,14);c.stroke();c.restore();T(c,V.q.noquery,700,358,{w:700,size:30,align:"center",color:rgba(AG_GREY,1)});
+    tag(c,700,480,V.q.named,AG_RED,{align:"center",size:30});c.restore();}
+});

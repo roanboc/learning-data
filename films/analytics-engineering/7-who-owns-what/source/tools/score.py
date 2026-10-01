@@ -77,7 +77,7 @@ def bed(sid, chords, a=None, b=None, g=0.04, tone='reed', bassg=0.02):
     prog(sid, chords, a, b, g=g, tone=tone, bassg=bassg)
 L0 = lambda sid, t: S0(sid) + t                     # a time inside a chapter, as the scene's t
 
-# 1. The register is the title: the reed organ alone for 1858; paper as each deed unrolls, a quill's scratch as the chain draws;
+# 1. The register is the title: the reed organ alone for 1858; paper as each deed unrolls;
 #    a knock where the finger stops at the gap; the register's page turning; the transfer signed and stamped; the register closing (a thud);
 #    a swell as it becomes a core model; three knocks for the three tags; the title on the series' mark
 bed('register', [BBMAJ9, EBMAJ9, BBMAJ9], 0, cq('register', 'bridge'), g=0.036)
@@ -85,7 +85,6 @@ bed('register', [GM7, EBMAJ9], cq('register', 'bridge'), cq('register', 'breath'
 span_ = W('register', 'act', 'tracing') - S0('register') + 1.2
 for i in range(6):
     paper(L0('register', 0.9 + i / 6 * span_), 0.026, -0.5 + i * 0.2, 0.4)
-quill(L0('register', 0.9), span_ * 0.9, 0.022, -0.2)
 knock(W('register', 'act', 'hoping', 0.2), 0.035, 0.1, 200); soft(46, W('register', 'act', 'hoping', 0.3), 0.03)
 pageturn(G('register', 'chain', 0.1), 0.04)
 paper(G('register', 'transfer', -0.3), 0.03, 0.5)

@@ -42,7 +42,7 @@ scene("staging",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   ctx.save();drift(ctx,t,sc,{z:0.03});
   const cD=c("draft"),cF=c("first"),cJ=c("job"),cN=c("nojoin"),outA=1-fin(t,cF-0.4,0.6);
   // the tests are written, and the loop is at step 6: build
-  withA(ctx,outA,()=>{arrive(ctx,330,270,t,0.2,()=>withA(ctx,1-fin(t,cD+0.4,0.6),()=>{stepLoop(ctx,330,280,210,140,t,{on:STEPS10.map((s,i)=>i===5?1:0.25),noLabels:true});
+  withA(ctx,outA,()=>{arrive(ctx,330,270,t,0.2,()=>withA(ctx,1-fin(t,cD+0.4,0.6),()=>{bl_stepLoop(ctx,330,280,210,140,t,{on:STEPS10.map((s,i)=>i===5?1:0.25)});
       tag(ctx,330,490,"step 6 · build in layers",WEED,{align:"center",size:22});}),{d:1});
     // the tests: grey (not run), red under the agent's first draft
     const tR=w("draft","watches them fail");arrive(ctx,1420,350,t,w("red","tests")-0.2,()=>bl_tests(ctx,1000,140,840,{p:clamp((t-w("red","tests"))/1.4,0,1),red:BL_TESTS.map((s,i)=>fin(t,tR+i*0.12,0.3))}),{dy:30});
@@ -50,7 +50,8 @@ scene("staging",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
     arrive(ctx,620,680,t,cD-0.1,()=>bl_code(ctx,80,600,1100,"skills/draft-a-model/SKILL.md",["The contract and the tests say what done looks like. Write them first, then the least SQL that","turns them green, in the right layer."],{edge:KT_AI,p:clamp((t-cD)/1.4,0,1),lit:{0:fin(t,w("draft","least code"),0.5),1:fin(t,w("draft","least code"),0.5)},litCol:KT_AI}),{dy:30});
     const dA=w("draft","first draft");arrive(ctx,500,350,t,dA-0.2,()=>bl_code(ctx,80,140,860,"models/staging/short_courses/stg_short_courses__learners.sql",BL_DRAFT,{edge:SRC3[2][1],p:clamp((t-dA)/2.2,0,0.55)+0.45*clamp((t-w("draft","least code"))/1.8,0,1),hi:pulseAt(t,w("draft","Jun reviews"),1.4)}),{dy:30});
     kt_agent(ctx,1300,690,26,t,{a:fin(t,cD-0.2,0.5),busy:fin(t,dA,0.5),label:"the agent"});
-    arrive(ctx,1600,880,t,w("draft","Jun reviews")-0.2,()=>{person(ctx,"jun",1600,830,0.48,{pose:"stand",expr:"calm",t});roleTag(ctx,1600,860,"jun");},{dy:20,from:0.94});
+    // Jun stands clear of the three-line caption (its box reaches up to about y 840): his name and role beside him, not under
+    arrive(ctx,1640,690,t,w("draft","Jun reviews")-0.2,()=>{person(ctx,"jun",1560,800,0.41,{pose:"stand",expr:"calm",t});roleTag(ctx,1735,690,"jun");},{dy:20,from:0.94});
     kt_gtick(ctx,930,150,20,fin(t,w("draft","every line")+0.2,0.35));});
   // the first station: the four layers as columns; staging fills with seven views
   const colA=fin(t,cF-0.3,0.6),chT=w("first","seven");
@@ -74,7 +75,7 @@ scene("staging",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
 // the layers table of docs/conventions.md, trimmed and drawn as the table it is; o.on[i] lights a row
 function bl_layersTable(ctx,x,y,w,t,o){o=o||{};const R=[["Staging","One model per source table: rename, cast, add keys qualified by their key set and their hashes. No joins, no rules. …","private","view"],
     ["Intermediate","Steps, not products: match keys, stitch timelines, apply business rules. …","private","view"],["Core","One model per entity and relationship at a declared grain. The enterprise contract, versioned: …","public","table (incremental where it pays)"],
-    ["Marts","Built for one consumer. The consumer contract.","protected","table"]],cx=[x+22,x+150,x+590,x+692],cw=[120,420,96,160];
+    ["Marts","Built for one consumer. The consumer contract.","protected","table"]],cx=[x+22,x+150,x+575,x+705],cw=[120,410,120,150];
   const rows=R.map(r=>[1,3].map(k=>wrapT(ctx,r[k],0,0,cw[k],{size:18,measure:true})));let h=84+44;rows.forEach(r=>{h+=Math.max(r[0].length,r[1].length)*24+18;});
   glass(ctx,x,y,w,h,14,[170,205,255],{glow:12,ea:0.7,fill:"rgba(6,10,20,0.96)"});ctx.fillStyle=rgba([170,205,255],0.9);rr(ctx,x+18,y+18,11,11,3);ctx.fill();
   T(ctx,"docs/conventions.md",x+38,y+30,{f:"mono",w:500,size:18,color:rgba([170,205,255],1)});T(ctx,BL_RUN,x+38,y+58,{w:600,size:18,color:rgba(SOFT,1)});
@@ -203,8 +204,11 @@ scene("ctes",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   arrive(ctx,1550,480,t,w("open","named steps")-0.2,()=>bl_outline(ctx,1290,200,t,{on:[Math.max(0.15,fin(t,cI,0.5)),fin(t,cL,0.5),fin(t,cF,0.5)].map(v=>Math.max(0.15,v)),
     trace:{measured:T1,joined:T2,awards_at_census:T3,credit_at_census:T3},cols:{measured:["credit_points_remaining",T1],awards_at_census:["credit_points_required",T3],credit_at_census:["credit_points_earned",T3]}}),{dy:30});
   if(T2>0){const[mx,my]=P.measured,[jx,jy]=P.joined,[ax,ay]=P.awards_at_census,[cx,cy]=P.credit_at_census;ctx.save();ctx.strokeStyle=rgba(TRUST,0.85);ctx.lineWidth=2.4;
-    const seg=(x0,y0,x1,y1,q)=>{if(q<=0)return;ctx.beginPath();ctx.moveTo(x0,y0);ctx.bezierCurveTo(x0-34,y0,x1-34,y1,lerp(x0,x1,q),lerp(y0,y1,q));ctx.stroke();};
-    seg(mx+6,my-12,jx+6,jy,T2);seg(jx+6,jy-12,ax+6,ay,T3);seg(jx+6,jy-12,cx+6,cy,T3);ctx.restore();}
+    // one hop: left from the bullet into the gutter, up to the CTE it reads, and right to its bullet, with a small head
+    const hop=(y0,y1,gx,q)=>{if(q<=0)return;const xb=mx-4,pts=[[xb,y0],[gx,y0],[gx,y1],[xb,y1]];let tot=0;const sg=[];for(let i=1;i<4;i++){const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);sg.push(d);tot+=d;}
+      let left=q*tot;ctx.beginPath();ctx.moveTo(xb,y0);for(let i=1;i<4&&left>0;i++){const f=Math.min(1,left/sg[i-1]);ctx.lineTo(lerp(pts[i-1][0],pts[i][0],f),lerp(pts[i-1][1],pts[i][1],f));left-=sg[i-1];}ctx.stroke();
+      if(q>0.98){ctx.fillStyle=rgba(TRUST,0.9);ctx.beginPath();ctx.moveTo(xb,y1);ctx.lineTo(xb-10,y1-6);ctx.lineTo(xb-10,y1+6);ctx.closePath();ctx.fill();}};
+    hop(my-6,jy-6,mx-22,T2);hop(jy-6,ay-6,mx-40,T3);hop(jy-6,cy-6,mx-40,T3);ctx.restore();}
   arrive(ctx,1550,870,t,tr+1.2,()=>tag(ctx,1550,870,"every column, traced back",TRUST,{align:"center",size:20}),{dy:12});
   ctx.restore();vign(ctx,S);});
 

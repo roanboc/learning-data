@@ -8,6 +8,6 @@ const BREATH={
 "evidence":{"hold":{"claim":1.0,"four":0.8,"more":0.8,"mei":0.8,"guess":0.8}},
 "shortcut":{"hold":{"refactor":0.8,"fails":1.0,"why":0.8,"warn":1.0,"stop":1.4,"news":0.8,"fix":0.6}},
 "validate":{"hold":{"two":0.6,"reconcile":0.8,"diff":0.8,"scratch":0.8,"none":0.8}},
-"ship":{"hold":{"pr":0.8,"ci":1.0,"cloud":0.8,"people":0.8,"approve":1.0}},
+"ship":{"hold":{"pr":1.0,"ci":1.0,"cloud":0.8,"people":1.0,"approve":1.0}},
 "next":{"hold":{"metadata":0.6},"breathe":4.2}
 };

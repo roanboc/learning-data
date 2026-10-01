@@ -131,7 +131,7 @@ scene("name",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   const cA=c("apart"),mv=fin(t,w("step","The model is")-0.3,1.3),rl=fin(t,w("step","The model is")+0.2,0.6),m=ease(fin(t,0,1.3));
   // the staging file, carried from the last chapter, moves to its place; the blueprint arrives beside it
   const fx=lerp(100,120,m),fy=lerp(240,330,m),fw=lerp(760,740,m);
-  codeFile(ctx,fx,fy,fw,"stg_student_system__learners.sql",MT_F1.slice(1),{edge:LAYER4[0][1]});
+  codeFile(ctx,fx,fy,fw,"stg_student_system__learners.sql",MT_F1,{edge:LAYER4[0][1]});
   arrive(ctx,1410,460,t,0.3,()=>{bpPaper(ctx,1000,250,820,420,1,{title:"CREDENTIAL MODEL · v3",sub:"the blueprint"});bpModel(ctx,1410,520,0.62,{b:1,hi:{learner:fin(t,cA,0.6)}});},{d:1.0,from:0.9});
   // the label "model" lifts from the file and lands on the blueprint; the file becomes "transformation"
   const k=spring(mv*1.2),lx=lerp(490,1410,k),ly=lerp(300,212,k)-Math.sin(Math.PI*clamp(mv,0,1))*90,warn=pulseAt(t,w("calls","misleading"),1.4);
@@ -202,16 +202,16 @@ scene("steps",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
 scene("series",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025});
   // the loop, carried from the last chapter, shrinks to make room for the films, and its labels give way to theirs
-  const m=ease(fin(t,0,1.4)),cx=960,cy=lerp(560,570,m),rx=lerp(640,400,m),ry=lerp(360,250,m),words=["question","same one","Grain","Contracts","layers","owns","agent","written"],ids=["list1","list1","list1","list2","list2","list2","list2","list2"];
+  const m=ease(fin(t,0,1.4)),cx=960,cy=lerp(560,540,m),rx=lerp(640,400,m),ry=lerp(360,250,m),words=["question","same one","Grain","Contracts","layers","owns","agent","written"],ids=["list1","list1","list1","list2","list2","list2","list2","list2"];
   stepLoop(ctx,cx,cy,rx,ry,t,{on:STEPS10.map(()=>lerp(1,0.35,m)),labA:1-fin(t,0,0.7)});
   arrive(ctx,cx,cy,t,1.0,()=>{glass(ctx,cx-200,cy-54,400,108,20,WEED,{glow:18,ea:0.85,fill:"rgba(7,12,24,0.96)"});T(ctx,"1 · this film",cx,cy-12,{f:"mono",w:500,size:18,align:"center",color:rgba(WEED,1)});T(ctx,"A model is not a transformation",cx,cy+24,{w:800,size:22,align:"center"});});
-  arrive(ctx,960,90,t,0.4,()=>T(ctx,"The next eight films",960,90,{w:800,size:36,align:"center"}),{from:0.9});
+  arrive(ctx,960,76,t,0.4,()=>T(ctx,"The next eight films",960,76,{w:800,size:36,align:"center"}),{from:0.9});
   // each film arrives in its place, beside the steps it takes, and a line joins it to them
-  MT_FILMS.forEach(([n,title,st],i)=>{const t0=w(ids[i],words[i])-0.2,a=fin(t,t0,0.5),an=-Math.PI/2+(st.reduce((s,x)=>s+x,0)/st.length)/10*TAU,px=cx+Math.cos(an)*(rx+300),py=cy+Math.sin(an)*(ry+120);
+  MT_FILMS.forEach(([n,title,st],i)=>{const t0=w(ids[i],words[i])-0.2,a=fin(t,t0,0.5),an=-Math.PI/2+(st.reduce((s,x)=>s+x,0)/st.length)/10*TAU,px=cx+Math.cos(an)*(rx+300),py=cy+Math.sin(an)*(ry+(Math.sin(an)>0.9?70:Math.sin(an)<-0.9?80:120));
     st.forEach(k=>{const[sx,sy]=stepPos(k,cx,cy,rx,ry),q=fin(t,t0+0.2,0.6);withA(ctx,a,()=>{ctx.strokeStyle=rgba(WEED,0.5);ctx.lineWidth=1.5;ctx.setLineDash([4,6]);ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(lerp(sx,px,q),lerp(sy,py,q));ctx.stroke();ctx.setLineDash([]);glow(ctx,sx,sy,50,WEED,0.3);});});
     arrive(ctx,px,py,t,t0,()=>mt_filmCard(ctx,px,py,n,title,1,pulseAt(t,t0+0.2,1.2)),{from:0.75});});
   // the films' code and data are real: the example project runs on dbt Core with DuckDB
-  arrive(ctx,960,150,t,w("real","real code")-0.1,()=>tag(ctx,960,150,"real code · real data · runs on dbt Core · DuckDB",WEED,{align:"center",size:20}),{dy:14});
+  arrive(ctx,960,124,t,w("real","real code")-0.1,()=>tag(ctx,960,124,"real code · real data · runs on dbt Core · DuckDB",WEED,{align:"center",size:20}),{dy:14});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 11. Pull back ---------- */

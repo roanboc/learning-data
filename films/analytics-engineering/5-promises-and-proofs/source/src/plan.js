@@ -76,15 +76,19 @@ function pp_hand(ctx,x,y,s,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)retur
   const skin=o.skin||[226,182,146],lit=rgba(mix(skin,[255,246,232],0.32),1),mid=rgba(skin,1),dk=rgba(mix(skin,[90,48,28],0.45),1),edge="rgba(110,64,40,0.55)";
   const sg=(y0,y1)=>{const q=ctx.createLinearGradient(0,y0,0,y1);q.addColorStop(0,lit);q.addColorStop(0.55,mid);q.addColorStop(1,dk);return q;};
   // the tool behind the fingers: a wooden handle above, a steel blade below
-  if(o.tool==="punch"){let g=ctx.createLinearGradient(-12,0,12,0);g.addColorStop(0,"#45474c");g.addColorStop(0.35,"#dcdcd6");g.addColorStop(0.6,"#8a8c90");g.addColorStop(1,"#3a3b40");ctx.fillStyle=g;
-    ctx.beginPath();ctx.moveTo(-11,-80);ctx.lineTo(11,-80);ctx.lineTo(11,60);ctx.lineTo(6,92);ctx.lineTo(-6,92);ctx.lineTo(-11,60);ctx.closePath();ctx.fill();ctx.strokeStyle="rgba(30,30,34,0.6)";ctx.lineWidth=1.2;ctx.stroke();
-    ctx.fillStyle="#b4b4b0";ctx.beginPath();ctx.ellipse(0,-80,12,4,0,0,TAU);ctx.fill();}
   if(o.tool==="scraper"){let g=ctx.createLinearGradient(-10,0,10,0);g.addColorStop(0,"#5a3a20");g.addColorStop(0.45,"#a2744a");g.addColorStop(1,"#4a2e16");ctx.fillStyle=g;rr(ctx,-9,-96,18,120,8);ctx.fill();
     g=ctx.createLinearGradient(-6,0,6,0);g.addColorStop(0,"#6c6e74");g.addColorStop(0.4,"#eceae4");g.addColorStop(1,"#55575c");ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(-5,22);ctx.lineTo(5,22);ctx.lineTo(4,92);ctx.lineTo(-2,104);ctx.lineTo(-5,92);ctx.closePath();ctx.fill();ctx.strokeStyle="rgba(40,40,46,0.6)";ctx.lineWidth=1;ctx.stroke();}
-  // the sleeve, wool, with soft folds, off to the right
-  const sl=o.sleeve||[86,64,48];let g=ctx.createLinearGradient(0,-70,0,90);g.addColorStop(0,rgba(mix(sl,[255,240,220],0.18),1));g.addColorStop(0.5,rgba(sl,1));g.addColorStop(1,rgba(mix(sl,[0,0,0],0.55),1));
-  ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(150,-52);ctx.bezierCurveTo(300,-66,600,-76,1200,-84);ctx.lineTo(1200,96);ctx.bezierCurveTo(600,90,300,80,150,62);ctx.bezierCurveTo(140,22,140,-18,150,-52);ctx.closePath();ctx.fill();
-  ctx.strokeStyle=rgba(mix(sl,[255,230,200],0.3),0.35);ctx.lineWidth=2.2;[[200,-56,226,58],[290,-62,320,66],[420,-70,452,76]].forEach(([x0,y0,x1,y1])=>{ctx.beginPath();ctx.moveTo(x0,y0);ctx.bezierCurveTo(x0+26,y0+40,x1-26,y1-40,x1,y1);ctx.stroke();});
+  // the sleeve, wool: it widens from the cuff to the elbow, shaded across its round, with soft folds; o.len ends it
+  // short (it fades into the shadow there) so a forearm never runs into the caption area
+  const sl=o.sleeve||[86,64,48],L=o.len||1200,fd=o.len?Math.min(220,L*0.4):0,wy=x_=>{const q=clamp((x_-150)/Math.max(1,L-150),0,1);return [-52-18*Math.sqrt(q),62+20*Math.sqrt(q)];};
+  const slv=()=>{ctx.beginPath();ctx.moveTo(150,-52);for(let i=1;i<=16;i++){const x_=150+(L-150)*i/16;ctx.lineTo(x_,wy(x_)[0]);}for(let i=16;i>=1;i--){const x_=150+(L-150)*i/16;ctx.lineTo(x_,wy(x_)[1]);}ctx.lineTo(150,62);ctx.bezierCurveTo(140,22,140,-18,150,-52);ctx.closePath();};
+  let g=ctx.createLinearGradient(0,-90,0,100);g.addColorStop(0,rgba(mix(sl,[255,240,220],0.22),1));g.addColorStop(0.3,rgba(mix(sl,[255,240,220],0.06),1));g.addColorStop(0.62,rgba(sl,1));g.addColorStop(1,rgba(mix(sl,[0,0,0],0.6),1));
+  const N=fd?10:1;for(let i=0;i<N;i++){const x0=fd?L-fd+fd*i/N:140,x1=fd?L-fd+fd*(i+1)/N:L+2;ctx.save();ctx.beginPath();ctx.rect(fd&&i===0?140:x0,-200,x1-(fd&&i===0?140:x0),400);ctx.clip();ctx.globalAlpha*=fd?1-i/N:1;slv();ctx.fillStyle=g;ctx.fill();
+    // a lit upper edge, and folds where the wool bunches at the wrist and the elbow
+    ctx.strokeStyle=rgba(mix(sl,[255,236,210],0.45),0.45);ctx.lineWidth=2;ctx.beginPath();for(let k=0;k<=16;k++){const x_=152+(L-154)*k/16;ctx.lineTo(x_,wy(x_)[0]+3);}ctx.stroke();
+    ctx.strokeStyle=rgba(mix(sl,[0,0,0],0.5),0.5);ctx.lineWidth=2;[0.06,0.13,0.22,0.45,0.62].forEach((f,j)=>{const x_=150+(L-150)*f,[a0,a1]=wy(x_),d=j%2?14:-10;ctx.beginPath();ctx.moveTo(x_,a0+4);ctx.bezierCurveTo(x_+22+d,a0+30,x_+d,a1-30,x_+20,a1-4);ctx.stroke();});
+    ctx.strokeStyle=rgba(mix(sl,[255,230,200],0.3),0.3);ctx.lineWidth=1.6;[0.09,0.17,0.5].forEach(f=>{const x_=150+(L-150)*f+8,[a0,a1]=wy(x_);ctx.beginPath();ctx.moveTo(x_,a0+8);ctx.bezierCurveTo(x_+20,a0+34,x_-4,a1-34,x_+16,a1-8);ctx.stroke();});
+    ctx.restore();}
   // the cuff: linen, gathered
   g=ctx.createLinearGradient(0,-50,0,60);g.addColorStop(0,"#f6efe0");g.addColorStop(0.6,"#d8ccb4");g.addColorStop(1,"#9c8e76");ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(116,-44);ctx.bezierCurveTo(132,-50,146,-52,156,-50);ctx.bezierCurveTo(148,-14,148,26,156,58);ctx.bezierCurveTo(144,60,128,58,116,52);ctx.bezierCurveTo(108,20,108,-12,116,-44);ctx.closePath();ctx.fill();ctx.strokeStyle="rgba(110,98,80,0.55)";ctx.lineWidth=1.2;ctx.stroke();
   // the back of the hand, from the knuckles to the wrist
@@ -117,16 +121,21 @@ function pp_balance(ctx,x,y,s,tilt,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.
     if(sd>0&&o.weight>0)withA(ctx,o.weight,()=>{ctx.fillStyle=br(ex-8,ex+8);rr(ctx,ex-8,py-12,16,13,2);ctx.fill();ctx.beginPath();ctx.arc(ex,py-14,4,0,TAU);ctx.fill();});});
   ctx.restore();});}
 
-// the punch and hammer: a steel punch, its face down at (x,y), and a hammer above it. down (0..1) is the blow
+// the punch and hammer: a steel punch stood upright, its face at (x,y), and a hammer held by a hand from above. down (0..1)
+// brings the hammer from raised to the blow on the punch's head; it falls faster as it goes, like a real swing
 function pp_punch(ctx,x,y,s,down,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(s,s);
-  let g=ctx.createLinearGradient(-14,0,14,0);g.addColorStop(0,"#45474c");g.addColorStop(0.35,"#d4d4d0");g.addColorStop(0.6,"#8a8c90");g.addColorStop(1,"#3a3b40");ctx.fillStyle=g;
-  ctx.beginPath();ctx.moveTo(-8,0);ctx.lineTo(8,0);ctx.lineTo(13,-30);ctx.lineTo(13,-150);ctx.lineTo(-13,-150);ctx.lineTo(-13,-30);ctx.closePath();ctx.fill();ctx.strokeStyle="rgba(30,30,34,0.6)";ctx.lineWidth=1.2;ctx.stroke();
-  ctx.fillStyle="#9c9ea2";ctx.beginPath();ctx.ellipse(0,-150,14,4,0,0,TAU);ctx.fill();
-  // the hammer: raised, then brought down onto the punch's head
-  const hy=-150-lerp(120,0,ease(down)),an=lerp(-0.5,0,ease(down));ctx.save();ctx.translate(140,hy-10);ctx.rotate(an);
-  g=ctx.createLinearGradient(0,-60,0,60);g.addColorStop(0,"#8a5e36");g.addColorStop(1,"#4a2e18");ctx.fillStyle=g;rr(ctx,-10,-14,220,26,10);ctx.fill();
-  g=ctx.createLinearGradient(-150,0,-120,0);g.addColorStop(0,"#3c3e42");g.addColorStop(0.5,"#b8b8b4");g.addColorStop(1,"#4a4c50");ctx.fillStyle=g;rr(ctx,-160,-34,52,64,6);ctx.fill();ctx.restore();
-  ctx.restore();});}
+  let g=ctx.createLinearGradient(-13,0,13,0);g.addColorStop(0,"#45474c");g.addColorStop(0.35,"#dcdcd6");g.addColorStop(0.6,"#8a8c90");g.addColorStop(1,"#3a3b40");ctx.fillStyle=g;
+  ctx.beginPath();ctx.moveTo(-7,0);ctx.lineTo(7,0);ctx.lineTo(12,-28);ctx.lineTo(12,-150);ctx.lineTo(-12,-150);ctx.lineTo(-12,-28);ctx.closePath();ctx.fill();ctx.strokeStyle="rgba(30,30,34,0.6)";ctx.lineWidth=1.2;ctx.stroke();
+  ctx.fillStyle="#b4b4b0";ctx.beginPath();ctx.ellipse(0,-150,13,4,0,0,TAU);ctx.fill();
+  // the hammer turns about the smith's wrist, to the right of the punch: raised, then down onto the punch's head
+  const d=clamp(down,0,1),an=0.75*(1-d*d);ctx.save();ctx.translate(196,-188);ctx.rotate(an);
+  g=ctx.createLinearGradient(0,-11,0,11);g.addColorStop(0,"#a87a4c");g.addColorStop(0.5,"#7a5230");g.addColorStop(1,"#3e2614");ctx.fillStyle=g;rr(ctx,-196,-10,226,20,9);ctx.fill();
+  // the head: dark forged iron, wider than the punch, with a bright striking face at its foot
+  g=ctx.createLinearGradient(-224,0,-168,0);g.addColorStop(0,"#1e1f22");g.addColorStop(0.4,"#5c5e62");g.addColorStop(1,"#26272a");ctx.fillStyle=g;rr(ctx,-224,-36,56,74,7);ctx.fill();ctx.strokeStyle="rgba(10,10,12,0.8)";ctx.lineWidth=1.4;ctx.stroke();
+  ctx.fillStyle="rgba(255,255,250,0.22)";ctx.fillRect(-218,-32,5,66);ctx.fillStyle="#b8b8b2";ctx.fillRect(-222,32,52,6);
+  // the hand round the handle's end, its forearm up and out of the frame
+  pp_hand(ctx,6,0,0.62/s,t,{rot:-Math.PI/2,sleeve:o.sleeve||[92,70,52],skin:o.skin||[214,170,132],seed:3,len:o.len});
+  ctx.restore();ctx.restore();});}
 
 // Goldsmiths' Hall: a stone front with columns, windows, a cornice and steps, lit from the left
 function pp_hall(ctx,x,y,w,h,t,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();const st=(x0,x1)=>{const g=ctx.createLinearGradient(x0,0,x1,0);g.addColorStop(0,"#d8c8a8");g.addColorStop(1,"#8c7a5e");return g;};
@@ -185,8 +194,6 @@ function pp_code(ctx,x,y,w,name,lines,o){o=o||{};const a=o.a==null?1:o.a,sz=o.si
       if(sw&&sw[1]>0){withA(ctx,1-sw[1],()=>T(ctx,typeOn(l,q),x+22,yy,{f:"mono",w:500,size:sz,color:c}));withA(ctx,sw[1],()=>T(ctx,sw[0],x+22,yy,{f:"mono",w:500,size:sz,color:rgba(sw[2]||BAD,1)}));}
       else T(ctx,typeOn(l,q),x+22,yy,{f:"mono",w:500,size:sz,color:c});});});
   return h;}
-// where line i of a pp_code card sits (its baseline), to point at it
-function pp_lineY(ctx,y,w,name,i,o){o=o||{};const sz=o.size||19,lh=o.lh||Math.round(sz*1.5),lab=o.label===undefined?PP_RUN:o.label,two=!!lab&&tw(ctx,name,18,500,"mono")+tw(ctx,lab,18,700)+28+64>w;return y+(two?88:56)+12+lh*0.72+i*lh;}
 
 // a person's face in a round frame, outlined in their side's colour; o.name and o.role under it (or to the side with o.side)
 function pp_face(ctx,id,x,y,r,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const P=PEOPLE[id],k=r/100;withA(ctx,a,()=>{glow(ctx,x,y,r*1.8,P.edge,0.2+0.25*(o.hi||0));
@@ -216,7 +223,7 @@ function pp_cred(ctx,x,y,w,h,key,name,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0
       ctx.fillStyle=rgba(cc,0.9);ctx.beginPath();ctx.arc(x+34,y+38,14,0,TAU);ctx.fill();ctx.fillStyle="rgba(7,12,24,1)";ctx.beginPath();ctx.arc(x+34,y+38,6,0,TAU);ctx.fill();
       T(ctx,o.kind||"microcredential",x+58,y+44,{w:600,size:18,color:rgba(SOFT,1)});T(ctx,name,x+22,y+88,{w:800,size:22});T(ctx,key,x+22,y+124,{f:"mono",w:500,size:18,color:rgba(cc,1)});});
     if(f>0&&bk<=0){withA(ctx,fin(f,0.5,0.5),()=>{ctx.save();ctx.setLineDash([8,8]);ctx.strokeStyle=rgba(SOFT,0.5);ctx.lineWidth=2;rr(ctx,x,y,w,h,16);ctx.stroke();ctx.restore();T(ctx,"deleted",x+w/2,y+h/2+8,{w:700,size:20,align:"center",color:rgba(SOFT,0.8)});});}
-    if(bk>0)kt_rstamp(ctx,x+w/2,y+h-26,"revoked · 12 Aug 2026",BAD,1,clamp((bk-0.3)/0.7,0,1),{size:18,rot:-0.06});});}
+    if(bk>0)kt_rstamp(ctx,x+w/2,y+h-24,"revoked · 12 Aug 2026",BAD,1,clamp((bk-0.3)/0.7,0,1),{size:18,rot:-0.06});});}
 
 // a box for a model that isn't built yet: a dashed outline, its name, and its layer's colour
 function pp_outline(ctx,x,y,w,h,name,col,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{if(o.hi)glow(ctx,x+w/2,y+h/2,w*0.6,col,0.3*o.hi);
@@ -253,8 +260,12 @@ function pp_table(ctx,x,y,cols,rows,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.0
 // the column of tests, each a hollow dot: written, reviewed, not yet run
 function pp_dots(ctx,x,y,n,col,p,o){o=o||{};const per=o.per||36,gap=o.gap||12,r=o.r||4.2;for(let i=0;i<n;i++){const q=clamp(p*n-i,0,1);if(q<=0)return;const dx=x+(i%per)*gap,dy=y+Math.floor(i/per)*gap;ctx.strokeStyle=rgba(col,0.9*q);ctx.lineWidth=1.6;ctx.beginPath();ctx.arc(dx,dy,r*(0.5+0.5*q),0,TAU);ctx.stroke();}}
 
-// the loop of ten steps, small, without labels, in a corner
-function pp_loop(ctx,x,y,s,t,on,a){if(a<=0.01)return;ctx.save();ctx.translate(x,y);ctx.scale(s,s);stepLoop(ctx,0,0,640,360,t,{on,noLabels:true,a});ctx.restore();}
+// the loop of ten steps, small, in a corner: ten stations on a dashed ring, each with its number; on[i] (0..1) lights station i.
+// s scales it (1: about 300 x 190 px). The numbers stay at 18 px.
+function pp_loop(ctx,x,y,s,t,on,a){if(a<=0.01)return;const rx=128*s,ry=74*s,r=17;withA(ctx,a,()=>{ctx.save();ctx.strokeStyle=rgba(WEED,0.28);ctx.lineWidth=2;ctx.setLineDash([4,8]);ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,TAU);ctx.stroke();ctx.restore();
+  for(let i=0;i<10;i++){const an=-Math.PI/2+i/10*TAU,px=x+Math.cos(an)*rx,py=y+Math.sin(an)*ry,q=on?on[i]||0:0;if(q>0.3)glow(ctx,px,py,r*2.6,WEED,0.3*q);
+    ctx.fillStyle="rgba(7,12,24,0.97)";ctx.beginPath();ctx.arc(px,py,r,0,TAU);ctx.fill();ring(ctx,px,py,r,mix(SOFT,WEED,q),0.35+0.65*q,2);
+    T(ctx,String(i+1),px,py+6.5,{f:"mono",w:500,size:18,align:"center",color:rgba(mix(SOFT,WEED,q),0.45+0.55*q)});}});}
 
 // the four layers of the project, as bands: the core lit, with a latch on its contract
 function pp_layers(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const n=4,gap=10,bh=(h-gap*(n-1))/n;withA(ctx,a,()=>{
@@ -266,7 +277,7 @@ function pp_layers(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)ret
 const PP_GAPS=[["a revoked credential is known as revoked","the platform deletes it",[1,0]],["every account names its student","some have no student ID",[1,0]],["one email, one learner","families share an email",[1]],
   ["an email is written one way","case and spaces vary",[1]],["every enrolment has an email","walk-ins can have none",[2]],["a change is dated when it happens","some are recorded late",[1,2]],
   ["the conferral of an award is recorded","no conferral record",[1,0]],["a status means one thing","three code sets",[1]],["a certificate is a credential","two kinds in one table",[1]],["a credential can expire","no source records an expiry",[2]]];
-const PP_REG={x:140,y:150,w:1400,rh:56,cols:[60,450,420,470]};
+const PP_REG={x:140,y:150,w:1400,rh:56,cols:[60,420,380,540]};
 // the register: rows type in as o.p goes 0..10; o.tags (0..1) shows the decisions; o.ink (0..1) turns the agent's teal draft to approved ink;
 // o.hiRow {i:0..1} glows a row; o.ticks {i:0..1} gold ticks at the row's end
 function pp_register(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const R=PP_REG,hh=118,h=hh+R.rh*10+14,p=o.p==null?10:o.p;
@@ -281,8 +292,6 @@ function pp_register(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;
       T(ctx,typeOn(ex,q),R.x+R.cols[0]+16,yy+R.rh/2+7,{w:600,size:20,color:rgba(col,1)});T(ctx,typeOn(ho,q),R.x+R.cols[0]+R.cols[1]+16,yy+R.rh/2+7,{w:600,size:20,color:rgba(mix(col,EDGE_,0.35),1)});
       let tx=R.x+R.cols[0]+R.cols[1]+R.cols[2]+12;dec.forEach((k,j)=>{const ta=clamp((o.tags||0)*12-i*0.9-j*0.4,0,1);if(ta>0)tx+=pp_dtag(ctx,tx,yy+R.rh/2,k,ta,{size:18})+8;});
       if(o.ticks&&o.ticks[i]>0)kt_gtick(ctx,R.x+R.w-30,yy+R.rh/2,13,o.ticks[i]);});});}
-// where row i of the register sits (its middle)
-const pp_regY=i=>PP_REG.y+118+i*PP_REG.rh+PP_REG.rh/2;
 
 // gap 1 as docs/gaps.md has it, rendered as a table (line 8; the decision trimmed with …). o.lit {exp, real, dec}: 0..1
 function pp_gap1(ctx,x,y,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const C=[60,300,450,540,300],w=C.reduce((s,c)=>s+c,0),h=262,lit=o.lit||{};
@@ -324,3 +333,136 @@ function pp_mart(ctx,x,y,w,h,kind,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.0
     T(ctx,nm,x+118,y+56,{w:800,size:26});T(ctx,mdl,x+118,y+88,{f:"mono",w:500,size:18,color:rgba(PP_MART,1)});
     if(o.g>0){T(ctx,"grain",x+24,y+146,{w:700,size:18,color:rgba(SOFT,1)});T(ctx,typeOn(gr,o.g),x+86,y+146,{w:700,size:21,color:rgba(TRUST,1)});}
     if(o.chips>0)withA(ctx,o.chips,()=>{tag(ctx,x+24,y+h-30,"contract: enforced",TRUST,{size:18});});});}
+
+// a short flow of boxes joined by arrows, centred on cx: items [[text, colour, dashed]], q[i] (0..1) brings box i in
+function pp_flow(ctx,cx,y,items,q,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const sz=o.size||22,h=sz+40,gap=o.gap||84,ws=items.map(([s])=>tw(ctx,s,sz,700)+48),tot=ws.reduce((s_,w_)=>s_+w_,0)+gap*(items.length-1);
+  withA(ctx,a,()=>{let x=cx-tot/2;items.forEach(([s,col,dash],i)=>{const qi=q[i]||0,w_=ws[i];if(qi>0.01)withA(ctx,qi,()=>{const yy=y-(1-spring(qi*1.6))*14;
+      if(dash){ctx.fillStyle="rgba(7,12,24,0.9)";rr(ctx,x,yy-h/2,w_,h,14);ctx.fill();ctx.save();ctx.setLineDash([7,6]);ctx.strokeStyle=rgba(col,0.85);ctx.lineWidth=1.8;rr(ctx,x,yy-h/2,w_,h,14);ctx.stroke();ctx.restore();}
+      else glass(ctx,x,yy-h/2,w_,h,14,col,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.95)"});
+      T(ctx,s,x+w_/2,yy+sz*0.36,{w:700,size:sz,align:"center",color:rgba(dash?mix(SOFT,col,0.4):mix(INK,col,0.3),1)});
+      if(i>0)arrowTo(ctx,x-gap+12,y,x-12,y,col,0.85,{p:clamp(qi*1.5,0,1),head:12});});x+=w_+gap;});});}
+
+/* ---------- the labs' and scenarios' pictures ----------
+   Added to the film bundle's LV registry (Keeping it true's true.js defines it; these keys are prefixed pp_ so they never clash).
+   Each draws with the film's own components, and takes its words from vis in site/assets/promises-and-proofs/learn.*.js.
+   Labs draw on 960 x 440, scenarios on 600 x 320. */
+function pp_lfit(c,w,h,bw,bh){const k=Math.min(w/bw,h/bh);c.translate((w-bw*k)/2,(h-bh*k)/2);c.scale(k,k);}
+// text that shrinks (down to min) until it fits maxW
+function pp_fitT(c,s,x,y,maxW,o){o=o||{};let sz=o.size||20;const mn=o.min||15;while(sz>mn&&tw(c,s,sz,o.w||600,o.f)>maxW)sz-=1;T(c,s,x,y,Object.assign({},o,{size:sz}));return sz;}
+// the "runs on" chip, right-aligned at (xr, y)
+function pp_runChip(c,xr,y,s,sz){sz=sz||18;const lw=tw(c,s,sz,700)+28,lx=xr-lw;c.fillStyle="rgba(8,14,24,0.95)";rr(c,lx,y-15,lw,30,15);c.fill();c.strokeStyle=rgba(WEED,0.8);c.lineWidth=1.5;rr(c,lx,y-15,lw,30,15);c.stroke();T(c,s,lx+14,y+6,{w:700,size:sz,color:rgba(WEED,1)});return lw;}
+// a card's head: the file's dot and name, and the "runs on" chip
+function pp_cardHead(c,x,y,w,name,run,col){c.fillStyle=rgba(col,0.9);rr(c,x+18,y+22,10,10,3);c.fill();T(c,name,x+38,y+34,{f:"mono",w:500,size:18,color:rgba(col,1)});if(run)pp_runChip(c,x+w-14,y+28,run);}
+// a chip whose width is returned; align "left" | "center" | "right"
+function pp_chip(c,x,y,s,col,o){o=o||{};const sz=o.size||18,w=tw(c,s,sz,700,o.f)+26,h=sz+14,X=o.align==="center"?x-w/2:o.align==="right"?x-w:x;
+  glass(c,X,y-h/2,w,h,h/2,col,{fill:"rgba(7,12,24,0.92)",glow:8,ea:0.85});T(c,s,X+13,y+sz*0.36,{f:o.f,w:700,size:sz,color:rgba(col,1)});return w;}
+// a credential as the wallet shows it, in the labs: a glass card with a kind, a name and a key
+function pp_lcred(c,x,y,w,h,kind,name,key,col){glass(c,x,y,w,h,16,col,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.95)"});c.fillStyle=rgba(col,0.9);c.beginPath();c.arc(x+30,y+34,12,0,TAU);c.fill();c.fillStyle="rgba(7,12,24,1)";c.beginPath();c.arc(x+30,y+34,5,0,TAU);c.fill();
+  pp_fitT(c,kind,x+52,y+40,w-64,{w:600,size:18,color:rgba(SOFT,1)});pp_fitT(c,name,x+20,y+80,w-36,{w:800,size:21});T(c,key,x+20,y+114,{f:"mono",w:500,size:18,color:rgba(col,1)});}
+// core_credential's contract, column by column: what each choice in the "write the contract" lab declares. null: left out
+const PP_LC=[{n:"credential_key",q:"VARCHAR",o:[["string",1,"unique"],["string",0,"unique"],["int",1,"unique"]]},{n:"learner_key",q:"VARCHAR",o:[["string",1,"relationships"],["string",0,"relationships"],["string",1,""]]},
+  {n:"credit_points",q:"INTEGER",o:[["int",0,""],["string",0,""],["bigint",0,""]]},{n:"issued_on",q:"DATE",o:[["date",1,""],null,["timestamp",1,""]]}];
+const PP_DT={string:"VARCHAR",int:"INTEGER",bigint:"BIGINT",date:"DATE",timestamp:"TIMESTAMP"};
+// the last level's line, moved: the levels lab's tenth step
+const PP_LT="not_null_stg_short_courses__enrolments_customer_bk";
+Object.assign(LV,{
+  // write the contract: the YAML card filling in from the choices, and what the build says
+  pp_l_contract:(c,w,h,st,L)=>{const V=L.vis,pk=st.pick||[];c.save();pp_lfit(c,w,h,960,440);const X=20,Y=14,CW=920,RH=40;
+    glass(c,X,Y,CW,264,14,TRUST,{glow:10,ea:0.7,fill:"rgba(6,10,20,0.96)"});pp_cardHead(c,X,Y,CW,"models/core/_core__models.yml",V.run,TRUST);
+    const CX=[X+24,X+330,X+530,X+690];V.cols.forEach((s,j)=>T(c,s,CX[j],Y+84,{w:800,size:18,color:rgba(SOFT,1)}));c.fillStyle="rgba(170,200,245,0.16)";c.fillRect(X+14,Y+96,CW-28,1.2);
+    const mm=[],gets=[];
+    PP_LC.forEach((col,i)=>{const y=Y+126+i*RH,p=pk[i],on=p!=null,v=on?col.o[p]:undefined;
+      if(on&&v===null){T(c,col.n,CX[0],y,{f:"mono",w:500,size:19,color:rgba(SOFT,0.6)});c.fillStyle=rgba(BAD,0.8);c.fillRect(CX[0]-4,y-7,tw(c,col.n,19,500,"mono")+8,2);T(c,V.leftOut,CX[1],y,{w:700,size:18,color:rgba(BAD,1)});mm.push([col.n,col.q,"",V.missing]);return;}
+      T(c,col.n,CX[0],y,{f:"mono",w:500,size:19,color:rgba(on?INK:SOFT,on?0.97:0.7)});
+      if(!on){T(c,"…",CX[1],y,{w:700,size:20,color:rgba(SOFT,0.8)});return;}
+      const bad=PP_DT[v[0]]!==col.q;T(c,v[0],CX[1],y,{f:"mono",w:500,size:19,color:rgba(bad?BAD:TRUST,1)});
+      if(v[1])tick_(c,CX[2]+14,y-6,22,GOOD,1);else T(c,"—",CX[2]+4,y,{w:700,size:19,color:rgba(SOFT,0.8)});
+      T(c,v[2]||"—",CX[3],y,{f:v[2]?"mono":undefined,w:500,size:19,color:rgba(v[2]?GOOD:SOFT,v[2]?1:0.8)});
+      if(bad)mm.push([col.n,col.q,PP_DT[v[0]],V.mismatch]);
+      if(i===0&&p===1)gets.push(V.getsIn[0]);if(i===1&&p===1)gets.push(V.getsIn[1]);if(i===1&&p===2)gets.push(V.getsIn[2]);});
+    const RY=298,done=PP_LC.every((_,i)=>pk[i]!=null);
+    if(mm.length){glass(c,X,RY,CW,40,12,BAD,{glow:12,ea:0.9,fill:"rgba(30,8,8,0.95)"});cross_(c,X+26,RY+20,22,BAD,1);T(c,V.stopped,X+50,RY+27,{w:800,size:20,color:rgba(BAD,1)});
+      const MW=[230,190,170,320];let mx=X+10;V.mm.forEach((s,j)=>{T(c,s,mx+10,RY+68,{f:"mono",w:500,size:17,color:rgba(SOFT,1)});mx+=MW[j];});
+      mm.slice(0,3).forEach((r,k)=>{let x=X+10;r.forEach((s,j)=>{T(c,s,x+10,RY+94+k*24,{f:"mono",w:500,size:17,color:rgba(j===3?BAD:INK,0.95)});x+=MW[j];});});}
+    else if(!done)T(c,V.choose,480,RY+64,{w:700,size:21,align:"center",color:rgba(SOFT,1)});
+    else if(gets.length){glass(c,X,RY,CW,40,12,PP_AMB,{glow:12,ea:0.9,fill:"rgba(28,20,6,0.95)"});T(c,V.passes,X+24,RY+27,{w:800,size:20,color:rgba(PP_AMB,1)});
+      gets.forEach((s,k)=>T(c,"· "+s,X+40,RY+74+k*30,{w:700,size:20,color:rgba(INK,0.95)}));}
+    else{glass(c,X,RY,CW,40,12,GOOD,{glow:12,ea:0.9,fill:"rgba(6,24,14,0.95)"});tick_(c,X+26,RY+18,22,GOOD,1);T(c,V.ok,X+50,RY+27,{w:800,size:20,color:rgba(GOOD,1)});
+      pp_seal(c,880,RY+90,30,0,{label:false});}
+    c.restore();},
+  // which test catches it: six broken rows; the chosen test stops one, the rest get through to the wallet and Planning
+  pp_l_catch:(c,w,h,st,L)=>{const V=L.vis,Lb=L.labs.find(l=>l.vis==="pp_l_catch"),r=Lb.w.res[st.pick]||[],nm=(Lb.w.opts.find(o=>o[0]===st.pick)||["",""])[1],gi={unique:0,notnull:1,rel:2,acc:3,over:4}[st.pick];
+    c.save();pp_lfit(c,w,h,960,440);T(c,V.pickTest,24,34,{w:700,size:19,color:rgba(SOFT,1)});const tw0=tw(c,V.pickTest,19,700);
+    const cw=pp_chip(c,24+tw0+14,28,nm,GOOD,{size:19,f:gi==null?undefined:"mono"});if(gi!=null)pp_tglyph(c,gi,24+tw0+14+cw+26,28,GOOD,1);
+    const DEST=[0,0,1,1,1,0],B=[[880,150],[880,330]];
+    B.forEach(([bx,by],k)=>{pp_consumer(c,bx,by,34,k?"planning":"wallet",{});T(c,k?V.planning:V.wallet,bx,by+62,{w:700,size:18,align:"center",color:rgba(PP_MART,1)});});
+    V.broken.forEach((s,i)=>{const y=64+i*60,v=r[i]||0,col=v===1?BAD:v===0.5?PP_AMB:[150,170,200];
+      if(v>0)glow(c,290,y+24,300,col,0.12);glass(c,20,y,560,48,12,col,{glow:v>0?14:6,ea:v>0?0.9:0.5,fill:"rgba(7,12,24,0.95)"});
+      pp_fitT(c,s,36,y+31,530,{w:600,size:19,min:15,color:rgba(INK,v>0?1:0.85)});
+      if(v===1){cross_(c,606,y+24,22,BAD,1);T(c,V.stop,624,y+31,{w:800,size:18,color:rgba(BAD,1)});}
+      else if(v===0.5){T(c,"!",606,y+32,{w:800,size:22,align:"center",color:rgba(PP_AMB,1)});T(c,V.warns,624,y+31,{w:800,size:18,color:rgba(PP_AMB,1)});}
+      else{const[bx,by]=B[DEST[i]];arrowTo(c,588,y+24,bx-44,by,SOFT,0.45,{head:10});}});
+    T(c,V.through,700,420,{w:700,size:18,align:"center",color:rgba(SOFT,1)});c.restore();},
+  // decide the gap: the register, each line taking the decision chosen; Jordan's badge on the right
+  pp_l_decide:(c,w,h,st,L)=>{const V=L.vis,Lb=L.labs.find(l=>l.vis==="pp_l_decide"),pk=st.pick||{},K={both:[1,0],rule:[1],ruleacc:[1,2],accept:[2]};c.save();pp_lfit(c,w,h,960,440);
+    glass(c,14,10,692,420,14,[170,205,255],{glow:10,ea:0.6,fill:"rgba(6,10,20,0.96)"});pp_cardHead(c,14,8,692,"docs/gaps.md",V.run,[170,205,255]);
+    V.gaps.forEach((s,i)=>{const y=82+i*34.6,b=pk[i],ok=st.checked&&b===Lb.w.items[i].b,no=st.checked&&b!==Lb.w.items[i].b;
+      if(i===0)withA(c,0.8,()=>{c.fillStyle=rgba(PP_LMS,0.1);rr(c,22,y-24,676,34,8);c.fill();});
+      T(c,String(i+1),36,y,{f:"mono",w:500,size:18,align:"center",color:rgba(SOFT,1)});pp_fitT(c,s,60,y,b?380:600,{w:600,size:18,min:15,color:rgba(INK,0.95)});
+      if(b){let x=st.checked?650:688;const ks=K[b].slice().reverse();ks.forEach(k=>{const ww=tw(c,V.dec[k],17,700)+26;x-=ww;pp_chip(c,x,y-6,V.dec[k],PP_DEC[k][1],{size:17});x-=6;});}
+      if(ok)tick_(c,680,y-6,20,GOOD,1);if(no)cross_(c,680,y-6,20,BAD,1);});
+    const b0=pk[0];pp_fitT(c,V.jordan,836,96,236,{w:700,size:18,align:"center",color:rgba(SOFT,1)});pp_lcred(c,718,112,236,140,V.micro,V.jordanName,"LMS|B-5028",PP_LMS);
+    if(!b0)T(c,V.undecided,836,300,{w:700,size:18,align:"center",color:rgba(SOFT,1)});
+    else if(b0==="accept"){pp_chip(c,836,296,V.showsValid,EDGE_,{size:18,align:"center"});cross_(c,836,346,26,BAD,1);}
+    else pp_chip(c,836,296,V.revoked,BAD,{size:18,align:"center"});
+    c.restore();},
+  // warn or stop: the light, the count, the level line, and the models built after the test
+  pp_l_levels:(c,w,h,st,L)=>{const V=L.vis,s=st.step||0,moved=s===9,n=moved?6:s,lit=n===0?0:n<=5?1:2,col=[GOOD,PP_AMB,BAD][lit];c.save();pp_lfit(c,w,h,960,440);
+    pp_light(c,70,170,0.5,lit,1);T(c,String(n),150,118,{w:800,size:64,color:rgba(col,1)});T(c,V.noEmail,150,152,{w:700,size:20,color:rgba(SOFT,1)});
+    const st_=lit===0?V.pass:(lit===1?V.warn:V.fail)+" "+n;pp_chip(c,150,206,st_,col,{size:22,f:"mono"});T(c,PP_LT,150,250,{f:"mono",w:500,size:17,color:rgba(SOFT,1)});
+    for(let i=0;i<=8;i++){const x=520+i*44,zc=i===0?GOOD:i<=5?PP_AMB:BAD,on=i===n;c.fillStyle=rgba(zc,on?0.85:0.2);rr(c,x+2,40,40,36,6);c.fill();T(c,String(i),x+22,65,{f:"mono",w:500,size:18,align:"center",color:on?"rgba(8,10,16,1)":rgba(zc,1)});}
+    T(c,"warn_if: \">0\"",566,104,{f:"mono",w:500,size:17,color:rgba(PP_AMB,1)});
+    if(moved){T(c,"error_if: \">8\" ?",786,104,{f:"mono",w:500,size:17,color:rgba(SOFT,1)});c.fillStyle=rgba(BAD,0.85);c.fillRect(782,98,150,2);
+      pp_face(c,"tom",860,196,40,0,{role:false});pp_chip(c,850,302,V.ask,BIZ,{size:18,align:"center"});}
+    else T(c,"error_if: \">5\"",786,104,{f:"mono",w:500,size:17,color:rgba(BAD,1)});
+    T(c,V.after,30,330,{w:700,size:18,color:rgba(SOFT,1)});
+    const M=[["int_credentials_unioned",PP_INT],["core_credential",TRUST],["mart_wallet__credentials",PP_MART]],sk=lit===2;let x=30;
+    M.forEach(([m,mc],i)=>{const bw=tw(c,m,17,500,"mono")+30;if(sk){c.fillStyle="rgba(7,12,24,0.8)";rr(c,x,352,bw,44,10);c.fill();c.save();c.setLineDash([7,6]);c.strokeStyle=rgba(SOFT,0.6);c.lineWidth=1.8;rr(c,x,352,bw,44,10);c.stroke();c.restore();}
+      else glass(c,x,352,bw,44,10,mc,{glow:10,ea:0.85,fill:"rgba(7,12,24,0.95)"});
+      T(c,m,x+15,380,{f:"mono",w:500,size:17,color:rgba(sk?SOFT:mix(INK,mc,0.3),sk?0.7:1)});if(sk)T(c,V.skipped,x+bw/2,422,{w:700,size:18,align:"center",color:rgba(BAD,1)});
+      if(i<M.length-1)arrowTo(c,x+bw+6,374,x+bw+40,374,sk?SOFT:mc,sk?0.4:0.8,{head:9});x+=bw+46;});
+    c.restore();},
+  // the scenarios
+  pp_q_badge:(c,w,h,st,L)=>{const V=L.vis,Q=V.q;c.save();pp_lfit(c,w,h,600,320);glass(c,16,30,300,250,14,[170,205,255],{glow:10,ea:0.6,fill:"rgba(6,10,20,0.96)"});
+    pp_cardHead(c,16,30,300,Q.register,"",[170,205,255]);pp_runChip(c,302,104,V.run,16);wrapT(c,Q.expects,36,160,264,{w:700,size:20,color:rgba(TRUST,1)});wrapT(c,Q.holds,36,226,264,{w:700,size:20,color:rgba(EDGE_,1)});
+    pp_fitT(c,V.jordan,462,30,244,{w:700,size:18,align:"center",color:rgba(SOFT,1)});pp_lcred(c,340,44,244,140,V.micro,V.jordanName,"LMS|B-5028",PP_LMS);T(c,Q.shows,462,222,{w:700,size:20,align:"center",color:rgba(SOFT,1)});pp_chip(c,462,262,Q.valid+" ?",GOOD,{size:20,align:"center"});c.restore();},
+  pp_q_drop:(c,w,h,st,L)=>{const V=L.vis,Q=V.q;c.save();pp_lfit(c,w,h,600,320);glass(c,16,20,330,280,14,TRUST,{glow:10,ea:0.7,fill:"rgba(6,10,20,0.96)"});
+    pp_cardHead(c,16,20,330,"core_credential","",TRUST);pp_runChip(c,332,92,V.run,16);T(c,Q.public,36,138,{w:700,size:18,color:rgba(TRUST,1)});
+    ["credential_key","credential_code","credential_name","credit_points"].forEach((s,i)=>{const y=180+i*32,x_=i===1;T(c,"- name: "+s,36,y,{f:"mono",w:500,size:17,color:rgba(x_?BAD:INK,0.95)});if(x_){c.fillStyle=rgba(BAD,0.9);c.fillRect(34,y-6,tw(c,"- name: "+s,17,500,"mono")+4,2);}});
+    T(c,Q.dropped,180,296,{w:700,size:17,align:"center",color:rgba(BAD,1)});
+    [[470,70,"wallet",V.wallet],[470,170,"planning",V.planning]].forEach(([x,y,k,s])=>{arrowTo(c,348,190,x-36,y,PP_MART,0.6,{head:9});pp_consumer(c,x,y,28,k,{});T(c,s,x+38,y+7,{w:700,size:17,color:rgba(PP_MART,1)});});
+    c.save();c.setLineDash([6,6]);c.strokeStyle=rgba(SOFT,0.8);c.lineWidth=2;c.beginPath();c.arc(470,262,28,0,TAU);c.stroke();c.restore();T(c,"?",470,271,{w:800,size:24,align:"center",color:rgba(SOFT,1)});arrowTo(c,348,200,434,262,SOFT,0.5,{head:9});T(c,Q.another,506,269,{w:700,size:17,color:rgba(SOFT,1)});c.restore();},
+  pp_q_night:(c,w,h,st,L)=>{const V=L.vis,Q=V.q;c.save();pp_lfit(c,w,h,600,320);pp_clock(c,120,140,74,2/12,[170,205,255],1);T(c,Q.night,120,262,{w:800,size:22,align:"center"});
+    pp_light(c,290,150,0.42,2,1);T(c,"1",360,130,{w:800,size:56,color:rgba(BAD,1)});wrapT(c,Q.one,360,170,220,{w:700,size:19,color:rgba(SOFT,1)});pp_chip(c,360,262,Q.level,PP_AMB,{size:20});c.restore();},
+  pp_q_pk:(c,w,h,st,L)=>{const V=L.vis,Q=V.q;c.save();pp_lfit(c,w,h,600,320);glass(c,16,24,350,132,14,[150,176,214],{glow:10,ea:0.7,fill:"rgba(6,10,20,0.96)"});T(c,"Databricks",36,60,{w:800,size:20,color:rgba(SOFT,1)});
+    T(c,Q.pk,36,98,{f:"mono",w:500,size:17,color:rgba(INK,0.95)});T(c,Q.recorded,36,134,{w:700,size:18,color:rgba(PP_AMB,1)});
+    [0,1].forEach(i=>{const y=196+i*54;glass(c,16,y,230,42,10,PP_LMS,{glow:8,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,"LMS|B-5028",34,y+28,{f:"mono",w:500,size:18,color:rgba(PP_LMS,1)});});
+    T(c,Q.dup,130,316,{w:700,size:17,align:"center",color:rgba(EDGE_,1)});arrowTo(c,256,242,410,242,SOFT,0.6,{head:10});
+    glass(c,420,196,164,92,14,GOOD,{glow:12,ea:0.9,fill:"rgba(6,20,12,0.95)"});pp_tglyph(c,0,502,224,GOOD,1);T(c,Q.unique,502,266,{w:700,size:18,align:"center",color:rgba(GOOD,1)});cross_(c,410,150,30,BAD,1);c.restore();},
+  pp_q_first:(c,w,h,st,L)=>{const V=L.vis,Q=V.q;c.save();pp_lfit(c,w,h,600,320);
+    ["unique","not_null","relationships","accepted_values","versions_do_not_overlap"].forEach((s,i)=>{const y=60+i*40;c.strokeStyle=rgba(WEED,0.9);c.lineWidth=1.8;c.beginPath();c.arc(30,y-6,7,0,TAU);c.stroke();T(c,s,48,y,{f:"mono",w:500,size:17,color:rgba(INK,0.95)});});
+    T(c,Q.written,20,292,{w:700,size:18,color:rgba(WEED,1)});arrowTo(c,300,150,380,150,SOFT,0.7,{head:10});T(c,Q.then,340,124,{w:700,size:17,align:"center",color:rgba(SOFT,1)});
+    pp_outline(c,392,96,192,110,"core_credential",TRUST,{size:17});wrapT(c,Q.notYet,488,246,196,{w:700,size:18,align:"center",color:rgba(SOFT,1)});c.restore();},
+  pp_q_expiry:(c,w,h,st,L)=>{const V=L.vis,Q=V.q;c.save();pp_lfit(c,w,h,600,320);pp_fitT(c,V.jordan,24,32,270,{w:700,size:18,color:rgba(SOFT,1)});pp_lcred(c,24,48,270,140,V.micro,V.jordanName,"LMS|B-5028",PP_LMS);
+    T(c,Q.expiry+":",24,226,{w:700,size:20,color:rgba(SOFT,1)});T(c,"?",24+tw(c,Q.expiry+":",20,700)+12,228,{w:800,size:26,color:rgba(EDGE_,1)});
+    T(c,"docs/gaps.md · 10",340,70,{f:"mono",w:500,size:17,color:"rgba(170,205,255,1)"});wrapT(c,Q.none,340,110,240,{w:700,size:20});pp_chip(c,340,210,V.dec[2],PP_DEC[2][1],{size:19});c.restore();},
+  pp_q_fresh:(c,w,h,st,L)=>{const V=L.vis,Q=V.q;c.save();pp_lfit(c,w,h,600,320);pp_clock(c,60,64,34,0.66,PP_SIS,1);T(c,"student_system",110,72,{f:"mono",w:500,size:18,color:rgba(PP_SIS,1)});
+    const X0=60,X1=540,dx=(X1-X0)/3,Y=170;[[0,1,GOOD],[1,3,PP_AMB]].forEach(([a,b,zc])=>{c.fillStyle=rgba(zc,0.3);rr(c,X0+a*dx,Y-10,(b-a)*dx,20,6);c.fill();});c.fillStyle=rgba(BAD,0.4);rr(c,X1,Y-10,40,20,6);c.fill();
+    Q.days.forEach((s,i)=>{const x=X0+i*dx;c.fillStyle=rgba(SOFT,0.9);c.fillRect(x-1,Y-18,2,36);T(c,s,x,Y+46,{w:700,size:18,align:"center",color:rgba(SOFT,1)});});
+    T(c,Q.fwarn,X0+dx,Y-34,{w:700,size:18,align:"center",color:rgba(PP_AMB,1)});T(c,Q.ferr,X1,Y-34,{w:700,size:18,align:"center",color:rgba(BAD,1)});
+    const xn=X0+2*dx;c.fillStyle=rgba(INK,1);c.beginPath();c.moveTo(xn,Y+70);c.lineTo(xn-10,Y+86);c.lineTo(xn+10,Y+86);c.closePath();c.fill();T(c,Q.now,xn,Y+110,{w:800,size:20,align:"center"});c.restore();},
+  pp_q_census:(c,w,h,st,L)=>{const V=L.vis,Q=V.q;c.save();pp_lfit(c,w,h,600,320);T(c,Q.faculty,300,40,{w:800,size:22,align:"center"});
+    [[150,"5",Q.report,TRUST],[450,"4",Q.mart,PP_MART]].forEach(([x,n,s,col])=>{glass(c,x-70,64,140,100,16,col,{glow:12,ea:0.9,fill:"rgba(7,12,24,0.95)"});T(c,n,x,134,{w:800,size:56,align:"center",color:rgba(col,1)});T(c,s,x,196,{w:700,size:19,align:"center",color:rgba(SOFT,1)});});
+    T(c,"≠",300,132,{w:800,size:48,align:"center",color:rgba(BAD,1)});
+    for(let i=0;i<4;i++)tick_(c,190+i*36,256,24,GOOD,1);T(c,Q.unitPass,340,264,{w:700,size:19,color:rgba(GOOD,1)});c.restore();}
+});

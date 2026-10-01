@@ -120,6 +120,7 @@ function sq_qpos(ctx,x,y,w,s,sz){sz=sz||34;const lines=wrapT(ctx,SQ_Q,0,0,w-60,{
 
 /* ---------- the slice, as a blueprint ---------- */
 // three entities and the relationship that carries rules, round (cx, top) at scale s. o.b: glass (0) to blueprint (1);
+// both relationship labels sit on one row: above the line, or above the boxes when "counts towards" doesn't fit between them;
 // o.ph: the paper's height; o.p: how much is drawn; o.hi: {learner, cred, award, credit}; o.from {name: [x,y,w,h]} and o.m (0..1)
 // bring each box in from somewhere else. Returns each box as [x, y, w, h].
 const SQ_ENT={learner:["Learner",KIND],cred:["Credential",TRUST],award:["Award",KIND]};
@@ -129,7 +130,8 @@ function sq_bp(ctx,cx,top,s,o){o=o||{};const a=o.a==null?1:o.a,b=o.b||0,ph=o.ph|
   const cw=330*s,ch=52*s,cy=top+(ph-48)*s,C=[cx-cw/2,cy-ch/2,cw,ch];B.credit=C;if(a<=0.01)return B;
   withA(ctx,a,()=>{if(o.paper!==0)bpPaper(ctx,cx-700*s,top,1400*s,ph*s,(o.paper==null?1:o.paper)*b,{});
     const lc=mix(SK,BPL,b),lab=(s_,x,y)=>T(ctx,s_,x,y,{w:600,size:Math.max(18,17*s),align:"center",color:rgba(mix(SOFT,BPL,b),0.95)});
-    const hl=(k0,k1,txt,q)=>{if(q<=0)return;const A=B[k0],Z=B[k1],x0=A[0]+A[2],x1=Z[0],y0=A[1]+A[3]/2;ctx.save();ctx.strokeStyle=rgba(lc,0.9);ctx.lineWidth=2.4*s;ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(lerp(x0,x1,q),y0);ctx.stroke();ctx.restore();const ly=tw(ctx,txt,Math.max(18,17*s),600)>x1-x0-16?A[1]+A[3]+20*s:y0-14*s;withA(ctx,fin(q,0.6,0.4),()=>lab(txt,(x0+x1)/2,ly));};
+    const lfit=clamp((170*s-8-tw(ctx,"counts towards",Math.max(18,17*s),600))/8,0,1);
+    const hl=(k0,k1,txt,q)=>{if(q<=0)return;const A=B[k0],Z=B[k1],x0=A[0]+A[2],x1=Z[0],y0=A[1]+A[3]/2;ctx.save();ctx.strokeStyle=rgba(lc,0.9);ctx.lineWidth=2.4*s;ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(lerp(x0,x1,q),y0);ctx.stroke();ctx.restore();const ly=lerp(A[1]-8,y0-14*s,lfit);withA(ctx,fin(q,0.6,0.4),()=>lab(txt,(x0+x1)/2,ly));};
     const dl=(k,right,q)=>{if(q<=0)return;const A=B[k],x0=A[0]+A[2]*(right?0.15:0.85),y0=A[1]+A[3],x1=right?C[0]+C[2]:C[0],y1=C[1]+C[3]/2;ctx.save();ctx.strokeStyle=rgba(lc,0.8);ctx.lineWidth=2*s;ctx.setLineDash([8*s,6*s]);ctx.beginPath();ctx.moveTo(x0,y0);
       const qx=lerp(x0,x1,q),qy=lerp(y0,y1,q);ctx.quadraticCurveTo(x0,lerp(y0,qy,0.9),qx,qy);ctx.stroke();ctx.restore();};
     if(!o.noLines){hl("learner","cred","holds",clamp(p*3-1.6,0,1));hl("cred","award","counts towards",clamp(p*3-2,0,1));}
@@ -145,8 +147,13 @@ function sq_key(ctx,x,y,key,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return
     T(ctx,r,X+14+tw(ctx,pre,sz,500,"mono"),y+sz*0.36,{f:"mono",w:500,size:sz,color:rgba(INK,0.95)});});return w;}
 
 /* ---------- the loop of ten steps, small ---------- */
-// the loop from the opening film, at a quarter of its size, without its labels; on[i] lights each station
-function sq_loop(ctx,x,y,s,t,on,a){if(a<=0.01)return;ctx.save();ctx.translate(x,y);ctx.scale(s,s);stepLoop(ctx,0,0,640,360,t,{on,noLabels:true,a});ctx.restore();}
+// the loop from the opening film, small enough to sit in a corner but still readable: ten numbered dots on a dashed ellipse
+// (rx × ry round x, y); on[i] lights each station (its dot and number turn the weeds' green and glow), the rest stay dim
+function sq_loop(ctx,x,y,rx,ry,t,on,a){if(a<=0.01)return;const r=16;withA(ctx,a,()=>{
+  ctx.save();ctx.strokeStyle=rgba(WEED,0.45);ctx.lineWidth=2;ctx.setLineDash([5,8]);ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,TAU);ctx.stroke();ctx.restore();
+  STEPS10.forEach((_,i)=>{const k=on[i]||0,[px,py]=stepPos(i,x,y,rx,ry),rr_=r*(1+0.15*k);withA(ctx,0.4+0.6*k,()=>{if(k>0)glow(ctx,px,py,rr_*2.6,WEED,0.3*k);
+    ctx.fillStyle="rgba(7,12,24,0.97)";ctx.beginPath();ctx.arc(px,py,rr_,0,TAU);ctx.fill();ring(ctx,px,py,rr_,mix(SOFT,WEED,k),1,2.2+k);
+    T(ctx,(i+1)+"",px,py+6.5,{f:"mono",w:700,size:18,align:"center",color:rgba(mix(SOFT,WEED,k),1)});});});});}
 
 /* ---------- the sources ---------- */
 // a source system's stream: its card, and its records rising from below in its colour
@@ -157,3 +164,82 @@ function sq_stream(ctx,x,yTop,yBot,k,t,a){if(a<=0.01)return;const col=SRC3[k][1]
 function sq_aisha(ctx,x,y,k,key,a){if(a<=0.01)return;const col=SRC3[k][1];withA(ctx,a,()=>{glass(ctx,x-150,y-44,300,96,16,col,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.96)"});
   T(ctx,"Aisha",x,y-8,{w:800,size:24,align:"center"});const shown=key.replace(/ /g,"·"),w=tw(ctx,shown,20,500,"mono");let xx=x-w/2;
   for(const ch of shown){T(ctx,ch,xx,y+30,{f:"mono",w:500,size:20,color:rgba(ch==="·"?SQ_AMB:col,1)});xx+=tw(ctx,ch,20,500,"mono");}});}
+
+/* ---------- the labs' and scenarios' pictures ----------
+   Added to the film bundle's LV registry (Keeping it true's true.js defines it; these keys are prefixed sq_ so they never clash).
+   Each draws with the film's own components and takes its words from vis in site/assets/start-from-a-question/learn.*.js. */
+function sq_fit(c,w,h,bw,bh){const k=Math.min(w/bw,h/bh);c.translate((w-bw*k)/2,(h-bh*k)/2);c.scale(k,k);}
+function sq_count(pick,b){return Object.values(pick||{}).filter(x=>x===b).length;}
+// a glossary card whose term shrinks to fit its width
+// (sq_term's card, with its small label in the page's language: o.label)
+function sq_termFit(c,x,y,w,h,s,o){let sz=o.size||28;while(sz>18&&tw(c,s,sz,800)>w-36)sz-=1;const a=o.a==null?1:o.a,on=o.on||0,dim=o.dim||0,cl=o.col||KIND,col=mix(SOFT,cl,on);
+  withA(c,a*(1-0.65*dim),()=>{if(on>0)glow(c,x+w/2,y+h/2,w*0.6,cl,0.25*on);glass(c,x,y,w,h,14,col,{glow:8+12*on,ea:0.7,fill:"rgba(7,12,24,0.94)"});
+    if(o.label)T(c,o.label,x+18,y+30,{w:600,size:18,color:rgba(SOFT,0.9)});T(c,s,x+18,y+h-24,{w:800,size:sz,color:rgba(mix(INK,cl,on*0.35),1)});});}
+// which glossary terms each starting point lights (indices into vis.terms); null: all of them, and growing
+const SQ_LIT={plan:[0,1,2,3],fees:[0,6],curious:[0],dash:null,all:null,near:null};
+// each owner slot's options, as people (0 Mei, 1 the learning team, 2 Planning, 3 Noor), and who is right
+const SQ_OWN=[[0,2,3,1],[1,0,2,3],[0,3,2,1],[1,0,3,2],[0,2,3,1]],SQ_OWN_OK=[0,1,0,1,0];
+function sq_owner(c,who,x,y,r,t){if(who===0)sq_face(c,"mei",x,y,r,1,{t});else if(who===1)sq_face(c,"tom",x,y,r,1,{t});else if(who===3)sq_face(c,"noor",x,y,r,1,{t});else sq_badge(c,x,y,r,"planning",null,{});}
+Object.assign(LV,{
+  // scope it: the starting point on a card, and the glossary terms it lights; with no decision, every term lights and more arrive
+  sq_scope:(c,w,h,st,L)=>{const V=L.vis,k=SQ_LIT[st.pick]!==undefined?st.pick:"plan",lit=SQ_LIT[k],grow=!lit,nod=grow||k==="curious";c.save();sq_fit(c,w,h,1440,660);
+    const ls=wrapT(c,V.q[k],0,0,1320,{w:700,size:32,measure:true}),qh=36+ls.length*40;glass(c,30,20,1380,qh,20,SQ_CON,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.95)"});ls.forEach((l,i)=>T(c,l,60,66+i*40,{w:700,size:32}));
+    tag(c,720,20+qh+30,nod?V.noDecision:V.decision,nod?EDGE_:GOOD,{align:"center",size:28});
+    V.terms.forEach((s,i)=>{const x=30+(i%4)*350,y=250+Math.floor(i/4)*118,on=grow||lit.includes(i);sq_termFit(c,x,y,330,104,s,{on:on?1:0,dim:on?0:0.7,col:grow?EDGE_:TRUST,size:32,label:V.glossary});});
+    if(grow)tag(c,720,632,V.growing,EDGE_,{align:"center",size:30});c.restore();},
+  // what's in the slice: the twelve terms, lit when placed in the slice and dimmed when left out, with a count of each
+  sq_slice:(c,w,h,st,L)=>{const V=L.vis,p=st.pick&&typeof st.pick==="object"?st.pick:{};c.save();sq_fit(c,w,h,1440,660);
+    const ls=wrapT(c,V.q.plan,0,0,1360,{w:700,size:32,measure:true});ls.forEach((l,i)=>T(c,l,720,50+i*42,{w:700,size:32,align:"center",color:rgba(SQ_CON,1)}));
+    V.terms.forEach((s,i)=>{const x=30+(i%4)*350,y=160+Math.floor(i/4)*130;sq_termFit(c,x,y,330,112,s,{on:p[i]==="in"?1:0,dim:p[i]==="out"?0.8:0,col:TRUST,size:32,label:V.glossary});});
+    tag(c,400,612,V.touches+" · "+sq_count(p,"in")+" "+V.placed,TRUST,{align:"center",size:28});tag(c,1080,612,V.out+" · "+sq_count(p,"out")+" "+V.placed,SOFT,{align:"center",size:28});c.restore();},
+  // combine or split: the credential beside the candidate, each row green where they match and red where they differ, and the verdict
+  sq_kinds:(c,w,h,st,L)=>{const V=L.vis,k=V.cand[st.pick]?st.pick:"micro",cd=V.cand[k],lab=L.labs.find(x=>x.id==="kinds"),res=lab?lab.w.res[k]:[1,1,1,1],ok=res.every(r=>r===1);c.save();sq_fit(c,w,h,1200,550);
+    const rc=r=>r===1?GOOD:r===0?EDGE_:TRUST;
+    sq_cmp(c,15,20,570,350,V.cred,TRUST,V.rows.map((r,i)=>[r,V.credRow[i],1]),{});
+    sq_cmp(c,615,20,570,350,cd[0],ok?TRUST:EDGE_,V.rows.map((r,i)=>[r,cd[i+1],1,rc(res[i])]),{});
+    tag(c,600,455,V.verdict[k],ok?GOOD:EDGE_,{align:"center",size:26});c.restore();},
+  // who owns the meaning: each part of the model, with the owner chosen for it, green when it's right and red when not;
+  // the learner given to Planning leaves the wallet app's meaning with no one to settle it
+  sq_owners:(c,w,h,st,L)=>{const V=L.vis,p=Array.isArray(st.pick)?st.pick:[],plan=p[0]!=null&&SQ_OWN[0][p[0]]===2;c.save();sq_fit(c,w,h,1440,660);
+    V.ownLines.forEach((s,i)=>{const y=20+i*126,ch=p[i],who=ch==null?null:SQ_OWN[i][ch],ok=who===SQ_OWN_OK[i],col=ch==null?SOFT:ok?GOOD:EDGE_;
+      glass(c,20,y,640,96,14,BPL,{glow:8,ea:0.6,fill:"rgba(7,12,24,0.95)"});let sz=34;while(sz>22&&tw(c,s,sz,700)>600)sz--;T(c,s,44,y+60,{w:700,size:sz});
+      arrowTo(c,672,y+48,770,y+48,col,ch==null?0.35:0.9,{head:14,lw:2.6,dash:ch==null?[6,8]:null});
+      if(ch==null){T(c,"?",830,y+62,{w:800,size:44,align:"center",color:rgba(SOFT,1)});return;}
+      sq_owner(c,who,830,y+48,44,0);let ns=28;while(ns>20&&tw(c,V.people[who],ns,700)>300)ns--;T(c,V.people[who],892,y+58,{w:700,size:ns,color:rgba(col,1)});});
+    if(plan){sq_badge(c,1335,250,52,"wallet",null,{});wrapT(c,V.wallet,1335,350,200,{w:800,size:28,align:"center"});T(c,"?",1335,150,{w:800,size:52,align:"center",color:rgba(EDGE_,1)});
+      wrapT(c,V.unsettled,1335,420,200,{w:700,size:28,align:"center",color:rgba(EDGE_,1)});}
+    c.restore();},
+  // the scenarios
+  sq_q_all:(c,w,h,st,L)=>{const V=L.vis;c.save();sq_fit(c,w,h,1200,640);tag(c,600,60,V.everything,EDGE_,{align:"center",size:30});
+    V.terms.forEach((s,i)=>sq_termFit(c,40+(i%4)*285,120+Math.floor(i/4)*165,265,140,s,{on:1,col:EDGE_,label:V.glossary}));c.restore();},
+  sq_q_row:(c,w,h,st,L)=>{const V=L.vis;c.save();sq_fit(c,w,h,1200,640);
+    glass(c,60,50,1080,130,18,KIND,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,V.learner+" =",100,108,{w:800,size:32,color:rgba(KIND,1)});T(c,V.row,100,154,{f:"mono",w:500,size:28});
+    SRC3.forEach(([_,col],i)=>{const x=40+i*390;glass(c,x,340,340,96,16,col,{glow:10,ea:0.75,fill:"rgba(7,12,24,0.94)",a:i?0.6:1});{const ls=wrapT(c,V.systems[i],0,0,300,{w:700,size:26,measure:true});ls.forEach((l,j)=>T(c,l,x+170,397+(j-(ls.length-1)/2)*30,{w:700,size:26,align:"center"}));}
+      arrowTo(c,600,190,x+170,330,i?EDGE_:col,i?0.4:0.9,{head:14,lw:2.2,dash:i?[6,8]:null});
+      if(i){tag(c,x+170,500,V.missed[i-1],EDGE_,{align:"center",size:24});cross_(c,x+170,570,40,EDGE_,1);}else tick_(c,x+170,520,40,GOOD,1);});c.restore();},
+  sq_q_fee:(c,w,h,st,L)=>{const V=L.vis;c.save();sq_fit(c,w,h,1200,640);sq_bp(c,500,110,0.68,{b:1,ph:260});
+    sq_termFit(c,1010,150,180,120,V.terms[6],{on:0.6,col:EDGE_,label:V.glossary,size:30});arrowTo(c,1000,210,990,210,EDGE_,0.7,{head:14,lw:2.2,dash:[6,8]});T(c,"?",1100,340,{w:800,size:48,align:"center",color:rgba(EDGE_,1)});
+    sq_badge(c,500,480,46,"planning",V.planning,{sub:false,size:26});c.restore();},
+  sq_q_word:(c,w,h,st,L)=>{const V=L.vis;c.save();sq_fit(c,w,h,1200,640);
+    V.words.forEach((s,i)=>{const col=SRC3[i][1],y=110+i*170;glass(c,60,y,420,110,16,col,{glow:10,ea:0.75,fill:"rgba(7,12,24,0.94)"});T(c,"“"+s+"”",270,y+52,{w:800,size:32,align:"center",color:rgba(col,1)});
+      T(c,V.systems[i],270,y+90,{w:600,size:20,align:"center",color:rgba(SOFT,1)});arrowTo(c,500,y+55,760,330,col,0.8,{head:14,lw:2.2});});
+    bpBox(c,780,280,340,100,V.learner,KIND,0,{size:34});sq_face(c,"mei",950,160,60,1,{});c.restore();},
+  sq_q_award:(c,w,h,st,L)=>{const V=L.vis;c.save();sq_fit(c,w,h,1200,640);
+    [[V.glossaryDef,60,SOFT],[V.registrar,700,TRUST]].forEach(([n,x,col])=>{glass(c,x,60,440,170,18,col,{glow:10,ea:0.75,fill:"rgba(7,12,24,0.95)"});T(c,n,x+30,104,{w:600,size:22,color:rgba(SOFT,1)});T(c,V.terms[2],x+30,170,{w:800,size:38,color:rgba(col,1)});});
+    T(c,"≠",600,170,{w:800,size:60,align:"center",color:rgba(EDGE_,1)});
+    kt_agent(c,330,430,56,0,{});tag(c,330,560,V.agentPicks,EDGE_,{align:"center",size:26});sq_face(c,"mei",900,430,80,1,{});T(c,"Mei",900,548,{w:800,size:28,align:"center"});T(c,V.registrar,900,582,{w:600,size:22,align:"center",color:rgba(SOFT,1)});c.restore();},
+  sq_q_attend:(c,w,h,st,L)=>{const V=L.vis,cd=V.cand.attend;c.save();sq_fit(c,w,h,1200,640);
+    sq_cmp(c,140,50,760,240,cd[0],SRC3[2][1],[[V.rows[0],cd[1],1],[V.rows[3],cd[4],1,EDGE_]],{});
+    tag(c,520,340,"+ "+V.credit5,TRUST,{align:"center",size:30});T(c,"?",1000,200,{w:800,size:60,align:"center",color:rgba(TRUST,1)});sq_face(c,"mei",520,480,80,1,{});c.restore();},
+  sq_q_split:(c,w,h,st,L)=>{const V=L.vis;c.save();sq_fit(c,w,h,1200,640);
+    glass(c,60,60,1080,250,18,TRUST,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.96)"});T(c,V.cred,100,120,{w:800,size:34,color:rgba(TRUST,1)});
+    [V.terms[2],V.cand.micro[0],V.cand.badge[0]].forEach((s,i)=>{const tw_=tw(c,s,26,700)+50,x=100+[0,330,760][i];glass(c,x,180,tw_,70,14,TRUST,{glow:i===1?18:8,ea:0.7,fill:"rgba(30,26,12,0.95)"});T(c,s,x+25,225,{w:700,size:26});});
+    tag(c,560,360,V.credit5,TRUST,{align:"center",size:26});
+    V.reasons.forEach((s,i)=>tag(c,[240,600,960,360,840][i],i<3?460:550,s,SOFT,{align:"center",size:24}));c.restore();},
+  sq_q_order:(c,w,h,st,L)=>{const V=L.vis;c.save();sq_fit(c,w,h,1200,640);
+    glass(c,180,50,840,110,18,SQ_CON,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});wrapT(c,V.q.near,600,118,780,{w:700,size:30,align:"center"});
+    tag(c,600,200,V.noDecision,EDGE_,{align:"center",size:24});
+    // shuffled, in two rows, each row centred and shrunk to fit
+    [[3,0,4],[1,2]].forEach((row,r)=>{let sz=28;const wd=()=>row.reduce((s,k)=>s+tw(c,V.order[k],sz,700)+26,0)+30*(row.length-1);while(sz>20&&wd()>1140)sz--;
+      let x=600-wd()/2;row.forEach(k=>{const tw_=tw(c,V.order[k],sz,700)+26;tag(c,x+tw_/2,330+r*120,V.order[k],WEED,{align:"center",size:sz});x+=tw_+30;});});c.restore();}
+});

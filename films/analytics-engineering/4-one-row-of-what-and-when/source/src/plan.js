@@ -10,7 +10,7 @@
 
 const RW_RUN="runs on dbt Core · DuckDB",RW_CON=[120,215,155],RW_TIME=[230,184,255],RW_INK=[44,34,26],RW_AMB=[255,190,90],RW_RED=[255,96,86];
 const RW_GRAIN="One row per learner per award",RW_ASAT="as at census date";
-const RW_KS={SIS:SRC3[0][1],LMS:SRC3[1][1],SC:SRC3[2][1]};
+const RW_KS={SIS:SRC3[0][1],LMS:SRC3[1][1],SC:SRC3[2][1]},RW_KC=[255,200,150];  // a credential, amber, on the stairs and in their legend
 
 /* ---------- the past: 1890 ---------- */
 // handwriting: Manrope, slanted, in iron-gall ink
@@ -178,8 +178,8 @@ function rw_dial(ctx,x,y,r,v,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ct
 // o.lit {line: 0..1} lights lines; o.seg [[line, text, a, colour]] lights a phrase; o.wrap wraps long lines under a hanging indent;
 // o.mark {line: [glyph drawer, a]} draws an icon in the margin
 function rw_code(ctx,x,y,w,name,lines,o){o=o||{};const a=o.a==null?1:o.a,sz=o.size||19,lh=o.lh||30,col=o.edge||[170,205,255],cw=tw(ctx,"M",sz,500,"mono"),lab=o.label===undefined?RW_RUN:o.label;
-  const V=[];lines.forEach((l,i)=>{if(!o.wrap||l.length<=o.wrap){V.push({i,s:l});return;}const ind=" ".repeat(l.match(/^\s*/)[0].length+3);let rest=l,first=true;
-    while(rest.length){const lim=first?o.wrap:o.wrap-ind.length;if(rest.length<=lim){V.push({i,s:(first?"":ind)+rest});break;}let cut=rest.lastIndexOf(" ",lim);if(cut<=0)cut=lim;V.push({i,s:(first?"":ind)+rest.slice(0,cut)});rest=rest.slice(cut).replace(/^ /,"");first=false;}});
+  const V=[];lines.forEach((l,i)=>{if(!o.wrap||l.length<=o.wrap){V.push({i,s:l});return;}const ind=o.hang===0?"":" ".repeat(l.match(/^\s*/)[0].length+3);let rest=l,first=true;
+    while(rest.length){const lim0=first?o.wrap:o.wrap-ind.length,lim=o.balance?Math.min(lim0,Math.ceil(rest.length/Math.ceil(rest.length/lim0))+4):lim0;if(rest.length<=lim){V.push({i,s:(first?"":ind)+rest});break;}let cut=rest.lastIndexOf(" ",lim);if(cut<=0)cut=lim;V.push({i,s:(first?"":ind)+rest.slice(0,cut)});rest=rest.slice(cut).replace(/^ /,"");first=false;}});
   const lb=lab&&36+tw(ctx,name,18,500,"mono")+tw(ctx,lab,18,700)+44>w,h=o.h||(76+V.length*lh+(lb?30:0));if(a<=0.01)return h;
   withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,col,{glow:12+10*(o.hi||0),ea:0.65,fill:"rgba(6,10,20,0.95)"});
     ctx.fillStyle=rgba(col,0.9);rr(ctx,x+16,y+17,10,10,3);ctx.fill();T(ctx,name,x+36,y+29,{f:"mono",w:500,size:18,color:rgba(col,1)});
@@ -229,7 +229,10 @@ function rw_face(ctx,id,x,y,r,a,o){o=o||{};if(a<=0.01)return;const P=PEOPLE[id],
   ctx.save();ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fillStyle="rgba(12,18,30,0.97)";ctx.fill();ctx.clip();person(ctx,id,x,y-0.1*r+505*k,k/P.build.h,{t:o.t||0,expr:o.expr||"calm",glow:0.2});ctx.restore();
   ring(ctx,x,y,r,P.edge,1,2.6);});}
 // the loop of ten steps, small and without its labels; on[i] lights each station
-function rw_loop(ctx,x,y,s,t,on,a){if(a<=0.01)return;ctx.save();ctx.translate(x,y);ctx.scale(s,s);stepLoop(ctx,0,0,640,360,t,{on,noLabels:true,a});ctx.restore();}
+// the ten steps as a small loop: a dashed ellipse of rx by ry, a ring per step, the lit ones filled and glowing
+function rw_loop(ctx,x,y,rx,ry,t,on,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.strokeStyle=rgba(WEED,0.35);ctx.lineWidth=1.6;ctx.setLineDash([4,7]);ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,TAU);ctx.stroke();ctx.restore();
+  STEPS10.forEach((_,i)=>{const q=on[i]||0,[px,py]=stepPos(i,x,y,rx,ry),r=10+2*q;if(q>0)glow(ctx,px,py,r*4,WEED,0.45*q);ctx.fillStyle="rgba(7,12,24,0.96)";ctx.beginPath();ctx.arc(px,py,r,0,TAU);ctx.fill();
+    if(q>0){ctx.fillStyle=rgba(WEED,0.9*q);ctx.beginPath();ctx.arc(px,py,r*0.62,0,TAU);ctx.fill();}ring(ctx,px,py,r,mix(SOFT,WEED,q),0.55+0.45*q,2);});});}
 // a small eye ("seen") and a small clock ("true")
 function rw_eye(ctx,x,y,s,col,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.strokeStyle=rgba(col,1);ctx.lineWidth=2.2;ctx.beginPath();ctx.moveTo(x-s,y);ctx.quadraticCurveTo(x,y-s*0.9,x+s,y);ctx.quadraticCurveTo(x,y+s*0.9,x-s,y);ctx.stroke();ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(x,y,s*0.32,0,TAU);ctx.fill();});}
 function rw_clock(ctx,x,y,s,col,a){if(a<=0.01)return;withA(ctx,a,()=>{ring(ctx,x,y,s,col,1,2.2);ctx.strokeStyle=rgba(col,1);ctx.lineWidth=2.2;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y-s*0.62);ctx.moveTo(x,y);ctx.lineTo(x+s*0.48,y+s*0.2);ctx.stroke();});}
@@ -256,7 +259,7 @@ function rw_stair(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)re
     RW_STEPS.forEach(([f,to,v,k],i)=>{const q=clamp(p-i,0,1);if(q<=0)return;const x0=X(f),x1=to==="(open)"?x+w:X(to),past=rw_day(f)<=lim,c=past?col:SOFT,yy=Y(v),xe=lerp(x0,x1,ease(q));
       withA(ctx,past?1:0.4,()=>{ctx.fillStyle=rgba(c,0.13);ctx.fillRect(x0,yy,xe-x0,y+h-yy);ctx.strokeStyle=rgba(c,1);ctx.lineWidth=3.2;ctx.beginPath();const pv=i?Y(RW_STEPS[i-1][2]):y+h;ctx.moveTo(x0,pv);ctx.lineTo(x0,yy);ctx.lineTo(xe,yy);ctx.stroke();
         if(o.labels!==false)withA(ctx,clamp(q*2,0,1),()=>T(ctx,String(v),x0+6,yy-10,{w:800,size:sz,color:rgba(c,1)}));
-        if(o.kinds&&(o.kinds[i]||0)>0)withA(ctx,o.kinds[i],()=>{const kc=k==="result"?RW_KS.SIS:RW_KS.LMS;ctx.fillStyle=rgba(kc,1);ctx.beginPath();ctx.arc(x0,pv,6,0,TAU);ctx.fill();});});});
+        if(o.kinds&&(o.kinds[i]||0)>0)withA(ctx,o.kinds[i],()=>{const kc=k==="result"?RW_KS.SIS:RW_KC;ctx.fillStyle=rgba(kc,1);ctx.beginPath();ctx.arc(x0,pv,6,0,TAU);ctx.fill();});});});
     if(o.at&&(o.atA||0)>0){const xx=X(o.at);withA(ctx,o.atA,()=>{ctx.save();ctx.setLineDash([6,6]);ctx.strokeStyle=rgba(o.atCol||RW_TIME,0.95);ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(xx,y-20);ctx.lineTo(xx,y+h);ctx.stroke();ctx.restore();});}});
   return{X,Y};}
 // stacked version cards, as a source keeps them: n behind one front card that names the four version columns
@@ -267,21 +270,138 @@ function rw_srcStack(ctx,x,y,w,k,n,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.
 
 /* ---------- one timeline from three ---------- */
 // the four dates on which one of Aisha's systems changed, placed on a schematic axis (not to scale: two are six days apart)
-const RW_TL=[["15 Jul 2025",360],["21 Jul 2025",520],["6 Jan 2026",760],["20 Jul 2026",960]],RW_TLX=[300,1080];
+const RW_TL=[["15 Jul 2025",340],["21 Jul 2025",480],["6 Jan 2026",700],["20 Jul 2026",900]],RW_TLX=[300,1100];
 // a band for one source: from its first date to the end of the axis, each segment with its value; p (0..1) draws it from the left
 function rw_band(ctx,y,k,segs,p,a,o){o=o||{};if(a<=0.01)return;const col=SRC3[k][1],x0=segs[0][0],xe=lerp(x0,RW_TLX[1],ease(p));withA(ctx,a,()=>{
   ctx.fillStyle=rgba(col,0.2);rr(ctx,x0,y-28,Math.max(0,xe-x0),56,10);ctx.fill();ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=2;rr(ctx,x0,y-28,Math.max(0,xe-x0),56,10);ctx.stroke();
-  segs.forEach(([sx,v],i)=>{const ex=i+1<segs.length?segs[i+1][0]:RW_TLX[1];if(xe<sx+30)return;if(i>0){ctx.strokeStyle=rgba(col,0.9);ctx.beginPath();ctx.moveTo(sx,y-28);ctx.lineTo(sx,y+28);ctx.stroke();}
-    T(ctx,v,(sx+Math.min(ex,xe))/2,y+7,{f:"mono",w:500,size:20,align:"center",color:rgba(INK,0.95)});});});}
+  segs.forEach(([sx,v,lx],i)=>{const ex=i+1<segs.length?segs[i+1][0]:RW_TLX[1];if(xe<(lx==null?sx+30:lx+20))return;if(i>0){ctx.strokeStyle=rgba(col,0.9);ctx.beginPath();ctx.moveTo(sx,y-28);ctx.lineTo(sx,y+28);ctx.stroke();}
+    T(ctx,v,lx==null?(sx+Math.min(ex,xe))/2:lx,y+7,{f:"mono",w:500,size:20,align:"center",color:rgba(INK,0.95)});});});}
 
 /* ---------- the labs' and scenarios' pictures ----------
    Added to the film bundle's LV registry (Keeping it true's true.js defines it; these keys are prefixed rw_ so they never clash).
-   The learning pages call each as f(ctx, w, h, state, L); words come from L.vis, so each language draws its own. */
+   assets/from-words-to-data/learn.js calls each as f(ctx, w, h, state, L): a lab passes its state (compose: {pick}; steps: {step};
+   pick: {pick}), a scenario passes {q}. Any words come from L.vis (the page's learn.en.js or learn.es.js), so each language draws its own. */
 function rw_fit(c,w,h,bw,bh){const k=Math.min(w/bw,h/bh);c.translate((w-bw*k)/2,(h-bh*k)/2);c.scale(k,k);}
+// a pill for a test, sized for the learning pages: its name, its columns under it, and a tick (st 1) or a cross (st -1)
+function rw_l_test(c,x,y,w,name,cols,st,note){const h=cols?92:62,col=st>0?GOOD:st<0?RW_RED:SOFT;glass(c,x,y,w,h,22,col,{glow:8+10*Math.abs(st),ea:0.8,fill:"rgba(7,12,24,0.95)"});
+  T(c,name,x+26,y+40,{f:"mono",w:500,size:24});if(cols)T(c,cols,x+26,y+76,{f:"mono",w:500,size:22,color:rgba(SOFT,1)});
+  if(note)T(c,note,x+w-80,y+40,{w:700,size:24,align:"right",color:rgba(col,1)});if(st>0)tick_(c,x+w-40,y+h/2,30,GOOD,1);if(st<0)cross_(c,x+w-40,y+h/2,26,RW_RED,1);return h;}
+// one version of an award, as a card: its dates and its name; lit (gold) or dim, dashed when it's only supposed
+function rw_l_ver(c,x,y,w,h,from,to,name,o){o=o||{};const lit=o.lit||0,col=o.col||KIND;withA(c,o.dim?0.4:1,()=>{
+  if(o.dash){c.save();c.setLineDash([12,9]);c.strokeStyle=rgba(col,0.9);c.lineWidth=2.4;rr(c,x,y,w,h,14);c.stroke();c.restore();}
+  else{if(lit)glow(c,x+w/2,y+h/2,w*0.45,TRUST,0.22);glass(c,x,y,w,h,14,lit?TRUST:col,{glow:10+12*lit,ea:0.8,fill:"rgba(7,12,24,0.96)"});}
+  c.fillStyle=rgba(col,1);rr(c,x+16,y+18,8,h-36,4);c.fill();
+  T(c,from+" → "+to,x+40,y+42,{f:"mono",w:500,size:24,color:rgba(RW_TIME,1)});T(c,name,x+40,y+84,{w:700,size:28});});}
+// a horizontal date axis between two days: X(day as "YYYY-MM-DD") -> x
+function rw_l_axis(x0,x1,d0,d1){const a=Date.parse(d0+"T00:00:00Z"),b=Date.parse(d1+"T00:00:00Z");return d=>x0+(x1-x0)*(Date.parse(d+"T00:00:00Z")-a)/(b-a);}
+function rw_l_dash(c,x,y0,y1,col,a){c.save();c.globalAlpha*=a==null?1:a;c.setLineDash([8,7]);c.strokeStyle=rgba(col,0.95);c.lineWidth=2.6;c.beginPath();c.moveTo(x,y0);c.lineTo(x,y1);c.stroke();c.restore();}
+// Aisha's credit and status on a day, from the core's versions (credit: core_credit_towards_award_v1; status: core_learner_v1)
+function rw_l_aisha(d){let cr=0;RW_STEPS.forEach(([f,to,v])=>{if(f<=d&&(to==="(open)"||to>d))cr=v;});const done=d>="2026-07-20",rem=60-cr;return{cr,rem,done,near:!done&&rem>0&&rem<=15};}
+const RW_L_DAYS=["2025-10-14","2026-02-26","2026-03-31","2026-07-03","2026-07-20","2026-09-30"];
+// the four changes of the "When was it true?" lab: [took effect, recorded], and the date each way of dating gives (null: none to give)
+const RW_L_CH=[["2026-03-27","2026-04-03"],["2026-04-20","2026-04-21"],[null,"2026-07-02"],[null,"2026-08-12"]];
+const RW_L_BY={rec:[1,1,1,1],eff:[0,0,1,1],all:[0,0,-1,-1],load:[1,1,1,1]};
+function rw_l_short(d,V){const m=+d.slice(5,7)-1;return +d.slice(8,10)+" "+V.mon[m];}
+// a small strip of version cards, for the scenarios
+function rw_l_rows(c,x,y,rows,o){o=o||{};rows.forEach((r,i)=>{const yy=y+i*(o.lh||52),col=r[2]||KIND;glass(c,x,yy,o.w||480,(o.lh||52)-10,10,col,{glow:6,ea:0.7,fill:"rgba(7,12,24,0.95)"});
+  T(c,r[0],x+18,yy+30,{f:"mono",w:500,size:o.size||24});if(r[1])T(c,r[1],x+(o.w||480)-18,yy+30,{f:"mono",w:500,size:o.size||24,align:"right",color:rgba(col,1)});});}
 Object.assign(LV,{
-  // Aisha's credit as a staircase, with a date line where the slider is
-  rw_stairs:(c,w,h,st,L)=>{const V=L.vis||{};c.save();rw_fit(c,w,h,1200,640);const at=st.at||"2026-03-31";rw_stair(c,120,120,1000,400,0,{at,atA:1,upTo:at});if(V.title)T(c,V.title,600,70,{w:800,size:30,align:"center"});c.restore();},
-  // the renamed award: one version or two, and the rows a join on the key alone returns
-  rw_fan:(c,w,h,st,L)=>{c.save();rw_fit(c,w,h,1200,640);const k=st.step||0;rw_award(c,80,60,700,{split:k>0?1:0,lit:k>1?[1,0]:[0,0],dim:k>1?[0,1]:[0,0]});
-    rw_test(c,80,300,700,"unique_combination","",k===1?-1:1,{});c.restore();}
+  // Declare the grain: three outputs, each with the grain sentence built so far, the test it becomes, and Aisha's rows
+  rw_l_grain:(c,w,h,st,L)=>{const V=L.vis,pick=st.pick||[],lab=(L.labs||[]).find(x=>x.id==="grain");if(!lab)return;const S=lab.w.slots;c.save();rw_fit(c,w,h,1920,840);
+    const opt=i=>pick[i]==null?null:S[i].opts[pick[i]];
+    const TESTS={la:["unique_combination","learner_key, award_key"],l:["unique","learner_key"],c:["unique","credential_key"],lav:["unique_combination","learner_key, award_key, valid_from"]};
+    [0,1,2].forEach(k=>{const x=30+k*630,y=16,cw=600,a=opt(k*2),d=opt(k*2+1);glass(c,x,y,cw,808,20,RW_CON,{glow:10,ea:0.6,fill:"rgba(7,12,24,0.92)"});
+      rw_badge(c,x+52,y+56,26,k?"wallet":"planning","",{});T(c,V.outputs[k],x+96,y+66,{w:800,size:28});
+      const n1=wrapT(c,V.perRow+" "+(a?V.what[a.k]:"…")+",",x+30,y+140,cw-60,{w:800,size:30,color:rgba(a?(a.ok?INK:EDGE_):SOFT,1)}).length;
+      T(c,d?V.day[d.k]:"…",x+30,y+140+n1*40,{w:800,size:30,color:rgba(d?(d.ok?RW_TIME:EDGE_):SOFT,1)});
+      const ok=a&&d?(a.ok&&d.ok?1:-1):0,ts=a?TESTS[a.k]:["…",""];rw_l_test(c,x+24,y+290,cw-48,ts[0],ts[1],ok);
+      T(c,V.aisha[k],x+30,y+430,{w:700,size:24,color:rgba(SOFT,1)});
+      const R=a?V.rows[k][a.k]||[]:[];R.forEach((r,i)=>{const gone=r[0]==="-";withA(c,gone?0.55:1,()=>{T(c,gone?r.slice(1):r,x+30,y+470+i*34,{f:"mono",w:500,size:22,color:rgba(gone?EDGE_:INK,1)});
+        if(gone){const tw_=tw(c,r.slice(1),22,500,"mono");c.strokeStyle=rgba(EDGE_,0.9);c.lineWidth=2.4;c.beginPath();c.moveTo(x+28,y+462+i*34);c.lineTo(x+32+tw_,y+462+i*34);c.stroke();}});});
+      const note=[a&&!a.ok?V.whatNote[k][a.k]:null,d&&!d.ok?V.dayNote[k][d.k]:null].filter(Boolean);
+      let ny=y+650;note.forEach(s=>{ny+=30*wrapT(c,s,x+30,ny,cw-60,{w:700,size:24,lh:30,color:rgba(EDGE_,1)}).length+8;});});c.restore();},
+  // Fan-out: the award's versions on the left, Health's eight learners on the right, a chip for each version a learner meets
+  rw_l_fan:(c,w,h,st,L)=>{const V=L.vis,k=st.step||0;c.save();rw_fit(c,w,h,1920,840);
+    const VC=[KIND,RW_AMB,EDGE_],mode=["one","key","at","key","latest"][k],nv=k===0?1:k===3?3:2,meets=mode==="key"?nv:1,which=mode==="latest"?1:0;
+    T(c,"SIS|GCHI",40,70,{f:"mono",w:500,size:28,color:rgba(RW_KS.SIS,1)});T(c,V.versionsOf,200,70,{w:700,size:26,color:rgba(SOFT,1)});
+    const vers=[["1 Nov 2024",k===0?"(open)":"2 Jul 2026",V.names[0]],["2 Jul 2026",k===3?V.later:"(open)",V.names[1]],[V.later,"(open)",V.names[2]]];
+    for(let i=0;i<nv;i++){const lit=(mode==="at"&&i===0)||(mode==="latest"&&i===1);rw_l_ver(c,40,100+i*140,840,120,vers[i][0],vers[i][1],vers[i][2],{col:VC[i],lit:lit?1:0,dim:(mode==="at"||mode==="latest")&&!lit,dash:i===2});}
+    tag(c,40,560,V.modes[mode],mode==="key"?RW_RED:mode==="one"?SOFT:mode==="at"?GOOD:RW_AMB,{size:26});
+    if(mode==="at")T(c,V.validAt,40,620,{w:700,size:26,color:rgba(TRUST,1)});
+    if(mode==="latest")wrapT(c,V.wrongName,40,620,840,{w:700,size:26,color:rgba(RW_AMB,1)});
+    if(k===3)wrapT(c,V.stillEight,40,620,840,{w:700,size:26,color:rgba(SOFT,1)});
+    let rows=0,pts=0;RW_FAN.forEach(([key,cp],i)=>{const y=120+i*52;T(c,key,980,y+8,{f:"mono",w:500,size:24,color:rgba(INK,0.9)});
+      for(let j=0;j<meets;j++){const vi=mode==="key"?j:which,x=1240+j*110;glass(c,x,y-22,96,40,10,VC[vi],{glow:6,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,String(cp),x+48,y+8,{f:"mono",w:500,size:22,align:"center",color:rgba(VC[vi],1)});rows++;pts+=cp;}});
+    [[rows,V.rows_],[8,V.learners],[pts,V.points]].forEach(([n,s],i)=>{const x=1000+i*300;T(c,String(n),x,600,{w:800,size:52,color:rgba(i!==1&&rows>8?RW_RED:INK,1)});T(c,s,x,636,{w:600,size:24,color:rgba(SOFT,1)});});
+    rw_l_test(c,960,680,920,"unique_combination","learner_key, award_key",rows>8?-1:1,rows>8?rows+" "+V.rows_+" · 8 "+V.learners:"");c.restore();},
+  // As at census: Aisha's credit staircase with a date line on the step's day; her credit, status and whether she counts beside it
+  rw_l_asat:(c,w,h,st,L)=>{const V=L.vis,k=st.step||0,d=RW_L_DAYS[k],A=rw_l_aisha(d);c.save();rw_fit(c,w,h,1920,840);
+    T(c,V.credit,140,70,{w:800,size:28});const X0=140,Y0=170,W0=1100,H0=520;
+    const P=rw_stair(c,X0,Y0,W0,H0,0,{at:d,atA:1,upTo:d,axis:false,size:26});
+    V.months.forEach((m,i)=>T(c,m,X0+W0*(i*30.4+15)/365,Y0+H0+40,{w:600,size:24,align:"center",color:rgba(SOFT,0.9)}));
+    [15,30,45,60].forEach(v=>{c.strokeStyle=rgba(SOFT,0.12);c.lineWidth=1.2;c.beginPath();c.moveTo(X0,P.Y(v));c.lineTo(X0+W0,P.Y(v));c.stroke();T(c,String(v),X0-14,P.Y(v)+8,{w:600,size:24,align:"right",color:rgba(SOFT,0.85)});});
+    rw_l_dash(c,P.X("2026-03-31"),Y0-30,Y0+H0,RW_TIME,k===2?0:0.45);if(k!==2)T(c,V.census,P.X("2026-03-31"),Y0-40,{w:700,size:22,align:"center",color:rgba(RW_TIME,0.7)});
+    const x=1320,y=150;glass(c,x,y,560,560,20,A.near?GOOD:SOFT,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.95)"});
+    T(c,V.dayLabel[k],x+30,y+56,{w:800,size:30,color:rgba(RW_TIME,1)});
+    T(c,A.cr+" "+V.of60,x+30,y+150,{w:800,size:56});T(c,A.rem>0?A.rem+" "+V.toGo:V.none,x+30,y+200,{w:600,size:26,color:rgba(SOFT,1)});
+    T(c,V.status,x+30,y+280,{w:600,size:24,color:rgba(SOFT,1)});T(c,A.done?V.completed:V.studying,x+30,y+320,{w:800,size:32});
+    tag(c,x+30,y+420,A.near?V.counted:V.notCounted,A.near?GOOD:SOFT,{size:28});
+    if(k===5)wrapT(c,V.wallet,x+30,y+490,500,{w:700,size:24,color:rgba(RW_CON,1)});c.restore();},
+  // When was it true? Four changes on one axis: a clock where the system says when it took effect, an eye where it was recorded;
+  // the date the chosen rule uses, lit; and Business's count on census day against the report
+  rw_l_when:(c,w,h,st,L)=>{const V=L.vis,by=RW_L_BY[st.pick]||RW_L_BY.rec,X=rw_l_axis(560,1440,"2026-03-15","2026-08-31");c.save();rw_fit(c,w,h,1920,840);
+    ["2026-04-01","2026-05-01","2026-06-01","2026-07-01","2026-08-01"].forEach(d=>{c.strokeStyle=rgba(SOFT,0.14);c.lineWidth=1.2;c.beginPath();c.moveTo(X(d),110);c.lineTo(X(d),720);c.stroke();T(c,V.mon[+d.slice(5,7)-1],X(d)+8,760,{w:600,size:24,color:rgba(SOFT,0.9)});});
+    rw_l_dash(c,X("2026-03-31"),80,730,RW_TIME,1);T(c,V.census,X("2026-03-31"),60,{w:700,size:24,align:"center",color:rgba(RW_TIME,1)});
+    RW_L_CH.forEach(([eff,rec],i)=>{const y=170+i*150,u=by[i],load=st.pick==="load";wrapT(c,V.changes[i],40,y-6,460,{w:700,size:26});
+      c.strokeStyle=rgba(SOFT,0.3);c.lineWidth=2;c.beginPath();c.moveTo(560,y);c.lineTo(1440,y);c.stroke();
+      if(eff)rw_clock(c,X(eff),y-36,14,u===0?TRUST:SOFT,1);rw_eye(c,X(rec),y+36,16,u===1?TRUST:SOFT,1);
+      const dd=u===0?eff:u===1?rec:null;
+      if(dd){glow(c,X(dd),y,40,TRUST,0.4);c.fillStyle=rgba(TRUST,1);c.beginPath();c.arc(X(dd),y,10,0,TAU);c.fill();
+        T(c,rw_l_short(dd,V),X(dd)+(i===3?-24:24),y-8,{w:800,size:24,align:i===3?"right":"left",color:rgba(TRUST,1)});}
+      else T(c,"?",X(rec)+30,y+10,{w:800,size:36,color:rgba(RW_AMB,1)});
+      if(load&&i<2)T(c,V.loaded[i],X(rec)+30,y+44,{w:600,size:22,color:rgba(RW_AMB,1)});});
+    const n=by[0]===0?3:4,ok=n===3;glass(c,1520,170,360,300,20,ok?GOOD:RW_RED,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});
+    T(c,V.business,1550,220,{w:700,size:26,color:rgba(SOFT,1)});T(c,String(n),1550,320,{w:800,size:84,color:rgba(ok?GOOD:RW_AMB,1)});
+    T(c,V.report+" 3",1550,400,{w:700,size:26,color:rgba(SOFT,1)});if(ok)tick_(c,1820,290,40,GOOD,1);else cross_(c,1820,290,34,RW_RED,1);
+    rw_clock(c,1540,560,14,SOFT,1);T(c,V.tookEffect,1570,568,{w:600,size:24,color:rgba(SOFT,1)});rw_eye(c,1540,610,16,SOFT,1);T(c,V.recorded,1570,618,{w:600,size:24,color:rgba(SOFT,1)});
+    c.fillStyle=rgba(TRUST,1);c.beginPath();c.arc(1540,660,9,0,TAU);c.fill();T(c,V.dates,1570,668,{w:600,size:24,color:rgba(SOFT,1)});c.restore();},
+  // the scenarios
+  rw_q_double:(c,w,h,st,L)=>{const V=L.vis;c.save();rw_fit(c,w,h,1200,640);
+    RW_FAN.forEach(([key,cp],i)=>{const y=70+i*60;T(c,key,60,y+8,{f:"mono",w:500,size:24});[KIND,RW_AMB].forEach((col,j)=>{glass(c,320+j*100,y-22,86,40,10,col,{glow:6,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,String(cp),363+j*100,y+8,{f:"mono",w:500,size:22,align:"center",color:rgba(col,1)});});});
+    T(c,"370",820,250,{w:800,size:96,align:"center",color:rgba(RW_RED,1)});T(c,V.dashboard,820,300,{w:600,size:26,align:"center",color:rgba(SOFT,1)});
+    T(c,"185",820,450,{w:800,size:96,align:"center",color:rgba(GOOD,1)});T(c,V.byHand,820,500,{w:600,size:26,align:"center",color:rgba(SOFT,1)});c.restore();},
+  rw_q_app:(c,w,h,st,L)=>{const V=L.vis;c.save();rw_fit(c,w,h,1200,640);
+    rw_badge(c,280,220,64,"planning",V.planning,{sub:false,size:28});rw_pin(c,200,420,"31 Mar 2026",1,{size:24});T(c,"12",280,560,{w:800,size:64,align:"center",color:rgba(RW_TIME,1)});
+    rw_badge(c,880,220,64,"wallet",V.walletApp,{sub:false,size:28});rw_pin(c,800,420,V.today,1,{size:24});T(c,"?",880,560,{w:800,size:64,align:"center",color:rgba(RW_AMB,1)});
+    arrowTo(c,400,540,760,540,RW_AMB,0.8,{head:16});c.restore();},
+  rw_q_rename:(c,w,h,st,L)=>{const V=L.vis;c.save();rw_fit(c,w,h,1200,640);
+    rw_l_ver(c,60,60,700,120,"1 Nov 2024","2 Jul 2026",V.names[0],{col:KIND});rw_l_ver(c,60,200,700,120,"2 Jul 2026","(open)",V.names[1],{col:RW_AMB,lit:1});
+    glass(c,820,60,340,260,18,TRUST,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.95)"});T(c,V.report,850,110,{w:800,size:28});T(c,"31 Mar 2026",850,152,{f:"mono",w:500,size:24,color:rgba(RW_TIME,1)});
+    wrapT(c,V.names[1]+"?",850,210,290,{w:700,size:26,color:rgba(RW_AMB,1)});arrowTo(c,770,260,840,220,RW_AMB,0.8,{head:14});
+    T(c,V.rebuilt,600,440,{w:700,size:30,align:"center",color:rgba(SOFT,1)});c.restore();},
+  rw_q_backdate:(c,w,h,st,L)=>{const V=L.vis,X=rw_l_axis(100,1100,"2026-03-15","2026-04-30");c.save();rw_fit(c,w,h,1200,640);
+    c.strokeStyle=rgba(SOFT,0.4);c.lineWidth=2;c.beginPath();c.moveTo(100,380);c.lineTo(1100,380);c.stroke();
+    [["2026-03-31",V.census,RW_TIME],["2026-04-14",V.published,TRUST]].forEach(([d,s,col],i)=>{rw_l_dash(c,X(d),120,400,col,1);T(c,s,X(d),100-0*i,{w:700,size:24,align:"center",color:rgba(col,1)});});
+    rw_clock(c,X("2026-03-25"),340,16,SOFT,1);T(c,"25 Mar",X("2026-03-25"),440,{w:700,size:24,align:"center",color:rgba(SOFT,1)});
+    rw_eye(c,X("2026-04-20"),340,18,SOFT,1);T(c,"20 Apr",X("2026-04-20"),440,{w:700,size:24,align:"center",color:rgba(SOFT,1)});
+    glass(c,X("2026-04-20")-120,200,240,80,14,RW_AMB,{glow:10,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,"WD",X("2026-04-20"),252,{f:"mono",w:500,size:30,align:"center",color:rgba(RW_AMB,1)});
+    arrowTo(c,X("2026-04-20")-130,250,X("2026-03-25")+20,320,RW_AMB,0.8,{head:14,bend:0.15});
+    T(c,V.mart+" 1",360,540,{w:800,size:32,align:"center",color:rgba(RW_AMB,1)});T(c,V.report+" 2",840,540,{w:800,size:32,align:"center",color:rgba(TRUST,1)});c.restore();},
+  rw_q_months:(c,w,h,st,L)=>{const V=L.vis;c.save();rw_fit(c,w,h,1200,640);const P=rw_stair(c,110,140,1000,380,0,{axis:false,labels:false});
+    ["2025-10-31","2025-11-30","2025-12-31","2026-01-31","2026-02-28","2026-03-31","2026-04-30","2026-05-31","2026-06-30","2026-07-31","2026-08-31"].forEach((d,i)=>{const x=P.X(d),A=rw_l_aisha(d);rw_l_dash(c,x,120,520,RW_TIME,0.6);
+      c.fillStyle=rgba(RW_TIME,1);c.beginPath();c.arc(x,P.Y(A.cr),7,0,TAU);c.fill();});
+    T(c,V.monthEnds,600,80,{w:800,size:30,align:"center",color:rgba(RW_TIME,1)});T(c,V.oneDay,600,590,{w:700,size:26,align:"center",color:rgba(SOFT,1)});c.restore();},
+  rw_q_current:(c,w,h,st,L)=>{const V=L.vis;c.save();rw_fit(c,w,h,1200,640);
+    rw_code(c,60,60,640,"stg_student_system__learners",["status_code     WD","effective_date  "+V.nextWeek,"_is_current     true"],{edge:SRC3[0][1],size:26,lh:46,label:null,lit:{2:1},litCol:RW_AMB});
+    rw_pin(c,780,140,V.today,1,{size:24});rw_clock(c,800,250,22,RW_TIME,1);T(c,V.notYet,840,260,{w:700,size:26,color:rgba(RW_TIME,1)});
+    rw_code(c,60,330,1080,"models/core/core_learner.sql",["{{ valid_at(as_is_date(), 'timeline.valid_from', 'timeline.valid_to') }} as is_current,"],{edge:TRUST,size:22,lh:40,wrap:72});c.restore();},
+  rw_q_fixes:(c,w,h,st,L)=>{const V=L.vis;c.save();rw_fit(c,w,h,1200,640);
+    rw_l_ver(c,60,60,620,110,"1 Nov 2024","2 Jul 2026",V.names[0],{col:KIND});rw_l_ver(c,60,190,620,110,"2 Jul 2026","(open)",V.names[1],{col:RW_AMB});
+    rw_l_test(c,60,360,620,"unique_combination","learner_key, award_key",-1,"");T(c,"16",900,220,{w:800,size:96,align:"center",color:rgba(RW_RED,1)});
+    T(c,V.rowsFor8,900,270,{w:600,size:26,align:"center",color:rgba(SOFT,1)});T(c,"?",900,470,{w:800,size:72,align:"center",color:rgba(RW_AMB,1)});c.restore();},
+  rw_q_overlap:(c,w,h,st,L)=>{const V=L.vis,X=rw_l_axis(100,1100,"2026-03-01","2026-05-01");c.save();rw_fit(c,w,h,1200,640);
+    glass(c,X("2026-03-01"),160,X("2026-04-04")-X("2026-03-01"),80,14,SRC3[0][1],{glow:8,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,V.version+" 1",X("2026-03-01")+20,210,{w:700,size:26});
+    glass(c,X("2026-04-03"),280,X("2026-05-01")-X("2026-04-03"),80,14,SRC3[0][1],{glow:8,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,V.version+" 2",X("2026-04-03")+20,330,{w:700,size:26});
+    c.fillStyle=rgba(RW_RED,0.35);c.fillRect(X("2026-04-03"),140,X("2026-04-04")-X("2026-04-03"),240);rw_l_dash(c,X("2026-04-03"),130,400,RW_RED,1);
+    T(c,V.overlap,X("2026-04-03"),460,{w:800,size:28,align:"center",color:rgba(RW_RED,1)});rw_l_test(c,300,500,600,"versions_do_not_overlap","",-1,"");c.restore();}
 });

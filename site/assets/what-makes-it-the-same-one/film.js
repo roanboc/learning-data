@@ -1932,6 +1932,98 @@ function sm_print(ctx,x,y,r,kind,p,a){if(a<=0.01||p<=0)return;withA(ctx,a,()=>{c
   for(let k=0;k<6;k++){const q=clamp(p*8-k-2,0,1);if(q<=0)continue;ctx.lineWidth=2.2;ctx.beginPath();const yy=r*0.55+k*r*0.09;ctx.moveTo(-r,yy+r*0.1);ctx.quadraticCurveTo(0,yy-r*0.25,lerp(-r,r,q),yy+r*0.1);ctx.stroke();}
   ctx.restore();});}
 
+/* ---------- the labs' and scenarios' pictures ----------
+   Added to the film bundle's LV registry (Keeping it true's true.js defines it; these keys are prefixed sm_ so they never clash).
+   assets/from-words-to-data/learn.js calls each as f(ctx, w, h, state, L): a lab passes its state (compose: {pick}; sort: {pick, checked};
+   pick: {pick}; steps: {step}), a scenario passes {q}. Any words come from L.vis (the page's learn.en.js or learn.es.js), so each language
+   draws its own; keys, file names and hashes are the same in both. */
+function sm_fit(c,w,h,bw,bh){const k=Math.min(w/bw,h/bh);c.translate((w-bw*k)/2,(h-bh*k)/2);c.scale(k,k);}
+function sm_lab(L,id){return (L.labs||[]).find(x=>x.id===id)||{w:{}};}
+function sm_short(hx){return hx?hx.slice(0,8)+"…"+hx.slice(-5):"null";}
+// the seven keys of Break the hash: the parts typed, then [string, hash] the raw (or naive) way and the macro's way, and how each reads
+const SM_E="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",SM_N1="eb1b4c34dd3372e1523a56b490f0620a99f309f43073320490d5ae54636e2534";
+const SM_HSTEPS=[
+  {parts:["SIS|S-20417"],raw:["SIS|S-20417",SM_H0],mac:["SIS|S-20417",SM_H0],ra:"same",ma:"same"},
+  {parts:["SIS|S-20417·"],raw:["SIS|S-20417·",SM_H1],mac:["SIS|S-20417",SM_H0],ra:"changed",ma:"same"},
+  {parts:["sis|s-20417"],raw:["sis|s-20417","8c73518cf662e82e5a12c6951dc494924bce32098a7b9ef3fc3023b836e2447e"],mac:["SIS|S-20417",SM_H0],ra:"changed",ma:"same"},
+  {parts:["S-20417","GCDA"],raw:["S-20417GCDA","092fe84979faa2b91b3d24d33c5457ec5881724758a9998ec988ba68eb4bc111"],mac:["S-20417|GCDA","6461c940bdf522268a1f7660374d1a74b4d6cb33b63c2fbc8fa5b0ca8560ca9b"]},
+  {parts:["S-20417","··"],raw:["S-20417",SM_N1],mac:["S-20417|<null>","2be6f4e3ac839cbad84df8bcdb4763bebaf0ad201362bfa66de72115c8665e83"]},
+  {parts:["··","S-20417"],raw:["S-20417",SM_N1],mac:["<null>|S-20417","f30f0e2a439b5fdf47437d7dfe4065cd808e41022420195781c86c90733aaf26"],ra:"collide",ma:"distinct"},
+  {parts:["··","··"],raw:["''",SM_E],mac:["null",null],ra:"collide",ma:"noHash"}];
+// Same learner?: the four pairs (left key, its source; right key), and which pairs each way of matching links
+const SM_PAIRS=[["SC|aisha.k@mail.example",2,"SIS|S-20417"],["LMS|u-88213",1,"SIS|S-20417"],["SC|nguyen.family@mail.example",2,"SIS|S-20436"],["LMS|u-88231",1,"SIS|S-20417"]];
+const SM_LINK={typed:[0,0,0,0],email:[1,1,1,0],rules:[1,1,0,1],decide:[1,1,1,0]};
+// Rules in order: the four keys run down the user's stack; fits lists the rules (by item) each key fits, and what each landing means
+const SM_RUN=[["SIS|S-20417",0,[1,4]],["LMS|u-88213",1,[2,4]],["SC|aisha.k@mail.example",2,[3,4]],["LMS|u-88231",1,[0,2,4]]];
+function sm_verdict(c,x,y,v){if(v===1||v===true)tick_(c,x,y,40,GOOD,1);else if(v===0.5){c.fillStyle=rgba(SM_AMBER,1);c.beginPath();c.arc(x,y,9,0,TAU);c.fill();}else cross_(c,x,y,40,BAD,1);}
+Object.assign(LV,{
+  // claim and evidence: each claim, and the evidence picked for it (a query and its result, or a guess), teal when it proves the claim
+  sm_l_claims:(c,w,h,st,L)=>{const V=L.vis,S=sm_lab(L,"claims").w.slots||[];c.save();sm_fit(c,w,h,900,530);
+    V.claims.forEach((cl,i)=>{const y=6+i*104,p=st.pick?st.pick[i]:null,o=p==null?null:S[i].opts[p];
+      T(c,V.claim+" · "+cl,20,y+24,{w:700,size:22,color:rgba(INK,1)});
+      if(!o){c.save();c.setLineDash([8,8]);c.strokeStyle=rgba(SOFT,0.6);c.lineWidth=2;rr(c,20,y+36,860,60,12);c.stroke();c.restore();T(c,V.query+" · "+V.result,450,y+73,{w:600,size:20,align:"center",color:rgba(SOFT,0.8)});return;}
+      const col=o.ok?[111,214,200]:BAD,gs=o.t.indexOf("→")<0;glass(c,20,y+36,860,60,12,col,{glow:10,ea:0.8,fill:"rgba(6,10,20,0.95)"});
+      if(gs){T(c,V.noQuery,40,y+74,{w:600,size:21,color:rgba(SOFT,1)});tag(c,866-tw(c,V.guess,18,700)-26,y+66,V.guess,SOFT,{size:18});}
+      else{const[qn,rs]=o.t.split(" → ");T(c,qn,40,y+74,{f:"mono",w:500,size:19,color:rgba(col,1)});T(c,"→ "+rs,46+tw(c,qn,19,500,"mono"),y+74,{f:"mono",w:500,size:19,color:rgba(INK,0.95)});}});c.restore();},
+  // rules in order: the stack in the user's order, and where each of four keys lands
+  sm_l_rules:(c,w,h,st,L)=>{const V=L.vis,pk=st.pick||{},ord=[0,1,2,3,4].filter(i=>pk[i]!=null).sort((a,b)=>(+pk[a])-(+pk[b])||a-b);c.save();sm_fit(c,w,h,1200,550);
+    [0,1,2,3,4].forEach(r=>{const y=20+r*92,i=ord[r];if(i==null){sm_rule(c,30,y,560,"·",V.unplaced,{dash:1,h:64});return;}
+      const ok=st.checked?(pk[i]===sm_lab(L,"rules").w.items[i].b):null;sm_rule(c,30,y,560,pk[i],V.rules[i],{h:64,on:ok===false?0.9:0.6,col:ok===false?BAD:i===0?TRUST:LAYER4[1][1]});});
+    SM_RUN.forEach(([k,s,fits],j)=>{const y=60+j*124,col=SM_SRC[s],land=ord.find(i=>fits.includes(i));sm_key(c,640,y,k,col,{size:20});
+      let txt=V.unplaced,good=null;if(land!=null){const own=land===4||land===0;if(j<3){good=!own;txt=own?V.ownLearner:"SIS|S-20417";}else{good=land!==2;txt=land===2?V.wrongMerge:V.ownLearner;}}
+      T(c,V.lands+" "+(land==null?"—":pk[land])+":",660,y+50,{w:600,size:20,color:rgba(SOFT,1)});T(c,txt,660+tw(c,V.lands+" 0: ",20,600)+8,y+50,{w:700,size:20,color:rgba(good==null?SOFT:good?GOOD:BAD,1)});});c.restore();},
+  // same learner?: four pairs, linked or not by the way of matching chosen, each with its verdict
+  sm_l_same:(c,w,h,st,L)=>{const V=L.vis,k=st.pick||"typed",res=(sm_lab(L,"same").w.res||{})[k]||[],ln=SM_LINK[k]||[];c.save();sm_fit(c,w,h,1200,525);
+    SM_PAIRS.forEach(([a,s,b],i)=>{const y=70+i*122;T(c,V.pairs[i],30,y-34,{w:600,size:19,color:rgba(SOFT,1)});const wa=sm_key(c,30,y,a,SM_SRC[s],{size:20});
+      const x0=30+wa+12,x1=760;if(ln[i]){c.strokeStyle=rgba(i===3?BAD:GOOD,0.9);c.lineWidth=3;if(i===3)c.setLineDash([10,8]);c.beginPath();c.moveTo(x0,y);c.lineTo(x1-12,y);c.stroke();c.setLineDash([]);}
+      else{c.strokeStyle=rgba(SOFT,0.4);c.lineWidth=2;c.setLineDash([4,10]);c.beginPath();c.moveTo(x0,y);c.lineTo(x1-12,y);c.stroke();c.setLineDash([]);}
+      if(k==="decide"&&(i===2||i===3))tag(c,(x0+x1)/2,y-26,i===2?"D-001":"D-003",TRUST,{align:"center",size:18});
+      sm_key(c,x1,y,b,SM_SRC[0],{size:20});sm_verdict(c,1150,y,res[i]);});c.restore();},
+  // break the hash: the parts typed; the raw (or naive) hash beside the macro's, each saying what happened
+  sm_l_hash:(c,w,h,st,L)=>{const V=L.vis,S=SM_HSTEPS[st.step||0],two=S.parts.length>1;c.save();sm_fit(c,w,h,1200,470);
+    T(c,V.parts+":",30,62,{w:600,size:20,color:rgba(SOFT,1)});let x=30+tw(c,V.parts+":",20,600)+16;S.parts.forEach(p=>{x+=sm_key(c,x,54,p,SM_SRC[0],{size:22})+14;});
+    [[two?V.naive:V.raw,S.raw,S.ra,30],[V.macro,S.mac,S.ma,612]].forEach(([lab,[s,hx],v,X])=>{const col=v==="same"||v==="distinct"||v==="noHash"?GOOD:v?BAD:[170,205,255];
+      glass(c,X,110,558,340,16,col,{glow:10,ea:0.7,fill:"rgba(6,10,20,0.95)"});T(c,lab,X+22,150,{w:700,size:20,color:rgba(col,1)});
+      T(c,s.replace(/·/g,"␣"),X+22,206,{f:"mono",w:500,size:24,color:rgba(INK,1)});
+      if(hx)sm_hex(c,X+22,272,hx,100,0,{size:26,col:mix(INK,col,0.35)});
+      if(v)tag(c,X+279,402,V[v],col,{align:"center",size:20});});c.restore();},
+  // the scenarios
+  sm_q_ticket:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);tag(c,40,60,V.q.ticket,TRUST,{size:24});T(c,V.q.two,40,130,{w:700,size:30});
+    [["LMS|u-88213",250],["LMS|u-88231",450]].forEach(([k,y])=>{sm_key(c,60,y,k,SM_SRC[1],{size:30});arrowTo(c,380,y,760,350,SM_SRC[1],0.8,{head:16});});
+    sm_key(c,780,350,"SIS|S-20417",SM_SRC[0],{size:30});T(c,"?",990,250,{w:800,size:64,align:"center",color:rgba(TRUST,1)});c.restore();},
+  sm_q_email:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);sm_key(c,600,120,"…@mail.example",[200,210,230],{size:30,align:"center"});T(c,V.q.email,600,60,{w:700,size:28,align:"center",color:rgba(SOFT,1)});
+    arrowTo(c,560,150,280,380,SM_SRC[0],0.8,{head:16});ring(c,240,450,60,SM_SRC[0],1,4);T(c,V.q.students,240,560,{w:700,size:28,align:"center",color:rgba(SM_SRC[0],1)});
+    [800,1000].forEach(x=>{arrowTo(c,640,150,x,380,SM_SRC[1],0.8,{head:16});ring(c,x,450,60,SM_SRC[1],1,4);});T(c,V.q.accounts,900,560,{w:700,size:28,align:"center",color:rgba(SM_SRC[1],1)});c.restore();},
+  sm_q_agent:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);kt_agent(c,170,320,60,0,{});T(c,V.q.agent,170,440,{w:700,size:28,align:"center",color:rgba([111,214,200],1)});
+    c.save();c.globalAlpha*=0.55;glass(c,330,170,800,300,18,SOFT,{glow:6,ea:0.6,fill:"rgba(6,10,20,0.95)"});c.restore();
+    T(c,V.claim+":",360,230,{w:600,size:26,color:rgba(SOFT,1)});T(c,V.q.uniq,360,290,{f:"mono",w:500,size:30,color:rgba(INK,0.8)});
+    T(c,V.query+": —",360,350,{w:600,size:26,color:rgba(SOFT,1)});T(c,V.result+": —",360,400,{w:600,size:26,color:rgba(SOFT,1)});tag(c,1040,230,V.guess,SOFT,{align:"center",size:24});
+    T(c,V.q.noq,730,540,{w:700,size:28,align:"center",color:rgba(SM_AMBER,1)});c.restore();},
+  sm_q_morning:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);T(c,V.q.vendor+":",60,70,{w:600,size:26,color:rgba(SOFT,1)});sm_key(c,60,130,"AISHA.K@MAIL.EXAMPLE",SM_SRC[2],{size:28});
+    [["SC|aisha.k@mail.example","0f45f571…b10f5",SOFT],["SC|AISHA.K@MAIL.EXAMPLE","deac2049…009b4",BAD]].forEach(([k,hx,col],i)=>{const y=270+i*110;
+      T(c,"sha256('"+k+"')",60,y,{f:"mono",w:500,size:26,color:rgba(INK,0.9)});T(c,"= "+hx,60,y+44,{f:"mono",w:500,size:26,color:rgba(col,1)});});
+    T(c,V.q.morning,600,590,{w:700,size:28,align:"center",color:rgba(BAD,1)});c.restore();},
+  sm_q_pr:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);tag(c,60,60,V.q.pr+" · "+V.q.drop,SM_AMBER,{size:24});
+    sm_file(c,60,110,1080,"models/core/_core__models.yml",["      - name: learner_key","        …","      - name: learner_bk","        …"],{size:26,lh:50,label:V.runs,lit:{2:1},litCol:BAD});
+    T(c,"learner_key: 0905e6e2…  ·  learner_bk: SIS|S-20417",600,560,{f:"mono",w:500,size:24,align:"center",color:rgba(INK,0.9)});c.restore();},
+  sm_q_wallet:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);glass(c,40,90,640,330,18,TRUST,{glow:12,ea:0.75,fill:"rgba(7,12,24,0.95)"});
+    T(c,V.q.wallet,70,145,{w:700,size:28,color:rgba(TRUST,1)});T(c,"6 "+V.q.creds,650,145,{w:800,size:28,align:"right",color:rgba(SM_AMBER,1)});
+    [TRUST,KIND,KIND,KIND,[180,150,255],SM_AMBER].forEach((col,i)=>{const x=70+i*100;glass(c,x,190,84,190,10,col,{glow:6,ea:0.8,fill:"rgba(10,16,30,0.96)"});c.fillStyle=rgba(i===5?KIND:col,0.85);rr(c,x+10,206,64,12,4);c.fill();
+      for(let r=0;r<4;r++){c.fillStyle=rgba(i===5?KIND:col,0.22);rr(c,x+10,240+r*24,64*(0.9-r*0.15),9,3);c.fill();}});
+    glass(c,740,90,420,330,18,GOOD,{glow:10,ea:0.6,fill:"rgba(6,10,20,0.95)"});T(c,V.q.green,770,145,{w:700,size:26,color:rgba(GOOD,1)});
+    for(let i=0;i<5;i++){c.fillStyle=rgba(INK,0.25);rr(c,770,190+i*44,260,12,4);c.fill();tick_(c,1110,196+i*44,30,GOOD,1);}
+    T(c,"?",600,540,{w:800,size:60,align:"center",color:rgba(SM_AMBER,1)});c.restore();},
+  sm_q_reopen:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);T(c,V.q.reopen,60,80,{w:700,size:30});
+    sm_key(c,60,170,"LMS|u-88213",SM_SRC[1],{size:28});sm_key(c,60,290,"LMS|u-…",SM_SRC[1],{size:28,hi:1});T(c,V.q.newId,60,360,{w:600,size:24,color:rgba(SOFT,1)});
+    [[3,V.rules[2]],[4,V.rules[3]],[9,V.rules[4]]].forEach(([p,t],i)=>sm_rule(c,560,140+i*96,600,p,t,{h:70,on:i===0?0.6:0}));
+    arrowTo(c,330,290,550,175,SM_SRC[1],0.8,{head:14});c.restore();},
+  sm_q_code:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);
+    sm_file(c,40,40,1120,"seeds/status_map.csv",["key_set,source_code,source_label,canonical_status","…","SC,1,Active customer,studying","SC,0,Inactive customer,inactive"],{size:26,lh:50,label:V.runs,lit:{3:1}});
+    c.save();c.setLineDash([10,8]);c.strokeStyle=rgba(SM_AMBER,0.9);c.lineWidth=2.5;rr(c,40,390,640,80,14);c.stroke();c.restore();
+    T(c,"+ SC,INACTIVE,…,inactive",64,442,{f:"mono",w:500,size:26,color:rgba(SM_AMBER,1)});tag(c,820,430,V.q.pr,SM_AMBER,{align:"center",size:24});
+    tag(c,600,560,V.q.owner,TRUST,{align:"center",size:26});c.restore();}
+});
+
 /* ===== What makes it the same one: scenes =====
    Eight chapters, as in ../script.md. Look-alikes in the past (Bertillon's cards, the West story) and the title; Aisha under
    three keys; profiling with evidence; key sets; rules, most trusted first; the look-alike kept apart by a person's decision;
@@ -1945,6 +2037,10 @@ const SM_AK=[["SIS|","S-20417"],["LMS|","u-88213"],["SC|","·Aisha.K@Mail.exampl
 // a tag whose right edge sits at x
 function sm_tagR(ctx,x,y,s,col,sz){tag(ctx,x-tw(ctx,s,sz||18,700)-26,y,s,col,{size:sz||18});}
 
+// a tag whose last part (a code character, like |) is set in the mono font, so it can't be misread
+function sm_tagBar(ctx,x,y,s,m,col,sz){const w1=tw(ctx,s,sz,700),w=w1+sz*0.62+26,h=sz+16;glass(ctx,x,y-h/2,w,h,h/2,col,{fill:"rgba(7,12,24,0.88)",glow:10,ea:0.8});
+  T(ctx,s,x+13,y+sz*0.36,{w:700,size:sz,color:rgba(col,1)});T(ctx,m,x+13+w1,y+sz*0.36,{f:"mono",w:700,size:sz,color:rgba(col,1)});}
+
 /* ---------- 1. Look-alikes ---------- */
 scene("west",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");histBg(ctx,S,t);
   ctx.save();drift(ctx,t,sc,{z:0.04,y:460});
@@ -1955,7 +2051,7 @@ scene("west",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
     arrive(ctx,520,490,t,0.5,()=>{kt_paper(ctx,140,170,760,640,t,{seed:5,col:[236,226,204],curl:0.5});
       sm_profile(ctx,470,420,1.05,clamp((t-0.9)/3.0,0,1),t);sm_hand(ctx,745,700,0.55,fin(t,1.6,1.4),t);},{d:1.0,from:0.94});
     const c1=ease(fin(t,m1-0.5,0.5)),c3=ease(fin(t,m3-0.4,0.5)),mv=ease(fin(t,m2-0.4,1.3));
-    sm_calipers(ctx,lerp(442,865,mv),lerp(112,632,mv),lerp(205,120,mv),mv<0.5?lerp(380,262,c1):lerp(170,104,c3),lerp(0,Math.PI/2,mv),fin(t,m1-1.0,0.5));
+    sm_calipers(ctx,lerp(442,865,mv),lerp(112,632,mv),lerp(205,120,mv),lerp(lerp(380,262,c1),lerp(170,104,c3),mv),lerp(0,Math.PI/2,mv),fin(t,m1-1.0,0.5));
     sm_tape(ctx,190,640,690,fin(t,m2-0.1,0.9),fin(t,m2-0.2,0.3));
     withA(ctx,fin(t,m2+0.8,0.4),()=>T(ctx,"arm span",415,730,{w:700,size:20,align:"center",color:rgba(SM_INK,0.9)}));
     // the card, written as each measure is taken; then it files itself into the drawer, by its numbers
@@ -1978,7 +2074,7 @@ scene("west",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
     const mg=ease(fin(t,bA-0.5,1.1));if(mg>0&&mg<1)withA(ctx,Math.sin(Math.PI*mg)*0.8,()=>{[520,1020].forEach(x0=>{const x=lerp(x0+190,960,mg),y=lerp(310,640,mg),ww=lerp(380,300,mg),hh=lerp(260,320,mg);ctx.save();ctx.setLineDash([8,8]);ctx.strokeStyle=rgba(INK,0.7);ctx.lineWidth=2;rr(ctx,x-ww/2,y-hh/2,ww,hh,lerp(6,120,mg));ctx.stroke();ctx.restore();});});
     sm_bust(ctx,960,800,320,KIND,{a:fin(t,bA,0.5),p:fin(t,bA,1.4)});
     arrive(ctx,960,842,t,bA+0.8,()=>T(ctx,"Aisha",960,850,{w:800,size:28,align:"center",color:rgba(KIND,1)}),{dy:10});});
-  ctx.restore();weedsTitle(ctx,S,t,B,"What makes it the same one","identity is a decision, written down",WEED);
+  ctx.restore();dark(ctx,S,fin(t,B+0.3,0.8));weedsTitle(ctx,S,t,B,"What makes it the same one","identity is a decision, written down",WEED);
   fadeIn(ctx,S,t);vign(ctx,S);});
 
 /* ---------- 2. Three keys ---------- */
@@ -2020,17 +2116,17 @@ scene("profile",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   arrive(ctx,170,300,t,c("first")+0.8,()=>{kt_agent(ctx,170,300,30,t,{busy:fin(t,cF,0.5)*(1-fin(t,cO+4,1))});tag(ctx,170,385,"agent",KT_AI,{align:"center",size:18});},{from:0.7});
   arrive(ctx,825,96,t,0.4,()=>tag(ctx,825,96,"profile first",WEED,{align:"center",size:22}),{from:0.8});
   // the first claim: its query, then its result
-  const cQ=c("first")+1.4;arrive(ctx,825,320,t,cQ,()=>sm_file(ctx,360,180,930,"analyses/profile_null_keys.sql",SM_NULLQ,{size:18,lh:29,wrap:true,p:clamp((t-cQ-0.2)/3.0,0,1),edge:KT_AI}),{dy:30});
+  const cQ=c("first")+1.4;arrive(ctx,825,320,t,cQ,()=>sm_file(ctx,360,180,910,"analyses/profile_null_keys.sql",SM_NULLQ,{size:18,lh:29,wrap:true,p:clamp((t-cQ-0.2)/3.0,0,1),edge:KT_AI}),{dy:30});
   arrive(ctx,560,150,t,w("nulls","Four"),()=>tag(ctx,360,148,"4 of 42 accounts: no student ID",KT_AI,{size:20}),{from:0.85});
   arrive(ctx,700,550,t,w("nulls","no student ID"),()=>sm_rows(ctx,360,506,["source_table","key_column","current_rows","missing"],[["learning_platform.users","student_id","42","4"]],{col:KT_AI}),{dy:20});
   [["claim",148,w("first","every claim")],["query",330,w("first","query")],["result",550,w("nulls","no student ID")]].forEach(([s,y,t0])=>arrive(ctx,300,y,t,t0,()=>sm_tagR(ctx,348,y,s,SOFT,18),{from:0.8}));
   // two more evidence cards stack beside it as they're named, then a claim with no query
-  arrive(ctx,1605,245,t,cSh-0.1,()=>sm_evid(ctx,1320,120,570,["one email, two students","one email, two accounts"],"analyses/profile_shared_emails.sql",["student_system | nguyen.family@… | 2","learning_platform | nguyen.family@… | 2"],
+  arrive(ctx,1565,245,t,cSh-0.1,()=>sm_evid(ctx,1290,120,550,["one email, two students","one email, two accounts"],"analyses/profile_shared_emails.sql",["student_system | nguyen.family@… | 2","learning_platform | nguyen.family@… | 2"],
     {h:252,cA:[1,fin(t,w("shared","so do"),0.5)],rA:[fin(t,w("shared","family email"),0.5),fin(t,w("shared","platform accounts"),0.5)]}),{dy:30});
-  arrive(ctx,1605,510,t,cO-0.1,()=>sm_evid(ctx,1320,392,570,["2 orphans as typed","0 once trimmed and lower-cased"],"analyses/profile_orphans.sql",["short_courses.enrolments -> learners | 2 | 0"],
+  arrive(ctx,1565,510,t,cO-0.1,()=>sm_evid(ctx,1290,392,550,["2 orphans as typed","0 once trimmed and lower-cased"],"analyses/profile_orphans.sql",["short_courses.enrolments -> learners | 2 | 0"],
     {h:262,cA:[1,fin(t,w("orphans","Trimmed"),0.5)],rA:[fin(t,w("orphans","no customer"),0.5)],note:"of the enrolments with an email",noteA:fin(t,w("orphans","with an email"),0.5)}),{dy:30});
   const gr=fin(t,w("guess","without"),0.6);
-  arrive(ctx,1605,712,t,cG-0.7,()=>{sm_evid(ctx,1320,676,570,["Emails are unique across the student system."],null,[],{h:108,grey:gr});withA(ctx,fin(t,w("guess","guess")-0.1,0.4),()=>sm_tagR(ctx,1872,760,"guess",EDGE_,20));},{dy:30});
+  arrive(ctx,1565,712,t,cG-0.7,()=>{sm_evid(ctx,1290,676,550,["Emails are unique across the student system."],null,[],{h:108,grey:gr});withA(ctx,fin(t,w("guess","guess")-0.1,0.4),()=>sm_tagR(ctx,1822,760,"guess",EDGE_,20));},{dy:30});
   arrive(ctx,825,660,t,w("guess","claim"),()=>T(ctx,"a claim without its query is a guess",825,668,{w:700,size:28,align:"center",color:rgba(INK,1)}),{dy:12});
   ctx.restore();vign(ctx,S);});
 
@@ -2056,11 +2152,11 @@ scene("sets",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   [[1340,0],[1720,1]].forEach(([x,k],i)=>{arrive(ctx,x,560,t,cA+0.3+i*0.3,()=>{sm_bust(ctx,x,580,120,SRC3[k][1],{});sm_key(ctx,x,630,"S-20417",SRC3[k][1],{align:"center",size:20,pre:["SIS|","LMS|"][k],q:qa});},{dy:24});});
   arrive(ctx,1530,700,t,w("alike","Qualified"),()=>tag(ctx,1530,700,"qualified",GOOD,{align:"center",size:20}),{from:0.8});
   // the macro that writes a qualified key, and the line in staging that writes the email one way
-  arrive(ctx,680,485,t,tm,()=>sm_file(ctx,100,390,1160,"macros/keys.sql",SM_KM,{size:18,lh:29,edge:[200,170,255],p:clamp((t-tm-0.1)/1.4,0,1)}),{dy:30});
-  arrive(ctx,450,700,t,cC,()=>sm_file(ctx,100,610,700,"models/staging/short_courses/stg_short_courses__learners.sql",SM_ST,{size:18,lh:29,edge:LAYER4[0][1],label:null,lit:{0:fin(t,w("case","trimmed"),0.5)}}),{dy:30});
-  withA(ctx,fin(t,cC,0.5),()=>T(ctx,SM_RUNS,800-18,610+219+30,{w:600,size:18,align:"right",color:rgba(SOFT,0.9)}));
-  arrive(ctx,900,700,t,w("case","trimmed"),()=>tag(ctx,840,700,"trimmed",LAYER4[0][1],{size:20}),{from:0.8});
-  arrive(ctx,900,756,t,w("case","one case"),()=>tag(ctx,840,756,"one case",LAYER4[0][1],{size:20}),{from:0.8});
+  arrive(ctx,670,485,t,tm,()=>sm_file(ctx,80,390,1180,"macros/keys.sql",SM_KM,{size:18,lh:29,edge:[200,170,255],p:clamp((t-tm-0.1)/1.4,0,1)}),{dy:30});
+  arrive(ctx,450,700,t,cC,()=>sm_file(ctx,80,610,740,"models/staging/short_courses/stg_short_courses__learners.sql",SM_ST,{size:18,lh:29,edge:LAYER4[0][1],label:null,lit:{0:fin(t,w("case","trimmed"),0.5)}}),{dy:30});
+  withA(ctx,fin(t,cC,0.5),()=>T(ctx,SM_RUNS,820-18,610+219+30,{w:600,size:18,align:"right",color:rgba(SOFT,0.9)}));
+  arrive(ctx,920,700,t,w("case","trimmed"),()=>tag(ctx,860,700,"trimmed",LAYER4[0][1],{size:20}),{from:0.8});
+  arrive(ctx,920,756,t,w("case","one case"),()=>tag(ctx,860,756,"one case",LAYER4[0][1],{size:20}),{from:0.8});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 5. Rules, most trusted first ---------- */
@@ -2139,9 +2235,9 @@ scene("apart",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   withA(ctx,fin(t,w("merge","never earned"),0.5)*(1-fin(t,un+0.3,0.6)),()=>T(ctx,"one she never earned",320,752,{w:700,size:22,align:"center",color:rgba(SM_AMBER,1)}));
   // every test stays green, tick after tick
   const tA=1-fin(t,dd-0.2,0.6),tt0=w("merge","every test");
-  arrive(ctx,1610,300,t,w("merge","And every")-0.4,()=>sm_tests(ctx,1340,110,540,SM_TESTS,SM_TESTS.map((_,i)=>fin(t,tt0+i*0.25,0.3)),{a:tA}),{dy:24});
-  withA(ctx,tA,()=>{arrive(ctx,1610,512,t,tt0+1.6,()=>tag(ctx,1610,512,"every test: green",GOOD,{align:"center",size:20}),{from:0.85});
-    withA(ctx,1-fin(t,cD-0.3,0.4),()=>arrive(ctx,1610,560,t,w("nobody","No test"),()=>T(ctx,"no test knew they were two people",1610,568,{w:600,size:21,align:"center",color:rgba(SOFT,1)}),{dy:10}));});
+  arrive(ctx,1610,300,t,w("merge","And every")-0.4,()=>sm_tests(ctx,1310,110,530,SM_TESTS,SM_TESTS.map((_,i)=>fin(t,tt0+i*0.25,0.3)),{a:tA}),{dy:24});
+  withA(ctx,tA,()=>{arrive(ctx,1575,484,t,tt0+1.6,()=>tag(ctx,1575,484,"every test: green",GOOD,{align:"center",size:20}),{from:0.85});
+    withA(ctx,1-fin(t,cD-0.9,0.4),()=>arrive(ctx,1575,560,t,w("nobody","No test"),()=>T(ctx,"no test knew they were two people",1575,568,{w:600,size:21,align:"center",color:rgba(SOFT,1)}),{dy:10}));});
   // Mei records a decision: different people; her stamp lands on it
   const mA=cD-0.2,dk=ease(fin(t,dd,1.2));
   withA(ctx,oA,()=>arrive(ctx,1740,700,t,mA,()=>{person(ctx,"mei",1740,840,0.44,{pose:"explain",t});T(ctx,"Mei Tanaka",1740,556,{w:800,size:22,align:"center"});T(ctx,"registrar's office",1740,580,{w:600,size:17,align:"center",color:rgba(SOFT,1)});},{dy:20,from:0.95}));
@@ -2151,11 +2247,12 @@ scene("apart",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   withA(ctx,fin(t,w("decide","beats"),0.5)*(1-fin(t,dd-0.2,0.5)),()=>T(ctx,"a decision beats every rule",1000,812,{w:700,size:26,align:"center",color:rgba(TRUST,1)}));
   arrive(ctx,1700,157,t,dd+0.6,()=>tag(ctx,1600,157,"the decision is data",TRUST,{size:18}),{from:0.85});
   // the code keeps them apart, and a test holds the decision
-  arrive(ctx,920,520,t,ck-0.3,()=>sm_file(ctx,600,268,690,"int_learner_key_candidates.sql",SM_AJ,{size:18,lh:28,edge:LAYER4[1][1],p:clamp((t-ck)/1.6,0,1),lit:{0:fin(t,ck+1.6,0.5),11:fin(t,ck+1.8,0.5),14:fin(t,ck+2.0,0.5)},litCol:LAYER4[1][1]}),{dy:30});
-  arrive(ctx,1600,360,t,tf-0.3,()=>sm_file(ctx,1320,268,560,"tests/keys_decided_different_stay_apart.sql",SM_TT,{size:18,lh:29,wrap:true,edge:EDGE_,label:null}),{dy:30});
-  withA(ctx,fin(t,tf-0.3,0.5),()=>T(ctx,SM_RUNS,1862,268+sm_fileH(SM_TT,560,{size:18,lh:29,wrap:true})+30,{w:600,size:18,align:"right",color:rgba(SOFT,0.9)}));
-  arrive(ctx,1600,560,t,ck+0.2,()=>tag(ctx,1600,560,"the code keeps them apart",LAYER4[1][1],{align:"center",size:20}),{from:0.85});
-  arrive(ctx,1600,620,t,w("undo","fails"),()=>tag(ctx,1600,620,"a test fails if they merge",EDGE_,{align:"center",size:20}),{from:0.85});
+  arrive(ctx,920,520,t,ck-0.3,()=>sm_file(ctx,600,268,690,"models/intermediate/int_learner_key_candidates.sql",SM_AJ,{size:18,lh:28,edge:LAYER4[1][1],label:null,p:clamp((t-ck)/1.6,0,1),lit:{0:fin(t,ck+1.6,0.5),11:fin(t,ck+1.8,0.5),14:fin(t,ck+2.0,0.5)},litCol:LAYER4[1][1]}),{dy:30});
+  withA(ctx,fin(t,ck-0.3,0.5),()=>T(ctx,SM_RUNS,1290-18,268+sm_fileH(SM_AJ,690,{size:18,lh:28})+30,{w:600,size:18,align:"right",color:rgba(SOFT,0.9)}));
+  arrive(ctx,1575,360,t,tf-0.3,()=>sm_file(ctx,1310,268,530,"tests/keys_decided_different_stay_apart.sql",SM_TT,{size:18,lh:29,wrap:true,edge:EDGE_,label:null}),{dy:30});
+  withA(ctx,fin(t,tf-0.3,0.5),()=>T(ctx,SM_RUNS,1822,268+sm_fileH(SM_TT,530,{size:18,lh:29,wrap:true})+30,{w:600,size:18,align:"right",color:rgba(SOFT,0.9)}));
+  arrive(ctx,1575,575,t,ck+0.2,()=>tag(ctx,1575,575,"the code keeps them apart",LAYER4[1][1],{align:"center",size:20}),{from:0.85});
+  arrive(ctx,1575,635,t,w("undo","fails"),()=>tag(ctx,1575,635,"a test fails if they merge",EDGE_,{align:"center",size:20}),{from:0.85});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 7. The same hash everywhere ---------- */
@@ -2179,10 +2276,10 @@ scene("hash",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   const mA=fin(t,cMc-0.2,0.6),tr=w("macro","trims"),uc=w("macro","upper case"),mk=w("macro","marks a missing"),jn=w("macro","joins");
   arrive(ctx,960,362,t,cMc-0.2,()=>sm_file(ctx,100,250,1720,"macros/keys.sql",SM_KC,{size:19,lh:30,edge:[200,170,255],p:clamp((t-cMc)/1.4,0,1),
     lit:{0:fin(t,tr,0.4)*(1-fin(t,cE-0.4,0.5)),1:fin(t,mk,0.4)*(1-fin(t,cE-0.4,0.5)),2:fin(t,mk,0.4)*(1-fin(t,cE-0.4,0.5)),3:fin(t,jn,0.4)*(1-fin(t,cE-0.4,0.5))},litCol:[200,170,255]}),{dy:30});
-  [["trim",tr,100],["upper case",uc,210],["<null> for a missing part",mk,370],["joined with |",jn,650]].forEach(([s,t0,x])=>arrive(ctx,x+60,512,t,t0,()=>tag(ctx,x,512,s,[200,170,255],{size:20}),{from:0.85}));
+  [["trim",tr,100],["upper case",uc,210],["<null> for a missing part",mk,370],["joined with ",jn,650]].forEach(([s,t0,x],i)=>arrive(ctx,x+60,512,t,t0,()=>i<3?tag(ctx,x,512,s,[200,170,255],{size:20}):sm_tagBar(ctx,x,512,s,"|",[200,170,255],20),{from:0.85}));
   // the two engines, side by side: both give the same hash
   const eA=fin(t,cE-0.3,0.6);arrive(ctx,550,680,t,cE-0.3,()=>sm_file(ctx,100,556,900,"macros/keys.sql",SM_EN,{size:19,lh:29,edge:LAYER4[2][1],lit:{1:fin(t,w("every","every engine")-0.2,0.4),5:fin(t,w("every","every engine")+0.2,0.4)}}),{dy:30});
-  const gA=1-fin(t,cBs-0.4,0.5);withA(ctx,gA,()=>{
+  const gA=1-fin(t,cBs-0.9,0.4);withA(ctx,gA,()=>{
     arrive(ctx,1300,600,t,w("every","every engine")-0.2,()=>{T(ctx,"DuckDB  sha256",1060,608,{f:"mono",w:500,size:20,color:rgba(SOFT,1)});T(ctx,"→ 0905e6e2…",1450,608,{f:"mono",w:500,size:20,color:rgba(GOOD,1)});},{from:0.9});
     arrive(ctx,1300,660,t,w("every","every engine")+0.2,()=>{T(ctx,"Databricks  sha2(…, 256)",1060,668,{f:"mono",w:500,size:20,color:rgba(SOFT,1)});T(ctx,"→ 0905e6e2…",1450,668,{f:"mono",w:500,size:20,color:rgba(GOOD,1)});},{from:0.9});
     arrive(ctx,1300,730,t,w("every","same hash"),()=>tag(ctx,1060,730,"one macro · the same hash, every model, every engine",GOOD,{size:20}),{from:0.85});});
@@ -2221,7 +2318,7 @@ scene("codes",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
   const ck=fin(t,nV,0.8);if(ck>0){const cx=1580,cy=470,r=120;withA(ctx,ck*0.6,()=>{ring(ctx,cx,cy,r,SOFT,0.8,2);for(let k=0;k<12;k++){const an=k/12*TAU;ctx.strokeStyle=rgba(SOFT,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(cx+Math.cos(an)*r*0.85,cy+Math.sin(an)*r*0.85);ctx.lineTo(cx+Math.cos(an)*r*0.95,cy+Math.sin(an)*r*0.95);ctx.stroke();}
     const ha=t*0.05,ma=t*0.6;ctx.lineCap="round";ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.sin(ha)*r*0.5,cy-Math.cos(ha)*r*0.5);ctx.stroke();ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.sin(ma)*r*0.78,cy-Math.cos(ma)*r*0.78);ctx.stroke();});
     arrive(ctx,1580,640,t,nV,()=>tag(ctx,1580,640,"many versions?",SOFT,{align:"center",size:20}),{from:0.85});}
-  ctx.restore();weedsEnd(ctx,S,t,B,"What makes it the same one",WEED,"Looking alike isn't being the same. Write down what is.");
+  ctx.restore();dark(ctx,S,fin(t,B+0.3,0.9));weedsEnd(ctx,S,t,B,"What makes it the same one",WEED,"Looking alike isn't being the same. Write down what is.");
   fadeIn(ctx,S,t,0.01);vign(ctx,S);});
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */

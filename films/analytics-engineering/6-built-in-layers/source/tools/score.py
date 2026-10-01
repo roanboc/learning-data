@@ -18,6 +18,9 @@ _NARR, _DUR = _obj('narration.js'), _obj('vodur.js')
 def W(sid, lid, word, off=0):
     ln = next(v for v in _NARR[sid]['vo'] if v['id'] == lid); s = ln.get('say') or ln['text']; i = max(0, s.find(word))
     return G(sid, lid) + _DUR[sid + '/' + lid] * i / len(s) + off
+# a moment in a chapter's own time, the t the scene draws with (a chapter's first cue comes 1 s after its start)
+def CH(sid, off=0):
+    return ST[sid]['start'] + off
 
 # ---- the film's instruments ----
 def pizz(m, start, g=0.06, pan=0.0, sec=1.6):
@@ -115,7 +118,7 @@ soft(57, W('staging', 'nojoin', 'still called a customer'), 0.028, -0.6)
 # 3. Intermediate: the layer lighting; its eight steps; the conventions' line; four steps picked out; the customer becoming a
 #    learner; the recipe, name by name
 bed('intermediate', [AM7, DM9, FMAJ7])
-soft(53, G('intermediate', 'steps', 0.2), 0.03, -0.3)
+soft(53, CH('intermediate', 0.2), 0.03, -0.3)
 chT = W('intermediate', 'steps', 'Eight')
 for j in range(8):
     knock(chT - 0.4 + j * 0.22, 0.016, -0.4)
@@ -130,7 +133,7 @@ lines(W('intermediate', 'recipe', 'top to bottom'), 11, 0.25, 0.014, 0.4)
 #    the award's line straight to the core; Noor's approval
 bed('core', [C, FMAJ7, G6, C])
 paper(W('core', 'names', 'blueprint', -0.3), 0.03, 0.4, 0.7)
-soft(55, G('core', 'names', 0.2), 0.03, -0.2)
+soft(55, CH('core', 0.2), 0.03, -0.2)
 for word in ['learner', 'an award', 'a credential', 'credit towards']:
     knock(W('core', 'names', word, -0.2), 0.03, -0.2)
 paper(G('core', 'contract', -0.2), 0.028, 0.4); knock(W('core', 'contract', 'enforced'), 0.035, 0.4)
@@ -175,7 +178,7 @@ for k, off in enumerate([-0.2, 0.4, 1.0]):
 # 7. Physical choices: the columns; views turning to glass (felt), tables to stone (a thud); the config; the agent's query;
 #    the incremental card; the merge; nothing to merge; clustered; rebuilt in full
 bed('physical', [C, EM7, AM7, FMAJ7, G6])
-knock(G('physical', 'how', 0.2), 0.03, -0.5)
+knock(CH('physical', 0.2), 0.03, -0.5)
 paper(G('physical', 'views', -0.2), 0.028, 0.4)
 soft(64, W('physical', 'views', 'views'), 0.028, -0.6); soft(60, W('physical', 'views', 'views', 0.1), 0.022, -0.4)
 for i in range(4):
@@ -191,8 +194,8 @@ tf = W('physical', 'cluster', 'in full'); lines(tf - 0.2, 5, 0.2, 0.018, -0.4); 
 # 8. Metrics once: the columns fold; the macro; the var; one column, read twice; the metric; the pass, faculty by faculty;
 #    twelve and twelve; each layer beside each station; the hand-off; the end card on the cello's mark
 bed('once', [C, FMAJ7, DM9, GSUS, C, FADD9, G6], 0, cq('once', 'breath'))
-paper(G('once', 'rule', 0.0), 0.028, 0.0, 1.0)
-paper(G('once', 'rule', 0.6), 0.03, -0.3); lines(G('once', 'rule', 0.8), 6, 0.33, 0.016, -0.3)
+paper(CH('once', 0.0), 0.028, 0.0, 1.0)
+paper(CH('once', 0.6), 0.03, -0.3); lines(CH('once', 0.8), 6, 0.33, 0.016, -0.3)
 knock(W('once', 'rule', 'fifteen', -0.3), 0.03, 0.6); soft(55, W('once', 'rule', 'fifteen', 0.3), 0.028, 0.5)
 tM = W('once', 'count', 'the metric'); paper(tM - 0.3, 0.035, -0.3)
 for i in range(4):

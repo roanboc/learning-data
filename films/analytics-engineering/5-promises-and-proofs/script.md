@@ -96,6 +96,10 @@ A second card, the credential's contract, each part lighting as it's named (`dat
         data_type: string
         constraints: [{type: not_null}]
         data_tests: [unique, not_null]
+      …
+      - name: credit_points
+        …
+        data_type: int
 ```
 
 On "disagree on a column's type", `credit_points`' type flips from `int` to `string` in the YAML, while the query still makes an integer; a red bar runs across the build and dbt's real message appears, trimmed (a muted double knock):
@@ -295,7 +299,7 @@ Four stops, one question each.
 | 2 | The platform deletes a revoked credential; anything the platform stops showing is revoked from that day; a flag is requested. | `docs/gaps.md` 8. In the model: `int_credentials_unioned.sql` 33-44 and 65 (a badge whose last version is closed and no longer current is revoked on the day that version closed). Known limitation (`docs/gaps.md` 23): a badge deleted for another reason also counts as revoked, and it may have been revoked earlier. The source keeps every version, with the dates it was recorded. |
 | 2 | Jordan's microcredential vanished on 12 August; it reads as revoked. | `core_credential_v2`, run 30 September 2026: `LMS|B-5028`, Data Visualisation, learner `SIS|S-20422`, issued 2026-02-02, `status` revoked, `revoked_on` 2026-08-12, the only revoked credential of 53. Jordan's credit towards `SIS|GCDA` in `core_credit_towards_award_v1`: 45 from 2 March to 12 August 2026 (so 45 at census), 40 since. |
 | 3 | The core folder: public, with an enforced contract. | `dbt_project.yml` 40-46. `access: public` means any model in any project may `ref()` it (cross-project refs need dbt Cloud; `docs/conventions.md` 30). An enforced contract makes dbt check, at build, that the model's columns match the YAML by name, data type and number; it is supported for table and incremental models (incremental with `on_schema_change` set to `append_new_columns` or `fail`; `core_credential_v2` uses `append_new_columns`). Constraints: DuckDB enforces `not_null` and `check`; Databricks enforces `not_null` and `check`, and records primary and foreign keys as information only (`docs/decisions.md` 29; `macros/duckdb_constraints.sql`). Hence the tests on keys. |
-| 3 | The credential's YAML lists every column, its type and what can't be empty; grain one row per credential. | `models/core/_core__models.yml` 170-187 (trimmed). Grain has no built-in field in dbt; the project keeps it in `meta.grain` and tests it as a key. `constraints: [{type: not_null}]` is enforced by the database; `data_tests: [not_null]` checks the data after the build. |
+| 3 | The credential's YAML lists every column, its type and what can't be empty; grain one row per credential. | `models/core/_core__models.yml` 170-187 and 232-234 (trimmed). Grain has no built-in field in dbt; the project keeps it in `meta.grain` and tests it as a key. `constraints: [{type: not_null}]` is enforced by the database; `data_tests: [not_null]` checks the data after the build. |
 | 3 | Let the query and the contract disagree on a column's type, and the build stops before the table is made. | Run 30 September 2026 on a scratch copy of the project with `credit_points` declared `string` in the YAML (the contract side; the query still makes an integer), as the picture shows: `dbt build --select +core_credential` gave "This model has an enforced contract that failed. Please ensure the name, data_type, and number of columns in your contract match the columns in your model's definition." with `credit_points | INTEGER | VARCHAR | data type mismatch`, raised in `assert_columns_equivalent` before `create_table_as`. `definition_type` comes from the query and `contract_type` from the YAML; changing the query instead (say, casting `credit_points` to text) would change the other side and stop the build the same way. Not committed. |
 | 3 | Noor approves it. | `docs/process.md` 11; `docs/decisions.md` 19 (every core model versioned, Noor). |
 | 4 | Each carries the grain it declared: Planning's as it was on census day, the wallet's as it is now. | `models/marts/planning/_planning__models.yml` 12; `models/marts/wallet/_wallet__models.yml` 10. The grains were declared, and as-was against as-is explained, in the previous film; this one only recalls them in words and shows the two grain lines on screen. |
@@ -321,7 +325,7 @@ Four stops, one question each.
 |---|---|---|
 | 2 | `docs/gaps.md` | 6, 8 (the header and gap 1, rendered as a table; the rest of the decision trimmed with …) |
 | 3 | `dbt_project.yml` | 40-46 |
-| 3 | `models/core/_core__models.yml` | 170, 176-179, 182-183, 185-187 (each left-out run of lines marked …) |
+| 3 | `models/core/_core__models.yml` | 170, 176-179, 182-183, 185-187, 232, 234 (each left-out run of lines marked …) |
 | 3 | dbt's message (scratch copy) | the contract error, trimmed to three lines |
 | 4 | `models/marts/planning/_planning__models.yml` | 12 (grain); 107-112, 116-121 (trimmed with …) |
 | 4 | `models/marts/wallet/_wallet__models.yml` | 10 (grain); 140-152 (named, not shown in full) |

@@ -76,13 +76,13 @@ def bed(sid, chords, a=None, b=None, g=0.04, bassg=0.02):
 EB = [39, 46, 51, 55, 58]; EBADD9 = [39, 46, 53, 55, 58]; AB = [44, 51, 55, 60]; ABM7 = [44, 51, 55, 58, 60]; BB = [46, 53, 58, 62]
 CM = [36, 43, 48, 51, 55]; FM7 = [41, 48, 51, 56]; GSUS = [43, 50, 55, 60]; G7 = [43, 50, 53, 59]; CM9 = [36, 43, 50, 51, 55]; EBSUS = [39, 46, 51, 56, 58]
 
-# 1. Look-alikes: C minor strings and one bassoon line for Paris; a click as the calipers close on each measure; the drawer slides;
+# 1. Look-alikes: C minor strings and one bassoon line for Paris; a click as the calipers close on the head and the finger, and as the tape's end lands; the drawer slides;
 #    paper for each Leavenworth card; low felt notes as the fingerprints draw; the title on the vibraphone, in E-flat
 bed('west', [CM, ABM7, FM7, G7], 0, cq('west', 'breath'))
 for k, (m, d) in enumerate([(48, 2.6), (51, 2.2), (50, 2.0), (46, 3.4)]):
     bassoon(m, S0('west') + 0.8 + sum(x[1] for x in [(48, 2.6), (51, 2.2), (50, 2.0), (46, 3.4)][:k]), d + 0.3, 0.032)
 click(W('west', 'measure', 'Bertillon', -0.05), 0.035, -0.2)
-click(W('west', 'measure', 'repeat', 0.4), 0.03, 0.1); paper(W('west', 'measure', 'repeat', -0.1), 0.025, -0.3, 0.9)
+click(W('west', 'measure', 'repeat', 0.8), 0.03, 0.1); paper(W('west', 'measure', 'repeat', -0.1), 0.025, -0.3, 0.9)
 click(W('west', 'measure', 'measuring', -0.05), 0.035, 0.3)
 slide(G('west', 'card', -0.6), 0.035, 0.4)
 knock(W('west', 'card', 'filed', 0.9), 0.03, 0.4)

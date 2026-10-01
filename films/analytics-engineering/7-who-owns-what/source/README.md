@@ -46,3 +46,7 @@ The video adds a finishing pass that stills and the site's player don't show (`.
 ## What the film shows, and where it comes from
 
 Every code card shows real lines from [`../../project/`](../../project/) and carries the label `runs on dbt Core · DuckDB`; the cards of chapter 6 and the README card of chapter 7 come from `examples/planning/`, which only dbt Cloud runs, and carry `sketch · dbt Cloud only` instead. dbt's refusal in chapter 4 is its real message, from a scratch copy of the project. The rigour sheet in [the script](../script.md) lists each file and line.
+
+## Labs, scenarios and Pause and think
+
+The labs and scenarios are `site/assets/who-owns-what/learn.en.js` and `learn.es.js`, drawn by *From words to data*'s engine (`site/assets/from-words-to-data/learn.js`); their pictures are this film's own, the `wo_` entries added to `LV` at the end of `src/plan.js`, which take their words from each language's `vis`. "Pause and think" is `think.en.js` and `think.es.js`: it stops after `domains`, `access`, `grants` and `shared`. The page texts are in `../site.json`. A change to `src/plan.js` changes the labs' pictures too, so build and publish again after one.

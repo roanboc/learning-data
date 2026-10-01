@@ -1,0 +1,167 @@
+1
+00:00:01,400 --> 00:00:06,312
+Under a law of 1300, English silver had to meet one standard: sterling.
+
+2
+00:00:07,012 --> 00:00:10,766
+No piece could leave the workshop until it was tested, then marked.
+
+3
+00:00:11,466 --> 00:00:16,715
+From 1478, the testing was done at Goldsmiths' Hall: the hall in hallmark.
+
+4
+00:00:18,015 --> 00:00:21,768
+Buyers still trust the mark, without testing the silver themselves.
+
+5
+00:00:23,068 --> 00:00:28,518
+A core model makes the same promise. Its tests are the assay, and they come before the mark.
+
+6
+00:00:34,818 --> 00:00:36,432
+Step four: name the gaps.
+
+7
+00:00:37,932 --> 00:00:43,975
+Jun's gap register sets what the business expects beside what the sources hold, one line per gap.
+
+8
+00:00:45,675 --> 00:00:51,786
+The business expects a revoked credential to be known as revoked. The learning platform just deletes it.
+
+9
+00:00:53,486 --> 00:01:00,570
+Every gap gets one of three decisions. Fix it at the source. Write a rule in the model. Or accept it, and write it down.
+
+10
+00:01:02,470 --> 00:01:10,353
+This one gets two. Anything the platform stops showing is revoked from that day. And the platform is asked for a proper flag.
+
+11
+00:01:12,053 --> 00:01:18,076
+Jordan's microcredential vanished on the twelfth of August. From that day, it reads as revoked.
+
+12
+00:01:19,776 --> 00:01:23,408
+Ten gaps, ten decisions. Mei approves the ones about meaning.
+
+13
+00:01:26,708 --> 00:01:32,306
+Then the contracts. The core is what everything else builds on, so it makes the strongest promise.
+
+14
+00:01:34,006 --> 00:01:40,722
+The whole core folder gets two settings. Public: other projects may build on it. And a contract, enforced.
+
+15
+00:01:42,622 --> 00:01:49,898
+The credential's YAML lists every column, its type, and what can't be empty. Its grain: one row per credential.
+
+16
+00:01:51,798 --> 00:01:57,687
+Let the query and the contract disagree on a column's type, and the build stops before the table is made.
+
+17
+00:01:59,687 --> 00:02:04,664
+The contract is checked at every build, not read once and forgotten. Noor approves it.
+
+18
+00:02:07,764 --> 00:02:11,352
+Each consumer gets a contract of its own, on the same core.
+
+19
+00:02:13,052 --> 00:02:18,986
+Each carries the grain it declared: Planning's as it was on census day, the wallet's as it is now.
+
+20
+00:02:20,786 --> 00:02:25,084
+Both are enforced, and protected: only this project can build on them.
+
+21
+00:02:26,984 --> 00:02:32,745
+And each declares an exposure: the dashboard or the app that reads it, with an owner and an email.
+
+22
+00:02:34,745 --> 00:02:40,894
+Change the credential in the core, and the lineage finds one exposure: the wallet app. That's who to tell.
+
+23
+00:02:42,894 --> 00:02:45,716
+Planning and the wallet team each approve their own.
+
+24
+00:02:49,016 --> 00:02:53,672
+Step five: the tests, before the code they check. They say what done looks like.
+
+25
+00:02:55,772 --> 00:03:00,885
+Every key, unique and never empty. Every relationship, pointing at something real.
+
+26
+00:03:01,985 --> 00:03:07,514
+Every closed list, from agreed values. Every history, with versions that never overlap.
+
+27
+00:03:09,214 --> 00:03:13,643
+And one number people already trust: the census report's twelve learners.
+
+28
+00:03:15,143 --> 00:03:20,499
+A test compares the model's count with the report, and fails on any faculty that differs.
+
+29
+00:03:22,099 --> 00:03:26,860
+The agent drafts the tests from the contracts and the register. Jun reviews them.
+
+30
+00:03:29,960 --> 00:03:38,288
+Data tests check the tables. Some logic needs checking on its own, with a few rows made up for the purpose. That's a unit test.
+
+31
+00:03:40,388 --> 00:03:52,343
+The credit rule, in two made-up rows. A passed unit of study counts from the tenth of January. A microcredential counts from the second of February, until it's revoked on the twelfth of August.
+
+32
+00:03:54,543 --> 00:04:00,280
+Credit changes twice, so the answer is three versions: fifteen, twenty, then fifteen again.
+
+33
+00:04:02,380 --> 00:04:08,255
+The microcredential's dates are Jordan's. The rule is proved before a single real row arrives.
+
+34
+00:04:11,855 --> 00:04:17,092
+Not every failure should stop everything. A test can warn, or it can stop the build.
+
+35
+00:04:18,392 --> 00:04:24,186
+One short-course enrolment has no email: a walk-in, whose certificate can't reach anyone.
+
+36
+00:04:25,686 --> 00:04:34,030
+The learning team agreed: warn when there's any, stop when there are more than five. One or two a term are expected. More means something broke.
+
+37
+00:04:36,030 --> 00:04:38,707
+Today, the build warns once, and carries on.
+
+38
+00:04:40,407 --> 00:04:45,038
+Freshness works the same way: warn when a source is a day late, fail at three.
+
+39
+00:04:46,838 --> 00:04:50,664
+Who sets the level? The data's owner, with the reason written down.
+
+40
+00:04:53,964 --> 00:05:00,594
+111 data tests. Four unit tests. Every promise written down, with its proof beside it.
+
+41
+00:05:01,894 --> 00:05:07,976
+Each is written before the code it checks, so until that code is built, it can't pass. That's on purpose.
+
+42
+00:05:09,276 --> 00:05:12,771
+Next, the least code that turns them green, in the right place.

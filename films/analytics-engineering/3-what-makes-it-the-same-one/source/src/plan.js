@@ -174,3 +174,95 @@ function sm_print(ctx,x,y,r,kind,p,a){if(a<=0.01||p<=0)return;withA(ctx,a,()=>{c
     ctx.stroke();}
   for(let k=0;k<6;k++){const q=clamp(p*8-k-2,0,1);if(q<=0)continue;ctx.lineWidth=2.2;ctx.beginPath();const yy=r*0.55+k*r*0.09;ctx.moveTo(-r,yy+r*0.1);ctx.quadraticCurveTo(0,yy-r*0.25,lerp(-r,r,q),yy+r*0.1);ctx.stroke();}
   ctx.restore();});}
+
+/* ---------- the labs' and scenarios' pictures ----------
+   Added to the film bundle's LV registry (Keeping it true's true.js defines it; these keys are prefixed sm_ so they never clash).
+   assets/from-words-to-data/learn.js calls each as f(ctx, w, h, state, L): a lab passes its state (compose: {pick}; sort: {pick, checked};
+   pick: {pick}; steps: {step}), a scenario passes {q}. Any words come from L.vis (the page's learn.en.js or learn.es.js), so each language
+   draws its own; keys, file names and hashes are the same in both. */
+function sm_fit(c,w,h,bw,bh){const k=Math.min(w/bw,h/bh);c.translate((w-bw*k)/2,(h-bh*k)/2);c.scale(k,k);}
+function sm_lab(L,id){return (L.labs||[]).find(x=>x.id===id)||{w:{}};}
+function sm_short(hx){return hx?hx.slice(0,8)+"…"+hx.slice(-5):"null";}
+// the seven keys of Break the hash: the parts typed, then [string, hash] the raw (or naive) way and the macro's way, and how each reads
+const SM_E="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",SM_N1="eb1b4c34dd3372e1523a56b490f0620a99f309f43073320490d5ae54636e2534";
+const SM_HSTEPS=[
+  {parts:["SIS|S-20417"],raw:["SIS|S-20417",SM_H0],mac:["SIS|S-20417",SM_H0],ra:"same",ma:"same"},
+  {parts:["SIS|S-20417·"],raw:["SIS|S-20417·",SM_H1],mac:["SIS|S-20417",SM_H0],ra:"changed",ma:"same"},
+  {parts:["sis|s-20417"],raw:["sis|s-20417","8c73518cf662e82e5a12c6951dc494924bce32098a7b9ef3fc3023b836e2447e"],mac:["SIS|S-20417",SM_H0],ra:"changed",ma:"same"},
+  {parts:["S-20417","GCDA"],raw:["S-20417GCDA","092fe84979faa2b91b3d24d33c5457ec5881724758a9998ec988ba68eb4bc111"],mac:["S-20417|GCDA","6461c940bdf522268a1f7660374d1a74b4d6cb33b63c2fbc8fa5b0ca8560ca9b"]},
+  {parts:["S-20417","··"],raw:["S-20417",SM_N1],mac:["S-20417|<null>","2be6f4e3ac839cbad84df8bcdb4763bebaf0ad201362bfa66de72115c8665e83"]},
+  {parts:["··","S-20417"],raw:["S-20417",SM_N1],mac:["<null>|S-20417","f30f0e2a439b5fdf47437d7dfe4065cd808e41022420195781c86c90733aaf26"],ra:"collide",ma:"distinct"},
+  {parts:["··","··"],raw:["''",SM_E],mac:["null",null],ra:"collide",ma:"noHash"}];
+// Same learner?: the four pairs (left key, its source; right key), and which pairs each way of matching links
+const SM_PAIRS=[["SC|aisha.k@mail.example",2,"SIS|S-20417"],["LMS|u-88213",1,"SIS|S-20417"],["SC|nguyen.family@mail.example",2,"SIS|S-20436"],["LMS|u-88231",1,"SIS|S-20417"]];
+const SM_LINK={typed:[0,0,0,0],email:[1,1,1,0],rules:[1,1,0,1],decide:[1,1,1,0]};
+// Rules in order: the four keys run down the user's stack; fits lists the rules (by item) each key fits, and what each landing means
+const SM_RUN=[["SIS|S-20417",0,[1,4]],["LMS|u-88213",1,[2,4]],["SC|aisha.k@mail.example",2,[3,4]],["LMS|u-88231",1,[0,2,4]]];
+function sm_verdict(c,x,y,v){if(v===1||v===true)tick_(c,x,y,40,GOOD,1);else if(v===0.5){c.fillStyle=rgba(SM_AMBER,1);c.beginPath();c.arc(x,y,9,0,TAU);c.fill();}else cross_(c,x,y,40,BAD,1);}
+Object.assign(LV,{
+  // claim and evidence: each claim, and the evidence picked for it (a query and its result, or a guess), teal when it proves the claim
+  sm_l_claims:(c,w,h,st,L)=>{const V=L.vis,S=sm_lab(L,"claims").w.slots||[];c.save();sm_fit(c,w,h,900,530);
+    V.claims.forEach((cl,i)=>{const y=6+i*104,p=st.pick?st.pick[i]:null,o=p==null?null:S[i].opts[p];
+      T(c,V.claim+" · "+cl,20,y+24,{w:700,size:22,color:rgba(INK,1)});
+      if(!o){c.save();c.setLineDash([8,8]);c.strokeStyle=rgba(SOFT,0.6);c.lineWidth=2;rr(c,20,y+36,860,60,12);c.stroke();c.restore();T(c,V.query+" · "+V.result,450,y+73,{w:600,size:20,align:"center",color:rgba(SOFT,0.8)});return;}
+      const col=o.ok?[111,214,200]:BAD,gs=o.t.indexOf("→")<0;glass(c,20,y+36,860,60,12,col,{glow:10,ea:0.8,fill:"rgba(6,10,20,0.95)"});
+      if(gs){T(c,V.noQuery,40,y+74,{w:600,size:21,color:rgba(SOFT,1)});tag(c,866-tw(c,V.guess,18,700)-26,y+66,V.guess,SOFT,{size:18});}
+      else{const[qn,rs]=o.t.split(" → ");T(c,qn,40,y+74,{f:"mono",w:500,size:19,color:rgba(col,1)});T(c,"→ "+rs,46+tw(c,qn,19,500,"mono"),y+74,{f:"mono",w:500,size:19,color:rgba(INK,0.95)});}});c.restore();},
+  // rules in order: the stack in the user's order, and where each of four keys lands
+  sm_l_rules:(c,w,h,st,L)=>{const V=L.vis,pk=st.pick||{},ord=[0,1,2,3,4].filter(i=>pk[i]!=null).sort((a,b)=>(+pk[a])-(+pk[b])||a-b);c.save();sm_fit(c,w,h,1200,550);
+    [0,1,2,3,4].forEach(r=>{const y=20+r*92,i=ord[r];if(i==null){sm_rule(c,30,y,560,"·",V.unplaced,{dash:1,h:64});return;}
+      const ok=st.checked?(pk[i]===sm_lab(L,"rules").w.items[i].b):null;sm_rule(c,30,y,560,pk[i],V.rules[i],{h:64,on:ok===false?0.9:0.6,col:ok===false?BAD:i===0?TRUST:LAYER4[1][1]});});
+    SM_RUN.forEach(([k,s,fits],j)=>{const y=60+j*124,col=SM_SRC[s],land=ord.find(i=>fits.includes(i));sm_key(c,640,y,k,col,{size:20});
+      let txt=V.unplaced,good=null;if(land!=null){const own=land===4||land===0;if(j<3){good=!own;txt=own?V.ownLearner:"SIS|S-20417";}else{good=land!==2;txt=land===2?V.wrongMerge:V.ownLearner;}}
+      T(c,V.lands+" "+(land==null?"—":pk[land])+":",660,y+50,{w:600,size:20,color:rgba(SOFT,1)});T(c,txt,660+tw(c,V.lands+" 0: ",20,600)+8,y+50,{w:700,size:20,color:rgba(good==null?SOFT:good?GOOD:BAD,1)});});c.restore();},
+  // same learner?: four pairs, linked or not by the way of matching chosen, each with its verdict
+  sm_l_same:(c,w,h,st,L)=>{const V=L.vis,k=st.pick||"typed",res=(sm_lab(L,"same").w.res||{})[k]||[],ln=SM_LINK[k]||[];c.save();sm_fit(c,w,h,1200,525);
+    SM_PAIRS.forEach(([a,s,b],i)=>{const y=70+i*122;T(c,V.pairs[i],30,y-34,{w:600,size:19,color:rgba(SOFT,1)});const wa=sm_key(c,30,y,a,SM_SRC[s],{size:20});
+      const x0=30+wa+12,x1=760;if(ln[i]){c.strokeStyle=rgba(i===3?BAD:GOOD,0.9);c.lineWidth=3;if(i===3)c.setLineDash([10,8]);c.beginPath();c.moveTo(x0,y);c.lineTo(x1-12,y);c.stroke();c.setLineDash([]);}
+      else{c.strokeStyle=rgba(SOFT,0.4);c.lineWidth=2;c.setLineDash([4,10]);c.beginPath();c.moveTo(x0,y);c.lineTo(x1-12,y);c.stroke();c.setLineDash([]);}
+      if(k==="decide"&&(i===2||i===3))tag(c,(x0+x1)/2,y-26,i===2?"D-001":"D-003",TRUST,{align:"center",size:18});
+      sm_key(c,x1,y,b,SM_SRC[0],{size:20});sm_verdict(c,1150,y,res[i]);});c.restore();},
+  // break the hash: the parts typed; the raw (or naive) hash beside the macro's, each saying what happened
+  sm_l_hash:(c,w,h,st,L)=>{const V=L.vis,S=SM_HSTEPS[st.step||0],two=S.parts.length>1;c.save();sm_fit(c,w,h,1200,470);
+    T(c,V.parts+":",30,62,{w:600,size:20,color:rgba(SOFT,1)});let x=30+tw(c,V.parts+":",20,600)+16;S.parts.forEach(p=>{x+=sm_key(c,x,54,p,SM_SRC[0],{size:22})+14;});
+    [[two?V.naive:V.raw,S.raw,S.ra,30],[V.macro,S.mac,S.ma,612]].forEach(([lab,[s,hx],v,X])=>{const col=v==="same"||v==="distinct"||v==="noHash"?GOOD:v?BAD:[170,205,255];
+      glass(c,X,110,558,340,16,col,{glow:10,ea:0.7,fill:"rgba(6,10,20,0.95)"});T(c,lab,X+22,150,{w:700,size:20,color:rgba(col,1)});
+      T(c,s.replace(/·/g,"␣"),X+22,206,{f:"mono",w:500,size:24,color:rgba(INK,1)});
+      if(hx)sm_hex(c,X+22,272,hx,100,0,{size:26,col:mix(INK,col,0.35)});
+      if(v)tag(c,X+279,402,V[v],col,{align:"center",size:20});});c.restore();},
+  // the scenarios
+  sm_q_ticket:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);tag(c,40,60,V.q.ticket,TRUST,{size:24});T(c,V.q.two,40,130,{w:700,size:30});
+    [["LMS|u-88213",250],["LMS|u-88231",450]].forEach(([k,y])=>{sm_key(c,60,y,k,SM_SRC[1],{size:30});arrowTo(c,380,y,760,350,SM_SRC[1],0.8,{head:16});});
+    sm_key(c,780,350,"SIS|S-20417",SM_SRC[0],{size:30});T(c,"?",990,250,{w:800,size:64,align:"center",color:rgba(TRUST,1)});c.restore();},
+  sm_q_email:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);sm_key(c,600,120,"…@mail.example",[200,210,230],{size:30,align:"center"});T(c,V.q.email,600,60,{w:700,size:28,align:"center",color:rgba(SOFT,1)});
+    arrowTo(c,560,150,280,380,SM_SRC[0],0.8,{head:16});ring(c,240,450,60,SM_SRC[0],1,4);T(c,V.q.students,240,560,{w:700,size:28,align:"center",color:rgba(SM_SRC[0],1)});
+    [800,1000].forEach(x=>{arrowTo(c,640,150,x,380,SM_SRC[1],0.8,{head:16});ring(c,x,450,60,SM_SRC[1],1,4);});T(c,V.q.accounts,900,560,{w:700,size:28,align:"center",color:rgba(SM_SRC[1],1)});c.restore();},
+  sm_q_agent:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);kt_agent(c,170,320,60,0,{});T(c,V.q.agent,170,440,{w:700,size:28,align:"center",color:rgba([111,214,200],1)});
+    c.save();c.globalAlpha*=0.55;glass(c,330,170,800,300,18,SOFT,{glow:6,ea:0.6,fill:"rgba(6,10,20,0.95)"});c.restore();
+    T(c,V.claim+":",360,230,{w:600,size:26,color:rgba(SOFT,1)});T(c,V.q.uniq,360,290,{f:"mono",w:500,size:30,color:rgba(INK,0.8)});
+    T(c,V.query+": —",360,350,{w:600,size:26,color:rgba(SOFT,1)});T(c,V.result+": —",360,400,{w:600,size:26,color:rgba(SOFT,1)});tag(c,1040,230,V.guess,SOFT,{align:"center",size:24});
+    T(c,V.q.noq,730,540,{w:700,size:28,align:"center",color:rgba(SM_AMBER,1)});c.restore();},
+  sm_q_morning:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);T(c,V.q.vendor+":",60,70,{w:600,size:26,color:rgba(SOFT,1)});sm_key(c,60,130,"AISHA.K@MAIL.EXAMPLE",SM_SRC[2],{size:28});
+    [["SC|aisha.k@mail.example","0f45f571…b10f5",SOFT],["SC|AISHA.K@MAIL.EXAMPLE","deac2049…009b4",BAD]].forEach(([k,hx,col],i)=>{const y=270+i*110;
+      T(c,"sha256('"+k+"')",60,y,{f:"mono",w:500,size:26,color:rgba(INK,0.9)});T(c,"= "+hx,60,y+44,{f:"mono",w:500,size:26,color:rgba(col,1)});});
+    T(c,V.q.morning,600,590,{w:700,size:28,align:"center",color:rgba(BAD,1)});c.restore();},
+  sm_q_pr:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);tag(c,60,60,V.q.pr+" · "+V.q.drop,SM_AMBER,{size:24});
+    sm_file(c,60,110,1080,"models/core/_core__models.yml",["      - name: learner_key","        …","      - name: learner_bk","        …"],{size:26,lh:50,label:V.runs,lit:{2:1},litCol:BAD});
+    T(c,"learner_key: 0905e6e2…  ·  learner_bk: SIS|S-20417",600,560,{f:"mono",w:500,size:24,align:"center",color:rgba(INK,0.9)});c.restore();},
+  sm_q_wallet:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);glass(c,40,90,640,330,18,TRUST,{glow:12,ea:0.75,fill:"rgba(7,12,24,0.95)"});
+    T(c,V.q.wallet,70,145,{w:700,size:28,color:rgba(TRUST,1)});T(c,"6 "+V.q.creds,650,145,{w:800,size:28,align:"right",color:rgba(SM_AMBER,1)});
+    [TRUST,KIND,KIND,KIND,[180,150,255],SM_AMBER].forEach((col,i)=>{const x=70+i*100;glass(c,x,190,84,190,10,col,{glow:6,ea:0.8,fill:"rgba(10,16,30,0.96)"});c.fillStyle=rgba(i===5?KIND:col,0.85);rr(c,x+10,206,64,12,4);c.fill();
+      for(let r=0;r<4;r++){c.fillStyle=rgba(i===5?KIND:col,0.22);rr(c,x+10,240+r*24,64*(0.9-r*0.15),9,3);c.fill();}});
+    glass(c,740,90,420,330,18,GOOD,{glow:10,ea:0.6,fill:"rgba(6,10,20,0.95)"});T(c,V.q.green,770,145,{w:700,size:26,color:rgba(GOOD,1)});
+    for(let i=0;i<5;i++){c.fillStyle=rgba(INK,0.25);rr(c,770,190+i*44,260,12,4);c.fill();tick_(c,1110,196+i*44,30,GOOD,1);}
+    T(c,"?",600,540,{w:800,size:60,align:"center",color:rgba(SM_AMBER,1)});c.restore();},
+  sm_q_reopen:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);T(c,V.q.reopen,60,80,{w:700,size:30});
+    sm_key(c,60,170,"LMS|u-88213",SM_SRC[1],{size:28});sm_key(c,60,290,"LMS|u-…",SM_SRC[1],{size:28,hi:1});T(c,V.q.newId,60,360,{w:600,size:24,color:rgba(SOFT,1)});
+    [[3,V.rules[2]],[4,V.rules[3]],[9,V.rules[4]]].forEach(([p,t],i)=>sm_rule(c,560,140+i*96,600,p,t,{h:70,on:i===0?0.6:0}));
+    arrowTo(c,330,290,550,175,SM_SRC[1],0.8,{head:14});c.restore();},
+  sm_q_code:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);
+    sm_file(c,40,40,1120,"seeds/status_map.csv",["key_set,source_code,source_label,canonical_status","…","SC,1,Active customer,studying","SC,0,Inactive customer,inactive"],{size:26,lh:50,label:V.runs,lit:{3:1}});
+    c.save();c.setLineDash([10,8]);c.strokeStyle=rgba(SM_AMBER,0.9);c.lineWidth=2.5;rr(c,40,390,640,80,14);c.stroke();c.restore();
+    T(c,"+ SC,INACTIVE,…,inactive",64,442,{f:"mono",w:500,size:26,color:rgba(SM_AMBER,1)});tag(c,820,430,V.q.pr,SM_AMBER,{align:"center",size:24});
+    tag(c,600,560,V.q.owner,TRUST,{align:"center",size:26});c.restore();}
+});

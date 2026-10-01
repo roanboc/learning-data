@@ -1,0 +1,31 @@
+{
+  "kicker": "Domains and ownership",
+  "kicker_es": "Dominios y propiedad",
+  "title_es": "Quién es dueño de qué",
+  "h1": "Who owns what: owners publish, consumers build on what's published",
+  "h1_es": "Quién es dueño de qué: los dueños publican, los consumidores construyen sobre lo publicado",
+  "lead": "In 1858, South Australia made the government's register the title: anyone could rely on it, and only its owner could change it. The credential's core models work the same way. Each fact's meaning has an owner, dbt's access says who can build on what, grants say who can read, and the keys stay shared.",
+  "lead_es": "En 1858, Australia del Sur hizo del registro del gobierno el título: cualquiera podía confiar en él, y solo su dueño podía cambiarlo. Los modelos núcleo de la credencial funcionan igual. El significado de cada hecho tiene dueño, el acceso de dbt dice quién puede construir sobre qué, los permisos dicen quién puede leer, y las claves siguen compartidas.",
+  "description": "A film for analytics engineers about ownership in a dbt project: domains that own the meaning of their facts, a core model published as a product, dbt's private, protected and public access, grants for reading, references across projects pinned to a version, the keys and hash that stay shared, and why groups come before projects.",
+  "description_es": "Una película para analytics engineers sobre la propiedad en un proyecto de dbt: dominios dueños del significado de sus hechos, un modelo núcleo publicado como producto, el acceso privado, protegido y público de dbt, los permisos para leer, las referencias entre proyectos fijadas a una versión, las claves y el hash que siguen compartidos, y por qué los grupos van antes que los proyectos.",
+  "card": "Each fact's meaning has an owner. Owners publish a public, versioned core; consumers build on it, never on each other's marts.",
+  "card_es": "El significado de cada hecho tiene dueño. Los dueños publican un núcleo público y versionado; los consumidores construyen sobre él, nunca sobre los marts de otros.",
+  "chapters_es": {
+    "register": "El registro es el título",
+    "domains": "Dominios",
+    "products": "Lo que publica un dominio",
+    "access": "Privado, protegido, público",
+    "grants": "Quién puede leer",
+    "across": "Entre proyectos",
+    "shared": "Lo que sigue compartido",
+    "split": "Primero grupos"
+  },
+  "next_h": "You've seen who owns what. Now decide who can build on what.",
+  "next_h_es": "Viste quién es dueño de qué. Ahora decide quién puede construir sobre qué.",
+  "labs_h1": "Draw the lines of ownership",
+  "labs_h1_es": "Traza las líneas de la propiedad",
+  "labs_lead": "Four labs, one idea each. Set the access of eight models, sort what each domain owns, tell a ref from a read, and watch what happens when two projects hash the same student ID two ways.",
+  "labs_lead_es": "Cuatro labs, una idea cada uno. Fija el acceso de ocho modelos, reparte entre los dominios lo que es de cada uno, distingue un ref de una lectura, y mira qué pasa cuando dos proyectos aplican el hash al mismo ID de estudiante de dos formas.",
+  "quiz_lead": "Eight situations an analytics engineer really faces: a mart copied from another team, a peek at a private step, a private table someone can read, two ways to hash an email, five projects on day one, a public column renamed in place, a team moving out, and a new version arriving. Decide what you'd do; each answer explains why.",
+  "quiz_lead_es": "Ocho situaciones que un analytics engineer enfrenta de verdad: un mart copiado de otro equipo, una mirada a un paso privado, una tabla privada que alguien puede leer, dos formas de aplicar el hash a un email, cinco proyectos el primer día, una columna pública renombrada en el lugar, un equipo que se muda, y una versión nueva que llega. Decide qué harías; cada respuesta explica por qué."
+}

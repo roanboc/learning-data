@@ -1,0 +1,115 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:11.019
+In 1766, Nevil Maskelyne, the Astronomer Royal, published the first Nautical Almanac: tables for finding longitude at sea.
+
+00:00:12.319 --> 00:00:18.967
+He didn't compute them himself. He posted instructions to computers: people working at home, across England.
+
+00:00:20.267 --> 00:00:28.380
+Every month was computed twice, by two computers far apart. A comparer checked one against the other, before anything was printed.
+
+00:00:29.880 --> 00:00:36.977
+Jun has had a computer on the team all along: an AI agent, and a fast one. The checking has to be built in.
+
+00:00:43.277 --> 00:00:48.608
+The agent can read the whole project, run dbt, and draft changes on a branch.
+
+00:00:49.908 --> 00:00:55.535
+Before any of that, it reads one page, written for agents. What it may do, and what it must not.
+
+00:00:57.235 --> 00:01:06.418
+Beside it, five skills, one file each: draft the conceptual model, profile a source, draft a model, reconcile and diff, review the metadata.
+
+00:01:07.918 --> 00:01:12.501
+And the process: for each of the ten steps, the agent's part, and who approves it.
+
+00:01:14.001 --> 00:01:21.188
+Files in the project, not a long prompt. Versioned, reviewed, and read the same way by people and by agents.
+
+00:01:24.888 --> 00:01:29.860
+On Databricks, the agent works as its own service principal, never as a person.
+
+00:01:31.560 --> 00:01:38.389
+It reads the sources, and the core and the marts in production. It writes only to its own development schemas.
+
+00:01:39.889 --> 00:01:46.287
+It works with counts and small samples. Names, emails and student IDs stay in the database.
+
+00:01:47.787 --> 00:01:50.915
+Whatever it gets wrong stays where nobody else reads it.
+
+00:01:53.615 --> 00:01:58.791
+Every claim the agent makes about the data comes with the query that shows it, and the result.
+
+00:02:00.491 --> 00:02:08.159
+You've seen its claims already: accounts with no student ID, a shared family email, a withdrawal recorded a week late.
+
+00:02:09.459 --> 00:02:14.563
+Now that habit is a rule, written in the agent's page, with an example to copy.
+
+00:02:16.063 --> 00:02:23.266
+Where rules can't decide, like that shared email, the agent doesn't guess. It asks Mei, and she records a decision.
+
+00:02:24.766 --> 00:02:27.992
+A claim that arrives without its query goes back, unread.
+
+00:02:31.492 --> 00:02:39.341
+Then the agent tidies the learner's timeline. To keep it simple, it dates every version the same way: by when it was recorded.
+
+00:02:40.841 --> 00:02:47.156
+One test fails: the census reconciliation. Business counts four learners. The report says three.
+
+00:02:48.856 --> 00:02:54.491
+The withdrawal recorded seven days late now looks like a learner still studying on census day.
+
+00:02:55.991 --> 00:02:59.559
+The agent's draft sets the test to warn. The build passes.
+
+00:03:01.259 --> 00:03:07.399
+Jun's review of the draft stops it. The rule is written down: never weaken a test to make it pass.
+
+00:03:09.499 --> 00:03:15.330
+A failing test is news. Report it, with its failing rows, and let a person decide what's wrong.
+
+00:03:16.830 --> 00:03:21.800
+The fix puts back the date each change took effect. Business: three. Green.
+
+00:03:25.100 --> 00:03:27.190
+Before anyone signs off, two checks.
+
+00:03:28.490 --> 00:03:35.816
+Reconcile: every faculty against the census report. Two, three, five and two. The difference is zero, everywhere.
+
+00:03:37.316 --> 00:03:44.589
+Diff: build main, then the branch from scratch, and compare them key by key. Counts only; no personal data leaves.
+
+00:03:46.089 --> 00:03:51.523
+From scratch, because the credential table is incremental, and would hide a change in logic.
+
+00:03:53.023 --> 00:04:01.371
+In Planning's mart, the shortcut changed one learner's row. In the core, fifty-five versions moved. With the fix, the diff is empty.
+
+00:04:04.871 --> 00:04:11.330
+The agent marks its pull request ready for review: what it changed, why, what it checked, and the evidence.
+
+00:04:13.030 --> 00:04:24.527
+CI, the checks that run on every pull request, builds the project on DuckDB. It checks that the generated docs are current, and that the metric still gives the census number.
+
+00:04:26.027 --> 00:04:34.455
+It parses the project for Databricks too. On dbt Cloud, a CI job builds only what changed, and what depends on it.
+
+00:04:35.955 --> 00:04:41.245
+Then people. Jun approves the code. Noor signs off the model, and Planning its number.
+
+00:04:42.945 --> 00:04:48.588
+The agent never merges or approves its own work. The agent recommends; people approve.
+
+00:04:52.288 --> 00:04:54.324
+It's merged, tested and signed off.
+
+00:04:55.024 --> 00:05:01.128
+Then the agent reviews the metadata, in the project and beyond it, and finds something no test checks.
+
+00:05:02.428 --> 00:05:07.155
+The definition of an award now lives in four places. And three of them are wrong.

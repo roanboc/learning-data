@@ -1,14 +1,14 @@
 # In the weeds of data crafting · Start from a question: script
 
-*The script of the second film of In the weeds of data crafting, a technical series for analytics engineers, as planned: about 4:50 (target 4 to 6 minutes), in eight chapters, in English, 30 September 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The timings are estimates from the word count (613 words, at the pace of the opening film) until the voice is recorded; the pacing report replaces them. Takes step 1 of Jun's ten: start from a question.*
+*The script of Start from a question, the film after A model is not a transformation in the series In the weeds of data crafting, a technical series for analytics engineers, as planned: about 4:45 (target 4 to 6 minutes), in eight chapters, in English, 30 September 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The timings are estimates from the word count (616 words, at the pace of the opening film) until the voice is recorded; the pacing report replaces them. Takes step 1 of Jun's ten: start from a question.*
 
 ## The promise
 
-A practitioner follows every line, and a data architect agrees with it. A canonical model has no edge until a question gives it one. Start from a question with a decision behind it; model only the entities it touches; give each its business key and the person who owns its meaning, before opening a single source; combine two candidates into one entity when they share identity and lifecycle, and split them when they don't. An agent can draft all of it; the owner approves the meaning. **Model only what the question touches, and write down who owns each meaning first.**
+A practitioner follows every line, and a data architect agrees with it. A canonical model has no edge until a question gives it one. Start from a question with a decision behind it; model only the entities it touches; give each its business key and the person who owns its meaning, before opening a single source; combine two candidates into one entity when they share identity and lifecycle, and split them when they don't. An agent can draft all of it; the owner approves the meaning. **Model only what the question touches; name who owns each meaning first.**
 
 ## The story in one paragraph
 
-In the late summer of 1854, cholera killed hundreds of people in a few streets of Soho. John Snow asked one question, where did the dead get their water, and marked each death at its address; the deaths gathered around one pump. His map left out almost everything about London. Jun's model starts the same way, with one question from Planning: how many learners are within 15 credit points of a graduate certificate, by faculty, as at census date? Behind it is a decision (how many places to offer in each faculty's final units next semester) and a number to reach: the census report's twelve. Everything on screen is real, and runs on dbt Core with DuckDB; the university runs the same project on Databricks with dbt Cloud. From a glossary of everything the university does, the question lights four things: learner, credential, award, and credit towards an award. Each is written once in YAML, with a hand-drawn diagram beside it. Each gets a business key qualified by the system it comes from, and an owner: Mei for learner, credential and award, the learning team for microcredentials and badges. A microcredential shares a credential's identity and lifecycle, so it becomes a kind of credential; a certificate of attendance is turned away. An agent drafts the lot from a skill in the project; Mei adds the clause the draft missed, and approves. Four things, two owners, one question. Now the sources, where Aisha is three.
+In 1854, cholera killed hundreds of people in a few streets of Soho. John Snow asked one question, where did the dead get their water, and marked each death at its address; the deaths gathered around one pump. His map showed only what the question needed. Jun's model starts the same way, with one question from Planning: how many learners are within 15 credit points of a graduate certificate, by faculty, as at census date? Behind it is a decision (how many places to offer in each faculty's final units next semester) and a number to reach: the census report's twelve. A second consumer, the learner's wallet app, will read the same facts as they are today. The code and the data on screen are real, and run on dbt Core with DuckDB; the university runs the same project on Databricks with dbt Cloud. From a glossary of everything the university does, the question lights four things: learner, credential, award, and credit towards an award. Each is written once in YAML, with a hand-drawn diagram beside it. Each gets a business key qualified by the system it comes from, and an owner: Mei for learner, credential and award, the learning team for microcredentials and badges. A microcredential shares a credential's identity and lifecycle, so it becomes a kind of credential; a certificate of attendance is turned away. An agent drafts the lot from a skill in the project; Mei adds the clause the draft missed, and approves. Four things, two owners, one question. Now the sources, where Aisha is three.
 
 ## What each object stands for
 
@@ -20,7 +20,7 @@ In the late summer of 1854, cholera killed hundreds of people in a few streets o
 | Planning's consumer badge and a question card typing itself | The question that scopes the model |
 | A decision card under the question, and "census report · 12" | The decision behind the question, and the number to reach |
 | The label `runs on dbt Core · DuckDB`, then a dim `Databricks · dbt Cloud` beside it | The setup is real; the same project runs on the story's platform |
-| Two `profiles.yml` targets; two hash macros side by side | Only the connection and the hash function change |
+| Two `profiles.yml` targets; two hash macros side by side | Only the connection and the function that turns a key into a hash change |
 | A fan of glossary cards | The university's catalog and glossary: everything it does |
 | Four cards lighting, the rest dimming off the edge | The slice: what the question touches, and what stays out |
 | A YAML card beside a hand-drawn diagram | The conceptual model: written once for tools, drawn for people |
@@ -35,19 +35,19 @@ In the late summer of 1854, cholera killed hundreds of people in a few streets o
 
 ## Script
 
-### 1 · One question, one map · 0:00–0:38
+### 1 · One question, one map · 0:00–0:31
 
-**Narration.** In the late summer of 1854, cholera killed hundreds of people in a few streets of Soho, in London. John Snow, a doctor, asked one question: where did the dead get their water? He marked each death at its address, and the deaths gathered around one pump, on Broad Street. His map left out almost everything about London. It showed only what the question needed. Jun's model starts the same way: with one question, from Planning.
+**Narration.** In 1854, cholera killed hundreds of people in a few streets of Soho. John Snow asked one question: where did the dead get their water? He marked each death at its address, and the deaths gathered around one pump, on Broad Street. His map showed only what the question needed. Jun's model starts the same way: with one question, from Planning.
 
 **Picture.** The warm past, with "1854 · Soho, London" in the corner. A pen draws a few streets by hand on cream paper. Short black bars stack at addresses, one per death, each with a pen nib's scratch; they gather around a small pump marked on Broad Street. Two buildings near it are outlined and stay empty: "workhouse · its own well" and "brewery". The rest of the sheet stays blank paper; the camera pulls back to show how much of it is empty. On the bridge line, a question mark lifts off the map and drifts right, towards the present. Wordless breather: the title card over the map, with the series' mark: "IN THE WEEDS OF DATA CRAFTING", *Start from a question*, "scope is a question, not the whole university".
 
 **On screen.** 1854 · Soho, London · one question · where did the dead get their water? · Broad Street pump · workhouse · its own well · brewery · left out · *Start from a question* · scope is a question, not the whole university
 
-### 2 · The question · 0:38–1:30
+### 2 · The question · 0:31–1:24
 
-**Narration.** Step one: start from a question. How many learners are within 15 credit points of a graduate certificate, by faculty, as at census date? Behind it, a decision: how many places to offer in each faculty's final graduate certificate units next semester. The decision says what done looks like. The census report counted twelve. The model has to reach the same number. Everything on screen in these films is real. The code and the data run on dbt Core, with DuckDB, in the series' repository, so anyone can run them. The university's own platform is Databricks, with dbt Cloud, and the same project runs there too. Only the connection changes, and one function: the hash.
+**Narration.** Step one: start from a question. How many learners are within 15 credit points of a graduate certificate, by faculty, as at census date? Behind it, a decision: how many places to offer in each faculty's final graduate certificate units next semester. A second consumer, the learner's wallet app, will read the same facts, as they are today. The decision says what done looks like. The census report counted twelve. The model has to reach the same number. The code and the data on screen are real. They run on dbt Core, with DuckDB, in the series' repository, so anyone can run them. The university's own platform is Databricks, with dbt Cloud, and the same project runs there too. Only the connection changes, and one function: the one that turns a key into a hash.
 
-**Picture.** The loop of ten steps from the opening film, small, with station 1 lit. Planning's consumer badge. The question types itself on a card, and the words "learners", "within 15 credit points", "graduate certificate", "by faculty" and "as at census date" underline as they're read. A second card below: the decision. A small tag, "census report · 12", pins to the corner (the number, not the report). The question card turns into the project's YAML, `model/conceptual.yml`, with its label:
+**Picture.** The loop of ten steps from the opening film, small, with station 1 lit. Planning's consumer badge. The question types itself on a card, and the words "learners", "within 15 credit points", "graduate certificate", "by faculty" and "as at census date" underline as they're read. A second card below: the decision. On "wallet app", the wallet's consumer badge arrives, smaller, beside Planning's, and the card's `also_served` line will light when the YAML appears. A small tag, "census report · 12", pins to the corner (the number, not the report). The question card turns into the project's YAML, `model/conceptual.yml`, with its label:
 
 ```yaml
 # model/conceptual.yml · runs on dbt Core · DuckDB
@@ -61,14 +61,14 @@ question:
   also_served: The learner's wallet app, which needs the same facts as they are now.
 ```
 
-On "real", the label `runs on dbt Core · DuckDB` glows. On "Databricks", a dim second label `Databricks · dbt Cloud` slides in beside it. On "the connection", `profiles.yml` opens beside the card, trimmed:
+On "real", the label `runs on dbt Core · DuckDB` glows. On "Databricks", a dim second label `Databricks · dbt Cloud` slides in beside it. On "the connection", `profiles.yml` opens beside the card, trimmed, with the film's label beside the `duckdb` target (the label, not a line of the file):
 
 ```yaml
 # profiles.yml
 credentials:
   target: duckdb
   outputs:
-    duckdb:
+    duckdb:                  # runs on dbt Core · DuckDB
       type: duckdb
       …
     databricks:
@@ -76,10 +76,10 @@ credentials:
       …
 ```
 
-On "the hash", `macros/keys.sql` shows the two macros side by side, and `sha256` and `sha2(…, 256)` light together:
+On "turns a key into a hash", the words "key → hash" write themselves a beat before `macros/keys.sql` shows the two macros side by side, and `sha256` and `sha2(…, 256)` light together:
 
 ```sql
--- macros/keys.sql
+-- macros/keys.sql · runs on dbt Core · DuckDB (and Databricks)
 {% macro duckdb__hash_key(columns) -%}
     sha256({{ credentials.key_string(columns) }})
 {%- endmacro %}
@@ -89,9 +89,9 @@ On "the hash", `macros/keys.sql` shows the two macros side by side, and `sha256`
 {%- endmacro %}
 ```
 
-**On screen.** step 1 · a question · Planning · within 15 credit points · graduate certificate · by faculty · as at census date · the decision · places to offer · census report · 12 · runs on dbt Core · DuckDB · Databricks · dbt Cloud · the connection · the hash
+**On screen.** step 1 · a question · Planning · within 15 credit points · graduate certificate · by faculty · as at census date · the decision · places to offer · the wallet app · as they are today · census report · 12 · runs on dbt Core · DuckDB · Databricks · dbt Cloud · the connection · key → hash
 
-### 3 · The slice · 1:30–2:00
+### 3 · The slice · 1:24–1:54
 
 **Narration.** The university's glossary has a term for everything it does: fees, timetables, rooms, staff. The question touches four: a learner, a credential, an award, and the credit a learner holds towards an award. Everything else stays out, however central it seems. Noor agreed that scope with Planning, and wrote down why. Model the university, and you never finish. A question, you can finish.
 
@@ -106,7 +106,7 @@ Noor, data architect, with Planning |
 
 **On screen.** glossary · fees · timetables · rooms · staff · the question touches four · learner · credential · award · credit towards an award · everything else stays out · 1 Oct 2026 · Noor, with Planning
 
-### 4 · Written as YAML, drawn for people · 2:00–2:34
+### 4 · Written as YAML, drawn for people · 1:54–2:28
 
 **Narration.** Each of the four is written down once, in YAML. The learner: a definition, an owner, and the rule for its key. The definition is in the business's words, not a system's: a person the university has recorded learning with it, in any of its systems. Beside it, a diagram drawn by hand: a learner holds credentials, and holds credit towards an award. The YAML holds the meaning. The diagram lets anyone read it.
 
@@ -129,6 +129,7 @@ Noor, data architect, with Planning |
 Beside it, `docs/conceptual-model.md` types its Mermaid source, and the diagram renders from it line by line:
 
 ```markdown
+<!-- docs/conceptual-model.md -->
 erDiagram
     LEARNER ||--o{ CREDENTIAL : holds
     LEARNER ||--o{ CREDIT_TOWARDS_AWARD : "holds credit"
@@ -139,9 +140,9 @@ erDiagram
 
 **On screen.** written once · YAML · definition · owner · business key · the business's words, not a system's · drawn by hand · holds · holds credit · the meaning · anyone can read it
 
-### 5 · Keys and owners · 2:34–3:17
+### 5 · Keys and owners · 2:28–3:10
 
-**Narration.** Next, what identifies each one in business terms, before anyone opens a source. A learner is her student ID, which the registrar's office issues. An award is its code. A credential is the identifier of the system that issued it. Each key carries the name of the system it comes from: the student system, the learning platform, or the short-course platform. And each meaning has an owner. Mei, in the registrar's office, owns learner, credential and award. The learning team owns microcredentials and badges. The sources will disagree. The owner is the person who decides which meaning wins.
+**Narration.** Next, what identifies each one in business terms, before anyone opens a source. A learner is their student ID, which the registrar's office issues. An award is its code. A credential is the ID its issuer gave it. Each key is tagged with the system it comes from: the student system, the learning platform, or the short-course platform. And each meaning has an owner. Mei, in the registrar's office, owns learner, credential and award. The learning team owns microcredentials and badges. The sources will disagree. The owner is the person who decides which meaning wins.
 
 **Picture.** The blueprint's entities each get a key tag as they're named, the prefix in its source colour: learner `SIS|S-20417` (blue), award `SIS|GCDA` (blue), credential `LMS|B-5010` (green) and `SC|C-88` (pink). The prefixes lift and line up as three key sets, beside the YAML that declares them:
 
@@ -161,11 +162,11 @@ key_sets:
 
 On "owner", faces arrive on the entities: Mei (business outline) on learner, credential and award; the learning team (Tom, business outline) on two small kind tabs on the credential, "microcredential" and "badge". On "disagree", three faint source outlines flicker behind the blueprint, each with a different word for the learner ("student", "user", "customer"); Mei's face stays lit.
 
-**On screen.** business keys · before any source · student ID · award code · the issuer's identifier · SIS · LMS · SC · key sets · owners · Mei, registrar's office · the learning team · the sources will disagree · the owner decides
+**On screen.** business keys · before any source · student ID · award code · the ID its issuer gave it · SIS · LMS · SC · key sets · owners · Mei, registrar's office · the learning team · the sources will disagree · the owner decides
 
-### 6 · Combine or split · 3:17–3:54
+### 6 · Combine or split · 3:10–3:47
 
-**Narration.** Then a harder call. Is a microcredential a kind of credential, or a thing of its own? Compare what identifies it: the issuer's own identifier. Compare its life: issued on a date, and perhaps revoked. Both match any credential. Only the credit points differ. Same identity, same lifecycle: one entity, with kinds. A different grain or a different lifecycle, and you split. A certificate of attendance asks to join. It says someone was there, not what they can do. It stays out.
+**Narration.** Then a harder call. Is a microcredential a kind of credential, or a thing of its own? Compare what identifies it: the issuer's own identifier. Compare its life: issued on a date, and perhaps revoked. Both match any credential. Only the credit points differ. Same identity, same lifecycle: one entity, with kinds. A different identity, grain or lifecycle, and you split. A certificate of attendance asks to join. It says someone was there, not what they can do. It stays out.
 
 **Picture.** Two cards side by side, "microcredential" and "credential", with three rows each: identity (`LMS|B-5010` · the issuer's identifier), lifecycle (issued · revoked?), credit points (5 · varies). The first two rows tick as they match; the third stays apart, amber. The two cards merge into one credential card with three kind tabs, each with its owner, from the YAML:
 
@@ -182,7 +183,7 @@ On "owner", faces arrive on the entities: Mei (business outline) on learner, cre
         owner: Learning team
 ```
 
-A rule card: "same identity + same lifecycle → one entity, with kinds · different grain or lifecycle → split". Then a certificate of attendance, `SC|C-81`, drifts towards the credential card; its rows show "was there" where the others show "can do"; it's turned away at the edge. The query that keeps it out, trimmed:
+A rule card: "same identity + same lifecycle → one entity, with kinds · different identity, grain or lifecycle → split". Then a certificate of attendance, `SC|C-81`, drifts towards the credential card; its rows show "was there" where the others show "can do"; it's turned away at the edge. The query that keeps it out, trimmed:
 
 ```sql
 -- models/intermediate/int_credentials_unioned.sql · runs on dbt Core · DuckDB
@@ -197,9 +198,9 @@ completed_courses as (
 ),
 ```
 
-**On screen.** combine or split? · identity · lifecycle · credit points · one entity, with kinds · award · microcredential · badge · different grain or lifecycle → split · certificate of attendance · was there, not can do · stays out
+**On screen.** combine or split? · identity · lifecycle · credit points · one entity, with kinds · award · microcredential · badge · different identity, grain or lifecycle → split · certificate of attendance · was there, not can do · stays out
 
-### 7 · The agent's draft · 3:54–4:28
+### 7 · The agent's draft · 3:47–4:21
 
 **Narration.** Jun doesn't write all this alone. An AI agent drafts it, following a skill kept in the project. Write the question first. List only what it touches. Propose combine or split, with the reasons. The draft defined the credential, but let certificates of attendance in. Mei adds one clause: a certificate of attendance isn't one. The agent drafts. The owner approves the meaning, and the decision goes in the log, with her name and the date.
 
@@ -235,11 +236,11 @@ The orb writes the credential's definition in teal, without its last clause. Mei
 
 **On screen.** the agent drafts · a skill · the question first · only what it touches · combine or split · Mei adds one clause · approved · 2 Oct 2026 · the owner approves the meaning
 
-### 8 · Now, the sources · 4:28–4:48
+### 8 · Now, the sources · 4:21–4:43
 
-**Narration.** One question. Four things to model. Two owners of meaning. Nothing else. Now, the sources. The model says a learner is one person. The sources say Aisha is three.
+**Narration.** One question. Four things to model. Two owners of meaning. Nothing else. Now, the sources. The model says a learner is one person. The sources say one learner, Aisha, is three.
 
-**Picture.** The blueprint with its four things, the question card above it and two faces beside it; around it, blank space, as on Snow's map. Beneath the blueprint, three source streams arrive in their colours: student system (blue), learning platform (green), short-course platform (pink). One learner, "Aisha", surfaces in each, under `S-20417`, `u-88213` and ` Aisha.K@Mail.example ` (spaces drawn as visible dots). The loop's station 2 lights. Wordless end card: *Start from a question* · "Model only what the question touches; name who owns each meaning first." · In the weeds of data crafting.
+**Picture.** The blueprint with its four things, the question card above it and two faces beside it; around it, blank space, as on Snow's map. Beneath the blueprint, three source streams arrive in their colours: student system (blue), learning platform (green), short-course platform (pink). On "one learner, Aisha", she surfaces in each, under `S-20417`, `u-88213` and ` Aisha.K@Mail.example ` (spaces drawn as visible dots). The loop's station 2 lights. Wordless end card: *Start from a question* · "Model only what the question touches; name who owns each meaning first." · In the weeds of data crafting.
 
 **On screen.** one question · four things · two owners · nothing else · the sources · Aisha · S-20417 · u-88213 · Aisha.K@Mail.example · *Start from a question* · Model only what the question touches; name who owns each meaning first.
 
@@ -258,25 +259,25 @@ Four stops, one question each.
 
 | Chapter | What the film says | What an expert would add, or what it simplifies |
 |---|---|---|
-| 1 | In the late summer of 1854, cholera killed hundreds of people in a few streets of Soho. | The Broad Street outbreak began on 31 August 1854; 616 deaths is the figure usually given, most in the first ten days. "Hundreds" avoids a disputed figure. |
+| 1 | In 1854, cholera killed hundreds of people in a few streets of Soho. | The Broad Street outbreak began on 31 August 1854; 616 deaths is the figure usually given, most in the first ten days; John Snow was a London doctor (on screen: "1854 · Soho, London"). "Hundreds" avoids a disputed figure. |
 | 1 | Snow asked where the dead got their water, and marked each death at its address; they gathered around one pump. | Snow collected the addresses from the General Register Office and visited households. The map most people know was published after the outbreak, in the second edition of *On the Mode of Communication of Cholera* (1855), and Snow's case rested on his interviews and counts as much as on the map. The film doesn't claim the map found the pump first. |
 | 1 | (Picture only) the workhouse with its own well; the brewery. | Snow reports that the Poland Street workhouse, with 535 inmates and its own well, had five deaths, and that none of the Broad Street brewery's workers, who drank its beer, died. Kept to labels. |
 | 1 | (Not said) the pump handle. | The handle was removed on 8 September 1854, when the outbreak was already declining. The story that removing it ended the outbreak is a legend; the film leaves the handle out rather than tell it. |
 | 1 | His map showed only what the question needed. | A simplification: the map shows streets and some landmarks for orientation. The point is the selection, not an empty map. |
 | 2 | Planning's question and its decision. | Verbatim from `model/conceptual.yml` 9-16. The university, its people and its numbers are fictional. |
 | 2 | The census report counted twelve; the model has to reach it. | `seeds/census_report.csv`: 2 + 3 + 5 + 2 = 12 as at 31 March 2026, published 14 April 2026 by the census team. `dbt show --select reconcile_census_report` gives difference 0 in all four faculties (run 30 September 2026). Reconciliation is the subject of later films. |
-| 2 | The code and the data run on dbt Core with DuckDB, in the series' repository. | `films/analytics-engineering/project/`. Run 30 September 2026: `dbt build --profiles-dir . --vars '{as_is_date: 2026-09-30}'`, dbt Core 1.12.5, dbt-duckdb 1.11.0: 146 nodes, PASS 143, WARN 1 (by design: gap 5), ERROR 0. |
-| 2 | The same project runs on Databricks with dbt Cloud. | `profiles.yml` holds a `databricks` target for dbt Core; dbt Cloud ignores `profiles.yml` and keeps the connection and credentials in the environment (the file's own comment, lines 1-2). The project's CI runs DuckDB; the Databricks target is the author's workspace. |
-| 2 | Only the connection changes, and one function: the hash. | True of the SQL. The project also switches some things by target, in configuration rather than code (README, "What differs between engines"): where sources are read (CSV files through `external_location` on DuckDB, ingested tables on Databricks); primary and foreign keys (declared and informational on Databricks, left out on DuckDB by `macros/duckdb_constraints.sql`); `persist_docs` (on for Databricks only, `dbt_project.yml` 23-25); grants on the Planning marts; liquid clustering on `core_credential`. |
+| 2 | The code and the data on screen are real; they run on dbt Core with DuckDB, in the series' repository. | Only the code and the data: the university, its people and the story's events are fictional, and the glossary cards are illustrative (chapter 3). `films/analytics-engineering/project/`. Run 30 September 2026: `dbt build --profiles-dir . --vars '{as_is_date: 2026-09-30}'`, dbt Core 1.12.5, dbt-duckdb 1.11.0: 146 nodes, PASS 143, WARN 1 (by design: gap 5), ERROR 0. |
+| 2 | The same project runs on Databricks with dbt Cloud. | "dbt Cloud" is the author's name for it; dbt Labs now calls it the dbt platform (its IDE is the Studio IDE, its explorer Catalog: getdbt.com/blog/updated-names-for-dbt-platform-and-features), to check on the day. `profiles.yml` holds a `databricks` target for dbt Core; dbt Cloud ignores `profiles.yml` and keeps the connection and credentials in the environment (the file's own comment, lines 1-2). The project's CI runs DuckDB; the Databricks target is the author's workspace. |
+| 2 | Only the connection changes, and one function: the one that turns a key into a hash. | True of the SQL. The project also switches some things by target, in configuration rather than code (README, "What differs between engines"): where sources are read (CSV files through `external_location` on DuckDB, ingested tables on Databricks); primary and foreign keys (declared and informational on Databricks, left out on DuckDB by `macros/duckdb_constraints.sql`); `persist_docs` (on for Databricks only, `dbt_project.yml` 23-26); grants on the Planning marts; liquid clustering on `core_credential`. |
 | 2 | The hash: `sha256` on DuckDB, `sha2(…, 256)` on Databricks, the same value. | `hash_key` is chosen per engine with `adapter.dispatch` (macro prefixes `duckdb__` and `databricks__`). Both functions return SHA-256 as a 64-character lower-case hex string. Checked here: DuckDB `sha256('SIS|S-20417')` = `0905e6e2b60bd76bfa5c6d3ed43ac6a4d55cf046c2c0cbce4c590300145f76a2`, identical to Python's `hashlib.sha256`. Databricks' `sha2` is documented to return the hex string of the SHA-2 digest; confirm on the day on a workspace. |
 | 3 | The question touches four things: learner, credential, award, credit towards an award. | Three entities and one relationship that carries rules (`model/conceptual.yml` 29-113); two simpler relationships, `holds` and `counts_towards`, need no owner or rules of their own. Units and enrolments appear in the sources as the evidence for credit, not as entities in this slice. |
 | 3 | A glossary with a term for everything. | Illustrative: the project has no enterprise glossary file. The cards on screen are generic terms, not a real catalog. |
 | 3 | Noor agreed the scope with Planning and wrote down why. | `docs/decisions.md` 9, dated 1 October 2026 in the story. |
 | 4 | Each thing is written once, in YAML, with a hand-drawn diagram. | `model/conceptual.yml` sits outside dbt's `model-paths` and isn't parsed by dbt; `scripts/definitions.py` turns each definition into a doc block (`docs/definitions.md`) that models' YAML reads with `doc()`, and writes `seeds/key_sets.csv`. The Mermaid `erDiagram` in `docs/conceptual-model.md` is drawn by hand; the physical diagram is generated (a later film). |
-| 5 | A learner is her student ID; an award its code; a credential the issuer's identifier; each qualified by its system. | `model/conceptual.yml` 36-42, 59-63, 80-82. A learner the student system doesn't know keeps the key of the first system that recorded them. Key sets, matching and hashing are the next film's subject. |
+| 5 | A learner is their student ID; an award its code; a credential the ID its issuer gave it; each tagged with the system it comes from. | `model/conceptual.yml` 36-42, 59-63, 80-82. A learner the student system doesn't know keeps the key of the first system that recorded them. "Tagged with the system" is the key set's code (`SIS`, `LMS`, `SC`), which names the issuing system, not the credential: the credential's key is the issuer's own identifier, qualified by it (`LMS|B-5010`). Key sets, matching and hashing are the next film's subject. |
 | 5 | Mei owns learner, credential and award; the learning team owns microcredentials and badges. | `owner:` fields in `model/conceptual.yml`; the key sets' owners at 18-27. The learning team also owns the `LMS` and `SC` key sets. |
 | 6 | A microcredential shares a credential's identity and lifecycle; only the credit points differ. | `docs/decisions.md` 10. In the data, a platform badge is a microcredential when it carries credit points and a badge when it carries none (`int_credentials_unioned.sql`); run on 30 September 2026, `core_credential_v2` holds 8 awards (60 points each), 42 microcredentials (5 each) and 3 badges (0). |
-| 6 | Different grain or lifecycle: split. | A heuristic, not a law: other signals are a different owner, different identifiers, or attributes that apply to only one of the two. The skill writes the reason down as a proposal (`SKILL.md` 21). |
+| 6 | A different identity, grain or lifecycle: split. | A heuristic, not a law: another signal is attributes that apply to only one of the two; a different owner of a kind's details is not, on its own, a reason (the kinds carry their own owners). The skill writes the reason down as a proposal (`SKILL.md` 21). |
 | 6 | A certificate of attendance stays out. | `docs/decisions.md` 11; `docs/gaps.md` 16 (gap 9); `int_credentials_unioned.sql` 72-80 keeps only certificates of completion. In the data, one current certificate of attendance, `SC|C-81` (First Aid, 0 credit points), and it isn't in `core_credential_v2` (checked 30 September 2026). |
 | 7 | An AI agent drafts, following a skill kept in the project. | `skills/draft-the-conceptual-model/SKILL.md`; `AGENTS.md` at the project root. The film names no product. Agents in dbt Cloud (dbt Copilot, the dbt MCP server) are named only here, and their availability by plan is to check on the day. |
 | 7 | The draft missed the clause; Mei added it. | The story's own event, placed on 2 October 2026 by `docs/decisions.md` 10-11. The skill's rule: "Don't approve a definition yourself" (`SKILL.md` 29). |
@@ -289,7 +290,7 @@ Four stops, one question each.
 | 2 | `profiles.yml` | 3-5, 7-8, 13-14 (trimmed with …) |
 | 2 | `macros/keys.sql` | 52-58 |
 | 3 | `docs/decisions.md` | 9 (the table row, wrapped) |
-| 4 | `model/conceptual.yml` | 31-41 (trimmed with …) |
+| 4 | `model/conceptual.yml` | 31-40 (trimmed with … mid-line 40) |
 | 4 | `docs/conceptual-model.md` | 8-13 |
 | 5 | `model/conceptual.yml` | 18-27 |
 | 6 | `model/conceptual.yml` | 64-72 |
@@ -334,19 +335,16 @@ Eight situations, in this order.
 7. **Sort.** Noor proposes splitting microcredential into its own entity "because it has credit points". Sort the reasons into "a reason to split" and "not a reason": a different identifier; a different lifecycle; a different grain; an extra attribute; a different owner of its details. (Only the first three; an attribute and a kind's owner fit inside one entity.)
 8. **Order.** A request with no decision ("just curious how many"). Put Jun's first moves in order: ask what it will decide; write the question and decision in `model/conceptual.yml`; list the entities it touches; name each owner; then look at the sources.
 
-## Pause and think
-
-`ask`, `slice`, `owners`, `split` (the questions and answers are in [Pause and think](#pause-and-think) above).
-
 ## Decisions taken
 
 | Date | Decision |
 |---|---|
 | 30 September 2026 | Open in 1854 Soho with Snow's map: one question decides what goes on a map. The workhouse and brewery stay as labels; the pump handle legend is left out. |
-| 30 September 2026 | The film says once, in *The question*, that the setup is real: dbt Core with DuckDB here, Databricks with dbt Cloud in the story, and only the connection and the hash change. Every code card carries `runs on dbt Core · DuckDB`. |
+| 30 September 2026 | The film says once, in *The question*, that the code and the data are real: dbt Core with DuckDB here, Databricks with dbt Cloud in the story, and only the connection and the hash function change. Every code and YAML card carries `runs on dbt Core · DuckDB` (on `profiles.yml`, beside the `duckdb` target; on `macros/keys.sql`, "(and Databricks)" since it shows both engines). Markdown cards (`docs/decisions.md`, `docs/conceptual-model.md`, `SKILL.md`) take no label: they are documents, and nothing runs them. |
 | 30 September 2026 | The census report's twelve is named, not shown, as the number to reach. The film keeps the opening film's numbers out. |
+| 1 October 2026 | Series read-through: the wallet app is named once in *The question*, as the second consumer that reads the same facts as they are today, so the next films can use it without introducing it. |
 
 ## Open
 
 1. **The learning team's face.** Drawn as Tom Whitfield, from *From words to data*; to confirm.
-2. **Voice.** Check "dee bee tee", "duck dee bee" and "May" by ear; the key strings, hashes and emails stay on screen only.
+2. **Voice.** "dbt" is voiced "D B T" by the series' shared list, as in the opening film, so the film has no respelling of its own; "ID" is voiced "I D" the same way. Check "duck dee bee" and "May" by ear; the key strings, hashes and emails stay on screen only.

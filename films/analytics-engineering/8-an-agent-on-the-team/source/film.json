@@ -21,6 +21,7 @@
     ["\\bIDs\\b", "eye dees"],
     ["\\bID\\b", "eye dee"],
     ["\\bCI\\b", "see eye"],
+    ["\\bAI\\b", "ay eye"],
     ["\\bMaskelyne\\b", "Maskelin"]
   ]
 }

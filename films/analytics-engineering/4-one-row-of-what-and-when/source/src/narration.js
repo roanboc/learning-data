@@ -2,16 +2,15 @@
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
 const NARR={
 "card":{"name":"One card, one day","lead":1.4,"tail":1.0,"vo":[
- {"id":"day","gap":0.8,"text":"In 1890, the United States counted its people as they were on one day: the first of June.","say":"In eighteen ninety, the United States counted its people as they were on one day: the first of June."},
- {"id":"called","gap":0.8,"text":"Census takers called for weeks, but every answer described that day."},
- {"id":"born","gap":0.8,"text":"A baby born after the first wasn't counted. Someone who died after it was."},
- {"id":"punch","gap":0.8,"text":"Each person's answers became holes punched in a card, and Herman Hollerith's machines counted them."},
- {"id":"bridge","gap":0.8,"text":"One card per person, as at one day. Planning's question needs the same two things."}]},
+ {"id":"day","gap":0.8,"text":"The first of June, 1890. The United States counted its people as they were on that one day.","say":"The first of June, eighteen ninety. The United States counted its people as they were on that one day."},
+ {"id":"born","gap":0.8,"text":"Counting took weeks, but a baby born after the first wasn't counted. Someone who died after it was."},
+ {"id":"punch","gap":0.8,"text":"Each person became a punched card, counted by Herman Hollerith's machines."},
+ {"id":"bridge","gap":0.8,"text":"One card per person, as at one day. Planning's question needs both."}]},
 "grain":{"name":"One sentence","lead":1.0,"tail":1.0,"vo":[
- {"id":"before","gap":0.8,"text":"Before any SQL, Jun writes down what one row of Planning's table is."},
+ {"id":"before","gap":0.8,"text":"Before any SQL, Jun's table for Planning gets one sentence."},
  {"id":"sentence","gap":0.8,"text":"One row per learner per award, as at census date."},
  {"id":"name","gap":0.8,"text":"That sentence is the grain. It says what a row is, and which day it describes."},
- {"id":"agent","gap":0.8,"text":"The agent drafted it from the census report's columns. Noor, who owns the model, approves it."},
+ {"id":"agent","gap":0.8,"text":"The agent drafts it from Planning's question and the census report. Noor, who owns the model, approves it."},
  {"id":"test","gap":0.8,"text":"Then it becomes a test: no two rows with the same learner and the same award."}]},
 "fan":{"name":"Fan-out","lead":1.0,"tail":1.0,"vo":[
  {"id":"why","gap":0.8,"text":"Here's why it matters. In July, a graduate certificate in Health changed its name."},
@@ -23,14 +22,14 @@ const NARR={
 "versions":{"name":"Every version kept","lead":1.0,"tail":1.0,"vo":[
  {"id":"kept","gap":0.8,"text":"Those versions come from the sources. Nothing is overwritten: every change arrives as a new row, with the date it started and the date it ended."},
  {"id":"seen","gap":0.8,"text":"But those dates say when the platform saw a change, not when it was true. Where a system says when something happened, the model uses that."},
- {"id":"aisha","gap":0.8,"text":"Aisha's credit towards her certificate has six versions. Five points in October, forty-five by the end of February, and sixty in July."},
- {"id":"core","gap":0.8,"text":"The core's grain says so: one row per learner, per award, per version. A test checks that no two versions overlap."}]},
+ {"id":"aisha","gap":0.8,"text":"The core builds its own versions from those dated facts. Aisha's credit towards her certificate has six. Five points in October, forty-five by the end of February, and sixty in July."},
+ {"id":"core","gap":0.8,"text":"So the core's grain is: one row per learner, per award, per version. A test checks that no two versions overlap."}]},
 "was":{"name":"As it was, as it is","lead":1.0,"tail":1.0,"vo":[
  {"id":"days","gap":0.8,"text":"Now two consumers read the same versions, and ask about different days."},
  {"id":"census","gap":0.8,"text":"Planning asks about census day, the 31st of March. Aisha held forty-five of sixty points, with fifteen to go. She counts.","say":"Planning asks about census day, the thirty-first of March. Aisha held forty-five of sixty points, with fifteen to go. She counts."},
  {"id":"today","gap":0.8,"text":"The wallet app asks about today. Aisha finished in July, and her wallet shows the certificate."},
- {"id":"totals","gap":0.8,"text":"Across the university, as it was on census day: twelve learners. As it is today: nine."},
- {"id":"both","gap":0.8,"text":"Both are right. They answer different questions."},
+ {"id":"totals","gap":0.8,"text":"Ask Planning's question, learners within fifteen points of a certificate, as it was on census day: twelve. Ask it today: nine."},
+ {"id":"both","gap":0.8,"text":"Both are right. They answer about different days."},
  {"id":"declare","gap":0.8,"text":"So each output declares its day, and one small macro picks the version valid on it."}]},
 "stitch":{"name":"One timeline","lead":1.0,"tail":1.0,"vo":[
  {"id":"three","gap":0.8,"text":"A learner lives in three systems, and each keeps its own versions."},

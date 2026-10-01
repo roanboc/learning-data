@@ -50,7 +50,8 @@ const NARR={
 "series":{"name":"The series","lead":1.0,"tail":1.0,"vo":[
  {"id":"next","gap":0.8,"text":"The next eight films take the steps in turn."},
  {"id":"list1","gap":0.3,"text":"Scoping a model from a question. What makes a learner the same one across systems, and how keys and hashes make it explicit. Grain and time."},
- {"id":"list2","gap":0.8,"text":"Contracts and tests. Building in layers. Who owns what, across domains. Working with an agent, responsibly. And writing it all down, once."}]},
+ {"id":"list2","gap":0.8,"text":"Contracts and tests. Building in layers. Who owns what, across domains. Working with an agent, responsibly. And writing it all down, once."},
+ {"id":"real","gap":0.8,"text":"Everything they show is real code and real data. It runs on dbt Core, with DuckDB, and you can run it yourself."}]},
 "end":{"name":"Pull back","lead":1.0,"tail":1.0,"vo":[
  {"id":"bp","gap":0.8,"text":"A blueprint says what a building will be. The building work makes it true."},
  {"id":"data","gap":0.8,"text":"In data, the model is the blueprint, and dbt is one way to build it."},

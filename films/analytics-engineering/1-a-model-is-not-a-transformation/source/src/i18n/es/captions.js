@@ -87,5 +87,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "In data, the model is the blueprint, and dbt is one way to build it.":
 "En los datos, el modelo es el plano, y dbt es una forma de construirlo.",
 "Declare it. Then build it.":
-"Decláralo. Luego constrúyelo."
+"Decláralo. Luego constrúyelo.",
+"Everything they show is real code and real data. It runs on dbt Core, with DuckDB, and you can run it yourself.":
+"Todo lo que muestran es código real y datos reales. Corre en dbt Core, con DuckDB, y puedes ejecutarlo tú mismo.",
 });

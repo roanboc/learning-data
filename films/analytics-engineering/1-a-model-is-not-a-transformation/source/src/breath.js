@@ -11,6 +11,6 @@ const BREATH={
 "models":{"hold":{"year":0.6,"steps":0.6,"core":0.6}},
 "lives":{"hold":{"beside":0.5,"yaml":1.0,"md":0.8,"check":0.6}},
 "steps":{"hold":{"s7":0.4,"agent":1.4}},
-"series":{"hold":{"list1":0.4,"list2":0.8}},
+"series":{"hold":{"list1":0.4,"list2":0.8,"real":0.8}},
 "end":{"hold":{"bp":0.5,"data":0.6},"breathe":4.2}
 };

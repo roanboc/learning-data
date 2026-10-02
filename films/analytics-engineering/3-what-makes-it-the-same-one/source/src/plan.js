@@ -178,7 +178,7 @@ function sm_print(ctx,x,y,r,kind,p,a){if(a<=0.01||p<=0)return;withA(ctx,a,()=>{c
 /* ---------- the labs' and scenarios' pictures ----------
    Added to the film bundle's LV registry (Keeping it true's true.js defines it; these keys are prefixed sm_ so they never clash).
    assets/from-words-to-data/learn.js calls each as f(ctx, w, h, state, L): a lab passes its state (compose: {pick}; sort: {pick, checked};
-   pick: {pick}; steps: {step}), a scenario passes {q}. Any words come from L.vis (the page's learn.en.js or learn.es.js), so each language
+   pick: {pick}; steps: {step}), a scenario passes {q}. Under 560 css px wide (sm_narrow), each lab draws a phone layout with larger words. Any words come from L.vis (the page's learn.en.js or learn.es.js), so each language
    draws its own; keys, file names and hashes are the same in both. */
 function sm_fit(c,w,h,bw,bh){const k=Math.min(w/bw,h/bh);c.translate((w-bw*k)/2,(h-bh*k)/2);c.scale(k,k);}
 function sm_lab(L,id){return (L.labs||[]).find(x=>x.id===id)||{w:{}};}
@@ -192,77 +192,117 @@ const SM_HSTEPS=[
   {parts:["S-20417","GCDA"],raw:["S-20417GCDA","092fe84979faa2b91b3d24d33c5457ec5881724758a9998ec988ba68eb4bc111"],mac:["S-20417|GCDA","6461c940bdf522268a1f7660374d1a74b4d6cb33b63c2fbc8fa5b0ca8560ca9b"]},
   {parts:["S-20417","··"],raw:["S-20417",SM_N1],mac:["S-20417|<null>","2be6f4e3ac839cbad84df8bcdb4763bebaf0ad201362bfa66de72115c8665e83"]},
   {parts:["··","S-20417"],raw:["S-20417",SM_N1],mac:["<null>|S-20417","f30f0e2a439b5fdf47437d7dfe4065cd808e41022420195781c86c90733aaf26"],ra:"collide",ma:"distinct"},
-  {parts:["··","··"],raw:["''",SM_E],mac:["null",null],ra:"collide",ma:"noHash"}];
+  {parts:["··","··"],raw:["''",SM_E],mac:["null",null],ra:"blank",ma:"noHash"}];
 // Same learner?: the four pairs (left key, its source; right key), and which pairs each way of matching links
 const SM_PAIRS=[["SC|aisha.k@mail.example",2,"SIS|S-20417"],["LMS|u-88213",1,"SIS|S-20417"],["SC|nguyen.family@mail.example",2,"SIS|S-20436"],["LMS|u-88231",1,"SIS|S-20417"]];
 const SM_LINK={typed:[0,0,0,0],email:[1,1,1,0],rules:[1,1,0,1],decide:[1,1,1,0]};
-// Rules in order: the four keys run down the user's stack; fits lists the rules (by item) each key fits, and what each landing means
-const SM_RUN=[["SIS|S-20417",0,[1,4]],["LMS|u-88213",1,[2,4]],["SC|aisha.k@mail.example",2,[3,4]],["LMS|u-88231",1,[0,2,4]]];
-function sm_verdict(c,x,y,v){if(v===1||v===true)tick_(c,x,y,40,GOOD,1);else if(v===0.5){c.fillStyle=rgba(SM_AMBER,1);c.beginPath();c.arc(x,y,9,0,TAU);c.fill();}else cross_(c,x,y,40,BAD,1);}
+// Rules in order: the four keys run down the user's stack; fits lists the rules (by item) each key fits, as the SQL proposes them
+// (the email rule also proposes Aisha's account, whose email is her student email; a student ID fits only its own rule)
+const SM_RUN=[["SIS|S-20417",0,[1]],["LMS|u-88213",1,[2,3,4]],["SC|aisha.k@mail.example",2,[3,4]],["LMS|u-88231",1,[0,2,4]]];
+function sm_verdict(c,x,y,v,s){s=s||40;if(v===1||v===true)tick_(c,x,y,s,GOOD,1);else if(v===0.5){c.fillStyle=rgba(SM_AMBER,1);c.beginPath();c.arc(x,y,s*0.24,0,TAU);c.fill();}else cross_(c,x,y,s,BAD,1);}
+// a phone-width page: the canvas is under 560 css px wide, so each lab draws a simpler layout with larger words
+function sm_narrow(c){const cw=c.canvas&&c.canvas.clientWidth;return !!cw&&cw<560;}
+// text that shrinks to fit maxW, never below o.min
+function sm_T(c,s,x,y,maxW,o){o=Object.assign({},o);let sz=o.size||28;const fl=o.min||Math.round(sz*0.8);while(sz>fl&&tw(c,s,sz,o.w||600,o.f)>maxW)sz-=1;o.size=sz;T(c,s,x,y,o);return sz;}
+// where a key lands in the user's stack, and how that reads
+function sm_land(V,pk,ord,j){const fits=SM_RUN[j][2],land=ord.find(i=>fits.includes(i));let txt=V.unplaced,good=null;
+  if(land!=null){const own=land===4||land===0;if(j<3){good=!own;txt=own?V.ownLearner:"SIS|S-20417";}else{good=land!==2;txt=land===2?V.wrongMerge:V.ownLearner;}}
+  return{head:V.lands+" "+(land==null?"—":pk[land])+":",txt,good};}
+// the decision tag a pair carries when decisions are on
+const SM_PAIRDEC=[null,null,"D-001","D-003"];
 Object.assign(LV,{
   // claim and evidence: each claim, and the evidence picked for it (a query and its result, or a guess), teal when it proves the claim
-  sm_l_claims:(c,w,h,st,L)=>{const V=L.vis,S=sm_lab(L,"claims").w.slots||[];c.save();sm_fit(c,w,h,900,530);
+  sm_l_claims:(c,w,h,st,L)=>{const V=L.vis,S=sm_lab(L,"claims").w.slots||[];c.save();
+    if(sm_narrow(c)){sm_fit(c,w,h,960,565);V.claims.forEach((cl,i)=>{const y=i*113,p=st.pick?st.pick[i]:null,o=p==null?null:S[i].opts[p];
+        if(!o){c.save();c.setLineDash([10,10]);c.strokeStyle=rgba(SOFT,0.6);c.lineWidth=3;rr(c,8,y+6,944,100,16);c.stroke();c.restore();}
+        else glass(c,8,y+6,944,100,16,o.ok?[111,214,200]:BAD,{glow:8,ea:0.8,fill:"rgba(6,10,20,0.95)"});
+        sm_T(c,cl,28,y+46,830,{w:700,size:32,min:26,color:rgba(INK,1)});
+        if(!o){T(c,V.query+" · "+V.result+" …",28,y+90,{w:600,size:28,color:rgba(SOFT,0.85)});return;}
+        if(o.t.indexOf("→")<0){T(c,V.noQuery,28,y+90,{w:600,size:28,color:rgba(SOFT,1)});tag(c,28+tw(c,V.noQuery,28,600)+20,y+81,V.guess,SOFT,{size:26});}
+        else T(c,o.t.split(" → ")[0],28,y+90,{f:"mono",w:500,size:30,color:rgba(o.ok?[111,214,200]:BAD,1)});
+        sm_verdict(c,906,y+56,o.ok?1:0,44);});c.restore();return;}
+    sm_fit(c,w,h,900,530);
     V.claims.forEach((cl,i)=>{const y=6+i*104,p=st.pick?st.pick[i]:null,o=p==null?null:S[i].opts[p];
       T(c,V.claim+" · "+cl,20,y+24,{w:700,size:22,color:rgba(INK,1)});
       if(!o){c.save();c.setLineDash([8,8]);c.strokeStyle=rgba(SOFT,0.6);c.lineWidth=2;rr(c,20,y+36,860,60,12);c.stroke();c.restore();T(c,V.query+" · "+V.result,450,y+73,{w:600,size:20,align:"center",color:rgba(SOFT,0.8)});return;}
       const col=o.ok?[111,214,200]:BAD,gs=o.t.indexOf("→")<0;glass(c,20,y+36,860,60,12,col,{glow:10,ea:0.8,fill:"rgba(6,10,20,0.95)"});
       if(gs){T(c,V.noQuery,40,y+74,{w:600,size:21,color:rgba(SOFT,1)});tag(c,866-tw(c,V.guess,18,700)-26,y+66,V.guess,SOFT,{size:18});}
       else{const[qn,rs]=o.t.split(" → ");T(c,qn,40,y+74,{f:"mono",w:500,size:19,color:rgba(col,1)});T(c,"→ "+rs,46+tw(c,qn,19,500,"mono"),y+74,{f:"mono",w:500,size:19,color:rgba(INK,0.95)});}});c.restore();},
-  // rules in order: the stack in the user's order, and where each of four keys lands
-  sm_l_rules:(c,w,h,st,L)=>{const V=L.vis,pk=st.pick||{},ord=[0,1,2,3,4].filter(i=>pk[i]!=null).sort((a,b)=>(+pk[a])-(+pk[b])||a-b);c.save();sm_fit(c,w,h,1200,550);
-    [0,1,2,3,4].forEach(r=>{const y=20+r*92,i=ord[r];if(i==null){sm_rule(c,30,y,560,"·",V.unplaced,{dash:1,h:64});return;}
-      const ok=st.checked?(pk[i]===sm_lab(L,"rules").w.items[i].b):null;sm_rule(c,30,y,560,pk[i],V.rules[i],{h:64,on:ok===false?0.9:0.6,col:ok===false?BAD:i===0?TRUST:LAYER4[1][1]});});
-    SM_RUN.forEach(([k,s,fits],j)=>{const y=60+j*124,col=SM_SRC[s],land=ord.find(i=>fits.includes(i));sm_key(c,640,y,k,col,{size:20});
-      let txt=V.unplaced,good=null;if(land!=null){const own=land===4||land===0;if(j<3){good=!own;txt=own?V.ownLearner:"SIS|S-20417";}else{good=land!==2;txt=land===2?V.wrongMerge:V.ownLearner;}}
-      T(c,V.lands+" "+(land==null?"—":pk[land])+":",660,y+50,{w:600,size:20,color:rgba(SOFT,1)});T(c,txt,660+tw(c,V.lands+" 0: ",20,600)+8,y+50,{w:700,size:20,color:rgba(good==null?SOFT:good?GOOD:BAD,1)});});c.restore();},
-  // same learner?: four pairs, linked or not by the way of matching chosen, each with its verdict
-  sm_l_same:(c,w,h,st,L)=>{const V=L.vis,k=st.pick||"typed",res=(sm_lab(L,"same").w.res||{})[k]||[],ln=SM_LINK[k]||[];c.save();sm_fit(c,w,h,1200,525);
-    SM_PAIRS.forEach(([a,s,b],i)=>{const y=70+i*122;T(c,V.pairs[i],30,y-34,{w:600,size:19,color:rgba(SOFT,1)});const wa=sm_key(c,30,y,a,SM_SRC[s],{size:20});
-      const x0=30+wa+12,x1=760;if(ln[i]){c.strokeStyle=rgba(i===3?BAD:GOOD,0.9);c.lineWidth=3;if(i===3)c.setLineDash([10,8]);c.beginPath();c.moveTo(x0,y);c.lineTo(x1-12,y);c.stroke();c.setLineDash([]);}
-      else{c.strokeStyle=rgba(SOFT,0.4);c.lineWidth=2;c.setLineDash([4,10]);c.beginPath();c.moveTo(x0,y);c.lineTo(x1-12,y);c.stroke();c.setLineDash([]);}
-      if(k==="decide"&&(i===2||i===3))tag(c,(x0+x1)/2,y-26,i===2?"D-001":"D-003",TRUST,{align:"center",size:18});
-      sm_key(c,x1,y,b,SM_SRC[0],{size:20});sm_verdict(c,1150,y,res[i]);});c.restore();},
+  // rules in order: the stack in the user's order, and where each of four keys lands (on a phone, the keys alone, larger)
+  sm_l_rules:(c,w,h,st,L)=>{const V=L.vis,pk=st.pick||{},ord=[0,1,2,3,4].filter(i=>pk[i]!=null).sort((a,b)=>(+pk[a])-(+pk[b])||a-b);c.save();
+    const lc=g=>rgba(g==null?SOFT:g?GOOD:BAD,1);
+    if(sm_narrow(c)){sm_fit(c,w,h,960,440);SM_RUN.forEach(([k,s],j)=>{const y=36+j*110,r=sm_land(V,pk,ord,j);sm_key(c,16,y,k,SM_SRC[s],{size:30});
+        T(c,r.head,24,y+62,{w:600,size:30,color:rgba(SOFT,1)});sm_T(c,r.txt,24+tw(c,r.head,30,600)+12,y+62,920-tw(c,r.head,30,600),{w:700,size:30,min:24,color:lc(r.good)});});c.restore();return;}
+    sm_fit(c,w,h,1000,458);
+    [0,1,2,3,4].forEach(r=>{const y=10+r*88,i=ord[r];if(i==null){sm_rule(c,20,y,520,"·",V.unplaced,{dash:1,h:72});return;}
+      const ok=st.checked?(pk[i]===sm_lab(L,"rules").w.items[i].b):null;sm_rule(c,20,y,520,pk[i],V.rules[i],{h:72,on:ok===false?0.9:0.6,col:ok===false?BAD:i===0?TRUST:LAYER4[1][1]});});
+    SM_RUN.forEach(([k,s],j)=>{const y=50+j*108,r=sm_land(V,pk,ord,j);sm_key(c,580,y,k,SM_SRC[s],{size:22});
+      T(c,r.head,596,y+48,{w:600,size:22,color:rgba(SOFT,1)});sm_T(c,r.txt,596+tw(c,r.head,22,600)+8,y+48,392-tw(c,r.head,22,600),{w:700,size:22,min:18,color:lc(r.good)});});c.restore();},
+  // same learner?: four pairs, linked or not by the way of matching chosen, each with its verdict; a wrong link is red and dashed
+  sm_l_same:(c,w,h,st,L)=>{const V=L.vis,k=st.pick||"typed",res=(sm_lab(L,"same").w.res||{})[k]||[],ln=SM_LINK[k]||[];c.save();
+    const link=(i,x0,x1,y,lw)=>{const bad=ln[i]&&res[i]===0;c.save();if(ln[i]){c.strokeStyle=rgba(bad?BAD:GOOD,0.9);c.lineWidth=lw;if(bad)c.setLineDash([10,8]);}
+      else{c.strokeStyle=rgba(SOFT,0.4);c.lineWidth=lw*0.7;c.setLineDash([4,10]);}c.beginPath();c.moveTo(x0,y);c.lineTo(x1,y);c.stroke();c.restore();};
+    if(sm_narrow(c)){sm_fit(c,w,h,960,420);SM_PAIRS.forEach(([a,s,b],i)=>{const y=i*105,d=k==="decide"&&SM_PAIRDEC[i];let tx=880;
+        if(d){tx-=tw(c,d,26,700)+26;tag(c,tx,y+24,d,TRUST,{size:26});}sm_T(c,V.pairs[i],16,y+34,tx-36,{w:600,size:30,min:24,color:rgba(SOFT,1)});sm_verdict(c,922,y+24,res[i],40);
+        const wa=sm_key(c,10,y+78,a,SM_SRC[s],{size:30}),wb=sm_keyW(b,30);link(i,10+wa+10,950-wb-10,y+78,4);sm_key(c,950-wb,y+78,b,SM_SRC[0],{size:30});});c.restore();return;}
+    sm_fit(c,w,h,1000,437);
+    SM_PAIRS.forEach(([a,s,b],i)=>{const y=62+i*106;T(c,V.pairs[i],20,y-32,{w:600,size:22,color:rgba(SOFT,1)});const wa=sm_key(c,20,y,a,SM_SRC[s],{size:22});
+      const x0=20+wa+12,x1=690;link(i,x0,x1-12,y,3);
+      if(k==="decide"&&SM_PAIRDEC[i])tag(c,(x0+x1)/2,y,SM_PAIRDEC[i],TRUST,{align:"center",size:20});
+      sm_key(c,x1,y,b,SM_SRC[0],{size:22});sm_verdict(c,945,y,res[i]);});c.restore();},
   // break the hash: the parts typed; the raw (or naive) hash beside the macro's, each saying what happened
-  sm_l_hash:(c,w,h,st,L)=>{const V=L.vis,S=SM_HSTEPS[st.step||0],two=S.parts.length>1;c.save();sm_fit(c,w,h,1200,470);
-    T(c,V.parts+":",30,62,{w:600,size:20,color:rgba(SOFT,1)});let x=30+tw(c,V.parts+":",20,600)+16;S.parts.forEach(p=>{x+=sm_key(c,x,54,p,SM_SRC[0],{size:22})+14;});
-    [[two?V.naive:V.raw,S.raw,S.ra,30],[V.macro,S.mac,S.ma,612]].forEach(([lab,[s,hx],v,X])=>{const col=v==="same"||v==="distinct"||v==="noHash"?GOOD:v?BAD:[170,205,255];
-      glass(c,X,110,558,340,16,col,{glow:10,ea:0.7,fill:"rgba(6,10,20,0.95)"});T(c,lab,X+22,150,{w:700,size:20,color:rgba(col,1)});
-      T(c,s.replace(/·/g,"␣"),X+22,206,{f:"mono",w:500,size:24,color:rgba(INK,1)});
-      if(hx)sm_hex(c,X+22,272,hx,100,0,{size:26,col:mix(INK,col,0.35)});
-      if(v)tag(c,X+279,402,V[v],col,{align:"center",size:20});});c.restore();},
-  // the scenarios
-  sm_q_ticket:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);tag(c,40,60,V.q.ticket,TRUST,{size:24});T(c,V.q.two,40,130,{w:700,size:30});
-    [["LMS|u-88213",250],["LMS|u-88231",450]].forEach(([k,y])=>{sm_key(c,60,y,k,SM_SRC[1],{size:30});arrowTo(c,380,y,760,350,SM_SRC[1],0.8,{head:16});});
-    sm_key(c,780,350,"SIS|S-20417",SM_SRC[0],{size:30});T(c,"?",990,250,{w:800,size:64,align:"center",color:rgba(TRUST,1)});c.restore();},
-  sm_q_email:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);sm_key(c,600,120,"…@mail.example",[200,210,230],{size:30,align:"center"});T(c,V.q.email,600,60,{w:700,size:28,align:"center",color:rgba(SOFT,1)});
-    arrowTo(c,560,150,280,380,SM_SRC[0],0.8,{head:16});ring(c,240,450,60,SM_SRC[0],1,4);T(c,V.q.students,240,560,{w:700,size:28,align:"center",color:rgba(SM_SRC[0],1)});
-    [800,1000].forEach(x=>{arrowTo(c,640,150,x,380,SM_SRC[1],0.8,{head:16});ring(c,x,450,60,SM_SRC[1],1,4);});T(c,V.q.accounts,900,560,{w:700,size:28,align:"center",color:rgba(SM_SRC[1],1)});c.restore();},
-  sm_q_agent:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);kt_agent(c,170,320,60,0,{});T(c,V.q.agent,170,440,{w:700,size:28,align:"center",color:rgba([111,214,200],1)});
-    c.save();c.globalAlpha*=0.55;glass(c,330,170,800,300,18,SOFT,{glow:6,ea:0.6,fill:"rgba(6,10,20,0.95)"});c.restore();
-    T(c,V.claim+":",360,230,{w:600,size:26,color:rgba(SOFT,1)});T(c,V.q.uniq,360,290,{f:"mono",w:500,size:30,color:rgba(INK,0.8)});
-    T(c,V.query+": —",360,350,{w:600,size:26,color:rgba(SOFT,1)});T(c,V.result+": —",360,400,{w:600,size:26,color:rgba(SOFT,1)});tag(c,1040,230,V.guess,SOFT,{align:"center",size:24});
-    T(c,V.q.noq,730,540,{w:700,size:28,align:"center",color:rgba(SM_AMBER,1)});c.restore();},
-  sm_q_morning:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);T(c,V.q.vendor+":",60,70,{w:600,size:26,color:rgba(SOFT,1)});sm_key(c,60,130,"AISHA.K@MAIL.EXAMPLE",SM_SRC[2],{size:28});
-    [["SC|aisha.k@mail.example","0f45f571…b10f5",SOFT],["SC|AISHA.K@MAIL.EXAMPLE","deac2049…009b4",BAD]].forEach(([k,hx,col],i)=>{const y=270+i*110;
-      T(c,"sha256('"+k+"')",60,y,{f:"mono",w:500,size:26,color:rgba(INK,0.9)});T(c,"= "+hx,60,y+44,{f:"mono",w:500,size:26,color:rgba(col,1)});});
-    T(c,V.q.morning,600,590,{w:700,size:28,align:"center",color:rgba(BAD,1)});c.restore();},
-  sm_q_pr:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);tag(c,60,60,V.q.pr+" · "+V.q.drop,SM_AMBER,{size:24});
-    sm_file(c,60,110,1080,"models/core/_core__models.yml",["      - name: learner_key","        …","      - name: learner_bk","        …"],{size:26,lh:50,label:V.runs,lit:{2:1},litCol:BAD});
-    T(c,"learner_key: 0905e6e2…  ·  learner_bk: SIS|S-20417",600,560,{f:"mono",w:500,size:24,align:"center",color:rgba(INK,0.9)});c.restore();},
-  sm_q_wallet:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);glass(c,40,90,640,330,18,TRUST,{glow:12,ea:0.75,fill:"rgba(7,12,24,0.95)"});
-    T(c,V.q.wallet,70,145,{w:700,size:28,color:rgba(TRUST,1)});T(c,"6 "+V.q.creds,650,145,{w:800,size:28,align:"right",color:rgba(SM_AMBER,1)});
-    [TRUST,KIND,KIND,KIND,[180,150,255],SM_AMBER].forEach((col,i)=>{const x=70+i*100;glass(c,x,190,84,190,10,col,{glow:6,ea:0.8,fill:"rgba(10,16,30,0.96)"});c.fillStyle=rgba(i===5?KIND:col,0.85);rr(c,x+10,206,64,12,4);c.fill();
-      for(let r=0;r<4;r++){c.fillStyle=rgba(i===5?KIND:col,0.22);rr(c,x+10,240+r*24,64*(0.9-r*0.15),9,3);c.fill();}});
-    glass(c,740,90,420,330,18,GOOD,{glow:10,ea:0.6,fill:"rgba(6,10,20,0.95)"});T(c,V.q.green,770,145,{w:700,size:26,color:rgba(GOOD,1)});
-    for(let i=0;i<5;i++){c.fillStyle=rgba(INK,0.25);rr(c,770,190+i*44,260,12,4);c.fill();tick_(c,1110,196+i*44,30,GOOD,1);}
-    T(c,"?",600,540,{w:800,size:60,align:"center",color:rgba(SM_AMBER,1)});c.restore();},
-  sm_q_reopen:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);T(c,V.q.reopen,60,80,{w:700,size:30});
-    sm_key(c,60,170,"LMS|u-88213",SM_SRC[1],{size:28});sm_key(c,60,290,"LMS|u-…",SM_SRC[1],{size:28,hi:1});T(c,V.q.newId,60,360,{w:600,size:24,color:rgba(SOFT,1)});
-    [[3,V.rules[2]],[4,V.rules[3]],[9,V.rules[4]]].forEach(([p,t],i)=>sm_rule(c,560,140+i*96,600,p,t,{h:70,on:i===0?0.6:0}));
-    arrowTo(c,330,290,550,175,SM_SRC[1],0.8,{head:14});c.restore();},
-  sm_q_code:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,1200,640);
-    sm_file(c,40,40,1120,"seeds/status_map.csv",["key_set,source_code,source_label,canonical_status","…","SC,1,Active customer,studying","SC,0,Inactive customer,inactive"],{size:26,lh:50,label:V.runs,lit:{3:1}});
-    c.save();c.setLineDash([10,8]);c.strokeStyle=rgba(SM_AMBER,0.9);c.lineWidth=2.5;rr(c,40,390,640,80,14);c.stroke();c.restore();
-    T(c,"+ SC,INACTIVE,…,inactive",64,442,{f:"mono",w:500,size:26,color:rgba(SM_AMBER,1)});tag(c,820,430,V.q.pr,SM_AMBER,{align:"center",size:24});
-    tag(c,600,560,V.q.owner,TRUST,{align:"center",size:26});c.restore();}
+  sm_l_hash:(c,w,h,st,L)=>{const V=L.vis,S=SM_HSTEPS[st.step||0],two=S.parts.length>1;c.save();
+    const colOf=v=>v==="same"||v==="distinct"||v==="noHash"?GOOD:v?BAD:[170,205,255],say=v=>V[v]||(v==="blank"?V.collide:"");
+    const sides=[[two?V.naive:V.raw,S.raw,S.ra],[V.macro,S.mac,S.ma]];
+    if(sm_narrow(c)){sm_fit(c,w,h,960,376);T(c,V.parts+":",16,46,{w:600,size:30,color:rgba(SOFT,1)});let x=16+tw(c,V.parts+":",30,600)+16;S.parts.forEach(p=>{x+=sm_key(c,x,36,p,SM_SRC[0],{size:30})+14;});
+      sides.forEach(([lab,[s,hx],v],r)=>{const Y=72+r*152,col=colOf(v);glass(c,8,Y,944,146,16,col,{glow:8,ea:0.7,fill:"rgba(6,10,20,0.95)"});
+        sm_T(c,lab,28,Y+38,900,{w:700,size:28,min:22,color:rgba(col,1)});
+        T(c,s.replace(/·/g,"␣")+"  →  "+sm_short(hx),28,Y+86,{f:"mono",w:500,size:30,color:rgba(INK,1)});
+        if(v)tag(c,28,Y+122,say(v),col,{size:26});});c.restore();return;}
+    sm_fit(c,w,h,1000,392);
+    T(c,V.parts+":",20,48,{w:600,size:22,color:rgba(SOFT,1)});let x=20+tw(c,V.parts+":",22,600)+14;S.parts.forEach(p=>{x+=sm_key(c,x,40,p,SM_SRC[0],{size:24})+12;});
+    sides.forEach(([lab,[s,hx],v],r)=>{const X=15+r*500,col=colOf(v);
+      glass(c,X,78,470,304,16,col,{glow:10,ea:0.7,fill:"rgba(6,10,20,0.95)"});sm_T(c,lab,X+20,116,430,{w:700,size:22,min:18,color:rgba(col,1)});
+      T(c,s.replace(/·/g,"␣"),X+20,164,{f:"mono",w:500,size:24,color:rgba(INK,1)});
+      if(hx)sm_hex(c,X+20,222,hx,100,0,{size:22,col:mix(INK,col,0.35)});
+      if(v){let ts=22;while(ts>17&&tw(c,say(v),ts,700)+26>440)ts--;tag(c,X+235,344,say(v),col,{align:"center",size:ts});}});c.restore();},
+  // the scenarios: each drawn in an 800 x 427 frame, so its smallest words (26) stay about 12 px on a phone
+  sm_q_ticket:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,800,427);tag(c,24,40,V.q.ticket,TRUST,{size:26});sm_T(c,V.q.two,24,104,752,{w:700,size:32,min:26});
+    [["LMS|u-88213",200],["LMS|u-88231",330]].forEach(([k,y])=>{const wk=sm_key(c,24,y,k,SM_SRC[1],{size:28});arrowTo(c,24+wk+14,y,512,266,SM_SRC[1],0.8,{head:16});});
+    sm_key(c,526,266,"SIS|S-20417",SM_SRC[0],{size:28});T(c,"?",632,212,{w:800,size:56,align:"center",color:rgba(TRUST,1)});c.restore();},
+  sm_q_email:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,800,427);T(c,V.q.email,400,44,{w:700,size:28,align:"center",color:rgba(SOFT,1)});sm_key(c,400,96,"…@mail.example",[200,210,230],{size:28,align:"center"});
+    arrowTo(c,360,122,190,240,SM_SRC[0],0.8,{head:16});ring(c,180,286,46,SM_SRC[0],1,4);T(c,V.q.students,180,384,{w:700,size:28,align:"center",color:rgba(SM_SRC[0],1)});
+    [530,690].forEach(x=>{arrowTo(c,440,122,x,240,SM_SRC[1],0.8,{head:16});ring(c,x,286,46,SM_SRC[1],1,4);});T(c,V.q.accounts,610,384,{w:700,size:28,align:"center",color:rgba(SM_SRC[1],1)});c.restore();},
+  sm_q_agent:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,800,427);kt_agent(c,104,190,44,0,{});T(c,V.q.agent,104,280,{w:700,size:28,align:"center",color:rgba([111,214,200],1)});
+    c.save();c.globalAlpha*=0.55;glass(c,214,60,566,270,18,SOFT,{glow:6,ea:0.6,fill:"rgba(6,10,20,0.95)"});c.restore();
+    T(c,V.claim+":",238,112,{w:600,size:28,color:rgba(SOFT,1)});tag(c,756-tw(c,V.guess,26,700)-26,104,V.guess,SOFT,{size:26});
+    sm_T(c,V.q.uniq,238,170,520,{f:"mono",w:500,size:30,min:24,color:rgba(INK,0.85)});
+    T(c,V.query+": —",238,236,{w:600,size:28,color:rgba(SOFT,1)});T(c,V.result+": —",238,292,{w:600,size:28,color:rgba(SOFT,1)});
+    sm_T(c,V.q.noq,497,388,560,{w:700,size:28,align:"center",color:rgba(SM_AMBER,1)});c.restore();},
+  sm_q_morning:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,800,427);T(c,V.q.vendor+":",24,44,{w:600,size:28,color:rgba(SOFT,1)});sm_key(c,24,98,"AISHA.K@MAIL.EXAMPLE",SM_SRC[2],{size:28});
+    [["SC|aisha.k@mail.example","0f45f571…b10f5",SOFT],["SC|AISHA.K@MAIL.EXAMPLE","deac2049…009b4",BAD]].forEach(([k,hx,col],i)=>{const y=178+i*92;
+      T(c,"sha256('"+k+"')",24,y,{f:"mono",w:500,size:26,color:rgba(INK,0.9)});T(c,"= "+hx,24,y+38,{f:"mono",w:500,size:26,color:rgba(col,1)});});
+    sm_T(c,V.q.morning,400,404,752,{w:700,size:28,min:24,align:"center",color:rgba(BAD,1)});c.restore();},
+  sm_q_pr:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,800,427);tag(c,24,36,V.q.pr+" · "+V.q.drop,SM_AMBER,{size:26});
+    c.save();c.translate(24,70);c.scale(1.5,1.5);sm_file(c,0,0,501,"models/core/_core__models.yml",["      - name: learner_key","        …","      - name: learner_bk"],{size:19,lh:32,label:null,lit:{2:1},litCol:BAD});c.restore();
+    T(c,V.runs,776,350,{w:600,size:24,align:"right",color:rgba(SOFT,0.95)});
+    T(c,"learner_key 0905e6e2…   learner_bk SIS|S-20417",400,404,{f:"mono",w:500,size:26,align:"center",color:rgba(INK,0.9)});c.restore();},
+  sm_q_wallet:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,800,427);glass(c,24,60,450,280,18,TRUST,{glow:12,ea:0.75,fill:"rgba(7,12,24,0.95)"});
+    sm_T(c,V.q.wallet,46,104,406,{w:700,size:28,min:24,color:rgba(TRUST,1)});T(c,"6 "+V.q.creds,46,142,{w:800,size:28,color:rgba(SM_AMBER,1)});
+    [TRUST,KIND,KIND,KIND,[180,150,255],SM_AMBER].forEach((col,i)=>{const x=46+i*70;glass(c,x,170,58,146,10,col,{glow:6,ea:0.8,fill:"rgba(10,16,30,0.96)"});c.fillStyle=rgba(i===5?KIND:col,0.85);rr(c,x+8,184,42,10,4);c.fill();
+      for(let r=0;r<4;r++){c.fillStyle=rgba(i===5?KIND:col,0.22);rr(c,x+8,212+r*22,42*(0.9-r*0.15),8,3);c.fill();}});
+    glass(c,500,60,276,280,18,GOOD,{glow:10,ea:0.6,fill:"rgba(6,10,20,0.95)"});const gl=V.q.green.split(": ");
+    gl.forEach((s,i)=>sm_T(c,s+(i<gl.length-1?":":""),520,104+i*36,236,{w:700,size:26,min:22,color:rgba(GOOD,1)}));
+    for(let i=0;i<4;i++){const y=104+gl.length*36+i*44-10;c.fillStyle=rgba(INK,0.25);rr(c,520,y,170,12,4);c.fill();tick_(c,736,y+6,30,GOOD,1);}
+    T(c,"?",400,400,{w:800,size:52,align:"center",color:rgba(SM_AMBER,1)});c.restore();},
+  sm_q_reopen:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,800,427);sm_T(c,V.q.reopen,24,44,752,{w:700,size:30,min:24});
+    const wo=sm_key(c,24,104,"LMS|u-88213",SM_SRC[1],{size:28,a:0.6});arrowTo(c,24+wo+14,104,24+wo+90,104,SM_SRC[1],0.8,{head:14});sm_key(c,24+wo+104,104,"LMS|u-…",SM_SRC[1],{size:28,hi:1});
+    T(c,V.q.newId,24+wo+104,166,{w:600,size:26,color:rgba(SOFT,1)});
+    [[3,V.rules[2]],[4,V.rules[3]],[9,V.rules[4]]].forEach(([p,t],i)=>{const y=196+i*76;sm_rule(c,24,y,752,p,"",{h:64,on:i===0?0.6:0});
+      sm_T(c,t,92,y+42,670,{w:700,size:28,min:22,color:rgba(INK,0.95)});});c.restore();},
+  sm_q_code:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,800,427);
+    c.save();c.translate(24,16);c.scale(1.3,1.3);sm_file(c,0,0,578,"seeds/status_map.csv",["…","SC,1,Active customer,studying","SC,0,Inactive customer,inactive"],{size:19,lh:30,label:V.runs,lit:{2:1}});c.restore();
+    c.save();c.setLineDash([10,8]);c.strokeStyle=rgba(SM_AMBER,0.9);c.lineWidth=2.5;rr(c,24,252,752,64,14);c.stroke();c.restore();
+    sm_T(c,"+ SC,INACTIVE,Inactive customer,inactive",44,294,712,{f:"mono",w:500,size:26,min:22,color:rgba(SM_AMBER,1)});
+    tag(c,24,380,V.q.pr,SM_AMBER,{size:26});const ow=tw(c,V.q.owner,26,700)+26;tag(c,776-ow,380,V.q.owner,TRUST,{size:26});c.restore();}
 });

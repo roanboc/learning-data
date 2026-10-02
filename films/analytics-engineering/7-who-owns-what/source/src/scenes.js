@@ -14,7 +14,7 @@ scene("register",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   const cC=c("chain"),cT=c("title"),cR=c("transfer"),cB=c("bridge"),eR=sc.ends.transfer;
   // the present gathers on the right as the register becomes a core model
   const m=ease(fin(t,cB-0.3,1.8));if(m>0){setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,W,0);g.addColorStop(0,"rgba(5,8,15,"+(0.55*m)+")");g.addColorStop(0.5,"rgba(5,8,15,"+(0.9*m)+")");g.addColorStop(1,"rgba(5,8,15,"+(0.97*m)+")");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);motes(ctx,t,{a:m});}
-  ctx.save();ctx.globalAlpha*=1-0.9*fin(t,B,0.8);drift(ctx,t,sc,{z:0.04,y:440});
+  ctx.save();ctx.globalAlpha*=1-0.97*fin(t,B,0.8);drift(ctx,t,sc,{z:0.04,y:440});
   yearTag(ctx,110,96,"1858 · Adelaide",CLAY,fin(t,0.3,0.6)*(1-m));
   // the chain of old deeds unrolls; then it shrinks to a strip under the register
   const k=ease(fin(t,cC-0.2,1.4)),sk=lerp(1,0.42,k),cp=clamp((t-0.9)/(w("act","tracing")+1.2),0,1);
@@ -119,7 +119,7 @@ scene("products",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
 
 /* ---------- 4. Private, protected, public ---------- */
 const WO_C=[620,510];   // the centre of the rings
-function wo_flyCard(ctx,t,lt,a){const f=ease(fin(lt,0,1.3)),z0=1.03,x0=960+(1435-960)*z0,y0=540+(405-540)*z0,s=z0*Math.pow(0.22/z0,f);
+function wo_flyCard(ctx,t,lt,a){const f=ease(fin(lt,0,1.3)),z0=1.03,x0=960+(1435-960)*z0,y0=540+(405-540)*z0,s=z0*Math.pow(0.26/z0,f);
   withA(ctx,a==null?1:a,()=>{ctx.save();ctx.translate(lerp(x0,WO_C[0],f),lerp(y0,WO_C[1]-282,f));ctx.scale(s,s);ctx.translate(-1435,-405);wo_product(ctx,1010,150,850,t,{on:[1,1,1,1,1,1,1],rh:58,latch:1});ctx.restore();});}
 const WO_PRJ=["    staging:","      +group: credential_model","      +access: private","    intermediate:","      +group: credential_model","      +access: private","    core:","      +group: credential_model","      +access: public","      …","    marts:","      +access: protected"];
 const WO_ACC=["| Access | Who can `ref()` it |","|---|---|","| `private` | Models in the same group only. … |","| `protected` | Any model in the same project. … |","| `public` | Any model in any project, … The core is public. |"];
@@ -130,7 +130,7 @@ function wo_ringScene(ctx,t,o){const[cx,cy]=WO_C;wo_rings(ctx,cx,cy,t,{ring:o.ri
 scene("access",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025,x:620});
   const[cx,cy]=WO_C,cPu=c("public"),cPr=c("protected"),cPv=c("private"),cRf=c("refused"),cAl=c("allowed"),cW=c("wrong");
-  const ring=[fin(t,Math.min(0.7,w("rings","three rings")-0.2),1.6),fin(t,Math.min(1.0,w("rings","three rings")+0.1),1.6),fin(t,w("private","private")-0.2,1.2)];
+  const ring=[fin(t,Math.min(0.3,w("rings","three rings")-0.2),1.6),fin(t,Math.min(0.6,w("rings","three rings")+0.1),1.6),fin(t,w("private","private")-0.2,1.2)];
   const lit=[fin(t,w("public","Public")-0.1,0.5)*(1-0.6*fin(t,cPr,0.5)),fin(t,w("protected","Protected")-0.1,0.5)*(1-0.6*fin(t,cPv,0.5)),fin(t,w("private","private")-0.1,0.5)*(1-0.6*fin(t,cRf,0.5))];
   wo_ringScene(ctx,t,{ring:[ring[0]*fin(t,w("public","Public")-0.3,0.4)+ring[0]*0.35*(1-fin(t,w("public","Public")-0.3,0.4)),ring[1]*fin(t,w("protected","Protected")-0.3,0.4)+ring[1]*0.35*(1-fin(t,w("protected","Protected")-0.3,0.4)),ring[2]],
     lit,core:fin(t,w("public","the core")-0.2,0.8),marts:fin(t,w("protected","the marts")-0.2,0.8),priv:fin(t,w("private","staging")-0.4,1.0)});
@@ -271,9 +271,9 @@ scene("shared",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
     withA(ctx,br,()=>{T(ctx,"joins find",960,232,{w:700,size:20,align:"center",color:rgba(BAD,1)});T(ctx,"nothing",960,258,{w:700,size:20,align:"center",color:rgba(BAD,1)});});}
   withA(ctx,fin(t,w("another","no test")+0.1,0.5),()=>tag(ctx,300,336,"no test fails",GOOD,{align:"center",size:20}));
   // the middle: the key sets, then the one hash macro, then the README's word on packages
-  const ksA=1-fin(t,cH-0.3,0.5),hkA=1-fin(t,cP-0.3,0.5);
+  const ksA=1-fin(t,cH-0.7,0.4),hkA=1-fin(t,cP-0.3,0.5);
   arrive(ctx,960,500,t,cK-0.2,()=>wo_code(ctx,600,330,720,"model/conceptual.yml",WO_KS,{a:ksA,p:clamp((t-cK)/1.4,0,1),size:18,lh:27,edge:WO_REG,lineCol:{1:WO_REG,4:WO_LRN,7:WO_SC}}),{dy:20});
-  arrive(ctx,960,510,t,cH-0.2,()=>wo_code(ctx,540,322,840,"macros/keys.sql",WO_HK,{a:hkA,p:clamp((t-cH)/1.6,0,1),size:18,lh:26,edge:TRUST,lit:{6:fin(t,w("hash","Aisha")-0.2,0.4),10:fin(t,w("hash","Aisha")-0.2,0.4)}}),{dy:20});
+  arrive(ctx,960,510,t,cH-0.2,()=>wo_code(ctx,540,328,840,"macros/keys.sql",WO_HK,{a:hkA,p:clamp((t-cH)/1.6,0,1),size:18,lh:25,edge:TRUST,lit:{6:fin(t,w("hash","Aisha")-0.2,0.4),10:fin(t,w("hash","Aisha")-0.2,0.4)}}),{dy:20});
   const rT=w("package","Macros don't")-0.2;
   arrive(ctx,960,400,t,rT,()=>wo_code(ctx,570,320,780,"examples/planning/README.md",WO_RD2,{p:clamp((t-rT)/1.4,0,1),size:18,lh:28,edge:WO_PLN,label:WO_CLOUD}),{dy:20});
   // the package both projects install
@@ -291,7 +291,7 @@ scene("shared",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
 /* ---------- 8. Groups first ---------- */
 const WO_DEC=["| 12 Oct 2026 | One group owns staging, intermediate and core while","one team builds them; Planning and the wallet each own their marts.","Split into projects when teams own their domains. | Groups control","who can `ref()` what within a project. Separate projects add cost","that pays off only with separate teams. | Noor, data architect |"];
 scene("split",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");setScreen(ctx,S);bg2(ctx);motes(ctx,t);
-  ctx.save();ctx.globalAlpha*=1-0.9*fin(t,B,0.8);drift(ctx,t,sc,{z:0.03,y:500});
+  ctx.save();ctx.globalAlpha*=1-0.97*fin(t,B,0.8);drift(ctx,t,sc,{z:0.03,y:500});
   const cD=c("decided"),cH=c("hands"),j=ease(fin(t,0.2,1.6));
   // the sketch folds back into the one project, which grows to hold three groups
   wo_proj(ctx,60,lerp(110,110,j),lerp(800,840,j),lerp(200,450,j),"credentials · one project",[150,190,255]);

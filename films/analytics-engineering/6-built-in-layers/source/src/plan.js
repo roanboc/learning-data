@@ -319,121 +319,171 @@ function bl_stepLoop(ctx,cx,cy,rx,ry,t,o){o=o||{};ctx.save();ctx.strokeStyle=rgb
 /* ---------- the labs' and scenarios' pictures ----------
    Added to the film bundle's LV registry (Keeping it true's true.js defines it; these keys are prefixed bl_ so they never clash).
    assets/from-words-to-data/learn.js calls each as f(ctx, w, h, state, L): a lab passes its state (sort: {pick, checked}; steps: {step};
-   pick: {pick}; count: {on, total}), a scenario passes {q}. Any words come from L.vis (the page's learn.en.js or learn.es.js). */
+   pick: {pick}; count: {on, total}), a scenario passes {q}. Any words come from L.vis (the page's learn.en.js or learn.es.js).
+   Sized for the real width: a lab draws in a frame of (css width / 0.7) units, so text of 16 or more reads at 11 css px or more,
+   and under 760 units (a phone) it draws a compact layout; a scenario draws in a 520 x 277 frame, which a phone shows at about 0.7. */
+const BL_LK=0.7;
+function bl_lcss(c,w){const cw=c.canvas&&c.canvas.clientWidth;return cw>0?cw:w;}
+// the frame of a lab: [width, height] in units, same shape as the canvas
+function bl_lframe(c,w,h){const fw=clamp(bl_lcss(c,w)/BL_LK,480,1000);return[fw,fw*h/w];}
 function bl_lfit(c,w,h,bw,bh){const k=Math.min(w/bw,h/bh);c.translate((w-bw*k)/2,(h-bh*k)/2);c.scale(k,k);}
-// a long model name on two lines, broken after its "__"; a consumer's badge, larger
-function bl_lsplit(nm){const i=nm.indexOf("__");return i<0?[nm]:[nm.slice(0,i+2),nm.slice(i+2)];}
-function bl_lbadge(c,x,y,name){c.save();c.translate(x,y);c.scale(1.7,1.7);bl_badge(c,0,0,name,1);c.restore();}
+// text at size, shrunk to no less than min, then cut with an ellipsis, to fit maxW; returns [text, size]
+function bl_lsz(c,s,size,min,maxW,w,f){let z=size;while(z>min&&tw(c,s,z,w||700,f)>maxW)z--;return[bl_fit(c,s,z,maxW,w||700,f),z];}
+// a mono name broken after its underscores into lines that fit maxW
+function bl_lbreak(c,s,size,maxW){const parts=s.match(/[^_]+_*/g)||[s],out=[];let cur="";parts.forEach(p=>{if(cur&&tw(c,cur+p,size,500,"mono")>maxW){out.push(cur);cur=p;}else cur+=p;});if(cur)out.push(cur);return out;}
 function bl_lcount(pick,b){return Object.values(pick||{}).filter(x=>x===b).length;}
+function bl_ltagR(c,xr,y,s,col,size){const wd=tw(c,s,size,700)+26;tag(c,xr-wd,y,s,col,{size});}
 // a model's material: a glass pane (view), a block of stone (table), stone with a fresh layer merged on top (incremental),
-// a dashed outline holding nothing (ephemeral); o.stale tints the rows built under an old rule
-function bl_lmat(c,kind,x,y,w,h,col,o){o=o||{};c.save();
-  if(kind==="ephemeral"){c.setLineDash([10,9]);c.strokeStyle=rgba(col,0.85);c.lineWidth=2.4;rr(c,x,y,w,h,14);c.stroke();c.restore();
-    if(o.nothing)wrapT(c,o.nothing,x+w/2,y+h/2,w-30,{w:700,size:18,align:"center",color:rgba(SOFT,1)});return;}
-  if(kind==="view"){glass(c,x,y,w,h,14,col,{glow:10,ea:0.8,fill:"rgba(7,12,24,0.9)"});rr(c,x+3,y+3,w-6,h-6,12);c.clip();
+// a dashed outline holding nothing (ephemeral); o.stale tints the rows built under an old rule; o.nothing, o.oldRows: words inside (o.fs)
+function bl_lmat(c,kind,x,y,w,h,col,o){o=o||{};const fs=o.fs||17;c.save();
+  if(kind==="ephemeral"){c.setLineDash([10,9]);c.strokeStyle=rgba(col,0.85);c.lineWidth=2.4;rr(c,x,y,w,h,12);c.stroke();c.restore();
+    if(o.nothing)wrapT(c,o.nothing,x+w/2,y+h/2+6,w-20,{w:700,size:fs,align:"center",color:rgba(SOFT,1)});return;}
+  if(kind==="view"){glass(c,x,y,w,h,12,col,{glow:10,ea:0.8,fill:"rgba(7,12,24,0.9)"});rr(c,x+3,y+3,w-6,h-6,10);c.clip();
     const g=c.createLinearGradient(x,y,x+w,y+h);g.addColorStop(0,rgba(col,0.2));g.addColorStop(1,rgba(col,0.04));c.fillStyle=g;c.fillRect(x,y,w,h);
-    c.strokeStyle="rgba(255,255,255,0.2)";c.lineWidth=10;[0.15,0.55].forEach(f=>{c.beginPath();c.moveTo(x+w*f,y+h);c.lineTo(x+w*f+90,y);c.stroke();});c.restore();
-    if(o.nothing)wrapT(c,o.nothing,x+w/2,y+h/2+6,w-30,{w:700,size:18,align:"center",color:rgba(INK,0.9)});return;}
-  const g=c.createLinearGradient(x,y,x+w,y+h);g.addColorStop(0,rgba(mix(col,[120,120,120],0.55),0.97));g.addColorStop(1,rgba(mix(col,[30,30,30],0.6),0.97));c.fillStyle=g;rr(c,x,y,w,h,12);c.fill();
-  rr(c,x,y,w,h,12);c.clip();c.fillStyle="rgba(0,0,0,0.13)";for(let k=0;k<26;k++){c.beginPath();c.arc(x+hash(k,61)*w,y+hash(k,62)*h,1+hash(k,63)*3,0,TAU);c.fill();}
-  c.strokeStyle="rgba(0,0,0,0.25)";c.lineWidth=2;for(let yy=y+46;yy<y+h;yy+=46){c.beginPath();c.moveTo(x,yy);c.lineTo(x+w,yy);c.stroke();}
-  if(o.stale){c.fillStyle=rgba(BAD,0.32);c.fillRect(x,y+h*0.3,w,h*0.7);}
-  if(kind==="incremental"){c.fillStyle=rgba(mix(col,[255,255,255],0.35),0.95);c.fillRect(x,y,w,h*0.13);c.fillStyle=rgba(GOOD,0.5);c.fillRect(x,y+h*0.13,w,3);}
-  c.restore();if(o.stale&&o.oldRows)wrapT(c,o.oldRows,x+w/2,y+h*0.62,w-24,{w:800,size:o.fs||18,align:"center",color:rgba(INK,1)});}
-// a short list of CTE names (the draft, mid-refactor): rows {n, g (0 import, 1 logical, 2 final), bad, hi, note}
-function bl_llist(c,x,y,rows){rows.forEach((r,i)=>{const yy=y+i*40,col=r.bad?BAD:r.g===0?BL_STG:r.g===2?TRUST:BL_MART;
-  if(r.hi)glow(c,x+90,yy-6,120,TRUST,0.25);c.fillStyle=rgba(col,1);c.beginPath();c.arc(x+6,yy-6,5,0,TAU);c.fill();
-  T(c,r.n,x+22,yy,{f:"mono",w:500,size:20,color:rgba(r.bad?mix(INK,BAD,0.5):r.hi?mix(INK,TRUST,0.6):INK,1)});});
-  // what is wrong, or what changed, under the list: one tag per marked row, named
-  let ny=y+rows.length*40+18;rows.forEach(r=>{if(!r.note)return;tag(c,x,ny,r.n+": "+r.note,r.bad?BAD:TRUST,{size:16});ny+=40;});return ny;}
+    c.strokeStyle="rgba(255,255,255,0.2)";c.lineWidth=Math.max(4,w*0.06);[0.15,0.55].forEach(f=>{c.beginPath();c.moveTo(x+w*f,y+h);c.lineTo(x+w*f+h*0.5,y);c.stroke();});c.restore();return;}
+  const g=c.createLinearGradient(x,y,x+w,y+h);g.addColorStop(0,rgba(mix(col,[120,120,120],0.55),0.97));g.addColorStop(1,rgba(mix(col,[30,30,30],0.6),0.97));c.fillStyle=g;rr(c,x,y,w,h,10);c.fill();
+  rr(c,x,y,w,h,10);c.clip();c.fillStyle="rgba(0,0,0,0.13)";for(let k=0;k<26;k++){c.beginPath();c.arc(x+hash(k,61)*w,y+hash(k,62)*h,1+hash(k,63)*3,0,TAU);c.fill();}
+  c.strokeStyle="rgba(0,0,0,0.25)";c.lineWidth=2;for(let yy=y+Math.max(16,h/5);yy<y+h;yy+=Math.max(16,h/5)){c.beginPath();c.moveTo(x,yy);c.lineTo(x+w,yy);c.stroke();}
+  if(o.stale){c.fillStyle=rgba(BAD,0.4);c.fillRect(x,y+h*0.3,w,h*0.7);}
+  if(kind==="incremental"){c.fillStyle=rgba(mix(col,[255,255,255],0.35),0.95);c.fillRect(x,y,w,h*0.16);c.fillStyle=rgba(GOOD,0.5);c.fillRect(x,y+h*0.16,w,3);}
+  c.restore();if(o.stale&&o.oldRows)wrapT(c,o.oldRows,x+w/2,y+h*0.58,w-16,{w:800,size:fs,align:"center",color:rgba(INK,1)});}
+
+/* refactor the CTEs: the draft's CTE names, moved and renamed one step at a time (rows {n, g (0 import, 1 logical, 2 final), bad, hi, note}),
+   then the finished file's outline, by group; real lines beside each step */
 const BL_LDRAFT=[
   [{n:"learners",g:0},{n:"cte2",g:1,bad:1,note:"badName"},{n:"credit",g:0},{n:"credit_at_census",g:1},{n:"learner_awards",g:1},{n:"joined",g:1,bad:1,note:"buried"},{n:"measured",g:1},{n:"select *",g:2,bad:1}],
   [{n:"learners",g:0},{n:"awards",g:0,hi:1,note:"moved"},{n:"credit",g:0},{n:"cte2",g:1,bad:1},{n:"credit_at_census",g:1},{n:"awards_at_census",g:1},{n:"learner_awards",g:1},{n:"joined",g:1},{n:"measured",g:1},{n:"select *",g:2,bad:1}],
   [{n:"learners",g:0},{n:"awards",g:0},{n:"credit",g:0},{n:"learners_at_census",g:1,hi:1,note:"renamed"},{n:"credit_at_census",g:1},{n:"awards_at_census",g:1},{n:"learner_awards",g:1},{n:"joined",g:1},{n:"measured",g:1},{n:"select *",g:2,bad:1}],
   [{n:"learners",g:0},{n:"awards",g:0},{n:"credit",g:0},{n:"learners_at_census",g:1},{n:"awards_at_census",g:1},{n:"credit_at_census",g:1},{n:"learner_awards",g:1},{n:"joined",g:1},{n:"measured",g:1},{n:"select *",g:2,bad:1}]];
-// the real lines beside each step of the refactor (docs/conventions.md, and mart_planning__near_award.sql; blank lines removed, trimmed with …)
+// credit_points_remaining, traced: measured computes it from joined, which takes credit_points_required from awards_at_census and credit_points_earned from credit_at_census
+const BL_LTRACE={"final select":1,measured:1,joined:1,awards_at_census:1,credit_at_census:1,awards:1,credit:1};
+// the real lines beside each step (docs/conventions.md, and mart_planning__near_award.sql; blank lines removed, trimmed with …)
 const BL_LMART="models/marts/planning/mart_planning__near_award.sql";
 const BL_LCARDS=[
   ["docs/conventions.md",["- **Import CTEs** first, one per model or source, …","- Then **logical CTEs**, one step each, named for what they hold …","- A **final select** that lists every column, in the contract's order."],{}],
   [BL_LMART,["learners as (","    select * from {{ ref('core_learner') }}","),","awards as (","    select * from {{ ref('core_award') }}","),","credit as (","    select * from {{ ref('core_credit_towards_award') }}","),"],{3:1,4:1}],
   [BL_LMART,["-- as it was: each entity's version on the census date","learners_at_census as (","    select * from learners","    where {{ valid_at(census_date()) }}","),"],{1:1}],
-  [BL_LMART,["learner_awards as (","    select learner_key, award_key from credit_at_census","    union","    select learner_key, enrolled_award_key from learners_at_census …","),"],{}],
+  [BL_LMART,["-- every award a learner was enrolled in, or had credit towards, on the census date","learner_awards as (","    select learner_key, award_key from credit_at_census","    union","    select learner_key, enrolled_award_key from learners_at_census …","),"],{}],
   [BL_LMART,["select","    {{ hash_key(['learner_bk', 'award_bk']) }} as learner_award_key,","    {{ census_date() }} as census_date,","    learner_key,","    …","    is_enrolled","        and learner_status = 'studying'","        and {{ is_near_award('credit_points_remaining') }}","        as is_near_award","from measured"],{}],
-  [BL_LMART,["measured as (","    select","        *,","        greatest(credit_points_required - …, 0) as credit_points_remaining","    from joined","),"],{3:1}]];
+  [BL_LMART,["measured as (","    select","        *,","        greatest(credit_points_required - credit_points_earned, 0) as credit_points_remaining","    from joined","),"],{3:1}]];
 // the five models of "View, table or incremental?", their layer, and how each option stores them
 const BL_LSTORE={layer:[0,1,2,2,3],views:["view","view","view","view","view"],tables:["table","table","table","table","table"],inc:["incremental","incremental","incremental","incremental","incremental"],
   eph:["view","ephemeral","table","incremental","table"],project:["view","view","table","incremental","table"],stale:["view","view","table","incremental","table"]};
+// a CTE name as a chip (mono); returns its width
+function bl_lchip(c,x,y,s,col,o){o=o||{};const sz=o.size||17,wd=tw(c,s,sz,500,"mono")+24;if(o.glow)glow(c,x+wd/2,y,wd*0.7,col,0.3);
+  glass(c,x,y-16,wd,32,9,col,{glow:4+8*(o.glow?1:0),ea:0.55+0.4*(o.glow?1:0),fill:"rgba(7,12,24,0.95)"});T(c,s,x+12,y+6,{f:"mono",w:500,size:sz,color:rgba(o.text||INK,1)});return wd;}
+// the chips of one step, flowing in rows across width W from (x, y); groups get a label from V.groups when o.groups; returns the next y
+function bl_lflow(c,V,k,x,y,W){const rows=k<4?BL_LDRAFT[k]:[...BL_OUT[0][1].map(n=>({n,g:0})),...BL_OUT[1][1].map(n=>({n,g:1})),{n:"final select",g:2}];
+  const colOf=r=>r.bad?BAD:k===5&&BL_LTRACE[r.n]?TRUST:r.hi?TRUST:r.g===0?BL_STG:r.g===2?TRUST:BL_MART;
+  let cx=x,cy=y+16;const nl=()=>{cx=x;cy+=42;};
+  const lines=k>=3?[0,1,2].map(g=>rows.filter(r=>r.g===g)):[rows];
+  lines.forEach((rs,li)=>{if(k>=3){const lab=V.groups[li];T(c,lab,cx,cy+6,{w:800,size:17,color:rgba(SOFT,1)});cx+=Math.max(tw(c,lab,17,800)+14,0);}
+    const x0=cx;rs.forEach(r=>{const wd=tw(c,r.n,17,500,"mono")+24;if(cx+wd>x+W&&cx>x0){cx=x0;cy+=42;}const col=colOf(r);
+      cx+=bl_lchip(c,cx,cy,r.n,col,{glow:r.hi||(k===5&&BL_LTRACE[r.n]),text:r.bad?mix(INK,BAD,0.5):INK})+8;});if(li<lines.length-1)nl();});
+  cy+=40;const notes=k<4?rows.filter(r=>r.note).map(r=>[r.n+": "+V[r.note],r.bad?BAD:TRUST]):[];
+  if(k===3)notes.push([V.ordered,BL_MART]);if(k===4)notes.push([V.inContract,BL_MART]);if(k===5)notes.push([V.traced,TRUST]);
+  notes.forEach(([s,col])=>{const[t2,z]=bl_lsz(c,s,17,16,W-30,700);tag(c,x,cy,t2,col,{size:z});cy+=40;});return cy-16;}
 
 Object.assign(LV,{
-  // which layer: the four columns of the film, with the project's models in them, each counting what has been placed in it, and a macro beside them
-  bl_l_layers:(c,w,h,st,L)=>{const V=L.vis,p=st.pick||{},g={x0:20,cw:206,gap:12,y0:16,h:400},B=["stg","int","core","mart"];c.save();bl_lfit(c,w,h,1200,550);
-    const n=B.map(b=>bl_lcount(p,b)),nm=bl_lcount(p,"macro");
-    bl_cols(c,0,{chips:[7,8,4,3],g,count:[1,1,1,1],lit:n.map(k=>k>0?1:0.45)});
-    LAYER4.forEach(([,col],i)=>tag(c,20+i*218+103,452,n[i]+" "+V.placed,col,{align:"center",size:20}));
-    const mx=900,mw=280,mc=nm>0?WEED:SOFT;glass(c,mx,16,mw,400,16,mc,{glow:6+10*(nm>0),ea:0.4+0.5*(nm>0),fill:"rgba(7,12,24,0.92)"});
-    T(c,V.macro,mx+mw/2,56,{w:800,size:22,align:"center",color:rgba(mc,1)});T(c,bl_fit(c,V.macroFile,17,mw-30,500,"mono"),mx+mw/2,150,{f:"mono",w:500,size:17,align:"center",color:rgba(INK,0.9)});
-    T(c,V.onceLab,mx+mw/2,190,{w:700,size:20,align:"center",color:rgba(SOFT,1)});tag(c,mx+mw/2,452,nm+" "+V.placed,WEED,{align:"center",size:20});
-    if(p[3]==="stg"){glow(c,123,200,140,BAD,0.3);tag(c,20,505,V.hiddenJoin,BAD,{size:18});}
-    if(p[5]==="mart"){glow(c,777,200,140,BAD,0.3);tag(c,777,505,V.ruleTwice,BAD,{align:"center",size:18});}
+  // which layer: the four columns of the film and a macro, each holding the pieces placed in it (red once checked, if wrong)
+  bl_l_layers:(c,w,h,st,L)=>{const V=L.vis,p=st.pick||{},[fw,fh]=bl_lframe(c,w,h),narrow=fw<760,B=["stg","int","core","mart","macro"];c.save();bl_lfit(c,w,h,fw,fh);
+    const cols=[...LAYER4.map(([nm,col])=>[nm,col]),[V.macro,WEED]],items=V.short.map((s,i)=>({s,i})),bad=i=>st.checked&&L.labs[0].w.items[i].b!==p[i];
+    const warn=[];if(p[3]==="stg")warn.push([V.hiddenJoin,0]);if(p[5]==="mart")warn.push([V.ruleTwice,3]);
+    if(!narrow){const gap=10,cw=(fw-40-4*gap)/5,top=14,colH=fh-top-110;
+      cols.forEach(([nm,col],ci)=>{const x=20+ci*(cw+gap),here=items.filter(it=>p[it.i]===B[ci]),on=here.length>0;
+        glass(c,x,top,cw,colH,14,mix(SOFT,col,on?1:0.4),{glow:6+10*on,ea:0.4+0.5*on,fill:"rgba(7,12,24,0.92)"});
+        const[hn,hz]=bl_lsz(c,nm,21,17,cw-14,800);T(c,hn,x+cw/2,top+34,{w:800,size:hz,align:"center",color:rgba(mix(SOFT,col,on?1:0.5),1)});
+        const sp=Math.min(38,(colH-64)/Math.max(1,here.length));
+        here.forEach((it,j)=>{const y=top+54+j*sp,b=bad(it.i),cc=b?BAD:col,ch=Math.min(32,sp-4);glass(c,x+8,y,cw-16,ch,9,cc,{glow:6,ea:0.7,fill:"rgba(8,14,28,0.95)"});
+          const[s2,z]=bl_lsz(c,it.s,17,16,cw-30,700);T(c,s2,x+cw/2,y+ch/2+6,{w:700,size:z,align:"center",color:rgba(b?mix(INK,BAD,0.5):INK,1)});});
+        tag(c,x+cw/2,top+colH+26,here.length+" "+V.placed,col,{align:"center",size:17});});
+      warn.forEach(([s,ci])=>{const x=20+ci*(cw+gap);if(ci===0)tag(c,x,fh-28,s,BAD,{size:18});else bl_ltagR(c,x+cw,fh-28,s,BAD,18);});}
+    else{const rh=46,top=8;
+      cols.forEach(([nm,col],ci)=>{const y=top+ci*rh,here=items.filter(it=>p[it.i]===B[ci]),on=here.length>0;
+        glass(c,8,y,fw-16,rh-8,12,mix(SOFT,col,on?1:0.4),{glow:4+8*on,ea:0.4+0.5*on,fill:"rgba(7,12,24,0.92)"});
+        const[hn,hz]=bl_lsz(c,nm,19,16,150,800);T(c,hn,22,y+rh/2+2,{w:800,size:hz,color:rgba(mix(SOFT,col,on?1:0.5),1)});
+        T(c,String(here.length),190,y+rh/2+4,{w:800,size:24,align:"center",color:rgba(col,1)});
+        here.forEach((it,j)=>{const b=bad(it.i);c.fillStyle=rgba(b?BAD:col,1);c.beginPath();c.arc(222+j*24,y+rh/2-4,8,0,TAU);c.fill();});});
+      warn.forEach(([s,ci],j)=>{const[s2,z]=bl_lsz(c,s,17,16,fw-50,700);tag(c,10,top+5*rh+18+j*40,s2,BAD,{size:z});});}
     c.restore();},
-  // refactor the CTEs: the draft's CTE names, moved and renamed one step at a time, then the film's outline; real lines beside them
-  bl_l_ctes:(c,w,h,st,L)=>{const V=L.vis,k=st.step||0;c.save();bl_lfit(c,w,h,1280,560);
-    if(k<4){const rows=BL_LDRAFT[k].map(r=>Object.assign({},r,{note:r.note?V[r.note]:null}));T(c,k===0?V.draft:"",30,34,{w:800,size:22,color:rgba(SOFT,1)});const ny=bl_llist(c,40,90,rows);
-      if(k===3)tag(c,40,ny,V.ordered,BL_MART,{size:18});}
-    else{c.save();c.translate(30,6);c.scale(0.82,0.82);bl_outline(c,20,0,0,{on:[1,1,1],trace:k===5?{credit:1,credit_at_census:1,joined:1,measured:1,"final select":1}:null});c.restore();
-      tag(c,40,522,k===5?V.traced:V.inContract,k===5?TRUST:BL_MART,{size:18});}
-    const[fn,ls,lit]=BL_LCARDS[k];bl_code(c,500,16,760,fn,ls,{size:k===5?16:17,lh:31,lit,edge:BL_MART});c.restore();},
+  // refactor the CTEs: the CTE names as chips, one step at a time; on a wider screen, the real lines below them
+  bl_l_ctes:(c,w,h,st,L)=>{const V=L.vis,k=st.step||0,[fw,fh]=bl_lframe(c,w,h),narrow=fw<760;
+    const[fn,ls,lit]=BL_LCARDS[k],cw=fw-32;let sz=16;while(sz>15&&Math.max(...ls.map(l=>tw(c,l,sz,500,"mono")))>cw-44)sz--;
+    // measure first (drawing into nothing), then fit the frame to what's there
+    c.save();c.globalAlpha=0;let y=k===0?44:12;const yEnd=bl_lflow(c,V,k,16,y,fw-32);c.restore();const cardH=narrow?0:84+ls.length*25+16,need=yEnd+(narrow?0:14+cardH)+12;
+    c.save();bl_lfit(c,w,h,need>fh?fw*need/fh:fw,Math.max(fh,need));
+    if(k===0)T(c,V.draft,16,30,{w:800,size:20,color:rgba(SOFT,1)});bl_lflow(c,V,k,16,y,fw-32);
+    if(!narrow)bl_code(c,16,yEnd+14,cw,fn,ls,{size:sz,lh:25,lit,edge:BL_MART});c.restore();},
   // view, table or incremental: five models, each with its size and use, drawn in the material the option gives it
-  bl_l_store:(c,w,h,st,L)=>{const V=L.vis,o=st.pick||"views",ks=BL_LSTORE[o]||BL_LSTORE.views;c.save();bl_lfit(c,w,h,1200,500);
-    V.models.forEach(([nm,use],i)=>{const x=12+i*238,cw=222,col=LAYER4[BL_LSTORE.layer[i]][1],kd=ks[i];
-      const parts=nm.includes("__")?[nm.split("__")[0]+"__",nm.split("__")[1]]:[nm];parts.forEach((s,j)=>T(c,s,x+cw/2,40+j*24,{f:"mono",w:500,size:17,align:"center",color:rgba(col,1)}));
-      wrapT(c,use,x+cw/2,112,cw-12,{w:600,size:18,align:"center",color:rgba(SOFT,1)});
-      bl_lmat(c,kd,x+8,212,cw-16,186,col,{nothing:kd==="ephemeral"?V.nothing:null,stale:o==="stale"&&i===3,oldRows:V.oldRows});
-      tag(c,x+cw/2,440,V.kinds[kd],kd==="ephemeral"?SOFT:col,{align:"center",size:20});});
+  bl_l_store:(c,w,h,st,L)=>{const V=L.vis,o=st.pick||"views",ks=BL_LSTORE[o]||BL_LSTORE.views,[fw,fh]=bl_lframe(c,w,h),narrow=fw<760;c.save();bl_lfit(c,w,h,fw,fh);
+    if(!narrow){const gap=10,cw=(fw-40-4*gap)/5;
+      const tops=V.models.map(([nm,use])=>30+bl_lbreak(c,nm,17,cw-6).length*22+26+wrapT(c,use,0,0,cw-8,{w:600,size:17,measure:1}).length*22),by=Math.max(...tops)+10,bh=fh-90-by;
+      V.models.forEach(([nm,use],i)=>{const x=20+i*(cw+gap),col=LAYER4[BL_LSTORE.layer[i]][1],kd=ks[i],stale=o==="stale"&&i===3;
+        const nl=bl_lbreak(c,nm,17,cw-6);nl.forEach((s,j)=>T(c,s,x+cw/2,30+j*22,{f:"mono",w:500,size:17,align:"center",color:rgba(col,1)}));
+        wrapT(c,use,x+cw/2,30+nl.length*22+26,cw-8,{w:600,size:17,lh:22,align:"center",color:rgba(SOFT,1)});
+        bl_lmat(c,kd,x+6,by,cw-12,bh,col,{nothing:kd==="ephemeral"?V.nothing:null,stale,oldRows:V.oldRows});
+        tag(c,x+cw/2,by+bh+36,V.kinds[kd],kd==="ephemeral"?SOFT:col,{align:"center",size:18});});}
+    else{const rh=(fh-8)/5;
+      V.models.forEach(([nm,use],i)=>{const y=4+i*rh,col=LAYER4[BL_LSTORE.layer[i]][1],kd=ks[i],stale=o==="stale"&&i===3;
+        bl_lmat(c,kd,10,y+6,62,rh-12,col,{stale});
+        const kt=V.kinds[kd],kw=tw(c,kt,17,700)+26;bl_ltagR(c,fw-8,y+20,kt,kd==="ephemeral"?SOFT:col,17);
+        const[n2,z]=bl_lsz(c,nm,17,15,fw-96-kw-10,500,"mono");T(c,n2,86,y+26,{f:"mono",w:500,size:z,color:rgba(col,1)});
+        wrapT(c,stale?V.oldRows:use,86,y+50,fw-96,{w:600,size:16,lh:20,color:rgba(stale?mix(INK,BAD,0.6):SOFT,1)});});}
     c.restore();},
-  // one rule, twice: the rule written once, read by the macro and the metric; a dashboard's own copy; and a balance against the census report
-  bl_l_once:(c,w,h,st,L)=>{const V=L.vis,on=st.on||new Set(),tot=st.total||0,has=k=>on.has(k);c.save();bl_lfit(c,w,h,1200,500);
-    const ruleOn=!has("done")&&!has("left")&&!has("s20")&&has("s10"),dashOn=has("done")&&has("left")&&has("s10")&&has("s15")&&!has("s20");
-    glass(c,20,20,560,110,16,BL_MART,{glow:8+14*ruleOn,ea:0.5+0.4*ruleOn,fill:"rgba(7,12,24,0.94)"});T(c,V.rule,300,68,{f:"mono",w:500,size:26,align:"center",color:rgba(BL_MART,1)});T(c,V.ruleOnce,300,106,{w:700,size:20,align:"center",color:rgba(SOFT,1)});
-    [[V.countMacro,160],[V.metric,440]].forEach(([s,x])=>{arrowTo(c,300,134,x,196,BL_MART,0.5+0.5*ruleOn,{head:12});glass(c,x-130,200,260,96,14,BL_MART,{glow:6+10*ruleOn,ea:0.4+0.4*ruleOn,fill:"rgba(7,12,24,0.94)"});wrapT(c,s,x,240,230,{w:700,size:19,align:"center",color:rgba(INK,0.95)});});
-    glass(c,20,350,560,110,16,EDGE_,{glow:6+14*dashOn,ea:0.4+0.5*dashOn,fill:"rgba(7,12,24,0.94)"});T(c,V.dash,300,394,{w:700,size:20,align:"center",color:rgba(SOFT,1)});T(c,V.dashRule,300,434,{f:"mono",w:500,size:22,align:"center",color:rgba(EDGE_,1)});
-    const ok=tot===12,r=-clamp((tot-12)/10,-1,1)*0.22;bl_balance(c,900,150,1,r,{l:String(tot),r:"12",col:ok?GOOD:EDGE_});
-    T(c,V.yours,900-Math.cos(r)*170,370,{w:700,size:20,align:"center",color:rgba(SOFT,1)});T(c,V.census,900+Math.cos(r)*170,370,{w:700,size:20,align:"center",color:rgba(SOFT,1)});
+  // one rule, twice: the rule written once, read by the macro and the metric; a dashboard's own copy; your count against the census report
+  bl_l_once:(c,w,h,st,L)=>{const V=L.vis,on=st.on||new Set(),tot=st.total||0,has=k=>on.has(k),[fw,fh]=bl_lframe(c,w,h),narrow=fw<760;c.save();bl_lfit(c,w,h,fw,fh);
+    const ruleOn=!has("done")&&!has("left")&&!has("s20")&&has("s10"),dashOn=has("done")&&has("left")&&has("s10")&&has("s15")&&!has("s20"),ok=tot===12;
+    const box=(x,y,bw,bh,col,lit)=>glass(c,x,y,bw,bh,14,col,{glow:6+12*lit,ea:0.45+0.45*lit,fill:"rgba(7,12,24,0.94)"});
+    if(!narrow){const LW=Math.min(520,fw*0.58),bw=(LW-20)/2;c.translate(0,Math.max(0,(fh-420)/2));
+      box(16,16,LW,96,BL_MART,ruleOn);T(c,V.rule,16+LW/2,58,{f:"mono",w:500,size:24,align:"center",color:rgba(BL_MART,1)});T(c,V.ruleOnce,16+LW/2,92,{w:700,size:18,align:"center",color:rgba(SOFT,1)});
+      [[V.countMacro,16],[V.metric,36+bw]].forEach(([s,x])=>{arrowTo(c,16+LW/2,114,x+bw/2,170,BL_MART,0.5+0.5*ruleOn,{head:12});box(x,174,bw,100,BL_MART,ruleOn);
+        const ln=wrapT(c,s,0,0,bw-24,{w:700,size:18,measure:1});wrapT(c,s,x+bw/2,224-(ln.length-1)*11+6,bw-24,{w:700,size:18,lh:22,align:"center",color:rgba(INK,0.95)});});
+      const dy=304;box(16,dy,LW,100,EDGE_,dashOn);T(c,V.dash,16+LW/2,dy+40,{w:700,size:18,align:"center",color:rgba(SOFT,1)});T(c,V.dashRule,16+LW/2,dy+76,{f:"mono",w:500,size:21,align:"center",color:rgba(EDGE_,1)});
+      const cx=16+LW+(fw-16-LW)/2,r=-clamp((tot-12)/10,-1,1)*0.22,sc=0.68;c.save();c.translate(cx,130);c.scale(sc,sc);bl_balance(c,0,0,1,r,{l:String(tot),r:"12",col:ok?GOOD:EDGE_});c.restore();
+      const RW=fw-32-LW,lab=(s,x)=>wrapT(c,s,x,330,RW/2-12,{w:700,size:18,lh:22,align:"center",color:rgba(SOFT,1)});lab(V.yours,cx-RW/4);lab(V.census,cx+RW/4);}
+    else{const LW=fw*0.6,bw=(LW-8)/2;
+      box(8,8,LW,72,BL_MART,ruleOn);T(c,V.rule,8+LW/2,38,{f:"mono",w:500,size:20,align:"center",color:rgba(BL_MART,1)});const[r2,rz]=bl_lsz(c,V.ruleOnce,16,16,LW-16,700);T(c,r2,8+LW/2,66,{w:700,size:rz,align:"center",color:rgba(SOFT,1)});
+      [[V.countMacro,8],[V.metric,16+bw]].forEach(([s,x])=>{arrowTo(c,8+LW/2,82,x+bw/2,104,BL_MART,0.5+0.5*ruleOn,{head:9});box(x,106,bw,98,BL_MART,ruleOn);
+        const ln=wrapT(c,s,0,0,bw-14,{w:700,size:16,measure:1});wrapT(c,s,x+bw/2,160-(ln.length-1)*10+5,bw-14,{w:700,size:16,lh:20,align:"center",color:rgba(INK,0.95)});});
+      const dy=fh-104;box(8,dy,LW,96,EDGE_,dashOn);wrapT(c,V.dash,8+LW/2,dy+30,LW-16,{w:700,size:16,lh:20,align:"center",color:rgba(SOFT,1)});T(c,V.dashRule,8+LW/2,dy+80,{f:"mono",w:500,size:17,align:"center",color:rgba(EDGE_,1)});
+      const cx=LW+16+(fw-LW-16)/2,RW=fw-LW-28,num=(lb,v,y,col)=>{const ln=wrapT(c,lb,cx,y,RW,{w:700,size:16,lh:20,align:"center",color:rgba(SOFT,1)});T(c,v,cx,y+ln.length*20+30,{w:800,size:40,align:"center",color:rgba(col,1)});};
+      num(V.yours,String(tot),40,ok?GOOD:EDGE_);T(c,ok?"=":"≠",cx,fh/2+30,{w:800,size:32,align:"center",color:rgba(ok?GOOD:BAD,1)});num(V.census,"12",fh/2+64,SOFT);}
     c.restore();},
-  // the scenarios
-  bl_q_join:(c,w,h,st,L)=>{const V=L.vis;c.save();bl_lfit(c,w,h,1200,640);
-    V.two.forEach((s,i)=>{const col=SRC3[i][1],y=120+i*250,sz=tw(c,s,28,700)>360?24:28;glass(c,40,y,410,110,16,col,{glow:10,ea:0.75,fill:"rgba(7,12,24,0.94)"});T(c,s,245,y+64,{w:700,size:sz,align:"center"});arrowTo(c,460,y+55,690,320,col,0.85,{head:16});});
-    glass(c,700,230,440,180,16,BL_STG,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});bl_lsplit(V.stgFile).forEach((s,j)=>T(c,s,920,282+j*36,{f:"mono",w:500,size:28,align:"center",color:rgba(BL_STG,1)}));
-    glow(c,920,368,90,BAD,0.3);tag(c,920,368,V.join,BAD,{align:"center",size:28});c.restore();},
-  bl_q_mart:(c,w,h,st,L)=>{const V=L.vis;c.save();bl_lfit(c,w,h,1200,640);
-    glass(c,330,60,540,110,16,TRUST,{glow:12,ea:0.8,fill:"rgba(26,20,8,0.94)"});T(c,"core_credit_towards_award",600,128,{f:"mono",w:500,size:32,align:"center",color:rgba(TRUST,1)});
-    arrowTo(c,480,180,220,390,TRUST,0.8,{head:16});arrowTo(c,720,180,880,390,TRUST,0.8,{head:16});tick_(c,850,270,44,GOOD,1);
-    bl_lbadge(c,200,450,V.planning);bl_lbadge(c,860,450,V.wallet);
-    arrowTo(c,450,560,840,560,EDGE_,0.8,{head:16,dash:[10,8]});cross_(c,645,560,46,BAD,1);c.restore();},
-  bl_q_names:(c,w,h,st,L)=>{const V=L.vis;c.save();bl_lfit(c,w,h,1200,640);tag(c,600,80,V.ask,EDGE_,{align:"center",size:28});
-    glass(c,330,150,540,400,18,BL_MART,{glow:10,ea:0.6,fill:"rgba(7,12,24,0.95)"});
-    V.badNames.forEach((s,i)=>{const y=250+i*110;c.fillStyle=rgba(BAD,1);c.beginPath();c.arc(400,y-12,8,0,TAU);c.fill();T(c,s,430,y,{f:"mono",w:500,size:40,color:rgba(mix(INK,BAD,0.4),1)});T(c,"?",800,y,{w:800,size:44,align:"center",color:rgba(EDGE_,1)});});c.restore();},
-  bl_q_stale:(c,w,h,st,L)=>{const V=L.vis;c.save();bl_lfit(c,w,h,1200,640);T(c,"core_credential",600,70,{f:"mono",w:500,size:30,align:"center",color:rgba(TRUST,1)});
-    bl_lmat(c,"incremental",300,110,600,380,TRUST,{stale:1,oldRows:V.oldRows,fs:30});T(c,V.merged,600,150,{w:800,size:28,align:"center",color:rgba([20,20,20],0.9)});
-    tag(c,600,560,V.fullRefresh,GOOD,{align:"center",size:28});c.restore();},
-  bl_q_sum:(c,w,h,st,L)=>{const V=L.vis;c.save();bl_lfit(c,w,h,1200,640);
-    glass(c,330,60,540,110,16,TRUST,{glow:12,ea:0.8,fill:"rgba(26,20,8,0.94)"});T(c,"credit_points_earned",600,128,{f:"mono",w:500,size:34,align:"center",color:rgba(TRUST,1)});
-    arrowTo(c,480,180,220,390,TRUST,0.8,{head:16});bl_lbadge(c,200,450,V.planning);
-    bl_lbadge(c,860,450,V.wallet);glow(c,900,320,90,BAD,0.3);tag(c,900,310,V.sumTwice+": sum(…)",BAD,{align:"center",size:28});
-    T(c,"≠",640,560,{w:800,size:72,align:"center",color:rgba(BAD,1)});c.restore();},
-  bl_q_eph:(c,w,h,st,L)=>{const V=L.vis;c.save();bl_lfit(c,w,h,1200,640);kt_agent(c,200,300,56,0,{});tag(c,200,450,V.agentAsks,KT_AI,{align:"center",size:24});
-    ["int_learner_keys","int_learner_timeline","int_credit_towards_award"].forEach((s,i)=>{const y=90+i*150;bl_lmat(c,"ephemeral",520,y,560,110,BL_VIO,{});T(c,s,800,y+66,{f:"mono",w:500,size:24,align:"center",color:rgba(mix(SOFT,BL_VIO,0.5),1)});
-      arrowTo(c,290,300,510,y+55,KT_AI,0.5,{head:14,dash:[8,8]});});
-    tag(c,800,590,V.cantQuery,BAD,{align:"center",size:24});c.restore();},
-  bl_q_award:(c,w,h,st,L)=>{const V=L.vis;c.save();bl_lfit(c,w,h,1200,640);
-    glass(c,40,340,340,120,16,BL_STG,{glow:10,ea:0.8,fill:"rgba(7,12,24,0.95)"});bl_lsplit(V.awardStg).forEach((s,j)=>T(c,s,210,394+j*34,{f:"mono",w:500,size:26,align:"center",color:rgba(BL_STG,1)}));
-    glass(c,820,340,340,120,16,TRUST,{glow:12,ea:0.85,fill:"rgba(26,20,8,0.95)"});T(c,V.awardCore,990,410,{f:"mono",w:500,size:30,align:"center",color:rgba(TRUST,1)});
-    arrowTo(c,390,400,810,400,TRUST,0.9,{head:18});
-    c.save();c.setLineDash([12,10]);c.strokeStyle=rgba(BL_VIO,0.8);c.lineWidth=2.4;rr(c,450,110,300,130,16);c.stroke();c.restore();
-    T(c,"intermediate",600,160,{w:800,size:22,align:"center",color:rgba(BL_VIO,1)});T(c,V.aStep,600,212,{w:800,size:30,align:"center",color:rgba(INK,0.95)});c.restore();},
-  bl_q_contract:(c,w,h,st,L)=>{const V=L.vis;c.save();bl_lfit(c,w,h,1200,640);tag(c,600,60,V.contractErr,BAD,{align:"center",size:24});
-    bl_code(c,30,120,660,"models/core/_core__models.yml",["      - name: credit_points_earned","        …","        data_type: int"],{size:28,lh:50,lit:{2:1},edge:TRUST});
-    glass(c,720,130,440,130,16,GOOD,{glow:10,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,V.promised,940,180,{w:700,size:26,align:"center",color:rgba(SOFT,1)});T(c,V.int_,940,234,{f:"mono",w:500,size:36,align:"center",color:rgba(GOOD,1)});
-    glass(c,720,300,440,130,16,BAD,{glow:10,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,V.got,940,350,{w:700,size:26,align:"center",color:rgba(SOFT,1)});T(c,V.hugeint,940,404,{f:"mono",w:500,size:36,align:"center",color:rgba(BAD,1)});
+  // the scenarios: one 520 x 277 frame each
+  bl_q_join:(c,w,h,st,L)=>{const V=L.vis;c.save();bl_lfit(c,w,h,520,277);
+    V.two.forEach((s,i)=>{const col=SRC3[i][1],y=34+i*140;glass(c,10,y,196,66,14,col,{glow:10,ea:0.75,fill:"rgba(7,12,24,0.94)"});
+      const ln=wrapT(c,s,0,0,176,{w:700,size:18,measure:1});wrapT(c,s,108,y+38-(ln.length-1)*11,176,{w:700,size:18,lh:22,align:"center"});arrowTo(c,210,y+33,276,138,col,0.85,{head:12});});
+    glass(c,282,74,228,128,14,BL_STG,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});bl_lbreak(c,V.stgFile,17,212).forEach((s,j)=>T(c,s,396,110+j*24,{f:"mono",w:500,size:17,align:"center",color:rgba(BL_STG,1)}));
+    glow(c,396,172,60,BAD,0.3);tag(c,396,174,V.join,BAD,{align:"center",size:19});c.restore();},
+  bl_q_mart:(c,w,h,st,L)=>{const V=L.vis;c.save();bl_lfit(c,w,h,520,277);
+    glass(c,105,10,310,52,14,TRUST,{glow:12,ea:0.8,fill:"rgba(26,20,8,0.94)"});T(c,"core_credit_towards_award",260,43,{f:"mono",w:500,size:18,align:"center",color:rgba(TRUST,1)});
+    arrowTo(c,200,66,90,140,TRUST,0.8,{head:12});arrowTo(c,320,66,370,140,TRUST,0.8,{head:12});tick_(c,384,92,30,GOOD,1);
+    bl_badge(c,60,176,V.planning,1);bl_badge(c,330,176,V.wallet,1);
+    arrowTo(c,90,236,350,236,EDGE_,0.8,{head:12,dash:[8,7]});cross_(c,220,236,32,BAD,1);c.restore();},
+  bl_q_names:(c,w,h,st,L)=>{const V=L.vis;c.save();bl_lfit(c,w,h,520,277);tag(c,260,26,V.ask,EDGE_,{align:"center",size:19});
+    glass(c,120,54,280,212,16,BL_MART,{glow:10,ea:0.6,fill:"rgba(7,12,24,0.95)"});
+    V.badNames.forEach((s,i)=>{const y=110+i*58;c.fillStyle=rgba(BAD,1);c.beginPath();c.arc(150,y-9,6,0,TAU);c.fill();T(c,s,168,y,{f:"mono",w:500,size:26,color:rgba(mix(INK,BAD,0.4),1)});T(c,"?",370,y,{w:800,size:28,align:"center",color:rgba(EDGE_,1)});});c.restore();},
+  bl_q_stale:(c,w,h,st,L)=>{const V=L.vis;c.save();bl_lfit(c,w,h,520,277);T(c,"core_credential",260,24,{f:"mono",w:500,size:20,align:"center",color:rgba(TRUST,1)});
+    bl_lmat(c,"incremental",80,38,360,184,TRUST,{stale:1,oldRows:V.oldRows,fs:19});const[m2,mz]=bl_lsz(c,V.merged,17,16,340,800);T(c,m2,260,61,{w:800,size:mz,align:"center",color:rgba([20,20,20],0.9)});
+    tag(c,260,250,V.fullRefresh,GOOD,{align:"center",size:19});c.restore();},
+  bl_q_sum:(c,w,h,st,L)=>{const V=L.vis;c.save();bl_lfit(c,w,h,520,277);
+    glass(c,120,10,280,52,14,TRUST,{glow:12,ea:0.8,fill:"rgba(26,20,8,0.94)"});T(c,"credit_points_earned",260,43,{f:"mono",w:500,size:20,align:"center",color:rgba(TRUST,1)});
+    arrowTo(c,200,66,80,150,TRUST,0.8,{head:12});bl_badge(c,60,186,V.planning,1);
+    bl_badge(c,330,186,V.wallet,1);glow(c,380,120,60,BAD,0.3);const s=V.sumTwice+": sum(…)",[s2,z]=bl_lsz(c,s,19,16,240,700);tag(c,384,122,s2,BAD,{align:"center",size:z});
+    T(c,"≠",260,258,{w:800,size:40,align:"center",color:rgba(BAD,1)});c.restore();},
+  bl_q_eph:(c,w,h,st,L)=>{const V=L.vis;c.save();bl_lfit(c,w,h,520,277);kt_agent(c,100,118,30,0,{});const[a2,az]=bl_lsz(c,V.agentAsks,17,16,230,700);tag(c,Math.max(4,100-(tw(c,a2,az,700)+26)/2),206,a2,KT_AI,{size:az});
+    ["int_learner_keys","int_learner_timeline","int_credit_towards_award"].forEach((s,i)=>{const y=12+i*66;bl_lmat(c,"ephemeral",214,y,298,52,BL_VIO,{});T(c,s,363,y+32,{f:"mono",w:500,size:17,align:"center",color:rgba(mix(SOFT,BL_VIO,0.5),1)});
+      arrowTo(c,146,118,208,y+26,KT_AI,0.5,{head:10,dash:[6,6]});});
+    bl_ltagR(c,512,250,V.cantQuery,BAD,18);c.restore();},
+  bl_q_award:(c,w,h,st,L)=>{const V=L.vis;c.save();bl_lfit(c,w,h,520,277);
+    glass(c,6,150,216,76,14,BL_STG,{glow:10,ea:0.8,fill:"rgba(7,12,24,0.95)"});bl_lbreak(c,V.awardStg,16,200).forEach((s,j)=>T(c,s,114,182+j*22,{f:"mono",w:500,size:16,align:"center",color:rgba(BL_STG,1)}));
+    glass(c,330,150,184,76,14,TRUST,{glow:12,ea:0.85,fill:"rgba(26,20,8,0.95)"});T(c,V.awardCore,422,195,{f:"mono",w:500,size:20,align:"center",color:rgba(TRUST,1)});
+    arrowTo(c,226,188,326,188,TRUST,0.9,{head:12});
+    c.save();c.setLineDash([10,8]);c.strokeStyle=rgba(BL_VIO,0.8);c.lineWidth=2.2;rr(c,170,14,180,90,14);c.stroke();c.restore();
+    T(c,"intermediate",260,46,{w:800,size:18,align:"center",color:rgba(BL_VIO,1)});T(c,V.aStep,260,84,{w:800,size:22,align:"center",color:rgba(INK,0.95)});c.restore();},
+  bl_q_contract:(c,w,h,st,L)=>{const V=L.vis;c.save();bl_lfit(c,w,h,520,277);const[e2,ez]=bl_lsz(c,V.contractErr,17,16,480,700);tag(c,260,20,e2,BAD,{align:"center",size:ez});
+    [[V.promised,V.int_,GOOD,8],[V.got,V.hugeint,BAD,266]].forEach(([lb,v,col,x])=>{glass(c,x,42,246,56,12,col,{glow:8,ea:0.8,fill:"rgba(7,12,24,0.95)"});
+      const[l2,lz]=bl_lsz(c,lb,17,16,100,700);T(c,l2,x+16,76,{w:700,size:lz,color:rgba(SOFT,1)});T(c,v,x+230,77,{f:"mono",w:500,size:20,align:"right",color:rgba(col,1)});});
+    bl_code(c,8,106,504,"models/core/_core__models.yml",["      - name: credit_points_earned","        …","        data_type: int"],{size:16,lh:22,lit:{2:1},edge:TRUST});
     c.restore();}
 });

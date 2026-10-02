@@ -1,0 +1,31 @@
+{
+  "kicker": "Documentation and versions",
+  "kicker_es": "Documentación y versiones",
+  "title_es": "Escrito una sola vez",
+  "h1": "Written once: one home per fact, and everything else generated",
+  "h1_es": "Escrito una sola vez: un hogar para cada dato, y todo lo demás generado",
+  "lead": "A definition copied into four places drifts in three. Give each fact one home: meaning in the conceptual model, decisions in Markdown, what the build uses in dbt's YAML. Generate the rest, sync it one way, and ship a breaking change as a new version with a date. The series' closing film.",
+  "lead_es": "Una definición copiada en cuatro lugares se desvía en tres. Dale a cada dato un hogar: el significado en el modelo conceptual, las decisiones en Markdown, lo que usa el build en el YAML de dbt. Genera el resto, sincronízalo en una sola dirección, y publica un cambio que rompe como una versión nueva con fecha. La película que cierra la serie.",
+  "description": "A film for analytics engineers about writing each fact once: the conceptual model, Markdown and dbt's YAML; doc blocks generated from one source and shown with doc(); a physical diagram generated from the manifest and checked in CI; descriptions pushed to Unity Catalog with persist_docs; and model versions with a deprecation date, found and told through lineage and exposures.",
+  "description_es": "Una película para analytics engineers sobre escribir cada dato una sola vez: el modelo conceptual, Markdown y el YAML de dbt; doc blocks generados desde una sola fuente y mostrados con doc(); un diagrama físico generado desde el manifest y comprobado en la CI; descripciones enviadas a Unity Catalog con persist_docs; y versiones de modelos con fecha de retiro, con los consumidores encontrados y avisados gracias al linaje y las exposures.",
+  "card": "Every copy of a fact is a chance to drift. One home per fact, everything else generated, and a breaking change arrives as a new version with a date.",
+  "card_es": "Cada copia de un dato es una ocasión de desviarse. Un hogar para cada dato, todo lo demás generado, y un cambio que rompe llega como una versión nueva con fecha.",
+  "chapters_es": {
+    "fork": "Una sola nota",
+    "four": "Cuatro copias",
+    "where": "Qué va dónde",
+    "blocks": "Escrito una vez, visible en todas partes",
+    "diagrams": "Diagramas que no se desvían",
+    "catalog": "Una sola dirección",
+    "version": "La siguiente versión",
+    "loop": "El ciclo se cierra"
+  },
+  "next_h": "You've seen one home per fact. Now find the home, and plan the change.",
+  "next_h_es": "Viste un hogar para cada dato. Ahora encuentra el hogar, y planifica el cambio.",
+  "labs_h1": "Find the home, plan the change",
+  "labs_h1_es": "Encuentra el hogar, planifica el cambio",
+  "labs_lead": "Four labs, one idea each, in the order of the film. Find where the award's definition should come from, sort twelve facts into their homes, plan a new version of core_credential, and count who a change reaches.",
+  "labs_lead_es": "Cuatro labs, una idea cada uno, en el orden de la película. Encuentra desde dónde debe salir la definición de título, ubica doce datos en sus hogares, planifica una versión nueva de core_credential, y cuenta a quién llega un cambio.",
+  "quiz_lead": "Eight situations an analytics engineer really faces: a fix made in the catalog, last year's diagram, a rename that “only affects one mart”, a number copied onto a page, two descriptions one word apart, a deprecation date ignored, a decision log deleted, and a new question. Decide what you'd do; each answer explains why.",
+  "quiz_lead_es": "Ocho situaciones que un analytics engineer enfrenta de verdad: un arreglo hecho en el catálogo, el diagrama del año pasado, un cambio de nombre que «solo afecta a un mart», un número copiado en una página, dos descripciones a una palabra de distancia, una fecha de retiro ignorada, un registro de decisiones borrado, y una pregunta nueva. Decide qué harías; cada respuesta explica por qué."
+}

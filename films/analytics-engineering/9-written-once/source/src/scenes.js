@@ -11,7 +11,7 @@
 const WR_DEF="A qualification the university confers, such as a graduate certificate or a master, for a set number of credit points. When it's conferred on a learner, it's a credential too.";
 const WR_C1=["  - name: award","    definition: >","      A qualification the university confers, such as a graduate certificate or a master, for","      a set number of credit points. When it's conferred on a learner, it's a credential too.","    owner: Mei Tanaka, registrar's office"];
 // the four copies, where chapter 2 leaves them and chapter 3 picks them up
-const WR_CP={wiki:[80,200,560,240],yaml:[80,470,560,200],cat:[80,700,560,200],tip:[690,200,500,250],dash:[690,520,500,300],con:[1226,200,630]};
+const WR_CP={wiki:[80,200,560,220],yaml:[80,450,560,200],cat:[80,670,560,180],tip:[690,200,500,250],dash:[690,520,500,300],con:[1226,200,630]};
 const WR_TXT={wiki:"A qualification the university confers on paper, such as a graduate certificate or a master, for a set number of credit points.",
   yaml:"A qualification the university confers, such as a graduate certificate or a master. [gap]",cat:"A degree the university confers, for a set number of credit points."};
 function wr_copies(ctx,t,o){const P=WR_CP,dx=o.dx||0,a=o.a==null?1:o.a;if(a<=0.01)return;
@@ -105,7 +105,7 @@ scene("four",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   const hl=[[["on paper",fin(t,w("drift","on paper")+0.2,0.8),WR_AMB]],[],[["degree",fin(t,w("drift","a degree")+0.2,0.8),WR_AMB]]];
   wr_copies(ctx,t,{t0:[nm[0]-0.3,nm[1]-0.3,nm[2]-0.3,nm[3]-0.4],amb,hl,ghost:fin(t,w("step","one small edit"),0.8),pin:nm.map(x=>fin(t,x+0.2,0.4))});
   // only the tooltip still says what Mei approved: the words in the conceptual model, drawn in beside it
-  const con=WR_CP.con;arrive(ctx,con[0]+280,con[1]+160,t,w("one","conceptual model")-0.3,()=>{const h=wr_code(ctx,con[0],con[1],con[2],"model/conceptual.yml",WR_C1,{wrap:54,size:18,lh:29,edge:BPL,lit:{2:fin(t,w("one","conceptual model")+0.6,0.5),3:fin(t,w("one","conceptual model")+0.6,0.5)},litCol:TRUST});
+  const con=WR_CP.con;arrive(ctx,con[0]+280,con[1]+160,t,w("one","conceptual model")-0.3,()=>{const h=wr_code(ctx,con[0],con[1],con[2],"model/conceptual.yml",WR_C1,{wrapMark:true,wrap:54,size:18,lh:29,edge:BPL,lit:{2:fin(t,w("one","conceptual model")+0.6,0.5),3:fin(t,w("one","conceptual model")+0.6,0.5)},litCol:TRUST});
     kt_gtick(ctx,con[0]+con[2]-24,con[1]+h+30,16,fin(t,w("one","Mei approved"),0.4));withA(ctx,fin(t,w("one","Mei approved")+0.2,0.4),()=>T(ctx,"Mei · 1 Oct",con[0]+con[2]-50,con[1]+h+37,{w:700,size:19,align:"right",color:rgba(TRUST,1)}));},{dy:30});
   const ln=fin(t,w("one","words in")+0.3,0.8);if(ln>0){ctx.save();ctx.setLineDash([5,8]);ctx.strokeStyle=rgba(INK,0.5);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(1192,330);ctx.lineTo(lerp(1192,1226,ln),lerp(330,380,ln));ctx.stroke();ctx.restore();}
   arrive(ctx,1450,640,t,w("one","words in")+0.6,()=>tag(ctx,1450,640,"same words · no wire",SOFT,{align:"center",size:19}),{dy:14});
@@ -132,8 +132,8 @@ scene("where",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   wr_fifth(ctx,500,330,460,180,fin(t,w("fifth","fifth copy")-0.2,0.5)*(1-fin(t,w("fifth","already has")+0.6,0.6)),fin(t,w("fifth","or a better")-0.1,0.5));
   // the conceptual model: from the card on the right to the home at the top, white on blue; later a strip, with the columns below
   const mv=ease(fin(t,cM-1.0,1.3)),sh=ease(fin(t,cW-0.6,1.0)),con=WR_CP.con;
-  if(mv<1){const h0=wr_code(ctx,0,0,con[2],"",WR_C1,{wrap:54,size:18,lh:29,a:0});withA(ctx,1-mv,()=>{const x=lerp(con[0],360,mv),y=lerp(con[1],110,mv);
-    wr_code(ctx,x,y,con[2],"model/conceptual.yml",WR_C1,{wrap:54,size:18,lh:29,edge:BPL,hi:fin(t,w("fifth","already has"),0.5),lit:{2:1,3:1}});kt_gtick(ctx,x+con[2]-24,y+h0+30,16,1);});}
+  if(mv<1){const h0=wr_code(ctx,0,0,con[2],"",WR_C1,{wrapMark:true,wrap:54,size:18,lh:29,a:0});withA(ctx,1-mv,()=>{const x=lerp(con[0],360,mv),y=lerp(con[1],110,mv);
+    wr_code(ctx,x,y,con[2],"model/conceptual.yml",WR_C1,{wrapMark:true,wrap:54,size:18,lh:29,edge:BPL,hi:fin(t,w("fifth","already has"),0.5),lit:{2:1,3:1}});kt_gtick(ctx,x+con[2]-24,y+h0+30,16,1);});}
   arrive(ctx,1500,640,t,w("fifth","already has"),()=>withA(ctx,1-mv,()=>tag(ctx,1500,640,"the home already exists",TRUST,{align:"center",size:20})),{dy:14});
   arrive(ctx,960,640,t,w("fifth","Everything else"),()=>withA(ctx,1-fin(t,cM-0.6,0.5),()=>T(ctx,"one home per fact",960,640,{w:800,size:44,align:"center",color:rgba(TRUST,1)})),{from:0.9});
   if(mv>0){const lit={2:fin(t,w("meaning","what each"),0.4),3:fin(t,w("meaning","what each"),0.4),7:fin(t,w("meaning","its key"),0.4),4:fin(t,w("meaning","who owns"),0.4)};
@@ -191,7 +191,7 @@ scene("blocks",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
     withA(ctx,A4*fin(t,w("points","dbt shows")+0.5,0.6),()=>arrowTo(ctx,1040,320,1076,420,TRUST,0.9,{head:12,bend:-0.2}));}
   // change the meaning in one line, with Mei's approval; edit the generated page instead, and CI fails
   const A5=fin(t,cC-0.3,0.5)*(1-fin(t,cZ-0.5,0.4)),tE=w("change","generated page"),tF=w("change","check in CI");
-  if(A5>0.01){arrive(ctx,510,380,t,cC-0.2,()=>withA(ctx,A5,()=>{const h=wr_code(ctx,80,240,860,"model/conceptual.yml",WR_C1,{wrap:54,size:18,lh:30,edge:BPL,lit:{2:fin(t,w("change","one line"),0.4),3:fin(t,w("change","one line"),0.4)}});
+  if(A5>0.01){arrive(ctx,510,380,t,cC-0.2,()=>withA(ctx,A5,()=>{const h=wr_code(ctx,80,240,860,"model/conceptual.yml",WR_C1,{wrapMark:true,wrap:54,size:18,lh:30,edge:BPL,lit:{2:fin(t,w("change","one line"),0.4),3:fin(t,w("change","one line"),0.4)}});
       kt_gtick(ctx,900,240+h-30,16,fin(t,w("change","Mei's approval"),0.4));withA(ctx,fin(t,w("change","Mei's approval")+0.2,0.4),()=>T(ctx,"Mei's approval",874,240+h-23,{w:700,size:18,align:"right",color:rgba(TRUST,1)}));}),{dy:30});
     const fail=fin(t,tF,0.3),fix=fin(t,tF+1.2,0.5),edit=fin(t,tE,1.0)*(1-fix);
     arrive(ctx,1410,420,t,tE-0.5,()=>withA(ctx,A5,()=>wr_code(ctx,980,240,860,"docs/definitions.md",WR_MD.slice(4,11),{wrap:64,size:18,lh:30,edge:mix(KIND,WR_AMB,edit),cog:true,t,amb:edit*0.6,ins:[1,49," on paper",edit,EDGE_]})),{dy:30});
@@ -202,8 +202,8 @@ scene("blocks",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   if(A6>0.01){kt_agent(ctx,190,400,24,t,{a:A6,busy:1-fin(t,cZ+1.4,0.8)});
     arrive(ctx,690,400,t,cZ,()=>wr_code(ctx,270,332,860,"review-metadata",["$ python skills/review-metadata/find_repeats.py","0 description(s) written more than once"],{size:18,lh:30,edge:KT_AI,p:clamp((t-cZ-0.2)/1.4,0,1),seg:[[1,"0 description(s) written more than once",fin(t,w("zero","no description"),0.5),GOOD]]}),{dy:30});
     arrive(ctx,700,540,t,w("zero","in the project"),()=>tag(ctx,700,540,"in the project: 0 descriptions written twice",GOOD,{align:"center",size:20}),{dy:14});
-    const lk=fin(t,w("zero","wiki now links")+0.8,0.7),st=fin(t,w("zero","wiki now links"),0.6);
-    arrive(ctx,1500,455,t,cZ+0.6,()=>wr_copy(ctx,1200,330,600,250,"wiki",WR_TXT.wiki,{amb:1-lk,hl:[["on paper",1-lk,WR_AMB]],strike:st,link:lk}),{dy:30});
+    const lk=fin(t,w("zero","wiki now links")+0.8,0.6),st=fin(t,w("zero","wiki now links"),0.5),gone=fin(t,w("zero","wiki now links")+0.5,0.3);
+    arrive(ctx,1500,455,t,cZ+0.6,()=>wr_copy(ctx,1200,330,600,250,"wiki",WR_TXT.wiki,{amb:1-lk,hl:[["on paper",1-gone,WR_AMB]],strike:st,link:lk,out:gone}),{dy:30});
     arrive(ctx,1500,630,t,w("zero","docs site"),()=>tag(ctx,1500,630,"the wiki links to the docs site",KIND,{align:"center",size:20}),{dy:14});}
   ctx.restore();vign(ctx,S);});
 
@@ -237,7 +237,7 @@ scene("diagrams",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
     arrive(ctx,1410,166,t,cF,()=>withA(ctx,wfA,()=>wr_ci(ctx,930,120,930,"Doc blocks and key sets match the conceptual model",2,"docs/definitions.md and seeds/key_sets.csv are up to date",{})),{dy:20});
     arrive(ctx,1410,276,t,cF+0.2,()=>withA(ctx,wfA,()=>wr_ci(ctx,930,230,930,"Physical diagram matches the YAML",stale>0.3?1:(upd>0.5?2:0),stale>0.3?"docs/physical.md is out of date: run dbt parse, then python scripts/diagrams.py":(upd>0.5?"docs/physical.md is up to date":""),{})),{dy:20});
     arrive(ctx,1410,372,t,tY,()=>withA(ctx,wfA*(1-upd),()=>tag(ctx,1410,372,"_core__models.yml: data_type changed",WR_AMB,{align:"center",size:19})),{dy:14});
-    arrive(ctx,1410,372,t,tY+2.4,()=>withA(ctx,wfA*upd,()=>tag(ctx,1410,372,"CI fails if it's out of date",GOOD,{align:"center",size:19})),{dy:14});}
+    arrive(ctx,1410,372,t,tY+2.4,()=>withA(ctx,wfA*upd,()=>tag(ctx,1410,372,"CI fails if it's out of date",KIND,{align:"center",size:19})),{dy:14});}
   // draw the meaning; generate the structure
   arrive(ctx,510,640,t,w("rule","Draw the meaning"),()=>T(ctx,"draw the meaning",510,640,{w:800,size:36,align:"center",color:rgba(BPL,1)}),{dy:16});
   arrive(ctx,1410,640,t,w("rule","Generate the structure"),()=>T(ctx,"generate the structure",1410,640,{w:800,size:36,align:"center",color:rgba([170,205,255],1)}),{dy:16});
@@ -254,7 +254,7 @@ scene("catalog",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   arrive(ctx,1450,370,t,0.3,()=>wr_catalog(ctx,1060,100,780,540,t,{search:clamp((t-w("find","catalog"))/0.8,0,1),desc:clamp((t-cP-0.6)/1.8,0,1),cols:clamp((t-w("push","its columns"))/1.0,0,1),
     edit:fin(t,w("there","Nobody edits"),1.2),reset:clamp((t-tW)/1.0,0,1),hi:pulseAt(t,w("find","descriptions"),1.6)}),{d:1.0,from:0.92,dy:30});
   // the setting that pushes them, and the homes they come from
-  arrive(ctx,530,240,t,cP-0.3,()=>wr_code(ctx,80,100,900,"dbt_project.yml",WR_PROJ,{wrap:78,size:18,lh:30,edge:TRUST,lit:{3:fin(t,w("push","pushes"),0.4),4:fin(t,w("push","each table"),0.4),5:fin(t,w("push","its columns"),0.4)}}),{dy:30});
+  arrive(ctx,530,240,t,cP-0.3,()=>wr_code(ctx,80,100,900,"dbt_project.yml",WR_PROJ,{wrapMark:true,wrap:78,size:18,lh:30,edge:TRUST,lit:{3:fin(t,w("push","pushes"),0.4),4:fin(t,w("push","each table"),0.4),5:fin(t,w("push","its columns"),0.4)}}),{dy:30});
   arrive(ctx,280,430,t,cP+0.4,()=>tag(ctx,80,430,"persist_docs · Databricks only",TRUST,{size:18}),{dy:12});
   const hA=fin(t,cP+0.2,0.6),hl=pulseAt(t,tH,2.4);const R=wr_homes(ctx,510,t,[0.5+0.5*hl,0.5+0.5*pulseAt(t,tH+0.6,2),0.5+0.5*pulseAt(t,tH+1.1,2)],hA);
   // one direction: the descriptions flow from the files out to the catalog, table then columns
@@ -304,15 +304,15 @@ scene("version",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
     wr_node(ctx,nx,ny,"a consumer · reads is_revoked",WR_AMB,{on:1});tag(ctx,nx,ny+60,"breaks the old column",WR_AMB,{size:19});});
   // the versions, beside each other; v1 built from v2 with a date to go
   const yA=fin(t,tNew,0.5)*(1-fin(t,cT-0.6,0.5));
-  if(yA>0.01){arrive(ctx,1320,330,t,tNew,()=>withA(ctx,yA,()=>wr_code(ctx,776,110,1084,"models/core/_core__models.yml",WR_VER,{size:18,lh:28,edge:TRUST,p:clamp((t-tNew)/2.4,0,1),lit:{4:fin(t,w("date","date to go"),0.4)},litCol:WR_AMB})),{dy:30});
-    arrive(ctx,1320,730,t,w("date","built from")-0.2,()=>withA(ctx,yA,()=>wr_code(ctx,776,592,1084,"models/core/core_credential_v1.sql",WR_V1,{size:18,lh:28,edge:TRUST,p:clamp((t-w("date","built from"))/1.6,0,1),seg:[[5,"{{ ref('core_credential', v=2) }}",fin(t,w("date","built from")+0.8,0.4),TRUST],[0,"the logic lives once",fin(t,w("date","logic lives once"),0.4),TRUST]]})),{dy:30});
+  if(yA>0.01){arrive(ctx,1320,307,t,tNew,()=>withA(ctx,yA,()=>wr_code(ctx,776,80,1084,"models/core/_core__models.yml",WR_VER,{size:18,lh:27,edge:TRUST,p:clamp((t-tNew)/2.4,0,1),lit:{4:fin(t,w("date","date to go"),0.4)},litCol:WR_AMB})),{dy:30});
+    arrive(ctx,1320,694,t,w("date","built from")-0.2,()=>withA(ctx,yA,()=>wr_code(ctx,776,548,1084,"models/core/core_credential_v1.sql",WR_V1,{size:18,lh:27,edge:TRUST,p:clamp((t-w("date","built from"))/1.6,0,1),seg:[[5,"{{ ref('core_credential', v=2) }}",fin(t,w("date","built from")+0.8,0.4),TRUST],[0,"the logic lives once",fin(t,w("date","logic lives once"),0.4),TRUST]]})),{dy:30});
     withA(ctx,yA*fin(t,w("date","built from"),0.5),()=>{arrowTo(ctx,vx-12,vy+170,vx-12,vy-34,TRUST,1,{p:fin(t,w("date","built from"),0.8),head:12,bend:-0.3});tag(ctx,vx+20,vy+290,"v1 built from v2",TRUST,{size:19});});}
   // who to tell: lineage from core_credential to one exposure; Planning's dashboard stays dark
   const lA=fin(t,cT-0.2,0.6)*(1-fin(t,cC-0.4,0.6)*0.6),NX=720;
   if(lA>0.01)withA(ctx,lA,()=>{const N=[["mart_wallet__credentials",250,0],["mart_wallet__learners",350,0.25],["mart_planning__near_award",470,0.6]];
     N.forEach(([n,y,d],i)=>{const q=fin(t,w("tell","exposures")+d,0.5),dk=i===2?1:0;if(q<=0)return;if(!dk){ctx.strokeStyle=rgba(dk?[70,80,95]:LAYER4[3][1],0.6*q);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(vx+vw+6,vy+60);ctx.bezierCurveTo(NX-40,vy+60,NX-60,y,lerp(vx+vw,NX+70,q),y);ctx.stroke();}
       arrive(ctx,NX+150,y,t,w("tell","exposures")+d,()=>{const ww=wr_node(ctx,NX+70,y,n,LAYER4[3][1],{dark:dk,on:dk?0:fin(t,w("tell","only the wallet"),0.5)});
-        ctx.strokeStyle=rgba(dk?[70,80,95]:WR_CON,0.6);ctx.beginPath();ctx.moveTo(NX+70+ww+4,y);ctx.lineTo(1470,i===2?470:300);ctx.stroke();},{from:0.85});});
+        withA(ctx,dk?1:fin(t,w("tell","only the wallet")-0.2,0.5),()=>{ctx.strokeStyle=rgba(dk?[70,80,95]:WR_CON,0.6);ctx.beginPath();ctx.moveTo(NX+70+ww+4,y);ctx.lineTo(1470,i===2?470:300);ctx.stroke();});},{from:0.85});});
     arrive(ctx,1510,300,t,w("tell","only the wallet")-0.2,()=>{wr_badge(ctx,1510,300,36,"wallet","wallet_app",{hi:1});kt_gtick(ctx,1545,268,13,fin(t,w("tell","pins")+0.8,0.4));},{from:0.7});
     arrive(ctx,1510,470,t,w("tell","exposures")+0.6,()=>wr_badge(ctx,1510,470,30,"planning","census_dashboard",{dark:1,size:18}),{from:0.7});
     arrive(ctx,NX+70,532,t,w("tell","exposures")+0.9,()=>withA(ctx,0.85,()=>tag(ctx,NX+70,532,"not downstream",SOFT,{size:18})),{dy:12});
@@ -342,7 +342,7 @@ scene("loop",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   const on=K.map((s,i)=>fin(t,w("steps",s)-0.1,0.4)*(i===0?1-0.5*fin(t,cN-0.2,0.3)+0.5*fin(t,w("new","new question")+0.4,0.4):1));
   const lpA=1-fin(t,cD-0.3,0.8),teal=K.map((_,i)=>fin(t,w("approved","drafted")+i*0.1,0.3)),ticks=K.map((_,i)=>fin(t,w("approved","a person")+i*0.1,0.3));
   const ag=8.5+1.5*ease(fin(t,w("new","new question")+0.6,2.4)),agA=fin(t,cA-0.2,0.6);
-  arrive(ctx,CX,CY,t,0,()=>stepLoop(ctx,CX,CY,RX,RY,t,{a:lpA,on,teal,ticks,agent:ag%10,agentA:agA}),{d:1.2,from:0.92});
+  arrive(ctx,CX,CY,t,0,()=>wr_stepLoop(ctx,CX,CY,RX,RY,t,{a:lpA,on,teal,ticks,agent:ag%10,agentA:agA,settle:fin(t,w("new","new question")+2.2,1.0)}),{d:1.2,from:0.92});
   arrive(ctx,CX,CY-20,t,w("approved","drafted"),()=>withA(ctx,lpA,()=>tag(ctx,CX,CY-20,"the agent drafts and checks",KT_AI,{align:"center",size:20})),{dy:14});
   arrive(ctx,CX,CY+36,t,w("approved","a person"),()=>withA(ctx,lpA,()=>tag(ctx,CX,CY+36,"a person approves",TRUST,{align:"center",size:20})),{dy:14});
   // the people of the series, each at the station where they approved

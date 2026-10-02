@@ -280,128 +280,159 @@ function rw_band(ctx,y,k,segs,p,a,o){o=o||{};if(a<=0.01)return;const col=SRC3[k]
 /* ---------- the labs' and scenarios' pictures ----------
    Added to the film bundle's LV registry (Keeping it true's true.js defines it; these keys are prefixed rw_ so they never clash).
    assets/from-words-to-data/learn.js calls each as f(ctx, w, h, state, L): a lab passes its state (compose: {pick}; steps: {step};
-   pick: {pick}), a scenario passes {q}. Any words come from L.vis (the page's learn.en.js or learn.es.js), so each language draws its own. */
-function rw_fit(c,w,h,bw,bh){const k=Math.min(w/bw,h/bh);c.translate((w-bw*k)/2,(h-bh*k)/2);c.scale(k,k);}
-// a pill for a test, sized for the learning pages: its name, its columns under it, and a tick (st 1) or a cross (st -1)
-function rw_l_test(c,x,y,w,name,cols,st,note){const h=cols?92:62,col=st>0?GOOD:st<0?RW_RED:SOFT;glass(c,x,y,w,h,22,col,{glow:8+10*Math.abs(st),ea:0.8,fill:"rgba(7,12,24,0.95)"});
-  T(c,name,x+26,y+40,{f:"mono",w:500,size:24});if(cols)T(c,cols,x+26,y+76,{f:"mono",w:500,size:22,color:rgba(SOFT,1)});
-  if(note)T(c,note,x+w-80,y+40,{w:700,size:24,align:"right",color:rgba(col,1)});if(st>0)tick_(c,x+w-40,y+h/2,30,GOOD,1);if(st<0)cross_(c,x+w-40,y+h/2,26,RW_RED,1);return h;}
-// one version of an award, as a card: its dates and its name; lit (gold) or dim, dashed when it's only supposed
-function rw_l_ver(c,x,y,w,h,from,to,name,o){o=o||{};const lit=o.lit||0,col=o.col||KIND;withA(c,o.dim?0.4:1,()=>{
-  if(o.dash){c.save();c.setLineDash([12,9]);c.strokeStyle=rgba(col,0.9);c.lineWidth=2.4;rr(c,x,y,w,h,14);c.stroke();c.restore();}
-  else{if(lit)glow(c,x+w/2,y+h/2,w*0.45,TRUST,0.22);glass(c,x,y,w,h,14,lit?TRUST:col,{glow:10+12*lit,ea:0.8,fill:"rgba(7,12,24,0.96)"});}
-  c.fillStyle=rgba(col,1);rr(c,x+16,y+18,8,h-36,4);c.fill();
-  T(c,from+" → "+to,x+40,y+42,{f:"mono",w:500,size:24,color:rgba(RW_TIME,1)});T(c,name,x+40,y+84,{w:700,size:28});});}
+   pick: {pick}), a scenario passes {q}. Any words come from L.vis (the page's learn.en.js or learn.es.js), so each language draws its own.
+   Each draws in the units the page gives it (a lab: its vw x vh, 960 wide; a scenario: 600 x 320), so its words are sized for the width
+   the page really shows: about 640 px for a lab and 470 px for a scenario on a laptop, 356 px on a phone. Labs keep their words at 17
+   units or more (about 11 px on a laptop); on a phone (rw_nar) they switch to fewer, bigger words, 30 units or more. Scenarios keep
+   theirs at 17 units or more, which stays above 10 px on a phone. */
+// a phone: the canvas shows under 560 CSS px wide
+function rw_nar(c){const el=c&&c.canvas;return!!el&&(el.clientWidth||960)<560;}
+// a pill for a test: its name, its columns under it (one per line), a tick (st 1) or a cross (st -1), and a note; returns its height
+function rw_l_test(c,x,y,w,name,cols,st,o){o=o||{};const s=o.size||17,lh=s+5,n=(cols||[]).length,h=s+24+n*lh,col=st>0?GOOD:st<0?RW_RED:SOFT;
+  glass(c,x,y,w,h,Math.min(18,h/2),col,{glow:6+8*Math.abs(st),ea:0.8,fill:"rgba(7,12,24,0.95)"});
+  T(c,name,x+14,y+s+9,{f:"mono",w:500,size:s});(cols||[]).forEach((l,i)=>T(c,l,x+14,y+s+9+(i+1)*lh,{f:"mono",w:500,size:s,color:rgba(SOFT,1)}));
+  if(o.note)T(c,o.note,x+w-s*2.4,y+s+9,{w:700,size:s,align:"right",color:rgba(col,1)});
+  if(st>0)tick_(c,x+w-s*1.2,y+h/2,s*1.5,GOOD,1);if(st<0)cross_(c,x+w-s*1.2,y+h/2,s*1.3,RW_RED,1);return h;}
+// one version of an award, as a card: its dates (o.fs) and its name (o.ns); lit (gold) or dim, dashed when it's only supposed
+function rw_l_ver(c,x,y,w,h,from,to,name,o){o=o||{};const lit=o.lit||0,col=o.col||KIND,fs=o.fs||17,ns=o.ns||19;withA(c,o.dim?0.4:1,()=>{
+  if(o.dash){c.save();c.setLineDash([10,8]);c.strokeStyle=rgba(col,0.9);c.lineWidth=2;rr(c,x,y,w,h,12);c.stroke();c.restore();}
+  else{if(lit)glow(c,x+w/2,y+h/2,w*0.4,TRUST,0.22);glass(c,x,y,w,h,12,lit?TRUST:col,{glow:8+10*lit,ea:0.8,fill:"rgba(7,12,24,0.96)"});}
+  c.fillStyle=rgba(col,1);rr(c,x+10,y+12,6,h-24,3);c.fill();
+  T(c,from+" → "+to,x+28,y+h*0.42,{f:"mono",w:500,size:fs,color:rgba(RW_TIME,1)});T(c,name,x+28,y+h*0.42+ns+6,{w:700,size:ns});});}
 // a horizontal date axis between two days: X(day as "YYYY-MM-DD") -> x
 function rw_l_axis(x0,x1,d0,d1){const a=Date.parse(d0+"T00:00:00Z"),b=Date.parse(d1+"T00:00:00Z");return d=>x0+(x1-x0)*(Date.parse(d+"T00:00:00Z")-a)/(b-a);}
-function rw_l_dash(c,x,y0,y1,col,a){c.save();c.globalAlpha*=a==null?1:a;c.setLineDash([8,7]);c.strokeStyle=rgba(col,0.95);c.lineWidth=2.6;c.beginPath();c.moveTo(x,y0);c.lineTo(x,y1);c.stroke();c.restore();}
+function rw_l_dash(c,x,y0,y1,col,a){c.save();c.globalAlpha*=a==null?1:a;c.setLineDash([7,6]);c.strokeStyle=rgba(col,0.95);c.lineWidth=2;c.beginPath();c.moveTo(x,y0);c.lineTo(x,y1);c.stroke();c.restore();}
 // Aisha's credit and status on a day, from the core's versions (credit: core_credit_towards_award_v1; status: core_learner_v1)
 function rw_l_aisha(d){let cr=0;RW_STEPS.forEach(([f,to,v])=>{if(f<=d&&(to==="(open)"||to>d))cr=v;});const done=d>="2026-07-20",rem=60-cr;return{cr,rem,done,near:!done&&rem>0&&rem<=15};}
 const RW_L_DAYS=["2025-10-14","2026-02-26","2026-03-31","2026-07-03","2026-07-20","2026-09-30"];
-// the four changes of the "When was it true?" lab: [took effect, recorded], and the date each way of dating gives (null: none to give)
+// the four changes of the "When was it true?" lab: [took effect, recorded], and the date each way of dating uses (0: took effect, 1: recorded, -1: none to give)
 const RW_L_CH=[["2026-03-27","2026-04-03"],["2026-04-20","2026-04-21"],[null,"2026-07-02"],[null,"2026-08-12"]];
 const RW_L_BY={rec:[1,1,1,1],eff:[0,0,1,1],all:[0,0,-1,-1],load:[1,1,1,1]};
 function rw_l_short(d,V){const m=+d.slice(5,7)-1;return +d.slice(8,10)+" "+V.mon[m];}
-// a small strip of version cards, for the scenarios
-function rw_l_rows(c,x,y,rows,o){o=o||{};rows.forEach((r,i)=>{const yy=y+i*(o.lh||52),col=r[2]||KIND;glass(c,x,yy,o.w||480,(o.lh||52)-10,10,col,{glow:6,ea:0.7,fill:"rgba(7,12,24,0.95)"});
-  T(c,r[0],x+18,yy+30,{f:"mono",w:500,size:o.size||24});if(r[1])T(c,r[1],x+(o.w||480)-18,yy+30,{f:"mono",w:500,size:o.size||24,align:"right",color:rgba(col,1)});});}
+const RW_L_TESTS={la:["unique_combination",["learner_key, award_key"]],l:["unique",["learner_key"]],c:["unique",["credential_key"]],lav:["unique_combination",["learner_key, award_key,","valid_from"]]};
 Object.assign(LV,{
   // Declare the grain: three outputs, each with the grain sentence built so far, the test it becomes, and Aisha's rows
-  rw_l_grain:(c,w,h,st,L)=>{const V=L.vis,pick=st.pick||[],lab=(L.labs||[]).find(x=>x.id==="grain");if(!lab)return;const S=lab.w.slots;c.save();rw_fit(c,w,h,1920,840);
+  rw_l_grain:(c,w,h,st,L)=>{const V=L.vis,pick=st.pick||[],lab=(L.labs||[]).find(x=>x.id==="grain");if(!lab)return;const S=lab.w.slots;
     const opt=i=>pick[i]==null?null:S[i].opts[pick[i]];
-    const TESTS={la:["unique_combination","learner_key, award_key"],l:["unique","learner_key"],c:["unique","credential_key"],lav:["unique_combination","learner_key, award_key, valid_from"]};
-    [0,1,2].forEach(k=>{const x=30+k*630,y=16,cw=600,a=opt(k*2),d=opt(k*2+1);glass(c,x,y,cw,808,20,RW_CON,{glow:10,ea:0.6,fill:"rgba(7,12,24,0.92)"});
-      rw_badge(c,x+52,y+56,26,k?"wallet":"planning","",{});T(c,V.outputs[k],x+96,y+66,{w:800,size:28});
-      const n1=wrapT(c,V.perRow+" "+(a?V.what[a.k]:"…")+",",x+30,y+140,cw-60,{w:800,size:30,color:rgba(a?(a.ok?INK:EDGE_):SOFT,1)}).length;
-      T(c,d?V.day[d.k]:"…",x+30,y+140+n1*40,{w:800,size:30,color:rgba(d?(d.ok?RW_TIME:EDGE_):SOFT,1)});
-      const ok=a&&d?(a.ok&&d.ok?1:-1):0,ts=a?TESTS[a.k]:["…",""];rw_l_test(c,x+24,y+290,cw-48,ts[0],ts[1],ok);
-      T(c,V.aisha[k],x+30,y+430,{w:700,size:24,color:rgba(SOFT,1)});
-      const R=a?V.rows[k][a.k]||[]:[];R.forEach((r,i)=>{const gone=r[0]==="-";withA(c,gone?0.55:1,()=>{T(c,gone?r.slice(1):r,x+30,y+470+i*34,{f:"mono",w:500,size:22,color:rgba(gone?EDGE_:INK,1)});
-        if(gone){const tw_=tw(c,r.slice(1),22,500,"mono");c.strokeStyle=rgba(EDGE_,0.9);c.lineWidth=2.4;c.beginPath();c.moveTo(x+28,y+462+i*34);c.lineTo(x+32+tw_,y+462+i*34);c.stroke();}});});
-      const note=[a&&!a.ok?V.whatNote[k][a.k]:null,d&&!d.ok?V.dayNote[k][d.k]:null].filter(Boolean);
-      let ny=y+650;note.forEach(s=>{ny+=30*wrapT(c,s,x+30,ny,cw-60,{w:700,size:24,lh:30,color:rgba(EDGE_,1)}).length+8;});});c.restore();},
+    const notes=k=>{const a=opt(k*2),d=opt(k*2+1);return[a&&!a.ok?V.whatNote[k][a.k]:null,d&&!d.ok?V.dayNote[k][d.k]:null].filter(Boolean);};
+    const okOf=k=>{const a=opt(k*2),d=opt(k*2+1);return a&&d?(a.ok&&d.ok?1:-1):0;};
+    if(rw_nar(c)){let y=8;[0,1,2].forEach(k=>{const a=opt(k*2),ok=okOf(k),col=ok>0?GOOD:ok<0?RW_RED:RW_CON,ts=a?RW_L_TESTS[a.k]:null,nt=notes(k).slice(0,1);
+        const nl=nt.length?wrapT(c,nt[0],28,0,900,{w:700,size:30,measure:true}).length:0,bh=62+(ts?44:0)+nl*38+(nl?10:0);
+        glass(c,6,y,948,bh,16,col,{glow:6,ea:0.7,fill:"rgba(7,12,24,0.92)"});T(c,V.outputs[k],28,y+46,{w:800,size:34});
+        if(ok>0)tick_(c,910,y+34,40,GOOD,1);if(ok<0)cross_(c,910,y+34,32,RW_RED,1);let yy=y+46;
+        if(ts){yy+=44;const full=ts[0]+" "+ts[1].join(" ");T(c,tw(c,full,30,500,"mono")<=900?full:ts[1].join(" "),28,yy,{f:"mono",w:500,size:30,color:rgba(SOFT,1)});}
+        if(nl){wrapT(c,nt[0],28,yy+42,900,{w:700,size:30,lh:38,color:rgba(EDGE_,1)});}
+        y+=bh+10;});return;}
+    [0,1,2].forEach(k=>{const x=6+k*318,y=6,cw=306,a=opt(k*2),d=opt(k*2+1);glass(c,x,y,cw,h-12,16,RW_CON,{glow:8,ea:0.6,fill:"rgba(7,12,24,0.92)"});
+      rw_badge(c,x+28,y+32,17,k?"wallet":"planning","",{});T(c,V.outputs[k],x+54,y+39,{w:800,size:20});
+      let yy=y+88;yy+=27*wrapT(c,V.perRow+" "+(a?V.what[a.k]:"…")+",",x+16,yy,cw-32,{w:800,size:22,lh:27,color:rgba(a?(a.ok?INK:EDGE_):SOFT,1)}).length;
+      yy+=27*wrapT(c,d?V.day[d.k]:"…",x+16,yy,cw-32,{w:800,size:22,lh:27,color:rgba(d?(d.ok?RW_TIME:EDGE_):SOFT,1)}).length-8;
+      const ts=a?RW_L_TESTS[a.k]:["…",[]];yy+=rw_l_test(c,x+12,yy,cw-24,ts[0],ts[1],okOf(k),{size:17})+30;
+      T(c,V.aisha[k],x+16,yy,{w:700,size:17,color:rgba(SOFT,1)});yy+=26;
+      const R=a?V.rows[k][a.k]||[]:[];R.forEach((r,i)=>{const gone=r[0]==="-",s=gone?r.slice(1):r,ry=yy+i*22;withA(c,gone?0.6:1,()=>{T(c,s,x+16,ry,{f:"mono",w:500,size:17,color:rgba(gone?EDGE_:INK,1)});
+        if(gone){c.strokeStyle=rgba(EDGE_,0.9);c.lineWidth=2;c.beginPath();c.moveTo(x+14,ry-6);c.lineTo(x+18+tw(c,s,17,500,"mono"),ry-6);c.stroke();}});});
+      yy+=R.length*22+12;notes(k).forEach(s=>{yy+=21*wrapT(c,s,x+16,yy,cw-32,{w:700,size:17,lh:21,color:rgba(EDGE_,1)}).length+6;});});},
   // Fan-out: the award's versions on the left, Health's eight learners on the right, a chip for each version a learner meets
-  rw_l_fan:(c,w,h,st,L)=>{const V=L.vis,k=st.step||0;c.save();rw_fit(c,w,h,1920,840);
+  rw_l_fan:(c,w,h,st,L)=>{const V=L.vis,k=st.step||0;
     const VC=[KIND,RW_AMB,EDGE_],mode=["one","key","at","key","latest"][k],nv=k===0?1:k===3?3:2,meets=mode==="key"?nv:1,which=mode==="latest"?1:0;
-    T(c,"SIS|GCHI",40,70,{f:"mono",w:500,size:28,color:rgba(RW_KS.SIS,1)});T(c,V.versionsOf,200,70,{w:700,size:26,color:rgba(SOFT,1)});
     const vers=[["1 Nov 2024",k===0?"(open)":"2 Jul 2026",V.names[0]],["2 Jul 2026",k===3?V.later:"(open)",V.names[1]],[V.later,"(open)",V.names[2]]];
-    for(let i=0;i<nv;i++){const lit=(mode==="at"&&i===0)||(mode==="latest"&&i===1);rw_l_ver(c,40,100+i*140,840,120,vers[i][0],vers[i][1],vers[i][2],{col:VC[i],lit:lit?1:0,dim:(mode==="at"||mode==="latest")&&!lit,dash:i===2});}
-    tag(c,40,560,V.modes[mode],mode==="key"?RW_RED:mode==="one"?SOFT:mode==="at"?GOOD:RW_AMB,{size:26});
-    if(mode==="at")T(c,V.validAt,40,620,{w:700,size:26,color:rgba(TRUST,1)});
-    if(mode==="latest")wrapT(c,V.wrongName,40,620,840,{w:700,size:26,color:rgba(RW_AMB,1)});
-    if(k===3)wrapT(c,V.stillEight,40,620,840,{w:700,size:26,color:rgba(SOFT,1)});
-    let rows=0,pts=0;RW_FAN.forEach(([key,cp],i)=>{const y=120+i*52;T(c,key,980,y+8,{f:"mono",w:500,size:24,color:rgba(INK,0.9)});
-      for(let j=0;j<meets;j++){const vi=mode==="key"?j:which,x=1240+j*110;glass(c,x,y-22,96,40,10,VC[vi],{glow:6,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,String(cp),x+48,y+8,{f:"mono",w:500,size:22,align:"center",color:rgba(VC[vi],1)});rows++;pts+=cp;}});
-    [[rows,V.rows_],[8,V.learners],[pts,V.points]].forEach(([n,s],i)=>{const x=1000+i*300;T(c,String(n),x,600,{w:800,size:52,color:rgba(i!==1&&rows>8?RW_RED:INK,1)});T(c,s,x,636,{w:600,size:24,color:rgba(SOFT,1)});});
-    rw_l_test(c,960,680,920,"unique_combination","learner_key, award_key",rows>8?-1:1,rows>8?rows+" "+V.rows_+" · 8 "+V.learners:"");c.restore();},
+    const lit=i=>(mode==="at"&&i===0)||(mode==="latest"&&i===1),dim=i=>(mode==="at"||mode==="latest")&&!lit(i),mcol=mode==="key"?RW_RED:mode==="one"?SOFT:mode==="at"?GOOD:RW_AMB;
+    const rows=8*meets,pts=RW_FAN.reduce((s,[,cp])=>s+cp,0)*meets,bad=rows>8,note=bad?rows+" "+V.rows_+" · 8 "+V.learners:"";
+    const note2=mode==="at"?[V.validAt,TRUST]:mode==="latest"?[V.wrongName,RW_AMB]:k===3?[V.stillEight,SOFT]:null;
+    if(rw_nar(c)){for(let i=0;i<nv;i++)withA(c,dim(i)?0.4:1,()=>T(c,vers[i][2],24,48+i*44,{w:700,size:30,color:rgba(lit(i)?TRUST:VC[i],1)}));
+      tag(c,24,200,V.modes[mode],mcol,{size:30});
+      [[rows,V.rows_],[8,V.learners],[pts,V.points]].forEach(([n,s],i)=>{const x=24+i*310;T(c,String(n),x,306,{w:800,size:58,color:rgba(i!==1&&bad?RW_RED:INK,1)});T(c,s,x,346,{w:600,size:30,color:rgba(SOFT,1)});});
+      rw_l_test(c,16,374,928,"unique_combination",[],bad?-1:1,{size:30,note});return;}
+    T(c,"SIS|GCHI",16,30,{f:"mono",w:500,size:20,color:rgba(RW_KS.SIS,1)});T(c,V.versionsOf,130,30,{w:700,size:18,color:rgba(SOFT,1)});
+    for(let i=0;i<nv;i++)rw_l_ver(c,16,46+i*74,424,66,vers[i][0],vers[i][1],vers[i][2],{col:VC[i],lit:lit(i)?1:0,dim:dim(i),dash:i===2});
+    tag(c,16,292,V.modes[mode],mcol,{size:18});if(note2)wrapT(c,note2[0],16,336,424,{w:700,size:18,lh:23,color:rgba(note2[1],1)});
+    RW_FAN.forEach(([key,cp],i)=>{const y=44+i*33;T(c,key,470,y+6,{f:"mono",w:500,size:17,color:rgba(INK,0.9)});
+      for(let j=0;j<meets;j++){const vi=mode==="key"?j:which,x=600+j*64;glass(c,x,y-14,56,27,8,VC[vi],{glow:5,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,String(cp),x+28,y+6,{f:"mono",w:500,size:17,align:"center",color:rgba(VC[vi],1)});}});
+    [[rows,V.rows_],[8,V.learners],[pts,V.points]].forEach(([n,s],i)=>{const x=470+i*160;T(c,String(n),x,334,{w:800,size:36,color:rgba(i!==1&&bad?RW_RED:INK,1)});T(c,s,x,358,{w:600,size:17,color:rgba(SOFT,1)});});
+    rw_l_test(c,470,378,476,"unique_combination",["learner_key, award_key"],bad?-1:1,{size:17,note});},
   // As at census: Aisha's credit staircase with a date line on the step's day; her credit, status and whether she counts beside it
-  rw_l_asat:(c,w,h,st,L)=>{const V=L.vis,k=st.step||0,d=RW_L_DAYS[k],A=rw_l_aisha(d);c.save();rw_fit(c,w,h,1920,840);
-    T(c,V.credit,140,70,{w:800,size:28});const X0=140,Y0=170,W0=1100,H0=520;
-    const P=rw_stair(c,X0,Y0,W0,H0,0,{at:d,atA:1,upTo:d,axis:false,size:26});
-    V.months.forEach((m,i)=>T(c,m,X0+W0*(i*30.4+15)/365,Y0+H0+40,{w:600,size:24,align:"center",color:rgba(SOFT,0.9)}));
-    [15,30,45,60].forEach(v=>{c.strokeStyle=rgba(SOFT,0.12);c.lineWidth=1.2;c.beginPath();c.moveTo(X0,P.Y(v));c.lineTo(X0+W0,P.Y(v));c.stroke();T(c,String(v),X0-14,P.Y(v)+8,{w:600,size:24,align:"right",color:rgba(SOFT,0.85)});});
-    rw_l_dash(c,P.X("2026-03-31"),Y0-30,Y0+H0,RW_TIME,k===2?0:0.45);if(k!==2)T(c,V.census,P.X("2026-03-31"),Y0-40,{w:700,size:22,align:"center",color:rgba(RW_TIME,0.7)});
-    const x=1320,y=150;glass(c,x,y,560,560,20,A.near?GOOD:SOFT,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.95)"});
-    T(c,V.dayLabel[k],x+30,y+56,{w:800,size:30,color:rgba(RW_TIME,1)});
-    T(c,A.cr+" "+V.of60,x+30,y+150,{w:800,size:56});T(c,A.rem>0?A.rem+" "+V.toGo:V.none,x+30,y+200,{w:600,size:26,color:rgba(SOFT,1)});
-    T(c,V.status,x+30,y+280,{w:600,size:24,color:rgba(SOFT,1)});T(c,A.done?V.completed:V.studying,x+30,y+320,{w:800,size:32});
-    tag(c,x+30,y+420,A.near?V.counted:V.notCounted,A.near?GOOD:SOFT,{size:28});
-    if(k===5)wrapT(c,V.wallet,x+30,y+490,500,{w:700,size:24,color:rgba(RW_CON,1)});c.restore();},
+  rw_l_asat:(c,w,h,st,L)=>{const V=L.vis,k=st.step||0,d=RW_L_DAYS[k],A=rw_l_aisha(d),cc=A.near?GOOD:SOFT;
+    if(rw_nar(c)){const P=rw_stair(c,40,40,400,350,0,{at:d,atA:1,upTo:d,axis:false,labels:false});rw_l_dash(c,P.X("2026-03-31"),24,390,RW_TIME,k===2?0:0.45);
+      let y=52;y+=36*wrapT(c,V.dayLabel[k],480,y,460,{w:800,size:30,lh:36,color:rgba(RW_TIME,1)}).length+48;
+      T(c,A.cr+" "+V.of60,480,y,{w:800,size:60});y+=42;T(c,A.rem>0?A.rem+" "+V.toGo:V.none,480,y,{w:600,size:30,color:rgba(SOFT,1)});
+      y+=56;T(c,A.done?V.completed:V.studying,480,y,{w:800,size:34});tag(c,480,y+62,A.near?V.counted:V.notCounted,cc,{size:28});return;}
+    wrapT(c,V.credit,16,30,928,{w:800,size:19});const X0=56,Y0=80,W0=540,H0=280;
+    const P=rw_stair(c,X0,Y0,W0,H0,0,{at:d,atA:1,upTo:d,axis:false,size:17});
+    V.months.forEach((m,i)=>T(c,m,X0+W0*(i*30.4+15)/365,Y0+H0+26,{w:600,size:17,align:"center",color:rgba(SOFT,0.9)}));
+    [15,30,45,60].forEach(v=>{c.strokeStyle=rgba(SOFT,0.12);c.lineWidth=1;c.beginPath();c.moveTo(X0,P.Y(v));c.lineTo(X0+W0,P.Y(v));c.stroke();T(c,String(v),X0-10,P.Y(v)+6,{w:600,size:17,align:"right",color:rgba(SOFT,0.85)});});
+    rw_l_dash(c,P.X("2026-03-31"),Y0-18,Y0+H0,RW_TIME,k===2?0:0.45);if(k!==2)T(c,V.census,P.X("2026-03-31"),Y0-24,{w:700,size:17,align:"center",color:rgba(RW_TIME,0.8)});
+    const x=626,y=52;glass(c,x,y,320,h-60,16,cc,{glow:8,ea:0.7,fill:"rgba(7,12,24,0.95)"});
+    let yy=y+36;yy+=24*wrapT(c,V.dayLabel[k],x+20,yy,284,{w:800,size:20,lh:24,color:rgba(RW_TIME,1)}).length+34;
+    T(c,A.cr+" "+V.of60,x+20,yy,{w:800,size:40});yy+=28;T(c,A.rem>0?A.rem+" "+V.toGo:V.none,x+20,yy,{w:600,size:18,color:rgba(SOFT,1)});
+    yy+=40;T(c,V.status,x+20,yy,{w:600,size:17,color:rgba(SOFT,1)});yy+=28;T(c,A.done?V.completed:V.studying,x+20,yy,{w:800,size:22});
+    yy+=42;tag(c,x+20,yy,A.near?V.counted:V.notCounted,cc,{size:18});
+    if(k===5)wrapT(c,V.wallet,x+20,yy+44,284,{w:700,size:17,lh:21,color:rgba(RW_CON,1)});},
   // When was it true? Four changes on one axis: a clock where the system says when it took effect, an eye where it was recorded;
   // the date the chosen rule uses, lit; and Business's count on census day against the report
-  rw_l_when:(c,w,h,st,L)=>{const V=L.vis,by=RW_L_BY[st.pick]||RW_L_BY.rec,X=rw_l_axis(560,1440,"2026-03-15","2026-08-31");c.save();rw_fit(c,w,h,1920,840);
-    ["2026-04-01","2026-05-01","2026-06-01","2026-07-01","2026-08-01"].forEach(d=>{c.strokeStyle=rgba(SOFT,0.14);c.lineWidth=1.2;c.beginPath();c.moveTo(X(d),110);c.lineTo(X(d),720);c.stroke();T(c,V.mon[+d.slice(5,7)-1],X(d)+8,760,{w:600,size:24,color:rgba(SOFT,0.9)});});
-    rw_l_dash(c,X("2026-03-31"),80,730,RW_TIME,1);T(c,V.census,X("2026-03-31"),60,{w:700,size:24,align:"center",color:rgba(RW_TIME,1)});
-    RW_L_CH.forEach(([eff,rec],i)=>{const y=170+i*150,u=by[i],load=st.pick==="load";wrapT(c,V.changes[i],40,y-6,460,{w:700,size:26});
-      c.strokeStyle=rgba(SOFT,0.3);c.lineWidth=2;c.beginPath();c.moveTo(560,y);c.lineTo(1440,y);c.stroke();
-      if(eff)rw_clock(c,X(eff),y-36,14,u===0?TRUST:SOFT,1);rw_eye(c,X(rec),y+36,16,u===1?TRUST:SOFT,1);
+  rw_l_when:(c,w,h,st,L)=>{const V=L.vis,by=RW_L_BY[st.pick]||RW_L_BY.rec,load=st.pick==="load",n=by[0]===0?3:4,ok=n===3;
+    if(rw_nar(c)){RW_L_CH.forEach(([eff,rec],i)=>{const y=56+i*70,u=by[i],dd=u===0?eff:u===1?rec:null;T(c,V.changes[i],16,y,{w:700,size:30});
+        if(dd){if(u===0)rw_clock(c,790,y-10,13,TRUST,1);else rw_eye(c,790,y-10,15,TRUST,1);T(c,rw_l_short(dd,V),944,y,{w:800,size:30,align:"right",color:rgba(TRUST,1)});}
+        else T(c,"?",944,y,{w:800,size:36,align:"right",color:rgba(RW_AMB,1)});});
+      glass(c,8,326,944,126,16,ok?GOOD:RW_RED,{glow:10,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,V.business,30,374,{w:700,size:30,color:rgba(SOFT,1)});
+      T(c,V.report+" 3",30,426,{w:700,size:30,color:rgba(SOFT,1)});T(c,String(n),700,416,{w:800,size:72,align:"center",color:rgba(ok?GOOD:RW_AMB,1)});
+      if(ok)tick_(c,880,388,48,GOOD,1);else cross_(c,880,388,40,RW_RED,1);return;}
+    const X=rw_l_axis(250,716,"2026-03-15","2026-08-31");
+    ["2026-04-01","2026-05-01","2026-06-01","2026-07-01","2026-08-01"].forEach(d=>{c.strokeStyle=rgba(SOFT,0.14);c.lineWidth=1;c.beginPath();c.moveTo(X(d),48);c.lineTo(X(d),380);c.stroke();T(c,V.mon[+d.slice(5,7)-1],X(d)+5,404,{w:600,size:17,color:rgba(SOFT,0.9)});});
+    rw_l_dash(c,X("2026-03-31"),40,384,RW_TIME,1);T(c,V.census,X("2026-03-31"),30,{w:700,size:17,align:"center",color:rgba(RW_TIME,1)});
+    RW_L_CH.forEach(([eff,rec],i)=>{const y=86+i*84,u=by[i];const nl=wrapT(c,V.changes[i],12,0,224,{w:700,size:17,measure:true}).length;wrapT(c,V.changes[i],12,y+6-(nl-1)*11,224,{w:700,size:17,lh:22});
+      c.strokeStyle=rgba(SOFT,0.3);c.lineWidth=1.5;c.beginPath();c.moveTo(250,y);c.lineTo(716,y);c.stroke();
+      if(eff)rw_clock(c,X(eff),y-22,9,u===0?TRUST:SOFT,1);rw_eye(c,X(rec),y+22,10,u===1?TRUST:SOFT,1);
       const dd=u===0?eff:u===1?rec:null;
-      if(dd){glow(c,X(dd),y,40,TRUST,0.4);c.fillStyle=rgba(TRUST,1);c.beginPath();c.arc(X(dd),y,10,0,TAU);c.fill();
-        T(c,rw_l_short(dd,V),X(dd)+(i===3?-24:24),y-8,{w:800,size:24,align:i===3?"right":"left",color:rgba(TRUST,1)});}
-      else T(c,"?",X(rec)+30,y+10,{w:800,size:36,color:rgba(RW_AMB,1)});
-      if(load&&i<2)T(c,V.loaded[i],X(rec)+30,y+44,{w:600,size:22,color:rgba(RW_AMB,1)});});
-    const n=by[0]===0?3:4,ok=n===3;glass(c,1520,170,360,300,20,ok?GOOD:RW_RED,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});
-    T(c,V.business,1550,220,{w:700,size:26,color:rgba(SOFT,1)});T(c,String(n),1550,320,{w:800,size:84,color:rgba(ok?GOOD:RW_AMB,1)});
-    T(c,V.report+" 3",1550,400,{w:700,size:26,color:rgba(SOFT,1)});if(ok)tick_(c,1820,290,40,GOOD,1);else cross_(c,1820,290,34,RW_RED,1);
-    rw_clock(c,1540,560,14,SOFT,1);T(c,V.tookEffect,1570,568,{w:600,size:24,color:rgba(SOFT,1)});rw_eye(c,1540,610,16,SOFT,1);T(c,V.recorded,1570,618,{w:600,size:24,color:rgba(SOFT,1)});
-    c.fillStyle=rgba(TRUST,1);c.beginPath();c.arc(1540,660,9,0,TAU);c.fill();T(c,V.dates,1570,668,{w:600,size:24,color:rgba(SOFT,1)});c.restore();},
-  // the scenarios
-  rw_q_double:(c,w,h,st,L)=>{const V=L.vis;c.save();rw_fit(c,w,h,1200,640);
-    RW_FAN.forEach(([key,cp],i)=>{const y=70+i*60;T(c,key,60,y+8,{f:"mono",w:500,size:24});[KIND,RW_AMB].forEach((col,j)=>{glass(c,320+j*100,y-22,86,40,10,col,{glow:6,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,String(cp),363+j*100,y+8,{f:"mono",w:500,size:22,align:"center",color:rgba(col,1)});});});
-    T(c,"370",820,250,{w:800,size:96,align:"center",color:rgba(RW_RED,1)});T(c,V.dashboard,820,300,{w:600,size:26,align:"center",color:rgba(SOFT,1)});
-    T(c,"185",820,450,{w:800,size:96,align:"center",color:rgba(GOOD,1)});T(c,V.byHand,820,500,{w:600,size:26,align:"center",color:rgba(SOFT,1)});c.restore();},
-  rw_q_app:(c,w,h,st,L)=>{const V=L.vis;c.save();rw_fit(c,w,h,1200,640);
-    rw_badge(c,280,220,64,"planning",V.planning,{sub:false,size:28});rw_pin(c,200,420,"31 Mar 2026",1,{size:24});T(c,"12",280,560,{w:800,size:64,align:"center",color:rgba(RW_TIME,1)});
-    rw_badge(c,880,220,64,"wallet",V.walletApp,{sub:false,size:28});rw_pin(c,800,420,V.today,1,{size:24});T(c,"?",880,560,{w:800,size:64,align:"center",color:rgba(RW_AMB,1)});
-    arrowTo(c,400,540,760,540,RW_AMB,0.8,{head:16});c.restore();},
-  rw_q_rename:(c,w,h,st,L)=>{const V=L.vis;c.save();rw_fit(c,w,h,1200,640);
-    rw_l_ver(c,60,60,700,120,"1 Nov 2024","2 Jul 2026",V.names[0],{col:KIND});rw_l_ver(c,60,200,700,120,"2 Jul 2026","(open)",V.names[1],{col:RW_AMB,lit:1});
-    glass(c,820,60,340,260,18,TRUST,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.95)"});T(c,V.report,850,110,{w:800,size:28});T(c,"31 Mar 2026",850,152,{f:"mono",w:500,size:24,color:rgba(RW_TIME,1)});
-    wrapT(c,V.names[1]+"?",850,210,290,{w:700,size:26,color:rgba(RW_AMB,1)});arrowTo(c,770,260,840,220,RW_AMB,0.8,{head:14});
-    T(c,V.rebuilt,600,440,{w:700,size:30,align:"center",color:rgba(SOFT,1)});c.restore();},
-  rw_q_backdate:(c,w,h,st,L)=>{const V=L.vis,X=rw_l_axis(100,1100,"2026-03-15","2026-04-30");c.save();rw_fit(c,w,h,1200,640);
-    c.strokeStyle=rgba(SOFT,0.4);c.lineWidth=2;c.beginPath();c.moveTo(100,380);c.lineTo(1100,380);c.stroke();
-    [["2026-03-31",V.census,RW_TIME],["2026-04-14",V.published,TRUST]].forEach(([d,s,col],i)=>{rw_l_dash(c,X(d),120,400,col,1);T(c,s,X(d),100-0*i,{w:700,size:24,align:"center",color:rgba(col,1)});});
-    rw_clock(c,X("2026-03-25"),340,16,SOFT,1);T(c,"25 Mar",X("2026-03-25"),440,{w:700,size:24,align:"center",color:rgba(SOFT,1)});
-    rw_eye(c,X("2026-04-20"),340,18,SOFT,1);T(c,"20 Apr",X("2026-04-20"),440,{w:700,size:24,align:"center",color:rgba(SOFT,1)});
-    glass(c,X("2026-04-20")-120,200,240,80,14,RW_AMB,{glow:10,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,"WD",X("2026-04-20"),252,{f:"mono",w:500,size:30,align:"center",color:rgba(RW_AMB,1)});
-    arrowTo(c,X("2026-04-20")-130,250,X("2026-03-25")+20,320,RW_AMB,0.8,{head:14,bend:0.15});
-    T(c,V.mart+" 1",360,540,{w:800,size:32,align:"center",color:rgba(RW_AMB,1)});T(c,V.report+" 2",840,540,{w:800,size:32,align:"center",color:rgba(TRUST,1)});c.restore();},
-  rw_q_months:(c,w,h,st,L)=>{const V=L.vis;c.save();rw_fit(c,w,h,1200,640);const P=rw_stair(c,110,140,1000,380,0,{axis:false,labels:false});
-    ["2025-10-31","2025-11-30","2025-12-31","2026-01-31","2026-02-28","2026-03-31","2026-04-30","2026-05-31","2026-06-30","2026-07-31","2026-08-31"].forEach((d,i)=>{const x=P.X(d),A=rw_l_aisha(d);rw_l_dash(c,x,120,520,RW_TIME,0.6);
-      c.fillStyle=rgba(RW_TIME,1);c.beginPath();c.arc(x,P.Y(A.cr),7,0,TAU);c.fill();});
-    T(c,V.monthEnds,600,80,{w:800,size:30,align:"center",color:rgba(RW_TIME,1)});T(c,V.oneDay,600,590,{w:700,size:26,align:"center",color:rgba(SOFT,1)});c.restore();},
-  rw_q_current:(c,w,h,st,L)=>{const V=L.vis;c.save();rw_fit(c,w,h,1200,640);
-    rw_code(c,60,60,640,"stg_student_system__learners",["status_code     WD","effective_date  "+V.nextWeek,"_is_current     true"],{edge:SRC3[0][1],size:26,lh:46,label:null,lit:{2:1},litCol:RW_AMB});
-    rw_pin(c,780,140,V.today,1,{size:24});rw_clock(c,800,250,22,RW_TIME,1);T(c,V.notYet,840,260,{w:700,size:26,color:rgba(RW_TIME,1)});
-    rw_code(c,60,330,1080,"models/core/core_learner.sql",["{{ valid_at(as_is_date(), 'timeline.valid_from', 'timeline.valid_to') }} as is_current,"],{edge:TRUST,size:22,lh:40,wrap:72});c.restore();},
-  rw_q_fixes:(c,w,h,st,L)=>{const V=L.vis;c.save();rw_fit(c,w,h,1200,640);
-    rw_l_ver(c,60,60,620,110,"1 Nov 2024","2 Jul 2026",V.names[0],{col:KIND});rw_l_ver(c,60,190,620,110,"2 Jul 2026","(open)",V.names[1],{col:RW_AMB});
-    rw_l_test(c,60,360,620,"unique_combination","learner_key, award_key",-1,"");T(c,"16",900,220,{w:800,size:96,align:"center",color:rgba(RW_RED,1)});
-    T(c,V.rowsFor8,900,270,{w:600,size:26,align:"center",color:rgba(SOFT,1)});T(c,"?",900,470,{w:800,size:72,align:"center",color:rgba(RW_AMB,1)});c.restore();},
-  rw_q_overlap:(c,w,h,st,L)=>{const V=L.vis,X=rw_l_axis(100,1100,"2026-03-01","2026-05-01");c.save();rw_fit(c,w,h,1200,640);
-    glass(c,X("2026-03-01"),160,X("2026-04-04")-X("2026-03-01"),80,14,SRC3[0][1],{glow:8,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,V.version+" 1",X("2026-03-01")+20,210,{w:700,size:26});
-    glass(c,X("2026-04-03"),280,X("2026-05-01")-X("2026-04-03"),80,14,SRC3[0][1],{glow:8,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,V.version+" 2",X("2026-04-03")+20,330,{w:700,size:26});
-    c.fillStyle=rgba(RW_RED,0.35);c.fillRect(X("2026-04-03"),140,X("2026-04-04")-X("2026-04-03"),240);rw_l_dash(c,X("2026-04-03"),130,400,RW_RED,1);
-    T(c,V.overlap,X("2026-04-03"),460,{w:800,size:28,align:"center",color:rgba(RW_RED,1)});rw_l_test(c,300,500,600,"versions_do_not_overlap","",-1,"");c.restore();}
+      if(dd){glow(c,X(dd),y,24,TRUST,0.4);c.fillStyle=rgba(TRUST,1);c.beginPath();c.arc(X(dd),y,6,0,TAU);c.fill();
+        const lf=i===3||dd<"2026-03-31";T(c,rw_l_short(dd,V),X(dd)+(lf?-14:14),y-6,{w:800,size:17,align:lf?"right":"left",color:rgba(TRUST,1)});}
+      else T(c,"?",X(rec)+16,y+6,{w:800,size:24,color:rgba(RW_AMB,1)});
+      if(load&&i<2)T(c,V.loaded[i],X(rec)+16,y+28,{w:600,size:17,color:rgba(RW_AMB,1)});});
+    glass(c,738,48,210,212,16,ok?GOOD:RW_RED,{glow:10,ea:0.8,fill:"rgba(7,12,24,0.95)"});
+    const bl=wrapT(c,V.business,756,80,180,{w:700,size:18,lh:22,color:rgba(SOFT,1)}).length;
+    T(c,String(n),756,150+bl*10,{w:800,size:54,color:rgba(ok?GOOD:RW_AMB,1)});T(c,V.report+" 3",756,236,{w:700,size:18,color:rgba(SOFT,1)});
+    if(ok)tick_(c,910,134+bl*10,30,GOOD,1);else cross_(c,910,134+bl*10,26,RW_RED,1);
+    rw_clock(c,752,300,9,SOFT,1);T(c,V.tookEffect,770,306,{w:600,size:17,color:rgba(SOFT,1)});rw_eye(c,752,334,10,SOFT,1);T(c,V.recorded,770,340,{w:600,size:17,color:rgba(SOFT,1)});
+    c.fillStyle=rgba(TRUST,1);c.beginPath();c.arc(752,368,6,0,TAU);c.fill();T(c,V.dates,770,374,{w:600,size:17,color:rgba(SOFT,1)});},
+  // the scenarios, drawn in the 600 x 320 the page gives them
+  rw_q_double:(c,w,h,st,L)=>{const V=L.vis;
+    RW_FAN.forEach(([key,cp],i)=>{const y=38+i*35;T(c,key,24,y+6,{f:"mono",w:500,size:17});[KIND,RW_AMB].forEach((col,j)=>{const x=160+j*64;glass(c,x,y-14,56,27,8,col,{glow:5,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,String(cp),x+28,y+6,{f:"mono",w:500,size:17,align:"center",color:rgba(col,1)});});});
+    T(c,"370",440,110,{w:800,size:60,align:"center",color:rgba(RW_RED,1)});T(c,V.dashboard,440,140,{w:600,size:18,align:"center",color:rgba(SOFT,1)});
+    T(c,"185",440,232,{w:800,size:60,align:"center",color:rgba(GOOD,1)});T(c,V.byHand,440,262,{w:600,size:18,align:"center",color:rgba(SOFT,1)});},
+  rw_q_app:(c,w,h,st,L)=>{const V=L.vis;
+    rw_badge(c,150,70,36,"planning",V.planning,{sub:false,size:20});rw_pin(c,100,170,"31 Mar 2026",1,{size:18});T(c,"12",150,276,{w:800,size:48,align:"center",color:rgba(RW_TIME,1)});
+    rw_badge(c,450,70,36,"wallet",V.walletApp,{sub:false,size:20});rw_pin(c,410,170,V.today,1,{size:18});T(c,"?",450,276,{w:800,size:48,align:"center",color:rgba(RW_AMB,1)});
+    arrowTo(c,206,260,404,260,RW_AMB,0.8,{head:12});},
+  rw_q_rename:(c,w,h,st,L)=>{const V=L.vis;
+    rw_l_ver(c,20,24,350,70,"1 Nov 2024","2 Jul 2026",V.names[0],{col:KIND,fs:17,ns:19});rw_l_ver(c,20,108,350,70,"2 Jul 2026","(open)",V.names[1],{col:RW_AMB,lit:1,fs:17,ns:19});
+    glass(c,400,24,180,154,14,TRUST,{glow:8,ea:0.7,fill:"rgba(7,12,24,0.95)"});T(c,V.report,416,54,{w:800,size:20});T(c,"31 Mar 2026",416,80,{f:"mono",w:500,size:17,color:rgba(RW_TIME,1)});
+    wrapT(c,V.names[1]+"?",416,114,150,{w:700,size:19,lh:23,color:rgba(RW_AMB,1)});arrowTo(c,372,150,398,132,RW_AMB,0.8,{head:10});
+    T(c,V.rebuilt,300,250,{w:700,size:22,align:"center",color:rgba(SOFT,1)});},
+  rw_q_backdate:(c,w,h,st,L)=>{const V=L.vis,X=rw_l_axis(40,560,"2026-03-15","2026-04-30");
+    c.strokeStyle=rgba(SOFT,0.4);c.lineWidth=1.5;c.beginPath();c.moveTo(40,206);c.lineTo(560,206);c.stroke();
+    [["2026-03-31",V.census,RW_TIME],["2026-04-14",V.published,TRUST]].forEach(([d,s,col])=>{rw_l_dash(c,X(d),48,216,col,1);T(c,s,X(d),36,{w:700,size:18,align:"center",color:rgba(col,1)});});
+    rw_clock(c,X("2026-03-25"),186,12,SOFT,1);T(c,"25 Mar",X("2026-03-25"),236,{w:700,size:18,align:"center",color:rgba(SOFT,1)});
+    rw_eye(c,X("2026-04-20"),186,13,SOFT,1);T(c,"20 Apr",X("2026-04-20"),236,{w:700,size:18,align:"center",color:rgba(SOFT,1)});
+    glass(c,X("2026-04-20")-44,74,88,40,10,RW_AMB,{glow:8,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,"WD",X("2026-04-20"),101,{f:"mono",w:500,size:20,align:"center",color:rgba(RW_AMB,1)});
+    arrowTo(c,X("2026-04-20")-48,104,X("2026-03-25")+14,172,RW_AMB,0.8,{head:10,bend:0.15});
+    T(c,V.mart+" 1",160,290,{w:800,size:20,align:"center",color:rgba(RW_AMB,1)});T(c,V.report+" 2",440,290,{w:800,size:20,align:"center",color:rgba(TRUST,1)});},
+  rw_q_months:(c,w,h,st,L)=>{const V=L.vis,P=rw_stair(c,50,70,500,190,0,{axis:false,labels:false});
+    ["2025-10-31","2025-11-30","2025-12-31","2026-01-31","2026-02-28","2026-03-31","2026-04-30","2026-05-31","2026-06-30","2026-07-31","2026-08-31"].forEach(d=>{const x=P.X(d),A=rw_l_aisha(d);rw_l_dash(c,x,58,260,RW_TIME,0.6);
+      c.fillStyle=rgba(RW_TIME,1);c.beginPath();c.arc(x,P.Y(A.cr),5,0,TAU);c.fill();});
+    T(c,V.monthEnds,300,40,{w:800,size:22,align:"center",color:rgba(RW_TIME,1)});T(c,V.oneDay,300,298,{w:700,size:19,align:"center",color:rgba(SOFT,1)});},
+  rw_q_current:(c,w,h,st,L)=>{const V=L.vis,card=(x,y,cw,name,lines,edge,lab,lit)=>{const ch=46+lines.length*26+(lab?28:0);glass(c,x,y,cw,ch,12,edge,{glow:8,ea:0.7,fill:"rgba(6,10,20,0.95)"});
+      T(c,name,x+14,y+26,{f:"mono",w:500,size:17,color:rgba(edge,1)});c.fillStyle="rgba(170,200,245,0.14)";c.fillRect(x+10,y+36,cw-20,1);
+      lines.forEach((l,i)=>{const ly=y+62+i*26;if(lit===i){c.fillStyle=rgba(RW_AMB,0.16);rr(c,x+8,ly-19,cw-16,25,5);c.fill();}T(c,l,x+14,ly,{f:"mono",w:500,size:17,color:rgba(lit===i?RW_AMB:[200,225,255],1)});});
+      if(lab)T(c,lab,x+cw-14,y+ch-12,{w:700,size:17,align:"right",color:rgba(mix(SOFT,WEED,0.35),1)});return ch;};
+    card(16,12,330,"stg_student_system__learners",["status_code     WD","effective_date  "+V.nextWeek,"_is_current     true"],SRC3[0][1],null,2);
+    rw_pin(c,380,40,V.today,1,{size:18});rw_clock(c,392,104,12,RW_TIME,1);wrapT(c,V.notYet,412,110,180,{w:700,size:18,lh:22,color:rgba(RW_TIME,1)});
+    card(16,172,568,"models/core/core_learner.sql",["{{ valid_at(as_is_date(), 'timeline.valid_from',","    'timeline.valid_to') }} as is_current,"],TRUST,RW_RUN);},
+  rw_q_fixes:(c,w,h,st,L)=>{const V=L.vis;
+    rw_l_ver(c,20,20,350,70,"1 Nov 2024","2 Jul 2026",V.names[0],{col:KIND,fs:17,ns:19});rw_l_ver(c,20,102,350,70,"2 Jul 2026","(open)",V.names[1],{col:RW_AMB,fs:17,ns:19});
+    rw_l_test(c,20,196,350,"unique_combination",["learner_key, award_key"],-1,{size:17});T(c,"16",480,110,{w:800,size:60,align:"center",color:rgba(RW_RED,1)});
+    T(c,V.rowsFor8,480,140,{w:600,size:18,align:"center",color:rgba(SOFT,1)});T(c,"?",480,250,{w:800,size:52,align:"center",color:rgba(RW_AMB,1)});},
+  rw_q_overlap:(c,w,h,st,L)=>{const V=L.vis,X=rw_l_axis(40,560,"2026-03-01","2026-05-01");
+    glass(c,X("2026-03-01"),40,X("2026-04-04")-X("2026-03-01"),48,10,SRC3[0][1],{glow:6,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,V.version+" 1",X("2026-03-01")+14,71,{w:700,size:19});
+    glass(c,X("2026-04-03"),104,X("2026-05-01")-X("2026-04-03"),48,10,SRC3[0][1],{glow:6,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,V.version+" 2",X("2026-04-03")+20,135,{w:700,size:19});
+    c.fillStyle=rgba(RW_RED,0.35);c.fillRect(X("2026-04-03"),30,X("2026-04-04")-X("2026-04-03"),132);rw_l_dash(c,X("2026-04-03"),24,170,RW_RED,1);
+    T(c,V.overlap,X("2026-04-03"),200,{w:800,size:20,align:"center",color:rgba(RW_RED,1)});rw_l_test(c,130,236,340,"versions_do_not_overlap",[],-1,{size:17});}
 });

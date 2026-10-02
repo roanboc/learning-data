@@ -238,7 +238,7 @@ and their real output: `docs/definitions.md and seeds/key_sets.csv are up to dat
 
 **Narration.** On Databricks, people find tables in the catalog, and read their descriptions there. So each build pushes the descriptions out to it, for each table and its columns. Nobody edits them there: a rebuild writes over the edit. Fix it at home, and it flows out. One direction: from the files, out to the catalog and whatever reads it. Tuned from one source, never the other way round.
 
-**Picture.** A catalog panel on the right, labelled "Databricks · Unity Catalog" (the story's stack, in the dim label the series uses for it): `core_award`, its description and its columns' comments. The setting lights:
+**Picture.** A catalog panel on the right, labelled "Databricks · Unity Catalog" (the story's stack, in the dim label the series uses for it): `core_award_v1` (the table dbt builds for the versioned model, in the default `dev_core` schema), its description and its columns' comments. The setting lights:
 
 ```yaml
 # dbt_project.yml · runs on dbt Core · DuckDB

@@ -263,10 +263,12 @@ Object.assign(LV,{
   // claim or guess: each statement, with its query if it has one; checked, each guess shows what running it finds
   ag_l_claims:(c,w,h,st,L)=>{const V=L.vis,Lb=L.labs.find(x=>x.id==="claims"),pick=st.pick||{};c.save();ag_lfit(c,w,h,1000,500);
     V.claims.forEach((cl,i)=>{const y=12+i*81,hasQ=!!cl.q,pb=pick[i];glass(c,16,y,740,72,12,hasQ?KT_AI:AG_GREY,{glow:6,ea:0.6,fill:"rgba(6,12,20,0.96)"});
-      T(c,cl.c,34,y+30,{w:700,size:21});
-      if(hasQ)T(c,cl.q+" → "+cl.r.split(" | ").slice(-2).join(" | "),34,y+60,{f:"mono",w:500,size:19,color:rgba(AG_GRN,0.95)});
-      else if(st.checked)T(c,V.run+" "+cl.run,34,y+60,{w:700,size:19,color:rgba(AG_AMB,1)});
-      else T(c,V.q.noquery,34,y+60,{w:600,size:19,color:rgba(SOFT,0.8)});
+      // every line shrinks, if it must, to stay inside its card (740 wide, text from 34 to 740)
+      const fit=(t,o)=>{c.save();let z=o.size;c.font=font(o.w,z,o.f);while(z>15&&c.measureText(t).width>700){z-=0.5;c.font=font(o.w,z,o.f);}c.restore();T(c,t,34,o.y,Object.assign({},o,{size:z}));};
+      fit(cl.c,{y:y+30,w:700,size:21});
+      if(hasQ)fit(cl.q+" → "+cl.r.split(" | ").slice(-2).join(" | "),{y:y+60,f:"mono",w:500,size:19,color:rgba(AG_GRN,0.95)});
+      else if(st.checked)fit(V.run+" "+cl.run,{y:y+60,w:700,size:19,color:rgba(AG_AMB,1)});
+      else fit(V.q.noquery,{y:y+60,w:600,size:19,color:rgba(SOFT,0.8)});
       if(pb){const ev=pb==="ev";tag(c,860,y+36,ev?V.evidence:V.guess,ev?AG_GRN:AG_AMB,{align:"center",size:21});
         if(st.checked){const ok=Lb.w.items[i].b===pb;if(ok)tick_(c,966,y+36,30,AG_GRN,1);else cross_(c,966,y+36,28,AG_RED,1);}}});
     c.restore();},

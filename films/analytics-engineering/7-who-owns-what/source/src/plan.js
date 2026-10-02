@@ -340,15 +340,15 @@ function wo_l_read(c,w,h,st,L){const V=L.vis,p=st.pick||"both",refA=p==="grants"
 // lab 4: two projects hash Aisha's student ID; the ground under them is the shared package
 function wo_l_shared(c,w,h,st,L){const V=L.vis,k=st.step||0,own=k>=1&&k<=4,low=k>=2&&k<=4,broke=k>=3&&k<=4,tests=k===4;c.save();wo_fit(c,w,h,960,400);
   [[20,"credentials",[150,190,255],false],[500,"planning",WO_PLN,true]].forEach(([x,nm,col,right])=>{wo_proj(c,x,30,440,262,nm,col,{dash:right});
-    if(right){const lw=tw(c,WO_CLOUD,18,700)+28;c.fillStyle="rgba(8,14,24,0.95)";rr(c,x+440-lw-12,15,lw,30,15);c.fill();c.save();c.setLineDash([5,4]);c.strokeStyle=rgba(WO_AMB,0.8);c.lineWidth=1.5;rr(c,x+440-lw-12,15,lw,30,15);c.stroke();c.restore();T(c,WO_CLOUD,x+440-lw+2,36,{w:700,size:18,color:rgba(WO_AMB,1)});}
+    if(right){const lw=tw(c,WO_CLOUD,18,700)+28,lx=x+440-lw+8;c.fillStyle="rgba(8,14,24,0.95)";rr(c,lx,15,lw,30,15);c.fill();c.save();c.setLineDash([5,4]);c.strokeStyle=rgba(WO_AMB,0.8);c.lineWidth=1.5;rr(c,lx,15,lw,30,15);c.stroke();c.restore();T(c,WO_CLOUD,lx+14,36,{w:700,size:18,color:rgba(WO_AMB,1)});}
     const l=right&&low,o=right&&own;T(c,l?"sis|s-20417":"SIS|S-20417",x+30,96,{f:"mono",w:500,size:24,color:rgba(l?WO_AMB:INK,1)});
     T(c,o?(low?"sha256(lower(…))":"sha256(…)"):"{{ hash_key(…) }}",x+30,142,{f:"mono",w:500,size:21,color:rgba(o?WO_AMB:mix(INK,TRUST,0.4),1)});
     T(c,(right&&low)?"8c73518c…447e":(right&&own)?"…":"0905e6e2…f76a2",x+30,194,{f:"mono",w:500,size:26,color:rgba((right&&low)?WO_AMB:TRUST,1)});
     withA(c,tests?1:0.5,()=>{tick_(c,x+40,262,11,GOOD,1);T(c,"unique · not_null",x+60,270,{f:"mono",w:500,size:20,color:rgba(tests?GOOD:SOFT,1)});});});
   // the join between the two keys
-  const jc=broke?BAD:GOOD;c.save();c.strokeStyle=rgba(jc,0.95);c.lineWidth=3;if(broke)c.setLineDash([10,10]);c.beginPath();c.moveTo(280,186);c.lineTo(524,186);c.stroke();c.restore();
+  const jc=broke?BAD:own?SOFT:GOOD;c.save();c.strokeStyle=rgba(jc,0.95);c.lineWidth=3;if(broke)c.setLineDash([10,10]);c.beginPath();c.moveTo(280,186);c.lineTo(524,186);c.stroke();c.restore();
   if(broke){c.fillStyle="rgba(7,12,24,1)";c.fillRect(470,172,20,28);cross_(c,480,186,11,BAD,1);}
-  const jt=broke?V.noRows:own?V.join:V.oneRow;tag(c,360,232,jt,jc,{align:"center",size:wo_fitS(c,jt,180,20,700)});
+  const jt=broke?V.noRows:own?V.join:V.oneRow;tag(c,345,232,jt,jc,{align:"center",size:wo_fitS(c,jt,180,20,700)});
   // the shared package: under both, or only under the credential project
   wo_slab(c,20,314,own?440:920,76,V.pkg,"hash_key · key_string",WEED,{hi:own?0:0.4});
   if(own){c.save();c.setLineDash([10,9]);c.strokeStyle=rgba(SOFT,0.6);c.lineWidth=2;rr(c,500,314,440,76,10);c.stroke();c.restore();T(c,V.noPkg,720,360,{w:700,size:20,align:"center",color:rgba(SOFT,1)});}
@@ -356,7 +356,7 @@ function wo_l_shared(c,w,h,st,L){const V=L.vis,k=st.step||0,own=k>=1&&k<=4,low=k
 
 // the scenarios
 function wo_q_copy(c,w,h,st,L){const V=L.vis;c.save();wo_fit(c,w,h,900,480);
-  wo_coreCard(c,290,16,320,92,{name:"core_learner",sub:V.pub});
+  wo_coreCard(c,290,8,320,118,{name:"core_learner",sub:V.pub});
   wo_proj(c,16,160,420,300,"planning",WO_PLN,{});wo_proj(c,464,160,420,300,"wallet",WO_WAL,{});
   wo_lpill(c,226,250,"mart_planning__near_award",WO_PLN,{size:22});tag(c,226,320,V.atCensus,WO_PLN,{align:"center",size:wo_fitS(c,V.atCensus,360,24,700)});
   wo_lpill(c,674,250,"mart_planning__near_award",WO_PLN,{size:22,glow:4});tag(c,674,320,V.copy,EDGE_,{align:"center",size:wo_fitS(c,V.copy,370,24,700)});

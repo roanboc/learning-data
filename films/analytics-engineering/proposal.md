@@ -1,6 +1,6 @@
 # In the weeds of data crafting
 
-*Proposal for a technical series for analytics engineers, on data modelling with dbt, v0.2. The folder is named after the topic. Status: the opening film is built, 30 September 2026; the [series README](README.md) describes the films as they are.*
+*Proposal for a technical series for analytics engineers, on data modelling with dbt, v0.2. The folder is named after the topic. Status: all nine films are built and on the site, 2 October 2026; the [series README](README.md) describes the films as they are.*
 
 ## Decided
 
@@ -298,4 +298,4 @@ Confirm against current documentation, and record in each film's rigour sheet wi
 
 1. The author's answers to the decisions above.
 2. ~~A script and rigour sheet for the opening film.~~ Built, 30 September 2026: [script](1-a-model-is-not-a-transformation/script.md), [source](1-a-model-is-not-a-transformation/source/README.md), [Jun's character card](characters/card-jun.jpg). Next for it: the author's review of the video, then publishing (site page, Spanish captions, Pause and think, labs).
-3. The example dbt project the films draw from: the credential model, sources, YAML and tests, so every on-screen snippet is real code that runs.
+3. ~~The example dbt project the films draw from.~~ Built, 30 September 2026: [project/](project/), on dbt Core with DuckDB, with a Databricks target; every film's code and data come from it.

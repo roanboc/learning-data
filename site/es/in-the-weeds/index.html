@@ -15,7 +15,7 @@
 <body>
 <header class="top"><div class="top-in"><a class="brand" href="../"><img src="../../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../">Empieza aquí</a><a href="../topics/" aria-current="true">Temas</a><a href="../journey/">Cómo se hizo</a><span class="lang" role="group" aria-label="Idioma"><a href="../../in-the-weeds/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span></nav></div></header>
 <main>
-<section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="../../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../../assets/a-model-is-not-a-transformation-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="../../assets/a-model-is-not-a-transformation-poster.jpg" alt=""><img src="../../assets/start-from-a-question-poster.jpg" alt=""><img src="../../assets/what-makes-it-the-same-one-poster.jpg" alt=""><img src="../../assets/one-row-of-what-and-when-poster.jpg" alt=""><img src="../../assets/promises-and-proofs-poster.jpg" alt=""><img src="../../assets/built-in-layers-poster.jpg" alt=""><img src="../../assets/who-owns-what-poster.jpg" alt=""><img src="../../assets/an-agent-on-the-team-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
 <p class="eyebrow crumbs"><a href="../topics/">Temas</a> › En las entrañas del oficio de datos</p>
 <h1>En las entrañas del oficio de datos</h1>
 <p class="lead">Una serie técnica para analytics engineers: cómo un modelo de datos acordado se convierte en tablas, con dbt, en Databricks. Sigue a Jun, analytics engineer de la universidad, desde una pregunta hasta modelos versionados, probados y documentados, con un agente de IA que ayuda en cada paso y una persona que aprueba cada uno.</p>
@@ -23,7 +23,7 @@
 </section>
 
 <section class="module" id="films" aria-labelledby="films-h">
-<div class="mhead"><div><h2 id="films-h">Las películas</h2><p>Míralas en orden. Es técnica: muestra código, YAML y Markdown reales, y nombra las funciones de dbt. Se entiende mejor después de De las palabras a los datos.</p></div></div>
+<div class="mhead"><div><h2 id="films-h">Las películas</h2><p>Míralas en orden. Es técnica: muestra código, YAML y Markdown reales de un proyecto de dbt de ejemplo que corre en dbt Core con DuckDB, en el repositorio de este sitio, así que puedes ejecutarlo tú mismo. Se entiende mejor después de De las palabras a los datos.</p></div></div>
 <div class="topic-grid" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}'>
 <article class="topic-card">
 <img src="../../assets/a-model-is-not-a-transformation-poster.jpg" alt="" width="1280" height="720" loading="lazy">
@@ -35,21 +35,87 @@
 <p class="tc-progress" data-progress="ld-a-model-is-not-a-transformation" data-labs="4" data-quiz="8" hidden></p>
 </div>
 </article>
+<article class="topic-card">
+<img src="../../assets/start-from-a-question-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 2 de 9 · Alcance y responsables</p>
+<h3><a href="start-from-a-question/">Empieza por una pregunta</a></h3>
+<p>Un modelo no tiene borde hasta que una pregunta se lo da. Modela solo lo que la pregunta toca, y nombra primero al responsable de cada significado.</p>
+<p class="meta">5 min · 4 labs · 8 situaciones · En las entrañas del oficio de datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-start-from-a-question" data-labs="4" data-quiz="8" hidden></p>
 </div>
-</section>
-
-<section class="module" id="coming" aria-labelledby="coming-h">
-<div class="mhead"><div><h2 id="coming-h">Las películas que vienen</h2><p>Cada una recorre uno o dos de los diez pasos de Jun. Un modelo no es una transformación es el mapa.</p></div></div>
-<ol class="series-list coming">
-<li><span class="n">2</span><span><b>Empezar por una pregunta</b> · El alcance, el modelo conceptual en YAML, los responsables; unir o separar una entidad</span></li>
-<li><span class="n">3</span><span><b>Qué la hace la misma</b> · Perfilado, claves de negocio, conjuntos de claves, correspondencias de identidad y hashing</span></li>
-<li><span class="n">4</span><span><b>Una fila de qué, y cuándo</b> · Granularidad; versiones guardadas al ingerir; como es y como era; uniones en un punto del tiempo</span></li>
-<li><span class="n">5</span><span><b>Promesas y pruebas</b> · El registro de brechas; contratos empresariales y de consumidor; las pruebas primero</span></li>
-<li><span class="n">6</span><span><b>Construido por capas</b> · Staging, intermediate, core y marts; estándares de CTE; materializaciones</span></li>
-<li><span class="n">7</span><span><b>Quién es dueño de qué</b> · Dominios, acceso, grupos y referencias entre proyectos</span></li>
-<li><span class="n">8</span><span><b>Un agente en el equipo</b> · Habilidades, acceso, evidencia y límites; validación, revisión y publicación</span></li>
-<li><span class="n">9</span><span><b>Escrito una sola vez</b> · Bloques de documentación, Mermaid y el catálogo; versiones y retiro</span></li>
-</ol>
+</article>
+<article class="topic-card">
+<img src="../../assets/what-makes-it-the-same-one-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 3 de 9 · Identidad y claves</p>
+<h3><a href="what-makes-it-the-same-one/">Qué lo hace el mismo</a></h3>
+<p>Una estudiante, tres claves, y alguien que se le parece. Las reglas unen la mayoría; una persona decide el resto, y la decisión se vuelve datos y una prueba.</p>
+<p class="meta">4½ min · 4 labs · 8 situaciones · En las entrañas del oficio de datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-what-makes-it-the-same-one" data-labs="4" data-quiz="8" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/one-row-of-what-and-when-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 4 de 9 · Grano y tiempo</p>
+<h3><a href="one-row-of-what-and-when/">Una fila de qué, y cuándo</a></h3>
+<p>Doce el día del censo, nueve hoy: las dos correctas. Di qué es una fila y qué día describe, antes de escribir SQL, y prueba las dos cosas.</p>
+<p class="meta">5 min · 4 labs · 8 situaciones · En las entrañas del oficio de datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-one-row-of-what-and-when" data-labs="4" data-quiz="8" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/promises-and-proofs-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 5 de 9 · Contratos y pruebas</p>
+<h3><a href="promises-and-proofs/">Promesas y pruebas</a></h3>
+<p>Cada brecha recibe una decisión. Prométela en un contrato; demuéstrala con una prueba, escrita antes del código que comprueba.</p>
+<p class="meta">5½ min · 4 labs · 8 situaciones · En las entrañas del oficio de datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-promises-and-proofs" data-labs="4" data-quiz="8" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/built-in-layers-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 6 de 9 · Capas y CTE</p>
+<h3><a href="built-in-layers/">Construido en capas</a></h3>
+<p>Cuatro capas ponen las pruebas en verde. Cada capa tiene una tarea; cada CTE, un paso; y la regla se escribe una sola vez.</p>
+<p class="meta">4½ min · 4 labs · 8 situaciones · En las entrañas del oficio de datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-built-in-layers" data-labs="4" data-quiz="8" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/who-owns-what-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 7 de 9 · Dominios y propiedad</p>
+<h3><a href="who-owns-what/">Quién es dueño de qué</a></h3>
+<p>El significado de cada hecho tiene dueño. Los dueños publican un núcleo público y versionado; los consumidores construyen sobre él, nunca sobre los marts de otros.</p>
+<p class="meta">5 min · 4 labs · 8 situaciones · En las entrañas del oficio de datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-who-owns-what" data-labs="4" data-quiz="8" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/an-agent-on-the-team-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 8 de 9 · Agentes y revisión</p>
+<h3><a href="an-agent-on-the-team/">Un agente en el equipo</a></h3>
+<p>Un agente de IA redacta en minutos. Sigue reglas escritas en el proyecto, muestra la consulta detrás de cada afirmación, nunca debilita una prueba, y las personas aprueban.</p>
+<p class="meta">5 min · 4 labs · 8 situaciones · En las entrañas del oficio de datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-an-agent-on-the-team" data-labs="4" data-quiz="8" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/written-once-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 9 de 9 · Documentación y versiones</p>
+<h3><a href="written-once/">Escrito una sola vez</a></h3>
+<p>Cada copia de un dato es una ocasión de desviarse. Un hogar para cada dato, todo lo demás generado, y un cambio que rompe llega como una versión nueva con fecha.</p>
+<p class="meta">5 min · 4 labs · 8 situaciones · En las entrañas del oficio de datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-written-once" data-labs="4" data-quiz="8" hidden></p>
+</div>
+</article>
+</div>
 </section>
 
 <section class="module" id="thread" aria-labelledby="thread-h">

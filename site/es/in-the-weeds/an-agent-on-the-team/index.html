@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Un agente en el equipo · En las entrañas del oficio de datos · Learning Data</title>
+<meta name="description" content="Una película para analytics engineers sobre trabajar con un agente de IA en un proyecto de dbt: AGENTS.md, archivos de skills y el proceso, una entidad de servicio con acceso mínimo, evidencia para cada afirmación, una prueba que nunca debe debilitar, conciliar con el informe del censo y comparar contra main, la CI, y las personas que aprueban.">
+<meta property="og:title" content="Un agente en el equipo · En las entrañas del oficio de datos · Learning Data"><meta property="og:description" content="Un agente de IA redacta en minutos. Sigue reglas escritas en el proyecto, muestra la consulta detrás de cada afirmación, nunca debilita una prueba, y las personas aprueban."><meta property="og:image" content="https://roanboc.github.io/learning-data/assets/an-agent-on-the-team-poster.jpg"><meta property="og:locale" content="es_419">
+<link rel="alternate" hreflang="en" href="https://roanboc.github.io/learning-data/in-the-weeds/an-agent-on-the-team/"><link rel="alternate" hreflang="es" href="https://roanboc.github.io/learning-data/es/in-the-weeds/an-agent-on-the-team/">
+<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../../"><img src="../../../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../../">Empieza aquí</a><a href="../../topics/" aria-current="true">Temas</a><a href="../../journey/">Cómo se hizo</a><span class="lang" role="group" aria-label="Idioma"><a href="../../../in-the-weeds/an-agent-on-the-team/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span></nav></div></header>
+<main>
+<section class="hero cine"><div class="bg" aria-hidden="true"><img src="../../../assets/an-agent-on-the-team-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow crumbs"><a href="../../topics/">Temas</a> › <a href="../">En las entrañas del oficio de datos</a></p>
+<h1>Un agente en el equipo: redacta y verifica, con evidencia; las personas aprueban</h1>
+<p class="lead">Un agente de IA puede leer un proyecto de dbt, ejecutarlo y preparar un cambio en minutos. Para confiar en él, necesita lo mismo que un colega nuevo, por escrito: reglas, skills y quién aprueba cada paso. Acceso mínimo, una consulta detrás de cada afirmación, una prueba que nunca debilita, y una conciliación, una comparación y la CI antes de que las personas aprueben.</p>
+<p class="meta-row"><span>5 min</span><span>4 labs</span><span>8 situaciones</span><span>Pausa para pensar</span><span>En inglés, con subtítulos en español</span></p>
+<p class="note">La película está en inglés, con subtítulos en español. Esta página, los capítulos, las preguntas, los labs y las situaciones están en español.</p>
+<p class="builds-on">Amplía <a href="../who-owns-what/"><i>Quién es dueño de qué</i></a></p>
+</section>
+<nav class="course" aria-label="Curso: Un agente en el equipo"><div class="course-in"><p class="course-t"><small>Película 8 de 9 · Agentes y revisión</small>Un agente en el equipo</p><ol class="path" data-store="ld-an-agent-on-the-team" data-labs="4" data-quiz="8" data-text='{"watched": "Vista", "labs": "{n} de 4 labs explorados", "quiz": "{n} de 8 respondidas · {ok} correctas"}'>
+<li><a href="./#watch" aria-current="step"><span class="n"><b>1</b></span><b>Mira</b><span>Una película de 5 min</span></a></li>
+<li><a href="./labs/"><span class="n"><b>2</b></span><b>Desarma</b><span>Cuatro labs interactivos</span></a></li>
+<li><a href="./scenarios/"><span class="n"><b>3</b></span><b>Tú decides</b><span>Ocho situaciones reales</span></a></li>
+</ol></div></nav>
+<section class="module" id="watch" data-store="ld-an-agent-on-the-team" aria-labelledby="watch-h">
+<div class="mhead"><div><h2 id="watch-h">Mira la película</h2><p>Presiona Reproducir, o salta a un capítulo. Activa <b>Pausa para pensar</b> y la película se detiene con una pregunta al final de los capítulos.</p></div></div>
+<div class="player" data-labs="labs/">
+<audio id="snd" preload="metadata" src="../../../assets/an-agent-on-the-team/soundtrack.mp3"></audio><div class="poster"><img src="../../../assets/an-agent-on-the-team-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Ver la película · 5 min</button><button type="button" class="think-badge" data-think>Ver con pausas para pensar</button></div></div><canvas id="film" width="1280" height="720" aria-label="Película animada, en inglés: An agent on the team"></canvas>
+<div class="bar"><button id="play">Reproducir</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="time">0:00</span><button id="think" aria-pressed="false" title="Detenerse al final de cuatro capítulos, con una pregunta cada vez">Pausa para pensar</button><button id="cc" class="on" aria-pressed="true">Subtítulos</button><button id="fs">Pantalla completa</button></div>
+</div>
+<div class="chapters" id="chapters" aria-label="Capítulos"></div>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/an-agent-on-the-team.mp4">Descargar el video (en inglés)</a><a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/8-an-agent-on-the-team/captions">Archivos de subtítulos</a><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/8-an-agent-on-the-team/script.md" hreflang="en">Leer el guion (en inglés)</a></p>
+<template id="next-panel"><div class="think-card"><p class="think-k">¿Y ahora?</p><h3>Viste el trabajo del agente verificado y revisado. Ahora revísalo tú.</h3>
+<div class="next-opts"><a class="btn primary" href="labs/">Desarma: 4 labs interactivos →</a><a class="btn" href="scenarios/">Tú decides: 8 situaciones</a><a class="btn" href="../written-once/">Sigue en la serie: Escrito una sola vez</a></div>
+<div class="think-foot"><button type="button" class="btn" data-again>Ver de nuevo</button></div></div></template>
+</section>
+
+<section class="module" id="think-it-through" aria-labelledby="think-h">
+<div class="mhead"><div><h2 id="think-h">Piénsalo</h2><p>Las cuatro preguntas de Pausa para pensar, para una clase o un equipo. Abre una para ver la respuesta.</p></div></div>
+<div id="think-list"></div>
+</section>
+
+<section class="module" id="in-the-series" aria-labelledby="series-h">
+<div class="mhead"><div><h2 id="series-h">En la serie: <a href="../">En las entrañas del oficio de datos</a></h2><p>Película 8 de 9.</p></div></div>
+<div class="topic-grid series-pn" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}'>
+<article class="topic-card">
+<img src="../../../assets/who-owns-what-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">← Anterior · Película 7 de 9</p>
+<h3><a href="../who-owns-what/">Quién es dueño de qué</a></h3>
+<p>El significado de cada hecho tiene dueño. Los dueños publican un núcleo público y versionado; los consumidores construyen sobre él, nunca sobre los marts de otros.</p>
+<p class="meta">5 min · 4 labs · 8 situaciones · En las entrañas del oficio de datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-who-owns-what" data-labs="4" data-quiz="8" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../../assets/written-once-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Siguiente · Película 9 de 9 →</p>
+<h3><a href="../written-once/">Escrito una sola vez</a></h3>
+<p>Cada copia de un dato es una ocasión de desviarse. Un hogar para cada dato, todo lo demás generado, y un cambio que rompe llega como una versión nueva con fecha.</p>
+<p class="meta">5 min · 4 labs · 8 situaciones · En las entrañas del oficio de datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-written-once" data-labs="4" data-quiz="8" hidden></p>
+</div>
+</article>
+</div>
+<ol class="series-list" aria-label="Todas las películas de la serie">
+<li><a href="../a-model-is-not-a-transformation/"><span class="n">1</span>Un modelo no es una transformación</a></li>
+<li><a href="../start-from-a-question/"><span class="n">2</span>Empieza por una pregunta</a></li>
+<li><a href="../what-makes-it-the-same-one/"><span class="n">3</span>Qué lo hace el mismo</a></li>
+<li><a href="../one-row-of-what-and-when/"><span class="n">4</span>Una fila de qué, y cuándo</a></li>
+<li><a href="../promises-and-proofs/"><span class="n">5</span>Promesas y pruebas</a></li>
+<li><a href="../built-in-layers/"><span class="n">6</span>Construido en capas</a></li>
+<li><a href="../who-owns-what/"><span class="n">7</span>Quién es dueño de qué</a></li>
+<li><a href="../an-agent-on-the-team/" aria-current="page"><span class="n">8</span>Un agente en el equipo</a></li>
+<li><a href="../written-once/"><span class="n">9</span>Escrito una sola vez</a></li>
+</ol>
+</section>
+</main>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película, los labs y las situaciones son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
+<script>window.L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla completa",fsExit:"Salir de pantalla completa"}};</script>
+<script src="../../../assets/an-agent-on-the-team/captions.es.js"></script>
+<script src="../../../assets/an-agent-on-the-team/film.js"></script>
+<script>/* the film is in English; its chapter buttons and the Pause and think kicker use these Spanish names */
+{const N={"almanac": "Calculado dos veces", "skills": "Por escrito", "least": "Acceso mínimo", "evidence": "Evidencia", "shortcut": "El atajo", "validate": "Conciliar y comparar", "ship": "Revisar y publicar", "next": "Las mismas palabras, en cuatro lugares"};SCENES.forEach(s=>{if(N[s.id])s.name=N[s.id];});}</script>
+<script src="../../../assets/an-agent-on-the-team/think.es.js"></script>
+<script src="../../../assets/learn/think.js"></script>
+<script src="../../../assets/learn/path.js"></script>
+<script src="../../../assets/learn/next.js"></script>
+<script src="../../../assets/ambient.js"></script>
+</body>
+</html>

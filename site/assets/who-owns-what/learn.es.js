@@ -95,7 +95,7 @@ qs:[
   why:"Los grupos controlan quién puede hacer ref() a qué dentro de un proyecto. Los proyectos separados suman un costo que solo se paga con equipos separados: la decisión de Noor, el 12 de octubre."},
  {type:"choice",lab:"domains",vis:"wo_q_edit",title:"Cambiado en el lugar",sit:"Encuentra el problema. El equipo de aprendizaje renombra una columna de microcredenciales en core_credential, en el lugar, sin versión nueva, y ajusta el YAML. Todas las pruebas pasan.",
   opts:[{t:"Está bien: el equipo de aprendizaje es dueño de las microcredenciales.",why:"Es dueño de lo que significa una microcredencial. core_credential es un modelo público con contrato, y sus consumidores dependen de sus columnas, sea quien sea el dueño del significado."},
-   {t:"Está bien, porque el contrato se cambió en el mismo cambio.",why:"El contrato ahora coincide con la columna nueva, y todo consumidor que lee la vieja se rompe. Cambiar un contrato no le avisa a nadie."},
+   {t:"Está bien, porque el contrato se actualizó en el mismo cambio.",why:"El contrato ahora coincide con la columna nueva, y todo consumidor que lee la vieja se rompe. Actualizar un contrato no le avisa a nadie."},
    {t:"Un contrato público cambió bajo sus consumidores. Un cambio que rompe es una versión nueva, con fecha de retiro para la anterior; las exposures dicen a quién avisar.",ok:true}],
   why:"La versión 2 de core_credential reemplazó is_revoked por status, y la versión 1 sigue hasta el 31 de marzo de 2027. Así llega un cambio que rompe: al lado de la versión anterior, no en su lugar."},
  {type:"order",lab:"shared",vis:"wo_q_move",title:"Planificación se muda",sit:"Planificación pasa a su propio proyecto. Pon los pasos en orden.",

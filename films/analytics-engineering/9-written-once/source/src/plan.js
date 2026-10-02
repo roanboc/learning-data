@@ -338,133 +338,145 @@ function wr_stepLoop(ctx,cx,cy,rx,ry,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=
    Added to the film bundle's LV registry (Keeping it true's true.js defines it; these keys are prefixed wr_ so they never clash).
    assets/from-words-to-data/learn.js calls each as f(ctx, w, h, state, L): a lab passes its state (pick: {pick}; sort: {pick, checked};
    steps: {step}; count: {on, total}), a scenario passes {q}. Any words come from L.vis (the page's learn.en.js or learn.es.js).
-   The labs draw on a 1280 x 560 board, the scenarios on 1200 x 640, scaled to fit. */
+   Sized for the real width: the labs draw on a 960 x 420 board with text from 22 to 30 px, the scenarios on 600 x 320 with text
+   from 16 to 22 px, so at a phone's 356 px the smallest word is about 9 px and on a desktop 12 to 19 px. Few things, large. */
 function wr_fit(c,w,h,bw,bh){const k=Math.min(w/bw,h/bh);c.translate((w-bw*k)/2,(h-bh*k)/2);c.scale(k,k);}
 function wr_count(pick,b){return Object.values(pick||{}).filter(x=>x===b).length;}
-// a copy of the definition in the labs: what it is, how it stands, and the phrase that matters
-function wr_lcopy(c,x,y,w,h,kind,status,phrase,col,o){o=o||{};glass(c,x,y,w,h,16,col,{glow:10+14*(o.hi||0),ea:0.75,fill:"rgba(8,12,22,0.95)"});
-  tag(c,x+16,y+30,kind,col,{size:19});if(status)T(c,status,x+w-20,y+36,{w:700,size:18,align:"right",color:rgba(o.scol||SOFT,1)});
-  T(c,phrase,x+22,y+78,{f:o.mono?"mono":undefined,w:700,size:24,color:rgba(mix(INK,col,0.35),1)});}
-// a file's name as a pill, large enough for the scenarios' small pictures
-function wr_pill(c,x,y,s,col,o){o=o||{};const sz=o.size||28,w=tw(c,s,sz,500,"mono")+48;if(o.on)glow(c,x+w/2,y,w*0.6,col,0.25*o.on);
-  glass(c,x,y-sz-2,w,sz*2+4,sz,col,{glow:8+10*(o.on||0),ea:0.75,fill:"rgba(7,12,24,0.96)"});T(c,s,x+24,y+sz*0.36,{f:"mono",w:500,size:sz,color:rgba(mix(INK,col,0.3),1)});return w;}
-const WR_LSTATE={ // [kind of state for each copy (fixed, drift, over, linked), and where the source is]
+// the largest size, from size down to min, at which s fits maxW
+function wr_fs(c,s,maxW,size,wt,f,min){let z=size;const m=min||Math.round(size*0.78);while(z>m&&tw(c,s,z,wt||700,f)>maxW)z-=1;return z;}
+// a model in the labs' lineage: a glass pill with its name in one or two mono lines; o.on lights it, o.dark dims what a change doesn't reach
+function wr_lnode(c,x,y,w,lines,col,o){o=o||{};const sz=o.size||24,lh=sz*1.2,h=20+lines.length*lh,on=o.on||0,dk=o.dark||0,cc=mix(col,[70,80,95],dk);
+  withA(c,1-0.45*dk,()=>{if(on>0)glow(c,x+w/2,y,w*0.55,col,0.22*on);glass(c,x,y-h/2,w,h,12,cc,{glow:6+12*on,ea:0.7,fill:"rgba(7,12,24,0.96)"});
+    lines.forEach((s,i)=>T(c,s,x+16,y-h/2+8+sz*0.92+i*lh,{f:"mono",w:500,size:sz,color:rgba(mix(INK,SOFT,dk),1)}));});return h;}
+// a file's name as a pill (the scenarios)
+function wr_pill(c,x,y,s,col,o){o=o||{};const sz=o.size||18,w=tw(c,s,sz,500,"mono")+32;if(o.on)glow(c,x+w/2,y,w*0.6,col,0.25*o.on);
+  glass(c,x,y-sz-2,w,sz*2+4,sz,col,{glow:8+10*(o.on||0),ea:0.75,fill:"rgba(7,12,24,0.96)"});T(c,s,x+16,y+sz*0.36,{f:"mono",w:500,size:sz,color:rgba(mix(INK,col,0.3),1)});return w;}
+// a tag fitted to a width
+function wr_ftag(c,x,y,s,col,maxW,size,o){o=o||{};const z=wr_fs(c,s,maxW-26,size,700,undefined,o.min);if(o.align==="right")x-=tw(c,s,z,700)+26;tag(c,x,y,s,col,{size:z,align:o.align==="center"?"center":undefined});}
+const WR_LSTATE={ // [kind of state for each copy (fixed, drift, over, linked), and where the source is; ci: 2 passes, 1 fails]
   tooltip:{src:"tooltip",st:["fixed","fixed","fixed","source"],ci:2},catalog:{src:"catalog",st:["drift","drift","over","drift"],ci:2},
   generated:{src:"generated",st:["drift","drift","drift","drift"],ci:1},home:{src:"home",st:["linked","linked","linked","linked"],ci:2}};
 Object.assign(LV,{
-  // find the home: the conceptual model and the generated page on the left, the four copies on the right, and CI's check below
-  wr_l_home:(c,w,h,st,L)=>{const V=L.vis,k=st.pick||"tooltip",S=WR_LSTATE[k]||WR_LSTATE.tooltip;c.save();wr_fit(c,w,h,1280,560);
-    const hh=wr_bpCode(c,30,24,600,"model/conceptual.yml",["  - name: award","    definition: >","      A qualification the university confers, …","    owner: Mei Tanaka, registrar's office"],{size:18,lh:28,h:222,hi:k==="home"?1:0});
-    if(k==="home")tag(c,64,24+hh-24,V.source,TRUST,{size:18});
-    wr_code(c,30,262,600,"docs/definitions.md",["{% docs award %}","**Award.** A qualification the university …","{% enddocs %}"],{size:19,lh:30,h:186,cog:true,amb:k==="generated"?1:0,hi:k==="generated"?1:0});
-    if(k==="generated")tag(c,440,262+160,V.source,TRUST,{size:18});
-    const Y=i=>24+i*108,mid=i=>Y(i)+48,src=["wiki","yaml","catalog","tooltip"].indexOf(S.src);
-    // arrows first, so the cards sit over their ends
-    if(k==="home"){arrowTo(c,330,24+hh+2,330,260,KIND,0.9,{head:10});[0,1,2,3].forEach(i=>arrowTo(c,632,355,676,mid(i),KIND,0.85,{head:12,bend:0.05}));}
-    else if(src>=0)[0,1,2,3].forEach(i=>{if(i!==src)arrowTo(c,674,mid(src),674,mid(i),k==="catalog"?WR_AMB:SOFT,0.75,{head:13,bend:-0.32});});
+  // find the home: the conceptual model, the generated page and CI's check on the left; the four copies on the right
+  wr_l_home:(c,w,h,st,L)=>{const V=L.vis,k=st.pick||"tooltip",S=WR_LSTATE[k]||WR_LSTATE.tooltip;c.save();wr_fit(c,w,h,960,420);
+    const src=["wiki","yaml","catalog","tooltip"].indexOf(S.src),RX=372,RW=588,Y=i=>i*106,mid=i=>Y(i)+49;
+    if(k==="home")glow(c,165,75,190,BPL,0.16);bpPaper(c,0,0,330,150,1,{});
+    T(c,"model/conceptual.yml",20,42,{f:"mono",w:500,size:wr_fs(c,"model/conceptual.yml",292,24,500,"mono"),color:rgba(BPL,1)});
+    T(c,V.fixed,20,86,{w:700,size:wr_fs(c,V.fixed,292,28,700),color:rgba(BPL,1)});if(k==="home")wr_ftag(c,20,124,V.source,TRUST,292,24);
+    const gen=k==="generated",gcol=gen?WR_AMB:[170,205,255];glass(c,0,168,330,112,14,gcol,{glow:6+14*(gen?1:0),ea:0.7,fill:"rgba(6,10,20,0.95)"});
+    T(c,"docs/definitions.md",18,206,{f:"mono",w:500,size:wr_fs(c,"docs/definitions.md",294,24,500,"mono"),color:rgba(gcol,1)});wr_cog(c,300,250,14,0,mix(SOFT,WR_AMB,gen?1:0),1,0);
+    if(gen)T(c,V.edited,18,258,{w:700,size:wr_fs(c,V.edited,250,26,700),color:rgba(WR_AMB,1)});
+    const ok=S.ci===2,cc=ok?GOOD:BAD;glass(c,0,298,330,72,14,cc,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.95)"});
+    if(ok){ring(c,34,334,16,GOOD,1,2.4);tick_(c,34,335,20,GOOD,1);}else kt_rcross(c,34,334,16,1);
+    T(c,"CI",64,344,{w:800,size:28,color:rgba(INK,1)});T(c,ok?"exit 0":"exit 1",312,344,{f:"mono",w:500,size:26,align:"right",color:rgba(cc,1)});
     V.copies.forEach((nm,i)=>{const s=S.st[i];let col=[190,205,230],status=V.drifts,phrase=V.drift[i],scol=SOFT;
-      if(s==="fixed"){phrase=V.fixed;status=V.byHand;}
-      else if(s==="source"){phrase=V.fixed;status=V.source;scol=TRUST;}
-      else if(s==="over"){phrase=V.drift[1];status=V.overwritten;col=WR_AMB;scol=WR_AMB;}
-      else if(s==="linked"){phrase=V.linked[i];status="";col=KIND;}
-      else if(i<3)col=WR_AMB;
-      wr_lcopy(c,680,Y(i),570,96,nm,status,phrase,col,{hi:src===i?1:0,scol,mono:s==="linked"&&i===1});});
-    wr_ci(c,30,462,1220,V.ciName,S.ci,S.ci===1?V.ciFail:V.ciPass,{});c.restore();},
+      if(s==="fixed"){phrase=V.fixed;status=V.byHand;}else if(s==="source"){phrase=V.fixed;status=V.source;scol=TRUST;}
+      else if(s==="over"){phrase=V.drift[1];status=V.overwritten;col=WR_AMB;scol=WR_AMB;}else if(s==="linked"){phrase=V.linked[i];status="";col=KIND;}else if(i<3)col=WR_AMB;
+      glass(c,RX,Y(i),RW,98,14,col,{glow:6+14*(src===i?1:0),ea:0.75,fill:"rgba(8,12,22,0.95)"});
+      let z=26;while(z>20&&tw(c,nm,z,800)+(status?tw(c,status,z,700)+28:0)>RW-40)z--;
+      T(c,nm,RX+20,Y(i)+38,{w:800,size:z,color:rgba(col,1)});if(status)T(c,status,RX+RW-20,Y(i)+38,{w:700,size:z,align:"right",color:rgba(scol,1)});
+      const mono=s==="linked"&&i===1;T(c,phrase,RX+20,Y(i)+80,{f:mono?"mono":undefined,w:mono?500:700,size:wr_fs(c,phrase,RW-40,28,mono?500:700,mono?"mono":undefined),color:rgba(mix(INK,col,0.3),1)});});
+    if(k==="home")[0,1,2,3].forEach(i=>arrowTo(c,334,75,RX-4,mid(i),KIND,0.9,{head:11}));
+    else if(src>=0)[0,1,2,3].forEach(i=>{if(i!==src)arrowTo(c,RX-4,mid(src),RX-4,mid(i),k==="catalog"?WR_AMB:SOFT,0.8,{head:11,bend:0.09*Math.sign(mid(i)-mid(src))});});
+    c.restore();},
   // where does it live: the four homes, each counting what has been placed in it; once checked, the 15 put on a page shows its drift
-  wr_l_where:(c,w,h,st,L)=>{const V=L.vis,P=st.pick||{},drift=st.checked&&P[9]==="md";c.save();wr_fit(c,w,h,1280,560);
-    const n=b=>String(wr_count(P,b))+" "+V.placed;
-    wr_bpCode(c,24,24,560,"model/conceptual.yml",["  - name: award","    definition: >","      A qualification the university confers, …","    owner: Mei Tanaka, registrar's office"],{size:18,lh:30,h:250});
-    tag(c,58,24+226,n("concept"),BPL,{size:19});
-    wr_code(c,596,24,660,"docs/decisions.md",["| Date | Decision | Why | Who |","|---|---|---|---|","| 2 Oct 2026 | A microcredential is a kind …","| 9 Oct 2026 | An enrolment with no email: …"],{size:19,lh:30,h:250,edge:KIND});
-    tag(c,616,24+226,n("md"),KIND,{size:19});if(drift){const s=V.pageSays,tw_=tw(c,s,18,700)+26;tag(c,596+660-20-tw_,24+226,s,WR_AMB,{size:18});}
-    wr_code(c,24,290,560,"dbt_project.yml",["vars:","  census_date: \"2026-03-31\"","  near_award_credit_points: "+(drift?"20":"15"),"  passing_grades: [\"P\", \"C\", \"D\", \"HD\"]"],{size:19,lh:30,h:250,edge:WEED,seg:drift?[[2,"20",1,WR_AMB]]:[]});
-    tag(c,44,290+226,n("var"),WEED,{size:19});if(drift){const s=V.varSays,tw_=tw(c,s,18,700)+26;tag(c,24+560-20-tw_,290+226,s,WR_AMB,{size:18});}
-    wr_code(c,596,290,660,"models/core/_core__models.yml",["  - name: core_award","        grain: One row per award per version","        owner: Mei Tanaka, registrar's office","        columns: [award_key, valid_from]"],{size:19,lh:30,h:250,edge:TRUST});
-    tag(c,616,290+226,n("yaml"),TRUST,{size:19});c.restore();},
+  wr_l_where:(c,w,h,st,L)=>{const V=L.vis,P=st.pick||{},drift=st.checked&&P[9]==="md",lab=L.labs.find(x=>x.vis==="wr_l_where"),B={};(lab?lab.w.buckets:[]).forEach(([k,t])=>B[k]=t);c.save();wr_fit(c,w,h,960,420);
+    [["concept","model/conceptual.yml",BPL,0,0],["md","docs/decisions.md",KIND,485,0],["var","dbt_project.yml",WEED,0,215],["yaml","models/core/_core__models.yml",TRUST,485,215]].forEach(([k,file,col,x,y])=>{
+      if(k==="concept")bpPaper(c,x,y,475,205,1,{});else glass(c,x,y,475,205,14,col,{glow:8,ea:0.7,fill:"rgba(7,12,24,0.95)"});
+      const ttl=B[k]||k;T(c,ttl,x+22,y+42,{w:800,size:wr_fs(c,ttl,431,28,800),color:rgba(k==="concept"?BPL:col,1)});
+      T(c,file,x+22,y+82,{f:"mono",w:500,size:wr_fs(c,file,431,24,500,"mono"),color:rgba(k==="concept"?BPL:mix(SOFT,col,0.3),0.95)});
+      const n=String(wr_count(P,k));T(c,n,x+22,y+150,{w:800,size:48,color:rgba(k==="concept"?BPL:INK,1)});T(c,V.placed,x+30+tw(c,n,48,800),y+148,{w:700,size:26,color:rgba(k==="concept"?BPL:SOFT,1)});
+      if(drift&&(k==="md"||k==="var")){const s=k==="md"?V.pageSays:V.varSays;wr_ftag(c,x+453,y+178,s,WR_AMB,300,24,{align:"right"});}});
+    c.restore();},
   // plan a new version: version 2 beside version 1, then the date, the lineage, the owner told, the pin, and version 1 gone
-  wr_l_version:(c,w,h,st,L)=>{const V=L.vis,k=st.step||0;c.save();wr_fit(c,w,h,1280,560);
-    const gone=k>=7;
-    if(k>=1){arrowTo(c,472,150,472,390,TRUST,0.85,{head:14,bend:-0.28});tag(c,516,276,V.builtFrom,TRUST,{size:19});}
-    wr_prod(c,30,300,440,{ver:"v1",rows:[["credential_key","string"],["is_revoked","boolean",EDGE_]],dim:0.5,a:gone?0.3:1});
-    if(gone){c.save();c.setLineDash([10,9]);c.strokeStyle=rgba(SOFT,0.7);c.lineWidth=2;rr(c,30,300,440,198,18);c.stroke();c.restore();tag(c,250,399,V.removed,SOFT,{size:20,align:"center"});}
-    wr_prod(c,30,30,440,{ver:"v2",rows:[["credential_key","string"],["status","string",TRUST],["revoked_on","date"]],lit:{1:1},hi:1});
-    if(k>=2)tag(c,516,64,V.latest,TRUST,{size:19});
-    if(k>=3&&!gone)tag(c,516,340,V.date,WR_AMB,{size:19});
-    if(k>=4){const on=k>=6?1:0.5;arrowTo(c,472,90,716,120,KIND,0.9,{head:13});arrowTo(c,472,110,716,220,KIND,0.9,{head:13});
-      wr_node(c,720,120,"mart_wallet__credentials",WR_CON,{on});wr_node(c,720,220,"mart_wallet__learners",WR_CON,{on});
-      arrowTo(c,1022,120,1112,160,WR_CON,0.8,{head:12});arrowTo(c,1004,220,1112,178,WR_CON,0.8,{head:12});
-      wr_badge(c,1160,170,38,"wallet","wallet_app",{hi:k>=5?1:0,size:21});
-      wr_node(c,720,440,"mart_planning__near_award",SOFT,{dark:1});T(c,V.notReached,736,500,{w:600,size:20,color:rgba(SOFT,1)});
-      if(k>=6){tag(c,610,112,V.pins,KIND,{size:18});tag(c,610,186,V.pins,KIND,{size:18});}}
-    if(k>=5){kt_gtick(c,1196,134,15,1);T(c,V.wallet+" · "+V.told,1262,264,{w:700,size:20,align:"right",color:rgba(TRUST,1)});}
+  wr_l_version:(c,w,h,st,L)=>{const V=L.vis,k=st.step||0,gone=k>=7;c.save();wr_fit(c,w,h,960,420);
+    const card=(y,hh,ver,col,lit,a,dash)=>{withA(c,a,()=>{glass(c,0,y,400,hh,16,TRUST,{glow:lit?14:6,ea:0.8,fill:"rgba(10,12,20,0.97)"});
+      T(c,"core_credential",20,y+44,{f:"mono",w:500,size:28,color:rgba(TRUST,1)});tag(c,380-tw(c,ver,24,700)-26,y+36,ver,TRUST,{size:24});
+      T(c,col,20,y+94,{f:"mono",w:500,size:28,color:rgba(lit?TRUST:INK,0.95)});});
+      if(dash){c.save();c.setLineDash([10,9]);c.strokeStyle=rgba(SOFT,0.7);c.lineWidth=2;rr(c,0,y,400,hh,16);c.stroke();c.restore();}};
+    card(0,166,"v2","status",1,1,0);if(k>=2)wr_ftag(c,20,134,V.latest,TRUST,360,24);
+    card(194,226,"v1","is_revoked",0,gone?0.3:0.85,gone);
+    if(gone)wr_ftag(c,200,330,V.removed,SOFT,360,26,{align:"center"});
+    else{if(k>=1)wr_ftag(c,20,330,V.builtFrom,TRUST,360,24);if(k>=3)wr_ftag(c,20,384,V.date,WR_AMB,360,24);}
+    if(k>=1&&!gone)arrowTo(c,404,120,404,290,TRUST,0.85,{head:13,bend:-0.16});
+    if(k>=4){const on=k>=6?1:0.5;arrowTo(c,402,44,466,44,KIND,0.9,{head:11});arrowTo(c,402,72,466,112,KIND,0.9,{head:11});
+      wr_lnode(c,470,44,378,["mart_wallet__credentials"],WR_CON,{on});wr_lnode(c,470,112,334,["mart_wallet__learners"],WR_CON,{on});
+      arrowTo(c,850,44,866,80,WR_CON,0.8,{head:10});arrowTo(c,806,112,846,112,WR_CON,0.8,{head:10});
+      wr_badge(c,884,112,30,"wallet",null,{hi:k>=5?1:0});T(c,"wallet_app",884,176,{w:800,size:24,align:"center",color:rgba(INK,1)});
+      if(k>=6){tag(c,856,22,V.pins,KIND,{size:22});tag(c,470,166,V.pins,KIND,{size:22});}
+      wr_lnode(c,470,320,392,["mart_planning__near_award"],SOFT,{dark:1});T(c,V.notReached,486,386,{w:700,size:wr_fs(c,V.notReached,460,26,700),color:rgba(SOFT,1)});}
+    if(k>=5){kt_gtick(c,908,88,13,1);const s=V.wallet+" · "+V.told;T(c,s,956,222,{w:700,size:wr_fs(c,s,470,24,700,undefined,19),align:"right",color:rgba(TRUST,1)});}
     c.restore();},
   // who's affected: two core models, what reads them, and the exposures with their owners; what's ticked lights up
-  wr_l_affected:(c,w,h,st,L)=>{const V=L.vis,on=st.on||new Set();c.save();wr_fit(c,w,h,1280,560);
-    const N={v1:[440,60,"core_credential_v1"],wc:[440,170,"mart_wallet__credentials"],wl:[440,290,"mart_wallet__learners"],pl:[440,420,"mart_planning__near_award"]};
-    const cc=[30,150],ct=[30,400],X={xw:[1110,215],xc:[1110,420]},has=k=>on.has(k);
-    const wOf=s=>tw(c,s,18,500,"mono")+40,R=k=>N[k][0]+wOf(N[k][2]);
-    const E=[[cc,"v1"],[cc,"wc"],[cc,"wl"],[ct,"wl"],[ct,"pl"]];
-    const aC=has("v1")||!has("pl"),aT=has("pl")||!has("v1"),act=s=>s===cc?aC:aT;
-    E.forEach(([s,k])=>{const sx=s[0]+wOf(s===cc?"core_credential":"core_credit_towards_award"),lit=has(k)&&act(s);arrowTo(c,sx+2,s[1],N[k][0]-4,N[k][1],lit?WR_CON:SOFT,lit?0.9:0.3,{head:12});});
-    arrowTo(c,460,266,460,196,has("wc")&&has("wl")?WR_CON:SOFT,has("wc")&&has("wl")?0.8:0.3,{head:11});
-    [["wc","xw"],["wl","xw"],["pl","xc"]].forEach(([a,b])=>arrowTo(c,R(a)+4,N[a][1],X[b][0]-44,X[b][1],has(b)?WR_CON:SOFT,has(b)?0.85:0.3,{head:12}));
-    wr_node(c,cc[0],cc[1],"core_credential",TRUST,{on:aC?1:0,dark:aC?0:0.5});wr_node(c,ct[0],ct[1],"core_credit_towards_award",TRUST,{on:aT?1:0,dark:aT?0:0.5});
-    Object.keys(N).forEach(k=>wr_node(c,N[k][0],N[k][1],N[k][2],WR_CON,{on:has(k)?1:0,dark:has(k)?0:0.6}));
-    [["xw","wallet_app",V.wallet],["xc","census_dashboard",V.planning]].forEach(([k,nm,own])=>{wr_badge(c,X[k][0],X[k][1],34,k==="xw"?"wallet":"planning",nm,{hi:has(k)?1:0,dark:has(k)?0:0.6,size:20});
-      if(has(k))T(c,own,X[k][0],X[k][1]+34+54,{w:700,size:19,align:"center",color:rgba(TRUST,1)});});
+  wr_l_affected:(c,w,h,st,L)=>{const V=L.vis,on=st.on||new Set(),has=k=>on.has(k);c.save();wr_fit(c,w,h,960,420);
+    const N={v1:[34,["core_credential_v1"]],wc:[124,["mart_wallet__","credentials"]],wl:[224,["mart_wallet__","learners"]],pl:[340,["mart_planning__","near_award"]]},BX=340,BW=300;
+    const cc=120,ct=300,X={xw:150,xc:300},aC=has("v1")||!has("pl"),aT=has("pl")||!has("v1");
+    [[cc,"v1",aC],[cc,"wc",aC],[cc,"wl",aC],[ct,"wl",aT],[ct,"pl",aT]].forEach(([sy,k,a],i)=>{const lit=has(k)&&a;arrowTo(c,272,sy+(i===3?8:0),BX-4,N[k][0]+(i===2?-8:i===3?8:0),lit?WR_CON:SOFT,lit?0.9:0.3,{head:11});});
+    const fk=has("wc")&&has("wl");arrowTo(c,BX+BW+2,N.wl[0]-14,BX+BW+2,N.wc[0]+14,fk?WR_CON:SOFT,fk?0.85:0.3,{head:10,bend:0.45});
+    [["wc","xw"],["wl","xw"],["pl","xc"]].forEach(([a,b])=>arrowTo(c,BX+BW+4,N[a][0],792,X[b]+(a==="wc"?-10:a==="wl"?10:0),has(b)?WR_CON:SOFT,has(b)?0.85:0.3,{head:11}));
+    wr_lnode(c,0,cc,272,["core_credential"],TRUST,{on:aC?1:0,dark:aC?0:0.5,size:24});wr_lnode(c,0,ct,272,["core_credit_","towards_award"],TRUST,{on:aT?1:0,dark:aT?0:0.5,size:24});
+    Object.keys(N).forEach(k=>wr_lnode(c,BX,N[k][0],BW,N[k][1],WR_CON,{on:has(k)?1:0,dark:has(k)?0:0.6,size:24}));
+    [["xw","wallet_app",V.wallet],["xc","census_dashboard",V.planning]].forEach(([k,nm,own])=>{const y=X[k];wr_badge(c,840,y,30,k==="xw"?"wallet":"planning",null,{hi:has(k)?1:0,dark:has(k)?0:0.6});
+      T(c,nm,840,y+62,{w:800,size:wr_fs(c,nm,236,24,800),align:"center",color:rgba(has(k)?INK:SOFT,1)});if(has(k))T(c,own,840,y+96,{w:700,size:wr_fs(c,own,236,24,700,undefined,19),align:"center",color:rgba(TRUST,1)});});
     c.restore();},
   // the scenarios
-  wr_q_catalog:(c,w,h,st,L)=>{const V=L.vis;c.save();wr_fit(c,w,h,1200,640);
-    wr_pill(c,40,230,"model/conceptual.yml",BPL,{size:26,on:0.6});tag(c,60,320,V.home,BPL,{size:24});wrapT(c,V.typo,60,400,340,{w:600,size:24,lh:32,color:rgba(SOFT,1)});
-    arrowTo(c,420,230,628,230,KIND,0.9,{head:16});T(c,"persist_docs",524,200,{f:"mono",w:500,size:22,align:"center",color:rgba(KIND,1)});
-    wr_noBack(c,628,520,420,520,1);
-    glass(c,640,70,520,500,18,[176,186,206],{glow:10,ea:0.6,fill:"rgba(12,14,20,0.96)"});T(c,"Databricks · Unity Catalog",670,120,{w:700,size:26,color:"rgba(176,186,206,1)"});
-    T(c,"core_award_v1",670,180,{f:"mono",w:500,size:26});wrapT(c,V.fixedText,670,250,460,{w:600,size:28,lh:38,color:rgba(EDGE_,1)});
-    tag(c,670,520,V.edited,EDGE_,{size:22});c.restore();},
-  wr_q_diagram:(c,w,h,st,L)=>{const V=L.vis;c.save();wr_fit(c,w,h,1200,640);
-    glass(c,40,80,520,470,18,WR_AMB,{glow:16,ea:0.75,fill:"rgba(8,12,22,0.95)"});T(c,"wiki",70,132,{w:800,size:28,color:rgba(WR_AMB,1)});T(c,V.stale,530,132,{w:700,size:22,align:"right",color:rgba(WR_AMB,0.9)});
-    [[80,200],[320,200],[200,380]].forEach(([bx,by],i)=>{c.fillStyle="rgba(14,22,40,0.98)";rr(c,bx,by,200,110,8);c.fill();c.strokeStyle=rgba(WR_AMB,0.8);c.lineWidth=2;rr(c,bx,by,200,110,8);c.stroke();
-      if(i===0){T(c,"credential",bx+14,by+38,{f:"mono",w:500,size:22,color:rgba(WR_AMB,1)});T(c,"is_revoked",bx+14,by+80,{f:"mono",w:500,size:22,color:rgba(INK,0.9)});}
-      else for(let r=0;r<3;r++){c.fillStyle=rgba(WR_AMB,0.3);rr(c,bx+14,by+22+r*26,120+30*hash(i,r),8,4);c.fill();}});
-    arrowTo(c,570,315,628,315,KIND,0.9,{head:14});
-    glass(c,640,80,520,470,18,[170,205,255],{glow:10,ea:0.7,fill:"rgba(6,10,20,0.95)"});wr_cog(c,1124,120,16,0,[170,205,255],1,0);T(c,"docs/physical.md",670,132,{f:"mono",w:500,size:26,color:"rgba(170,205,255,1)"});
-    c.fillStyle="rgba(14,22,40,0.98)";rr(c,680,180,440,250,8);c.fill();c.strokeStyle="rgba(170,205,255,0.8)";rr(c,680,180,440,250,8);c.stroke();T(c,"core_credential_v2",700,220,{f:"mono",w:500,size:24,color:"rgba(170,205,255,1)"});
-    [["string","credential_key","PK"],["string","learner_key","FK"],["string","status",""],["date","issued_on",""]].forEach(([ty,cn,pk],i)=>{T(c,ty,700,270+i*42,{f:"mono",w:500,size:22,color:rgba(SOFT,1)});T(c,cn,800,270+i*42,{f:"mono",w:500,size:22,color:rgba(INK,0.95)});if(pk)T(c,pk,1100,270+i*42,{f:"mono",w:500,size:20,align:"right",color:rgba(TRUST,1)});});
-    tag(c,680,500,V.generated,GOOD,{size:22});c.restore();},
-  wr_q_rename:(c,w,h,st,L)=>{const V=L.vis;c.save();wr_fit(c,w,h,1200,640);
-    const w0=wr_pill(c,30,320,"core_credit_towards_award",TRUST,{size:24,on:1});
-    T(c,"credit_points_earned",50,420,{f:"mono",w:500,size:24,color:rgba(EDGE_,1)});c.strokeStyle=rgba(EDGE_,0.9);c.lineWidth=3;c.beginPath();c.moveTo(48,412);c.lineTo(54+tw(c,"credit_points_earned",24,500,"mono"),412);c.stroke();tag(c,50,470,V.renamed,EDGE_,{size:22});
-    arrowTo(c,30+w0+4,310,520,180,WR_CON,0.85,{head:14});arrowTo(c,30+w0+4,330,520,460,WR_CON,0.85,{head:14});
-    const a=wr_pill(c,530,180,"mart_planning__near_award",WR_CON,{size:22}),b=wr_pill(c,530,460,"mart_wallet__learners",WR_CON,{size:22});
-    arrowTo(c,530+a+4,180,1020,180,WR_CON,0.8,{head:12});arrowTo(c,530+b+4,460,1020,460,WR_CON,0.8,{head:12});
-    wr_badge(c,1060,180,34,"planning","census_dashboard",{size:20});wr_badge(c,1060,460,34,"wallet","wallet_app",{size:20});
-    T(c,V.readers,600,80,{w:700,size:26,align:"center",color:rgba(SOFT,1)});c.restore();},
-  wr_q_fifteen:(c,w,h,st,L)=>{const V=L.vis;c.save();wr_fit(c,w,h,1200,640);
-    glass(c,40,90,560,380,18,WR_AMB,{glow:16,ea:0.75,fill:"rgba(8,12,22,0.95)"});tag(c,64,140,V.page,WR_AMB,{size:22});
-    wrapT(c,"… "+V.within+" …",70,260,500,{w:700,size:32,lh:44,color:rgba(INK,0.95)});tag(c,64,420,V.pageSays,WR_AMB,{size:22});
-    wr_pill(c,660,210,"near_award_credit_points: 20",WEED,{size:24,on:0.7});T(c,"dbt_project.yml",680,140,{f:"mono",w:500,size:22,color:rgba(SOFT,1)});tag(c,680,300,V.varSays,WEED,{size:22});c.restore();},
-  wr_q_near:(c,w,h,st,L)=>{const V=L.vis;c.save();wr_fit(c,w,h,1200,640);
+  wr_q_catalog:(c,w,h,st,L)=>{const V=L.vis;c.save();wr_fit(c,w,h,600,320);
+    wr_pill(c,6,80,"model/conceptual.yml",BPL,{on:0.6});wr_ftag(c,8,138,V.home,BPL,250,18);wrapT(c,V.typo,10,186,240,{w:600,size:18,lh:24,color:rgba(SOFT,1)});
+    T(c,"persist_docs",290,44,{f:"mono",w:500,size:18,align:"center",color:rgba(KIND,1)});arrowTo(c,262,80,316,80,KIND,0.9,{head:12});
+    wr_noBack(c,316,262,262,262,1);
+    const UC=[176,186,206];glass(c,322,60,274,250,16,UC,{glow:10,ea:0.6,fill:"rgba(12,14,20,0.96)"});const ttl="Databricks · Unity Catalog";T(c,ttl,338,92,{w:700,size:wr_fs(c,ttl,242,18,700,undefined,15),color:rgba(UC,1)});
+    T(c,"core_award_v1",338,124,{f:"mono",w:500,size:18});wrapT(c,V.fixedText,338,164,240,{w:700,size:20,lh:26,color:rgba(EDGE_,1)});
+    wr_ftag(c,338,280,V.edited,EDGE_,244,18);c.restore();},
+  wr_q_diagram:(c,w,h,st,L)=>{const V=L.vis;c.save();wr_fit(c,w,h,600,320);
+    glass(c,4,14,276,292,16,WR_AMB,{glow:14,ea:0.75,fill:"rgba(8,12,22,0.95)"});T(c,"wiki",22,48,{w:800,size:22,color:rgba(WR_AMB,1)});T(c,V.stale,22,78,{w:700,size:wr_fs(c,V.stale,240,18,700,undefined,15),color:rgba(WR_AMB,0.9)});
+    const box=(x,y,ww,hh)=>{c.fillStyle="rgba(14,22,40,0.98)";rr(c,x,y,ww,hh,8);c.fill();c.strokeStyle=rgba(WR_AMB,0.8);c.lineWidth=2;rr(c,x,y,ww,hh,8);c.stroke();};
+    box(22,100,160,82);T(c,"credential",36,132,{f:"mono",w:500,size:18,color:rgba(WR_AMB,1)});T(c,"is_revoked",36,164,{f:"mono",w:500,size:18,color:rgba(INK,0.9)});
+    box(110,206,150,80);for(let r=0;r<3;r++){c.fillStyle=rgba(WR_AMB,0.3);rr(c,124,224+r*20,70+30*hash(2,r),7,3);c.fill();}
+    arrowTo(c,284,160,308,160,KIND,0.9,{head:10});
+    const PC=[170,205,255];glass(c,312,14,284,292,16,PC,{glow:10,ea:0.7,fill:"rgba(6,10,20,0.95)"});wr_cog(c,574,40,11,0,PC,1,0);T(c,"docs/physical.md",328,48,{f:"mono",w:500,size:18,color:rgba(PC,1)});
+    c.fillStyle="rgba(14,22,40,0.98)";rr(c,326,64,256,184,8);c.fill();c.strokeStyle=rgba(PC,0.8);c.lineWidth=1.5;rr(c,326,64,256,184,8);c.stroke();
+    T(c,"core_credential_v2",340,92,{f:"mono",w:500,size:18,color:rgba(PC,1)});
+    [["credential_key","PK"],["learner_key","FK"],["status",""],["issued_on",""]].forEach(([cn,pk],i)=>{T(c,cn,340,128+i*32,{f:"mono",w:500,size:18,color:rgba(INK,0.95)});if(pk)T(c,pk,568,128+i*32,{f:"mono",w:500,size:18,align:"right",color:rgba(TRUST,1)});});
+    wr_ftag(c,326,280,V.generated,GOOD,256,18,{min:14});c.restore();},
+  wr_q_rename:(c,w,h,st,L)=>{const V=L.vis;c.save();wr_fit(c,w,h,600,320);
+    const pw=wr_pill(c,6,40,"core_credit_towards_award",TRUST,{on:1});const cx=pw+22,cn="credit_points_earned";
+    T(c,cn,cx,46,{f:"mono",w:500,size:wr_fs(c,cn,590-cx,18,500,"mono",14),color:rgba(EDGE_,1)});c.strokeStyle=rgba(EDGE_,0.9);c.lineWidth=2.5;c.beginPath();c.moveTo(cx-2,40);c.lineTo(Math.min(596,cx+2+tw(c,cn,wr_fs(c,cn,590-cx,18,500,"mono",14),500,"mono")),40);c.stroke();
+    wr_ftag(c,cx,84,V.renamed,EDGE_,590-cx,18);
+    T(c,V.readers,46,124,{w:700,size:18,color:rgba(SOFT,1)});
+    c.strokeStyle=rgba(WR_CON,0.7);c.lineWidth=2;c.beginPath();c.moveTo(24,62);c.lineTo(24,284);c.stroke();
+    [["mart_planning__near_award","planning","census_dashboard",164],["mart_wallet__learners","wallet","wallet_app",224],["mart_wallet__credentials","wallet","wallet_app",284]].forEach(([m,kd,x,y])=>{
+      c.beginPath();c.moveTo(24,y-6);c.lineTo(40,y-6);c.stroke();T(c,m,46,y,{f:"mono",w:500,size:18,color:rgba(INK,0.95)});
+      arrowTo(c,320,y-6,350,y-6,WR_CON,0.85,{head:9});wr_badge(c,370,y-6,16,kd,null,{});T(c,x,392,y,{w:800,size:18,color:rgba(INK,1)});});
+    c.restore();},
+  wr_q_fifteen:(c,w,h,st,L)=>{const V=L.vis;c.save();wr_fit(c,w,h,600,320);
+    glass(c,4,14,268,292,16,WR_AMB,{glow:14,ea:0.75,fill:"rgba(8,12,22,0.95)"});wr_ftag(c,18,46,V.page,WR_AMB,240,18);
+    wrapT(c,"… "+V.within+" …",22,124,232,{w:700,size:22,lh:30,color:rgba(INK,0.95)});wr_ftag(c,18,272,V.pageSays,WR_AMB,240,18);
+    T(c,"dbt_project.yml",300,48,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});glass(c,296,66,300,128,14,WEED,{glow:12,ea:0.75,fill:"rgba(7,12,24,0.96)"});
+    T(c,"vars:",310,98,{f:"mono",w:500,size:18,color:rgba(INK,0.9)});T(c,"near_award_credit_points:",310,132,{f:"mono",w:500,size:18,color:rgba(INK,0.95)});
+    T(c,"20",310,174,{f:"mono",w:700,size:30,color:rgba(WEED,1)});wr_ftag(c,298,232,V.varSays,WEED,298,18);c.restore();},
+  wr_q_near:(c,w,h,st,L)=>{const V=L.vis;c.save();wr_fit(c,w,h,600,320);
     const D=w_=>"Credit points the learner has "+w_+" towards the award, from units and microcredentials.";
-    [["core_credit_towards_award",V.heldWord,"held"],["mart_planning__near_award",V.earnedWord,"earned"]].forEach(([m,word,en],i)=>{const y=50+i*210;glass(c,40,y,1120,180,16,KIND,{glow:8,ea:0.7,fill:"rgba(8,12,22,0.95)"});
-      T(c,m+" · credit_points_earned",70,y+44,{f:"mono",w:500,size:24,color:rgba(KIND,1)});wr_para(c,D(en),70,y+100,1060,{size:28,hl:[[en,1,WR_AMB]]});});
-    T(c,"$ python skills/review-metadata/find_repeats.py",40,520,{f:"mono",w:500,size:24,color:rgba(SOFT,1)});T(c,V.repeats,40,570,{f:"mono",w:500,size:24,color:rgba(INK,0.95)});c.restore();},
-  wr_q_deadline:(c,w,h,st,L)=>{const V=L.vis;c.save();wr_fit(c,w,h,1200,640);
-    c.strokeStyle=rgba(SOFT,0.6);c.lineWidth=3;c.beginPath();c.moveTo(80,420);c.lineTo(1120,420);c.stroke();
-    [[220,"13 Oct 2026",SOFT],[760,"31 Mar 2027",WR_AMB],[980,V.after,EDGE_]].forEach(([x,s,col])=>{c.fillStyle=rgba(col,1);c.beginPath();c.arc(x,420,10,0,TAU);c.fill();T(c,s,x,474,{w:700,size:24,align:"center",color:rgba(col,1)});});
-    wr_pill(c,80,150,"core_credential v1",SOFT,{size:26});wr_pill(c,620,150,"core_credential v2",TRUST,{size:26,on:1});
-    tag(c,560,300,V.warn,WR_AMB,{size:24,align:"center"});arrowTo(c,560,330,760,404,WR_AMB,0.7,{head:12});
-    tag(c,980,560,V.removed,EDGE_,{size:22,align:"center"});c.restore();},
-  wr_q_log:(c,w,h,st,L)=>{const V=L.vis;c.save();wr_fit(c,w,h,1200,640);
-    glass(c,60,70,1080,420,18,KIND,{glow:10,ea:0.7,fill:"rgba(8,12,22,0.95)"});T(c,"docs/decisions.md",96,124,{f:"mono",w:500,size:26,color:rgba(KIND,1)});
-    const cols=[["Date",96,SOFT],["Decision",300,INK],[V.why,640,TRUST],[V.who,900,TRUST]];cols.forEach(([s,x,col])=>T(c,s,x,200,{w:800,size:28,color:rgba(col,1)}));
-    c.fillStyle="rgba(170,200,245,0.2)";c.fillRect(90,222,1020,2);
-    [0,1,2].forEach(r=>cols.forEach(([,x,col],i)=>{c.fillStyle=rgba(col,i>=2?0.45:0.25);rr(c,x,250+r*64,i===1?300:i===0?160:200,22,6);c.fill();}));
-    c.strokeStyle=rgba(BAD,0.85);c.lineWidth=5;c.lineCap="round";c.beginPath();c.moveTo(96,246);c.lineTo(1104,440);c.stroke();
-    tag(c,600,560,V.deleted,BAD,{size:24,align:"center"});c.restore();},
-  wr_q_loop:(c,w,h,st,L)=>{const V=L.vis;c.save();wr_fit(c,w,h,1200,640);
-    glass(c,60,40,1080,120,18,WEED,{glow:16,ea:0.85,fill:"rgba(7,12,24,0.96)"});wr_badge(c,124,100,36,"wallet",null,{});wrapT(c,V.question,186,92,920,{w:700,size:28,lh:36});
-    arrowTo(c,124,170,124,320,WEED,0.8,{head:14});
-    [0,1,2,3,4,5].forEach(i=>{const x=124+i*190,y=380,on=i===0;if(on)glow(c,x,y,110,WEED,0.3);c.fillStyle="rgba(7,12,24,0.96)";c.beginPath();c.arc(x,y,52,0,TAU);c.fill();ring(c,x,y,52,on?WEED:SOFT,1,3);
-      T(c,on?"1":"?",x,y+15,{w:800,size:40,align:"center",color:rgba(on?WEED:SOFT,1)});if(i<5)arrowTo(c,x+60,y,x+128,y,SOFT,0.5,{head:10});});
-    T(c,V.order,600,520,{w:700,size:26,align:"center",color:rgba(SOFT,1)});c.restore();}
+    [["core_credit_towards_award","held"],["mart_planning__near_award","earned"]].forEach(([m,en],i)=>{const y=6+i*114;glass(c,4,y,592,104,14,KIND,{glow:8,ea:0.7,fill:"rgba(8,12,22,0.95)"});
+      const s=m+" · credit_points_earned";T(c,s,18,y+30,{f:"mono",w:500,size:wr_fs(c,s,564,17,500,"mono",14),color:rgba(KIND,1)});wr_para(c,D(en),18,y+62,566,{size:18,lh:24,hl:[[en,1,WR_AMB]]});});
+    const cmd="$ python skills/review-metadata/find_repeats.py";T(c,cmd,6,262,{f:"mono",w:500,size:wr_fs(c,cmd,588,17,500,"mono",14),color:rgba(SOFT,1)});
+    T(c,V.repeats,6,296,{f:"mono",w:500,size:wr_fs(c,V.repeats,588,18,500,"mono",14),color:rgba(INK,0.95)});c.restore();},
+  wr_q_deadline:(c,w,h,st,L)=>{const V=L.vis;c.save();wr_fit(c,w,h,600,320);
+    wr_pill(c,8,52,"core_credential v1",SOFT);wr_pill(c,316,52,"core_credential v2",TRUST,{on:1});
+    tag(c,300,128,V.warn,WR_AMB,{size:20,align:"center"});arrowTo(c,320,150,374,212,WR_AMB,0.75,{head:11});
+    c.strokeStyle=rgba(SOFT,0.6);c.lineWidth=3;c.beginPath();c.moveTo(16,226);c.lineTo(584,226);c.stroke();
+    [[80,"13 Oct 2026",SOFT],[380,"31 Mar 2027",WR_AMB],[530,V.after,EDGE_]].forEach(([x,s,col])=>{c.fillStyle=rgba(col,1);c.beginPath();c.arc(x,226,8,0,TAU);c.fill();T(c,s,Math.min(x,592-tw(c,s,18,700)/2),258,{w:700,size:18,align:"center",color:rgba(col,1)});});
+    tag(c,530,296,V.removed,EDGE_,{size:18,align:"center"});c.restore();},
+  wr_q_log:(c,w,h,st,L)=>{const V=L.vis;c.save();wr_fit(c,w,h,600,320);
+    glass(c,6,10,588,236,16,KIND,{glow:10,ea:0.7,fill:"rgba(8,12,22,0.95)"});T(c,"docs/decisions.md",26,44,{f:"mono",w:500,size:18,color:rgba(KIND,1)});
+    const cols=[["Date",26,SOFT,80],["Decision",126,INK,170],[V.why,326,TRUST,110],[V.who,456,TRUST,110]];cols.forEach(([s,x,col])=>T(c,s,x,88,{w:800,size:20,color:rgba(col,1)}));
+    c.fillStyle="rgba(170,200,245,0.2)";c.fillRect(22,102,556,2);
+    [0,1,2].forEach(r=>cols.forEach(([,x,col,ww],i)=>{c.fillStyle=rgba(col,i>=2?0.45:0.25);rr(c,x,122+r*36,ww,14,5);c.fill();}));
+    c.strokeStyle=rgba(BAD,0.85);c.lineWidth=4;c.lineCap="round";c.beginPath();c.moveTo(24,112);c.lineTo(576,220);c.stroke();
+    tag(c,300,286,V.deleted,BAD,{size:20,align:"center"});c.restore();},
+  wr_q_loop:(c,w,h,st,L)=>{const V=L.vis;c.save();wr_fit(c,w,h,600,320);
+    glass(c,6,8,588,96,16,WEED,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.96)"});wr_badge(c,46,56,22,"wallet",null,{});wrapT(c,V.question,84,48,494,{w:700,size:20,lh:26});
+    arrowTo(c,46,110,46,168,WEED,0.8,{head:11});
+    [0,1,2,3,4,5].forEach(i=>{const x=46+i*101,y=206,on=i===0;if(on)glow(c,x,y,64,WEED,0.3);c.fillStyle="rgba(7,12,24,0.96)";c.beginPath();c.arc(x,y,28,0,TAU);c.fill();ring(c,x,y,28,on?WEED:SOFT,1,2.5);
+      T(c,on?"1":"?",x,y+9,{w:800,size:24,align:"center",color:rgba(on?WEED:SOFT,1)});if(i<5)arrowTo(c,x+32,y,x+68,y,SOFT,0.5,{head:8});});
+    T(c,V.order,300,290,{w:700,size:20,align:"center",color:rgba(SOFT,1)});c.restore();}
 });

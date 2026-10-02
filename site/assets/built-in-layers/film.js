@@ -2151,7 +2151,7 @@ Object.assign(LV,{
         here.forEach((it,j)=>{const y=top+54+j*sp,b=bad(it.i),cc=b?BAD:col,ch=Math.min(32,sp-4);glass(c,x+8,y,cw-16,ch,9,cc,{glow:6,ea:0.7,fill:"rgba(8,14,28,0.95)"});
           const[s2,z]=bl_lsz(c,it.s,17,16,cw-30,700);T(c,s2,x+cw/2,y+ch/2+6,{w:700,size:z,align:"center",color:rgba(b?mix(INK,BAD,0.5):INK,1)});});
         tag(c,x+cw/2,top+colH+26,here.length+" "+V.placed,col,{align:"center",size:17});});
-      warn.forEach(([s,ci])=>{const x=20+ci*(cw+gap);if(ci===0)tag(c,x,fh-28,s,BAD,{size:18});else bl_ltagR(c,x+cw,fh-28,s,BAD,18);});}
+      warn.forEach(([s,ci])=>{const x=20+ci*(cw+gap),[s2,z]=bl_lsz(c,s,18,16,(fw-40)/2-40,700);if(ci===0)tag(c,x,fh-28,s2,BAD,{size:z});else bl_ltagR(c,x+cw,fh-28,s2,BAD,z);});}
     else{const rh=46,top=8;
       cols.forEach(([nm,col],ci)=>{const y=top+ci*rh,here=items.filter(it=>p[it.i]===B[ci]),on=here.length>0;
         glass(c,8,y,fw-16,rh-8,12,mix(SOFT,col,on?1:0.4),{glow:4+8*on,ea:0.4+0.5*on,fill:"rgba(7,12,24,0.92)"});

@@ -281,8 +281,8 @@ function wo_loop(ctx,cx,cy,rx,ry,lit,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=
    Added to the film bundle's LV registry (Keeping it true's true.js defines it; these keys are prefixed wo_ so they never clash).
    assets/from-words-to-data/learn.js calls each as f(ctx, w, h, state, L): a lab passes its state (sort: {pick, checked}; pick: {pick};
    steps: {step}), a scenario passes {q}. Any words come from L.vis (the page's learn.en.js or learn.es.js), so each language draws its
-   own; model, file and project names stay as they are in the project. Labs draw in a 960x400 space and scenarios in 900x480, at
-   sizes that read on the page; wo_fitS shrinks a label that a longer language would push past its room. */
+   own; model, file and project names stay as they are in the project. Labs draw in a 960x400 space (with a simpler picture on a phone) and scenarios in the page's
+   600x320, at sizes that read on the page; wo_fitS shrinks a label that a longer language would push past its room. */
 function wo_fit(c,w,h,bw,bh){const k=Math.min(w/bw,h/bh);c.translate((w-bw*k)/2,(h-bh*k)/2);c.scale(k,k);}
 function wo_labOf(L,vis){return(L.labs||[]).find(x=>x.vis===vis)||{w:{}};}
 function wo_fitS(c,s,maxW,size,wt,f){let z=size;while(z>16&&tw(c,s,z,wt,f)>maxW)z--;return z;}
@@ -293,12 +293,58 @@ function wo_lpill(c,x,y,s,col,o){o=o||{};const sz=o.size||22,w=tw(c,s,sz,500,"mo
 function wo_num(c,x,y,n,col,r){r=r||16;c.fillStyle="rgba(7,12,24,0.97)";c.beginPath();c.arc(x,y,r,0,TAU);c.fill();ring(c,x,y,r,col,1,2.4);T(c,String(n),x,y+7,{w:800,size:20,align:"center",color:rgba(col,1)});}
 function wo_q_mark(c,x,y){T(c,"?",x,y,{w:800,size:48,align:"center",color:rgba(EDGE_,1)});}
 
+/* On a phone (a canvas under 560 px wide) each lab draws a simpler picture with larger words, at 30 to 36 in the 960x400 space
+   (about 12 to 13 px); the same picture on a desktop keeps its detail. */
+function wo_nar(c){const cw=c&&c.canvas&&c.canvas.clientWidth;return !!cw&&cw<560;}
+function wo_fitM(c,s,maxW,size,wt,f,min){let z=size;while(z>(min||16)&&tw(c,s,z,wt,f)>maxW)z--;return z;}
+function wo_numZ(c,x,y,n,col,r){c.fillStyle="rgba(7,12,24,0.97)";c.beginPath();c.arc(x,y,r,0,TAU);c.fill();ring(c,x,y,r,col,1,3);T(c,String(n),x,y+r*0.42,{w:800,size:Math.round(r*1.2),align:"center",color:rgba(col,1)});}
+function wo_chipN(c,x,y,s,col,z,tc){const w=tw(c,s,z,700)+z*1.1,h=z*1.6;glass(c,x,y-h/2,w,h,h/2,col,{glow:8,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(c,s,x+z*0.55,y+z*0.36,{w:700,size:z,color:rgba(tc||col,1)});return w;}
+const WO_LN={
+  // lab 1: the eight models as rows: name, access, and whether the wallet's mart can ref it
+  access:(c,w,h,st,L)=>{const V=L.vis,acc=WO_LACC[st.pick]||WO_LACC.project,bad=st.pick==="corepriv",pt=bad?V.parseBad:V.parseOk;c.save();wo_fit(c,w,h,960,400);
+    tag(c,10,26,pt,bad?BAD:GOOD,{size:wo_fitM(c,pt,400,28,700,undefined,24)});T(c,V.walletCan,950,36,{w:700,size:wo_fitM(c,V.walletCan,470,30,700,undefined,24),align:"right",color:rgba(WO_WAL,1)});
+    WO_L8.forEach(([col,grp],i)=>{const y=86+i*41,k=acc[i],acol=WO_RING[WO_ACCI[k]][2],nm=V.l8[i];wo_numZ(c,28,y-11,i+1,col,17);
+      T(c,nm,58,y,{w:700,size:wo_fitM(c,nm,520,32,700,undefined,26),color:rgba(col,1)});T(c,WO_ACCN[k],600,y,{f:"mono",w:500,size:32,color:rgba(acol,1)});
+      if(i===5)T(c,"·",920,y,{w:800,size:34,align:"center",color:rgba(SOFT,1)});else{const ok=k!=="v"||grp==="wallet";(ok?tick_:cross_)(c,920,y-11,26,ok?GOOD:BAD,1);}});
+    c.restore();},
+  // lab 2: the four domains in a grid, each holding the short labels placed in it
+  domains:(c,w,h,st,L)=>{const V=L.vis,its=wo_labOf(L,"wo_l_domains").w.items||[],keys=["registrar","learning","planning","wallet"];c.save();wo_fit(c,w,h,960,400);
+    keys.forEach((k,i)=>{const x=6+(i%2)*478,y=6+Math.floor(i/2)*197,col=WO_DOM[k][1];glass(c,x,y,468,187,16,col,{glow:6,ea:0.75,fill:"rgba(9,14,26,0.95)"});
+      T(c,V.domains[i],x+20,y+44,{w:800,size:wo_fitM(c,V.domains[i],428,32,800,undefined,26),color:rgba(col,1)});
+      const mine=its.map((it,j)=>[it,j]).filter(([it,j])=>(st.pick||{})[j]===k);let cx=x+16,row=0,shown=0;
+      for(const [it,j] of mine){const lab=it.s||it.t,z=30,cw=tw(c,lab,z,700)+z*1.1;if(cx+cw>x+452){row++;cx=x+16;}if(row>1)break;
+        wo_chipN(c,cx,y+94+row*52,lab,st.checked?(it.b===k?GOOD:BAD):col,z,INK);cx+=cw+10;shown++;}
+      if(shown<mine.length)T(c,"+"+(mine.length-shown),x+452,y+44,{w:800,size:30,align:"right",color:rgba(SOFT,1)});});
+    c.restore();},
+  // lab 3: two doors side by side; the rule picked lights its side, and says what it misses
+  read:(c,w,h,st,L)=>{const V=L.vis,p=st.pick||"both",refA=p==="grants"?0.35:1,readA=p==="access"?0.35:1;c.save();wo_fit(c,w,h,960,400);
+    [[6,V.refer,[2,3,5],"ref()",refA,[255,209,102]],[486,V.read,[1,4,5],"grant select",readA,GOOD]].forEach(([x,ttl,ns,code,a,col])=>{withA(c,a,()=>{glass(c,x,6,468,388,16,col,{glow:8,ea:0.7,fill:"rgba(9,14,26,0.95)"});
+      T(c,ttl,x+234,60,{w:800,size:wo_fitM(c,ttl,430,34,800,undefined,26),align:"center",color:rgba(INK,1)});
+      ns.forEach((n,i)=>wo_numZ(c,x+114+i*120,140,n,n===5?TRUST:col,28));T(c,code,x+234,236,{f:"mono",w:500,size:38,align:"center",color:rgba(col,1)});});});
+    if(p==="access")tag(c,720,322,V.anyway,EDGE_,{align:"center",size:wo_fitM(c,V.anyway,400,32,700,undefined,24)});
+    if(p==="grants")tag(c,240,322,V.noRef,EDGE_,{align:"center",size:wo_fitM(c,V.noRef,400,32,700,undefined,24)});
+    c.restore();},
+  // lab 4: Aisha's key in two projects, the join between them, and the package under them
+  shared:(c,w,h,st,L)=>{const V=L.vis,k=st.step||0,own=k>=1&&k<=4,low=k>=2&&k<=4,broke=k>=3&&k<=4,tests=k===4;c.save();wo_fit(c,w,h,960,400);
+    [[240,"credentials",[150,190,255],false],[720,"planning",WO_PLN,true]].forEach(([x,nm,col,right])=>{tag(c,x,30,nm,col,{align:"center",size:30});
+      const l=right&&low,o=right&&own;T(c,l?"sis|s-20417":"SIS|S-20417",x,96,{f:"mono",w:500,size:32,align:"center",color:rgba(l?WO_AMB:INK,1)});
+      T(c,o?(low?"sha256(lower(…))":"sha256(…)"):"{{ hash_key(…) }}",x,146,{f:"mono",w:500,size:30,align:"center",color:rgba(o?WO_AMB:mix(INK,TRUST,0.4),1)});
+      T(c,l?"8c73518c…447e":o?"…":"0905e6e2…f76a2",x,204,{f:"mono",w:500,size:34,align:"center",color:rgba(l?WO_AMB:TRUST,1)});
+      withA(c,tests?1:0.55,()=>{tick_(c,x-150,284,22,GOOD,1);T(c,"unique · not_null",x-126,294,{f:"mono",w:500,size:28,color:rgba(tests?GOOD:SOFT,1)});});});
+    const jc=broke?BAD:own?SOFT:GOOD;c.save();c.strokeStyle=rgba(jc,0.95);c.lineWidth=4;if(broke)c.setLineDash([12,10]);c.beginPath();c.moveTo(400,192);c.lineTo(560,192);c.stroke();c.restore();
+    if(broke){c.fillStyle="rgba(7,12,24,1)";c.fillRect(466,172,28,40);cross_(c,480,192,22,BAD,1);}
+    const jt=broke?V.noRows:own?V.join:V.oneRow;tag(c,480,246,jt,jc,{align:"center",size:wo_fitM(c,jt,420,30,700,undefined,24)});
+    const sl=(x,ww,on)=>{if(on){glass(c,x,318,ww,74,12,WEED,{glow:10,ea:0.85,fill:"rgba(20,34,24,0.95)"});T(c,V.pkg,x+ww/2,366,{w:800,size:wo_fitM(c,V.pkg,ww-30,32,800,undefined,24),align:"center",color:rgba(mix(WEED,INK,0.5),1)});}
+      else{c.save();c.setLineDash([10,9]);c.strokeStyle=rgba(SOFT,0.6);c.lineWidth=2;rr(c,x,318,ww,74,12);c.stroke();c.restore();T(c,V.noPkg,x+ww/2,366,{w:700,size:wo_fitM(c,V.noPkg,ww-30,30,700,undefined,24),align:"center",color:rgba(SOFT,1)});}};
+    if(own){sl(10,460,1);sl(490,460,0);}else sl(10,940,1);
+    c.restore();}};
+
 // lab 1: eight models, each on the ring its access puts it in; on the right, each one's access, and whether the wallet's mart can ref it
 const WO_L8=[[LAYER4[0][1],"credential_model"],[LAYER4[1][1],"credential_model"],[TRUST,"credential_model"],[TRUST,"credential_model"],[WO_PLN,"planning"],[WO_WAL,"wallet"],[WO_WAL,"wallet"],[WO_PLN,"planning"]];
 // u public, r protected, v private, for each option of the lab (the keys of its opts)
 const WO_LACC={project:"vvuurrrr",none:"rrrrrrrr",public:"uuuuuuuu",intpub:"vuuurrrr",corepriv:"vvvvrrrr"};
 const WO_ACCN={u:"public",r:"protected",v:"private"},WO_ACCI={u:0,r:1,v:2};
-function wo_l_access(c,w,h,st,L){const V=L.vis,acc=WO_LACC[st.pick]||WO_LACC.project;c.save();wo_fit(c,w,h,960,400);
+function wo_l_access(c,w,h,st,L){if(wo_nar(c))return WO_LN.access(c,w,h,st,L);const V=L.vis,acc=WO_LACC[st.pick]||WO_LACC.project;c.save();wo_fit(c,w,h,960,400);
   const cx=228,cy=198,s=0.4,mid={u:[178,112],r:[118,72],v:[48,24]},n={u:0,r:0,v:0},cnt={u:0,r:0,v:0};for(const k of acc)cnt[k]++;
   wo_rings(c,cx,cy,0,{s,ring:[1,1,1],lit:[0.35,0.25,0.25],noLabels:true});
   WO_L8.forEach(([col],i)=>{const k=acc[i],j=n[k]++,an=-Math.PI/2+(k==="v"?0:0.4)+j*TAU/cnt[k],[rx,ry]=mid[k];wo_num(c,cx+Math.cos(an)*rx,cy+Math.sin(an)*ry,i+1,col,15);});
@@ -313,32 +359,32 @@ function wo_l_access(c,w,h,st,L){const V=L.vis,acc=WO_LACC[st.pick]||WO_LACC.pro
   c.restore();}
 
 // lab 2: four territories, each holding the things placed in it; after checking, each turns green or red
-function wo_l_domains(c,w,h,st,L){const V=L.vis,its=wo_labOf(L,"wo_l_domains").w.items||[],keys=["registrar","learning","planning","wallet"];c.save();wo_fit(c,w,h,960,400);
+function wo_l_domains(c,w,h,st,L){if(wo_nar(c))return WO_LN.domains(c,w,h,st,L);const V=L.vis,its=wo_labOf(L,"wo_l_domains").w.items||[],keys=["registrar","learning","planning","wallet"];c.save();wo_fit(c,w,h,960,400);
   keys.forEach((k,i)=>{const x=6+i*238,col=WO_DOM[k][1],cxx=x+113;wo_terr(c,x,6,226,388,col,"",0,{seed:i+1});
     T(c,V.domains[i],cxx,48,{w:800,size:wo_fitS(c,V.domains[i],200,22,800),align:"center",color:rgba(col,1)});T(c,V.owners[i],cxx,76,{w:600,size:20,align:"center",color:rgba(SOFT,1)});
     const mine=its.map((it,j)=>[it,j]).filter(([it,j])=>(st.pick||{})[j]===k),step=Math.min(44,280/Math.max(1,mine.length));
-    mine.forEach(([it,j],m)=>{const y=118+m*step,ok=it.b===k,lab=it.s||it.t,z=wo_fitS(c,lab,190,20,700),cw=tw(c,lab,z,700)+26;
+    mine.forEach(([it,j],m)=>{const y=118+m*step,ok=it.b===k,lab=it.s||it.t,z=wo_fitS(c,lab,198,20,700),cw=tw(c,lab,z,700)+26;
       glass(c,cxx-cw/2,y-18,cw,36,10,st.checked?(ok?GOOD:BAD):col,{glow:8,ea:0.8,fill:"rgba(7,12,24,0.94)"});T(c,lab,cxx,y+7,{w:700,size:z,align:"center"});});});
   c.restore();}
 
 // lab 3: on the left, refs between models (access); on the right, tables with doors (grants). The rule picked lights its side
-function wo_l_read(c,w,h,st,L){const V=L.vis,p=st.pick||"both",refA=p==="grants"?0.35:1,readA=p==="access"?0.35:1;c.save();wo_fit(c,w,h,960,400);
-  T(c,V.refer,16,30,{w:800,size:22,color:rgba(INK,0.4+0.6*refA)});T(c,V.read,496,30,{w:800,size:22,color:rgba(INK,0.4+0.6*readA)});
-  c.strokeStyle="rgba(150,170,210,0.25)";c.lineWidth=1.5;c.beginPath();c.moveTo(478,14);c.lineTo(478,390);c.stroke();
-  withA(c,refA,()=>{wo_dot(c,50,190,WO_WAL,1,10);T(c,"mart_wallet__learners",16,226,{f:"mono",w:500,size:18,color:rgba(WO_WAL,1)});
-    wo_lpill(c,300,96,"mart_planning__near_award",WO_PLN,{size:19});wo_lpill(c,360,214,"core_learner",TRUST,{size:20});
-    arrowTo(c,62,184,140,108,WO_AMB,1,{head:12,lw:3});wo_num(c,82,130,3,WO_AMB);
-    arrowTo(c,64,194,274,212,GOOD,1,{head:12,lw:3});wo_num(c,180,186,2,GOOD);
-    wo_proj(c,250,304,200,76,"planning",WO_PLN,{dash:true});arrowTo(c,420,302,420,234,TRUST,1,{head:12,lw:3});wo_num(c,448,270,5,TRUST);tag(c,360,256,"v=1",TRUST,{size:18,align:"center"});});
-  withA(c,readA,()=>{wo_table(c,488,48,322,156,"mart_planning__near_award",WO_PLN,{open:1});wo_table(c,488,228,322,156,"stg_student_system__learners",LAYER4[0][1],{open:1});
-    wo_team(c,878,80,0.36,WO_PLN,0,{});wrapT(c,V.analyst,878,140,140,{w:700,size:wo_fitS(c,V.analyst.split(" ").reduce((x,y)=>x.length>y.length?x:y),136,18,700),align:"center",color:rgba(WO_PLN,1),lh:22});arrowTo(c,848,112,806,140,GOOD,1,{head:10,lw:3});wo_num(c,842,184,1,GOOD);
-    wo_dash(c,826,246,126,92,WO_PLN,0,{title:V.dashS});arrowTo(c,824,300,806,316,GOOD,1,{head:10,lw:3});wo_num(c,838,222,4,GOOD);});
+function wo_l_read(c,w,h,st,L){if(wo_nar(c))return WO_LN.read(c,w,h,st,L);const V=L.vis,p=st.pick||"both",refA=p==="grants"?0.35:1,readA=p==="access"?0.35:1;c.save();wo_fit(c,w,h,960,400);
+  T(c,V.refer,16,30,{w:800,size:22,color:rgba(INK,0.4+0.6*refA)});T(c,V.read,458,30,{w:800,size:22,color:rgba(INK,0.4+0.6*readA)});
+  c.strokeStyle="rgba(150,170,210,0.25)";c.lineWidth=1.5;c.beginPath();c.moveTo(442,14);c.lineTo(442,390);c.stroke();
+  withA(c,refA,()=>{wo_dot(c,50,190,WO_WAL,1,10);T(c,"mart_wallet__learners",16,228,{f:"mono",w:500,size:20,color:rgba(WO_WAL,1)});
+    wo_lpill(c,272,96,"mart_planning__near_award",WO_PLN,{size:20});wo_lpill(c,330,190,"core_learner",TRUST,{size:20});
+    arrowTo(c,60,182,112,112,WO_AMB,1,{head:12,lw:3});wo_num(c,64,132,3,WO_AMB);
+    arrowTo(c,64,192,236,192,GOOD,1,{head:12,lw:3});wo_num(c,150,170,2,GOOD);
+    wo_proj(c,220,304,200,76,"planning",WO_PLN,{dash:true});arrowTo(c,390,302,390,212,TRUST,1,{head:12,lw:3});wo_num(c,418,262,5,TRUST);tag(c,322,256,"v=1",TRUST,{size:18,align:"center"});});
+  withA(c,readA,()=>{[[48,"mart_planning__near_award",WO_PLN],[228,"stg_student_system__learners",LAYER4[0][1]]].forEach(([y,nm,col])=>{wo_table(c,452,y,360,156," ",col,{open:1});T(c,nm,468,y+34,{f:"mono",w:500,size:wo_fitS(c,nm,336,20,500,"mono"),color:rgba(col,1)});});
+    wo_team(c,880,80,0.36,WO_PLN,0,{});wrapT(c,V.analyst,880,140,120,{w:700,size:wo_fitS(c,V.analyst.split(" ").reduce((x,y)=>x.length>y.length?x:y),118,20,700),align:"center",color:rgba(WO_PLN,1),lh:24});arrowTo(c,848,112,806,140,GOOD,1,{head:10,lw:3});wo_num(c,830,92,1,GOOD);
+    wo_dash(c,826,246,126,92,WO_PLN,0,{title:V.dashS});arrowTo(c,824,300,806,316,GOOD,1,{head:10,lw:3});wo_num(c,842,226,4,GOOD);});
   if(p==="access")tag(c,880,374,V.anyway,EDGE_,{align:"center",size:wo_fitS(c,V.anyway,110,20,700)});
-  if(p==="grants")tag(c,126,300,V.noRef,EDGE_,{align:"center",size:wo_fitS(c,V.noRef,200,20,700)});
+  if(p==="grants")tag(c,6,270,V.noRef,EDGE_,{size:wo_fitS(c,V.noRef,206,20,700)});
   c.restore();}
 
 // lab 4: two projects hash Aisha's student ID; the ground under them is the shared package
-function wo_l_shared(c,w,h,st,L){const V=L.vis,k=st.step||0,own=k>=1&&k<=4,low=k>=2&&k<=4,broke=k>=3&&k<=4,tests=k===4;c.save();wo_fit(c,w,h,960,400);
+function wo_l_shared(c,w,h,st,L){if(wo_nar(c))return WO_LN.shared(c,w,h,st,L);const V=L.vis,k=st.step||0,own=k>=1&&k<=4,low=k>=2&&k<=4,broke=k>=3&&k<=4,tests=k===4;c.save();wo_fit(c,w,h,960,400);
   [[20,"credentials",[150,190,255],false],[500,"planning",WO_PLN,true]].forEach(([x,nm,col,right])=>{wo_proj(c,x,30,440,262,nm,col,{dash:right});
     if(right){const lw=tw(c,WO_CLOUD,18,700)+28,lx=x+440-lw+8;c.fillStyle="rgba(8,14,24,0.95)";rr(c,lx,15,lw,30,15);c.fill();c.save();c.setLineDash([5,4]);c.strokeStyle=rgba(WO_AMB,0.8);c.lineWidth=1.5;rr(c,lx,15,lw,30,15);c.stroke();c.restore();T(c,WO_CLOUD,lx+14,36,{w:700,size:18,color:rgba(WO_AMB,1)});}
     const l=right&&low,o=right&&own;T(c,l?"sis|s-20417":"SIS|S-20417",x+30,96,{f:"mono",w:500,size:24,color:rgba(l?WO_AMB:INK,1)});
@@ -354,42 +400,50 @@ function wo_l_shared(c,w,h,st,L){const V=L.vis,k=st.step||0,own=k>=1&&k<=4,low=k
   if(own){c.save();c.setLineDash([10,9]);c.strokeStyle=rgba(SOFT,0.6);c.lineWidth=2;rr(c,500,314,440,76,10);c.stroke();c.restore();T(c,V.noPkg,720,360,{w:700,size:20,align:"center",color:rgba(SOFT,1)});}
   c.restore();}
 
-// the scenarios
-function wo_q_copy(c,w,h,st,L){const V=L.vis;c.save();wo_fit(c,w,h,900,480);
-  wo_coreCard(c,290,8,320,118,{name:"core_learner",sub:V.pub});
-  wo_proj(c,16,160,420,300,"planning",WO_PLN,{});wo_proj(c,464,160,420,300,"wallet",WO_WAL,{});
-  wo_lpill(c,226,250,"mart_planning__near_award",WO_PLN,{size:22});tag(c,226,320,V.atCensus,WO_PLN,{align:"center",size:wo_fitS(c,V.atCensus,360,24,700)});
-  wo_lpill(c,674,250,"mart_planning__near_award",WO_PLN,{size:22,glow:4});tag(c,674,320,V.copy,EDGE_,{align:"center",size:wo_fitS(c,V.copy,370,24,700)});
-  wo_q_mark(c,674,410);c.restore();}
-function wo_q_private(c,w,h,st,L){c.save();wo_fit(c,w,h,900,480);const cx=450,cy=236;
-  wo_rings(c,cx,cy,0,{s:0.66,ring:[1,1,1],lit:[0.2,0.3,0.6],noLabels:true});
-  T(c,"private",cx,cy+66,{f:"mono",w:500,size:26,align:"center",color:rgba(WO_RING[2][2],1)});
-  wo_lpill(c,cx,cy+8,"int_learner_keys_matched",LAYER4[1][1],{size:24});
-  wo_lpill(c,cx,cy-124,"mart_planning__near_award",WO_PLN,{size:24});arrowTo(c,cx,cy-98,cx,cy-24,EDGE_,1,{head:13,lw:3});
-  wo_q_mark(c,cx+70,cy-44);c.restore();}
-function wo_q_read(c,w,h,st,L){const V=L.vis;c.save();wo_fit(c,w,h,900,480);
-  wo_table(c,30,110,480,240,"stg_student_system__learners",LAYER4[0][1],{open:0});tag(c,270,400,"+access: private",WO_RING[2][2],{align:"center",size:26});
-  wo_dash(c,620,150,250,170,WO_PLN,0,{title:V.dash});arrowTo(c,616,250,514,290,EDGE_,1,{head:13,lw:3});wo_q_mark(c,566,220);c.restore();}
-function wo_q_hash(c,w,h,st,L){const V=L.vis;c.save();wo_fit(c,w,h,900,480);
-  [[16,"credentials",[150,190,255],"{{ hash_key(…) }}","f7125487…fab524",false],[464,V.scProj,WO_SC,"sha256(…)","a7534411…0b1777",true]].forEach(([x,nm,col,fn,hh,r])=>{wo_proj(c,x,40,420,320,nm,col,{dash:r});
-    T(c,"SC|grace.okafor@mail.example",x+22,120,{f:"mono",w:500,size:22,color:rgba(INK,1)});T(c,fn,x+22,190,{f:"mono",w:500,size:24,color:rgba(SOFT,1)});T(c,hh,x+22,270,{f:"mono",w:500,size:28,color:rgba(r?WO_AMB:TRUST,1)});});
-  c.save();c.setLineDash([10,10]);c.strokeStyle=rgba(EDGE_,0.9);c.lineWidth=3;c.beginPath();c.moveTo(226,400);c.lineTo(674,400);c.stroke();c.restore();
-  wo_q_mark(c,450,456);c.restore();}
-function wo_q_five(c,w,h,st,L){const V=L.vis;c.save();wo_fit(c,w,h,900,480);
-  [["staging",LAYER4[0][1]],["intermediate",LAYER4[1][1]],["core",TRUST],["planning",WO_PLN],["wallet",WO_WAL]].forEach(([nm,col],i)=>{const x=10+i*178;c.save();c.setLineDash([12,9]);c.strokeStyle=rgba(col,0.85);c.lineWidth=2.4;rr(c,x,40,168,180,20);c.stroke();c.restore();
-    T(c,nm,x+84,138,{w:800,size:wo_fitS(c,nm,150,24,800),align:"center",color:rgba(col,1)});});
-  wo_team(c,450,320,0.8,WEED,0,{});T(c,V.oneTeam,450,448,{w:800,size:wo_fitS(c,V.oneTeam,600,26,800),align:"center",color:rgba(WEED,1)});c.restore();}
-function wo_q_edit(c,w,h,st,L){const V=L.vis;c.save();wo_fit(c,w,h,900,480);
-  const hh=wo_code(c,20,8,560,"models/core/core_credential_v2.sql",["…","    credential_kind,","    credential_code,","    credential_name,","    credit_points,","    issued_on,","…"],{size:23,lh:34,edge:TRUST,lit:{4:1},litCol:EDGE_});
-  tag(c,746,250,V.renamed,EDGE_,{align:"center",size:wo_fitS(c,V.renamed,280,22,700)});tag(c,746,310,V.noVersion,EDGE_,{align:"center",size:wo_fitS(c,V.noVersion,280,22,700)});
-  [["planning",WO_PLN,200],["wallet",WO_WAL,520]].forEach(([nm,col,x])=>{arrowTo(c,300,hh+14,x,418,col,0.9,{head:13,lw:3});wo_lpill(c,x,446,nm,col,{size:24});});c.restore();}
-function wo_q_move(c,w,h,st,L){const V=L.vis;c.save();wo_fit(c,w,h,900,480);
-  wo_proj(c,16,30,520,330,"credentials",[150,190,255],{});wo_credProj(c,16,10,520,330,0,{noBox:true,noLabels:true,s:0.42});
-  wo_proj(c,624,30,260,330,"planning",WO_PLN,{dash:true});arrowTo(c,500,120,640,120,WO_PLN,0.9,{head:13,lw:3,bend:-0.2});
-  wo_slab(c,16,384,868,80,V.pkg,"hash_key · key_string",WEED,{});c.restore();}
-function wo_q_pin(c,w,h,st,L){const V=L.vis;c.save();wo_fit(c,w,h,900,480);
-  wo_coreCard(c,24,30,340,110,{name:"core_learner",sub:"v1"});wo_coreCard(c,24,280,340,110,{name:"core_learner",sub:"v2",hi:1});
-  tag(c,194,212,V.depr,EDGE_,{align:"center",size:wo_fitS(c,V.depr,340,22,700)});
-  wo_proj(c,540,140,340,180,"planning",WO_PLN,{dash:true});T(c,"ref('credentials',",562,216,{f:"mono",w:500,size:22,color:rgba(INK,1)});T(c,"  'core_learner', v=1)",562,252,{f:"mono",w:500,size:22,color:rgba(INK,1)});
-  arrowTo(c,536,190,372,90,TRUST,1,{head:13,lw:3,bend:0.1});wo_q_mark(c,452,400);c.restore();}
+// the scenarios: drawn in the page's own 600x320, so their words stay at 22 or more (about 13 px on a phone, 17 on a desktop)
+function wo_q_copy(c,w,h,st,L){const V=L.vis;c.save();wo_fit(c,w,h,600,320);
+  glow(c,300,38,200,TRUST,0.12);glass(c,110,6,380,64,14,TRUST,{glow:16,ea:0.95,lw:3,fill:"rgba(12,12,18,0.97)"});
+  T(c,"core_learner",130,46,{f:"mono",w:500,size:26,color:rgba(TRUST,1)});T(c,V.pub,470,45,{w:700,size:wo_fitS(c,V.pub,140,22,700),align:"right",color:rgba(SOFT,1)});
+  tag(c,10,118,"planning",WO_PLN,{size:22});wo_lpill(c,166,118,"mart_planning__near_award",WO_PLN,{size:22,align:"left"});
+  tag(c,347,166,V.atCensus,WO_PLN,{align:"center",size:wo_fitS(c,V.atCensus,400,22,700)});
+  tag(c,10,226,"wallet",WO_WAL,{size:22});wo_lpill(c,166,226,"mart_planning__near_award",WO_PLN,{size:22,align:"left",glow:3});
+  tag(c,330,274,V.copy,EDGE_,{align:"center",size:wo_fitS(c,V.copy,500,22,700)});wo_q_mark(c,566,244);c.restore();}
+function wo_q_private(c,w,h,st,L){c.save();wo_fit(c,w,h,600,320);const cx=300,cy=190;
+  wo_rings(c,cx,cy,0,{s:0.39,ring:[1,1,1],lit:[0.2,0.3,0.6],noLabels:true});
+  wo_lpill(c,cx,28,"mart_planning__near_award",WO_PLN,{size:22});arrowTo(c,cx,54,cx,132,EDGE_,1,{head:12,lw:3});wo_q_mark(c,cx+40,116);
+  wo_lpill(c,cx,160,"int_learner_keys_matched",LAYER4[1][1],{size:22});T(c,"private",cx,214,{f:"mono",w:500,size:24,align:"center",color:rgba(WO_RING[2][2],1)});c.restore();}
+function wo_q_read(c,w,h,st,L){const V=L.vis;c.save();wo_fit(c,w,h,600,320);
+  T(c,"stg_student_system__learners",10,32,{f:"mono",w:500,size:22,color:rgba(LAYER4[0][1],1)});wo_table(c,10,48,340,190," ",LAYER4[0][1],{open:0});
+  tag(c,180,284,"+access: private",WO_RING[2][2],{align:"center",size:24});
+  wrapT(c,V.dash,495,32,190,{w:700,size:wo_fitS(c,V.dash.split(" ").reduce((x,y)=>x.length>y.length?x:y),186,22,700),align:"center",color:rgba(WO_PLN,1),lh:26});
+  wo_dash(c,400,82,190,150,WO_PLN,0,{title:" "});arrowTo(c,396,170,328,176,EDGE_,1,{head:12,lw:3});wo_q_mark(c,364,146);c.restore();}
+function wo_q_hash(c,w,h,st,L){const V=L.vis;c.save();wo_fit(c,w,h,600,320);
+  T(c,"SC|grace.okafor@mail.example",300,30,{f:"mono",w:500,size:22,align:"center",color:rgba(INK,1)});
+  [[8,"credentials",[150,190,255],"{{ hash_key(…) }}","f7125487…fab524",false],[308,V.scProj,WO_SC,"sha256(…)","a7534411…0b1777",true]].forEach(([x,nm,col,fn,hh,r])=>{wo_proj(c,x,84,284,176,nm,col,{dash:r});
+    T(c,fn,x+20,150,{f:"mono",w:500,size:22,color:rgba(SOFT,1)});T(c,hh,x+20,214,{f:"mono",w:500,size:24,color:rgba(r?WO_AMB:TRUST,1)});});
+  c.save();c.setLineDash([10,10]);c.strokeStyle=rgba(EDGE_,0.9);c.lineWidth=3;c.beginPath();c.moveTo(130,290);c.lineTo(270,290);c.moveTo(330,290);c.lineTo(470,290);c.stroke();c.restore();
+  wo_q_mark(c,300,306);c.restore();}
+function wo_q_five(c,w,h,st,L){const V=L.vis;c.save();wo_fit(c,w,h,600,320);
+  [["staging",LAYER4[0][1],8,8],["intermediate",LAYER4[1][1],205,8],["core",TRUST,402,8],["planning",WO_PLN,106,84],["wallet",WO_WAL,303,84]].forEach(([nm,col,x,y])=>{c.save();c.setLineDash([12,9]);c.strokeStyle=rgba(col,0.85);c.lineWidth=2.4;rr(c,x,y,190,64,16);c.stroke();c.restore();
+    T(c,nm,x+95,y+41,{w:800,size:wo_fitS(c,nm,170,24,800),align:"center",color:rgba(col,1)});});
+  wo_team(c,300,214,0.7,WEED,0,{});T(c,V.oneTeam,300,300,{w:800,size:wo_fitS(c,V.oneTeam,580,24,800),align:"center",color:rgba(WEED,1)});c.restore();}
+function wo_q_edit(c,w,h,st,L){const V=L.vis;c.save();wo_fit(c,w,h,600,320);
+  // a code card of its own, so its file name and label read on a phone: the path on two lines, the label under it
+  glass(c,6,6,384,306,14,TRUST,{glow:12,ea:0.65,fill:"rgba(6,10,20,0.95)"});c.fillStyle=rgba(TRUST,0.9);rr(c,22,24,10,10,3);c.fill();
+  T(c,"models/core/",42,36,{f:"mono",w:500,size:22,color:rgba(TRUST,1)});T(c,"core_credential_v2.sql",42,62,{f:"mono",w:500,size:22,color:rgba(TRUST,1)});
+  tag(c,22,98,WO_DUCK,WEED,{size:20});c.fillStyle="rgba(150,170,210,0.25)";c.fillRect(20,124,356,1.5);
+  ["…","    credential_name,","    credit_points,","    issued_on,","…"].forEach((s,i)=>{const y=156+i*32;if(i===2){c.fillStyle=rgba(EDGE_,0.16);rr(c,14,y-24,368,32,6);c.fill();}
+    T(c,s,22,y,{f:"mono",w:500,size:22,color:rgba(i===2?EDGE_:INK,i===2?1:0.9)});});
+  wrapT(c,V.renamed,404,40,190,{w:700,size:22,color:rgba(EDGE_,1),lh:27});wrapT(c,V.noVersion,404,118,190,{w:700,size:22,color:rgba(EDGE_,1),lh:27});
+  [["planning",WO_PLN,206],["wallet",WO_WAL,270]].forEach(([nm,col,y])=>{arrowTo(c,386,212,428,y,col,0.9,{head:11,lw:3});wo_lpill(c,432,y,nm,col,{size:22,align:"left"});});c.restore();}
+function wo_q_move(c,w,h,st,L){const V=L.vis;c.save();wo_fit(c,w,h,600,320);
+  wo_proj(c,8,26,370,192,"credentials",[150,190,255],{});wo_rings(c,193,128,0,{s:0.25,ring:[1,1,1],lit:[0.3,0.3,0.3],noLabels:true});
+  wo_proj(c,420,26,172,192,"planning",WO_PLN,{dash:true});arrowTo(c,330,110,436,110,WO_PLN,0.9,{head:12,lw:3,bend:-0.2});
+  wo_slab(c,8,236,584,80,V.pkg,null,WEED,{});T(c,"hash_key · key_string",300,304,{f:"mono",w:500,size:22,align:"center",color:rgba(SOFT,1)});c.restore();}
+function wo_q_pin(c,w,h,st,L){const V=L.vis;c.save();wo_fit(c,w,h,600,320);
+  [[8,"v1",0],[248,"v2",1]].forEach(([y,v,hi])=>{glow(c,148,y+32,150,TRUST,0.08+0.08*hi);glass(c,8,y,280,64,14,TRUST,{glow:12+10*hi,ea:0.95,lw:3,fill:"rgba(12,12,18,0.97)"});
+    T(c,"core_learner",24,y+42,{f:"mono",w:500,size:26,color:rgba(TRUST,1)});tag(c,232,y+32,v,TRUST,{size:22});});
+  wrapT(c,V.depr,148,144,280,{w:700,size:22,align:"center",color:rgba(EDGE_,1),lh:27});
+  wo_proj(c,320,100,272,150,"planning",WO_PLN,{dash:true});["ref('credentials',","  'core_learner',","  v=1)"].forEach((s,i)=>T(c,s,336,156+i*32,{f:"mono",w:500,size:22,color:rgba(INK,1)}));
+  arrowTo(c,318,130,292,48,TRUST,1,{head:12,lw:3,bend:0.1});wo_q_mark(c,456,304);c.restore();}
 Object.assign(LV,{wo_l_access,wo_l_domains,wo_l_read,wo_l_shared,wo_q_copy,wo_q_private,wo_q_read,wo_q_hash,wo_q_five,wo_q_edit,wo_q_move,wo_q_pin});

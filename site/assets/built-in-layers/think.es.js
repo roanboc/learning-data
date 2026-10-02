@@ -9,7 +9,7 @@ think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar
     opts:[{t:"Los joins son lentos, y los modelos de staging son vistas."},{t:"Un join esconde una decisión (qué registro gana, qué clave coincide) donde nadie la busca. Emparejar es una regla, y las reglas viven en intermediate.",ok:true},{t:"dbt no permite un join en un modelo de staging."}],
     why:"Staging ordena cada fuente una vez, de la misma manera, y cada paso siguiente parte de ahí. Un join en staging esconde una regla de emparejamiento; en intermediate, tiene nombre y pruebas."},
   "core":{stop:"layers",q:"¿Por qué el título se salta intermediate?",
-    opts:[{t:"Tiene una sola fuente y nada que resolver: ni claves que emparejar, ni historias que coser.",ok:true},{t:"Los títulos nunca cambian, así que no necesitan pruebas."},{t:"El core solo puede leer modelos de staging."}],
+    opts:[{t:"Tiene una sola fuente y nada que resolver: ni claves que emparejar, ni historiales que coser.",ok:true},{t:"Los títulos nunca cambian, así que no necesitan pruebas."},{t:"El core solo puede leer modelos de staging."}],
     why:"Un paso que solo deja pasar filas agrega un modelo que mantener y nada que probar. Cuando llegue una segunda fuente de títulos, aparecerá un paso."},
   "ctes":{stop:"ctes",q:"¿Qué te da una CTE de importación?",
     opts:[{t:"Una consulta más rápida: la base de datos lee cada entrada una vez."},{t:"Cada modelo del que depende el archivo, listado arriba, una vez.",ok:true},{t:"Nada: es cuestión de estilo."}],

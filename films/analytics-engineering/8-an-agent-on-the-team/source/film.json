@@ -1,0 +1,27 @@
+{
+  "key": "an-agent-on-the-team",
+  "title": "An agent on the team",
+  "sub": "In the weeds of data crafting, a technical series for analytics engineers: an AI agent follows what's written down, works with least access, shows the query behind every claim and never weakens a test to pass it; reconciliation, a diff and CI check its work, and people approve.",
+  "howto": "Code on dark glass is the project, and the small label beside it says where it runs. Teal is the AI agent's work; gold is a person's approval, never drawn on the agent's work until a person gives it. Red means a test stopped something; green, it passed; amber, a warning.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "almanac",
+    "breath",
+    1.6
+  ],
+  "say": [
+    ["\\bYAML\\b", "yammel"],
+    ["\\bJun\\b", "Joon"],
+    ["\\bMei\\b", "May"],
+    ["\\bdbt\\b", "dee bee tee"],
+    ["\\bDuckDB\\b", "duck dee bee"],
+    ["\\bIDs\\b", "eye dees"],
+    ["\\bID\\b", "eye dee"],
+    ["\\bCI\\b", "see eye"],
+    ["\\bAI\\b", "ay eye"],
+    ["\\bMaskelyne\\b", "Maskelin"]
+  ]
+}

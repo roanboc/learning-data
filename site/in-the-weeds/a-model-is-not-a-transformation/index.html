@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A model is not a transformation · In the weeds of data crafting · Learning Data</title>
+<meta name="description" content="A film for analytics engineers about the difference between a data model and a dbt model: where the model lives (YAML and Markdown, beside the code), the layers of a dbt project, the ten steps from a question to versioned models, and the eight films to come.">
+<meta property="og:title" content="A model is not a transformation · In the weeds of data crafting · Learning Data"><meta property="og:description" content="dbt calls every query a model. The data model is the blueprint: declared beside the code, and checked by the tests."><meta property="og:image" content="https://roanboc.github.io/learning-data/assets/a-model-is-not-a-transformation-poster.jpg">
+<link rel="alternate" hreflang="en" href="https://roanboc.github.io/learning-data/in-the-weeds/a-model-is-not-a-transformation/"><link rel="alternate" hreflang="es" href="https://roanboc.github.io/learning-data/es/in-the-weeds/a-model-is-not-a-transformation/">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../../"><img src="../../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Site"><a href="../../">Start here</a><a href="../../topics/" aria-current="true">Topics</a><a href="../../journey/">Making of</a><span class="lang" role="group" aria-label="Language"><a href="./" aria-current="true" lang="en">EN</a><a href="../../es/in-the-weeds/a-model-is-not-a-transformation/" lang="es" hreflang="es">ES</a></span></nav></div></header>
+<main>
+<section class="hero cine"><div class="bg" aria-hidden="true"><img src="../../assets/a-model-is-not-a-transformation-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow crumbs"><a href="../../topics/">Topics</a> › <a href="../">In the weeds of data crafting</a></p>
+<h1>A model is not a transformation: the blueprint, and the building work</h1>
+<p class="lead">A blueprint lays no bricks. dbt calls every query a model, but the data model is what you declare beside the code, and the tests check the tables against it. The map for a technical series for analytics engineers.</p>
+<p class="meta-row"><span>5½ min</span><span>4 labs</span><span>8 scenarios</span><span>Pause and think</span><span>English captions</span></p>
+<p class="builds-on">Builds on the series <a href="../../from-words-to-data/"><i>From words to data</i></a>, and where it ends: <a href="../../from-words-to-data/keeping-it-true/"><i>Keeping it true</i></a></p>
+</section>
+<nav class="course" aria-label="Course: A model is not a transformation"><div class="course-in"><p class="course-t"><small>Film 1 of 9 · Models and transformations</small>A model is not a transformation</p><ol class="path" data-store="ld-a-model-is-not-a-transformation" data-labs="4" data-quiz="8" data-text='{"watched": "Watched", "labs": "{n} of 4 labs explored", "quiz": "{n} of 8 answered \u00b7 {ok} right"}'>
+<li><a href="./#watch" aria-current="step"><span class="n"><b>1</b></span><b>Watch</b><span>A 5½ min film</span></a></li>
+<li><a href="./labs/"><span class="n"><b>2</b></span><b>Take it apart</b><span>Four hands-on labs</span></a></li>
+<li><a href="./scenarios/"><span class="n"><b>3</b></span><b>Make the call</b><span>Eight real situations</span></a></li>
+</ol></div></nav>
+<section class="module" id="watch" data-store="ld-a-model-is-not-a-transformation" aria-labelledby="watch-h">
+<div class="mhead"><div><h2 id="watch-h">Watch the film</h2><p>Press Play, or pick a chapter. Turn on <b>Pause and think</b> to stop for one question at the end of chapters.</p></div></div>
+<div class="player" data-labs="labs/">
+<audio id="snd" preload="metadata" src="../../assets/a-model-is-not-a-transformation/soundtrack.mp3"></audio><div class="poster"><img src="../../assets/a-model-is-not-a-transformation-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Play the film · 5½ min</button><button type="button" class="think-badge" data-think>Play with pauses to think</button></div></div><canvas id="film" width="1280" height="720" aria-label="Animated film: A model is not a transformation"></canvas>
+<div class="bar"><button id="play">Play</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Seek"><span id="time">0:00</span><button id="think" aria-pressed="false" title="Stop at the end of four chapters, with one question each">Pause and think</button><button id="cc" class="on" aria-pressed="true">Captions</button><button id="fs">Full screen</button></div>
+</div>
+<div class="chapters" id="chapters" aria-label="Chapters"></div>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/a-model-is-not-a-transformation.mp4">Download the video</a><a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/1-a-model-is-not-a-transformation/captions">Caption files</a><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/1-a-model-is-not-a-transformation/script.md">Read the script</a></p>
+<template id="next-panel"><div class="think-card"><p class="think-k">Where next?</p><h3>You've seen the blueprint and the building work. Now tell them apart yourself.</h3>
+<div class="next-opts"><a class="btn primary" href="labs/">Take it apart: 4 hands-on labs →</a><a class="btn" href="scenarios/">Make the call: 8 situations</a><a class="btn" href="../start-from-a-question/">Next in the series: Start from a question</a></div>
+<div class="think-foot"><button type="button" class="btn" data-again>Watch again</button></div></div></template>
+</section>
+
+<section class="module" id="think-it-through" aria-labelledby="think-h">
+<div class="mhead"><div><h2 id="think-h">Think it through</h2><p>The four Pause and think questions, for a class or a team. Open one to see the answer.</p></div></div>
+<div id="think-list"></div>
+</section>
+
+<section class="module" id="in-the-series" aria-labelledby="series-h">
+<div class="mhead"><div><h2 id="series-h">In the series: <a href="../">In the weeds of data crafting</a></h2><p>Film 1 of 9.</p></div></div>
+<div class="topic-grid series-pn" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
+<article class="topic-card">
+<img src="../../assets/start-from-a-question-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Next · Film 2 of 9 →</p>
+<h3><a href="../start-from-a-question/">Start from a question</a></h3>
+<p>A model has no edge until a question gives it one. Model only what the question touches, and name who owns each meaning first.</p>
+<p class="meta">5 min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
+<p class="tc-progress" data-progress="ld-start-from-a-question" data-labs="4" data-quiz="8" hidden></p>
+</div>
+</article>
+</div>
+<ol class="series-list" aria-label="Every film of the series">
+<li><a href="../a-model-is-not-a-transformation/" aria-current="page"><span class="n">1</span>A model is not a transformation</a></li>
+<li><a href="../start-from-a-question/"><span class="n">2</span>Start from a question</a></li>
+<li><a href="../what-makes-it-the-same-one/"><span class="n">3</span>What makes it the same one</a></li>
+<li><a href="../one-row-of-what-and-when/"><span class="n">4</span>One row of what, and when</a></li>
+<li><a href="../promises-and-proofs/"><span class="n">5</span>Promises and proofs</a></li>
+<li><a href="../built-in-layers/"><span class="n">6</span>Built in layers</a></li>
+<li><a href="../who-owns-what/"><span class="n">7</span>Who owns what</a></li>
+<li><a href="../an-agent-on-the-team/"><span class="n">8</span>An agent on the team</a></li>
+<li><a href="../written-once/"><span class="n">9</span>Written once</a></li>
+</ol>
+</section>
+</main>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Source on GitHub</a></p><p>The university, people, numbers and records in the film, the labs and the scenarios are fictional. The narration is a synthetic voice. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
+<script src="../../assets/a-model-is-not-a-transformation/film.js"></script>
+<script src="../../assets/a-model-is-not-a-transformation/think.en.js"></script>
+<script src="../../assets/learn/think.js"></script>
+<script src="../../assets/learn/path.js"></script>
+<script src="../../assets/learn/next.js"></script>
+<script src="../../assets/ambient.js"></script>
+</body>
+</html>

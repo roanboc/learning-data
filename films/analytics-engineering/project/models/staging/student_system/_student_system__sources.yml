@@ -1,0 +1,40 @@
+sources:
+  - name: student_system
+    description: '{{ doc("source_student_system") }}'
+    database: "{{ env_var('DBT_SOURCES_CATALOG', target.database) }}"
+    schema: "{{ env_var('DBT_SOURCES_SCHEMA_PREFIX', '') }}student_system"
+    config:
+      # Read by dbt-duckdb only: on DuckDB each table is a CSV file in data/. Databricks reads the ingested table.
+      external_location: "read_csv('data/student_system/{name}.csv', header = true, all_varchar = true)"
+      # on DuckDB the column is text; on Databricks the cast does nothing
+      loaded_at_field: "cast(_loaded_at as timestamp)"
+      freshness:
+        warn_after: {count: 1, period: day}
+        error_after: {count: 3, period: day}
+      meta:
+        owner: Registrar's office
+        key_set: SIS
+    tables:
+      - name: learners
+        description: One row per version of a student record. The system key is the student ID.
+        config:
+          meta:
+            system_key: [student_id]
+        columns:
+          - name: student_id
+            description: The student ID the registrar's office issues, like S-20417.
+          - name: effective_date
+            description: '{{ doc("effective_date") }}'
+      - name: awards
+        description: One row per version of an award the university offers. The system key is the award code.
+        config:
+          meta:
+            system_key: [award_code]
+      - name: results
+        description: One row per version of a unit result. The system key is the result ID.
+        config:
+          meta:
+            system_key: [result_id]
+        columns:
+          - name: result_date
+            description: '{{ doc("result_date") }}'

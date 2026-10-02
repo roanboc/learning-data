@@ -1,0 +1,21 @@
+{
+  "key": "start-from-a-question",
+  "title": "Start from a question",
+  "sub": "In the weeds of data crafting, a technical series for analytics engineers: scope is a question, not the whole university. Model only what the question touches, and name who owns each meaning before opening a source.",
+  "howto": "White lines on blue are the model; code on dark glass is the project, and the small label beside it says where it runs. Teal is an AI agent's work; gold is a person's approval.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "map",
+    "breath",
+    1.6
+  ],
+  "say": [
+    ["\\bYAML\\b", "yammel"],
+    ["\\bJun\\b", "Joon"],
+    ["\\bMei\\b", "May"],
+    ["\\bDuckDB\\b", "duck dee bee"]
+  ]
+}

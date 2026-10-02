@@ -1,0 +1,76 @@
+models:
+
+  - name: stg_short_courses__learners
+    description: One row per version of a short-course customer, as the platform recorded it.
+    config:
+      meta: {owner: Learning team, domain: learning}
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [customer_bk, recorded_from]
+    columns:
+      - name: customer_key
+        description: The hash of customer_bk.
+      - name: customer_bk
+        description: '{{ doc("qualified_key") }}'
+        data_tests: [not_null]
+        config:
+          meta: {personal_data: direct}
+      - name: email
+        description: The customer's email, the platform's key, trimmed and lower case.
+        config:
+          meta: {personal_data: direct}
+      - name: customer_name
+        config:
+          meta: {personal_data: direct}
+      - name: status_code
+        description: The platform's customer status. Mapped to the canonical set in seeds/status_map.csv.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['1', '0']
+
+  - name: stg_short_courses__enrolments
+    description: One row per version of an enrolment in a short course, as the platform recorded it.
+    config:
+      meta: {owner: Learning team, domain: learning}
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [enrolment_bk, recorded_from]
+    columns:
+      - name: enrolment_key
+        description: The hash of enrolment_bk.
+      - name: enrolment_bk
+        description: The enrolment's key, qualified by its key set, like SC|E-7005.
+        data_tests: [not_null]
+      - name: customer_bk
+        description: >
+          The customer who enrolled, by email. An enrolment with no email can't be matched to a
+          learner. The learning team agreed: warn when any current enrolment has none, stop the
+          build when more than five do (see docs/gaps.md).
+        data_tests:
+          - not_null:
+              config:
+                where: is_current_version
+                warn_if: ">0"
+                error_if: ">5"
+          - relationships:
+              arguments:
+                to: ref('stg_short_courses__learners')
+                field: customer_bk
+        config:
+          meta: {personal_data: direct}
+      - name: certificate_bk
+        description: The certificate's key, qualified by its key set, like SC|C-88. Null until the course is completed.
+      - name: enrolment_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [enrolled, completed, cancelled]
+      - name: certificate_type
+        description: '{{ doc("certificate_type") }}'
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [completion, attendance]

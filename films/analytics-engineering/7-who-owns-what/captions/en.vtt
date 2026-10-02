@@ -1,0 +1,124 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:08.874
+Before 1858, buying land in South Australia meant tracing a chain of old deeds, and hoping none was missing.
+
+00:00:09.574 --> 00:00:14.523
+That year, a law promoted by Robert Torrens made the government's register the title.
+
+00:00:15.823 --> 00:00:18.829
+Anyone could rely on it, without checking its history.
+
+00:00:20.329 --> 00:00:24.093
+Only a registered transfer, signed by the owner, could change it.
+
+00:00:25.393 --> 00:00:33.765
+The credential's core models work the same way. Their owner publishes them, everyone relies on them, and only their owner changes them.
+
+00:00:40.065 --> 00:00:42.332
+Everything is green, in one project.
+
+00:00:43.832 --> 00:00:53.078
+But its meaning has owners. The registrar's office, where Mei works, owns learners, awards and credentials, and the student IDs it issues.
+
+00:00:54.578 --> 00:01:01.433
+The learning team owns two kinds of credential, microcredentials and badges, and the keys of its two platforms.
+
+00:01:03.133 --> 00:01:06.911
+Each is a domain: it owns the meaning of the facts it records.
+
+00:01:08.411 --> 00:01:13.789
+Planning and the wallet app are domains too. They own what they build for themselves: their marts.
+
+00:01:15.489 --> 00:01:26.800
+In the project, models are gathered in groups, and each group names an owner. The staging, core and mart models also name their domain. Ownership follows meaning, not the code.
+
+00:01:30.500 --> 00:01:34.091
+So what does a domain publish? A core model, as a product.
+
+00:01:35.391 --> 00:01:40.245
+Take the learner. Its YAML states its grain: one row per learner per version.
+
+00:01:41.545 --> 00:01:47.342
+Its owner: Mei, at the registrar's office. Its domain. And its glossary term: learner.
+
+00:01:48.642 --> 00:01:55.618
+An enforced contract. A version number, so a change never arrives as a surprise. And its documentation.
+
+00:01:57.118 --> 00:02:02.832
+Noor's group builds it. Mei owns what it means. Everyone else builds on it, not on how it was made.
+
+00:02:05.532 --> 00:02:10.389
+Who can build on what? In dbt, that's access, and it comes in three rings.
+
+00:02:11.889 --> 00:02:16.541
+Two came with the contracts. Public, for the core: any project can build on it.
+
+00:02:17.641 --> 00:02:20.318
+Protected, for the marts: only this project.
+
+00:02:21.218 --> 00:02:26.338
+The third is private: only models in the same group. That's staging and intermediate.
+
+00:02:27.838 --> 00:02:35.209
+The wallet team tries to build on an intermediate model. dbt refuses before anything runs, and says why.
+
+00:02:36.909 --> 00:02:42.932
+Then it builds on Planning's mart. dbt allows it: same project, and the mart is protected.
+
+00:02:44.432 --> 00:02:53.364
+It's still wrong. That mart is shaped for Planning, and changes when Planning needs it to. Consumers build on the core, not on each other's marts.
+
+00:02:57.464 --> 00:03:03.260
+Access decides which models can refer to a model. It doesn't decide who can read its table.
+
+00:03:04.760 --> 00:03:10.179
+On Databricks, grants do that. Planning's marts grant reading to the groups Planning names.
+
+00:03:11.479 --> 00:03:17.013
+A dashboard can read a private staging table, if a grant lets it. Access doesn't stop it.
+
+00:03:18.313 --> 00:03:22.655
+Referring and reading are two different doors, opened by two different rules.
+
+00:03:25.355 --> 00:03:30.218
+Today, it's all one project. One day, Planning may own a project of its own.
+
+00:03:31.718 --> 00:03:34.941
+Then it names the project it depends on: credentials.
+
+00:03:36.241 --> 00:03:42.071
+And it refers to the core by project and by name, pinned to a version: the learner, version one.
+
+00:03:43.771 --> 00:03:51.137
+Only public models cross. Planning can't reach the wallet's marts, or any step inside. The domains meet on the core.
+
+00:03:52.837 --> 00:03:59.887
+This part is a sketch. References across projects need dbt Cloud, so it doesn't run on DuckDB.
+
+00:04:02.587 --> 00:04:05.525
+Split into domains, some things must still be shared.
+
+00:04:06.225 --> 00:04:09.340
+The key sets: one per system, each with its owner.
+
+00:04:10.640 --> 00:04:17.900
+One macro for every hash. Aisha's student ID gives the same sixty-four characters, in every project.
+
+00:04:19.200 --> 00:04:25.527
+Hash it another way, in lower case, and she gets a second key. Joins find nothing, and no test fails.
+
+00:04:27.227 --> 00:04:34.850
+The conventions and the glossary, too. Macros don't cross projects, so the shared ones would move to a package both install.
+
+00:04:35.550 --> 00:04:38.395
+Without shared keys, domains become silos.
+
+00:04:42.095 --> 00:04:47.000
+So why not split now? Every project is more to deploy, and more to keep in step.
+
+00:04:48.300 --> 00:04:57.708
+On the twelfth of October, Noor decided: groups first, in one project, while one team builds the core. Projects later, when teams own their domains.
+
+00:04:59.208 --> 00:05:02.585
+Many owners, and many hands. One of them isn't a person.

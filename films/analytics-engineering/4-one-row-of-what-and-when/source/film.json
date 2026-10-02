@@ -1,0 +1,24 @@
+{
+  "key": "one-row-of-what-and-when",
+  "title": "One row of what, and when",
+  "sub": "In the weeds of data crafting: two answers to one question, twelve and nine, both right, one as it was on census day and one as it is now. Declare the grain and the day in one sentence, before any SQL, and test both.",
+  "howto": "Each source keeps its colour: blue the student system, green the learning platform, pink short courses. Stacked cards are versions, each with the day it started and ended. Code on dark glass runs on dbt Core with DuckDB, in the repository. Teal is an AI agent's work; gold is a person's approval.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "card",
+    "breath",
+    1.6
+  ],
+  "say": [
+    ["\\bYAML\\b", "yammel"],
+    ["\\bJun\\b", "Joon"],
+    ["\\bMei\\b", "May"],
+    ["\\bdbt\\b", "dee bee tee"],
+    ["\\bSQL\\b", "sequel"],
+    ["\\bDuckDB\\b", "duck dee bee"],
+    ["\\bPriya\\b", "Pree-ya"]
+  ]
+}

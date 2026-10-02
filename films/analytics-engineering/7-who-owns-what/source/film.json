@@ -1,0 +1,23 @@
+{
+  "key": "who-owns-what",
+  "title": "Who owns what",
+  "sub": "In the weeds of data crafting, a technical series for analytics engineers: domains own meaning and publish public, contracted, versioned core models; consumers build on those, not on each other's marts. Access says who can refer to a model; grants say who can read it; keys, the hash and conventions stay shared.",
+  "howto": "White lines on blue are the model; code on dark glass is the project, and the small label beside it says where it runs. Three rings are dbt's access: private, protected, public. Doors are grants: who can read. Teal is an AI agent's work; gold is a person's approval.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "register",
+    "breath",
+    1.6
+  ],
+  "say": [
+    ["\\bYAML\\b", "yammel"],
+    ["\\bJun\\b", "Joon"],
+    ["\\bMei\\b", "May"],
+    ["\\bdbt\\b", "dee bee tee"],
+    ["\\bDuckDB\\b", "duck dee bee"],
+    ["\\bIDs\\b", "eye dees"]
+  ]
+}

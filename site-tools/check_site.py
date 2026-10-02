@@ -100,27 +100,32 @@ LENGTHS = re.compile(r"eight-minute|five-minute|six-minute|nueve minutos|seis mi
 # the stated lengths: 7½ (intro, EN), 8½ (intro, ES), 5½ (A Sharper Sketch, Silent change), and 6 min (Too good to be true)
 HALVES = {"en": {"5½", "7½"}, "es": {"5½", "8½"}}
 WHOLE = {"6 min"}
-# the series From words to data: its pages, players, packs, counts and lengths come from its own data, through
-# site-tools/build_series.py (which makes its pages), so a new film of the series needs no change here
+# the series (From words to data, In the weeds of data crafting): their pages, players, packs, counts and lengths come from
+# their own data, through site-tools/build_series.py (which makes their pages), so a new film, or a new series, needs no change here
 sys.path.insert(0, str(ROOT / "site-tools"))
 sys.dont_write_bytecode = True
 import build_series  # noqa: E402
-SERIES_FILMS = build_series.films()[1]
-TWINS += ["from-words-to-data/"] + [f"from-words-to-data/{f['key']}/{sub}" for f in SERIES_FILMS for sub in ("", "labs/", "scenarios/")]
-CRUMBS["from-words-to-data/"] = ("Topics › From words to data", ["topics/"])
-CRUMBS["es/from-words-to-data/"] = ("Temas › De las palabras a los datos", ["es/topics/"])
+SERIES_FILMS = build_series.all_films()
+for _S in build_series.SERIES:
+    _sl, _nm = _S["slug"], _S["name"]
+    if not build_series.films(_S)[1]:
+        continue
+    TWINS.append(f"{_sl}/")
+    CRUMBS[f"{_sl}/"] = (f"Topics › {_nm['en']}", ["topics/"])
+    CRUMBS[f"es/{_sl}/"] = (f"Temas › {_nm['es']}", ["es/topics/"])
 for _f in SERIES_FILMS:
-    _k = _f["key"]
+    _k, _S = _f["key"], _f["series"]; _sl, _nm = _S["slug"], _S["name"]
     for _sub in ("", "labs/", "scenarios/"):
-        CRUMBS[f"from-words-to-data/{_k}/{_sub}"] = ("Topics › From words to data", ["topics/", "from-words-to-data/"])
-        CRUMBS[f"es/from-words-to-data/{_k}/{_sub}"] = ("Temas › De las palabras a los datos", ["es/topics/", "es/from-words-to-data/"])
+        TWINS.append(f"{_sl}/{_k}/{_sub}")
+        CRUMBS[f"{_sl}/{_k}/{_sub}"] = (f"Topics › {_nm['en']}", ["topics/", f"{_sl}/"])
+        CRUMBS[f"es/{_sl}/{_k}/{_sub}"] = (f"Temas › {_nm['es']}", ["es/topics/", f"es/{_sl}/"])
     BUNDLES[f"assets/{_k}/film.js"] = f"ld-{_k}"
     COMMENT_OK.add(f"assets/{_k}/film.js")  # the shared code's comments name The Inner Life of Data as the first film
     for _lg in ("en", "es"):
         PACKS.add(f"assets/{_k}/think.{_lg}.js")
-        OWN_LABS[f"assets/{_k}/think.{_lg}.js"] = (("es/" if _lg == "es" else "") + f"from-words-to-data/{_k}/labs/index.html", f"assets/{_k}/learn.{_lg}.js")
+        OWN_LABS[f"assets/{_k}/think.{_lg}.js"] = (("es/" if _lg == "es" else "") + f"{_sl}/{_k}/labs/index.html", f"assets/{_k}/learn.{_lg}.js")
     COUNTS[f"ld-{_k}"] = (str(_f["labs"]), str(_f["quiz"]))
-    CAPTIONS_ES[f"assets/{_k}/film.js"] = (f"assets/{_k}/captions.es.js", f"films/from-words-to-data/{_f['dir']}/source")
+    CAPTIONS_ES[f"assets/{_k}/film.js"] = (f"assets/{_k}/captions.es.js", f"films/{_S['dir']}/{_f['dir']}/source")
     if "½" in _f["len"]:
         HALVES["en"].add(_f["len"]); HALVES["es"].add(_f["len"])
     else:
@@ -578,7 +583,7 @@ def main():
             exp = (2, "page")
         elif base.startswith(("labs/", "scenarios/")):
             exp = (0, "true")
-        elif base.startswith(("sketch/", "when-things-go-wrong/", "from-words-to-data/")):
+        elif base.startswith(("sketch/", "when-things-go-wrong/") + tuple(S["slug"] + "/" for S in build_series.SERIES)):
             exp = (1, "true")
         if pg.is404:
             exp = None
@@ -888,14 +893,15 @@ def main():
                 s["fails"].append(f"{pg.file}: the footer text is the same as the English page's")
 
     # -- generated pages
-    s = rep.check("From words to data: its pages, and its blocks in other pages, are what site-tools/build_series.py makes")
+    s = rep.check("The series: their pages, and their blocks in other pages, are what site-tools/build_series.py makes")
     for rel, text in build_series.pages() + build_series.blocks():
         f = WEB / rel
         if not f.exists() or f.read_text() != text:
             s["fails"].append(f"site/{rel} is not what build_series.py makes: run python site-tools/build_series.py")
-    if build_series.readme() != (build_series.SER / "README.md").read_text():
-        s["fails"].append("films/from-words-to-data/README.md: its table of films is not what build_series.py makes")
-    s["notes"].append(f"{len(build_series.films()[1])} films")
+    for S in build_series.SERIES:
+        if build_series.readme(S) != (S["root"] / "README.md").read_text():
+            s["fails"].append(f"films/{S['dir']}/README.md: its table of films is not what build_series.py makes")
+        s["notes"].append(f"{S['name']['en']}: {len(build_series.films(S)[1])} films")
 
     s = rep.check("Journey pages: the same as site-tools/build_pages.py makes from their Markdown")
     try:

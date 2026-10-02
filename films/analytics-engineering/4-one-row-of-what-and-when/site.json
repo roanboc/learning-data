@@ -1,0 +1,31 @@
+{
+  "kicker": "Grain and time",
+  "kicker_es": "Grano y tiempo",
+  "title_es": "Una fila de qué, y cuándo",
+  "h1": "One row of what, and when: twelve and nine, both right",
+  "h1_es": "Una fila de qué, y cuándo: doce y nueve, las dos correctas",
+  "lead": "One question gives twelve on census day and nine today, and both are right. Before any SQL, say in one sentence what one row is and which day it describes, test it as a key, and join every versioned thing at that day.",
+  "lead_es": "Una pregunta da doce el día del censo y nueve hoy, y las dos son correctas. Antes de escribir SQL, di en una oración qué es una fila y qué día describe, pruébala como clave, y une todo lo que tiene versiones a ese día.",
+  "description": "A film for analytics engineers about grain and time: the grain in one sentence, tested as a key; the fan-out a versioned join causes; every version kept, dated by when it was true; two consumers reading one core as it was and as it is; three sources stitched into one timeline; and a change recorded late.",
+  "description_es": "Una película para analytics engineers sobre el grano y el tiempo: el grano en una oración, probado como clave; las filas que multiplica un join con versiones; cada versión guardada, fechada por cuándo fue cierta; dos consumidores que leen un núcleo como era y como es; tres fuentes unidas en una línea de tiempo; y un cambio registrado tarde.",
+  "card": "Twelve on census day, nine today: both right. Say what one row is and which day it describes, before any SQL, and test both.",
+  "card_es": "Doce el día del censo, nueve hoy: las dos correctas. Di qué es una fila y qué día describe, antes de escribir SQL, y prueba las dos cosas.",
+  "chapters_es": {
+    "card": "Una tarjeta, un día",
+    "grain": "Una oración",
+    "fan": "Filas multiplicadas",
+    "versions": "Cada versión guardada",
+    "was": "Como era, como es",
+    "stitch": "Una línea de tiempo",
+    "late": "Noticias tardías",
+    "next": "Una promesa por escribir"
+  },
+  "next_h": "You've seen one question give two right answers. Now declare the grain and the day yourself.",
+  "next_h_es": "Viste una pregunta dar dos respuestas correctas. Ahora declara tú el grano y el día.",
+  "labs_h1": "Say what one row is, and when",
+  "labs_h1_es": "Di qué es una fila, y cuándo",
+  "labs_lead": "Four labs, one idea each, in the order of the film. Declare the grain of three outputs, double the rows with a join and fix it, step through Aisha's year, and choose which date dates each version.",
+  "labs_lead_es": "Cuatro labs, una idea cada uno, en el orden de la película. Declara el grano de tres salidas, duplica las filas con un join y arréglalo, recorre el año de Aisha, y elige qué fecha lleva cada versión.",
+  "quiz_lead": "Eight situations an analytics engineer really faces: credit that doubled, a census number for the app, a report that changed after a rename, a withdrawal recorded after publishing, monthly snapshots, a version current before it's true, four fixes for a fan-out, and two versions that overlap. Decide what you'd do; each answer explains why.",
+  "quiz_lead_es": "Ocho situaciones que un analytics engineer enfrenta de verdad: créditos que se duplicaron, un número del censo para la app, un informe que cambió con un cambio de nombre, un retiro registrado después de publicar, cortes mensuales, una versión vigente antes de ser cierta, cuatro arreglos para filas multiplicadas, y dos versiones que se solapan. Decide qué harías; cada respuesta explica por qué."
+}

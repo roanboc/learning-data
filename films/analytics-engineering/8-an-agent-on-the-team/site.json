@@ -1,0 +1,31 @@
+{
+  "kicker": "Agents and review",
+  "kicker_es": "Agentes y revisión",
+  "title_es": "Un agente en el equipo",
+  "h1": "An agent on the team: it drafts and checks, with evidence; people approve",
+  "h1_es": "Un agente en el equipo: redacta y verifica, con evidencia; las personas aprueban",
+  "lead": "An AI agent can read a dbt project, run it and draft a change in minutes. To be trusted, it needs what a new colleague needs, written down: rules, skills and who approves each step. Least access, a query behind every claim, a test it never weakens, and a reconciliation, a diff and CI before people sign off.",
+  "lead_es": "Un agente de IA puede leer un proyecto de dbt, ejecutarlo y preparar un cambio en minutos. Para confiar en él, necesita lo mismo que un colega nuevo, por escrito: reglas, skills y quién aprueba cada paso. Acceso mínimo, una consulta detrás de cada afirmación, una prueba que nunca debilita, y una conciliación, una comparación y la CI antes de que las personas aprueben.",
+  "description": "A film for analytics engineers about working with an AI agent on a dbt project: AGENTS.md, skill files and the process, a service principal with least access, evidence for every claim, a test it must never weaken, reconciling with the census report and diffing against main, CI, and the people who approve.",
+  "description_es": "Una película para analytics engineers sobre trabajar con un agente de IA en un proyecto de dbt: AGENTS.md, archivos de skills y el proceso, una entidad de servicio con acceso mínimo, evidencia para cada afirmación, una prueba que nunca debe debilitar, conciliar con el informe del censo y comparar contra main, la CI, y las personas que aprueban.",
+  "card": "An AI agent drafts in minutes. It follows rules written in the project, shows the query behind every claim, never weakens a test, and people approve.",
+  "card_es": "Un agente de IA redacta en minutos. Sigue reglas escritas en el proyecto, muestra la consulta detrás de cada afirmación, nunca debilita una prueba, y las personas aprueban.",
+  "chapters_es": {
+    "almanac": "Calculado dos veces",
+    "skills": "Por escrito",
+    "least": "Acceso mínimo",
+    "evidence": "Evidencia",
+    "shortcut": "El atajo",
+    "validate": "Conciliar y comparar",
+    "ship": "Revisar y publicar",
+    "next": "Las mismas palabras, en cuatro lugares"
+  },
+  "next_h": "You've seen the agent's work checked and reviewed. Now review it yourself.",
+  "next_h_es": "Viste el trabajo del agente verificado y revisado. Ahora revísalo tú.",
+  "labs_h1": "Review the agent's work",
+  "labs_h1_es": "Revisa el trabajo del agente",
+  "labs_lead": "Four labs, one idea each. Review the agent's pull request, write a rule it can follow, tell a claim from a guess, and give it the access it needs and no more.",
+  "labs_lead_es": "Cuatro labs, una idea cada uno. Revisa la pull request del agente, escribe una regla que pueda seguir, distingue una afirmación de una suposición, y dale el acceso que necesita, y nada más.",
+  "quiz_lead": "Eight situations an analytics engineer really faces with an agent on the team: a failing reconciliation, emails pasted as evidence, a diff nobody expected, a request for production, a rule with two homes, a green CI, an incremental table, and a claim about a learner. Decide what you'd do; each answer explains why.",
+  "quiz_lead_es": "Ocho situaciones que un analytics engineer enfrenta de verdad con un agente en el equipo: una conciliación que falla, correos pegados como evidencia, una comparación que nadie esperaba, un pedido de acceso a producción, una regla con dos hogares, una CI en verde, una tabla incremental, y una afirmación sobre una estudiante. Decide qué harías; cada respuesta explica por qué."
+}

@@ -1,0 +1,112 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:08.817
+At the Savoy hotel in London, in the 1890s, the chef Auguste Escoffier ran his kitchen as a brigade.
+
+00:00:10.017 --> 00:00:14.353
+Each station had one job: sauces, roasts, fish, vegetables.
+
+00:00:15.653 --> 00:00:19.480
+Each prepared its part ahead, and every plate was checked at the pass.
+
+00:00:20.680 --> 00:00:26.338
+Jun's credential project is a kitchen too: four stations, one job each, and a pass.
+
+00:00:32.638 --> 00:00:36.627
+The tests are written. Now the code has to pass them, layer by layer.
+
+00:00:38.327 --> 00:00:48.628
+The agent writes a first draft of each model, runs its tests, and watches them fail. Then it writes the least code that turns them green. Jun reviews every line.
+
+00:00:50.428 --> 00:00:54.940
+The first station is staging. One model per source table: seven of them.
+
+00:00:56.640 --> 00:01:05.026
+Staging renames and casts. It trims, and writes each key in one case. It adds the readable key, with its key set, and its hash.
+
+00:01:06.926 --> 00:01:12.062
+No joins, and no rules. A short-course customer is still called a customer here.
+
+00:01:15.662 --> 00:01:20.124
+Next, intermediate. Eight models, and each one is a step, not a product.
+
+00:01:21.624 --> 00:01:29.187
+Match a learner's keys. Stitch three timelines into one. Gather the credentials from three systems. Apply the credit rule.
+
+00:01:30.687 --> 00:01:34.941
+Here the sources' words become the model's: a customer becomes a learner.
+
+00:01:36.241 --> 00:01:40.806
+Read the names of one model's steps, top to bottom, and you have its recipe.
+
+00:01:44.106 --> 00:01:50.289
+Then the core: what the blueprint names. A learner, an award, a credential, and credit towards an award.
+
+00:01:51.589 --> 00:01:55.452
+Each at its declared grain, public, under an enforced contract.
+
+00:01:56.752 --> 00:01:59.144
+Jun builds it, and the tests turn green.
+
+00:02:00.644 --> 00:02:07.361
+The award skips intermediate. It has one source, and nothing to resolve, so staging feeds the core directly.
+
+00:02:08.861 --> 00:02:11.447
+Noor reviews the core. It's her model, built.
+
+00:02:14.647 --> 00:02:19.224
+Last, the marts: each built for one consumer, and shaped for how it's read.
+
+00:02:20.424 --> 00:02:27.132
+Planning's is long and narrow: seventy-three rows, one per learner per award, ready to count by faculty.
+
+00:02:28.632 --> 00:02:34.228
+The wallet's is wide: everything about a learner in one row, so the app reads it in one lookup.
+
+00:02:35.728 --> 00:02:38.685
+Each mart builds on the core, never on another mart.
+
+00:02:41.985 --> 00:02:48.966
+Open Planning's mart. It's written as named steps, each called a CTE, and it reads like a recipe too.
+
+00:02:49.666 --> 00:02:54.405
+First, import CTEs: one for each model it reads, and nothing else.
+
+00:02:55.905 --> 00:03:03.014
+Then logical CTEs, one step each, named for what they hold: learners at census, not CTE two.
+
+00:03:04.514 --> 00:03:08.781
+Last, a final select that lists every column, in the contract's order.
+
+00:03:10.081 --> 00:03:14.339
+A reviewer reads it top to bottom, and can see where every column comes from.
+
+00:03:17.639 --> 00:03:20.556
+How each model is stored follows how it's used.
+
+00:03:21.856 --> 00:03:27.685
+Staging and the steps are views: nothing stored twice, and the agent can query any one of them.
+
+00:03:28.985 --> 00:03:32.796
+The core and the marts are tables, because people read them all day.
+
+00:03:33.996 --> 00:03:44.134
+The credential table is incremental. Each run merges only what changed, matched on the credential's key. Run it twice, and the second run merges nothing.
+
+00:03:45.834 --> 00:03:52.201
+On Databricks, the same file clusters it by learner. And when the logic changes, rebuild it in full.
+
+00:03:55.501 --> 00:04:02.012
+Planning's rule is written once: near an award means more than nothing left, and no more than fifteen points.
+
+00:04:03.312 --> 00:04:12.451
+The count by faculty is one macro. And the metric the dashboards ask for, defined in dbt's semantic layer, counts the same column.
+
+00:04:13.751 --> 00:04:20.660
+Then the pass. Planning's mart against the census report, faculty by faculty: twelve, and twelve. Green.
+
+00:04:22.760 --> 00:04:26.207
+Each layer has one job. Each CTE, one step.
+
+00:04:27.707 --> 00:04:37.513
+It's built by one team, in one project. But the registrar owns learners, the learning team owns microcredentials, and Planning wants a project of its own.

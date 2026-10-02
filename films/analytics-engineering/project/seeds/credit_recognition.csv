@@ -1,0 +1,25 @@
+key_set,credential_code,award_code,approved_by,approved_on
+LMS,MC-SQL,GCDA,Faculty of Engineering and IT,2025-06-30
+LMS,MC-PY,GCDA,Faculty of Engineering and IT,2025-06-30
+LMS,MC-VIZ,GCDA,Faculty of Engineering and IT,2025-06-30
+LMS,MC-STATS,GCDA,Faculty of Engineering and IT,2025-06-30
+LMS,MC-ML,GCDA,Faculty of Engineering and IT,2025-06-30
+SC,SC-DVE,GCDA,Faculty of Engineering and IT,2025-06-30
+LMS,MC-SQL,MDA,Faculty of Engineering and IT,2025-06-30
+LMS,MC-PY,MDA,Faculty of Engineering and IT,2025-06-30
+LMS,MC-VIZ,MDA,Faculty of Engineering and IT,2025-06-30
+LMS,MC-STATS,MDA,Faculty of Engineering and IT,2025-06-30
+LMS,MC-ML,MDA,Faculty of Engineering and IT,2025-06-30
+LMS,MC-PY,GCCS,Faculty of Engineering and IT,2025-06-30
+LMS,MC-SEC,GCCS,Faculty of Engineering and IT,2025-06-30
+SC,SC-CLOUD,GCCS,Faculty of Engineering and IT,2025-06-30
+LMS,MC-LEAD,GCBA,Faculty of Business,2025-06-30
+LMS,MC-FIN,GCBA,Faculty of Business,2025-06-30
+SC,SC-AGILE,GCBA,Faculty of Business,2025-06-30
+LMS,MC-LEAD,MBA,Faculty of Business,2025-06-30
+LMS,MC-FIN,MBA,Faculty of Business,2025-06-30
+LMS,MC-HDATA,GCHI,Faculty of Health,2025-06-30
+LMS,MC-VIZ,GCHI,Faculty of Health,2025-06-30
+SC,SC-HLIT,GCHI,Faculty of Health,2025-06-30
+LMS,MC-HDATA,MPH,Faculty of Health,2025-06-30
+LMS,MC-DL,GCED,Faculty of Arts and Education,2025-06-30

@@ -1,0 +1,31 @@
+{
+  "kicker": "Layers and CTEs",
+  "kicker_es": "Capas y CTE",
+  "title_es": "Construido en capas",
+  "h1": "Built in layers: one job per layer, one step per CTE",
+  "h1_es": "Construido en capas: una tarea por capa, un paso por CTE",
+  "lead": "The tests are written, and they wait for code. Like the stations of Escoffier's kitchen, each layer of Jun's project does one job: staging tidies a table, intermediate holds the steps, the core holds what the blueprint names, and each mart serves one consumer. Inside a model, each CTE is one step.",
+  "lead_es": "Las pruebas están escritas y esperan el código. Como las estaciones de la cocina de Escoffier, cada capa del proyecto de Jun hace una sola tarea: staging ordena una tabla, intermediate guarda los pasos, el core guarda lo que nombra el plano, y cada mart sirve a un consumidor. Dentro de un modelo, cada CTE es un paso.",
+  "description": "A film for analytics engineers about building a dbt project in layers: staging, intermediate, core and marts, each with one job; CTEs named for what they hold; views, tables and an incremental table chosen by how each model is used; and a rule and a count written once, reconciled with the census report.",
+  "description_es": "Una película para analytics engineers sobre construir un proyecto de dbt en capas: staging, intermediate, core y marts, cada una con una tarea; CTE con el nombre de lo que guardan; vistas, tablas y una tabla incremental elegidas según cómo se usa cada modelo; y una regla y un conteo escritos una sola vez, conciliados con el informe de censo.",
+  "card": "Four layers turn the tests green. Each layer has one job; each CTE, one step; and the rule is written once.",
+  "card_es": "Cuatro capas ponen las pruebas en verde. Cada capa tiene una tarea; cada CTE, un paso; y la regla se escribe una sola vez.",
+  "chapters_es": {
+    "brigade": "Una estación, una tarea",
+    "staging": "Staging",
+    "intermediate": "Intermediate",
+    "core": "Core",
+    "marts": "Marts",
+    "ctes": "Una CTE, un paso",
+    "physical": "Decisiones físicas",
+    "once": "Métricas una sola vez"
+  },
+  "next_h": "You've seen each layer do its job. Now put each piece where it belongs.",
+  "next_h_es": "Viste a cada capa hacer su tarea. Ahora pon cada pieza donde va.",
+  "labs_h1": "Put each piece in its layer",
+  "labs_h1_es": "Pon cada pieza en su capa",
+  "labs_lead": "Four labs, one idea each, in the order of the film. Sort ten pieces of logic into the layers, refactor Planning's mart into named CTEs, choose how each model is stored, and see what happens when a rule is written twice.",
+  "labs_lead_es": "Cuatro labs, una idea cada uno, en el orden de la película. Ubica diez piezas de lógica en las capas, reescribe el mart de Planificación en CTE con nombre, elige cómo se guarda cada modelo, y mira qué pasa cuando una regla se escribe dos veces.",
+  "quiz_lead": "Eight situations an analytics engineer really faces: a join in staging, one mart built on another, CTEs called cte2, an incremental table after a rule change, a mart that recomputes a rule, ephemeral steps, a step the award may not need, and a contract that stops the build. Decide what you'd do; each answer explains why.",
+  "quiz_lead_es": "Ocho situaciones que un analytics engineer enfrenta de verdad: un join en staging, un mart construido sobre otro, CTE llamadas cte2, una tabla incremental después de un cambio de regla, un mart que vuelve a calcular una regla, pasos ephemeral, un paso que el título quizá no necesita, y un contrato que detiene el build. Decide qué harías; cada respuesta explica por qué."
+}

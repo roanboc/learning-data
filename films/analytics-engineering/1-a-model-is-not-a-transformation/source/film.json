@@ -1,0 +1,19 @@
+{
+  "key": "a-model-is-not-a-transformation",
+  "title": "A model is not a transformation",
+  "sub": "In the weeds of data crafting, a technical series for analytics engineers: the data model is what you declare; a dbt model is how you make it.",
+  "howto": "White lines on blue are the model, the blueprint. Code on dark glass is the building work. Teal is an AI agent's work; gold is a person's approval.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "name",
+    "breath",
+    1.6
+  ],
+  "say": [
+    ["\\bYAML\\b", "yammel"],
+    ["\\bJun\\b", "Joon"]
+  ]
+}

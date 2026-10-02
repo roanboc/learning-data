@@ -1,0 +1,152 @@
+models:
+
+  - name: mart_wallet__learners
+    description: >
+      Who a learner is, what they hold, and how far they are towards the award they're enrolled
+      in, as it is now: each entity's version valid today. One wide row, so the app reads a
+      learner in one lookup.
+    config:
+      meta:
+        grain: One row per learner, as it is now
+        owner: Wallet app team
+        domain: wallet
+        consumer: Learner wallet app
+    constraints:
+      - type: primary_key
+        name: pk_mart_wallet__learners
+        columns: [learner_key]
+        warn_unenforced: false
+    columns:
+      - name: learner_key
+        description: '{{ doc("learner_key") }}'
+        data_type: string
+        constraints: [{type: not_null}]
+        data_tests: [unique]
+        config:
+          meta: {glossary_term: learner, personal_data: pseudonymous}
+      - name: full_name
+        description: The learner's name, now.
+        data_type: string
+        config:
+          meta: {personal_data: direct}
+      - name: email
+        description: The learner's email, now.
+        data_type: string
+        config:
+          meta: {personal_data: direct}
+      - name: status
+        description: '{{ doc("learner_status") }}'
+        data_type: string
+      - name: enrolled_award_name
+        description: The award the learner is enrolled in now, by its current name.
+        data_type: string
+      - name: enrolled_award_type
+        description: The kind of that award.
+        data_type: string
+      - name: credit_points_required
+        description: '{{ doc("credit_points_required") }}'
+        data_type: int
+      - name: credit_points_earned
+        description: '{{ doc("credit_points_earned") }} Now, towards the award the learner is enrolled in.'
+        data_type: int
+        constraints: [{type: not_null}]
+      - name: credit_points_remaining
+        description: '{{ doc("credit_points_remaining") }}'
+        data_type: int
+      - name: credentials_held
+        description: Valid credentials the learner holds, of any kind.
+        data_type: int
+        constraints: [{type: not_null}]
+      - name: awards_held
+        description: Valid awards conferred on the learner.
+        data_type: int
+      - name: microcredentials_held
+        description: Valid microcredentials the learner holds.
+        data_type: int
+      - name: badges_held
+        description: Valid badges the learner holds.
+        data_type: int
+      - name: credentials_revoked
+        description: Credentials issued to the learner and later revoked.
+        data_type: int
+
+  - name: mart_wallet__credentials
+    description: >
+      Each credential with its holder, as it is now: what the wallet shows, and what a verifier
+      checks. A revoked credential stays, marked revoked. Reads core_credential version 2.
+    config:
+      meta:
+        grain: One row per credential, as it is now
+        owner: Wallet app team
+        domain: wallet
+        consumer: Learner wallet app
+    constraints:
+      - type: primary_key
+        name: pk_mart_wallet__credentials
+        columns: [credential_key]
+        warn_unenforced: false
+    columns:
+      - name: credential_key
+        description: '{{ doc("credential_key") }}'
+        data_type: string
+        constraints: [{type: not_null}]
+        data_tests: [unique]
+      - name: learner_key
+        description: '{{ doc("learner_key") }}'
+        data_type: string
+        constraints:
+          - type: not_null
+          - type: foreign_key
+            name: fk_mart_wallet__credentials_learner
+            warn_unenforced: false
+            to: ref('mart_wallet__learners')
+            to_columns: [learner_key]
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('mart_wallet__learners')
+                field: learner_key
+        config:
+          meta: {glossary_term: learner, personal_data: pseudonymous}
+      - name: credential_kind
+        description: '{{ doc("credential_kind") }}'
+        data_type: string
+      - name: credential_name
+        description: '{{ doc("credential_name") }}'
+        data_type: string
+      - name: issued_by
+        description: The system that issued it, from seeds/key_sets.csv.
+        data_type: string
+      - name: issued_on
+        description: '{{ doc("issued_on") }}'
+        data_type: date
+      - name: status
+        description: '{{ doc("credential_status") }}'
+        data_type: string
+        constraints: [{type: not_null}]
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [valid, expired, revoked]
+      - name: revoked_on
+        description: '{{ doc("revoked_on") }}'
+        data_type: date
+      - name: credit_points
+        description: '{{ doc("credential_credit_points") }}'
+        data_type: int
+
+exposures:
+
+  - name: wallet_app
+    label: Learner wallet app
+    type: application
+    maturity: medium
+    description: >
+      The app where learners see, and share, the credentials they hold now and their progress
+      towards their award.
+    owner:
+      name: Wallet app team
+      email: wallet@uni.example
+    depends_on:
+      - ref('mart_wallet__learners')
+      - ref('mart_wallet__credentials')

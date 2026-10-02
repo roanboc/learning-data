@@ -1,0 +1,31 @@
+{
+  "kicker": "Identity and keys",
+  "kicker_es": "Identidad y claves",
+  "title_es": "Qué lo hace el mismo",
+  "h1": "What makes it the same one: identity is a decision, written down",
+  "h1_es": "Qué lo hace el mismo: la identidad es una decisión, por escrito",
+  "lead": "Aisha arrives under three keys, and another Aisha looks just like her. Profile the sources with a query behind every claim, qualify each key, match by rules most trusted first, let a person decide what rules can't, and hash every key the same way everywhere.",
+  "lead_es": "Aisha llega con tres claves, y otra Aisha se le parece mucho. Perfila las fuentes con una consulta detrás de cada afirmación, califica cada clave, une por reglas de la más confiable a la menos, deja que una persona decida lo que las reglas no pueden, y aplica el mismo hash a cada clave en todas partes.",
+  "description": "A film for analytics engineers about identity: profiling sources with evidence, key sets that qualify every key, identity rules most trusted first, a person's decisions kept as data and guarded by a test, one hash macro for every model and engine, and status codes mapped through reference data the business owns.",
+  "description_es": "Una película para analytics engineers sobre la identidad: perfilar las fuentes con evidencia, conjuntos de claves que califican cada clave, reglas de identidad de la más confiable a la menos, las decisiones de una persona guardadas como datos y protegidas por una prueba, una sola macro de hash para todos los modelos y motores, y códigos de estado traducidos con datos de referencia que son del negocio.",
+  "card": "One learner, three keys, and a look-alike. Rules match most of them; a person decides the rest, and the decision becomes data and a test.",
+  "card_es": "Una estudiante, tres claves, y alguien que se le parece. Las reglas unen la mayoría; una persona decide el resto, y la decisión se vuelve datos y una prueba.",
+  "chapters_es": {
+    "west": "Parecidos",
+    "three": "Tres claves",
+    "profile": "Primero, perfilar",
+    "sets": "Conjuntos de claves",
+    "rules": "Reglas, de la más confiable a la menos",
+    "apart": "Mantenerlos separados",
+    "hash": "El mismo hash en todas partes",
+    "codes": "Los códigos, también"
+  },
+  "next_h": "You've seen one learner under three keys, and a look-alike. Now match them yourself.",
+  "next_h_es": "Viste a una estudiante con tres claves, y a alguien que se le parece. Ahora únelas tú.",
+  "labs_h1": "Decide what makes it the same one",
+  "labs_h1_es": "Decide qué lo hace el mismo",
+  "labs_lead": "Four labs, one idea each, in the order of the film. Back each claim with its query, put the identity rules in order, decide which records are the same learner, and try to break the hash.",
+  "labs_lead_es": "Cuatro labs, una idea cada uno, en el orden de la película. Respalda cada afirmación con su consulta, ordena las reglas de identidad, decide qué registros son la misma estudiante, e intenta romper el hash.",
+  "quiz_lead": "Eight situations an analytics engineer really faces: two accounts with one student ID, a shared email, an agent's claim with no query, hashes that moved overnight, a pull request that drops the readable key, a credential nobody earned, a reopened account, and a new status code. Decide what you'd do; each answer explains why.",
+  "quiz_lead_es": "Ocho situaciones que un analytics engineer enfrenta de verdad: dos cuentas con un mismo ID de estudiante, un correo compartido, la afirmación de un agente sin consulta, hashes que cambiaron de un día para otro, un pull request que quita la clave legible, una credencial que nadie ganó, una cuenta reabierta, y un código de estado nuevo. Decide qué harías; cada respuesta explica por qué."
+}

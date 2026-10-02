@@ -1,0 +1,147 @@
+1
+00:00:01,400 --> 00:00:08,817
+En el hotel Savoy de Londres, en la década de 1890, el chef Auguste Escoffier organizó su cocina como una brigada.
+
+2
+00:00:10,017 --> 00:00:14,353
+Cada estación tenía una sola tarea: salsas, asados, pescados, verduras.
+
+3
+00:00:15,653 --> 00:00:19,480
+Cada una preparaba su parte antes, y cada plato se revisaba en el pase.
+
+4
+00:00:20,680 --> 00:00:26,338
+El proyecto de credenciales de Jun es otra cocina: cuatro estaciones, una tarea cada una, y un pase.
+
+5
+00:00:32,638 --> 00:00:36,627
+Las pruebas ya están escritas. Ahora el código tiene que pasarlas, capa por capa.
+
+6
+00:00:38,327 --> 00:00:48,628
+El agente escribe un primer borrador de cada modelo, corre sus pruebas y las ve fallar. Luego escribe el mínimo código que las pone en verde. Jun revisa cada línea.
+
+7
+00:00:50,428 --> 00:00:54,940
+La primera estación es staging. Un modelo por tabla de origen: siete en total.
+
+8
+00:00:56,640 --> 00:01:05,026
+Staging renombra y convierte tipos. Recorta y escribe cada clave en un solo formato. Agrega la clave legible, con su conjunto de claves, y su hash.
+
+9
+00:01:06,926 --> 00:01:12,062
+Sin joins y sin reglas. Un cliente de cursos cortos aquí todavía se llama cliente.
+
+10
+00:01:15,662 --> 00:01:20,124
+Luego, intermediate. Ocho modelos, y cada uno es un paso, no un producto.
+
+11
+00:01:21,624 --> 00:01:29,187
+Unir las claves de un estudiante. Coser tres historiales en uno. Reunir las credenciales de tres sistemas. Aplicar la regla de créditos.
+
+12
+00:01:30,687 --> 00:01:34,941
+Aquí el vocabulario del origen pasa a ser el del modelo: un cliente se vuelve estudiante.
+
+13
+00:01:36,241 --> 00:01:40,806
+Lee los nombres de los pasos de un modelo, de arriba abajo, y tienes su receta.
+
+14
+00:01:44,106 --> 00:01:50,289
+Después, el core: lo que nombra el plano. Un estudiante, un título, una credencial y el crédito hacia un título.
+
+15
+00:01:51,589 --> 00:01:55,452
+Cada uno con su granularidad declarada, público, bajo un contrato exigido.
+
+16
+00:01:56,752 --> 00:01:59,144
+Jun lo construye y las pruebas pasan a verde.
+
+17
+00:02:00,644 --> 00:02:07,361
+El título se salta intermediate. Tiene un solo origen y nada que resolver, así que staging alimenta el core directamente.
+
+18
+00:02:08,861 --> 00:02:11,447
+Noor revisa el core. Es su modelo, construido.
+
+19
+00:02:14,647 --> 00:02:19,224
+Por último, los marts: cada uno hecho para un consumidor, y con la forma en que se lee.
+
+20
+00:02:20,424 --> 00:02:27,132
+El de Planificación es largo y angosto: setenta y tres filas, una por estudiante y título, listas para contar por facultad.
+
+21
+00:02:28,632 --> 00:02:34,228
+El de la billetera es ancho: todo sobre un estudiante en una fila, así la app lo lee en una sola consulta.
+
+22
+00:02:35,728 --> 00:02:38,685
+Cada mart se construye sobre el core, nunca sobre otro mart.
+
+23
+00:02:41,985 --> 00:02:48,966
+Abre el mart de Planificación. Está escrito como pasos con nombre, cada uno llamado CTE, y también se lee como una receta.
+
+24
+00:02:49,666 --> 00:02:54,405
+Primero, las CTE de importación: una por cada modelo que lee, y nada más.
+
+25
+00:02:55,905 --> 00:03:03,014
+Luego, las CTE lógicas, un paso cada una, con el nombre de lo que contienen: estudiantes al censo, no CTE dos.
+
+26
+00:03:04,514 --> 00:03:08,781
+Por último, un select final que lista cada columna, en el orden del contrato.
+
+27
+00:03:10,081 --> 00:03:14,339
+Quien revisa lo lee de arriba abajo, y puede ver de dónde viene cada columna.
+
+28
+00:03:17,639 --> 00:03:20,556
+Cómo se guarda cada modelo depende de cómo se usa.
+
+29
+00:03:21,856 --> 00:03:27,685
+Staging y los pasos son vistas: nada se guarda dos veces, y el agente puede consultar cualquiera de ellas.
+
+30
+00:03:28,985 --> 00:03:32,796
+El core y los marts son tablas, porque la gente las lee todo el día.
+
+31
+00:03:33,996 --> 00:03:44,134
+La tabla de credenciales es incremental. Cada corrida fusiona solo lo que cambió, según la clave de la credencial. Córrela dos veces, y la segunda no fusiona nada.
+
+32
+00:03:45,834 --> 00:03:52,201
+En Databricks, el mismo archivo la agrupa por estudiante. Y cuando la lógica cambia, reconstrúyela completa.
+
+33
+00:03:55,501 --> 00:04:02,012
+La regla de Planificación se escribe una vez: cerca de un título significa que falta algo, y no más de quince créditos.
+
+34
+00:04:03,312 --> 00:04:12,451
+El conteo por facultad es una macro. Y la métrica que piden los tableros, definida en la capa semántica de dbt, cuenta la misma columna.
+
+35
+00:04:13,751 --> 00:04:20,660
+Después, el pase. El mart de Planificación contra el informe del censo, facultad por facultad: doce, y doce. Verde.
+
+36
+00:04:22,760 --> 00:04:26,207
+Cada capa tiene una tarea. Cada CTE, un paso.
+
+37
+00:04:27,707 --> 00:04:37,513
+Lo construye un equipo, en un proyecto. Pero registro académico es dueño de los estudiantes, el equipo de aprendizaje de las microcredenciales, y Planificación quiere un proyecto propio.

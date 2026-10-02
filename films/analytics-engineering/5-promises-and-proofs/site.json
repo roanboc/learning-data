@@ -1,0 +1,31 @@
+{
+  "kicker": "Contracts and tests",
+  "kicker_es": "Contratos y pruebas",
+  "title_es": "Promesas y pruebas",
+  "h1": "Promises and proofs: promise it in a contract, prove it with a test, first",
+  "h1_es": "Promesas y pruebas: prométela en un contrato, demuéstrala con una prueba, primero",
+  "lead": "Since 1300, English silver has been tested before it's marked. A core model makes the same kind of promise: every gap between what the business expects and what the sources hold gets a decision, the contracts say what's promised, and the tests prove it, written before the code they check.",
+  "lead_es": "Desde 1300, la plata inglesa se prueba antes de marcarla. Un modelo del núcleo hace el mismo tipo de promesa: cada brecha entre lo que el negocio espera y lo que las fuentes guardan recibe una decisión, los contratos dicen lo que se promete, y las pruebas lo demuestran, escritas antes del código que comprueban.",
+  "description": "A film for analytics engineers about steps four and five: a gap register with a decision for every gap, an enforced public contract on the core and protected contracts for each consumer's mart, data tests and unit tests written before the code, and a level for each test, warn or stop, set by the data's owner.",
+  "description_es": "Una película para analytics engineers sobre los pasos cuatro y cinco: un registro de brechas con una decisión para cada una, un contrato público y aplicado en el núcleo y contratos protegidos para el mart de cada consumidor, pruebas de datos y pruebas unitarias escritas antes del código, y un nivel para cada prueba, avisar o detener, fijado por el responsable de los datos.",
+  "card": "Every gap gets a decision. Promise it in a contract; prove it with a test, written before the code it checks.",
+  "card_es": "Cada brecha recibe una decisión. Prométela en un contrato; demuéstrala con una prueba, escrita antes del código que comprueba.",
+  "chapters_es": {
+    "assay": "Probada antes de marcarla",
+    "gaps": "El registro de brechas",
+    "enterprise": "El contrato de la empresa",
+    "consumer": "Dos contratos de consumidor",
+    "tests": "Primero las pruebas",
+    "unit": "La lógica, probada aparte",
+    "levels": "Avisar o detener",
+    "next": "Esperando, a propósito"
+  },
+  "next_h": "You've seen the promises and the proofs. Now write some yourself.",
+  "next_h_es": "Viste las promesas y las pruebas. Ahora escribe algunas tú.",
+  "labs_h1": "Promise it, then prove it",
+  "labs_h1_es": "Prométela, y luego demuéstrala",
+  "labs_lead": "Four labs, one idea each. Write core_credential's contract, pick the test that stops each broken row, decide each gap in the register, and step a test from warn to stop.",
+  "labs_lead_es": "Cuatro labs, una idea cada uno. Escribe el contrato de core_credential, elige la prueba que detiene cada fila rota, decide cada brecha del registro, y lleva una prueba de avisar a detener.",
+  "quiz_lead": "Eight situations an analytics engineer really faces: a revoked badge shown as valid, a column nobody uses, a failure at 2 a.m., a primary key that isn't enforced, tests before the SQL, an expiry no source records, a stale source, and a number one off the census. Decide what you'd do; each answer explains why.",
+  "quiz_lead_es": "Ocho situaciones que un analytics engineer enfrenta de verdad: una insignia revocada que aparece como válida, una columna que nadie usa, un fallo a las 2 de la mañana, una clave primaria que no se aplica, pruebas antes del SQL, un vencimiento que ninguna fuente registra, una fuente sin cargar, y un número que no cuadra con el censo. Decide qué harías; cada respuesta explica por qué."
+}

@@ -1,0 +1,109 @@
+models:
+
+  - name: stg_student_system__learners
+    description: One row per version of a student record, as the student system recorded it.
+    config:
+      meta: {owner: Registrar's office, domain: registrar}
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [student_bk, recorded_from]
+    columns:
+      - name: student_key
+        description: The hash of student_bk.
+      - name: student_bk
+        description: '{{ doc("qualified_key") }}'
+        data_tests: [not_null]
+        config:
+          meta: {personal_data: direct}
+      - name: award_bk
+        description: '{{ doc("award_bk") }}'
+      - name: email
+        description: The email the student system holds, trimmed and lower case.
+        config:
+          meta: {personal_data: direct}
+      - name: given_name
+        config:
+          meta: {personal_data: direct}
+      - name: family_name
+        config:
+          meta: {personal_data: direct}
+      - name: status_code
+        description: The student system's status code. Mapped to the canonical set in seeds/status_map.csv.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [ENR, LOA, WD, CMP]
+      - name: effective_date
+        description: '{{ doc("effective_date") }}'
+        data_tests: [not_null]
+      - name: recorded_from
+        description: '{{ doc("recorded_from") }}'
+      - name: recorded_to
+        description: '{{ doc("recorded_to") }}'
+      - name: is_current_version
+        description: '{{ doc("is_current_version") }}'
+      - name: loaded_at
+        description: '{{ doc("loaded_at") }}'
+
+  - name: stg_student_system__awards
+    description: One row per version of an award, as the student system recorded it.
+    config:
+      meta: {owner: Registrar's office, domain: registrar}
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [award_bk, recorded_from]
+    columns:
+      - name: award_key
+        description: '{{ doc("award_key") }}'
+      - name: award_bk
+        description: '{{ doc("award_bk") }}'
+        data_tests: [not_null]
+      - name: award_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [graduate certificate, master]
+      - name: credit_points_required
+        description: '{{ doc("credit_points_required") }}'
+        data_tests: [not_null]
+
+  - name: stg_student_system__results
+    description: One row per version of a unit result, as the student system recorded it.
+    config:
+      meta: {owner: Registrar's office, domain: registrar}
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [result_bk, recorded_from]
+    columns:
+      - name: result_key
+        description: The hash of result_bk.
+      - name: result_bk
+        description: The result's key, qualified by its key set, like SIS|R-1001.
+        data_tests: [not_null]
+      - name: student_bk
+        description: The student the result belongs to.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_student_system__learners')
+                field: student_bk
+      - name: award_bk
+        description: The award the unit was taken under. The unit counts towards that award only.
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_student_system__awards')
+                field: award_bk
+      - name: grade
+        description: HD, D, C and P pass; F fails; W is a withdrawal from the unit.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [HD, D, C, P, F, W]
+      - name: result_date
+        description: '{{ doc("result_date") }}'
+        data_tests: [not_null]

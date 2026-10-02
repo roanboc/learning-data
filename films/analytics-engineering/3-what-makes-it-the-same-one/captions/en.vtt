@@ -1,0 +1,118 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:08.541
+In the 1880s, a Paris police clerk, Alphonse Bertillon, identified repeat offenders by measuring them.
+
+00:00:09.741 --> 00:00:12.720
+Each measure went on a card, filed by its numbers.
+
+00:00:13.420 --> 00:00:21.862
+In 1903, the story goes, a new prisoner at Leavenworth matched the card of a man already inside. Fingerprints told them apart.
+
+00:00:23.362 --> 00:00:26.717
+Looking alike isn't being the same. Which brings us to Aisha.
+
+00:00:33.017 --> 00:00:37.237
+Aisha has just completed a graduate certificate in data analytics.
+
+00:00:37.937 --> 00:00:43.276
+The student system knows her by her student ID. The learning platform, by her account.
+
+00:00:43.776 --> 00:00:49.214
+The short-course platform, by the email she typed, with a space either side, in mixed case.
+
+00:00:50.814 --> 00:00:54.745
+Three keys. Each one means something only inside its own system.
+
+00:00:56.045 --> 00:00:58.010
+None of them says which learner she is.
+
+00:01:00.710 --> 00:01:09.497
+Before matching anything, Jun learns what the sources really hold. The agent profiles them, and every claim comes with the query that shows it.
+
+00:01:10.797 --> 00:01:14.484
+Four of forty-two platform accounts have no student ID.
+
+00:01:15.684 --> 00:01:20.029
+Two students share one family email, and so do their two platform accounts.
+
+00:01:21.229 --> 00:01:29.469
+Two short-course enrolments point at no customer, as typed. Trimmed and in lower case, every one with an email finds its customer.
+
+00:01:30.769 --> 00:01:32.892
+A claim without its query is a guess.
+
+00:01:35.592 --> 00:01:38.726
+First, the key sets from the question's model go to work.
+
+00:01:39.826 --> 00:01:44.812
+Every key now carries the short code of the system it comes from, and that system's owner.
+
+00:01:46.112 --> 00:01:52.372
+Two systems can use the same-looking key for two different people. Qualified, they can't be confused.
+
+00:01:53.872 --> 00:02:01.580
+And staging writes every key one way: trimmed, and in one case. Aisha's email loses its spaces and its capitals.
+
+00:02:04.880 --> 00:02:11.789
+Then: which keys are the same learner? Jun writes it as rules, most trusted first, one block of code for each.
+
+00:02:12.989 --> 00:02:14.676
+A student ID is a learner.
+
+00:02:15.676 --> 00:02:18.904
+A platform account is the student whose ID it holds.
+
+00:02:19.904 --> 00:02:23.989
+An email names a student, but only if exactly one student has it.
+
+00:02:25.089 --> 00:02:27.340
+Anything left is a learner of its own.
+
+00:02:29.040 --> 00:02:31.618
+Each key takes the most trusted rule that fits.
+
+00:02:32.918 --> 00:02:40.463
+Aisha's three keys resolve to her student ID. Across the university, ninety keys become forty-six learners.
+
+00:02:41.963 --> 00:02:49.357
+The rules are written in words in the model, and in code in two models. Mei, who owns what a learner means, approved them.
+
+00:02:52.457 --> 00:02:59.421
+But another Aisha has a platform account, and its student ID field holds our Aisha's number, typed by mistake.
+
+00:03:00.121 --> 00:03:07.748
+The rules merge them. Aisha's wallet now shows six credentials, one she never earned. And every test still passes.
+
+00:03:09.448 --> 00:03:13.236
+No test knew they were two people, because nobody had written it down.
+
+00:03:14.536 --> 00:03:20.035
+Mei checks, and records a decision: different people. A person's decision beats every rule.
+
+00:03:22.135 --> 00:03:31.374
+The merge undoes, and Aisha holds five. The decision is data now: the code keeps them apart, and a test fails if anything merges them again.
+
+00:03:34.674 --> 00:03:36.985
+Jun hashes each learner's business key.
+
+00:03:38.185 --> 00:03:43.346
+Sixty-four characters. Add one trailing space, and the hash is completely different.
+
+00:03:44.846 --> 00:03:53.088
+So one macro builds every hash. It trims each part, writes it in upper case, marks a missing part, and joins the parts with a bar.
+
+00:03:54.788 --> 00:03:58.956
+The same key gives the same hash, in every model, and on every engine.
+
+00:04:00.256 --> 00:04:05.361
+And the readable key stays beside the hash. A hash can't be read, or checked by eye.
+
+00:04:08.061 --> 00:04:13.022
+Codes need the same care. Three systems, three codes, one meaning: studying.
+
+00:04:14.222 --> 00:04:20.765
+A status map says so, one row per code. The registrar's office owns it, and approves every change.
+
+00:04:22.065 --> 00:04:27.446
+Now every learner has one key. But one key can still mean many rows, and many versions.

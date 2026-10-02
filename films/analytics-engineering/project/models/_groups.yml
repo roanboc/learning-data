@@ -1,0 +1,20 @@
+groups:
+  - name: credential_model
+    description: >
+      The enterprise credential model: staging, intermediate and core. Its core models are the
+      enterprise contract. Business owners of each entity's meaning are named in its meta.
+    owner:
+      name: Noor, data architect
+      email: noor@uni.example
+
+  - name: planning
+    description: Planning's marts and metrics, built on the core.
+    owner:
+      name: Planning
+      email: planning@uni.example
+
+  - name: wallet
+    description: The learner's wallet app's marts, built on the core.
+    owner:
+      name: Wallet app team
+      email: wallet@uni.example

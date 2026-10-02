@@ -1,0 +1,121 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:06.186
+In 1854, cholera killed hundreds of people in a few streets of Soho.
+
+00:00:06.886 --> 00:00:10.705
+John Snow asked one question: where did the dead get their water?
+
+00:00:11.405 --> 00:00:16.652
+He marked each death at its address, and the deaths gathered around one pump, on Broad Street.
+
+00:00:17.952 --> 00:00:20.339
+His map showed only what the question needed.
+
+00:00:21.839 --> 00:00:25.743
+Jun's model starts the same way: with one question, from Planning.
+
+00:00:32.043 --> 00:00:33.975
+Step one: start from a question.
+
+00:00:35.075 --> 00:00:41.859
+How many learners are within 15 credit points of a graduate certificate, by faculty, as at census date?
+
+00:00:43.559 --> 00:00:51.331
+Behind it, a decision: how many places to offer in each faculty's final graduate certificate units next semester.
+
+00:00:52.831 --> 00:00:57.889
+A second consumer, the learner's wallet app, will read the same facts, as they are today.
+
+00:00:59.089 --> 00:01:05.993
+The decision says what done looks like. The census report counted twelve. The model has to reach the same number.
+
+00:01:07.293 --> 00:01:16.713
+The code and the data on screen are real. They run on dbt Core, with DuckDB, in the series' repository, so anyone can run them.
+
+00:01:18.013 --> 00:01:24.774
+The university's own platform is Databricks, with dbt Cloud, and the same project runs there too.
+
+00:01:25.974 --> 00:01:30.996
+Only the connection changes, and one function: the one that turns a key into a hash.
+
+00:01:34.496 --> 00:01:40.436
+The university's glossary has a term for everything it does: fees, timetables, rooms, staff.
+
+00:01:41.136 --> 00:01:48.120
+The question touches four: a learner, a credential, an award, and the credit a learner holds towards an award.
+
+00:01:49.620 --> 00:01:52.394
+Everything else stays out, however central it seems.
+
+00:01:53.694 --> 00:02:01.717
+Noor agreed that scope with Planning, and wrote down why. Model the university, and you never finish. A question, you can finish.
+
+00:02:05.817 --> 00:02:08.425
+Each of the four is written down once, in YAML.
+
+00:02:09.625 --> 00:02:13.186
+The learner: a definition, an owner, and the rule for its key.
+
+00:02:14.486 --> 00:02:22.901
+The definition is in the business's words, not a system's: a person the university has recorded learning with it, in any of its systems.
+
+00:02:24.401 --> 00:02:31.020
+Beside it, a diagram drawn by hand: a learner holds credentials, and holds credit towards an award.
+
+00:02:32.320 --> 00:02:35.912
+The YAML holds the meaning. The diagram lets anyone read it.
+
+00:02:39.212 --> 00:02:44.135
+Next, what identifies each one in business terms, before anyone opens a source.
+
+00:02:45.335 --> 00:02:54.538
+A learner is their student ID, which the registrar's office issues. An award is its code. A credential is the ID its issuer gave it.
+
+00:02:56.038 --> 00:03:03.217
+Each key is tagged with the system it comes from: the student system, the learning platform, or the short-course platform.
+
+00:03:04.517 --> 00:03:14.520
+And each meaning has an owner. Mei, in the registrar's office, owns learner, credential and award. The learning team owns microcredentials and badges.
+
+00:03:16.020 --> 00:03:20.950
+The sources will disagree. The owner is the person who decides which meaning wins.
+
+00:03:24.450 --> 00:03:29.561
+Then a harder call. Is a microcredential a kind of credential, or a thing of its own?
+
+00:03:30.261 --> 00:03:37.968
+Compare what identifies it: the issuer's own identifier. Compare its life: issued on a date, and perhaps revoked.
+
+00:03:39.268 --> 00:03:42.724
+Both match any credential. Only the credit points differ.
+
+00:03:44.024 --> 00:03:51.495
+Same identity, same lifecycle: one entity, with kinds. A different identity, grain or lifecycle, and you split.
+
+00:03:53.195 --> 00:03:59.448
+A certificate of attendance asks to join. It says someone was there, not what they can do. It stays out.
+
+00:04:02.748 --> 00:04:08.905
+Jun doesn't write all this alone. An AI agent drafts it, following a skill kept in the project.
+
+00:04:10.105 --> 00:04:16.224
+Write the question first. List only what it touches. Propose combine or split, with the reasons.
+
+00:04:17.524 --> 00:04:21.670
+The draft defined the credential, but let certificates of attendance in.
+
+00:04:22.770 --> 00:04:26.355
+Mei adds one clause: a certificate of attendance isn't one.
+
+00:04:27.655 --> 00:04:34.057
+The agent drafts. The owner approves the meaning, and the decision goes in the log, with her name and the date.
+
+00:04:37.757 --> 00:04:42.300
+One question. Four things to model. Two owners of meaning. Nothing else.
+
+00:04:43.600 --> 00:04:44.719
+Now, the sources.
+
+00:04:45.919 --> 00:04:51.255
+The model says a learner is one person. The sources say one learner, Aisha, is three.

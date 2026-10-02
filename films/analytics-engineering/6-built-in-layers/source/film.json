@@ -1,0 +1,27 @@
+{
+  "key": "built-in-layers",
+  "title": "Built in layers",
+  "sub": "In the weeds of data crafting, a technical series for analytics engineers: the tests are red, and four layers turn them green. Each layer has one job, each CTE one step, and the rule and the count are written once.",
+  "howto": "Four layers keep their colours: staging blue-grey, intermediate violet, core gold, marts green. Code on dark glass is the project, and the small label beside it says where it runs. Red is a test that fails; green, one that passes. Teal is an AI agent's work; gold is a person's approval.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "brigade",
+    "breath",
+    1.6
+  ],
+  "say": [
+    ["\\bYAML\\b", "yammel"],
+    ["\\bJun\\b", "Joon"],
+    ["\\bMei\\b", "May"],
+    ["\\bdbt\\b", "dee bee tee"],
+    ["\\bSQL\\b", "sequel"],
+    ["\\bCTEs\\b", "see tee ees"],
+    ["\\bCTE\\b", "see tee ee"],
+    ["\\bDuckDB\\b", "duck dee bee"],
+    ["\\bAuguste\\b", "oh-goost"],
+    ["\\bEscoffier\\b", "ess-coff-ee-ay"]
+  ]
+}

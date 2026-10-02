@@ -167,79 +167,121 @@ function sq_aisha(ctx,x,y,k,key,a){if(a<=0.01)return;const col=SRC3[k][1];withA(
 
 /* ---------- the labs' and scenarios' pictures ----------
    Added to the film bundle's LV registry (Keeping it true's true.js defines it; these keys are prefixed sq_ so they never clash).
-   Each draws with the film's own components and takes its words from vis in site/assets/start-from-a-question/learn.*.js. */
+   Each draws with the film's own components and takes its words from vis in site/assets/start-from-a-question/learn.*.js.
+   Words are sized for the real width: a lab's picture lays itself out wide (a stage 560 CSS px or more) or narrow (a phone),
+   and every layout keeps its smallest words at about 12 CSS px or more. A scenario's picture is always about 380 to 470 px wide,
+   so it has one layout, drawn in a 760 × 405 box. */
 function sq_fit(c,w,h,bw,bh){const k=Math.min(w/bw,h/bh);c.translate((w-bw*k)/2,(h-bh*k)/2);c.scale(k,k);}
+function sq_fill(s,o){return String(s).replace(/\{(\w+)\}/g,(m,k)=>o[k]!=null?o[k]:m);}
 function sq_count(pick,b){return Object.values(pick||{}).filter(x=>x===b).length;}
-// a glossary card whose term shrinks to fit its width
-// (sq_term's card, with its small label in the page's language: o.label)
-function sq_termFit(c,x,y,w,h,s,o){let sz=o.size||28;while(sz>18&&tw(c,s,sz,800)>w-36)sz-=1;const a=o.a==null?1:o.a,on=o.on||0,dim=o.dim||0,cl=o.col||KIND,col=mix(SOFT,cl,on);
-  withA(c,a*(1-0.65*dim),()=>{if(on>0)glow(c,x+w/2,y+h/2,w*0.6,cl,0.25*on);glass(c,x,y,w,h,14,col,{glow:8+12*on,ea:0.7,fill:"rgba(7,12,24,0.94)"});
-    if(o.label)T(c,o.label,x+18,y+30,{w:600,size:18,color:rgba(SOFT,0.9)});T(c,s,x+18,y+h-24,{w:800,size:sz,color:rgba(mix(INK,cl,on*0.35),1)});});}
+// the stage's width in CSS pixels (the canvas's own width when it isn't on a page yet)
+function sq_cssW(c,w){const cw=c.canvas&&c.canvas.clientWidth;return cw>0?cw:w;}
+// a lab's box: wide 1440 × 780, or narrow 720 × 390 on a stage under 560 CSS px. Returns true when narrow
+function sq_lab(c,w,h){const n=sq_cssW(c,w)<560;sq_fit(c,w,h,n?720:1440,n?390:780);return n;}
+// the largest size from sz down to min at which s fits in maxW
+function sq_size(c,s,maxW,sz,min,wt){while(sz>min&&tw(c,s,sz,wt||700)>maxW)sz-=1;return sz;}
+// centred lines of text round (cx, cy), wrapped to maxW; returns the lines' height
+function sq_lines(c,s,cx,cy,maxW,o){const sz=o.size||28,lh=o.lh||Math.round(sz*1.22),ls=wrapT(c,s,0,0,maxW,{w:o.w||700,size:sz,measure:true}),h=ls.length*lh;
+  if(!o.measure)ls.forEach((l,i)=>T(c,l,cx,cy-h/2+lh*(i+0.78),{w:o.w||700,size:sz,align:o.align||"center",color:o.color}));return h;}
+// tags in centred rows inside maxW, row by row (rowH apart), shrinking from sz to fit; cols(i) is each tag's colour.
+// Returns each tag's centre
+function sq_flow(c,items,cx,y,maxW,sz,rowH,cols){const gap=18;sz=Math.min(sz,...items.map(s=>sq_size(c,s,maxW-26,sz,18)));const wd=s=>tw(c,s,sz,700)+26,rows=[[]];let used=0;
+  items.forEach((s,i)=>{const ww=wd(s);if(rows[rows.length-1].length&&used+gap+ww>maxW){rows.push([]);used=0;}const r=rows[rows.length-1];used+=(r.length?gap:0)+ww;r.push(i);});
+  const at=[];rows.forEach((r,ri)=>{const tot=r.reduce((a,i)=>a+wd(items[i]),0)+gap*(r.length-1);let x=cx-tot/2;r.forEach(i=>{const ww=wd(items[i]);at[i]=[x+ww/2,y+ri*rowH];tag(c,x+ww/2,y+ri*rowH,items[i],cols(i),{align:"center",size:sz});x+=ww+gap;});});return at;}
+// a glossary term on a card, in one or two lines, shrinking from sz (never under min) to fit
+function sq_tcard(c,x,y,w,h,s,o){const on=o.on||0,dim=o.dim||0,cl=o.col||KIND,col=mix(SOFT,cl,on);let sz=o.size||32;const min=o.min||26;
+  while(sz>min&&wrapT(c,s,0,0,w-28,{w:800,size:sz,measure:true}).length>2)sz--;
+  withA(c,1-0.62*dim,()=>{if(on>0)glow(c,x+w/2,y+h/2,w*0.6,cl,0.25*on);glass(c,x,y,w,h,14,col,{glow:8+12*on,ea:0.7,fill:"rgba(7,12,24,0.94)"});
+    sq_lines(c,s,x+w/2,y+h/2,w-28,{size:sz,w:800,color:rgba(mix(INK,cl,on*0.35),1)});});}
 // which glossary terms each starting point lights (indices into vis.terms); null: all of them, and growing
 const SQ_LIT={plan:[0,1,2,3],fees:[0,6],curious:[0],dash:null,all:null,near:null};
-// each owner slot's options, as people (0 Mei, 1 the learning team, 2 Planning, 3 Noor), and who is right
-const SQ_OWN=[[0,2,3,1],[1,0,2,3],[0,3,2,1],[1,0,3,2],[0,2,3,1]],SQ_OWN_OK=[0,1,0,1,0];
+// each owner slot's options, as people (0 Mei, 1 the learning team, 2 Planning, 3 Noor), in the order learn.*.js lists them,
+// and who is right
+const SQ_OWN=[[2,3,0,1],[0,1,2,3],[3,2,1,0],[1,0,3,2],[2,0,3,1]],SQ_OWN_OK=[0,1,0,1,0];
 function sq_owner(c,who,x,y,r,t){if(who===0)sq_face(c,"mei",x,y,r,1,{t});else if(who===1)sq_face(c,"tom",x,y,r,1,{t});else if(who===3)sq_face(c,"noor",x,y,r,1,{t});else sq_badge(c,x,y,r,"planning",null,{});}
+// a candidate beside the credential, row by row: label, then value (a business key drawn as a key); vc colours each value
+function sq_rows(c,x,y,w,name,col,rows,o){const n=rows.length,rh=o.rh,hh=o.head;glass(c,x,y,w,hh+n*rh+o.pad,18,col,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.95)"});
+  T(c,name,x+26,y+hh*0.62,{w:800,size:sq_size(c,name,w-52,o.name,24,800),color:rgba(col,1)});
+  rows.forEach(([lab,val,vc],i)=>{const yy=y+hh+i*rh;c.fillStyle="rgba(170,200,245,0.12)";c.fillRect(x+18,yy,w-36,1.5);
+    const lx=x+26,vx=o.stack?x+26:x+Math.max(o.col,48+Math.max(...rows.map(r=>tw(c,r[0],o.lab,600)))),ly=o.stack?yy+o.lab+8:yy+rh/2+o.lab*0.36,vy=o.stack?yy+o.lab+14+o.val:yy+rh/2+o.val*0.36;
+    T(c,lab,lx,ly,{w:600,size:o.lab,color:rgba(SOFT,1)});
+    if(/^[A-Z]+\|\S+$/.test(val))sq_key(c,vx,vy-o.val*0.36,val,{size:o.val-4});else T(c,val,vx,vy,{w:700,size:sq_size(c,val,w-(vx-x)-22,o.val,22),color:rgba(vc||INK,1)});});}
 Object.assign(LV,{
   // scope it: the starting point on a card, and the glossary terms it lights; with no decision, every term lights and more arrive
-  sq_scope:(c,w,h,st,L)=>{const V=L.vis,k=SQ_LIT[st.pick]!==undefined?st.pick:"plan",lit=SQ_LIT[k],grow=!lit,nod=grow||k==="curious";c.save();sq_fit(c,w,h,1440,660);
-    const ls=wrapT(c,V.q[k],0,0,1320,{w:700,size:32,measure:true}),qh=36+ls.length*40;glass(c,30,20,1380,qh,20,SQ_CON,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.95)"});ls.forEach((l,i)=>T(c,l,60,66+i*40,{w:700,size:32}));
-    tag(c,720,20+qh+30,nod?V.noDecision:V.decision,nod?EDGE_:GOOD,{align:"center",size:28});
-    V.terms.forEach((s,i)=>{const x=30+(i%4)*350,y=250+Math.floor(i/4)*118,on=grow||lit.includes(i);sq_termFit(c,x,y,330,104,s,{on:on?1:0,dim:on?0:0.7,col:grow?EDGE_:TRUST,size:32,label:V.glossary});});
-    if(grow)tag(c,720,632,V.growing,EDGE_,{align:"center",size:30});c.restore();},
+  sq_scope:(c,w,h,st,L)=>{const V=L.vis,k=SQ_LIT[st.pick]!==undefined?st.pick:"plan",lit=SQ_LIT[k],grow=!lit,nod=grow||k==="curious";c.save();const nar=sq_lab(c,w,h);
+    const W_=nar?720:1440;let qs=nar?28:36;if(nar)while(qs>24&&wrapT(c,V.q[k],0,0,W_-80,{w:700,size:qs,measure:true}).length>3)qs--;const qh=sq_lines(c,V.q[k],0,0,W_-80,{size:qs,measure:true})+(nar?26:36);
+    glass(c,12,10,W_-24,qh,18,SQ_CON,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.95)"});sq_lines(c,V.q[k],W_/2,10+qh/2,W_-80,{size:qs});
+    const ty=10+qh+(nar?32:42);tag(c,W_/2,ty,nod?V.noDecision:V.decision,nod?EDGE_:GOOD,{align:"center",size:nar?26:30});
+    if(!nar){V.terms.forEach((s,i)=>{const x=20+(i%4)*352,y=ty+50+Math.floor(i/4)*134,on=grow||lit.includes(i);sq_tcard(c,x,y,336,118,s,{on:on?1:0,dim:on?0:0.7,col:grow?EDGE_:TRUST,size:34,min:28});});
+      if(grow)tag(c,720,746,V.growing,EDGE_,{align:"center",size:30});}
+    else{const y0=ty+60;if(grow){const it=V.terms.slice(0,4);sq_flow(c,[...it,sq_fill(V.moreGrow,{n:V.terms.length-4})],360,y0,700,26,54,i=>i<4?EDGE_:SOFT);}
+      else{const it=lit.map(i=>V.terms[i]);sq_flow(c,[...it,sq_fill(V.more,{n:V.terms.length-lit.length})],360,y0,700,26,54,i=>i<it.length?TRUST:SOFT);}}
+    c.restore();},
   // what's in the slice: the twelve terms, lit when placed in the slice and dimmed when left out, with a count of each
-  sq_slice:(c,w,h,st,L)=>{const V=L.vis,p=st.pick&&typeof st.pick==="object"?st.pick:{};c.save();sq_fit(c,w,h,1440,660);
-    const ls=wrapT(c,V.q.plan,0,0,1360,{w:700,size:32,measure:true});ls.forEach((l,i)=>T(c,l,720,50+i*42,{w:700,size:32,align:"center",color:rgba(SQ_CON,1)}));
-    V.terms.forEach((s,i)=>{const x=30+(i%4)*350,y=160+Math.floor(i/4)*130;sq_termFit(c,x,y,330,112,s,{on:p[i]==="in"?1:0,dim:p[i]==="out"?0.8:0,col:TRUST,size:32,label:V.glossary});});
-    tag(c,400,612,V.touches+" · "+sq_count(p,"in")+" "+V.placed,TRUST,{align:"center",size:28});tag(c,1080,612,V.out+" · "+sq_count(p,"out")+" "+V.placed,SOFT,{align:"center",size:28});c.restore();},
-  // combine or split: the credential beside the candidate, each row green where they match and red where they differ, and the verdict
-  sq_kinds:(c,w,h,st,L)=>{const V=L.vis,k=V.cand[st.pick]?st.pick:"micro",cd=V.cand[k],lab=L.labs.find(x=>x.id==="kinds"),res=lab?lab.w.res[k]:[1,1,1,1],ok=res.every(r=>r===1);c.save();sq_fit(c,w,h,1200,550);
+  sq_slice:(c,w,h,st,L)=>{const V=L.vis,p=st.pick&&typeof st.pick==="object"?st.pick:{};c.save();const nar=sq_lab(c,w,h);
+    if(!nar){const qh=sq_lines(c,V.q.plan,720,0,1360,{size:32,measure:true});sq_lines(c,V.q.plan,720,14+qh/2,1360,{size:32,color:rgba(SQ_CON,1)});
+      V.terms.forEach((s,i)=>{const x=20+(i%4)*352,y=qh+50+Math.floor(i/4)*146;sq_tcard(c,x,y,336,128,s,{on:p[i]==="in"?1:0,dim:p[i]==="out"?0.8:0,col:TRUST,size:34,min:28});});
+      tag(c,380,736,V.touches+" · "+sq_count(p,"in")+" "+V.placed,TRUST,{align:"center",size:30});tag(c,1070,736,V.out+" · "+sq_count(p,"out")+" "+V.placed,SOFT,{align:"center",size:30});}
+    else{V.terms.forEach((s,i)=>{const x=8+(i%3)*238,y=6+Math.floor(i/3)*82;sq_tcard(c,x,y,228,74,s,{on:p[i]==="in"?1:0,dim:p[i]==="out"?0.8:0,col:TRUST,size:26,min:24});});
+      const a=V.touches+" · "+sq_count(p,"in"),b=V.out+" · "+sq_count(p,"out"),sz=Math.min(sq_size(c,a,330,26,22),sq_size(c,b,300,26,22));
+      tag(c,190,362,a,TRUST,{align:"center",size:sz});tag(c,545,362,b,SOFT,{align:"center",size:sz});}
+    c.restore();},
+  // combine or split: the credential beside the candidate (on a phone, the candidate alone), each of its rows green where it
+  // matches a credential and red where it doesn't, and the verdict
+  sq_kinds:(c,w,h,st,L)=>{const V=L.vis,k=V.cand[st.pick]?st.pick:"micro",cd=V.cand[k],lab=L.labs.find(x=>x.id==="kinds"),res=lab?lab.w.res[k]:[1,1,1,1],ok=res.every(r=>r===1);c.save();const nar=sq_lab(c,w,h);
     const rc=r=>r===1?GOOD:r===0?EDGE_:TRUST;
-    sq_cmp(c,15,20,570,350,V.cred,TRUST,V.rows.map((r,i)=>[r,V.credRow[i],1]),{});
-    sq_cmp(c,615,20,570,350,cd[0],ok?TRUST:EDGE_,V.rows.map((r,i)=>[r,cd[i+1],1,rc(res[i])]),{});
-    tag(c,600,455,V.verdict[k],ok?GOOD:EDGE_,{align:"center",size:26});c.restore();},
+    if(!nar){const o={rh:122,head:86,pad:10,name:40,lab:28,val:32,stack:true};
+      sq_rows(c,20,16,690,V.cred,TRUST,V.rows.map((r,i)=>[r,V.credRow[i]]),o);sq_rows(c,730,16,690,cd[0],ok?TRUST:EDGE_,V.rows.map((r,i)=>[r,cd[i+1],rc(res[i])]),o);
+      tag(c,720,700,V.verdict[k],ok?GOOD:EDGE_,{align:"center",size:sq_size(c,V.verdict[k],1300,36,28)});}
+    else{sq_rows(c,10,8,700,cd[0],ok?TRUST:EDGE_,V.rows.map((r,i)=>[r,cd[i+1],rc(res[i])]),{rh:60,head:62,pad:6,name:32,lab:24,val:28,col:200});
+      tag(c,360,354,V.verdict[k],ok?GOOD:EDGE_,{align:"center",size:sq_size(c,V.verdict[k],650,28,24)});}
+    c.restore();},
   // who owns the meaning: each part of the model, with the owner chosen for it, green when it's right and red when not;
   // the learner given to Planning leaves the wallet app's meaning with no one to settle it
-  sq_owners:(c,w,h,st,L)=>{const V=L.vis,p=Array.isArray(st.pick)?st.pick:[],plan=p[0]!=null&&SQ_OWN[0][p[0]]===2;c.save();sq_fit(c,w,h,1440,660);
-    V.ownLines.forEach((s,i)=>{const y=20+i*126,ch=p[i],who=ch==null?null:SQ_OWN[i][ch],ok=who===SQ_OWN_OK[i],col=ch==null?SOFT:ok?GOOD:EDGE_;
-      glass(c,20,y,640,96,14,BPL,{glow:8,ea:0.6,fill:"rgba(7,12,24,0.95)"});let sz=34;while(sz>22&&tw(c,s,sz,700)>600)sz--;T(c,s,44,y+60,{w:700,size:sz});
-      arrowTo(c,672,y+48,770,y+48,col,ch==null?0.35:0.9,{head:14,lw:2.6,dash:ch==null?[6,8]:null});
-      if(ch==null){T(c,"?",830,y+62,{w:800,size:44,align:"center",color:rgba(SOFT,1)});return;}
-      sq_owner(c,who,830,y+48,44,0);let ns=28;while(ns>20&&tw(c,V.people[who],ns,700)>300)ns--;T(c,V.people[who],892,y+58,{w:700,size:ns,color:rgba(col,1)});});
-    if(plan){sq_badge(c,1335,250,52,"wallet",null,{});wrapT(c,V.wallet,1335,350,200,{w:800,size:28,align:"center"});T(c,"?",1335,150,{w:800,size:52,align:"center",color:rgba(EDGE_,1)});
-      wrapT(c,V.unsettled,1335,420,200,{w:700,size:28,align:"center",color:rgba(EDGE_,1)});}
+  sq_owners:(c,w,h,st,L)=>{const V=L.vis,p=Array.isArray(st.pick)?st.pick:[],plan=p[0]!=null&&SQ_OWN[0][p[0]]===2;c.save();const nar=sq_lab(c,w,h);
+    const G=nar?{rh:58,y0:4,bw:452,ts:26,ax:[462,492],fx:514,fr:21,nx:542,nw:176,ns:24}:{rh:150,y0:16,bw:560,ts:34,ax:[592,676],fx:730,fr:48,nx:794,nw:420,ns:32};
+    V.ownLines.forEach((s,i)=>{const y=G.y0+i*G.rh,cy=y+(G.rh-12)/2,ch=p[i],who=ch==null?null:SQ_OWN[i][ch],ok=who===SQ_OWN_OK[i],col=ch==null?SOFT:ok?GOOD:EDGE_;
+      glass(c,8,y,G.bw,G.rh-12,14,BPL,{glow:8,ea:0.6,fill:"rgba(7,12,24,0.95)"});T(c,s,24,cy+G.ts*0.36,{w:700,size:sq_size(c,s,G.bw-32,G.ts,nar?23:28)});
+      arrowTo(c,G.ax[0],cy,G.ax[1],cy,col,ch==null?0.35:0.9,{head:nar?10:14,lw:nar?2.2:2.6,dash:ch==null?[6,8]:null});
+      if(ch==null){T(c,"?",G.fx,cy+G.ns*0.5,{w:800,size:G.ns+10,align:"center",color:rgba(SOFT,1)});return;}
+      sq_owner(c,who,G.fx,cy,G.fr,0);const nm=V.people[who],ns=sq_size(c,nm,G.nw,G.ns,24);
+      if(tw(c,nm,ns,700)<=G.nw)T(c,nm,G.nx,cy+ns*0.36,{w:700,size:ns,color:rgba(col,1)});else sq_lines(c,nm,G.nx,cy,G.nw,{size:ns,align:"left",color:rgba(col,1),lh:ns+2});});
+    if(plan){if(!nar){sq_badge(c,1330,250,52,"wallet",null,{});sq_lines(c,V.wallet,1330,350,200,{size:28,w:800});T(c,"?",1330,160,{w:800,size:52,align:"center",color:rgba(EDGE_,1)});
+        sq_lines(c,V.unsettled,1330,440,200,{size:28,color:rgba(EDGE_,1)});}
+      else{sq_badge(c,40,340,24,"wallet",null,{});const m=V.wallet+" · "+V.unsettled;T(c,m,80,349,{w:700,size:sq_size(c,m,630,26,22),color:rgba(EDGE_,1)});}}
     c.restore();},
-  // the scenarios
-  sq_q_all:(c,w,h,st,L)=>{const V=L.vis;c.save();sq_fit(c,w,h,1200,640);tag(c,600,60,V.everything,EDGE_,{align:"center",size:30});
-    V.terms.forEach((s,i)=>sq_termFit(c,40+(i%4)*285,120+Math.floor(i/4)*165,265,140,s,{on:1,col:EDGE_,label:V.glossary}));c.restore();},
-  sq_q_row:(c,w,h,st,L)=>{const V=L.vis;c.save();sq_fit(c,w,h,1200,640);
-    glass(c,60,50,1080,130,18,KIND,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,V.learner+" =",100,108,{w:800,size:32,color:rgba(KIND,1)});T(c,V.row,100,154,{f:"mono",w:500,size:28});
-    SRC3.forEach(([_,col],i)=>{const x=40+i*390;glass(c,x,340,340,96,16,col,{glow:10,ea:0.75,fill:"rgba(7,12,24,0.94)",a:i?0.6:1});{const ls=wrapT(c,V.systems[i],0,0,300,{w:700,size:26,measure:true});ls.forEach((l,j)=>T(c,l,x+170,397+(j-(ls.length-1)/2)*30,{w:700,size:26,align:"center"}));}
-      arrowTo(c,600,190,x+170,330,i?EDGE_:col,i?0.4:0.9,{head:14,lw:2.2,dash:i?[6,8]:null});
-      if(i){tag(c,x+170,500,V.missed[i-1],EDGE_,{align:"center",size:24});cross_(c,x+170,570,40,EDGE_,1);}else tick_(c,x+170,520,40,GOOD,1);});c.restore();},
-  sq_q_fee:(c,w,h,st,L)=>{const V=L.vis;c.save();sq_fit(c,w,h,1200,640);sq_bp(c,500,110,0.68,{b:1,ph:260});
-    sq_termFit(c,1010,150,180,120,V.terms[6],{on:0.6,col:EDGE_,label:V.glossary,size:30});arrowTo(c,1000,210,990,210,EDGE_,0.7,{head:14,lw:2.2,dash:[6,8]});T(c,"?",1100,340,{w:800,size:48,align:"center",color:rgba(EDGE_,1)});
-    sq_badge(c,500,480,46,"planning",V.planning,{sub:false,size:26});c.restore();},
-  sq_q_word:(c,w,h,st,L)=>{const V=L.vis;c.save();sq_fit(c,w,h,1200,640);
-    V.words.forEach((s,i)=>{const col=SRC3[i][1],y=110+i*170;glass(c,60,y,420,110,16,col,{glow:10,ea:0.75,fill:"rgba(7,12,24,0.94)"});T(c,"“"+s+"”",270,y+52,{w:800,size:32,align:"center",color:rgba(col,1)});
-      T(c,V.systems[i],270,y+90,{w:600,size:20,align:"center",color:rgba(SOFT,1)});arrowTo(c,500,y+55,760,330,col,0.8,{head:14,lw:2.2});});
-    bpBox(c,780,280,340,100,V.learner,KIND,0,{size:34});sq_face(c,"mei",950,160,60,1,{});c.restore();},
-  sq_q_award:(c,w,h,st,L)=>{const V=L.vis;c.save();sq_fit(c,w,h,1200,640);
-    [[V.glossaryDef,60,SOFT],[V.registrar,700,TRUST]].forEach(([n,x,col])=>{glass(c,x,60,440,170,18,col,{glow:10,ea:0.75,fill:"rgba(7,12,24,0.95)"});T(c,n,x+30,104,{w:600,size:22,color:rgba(SOFT,1)});T(c,V.terms[2],x+30,170,{w:800,size:38,color:rgba(col,1)});});
-    T(c,"≠",600,170,{w:800,size:60,align:"center",color:rgba(EDGE_,1)});
-    kt_agent(c,330,430,56,0,{});tag(c,330,560,V.agentPicks,EDGE_,{align:"center",size:26});sq_face(c,"mei",900,430,80,1,{});T(c,"Mei",900,548,{w:800,size:28,align:"center"});T(c,V.registrar,900,582,{w:600,size:22,align:"center",color:rgba(SOFT,1)});c.restore();},
-  sq_q_attend:(c,w,h,st,L)=>{const V=L.vis,cd=V.cand.attend;c.save();sq_fit(c,w,h,1200,640);
-    sq_cmp(c,140,50,760,240,cd[0],SRC3[2][1],[[V.rows[0],cd[1],1],[V.rows[3],cd[4],1,EDGE_]],{});
-    tag(c,520,340,"+ "+V.credit5,TRUST,{align:"center",size:30});T(c,"?",1000,200,{w:800,size:60,align:"center",color:rgba(TRUST,1)});sq_face(c,"mei",520,480,80,1,{});c.restore();},
-  sq_q_split:(c,w,h,st,L)=>{const V=L.vis;c.save();sq_fit(c,w,h,1200,640);
-    glass(c,60,60,1080,250,18,TRUST,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.96)"});T(c,V.cred,100,120,{w:800,size:34,color:rgba(TRUST,1)});
-    [V.terms[2],V.cand.micro[0],V.cand.badge[0]].forEach((s,i)=>{const tw_=tw(c,s,26,700)+50,x=100+[0,330,760][i];glass(c,x,180,tw_,70,14,TRUST,{glow:i===1?18:8,ea:0.7,fill:"rgba(30,26,12,0.95)"});T(c,s,x+25,225,{w:700,size:26});});
-    tag(c,560,360,V.credit5,TRUST,{align:"center",size:26});
-    V.reasons.forEach((s,i)=>tag(c,[240,600,960,360,840][i],i<3?460:550,s,SOFT,{align:"center",size:24}));c.restore();},
-  sq_q_order:(c,w,h,st,L)=>{const V=L.vis;c.save();sq_fit(c,w,h,1200,640);
-    glass(c,180,50,840,110,18,SQ_CON,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});wrapT(c,V.q.near,600,118,780,{w:700,size:30,align:"center"});
-    tag(c,600,200,V.noDecision,EDGE_,{align:"center",size:24});
-    // shuffled, in two rows, each row centred and shrunk to fit
-    [[3,0,4],[1,2]].forEach((row,r)=>{let sz=28;const wd=()=>row.reduce((s,k)=>s+tw(c,V.order[k],sz,700)+26,0)+30*(row.length-1);while(sz>20&&wd()>1140)sz--;
-      let x=600-wd()/2;row.forEach(k=>{const tw_=tw(c,V.order[k],sz,700)+26;tag(c,x+tw_/2,330+r*120,V.order[k],WEED,{align:"center",size:sz});x+=tw_+30;});});c.restore();}
+  // the scenarios: one layout each, in a 760 × 405 box
+  sq_q_all:(c,w,h,st,L)=>{const V=L.vis;c.save();sq_fit(c,w,h,760,405);tag(c,380,26,V.everything,EDGE_,{align:"center",size:28});
+    V.terms.forEach((s,i)=>sq_tcard(c,8+(i%3)*252,62+Math.floor(i/3)*85,240,76,s,{on:1,col:EDGE_,size:26,min:24}));c.restore();},
+  sq_q_row:(c,w,h,st,L)=>{const V=L.vis;c.save();sq_fit(c,w,h,760,405);
+    glass(c,40,10,680,104,18,KIND,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,V.learner+" =",68,52,{w:800,size:30,color:rgba(KIND,1)});T(c,V.row,68,94,{f:"mono",w:500,size:sq_size(c,V.row,630,26,22,500)});
+    SRC3.forEach(([_,col],i)=>{const x=10+i*252,cx=x+116;glass(c,x,178,232,82,16,col,{glow:10,ea:0.75,fill:"rgba(7,12,24,0.94)",a:i?0.6:1});sq_lines(c,V.systems[i],cx,219,210,{size:24});
+      arrowTo(c,380,118,cx,172,i?EDGE_:col,i?0.45:0.9,{head:12,lw:2.2,dash:i?[6,8]:null});
+      if(i){cross_(c,cx,292,30,EDGE_,1);sq_lines(c,V.missed[i-1],cx,350,226,{size:24,color:rgba(EDGE_,1)});}else tick_(c,cx,294,32,GOOD,1);});c.restore();},
+  sq_q_fee:(c,w,h,st,L)=>{const V=L.vis;c.save();sq_fit(c,w,h,760,405);bpPaper(c,14,40,456,320,1,{});
+    V.terms.slice(0,4).forEach((s,i)=>bpBox(c,40,62+i*72,404,58,s,i===1?TRUST:KIND,1,{size:sq_size(c,s,370,26,22)}));
+    sq_tcard(c,560,120,190,92,V.terms[6],{on:0.7,col:EDGE_,size:30});arrowTo(c,552,166,482,166,EDGE_,0.8,{head:12,lw:2.4,dash:[6,8]});
+    T(c,"?",517,140,{w:800,size:40,align:"center",color:rgba(EDGE_,1)});sq_badge(c,655,282,34,"planning",null,{});T(c,V.planning,655,350,{w:800,size:26,align:"center"});c.restore();},
+  sq_q_word:(c,w,h,st,L)=>{const V=L.vis;c.save();sq_fit(c,w,h,760,405);
+    V.words.forEach((s,i)=>{const col=SRC3[i][1],y=12+i*132;glass(c,10,y,340,112,16,col,{glow:10,ea:0.75,fill:"rgba(7,12,24,0.94)"});T(c,"“"+s+"”",180,y+50,{w:800,size:32,align:"center",color:rgba(col,1)});
+      T(c,V.systems[i],180,y+90,{w:600,size:sq_size(c,V.systems[i],316,24,22,600),align:"center",color:rgba(SOFT,1)});arrowTo(c,358,y+56,470,238,col,0.8,{head:12,lw:2.2});});
+    bpBox(c,478,196,272,86,V.learner,KIND,0,{size:sq_size(c,V.learner,240,34,26)});sq_face(c,"mei",614,96,56,1,{});c.restore();},
+  sq_q_award:(c,w,h,st,L)=>{const V=L.vis;c.save();sq_fit(c,w,h,760,405);
+    [[V.glossaryDef,12,SOFT],[V.registrar,418,TRUST]].forEach(([n,x,col])=>{glass(c,x,12,330,124,18,col,{glow:10,ea:0.75,fill:"rgba(7,12,24,0.95)"});T(c,n,x+24,52,{w:600,size:sq_size(c,n,290,24,22,600),color:rgba(SOFT,1)});T(c,V.terms[2],x+24,110,{w:800,size:36,color:rgba(col,1)});});
+    T(c,"≠",380,92,{w:800,size:52,align:"center",color:rgba(EDGE_,1)});
+    kt_agent(c,190,236,48,0,{});tag(c,190,350,V.agentPicks,EDGE_,{align:"center",size:sq_size(c,V.agentPicks,330,26,22)});
+    sq_face(c,"mei",583,230,62,1,{});T(c,"Mei",583,330,{w:800,size:28,align:"center"});T(c,V.registrar,583,368,{w:600,size:24,align:"center",color:rgba(SOFT,1)});c.restore();},
+  sq_q_attend:(c,w,h,st,L)=>{const V=L.vis,cd=V.cand.attend;c.save();sq_fit(c,w,h,760,405);
+    sq_rows(c,20,10,560,cd[0],SRC3[2][1],[[V.rows[0],cd[1]],[V.rows[3],cd[4],EDGE_]],{rh:62,head:66,pad:8,name:30,lab:24,val:28,col:150});
+    T(c,"?",680,120,{w:800,size:64,align:"center",color:rgba(TRUST,1)});tag(c,300,250,"+ "+V.credit5,TRUST,{align:"center",size:28});sq_face(c,"mei",300,340,52,1,{});c.restore();},
+  sq_q_split:(c,w,h,st,L)=>{const V=L.vis;c.save();sq_fit(c,w,h,760,405);
+    glass(c,12,10,736,152,18,TRUST,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.96)"});T(c,V.cred,36,52,{w:800,size:30,color:rgba(TRUST,1)});
+    const at=sq_flow(c,[V.terms[2],V.cand.micro[0],V.cand.badge[0]],380,110,700,28,50,()=>TRUST);
+    tag(c,at[1][0],196,V.credit5,TRUST,{align:"center",size:26});
+    sq_flow(c,V.reasons,380,258,740,26,52,()=>SOFT);c.restore();},
+  sq_q_order:(c,w,h,st,L)=>{const V=L.vis;c.save();sq_fit(c,w,h,760,405);
+    const qh=sq_lines(c,V.q.near,0,0,680,{size:30,measure:true})+30;glass(c,30,10,700,qh,18,SQ_CON,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});sq_lines(c,V.q.near,380,10+qh/2,680,{size:30});
+    tag(c,380,qh+46,V.noDecision,EDGE_,{align:"center",size:26});
+    // shuffled, in centred rows
+    sq_flow(c,[3,0,4,1,2].map(k=>V.order[k]),380,qh+128,740,28,60,()=>WEED);c.restore();}
 });

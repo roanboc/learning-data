@@ -133,7 +133,7 @@ for i in range(2):
 #    a muted double knock as the reference is refused; keys for dbt's message; a soft knock as the reference to Planning's mart goes through;
 #    a muted knock as it snaps; a note for the green reference to the core
 bed('access', [GM7, EBMAJ9, CM7, FSUS, BBMAJ9])
-swell([46, 53, 58, 62], L0('access', 0.7), 3.6, 0.02)
+swell([46, 53, 58, 62], L0('access', 0.3), 3.6, 0.02)
 lines(W('access', 'rings', 'access', -0.1), 6, 0.27, 0.017, 0.4)
 lines(G('access', 'public', 0.0), 4, 0.3, 0.016, 0.4)
 for lid, word, m in [('public', 'Public', 58), ('protected', 'Protected', 55), ('private', 'private', 50)]:

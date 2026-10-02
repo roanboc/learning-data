@@ -1,38 +1,24 @@
 {
   "title": "In the weeds of data crafting",
   "title_es": "En las entrañas del oficio de datos",
-  "films": ["1-a-model-is-not-a-transformation"],
+  "films": [
+    "1-a-model-is-not-a-transformation",
+    "2-start-from-a-question",
+    "3-what-makes-it-the-same-one",
+    "4-one-row-of-what-and-when",
+    "5-promises-and-proofs",
+    "6-built-in-layers",
+    "7-who-owns-what",
+    "8-an-agent-on-the-team",
+    "9-written-once"
+  ],
   "planned": 9,
   "lead": "A technical series for analytics engineers: how an agreed data model becomes tables, with dbt, on Databricks. It follows Jun, the university's analytics engineer, from a question to versioned, tested and documented models, with an AI agent that helps at every step and a person who approves each one.",
   "lead_es": "Una serie técnica para analytics engineers: cómo un modelo de datos acordado se convierte en tablas, con dbt, en Databricks. Sigue a Jun, analytics engineer de la universidad, desde una pregunta hasta modelos versionados, probados y documentados, con un agente de IA que ayuda en cada paso y una persona que aprueba cada uno.",
   "description": "A technical series for analytics engineers on data modelling with dbt: why a dbt model is a transformation and not the data model, where the model lives, keys and hashing, grain and time, contracts and tests, layers, domains, and working with an AI agent responsibly.",
   "description_es": "Una serie técnica para analytics engineers sobre modelado de datos con dbt: por qué un modelo de dbt es una transformación y no el modelo de datos, dónde vive el modelo, claves y hashing, granularidad y tiempo, contratos y pruebas, capas, dominios, y cómo trabajar con un agente de IA con responsabilidad.",
-  "order": "Watch them in order. It's technical: it shows real code, YAML and Markdown, and names dbt's features. It makes most sense after From words to data.",
-  "order_es": "Míralas en orden. Es técnica: muestra código, YAML y Markdown reales, y nombra las funciones de dbt. Se entiende mejor después de De las palabras a los datos.",
-  "coming_h": "The films to come",
-  "coming_h_es": "Las películas que vienen",
-  "coming_p": "Each takes one or two of Jun's ten steps. A model is not a transformation is the map.",
-  "coming_p_es": "Cada una recorre uno o dos de los diez pasos de Jun. Un modelo no es una transformación es el mapa.",
-  "coming": [
-    [2, "Start from a question", "Scope, the conceptual model in YAML, owners; combining or splitting an entity"],
-    [3, "What makes it the same one", "Profiling, business keys, key sets, identity mapping and hashing"],
-    [4, "One row of what, and when", "Grain; versions kept at ingestion; as it is and as it was; point-in-time joins"],
-    [5, "Promises and proofs", "The gap register; enterprise and consumer contracts; tests first"],
-    [6, "Built in layers", "Staging, intermediate, core and marts; CTE standards; materialisations"],
-    [7, "Who owns what", "Domains, access, groups and cross-project refs"],
-    [8, "An agent on the team", "Skills, access, evidence and guardrails; validation, review and shipping"],
-    [9, "Written once", "Doc blocks, Mermaid and the catalog; versions and deprecation"]
-  ],
-  "coming_es": [
-    [2, "Empezar por una pregunta", "El alcance, el modelo conceptual en YAML, los responsables; unir o separar una entidad"],
-    [3, "Qué la hace la misma", "Perfilado, claves de negocio, conjuntos de claves, correspondencias de identidad y hashing"],
-    [4, "Una fila de qué, y cuándo", "Granularidad; versiones guardadas al ingerir; como es y como era; uniones en un punto del tiempo"],
-    [5, "Promesas y pruebas", "El registro de brechas; contratos empresariales y de consumidor; las pruebas primero"],
-    [6, "Construido por capas", "Staging, intermediate, core y marts; estándares de CTE; materializaciones"],
-    [7, "Quién es dueño de qué", "Dominios, acceso, grupos y referencias entre proyectos"],
-    [8, "Un agente en el equipo", "Habilidades, acceso, evidencia y límites; validación, revisión y publicación"],
-    [9, "Escrito una sola vez", "Bloques de documentación, Mermaid y el catálogo; versiones y retiro"]
-  ],
+  "order": "Watch them in order. It's technical: it shows real code, YAML and Markdown from an example dbt project that runs on dbt Core with DuckDB, in this site's repository, so you can run it yourself. It makes most sense after From words to data.",
+  "order_es": "Míralas en orden. Es técnica: muestra código, YAML y Markdown reales de un proyecto de dbt de ejemplo que corre en dbt Core con DuckDB, en el repositorio de este sitio, así que puedes ejecutarlo tú mismo. Se entiende mejor después de De las palabras a los datos.",
   "thread_h": "One thread: the credential, built",
   "thread_h_es": "Un hilo: la credencial, construida",
   "thread": "From words to data ends with version 3 of the credential model approved. This series builds it, from one question asked by planning: how many learners are within 15 credit points of a graduate certificate, as at census date? It needs credentials from three systems, one learner keyed three ways, credit that counts towards awards, and history.",
@@ -40,15 +26,47 @@
   "people_h": "Who builds, who decides",
   "people_h_es": "Quién construye, quién decide",
   "people": [
-    ["tech", "Builds the model", "Jun, analytics engineer, the series' guide"],
-    ["tech", "Owns the model", "Noor, data architect"],
-    ["biz", "Owns the words", "Mei, registrar's office"],
-    ["biz", "Asks the questions", "Planning, and the learner's wallet app"]
+    [
+      "tech",
+      "Builds the model",
+      "Jun, analytics engineer, the series' guide"
+    ],
+    [
+      "tech",
+      "Owns the model",
+      "Noor, data architect"
+    ],
+    [
+      "biz",
+      "Owns the words",
+      "Mei, registrar's office"
+    ],
+    [
+      "biz",
+      "Asks the questions",
+      "Planning, and the learner's wallet app"
+    ]
   ],
   "people_es": [
-    ["tech", "Construye el modelo", "Jun, analytics engineer, guía de la serie"],
-    ["tech", "Es dueña del modelo", "Noor, arquitecta de datos"],
-    ["biz", "Es dueña de las palabras", "Mei, registro académico"],
-    ["biz", "Hace las preguntas", "Planificación, y la billetera del estudiante"]
+    [
+      "tech",
+      "Construye el modelo",
+      "Jun, analytics engineer, guía de la serie"
+    ],
+    [
+      "tech",
+      "Es dueña del modelo",
+      "Noor, arquitecta de datos"
+    ],
+    [
+      "biz",
+      "Es dueña de las palabras",
+      "Mei, registro académico"
+    ],
+    [
+      "biz",
+      "Hace las preguntas",
+      "Planificación, y la billetera del estudiante"
+    ]
   ]
 }

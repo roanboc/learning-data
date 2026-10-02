@@ -15,7 +15,7 @@ Start with *The Inner Life of Data*, the overview. Then go deeper, one topic at 
 | Changes and data contracts | [Silent change](https://roanboc.github.io/learning-data/when-things-go-wrong/silent-change/), from the series *When things go wrong* | *Refining with dbt* and *Gold* |
 | Data quality checks | [Too good to be true](https://roanboc.github.io/learning-data/when-things-go-wrong/too-good-to-be-true/), from the series *When things go wrong*, with labs and scenarios | *Refining with dbt* and *Gold* |
 | Data modelling, in depth | [From words to data](https://roanboc.github.io/learning-data/from-words-to-data/): seven films, from language and meaning to keeping models true with AI, each with labs, scenarios and Pause and think, and Spanish pages | *The sketch*, and *A Sharper Sketch* |
-| Data modelling with dbt, for analytics engineers | [In the weeds of data crafting](https://roanboc.github.io/learning-data/in-the-weeds/): a technical series; its opening film, *A model is not a transformation*, with labs, scenarios and Pause and think, and Spanish pages | *From words to data* |
+| Data modelling with dbt, for analytics engineers | [In the weeds of data crafting](https://roanboc.github.io/learning-data/in-the-weeds/): a technical series of nine films, each with labs, scenarios and Pause and think, and Spanish pages; its code and data come from [an example dbt project](films/analytics-engineering/project/) that runs on dbt Core with DuckDB | *From words to data* |
 
 And on the [Making of page](https://roanboc.github.io/learning-data/journey/), two short films about the films themselves: *Data for Films*, how they're drawn, and *That's not quite right*, how they're made, by a person and Claude.
 
@@ -66,7 +66,8 @@ films/                           one folder per film: script or story, captions/
     2-too-good-to-be-true/       Too good to be true: treatment, script (with the rigour sheet), style frames, captions and source
   making-of/                     the two Making of films: 1-data-for-films and 2-the-process, each with treatment, script, captions and source
   analytics-engineering/         the series In the weeds of data crafting, for analytics engineers: its README, series.json,
-                                 proposal.md, characters/ (Jun), shared/ (its components and tools) and one folder per film
+                                 proposal.md, characters/ (Jun), shared/ (its components and tools), project/ (the example dbt project the films
+                                 draw from, on dbt Core and DuckDB, checked by .github/workflows/credential-project.yml) and one folder per film
 site-tools/                      build_pages.py turns the Markdown pages into site pages; build_series.py makes the pages of the series (From words to data, In the weeds of data crafting);
                                  check_site.py and smoke.py check the site
 .github/workflows/pages.yml      publishes site/ on every push to main

@@ -1,6 +1,6 @@
 # In the weeds of data crafting · A model is not a transformation: script
 
-*The script of the opening film of In the weeds of data crafting, a technical series for analytics engineers, as built: 5:20, in eleven chapters, in English, 30 September 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The timings are the voiced ones (see [Pacing report](#pacing-report)). "Declare it. Then build it." is a working tagline.*
+*The script of the opening film of In the weeds of data crafting, a technical series for analytics engineers, as built: 5:30, in eleven chapters, in English, 30 September 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The timings are the voiced ones (see [Pacing report](#pacing-report)). "Declare it. Then build it." is a working tagline.*
 
 ## The promise
 

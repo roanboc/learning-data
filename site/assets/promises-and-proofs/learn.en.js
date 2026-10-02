@@ -87,7 +87,7 @@ labs:[
     {t:"3 missing · warn",d:"WARN 3. More than usual, and worth a look, but below the agreed line."},
     {t:"4 missing · warn",d:"WARN 4. The warning counts them, so a rising number is visible in every build's log."},
     {t:"5 missing · warn",d:"WARN 5: the most the learning team accepts. The build still carries on."},
-    {t:"6 missing · stop",d:"Red: FAIL 6, configured to fail if >5. dbt build skips everything built after the test: int_credentials_unioned, core_credential and the wallet's marts keep yesterday's tables."},
+    {t:"6 missing · stop",d:"Red: FAIL 6, configured to fail if >5. dbt build skips everything built after the test: int_credentials_unioned, core_credential, the credit towards awards and both consumers' marts keep yesterday's tables."},
     {t:"7 missing · stop",d:"Still red. This many means something broke: an import that dropped the emails, say. Stopping means the wallet doesn't quietly lose a batch of certificates."},
     {t:"8 missing · stop",d:"Red. The fix belongs at the source: the short-course team restores the emails, and the next build goes amber or green again."},
     {t:"Move error_if to \">8\"?",d:"It would turn this red to amber, and the build would carry on. But the level isn't yours to change: it's the learning team's decision of 9 October 2026, in docs/decisions.md. Ask them, and write the new reason down."}],

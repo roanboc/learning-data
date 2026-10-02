@@ -100,7 +100,7 @@ qs:[
  {type:"choice",lab:"layers",vis:"bl_q_award",title:"A step for the award?",sit:"core_award reads stg_student_system__awards directly. A colleague wants to add int_awards, so every core model has an intermediate step. Which reason would earn one?",
   opts:[{t:"Every entity needs an intermediate model.",why:"A step that only passes rows through adds a model to maintain and nothing to test."},{t:"It keeps the lineage graph symmetrical.",why:"The graph shows what the work needs, not a pattern to fill in. A model with nothing to do is noise in it."},{t:"A second source of awards arrives, award codes must be matched across systems, or an award rule needs a unit test.",ok:true}],
   why:"A step is earned by work: a second source to combine, keys to match, or a rule to apply and test. Until then, staging feeds the core directly."},
- {type:"order",lab:"store",vis:"bl_q_contract",title:"The contract stops the build",sit:"A sum of credit points returns a type the contract refuses, and the build stops. Put Jun's moves in order.",
+ {type:"order",lab:"ctes",vis:"bl_q_contract",title:"The contract stops the build",sit:"A sum of credit points returns a type the contract refuses, and the build stops. Put Jun's moves in order.",
   items:["Read the contract error","Find the column, and the type the contract promises","Cast the sum to that type, where it's computed","Rebuild the model and the ones that depend on it","Check the reconciliation still passes"],
   why:"The contract is the promise; the code is what changes. On DuckDB, sum returns a 128-bit integer, so the project casts it to int where it's computed. Never change the contract to match the code."}
 ],

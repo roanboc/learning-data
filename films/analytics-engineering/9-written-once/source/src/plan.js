@@ -357,7 +357,7 @@ Object.assign(LV,{
     const hh=wr_bpCode(c,30,24,600,"model/conceptual.yml",["  - name: award","    definition: >","      A qualification the university confers, …","    owner: Mei Tanaka, registrar's office"],{size:18,lh:28,h:222,hi:k==="home"?1:0});
     if(k==="home")tag(c,64,24+hh-24,V.source,TRUST,{size:18});
     wr_code(c,30,262,600,"docs/definitions.md",["{% docs award %}","**Award.** A qualification the university …","{% enddocs %}"],{size:19,lh:30,h:186,cog:true,amb:k==="generated"?1:0,hi:k==="generated"?1:0});
-    if(k==="generated")tag(c,52,262+160,V.source,TRUST,{size:18});
+    if(k==="generated")tag(c,440,262+160,V.source,TRUST,{size:18});
     const Y=i=>24+i*108,mid=i=>Y(i)+48,src=["wiki","yaml","catalog","tooltip"].indexOf(S.src);
     // arrows first, so the cards sit over their ends
     if(k==="home"){arrowTo(c,330,24+hh+2,330,260,KIND,0.9,{head:10});[0,1,2,3].forEach(i=>arrowTo(c,632,355,676,mid(i),KIND,0.85,{head:12,bend:0.05}));}

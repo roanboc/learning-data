@@ -331,9 +331,9 @@ function wo_l_read(c,w,h,st,L){const V=L.vis,p=st.pick||"both",refA=p==="grants"
     arrowTo(c,64,194,274,212,GOOD,1,{head:12,lw:3});wo_num(c,180,186,2,GOOD);
     wo_proj(c,250,304,200,76,"planning",WO_PLN,{dash:true});arrowTo(c,420,302,420,234,TRUST,1,{head:12,lw:3});wo_num(c,448,270,5,TRUST);tag(c,360,256,"v=1",TRUST,{size:18,align:"center"});});
   withA(c,readA,()=>{wo_table(c,488,48,322,156,"mart_planning__near_award",WO_PLN,{open:1});wo_table(c,488,228,322,156,"stg_student_system__learners",LAYER4[0][1],{open:1});
-    wo_team(c,886,80,0.36,WO_PLN,0,{});wrapT(c,V.analyst,886,140,140,{w:700,size:18,align:"center",color:rgba(WO_PLN,1),lh:22});arrowTo(c,848,112,806,140,GOOD,1,{head:10,lw:3});wo_num(c,842,184,1,GOOD);
+    wo_team(c,878,80,0.36,WO_PLN,0,{});wrapT(c,V.analyst,878,140,140,{w:700,size:wo_fitS(c,V.analyst.split(" ").reduce((x,y)=>x.length>y.length?x:y),136,18,700),align:"center",color:rgba(WO_PLN,1),lh:22});arrowTo(c,848,112,806,140,GOOD,1,{head:10,lw:3});wo_num(c,842,184,1,GOOD);
     wo_dash(c,826,246,126,92,WO_PLN,0,{title:V.dashS});arrowTo(c,824,300,806,316,GOOD,1,{head:10,lw:3});wo_num(c,838,222,4,GOOD);});
-  if(p==="access")tag(c,889,374,V.anyway,EDGE_,{align:"center",size:wo_fitS(c,V.anyway,110,20,700)});
+  if(p==="access")tag(c,880,374,V.anyway,EDGE_,{align:"center",size:wo_fitS(c,V.anyway,110,20,700)});
   if(p==="grants")tag(c,126,300,V.noRef,EDGE_,{align:"center",size:wo_fitS(c,V.noRef,200,20,700)});
   c.restore();}
 

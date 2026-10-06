@@ -139,8 +139,9 @@ that date: `core_credential` v1 after 31 March 2027 (DEC-STU-07). The exposures 
 
 ## Splitting into projects
 
-Today one project holds every domain (DEC-PRJ-03). Every file a domain owns is under a path named
-for it, so when a team owns a domain, its project is those paths:
+Today one project holds every domain (DEC-PRJ-03). The files a domain owns are under paths named
+for it, except its tests and analyses, which are split by purpose first and listed here by name. When
+a team owns a domain, its project is these:
 
 | What | A core domain's project (`student`) | A consumer's project (`planning`) | A consumer added later (`finance`) |
 |---|---|---|---|
@@ -149,11 +150,14 @@ for it, so when a team owns a domain, its project is those paths:
 | Macros | | `macros/planning/` | |
 | Exposures | | `exposures/planning/` | `exposures/finance/` |
 | Decisions | `models/core/student/_student__decisions.yml` | `models/marts/planning/_planning__decisions.yml` | `models/marts/finance/_finance__decisions.yml` |
+| Tests | `tests/rules/keys_decided_different_stay_apart.sql` | `tests/reconciliation/reconcile_planning_with_census_report.sql` | `tests/reconciliation/reconcile_finance_with_tuition_report.sql` |
+| Analyses | `analyses/design/fan_out_without_point_in_time.sql`, and the profiles of the sources it reads (`analyses/profiling/`) | `analyses/validation/reconcile_census_report.sql`, `analyses/validation/diff_as_was_as_is.sql` | `analyses/profiling/profile_credit_across_awards.sql`, `analyses/validation/reconcile_tuition_report.sql` |
 | Open requirements | `requirements/models/student/`, if any | `requirements/exposures/planning/`, if any | `requirements/exposures/finance/`, if any (none since it shipped) |
 | Sources | The sources it reads, with their decisions and open requirements (`sources/<system>/`, `requirements/sources/<system>/`) | None: it reads the core | None: it reads the core, pinned to the versions it was built on |
 
-A consumer added later starts the same way: Finance's files were under paths named for it from its
-first commit, so it can move out whole, and nothing else needs untangling.
+A singular test's entry in its folder's YAML (`_reconciliation__tests.yml`, `_rules__tests.yml`)
+moves with it. A consumer added later starts the same way: Finance's folders were named for it from
+its first commit, and its test and analyses are listed above, so it can move out whole.
 
 What every domain shares (`models/_shared/`, with the project's decisions; `macros/shared/`;
 `seeds/reference/shared/`; these conventions) becomes a package each project

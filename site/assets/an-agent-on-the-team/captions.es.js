@@ -18,6 +18,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "A su lado, cinco skills, un archivo cada una: esbozar el modelo conceptual, perfilar una fuente, esbozar un modelo, conciliar y comparar, revisar los metadatos.",
 "And the process: for each of the ten steps, the agent's part, and who approves it.":
 "Y el proceso: para cada uno de los diez pasos, la parte del agente y quién la aprueba.",
+"The work itself is tracked in the team's backlog tool, which the agent can read. In the project, only what's still open is written down, and it's deleted once it's done.":
+"El trabajo en sí se sigue en la herramienta de backlog del equipo, que el agente puede leer. En el proyecto solo se escribe lo que sigue abierto, y se borra cuando está hecho.",
 "Files in the project, not a long prompt. Versioned, reviewed, and read the same way by people and by agents.":
 "Archivos en el proyecto, no un prompt largo. Versionados, revisados y leídos igual por personas y por agentes.",
 "On Databricks, the agent works as its own service principal, never as a person.":

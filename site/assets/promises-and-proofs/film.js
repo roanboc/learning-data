@@ -417,12 +417,13 @@ const NARR={
  {"id":"bridge","gap":0.8,"text":"A core model makes the same promise. Its tests are the assay, and they come before the mark."}]},
 "gaps":{"name":"The gap register","lead":1.0,"tail":1.0,"vo":[
  {"id":"step","gap":0.8,"text":"Step four: name the gaps."},
- {"id":"register","gap":0.8,"text":"Jun's gap register sets what the business expects beside what the sources hold, one line per gap."},
+ {"id":"register","gap":0.8,"text":"Jun's gap register lists them beside each source, while they're open: what the business expects, beside what the source holds, one line per gap."},
  {"id":"revoked","gap":0.8,"text":"The business expects a revoked credential to be known as revoked. The learning platform just deletes it."},
  {"id":"three","gap":0.8,"text":"Every gap gets one of three decisions. Fix it at the source. Write a rule in the model. Or accept it, and write it down."},
  {"id":"both","gap":0.8,"text":"This one gets two. Anything the platform stops showing is revoked from that day. And the platform is asked for a proper flag."},
  {"id":"jordan","gap":0.8,"text":"Jordan's microcredential vanished on the twelfth of August. From that day, it reads as revoked."},
- {"id":"ten","gap":0.8,"text":"Ten gaps, ten decisions. Mei approves the ones about meaning.","say":"Ten gaps, ten decisions. May approves the ones about meaning."}]},
+ {"id":"ten","gap":0.8,"text":"Ten gaps, ten decisions. Mei approves the ones about meaning.","say":"Ten gaps, ten decisions. May approves the ones about meaning."},
+ {"id":"leave","gap":0.8,"text":"Then each gap leaves the register. A rule in the model becomes a decision, in its source's log. An accepted gap becomes a known limitation, on the model. Only a fix still awaited stays open."}]},
 "enterprise":{"name":"The enterprise contract","lead":1.0,"tail":1.0,"vo":[
  {"id":"contracts","gap":0.8,"text":"Then the contracts. The core is what everything else builds on, so it makes the strongest promise."},
  {"id":"folder","gap":0.8,"text":"The whole core folder gets two settings. Public: other projects may build on it. And a contract, enforced."},
@@ -456,19 +457,19 @@ const NARR={
  {"id":"fresh","gap":0.8,"text":"Freshness works the same way: warn when a source is a day late, fail at three."},
  {"id":"owner","gap":0.8,"text":"Who sets the level? The data's owner, with the reason written down."}]},
 "next":{"name":"Waiting, on purpose","lead":1.0,"tail":1.0,"vo":[
- {"id":"count","gap":0.8,"text":"111 data tests. Four unit tests. Every promise written down, with its proof beside it.","say":"A hundred and eleven data tests. Four unit tests. Every promise written down, with its proof beside it."},
+ {"id":"count","gap":0.8,"text":"112 data tests. Four unit tests. Every promise written down, with its proof beside it.","say":"A hundred and twelve data tests. Four unit tests. Every promise written down, with its proof beside it."},
  {"id":"red","gap":0.8,"text":"Each is written before the code it checks, so until that code is built, it can't pass. That's on purpose."},
  {"id":"green","gap":0.8,"text":"Next, the least code that turns them green, in the right place."}]}
 };
 
-const VODUR={"assay/law": 4.812, "assay/test": 3.654, "assay/hall": 5.149, "assay/buyer": 3.653, "assay/bridge": 5.35, "gaps/step": 1.514, "gaps/register": 5.943, "gaps/revoked": 6.011, "gaps/three": 6.984, "gaps/both": 7.783, "gaps/jordan": 5.923, "gaps/ten": 3.532, "enterprise/contracts": 5.498, "enterprise/folder": 6.616, "enterprise/columns": 7.176, "enterprise/stops": 5.789, "enterprise/noor": 4.877, "consumer/own": 3.488, "consumer/grains": 5.834, "consumer/protected": 4.198, "consumer/exposure": 5.661, "consumer/tell": 6.049, "consumer/approve": 2.722, "tests/step": 4.556, "tests/keys": 5.013, "tests/values": 5.429, "tests/trusted": 4.329, "tests/reconcile": 5.256, "tests/agent": 4.661, "unit/alone": 8.228, "unit/rows": 11.855, "unit/expect": 5.637, "unit/before": 5.775, "levels/not": 5.137, "levels/walkin": 5.694, "levels/agreed": 8.244, "levels/today": 2.577, "levels/fresh": 4.531, "levels/owner": 3.726, "next/count": 6.53, "next/red": 5.982, "next/green": 3.395};
+const VODUR={"assay/law": 4.812, "assay/test": 3.654, "assay/hall": 5.149, "assay/buyer": 3.653, "assay/bridge": 5.35, "gaps/step": 1.514, "gaps/register": 8.558, "gaps/revoked": 6.011, "gaps/three": 6.984, "gaps/both": 7.783, "gaps/jordan": 5.923, "gaps/ten": 3.532, "gaps/leave": 12.898, "enterprise/contracts": 5.498, "enterprise/folder": 6.616, "enterprise/columns": 7.176, "enterprise/stops": 5.789, "enterprise/noor": 4.877, "consumer/own": 3.488, "consumer/grains": 5.834, "consumer/protected": 4.198, "consumer/exposure": 5.661, "consumer/tell": 6.049, "consumer/approve": 2.722, "tests/step": 4.556, "tests/keys": 5.013, "tests/values": 5.429, "tests/trusted": 4.329, "tests/reconcile": 5.256, "tests/agent": 4.661, "unit/alone": 8.228, "unit/rows": 11.855, "unit/expect": 5.637, "unit/before": 5.775, "levels/not": 5.137, "levels/walkin": 5.694, "levels/agreed": 8.244, "levels/today": 2.577, "levels/fresh": 4.531, "levels/owner": 3.726, "next/count": 6.433, "next/red": 5.982, "next/green": 3.395};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
    Two wordless moments: the title, drawn over the struck hallmark, and the ending. */
 const BREATH={
 "assay":{"hold":{"hall":0.6,"buyer":0.6},"breathe":3.6},
-"gaps":{"hold":{"step":0.8,"register":1.0,"revoked":1.0,"three":1.2,"both":1.0,"jordan":1.0,"ten":0.6}},
+"gaps":{"hold":{"step":0.8,"register":1.0,"revoked":1.0,"three":1.2,"both":1.0,"jordan":1.0,"ten":0.9,"leave":1.2}},
 "enterprise":{"hold":{"contracts":1.0,"folder":1.2,"columns":1.2,"stops":1.3,"noor":0.4}},
 "consumer":{"hold":{"own":1.0,"grains":1.1,"protected":1.2,"exposure":1.3,"tell":1.3,"approve":0.6}},
 "tests":{"hold":{"step":1.4,"keys":0.6,"values":1.0,"trusted":0.8,"reconcile":0.9,"agent":0.4}},
@@ -2032,30 +2033,31 @@ function pp_layers(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)ret
     glass(ctx,x,yy,w,bh,10,c,{glow:6+12*on,ea:0.5+0.4*on,fill:"rgba(7,12,24,0.92)"});T(ctx,nm,x+20,yy+bh/2+7,{w:800,size:20,color:rgba(c,1)});});});
   if(o.latch!=null){const yy=y+(bh+gap)+bh/2;withA(ctx,o.latchA==null?1:o.latchA,()=>{kt_lock(ctx,x+w-40,yy+6,0.42,TRUST,1,1-o.latch);});}});}
 
-/* ---------- the gap register (docs/gaps.md), in short labels: what the business expects, what the sources hold, and the decisions ---------- */
+/* ---------- the gap register (the open gaps, in requirements/sources/<system>/), in short labels: what the business expects, what the sources hold, and the decisions ---------- */
 const PP_GAPS=[["a revoked credential is known as revoked","the platform deletes it",[1,0]],["every account names its student","some have no student ID",[1,0]],["one email, one learner","families share an email",[1]],
   ["an email is written one way","case and spaces vary",[1]],["every enrolment has an email","walk-ins can have none",[2]],["a change is dated when it happens","some are recorded late",[1,2]],
   ["the conferral of an award is recorded","no conferral record",[1,0]],["a status means one thing","three code sets",[1]],["a certificate is a credential","two kinds in one table",[1]],["a credential can expire","no source records an expiry",[2]]];
 const PP_REG={x:140,y:150,w:1400,rh:56,cols:[60,420,380,540]};
 // the register: rows type in as o.p goes 0..10; o.tags (0..1) shows the decisions; o.ink (0..1) turns the agent's teal draft to approved ink;
-// o.hiRow {i:0..1} glows a row; o.ticks {i:0..1} gold ticks at the row's end
+// o.hiRow {i:0..1} glows a row; o.ticks {i:0..1} gold ticks at the row's end; o.gone {i:0..1} fades a row out of the register, struck through, once its gap is settled
 function pp_register(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const R=PP_REG,hh=118,h=hh+R.rh*10+14,p=o.p==null?10:o.p;
   withA(ctx,a,()=>{glass(ctx,R.x,R.y,R.w,h,16,[170,205,255],{glow:12,ea:0.6,fill:"rgba(6,10,20,0.96)"});
-    ctx.fillStyle="rgba(170,205,255,0.9)";rr(ctx,R.x+18,R.y+22,10,10,3);ctx.fill();T(ctx,"docs/gaps.md",R.x+38,R.y+34,{f:"mono",w:500,size:18,color:"rgba(170,205,255,1)"});
+    ctx.fillStyle="rgba(170,205,255,0.9)";rr(ctx,R.x+18,R.y+22,10,10,3);ctx.fill();T(ctx,"requirements/ · the open gaps",R.x+38,R.y+34,{f:"mono",w:500,size:18,color:"rgba(170,205,255,1)"});
     const lw=tw(ctx,PP_RUN,18,700)+28,lx=R.x+R.w-16-lw;ctx.fillStyle="rgba(8,14,24,0.95)";rr(ctx,lx,R.y+13,lw,30,15);ctx.fill();ctx.strokeStyle=rgba(WEED,0.8);ctx.lineWidth=1.5;rr(ctx,lx,R.y+13,lw,30,15);ctx.stroke();T(ctx,PP_RUN,lx+14,R.y+34,{w:700,size:18,color:rgba(WEED,1)});
     let cx=R.x;["#","expects","holds","decision"].forEach((s,j)=>{withA(ctx,j===3?(o.tags||0):1,()=>T(ctx,s,cx+16,R.y+96,{w:800,size:20,color:rgba(j===1?TRUST:j===2?EDGE_:SOFT,1)}));cx+=R.cols[j];});
     ctx.fillStyle="rgba(170,200,245,0.16)";ctx.fillRect(R.x+14,R.y+hh-8,R.w-28,1.2);
-    PP_GAPS.forEach(([ex,ho,dec],i)=>{const q=clamp(p-i,0,1);if(q<=0)return;const yy=R.y+hh+i*R.rh,hi=o.hiRow?o.hiRow[i]||0:0,col=mix(KT_AI,INK,o.ink||0);
+    PP_GAPS.forEach(([ex,ho,dec],i)=>{const q=clamp(p-i,0,1);if(q<=0)return;const yy=R.y+hh+i*R.rh,hi=o.hiRow?o.hiRow[i]||0:0,col=mix(KT_AI,INK,o.ink||0),gn=o.gone?o.gone[i]||0:0;withA(ctx,1-0.78*gn,()=>{
       if(hi>0)withA(ctx,hi,()=>{ctx.fillStyle=rgba(o.hiCol||PP_DEC[2][1],0.16);rr(ctx,R.x+8,yy+4,R.w-16,R.rh-8,8);ctx.fill();});
       T(ctx,String(i+1),R.x+16,yy+R.rh/2+7,{f:"mono",w:500,size:20,color:rgba(SOFT,q)});
       T(ctx,typeOn(ex,q),R.x+R.cols[0]+16,yy+R.rh/2+7,{w:600,size:20,color:rgba(col,1)});T(ctx,typeOn(ho,q),R.x+R.cols[0]+R.cols[1]+16,yy+R.rh/2+7,{w:600,size:20,color:rgba(mix(col,EDGE_,0.35),1)});
       let tx=R.x+R.cols[0]+R.cols[1]+R.cols[2]+12;dec.forEach((k,j)=>{const ta=clamp((o.tags||0)*12-i*0.9-j*0.4,0,1);if(ta>0)tx+=pp_dtag(ctx,tx,yy+R.rh/2,k,ta,{size:18})+8;});
-      if(o.ticks&&o.ticks[i]>0)kt_gtick(ctx,R.x+R.w-30,yy+R.rh/2,13,o.ticks[i]);});});}
+      if(o.ticks&&o.ticks[i]>0)kt_gtick(ctx,R.x+R.w-30,yy+R.rh/2,13,o.ticks[i]);});
+      if(gn>0){ctx.fillStyle=rgba(SOFT,0.7*gn);ctx.fillRect(R.x+R.cols[0]+10,yy+R.rh/2,(R.w-R.cols[0]-60)*clamp(gn*1.4,0,1),1.6);}});});}
 
-// gap 1 as docs/gaps.md has it, rendered as a table (line 8; the decision trimmed with …). o.lit {exp, real, dec}: 0..1
+// gap 1 as its register had it while it was open (GAP-LMS-01), rendered as a table (the decision trimmed with …). o.lit {exp, real, dec}: 0..1
 function pp_gap1(ctx,x,y,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const C=[60,300,450,540,300],w=C.reduce((s,c)=>s+c,0),h=262,lit=o.lit||{};
   withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,[170,205,255],{glow:12,ea:0.6,fill:"rgba(6,10,20,0.96)"});
-    ctx.fillStyle="rgba(170,205,255,0.9)";rr(ctx,x+18,y+22,10,10,3);ctx.fill();T(ctx,"docs/gaps.md · line 8",x+38,y+34,{f:"mono",w:500,size:18,color:"rgba(170,205,255,1)"});
+    ctx.fillStyle="rgba(170,205,255,0.9)";rr(ctx,x+18,y+22,10,10,3);ctx.fill();T(ctx,"requirements/sources/learning_platform/ · GAP-LMS-01",x+38,y+34,{f:"mono",w:500,size:18,color:"rgba(170,205,255,1)"});
     const lw=tw(ctx,PP_RUN,18,700)+28,lx=x+w-16-lw;ctx.fillStyle="rgba(8,14,24,0.95)";rr(ctx,lx,y+13,lw,30,15);ctx.fill();ctx.strokeStyle=rgba(WEED,0.8);ctx.lineWidth=1.5;rr(ctx,lx,y+13,lw,30,15);ctx.stroke();T(ctx,PP_RUN,lx+14,y+34,{w:700,size:18,color:rgba(WEED,1)});
     let cx=x;["#","Expectation","Reality","Decision","Where"].forEach((s,j)=>{T(ctx,s,cx+16,y+92,{w:800,size:20,color:rgba(SOFT,1)});cx+=C[j];});
     ctx.fillStyle="rgba(170,200,245,0.16)";ctx.fillRect(x+14,y+108,w-28,1.2);
@@ -2063,7 +2065,7 @@ function pp_gap1(ctx,x,y,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;
     const L=(s,xx,yy,col,f)=>T(ctx,s,xx,yy,{f,w:600,size:20,color:col||rgba(INK,0.95)});
     L("1",x+16,y+146,rgba(SOFT,1),"mono");
     let xx=cell(1,"exp",TRUST);L("A revoked credential is",xx,y+146);L("known as revoked.",xx,y+174);
-    xx=cell(2,"real",EDGE_);L("The learning platform has no",xx,y+146);L("revocation flag: it deletes a",xx,y+174);L("revoked badge.",xx,y+202);
+    xx=cell(2,"real",EDGE_);L("The learning platform has no",xx,y+146);L("revocation flag. It deletes a",xx,y+174);L("revoked badge.",xx,y+202);
     xx=cell(3,"dec",PP_INT);const r1="Rule in the model:",f1="Fix at source";T(ctx,r1,xx,y+146,{w:800,size:20,color:rgba(PP_DEC[1][1],1)});L(" a badge that disappears",xx+tw(ctx,r1,20,800),y+146);
     L("is revoked from the day the platform",xx,y+174);L("stopped showing it.",xx,y+202);T(ctx,f1,xx+tw(ctx,"stopped showing it. ",20,600),y+202,{w:800,size:20,color:rgba(PP_DEC[0][1],1)});L(", requested: …",xx+tw(ctx,"stopped showing it. ",20,600)+tw(ctx,f1,20,800),y+202);
     xx=cell(4,"where",PP_INT);L("int_credentials_",xx,y+146,rgba(PP_INT,1),"mono");L("unioned",xx,y+174,rgba(PP_INT,1),"mono");});
@@ -2208,7 +2210,7 @@ const PP_N={
   expiry:(c,w,h,st,L)=>{const V=L.vis,Q=V.q;c.save();pp_lfit(c,w,h,600,320);pp_fitT(c,V.jordan,10,32,280,{w:700,size:24,min:16,color:rgba(SOFT,1)});
     glass(c,10,46,280,128,16,PP_LMS,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.95)"});pp_fitT(c,V.jordanName,26,96,250,{w:800,size:28,min:18});T(c,"LMS|B-5028",26,146,{f:"mono",w:500,size:26,color:rgba(PP_LMS,1)});
     T(c,Q.expiry+":",10,236,{w:700,size:30,color:rgba(SOFT,1)});T(c,"?",10+tw(c,Q.expiry+":",30,700)+14,238,{w:800,size:36,color:rgba(EDGE_,1)});
-    pp_fitT(c,"docs/gaps.md · 10",316,46,276,{f:"mono",w:500,size:22,min:16,color:"rgba(170,205,255,1)"});wrapT(c,Q.none,316,100,276,{w:700,size:30});pp_chipFit(c,316,250,V.dec[2],PP_DEC[2][1],{size:28,min:18},276);c.restore();},
+    pp_fitT(c,"requirements/ · gap 10",316,46,276,{f:"mono",w:500,size:22,min:16,color:"rgba(170,205,255,1)"});wrapT(c,Q.none,316,100,276,{w:700,size:30});pp_chipFit(c,316,250,V.dec[2],PP_DEC[2][1],{size:28,min:18},276);c.restore();},
   fresh:(c,w,h,st,L)=>{const V=L.vis,Q=V.q;c.save();pp_lfit(c,w,h,600,320);pp_clock(c,44,48,34,0.66,PP_SIS,1);T(c,"student_system",96,58,{f:"mono",w:500,size:26,color:rgba(PP_SIS,1)});
     const X0=40,X1=520,dx=(X1-X0)/3,Y=170;[[0,1,GOOD],[1,3,PP_AMB]].forEach(([a,b,zc])=>{c.fillStyle=rgba(zc,0.3);rr(c,X0+a*dx,Y-12,(b-a)*dx,24,6);c.fill();});c.fillStyle=rgba(BAD,0.4);rr(c,X1,Y-12,52,24,6);c.fill();
     Q.days.forEach((s,i)=>{const x=X0+i*dx;c.fillStyle=rgba(SOFT,0.9);c.fillRect(x-1,Y-20,2,40);const sw=tw(c,s,24,700);T(c,s,Math.max(4+sw/2,Math.min(596-sw/2,x)),Y+50,{w:700,size:24,align:"center",color:rgba(SOFT,1)});});
@@ -2222,7 +2224,7 @@ const PP_N={
 Object.assign(LV,{
   // write the contract: the YAML card filling in from the choices, and what the build says
   pp_l_contract:(c,w,h,st,L)=>{if(pp_nar(c))return PP_N.contract(c,w,h,st,L);const V=L.vis,pk=st.pick||[];c.save();pp_lfit(c,w,h,960,440);const X=20,Y=14,CW=920,RH=40;
-    glass(c,X,Y,CW,264,14,TRUST,{glow:10,ea:0.7,fill:"rgba(6,10,20,0.96)"});pp_cardHead(c,X,Y,CW,"models/core/_core__models.yml",V.run,TRUST);
+    glass(c,X,Y,CW,264,14,TRUST,{glow:10,ea:0.7,fill:"rgba(6,10,20,0.96)"});pp_cardHead(c,X,Y,CW,"models/core/student/_core_student__models.yml",V.run,TRUST);
     const CX=[X+24,X+330,X+530,X+690];V.cols.forEach((s,j)=>T(c,s,CX[j],Y+84,{w:800,size:18,color:rgba(SOFT,1)}));c.fillStyle="rgba(170,200,245,0.16)";c.fillRect(X+14,Y+96,CW-28,1.2);
     const mm=[],gets=[];
     PP_LC.forEach((col,i)=>{const y=Y+126+i*RH,p=pk[i],on=p!=null,v=on?col.o[p]:undefined;
@@ -2259,7 +2261,7 @@ Object.assign(LV,{
     T(c,V.through,880,72,{w:700,size:18,align:"center",color:rgba(SOFT,1)});c.restore();},
   // decide the gap: the register, each line taking the decision chosen; Jordan's badge on the right
   pp_l_decide:(c,w,h,st,L)=>{if(pp_nar(c))return PP_N.decide(c,w,h,st,L);const V=L.vis,Lb=L.labs.find(l=>l.vis==="pp_l_decide"),pk=st.pick||{},K={both:[1,0],rule:[1],ruleacc:[1,2],accept:[2]};c.save();pp_lfit(c,w,h,960,440);
-    glass(c,14,10,692,420,14,[170,205,255],{glow:10,ea:0.6,fill:"rgba(6,10,20,0.96)"});pp_cardHead(c,14,8,692,"docs/gaps.md",V.run,[170,205,255]);
+    glass(c,14,10,692,420,14,[170,205,255],{glow:10,ea:0.6,fill:"rgba(6,10,20,0.96)"});pp_cardHead(c,14,8,692,"requirements/ · the open gaps",V.run,[170,205,255]);
     V.gaps.forEach((s,i)=>{const y=82+i*34.6,b=pk[i],ok=st.checked&&b===Lb.w.items[i].b,no=st.checked&&b!==Lb.w.items[i].b;
       if(i===0)withA(c,0.8,()=>{c.fillStyle=rgba(PP_LMS,0.1);rr(c,22,y-24,676,34,8);c.fill();});
       T(c,String(i+1),36,y,{f:"mono",w:500,size:18,align:"center",color:rgba(SOFT,1)});let x=st.checked?650:688;const tags=[];
@@ -2312,7 +2314,7 @@ Object.assign(LV,{
     pp_outline(c,392,96,192,110,"core_credential",TRUST,{size:17});wrapT(c,Q.notYet,488,246,196,{w:700,size:18,align:"center",color:rgba(SOFT,1)});c.restore();},
   pp_q_expiry:(c,w,h,st,L)=>{if(pp_nar(c))return PP_N.expiry(c,w,h,st,L);const V=L.vis,Q=V.q;c.save();pp_lfit(c,w,h,600,320);pp_fitT(c,V.jordan,24,32,270,{w:700,size:18,color:rgba(SOFT,1)});pp_lcred(c,24,48,270,140,V.micro,V.jordanName,"LMS|B-5028",PP_LMS);
     T(c,Q.expiry+":",24,226,{w:700,size:20,color:rgba(SOFT,1)});T(c,"?",24+tw(c,Q.expiry+":",20,700)+12,228,{w:800,size:26,color:rgba(EDGE_,1)});
-    T(c,"docs/gaps.md · 10",340,70,{f:"mono",w:500,size:17,color:"rgba(170,205,255,1)"});wrapT(c,Q.none,340,110,240,{w:700,size:20});pp_chip(c,340,210,V.dec[2],PP_DEC[2][1],{size:19});c.restore();},
+    T(c,"requirements/ · gap 10",340,70,{f:"mono",w:500,size:17,color:"rgba(170,205,255,1)"});wrapT(c,Q.none,340,110,240,{w:700,size:20});pp_chip(c,340,210,V.dec[2],PP_DEC[2][1],{size:19});c.restore();},
   pp_q_fresh:(c,w,h,st,L)=>{if(pp_nar(c))return PP_N.fresh(c,w,h,st,L);const V=L.vis,Q=V.q;c.save();pp_lfit(c,w,h,600,320);pp_clock(c,60,64,34,0.66,PP_SIS,1);T(c,"student_system",110,72,{f:"mono",w:500,size:18,color:rgba(PP_SIS,1)});
     const X0=60,X1=540,dx=(X1-X0)/3,Y=170;[[0,1,GOOD],[1,3,PP_AMB]].forEach(([a,b,zc])=>{c.fillStyle=rgba(zc,0.3);rr(c,X0+a*dx,Y-10,(b-a)*dx,20,6);c.fill();});c.fillStyle=rgba(BAD,0.4);rr(c,X1,Y-10,40,20,6);c.fill();
     Q.days.forEach((s,i)=>{const x=X0+i*dx;c.fillStyle=rgba(SOFT,0.9);c.fillRect(x-1,Y-18,2,36);T(c,s,x,Y+46,{w:700,size:18,align:"center",color:rgba(SOFT,1)});});
@@ -2397,9 +2399,11 @@ scene("gaps",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   // the register: drafted by the agent, one line per gap; it steps back for gap 1 and returns for the ten decisions
   const away=fin(t,Rv-0.5,0.5)*(1-fin(t,Tn-0.05,0.6)),regA=fin(t,Rg-0.2,0.5)*(1-away);
   const p=clamp((t-w("register","register")-0.3)/0.42,0,10),tags=clamp((t-w("ten","ten decisions")+0.4)/1.2,0,1),ink=fin(t,w("ten","May")+0.2,0.8);
-  const hiRow={4:pulseAt(t,w("ten","ten decisions")+1.0,1.6),9:pulseAt(t,w("ten","ten decisions")+1.0,1.6)},meaning=[0,6,8];
+  const Lv=c("leave"),hiRow={4:pulseAt(t,w("ten","ten decisions")+1.0,1.6),9:pulseAt(t,w("ten","ten decisions")+1.0,1.6)},meaning=[6,8];
+  // once decided, each gap leaves the register; the three still waiting on a fix at the source stay open
+  const OPEN=[0,1,6],gone={};[2,3,4,5,7,8,9].forEach((i,k)=>gone[i]=fin(t,w("leave","leaves")+k*0.14,0.5));const stay=fin(t,w("leave","stays open")-0.2,0.5);OPEN.forEach(i=>hiRow[i]=stay);
   const ticks={};for(let i=0;i<10;i++)ticks[i]=fin(t,w("ten","approves")+(meaning.includes(i)?meaning.indexOf(i)*0.25:1.0+i*0.08),0.3);
-  arrive(ctx,840,500,t,Rg-0.2,()=>pp_register(ctx,t,{a:regA,p,tags,ink,hiRow,ticks}),{d:0.9,from:0.96,dy:24});
+  arrive(ctx,840,500,t,Rg-0.2,()=>pp_register(ctx,t,{a:regA,p,tags,ink,hiRow,ticks,gone,hiCol:stay>0?PP_AMB:undefined}),{d:0.9,from:0.96,dy:24});
   kt_agent(ctx,1610,240,22,t,{a:fin(t,Rg-0.2,0.5)*(1-fin(t,w("register","one line per gap")+4.4,0.6))*(1-away),busy:1});
   // gap 1, as the file has it
   arrive(ctx,960,290,t,Rv,()=>pp_gap1(ctx,150,160,t,{a:dA,lit:{exp:fin(t,w("revoked","expects"),0.4),real:fin(t,w("revoked","deletes"),0.4),dec:fin(t,Bo,0.4)}}),{dy:30,from:0.95});
@@ -2414,6 +2418,10 @@ scene("gaps",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   arrive(ctx,1340,700,t,w("revoked","deletes")+0.0,()=>pp_cred(ctx,1180,610,320,184,"LMS|B-5028","Data Visualisation",{a:bA,fade:del,back,hi:pulseAt(t,Jo,1.4)}),{dy:30});
   withA(ctx,bA*fin(t,Jo,0.5),()=>{T(ctx,"Jordan's",1340,594,{w:800,size:22,align:"center",color:rgba(PP_LMS,1)});withA(ctx,fin(t,w("jordan","twelfth")-0.1,0.4),()=>tag(ctx,1590,702,"12 Aug",SOFT,{size:20}));});
   if(back>0)withA(ctx,bA*(1-fin(t,Jo+5.6,0.6)),()=>arrowTo(ctx,1110,478,1300,602,PP_DEC[1][1],0.85,{p:back,bend:-0.15,dash:[6,6],head:12}));
+  // where each gap goes once it's settled: a decision in its source's log, a known limitation on the model, or still open
+  [["a decision, in its source's log","sources/<system>/_<system>__decisions.yml",w("leave","becomes a decision"),TRUST],["a known limitation, on the model","meta.limitations",w("leave","known limitation"),PP_DEC[2][1]],
+   ["still open, until the fix arrives","requirements/sources/<system>/",w("leave","stays open"),PP_AMB]].forEach(([h,f,t0,col],k)=>{const x=140+k*480;
+    arrive(ctx,x+220,935,t,t0-0.2,()=>{glass(ctx,x,880,440,110,14,col,{glow:12,ea:0.75,fill:"rgba(7,12,24,0.96)"});T(ctx,h,x+22,922,{w:800,size:20,color:rgba(col,1)});pp_fitT(ctx,f,x+22,962,396,{f:"mono",w:500,size:18,min:14,color:rgba(INK,0.9)});},{dy:20});});
   // Mei approves the decisions about meaning
   arrive(ctx,1700,520,t,w("ten","May")-0.2,()=>{pp_face(ctx,"mei",1700,520,64,t,{name:"Mei",role:"approves meaning"});},{from:0.85});
   ctx.restore();vign(ctx,S);});
@@ -2435,7 +2443,7 @@ scene("enterprise",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,
   withA(ctx,fin(t,w("folder","Public"),0.4)*(1-fin(t,Co-0.9,0.4)),()=>tag(ctx,800,525,"other projects may build on it",TRUST,{size:18}));
   // the credential's contract: every column, its type, what can't be empty; then its grain
   const flip=fin(t,w("stops","disagree"),0.4)*(1-fin(t,No,0.5)),bLit={7:fin(t,w("columns","every column"),0.4),10:fin(t,w("columns","its type"),0.4),16:Math.max(fin(t,w("columns","its type"),0.4),flip),11:fin(t,w("columns","can't be empty"),0.4),4:fin(t,w("columns","grain"),0.4)};
-  arrive(ctx,1350,580,t,Co-0.4,()=>pp_code(ctx,880,330,940,"models/core/_core__models.yml",PP_CRED,{size:18,lh:27,p:clamp((t-Co+0.2)/1.8,0,1),lit:bLit,litCols:{16:flip>0.5?BAD:TRUST},edge:TRUST,swap:{16:["        data_type: string",flip,BAD]}}),{dy:30});
+  arrive(ctx,1350,580,t,Co-0.4,()=>pp_code(ctx,880,330,940,"models/core/student/_core_student__models.yml",PP_CRED,{size:18,lh:27,p:clamp((t-Co+0.2)/1.8,0,1),lit:bLit,litCols:{16:flip>0.5?BAD:TRUST},edge:TRUST,swap:{16:["        data_type: string",flip,BAD]}}),{dy:30});
   // the query and the contract disagree: the build stops before the table is made
   const run=clamp((t-w("stops","build")+0.8)/0.8,0,1),red=fin(t,w("stops","stops"),0.3),ok=fin(t,No+0.2,0.6),eA=fin(t,w("stops","build")-0.9,0.5);
   arrive(ctx,470,740,t,w("stops","build")-0.9,()=>{const col=mix(mix([150,180,220],BAD,red),GOOD,ok);glass(ctx,80,620,780,250,16,col,{glow:14,ea:0.85,fill:"rgba(10,8,14,0.96)"});
@@ -2472,8 +2480,8 @@ scene("consumer",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   arrive(ctx,960,520,t,Pr-0.3,()=>pp_code(ctx,620,400,680,"dbt_project.yml",PP_MARTS,{a:mA,p:clamp((t-Pr)/1.2,0,1),edge:PP_MART,lit:{3:fin(t,w("protected","protected"),0.4),4:fin(t,w("protected","enforced"),0.4),5:fin(t,w("protected","enforced"),0.4)}}),{dy:30});
   // each declares an exposure: who reads it, with an owner and an email
   const dimE=1-fin(t,Te+0.8,0.6)*(1-fin(t,Ap,0.6)),lit=(tt)=>({4:fin(t,tt,0.4),7:fin(t,w("exposure","owner"),0.4),8:fin(t,w("exposure","owner"),0.4),9:fin(t,w("exposure","email"),0.4)});
-  arrive(ctx,510,610,t,Ex-0.2,()=>pp_code(ctx,140,368,740,"models/marts/planning/_planning__models.yml",PP_EXP_P,{a:dimE,size:18,lh:24,p:clamp((t-Ex)/1.6,0,1),edge:PP_MART,lit:lit(w("exposure","dashboard"))}),{dy:30});
-  arrive(ctx,1410,610,t,w("exposure","app")-0.3,()=>pp_code(ctx,1040,368,740,"models/marts/wallet/_wallet__models.yml",PP_EXP_W,{a:dimE,size:18,lh:24,p:clamp((t-w("exposure","app")+0.1)/1.4,0,1),edge:PP_MART,lit:lit(w("exposure","app"))}),{dy:30});
+  arrive(ctx,510,610,t,Ex-0.2,()=>pp_code(ctx,140,368,740,"exposures/planning/_planning__exposures.yml",PP_EXP_P,{a:dimE,size:18,lh:24,p:clamp((t-Ex)/1.6,0,1),edge:PP_MART,lit:lit(w("exposure","dashboard"))}),{dy:30});
+  arrive(ctx,1410,610,t,w("exposure","app")-0.3,()=>pp_code(ctx,1040,368,740,"exposures/wallet/_wallet__exposures.yml",PP_EXP_W,{a:dimE,size:18,lh:24,p:clamp((t-w("exposure","app")+0.1)/1.4,0,1),edge:PP_MART,lit:lit(w("exposure","app"))}),{dy:30});
   // change the credential: the lineage reaches one exposure, the wallet app
   const run=fin(t,Te+0.2,1.4);if(run>0&&bandY>800){const[x0,y0]=P.core_credential,pts=[];for(let i=0;i<=40;i++){const u=i/40*run,v=1-u;pts.push([v*v*v*x0+3*v*v*u*x0+3*v*u*u*1410+u*u*u*1410,v*v*v*(y0-16)+3*v*v*u*(y0-320)+3*v*u*u*500+u*u*u*332]);}
     withA(ctx,1-fin(t,Ap-0.4,0.4),()=>{ctx.save();ctx.strokeStyle=rgba(TRUST,1);ctx.lineWidth=4;ctx.shadowColor=rgba(TRUST,0.8);ctx.shadowBlur=14;ctx.beginPath();pts.forEach((q,i)=>i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]));ctx.stroke();ctx.restore();});}
@@ -2518,14 +2526,14 @@ scene("tests",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   withA(ctx,fin(t,w("step","done looks like")-0.1,0.5)*oA,()=>T(ctx,"they say what done looks like",1290,440,{w:700,size:22,align:"center",color:rgba(SOFT,1)}));
   // agreed values, and the rule that versions never overlap
   const vOut=fin(t,Tr-0.8,0.5);
-  arrive(ctx,1290,290,t,w("values","agreed values")-0.4,()=>pp_code(ctx,760,150,1060,"models/core/_core__models.yml",PP_AWARD,{a:1-vOut,p:clamp((t-w("values","agreed values")+0.2)/1.2,0,1),edge:TRUST,lit:{6:fin(t,w("values","agreed values")+0.4,0.4),4:fin(t,w("values","agreed values")+0.4,0.4)}}),{dy:30});
+  arrive(ctx,1290,290,t,w("values","agreed values")-0.4,()=>pp_code(ctx,760,150,1060,"models/core/course/_core_course__models.yml",PP_AWARD,{a:1-vOut,p:clamp((t-w("values","agreed values")+0.2)/1.2,0,1),edge:TRUST,lit:{6:fin(t,w("values","agreed values")+0.4,0.4),4:fin(t,w("values","agreed values")+0.4,0.4)}}),{dy:30});
   arrive(ctx,1290,560,t,w("values","never overlap")-0.4,()=>pp_code(ctx,760,460,1060,"tests/generic/versions_do_not_overlap.sql",PP_VER,{a:1-vOut,size:18,lh:27,p:clamp((t-w("values","never overlap")+0.2)/1.0,0,1),edge:PP_INT}),{dy:30});
   // a number people already trust: the census report, weighed against the mart that isn't built yet
   const cA=fin(t,Tr-0.1,0.5);
-  arrive(ctx,1000,280,t,Tr-0.1,()=>{T(ctx,"seeds/census_report.csv",780,150,{f:"mono",w:500,size:18,color:rgba(TRUST,1)});tag(ctx,1046,144,PP_RUN,WEED,{size:18});
+  arrive(ctx,1000,280,t,Tr-0.1,()=>{T(ctx,"seeds/expected/planning/census_report.csv",780,150,{f:"mono",w:500,size:18,color:rgba(TRUST,1)});tag(ctx,1046,144,PP_RUN,WEED,{size:18});
     pp_table(ctx,780,172,[300,140],[["faculty","learners"],["Arts and Education",2],["Business",3],["Engineering and IT",5],["Health",2],["total",12]],{size:20,rh:42,col:TRUST,align:[0,"right"],lit:{5:fin(t,w("trusted","twelve"),0.4)}});},{dy:30,a:cA});
   arrive(ctx,1530,420,t,w("trusted","trust")-0.2,()=>pp_scale(ctx,1530,440,0.9,-0.1+0.02*Math.sin(t*1.2),{left:"12",leftLab:"census report",rightLab:"the mart",col:TRUST}),{from:0.9});
-  arrive(ctx,1290,590,t,Re-0.3,()=>pp_code(ctx,760,460,1060,"tests/reconcile_planning_with_census_report.sql",PP_REC,{size:18,lh:27,p:clamp((t-Re)/1.4,0,1),edge:TRUST,lit:{5:fin(t,w("reconcile","fails"),0.4),6:fin(t,w("reconcile","fails"),0.4)}}),{dy:30});
+  arrive(ctx,1290,590,t,Re-0.3,()=>pp_code(ctx,760,460,1060,"tests/reconciliation/reconcile_planning_with_census_report.sql",PP_REC,{size:18,lh:27,p:clamp((t-Re)/1.4,0,1),edge:TRUST,lit:{5:fin(t,w("reconcile","fails"),0.4),6:fin(t,w("reconcile","fails"),0.4)}}),{dy:30});
   withA(ctx,fin(t,w("reconcile","faculty"),0.4),()=>tag(ctx,1300,766,"faculty by faculty",TRUST,{align:"center",size:20}));
   // the agent drafts; Jun reviews (both kept clear of the two-line captions)
   arrive(ctx,1010,830,t,Ag-0.2,()=>{kt_agent(ctx,800,820,14,t,{});T(ctx,"the agent drafts, from the contracts and the register",832,828,{w:700,size:20,color:rgba(KT_AI,1)});},{dy:12});
@@ -2555,9 +2563,9 @@ scene("unit",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   pp_flow(ctx,1270,300,[["given: made-up rows",PP_INT,false],["the model's logic",PP_INT,true],["expect: these rows",GOOD,false]],[fin(t,w("alone","a few rows")-0.1,0.5),fin(t,w("alone","purpose")-0.1,0.5),fin(t,w("alone","unit test")-0.1,0.5)],{a:fA,size:22,gap:70});
   // given: two made-up rows; then expect: three versions
   const sw=ease(fin(t,Ex-0.3,0.8));
-  arrive(ctx,1270,270,t,w("rows","credit rule")-0.4,()=>pp_code(ctx,720,lerp(110,-260,sw),1100,"models/intermediate/_int_models.yml",PP_GIVEN,{a:1-sw,size:18,lh:27,p:clamp((t-w("rows","credit rule"))/1.4,0,1),edge:PP_INT,lit:{7:fin(t,w("rows","passed unit"),0.4),8:fin(t,w("rows","microcredential counts"),0.4)}}),{dy:30});
+  arrive(ctx,1270,270,t,w("rows","credit rule")-0.4,()=>pp_code(ctx,720,lerp(110,-260,sw),1100,"models/intermediate/student/_int_student__models.yml",PP_GIVEN,{a:1-sw,size:18,lh:27,p:clamp((t-w("rows","credit rule"))/1.4,0,1),edge:PP_INT,lit:{7:fin(t,w("rows","passed unit"),0.4),8:fin(t,w("rows","microcredential counts"),0.4)}}),{dy:30});
   const E3=[w("expect","fifteen"),w("expect","twenty"),w("expect","fifteen again")],ok=fin(t,w("before","proved"),0.35);
-  if(sw>0)pp_code(ctx,720,lerp(460,110,sw),1100,"models/intermediate/_int_models.yml",PP_EXPECT,{a:sw,size:18,lh:27,edge:mix(PP_INT,GOOD,ok),lit:{4:fin(t,E3[0],0.3),5:fin(t,E3[1],0.3),6:fin(t,E3[2],0.3)},litCol:GOOD});
+  if(sw>0)pp_code(ctx,720,lerp(460,110,sw),1100,"models/intermediate/student/_int_student__models.yml",PP_EXPECT,{a:sw,size:18,lh:27,edge:mix(PP_INT,GOOD,ok),lit:{4:fin(t,E3[0],0.3),5:fin(t,E3[1],0.3),6:fin(t,E3[2],0.3)},litCol:GOOD});
   if(ok>0)withA(ctx,ok,()=>{glow(ctx,1790,412,40,GOOD,0.4);ctx.fillStyle="rgba(8,20,14,0.96)";ctx.beginPath();ctx.arc(1790,412,20,0,TAU);ctx.fill();ring(ctx,1790,412,20,GOOD,1,2.5);tick_(ctx,1790,413,24,GOOD,1);});
   // the timeline of the two rows, and the credit they add up to (kept above the captions)
   const X=d=>200+d/273*1520,aA=fin(t,Ro-0.2,0.6),AX=770,MB=652,UB=712;
@@ -2582,7 +2590,7 @@ scene("unit",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 7. Warn or stop ---------- */
-const PP_SCY=["      - name: customer_bk","        description: >","          The customer who enrolled, by email. An enrolment with no email can't be matched to a","          learner. The learning team agreed: warn when any current enrolment has none, stop the","          build when more than five do (see docs/gaps.md).","        data_tests:","          - not_null:","              config:","                where: is_current_version","                warn_if: \">0\"","                error_if: \">5\""];
+const PP_SCY=["      - name: customer_bk","        description: >","          The customer who enrolled, by email. An enrolment with no email can't be matched to a","          learner. The learning team agreed: warn when any current enrolment has none, stop the","          build when more than five do (see DEC-SC-01 and LIM-SC-02).","        data_tests:","          - not_null:","              config:","                where: is_current_version","                warn_if: \">0\"","                error_if: \">5\""];
 const PP_FRESH=["      loaded_at_field: \"cast(_loaded_at as timestamp)\"","      freshness:","        warn_after: {count: 1, period: day}","        error_after: {count: 3, period: day}"];
 scene("levels",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.03,y:480});
@@ -2610,13 +2618,13 @@ scene("levels",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   const fOut=fin(t,Fr-0.3,0.6);
   arrive(ctx,1255,300,t,Wa+0.6,()=>pp_code(ctx,700,120,1110,"models/staging/short_courses/_short_courses__models.yml",PP_SCY,{a:1-fOut,size:18,lh:27,p:clamp((t-Wa-0.8)/1.8,0,1),edge:PP_SC,lit:{9:fin(t,t0,0.4),10:fin(t,t5,0.4),3:fin(t,w("agreed","learning team"),0.4)},litCol:PP_AMB}),{dy:30});
   // the learning team's decision, from the decisions log
-  arrive(ctx,1250,640,t,w("agreed","learning team")-0.2,()=>{pp_face(ctx,"tom",760,650,46,t,{name:"",role:""});T(ctx,"the learning team · docs/decisions.md",830,624,{w:800,size:22,color:rgba(TRUST,1)});
-    wrapT(ctx,"9 Oct 2026 · An enrolment with no email: warn when there's any, stop the build when more than five.",830,660,940,{w:600,size:20,color:rgba(INK,0.95)});},{dy:20});
+  arrive(ctx,1250,640,t,w("agreed","learning team")-0.2,()=>{pp_face(ctx,"tom",760,650,46,t,{name:"",role:""});T(ctx,"the learning team · DEC-SC-01 · _short_courses__decisions.yml",830,624,{w:800,size:22,color:rgba(TRUST,1)});
+    wrapT(ctx,"9 Oct 2026 · An enrolment with no email - warn when there's any, stop the build when more than five.",830,660,940,{w:600,size:20,color:rgba(INK,0.95)});},{dy:20});
   kt_gtick(ctx,1790,612,15,fin(t,w("agreed","learning team")+0.6,0.35));
   // today's build: one warning, and it carries on
   arrive(ctx,1060,546,t,To-0.1,()=>{glass(ctx,700,518,850,56,12,PP_AMB,{glow:14,ea:0.9,fill:"rgba(16,12,4,0.96)"});T(ctx,"today",722,554,{w:800,size:18,color:rgba(SOFT,1)});T(ctx,"WARN 1 not_null_stg_short_courses__enrolments_customer_bk",790,554,{f:"mono",w:500,size:18,color:rgba(PP_AMB,1)});},{dy:16});
   // freshness works the same way: a clock on the student system's stream
-  arrive(ctx,1255,210,t,Fr-0.2,()=>pp_code(ctx,700,120,1110,"models/staging/student_system/_student_system__sources.yml",PP_FRESH,{p:clamp((t-Fr)/1.0,0,1),edge:PP_SIS,lit:{2:fin(t,w("fresh","a day late"),0.4),3:fin(t,w("fresh","fail at three"),0.4)},litCol:PP_AMB}),{dy:30});
+  arrive(ctx,1255,210,t,Fr-0.2,()=>pp_code(ctx,700,120,1110,"sources/student_system/_student_system__sources.yml",PP_FRESH,{p:clamp((t-Fr)/1.0,0,1),edge:PP_SIS,lit:{2:fin(t,w("fresh","a day late"),0.4),3:fin(t,w("fresh","fail at three"),0.4)},litCol:PP_AMB}),{dy:30});
   arrive(ctx,960,370,t,Fr+0.4,()=>{glass(ctx,700,336,560,68,14,PP_SIS,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.95)"});ctx.fillStyle=rgba(PP_SIS,1);rr(ctx,716,354,6,32,3);ctx.fill();T(ctx,"student system",736,378,{w:700,size:21});
     pp_clock(ctx,1222,370,24,clamp((t-Fr-0.4)/3,0,1)*1.6,PP_SIS,1);},{dy:16});
   withA(ctx,fin(t,w("fresh","a day late"),0.4),()=>tag(ctx,1284,370,"warn after a day",PP_AMB,{size:20}));
@@ -2626,13 +2634,13 @@ scene("levels",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 8. Waiting, on purpose ---------- */
-const PP_COUNT=[[36,"not_null"],[20,"relationships"],[18,"accepted_values"],[18,"unique_combination"],[12,"unique"],[5,"versions_do_not_overlap"],[2,"singular"]];
+const PP_COUNT=[[36,"not_null"],[20,"relationships"],[18,"accepted_values"],[18,"unique_combination"],[12,"unique"],[5,"versions_do_not_overlap"],[3,"singular"]];
 scene("next",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.03,y:480});
   const Re=c("red"),Gr=c("green");
   // every test, in a column of hollow dots: written, reviewed, not yet run
   arrive(ctx,480,480,t,0.3,()=>{glass(ctx,90,100,800,760,18,[170,205,255],{glow:12,ea:0.6,fill:"rgba(6,10,20,0.95)"});},{from:0.96});
-  arrive(ctx,120,160,t,w("count","hundred")-0.2,()=>{T(ctx,"111",122,176,{w:800,size:52,color:rgba(INK,1)});T(ctx,"data tests",232,176,{w:700,size:28,color:rgba(SOFT,1)});},{from:0.9});
+  arrive(ctx,120,160,t,w("count","hundred")-0.2,()=>{T(ctx,"112",122,176,{w:800,size:52,color:rgba(INK,1)});T(ctx,"data tests",232,176,{w:700,size:28,color:rgba(SOFT,1)});},{from:0.9});
   PP_COUNT.forEach(([n,nm],i)=>{const y=242+i*66,t0=w("count","hundred")+0.3+i*0.22,a=fin(t,t0,0.4);if(a<=0)return;withA(ctx,a,()=>{T(ctx,String(n),170,y,{f:"mono",w:500,size:22,align:"right",color:rgba(INK,1)});T(ctx,nm,190,y,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});
     pp_dots(ctx,476,y-14,n,[170,205,255],clamp((t-t0)/0.8,0,1),{per:36,gap:11,r:4});});});
   arrive(ctx,120,720,t,w("count","Four unit")-0.2,()=>{T(ctx,"4",170,736,{f:"mono",w:500,size:22,align:"right",color:rgba(INK,1)});T(ctx,"unit tests",190,736,{w:700,size:22,color:rgba(PP_INT,1)});pp_dots(ctx,476,722,4,PP_INT,clamp((t-w("count","Four unit"))/0.6,0,1),{gap:14,r:5});},{from:0.9});

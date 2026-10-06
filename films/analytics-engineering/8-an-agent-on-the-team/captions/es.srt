@@ -31,121 +31,125 @@ A su lado, cinco skills, un archivo cada una: esbozar el modelo conceptual, perf
 Y el proceso: para cada uno de los diez pasos, la parte del agente y quién la aprueba.
 
 9
-00:01:14,001 --> 00:01:21,188
-Archivos en el proyecto, no un prompt largo. Versionados, revisados y leídos igual por personas y por agentes.
+00:01:14,201 --> 00:01:24,446
+El trabajo en sí se sigue en la herramienta de backlog del equipo, que el agente puede leer. En el proyecto solo se escribe lo que sigue abierto, y se borra cuando está hecho.
 
 10
-00:01:24,888 --> 00:01:29,860
-En Databricks, el agente trabaja como su propia entidad de servicio, nunca como una persona.
+00:01:26,446 --> 00:01:33,633
+Archivos en el proyecto, no un prompt largo. Versionados, revisados y leídos igual por personas y por agentes.
 
 11
-00:01:31,560 --> 00:01:38,389
-Lee las fuentes, y el núcleo y los marts en producción. Solo escribe en sus propios esquemas de desarrollo.
+00:01:37,333 --> 00:01:42,305
+En Databricks, el agente trabaja como su propia entidad de servicio, nunca como una persona.
 
 12
-00:01:39,889 --> 00:01:46,287
-Trabaja con conteos y muestras pequeñas. Nombres, correos e IDs de estudiante se quedan en la base de datos.
+00:01:44,005 --> 00:01:50,834
+Lee las fuentes, y el núcleo y los marts en producción. Solo escribe en sus propios esquemas de desarrollo.
 
 13
-00:01:47,787 --> 00:01:50,915
-Lo que haga mal se queda donde nadie más lo lee.
+00:01:52,334 --> 00:01:58,732
+Trabaja con conteos y muestras pequeñas. Nombres, correos e IDs de estudiante se quedan en la base de datos.
 
 14
-00:01:53,615 --> 00:01:58,791
-Cada afirmación del agente sobre los datos viene con la consulta que la demuestra, y el resultado.
+00:02:00,232 --> 00:02:03,360
+Lo que haga mal se queda donde nadie más lo lee.
 
 15
-00:02:00,491 --> 00:02:08,159
-Ya viste sus afirmaciones: cuentas sin ID de estudiante, un correo familiar compartido, una baja registrada una semana tarde.
+00:02:06,060 --> 00:02:11,236
+Cada afirmación del agente sobre los datos viene con la consulta que la demuestra, y el resultado.
 
 16
-00:02:09,459 --> 00:02:14,563
-Ahora ese hábito es una regla, escrita en la página del agente, con un ejemplo para copiar.
+00:02:12,936 --> 00:02:20,604
+Ya viste sus afirmaciones: cuentas sin ID de estudiante, un correo familiar compartido, una baja registrada una semana tarde.
 
 17
-00:02:16,063 --> 00:02:23,266
-Donde las reglas no deciden, como con ese correo compartido, el agente no adivina. Le pregunta a Mei, y ella registra una decisión.
+00:02:21,904 --> 00:02:27,008
+Ahora ese hábito es una regla, escrita en la página del agente, con un ejemplo para copiar.
 
 18
-00:02:24,766 --> 00:02:27,992
-Una afirmación que llega sin su consulta se devuelve, sin leerla.
+00:02:28,508 --> 00:02:35,711
+Donde las reglas no deciden, como con ese correo compartido, el agente no adivina. Le pregunta a Mei, y ella registra una decisión.
 
 19
-00:02:31,492 --> 00:02:39,341
-Luego el agente ordena la línea de tiempo del estudiante. Para simplificar, fecha cada versión igual: según cuándo se registró.
+00:02:37,211 --> 00:02:40,437
+Una afirmación que llega sin su consulta se devuelve, sin leerla.
 
 20
-00:02:40,841 --> 00:02:47,156
-Falla una prueba: la conciliación con el censo. Negocios cuenta cuatro estudiantes. El informe dice tres.
+00:02:43,937 --> 00:02:51,786
+Luego el agente ordena la línea de tiempo del estudiante. Para simplificar, fecha cada versión igual: según cuándo se registró.
 
 21
-00:02:48,856 --> 00:02:54,491
-La baja registrada siete días tarde ahora parece un estudiante que seguía estudiando el día del censo.
+00:02:53,286 --> 00:02:59,601
+Falla una prueba: la conciliación con el censo. Negocios cuenta cuatro estudiantes. El informe dice tres.
 
 22
-00:02:55,991 --> 00:02:59,559
-El borrador del agente pone la prueba en advertencia. La compilación pasa.
+00:03:01,301 --> 00:03:06,936
+La baja registrada siete días tarde ahora parece un estudiante que seguía estudiando el día del censo.
 
 23
-00:03:01,259 --> 00:03:07,399
-La revisión de Jun del borrador lo detiene. La regla está escrita: nunca debilitar una prueba para que pase.
+00:03:08,436 --> 00:03:12,004
+El borrador del agente pone la prueba en advertencia. La compilación pasa.
 
 24
-00:03:09,499 --> 00:03:15,330
-Una prueba que falla es una noticia. Repórtala, con sus filas fallidas, y deja que una persona decida qué está mal.
+00:03:13,704 --> 00:03:19,844
+La revisión de Jun del borrador lo detiene. La regla está escrita: nunca debilitar una prueba para que pase.
 
 25
-00:03:16,830 --> 00:03:21,800
-La corrección devuelve la fecha en que cada cambio entró en vigor. Negocios: tres. Verde.
+00:03:21,944 --> 00:03:27,775
+Una prueba que falla es una noticia. Repórtala, con sus filas fallidas, y deja que una persona decida qué está mal.
 
 26
-00:03:25,100 --> 00:03:27,190
-Antes de aprobar, dos verificaciones.
+00:03:29,275 --> 00:03:34,245
+La corrección devuelve la fecha en que cada cambio entró en vigor. Negocios: tres. Verde.
 
 27
-00:03:28,490 --> 00:03:35,816
-Conciliar: cada facultad contra el informe del censo. Dos, tres, cinco y dos. La diferencia es cero, en todas.
+00:03:37,545 --> 00:03:39,635
+Antes de aprobar, dos verificaciones.
 
 28
-00:03:37,316 --> 00:03:44,589
-Comparar: compilar main, luego la rama desde cero, y compararlas clave por clave. Solo conteos; no sale ningún dato personal.
+00:03:40,935 --> 00:03:48,261
+Conciliar: cada facultad contra el informe del censo. Dos, tres, cinco y dos. La diferencia es cero, en todas.
 
 29
-00:03:46,089 --> 00:03:51,523
-Desde cero, porque la tabla de credenciales es incremental, y ocultaría un cambio de lógica.
+00:03:49,761 --> 00:03:57,034
+Comparar: compilar main, luego la rama desde cero, y compararlas clave por clave. Solo conteos; no sale ningún dato personal.
 
 30
-00:03:53,023 --> 00:04:01,371
-En el mart de Planificación, el atajo cambió la fila de un estudiante. En el núcleo, se movieron cincuenta y cinco versiones. Con la corrección, la comparación sale vacía.
+00:03:58,534 --> 00:04:03,968
+Desde cero, porque la tabla de credenciales es incremental, y ocultaría un cambio de lógica.
 
 31
-00:04:04,871 --> 00:04:11,330
-El agente marca su pull request como lista para revisión: qué cambió, por qué, qué verificó y la evidencia.
+00:04:05,468 --> 00:04:13,816
+En el mart de Planificación, el atajo cambió la fila de un estudiante. En el núcleo, se movieron cincuenta y cinco versiones. Con la corrección, la comparación sale vacía.
 
 32
-00:04:13,030 --> 00:04:24,527
-La CI, las verificaciones que corren en cada pull request, compila el proyecto en DuckDB. Comprueba que la documentación generada esté al día y que la métrica siga dando el número del censo.
+00:04:17,316 --> 00:04:23,775
+El agente marca su pull request como lista para revisión: qué cambió, por qué, qué verificó y la evidencia.
 
 33
-00:04:26,027 --> 00:04:34,455
-También analiza el proyecto para Databricks. En dbt Cloud, un job de CI compila solo lo que cambió y lo que depende de ello.
+00:04:25,475 --> 00:04:36,972
+La CI, las verificaciones que corren en cada pull request, compila el proyecto en DuckDB. Comprueba que la documentación generada esté al día y que la métrica siga dando el número del censo.
 
 34
-00:04:35,955 --> 00:04:41,245
-Luego, las personas. Jun aprueba el código. Noor aprueba el modelo, y Planificación su número.
+00:04:38,472 --> 00:04:46,900
+También analiza el proyecto para Databricks. En dbt Cloud, un job de CI compila solo lo que cambió y lo que depende de ello.
 
 35
-00:04:42,945 --> 00:04:48,588
-El agente nunca fusiona ni aprueba su propio trabajo. El agente recomienda; las personas aprueban.
+00:04:48,400 --> 00:04:53,690
+Luego, las personas. Jun aprueba el código. Noor aprueba el modelo, y Planificación su número.
 
 36
-00:04:52,288 --> 00:04:54,324
-Está fusionado, probado y aprobado.
+00:04:55,390 --> 00:05:01,033
+El agente nunca fusiona ni aprueba su propio trabajo. El agente recomienda; las personas aprueban.
 
 37
-00:04:55,024 --> 00:05:01,128
-Luego el agente revisa los metadatos, en el proyecto y fuera de él, y encuentra algo que ninguna prueba verifica.
+00:05:04,733 --> 00:05:06,769
+Está fusionado, probado y aprobado.
 
 38
-00:05:02,428 --> 00:05:07,155
+00:05:07,469 --> 00:05:13,573
+Luego el agente revisa los metadatos, en el proyecto y fuera de él, y encuentra algo que ninguna prueba verifica.
+
+39
+00:05:14,873 --> 00:05:19,600
 La definición de un título ahora vive en cuatro lugares. Y tres de ellos están mal.

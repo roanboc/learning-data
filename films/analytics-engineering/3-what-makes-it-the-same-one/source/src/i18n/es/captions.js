@@ -30,8 +30,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Dos inscripciones a cursos cortos no apuntan a ningún cliente, tal como se escribieron. Sin espacios y en minúsculas, cada una con correo encuentra su cliente.",
 "A claim without its query is a guess.":
 "Una afirmación sin su consulta es una suposición.",
-"First, the key sets from the question's model go to work.":
-"Primero, los conjuntos de claves del modelo de la pregunta se ponen a trabajar.",
+"First, the key sets written on each source go to work.":
+"Primero, los conjuntos de claves escritos en cada fuente se ponen a trabajar.",
 "Every key now carries the short code of the system it comes from, and that system's owner.":
 "Cada clave lleva ahora el código corto del sistema del que viene, y el dueño de ese sistema.",
 "Two systems can use the same-looking key for two different people. Qualified, they can't be confused.":

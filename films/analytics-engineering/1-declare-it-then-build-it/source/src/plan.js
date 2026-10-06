@@ -94,7 +94,7 @@ Object.assign(LV,{
   mt_graph:(c,w,h,st,L)=>{c.save();mt_fit(c,w,h,1920,640);const n=mt_count(st.pick,"core");lineageGraph(c,100,70,1720,540,0,{core:n>0?1:0.35,dim:0.2});c.restore();},
   // where does it live: three cards, YAML, Markdown and SQL, each counting what has been placed in it
   mt_lives:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1920,640);
-    [[V.yaml,"yaml",TRUST,["meta: {grain: …}","data_tests: [unique]","contract: {enforced: true}"]],[V.md,"md",KIND,["# Credential","```mermaid","## Decisions"]],[V.sql,"sql",[150,176,214],["select …","from {{ ref(…) }}","join … using (…)"]]].forEach(([nm,k,col,ls],i)=>{
+    [[V.yaml,"yaml",TRUST,["meta: {grain: …}","data_tests: [unique]","contract: {enforced: true}"]],[V.md,"md",KIND,["definition: >","```mermaid","- id: DEC-STU-01"]],[V.sql,"sql",[150,176,214],["select …","from {{ ref(…) }}","join … using (…)"]]].forEach(([nm,k,col,ls],i)=>{
       codeFile(c,60+i*620,60,560,nm,ls,{edge:col,size:28,lh:52,h:360});tag(c,340+i*620,520,String(mt_count(st.pick,k))+" "+V.placed,col,{align:"center",size:30});});c.restore();},
   // ten steps: the loop, lit up to the current step, with the agent beside it
   mt_loop:(c,w,h,st,L)=>{const V=L.vis,k=st.step||0;c.save();mt_fit(c,w,h,1920,640);
@@ -103,7 +103,7 @@ Object.assign(LV,{
     kt_agent(c,110+k*190,150,26,0,{});tag(c,110+k*190,560,V.person,TRUST,{align:"center",size:26});c.restore();},
   // the scenarios
   mt_q_where:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1200,640);lineageGraph(c,60,190,620,420,0,{core:1,dim:0.5,heads:0.8});
-    codeFile(c,720,190,440,"_core_models.yml",["meta: {grain: …}","contract: {enforced: true}","data_tests: [unique]"],{edge:TRUST,size:24,lh:46,h:260});
+    codeFile(c,720,190,440,"_core_student__models.yml",["meta: {grain: …}","contract: {enforced: true}","data_tests: [unique]"],{edge:TRUST,size:24,lh:46,h:260});
     tag(c,600,70,V.ask,EDGE_,{align:"center",size:30});c.restore();},
   mt_q_keys:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1200,640);const K=["S-20417","u-88213","aisha.k@mail.example"];
     SRC3.forEach(([n,col],i)=>{glass(c,60,90+i*160,520,110,16,col,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.94)"});T(c,V.keys[i],90,135+i*160,{w:700,size:26});T(c,K[i],90,178+i*160,{f:"mono",w:500,size:26,color:rgba(col,1)});arrowTo(c,600,145+i*160,820,320,col,0.8,{head:16});});
@@ -111,11 +111,11 @@ Object.assign(LV,{
   mt_q_two:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1200,640);bpBox(c,420,60,360,110,V.core,TRUST,0,{size:30});
     [[V.planning,120,[120,215,155]],[V.wallet,720,[120,215,155]]].forEach(([n,x,col])=>{arrowTo(c,600,180,x+180,400,col,0.8,{head:16});glass(c,x,410,360,120,16,col,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.94)"});wrapT(c,n,x+180,460,320,{w:700,size:26,align:"center"});});c.restore();},
   mt_q_bare:(c,w,h,st,L)=>{c.save();mt_fit(c,w,h,1200,640);codeFile(c,80,80,500,"core_award.sql",["select …","from {{ ref(…) }}"],{edge:TRUST,size:28,lh:52,h:260});
-    c.save();c.setLineDash([12,10]);c.strokeStyle=rgba(EDGE_,0.9);c.lineWidth=3;rr(c,640,80,480,260,14);c.stroke();c.restore();T(c,"_core_models.yml",880,200,{f:"mono",w:500,size:28,align:"center",color:rgba(EDGE_,1)});T(c,"?",880,270,{w:800,size:60,align:"center",color:rgba(EDGE_,1)});c.restore();},
+    c.save();c.setLineDash([12,10]);c.strokeStyle=rgba(EDGE_,0.9);c.lineWidth=3;rr(c,640,80,480,260,14);c.stroke();c.restore();T(c,"_core_course__models.yml",880,200,{f:"mono",w:500,size:28,align:"center",color:rgba(EDGE_,1)});T(c,"?",880,270,{w:800,size:60,align:"center",color:rgba(EDGE_,1)});c.restore();},
   mt_q_twice:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1200,640);[[V.md,KIND],[V.yaml,TRUST],[V.sql,[150,176,214]]].forEach(([n,col],i)=>{codeFile(c,40+i*390,120,360,n,["credential: …"],{edge:col,size:26,lh:48,h:200});
       if(i)cross_(c,220+i*390,420,50,EDGE_,1);else tick_(c,220,420,50,GOOD,1);});c.restore();},
   mt_q_agent:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1200,640);kt_agent(c,200,300,50,0,{});
-    codeFile(c,360,120,440,"_core_models.yml",["data_tests:","  - unique:","      config:","        "+V.weakened],{edge:TRUST,size:26,lh:48,lit:{3:1},litCol:EDGE_});
+    codeFile(c,360,120,440,"_core_student__models.yml",["data_tests:","  - unique:","      config:","        "+V.weakened],{edge:TRUST,size:26,lh:48,lit:{3:1},litCol:EDGE_});
     glass(c,860,220,300,160,20,EDGE_,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,V.gate,1010,290,{w:700,size:26,align:"center"});T(c,V.held,1010,340,{f:"mono",w:500,size:24,align:"center",color:rgba(GOOD,1)});c.restore();},
   mt_q_tools:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1200,640);bpPaper(c,300,40,600,260,1,{});bpModel(c,600,210,0.4,{b:1});T(c,V.same,600,340,{w:700,size:28,align:"center",color:rgba(BPL,1)});
     V.tools.forEach((n,i)=>mt_tool(c,20+i*295,420,275,80,n,i,{on:i===3?1:0}));c.restore();},

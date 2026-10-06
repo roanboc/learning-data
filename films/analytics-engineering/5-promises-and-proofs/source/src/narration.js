@@ -49,7 +49,7 @@ const NARR={
  {"id":"fresh","gap":0.8,"text":"Freshness works the same way: warn when a source is a day late, fail at three."},
  {"id":"owner","gap":0.8,"text":"Who sets the level? The data's owner, with the reason written down."}]},
 "next":{"name":"Waiting, on purpose","lead":1.0,"tail":1.0,"vo":[
- {"id":"count","gap":0.8,"text":"111 data tests. Four unit tests. Every promise written down, with its proof beside it.","say":"A hundred and eleven data tests. Four unit tests. Every promise written down, with its proof beside it."},
+ {"id":"count","gap":0.8,"text":"112 data tests. Four unit tests. Every promise written down, with its proof beside it.","say":"A hundred and twelve data tests. Four unit tests. Every promise written down, with its proof beside it."},
  {"id":"red","gap":0.8,"text":"Each is written before the code it checks, so until that code is built, it can't pass. That's on purpose."},
  {"id":"green","gap":0.8,"text":"Next, the least code that turns them green, in the right place."}]}
 };

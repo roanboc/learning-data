@@ -16,6 +16,7 @@ const NARR={
 "where":{"name":"What goes where","lead":1.0,"tail":1.0,"vo":[
  {"id":"fifth","gap":0.8,"text":"The fix isn't a fifth copy, or a better one. The definition already has a home. Everything else has to be driven from it."},
  {"id":"meaning","gap":0.8,"text":"Meaning lives in the conceptual model: what each thing is, its key, and who owns it."},
+ {"id":"glossary","gap":1.4,"text":"And where the business glossary already defines a term, that's its home. Data governance says which term applies, and the conceptual model takes its words."},
  {"id":"why","gap":0.8,"text":"Decisions live in a log beside what they're about, with why and who. The gaps the team accepted live on the model, as known limitations."},
  {"id":"build","gap":0.8,"text":"Everything the build uses lives in YAML: grain, keys, contracts, tests and owners."},
  {"id":"log","gap":0.8,"text":"A decision log isn't a copy. It holds why, which a model's YAML has no place for."}]},
@@ -34,8 +35,9 @@ const NARR={
 "catalog":{"name":"One direction","lead":1.0,"tail":1.0,"vo":[
  {"id":"find","gap":0.8,"text":"On Databricks, people find tables in the catalog, and read their descriptions there."},
  {"id":"push","gap":0.8,"text":"So each build pushes the descriptions out to it, for each table and its columns."},
- {"id":"there","gap":0.8,"text":"Nobody edits them there: a rebuild writes over the edit. Fix it at home, and it flows out."},
- {"id":"gate","gap":0.8,"text":"One direction: from the files, out to the catalog and whatever reads it. Tuned from one source, never the other way round."}]},
+ {"id":"there","gap":1.3,"text":"Nobody edits them there: a rebuild writes over the edit. Fix it at home, and it flows out."},
+ {"id":"upstream","gap":2.0,"text":"Upstream, the same rule. A sync checks the glossary on a schedule. When a term changes, it opens a pull request, so the owner sees what the new meaning touches before it reaches the build."},
+ {"id":"gate","gap":0.8,"text":"One direction: from the glossary, through the files, out to the catalog and whatever reads it. Tuned from one source, never the other way round."}]},
 "version":{"name":"The next version","lead":1.0,"tail":1.0,"vo":[
  {"id":"change","gap":0.8,"text":"Written once doesn't mean never changed."},
  {"id":"expire","gap":0.8,"text":"A credential can expire, and a true or false can't say so. So is_revoked becomes status: valid, expired or revoked.","say":"A credential can expire, and a true or false can't say so. So is revoked becomes status: valid, expired or revoked."},

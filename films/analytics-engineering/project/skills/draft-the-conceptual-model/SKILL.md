@@ -13,7 +13,7 @@ in the conceptual model of the domain that owns each entity (`models/core/<domai
 1. **Write the question** under `question:` in the mart's conceptual model (`models/marts/<consumer>/_<consumer>__conceptual.yml`): who asks it, the words they use, and the decision it supports. While it's still being worked out, it can be an open item in `requirements/`; once it's agreed, it lives in the conceptual model and the item is deleted. If the decision isn't clear, ask; don't guess.
 2. **List only the entities the question touches.** For each noun in the question, find the term in the glossary and the tables in the catalog. An entity the question doesn't need stays out, however central it seems.
 3. **For each entity, draft**:
-   - `definition`: one or two plain sentences, in the business's words, not a system's;
+   - `definition`: one or two plain sentences, in the business's words, not a system's. If the glossary defines it, ask data governance which term applies, take its words, and add `source:` (see `skills/sync-the-glossary/`);
    - `owner`: who owns the meaning (for a learner, an award or a credential, the registrar's office);
    - `business_key`: what identifies it in business terms, who issues it, and the key set it's qualified by;
    - `identity`: the rules that say two records are the same one, most trusted first;

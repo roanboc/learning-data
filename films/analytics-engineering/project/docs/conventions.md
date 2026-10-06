@@ -21,9 +21,18 @@ An entity with one source and nothing to resolve (the award) needs no intermedia
 
 ## Domains
 
-A large project holds several domains, and each owns its models and their metadata. Staging is
-split by source system, because one system can feed several domains. Intermediate and core are
-split by domain; the marts by consumer, which is a domain too.
+A large project holds several domains, and each owns its models and their metadata. There are
+three kinds, and the project's folders follow them:
+
+| Kind | What it is | Here | Folders |
+|---|---|---|---|
+| Application domain | A system, and the team that runs it | `registrar` (the student system), `learning` (the learning platform and the short-course platform) | `sources/<system>/`, `models/staging/<system>/` |
+| Data domain | What the facts mean, following the reference model | `student`, `course` | `models/intermediate/<domain>/`, `models/core/<domain>/` |
+| Business domain | Who decides with the data | `planning`, `wallet` | `models/marts/<consumer>/`, `exposures/<consumer>/` |
+
+Staging is split by source system, because one system can feed several data domains.
+Intermediate and core are split by data domain; the marts and exposures by consumer. The data
+and business domains:
 
 | Domain | Folders | Holds | Reference |
 |---|---|---|---|
@@ -214,7 +223,7 @@ to itself, and they meet only on the public core. `examples/planning/` sketches 
 
 - `meta.grain`: on every core and mart model, the grain in one sentence ("One row per credential"). Each domain's physical diagram (`_<domain>__physical.md`) reads it; a test proves it.
 - `meta.owner`: who owns the meaning (models) or the data (sources, seeds).
-- `meta.domain`: the domain that owns the model, seed or source: `student`, `course`, `learning` (the learning team's sources), `planning`, `wallet`, or `shared`.
+- `meta.domain`: the domain that owns the model, seed or source: `registrar` or `learning` (application domains: the teams whose systems are the sources), `student` or `course` (data domains), `planning` or `wallet` (business domains), or `shared`.
 - `meta.glossary_term`: the term in the domain's conceptual model a model or key holds.
 - `meta.limitations` on a model or a source table: what anyone using it needs to know and can't change, as `[{id: LIM-<SCOPE>-<nn>, text}]`, with `was:` naming the gap it came from, if any. An accepted gap ends here, with the decision that accepted it in the scope's log.
 - `meta.personal_data` on columns: `direct` (identifies a person: name, email, student ID, or a key that contains one) or `pseudonymous` (a hash of one). A column with neither holds no personal data.

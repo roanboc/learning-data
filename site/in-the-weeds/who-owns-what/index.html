@@ -19,18 +19,18 @@
 <p class="eyebrow crumbs"><a href="../../topics/">Topics</a> › <a href="../">In the weeds of data crafting</a></p>
 <h1>Who owns what: owners publish, consumers build on what's published</h1>
 <p class="lead">In 1858, South Australia made the government's register the title: anyone could rely on it, and only its owner could change it. The credential's core models work the same way. Each fact's meaning has an owner, dbt's access says who can build on what, grants say who can read, and the keys stay shared.</p>
-<p class="meta-row"><span>5 min</span><span>4 labs</span><span>8 scenarios</span><span>Pause and think</span><span>English captions</span></p>
+<p class="meta-row"><span>5½ min</span><span>4 labs</span><span>8 scenarios</span><span>Pause and think</span><span>English captions</span></p>
 <p class="builds-on">Builds on <a href="../built-in-layers/"><i>Built in layers</i></a></p>
 </section>
 <nav class="course" aria-label="Course: Who owns what"><div class="course-in"><p class="course-t"><small>Film 7 of 9 · Domains and ownership</small>Who owns what</p><ol class="path" data-store="ld-who-owns-what" data-labs="4" data-quiz="8" data-text='{"watched": "Watched", "labs": "{n} of 4 labs explored", "quiz": "{n} of 8 answered \u00b7 {ok} right"}'>
-<li><a href="./#watch" aria-current="step"><span class="n"><b>1</b></span><b>Watch</b><span>A 5 min film</span></a></li>
+<li><a href="./#watch" aria-current="step"><span class="n"><b>1</b></span><b>Watch</b><span>A 5½ min film</span></a></li>
 <li><a href="./labs/"><span class="n"><b>2</b></span><b>Take it apart</b><span>Four hands-on labs</span></a></li>
 <li><a href="./scenarios/"><span class="n"><b>3</b></span><b>Make the call</b><span>Eight real situations</span></a></li>
 </ol></div></nav>
 <section class="module" id="watch" data-store="ld-who-owns-what" aria-labelledby="watch-h">
 <div class="mhead"><div><h2 id="watch-h">Watch the film</h2><p>Press Play, or pick a chapter. Turn on <b>Pause and think</b> to stop for one question at the end of chapters.</p></div></div>
 <div class="player" data-labs="labs/">
-<audio id="snd" preload="metadata" src="../../assets/who-owns-what/soundtrack.mp3"></audio><div class="poster"><img src="../../assets/who-owns-what-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Play the film · 5 min</button><button type="button" class="think-badge" data-think>Play with pauses to think</button></div></div><canvas id="film" width="1280" height="720" aria-label="Animated film: Who owns what"></canvas>
+<audio id="snd" preload="metadata" src="../../assets/who-owns-what/soundtrack.mp3"></audio><div class="poster"><img src="../../assets/who-owns-what-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Play the film · 5½ min</button><button type="button" class="think-badge" data-think>Play with pauses to think</button></div></div><canvas id="film" width="1280" height="720" aria-label="Animated film: Who owns what"></canvas>
 <div class="bar"><button id="play">Play</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Seek"><span id="time">0:00</span><button id="think" aria-pressed="false" title="Stop at the end of four chapters, with one question each">Pause and think</button><button id="cc" class="on" aria-pressed="true">Captions</button><button id="fs">Full screen</button></div>
 </div>
 <div class="chapters" id="chapters" aria-label="Chapters"></div>
@@ -38,6 +38,20 @@
 <template id="next-panel"><div class="think-card"><p class="think-k">Where next?</p><h3>You've seen who owns what. Now decide who can build on what.</h3>
 <div class="next-opts"><a class="btn primary" href="labs/">Take it apart: 4 hands-on labs →</a><a class="btn" href="scenarios/">Make the call: 8 situations</a><a class="btn" href="../an-agent-on-the-team/">Next in the series: An agent on the team</a></div>
 <div class="think-foot"><button type="button" class="btn" data-again>Watch again</button></div></div></template>
+</section>
+
+<section class="module" id="in-the-project" aria-labelledby="project-h">
+<div class="mhead"><div><h2 id="project-h">See it in the project</h2><p>Every card in the film shows a real file from the example dbt project. Open the ones each chapter shows, on GitHub, or run the whole project yourself.</p></div></div>
+<ul class="repo-list">
+<li><b>Domains</b><span><a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/sources/student_system"><code>sources/student_system/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/sources/learning_platform"><code>sources/learning_platform/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/sources/short_courses"><code>sources/short_courses/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/core/student"><code>models/core/student/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/core/course"><code>models/core/course/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/marts/planning"><code>models/marts/planning/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/exposures/planning"><code>exposures/planning/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/marts/wallet"><code>models/marts/wallet/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/exposures/wallet"><code>exposures/wallet/</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/_groups.yml"><code>models/_groups.yml</code></a></span></li>
+<li><b>What a domain publishes</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_core_student__models.yml"><code>models/core/student/_core_student__models.yml</code></a></span></li>
+<li><b>Private, protected, public</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml"><code>dbt_project.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md"><code>docs/conventions.md</code></a></span></li>
+<li><b>Who can read</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml"><code>dbt_project.yml</code></a></span></li>
+<li><b>Across projects</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/planning/dependencies.yml"><code>examples/planning/dependencies.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/planning/models/planning_enrolments_at_census.sql"><code>examples/planning/models/planning_enrolments_at_census.sql</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/planning/README.md"><code>examples/planning/README.md</code></a></span></li>
+<li><b>What stays shared</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/student_system/_student_system__sources.yml"><code>sources/student_system/_student_system__sources.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/learning_platform/_learning_platform__sources.yml"><code>sources/learning_platform/_learning_platform__sources.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/short_courses/_short_courses__sources.yml"><code>sources/short_courses/_short_courses__sources.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/macros/shared/keys.sql"><code>macros/shared/keys.sql</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/planning/README.md"><code>examples/planning/README.md</code></a></span></li>
+<li><b>Groups first</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/_shared/_shared__decisions.yml"><code>models/_shared/_shared__decisions.yml</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/marts/planning"><code>models/marts/planning/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/exposures/planning"><code>exposures/planning/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/seeds/expected/planning"><code>seeds/expected/planning/</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__decisions.yml"><code>models/marts/planning/_planning__decisions.yml</code></a></span></li>
+</ul>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project">Explore the whole project</a><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/README.md">How to run it</a></p>
 </section>
 
 <section class="module" id="think-it-through" aria-labelledby="think-h">
@@ -64,13 +78,13 @@
 <p class="kicker">Next · Film 8 of 9 →</p>
 <h3><a href="../an-agent-on-the-team/">An agent on the team</a></h3>
 <p>An AI agent drafts in minutes. It follows rules written in the project, shows the query behind every claim, never weakens a test, and people approve.</p>
-<p class="meta">5 min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
+<p class="meta">5½ min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
 <p class="tc-progress" data-progress="ld-an-agent-on-the-team" data-labs="4" data-quiz="8" hidden></p>
 </div>
 </article>
 </div>
 <ol class="series-list" aria-label="Every film of the series">
-<li><a href="../a-model-is-not-a-transformation/"><span class="n">1</span>A model is not a transformation</a></li>
+<li><a href="../declare-it-then-build-it/"><span class="n">1</span>Declare it, then build it</a></li>
 <li><a href="../start-from-a-question/"><span class="n">2</span>Start from a question</a></li>
 <li><a href="../what-makes-it-the-same-one/"><span class="n">3</span>What makes it the same one</a></li>
 <li><a href="../one-row-of-what-and-when/"><span class="n">4</span>One row of what, and when</a></li>

@@ -55,16 +55,16 @@ The contract and the tests say what done looks like. Write them first, then the 
 turns them green, in the right layer.
 ```
 
-The orb writes a first draft under the grey names, runs them, and they turn red; then it writes the least SQL under a failing test; Jun, outlined in cyan, reads it and adds a gold tick. Then four columns in the layer colours; the first, staging, fills with seven small files in their source colours (three blue, two green, two pink). The layers table from `docs/conventions.md` writes itself, trimmed:
+The orb writes a first draft under the grey names, runs them, and they turn red; then it writes the least SQL under a failing test; Jun, outlined in cyan, reads it and adds a gold tick. Then four columns in the layer colours; the first, staging, fills with seven small files in their source colours (three blue, two green, two pink). The layers table from `docs/conventions.md` writes itself, trimmed (the Sources row and the Folder column left out):
 
 ```markdown
 <!-- docs/conventions.md · runs on dbt Core · DuckDB -->
-| Layer | Folder | Job | Access | Materialised |
-|---|---|---|---|---|
-| Staging | `models/staging/<source>/` | One model per source table: rename, cast, add keys qualified by their key set and their hashes. No joins, no rules. … | private | view |
-| Intermediate | `models/intermediate/` | Steps, not products: match keys, stitch timelines, apply business rules. … | private | view |
-| Core | `models/core/` | One model per entity and relationship at a declared grain. The enterprise contract, versioned: … | public | table (incremental where it pays) |
-| Marts | `models/marts/<consumer>/` | Built for one consumer. The consumer contract. | protected | table |
+| Layer | Job | Access | Materialised |
+|---|---|---|---|
+| Staging | One model per source table: rename, cast, add keys qualified by their key set and their hashes. No joins, no rules. … | private | view |
+| Intermediate | Steps, not products: match keys, stitch timelines, apply business rules. … | private | view |
+| Core | One model per entity and relationship at a declared grain. The enterprise contract, versioned: … | public | table (incremental where it pays) |
+| Marts | Built for one consumer. The consumer contract. | protected | table |
 ```
 
 Only the staging row is lit; the others stay dim until their chapters. One pink file opens, with its label, each part lighting as it's named (rename and cast; trim and one case; the key; the hash):
@@ -93,15 +93,18 @@ On "no joins", a dashed arrow tries to reach from the pink file to a blue one an
 
 **On screen.** step 6 · build · tests first · now the code · the agent drafts · runs · red · the least code · Jun reviews · staging · one per source table · 7 views · rename · cast · trim · one case · readable key · key set · hash · no joins · no rules · still a customer · runs on dbt Core · DuckDB
 
+**In the repo.** [`skills/draft-a-model/SKILL.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/skills/draft-a-model/SKILL.md) · [`models/staging/short_courses/stg_short_courses__learners.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/staging/short_courses/stg_short_courses__learners.sql) · [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md)
+
 ### 3 · Intermediate · 1:13–1:41
 
 **Narration.** Next, intermediate. Eight models, and each one is a step, not a product. Match a learner's keys. Stitch three timelines into one. Gather the credentials from three systems. Apply the credit rule. Here the sources' words become the model's: a customer becomes a learner. Read the names of one model's steps, top to bottom, and you have its recipe.
 
-**Picture.** The violet column fills with eight small files, drawn with arrows from the staging files. Four are picked out as they're named, each with a one-line label: `int_learner_keys_matched` (match keys), `int_learner_timeline` (one timeline), `int_credentials_unioned` (three systems, one list), `int_credit_towards_award` (the credit rule). The line from `docs/conventions.md` 11 writes: "Steps, not products: match keys, stitch timelines, apply business rules. Translates the source's words into the model's." The tag "customer" from staging travels into the violet column and turns into "learner". Then `int_learner_timeline.sql` shows only its CTE names, lighting top to bottom like a recipe card, the first five dimmer (they import). The card is a list drawn from the file, not lines of it, and says so:
+**Picture.** The violet column fills with eight small files, drawn with arrows from the staging files. Four are picked out as they're named, each with a one-line label: `int_learner_keys_matched` (match keys), `int_learner_timeline` (one timeline), `int_credentials_unioned` (three systems, one list), `int_credit_towards_award` (the credit rule). The line from `docs/conventions.md` 12 writes: "Steps, not products: match keys, stitch timelines, apply business rules. Translates the source's words into the model's." The tag "customer" from staging travels into the violet column and turns into "learner". Then `int_learner_timeline.sql` shows only its CTE names, lighting top to bottom like a recipe card, the first five dimmer (they import). The card is a list drawn from the file, not lines of it, and says so:
 
 ```
--- CTE names from models/intermediate/int_learner_timeline.sql · runs on dbt Core · DuckDB
-matched_keys · student_records · platform_users · course_customers · status_map
+-- CTE names from models/intermediate/student/int_learner_timeline.sql · runs on dbt Core · DuckDB
+matched_keys · student_records · platform_users
+course_customers · status_map
 student_versions
 platform_versions
 customer_versions
@@ -116,6 +119,8 @@ changed
 ```
 
 **On screen.** intermediate · 8 views · steps, not products · match keys · one timeline · three systems, one list · the credit rule · customer → learner · the recipe
+
+**In the repo.** [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md) · [`models/intermediate/student/int_learner_timeline.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_learner_timeline.sql)
 
 ### 4 · Core · 1:41–2:12
 
@@ -137,7 +142,7 @@ changed
 On "green", the red test names from the staging chapter turn green in a wave, top to bottom (each a soft felt note, rising a fifth as it changes). An arrow runs from `stg_student_system__awards` in the blue-grey column straight past the violet column to the award node; `core_award.sql` opens, with its label:
 
 ```sql
--- models/core/core_award.sql · runs on dbt Core · DuckDB
+-- models/core/course/core_award.sql · runs on dbt Core · DuckDB
 with
 awards as (
     select * from {{ ref('stg_student_system__awards') }}
@@ -154,6 +159,8 @@ from awards
 Noor, outlined in cyan, looks over the gold column and adds a gold tick.
 
 **On screen.** core · what the blueprint names · learner · award · credential · credit towards an award · declared grain · public · contract enforced · tests green · the award: one source, nothing to resolve · Noor reviews
+
+**In the repo.** [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml) · [`models/core/course/core_award.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/core_award.sql)
 
 ### 5 · Marts · 2:12–2:42
 
@@ -176,6 +183,8 @@ Noor, outlined in cyan, looks over the gold column and adds a gold tick.
 On "never", an arrow from the wallet's mart to Planning's appears and is crossed out; both marts' arrows run back to the gold core.
 
 **On screen.** marts · each for one consumer · Planning · one row per learner per award · as at census date · 73 rows · the wallet · one wide row · as it is now · one lookup · on the core, not on another mart
+
+**In the repo.** [`models/marts/wallet/_wallet__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/wallet/_wallet__models.yml)
 
 ### 6 · One CTE, one step · 2:42–3:14
 
@@ -240,6 +249,8 @@ Beside it, the CTE names as an outline: learners · awards · credit → learner
 
 **On screen.** import CTEs · one per model it reads · logical CTEs · one step each · named for what they hold · learners_at_census, not cte2 · final select · every column · the contract's order · top to bottom
 
+**In the repo.** [`models/marts/planning/mart_planning__near_award.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/mart_planning__near_award.sql) · [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md)
+
 ### 7 · Physical choices · 3:14–3:52
 
 **Narration.** How each model is stored follows how it's used. Staging and the steps are views: nothing stored twice, and the agent can query any one of them. The core and the marts are tables, because people read them all day. The credential table is incremental. Each run merges only what changed, matched on the credential's key. Run it twice, and the second run merges nothing. On Databricks, the same file clusters it by learner. And when the logic changes, rebuild it in full.
@@ -264,7 +275,7 @@ Beside it, the CTE names as an outline: learners · awards · credit → learner
 The teal orb queries a violet pane, and a few rows appear through it. Then one gold block, `core_credential`, gains a thin new layer on top that merges into it, row by row, matched by key. Its config and filter, with its label:
 
 ```sql
--- models/core/core_credential_v2.sql · runs on dbt Core · DuckDB
+-- models/core/student/core_credential_v2.sql · runs on dbt Core · DuckDB
 {{
     config(
         materialized='incremental',
@@ -284,6 +295,8 @@ On "twice", a second run: the new layer is empty: "0 rows to merge". On "Databri
 
 **On screen.** how it's used · views: staging and steps · tables: core and marts · incremental · merge · on the credential's key · second run: 0 rows to merge · clustered by learner on Databricks · logic changed: --full-refresh
 
+**In the repo.** [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml) · [`models/core/student/core_credential_v2.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/core_credential_v2.sql)
+
 ### 8 · Metrics once · 3:52–4:36
 
 **Narration.** Planning's rule is written once: near an award means more than nothing left, and no more than fifteen points. The count by faculty is one macro. And the metric the dashboards ask for, defined in dbt's semantic layer, counts the same column. Then the pass. Planning's mart against the census report, faculty by faculty: twelve, and twelve. Green. Each layer has one job. Each CTE, one step. It's built by one team, in one project. But the registrar owns learners, the learning team owns microcredentials, and Planning wants a project of its own.
@@ -291,7 +304,7 @@ On "twice", a second run: the new layer is empty: "0 rows to merge". On "Databri
 **Picture.** The macro card, with its label:
 
 ```sql
--- macros/near_award.sql · runs on dbt Core · DuckDB
+-- macros/planning/near_award.sql · runs on dbt Core · DuckDB
 {#- Near an award: more than none left, and no more than the near_award_credit_points var. -#}
 {% macro is_near_award(credit_points_remaining) -%}
     ({{ credit_points_remaining }} > 0 and {{ credit_points_remaining }} <= {{ var('near_award_credit_points') }})
@@ -311,7 +324,7 @@ On "twice", a second run: the new layer is empty: "0 rows to merge". On "Databri
 The var `near_award_credit_points: 15` glows in `dbt_project.yml`, with a thin line to the `is_near_award` macro, and from it to the mart's `is_near_award` column. From that column, two lines run out: one to the count macro, and on from it to the reconciliation test; one to the metric, whose YAML opens beside it. No line joins the count macro to the metric:
 
 ```yaml
-# models/semantic/_semantic.yml · runs on dbt Core · DuckDB
+# models/marts/planning/_planning__semantic.yml · runs on dbt Core · DuckDB
   - name: learners_near_graduate_certificate
     label: Learners near a graduate certificate
     …
@@ -337,6 +350,8 @@ and the build line `PASS reconcile_planning_with_census_report`, green, with the
 
 **On screen.** is_near_award · more than 0 left · no more than 15 · written once · the count, one macro · the metric · the same column · the pass · 12 · 12 · green · one team · one project · the registrar · the learning team · a project of its own · *Built in layers* · Each layer one job; each CTE one step; each rule written once.
 
+**In the repo.** [`macros/planning/near_award.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/macros/planning/near_award.sql) · [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml) · [`models/marts/planning/_planning__semantic.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__semantic.yml)
+
 ## Pause and think
 
 Four stops, one question each.
@@ -357,48 +372,49 @@ Four stops, one question each.
 | 1 | Each prepared its part ahead; every plate was checked at the pass. | Preparation ahead (*mise en place*) and a pass where the head chef or an expediter checks each plate are standard in brigade kitchens; the film doesn't claim a specific Savoy practice beyond the brigade. |
 | 2 | The tests are written. Now the code has to pass them, layer by layer. | Illustrative: the test names are real (from the build of 30 September 2026), but the run shown is the finished project, where they pass. With YAML and no model, dbt doesn't fail: it warns "Did not find matching node for patch" and that each test depends on a node that was not found, skips those tests, and the build passes with none run; `--select <model>` selects nothing. Checked 30 September 2026 on a scratch project (dbt Core 1.12.5, dbt-duckdb 1.11.0). Tests go red only once a model exists, even a first draft: so the film shows the names grey until the agent's draft, then red. |
 | 2 | The agent writes a first draft, runs the tests, watches them fail, then writes the least code; Jun reviews. | `skills/draft-a-model/SKILL.md` 8-9 and 21-23 (step 3, "Run it and watch it fail", runs before any SQL exists, which on dbt selects nothing: raised with the author, see Open); `AGENTS.md` (the agent may build against the development target only; a person approves). The agent is the series' own; no product is named. What dbt Cloud offers for agents (dbt Copilot, the dbt MCP server) is to be checked on the day and stays in the rigour sheets. |
-| 2 | Staging: one model per source table, seven of them; rename, cast, trim, one case per key, the readable key and its hash; no joins, no rules. | `docs/conventions.md` 10 and 63; 7 staging views in `models/staging/`. dbt's own guide ("How we structure our dbt projects") puts staging as one model per source table, materialised as views, with renaming, type casting, basic computations and categorisation, and no joins or aggregations; the series adds the keys and hashes there. The project uses `source` → `renamed` → `keyed` → final select (dbt's guide names the first two `source` and `renamed` too). |
-| 2 | A short-course customer is still called a customer here. | `docs/conventions.md` 10: "Keeps the source's own words (a 'customer' is still a customer)". `customer_bk`, `customer_key` in `stg_short_courses__learners`. |
-| 3 | Intermediate: eight models, each a step, not a product. | `int_learner_keys`, `int_learner_key_candidates`, `int_learner_keys_matched`, `int_learners`, `int_learner_timeline`, `int_credentials_unioned`, `int_credit_items`, `int_credit_towards_award`; all views (`dbt_project.yml` 34-38). dbt's guide describes intermediate models as purpose-built steps, not exposed to end users. |
-| 3 | Here a customer becomes a learner. | `docs/conventions.md` 11; `int_learner_keys.sql` reads `course_customers` and turns each `customer_bk` into a learner key to match (lines 15, 49-53). |
+| 2 | Staging: one model per source table, seven of them; rename, cast, trim, one case per key, the readable key and its hash; no joins, no rules. | `docs/conventions.md` 11 and 201; 7 staging views in `models/staging/`, a folder per source system. dbt's own guide ("How we structure our dbt projects") puts staging as one model per source table, materialised as views, with renaming, type casting, basic computations and categorisation, and no joins or aggregations; the series adds the keys and hashes there. The project uses `source` → `renamed` → `keyed` → final select (dbt's guide names the first two `source` and `renamed` too). |
+| 2 | A short-course customer is still called a customer here. | `docs/conventions.md` 11: "Keeps the source's own words (a 'customer' is still a customer)". `customer_bk`, `customer_key` in `stg_short_courses__learners`. |
+| 3 | Intermediate: eight models, each a step, not a product. | `int_learner_keys`, `int_learner_key_candidates`, `int_learner_keys_matched`, `int_learners`, `int_learner_timeline`, `int_credentials_unioned`, `int_credit_items`, `int_credit_towards_award`, in `models/intermediate/student/`; all views (`dbt_project.yml` 38-42). dbt's guide describes intermediate models as purpose-built steps, not exposed to end users. |
+| 3 | Here a customer becomes a learner. | `docs/conventions.md` 12; `int_learner_keys.sql` reads `course_customers` and turns each `customer_bk` into a learner key to match (lines 15, 49-53). |
 | 3 | Read the names of a model's steps and you have its recipe. | `int_learner_timeline.sql`: 16 CTEs, 5 import (`matched_keys` … `status_map`) and 11 logical (`student_versions` … `changed`), lines 9-213. |
-| 4 | The core: learner, award, credential, and credit towards an award; declared grain; public; enforced contract. | `dbt_project.yml` 40-46 (`access: public`, `contract: enforced: true`, set once for the folder); `meta.grain` on each (`_core__models.yml` 10, 101, 178, 286). Five core tables in the warehouse: `core_learner_v1` (101 rows), `core_award_v1` (9), `core_credential_v2` (53) and `core_credential_v1` (53, built from v2), `core_credit_towards_award_v1` (166). An enforced contract checks column names and data types at build time (and, where the platform supports them, `not_null` and `check` constraints); it doesn't check the grain, which the tests do. |
-| 4 | Jun builds it, and the tests turn green. | The build of 30 September 2026: `dbt build --profiles-dir . --vars '{as_is_date: 2026-09-30}'`, dbt Core 1.12.5 with dbt-duckdb 1.11.0: 146 nodes, PASS 143, WARN 1 (by design, gap 5), ERROR 0; 111 data tests and 4 unit tests. |
-| 4 | The award skips intermediate: one source and nothing to resolve. | `models/core/core_award.sql` 9; `docs/conventions.md` 19. |
+| 4 | The core: learner, award, credential, and credit towards an award; declared grain; public; enforced contract. | `dbt_project.yml` 46-52 (`access: public`, `contract: enforced: true`, set once for the folder); `meta.grain` on each (`models/core/student/_core_student__models.yml` 10, 119, 246; `models/core/course/_core_course__models.yml` 10). Five core tables in the warehouse: `core_learner_v1` (101 rows), `core_award_v1` (9), `core_credential_v2` (53) and `core_credential_v1` (53, built from v2), `core_credit_towards_award_v1` (166). An enforced contract checks column names and data types at build time (and, where the platform supports them, `not_null` and `check` constraints); it doesn't check the grain, which the tests do. |
+| 4 | Jun builds it, and the tests turn green. | The build of 30 September 2026: `dbt build --profiles-dir . --vars '{as_is_date: 2026-09-30}'`, dbt Core 1.12.5 with dbt-duckdb 1.11.0: 146 nodes, PASS 143, WARN 1 (by design: an enrolment with no email, LIM-SC-02), ERROR 0; 111 data tests and 4 unit tests. |
+| 4 | The award skips intermediate: one source and nothing to resolve. | `models/core/course/core_award.sql` 9; `docs/conventions.md` 20. |
 | 5 | Planning's mart: one row per learner per award, as at census date, 73 rows. | `_planning__models.yml` 12; 73 rows in `mart_planning__near_award` (17 columns), queried 30 September 2026. It's a fact in the usual sense (one row per event or pair, with numbers to add up); the film doesn't name the pattern. |
 | 5 | The wallet's is wide: one row per learner, as it is now, one lookup. | `_wallet__models.yml` 3-10; 46 rows, 14 columns in `mart_wallet__learners`, with `as_is_date` pinned to 30 September 2026. |
-| 5 | Each mart is built for one consumer, and builds on the core, never on another mart. | The marts' `ref()`s: `core_learner`, `core_award`, `core_credit_towards_award`, `core_credential` (v2), and the seed `key_sets`. dbt itself would allow a mart to `ref()` another here (both are `protected`, one project); review and the conventions stop it (`docs/conventions.md` 29). The next film takes this up. |
+| 5 | Each mart is built for one consumer, and builds on the core, never on another mart. | The marts' `ref()`s: `core_learner`, `core_award`, `core_credit_towards_award`, `core_credential` (v2), and the seed `key_sets`. dbt itself would allow a mart to `ref()` another here (both are `protected`, one project); review and the conventions stop it (`docs/conventions.md` 167). The next film takes this up. |
 | 6 | A model is written as named steps, each called a CTE. | A CTE is a common table expression, a named `select` in a `with` clause; SQL reads them in order, and each can use the ones before it. The narration names the term here, where the series first uses it in words. |
-| 6 | Import CTEs, logical CTEs named for what they hold, a final select in the contract's order. | `docs/conventions.md` 53-58; dbt Labs' style guide ("How we style our SQL") recommends import CTEs at the top, one logical unit of work per CTE, descriptive CTE names, and a final `select * from` a last CTE; the project instead lists every column in the final select, in the contract's order, so the file reads like the contract. |
-| 7 | Staging and the steps are views; the agent can query any one of them. | `dbt_project.yml` 28-38 (staging and intermediate both `+materialized: view`; in the warehouse, 7 `dev_staging` and 8 `dev_intermediate` relations, all views); README, "Workarounds": "Intermediate models are views, not ephemeral. Unit tests can then mock their inputs as plain rows, and an agent can query each step." Ephemeral models are inlined as CTEs and can't be queried on their own. A view is computed each time it's read; "nothing stored twice" means no copy of the data. |
-| 7 | The core and the marts are tables. | `dbt_project.yml` 40-53. On Databricks, tables are Delta tables in Unity Catalog. |
+| 6 | Import CTEs, logical CTEs named for what they hold, a final select in the contract's order. | `docs/conventions.md` 191-196; dbt Labs' style guide ("How we style our SQL") recommends import CTEs at the top, one logical unit of work per CTE, descriptive CTE names, and a final `select * from` a last CTE; the project instead lists every column in the final select, in the contract's order, so the file reads like the contract. |
+| 7 | Staging and the steps are views; the agent can query any one of them. | `dbt_project.yml` 32-42 (staging and intermediate both `+materialized: view`; in the warehouse, 7 `dev_staging` and 8 `dev_intermediate` relations, all views); README, "Workarounds": "Intermediate models are views, not ephemeral. Unit tests can then mock their inputs as plain rows, and an agent can query each step." Ephemeral models are inlined as CTEs and can't be queried on their own. A view is computed each time it's read; "nothing stored twice" means no copy of the data. |
+| 7 | The core and the marts are tables. | `dbt_project.yml` 46-59. On Databricks, tables are Delta tables in Unity Catalog. |
 | 7 | The credential table is incremental, merged on the credential's key; run twice, the second run merges nothing. | `core_credential_v2.sql` 1-9, 21-34: `incremental_strategy='merge'`, `unique_key='credential_key'`; rows written to the source since the last run, or whose holder was re-matched. Checked 30 September 2026: after a build, `dbt run --select core_credential` again selects 0 rows to merge (the `to_merge` filter run against the built table). `merge` is dbt-databricks' default for Delta; dbt-duckdb supports it too (used here). |
 | 7 | On Databricks, the same file clusters it by learner. | `liquid_clustered_by` (dbt-databricks), set only when `target.type == 'databricks'`; Delta liquid clustering; dbt-databricks runs `OPTIMIZE` after the build when it's set. Not run on DuckDB. |
 | 7 | When the logic changes, rebuild it in full. | `dbt build --select core_credential --full-refresh --profiles-dir .` (the project's `profiles.yml` lives in `project/`, so every command here passes the flag); an incremental model otherwise keeps rows built under the old logic. `skills/reconcile-and-diff/SKILL.md` builds the branch with `--full-refresh` before diffing. |
-| 8 | Near an award means more than nothing left, and no more than fifteen points. | `macros/near_award.sql` 6-9; var `near_award_credit_points: 15` (`dbt_project.yml` 17). The mart applies it once, into `is_near_award` (with enrolled and studying). |
-| 8 | The count by faculty is one macro; the metric counts the same column. | `macros/near_award.sql` 17-25, used by `tests/reconcile_planning_with_census_report.sql` 7 and the analyses; the metric `learners_near_graduate_certificate` (`models/semantic/_semantic.yml` 60-70) counts distinct `learner_key` filtered on the same `is_near_award` column. Two expressions of one count, one for SQL and one for BI, both reading the column the rule wrote once. Checked 30 September 2026 with MetricFlow 0.15.0 on a copy of the project (`mf query --metrics learners_near_graduate_certificate --group-by learner_award__faculty_name`): Arts and Education 2, Business 3, Engineering and IT 5, Health 2, the same as the macro; CI checks the same (`.github/workflows/credential-project.yml` 52-57). The dbt Semantic Layer (MetricFlow) is queried through dbt Cloud on plans that include it; with dbt Core, the MetricFlow CLI queries it locally. |
-| 8 | The pass: twelve and twelve, faculty by faculty. Green. | `dbt show --select reconcile_census_report`: 2/2/0, 3/3/0, 5/5/0, 2/2/0; the singular test `reconcile_planning_with_census_report` passes (it returns a row for any faculty that differs). The census report is `seeds/census_report.csv`, published 14 April 2026. |
+| 8 | Near an award means more than nothing left, and no more than fifteen points. | `macros/planning/near_award.sql` 6-9; var `near_award_credit_points: 15` (`dbt_project.yml` 21). The mart applies it once, into `is_near_award` (with enrolled and studying). |
+| 8 | The count by faculty is one macro; the metric counts the same column. | `macros/planning/near_award.sql` 17-25, used by `tests/reconciliation/reconcile_planning_with_census_report.sql` 7 and the analyses; the metric `learners_near_graduate_certificate` (`models/marts/planning/_planning__semantic.yml` 49-59) counts distinct `learner_key` filtered on the same `is_near_award` column. Two expressions of one count, one for SQL and one for BI, both reading the column the rule wrote once. Checked 30 September 2026 with MetricFlow 0.15.0 on a copy of the project (`mf query --metrics learners_near_graduate_certificate --group-by learner_award__faculty_name`): Arts and Education 2, Business 3, Engineering and IT 5, Health 2, the same as the macro; CI checks the same (`.github/workflows/credential-project.yml` 58-63). The dbt Semantic Layer (MetricFlow) is queried through dbt Cloud on plans that include it; with dbt Core, the MetricFlow CLI queries it locally. |
+| 8 | The pass: twelve and twelve, faculty by faculty. Green. | `dbt show --select reconcile_census_report`: 2/2/0, 3/3/0, 5/5/0, 2/2/0; the singular test `reconcile_planning_with_census_report` passes (it returns a row for any faculty that differs). The census report is `seeds/expected/planning/census_report.csv`, published 14 April 2026. |
 
-**Project files each snippet comes from** (checked against the files on 30 September 2026):
+**Project files each snippet comes from** (checked against the files on 6 October 2026):
 
 | Ch | File | Lines |
 |---|---|---|
-| 2 | `skills/draft-a-model/SKILL.md` | 8-9 |
-| 2 | `docs/conventions.md` | 8-13 (the Job column trimmed with …) |
-| 2 | `models/staging/short_courses/stg_short_courses__learners.sql` | 9-12, 19, 21, 23, 25-28, 30, 32-35 (blank lines removed; trimmed with …) |
+| 2 | [`skills/draft-a-model/SKILL.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/skills/draft-a-model/SKILL.md) | 8-9 |
+| 2 | [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md) | 8, 11-14 (the Sources row and the Folder column left out; the Job column trimmed with …) |
+| 2 | [`models/staging/short_courses/stg_short_courses__learners.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/staging/short_courses/stg_short_courses__learners.sql) | 9-12, 19, 21, 23, 25-28, 30, 32-35 (blank lines removed; trimmed with …) |
 | 2 | test names | from the build output of 30 September 2026 |
-| 3 | `docs/conventions.md` | 11 (trimmed) |
-| 3 | `models/intermediate/int_learner_timeline.sql` | the CTE names, lines 9-213 (a list drawn from the file, labelled "CTE names from"; not lines of it) |
-| 4 | `dbt_project.yml` | 40-46 |
-| 4 | `models/core/core_award.sql` | 1-5, 7, 9-13, 22 (blank lines removed; trimmed with …) |
-| 5 | `models/marts/planning/_planning__models.yml` | 12 |
-| 5 | `models/marts/wallet/_wallet__models.yml` | 3-10 |
-| 6 | `models/marts/planning/mart_planning__near_award.sql` | 3-19, 21-27, 79-86, 88-92, 105-109 (blank lines removed; trimmed with …) |
-| 6 | `docs/conventions.md` | 54-56 (trimmed) |
-| 7 | `dbt_project.yml` | 28-29, 34-35, 40-41, 48-49 (trimmed with …) |
-| 7 | `models/core/core_credential_v2.sql` | 1-9, 24-25 (trimmed with …) |
-| 8 | `macros/near_award.sql` | 6-9, 17-25 |
-| 8 | `models/semantic/_semantic.yml` | 60-61, 66-70 (trimmed with …) |
+| 3 | [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md) | 12 (trimmed) |
+| 3 | [`models/intermediate/student/int_learner_timeline.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_learner_timeline.sql) | the CTE names, lines 9-213 (a list drawn from the file, labelled "CTE names from"; not lines of it) |
+| 4 | [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml) | 46-52 |
+| 4 | [`models/core/course/core_award.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/core_award.sql) | 1-5, 7, 9-13, 22 (blank lines removed; trimmed with …) |
+| 5 | [`models/marts/planning/_planning__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__models.yml) | 12 |
+| 5 | [`models/marts/wallet/_wallet__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/wallet/_wallet__models.yml) | 3-10 |
+| 6 | [`models/marts/planning/mart_planning__near_award.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/mart_planning__near_award.sql) | 3-19, 21-27, 79-86, 88-92, 105-109 (blank lines removed; trimmed with …) |
+| 6 | [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md) | 192-194 (trimmed) |
+| 7 | [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml) | 32-33, 38-39, 46-47, 54-55 (trimmed with …) |
+| 7 | [`models/core/student/core_credential_v2.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/core_credential_v2.sql) | 1-9, 24-25 (trimmed with …) |
+| 8 | [`macros/planning/near_award.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/macros/planning/near_award.sql) | 6-9, 17-25 |
+| 8 | [`dbt_project.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml) | 18, 21 (trimmed) |
+| 8 | [`models/marts/planning/_planning__semantic.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__semantic.yml) | 49-50, 55-59 (trimmed with …) |
 | 8 | `dbt show --select reconcile_census_report --profiles-dir .` | result, with its real column names and full faculty names (dbt show's separator row dropped) |
 | 8 | build output | `PASS reconcile_planning_with_census_report` |
 
@@ -422,8 +438,8 @@ The run behind every number: `dbt build --profiles-dir . --vars '{as_is_date: 20
 |---|---|---|---|
 | 1 | *Which layer?* | sort | Ten pieces of logic into the four layers: trim an email; rename `customer_email` to `email`; add the readable key and its hash; match a platform account to a student; stitch three timelines; apply the credit rule; the award, with one source; a wide row for the wallet app; one row per learner per award as at census; a count by faculty (a macro, above the marts). Drop "match two keys" into staging and the picture shows the join hiding inside a tidy-up step; drop the credit rule into a mart and a second mart computes it differently. |
 | 2 | *Refactor the CTEs* | steps | A jumbled `mart_planning__near_award`: its CTEs out of order, one called `cte2`, one `ref()` buried in a join. Step it into import → logical → final: the buried reference moves to the top, `cte2` is renamed for what it holds (`learners_at_census`), and the final select lists every column in the contract's order. Leave a `ref()` in the middle and the outline shows an input nobody sees at the top. |
-| 3 | *View, table or incremental?* | pick | Five models with their size and use shown: a staging model read only by the next step; `int_learner_timeline`, which an agent queries while drafting; `core_learner`, read by both marts all day; `core_credential`, large in a real university and mostly unchanged between runs; the wallet's mart, read by an app. Pick for each; pick incremental for a small table and the picture shows the extra logic for no gain; change the credential rule without `--full-refresh` and old rows keep the old logic. |
-| 4 | *One rule, twice* | count | The threshold written as `15` in the mart and again in a dashboard's filter. Change the var to 10 and count near-award learners in each: the mart moves, the dashboard doesn't, and the reconciliation still passes on the mart. Put the rule in the macro and the metric on its column, and both counts move together. |
+| 3 | *View, table or incremental?* | pick | Five models with their size and use shown: a staging model read only by the next step; `int_learner_timeline`, which an agent queries while drafting; `core_learner`, read by both marts all day; `core_credential`, large in a real university and mostly unchanged between runs; the wallet's mart, read by an app. Pick a way to store them (all views, all tables, all incremental, the steps ephemeral, or the project's choice) and six checks show what it gets right; all incremental shows the extra logic for no gain; change the credit rule without `--full-refresh` and old rows keep the old logic. |
+| 4 | *One rule, twice* | count | Graduate certificate learners as at census, grouped by status and points left: tick the ones each count includes. The rule, written once (var at 15), counts 12, as the census report does. With the var at 10, the mart, the macro and the metric move together (1), and the reconciliation fails, as it should. A dashboard's own copy of the filter, `points left <= 15`, counts 16 (it forgot "more than nothing left" and "still studying"), still says 16 with the var at 10, and the reconciliation can't see it: it only checks the mart. |
 
 ## Scenarios
 
@@ -435,8 +451,8 @@ Eight situations, in this order.
 4. **Choose.** The credit rule changed last week; the incremental credential table still shows the old status for older rows. What now? (Rebuild it in full, `--full-refresh`, and compare with a full build. Incremental runs only touch rows the filter selects.)
 5. **Spot the problem.** The wallet's mart computes credit towards an award with its own `sum`, and its number differs from Planning's by one learner. (The rule lives once, in intermediate and the core; a mart reads it, it doesn't recompute it.)
 6. **Choose.** Someone makes every intermediate model ephemeral "to save space". (Views already store nothing; ephemeral steps can't be queried by the agent or a person, and unit tests must mock them as SQL. Keep them views unless there's a reason.)
-7. **Sort.** Sort the reasons for an intermediate model for the award: "every entity needs one"; "a second source of awards arrives"; "award codes must be matched across systems"; "it keeps the lineage graph symmetrical"; "an award rule needs a unit test". (Only a second source, a match or a rule earns a step.)
-8. **Order.** A `sum` of credit points returns a type the contract refuses, and the build stops. Put Jun's moves in order: read the contract error; find the column and the type the contract promises; cast to that type in the final select (`sum` on DuckDB returns a 128-bit integer); rebuild; check the reconciliation still passes. Never change the contract to match the code.
+7. **Choose.** `core_award` reads `stg_student_system__awards` directly; a colleague wants `int_awards`, so every core model has a step. Which reason would earn one? (A second source of awards, award codes to match across systems, or an award rule that needs a unit test. Not "every entity needs one", nor a symmetrical lineage graph: only work earns a step.)
+8. **Order.** A `sum` of credit points returns a type the contract refuses, and the build stops. Put Jun's moves in order: read the contract error; find the column and the type the contract promises; cast the sum to that type, where it's computed (`sum` on DuckDB returns a 128-bit integer); rebuild the model and the ones that depend on it; check the reconciliation still passes. Never change the contract to match the code.
 
 ## Decisions taken
 
@@ -449,6 +465,7 @@ Eight situations, in this order.
 | 30 September 2026 | "Run it twice, and the second run merges nothing" is from a real second run, not assumed. |
 | 30 September 2026 | The setup-is-real lines stay in *Start from a question*; this film carries only the on-screen label, `runs on dbt Core · DuckDB`, and one dim `Databricks · dbt Cloud` tag on the clustering line. |
 | 1 October 2026 | Series read-through: *Staging* opens on "Now the code has to pass them" (the film before ends with the tests waiting for the code). CTE is defined in words where the narration first uses it; the semantic layer is introduced as where the dashboards' metric is defined. *Marts* says each mart's shape (long and narrow; wide) instead of repeating the grains a third time. The opening line starts "At the Savoy hotel". |
+| 6 October 2026 | The example project was reorganised by application, data and business domains (sources and staging by source system; intermediate and core by data domain, `student` and `course`; the marts by consumer, `planning` and `wallet`), so each domain is ready to split into a project of its own. The film's cards show the files as they are now: `models/core/course/core_award.sql`, `models/core/student/core_credential_v2.sql`, `macros/planning/near_award.sql`, `models/marts/planning/_planning__semantic.yml`, and `…/student/_core_student__models.yml` in the contract scenario's picture. No narration line changed. The script's layers table now matches the card (no Folder column), and each chapter, lab and scenario links the project files it shows. |
 
 ## Open
 

@@ -27,5 +27,14 @@
   "labs_lead": "Four labs, one idea each, in the order of the film. Sort ten pieces of logic into the layers, refactor Planning's mart into named CTEs, choose how each model is stored, and see what happens when a rule is written twice.",
   "labs_lead_es": "Cuatro labs, una idea cada uno, en el orden de la película. Ubica diez piezas de lógica en las capas, reescribe el mart de Planificación en CTE con nombre, elige cómo se guarda cada modelo, y mira qué pasa cuando una regla se escribe dos veces.",
   "quiz_lead": "Eight situations an analytics engineer really faces: a join in staging, one mart built on another, CTEs called cte2, an incremental table after a rule change, a mart that recomputes a rule, ephemeral steps, a step the award may not need, and a contract that stops the build. Decide what you'd do; each answer explains why.",
-  "quiz_lead_es": "Ocho situaciones que un analytics engineer enfrenta de verdad: un join en staging, un mart construido sobre otro, CTE llamadas cte2, una tabla incremental después de un cambio de regla, un mart que vuelve a calcular una regla, pasos ephemeral, un paso que el título quizá no necesita, y un contrato que detiene el build. Decide qué harías; cada respuesta explica por qué."
+  "quiz_lead_es": "Ocho situaciones que un analytics engineer enfrenta de verdad: un join en staging, un mart construido sobre otro, CTE llamadas cte2, una tabla incremental después de un cambio de regla, un mart que vuelve a calcular una regla, pasos ephemeral, un paso que el título quizá no necesita, y un contrato que detiene el build. Decide qué harías; cada respuesta explica por qué.",
+  "repo": {
+    "staging": ["skills/draft-a-model/SKILL.md", "models/staging/short_courses/stg_short_courses__learners.sql", "docs/conventions.md"],
+    "intermediate": ["docs/conventions.md", "models/intermediate/student/int_learner_timeline.sql"],
+    "core": ["dbt_project.yml", "models/core/course/core_award.sql"],
+    "marts": ["models/marts/wallet/_wallet__models.yml"],
+    "ctes": ["models/marts/planning/mart_planning__near_award.sql", "docs/conventions.md"],
+    "physical": ["dbt_project.yml", "models/core/student/core_credential_v2.sql"],
+    "once": ["macros/planning/near_award.sql", "dbt_project.yml", "models/marts/planning/_planning__semantic.yml"]
+  }
 }

@@ -3,9 +3,9 @@
 Build main into target/main.duckdb and this branch into target/credentials.duckdb first (see
 skills/reconcile-and-diff/SKILL.md). Then, for example:
 
-    python scripts/diff_against_main.py dev_marts.mart_planning__near_award learner_award_key
-    python scripts/diff_against_main.py dev_core.core_credential_v2 credential_key
-    python scripts/diff_against_main.py dev_core.core_learner_v1 learner_key,valid_from
+    python scripts/tools/diff_against_main.py dev_marts.mart_planning__near_award learner_award_key
+    python scripts/tools/diff_against_main.py dev_core.core_credential_v2 credential_key
+    python scripts/tools/diff_against_main.py dev_core.core_learner_v1 learner_key,valid_from
 
 Prints the keys only in this branch, the keys only in main, and, for keys in both, how many
 rows changed in each column. Counts only: no personal data leaves the database.

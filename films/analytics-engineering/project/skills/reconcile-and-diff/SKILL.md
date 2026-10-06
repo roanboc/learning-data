@@ -27,8 +27,8 @@ changed against the version before?
    already built. The diff would say nothing changed.
 2. Compare each changed model by its key:
    ```sh
-   python scripts/diff_against_main.py dev_marts.mart_planning__near_award learner_award_key
-   python scripts/diff_against_main.py dev_core.core_credential_v2 credential_key
+   python scripts/tools/diff_against_main.py dev_marts.mart_planning__near_award learner_award_key
+   python scripts/tools/diff_against_main.py dev_core.core_credential_v2 credential_key
    ```
    It prints the keys only on one side and, for keys on both, how many rows changed in each
    column. Counts only: no personal data leaves the database.

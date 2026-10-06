@@ -14,8 +14,8 @@ places where that slipped.
 1. **Generated files are current.**
    ```sh
    dbt parse --profiles-dir .
-   python scripts/definitions.py --check
-   python scripts/diagrams.py --check
+   python scripts/generate/definitions.py --check
+   python scripts/generate/diagrams.py --check
    ```
 2. **The same text in more than one description.** List descriptions written out, word for word, in more than one place:
    ```sh

@@ -42,9 +42,9 @@ Each domain's folder holds its data definitions, next to its models:
 |---|---|
 | `_core_<domain>__models.yml`, `_int_<domain>__models.yml` | The models: grain, columns, types, constraints, tests |
 | `_<domain>__conceptual.yml` | What each entity and relationship means, its key and its owner. Not read by dbt (`.dbtignore`) |
-| `_<domain>__definitions.md` | Doc blocks generated from the conceptual model by `scripts/definitions.py` |
+| `_<domain>__definitions.md` | Doc blocks generated from the conceptual model by `scripts/generate/definitions.py` |
 | `_<domain>__columns.md` | Doc blocks for the columns the domain owns |
-| `_<domain>__physical.md` | The physical diagram, generated from the manifest by `scripts/diagrams.py` |
+| `_<domain>__physical.md` | The physical diagram, generated from the manifest by `scripts/generate/diagrams.py` |
 
 Seeds are split by purpose before domain, and the two purposes never share a folder:
 
@@ -54,7 +54,24 @@ Seeds are split by purpose before domain, and the two purposes never share a fol
 | `seeds/expected/<domain>/` | Numbers published outside this project, to reconcile against | `expected` | Tests, analyses and scripts only; never a model |
 
 Each seed's `meta.purpose` and tag (`reference` or `expected`) say the same, so
-`dbt build --select tag:expected` finds them.
+`dbt build --select tag:expected` finds them. The test
+`tests/governance/models_do_not_read_expected_seeds.sql` fails the build if a model refs one.
+
+## One purpose per folder
+
+A folder holds one kind of thing. Where a dbt folder holds several, it's split by purpose first,
+then by domain:
+
+| Folder | Purposes |
+|---|---|
+| `seeds/` | `reference/` (models read it), `expected/` (tests reconcile against it) |
+| `tests/` | `generic/` (custom generic tests), `rules/` (business rules that must hold), `reconciliation/` (a result against an expected seed), `governance/` (rules about the project itself) |
+| `analyses/` | `profiling/` (evidence about the sources), `design/` (evidence for a modelling choice), `validation/` (checking the result) |
+| `macros/` | `shared/` (conventions every domain uses), `<domain>/` (one domain's rule), `adapters/` (engine workarounds) |
+| `scripts/` | `generate/` (write committed files), `check/` (CI checks), `tools/` (for people, on demand), `setup/` (one-off platform setup) |
+
+The governance test does the job of a dbt v2 check. When the project moves to dbt v2 (the Fusion
+engine), it moves to `checks/`, as the SQL in its header shows.
 
 A staging folder holds its source's doc block and the columns only that source has
 (`_<source>__docs.md`). `docs/` holds how the work is done (process, conventions, decisions,
@@ -101,10 +118,10 @@ to itself, and they meet only on the public core. `examples/planning/` sketches 
 
 ## Keys and hashes
 
-- **Key sets.** Every key is qualified by where it comes from: `SIS` (student system), `LMS` (learning platform), `SC` (short-course platform). The list is written once, in `models/_shared/_shared__conceptual.yml`; `scripts/definitions.py` generates `seeds/reference/shared/key_sets.csv` from it.
+- **Key sets.** Every key is qualified by where it comes from: `SIS` (student system), `LMS` (learning platform), `SC` (short-course platform). The list is written once, in `models/_shared/_shared__conceptual.yml`; `scripts/generate/definitions.py` generates `seeds/reference/shared/key_sets.csv` from it.
 - **One case per key.** Staging writes each system key in one case: IDs and codes upper case (`S-20417`, `GCDA`), platform user IDs and emails lower case (`u-88213`). So `s-20417` typed into the platform is the same key as `S-20417`, and a readable key and its hash are one to one.
 - **Readable key.** `business_key('SIS', 'student_id')` gives `SIS|S-20417`; null when any part is missing or blank.
-- **Hash.** `hash_key(['learner_bk'])`: sha-256, as 64 hex characters, of the parts trimmed, upper-cased and joined with `|`, with a sentinel for a missing part. Every key in these sources is case-insensitive. The exact rules are in the macro's comment, `macros/keys.sql`. DuckDB's `sha256` and Databricks' `sha2(..., 256)` give the same value.
+- **Hash.** `hash_key(['learner_bk'])`: sha-256, as 64 hex characters, of the parts trimmed, upper-cased and joined with `|`, with a sentinel for a missing part. Every key in these sources is case-insensitive. The exact rules are in the macro's comment, `macros/shared/keys.sql`. DuckDB's `sha256` and Databricks' `sha2(..., 256)` give the same value.
 - **Collision risk.** Two different keys giving the same sha-256 is negligible. The real risk is two different keys normalising to the same string: keys that differ only by case or spaces (intended), or a key containing `|` (none in these sources).
 - **The readable key stays beside the hash**, in every core model, so any row can be read and checked.
 

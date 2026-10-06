@@ -9,8 +9,3 @@ data_tests:
       D-002 in October (docs/gaps.md).
     config:
       meta: {owner: Planning}
-
-  - name: keys_decided_different_stay_apart
-    description: A decision that two keys are different people holds, whatever the matching rules do.
-    config:
-      meta: {owner: "Mei Tanaka, registrar's office"}

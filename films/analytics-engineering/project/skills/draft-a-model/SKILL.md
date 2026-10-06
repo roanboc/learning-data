@@ -21,7 +21,7 @@ turns them green, in the right layer.
 3. **Run it and watch it fail**: `dbt build --select <model> --profiles-dir .`. The failures are the work to do.
 4. **Write the SQL** the way `docs/conventions.md` says: import CTEs, one step per CTE, a final select listing every column in the contract's order. Use `business_key`, `hash_key` and `valid_at` from `macros/`; don't write your own.
 5. **Build it with what depends on it**: `dbt build --select <model>+ --profiles-dir .`, until it's green.
-6. **Check the generated docs**: `dbt parse`, then `python scripts/diagrams.py --check` and `python scripts/definitions.py --check`; regenerate if the YAML changed them.
+6. **Check the generated docs**: `dbt parse`, then `python scripts/generate/diagrams.py --check` and `python scripts/generate/definitions.py --check`; regenerate if the YAML changed them.
 7. **Open a pull request** with what the model does, its grain, the tests, and the evidence that it's right: row counts, and a reconciliation where one exists.
 
 ## When a test fails and you can't see why

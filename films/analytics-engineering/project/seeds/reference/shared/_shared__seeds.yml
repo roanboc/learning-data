@@ -4,7 +4,7 @@ seeds:
     description: >
       One row per key set: where a key comes from, the system's name and who owns it. Shared by
       every model and domain, like the hashing macro. Generated from models/_shared/_shared__conceptual.yml by
-      scripts/definitions.py: edit the conceptual model, not this file.
+      scripts/generate/definitions.py: edit the conceptual model, not this file.
     config:
       column_types: {key_set: string, system_name: string, owner: string}
       meta: {owner: "Noor, data architect", domain: shared, purpose: reference}

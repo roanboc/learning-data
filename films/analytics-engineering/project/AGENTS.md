@@ -59,8 +59,8 @@ A claim without its query is a guess, and reviewers treat it as one.
 
 ```sh
 dbt build --profiles-dir .              # green; the one warning is by design (docs/gaps.md, gap 5)
-python scripts/definitions.py --check   # the doc blocks match the conceptual models
-python scripts/diagrams.py --check      # the physical diagrams match the YAML
+python scripts/generate/definitions.py --check   # the doc blocks match the conceptual models
+python scripts/generate/diagrams.py --check      # the physical diagrams match the YAML
 ```
 
 Say in the pull request what you changed, why, what you checked, and the evidence.

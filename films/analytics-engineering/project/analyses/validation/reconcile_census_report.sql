@@ -1,5 +1,5 @@
 -- Validation: Planning's number beside the census report's, faculty by faculty.
--- The singular test tests/reconcile_planning_with_census_report.sql fails the build on any difference;
+-- The singular test tests/reconciliation/reconcile_planning_with_census_report.sql fails the build on any difference;
 -- this shows every row, for the sign-off.
 -- Run: dbt show --select reconcile_census_report --profiles-dir .
 with

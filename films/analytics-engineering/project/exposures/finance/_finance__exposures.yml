@@ -3,11 +3,12 @@ exposures:
   - name: revenue_forecast
     label: Revenue forecast
     type: analysis
-    maturity: low
+    maturity: medium
     description: >
       Finance's revenue forecast for next year: the tuition that recognised credit saves learners,
-      by faculty, as at census date. Declared with the question, before anything is built, so
-      everyone can see who will depend on what Finance's mart reads.
+      by faculty, as at census date. Declared with the question, before anything was built. Its
+      mart pins the core versions it reads, so a new version reaches Finance as a choice, with a
+      date, and the lineage names Finance among who to tell.
     owner:
       name: Finance
       email: finance@uni.example

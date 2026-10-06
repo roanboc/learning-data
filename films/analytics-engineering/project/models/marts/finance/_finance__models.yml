@@ -108,19 +108,19 @@ unit_tests:
       rate. A learner with no recognised credit saves nothing.
     model: mart_finance__tuition_forgone
     given:
-      - input: ref('core_learner')
+      - input: ref('core_learner', v=1)
         format: csv
         rows: |
           learner_key,learner_bk,enrolled_award_key,valid_from,valid_to
           L1,SIS|S-1,A1,2026-01-01,
           L2,SIS|S-2,A1,2026-01-01,
-      - input: ref('core_award')
+      - input: ref('core_award', v=1)
         format: csv
         rows: |
           award_key,award_bk,award_code,award_name,award_type,faculty_code,faculty_name,valid_from,valid_to
           A1,SIS|GC,GC,A graduate certificate,graduate certificate,EIT,Faculty of Engineering and IT,2025-01-01,
           A2,SIS|M,M,A master,master,EIT,Faculty of Engineering and IT,2025-01-01,
-      - input: ref('core_credit_towards_award')
+      - input: ref('core_credit_towards_award', v=1)
         format: csv
         rows: |
           learner_key,award_key,credit_points_from_microcredentials,valid_from,valid_to

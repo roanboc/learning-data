@@ -2,19 +2,19 @@ with
 
 learners as (
 
-    select * from {{ ref('core_learner') }}
+    select * from {{ ref('core_learner', v=1) }}
 
 ),
 
 awards as (
 
-    select * from {{ ref('core_award') }}
+    select * from {{ ref('core_award', v=1) }}
 
 ),
 
 credit as (
 
-    select * from {{ ref('core_credit_towards_award') }}
+    select * from {{ ref('core_credit_towards_award', v=1) }}
 
 ),
 

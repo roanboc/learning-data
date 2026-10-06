@@ -9,12 +9,13 @@ const NARR={
  {"id":"bridge","gap":0.8,"text":"A core model makes the same promise. Its tests are the assay, and they come before the mark."}]},
 "gaps":{"name":"The gap register","lead":1.0,"tail":1.0,"vo":[
  {"id":"step","gap":0.8,"text":"Step four: name the gaps."},
- {"id":"register","gap":0.8,"text":"Jun's gap register sets what the business expects beside what the sources hold, one line per gap."},
+ {"id":"register","gap":0.8,"text":"Jun's gap register lists them beside each source, while they're open: what the business expects, beside what the source holds, one line per gap."},
  {"id":"revoked","gap":0.8,"text":"The business expects a revoked credential to be known as revoked. The learning platform just deletes it."},
  {"id":"three","gap":0.8,"text":"Every gap gets one of three decisions. Fix it at the source. Write a rule in the model. Or accept it, and write it down."},
  {"id":"both","gap":0.8,"text":"This one gets two. Anything the platform stops showing is revoked from that day. And the platform is asked for a proper flag."},
  {"id":"jordan","gap":0.8,"text":"Jordan's microcredential vanished on the twelfth of August. From that day, it reads as revoked."},
- {"id":"ten","gap":0.8,"text":"Ten gaps, ten decisions. Mei approves the ones about meaning.","say":"Ten gaps, ten decisions. May approves the ones about meaning."}]},
+ {"id":"ten","gap":0.8,"text":"Ten gaps, ten decisions. Mei approves the ones about meaning.","say":"Ten gaps, ten decisions. May approves the ones about meaning."},
+ {"id":"leave","gap":0.8,"text":"Then each gap leaves the register. A rule in the model becomes a decision, in its source's log. An accepted gap becomes a known limitation, on the model. Only a fix still awaited stays open."}]},
 "enterprise":{"name":"The enterprise contract","lead":1.0,"tail":1.0,"vo":[
  {"id":"contracts","gap":0.8,"text":"Then the contracts. The core is what everything else builds on, so it makes the strongest promise."},
  {"id":"folder","gap":0.8,"text":"The whole core folder gets two settings. Public: other projects may build on it. And a contract, enforced."},

@@ -71,9 +71,11 @@ scene("gaps",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   // the register: drafted by the agent, one line per gap; it steps back for gap 1 and returns for the ten decisions
   const away=fin(t,Rv-0.5,0.5)*(1-fin(t,Tn-0.05,0.6)),regA=fin(t,Rg-0.2,0.5)*(1-away);
   const p=clamp((t-w("register","register")-0.3)/0.42,0,10),tags=clamp((t-w("ten","ten decisions")+0.4)/1.2,0,1),ink=fin(t,w("ten","May")+0.2,0.8);
-  const hiRow={4:pulseAt(t,w("ten","ten decisions")+1.0,1.6),9:pulseAt(t,w("ten","ten decisions")+1.0,1.6)},meaning=[0,6,8];
+  const Lv=c("leave"),hiRow={4:pulseAt(t,w("ten","ten decisions")+1.0,1.6),9:pulseAt(t,w("ten","ten decisions")+1.0,1.6)},meaning=[0,6,8];
+  // once decided, each gap leaves the register; the three still waiting on a fix at the source stay open
+  const OPEN=[0,1,6],gone={};[2,3,4,5,7,8,9].forEach((i,k)=>gone[i]=fin(t,w("leave","leaves")+k*0.14,0.5));const stay=fin(t,w("leave","stays open")-0.2,0.5);OPEN.forEach(i=>hiRow[i]=stay);
   const ticks={};for(let i=0;i<10;i++)ticks[i]=fin(t,w("ten","approves")+(meaning.includes(i)?meaning.indexOf(i)*0.25:1.0+i*0.08),0.3);
-  arrive(ctx,840,500,t,Rg-0.2,()=>pp_register(ctx,t,{a:regA,p,tags,ink,hiRow,ticks}),{d:0.9,from:0.96,dy:24});
+  arrive(ctx,840,500,t,Rg-0.2,()=>pp_register(ctx,t,{a:regA,p,tags,ink,hiRow,ticks,gone,hiCol:stay>0?PP_AMB:undefined}),{d:0.9,from:0.96,dy:24});
   kt_agent(ctx,1610,240,22,t,{a:fin(t,Rg-0.2,0.5)*(1-fin(t,w("register","one line per gap")+4.4,0.6))*(1-away),busy:1});
   // gap 1, as the file has it
   arrive(ctx,960,290,t,Rv,()=>pp_gap1(ctx,150,160,t,{a:dA,lit:{exp:fin(t,w("revoked","expects"),0.4),real:fin(t,w("revoked","deletes"),0.4),dec:fin(t,Bo,0.4)}}),{dy:30,from:0.95});
@@ -88,6 +90,10 @@ scene("gaps",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   arrive(ctx,1340,700,t,w("revoked","deletes")+0.0,()=>pp_cred(ctx,1180,610,320,184,"LMS|B-5028","Data Visualisation",{a:bA,fade:del,back,hi:pulseAt(t,Jo,1.4)}),{dy:30});
   withA(ctx,bA*fin(t,Jo,0.5),()=>{T(ctx,"Jordan's",1340,594,{w:800,size:22,align:"center",color:rgba(PP_LMS,1)});withA(ctx,fin(t,w("jordan","twelfth")-0.1,0.4),()=>tag(ctx,1590,702,"12 Aug",SOFT,{size:20}));});
   if(back>0)withA(ctx,bA*(1-fin(t,Jo+5.6,0.6)),()=>arrowTo(ctx,1110,478,1300,602,PP_DEC[1][1],0.85,{p:back,bend:-0.15,dash:[6,6],head:12}));
+  // where each gap goes once it's settled: a decision in its source's log, a known limitation on the model, or still open
+  [["a decision, in its source's log","sources/<system>/_<system>__decisions.yml",w("leave","becomes a decision"),TRUST],["a known limitation, on the model","meta.limitations",w("leave","known limitation"),PP_DEC[2][1]],
+   ["still open, until the fix arrives","requirements/sources/<system>/",w("leave","stays open"),PP_AMB]].forEach(([h,f,t0,col],k)=>{const x=140+k*480;
+    arrive(ctx,x+220,935,t,t0-0.2,()=>{glass(ctx,x,880,440,110,14,col,{glow:12,ea:0.75,fill:"rgba(7,12,24,0.96)"});T(ctx,h,x+22,922,{w:800,size:20,color:rgba(col,1)});pp_fitT(ctx,f,x+22,962,396,{f:"mono",w:500,size:18,min:14,color:rgba(INK,0.9)});},{dy:20});});
   // Mei approves the decisions about meaning
   arrive(ctx,1700,520,t,w("ten","May")-0.2,()=>{pp_face(ctx,"mei",1700,520,64,t,{name:"Mei",role:"approves meaning"});},{from:0.85});
   ctx.restore();vign(ctx,S);});
@@ -109,7 +115,7 @@ scene("enterprise",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,
   withA(ctx,fin(t,w("folder","Public"),0.4)*(1-fin(t,Co-0.9,0.4)),()=>tag(ctx,800,525,"other projects may build on it",TRUST,{size:18}));
   // the credential's contract: every column, its type, what can't be empty; then its grain
   const flip=fin(t,w("stops","disagree"),0.4)*(1-fin(t,No,0.5)),bLit={7:fin(t,w("columns","every column"),0.4),10:fin(t,w("columns","its type"),0.4),16:Math.max(fin(t,w("columns","its type"),0.4),flip),11:fin(t,w("columns","can't be empty"),0.4),4:fin(t,w("columns","grain"),0.4)};
-  arrive(ctx,1350,580,t,Co-0.4,()=>pp_code(ctx,880,330,940,"models/core/_core__models.yml",PP_CRED,{size:18,lh:27,p:clamp((t-Co+0.2)/1.8,0,1),lit:bLit,litCols:{16:flip>0.5?BAD:TRUST},edge:TRUST,swap:{16:["        data_type: string",flip,BAD]}}),{dy:30});
+  arrive(ctx,1350,580,t,Co-0.4,()=>pp_code(ctx,880,330,940,"models/core/student/_core_student__models.yml",PP_CRED,{size:18,lh:27,p:clamp((t-Co+0.2)/1.8,0,1),lit:bLit,litCols:{16:flip>0.5?BAD:TRUST},edge:TRUST,swap:{16:["        data_type: string",flip,BAD]}}),{dy:30});
   // the query and the contract disagree: the build stops before the table is made
   const run=clamp((t-w("stops","build")+0.8)/0.8,0,1),red=fin(t,w("stops","stops"),0.3),ok=fin(t,No+0.2,0.6),eA=fin(t,w("stops","build")-0.9,0.5);
   arrive(ctx,470,740,t,w("stops","build")-0.9,()=>{const col=mix(mix([150,180,220],BAD,red),GOOD,ok);glass(ctx,80,620,780,250,16,col,{glow:14,ea:0.85,fill:"rgba(10,8,14,0.96)"});
@@ -146,8 +152,8 @@ scene("consumer",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   arrive(ctx,960,520,t,Pr-0.3,()=>pp_code(ctx,620,400,680,"dbt_project.yml",PP_MARTS,{a:mA,p:clamp((t-Pr)/1.2,0,1),edge:PP_MART,lit:{3:fin(t,w("protected","protected"),0.4),4:fin(t,w("protected","enforced"),0.4),5:fin(t,w("protected","enforced"),0.4)}}),{dy:30});
   // each declares an exposure: who reads it, with an owner and an email
   const dimE=1-fin(t,Te+0.8,0.6)*(1-fin(t,Ap,0.6)),lit=(tt)=>({4:fin(t,tt,0.4),7:fin(t,w("exposure","owner"),0.4),8:fin(t,w("exposure","owner"),0.4),9:fin(t,w("exposure","email"),0.4)});
-  arrive(ctx,510,610,t,Ex-0.2,()=>pp_code(ctx,140,368,740,"models/marts/planning/_planning__models.yml",PP_EXP_P,{a:dimE,size:18,lh:24,p:clamp((t-Ex)/1.6,0,1),edge:PP_MART,lit:lit(w("exposure","dashboard"))}),{dy:30});
-  arrive(ctx,1410,610,t,w("exposure","app")-0.3,()=>pp_code(ctx,1040,368,740,"models/marts/wallet/_wallet__models.yml",PP_EXP_W,{a:dimE,size:18,lh:24,p:clamp((t-w("exposure","app")+0.1)/1.4,0,1),edge:PP_MART,lit:lit(w("exposure","app"))}),{dy:30});
+  arrive(ctx,510,610,t,Ex-0.2,()=>pp_code(ctx,140,368,740,"exposures/planning/_planning__exposures.yml",PP_EXP_P,{a:dimE,size:18,lh:24,p:clamp((t-Ex)/1.6,0,1),edge:PP_MART,lit:lit(w("exposure","dashboard"))}),{dy:30});
+  arrive(ctx,1410,610,t,w("exposure","app")-0.3,()=>pp_code(ctx,1040,368,740,"exposures/wallet/_wallet__exposures.yml",PP_EXP_W,{a:dimE,size:18,lh:24,p:clamp((t-w("exposure","app")+0.1)/1.4,0,1),edge:PP_MART,lit:lit(w("exposure","app"))}),{dy:30});
   // change the credential: the lineage reaches one exposure, the wallet app
   const run=fin(t,Te+0.2,1.4);if(run>0&&bandY>800){const[x0,y0]=P.core_credential,pts=[];for(let i=0;i<=40;i++){const u=i/40*run,v=1-u;pts.push([v*v*v*x0+3*v*v*u*x0+3*v*u*u*1410+u*u*u*1410,v*v*v*(y0-16)+3*v*v*u*(y0-320)+3*v*u*u*500+u*u*u*332]);}
     withA(ctx,1-fin(t,Ap-0.4,0.4),()=>{ctx.save();ctx.strokeStyle=rgba(TRUST,1);ctx.lineWidth=4;ctx.shadowColor=rgba(TRUST,0.8);ctx.shadowBlur=14;ctx.beginPath();pts.forEach((q,i)=>i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]));ctx.stroke();ctx.restore();});}
@@ -192,14 +198,14 @@ scene("tests",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   withA(ctx,fin(t,w("step","done looks like")-0.1,0.5)*oA,()=>T(ctx,"they say what done looks like",1290,440,{w:700,size:22,align:"center",color:rgba(SOFT,1)}));
   // agreed values, and the rule that versions never overlap
   const vOut=fin(t,Tr-0.8,0.5);
-  arrive(ctx,1290,290,t,w("values","agreed values")-0.4,()=>pp_code(ctx,760,150,1060,"models/core/_core__models.yml",PP_AWARD,{a:1-vOut,p:clamp((t-w("values","agreed values")+0.2)/1.2,0,1),edge:TRUST,lit:{6:fin(t,w("values","agreed values")+0.4,0.4),4:fin(t,w("values","agreed values")+0.4,0.4)}}),{dy:30});
+  arrive(ctx,1290,290,t,w("values","agreed values")-0.4,()=>pp_code(ctx,760,150,1060,"models/core/course/_core_course__models.yml",PP_AWARD,{a:1-vOut,p:clamp((t-w("values","agreed values")+0.2)/1.2,0,1),edge:TRUST,lit:{6:fin(t,w("values","agreed values")+0.4,0.4),4:fin(t,w("values","agreed values")+0.4,0.4)}}),{dy:30});
   arrive(ctx,1290,560,t,w("values","never overlap")-0.4,()=>pp_code(ctx,760,460,1060,"tests/generic/versions_do_not_overlap.sql",PP_VER,{a:1-vOut,size:18,lh:27,p:clamp((t-w("values","never overlap")+0.2)/1.0,0,1),edge:PP_INT}),{dy:30});
   // a number people already trust: the census report, weighed against the mart that isn't built yet
   const cA=fin(t,Tr-0.1,0.5);
-  arrive(ctx,1000,280,t,Tr-0.1,()=>{T(ctx,"seeds/census_report.csv",780,150,{f:"mono",w:500,size:18,color:rgba(TRUST,1)});tag(ctx,1046,144,PP_RUN,WEED,{size:18});
+  arrive(ctx,1000,280,t,Tr-0.1,()=>{T(ctx,"seeds/expected/planning/census_report.csv",780,150,{f:"mono",w:500,size:18,color:rgba(TRUST,1)});tag(ctx,1046,144,PP_RUN,WEED,{size:18});
     pp_table(ctx,780,172,[300,140],[["faculty","learners"],["Arts and Education",2],["Business",3],["Engineering and IT",5],["Health",2],["total",12]],{size:20,rh:42,col:TRUST,align:[0,"right"],lit:{5:fin(t,w("trusted","twelve"),0.4)}});},{dy:30,a:cA});
   arrive(ctx,1530,420,t,w("trusted","trust")-0.2,()=>pp_scale(ctx,1530,440,0.9,-0.1+0.02*Math.sin(t*1.2),{left:"12",leftLab:"census report",rightLab:"the mart",col:TRUST}),{from:0.9});
-  arrive(ctx,1290,590,t,Re-0.3,()=>pp_code(ctx,760,460,1060,"tests/reconcile_planning_with_census_report.sql",PP_REC,{size:18,lh:27,p:clamp((t-Re)/1.4,0,1),edge:TRUST,lit:{5:fin(t,w("reconcile","fails"),0.4),6:fin(t,w("reconcile","fails"),0.4)}}),{dy:30});
+  arrive(ctx,1290,590,t,Re-0.3,()=>pp_code(ctx,760,460,1060,"tests/reconciliation/reconcile_planning_with_census_report.sql",PP_REC,{size:18,lh:27,p:clamp((t-Re)/1.4,0,1),edge:TRUST,lit:{5:fin(t,w("reconcile","fails"),0.4),6:fin(t,w("reconcile","fails"),0.4)}}),{dy:30});
   withA(ctx,fin(t,w("reconcile","faculty"),0.4),()=>tag(ctx,1300,766,"faculty by faculty",TRUST,{align:"center",size:20}));
   // the agent drafts; Jun reviews (both kept clear of the two-line captions)
   arrive(ctx,1010,830,t,Ag-0.2,()=>{kt_agent(ctx,800,820,14,t,{});T(ctx,"the agent drafts, from the contracts and the register",832,828,{w:700,size:20,color:rgba(KT_AI,1)});},{dy:12});
@@ -229,9 +235,9 @@ scene("unit",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   pp_flow(ctx,1270,300,[["given: made-up rows",PP_INT,false],["the model's logic",PP_INT,true],["expect: these rows",GOOD,false]],[fin(t,w("alone","a few rows")-0.1,0.5),fin(t,w("alone","purpose")-0.1,0.5),fin(t,w("alone","unit test")-0.1,0.5)],{a:fA,size:22,gap:70});
   // given: two made-up rows; then expect: three versions
   const sw=ease(fin(t,Ex-0.3,0.8));
-  arrive(ctx,1270,270,t,w("rows","credit rule")-0.4,()=>pp_code(ctx,720,lerp(110,-260,sw),1100,"models/intermediate/_int_models.yml",PP_GIVEN,{a:1-sw,size:18,lh:27,p:clamp((t-w("rows","credit rule"))/1.4,0,1),edge:PP_INT,lit:{7:fin(t,w("rows","passed unit"),0.4),8:fin(t,w("rows","microcredential counts"),0.4)}}),{dy:30});
+  arrive(ctx,1270,270,t,w("rows","credit rule")-0.4,()=>pp_code(ctx,720,lerp(110,-260,sw),1100,"models/intermediate/student/_int_student__models.yml",PP_GIVEN,{a:1-sw,size:18,lh:27,p:clamp((t-w("rows","credit rule"))/1.4,0,1),edge:PP_INT,lit:{7:fin(t,w("rows","passed unit"),0.4),8:fin(t,w("rows","microcredential counts"),0.4)}}),{dy:30});
   const E3=[w("expect","fifteen"),w("expect","twenty"),w("expect","fifteen again")],ok=fin(t,w("before","proved"),0.35);
-  if(sw>0)pp_code(ctx,720,lerp(460,110,sw),1100,"models/intermediate/_int_models.yml",PP_EXPECT,{a:sw,size:18,lh:27,edge:mix(PP_INT,GOOD,ok),lit:{4:fin(t,E3[0],0.3),5:fin(t,E3[1],0.3),6:fin(t,E3[2],0.3)},litCol:GOOD});
+  if(sw>0)pp_code(ctx,720,lerp(460,110,sw),1100,"models/intermediate/student/_int_student__models.yml",PP_EXPECT,{a:sw,size:18,lh:27,edge:mix(PP_INT,GOOD,ok),lit:{4:fin(t,E3[0],0.3),5:fin(t,E3[1],0.3),6:fin(t,E3[2],0.3)},litCol:GOOD});
   if(ok>0)withA(ctx,ok,()=>{glow(ctx,1790,412,40,GOOD,0.4);ctx.fillStyle="rgba(8,20,14,0.96)";ctx.beginPath();ctx.arc(1790,412,20,0,TAU);ctx.fill();ring(ctx,1790,412,20,GOOD,1,2.5);tick_(ctx,1790,413,24,GOOD,1);});
   // the timeline of the two rows, and the credit they add up to (kept above the captions)
   const X=d=>200+d/273*1520,aA=fin(t,Ro-0.2,0.6),AX=770,MB=652,UB=712;
@@ -256,7 +262,7 @@ scene("unit",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 7. Warn or stop ---------- */
-const PP_SCY=["      - name: customer_bk","        description: >","          The customer who enrolled, by email. An enrolment with no email can't be matched to a","          learner. The learning team agreed: warn when any current enrolment has none, stop the","          build when more than five do (see docs/gaps.md).","        data_tests:","          - not_null:","              config:","                where: is_current_version","                warn_if: \">0\"","                error_if: \">5\""];
+const PP_SCY=["      - name: customer_bk","        description: >","          The customer who enrolled, by email. An enrolment with no email can't be matched to a","          learner. The learning team agreed: warn when any current enrolment has none, stop the","          build when more than five do (see DEC-SC-01 and LIM-SC-02).","        data_tests:","          - not_null:","              config:","                where: is_current_version","                warn_if: \">0\"","                error_if: \">5\""];
 const PP_FRESH=["      loaded_at_field: \"cast(_loaded_at as timestamp)\"","      freshness:","        warn_after: {count: 1, period: day}","        error_after: {count: 3, period: day}"];
 scene("levels",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.03,y:480});
@@ -290,7 +296,7 @@ scene("levels",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   // today's build: one warning, and it carries on
   arrive(ctx,1060,546,t,To-0.1,()=>{glass(ctx,700,518,850,56,12,PP_AMB,{glow:14,ea:0.9,fill:"rgba(16,12,4,0.96)"});T(ctx,"today",722,554,{w:800,size:18,color:rgba(SOFT,1)});T(ctx,"WARN 1 not_null_stg_short_courses__enrolments_customer_bk",790,554,{f:"mono",w:500,size:18,color:rgba(PP_AMB,1)});},{dy:16});
   // freshness works the same way: a clock on the student system's stream
-  arrive(ctx,1255,210,t,Fr-0.2,()=>pp_code(ctx,700,120,1110,"models/staging/student_system/_student_system__sources.yml",PP_FRESH,{p:clamp((t-Fr)/1.0,0,1),edge:PP_SIS,lit:{2:fin(t,w("fresh","a day late"),0.4),3:fin(t,w("fresh","fail at three"),0.4)},litCol:PP_AMB}),{dy:30});
+  arrive(ctx,1255,210,t,Fr-0.2,()=>pp_code(ctx,700,120,1110,"sources/student_system/_student_system__sources.yml",PP_FRESH,{p:clamp((t-Fr)/1.0,0,1),edge:PP_SIS,lit:{2:fin(t,w("fresh","a day late"),0.4),3:fin(t,w("fresh","fail at three"),0.4)},litCol:PP_AMB}),{dy:30});
   arrive(ctx,960,370,t,Fr+0.4,()=>{glass(ctx,700,336,560,68,14,PP_SIS,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.95)"});ctx.fillStyle=rgba(PP_SIS,1);rr(ctx,716,354,6,32,3);ctx.fill();T(ctx,"student system",736,378,{w:700,size:21});
     pp_clock(ctx,1222,370,24,clamp((t-Fr-0.4)/3,0,1)*1.6,PP_SIS,1);},{dy:16});
   withA(ctx,fin(t,w("fresh","a day late"),0.4),()=>tag(ctx,1284,370,"warn after a day",PP_AMB,{size:20}));

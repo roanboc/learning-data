@@ -1,6 +1,6 @@
-# Rebuilding A model is not a transformation
+# Rebuilding Declare it, then build it
 
-*A model is not a transformation*, the opening film of *In the weeds of data crafting*, is generated from code like every other film here. It shares the engine, components, fonts and voice model of *The Inner Life of Data*, draws with *A Sharper Sketch*'s diagrams, the people of *When things go wrong*, *From words to data*'s components and *Keeping it true*'s, and the series' own in [`../../shared/src/`](../../shared/src/). Only what is new lives here:
+*Declare it, then build it*, the opening film of *In the weeds of data crafting*, is generated from code like every other film here. It shares the engine, components, fonts and voice model of *The Inner Life of Data*, draws with *A Sharper Sketch*'s diagrams, the people of *When things go wrong*, *From words to data*'s components and *Keeping it true*'s, and the series' own in [`../../shared/src/`](../../shared/src/). Only what is new lives here:
 
 | File | What it holds |
 |---|---|
@@ -19,7 +19,7 @@ Follow the setup in [the build guide of *The Inner Life of Data*](../../../inner
 
 ## Rebuild
 
-Run from this folder, `films/analytics-engineering/1-a-model-is-not-a-transformation/source/`:
+Run from this folder, `films/analytics-engineering/1-declare-it-then-build-it/source/`:
 
 ```
 python tools/tts.py        # voices each line into build/vo/ and writes src/vodur.js
@@ -30,7 +30,7 @@ python tools/stills.py [chapter ...] [--at 12.5 ...] [--every 2] --size 960   # 
 python tools/audio.py      # mixes dist/soundtrack.mp3 from build/vo and tools/score.py
 python tools/build.py      # again, to embed the soundtrack
 python tools/captions.py   # ../captions/en.srt and en.vtt
-python tools/render.py --workers 4   # dist/a-model-is-not-a-transformation.mp4
+python tools/render.py --workers 4   # dist/declare-it-then-build-it.mp4
 ```
 
 The video adds a finishing pass that stills and the site's player don't show (`../../shared/src/post.js`): motion blur and a soft glow. It takes about half a second a frame, about 20 minutes with four workers. To see one finished frame, open `dist/render.html` in a browser and call `renderAt(seconds)`.
@@ -39,6 +39,6 @@ The video adds a finishing pass that stills and the site's player don't show (`.
 
 ## Publish
 
-`python tools/publish.py` copies `dist/film.js` and `dist/soundtrack.mp3` to `site/assets/a-model-is-not-a-transformation/`, with the Spanish captions (`src/i18n/es/captions.js`, as `captions.es.js`), and draws the poster, `site/assets/a-model-is-not-a-transformation-poster.jpg`, at the moment `film.json` names. Then run `python site-tools/build_series.py`, which makes the series' pages from `../../series.json` and `../site.json`, then `python site-tools/check_site.py` and `python site-tools/smoke.py`. Never edit the site's copies by hand: the release workflow checks that the site's `film.js` is byte for byte the one this source builds, and renders the video from this source.
+`python tools/publish.py` copies `dist/film.js` and `dist/soundtrack.mp3` to `site/assets/declare-it-then-build-it/`, with the Spanish captions (`src/i18n/es/captions.js`, as `captions.es.js`), and draws the poster, `site/assets/declare-it-then-build-it-poster.jpg`, at the moment `film.json` names. Then run `python site-tools/build_series.py`, which makes the series' pages from `../../series.json` and `../site.json`, then `python site-tools/check_site.py` and `python site-tools/smoke.py`. Never edit the site's copies by hand: the release workflow checks that the site's `film.js` is byte for byte the one this source builds, and renders the video from this source.
 
-The labs and scenarios are `site/assets/a-model-is-not-a-transformation/learn.en.js` and `learn.es.js`, drawn by *From words to data*'s engine (`site/assets/from-words-to-data/learn.js`); their pictures are this film's own, the `mt_` entries added to `LV` at the end of `src/plan.js`. "Pause and think" is `think.en.js` and `think.es.js`: it stops after `recap`, `name`, `lives` and `steps`. A change to `src/plan.js` changes the labs' pictures too, so publish again after one.
+The labs and scenarios are `site/assets/declare-it-then-build-it/learn.en.js` and `learn.es.js`, drawn by *From words to data*'s engine (`site/assets/from-words-to-data/learn.js`); their pictures are this film's own, the `mt_` entries added to `LV` at the end of `src/plan.js`. "Pause and think" is `think.en.js` and `think.es.js`: it stops after `recap`, `name`, `lives` and `steps`. A change to `src/plan.js` changes the labs' pictures too, so publish again after one.

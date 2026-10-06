@@ -1,4 +1,4 @@
-# A model is not a transformation: the music and sounds, played by tools/audio.py with From words to data's instruments
+# Declare it, then build it: the music and sounds, played by tools/audio.py with From words to data's instruments
 # (shared/tools/music.py). A new palette for a new series (PLAYBOOK.md: vary the sound itself): warm pads and a mellow electric
 # piano in D dorian for the present, a harp and strings for the 1870s, and the series' own mark, 1-4-5-8, at the title and the end.
 # Two rules, from the first cut's review:

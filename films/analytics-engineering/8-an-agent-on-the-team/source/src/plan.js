@@ -343,7 +343,7 @@ Object.assign(LV,{
     c.restore();},
   // the scenarios: drawn large, since learn.js shows them at 600 by 320 in a narrow column; components with fixed small labels are scaled up
   ag_q_warn:(c,w,h,st,L)=>{const V=L.vis;c.save();ag_lfit(c,w,h,1200,640);
-    c.save();c.translate(60,30);c.scale(1.5,1.5);ag_code(c,0,0,720,"tests/_singular_tests.yml",["  - name: reconcile_planning_with_census_report","    config:","      meta: {owner: Planning}","+     severity: warn"],{size:20,lh:32,label:V.draft||AG_DRAFT,draft:true,lineCol:{3:AG_AMB}});c.restore();
+    c.save();c.translate(60,30);c.scale(1.5,1.5);ag_code(c,0,0,720,"tests/reconciliation/_reconciliation__tests.yml",["  - name: reconcile_planning_with_census_report","    config:","      meta: {owner: Planning}","+     severity: warn"],{size:20,lh:32,label:V.draft||AG_DRAFT,draft:true,lineCol:{3:AG_AMB}});c.restore();
     tag(c,600,470,V.q.fail,AG_RED,{align:"center",size:40});T(c,V.q.until,600,580,{w:700,size:38,align:"center",color:rgba(AG_AMB,1)});c.restore();},
   ag_q_emails:(c,w,h,st,L)=>{const V=L.vis;c.save();ag_lfit(c,w,h,1200,640);glass(c,40,30,1120,580,18,KT_AI,{glow:12,ea:0.7,fill:"rgba(6,12,20,0.96)"});
     wrapT(c,V.q.emails,90,108,1020,{w:800,size:42,lh:52});for(let i=0;i<7;i++){const y=230+i*50;c.fillStyle=rgba([205,225,255],0.18);rr(c,90,y,260+160*hash(i,3),24,8);c.fill();c.fillStyle=rgba([205,225,255],0.1);rr(c,540,y,180+140*hash(i,9),24,8);c.fill();}

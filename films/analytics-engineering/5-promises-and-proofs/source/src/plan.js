@@ -273,30 +273,31 @@ function pp_layers(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)ret
     glass(ctx,x,yy,w,bh,10,c,{glow:6+12*on,ea:0.5+0.4*on,fill:"rgba(7,12,24,0.92)"});T(ctx,nm,x+20,yy+bh/2+7,{w:800,size:20,color:rgba(c,1)});});});
   if(o.latch!=null){const yy=y+(bh+gap)+bh/2;withA(ctx,o.latchA==null?1:o.latchA,()=>{kt_lock(ctx,x+w-40,yy+6,0.42,TRUST,1,1-o.latch);});}});}
 
-/* ---------- the gap register (docs/gaps.md), in short labels: what the business expects, what the sources hold, and the decisions ---------- */
+/* ---------- the gap register (the open gaps, in requirements/sources/<system>/), in short labels: what the business expects, what the sources hold, and the decisions ---------- */
 const PP_GAPS=[["a revoked credential is known as revoked","the platform deletes it",[1,0]],["every account names its student","some have no student ID",[1,0]],["one email, one learner","families share an email",[1]],
   ["an email is written one way","case and spaces vary",[1]],["every enrolment has an email","walk-ins can have none",[2]],["a change is dated when it happens","some are recorded late",[1,2]],
   ["the conferral of an award is recorded","no conferral record",[1,0]],["a status means one thing","three code sets",[1]],["a certificate is a credential","two kinds in one table",[1]],["a credential can expire","no source records an expiry",[2]]];
 const PP_REG={x:140,y:150,w:1400,rh:56,cols:[60,420,380,540]};
 // the register: rows type in as o.p goes 0..10; o.tags (0..1) shows the decisions; o.ink (0..1) turns the agent's teal draft to approved ink;
-// o.hiRow {i:0..1} glows a row; o.ticks {i:0..1} gold ticks at the row's end
+// o.hiRow {i:0..1} glows a row; o.ticks {i:0..1} gold ticks at the row's end; o.gone {i:0..1} fades a row out of the register, struck through, once its gap is settled
 function pp_register(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const R=PP_REG,hh=118,h=hh+R.rh*10+14,p=o.p==null?10:o.p;
   withA(ctx,a,()=>{glass(ctx,R.x,R.y,R.w,h,16,[170,205,255],{glow:12,ea:0.6,fill:"rgba(6,10,20,0.96)"});
-    ctx.fillStyle="rgba(170,205,255,0.9)";rr(ctx,R.x+18,R.y+22,10,10,3);ctx.fill();T(ctx,"docs/gaps.md",R.x+38,R.y+34,{f:"mono",w:500,size:18,color:"rgba(170,205,255,1)"});
+    ctx.fillStyle="rgba(170,205,255,0.9)";rr(ctx,R.x+18,R.y+22,10,10,3);ctx.fill();T(ctx,"requirements/ · the open gaps",R.x+38,R.y+34,{f:"mono",w:500,size:18,color:"rgba(170,205,255,1)"});
     const lw=tw(ctx,PP_RUN,18,700)+28,lx=R.x+R.w-16-lw;ctx.fillStyle="rgba(8,14,24,0.95)";rr(ctx,lx,R.y+13,lw,30,15);ctx.fill();ctx.strokeStyle=rgba(WEED,0.8);ctx.lineWidth=1.5;rr(ctx,lx,R.y+13,lw,30,15);ctx.stroke();T(ctx,PP_RUN,lx+14,R.y+34,{w:700,size:18,color:rgba(WEED,1)});
     let cx=R.x;["#","expects","holds","decision"].forEach((s,j)=>{withA(ctx,j===3?(o.tags||0):1,()=>T(ctx,s,cx+16,R.y+96,{w:800,size:20,color:rgba(j===1?TRUST:j===2?EDGE_:SOFT,1)}));cx+=R.cols[j];});
     ctx.fillStyle="rgba(170,200,245,0.16)";ctx.fillRect(R.x+14,R.y+hh-8,R.w-28,1.2);
-    PP_GAPS.forEach(([ex,ho,dec],i)=>{const q=clamp(p-i,0,1);if(q<=0)return;const yy=R.y+hh+i*R.rh,hi=o.hiRow?o.hiRow[i]||0:0,col=mix(KT_AI,INK,o.ink||0);
+    PP_GAPS.forEach(([ex,ho,dec],i)=>{const q=clamp(p-i,0,1);if(q<=0)return;const yy=R.y+hh+i*R.rh,hi=o.hiRow?o.hiRow[i]||0:0,col=mix(KT_AI,INK,o.ink||0),gn=o.gone?o.gone[i]||0:0;withA(ctx,1-0.78*gn,()=>{
       if(hi>0)withA(ctx,hi,()=>{ctx.fillStyle=rgba(o.hiCol||PP_DEC[2][1],0.16);rr(ctx,R.x+8,yy+4,R.w-16,R.rh-8,8);ctx.fill();});
       T(ctx,String(i+1),R.x+16,yy+R.rh/2+7,{f:"mono",w:500,size:20,color:rgba(SOFT,q)});
       T(ctx,typeOn(ex,q),R.x+R.cols[0]+16,yy+R.rh/2+7,{w:600,size:20,color:rgba(col,1)});T(ctx,typeOn(ho,q),R.x+R.cols[0]+R.cols[1]+16,yy+R.rh/2+7,{w:600,size:20,color:rgba(mix(col,EDGE_,0.35),1)});
       let tx=R.x+R.cols[0]+R.cols[1]+R.cols[2]+12;dec.forEach((k,j)=>{const ta=clamp((o.tags||0)*12-i*0.9-j*0.4,0,1);if(ta>0)tx+=pp_dtag(ctx,tx,yy+R.rh/2,k,ta,{size:18})+8;});
-      if(o.ticks&&o.ticks[i]>0)kt_gtick(ctx,R.x+R.w-30,yy+R.rh/2,13,o.ticks[i]);});});}
+      if(o.ticks&&o.ticks[i]>0)kt_gtick(ctx,R.x+R.w-30,yy+R.rh/2,13,o.ticks[i]);});
+      if(gn>0){ctx.fillStyle=rgba(SOFT,0.7*gn);ctx.fillRect(R.x+R.cols[0]+10,yy+R.rh/2,(R.w-R.cols[0]-60)*clamp(gn*1.4,0,1),1.6);}});});}
 
-// gap 1 as docs/gaps.md has it, rendered as a table (line 8; the decision trimmed with …). o.lit {exp, real, dec}: 0..1
+// gap 1 as its register had it while it was open (GAP-LMS-01), rendered as a table (the decision trimmed with …). o.lit {exp, real, dec}: 0..1
 function pp_gap1(ctx,x,y,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const C=[60,300,450,540,300],w=C.reduce((s,c)=>s+c,0),h=262,lit=o.lit||{};
   withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,[170,205,255],{glow:12,ea:0.6,fill:"rgba(6,10,20,0.96)"});
-    ctx.fillStyle="rgba(170,205,255,0.9)";rr(ctx,x+18,y+22,10,10,3);ctx.fill();T(ctx,"docs/gaps.md · line 8",x+38,y+34,{f:"mono",w:500,size:18,color:"rgba(170,205,255,1)"});
+    ctx.fillStyle="rgba(170,205,255,0.9)";rr(ctx,x+18,y+22,10,10,3);ctx.fill();T(ctx,"requirements/sources/learning_platform/ · GAP-LMS-01",x+38,y+34,{f:"mono",w:500,size:18,color:"rgba(170,205,255,1)"});
     const lw=tw(ctx,PP_RUN,18,700)+28,lx=x+w-16-lw;ctx.fillStyle="rgba(8,14,24,0.95)";rr(ctx,lx,y+13,lw,30,15);ctx.fill();ctx.strokeStyle=rgba(WEED,0.8);ctx.lineWidth=1.5;rr(ctx,lx,y+13,lw,30,15);ctx.stroke();T(ctx,PP_RUN,lx+14,y+34,{w:700,size:18,color:rgba(WEED,1)});
     let cx=x;["#","Expectation","Reality","Decision","Where"].forEach((s,j)=>{T(ctx,s,cx+16,y+92,{w:800,size:20,color:rgba(SOFT,1)});cx+=C[j];});
     ctx.fillStyle="rgba(170,200,245,0.16)";ctx.fillRect(x+14,y+108,w-28,1.2);
@@ -449,7 +450,7 @@ const PP_N={
   expiry:(c,w,h,st,L)=>{const V=L.vis,Q=V.q;c.save();pp_lfit(c,w,h,600,320);pp_fitT(c,V.jordan,10,32,280,{w:700,size:24,min:16,color:rgba(SOFT,1)});
     glass(c,10,46,280,128,16,PP_LMS,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.95)"});pp_fitT(c,V.jordanName,26,96,250,{w:800,size:28,min:18});T(c,"LMS|B-5028",26,146,{f:"mono",w:500,size:26,color:rgba(PP_LMS,1)});
     T(c,Q.expiry+":",10,236,{w:700,size:30,color:rgba(SOFT,1)});T(c,"?",10+tw(c,Q.expiry+":",30,700)+14,238,{w:800,size:36,color:rgba(EDGE_,1)});
-    pp_fitT(c,"docs/gaps.md · 10",316,46,276,{f:"mono",w:500,size:22,min:16,color:"rgba(170,205,255,1)"});wrapT(c,Q.none,316,100,276,{w:700,size:30});pp_chipFit(c,316,250,V.dec[2],PP_DEC[2][1],{size:28,min:18},276);c.restore();},
+    pp_fitT(c,"requirements/ · gap 10",316,46,276,{f:"mono",w:500,size:22,min:16,color:"rgba(170,205,255,1)"});wrapT(c,Q.none,316,100,276,{w:700,size:30});pp_chipFit(c,316,250,V.dec[2],PP_DEC[2][1],{size:28,min:18},276);c.restore();},
   fresh:(c,w,h,st,L)=>{const V=L.vis,Q=V.q;c.save();pp_lfit(c,w,h,600,320);pp_clock(c,44,48,34,0.66,PP_SIS,1);T(c,"student_system",96,58,{f:"mono",w:500,size:26,color:rgba(PP_SIS,1)});
     const X0=40,X1=520,dx=(X1-X0)/3,Y=170;[[0,1,GOOD],[1,3,PP_AMB]].forEach(([a,b,zc])=>{c.fillStyle=rgba(zc,0.3);rr(c,X0+a*dx,Y-12,(b-a)*dx,24,6);c.fill();});c.fillStyle=rgba(BAD,0.4);rr(c,X1,Y-12,52,24,6);c.fill();
     Q.days.forEach((s,i)=>{const x=X0+i*dx;c.fillStyle=rgba(SOFT,0.9);c.fillRect(x-1,Y-20,2,40);const sw=tw(c,s,24,700);T(c,s,Math.max(4+sw/2,Math.min(596-sw/2,x)),Y+50,{w:700,size:24,align:"center",color:rgba(SOFT,1)});});
@@ -463,7 +464,7 @@ const PP_N={
 Object.assign(LV,{
   // write the contract: the YAML card filling in from the choices, and what the build says
   pp_l_contract:(c,w,h,st,L)=>{if(pp_nar(c))return PP_N.contract(c,w,h,st,L);const V=L.vis,pk=st.pick||[];c.save();pp_lfit(c,w,h,960,440);const X=20,Y=14,CW=920,RH=40;
-    glass(c,X,Y,CW,264,14,TRUST,{glow:10,ea:0.7,fill:"rgba(6,10,20,0.96)"});pp_cardHead(c,X,Y,CW,"models/core/_core__models.yml",V.run,TRUST);
+    glass(c,X,Y,CW,264,14,TRUST,{glow:10,ea:0.7,fill:"rgba(6,10,20,0.96)"});pp_cardHead(c,X,Y,CW,"models/core/student/_core_student__models.yml",V.run,TRUST);
     const CX=[X+24,X+330,X+530,X+690];V.cols.forEach((s,j)=>T(c,s,CX[j],Y+84,{w:800,size:18,color:rgba(SOFT,1)}));c.fillStyle="rgba(170,200,245,0.16)";c.fillRect(X+14,Y+96,CW-28,1.2);
     const mm=[],gets=[];
     PP_LC.forEach((col,i)=>{const y=Y+126+i*RH,p=pk[i],on=p!=null,v=on?col.o[p]:undefined;
@@ -500,7 +501,7 @@ Object.assign(LV,{
     T(c,V.through,880,72,{w:700,size:18,align:"center",color:rgba(SOFT,1)});c.restore();},
   // decide the gap: the register, each line taking the decision chosen; Jordan's badge on the right
   pp_l_decide:(c,w,h,st,L)=>{if(pp_nar(c))return PP_N.decide(c,w,h,st,L);const V=L.vis,Lb=L.labs.find(l=>l.vis==="pp_l_decide"),pk=st.pick||{},K={both:[1,0],rule:[1],ruleacc:[1,2],accept:[2]};c.save();pp_lfit(c,w,h,960,440);
-    glass(c,14,10,692,420,14,[170,205,255],{glow:10,ea:0.6,fill:"rgba(6,10,20,0.96)"});pp_cardHead(c,14,8,692,"docs/gaps.md",V.run,[170,205,255]);
+    glass(c,14,10,692,420,14,[170,205,255],{glow:10,ea:0.6,fill:"rgba(6,10,20,0.96)"});pp_cardHead(c,14,8,692,"requirements/ · the open gaps",V.run,[170,205,255]);
     V.gaps.forEach((s,i)=>{const y=82+i*34.6,b=pk[i],ok=st.checked&&b===Lb.w.items[i].b,no=st.checked&&b!==Lb.w.items[i].b;
       if(i===0)withA(c,0.8,()=>{c.fillStyle=rgba(PP_LMS,0.1);rr(c,22,y-24,676,34,8);c.fill();});
       T(c,String(i+1),36,y,{f:"mono",w:500,size:18,align:"center",color:rgba(SOFT,1)});let x=st.checked?650:688;const tags=[];
@@ -553,7 +554,7 @@ Object.assign(LV,{
     pp_outline(c,392,96,192,110,"core_credential",TRUST,{size:17});wrapT(c,Q.notYet,488,246,196,{w:700,size:18,align:"center",color:rgba(SOFT,1)});c.restore();},
   pp_q_expiry:(c,w,h,st,L)=>{if(pp_nar(c))return PP_N.expiry(c,w,h,st,L);const V=L.vis,Q=V.q;c.save();pp_lfit(c,w,h,600,320);pp_fitT(c,V.jordan,24,32,270,{w:700,size:18,color:rgba(SOFT,1)});pp_lcred(c,24,48,270,140,V.micro,V.jordanName,"LMS|B-5028",PP_LMS);
     T(c,Q.expiry+":",24,226,{w:700,size:20,color:rgba(SOFT,1)});T(c,"?",24+tw(c,Q.expiry+":",20,700)+12,228,{w:800,size:26,color:rgba(EDGE_,1)});
-    T(c,"docs/gaps.md · 10",340,70,{f:"mono",w:500,size:17,color:"rgba(170,205,255,1)"});wrapT(c,Q.none,340,110,240,{w:700,size:20});pp_chip(c,340,210,V.dec[2],PP_DEC[2][1],{size:19});c.restore();},
+    T(c,"requirements/ · gap 10",340,70,{f:"mono",w:500,size:17,color:"rgba(170,205,255,1)"});wrapT(c,Q.none,340,110,240,{w:700,size:20});pp_chip(c,340,210,V.dec[2],PP_DEC[2][1],{size:19});c.restore();},
   pp_q_fresh:(c,w,h,st,L)=>{if(pp_nar(c))return PP_N.fresh(c,w,h,st,L);const V=L.vis,Q=V.q;c.save();pp_lfit(c,w,h,600,320);pp_clock(c,60,64,34,0.66,PP_SIS,1);T(c,"student_system",110,72,{f:"mono",w:500,size:18,color:rgba(PP_SIS,1)});
     const X0=60,X1=540,dx=(X1-X0)/3,Y=170;[[0,1,GOOD],[1,3,PP_AMB]].forEach(([a,b,zc])=>{c.fillStyle=rgba(zc,0.3);rr(c,X0+a*dx,Y-10,(b-a)*dx,20,6);c.fill();});c.fillStyle=rgba(BAD,0.4);rr(c,X1,Y-10,40,20,6);c.fill();
     Q.days.forEach((s,i)=>{const x=X0+i*dx;c.fillStyle=rgba(SOFT,0.9);c.fillRect(x-1,Y-18,2,36);T(c,s,x,Y+46,{w:700,size:18,align:"center",color:rgba(SOFT,1)});});

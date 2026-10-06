@@ -16,9 +16,9 @@ const NARR={
 "where":{"name":"What goes where","lead":1.0,"tail":1.0,"vo":[
  {"id":"fifth","gap":0.8,"text":"The fix isn't a fifth copy, or a better one. The definition already has a home. Everything else has to be driven from it."},
  {"id":"meaning","gap":0.8,"text":"Meaning lives in the conceptual model: what each thing is, its key, and who owns it."},
- {"id":"why","gap":0.8,"text":"Decisions live in Markdown, with why and who. So do the gaps the team accepted."},
+ {"id":"why","gap":0.8,"text":"Decisions live in a log beside what they're about, with why and who. The gaps the team accepted live on the model, as known limitations."},
  {"id":"build","gap":0.8,"text":"Everything the build uses lives in YAML: grain, keys, contracts, tests and owners."},
- {"id":"log","gap":0.8,"text":"A decision log isn't a copy. It holds why, and YAML has no place for why."}]},
+ {"id":"log","gap":0.8,"text":"A decision log isn't a copy. It holds why, which a model's YAML has no place for."}]},
 "blocks":{"name":"Written once, shown everywhere","lead":1.0,"tail":1.0,"vo":[
  {"id":"once","gap":0.8,"text":"So the award is defined once, in the conceptual model."},
  {"id":"script","gap":0.8,"text":"A script turns each definition into a doc block, on a Markdown page it writes itself. Nobody edits that page."},

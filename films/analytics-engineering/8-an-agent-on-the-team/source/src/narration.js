@@ -11,6 +11,7 @@ const NARR={
  {"id":"agents","gap":0.8,"text":"Before any of that, it reads one page, written for agents. What it may do, and what it must not."},
  {"id":"five","gap":0.6,"text":"Beside it, five skills, one file each: draft the conceptual model, profile a source, draft a model, reconcile and diff, review the metadata."},
  {"id":"process","gap":0.8,"text":"And the process: for each of the ten steps, the agent's part, and who approves it."},
+ {"id":"backlog","gap":0.8,"text":"The work itself is tracked in the team's backlog tool, which the agent can read. In the project, only what's still open is written down, and it's deleted once it's done."},
  {"id":"files","gap":0.8,"text":"Files in the project, not a long prompt. Versioned, reviewed, and read the same way by people and by agents."}]},
 "least":{"name":"Least access","lead":1.0,"tail":1.0,"vo":[
  {"id":"principal","gap":0.8,"text":"On Databricks, the agent works as its own service principal, never as a person."},

@@ -90,14 +90,14 @@ scene("profile",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   arrive(ctx,170,300,t,c("first")+0.8,()=>{kt_agent(ctx,170,300,30,t,{busy:fin(t,cF,0.5)*(1-fin(t,cO+4,1))});tag(ctx,170,385,"agent",KT_AI,{align:"center",size:18});},{from:0.7});
   arrive(ctx,825,96,t,0.4,()=>tag(ctx,825,96,"profile first",WEED,{align:"center",size:22}),{from:0.8});
   // the first claim: its query, then its result
-  const cQ=c("first")+1.4;arrive(ctx,825,320,t,cQ,()=>sm_file(ctx,360,180,910,"analyses/profile_null_keys.sql",SM_NULLQ,{size:18,lh:29,wrap:true,p:clamp((t-cQ-0.2)/3.0,0,1),edge:KT_AI}),{dy:30});
+  const cQ=c("first")+1.4;arrive(ctx,825,320,t,cQ,()=>sm_file(ctx,360,180,910,"analyses/profiling/profile_null_keys.sql",SM_NULLQ,{size:18,lh:29,wrap:true,p:clamp((t-cQ-0.2)/3.0,0,1),edge:KT_AI}),{dy:30});
   arrive(ctx,560,150,t,w("nulls","Four"),()=>tag(ctx,360,148,"4 of 42 accounts: no student ID",KT_AI,{size:20}),{from:0.85});
   arrive(ctx,700,550,t,w("nulls","no student ID"),()=>sm_rows(ctx,360,506,["source_table","key_column","current_rows","missing"],[["learning_platform.users","student_id","42","4"]],{col:KT_AI}),{dy:20});
   [["claim",148,w("first","every claim")],["query",330,w("first","query")],["result",550,w("nulls","no student ID")]].forEach(([s,y,t0])=>arrive(ctx,300,y,t,t0,()=>sm_tagR(ctx,348,y,s,SOFT,18),{from:0.8}));
   // two more evidence cards stack beside it as they're named, then a claim with no query
-  arrive(ctx,1565,245,t,cSh-0.1,()=>sm_evid(ctx,1290,120,550,["one email, two students","one email, two accounts"],"analyses/profile_shared_emails.sql",["student_system | nguyen.family@… | 2","learning_platform | nguyen.family@… | 2"],
+  arrive(ctx,1565,245,t,cSh-0.1,()=>sm_evid(ctx,1290,120,550,["one email, two students","one email, two accounts"],"analyses/profiling/profile_shared_emails.sql",["student_system | nguyen.family@… | 2","learning_platform | nguyen.family@… | 2"],
     {h:252,cA:[1,fin(t,w("shared","so do"),0.5)],rA:[fin(t,w("shared","family email"),0.5),fin(t,w("shared","platform accounts"),0.5)]}),{dy:30});
-  arrive(ctx,1565,510,t,cO-0.1,()=>sm_evid(ctx,1290,392,550,["2 orphans as typed","0 once trimmed and lower-cased"],"analyses/profile_orphans.sql",["short_courses.enrolments -> learners | 2 | 0"],
+  arrive(ctx,1565,510,t,cO-0.1,()=>sm_evid(ctx,1290,392,550,["2 orphans as typed","0 once trimmed and lower-cased"],"analyses/profiling/profile_orphans.sql",["short_courses.enrolments -> learners | 2 | 0"],
     {h:262,cA:[1,fin(t,w("orphans","Trimmed"),0.5)],rA:[fin(t,w("orphans","no customer"),0.5)],note:"of the enrolments with an email",noteA:fin(t,w("orphans","with an email"),0.5)}),{dy:30});
   const gr=fin(t,w("guess","without"),0.6);
   arrive(ctx,1565,712,t,cG-0.7,()=>{sm_evid(ctx,1290,676,550,["Emails are unique across the student system."],null,[],{h:108,grey:gr});withA(ctx,fin(t,w("guess","guess")-0.1,0.4),()=>sm_tagR(ctx,1822,760,"guess",EDGE_,20));},{dy:30});
@@ -115,7 +115,7 @@ function sm_setKeys(ctx,t,sc,o){o=o||{};const w=(id,s,of)=>kt_w(sc,id,s,of),dots
 scene("sets",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.03});
   const cA=c("alike"),cC=c("case"),tm=w("set","owner")+0.5;
-  arrive(ctx,420,220,t,0.4,()=>sm_file(ctx,80,120,680,"seeds/key_sets.csv",SM_KS,{size:20,lh:32,edge:TRUST,lit:{1:pulseAt(t,w("set","short code"),1.4),2:pulseAt(t,w("set","short code")+0.35,1.4),3:pulseAt(t,w("set","short code")+0.7,1.4)}}),{dy:30});
+  arrive(ctx,420,220,t,0.4,()=>sm_file(ctx,80,120,710,"seeds/reference/shared/key_sets.csv",SM_KS,{size:20,lh:32,edge:TRUST,lit:{1:pulseAt(t,w("set","short code"),1.4),2:pulseAt(t,w("set","short code")+0.35,1.4),3:pulseAt(t,w("set","short code")+0.7,1.4)}}),{dy:30});
   arrive(ctx,230,350,t,w("where","key sets"),()=>tag(ctx,80,350,"decided 5 Oct 2026 · Noor",TECH,{size:18}),{from:0.85});
   arrive(ctx,1200,250,t,0.8,()=>sm_setKeys(ctx,t,sc),{dy:24,from:0.95});
   const ow=fin(t,w("set","owner"),0.5);[["Registrar's office",TRUST],["Learning team",[126,224,140]],["Learning team",[255,128,168]]].forEach(([s,col],i)=>withA(ctx,ow,()=>{const kw=sm_keyW(i<2?SM_AK[i][1]:"·Aisha.K@Mail.example·",22,SM_AK[i][0]);
@@ -126,7 +126,7 @@ scene("sets",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   [[1340,0],[1720,1]].forEach(([x,k],i)=>{arrive(ctx,x,560,t,cA+0.3+i*0.3,()=>{sm_bust(ctx,x,580,120,SRC3[k][1],{});sm_key(ctx,x,630,"S-20417",SRC3[k][1],{align:"center",size:20,pre:["SIS|","LMS|"][k],q:qa});},{dy:24});});
   arrive(ctx,1530,700,t,w("alike","Qualified"),()=>tag(ctx,1530,700,"qualified",GOOD,{align:"center",size:20}),{from:0.8});
   // the macro that writes a qualified key, and the line in staging that writes the email one way
-  arrive(ctx,670,485,t,tm,()=>sm_file(ctx,80,390,1180,"macros/keys.sql",SM_KM,{size:18,lh:29,edge:[200,170,255],p:clamp((t-tm-0.1)/1.4,0,1)}),{dy:30});
+  arrive(ctx,670,485,t,tm,()=>sm_file(ctx,80,390,1180,"macros/shared/keys.sql",SM_KM,{size:18,lh:29,edge:[200,170,255],p:clamp((t-tm-0.1)/1.4,0,1)}),{dy:30});
   arrive(ctx,450,700,t,cC,()=>sm_file(ctx,80,610,740,"models/staging/short_courses/stg_short_courses__learners.sql",SM_ST,{size:18,lh:29,edge:LAYER4[0][1],label:null,lit:{0:fin(t,w("case","trimmed"),0.5)}}),{dy:30});
   withA(ctx,fin(t,cC,0.5),()=>T(ctx,SM_RUNS,820-18,610+219+30,{w:600,size:18,align:"right",color:rgba(SOFT,0.9)}));
   arrive(ctx,920,700,t,w("case","trimmed"),()=>tag(ctx,860,700,"trimmed",LAYER4[0][1],{size:20}),{from:0.8});
@@ -154,7 +154,7 @@ scene("rules",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     // one block of code for each rule: the card shows the rule being named
     const RT=[c("id"),c("held"),c("email"),c("left"),cB-0.2];
     SM_RC.forEach(([f,ls,lit],i)=>{const t0=RT[i]-0.15,t1=i<4?RT[i+1]-0.5:1e9,a=1-fin(t,t1,0.35);if(t>t1+0.4)return;
-      arrive(ctx,510,300,t,t0,()=>sm_file(ctx,60,130,900,"models/intermediate/"+f,ls,{size:18,lh:29,edge:LAYER4[1][1],a,lit:{[lit]:fin(t,t0+0.6,0.5)},litCol:LAYER4[1][1]}),{dy:24});});
+      arrive(ctx,510,300,t,t0,()=>sm_file(ctx,60,130,960,"models/intermediate/student/"+f,ls,{size:18,lh:29,edge:LAYER4[1][1],a,lit:{[lit]:fin(t,t0+0.6,0.5)},litCol:LAYER4[1][1]}),{dy:24});});
     // the rule cards, most trusted first; the recorded decision waits for the next chapter
     const RA=[cB-0.2,c("id"),c("held"),c("email"),cB-0.2,c("left")],RY=k=>140+k*76;
     SM_RULES.forEach(([p,s],k)=>{const lit=k===1?fin(t,cAi+0.3+1.0,0.3):k===2?fin(t,cAi+0.6+1.2,0.3):k===3?fin(t,cAi+0.9+1.4,0.3):0;
@@ -173,7 +173,7 @@ scene("rules",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     arrive(ctx,600,600,t,w("aisha","forty-six"),()=>T(ctx,"→ 46 learners",440,612,{w:800,size:40,color:rgba(TRUST,1)}),{from:0.9});
     [["40 student system",0],["42 learning platform",1],["8 short courses",2]].forEach(([s,k],i)=>T(ctx,s,80+i*230,690,{w:600,size:19,color:rgba(SRC3[k][1],1)}));});
   const yh=sm_fileH(SM_YML,900,{size:18,lh:29,wrap:true});
-  arrive(ctx,1410,280,t,cOw-0.1,()=>{sm_file(ctx,960,150,900,"model/conceptual.yml",SM_YML,{size:18,lh:29,wrap:true,edge:BPL,p:clamp((t-cOw)/2.0,0,1)});tag(ctx,960,112,"in words: the model",BPL,{size:18});},{dy:30});
+  arrive(ctx,1410,280,t,cOw-0.1,()=>{sm_file(ctx,960,150,900,"models/core/student/_student__conceptual.yml",SM_YML,{size:18,lh:29,wrap:true,edge:BPL,p:clamp((t-cOw)/2.0,0,1)});tag(ctx,960,112,"in words: the model",BPL,{size:18});},{dy:30});
   arrive(ctx,1100,150+yh+34,t,w("owned","in code"),()=>tag(ctx,960,150+yh+34,"in code: two models",LAYER4[1][1],{size:18}),{from:0.85});
   const mA=w("owned","May")-0.4;arrive(ctx,1080,700,t,mA,()=>{person(ctx,"mei",1080,840,0.46,{pose:"explain",t});},{dy:20,from:0.95});
   arrive(ctx,1400,690,t,w("owned","approved"),()=>{kt_gtick(ctx,1210,700,20,1);T(ctx,"approved 6 Oct 2026",1244,708,{w:700,size:22,color:rgba(TRUST,1)});T(ctx,"Mei Tanaka, registrar's office",1210,752,{w:600,size:19,color:rgba(SOFT,1)});},{from:0.85});
@@ -216,14 +216,14 @@ scene("apart",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const mA=cD-0.2,dk=ease(fin(t,dd,1.2));
   withA(ctx,oA,()=>arrive(ctx,1740,700,t,mA,()=>{person(ctx,"mei",1740,840,0.44,{pose:"explain",t});T(ctx,"Mei Tanaka",1740,556,{w:800,size:22,align:"center"});T(ctx,"registrar's office",1740,580,{w:600,size:17,align:"center",color:rgba(SOFT,1)});},{dy:20,from:0.95}));
   const dy_=lerp(600,90,dk);
-  arrive(ctx,1090,dy_+67,t,w("decide","records"),()=>{sm_file(ctx,600,dy_,980,"seeds/learner_identity_decisions.csv",SM_DEC,{size:18,lh:30,wrap:true,edge:TRUST,p:clamp((t-w("decide","records"))/1.2,0,1),lit:{1:fin(t,w("decide","different people"),0.5)}});
+  arrive(ctx,1090,dy_+67,t,w("decide","records"),()=>{sm_file(ctx,600,dy_,980,"seeds/reference/student/learner_identity_decisions.csv",SM_DEC,{size:18,lh:30,wrap:true,edge:TRUST,p:clamp((t-w("decide","records"))/1.2,0,1),lit:{1:fin(t,w("decide","different people"),0.5)}});
     kt_rstamp(ctx,1440,dy_+166,"decided · Mei",TRUST,fin(t,w("decide","A person"),0.2)*(1-fin(t,dd-0.3,0.3)),fin(t,w("decide","A person"),0.35),{size:22,rot:-0.06});},{dy:24});
   withA(ctx,fin(t,w("decide","beats"),0.5)*(1-fin(t,dd-0.2,0.5)),()=>T(ctx,"a decision beats every rule",1000,812,{w:700,size:26,align:"center",color:rgba(TRUST,1)}));
   arrive(ctx,1700,157,t,dd+0.6,()=>tag(ctx,1600,157,"the decision is data",TRUST,{size:18}),{from:0.85});
   // the code keeps them apart, and a test holds the decision
-  arrive(ctx,920,520,t,ck-0.3,()=>sm_file(ctx,600,268,690,"models/intermediate/int_learner_key_candidates.sql",SM_AJ,{size:18,lh:28,edge:LAYER4[1][1],label:null,p:clamp((t-ck)/1.6,0,1),lit:{0:fin(t,ck+1.6,0.5),11:fin(t,ck+1.8,0.5),14:fin(t,ck+2.0,0.5)},litCol:LAYER4[1][1]}),{dy:30});
+  arrive(ctx,920,520,t,ck-0.3,()=>sm_file(ctx,600,268,690,"models/intermediate/student/int_learner_key_candidates.sql",SM_AJ,{size:18,lh:28,edge:LAYER4[1][1],label:null,p:clamp((t-ck)/1.6,0,1),lit:{0:fin(t,ck+1.6,0.5),11:fin(t,ck+1.8,0.5),14:fin(t,ck+2.0,0.5)},litCol:LAYER4[1][1]}),{dy:30});
   withA(ctx,fin(t,ck-0.3,0.5),()=>T(ctx,SM_RUNS,1290-18,268+sm_fileH(SM_AJ,690,{size:18,lh:28})+30,{w:600,size:18,align:"right",color:rgba(SOFT,0.9)}));
-  arrive(ctx,1575,360,t,tf-0.3,()=>sm_file(ctx,1310,268,530,"tests/keys_decided_different_stay_apart.sql",SM_TT,{size:18,lh:29,wrap:true,edge:EDGE_,label:null}),{dy:30});
+  arrive(ctx,1575,360,t,tf-0.3,()=>sm_file(ctx,1270,268,600,"tests/rules/keys_decided_different_stay_apart.sql",SM_TT,{size:18,lh:29,wrap:true,edge:EDGE_,label:null}),{dy:30});
   withA(ctx,fin(t,tf-0.3,0.5),()=>T(ctx,SM_RUNS,1822,268+sm_fileH(SM_TT,530,{size:18,lh:29,wrap:true})+30,{w:600,size:18,align:"right",color:rgba(SOFT,0.9)}));
   arrive(ctx,1575,575,t,ck+0.2,()=>tag(ctx,1575,575,"the code keeps them apart",LAYER4[1][1],{align:"center",size:20}),{from:0.85});
   arrive(ctx,1575,635,t,w("undo","fails"),()=>tag(ctx,1575,635,"a test fails if they merge",EDGE_,{align:"center",size:20}),{from:0.85});
@@ -248,11 +248,11 @@ scene("hash",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   withA(ctx,fin(t,heal,0.4),()=>tag(ctx,1030,228,"the same hash again",GOOD,{size:18}));ctx.restore();
   // the macro arrives: the key goes through it as typed, loses its space, takes upper case, and the hash heals
   const mA=fin(t,cMc-0.2,0.6),tr=w("macro","trims"),uc=w("macro","upper case"),mk=w("macro","marks a missing"),jn=w("macro","joins");
-  arrive(ctx,960,362,t,cMc-0.2,()=>sm_file(ctx,100,250,1720,"macros/keys.sql",SM_KC,{size:19,lh:30,edge:[200,170,255],p:clamp((t-cMc)/1.4,0,1),
+  arrive(ctx,960,362,t,cMc-0.2,()=>sm_file(ctx,100,250,1720,"macros/shared/keys.sql",SM_KC,{size:19,lh:30,edge:[200,170,255],p:clamp((t-cMc)/1.4,0,1),
     lit:{0:fin(t,tr,0.4)*(1-fin(t,cE-0.4,0.5)),1:fin(t,mk,0.4)*(1-fin(t,cE-0.4,0.5)),2:fin(t,mk,0.4)*(1-fin(t,cE-0.4,0.5)),3:fin(t,jn,0.4)*(1-fin(t,cE-0.4,0.5))},litCol:[200,170,255]}),{dy:30});
   [["trim",tr,100],["upper case",uc,210],["<null> for a missing part",mk,370],["joined with ",jn,650]].forEach(([s,t0,x],i)=>arrive(ctx,x+60,512,t,t0,()=>i<3?tag(ctx,x,512,s,[200,170,255],{size:20}):sm_tagBar(ctx,x,512,s,"|",[200,170,255],20),{from:0.85}));
   // the two engines, side by side: both give the same hash
-  const eA=fin(t,cE-0.3,0.6);arrive(ctx,550,680,t,cE-0.3,()=>sm_file(ctx,100,556,900,"macros/keys.sql",SM_EN,{size:19,lh:29,edge:LAYER4[2][1],lit:{1:fin(t,w("every","every engine")-0.2,0.4),5:fin(t,w("every","every engine")+0.2,0.4)}}),{dy:30});
+  const eA=fin(t,cE-0.3,0.6);arrive(ctx,550,680,t,cE-0.3,()=>sm_file(ctx,100,556,900,"macros/shared/keys.sql",SM_EN,{size:19,lh:29,edge:LAYER4[2][1],lit:{1:fin(t,w("every","every engine")-0.2,0.4),5:fin(t,w("every","every engine")+0.2,0.4)}}),{dy:30});
   const gA=1-fin(t,cBs-0.9,0.4);withA(ctx,gA,()=>{
     arrive(ctx,1300,600,t,w("every","every engine")-0.2,()=>{T(ctx,"DuckDB  sha256",1060,608,{f:"mono",w:500,size:20,color:rgba(SOFT,1)});T(ctx,"→ 0905e6e2…",1450,608,{f:"mono",w:500,size:20,color:rgba(GOOD,1)});},{from:0.9});
     arrive(ctx,1300,660,t,w("every","every engine")+0.2,()=>{T(ctx,"Databricks  sha2(…, 256)",1060,668,{f:"mono",w:500,size:20,color:rgba(SOFT,1)});T(ctx,"→ 0905e6e2…",1450,668,{f:"mono",w:500,size:20,color:rgba(GOOD,1)});},{from:0.9});
@@ -265,7 +265,7 @@ scene("hash",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
 
 /* ---------- 8. Codes, too ---------- */
 const SM_SM=["key_set,source_code,source_label,canonical_status","SIS,ENR,Enrolled,studying","SIS,LOA,Leave of absence,inactive","SIS,WD,Withdrawn,withdrawn","SIS,CMP,Completed,completed","LMS,active,Active account,studying","LMS,inactive,Inactive account,inactive","SC,1,Active customer,studying","SC,0,Inactive customer,inactive"];
-const SM_SY=["      meta: {owner: \"Mei Tanaka, registrar's office\", domain: registrar}"];
+const SM_SY=["      meta: {owner: \"Mei Tanaka, registrar's office\", domain: student, purpose: reference}"];
 // Aisha's one key, as a row: learner_bk beside learner_key (carried from the last chapter)
 function sm_keyRow(ctx,x,y,s,a){ctx.save();ctx.translate(x,y);ctx.scale(s,s);sm_rows(ctx,0,0,["learner_bk","learner_key"],[["SIS|S-20417","0905e6e2…f76a2"]],{a,size:22,lh:40,col:TRUST,cellCol:(i,j)=>j===0?SRC3[0][1]:INK});ctx.restore();}
 scene("codes",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");setScreen(ctx,S);bg2(ctx);motes(ctx,t);
@@ -277,10 +277,10 @@ scene("codes",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
       withA(ctx,1-fin(fold,0.8,0.2),()=>arrive(ctx,x+60,y,t,t0,()=>{sm_key(ctx,x,y,s,SRC3[k][1],{size:26});T(ctx,SRC3[k][0],x,y+52,{w:600,size:18,color:rgba(SRC3[k][1],0.9*(1-fold))});},{dy:24,from:0.8}));});
     arrive(ctx,620,330,t,w("codes","studying")-0.1,()=>{glass(ctx,480,290,280,80,40,GOOD,{glow:18,ea:0.9,fill:"rgba(7,12,24,0.95)"});T(ctx,"studying",620,342,{w:800,size:32,align:"center",color:rgba(GOOD,1)});},{from:0.7});
     // the status map, one row per code; the registrar's office owns it
-    const cM=c("map");arrive(ctx,1340,300,t,cM-0.3,()=>sm_file(ctx,880,130,920,"seeds/status_map.csv",SM_SM,{size:19,lh:30,edge:TRUST,p:clamp((t-cM+0.1)/1.6,0,1),
+    const cM=c("map");arrive(ctx,1340,300,t,cM-0.3,()=>sm_file(ctx,880,130,920,"seeds/reference/student/status_map.csv",SM_SM,{size:19,lh:30,edge:TRUST,p:clamp((t-cM+0.1)/1.6,0,1),
       lit:{1:fin(t,w("map","one row"),0.4),5:fin(t,w("map","one row")+0.2,0.4),7:fin(t,w("map","one row")+0.4,0.4)},litCol:GOOD}),{dy:30});
     arrive(ctx,1340,540,t,w("map","status map"),()=>tag(ctx,880,92,"status map · one row per code",TRUST,{size:20}),{from:0.85});
-    const oT=w("map","registrar's");arrive(ctx,1340,640,t,oT-0.2,()=>sm_file(ctx,880,560,920,"seeds/_seeds.yml",SM_SY,{size:19,lh:30,edge:TRUST}),{dy:24});
+    const oT=w("map","registrar's");arrive(ctx,1340,640,t,oT-0.2,()=>sm_file(ctx,880,560,920,"seeds/reference/student/_student__seeds.yml",SM_SY,{size:19,lh:30,edge:TRUST,wrap:true}),{dy:24});
     arrive(ctx,1100,720,t,w("map","approves"),()=>{kt_gtick(ctx,900,722,18,1);T(ctx,"owner: registrar's office · approves every change",930,730,{w:700,size:22,color:rgba(TRUST,1)});},{from:0.85});});
   // the key from the last chapter waits below, then takes the centre: one key, many rows behind it, and a clock
   const mv=ease(fin(t,cN-0.3,1.4)),rx=lerp(lerp(1060,140,ease(fin(t,0,1.4))),700,mv),ry=lerp(lerp(594,700,ease(fin(t,0,1.4))),470,mv),rs=lerp(1,1.2,mv);

@@ -1,4 +1,4 @@
-/* ===== A model is not a transformation: scenes =====
+/* ===== Declare it, then build it: scenes =====
    Eleven chapters, as in ../script.md. A blueprint lays no bricks; data has blueprints too (the recap of From words to data);
    many shapes hold the same four answers, and the series takes a middle way; someone has to build it: Jun, with dbt, one tool
    among several; dbt calls each query a model, but the model is the blueprint; a project of three hundred files, where the
@@ -112,8 +112,8 @@ scene("work",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   withA(ctx,fin(t,w("tools","widely used"),0.5)*(1-up),()=>T(ctx,"Jun's team: dbt",1600,400,{w:700,size:22,align:"center",color:rgba([255,160,110],1)}));
   // one query, one file; then another that refers to it; dbt works out the order
   const f2=["matched_keys as (","    select * from {{ ref('int_learner_keys_matched') }}","),","learner_keys as (","    select * from {{ ref('int_learner_keys') }}"];
-  arrive(ctx,480,350,t,cF-0.3,()=>codeFile(ctx,100,240,760,"models/staging/stg_student_system__learners.sql",MT_F1,{p:clamp((t-cF)/2.4,0,1),edge:LAYER4[0][1]}),{dy:30});
-  arrive(ctx,480,640,t,cO-0.2,()=>codeFile(ctx,100,560,760,"models/intermediate/int_learners.sql",f2,{p:clamp((t-cO)/2.0,0,1),edge:LAYER4[1][1],lit:{1:fin(t,w("order","refer to each other"),0.5),4:fin(t,w("order","refer to each other"),0.5)}}),{dy:30});
+  arrive(ctx,480,350,t,cF-0.3,()=>codeFile(ctx,100,240,760,"models/staging/student_system/stg_student_system__learners.sql",MT_F1,{p:clamp((t-cF)/2.4,0,1),edge:LAYER4[0][1]}),{dy:30});
+  arrive(ctx,480,640,t,cO-0.2,()=>codeFile(ctx,100,560,760,"models/intermediate/student/int_learners.sql",f2,{p:clamp((t-cO)/2.0,0,1),edge:LAYER4[1][1],lit:{1:fin(t,w("order","refer to each other"),0.5),4:fin(t,w("order","refer to each other"),0.5)}}),{dy:30});
   withA(ctx,fin(t,w("order","refer to each other"),0.5),()=>{arrowTo(ctx,880,420,880,640,[255,160,110],1,{p:fin(t,w("order","refer to each other"),0.8),bend:-0.25,head:14});tag(ctx,960,540,"ref() sets the order",[255,160,110],{size:18});});
   // what dbt builds on the platform, and the tests and docs beside the code
   arrive(ctx,1500,460,t,w("order","builds each result"),()=>{glass(ctx,1180,250,640,420,20,[120,160,220],{glow:12,ea:0.6,fill:"rgba(7,12,24,0.9)"});T(ctx,"on the platform",1210,290,{w:800,size:22,color:rgba(SOFT,1)});
@@ -121,7 +121,7 @@ scene("work",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
       glass(ctx,1210,y,580,96,14,col,{glow:10,ea:0.7,fill:"rgba(8,14,28,0.96)"});for(let r=0;r<3;r++){ctx.fillStyle=rgba(col,0.18+0.06*r);rr(ctx,1230,y+44+r*14,300,8,3);ctx.fill();}
       T(ctx,n,1230,y+34,{f:"mono",w:500,size:18,color:rgba(col,1)});tag(ctx,1700,y+48,k,col,{align:"center",size:18});},{from:0.9});});},{dy:30});
   const tY=w("order","tests and documentation");
-  arrive(ctx,1500,790,t,tY,()=>codeFile(ctx,1180,700,640,"models/intermediate/_int_models.yml",["- name: int_learners","  columns:","    - name: learner_key","      description: '{{ doc(\"learner_key\") }}'","      data_tests: [unique, not_null]"],{p:clamp((t-tY)/1.6,0,1),edge:TRUST,size:17,lh:30}),{dy:30});
+  arrive(ctx,1500,790,t,tY,()=>codeFile(ctx,1180,700,640,"models/intermediate/student/_int_student__models.yml",["- name: int_learners","  columns:","    - name: learner_key","      description: '{{ doc(\"learner_key\") }}'","      data_tests: [unique, not_null]"],{p:clamp((t-tY)/1.6,0,1),edge:TRUST,size:17,lh:30}),{dy:30});
   kt_gtick(ctx,1770,870,14,fin(t,w("order","documentation")+0.8,0.3));
   ctx.restore();vign(ctx,S);});
 
@@ -143,7 +143,7 @@ scene("name",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   const ln=fin(t,w("apart","connecting"),0.8);if(ln>0){ctx.save();ctx.strokeStyle=rgba(TRUST,0.9);ctx.lineWidth=2;ctx.setLineDash([6,8]);ctx.beginPath();ctx.moveTo(860,420);ctx.bezierCurveTo(960,420,1040,470,lerp(860,1110,ln),lerp(420,470,ln));ctx.stroke();ctx.restore();}
   arrive(ctx,960,820,t,w("apart","keeping the two apart"),()=>T(ctx,"keep them apart · connect them",960,820,{w:700,size:26,align:"center",color:rgba(TRUST,1)}),{dy:16});
   arrive(ctx,960,900,t,w("apart","analytics engineers"),()=>tag(ctx,960,900,"for analytics engineers · into the weeds",WEED,{align:"center",size:20}),{dy:16});
-  ctx.restore();weedsTitle(ctx,S,t,B,"A model is not a transformation","the model is what you declare; a dbt model is how you make it",WEED);
+  ctx.restore();weedsTitle(ctx,S,t,B,"Declare it, then build it","the model is what you declare; a dbt model is how you make it",WEED);
   vign(ctx,S);});
 
 /* ---------- 7. Three hundred models ---------- */
@@ -175,12 +175,12 @@ scene("lives",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   // YAML: grain, key, relationships, contract
   const Y=["models:","  - name: core_credential","    description: '{{ doc(\"credential\") }}'","    config:","      access: public","      contract: {enforced: true}","      meta: {grain: one row per credential}","    columns:","      - name: credential_key","        data_tests: [unique, not_null]","      - name: learner_key","        data_tests:","          - relationships:","              arguments: {to: ref('core_learner'), field: learner_key}"];
   const lit={6:fin(t,w("yaml","one row"),0.4),8:fin(t,w("yaml","which key"),0.4),9:fin(t,w("yaml","unique"),0.4),12:fin(t,w("yaml","relates"),0.4),13:fin(t,w("yaml","relates"),0.4),5:fin(t,w("yaml","contract"),0.4),4:fin(t,w("yaml","contract")+0.2,0.4)};
-  arrive(ctx,1012,420,t,cY-0.3,()=>codeFile(ctx,648,190,728,"models/core/_core_models.yml",Y,{p:clamp((t-cY+0.2)/1.6,0,1),edge:TRUST,size:16,lh:29,lit,label:"YAML",labelCol:TRUST}),{dy:30});
+  arrive(ctx,1012,420,t,cY-0.3,()=>codeFile(ctx,648,190,728,"models/core/student/_core_student__models.yml",Y,{p:clamp((t-cY+0.2)/1.6,0,1),edge:TRUST,size:16,lh:29,lit,label:"YAML",labelCol:TRUST}),{dy:30});
   // Markdown: meaning, a diagram anyone can read, and why
-  arrive(ctx,1623,495,t,cM-0.2,()=>{const x=1392,y=190,wd=462;glass(ctx,x,y,wd,610,14,KIND,{glow:12,ea:0.65,fill:"rgba(6,10,20,0.95)"});T(ctx,"docs/credential.md",x+36,y+27,{f:"mono",w:500,size:16,color:rgba(KIND,1)});T(ctx,"Markdown",x+wd-18,y+27,{w:700,size:15,align:"right",color:rgba(KIND,1)});
+  arrive(ctx,1623,495,t,cM-0.2,()=>{const x=1392,y=190,wd=462;glass(ctx,x,y,wd,610,14,KIND,{glow:12,ea:0.65,fill:"rgba(6,10,20,0.95)"});T(ctx,"core/student/_student__conceptual.md",x+30,y+27,{f:"mono",w:500,size:14,color:rgba(KIND,1)});T(ctx,"Markdown",x+wd-16,y+27,{w:700,size:13,align:"right",color:rgba(KIND,1)});
     T(ctx,"# Credential",x+24,y+82,{f:"mono",w:500,size:20,color:rgba(INK,0.95)});wrapT(ctx,"A trusted, checkable claim about what someone knows, issued by the university: a degree, a microcredential or a badge.",x+24,y+120,wd-48,{w:600,size:18,color:rgba(SOFT,1)});
     withA(ctx,fin(t,w("md","diagram"),0.5),()=>{T(ctx,"```mermaid",x+24,y+212,{f:"mono",w:500,size:15,color:rgba(SOFT,0.7)});bpModel(ctx,x+wd/2,y+306,0.36,{b:0});});
-    withA(ctx,fin(t,w("md","why"),0.5),()=>{T(ctx,"## Decisions",x+24,y+400,{f:"mono",w:500,size:18,color:rgba(INK,0.95)});wrapT(ctx,"A microcredential is a kind of credential. Agreed 2 Oct 2026 · Mei, registrar's office",x+24,y+438,wd-48,{w:600,size:17,color:rgba(TRUST,0.95)});});},{dy:30});
+    withA(ctx,fin(t,w("md","why"),0.5),()=>{T(ctx,"_student__decisions.yml",x+24,y+400,{f:"mono",w:500,size:17,color:rgba(INK,0.95)});wrapT(ctx,"DEC-STU-01 · A microcredential is a kind of credential. Agreed 2 Oct 2026 · Mei, registrar's office",x+24,y+438,wd-48,{w:600,size:17,color:rgba(TRUST,0.95)});});},{dy:30});
   // the tests check that the tables are what the YAML and the Markdown say
   const tT=w("check","the tests");withA(ctx,fin(t,tT,0.5),()=>T(ctx,"tables  ←  the tests check  →  what the model says",960,880,{w:700,size:20,align:"center",color:rgba(SOFT,1)}));
   ["unique","not_null","relationships","contract"].forEach((s,i)=>{const x=760+i*260,y=940,ok=fin(t,tT+0.3+i*0.35,0.3);arrive(ctx,x,y,t,tT+i*0.12,()=>{glass(ctx,x-110,y-30,220,60,14,GOOD,{glow:8+10*ok,ea:0.6,fill:"rgba(7,12,24,0.95)"});T(ctx,s,x-10,y+7,{f:"mono",w:500,size:18,align:"center"});tick_(ctx,x+84,y,24,GOOD,ok);},{dy:20});});
@@ -204,7 +204,7 @@ scene("series",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   // the loop, carried from the last chapter, shrinks to make room for the films, and its labels give way to theirs
   const m=ease(fin(t,0,1.4)),cx=960,cy=lerp(560,540,m),rx=lerp(640,400,m),ry=lerp(360,250,m),words=["question","same one","Grain","Contracts","layers","owns","agent","written"],ids=["list1","list1","list1","list2","list2","list2","list2","list2"];
   stepLoop(ctx,cx,cy,rx,ry,t,{on:STEPS10.map(()=>lerp(1,0.35,m)),labA:1-fin(t,0,0.7)});
-  arrive(ctx,cx,cy,t,1.0,()=>{glass(ctx,cx-200,cy-54,400,108,20,WEED,{glow:18,ea:0.85,fill:"rgba(7,12,24,0.96)"});T(ctx,"1 · this film",cx,cy-12,{f:"mono",w:500,size:18,align:"center",color:rgba(WEED,1)});T(ctx,"A model is not a transformation",cx,cy+24,{w:800,size:22,align:"center"});});
+  arrive(ctx,cx,cy,t,1.0,()=>{glass(ctx,cx-200,cy-54,400,108,20,WEED,{glow:18,ea:0.85,fill:"rgba(7,12,24,0.96)"});T(ctx,"1 · this film",cx,cy-12,{f:"mono",w:500,size:18,align:"center",color:rgba(WEED,1)});T(ctx,"Declare it, then build it",cx,cy+24,{w:800,size:22,align:"center"});});
   arrive(ctx,960,76,t,0.4,()=>T(ctx,"The next eight films",960,76,{w:800,size:36,align:"center"}),{from:0.9});
   // each film arrives in its place, beside the steps it takes, and a line joins it to them
   MT_FILMS.forEach(([n,title,st],i)=>{const t0=w(ids[i],words[i])-0.2,a=fin(t,t0,0.5),an=-Math.PI/2+(st.reduce((s,x)=>s+x,0)/st.length)/10*TAU,px=cx+Math.cos(an)*(rx+300),py=cy+Math.sin(an)*(ry+(Math.sin(an)>0.9?70:Math.sin(an)<-0.9?80:120));
@@ -233,5 +233,5 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   ctx.fillStyle="rgba(0,0,0,0.5)";ctx.fillRect(W/2-1,0,2,H);
   arrive(ctx,480,415,t,w("bp","blueprint"),()=>tag(ctx,480,415,"the blueprint",BPL,{align:"center",size:20}),{from:0.7});arrive(ctx,480,960,t,w("bp","building work"),()=>tag(ctx,480,960,"the building work",CLAY,{align:"center",size:20}),{from:0.7});
   withA(ctx,rA,()=>{tag(ctx,1440,50,"the model",BPL,{align:"center",size:20});tag(ctx,1440,975,"the building work: transformations",[255,160,110],{align:"center",size:20});});
-  ctx.restore();weedsEnd(ctx,S,t,B,"A model is not a transformation",WEED,"Declare it. Then build it.");
+  ctx.restore();weedsEnd(ctx,S,t,B,"Declare it, then build it",WEED,"The model is the blueprint. dbt is how you build it.");
   fadeIn(ctx,S,t,0.01);vign(ctx,S);});

@@ -1,0 +1,36 @@
+# Planning's conceptual model: the question Planning asks, and the one concept it adds to the core.
+#
+# Not parsed by dbt (.dbtignore). scripts/generate/definitions.py turns each definition into a doc
+# block in _planning__definitions.md, next to this file, and checks that every entity it uses is
+# defined in a core domain. The diagram is drawn by hand in _planning__conceptual.md.
+
+domain: planning
+kind: mart
+
+question:
+  asked_by: Planning
+  text: >
+    How many learners are within 15 credit points of a graduate certificate, by faculty,
+    as at census date?
+  decision: >
+    How many places to offer in each faculty's final graduate certificate units next semester.
+
+# The core's entities this mart reads, as they were on the census date.
+uses: [learner, award, credit_towards_award]
+
+entities:
+
+  - name: near_award
+    label: learner near an award
+    definition: >
+      A learner who, on the census date, was studying, enrolled in an award, and had more than
+      none and no more than 15 credit points left to earn towards it.
+    owner: Planning
+    business_key:
+      rule: The learner's business key and the award's, together, as at census date.
+    # The numbers these rules use live once, as vars in dbt_project.yml.
+    rules:
+      - As at census date (var census_date) - every entity is read at its version valid that day.
+      - Near means more than none and no more than the near_award_credit_points var left to earn.
+      - Planning's question counts graduate certificates only, by faculty.
+    history: One census date at a time. A change recorded after census, dated after it, doesn't change the answer.

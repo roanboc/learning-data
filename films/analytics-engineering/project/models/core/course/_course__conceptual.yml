@@ -1,8 +1,11 @@
 # The course domain's conceptual model: the awards the university offers. Owned by the registrar's
 # office.
 #
-# Not parsed by dbt (.dbtignore). scripts/generate/definitions.py turns each definition into a doc block in
-# _course__definitions.md, next to this file. The question and the key sets are in models/_shared/.
+# Not parsed by dbt (.dbtignore). scripts/generate/definitions.py turns each definition into a
+# doc block in _course__definitions.md, next to this file, which the dbt YAML shows with doc() and
+# Databricks pushes to Unity Catalog. The diagram is drawn by hand in _course__conceptual.md.
+# The university's map, with this domain on it, is in models/_shared/; the questions are in each
+# mart's conceptual model.
 
 domain: course
 reference:

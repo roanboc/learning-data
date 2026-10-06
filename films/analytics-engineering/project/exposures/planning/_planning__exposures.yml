@@ -1,0 +1,15 @@
+exposures:
+
+  - name: census_dashboard
+    label: Census dashboard
+    type: dashboard
+    maturity: high
+    description: >
+      Planning's census dashboard: learners near a graduate certificate, by faculty, as at census
+      date. It reconciles with the census report every run (tests/reconciliation/reconcile_planning_with_census_report.sql).
+    owner:
+      name: Planning
+      email: planning@uni.example
+    depends_on:
+      - ref('mart_planning__near_award')
+      - metric('learners_near_graduate_certificate')

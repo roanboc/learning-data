@@ -8,7 +8,7 @@ every step, a person approves. This page says what an agent may and may not do.
 
 - [`docs/process.md`](docs/process.md): the ten steps, what each produces, your part in it, and who approves it.
 - [`docs/conventions.md`](docs/conventions.md): layers, names, SQL, keys, time, tests, metadata.
-- The conceptual model, in each domain's folder ([`student`](models/core/student/_student__conceptual.yml), [`course`](models/core/course/_course__conceptual.yml)) and [`models/_shared/`](models/_shared/): what each entity means, its key and its owner.
+- The conceptual model: [the university's map](models/_shared/_shared__conceptual.md) of domains and key entities, and each core domain and mart's own, in its folder ([`student`](models/core/student/_student__conceptual.yml), [`course`](models/core/course/_course__conceptual.yml), [`planning`](models/marts/planning/_planning__conceptual.yml), [`wallet`](models/marts/wallet/_wallet__conceptual.yml)): what each entity means, its key and its owner, and each consumer's question.
 - [`docs/gaps.md`](docs/gaps.md) and [`docs/decisions.md`](docs/decisions.md): what's been decided, and why.
 - [`skills/`](skills/): how to do the five jobs agents do most here: draft the conceptual model, profile a source, draft a model, reconcile and diff, review metadata.
 

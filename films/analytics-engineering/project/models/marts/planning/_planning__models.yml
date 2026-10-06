@@ -10,6 +10,7 @@ models:
     config:
       meta:
         grain: One row per learner per award, as at census date
+        glossary_term: near_award
         owner: Planning
         domain: planning
         consumer: Census dashboard
@@ -102,20 +103,6 @@ models:
           within the var near_award_credit_points of it: more than none left, and no more than
           that many.
         data_type: boolean
+        config:
+          meta: {glossary_term: near_award}
         constraints: [{type: not_null}]
-
-exposures:
-
-  - name: census_dashboard
-    label: Census dashboard
-    type: dashboard
-    maturity: high
-    description: >
-      Planning's census dashboard: learners near a graduate certificate, by faculty, as at census
-      date. It reconciles with the census report every run (tests/reconciliation/reconcile_planning_with_census_report.sql).
-    owner:
-      name: Planning
-      email: planning@uni.example
-    depends_on:
-      - ref('mart_planning__near_award')
-      - metric('learners_near_graduate_certificate')

@@ -1,24 +1,119 @@
-# The conceptual model's shared part: the question it answers, and the key sets every domain uses.
+# The university's conceptual model, at a high level: its domains and their key entities, and the
+# key sets every domain uses. A map, not the detail: each domain's own conceptual model, in its
+# folder, holds the definitions, keys, rules and owners.
 #
-# Each domain's entities and relationships are in its own folder:
-#   models/core/student/_student__conceptual.yml   learner, credential, credit towards an award
-#   models/core/course/_course__conceptual.yml     award
-# The domains follow the reference model, TCSI (Tertiary Collection of Student Information): its
-# Student and Course packets. Where the business needs more than TCSI holds, the domain's file says so.
+#   models/core/<domain>/_<domain>__conceptual.yml    a core domain: what its entities mean
+#   models/marts/<consumer>/_<consumer>__conceptual.yml  a consumer: its question, and what it adds
 #
-# Not parsed by dbt (.dbtignore). scripts/generate/definitions.py turns each domain's definitions into a doc
-# block next to it, and the key sets below into seeds/reference/shared/key_sets.csv.
+# The domains follow the reference model, TCSI (Tertiary Collection of Student Information), and
+# extend it where the university needs more. This is the first model: most entities are planned,
+# and the map grows as questions arrive. Keep it to the key entities: no more than 50.
 #
-# The diagram of the whole slice is drawn by hand in _shared__conceptual.md, next to this file.
+# Not parsed by dbt (.dbtignore). scripts/generate/definitions.py draws the map into
+# _shared__conceptual.md, checks that every modelled entity here is defined in its domain's file
+# (and every defined one is here), and writes the key sets into seeds/reference/shared/key_sets.csv.
 
-question:
-  asked_by: Planning
-  text: >
-    How many learners are within 15 credit points of a graduate certificate, by faculty,
-    as at census date?
-  decision: >
-    How many places to offer in each faculty's final graduate certificate units next semester.
-  also_served: The learner's wallet app, which needs the same facts as they are now.
+max_entities: 50
+
+domains:
+
+  - name: student
+    owner: Registrar's office
+    reference: TCSI Student packet
+    entities:
+      - {name: learner, status: modelled, reference: "Student, extended to learners with no award"}
+      - {name: credential, status: modelled, reference: "Course outcome, extended to microcredentials and badges"}
+      - {name: credit_towards_award, status: modelled, reference: "Extension: units passed and recognised microcredentials"}
+      - {name: course_admission, status: planned, reference: Course admission}
+      - {name: unit_enrolment, status: planned, reference: Unit enrolment}
+      - {name: prior_credit, status: planned, reference: Course prior credit}
+
+  - name: course
+    owner: Registrar's office, with the faculties
+    reference: TCSI Course and Unit of study packets
+    entities:
+      - {name: award, status: modelled, reference: Course}
+      - {name: course_of_study, status: planned, reference: Course of study}
+      - {name: specialisation, status: planned, reference: Course specialisation}
+      - {name: unit_of_study, status: planned, reference: Unit of study}
+      - {name: unit_offering, status: planned, reference: "Extension: a unit of study and its census date, named"}
+      - {name: teaching_period, status: planned, reference: "Extension: institutional"}
+      - {name: class, status: planned, reference: "Extension: the timetabled activity, not in TCSI"}
+      - {name: field_of_education, status: planned, reference: Field of education}
+      - {name: short_course, status: planned, reference: "Extension: the short-course platform's offerings"}
+
+  - name: organisation
+    owner: Planning
+    reference: TCSI Provider and Campus
+    entities:
+      - {name: provider, status: planned, reference: Provider}
+      - {name: campus, status: planned, reference: Campus}
+      - {name: faculty, status: planned, reference: "Extension: institutional; today an attribute of the award"}
+      - {name: school, status: planned, reference: "Extension: institutional"}
+
+  - name: admissions
+    owner: Admissions office
+    reference: TCSI Applications and offers
+    entities:
+      - {name: applicant, status: planned, reference: Applicant}
+      - {name: application, status: planned, reference: Application}
+      - {name: offer, status: planned, reference: Offer}
+
+  - name: staff
+    owner: People and culture
+    reference: TCSI Staff packet
+    entities:
+      - {name: staff_member, status: planned, reference: Staff}
+      - {name: appointment, status: planned, reference: Staff appointment}
+
+  - name: research
+    owner: Graduate research school
+    reference: TCSI higher degree by research elements
+    entities:
+      - {name: research_candidature, status: planned, reference: "HDR course admission"}
+      - {name: supervision, status: planned, reference: "Extension: institutional"}
+
+  - name: finance
+    owner: Finance
+    reference: TCSI HELP and fee elements
+    entities:
+      - {name: student_fee, status: planned, reference: Student contribution and tuition fee}
+      - {name: help_loan, status: planned, reference: HELP loans}
+      - {name: scholarship, status: planned, reference: Commonwealth scholarships}
+
+# The key relationships between key entities, across domains: [from, label, to].
+relationships:
+  - [learner, holds, credential]
+  - [learner, holds credit, credit_towards_award]
+  - [credit_towards_award, towards, award]
+  - [credential, counts towards, award]
+  - [learner, is admitted to, course_admission]
+  - [course_admission, in, award]
+  - [course_admission, enrols in, unit_enrolment]
+  - [course_admission, recognises, prior_credit]
+  - [unit_enrolment, in, unit_offering]
+  - [unit_offering, of, unit_of_study]
+  - [unit_offering, in, teaching_period]
+  - [unit_offering, runs, class]
+  - [award, belongs to, course_of_study]
+  - [award, offers, specialisation]
+  - [unit_of_study, classified by, field_of_education]
+  - [short_course, issues, credential]
+  - [award, owned by, faculty]
+  - [faculty, has, school]
+  - [faculty, part of, provider]
+  - [campus, part of, provider]
+  - [applicant, makes, application]
+  - [application, receives, offer]
+  - [offer, becomes, course_admission]
+  - [staff_member, holds, appointment]
+  - [appointment, in, school]
+  - [research_candidature, is a, course_admission]
+  - [staff_member, supervises, supervision]
+  - [supervision, of, research_candidature]
+  - [unit_enrolment, charges, student_fee]
+  - [student_fee, paid by, help_loan]
+  - [learner, awarded, scholarship]
 
 key_sets:
   - code: SIS

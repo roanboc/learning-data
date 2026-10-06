@@ -120,21 +120,26 @@ project/
 │   │                         identity decisions, credit recognition), shared (key sets)
 │   └── expected/<domain>/    numbers published elsewhere, that tests reconcile against: planning
 │                             (the census report). No model reads them
-├── models/                   organised by domain, following TCSI; each domain's folder holds its
-│   │                         models and its data definitions
+├── sources/<system>/         what comes in: each source's YAML (tables, freshness, key set) and
+│                             its doc blocks
+├── models/                   what's built, organised by domain, following TCSI; each domain's
+│   │                         folder holds its models and its data definitions
 │   ├── overview.md           the docs site's front page
 │   ├── _groups.yml           who owns which models
-│   ├── _shared/              what every domain uses: the question and key sets
-│   │                         (_shared__conceptual.yml), the hand-drawn conceptual diagram, the
-│   │                         version columns' doc blocks, the time spine every metric needs
-│   ├── staging/<system>/     one view per source table; sources YAML; the source's doc blocks
+│   ├── _shared/              the university's map: its domains and their key entities, at most 50
+│   │                         (_shared__conceptual.yml, drawn into _shared__conceptual.md); the
+│   │                         key sets; the version columns' doc blocks; the time spine
+│   ├── staging/<system>/     one view per source table
 │   ├── intermediate/student/ identity candidates and matches, timelines, the credit rule; unit tests
 │   ├── core/student/         learner, credential, credit towards an award ┐ the enterprise contract:
-│   ├── core/course/          award                                        ┘ public, versioned, enforced;
-│   │                         each with _<domain>__conceptual.yml (not read by dbt), and the
-│   │                         generated _<domain>__definitions.md and _<domain>__physical.md
-│   ├── marts/planning/       as at census; the semantic model and metric; the census dashboard exposure
-│   └── marts/wallet/         as it is now; the wallet app exposure
+│   ├── core/course/          award                                        ┘ public, versioned, enforced
+│   ├── marts/planning/       as at census; the semantic model and metric
+│   └── marts/wallet/         as it is now
+│                             Each core domain and mart has its own conceptual model
+│                             (_<domain>__conceptual.yml, not read by dbt, and a hand-drawn
+│                             _<domain>__conceptual.md), and the generated _<domain>__definitions.md
+│                             and _<domain>__physical.md
+├── exposures/<consumer>/     who uses it: the census dashboard, the wallet app
 ├── macros/
 │   ├── shared/               conventions every domain uses: keys and hashes, point in time
 │   ├── planning/             Planning's near-award rule and count, written once
@@ -165,10 +170,10 @@ project/
 | Film | What it shows from here |
 |---|---|
 | *A model is not a transformation* | The names of the sources and of the staging and intermediate models; `learner_key` tested unique and not null |
-| *Start from a question* | The question in `models/_shared/_shared__conceptual.yml` and the slice in each domain's `_<domain>__conceptual.yml`; the hand-drawn diagram in `models/_shared/_shared__conceptual.md`; the decision that a microcredential is a kind of credential; `skills/draft-the-conceptual-model/` for the agent's draft |
+| *Start from a question* | The question in Planning's `models/marts/planning/_planning__conceptual.yml`; the slice in each core domain's `_<domain>__conceptual.yml`, with its hand-drawn diagram; the university's map in `models/_shared/`; the decision that a microcredential is a kind of credential; `skills/draft-the-conceptual-model/` for the agent's draft |
 | *What makes it the same one* | The profiling queries in `analyses/`; key sets and `macros/shared/keys.sql` (its header shows the compiled SQL); the staging models; `int_learner_keys`, `int_learner_key_candidates` (one CTE per rule) and `int_learner_keys_matched`; the identity decisions and status map seeds; the unit tests on matching |
 | *One row of what, and when* | `meta.grain`, tested as keys; `analyses/design/fan_out_without_point_in_time.sql`; the version columns; `int_learner_timeline`; the Planning mart (as it was) beside the wallet marts (as it is); `analyses/profiling/profile_late_changes.sql` and `diff_as_was_as_is.sql` |
-| *Promises and proofs* | `docs/gaps.md`; the core YAML (enterprise contract) and the marts YAML (consumer contracts, exposures); the tests; unit tests on the credit rule; warn and error levels; source freshness |
+| *Promises and proofs* | `docs/gaps.md`; the core YAML (enterprise contract) and the marts YAML (consumer contracts) and `exposures/`; the tests; unit tests on the credit rule; warn and error levels; source freshness |
 | *Built in layers* | The four layers and `docs/conventions.md`; import and logical CTEs; views, tables and the incremental `core_credential`; liquid clustering; the semantic layer, and `macros/planning/near_award.sql`, where the rule and the count are written once |
 | *Who owns what* | `models/_groups.yml`; access and contracts in `dbt_project.yml` (set per folder; a model's YAML holds its grain, columns and tests); what each access level allows, in `docs/conventions.md`; `meta.owner` and `meta.domain`; the domain folders, following TCSI (`docs/conventions.md`, *Domains*); the exposures; the key sets, hashing macro and conventions that every domain shares; for *Across projects*, `examples/planning/` (dbt Cloud only, not run here) |
 | *An agent on the team* | `AGENTS.md`, with the agent's access; `docs/process.md`, the ten steps; `skills/`; the evidence in `analyses/`; the reconciliation test and `scripts/tools/diff_against_main.py`; the CI workflow, and the `state:modified+` command above for CI on changed models |

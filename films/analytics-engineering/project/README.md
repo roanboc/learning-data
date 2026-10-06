@@ -7,7 +7,9 @@ DuckDB. One exception: the cross-project sketch in `examples/planning/`, which n
 It builds the slice of the university's credential model (v3) that answers one question from
 Planning: **how many learners are within 15 credit points of a graduate certificate, by faculty,
 as at census date?** A second consumer, the learner's wallet app, reads the same facts as they
-are now. That makes two consumer contracts on one enterprise contract.
+are now. A third, Finance, arrives later and asks how much tuition recognised credit saves
+learners: its history, one commit per step of the process, is how a consumer is added. That makes
+three consumer contracts on one enterprise contract.
 
 It runs on your machine and in CI, on DuckDB, with no account. The same code runs on
 Databricks, with dbt Cloud or dbt Core. The university, its people and its data are fictional.
@@ -128,10 +130,11 @@ project/
 ├── .dbtignore                keeps the conceptual models and decision logs out of dbt's parse
 ├── seeds/
 │   ├── reference/<domain>/   data the business owns, that models join to: student (status map,
-│   │                         identity decisions, credit recognition), shared (key sets
-│   │                         [generated] from each source's meta.key_set)
+│   │                         identity decisions, credit recognition), finance (tuition rates),
+│   │                         shared (key sets [generated] from each source's meta.key_set)
 │   └── expected/<domain>/    numbers published elsewhere, that tests reconcile against: planning
-│                             (the census report). No model reads them
+│                             (the census report), finance (Finance's tuition report). No model
+│                             reads them
 ├── sources/<system>/         what comes in: each source's YAML (tables, freshness, its key set
 │                             with each system key and its case, known limitations), its doc
 │                             blocks, and its decision log (_<system>__decisions.yml)
@@ -148,14 +151,15 @@ project/
 │   ├── core/course/          award                                        ┘ public, versioned, enforced;
 │   │                         core_credential v1 [temporary], removed after 31 March 2027
 │   ├── marts/planning/       as at census; the semantic model and metric
-│   └── marts/wallet/         as it is now
+│   ├── marts/wallet/         as it is now
+│   └── marts/finance/        as at census: the tuition recognised credit saves
 │                             Each core domain and mart folder also holds:
 │                               _<domain>__conceptual.yml and .md   its conceptual model
 │                               _<domain>__decisions.yml            its decision log
 │                               _<domain>__columns.md               its column doc blocks
 │                               _<domain>__definitions.md           [generated] doc blocks
 │                               _<domain>__physical.md              [generated] physical diagram
-├── exposures/<consumer>/     who uses it: the census dashboard, the wallet app
+├── exposures/<consumer>/     who uses it: the census dashboard, the wallet app, the revenue forecast
 ├── macros/
 │   ├── shared/               conventions every domain uses: keys and hashes, point in time
 │   ├── planning/             Planning's near-award rule and count, written once
@@ -163,12 +167,14 @@ project/
 ├── tests/
 │   ├── generic/              custom generic tests
 │   ├── rules/                business rules that must hold: identity decisions
-│   ├── reconciliation/       the mart against an expected seed: the census report
+│   ├── reconciliation/       a mart against an expected seed: the census report, the tuition report
 │   └── governance/           rules about the project itself: no model reads an expected seed
 ├── analyses/
-│   ├── profiling/            evidence about the sources: keys, nulls, orphans, emails, late changes
+│   ├── profiling/            evidence about the sources and the core: keys, nulls, orphans, emails,
+│   │                         late changes, credit counted towards several awards
 │   ├── design/               evidence for a modelling choice: fan-out without point in time
-│   └── validation/           checking the result: reconcile with the census report, as-was and as-is
+│   └── validation/           checking the result: reconcile with the census and tuition reports,
+│                             as-was and as-is
 ├── requirements/             [temporary] what's still open while something is built (questions,
 │                             requirements, gaps), by source, domain and consumer. Each item:
 │                             open → in_progress → done → what lasts moves to its home → deleted.

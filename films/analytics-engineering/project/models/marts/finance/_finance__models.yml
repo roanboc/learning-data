@@ -1,0 +1,140 @@
+models:
+
+  - name: mart_finance__tuition_forgone
+    description: >
+      Every award a learner was enrolled in on the census date, with the credit recognised towards
+      it and the tuition that credit saves them, at the published rate for the census year. As it
+      was: every entity is read at its version on the census date. No names or emails: Finance
+      adds up money, it doesn't need to know who.
+    config:
+      meta:
+        grain: One row per learner per award they're enrolled in, as at census date
+        glossary_term: tuition_forgone
+        owner: Finance
+        domain: finance
+        consumer: Revenue forecast
+        limitations:
+          - id: LIM-FIN-01
+            text: >
+              Tuition forgone is worked out at the published rate per credit point, not from what
+              each learner was charged: scholarships, discounts and fee waivers aren't in. Finance
+              adjusts for them in the forecast itself.
+    constraints:
+      - type: primary_key
+        name: pk_mart_finance__tuition_forgone
+        columns: [learner_award_key]
+        warn_unenforced: false
+    data_tests:
+      # the grain, tested as a key
+      - unique_combination:
+          arguments:
+            columns: [learner_key, award_key]
+    columns:
+      - name: learner_award_key
+        description: '{{ doc("learner_award_key") }}'
+        data_type: string
+        constraints: [{type: not_null}]
+        data_tests: [unique]
+        config:
+          meta: {personal_data: pseudonymous}
+      - name: census_date
+        description: '{{ doc("census_date") }}'
+        data_type: date
+        constraints: [{type: not_null}]
+      - name: learner_key
+        description: '{{ doc("learner_key") }}'
+        data_type: string
+        constraints: [{type: not_null}]
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('core_learner')
+                field: learner_key
+        config:
+          meta: {glossary_term: learner, personal_data: pseudonymous}
+      - name: award_key
+        description: '{{ doc("award_key") }}'
+        data_type: string
+        constraints: [{type: not_null}]
+        config:
+          meta: {glossary_term: award}
+      - name: award_code
+        description: '{{ doc("award_code") }}'
+        data_type: string
+      - name: award_name
+        description: '{{ doc("award_name") }} On the census date.'
+        data_type: string
+      - name: award_type
+        description: '{{ doc("award_type") }}'
+        data_type: string
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [graduate certificate, master]
+      - name: faculty_code
+        description: '{{ doc("faculty_code") }}'
+        data_type: string
+        constraints: [{type: not_null}]
+      - name: faculty_name
+        description: '{{ doc("faculty_name") }}'
+        data_type: string
+      - name: credit_points_recognised
+        description: >
+          Credit points recognised towards this award on the census date, from microcredentials and
+          short-course certificates. Units passed aren't in: they're paid for.
+        data_type: int
+        constraints: [{type: not_null}]
+      - name: rate_year
+        description: The year of the published rate used, the census date's year.
+        data_type: int
+        constraints: [{type: not_null}]
+      - name: rate_per_credit_point
+        description: Finance's published tuition for one credit point of this award type, in that year.
+        data_type: int
+        constraints: [{type: not_null}]
+      - name: tuition_forgone
+        description: '{{ doc("tuition_forgone") }} In whole dollars.'
+        data_type: int
+        constraints: [{type: not_null}]
+        config:
+          meta: {glossary_term: tuition_forgone}
+
+unit_tests:
+
+  - name: recognised_credit_saves_tuition_in_the_enrolled_award_only
+    description: >
+      A learner enrolled in a graduate certificate holds 10 recognised credit points that also count
+      towards a master. The saving is counted once, in the award they're enrolled in, at its 2026
+      rate. A learner with no recognised credit saves nothing.
+    model: mart_finance__tuition_forgone
+    given:
+      - input: ref('core_learner', v=1)
+        format: csv
+        rows: |
+          learner_key,learner_bk,enrolled_award_key,valid_from,valid_to
+          L1,SIS|S-1,A1,2026-01-01,
+          L2,SIS|S-2,A1,2026-01-01,
+      - input: ref('core_award', v=1)
+        format: csv
+        rows: |
+          award_key,award_bk,award_code,award_name,award_type,faculty_code,faculty_name,valid_from,valid_to
+          A1,SIS|GC,GC,A graduate certificate,graduate certificate,EIT,Faculty of Engineering and IT,2025-01-01,
+          A2,SIS|M,M,A master,master,EIT,Faculty of Engineering and IT,2025-01-01,
+      - input: ref('core_credit_towards_award', v=1)
+        format: csv
+        rows: |
+          learner_key,award_key,credit_points_from_microcredentials,valid_from,valid_to
+          L1,A1,10,2026-02-01,
+          L1,A2,10,2026-02-01,
+      - input: ref('tuition_rates')
+        format: csv
+        rows: |
+          award_type,rate_year,rate_per_credit_point
+          graduate certificate,2026,420
+          master,2026,480
+    expect:
+      format: csv
+      rows: |
+        learner_key,award_key,credit_points_recognised,rate_per_credit_point,tuition_forgone
+        L1,A1,10,420,4200
+        L2,A1,0,420,0

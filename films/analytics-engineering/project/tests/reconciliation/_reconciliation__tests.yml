@@ -9,3 +9,10 @@ data_tests:
       D-002 in October (LIM-PLN-01 on mart_planning__near_award).
     config:
       meta: {owner: Planning}
+
+  - name: reconcile_finance_with_tuition_report
+    description: >
+      Finance's mart gives the tuition forgone Finance worked out in its own spreadsheet, faculty by
+      faculty. Written before the mart's logic, so it fails until the logic is built.
+    config:
+      meta: {owner: Finance}

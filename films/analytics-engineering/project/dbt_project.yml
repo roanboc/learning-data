@@ -64,6 +64,8 @@ models:
         +grants: "{{ {'select': var('planning_readers')} if target.type == 'databricks' and var('planning_readers', none) else {} }}"
       wallet:
         +group: wallet
+      finance:
+        +group: finance
 
     # What every domain uses. Today: the time spine every metric needs. Planning's semantic model
     # and metrics live with its marts.
@@ -81,6 +83,8 @@ seeds:
       +schema: reference
       +group: credential_model
       +tags: ["reference"]
+      finance:
+        +group: finance
     # Expected values: numbers published outside this project, that tests and reconciliations
     # compare against. No model may ref() them.
     expected:
@@ -88,3 +92,5 @@ seeds:
       +tags: ["expected"]
       planning:
         +group: planning
+      finance:
+        +group: finance

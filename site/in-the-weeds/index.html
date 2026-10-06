@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>In the weeds of data crafting · Learning Data</title>
-<meta name="description" content="A technical series for analytics engineers on data modelling with dbt: why a dbt model is a transformation and not the data model, where the model lives, keys and hashing, grain and time, contracts and tests, layers, domains, and working with an AI agent responsibly.">
+<meta name="description" content="A technical series for analytics engineers on data modelling with dbt: why a dbt model is a transformation and not the data model, where the model lives, keys and hashing, grain and time, contracts and tests, layers, domains, working with an AI agent responsibly, and one question taken from start to end.">
 <meta property="og:title" content="In the weeds of data crafting · Learning Data"><meta property="og:description" content="A technical series for analytics engineers: how an agreed data model becomes tables, with dbt, on Databricks. It follows Jun, the university's analytics engineer, from a question to versioned, tested and documented models, with an AI agent that helps at every step and a person who approves each one."><meta property="og:image" content="https://roanboc.github.io/learning-data/assets/declare-it-then-build-it-poster.jpg">
 <link rel="alternate" hreflang="en" href="https://roanboc.github.io/learning-data/in-the-weeds/"><link rel="alternate" hreflang="es" href="https://roanboc.github.io/learning-data/es/in-the-weeds/">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
@@ -27,7 +27,7 @@
 <article class="topic-card">
 <img src="../assets/declare-it-then-build-it-poster.jpg" alt="" width="1280" height="720" loading="lazy">
 <div class="tc-body">
-<p class="kicker">Film 1 of 9 · The series and its method</p>
+<p class="kicker">Film 1 of 10 · The series and its method</p>
 <h3><a href="declare-it-then-build-it/">Declare it, then build it</a></h3>
 <p>dbt calls every query a model. The data model is the blueprint: declared beside the code, and checked by the tests.</p>
 <p class="meta">5½ min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
@@ -37,7 +37,7 @@
 <article class="topic-card">
 <img src="../assets/start-from-a-question-poster.jpg" alt="" width="1280" height="720" loading="lazy">
 <div class="tc-body">
-<p class="kicker">Film 2 of 9 · Scope and owners</p>
+<p class="kicker">Film 2 of 10 · Scope and owners</p>
 <h3><a href="start-from-a-question/">Start from a question</a></h3>
 <p>A model has no edge until a question gives it one. Model only what the question touches, and name who owns each meaning first.</p>
 <p class="meta">5 min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
@@ -47,7 +47,7 @@
 <article class="topic-card">
 <img src="../assets/what-makes-it-the-same-one-poster.jpg" alt="" width="1280" height="720" loading="lazy">
 <div class="tc-body">
-<p class="kicker">Film 3 of 9 · Identity and keys</p>
+<p class="kicker">Film 3 of 10 · Identity and keys</p>
 <h3><a href="what-makes-it-the-same-one/">What makes it the same one</a></h3>
 <p>One learner, three keys, and a look-alike. Rules match most of them; a person decides the rest, and the decision becomes data and a test.</p>
 <p class="meta">4½ min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
@@ -57,7 +57,7 @@
 <article class="topic-card">
 <img src="../assets/one-row-of-what-and-when-poster.jpg" alt="" width="1280" height="720" loading="lazy">
 <div class="tc-body">
-<p class="kicker">Film 4 of 9 · Grain and time</p>
+<p class="kicker">Film 4 of 10 · Grain and time</p>
 <h3><a href="one-row-of-what-and-when/">One row of what, and when</a></h3>
 <p>Twelve on census day, nine today: both right. Say what one row is and which day it describes, before any SQL, and test both.</p>
 <p class="meta">5 min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
@@ -67,7 +67,7 @@
 <article class="topic-card">
 <img src="../assets/promises-and-proofs-poster.jpg" alt="" width="1280" height="720" loading="lazy">
 <div class="tc-body">
-<p class="kicker">Film 5 of 9 · Contracts and tests</p>
+<p class="kicker">Film 5 of 10 · Contracts and tests</p>
 <h3><a href="promises-and-proofs/">Promises and proofs</a></h3>
 <p>Every gap gets a decision. Promise it in a contract; prove it with a test, written before the code it checks.</p>
 <p class="meta">5½ min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
@@ -77,7 +77,7 @@
 <article class="topic-card">
 <img src="../assets/built-in-layers-poster.jpg" alt="" width="1280" height="720" loading="lazy">
 <div class="tc-body">
-<p class="kicker">Film 6 of 9 · Layers and CTEs</p>
+<p class="kicker">Film 6 of 10 · Layers and CTEs</p>
 <h3><a href="built-in-layers/">Built in layers</a></h3>
 <p>Four layers turn the tests green. Each layer has one job; each CTE, one step; and the rule is written once.</p>
 <p class="meta">4½ min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
@@ -87,7 +87,7 @@
 <article class="topic-card">
 <img src="../assets/who-owns-what-poster.jpg" alt="" width="1280" height="720" loading="lazy">
 <div class="tc-body">
-<p class="kicker">Film 7 of 9 · Domains and ownership</p>
+<p class="kicker">Film 7 of 10 · Domains and ownership</p>
 <h3><a href="who-owns-what/">Who owns what</a></h3>
 <p>Each fact's meaning has an owner. Owners publish a public, versioned core; consumers build on it, never on each other's marts.</p>
 <p class="meta">5½ min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
@@ -97,7 +97,7 @@
 <article class="topic-card">
 <img src="../assets/an-agent-on-the-team-poster.jpg" alt="" width="1280" height="720" loading="lazy">
 <div class="tc-body">
-<p class="kicker">Film 8 of 9 · Agents and review</p>
+<p class="kicker">Film 8 of 10 · Agents and review</p>
 <h3><a href="an-agent-on-the-team/">An agent on the team</a></h3>
 <p>An AI agent drafts in minutes. It follows rules written in the project, shows the query behind every claim, never weakens a test, and people approve.</p>
 <p class="meta">5½ min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
@@ -107,11 +107,21 @@
 <article class="topic-card">
 <img src="../assets/written-once-poster.jpg" alt="" width="1280" height="720" loading="lazy">
 <div class="tc-body">
-<p class="kicker">Film 9 of 9 · Documentation and versions</p>
+<p class="kicker">Film 9 of 10 · Documentation and versions</p>
 <h3><a href="written-once/">Written once</a></h3>
 <p>Every copy of a fact is a chance to drift. One home per fact, everything else generated, and a breaking change arrives as a new version with a date.</p>
 <p class="meta">5½ min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
 <p class="tc-progress" data-progress="ld-written-once" data-labs="4" data-quiz="8" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../assets/end-to-end-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 10 of 10 · The whole process</p>
+<h3><a href="end-to-end/">End to end</a></h3>
+<p>One question, ten steps, ten commits. Every file in its place, for as long as it's needed.</p>
+<p class="meta">8½ min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
+<p class="tc-progress" data-progress="ld-end-to-end" data-labs="4" data-quiz="8" hidden></p>
 </div>
 </article>
 </div>
@@ -127,7 +137,7 @@
 <div class="card tech"><h3>Builds the model</h3><p>Jun, analytics engineer, the series' guide</p></div>
 <div class="card tech"><h3>Owns the model</h3><p>Noor, data architect</p></div>
 <div class="card biz"><h3>Owns the words</h3><p>Mei, registrar's office</p></div>
-<div class="card biz"><h3>Asks the questions</h3><p>Planning, and the learner's wallet app</p></div>
+<div class="card biz"><h3>Asks the questions</h3><p>Planning, the learner's wallet app, and Finance</p></div>
 </div>
 </section>
 </main>

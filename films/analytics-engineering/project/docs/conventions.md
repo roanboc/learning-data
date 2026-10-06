@@ -231,7 +231,7 @@ to itself, and they meet only on the public core. `examples/planning/` sketches 
 
 ### Definitions from the business glossary
 
-The university keeps a business glossary outside dbt (on Databricks). Where it
+The university keeps a business glossary outside dbt: Unity Catalog's Glossary, on Databricks. Where it
 defines an entity, the glossary is the home of the definition, not the project: data governance
 names the term that applies, and the conceptual model takes its words and records the term in
 `source:` (`glossary`, `term`, `named_by`, `synced_on`), adding only what the glossary doesn't

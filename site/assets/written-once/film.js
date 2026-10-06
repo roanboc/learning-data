@@ -2035,7 +2035,7 @@ function wr_catalog(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)
 // the university's business glossary on Databricks, outside the project (drawn, not a project file): one term, its words, and who named it the source.
 // o.chg (0..1) marks the term as changed since the last sync; o.tick the gold tick of data governance, who names the term
 function wr_glossary(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const GL=[176,186,206],chg=o.chg||0;withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,mix(GL,WR_AMB,chg),{glow:10+12*(o.hi||0),ea:0.6,fill:"rgba(12,14,20,0.96)"});
-  T(ctx,o.short?"business glossary":"Databricks · business glossary",x+24,y+38,{w:700,size:20,color:rgba(GL,1)});const ot="outside dbt",ow=tw(ctx,ot,16,700)+26;tag(ctx,x+w-16-ow,y+32,ot,SOFT,{size:16});
+  T(ctx,"Unity Catalog · Glossary",x+24,y+38,{w:700,size:20,color:rgba(GL,1)});if(!o.short){const ot="outside dbt",ow=tw(ctx,ot,16,700)+26;tag(ctx,x+w-16-ow,y+32,ot,SOFT,{size:16});}
   T(ctx,"Award",x+24,y+84,{w:800,size:26,color:rgba(INK,1)});
   if(chg>0)withA(ctx,chg,()=>tag(ctx,x+40+tw(ctx,"Award",26,800),y+76,"changed",WR_AMB,{size:17}));
   if(!o.short)wr_para(ctx,WR_DEF,x+24,y+124,w-48,{size:18,color:rgba(mix(INK,SOFT,0.2),1)});
@@ -2379,7 +2379,7 @@ const WR_WHY=["Four copies of a definition drift apart. One home, and one","dire
 const WR_GAPS=["  - name: core_credential","    …","        limitations:","          - id: LIM-STU-06","            was: GAP-STU-02","            text: >","              No source records an expiry. status allows expired; nothing sets it yet."];
 const WR_CONV=["## Metadata","","- `meta.grain`: on every core and mart model, the grain in one sentence (\"One row per credential\"). Each domain's physical diagram (`_<domain>__physical.md`) reads it; a test proves it.",
   "- `meta.owner`: who owns the meaning (models) or the data (sources, seeds).","- `meta.domain`: the domain that owns the model, seed or source: `registrar` or `learning` (application domains: the teams whose systems are the sources), `student` or `course` (data domains), `planning` or `wallet` (business domains), or `shared`.","- `meta.glossary_term`: the term in the domain's conceptual model a model or key holds.","…"];
-const WR_SRC=["    source:","      glossary: the university's business glossary, on Databricks","      term: Award","      named_by: data governance","      synced_on: 2026-10-14"];
+const WR_SRC=["    source:","      glossary: the university's Unity Catalog Glossary, on Databricks","      term: Award","      named_by: data governance","      synced_on: 2026-10-14"];
 const WR_CON9=["  - name: award","    definition: >","      A qualification the university confers, such as a graduate certificate or a master, for","      a set number of credit points. When it's conferred on a learner, it's a credential too.","    owner: Mei Tanaka, registrar's office","    business_key:","      issued_by: Registrar's office","      rule: The award code, qualified by its key set, SIS|GCDA.","    history: Every version, dated when it was recorded."];
 scene("where",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025});

@@ -276,7 +276,7 @@ function wr_catalog(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)
 // the university's business glossary on Databricks, outside the project (drawn, not a project file): one term, its words, and who named it the source.
 // o.chg (0..1) marks the term as changed since the last sync; o.tick the gold tick of data governance, who names the term
 function wr_glossary(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const GL=[176,186,206],chg=o.chg||0;withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,mix(GL,WR_AMB,chg),{glow:10+12*(o.hi||0),ea:0.6,fill:"rgba(12,14,20,0.96)"});
-  T(ctx,o.short?"business glossary":"Databricks · business glossary",x+24,y+38,{w:700,size:20,color:rgba(GL,1)});const ot="outside dbt",ow=tw(ctx,ot,16,700)+26;tag(ctx,x+w-16-ow,y+32,ot,SOFT,{size:16});
+  T(ctx,"Unity Catalog · Glossary",x+24,y+38,{w:700,size:20,color:rgba(GL,1)});if(!o.short){const ot="outside dbt",ow=tw(ctx,ot,16,700)+26;tag(ctx,x+w-16-ow,y+32,ot,SOFT,{size:16});}
   T(ctx,"Award",x+24,y+84,{w:800,size:26,color:rgba(INK,1)});
   if(chg>0)withA(ctx,chg,()=>tag(ctx,x+40+tw(ctx,"Award",26,800),y+76,"changed",WR_AMB,{size:17}));
   if(!o.short)wr_para(ctx,WR_DEF,x+24,y+124,w-48,{size:18,color:rgba(mix(INK,SOFT,0.2),1)});

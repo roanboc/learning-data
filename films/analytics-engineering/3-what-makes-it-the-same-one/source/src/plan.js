@@ -284,7 +284,7 @@ Object.assign(LV,{
       T(c,"sha256('"+k+"')",24,y,{f:"mono",w:500,size:26,color:rgba(INK,0.9)});T(c,"= "+hx,24,y+38,{f:"mono",w:500,size:26,color:rgba(col,1)});});
     sm_T(c,V.q.morning,400,404,752,{w:700,size:28,min:24,align:"center",color:rgba(BAD,1)});c.restore();},
   sm_q_pr:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,800,427);tag(c,24,36,V.q.pr+" · "+V.q.drop,SM_AMBER,{size:26});
-    c.save();c.translate(24,70);c.scale(1.5,1.5);sm_file(c,0,0,501,"models/core/_core__models.yml",["      - name: learner_key","        …","      - name: learner_bk"],{size:19,lh:32,label:null,lit:{2:1},litCol:BAD});c.restore();
+    c.save();c.translate(24,70);c.scale(1.36,1.36);sm_file(c,0,0,552,"models/core/student/_core_student__models.yml",["      - name: learner_key","        …","      - name: learner_bk"],{size:19,lh:32,label:null,lit:{2:1},litCol:BAD});c.restore();
     T(c,V.runs,776,350,{w:600,size:24,align:"right",color:rgba(SOFT,0.95)});
     T(c,"learner_key 0905e6e2…   learner_bk SIS|S-20417",400,404,{f:"mono",w:500,size:26,align:"center",color:rgba(INK,0.9)});c.restore();},
   sm_q_wallet:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,800,427);glass(c,24,60,450,280,18,TRUST,{glow:12,ea:0.75,fill:"rgba(7,12,24,0.95)"});
@@ -301,7 +301,7 @@ Object.assign(LV,{
     [[3,V.rules[2]],[4,V.rules[3]],[9,V.rules[4]]].forEach(([p,t],i)=>{const y=196+i*76;sm_rule(c,24,y,752,p,"",{h:64,on:i===0?0.6:0});
       sm_T(c,t,92,y+42,670,{w:700,size:28,min:22,color:rgba(INK,0.95)});});c.restore();},
   sm_q_code:(c,w,h,st,L)=>{const V=L.vis;c.save();sm_fit(c,w,h,800,427);
-    c.save();c.translate(24,16);c.scale(1.3,1.3);sm_file(c,0,0,578,"seeds/status_map.csv",["…","SC,1,Active customer,studying","SC,0,Inactive customer,inactive"],{size:19,lh:30,label:V.runs,lit:{2:1}});c.restore();
+    c.save();c.translate(24,16);c.scale(1.04,1.04);sm_file(c,0,0,722,"seeds/reference/student/status_map.csv",["…","SC,1,Active customer,studying","SC,0,Inactive customer,inactive"],{size:19,lh:30,label:V.runs,lit:{2:1}});c.restore();
     c.save();c.setLineDash([10,8]);c.strokeStyle=rgba(SM_AMBER,0.9);c.lineWidth=2.5;rr(c,24,252,752,64,14);c.stroke();c.restore();
     sm_T(c,"+ SC,INACTIVE,Inactive customer,inactive",44,294,712,{f:"mono",w:500,size:26,min:22,color:rgba(SM_AMBER,1)});
     tag(c,24,380,V.q.pr,SM_AMBER,{size:26});const ow=tw(c,V.q.owner,26,700)+26;tag(c,776-ow,380,V.q.owner,TRUST,{size:26});c.restore();}

@@ -10,7 +10,13 @@
 // each domain has its own colour: the registrar's is the student system's blue, the learning team's the platform's green;
 // Planning and the wallet app, who own their marts, get their own. Amber is a warning: allowed, but wrong.
 const WO_REG=SRC3[0][1],WO_LRN=SRC3[1][1],WO_SC=SRC3[2][1],WO_PLN=[255,170,110],WO_WAL=[196,160,255],WO_AMB=[255,200,70];
-const WO_DOM={registrar:["registrar's office",WO_REG],learning:["learning team",WO_LRN],planning:["Planning",WO_PLN],wallet:["wallet app",WO_WAL]};
+const WO_STU=[255,206,110],WO_CRS=[130,214,205],WO_APP=[150,190,255],WO_DAT=[255,206,110],WO_BUS=[255,160,170];
+// the domains, by the meta.domain the models carry, and the three kinds of domain they belong to
+const WO_DOM={registrar:["registrar's office",WO_REG],learning:["learning team",WO_LRN],student:["student",WO_STU],course:["course",WO_CRS],planning:["Planning",WO_PLN],wallet:["wallet app",WO_WAL],
+  application:["application domains",WO_APP],data:["data domains",WO_DAT],business:["business domains",WO_BUS]};
+// the three kinds, each with the folders it lives in: what comes in, what the facts mean, who decides with them
+const WO_KINDS=[["application","application domains","sources/<system>/","the systems, and the teams that run them"],["data","data domains","models/core/<domain>/","what the facts mean · TCSI"],
+  ["business","business domains","marts/ · exposures/","who decides with the data"]];
 const WO_DUCK="runs on dbt Core · DuckDB",WO_CLOUD="sketch · dbt Cloud only";
 const WO_INKP="rgba(58,40,26,0.9)";   // iron-gall ink on paper
 
@@ -181,7 +187,7 @@ function wo_coreCard(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)r
 function wo_latch(ctx,x,y,s,shut,col){col=col||TRUST;const u=ease(clamp(shut,0,1));ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.strokeStyle=rgba(col,1);ctx.fillStyle=rgba(col,0.18);ctx.lineWidth=3;
   rr(ctx,-16,-10,32,24,4);ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(-10,-10);ctx.lineTo(-10,-20);ctx.arc(0,-20,10,Math.PI,0,false);ctx.lineTo(10,-20+(1-u)*-14+(u<0.5?0:10));ctx.stroke();ctx.restore();}
 // the product card: a core model and what it publishes. on[i] lights each part as it's named
-const WO_PROD=[["grain","One row per learner per version"],["owner","Mei Tanaka, registrar's office"],["domain","registrar"],["glossary term","learner"],["contract","enforced"],["version","v1"],["docs","{{ doc(\"learner\") }}"]];
+const WO_PROD=[["grain","One row per learner per version"],["owner","Mei Tanaka, registrar's office"],["domain","student"],["glossary term","learner"],["contract","enforced"],["version","v1"],["docs","{{ doc(\"learner\") }}"]];
 function wo_product(ctx,x,y,w,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const on=o.on||[],rh=o.rh||60,h=116+rh*WO_PROD.length;withA(ctx,a,()=>{
   wo_coreCard(ctx,x,y,w,h,{name:"core_learner",sub:"a data product",hi:o.hi});
   WO_PROD.forEach(([k,v],i)=>{const q=on[i]||0,yy=y+140+i*rh;withA(ctx,0.32+0.68*q,()=>{if(q>0)withA(ctx,q,()=>{ctx.fillStyle=rgba(TRUST,0.07);rr(ctx,x+16,yy-rh*0.62,w-32,rh*0.9,8);ctx.fill();});
@@ -307,14 +313,14 @@ const WO_LN={
       T(c,nm,58,y,{w:700,size:wo_fitM(c,nm,520,32,700,undefined,26),color:rgba(col,1)});T(c,WO_ACCN[k],600,y,{f:"mono",w:500,size:32,color:rgba(acol,1)});
       if(i===5)T(c,"·",920,y,{w:800,size:34,align:"center",color:rgba(SOFT,1)});else{const ok=k!=="v"||grp==="wallet";(ok?tick_:cross_)(c,920,y-11,26,ok?GOOD:BAD,1);}});
     c.restore();},
-  // lab 2: the four domains in a grid, each holding the short labels placed in it
-  domains:(c,w,h,st,L)=>{const V=L.vis,its=wo_labOf(L,"wo_l_domains").w.items||[],keys=["registrar","learning","planning","wallet"];c.save();wo_fit(c,w,h,960,400);
-    keys.forEach((k,i)=>{const x=6+(i%2)*478,y=6+Math.floor(i/2)*197,col=WO_DOM[k][1];glass(c,x,y,468,187,16,col,{glow:6,ea:0.75,fill:"rgba(9,14,26,0.95)"});
-      T(c,V.domains[i],x+20,y+44,{w:800,size:wo_fitM(c,V.domains[i],428,32,800,undefined,26),color:rgba(col,1)});
-      const mine=its.map((it,j)=>[it,j]).filter(([it,j])=>(st.pick||{})[j]===k);let cx=x+16,row=0,shown=0;
-      for(const [it,j] of mine){const lab=it.s||it.t,z=30,cw=tw(c,lab,z,700)+z*1.1;if(cx+cw>x+452){row++;cx=x+16;}if(row>1)break;
-        wo_chipN(c,cx,y+94+row*52,lab,st.checked?(it.b===k?GOOD:BAD):col,z,INK);cx+=cw+10;shown++;}
-      if(shown<mine.length)T(c,"+"+(mine.length-shown),x+452,y+44,{w:800,size:30,align:"right",color:rgba(SOFT,1)});});
+  // lab 2: the three kinds of domain side by side, each holding the short labels placed in it
+  domains:(c,w,h,st,L)=>{const V=L.vis,its=wo_labOf(L,"wo_l_domains").w.items||[],keys=["application","data","business"];c.save();wo_fit(c,w,h,960,400);
+    keys.forEach((k,i)=>{const x=6+i*318,y=6,col=WO_DOM[k][1];glass(c,x,y,306,388,16,col,{glow:6,ea:0.75,fill:"rgba(9,14,26,0.95)"});
+      T(c,V.domains[i],x+18,y+44,{w:800,size:wo_fitM(c,V.domains[i],270,30,800,undefined,22),color:rgba(col,1)});
+      const mine=its.map((it,j)=>[it,j]).filter(([it,j])=>(st.pick||{})[j]===k);let cx=x+14,row=0,shown=0;
+      for(const [it,j] of mine){const lab=it.s||it.t,z=26,cw=tw(c,lab,z,700)+z*1.1;if(cx+cw>x+292){row++;cx=x+14;}if(row>5)break;
+        wo_chipN(c,cx,y+94+row*50,lab,st.checked?(it.b===k?GOOD:BAD):col,z,INK);cx+=cw+10;shown++;}
+      if(shown<mine.length)T(c,"+"+(mine.length-shown),x+292,y+44,{w:800,size:28,align:"right",color:rgba(SOFT,1)});});
     c.restore();},
   // lab 3: two doors side by side; the rule picked lights its side, and says what it misses
   read:(c,w,h,st,L)=>{const V=L.vis,p=st.pick||"both",refA=p==="grants"?0.35:1,readA=p==="access"?0.35:1;c.save();wo_fit(c,w,h,960,400);
@@ -358,12 +364,12 @@ function wo_l_access(c,w,h,st,L){if(wo_nar(c))return WO_LN.access(c,w,h,st,L);co
     else{const ok=k!=="v"||grp==="wallet";(ok?tick_:cross_)(c,932,y-8,12,ok?GOOD:BAD,1);}});
   c.restore();}
 
-// lab 2: four territories, each holding the things placed in it; after checking, each turns green or red
-function wo_l_domains(c,w,h,st,L){if(wo_nar(c))return WO_LN.domains(c,w,h,st,L);const V=L.vis,its=wo_labOf(L,"wo_l_domains").w.items||[],keys=["registrar","learning","planning","wallet"];c.save();wo_fit(c,w,h,960,400);
-  keys.forEach((k,i)=>{const x=6+i*238,col=WO_DOM[k][1],cxx=x+113;wo_terr(c,x,6,226,388,col,"",0,{seed:i+1});
-    T(c,V.domains[i],cxx,48,{w:800,size:wo_fitS(c,V.domains[i],200,22,800),align:"center",color:rgba(col,1)});T(c,V.owners[i],cxx,76,{w:600,size:20,align:"center",color:rgba(SOFT,1)});
+// lab 2: three territories, one for each kind of domain, each holding the things placed in it; after checking, each turns green or red
+function wo_l_domains(c,w,h,st,L){if(wo_nar(c))return WO_LN.domains(c,w,h,st,L);const V=L.vis,its=wo_labOf(L,"wo_l_domains").w.items||[],keys=["application","data","business"];c.save();wo_fit(c,w,h,960,400);
+  keys.forEach((k,i)=>{const x=6+i*318,col=WO_DOM[k][1],cxx=x+153;wo_terr(c,x,6,306,388,col,"",0,{seed:i+1});
+    T(c,V.domains[i],cxx,48,{w:800,size:wo_fitS(c,V.domains[i],270,22,800),align:"center",color:rgba(col,1)});T(c,V.owners[i],cxx,76,{w:600,size:wo_fitS(c,V.owners[i],270,20,600),align:"center",color:rgba(SOFT,1)});
     const mine=its.map((it,j)=>[it,j]).filter(([it,j])=>(st.pick||{})[j]===k),step=Math.min(44,280/Math.max(1,mine.length));
-    mine.forEach(([it,j],m)=>{const y=118+m*step,ok=it.b===k,lab=it.s||it.t,z=wo_fitS(c,lab,198,20,700),cw=tw(c,lab,z,700)+26;
+    mine.forEach(([it,j],m)=>{const y=118+m*step,ok=it.b===k,lab=it.s||it.t,z=wo_fitS(c,lab,270,20,700),cw=tw(c,lab,z,700)+26;
       glass(c,cxx-cw/2,y-18,cw,36,10,st.checked?(ok?GOOD:BAD):col,{glow:8,ea:0.8,fill:"rgba(7,12,24,0.94)"});T(c,lab,cxx,y+7,{w:700,size:z,align:"center"});});});
   c.restore();}
 

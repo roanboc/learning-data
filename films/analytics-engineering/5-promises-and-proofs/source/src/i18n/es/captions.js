@@ -14,8 +14,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Un modelo del núcleo hace la misma promesa. Sus pruebas son el ensayo, y van antes de la marca.",
 "Step four: name the gaps.":
 "Paso cuatro: nombrar las brechas.",
-"Jun's gap register sets what the business expects beside what the sources hold, one line per gap.":
-"El registro de brechas de Jun pone lo que espera el negocio junto a lo que tienen las fuentes, una línea por brecha.",
+"Jun's gap register lists them beside each source, while they're open: what the business expects, beside what the source holds, one line per gap.":
+"El registro de brechas de Jun las anota junto a cada fuente, mientras siguen abiertas: lo que espera el negocio, junto a lo que tiene la fuente, una línea por brecha.",
 "The business expects a revoked credential to be known as revoked. The learning platform just deletes it.":
 "El negocio espera que una credencial revocada conste como revocada. La plataforma de aprendizaje simplemente la borra.",
 "Every gap gets one of three decisions. Fix it at the source. Write a rule in the model. Or accept it, and write it down.":
@@ -26,6 +26,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La microcredencial de Jordan desapareció el doce de agosto. Desde ese día, figura como revocada.",
 "Ten gaps, ten decisions. Mei approves the ones about meaning.":
 "Diez brechas, diez decisiones. Mei aprueba las que tratan del significado.",
+"Then each gap leaves the register. A rule in the model becomes a decision, in its source's log. An accepted gap becomes a known limitation, on the model. Only a fix still awaited stays open.":
+"Luego cada brecha sale del registro. Una regla en el modelo se vuelve una decisión, en el registro de decisiones de su fuente. Una brecha aceptada se vuelve una limitación conocida, en el modelo. Solo queda abierto un arreglo que aún se espera.",
 "Then the contracts. The core is what everything else builds on, so it makes the strongest promise.":
 "Luego, los contratos. Todo lo demás se construye sobre el núcleo, así que hace la promesa más fuerte.",
 "The whole core folder gets two settings. Public: other projects may build on it. And a contract, enforced.":

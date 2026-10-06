@@ -1,4 +1,4 @@
-/* ===== A model is not a transformation: the film's own pictures (prefixed mt_) =====
+/* ===== Declare it, then build it: the film's own pictures (prefixed mt_) =====
    The 1870s blueprint: a small building's plan, printed in sunlight (the paper turns from pale yellow-green to blue, and the
    lines to white), copies for the trades, and an empty site; the ways to transform data; the shapes a model can take; the
    three stages of the series' middle way; and the eight films to come. */

@@ -1,4 +1,4 @@
-// In the weeds of data crafting · A model is not a transformation. One line per id; the film re-times itself to the voice.
+// In the weeds of data crafting · Declare it, then build it. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
 const NARR={
 "plan":{"name":"A plan is not a building","lead":1.4,"tail":1.0,"vo":[
@@ -32,14 +32,14 @@ const NARR={
  {"id":"step","gap":0.8,"text":"A query is one step of the building work. The model is the blueprint."},
  {"id":"apart","gap":0.8,"text":"This series is about keeping the two apart, and connecting them. It's for analytics engineers, and it goes into the weeds."}]},
 "models":{"name":"Three hundred models","lead":1.0,"tail":1.0,"vo":[
- {"id":"year","gap":0.8,"text":"A year from now, Jun's project could hold three hundred of these files, in four layers."},
+ {"id":"year","gap":0.8,"text":"A year from now, Jun's project could hold three hundred of these files, in four layers, each folder named for its domain."},
  {"id":"steps","gap":0.8,"text":"Most are steps: one tidies a source, one matches a learner's three keys, one stitches their history into a single timeline."},
  {"id":"core","gap":0.8,"text":"Only the core holds what the blueprint names: a learner, a credential, an award. The marts serve each consumer what it asked for."},
  {"id":"which","gap":0.8,"text":"So which file is the data model? None of them."}]},
 "lives":{"name":"Where the model lives","lead":1.0,"tail":1.0,"vo":[
  {"id":"beside","gap":0.8,"text":"The model lives beside the code."},
  {"id":"yaml","gap":0.8,"text":"In YAML: what one row holds, which key makes it unique, how it relates to the rest, and the contract each table promises.","say":"In yammel: what one row holds, which key makes it unique, how it relates to the rest, and the contract each table promises."},
- {"id":"md","gap":0.8,"text":"In Markdown, with a diagram anyone can read: what each thing means, and why it was decided that way."},
+ {"id":"md","gap":0.8,"text":"In a conceptual model, with a diagram anyone can read: what each thing means. And in a decision log beside it: why it was decided that way."},
  {"id":"check","gap":0.8,"text":"The queries make the tables. The YAML and the Markdown say what those tables must be, and the tests check that they are.","say":"The queries make the tables. The yammel and the Markdown say what those tables must be, and the tests check that they are."}]},
 "steps":{"name":"Ten steps","lead":1.0,"tail":1.0,"vo":[
  {"id":"ten","gap":0.8,"text":"Jun works in ten steps."},

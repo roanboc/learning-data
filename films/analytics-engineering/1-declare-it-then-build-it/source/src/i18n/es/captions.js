@@ -1,4 +1,4 @@
-/* A model is not a transformation: Latin American Spanish captions, over the English film. Each English narration line (the key, exactly as in src/narration.js) maps to its caption.
+/* Declare it, then build it: Latin American Spanish captions, over the English film. Each English narration line (the key, exactly as in src/narration.js) maps to its caption.
    Only the captions change: the picture, the voice and the timings stay English, so the site plays the same film, and the video, which has no captions on its picture, takes es.srt.
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
@@ -50,8 +50,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Una consulta es un paso de la obra. El modelo es el plano.",
 "This series is about keeping the two apart, and connecting them. It's for analytics engineers, and it goes into the weeds.":
 "Esta serie trata de mantener separadas las dos cosas, y de conectarlas. Es para analytics engineers, y entra en el detalle.",
-"A year from now, Jun's project could hold three hundred of these files, in four layers.":
-"Dentro de un año, el proyecto de Jun podría tener trescientos de estos archivos, en cuatro capas.",
+"A year from now, Jun's project could hold three hundred of these files, in four layers, each folder named for its domain.":
+"Dentro de un año, el proyecto de Jun podría tener trescientos de estos archivos, en cuatro capas, cada carpeta con el nombre de su dominio.",
 "Most are steps: one tidies a source, one matches a learner's three keys, one stitches their history into a single timeline.":
 "La mayoría son pasos: uno ordena una fuente, otro une las tres claves de un estudiante, otro cose su historia en una sola línea de tiempo.",
 "Only the core holds what the blueprint names: a learner, a credential, an award. The marts serve each consumer what it asked for.":
@@ -62,8 +62,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "El modelo vive junto al código.",
 "In YAML: what one row holds, which key makes it unique, how it relates to the rest, and the contract each table promises.":
 "En YAML: qué contiene una fila, qué clave la hace única, cómo se relaciona con el resto, y el contrato que promete cada tabla.",
-"In Markdown, with a diagram anyone can read: what each thing means, and why it was decided that way.":
-"En Markdown, con un diagrama que cualquiera puede leer: qué significa cada cosa, y por qué se decidió así.",
+"In a conceptual model, with a diagram anyone can read: what each thing means. And in a decision log beside it: why it was decided that way.":
+"En un modelo conceptual, con un diagrama que cualquiera puede leer: qué significa cada cosa. Y en un registro de decisiones a su lado: por qué se decidió así.",
 "The queries make the tables. The YAML and the Markdown say what those tables must be, and the tests check that they are.":
 "Las consultas hacen las tablas. El YAML y el Markdown dicen qué deben ser esas tablas, y las pruebas comprueban que lo son.",
 "Jun works in ten steps.":

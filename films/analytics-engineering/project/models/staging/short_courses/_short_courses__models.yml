@@ -48,7 +48,7 @@ models:
         description: >
           The customer who enrolled, by email. An enrolment with no email can't be matched to a
           learner. The learning team agreed: warn when any current enrolment has none, stop the
-          build when more than five do (see GAP-SC-02 in docs/registers.md).
+          build when more than five do (see DEC-SC-01 and LIM-SC-02).
         data_tests:
           - not_null:
               config:

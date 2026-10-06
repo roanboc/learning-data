@@ -3,14 +3,17 @@
 #
 # Not parsed by dbt (.dbtignore). scripts/generate/definitions.py turns each definition into a doc
 # block in _wallet__definitions.md, next to this file, and checks that every entity it uses is defined
-# in a core domain, and that the question it answers is in a register. The diagram is drawn by hand
-# in _wallet__conceptual.md.
+# in a core domain. The diagram is drawn by hand in _wallet__conceptual.md.
 
 domain: wallet
 kind: mart
 
-# The question this mart answers, in its register: requirements/exposures/wallet/.
-answers: Q-WAL-01
+question:
+  asked_by: The learner's wallet app
+  text: >
+    What does this learner hold now, and how far are they from the award they're enrolled in?
+  decision: >
+    What the app shows a learner, and what they can share with an employer.
 
 # The core's entities this mart reads, at their version valid today.
 uses: [learner, credential, award, credit_towards_award]

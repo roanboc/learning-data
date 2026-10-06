@@ -14,7 +14,7 @@ wallet app reads the same facts, as they are now.
 The models are organised by domain, following the reference model, TCSI: the core's `student`
 and `course` domains, and the marts' `planning` and `wallet`. Each domain's folder holds its
 meaning (the conceptual model and the definitions generated from it), its column descriptions
-and its physical diagram. The questions, requirements, decisions and gaps are in `requirements/`, by source, domain and
-consumer; the process is in `docs/`. The university and
-everyone in it are fictional.
+and its physical diagram, and its decision log. Known limitations are on the models and sources
+they affect. What's still open is in `requirements/`; the process is in `docs/`. The university
+and everyone in it are fictional.
 {% enddocs %}

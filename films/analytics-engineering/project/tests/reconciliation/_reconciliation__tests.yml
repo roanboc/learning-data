@@ -6,6 +6,6 @@ data_tests:
       doesn't, the mart is wrong or the report is; either way, nobody ships until someone knows
       which. The mart applies identity as it's known today: the census team matched two
       learners by hand in April, and the registrar's office recorded those matches as D-001 and
-      D-002 in October (LIM-PLN-01 in docs/registers.md).
+      D-002 in October (LIM-PLN-01 on mart_planning__near_award).
     config:
       meta: {owner: Planning}

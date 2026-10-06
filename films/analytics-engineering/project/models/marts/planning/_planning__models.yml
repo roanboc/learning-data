@@ -14,6 +14,14 @@ models:
         owner: Planning
         domain: planning
         consumer: Census dashboard
+        limitations:
+          - id: LIM-PLN-01
+            text: >
+              The Planning mart applies identity as it's known today to the census date. The
+              census team matched two learners by hand before publishing on 14 April 2026; the
+              registrar's office recorded the same matches as identity decisions D-001 and D-002
+              in October. Without those decisions, the mart counts 10 learners, not 12, and the
+              reconciliation fails.
     constraints:
       - type: primary_key
         name: pk_mart_planning__near_award

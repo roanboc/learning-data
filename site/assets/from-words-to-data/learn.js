@@ -16,6 +16,10 @@ const get=(k,d)=>{try{const v=localStorage.getItem(P+":"+k);return v==null?d:JSO
 const set=(k,v)=>{try{localStorage.setItem(P+":"+k,JSON.stringify(v));}catch(e){}
   // path.js repaints the stepper on "storage", which only other tabs fire: fire it here too
   try{window.dispatchEvent(new StorageEvent("storage",{key:P+":"+k}));}catch(e){}};
+/* A lab or a scenario can name the files it's about in the series' example project: repo:[paths], links under L.repoBase.
+   Optional: without repo, or without L.repoBase, nothing is drawn. A folder ends with "/". */
+const repoLinks=x=>!(x&&x.repo&&x.repo.length&&L.repoBase)?null:h("p",{class:"fw-repo"},h("b",null,(U.repo||"See it in the project:")+" "),
+  ...x.repo.flatMap((f,i)=>[i?" · ":"",h("a",{href:L.repoBase.replace(/\/blob\/main\//,f.endsWith("/")?"/tree/main/":"/blob/main/")+f.replace(/\/$/,""),target:"_blank",rel:"noopener"},h("code",null,f))]));
 function h(tag,attrs,...kids){const e=document.createElement(tag);for(const k in attrs||{}){const v=attrs[k];if(v==null||v===false)continue;if(k.startsWith("on"))e.addEventListener(k.slice(2),v);else if(k==="html")e.innerHTML=v;else e.setAttribute(k,v===true?"":v);}
   kids.flat().forEach(c=>{if(c!=null&&c!==false)e.append(c.nodeType?c:document.createTextNode(c));});return e;}
 const fill=(s,o)=>String(s).replace(/\{(\w+)\}/g,(m,k)=>o[k]!=null?o[k]:m);
@@ -92,7 +96,7 @@ if(labsApp){labsApp.textContent="";const rail=h("div",{class:"stops",role:"tabli
     const i=L.labs.indexOf(Lb),nxt=L.labs[i+1];
     holder.replaceChildren(h("div",{class:"stop",style:"--c:"+Lb.c},
       h("div",{class:"stop-text"},h("p",{class:"kicker"},h("b",null,U.lab+" "+(i+1))," "+U.of+" "+L.labs.length),h("h3",null,Lb.name),h("p",{class:"idea"},Lb.idea),h("ul",null,...Lb.points.map(p=>h("li",null,p))),
-        h("details",{class:"real"},h("summary",null,U.inPractice),h("p",null,Lb.real)),
+        h("details",{class:"real"},h("summary",null,U.inPractice),h("p",null,Lb.real),repoLinks(Lb)),
         h("div",{class:"stop-nav"},h("a",{class:"btn",href:"../#t="+chapterStart(Lb.chapter)},U.watch),nxt?h("button",{type:"button",class:"btn primary",onclick:()=>show(nxt.id,true)},U.next+" "+nxt.name+" →"):h("a",{class:"btn primary",href:"../scenarios/"},U.makeCall))),
       BUILD[Lb.kind](Lb)));
     if(history.replaceState)history.replaceState(null,"","#"+Lb.id);if(focus)holder.scrollIntoView({block:"start"});}
@@ -107,7 +111,7 @@ if(quizApp){quizApp.textContent="";const QS=L.qs,ans=get("quiz",{});let cur=0;
   function paintBar(){dots.replaceChildren(...QS.map((q,i)=>h("button",{type:"button",class:ans[i]?(ans[i].ok?"ok":"no"):"","aria-current":String(i===cur),"aria-label":U.scenario+" "+(i+1),onclick:()=>{cur=i;render();}},String(i+1))));
     const n=Object.keys(ans).length,ok=Object.values(ans).filter(a=>a.ok).length;score.replaceChildren(U.score+" "+ok+" ",h("span",null,U.of+" "+n+" "+U.answered+" · "+(QS.length-n)+" "+U.toGo));}
   function done(ok){ans[cur]={ok};set("quiz",ans);paintBar();}
-  const feed=(ok,q)=>h("div",{class:"qfeed "+(ok?"ok":"no")},h("h4",null,ok?U.good:U.notQuite),h("p",null,q.why));
+  const feed=(ok,q)=>h("div",{class:"qfeed "+(ok?"ok":"no")},h("h4",null,ok?U.good:U.notQuite),h("p",null,q.why),repoLinks(q));
   function foot(q){const last=cur===QS.length-1;return h("div",{class:"qfoot"},h("a",{class:"link",href:labHref(q.lab)},U.explore+" "+labName(q.lab)),
     h("button",{type:"button",class:"btn primary",onclick:()=>{if(last)results();else{cur+=1;render();}}},last?U.results:U.nextQ));}
   function render(){paintBar();const q=QS[cur],body=h("div",{class:"qbody"}),f=VIS(q.vis),vis=stage(600,320,c=>{if(f)f(c,600,320,{q},L);},q.title),out=h("div");

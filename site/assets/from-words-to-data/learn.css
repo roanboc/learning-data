@@ -34,3 +34,4 @@
 .fw-steps li{padding:4px 0}.fw-steps li b{color:var(--smuted);font-weight:700}
 .fw-steps li.done b{color:var(--sfg)}.fw-steps li.on b{color:#ffd166}
 .fw-steps li span{display:block;margin-top:4px;color:var(--sfg);font-size:14px}
+.fw-repo{margin:10px 0 0;font-size:13px;display:flex;flex-wrap:wrap;gap:2px 6px;align-items:baseline}.fw-repo b{color:var(--sfg)}.fw-repo a{text-decoration:none}.fw-repo a:hover{text-decoration:underline}

@@ -1,9 +1,11 @@
 # The student domain's conceptual model: learners, the credentials they hold, and the credit they
 # hold towards an award. Owned by the registrar's office.
 #
-# Not parsed by dbt (.dbtignore). scripts/generate/definitions.py turns each definition into a doc block in
-# _student__definitions.md, next to this file, which the dbt YAML shows with doc() and Databricks
-# pushes to Unity Catalog. The question and the key sets are in models/_shared/.
+# Not parsed by dbt (.dbtignore). scripts/generate/definitions.py turns each definition into a
+# doc block in _student__definitions.md, next to this file, which the dbt YAML shows with doc() and
+# Databricks pushes to Unity Catalog. The diagram is drawn by hand in _student__conceptual.md.
+# The university's map, with this domain on it, is in models/_shared/; the questions are in each
+# mart's conceptual model.
 
 domain: student
 reference:

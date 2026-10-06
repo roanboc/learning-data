@@ -7,6 +7,7 @@ domain, like the key sets and the hashing macro.
 
 | Layer | Folder | Job | Access | Materialised |
 |---|---|---|---|---|
+| Sources | `sources/<source>/` | What comes in: tables, freshness, key set, and the source's doc blocks. No SQL. | | |
 | Staging | `models/staging/<source>/` | One model per source table: rename, cast, add keys qualified by their key set and their hashes. No joins, no rules. Keeps the source's own words (a "customer" is still a customer). | private | view |
 | Intermediate | `models/intermediate/<domain>/` | Steps, not products: match keys, stitch timelines, apply business rules. Translates the source's words into the model's. | private | view |
 | Core | `models/core/<domain>/` | One model per entity and relationship at a declared grain. The enterprise contract, versioned: a breaking change is a new version. | public | table (incremental where it pays) |
@@ -30,20 +31,40 @@ split by domain; the marts by consumer, which is a domain too.
 | `course` | `models/core/course/` | The awards the university offers | TCSI Course packet |
 | `planning` | `models/marts/planning/`, `seeds/expected/planning/` | Planning's marts, as at census | |
 | `wallet` | `models/marts/wallet/` | The wallet app's marts, as they are now | |
-| shared | `models/_shared/`, `seeds/reference/shared/` | What every domain uses: the question, the key sets, the version columns, the conceptual diagram | |
+| shared | `models/_shared/`, `seeds/reference/shared/` | The university's map (domains and key entities), the key sets, the version columns, the time spine | |
 
 The domains follow the reference model, TCSI (Tertiary Collection of Student Information): check
 it, adopt what fits, extend where the business needs more, and record each extension in the
 domain's conceptual model.
 
-Each domain's folder holds its data definitions, next to its models:
+Sources, models and exposures each have their own top-level folder, so what comes in, what's
+built and who uses it are never lost in each other's YAML:
+
+| Folder | Holds |
+|---|---|
+| `sources/<source>/` | `_<source>__sources.yml` and `_<source>__docs.md` |
+| `models/` | The models, by layer and domain |
+| `exposures/<consumer>/` | `_<consumer>__exposures.yml`: the dashboards and apps that use the marts |
+
+The conceptual model is written at two levels:
+
+- **The university's map**, `models/_shared/_shared__conceptual.yml`: its domains and their key
+  entities, no more than 50, each modelled or planned, with the TCSI element it follows. It's a
+  map, not the detail; it grows as questions arrive. `scripts/generate/definitions.py` draws it
+  into `_shared__conceptual.md`, and fails if it and the domains disagree.
+- **Each core domain and mart's own conceptual model**, in its folder. A core domain defines its
+  entities; a mart states its question, the core entities it uses, and any concept it adds
+  (Planning's learner near an award, the wallet's learner's wallet).
+
+Each core domain and mart's folder holds its data definitions, next to its models:
 
 | File | What it holds |
 |---|---|
-| `_core_<domain>__models.yml`, `_int_<domain>__models.yml` | The models: grain, columns, types, constraints, tests |
-| `_<domain>__conceptual.yml` | What each entity and relationship means, its key and its owner. Not read by dbt (`.dbtignore`) |
+| `_core_<domain>__models.yml`, `_int_<domain>__models.yml`, `_<consumer>__models.yml` | The models: grain, columns, types, constraints, tests |
+| `_<domain>__conceptual.yml` | The question (a mart), and what each entity and relationship means, its key and its owner. Not read by dbt (`.dbtignore`) |
+| `_<domain>__conceptual.md` | The conceptual diagram, drawn by hand |
 | `_<domain>__definitions.md` | Doc blocks generated from the conceptual model by `scripts/generate/definitions.py` |
-| `_<domain>__columns.md` | Doc blocks for the columns the domain owns |
+| `_<domain>__columns.md` | Doc blocks for the columns the domain owns, if any |
 | `_<domain>__physical.md` | The physical diagram, generated from the manifest by `scripts/generate/diagrams.py` |
 
 Seeds are split by purpose before domain, and the two purposes never share a folder:
@@ -73,7 +94,7 @@ then by domain:
 The governance test does the job of a dbt v2 check. When the project moves to dbt v2 (the Fusion
 engine), it moves to `checks/`, as the SQL in its header shows.
 
-A staging folder holds its source's doc block and the columns only that source has
+A source's folder holds its doc block and the columns only that source has
 (`_<source>__docs.md`). `docs/` holds how the work is done (process, conventions, decisions,
 gaps), not what the data means.
 

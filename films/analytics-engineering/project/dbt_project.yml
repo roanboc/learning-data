@@ -2,13 +2,16 @@ name: credentials
 version: "1.0.0"
 profile: credentials
 
-model-paths: ["models"]
+# Sources, models and exposures each have their own folder: what comes in, what's built, and who
+# uses it. dbt reads all three as model paths.
+model-paths: ["sources", "models", "exposures"]
 seed-paths: ["seeds"]
 test-paths: ["tests"]
 analysis-paths: ["analyses"]
 macro-paths: ["macros"]
-# Doc blocks live with the domain that owns them, in models/. docs/ holds the process, not definitions.
-docs-paths: ["models"]
+# Doc blocks live with what they describe: sources in sources/, the rest with the domain that owns
+# it in models/. docs/ holds the process, not definitions.
+docs-paths: ["sources", "models"]
 clean-targets: ["target", "logs"]
 
 # Stated once, used everywhere. Override one for a run with --vars.

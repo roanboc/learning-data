@@ -1,0 +1,15 @@
+exposures:
+
+  - name: wallet_app
+    label: Learner wallet app
+    type: application
+    maturity: medium
+    description: >
+      The app where learners see, and share, the credentials they hold now and their progress
+      towards their award.
+    owner:
+      name: Wallet app team
+      email: wallet@uni.example
+    depends_on:
+      - ref('mart_wallet__learners')
+      - ref('mart_wallet__credentials')

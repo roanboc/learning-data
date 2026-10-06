@@ -406,7 +406,7 @@ function ledFrame(ctx,x,y,w,h,c,img,o){o=o||{};const p=o.pad==null?Math.max(4,w*
 function plaque(ctx,x,y,w,rows,c){const h=20+rows.length*52;glass(ctx,x,y,w,h,14,c,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.9)"});
   rows.forEach((r,i)=>{const yy=y+16+i*52;let tx=x+18;if(r[2]){const lw=logo(ctx,r[2],tx,yy+8,28);tx+=Math.max(lw,26)+10;}T(ctx,r[0],tx,yy+16,{size:15,w:700,color:rgba(SOFT,0.95)});T(ctx,r[1],tx,yy+40,{size:21,w:700});});return h;}
 
-// In the weeds of data crafting · A model is not a transformation. One line per id; the film re-times itself to the voice.
+// In the weeds of data crafting · Declare it, then build it. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
 const NARR={
 "plan":{"name":"A plan is not a building","lead":1.4,"tail":1.0,"vo":[
@@ -440,14 +440,14 @@ const NARR={
  {"id":"step","gap":0.8,"text":"A query is one step of the building work. The model is the blueprint."},
  {"id":"apart","gap":0.8,"text":"This series is about keeping the two apart, and connecting them. It's for analytics engineers, and it goes into the weeds."}]},
 "models":{"name":"Three hundred models","lead":1.0,"tail":1.0,"vo":[
- {"id":"year","gap":0.8,"text":"A year from now, Jun's project could hold three hundred of these files, in four layers."},
+ {"id":"year","gap":0.8,"text":"A year from now, Jun's project could hold three hundred of these files, in four layers, each folder named for its domain."},
  {"id":"steps","gap":0.8,"text":"Most are steps: one tidies a source, one matches a learner's three keys, one stitches their history into a single timeline."},
  {"id":"core","gap":0.8,"text":"Only the core holds what the blueprint names: a learner, a credential, an award. The marts serve each consumer what it asked for."},
  {"id":"which","gap":0.8,"text":"So which file is the data model? None of them."}]},
 "lives":{"name":"Where the model lives","lead":1.0,"tail":1.0,"vo":[
  {"id":"beside","gap":0.8,"text":"The model lives beside the code."},
  {"id":"yaml","gap":0.8,"text":"In YAML: what one row holds, which key makes it unique, how it relates to the rest, and the contract each table promises.","say":"In yammel: what one row holds, which key makes it unique, how it relates to the rest, and the contract each table promises."},
- {"id":"md","gap":0.8,"text":"In Markdown, with a diagram anyone can read: what each thing means, and why it was decided that way."},
+ {"id":"md","gap":0.8,"text":"In a conceptual model, with a diagram anyone can read: what each thing means. And in a decision log beside it: why it was decided that way."},
  {"id":"check","gap":0.8,"text":"The queries make the tables. The YAML and the Markdown say what those tables must be, and the tests check that they are.","say":"The queries make the tables. The yammel and the Markdown say what those tables must be, and the tests check that they are."}]},
 "steps":{"name":"Ten steps","lead":1.0,"tail":1.0,"vo":[
  {"id":"ten","gap":0.8,"text":"Jun works in ten steps."},
@@ -466,7 +466,7 @@ const NARR={
  {"id":"declare","gap":0.8,"text":"Declare it. Then build it."}]}
 };
 
-const VODUR={"plan/copy": 9.142, "plan/exact": 6.227, "plan/brick": 1.494, "recap/too": 1.491, "recap/offices": 7.044, "recap/agreed": 3.673, "recap/four": 8.242, "recap/names": 2.146, "recap/v3": 3.763, "recap/series": 4.234, "shapes/many": 8.565, "shapes/same": 4.948, "shapes/middle": 9.547, "build/still": 2.171, "build/arrive": 6.846, "build/turn": 4.255, "build/jun": 4.208, "work/transform": 4.467, "work/tools": 8.523, "work/file": 3.461, "work/order": 11.106, "name/calls": 5.599, "name/step": 4.034, "name/apart": 6.779, "models/year": 5.129, "models/steps": 7.711, "models/core": 7.92, "models/which": 2.674, "lives/beside": 1.739, "lives/yaml": 7.242, "lives/md": 6.313, "lives/check": 6.884, "steps/ten": 1.521, "steps/s1": 5.38, "steps/s4": 5.748, "steps/s7": 8.473, "steps/agent": 4.513, "series/next": 2.24, "series/list1": 9.021, "series/list2": 9.257, "series/real": 8.241, "end/bp": 3.765, "end/data": 4.698, "end/declare": 1.402};
+const VODUR={"plan/copy": 9.142, "plan/exact": 6.227, "plan/brick": 1.494, "recap/too": 1.491, "recap/offices": 7.044, "recap/agreed": 3.673, "recap/four": 8.242, "recap/names": 2.146, "recap/v3": 3.763, "recap/series": 4.234, "shapes/many": 8.565, "shapes/same": 4.948, "shapes/middle": 9.547, "build/still": 2.171, "build/arrive": 6.846, "build/turn": 4.255, "build/jun": 4.208, "work/transform": 4.467, "work/tools": 8.523, "work/file": 3.461, "work/order": 11.106, "name/calls": 5.599, "name/step": 4.034, "name/apart": 6.779, "models/year": 7.128, "models/steps": 7.711, "models/core": 7.92, "models/which": 2.674, "lives/beside": 1.739, "lives/yaml": 7.242, "lives/md": 8.642, "lives/check": 6.884, "steps/ten": 1.521, "steps/s1": 5.38, "steps/s4": 5.748, "steps/s7": 8.473, "steps/agent": 4.513, "series/next": 2.24, "series/list1": 9.021, "series/list2": 9.257, "series/real": 8.241, "end/bp": 3.765, "end/data": 4.698, "end/declare": 1.402};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -478,8 +478,8 @@ const BREATH={
 "build":{"hold":{"still":0.6,"arrive":0.9,"turn":0.6,"jun":0.6}},
 "work":{"hold":{"tools":0.5,"file":0.8,"order":0.8}},
 "name":{"hold":{"calls":0.4,"step":0.6},"breathe":3.6},
-"models":{"hold":{"year":0.6,"steps":0.6,"core":0.6}},
-"lives":{"hold":{"beside":0.5,"yaml":1.0,"md":0.8,"check":0.6}},
+"models":{"hold":{"year":1.0,"steps":0.6,"core":0.6}},
+"lives":{"hold":{"beside":0.7,"yaml":1.4,"md":1.4,"check":0.8}},
 "steps":{"hold":{"s7":0.4,"agent":1.4}},
 "series":{"hold":{"list1":0.4,"list2":0.8,"real":0.8}},
 "end":{"hold":{"bp":0.5,"data":0.6},"breathe":4.2}
@@ -1765,7 +1765,7 @@ function drift(ctx,t,sc,o){o=o||{};const u=ease(clamp(t/Math.max(1,sc.dur),0,1))
 // dust in the light, in three depths: nearer motes are larger and move further as the camera drifts, which gives depth
 function motes(ctx,t,o){o=o||{};const col=o.col||[150,190,255],n=o.n||54;for(let i=0;i<n;i++){const d=0.4+0.6*hash(i,91),x=(hash(i,92)*W+t*(4+10*d)*(hash(i,93)>0.5?1:-1)+W*4)%W,y=(hash(i,94)*H+Math.sin(t*0.25+i)*14*d+H)%H;
   ctx.fillStyle=rgba(col,(0.035+0.08*d)*(o.a==null?1:o.a));ctx.beginPath();ctx.arc(x,y,0.8+2.4*d,0,TAU);ctx.fill();}}
-/* ===== A model is not a transformation: the film's own pictures (prefixed mt_) =====
+/* ===== Declare it, then build it: the film's own pictures (prefixed mt_) =====
    The 1870s blueprint: a small building's plan, printed in sunlight (the paper turns from pale yellow-green to blue, and the
    lines to white), copies for the trades, and an empty site; the ways to transform data; the shapes a model can take; the
    three stages of the series' middle way; and the eight films to come. */
@@ -1861,7 +1861,7 @@ Object.assign(LV,{
   mt_graph:(c,w,h,st,L)=>{c.save();mt_fit(c,w,h,1920,640);const n=mt_count(st.pick,"core");lineageGraph(c,100,70,1720,540,0,{core:n>0?1:0.35,dim:0.2});c.restore();},
   // where does it live: three cards, YAML, Markdown and SQL, each counting what has been placed in it
   mt_lives:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1920,640);
-    [[V.yaml,"yaml",TRUST,["meta: {grain: …}","data_tests: [unique]","contract: {enforced: true}"]],[V.md,"md",KIND,["# Credential","```mermaid","## Decisions"]],[V.sql,"sql",[150,176,214],["select …","from {{ ref(…) }}","join … using (…)"]]].forEach(([nm,k,col,ls],i)=>{
+    [[V.yaml,"yaml",TRUST,["meta: {grain: …}","data_tests: [unique]","contract: {enforced: true}"]],[V.md,"md",KIND,["definition: >","```mermaid","- id: DEC-STU-01"]],[V.sql,"sql",[150,176,214],["select …","from {{ ref(…) }}","join … using (…)"]]].forEach(([nm,k,col,ls],i)=>{
       codeFile(c,60+i*620,60,560,nm,ls,{edge:col,size:28,lh:52,h:360});tag(c,340+i*620,520,String(mt_count(st.pick,k))+" "+V.placed,col,{align:"center",size:30});});c.restore();},
   // ten steps: the loop, lit up to the current step, with the agent beside it
   mt_loop:(c,w,h,st,L)=>{const V=L.vis,k=st.step||0;c.save();mt_fit(c,w,h,1920,640);
@@ -1870,7 +1870,7 @@ Object.assign(LV,{
     kt_agent(c,110+k*190,150,26,0,{});tag(c,110+k*190,560,V.person,TRUST,{align:"center",size:26});c.restore();},
   // the scenarios
   mt_q_where:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1200,640);lineageGraph(c,60,190,620,420,0,{core:1,dim:0.5,heads:0.8});
-    codeFile(c,720,190,440,"_core_models.yml",["meta: {grain: …}","contract: {enforced: true}","data_tests: [unique]"],{edge:TRUST,size:24,lh:46,h:260});
+    codeFile(c,720,190,440,"_core_student__models.yml",["meta: {grain: …}","contract: {enforced: true}","data_tests: [unique]"],{edge:TRUST,size:24,lh:46,h:260});
     tag(c,600,70,V.ask,EDGE_,{align:"center",size:30});c.restore();},
   mt_q_keys:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1200,640);const K=["S-20417","u-88213","aisha.k@mail.example"];
     SRC3.forEach(([n,col],i)=>{glass(c,60,90+i*160,520,110,16,col,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.94)"});T(c,V.keys[i],90,135+i*160,{w:700,size:26});T(c,K[i],90,178+i*160,{f:"mono",w:500,size:26,color:rgba(col,1)});arrowTo(c,600,145+i*160,820,320,col,0.8,{head:16});});
@@ -1878,11 +1878,11 @@ Object.assign(LV,{
   mt_q_two:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1200,640);bpBox(c,420,60,360,110,V.core,TRUST,0,{size:30});
     [[V.planning,120,[120,215,155]],[V.wallet,720,[120,215,155]]].forEach(([n,x,col])=>{arrowTo(c,600,180,x+180,400,col,0.8,{head:16});glass(c,x,410,360,120,16,col,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.94)"});wrapT(c,n,x+180,460,320,{w:700,size:26,align:"center"});});c.restore();},
   mt_q_bare:(c,w,h,st,L)=>{c.save();mt_fit(c,w,h,1200,640);codeFile(c,80,80,500,"core_award.sql",["select …","from {{ ref(…) }}"],{edge:TRUST,size:28,lh:52,h:260});
-    c.save();c.setLineDash([12,10]);c.strokeStyle=rgba(EDGE_,0.9);c.lineWidth=3;rr(c,640,80,480,260,14);c.stroke();c.restore();T(c,"_core_models.yml",880,200,{f:"mono",w:500,size:28,align:"center",color:rgba(EDGE_,1)});T(c,"?",880,270,{w:800,size:60,align:"center",color:rgba(EDGE_,1)});c.restore();},
+    c.save();c.setLineDash([12,10]);c.strokeStyle=rgba(EDGE_,0.9);c.lineWidth=3;rr(c,640,80,480,260,14);c.stroke();c.restore();T(c,"_core_course__models.yml",880,200,{f:"mono",w:500,size:28,align:"center",color:rgba(EDGE_,1)});T(c,"?",880,270,{w:800,size:60,align:"center",color:rgba(EDGE_,1)});c.restore();},
   mt_q_twice:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1200,640);[[V.md,KIND],[V.yaml,TRUST],[V.sql,[150,176,214]]].forEach(([n,col],i)=>{codeFile(c,40+i*390,120,360,n,["credential: …"],{edge:col,size:26,lh:48,h:200});
       if(i)cross_(c,220+i*390,420,50,EDGE_,1);else tick_(c,220,420,50,GOOD,1);});c.restore();},
   mt_q_agent:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1200,640);kt_agent(c,200,300,50,0,{});
-    codeFile(c,360,120,440,"_core_models.yml",["data_tests:","  - unique:","      config:","        "+V.weakened],{edge:TRUST,size:26,lh:48,lit:{3:1},litCol:EDGE_});
+    codeFile(c,360,120,440,"_core_student__models.yml",["data_tests:","  - unique:","      config:","        "+V.weakened],{edge:TRUST,size:26,lh:48,lit:{3:1},litCol:EDGE_});
     glass(c,860,220,300,160,20,EDGE_,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,V.gate,1010,290,{w:700,size:26,align:"center"});T(c,V.held,1010,340,{f:"mono",w:500,size:24,align:"center",color:rgba(GOOD,1)});c.restore();},
   mt_q_tools:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1200,640);bpPaper(c,300,40,600,260,1,{});bpModel(c,600,210,0.4,{b:1});T(c,V.same,600,340,{w:700,size:28,align:"center",color:rgba(BPL,1)});
     V.tools.forEach((n,i)=>mt_tool(c,20+i*295,420,275,80,n,i,{on:i===3?1:0}));c.restore();},
@@ -1891,7 +1891,7 @@ Object.assign(LV,{
       wrapT(c,s,x+40,y+86,240,{w:700,size:26,align:"center"});});c.restore();}
 });
 
-/* ===== A model is not a transformation: scenes =====
+/* ===== Declare it, then build it: scenes =====
    Eleven chapters, as in ../script.md. A blueprint lays no bricks; data has blueprints too (the recap of From words to data);
    many shapes hold the same four answers, and the series takes a middle way; someone has to build it: Jun, with dbt, one tool
    among several; dbt calls each query a model, but the model is the blueprint; a project of three hundred files, where the
@@ -2005,8 +2005,8 @@ scene("work",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   withA(ctx,fin(t,w("tools","widely used"),0.5)*(1-up),()=>T(ctx,"Jun's team: dbt",1600,400,{w:700,size:22,align:"center",color:rgba([255,160,110],1)}));
   // one query, one file; then another that refers to it; dbt works out the order
   const f2=["matched_keys as (","    select * from {{ ref('int_learner_keys_matched') }}","),","learner_keys as (","    select * from {{ ref('int_learner_keys') }}"];
-  arrive(ctx,480,350,t,cF-0.3,()=>codeFile(ctx,100,240,760,"models/staging/stg_student_system__learners.sql",MT_F1,{p:clamp((t-cF)/2.4,0,1),edge:LAYER4[0][1]}),{dy:30});
-  arrive(ctx,480,640,t,cO-0.2,()=>codeFile(ctx,100,560,760,"models/intermediate/int_learners.sql",f2,{p:clamp((t-cO)/2.0,0,1),edge:LAYER4[1][1],lit:{1:fin(t,w("order","refer to each other"),0.5),4:fin(t,w("order","refer to each other"),0.5)}}),{dy:30});
+  arrive(ctx,480,350,t,cF-0.3,()=>codeFile(ctx,100,240,760,"models/staging/student_system/stg_student_system__learners.sql",MT_F1,{p:clamp((t-cF)/2.4,0,1),edge:LAYER4[0][1]}),{dy:30});
+  arrive(ctx,480,640,t,cO-0.2,()=>codeFile(ctx,100,560,760,"models/intermediate/student/int_learners.sql",f2,{p:clamp((t-cO)/2.0,0,1),edge:LAYER4[1][1],lit:{1:fin(t,w("order","refer to each other"),0.5),4:fin(t,w("order","refer to each other"),0.5)}}),{dy:30});
   withA(ctx,fin(t,w("order","refer to each other"),0.5),()=>{arrowTo(ctx,880,420,880,640,[255,160,110],1,{p:fin(t,w("order","refer to each other"),0.8),bend:-0.25,head:14});tag(ctx,960,540,"ref() sets the order",[255,160,110],{size:18});});
   // what dbt builds on the platform, and the tests and docs beside the code
   arrive(ctx,1500,460,t,w("order","builds each result"),()=>{glass(ctx,1180,250,640,420,20,[120,160,220],{glow:12,ea:0.6,fill:"rgba(7,12,24,0.9)"});T(ctx,"on the platform",1210,290,{w:800,size:22,color:rgba(SOFT,1)});
@@ -2014,7 +2014,7 @@ scene("work",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
       glass(ctx,1210,y,580,96,14,col,{glow:10,ea:0.7,fill:"rgba(8,14,28,0.96)"});for(let r=0;r<3;r++){ctx.fillStyle=rgba(col,0.18+0.06*r);rr(ctx,1230,y+44+r*14,300,8,3);ctx.fill();}
       T(ctx,n,1230,y+34,{f:"mono",w:500,size:18,color:rgba(col,1)});tag(ctx,1700,y+48,k,col,{align:"center",size:18});},{from:0.9});});},{dy:30});
   const tY=w("order","tests and documentation");
-  arrive(ctx,1500,790,t,tY,()=>codeFile(ctx,1180,700,640,"models/intermediate/_int_models.yml",["- name: int_learners","  columns:","    - name: learner_key","      description: '{{ doc(\"learner_key\") }}'","      data_tests: [unique, not_null]"],{p:clamp((t-tY)/1.6,0,1),edge:TRUST,size:17,lh:30}),{dy:30});
+  arrive(ctx,1500,790,t,tY,()=>codeFile(ctx,1180,700,640,"models/intermediate/student/_int_student__models.yml",["- name: int_learners","  columns:","    - name: learner_key","      description: '{{ doc(\"learner_key\") }}'","      data_tests: [unique, not_null]"],{p:clamp((t-tY)/1.6,0,1),edge:TRUST,size:17,lh:30}),{dy:30});
   kt_gtick(ctx,1770,870,14,fin(t,w("order","documentation")+0.8,0.3));
   ctx.restore();vign(ctx,S);});
 
@@ -2036,7 +2036,7 @@ scene("name",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   const ln=fin(t,w("apart","connecting"),0.8);if(ln>0){ctx.save();ctx.strokeStyle=rgba(TRUST,0.9);ctx.lineWidth=2;ctx.setLineDash([6,8]);ctx.beginPath();ctx.moveTo(860,420);ctx.bezierCurveTo(960,420,1040,470,lerp(860,1110,ln),lerp(420,470,ln));ctx.stroke();ctx.restore();}
   arrive(ctx,960,820,t,w("apart","keeping the two apart"),()=>T(ctx,"keep them apart · connect them",960,820,{w:700,size:26,align:"center",color:rgba(TRUST,1)}),{dy:16});
   arrive(ctx,960,900,t,w("apart","analytics engineers"),()=>tag(ctx,960,900,"for analytics engineers · into the weeds",WEED,{align:"center",size:20}),{dy:16});
-  ctx.restore();weedsTitle(ctx,S,t,B,"A model is not a transformation","the model is what you declare; a dbt model is how you make it",WEED);
+  ctx.restore();weedsTitle(ctx,S,t,B,"Declare it, then build it","the model is what you declare; a dbt model is how you make it",WEED);
   vign(ctx,S);});
 
 /* ---------- 7. Three hundred models ---------- */
@@ -2068,12 +2068,12 @@ scene("lives",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   // YAML: grain, key, relationships, contract
   const Y=["models:","  - name: core_credential","    description: '{{ doc(\"credential\") }}'","    config:","      access: public","      contract: {enforced: true}","      meta: {grain: one row per credential}","    columns:","      - name: credential_key","        data_tests: [unique, not_null]","      - name: learner_key","        data_tests:","          - relationships:","              arguments: {to: ref('core_learner'), field: learner_key}"];
   const lit={6:fin(t,w("yaml","one row"),0.4),8:fin(t,w("yaml","which key"),0.4),9:fin(t,w("yaml","unique"),0.4),12:fin(t,w("yaml","relates"),0.4),13:fin(t,w("yaml","relates"),0.4),5:fin(t,w("yaml","contract"),0.4),4:fin(t,w("yaml","contract")+0.2,0.4)};
-  arrive(ctx,1012,420,t,cY-0.3,()=>codeFile(ctx,648,190,728,"models/core/_core_models.yml",Y,{p:clamp((t-cY+0.2)/1.6,0,1),edge:TRUST,size:16,lh:29,lit,label:"YAML",labelCol:TRUST}),{dy:30});
+  arrive(ctx,1012,420,t,cY-0.3,()=>codeFile(ctx,648,190,728,"models/core/student/_core_student__models.yml",Y,{p:clamp((t-cY+0.2)/1.6,0,1),edge:TRUST,size:16,lh:29,lit,label:"YAML",labelCol:TRUST}),{dy:30});
   // Markdown: meaning, a diagram anyone can read, and why
-  arrive(ctx,1623,495,t,cM-0.2,()=>{const x=1392,y=190,wd=462;glass(ctx,x,y,wd,610,14,KIND,{glow:12,ea:0.65,fill:"rgba(6,10,20,0.95)"});T(ctx,"docs/credential.md",x+36,y+27,{f:"mono",w:500,size:16,color:rgba(KIND,1)});T(ctx,"Markdown",x+wd-18,y+27,{w:700,size:15,align:"right",color:rgba(KIND,1)});
+  arrive(ctx,1623,495,t,cM-0.2,()=>{const x=1392,y=190,wd=462;glass(ctx,x,y,wd,610,14,KIND,{glow:12,ea:0.65,fill:"rgba(6,10,20,0.95)"});T(ctx,"core/student/_student__conceptual.md",x+30,y+27,{f:"mono",w:500,size:14,color:rgba(KIND,1)});T(ctx,"Markdown",x+wd-16,y+27,{w:700,size:13,align:"right",color:rgba(KIND,1)});
     T(ctx,"# Credential",x+24,y+82,{f:"mono",w:500,size:20,color:rgba(INK,0.95)});wrapT(ctx,"A trusted, checkable claim about what someone knows, issued by the university: a degree, a microcredential or a badge.",x+24,y+120,wd-48,{w:600,size:18,color:rgba(SOFT,1)});
     withA(ctx,fin(t,w("md","diagram"),0.5),()=>{T(ctx,"```mermaid",x+24,y+212,{f:"mono",w:500,size:15,color:rgba(SOFT,0.7)});bpModel(ctx,x+wd/2,y+306,0.36,{b:0});});
-    withA(ctx,fin(t,w("md","why"),0.5),()=>{T(ctx,"## Decisions",x+24,y+400,{f:"mono",w:500,size:18,color:rgba(INK,0.95)});wrapT(ctx,"A microcredential is a kind of credential. Agreed 2 Oct 2026 · Mei, registrar's office",x+24,y+438,wd-48,{w:600,size:17,color:rgba(TRUST,0.95)});});},{dy:30});
+    withA(ctx,fin(t,w("md","why"),0.5),()=>{T(ctx,"_student__decisions.yml",x+24,y+400,{f:"mono",w:500,size:17,color:rgba(INK,0.95)});wrapT(ctx,"DEC-STU-01 · A microcredential is a kind of credential. Agreed 2 Oct 2026 · Mei, registrar's office",x+24,y+438,wd-48,{w:600,size:17,color:rgba(TRUST,0.95)});});},{dy:30});
   // the tests check that the tables are what the YAML and the Markdown say
   const tT=w("check","the tests");withA(ctx,fin(t,tT,0.5),()=>T(ctx,"tables  ←  the tests check  →  what the model says",960,880,{w:700,size:20,align:"center",color:rgba(SOFT,1)}));
   ["unique","not_null","relationships","contract"].forEach((s,i)=>{const x=760+i*260,y=940,ok=fin(t,tT+0.3+i*0.35,0.3);arrive(ctx,x,y,t,tT+i*0.12,()=>{glass(ctx,x-110,y-30,220,60,14,GOOD,{glow:8+10*ok,ea:0.6,fill:"rgba(7,12,24,0.95)"});T(ctx,s,x-10,y+7,{f:"mono",w:500,size:18,align:"center"});tick_(ctx,x+84,y,24,GOOD,ok);},{dy:20});});
@@ -2097,7 +2097,7 @@ scene("series",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   // the loop, carried from the last chapter, shrinks to make room for the films, and its labels give way to theirs
   const m=ease(fin(t,0,1.4)),cx=960,cy=lerp(560,540,m),rx=lerp(640,400,m),ry=lerp(360,250,m),words=["question","same one","Grain","Contracts","layers","owns","agent","written"],ids=["list1","list1","list1","list2","list2","list2","list2","list2"];
   stepLoop(ctx,cx,cy,rx,ry,t,{on:STEPS10.map(()=>lerp(1,0.35,m)),labA:1-fin(t,0,0.7)});
-  arrive(ctx,cx,cy,t,1.0,()=>{glass(ctx,cx-200,cy-54,400,108,20,WEED,{glow:18,ea:0.85,fill:"rgba(7,12,24,0.96)"});T(ctx,"1 · this film",cx,cy-12,{f:"mono",w:500,size:18,align:"center",color:rgba(WEED,1)});T(ctx,"A model is not a transformation",cx,cy+24,{w:800,size:22,align:"center"});});
+  arrive(ctx,cx,cy,t,1.0,()=>{glass(ctx,cx-200,cy-54,400,108,20,WEED,{glow:18,ea:0.85,fill:"rgba(7,12,24,0.96)"});T(ctx,"1 · this film",cx,cy-12,{f:"mono",w:500,size:18,align:"center",color:rgba(WEED,1)});T(ctx,"Declare it, then build it",cx,cy+24,{w:800,size:22,align:"center"});});
   arrive(ctx,960,76,t,0.4,()=>T(ctx,"The next eight films",960,76,{w:800,size:36,align:"center"}),{from:0.9});
   // each film arrives in its place, beside the steps it takes, and a line joins it to them
   MT_FILMS.forEach(([n,title,st],i)=>{const t0=w(ids[i],words[i])-0.2,a=fin(t,t0,0.5),an=-Math.PI/2+(st.reduce((s,x)=>s+x,0)/st.length)/10*TAU,px=cx+Math.cos(an)*(rx+300),py=cy+Math.sin(an)*(ry+(Math.sin(an)>0.9?70:Math.sin(an)<-0.9?80:120));
@@ -2126,7 +2126,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   ctx.fillStyle="rgba(0,0,0,0.5)";ctx.fillRect(W/2-1,0,2,H);
   arrive(ctx,480,415,t,w("bp","blueprint"),()=>tag(ctx,480,415,"the blueprint",BPL,{align:"center",size:20}),{from:0.7});arrive(ctx,480,960,t,w("bp","building work"),()=>tag(ctx,480,960,"the building work",CLAY,{align:"center",size:20}),{from:0.7});
   withA(ctx,rA,()=>{tag(ctx,1440,50,"the model",BPL,{align:"center",size:20});tag(ctx,1440,975,"the building work: transformations",[255,160,110],{align:"center",size:20});});
-  ctx.restore();weedsEnd(ctx,S,t,B,"A model is not a transformation",WEED,"Declare it. Then build it.");
+  ctx.restore();weedsEnd(ctx,S,t,B,"Declare it, then build it",WEED,"The model is the blueprint. dbt is how you build it.");
   fadeIn(ctx,S,t,0.01);vign(ctx,S);});
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */

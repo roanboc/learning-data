@@ -31,121 +31,125 @@ Beside it, five skills, one file each: draft the conceptual model, profile a sou
 And the process: for each of the ten steps, the agent's part, and who approves it.
 
 9
-00:01:14,001 --> 00:01:21,188
-Files in the project, not a long prompt. Versioned, reviewed, and read the same way by people and by agents.
+00:01:14,201 --> 00:01:24,446
+The work itself is tracked in the team's backlog tool, which the agent can read. In the project, only what's still open is written down, and it's deleted once it's done.
 
 10
-00:01:24,888 --> 00:01:29,860
-On Databricks, the agent works as its own service principal, never as a person.
+00:01:26,446 --> 00:01:33,633
+Files in the project, not a long prompt. Versioned, reviewed, and read the same way by people and by agents.
 
 11
-00:01:31,560 --> 00:01:38,389
-It reads the sources, and the core and the marts in production. It writes only to its own development schemas.
+00:01:37,333 --> 00:01:42,305
+On Databricks, the agent works as its own service principal, never as a person.
 
 12
-00:01:39,889 --> 00:01:46,287
-It works with counts and small samples. Names, emails and student IDs stay in the database.
+00:01:44,005 --> 00:01:50,834
+It reads the sources, and the core and the marts in production. It writes only to its own development schemas.
 
 13
-00:01:47,787 --> 00:01:50,915
-Whatever it gets wrong stays where nobody else reads it.
+00:01:52,334 --> 00:01:58,732
+It works with counts and small samples. Names, emails and student IDs stay in the database.
 
 14
-00:01:53,615 --> 00:01:58,791
-Every claim the agent makes about the data comes with the query that shows it, and the result.
+00:02:00,232 --> 00:02:03,360
+Whatever it gets wrong stays where nobody else reads it.
 
 15
-00:02:00,491 --> 00:02:08,159
-You've seen its claims already: accounts with no student ID, a shared family email, a withdrawal recorded a week late.
+00:02:06,060 --> 00:02:11,236
+Every claim the agent makes about the data comes with the query that shows it, and the result.
 
 16
-00:02:09,459 --> 00:02:14,563
-Now that habit is a rule, written in the agent's page, with an example to copy.
+00:02:12,936 --> 00:02:20,604
+You've seen its claims already: accounts with no student ID, a shared family email, a withdrawal recorded a week late.
 
 17
-00:02:16,063 --> 00:02:23,266
-Where rules can't decide, like that shared email, the agent doesn't guess. It asks Mei, and she records a decision.
+00:02:21,904 --> 00:02:27,008
+Now that habit is a rule, written in the agent's page, with an example to copy.
 
 18
-00:02:24,766 --> 00:02:27,992
-A claim that arrives without its query goes back, unread.
+00:02:28,508 --> 00:02:35,711
+Where rules can't decide, like that shared email, the agent doesn't guess. It asks Mei, and she records a decision.
 
 19
-00:02:31,492 --> 00:02:39,341
-Then the agent tidies the learner's timeline. To keep it simple, it dates every version the same way: by when it was recorded.
+00:02:37,211 --> 00:02:40,437
+A claim that arrives without its query goes back, unread.
 
 20
-00:02:40,841 --> 00:02:47,156
-One test fails: the census reconciliation. Business counts four learners. The report says three.
+00:02:43,937 --> 00:02:51,786
+Then the agent tidies the learner's timeline. To keep it simple, it dates every version the same way: by when it was recorded.
 
 21
-00:02:48,856 --> 00:02:54,491
-The withdrawal recorded seven days late now looks like a learner still studying on census day.
+00:02:53,286 --> 00:02:59,601
+One test fails: the census reconciliation. Business counts four learners. The report says three.
 
 22
-00:02:55,991 --> 00:02:59,559
-The agent's draft sets the test to warn. The build passes.
+00:03:01,301 --> 00:03:06,936
+The withdrawal recorded seven days late now looks like a learner still studying on census day.
 
 23
-00:03:01,259 --> 00:03:07,399
-Jun's review of the draft stops it. The rule is written down: never weaken a test to make it pass.
+00:03:08,436 --> 00:03:12,004
+The agent's draft sets the test to warn. The build passes.
 
 24
-00:03:09,499 --> 00:03:15,330
-A failing test is news. Report it, with its failing rows, and let a person decide what's wrong.
+00:03:13,704 --> 00:03:19,844
+Jun's review of the draft stops it. The rule is written down: never weaken a test to make it pass.
 
 25
-00:03:16,830 --> 00:03:21,800
-The fix puts back the date each change took effect. Business: three. Green.
+00:03:21,944 --> 00:03:27,775
+A failing test is news. Report it, with its failing rows, and let a person decide what's wrong.
 
 26
-00:03:25,100 --> 00:03:27,190
-Before anyone signs off, two checks.
+00:03:29,275 --> 00:03:34,245
+The fix puts back the date each change took effect. Business: three. Green.
 
 27
-00:03:28,490 --> 00:03:35,816
-Reconcile: every faculty against the census report. Two, three, five and two. The difference is zero, everywhere.
+00:03:37,545 --> 00:03:39,635
+Before anyone signs off, two checks.
 
 28
-00:03:37,316 --> 00:03:44,589
-Diff: build main, then the branch from scratch, and compare them key by key. Counts only; no personal data leaves.
+00:03:40,935 --> 00:03:48,261
+Reconcile: every faculty against the census report. Two, three, five and two. The difference is zero, everywhere.
 
 29
-00:03:46,089 --> 00:03:51,523
-From scratch, because the credential table is incremental, and would hide a change in logic.
+00:03:49,761 --> 00:03:57,034
+Diff: build main, then the branch from scratch, and compare them key by key. Counts only; no personal data leaves.
 
 30
-00:03:53,023 --> 00:04:01,371
-In Planning's mart, the shortcut changed one learner's row. In the core, fifty-five versions moved. With the fix, the diff is empty.
+00:03:58,534 --> 00:04:03,968
+From scratch, because the credential table is incremental, and would hide a change in logic.
 
 31
-00:04:04,871 --> 00:04:11,330
-The agent marks its pull request ready for review: what it changed, why, what it checked, and the evidence.
+00:04:05,468 --> 00:04:13,816
+In Planning's mart, the shortcut changed one learner's row. In the core, fifty-five versions moved. With the fix, the diff is empty.
 
 32
-00:04:13,030 --> 00:04:24,527
-CI, the checks that run on every pull request, builds the project on DuckDB. It checks that the generated docs are current, and that the metric still gives the census number.
+00:04:17,316 --> 00:04:23,775
+The agent marks its pull request ready for review: what it changed, why, what it checked, and the evidence.
 
 33
-00:04:26,027 --> 00:04:34,455
-It parses the project for Databricks too. On dbt Cloud, a CI job builds only what changed, and what depends on it.
+00:04:25,475 --> 00:04:36,972
+CI, the checks that run on every pull request, builds the project on DuckDB. It checks that the generated docs are current, and that the metric still gives the census number.
 
 34
-00:04:35,955 --> 00:04:41,245
-Then people. Jun approves the code. Noor signs off the model, and Planning its number.
+00:04:38,472 --> 00:04:46,900
+It parses the project for Databricks too. On dbt Cloud, a CI job builds only what changed, and what depends on it.
 
 35
-00:04:42,945 --> 00:04:48,588
-The agent never merges or approves its own work. The agent recommends; people approve.
+00:04:48,400 --> 00:04:53,690
+Then people. Jun approves the code. Noor signs off the model, and Planning its number.
 
 36
-00:04:52,288 --> 00:04:54,324
-It's merged, tested and signed off.
+00:04:55,390 --> 00:05:01,033
+The agent never merges or approves its own work. The agent recommends; people approve.
 
 37
-00:04:55,024 --> 00:05:01,128
-Then the agent reviews the metadata, in the project and beyond it, and finds something no test checks.
+00:05:04,733 --> 00:05:06,769
+It's merged, tested and signed off.
 
 38
-00:05:02,428 --> 00:05:07,155
+00:05:07,469 --> 00:05:13,573
+Then the agent reviews the metadata, in the project and beyond it, and finds something no test checks.
+
+39
+00:05:14,873 --> 00:05:19,600
 The definition of an award now lives in four places. And three of them are wrong.

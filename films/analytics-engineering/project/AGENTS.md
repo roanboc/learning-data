@@ -7,9 +7,10 @@ every step, a person approves. This page says what an agent may and may not do.
 ## Read first
 
 - [`docs/process.md`](docs/process.md): the ten steps, what each produces, your part in it, and who approves it.
-- [`docs/conventions.md`](docs/conventions.md): layers, names, SQL, keys, time, tests, metadata.
-- [`model/conceptual.yml`](model/conceptual.yml): what each entity means, its key and its owner.
-- [`docs/gaps.md`](docs/gaps.md) and [`docs/decisions.md`](docs/decisions.md): what's been decided, and why.
+- [`docs/conventions.md`](docs/conventions.md): layers, names, SQL, keys, time, tests, metadata, and each file's lifecycle (*File lifecycles*): never edit a generated file; delete a requirement once it's done; never delete a decision, mark it superseded.
+- The conceptual model: [the university's map](models/_shared/_shared__conceptual.md) of domains and key entities, and each core domain and mart's own, in its folder ([`student`](models/core/student/_student__conceptual.yml), [`course`](models/core/course/_course__conceptual.yml), [`planning`](models/marts/planning/_planning__conceptual.yml), [`wallet`](models/marts/wallet/_wallet__conceptual.yml)): what each entity means, its key and its owner, and each consumer's question.
+- [`docs/decisions.md`](docs/decisions.md): every decision and why, indexed from each scope's log (`_<scope>__decisions.yml`, next to what it's about). Known limitations are on the model or source they affect (`meta.limitations`).
+- [`requirements/`](requirements/): what's still open while something is built. Temporary: when an item is done, move what lasts to its home and delete it. It's not a backlog; the backlog tool is.
 - [`skills/`](skills/): how to do the five jobs agents do most here: draft the conceptual model, profile a source, draft a model, reconcile and diff, review metadata.
 
 ## What you may do
@@ -41,7 +42,7 @@ don't say who can read a table. Grants do: see `+grants` on the Planning marts i
 - **Write to production**, or to any schema that isn't a development one.
 - **Pull bulk personal data.** Work with aggregates and small samples (`dbt show --limit 20`). Never copy names, emails or student IDs out of the project, into a prompt, a log or a pull request, beyond the sample a claim needs.
 - **Weaken a test to make it pass.** Don't delete, disable or skip a test, lower its severity, raise its thresholds, or narrow it with a `where`. A failing test is news: report it, with its failing rows, and propose a fix to the data or the code.
-- **Change what the business owns.** The seeds (identity decisions, status map, credit recognition, census report) and `model/conceptual.yml` record people's decisions. You may draft a change; the owner in its `meta` approves it.
+- **Change what the business owns.** The seeds (identity decisions, status map, credit recognition, census report) and the conceptual models (`_<domain>__conceptual.yml`) record people's decisions. You may draft a change; the owner in its `meta` approves it.
 - **Break a public contract.** A change to a core model's columns or types is a new version, with a deprecation date for the old one.
 - **Merge your own pull request**, or approve one.
 
@@ -58,9 +59,11 @@ A claim without its query is a guess, and reviewers treat it as one.
 ## Before you open a pull request
 
 ```sh
-dbt build --profiles-dir .              # green; the one warning is by design (docs/gaps.md, gap 5)
-python scripts/definitions.py --check   # the doc blocks match model/conceptual.yml
-python scripts/diagrams.py --check      # the physical diagram matches the YAML
+dbt build --profiles-dir .              # green; the one warning is by design (LIM-SC-02 on the short_courses source)
+python scripts/generate/definitions.py --check   # the doc blocks match the conceptual models
+python scripts/generate/diagrams.py --check      # the physical diagrams match the YAML
+python scripts/generate/decisions.py --check     # the decision logs are valid and indexed
+python scripts/check/requirements.py             # only open requirements, each saying when it's done
 ```
 
 Say in the pull request what you changed, why, what you checked, and the evidence.

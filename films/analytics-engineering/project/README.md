@@ -25,8 +25,8 @@ dbt build --profiles-dir .
 ```
 
 `dbt build` loads the reference data, builds every model and runs every test. It ends green, with
-one warning by design: a short-course enrolment with no email (see [the gap register](docs/gaps.md),
-gap 5). The database is `target/credentials.duckdb`.
+one warning by design: a short-course enrolment with no email (see LIM-SC-02 on the
+`short_courses` source, and DEC-SC-01 in [the decisions](docs/decisions.md)). The database is `target/credentials.duckdb`.
 
 Then, if you like:
 
@@ -35,8 +35,10 @@ Then, if you like:
 | `dbt docs generate --profiles-dir . && dbt docs serve --profiles-dir .` | The docs site, with lineage |
 | `dbt show --select profile_null_keys --profiles-dir .` | One of the evidence queries in `analyses/` |
 | `dbt show --select reconcile_census_report --profiles-dir .` | Planning's number beside the census report's |
-| `python scripts/diagrams.py` | Regenerates `docs/physical.md` from `target/manifest.json` |
-| `python scripts/definitions.py` | Regenerates `docs/definitions.md` and `seeds/key_sets.csv` from `model/conceptual.yml` |
+| `python scripts/generate/diagrams.py` | Regenerates each domain's physical diagram (`_<domain>__physical.md`) from `target/manifest.json` |
+| `python scripts/generate/decisions.py` | Checks every decision log and regenerates their index, `docs/decisions.md` |
+| `python scripts/check/requirements.py` | Checks the open requirements in `requirements/`, and lists them |
+| `python scripts/generate/definitions.py` | Regenerates each domain's definitions (`_<domain>__definitions.md`) and `seeds/reference/shared/key_sets.csv` from the conceptual models |
 | `pip install dbt-metricflow==0.15.0`, then `DBT_PROFILES_DIR=. mf query --metrics learners_near_graduate_certificate --group-by learner_award__faculty_name` | Planning's answer, from the semantic layer's metric |
 | `dbt clean --profiles-dir .` | Deletes `target/`, the database with it, for a clean start |
 
@@ -59,7 +61,7 @@ ingestion lands them in three schemas named after the systems: `student_system`,
 
 1. Upload `data/` to a Unity Catalog volume, with the Databricks CLI:
    `databricks fs cp -r data dbfs:/Volumes/<catalog>/<schema>/<volume>/data`
-2. Run `scripts/load_databricks.sql` in the SQL editor, with two parameters: `catalog`, the
+2. Run `scripts/setup/load_databricks.sql` in the SQL editor, with two parameters: `catalog`, the
    catalog the three schemas go in, and `data`, the folder you uploaded
    (`/Volumes/<catalog>/<schema>/<volume>/data`). It creates the schemas and the seven tables.
 
@@ -108,34 +110,83 @@ Databricks-only mistake in the SQL's Jinja, the configs or the profile before it
 
 ## Layout
 
+Every file has one of four lifecycles (*File lifecycles* in `docs/conventions.md`). Untagged
+files are **permanent**: written by hand, changed in a reviewed pull request. The others are tagged:
+
+- `[generated]`: written by a script in `scripts/generate/`. Never edit it; change its source and
+  rerun the script. CI fails if it's out of date.
+- `[temporary]`: lives only while the work it's about is under way, then is deleted. CI fails on
+  anything done that's still there.
+- `[build output]`: written by dbt, never committed.
+
 ```
 project/
 ├── dbt_project.yml           vars (census date, the 15-credit-point threshold, the limit of four
 │                             microcredentials), layers, access, contracts, groups, grants
 ├── profiles.yml              targets: duckdb (default), databricks
 ├── data/<system>/<table>.csv the three sources, every version kept (DuckDB only)
-├── seeds/                    reference data the business owns: status map, identity decisions,
-│                             credit recognition, key sets, the census report
-├── models/
-│   ├── staging/<system>/     one view per source table; sources YAML
-│   ├── intermediate/         identity candidates and matches, timelines, the credit rule; unit tests
-│   ├── core/                 the enterprise contract: public, versioned, enforced
-│   ├── marts/planning/       as at census; the census dashboard exposure
-│   ├── marts/wallet/         as it is now; the wallet app exposure
-│   ├── semantic/             semantic model, metrics, time spine
-│   └── _groups.yml           who owns which models
-├── macros/                   keys and hashes, point in time, the near-award rule, DuckDB constraints
-├── tests/                    custom generic tests, reconciliation, identity
-├── analyses/                 the evidence: profiling, fan-out, late changes, reconcile, as-was and as-is
-├── model/conceptual.yml      the conceptual model in YAML (not read by dbt)
-├── docs/                     conceptual model, the process, decisions, gap register, conventions,
-│                             doc blocks, and two generated pages: definitions and the physical diagram
-├── scripts/                  diagrams.py and definitions.py, each with --check; diff_against_main.py;
-│                             load_databricks.sql
+├── .dbtignore                keeps the conceptual models and decision logs out of dbt's parse
+├── seeds/
+│   ├── reference/<domain>/   data the business owns, that models join to: student (status map,
+│   │                         identity decisions, credit recognition), shared (key sets
+│   │                         [generated] from each source's meta.key_set)
+│   └── expected/<domain>/    numbers published elsewhere, that tests reconcile against: planning
+│                             (the census report). No model reads them
+├── sources/<system>/         what comes in: each source's YAML (tables, freshness, its key set
+│                             with each system key and its case, known limitations), its doc
+│                             blocks, and its decision log (_<system>__decisions.yml)
+├── models/                   what's built, organised by domain, following TCSI; each domain's
+│   │                         folder holds its models and its data definitions
+│   ├── overview.md           the docs site's front page
+│   ├── _groups.yml           who owns which models
+│   ├── _shared/              the university's map: its domains and key entities, at most 50
+│   │                         (_shared__conceptual.yml; _shared__conceptual.md [generated]); the
+│   │                         project's decision log; the version columns' doc blocks; the time spine
+│   ├── staging/<system>/     one view per source table
+│   ├── intermediate/student/ identity candidates and matches, timelines, the credit rule; unit tests
+│   ├── core/student/         learner, credential, credit towards an award ┐ the enterprise contract:
+│   ├── core/course/          award                                        ┘ public, versioned, enforced;
+│   │                         core_credential v1 [temporary], removed after 31 March 2027
+│   ├── marts/planning/       as at census; the semantic model and metric
+│   └── marts/wallet/         as it is now
+│                             Each core domain and mart folder also holds:
+│                               _<domain>__conceptual.yml and .md   its conceptual model
+│                               _<domain>__decisions.yml            its decision log
+│                               _<domain>__columns.md               its column doc blocks
+│                               _<domain>__definitions.md           [generated] doc blocks
+│                               _<domain>__physical.md              [generated] physical diagram
+├── exposures/<consumer>/     who uses it: the census dashboard, the wallet app
+├── macros/
+│   ├── shared/               conventions every domain uses: keys and hashes, point in time
+│   ├── planning/             Planning's near-award rule and count, written once
+│   └── adapters/             engine workarounds: DuckDB constraints
+├── tests/
+│   ├── generic/              custom generic tests
+│   ├── rules/                business rules that must hold: identity decisions
+│   ├── reconciliation/       the mart against an expected seed: the census report
+│   └── governance/           rules about the project itself: no model reads an expected seed
+├── analyses/
+│   ├── profiling/            evidence about the sources: keys, nulls, orphans, emails, late changes
+│   ├── design/               evidence for a modelling choice: fan-out without point in time
+│   └── validation/           checking the result: reconcile with the census report, as-was and as-is
+├── requirements/             [temporary] what's still open while something is built (questions,
+│                             requirements, gaps), by source, domain and consumer. Each item:
+│                             open → in_progress → done → what lasts moves to its home → deleted.
+│                             See requirements/README.md
+├── docs/                     how the work is done: the process and the conventions; decisions.md
+│                             [generated], the index of every decision log
+├── scripts/
+│   ├── generate/             definitions.py, diagrams.py and decisions.py: write the [generated]
+│   │                         files; --check in CI
+│   ├── check/                check_metric.py: the metric against the census report; requirements.py:
+│   │                         only open requirements, with what shows they're done; both in CI
+│   ├── tools/                diff_against_main.py: a branch's table against main's, for review
+│   └── setup/                load_databricks.sql: loads the sample sources into Databricks
 ├── examples/planning/        Planning's own project, refing the core across projects (dbt Cloud only)
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
-└── skills/                   five skills for an agent: draft the conceptual model, profile, draft
-                              a model, reconcile and diff, review metadata
+├── skills/                   five skills for an agent: draft the conceptual model, profile, draft
+│                             a model, reconcile and diff, review metadata
+└── target/, logs/            [build output] dbt's artifacts and the DuckDB database; dbt clean
 ```
 
 ## Which film uses which part
@@ -143,14 +194,14 @@ project/
 | Film | What it shows from here |
 |---|---|
 | *A model is not a transformation* | The names of the sources and of the staging and intermediate models; `learner_key` tested unique and not null |
-| *Start from a question* | The question and the slice in `model/conceptual.yml`; the hand-drawn diagram in `docs/conceptual-model.md`; the decision that a microcredential is a kind of credential; `skills/draft-the-conceptual-model/` for the agent's draft |
-| *What makes it the same one* | The profiling queries in `analyses/`; key sets and `macros/keys.sql` (its header shows the compiled SQL); the staging models; `int_learner_keys`, `int_learner_key_candidates` (one CTE per rule) and `int_learner_keys_matched`; the identity decisions and status map seeds; the unit tests on matching |
-| *One row of what, and when* | `meta.grain`, tested as keys; `analyses/fan_out_without_point_in_time.sql`; the version columns; `int_learner_timeline`; the Planning mart (as it was) beside the wallet marts (as it is); `analyses/profile_late_changes.sql` and `diff_as_was_as_is.sql` |
-| *Promises and proofs* | `docs/gaps.md`; the core YAML (enterprise contract) and the marts YAML (consumer contracts, exposures); the tests; unit tests on the credit rule; warn and error levels; source freshness |
-| *Built in layers* | The four layers and `docs/conventions.md`; import and logical CTEs; views, tables and the incremental `core_credential`; liquid clustering; the semantic layer, and `macros/near_award.sql`, where the rule and the count are written once |
-| *Who owns what* | `models/_groups.yml`; access and contracts in `dbt_project.yml` (set per folder; a model's YAML holds its grain, columns and tests); what each access level allows, in `docs/conventions.md`; `meta.owner` and `meta.domain`; the exposures; the key sets, hashing macro and conventions that every domain shares; for *Across projects*, `examples/planning/` (dbt Cloud only, not run here) |
-| *An agent on the team* | `AGENTS.md`, with the agent's access; `docs/process.md`, the ten steps; `skills/`; the evidence in `analyses/`; the reconciliation test and `scripts/diff_against_main.py`; the CI workflow, and the `state:modified+` command above for CI on changed models |
-| *Written once* | Doc blocks in `docs/`; `model/conceptual.yml` generated into `docs/definitions.md` and `seeds/key_sets.csv`; `docs/physical.md` generated from the manifest; `persist_docs`; `core_credential` versions 1 and 2, with a deprecation date, and the wallet's `ref('core_credential', v=2)` |
+| *Start from a question* | The question in Planning's `models/marts/planning/_planning__conceptual.yml`; the slice in each core domain's `_<domain>__conceptual.yml`, with its hand-drawn diagram; the university's map in `models/_shared/`; the decision that a microcredential is a kind of credential; `skills/draft-the-conceptual-model/` for the agent's draft |
+| *What makes it the same one* | The profiling queries in `analyses/`; key sets and `macros/shared/keys.sql` (its header shows the compiled SQL); the staging models; `int_learner_keys`, `int_learner_key_candidates` (one CTE per rule) and `int_learner_keys_matched`; the identity decisions and status map seeds; the unit tests on matching |
+| *One row of what, and when* | `meta.grain`, tested as keys; `analyses/design/fan_out_without_point_in_time.sql`; the version columns; `int_learner_timeline`; the Planning mart (as it was) beside the wallet marts (as it is); `analyses/profiling/profile_late_changes.sql` and `diff_as_was_as_is.sql` |
+| *Promises and proofs* | The decisions on each gap (`docs/decisions.md`), the known limitations on each model and source (`meta.limitations`), and what's still open in `requirements/`; the core YAML (enterprise contract) and the marts YAML (consumer contracts) and `exposures/`; the tests; unit tests on the credit rule; warn and error levels; source freshness |
+| *Built in layers* | The four layers and `docs/conventions.md`; import and logical CTEs; views, tables and the incremental `core_credential`; liquid clustering; the semantic layer, and `macros/planning/near_award.sql`, where the rule and the count are written once |
+| *Who owns what* | `models/_groups.yml`; access and contracts in `dbt_project.yml` (set per folder; a model's YAML holds its grain, columns and tests); what each access level allows, in `docs/conventions.md`; `meta.owner` and `meta.domain`; the domain folders, following TCSI (`docs/conventions.md`, *Domains*); the exposures; the key sets, hashing macro and conventions that every domain shares; for *Across projects*, `examples/planning/` (dbt Cloud only, not run here) |
+| *An agent on the team* | `AGENTS.md`, with the agent's access; `docs/process.md`, the ten steps; `skills/`; the evidence in `analyses/`; the reconciliation test and `scripts/tools/diff_against_main.py`; the CI workflow, and the `state:modified+` command above for CI on changed models |
+| *Written once* | Doc blocks in each domain's folder; each domain's conceptual model generated into its `_<domain>__definitions.md`, the key sets, written once on each source, into `seeds/reference/shared/key_sets.csv`; each domain's `_<domain>__physical.md` generated from the manifest; `persist_docs`; `core_credential` versions 1 and 2, with a deprecation date, and the wallet's `ref('core_credential', v=2)` |
 
 ## What differs between engines
 
@@ -165,11 +216,11 @@ project/
 | Schemas | `dev_staging`, `dev_intermediate`, `dev_core`, `dev_marts`, `dev_reference` | The same suffixes on your target schema |
 | Core tables | One per version: `core_learner_v1`, `core_credential_v2`, ... | The same |
 | Grants | None | On the Planning marts, when the `planning_readers` var names groups |
-| Semantic layer | Parsed, validated, and queried with MetricFlow in CI (`scripts/check_metric.py`) | Queried through dbt Cloud's Semantic Layer, on plans that include it |
+| Semantic layer | Parsed, validated, and queried with MetricFlow in CI (`scripts/check/check_metric.py`) | Queried through dbt Cloud's Semantic Layer, on plans that include it |
 
 ## Engine and dbt workarounds
 
-- **Key constraints on DuckDB.** DuckDB enforces foreign keys, and won't rename or drop a table that another table's foreign key points to, which is how dbt replaces a table on the next build. `macros/duckdb_constraints.sql` keeps `not_null` and `check` on DuckDB and leaves out the keys; tests check keys on both engines.
+- **Key constraints on DuckDB.** DuckDB enforces foreign keys, and won't rename or drop a table that another table's foreign key points to, which is how dbt replaces a table on the next build. `macros/adapters/duckdb_constraints.sql` keeps `not_null` and `check` on DuckDB and leaves out the keys; tests check keys on both engines.
 - **`core_credential` version 1 is a table, not a view.** A view can't hold the contract's constraints, and dbt warns. It's built from version 2, so its logic still lives once.
 - **Seeds, and the identity test, are in the `credential_model` group.** A test that refers to a private model must be in that model's group. The singular test sets it in its own `config()`: set in YAML, it was lost on partial parses.
 - **The sources' catalog variable is `DBT_SOURCES_CATALOG`.** dbt Cloud accepts only custom environment variables that start with `DBT_`.
@@ -191,8 +242,8 @@ who share an email.
 
 As at census (31 March 2026), 12 learners are within 15 credit points of a graduate certificate:
 Engineering and IT 5, Business 3, Health 2, Arts and Education 2. The census report says the
-same, and `tests/reconcile_planning_with_census_report.sql` checks it on every build. As things
-are now, the answer is 9 (`analyses/diff_as_was_as_is.sql`).
+same, and `tests/reconciliation/reconcile_planning_with_census_report.sql` checks it on every build. As things
+are now, the answer is 9 (`analyses/validation/diff_as_was_as_is.sql`).
 
 ## A new version, and who it touches
 

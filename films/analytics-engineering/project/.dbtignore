@@ -1,0 +1,5 @@
+# Files that sit next to the models and sources they describe, but aren't dbt YAML:
+# scripts/generate/definitions.py reads the conceptual models, and scripts/generate/decisions.py
+# the decision logs.
+models/**/_*__conceptual.yml
+**/_*__decisions.yml

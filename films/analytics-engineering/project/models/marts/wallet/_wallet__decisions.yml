@@ -1,0 +1,19 @@
+# Decisions about the wallet consumer: what was decided, why, and who decided.
+# Permanent: a decision is never deleted; a replaced one is marked superseded and relates to
+# what replaced it. The schema is in requirements/README.md, and docs/decisions.md indexes
+# every log. Not parsed by dbt (.dbtignore).
+
+scope: {kind: consumer, name: wallet, code: WAL}
+
+decisions:
+
+  - id: DEC-WAL-01
+    step: consumer_output
+    title: The wallet's marts are as they are now
+    text: The wallet's marts are as they are now.
+    why: The wallet shows the learner today. It builds on the same core as Planning.
+    decided_by: Planning, the wallet app team and Noor
+    decided_on: 2026-10-08
+    status: agreed
+    implemented_in: [mart_wallet__learners, mart_wallet__credentials]
+    relates_to: [DEC-PLN-02]

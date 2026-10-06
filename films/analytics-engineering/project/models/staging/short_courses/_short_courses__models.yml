@@ -24,7 +24,7 @@ models:
         config:
           meta: {personal_data: direct}
       - name: status_code
-        description: The platform's customer status. Mapped to the canonical set in seeds/status_map.csv.
+        description: The platform's customer status. Mapped to the canonical set in seeds/reference/student/status_map.csv.
         data_tests:
           - accepted_values:
               arguments:
@@ -48,7 +48,7 @@ models:
         description: >
           The customer who enrolled, by email. An enrolment with no email can't be matched to a
           learner. The learning team agreed: warn when any current enrolment has none, stop the
-          build when more than five do (see docs/gaps.md).
+          build when more than five do (see DEC-SC-01 and LIM-SC-02).
         data_tests:
           - not_null:
               config:

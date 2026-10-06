@@ -2,12 +2,16 @@ name: credentials
 version: "1.0.0"
 profile: credentials
 
-model-paths: ["models"]
+# Sources, models and exposures each have their own folder: what comes in, what's built, and who
+# uses it. dbt reads all three as model paths.
+model-paths: ["sources", "models", "exposures"]
 seed-paths: ["seeds"]
 test-paths: ["tests"]
 analysis-paths: ["analyses"]
 macro-paths: ["macros"]
-docs-paths: ["docs"]
+# Doc blocks live with what they describe: sources in sources/, the rest with the domain that owns
+# it in models/. docs/ holds the process, not definitions.
+docs-paths: ["sources", "models"]
 clean-targets: ["target", "logs"]
 
 # Stated once, used everywhere. Override one for a run with --vars.
@@ -37,6 +41,8 @@ models:
       +group: credential_model
       +access: private
 
+    # Core and intermediate are split by domain (core/student/, core/course/), following the
+    # reference model, TCSI. Staging is split by source system; marts by consumer.
     core:
       +materialized: table
       +schema: core
@@ -59,13 +65,26 @@ models:
       wallet:
         +group: wallet
 
-    semantic:
+    # What every domain uses. Today: the time spine every metric needs. Planning's semantic model
+    # and metrics live with its marts.
+    _shared:
       +materialized: table
-      +schema: marts
-      +group: planning
+      +schema: shared
+      +group: credential_model
       +access: protected
 
+# Seeds are split by purpose first, then by domain. Never mix the two purposes in one folder.
 seeds:
   credentials:
-    +schema: reference
-    +group: credential_model
+    # Reference data the business owns: mappings, decisions, key sets. Models join to it.
+    reference:
+      +schema: reference
+      +group: credential_model
+      +tags: ["reference"]
+    # Expected values: numbers published outside this project, that tests and reconciliations
+    # compare against. No model may ref() them.
+    expected:
+      +schema: expected
+      +tags: ["expected"]
+      planning:
+        +group: planning

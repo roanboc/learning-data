@@ -28,7 +28,7 @@ three kinds, and the project's folders follow them:
 |---|---|---|---|
 | Application domain | A system, and the team that runs it | `registrar` (the student system), `learning` (the learning platform and the short-course platform) | `sources/<system>/`, `models/staging/<system>/` |
 | Data domain | What the facts mean, following the reference model | `student`, `course` | `models/intermediate/<domain>/`, `models/core/<domain>/` |
-| Business domain | Who decides with the data | `planning`, `wallet` | `models/marts/<consumer>/`, `exposures/<consumer>/` |
+| Business domain | Who decides with the data | `planning`, `wallet`, `finance` | `models/marts/<consumer>/`, `exposures/<consumer>/` |
 
 Staging is split by source system, because one system can feed several data domains.
 Intermediate and core are split by data domain; the marts and exposures by consumer. The data
@@ -40,6 +40,7 @@ and business domains:
 | `course` | `models/core/course/` | The awards the university offers | TCSI Course packet |
 | `planning` | `models/marts/planning/`, `seeds/expected/planning/` | Planning's marts, as at census | |
 | `wallet` | `models/marts/wallet/` | The wallet app's marts, as they are now | |
+| `finance` | `models/marts/finance/`, `seeds/reference/finance/`, `seeds/expected/finance/` | Finance's marts, as at census, and the tuition rates it publishes | |
 | shared | `models/_shared/`, `seeds/reference/shared/` | The university's map (domains and key entities), the key sets seed (generated from the sources), the version columns, the time spine | |
 
 The domains follow the reference model, TCSI (Tertiary Collection of Student Information): check
@@ -141,15 +142,18 @@ that date: `core_credential` v1 after 31 March 2027 (DEC-STU-07). The exposures 
 Today one project holds every domain (DEC-PRJ-03). Every file a domain owns is under a path named
 for it, so when a team owns a domain, its project is those paths:
 
-| What | A core domain's project (`student`) | A consumer's project (`planning`) |
-|---|---|---|
-| Models | `models/intermediate/student/`, `models/core/student/` | `models/marts/planning/` |
-| Seeds | `seeds/reference/student/` | `seeds/expected/planning/` |
-| Macros | | `macros/planning/` |
-| Exposures | | `exposures/planning/` |
-| Decisions | `models/core/student/_student__decisions.yml` | `models/marts/planning/_planning__decisions.yml` |
-| Open requirements | `requirements/models/student/`, if any | `requirements/exposures/planning/`, if any |
-| Sources | The sources it reads, with their decisions and open requirements (`sources/<system>/`, `requirements/sources/<system>/`) | None: it reads the core |
+| What | A core domain's project (`student`) | A consumer's project (`planning`) | A consumer added later (`finance`) |
+|---|---|---|---|
+| Models | `models/intermediate/student/`, `models/core/student/` | `models/marts/planning/` | `models/marts/finance/` |
+| Seeds | `seeds/reference/student/` | `seeds/expected/planning/` | `seeds/reference/finance/`, `seeds/expected/finance/` |
+| Macros | | `macros/planning/` | |
+| Exposures | | `exposures/planning/` | `exposures/finance/` |
+| Decisions | `models/core/student/_student__decisions.yml` | `models/marts/planning/_planning__decisions.yml` | `models/marts/finance/_finance__decisions.yml` |
+| Open requirements | `requirements/models/student/`, if any | `requirements/exposures/planning/`, if any | `requirements/exposures/finance/`, if any (none since it shipped) |
+| Sources | The sources it reads, with their decisions and open requirements (`sources/<system>/`, `requirements/sources/<system>/`) | None: it reads the core | None: it reads the core, pinned to the versions it was built on |
+
+A consumer added later starts the same way: Finance's files were under paths named for it from its
+first commit, so it can move out whole, and nothing else needs untangling.
 
 What every domain shares (`models/_shared/`, with the project's decisions; `macros/shared/`;
 `seeds/reference/shared/`; these conventions) becomes a package each project
@@ -223,7 +227,7 @@ to itself, and they meet only on the public core. `examples/planning/` sketches 
 
 - `meta.grain`: on every core and mart model, the grain in one sentence ("One row per credential"). Each domain's physical diagram (`_<domain>__physical.md`) reads it; a test proves it.
 - `meta.owner`: who owns the meaning (models) or the data (sources, seeds).
-- `meta.domain`: the domain that owns the model, seed or source: `registrar` or `learning` (application domains: the teams whose systems are the sources), `student` or `course` (data domains), `planning` or `wallet` (business domains), or `shared`.
+- `meta.domain`: the domain that owns the model, seed or source: `registrar` or `learning` (application domains: the teams whose systems are the sources), `student` or `course` (data domains), `planning`, `wallet` or `finance` (business domains), or `shared`.
 - `meta.glossary_term`: the term in the domain's conceptual model a model or key holds.
 - `meta.limitations` on a model or a source table: what anyone using it needs to know and can't change, as `[{id: LIM-<SCOPE>-<nn>, text}]`, with `was:` naming the gap it came from, if any. An accepted gap ends here, with the decision that accepted it in the scope's log.
 - `meta.personal_data` on columns: `direct` (identifies a person: name, email, student ID, or a key that contains one) or `pseudonymous` (a hash of one). A column with neither holds no personal data.

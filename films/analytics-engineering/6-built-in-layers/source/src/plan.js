@@ -484,6 +484,6 @@ Object.assign(LV,{
   bl_q_contract:(c,w,h,st,L)=>{const V=L.vis;c.save();bl_lfit(c,w,h,520,277);const[e2,ez]=bl_lsz(c,V.contractErr,17,16,480,700);tag(c,260,20,e2,BAD,{align:"center",size:ez});
     [[V.promised,V.int_,GOOD,8],[V.got,V.hugeint,BAD,266]].forEach(([lb,v,col,x])=>{glass(c,x,42,246,56,12,col,{glow:8,ea:0.8,fill:"rgba(7,12,24,0.95)"});
       const[l2,lz]=bl_lsz(c,lb,17,16,100,700);T(c,l2,x+16,76,{w:700,size:lz,color:rgba(SOFT,1)});T(c,v,x+230,77,{f:"mono",w:500,size:20,align:"right",color:rgba(col,1)});});
-    bl_code(c,8,106,504,"models/core/_core__models.yml",["      - name: credit_points_earned","        …","        data_type: int"],{size:16,lh:22,lit:{2:1},edge:TRUST});
+    bl_code(c,8,106,504,"…/student/_core_student__models.yml",["      - name: credit_points_earned","        …","        data_type: int"],{size:16,lh:22,lit:{2:1},edge:TRUST});
     c.restore();}
 });

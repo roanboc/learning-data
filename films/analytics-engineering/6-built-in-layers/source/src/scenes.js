@@ -108,7 +108,7 @@ scene("intermediate",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,i
       T(ctx,f,1014,y-4,{f:"mono",w:500,size:18,color:rgba(BL_VIO,1)});T(ctx,lab,1014,y+26,{w:700,size:20});}),{dy:20});});
   arrive(ctx,1200,756,t,cW,()=>withA(ctx,rOut,()=>tag(ctx,1000,740,"customer → learner",BL_VIO,{size:20})),{dy:12});
   const rp=clamp((t-w("recipe","top to bottom"))/2.8,0,1);
-  arrive(ctx,1425,380,t,cR-0.1,()=>bl_code(ctx,990,140,870,"CTE names from models/intermediate/int_learner_timeline.sql",BL_TL,{edge:BL_VIO,lit:Object.fromEntries(BL_TL.map((s,i)=>[i,i<2?0:clamp(rp*11-(i-2),0,1)])),litCol:BL_VIO,dim:{0:0.4,1:0.4}}),{dy:30});
+  arrive(ctx,1425,380,t,cR-0.1,()=>bl_code(ctx,990,140,870,"CTE names from models/intermediate/student/int_learner_timeline.sql",BL_TL,{edge:BL_VIO,lit:Object.fromEntries(BL_TL.map((s,i)=>[i,i<2?0:clamp(rp*11-(i-2),0,1)])),litCol:BL_VIO,dim:{0:0.4,1:0.4}}),{dy:30});
   arrive(ctx,1425,660,t,w("recipe","recipe"),()=>tag(ctx,1425,660,"the recipe: one step per name",BL_VIO,{align:"center",size:20}),{dy:12});
   ctx.restore();vign(ctx,S);});
 
@@ -140,7 +140,7 @@ function bl_bpModel(ctx,t,t0,hiT){const X=[1100,1425,1750],y=380,bw=180,bh=72,K=
   arrive(ctx,1425,290,t,cC-0.2,()=>withA(ctx,pA,()=>bl_code(ctx,990,140,870,"dbt_project.yml",BL_COREY,{edge:TRUST,p:clamp((t-cC)/1.2,0,1),lit:{4:fin(t,w("contract","public"),0.4),5:fin(t,w("contract","enforced"),0.4),6:fin(t,w("contract","enforced"),0.4)}})),{dy:30});
   arrive(ctx,1425,680,t,cG-0.4,()=>withA(ctx,pA,()=>bl_tests(ctx,990,470,870,{red:BL_TESTS.map(()=>1),green:BL_TESTS.map((s,i)=>fin(t,gW+i*0.16,0.3))})),{dy:30});
   [["declared grain",w("contract","grain")],["public",w("contract","public")],["contract enforced",w("contract","enforced")]].forEach(([s,tt],i)=>arrive(ctx,560,820,t,tt,()=>withA(ctx,1-fin(t,cA-0.2,0.5),()=>tag(ctx,[60,250,380][i],820,s,TRUST,{size:20})),{dy:12}));
-  arrive(ctx,1425,350,t,cA+0.6,()=>withA(ctx,1-fin(t,cN-0.2,0.5)*0.0,()=>bl_code(ctx,990,140,870,"models/core/core_award.sql",BL_AWARD,{edge:TRUST,p:clamp((t-cA-0.6)/1.4,0,1),lit:{4:fin(t,w("award","nothing to resolve"),0.4),2:fin(t,w("award","staging feeds"),0.4)}})),{dy:30});
+  arrive(ctx,1425,350,t,cA+0.6,()=>withA(ctx,1-fin(t,cN-0.2,0.5)*0.0,()=>bl_code(ctx,990,140,870,"models/core/course/core_award.sql",BL_AWARD,{edge:TRUST,p:clamp((t-cA-0.6)/1.4,0,1),lit:{4:fin(t,w("award","nothing to resolve"),0.4),2:fin(t,w("award","staging feeds"),0.4)}})),{dy:30});
   arrive(ctx,300,820,t,w("award","one source"),()=>withA(ctx,1-fin(t,cN,0.5),()=>tag(ctx,60,820,"the award: one source, nothing to resolve",TRUST,{size:20})),{dy:12});
   // Noor reviews the core, and approves it
   arrive(ctx,1300,860,t,cN-0.2,()=>{person(ctx,"noor",1300,820,0.46,{pose:"explain",expr:"calm",t});roleTag(ctx,1300,850,"noor");},{dy:20,from:0.94});
@@ -239,7 +239,7 @@ scene("physical",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   // the cards
   const yOut=fin(t,cI-0.2,0.5);
   arrive(ctx,1355,330,t,cV-0.2,()=>withA(ctx,1-yOut,()=>bl_code(ctx,850,140,1010,"dbt_project.yml",BL_MATY,{edge:[170,205,255],p:clamp((t-cV)/1.4,0,1),lit:{1:mv,4:mv,7:mt,10:mt}})),{dy:30});
-  arrive(ctx,1355,380,t,cI,()=>bl_code(ctx,850,140,1010,"models/core/core_credential_v2.sql",BL_INC,{edge:TRUST,p:clamp((t-cI)/1.6,0,1),
+  arrive(ctx,1355,380,t,cI,()=>bl_code(ctx,850,140,1010,"models/core/student/core_credential_v2.sql",BL_INC,{edge:TRUST,p:clamp((t-cI)/1.6,0,1),
     lit:{2:fin(t,w("incr","incremental"),0.4),3:fin(t,w("incr","credential's key"),0.4),4:fin(t,w("incr","merges"),0.4),10:fin(t,tw2,0.4),11:fin(t,tw2,0.4),6:fin(t,w("cluster","Databricks"),0.4)}}),{dy:30});
   arrive(ctx,1700,650,t,w("cluster","Databricks"),()=>tag(ctx,1860-tw(ctx,"Databricks · dbt Cloud",18,700)-26,650,"Databricks · dbt Cloud",[150,160,180],{size:18}),{dy:10});
   arrive(ctx,1100,700,t,w("cluster","clusters"),()=>tag(ctx,850,650,"clustered by learner",TRUST,{size:18}),{dy:10});
@@ -261,7 +261,7 @@ scene("once",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   // the rule and the count: one macro file; the var it reads, set once
   const aA=1-fin(t,cP-0.4,0.6);
   withA(ctx,aA,()=>{
-    arrive(ctx,720,450,t,0.6,()=>bl_code(ctx,60,200,1320,"macros/near_award.sql",BL_MAC,{edge:TRUST,fold:fin(t,tM-0.3,0.6),p:clamp((t-0.8)/2.0,0,1),
+    arrive(ctx,720,450,t,0.6,()=>bl_code(ctx,60,200,1320,"macros/planning/near_award.sql",BL_MAC,{edge:TRUST,fold:fin(t,tM-0.3,0.6),p:clamp((t-0.8)/2.0,0,1),
       lit:{0:fin(t,w("rule","near an award"),0.4),1:fin(t,w("rule","near an award"),0.4),2:fin(t,w("rule","more than nothing"),0.4),5:fin(t,w("count","one macro")-0.3,0.4),8:fin(t,w("count","one macro"),0.4),10:fin(t,w("count","one macro")+0.2,0.4)}}),{dy:30});
     const vA=fin(t,w("rule","fifteen"),0.4);arrive(ctx,1640,280,t,w("rule","fifteen")-0.3,()=>bl_code(ctx,1420,200,440,"dbt_project.yml",["vars:","  near_award_credit_points: 15"],{edge:TRUST,lit:{1:vA},hi:pulseAt(t,w("rule","fifteen"),1.2)}),{dy:20});
     const ln=fin(t,w("rule","fifteen")+0.3,0.6)*(1-fin(t,tM-0.4,0.4));if(ln>0)withA(ctx,ln,()=>{ctx.save();ctx.strokeStyle=rgba(TRUST,0.9);ctx.lineWidth=2.4;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(1420,bl_lineY(200,1));ctx.lineTo(lerp(1420,1340,ln),lerp(bl_lineY(200,1),bl_lineY(200,2),ln));ctx.stroke();ctx.restore();});
@@ -270,7 +270,7 @@ scene("once",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
     const wA=bl_pill(ctx,60,400,"is_near_award()",TRUST,q[0]),wB=bl_pill(ctx,400,400,"column · is_near_award",BL_MART,q[1]),wC=bl_pill(ctx,790,400,"learners_near_graduate_certificate()",TRUST,q[2]),wD=bl_pill(ctx,1340,400,"reconcile_planning_with_census_report",GOOD,q[3]),wE=bl_pill(ctx,790,490,"metric · learners_near_graduate_certificate",KIND,q[4]);
     if(q[1]>0)arrowTo(ctx,60+wA+4,400,396,400,TRUST,q[1],{p:q[1],head:10});if(q[2]>0)arrowTo(ctx,400+wB+4,400,786,400,BL_MART,q[2],{p:q[2],head:10});if(q[3]>0)arrowTo(ctx,790+wC+4,400,1336,400,TRUST,q[3],{p:q[3],head:10});
     if(q[4]>0)arrowTo(ctx,400+wB-30,426,786,490,BL_MART,q[4],{p:q[4],bend:-0.15,head:10});
-    arrive(ctx,960,700,t,w("count","semantic layer")-0.3,()=>bl_code(ctx,60,536,1800,"models/semantic/_semantic.yml",BL_SEM,{edge:KIND,p:clamp((t-w("count","semantic layer")+0.2)/1.4,0,1),lit:{7:fin(t,w("count","same column"),0.4)},litCol:KIND}),{dy:30});});
+    arrive(ctx,960,700,t,w("count","semantic layer")-0.3,()=>bl_code(ctx,60,536,1800,"models/marts/planning/_planning__semantic.yml",BL_SEM,{edge:KIND,p:clamp((t-w("count","semantic layer")+0.2)/1.4,0,1),lit:{7:fin(t,w("count","same column"),0.4)},litCol:KIND}),{dy:30});});
   // the pass returns: the reconciliation, faculty by faculty, and the build's line, green
   const pA=fin(t,cP-0.2,0.6)*(1-fin(t,cE-0.8,0.5));
   withA(ctx,pA,()=>{const mg=ctx.createLinearGradient(0,640,0,720);mg.addColorStop(0,"#cfc6b6");mg.addColorStop(1,"#8e8678");ctx.fillStyle=mg;ctx.fillRect(100,650,1720,60);ctx.strokeStyle=rgba(BL_BRASS,0.95);ctx.lineWidth=6;ctx.beginPath();ctx.moveTo(100,650);ctx.lineTo(1820,650);ctx.stroke();

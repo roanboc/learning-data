@@ -20,7 +20,7 @@ const NARR={
  {"id":"orphans","gap":0.8,"text":"Two short-course enrolments point at no customer, as typed. Trimmed and in lower case, every one with an email finds its customer."},
  {"id":"guess","gap":0.8,"text":"A claim without its query is a guess."}]},
 "sets":{"name":"Key sets","lead":1.0,"tail":1.0,"vo":[
- {"id":"where","gap":0.8,"text":"First, the key sets from the question's model go to work."},
+ {"id":"where","gap":0.8,"text":"First, the key sets written on each source go to work."},
  {"id":"set","gap":0.8,"text":"Every key now carries the short code of the system it comes from, and that system's owner."},
  {"id":"alike","gap":0.8,"text":"Two systems can use the same-looking key for two different people. Qualified, they can't be confused."},
  {"id":"case","gap":0.8,"text":"And staging writes every key one way: trimmed, and in one case. Aisha's email loses its spaces and its capitals."}]},

@@ -18,12 +18,16 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Pero su significado tiene dueños. La oficina de registro, donde trabaja Mei, es dueña de estudiantes, títulos y credenciales, y de los ID de estudiante que emite.",
 "The learning team owns two kinds of credential, microcredentials and badges, and the keys of its two platforms.":
 "El equipo de aprendizaje es dueño de dos tipos de credencial, microcredenciales e insignias, y de las claves de sus dos plataformas.",
-"Each is a domain: it owns the meaning of the facts it records.":
-"Cada uno es un dominio: es dueño del significado de los hechos que registra.",
-"Planning and the wallet app are domains too. They own what they build for themselves: their marts.":
-"Planificación y la app de billetera también son dominios. Son dueños de lo que construyen para sí: sus marts.",
-"In the project, models are gathered in groups, and each group names an owner. The staging, core and mart models also name their domain. Ownership follows meaning, not the code.":
-"En el proyecto, los modelos se reúnen en grupos, y cada grupo nombra un dueño. Los modelos de staging, núcleo y marts también nombran su dominio. La propiedad sigue al significado, no al código.",
+"So there are three kinds of domain. The systems, and the teams that run them, are application domains.":
+"Así que hay tres tipos de dominio. Los sistemas, y los equipos que los operan, son dominios de aplicación.",
+"What the facts mean, learners, credentials and awards, are data domains, named as the reference model names them: student and course.":
+"Lo que significan los hechos, estudiantes, credenciales y titulaciones, son dominios de datos, con los nombres que les da el modelo de referencia: student y course.",
+"And Planning and the wallet app are business domains: they decide with the data, and own the marts they build for it.":
+"Y Planificación y la app de billetera son dominios de negocio: deciden con los datos, y son dueños de los marts que construyen para eso.",
+"The project is laid out the same way: sources by system, the core by data domain, the marts and exposures by consumer.":
+"El proyecto se organiza igual: las fuentes por sistema, el núcleo por dominio de datos, los marts y las exposiciones por consumidor.",
+"Each group names an owner, and the staging, core and mart models name their domain. Ownership follows meaning, not the code.":
+"Cada grupo nombra un dueño, y los modelos de staging, núcleo y marts nombran su dominio. La propiedad sigue al significado, no al código.",
 "So what does a domain publish? A core model, as a product.":
 "Entonces, ¿qué publica un dominio? Un modelo núcleo, como producto.",
 "Take the learner. Its YAML states its grain: one row per learner per version.":
@@ -82,6 +86,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Entonces, ¿por qué no dividir ahora? Cada proyecto es más que desplegar, y más que mantener al paso.",
 "On the twelfth of October, Noor decided: groups first, in one project, while one team builds the core. Projects later, when teams own their domains.":
 "El doce de octubre, Noor decidió: primero grupos, en un solo proyecto, mientras un equipo construye el núcleo. Proyectos después, cuando los equipos sean dueños de sus dominios.",
+"When that day comes, a domain moves out with its own folders: its marts, its exposures, its seeds and its decisions. Nothing else needs untangling.":
+"Cuando llegue ese día, un dominio se muda con sus propias carpetas: sus marts, sus exposiciones, sus seeds y sus decisiones. No hay nada más que desenredar.",
 "Many owners, and many hands. One of them isn't a person.":
 "Muchos dueños, y muchas manos. Una de ellas no es una persona."
 });

@@ -419,6 +419,7 @@ const NARR={
  {"id":"agents","gap":0.8,"text":"Before any of that, it reads one page, written for agents. What it may do, and what it must not."},
  {"id":"five","gap":0.6,"text":"Beside it, five skills, one file each: draft the conceptual model, profile a source, draft a model, reconcile and diff, review the metadata."},
  {"id":"process","gap":0.8,"text":"And the process: for each of the ten steps, the agent's part, and who approves it."},
+ {"id":"backlog","gap":0.8,"text":"The work itself is tracked in the team's backlog tool, which the agent can read. In the project, only what's still open is written down, and it's deleted once it's done."},
  {"id":"files","gap":0.8,"text":"Files in the project, not a long prompt. Versioned, reviewed, and read the same way by people and by agents."}]},
 "least":{"name":"Least access","lead":1.0,"tail":1.0,"vo":[
  {"id":"principal","gap":0.8,"text":"On Databricks, the agent works as its own service principal, never as a person."},
@@ -457,14 +458,14 @@ const NARR={
  {"id":"award","gap":0.8,"text":"The definition of an award now lives in four places. And three of them are wrong."}]}
 };
 
-const VODUR={"almanac/first": 9.519, "almanac/posted": 6.548, "almanac/twice": 8.013, "almanac/bridge": 6.997, "skills/can": 5.231, "skills/agents": 5.527, "skills/five": 9.083, "skills/process": 4.483, "skills/files": 7.087, "least/principal": 4.872, "least/reads": 6.729, "least/samples": 6.298, "least/stays": 3.028, "evidence/claim": 5.076, "evidence/four": 7.568, "evidence/more": 5.004, "evidence/mei": 7.103, "evidence/guess": 3.126, "shortcut/refactor": 7.749, "shortcut/fails": 6.215, "shortcut/why": 5.535, "shortcut/warn": 3.468, "shortcut/stop": 6.04, "shortcut/news": 5.731, "shortcut/fix": 4.87, "validate/two": 1.99, "validate/reconcile": 7.226, "validate/diff": 7.173, "validate/scratch": 5.334, "validate/none": 8.248, "ship/pr": 6.359, "ship/ci": 11.397, "ship/cloud": 8.328, "ship/people": 5.19, "ship/approve": 5.543, "next/merged": 1.936, "next/metadata": 6.004, "next/award": 4.627};
+const VODUR={"almanac/first": 9.519, "almanac/posted": 6.548, "almanac/twice": 8.013, "almanac/bridge": 6.997, "skills/can": 5.231, "skills/agents": 5.527, "skills/five": 9.083, "skills/process": 4.483, "skills/backlog": 10.145, "skills/files": 7.087, "least/principal": 4.872, "least/reads": 6.729, "least/samples": 6.298, "least/stays": 3.028, "evidence/claim": 5.076, "evidence/four": 7.568, "evidence/more": 5.004, "evidence/mei": 7.103, "evidence/guess": 3.126, "shortcut/refactor": 7.749, "shortcut/fails": 6.215, "shortcut/why": 5.535, "shortcut/warn": 3.468, "shortcut/stop": 6.04, "shortcut/news": 5.731, "shortcut/fix": 4.87, "validate/two": 1.99, "validate/reconcile": 7.226, "validate/diff": 7.173, "validate/scratch": 5.334, "validate/none": 8.248, "ship/pr": 6.359, "ship/ci": 11.397, "ship/cloud": 8.328, "ship/people": 5.19, "ship/approve": 5.543, "next/merged": 1.936, "next/metadata": 6.004, "next/award": 4.627};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
    Two wordless moments: the title, drawn over the comparer's desk and the printed page, and the ending. */
 const BREATH={
 "almanac":{"hold":{"first":0.6,"posted":0.6,"twice":0.8},"breathe":3.6},
-"skills":{"hold":{"can":0.6,"agents":1.0,"five":1.0,"process":0.8,"files":1.0}},
+"skills":{"hold":{"can":0.6,"agents":1.0,"five":1.0,"process":1.0,"backlog":1.3,"files":1.0}},
 "least":{"hold":{"principal":1.0,"reads":0.8,"samples":0.8}},
 "evidence":{"hold":{"claim":1.0,"four":0.8,"more":0.8,"mei":0.8,"guess":0.8}},
 "shortcut":{"hold":{"refactor":0.8,"fails":1.0,"why":0.8,"warn":1.0,"stop":1.4,"news":0.8,"fix":0.6}},
@@ -2098,7 +2099,7 @@ Object.assign(LV,{
     c.restore();},
   // the scenarios: drawn large, since learn.js shows them at 600 by 320 in a narrow column; components with fixed small labels are scaled up
   ag_q_warn:(c,w,h,st,L)=>{const V=L.vis;c.save();ag_lfit(c,w,h,1200,640);
-    c.save();c.translate(60,30);c.scale(1.5,1.5);ag_code(c,0,0,720,"tests/_singular_tests.yml",["  - name: reconcile_planning_with_census_report","    config:","      meta: {owner: Planning}","+     severity: warn"],{size:20,lh:32,label:V.draft||AG_DRAFT,draft:true,lineCol:{3:AG_AMB}});c.restore();
+    c.save();c.translate(60,30);c.scale(1.5,1.5);ag_code(c,0,0,720,"tests/reconciliation/_reconciliation__tests.yml",["  - name: reconcile_planning_with_census_report","    config:","      meta: {owner: Planning}","+     severity: warn"],{size:20,lh:32,label:V.draft||AG_DRAFT,draft:true,lineCol:{3:AG_AMB}});c.restore();
     tag(c,600,470,V.q.fail,AG_RED,{align:"center",size:40});T(c,V.q.until,600,580,{w:700,size:38,align:"center",color:rgba(AG_AMB,1)});c.restore();},
   ag_q_emails:(c,w,h,st,L)=>{const V=L.vis;c.save();ag_lfit(c,w,h,1200,640);glass(c,40,30,1120,580,18,KT_AI,{glow:12,ea:0.7,fill:"rgba(6,12,20,0.96)"});
     wrapT(c,V.q.emails,90,108,1020,{w:800,size:42,lh:52});for(let i=0;i<7;i++){const y=230+i*50;c.fillStyle=rgba([205,225,255],0.18);rr(c,90,y,260+160*hash(i,3),24,8);c.fill();c.fillStyle=rgba([205,225,255],0.1);rr(c,540,y,180+140*hash(i,9),24,8);c.fill();}
@@ -2225,6 +2226,10 @@ scene("skills",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   // the process: the agent's part lights teal, who approves gold, row by row; validate and review stay lit
   const pA=fin(t,cPr-0.1,0.6)*(1-ph4);if(pA>0){const ag=[],ap=[],dimT=c("files")-0.4;for(let i=0;i<10;i++){const keep=i===6||i===7?1:1-0.7*fin(t,dimT,0.6);ag.push(fin(t,w("process","the agent's part")+i*0.1,0.3)*keep);ap.push(fin(t,w("process","who approves")+i*0.1,0.3)*keep);}
     arrive(ctx,960,460,t,cPr-0.1,()=>ag_process(ctx,100,160,1720,{a:pA,agent:ag,appr:ap,p:clamp((t-cPr)/1.0,0,1)}),{dy:30,from:0.94});}
+  // the work is tracked in the team's backlog tool; the project keeps only what's still open, and deletes it once it's done
+  const bkA=fin(t,w("backlog","backlog tool")-0.2,0.5)*(1-fin(t,cFi-0.4,0.5)),opA=fin(t,w("backlog","still open")-0.2,0.5)*(1-fin(t,cFi-0.4,0.5)),dlA=fin(t,w("backlog","deleted")-0.1,0.5);
+  ag_chip(ctx,140,812,"the backlog tool · who, when, how big",[150,190,255],bkA,{size:20});
+  ag_chip(ctx,980,812,"requirements/ · only what's still open",WEED,opA,{size:20});if(opA>0)withA(ctx,opA*dlA,()=>tag(ctx,1340,868,"deleted once it's done",SOFT,{align:"center",size:20}));
   // files in the project, not a long prompt: versioned, reviewed, and read the same way by people and by agents
   const lp=fin(t,cFi,0.6)*(1-fin(t,w("files","not a long prompt")+0.6,1.6));ag_prompt(ctx,140,230,560,560,t,lp);if(lp>0)withA(ctx,lp,()=>cross_(ctx,420,520,90,AG_RED,fin(t,w("files","not a long prompt"),0.5)));
   ag_tag(ctx,960,150,"files, not a prompt",WEED,fin(t,w("files","not a long prompt"),0.5),{size:24});
@@ -2298,7 +2303,7 @@ scene("evidence",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
     const ar=fin(t,w("mei","asks Mei"),0.8);if(ar>0)arrowTo(ctx,930,540,1520,620,TRUST,0.85,{p:ar,bend:0.12,head:14});}
   ag_tag(ctx,1640,470,"Mei decides · D-001",TRUST,fin(t,w("mei","records a decision"),0.5),{size:22});
   ag_tag(ctx,1230,480,"rules can't decide",AG_AMB,fin(t,w("mei","rules can't decide"),0.5)*(1-fin(t,cG,0.5)),{size:20});
-  const kA=fin(t,w("mei","records")-0.2,0.6);if(kA>0){arrive(ctx,630,720,t,w("mei","records")-0.2,()=>ag_code(ctx,100,656,1160,"seeds/learner_identity_decisions.csv",AG_DEC,{a:kA,edge:TRUST,p:clamp((t-w("mei","records"))/1.4,0,1),lit:{1:fin(t,w("mei","records a decision")+0.4,0.5)}}),{dy:30});
+  const kA=fin(t,w("mei","records")-0.2,0.6);if(kA>0){arrive(ctx,630,720,t,w("mei","records")-0.2,()=>ag_code(ctx,100,656,1160,"seeds/reference/student/learner_identity_decisions.csv",AG_DEC,{a:kA,edge:TRUST,p:clamp((t-w("mei","records"))/1.4,0,1),lit:{1:fin(t,w("mei","records a decision")+0.4,0.5)}}),{dy:30});
     kt_gtick(ctx,1232,768,16,fin(t,w("mei","records a decision")+0.5,0.35));ag_tag(ctx,300,820,"SC: short courses",SRC3[2][1],fin(t,w("mei","records a decision")+0.8,0.5),{size:18});}
   // a claim with no query goes back to the agent, unread
   const g0=cG-0.1,gb=ease(fin(t,w("guess","goes back"),1.4));if(t>g0){const gx=lerp(1390,ox-60,gb),gy=lerp(220,oy,gb),ga=1-fin(t,w("guess","goes back")+1.0,0.5);
@@ -2316,9 +2321,9 @@ const AG_DESC=["  - name: reconcile_planning_with_census_report","    descriptio
 function ag_build(ctx,x,y,w,t,o){o=o||{};const st=o.state||0,warn=fin(st,0,1)*(st<1.5?1:0),pass=st>=2?1:0;
   // a passing test returns no rows, so the passing build shows only its line and the summary
   const L=pass?["PASS not_null_int_learner_timeline_learner_key","PASS versions_do_not_overlap_int_learner_timeline_learner_key","PASS versions_do_not_overlap_core_learner_v1_learner_key",
-    "PASS reconcile_planning_with_census_report","PASS=143 WARN=1 ERROR=0"]:["PASS not_null_int_learner_timeline_learner_key","PASS versions_do_not_overlap_int_learner_timeline_learner_key","PASS versions_do_not_overlap_core_learner_v1_learner_key",
+    "PASS reconcile_planning_with_census_report","PASS=144 WARN=1 ERROR=0"]:["PASS not_null_int_learner_timeline_learner_key","PASS versions_do_not_overlap_int_learner_timeline_learner_key","PASS versions_do_not_overlap_core_learner_v1_learner_key",
     warn>0.5?"WARN 1 reconcile_planning_with_census_report":"FAIL 1 reconcile_planning_with_census_report","faculty_code | in_the_mart | in_the_census_report","BUS          |           4 |                    3",
-    warn>0.5?"PASS=142 WARN=2 ERROR=0":"PASS=142 WARN=1 ERROR=1"];
+    warn>0.5?"PASS=143 WARN=2 ERROR=0":"PASS=143 WARN=1 ERROR=1"];
   const rc=pass?AG_GRN:mix(AG_RED,AG_AMB,warn),sm=pass?4:6,lc={0:AG_GRN,1:AG_GRN,2:AG_GRN,3:rc,[sm]:pass?AG_GRN:warn>0.5?AG_AMB:AG_RED};if(!pass)lc[5]=rc;
   const lit={3:o.lit||0,[sm]:o.lit6||0};if(!pass)lit[5]=o.lit||0;
   return ag_code(ctx,x,y,w,"dbt build",L,{a:o.a,p:o.p,edge:rc,lineCol:lc,lit,litCol:rc,dim:{0:0.3,1:0.3,2:0.3}});}
@@ -2326,12 +2331,12 @@ scene("shortcut",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   ctx.save();drift(ctx,t,sc,{z:0.03});
   const cF=c("fails"),cY=c("why"),cW=c("warn"),cS=c("stop"),cN=c("news"),cX=c("fix"),rec=w("refactor","by when it was recorded");
   // the timeline's model: the lines that date the student system's versions, and their comment
-  const tlA=fin(t,0.4,0.6)*(1-fin(t,cF-1.0,0.5));if(tlA>0)arrive(ctx,690,290,t,0.4,()=>ag_code(ctx,100,110,1180,"models/intermediate/int_learner_timeline.sql",AG_TL,{a:tlA,edge:LAYER4[1][1],p:clamp((t-0.5)/1.8,0,1),lit:{0:fin(t,w("refactor","dates every version"),0.5),4:fin(t,w("refactor","dates every version"),0.5),5:fin(t,w("refactor","dates every version")+0.1,0.5),6:fin(t,w("refactor","dates every version")+0.1,0.5),10:fin(t,w("refactor","dates every version")+0.2,0.5)}}),{dy:30});
+  const tlA=fin(t,0.4,0.6)*(1-fin(t,cF-1.0,0.5));if(tlA>0)arrive(ctx,690,290,t,0.4,()=>ag_code(ctx,100,110,1180,"models/intermediate/student/int_learner_timeline.sql",AG_TL,{a:tlA,edge:LAYER4[1][1],p:clamp((t-0.5)/1.8,0,1),lit:{0:fin(t,w("refactor","dates every version"),0.5),4:fin(t,w("refactor","dates every version"),0.5),5:fin(t,w("refactor","dates every version")+0.1,0.5),6:fin(t,w("refactor","dates every version")+0.1,0.5),10:fin(t,w("refactor","dates every version")+0.2,0.5)}}),{dy:30});
   ag_tag(ctx,1560,160,"tidy the timeline",KT_AI,fin(t,w("refactor","tidies"),0.5)*(1-fin(t,cF-1.0,0.5)),{size:22});
   // the agent's draft: both dates from when the change was recorded
   const up=ease(fin(t,cF-0.4,1.0)),dfA=fin(t,rec-0.3,0.6)*(1-fin(t,cS+0.2,0.6));
   const orbX=lerp(lerp(1560,1000,fin(t,rec-0.5,1.0)),1000,up),orbY=lerp(lerp(300,600,fin(t,rec-0.5,1.0)),520,up);kt_agent(ctx,orbX,orbY,26,t,{a:fin(t,0.2,0.6)*(1-fin(t,cS,0.6)),busy:pulseAt(t,rec,1.6)});
-  if(dfA>0)arrive(ctx,500,660,t,rec-0.3,()=>ag_code(ctx,100,lerp(520,110,up),800,"models/intermediate/int_learner_timeline.sql",AG_TLD,{a:dfA,label:AG_DRAFT,diff:true,p:clamp((t-rec)/1.6,0,1)}),{dy:30});
+  if(dfA>0)arrive(ctx,500,660,t,rec-0.3,()=>ag_code(ctx,100,lerp(520,110,up),800,"models/intermediate/student/int_learner_timeline.sql",AG_TLD,{a:dfA,label:AG_DRAFT,diff:true,p:clamp((t-rec)/1.6,0,1)}),{dy:30});
   ag_tag(ctx,1460,640,"one date for every version: when it was recorded",KT_AI,fin(t,rec+0.4,0.5)*(1-fin(t,cF-0.4,0.5)),{size:20});
   // the build: green, then one row red; Business 4 against 3
   const bState=fin(t,w("warn","The build passes")-0.3,0.6)*1;const bA=fin(t,cF-0.2,0.6)*(1-fin(t,cS-0.8,0.5));
@@ -2353,7 +2358,7 @@ scene("shortcut",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
     [[27,"took effect 27 Mar",SRC3[0][1],-1],[34,"recorded 3 Apr",AG_AMB,1]].forEach(([d,s,col,sd])=>{const x=day(d);withA(ctx,fin(t,cY+(sd>0?1:0.3),0.5),()=>{ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(x,yA,8,0,TAU);ctx.fill();T(ctx,s,x,yA-22,{w:700,size:18,align:"center",color:rgba(col,1)});});});
     withA(ctx,fin(t,w("why","still studying"),0.5),()=>tag(ctx,cx+200,640,"studying on census day",AG_RED,{size:18}));});
   // the agent's second draft: the test set to warn
-  const svA=fin(t,cW-0.3,0.6)*(1-fin(t,cX-0.9,0.5));if(svA>0)arrive(ctx,510,700,t,cW-0.3,()=>ag_code(ctx,100,600,820,"tests/_singular_tests.yml",AG_SEV,{a:svA,label:AG_DRAFT,diff:true,p:clamp((t-cW)/1.0,0,1),strike:{4:fin(t,w("stop","stops it"),0.6)}}),{dy:30});
+  const svA=fin(t,cW-0.3,0.6)*(1-fin(t,cX-0.9,0.5));if(svA>0)arrive(ctx,510,700,t,cW-0.3,()=>ag_code(ctx,100,600,820,"tests/reconciliation/_reconciliation__tests.yml",AG_SEV,{a:svA,label:AG_DRAFT,diff:true,p:clamp((t-cW)/1.0,0,1),strike:{4:fin(t,w("stop","stops it"),0.6)}}),{dy:30});
   ag_tag(ctx,1460,580,"the build passes",AG_AMB,fin(t,w("warn","The build passes"),0.5)*(1-fin(t,cS-0.8,0.5)),{size:22});
   // Jun's review of the draft pull request stops it; the rule, written down
   const prA=fin(t,cS-0.1,0.6);if(prA>0){arrive(ctx,1590,260,t,cS-0.1,()=>{ag_pr(ctx,1340,110,500,330,t,{});
@@ -2361,9 +2366,9 @@ scene("shortcut",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
         wrapT(ctx,"Never weaken a test to make it pass. Report the failing row.",1384,320,410,{w:600,size:19,lh:28});});},{dy:24});
     arrive(ctx,1590,700,t,cS,()=>person(ctx,"jun",1590,860,0.5,{pose:fin(t,w("stop","stops it"),0.3)>0.5?"explain":"stand",expr:"concerned",t}),{dy:20,d:0.9});withA(ctx,fin(t,cS,0.6),()=>ag_role(ctx,1590,886,"jun",1));}
   const ruA=fin(t,w("stop","The rule")-0.3,0.6)*(1-fin(t,cX-0.9,0.5));if(ruA>0)arrive(ctx,690,190,t,w("stop","The rule")-0.3,()=>ag_code(ctx,100,110,1180,"AGENTS.md",AG_RULE,{a:ruA,edge:KT_AI,p:clamp((t-w("stop","The rule"))/1.2,0,1),lit:{0:fin(t,w("stop","never weaken"),0.5),1:fin(t,w("news","A failing test"),0.5),2:fin(t,w("news","failing rows"),0.5)},litCol:AG_RED}),{dy:30});
-  const deA=fin(t,cN-0.2,0.6)*(1-fin(t,cX-0.9,0.5));if(deA>0)arrive(ctx,690,430,t,cN-0.2,()=>ag_code(ctx,100,300,1180,"tests/_singular_tests.yml",AG_DESC,{a:deA,edge:LAYER4[3][1],p:clamp((t-cN)/1.4,0,1),lit:{3:fin(t,w("news","let a person decide"),0.5),6:fin(t,w("news","let a person decide")+0.4,0.5)},litCol:TRUST}),{dy:30});
+  const deA=fin(t,cN-0.2,0.6)*(1-fin(t,cX-0.9,0.5));if(deA>0)arrive(ctx,690,430,t,cN-0.2,()=>ag_code(ctx,100,300,1180,"tests/reconciliation/_reconciliation__tests.yml",AG_DESC,{a:deA,edge:LAYER4[3][1],p:clamp((t-cN)/1.4,0,1),lit:{3:fin(t,w("news","let a person decide"),0.5),6:fin(t,w("news","let a person decide")+0.4,0.5)},litCol:TRUST}),{dy:30});
   // the fix: both lines return; the build runs; Business 3, green
-  const fxA=fin(t,cX-0.3,0.6);if(fxA>0){arrive(ctx,690,290,t,cX-0.3,()=>ag_code(ctx,100,110,1180,"models/intermediate/int_learner_timeline.sql",AG_TL,{a:fxA,edge:LAYER4[1][1],lit:{4:fin(t,cX+0.2,0.5),5:fin(t,cX+0.3,0.5),6:fin(t,cX+0.3,0.5),10:fin(t,cX+0.4,0.5)},litCol:AG_GRN}),{dy:30});
+  const fxA=fin(t,cX-0.3,0.6);if(fxA>0){arrive(ctx,690,290,t,cX-0.3,()=>ag_code(ctx,100,110,1180,"models/intermediate/student/int_learner_timeline.sql",AG_TL,{a:fxA,edge:LAYER4[1][1],lit:{4:fin(t,cX+0.2,0.5),5:fin(t,cX+0.3,0.5),6:fin(t,cX+0.3,0.5),10:fin(t,cX+0.4,0.5)},litCol:AG_GRN}),{dy:30});
     const b2=w("fix","Business");arrive(ctx,550,640,t,b2-0.4,()=>ag_build(ctx,100,520,900,t,{state:2,p:clamp((t-b2+0.3)/1.2,0,1),lit:fin(t,b2+0.4,0.4),lit6:fin(t,b2+0.6,0.4)}),{dy:30});
     arrive(ctx,1170,640,t,b2,()=>{glass(ctx,1040,580,260,120,16,AG_GRN,{glow:16,ea:0.85,fill:"rgba(6,18,12,0.95)"});T(ctx,"Business",1170,622,{w:700,size:22,align:"center",color:rgba(SOFT,1)});T(ctx,"3",1170,682,{w:800,size:52,align:"center",color:rgba(AG_GRN,1)});},{d:0.9});
     ag_tag(ctx,550,830,"the fix: when each change took effect",AG_GRN,fin(t,w("fix","took effect"),0.5),{size:22});}
@@ -2402,15 +2407,15 @@ scene("validate",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   // the diffs: the shortcut moved one row of the mart and 55 versions in the core; with the fix, nothing
   const nA=fin(t,cN-0.2,0.6);if(nA>0){const fx=fin(t,w("none","With the fix"),0.7);
     const sh=(y,h)=>withA(ctx,fx,()=>{glow(ctx,960,y+h/2,300,AG_GRN,0.12);ctx.fillStyle=rgba(AG_GRN,0.08);rr(ctx,660,y+60,600,h-70,10);ctx.fill();ctx.strokeStyle=rgba(AG_GRN,0.5);ctx.lineWidth=1.5;rr(ctx,660,y+60,600,h-70,10);ctx.stroke();});
-    arrive(ctx,690,240,t,cN-0.2,()=>{ag_code(ctx,100,110,1180,"scripts/diff_against_main.py",AG_D1,{a:nA,edge:KT_AI,p:clamp((t-cN)/1.2,0,1),lit:{5:fin(t,w("none","one learner's"),0.5),6:fin(t,w("none","one learner's")+0.1,0.5)},litCol:AG_AMB});sh(110,263);},{dy:30});
-    const c2=w("none","In the core")-0.2;arrive(ctx,690,530,t,c2,()=>{ag_code(ctx,100,410,1180,"scripts/diff_against_main.py",AG_D2,{a:nA,edge:KT_AI,p:clamp((t-c2)/1.2,0,1),lit:{3:fin(t,w("none","fifty-five"),0.5),4:fin(t,w("none","fifty-five"),0.5),5:fin(t,w("none","fifty-five")+0.2,0.5)},litCol:AG_AMB});sh(410,236);},{dy:30});
+    arrive(ctx,690,240,t,cN-0.2,()=>{ag_code(ctx,100,110,1180,"scripts/tools/diff_against_main.py",AG_D1,{a:nA,edge:KT_AI,p:clamp((t-cN)/1.2,0,1),lit:{5:fin(t,w("none","one learner's"),0.5),6:fin(t,w("none","one learner's")+0.1,0.5)},litCol:AG_AMB});sh(110,263);},{dy:30});
+    const c2=w("none","In the core")-0.2;arrive(ctx,690,530,t,c2,()=>{ag_code(ctx,100,410,1180,"scripts/tools/diff_against_main.py",AG_D2,{a:nA,edge:KT_AI,p:clamp((t-c2)/1.2,0,1),lit:{3:fin(t,w("none","fifty-five"),0.5),4:fin(t,w("none","fifty-five"),0.5),5:fin(t,w("none","fifty-five")+0.2,0.5)},litCol:AG_AMB});sh(410,236);},{dy:30});
     ag_tag(ctx,1560,240,"the mart: 1 row changed",AG_AMB,fin(t,w("none","one learner's"),0.5),{size:22});
     ag_tag(ctx,1560,520,"the core: 55 versions moved",AG_AMB,fin(t,w("none","fifty-five"),0.5),{size:22});
     ag_tag(ctx,960,740,"the fix: the diff is empty",AG_GRN,fin(t,w("none","the diff is empty"),0.5),{size:24});}
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 7. Review and ship ---------- */
-const AG_WF=["      - name: Build and test on DuckDB","        run: dbt build --profiles-dir .","","      - name: Doc blocks and key sets match the conceptual model","        run: python scripts/definitions.py --check","","      - name: Physical diagram matches the YAML","        run: python scripts/diagrams.py --check","","      - name: The metric gives the census report's number","        run: |","          …","          python scripts/check_metric.py"];
+const AG_WF=["      - name: Build and test on DuckDB","        run: dbt build --profiles-dir .","","      - name: Doc blocks and key sets match the conceptual model","        run: python scripts/generate/definitions.py --check","","      - name: Physical diagram matches the YAML","        run: python scripts/generate/diagrams.py --check","","      …","","      - name: The metric gives the census report's number","        run: |","          …","          python scripts/check/check_metric.py"];
 const AG_README=["… With dbt Cloud, a CI job does the same, and builds only the changed models","and what depends on them:","`dbt build --select state:modified+ --defer --state <production artifacts>`,","where the artifacts are the `manifest.json` of the last production run."];
 const AG_WHO=["| Change | Approves |","|---|---|","| Meaning: a definition, a key, an identity rule, a business rule | Mei Tanaka, … |","| The model: grain, entities, relationships, versions | Noor, data architect |","| The code: models, tests, macros | Jun Park, analytics engineer, in review |","| A consumer contract | Its consumer: Planning, or the wallet app team |","","The agent recommends; people approve."];
 const AG_CHECKS=["Build and test on DuckDB","Doc blocks and key sets match the conceptual model","Physical diagram matches the YAML","The metric gives the census report's number","Parse for Databricks"];
@@ -2434,10 +2439,10 @@ scene("ship",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   arrive(ctx,480,470,t,0.2,()=>ag_prFull(ctx,80,90,800,720,t,{ready:fin(t,w("pr","ready"),0.3),merged:fin(t,mergeT,0.3),s:[fin(t,w("pr","what it changed"),0.5),fin(t,w("pr","why"),0.5),fin(t,w("pr","what it checked"),0.5),fin(t,w("pr","the evidence"),0.5)],chk:fin(t,cC,0.3)>0?chk:null}),{d:0.9,from:0.95});
   // the evidence from the last chapter, carried across the cut: it shrinks into the pull request's evidence section
   const ev=ease(fin(t,w("pr","the evidence")-0.3,1.1)),evA=fin(t,0.6,0.5)*(1-fin(t,w("pr","the evidence")+0.5,0.4));if(evA>0)withA(ctx,evA,()=>{
-    [[940,100,104,480,"dbt show --select reconcile_census_report",AG_REC.map(l=>l.slice(14)),TRUST],[940,360,488,480,"scripts/diff_against_main.py",AG_D1.slice(0,5).map(l=>l.slice(51)),KT_AI]].forEach(([x0,y0,x1,y1,nm,L,col])=>{
+    [[940,100,104,480,"dbt show --select reconcile_census_report",AG_REC.map(l=>l.slice(14)),TRUST],[940,360,488,480,"scripts/tools/diff_against_main.py",AG_D1.slice(0,5).map(l=>l.slice(51)),KT_AI]].forEach(([x0,y0,x1,y1,nm,L,col])=>{
       const k=lerp(1,368/900,ev);ctx.save();ctx.translate(lerp(x0,x1,ev),lerp(y0,y1,ev));ctx.scale(k,k);ag_code(ctx,0,0,900,nm,L,{edge:col,lit:nm[0]==="d"?{1:1,2:1,3:1,4:1}:{3:1,4:1},litCol:AG_GRN});ctx.restore();});});
   // CI: the checks that run on every pull request, from the workflow
-  const wA=fin(t,cC-0.2,0.6)*(1-fin(t,w("cloud","On dbt Cloud")-0.4,0.5));if(wA>0)arrive(ctx,1390,310,t,cC-0.2,()=>ag_code(ctx,940,100,900,".github/workflows/credential-project.yml",AG_WF,{a:wA,edge:[170,205,255],p:clamp((t-cC)/1.6,0,1),lit:{0:chk[0],1:chk[0],3:chk[1],4:chk[1],6:chk[2],7:chk[2],9:chk[3],12:chk[3]},litCol:AG_GRN}),{dy:30});
+  const wA=fin(t,cC-0.2,0.6)*(1-fin(t,w("cloud","On dbt Cloud")-0.4,0.5));if(wA>0)arrive(ctx,1390,310,t,cC-0.2,()=>ag_code(ctx,940,100,900,".github/workflows/credential-project.yml",AG_WF,{a:wA,edge:[170,205,255],p:clamp((t-cC)/1.6,0,1),lit:{0:chk[0],1:chk[0],3:chk[1],4:chk[1],6:chk[2],7:chk[2],11:chk[3],14:chk[3]},litCol:AG_GRN}),{dy:30});
   ag_tag(ctx,1390,580,"CI: the checks that run on every pull request",SOFT,fin(t,w("ci","the checks"),0.5)*wA,{size:20});
   ag_tag(ctx,1390,650,"parse for Databricks",[150,176,214],fin(t,w("cloud","parses"),0.5)*(1-fin(t,w("cloud","On dbt Cloud")-0.4,0.5)),{size:20});
   // dbt Cloud: only what changed, and what depends on it

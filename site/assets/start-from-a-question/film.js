@@ -2093,7 +2093,7 @@ scene("map",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
 
 /* ---------- 2. The question ---------- */
 const SQ_YQ=["question:","  asked_by: Planning","  text: >","    How many learners are within 15 credit points of a graduate certificate, by faculty,","    as at census date?","  decision: >",
-  "    How many places to offer in each faculty's final graduate certificate units next semester.","  also_served: The learner's wallet app, which needs the same facts as they are now."];
+  "    How many places to offer in each faculty's final graduate certificate units next semester."];
 const SQ_PROF=["credentials:","  target: duckdb","  outputs:","    duckdb:","      type: duckdb","      …","    databricks:","      type: databricks","      …"];
 const SQ_KEYS=[["{% macro duckdb__hash_key(columns) -%}","    sha256({{ credentials.key_string(columns) }})","{%- endmacro %}"],
   ["{% macro databricks__hash_key(columns) -%}","    sha2({{ credentials.key_string(columns) }}, 256)","{%- endmacro %}"]];
@@ -2121,7 +2121,7 @@ scene("ask",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);se
     const hw=(tw(ctx,"census report · 12",22,700)+26)/2;ctx.fillStyle=rgba([200,70,60],1);ctx.beginPath();ctx.arc(-hw-12,0,6,0,TAU);ctx.fill();ctx.restore();}),{from:0.6});
   // the card turns into the project's YAML; the label says where it runs, and where else it runs
   const lg=fin(t,w("real","real"),0.5)*(1-0.5*fin(t,cC+1,1.2));
-  sq_code(ctx,yx,SQ_YR[1],SQ_YR[2],"model/conceptual.yml",SQ_YQ,{a:m,size:18,lh:30,label:SQ_RUN,labelGlow:lg,edge:BPL,lit:{7:fin(t,cR+0.6,0.6)},litCol:SQ_CON});
+  sq_code(ctx,yx,SQ_YR[1],SQ_YR[2],"models/marts/planning/_planning__conceptual.yml",SQ_YQ,{a:m,size:18,lh:30,label:SQ_RUN,labelGlow:lg,edge:BPL});
   const sl=fin(t,w("cloud","Databricks")-0.1,0.8);withA(ctx,sl*0.85,()=>{const lx=yx+SQ_YR[2]-20-tw(ctx,SQ_RUN,18,700)-16;tag(ctx,lx-tw(ctx,"Databricks · dbt Cloud",18,700)-26-lerp(40,0,ease(sl)),SQ_YR[1]+24,"Databricks · dbt Cloud",[150,170,200],{size:18});});
   // only the connection changes: two targets; and one function, the hash
   const dl=fin(t,w("hash","connection")+0.2,0.5);
@@ -2129,7 +2129,7 @@ scene("ask",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);se
     withA(ctx,dl,()=>tag(ctx,x+22+tw(ctx,"    duckdb: ",18,500,"mono")+16,y+80+3*30-6,SQ_RUN,WEED,{size:18}));},{dy:26});
   const kh=w("hash","turns a key")-0.2;withA(ctx,fin(t,kh,0.3),()=>{const s="key → hash",n=typeOn(s,clamp((t-kh)/0.6,0,1));T(ctx,n,960,712,{w:800,size:28,align:"center",color:rgba(WEED,1)});});
   const kA=w("hash","into a hash")-0.1,ka=fin(t,w("hash","hash")+0.3,0.5);
-  arrive(ctx,960,813,t,kA,()=>sq_code(ctx,260,730,1400,"macros/keys.sql",null,{cols:SQ_KEYS,size:18,lh:30,label:SQ_RUN+" (and Databricks)",edge:[150,190,255],seg:[[1,"sha256",ka,WEED],[101,"sha2",ka,WEED],[101,", 256",ka,WEED]]}),{dy:26});
+  arrive(ctx,960,813,t,kA,()=>sq_code(ctx,260,730,1400,"macros/shared/keys.sql",null,{cols:SQ_KEYS,size:18,lh:30,label:SQ_RUN+" (and Databricks)",edge:[150,190,255],seg:[[1,"sha256",ka,WEED],[101,"sha2",ka,WEED],[101,", 256",ka,WEED]]}),{dy:26});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 3. The slice ---------- */
@@ -2140,7 +2140,7 @@ scene("slice",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   ctx.save();drift(ctx,t,sc,{z:0.025});
   const cG=c("glossary"),cF=c("four"),cO=c("out"),cN=c("never"),m=ease(fin(t,0,1.4)),go=ease(fin(t,cO+0.1,1.4));
   // the question's YAML, carried from the last chapter, folds back into a card above the glossary
-  sq_code(ctx,SQ_YR[0],SQ_YR[1],SQ_YR[2],"model/conceptual.yml",SQ_YQ,{a:1-m,size:18,lh:30,label:SQ_RUN,edge:BPL});
+  sq_code(ctx,SQ_YR[0],SQ_YR[1],SQ_YR[2],"models/marts/planning/_planning__conceptual.yml",SQ_YQ,{a:1-m,size:18,lh:30,label:SQ_RUN,edge:BPL});
   const[qx,qy,qw,qs]=SQ_QTOP;sq_qcard(ctx,lerp(SQ_YR[0],qx,m),lerp(SQ_YR[1],qy,m),qw,{a:m,size:qs});
   // the cards spread from a deck; the four the question touches light; the rest dim and drift off the edge
   const bp=sq_bpBoxes(960,270,1),grid=i=>[105+(i%6)*290,300+Math.floor(i/6)*150];
@@ -2162,7 +2162,7 @@ scene("slice",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   arrive(ctx,1450,655,t,cN-0.2,()=>{person(ctx,"noor",1450,785,0.48,{pose:"explain",t});roleTag(ctx,1450,817,"noor");},{dy:20,from:0.94});
   arrive(ctx,1720,635,t,cN+0.2,()=>sq_badge(ctx,1720,615,40,"planning","Planning",{}),{dy:20});
   const dP=clamp((t-w("never","wrote down"))/2.6,0,1);
-  arrive(ctx,690,730,t,w("never","wrote down")-0.3,()=>sq_code(ctx,100,650,1180,"docs/decisions.md",["| 1 Oct 2026 | Scope: the entities Planning's question touches, and no more: learner, credential,","award, and credit towards an award. | \"Model the university\" never ends. A question does. |","Noor, data architect, with Planning |"],{size:18,lh:30,p:dP,edge:KIND}),{dy:24});
+  arrive(ctx,690,730,t,w("never","wrote down")-0.3,()=>sq_code(ctx,100,650,1180,"models/marts/planning/_planning__decisions.yml",["  - id: DEC-PLN-01","    title: Scope is what Planning's question touches","    …","    why: '\"Model the university\" never ends. A question does.'","    decided_by: Noor, data architect, with Planning"],{size:18,lh:30,p:dP,edge:KIND}),{dy:24});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 4. Written as YAML, drawn for people ---------- */
@@ -2189,20 +2189,20 @@ scene("yaml",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   // the learner, written once: each part lights as it's named
   const yp=clamp((t-cO-0.2)/1.8,0,1),L1=fin(t,w("learner","a definition")-0.1,0.4),L2=fin(t,w("learner","an owner")-0.1,0.4),L3=fin(t,w("learner","the rule")-0.1,0.4),Lw=fin(t,w("words","a person")-0.1,0.5);
   const on=(a,b)=>a*(1-0.7*b);
-  arrive(ctx,600,458,t,cO,()=>sq_code(ctx,60,270,1080,"model/conceptual.yml",SQ_YL,{size:18,lh:30,p:yp,label:SQ_RUN,edge:BPL,lit:{1:on(L1,L2),2:Math.max(on(L1,L2),Lw),3:Math.max(on(L1,L2),Lw),4:on(L2,L3),5:L3,6:L3,7:L3,8:L3,9:L3}}),{dy:26});
+  arrive(ctx,600,458,t,cO,()=>sq_code(ctx,60,270,1080,"models/core/student/_student__conceptual.yml",SQ_YL,{size:18,lh:30,p:yp,label:SQ_RUN,edge:BPL,lit:{1:on(L1,L2),2:Math.max(on(L1,L2),Lw),3:Math.max(on(L1,L2),Lw),4:on(L2,L3),5:L3,6:L3,7:L3,8:L3,9:L3}}),{dy:26});
   arrive(ctx,600,244,t,cO+0.3,()=>withA(ctx,1-fin(t,cR-0.2,0.5),()=>tag(ctx,600,244,"written once · YAML",BPL,{align:"center",size:20})),{from:0.8});
   arrive(ctx,600,244,t,cR,()=>tag(ctx,600,244,"the meaning",TRUST,{align:"center",size:20}),{from:0.8});
   arrive(ctx,100,688,t,w("words","business's words"),()=>tag(ctx,100,688,"the business's words, not a system's",TRUST,{size:20}),{dy:14});
   // beside it, the diagram: its Mermaid source types, and the diagram renders from it line by line
   const mp=clamp((t-cD+0.1)/3.4,0,1),mq=SQ_MM.map((_,i)=>clamp(mp*(SQ_MM.length+0.3)-i-0.3,0,1));
-  arrive(ctx,1520,575,t,cD-0.3,()=>{sq_code(ctx,1180,270,680,"docs/conceptual-model.md",SQ_MM,{size:18,lh:28,p:mp,edge:KIND,h:620,lit:{1:fin(t,w("diagram","holds credentials"),0.4)*(1-fin(t,cR,0.5)),2:fin(t,w("diagram","holds credit"),0.4)*(1-fin(t,cR,0.5))},litCol:KIND});
+  arrive(ctx,1520,575,t,cD-0.3,()=>{sq_code(ctx,1180,270,680,"models/core/student/_student__conceptual.md",SQ_MM,{size:18,lh:28,p:mp,edge:KIND,h:620,lit:{1:fin(t,w("diagram","holds credentials"),0.4)*(1-fin(t,cR,0.5)),2:fin(t,w("diagram","holds credit"),0.4)*(1-fin(t,cR,0.5))},litCol:KIND});
     ctx.fillStyle="rgba(170,200,245,0.12)";ctx.fillRect(1196,516,648,1.2);sq_erd(ctx,mq,t);},{dy:26});
   arrive(ctx,1520,244,t,w("diagram","drawn by hand"),()=>withA(ctx,1-fin(t,cR+0.2,0.5),()=>tag(ctx,1520,244,"drawn by hand",KIND,{align:"center",size:20})),{from:0.8});
   arrive(ctx,1520,244,t,w("read","anyone"),()=>tag(ctx,1520,244,"anyone can read it",KIND,{align:"center",size:20}),{from:0.8});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 5. Keys and owners ---------- */
-const SQ_YKS=["key_sets:","  - code: SIS","    system: student system","    owner: Registrar's office","  - code: LMS","    system: learning platform","    owner: Learning team","  - code: SC","    system: short-course platform","    owner: Learning team"];
+const SQ_YKS=["# meta.key_set, on each source","code: SIS","system: student system","owner: Registrar's office","code: LMS","system: learning platform","owner: Learning team","code: SC","system: short-course platform","owner: Learning team"];
 scene("owners",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025});
   const cK=c("keys"),cS=c("sets"),cM=c("mei"),cW=c("why"),m=ease(fin(t,0,1.6)),[ax,at,as_,ap]=SQ_STRIP,[bx,bt,bs,bph]=SQ_MID;
@@ -2220,7 +2220,7 @@ scene("owners",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
     const x1=150,y1=560+i*90,xx=lerp(x0,x1,u),yy=lerp(y0,y1,u)-Math.sin(Math.PI*u)*40;
     T(ctx,ks,xx,yy+(lerp(20,30,u))*0.36,{f:"mono",w:500,size:lerp(20,30,u),color:rgba(SRC3[i][1],1)});withA(ctx,fin(u,0.8,0.2),()=>{T(ctx,SRC3[i][0],222,y1+8,{w:700,size:20});});});
   arrive(ctx,150,500,t,w("sets","system it comes from"),()=>tag(ctx,150,500,"key sets",BPL,{size:20}),{from:0.8});
-  arrive(ctx,780,670,t,cS+1.0,()=>sq_code(ctx,520,480,580,"model/conceptual.yml",SQ_YKS,{size:18,lh:30,p:clamp((t-cS-1.0)/1.6,0,1),label:SQ_RUN,edge:BPL,lit:{1:fin(t,w("sets","student system"),0.4),4:fin(t,w("sets","learning platform"),0.4),7:fin(t,w("sets","short-course"),0.4)}}),{dy:24});
+  arrive(ctx,780,670,t,cS+1.0,()=>sq_code(ctx,520,480,580,"sources/*/_*__sources.yml",SQ_YKS,{size:18,lh:30,p:clamp((t-cS-1.0)/1.6,0,1),label:SQ_RUN,edge:BPL,lit:{1:fin(t,w("sets","student system"),0.4),4:fin(t,w("sets","learning platform"),0.4),7:fin(t,w("sets","short-course"),0.4)}}),{dy:24});
   // each meaning has an owner: Mei on the learner, the credential and the award; the learning team on two kinds of credential
   const mA=fin(t,w("mei","Mei")-0.2,0.5),tA=fin(t,w("mei","learning team")-0.2,0.5),mHi=fin(t,cW,0.6);
   ["learner","cred","award"].forEach((k,i)=>{const[x0,y,bw]=B[k],x=k==="award"?x0+bw:x0;arrive(ctx,x,y,t,w("mei","owns learner")+i*0.25-0.2,()=>sq_face(ctx,"mei",x,y,30,1,{t,hi:mHi}),{from:0.5});});
@@ -2264,7 +2264,7 @@ scene("split",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     T(ctx,"says",x+28,y+110,{w:600,size:18,color:rgba(SOFT,1)});T(ctx,"what someone can do",x+200,y+110,{w:700,size:22,color:rgba(mix(INK,GOOD,pulseAt(t,w("attend","can do"),1.4)),1)});
     [["award","mei"],["microcredential","tom"],["badge","tom"]].forEach(([s,who],i)=>{const kx=x+28+[0,180,440][i],ka=fin(t,w("rule","with kinds")+0.2+i*0.2,0.4);withA(ctx,ka,()=>{const tw_=tw(ctx,s,20,700)+60;glass(ctx,kx,y+170,tw_,52,12,TRUST,{glow:8,ea:0.7,fill:"rgba(30,26,12,0.95)"});
       sq_face(ctx,who,kx+24,y+196,17,1,{t});T(ctx,s,kx+48,y+203,{w:700,size:20});});});});
-  arrive(ctx,960,653,t,w("rule","with kinds")-0.1,()=>sq_code(ctx,290,480,1340,"model/conceptual.yml",SQ_YK,{a:yk>0?1:0,p:clamp((t-w("rule","with kinds")+0.1)/0.6,0,1),size:18,lh:30,wrap:104,label:SQ_RUN,edge:BPL,lit:{1:yk,3:yk,6:yk}}),{dy:24,a:yk});
+  arrive(ctx,960,653,t,w("rule","with kinds")-0.1,()=>sq_code(ctx,290,480,1340,"models/core/student/_student__conceptual.yml",SQ_YK,{a:yk>0?1:0,p:clamp((t-w("rule","with kinds")+0.1)/0.6,0,1),size:18,lh:30,wrap:104,label:SQ_RUN,edge:BPL,lit:{1:yk,3:yk,6:yk}}),{dy:24,a:yk});
   // the rule, and its other half
   arrive(ctx,960,104,t,w("rule","A different")-0.2,()=>{glass(ctx,250,64,1420,80,18,TRUST,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.96)"});
     const a1="same identity + same lifecycle → one entity, with kinds",sep="  ·  ",a2="different identity, grain or lifecycle → split",W1=tw(ctx,a1,24,700),W2=tw(ctx,sep,24,700),W3=tw(ctx,a2,24,700),x0=960-(W1+W2+W3)/2;
@@ -2274,13 +2274,13 @@ scene("split",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   if(t>d0){sq_cmp(ctx,cxC,190,500,250,"certificate of attendance",SRC3[2][1],[["key","SC|C-81",1],["says","someone was there",fin(t,w("attend","was there")-0.2,0.5),EDGE_]],{a:1-0.45*fin(t,w("attend","stays out"),0.8)});
     kt_rcross(ctx,cxC+470,190,22,fin(t,w("attend","stays out")-0.2,0.4));}
   arrive(ctx,1590,486,t,w("attend","stays out"),()=>tag(ctx,1590,486,"stays out",EDGE_,{align:"center",size:20}),{dy:12});
-  arrive(ctx,560,640,t,w("attend","was there")-0.4,()=>sq_code(ctx,120,480,880,"models/intermediate/int_credentials_unioned.sql",SQ_SQL,{size:18,lh:30,label:SQ_RUN,edge:LAYER4[1][1],lit:{0:fin(t,w("attend","stays out"),0.5),5:fin(t,w("attend","stays out")+0.3,0.5)},litCol:EDGE_}),{dy:24});
+  arrive(ctx,560,640,t,w("attend","was there")-0.4,()=>sq_code(ctx,110,480,910,"models/intermediate/student/int_credentials_unioned.sql",SQ_SQL,{size:18,lh:30,label:SQ_RUN,edge:LAYER4[1][1],lit:{0:fin(t,w("attend","stays out"),0.5),5:fin(t,w("attend","stays out")+0.3,0.5)},litCol:EDGE_}),{dy:24});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 7. The agent's draft ---------- */
-const SQ_SK=["1. **Write the question** under `question:`: who asks it, the words they use, and the decision it supports. …","2. **List only the entities the question touches.** … An entity the question doesn't need stays out, however central it seems.","…","4. **Combine or split.** Two candidates with the same identity and the same lifecycle are one entity, with kinds …"];
+const SQ_SK=["1. **Write the question** under `question:` in the mart's conceptual model (…): who asks it, the words they use, and the decision it supports. …","2. **List only the entities the question touches.** … An entity the question doesn't need stays out, however central it seems.","…","4. **Combine or split.** Two candidates with the same identity and the same lifecycle are one entity, with kinds …"];
 const SQ_YC=["  - name: credential","    definition: >","      A trusted, checkable statement that someone has shown what they know or can do.","      Awards, microcredentials and badges are kinds of credential; a certificate of attendance","      isn't one.","    owner: Mei Tanaka, registrar's office"];
-const SQ_DD=["| 2 Oct 2026 | A microcredential is a kind of credential, not an entity of its own. So is a badge. | … | Mei Tanaka, registrar's office |","| 2 Oct 2026 | A certificate of attendance isn't a credential. | It says someone was there, not what they can do. | Mei Tanaka, registrar's office |"];
+const SQ_DD=["  - id: DEC-STU-01","    title: A microcredential is a kind of credential","    decided_by: Mei Tanaka, registrar's office","    decided_on: 2026-10-02","  - id: DEC-STU-02","    title: A certificate of attendance isn't a credential","    decided_by: Mei Tanaka, registrar's office","    decided_on: 2026-10-02"];
 scene("draft",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025});
   const cG=c("agent"),cK=c("skill"),cM=c("miss"),cL=c("clause"),cP=c("approve");
@@ -2293,7 +2293,7 @@ scene("draft",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   arrive(ctx,1220,180,t,w("agent","a skill")-0.2,()=>{sq_code(ctx,580,50,1280,"skills/draft-the-conceptual-model/SKILL.md",SQ_SK,{size:18,lh:30,wrap:112,edge:KT_AI,label:"a skill",lit:{0:fin(t,w("skill","Write the question")-0.1,0.4),1:fin(t,w("skill","List only")-0.1,0.4),3:fin(t,w("skill","Propose")-0.1,0.4)},litCol:KT_AI});},{dy:24});
   // the draft, in teal, without its last clause; Mei writes it, in gold
   const dp=clamp((t-cM+0.6)/2.4,0,1),cl=clamp((t-w("clause","a certificate"))/1.6,0,1),k3=SQ_YC[3].indexOf(" a certificate");
-  arrive(ctx,1220,468,t,cM-0.8,()=>{sq_code(ctx,580,340,1280,"model/conceptual.yml",SQ_YC,{size:18,lh:30,p:dp,label:SQ_RUN,edge:mix(KT_AI,TRUST,fin(t,cL,0.8)),lineCol:{2:KT_AI,3:KT_AI},
+  arrive(ctx,1220,468,t,cM-0.8,()=>{sq_code(ctx,580,340,1280,"models/core/student/_student__conceptual.yml",SQ_YC,{size:18,lh:30,p:dp,label:SQ_RUN,edge:mix(KT_AI,TRUST,fin(t,cL,0.8)),lineCol:{2:KT_AI,3:KT_AI},
     clip:{3:[k3,cl,TRUST],4:[0,cl>0?clamp(cl*2-1,0,1):0,TRUST]},hi:fin(t,cL,0.6)});
     const cw=tw(ctx,"M",18,500,"mono"),miss=fin(t,w("miss","let certificates")-0.2,0.5)*(1-fin(t,w("clause","a certificate"),0.4));
     withA(ctx,miss,()=>{const x0=602+cw*(k3+1);ctx.save();ctx.setLineDash([6,6]);ctx.strokeStyle=rgba(EDGE_,0.9);ctx.lineWidth=2;rr(ctx,x0-6,486,cw*28+12,60,8);ctx.stroke();ctx.restore();});},{dy:24});
@@ -2301,7 +2301,7 @@ scene("draft",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   arrive(ctx,1720,624,t,w("clause","one clause"),()=>tag(ctx,1720,624,"Mei adds one clause",TRUST,{align:"center",size:20}),{dy:12});
   // her approval, and the decision in the log, with her name and the date
   const ap=w("approve","approves");kt_gtick(ctx,1590,552,20,fin(t,ap-0.1,0.4));kt_rstamp(ctx,1720,558,"approved",TRUST,fin(t,ap,0.3),fin(t,ap+0.1,0.35),{size:24,rot:-0.08});
-  arrive(ctx,1040,728,t,w("approve","in the log")-0.3,()=>sq_code(ctx,580,630,920,"docs/decisions.md",SQ_DD,{size:18,lh:30,wrap:78,edge:KIND,p:clamp((t-w("approve","in the log")+0.1)/1.6,0,1),lit:{0:fin(t,w("approve","the date"),0.5),1:fin(t,w("approve","the date")+0.2,0.5)},litCol:TRUST}),{dy:24});
+  arrive(ctx,1040,728,t,w("approve","in the log")-0.3,()=>sq_code(ctx,580,630,920,"models/core/student/_student__decisions.yml",SQ_DD,{size:18,lh:30,wrap:78,edge:KIND,p:clamp((t-w("approve","in the log")+0.1)/1.6,0,1),lit:{2:fin(t,w("approve","her name"),0.5),3:fin(t,w("approve","the date"),0.5),6:fin(t,w("approve","her name")+0.2,0.5),7:fin(t,w("approve","the date")+0.2,0.5)},litCol:TRUST}),{dy:24});
   arrive(ctx,280,790,t,w("approve","owner approves"),()=>tag(ctx,280,790,"the owner approves the meaning",TRUST,{align:"center",size:20}),{dy:14});
   ctx.restore();vign(ctx,S);});
 

@@ -41,6 +41,19 @@
 <div class="think-foot"><button type="button" class="btn" data-again>Ver de nuevo</button></div></div></template>
 </section>
 
+<section class="module" id="in-the-project" aria-labelledby="project-h">
+<div class="mhead"><div><h2 id="project-h">Míralo en el proyecto</h2><p>Cada tarjeta de la película muestra un archivo real del proyecto de dbt de ejemplo. Abre en GitHub los que muestra cada capítulo, o ejecuta tú el proyecto entero.</p></div></div>
+<ul class="repo-list">
+<li><b>Primero, perfilar</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/analyses/profiling/profile_null_keys.sql"><code>analyses/profiling/profile_null_keys.sql</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/analyses/profiling/profile_shared_emails.sql"><code>analyses/profiling/profile_shared_emails.sql</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/analyses/profiling/profile_orphans.sql"><code>analyses/profiling/profile_orphans.sql</code></a></span></li>
+<li><b>Conjuntos de claves</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/reference/shared/key_sets.csv"><code>seeds/reference/shared/key_sets.csv</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/macros/shared/keys.sql"><code>macros/shared/keys.sql</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/staging/short_courses/stg_short_courses__learners.sql"><code>models/staging/short_courses/stg_short_courses__learners.sql</code></a></span></li>
+<li><b>Reglas, de la más confiable a la menos</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_learner_key_candidates.sql"><code>models/intermediate/student/int_learner_key_candidates.sql</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_learner_keys_matched.sql"><code>models/intermediate/student/int_learner_keys_matched.sql</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__conceptual.yml"><code>models/core/student/_student__conceptual.yml</code></a></span></li>
+<li><b>Mantenerlos separados</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/reference/student/learner_identity_decisions.csv"><code>seeds/reference/student/learner_identity_decisions.csv</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/intermediate/student/int_learner_key_candidates.sql"><code>models/intermediate/student/int_learner_key_candidates.sql</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/tests/rules/keys_decided_different_stay_apart.sql"><code>tests/rules/keys_decided_different_stay_apart.sql</code></a></span></li>
+<li><b>El mismo hash en todas partes</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/macros/shared/keys.sql"><code>macros/shared/keys.sql</code></a></span></li>
+<li><b>Los códigos, también</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/reference/student/status_map.csv"><code>seeds/reference/student/status_map.csv</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/reference/student/_student__seeds.yml"><code>seeds/reference/student/_student__seeds.yml</code></a></span></li>
+</ul>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project">Explora el proyecto entero</a><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/README.md">Cómo ejecutarlo</a></p>
+</section>
+
 <section class="module" id="think-it-through" aria-labelledby="think-h">
 <div class="mhead"><div><h2 id="think-h">Piénsalo</h2><p>Las cuatro preguntas de Pausa para pensar, para una clase o un equipo. Abre una para ver la respuesta.</p></div></div>
 <div id="think-list"></div>
@@ -71,7 +84,7 @@
 </article>
 </div>
 <ol class="series-list" aria-label="Todas las películas de la serie">
-<li><a href="../a-model-is-not-a-transformation/"><span class="n">1</span>Un modelo no es una transformación</a></li>
+<li><a href="../declare-it-then-build-it/"><span class="n">1</span>Decláralo, luego constrúyelo</a></li>
 <li><a href="../start-from-a-question/"><span class="n">2</span>Empieza por una pregunta</a></li>
 <li><a href="../what-makes-it-the-same-one/" aria-current="page"><span class="n">3</span>Qué lo hace el mismo</a></li>
 <li><a href="../one-row-of-what-and-when/"><span class="n">4</span>Una fila de qué, y cuándo</a></li>

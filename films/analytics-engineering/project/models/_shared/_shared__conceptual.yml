@@ -11,7 +11,7 @@
 # Not parsed by dbt (.dbtignore). scripts/generate/definitions.py draws the map into
 # _shared__conceptual.md, and checks that every modelled entity here is defined in its domain's
 # file, and every defined one is here. The key sets are on the sources that issue them
-# (sources/<system>/), and the questions in requirements/.
+# (sources/<system>/); each mart's question is in its own conceptual model (models/marts/<consumer>/).
 
 max_entities: 50
 

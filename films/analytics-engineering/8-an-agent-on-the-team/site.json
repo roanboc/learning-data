@@ -27,5 +27,14 @@
   "labs_lead": "Four labs, one idea each. Review the agent's pull request, write a rule it can follow, tell a claim from a guess, and give it the access it needs and no more.",
   "labs_lead_es": "Cuatro labs, una idea cada uno. Revisa la pull request del agente, escribe una regla que pueda seguir, distingue una afirmación de una suposición, y dale el acceso que necesita, y nada más.",
   "quiz_lead": "Eight situations an analytics engineer really faces with an agent on the team: a failing reconciliation, emails pasted as evidence, a diff nobody expected, a request for production, a rule with two homes, a green CI, an incremental table, and a claim about a learner. Decide what you'd do; each answer explains why.",
-  "quiz_lead_es": "Ocho situaciones que un analytics engineer enfrenta de verdad con un agente en el equipo: una conciliación que falla, correos pegados como evidencia, una comparación que nadie esperaba, un pedido de acceso a producción, una regla con dos hogares, una CI en verde, una tabla incremental, y una afirmación sobre una estudiante. Decide qué harías; cada respuesta explica por qué."
+  "quiz_lead_es": "Ocho situaciones que un analytics engineer enfrenta de verdad con un agente en el equipo: una conciliación que falla, correos pegados como evidencia, una comparación que nadie esperaba, un pedido de acceso a producción, una regla con dos hogares, una CI en verde, una tabla incremental, y una afirmación sobre una estudiante. Decide qué harías; cada respuesta explica por qué.",
+  "repo": {
+    "skills": ["AGENTS.md", "skills/draft-a-model/SKILL.md", "skills/reconcile-and-diff/SKILL.md", "docs/process.md", "requirements/"],
+    "least": ["AGENTS.md"],
+    "evidence": ["AGENTS.md", "seeds/reference/student/learner_identity_decisions.csv"],
+    "shortcut": ["models/intermediate/student/int_learner_timeline.sql", "tests/reconciliation/_reconciliation__tests.yml", "AGENTS.md"],
+    "validate": ["skills/reconcile-and-diff/SKILL.md", "scripts/tools/diff_against_main.py"],
+    "ship": ["scripts/tools/diff_against_main.py", "README.md", "AGENTS.md"],
+    "next": ["skills/review-metadata/SKILL.md"]
+  }
 }

@@ -8,19 +8,21 @@
 
 **Status:** all nine films are on the site, each with labs, scenarios and Pause and think, in English and Spanish. Their code and data come from [the example dbt project](project/), which runs on dbt Core with DuckDB. The plan is in the [proposal](proposal.md).
 
+**The example project** is laid out the way a large project with several domains would be: sources by system (application domains), the core by what the facts mean (data domains, following TCSI), and the marts and exposures by who decides with them (business domains). Any domain can move out to its own dbt project later, with its folders. Each film's page, script, labs and scenarios link the files its chapters show.
+
 ## The films
 
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Labs and scenarios | Script |
 |---|---|---|---|---|---|
-| [A model is not a transformation](https://roanboc.github.io/learning-data/in-the-weeds/a-model-is-not-a-transformation/) | Models and transformations | 5½ min | 11 | 4 labs, 8 scenarios | [script](1-a-model-is-not-a-transformation/script.md) · [source](1-a-model-is-not-a-transformation/source/README.md) |
+| [Declare it, then build it](https://roanboc.github.io/learning-data/in-the-weeds/declare-it-then-build-it/) | The series and its method | 5½ min | 11 | 4 labs, 8 scenarios | [script](1-declare-it-then-build-it/script.md) · [source](1-declare-it-then-build-it/source/README.md) |
 | [Start from a question](https://roanboc.github.io/learning-data/in-the-weeds/start-from-a-question/) | Scope and owners | 5 min | 8 | 4 labs, 8 scenarios | [script](2-start-from-a-question/script.md) · [source](2-start-from-a-question/source/README.md) |
 | [What makes it the same one](https://roanboc.github.io/learning-data/in-the-weeds/what-makes-it-the-same-one/) | Identity and keys | 4½ min | 8 | 4 labs, 8 scenarios | [script](3-what-makes-it-the-same-one/script.md) · [source](3-what-makes-it-the-same-one/source/README.md) |
 | [One row of what, and when](https://roanboc.github.io/learning-data/in-the-weeds/one-row-of-what-and-when/) | Grain and time | 5 min | 8 | 4 labs, 8 scenarios | [script](4-one-row-of-what-and-when/script.md) · [source](4-one-row-of-what-and-when/source/README.md) |
 | [Promises and proofs](https://roanboc.github.io/learning-data/in-the-weeds/promises-and-proofs/) | Contracts and tests | 5½ min | 8 | 4 labs, 8 scenarios | [script](5-promises-and-proofs/script.md) · [source](5-promises-and-proofs/source/README.md) |
 | [Built in layers](https://roanboc.github.io/learning-data/in-the-weeds/built-in-layers/) | Layers and CTEs | 4½ min | 8 | 4 labs, 8 scenarios | [script](6-built-in-layers/script.md) · [source](6-built-in-layers/source/README.md) |
-| [Who owns what](https://roanboc.github.io/learning-data/in-the-weeds/who-owns-what/) | Domains and ownership | 5 min | 8 | 4 labs, 8 scenarios | [script](7-who-owns-what/script.md) · [source](7-who-owns-what/source/README.md) |
-| [An agent on the team](https://roanboc.github.io/learning-data/in-the-weeds/an-agent-on-the-team/) | Agents and review | 5 min | 8 | 4 labs, 8 scenarios | [script](8-an-agent-on-the-team/script.md) · [source](8-an-agent-on-the-team/source/README.md) |
+| [Who owns what](https://roanboc.github.io/learning-data/in-the-weeds/who-owns-what/) | Domains and ownership | 5½ min | 8 | 4 labs, 8 scenarios | [script](7-who-owns-what/script.md) · [source](7-who-owns-what/source/README.md) |
+| [An agent on the team](https://roanboc.github.io/learning-data/in-the-weeds/an-agent-on-the-team/) | Agents and review | 5½ min | 8 | 4 labs, 8 scenarios | [script](8-an-agent-on-the-team/script.md) · [source](8-an-agent-on-the-team/source/README.md) |
 | [Written once](https://roanboc.github.io/learning-data/in-the-weeds/written-once/) | Documentation and versions | 5 min | 8 | 4 labs, 8 scenarios | [script](9-written-once/script.md) · [source](9-written-once/source/README.md) |
 <!-- /films -->
 

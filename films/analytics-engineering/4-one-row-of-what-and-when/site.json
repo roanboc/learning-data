@@ -27,5 +27,13 @@
   "labs_lead": "Four labs, one idea each, in the order of the film. Declare the grain of three outputs, double the rows with a join and fix it, step through Aisha's year, and choose which date dates each version.",
   "labs_lead_es": "Cuatro labs, una idea cada uno, en el orden de la película. Declara el grano de tres salidas, duplica las filas con un join y arréglalo, recorre el año de Aisha, y elige qué fecha lleva cada versión.",
   "quiz_lead": "Eight situations an analytics engineer really faces: credit that doubled, a census number for the app, a report that changed after a rename, a withdrawal recorded after publishing, monthly snapshots, a version current before it's true, four fixes for a fan-out, and two versions that overlap. Decide what you'd do; each answer explains why.",
-  "quiz_lead_es": "Ocho situaciones que un analytics engineer enfrenta de verdad: créditos que se duplicaron, un número del censo para la app, un informe que cambió con un cambio de nombre, un retiro registrado después de publicar, cortes mensuales, una versión vigente antes de ser cierta, cuatro arreglos para filas multiplicadas, y dos versiones que se solapan. Decide qué harías; cada respuesta explica por qué."
+  "quiz_lead_es": "Ocho situaciones que un analytics engineer enfrenta de verdad: créditos que se duplicaron, un número del censo para la app, un informe que cambió con un cambio de nombre, un retiro registrado después de publicar, cortes mensuales, una versión vigente antes de ser cierta, cuatro arreglos para filas multiplicadas, y dos versiones que se solapan. Decide qué harías; cada respuesta explica por qué.",
+  "repo": {
+    "grain": ["seeds/expected/planning/census_report.csv", "models/marts/planning/_planning__models.yml", "docs/conventions.md"],
+    "fan": ["analyses/design/fan_out_without_point_in_time.sql"],
+    "versions": ["models/_shared/_shared__columns.md", "models/core/student/_core_student__models.yml"],
+    "was": ["macros/shared/time.sql", "models/marts/planning/mart_planning__near_award.sql", "models/marts/planning/_planning__decisions.yml", "models/marts/wallet/_wallet__decisions.yml"],
+    "stitch": ["models/intermediate/student/int_learner_timeline.sql"],
+    "late": ["analyses/profiling/profile_late_changes.sql", "models/intermediate/student/int_learner_timeline.sql", "models/core/student/_core_student__models.yml"]
+  }
 }

@@ -220,10 +220,10 @@ function wr_link(ctx,x,y,w,name,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)re
   glass(ctx,x,y-26,w,52,26,col,{glow:6+12*on,ea:0.7,fill:"rgba(7,12,24,0.95)"});T(ctx,name,x+(o.cog?44:w/2),y+7,{f:"mono",w:500,size:18,align:o.cog?"left":"center",color:rgba(mix(SOFT,INK,0.4+0.6*on),1)});
   if(o.cog)wr_cog(ctx,x+24,y,10,o.t||0,col,1,o.spin||0);});}
 // a CI check: a status (0 waiting, 1 failed, 2 passed), its name and its message
-function wr_ci(ctx,x,y,w,name,st,msg,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=st>=1.5?GOOD:st>=0.5?BAD:SOFT,h=msg?92:60;withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,col,{glow:8+10*(st>0?1:0),ea:0.7,fill:"rgba(7,12,24,0.95)"});
+function wr_ci(ctx,x,y,w,name,st,msg,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=st>=1.5?GOOD:st>=0.5?BAD:SOFT,h=msg?68+24*msg.split("\n").length:60;withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,col,{glow:8+10*(st>0?1:0),ea:0.7,fill:"rgba(7,12,24,0.95)"});
   const cx=x+32,cy=y+30;if(st>=1.5){ctx.fillStyle="rgba(8,24,16,0.95)";ctx.beginPath();ctx.arc(cx,cy,15,0,TAU);ctx.fill();ring(ctx,cx,cy,15,GOOD,1,2.2);tick_(ctx,cx,cy+1,20,GOOD,1);}
   else if(st>=0.5)kt_rcross(ctx,cx,cy,15,1);else ring(ctx,cx,cy,15,SOFT,0.7,2,[4,4]);
-  T(ctx,name,x+62,y+37,{w:700,size:20});if(msg)T(ctx,msg,x+24,y+76,{f:"mono",w:500,size:o.msize||18,color:rgba(col,1)});});return h;}
+  T(ctx,name,x+62,y+37,{w:700,size:20});if(msg)msg.split("\n").forEach((m,i)=>T(ctx,m,x+24,y+76+i*24,{f:"mono",w:500,size:o.msize||18,color:rgba(col,1)}));});return h;}
 // the docs site's page for a model: the description dbt shows, with the definition it names in full
 function wr_docs(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,KIND,{glow:10,ea:0.7,fill:"rgba(10,16,30,0.96)"});
   ctx.fillStyle="rgba(140,200,255,0.12)";rr(ctx,x+2,y+2,w-4,44,12);ctx.fill();[0,1,2].forEach(i=>{ctx.fillStyle=rgba(SOFT,0.6);ctx.beginPath();ctx.arc(x+24+i*18,y+24,5,0,TAU);ctx.fill();});
@@ -361,10 +361,10 @@ Object.assign(LV,{
   wr_l_home:(c,w,h,st,L)=>{const V=L.vis,k=st.pick||"tooltip",S=WR_LSTATE[k]||WR_LSTATE.tooltip;c.save();wr_fit(c,w,h,960,420);
     const src=["wiki","yaml","catalog","tooltip"].indexOf(S.src),RX=372,RW=588,Y=i=>i*106,mid=i=>Y(i)+49;
     if(k==="home")glow(c,165,75,190,BPL,0.16);bpPaper(c,0,0,330,150,1,{});
-    T(c,"model/conceptual.yml",20,42,{f:"mono",w:500,size:wr_fs(c,"model/conceptual.yml",292,24,500,"mono"),color:rgba(BPL,1)});
+    T(c,"_course__conceptual.yml",20,42,{f:"mono",w:500,size:wr_fs(c,"_course__conceptual.yml",292,24,500,"mono"),color:rgba(BPL,1)});
     T(c,V.fixed,20,86,{w:700,size:wr_fs(c,V.fixed,292,28,700),color:rgba(BPL,1)});if(k==="home")wr_ftag(c,20,124,V.source,TRUST,292,24);
     const gen=k==="generated",gcol=gen?WR_AMB:[170,205,255];glass(c,0,168,330,112,14,gcol,{glow:6+14*(gen?1:0),ea:0.7,fill:"rgba(6,10,20,0.95)"});
-    T(c,"docs/definitions.md",18,206,{f:"mono",w:500,size:wr_fs(c,"docs/definitions.md",294,24,500,"mono"),color:rgba(gcol,1)});wr_cog(c,300,250,14,0,mix(SOFT,WR_AMB,gen?1:0),1,0);
+    T(c,"_course__definitions.md",18,206,{f:"mono",w:500,size:wr_fs(c,"_course__definitions.md",270,24,500,"mono"),color:rgba(gcol,1)});wr_cog(c,300,250,14,0,mix(SOFT,WR_AMB,gen?1:0),1,0);
     if(gen)T(c,V.edited,18,258,{w:700,size:wr_fs(c,V.edited,250,26,700),color:rgba(WR_AMB,1)});
     const ok=S.ci===2,cc=ok?GOOD:BAD;glass(c,0,298,330,72,14,cc,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.95)"});
     if(ok){ring(c,34,334,16,GOOD,1,2.4);tick_(c,34,335,20,GOOD,1);}else kt_rcross(c,34,334,16,1);
@@ -381,7 +381,7 @@ Object.assign(LV,{
     c.restore();},
   // where does it live: the four homes, each counting what has been placed in it; once checked, the 15 put on a page shows its drift
   wr_l_where:(c,w,h,st,L)=>{const V=L.vis,P=st.pick||{},drift=st.checked&&P[9]==="md",lab=L.labs.find(x=>x.vis==="wr_l_where"),B={};(lab?lab.w.buckets:[]).forEach(([k,t])=>B[k]=t);c.save();wr_fit(c,w,h,960,420);
-    [["concept","model/conceptual.yml",BPL,0,0],["md","docs/decisions.md",KIND,485,0],["var","dbt_project.yml",WEED,0,215],["yaml","models/core/_core__models.yml",TRUST,485,215]].forEach(([k,file,col,x,y])=>{
+    [["concept","_<domain>__conceptual.yml",BPL,0,0],["md","_<scope>__decisions.yml",KIND,485,0],["var","dbt_project.yml",WEED,0,215],["yaml","_core_<domain>__models.yml",TRUST,485,215]].forEach(([k,file,col,x,y])=>{
       if(k==="concept")bpPaper(c,x,y,475,205,1,{});else glass(c,x,y,475,205,14,col,{glow:8,ea:0.7,fill:"rgba(7,12,24,0.95)"});
       const ttl=B[k]||k;T(c,ttl,x+22,y+42,{w:800,size:wr_fs(c,ttl,431,28,800),color:rgba(k==="concept"?BPL:col,1)});
       T(c,file,x+22,y+82,{f:"mono",w:500,size:wr_fs(c,file,431,24,500,"mono"),color:rgba(k==="concept"?BPL:mix(SOFT,col,0.3),0.95)});
@@ -421,7 +421,7 @@ Object.assign(LV,{
     c.restore();},
   // the scenarios
   wr_q_catalog:(c,w,h,st,L)=>{const V=L.vis;c.save();wr_fit(c,w,h,600,320);
-    wr_pill(c,6,80,"model/conceptual.yml",BPL,{on:0.6});wr_ftag(c,8,138,V.home,BPL,250,18);wrapT(c,V.typo,10,186,240,{w:600,size:18,lh:24,color:rgba(SOFT,1)});
+    wr_pill(c,6,80,"_course__conceptual.yml",BPL,{on:0.6});wr_ftag(c,8,138,V.home,BPL,250,18);wrapT(c,V.typo,10,186,240,{w:600,size:18,lh:24,color:rgba(SOFT,1)});
     T(c,"persist_docs",290,44,{f:"mono",w:500,size:18,align:"center",color:rgba(KIND,1)});arrowTo(c,262,80,316,80,KIND,0.9,{head:12});
     wr_noBack(c,316,262,262,262,1);
     const UC=[176,186,206];glass(c,322,60,274,250,16,UC,{glow:10,ea:0.6,fill:"rgba(12,14,20,0.96)"});const ttl="Databricks · Unity Catalog";T(c,ttl,338,92,{w:700,size:wr_fs(c,ttl,242,18,700,undefined,15),color:rgba(UC,1)});
@@ -433,7 +433,7 @@ Object.assign(LV,{
     box(22,100,160,82);T(c,"credential",36,132,{f:"mono",w:500,size:18,color:rgba(WR_AMB,1)});T(c,"is_revoked",36,164,{f:"mono",w:500,size:18,color:rgba(INK,0.9)});
     box(110,206,150,80);for(let r=0;r<3;r++){c.fillStyle=rgba(WR_AMB,0.3);rr(c,124,224+r*20,70+30*hash(2,r),7,3);c.fill();}
     arrowTo(c,284,160,308,160,KIND,0.9,{head:10});
-    const PC=[170,205,255];glass(c,312,14,284,292,16,PC,{glow:10,ea:0.7,fill:"rgba(6,10,20,0.95)"});wr_cog(c,574,40,11,0,PC,1,0);T(c,"docs/physical.md",328,48,{f:"mono",w:500,size:18,color:rgba(PC,1)});
+    const PC=[170,205,255];glass(c,312,14,284,292,16,PC,{glow:10,ea:0.7,fill:"rgba(6,10,20,0.95)"});wr_cog(c,574,40,11,0,PC,1,0);T(c,"_student__physical.md",328,48,{f:"mono",w:500,size:18,color:rgba(PC,1)});
     c.fillStyle="rgba(14,22,40,0.98)";rr(c,326,64,256,184,8);c.fill();c.strokeStyle=rgba(PC,0.8);c.lineWidth=1.5;rr(c,326,64,256,184,8);c.stroke();
     T(c,"core_credential_v2",340,92,{f:"mono",w:500,size:18,color:rgba(PC,1)});
     [["credential_key","PK"],["learner_key","FK"],["status",""],["issued_on",""]].forEach(([cn,pk],i)=>{T(c,cn,340,128+i*32,{f:"mono",w:500,size:18,color:rgba(INK,0.95)});if(pk)T(c,pk,568,128+i*32,{f:"mono",w:500,size:18,align:"right",color:rgba(TRUST,1)});});
@@ -467,10 +467,11 @@ Object.assign(LV,{
     [[80,"13 Oct 2026",SOFT],[380,"31 Mar 2027",WR_AMB],[530,V.after,EDGE_]].forEach(([x,s,col])=>{c.fillStyle=rgba(col,1);c.beginPath();c.arc(x,226,8,0,TAU);c.fill();T(c,s,Math.min(x,592-tw(c,s,18,700)/2),258,{w:700,size:18,align:"center",color:rgba(col,1)});});
     tag(c,530,296,V.removed,EDGE_,{size:18,align:"center"});c.restore();},
   wr_q_log:(c,w,h,st,L)=>{const V=L.vis;c.save();wr_fit(c,w,h,600,320);
-    glass(c,6,10,588,236,16,KIND,{glow:10,ea:0.7,fill:"rgba(8,12,22,0.95)"});T(c,"docs/decisions.md",26,44,{f:"mono",w:500,size:18,color:rgba(KIND,1)});
-    const cols=[["Date",26,SOFT,80],["Decision",126,INK,170],[V.why,326,TRUST,110],[V.who,456,TRUST,110]];cols.forEach(([s,x,col])=>T(c,s,x,88,{w:800,size:20,color:rgba(col,1)}));
-    c.fillStyle="rgba(170,200,245,0.2)";c.fillRect(22,102,556,2);
-    [0,1,2].forEach(r=>cols.forEach(([,x,col,ww],i)=>{c.fillStyle=rgba(col,i>=2?0.45:0.25);rr(c,x,122+r*36,ww,14,5);c.fill();}));
+    glass(c,6,10,588,236,16,KIND,{glow:10,ea:0.7,fill:"rgba(8,12,22,0.95)"});T(c,"_shared__decisions.yml",26,44,{f:"mono",w:500,size:18,color:rgba(KIND,1)});
+    c.fillStyle="rgba(170,200,245,0.2)";c.fillRect(22,60,556,1.5);
+    // one decision, as the log keeps it: what was decided, why, and who
+    [["- id:",SOFT,110],["  title:",INK,300],["  why:",TRUST,340],["  decided_by:",TRUST,170]].forEach(([k,col,ww],r)=>{const y=98+r*36,kx=26+tw(c,k,18,500,"mono")+12;
+      T(c,k,26,y,{f:"mono",w:500,size:18,color:rgba(col===INK?SOFT:col,1)});c.fillStyle=rgba(col,col===TRUST?0.45:0.25);rr(c,kx,y-12,ww,14,5);c.fill();});
     c.strokeStyle=rgba(BAD,0.85);c.lineWidth=4;c.lineCap="round";c.beginPath();c.moveTo(24,112);c.lineTo(576,220);c.stroke();
     tag(c,300,286,V.deleted,BAD,{size:20,align:"center"});c.restore();},
   wr_q_loop:(c,w,h,st,L)=>{const V=L.vis;c.save();wr_fit(c,w,h,600,320);

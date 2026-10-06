@@ -1,0 +1,25 @@
+{
+  "key": "declare-it-then-build-it",
+  "title": "Declare it, then build it",
+  "sub": "In the weeds of data crafting, a technical series for analytics engineers: declare the data model beside the code, then build it with dbt, in ten steps. A dbt model is how you make it, not the model.",
+  "howto": "White lines on blue are the model, the blueprint. Code on dark glass is the building work. Teal is an AI agent's work; gold is a person's approval.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "name",
+    "breath",
+    1.6
+  ],
+  "say": [
+    [
+      "\\bYAML\\b",
+      "yammel"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ]
+  ]
+}

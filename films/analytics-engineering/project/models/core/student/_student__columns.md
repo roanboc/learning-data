@@ -67,7 +67,7 @@ points) or `badge` (carries none).
 
 {% docs credential_status %}
 `valid`, `expired` or `revoked`. The learning platform can't flag a revoked badge; it deletes it,
-so a badge that disappears is treated as revoked from that day (see `docs/gaps.md`). No credential
+so a badge that disappears is treated as revoked from that day (see GAP-LMS-01 in `docs/registers.md`). No credential
 in these sources expires yet.
 {% enddocs %}
 

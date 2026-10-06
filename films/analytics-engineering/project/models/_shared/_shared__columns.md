@@ -14,7 +14,7 @@ keys that look alike in different systems stay apart.
 
 {% docs key_set %}
 Where a key comes from: `SIS` (student system), `LMS` (learning platform) or `SC` (short-course
-platform). The list is in `models/_shared/_shared__conceptual.yml`, and the `key_sets` seed.
+platform). Each key set is an attribute of the source that issues it (`meta.key_set` in `sources/<system>/`), and they're listed in the `key_sets` seed.
 {% enddocs %}
 
 ## Time

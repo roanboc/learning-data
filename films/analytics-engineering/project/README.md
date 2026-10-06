@@ -25,8 +25,8 @@ dbt build --profiles-dir .
 ```
 
 `dbt build` loads the reference data, builds every model and runs every test. It ends green, with
-one warning by design: a short-course enrolment with no email (see [the gap register](docs/gaps.md),
-gap 5). The database is `target/credentials.duckdb`.
+one warning by design: a short-course enrolment with no email (see GAP-SC-02 in
+[the registers](docs/registers.md)). The database is `target/credentials.duckdb`.
 
 Then, if you like:
 
@@ -36,6 +36,7 @@ Then, if you like:
 | `dbt show --select profile_null_keys --profiles-dir .` | One of the evidence queries in `analyses/` |
 | `dbt show --select reconcile_census_report --profiles-dir .` | Planning's number beside the census report's |
 | `python scripts/generate/diagrams.py` | Regenerates each domain's physical diagram (`_<domain>__physical.md`) from `target/manifest.json` |
+| `python scripts/generate/registers.py` | Checks every register in `requirements/` and regenerates their index, `docs/registers.md` |
 | `python scripts/generate/definitions.py` | Regenerates each domain's definitions (`_<domain>__definitions.md`) and `seeds/reference/shared/key_sets.csv` from the conceptual models |
 | `pip install dbt-metricflow==0.15.0`, then `DBT_PROFILES_DIR=. mf query --metrics learners_near_graduate_certificate --group-by learner_award__faculty_name` | Planning's answer, from the semantic layer's metric |
 | `dbt clean --profiles-dir .` | Deletes `target/`, the database with it, for a clean start |
@@ -120,15 +121,15 @@ project/
 │   │                         identity decisions, credit recognition), shared (key sets)
 │   └── expected/<domain>/    numbers published elsewhere, that tests reconcile against: planning
 │                             (the census report). No model reads them
-├── sources/<system>/         what comes in: each source's YAML (tables, freshness, key set) and
-│                             its doc blocks
+├── sources/<system>/         what comes in: each source's YAML (tables, freshness, and its key set,
+│                             with each system key and its case) and its doc blocks
 ├── models/                   what's built, organised by domain, following TCSI; each domain's
 │   │                         folder holds its models and its data definitions
 │   ├── overview.md           the docs site's front page
 │   ├── _groups.yml           who owns which models
 │   ├── _shared/              the university's map: its domains and their key entities, at most 50
 │   │                         (_shared__conceptual.yml, drawn into _shared__conceptual.md); the
-│   │                         key sets; the version columns' doc blocks; the time spine
+│   │                         version columns' doc blocks; the time spine
 │   ├── staging/<system>/     one view per source table
 │   ├── intermediate/student/ identity candidates and matches, timelines, the credit rule; unit tests
 │   ├── core/student/         learner, credential, credit towards an award ┐ the enterprise contract:
@@ -153,9 +154,14 @@ project/
 │   ├── profiling/            evidence about the sources: keys, nulls, orphans, emails, late changes
 │   ├── design/               evidence for a modelling choice: fan-out without point in time
 │   └── validation/           checking the result: reconcile with the census report, as-was and as-is
-├── docs/                     how the work is done: the process, conventions, decisions, gap register
+├── requirements/             questions, requirements, decisions, gaps and limitations, in one schema:
+│                             _project__requirements.yml, and sources/, models/ and exposures/ by
+│                             system, domain and consumer
+├── docs/                     how the work is done: the process, conventions, and the generated index
+│                             of every register (registers.md)
 ├── scripts/
-│   ├── generate/             definitions.py and diagrams.py: write committed files; --check in CI
+│   ├── generate/             definitions.py, diagrams.py and registers.py: write committed files;
+│   │                         --check in CI
 │   ├── check/                check_metric.py: the metric against the census report, in CI
 │   ├── tools/                diff_against_main.py: a branch's table against main's, for review
 │   └── setup/                load_databricks.sql: loads the sample sources into Databricks
@@ -173,11 +179,11 @@ project/
 | *Start from a question* | The question in Planning's `models/marts/planning/_planning__conceptual.yml`; the slice in each core domain's `_<domain>__conceptual.yml`, with its hand-drawn diagram; the university's map in `models/_shared/`; the decision that a microcredential is a kind of credential; `skills/draft-the-conceptual-model/` for the agent's draft |
 | *What makes it the same one* | The profiling queries in `analyses/`; key sets and `macros/shared/keys.sql` (its header shows the compiled SQL); the staging models; `int_learner_keys`, `int_learner_key_candidates` (one CTE per rule) and `int_learner_keys_matched`; the identity decisions and status map seeds; the unit tests on matching |
 | *One row of what, and when* | `meta.grain`, tested as keys; `analyses/design/fan_out_without_point_in_time.sql`; the version columns; `int_learner_timeline`; the Planning mart (as it was) beside the wallet marts (as it is); `analyses/profiling/profile_late_changes.sql` and `diff_as_was_as_is.sql` |
-| *Promises and proofs* | `docs/gaps.md`; the core YAML (enterprise contract) and the marts YAML (consumer contracts) and `exposures/`; the tests; unit tests on the credit rule; warn and error levels; source freshness |
+| *Promises and proofs* | The gaps in `requirements/` (index: `docs/registers.md`); the core YAML (enterprise contract) and the marts YAML (consumer contracts) and `exposures/`; the tests; unit tests on the credit rule; warn and error levels; source freshness |
 | *Built in layers* | The four layers and `docs/conventions.md`; import and logical CTEs; views, tables and the incremental `core_credential`; liquid clustering; the semantic layer, and `macros/planning/near_award.sql`, where the rule and the count are written once |
 | *Who owns what* | `models/_groups.yml`; access and contracts in `dbt_project.yml` (set per folder; a model's YAML holds its grain, columns and tests); what each access level allows, in `docs/conventions.md`; `meta.owner` and `meta.domain`; the domain folders, following TCSI (`docs/conventions.md`, *Domains*); the exposures; the key sets, hashing macro and conventions that every domain shares; for *Across projects*, `examples/planning/` (dbt Cloud only, not run here) |
 | *An agent on the team* | `AGENTS.md`, with the agent's access; `docs/process.md`, the ten steps; `skills/`; the evidence in `analyses/`; the reconciliation test and `scripts/tools/diff_against_main.py`; the CI workflow, and the `state:modified+` command above for CI on changed models |
-| *Written once* | Doc blocks in each domain's folder; each domain's conceptual model generated into its `_<domain>__definitions.md`, and the key sets into `seeds/reference/shared/key_sets.csv`; each domain's `_<domain>__physical.md` generated from the manifest; `persist_docs`; `core_credential` versions 1 and 2, with a deprecation date, and the wallet's `ref('core_credential', v=2)` |
+| *Written once* | Doc blocks in each domain's folder; each domain's conceptual model generated into its `_<domain>__definitions.md`, the key sets, written once on each source, into `seeds/reference/shared/key_sets.csv`; each domain's `_<domain>__physical.md` generated from the manifest; `persist_docs`; `core_credential` versions 1 and 2, with a deprecation date, and the wallet's `ref('core_credential', v=2)` |
 
 ## What differs between engines
 

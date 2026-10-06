@@ -7,12 +7,15 @@ The meaning is written once, in the conceptual model:
   next to it; the dbt YAML shows them with doc(), and on Databricks persist_docs pushes them to
   Unity Catalog.
 - the university's map (models/_shared/_shared__conceptual.yml): its domains and their key
-  entities, and the key sets. This script draws the map into _shared__conceptual.md, and writes
-  the key sets into the seed the models join to.
+  entities. This script draws the map into _shared__conceptual.md.
+
+The key sets are written once too, on the source that issues each (meta.key_set in
+sources/<system>/_<system>__sources.yml); this script writes them into the seed the models join to.
 
 It also checks that they agree: every entity a domain defines is on the map as modelled, under
 that domain, and every modelled entity on the map is defined; every entity a mart uses is defined
-in a core domain; the map's relationships name entities on it; the map keeps to its maximum.
+in a core domain; the question each mart answers is in a register (requirements/); the map's
+relationships name entities on it; the map keeps to its maximum.
 
     python scripts/generate/definitions.py           # write the definitions and the key sets seed
     python scripts/generate/definitions.py --check   # fail if any is out of date
@@ -25,10 +28,13 @@ from pathlib import Path
 
 import yaml
 
+from registers import items_by_id
+
 ROOT = Path(__file__).resolve().parents[2]
 SOURCES = sorted((ROOT / "models").glob("**/_*__conceptual.yml"))
 KEY_SETS = ROOT / "seeds" / "reference" / "shared" / "key_sets.csv"
 MAP = ROOT / "models" / "_shared" / "_shared__conceptual.yml"
+SOURCE_FILES = sorted((ROOT / "sources").glob("*/_*__sources.yml"))
 
 
 def one_line(text):
@@ -80,8 +86,11 @@ def render(source):
 
 def render_key_sets():
     key_sets = {}
-    for source in SOURCES:
-        for key_set in yaml.safe_load(source.read_text()).get("key_sets", []):
+    for path in SOURCE_FILES:
+        for source in yaml.safe_load(path.read_text()).get("sources", []):
+            key_set = (source.get("config", {}).get("meta") or {}).get("key_set")
+            if not isinstance(key_set, dict):
+                raise SystemExit(f"source {source['name']} has no key set: give it meta.key_set, with code, system and owner")
             if key_set["code"] in key_sets:
                 raise SystemExit(f"key set {key_set['code']} is defined twice: write it once")
             key_sets[key_set["code"]] = key_set
@@ -99,7 +108,7 @@ def defined(model):
             | {r["name"] for r in model.get("relationships", []) if r.get("owner")})
 
 
-def validate(the_map, domains):
+def validate(the_map, domains, questions):
     problems = []
     on_map = {e["name"]: (d["name"], e["status"]) for d in the_map["domains"] for e in d["entities"]}
     if len(on_map) > the_map["max_entities"]:
@@ -115,6 +124,10 @@ def validate(the_map, domains):
         if status == "modelled" and entity not in defined(core.get(domain, {})):
             problems.append(f"{entity} is modelled on the map: define it in the {domain} domain's conceptual model")
     for name, model in domains.items():
+        if model.get("kind") == "mart":
+            answers = questions.get(model.get("answers"))
+            if not answers or answers[1]["type"] != "question":
+                problems.append(f"the {name} mart answers {model.get('answers')}, which isn't a question in any register")
         for entity in model.get("uses", []):
             if entity not in core_defined:
                 problems.append(f"the {name} mart uses {entity}, which no core domain defines")
@@ -131,7 +144,7 @@ def node(name):
     return f"e_{name}"
 
 
-def render_map(the_map, domains):
+def render_map(the_map, domains, questions):
     lines = ["```mermaid", "flowchart TB"]
     modelled = []
     for domain in the_map["domains"]:
@@ -163,9 +176,9 @@ def render_map(the_map, domains):
     consumers = ["| Consumer | Asked by | Question | Uses |", "|---|---|---|---|"]
     for name, model in sorted(domains.items()):
         if model.get("kind") == "mart":
-            question = model["question"]
-            consumers.append(f"| [{name}](../marts/{name}/_{name}__conceptual.yml) | {question['asked_by']} | "
-                             f"{one_line(question['text'])} | {', '.join(model['uses'])} |")
+            question = questions[model["answers"]][1]
+            consumers.append(f"| [{name}](../marts/{name}/_{name}__conceptual.yml) | {question['raised_by']} | "
+                             f"{one_line(question['text'])} ({model['answers']}) | {', '.join(model['uses'])} |")
     count = sum(len(d["entities"]) for d in the_map["domains"])
     return "\n".join([
         "# The university's conceptual model",
@@ -201,10 +214,11 @@ def main():
         if model.get("domain"):
             domains[model["domain"]] = model
     the_map = yaml.safe_load(MAP.read_text())
-    validate(the_map, domains)
+    questions = items_by_id()
+    validate(the_map, domains, questions)
     outputs = {target(source): render(source) for source in SOURCES
                if yaml.safe_load(source.read_text()).get("domain")}
-    outputs[MAP.with_suffix(".md")] = render_map(the_map, domains)
+    outputs[MAP.with_suffix(".md")] = render_map(the_map, domains, questions)
     outputs[KEY_SETS] = render_key_sets()
     if args.check:
         stale = [path for path, text in outputs.items() if not path.exists() or path.read_text() != text]

@@ -1,5 +1,4 @@
-# The university's conceptual model, at a high level: its domains and their key entities, and the
-# key sets every domain uses. A map, not the detail: each domain's own conceptual model, in its
+# The university's conceptual model, at a high level: its domains and their key entities. A map, not the detail: each domain's own conceptual model, in its
 # folder, holds the definitions, keys, rules and owners.
 #
 #   models/core/<domain>/_<domain>__conceptual.yml    a core domain: what its entities mean
@@ -10,8 +9,9 @@
 # and the map grows as questions arrive. Keep it to the key entities: no more than 50.
 #
 # Not parsed by dbt (.dbtignore). scripts/generate/definitions.py draws the map into
-# _shared__conceptual.md, checks that every modelled entity here is defined in its domain's file
-# (and every defined one is here), and writes the key sets into seeds/reference/shared/key_sets.csv.
+# _shared__conceptual.md, and checks that every modelled entity here is defined in its domain's
+# file, and every defined one is here. The key sets are on the sources that issue them
+# (sources/<system>/), and the questions in requirements/.
 
 max_entities: 50
 
@@ -114,17 +114,3 @@ relationships:
   - [unit_enrolment, charges, student_fee]
   - [student_fee, paid by, help_loan]
   - [learner, awarded, scholarship]
-
-key_sets:
-  - code: SIS
-    system: student system
-    owner: Registrar's office
-  - code: LMS
-    system: learning platform
-    owner: Learning team
-  - code: SC
-    system: short-course platform
-    owner: Learning team
-
-decisions: docs/decisions.md
-gaps: docs/gaps.md

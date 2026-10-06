@@ -1,0 +1,82 @@
+# Planning's requirements: its question, and what it needs from the output. The schema is in
+# requirements/README.md.
+scope:
+  kind: consumer
+  name: planning
+  code: PLN
+
+items:
+
+  - id: Q-PLN-01
+    type: question
+    step: scope
+    title: Learners near a graduate certificate, by faculty, as at census
+    text: >
+      How many learners are within 15 credit points of a graduate certificate, by faculty,
+      as at census date?
+    decision: >
+      How many places to offer in each faculty's final graduate certificate units next semester.
+    raised_by: Planning
+    owner: Planning
+    status: delivered
+    implemented_in: [mart_planning__near_award, learners_near_graduate_certificate, census_dashboard]
+
+  - id: DEC-PLN-01
+    type: decision
+    step: scope
+    title: Scope is what Planning's question touches
+    text: >
+      Scope: the entities Planning's question touches, and no more: learner, credential, award,
+      and credit towards an award.
+    why: '"Model the university" never ends. A question does.'
+    decided_by: Noor, data architect, with Planning
+    decided_on: 2026-10-01
+    status: delivered
+    relates_to: [Q-PLN-01]
+
+  - id: DEC-PLN-02
+    type: decision
+    step: consumer_output
+    title: Planning's mart is as it was at census
+    text: Planning's mart is as it was at census, dated by when things took effect.
+    why: Planning compares with the census report. It builds on the same core as the wallet.
+    decided_by: Planning, the wallet app team and Noor
+    decided_on: 2026-10-08
+    status: delivered
+    implemented_in: [mart_planning__near_award]
+    relates_to: [DEC-WAL-01]
+
+  - id: REQ-PLN-01
+    type: requirement
+    step: validate
+    title: Reconcile with the census report, faculty by faculty
+    text: >
+      The Planning mart gives the census team's published number, faculty by faculty. If it
+      doesn't, nobody ships until someone knows whether the mart or the report is wrong.
+    raised_by: Planning
+    owner: Planning
+    status: delivered
+    implemented_in: [reconcile_planning_with_census_report, census_report]
+    relates_to: [Q-PLN-01]
+
+  - id: REQ-PLN-02
+    type: requirement
+    step: consumer_output
+    title: No names or emails
+    text: Planning counts learners; it doesn't need to know who they are. The mart holds no names or emails.
+    raised_by: Planning
+    owner: Planning
+    status: delivered
+    implemented_in: [mart_planning__near_award]
+
+  - id: LIM-PLN-01
+    type: limitation
+    step: validate
+    title: The Planning mart applies identity as it's known today to the census date
+    text: >
+      The census team matched two learners by hand before publishing on 14 April 2026; the
+      registrar's office recorded the same matches as identity decisions D-001 and D-002 in
+      October. Without those decisions, the mart counts 10 learners, not 12, and the
+      reconciliation fails.
+    status: agreed
+    relates_to: [REQ-PLN-01, DEC-STU-04]

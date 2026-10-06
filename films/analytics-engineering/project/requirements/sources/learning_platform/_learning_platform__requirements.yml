@@ -1,0 +1,40 @@
+# What the learning platform holds, against what the business expects. The schema is in requirements/README.md.
+scope:
+  kind: source
+  name: learning_platform
+  code: LMS
+
+items:
+
+  - id: GAP-LMS-01
+    type: gap
+    step: gaps_and_contracts
+    title: No revocation flag
+    expectation: A revoked credential is known as revoked.
+    reality: The learning platform has no revocation flag. It deletes a revoked badge.
+    resolution: [rule_in_model, fix_at_source]
+    text: >
+      A badge that disappears is revoked from the day the platform stopped showing it. A
+      revocation flag and date are requested from the learning team.
+    owner: Learning team
+    status: agreed
+    implemented_in: [int_credentials_unioned]
+    relates_to: [LIM-STU-01]
+
+  - id: GAP-LMS-02
+    type: gap
+    step: gaps_and_contracts
+    title: Accounts without a student ID
+    expectation: Every learning platform account names its student.
+    reality: >
+      Staff type the student ID in. 4 of 42 current accounts have none
+      (analyses/profiling/profile_null_keys.sql); one holds another student's ID.
+    resolution: [rule_in_model, fix_at_source]
+    text: >
+      Match by email when exactly one student has it; a recorded decision beats the rules. A check
+      of the ID against the student system is requested from the learning team.
+    owner: Learning team
+    status: agreed
+    evidence: [analyses/profiling/profile_null_keys.sql]
+    implemented_in: [int_learner_key_candidates]
+    relates_to: [DEC-STU-04]

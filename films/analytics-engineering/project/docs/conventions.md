@@ -31,7 +31,7 @@ split by domain; the marts by consumer, which is a domain too.
 | `course` | `models/core/course/` | The awards the university offers | TCSI Course packet |
 | `planning` | `models/marts/planning/`, `seeds/expected/planning/` | Planning's marts, as at census | |
 | `wallet` | `models/marts/wallet/` | The wallet app's marts, as they are now | |
-| shared | `models/_shared/`, `seeds/reference/shared/` | The university's map (domains and key entities), the key sets, the version columns, the time spine | |
+| shared | `models/_shared/`, `seeds/reference/shared/` | The university's map (domains and key entities), the key sets seed (generated from the sources), the version columns, the time spine | |
 
 The domains follow the reference model, TCSI (Tertiary Collection of Student Information): check
 it, adopt what fits, extend where the business needs more, and record each extension in the
@@ -42,9 +42,10 @@ built and who uses it are never lost in each other's YAML:
 
 | Folder | Holds |
 |---|---|
-| `sources/<source>/` | `_<source>__sources.yml` and `_<source>__docs.md` |
+| `sources/<source>/` | `_<source>__sources.yml` and `_<source>__docs.md`. The source's key set is an attribute of the source (`meta.key_set`): its code, system, owner, and each system key with the case staging writes it in |
 | `models/` | The models, by layer and domain |
 | `exposures/<consumer>/` | `_<consumer>__exposures.yml`: the dashboards and apps that use the marts |
+| `requirements/` | The registers: questions, requirements, decisions, gaps and limitations, mirroring `sources/`, `models/<domain>/` and `exposures/`, plus `_project__requirements.yml`. Not read by dbt. See [`requirements/README.md`](../requirements/README.md) |
 
 The conceptual model is written at two levels:
 
@@ -95,8 +96,27 @@ The governance test does the job of a dbt v2 check. When the project moves to db
 engine), it moves to `checks/`, as the SQL in its header shows.
 
 A source's folder holds its doc block and the columns only that source has
-(`_<source>__docs.md`). `docs/` holds how the work is done (process, conventions, decisions,
-gaps), not what the data means.
+(`_<source>__docs.md`). `docs/` holds how the work is done (process, conventions) and the
+generated index of the registers, not what the data means.
+
+## Splitting into projects
+
+Today one project holds every domain (DEC-PRJ-03). Every file a domain owns is under a path named
+for it, so when a team owns a domain, its project is those paths:
+
+| What | A core domain's project (`student`) | A consumer's project (`planning`) |
+|---|---|---|
+| Models | `models/intermediate/student/`, `models/core/student/` | `models/marts/planning/` |
+| Seeds | `seeds/reference/student/` | `seeds/expected/planning/` |
+| Macros | | `macros/planning/` |
+| Exposures | | `exposures/planning/` |
+| Registers | `requirements/models/student/` | `requirements/exposures/planning/` |
+| Sources | The sources it reads, with their registers (`sources/<system>/`, `requirements/sources/<system>/`) | None: it reads the core |
+
+What every domain shares (`models/_shared/`, `macros/shared/`, `seeds/reference/shared/`,
+`requirements/_project__requirements.yml`, these conventions) becomes a package each project
+installs. A consumer's project refs the public core across projects, as `examples/planning/`
+sketches.
 
 ## Access
 
@@ -139,7 +159,7 @@ to itself, and they meet only on the public core. `examples/planning/` sketches 
 
 ## Keys and hashes
 
-- **Key sets.** Every key is qualified by where it comes from: `SIS` (student system), `LMS` (learning platform), `SC` (short-course platform). The list is written once, in `models/_shared/_shared__conceptual.yml`; `scripts/generate/definitions.py` generates `seeds/reference/shared/key_sets.csv` from it.
+- **Key sets.** Every key is qualified by where it comes from: `SIS` (student system), `LMS` (learning platform), `SC` (short-course platform). Each key set is written once, on the source that issues it (`meta.key_set` in `sources/<system>/_<system>__sources.yml`); `scripts/generate/definitions.py` generates `seeds/reference/shared/key_sets.csv` from them.
 - **One case per key.** Staging writes each system key in one case: IDs and codes upper case (`S-20417`, `GCDA`), platform user IDs and emails lower case (`u-88213`). So `s-20417` typed into the platform is the same key as `S-20417`, and a readable key and its hash are one to one.
 - **Readable key.** `business_key('SIS', 'student_id')` gives `SIS|S-20417`; null when any part is missing or blank.
 - **Hash.** `hash_key(['learner_bk'])`: sha-256, as 64 hex characters, of the parts trimmed, upper-cased and joined with `|`, with a sentinel for a missing part. Every key in these sources is case-insensitive. The exact rules are in the macro's comment, `macros/shared/keys.sql`. DuckDB's `sha256` and Databricks' `sha2(..., 256)` give the same value.

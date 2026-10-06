@@ -5,7 +5,7 @@ description: Review the project's YAML and Markdown for facts written twice, dri
 
 # Review metadata for duplication
 
-Each fact lives once. Meaning goes in the domain's conceptual model (`_<domain>__conceptual.yml`), decisions and gaps in `docs/`,
+Each fact lives once. Meaning goes in the domain's conceptual model (`_<domain>__conceptual.yml`), questions, decisions and gaps in the registers in `requirements/`,
 everything the build uses in YAML, and long or shared text in doc blocks. This skill finds the
 places where that slipped.
 

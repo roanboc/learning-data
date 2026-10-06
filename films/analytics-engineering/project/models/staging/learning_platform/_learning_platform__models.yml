@@ -17,7 +17,7 @@ models:
       - name: student_bk
         description: >
           The student ID the account holds, qualified: SIS|S-20417. Staff type it in, so it's
-          often missing and sometimes wrong (see docs/gaps.md).
+          often missing and sometimes wrong (see GAP-LMS-02 in docs/registers.md).
         data_tests:
           - relationships:
               arguments:

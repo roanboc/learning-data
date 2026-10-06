@@ -1,0 +1,70 @@
+# What the short-course platform holds, against what the business expects. The schema is in requirements/README.md.
+scope:
+  kind: source
+  name: short_courses
+  code: SC
+
+items:
+
+  - id: GAP-SC-01
+    type: gap
+    step: gaps_and_contracts
+    title: Emails written as typed
+    expectation: An email is written the same way everywhere.
+    reality: >
+      The short-course platform keeps case and spaces as typed: 2 enrolments find no customer as
+      typed, none once trimmed and lower-cased (analyses/profiling/profile_orphans.sql).
+    resolution: [rule_in_model]
+    text: >
+      Trim every key and write it in one case before comparing: emails lower case, IDs upper case.
+      The hash upper-cases every key too.
+    owner: Learning team
+    status: delivered
+    evidence: [analyses/profiling/profile_orphans.sql]
+    implemented_in: [staging, hash_key]
+
+  - id: GAP-SC-02
+    type: gap
+    step: gaps_and_contracts
+    title: Walk-in enrolments with no email
+    expectation: Every short-course enrolment has an email.
+    reality: Walk-in enrolments can have none. One current enrolment has none, and its certificate can't reach anyone.
+    resolution: [accept]
+    text: Warn on any; stop the build above five.
+    owner: Learning team
+    status: delivered
+    implemented_in: [stg_short_courses__enrolments]
+    relates_to: [DEC-SC-01, LIM-SC-01]
+
+  - id: GAP-SC-03
+    type: gap
+    step: gaps_and_contracts
+    title: Certificates of attendance in the same table
+    expectation: A certificate is a credential.
+    reality: The short-course platform issues certificates of completion and of attendance in one table.
+    resolution: [rule_in_model]
+    text: Only certificates of completion are credentials.
+    owner: Mei Tanaka, registrar's office
+    status: delivered
+    implemented_in: [int_credentials_unioned]
+    relates_to: [DEC-STU-02]
+
+  - id: DEC-SC-01
+    type: decision
+    step: tests
+    title: Warn on an enrolment with no email; stop above five
+    text: An enrolment with no email - warn when there's any, stop the build when more than five.
+    why: One or two walk-ins a term are expected, and the learning team follows them up. More means something broke.
+    decided_by: The learning team
+    decided_on: 2026-10-09
+    status: delivered
+    implemented_in: [stg_short_courses__enrolments]
+    relates_to: [GAP-SC-02]
+
+  - id: LIM-SC-01
+    type: limitation
+    step: gaps_and_contracts
+    title: An enrolment with no email gives a credential no one holds
+    text: It stays out of the core until the learning team adds the email.
+    status: agreed
+    relates_to: [GAP-SC-02]

@@ -1,0 +1,50 @@
+sources:
+  - name: short_courses
+    description: '{{ doc("source_short_courses") }}'
+    database: "{{ env_var('DBT_SOURCES_CATALOG', target.database) }}"
+    schema: "{{ env_var('DBT_SOURCES_SCHEMA_PREFIX', '') }}short_courses"
+    config:
+      # Read by dbt-duckdb only: on DuckDB each table is a CSV file in data/. Databricks reads the ingested table.
+      external_location: "read_csv('data/short_courses/{name}.csv', header = true, all_varchar = true)"
+      # on DuckDB the column is text; on Databricks the cast does nothing
+      loaded_at_field: "cast(_loaded_at as timestamp)"
+      freshness:
+        warn_after: {count: 2, period: day}
+        error_after: {count: 7, period: day}
+      meta:
+        owner: Learning team
+        key_set:
+          code: SC
+          system: short-course platform
+          owner: Learning team
+          # Each key the system issues, and the case staging writes it in (docs/conventions.md).
+          system_keys:
+            - {key: customer_email, case: lower, example: grace.okafor@mail.example}
+            - {key: enrolment_id, case: upper, example: C-88}
+          example: SC|grace.okafor@mail.example
+    tables:
+      - name: learners
+        description: >
+          One row per version of a customer, as the vendor calls learners. The system key is the
+          email, as typed: case and spaces vary.
+        config:
+          meta:
+            system_key: [customer_email]
+      - name: enrolments
+        description: One row per version of an enrolment in a short course. The system key is the enrolment ID.
+        config:
+          meta:
+            system_key: [enrolment_id]
+            limitations:
+              - id: LIM-SC-01
+                text: >
+                  An enrolment with no email gives a credential no one holds. It stays out of the
+                  core until the learning team adds the email.
+              - id: LIM-SC-02
+                was: GAP-SC-02
+                text: >
+                  Walk-in enrolments can have no email. The build warns on any, and stops above
+                  five.
+        columns:
+          - name: certificate_type
+            description: '{{ doc("certificate_type") }}'

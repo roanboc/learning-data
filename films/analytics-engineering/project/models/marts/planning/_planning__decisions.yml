@@ -1,0 +1,29 @@
+# Decisions about the planning consumer: what was decided, why, and who decided.
+# Permanent: a decision is never deleted; a replaced one is marked superseded and relates to
+# what replaced it. The schema is in requirements/README.md, and docs/decisions.md indexes
+# every log. Not parsed by dbt (.dbtignore).
+
+scope: {kind: consumer, name: planning, code: PLN}
+
+decisions:
+
+  - id: DEC-PLN-01
+    step: scope
+    title: Scope is what Planning's question touches
+    text: 'Scope: the entities Planning''s question touches, and no more: learner, credential, award, and
+      credit towards an award.'
+    why: '"Model the university" never ends. A question does.'
+    decided_by: Noor, data architect, with Planning
+    decided_on: 2026-10-01
+    status: agreed
+
+  - id: DEC-PLN-02
+    step: consumer_output
+    title: Planning's mart is as it was at census
+    text: Planning's mart is as it was at census, dated by when things took effect.
+    why: Planning compares with the census report. It builds on the same core as the wallet.
+    decided_by: Planning, the wallet app team and Noor
+    decided_on: 2026-10-08
+    status: agreed
+    implemented_in: [mart_planning__near_award]
+    relates_to: [DEC-WAL-01]

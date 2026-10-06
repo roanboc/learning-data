@@ -1,0 +1,48 @@
+# Decisions about the student_system source: what was decided, why, and who decided.
+# Permanent: a decision is never deleted; a replaced one is marked superseded and relates to
+# what replaced it. The schema is in requirements/README.md, and docs/decisions.md indexes
+# every log. Not parsed by dbt (.dbtignore).
+
+scope: {kind: source, name: student_system, code: SIS}
+
+decisions:
+
+  - id: DEC-SIS-01
+    step: gaps_and_contracts
+    title: An email matches only when exactly one learner has it
+    text: An email matches only when exactly one learner has it. The registrar's office decides the rest.
+    why: 'Expected: One email, one learner. Found: Two students share a family email, in the student system
+      and on the platform (analyses/profiling/profile_shared_emails.sql).'
+    decided_by: Mei Tanaka, registrar's office
+    status: agreed
+    sources: [student_system, learning_platform]
+    evidence: [analyses/profiling/profile_shared_emails.sql]
+    implemented_in: [int_learner_key_candidates, int_learner_keys_matched, learner_identity_decisions]
+    relates_to: [DEC-STU-04]
+    was: GAP-SIS-01
+
+  - id: DEC-SIS-02
+    step: gaps_and_contracts
+    title: A change is dated by the student system's effective date
+    text: Use the student system's effective date to date a change.
+    why: 'Expected: A change is dated when it happened. Found: The student system records some changes late:
+      a withdrawal effective on 27 March was recorded on 3 April (analyses/profiling/profile_late_changes.sql).
+      The platforms only say when they recorded a change.'
+    decided_by: Mei Tanaka, registrar's office
+    status: agreed
+    sources: [student_system, learning_platform, short_courses]
+    evidence: [analyses/profiling/profile_late_changes.sql]
+    implemented_in: [int_learner_timeline]
+    relates_to: [LIM-STU-07]
+    was: GAP-SIS-02
+
+  - id: DEC-SIS-03
+    step: gaps_and_contracts
+    title: An award is conferred when the first completed version takes effect
+    text: An award is conferred on the day the first completed version takes effect.
+    why: 'Expected: The student system says when an award was conferred. Found: It has no conferral record.
+      The student''s status turns completed.'
+    decided_by: Mei Tanaka, registrar's office
+    status: agreed
+    implemented_in: [int_credentials_unioned]
+    relates_to: [GAP-SIS-03]

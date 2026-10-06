@@ -10,9 +10,18 @@ models:
     config:
       meta:
         grain: One row per learner per award, as at census date
+        glossary_term: near_award
         owner: Planning
         domain: planning
         consumer: Census dashboard
+        limitations:
+          - id: LIM-PLN-01
+            text: >
+              The Planning mart applies identity as it's known today to the census date. The
+              census team matched two learners by hand before publishing on 14 April 2026; the
+              registrar's office recorded the same matches as identity decisions D-001 and D-002
+              in October. Without those decisions, the mart counts 10 learners, not 12, and the
+              reconciliation fails.
     constraints:
       - type: primary_key
         name: pk_mart_planning__near_award
@@ -102,20 +111,6 @@ models:
           within the var near_award_credit_points of it: more than none left, and no more than
           that many.
         data_type: boolean
+        config:
+          meta: {glossary_term: near_award}
         constraints: [{type: not_null}]
-
-exposures:
-
-  - name: census_dashboard
-    label: Census dashboard
-    type: dashboard
-    maturity: high
-    description: >
-      Planning's census dashboard: learners near a graduate certificate, by faculty, as at census
-      date. It reconciles with the census report every run (tests/reconcile_planning_with_census_report.sql).
-    owner:
-      name: Planning
-      email: planning@uni.example
-    depends_on:
-      - ref('mart_planning__near_award')
-      - metric('learners_near_graduate_certificate')

@@ -17,7 +17,7 @@ models:
       - name: student_bk
         description: >
           The student ID the account holds, qualified: SIS|S-20417. Staff type it in, so it's
-          often missing and sometimes wrong (see docs/gaps.md).
+          often missing and sometimes wrong (see DEC-LMS-02, and GAP-LMS-02 in requirements/).
         data_tests:
           - relationships:
               arguments:
@@ -33,7 +33,7 @@ models:
         config:
           meta: {personal_data: direct}
       - name: account_status
-        description: The platform's account status. Mapped to the canonical set in seeds/status_map.csv.
+        description: The platform's account status. Mapped to the canonical set in seeds/reference/student/status_map.csv.
         data_tests:
           - accepted_values:
               arguments:

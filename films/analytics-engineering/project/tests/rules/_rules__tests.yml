@@ -1,0 +1,6 @@
+data_tests:
+
+  - name: keys_decided_different_stay_apart
+    description: A decision that two keys are different people holds, whatever the matching rules do.
+    config:
+      meta: {owner: "Mei Tanaka, registrar's office"}

@@ -1,0 +1,23 @@
+# The course domain's conceptual model: the awards the university offers. Owned by the registrar's
+# office.
+#
+# Not parsed by dbt (.dbtignore). scripts/definitions.py turns each definition into a doc block in
+# _course__definitions.md, next to this file. The question and the key sets are in models/_shared/.
+
+domain: course
+reference:
+  model: TCSI
+  packet: Course
+  adopted: The award as a course of study, identified by its code, with the credit points it requires.
+
+entities:
+
+  - name: award
+    definition: >
+      A qualification the university confers, such as a graduate certificate or a master, for
+      a set number of credit points. When it's conferred on a learner, it's a credential too.
+    owner: Mei Tanaka, registrar's office
+    business_key:
+      issued_by: Registrar's office
+      rule: The award code, qualified by its key set, SIS|GCDA.
+    history: Every version, dated when it was recorded.

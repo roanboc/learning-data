@@ -7,7 +7,8 @@ seed-paths: ["seeds"]
 test-paths: ["tests"]
 analysis-paths: ["analyses"]
 macro-paths: ["macros"]
-docs-paths: ["docs"]
+# Doc blocks live with the domain that owns them, in models/. docs/ holds the process, not definitions.
+docs-paths: ["models"]
 clean-targets: ["target", "logs"]
 
 # Stated once, used everywhere. Override one for a run with --vars.
@@ -37,6 +38,8 @@ models:
       +group: credential_model
       +access: private
 
+    # Core and intermediate are split by domain (core/student/, core/course/), following the
+    # reference model, TCSI. Staging is split by source system; marts by consumer.
     core:
       +materialized: table
       +schema: core
@@ -69,3 +72,5 @@ seeds:
   credentials:
     +schema: reference
     +group: credential_model
+    planning:
+      +group: planning

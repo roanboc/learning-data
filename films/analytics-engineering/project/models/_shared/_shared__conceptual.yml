@@ -1,0 +1,35 @@
+# The conceptual model's shared part: the question it answers, and the key sets every domain uses.
+#
+# Each domain's entities and relationships are in its own folder:
+#   models/core/student/_student__conceptual.yml   learner, credential, credit towards an award
+#   models/core/course/_course__conceptual.yml     award
+# The domains follow the reference model, TCSI (Tertiary Collection of Student Information): its
+# Student and Course packets. Where the business needs more than TCSI holds, the domain's file says so.
+#
+# Not parsed by dbt (.dbtignore). scripts/definitions.py turns each domain's definitions into a doc
+# block next to it, and the key sets below into seeds/shared/key_sets.csv.
+#
+# The diagram of the whole slice is drawn by hand in _shared__conceptual.md, next to this file.
+
+question:
+  asked_by: Planning
+  text: >
+    How many learners are within 15 credit points of a graduate certificate, by faculty,
+    as at census date?
+  decision: >
+    How many places to offer in each faculty's final graduate certificate units next semester.
+  also_served: The learner's wallet app, which needs the same facts as they are now.
+
+key_sets:
+  - code: SIS
+    system: student system
+    owner: Registrar's office
+  - code: LMS
+    system: learning platform
+    owner: Learning team
+  - code: SC
+    system: short-course platform
+    owner: Learning team
+
+decisions: docs/decisions.md
+gaps: docs/gaps.md

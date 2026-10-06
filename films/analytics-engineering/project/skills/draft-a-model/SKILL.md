@@ -10,7 +10,7 @@ turns them green, in the right layer.
 
 ## Steps
 
-1. **Find the model's place** in `docs/conventions.md`: which layer, which name, which access. Read the entity in `model/conceptual.yml`.
+1. **Find the model's place** in `docs/conventions.md`: which layer, which name, which access. Read the entity in its domain's conceptual model (`models/core/<domain>/_<domain>__conceptual.yml`); the model goes in that domain's folder.
 2. **Write the YAML first**, in the folder's `_<folder>__models.yml`:
    - the grain in one sentence, in `meta.grain`: "One row per ...", and a description of what a row means;
    - the grain as a test: `unique`, or `unique_combination` with `arguments: {columns: [...]}`;

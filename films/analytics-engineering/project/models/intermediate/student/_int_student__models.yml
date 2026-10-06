@@ -84,7 +84,7 @@ models:
                   - first key recorded
                   - own key
       - name: decision_id
-        description: The decision in seeds/learner_identity_decisions.csv, when a person decided.
+        description: The decision in seeds/student/learner_identity_decisions.csv, when a person decided.
       - name: decided_by
         description: '{{ doc("decided_by") }}'
       - name: decided_on

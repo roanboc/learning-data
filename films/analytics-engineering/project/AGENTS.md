@@ -11,7 +11,7 @@ every step, a person approves. This page says what an agent may and may not do.
 - The conceptual model: [the university's map](models/_shared/_shared__conceptual.md) of domains and key entities, and each core domain and mart's own, in its folder ([`student`](models/core/student/_student__conceptual.yml), [`course`](models/core/course/_course__conceptual.yml), [`planning`](models/marts/planning/_planning__conceptual.yml), [`wallet`](models/marts/wallet/_wallet__conceptual.yml)): what each entity means, its key and its owner, and each consumer's question.
 - [`docs/decisions.md`](docs/decisions.md): every decision and why, indexed from each scope's log (`_<scope>__decisions.yml`, next to what it's about). Known limitations are on the model or source they affect (`meta.limitations`).
 - [`requirements/`](requirements/): what's still open while something is built. Temporary: when an item is done, move what lasts to its home and delete it. It's not a backlog: the team's backlog tool tracks the work (who, when, how big), and you can read it.
-- [`skills/`](skills/): how to do the five jobs agents do most here: draft the conceptual model, profile a source, draft a model, reconcile and diff, review metadata.
+- [`skills/`](skills/): how to do the six jobs agents do most here: draft the conceptual model, profile a source, draft a model, reconcile and diff, review metadata, sync the glossary.
 
 ## What you may do
 
@@ -72,7 +72,7 @@ Say in the pull request what you changed, why, what you checked, and the evidenc
 
 | Change | Approves |
 |---|---|
-| Meaning: a definition, a key, an identity rule, a business rule | Mei Tanaka, registrar's office, for learners, awards and credentials; the learning team for microcredentials |
+| Meaning: a definition, a key, an identity rule, a business rule | Mei Tanaka, registrar's office, for learners, awards and credentials; the learning team for microcredentials; data governance names the glossary term a definition comes from |
 | The model: grain, entities, relationships, versions | Noor, data architect |
 | The code: models, tests, macros | Jun Park, analytics engineer, in review |
 | A consumer contract | Its consumer: Planning, or the wallet app team |

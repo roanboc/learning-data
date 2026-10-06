@@ -1,159 +1,167 @@
 1
-00:00:01,400 --> 00:00:07,354
+00:00:01,400 --> 00:00:07,358
 Hacia 1850, la nota la sonaba distinta de una ciudad a otra, y seguía subiendo poco a poco.
 
 2
-00:00:08,054 --> 00:00:14,300
+00:00:08,058 --> 00:00:14,304
 En 1859, Francia la fijó por decreto y guardó un diapasón en París como su hogar.
 
 3
-00:00:15,600 --> 00:00:21,128
+00:00:15,604 --> 00:00:21,132
 Otros diapasones se comprobaban con él, y los instrumentos se afinaban con ellos, nunca al revés.
 
 4
-00:00:22,628 --> 00:00:26,691
+00:00:22,632 --> 00:00:26,695
 Hoy, antes de tocar, toda una orquesta aún se afina con una sola nota.
 
 5
-00:00:27,991 --> 00:00:32,836
+00:00:27,995 --> 00:00:32,840
 Una definición puede funcionar así: guardada en un lugar, y todo lo demás afinado con ella.
 
 6
-00:00:39,136 --> 00:00:44,792
+00:00:39,140 --> 00:00:44,796
 La revisión de metadatos del agente lo encontró: la definición de título, en cuatro lugares.
 
 7
-00:00:46,092 --> 00:00:51,135
+00:00:46,096 --> 00:00:51,139
 La wiki, una descripción en YAML, el catálogo y el tooltip del dashboard de Planificación.
 
 8
-00:00:52,435 --> 00:00:59,386
+00:00:52,439 --> 00:00:59,390
 Una dice que el título se entrega en papel. Otra perdió los créditos. Otra llama grado a todo título.
 
 9
-00:01:00,886 --> 00:01:05,540
+00:01:00,890 --> 00:01:05,544
 Solo el tooltip dice aún lo que aprobó Mei, las palabras del modelo conceptual.
 
 10
-00:01:06,840 --> 00:01:11,411
+00:01:06,844 --> 00:01:11,415
 Nada mantuvo a las demás alineadas. Se desviaron, un pequeño cambio a la vez.
 
 11
-00:01:15,111 --> 00:01:22,389
+00:01:15,115 --> 00:01:22,393
 La solución no es una quinta copia, ni una mejor. La definición ya tiene un hogar. Todo lo demás debe salir de él.
 
 12
-00:01:24,089 --> 00:01:29,308
+00:01:24,093 --> 00:01:29,312
 El significado vive en el modelo conceptual: qué es cada cosa, su clave y quién es su dueño.
 
 13
-00:01:30,808 --> 00:01:39,362
-Las decisiones viven en un registro junto a aquello de lo que tratan, con el porqué y el quién. Los vacíos que el equipo aceptó viven en el modelo, como limitaciones conocidas.
+00:01:30,812 --> 00:01:39,815
+Y donde el glosario de negocio ya define un término, ese es su hogar. Gobierno de datos dice qué término aplica, y el modelo conceptual toma sus palabras.
 
 14
-00:01:40,862 --> 00:01:46,372
-Todo lo que usa el build vive en YAML: grano, claves, contratos, tests y dueños.
+00:01:41,115 --> 00:01:49,669
+Las decisiones viven en un registro junto a aquello de lo que tratan, con el porqué y el quién. Los vacíos que el equipo aceptó viven en el modelo, como limitaciones conocidas.
 
 15
-00:01:47,872 --> 00:01:53,516
-Un registro de decisiones no es una copia. Guarda el porqué, y el YAML de un modelo no tiene lugar para él.
+00:01:51,169 --> 00:01:56,679
+Todo lo que usa el build vive en YAML: grano, claves, contratos, tests y dueños.
 
 16
-00:01:57,216 --> 00:02:00,528
-Así que el título se define una vez, en el modelo conceptual.
+00:01:58,179 --> 00:02:03,823
+Un registro de decisiones no es una copia. Guarda el porqué, y el YAML de un modelo no tiene lugar para él.
 
 17
-00:02:02,028 --> 00:02:09,410
-Un script convierte cada definición en un doc block, en una página Markdown que escribe él mismo. Nadie la edita.
+00:02:07,523 --> 00:02:10,835
+Así que el título se define una vez, en el modelo conceptual.
 
 18
-00:02:10,910 --> 00:02:16,776
-El YAML no copia la definición. La nombra, y dbt muestra ahí la definición.
+00:02:12,335 --> 00:02:19,717
+Un script convierte cada definición en un doc block, en una página Markdown que escribe él mismo. Nadie la edita.
 
 19
-00:02:18,276 --> 00:02:26,361
-Para cambiar el significado, cambia una línea, con la aprobación de Mei. Edita la página generada, y falla el check en CI.
+00:02:21,217 --> 00:02:27,083
+El YAML no copia la definición. La nombra, y dbt muestra ahí la definición.
 
 20
-00:02:28,061 --> 00:02:35,116
-La revisión del agente corre otra vez: en el proyecto, ninguna descripción escrita dos veces. La wiki ahora enlaza al sitio de docs.
+00:02:28,583 --> 00:02:36,668
+Para cambiar el significado, cambia una línea, con la aprobación de Mei. Edita la página generada, y falla el check en CI.
 
 21
-00:02:37,816 --> 00:02:39,255
-Los diagramas también se desvían.
+00:02:38,368 --> 00:02:45,423
+La revisión del agente corre otra vez: en el proyecto, ninguna descripción escrita dos veces. La wiki ahora enlaza al sitio de docs.
 
 22
-00:02:39,955 --> 00:02:45,831
-El diagrama conceptual se dibuja a mano, para personas. Solo cambia cuando cambia el significado.
+00:02:48,123 --> 00:02:49,562
+Los diagramas también se desvían.
 
 23
-00:02:47,131 --> 00:02:55,592
-El diagrama físico se genera: cada tabla del core y de los marts, sus columnas, tipos y claves, leídos de lo que dbt analizó.
+00:02:50,262 --> 00:02:56,138
+El diagrama conceptual se dibuja a mano, para personas. Solo cambia cuando cambia el significado.
 
 24
-00:02:56,892 --> 00:03:00,700
-Si el YAML cambia y el diagrama no, CI falla.
+00:02:57,438 --> 00:03:05,899
+El diagrama físico se genera: cada tabla del core y de los marts, sus columnas, tipos y claves, leídos de lo que dbt analizó.
 
 25
-00:03:01,400 --> 00:03:03,668
-Dibuja el significado. Genera la estructura.
+00:03:07,199 --> 00:03:11,007
+Si el YAML cambia y el diagrama no, CI falla.
 
 26
-00:03:07,768 --> 00:03:12,723
-En Databricks, la gente encuentra las tablas en el catálogo y lee ahí sus descripciones.
+00:03:11,707 --> 00:03:13,975
+Dibuja el significado. Genera la estructura.
 
 27
-00:03:14,423 --> 00:03:19,040
-Así que cada build le envía las descripciones, de cada tabla y sus columnas.
+00:03:18,075 --> 00:03:23,030
+En Databricks, la gente encuentra las tablas en el catálogo y lee ahí sus descripciones.
 
 28
-00:03:20,740 --> 00:03:26,206
-Nadie las edita ahí: un nuevo build sobrescribe el cambio. Corrígelo en casa, y fluye hacia fuera.
+00:03:24,730 --> 00:03:29,347
+Así que cada build le envía las descripciones, de cada tabla y sus columnas.
 
 29
-00:03:27,906 --> 00:03:35,378
-Una dirección: de los archivos hacia el catálogo y lo que lo lea. Afinado desde una fuente, nunca al revés.
+00:03:31,047 --> 00:03:36,513
+Nadie las edita ahí: un nuevo build sobrescribe el cambio. Corrígelo en casa, y fluye hacia fuera.
 
 30
-00:03:38,078 --> 00:03:40,208
-Escrito una vez no significa que nunca cambie.
+00:03:38,713 --> 00:03:50,499
+Río arriba, la misma regla. Una sincronización revisa el glosario de forma periódica. Cuando un término cambia, abre un pull request, para que el dueño vea a qué afecta el nuevo significado antes de que llegue al build.
 
 31
-00:03:41,508 --> 00:03:49,775
-Una credencial puede vencer, y un verdadero o falso no puede decirlo. Así que is_revoked pasa a status: vigente, vencida o revocada.
+00:03:52,399 --> 00:04:01,022
+Una dirección: del glosario, por los archivos, hacia el catálogo y lo que lo lea. Afinado desde una fuente, nunca al revés.
 
 32
-00:03:51,275 --> 00:03:57,413
-Eso rompe a quien lea la columna vieja. Así que es una nueva versión de la credencial, junto a la anterior.
+00:04:03,722 --> 00:04:05,852
+Escrito una vez no significa que nunca cambie.
 
 33
-00:03:58,913 --> 00:04:07,663
-La versión uno se construye desde la dos, así que la lógica vive una vez. Y tiene fecha de salida: el 31 de marzo de 2027.
+00:04:07,152 --> 00:04:15,419
+Una credencial puede vencer, y un verdadero o falso no puede decirlo. Así que is_revoked pasa a status: vigente, vencida o revocada.
 
 34
-00:04:09,363 --> 00:04:15,293
-Las exposures declaradas con los contratos dicen a quién avisar: solo a la app de la billetera. Fija la versión dos.
+00:04:16,919 --> 00:04:23,057
+Eso rompe a quien lea la columna vieja. Así que es una nueva versión de la credencial, junto a la anterior.
 
 35
-00:04:16,793 --> 00:04:22,695
-Quien aún lea la versión uno recibe el aviso de dbt, con la fecha, cada vez que hace build.
+00:04:24,557 --> 00:04:33,307
+La versión uno se construye desde la dos, así que la lógica vive una vez. Y tiene fecha de salida: el 31 de marzo de 2027.
 
 36
-00:04:24,195 --> 00:04:28,859
-Un cambio que rompe llega como una decisión con plazo, no como una sorpresa.
+00:04:35,007 --> 00:04:40,937
+Las exposures declaradas con los contratos dicen a quién avisar: solo a la app de la billetera. Fija la versión dos.
 
 37
-00:04:32,559 --> 00:04:41,279
-Ese es el ciclo. Una pregunta, las fuentes, los consumidores, vacíos y contratos, tests, capas, el número confiable, revisión, escrito una vez, y cambio.
+00:04:42,437 --> 00:04:48,339
+Quien aún lea la versión uno recibe el aviso de dbt, con la fecha, cada vez que hace build.
 
 38
-00:04:42,379 --> 00:04:47,269
-En cada paso, el agente redactó y comprobó. En cada paso, una persona aprobó.
+00:04:49,839 --> 00:04:54,503
+Un cambio que rompe llega como una decisión con plazo, no como una sorpresa.
 
 39
-00:04:48,769 --> 00:04:53,829
-Y llega una nueva pregunta, del equipo de la billetera. El ciclo vuelve a empezar, en la pregunta.
+00:04:58,203 --> 00:05:06,923
+Ese es el ciclo. Una pregunta, las fuentes, los consumidores, vacíos y contratos, tests, capas, el número confiable, revisión, escrito una vez, y cambio.
 
 40
-00:04:55,329 --> 00:04:56,831
+00:05:08,023 --> 00:05:12,913
+En cada paso, el agente redactó y comprobó. En cada paso, una persona aprobó.
+
+41
+00:05:14,413 --> 00:05:19,473
+Y llega una nueva pregunta, del equipo de la billetera. El ciclo vuelve a empezar, en la pregunta.
+
+42
+00:05:20,973 --> 00:05:22,475
 Decláralo. Luego constrúyelo.

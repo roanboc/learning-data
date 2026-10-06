@@ -24,7 +24,7 @@ places where that slipped.
    python skills/review-metadata/find_repeats.py
    ```
    Each one is a candidate for a doc block in the owning domain's `_<domain>__columns.md` (or `models/_shared/_shared__columns.md` when every domain shares it), shown with `doc()` in every place. Read near-repeats too: the same meaning in slightly different words is the drift this step exists to catch.
-3. **Definitions outside the conceptual model.** Search the YAML and Markdown for a definition of an entity ("A learner is", "A credential is") that isn't a `doc()` of the generated block. There should be one home: the domain's conceptual model.
+3. **Definitions outside the conceptual model.** Search the YAML and Markdown for a definition of an entity ("A learner is", "A credential is") that isn't a `doc()` of the generated block. There should be one home: the domain's conceptual model, or the glossary term it names in `source:` (`skills/sync-the-glossary/` keeps those in step).
 4. **Numbers the build uses, written in prose.** The census date, the 15 credit points, the limit of four microcredentials and the passing grades live as vars in `dbt_project.yml`. Docs refer to the var; they don't repeat the value.
 5. **Missing metadata.** Every core and mart model has `meta.grain`, `meta.owner`, `meta.domain` and a glossary term; every column that holds personal data has `meta.personal_data`; every core and mart column has a description.
 6. **Nothing done left in `requirements/`.** For each open item, check its `done_when`: if it's already true, move what lasts to its home (see `requirements/README.md`) and delete the item.

@@ -17,3 +17,15 @@ decisions:
     decided_by: Finance, with Noor, data architect
     decided_on: 2026-10-19
     status: agreed
+
+  - id: DEC-FIN-02
+    step: consumer_output
+    title: Tuition is saved in the enrolled award only
+    text: Recognised credit saves tuition only in the award the learner is enrolled in on census day,
+      counted once, at that award's published rate for the census year.
+    why: The core counts recognised credit towards every award it could count towards. A learner pays
+      tuition for one award; counted across all of them, the saving would be two or three times too big.
+    decided_by: Finance
+    decided_on: 2026-10-21
+    status: agreed
+    was: Q-FIN-01

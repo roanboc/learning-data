@@ -9,5 +9,6 @@
 - Owner of the meaning: Finance.
 - Rule: As at census date (var census_date) - every entity is read at its version valid that day.
 - Rule: Recognised credit only (microcredentials and short-course certificates a faculty recognises); units passed are paid for.
+- Rule: Only in the award the learner is enrolled in on census day. Credit that counts towards other awards saves nothing there yet.
 - History: One census date at a time, like Planning's.
 {% enddocs %}

@@ -16,16 +16,14 @@ items:
       A reconciliation test compares the mart with Finance's tuition report, faculty by faculty,
       and passes on every build.
 
-  - id: Q-FIN-01
-    type: question
-    step: source_reality
-    title: The award recognised credit saves tuition in
-    text: The core counts recognised credit towards every award it could count towards, so one
-      microcredential can count against two or three awards. Which one does it save the learner
-      tuition in?
+  - id: REQ-FIN-02
+    type: requirement
+    step: consumer_output
+    title: The rows and columns the forecast needs
+    text: One row per learner per award they're enrolled in, as at census date, with the faculty, the
+      award type, the recognised credit points, the rate per credit point and the tuition forgone.
+      No names or emails.
     owner: Finance
     status: open
     done_when: >
-      Finance has answered. The answer is a rule on tuition_forgone, in Finance's conceptual model,
-      and a decision in Finance's log.
-    evidence: [analyses/profiling/profile_credit_across_awards.sql]
+      The mart's contract enforces these columns and their types, and its grain is tested as a key.

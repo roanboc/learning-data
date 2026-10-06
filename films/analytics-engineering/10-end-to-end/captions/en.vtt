@@ -1,0 +1,190 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:08.164
+In the fourteenth century, the masons building York Minster drew their windows full size, on a floor of plaster.
+
+00:00:09.464 --> 00:00:13.629
+From each drawing they cut a wooden template, and carved the stone to match it.
+
+00:00:15.129 --> 00:00:20.483
+When a window was done, the next was drawn over it. In time, the floor was plastered again.
+
+00:00:21.983 --> 00:00:24.992
+The drawings were for the work. The windows are what stayed.
+
+00:00:26.692 --> 00:00:34.808
+A project has both: files for the work, deleted when it's done, and files that stay. This is one new question, from start to end.
+
+00:00:41.108 --> 00:00:43.407
+A new consumer arrives: Finance.
+
+00:00:44.107 --> 00:00:49.800
+How much tuition does recognised credit save learners, by faculty, as at census date?
+
+00:00:51.300 --> 00:00:56.060
+The answer sets next year's revenue forecast, and what a microcredential should cost.
+
+00:00:57.360 --> 00:01:04.824
+Finance is a business domain: it decides with the data. So it gets folders of its own, named for it, from the first commit.
+
+00:01:06.324 --> 00:01:16.657
+Step one is the scope. Its conceptual model holds the question; its decision log, the first decision: recognised credit only, read from the public core.
+
+00:01:18.157 --> 00:01:26.200
+And one file that won't last: Finance's open requirements. The first says what done looks like: match Finance's own number.
+
+00:01:27.700 --> 00:01:33.942
+Who does the work, and when, lives in the team's backlog tool. The project keeps only what's still open.
+
+00:01:37.642 --> 00:01:44.699
+Step two: what the data really holds. Finance reads the core, not the sources, so the agent profiles the core.
+
+00:01:45.999 --> 00:01:51.852
+Recognised credit counts towards every award it could count towards. Aisha's counts towards three.
+
+00:01:53.352 --> 00:02:01.884
+Added up across awards, that's 385 credit points. In the award each learner is enrolled in, 160.
+
+00:02:03.584 --> 00:02:11.654
+Which one saves the tuition? No rule can say. A question opens, with the query as evidence, and Finance owns the answer.
+
+00:02:13.154 --> 00:02:19.119
+Finance brings one thing of its own: the tuition rates it publishes, as reference data it owns.
+
+00:02:22.619 --> 00:02:29.898
+Step three: the output. First, Finance answers: only the award the learner is enrolled in, on census day.
+
+00:02:31.198 --> 00:02:37.483
+The answer goes where it lasts: a rule in Finance's conceptual model, and a decision in its log.
+
+00:02:38.983 --> 00:02:43.967
+And the question is deleted. Git keeps it, and the decision says where it came from.
+
+00:02:45.667 --> 00:02:52.109
+Then the output, before any code: one row per learner per award they're enrolled in, as at census date.
+
+00:02:53.609 --> 00:02:57.345
+That's a requirement too, open until a contract enforces it.
+
+00:03:00.845 --> 00:03:08.104
+Step four: the promise. Finance's mart gets a contract: the columns and types the forecast needs, enforced.
+
+00:03:09.604 --> 00:03:16.150
+For now it's an empty table, the right shape with no rows, and the forecast is declared as what depends on it.
+
+00:03:17.650 --> 00:03:24.729
+One gap: the project knows the published rate, not what each learner was charged. Scholarships and discounts aren't in.
+
+00:03:26.229 --> 00:03:32.262
+Finance accepts it. It becomes a known limitation, on the mart, with a decision that says why.
+
+00:03:35.962 --> 00:03:38.536
+Step five: the tests, before the logic.
+
+00:03:39.636 --> 00:03:45.443
+The grain, tested as a key. Learners that exist. Only the award types Finance prices.
+
+00:03:46.743 --> 00:03:52.016
+A unit test for the rule: credit that counts towards two awards still saves tuition once.
+
+00:03:53.316 --> 00:04:01.648
+And Finance's own number, from its spreadsheet, as an expected seed that no model may read. A reconciliation compares the two.
+
+00:04:03.148 --> 00:04:08.356
+Nothing can pass yet. The unit test fails, so dbt doesn't even build the mart.
+
+00:04:10.056 --> 00:04:15.979
+But the grain is tested and the contract enforced, so the output requirement is done, and deleted.
+
+00:04:19.679 --> 00:04:21.243
+Step six: the logic.
+
+00:04:22.343 --> 00:04:30.264
+It reads the core as it was on census day, keeps the award each learner was enrolled in, and prices the credit at that year's rate.
+
+00:04:31.764 --> 00:04:37.791
+It reads nothing but the public core and Finance's own rates. No other team's model changes.
+
+00:04:39.291 --> 00:04:45.294
+It's short, because the core already did the hard parts: identity, timelines, and the credit itself.
+
+00:04:46.794 --> 00:04:52.482
+Every test passes: 67,800 dollars, across four faculties.
+
+00:04:56.382 --> 00:05:02.774
+Step seven: validate. Faculty by faculty, against Finance's report. The difference is zero.
+
+00:05:04.474 --> 00:05:09.915
+Then the diff against main, built from scratch: every core table, Planning's mart, the wallet's.
+
+00:05:11.415 --> 00:05:17.661
+No key added, none lost, no column changed. A new consumer moved nobody else's numbers.
+
+00:05:19.161 --> 00:05:21.906
+Finance signs off, with every row in front of it.
+
+00:05:25.806 --> 00:05:27.373
+Step eight: review and ship.
+
+00:05:28.473 --> 00:05:35.405
+The last open item, match Finance's number, is done: the reconciliation enforces it on every build.
+
+00:05:36.905 --> 00:05:41.988
+So the item is deleted, and with it Finance's requirements file, and its folder.
+
+00:05:43.688 --> 00:05:49.098
+A check in CI makes sure of it: nothing stays in requirements unless it's still open.
+
+00:05:50.598 --> 00:05:55.184
+Jun approves the code, and Finance its number. The agent never merges.
+
+00:05:58.884 --> 00:06:01.605
+Step nine: the agent reviews the metadata.
+
+00:06:02.705 --> 00:06:10.106
+Two descriptions were written twice, word for word: the award's code and its name, in Finance's YAML and in Planning's.
+
+00:06:11.606 --> 00:06:17.778
+The award belongs to the course domain, so each becomes one doc block there, shown everywhere it's needed.
+
+00:06:19.278 --> 00:06:28.143
+Zero descriptions written twice. The generated pages, the definitions, the diagram and the index of decisions, keep up on their own.
+
+00:06:31.843 --> 00:06:36.958
+Step ten: operate and evolve. Finance pins the versions of the core it reads.
+
+00:06:38.458 --> 00:06:44.516
+A new version reaches Finance as a choice with a date, and the lineage names Finance among who to tell.
+
+00:06:46.216 --> 00:06:52.902
+And because Finance's folders were named for it from the first commit, Finance can move out to a project of its own, whole.
+
+00:06:54.602 --> 00:07:01.056
+Its marts, its exposure, its seeds, its decisions, and the test and two analyses it was built with.
+
+00:07:04.956 --> 00:07:09.835
+Ten steps, ten commits. You can replay them one by one, in the repository.
+
+00:07:11.335 --> 00:07:16.840
+Some files arrived to stay: the question, the decisions, the contract, the tests, the model.
+
+00:07:18.340 --> 00:07:25.719
+Some were for the work: three open items, and the file that held them. They're gone. The project says only what's still open.
+
+00:07:27.419 --> 00:07:38.477
+Every file has a home. Sources by system: application domains. The core by meaning: data domains. Marts and exposures by who decides: business domains.
+
+00:07:40.177 --> 00:07:46.636
+And every file has a lifetime: written by hand, generated, or kept only while the work goes on.
+
+00:07:48.136 --> 00:07:53.877
+The next question will start the same way: in folders of its own, with one file that won't last.
+
+00:07:55.577 --> 00:08:06.047
+That's the series. A question and its meaning, the sources, the consumers, promises and proofs, layers, the trusted number, an agent on the team, written once, and change.
+
+00:08:07.747 --> 00:08:11.346
+The model is the blueprint. dbt is how you build it.
+
+00:08:13.046 --> 00:08:14.548
+Declare it. Then build it.

@@ -18,3 +18,9 @@ groups:
     owner:
       name: Wallet app team
       email: wallet@uni.example
+
+  - name: finance
+    description: Finance's marts, built on the core.
+    owner:
+      name: Finance
+      email: finance@uni.example

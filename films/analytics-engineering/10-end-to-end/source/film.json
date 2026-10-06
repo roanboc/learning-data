@@ -1,0 +1,21 @@
+{
+  "key": "end-to-end",
+  "title": "End to end",
+  "sub": "In the weeds of data crafting, a technical series for analytics engineers: one new consumer, Finance, taken through the ten steps in a real project, one commit per step. The files that arrive to stay, the ones that change, the temporary ones deleted when the work is done; every file in a home named for its domain, so a domain can move out to a project of its own.",
+  "howto": "White lines on blue are the model; code on dark glass is a file in the project, as that step's commit left it. Along the top, the ten commits fill in as the steps are taken. A file that arrives is marked +, one that changes ~, one that's deleted −; temporary files are drawn dashed. Teal is an AI agent's work; gold is a person's approval.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "floor",
+    "breath",
+    1.6
+  ],
+  "say": [
+    ["\\bYAML\\b", "yammel"],
+    ["\\bJun\\b", "Joon"],
+    ["\\bdbt\\b", "dee bee tee"],
+    ["\\bCI\\b", "see eye"]
+  ]
+}

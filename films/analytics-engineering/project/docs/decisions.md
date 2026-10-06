@@ -8,6 +8,7 @@ What was decided, why, and who decided, for every source, domain and consumer, a
 
 | ID | Scope | Decision | Why | Who | When | Status |
 |---|---|---|---|---|---|---|
+| [DEC-FIN-01](../models/marts/finance/_finance__decisions.yml) | consumer `finance` | **Recognised credit only, on the public core.** Finance's question counts recognised credit only, from microcredentials and short-course certificates; units passed are paid for. It reads the public core, and touches no other domain. | Only recognised credit saves tuition. A new consumer builds on what the core publishes, so no other team's work changes. | Finance, with Noor, data architect | 19 Oct 2026 | agreed |
 | [DEC-PLN-01](../models/marts/planning/_planning__decisions.yml) | consumer `planning` | **Scope is what Planning's question touches.** Scope: the entities Planning's question touches, and no more: learner, credential, award, and credit towards an award. | "Model the university" never ends. A question does. | Noor, data architect, with Planning | 1 Oct 2026 | agreed |
 | [DEC-PRJ-06](../models/_shared/_shared__decisions.yml) | project | **The conceptual model at two levels; sources, models and exposures apart.** The conceptual model is written at two levels: a map of the university's domains and key entities (at most 50, modelled or planned, following TCSI), and each core domain and mart's own. Sources, models and exposures each get a top-level folder. | The map shows where each domain sits and what's still to model, without the detail; the detail stays with its owner. What comes in, what's built and who uses it are different things, and each is easy to find on its own. | Noor, data architect | 16 Oct 2026 | agreed |
 | [DEC-STU-01](../models/core/student/_student__decisions.yml) | domain `student` | **A microcredential is a kind of credential.** A microcredential is a kind of credential, not an entity of its own. So is a badge. | Same identity (the issuer's identifier) and the same lifecycle (issued, maybe revoked). Only the credit points differ. | Mei Tanaka, registrar's office | 2 Oct 2026 | agreed |
@@ -27,6 +28,7 @@ What was decided, why, and who decided, for every source, domain and consumer, a
 
 | ID | Scope | Decision | Why | Who | When | Status |
 |---|---|---|---|---|---|---|
+| [DEC-FIN-02](../models/marts/finance/_finance__decisions.yml) (was Q-FIN-01) | consumer `finance` | **Tuition is saved in the enrolled award only.** Recognised credit saves tuition only in the award the learner is enrolled in on census day, counted once, at that award's published rate for the census year. | The core counts recognised credit towards every award it could count towards. A learner pays tuition for one award; counted across all of them, the saving would be two or three times too big. | Finance | 21 Oct 2026 | agreed |
 | [DEC-PLN-02](../models/marts/planning/_planning__decisions.yml) | consumer `planning` | **Planning's mart is as it was at census.** Planning's mart is as it was at census, dated by when things took effect. | Planning compares with the census report. It builds on the same core as the wallet. | Planning, the wallet app team and Noor | 8 Oct 2026 | agreed |
 | [DEC-WAL-01](../models/marts/wallet/_wallet__decisions.yml) | consumer `wallet` | **The wallet's marts are as they are now.** The wallet's marts are as they are now. | The wallet shows the learner today. It builds on the same core as Planning. | Planning, the wallet app team and Noor | 8 Oct 2026 | agreed |
 
@@ -34,6 +36,7 @@ What was decided, why, and who decided, for every source, domain and consumer, a
 
 | ID | Scope | Decision | Why | Who | When | Status |
 |---|---|---|---|---|---|---|
+| [DEC-FIN-03](../models/marts/finance/_finance__decisions.yml) | consumer `finance` | **The published rate, not what each learner was charged.** Tuition forgone is worked out at the published rate per credit point. Scholarships, discounts and fee waivers aren't in; Finance adjusts for them in the forecast. Accepted as LIM-FIN-01, on the mart. | No source in the project holds what each learner was charged. The forecast needs the published price; the adjustments are Finance's own, and change every year. | Finance | 22 Oct 2026 | agreed |
 | [DEC-LMS-01](../sources/learning_platform/_learning_platform__decisions.yml) | source `learning_platform` | **A badge that disappears is revoked.** A badge that disappears is revoked from the day the platform stopped showing it. | Expected: A revoked credential is known as revoked. Found: The learning platform has no revocation flag. It deletes a revoked badge. | Learning team |  | agreed |
 | [DEC-LMS-02](../sources/learning_platform/_learning_platform__decisions.yml) | source `learning_platform` | **An account with no student ID matches by email.** Match by email when exactly one student has it; a recorded decision beats the rules. | Expected: Every learning platform account names its student. Found: Staff type the student ID in. 4 of 42 current accounts have none (analyses/profiling/profile_null_keys.sql); one holds another student's ID. | Learning team |  | agreed |
 | [DEC-SC-02](../sources/short_courses/_short_courses__decisions.yml) (was GAP-SC-01) | source `short_courses` | **Every key is trimmed and written in one case.** Trim every key and write it in one case before comparing: emails lower case, IDs upper case. The hash upper-cases every key too. | Expected: An email is written the same way everywhere. Found: The short-course platform keeps case and spaces as typed: 2 enrolments find no customer as typed, none once trimmed and lower-cased (analyses/profiling/profile_orphans.sql). | Learning team |  | agreed |
@@ -85,6 +88,7 @@ How many decisions each log holds at each step. A domain's project, when it has 
 | project | 1 | 1 |  |  |  | 4 | 4 | 1 |
 | domain `course` |  |  |  |  |  | 1 |  |  |
 | domain `student` | 4 | 2 |  | 1 |  | 1 |  | 1 |
+| consumer `finance` | 1 |  | 1 | 1 |  |  |  |  |
 | consumer `planning` | 1 |  | 1 |  |  |  |  |  |
 | consumer `wallet` |  |  | 1 |  |  |  |  |  |
 | source `learning_platform` |  |  |  | 2 |  |  |  |  |

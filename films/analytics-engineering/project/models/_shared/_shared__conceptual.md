@@ -44,7 +44,7 @@ flowchart TB
         e_research_candidature["Research candidature"]
         e_supervision["Supervision"]
     end
-    subgraph d_finance["Finance"]
+    subgraph d_fees["Fees"]
         e_student_fee["Student fee"]
         e_help_loan["Help loan"]
         e_scholarship["Scholarship"]
@@ -114,9 +114,9 @@ flowchart TB
 | staff | People and culture | appointment | planned | Staff appointment |
 | research | Graduate research school | research_candidature | planned | HDR course admission |
 | research | Graduate research school | supervision | planned | Extension: institutional |
-| finance | Finance | student_fee | planned | Student contribution and tuition fee |
-| finance | Finance | help_loan | planned | HELP loans |
-| finance | Finance | scholarship | planned | Commonwealth scholarships |
+| fees | Finance | student_fee | planned | Student contribution and tuition fee |
+| fees | Finance | help_loan | planned | HELP loans |
+| fees | Finance | scholarship | planned | Commonwealth scholarships |
 
 ## Consumers
 
@@ -124,5 +124,6 @@ Each consumer has its own conceptual model: the question it asks, and what it ad
 
 | Consumer | Asked by | Question | Uses |
 |---|---|---|---|
+| [finance](../marts/finance/_finance__conceptual.yml) | Finance | How much tuition does recognised credit save learners, by faculty, as at census date? | learner, award, credit_towards_award |
 | [planning](../marts/planning/_planning__conceptual.yml) | Planning | How many learners are within 15 credit points of a graduate certificate, by faculty, as at census date? | learner, award, credit_towards_award |
 | [wallet](../marts/wallet/_wallet__conceptual.yml) | The learner's wallet app | What does this learner hold now, and how far are they from the award they're enrolled in? | learner, credential, award, credit_towards_award |

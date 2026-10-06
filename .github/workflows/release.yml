@@ -261,6 +261,16 @@ jobs:
                        "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js",
                        "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
                        "films/a-sharper-sketch/source/src",
+                       "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
+            {"name": "End to end", "key": "end-to-end-en",
+             "dir": "films/analytics-engineering/10-end-to-end/source", "lang": "en",
+             "player": "dist/film.js", "site_player": "site/assets/end-to-end/film.js",
+             "video": "dist/end-to-end.mp4", "file": "end-to-end.mp4",
+             "captions": [["films/analytics-engineering/10-end-to-end/captions/en.srt", "end-to-end.en.srt"], ["films/analytics-engineering/10-end-to-end/captions/es.srt", "end-to-end.es.srt"]],
+             "paths": ["films/analytics-engineering/10-end-to-end/source", ":(exclude)films/analytics-engineering/10-end-to-end/source/src/i18n/es/captions.js", "films/analytics-engineering/shared",
+                       "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js",
+                       "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
+                       "films/a-sharper-sketch/source/src",
                        "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]}
           ]
           EOF

@@ -1,0 +1,34 @@
+# Finance's conceptual model: the question it asks, and the one concept it adds to the core.
+#
+# Not parsed by dbt (.dbtignore). scripts/generate/definitions.py turns each definition into a doc
+# block in _finance__definitions.md, next to this file, and checks that every entity it uses is defined
+# in a core domain. The diagram is drawn by hand in _finance__conceptual.md.
+
+domain: finance
+kind: mart
+
+question:
+  asked_by: Finance
+  text: >
+    How much tuition does recognised credit save learners, by faculty, as at census date?
+  decision: >
+    Next year's revenue forecast, and the price of microcredentials.
+
+# The core's entities this mart reads, as they were on the census date.
+uses: [learner, award, credit_towards_award]
+
+entities:
+
+  - name: tuition_forgone
+    label: tuition forgone
+    definition: >
+      The tuition a learner doesn't pay for an award, because credit they earned elsewhere was
+      recognised towards it: the recognised credit points, at the published rate for the award.
+    owner: Finance
+    business_key:
+      rule: The learner's business key and the award's, together, as at census date.
+    rules:
+      - As at census date (var census_date) - every entity is read at its version valid that day.
+      - Recognised credit only (microcredentials and short-course certificates a faculty recognises); units passed are paid for.
+      - Only in the award the learner is enrolled in on census day. Credit that counts towards other awards saves nothing there yet.
+    history: One census date at a time, like Planning's.

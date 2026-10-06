@@ -108,7 +108,7 @@ scene("intermediate",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,i
       T(ctx,f,1014,y-4,{f:"mono",w:500,size:18,color:rgba(BL_VIO,1)});T(ctx,lab,1014,y+26,{w:700,size:20});}),{dy:20});});
   arrive(ctx,1200,756,t,cW,()=>withA(ctx,rOut,()=>tag(ctx,1000,740,"customer → learner",BL_VIO,{size:20})),{dy:12});
   const rp=clamp((t-w("recipe","top to bottom"))/2.8,0,1);
-  arrive(ctx,1425,380,t,cR-0.1,()=>bl_code(ctx,990,140,870,"CTE names from models/intermediate/int_learner_timeline.sql",BL_TL,{edge:BL_VIO,lit:Object.fromEntries(BL_TL.map((s,i)=>[i,i<2?0:clamp(rp*11-(i-2),0,1)])),litCol:BL_VIO,dim:{0:0.4,1:0.4}}),{dy:30});
+  arrive(ctx,1425,380,t,cR-0.1,()=>bl_code(ctx,990,140,870,"CTE names from models/intermediate/student/int_learner_timeline.sql",BL_TL,{edge:BL_VIO,lit:Object.fromEntries(BL_TL.map((s,i)=>[i,i<2?0:clamp(rp*11-(i-2),0,1)])),litCol:BL_VIO,dim:{0:0.4,1:0.4}}),{dy:30});
   arrive(ctx,1425,660,t,w("recipe","recipe"),()=>tag(ctx,1425,660,"the recipe: one step per name",BL_VIO,{align:"center",size:20}),{dy:12});
   ctx.restore();vign(ctx,S);});
 

@@ -305,7 +305,7 @@ function pp_gap1(ctx,x,y,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;
     const L=(s,xx,yy,col,f)=>T(ctx,s,xx,yy,{f,w:600,size:20,color:col||rgba(INK,0.95)});
     L("1",x+16,y+146,rgba(SOFT,1),"mono");
     let xx=cell(1,"exp",TRUST);L("A revoked credential is",xx,y+146);L("known as revoked.",xx,y+174);
-    xx=cell(2,"real",EDGE_);L("The learning platform has no",xx,y+146);L("revocation flag: it deletes a",xx,y+174);L("revoked badge.",xx,y+202);
+    xx=cell(2,"real",EDGE_);L("The learning platform has no",xx,y+146);L("revocation flag. It deletes a",xx,y+174);L("revoked badge.",xx,y+202);
     xx=cell(3,"dec",PP_INT);const r1="Rule in the model:",f1="Fix at source";T(ctx,r1,xx,y+146,{w:800,size:20,color:rgba(PP_DEC[1][1],1)});L(" a badge that disappears",xx+tw(ctx,r1,20,800),y+146);
     L("is revoked from the day the platform",xx,y+174);L("stopped showing it.",xx,y+202);T(ctx,f1,xx+tw(ctx,"stopped showing it. ",20,600),y+202,{w:800,size:20,color:rgba(PP_DEC[0][1],1)});L(", requested: …",xx+tw(ctx,"stopped showing it. ",20,600)+tw(ctx,f1,20,800),y+202);
     xx=cell(4,"where",PP_INT);L("int_credentials_",xx,y+146,rgba(PP_INT,1),"mono");L("unioned",xx,y+174,rgba(PP_INT,1),"mono");});

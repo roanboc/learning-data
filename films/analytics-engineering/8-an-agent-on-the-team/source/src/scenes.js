@@ -191,9 +191,9 @@ const AG_DESC=["  - name: reconcile_planning_with_census_report","    descriptio
 function ag_build(ctx,x,y,w,t,o){o=o||{};const st=o.state||0,warn=fin(st,0,1)*(st<1.5?1:0),pass=st>=2?1:0;
   // a passing test returns no rows, so the passing build shows only its line and the summary
   const L=pass?["PASS not_null_int_learner_timeline_learner_key","PASS versions_do_not_overlap_int_learner_timeline_learner_key","PASS versions_do_not_overlap_core_learner_v1_learner_key",
-    "PASS reconcile_planning_with_census_report","PASS=143 WARN=1 ERROR=0"]:["PASS not_null_int_learner_timeline_learner_key","PASS versions_do_not_overlap_int_learner_timeline_learner_key","PASS versions_do_not_overlap_core_learner_v1_learner_key",
+    "PASS reconcile_planning_with_census_report","PASS=144 WARN=1 ERROR=0"]:["PASS not_null_int_learner_timeline_learner_key","PASS versions_do_not_overlap_int_learner_timeline_learner_key","PASS versions_do_not_overlap_core_learner_v1_learner_key",
     warn>0.5?"WARN 1 reconcile_planning_with_census_report":"FAIL 1 reconcile_planning_with_census_report","faculty_code | in_the_mart | in_the_census_report","BUS          |           4 |                    3",
-    warn>0.5?"PASS=142 WARN=2 ERROR=0":"PASS=142 WARN=1 ERROR=1"];
+    warn>0.5?"PASS=143 WARN=2 ERROR=0":"PASS=143 WARN=1 ERROR=1"];
   const rc=pass?AG_GRN:mix(AG_RED,AG_AMB,warn),sm=pass?4:6,lc={0:AG_GRN,1:AG_GRN,2:AG_GRN,3:rc,[sm]:pass?AG_GRN:warn>0.5?AG_AMB:AG_RED};if(!pass)lc[5]=rc;
   const lit={3:o.lit||0,[sm]:o.lit6||0};if(!pass)lit[5]=o.lit||0;
   return ag_code(ctx,x,y,w,"dbt build",L,{a:o.a,p:o.p,edge:rc,lineCol:lc,lit,litCol:rc,dim:{0:0.3,1:0.3,2:0.3}});}
@@ -285,7 +285,7 @@ scene("validate",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 7. Review and ship ---------- */
-const AG_WF=["      - name: Build and test on DuckDB","        run: dbt build --profiles-dir .","","      - name: Doc blocks and key sets match the conceptual model","        run: python scripts/definitions.py --check","","      - name: Physical diagram matches the YAML","        run: python scripts/diagrams.py --check","","      - name: The metric gives the census report's number","        run: |","          …","          python scripts/check_metric.py"];
+const AG_WF=["      - name: Build and test on DuckDB","        run: dbt build --profiles-dir .","","      - name: Doc blocks and key sets match the conceptual model","        run: python scripts/generate/definitions.py --check","","      - name: Physical diagram matches the YAML","        run: python scripts/generate/diagrams.py --check","","      …","","      - name: The metric gives the census report's number","        run: |","          …","          python scripts/check/check_metric.py"];
 const AG_README=["… With dbt Cloud, a CI job does the same, and builds only the changed models","and what depends on them:","`dbt build --select state:modified+ --defer --state <production artifacts>`,","where the artifacts are the `manifest.json` of the last production run."];
 const AG_WHO=["| Change | Approves |","|---|---|","| Meaning: a definition, a key, an identity rule, a business rule | Mei Tanaka, … |","| The model: grain, entities, relationships, versions | Noor, data architect |","| The code: models, tests, macros | Jun Park, analytics engineer, in review |","| A consumer contract | Its consumer: Planning, or the wallet app team |","","The agent recommends; people approve."];
 const AG_CHECKS=["Build and test on DuckDB","Doc blocks and key sets match the conceptual model","Physical diagram matches the YAML","The metric gives the census report's number","Parse for Databricks"];
@@ -312,7 +312,7 @@ scene("ship",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
     [[940,100,104,480,"dbt show --select reconcile_census_report",AG_REC.map(l=>l.slice(14)),TRUST],[940,360,488,480,"scripts/tools/diff_against_main.py",AG_D1.slice(0,5).map(l=>l.slice(51)),KT_AI]].forEach(([x0,y0,x1,y1,nm,L,col])=>{
       const k=lerp(1,368/900,ev);ctx.save();ctx.translate(lerp(x0,x1,ev),lerp(y0,y1,ev));ctx.scale(k,k);ag_code(ctx,0,0,900,nm,L,{edge:col,lit:nm[0]==="d"?{1:1,2:1,3:1,4:1}:{3:1,4:1},litCol:AG_GRN});ctx.restore();});});
   // CI: the checks that run on every pull request, from the workflow
-  const wA=fin(t,cC-0.2,0.6)*(1-fin(t,w("cloud","On dbt Cloud")-0.4,0.5));if(wA>0)arrive(ctx,1390,310,t,cC-0.2,()=>ag_code(ctx,940,100,900,".github/workflows/credential-project.yml",AG_WF,{a:wA,edge:[170,205,255],p:clamp((t-cC)/1.6,0,1),lit:{0:chk[0],1:chk[0],3:chk[1],4:chk[1],6:chk[2],7:chk[2],9:chk[3],12:chk[3]},litCol:AG_GRN}),{dy:30});
+  const wA=fin(t,cC-0.2,0.6)*(1-fin(t,w("cloud","On dbt Cloud")-0.4,0.5));if(wA>0)arrive(ctx,1390,310,t,cC-0.2,()=>ag_code(ctx,940,100,900,".github/workflows/credential-project.yml",AG_WF,{a:wA,edge:[170,205,255],p:clamp((t-cC)/1.6,0,1),lit:{0:chk[0],1:chk[0],3:chk[1],4:chk[1],6:chk[2],7:chk[2],11:chk[3],14:chk[3]},litCol:AG_GRN}),{dy:30});
   ag_tag(ctx,1390,580,"CI: the checks that run on every pull request",SOFT,fin(t,w("ci","the checks"),0.5)*wA,{size:20});
   ag_tag(ctx,1390,650,"parse for Databricks",[150,176,214],fin(t,w("cloud","parses"),0.5)*(1-fin(t,w("cloud","On dbt Cloud")-0.4,0.5)),{size:20});
   // dbt Cloud: only what changed, and what depends on it

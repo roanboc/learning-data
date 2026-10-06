@@ -71,7 +71,7 @@ scene("gaps",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   // the register: drafted by the agent, one line per gap; it steps back for gap 1 and returns for the ten decisions
   const away=fin(t,Rv-0.5,0.5)*(1-fin(t,Tn-0.05,0.6)),regA=fin(t,Rg-0.2,0.5)*(1-away);
   const p=clamp((t-w("register","register")-0.3)/0.42,0,10),tags=clamp((t-w("ten","ten decisions")+0.4)/1.2,0,1),ink=fin(t,w("ten","May")+0.2,0.8);
-  const Lv=c("leave"),hiRow={4:pulseAt(t,w("ten","ten decisions")+1.0,1.6),9:pulseAt(t,w("ten","ten decisions")+1.0,1.6)},meaning=[0,6,8];
+  const Lv=c("leave"),hiRow={4:pulseAt(t,w("ten","ten decisions")+1.0,1.6),9:pulseAt(t,w("ten","ten decisions")+1.0,1.6)},meaning=[6,8];
   // once decided, each gap leaves the register; the three still waiting on a fix at the source stay open
   const OPEN=[0,1,6],gone={};[2,3,4,5,7,8,9].forEach((i,k)=>gone[i]=fin(t,w("leave","leaves")+k*0.14,0.5));const stay=fin(t,w("leave","stays open")-0.2,0.5);OPEN.forEach(i=>hiRow[i]=stay);
   const ticks={};for(let i=0;i<10;i++)ticks[i]=fin(t,w("ten","approves")+(meaning.includes(i)?meaning.indexOf(i)*0.25:1.0+i*0.08),0.3);
@@ -290,8 +290,8 @@ scene("levels",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   const fOut=fin(t,Fr-0.3,0.6);
   arrive(ctx,1255,300,t,Wa+0.6,()=>pp_code(ctx,700,120,1110,"models/staging/short_courses/_short_courses__models.yml",PP_SCY,{a:1-fOut,size:18,lh:27,p:clamp((t-Wa-0.8)/1.8,0,1),edge:PP_SC,lit:{9:fin(t,t0,0.4),10:fin(t,t5,0.4),3:fin(t,w("agreed","learning team"),0.4)},litCol:PP_AMB}),{dy:30});
   // the learning team's decision, from the decisions log
-  arrive(ctx,1250,640,t,w("agreed","learning team")-0.2,()=>{pp_face(ctx,"tom",760,650,46,t,{name:"",role:""});T(ctx,"the learning team · docs/decisions.md",830,624,{w:800,size:22,color:rgba(TRUST,1)});
-    wrapT(ctx,"9 Oct 2026 · An enrolment with no email: warn when there's any, stop the build when more than five.",830,660,940,{w:600,size:20,color:rgba(INK,0.95)});},{dy:20});
+  arrive(ctx,1250,640,t,w("agreed","learning team")-0.2,()=>{pp_face(ctx,"tom",760,650,46,t,{name:"",role:""});T(ctx,"the learning team · DEC-SC-01 · _short_courses__decisions.yml",830,624,{w:800,size:22,color:rgba(TRUST,1)});
+    wrapT(ctx,"9 Oct 2026 · An enrolment with no email - warn when there's any, stop the build when more than five.",830,660,940,{w:600,size:20,color:rgba(INK,0.95)});},{dy:20});
   kt_gtick(ctx,1790,612,15,fin(t,w("agreed","learning team")+0.6,0.35));
   // today's build: one warning, and it carries on
   arrive(ctx,1060,546,t,To-0.1,()=>{glass(ctx,700,518,850,56,12,PP_AMB,{glow:14,ea:0.9,fill:"rgba(16,12,4,0.96)"});T(ctx,"today",722,554,{w:800,size:18,color:rgba(SOFT,1)});T(ctx,"WARN 1 not_null_stg_short_courses__enrolments_customer_bk",790,554,{f:"mono",w:500,size:18,color:rgba(PP_AMB,1)});},{dy:16});
@@ -306,13 +306,13 @@ scene("levels",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 8. Waiting, on purpose ---------- */
-const PP_COUNT=[[36,"not_null"],[20,"relationships"],[18,"accepted_values"],[18,"unique_combination"],[12,"unique"],[5,"versions_do_not_overlap"],[2,"singular"]];
+const PP_COUNT=[[36,"not_null"],[20,"relationships"],[18,"accepted_values"],[18,"unique_combination"],[12,"unique"],[5,"versions_do_not_overlap"],[3,"singular"]];
 scene("next",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.03,y:480});
   const Re=c("red"),Gr=c("green");
   // every test, in a column of hollow dots: written, reviewed, not yet run
   arrive(ctx,480,480,t,0.3,()=>{glass(ctx,90,100,800,760,18,[170,205,255],{glow:12,ea:0.6,fill:"rgba(6,10,20,0.95)"});},{from:0.96});
-  arrive(ctx,120,160,t,w("count","hundred")-0.2,()=>{T(ctx,"111",122,176,{w:800,size:52,color:rgba(INK,1)});T(ctx,"data tests",232,176,{w:700,size:28,color:rgba(SOFT,1)});},{from:0.9});
+  arrive(ctx,120,160,t,w("count","hundred")-0.2,()=>{T(ctx,"112",122,176,{w:800,size:52,color:rgba(INK,1)});T(ctx,"data tests",232,176,{w:700,size:28,color:rgba(SOFT,1)});},{from:0.9});
   PP_COUNT.forEach(([n,nm],i)=>{const y=242+i*66,t0=w("count","hundred")+0.3+i*0.22,a=fin(t,t0,0.4);if(a<=0)return;withA(ctx,a,()=>{T(ctx,String(n),170,y,{f:"mono",w:500,size:22,align:"right",color:rgba(INK,1)});T(ctx,nm,190,y,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});
     pp_dots(ctx,476,y-14,n,[170,205,255],clamp((t-t0)/0.8,0,1),{per:36,gap:11,r:4});});});
   arrive(ctx,120,720,t,w("count","Four unit")-0.2,()=>{T(ctx,"4",170,736,{f:"mono",w:500,size:22,align:"right",color:rgba(INK,1)});T(ctx,"unit tests",190,736,{w:700,size:22,color:rgba(PP_INT,1)});pp_dots(ctx,476,722,4,PP_INT,clamp((t-w("count","Four unit"))/0.6,0,1),{gap:14,r:5});},{from:0.9});

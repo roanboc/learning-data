@@ -105,7 +105,7 @@ scene("profile",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 4. Key sets ---------- */
-const SM_KS=["key_set,system_name,owner","SIS,student system,Registrar's office","LMS,learning platform,Learning team","SC,short-course platform,Learning team"];
+const SM_KS=["key_set,system_name,owner","LMS,learning platform,Learning team","SC,short-course platform,Learning team","SIS,student system,Registrar's office"];
 const SM_KM=["    business_key('SIS', 'student_id')                  ->  'SIS|S-20417'","    business_key('SIS', ['student_id', 'award_code'])  ->  'SIS|S-20417|GCDA'","    hash_key(['learner_bk'])                            ->  sha-256 of 'SIS|S-20417', 64 hex characters","    hash_key(['learner_bk', 'award_bk'])                ->  the key of a relationship between two keys"];
 const SM_ST=["        nullif(lower(trim(customer_email)), '') as email,","…","    select","        {{ business_key('SC', 'email') }} as customer_bk,","        *"];
 // Aisha's keys in this chapter's places, as they stand at time t (also where chapter 5 picks them up)

@@ -82,8 +82,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La frescura funciona igual: advertir si una fuente lleva un día de retraso, fallar a los tres.",
 "Who sets the level? The data's owner, with the reason written down.":
 "¿Quién fija el nivel? El responsable de los datos, con la razón por escrito.",
-"111 data tests. Four unit tests. Every promise written down, with its proof beside it.":
-"111 pruebas de datos. Cuatro pruebas unitarias. Cada promesa por escrito, con su prueba al lado.",
+"112 data tests. Four unit tests. Every promise written down, with its proof beside it.":
+"112 pruebas de datos. Cuatro pruebas unitarias. Cada promesa por escrito, con su prueba al lado.",
 "Each is written before the code it checks, so until that code is built, it can't pass. That's on purpose.":
 "Cada una se escribe antes del código que verifica, así que hasta que ese código exista, no puede pasar. Es a propósito.",
 "Next, the least code that turns them green, in the right place.":

@@ -15,6 +15,6 @@ think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",ski
     opts:[{t:"Twelve: it matches the census report."},{t:"Nine: it's the newest."},{t:"Both: the same question, asked about two days.",ok:true}],
     why:"Learners within 15 points of a graduate certificate: twelve as at census day, which Planning asked for; nine as at today. The output's grain says which day it describes."},
   "late":{stop:"when",q:"The platforms don't record when a change took effect. Which date do you use for them?",
-    opts:[{t:"The date they recorded it, accepted and written down as a gap.",ok:true},{t:"Today's date, when the model is built."},{t:"An effective date guessed from the student system."}],
-    why:"The recorded date is the only one there is. It's accepted, and written down as gap 6, so no one mistakes it for when the change happened."}
+    opts:[{t:"The date they recorded it, accepted and written down as a known limitation.",ok:true},{t:"Today's date, when the model is built."},{t:"An effective date guessed from the student system."}],
+    why:"The recorded date is the only one there is. It's accepted, and written down on the model as a known limitation, so no one mistakes it for when the change happened."}
   }}};

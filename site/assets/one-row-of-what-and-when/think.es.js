@@ -15,6 +15,6 @@ think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar
     opts:[{t:"Doce: coincide con el informe del censo."},{t:"Nueve: es el más nuevo."},{t:"Los dos: la misma pregunta, hecha sobre dos días.",ok:true}],
     why:"Estudiantes a 15 créditos o menos de un certificado de posgrado: doce a la fecha del censo, que es lo que preguntó Planificación; nueve a hoy. El grano de la salida dice qué día describe."},
   "late":{stop:"when",q:"Las plataformas no registran cuándo rigió un cambio. ¿Qué fecha usas para ellas?",
-    opts:[{t:"La fecha en que lo registraron, aceptada y escrita como una brecha.",ok:true},{t:"La fecha de hoy, cuando se construye el modelo."},{t:"Una fecha en que rigió, adivinada a partir del sistema de estudiantes."}],
-    why:"La fecha de registro es la única que hay. Se acepta, y queda por escrito como la brecha 6, para que nadie la confunda con cuándo pasó el cambio."}
+    opts:[{t:"La fecha en que lo registraron, aceptada y escrita como una limitación conocida.",ok:true},{t:"La fecha de hoy, cuando se construye el modelo."},{t:"Una fecha en que rigió, adivinada a partir del sistema de estudiantes."}],
+    why:"La fecha de registro es la única que hay. Se acepta, y queda por escrito en el modelo como una limitación conocida, para que nadie la confunda con cuándo pasó el cambio."}
   }}};

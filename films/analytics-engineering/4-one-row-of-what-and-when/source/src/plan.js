@@ -428,7 +428,7 @@ Object.assign(LV,{
       if(lab)T(c,lab,x+cw-14,y+ch-12,{w:700,size:17,align:"right",color:rgba(mix(SOFT,WEED,0.35),1)});return ch;};
     card(16,12,330,"stg_student_system__learners",["status_code     WD","effective_date  "+V.nextWeek,"_is_current     true"],SRC3[0][1],null,2);
     rw_pin(c,380,40,V.today,1,{size:18});rw_clock(c,392,104,12,RW_TIME,1);wrapT(c,V.notYet,412,110,180,{w:700,size:18,lh:22,color:rgba(RW_TIME,1)});
-    card(16,172,568,"models/core/core_learner.sql",["{{ valid_at(as_is_date(), 'timeline.valid_from',","    'timeline.valid_to') }} as is_current,"],TRUST,RW_RUN);},
+    card(16,172,568,"models/core/student/core_learner.sql",["{{ valid_at(as_is_date(), 'timeline.valid_from',","    'timeline.valid_to') }} as is_current,"],TRUST,RW_RUN);},
   rw_q_fixes:(c,w,h,st,L)=>{const V=L.vis;
     rw_l_ver(c,20,20,350,70,rw_l_d("1 Nov 2024",V),rw_l_d("2 Jul 2026",V),V.names[0],{col:KIND,fs:17,ns:17});rw_l_ver(c,20,102,350,70,rw_l_d("2 Jul 2026",V),"(open)",V.names[1],{col:RW_AMB,fs:17,ns:17});
     rw_l_test(c,20,196,350,"unique_combination",["learner_key, award_key"],-1,{size:17});T(c,"16",480,110,{w:800,size:60,align:"center",color:rgba(RW_RED,1)});

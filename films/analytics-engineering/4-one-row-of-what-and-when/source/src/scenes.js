@@ -80,7 +80,7 @@ scene("grain",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const out=1-fin(t,cT-0.5,0.6);withA(ctx,out,()=>{
     arrive(ctx,470,530,t,w("agent","Planning's question")-0.3,()=>{glass(ctx,120,470,700,124,18,RW_CON,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(ctx,"Planning's question",146,504,{w:700,size:18,color:rgba(RW_CON,1)});
       wrapT(ctx,"learners within 15 credit points of a graduate certificate, by faculty, as at census date",146,540,650,{w:700,size:22});},{dy:20});
-    arrive(ctx,470,710,t,w("agent","census report")-0.3,()=>{glass(ctx,120,620,700,170,18,[150,180,220],{glow:10,ea:0.7,fill:"rgba(7,12,24,0.95)"});T(ctx,"seeds/census_report.csv",146,654,{f:"mono",w:500,size:18,color:rgba([150,180,220],1)});
+    arrive(ctx,470,710,t,w("agent","census report")-0.3,()=>{glass(ctx,120,620,700,170,18,[150,180,220],{glow:10,ea:0.7,fill:"rgba(7,12,24,0.95)"});T(ctx,"seeds/expected/planning/census_report.csv",146,654,{f:"mono",w:500,size:18,color:rgba([150,180,220],1)});
       T(ctx,"one row per faculty",794,654,{w:700,size:18,align:"right",color:rgba(SOFT,1)});RW_REPORT.forEach((s,i)=>T(ctx,s,146+(i>2?250:0),698+(i%3)*30,{f:"mono",w:500,size:18,color:rgba(INK,0.9)}));},{dy:20});
     const ag=fin(t,cA-0.2,0.5),dr=fin(t,w("agent","drafts")-0.1,0.9);
     arrive(ctx,960,640,t,cA-0.2,()=>{kt_agent(ctx,960,640,34,t,{busy:dr*(1-fin(t,w("agent","Noor"),0.6))});
@@ -131,8 +131,8 @@ scene("fan",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);se
   // the join: every learner meets both versions, and the rows double
   const jOn=[];RW_FAN.forEach((_,i)=>{jOn.push(fin(t,w("join","every learner")+i*0.14,0.3));jOn.push(fin(t,w("double","become sixteen")+i*0.16,0.3));});
   const jy=lerp(360,392,clamp(jp*2.5,0,1)),eA=eOut;
-  arrive(ctx,1330,220,t,cJ-0.2,()=>{rw_code(ctx,840,110,980,"analyses/fan_out_without_point_in_time.sql",RW_E1,{a:eA,p:clamp((t-cJ)/1.4,0,1),size:18,lh:28,lit:{3:fin(t,w("join","key alone"),0.4)*(1-fx)},litCol:RW_AMB});
-    rw_code(ctx,840,110,980,"analyses/fan_out_without_point_in_time.sql",RW_E2,{a:eIn,size:18,lh:28,lit:{5:fin(t,w("fix","valid on census day"),0.5)},litCol:RW_TIME,seg:[[5,"valid_at(census_date()",fin(t,w("fix","valid on census day"),0.5),RW_TIME]]});},{dy:20});
+  arrive(ctx,1330,220,t,cJ-0.2,()=>{rw_code(ctx,840,110,980,"analyses/design/fan_out_without_point_in_time.sql",RW_E1,{a:eA,p:clamp((t-cJ)/1.4,0,1),size:18,lh:28,lit:{3:fin(t,w("join","key alone"),0.4)*(1-fx)},litCol:RW_AMB});
+    rw_code(ctx,840,110,980,"analyses/design/fan_out_without_point_in_time.sql",RW_E2,{a:eIn,size:18,lh:28,lit:{5:fin(t,w("fix","valid on census day"),0.5)},litCol:RW_TIME,seg:[[5,"valid_at(census_date()",fin(t,w("fix","valid on census day"),0.5),RW_TIME]]});},{dy:20});
   arrive(ctx,1330,600,t,w("join","every learner")-0.2,()=>rw_joined(ctx,840,jy,980,t,{on:jOn,fold:jf}),{dy:20});
   // threads from each learner to its rows, while they double
   const th=fin(t,w("join","every learner"),0.4)*(1-fin(t,cQ,0.8));if(th>0)RW_FAN.forEach((_,i)=>{const y0=300+44+56+i*32+16;[0,1].forEach(j=>{const q=jOn[2*i+j];if(q<=0)return;const y1=jy+96+(2*i+j)*27+14;
@@ -165,7 +165,7 @@ scene("versions",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
       rw_eye(ctx,72,y+62,12,[150,190,255],saw);});
     arrive(ctx,100,700,t,w("seen","saw a change"),()=>tag(ctx,100,700,"_valid_from: when the platform saw it",[150,190,255],{size:20}),{dy:10});
     arrive(ctx,100,760,t,w("seen","model uses that"),()=>tag(ctx,100,760,"when it was true: the effective date wins",RW_TIME,{size:20}),{dy:10});
-    arrive(ctx,1310,310,t,w("kept","Nothing is overwritten")-0.3,()=>rw_code(ctx,800,110,1020,"docs/sources.md",RW_DOC,{wrap:88,hang:0,balance:true,size:18,lh:30,edge:KIND,p:clamp((t-w("kept","Nothing is overwritten"))/2.4,0,1),
+    arrive(ctx,1310,310,t,w("kept","Nothing is overwritten")-0.3,()=>rw_code(ctx,800,110,1020,"models/_shared/_shared__columns.md",RW_DOC,{wrap:88,hang:0,balance:true,size:18,lh:30,edge:KIND,p:clamp((t-w("kept","Nothing is overwritten"))/2.4,0,1),
       lit:{2:saw},litCol:[150,190,255],seg:[[7,"saw a change",saw,[150,190,255]],[7,"when it was true",tru,RW_TIME],[8,"`effective_date`",tru,RW_TIME],[8,"`result_date`",tru,RW_TIME]]}),{dy:24});
     rw_eye(ctx,780,244,12,[150,190,255],saw);rw_clock(ctx,780,454,13,RW_TIME,tru);});
   // the core builds its own versions: Aisha's credit as a staircase, and the rows it makes
@@ -182,7 +182,7 @@ scene("versions",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   arrive(ctx,1460,316,t,cA+0.3,()=>rw_table(ctx,1120,160,[["valid_from",180,"l"],["valid_to",180,"l"],["credit_points_earned",280,"r"]],vr,{on:ts.map(x=>fin(t,x,0.4)),title:"core_credit_towards_award_v1 · Aisha, GCDA",titleMono:true,lh:32,edge:TRUST}),{dy:20});
   // the core's grain, and the test that no two versions overlap
   const lg=fin(t,w("core","one row per learner"),0.5),lo=fin(t,w("core","overlap")-0.3,0.5);
-  arrive(ctx,1470,660,t,cC-0.3,()=>rw_code(ctx,1120,468,700,"models/core/_core__models.yml",RW_Y4,{p:clamp((t-cC)/1.4,0,1),size:18,lh:26,edge:TRUST,lit:{3:lg,9:lo,10:lo,11:lo},seg:[[3,"per version",lg,RW_TIME]]}),{dy:24});
+  arrive(ctx,1470,660,t,cC-0.3,()=>rw_code(ctx,1120,468,700,"models/core/student/_core_student__models.yml",RW_Y4,{p:clamp((t-cC)/1.4,0,1),size:18,lh:26,edge:TRUST,lit:{3:lg,9:lo,10:lo,11:lo},seg:[[3,"per version",lg,RW_TIME]]}),{dy:24});
   arrive(ctx,630,828,t,w("core","A test"),()=>rw_test(ctx,200,800,860,"versions_do_not_overlap",lo>0.5?"no two versions overlap":"",fin(t,w("core","overlap")+0.3,0.4),{h:56}),{dy:14});
   ctx.restore();vign(ctx,S);});
 
@@ -227,11 +227,11 @@ scene("was",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);se
     arrive(ctx,960,712,t,w("both","Both are right"),()=>tag(ctx,960,712,"the same question · two days · both right",INK,{align:"center",size:22}),{dy:12});});
   // each output declares its day; one macro picks the version valid on it
   const lm=fin(t,w("declare","one small macro"),0.5);
-  arrive(ctx,540,480,t,w("declare","one small macro")-0.3,()=>rw_code(ctx,100,300,880,"macros/time.sql",RW_TIME5,{wrap:76,size:18,lh:28,p:clamp((t-w("declare","one small macro"))/1.4,0,1),edge:RW_TIME,
+  arrive(ctx,540,480,t,w("declare","one small macro")-0.3,()=>rw_code(ctx,100,300,880,"macros/shared/time.sql",RW_TIME5,{wrap:76,size:18,lh:28,p:clamp((t-w("declare","one small macro"))/1.4,0,1),edge:RW_TIME,
     seg:[[1,"valid_from is inclusive",lm,RW_TIME],[1,"valid_to exclusive",lm,RW_TIME],[4,"valid_at",lm,RW_TIME]]}),{dy:24});
   arrive(ctx,1415,490,t,w("declare","one small macro")+0.3,()=>rw_code(ctx,1010,300,810,"models/marts/planning/mart_planning__near_award.sql",RW_MART5,{size:18,lh:28,p:clamp((t-w("declare","one small macro")-0.5)/1.4,0,1),edge:LAYER4[3][1],lit:{3:lm,8:lm},litCol:RW_TIME}),{dy:24});
   const tD=w("declare","valid on it")+0.2;
-  arrive(ctx,960,770,t,tD,()=>{rw_code(ctx,100,716,1720,"docs/decisions.md",["| 8 Oct 2026 | Planning's mart is as it was at census, dated by when things took effect. The wallet's marts are as they are now. | … |"],{size:18,lh:28,edge:TRUST,p:clamp((t-tD)/1.0,0,1)});kt_gtick(ctx,1806,716,16,fin(t,tD+1.0,0.4));},{dy:16});
+  arrive(ctx,960,770,t,tD,()=>{rw_code(ctx,100,716,1720,"models/marts/{planning,wallet}/_*__decisions.yml",["    text: Planning's mart is as it was at census, dated by when things took effect.","    text: The wallet's marts are as they are now."],{size:18,lh:28,edge:TRUST,p:clamp((t-tD)/1.0,0,1)});kt_gtick(ctx,1806,716,16,fin(t,tD+1.0,0.4));},{dy:16});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 6. One timeline ---------- */
@@ -280,7 +280,7 @@ scene("stitch",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   arrive(ctx,190,790,t,w("cut","Jun")-0.2,()=>{rw_face(ctx,"jun",190,790,40,1,{t});T(ctx,"Jun",190,860,{w:800,size:22,align:"center"});},{dy:14});
   // the code: the change dates, then one value per attribute, the student system first
   const lC=fin(t,w("cut","every date"),0.5),lW=fin(t,w("wins","student system's"),0.5);
-  arrive(ctx,1485,380,t,cCu-0.2,()=>rw_code(ctx,1150,110,670,"models/intermediate/int_learner_timeline.sql",RW_TLC,{wrap:56,size:18,lh:28,edge:LAYER4[1][1],p:clamp((t-cCu)/2.0,0,1),lit:{1:lC,2:lC,4:lC,11:lW},seg:[[11,"student_email",lW,SRC3[0][1]],[11,"platform_email",lW,SRC3[1][1]],[11,"customer_email",lW,SRC3[2][1]]]}),{dy:24});
+  arrive(ctx,1485,380,t,cCu-0.2,()=>rw_code(ctx,1150,110,670,"models/intermediate/student/int_learner_timeline.sql",RW_TLC,{wrap:56,size:18,lh:28,edge:LAYER4[1][1],p:clamp((t-cCu)/2.0,0,1),lit:{1:lC,2:lC,4:lC,11:lW},seg:[[11,"student_email",lW,SRC3[0][1]],[11,"platform_email",lW,SRC3[1][1]],[11,"customer_email",lW,SRC3[2][1]]]}),{dy:24});
   [["1  student system",0,"wins"],["2  learning platform",1,"then the platform's"],["3  short courses",2,"short course's"]].forEach(([s,k,wd],i)=>arrive(ctx,1160,760+i*40,t,w("wins",wd)-0.1,()=>{ctx.fillStyle=rgba(SRC3[k][1],1);rr(ctx,1160,746+i*40,30,12,3);ctx.fill();T(ctx,s,1204,758+i*40,{w:700,size:20});},{dy:8}));
   arrive(ctx,1160,712,t,w("wins","On each date"),()=>T(ctx,"on each date, a value comes from",1160,716,{w:600,size:18,color:rgba(SOFT,1)}),{dy:8});
   ctx.restore();vign(ctx,S);});
@@ -288,7 +288,7 @@ scene("stitch",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
 /* ---------- 7. Late news ---------- */
 const RW_PROF=["select","    *,","    {{ dbt.datediff('took_effect', 'recorded_on', 'day') }} as days_late","from versions","where {{ dbt.datediff('took_effect', 'recorded_on', 'day') }} > 1","order by days_late desc"];
 const RW_RULE=["-- the student system says when each version took effect: that date, not the date it was recorded","student_versions as (","    select","        …","        student_records.effective_date as valid_from,","        …","        student_records.recorded_from as recorded_at,"];
-const RW_GAP=["| 6 | A change is dated when it happened. | The student system records some changes late … The platforms only say when they recorded a change. | **Rule in the model:** use the student system's effective date. **Accept** that platform dates are the day the platform recorded the change. | `int_learner_timeline` |"];  // one row of the file, wrapped
+const RW_GAP=["          - id: LIM-STU-07","            text: >","              Platform dates are the day the platform recorded a change, not the day it happened.","              Only the student system says when a change took effect."];  // the gap, accepted: a known limitation on core_learner
 function rw_lx(d){return 140+d*54;}  // days after 20 March, on the axis
 scene("late",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025,x:700});
@@ -322,15 +322,15 @@ scene("late",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
     cross_(ctx,560,588,30,RW_RED,fin(t,tR+0.3,0.3)*dO);tick_(ctx,560,588,34,GOOD,dI);
     withA(ctx,fin(t,tB,0.4),()=>{T(ctx,dm<0.5?"dated by when it was recorded":"dated by when it took effect",560,672,{w:700,size:20,align:"center",color:rgba(dm<0.5?RW_AMB:GOOD,1)});});},{dy:16});
   // the evidence, then the rule
-  arrive(ctx,1480,280,t,w("week","recorded it")+0.2,()=>{rw_code(ctx,1140,110,680,"analyses/profile_late_changes.sql",RW_PROF,{a:rOut,wrap:58,size:18,lh:28,p:clamp((t-w("week","recorded it")-0.2)/1.4,0,1)});
+  arrive(ctx,1480,280,t,w("week","recorded it")+0.2,()=>{rw_code(ctx,1140,110,680,"analyses/profiling/profile_late_changes.sql",RW_PROF,{a:rOut,wrap:58,size:18,lh:28,p:clamp((t-w("week","recorded it")-0.2)/1.4,0,1)});
     rw_table(ctx,1140,460,[["student_id",125,"l"],["status_code",130,"l"],["took_effect",140,"l"],["recorded_on",140,"l"],["days_late",105,"r"]],[["S-20431","WD","2026-03-27","2026-04-03","7"]],{a:fin(t,w("week","a week late"),0.4)*rOut,size:18,lh:32});
-    rw_code(ctx,1140,110,680,"models/intermediate/int_learner_timeline.sql",RW_RULE,{a:rIn,wrap:58,size:18,lh:28,edge:LAYER4[1][1],lit:{4:fin(t,w("effect","describes the day"),0.5),6:fin(t,w("effect","written down"),0.5)},litCol:RW_TIME});},{dy:24});
+    rw_code(ctx,1140,110,680,"models/intermediate/student/int_learner_timeline.sql",RW_RULE,{a:rIn,wrap:58,size:18,lh:28,edge:LAYER4[1][1],lit:{4:fin(t,w("effect","describes the day"),0.5),6:fin(t,w("effect","written down"),0.5)},litCol:RW_TIME});},{dy:24});
   arrive(ctx,1480,476,t,w("effect","written down"),()=>tag(ctx,1480,476,"when it was true · when it was recorded: both kept",RW_TIME,{align:"center",size:18}),{dy:10});
   // as in 1890: the page of June 1, for a moment
   const fl=pulseAt(t,w("effect","As in")-0.2,2.6);if(fl>0)rw_calendar(ctx,1400,560,190,220,t,{a:0.9*fl});
   // gap 6, written down
-  const tG=w("gap","platforms")-0.3;arrive(ctx,1480,680,t,tG,()=>rw_code(ctx,1140,530,680,"docs/gaps.md",RW_GAP,{wrap:58,size:18,lh:28,edge:EDGE_,p:clamp((t-tG)/2.2,0,1),seg:[[0,"use the student system's effective date.",fin(t,w("gap","accepted"),0.5),TRUST],[0,"**Accept** that platform dates are the day the platform",fin(t,w("gap","accepted"),0.5),TRUST]]}),{dy:20});
-  arrive(ctx,1480,822,t,w("gap","accepted"),()=>{tag(ctx,1480,822,"gap 6 · accepted, and written down",TRUST,{align:"center",size:20});},{dy:10});
+  const tG=w("gap","platforms")-0.3;arrive(ctx,1480,680,t,tG,()=>rw_code(ctx,1040,530,780,"models/core/student/_core_student__models.yml",RW_GAP,{wrap:66,size:18,lh:28,edge:EDGE_,p:clamp((t-tG)/2.2,0,1),seg:[[2,"Platform dates are the day the platform",fin(t,w("gap","accepted"),0.5),TRUST],[3,"Only the student system",fin(t,w("gap","accepted"),0.5),TRUST]]}),{dy:20});
+  arrive(ctx,1480,822,t,w("gap","accepted"),()=>{tag(ctx,1430,822,"accepted, and written down: a known limitation",TRUST,{align:"center",size:20});},{dy:10});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 8. A promise to write ---------- */

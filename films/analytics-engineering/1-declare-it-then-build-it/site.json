@@ -1,0 +1,40 @@
+{
+  "kicker": "The series and its method",
+  "kicker_es": "La serie y su método",
+  "title_es": "Decláralo, luego constrúyelo",
+  "h1": "Declare it, then build it: the model, the building work, and ten steps",
+  "h1_es": "Decláralo, luego constrúyelo: el modelo, la obra y diez pasos",
+  "lead": "The opening film of a technical series for analytics engineers. Declare the data model beside the code, then build it with dbt: layer by layer, domain by domain, in ten steps from a question to tested, versioned and documented tables. A blueprint lays no bricks, and dbt calls every query a model: the model is what you declare.",
+  "lead_es": "La película que abre una serie técnica para analytics engineers. Declara el modelo de datos junto al código, y luego constrúyelo con dbt: capa por capa, dominio por dominio, en diez pasos desde una pregunta hasta tablas probadas, versionadas y documentadas. Un plano no pone ni un ladrillo, y dbt llama modelo a cada consulta: el modelo es lo que declaras.",
+  "description": "A film for analytics engineers about the difference between a data model and a dbt model: where the model lives (YAML, a conceptual model and a decision log, beside the code), the layers of a dbt project, each folder named for its domain, the ten steps from a question to versioned models, and the eight films to come.",
+  "description_es": "Una película para analytics engineers sobre la diferencia entre un modelo de datos y un modelo de dbt: dónde vive el modelo (YAML, un modelo conceptual y un registro de decisiones, junto al código), las capas de un proyecto de dbt, cada carpeta con el nombre de su dominio, los diez pasos desde una pregunta hasta modelos versionados, y las ocho películas que vienen.",
+  "card": "dbt calls every query a model. The data model is the blueprint: declared beside the code, and checked by the tests.",
+  "card_es": "dbt llama modelo a cada consulta. El modelo de datos es el plano: declarado junto al código, y comprobado por las pruebas.",
+  "chapters_es": {
+    "plan": "Un plano no es un edificio",
+    "recap": "Donde lo dejamos",
+    "shapes": "Muchas formas, un modelo",
+    "build": "Alguien tiene que construirlo",
+    "work": "La obra",
+    "name": "El nombre que confunde",
+    "models": "Trescientos modelos",
+    "lives": "Dónde vive el modelo",
+    "steps": "Diez pasos",
+    "series": "La serie",
+    "end": "Vista completa"
+  },
+  "next_h": "You've seen the blueprint and the building work. Now tell them apart yourself.",
+  "next_h_es": "Viste el plano y la obra. Ahora sepáralos tú.",
+  "labs_h1": "Tell the model from the building work",
+  "labs_h1_es": "Distingue el modelo de la obra",
+  "labs_lead": "Four labs, one idea each, in the order of the film. Sort the blueprint from the building work, find the files that name the model, decide where each fact lives, and walk through Jun's ten steps.",
+  "labs_lead_es": "Cuatro labs, una idea cada uno, en el orden de la película. Separa el plano de la obra, encuentra los archivos que nombran el modelo, decide dónde vive cada dato, y recorre los diez pasos de Jun.",
+  "quiz_lead": "Eight situations an analytics engineer really faces: where the model is, three keys for one learner, two consumers on one core, a core model with nothing declared, a definition written twice, an agent's shortcut, a change of tool, and the steps in order. Decide what you'd do; each answer explains why.",
+  "quiz_lead_es": "Ocho situaciones que un analytics engineer enfrenta de verdad: dónde está el modelo, tres claves para un estudiante, dos consumidores sobre un núcleo, un modelo del núcleo sin nada declarado, una definición escrita dos veces, el atajo de un agente, un cambio de herramienta, y los pasos en orden. Decide qué harías; cada respuesta explica por qué.",
+  "repo": {
+    "work": ["models/staging/student_system/stg_student_system__learners.sql", "models/intermediate/student/int_learners.sql", "models/intermediate/student/_int_student__models.yml"],
+    "name": ["models/staging/student_system/stg_student_system__learners.sql"],
+    "models": ["models/"],
+    "lives": ["models/core/student/_core_student__models.yml", "models/core/student/_student__conceptual.md", "models/core/student/_student__decisions.yml"]
+  }
+}

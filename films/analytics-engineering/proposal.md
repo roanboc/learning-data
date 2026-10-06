@@ -50,7 +50,7 @@ The author's working process, as given:
 - **Time.** Kept versions at ingestion don't settle history. Each output needs "as it is now" or "as it was then", and SCD2 dates usually record when the platform saw a change, not when it was true.
 - **Review and ship** becomes its own step: pull request, CI, human approval, deploy. That's where people approve an agent's work.
 - **Operate and evolve:** versions, deprecation, and impact through lineage.
-- **Where the "why" lives.** Decisions and accepted gaps stay in Markdown after the cleanup; they aren't duplication.
+- **Where the "why" lives.** Decisions stay in a decision log beside what they're about, and accepted gaps on the model as known limitations, after the cleanup; they aren't duplication.
 
 ## The process
 
@@ -61,12 +61,12 @@ The spine of the series. The agent's part and the approval are shown at every st
 | 1 | **Scope and meaning.** One question, the decision it supports, the entities it touches. Each entity's business key, identity rule and owner. Generalise or split. | Conceptual model in YAML; Mermaid diagram | Drafts from the catalog and glossary | Business owner |
 | 2 | **Source reality.** Profile every source; map system keys to business keys; code-mapping tables; what the SCD2 dates mean. | Source-to-canonical mapping, with evidence queries | Profiles and proposes the mapping, with the query behind each claim | Engineer |
 | 3 | **Consumer output.** Grain in one sentence; as-is or as-was history; freshness; metrics defined once. | Output specification | Drafts from the request and existing reports | Consumer |
-| 4 | **Gaps and contracts.** A decision per gap: fix at the source, rule in the model, or accept and document. | Gap register; enterprise and consumer contracts | Drafts both | Owner and consumer |
+| 4 | **Gaps and contracts.** A decision per gap: fix at the source, rule in the model, or accept and document. | Gap register, kept only while gaps are open; enterprise and consumer contracts | Drafts both | Owner and consumer |
 | 5 | **Tests.** Data tests, unit tests and source freshness, with warn and error levels, and a number to reconcile against. | Tests, before any model | Writes them first | Engineer, in review |
 | 6 | **Build.** Staging, intermediate, core, marts; materialisations; point-in-time joins; coding standards. | dbt models | Drafts the SQL to pass the tests | Engineer, in review |
 | 7 | **Validate.** Reconcile with the trusted number; diff against the previous version; owner sign-off. | Reconciliation and diff | Runs them | Engineer and owner |
 | 8 | **Review and ship.** Pull request, CI on changed models, deploy. | A merged, deployed change | Opens the pull request | Reviewer |
-| 9 | **Written once.** Markdown keeps the conceptual model, decisions and accepted gaps; YAML keeps everything the build uses. | Clean docs; a generated physical diagram | Finds duplicated and drifted metadata | Engineer |
+| 9 | **Written once.** The conceptual model keeps the meaning; decision logs keep why and who; YAML keeps everything the build uses, and the accepted gaps as known limitations. | Clean docs; a generated physical diagram | Finds duplicated and drifted metadata | Engineer |
 | 10 | **Operate and evolve.** Versions, deprecation dates, impact through lineage and exposures. | Versioned models | Flags breaking changes | Owners of dependent models |
 
 ## How it maps to dbt
@@ -84,7 +84,8 @@ The spine of the series. The agent's part and the approval are shown at every st
 
 **Metadata, written once.**
 
-- **Markdown:** the conceptual model with a hand-drawn Mermaid diagram, decisions and why, accepted gaps as known limitations. Long descriptions in dbt doc blocks (`{% docs %}`), referenced from YAML with `doc()`.
+- **Meaning:** each domain's conceptual model, with a hand-drawn Mermaid diagram beside it. Long descriptions in dbt doc blocks (`{% docs %}`), generated from it and referenced from YAML with `doc()`.
+- **Why:** one decision log per scope, with who decided and when; accepted gaps as known limitations on the model they're about.
 - **YAML:** grain, keys, relationships, contracts, tests, and `meta` (owner, domain, glossary term, personal-data class).
 - **Generated:** the physical diagram, from YAML. Descriptions pushed to Unity Catalog with `persist_docs`, so the catalog doesn't hold a second copy.
 
@@ -94,7 +95,7 @@ Nine films of 4 to 6 minutes, each built around one step or one idea. The agent 
 
 | # | Working title | Steps | The idea to take away |
 |---|---|---|---|
-| 1 | A model is not a transformation | All | The data model is what you declare; the dbt model is how you produce it. |
+| 1 | Declare it, then build it | All | The data model is what you declare; the dbt model is how you produce it. |
 | 2 | Start from a question | 1 | Scope is a question, not the whole enterprise. |
 | 3 | What makes it the same one | 2 | Identity is a decision, made explicit with key sets and hashes. |
 | 4 | One row of what, and when | 3 | Grain and time, declared before any SQL. |
@@ -102,7 +103,7 @@ Nine films of 4 to 6 minutes, each built around one step or one idea. The agent 
 | 6 | Built in layers | 6 | Each layer has one job, and each CTE one step. |
 | 7 | Who owns what | 4, 10 | Domains publish core models; consumers build on them, not on each other's marts. |
 | 8 | An agent on the team | 7, 8 | The agent drafts and checks with evidence; people approve; tests are never weakened. |
-| 9 | Written once | 9, 10 | Meaning in Markdown, facts in YAML, diagrams generated. |
+| 9 | Written once | 9, 10 | Meaning in the conceptual model, why in decision logs, facts in YAML, diagrams generated. |
 
 ## The thread: the credential, built
 
@@ -110,7 +111,7 @@ Nine films of 4 to 6 minutes, each built around one step or one idea. The agent 
 
 ## The films
 
-### A model is not a transformation
+### Declare it, then build it
 
 **Logline.** The credential model is approved: a blueprint. Now it has to be built from three messy sources, with a tool that calls every query a model. Which of them is the data model? None of them, and all of the YAML.
 
@@ -130,7 +131,7 @@ Nine films of 4 to 6 minutes, each built around one step or one idea. The agent 
 
 **Labs.** *Which of these are entities?* (sort a lineage graph).
 
-The script, chapter by chapter, with narration and rigour sheet: [1-a-model-is-not-a-transformation/script.md](1-a-model-is-not-a-transformation/script.md).
+The script, chapter by chapter, with narration and rigour sheet: [1-declare-it-then-build-it/script.md](1-declare-it-then-build-it/script.md).
 
 ### Start from a question
 
@@ -183,7 +184,7 @@ The script, chapter by chapter, with narration and rigour sheet: [1-a-model-is-n
 
 | Chapter | What happens | What it teaches |
 |---|---|---|
-| The gap | Expectation against reality, one line per gap. | A gap register, with a decision per gap. |
+| The gap | Expectation against reality, one line per gap. | A gap register, kept only while a gap is open, with a decision per gap. |
 | The enterprise contract | Core credential and award models: columns, types, keys, allowed values. | Enforced contracts, versioned, public. |
 | The consumer contract | Planning's mart and the wallet's mart, on the same core. | Consumer contracts, protected, with exposures. |
 | Tests first | Keys, relationships, allowed values, rules. | Data tests. |
@@ -214,7 +215,7 @@ The script, chapter by chapter, with narration and rigour sheet: [1-a-model-is-n
 
 | Chapter | What happens | What it teaches |
 |---|---|---|
-| Domains | Source-aligned domains own entities; consumer-aligned domains own marts. | Ownership follows meaning. |
+| Domains | Three kinds: application domains (the systems and their teams), data domains (what the facts mean), business domains (who decides with the data, and owns its marts). The project is laid out the same way. | Ownership follows meaning. |
 | Data products | A public core model with a contract, a version, an owner and docs. | What a domain publishes. |
 | Access | Private, protected, public. | Who can `ref()`, not who can read. |
 | Across projects | Planning's project refs the registrar's core. | Cross-project refs in dbt Cloud. |
@@ -245,7 +246,7 @@ The script, chapter by chapter, with narration and rigour sheet: [1-a-model-is-n
 | Chapter | What happens | What it teaches |
 |---|---|---|
 | Four copies | One definition, drifting in four places. | Duplication is how docs go stale. |
-| What goes where | Markdown: meaning, decisions, gaps. YAML: everything the build uses. | One home per fact. |
+| What goes where | The conceptual model: meaning. Decision logs: why and who. The model's YAML: everything the build uses, and known limitations. | One home per fact. |
 | Doc blocks | Long text in Markdown, referenced from YAML. | Written once, shown everywhere. |
 | Diagrams | Conceptual by hand; physical generated. | Diagrams that can't drift. |
 | To the catalog | Descriptions pushed to Unity Catalog. | One direction of sync. |
@@ -285,7 +286,7 @@ Confirm against current documentation, and record in each film's rigour sheet wi
 - **Databricks:** Unity Catalog grants versus dbt access; informational primary and foreign keys; how SCD2 ingestion records its dates.
 - **Hashing:** the hash functions available, how `dbt_utils.generate_surrogate_key` handles nulls, and collision risk stated honestly.
 - **Mermaid:** where it renders (GitHub does; check dbt's docs site).
-- **Approaches in *A model is not a transformation*:** the landscape as it stands, with sources in the rigour sheet only; no attribution of mechanisms to approaches.
+- **Approaches in *Declare it, then build it*:** the landscape as it stands, with sources in the rigour sheet only; no attribution of mechanisms to approaches.
 
 ## Decisions for the author
 
@@ -297,5 +298,5 @@ Confirm against current documentation, and record in each film's rigour sheet wi
 ## Next checkpoints
 
 1. The author's answers to the decisions above.
-2. ~~A script and rigour sheet for the opening film.~~ Built, 30 September 2026: [script](1-a-model-is-not-a-transformation/script.md), [source](1-a-model-is-not-a-transformation/source/README.md), [Jun's character card](characters/card-jun.jpg). Next for it: the author's review of the video, then publishing (site page, Spanish captions, Pause and think, labs).
+2. ~~A script and rigour sheet for the opening film.~~ Built, 30 September 2026: [script](1-declare-it-then-build-it/script.md), [source](1-declare-it-then-build-it/source/README.md), [Jun's character card](characters/card-jun.jpg). Next for it: the author's review of the video, then publishing (site page, Spanish captions, Pause and think, labs).
 3. ~~The example dbt project the films draw from.~~ Built, 30 September 2026: [project/](project/), on dbt Core with DuckDB, with a Databricks target; every film's code and data come from it.

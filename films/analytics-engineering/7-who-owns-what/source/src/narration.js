@@ -11,9 +11,11 @@ const NARR={
  {"id":"green","gap":0.8,"text":"Everything is green, in one project."},
  {"id":"registrar","gap":0.8,"text":"But its meaning has owners. The registrar's office, where Mei works, owns learners, awards and credentials, and the student IDs it issues."},
  {"id":"learning","gap":0.8,"text":"The learning team owns two kinds of credential, microcredentials and badges, and the keys of its two platforms."},
- {"id":"domain","gap":0.8,"text":"Each is a domain: it owns the meaning of the facts it records."},
- {"id":"consumers","gap":0.8,"text":"Planning and the wallet app are domains too. They own what they build for themselves: their marts."},
- {"id":"follows","gap":0.8,"text":"In the project, models are gathered in groups, and each group names an owner. The staging, core and mart models also name their domain. Ownership follows meaning, not the code."}]},
+ {"id":"domain","gap":0.8,"text":"So there are three kinds of domain. The systems, and the teams that run them, are application domains."},
+ {"id":"data","gap":0.8,"text":"What the facts mean, learners, credentials and awards, are data domains, named as the reference model names them: student and course."},
+ {"id":"consumers","gap":0.8,"text":"And Planning and the wallet app are business domains: they decide with the data, and own the marts they build for it."},
+ {"id":"laid","gap":0.8,"text":"The project is laid out the same way: sources by system, the core by data domain, the marts and exposures by consumer."},
+ {"id":"follows","gap":0.6,"text":"Each group names an owner, and the staging, core and mart models name their domain. Ownership follows meaning, not the code."}]},
 "products":{"name":"What a domain publishes","lead":1.0,"tail":1.0,"vo":[
  {"id":"publish","gap":0.8,"text":"So what does a domain publish? A core model, as a product."},
  {"id":"learner","gap":0.8,"text":"Take the learner. Its YAML states its grain: one row per learner per version."},
@@ -49,5 +51,6 @@ const NARR={
 "split":{"name":"Groups first","lead":1.0,"tail":1.0,"vo":[
  {"id":"why","gap":0.8,"text":"So why not split now? Every project is more to deploy, and more to keep in step."},
  {"id":"decided","gap":0.8,"text":"On the twelfth of October, Noor decided: groups first, in one project, while one team builds the core. Projects later, when teams own their domains."},
+ {"id":"later","gap":0.8,"text":"When that day comes, a domain moves out with its own folders: its marts, its exposures, its seeds and its decisions. Nothing else needs untangling."},
  {"id":"hands","gap":0.8,"text":"Many owners, and many hands. One of them isn't a person."}]}
 };

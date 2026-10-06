@@ -23,145 +23,149 @@ Un modelo del núcleo hace la misma promesa. Sus pruebas son el ensayo, y van an
 Paso cuatro: nombrar las brechas.
 
 7
-00:00:37,932 --> 00:00:43,975
-El registro de brechas de Jun pone lo que espera el negocio junto a lo que tienen las fuentes, una línea por brecha.
+00:00:37,932 --> 00:00:46,590
+El registro de brechas de Jun las anota junto a cada fuente, mientras siguen abiertas: lo que espera el negocio, junto a lo que tiene la fuente, una línea por brecha.
 
 8
-00:00:45,675 --> 00:00:51,786
+00:00:48,290 --> 00:00:54,401
 El negocio espera que una credencial revocada conste como revocada. La plataforma de aprendizaje simplemente la borra.
 
 9
-00:00:53,486 --> 00:01:00,570
+00:00:56,101 --> 00:01:03,185
 Cada brecha recibe una de tres decisiones. Corregirla en la fuente. Escribir una regla en el modelo. O aceptarla, y dejarla por escrito.
 
 10
-00:01:02,470 --> 00:01:10,353
+00:01:05,085 --> 00:01:12,968
 Esta recibe dos. Lo que la plataforma deja de mostrar queda revocado desde ese día. Y se le pide a la plataforma un indicador propio.
 
 11
-00:01:12,053 --> 00:01:18,076
+00:01:14,668 --> 00:01:20,691
 La microcredencial de Jordan desapareció el doce de agosto. Desde ese día, figura como revocada.
 
 12
-00:01:19,776 --> 00:01:23,408
+00:01:22,391 --> 00:01:26,023
 Diez brechas, diez decisiones. Mei aprueba las que tratan del significado.
 
 13
-00:01:26,708 --> 00:01:32,306
-Luego, los contratos. Todo lo demás se construye sobre el núcleo, así que hace la promesa más fuerte.
+00:01:27,623 --> 00:01:40,621
+Luego cada brecha sale del registro. Una regla en el modelo se vuelve una decisión, en el registro de decisiones de su fuente. Una brecha aceptada se vuelve una limitación conocida, en el modelo. Solo queda abierto un arreglo que aún se espera.
 
 14
-00:01:34,006 --> 00:01:40,722
-Toda la carpeta del núcleo recibe dos ajustes. Público: otros proyectos pueden construir sobre él. Y un contrato, obligatorio.
+00:01:44,521 --> 00:01:50,119
+Luego, los contratos. Todo lo demás se construye sobre el núcleo, así que hace la promesa más fuerte.
 
 15
-00:01:42,622 --> 00:01:49,898
-El YAML de la credencial lista cada columna, su tipo y lo que no puede estar vacío. Su granularidad: una fila por credencial.
+00:01:51,819 --> 00:01:58,535
+Toda la carpeta del núcleo recibe dos ajustes. Público: otros proyectos pueden construir sobre él. Y un contrato, obligatorio.
 
 16
-00:01:51,798 --> 00:01:57,687
-Si la consulta y el contrato no coinciden en el tipo de una columna, la construcción se detiene antes de crear la tabla.
+00:02:00,435 --> 00:02:07,711
+El YAML de la credencial lista cada columna, su tipo y lo que no puede estar vacío. Su granularidad: una fila por credencial.
 
 17
-00:01:59,687 --> 00:02:04,664
-El contrato se verifica en cada construcción, no se lee una vez y se olvida. Noor lo aprueba.
+00:02:09,611 --> 00:02:15,500
+Si la consulta y el contrato no coinciden en el tipo de una columna, la construcción se detiene antes de crear la tabla.
 
 18
-00:02:07,764 --> 00:02:11,352
-Cada consumidor recibe su propio contrato, sobre el mismo núcleo.
+00:02:17,500 --> 00:02:22,477
+El contrato se verifica en cada construcción, no se lee una vez y se olvida. Noor lo aprueba.
 
 19
-00:02:13,052 --> 00:02:18,986
-Cada uno lleva la granularidad que declaró: la de Planificación, como era el día del censo; la de la billetera, como es hoy.
+00:02:25,577 --> 00:02:29,165
+Cada consumidor recibe su propio contrato, sobre el mismo núcleo.
 
 20
-00:02:20,786 --> 00:02:25,084
-Ambos son obligatorios y protegidos: solo este proyecto puede construir sobre ellos.
+00:02:30,865 --> 00:02:36,799
+Cada uno lleva la granularidad que declaró: la de Planificación, como era el día del censo; la de la billetera, como es hoy.
 
 21
-00:02:26,984 --> 00:02:32,745
-Y cada uno declara una exposición: el tablero o la app que lo lee, con un responsable y un correo.
+00:02:38,599 --> 00:02:42,897
+Ambos son obligatorios y protegidos: solo este proyecto puede construir sobre ellos.
 
 22
-00:02:34,745 --> 00:02:40,894
-Si cambias la credencial en el núcleo, el linaje encuentra una exposición: la app de billetera. A ellos hay que avisar.
+00:02:44,797 --> 00:02:50,558
+Y cada uno declara una exposición: el tablero o la app que lo lee, con un responsable y un correo.
 
 23
-00:02:42,894 --> 00:02:45,716
-Planificación y el equipo de la billetera aprueban cada uno el suyo.
+00:02:52,558 --> 00:02:58,707
+Si cambias la credencial en el núcleo, el linaje encuentra una exposición: la app de billetera. A ellos hay que avisar.
 
 24
-00:02:49,016 --> 00:02:53,672
-Paso cinco: las pruebas, antes del código que verifican. Dicen cómo se ve lo terminado.
+00:03:00,707 --> 00:03:03,529
+Planificación y el equipo de la billetera aprueban cada uno el suyo.
 
 25
-00:02:55,772 --> 00:03:00,885
-Cada clave, única y nunca vacía. Cada relación, apuntando a algo que existe.
+00:03:06,829 --> 00:03:11,485
+Paso cinco: las pruebas, antes del código que verifican. Dicen cómo se ve lo terminado.
 
 26
-00:03:01,985 --> 00:03:07,514
-Cada lista cerrada, con valores acordados. Cada historia, con versiones que nunca se superponen.
+00:03:13,585 --> 00:03:18,698
+Cada clave, única y nunca vacía. Cada relación, apuntando a algo que existe.
 
 27
-00:03:09,214 --> 00:03:13,643
-Y un número en el que ya se confía: los doce estudiantes del informe del censo.
+00:03:19,798 --> 00:03:25,327
+Cada lista cerrada, con valores acordados. Cada historia, con versiones que nunca se superponen.
 
 28
-00:03:15,143 --> 00:03:20,499
-Una prueba compara el conteo del modelo con el informe, y falla en cualquier facultad que difiera.
+00:03:27,027 --> 00:03:31,456
+Y un número en el que ya se confía: los doce estudiantes del informe del censo.
 
 29
-00:03:22,099 --> 00:03:26,860
-El agente redacta las pruebas a partir de los contratos y el registro. Jun las revisa.
+00:03:32,956 --> 00:03:38,312
+Una prueba compara el conteo del modelo con el informe, y falla en cualquier facultad que difiera.
 
 30
-00:03:29,960 --> 00:03:38,288
-Las pruebas de datos verifican las tablas. Cierta lógica se verifica por separado, con unas filas inventadas para eso. Eso es una prueba unitaria.
+00:03:39,912 --> 00:03:44,673
+El agente redacta las pruebas a partir de los contratos y el registro. Jun las revisa.
 
 31
-00:03:40,388 --> 00:03:52,343
-La regla de créditos, en dos filas inventadas. Una asignatura aprobada cuenta desde el diez de enero. Una microcredencial cuenta desde el dos de febrero, hasta que se revoca el doce de agosto.
+00:03:47,773 --> 00:03:56,101
+Las pruebas de datos verifican las tablas. Cierta lógica se verifica por separado, con unas filas inventadas para eso. Eso es una prueba unitaria.
 
 32
-00:03:54,543 --> 00:04:00,280
-El crédito cambia dos veces, así que la respuesta son tres versiones: quince, veinte y otra vez quince.
+00:03:58,201 --> 00:04:10,156
+La regla de créditos, en dos filas inventadas. Una asignatura aprobada cuenta desde el diez de enero. Una microcredencial cuenta desde el dos de febrero, hasta que se revoca el doce de agosto.
 
 33
-00:04:02,380 --> 00:04:08,255
-Las fechas de la microcredencial son las de Jordan. La regla se prueba antes de que llegue una sola fila real.
+00:04:12,356 --> 00:04:18,093
+El crédito cambia dos veces, así que la respuesta son tres versiones: quince, veinte y otra vez quince.
 
 34
-00:04:11,855 --> 00:04:17,092
-No toda falla debe detenerlo todo. Una prueba puede advertir, o puede detener la construcción.
+00:04:20,193 --> 00:04:26,068
+Las fechas de la microcredencial son las de Jordan. La regla se prueba antes de que llegue una sola fila real.
 
 35
-00:04:18,392 --> 00:04:24,186
-Una inscripción a un curso corto no tiene correo: alguien que llegó sin registro, cuyo certificado no llega a nadie.
+00:04:29,668 --> 00:04:34,905
+No toda falla debe detenerlo todo. Una prueba puede advertir, o puede detener la construcción.
 
 36
-00:04:25,686 --> 00:04:34,030
-El equipo de aprendizaje acordó: advertir si hay alguna, detener si hay más de cinco. Se esperan una o dos por período. Más significa que algo se rompió.
+00:04:36,205 --> 00:04:41,999
+Una inscripción a un curso corto no tiene correo: alguien que llegó sin registro, cuyo certificado no llega a nadie.
 
 37
-00:04:36,030 --> 00:04:38,707
-Hoy, la construcción advierte una vez y sigue.
+00:04:43,499 --> 00:04:51,843
+El equipo de aprendizaje acordó: advertir si hay alguna, detener si hay más de cinco. Se esperan una o dos por período. Más significa que algo se rompió.
 
 38
-00:04:40,407 --> 00:04:45,038
-La frescura funciona igual: advertir si una fuente lleva un día de retraso, fallar a los tres.
+00:04:53,843 --> 00:04:56,520
+Hoy, la construcción advierte una vez y sigue.
 
 39
-00:04:46,838 --> 00:04:50,664
-¿Quién fija el nivel? El responsable de los datos, con la razón por escrito.
+00:04:58,220 --> 00:05:02,851
+La frescura funciona igual: advertir si una fuente lleva un día de retraso, fallar a los tres.
 
 40
-00:04:53,964 --> 00:05:00,594
-111 pruebas de datos. Cuatro pruebas unitarias. Cada promesa por escrito, con su prueba al lado.
+00:05:04,651 --> 00:05:08,477
+¿Quién fija el nivel? El responsable de los datos, con la razón por escrito.
 
 41
-00:05:01,894 --> 00:05:07,976
-Cada una se escribe antes del código que verifica, así que hasta que ese código exista, no puede pasar. Es a propósito.
+00:05:11,777 --> 00:05:18,310
+112 pruebas de datos. Cuatro pruebas unitarias. Cada promesa por escrito, con su prueba al lado.
 
 42
-00:05:09,276 --> 00:05:12,771
+00:05:19,610 --> 00:05:25,692
+Cada una se escribe antes del código que verifica, así que hasta que ese código exista, no puede pasar. Es a propósito.
+
+43
+00:05:26,992 --> 00:05:30,487
 Luego, el mínimo código que las ponga en verde, en el lugar correcto.

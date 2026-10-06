@@ -222,6 +222,30 @@ def series_nav(lg, f, films_, R, rel):
             f'<ol class="series-list" aria-label="{T(lg, "Every film of the series", "Todas las películas de la serie")}">\n{lis}\n</ol>\n</section>\n')
 
 
+def project_url(f, path):
+    """A file or folder of the series' example project on GitHub: a folder ends with /."""
+    kind = "tree" if path.endswith("/") or not path else "blob"
+    return f'{REPO}/{kind}/main/films/{f["series"]["dir"]}/project/{path}'.rstrip("/")
+
+
+def project_section(lg, f):
+    """See it in the project: for each chapter whose cards show files of the example project, a link to each, on GitHub.
+    The files come from the film's site.json, "repo": {chapter id: [paths]}."""
+    repo = f["site"].get("repo")
+    if not repo:
+        return ""
+    names = dict(f["chapters"]) if lg == "en" else {k: f["site"]["chapters_es"].get(k, v) for k, v in f["chapters"]}
+    rows = []
+    for cid, _ in f["chapters"]:
+        paths = repo.get(cid)
+        if paths:
+            links = " ".join(f'<a href="{project_url(f, x)}"><code>{E(x)}</code></a>' for x in paths)
+            rows.append(f'<li><b>{E(names[cid])}</b><span>{links}</span></li>')
+    return (f'<section class="module" id="in-the-project" aria-labelledby="project-h">\n<div class="mhead"><div><h2 id="project-h">{T(lg, "See it in the project", "Míralo en el proyecto")}</h2>'
+            f'<p>{T(lg, "Every card in the film shows a real file from the example dbt project. Open the ones each chapter shows, on GitHub, or run the whole project yourself.", "Cada tarjeta de la película muestra un archivo real del proyecto de dbt de ejemplo. Abre en GitHub los que muestra cada capítulo, o ejecuta tú el proyecto entero.")}</p></div></div>\n'
+            f'<ul class="repo-list">\n' + "\n".join(rows) + f'\n</ul>\n<p class="film-links"><a href="{project_url(f, "")}">{T(lg, "Explore the whole project", "Explora el proyecto entero")}</a><a href="{project_url(f, "README.md")}">{T(lg, "How to run it", "Cómo ejecutarlo")}</a></p>\n</section>\n\n')
+
+
 def es_scenes(f):
     names = f["site"]["chapters_es"]
     return ('<script>/* the film is in English; its chapter buttons and the Pause and think kicker use these Spanish names */\n'
@@ -261,6 +285,7 @@ def film_page(lg, f, films_, series):
             f'<section class="module" id="watch" data-store="{f["prefix"]}" aria-labelledby="watch-h">\n'
             f'<div class="mhead"><div><h2 id="watch-h">{T(lg, "Watch the film", "Mira la película")}</h2><p>{T(lg, "Press Play, or pick a chapter. Turn on <b>Pause and think</b> to stop for one question at the end of chapters.", "Presiona Reproducir, o salta a un capítulo. Activa <b>Pausa para pensar</b> y la película se detiene con una pregunta al final de los capítulos.")}</p></div></div>\n'
             f'{player}\n<div class="chapters" id="chapters" aria-label="{T(lg, "Chapters", "Capítulos")}"></div>\n{links}\n{nextp}\n</section>\n\n'
+            + project_section(lg, f) +
             f'<section class="module" id="think-it-through" aria-labelledby="think-h">\n<div class="mhead"><div><h2 id="think-h">{T(lg, "Think it through", "Piénsalo")}</h2><p>{T(lg, f"The {ntw} Pause and think questions, for a class or a team. Open one to see the answer.", f"Las {ntw} preguntas de Pausa para pensar, para una clase o un equipo. Abre una para ver la respuesta.")}</p></div></div>\n<div id="think-list"></div>\n</section>\n\n'
             + series_nav(lg, f, films_, R, "../") + '</main>\n'
             f'{FOOT[lg]}\n'

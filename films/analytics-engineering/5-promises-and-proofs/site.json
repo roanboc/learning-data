@@ -27,5 +27,13 @@
   "labs_lead": "Four labs, one idea each. Write core_credential's contract, pick the test that stops each broken row, decide each gap in the register, and step a test from warn to stop.",
   "labs_lead_es": "Cuatro labs, una idea cada uno. Escribe el contrato de core_credential, elige la prueba que detiene cada fila rota, decide cada brecha del registro, y lleva una prueba de avisar a detener.",
   "quiz_lead": "Eight situations an analytics engineer really faces: a revoked badge shown as valid, a column nobody uses, a failure at 2 a.m., a primary key that isn't enforced, tests before the SQL, an expiry no source records, a stale source, and a number one off the census. Decide what you'd do; each answer explains why.",
-  "quiz_lead_es": "Ocho situaciones que un analytics engineer enfrenta de verdad: una insignia revocada que aparece como válida, una columna que nadie usa, un fallo a las 2 de la mañana, una clave primaria que no se aplica, pruebas antes del SQL, un vencimiento que ninguna fuente registra, una fuente sin cargar, y un número que no cuadra con el censo. Decide qué harías; cada respuesta explica por qué."
+  "quiz_lead_es": "Ocho situaciones que un analytics engineer enfrenta de verdad: una insignia revocada que aparece como válida, una columna que nadie usa, un fallo a las 2 de la mañana, una clave primaria que no se aplica, pruebas antes del SQL, un vencimiento que ninguna fuente registra, una fuente sin cargar, y un número que no cuadra con el censo. Decide qué harías; cada respuesta explica por qué.",
+  "repo": {
+    "gaps": ["requirements/", "requirements/sources/learning_platform/_learning_platform__requirements.yml", "sources/learning_platform/_learning_platform__decisions.yml"],
+    "enterprise": ["dbt_project.yml", "models/core/student/_core_student__models.yml"],
+    "consumer": ["dbt_project.yml", "exposures/planning/_planning__exposures.yml", "exposures/wallet/_wallet__exposures.yml"],
+    "tests": ["models/core/course/_core_course__models.yml", "tests/generic/versions_do_not_overlap.sql", "seeds/expected/planning/census_report.csv", "tests/reconciliation/reconcile_planning_with_census_report.sql"],
+    "unit": ["models/intermediate/student/_int_student__models.yml"],
+    "levels": ["models/staging/short_courses/_short_courses__models.yml", "sources/short_courses/_short_courses__decisions.yml", "sources/student_system/_student_system__sources.yml"]
+  }
 }

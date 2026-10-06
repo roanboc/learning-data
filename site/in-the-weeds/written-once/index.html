@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Written once · In the weeds of data crafting · Learning Data</title>
-<meta name="description" content="A film for analytics engineers about writing each fact once: the conceptual model, Markdown and dbt's YAML; doc blocks generated from one source and shown with doc(); a physical diagram generated from the manifest and checked in CI; descriptions pushed to Unity Catalog with persist_docs; and model versions with a deprecation date, found and told through lineage and exposures.">
+<meta name="description" content="A film for analytics engineers about writing each fact once: meaning in the conceptual model, decisions in a log beside what they're about, accepted gaps as known limitations on the model, and what the build uses in dbt's YAML; doc blocks generated from one source and shown with doc(); a physical diagram generated from the manifest and checked in CI; descriptions pushed to Unity Catalog with persist_docs; and model versions with a deprecation date, found and told through lineage and exposures.">
 <meta property="og:title" content="Written once · In the weeds of data crafting · Learning Data"><meta property="og:description" content="Every copy of a fact is a chance to drift. One home per fact, everything else generated, and a breaking change arrives as a new version with a date."><meta property="og:image" content="https://roanboc.github.io/learning-data/assets/written-once-poster.jpg">
 <link rel="alternate" hreflang="en" href="https://roanboc.github.io/learning-data/in-the-weeds/written-once/"><link rel="alternate" hreflang="es" href="https://roanboc.github.io/learning-data/es/in-the-weeds/written-once/">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
@@ -18,7 +18,7 @@
 <section class="hero cine"><div class="bg" aria-hidden="true"><img src="../../assets/written-once-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
 <p class="eyebrow crumbs"><a href="../../topics/">Topics</a> › <a href="../">In the weeds of data crafting</a></p>
 <h1>Written once: one home per fact, and everything else generated</h1>
-<p class="lead">A definition copied into four places drifts in three. Give each fact one home: meaning in the conceptual model, decisions in Markdown, what the build uses in dbt's YAML. Generate the rest, sync it one way, and ship a breaking change as a new version with a date. The series' closing film.</p>
+<p class="lead">A definition copied into four places drifts in three. Give each fact one home: meaning in the conceptual model, decisions with why and who in a log beside what they're about, accepted gaps on the model as known limitations, what the build uses in dbt's YAML. Generate the rest, sync it one way, and ship a breaking change as a new version with a date. The series' closing film.</p>
 <p class="meta-row"><span>5 min</span><span>4 labs</span><span>8 scenarios</span><span>Pause and think</span><span>English captions</span></p>
 <p class="builds-on">Builds on <a href="../an-agent-on-the-team/"><i>An agent on the team</i></a></p>
 </section>
@@ -40,6 +40,19 @@
 <div class="think-foot"><button type="button" class="btn" data-again>Watch again</button></div></div></template>
 </section>
 
+<section class="module" id="in-the-project" aria-labelledby="project-h">
+<div class="mhead"><div><h2 id="project-h">See it in the project</h2><p>Every card in the film shows a real file from the example dbt project. Open the ones each chapter shows, on GitHub, or run the whole project yourself.</p></div></div>
+<ul class="repo-list">
+<li><b>Four copies</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_course__conceptual.yml"><code>models/core/course/_course__conceptual.yml</code></a></span></li>
+<li><b>What goes where</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_course__conceptual.yml"><code>models/core/course/_course__conceptual.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/_shared/_shared__decisions.yml"><code>models/_shared/_shared__decisions.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_core_student__models.yml"><code>models/core/student/_core_student__models.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md"><code>docs/conventions.md</code></a></span></li>
+<li><b>Written once, shown everywhere</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_course__conceptual.yml"><code>models/core/course/_course__conceptual.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/scripts/generate/definitions.py"><code>scripts/generate/definitions.py</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_course__definitions.md"><code>models/core/course/_course__definitions.md</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_core_course__models.yml"><code>models/core/course/_core_course__models.yml</code></a></span></li>
+<li><b>Diagrams that can't drift</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__conceptual.md"><code>models/core/student/_student__conceptual.md</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__physical.md"><code>models/core/student/_student__physical.md</code></a></span></li>
+<li><b>One direction</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml"><code>dbt_project.yml</code></a></span></li>
+<li><b>The next version</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_core_student__models.yml"><code>models/core/student/_core_student__models.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/core_credential_v1.sql"><code>models/core/student/core_credential_v1.sql</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/wallet/mart_wallet__credentials.sql"><code>models/marts/wallet/mart_wallet__credentials.sql</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__decisions.yml"><code>models/core/student/_student__decisions.yml</code></a></span></li>
+</ul>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project">Explore the whole project</a><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/README.md">How to run it</a></p>
+</section>
+
 <section class="module" id="think-it-through" aria-labelledby="think-h">
 <div class="mhead"><div><h2 id="think-h">Think it through</h2><p>The four Pause and think questions, for a class or a team. Open one to see the answer.</p></div></div>
 <div id="think-list"></div>
@@ -54,13 +67,13 @@
 <p class="kicker">← Previous · Film 8 of 9</p>
 <h3><a href="../an-agent-on-the-team/">An agent on the team</a></h3>
 <p>An AI agent drafts in minutes. It follows rules written in the project, shows the query behind every claim, never weakens a test, and people approve.</p>
-<p class="meta">5 min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
+<p class="meta">5½ min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
 <p class="tc-progress" data-progress="ld-an-agent-on-the-team" data-labs="4" data-quiz="8" hidden></p>
 </div>
 </article>
 </div>
 <ol class="series-list" aria-label="Every film of the series">
-<li><a href="../a-model-is-not-a-transformation/"><span class="n">1</span>A model is not a transformation</a></li>
+<li><a href="../declare-it-then-build-it/"><span class="n">1</span>Declare it, then build it</a></li>
 <li><a href="../start-from-a-question/"><span class="n">2</span>Start from a question</a></li>
 <li><a href="../what-makes-it-the-same-one/"><span class="n">3</span>What makes it the same one</a></li>
 <li><a href="../one-row-of-what-and-when/"><span class="n">4</span>One row of what, and when</a></li>

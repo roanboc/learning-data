@@ -1,0 +1,175 @@
+1
+00:00:01,400 --> 00:00:10,642
+En la década de 1870, los arquitectos empezaron a copiar sus planos como cianotipos: líneas blancas sobre papel azul, una copia para cada oficio de la obra.
+
+2
+00:00:11,842 --> 00:00:18,169
+Un plano dice exactamente cómo será el edificio: dónde va cada muro, qué grosor tiene y qué soporta.
+
+3
+00:00:19,469 --> 00:00:21,063
+No pone ni un solo ladrillo.
+
+4
+00:00:26,163 --> 00:00:27,754
+Los datos también tienen planos.
+
+5
+00:00:28,454 --> 00:00:35,598
+En una universidad, cuatro oficinas dieron una vez cuatro respuestas distintas a una misma pregunta: ¿cuántas credenciales otorgamos?
+
+6
+00:00:37,298 --> 00:00:41,071
+Así que acordaron qué es una credencial, y lo escribieron como un modelo.
+
+7
+00:00:42,371 --> 00:00:50,713
+Un modelo responde cuatro preguntas. Qué es una cosa. Qué la hace la misma en todas partes. Qué contiene una fila. Y cuándo fue cierta cada cosa.
+
+8
+00:00:52,113 --> 00:00:54,359
+Significado, identidad, granularidad y tiempo.
+
+9
+00:00:55,559 --> 00:00:59,422
+Acaba de aprobarse la versión tres del modelo de la universidad.
+
+10
+00:01:00,722 --> 00:01:05,056
+La serie De las palabras a los datos cuenta esa historia. Esto es todo lo que necesitas de ella.
+
+11
+00:01:07,756 --> 00:01:16,421
+Un modelo se puede escribir de muchas formas: un núcleo normalizado, estrellas, un data vault, anclas, hooks, una tabla ancha por entidad.
+
+12
+00:01:17,721 --> 00:01:22,769
+Cada una tiene sus defensores. Mira dentro de cualquiera, y encontrarás las mismas cuatro respuestas.
+
+13
+00:01:24,069 --> 00:01:33,716
+Esta serie toma un camino intermedio. Integrar sobre claves de negocio, guardar cada versión, y servir cada entidad como una fila ancha, con estrellas donde la gente las necesita.
+
+14
+00:01:36,416 --> 00:01:38,687
+Pero un modelo aprobado sigue siendo un plano.
+
+15
+00:01:39,987 --> 00:01:46,933
+Los datos llegan de tres sistemas, cada uno con sus propias claves, sus propios códigos, y cada versión que ha tenido.
+
+16
+00:01:48,533 --> 00:01:52,888
+Alguien tiene que convertir lo que llega en lo que se acordó, y demostrar que coincide.
+
+17
+00:01:54,188 --> 00:01:58,496
+Ese es el trabajo de un analytics engineer. En la universidad, es Jun.
+
+18
+00:02:01,796 --> 00:02:06,363
+La obra es la transformación: seleccionar, unir, limpiar y dar forma.
+
+19
+00:02:07,063 --> 00:02:15,686
+Se puede hacer en notebooks, en procedimientos almacenados o en herramientas de pipelines. El equipo de Jun usa dbt, una herramienta muy usada para esto.
+
+20
+00:02:16,886 --> 00:02:20,447
+Cada transformación es una consulta SQL, en su propio archivo.
+
+21
+00:02:21,947 --> 00:02:33,153
+dbt deduce el orden a partir de cómo se refieren unas consultas a otras, construye cada resultado como una tabla o una vista en la plataforma, y guarda las pruebas y la documentación junto al código.
+
+22
+00:02:36,653 --> 00:02:42,352
+dbt llama modelo a cada una de estas consultas. Es un nombre útil, y engañoso.
+
+23
+00:02:43,452 --> 00:02:47,586
+Una consulta es un paso de la obra. El modelo es el plano.
+
+24
+00:02:48,886 --> 00:02:55,765
+Esta serie trata de mantener separadas las dos cosas, y de conectarlas. Es para analytics engineers, y entra en el detalle.
+
+25
+00:03:02,065 --> 00:03:09,293
+Dentro de un año, el proyecto de Jun podría tener trescientos de estos archivos, en cuatro capas, cada carpeta con el nombre de su dominio.
+
+26
+00:03:10,993 --> 00:03:18,804
+La mayoría son pasos: uno ordena una fuente, otro une las tres claves de un estudiante, otro cose su historia en una sola línea de tiempo.
+
+27
+00:03:20,104 --> 00:03:28,124
+Solo el núcleo contiene lo que nombra el plano: un estudiante, una credencial, un título. Los marts sirven a cada consumidor lo que pidió.
+
+28
+00:03:29,424 --> 00:03:32,198
+Entonces, ¿qué archivo es el modelo de datos? Ninguno.
+
+29
+00:03:34,898 --> 00:03:36,737
+El modelo vive junto al código.
+
+30
+00:03:38,137 --> 00:03:45,479
+En YAML: qué contiene una fila, qué clave la hace única, cómo se relaciona con el resto, y el contrato que promete cada tabla.
+
+31
+00:03:47,579 --> 00:03:56,321
+En un modelo conceptual, con un diagrama que cualquiera puede leer: qué significa cada cosa. Y en un registro de decisiones a su lado: por qué se decidió así.
+
+32
+00:03:58,421 --> 00:04:05,405
+Las consultas hacen las tablas. El YAML y el Markdown dicen qué deben ser esas tablas, y las pruebas comprueban que lo son.
+
+33
+00:04:08,905 --> 00:04:10,526
+Jun trabaja en diez pasos.
+
+34
+00:04:11,226 --> 00:04:16,706
+Empezar por una pregunta. Conocer lo que de verdad contienen las fuentes. Definir lo que necesita cada consumidor.
+
+35
+00:04:17,206 --> 00:04:23,054
+Nombrar las brechas, y escribir los contratos. Escribir las pruebas, antes de cualquier código. Construir, capa por capa.
+
+36
+00:04:23,554 --> 00:04:32,127
+Validar contra una cifra en la que la gente confía. Revisar y publicar. Escribir cada dato una sola vez. Y dejar que el modelo evolucione sin romper nada a nadie.
+
+37
+00:04:33,227 --> 00:04:37,840
+Un agente de IA puede ayudar en cada paso. En cada paso, aprueba una persona.
+
+38
+00:04:41,940 --> 00:04:44,280
+Las próximas ocho películas recorren los pasos uno a uno.
+
+39
+00:04:44,980 --> 00:04:54,101
+Delimitar un modelo a partir de una pregunta. Qué hace que un estudiante sea el mismo en todos los sistemas, y cómo las claves y los hashes lo hacen explícito. Granularidad y tiempo.
+
+40
+00:04:54,701 --> 00:05:04,058
+Contratos y pruebas. Construir por capas. Quién es dueño de qué, entre dominios. Trabajar con un agente, con responsabilidad. Y escribirlo todo, una sola vez.
+
+41
+00:05:05,558 --> 00:05:13,899
+Todo lo que muestran es código real y datos reales. Corre en dbt Core, con DuckDB, y puedes ejecutarlo tú mismo.
+
+42
+00:05:17,399 --> 00:05:21,264
+Un plano dice cómo será un edificio. La obra lo hace realidad.
+
+43
+00:05:22,464 --> 00:05:27,262
+En los datos, el modelo es el plano, y dbt es una forma de construirlo.
+
+44
+00:05:28,562 --> 00:05:30,064
+Decláralo. Luego constrúyelo.

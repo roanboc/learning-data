@@ -10,7 +10,7 @@ import json, os, pathlib, sys
 
 ROOT = pathlib.Path.cwd()
 if not (ROOT / 'film.json').exists():
-    raise SystemExit('Run this from a film\'s source folder, such as films/analytics-engineering/1-a-model-is-not-a-transformation/source/')
+    raise SystemExit('Run this from a film\'s source folder, such as films/analytics-engineering/1-declare-it-then-build-it/source/')
 SERIES = pathlib.Path(__file__).resolve().parents[2]
 FILMS = SERIES.parent
 REPO = FILMS.parent

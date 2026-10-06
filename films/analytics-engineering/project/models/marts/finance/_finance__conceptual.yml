@@ -30,4 +30,5 @@ entities:
     rules:
       - As at census date (var census_date) - every entity is read at its version valid that day.
       - Recognised credit only (microcredentials and short-course certificates a faculty recognises); units passed are paid for.
+      - Only in the award the learner is enrolled in on census day. Credit that counts towards other awards saves nothing there yet.
     history: One census date at a time, like Planning's.

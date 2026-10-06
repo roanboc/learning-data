@@ -28,6 +28,7 @@ What was decided, why, and who decided, for every source, domain and consumer, a
 
 | ID | Scope | Decision | Why | Who | When | Status |
 |---|---|---|---|---|---|---|
+| [DEC-FIN-02](../models/marts/finance/_finance__decisions.yml) (was Q-FIN-01) | consumer `finance` | **Tuition is saved in the enrolled award only.** Recognised credit saves tuition only in the award the learner is enrolled in on census day, counted once, at that award's published rate for the census year. | The core counts recognised credit towards every award it could count towards. A learner pays tuition for one award; counted across all of them, the saving would be two or three times too big. | Finance | 21 Oct 2026 | agreed |
 | [DEC-PLN-02](../models/marts/planning/_planning__decisions.yml) | consumer `planning` | **Planning's mart is as it was at census.** Planning's mart is as it was at census, dated by when things took effect. | Planning compares with the census report. It builds on the same core as the wallet. | Planning, the wallet app team and Noor | 8 Oct 2026 | agreed |
 | [DEC-WAL-01](../models/marts/wallet/_wallet__decisions.yml) | consumer `wallet` | **The wallet's marts are as they are now.** The wallet's marts are as they are now. | The wallet shows the learner today. It builds on the same core as Planning. | Planning, the wallet app team and Noor | 8 Oct 2026 | agreed |
 
@@ -85,7 +86,7 @@ How many decisions each log holds at each step. A domain's project, when it has 
 | project | 1 | 1 |  |  |  | 4 | 3 | 1 |
 | domain `course` |  |  |  |  |  | 1 |  |  |
 | domain `student` | 4 | 2 |  | 1 |  | 1 |  | 1 |
-| consumer `finance` | 1 |  |  |  |  |  |  |  |
+| consumer `finance` | 1 |  | 1 |  |  |  |  |  |
 | consumer `planning` | 1 |  | 1 |  |  |  |  |  |
 | consumer `wallet` |  |  | 1 |  |  |  |  |  |
 | source `learning_platform` |  |  |  | 2 |  |  |  |  |

@@ -8,4 +8,5 @@
 - Business key: The award code, qualified by its key set, SIS|GCDA. Issued by: Registrar's office.
 - Owner of the meaning: Mei Tanaka, registrar's office.
 - History: Every version, dated when it was recorded.
+- Source of the definition: the term Award in the university's business glossary (Unity Catalog), named by data governance; synced on 2026-10-14.
 {% enddocs %}

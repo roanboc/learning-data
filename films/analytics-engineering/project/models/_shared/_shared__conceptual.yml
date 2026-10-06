@@ -73,7 +73,7 @@ domains:
       - {name: research_candidature, status: planned, reference: "HDR course admission"}
       - {name: supervision, status: planned, reference: "Extension: institutional"}
 
-  - name: finance
+  - name: fees
     owner: Finance
     reference: TCSI HELP and fee elements
     entities:

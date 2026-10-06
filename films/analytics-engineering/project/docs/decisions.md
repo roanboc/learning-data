@@ -8,6 +8,7 @@ What was decided, why, and who decided, for every source, domain and consumer, a
 
 | ID | Scope | Decision | Why | Who | When | Status |
 |---|---|---|---|---|---|---|
+| [DEC-FIN-01](../models/marts/finance/_finance__decisions.yml) | consumer `finance` | **Recognised credit only, on the public core.** Finance's question counts recognised credit only, from microcredentials and short-course certificates; units passed are paid for. It reads the public core, and touches no other domain. | Only recognised credit saves tuition. A new consumer builds on what the core publishes, so no other team's work changes. | Finance, with Noor, data architect | 19 Oct 2026 | agreed |
 | [DEC-PLN-01](../models/marts/planning/_planning__decisions.yml) | consumer `planning` | **Scope is what Planning's question touches.** Scope: the entities Planning's question touches, and no more: learner, credential, award, and credit towards an award. | "Model the university" never ends. A question does. | Noor, data architect, with Planning | 1 Oct 2026 | agreed |
 | [DEC-PRJ-06](../models/_shared/_shared__decisions.yml) | project | **The conceptual model at two levels; sources, models and exposures apart.** The conceptual model is written at two levels: a map of the university's domains and key entities (at most 50, modelled or planned, following TCSI), and each core domain and mart's own. Sources, models and exposures each get a top-level folder. | The map shows where each domain sits and what's still to model, without the detail; the detail stays with its owner. What comes in, what's built and who uses it are different things, and each is easy to find on its own. | Noor, data architect | 16 Oct 2026 | agreed |
 | [DEC-STU-01](../models/core/student/_student__decisions.yml) | domain `student` | **A microcredential is a kind of credential.** A microcredential is a kind of credential, not an entity of its own. So is a badge. | Same identity (the issuer's identifier) and the same lifecycle (issued, maybe revoked). Only the credit points differ. | Mei Tanaka, registrar's office | 2 Oct 2026 | agreed |
@@ -84,6 +85,7 @@ How many decisions each log holds at each step. A domain's project, when it has 
 | project | 1 | 1 |  |  |  | 4 | 3 | 1 |
 | domain `course` |  |  |  |  |  | 1 |  |  |
 | domain `student` | 4 | 2 |  | 1 |  | 1 |  | 1 |
+| consumer `finance` | 1 |  |  |  |  |  |  |  |
 | consumer `planning` | 1 |  | 1 |  |  |  |  |  |
 | consumer `wallet` |  |  | 1 |  |  |  |  |  |
 | source `learning_platform` |  |  |  | 2 |  |  |  |  |

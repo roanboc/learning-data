@@ -7,7 +7,7 @@ every step, a person approves. This page says what an agent may and may not do.
 ## Read first
 
 - [`docs/process.md`](docs/process.md): the ten steps, what each produces, your part in it, and who approves it.
-- [`docs/conventions.md`](docs/conventions.md): layers, names, SQL, keys, time, tests, metadata.
+- [`docs/conventions.md`](docs/conventions.md): layers, names, SQL, keys, time, tests, metadata, and each file's lifecycle (*File lifecycles*): never edit a generated file; delete a requirement once it's done; never delete a decision, mark it superseded.
 - The conceptual model: [the university's map](models/_shared/_shared__conceptual.md) of domains and key entities, and each core domain and mart's own, in its folder ([`student`](models/core/student/_student__conceptual.yml), [`course`](models/core/course/_course__conceptual.yml), [`planning`](models/marts/planning/_planning__conceptual.yml), [`wallet`](models/marts/wallet/_wallet__conceptual.yml)): what each entity means, its key and its owner, and each consumer's question.
 - [`docs/decisions.md`](docs/decisions.md): every decision and why, indexed from each scope's log (`_<scope>__decisions.yml`, next to what it's about). Known limitations are on the model or source they affect (`meta.limitations`).
 - [`requirements/`](requirements/): what's still open while something is built. Temporary: when an item is done, move what lasts to its home and delete it. It's not a backlog; the backlog tool is.

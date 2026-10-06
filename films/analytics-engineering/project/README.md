@@ -110,37 +110,51 @@ Databricks-only mistake in the SQL's Jinja, the configs or the profile before it
 
 ## Layout
 
+Every file has one of four lifecycles (*File lifecycles* in `docs/conventions.md`). Untagged
+files are **permanent**: written by hand, changed in a reviewed pull request. The others are tagged:
+
+- `[generated]`: written by a script in `scripts/generate/`. Never edit it; change its source and
+  rerun the script. CI fails if it's out of date.
+- `[temporary]`: lives only while the work it's about is under way, then is deleted. CI fails on
+  anything done that's still there.
+- `[build output]`: written by dbt, never committed.
+
 ```
 project/
 ├── dbt_project.yml           vars (census date, the 15-credit-point threshold, the limit of four
 │                             microcredentials), layers, access, contracts, groups, grants
 ├── profiles.yml              targets: duckdb (default), databricks
 ├── data/<system>/<table>.csv the three sources, every version kept (DuckDB only)
-├── .dbtignore                keeps the conceptual models out of dbt's parse
+├── .dbtignore                keeps the conceptual models and decision logs out of dbt's parse
 ├── seeds/
 │   ├── reference/<domain>/   data the business owns, that models join to: student (status map,
-│   │                         identity decisions, credit recognition), shared (key sets)
+│   │                         identity decisions, credit recognition), shared (key sets
+│   │                         [generated] from each source's meta.key_set)
 │   └── expected/<domain>/    numbers published elsewhere, that tests reconcile against: planning
 │                             (the census report). No model reads them
-├── sources/<system>/         what comes in: each source's YAML (tables, freshness, and its key set,
-│                             with each system key and its case) and its doc blocks
+├── sources/<system>/         what comes in: each source's YAML (tables, freshness, its key set
+│                             with each system key and its case, known limitations), its doc
+│                             blocks, and its decision log (_<system>__decisions.yml)
 ├── models/                   what's built, organised by domain, following TCSI; each domain's
 │   │                         folder holds its models and its data definitions
 │   ├── overview.md           the docs site's front page
 │   ├── _groups.yml           who owns which models
-│   ├── _shared/              the university's map: its domains and their key entities, at most 50
-│   │                         (_shared__conceptual.yml, drawn into _shared__conceptual.md); the
-│   │                         version columns' doc blocks; the time spine
+│   ├── _shared/              the university's map: its domains and key entities, at most 50
+│   │                         (_shared__conceptual.yml; _shared__conceptual.md [generated]); the
+│   │                         project's decision log; the version columns' doc blocks; the time spine
 │   ├── staging/<system>/     one view per source table
 │   ├── intermediate/student/ identity candidates and matches, timelines, the credit rule; unit tests
 │   ├── core/student/         learner, credential, credit towards an award ┐ the enterprise contract:
-│   ├── core/course/          award                                        ┘ public, versioned, enforced
+│   ├── core/course/          award                                        ┘ public, versioned, enforced;
+│   │                         core_credential v1 [temporary], removed after 31 March 2027
 │   ├── marts/planning/       as at census; the semantic model and metric
 │   └── marts/wallet/         as it is now
-│                             Each core domain and mart has its own conceptual model
-│                             (_<domain>__conceptual.yml, not read by dbt, and a hand-drawn
-│                             _<domain>__conceptual.md), and the generated _<domain>__definitions.md
-│                             and _<domain>__physical.md
+│                             Each core domain and mart folder also holds:
+│                               _<domain>__conceptual.yml and .md   its conceptual model
+│                               _<domain>__decisions.yml            its decision log
+│                               _<domain>__columns.md               its column doc blocks
+│                               _<domain>__definitions.md           [generated] doc blocks
+│                               _<domain>__physical.md              [generated] physical diagram
 ├── exposures/<consumer>/     who uses it: the census dashboard, the wallet app
 ├── macros/
 │   ├── shared/               conventions every domain uses: keys and hashes, point in time
@@ -155,21 +169,24 @@ project/
 │   ├── profiling/            evidence about the sources: keys, nulls, orphans, emails, late changes
 │   ├── design/               evidence for a modelling choice: fan-out without point in time
 │   └── validation/           checking the result: reconcile with the census report, as-was and as-is
-├── requirements/             temporary: what's still open while something is built (questions,
-│                             requirements, gaps), by source, domain and consumer; deleted when done
-├── docs/                     how the work is done: the process, conventions, and the generated index
-│                             of every decision log (decisions.md)
+├── requirements/             [temporary] what's still open while something is built (questions,
+│                             requirements, gaps), by source, domain and consumer. Each item:
+│                             open → in_progress → done → what lasts moves to its home → deleted.
+│                             See requirements/README.md
+├── docs/                     how the work is done: the process and the conventions; decisions.md
+│                             [generated], the index of every decision log
 ├── scripts/
-│   ├── generate/             definitions.py, diagrams.py and decisions.py: write committed files;
-│   │                         --check in CI
+│   ├── generate/             definitions.py, diagrams.py and decisions.py: write the [generated]
+│   │                         files; --check in CI
 │   ├── check/                check_metric.py: the metric against the census report; requirements.py:
 │   │                         only open requirements, with what shows they're done; both in CI
 │   ├── tools/                diff_against_main.py: a branch's table against main's, for review
 │   └── setup/                load_databricks.sql: loads the sample sources into Databricks
 ├── examples/planning/        Planning's own project, refing the core across projects (dbt Cloud only)
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
-└── skills/                   five skills for an agent: draft the conceptual model, profile, draft
-                              a model, reconcile and diff, review metadata
+├── skills/                   five skills for an agent: draft the conceptual model, profile, draft
+│                             a model, reconcile and diff, review metadata
+└── target/, logs/            [build output] dbt's artifacts and the DuckDB database; dbt clean
 ```
 
 ## Which film uses which part

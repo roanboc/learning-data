@@ -12,6 +12,35 @@ item with a priority, estimate, assignee or sprint.
 item. Git keeps its history. `scripts/check/requirements.py` fails on any item that isn't `open` or
 `in_progress`, and on a register with nothing in it. CI runs it, and it lists what's still open.
 
+## Lifecycle
+
+Everything in this folder is temporary. An item lives only while the work it's about is under way:
+
+```mermaid
+stateDiagram-v2
+    direction LR
+    [*] --> open: raised
+    open --> in_progress: work starts
+    in_progress --> done: done_when is true
+    done --> moved: what lasts goes to its home
+    moved --> [*]: the item is deleted
+    note right of moved
+        a decision in its scope's log,
+        meta.limitations on the YAML,
+        question: in the mart's conceptual model,
+        or the test that enforces it
+    end note
+```
+
+- `open` and `in_progress` are the only statuses an item can have. There's no `done` status: a
+  done item is moved and deleted in the same pull request.
+- A register exists only while it has open items. When its last item goes, delete the file, and
+  its folder.
+- Git history keeps every deleted item; the pull request that deleted it says where it went.
+
+The rest of the project lives longer: see *File lifecycles* in
+[`docs/conventions.md`](../docs/conventions.md) for what's permanent, generated or build output.
+
 ## Where what lasts goes
 
 | When it's done, the item was | What lasts | Its home |

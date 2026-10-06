@@ -100,6 +100,33 @@ A source's folder holds its doc block and the columns only that source has
 (`_<source>__docs.md`). `docs/` holds how the work is done (process, conventions) and the
 generated index of the decision logs, not what the data means.
 
+## File lifecycles
+
+Every file in the project has one of four lifecycles. A file's header, or its folder, says which.
+
+| Lifecycle | Files | How they change |
+|---|---|---|
+| **Permanent**, written by hand | Sources, models, exposures, seeds, tests, macros, analyses, scripts; conceptual models (`_<domain>__conceptual.yml`, `_<domain>__conceptual.md`); decision logs (`_<scope>__decisions.yml`); `meta.limitations`; `docs/process.md`, `docs/conventions.md` | Edited in a pull request and reviewed. A decision is never deleted: when it's replaced, it's marked `superseded` and relates to what replaced it |
+| **Generated**, never edited by hand | `_<domain>__definitions.md`, `_<domain>__physical.md`, `models/_shared/_shared__conceptual.md`, `docs/decisions.md`, `seeds/reference/shared/key_sets.csv` | Rewritten by `scripts/generate/*` from the permanent files. Each says so in its first lines. CI fails if one is out of date: change the source, then run the script |
+| **Temporary**, deleted when done | Items in `requirements/`; a deprecated model version (`core_credential` v1) | Live only while the work they're about is under way, then go (below). CI fails on a requirement that's done |
+| **Build output**, never committed | `target/`, `logs/`, `*.duckdb`, `dbt_packages/` | Written by dbt, ignored by git, removed by `dbt clean` |
+
+**A requirement**, from the day it's raised to the day it's gone:
+
+```
+open ─► in_progress ─► done ─► what lasts moves to its home ─► the item is deleted
+                                (decision log, meta.limitations,     (and its register, once empty;
+                                 question:, a test or contract)        git keeps the history)
+```
+
+Nothing stays in `requirements/` once it's done: `scripts/check/requirements.py` fails on any item
+that isn't `open` or `in_progress`. [`requirements/README.md`](../requirements/README.md) says where
+each kind of item goes.
+
+**A deprecated model version** stays, built from the current version, until its
+`deprecation_date`, so its consumers have time to move. It's removed in the first release after
+that date: `core_credential` v1 after 31 March 2027 (DEC-STU-07). The exposures say who to tell.
+
 ## Splitting into projects
 
 Today one project holds every domain (DEC-PRJ-03). Every file a domain owns is under a path named

@@ -5,19 +5,21 @@ description: Compare each definition the university's business glossary holds wi
 
 # Sync the conceptual model from the glossary
 
-The university keeps its business glossary outside dbt, on Databricks. Where
-it defines an entity, data governance names the term that applies, and that term is the home of
-the definition (DEC-PRJ-11 in `models/_shared/_shared__decisions.yml`). The conceptual model
-keeps a reviewed copy, with the term in `source:`, so the build, the docs site and the catalog
-read it from one place. The copy flows one way: from the glossary into the project, never back.
+The university keeps its business glossary outside dbt: Unity Catalog's Glossary, on Databricks,
+with its terms organised by domain. Where it defines an entity, data governance names the term
+that applies, and that term is the home of the definition (DEC-PRJ-11 in
+`models/_shared/_shared__decisions.yml`). The conceptual model keeps a reviewed copy, with the
+term in `source:`, so the build, the docs site and the catalog read it from one place. The copy
+flows one way: from the glossary into the project, never back.
 
 ## Steps
 
 1. **List the entities with a source.** Every entity in a `_<domain>__conceptual.yml` with
    `source:`: the glossary, the term, who named it (`named_by`) and when it was last synced
    (`synced_on`).
-2. **Read each term in the glossary**, as it stands now, with its steward and the date it last
-   changed. Read access only: never edit the glossary from here.
+2. **Read each term in the glossary**, as it stands now, with its owner and the date it last
+   changed. Databricks serves the Glossary through SQL, its APIs and MCP; read access only:
+   never edit the glossary from here.
 3. **Compare the meaning.** The same words: nothing to do. Different words: is it a reword, or
    does it change what counts? A changed scope (what's included, a number, a condition) changes
    what models count.

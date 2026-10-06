@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>De principio a fin · En las entrañas del oficio de datos · Learning Data</title>
+<meta name="description" content="Una película para analytics engineers que lleva a un consumidor nuevo, Finanzas, por los diez pasos en un proyecto de dbt real, un commit por paso: alcance, realidad de las fuentes, resultado para el consumidor, brechas y contratos, pruebas, construcción, validación, revisión y publicación, escrito una sola vez, y operar y evolucionar. Muestra dónde vive cada archivo (dominios de aplicación, de datos y de negocio), cuánto vive (escrito a mano, generado, o guardado solo mientras está abierto), y cómo un dominio puede mudarse a un proyecto propio.">
+<meta property="og:title" content="De principio a fin · En las entrañas del oficio de datos · Learning Data"><meta property="og:description" content="Una pregunta, diez pasos, diez commits. Cada archivo en su lugar, mientras haga falta."><meta property="og:image" content="https://roanboc.github.io/learning-data/assets/end-to-end-poster.jpg"><meta property="og:locale" content="es_419">
+<link rel="alternate" hreflang="en" href="https://roanboc.github.io/learning-data/in-the-weeds/end-to-end/"><link rel="alternate" hreflang="es" href="https://roanboc.github.io/learning-data/es/in-the-weeds/end-to-end/">
+<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../../"><img src="../../../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../../">Empieza aquí</a><a href="../../topics/" aria-current="true">Temas</a><a href="../../journey/">Cómo se hizo</a><span class="lang" role="group" aria-label="Idioma"><a href="../../../in-the-weeds/end-to-end/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span></nav></div></header>
+<main>
+<section class="hero cine"><div class="bg" aria-hidden="true"><img src="../../../assets/end-to-end-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow crumbs"><a href="../../topics/">Temas</a> › <a href="../">En las entrañas del oficio de datos</a></p>
+<h1>De principio a fin: una pregunta, cada archivo que toca, y los que se van</h1>
+<p class="lead">Finanzas pregunta cuánto ahorran los estudiantes en matrícula gracias a los créditos reconocidos. Sigue su pregunta por los diez pasos, un commit real por paso: los archivos que llegan para quedarse, los que cambian, y los temporales, que se borran cuando el trabajo está hecho. Cada archivo tiene un hogar con el nombre de su dominio, y una vida. La película que cierra la serie.</p>
+<p class="meta-row"><span>8½ min</span><span>4 labs</span><span>8 situaciones</span><span>Pausa para pensar</span><span>En inglés, con subtítulos en español</span></p>
+<p class="note">La película está en inglés, con subtítulos en español. Esta página, los capítulos, las preguntas, los labs y las situaciones están en español.</p>
+<p class="builds-on">Amplía <a href="../written-once/"><i>Escrito una sola vez</i></a></p>
+</section>
+<nav class="course" aria-label="Curso: De principio a fin"><div class="course-in"><p class="course-t"><small>Película 10 de 10 · Todo el proceso</small>De principio a fin</p><ol class="path" data-store="ld-end-to-end" data-labs="4" data-quiz="8" data-text='{"watched": "Vista", "labs": "{n} de 4 labs explorados", "quiz": "{n} de 8 respondidas · {ok} correctas"}'>
+<li><a href="./#watch" aria-current="step"><span class="n"><b>1</b></span><b>Mira</b><span>Una película de 8½ min</span></a></li>
+<li><a href="./labs/"><span class="n"><b>2</b></span><b>Desarma</b><span>Cuatro labs interactivos</span></a></li>
+<li><a href="./scenarios/"><span class="n"><b>3</b></span><b>Tú decides</b><span>Ocho situaciones reales</span></a></li>
+</ol></div></nav>
+<section class="module" id="watch" data-store="ld-end-to-end" aria-labelledby="watch-h">
+<div class="mhead"><div><h2 id="watch-h">Mira la película</h2><p>Presiona Reproducir, o salta a un capítulo. Activa <b>Pausa para pensar</b> y la película se detiene con una pregunta al final de los capítulos.</p></div></div>
+<div class="player" data-labs="labs/">
+<audio id="snd" preload="metadata" src="../../../assets/end-to-end/soundtrack.mp3"></audio><div class="poster"><img src="../../../assets/end-to-end-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Ver la película · 8½ min</button><button type="button" class="think-badge" data-think>Ver con pausas para pensar</button></div></div><canvas id="film" width="1280" height="720" aria-label="Película animada, en inglés: End to end"></canvas>
+<div class="bar"><button id="play">Reproducir</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="time">0:00</span><button id="think" aria-pressed="false" title="Detenerse al final de cuatro capítulos, con una pregunta cada vez">Pausa para pensar</button><button id="cc" class="on" aria-pressed="true">Subtítulos</button><button id="fs">Pantalla completa</button></div>
+</div>
+<div class="chapters" id="chapters" aria-label="Capítulos"></div>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/end-to-end.mp4">Descargar el video (en inglés)</a><a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/10-end-to-end/captions">Archivos de subtítulos</a><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/10-end-to-end/script.md" hreflang="en">Leer el guion (en inglés)</a></p>
+<template id="next-panel"><div class="think-card"><p class="think-k">¿Y ahora?</p><h3>Seguiste una pregunta de principio a fin. Ahora ubica cada archivo, y sigue una tú.</h3>
+<div class="next-opts"><a class="btn primary" href="labs/">Desarma: 4 labs interactivos →</a><a class="btn" href="scenarios/">Tú decides: 8 situaciones</a><a class="btn" href="../">Toda la serie: En las entrañas del oficio de datos</a></div>
+<div class="think-foot"><button type="button" class="btn" data-again>Ver de nuevo</button></div></div></template>
+</section>
+
+<section class="module" id="in-the-project" aria-labelledby="project-h">
+<div class="mhead"><div><h2 id="project-h">Míralo en el proyecto</h2><p>Cada tarjeta de la película muestra un archivo real del proyecto de dbt de ejemplo. Abre en GitHub los que muestra cada capítulo, o ejecuta tú el proyecto entero.</p></div></div>
+<ul class="repo-list">
+<li><b>Una pregunta nueva</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/_finance__conceptual.yml"><code>models/marts/finance/_finance__conceptual.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/_finance__decisions.yml"><code>models/marts/finance/_finance__decisions.yml</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/exposures/finance"><code>exposures/finance/</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/_shared/_shared__conceptual.yml"><code>models/_shared/_shared__conceptual.yml</code></a></span></li>
+<li><b>Lo que contiene el núcleo</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/analyses/profiling/profile_credit_across_awards.sql"><code>analyses/profiling/profile_credit_across_awards.sql</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/reference/finance/tuition_rates.csv"><code>seeds/reference/finance/tuition_rates.csv</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/reference/finance/_finance__seeds.yml"><code>seeds/reference/finance/_finance__seeds.yml</code></a></span></li>
+<li><b>Una fila de qué</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/_finance__conceptual.yml"><code>models/marts/finance/_finance__conceptual.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/_finance__decisions.yml"><code>models/marts/finance/_finance__decisions.yml</code></a></span></li>
+<li><b>La promesa</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/_finance__models.yml"><code>models/marts/finance/_finance__models.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/mart_finance__tuition_forgone.sql"><code>models/marts/finance/mart_finance__tuition_forgone.sql</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/exposures/finance/_finance__exposures.yml"><code>exposures/finance/_finance__exposures.yml</code></a></span></li>
+<li><b>Primero las pruebas</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/_finance__models.yml"><code>models/marts/finance/_finance__models.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/expected/finance/tuition_report.csv"><code>seeds/expected/finance/tuition_report.csv</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/tests/reconciliation/reconcile_finance_with_tuition_report.sql"><code>tests/reconciliation/reconcile_finance_with_tuition_report.sql</code></a></span></li>
+<li><b>La construcción</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/mart_finance__tuition_forgone.sql"><code>models/marts/finance/mart_finance__tuition_forgone.sql</code></a></span></li>
+<li><b>Nada más se movió</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/analyses/validation/reconcile_tuition_report.sql"><code>analyses/validation/reconcile_tuition_report.sql</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/scripts/tools/diff_against_main.py"><code>scripts/tools/diff_against_main.py</code></a></span></li>
+<li><b>Revisar y publicar</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/scripts/check/requirements.py"><code>scripts/check/requirements.py</code></a></span></li>
+<li><b>Escrito una sola vez</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/skills/review-metadata/find_repeats.py"><code>skills/review-metadata/find_repeats.py</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_course__columns.md"><code>models/core/course/_course__columns.md</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/_finance__models.yml"><code>models/marts/finance/_finance__models.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__models.yml"><code>models/marts/planning/_planning__models.yml</code></a></span></li>
+<li><b>Lista para mudarse</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/mart_finance__tuition_forgone.sql"><code>models/marts/finance/mart_finance__tuition_forgone.sql</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/marts/finance"><code>models/marts/finance/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/exposures/finance"><code>exposures/finance/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/seeds/reference/finance"><code>seeds/reference/finance/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/seeds/expected/finance"><code>seeds/expected/finance/</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md"><code>docs/conventions.md</code></a></span></li>
+<li><b>Todo el edificio</b><span><a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/sources"><code>sources/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/core"><code>models/core/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/marts"><code>models/marts/</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md"><code>docs/conventions.md</code></a></span></li>
+</ul>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project">Explora el proyecto entero</a><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/README.md">Cómo ejecutarlo</a></p>
+</section>
+
+<section class="module" id="think-it-through" aria-labelledby="think-h">
+<div class="mhead"><div><h2 id="think-h">Piénsalo</h2><p>Las cuatro preguntas de Pausa para pensar, para una clase o un equipo. Abre una para ver la respuesta.</p></div></div>
+<div id="think-list"></div>
+</section>
+
+<section class="module" id="in-the-series" aria-labelledby="series-h">
+<div class="mhead"><div><h2 id="series-h">En la serie: <a href="../">En las entrañas del oficio de datos</a></h2><p>Película 10 de 10.</p></div></div>
+<div class="topic-grid series-pn" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}'>
+<article class="topic-card">
+<img src="../../../assets/written-once-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">← Anterior · Película 9 de 10</p>
+<h3><a href="../written-once/">Escrito una sola vez</a></h3>
+<p>Cada copia de un dato es una ocasión de desviarse. Un hogar para cada dato, todo lo demás generado, y un cambio que rompe llega como una versión nueva con fecha.</p>
+<p class="meta">5 min · 4 labs · 8 situaciones · En las entrañas del oficio de datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-written-once" data-labs="4" data-quiz="8" hidden></p>
+</div>
+</article>
+</div>
+<ol class="series-list" aria-label="Todas las películas de la serie">
+<li><a href="../declare-it-then-build-it/"><span class="n">1</span>Decláralo, luego constrúyelo</a></li>
+<li><a href="../start-from-a-question/"><span class="n">2</span>Empieza por una pregunta</a></li>
+<li><a href="../what-makes-it-the-same-one/"><span class="n">3</span>Qué lo hace el mismo</a></li>
+<li><a href="../one-row-of-what-and-when/"><span class="n">4</span>Una fila de qué, y cuándo</a></li>
+<li><a href="../promises-and-proofs/"><span class="n">5</span>Promesas y pruebas</a></li>
+<li><a href="../built-in-layers/"><span class="n">6</span>Construido en capas</a></li>
+<li><a href="../who-owns-what/"><span class="n">7</span>Quién es dueño de qué</a></li>
+<li><a href="../an-agent-on-the-team/"><span class="n">8</span>Un agente en el equipo</a></li>
+<li><a href="../written-once/"><span class="n">9</span>Escrito una sola vez</a></li>
+<li><a href="../end-to-end/" aria-current="page"><span class="n">10</span>De principio a fin</a></li>
+</ol>
+</section>
+</main>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película, los labs y las situaciones son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
+<script>window.L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla completa",fsExit:"Salir de pantalla completa"}};</script>
+<script src="../../../assets/end-to-end/captions.es.js"></script>
+<script src="../../../assets/end-to-end/film.js"></script>
+<script>/* the film is in English; its chapter buttons and the Pause and think kicker use these Spanish names */
+{const N={"floor": "El piso de trazado", "question": "Una pregunta nueva", "sources": "Lo que contiene el núcleo", "output": "Una fila de qué", "promise": "La promesa", "tests": "Primero las pruebas", "build": "La construcción", "validate": "Nada más se movió", "ship": "Revisar y publicar", "once": "Escrito una sola vez", "evolve": "Lista para mudarse", "building": "Todo el edificio"};SCENES.forEach(s=>{if(N[s.id])s.name=N[s.id];});}</script>
+<script src="../../../assets/end-to-end/think.es.js"></script>
+<script src="../../../assets/learn/think.js"></script>
+<script src="../../../assets/learn/path.js"></script>
+<script src="../../../assets/learn/next.js"></script>
+<script src="../../../assets/ambient.js"></script>
+</body>
+</html>

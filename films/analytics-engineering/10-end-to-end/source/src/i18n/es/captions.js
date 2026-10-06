@@ -106,10 +106,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Paso diez: operar y evolucionar. Finanzas fija las versiones del núcleo que lee.",
 "A new version reaches Finance as a choice with a date, and the lineage names Finance among who to tell.":
 "Una versión nueva le llega a Finanzas como una elección con fecha, y el linaje nombra a Finanzas entre a quién avisar.",
-"And because every Finance file lives under a path named for it, Finance can move out to a project of its own, whole.":
-"Y como cada archivo de Finanzas vive bajo una ruta con su nombre, Finanzas puede mudarse a un proyecto propio, entera.",
-"Its marts, its exposure, its seeds and its decisions. Nothing else needs untangling.":
-"Sus marts, su exposición, sus seeds y sus decisiones. No hay nada más que desenredar.",
+"And because Finance's folders were named for it from the first commit, Finance can move out to a project of its own, whole.":
+"Y como las carpetas de Finanzas llevan su nombre desde el primer commit, Finanzas puede mudarse a un proyecto propio, entera.",
+"Its marts, its exposure, its seeds, its decisions, and the test and two analyses it was built with.":
+"Sus marts, su exposición, sus seeds, sus decisiones, y la prueba y los dos análisis con que se construyó.",
 "Ten steps, ten commits. You can replay them one by one, in the repository.":
 "Diez pasos, diez commits. Puedes repetirlos uno por uno, en el repositorio.",
 "Some files arrived to stay: the question, the decisions, the contract, the tests, the model.":

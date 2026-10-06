@@ -1,0 +1,251 @@
+1
+00:00:01,400 --> 00:00:08,164
+En el siglo XIV, los canteros que construían la catedral de York dibujaban sus ventanas a tamaño real, sobre un piso de yeso.
+
+2
+00:00:09,464 --> 00:00:13,629
+De cada dibujo cortaban una plantilla de madera, y tallaban la piedra para que coincidiera con ella.
+
+3
+00:00:15,129 --> 00:00:20,483
+Cuando una ventana estaba lista, la siguiente se dibujaba encima. Con el tiempo, el piso se cubría otra vez de yeso.
+
+4
+00:00:21,983 --> 00:00:24,992
+Los dibujos eran para el trabajo. Las ventanas son lo que quedó.
+
+5
+00:00:26,692 --> 00:00:34,808
+Un proyecto tiene ambos: archivos para el trabajo, que se borran cuando está hecho, y archivos que se quedan. Esta es una pregunta nueva, de principio a fin.
+
+6
+00:00:41,108 --> 00:00:43,407
+Llega un consumidor nuevo: Finanzas.
+
+7
+00:00:44,107 --> 00:00:49,800
+¿Cuánto ahorran los estudiantes en matrícula gracias a los créditos reconocidos, por facultad, a la fecha del censo?
+
+8
+00:00:51,300 --> 00:00:56,060
+La respuesta fija la previsión de ingresos del año próximo, y cuánto debería costar una microcredencial.
+
+9
+00:00:57,360 --> 00:01:04,824
+Finanzas es un dominio de negocio: decide con los datos. Así que tiene carpetas propias, con su nombre, desde el primer commit.
+
+10
+00:01:06,324 --> 00:01:16,657
+El paso uno es el alcance. Su modelo conceptual guarda la pregunta; su registro de decisiones, la primera decisión: solo créditos reconocidos, leídos del núcleo público.
+
+11
+00:01:18,157 --> 00:01:26,200
+Y un archivo que no va a durar: los requisitos abiertos de Finanzas. El primero dice cómo se ve el trabajo terminado: dar el mismo número que Finanzas.
+
+12
+00:01:27,700 --> 00:01:33,942
+Quién hace el trabajo, y cuándo, vive en la herramienta de backlog del equipo. El proyecto guarda solo lo que sigue abierto.
+
+13
+00:01:37,642 --> 00:01:44,699
+Paso dos: lo que de verdad contienen los datos. Finanzas lee el núcleo, no las fuentes, así que el agente perfila el núcleo.
+
+14
+00:01:45,999 --> 00:01:51,852
+Los créditos reconocidos cuentan para cada título para el que podrían contar. Los de Aisha cuentan para tres.
+
+15
+00:01:53,352 --> 00:02:01,884
+Sumados entre títulos, son 385 créditos. En el título en que está inscrito cada estudiante, 160.
+
+16
+00:02:03,584 --> 00:02:11,654
+¿Cuál ahorra la matrícula? Ninguna regla puede decirlo. Se abre una pregunta, con la consulta como evidencia, y la respuesta es de Finanzas.
+
+17
+00:02:13,154 --> 00:02:19,119
+Finanzas aporta algo propio: las tarifas de matrícula que publica, como datos de referencia de los que es dueña.
+
+18
+00:02:22,619 --> 00:02:29,898
+Paso tres: el resultado. Primero, Finanzas responde: solo el título en que el estudiante está inscrito, el día del censo.
+
+19
+00:02:31,198 --> 00:02:37,483
+La respuesta va donde perdura: una regla en el modelo conceptual de Finanzas, y una decisión en su registro.
+
+20
+00:02:38,983 --> 00:02:43,967
+Y la pregunta se borra. Git la conserva, y la decisión dice de dónde vino.
+
+21
+00:02:45,667 --> 00:02:52,109
+Luego el resultado, antes de cualquier código: una fila por estudiante y por título en que está inscrito, a la fecha del censo.
+
+22
+00:02:53,609 --> 00:02:57,345
+Eso también es un requisito, abierto hasta que un contrato lo haga cumplir.
+
+23
+00:03:00,845 --> 00:03:08,104
+Paso cuatro: la promesa. El mart de Finanzas recibe un contrato: las columnas y los tipos que necesita la previsión, exigidos.
+
+24
+00:03:09,604 --> 00:03:16,150
+Por ahora es una tabla vacía, con la forma correcta y sin filas, y la previsión se declara como lo que depende de ella.
+
+25
+00:03:17,650 --> 00:03:24,729
+Una brecha: el proyecto conoce la tarifa publicada, no lo que se le cobró a cada estudiante. Las becas y los descuentos no están.
+
+26
+00:03:26,229 --> 00:03:32,262
+Finanzas la acepta. Se vuelve una limitación conocida, en el mart, con una decisión que dice por qué.
+
+27
+00:03:35,962 --> 00:03:38,536
+Paso cinco: las pruebas, antes de la lógica.
+
+28
+00:03:39,636 --> 00:03:45,443
+La granularidad, probada como clave. Estudiantes que existen. Solo los tipos de título a los que Finanzas pone precio.
+
+29
+00:03:46,743 --> 00:03:52,016
+Una prueba unitaria para la regla: un crédito que cuenta para dos títulos ahorra matrícula una sola vez.
+
+30
+00:03:53,316 --> 00:04:01,648
+Y el número propio de Finanzas, de su planilla, como un seed esperado que ningún modelo puede leer. Una conciliación compara los dos.
+
+31
+00:04:03,148 --> 00:04:08,356
+Todavía nada puede pasar. La prueba unitaria falla, así que dbt ni siquiera construye el mart.
+
+32
+00:04:10,056 --> 00:04:15,979
+Pero la granularidad está probada y el contrato se cumple, así que el requisito del resultado está hecho, y se borra.
+
+33
+00:04:19,679 --> 00:04:21,243
+Paso seis: la lógica.
+
+34
+00:04:22,343 --> 00:04:30,264
+Lee el núcleo tal como estaba el día del censo, se queda con el título en que estaba inscrito cada estudiante, y pone precio al crédito con la tarifa de ese año.
+
+35
+00:04:31,764 --> 00:04:37,791
+No lee nada más que el núcleo público y las tarifas de Finanzas. No cambia el modelo de ningún otro equipo.
+
+36
+00:04:39,291 --> 00:04:45,294
+Es corta, porque el núcleo ya hizo lo difícil: la identidad, las líneas de tiempo y el propio crédito.
+
+37
+00:04:46,794 --> 00:04:52,482
+Pasan todas las pruebas: 67 800 dólares, en cuatro facultades.
+
+38
+00:04:56,382 --> 00:05:02,774
+Paso siete: validar. Facultad por facultad, contra el informe de Finanzas. La diferencia es cero.
+
+39
+00:05:04,474 --> 00:05:09,915
+Luego el diff contra main, construido desde cero: cada tabla del núcleo, el mart de Planificación, el de la billetera.
+
+40
+00:05:11,415 --> 00:05:17,661
+Ninguna clave agregada, ninguna perdida, ninguna columna cambiada. Un consumidor nuevo no movió los números de nadie más.
+
+41
+00:05:19,161 --> 00:05:21,906
+Finanzas aprueba, con cada fila delante.
+
+42
+00:05:25,806 --> 00:05:27,373
+Paso ocho: revisar y publicar.
+
+43
+00:05:28,473 --> 00:05:35,405
+El último punto abierto, dar el número de Finanzas, está hecho: la conciliación lo exige en cada build.
+
+44
+00:05:36,905 --> 00:05:41,988
+Así que el punto se borra, y con él el archivo de requisitos de Finanzas, y su carpeta.
+
+45
+00:05:43,688 --> 00:05:49,098
+Una verificación en la CI se asegura de eso: nada se queda en los requisitos salvo que siga abierto.
+
+46
+00:05:50,598 --> 00:05:55,184
+Jun aprueba el código, y Finanzas su número. El agente nunca fusiona.
+
+47
+00:05:58,884 --> 00:06:01,605
+Paso nueve: el agente revisa los metadatos.
+
+48
+00:06:02,705 --> 00:06:10,106
+Dos descripciones estaban escritas dos veces, palabra por palabra: el código del título y su nombre, en el YAML de Finanzas y en el de Planificación.
+
+49
+00:06:11,606 --> 00:06:17,778
+El título pertenece al dominio course, así que cada una se vuelve un doc block allí, que se muestra dondequiera que haga falta.
+
+50
+00:06:19,278 --> 00:06:28,143
+Cero descripciones escritas dos veces. Las páginas generadas, las definiciones, el diagrama y el índice de decisiones, se mantienen al día solas.
+
+51
+00:06:31,843 --> 00:06:36,958
+Paso diez: operar y evolucionar. Finanzas fija las versiones del núcleo que lee.
+
+52
+00:06:38,458 --> 00:06:44,516
+Una versión nueva le llega a Finanzas como una elección con fecha, y el linaje nombra a Finanzas entre a quién avisar.
+
+53
+00:06:46,216 --> 00:06:52,902
+Y como las carpetas de Finanzas llevan su nombre desde el primer commit, Finanzas puede mudarse a un proyecto propio, entera.
+
+54
+00:06:54,602 --> 00:07:01,056
+Sus marts, su exposición, sus seeds, sus decisiones, y la prueba y los dos análisis con que se construyó.
+
+55
+00:07:04,956 --> 00:07:09,835
+Diez pasos, diez commits. Puedes repetirlos uno por uno, en el repositorio.
+
+56
+00:07:11,335 --> 00:07:16,840
+Algunos archivos llegaron para quedarse: la pregunta, las decisiones, el contrato, las pruebas, el modelo.
+
+57
+00:07:18,340 --> 00:07:25,719
+Otros eran para el trabajo: tres puntos abiertos, y el archivo que los contenía. Ya no están. El proyecto dice solo lo que sigue abierto.
+
+58
+00:07:27,419 --> 00:07:38,477
+Cada archivo tiene un hogar. Las fuentes, por sistema: dominios de aplicación. El núcleo, por significado: dominios de datos. Los marts y las exposiciones, por quién decide: dominios de negocio.
+
+59
+00:07:40,177 --> 00:07:46,636
+Y cada archivo tiene una vida: escrito a mano, generado, o guardado solo mientras dura el trabajo.
+
+60
+00:07:48,136 --> 00:07:53,877
+La próxima pregunta empezará igual: en carpetas propias, con un archivo que no va a durar.
+
+61
+00:07:55,577 --> 00:08:06,047
+Esa es la serie. Una pregunta y su significado, las fuentes, los consumidores, promesas y pruebas, capas, el número confiable, un agente en el equipo, escrito una sola vez, y el cambio.
+
+62
+00:08:07,747 --> 00:08:11,346
+El modelo es el plano. dbt es cómo lo construyes.
+
+63
+00:08:13,046 --> 00:08:14,548
+Decláralo. Luego constrúyelo.

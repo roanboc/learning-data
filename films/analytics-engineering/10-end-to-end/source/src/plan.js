@@ -196,3 +196,134 @@ function ee_bars(ctx,x,y,w,rows,max,p,col,o){o=o||{};const a=o.a==null?1:o.a;if(
 // a question asked of the project: a card with the asker's badge
 function ee_qcard(ctx,x,y,w,kind,line1,line2,a){if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,96,18,EE_KIND[kind],{glow:16,ea:0.85,fill:"rgba(7,12,24,0.96)"});ee_badge(ctx,x+48,y+48,28,kind,null,{});
   T(ctx,line1,x+92,y+42,{w:800,size:24,color:rgba(EE_KIND[kind],1)});T(ctx,line2,x+92,y+74,{w:600,size:19,color:rgba(SOFT,1)});});}
+
+/* ---------- the labs' and scenarios' pictures ----------
+   Added to the film bundle's LV registry (Keeping it true's true.js defines it; these keys are prefixed ee_ so they never clash).
+   assets/from-words-to-data/learn.js calls each as f(ctx, w, h, state, L): a lab passes its state (sort: {pick, checked};
+   steps: {step}; count: {on, total}), a scenario passes {q}. Any words come from L.vis (the page's learn.en.js or learn.es.js);
+   paths and code stay as they are in the project. Sized as Written once's: the labs draw on a 960 x 420 board with text from 22 to
+   30 px, the scenarios on 600 x 320 with text from 16 to 22 px. Few things, large. */
+function ee_fit(c,w,h,bw,bh){const k=Math.min(w/bw,h/bh);c.translate((w-bw*k)/2,(h-bh*k)/2);c.scale(k,k);}
+// the largest size, from size down to min, at which s fits maxW
+function ee_fs(c,s,maxW,size,wt,f,min){let z=size;const m=min||Math.round(size*0.78);while(z>m&&tw(c,s,z,wt||700,f)>maxW)z-=1;return z;}
+// a tag fitted to a width
+function ee_ftag(c,x,y,s,col,maxW,size,o){o=o||{};const z=ee_fs(c,s,maxW-26,size,700,undefined,o.min);if(o.align==="right")x-=tw(c,s,z,700)+26;tag(c,x,y,s,col,{size:z,align:o.align==="center"?"center":undefined});}
+// a file or a folder as a pill, at any size: o.dir draws a folder, o.dash a temporary file's dashed edge, o.strike a line through it
+function ee_lpill(c,x,y,s,col,o){o=o||{};const sz=o.size||22,pad=o.dir?sz*2.2:sz*0.9,h=sz*2.1,on=o.on||0,dk=o.dark||0,cc=mix(col,[70,80,95],dk);
+  const w=Math.min(o.maxW||1e4,tw(c,s,sz,500,"mono")+pad+sz*0.9),fz=ee_fs(c,s,w-pad-sz*0.7,sz,500,"mono",Math.round(sz*0.7));
+  withA(c,(o.a==null?1:o.a)*(1-0.45*dk),()=>{if(on>0)glow(c,x+w/2,y,w*0.55,col,0.24*on);glass(c,x,y-h/2,w,h,10,cc,{glow:6+10*on,ea:0.75,fill:"rgba(7,12,24,0.96)"});
+    if(o.dir){const fx=x+sz*0.6,fy=y-sz*0.42,fw=sz*0.95,fh=sz*0.84;c.fillStyle=rgba(cc,0.92);c.beginPath();c.moveTo(fx,fy+fh*0.2);c.lineTo(fx+fw*0.38,fy+fh*0.2);c.lineTo(fx+fw*0.48,fy);
+      c.lineTo(fx+fw,fy);c.lineTo(fx+fw,fy+fh);c.lineTo(fx,fy+fh);c.closePath();c.fill();}
+    if(o.dash){c.save();c.setLineDash([7,6]);c.strokeStyle=rgba(EE_TMP,0.9);c.lineWidth=2;rr(c,x-5,y-h/2-5,w+10,h+10,13);c.stroke();c.restore();}
+    T(c,s,x+pad,y+fz*0.36,{f:"mono",w:500,size:fz,color:rgba(mix(INK,SOFT,dk),1)});
+    if(o.strike>0){c.strokeStyle=rgba(EE_DEL,0.95);c.lineWidth=3;c.beginPath();c.moveTo(x+pad-4,y);c.lineTo(x+pad-4+(w-pad-sz*0.3)*ease(o.strike),y);c.stroke();}});return w;}
+// a card of code, top-left at x, y: a title line, then the lines; lit lines get a soft bar
+function ee_lcode(c,x,y,w,name,lines,col,o){o=o||{};const sz=o.size||22,lh=sz*1.36,h=o.h||(64+lines.length*lh);
+  glass(c,x,y,w,h,14,col,{glow:8,ea:0.7,fill:"rgba(6,10,20,0.96)"});if(o.dash){c.save();c.setLineDash([9,7]);c.strokeStyle=rgba(EE_TMP,0.9);c.lineWidth=2;rr(c,x-6,y-6,w+12,h+12,18);c.stroke();c.restore();}
+  T(c,name,x+20,y+36,{f:"mono",w:500,size:ee_fs(c,name,w-40,sz*0.9,500,"mono"),color:rgba(col,1)});c.fillStyle=rgba(col,0.22);c.fillRect(x+16,y+50,w-32,1.5);
+  lines.forEach((s,i)=>{const yy=y+56+(i+1)*lh-lh*0.28;if(o.lit&&o.lit.indexOf(i)>=0){c.fillStyle=rgba(o.litCol||TRUST,0.18);rr(c,x+12,yy-sz*0.95,w-24,lh,6);c.fill();}
+    T(c,s,x+20,yy,{f:"mono",w:500,size:ee_fs(c,s,w-40,sz,500,"mono",Math.round(sz*0.7)),color:rgba(INK,0.95)});
+    if(o.strike){c.strokeStyle=rgba(EE_DEL,0.9);c.lineWidth=2.6;c.beginPath();c.moveTo(x+18,yy-sz*0.32);c.lineTo(x+18+Math.min(w-40,tw(c,s,sz,500,"mono")),yy-sz*0.32);c.stroke();}});return h;}
+// the three kinds of domain, and shared, where Finance's work puts each file (the "where does it go?" lab)
+const EE_LWHERE=[["app",[110,170,255],"sources/<system>/"],["data",TRUST,"models/core/<domain>/"],["biz",EE_FIN,"models/marts/finance/"],["shared",WEED,"models/_shared/ · docs/"]];
+// the life of Q-FIN-01: where it lives at each step of the "follow the question" lab
+const EE_LHOMES=[["_finance__requirements.yml",EE_TMP],["_finance__conceptual.yml",BPL],["_finance__decisions.yml",KIND],["_finance__models.yml",TRUST],["mart_finance__tuition_forgone.sql",EE_FIN]];
+const EE_LHOME_AT=[-1,0,0,1,2,0,3,4];
+// what Finance could take when it moves out (the "ready to move out?" lab): [key, label, colour, folder?]
+const EE_LMOVE=[["mart","models/marts/finance/",EE_FIN,1],["exp","exposures/finance/",EE_FIN,1],["ref","seeds/reference/finance/",EE_FIN,1],["expd","seeds/expected/finance/",EE_FIN,1],
+  ["test","reconcile_finance_with_tuition_report.sql",TRUST,0],["an","",SOFT,0],["core","models/core/",TRUST,1],["shared","models/_shared/",WEED,1]];
+Object.assign(LV,{
+  // where does it go? four homes, with how many items are placed in each, and after the check how many are right
+  ee_l_where:(c,w,h,st,L)=>{const V=L.vis,P=st.pick||{},lab=L.labs.find(x=>x.vis==="ee_l_where"),B={},items=lab?lab.w.items:[];(lab?lab.w.buckets:[]).forEach(([k,t])=>B[k]=t);c.save();ee_fit(c,w,h,960,420);
+    EE_LWHERE.forEach(([k,col,path],i)=>{const x=(i%2)*485,y=Math.floor(i/2)*215;glass(c,x,y,475,205,14,col,{glow:8,ea:0.7,fill:"rgba(7,12,24,0.95)"});
+      const ttl=B[k]||k;T(c,ttl,x+22,y+42,{w:800,size:ee_fs(c,ttl,431,26,800,undefined,19),color:rgba(col,1)});ee_lpill(c,x+22,y+94,path,col,{dir:1,size:22,maxW:431});
+      const mine=Object.keys(P).filter(j=>P[j]===k),n=mine.length,ok=mine.filter(j=>items[j]&&items[j].b===k).length;
+      T(c,String(n),x+22,y+178,{w:800,size:44,color:rgba(INK,1)});T(c,(n===1&&V.placedOne||V.placed),x+30+tw(c,String(n),44,800),y+176,{w:700,size:24,color:rgba(SOFT,1)});
+      if(st.checked&&n){const s=ok+" "+(ok===1&&V.rightOne||V.right);ee_ftag(c,x+453,y+168,s,ok===n?GOOD:EE_AMB,200,22,{align:"right"});}});
+    c.restore();},
+  // how long does it live? three lifetimes: by hand and kept, generated and never edited, and only while the work goes on
+  ee_l_lives:(c,w,h,st,L)=>{const V=L.vis,P=st.pick||{},lab=L.labs.find(x=>x.vis==="ee_l_lives"),B={},items=lab?lab.w.items:[];(lab?lab.w.buckets:[]).forEach(([k,t])=>B[k]=t);c.save();ee_fit(c,w,h,960,420);
+    [["hand",TRUST,V.handSub],["gen",[170,205,255],V.genSub],["tmp",EE_TMP,V.tmpSub]].forEach(([k,col,sub],i)=>{const x=8+i*322,cw=296;glass(c,x,0,cw,420,16,col,{glow:8,ea:0.75,fill:"rgba(7,12,24,0.95)"});
+      if(k==="tmp"){c.save();c.setLineDash([10,8]);c.strokeStyle=rgba(EE_TMP,0.9);c.lineWidth=2.4;rr(c,x-7,-7,cw+14,434,20);c.stroke();c.restore();}
+      // the mark: a page written by hand, a cog, or a page that fades
+      const mx=x+cw/2,my=86;if(k==="gen")ee_cog(c,mx,my,28,0,[170,205,255],1,0);
+      else{withA(c,k==="tmp"?0.75:1,()=>{glass(c,mx-26,my-34,52,68,6,col,{glow:6,ea:0.8,fill:"rgba(7,12,24,0.95)"});c.fillStyle=rgba(col,0.6);[0,1,2,3].forEach(r=>c.fillRect(mx-16,my-20+r*12,r===3?18:32,3));});
+        if(k==="tmp"){c.save();c.setLineDash([6,5]);c.strokeStyle=rgba(EE_TMP,0.95);c.lineWidth=2;rr(c,mx-32,my-40,64,80,9);c.stroke();c.restore();}}
+      const ttl=B[k]||k;wrapT(c,ttl,mx,166,cw-36,{w:800,size:ee_fs(c,ttl,cw-36,26,800,undefined,20),lh:32,color:rgba(col,1),align:"center"});
+      wrapT(c,sub,mx,236,cw-40,{w:600,size:21,lh:26,color:rgba(SOFT,1),align:"center"});
+      const mine=Object.keys(P).filter(j=>P[j]===k),n=mine.length,ok=mine.filter(j=>items[j]&&items[j].b===k).length,ns=String(n);
+      const nw=tw(c,ns,44,800)+8+tw(c,(n===1&&V.placedOne||V.placed),24,700);T(c,ns,mx-nw/2,350,{w:800,size:44,color:rgba(INK,1)});T(c,(n===1&&V.placedOne||V.placed),mx-nw/2+tw(c,ns,44,800)+8,348,{w:700,size:24,color:rgba(SOFT,1)});
+      if(st.checked&&n){const s=ok+" "+(ok===1&&V.rightOne||V.right);ee_ftag(c,mx,388,s,ok===n?GOOD:EE_AMB,cw-20,20,{align:"center"});}});
+    c.restore();},
+  // follow Q-FIN-01: on the left, the item as it is at this step; on the right, its homes, lit where it lives now
+  ee_l_follow:(c,w,h,st,L)=>{const V=L.vis,k=Math.max(0,Math.min(7,st.step||0)),at=EE_LHOME_AT[k];c.save();ee_fit(c,w,h,960,420);
+    if(k===0){ee_lcode(c,0,0,460,"profile_credit_across_awards.sql",[],[170,205,255],{h:420});
+      T(c,"385",30,170,{w:800,size:64,color:rgba(EE_AMB,1)});wrapT(c,V.across,30,212,400,{w:600,size:22,lh:28,color:rgba(SOFT,1)});
+      T(c,"160",30,320,{w:800,size:64,color:rgba(TRUST,1)});wrapT(c,V.enrolled,30,362,400,{w:600,size:22,lh:28,color:rgba(SOFT,1)});}
+    else if(k===1||k===5){glass(c,0,40,460,300,16,EE_TMP,{glow:10,ea:0.8,fill:"rgba(7,12,24,0.95)"});c.save();c.setLineDash([10,8]);c.strokeStyle=rgba(EE_TMP,0.9);c.lineWidth=2.4;rr(c,-6,34,472,312,20);c.stroke();c.restore();
+      withA(c,k===5?0.45:1,()=>{T(c,"Q-FIN-01",26,92,{f:"mono",w:500,size:26,color:rgba(EE_TMP,1)});wrapT(c,V.qText,26,140,410,{w:700,size:26,lh:34});ee_ftag(c,26,300,V.qOpen,EE_TMP,410,22);});
+      if(k===5){c.strokeStyle=rgba(EE_DEL,0.9);c.lineWidth=5;c.lineCap="round";c.beginPath();c.moveTo(20,70);c.lineTo(440,320);c.stroke();ee_ftag(c,230,384,V.deleted,EE_DEL,460,24,{align:"center"});}}
+    else if(k===2){ee_badge(c,50,110,38,"finance",null,{});glass(c,104,52,356,236,18,EE_FIN,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.96)"});wrapT(c,V.answer,126,104,312,{w:800,size:26,lh:34});
+      T(c,"Finance",50,176,{w:800,size:20,align:"center",color:rgba(EE_FIN,1)});}
+    else if(k===3)ee_lcode(c,0,0,460,"_finance__conceptual.yml",["rules:","  - Only in the award the","    learner is enrolled in","    on census day. Credit","    that counts towards","    other awards saves","    nothing there yet."],BPL,{lit:[1,2,3]});
+    else if(k===4)ee_lcode(c,0,0,460,"_finance__decisions.yml",["- id: DEC-FIN-02","  title: Tuition is saved in","    the enrolled award only","  decided_by: Finance","  was: Q-FIN-01"],KIND,{lit:[4],litCol:EE_TMP});
+    else if(k===6)ee_lcode(c,0,0,460,"_finance__models.yml",["unit_tests:","  - name: recognised_credit_","      saves_tuition_in_the_","      enrolled_award_only"],TRUST,{lit:[1,2,3]});
+    else ee_lcode(c,0,0,460,"mart_finance__tuition_forgone.sql",["enrolled as (","    select","        learner_key,","        learner_bk,","        enrolled_award_key as award_key","    from learners_at_census","    where enrolled_award_key is not null",")"],EE_FIN,{lit:[4],size:17});
+    // the homes: ticked once reached; the requirements file struck through once the question is deleted
+    EE_LHOMES.forEach(([f,col],i)=>{const y=42+i*84,now=i===at,was=EE_LHOME_AT.slice(0,k+1).indexOf(i)>=0,gone=i===0&&k>=5;
+      ee_lpill(c,510,y,f,col,{size:22,maxW:400,on:now?1:0,dark:was||now?0:0.7,dash:i===0,strike:gone?1:0,a:gone?0.6:1});
+      if(was&&!now&&!gone)kt_gtick(c,936,y,14,1);});
+    if(k>=1&&at>=0&&k!==5){const y=42+at*84;arrowTo(c,466,180,504,y,EE_LHOMES[at][1],0.8,{head:12});}
+    c.restore();},
+  // ready to move out? what's ticked goes into Finance's own project; the rest stays where it is
+  ee_l_move:(c,w,h,st,L)=>{const V=L.vis,on=st.on||new Set();c.save();ee_fit(c,w,h,960,420);
+    glass(c,500,0,460,420,18,EE_FIN,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(c,V.project,524,40,{w:800,size:ee_fs(c,V.project,410,26,800),color:rgba(EE_FIN,1)});
+    T(c,V.refs,524,72,{w:600,size:ee_fs(c,V.refs,410,20,600),color:rgba(SOFT,1)});
+    let li=0,ri=0;EE_LMOVE.forEach(([k,lab,col,dir])=>{const s=lab||V.analyses,inn=on.has(k);
+      if(inn){ee_lpill(c,524,114+ri*38,s,col,{dir,size:17,maxW:412,on:0.5});ri++;}else{ee_lpill(c,0,26+li*52,s,col,{dir,size:20,maxW:470,dark:0.35});li++;}});
+    if(!on.size)wrapT(c,V.empty,730,240,380,{w:600,size:22,lh:28,align:"center",color:rgba(SOFT,1)});
+    c.restore();},
+
+  // the scenarios
+  ee_q_backlog:(c,w,h,st,L)=>{const V=L.vis;c.save();ee_fit(c,w,h,600,320);
+    glass(c,6,14,268,226,16,KIND,{glow:10,ea:0.75,fill:"rgba(7,12,24,0.95)"});T(c,V.backlog,26,52,{w:800,size:ee_fs(c,V.backlog,228,22,800,undefined,15),color:rgba(KIND,1)});
+    wrapT(c,V.backlogSub,26,86,228,{w:600,size:18,lh:23,color:rgba(SOFT,1)});["FIN-12","FIN-13","FIN-14"].forEach((s,i)=>{glass(c,26,148+i*28,228,22,6,KIND,{glow:2,ea:0.4,fill:"rgba(10,16,30,0.9)"});T(c,s,36,164+i*28,{f:"mono",w:500,size:14,color:rgba(SOFT,1)});});
+    glass(c,326,20,268,214,16,EE_TMP,{glow:10,ea:0.75,fill:"rgba(7,12,24,0.95)"});c.save();c.setLineDash([8,6]);c.strokeStyle=rgba(EE_TMP,0.9);c.lineWidth=2;rr(c,320,14,280,226,20);c.stroke();c.restore();
+    T(c,"requirements/",346,58,{f:"mono",w:500,size:20,color:rgba(EE_TMP,1)});wrapT(c,V.open,346,96,228,{w:600,size:18,lh:24,color:rgba(SOFT,1)});
+    ee_lpill(c,346,186,"REQ-FIN-01",EE_TMP,{size:16,dash:1});
+    arrowTo(c,276,120,322,120,SOFT,0.6,{head:10});kt_rcross(c,299,96,11,0.9);ee_ftag(c,300,276,V.copy,SOFT,560,20,{align:"center"});c.restore();},
+  ee_q_rates:(c,w,h,st,L)=>{const V=L.vis;c.save();ee_fit(c,w,h,600,320);
+    ee_lcode(c,6,6,330,"tuition_rates.csv",["award_type,rate_year,rate_…","graduate certificate,2025,400,…","master,2025,455,…","graduate certificate,2026,420,…","master,2026,480,…"],EE_FIN,{size:15});
+    ee_lpill(c,352,60,"seeds/reference/finance/",EE_FIN,{dir:1,size:15,maxW:242});wrapT(c,V.reference,360,104,234,{w:600,size:17,lh:22,color:rgba(SOFT,1)});
+    ee_lpill(c,352,170,"seeds/expected/finance/",EE_FIN,{dir:1,size:15,maxW:242});wrapT(c,V.expected,360,214,234,{w:600,size:17,lh:22,color:rgba(SOFT,1)});
+    ee_ftag(c,300,296,V.which,SOFT,560,20,{align:"center"});c.restore();},
+  ee_q_done:(c,w,h,st,L)=>{const V=L.vis;c.save();ee_fit(c,w,h,600,320);
+    ee_lcode(c,6,6,588,"_finance__requirements.yml",["  - id: REQ-FIN-02","    title: The rows and columns the forecast needs","    status: done"],EE_TMP,{size:17,dash:1,lit:[2],litCol:EE_AMB});
+    ee_ci(c,6,196,588,V.ciName,1,"",{size:18});ee_ftag(c,300,296,V.ciFail,BAD,580,16,{align:"center",min:13});c.restore();},
+  ee_q_generated:(c,w,h,st,L)=>{const V=L.vis;c.save();ee_fit(c,w,h,600,320);
+    ee_lpill(c,6,40,"_finance__conceptual.yml",BPL,{size:15,on:0.6,maxW:250});ee_ftag(c,10,90,V.home,BPL,240,17);arrowTo(c,262,40,326,40,SOFT,0.8,{head:10});
+    glass(c,332,10,262,176,14,[170,205,255],{glow:8,ea:0.7,fill:"rgba(7,12,24,0.95)"});ee_cog(c,356,38,11,0,SOFT,1,0);
+    T(c,"_finance__definitions.md",376,44,{f:"mono",w:500,size:ee_fs(c,"_finance__definitions.md",204,15,500,"mono"),color:rgba(INK,1)});
+    T(c,"{% docs tuition_forgone %}",348,86,{f:"mono",w:500,size:ee_fs(c,"{% docs tuition_forgone %}",232,14,500,"mono"),color:rgba(SOFT,1)});
+    c.fillStyle=rgba(EE_AMB,0.25);rr(c,344,98,238,44,6);c.fill();wrapT(c,"**Tuition forgone.** The tuition …",350,116,226,{f:"mono",w:500,size:13,lh:17,color:rgba(EE_AMB,1)});
+    ee_ftag(c,344,166,V.edited,EE_AMB,240,15);ee_ci(c,6,210,588,"Doc blocks and key sets match the conceptual model",1,"",{size:17});c.restore();},
+  ee_q_answer:(c,w,h,st,L)=>{const V=L.vis;c.save();ee_fit(c,w,h,600,320);
+    ee_lcode(c,6,6,588,"_finance__requirements.yml",["  - id: Q-FIN-01","    title: The award recognised credit saves tuition in","    status: answered","    answer: Only the award the learner is enrolled in"],EE_TMP,{size:17,dash:1,lit:[2,3],litCol:EE_AMB});
+    ee_badge(c,40,262,26,"finance",null,{});wrapT(c,V.answered,80,256,500,{w:700,size:18,lh:24,color:rgba(EE_FIN,1)});c.restore();},
+  ee_q_own:(c,w,h,st,L)=>{const V=L.vis;c.save();ee_fit(c,w,h,600,320);
+    glass(c,330,6,264,300,16,EE_FIN,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(c,V.ownProject,350,40,{w:800,size:ee_fs(c,V.ownProject,224,20,800,undefined,14),color:rgba(EE_FIN,1)});
+    T(c,"?",462,190,{w:800,size:72,align:"center",color:rgba(EE_FIN,0.5)});
+    [["models/marts/finance/",EE_FIN,1],["exposures/finance/",EE_FIN,1],["seeds/…/finance/",EE_FIN,1],["tests/reconciliation/",TRUST,1],["analyses/",SOFT,1],["models/core/",TRUST,1]].forEach(([s,col,dir],i)=>ee_lpill(c,6,28+i*50,s,col,{dir,size:16,maxW:300}));
+    c.restore();},
+  ee_q_version:(c,w,h,st,L)=>{const V=L.vis;c.save();ee_fit(c,w,h,600,320);
+    ee_lpill(c,6,40,"core_credit_towards_award v1",TRUST,{size:16,on:0.5});ee_lpill(c,6,110,"core_credit_towards_award v2",TRUST,{size:16,dash:1});
+    ee_ftag(c,14,160,V.newVersion,EE_AMB,330,15);arrowTo(c,300,40,352,40,TRUST,0.85,{head:10});
+    ee_lpill(c,356,40,"mart_finance__…",EE_FIN,{size:16,on:0.6});ee_ftag(c,362,90,V.pinned,EE_AMB,230,16);
+    ee_badge(c,40,250,26,"finance",null,{});wrapT(c,V.whatNow,80,244,500,{w:700,size:18,lh:24,color:rgba(INK,1)});c.restore();},
+  ee_q_next:(c,w,h,st,L)=>{const V=L.vis;c.save();ee_fit(c,w,h,600,320);
+    glass(c,6,8,588,96,16,WEED,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.96)"});wrapT(c,V.question,26,48,548,{w:700,size:20,lh:26});
+    arrowTo(c,46,110,46,168,WEED,0.8,{head:11});
+    [0,1,2,3,4,5].forEach(i=>{const x=46+i*101,y=206,on=i===0;if(on)glow(c,x,y,64,WEED,0.3);c.fillStyle="rgba(7,12,24,0.96)";c.beginPath();c.arc(x,y,28,0,TAU);c.fill();ring(c,x,y,28,on?WEED:SOFT,1,2.5);
+      T(c,on?"1":"?",x,y+9,{w:800,size:24,align:"center",color:rgba(on?WEED:SOFT,1)});if(i<5)arrowTo(c,x+32,y,x+68,y,SOFT,0.5,{head:8});});
+    T(c,V.order,300,290,{w:700,size:20,align:"center",color:rgba(SOFT,1)});c.restore();}
+});

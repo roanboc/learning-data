@@ -64,6 +64,8 @@ models:
         +grants: "{{ {'select': var('planning_readers')} if target.type == 'databricks' and var('planning_readers', none) else {} }}"
       wallet:
         +group: wallet
+      finance:
+        +group: finance
 
     # What every domain uses. Today: the time spine every metric needs. Planning's semantic model
     # and metrics live with its marts.

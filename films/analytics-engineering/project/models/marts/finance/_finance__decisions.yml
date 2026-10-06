@@ -29,3 +29,17 @@ decisions:
     decided_on: 2026-10-21
     status: agreed
     was: Q-FIN-01
+
+  - id: DEC-FIN-03
+    step: gaps_and_contracts
+    title: The published rate, not what each learner was charged
+    text: Tuition forgone is worked out at the published rate per credit point. Scholarships,
+      discounts and fee waivers aren't in; Finance adjusts for them in the forecast. Accepted as
+      LIM-FIN-01, on the mart.
+    why: No source in the project holds what each learner was charged. The forecast needs the
+      published price; the adjustments are Finance's own, and change every year.
+    decided_by: Finance
+    decided_on: 2026-10-22
+    status: agreed
+    implemented_in: [mart_finance__tuition_forgone]
+    relates_to: [LIM-FIN-01]

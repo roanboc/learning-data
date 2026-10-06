@@ -36,6 +36,7 @@ What was decided, why, and who decided, for every source, domain and consumer, a
 
 | ID | Scope | Decision | Why | Who | When | Status |
 |---|---|---|---|---|---|---|
+| [DEC-FIN-03](../models/marts/finance/_finance__decisions.yml) | consumer `finance` | **The published rate, not what each learner was charged.** Tuition forgone is worked out at the published rate per credit point. Scholarships, discounts and fee waivers aren't in; Finance adjusts for them in the forecast. Accepted as LIM-FIN-01, on the mart. | No source in the project holds what each learner was charged. The forecast needs the published price; the adjustments are Finance's own, and change every year. | Finance | 22 Oct 2026 | agreed |
 | [DEC-LMS-01](../sources/learning_platform/_learning_platform__decisions.yml) | source `learning_platform` | **A badge that disappears is revoked.** A badge that disappears is revoked from the day the platform stopped showing it. | Expected: A revoked credential is known as revoked. Found: The learning platform has no revocation flag. It deletes a revoked badge. | Learning team |  | agreed |
 | [DEC-LMS-02](../sources/learning_platform/_learning_platform__decisions.yml) | source `learning_platform` | **An account with no student ID matches by email.** Match by email when exactly one student has it; a recorded decision beats the rules. | Expected: Every learning platform account names its student. Found: Staff type the student ID in. 4 of 42 current accounts have none (analyses/profiling/profile_null_keys.sql); one holds another student's ID. | Learning team |  | agreed |
 | [DEC-SC-02](../sources/short_courses/_short_courses__decisions.yml) (was GAP-SC-01) | source `short_courses` | **Every key is trimmed and written in one case.** Trim every key and write it in one case before comparing: emails lower case, IDs upper case. The hash upper-cases every key too. | Expected: An email is written the same way everywhere. Found: The short-course platform keeps case and spaces as typed: 2 enrolments find no customer as typed, none once trimmed and lower-cased (analyses/profiling/profile_orphans.sql). | Learning team |  | agreed |
@@ -86,7 +87,7 @@ How many decisions each log holds at each step. A domain's project, when it has 
 | project | 1 | 1 |  |  |  | 4 | 3 | 1 |
 | domain `course` |  |  |  |  |  | 1 |  |  |
 | domain `student` | 4 | 2 |  | 1 |  | 1 |  | 1 |
-| consumer `finance` | 1 |  | 1 |  |  |  |  |  |
+| consumer `finance` | 1 |  | 1 | 1 |  |  |  |  |
 | consumer `planning` | 1 |  | 1 |  |  |  |  |  |
 | consumer `wallet` |  |  | 1 |  |  |  |  |  |
 | source `learning_platform` |  |  |  | 2 |  |  |  |  |

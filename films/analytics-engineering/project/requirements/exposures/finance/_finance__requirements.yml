@@ -24,6 +24,6 @@ items:
       award type, the recognised credit points, the rate per credit point and the tuition forgone.
       No names or emails.
     owner: Finance
-    status: open
+    status: in_progress
     done_when: >
       The mart's contract enforces these columns and their types, and its grain is tested as a key.

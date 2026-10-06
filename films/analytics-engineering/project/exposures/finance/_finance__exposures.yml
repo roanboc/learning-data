@@ -11,3 +11,5 @@ exposures:
     owner:
       name: Finance
       email: finance@uni.example
+    depends_on:
+      - ref('mart_finance__tuition_forgone')

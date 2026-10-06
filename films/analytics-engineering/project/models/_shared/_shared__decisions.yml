@@ -125,7 +125,7 @@ decisions:
   - id: DEC-PRJ-11
     step: written_once
     title: The business glossary is the source of a definition it holds
-    text: 'Where the university''s business glossary (in Unity Catalog) defines an entity, data governance
+    text: 'Where the university''s business glossary (on Databricks) defines an entity, data governance
       names the term that applies, and the conceptual model takes its definition, recording the term in
       source:. The project adds only what the glossary doesn''t hold: keys, identity rules, history. An entity
       the glossary doesn''t define is defined in the conceptual model, once governance confirms there''s no

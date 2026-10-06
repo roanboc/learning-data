@@ -23,7 +23,7 @@
 | [Built in layers](https://roanboc.github.io/learning-data/in-the-weeds/built-in-layers/) | Layers and CTEs | 4½ min | 8 | 4 labs, 8 scenarios | [script](6-built-in-layers/script.md) · [source](6-built-in-layers/source/README.md) |
 | [Who owns what](https://roanboc.github.io/learning-data/in-the-weeds/who-owns-what/) | Domains and ownership | 5½ min | 8 | 4 labs, 8 scenarios | [script](7-who-owns-what/script.md) · [source](7-who-owns-what/source/README.md) |
 | [An agent on the team](https://roanboc.github.io/learning-data/in-the-weeds/an-agent-on-the-team/) | Agents and review | 5½ min | 8 | 4 labs, 8 scenarios | [script](8-an-agent-on-the-team/script.md) · [source](8-an-agent-on-the-team/source/README.md) |
-| [Written once](https://roanboc.github.io/learning-data/in-the-weeds/written-once/) | Documentation and versions | 5 min | 8 | 4 labs, 8 scenarios | [script](9-written-once/script.md) · [source](9-written-once/source/README.md) |
+| [Written once](https://roanboc.github.io/learning-data/in-the-weeds/written-once/) | Documentation and versions | 5½ min | 8 | 4 labs, 8 scenarios | [script](9-written-once/script.md) · [source](9-written-once/source/README.md) |
 <!-- /films -->
 
 **On the site:** [In the weeds of data crafting](https://roanboc.github.io/learning-data/in-the-weeds/), in Spanish [En las entrañas del oficio de datos](https://roanboc.github.io/learning-data/es/in-the-weeds/). The films are in English, with English and Spanish captions; their pages, chapters, Pause and think questions, labs and scenarios are in English and Spanish.

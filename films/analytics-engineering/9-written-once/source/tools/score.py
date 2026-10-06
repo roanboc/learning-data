@@ -97,11 +97,15 @@ detuned(W('four', 'drift', 'on paper'), 47, 0.035)
 paper(W('four', 'one', 'conceptual model', -0.3), 0.035, 0.5)
 soft(62, W('four', 'one', 'Mei approved'), 0.035, 0.5)
 knock(G('four', 'step'), 0.03, -0.5); knock(W('four', 'step', 'one small edit'), 0.028, -0.3)
-# 3. What goes where: the fifth copy crossed out (a knock); the home lighting (paper); muffled keys as the decision log and the gaps
-#    are written; a knock for each thing the build uses; a felt note for why
+# 3. What goes where: the fifth copy crossed out (a knock); the home lighting (paper); the business glossary (a knock), muffled keys
+#    as the conceptual model writes where its words came from, and data governance's tick (felt); muffled keys as the decision log
+#    and the gaps are written; a knock for each thing the build uses; a felt note for why
 bed('where', [GMAJ7, DMAJ9, BM7, GADD, ASUS])
 knock(W('where', 'fifth', 'or a better', -0.1), 0.035, -0.2)
 paper(G('where', 'meaning', -1.0), 0.035, 0.0, 0.8)
+knock(W('where', 'glossary', 'business glossary', -0.3), 0.03, -0.2)
+lines(W('where', 'glossary', 'Data governance'), 5, 0.44, 0.016, 0.2)
+soft(62, W('where', 'glossary', 'Data governance'), 0.032, -0.3)
 lines(W('where', 'why', 'Decisions'), 5, 0.3, 0.018, -0.4)
 lines(W('where', 'why', 'gaps'), 4, 0.28, 0.018, -0.4)
 for word in ['grain', 'keys', 'contracts', 'tests', 'owners']:
@@ -135,7 +139,8 @@ lines(W('diagrams', 'fails', 'YAML changes', 1.6), 4, 0.18, 0.016, 0.4)
 soft(62, W('diagrams', 'fails', 'YAML changes', 2.4), 0.032, 0.4)
 soft(50, W('diagrams', 'rule', 'Draw the meaning'), 0.04, -0.4); soft(57, W('diagrams', 'rule', 'Generate the structure'), 0.04, 0.4)
 # 6. One direction: the catalog (a knock) and its search (keys); the descriptions flowing out (a swell); the hand's edit (keys) and
-#    the rebuild writing over it (paper); the fix flowing from home (a felt note); the dashboard (a knock); the fork, once more (felt)
+#    the rebuild writing over it (paper); the fix flowing from home (a felt note); upstream, the glossary (a knock), the pull request
+#    (a knock) and the owner's tick (felt); the dashboard (a knock); the fork, once more (felt)
 bed('catalog', [DMAJ9, FSM7, GMAJ7, DADD])
 knock(S0('catalog') + 0.3, 0.035, 0.4)
 lines(W('catalog', 'find', 'catalog'), 5, 0.16, 0.016, 0.4)
@@ -143,6 +148,9 @@ swell([50, 57, 62, 66], W('catalog', 'push', 'pushes', -0.2), 2.6, 0.022)
 lines(W('catalog', 'there', 'Nobody edits'), 5, 0.2, 0.018, 0.4)
 paper(W('catalog', 'there', 'writes over'), 0.04, 0.4, 0.9)
 soft(62, W('catalog', 'there', 'Fix it at home', 0.4), 0.032, -0.3)
+knock(G('catalog', 'upstream', -0.2), 0.03, -0.3)
+knock(W('catalog', 'upstream', 'opens a pull request'), 0.03, -0.5)
+soft(62, W('catalog', 'upstream', 'the owner'), 0.032, -0.4)
 knock(W('catalog', 'gate', 'whatever reads it', -0.2), 0.03, 0.4)
 soft(45, W('catalog', 'gate', 'Tuned from', -0.3), 0.04, -0.4)
 # 7. The next version: the card (a knock); the status a true or false can't hold (felt); the old column breaking (a muted double

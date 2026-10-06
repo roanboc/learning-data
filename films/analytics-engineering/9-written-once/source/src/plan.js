@@ -273,6 +273,21 @@ function wr_catalog(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)
   const cy=y+h-218;T(ctx,"Columns",x+24,cy,{w:700,size:18,color:rgba(SOFT,1)});WR_CCOL.forEach(([c,cm],i)=>{const yy=cy+40+i*62;ctx.fillStyle="rgba(255,255,255,0.04)";rr(ctx,x+16,yy-26,w-32,58,8);ctx.fill();
     T(ctx,c,x+30,yy,{f:"mono",w:500,size:18,color:rgba(INK,0.95)});withA(ctx,clamp((o.cols==null?1:o.cols)*3-i,0,1),()=>T(ctx,cm,x+30,yy+24,{w:600,size:17,color:rgba(mix(INK,KIND,0.3),1)}));});});}
 
+// the university's business glossary on Databricks, outside the project (drawn, not a project file): one term, its words, and who named it the source.
+// o.chg (0..1) marks the term as changed since the last sync; o.tick the gold tick of data governance, who names the term
+function wr_glossary(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const GL=[176,186,206],chg=o.chg||0;withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,mix(GL,WR_AMB,chg),{glow:10+12*(o.hi||0),ea:0.6,fill:"rgba(12,14,20,0.96)"});
+  T(ctx,o.short?"business glossary":"Databricks · business glossary",x+24,y+38,{w:700,size:20,color:rgba(GL,1)});const ot="outside dbt",ow=tw(ctx,ot,16,700)+26;tag(ctx,x+w-16-ow,y+32,ot,SOFT,{size:16});
+  T(ctx,"Award",x+24,y+84,{w:800,size:26,color:rgba(INK,1)});
+  if(chg>0)withA(ctx,chg,()=>tag(ctx,x+40+tw(ctx,"Award",26,800),y+76,"changed",WR_AMB,{size:17}));
+  if(!o.short)wr_para(ctx,WR_DEF,x+24,y+124,w-48,{size:18,color:rgba(mix(INK,SOFT,0.2),1)});
+  if(o.tick>0)withA(ctx,o.tick,()=>{kt_gtick(ctx,x+38,y+h-30,13,1);T(ctx,"named by data governance",x+62,y+h-24,{w:700,size:18,color:rgba(TRUST,1)});});});}
+// a pull request card: the agent's sync, what it changes and what it touches; o.tick the owner's gold tick
+function wr_pr(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,KIND,{glow:10+12*(o.hi||0),ea:0.7,fill:"rgba(7,12,24,0.96)"});
+  T(ctx,"pull request",x+24,y+38,{w:700,size:20,color:rgba(KIND,1)});
+  T(ctx,"sync award from the glossary",x+24,y+76,{f:"mono",w:500,size:18,color:rgba(INK,0.95)});
+  withA(ctx,o.touch==null?1:o.touch,()=>T(ctx,"touches: doc(\"award\") · core_award",x+24,y+110,{f:"mono",w:500,size:17,color:rgba(SOFT,1)}));
+  if(o.tick>0)withA(ctx,o.tick,()=>{kt_gtick(ctx,x+38,y+h-30,13,1);T(ctx,"the owner approves",x+62,y+h-24,{w:700,size:18,color:rgba(TRUST,1)});});});}
+
 /* ---------- the present: the credential and its versions ---------- */
 // core_credential's product card: its name, its version, and a few columns; o.ver ("v2"), o.dim, o.rows, o.lit {row: a}, o.strain (0..1) on the old column
 function wr_prod(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rows=o.rows||[],h=118+rows.length*40;if(a<=0.01)return h;const dim=o.dim||0;withA(ctx,a*(1-0.45*dim),()=>{glass(ctx,x,y,w,h,18,TRUST,{glow:12+8*(o.hi||0),ea:0.8,fill:"rgba(10,12,20,0.97)"});

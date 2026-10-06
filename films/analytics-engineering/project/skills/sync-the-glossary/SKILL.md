@@ -5,7 +5,7 @@ description: Compare each definition the university's business glossary holds wi
 
 # Sync the conceptual model from the glossary
 
-The university keeps its business glossary outside dbt; on Databricks, in Unity Catalog. Where
+The university keeps its business glossary outside dbt, on Databricks. Where
 it defines an entity, data governance names the term that applies, and that term is the home of
 the definition (DEC-PRJ-11 in `models/_shared/_shared__decisions.yml`). The conceptual model
 keeps a reviewed copy, with the term in `source:`, so the build, the docs site and the catalog

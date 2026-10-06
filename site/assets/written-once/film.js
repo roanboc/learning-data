@@ -424,6 +424,7 @@ const NARR={
 "where":{"name":"What goes where","lead":1.0,"tail":1.0,"vo":[
  {"id":"fifth","gap":0.8,"text":"The fix isn't a fifth copy, or a better one. The definition already has a home. Everything else has to be driven from it."},
  {"id":"meaning","gap":0.8,"text":"Meaning lives in the conceptual model: what each thing is, its key, and who owns it."},
+ {"id":"glossary","gap":1.4,"text":"And where the business glossary already defines a term, that's its home. Data governance says which term applies, and the conceptual model takes its words."},
  {"id":"why","gap":0.8,"text":"Decisions live in a log beside what they're about, with why and who. The gaps the team accepted live on the model, as known limitations."},
  {"id":"build","gap":0.8,"text":"Everything the build uses lives in YAML: grain, keys, contracts, tests and owners."},
  {"id":"log","gap":0.8,"text":"A decision log isn't a copy. It holds why, which a model's YAML has no place for."}]},
@@ -442,8 +443,9 @@ const NARR={
 "catalog":{"name":"One direction","lead":1.0,"tail":1.0,"vo":[
  {"id":"find","gap":0.8,"text":"On Databricks, people find tables in the catalog, and read their descriptions there."},
  {"id":"push","gap":0.8,"text":"So each build pushes the descriptions out to it, for each table and its columns."},
- {"id":"there","gap":0.8,"text":"Nobody edits them there: a rebuild writes over the edit. Fix it at home, and it flows out."},
- {"id":"gate","gap":0.8,"text":"One direction: from the files, out to the catalog and whatever reads it. Tuned from one source, never the other way round."}]},
+ {"id":"there","gap":1.3,"text":"Nobody edits them there: a rebuild writes over the edit. Fix it at home, and it flows out."},
+ {"id":"upstream","gap":2.0,"text":"Upstream, the same rule. A sync checks the glossary on a schedule. When a term changes, it opens a pull request, so the owner sees what the new meaning touches before it reaches the build."},
+ {"id":"gate","gap":0.8,"text":"One direction: from the glossary, through the files, out to the catalog and whatever reads it. Tuned from one source, never the other way round."}]},
 "version":{"name":"The next version","lead":1.0,"tail":1.0,"vo":[
  {"id":"change","gap":0.8,"text":"Written once doesn't mean never changed."},
  {"id":"expire","gap":0.8,"text":"A credential can expire, and a true or false can't say so. So is_revoked becomes status: valid, expired or revoked.","say":"A credential can expire, and a true or false can't say so. So is revoked becomes status: valid, expired or revoked."},
@@ -459,7 +461,7 @@ const NARR={
  {"id":"declare","gap":0.8,"text":"Declare it. Then build it."}]}
 };
 
-const VODUR={"fork/drift": 5.854, "fork/law": 6.146, "fork/copies": 5.428, "fork/today": 3.963, "fork/bridge": 4.745, "four/review": 5.556, "four/found": 4.943, "four/drift": 6.851, "four/one": 4.554, "four/step": 4.471, "where/fifth": 7.178, "where/meaning": 5.119, "where/why": 8.454, "where/build": 5.41, "where/log": 5.544, "blocks/once": 3.212, "blocks/script": 7.282, "blocks/points": 5.766, "blocks/change": 7.985, "blocks/zero": 6.955, "diagrams/too": 1.339, "diagrams/hand": 5.776, "diagrams/generated": 8.361, "diagrams/fails": 3.708, "diagrams/rule": 2.168, "catalog/find": 4.855, "catalog/push": 4.517, "catalog/there": 5.366, "catalog/gate": 7.372, "version/change": 2.03, "version/expire": 8.167, "version/breaks": 6.038, "version/date": 8.65, "version/tell": 5.83, "version/warn": 5.802, "version/choice": 4.564, "loop/steps": 8.62, "loop/approved": 4.79, "loop/new": 4.96, "loop/declare": 1.402};
+const VODUR={"fork/drift": 5.858, "fork/law": 6.146, "fork/copies": 5.428, "fork/today": 3.963, "fork/bridge": 4.745, "four/review": 5.556, "four/found": 4.943, "four/drift": 6.851, "four/one": 4.554, "four/step": 4.471, "where/fifth": 7.178, "where/meaning": 5.119, "where/glossary": 8.903, "where/why": 8.454, "where/build": 5.41, "where/log": 5.544, "blocks/once": 3.212, "blocks/script": 7.282, "blocks/points": 5.766, "blocks/change": 7.985, "blocks/zero": 6.955, "diagrams/too": 1.339, "diagrams/hand": 5.776, "diagrams/generated": 8.361, "diagrams/fails": 3.708, "diagrams/rule": 2.168, "catalog/find": 4.855, "catalog/push": 4.517, "catalog/there": 5.366, "catalog/upstream": 11.686, "catalog/gate": 8.523, "version/change": 2.03, "version/expire": 8.167, "version/breaks": 6.038, "version/date": 8.65, "version/tell": 5.83, "version/warn": 5.802, "version/choice": 4.564, "loop/steps": 8.62, "loop/approved": 4.79, "loop/new": 4.96, "loop/declare": 1.402};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2030,6 +2032,21 @@ function wr_catalog(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)
   const cy=y+h-218;T(ctx,"Columns",x+24,cy,{w:700,size:18,color:rgba(SOFT,1)});WR_CCOL.forEach(([c,cm],i)=>{const yy=cy+40+i*62;ctx.fillStyle="rgba(255,255,255,0.04)";rr(ctx,x+16,yy-26,w-32,58,8);ctx.fill();
     T(ctx,c,x+30,yy,{f:"mono",w:500,size:18,color:rgba(INK,0.95)});withA(ctx,clamp((o.cols==null?1:o.cols)*3-i,0,1),()=>T(ctx,cm,x+30,yy+24,{w:600,size:17,color:rgba(mix(INK,KIND,0.3),1)}));});});}
 
+// the university's business glossary on Databricks, outside the project (drawn, not a project file): one term, its words, and who named it the source.
+// o.chg (0..1) marks the term as changed since the last sync; o.tick the gold tick of data governance, who names the term
+function wr_glossary(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const GL=[176,186,206],chg=o.chg||0;withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,mix(GL,WR_AMB,chg),{glow:10+12*(o.hi||0),ea:0.6,fill:"rgba(12,14,20,0.96)"});
+  T(ctx,o.short?"business glossary":"Databricks · business glossary",x+24,y+38,{w:700,size:20,color:rgba(GL,1)});const ot="outside dbt",ow=tw(ctx,ot,16,700)+26;tag(ctx,x+w-16-ow,y+32,ot,SOFT,{size:16});
+  T(ctx,"Award",x+24,y+84,{w:800,size:26,color:rgba(INK,1)});
+  if(chg>0)withA(ctx,chg,()=>tag(ctx,x+40+tw(ctx,"Award",26,800),y+76,"changed",WR_AMB,{size:17}));
+  if(!o.short)wr_para(ctx,WR_DEF,x+24,y+124,w-48,{size:18,color:rgba(mix(INK,SOFT,0.2),1)});
+  if(o.tick>0)withA(ctx,o.tick,()=>{kt_gtick(ctx,x+38,y+h-30,13,1);T(ctx,"named by data governance",x+62,y+h-24,{w:700,size:18,color:rgba(TRUST,1)});});});}
+// a pull request card: the agent's sync, what it changes and what it touches; o.tick the owner's gold tick
+function wr_pr(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,KIND,{glow:10+12*(o.hi||0),ea:0.7,fill:"rgba(7,12,24,0.96)"});
+  T(ctx,"pull request",x+24,y+38,{w:700,size:20,color:rgba(KIND,1)});
+  T(ctx,"sync award from the glossary",x+24,y+76,{f:"mono",w:500,size:18,color:rgba(INK,0.95)});
+  withA(ctx,o.touch==null?1:o.touch,()=>T(ctx,"touches: doc(\"award\") · core_award",x+24,y+110,{f:"mono",w:500,size:17,color:rgba(SOFT,1)}));
+  if(o.tick>0)withA(ctx,o.tick,()=>{kt_gtick(ctx,x+38,y+h-30,13,1);T(ctx,"the owner approves",x+62,y+h-24,{w:700,size:18,color:rgba(TRUST,1)});});});}
+
 /* ---------- the present: the credential and its versions ---------- */
 // core_credential's product card: its name, its version, and a few columns; o.ver ("v2"), o.dim, o.rows, o.lit {row: a}, o.strain (0..1) on the old column
 function wr_prod(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rows=o.rows||[],h=118+rows.length*40;if(a<=0.01)return h;const dim=o.dim||0;withA(ctx,a*(1-0.45*dim),()=>{glass(ctx,x,y,w,h,18,TRUST,{glow:12+8*(o.hi||0),ea:0.8,fill:"rgba(10,12,20,0.97)"});
@@ -2362,6 +2379,7 @@ const WR_WHY=["Four copies of a definition drift apart. One home, and one","dire
 const WR_GAPS=["  - name: core_credential","    …","        limitations:","          - id: LIM-STU-06","            was: GAP-STU-02","            text: >","              No source records an expiry. status allows expired; nothing sets it yet."];
 const WR_CONV=["## Metadata","","- `meta.grain`: on every core and mart model, the grain in one sentence (\"One row per credential\"). Each domain's physical diagram (`_<domain>__physical.md`) reads it; a test proves it.",
   "- `meta.owner`: who owns the meaning (models) or the data (sources, seeds).","- `meta.domain`: the domain that owns the model, seed or source: `registrar` or `learning` (application domains: the teams whose systems are the sources), `student` or `course` (data domains), `planning` or `wallet` (business domains), or `shared`.","- `meta.glossary_term`: the term in the domain's conceptual model a model or key holds.","…"];
+const WR_SRC=["    source:","      glossary: the university's business glossary, on Databricks","      term: Award","      named_by: data governance","      synced_on: 2026-10-14"];
 const WR_CON9=["  - name: award","    definition: >","      A qualification the university confers, such as a graduate certificate or a master, for","      a set number of credit points. When it's conferred on a learner, it's a credential too.","    owner: Mei Tanaka, registrar's office","    business_key:","      issued_by: Registrar's office","      rule: The award code, qualified by its key set, SIS|GCDA.","    history: Every version, dated when it was recorded."];
 scene("where",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025});
@@ -2376,9 +2394,16 @@ scene("where",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     wr_code(ctx,x,y,con[2],"models/core/course/_course__conceptual.yml",WR_C1,{label:"",wrapMark:true,wrap:54,size:18,lh:29,edge:BPL,hi:fin(t,w("fifth","already has"),0.5),lit:{2:1,3:1}});kt_gtick(ctx,x+con[2]-24,y+h0+30,16,1);});}
   arrive(ctx,1500,640,t,w("fifth","already has"),()=>withA(ctx,1-mv,()=>tag(ctx,1500,640,"the home already exists",TRUST,{align:"center",size:20})),{dy:14});
   arrive(ctx,960,640,t,w("fifth","Everything else"),()=>withA(ctx,1-fin(t,cM-0.6,0.5),()=>T(ctx,"one home per fact",960,640,{w:800,size:44,align:"center",color:rgba(TRUST,1)})),{from:0.9});
-  if(mv>0){const lit={2:fin(t,w("meaning","what each"),0.4),3:fin(t,w("meaning","what each"),0.4),7:fin(t,w("meaning","its key"),0.4),4:fin(t,w("meaning","who owns"),0.4)};
-    withA(ctx,mv*(1-sh),()=>wr_bpCode(ctx,360,110,1200,"models/core/course/_course__conceptual.yml · the conceptual model",WR_CON9,{size:18,lh:27,lit,tags:[[2,"what it is",lit[2]],[7,"its key",lit[7]],[4,"its owner",lit[4]]]}));
+  // where the business glossary already defines the term: data governance names it, and the conceptual model takes its words, with where they came from
+  const cGl=c("glossary"),glA=fin(t,w("glossary","business glossary")-0.3,0.6)*(1-fin(t,cW-0.9,0.5)),sp=clamp((t-w("glossary","Data governance"))/2.2,0,1),tk=w("glossary","takes its words");
+  if(mv>0){const lit={2:fin(t,w("meaning","what each"),0.4)*(1-fin(t,cGl,0.4))+pulseAt(t,tk,1.6),3:fin(t,w("meaning","what each"),0.4)*(1-fin(t,cGl,0.4))+pulseAt(t,tk,1.6),7:fin(t,w("meaning","its key"),0.4)*(1-fin(t,cGl,0.4)),4:fin(t,w("meaning","who owns"),0.4)*(1-fin(t,cGl,0.4)),11:fin(t,tk+0.6,0.4),12:fin(t,w("glossary","Data governance"),0.4)*fin(t,tk+0.8,0.4)};
+    const src=WR_SRC.map((l,i)=>typeOn(l,clamp(sp*WR_SRC.length-i,0,1))).filter((l,i)=>sp*WR_SRC.length-i>0);
+    withA(ctx,mv*(1-sh),()=>wr_bpCode(ctx,360,110,1200,"models/core/course/_course__conceptual.yml · the conceptual model",WR_CON9.concat(src),{size:18,lh:27,lit,tags:[[2,"what it is",lit[2]],[7,"its key",lit[7]],[4,"its owner",lit[4]],[11,"the glossary's term",lit[11]]]}));
     withA(ctx,sh,()=>{bpPaper(ctx,360,90,1200,96,1,{});T(ctx,"models/core/course/_course__conceptual.yml",390,148,{f:"mono",w:500,size:20,color:rgba(BPL,1)});T(ctx,"the conceptual model · meaning",1530,148,{w:700,size:20,align:"right",color:rgba(BPL,0.9)});});}
+  if(glA>0.01){const gy=620;arrive(ctx,760,gy+110,t,w("glossary","business glossary")-0.3,()=>wr_glossary(ctx,360,gy,800,230,t,{a:glA,tick:fin(t,w("glossary","Data governance"),0.5),hi:pulseAt(t,w("glossary","that's its home"),1.4)}),{dy:30});
+    arrive(ctx,1400,gy+60,t,w("glossary","that's its home"),()=>withA(ctx,glA,()=>tag(ctx,1400,gy+60,"its home",TRUST,{align:"center",size:20})),{dy:12});
+    withA(ctx,glA,()=>{wr_flow(ctx,[[760,gy-4],[760,gy-30]],t,fin(t,tk-0.3,0.5),BPL,{p:fin(t,tk-0.3,0.6),n:3});});
+    arrive(ctx,1400,gy+130,t,tk,()=>withA(ctx,glA,()=>tag(ctx,1400,gy+130,"takes its words",BPL,{align:"center",size:20})),{dy:12});}
   // two columns below it: what was decided and accepted, beside what it's about; and the YAML the build uses
   const MX=80,YX=980,CW=860;
   arrive(ctx,YX+50,224,t,cB-0.2,()=>tag(ctx,YX,224,"YAML",TRUST,{size:22}),{dy:12});
@@ -2488,7 +2513,7 @@ const WR_HOME=[["_course__conceptual.yml",BPL],["_course__definitions.md",KIND],
 function wr_homes(ctx,y,t,on,a){if(a<=0.01)return[];let x=80;const R=[];withA(ctx,a,()=>{WR_HOME.forEach(([n,col],i)=>{const w_=tw(ctx,n,18,500,"mono")+44;if(i>0)arrowTo(ctx,x-34,y,x-6,y,col,1,{head:10});wr_link(ctx,x,y,w_,n,{on:on[i],col});R.push([x,w_]);x+=w_+40;});});return R;}
 scene("catalog",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025,x:1100});
-  const cP=c("push"),cT=c("there"),cG=c("gate"),tH=w("there","Fix it at home"),tW=w("there","writes over");
+  const cP=c("push"),cT=c("there"),cG=c("gate"),cU=c("upstream"),tH=w("there","Fix it at home"),tW=w("there","writes over");
   // the catalog, where people on Databricks find tables
   arrive(ctx,1450,370,t,0.3,()=>wr_catalog(ctx,1060,100,780,540,t,{search:clamp((t-w("find","catalog"))/0.8,0,1),desc:clamp((t-cP-0.6)/1.8,0,1),cols:clamp((t-w("push","its columns"))/1.0,0,1),
     edit:fin(t,w("there","Nobody edits"),1.2),reset:clamp((t-tW)/1.0,0,1),hi:pulseAt(t,w("find","descriptions"),1.6)}),{d:1.0,from:0.92,dy:30});
@@ -2507,6 +2532,14 @@ scene("catalog",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   arrive(ctx,560,610,t,cG,()=>tag(ctx,560,610,"one direction →",KIND,{align:"center",size:22}),{dy:12});
   const rd=w("gate","whatever reads it");arrive(ctx,1450,760,t,rd-0.2,()=>{wr_dash(ctx,1180,700,540,140,t,{});tag(ctx,1500,668,"tooltip · reads the catalog",KIND,{size:18});},{dy:24});
   withA(ctx,fin(t,rd,0.5),()=>arrowTo(ctx,1460,644,1460,694,KIND,1,{head:10}));
+  // upstream, the same rule: a sync checks the glossary on a schedule, and a changed term arrives as a pull request, for the owner to approve
+  const uA=fin(t,cU-0.2,0.6)*(1-fin(t,w("gate","Tuned from")-0.9,0.5)),tPR=w("upstream","opens a pull request");
+  if(uA>0.01&&R.length){const r0=R[0][0]+R[0][1]/2;
+    arrive(ctx,730,730,t,cU-0.2,()=>wr_glossary(ctx,540,650,380,160,t,{a:uA,short:1,chg:fin(t,w("upstream","When a term changes"),0.5),hi:pulseAt(t,w("upstream","checks the glossary"),1.4)+pulseAt(t,w("gate","the glossary"),1.4)}),{dy:24});
+    withA(ctx,uA,()=>arrowTo(ctx,532,730,472,730,KIND,1,{p:fin(t,tPR-0.2,0.5),head:10}));
+    arrive(ctx,270,730,t,tPR,()=>wr_pr(ctx,40,650,424,160,t,{a:uA,touch:fin(t,w("upstream","touches"),0.5),tick:fin(t,w("upstream","the owner"),0.5)}),{dy:24});
+    withA(ctx,uA*fin(t,w("upstream","before it reaches"),0.5),()=>wr_flow(ctx,[[r0,646],[r0,542]],t,1,BPL,{p:fin(t,w("upstream","before it reaches"),0.8),n:3}));
+    arrive(ctx,880,612,t,cU,()=>withA(ctx,uA,()=>tag(ctx,760,612,"upstream · on a schedule",SOFT,{size:18})),{dy:12});}
   // a brief echo of the past: the fork in its case, an arrow out to a violin, and none back
   const eA=fin(t,w("gate","Tuned from")-0.3,0.6);if(eA>0.01){withA(ctx,eA,()=>{ctx.save();ctx.fillStyle="rgba(26,16,8,0.92)";rr(ctx,70,650,900,220,18);ctx.fill();ctx.strokeStyle=rgba(CLAY,0.5);ctx.lineWidth=1.5;rr(ctx,70,650,900,220,18);ctx.stroke();ctx.restore();
     wr_case(ctx,110,740,360,90,t,{});wr_violin(ctx,800,750,0.3,t,{rot:-1.1});arrowTo(ctx,500,745,680,745,TRUST,1,{p:fin(t,w("gate","Tuned from"),0.6),head:12});wr_noBack(ctx,680,790,500,790,fin(t,w("gate","never the other"),0.5));

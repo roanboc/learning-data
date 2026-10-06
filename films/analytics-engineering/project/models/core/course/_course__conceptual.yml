@@ -25,7 +25,7 @@ entities:
       rule: The award code, qualified by its key set, SIS|GCDA.
     history: Every version, dated when it was recorded.
     source:
-      glossary: the university's business glossary (Unity Catalog)
+      glossary: the university's business glossary, on Databricks
       term: Award
       named_by: data governance
       synced_on: 2026-10-14

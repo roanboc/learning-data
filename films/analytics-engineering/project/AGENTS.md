@@ -72,8 +72,7 @@ Say in the pull request what you changed, why, what you checked, and the evidenc
 
 | Change | Approves |
 |---|---|
-| Meaning: a definition, a key, an identity rule, a business rule | Mei Tanaka, registrar's office, for learners, awards and credentials; the learning team for microcredentials |
-| Which glossary term is a definition's source | Data governance |
+| Meaning: a definition, a key, an identity rule, a business rule | Mei Tanaka, registrar's office, for learners, awards and credentials; the learning team for microcredentials; data governance names the glossary term a definition comes from |
 | The model: grain, entities, relationships, versions | Noor, data architect |
 | The code: models, tests, macros | Jun Park, analytics engineer, in review |
 | A consumer contract | Its consumer: Planning, or the wallet app team |

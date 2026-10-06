@@ -193,7 +193,7 @@ project/
 
 | Film | What it shows from here |
 |---|---|
-| *A model is not a transformation* | The names of the sources and of the staging and intermediate models; `learner_key` tested unique and not null |
+| *Declare it, then build it* | The names of the sources and of the staging and intermediate models; `learner_key` tested unique and not null |
 | *Start from a question* | The question in Planning's `models/marts/planning/_planning__conceptual.yml`; the slice in each core domain's `_<domain>__conceptual.yml`, with its hand-drawn diagram; the university's map in `models/_shared/`; the decision that a microcredential is a kind of credential; `skills/draft-the-conceptual-model/` for the agent's draft |
 | *What makes it the same one* | The profiling queries in `analyses/`; key sets and `macros/shared/keys.sql` (its header shows the compiled SQL); the staging models; `int_learner_keys`, `int_learner_key_candidates` (one CTE per rule) and `int_learner_keys_matched`; the identity decisions and status map seeds; the unit tests on matching |
 | *One row of what, and when* | `meta.grain`, tested as keys; `analyses/design/fan_out_without_point_in_time.sql`; the version columns; `int_learner_timeline`; the Planning mart (as it was) beside the wallet marts (as it is); `analyses/profiling/profile_late_changes.sql` and `diff_as_was_as_is.sql` |

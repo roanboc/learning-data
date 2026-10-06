@@ -7,7 +7,7 @@ seeds:
       pull request they approve.
     config:
       column_types: {key_set: string, source_code: string, source_label: string, canonical_status: string}
-      meta: {owner: "Mei Tanaka, registrar's office", domain: registrar}
+      meta: {owner: "Mei Tanaka, registrar's office", domain: student}
     data_tests:
       - unique_combination:
           arguments:
@@ -44,7 +44,7 @@ seeds:
         decided_by: string
         decided_on: date
         reason: string
-      meta: {owner: "Mei Tanaka, registrar's office", domain: registrar}
+      meta: {owner: "Mei Tanaka, registrar's office", domain: student}
     columns:
       - name: decision_id
         description: The decision's ID.
@@ -91,7 +91,7 @@ seeds:
       towards which awards. Each faculty decides for its own awards.
     config:
       column_types: {key_set: string, credential_code: string, award_code: string, approved_by: string, approved_on: date}
-      meta: {owner: The faculties, domain: registrar}
+      meta: {owner: The faculties, domain: student}
     data_tests:
       - unique_combination:
           arguments:
@@ -112,43 +112,3 @@ seeds:
         description: The faculty that recognised it.
       - name: approved_on
         description: When.
-
-  - name: census_report
-    description: >
-      One row per faculty per census date: the number the census team published for Planning's
-      question. The trusted number the Planning mart reconciles against.
-    config:
-      column_types:
-        census_date: date
-        faculty_code: string
-        faculty_name: string
-        learners_near_graduate_certificate: int
-        published_by: string
-        published_on: date
-      meta: {owner: "Census team, registrar's office", domain: planning}
-    data_tests:
-      - unique_combination:
-          arguments:
-            columns: [census_date, faculty_code]
-    columns:
-      - name: learners_near_graduate_certificate
-        description: Learners near a graduate certificate, as the census team counted them. The number Planning's question asks for.
-      - name: published_on
-        description: When the census team published the number, after late changes were entered.
-
-  - name: key_sets
-    description: >
-      One row per key set: where a key comes from, the system's name and who owns it. Shared by
-      every model and domain, like the hashing macro. Generated from model/conceptual.yml by
-      scripts/definitions.py: edit the conceptual model, not this file.
-    config:
-      column_types: {key_set: string, system_name: string, owner: string}
-      meta: {owner: "Noor, data architect", domain: registrar}
-    columns:
-      - name: key_set
-        description: '{{ doc("key_set") }}'
-        data_tests: [unique, not_null]
-      - name: system_name
-        description: The system, in words.
-      - name: owner
-        description: Who owns the system.

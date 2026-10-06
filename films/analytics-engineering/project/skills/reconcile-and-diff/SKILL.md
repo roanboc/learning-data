@@ -11,7 +11,7 @@ changed against the version before?
 ## Reconcile
 
 1. Build on the development target: `dbt build --profiles-dir .`.
-2. The singular test `reconcile_planning_with_census_report` must pass. It compares Planning's mart with `seeds/census_report.csv`, faculty by faculty.
+2. The singular test `reconcile_planning_with_census_report` must pass. It compares Planning's mart with `seeds/planning/census_report.csv`, faculty by faculty.
 3. For the sign-off, show every row, not just the failures: `dbt show --select reconcile_census_report --profiles-dir .`.
 4. If they differ, find the learners behind the difference: query `mart_planning__near_award` for the faculty, with `learner_key` and the credit columns, not names. Then trace one learner back through `core_credit_towards_award` and `int_credit_items`. Report each cause with its query.
 

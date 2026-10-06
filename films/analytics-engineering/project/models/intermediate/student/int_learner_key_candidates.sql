@@ -1,5 +1,6 @@
 {#-
-    Every learner a key could belong to: one CTE per identity rule in model/conceptual.yml.
+    Every learner a key could belong to: one CTE per identity rule in the student domain's
+    conceptual model (models/core/student/_student__conceptual.yml).
     The lower the priority, the more trusted the rule. A decision that two keys are different
     people removes a match, whatever rule made it.
 -#}

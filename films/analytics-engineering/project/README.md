@@ -35,8 +35,8 @@ Then, if you like:
 | `dbt docs generate --profiles-dir . && dbt docs serve --profiles-dir .` | The docs site, with lineage |
 | `dbt show --select profile_null_keys --profiles-dir .` | One of the evidence queries in `analyses/` |
 | `dbt show --select reconcile_census_report --profiles-dir .` | Planning's number beside the census report's |
-| `python scripts/diagrams.py` | Regenerates `docs/physical.md` from `target/manifest.json` |
-| `python scripts/definitions.py` | Regenerates `docs/definitions.md` and `seeds/key_sets.csv` from `model/conceptual.yml` |
+| `python scripts/diagrams.py` | Regenerates each domain's physical diagram (`_<domain>__physical.md`) from `target/manifest.json` |
+| `python scripts/definitions.py` | Regenerates each domain's definitions (`_<domain>__definitions.md`) and `seeds/shared/key_sets.csv` from the conceptual models |
 | `pip install dbt-metricflow==0.15.0`, then `DBT_PROFILES_DIR=. mf query --metrics learners_near_graduate_certificate --group-by learner_award__faculty_name` | Planning's answer, from the semantic layer's metric |
 | `dbt clean --profiles-dir .` | Deletes `target/`, the database with it, for a clean start |
 
@@ -114,22 +114,30 @@ project/
 │                             microcredentials), layers, access, contracts, groups, grants
 ├── profiles.yml              targets: duckdb (default), databricks
 ├── data/<system>/<table>.csv the three sources, every version kept (DuckDB only)
-├── seeds/                    reference data the business owns: status map, identity decisions,
-│                             credit recognition, key sets, the census report
-├── models/
-│   ├── staging/<system>/     one view per source table; sources YAML
-│   ├── intermediate/         identity candidates and matches, timelines, the credit rule; unit tests
-│   ├── core/                 the enterprise contract: public, versioned, enforced
+├── .dbtignore                keeps the conceptual models out of dbt's parse
+├── seeds/<domain>/           reference data the business owns, by domain: student (status map,
+│                             identity decisions, credit recognition), planning (the census
+│                             report), shared (key sets)
+├── models/                   organised by domain, following TCSI; each domain's folder holds its
+│   │                         models and its data definitions
+│   ├── overview.md           the docs site's front page
+│   ├── _groups.yml           who owns which models
+│   ├── _shared/              what every domain uses: the question and key sets
+│   │                         (_shared__conceptual.yml), the hand-drawn conceptual diagram, the
+│   │                         version columns' doc blocks
+│   ├── staging/<system>/     one view per source table; sources YAML; the source's doc blocks
+│   ├── intermediate/student/ identity candidates and matches, timelines, the credit rule; unit tests
+│   ├── core/student/         learner, credential, credit towards an award ┐ the enterprise contract:
+│   ├── core/course/          award                                        ┘ public, versioned, enforced;
+│   │                         each with _<domain>__conceptual.yml (not read by dbt), and the
+│   │                         generated _<domain>__definitions.md and _<domain>__physical.md
 │   ├── marts/planning/       as at census; the census dashboard exposure
 │   ├── marts/wallet/         as it is now; the wallet app exposure
-│   ├── semantic/             semantic model, metrics, time spine
-│   └── _groups.yml           who owns which models
+│   └── semantic/             semantic model, metrics, time spine
 ├── macros/                   keys and hashes, point in time, the near-award rule, DuckDB constraints
 ├── tests/                    custom generic tests, reconciliation, identity
 ├── analyses/                 the evidence: profiling, fan-out, late changes, reconcile, as-was and as-is
-├── model/conceptual.yml      the conceptual model in YAML (not read by dbt)
-├── docs/                     conceptual model, the process, decisions, gap register, conventions,
-│                             doc blocks, and two generated pages: definitions and the physical diagram
+├── docs/                     how the work is done: the process, conventions, decisions, gap register
 ├── scripts/                  diagrams.py and definitions.py, each with --check; diff_against_main.py;
 │                             load_databricks.sql
 ├── examples/planning/        Planning's own project, refing the core across projects (dbt Cloud only)
@@ -143,14 +151,14 @@ project/
 | Film | What it shows from here |
 |---|---|
 | *A model is not a transformation* | The names of the sources and of the staging and intermediate models; `learner_key` tested unique and not null |
-| *Start from a question* | The question and the slice in `model/conceptual.yml`; the hand-drawn diagram in `docs/conceptual-model.md`; the decision that a microcredential is a kind of credential; `skills/draft-the-conceptual-model/` for the agent's draft |
+| *Start from a question* | The question in `models/_shared/_shared__conceptual.yml` and the slice in each domain's `_<domain>__conceptual.yml`; the hand-drawn diagram in `models/_shared/_shared__conceptual.md`; the decision that a microcredential is a kind of credential; `skills/draft-the-conceptual-model/` for the agent's draft |
 | *What makes it the same one* | The profiling queries in `analyses/`; key sets and `macros/keys.sql` (its header shows the compiled SQL); the staging models; `int_learner_keys`, `int_learner_key_candidates` (one CTE per rule) and `int_learner_keys_matched`; the identity decisions and status map seeds; the unit tests on matching |
 | *One row of what, and when* | `meta.grain`, tested as keys; `analyses/fan_out_without_point_in_time.sql`; the version columns; `int_learner_timeline`; the Planning mart (as it was) beside the wallet marts (as it is); `analyses/profile_late_changes.sql` and `diff_as_was_as_is.sql` |
 | *Promises and proofs* | `docs/gaps.md`; the core YAML (enterprise contract) and the marts YAML (consumer contracts, exposures); the tests; unit tests on the credit rule; warn and error levels; source freshness |
 | *Built in layers* | The four layers and `docs/conventions.md`; import and logical CTEs; views, tables and the incremental `core_credential`; liquid clustering; the semantic layer, and `macros/near_award.sql`, where the rule and the count are written once |
-| *Who owns what* | `models/_groups.yml`; access and contracts in `dbt_project.yml` (set per folder; a model's YAML holds its grain, columns and tests); what each access level allows, in `docs/conventions.md`; `meta.owner` and `meta.domain`; the exposures; the key sets, hashing macro and conventions that every domain shares; for *Across projects*, `examples/planning/` (dbt Cloud only, not run here) |
+| *Who owns what* | `models/_groups.yml`; access and contracts in `dbt_project.yml` (set per folder; a model's YAML holds its grain, columns and tests); what each access level allows, in `docs/conventions.md`; `meta.owner` and `meta.domain`; the domain folders, following TCSI (`docs/conventions.md`, *Domains*); the exposures; the key sets, hashing macro and conventions that every domain shares; for *Across projects*, `examples/planning/` (dbt Cloud only, not run here) |
 | *An agent on the team* | `AGENTS.md`, with the agent's access; `docs/process.md`, the ten steps; `skills/`; the evidence in `analyses/`; the reconciliation test and `scripts/diff_against_main.py`; the CI workflow, and the `state:modified+` command above for CI on changed models |
-| *Written once* | Doc blocks in `docs/`; `model/conceptual.yml` generated into `docs/definitions.md` and `seeds/key_sets.csv`; `docs/physical.md` generated from the manifest; `persist_docs`; `core_credential` versions 1 and 2, with a deprecation date, and the wallet's `ref('core_credential', v=2)` |
+| *Written once* | Doc blocks in each domain's folder; each domain's conceptual model generated into its `_<domain>__definitions.md`, and the key sets into `seeds/shared/key_sets.csv`; each domain's `_<domain>__physical.md` generated from the manifest; `persist_docs`; `core_credential` versions 1 and 2, with a deprecation date, and the wallet's `ref('core_credential', v=2)` |
 
 ## What differs between engines
 

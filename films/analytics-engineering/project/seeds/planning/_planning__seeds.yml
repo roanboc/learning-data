@@ -1,0 +1,24 @@
+seeds:
+
+  - name: census_report
+    description: >
+      One row per faculty per census date: the number the census team published for Planning's
+      question. The trusted number the Planning mart reconciles against.
+    config:
+      column_types:
+        census_date: date
+        faculty_code: string
+        faculty_name: string
+        learners_near_graduate_certificate: int
+        published_by: string
+        published_on: date
+      meta: {owner: "Census team, registrar's office", domain: planning}
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [census_date, faculty_code]
+    columns:
+      - name: learners_near_graduate_certificate
+        description: Learners near a graduate certificate, as the census team counted them. The number Planning's question asks for.
+      - name: published_on
+        description: When the census team published the number, after late changes were entered.

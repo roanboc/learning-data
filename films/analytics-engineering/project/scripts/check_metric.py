@@ -23,7 +23,7 @@ def main():
             day = row["learner_award__census_date__day"][:10]
             metric[(day, row["learner_award__faculty_name"])] = int(row["learners_near_graduate_certificate"])
     report = {}
-    with open(ROOT / "seeds" / "census_report.csv") as f:
+    with open(ROOT / "seeds" / "planning" / "census_report.csv") as f:
         for row in csv.DictReader(f):
             report[(row["census_date"], row["faculty_name"])] = int(row["learners_near_graduate_certificate"])
 

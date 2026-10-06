@@ -1,30 +1,19 @@
-# The conceptual model: the slice of the credential model (v3) that Planning's question touches.
+# The student domain's conceptual model: learners, the credentials they hold, and the credit they
+# hold towards an award. Owned by the registrar's office.
 #
-# Not parsed by dbt (it sits outside model-paths). It's where the meaning is written once:
-# scripts/definitions.py turns each definition into a doc block in docs/definitions.md, which
-# the dbt YAML shows with doc() and Databricks pushes to Unity Catalog.
-#
-# The diagram of it is drawn by hand in docs/conceptual-model.md.
+# Not parsed by dbt (.dbtignore). scripts/definitions.py turns each definition into a doc block in
+# _student__definitions.md, next to this file, which the dbt YAML shows with doc() and Databricks
+# pushes to Unity Catalog. The question and the key sets are in models/_shared/.
 
-question:
-  asked_by: Planning
-  text: >
-    How many learners are within 15 credit points of a graduate certificate, by faculty,
-    as at census date?
-  decision: >
-    How many places to offer in each faculty's final graduate certificate units next semester.
-  also_served: The learner's wallet app, which needs the same facts as they are now.
-
-key_sets:
-  - code: SIS
-    system: student system
-    owner: Registrar's office
-  - code: LMS
-    system: learning platform
-    owner: Learning team
-  - code: SC
-    system: short-course platform
-    owner: Learning team
+domain: student
+reference:
+  model: TCSI
+  packet: Student
+  adopted: The student, as the person the university records learning for; their history, version by version.
+  extended:
+    - A learner is wider than a TCSI student. It includes learning platform users and short-course customers with no student ID.
+    - A credential is wider than a TCSI course outcome. It includes microcredentials and badges, not only awards conferred.
+    - Credit towards an award counts recognised microcredentials, as well as units passed.
 
 entities:
 
@@ -72,16 +61,6 @@ entities:
         owner: Learning team
     history: Issued on a date; revoked on a date, if it is. A revoked credential never counts.
 
-  - name: award
-    definition: >
-      A qualification the university confers, such as a graduate certificate or a master, for
-      a set number of credit points. When it's conferred on a learner, it's a credential too.
-    owner: Mei Tanaka, registrar's office
-    business_key:
-      issued_by: Registrar's office
-      rule: The award code, qualified by its key set, SIS|GCDA.
-    history: Every version, dated when it was recorded.
-
 relationships:
 
   - name: credit_towards_award
@@ -97,7 +76,7 @@ relationships:
     # The numbers these rules use live once, as vars in dbt_project.yml.
     rules:
       - A unit counts only with a passing grade (var passing_grades).
-      - A microcredential counts towards each award that recognises it; the faculties decide which, in seeds/credit_recognition.csv.
+      - A microcredential counts towards each award that recognises it; the faculties decide which, in seeds/student/credit_recognition.csv.
       - An award accepts a limited number of microcredentials towards its credit, the first ones issued (var microcredentials_per_award).
       - A revoked credential never counts, from the day it's revoked.
       - Credit changes over time, and every change is a new version.
@@ -111,6 +90,3 @@ relationships:
     between: [credential, award]
     cardinality: many microcredentials to many awards
     definition: A microcredential counts towards an award when the award's faculty recognises it.
-
-decisions: docs/decisions.md
-gaps: docs/gaps.md

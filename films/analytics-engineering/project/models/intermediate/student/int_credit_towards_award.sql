@@ -1,6 +1,6 @@
 {#-
-    The rules for credit towards an award, as model/conceptual.yml states them. Each CTE below
-    says which rule it applies; the numbers come from vars in dbt_project.yml.
+    The rules for credit towards an award, as the student domain's conceptual model states them
+    (models/core/student/_student__conceptual.yml). Each CTE below says which rule it applies; the numbers come from vars in dbt_project.yml.
 -#}
 
 {%- set passing_grades = var('passing_grades') -%}

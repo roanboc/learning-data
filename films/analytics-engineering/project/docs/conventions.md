@@ -8,8 +8,8 @@ domain, like the key sets and the hashing macro.
 | Layer | Folder | Job | Access | Materialised |
 |---|---|---|---|---|
 | Staging | `models/staging/<source>/` | One model per source table: rename, cast, add keys qualified by their key set and their hashes. No joins, no rules. Keeps the source's own words (a "customer" is still a customer). | private | view |
-| Intermediate | `models/intermediate/` | Steps, not products: match keys, stitch timelines, apply business rules. Translates the source's words into the model's. | private | view |
-| Core | `models/core/` | One model per entity and relationship at a declared grain. The enterprise contract, versioned: a breaking change is a new version. | public | table (incremental where it pays) |
+| Intermediate | `models/intermediate/<domain>/` | Steps, not products: match keys, stitch timelines, apply business rules. Translates the source's words into the model's. | private | view |
+| Core | `models/core/<domain>/` | One model per entity and relationship at a declared grain. The enterprise contract, versioned: a breaking change is a new version. | public | table (incremental where it pays) |
 | Marts | `models/marts/<consumer>/` | Built for one consumer. The consumer contract. | protected | table |
 
 Access, contracts and materialisations are set once per folder, in `dbt_project.yml`. Each
@@ -17,6 +17,38 @@ model's YAML holds the rest: `meta.grain`, the columns and their types, the cons
 tests.
 
 An entity with one source and nothing to resolve (the award) needs no intermediate step.
+
+## Domains
+
+A large project holds several domains, and each owns its models and their metadata. Staging is
+split by source system, because one system can feed several domains. Intermediate and core are
+split by domain; the marts by consumer, which is a domain too.
+
+| Domain | Folders | Holds | Reference |
+|---|---|---|---|
+| `student` | `models/intermediate/student/`, `models/core/student/`, `seeds/student/` | Learners, the credentials they hold, the credit they hold towards an award | TCSI Student packet, extended to learners with no award and to microcredentials and badges |
+| `course` | `models/core/course/` | The awards the university offers | TCSI Course packet |
+| `planning` | `models/marts/planning/`, `seeds/planning/` | Planning's marts, as at census | |
+| `wallet` | `models/marts/wallet/` | The wallet app's marts, as they are now | |
+| shared | `models/_shared/`, `seeds/shared/` | What every domain uses: the question, the key sets, the version columns, the conceptual diagram | |
+
+The domains follow the reference model, TCSI (Tertiary Collection of Student Information): check
+it, adopt what fits, extend where the business needs more, and record each extension in the
+domain's conceptual model.
+
+Each domain's folder holds its data definitions, next to its models:
+
+| File | What it holds |
+|---|---|
+| `_core_<domain>__models.yml`, `_int_<domain>__models.yml` | The models: grain, columns, types, constraints, tests |
+| `_<domain>__conceptual.yml` | What each entity and relationship means, its key and its owner. Not read by dbt (`.dbtignore`) |
+| `_<domain>__definitions.md` | Doc blocks generated from the conceptual model by `scripts/definitions.py` |
+| `_<domain>__columns.md` | Doc blocks for the columns the domain owns |
+| `_<domain>__physical.md` | The physical diagram, generated from the manifest by `scripts/diagrams.py` |
+
+A staging folder holds its source's doc block and the columns only that source has
+(`_<source>__docs.md`). `docs/` holds how the work is done (process, conventions, decisions,
+gaps), not what the data means.
 
 ## Access
 
@@ -40,7 +72,7 @@ to itself, and they meet only on the public core. `examples/planning/` sketches 
 | Intermediate model | `int_<entity>`, or `int_<entity>_<step>` when an entity takes several steps | `int_learners`, `int_learner_keys_matched` |
 | Core model | `core_<entity or relationship>` | `core_credit_towards_award` |
 | Mart | `mart_<consumer>__<what>` | `mart_planning__near_award` |
-| YAML | `_<source>__sources.yml`, `_<folder>__models.yml` | `_core__models.yml` |
+| YAML | `_<source>__sources.yml`, `_<layer>_<domain>__models.yml` (`_<consumer>__models.yml` in the marts) | `_core_student__models.yml` |
 | Readable key | `<thing>_bk`: qualified by its key set | `learner_bk` = `SIS\|S-20417` |
 | Hash key | `<thing>_key`: the hash of `<thing>_bk` | `learner_key` |
 | Versions | `valid_from` (inclusive), `valid_to` (exclusive, null for the last version), `is_current` (valid today) | |
@@ -59,7 +91,7 @@ to itself, and they meet only on the public core. `examples/planning/` sketches 
 
 ## Keys and hashes
 
-- **Key sets.** Every key is qualified by where it comes from: `SIS` (student system), `LMS` (learning platform), `SC` (short-course platform). The list is written once, in `model/conceptual.yml`; `scripts/definitions.py` generates `seeds/key_sets.csv` from it.
+- **Key sets.** Every key is qualified by where it comes from: `SIS` (student system), `LMS` (learning platform), `SC` (short-course platform). The list is written once, in `models/_shared/_shared__conceptual.yml`; `scripts/definitions.py` generates `seeds/shared/key_sets.csv` from it.
 - **One case per key.** Staging writes each system key in one case: IDs and codes upper case (`S-20417`, `GCDA`), platform user IDs and emails lower case (`u-88213`). So `s-20417` typed into the platform is the same key as `S-20417`, and a readable key and its hash are one to one.
 - **Readable key.** `business_key('SIS', 'student_id')` gives `SIS|S-20417`; null when any part is missing or blank.
 - **Hash.** `hash_key(['learner_bk'])`: sha-256, as 64 hex characters, of the parts trimmed, upper-cased and joined with `|`, with a sentinel for a missing part. Every key in these sources is case-insensitive. The exact rules are in the macro's comment, `macros/keys.sql`. DuckDB's `sha256` and Databricks' `sha2(..., 256)` give the same value.
@@ -83,9 +115,9 @@ to itself, and they meet only on the public core. `examples/planning/` sketches 
 
 ## Metadata
 
-- `meta.grain`: on every core and mart model, the grain in one sentence ("One row per credential"). The diagram in `docs/physical.md` reads it; a test proves it.
+- `meta.grain`: on every core and mart model, the grain in one sentence ("One row per credential"). Each domain's physical diagram (`_<domain>__physical.md`) reads it; a test proves it.
 - `meta.owner`: who owns the meaning (models) or the data (sources, seeds).
-- `meta.domain`: registrar, learning, planning or wallet.
-- `meta.glossary_term`: the term in `model/conceptual.yml` a model or key holds.
+- `meta.domain`: the domain that owns the model, seed or source: `student`, `course`, `learning` (the learning team's sources), `planning`, `wallet`, or `shared`.
+- `meta.glossary_term`: the term in the domain's conceptual model a model or key holds.
 - `meta.personal_data` on columns: `direct` (identifies a person: name, email, student ID, or a key that contains one) or `pseudonymous` (a hash of one). A column with neither holds no personal data.
-- A description used in more than one place is a doc block, written once (`docs/columns.md`); a definition is written once, in `model/conceptual.yml`.
+- A description used in more than one place is a doc block, written once, in the folder of the domain that owns it (`_<domain>__columns.md`), or in `models/_shared/_shared__columns.md` when every domain shares it. A definition is written once, in the domain's conceptual model.

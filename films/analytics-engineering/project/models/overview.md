@@ -11,6 +11,9 @@ wallet app reads the same facts, as they are now.
 - **Core**: one model per entity and relationship, public, with an enforced contract: the enterprise contract.
 - **Marts**: one per consumer, protected, with an enforced contract: the consumer contract.
 
-The meaning is in `model/conceptual.yml`; decisions and gaps are in `docs/`. The university and
+The models are organised by domain, following the reference model, TCSI: the core's `student`
+and `course` domains, and the marts' `planning` and `wallet`. Each domain's folder holds its
+meaning (the conceptual model and the definitions generated from it), its column descriptions
+and its physical diagram. The process, decisions and gaps are in `docs/`. The university and
 everyone in it are fictional.
 {% enddocs %}

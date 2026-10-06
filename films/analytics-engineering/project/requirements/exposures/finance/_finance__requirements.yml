@@ -15,15 +15,3 @@ items:
     done_when: >
       A reconciliation test compares the mart with Finance's tuition report, faculty by faculty,
       and passes on every build.
-
-  - id: REQ-FIN-02
-    type: requirement
-    step: consumer_output
-    title: The rows and columns the forecast needs
-    text: One row per learner per award they're enrolled in, as at census date, with the faculty, the
-      award type, the recognised credit points, the rate per credit point and the tuition forgone.
-      No names or emails.
-    owner: Finance
-    status: in_progress
-    done_when: >
-      The mart's contract enforces these columns and their types, and its grain is tested as a key.

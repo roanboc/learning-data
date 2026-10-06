@@ -10,7 +10,7 @@ in the conceptual model of the domain that owns each entity (`models/core/<domai
 
 ## Steps
 
-1. **Write the question** under `question:`: who asks it, the words they use, and the decision it supports. If the decision isn't clear, ask; don't guess.
+1. **Write the question** as an item in the consumer's register (`requirements/exposures/<consumer>/`, `type: question`, `step: scope`): who asks it, the words they use, and the decision it supports. Point the mart's conceptual model at it with `answers:`. If the decision isn't clear, ask; don't guess.
 2. **List only the entities the question touches.** For each noun in the question, find the term in the glossary and the tables in the catalog. An entity the question doesn't need stays out, however central it seems.
 3. **For each entity, draft**:
    - `definition`: one or two plain sentences, in the business's words, not a system's;

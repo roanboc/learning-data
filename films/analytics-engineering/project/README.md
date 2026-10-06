@@ -190,8 +190,8 @@ project/
 │   └── setup/                load_databricks.sql: loads the sample sources into Databricks
 ├── examples/planning/        Planning's own project, refing the core across projects (dbt Cloud only)
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
-├── skills/                   five skills for an agent: draft the conceptual model, profile, draft
-│                             a model, reconcile and diff, review metadata
+├── skills/                   six skills for an agent: draft the conceptual model, profile, draft
+│                             a model, reconcile and diff, review metadata, sync the glossary
 └── target/, logs/            [build output] dbt's artifacts and the DuckDB database; dbt clean
 ```
 
@@ -207,7 +207,7 @@ project/
 | *Built in layers* | The four layers and `docs/conventions.md`; import and logical CTEs; views, tables and the incremental `core_credential`; liquid clustering; the semantic layer, and `macros/planning/near_award.sql`, where the rule and the count are written once |
 | *Who owns what* | `models/_groups.yml`; access and contracts in `dbt_project.yml` (set per folder; a model's YAML holds its grain, columns and tests); what each access level allows, in `docs/conventions.md`; `meta.owner` and `meta.domain`; the domain folders, following TCSI (`docs/conventions.md`, *Domains*); the exposures; the key sets, hashing macro and conventions that every domain shares; for *Across projects*, `examples/planning/` (dbt Cloud only, not run here) |
 | *An agent on the team* | `AGENTS.md`, with the agent's access; `docs/process.md`, the ten steps; `skills/`; the evidence in `analyses/`; the reconciliation test and `scripts/tools/diff_against_main.py`; the CI workflow, and the `state:modified+` command above for CI on changed models |
-| *Written once* | Doc blocks in each domain's folder; each domain's conceptual model generated into its `_<domain>__definitions.md`, the key sets, written once on each source, into `seeds/reference/shared/key_sets.csv`; each domain's `_<domain>__physical.md` generated from the manifest; `persist_docs`; `core_credential` versions 1 and 2, with a deprecation date, and the wallet's `ref('core_credential', v=2)` |
+| *Written once* | Doc blocks in each domain's folder; each domain's conceptual model generated into its `_<domain>__definitions.md`, the award's definition taken from the business glossary (`source:`, `skills/sync-the-glossary/`), the key sets, written once on each source, into `seeds/reference/shared/key_sets.csv`; each domain's `_<domain>__physical.md` generated from the manifest; `persist_docs`; `core_credential` versions 1 and 2, with a deprecation date, and the wallet's `ref('core_credential', v=2)` |
 
 ## What differs between engines
 

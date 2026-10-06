@@ -26,6 +26,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La solución no es una quinta copia, ni una mejor. La definición ya tiene un hogar. Todo lo demás debe salir de él.",
 "Meaning lives in the conceptual model: what each thing is, its key, and who owns it.":
 "El significado vive en el modelo conceptual: qué es cada cosa, su clave y quién es su dueño.",
+"And where the business glossary already defines a term, that's its home. Data governance says which term applies, and the conceptual model takes its words.":
+"Y donde el glosario de negocio ya define un término, ese es su hogar. Gobierno de datos dice qué término aplica, y el modelo conceptual toma sus palabras.",
 "Decisions live in a log beside what they're about, with why and who. The gaps the team accepted live on the model, as known limitations.":
 "Las decisiones viven en un registro junto a aquello de lo que tratan, con el porqué y el quién. Los vacíos que el equipo aceptó viven en el modelo, como limitaciones conocidas.",
 "Everything the build uses lives in YAML: grain, keys, contracts, tests and owners.":
@@ -58,8 +60,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Así que cada build le envía las descripciones, de cada tabla y sus columnas.",
 "Nobody edits them there: a rebuild writes over the edit. Fix it at home, and it flows out.":
 "Nadie las edita ahí: un nuevo build sobrescribe el cambio. Corrígelo en casa, y fluye hacia fuera.",
-"One direction: from the files, out to the catalog and whatever reads it. Tuned from one source, never the other way round.":
-"Una dirección: de los archivos hacia el catálogo y lo que lo lea. Afinado desde una fuente, nunca al revés.",
+"Upstream, the same rule. A sync checks the glossary on a schedule. When a term changes, it opens a pull request, so the owner sees what the new meaning touches before it reaches the build.":
+"Río arriba, la misma regla. Una sincronización revisa el glosario de forma periódica. Cuando un término cambia, abre un pull request, para que el dueño vea a qué afecta el nuevo significado antes de que llegue al build.",
+"One direction: from the glossary, through the files, out to the catalog and whatever reads it. Tuned from one source, never the other way round.":
+"Una dirección: del glosario, por los archivos, hacia el catálogo y lo que lo lea. Afinado desde una fuente, nunca al revés.",
 "Written once doesn't mean never changed.":
 "Escrito una vez no significa que nunca cambie.",
 "A credential can expire, and a true or false can't say so. So is_revoked becomes status: valid, expired or revoked.":

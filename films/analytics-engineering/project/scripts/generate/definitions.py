@@ -56,6 +56,10 @@ def block(name, title, item):
         lines.append(f"- Rule: {one_line(rule)}")
     if item.get("history"):
         lines.append(f"- History: {one_line(item['history'])}")
+    source = item.get("source")
+    if source:
+        lines.append(f"- Source of the definition: the term {source['term']} in {one_line(source['glossary'])}, "
+                     f"named by {source['named_by']}; synced on {source['synced_on']}.")
     lines.append("{% enddocs %}")
     return "\n".join(lines)
 

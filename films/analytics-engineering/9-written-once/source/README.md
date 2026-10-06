@@ -1,13 +1,13 @@
 # Rebuilding Written once
 
-*Written once*, the closing film of *In the weeds of data crafting*, is generated from code like every other film here. It shares the engine, components, fonts and voice model of *The Inner Life of Data*, draws with *A Sharper Sketch*'s diagrams, the people of *When things go wrong*, *From words to data*'s components and *Keeping it true*'s, and the series' own in [`../../shared/src/`](../../shared/src/). Only what is new lives here:
+*Written once*, the ninth film of *In the weeds of data crafting*, is generated from code like every other film here. It shares the engine, components, fonts and voice model of *The Inner Life of Data*, draws with *A Sharper Sketch*'s diagrams, the people of *When things go wrong*, *From words to data*'s components and *Keeping it true*'s, and the series' own in [`../../shared/src/`](../../shared/src/). Only what is new lives here:
 
 | File | What it holds |
 |---|---|
 | `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (YAML, Jun, Mei, dbt, DuckDB, CI), and the moment its poster shows (the title card, over the tuning fork in its case). |
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). The film re-times itself to the voice. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
-| `src/breath.js` | The few longer pauses: holds after some lines, and two wordless moments (the title, and the end card that closes the series). |
+| `src/breath.js` | The few longer pauses: holds after some lines, and two wordless moments (the title, and the end card, back on the opening film's loop). |
 | `src/plan.js` | This film's pictures (prefixed `wr_`): Paris, 1859 (tuning forks of polished steel, the decree and its seal, the standard fork in its lined case, a violin, an orchestra tuning to the oboe), project files on glass and on the blueprint, the four drifting copies of a definition, Planning's dashboard and its tooltip, the chain from the conceptual model to the docs site, CI checks, the two diagrams, the Unity Catalog panel, the credential's two versions, lineage nodes and badges, and the people's faces. |
 | `src/scenes.js` | The eight chapters. The title card ends chapter 1; the end card ends chapter 8. Every shot drifts, things arrive with a spring, and the four copies and the conceptual model (2 → 3), the conceptual model into the chain (3 → 4), the wiki card (4 → 5), the chain (4 → 5) and the catalog (6 → 7) carry across the cuts. |
 | `src/i18n/es/captions.js` | The Spanish captions (Latin American), one per English line. |

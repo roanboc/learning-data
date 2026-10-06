@@ -1,6 +1,6 @@
 # In the weeds of data crafting
 
-*Proposal for a technical series for analytics engineers, on data modelling with dbt, v0.2. The folder is named after the topic. Status: all nine films are built and on the site, 2 October 2026; the [series README](README.md) describes the films as they are.*
+*Proposal for a technical series for analytics engineers, on data modelling with dbt, v0.2. The folder is named after the topic. Status: all nine films planned here are built and on the site, 2 October 2026, and a tenth, *End to end*, follows one question through all ten steps, 6 October 2026; the [series README](README.md) describes the films as they are.*
 
 ## Decided
 

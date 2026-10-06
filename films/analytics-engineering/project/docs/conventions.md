@@ -133,9 +133,13 @@ Nothing stays in `requirements/` once it's done: `scripts/check/requirements.py`
 that isn't `open` or `in_progress`. [`requirements/README.md`](../requirements/README.md) says where
 each kind of item goes.
 
-**A deprecated model version** stays, built from the current version, until its
-`deprecation_date`, so its consumers have time to move. It's removed in the first release after
-that date: `core_credential` v1 after 31 March 2027 (DEC-STU-07). The exposures say who to tell.
+**A deprecated model version** stays until its `deprecation_date`, so its consumers have time to
+move. The newest version holds the logic, and each older version is built from it, never the other
+way round: the new version can say what the old one can't (a credential that expired), so only the
+old shape can be derived from the new one, and an old version can go without touching anything
+else. With a version 3, versions 1 and 2 would both be built from it. An old version is removed in
+the first release after its date: `core_credential` v1 after 31 March 2027 (DEC-STU-07). The
+exposures say who to tell.
 
 ## Splitting into projects
 

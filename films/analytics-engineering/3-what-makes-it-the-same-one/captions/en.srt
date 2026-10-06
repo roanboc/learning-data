@@ -55,101 +55,101 @@ Two short-course enrolments point at no customer, as typed. Trimmed and in lower
 A claim without its query is a guess.
 
 15
-00:01:35,592 --> 00:01:38,726
-First, the key sets from the question's model go to work.
+00:01:35,592 --> 00:01:38,380
+First, the key sets written on each source go to work.
 
 16
-00:01:39,826 --> 00:01:44,812
+00:01:39,480 --> 00:01:44,466
 Every key now carries the short code of the system it comes from, and that system's owner.
 
 17
-00:01:46,112 --> 00:01:52,372
+00:01:45,766 --> 00:01:52,026
 Two systems can use the same-looking key for two different people. Qualified, they can't be confused.
 
 18
-00:01:53,872 --> 00:02:01,580
+00:01:53,526 --> 00:02:01,234
 And staging writes every key one way: trimmed, and in one case. Aisha's email loses its spaces and its capitals.
 
 19
-00:02:04,880 --> 00:02:11,789
+00:02:04,534 --> 00:02:11,443
 Then: which keys are the same learner? Jun writes it as rules, most trusted first, one block of code for each.
 
 20
-00:02:12,989 --> 00:02:14,676
+00:02:12,643 --> 00:02:14,330
 A student ID is a learner.
 
 21
-00:02:15,676 --> 00:02:18,904
+00:02:15,330 --> 00:02:18,558
 A platform account is the student whose ID it holds.
 
 22
-00:02:19,904 --> 00:02:23,989
+00:02:19,558 --> 00:02:23,643
 An email names a student, but only if exactly one student has it.
 
 23
-00:02:25,089 --> 00:02:27,340
+00:02:24,743 --> 00:02:26,994
 Anything left is a learner of its own.
 
 24
-00:02:29,040 --> 00:02:31,618
+00:02:28,694 --> 00:02:31,272
 Each key takes the most trusted rule that fits.
 
 25
-00:02:32,918 --> 00:02:40,463
+00:02:32,572 --> 00:02:40,117
 Aisha's three keys resolve to her student ID. Across the university, ninety keys become forty-six learners.
 
 26
-00:02:41,963 --> 00:02:49,357
+00:02:41,617 --> 00:02:49,011
 The rules are written in words in the model, and in code in two models. Mei, who owns what a learner means, approved them.
 
 27
-00:02:52,457 --> 00:02:59,421
+00:02:52,111 --> 00:02:59,075
 But another Aisha has a platform account, and its student ID field holds our Aisha's number, typed by mistake.
 
 28
-00:03:00,121 --> 00:03:07,748
+00:02:59,775 --> 00:03:07,402
 The rules merge them. Aisha's wallet now shows six credentials, one she never earned. And every test still passes.
 
 29
-00:03:09,448 --> 00:03:13,236
+00:03:09,102 --> 00:03:12,890
 No test knew they were two people, because nobody had written it down.
 
 30
-00:03:14,536 --> 00:03:20,035
+00:03:14,190 --> 00:03:19,689
 Mei checks, and records a decision: different people. A person's decision beats every rule.
 
 31
-00:03:22,135 --> 00:03:31,374
+00:03:21,789 --> 00:03:31,028
 The merge undoes, and Aisha holds five. The decision is data now: the code keeps them apart, and a test fails if anything merges them again.
 
 32
-00:03:34,674 --> 00:03:36,985
+00:03:34,328 --> 00:03:36,639
 Jun hashes each learner's business key.
 
 33
-00:03:38,185 --> 00:03:43,346
+00:03:37,839 --> 00:03:43,000
 Sixty-four characters. Add one trailing space, and the hash is completely different.
 
 34
-00:03:44,846 --> 00:03:53,088
+00:03:44,500 --> 00:03:52,742
 So one macro builds every hash. It trims each part, writes it in upper case, marks a missing part, and joins the parts with a bar.
 
 35
-00:03:54,788 --> 00:03:58,956
+00:03:54,442 --> 00:03:58,610
 The same key gives the same hash, in every model, and on every engine.
 
 36
-00:04:00,256 --> 00:04:05,361
+00:03:59,910 --> 00:04:05,015
 And the readable key stays beside the hash. A hash can't be read, or checked by eye.
 
 37
-00:04:08,061 --> 00:04:13,022
+00:04:07,715 --> 00:04:12,676
 Codes need the same care. Three systems, three codes, one meaning: studying.
 
 38
-00:04:14,222 --> 00:04:20,765
+00:04:13,876 --> 00:04:20,419
 A status map says so, one row per code. The registrar's office owns it, and approves every change.
 
 39
-00:04:22,065 --> 00:04:27,446
+00:04:21,719 --> 00:04:27,100
 Now every learner has one key. But one key can still mean many rows, and many versions.

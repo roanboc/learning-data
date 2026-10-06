@@ -9,7 +9,7 @@ erDiagram
     mart_finance__tuition_forgone {
         string learner_award_key PK
         date census_date
-        string learner_key
+        string learner_key FK
         string award_key
         string award_code
         string award_name
@@ -21,6 +21,10 @@ erDiagram
         int rate_per_credit_point
         int tuition_forgone
     }
+    core_learner_v1 {
+        string learner_key PK
+    }
+    core_learner_v1 }|--o{ mart_finance__tuition_forgone : "learner_key"
 ```
 
 | Model | Grain | Access | Contract |

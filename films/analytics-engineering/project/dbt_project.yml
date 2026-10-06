@@ -92,3 +92,5 @@ seeds:
       +tags: ["expected"]
       planning:
         +group: planning
+      finance:
+        +group: finance

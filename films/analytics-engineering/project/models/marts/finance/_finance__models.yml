@@ -24,11 +24,17 @@ models:
         name: pk_mart_finance__tuition_forgone
         columns: [learner_award_key]
         warn_unenforced: false
+    data_tests:
+      # the grain, tested as a key
+      - unique_combination:
+          arguments:
+            columns: [learner_key, award_key]
     columns:
       - name: learner_award_key
         description: '{{ doc("learner_award_key") }}'
         data_type: string
         constraints: [{type: not_null}]
+        data_tests: [unique]
         config:
           meta: {personal_data: pseudonymous}
       - name: census_date
@@ -39,6 +45,11 @@ models:
         description: '{{ doc("learner_key") }}'
         data_type: string
         constraints: [{type: not_null}]
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('core_learner')
+                field: learner_key
         config:
           meta: {glossary_term: learner, personal_data: pseudonymous}
       - name: award_key
@@ -56,6 +67,10 @@ models:
       - name: award_type
         description: '{{ doc("award_type") }}'
         data_type: string
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [graduate certificate, master]
       - name: faculty_code
         description: '{{ doc("faculty_code") }}'
         data_type: string
@@ -83,3 +98,43 @@ models:
         constraints: [{type: not_null}]
         config:
           meta: {glossary_term: tuition_forgone}
+
+unit_tests:
+
+  - name: recognised_credit_saves_tuition_in_the_enrolled_award_only
+    description: >
+      A learner enrolled in a graduate certificate holds 10 recognised credit points that also count
+      towards a master. The saving is counted once, in the award they're enrolled in, at its 2026
+      rate. A learner with no recognised credit saves nothing.
+    model: mart_finance__tuition_forgone
+    given:
+      - input: ref('core_learner')
+        format: csv
+        rows: |
+          learner_key,learner_bk,enrolled_award_key,valid_from,valid_to
+          L1,SIS|S-1,A1,2026-01-01,
+          L2,SIS|S-2,A1,2026-01-01,
+      - input: ref('core_award')
+        format: csv
+        rows: |
+          award_key,award_bk,award_code,award_name,award_type,faculty_code,faculty_name,valid_from,valid_to
+          A1,SIS|GC,GC,A graduate certificate,graduate certificate,EIT,Faculty of Engineering and IT,2025-01-01,
+          A2,SIS|M,M,A master,master,EIT,Faculty of Engineering and IT,2025-01-01,
+      - input: ref('core_credit_towards_award')
+        format: csv
+        rows: |
+          learner_key,award_key,credit_points_from_microcredentials,valid_from,valid_to
+          L1,A1,10,2026-02-01,
+          L1,A2,10,2026-02-01,
+      - input: ref('tuition_rates')
+        format: csv
+        rows: |
+          award_type,rate_year,rate_per_credit_point
+          graduate certificate,2026,420
+          master,2026,480
+    expect:
+      format: csv
+      rows: |
+        learner_key,award_key,credit_points_recognised,rate_per_credit_point,tuition_forgone
+        L1,A1,10,420,4200
+        L2,A1,0,420,0

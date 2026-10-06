@@ -1,4 +1,4 @@
-/* Learning Data: "Pausa para pensar" de Un modelo no es una transformación, en español. Mantén las claves iguales a think.en.js.
+/* Learning Data: "Pausa para pensar" de Decláralo, luego constrúyelo, en español. Mantén las claves iguales a think.en.js.
    La película se detiene al final de cuatro capítulos (recap, name, lives, steps), con una pregunta cada vez. think.js las muestra,
    y las lista otra vez en "Piénsalo" (#think-list). Cada "stop" es un lab de esta película que enseña la misma idea;
    el .player data-labs de la página dice dónde están esos labs. */
@@ -12,8 +12,8 @@ think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar
     opts:[{t:"El modelo de datos: lo que los datos deben ser."},{t:"Una consulta: un paso que hace una tabla o una vista.",ok:true},{t:"La tabla misma, con sus filas."}],
     why:"Un modelo de dbt es un SELECT y su configuración: un paso de la obra. El modelo de datos es lo que esa tabla debe ser, declarado a su lado."},
   "lives":{stop:"lives",q:"Necesitas saber qué significa una fila de una tabla. ¿Dónde miras?",
-    opts:[{t:"En el SQL que la construye."},{t:"En su YAML (la granularidad, la clave, el contrato) y en el Markdown al que apunta.",ok:true},{t:"En la tabla: contando las filas."}],
-    why:"El SQL dice cómo se hace la tabla, no qué debe ser una fila. La granularidad, las claves y el significado se declaran en YAML y Markdown, junto al código."},
+    opts:[{t:"En el SQL que la construye."},{t:"En su YAML (la granularidad, la clave, el contrato) y en el modelo conceptual a su lado (qué significa cada cosa).",ok:true},{t:"En la tabla: contando las filas."}],
+    why:"El SQL dice cómo se hace la tabla, no qué debe ser una fila. La granularidad y las claves se declaran en el YAML del modelo, y el significado en el modelo conceptual del dominio, junto al código."},
   "steps":{stop:"steps",q:"Un agente redacta tus pruebas y tu SQL. ¿Qué sigue siendo tuyo?",
     opts:[{t:"Nada: si las pruebas pasan, está listo."},{t:"Aprobar: el significado, el contrato y el cambio. El agente redacta y comprueba, con evidencia.",ok:true},{t:"Solo escribir el mensaje del commit."}],
     why:"El agente recomienda; las personas aprueban. Redactar ya es barato; juzgar el borrador, y ser dueño del significado, sigue siendo el trabajo."}

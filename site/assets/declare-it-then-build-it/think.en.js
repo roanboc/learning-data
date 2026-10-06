@@ -1,4 +1,4 @@
-/* Learning Data: "Pause and think" for A model is not a transformation, in English. Keep the keys in step with think.es.js.
+/* Learning Data: "Pause and think" for Declare it, then build it, in English. Keep the keys in step with think.es.js.
    The film stops at the end of four chapters (recap, name, lives, steps), with one question each. think.js shows them,
    and lists them again under "Think it through" (#think-list). Each "stop" is this film's own lab that teaches the same idea;
    the page's .player data-labs says where those labs are. */
@@ -12,8 +12,8 @@ think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",ski
     opts:[{t:"The data model: what the data must be."},{t:"One query: a step that makes one table or view.",ok:true},{t:"The table itself, with its rows."}],
     why:"A dbt model is a SELECT and its configuration: one step of the building work. The data model is what that table must be, declared beside it."},
   "lives":{stop:"lives",q:"You need to know what one row of a table means. Where do you look?",
-    opts:[{t:"In the SQL that builds it."},{t:"In its YAML (the grain, the key, the contract) and the Markdown it points to.",ok:true},{t:"In the table: count the rows."}],
-    why:"The SQL says how the table is made, not what one row must be. The grain, the keys and the meaning are declared in YAML and Markdown, beside the code."},
+    opts:[{t:"In the SQL that builds it."},{t:"In its YAML (the grain, the key, the contract) and the conceptual model beside it (what each thing means).",ok:true},{t:"In the table: count the rows."}],
+    why:"The SQL says how the table is made, not what one row must be. The grain and the keys are declared in the model's YAML, and the meaning in the domain's conceptual model, beside the code."},
   "steps":{stop:"steps",q:"An agent drafts your tests and your SQL. What's still yours?",
     opts:[{t:"Nothing: if the tests pass, it's done."},{t:"Approving: the meaning, the contract and the change. The agent drafts and checks, with evidence.",ok:true},{t:"Only typing the commit message."}],
     why:"The agent recommends; people approve. Drafting is cheap now; judging the draft, and owning the meaning, is still the job."}

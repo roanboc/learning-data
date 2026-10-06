@@ -26,12 +26,12 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La solución no es una quinta copia, ni una mejor. La definición ya tiene un hogar. Todo lo demás debe salir de él.",
 "Meaning lives in the conceptual model: what each thing is, its key, and who owns it.":
 "El significado vive en el modelo conceptual: qué es cada cosa, su clave y quién es su dueño.",
-"Decisions live in Markdown, with why and who. So do the gaps the team accepted.":
-"Las decisiones viven en Markdown, con el porqué y el quién. También los vacíos que el equipo aceptó.",
+"Decisions live in a log beside what they're about, with why and who. The gaps the team accepted live on the model, as known limitations.":
+"Las decisiones viven en un registro junto a aquello de lo que tratan, con el porqué y el quién. Los vacíos que el equipo aceptó viven en el modelo, como limitaciones conocidas.",
 "Everything the build uses lives in YAML: grain, keys, contracts, tests and owners.":
 "Todo lo que usa el build vive en YAML: grano, claves, contratos, tests y dueños.",
-"A decision log isn't a copy. It holds why, and YAML has no place for why.":
-"Un registro de decisiones no es una copia. Guarda el porqué, y en YAML no hay lugar para el porqué.",
+"A decision log isn't a copy. It holds why, which a model's YAML has no place for.":
+"Un registro de decisiones no es una copia. Guarda el porqué, y el YAML de un modelo no tiene lugar para él.",
 "So the award is defined once, in the conceptual model.":
 "Así que el título se define una vez, en el modelo conceptual.",
 "A script turns each definition into a doc block, on a Markdown page it writes itself. Nobody edits that page.":

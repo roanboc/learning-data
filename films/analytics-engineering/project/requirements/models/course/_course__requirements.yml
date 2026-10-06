@@ -1,0 +1,17 @@
+# The course domain's requirements. The schema is in requirements/README.md.
+scope:
+  kind: domain
+  name: course
+  code: CRS
+
+items:
+
+  - id: DEC-CRS-01
+    type: decision
+    step: build
+    title: The award needs no intermediate step
+    text: The award has one source and nothing to resolve, so core_award reads its staging model directly.
+    why: An intermediate step is for matching keys, stitching timelines and applying rules; the award needs none of them (docs/conventions.md, Layers).
+    status: delivered
+    implemented_in: [core_award]
+

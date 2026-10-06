@@ -207,7 +207,7 @@ every_credential as (
 
 ),
 
--- a credential whose holder has no key can't reach anyone: it stays out (see docs/gaps.md)
+-- a credential whose holder has no key can't reach anyone: it stays out (see GAP-SC-02 and LIM-SC-01 in docs/registers.md)
 held as (
 
     select

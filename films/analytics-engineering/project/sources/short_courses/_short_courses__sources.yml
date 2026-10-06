@@ -13,7 +13,15 @@ sources:
         error_after: {count: 7, period: day}
       meta:
         owner: Learning team
-        key_set: SC
+        key_set:
+          code: SC
+          system: short-course platform
+          owner: Learning team
+          # Each key the system issues, and the case staging writes it in (docs/conventions.md).
+          system_keys:
+            - {key: customer_email, case: lower, example: grace.okafor@mail.example}
+            - {key: enrolment_id, case: upper, example: C-88}
+          example: SC|grace.okafor@mail.example
     tables:
       - name: learners
         description: >

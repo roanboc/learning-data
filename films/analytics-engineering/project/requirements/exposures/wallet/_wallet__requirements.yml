@@ -1,0 +1,42 @@
+# The wallet app's requirements: its question, and what it needs from the output. The schema is in
+# requirements/README.md.
+scope:
+  kind: consumer
+  name: wallet
+  code: WAL
+
+items:
+
+  - id: Q-WAL-01
+    type: question
+    step: scope
+    title: What a learner holds now
+    text: >
+      What does this learner hold now, and how far are they from the award they're enrolled in?
+    decision: What the app shows a learner, and what they can share with an employer.
+    raised_by: The learner's wallet app
+    owner: Wallet app team
+    status: delivered
+    implemented_in: [mart_wallet__learners, mart_wallet__credentials, wallet_app]
+
+  - id: DEC-WAL-01
+    type: decision
+    step: consumer_output
+    title: The wallet's marts are as they are now
+    text: The wallet's marts are as they are now.
+    why: The wallet shows the learner today. It builds on the same core as Planning.
+    decided_by: Planning, the wallet app team and Noor
+    decided_on: 2026-10-08
+    status: delivered
+    implemented_in: [mart_wallet__learners, mart_wallet__credentials]
+    relates_to: [DEC-PLN-02]
+
+  - id: REQ-WAL-01
+    type: requirement
+    step: consumer_output
+    title: One lookup per learner
+    text: One wide row per learner, so the app reads a learner in one lookup.
+    raised_by: Wallet app team
+    owner: Wallet app team
+    status: delivered
+    implemented_in: [mart_wallet__learners]

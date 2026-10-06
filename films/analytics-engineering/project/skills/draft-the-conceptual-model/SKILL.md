@@ -18,7 +18,7 @@ in the conceptual model of the domain that owns each entity (`models/core/<domai
    - `business_key`: what identifies it in business terms, who issues it, and the key set it's qualified by;
    - `identity`: the rules that say two records are the same one, most trusted first;
    - `history`: which dates version it.
-4. **Combine or split.** Two candidates with the same identity and the same lifecycle are one entity, with kinds (a microcredential is a kind of credential). A different grain or lifecycle is a separate entity. Write the reason in `docs/decisions.md` as a proposal.
+4. **Combine or split.** Two candidates with the same identity and the same lifecycle are one entity, with kinds (a microcredential is a kind of credential). A different grain or lifecycle is a separate entity. Write the reason as a decision in the domain's register (`requirements/models/<domain>/`), with `status: open`, as a proposal.
 5. **Relationships**: the two entities, the cardinality in words, and, when it carries rules, its definition, owner and rules. Numbers a rule uses are vars in `dbt_project.yml`, named, not written out.
 6. **Regenerate and check**: `python scripts/generate/definitions.py`, then `dbt parse --profiles-dir .`. Mark each new entity as modelled on the map, under its domain (the script fails until the map and the domains agree), and update the domain's hand-drawn diagram (`_<domain>__conceptual.md`) to match.
 7. **Hand it to the owners**, in a pull request: each definition, key and rule, with where it came from (glossary entry, catalog table, a person). Mark anything you inferred as a question.

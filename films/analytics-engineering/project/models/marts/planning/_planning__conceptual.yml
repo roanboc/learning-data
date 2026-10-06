@@ -1,19 +1,15 @@
-# Planning's conceptual model: the question Planning asks, and the one concept it adds to the core.
+# Planning's conceptual model: the question it answers, and the one concept it adds to the core.
 #
 # Not parsed by dbt (.dbtignore). scripts/generate/definitions.py turns each definition into a doc
-# block in _planning__definitions.md, next to this file, and checks that every entity it uses is
-# defined in a core domain. The diagram is drawn by hand in _planning__conceptual.md.
+# block in _planning__definitions.md, next to this file, and checks that every entity it uses is defined
+# in a core domain, and that the question it answers is in a register. The diagram is drawn by hand
+# in _planning__conceptual.md.
 
 domain: planning
 kind: mart
 
-question:
-  asked_by: Planning
-  text: >
-    How many learners are within 15 credit points of a graduate certificate, by faculty,
-    as at census date?
-  decision: >
-    How many places to offer in each faculty's final graduate certificate units next semester.
+# The question this mart answers, in its register: requirements/exposures/planning/.
+answers: Q-PLN-01
 
 # The core's entities this mart reads, as they were on the census date.
 uses: [learner, award, credit_towards_award]

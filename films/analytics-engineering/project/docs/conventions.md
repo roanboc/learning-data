@@ -67,15 +67,6 @@ The conceptual model is written at two levels:
   entities; a mart states its question, the core entities it uses, and any concept it adds
   (Planning's learner near an award, the wallet's learner's wallet).
 
-The university keeps a business glossary outside dbt (on Databricks, in Unity Catalog). Where it
-defines an entity, the glossary is the home of the definition, not the project: data governance
-names the term that applies, and the conceptual model takes its words and records the term in
-`source:` (`glossary`, `term`, `named_by`, `synced_on`), adding only what the glossary doesn't
-hold, such as keys, identity rules and history. An entity the glossary doesn't define is defined
-in the conceptual model, once governance confirms there's no term for it. The copy flows one way,
-from the glossary in: `skills/sync-the-glossary/` compares them on a schedule, and a changed term
-arrives as a pull request that says what it touches, for the owner to approve (DEC-PRJ-11).
-
 Each core domain and mart's folder holds its data definitions, next to its models:
 
 | File | What it holds |
@@ -237,3 +228,14 @@ to itself, and they meet only on the public core. `examples/planning/` sketches 
 - `meta.limitations` on a model or a source table: what anyone using it needs to know and can't change, as `[{id: LIM-<SCOPE>-<nn>, text}]`, with `was:` naming the gap it came from, if any. An accepted gap ends here, with the decision that accepted it in the scope's log.
 - `meta.personal_data` on columns: `direct` (identifies a person: name, email, student ID, or a key that contains one) or `pseudonymous` (a hash of one). A column with neither holds no personal data.
 - A description used in more than one place is a doc block, written once, in the folder of the domain that owns it (`_<domain>__columns.md`), or in `models/_shared/_shared__columns.md` when every domain shares it. A definition is written once, in the domain's conceptual model, or taken from the glossary term it names in `source:`.
+
+### Definitions from the business glossary
+
+The university keeps a business glossary outside dbt (on Databricks). Where it
+defines an entity, the glossary is the home of the definition, not the project: data governance
+names the term that applies, and the conceptual model takes its words and records the term in
+`source:` (`glossary`, `term`, `named_by`, `synced_on`), adding only what the glossary doesn't
+hold, such as keys, identity rules and history. An entity the glossary doesn't define is defined
+in the conceptual model, once governance confirms there's no term for it. The copy flows one way,
+from the glossary in: `skills/sync-the-glossary/` compares them on a schedule, and a changed term
+arrives as a pull request that says what it touches, for the owner to approve (DEC-PRJ-11).

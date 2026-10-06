@@ -11,6 +11,14 @@ The award's hash key: the sha-256 of `award_bk`.
 The award's business key, readable and qualified by its key set: `SIS|GCDA`.
 {% enddocs %}
 
+{% docs award_code %}
+The registrar's code for the award, like `GCDA`.
+{% enddocs %}
+
+{% docs award_name %}
+The award's name.
+{% enddocs %}
+
 {% docs award_type %}
 The kind of award: `graduate certificate` or `master`.
 {% enddocs %}

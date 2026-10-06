@@ -27,5 +27,13 @@
   "labs_lead": "Four labs, one idea each, in the order of the film. Pick a question with a decision behind it, sort what's in its slice, decide what's a kind of credential, and give each meaning its owner.",
   "labs_lead_es": "Cuatro labs, una idea cada uno, en el orden de la película. Elige una pregunta con una decisión detrás, separa lo que entra en su porción, decide qué es un tipo de credencial, y da a cada significado su responsable.",
   "quiz_lead": "Eight situations an analytics engineer really faces: a request to model everything, a learner defined as a row, fees mid-build, three words for one learner, two definitions of award, credit for attending, reasons to split, and a question with no decision. Decide what you'd do; each answer explains why.",
-  "quiz_lead_es": "Ocho situaciones que un analytics engineer enfrenta de verdad: un pedido de modelarlo todo, un estudiante definido como una fila, aranceles a mitad de camino, tres palabras para un estudiante, dos definiciones de título, créditos por asistir, razones para separar, y una pregunta sin decisión. Decide qué harías; cada respuesta explica por qué."
+  "quiz_lead_es": "Ocho situaciones que un analytics engineer enfrenta de verdad: un pedido de modelarlo todo, un estudiante definido como una fila, aranceles a mitad de camino, tres palabras para un estudiante, dos definiciones de título, créditos por asistir, razones para separar, y una pregunta sin decisión. Decide qué harías; cada respuesta explica por qué.",
+  "repo": {
+    "ask": ["models/marts/planning/_planning__conceptual.yml", "profiles.yml", "macros/shared/keys.sql"],
+    "slice": ["models/marts/planning/_planning__conceptual.yml", "models/marts/planning/_planning__decisions.yml"],
+    "yaml": ["models/core/student/_student__conceptual.yml", "models/core/student/_student__conceptual.md"],
+    "owners": ["sources/student_system/_student_system__sources.yml", "sources/learning_platform/_learning_platform__sources.yml", "sources/short_courses/_short_courses__sources.yml"],
+    "split": ["models/core/student/_student__conceptual.yml", "models/intermediate/student/int_credentials_unioned.sql"],
+    "draft": ["skills/draft-the-conceptual-model/SKILL.md", "models/core/student/_student__conceptual.yml", "models/core/student/_student__decisions.yml"]
+  }
 }

@@ -27,5 +27,13 @@
   "labs_lead": "Four labs, one idea each, in the order of the film. Back each claim with its query, put the identity rules in order, decide which records are the same learner, and try to break the hash.",
   "labs_lead_es": "Cuatro labs, una idea cada uno, en el orden de la película. Respalda cada afirmación con su consulta, ordena las reglas de identidad, decide qué registros son la misma estudiante, e intenta romper el hash.",
   "quiz_lead": "Eight situations an analytics engineer really faces: two accounts with one student ID, a shared email, an agent's claim with no query, hashes that moved overnight, a pull request that drops the readable key, a credential nobody earned, a reopened account, and a new status code. Decide what you'd do; each answer explains why.",
-  "quiz_lead_es": "Ocho situaciones que un analytics engineer enfrenta de verdad: dos cuentas con un mismo ID de estudiante, un correo compartido, la afirmación de un agente sin consulta, hashes que cambiaron de un día para otro, un pull request que quita la clave legible, una credencial que nadie ganó, una cuenta reabierta, y un código de estado nuevo. Decide qué harías; cada respuesta explica por qué."
+  "quiz_lead_es": "Ocho situaciones que un analytics engineer enfrenta de verdad: dos cuentas con un mismo ID de estudiante, un correo compartido, la afirmación de un agente sin consulta, hashes que cambiaron de un día para otro, un pull request que quita la clave legible, una credencial que nadie ganó, una cuenta reabierta, y un código de estado nuevo. Decide qué harías; cada respuesta explica por qué.",
+  "repo": {
+    "profile": ["analyses/profiling/profile_null_keys.sql", "analyses/profiling/profile_shared_emails.sql", "analyses/profiling/profile_orphans.sql"],
+    "sets": ["seeds/reference/shared/key_sets.csv", "macros/shared/keys.sql", "models/staging/short_courses/stg_short_courses__learners.sql"],
+    "rules": ["models/intermediate/student/int_learner_key_candidates.sql", "models/intermediate/student/int_learner_keys_matched.sql", "models/core/student/_student__conceptual.yml"],
+    "apart": ["seeds/reference/student/learner_identity_decisions.csv", "models/intermediate/student/int_learner_key_candidates.sql", "tests/rules/keys_decided_different_stay_apart.sql"],
+    "hash": ["macros/shared/keys.sql"],
+    "codes": ["seeds/reference/student/status_map.csv", "seeds/reference/student/_student__seeds.yml"]
+  }
 }

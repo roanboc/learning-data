@@ -1,0 +1,19 @@
+# Decisions about the finance consumer: what was decided, why, and who decided.
+# Permanent: a decision is never deleted; a replaced one is marked superseded and relates to
+# what replaced it. The schema is in requirements/README.md, and docs/decisions.md indexes
+# every log. Not parsed by dbt (.dbtignore).
+
+scope: {kind: consumer, name: finance, code: FIN}
+
+decisions:
+
+  - id: DEC-FIN-01
+    step: scope
+    title: Recognised credit only, on the public core
+    text: Finance's question counts recognised credit only, from microcredentials and short-course
+      certificates; units passed are paid for. It reads the public core, and touches no other domain.
+    why: Only recognised credit saves tuition. A new consumer builds on what the core publishes, so no
+      other team's work changes.
+    decided_by: Finance, with Noor, data architect
+    decided_on: 2026-10-19
+    status: agreed

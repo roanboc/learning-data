@@ -12,6 +12,6 @@ const BREATH={
 "validate":{"hold":{"reconcile":1.0,"diff":0.8,"nothing":0.8,"signoff":1.2}},
 "ship":{"hold":{"pr":0.4,"last":0.8,"gone":1.0,"check":0.8,"approve":1.0}},
 "once":{"hold":{"review":0.4,"two":0.8,"home":0.8,"zero":1.0}},
-"evolve":{"hold":{"pin":0.6,"choice":0.8,"move":0.8,"list":1.2}},
+"evolve":{"hold":{"pin":0.8,"choice":1.0,"move":1.0,"list":1.2}},
 "building":{"hold":{"ten":0.8,"stay":0.8,"work":1.0,"homes":1.0,"lives":0.8,"next":1.0,"series":1.0,"blueprint":1.0},"breathe":4.6}
 };

@@ -64,8 +64,8 @@ const NARR={
 "evolve":{"name":"Ready to move","lead":1.0,"tail":1.0,"vo":[
  {"id":"pin","gap":0.8,"text":"Step ten: operate and evolve. Finance pins the versions of the core it reads."},
  {"id":"choice","gap":0.8,"text":"A new version reaches Finance as a choice with a date, and the lineage names Finance among who to tell."},
- {"id":"move","gap":0.8,"text":"And because every Finance file lives under a path named for it, Finance can move out to a project of its own, whole."},
- {"id":"list","gap":0.8,"text":"Its marts, its exposure, its seeds and its decisions. Nothing else needs untangling."}]},
+ {"id":"move","gap":0.8,"text":"And because Finance's folders were named for it from the first commit, Finance can move out to a project of its own, whole."},
+ {"id":"list","gap":0.8,"text":"Its marts, its exposure, its seeds, its decisions, and the test and two analyses it was built with."}]},
 "building":{"name":"The whole building","lead":1.0,"tail":1.0,"vo":[
  {"id":"ten","gap":0.8,"text":"Ten steps, ten commits. You can replay them one by one, in the repository."},
  {"id":"stay","gap":0.8,"text":"Some files arrived to stay: the question, the decisions, the contract, the tests, the model."},

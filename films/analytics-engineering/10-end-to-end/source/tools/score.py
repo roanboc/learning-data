@@ -225,7 +225,7 @@ knock(S0('validate') + 0.4, 0.03, 0.2)
 lines(S0('validate') + 0.8, 4, 0.3, 0.018, 0.2)
 soft(62, W('validate', 'reconcile', 'is zero'), 0.032, 0.2)
 knock(G('validate', 'diff'), 0.03, 0.2)
-lines(G('validate', 'diff', 0.4), 7, 0.25, 0.016, 0.2)
+lines(G('validate', 'diff', 0.4), 8, 0.25, 0.016, 0.2)
 swell([50, 57, 62, 66], W('validate', 'nothing', 'No key added'), 2.6, 0.022)
 soft(57, W('validate', 'nothing', 'A new consumer'), 0.03, 0.3)
 soft(57, W('validate', 'signoff', 'signs off', 0.3), 0.032, -0.2); soft(62, W('validate', 'signoff', 'signs off', 0.5), 0.03, -0.2)
@@ -265,8 +265,8 @@ for i in range(3):
     knock(W('once', 'zero', 'generated pages', i * 0.3), 0.02, 0.2)
 
 # 11. Ready to move: the pinned refs (a knock, then a stamp); version 1 and version 2 (knocks), the choice with a date (paper); who
-#     to tell (a felt note); Finance's folders (a key each), gathering into a project of its own (a swell); nothing else needs
-#     untangling (two felt notes)
+#     to tell (a felt note); Finance's folders (a key each), gathering into a project of its own (a swell); the test and two
+#     analyses it was built with (knocks), and the project whole (two felt notes)
 bed('evolve', [DMAJ9, BM7, EM9, A7, GMAJ7, DMAJ9])
 knock(S0('evolve') + 0.4, 0.03, 0.2)
 press(W('evolve', 'pin', 'pins'), 0.05)
@@ -277,7 +277,9 @@ soft(62, W('evolve', 'choice', 'who to tell'), 0.03, 0.3)
 for i in range(5):
     tap(G('evolve', 'move', 0.2 + i * 0.18), 0.022, -0.3)
 swell([50, 57, 62, 66], W('evolve', 'list', 'Its marts', -0.2), 2.4, 0.024)
-soft(57, W('evolve', 'list', 'Nothing else'), 0.032, 0.2); soft(62, W('evolve', 'list', 'Nothing else', 0.2), 0.03, 0.2)
+for i in range(3):
+    knock(W('evolve', 'list', 'the test and', i * 0.25), 0.024, 0.4)
+soft(57, W('evolve', 'list', 'built with'), 0.032, 0.2); soft(62, W('evolve', 'list', 'built with', 0.2), 0.03, 0.2)
 
 # 12. The whole building: keys as the log is written; a knock for each file that stayed; the work's items struck through (paper);
 #     the three kinds of domain (a knock and a felt note each, rising); the three lifetimes (felt notes); the next question (paper),

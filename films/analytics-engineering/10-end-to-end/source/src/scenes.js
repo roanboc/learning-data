@@ -57,7 +57,7 @@ scene("floor",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
     arrive(ctx,1360,640,t,w("bridge","files that stay"),()=>tag(ctx,1360,640,"what stays",TRUST,{align:"center",size:20}),{dy:12});
     arrive(ctx,960,760,t,w("bridge","one new question"),()=>T(ctx,"one new question, from start to end",960,770,{w:700,size:30,align:"center",color:rgba(PARCH,1)}),{dy:14});});}
   ctx.restore();weedsTitle(ctx,S,t,B,"End to end","one question, every file it touches, and the ones that leave",WEED);
-  if(t>B){ctx.save();drift(ctx,t,sc,{z:0.04,y:500});withA(ctx,0.5*fin(t,B+0.3,1.0),()=>ee_window(ctx,960,1010,90,t,1));ctx.restore();}
+  if(t>B){ctx.save();drift(ctx,t,sc,{z:0.04,y:500});withA(ctx,0.5*fin(t,B+0.3,1.0),()=>ee_window(ctx,960,1056,58,t,1));ctx.restore();}
   fadeIn(ctx,S,t);vign(ctx,S);});
 
 /* ---------- 2. A new question (step 1: scope) ---------- */
@@ -255,7 +255,7 @@ scene("build",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
 
 /* ---------- 8. Nothing else moved (step 7: validate) ---------- */
 const EE_R7=[["+","reconcile_tuition_report.sql","analyses/validation/",""]];
-const EE_DIFF=[["core_learner_v1","0","0","0"],["core_award_v1","0","0","0"],["core_credential_v2","0","0","0"],["core_credit_towards_award_v1","0","0","0"],["mart_planning__near_award","0","0","0"],["mart_wallet__learners","0","0","0"],["mart_wallet__credentials","0","0","0"]];
+const EE_DIFF=[["core_learner_v1","0","0","0"],["core_award_v1","0","0","0"],["core_credential_v1","0","0","0"],["core_credential_v2","0","0","0"],["core_credit_towards_award_v1","0","0","0"],["mart_planning__near_award","0","0","0"],["mart_wallet__learners","0","0","0"],["mart_wallet__credentials","0","0","0"]];
 scene("validate",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);ee_bg(ctx,S,t,sc);
   const cD=c("diff"),cN=c("nothing"),E=sc.dur;
   // faculty by faculty, against Finance's report: zero difference
@@ -332,6 +332,7 @@ scene("once",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);e
 /* ---------- 11. Ready to move (step 10: operate and evolve) ---------- */
 const EE_R10=[["~","mart_finance__tuition_forgone.sql","models/marts/finance/",""],["~","_finance__models.yml","models/marts/finance/",""],["~","_finance__exposures.yml","exposures/finance/",""],["~","conventions.md","docs/",""],["~","README.md","",""]];
 const EE_PIN=["learners as (","    select * from {{ ref('core_learner', v=1) }}","…","    select * from {{ ref('core_award', v=1) }}","…","    select * from {{ ref('core_credit_towards_award', v=1) }}"];
+const EE_TAKE=["reconcile_finance_with_tuition_report.sql","profile_credit_across_awards.sql","reconcile_tuition_report.sql"];
 const EE_MOVE=[["models/marts/finance/",EE_FIN],["exposures/finance/",EE_FIN],["seeds/reference/finance/",EE_FIN],["seeds/expected/finance/",EE_FIN],["_finance__decisions.yml",KIND]];
 scene("evolve",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);ee_bg(ctx,S,t,sc);
   const cC=c("choice"),cM=c("move"),cL=c("list"),E=sc.dur;
@@ -347,12 +348,13 @@ scene("evolve",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   // Finance can move out to a project of its own, whole: its paths gather into one box
   const mA=fin(t,cM-0.2,0.6);
   if(mA>0.01){const g=ease(fin(t,w("list","Its marts")-0.2,1.6));
-    arrive(ctx,EE_RX+EE_RW/2,500,t,cM,()=>{withA(ctx,g,()=>{glass(ctx,EE_RX+560,190,600,520,20,EE_FIN,{glow:18,ea:0.85,fill:"rgba(7,12,24,0.94)"});T(ctx,"Finance's own project",EE_RX+590,236,{w:800,size:24,color:rgba(EE_FIN,1)});
+    arrive(ctx,EE_RX+EE_RW/2,500,t,cM,()=>{withA(ctx,g,()=>{glass(ctx,EE_RX+560,190,600,610,20,EE_FIN,{glow:18,ea:0.85,fill:"rgba(7,12,24,0.94)"});T(ctx,"Finance's own project",EE_RX+590,236,{w:800,size:24,color:rgba(EE_FIN,1)});
         T(ctx,"refs the public core across projects",EE_RX+590,268,{w:600,size:19,color:rgba(SOFT,1)});});
-      EE_MOVE.forEach(([p,col],i)=>{const x0=EE_RX,y0=220+i*100,x1=EE_RX+590,y1=330+i*74,q=fin(t,cM+0.2+i*0.18,0.4);ee_folder(ctx,lerp(x0,x1,g),lerp(y0,y1,g),p,col,{a:q,on:0.4*q});});
-      withA(ctx,1-g,()=>tag(ctx,EE_RX,740,"every Finance file, under a path named for it",EE_FIN,{size:20}));},{dy:20});
-    arrive(ctx,EE_RX+280,780,t,w("list","Nothing else"),()=>tag(ctx,EE_RX,780,"nothing else needs untangling",GOOD,{size:22}),{dy:12});}
-  const on=[w("pin","pins"),w("choice","choice"),w("choice","who to tell"),w("move","path named"),w("move","project of its own")].map(x=>fin(t,x,0.4));
+      EE_MOVE.forEach(([p,col],i)=>{const x0=EE_RX,y0=220+i*100,x1=EE_RX+590,y1=320+i*66,q=fin(t,cM+0.2+i*0.18,0.4);ee_folder(ctx,lerp(x0,x1,g),lerp(y0,y1,g),p,col,{a:q,on:0.4*q});});
+      withA(ctx,1-g,()=>tag(ctx,EE_RX,740,"Finance's folders, named for it from the first commit",EE_FIN,{size:20}));},{dy:20});
+    // and the one test and two analyses it was built with: split by purpose, so they're named one by one
+    EE_TAKE.forEach((f,i)=>arrive(ctx,EE_RX+860,650+i*54,t,w("list","the test and")+i*0.25,()=>ee_node(ctx,EE_RX+600,650+i*54,f,i?SOFT:TRUST,{on:0.4}),{dy:12}));}
+  const on=[w("pin","pins"),w("choice","choice"),w("choice","who to tell"),w("move","folders were named"),w("move","project of its own")].map(x=>fin(t,x,0.4));
   arrive(ctx,EE_CX+EE_CW/2,320,t,0.3,()=>ee_commit(ctx,EE_CX,150,EE_CW,9,"pinned, and ready to move out",EE_R10,{on}),{dy:24});
   ee_top(ctx,S,t,9,fin(t,E-1.6,0.6));});
 

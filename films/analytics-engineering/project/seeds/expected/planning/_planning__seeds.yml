@@ -12,7 +12,7 @@ seeds:
         learners_near_graduate_certificate: int
         published_by: string
         published_on: date
-      meta: {owner: "Census team, registrar's office", domain: planning}
+      meta: {owner: "Census team, registrar's office", domain: planning, purpose: expected}
     data_tests:
       - unique_combination:
           arguments:

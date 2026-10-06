@@ -9,7 +9,7 @@ Know what a source really holds before a model assumes anything about it.
 
 ## Steps
 
-1. **Read what's known.** The source's YAML in `models/staging/<system>/`, its key set in `seeds/shared/key_sets.csv`, and any gap about it in `docs/gaps.md`.
+1. **Read what's known.** The source's YAML in `models/staging/<system>/`, its key set in `seeds/reference/shared/key_sets.csv`, and any gap about it in `docs/gaps.md`.
 2. **Run the profiling queries** in `analyses/`, on the development target:
    - `profile_key_uniqueness`: is the system key unique among current versions? Is an email enough to identify one person?
    - `profile_null_keys`: which keys are missing or blank?

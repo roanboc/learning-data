@@ -34,7 +34,7 @@
 - Business key: The learner's business key and the award's, together.
 - Owner of the meaning: Mei Tanaka, registrar's office.
 - Rule: A unit counts only with a passing grade (var passing_grades).
-- Rule: A microcredential counts towards each award that recognises it; the faculties decide which, in seeds/student/credit_recognition.csv.
+- Rule: A microcredential counts towards each award that recognises it; the faculties decide which, in seeds/reference/student/credit_recognition.csv.
 - Rule: An award accepts a limited number of microcredentials towards its credit, the first ones issued (var microcredentials_per_award).
 - Rule: A revoked credential never counts, from the day it's revoked.
 - Rule: Credit changes over time, and every change is a new version.

@@ -24,7 +24,7 @@ models:
         config:
           meta: {personal_data: direct}
       - name: status_code
-        description: The platform's customer status. Mapped to the canonical set in seeds/student/status_map.csv.
+        description: The platform's customer status. Mapped to the canonical set in seeds/reference/student/status_map.csv.
         data_tests:
           - accepted_values:
               arguments:

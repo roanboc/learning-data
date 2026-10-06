@@ -7,7 +7,7 @@
 # Student and Course packets. Where the business needs more than TCSI holds, the domain's file says so.
 #
 # Not parsed by dbt (.dbtignore). scripts/definitions.py turns each domain's definitions into a doc
-# block next to it, and the key sets below into seeds/shared/key_sets.csv.
+# block next to it, and the key sets below into seeds/reference/shared/key_sets.csv.
 #
 # The diagram of the whole slice is drawn by hand in _shared__conceptual.md, next to this file.
 

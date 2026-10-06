@@ -36,7 +36,7 @@ Then, if you like:
 | `dbt show --select profile_null_keys --profiles-dir .` | One of the evidence queries in `analyses/` |
 | `dbt show --select reconcile_census_report --profiles-dir .` | Planning's number beside the census report's |
 | `python scripts/diagrams.py` | Regenerates each domain's physical diagram (`_<domain>__physical.md`) from `target/manifest.json` |
-| `python scripts/definitions.py` | Regenerates each domain's definitions (`_<domain>__definitions.md`) and `seeds/shared/key_sets.csv` from the conceptual models |
+| `python scripts/definitions.py` | Regenerates each domain's definitions (`_<domain>__definitions.md`) and `seeds/reference/shared/key_sets.csv` from the conceptual models |
 | `pip install dbt-metricflow==0.15.0`, then `DBT_PROFILES_DIR=. mf query --metrics learners_near_graduate_certificate --group-by learner_award__faculty_name` | Planning's answer, from the semantic layer's metric |
 | `dbt clean --profiles-dir .` | Deletes `target/`, the database with it, for a clean start |
 
@@ -115,9 +115,11 @@ project/
 ├── profiles.yml              targets: duckdb (default), databricks
 ├── data/<system>/<table>.csv the three sources, every version kept (DuckDB only)
 ├── .dbtignore                keeps the conceptual models out of dbt's parse
-├── seeds/<domain>/           reference data the business owns, by domain: student (status map,
-│                             identity decisions, credit recognition), planning (the census
-│                             report), shared (key sets)
+├── seeds/
+│   ├── reference/<domain>/   data the business owns, that models join to: student (status map,
+│   │                         identity decisions, credit recognition), shared (key sets)
+│   └── expected/<domain>/    numbers published elsewhere, that tests reconcile against: planning
+│                             (the census report). No model reads them
 ├── models/                   organised by domain, following TCSI; each domain's folder holds its
 │   │                         models and its data definitions
 │   ├── overview.md           the docs site's front page
@@ -158,7 +160,7 @@ project/
 | *Built in layers* | The four layers and `docs/conventions.md`; import and logical CTEs; views, tables and the incremental `core_credential`; liquid clustering; the semantic layer, and `macros/near_award.sql`, where the rule and the count are written once |
 | *Who owns what* | `models/_groups.yml`; access and contracts in `dbt_project.yml` (set per folder; a model's YAML holds its grain, columns and tests); what each access level allows, in `docs/conventions.md`; `meta.owner` and `meta.domain`; the domain folders, following TCSI (`docs/conventions.md`, *Domains*); the exposures; the key sets, hashing macro and conventions that every domain shares; for *Across projects*, `examples/planning/` (dbt Cloud only, not run here) |
 | *An agent on the team* | `AGENTS.md`, with the agent's access; `docs/process.md`, the ten steps; `skills/`; the evidence in `analyses/`; the reconciliation test and `scripts/diff_against_main.py`; the CI workflow, and the `state:modified+` command above for CI on changed models |
-| *Written once* | Doc blocks in each domain's folder; each domain's conceptual model generated into its `_<domain>__definitions.md`, and the key sets into `seeds/shared/key_sets.csv`; each domain's `_<domain>__physical.md` generated from the manifest; `persist_docs`; `core_credential` versions 1 and 2, with a deprecation date, and the wallet's `ref('core_credential', v=2)` |
+| *Written once* | Doc blocks in each domain's folder; each domain's conceptual model generated into its `_<domain>__definitions.md`, and the key sets into `seeds/reference/shared/key_sets.csv`; each domain's `_<domain>__physical.md` generated from the manifest; `persist_docs`; `core_credential` versions 1 and 2, with a deprecation date, and the wallet's `ref('core_credential', v=2)` |
 
 ## What differs between engines
 

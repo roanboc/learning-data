@@ -34,7 +34,7 @@ The key of a learner and an award together: the sha-256 of `learner_bk` and `awa
 
 {% docs learner_status %}
 The learner's status, in the canonical set: `studying`, `inactive`, `withdrawn` or `completed`.
-Each system's own codes (ENR, active, 1, ...) are mapped in `seeds/student/status_map.csv`, owned by the
+Each system's own codes (ENR, active, 1, ...) are mapped in `seeds/reference/student/status_map.csv`, owned by the
 registrar's office. The student system's status wins over the platforms'.
 {% enddocs %}
 

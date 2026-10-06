@@ -29,7 +29,7 @@ models:
         config:
           meta: {personal_data: direct}
       - name: status_code
-        description: The student system's status code. Mapped to the canonical set in seeds/student/status_map.csv.
+        description: The student system's status code. Mapped to the canonical set in seeds/reference/student/status_map.csv.
         data_tests:
           - accepted_values:
               arguments:

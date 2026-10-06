@@ -115,7 +115,7 @@ models:
         description: '{{ doc("credential_name") }}'
         data_type: string
       - name: issued_by
-        description: The system that issued it, from seeds/shared/key_sets.csv.
+        description: The system that issued it, from seeds/reference/shared/key_sets.csv.
         data_type: string
       - name: issued_on
         description: '{{ doc("issued_on") }}'

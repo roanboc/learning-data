@@ -1,4 +1,4 @@
-"""Writes each domain's definitions and seeds/shared/key_sets.csv from the conceptual model.
+"""Writes each domain's definitions and seeds/reference/shared/key_sets.csv from the conceptual model.
 
 The meaning is written once, in the conceptual model: one file per domain, next to its core models
 (models/core/<domain>/_<domain>__conceptual.yml), and a shared one for the key sets
@@ -20,7 +20,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
 SOURCES = sorted((ROOT / "models").glob("**/_*__conceptual.yml"))
-KEY_SETS = ROOT / "seeds" / "shared" / "key_sets.csv"
+KEY_SETS = ROOT / "seeds" / "reference" / "shared" / "key_sets.csv"
 
 
 def one_line(text):
@@ -98,7 +98,7 @@ def main():
             print(f"{path.relative_to(ROOT)} is out of date: run python scripts/definitions.py", file=sys.stderr)
         if stale:
             return 1
-        print("the definitions and seeds/shared/key_sets.csv are up to date")
+        print("the definitions and seeds/reference/shared/key_sets.csv are up to date")
         return 0
     for path, text in outputs.items():
         path.write_text(text)

@@ -76,7 +76,7 @@ relationships:
     # The numbers these rules use live once, as vars in dbt_project.yml.
     rules:
       - A unit counts only with a passing grade (var passing_grades).
-      - A microcredential counts towards each award that recognises it; the faculties decide which, in seeds/student/credit_recognition.csv.
+      - A microcredential counts towards each award that recognises it; the faculties decide which, in seeds/reference/student/credit_recognition.csv.
       - An award accepts a limited number of microcredentials towards its credit, the first ones issued (var microcredentials_per_award).
       - A revoked credential never counts, from the day it's revoked.
       - Credit changes over time, and every change is a new version.

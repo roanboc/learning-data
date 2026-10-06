@@ -7,7 +7,7 @@ seeds:
       pull request they approve.
     config:
       column_types: {key_set: string, source_code: string, source_label: string, canonical_status: string}
-      meta: {owner: "Mei Tanaka, registrar's office", domain: student}
+      meta: {owner: "Mei Tanaka, registrar's office", domain: student, purpose: reference}
     data_tests:
       - unique_combination:
           arguments:
@@ -44,7 +44,7 @@ seeds:
         decided_by: string
         decided_on: date
         reason: string
-      meta: {owner: "Mei Tanaka, registrar's office", domain: student}
+      meta: {owner: "Mei Tanaka, registrar's office", domain: student, purpose: reference}
     columns:
       - name: decision_id
         description: The decision's ID.
@@ -91,7 +91,7 @@ seeds:
       towards which awards. Each faculty decides for its own awards.
     config:
       column_types: {key_set: string, credential_code: string, award_code: string, approved_by: string, approved_on: date}
-      meta: {owner: The faculties, domain: student}
+      meta: {owner: The faculties, domain: student, purpose: reference}
     data_tests:
       - unique_combination:
           arguments:

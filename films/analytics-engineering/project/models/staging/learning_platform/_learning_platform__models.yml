@@ -33,7 +33,7 @@ models:
         config:
           meta: {personal_data: direct}
       - name: account_status
-        description: The platform's account status. Mapped to the canonical set in seeds/student/status_map.csv.
+        description: The platform's account status. Mapped to the canonical set in seeds/reference/student/status_map.csv.
         data_tests:
           - accepted_values:
               arguments:

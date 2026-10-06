@@ -68,9 +68,18 @@ models:
       +group: planning
       +access: protected
 
+# Seeds are split by purpose first, then by domain. Never mix the two purposes in one folder.
 seeds:
   credentials:
-    +schema: reference
-    +group: credential_model
-    planning:
-      +group: planning
+    # Reference data the business owns: mappings, decisions, key sets. Models join to it.
+    reference:
+      +schema: reference
+      +group: credential_model
+      +tags: ["reference"]
+    # Expected values: numbers published outside this project, that tests and reconciliations
+    # compare against. No model may ref() them.
+    expected:
+      +schema: expected
+      +tags: ["expected"]
+      planning:
+        +group: planning

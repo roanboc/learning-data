@@ -7,13 +7,13 @@ the mart under it. This checks the metric itself, queried with MetricFlow on Duc
     dbt build --profiles-dir .
     DBT_PROFILES_DIR=. mf query --metrics learners_near_graduate_certificate \\
         --group-by learner_award__faculty_name,learner_award__census_date --csv target/metric.csv
-    python scripts/check_metric.py
+    python scripts/check/check_metric.py
 """
 import csv
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parents[2]
 
 
 def main():

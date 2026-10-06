@@ -1,7 +1,7 @@
 # The course domain's conceptual model: the awards the university offers. Owned by the registrar's
 # office.
 #
-# Not parsed by dbt (.dbtignore). scripts/definitions.py turns each definition into a doc block in
+# Not parsed by dbt (.dbtignore). scripts/generate/definitions.py turns each definition into a doc block in
 # _course__definitions.md, next to this file. The question and the key sets are in models/_shared/.
 
 domain: course

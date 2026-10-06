@@ -35,6 +35,16 @@ sources:
         config:
           meta:
             system_key: [enrolment_id]
+            limitations:
+              - id: LIM-SC-01
+                text: >
+                  An enrolment with no email gives a credential no one holds. It stays out of the
+                  core until the learning team adds the email.
+              - id: LIM-SC-02
+                was: GAP-SC-02
+                text: >
+                  Walk-in enrolments can have no email. The build warns on any, and stops above
+                  five.
         columns:
           - name: certificate_type
             description: '{{ doc("certificate_type") }}'

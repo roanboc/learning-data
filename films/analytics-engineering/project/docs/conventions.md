@@ -45,7 +45,8 @@ built and who uses it are never lost in each other's YAML:
 | `sources/<source>/` | `_<source>__sources.yml` and `_<source>__docs.md`. The source's key set is an attribute of the source (`meta.key_set`): its code, system, owner, and each system key with the case staging writes it in |
 | `models/` | The models, by layer and domain |
 | `exposures/<consumer>/` | `_<consumer>__exposures.yml`: the dashboards and apps that use the marts |
-| `requirements/` | The registers: questions, requirements, decisions, gaps and limitations, mirroring `sources/`, `models/<domain>/` and `exposures/`, plus `_project__requirements.yml`. Not read by dbt. See [`requirements/README.md`](../requirements/README.md) |
+| `requirements/` | Temporary: what's still open while something is built (questions, requirements, gaps), mirroring `sources/`, `models/<domain>/` and `exposures/`. Deleted when done; not a backlog. Not read by dbt. See [`requirements/README.md`](../requirements/README.md) |
+| `_<scope>__decisions.yml` | Permanent: each scope's decision log, next to what it's about (`sources/<system>/`, `models/core/<domain>/`, `models/marts/<consumer>/`, `models/_shared/` for the project). Indexed in `docs/decisions.md`. Not read by dbt (`.dbtignore`) |
 
 The conceptual model is written at two levels:
 
@@ -97,7 +98,7 @@ engine), it moves to `checks/`, as the SQL in its header shows.
 
 A source's folder holds its doc block and the columns only that source has
 (`_<source>__docs.md`). `docs/` holds how the work is done (process, conventions) and the
-generated index of the registers, not what the data means.
+generated index of the decision logs, not what the data means.
 
 ## Splitting into projects
 
@@ -110,11 +111,12 @@ for it, so when a team owns a domain, its project is those paths:
 | Seeds | `seeds/reference/student/` | `seeds/expected/planning/` |
 | Macros | | `macros/planning/` |
 | Exposures | | `exposures/planning/` |
-| Registers | `requirements/models/student/` | `requirements/exposures/planning/` |
-| Sources | The sources it reads, with their registers (`sources/<system>/`, `requirements/sources/<system>/`) | None: it reads the core |
+| Decisions | `models/core/student/_student__decisions.yml` | `models/marts/planning/_planning__decisions.yml` |
+| Open requirements | `requirements/models/student/`, if any | `requirements/exposures/planning/`, if any |
+| Sources | The sources it reads, with their decisions and open requirements (`sources/<system>/`, `requirements/sources/<system>/`) | None: it reads the core |
 
-What every domain shares (`models/_shared/`, `macros/shared/`, `seeds/reference/shared/`,
-`requirements/_project__requirements.yml`, these conventions) becomes a package each project
+What every domain shares (`models/_shared/`, with the project's decisions; `macros/shared/`;
+`seeds/reference/shared/`; these conventions) becomes a package each project
 installs. A consumer's project refs the public core across projects, as `examples/planning/`
 sketches.
 
@@ -187,5 +189,6 @@ to itself, and they meet only on the public core. `examples/planning/` sketches 
 - `meta.owner`: who owns the meaning (models) or the data (sources, seeds).
 - `meta.domain`: the domain that owns the model, seed or source: `student`, `course`, `learning` (the learning team's sources), `planning`, `wallet`, or `shared`.
 - `meta.glossary_term`: the term in the domain's conceptual model a model or key holds.
+- `meta.limitations` on a model or a source table: what anyone using it needs to know and can't change, as `[{id: LIM-<SCOPE>-<nn>, text}]`, with `was:` naming the gap it came from, if any. An accepted gap ends here, with the decision that accepted it in the scope's log.
 - `meta.personal_data` on columns: `direct` (identifies a person: name, email, student ID, or a key that contains one) or `pseudonymous` (a hash of one). A column with neither holds no personal data.
 - A description used in more than one place is a doc block, written once, in the folder of the domain that owns it (`_<domain>__columns.md`), or in `models/_shared/_shared__columns.md` when every domain shares it. A definition is written once, in the domain's conceptual model.

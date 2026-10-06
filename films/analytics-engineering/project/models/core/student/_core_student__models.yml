@@ -11,6 +11,23 @@ models:
         owner: Mei Tanaka, registrar's office
         domain: student
         glossary_term: learner
+        limitations:
+          - id: LIM-STU-02
+            text: >
+              A learner the student system doesn't know keeps the key of the first system that
+              recorded them. The learning platform comes first on a tie. The key changes only when
+              they're matched to a student ID, by a rule (a student ID in their platform account,
+              an email only one student has) or by the registrar's office. Their old key stays in
+              int_learner_keys.
+          - id: LIM-STU-03
+            text: >
+              A learner with two keys in one system gets one value per attribute. Two platform
+              accounts, or two short-course emails - on each date, that system's version recorded
+              last wins.
+          - id: LIM-STU-07
+            text: >
+              Platform dates are the day the platform recorded a change, not the day it happened.
+              Only the student system says when a change took effect.
     constraints:
       - type: primary_key
         name: pk_core_learner
@@ -103,6 +120,24 @@ models:
         owner: Mei Tanaka, registrar's office
         domain: student
         glossary_term: credential
+        limitations:
+          - id: LIM-STU-01
+            text: >
+              Revocation dates are the day a source stopped showing a credential as held. A badge:
+              the day the platform stopped showing it. A short-course certificate: the day its
+              enrolment stopped being completed. An award: the day a later record of the same
+              award stopped being completed. It may have been revoked earlier, and a badge deleted
+              for another reason also counts as revoked.
+          - id: LIM-STU-05
+            text: >
+              An incremental run re-merges only what changed. core_credential merges credentials
+              whose source rows were written since the last run, and credentials whose holder was
+              matched to another learner. A change to the model's logic reaches existing rows only
+              with --full-refresh.
+          - id: LIM-STU-06
+            was: GAP-STU-02
+            text: >
+              No source records an expiry. status allows expired; nothing sets it yet.
     columns:
       - name: credential_key
         description: '{{ doc("credential_key") }}'
@@ -211,6 +246,11 @@ models:
         owner: Mei Tanaka, registrar's office
         domain: student
         glossary_term: credit towards an award
+        limitations:
+          - id: LIM-STU-04
+            text: >
+              Units count only towards the award they were taken under. Credit moved between
+              awards when a learner changes award is outside this slice.
     constraints:
       - type: primary_key
         name: pk_core_credit_towards_award

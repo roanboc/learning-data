@@ -14,8 +14,8 @@ sources/<system>/_<system>__sources.yml); this script writes them into the seed 
 
 It also checks that they agree: every entity a domain defines is on the map as modelled, under
 that domain, and every modelled entity on the map is defined; every entity a mart uses is defined
-in a core domain; the question each mart answers is in a register (requirements/); the map's
-relationships name entities on it; the map keeps to its maximum.
+in a core domain, and every mart states its question; the map's relationships name entities on
+it; the map keeps to its maximum.
 
     python scripts/generate/definitions.py           # write the definitions and the key sets seed
     python scripts/generate/definitions.py --check   # fail if any is out of date
@@ -27,8 +27,6 @@ import sys
 from pathlib import Path
 
 import yaml
-
-from registers import items_by_id
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCES = sorted((ROOT / "models").glob("**/_*__conceptual.yml"))
@@ -108,7 +106,7 @@ def defined(model):
             | {r["name"] for r in model.get("relationships", []) if r.get("owner")})
 
 
-def validate(the_map, domains, questions):
+def validate(the_map, domains):
     problems = []
     on_map = {e["name"]: (d["name"], e["status"]) for d in the_map["domains"] for e in d["entities"]}
     if len(on_map) > the_map["max_entities"]:
@@ -124,10 +122,8 @@ def validate(the_map, domains, questions):
         if status == "modelled" and entity not in defined(core.get(domain, {})):
             problems.append(f"{entity} is modelled on the map: define it in the {domain} domain's conceptual model")
     for name, model in domains.items():
-        if model.get("kind") == "mart":
-            answers = questions.get(model.get("answers"))
-            if not answers or answers[1]["type"] != "question":
-                problems.append(f"the {name} mart answers {model.get('answers')}, which isn't a question in any register")
+        if model.get("kind") == "mart" and not (model.get("question") or {}).get("text"):
+            problems.append(f"the {name} mart has no question: write it under question:, with asked_by, text and decision")
         for entity in model.get("uses", []):
             if entity not in core_defined:
                 problems.append(f"the {name} mart uses {entity}, which no core domain defines")
@@ -144,7 +140,7 @@ def node(name):
     return f"e_{name}"
 
 
-def render_map(the_map, domains, questions):
+def render_map(the_map, domains):
     lines = ["```mermaid", "flowchart TB"]
     modelled = []
     for domain in the_map["domains"]:
@@ -176,9 +172,9 @@ def render_map(the_map, domains, questions):
     consumers = ["| Consumer | Asked by | Question | Uses |", "|---|---|---|---|"]
     for name, model in sorted(domains.items()):
         if model.get("kind") == "mart":
-            question = questions[model["answers"]][1]
-            consumers.append(f"| [{name}](../marts/{name}/_{name}__conceptual.yml) | {question['raised_by']} | "
-                             f"{one_line(question['text'])} ({model['answers']}) | {', '.join(model['uses'])} |")
+            question = model["question"]
+            consumers.append(f"| [{name}](../marts/{name}/_{name}__conceptual.yml) | {question['asked_by']} | "
+                             f"{one_line(question['text'])} | {', '.join(model['uses'])} |")
     count = sum(len(d["entities"]) for d in the_map["domains"])
     return "\n".join([
         "# The university's conceptual model",
@@ -214,11 +210,10 @@ def main():
         if model.get("domain"):
             domains[model["domain"]] = model
     the_map = yaml.safe_load(MAP.read_text())
-    questions = items_by_id()
-    validate(the_map, domains, questions)
+    validate(the_map, domains)
     outputs = {target(source): render(source) for source in SOURCES
                if yaml.safe_load(source.read_text()).get("domain")}
-    outputs[MAP.with_suffix(".md")] = render_map(the_map, domains, questions)
+    outputs[MAP.with_suffix(".md")] = render_map(the_map, domains)
     outputs[KEY_SETS] = render_key_sets()
     if args.check:
         stale = [path for path, text in outputs.items() if not path.exists() or path.read_text() != text]

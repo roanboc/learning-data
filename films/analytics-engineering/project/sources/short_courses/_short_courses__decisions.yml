@@ -1,0 +1,46 @@
+# Decisions about the short_courses source: what was decided, why, and who decided.
+# Permanent: a decision is never deleted; a replaced one is marked superseded and relates to
+# what replaced it. The schema is in requirements/README.md, and docs/decisions.md indexes
+# every log. Not parsed by dbt (.dbtignore).
+
+scope: {kind: source, name: short_courses, code: SC}
+
+decisions:
+
+  - id: DEC-SC-01
+    step: tests
+    title: Warn on an enrolment with no email; stop above five
+    text: An enrolment with no email - warn when there's any, stop the build when more than five.
+    why: One or two walk-ins a term are expected, and the learning team follows them up. More means something
+      broke.
+    decided_by: The learning team
+    decided_on: 2026-10-09
+    status: agreed
+    implemented_in: [stg_short_courses__enrolments]
+    relates_to: [LIM-SC-02]
+
+  - id: DEC-SC-02
+    step: gaps_and_contracts
+    title: Every key is trimmed and written in one case
+    text: 'Trim every key and write it in one case before comparing: emails lower case, IDs upper case.
+      The hash upper-cases every key too.'
+    why: 'Expected: An email is written the same way everywhere. Found: The short-course platform keeps
+      case and spaces as typed: 2 enrolments find no customer as typed, none once trimmed and lower-cased
+      (analyses/profiling/profile_orphans.sql).'
+    decided_by: Learning team
+    status: agreed
+    evidence: [analyses/profiling/profile_orphans.sql]
+    implemented_in: [staging, hash_key]
+    was: GAP-SC-01
+
+  - id: DEC-SC-03
+    step: gaps_and_contracts
+    title: Only certificates of completion are credentials
+    text: Only certificates of completion are credentials.
+    why: 'Expected: A certificate is a credential. Found: The short-course platform issues certificates
+      of completion and of attendance in one table.'
+    decided_by: Mei Tanaka, registrar's office
+    status: agreed
+    implemented_in: [int_credentials_unioned]
+    relates_to: [DEC-STU-02]
+    was: GAP-SC-03

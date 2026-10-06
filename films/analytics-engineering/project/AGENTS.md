@@ -9,7 +9,8 @@ every step, a person approves. This page says what an agent may and may not do.
 - [`docs/process.md`](docs/process.md): the ten steps, what each produces, your part in it, and who approves it.
 - [`docs/conventions.md`](docs/conventions.md): layers, names, SQL, keys, time, tests, metadata.
 - The conceptual model: [the university's map](models/_shared/_shared__conceptual.md) of domains and key entities, and each core domain and mart's own, in its folder ([`student`](models/core/student/_student__conceptual.yml), [`course`](models/core/course/_course__conceptual.yml), [`planning`](models/marts/planning/_planning__conceptual.yml), [`wallet`](models/marts/wallet/_wallet__conceptual.yml)): what each entity means, its key and its owner, and each consumer's question.
-- [`requirements/`](requirements/): the questions, requirements, decisions, gaps and limitations, each in the register of the source, domain or consumer it's about. [`docs/registers.md`](docs/registers.md) indexes them all.
+- [`docs/decisions.md`](docs/decisions.md): every decision and why, indexed from each scope's log (`_<scope>__decisions.yml`, next to what it's about). Known limitations are on the model or source they affect (`meta.limitations`).
+- [`requirements/`](requirements/): what's still open while something is built. Temporary: when an item is done, move what lasts to its home and delete it. It's not a backlog; the backlog tool is.
 - [`skills/`](skills/): how to do the five jobs agents do most here: draft the conceptual model, profile a source, draft a model, reconcile and diff, review metadata.
 
 ## What you may do
@@ -58,10 +59,11 @@ A claim without its query is a guess, and reviewers treat it as one.
 ## Before you open a pull request
 
 ```sh
-dbt build --profiles-dir .              # green; the one warning is by design (GAP-SC-02 in docs/registers.md)
+dbt build --profiles-dir .              # green; the one warning is by design (LIM-SC-02 on the short_courses source)
 python scripts/generate/definitions.py --check   # the doc blocks match the conceptual models
 python scripts/generate/diagrams.py --check      # the physical diagrams match the YAML
-python scripts/generate/registers.py --check     # the registers are valid and indexed
+python scripts/generate/decisions.py --check     # the decision logs are valid and indexed
+python scripts/check/requirements.py             # only open requirements, each saying when it's done
 ```
 
 Say in the pull request what you changed, why, what you checked, and the evidence.

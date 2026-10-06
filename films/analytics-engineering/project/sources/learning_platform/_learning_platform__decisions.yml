@@ -1,0 +1,32 @@
+# Decisions about the learning_platform source: what was decided, why, and who decided.
+# Permanent: a decision is never deleted; a replaced one is marked superseded and relates to
+# what replaced it. The schema is in requirements/README.md, and docs/decisions.md indexes
+# every log. Not parsed by dbt (.dbtignore).
+
+scope: {kind: source, name: learning_platform, code: LMS}
+
+decisions:
+
+  - id: DEC-LMS-01
+    step: gaps_and_contracts
+    title: A badge that disappears is revoked
+    text: A badge that disappears is revoked from the day the platform stopped showing it.
+    why: 'Expected: A revoked credential is known as revoked. Found: The learning platform has no revocation
+      flag. It deletes a revoked badge.'
+    decided_by: Learning team
+    status: agreed
+    implemented_in: [int_credentials_unioned]
+    relates_to: [LIM-STU-01, GAP-LMS-01]
+
+  - id: DEC-LMS-02
+    step: gaps_and_contracts
+    title: An account with no student ID matches by email
+    text: Match by email when exactly one student has it; a recorded decision beats the rules.
+    why: 'Expected: Every learning platform account names its student. Found: Staff type the student ID
+      in. 4 of 42 current accounts have none (analyses/profiling/profile_null_keys.sql); one holds another
+      student''s ID.'
+    decided_by: Learning team
+    status: agreed
+    evidence: [analyses/profiling/profile_null_keys.sql]
+    implemented_in: [int_learner_key_candidates]
+    relates_to: [DEC-STU-04, GAP-LMS-02]

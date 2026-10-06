@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Escrito una sola vez · En las entrañas del oficio de datos · Learning Data</title>
-<meta name="description" content="Una película para analytics engineers sobre escribir cada dato una sola vez: el modelo conceptual, Markdown y el YAML de dbt; doc blocks generados desde una sola fuente y mostrados con doc(); un diagrama físico generado desde el manifest y comprobado en la CI; descripciones enviadas a Unity Catalog con persist_docs; y versiones de modelos con fecha de retiro, con los consumidores encontrados y avisados gracias al linaje y las exposures.">
+<meta name="description" content="Una película para analytics engineers sobre escribir cada dato una sola vez: el significado en el modelo conceptual, las decisiones en un registro junto a aquello de lo que tratan, los vacíos aceptados como limitaciones conocidas en el modelo, y lo que usa el build en el YAML de dbt; doc blocks generados desde una sola fuente y mostrados con doc(); un diagrama físico generado desde el manifest y comprobado en la CI; descripciones enviadas a Unity Catalog con persist_docs; y versiones de modelos con fecha de retiro, con los consumidores encontrados y avisados gracias al linaje y las exposures.">
 <meta property="og:title" content="Escrito una sola vez · En las entrañas del oficio de datos · Learning Data"><meta property="og:description" content="Cada copia de un dato es una ocasión de desviarse. Un hogar para cada dato, todo lo demás generado, y un cambio que rompe llega como una versión nueva con fecha."><meta property="og:image" content="https://roanboc.github.io/learning-data/assets/written-once-poster.jpg"><meta property="og:locale" content="es_419">
 <link rel="alternate" hreflang="en" href="https://roanboc.github.io/learning-data/in-the-weeds/written-once/"><link rel="alternate" hreflang="es" href="https://roanboc.github.io/learning-data/es/in-the-weeds/written-once/">
 <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
@@ -18,7 +18,7 @@
 <section class="hero cine"><div class="bg" aria-hidden="true"><img src="../../../assets/written-once-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
 <p class="eyebrow crumbs"><a href="../../topics/">Temas</a> › <a href="../">En las entrañas del oficio de datos</a></p>
 <h1>Escrito una sola vez: un hogar para cada dato, y todo lo demás generado</h1>
-<p class="lead">Una definición copiada en cuatro lugares se desvía en tres. Dale a cada dato un hogar: el significado en el modelo conceptual, las decisiones en Markdown, lo que usa el build en el YAML de dbt. Genera el resto, sincronízalo en una sola dirección, y publica un cambio que rompe como una versión nueva con fecha. La película que cierra la serie.</p>
+<p class="lead">Una definición copiada en cuatro lugares se desvía en tres. Dale a cada dato un hogar: el significado en el modelo conceptual, las decisiones con el porqué y el quién en un registro junto a aquello de lo que tratan, los vacíos aceptados en el modelo como limitaciones conocidas, lo que usa el build en el YAML de dbt. Genera el resto, sincronízalo en una sola dirección, y publica un cambio que rompe como una versión nueva con fecha. La película que cierra la serie.</p>
 <p class="meta-row"><span>5 min</span><span>4 labs</span><span>8 situaciones</span><span>Pausa para pensar</span><span>En inglés, con subtítulos en español</span></p>
 <p class="note">La película está en inglés, con subtítulos en español. Esta página, los capítulos, las preguntas, los labs y las situaciones están en español.</p>
 <p class="builds-on">Amplía <a href="../an-agent-on-the-team/"><i>Un agente en el equipo</i></a></p>
@@ -41,6 +41,19 @@
 <div class="think-foot"><button type="button" class="btn" data-again>Ver de nuevo</button></div></div></template>
 </section>
 
+<section class="module" id="in-the-project" aria-labelledby="project-h">
+<div class="mhead"><div><h2 id="project-h">Míralo en el proyecto</h2><p>Cada tarjeta de la película muestra un archivo real del proyecto de dbt de ejemplo. Abre en GitHub los que muestra cada capítulo, o ejecuta tú el proyecto entero.</p></div></div>
+<ul class="repo-list">
+<li><b>Cuatro copias</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_course__conceptual.yml"><code>models/core/course/_course__conceptual.yml</code></a></span></li>
+<li><b>Qué va dónde</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_course__conceptual.yml"><code>models/core/course/_course__conceptual.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/_shared/_shared__decisions.yml"><code>models/_shared/_shared__decisions.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_core_student__models.yml"><code>models/core/student/_core_student__models.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md"><code>docs/conventions.md</code></a></span></li>
+<li><b>Escrito una vez, visible en todas partes</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_course__conceptual.yml"><code>models/core/course/_course__conceptual.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/scripts/generate/definitions.py"><code>scripts/generate/definitions.py</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_course__definitions.md"><code>models/core/course/_course__definitions.md</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/course/_core_course__models.yml"><code>models/core/course/_core_course__models.yml</code></a></span></li>
+<li><b>Diagramas que no se desvían</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__conceptual.md"><code>models/core/student/_student__conceptual.md</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__physical.md"><code>models/core/student/_student__physical.md</code></a></span></li>
+<li><b>Una sola dirección</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml"><code>dbt_project.yml</code></a></span></li>
+<li><b>La siguiente versión</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_core_student__models.yml"><code>models/core/student/_core_student__models.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/core_credential_v1.sql"><code>models/core/student/core_credential_v1.sql</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/wallet/mart_wallet__credentials.sql"><code>models/marts/wallet/mart_wallet__credentials.sql</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__decisions.yml"><code>models/core/student/_student__decisions.yml</code></a></span></li>
+</ul>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project">Explora el proyecto entero</a><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/README.md">Cómo ejecutarlo</a></p>
+</section>
+
 <section class="module" id="think-it-through" aria-labelledby="think-h">
 <div class="mhead"><div><h2 id="think-h">Piénsalo</h2><p>Las cuatro preguntas de Pausa para pensar, para una clase o un equipo. Abre una para ver la respuesta.</p></div></div>
 <div id="think-list"></div>
@@ -55,13 +68,13 @@
 <p class="kicker">← Anterior · Película 8 de 9</p>
 <h3><a href="../an-agent-on-the-team/">Un agente en el equipo</a></h3>
 <p>Un agente de IA redacta en minutos. Sigue reglas escritas en el proyecto, muestra la consulta detrás de cada afirmación, nunca debilita una prueba, y las personas aprueban.</p>
-<p class="meta">5 min · 4 labs · 8 situaciones · En las entrañas del oficio de datos · En inglés</p>
+<p class="meta">5½ min · 4 labs · 8 situaciones · En las entrañas del oficio de datos · En inglés</p>
 <p class="tc-progress" data-progress="ld-an-agent-on-the-team" data-labs="4" data-quiz="8" hidden></p>
 </div>
 </article>
 </div>
 <ol class="series-list" aria-label="Todas las películas de la serie">
-<li><a href="../a-model-is-not-a-transformation/"><span class="n">1</span>Un modelo no es una transformación</a></li>
+<li><a href="../declare-it-then-build-it/"><span class="n">1</span>Decláralo, luego constrúyelo</a></li>
 <li><a href="../start-from-a-question/"><span class="n">2</span>Empieza por una pregunta</a></li>
 <li><a href="../what-makes-it-the-same-one/"><span class="n">3</span>Qué lo hace el mismo</a></li>
 <li><a href="../one-row-of-what-and-when/"><span class="n">4</span>Una fila de qué, y cuándo</a></li>

@@ -19,19 +19,19 @@
 <p class="eyebrow crumbs"><a href="../../topics/">Temas</a> › <a href="../">En las entrañas del oficio de datos</a></p>
 <h1>Quién es dueño de qué: los dueños publican, los consumidores construyen sobre lo publicado</h1>
 <p class="lead">En 1858, Australia del Sur hizo del registro del gobierno el título: cualquiera podía confiar en él, y solo su dueño podía cambiarlo. Los modelos núcleo de la credencial funcionan igual. El significado de cada hecho tiene dueño, el acceso de dbt dice quién puede construir sobre qué, los permisos dicen quién puede leer, y las claves siguen compartidas.</p>
-<p class="meta-row"><span>5 min</span><span>4 labs</span><span>8 situaciones</span><span>Pausa para pensar</span><span>En inglés, con subtítulos en español</span></p>
+<p class="meta-row"><span>5½ min</span><span>4 labs</span><span>8 situaciones</span><span>Pausa para pensar</span><span>En inglés, con subtítulos en español</span></p>
 <p class="note">La película está en inglés, con subtítulos en español. Esta página, los capítulos, las preguntas, los labs y las situaciones están en español.</p>
 <p class="builds-on">Amplía <a href="../built-in-layers/"><i>Construido en capas</i></a></p>
 </section>
 <nav class="course" aria-label="Curso: Quién es dueño de qué"><div class="course-in"><p class="course-t"><small>Película 7 de 9 · Dominios y propiedad</small>Quién es dueño de qué</p><ol class="path" data-store="ld-who-owns-what" data-labs="4" data-quiz="8" data-text='{"watched": "Vista", "labs": "{n} de 4 labs explorados", "quiz": "{n} de 8 respondidas · {ok} correctas"}'>
-<li><a href="./#watch" aria-current="step"><span class="n"><b>1</b></span><b>Mira</b><span>Una película de 5 min</span></a></li>
+<li><a href="./#watch" aria-current="step"><span class="n"><b>1</b></span><b>Mira</b><span>Una película de 5½ min</span></a></li>
 <li><a href="./labs/"><span class="n"><b>2</b></span><b>Desarma</b><span>Cuatro labs interactivos</span></a></li>
 <li><a href="./scenarios/"><span class="n"><b>3</b></span><b>Tú decides</b><span>Ocho situaciones reales</span></a></li>
 </ol></div></nav>
 <section class="module" id="watch" data-store="ld-who-owns-what" aria-labelledby="watch-h">
 <div class="mhead"><div><h2 id="watch-h">Mira la película</h2><p>Presiona Reproducir, o salta a un capítulo. Activa <b>Pausa para pensar</b> y la película se detiene con una pregunta al final de los capítulos.</p></div></div>
 <div class="player" data-labs="labs/">
-<audio id="snd" preload="metadata" src="../../../assets/who-owns-what/soundtrack.mp3"></audio><div class="poster"><img src="../../../assets/who-owns-what-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Ver la película · 5 min</button><button type="button" class="think-badge" data-think>Ver con pausas para pensar</button></div></div><canvas id="film" width="1280" height="720" aria-label="Película animada, en inglés: Who owns what"></canvas>
+<audio id="snd" preload="metadata" src="../../../assets/who-owns-what/soundtrack.mp3"></audio><div class="poster"><img src="../../../assets/who-owns-what-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Ver la película · 5½ min</button><button type="button" class="think-badge" data-think>Ver con pausas para pensar</button></div></div><canvas id="film" width="1280" height="720" aria-label="Película animada, en inglés: Who owns what"></canvas>
 <div class="bar"><button id="play">Reproducir</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="time">0:00</span><button id="think" aria-pressed="false" title="Detenerse al final de cuatro capítulos, con una pregunta cada vez">Pausa para pensar</button><button id="cc" class="on" aria-pressed="true">Subtítulos</button><button id="fs">Pantalla completa</button></div>
 </div>
 <div class="chapters" id="chapters" aria-label="Capítulos"></div>
@@ -39,6 +39,20 @@
 <template id="next-panel"><div class="think-card"><p class="think-k">¿Y ahora?</p><h3>Viste quién es dueño de qué. Ahora decide quién puede construir sobre qué.</h3>
 <div class="next-opts"><a class="btn primary" href="labs/">Desarma: 4 labs interactivos →</a><a class="btn" href="scenarios/">Tú decides: 8 situaciones</a><a class="btn" href="../an-agent-on-the-team/">Sigue en la serie: Un agente en el equipo</a></div>
 <div class="think-foot"><button type="button" class="btn" data-again>Ver de nuevo</button></div></div></template>
+</section>
+
+<section class="module" id="in-the-project" aria-labelledby="project-h">
+<div class="mhead"><div><h2 id="project-h">Míralo en el proyecto</h2><p>Cada tarjeta de la película muestra un archivo real del proyecto de dbt de ejemplo. Abre en GitHub los que muestra cada capítulo, o ejecuta tú el proyecto entero.</p></div></div>
+<ul class="repo-list">
+<li><b>Dominios</b><span><a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/sources/student_system"><code>sources/student_system/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/sources/learning_platform"><code>sources/learning_platform/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/sources/short_courses"><code>sources/short_courses/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/core/student"><code>models/core/student/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/core/course"><code>models/core/course/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/marts/planning"><code>models/marts/planning/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/exposures/planning"><code>exposures/planning/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/marts/wallet"><code>models/marts/wallet/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/exposures/wallet"><code>exposures/wallet/</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/_groups.yml"><code>models/_groups.yml</code></a></span></li>
+<li><b>Lo que publica un dominio</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_core_student__models.yml"><code>models/core/student/_core_student__models.yml</code></a></span></li>
+<li><b>Privado, protegido, público</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml"><code>dbt_project.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md"><code>docs/conventions.md</code></a></span></li>
+<li><b>Quién puede leer</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/dbt_project.yml"><code>dbt_project.yml</code></a></span></li>
+<li><b>Entre proyectos</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/planning/dependencies.yml"><code>examples/planning/dependencies.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/planning/models/planning_enrolments_at_census.sql"><code>examples/planning/models/planning_enrolments_at_census.sql</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/planning/README.md"><code>examples/planning/README.md</code></a></span></li>
+<li><b>Lo que sigue compartido</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/student_system/_student_system__sources.yml"><code>sources/student_system/_student_system__sources.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/learning_platform/_learning_platform__sources.yml"><code>sources/learning_platform/_learning_platform__sources.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/sources/short_courses/_short_courses__sources.yml"><code>sources/short_courses/_short_courses__sources.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/macros/shared/keys.sql"><code>macros/shared/keys.sql</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/planning/README.md"><code>examples/planning/README.md</code></a></span></li>
+<li><b>Primero grupos</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/_shared/_shared__decisions.yml"><code>models/_shared/_shared__decisions.yml</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/marts/planning"><code>models/marts/planning/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/exposures/planning"><code>exposures/planning/</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/seeds/expected/planning"><code>seeds/expected/planning/</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__decisions.yml"><code>models/marts/planning/_planning__decisions.yml</code></a></span></li>
+</ul>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project">Explora el proyecto entero</a><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/README.md">Cómo ejecutarlo</a></p>
 </section>
 
 <section class="module" id="think-it-through" aria-labelledby="think-h">
@@ -65,13 +79,13 @@
 <p class="kicker">Siguiente · Película 8 de 9 →</p>
 <h3><a href="../an-agent-on-the-team/">Un agente en el equipo</a></h3>
 <p>Un agente de IA redacta en minutos. Sigue reglas escritas en el proyecto, muestra la consulta detrás de cada afirmación, nunca debilita una prueba, y las personas aprueban.</p>
-<p class="meta">5 min · 4 labs · 8 situaciones · En las entrañas del oficio de datos · En inglés</p>
+<p class="meta">5½ min · 4 labs · 8 situaciones · En las entrañas del oficio de datos · En inglés</p>
 <p class="tc-progress" data-progress="ld-an-agent-on-the-team" data-labs="4" data-quiz="8" hidden></p>
 </div>
 </article>
 </div>
 <ol class="series-list" aria-label="Todas las películas de la serie">
-<li><a href="../a-model-is-not-a-transformation/"><span class="n">1</span>Un modelo no es una transformación</a></li>
+<li><a href="../declare-it-then-build-it/"><span class="n">1</span>Decláralo, luego constrúyelo</a></li>
 <li><a href="../start-from-a-question/"><span class="n">2</span>Empieza por una pregunta</a></li>
 <li><a href="../what-makes-it-the-same-one/"><span class="n">3</span>Qué lo hace el mismo</a></li>
 <li><a href="../one-row-of-what-and-when/"><span class="n">4</span>Una fila de qué, y cuándo</a></li>

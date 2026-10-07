@@ -144,6 +144,8 @@ Chapter by chapter, with narration: [the script](2-who-it-serves/script.md).
 
 **On screen.** A motivation view: who cares, what pressures them, what must be true.
 
+Chapter by chapter, with narration: [the script](3-why-it-moves/script.md) (a draft, not built yet).
+
 ### 4. What it must be able to do
 
 **Story.** Tomás's first capability map looks like the org chart. The operations manager shows him that "Network Operations" is a team, and the capabilities are things like *manage outages*, *maintain assets* and *connect customers*.

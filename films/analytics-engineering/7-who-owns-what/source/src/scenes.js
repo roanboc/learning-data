@@ -331,7 +331,7 @@ scene("split",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
   ["models/marts/planning/","exposures/planning/","seeds/expected/planning/","_planning__decisions.yml"].forEach((s,i)=>{const q=fin(t,lT+0.3+i*0.25,0.5);
     if(q>0)withA(ctx,q,()=>wo_chip(ctx,lerp(700,960,ease(q)),540+i*46,s,WO_PLN,{mono:true,size:18,text:INK}));});
   // the ten steps, small: this film's are 4 and 10
-  arrive(ctx,1440,650,t,w("decided","Projects later")+0.6,()=>wo_loop(ctx,1440,650,190,110,{3:1,9:1},t,{label:"steps 4 and 10"}),{d:1.0,from:0.9});
+  arrive(ctx,1440,650,t,w("decided","Projects later")+0.6,()=>wo_loop(ctx,1440,650,190,110,{3:1,9:1},t,{label:"Promise and Keep · steps 4 and 10"}),{d:1.0,from:0.9});
   // many owners, many hands
   const own=[["mei",130],["tom",290],["Planning",450,WO_PLN],["wallet app",610,WO_WAL],["noor",770],["jun",930]];
   own.forEach(([id,x,col],i)=>arrive(ctx,x,740,t,w("hands","Many owners")-0.2+i*0.15,()=>{if(col){wo_team(ctx,x,724,0.62,col,t,{label:id,ly:200,size:22});}

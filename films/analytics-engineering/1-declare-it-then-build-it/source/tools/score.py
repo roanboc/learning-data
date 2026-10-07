@@ -122,9 +122,12 @@ lines(G('lives', 'yaml', -0.2), 7, 0.23, 0.02, 0.0)
 paper(G('lives', 'md', -0.2), 0.03, 0.4)
 for i in range(4):
     soft([57, 60, 62, 65][i], W('lives', 'check', 'the tests', 0.3 + i * 0.35), 0.032, -0.3 + i * 0.2)
-# 9. Ten steps: a knock as each station lights; a soft swell while the agent goes round; two felt notes for "a person approves"
+# 9. Four phases: a low felt note as each phase lights, rising; a knock as each station lights; a soft swell while the agent goes
+#    round; two felt notes for "a person approves"
 bed('steps', [DM9, G13, AM7, CMAJ9, DM9])
-for lid, word in [('s1', 'Start'), ('s1', 'Learn'), ('s1', 'Define'), ('s4', 'Name'), ('s4', 'Write the tests'), ('s4', 'Build'), ('s7', 'Validate'), ('s7', 'Review'), ('s7', 'Keep'), ('s7', 'evolve')]:
+for (lid, word), m in zip([('s1', 'Ask'), ('s4', 'Promise'), ('s7', 'Build'), ('s9', 'Keep')], [50, 54, 57, 62]):
+    soft(m, W('steps', lid, word, -0.1), 0.034)
+for lid, word in [('s1', 'Start'), ('s1', 'Learn'), ('s1', 'Define'), ('s4', 'Name'), ('s4', 'Write the tests'), ('s7', 'Layer'), ('s7', 'Validate'), ('s7', 'Review'), ('s9', 'written once'), ('s9', 'evolves')]:
     knock(W('steps', lid, word, -0.1), 0.032)
 swell([50, 57, 62, 64, 69], G('steps', 'agent', -0.2), 4.6, 0.02)
 soft(55, W('steps', 'agent', 'person approves', -0.4), 0.045); soft(62, W('steps', 'agent', 'person approves', -0.2), 0.032)

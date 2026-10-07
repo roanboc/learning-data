@@ -70,8 +70,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Una credencial puede vencer, y un verdadero o falso no puede decirlo. Así que is_revoked pasa a status: vigente, vencida o revocada.",
 "That breaks anyone who reads the old column. So it's a new version of the credential, beside the old one.":
 "Eso rompe a quien lea la columna vieja. Así que es una nueva versión de la credencial, junto a la anterior.",
-"Version one is built from version two, so the logic lives once. And it has a date to go: the 31st of March, 2027.":
-"La versión uno se construye desde la dos, así que la lógica vive una vez. Y tiene fecha de salida: el 31 de marzo de 2027.",
+"Version one came first. Now it's built from version two, which holds the logic, so it can go without touching version two. It has a date to go: the 31st of March, 2027.":
+"La versión uno llegó primero. Ahora se construye desde la dos, que tiene la lógica, así que puede irse sin tocar la dos. Tiene fecha de salida: el 31 de marzo de 2027.",
 "The exposures declared with the contracts say who to tell: only the wallet app. It pins version two.":
 "Las exposures declaradas con los contratos dicen a quién avisar: solo a la app de la billetera. Fija la versión dos.",
 "Anyone still reading version one gets dbt's warning, with the date, every time they build.":

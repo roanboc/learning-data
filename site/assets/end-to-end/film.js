@@ -475,7 +475,7 @@ const NARR={
  {"id":"move","gap":0.8,"text":"And because Finance's folders were named for it from the first commit, Finance can move out to a project of its own, whole."},
  {"id":"list","gap":0.8,"text":"Its marts, its exposure, its seeds, its decisions, and the test and two analyses it was built with."}]},
 "building":{"name":"The whole building","lead":1.0,"tail":1.0,"vo":[
- {"id":"ten","gap":0.8,"text":"Ten steps, ten commits. You can replay them one by one, in the repository."},
+ {"id":"ten","gap":0.8,"text":"Four phases, ten steps, ten commits. You can replay them one by one, in the repository."},
  {"id":"stay","gap":0.8,"text":"Some files arrived to stay: the question, the decisions, the contract, the tests, the model."},
  {"id":"work","gap":0.8,"text":"Some were for the work: three open items, and the file that held them. They're gone. The project says only what's still open."},
  {"id":"homes","gap":0.8,"text":"Every file has a home. Sources by system: application domains. The core by meaning: data domains. Marts and exposures by who decides: business domains."},
@@ -486,7 +486,7 @@ const NARR={
  {"id":"declare","gap":0.8,"text":"Declare it. Then build it."}]}
 };
 
-const VODUR={"floor/drew": 6.664, "floor/templates": 4.065, "floor/over": 5.254, "floor/stayed": 2.909, "floor/bridge": 8.016, "question/arrives": 2.199, "question/asks": 5.593, "question/decides": 4.66, "question/kind": 7.364, "question/files": 10.233, "question/open": 7.943, "question/backlog": 6.142, "sources/profile": 6.957, "sources/across": 5.753, "sources/numbers": 8.432, "sources/which": 7.97, "sources/rates": 5.865, "output/answer": 7.179, "output/moves": 6.185, "output/deleted": 4.884, "output/grain": 6.342, "output/until": 3.636, "promise/contract": 7.159, "promise/empty": 6.446, "promise/gap": 6.979, "promise/accept": 5.933, "tests/first": 2.474, "tests/grain": 5.707, "tests/unit": 5.173, "tests/report": 8.232, "tests/fail": 5.108, "tests/done": 5.823, "build/logic": 1.464, "build/reads": 7.821, "build/only": 5.927, "build/short": 5.903, "build/green": 5.588, "validate/reconcile": 6.292, "validate/diff": 5.341, "validate/nothing": 6.146, "validate/signoff": 2.645, "ship/pr": 1.467, "ship/last": 6.832, "ship/gone": 4.983, "ship/check": 5.31, "ship/approve": 4.486, "once/review": 2.621, "once/two": 7.301, "once/home": 6.072, "once/zero": 8.765, "evolve/pin": 5.015, "evolve/choice": 5.958, "evolve/move": 6.586, "evolve/list": 6.354, "building/ten": 4.779, "building/stay": 5.405, "building/work": 7.279, "building/homes": 10.958, "building/lives": 6.359, "building/next": 5.641, "building/series": 10.37, "building/blueprint": 3.499, "building/declare": 1.402};
+const VODUR={"floor/drew": 6.664, "floor/templates": 4.065, "floor/over": 5.254, "floor/stayed": 2.909, "floor/bridge": 8.016, "question/arrives": 2.199, "question/asks": 5.593, "question/decides": 4.66, "question/kind": 7.364, "question/files": 10.233, "question/open": 7.943, "question/backlog": 6.142, "sources/profile": 6.957, "sources/across": 5.753, "sources/numbers": 8.432, "sources/which": 7.97, "sources/rates": 5.865, "output/answer": 7.179, "output/moves": 6.185, "output/deleted": 4.884, "output/grain": 6.342, "output/until": 3.636, "promise/contract": 7.159, "promise/empty": 6.446, "promise/gap": 6.979, "promise/accept": 5.933, "tests/first": 2.474, "tests/grain": 5.707, "tests/unit": 5.173, "tests/report": 8.232, "tests/fail": 5.108, "tests/done": 5.823, "build/logic": 1.464, "build/reads": 7.821, "build/only": 5.927, "build/short": 5.903, "build/green": 5.588, "validate/reconcile": 6.292, "validate/diff": 5.341, "validate/nothing": 6.146, "validate/signoff": 2.645, "ship/pr": 1.467, "ship/last": 6.832, "ship/gone": 4.983, "ship/check": 5.31, "ship/approve": 4.486, "once/review": 2.621, "once/two": 7.301, "once/home": 6.072, "once/zero": 8.765, "evolve/pin": 5.015, "evolve/choice": 5.958, "evolve/move": 6.586, "evolve/list": 6.354, "building/ten": 5.787, "building/stay": 5.405, "building/work": 7.279, "building/homes": 10.958, "building/lives": 6.359, "building/next": 5.641, "building/series": 10.37, "building/blueprint": 3.499, "building/declare": 1.402};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -1748,12 +1748,24 @@ function lineageGraph(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.0
       if(core>0||pk>0)glow(ctx,px,py,26+16*pk,c===2?TRUST:col,0.5*Math.max(core,pk));ctx.fillStyle=rgba(col,(0.55+0.45*Math.max(core,pk))*(1-0.75*dim*(1-Math.max(core,pk))));ctx.beginPath();ctx.arc(px,py,r,0,TAU);ctx.fill();});});
   return pos;}
 
-/* ---------- the process: ten steps on a loop ---------- */
+/* ---------- the process: ten steps on a loop, in four phases ---------- */
 const STEPS10=[["a question","?"],["the sources","src"],["the consumers","use"],["gaps · contracts","≠"],["tests first","✓"],["build in layers","≡"],["validate","="],["review · ship","PR"],["written once","1×"],["evolve","v2"]];
 function stepPos(i,cx,cy,rx,ry){const an=-Math.PI/2+i/10*TAU;return[cx+Math.cos(an)*rx,cy+Math.sin(an)*ry];}
-// o.on[i]: each station lit; o.agent: where the agent is (0..10, along the loop); o.ticks[i]: gold ticks; o.teal[i]: teal dots
+// the four phases the ten steps fall into, with their first and last step: ask, promise, build, keep ("declare it" is the first two, "then build it" the last two)
+const PHASES4=[["Ask",0,2],["Promise",3,4],["Build",5,7],["Keep",8,9]];
+const phaseOf=i=>PHASES4.findIndex(([,a,b])=>i>=a&&i<=b);
+// each phase as an arc just inside the loop, under its steps, with its name inside: o.on[k] lights phase k, o.a fades them all,
+// o.inset is how far inside the stations the arcs run, o.size the names' size, o.nameA fades the names alone, o.noNames draws the arcs alone
+function phaseRing(ctx,cx,cy,rx,ry,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const ins=o.inset==null?64:o.inset,ax=rx-ins,ay=ry-ins,an=k=>-Math.PI/2+k/10*TAU;
+  withA(ctx,a,()=>PHASES4.forEach(([nm,f,l],k)=>{const on=o.on?o.on[k]||0:1,a0=an(f-0.36),a1=an(l+0.36),am=an((f+l)/2);
+    ctx.save();ctx.strokeStyle=rgba(WEED,0.28+0.6*on);ctx.lineWidth=o.lw||4;ctx.lineCap="round";ctx.beginPath();ctx.ellipse(cx,cy,ax,ay,0,a0,a1);ctx.stroke();ctx.restore();
+    const na=o.nameA==null?1:o.nameA;if(!o.noNames&&na>0.01){const sz=o.size||24,lx=cx+Math.cos(am)*(ax-sz*2.4),ly=cy+Math.sin(am)*(ay-sz*1.5)+sz*0.36;
+      withA(ctx,na,()=>T(ctx,nm,lx,ly,{w:800,size:sz,align:"center",color:rgba(mix(SOFT,WEED,on),0.5+0.5*on)}));}}));}
+// o.on[i]: each station lit; o.agent: where the agent is (0..10, along the loop); o.ticks[i]: gold ticks; o.teal[i]: teal dots;
+// o.phases fades the four phases (default 1), o.phaseOn[k] lights each, o.phaseSize sizes their names
 function stepLoop(ctx,cx,cy,rx,ry,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{
   ctx.save();ctx.strokeStyle=rgba(WEED,0.25);ctx.lineWidth=2;ctx.setLineDash([4,10]);ctx.beginPath();ctx.ellipse(cx,cy,rx,ry,0,0,TAU);ctx.stroke();ctx.restore();
+  phaseRing(ctx,cx,cy,rx,ry,{a:o.phases==null?1:o.phases,on:o.phaseOn,size:o.phaseSize});
   STEPS10.forEach(([nm,gl],i)=>{const on=o.on?o.on[i]||0:1,[px,py]=stepPos(i,cx,cy,rx,ry),r=40;withA(ctx,0.25+0.75*on,()=>{if(on>0)glow(ctx,px,py,r*2,WEED,0.2*on);
       ctx.fillStyle="rgba(7,12,24,0.96)";ctx.beginPath();ctx.arc(px,py,r,0,TAU);ctx.fill();ring(ctx,px,py,r,mix(SOFT,WEED,on),1,2.4);
       T(ctx,gl,px,py+8,{w:800,size:gl.length>2?19:24,align:"center",color:rgba(mix(SOFT,WEED,on),1)});T(ctx,(i+1)+"",px-r+4,py-r+10,{f:"mono",w:500,size:15,color:rgba(SOFT,0.9)});
@@ -1884,7 +1896,11 @@ function ee_ledger(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;co
     withA(ctx,q,()=>{if(isCur)glow(ctx,x+bw/2,y+h/2,bw*0.7,WEED,0.2);glass(ctx,x,y,bw,h,12,col,{glow:isCur?14:6,ea:0.75,fill:"rgba(7,12,24,0.95)"});
       T(ctx,(i+1)+"",x+14,y+29,{f:"mono",w:500,size:18,color:rgba(col,1)});T(ctx,nm,x+(i<9?38:46),y+29,{w:700,size:18,color:rgba(done||isCur?INK:SOFT,1)});
       if(done){const k=isCur&&!o.all?(o.counted||0):1;withA(ctx,k,()=>{const[ad,ch,de]=EE_COUNT[i];let cx=x+14;[["+"+ad,EE_ADD,ad],["~"+ch,EE_AMB,ch],["−"+de,EE_DEL,de]].forEach(([s,c,n])=>{if(!n)return;
-        T(ctx,s,cx,y+56,{f:"mono",w:500,size:18,color:rgba(c,1)});cx+=tw(ctx,s,18,500,"mono")+12;});});}});});});}
+        T(ctx,s,cx,y+56,{f:"mono",w:500,size:18,color:rgba(c,1)});cx+=tw(ctx,s,18,500,"mono")+12;});});}});});
+  // the four phases under their steps: a bracket and a name, lit for the phase of the current step (all of them at the end)
+  PHASES4.forEach(([nm,f,l])=>{const xa=x0+f*(bw+gap)+8,xb=x0+l*(bw+gap)+bw-8,on=(cur>=f&&cur<=l)||(o.all||0)>0,col=on?WEED:SOFT;
+    ctx.strokeStyle=rgba(col,on?0.85:0.4);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(xa,y+h+6);ctx.lineTo(xa,y+h+12);ctx.lineTo(xb,y+h+12);ctx.lineTo(xb,y+h+6);ctx.stroke();
+    T(ctx,nm,(xa+xb)/2,y+h+33,{w:800,size:17,align:"center",color:rgba(col,on?1:0.7)});});});}
 // one step's commit: its step and short hash, its title, then each file it touched, + added, ~ changed, − deleted, appearing as on[i] goes 0..1.
 // rows: [sign, file, folder, flag]; flag "tmp" (temporary), "gen" (generated: a cog) or "". o.hi {i:0..1} lights a row
 function ee_commit(ctx,x,y,w,step,title,rows,o){o=o||{};const a=o.a==null?1:o.a,rh=56,h=96+rows.length*rh;if(a<=0.01)return h;withA(ctx,a,()=>{
@@ -2522,7 +2538,7 @@ scene("building",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   // the series: the ten steps, each lit as it's named
   const rA=fin(t,cR-0.2,0.6)*(1-fin(t,cP-0.4,0.8));
   if(rA>0.01){const on=EE_SERIES.map(s=>fin(t,w("series",s)-0.1,0.4));stepLoop(ctx,960,440,620,280,t,{a:rA,on,ticks:on.map((q,i)=>fin(t,w("series","change")+0.6+i*0.08,0.3)),teal:on.map((q,i)=>fin(t,w("series","change")+0.4+i*0.08,0.3))});
-    arrive(ctx,960,440,t,cR,()=>withA(ctx,rA,()=>{T(ctx,"In the weeds of data crafting",960,426,{w:800,size:30,align:"center",color:rgba(WEED,1)});T(ctx,"ten films · ten steps",960,464,{w:600,size:22,align:"center",color:rgba(SOFT,1)});}),{from:0.9});}
+    arrive(ctx,960,440,t,cR,()=>withA(ctx,rA,()=>{T(ctx,"In the weeds of data crafting",960,426,{w:800,size:30,align:"center",color:rgba(WEED,1)});T(ctx,"ten films · four phases · ten steps",960,464,{w:600,size:22,align:"center",color:rgba(SOFT,1)});}),{from:0.9});}
   // the blueprint over the lineage graph; declare it, then build it
   const dA=fin(t,cP-0.3,0.9);if(dA>0.01)withA(ctx,dA,()=>{lineageGraph(ctx,260,540,1400,360,t,{core:1,dim:0.35,heads:0.8});
     arrive(ctx,960,260,t,cP-0.1,()=>{bpPaper(ctx,560,110,800,280,1,{title:"CREDENTIAL MODEL · v3"});bpModel(ctx,960,290,0.62,{b:1});},{d:1.1,from:0.9,dy:-20});

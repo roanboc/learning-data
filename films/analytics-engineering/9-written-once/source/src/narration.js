@@ -42,7 +42,7 @@ const NARR={
  {"id":"change","gap":0.8,"text":"Written once doesn't mean never changed."},
  {"id":"expire","gap":0.8,"text":"A credential can expire, and a true or false can't say so. So is_revoked becomes status: valid, expired or revoked.","say":"A credential can expire, and a true or false can't say so. So is revoked becomes status: valid, expired or revoked."},
  {"id":"breaks","gap":0.8,"text":"That breaks anyone who reads the old column. So it's a new version of the credential, beside the old one."},
- {"id":"date","gap":0.8,"text":"Version one is built from version two, so the logic lives once. And it has a date to go: the 31st of March, 2027.","say":"Version one is built from version two, so the logic lives once. And it has a date to go: the thirty-first of March, twenty twenty-seven."},
+ {"id":"date","gap":0.8,"text":"Version one came first. Now it's built from version two, which holds the logic, so it can go without touching version two. It has a date to go: the 31st of March, 2027.","say":"Version one came first. Now it's built from version two, which holds the logic, so it can go without touching version two. It has a date to go: the thirty-first of March, twenty twenty-seven."},
  {"id":"tell","gap":0.8,"text":"The exposures declared with the contracts say who to tell: only the wallet app. It pins version two."},
  {"id":"warn","gap":0.8,"text":"Anyone still reading version one gets dbt's warning, with the date, every time they build."},
  {"id":"choice","gap":0.8,"text":"A breaking change arrives as a choice with a deadline, not as a surprise."}]},

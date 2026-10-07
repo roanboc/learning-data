@@ -43,7 +43,7 @@ scene("staging",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   const cD=c("draft"),cF=c("first"),cJ=c("job"),cN=c("nojoin"),outA=1-fin(t,cF-0.4,0.6);
   // the tests are written, and the loop is at step 6: build
   withA(ctx,outA,()=>{arrive(ctx,330,270,t,0.2,()=>withA(ctx,1-fin(t,cD+0.4,0.6),()=>{bl_stepLoop(ctx,330,280,210,140,t,{on:STEPS10.map((s,i)=>i===5?1:0.25)});
-      tag(ctx,330,490,"step 6 · build in layers",WEED,{align:"center",size:22});}),{d:1});
+      tag(ctx,330,490,"Build · step 6 · in layers",WEED,{align:"center",size:22});}),{d:1});
     // the tests: grey (not run), red under the agent's first draft
     const tR=w("draft","watches them fail");arrive(ctx,1420,350,t,w("red","tests")-0.2,()=>bl_tests(ctx,1000,140,840,{p:clamp((t-w("red","tests"))/1.4,0,1),red:BL_TESTS.map((s,i)=>fin(t,tR+i*0.12,0.3))}),{dy:30});
     // the agent opens its skill, drafts, runs the tests, then writes the least code; Jun reviews

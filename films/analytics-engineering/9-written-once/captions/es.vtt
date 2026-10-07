@@ -1,127 +1,127 @@
 WEBVTT
 
-00:00:01.400 --> 00:00:07.358
+00:00:01.400 --> 00:00:07.354
 Hacia 1850, la nota la sonaba distinta de una ciudad a otra, y seguía subiendo poco a poco.
 
-00:00:08.058 --> 00:00:14.304
+00:00:08.054 --> 00:00:14.300
 En 1859, Francia la fijó por decreto y guardó un diapasón en París como su hogar.
 
-00:00:15.604 --> 00:00:21.132
+00:00:15.600 --> 00:00:21.128
 Otros diapasones se comprobaban con él, y los instrumentos se afinaban con ellos, nunca al revés.
 
-00:00:22.632 --> 00:00:26.695
+00:00:22.628 --> 00:00:26.691
 Hoy, antes de tocar, toda una orquesta aún se afina con una sola nota.
 
-00:00:27.995 --> 00:00:32.840
+00:00:27.991 --> 00:00:32.836
 Una definición puede funcionar así: guardada en un lugar, y todo lo demás afinado con ella.
 
-00:00:39.140 --> 00:00:44.796
+00:00:39.136 --> 00:00:44.792
 La revisión de metadatos del agente lo encontró: la definición de título, en cuatro lugares.
 
-00:00:46.096 --> 00:00:51.139
+00:00:46.092 --> 00:00:51.135
 La wiki, una descripción en YAML, el catálogo y el tooltip del dashboard de Planificación.
 
-00:00:52.439 --> 00:00:59.390
+00:00:52.435 --> 00:00:59.386
 Una dice que el título se entrega en papel. Otra perdió los créditos. Otra llama grado a todo título.
 
-00:01:00.890 --> 00:01:05.544
+00:01:00.886 --> 00:01:05.540
 Solo el tooltip dice aún lo que aprobó Mei, las palabras del modelo conceptual.
 
-00:01:06.844 --> 00:01:11.415
+00:01:06.840 --> 00:01:11.411
 Nada mantuvo a las demás alineadas. Se desviaron, un pequeño cambio a la vez.
 
-00:01:15.115 --> 00:01:22.393
+00:01:15.111 --> 00:01:22.389
 La solución no es una quinta copia, ni una mejor. La definición ya tiene un hogar. Todo lo demás debe salir de él.
 
-00:01:24.093 --> 00:01:29.312
+00:01:24.089 --> 00:01:29.308
 El significado vive en el modelo conceptual: qué es cada cosa, su clave y quién es su dueño.
 
-00:01:30.812 --> 00:01:39.815
+00:01:30.808 --> 00:01:39.811
 Y donde el glosario de negocio ya define un término, ese es su hogar. Gobierno de datos dice qué término aplica, y el modelo conceptual toma sus palabras.
 
-00:01:41.115 --> 00:01:49.669
+00:01:41.111 --> 00:01:49.665
 Las decisiones viven en un registro junto a aquello de lo que tratan, con el porqué y el quién. Los vacíos que el equipo aceptó viven en el modelo, como limitaciones conocidas.
 
-00:01:51.169 --> 00:01:56.679
+00:01:51.165 --> 00:01:56.675
 Todo lo que usa el build vive en YAML: grano, claves, contratos, tests y dueños.
 
-00:01:58.179 --> 00:02:03.823
+00:01:58.175 --> 00:02:03.819
 Un registro de decisiones no es una copia. Guarda el porqué, y el YAML de un modelo no tiene lugar para él.
 
-00:02:07.523 --> 00:02:10.835
+00:02:07.519 --> 00:02:10.831
 Así que el título se define una vez, en el modelo conceptual.
 
-00:02:12.335 --> 00:02:19.717
+00:02:12.331 --> 00:02:19.713
 Un script convierte cada definición en un doc block, en una página Markdown que escribe él mismo. Nadie la edita.
 
-00:02:21.217 --> 00:02:27.083
+00:02:21.213 --> 00:02:27.079
 El YAML no copia la definición. La nombra, y dbt muestra ahí la definición.
 
-00:02:28.583 --> 00:02:36.668
+00:02:28.579 --> 00:02:36.664
 Para cambiar el significado, cambia una línea, con la aprobación de Mei. Edita la página generada, y falla el check en CI.
 
-00:02:38.368 --> 00:02:45.423
+00:02:38.364 --> 00:02:45.419
 La revisión del agente corre otra vez: en el proyecto, ninguna descripción escrita dos veces. La wiki ahora enlaza al sitio de docs.
 
-00:02:48.123 --> 00:02:49.562
+00:02:48.119 --> 00:02:49.558
 Los diagramas también se desvían.
 
-00:02:50.262 --> 00:02:56.138
+00:02:50.258 --> 00:02:56.134
 El diagrama conceptual se dibuja a mano, para personas. Solo cambia cuando cambia el significado.
 
-00:02:57.438 --> 00:03:05.899
+00:02:57.434 --> 00:03:05.895
 El diagrama físico se genera: cada tabla del core y de los marts, sus columnas, tipos y claves, leídos de lo que dbt analizó.
 
-00:03:07.199 --> 00:03:11.007
+00:03:07.195 --> 00:03:11.003
 Si el YAML cambia y el diagrama no, CI falla.
 
-00:03:11.707 --> 00:03:13.975
+00:03:11.703 --> 00:03:13.971
 Dibuja el significado. Genera la estructura.
 
-00:03:18.075 --> 00:03:23.030
+00:03:18.071 --> 00:03:23.026
 En Databricks, la gente encuentra las tablas en el catálogo y lee ahí sus descripciones.
 
-00:03:24.730 --> 00:03:29.347
+00:03:24.726 --> 00:03:29.343
 Así que cada build le envía las descripciones, de cada tabla y sus columnas.
 
-00:03:31.047 --> 00:03:36.513
+00:03:31.043 --> 00:03:36.509
 Nadie las edita ahí: un nuevo build sobrescribe el cambio. Corrígelo en casa, y fluye hacia fuera.
 
-00:03:38.713 --> 00:03:50.499
+00:03:38.709 --> 00:03:50.497
 Río arriba, la misma regla. Una sincronización revisa el glosario de forma periódica. Cuando un término cambia, abre un pull request, para que el dueño vea a qué afecta el nuevo significado antes de que llegue al build.
 
-00:03:52.399 --> 00:04:01.022
+00:03:52.397 --> 00:03:59.869
 Una dirección: del glosario, por los archivos, hacia el catálogo y lo que lo lea. Afinado desde una fuente, nunca al revés.
 
-00:04:03.722 --> 00:04:05.852
+00:04:02.569 --> 00:04:04.699
 Escrito una vez no significa que nunca cambie.
 
-00:04:07.152 --> 00:04:15.419
+00:04:05.999 --> 00:04:14.266
 Una credencial puede vencer, y un verdadero o falso no puede decirlo. Así que is_revoked pasa a status: vigente, vencida o revocada.
 
-00:04:16.919 --> 00:04:23.057
+00:04:15.766 --> 00:04:21.904
 Eso rompe a quien lea la columna vieja. Así que es una nueva versión de la credencial, junto a la anterior.
 
-00:04:24.557 --> 00:04:33.307
-La versión uno se construye desde la dos, así que la lógica vive una vez. Y tiene fecha de salida: el 31 de marzo de 2027.
+00:04:23.404 --> 00:04:35.733
+La versión uno llegó primero. Ahora se construye desde la dos, que tiene la lógica, así que puede irse sin tocar la dos. Tiene fecha de salida: el 31 de marzo de 2027.
 
-00:04:35.007 --> 00:04:40.937
+00:04:37.433 --> 00:04:43.363
 Las exposures declaradas con los contratos dicen a quién avisar: solo a la app de la billetera. Fija la versión dos.
 
-00:04:42.437 --> 00:04:48.339
+00:04:44.863 --> 00:04:50.765
 Quien aún lea la versión uno recibe el aviso de dbt, con la fecha, cada vez que hace build.
 
-00:04:49.839 --> 00:04:54.503
+00:04:52.265 --> 00:04:56.929
 Un cambio que rompe llega como una decisión con plazo, no como una sorpresa.
 
-00:04:58.203 --> 00:05:06.923
+00:05:00.629 --> 00:05:09.349
 Ese es el ciclo. Una pregunta, las fuentes, los consumidores, vacíos y contratos, tests, capas, el número confiable, revisión, escrito una vez, y cambio.
 
-00:05:08.023 --> 00:05:12.913
+00:05:10.449 --> 00:05:15.339
 En cada paso, el agente redactó y comprobó. En cada paso, una persona aprobó.
 
-00:05:14.413 --> 00:05:19.473
+00:05:16.839 --> 00:05:21.899
 Y llega una nueva pregunta, del equipo de la billetera. El ciclo vuelve a empezar, en la pregunta.
 
-00:05:20.973 --> 00:05:22.475
+00:05:23.399 --> 00:05:24.901
 Decláralo. Luego constrúyelo.

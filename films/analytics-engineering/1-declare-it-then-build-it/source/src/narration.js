@@ -41,11 +41,12 @@ const NARR={
  {"id":"yaml","gap":0.8,"text":"In YAML: what one row holds, which key makes it unique, how it relates to the rest, and the contract each table promises.","say":"In yammel: what one row holds, which key makes it unique, how it relates to the rest, and the contract each table promises."},
  {"id":"md","gap":0.8,"text":"In a conceptual model, with a diagram anyone can read: what each thing means. And in a decision log beside it: why it was decided that way."},
  {"id":"check","gap":0.8,"text":"The queries make the tables. The YAML and the Markdown say what those tables must be, and the tests check that they are.","say":"The queries make the tables. The yammel and the Markdown say what those tables must be, and the tests check that they are."}]},
-"steps":{"name":"Ten steps","lead":1.0,"tail":1.0,"vo":[
- {"id":"ten","gap":0.8,"text":"Jun works in ten steps."},
- {"id":"s1","gap":0.6,"text":"Start from a question. Learn what the sources really hold. Define what each consumer needs."},
- {"id":"s4","gap":0.6,"text":"Name the gaps, and write the contracts. Write the tests, before any code. Build, layer by layer."},
- {"id":"s7","gap":0.8,"text":"Validate against a number people trust. Review and ship. Keep each fact written once. And let the model evolve without breaking anyone."},
+"steps":{"name":"Four phases","lead":1.0,"tail":1.0,"vo":[
+ {"id":"ten","gap":0.8,"text":"Jun works in four phases: ask, promise, build and keep. Ten steps in all."},
+ {"id":"s1","gap":0.6,"text":"Ask. Start from a question. Learn what the sources really hold. Define what each consumer needs."},
+ {"id":"s4","gap":0.6,"text":"Promise. Name the gaps, and write the contracts. Write the tests, before any code."},
+ {"id":"s7","gap":0.6,"text":"Build. Layer by layer. Validate against a number people trust. Review and ship."},
+ {"id":"s9","gap":0.8,"text":"Keep. Each fact written once, and a model that evolves without breaking anyone."},
  {"id":"agent","gap":0.8,"text":"An AI agent can help at every step. At every step, a person approves."}]},
 "series":{"name":"The series","lead":1.0,"tail":1.0,"vo":[
  {"id":"next","gap":0.8,"text":"The next eight films take the steps in turn."},

@@ -110,8 +110,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Y como las carpetas de Finanzas llevan su nombre desde el primer commit, Finanzas puede mudarse a un proyecto propio, entera.",
 "Its marts, its exposure, its seeds, its decisions, and the test and two analyses it was built with.":
 "Sus marts, su exposición, sus seeds, sus decisiones, y la prueba y los dos análisis con que se construyó.",
-"Ten steps, ten commits. You can replay them one by one, in the repository.":
-"Diez pasos, diez commits. Puedes repetirlos uno por uno, en el repositorio.",
+"Four phases, ten steps, ten commits. You can replay them one by one, in the repository.":
+"Cuatro fases, diez pasos, diez commits. Puedes repetirlos uno por uno, en el repositorio.",
 "Some files arrived to stay: the question, the decisions, the contract, the tests, the model.":
 "Algunos archivos llegaron para quedarse: la pregunta, las decisiones, el contrato, las pruebas, el modelo.",
 "Some were for the work: three open items, and the file that held them. They're gone. The project says only what's still open.":

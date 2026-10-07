@@ -215,37 +215,37 @@ Y como las carpetas de Finanzas llevan su nombre desde el primer commit, Finanza
 Sus marts, su exposición, sus seeds, sus decisiones, y la prueba y los dos análisis con que se construyó.
 
 55
-00:07:04,956 --> 00:07:09,835
-Diez pasos, diez commits. Puedes repetirlos uno por uno, en el repositorio.
+00:07:04,956 --> 00:07:10,843
+Cuatro fases, diez pasos, diez commits. Puedes repetirlos uno por uno, en el repositorio.
 
 56
-00:07:11,335 --> 00:07:16,840
+00:07:12,343 --> 00:07:17,848
 Algunos archivos llegaron para quedarse: la pregunta, las decisiones, el contrato, las pruebas, el modelo.
 
 57
-00:07:18,340 --> 00:07:25,719
+00:07:19,348 --> 00:07:26,727
 Otros eran para el trabajo: tres puntos abiertos, y el archivo que los contenía. Ya no están. El proyecto dice solo lo que sigue abierto.
 
 58
-00:07:27,419 --> 00:07:38,477
+00:07:28,427 --> 00:07:39,485
 Cada archivo tiene un hogar. Las fuentes, por sistema: dominios de aplicación. El núcleo, por significado: dominios de datos. Los marts y las exposiciones, por quién decide: dominios de negocio.
 
 59
-00:07:40,177 --> 00:07:46,636
+00:07:41,185 --> 00:07:47,644
 Y cada archivo tiene una vida: escrito a mano, generado, o guardado solo mientras dura el trabajo.
 
 60
-00:07:48,136 --> 00:07:53,877
+00:07:49,144 --> 00:07:54,885
 La próxima pregunta empezará igual: en carpetas propias, con un archivo que no va a durar.
 
 61
-00:07:55,577 --> 00:08:06,047
+00:07:56,585 --> 00:08:07,055
 Esa es la serie. Una pregunta y su significado, las fuentes, los consumidores, promesas y pruebas, capas, el número confiable, un agente en el equipo, escrito una sola vez, y el cambio.
 
 62
-00:08:07,747 --> 00:08:11,346
+00:08:08,755 --> 00:08:12,354
 El modelo es el plano. dbt es cómo lo construyes.
 
 63
-00:08:13,046 --> 00:08:14,548
+00:08:14,054 --> 00:08:15,556
 Decláralo. Luego constrúyelo.

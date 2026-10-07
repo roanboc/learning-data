@@ -88,7 +88,7 @@ On "turns a key into a hash", the words "key → hash" write themselves a beat b
 {%- endmacro %}
 ```
 
-**On screen.** step 1 · a question · Planning · within 15 credit points · graduate certificate · by faculty · as at census date · the decision · places to offer · the wallet app · as they are today · census report · 12 · runs on dbt Core · DuckDB · Databricks · dbt Cloud · the connection · key → hash
+**On screen.** Ask · step 1 · a question · Planning · within 15 credit points · graduate certificate · by faculty · as at census date · the decision · places to offer · the wallet app · as they are today · census report · 12 · runs on dbt Core · DuckDB · Databricks · dbt Cloud · the connection · key → hash
 
 **In the repo.** [`models/marts/planning/_planning__conceptual.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__conceptual.yml) · [`profiles.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/profiles.yml) · [`macros/shared/keys.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/macros/shared/keys.sql)
 
@@ -261,7 +261,7 @@ The student domain's decision log, `models/core/student/_student__decisions.yml`
 
 **Picture.** The blueprint with its four things, the question card above it and two faces beside it; around it, blank space, as on Snow's map. Beneath the blueprint, three source streams arrive in their colours: student system (blue), learning platform (green), short-course platform (pink). On "one learner, Aisha", she surfaces in each, under `S-20417`, `u-88213` and ` Aisha.K@Mail.example ` (spaces drawn as visible dots). The loop's station 2 lights. Wordless end card: *Start from a question* · "Model only what the question touches; name who owns each meaning first." · In the weeds of data crafting.
 
-**On screen.** one question · four things · two owners · nothing else · the sources · Aisha · S-20417 · u-88213 · Aisha.K@Mail.example · *Start from a question* · Model only what the question touches; name who owns each meaning first.
+**On screen.** one question · four things · two owners · nothing else · the sources · Aisha · S-20417 · u-88213 · Aisha.K@Mail.example · *Start from a question* · Model only what the question touches; name who owns each meaning first. · Ask · step 2 · the sources
 
 ## Pause and think
 
@@ -358,6 +358,7 @@ Eight situations, in this order.
 
 | Date | Decision |
 |---|---|
+| 7 October 2026 | The series now groups its ten steps into four phases (ask, promise, build, keep), which the opening film introduces. This film's step labels name their phase: "Ask · step 1 · a question" and "Ask · step 2 · the sources". |
 | 30 September 2026 | Open in 1854 Soho with Snow's map: one question decides what goes on a map. The workhouse and brewery stay as labels; the pump handle legend is left out. |
 | 30 September 2026 | The film says once, in *The question*, that the code and the data are real: dbt Core with DuckDB here, Databricks with dbt Cloud in the story, and only the connection and the hash function change. Every code and YAML card carries `runs on dbt Core · DuckDB` (on `profiles.yml`, beside the `duckdb` target; on `macros/keys.sql`, "(and Databricks)" since it shows both engines). Markdown cards (`docs/decisions.md`, `docs/conceptual-model.md`, `SKILL.md`) take no label: they are documents, and nothing runs them. |
 | 30 September 2026 | The census report's twelve is named, not shown, as the number to reach. The film keeps the opening film's numbers out. |

@@ -186,14 +186,16 @@ scene("lives",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   ["unique","not_null","relationships","contract"].forEach((s,i)=>{const x=760+i*260,y=940,ok=fin(t,tT+0.3+i*0.35,0.3);arrive(ctx,x,y,t,tT+i*0.12,()=>{glass(ctx,x-110,y-30,220,60,14,GOOD,{glow:8+10*ok,ea:0.6,fill:"rgba(7,12,24,0.95)"});T(ctx,s,x-10,y+7,{f:"mono",w:500,size:18,align:"center"});tick_(ctx,x+84,y,24,GOOD,ok);},{dy:20});});
   ctx.restore();vign(ctx,S);});
 
-/* ---------- 9. Ten steps ---------- */
+/* ---------- 9. Four phases ---------- */
 scene("steps",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.03});
-  const cA=c("agent"),K=[["s1","Start"],["s1","Learn"],["s1","Define"],["s4","Name"],["s4","Write the tests"],["s4","Build"],["s7","Validate"],["s7","Review"],["s7","Keep"],["s7","evolve"]];
+  const cA=c("agent"),K=[["s1","Start"],["s1","Learn"],["s1","Define"],["s4","Name"],["s4","Write the tests"],["s7","Layer"],["s7","Validate"],["s7","Review"],["s9","written once"],["s9","evolves"]];
+  // the four phases: named together in the first line, then each lit as its own line begins
+  const P=[["ask","s1","Ask"],["promise","s4","Promise"],["build","s7","Build"],["keep","s9","Keep"]],phA=fin(t,w("ten","four phases")-0.2,0.6),phaseOn=P.map(([n,id,s])=>0.35*fin(t,w("ten",n)-0.1,0.4)+0.65*fin(t,w(id,s)-0.1,0.4));
   const on=K.map(([id,s])=>fin(t,w(id,s)-0.1,0.4));const ag=clamp((t-cA-0.2)/4.4,0,1)*10,agA=fin(t,cA-0.2,0.5);
   const teal=on.map((_,i)=>fin(t,cA+0.2+(i+0.6)*0.44,0.3)),ticks=on.map((_,i)=>fin(t,w("agent","person approves")-0.4+i*0.12,0.3));
-  arrive(ctx,960,580,t,0.2,()=>{T(ctx,"Ten steps",960,560,{w:800,size:46,align:"center"});T(ctx,"Jun's process",960,604,{w:600,size:22,align:"center",color:rgba(SOFT,1)});},{from:0.9});
-  arrive(ctx,960,560,t,0.0,()=>stepLoop(ctx,960,560,640,360,t,{on,agent:ag,agentA:agA,teal,ticks}),{d:1.2,from:0.9});
+  arrive(ctx,960,580,t,0.2,()=>{T(ctx,"Four phases, ten steps",960,560,{w:800,size:46,align:"center"});T(ctx,"Jun's process",960,604,{w:600,size:22,align:"center",color:rgba(SOFT,1)});},{from:0.9});
+  arrive(ctx,960,560,t,0.0,()=>stepLoop(ctx,960,560,640,360,t,{on,agent:ag,agentA:agA,teal,ticks,phases:phA,phaseOn,phaseSize:30}),{d:1.2,from:0.9});
   arrive(ctx,760,680,t,w("agent","agent"),()=>tag(ctx,760,680,"an agent helps",KT_AI,{align:"center",size:20}),{dy:14});
   arrive(ctx,1160,680,t,w("agent","person approves")-0.2,()=>tag(ctx,1160,680,"a person approves",TRUST,{align:"center",size:20}),{dy:14});
   ctx.restore();vign(ctx,S);});
@@ -203,7 +205,7 @@ scene("series",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   ctx.save();drift(ctx,t,sc,{z:0.025});
   // the loop, carried from the last chapter, shrinks to make room for the films, and its labels give way to theirs
   const m=ease(fin(t,0,1.4)),cx=960,cy=lerp(560,540,m),rx=lerp(640,400,m),ry=lerp(360,250,m),words=["question","same one","Grain","Contracts","layers","owns","agent","written"],ids=["list1","list1","list1","list2","list2","list2","list2","list2"];
-  stepLoop(ctx,cx,cy,rx,ry,t,{on:STEPS10.map(()=>lerp(1,0.35,m)),labA:1-fin(t,0,0.7)});
+  stepLoop(ctx,cx,cy,rx,ry,t,{on:STEPS10.map(()=>lerp(1,0.35,m)),labA:1-fin(t,0,0.7),phases:1-fin(t,0,0.7)});
   arrive(ctx,cx,cy,t,1.0,()=>{glass(ctx,cx-200,cy-54,400,108,20,WEED,{glow:18,ea:0.85,fill:"rgba(7,12,24,0.96)"});T(ctx,"1 · this film",cx,cy-12,{f:"mono",w:500,size:18,align:"center",color:rgba(WEED,1)});T(ctx,"Declare it, then build it",cx,cy+24,{w:800,size:22,align:"center"});});
   arrive(ctx,960,76,t,0.4,()=>T(ctx,"The next eight films",960,76,{w:800,size:36,align:"center"}),{from:0.9});
   // each film arrives in its place, beside the steps it takes, and a line joins it to them

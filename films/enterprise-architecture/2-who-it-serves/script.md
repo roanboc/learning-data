@@ -1,6 +1,6 @@
 # The map before the data · Who it serves, and how it pays: script
 
-*The script of Who it serves, and how it pays, film 2 of 11 of The map before the data (a working title), a series on enterprise architecture and why it matters for data, as built: 4:58, in ten chapters, in English, 7 October 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 10.*
+*The script of Who it serves, and how it pays, film 2 of 11 of The map before the data (a working title), a series on enterprise architecture and why it matters for data, as built: 4:58, in ten chapters, in English, 7 October 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 10. Made to read on a phone: on-screen text is at least 28 px in the frame, and the camera moves in on whatever the narration is about.*
 
 ## The promise
 
@@ -62,7 +62,7 @@ In 1882, Edison's customers on Pearl Street didn't want electricity; they wanted
 
 **Narration.** Tomás starts with households, one canvas at a time. What are they trying to get done? Keep the lights and the heating on. Not worry about the bill. And, for many, do their bit for the climate. A job is what the customer wants, in their words, not what the utility sells.
 
-**Picture.** The households' value proposition canvas goes up across the wall, drawn in marker: the value map (products and services; gain creators; pain relievers) and the customer profile (gains; pains; customer jobs). The customer jobs section lights, and three blue notes land in it: keep the lights and heating on · not worry about the bill · do their bit for the climate. "jobs: in the customer's words, not what the utility sells".
+**Picture.** The households' value proposition canvas goes up across the wall, drawn in marker: the value map (products and services; gain creators; pain relievers) and the customer profile (gains; pains; customer jobs). The camera moves in on the customer jobs section, which lights, and three blue notes land in it: keep the lights and heating on · not worry about the bill · do their bit for the climate. "jobs: in the customer's words, not what the utility sells".
 
 **On screen.** value proposition canvas · households · customer jobs · keep the lights and heating on · not worry about the bill · do their bit for the climate · jobs: in the customer's words, not what the utility sells
 
@@ -70,7 +70,7 @@ In 1882, Edison's customers on Pearl Street didn't want electricity; they wanted
 
 **Narration.** What goes wrong today? Bills that are too high. Bills based on a guess. A power cut with no warning, and no idea when it ends. And what would be a win? Knowing when the power will be back. A bill they understand. Paying less, because of their solar panels.
 
-**Picture.** The same canvas. The pains section lights; three pink notes: bills too high · bills based on a guess · no warning, no idea when it ends. Then the gains section; three green notes: know when the power's back · a bill they understand · pay less, with solar.
+**Picture.** The same canvas. The camera moves to the pains section, which lights; three pink notes: bills too high · bills based on a guess · no warning, no idea when it ends. Then up to the gains section; three green notes: know when the power's back · a bill they understand · pay less, with solar.
 
 **On screen.** pains · bills too high · bills based on a guess · no warning, no idea when it ends · gains · know when the power's back · a bill they understand · pay less, with solar
 
@@ -78,7 +78,7 @@ In 1882, Edison's customers on Pearl Street didn't want electricity; they wanted
 
 **Narration.** Now the other side: what the utility offers, named the way a customer would name it. Electricity supply. A connection to the network. Outage updates by text. A hardship plan. Then, for each pain, what takes it away. Smart meters replace guesses with real readings. A text gives the time the power will be back. A payment plan spreads a large bill.
 
-**Picture.** The value map. Products and services, as yellow notes as they're named: electricity supply · a network connection · outage updates by text · a hardship plan. Then the pain relievers, each with a red line drawn to the pain it relieves: smart meters: real readings (to bills based on a guess) · outage text, with a time (to no warning) · payment plans (to bills too high).
+**Picture.** The camera moves to the value map. Products and services, as yellow notes as they're named: electricity supply · a network connection · outage updates by text · a hardship plan. Then, with the pains in view, the pain relievers, each with a red line drawn to the pain it relieves: smart meters: real readings (to bills based on a guess) · outage text, with a time (to no warning) · payment plans (to bills too high).
 
 **On screen.** products & services · electricity supply · a network connection · outage updates by text · a hardship plan · pain relievers · smart meters: real readings · outage text, with a time · payment plans
 
@@ -94,7 +94,7 @@ In 1882, Edison's customers on Pearl Street didn't want electricity; they wanted
 
 **Narration.** Then, how each offering pays. Not one canvas for the whole utility, but one for each offering, because each has its own economics. The network earns what the regulator allows, through a charge on every bill. Its biggest cost is poles, wires and crews. Retail supply earns from tariffs, and its biggest cost is buying energy on the wholesale market. The hardship plan is paid for by the government, because a public utility is measured by public value, not only by profit.
 
-**Picture.** Two business model canvases side by side: network connection, and retail supply. Notes land in their blocks. Network: every connected home and business (segments) · power, delivered safely (value) · build, maintain, restore (activities) · a charge on every bill, capped by the regulator (revenue) · poles, wires and crews (cost). Retail: households and businesses · power at a fair price · buy energy, bill customers · tariffs · energy, bought wholesale. Below, a table builds row by row: offering · earns from · biggest cost, for the network connection, retail supply and the hardship plan (the government · support for those who can't pay). "public value, not only profit".
+**Picture.** Two business model canvases side by side: network connection, and retail supply. The camera moves in on each in turn as notes land in its blocks. Network: every connected home and business (segments) · power, delivered safely (value) · build, maintain, restore (activities) · a charge on every bill, capped by the regulator (revenue) · poles, wires and crews (cost). Retail: households and businesses · power at a fair price · buy energy, bill customers · tariffs · energy, bought wholesale. The camera pulls back, and below, a table builds: offering · earns from · biggest cost, for the network connection, retail supply and the hardship plan (the government · support for those who can't pay). "public value, not only profit".
 
 **On screen.** business model canvas · network connection · retail supply · offering · earns from · biggest cost · a regulated charge on every bill · poles, wires and crews · tariffs · wholesale energy · hardship plan · the government · support for those who can't pay · public value, not only profit
 

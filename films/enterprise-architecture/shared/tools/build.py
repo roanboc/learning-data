@@ -11,7 +11,7 @@ SS, S = SHARED / 'src', ROOT / 'src'
 # last, then In the weeds' finishing pass for the video.
 FILES = [SS / 'core.js', SS / 'logos.js', SS / 'style2.js', S / 'narration.js', S / 'vodur.js', S / 'breath.js', SS / 'ui3.js',
          SKETCH / 'sketch3.js', CHARS / 'people.js', EP1 / 'silent.js', WORDS / 'words.js', TRUE / 'true.js', WEEDS / 'weeds.js',
-         EA / 'people.js', EA / 'ea.js'] + [S / f for f in META['src']] + [SS / 'engine3.js', WEEDS / 'post.js']
+         EA / 'people.js', EA / 'ea.js'] + [S / f for f in META['src']] + [SS / 'engine3.js', EA / 'mobile.js', WEEDS / 'post.js']
 js = '\n'.join(f.read_text() for f in FILES if f.exists())
 GF = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">'
 # the render page carries its own fonts, so renders need no network and look the same on every machine

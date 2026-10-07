@@ -26,6 +26,7 @@ Run from this folder, `films/enterprise-architecture/1-day-one/source/`:
 python tools/tts.py        # voices each line into build/vo/ and writes src/vodur.js
 python tools/build.py      # dist/render.html, dist/film.js, dist/film.html
 python tools/check.py      # every frame must draw without an error
+python tools/legible.py    # every piece of text must read on a phone (28 px or more in the frame, or marked as decoration)
 python tools/pace.py       # pacing per chapter
 python tools/stills.py [chapter ...] [--at 12.5 ...] [--every 2] --size 960   # review stills -> build/stills/
 python tools/audio.py      # mixes dist/soundtrack.mp3 from build/vo and tools/score.py

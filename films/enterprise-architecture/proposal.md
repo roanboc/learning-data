@@ -1,6 +1,6 @@
 # Enterprise architecture, for data
 
-*Proposal for a series on enterprise architecture and why it matters for data, v0.1. The folder is named after the topic; the series title is still open. Status: proposed, 7 October 2026. *Day one* is built ([script](1-day-one/script.md), [series README](README.md)); it isn't on the site yet.*
+*Proposal for a series on enterprise architecture and why it matters for data, v0.1. The folder is named after the topic; the series title is still open. Status: proposed, 7 October 2026. *Day one* and *Who it serves, and how it pays* are built ([series README](README.md)); they aren't on the site yet.*
 
 ## Decided
 
@@ -15,6 +15,7 @@
 | 7 October 2026 | *Day one* opens in 1085 with the Domesday survey: a ruler who, nineteen years on, still didn't know exactly what he ruled. The layers are held by three questions: why, and for whom; how it works; what runs it. |
 | 7 October 2026 | A working title, *The map before the data*, for the title and end cards; it's one line in `shared/src/ea.js` to change. |
 | 7 October 2026 | The series' look: drafts are paper on a wall, the confirmed model is glass in the layers' conventional colours. Its sound: nylon-string plucks and a soft flute over warm pads, and its own mark, 1-3-5-8. A second character, Grace Achieng, owns network operations. |
+| 7 October 2026 | *Who it serves, and how it pays* opens in 1882 with Edison's Pearl Street customers, who wanted light, not electricity. Farah Siddiqui, the customer advocate, joins the cast. Fit is a rule: an unmatched pain is a missing capability or a customer not served, and the canvas says which. |
 
 ## The brief
 
@@ -132,6 +133,8 @@ Chapter by chapter, with narration: [the script](1-day-one/script.md).
 **Ideas.** Customer segments, jobs, pains and gains; products and services, pain relievers and gain creators; the fit between them. The business model canvas per offering. In the public sector, value isn't only revenue, and the canvas has to say so.
 
 **On screen.** Canvases on a wall, with sticky notes moved as people correct them.
+
+Chapter by chapter, with narration: [the script](2-who-it-serves/script.md).
 
 ### 3. Why it moves
 

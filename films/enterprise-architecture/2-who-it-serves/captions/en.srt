@@ -1,0 +1,187 @@
+1
+00:00:01,400 --> 00:00:06,809
+In 1882, Thomas Edison opened a power station on Pearl Street, in New York.
+
+2
+00:00:08,009 --> 00:00:11,280
+His customers didn't want electricity. They wanted light.
+
+3
+00:00:12,580 --> 00:00:15,640
+Gas lamps were hot, smoky, and could start fires.
+
+4
+00:00:16,840 --> 00:00:24,126
+So Edison sold steady, clean light, priced to compete with gas, and measured it with a meter whose zinc plates were weighed.
+
+5
+00:00:24,826 --> 00:00:28,393
+He knew who he served, what they were trying to do, and how it would pay.
+
+6
+00:00:35,693 --> 00:00:38,988
+Tomás's first note asks why the utility exists.
+
+7
+00:00:39,688 --> 00:00:45,508
+The annual report answers in five words: safe, affordable, reliable, clean, ours.
+
+8
+00:00:46,808 --> 00:00:51,158
+But for whom? He goes to see Farah, the utility's customer advocate.
+
+9
+00:00:52,358 --> 00:00:58,982
+They start with two kinds of canvas: one for each kind of customer, and one for each thing the utility offers.
+
+10
+00:01:01,682 --> 00:01:05,449
+Who pays, who uses and who decides are often different people.
+
+11
+00:01:06,649 --> 00:01:14,788
+A tenant uses the power and pays the bill. The landlord decides whether there are solar panels. And the regulator decides the price.
+
+12
+00:01:16,388 --> 00:01:24,667
+Farah names the segments: households, households in hardship, businesses, and homes with solar, which buy power and sell it back.
+
+13
+00:01:26,167 --> 00:01:32,732
+The minister and the regulator matter just as much, but they aren't customers. They'll have their own place on the map.
+
+14
+00:01:35,432 --> 00:01:38,612
+Tomás starts with households, one canvas at a time.
+
+15
+00:01:39,312 --> 00:01:40,732
+What are they trying to get done?
+
+16
+00:01:41,832 --> 00:01:43,587
+Keep the lights and the heating on.
+
+17
+00:01:44,887 --> 00:01:46,337
+Not worry about the bill.
+
+18
+00:01:47,037 --> 00:01:49,295
+And, for many, do their bit for the climate.
+
+19
+00:01:50,595 --> 00:01:55,360
+A job is what the customer wants, in their words, not what the utility sells.
+
+20
+00:01:58,060 --> 00:02:00,608
+What goes wrong today? Bills that are too high.
+
+21
+00:02:01,308 --> 00:02:02,674
+Bills based on a guess.
+
+22
+00:02:03,774 --> 00:02:06,970
+A power cut with no warning, and no idea when it ends.
+
+23
+00:02:08,670 --> 00:02:11,551
+And what would be a win? Knowing when the power will be back.
+
+24
+00:02:12,251 --> 00:02:13,591
+A bill they understand.
+
+25
+00:02:14,291 --> 00:02:16,754
+Paying less, because of their solar panels.
+
+26
+00:02:19,854 --> 00:02:24,734
+Now the other side: what the utility offers, named the way a customer would name it.
+
+27
+00:02:25,834 --> 00:02:31,907
+Electricity supply. A connection to the network. Outage updates by text. A hardship plan.
+
+28
+00:02:33,407 --> 00:02:35,729
+Then, for each pain, what takes it away.
+
+29
+00:02:36,829 --> 00:02:39,803
+Smart meters replace guesses with real readings.
+
+30
+00:02:40,503 --> 00:02:42,919
+A text gives the time the power will be back.
+
+31
+00:02:43,619 --> 00:02:45,733
+A payment plan spreads a large bill.
+
+32
+00:02:48,433 --> 00:02:50,869
+A canvas only means something if it fits.
+
+33
+00:02:51,569 --> 00:02:56,628
+Every pain needs something that relieves it. Every gain needs something that creates it.
+
+34
+00:02:57,928 --> 00:03:03,665
+On the canvas for homes with solar, one pain has nothing: waiting months to connect new panels.
+
+35
+00:03:05,165 --> 00:03:14,061
+An unmatched pain is either a missing capability or a customer the utility has decided not to serve. The canvas has to say which.
+
+36
+00:03:15,561 --> 00:03:20,478
+Farah is clear: they serve them. It's a missing capability, and it goes on the list.
+
+37
+00:03:26,178 --> 00:03:34,910
+Then, how each offering pays. Not one canvas for the whole utility, but one for each offering, because each has its own economics.
+
+38
+00:03:36,210 --> 00:03:43,874
+The network earns what the regulator allows, through a charge on every bill. Its biggest cost is poles, wires and crews.
+
+39
+00:03:45,374 --> 00:03:51,302
+Retail supply earns from tariffs, and its biggest cost is buying energy on the wholesale market.
+
+40
+00:03:52,602 --> 00:04:00,116
+The hardship plan is paid for by the government, because a public utility is measured by public value, not only by profit.
+
+41
+00:04:02,816 --> 00:04:07,315
+These canvases aren't the architecture. The architecture is derived from them.
+
+42
+00:04:08,615 --> 00:04:18,863
+Segments become stakeholders. Pains and gains become reasons to change. What relieves a pain becomes a capability. Key activities become processes.
+
+43
+00:04:20,463 --> 00:04:26,895
+Revenue and costs have no box of their own in the model. They stay as tables, tied to what they pay for.
+
+44
+00:04:28,195 --> 00:04:32,459
+And later, the same blocks will tell a data team what each number is for.
+
+45
+00:04:35,159 --> 00:04:39,496
+Farah confirms the households' canvas. The rest stay drafts, for now.
+
+46
+00:04:40,796 --> 00:04:47,810
+Tomás's first note has an answer: to keep the region's homes and businesses powered, affordably and fairly.
+
+47
+00:04:49,310 --> 00:04:51,402
+Next, he asks why it has to change.

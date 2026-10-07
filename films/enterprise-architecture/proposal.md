@@ -144,7 +144,7 @@ Chapter by chapter, with narration: [the script](2-who-it-serves/script.md).
 
 **On screen.** A motivation view: who cares, what pressures them, what must be true.
 
-Chapter by chapter, with narration: [the script](3-why-it-moves/script.md) (a draft, not built yet).
+Chapter by chapter, with narration: [the script](3-why-it-moves/script.md).
 
 ### 4. What it must be able to do
 

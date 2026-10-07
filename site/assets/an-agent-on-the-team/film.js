@@ -1716,12 +1716,24 @@ function lineageGraph(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.0
       if(core>0||pk>0)glow(ctx,px,py,26+16*pk,c===2?TRUST:col,0.5*Math.max(core,pk));ctx.fillStyle=rgba(col,(0.55+0.45*Math.max(core,pk))*(1-0.75*dim*(1-Math.max(core,pk))));ctx.beginPath();ctx.arc(px,py,r,0,TAU);ctx.fill();});});
   return pos;}
 
-/* ---------- the process: ten steps on a loop ---------- */
+/* ---------- the process: ten steps on a loop, in four phases ---------- */
 const STEPS10=[["a question","?"],["the sources","src"],["the consumers","use"],["gaps · contracts","≠"],["tests first","✓"],["build in layers","≡"],["validate","="],["review · ship","PR"],["written once","1×"],["evolve","v2"]];
 function stepPos(i,cx,cy,rx,ry){const an=-Math.PI/2+i/10*TAU;return[cx+Math.cos(an)*rx,cy+Math.sin(an)*ry];}
-// o.on[i]: each station lit; o.agent: where the agent is (0..10, along the loop); o.ticks[i]: gold ticks; o.teal[i]: teal dots
+// the four phases the ten steps fall into, with their first and last step: ask, promise, build, keep ("declare it" is the first two, "then build it" the last two)
+const PHASES4=[["Ask",0,2],["Promise",3,4],["Build",5,7],["Keep",8,9]];
+const phaseOf=i=>PHASES4.findIndex(([,a,b])=>i>=a&&i<=b);
+// each phase as an arc just inside the loop, under its steps, with its name inside: o.on[k] lights phase k, o.a fades them all,
+// o.inset is how far inside the stations the arcs run, o.size the names' size, o.nameA fades the names alone, o.noNames draws the arcs alone
+function phaseRing(ctx,cx,cy,rx,ry,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const ins=o.inset==null?64:o.inset,ax=rx-ins,ay=ry-ins,an=k=>-Math.PI/2+k/10*TAU;
+  withA(ctx,a,()=>PHASES4.forEach(([nm,f,l],k)=>{const on=o.on?o.on[k]||0:1,a0=an(f-0.36),a1=an(l+0.36),am=an((f+l)/2);
+    ctx.save();ctx.strokeStyle=rgba(WEED,0.28+0.6*on);ctx.lineWidth=o.lw||4;ctx.lineCap="round";ctx.beginPath();ctx.ellipse(cx,cy,ax,ay,0,a0,a1);ctx.stroke();ctx.restore();
+    const na=o.nameA==null?1:o.nameA;if(!o.noNames&&na>0.01){const sz=o.size||24,lx=cx+Math.cos(am)*(ax-sz*2.4),ly=cy+Math.sin(am)*(ay-sz*1.5)+sz*0.36;
+      withA(ctx,na,()=>T(ctx,nm,lx,ly,{w:800,size:sz,align:"center",color:rgba(mix(SOFT,WEED,on),0.5+0.5*on)}));}}));}
+// o.on[i]: each station lit; o.agent: where the agent is (0..10, along the loop); o.ticks[i]: gold ticks; o.teal[i]: teal dots;
+// o.phases fades the four phases (default 1), o.phaseOn[k] lights each, o.phaseSize sizes their names
 function stepLoop(ctx,cx,cy,rx,ry,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{
   ctx.save();ctx.strokeStyle=rgba(WEED,0.25);ctx.lineWidth=2;ctx.setLineDash([4,10]);ctx.beginPath();ctx.ellipse(cx,cy,rx,ry,0,0,TAU);ctx.stroke();ctx.restore();
+  phaseRing(ctx,cx,cy,rx,ry,{a:o.phases==null?1:o.phases,on:o.phaseOn,size:o.phaseSize});
   STEPS10.forEach(([nm,gl],i)=>{const on=o.on?o.on[i]||0:1,[px,py]=stepPos(i,cx,cy,rx,ry),r=40;withA(ctx,0.25+0.75*on,()=>{if(on>0)glow(ctx,px,py,r*2,WEED,0.2*on);
       ctx.fillStyle="rgba(7,12,24,0.96)";ctx.beginPath();ctx.arc(px,py,r,0,TAU);ctx.fill();ring(ctx,px,py,r,mix(SOFT,WEED,on),1,2.4);
       T(ctx,gl,px,py+8,{w:800,size:gl.length>2?19:24,align:"center",color:rgba(mix(SOFT,WEED,on),1)});T(ctx,(i+1)+"",px-r+4,py-r+10,{f:"mono",w:500,size:15,color:rgba(SOFT,0.9)});
@@ -2478,7 +2490,7 @@ scene("next",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
     withA(ctx,1-0.88*(1-g4),()=>lineageGraph(ctx,320,452,960,388,t,{pick:pk,heads:0.8*g4,core:0.7}));});
   ag_tag(ctx,800,200,"merged · tested · signed off",AG_GRN,fin(t,Math.max(w("merged","merged"),1.9),0.5)*(1-fin(t,cM+0.4,0.5)),{size:24});
   const lA=fin(t,0.9,0.6)*out;if(lA>0){const on=STEPS10.map((_,i)=>i===6||i===7?1:0.3);ag_stepLoop(ctx,1620,190,215,120,t,{a:lA,on,r:34,teal:on.map((_,i)=>i===6||i===7?fin(t,1.0+i*0.05,0.4):0),ticks:on.map((_,i)=>i===6||i===7?fin(t,1.4+i*0.1,0.4):0)});
-    ag_tag(ctx,1620,190,"validate · review and ship",WEED,lA,{size:18});}
+    ag_tag(ctx,1620,190,"Build · validate · review and ship",WEED,lA,{size:18});}
   // the agent: carried across the cut from where chapter 7 left it, beside the Merge button; then it opens its fifth skill
   withA(ctx,out,()=>{
   const cr=ease(fin(t,0.9,1.4)),ox=lerp(lerp(960+(420-960)*1.025,1100,cr),1400,fin(t,cM-0.3,1.0)),oy=lerp(lerp(540+(770-540)*1.025,260,cr),440,fin(t,cM-0.3,1.0));kt_agent(ctx,ox,oy,26,t,{busy:pulseAt(t,cM,1.6)});

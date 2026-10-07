@@ -4,7 +4,7 @@
 
 **Tagline (working):** Declare it. Then build it.
 
-*From words to data* explained what a data model is and why it matters. This series goes one level deeper, into the weeds: how an analytics engineer turns an agreed model into tables, with dbt. It follows Jun, the university's analytics engineer, building version 3 of the credential model, from a question to versioned, tested and documented models, with an AI agent that helps at every step and a person who approves each one. It's for practitioners: it shows real code, YAML and Markdown, and names dbt's features.
+*From words to data* explained what a data model is and why it matters. This series goes one level deeper, into the weeds: how an analytics engineer turns an agreed model into tables, with dbt. It follows Jun, the university's analytics engineer, building version 3 of the credential model, from a question to versioned, tested and documented models, in four phases (ask, promise, build, keep) and ten steps, with an AI agent that helps at every step and a person who approves each one. It's for practitioners: it shows real code, YAML and Markdown, and names dbt's features.
 
 **Status:** all ten films are on the site, each with labs, scenarios and Pause and think, in English and Spanish. Their code and data come from [the example dbt project](project/), which runs on dbt Core with DuckDB. The plan is in the [proposal](proposal.md).
 
@@ -45,7 +45,7 @@ Like the other series, each film is generated from code. The series keeps what's
 
 | File | What it holds |
 |---|---|
-| `shared/src/weeds.js` | The series' components: its colours, title and end cards, the blueprint (`bpPaper`, `bpModel`), code files (`codeFile`), the lineage graph of a dbt project (`lineageGraph`), the loop of ten steps (`stepLoop`) and small cards, and its motion: a spring (`spring`), entrances that settle (`arrive`), a camera that drifts in every shot (`drift`) and dust for depth (`motes`) |
+| `shared/src/weeds.js` | The series' components: its colours, title and end cards, the blueprint (`bpPaper`, `bpModel`), code files (`codeFile`), the lineage graph of a dbt project (`lineageGraph`), the loop of ten steps in four phases (`stepLoop`, `phaseRing`, `PHASES4`) and small cards, and its motion: a spring (`spring`), entrances that settle (`arrive`), a camera that drifts in every shot (`drift`) and dust for depth (`motes`) |
 | `shared/src/post.js` | The video's finishing pass, used only by `tools/render.py`: motion blur (eight moments averaged into each frame) and a soft glow. The site's player draws live, without it |
 | `shared/src/people.js` | The series' new character, Jun Park, added to the cast of *When things go wrong* |
 | `shared/src/page.html` | The standalone player page |

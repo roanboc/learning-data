@@ -162,29 +162,29 @@ And because Finance's folders were named for it from the first commit, Finance c
 00:06:54.602 --> 00:07:01.056
 Its marts, its exposure, its seeds, its decisions, and the test and two analyses it was built with.
 
-00:07:04.956 --> 00:07:09.835
-Ten steps, ten commits. You can replay them one by one, in the repository.
+00:07:04.956 --> 00:07:10.843
+Four phases, ten steps, ten commits. You can replay them one by one, in the repository.
 
-00:07:11.335 --> 00:07:16.840
+00:07:12.343 --> 00:07:17.848
 Some files arrived to stay: the question, the decisions, the contract, the tests, the model.
 
-00:07:18.340 --> 00:07:25.719
+00:07:19.348 --> 00:07:26.727
 Some were for the work: three open items, and the file that held them. They're gone. The project says only what's still open.
 
-00:07:27.419 --> 00:07:38.477
+00:07:28.427 --> 00:07:39.485
 Every file has a home. Sources by system: application domains. The core by meaning: data domains. Marts and exposures by who decides: business domains.
 
-00:07:40.177 --> 00:07:46.636
+00:07:41.185 --> 00:07:47.644
 And every file has a lifetime: written by hand, generated, or kept only while the work goes on.
 
-00:07:48.136 --> 00:07:53.877
+00:07:49.144 --> 00:07:54.885
 The next question will start the same way: in folders of its own, with one file that won't last.
 
-00:07:55.577 --> 00:08:06.047
+00:07:56.585 --> 00:08:07.055
 That's the series. A question and its meaning, the sources, the consumers, promises and proofs, layers, the trusted number, an agent on the team, written once, and change.
 
-00:08:07.747 --> 00:08:11.346
+00:08:08.755 --> 00:08:12.354
 The model is the blueprint. dbt is how you build it.
 
-00:08:13.046 --> 00:08:14.548
+00:08:14.054 --> 00:08:15.556
 Declare it. Then build it.

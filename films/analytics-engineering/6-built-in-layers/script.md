@@ -91,7 +91,7 @@ from keyed
 
 On "no joins", a dashed arrow tries to reach from the pink file to a blue one and fades. On "customer", the word `customer_bk` glows, and a small tag "customer" sits on the file.
 
-**On screen.** step 6 · build · tests first · now the code · the agent drafts · runs · red · the least code · Jun reviews · staging · one per source table · 7 views · rename · cast · trim · one case · readable key · key set · hash · no joins · no rules · still a customer · runs on dbt Core · DuckDB
+**On screen.** Build · step 6 · in layers · tests first · now the code · the agent drafts · runs · red · the least code · Jun reviews · staging · one per source table · 7 views · rename · cast · trim · one case · readable key · key set · hash · no joins · no rules · still a customer · runs on dbt Core · DuckDB
 
 **In the repo.** [`skills/draft-a-model/SKILL.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/skills/draft-a-model/SKILL.md) · [`models/staging/short_courses/stg_short_courses__learners.sql`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/staging/short_courses/stg_short_courses__learners.sql) · [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md)
 
@@ -458,6 +458,7 @@ Eight situations, in this order.
 
 | Date | Decision |
 |---|---|
+| 7 October 2026 | The series now groups its ten steps into four phases (ask, promise, build, keep), which the opening film introduces. This film's step label names its phase: "Build · step 6 · in layers". |
 | 30 September 2026 | Open in the 1890s in Escoffier's kitchen at the Savoy: stations with one job each, and a pass. "Ran his kitchen as a brigade", not "invented". |
 | 30 September 2026 | The tests at the start are the real test names, drawn grey (not run: with no model, dbt skips them) and red only once the agent's first draft exists; the rigour sheet says the run is green. |
 | 1 October 2026 | After review: the opening trimmed to about 26 seconds and its bridge names the credential; the marts "each built for one consumer" (the wallet has two); staging named with the steps as views; the last chapter renamed *Metrics once* (the proposal's name), so it doesn't echo the series' last film. |

@@ -117,7 +117,7 @@ qs:[
   repo:["models/marts/finance/mart_finance__tuition_forgone.sql","exposures/finance/_finance__exposures.yml"]},
  {type:"order",lab:"where",vis:"ee_q_next",title:"La próxima pregunta",sit:"Servicios estudiantiles pregunta: ¿cuántos estudiantes tienen créditos reconocidos que todavía no usaron, por facultad? Ordena los primeros pasos.",
   items:["Alcance: la pregunta, y la decisión a la que sirve, en carpetas propias","Realidad de las fuentes: perfilar lo que contiene el núcleo","Resultado para el consumidor: una fila de qué, antes de cualquier código","Brechas y contratos: la promesa, y las brechas aceptadas","Las pruebas, antes de la lógica","Construir: la lógica, sobre el núcleo público"],
-  why:"Los mismos diez pasos. El primer commit le da al consumidor nuevo carpetas propias, su pregunta en su modelo conceptual, y un archivo que no va a durar: sus requisitos abiertos.",
+  why:"Las mismas cuatro fases y diez pasos. El primer commit le da al consumidor nuevo carpetas propias, su pregunta en su modelo conceptual, y un archivo que no va a durar: sus requisitos abiertos.",
   repo:["docs/process.md","models/marts/finance/_finance__conceptual.yml"]}
 ],
 done:[["Todas las decisiones bien tomadas.","Sabes darle a cada archivo su hogar y su vida, seguir una pregunta hasta donde perdura, y mudar un dominio entero."],["Casi todas.","Vuelve a mirar las situaciones que fallaste, y los labs a los que apuntan."],["Un buen comienzo.","Prueba los labs otra vez: la mayoría de las confusiones vienen de guardar algo más allá de su vida, o en el hogar de otro."],["Vale la pena otra mirada.","Mira la película otra vez, y luego prueba los labs antes que las situaciones."]]

@@ -18,7 +18,7 @@ On 9 November 1965, one relay near Niagara Falls tripped, and thirty million peo
 | A relay in a circle, its lever swinging open | The trigger: a protective relay set too low |
 | A rulebook with one seal | The answer: rules every utility keeps, so the whole holds |
 | Three letters on Tomás's desk, each pulling a thread | The minister, the regulator and the community, pulling apart |
-| Lavender cards: paper while they're drafts, purple glass once confirmed | The motivation layer's elements, each with its ArchiMate glyph in the corner |
+| Lavender cards: paper while they're drafts, purple glass once confirmed | The motivation layer's elements, each headed with its kind ("stakeholder", "driver", "goal"…) beside ArchiMate's glyph for it, large enough to tell the kinds apart; the small cards at the end keep only the glyph |
 | A card with the stakeholder glyph | Stakeholders |
 | Cards with a wheel, and purple arrows pushing on the utility's badge | Drivers: pressures, not wishes |
 | Cards with a magnifying glass and a source clipped on | Assessments: what a driver means here, with evidence |
@@ -56,7 +56,7 @@ On 9 November 1965, one relay near Niagara Falls tripped, and thirty million peo
 
 **Picture.** Ama, outlined in gold, arrives on the right. "who cares". Lavender cards, each with the stakeholder glyph, go up as they're named: customers (Farah's canvases, with four blue segment notes tucked behind) · the minister: owns it · the regulator: sets its prices · the community: lives beside its lines · the staff: keep it running. "stakeholder: anyone with an interest in what it does".
 
-**On screen.** Ama · regulatory lead · who cares · customers · Farah's canvases · the minister · owns it · the regulator · sets its prices · the community · lives beside its lines · the staff · keep it running · stakeholder: anyone with an interest in what it does
+**On screen.** Ama · regulatory lead · who cares · stakeholder (on each card) · customers · Farah's canvases · the minister · owns it · the regulator · sets its prices · the community · lives beside its lines · the staff · keep it running · stakeholder: anyone with an interest in what it does
 
 ### 4 · What pushes · 1:36–1:59
 
@@ -64,7 +64,7 @@ On 9 November 1965, one relay near Niagara Falls tripped, and thirty million peo
 
 **Picture.** The utility's badge in the middle. "drivers". A card with the driver glyph arrives in each corner as it's named, and a purple arrow from it pushes on the badge, again and again, until the badge shakes: decarbonisation (net zero by 2045) · affordability (bills up, incomes not) · ageing assets (poles and wires, built long ago) · rooftop solar (customers become generators). The tag becomes "driver: a pressure, not a wish".
 
-**On screen.** the utility · drivers · decarbonisation · net zero by 2045 · affordability · bills up, incomes not · ageing assets · poles and wires, built long ago · rooftop solar · customers become generators · driver: a pressure, not a wish
+**On screen.** the utility · drivers · driver (on each card) · decarbonisation · net zero by 2045 · affordability · bills up, incomes not · ageing assets · poles and wires, built long ago · rooftop solar · customers become generators · driver: a pressure, not a wish
 
 ### 5 · What it means here · 1:59–2:25
 
@@ -72,7 +72,7 @@ On 9 November 1965, one relay near Niagara Falls tripped, and thirty million peo
 
 **Picture.** The four drivers in a row along the top. "assessment: what it means here". Under three of them, a card with the assessment glyph arrives on a short line, and its source is clipped on: a third of poles over 50 years old (asset register, 2025) · built for one-way flow (network planning review) · bills up 18% in two years (annual report). Under decarbonisation, a fourth card, "customers don't care about climate", with no source; it's stamped "no source", and fades. "no source, no assessment".
 
-**On screen.** assessment: what it means here · decarbonisation · affordability · ageing assets · rooftop solar · a third of poles over 50 years old · asset register, 2025 · built for one-way flow · network planning review · bills up 18% in two years · annual report · customers don't care about climate · no source · no source, no assessment
+**On screen.** assessment: what it means here · driver · assessment (on each card) · decarbonisation · affordability · ageing assets · rooftop solar · a third of poles over 50 years old · asset register, 2025 · built for one-way flow · network planning review · bills up 18% in two years · annual report · customers don't care about climate · no source · no source, no assessment
 
 ### 6 · What must become true · 2:25–2:58
 
@@ -80,7 +80,7 @@ On 9 November 1965, one relay near Niagara Falls tripped, and thirty million peo
 
 **Picture.** "goals". Three cards with the goal glyph arrive along the top: keep bills affordable · replace assets before they fail · connect renewable power. "goal: a direction" · "outcome: how anyone will know". Under the first and the third, an arrow, and a card with the outcome glyph: network charge no higher in real terms, by 2030; new solar connected within 10 working days. Under the second, "a better network", which gets a red stamp: "how would anyone check?".
 
-**On screen.** goals · keep bills affordable · replace assets before they fail · connect renewable power · goal: a direction · outcome: how anyone will know · network charge no higher in real terms · by 2030 · new solar connected within 10 working days · a better network · how would anyone check?
+**On screen.** goals · goal · outcome (on each card) · keep bills affordable · replace assets before they fail · connect renewable power · goal: a direction · outcome: how anyone will know · network charge no higher in real terms · by 2030 · new solar connected within 10 working days · a better network · how would anyone check?
 
 ### 7 · When goals pull apart · 2:58–3:23
 
@@ -88,15 +88,15 @@ On 9 November 1965, one relay near Niagara Falls tripped, and thirty million peo
 
 **Picture.** A sketch on paper: hills with a wind farm on the left, a valley with a river, a substation on the right. A dashed red line draws itself from the wind farm, down through the valley, to the substation. Ropes are tied to one knot on it, and three cards pull: connect renewable power, keep bills affordable, and the community (no new line through our valley); the knot is dragged back and forth. "decided by the loudest? the next one goes another way". The tag gives way to "principles", and in the wordless breather the ropes go slack and still.
 
-**On screen.** connect renewable power · keep bills affordable · the community · no new line through our valley · decided by the loudest? the next one goes another way · principles
+**On screen.** goal · stakeholder (on each card) · connect renewable power · keep bills affordable · the community · no new line through our valley · decided by the loudest? the next one goes another way · principles
 
 ### 8 · Principles that can be tested · 3:23–3:56
 
 **Narration.** A principle is a rule every choice is checked against. Ama has three. Use what we have before we build. Every option is costed for the customers who pay for it. And customer information stays with the business that collected it. "Be sustainable" is not a principle, because nothing could ever fail it. Checked against these three, the new line isn't the first option. Upgrading the old line, with batteries in the valley, is.
 
-**Picture.** "principle: a rule every choice is checked against". Three numbered cards with the principle glyph: 1 use what we have before we build · 2 cost every option for the customers who pay · 3 customer information stays with the business that collected it. A fourth card, "be sustainable", is stamped "nothing could fail it", and fades. Two options arrive in glass: a new line through the valley, and upgrade the old line, add batteries. Each is checked against the three in turn: the new line gets a cross for 1, a tick for 2 and a dash for 3, which doesn't apply; the upgrade gets ticks for 1 and 2, and a dash for 3. The upgrade is outlined in gold. "not the loudest: the same rule, every time".
+**Picture.** "principle: a rule every choice is checked against". Three cards headed "principle 1", "principle 2" and "principle 3": 1 use what we have before we build · 2 cost every option for the customers who pay · 3 customer information stays with the business that collected it. A fourth card, "be sustainable", is stamped "nothing could fail it", and fades. Two options arrive in glass: a new line through the valley, and upgrade the old line, add batteries. Each is checked against the three in turn: the new line gets a cross for 1, a tick for 2 and a dash for 3, which doesn't apply; the upgrade gets ticks for 1 and 2, and a dash for 3. The upgrade is outlined in gold. "not the loudest: the same rule, every time".
 
-**On screen.** principle: a rule every choice is checked against · 1 · 2 · 3 · use what we have before we build · cost every option for the customers who pay · customer information stays with the business that collected it · be sustainable · nothing could fail it · a new line through the valley · upgrade the old line, add batteries · not the loudest: the same rule, every time
+**On screen.** principle: a rule every choice is checked against · principle 1 · principle 2 · principle 3 · principle · 1 · 2 · 3 · use what we have before we build · cost every option for the customers who pay · customer information stays with the business that collected it · be sustainable · nothing could fail it · a new line through the valley · upgrade the old line, add batteries · not the loudest: the same rule, every time
 
 ### 9 · The chain · 3:56–4:20
 
@@ -140,4 +140,4 @@ Stops after:
 
 ## Pacing report
 
-From `source/tools/pace.py`, as built: 4:43, 591 words, 125 words a minute, the voice speaking 68% of the time; no sentence with under 0.5 s after it, and no stop of 2.5 s or more inside a chapter. Three wordless moments: the map relit and the title, the ropes going still under "principles", and the end card. `source/tools/legible.py`: 259 pieces of text, none smaller than 28 px.
+From `source/tools/pace.py`, as built: 4:43, 591 words, 125 words a minute, the voice speaking 68% of the time; no sentence with under 0.5 s after it, and no stop of 2.5 s or more inside a chapter. Three wordless moments: the map relit and the title, the ropes going still under "principles", and the end card. `source/tools/legible.py`: 269 pieces of text, none smaller than 28 px.

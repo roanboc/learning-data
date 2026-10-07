@@ -8,7 +8,7 @@
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/breath.js` | The few longer pauses, and three wordless moments: the map relit and the title, the ropes going still under "principles", and the end card. |
-| `src/plan.js` | This film's pictures (prefixed `d3_`): a sketch of a grid going dark from Niagara outwards, the relay, a rulebook, the letters, the utility's badge, the motivation layer's cards (`d3_card`: lavender paper while a draft, purple glass once confirmed), a valley with a wind farm and a new line, and a gauge with a question. |
+| `src/plan.js` | This film's pictures (prefixed `d3_`): a sketch of a grid going dark from Niagara outwards, the relay, a rulebook, the letters, the utility's badge, the motivation layer's cards (`d3_card`: lavender paper while a draft, purple glass once confirmed, each headed with its kind and ArchiMate's glyph for it), a valley with a wind farm and a new line, and a gauge with a question. |
 | `src/scenes.js` | The ten chapters. |
 | `src/i18n/es/captions.js` | The Spanish captions, one per English line. |
 | `tools/score.py` | The film's music and sounds: the series' palette (nylon plucks, a soft flute, warm pads, open strings and a drone for 1965), here in D major, and the series' mark at the title and the end. Each effect fires with the thing it belongs to in `src/scenes.js`. |

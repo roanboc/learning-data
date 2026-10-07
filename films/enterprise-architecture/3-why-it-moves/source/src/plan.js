@@ -42,15 +42,19 @@ function d3_letter(ctx,x,y,w,h,head,lines,o){o=o||{};const a=o.a==null?1:o.a;if(
 function d3_badge(ctx,x,y,r,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x-r,y-r,2*r,2*r,r,EAC,{glow:16,ea:0.85,fill:"rgba(7,12,24,0.95)"});
   ctx.fillStyle=rgba(EAC,1);ctx.beginPath();ctx.moveTo(x+r*0.12,y-r*0.6);ctx.lineTo(x-r*0.32,y+r*0.08);ctx.lineTo(x-r*0.02,y+r*0.08);ctx.lineTo(x-r*0.14,y+r*0.6);ctx.lineTo(x+r*0.34,y-r*0.1);ctx.lineTo(x+r*0.04,y-r*0.1);ctx.closePath();ctx.fill();
   if(o.label)T(ctx,o.label,x,y+r+44,{w:800,size:30,align:"center",color:rgba(EAC,1)});});}
-// an element of the motivation layer: lavender paper while it's a draft, purple glass as o.glass goes to 1; its kind's glyph in the
-// corner, a title and an optional second line; o.st its status dot; o.src a source clipped to it
-function d3_card(ctx,cx,cy,w,h,kind,title,line,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const gl=clamp(o.glass||0,0,1),sz=o.size||32,lsz=o.lsize||28;
+// an element of the motivation layer: lavender paper while it's a draft, purple glass as o.glass goes to 1. A header names its kind,
+// with ArchiMate's glyph for it, large enough to tell the kinds apart (o.kind:false leaves only the glyph, at the left, for small cards;
+// o.kindText overrides the name, as in "principle 1"); then a title and an optional second line; o.st its status dot; o.src a source
+function d3_card(ctx,cx,cy,w,h,kind,title,line,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const gl=clamp(o.glass||0,0,1),sz=o.size||32,lsz=o.lsize||28,head=o.kind!==false;
   withA(ctx,a,()=>{sticky(ctx,cx,cy,w,h,"",{col:MOTP,edge:MOT,glass:gl,rot:0,st:o.st,src:o.src,srcA:o.srcA});
     if(o.hi)withA(ctx,o.hi,()=>{ctx.save();ctx.strokeStyle=rgba(MOT,0.9);ctx.lineWidth=4;rr(ctx,cx-w/2-6,cy-h/2-6,w+12,h+12,14);ctx.stroke();ctx.restore();});
-    const ink=gl>0.5?INK:INKD,gc=gl>0.5?MOT:MOTD;archGlyph(ctx,kind,cx+w/2-(o.st!=null?52:30),cy-h/2+28,13,gc);
-    const ls=wrapT(ctx,title,0,0,w-84,{size:sz,w:800,measure:true}),lh=sz*1.15,tot=ls.length*lh+(line?lsz*1.35:0),y0=cy-tot/2+sz*0.8;
-    ls.forEach((l,i)=>T(ctx,l,cx-w/2+26,y0+i*lh,{w:800,size:sz,color:rgba(ink,0.94),deco:o.deco}));
-    if(line)T(ctx,line,cx-w/2+26,y0+ls.length*lh+lsz*0.3,{w:600,size:lsz,color:rgba(ink,0.72),deco:o.deco});});}
+    const ink=gl>0.5?INK:INKD,gc=gl>0.5?MOT:MOTD,x0=cx-w/2,y0_=cy-h/2;let top=y0_;
+    if(head){archGlyph(ctx,kind,x0+46,y0_+36,22,gc);T(ctx,o.kindText||kind,x0+90,y0_+47,{f:"mono",w:600,size:30,color:rgba(gc,1),deco:o.deco});
+      ctx.fillStyle=rgba(gc,0.35);ctx.fillRect(x0+16,y0_+70,w-32,1.5);top=y0_+72;}
+    else archGlyph(ctx,kind,x0+36,cy,17,gc);
+    const tx=head?x0+26:x0+66,tw_=head?w-52:w-(o.st!=null?100:80),ls=wrapT(ctx,title,0,0,tw_,{size:sz,w:800,measure:true}),lh=sz*1.15,tot=ls.length*lh+(line?lsz*1.35:0),mid=(top+cy+h/2)/2,y1=mid-tot/2+sz*0.8;
+    ls.forEach((l,i)=>T(ctx,l,tx,y1+i*lh,{w:800,size:sz,color:rgba(ink,0.94),deco:o.deco}));
+    if(line)T(ctx,line,tx,y1+ls.length*lh+lsz*0.3,{w:600,size:lsz,color:rgba(ink,0.72),deco:o.deco});});}
 // a sketch of the valley in marker on a sheet: hills with a wind farm on the left, the valley, a substation on the right; p draws the
 // new line from the wind farm, through the valley, to the substation. Returns the knot where the ropes are tied.
 function d3_valley(ctx,x,y,w,h,t,p){sheet(ctx,x,y,w,h,{rot:-0.004});

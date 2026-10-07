@@ -50,31 +50,31 @@ scene("letters",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
 
 /* ---------- 3. Who cares ---------- */
 const D3_STK=[["customers","Farah's canvases",410,300,"customers"],["the minister","owns it",880,300,"minister"],["the regulator","sets its prices",1350,300,"regulator"],
-  ["the community","lives beside its lines",640,560,"community"],["the staff","keep it running",1110,560,"staff"]];
+  ["the community","lives beside its lines",640,570,"community"],["the staff","keep it running",1110,570,"staff"]];
 scene("cares",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);wallBg(ctx,S,t);
   ctx.save();drift(ctx,t,sc,{z:0.025,y:420});
   const cA=c("ama"),cS=c("stakeholder");
   arrive(ctx,1760,800,t,w("ama","Ama")-0.3,()=>{person(ctx,"ama",1760,1030,0.8,{t,pose:t>w("ama","starts")&&t<w("ama","starts")+2.2||t>cS&&t<cS+2?"explain":"stand"});tag(ctx,1660,540,"Ama · regulatory lead",TRUST,{align:"center",size:28});},{dy:20,from:0.96});
   arrive(ctx,880,120,t,w("ama","who cares"),()=>T(ctx,"who cares",880,132,{w:800,size:40,align:"center",color:rgba(PARCH,1)}),{dy:12});
   D3_STK.forEach(([n,l,x,y,k],i)=>{const t0=i===0?c("customers"):w(i<3?"others":"others",i===1?"minister":i===2?"regulator":i===3?"community":"staff")-0.2;
-    arrive(ctx,x,y,t,t0,()=>{if(i===0)[[-120,-92],[-40,-100],[40,-96],[120,-90]].forEach(([dx,dy],j)=>sticky(ctx,x+dx,y+dy,90,70,"",{col:NOTEC[2],rot:(j-1.5)*0.08}));
-      d3_card(ctx,x,y,420,150,"stakeholder",n,l,{hi:pulseAt(t,t0+0.2,1.6)});},{dy:-24,from:1.06});});
-  arrive(ctx,880,770,t,w("stakeholder","stakeholder"),()=>tag(ctx,880,770,"stakeholder: anyone with an interest in what it does",MOT,{align:"center",size:30}),{dy:12});
+    arrive(ctx,x,y,t,t0,()=>{if(i===0)[[-120,-92],[-40,-100],[40,-96],[120,-90]].forEach(([dx,dy],j)=>sticky(ctx,x+dx,y+dy-22,90,70,"",{col:NOTEC[2],rot:(j-1.5)*0.08}));
+      d3_card(ctx,x,y,420,190,"stakeholder",n,l,{hi:pulseAt(t,t0+0.2,1.6)});},{dy:-24,from:1.06});});
+  arrive(ctx,880,790,t,w("stakeholder","stakeholder"),()=>tag(ctx,880,790,"stakeholder: anyone with an interest in what it does",MOT,{align:"center",size:30}),{dy:12});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 4. What pushes ---------- */
 // each driver: name, line, where it sits, the line and word that bring it
-const D3_DRV=[["decarbonisation","net zero by 2045",380,290,"list","Decarbonisation"],["affordability","bills up, incomes not",1540,290,"list","Affordability"],
-  ["ageing assets","poles and wires, built long ago",380,760,"list","Ageing"],["rooftop solar","customers become generators",1540,760,"solar","rooftop solar"]];
+const D3_DRV=[["decarbonisation","net zero by 2045",380,280,"list","Decarbonisation"],["affordability","bills up, incomes not",1540,280,"list","Affordability"],
+  ["ageing assets","poles and wires, built long ago",380,770,"list","Ageing"],["rooftop solar","customers become generators",1540,770,"solar","rooftop solar"]];
 scene("pushes",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);wallBg(ctx,S,t);
   ctx.save();drift(ctx,t,sc,{z:0.025,y:500});
   const cP=c("pressure");let push=0;
   D3_DRV.forEach(([n,l,x,y,lid,k])=>{const t0=w(lid,k)-0.1,q=fin(t,t0+0.3,0.8);if(q<=0)return;const s=0.5+0.5*Math.sin((t-t0)*2.4);push+=q*s;
-    const dx=960-x,dy=520-y,L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L,x0=x+ux*250,y0=y+uy*110,x1=960-ux*(110+10*s),y1=520-uy*(110+10*s);
+    const dx=960-x,dy=520-y,L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L,x0=x+ux*250,y0=y+uy*130,x1=960-ux*(110+10*s),y1=520-uy*(110+10*s);
     arrowTo(ctx,x0,y0,x1,y1,MOT,0.9,{p:q,lw:6,head:18});});
   const wob=Math.min(1,push*0.35);
   arrive(ctx,960,520,t,0.3,()=>d3_badge(ctx,960+Math.sin(t*6)*4*wob,520+Math.cos(t*5)*4*wob,90,{label:"the utility"}),{dy:16});
-  D3_DRV.forEach(([n,l,x,y,lid,k])=>{const t0=w(lid,k)-0.1;arrive(ctx,x,y,t,t0,()=>d3_card(ctx,x,y,480,140,"driver",n,l,{hi:pulseAt(t,t0+0.2,1.6)}),{dy:-24,from:1.06});});
+  D3_DRV.forEach(([n,l,x,y,lid,k])=>{const t0=w(lid,k)-0.1;arrive(ctx,x,y,t,t0,()=>d3_card(ctx,x,y,480,180,"driver",n,l,{hi:pulseAt(t,t0+0.2,1.6)}),{dy:-24,from:1.06});});
   ctx.restore();
   arrive(ctx,960,90,t,w("then","drivers"),()=>tag(ctx,960,90,t>w("pressure","pressure")?"driver: a pressure, not a wish":"drivers",MOT,{align:"center",size:32}),{dy:10});
   vign(ctx,S);});
@@ -84,16 +84,16 @@ const D3_ASM=[["bills up 18% in two years","annual report",720,"bills","rose"],[
 scene("means",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);wallBg(ctx,S,t);
   ctx.save();drift(ctx,t,sc,{z:0.02,y:420});
   const cO=c("opinion"),gone=fin(t,cO+1.4,0.8);
-  D3_DRV.forEach(([n],i)=>arrive(ctx,260+i*460,200,t,0.2+i*0.12,()=>d3_card(ctx,260+i*460,200,420,110,"driver",n,null,{size:30}),{dy:-16}));
+  D3_DRV.forEach(([n],i)=>arrive(ctx,260+i*460,200,t,0.2+i*0.12,()=>d3_card(ctx,260+i*460,210,420,140,"driver",n,null,{size:30}),{dy:-16}));
   D3_ASM.forEach(([s_,src,x,lid,k])=>{const t0=w(lid,k)-0.3,q=fin(t,t0,0.6);if(q<=0)return;
-    withA(ctx,q,()=>{ctx.strokeStyle=rgba(MOT,0.7);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x,255);ctx.lineTo(x,375);ctx.stroke();});
-    arrive(ctx,x,470,t,t0,()=>d3_card(ctx,x,470,420,190,"assessment",s_,null,{size:30,src,srcA:fin(t,t0+0.5,0.4)}),{dy:-24,from:1.06});});
+    withA(ctx,q,()=>{ctx.strokeStyle=rgba(MOT,0.7);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x,280);ctx.lineTo(x,380);ctx.stroke();});
+    arrive(ctx,x,490,t,t0,()=>d3_card(ctx,x,490,420,220,"assessment",s_,null,{size:30,src,srcA:fin(t,t0+0.5,0.4)}),{dy:-24,from:1.06});});
   // an opinion, with no source
-  arrive(ctx,260,470,t,w("opinion","Without")-0.2,()=>withA(ctx,1-gone,()=>{d3_card(ctx,260,470,420,190,"assessment","customers don't care about climate",null,{size:30});
-    kt_rstamp(ctx,260,480,"no source",[200,60,60],fin(t,w("opinion","opinion")-0.2,0.3),fin(t,w("opinion","opinion"),0.35),{size:40,rot:-0.12});}),{dy:-24,from:1.06});
+  arrive(ctx,260,490,t,w("opinion","Without")-0.2,()=>withA(ctx,1-gone,()=>{d3_card(ctx,260,490,420,220,"assessment","customers don't care about climate",null,{size:30});
+    kt_rstamp(ctx,260,540,"no source",[200,60,60],fin(t,w("opinion","opinion")-0.2,0.3),fin(t,w("opinion","opinion"),0.35),{size:40,rot:-0.12});}),{dy:-24,from:1.06});
   ctx.restore();
   arrive(ctx,960,70,t,w("source","assessment"),()=>tag(ctx,960,70,"assessment: what it means here",MOT,{align:"center",size:32}),{dy:10});
-  arrive(ctx,960,760,t,w("opinion","opinion")+0.3,()=>tag(ctx,960,760,"no source, no assessment",[255,140,120],{align:"center",size:32}),{dy:12});
+  arrive(ctx,960,790,t,w("opinion","opinion")+0.3,()=>tag(ctx,960,790,"no source, no assessment",[255,140,120],{align:"center",size:32}),{dy:12});
   vign(ctx,S);});
 
 /* ---------- 6. What must become true ---------- */
@@ -101,25 +101,25 @@ const D3_GOAL=[["keep bills affordable",380,"Keep bills"],["replace assets befor
 scene("goals",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);wallBg(ctx,S,t);
   ctx.save();drift(ctx,t,sc,{z:0.02,y:420});
   const cD=c("direction"),cK=c("check");
-  D3_GOAL.forEach(([s_,x,k])=>{const t0=w("list",k)-0.1;arrive(ctx,x,230,t,t0,()=>d3_card(ctx,x,230,480,140,"goal",s_,null,{hi:pulseAt(t,t0+0.2,1.6)}),{dy:-24,from:1.06});});
+  D3_GOAL.forEach(([s_,x,k])=>{const t0=w("list",k)-0.1;arrive(ctx,x,220,t,t0,()=>d3_card(ctx,x,220,480,180,"goal",s_,null,{hi:pulseAt(t,t0+0.2,1.6)}),{dy:-24,from:1.06});});
   const OUT=[[380,"network charge no higher in real terms","by 2030",c("charge")],[1540,"new solar connected within 10 working days",null,c("days")],[960,"a better network",null,w("check","If no one")]];
-  OUT.forEach(([x,s_,l,t0],i)=>{const q=fin(t,t0+0.2,0.7);if(q<=0)return;arrowTo(ctx,x,305,x,410,MOT,0.85,{p:q,lw:3,head:12});
-    arrive(ctx,x,510,t,t0,()=>{d3_card(ctx,x,510,480,190,"outcome",s_,l,{size:30});if(i===2)kt_rstamp(ctx,x,612,"how would anyone check?",[200,60,60],fin(t,w("check","checked")-0.2,0.3),fin(t,w("check","checked"),0.35),{size:34,rot:-0.1});},{dy:-24,from:1.06});});
+  OUT.forEach(([x,s_,l,t0],i)=>{const q=fin(t,t0+0.2,0.7);if(q<=0)return;arrowTo(ctx,x,315,x,395,MOT,0.85,{p:q,lw:3,head:12});
+    arrive(ctx,x,510,t,t0,()=>{d3_card(ctx,x,510,480,220,"outcome",s_,l,{size:30});if(i===2)kt_rstamp(ctx,x,628,"how would anyone check?",[200,60,60],fin(t,w("check","checked")-0.2,0.3),fin(t,w("check","checked"),0.35),{size:34,rot:-0.1});},{dy:-24,from:1.06});});
   ctx.restore();
   arrive(ctx,960,70,t,w("now","Goals"),()=>tag(ctx,960,70,"goals",MOT,{align:"center",size:32}),{dy:10});
-  arrive(ctx,560,740,t,w("direction","direction"),()=>tag(ctx,560,740,"goal: a direction",MOT,{align:"center",size:30}),{dy:12});
-  arrive(ctx,1300,740,t,w("direction","An outcome"),()=>tag(ctx,1300,740,"outcome: how anyone will know",MOT,{align:"center",size:30}),{dy:12});
+  arrive(ctx,560,770,t,w("direction","direction"),()=>tag(ctx,560,770,"goal: a direction",MOT,{align:"center",size:30}),{dy:12});
+  arrive(ctx,1300,770,t,w("direction","An outcome"),()=>tag(ctx,1300,770,"outcome: how anyone will know",MOT,{align:"center",size:30}),{dy:12});
   vign(ctx,S);});
 
 /* ---------- 7. When goals pull apart ---------- */
 scene("collide",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");wallBg(ctx,S,t);
   ctx.save();drift(ctx,t,sc,{z:0.02,y:420});
   const still=fin(t,B,1.2),tug=fin(t,w("collide","collide"),0.8)*(1-still);
-  let knot=[960,540];arrive(ctx,960,400,t,0.2,()=>{knot=d3_valley(ctx,160,170,1600,500,t,clamp((t-w("collide","new line"))/1.4,0,1));},{d:1.0,from:0.97});
-  const pulls=[[420,770,"goal","keep bills affordable",null,w("cost","costs money")],[960,820,"stakeholder","the community","no new line through our valley",w("cost","through the valley")],[1500,770,"goal","connect renewable power",null,w("collide","Connecting")]];
+  let knot=[960,540];arrive(ctx,960,400,t,0.2,()=>{knot=d3_valley(ctx,160,160,1600,480,t,clamp((t-w("collide","new line"))/1.4,0,1));},{d:1.0,from:0.97});
+  const pulls=[[420,760,"goal","keep bills affordable",null,w("cost","costs money")],[960,780,"stakeholder","the community","no new line through our valley",w("cost","through the valley")],[1500,760,"goal","connect renewable power",null,w("collide","Connecting")]];
   let kx=knot[0],ky=knot[1];pulls.forEach(([x,y,,,,t0],i)=>{const q=fin(t,t0,0.6)*tug,s=Math.sin(t*3.1+i*2.1);kx+=(x-knot[0])*0.07*q*(0.5+0.5*s);ky+=(y-knot[1])*0.07*q*(0.5+0.5*s);});
-  pulls.forEach(([x,y,k,n,l,t0],i)=>{const q=fin(t,t0,0.6);if(q<=0)return;withA(ctx,q,()=>{ctx.save();ctx.strokeStyle="rgba(150,120,80,0.95)";ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(kx,ky);ctx.quadraticCurveTo((kx+x)/2,(ky+y)/2+30*(1-tug),x,y-70);ctx.stroke();ctx.restore();});
-    arrive(ctx,x,y,t,t0,()=>d3_card(ctx,x,y,i===1?520:440,i===1?150:120,k,n,l,{size:30}),{dy:24,from:1.06});});
+  pulls.forEach(([x,y,k,n,l,t0],i)=>{const q=fin(t,t0,0.6);if(q<=0)return;withA(ctx,q,()=>{ctx.save();ctx.strokeStyle="rgba(150,120,80,0.95)";ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(kx,ky);ctx.quadraticCurveTo((kx+x)/2,(ky+y)/2+30*(1-tug),x,y-(i===1?95:80));ctx.stroke();ctx.restore();});
+    arrive(ctx,x,y,t,t0,()=>d3_card(ctx,x,y,i===1?520:440,i===1?190:160,k,n,l,{size:30}),{dy:24,from:1.06});});
   ctx.fillStyle="rgba(150,120,80,1)";ctx.beginPath();ctx.arc(kx,ky,10,0,TAU);ctx.fill();
   ctx.restore();
   arrive(ctx,960,70,t,w("loudest","loudest"),()=>withA(ctx,1-fin(t,w("loudest","principles")-0.3,0.4),()=>tag(ctx,960,70,t>w("loudest","another way")?"decided by the loudest? the next one goes another way":"decided by the loudest?",[255,140,120],{align:"center",size:30})),{dy:10});
@@ -133,9 +133,9 @@ const D3_OPT=[["a new line through the valley",600,[-1,1,0]],["upgrade the old l
 scene("principles",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);wallBg(ctx,S,t);
   ctx.save();drift(ctx,t,sc,{z:0.02,y:420});
   const cC=c("checked"),sus=fin(t,cC-0.4,0.6);
-  D3_PR.forEach(([s_,x,lid,k],i)=>{const t0=w(lid,k)-0.1;arrive(ctx,x,240,t,t0,()=>{d3_card(ctx,x,240,560,180,"principle",s_,null,{size:30,hi:pulseAt(t,t0+0.2,1.6)});T(ctx,String(i+1),x-268,132,{w:800,size:32,color:rgba(MOT,1)});},{dy:-24,from:1.06});});
-  arrive(ctx,960,460,t,w("sustain","Be sustainable")-0.1,()=>withA(ctx,1-sus,()=>{d3_card(ctx,960,460,480,110,"principle","be sustainable",null,{size:30});
-    kt_rstamp(ctx,960,530,"nothing could fail it",[200,60,60],fin(t,w("sustain","nothing")-0.2,0.3),fin(t,w("sustain","nothing"),0.35),{size:34,rot:-0.08});}),{dy:-20,from:1.06});
+  D3_PR.forEach(([s_,x,lid,k],i)=>{const t0=w(lid,k)-0.1;arrive(ctx,x,250,t,t0,()=>{d3_card(ctx,x,250,560,220,"principle",s_,null,{size:30,kindText:"principle "+(i+1),hi:pulseAt(t,t0+0.2,1.6)});},{dy:-24,from:1.06});});
+  arrive(ctx,960,460,t,w("sustain","Be sustainable")-0.1,()=>withA(ctx,1-sus,()=>{d3_card(ctx,960,470,480,150,"principle","be sustainable",null,{size:30});
+    kt_rstamp(ctx,960,565,"nothing could fail it",[200,60,60],fin(t,w("sustain","nothing")-0.2,0.3),fin(t,w("sustain","nothing"),0.35),{size:34,rot:-0.08});}),{dy:-20,from:1.06});
   D3_OPT.forEach(([s_,x,res],j)=>{const t0=cC+0.2+j*0.3;arrive(ctx,x,660,t,t0,()=>{glass(ctx,x-320,560,640,200,18,[200,210,230],{glow:10,ea:0.6,fill:"rgba(7,12,24,0.94)"});
       T(ctx,s_,x,620,{w:800,size:32,align:"center"});
       res.forEach((r,i)=>{const tx=x-170+i*170,q=fin(t,w("checked","new line")+i*0.5+j*0.25,0.3);T(ctx,String(i+1),tx-28,712,{w:800,size:30,color:rgba(MOT,1)});if(q<=0)return;
@@ -153,11 +153,11 @@ scene("chain",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   ctx.save();drift(ctx,t,sc,{z:0.02,y:420});const K=[[0,960,540,1],[cN-0.4,960,620,1.05]];focus(ctx,t,K);
   D3_CH.forEach(([n,k,word],i)=>{const x=70+i*278,t0=i===0?w("drawn","chain"):w("links",word)-0.1;
     if(i>0){const q=fin(t,t0-0.1,0.5);if(q>0)arrowTo(ctx,x-30,345,x-4,345,MOT,0.9,{p:q,lw:3,head:10});}
-    arrive(ctx,x+120,345,t,t0,()=>archEl(ctx,x,290,240,110,n,MOT,k,{hi:pulseAt(t,t0+0.2,1.4)}),{dy:16});});
-  arrive(ctx,725,190,t,w("beside","Principles"),()=>archEl(ctx,70,140,1350,96,"principles",MOT,"principle",{size:32}),{dy:-16});
+    arrive(ctx,x+120,345,t,t0,()=>archEl(ctx,x,290,240,110,n,MOT,k,{gs:17,hi:pulseAt(t,t0+0.2,1.4)}),{dy:16});});
+  arrive(ctx,725,190,t,w("beside","Principles"),()=>archEl(ctx,70,140,1350,96,"principles",MOT,"principle",{size:32,gs:17}),{dy:-16});
   const R=layerStack(ctx,1500,150,340,{sh:58,gap:14,p:clamp((t-w("drawn","chain")+0.2)/1.6,0,1),fill:[fin(t,c("beside"),1.2)],hi:[0,0,0,0.7*fin(t,cW,0.8),0,0]});
   // one outcome, and the questions it leaves for whoever measures it
-  arrive(ctx,700,560,t,cN-0.2,()=>{archEl(ctx,180,510,1040,110,"new solar connected within 10 working days",MOT,"outcome",{size:34,hi:0.6});
+  arrive(ctx,700,560,t,cN-0.2,()=>{archEl(ctx,180,510,1040,110,"new solar connected within 10 working days",MOT,"outcome",{size:34,gs:17,hi:0.6});
     ctx.strokeStyle=rgba(MOT,0.5);ctx.lineWidth=2;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(1188,400);ctx.lineTo(1100,510);ctx.stroke();ctx.setLineDash([]);},{dy:20});
   arrive(ctx,330,760,t,w("number","measure"),()=>d3_gauge(ctx,330,780,90,t,1),{dy:16});
   [["what counts as a working day?","working day",700],["connected, from when?","Connected",790]].forEach(([s_,k,y])=>arrive(ctx,780,y,t,w("what",k),()=>tag(ctx,500,y,s_,[255,186,150],{size:32}),{dy:12}));
@@ -167,16 +167,16 @@ scene("chain",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
 scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");wallBg(ctx,S,t);
   ctx.save();drift(ctx,t,sc,{z:0.03,y:420});
   const cC=c("confirms"),cA=c("answer"),ok=fin(t,w("confirms","confirms")+0.2,0.8),gb=fin(t,w("confirms","board"),0.5);
-  [["decarbonisation",170],["affordability",470],["ageing assets",770],["rooftop solar",1070]].forEach(([s_,x],i)=>arrive(ctx,x,150,t,0.2+i*0.1,()=>d3_card(ctx,x,150,290,96,"driver",s_,null,{size:28,glass:ok,st:0.5+0.5*ok}),{dy:-16}));
-  [["bills up 18%",470],["old poles",770],["one-way flow",1070]].forEach(([s_,x],i)=>arrive(ctx,x,290,t,0.5+i*0.1,()=>d3_card(ctx,x,290,290,96,"assessment",s_,null,{size:28,glass:ok,st:0.5+0.5*ok}),{dy:-16}));
-  if(ok>0)withA(ctx,ok,()=>{kt_gtick(ctx,170,290,26,1);T(ctx,"confirmed",170,350,{w:700,size:28,align:"center",color:rgba(TRUST,1)});});
-  [["affordable bills",320],["assets renewed",620],["renewables connected",920]].forEach(([s_,x],i)=>arrive(ctx,x,470,t,0.8+i*0.1,()=>d3_card(ctx,x,470,290,96,"goal",s_,null,{size:28,st:0.5}),{dy:-16}));
-  [["charge flat, 2030",320],["solar in 10 days",920]].forEach(([s_,x],i)=>arrive(ctx,x,610,t,1.0+i*0.1,()=>d3_card(ctx,x,610,290,96,"outcome",s_,null,{size:28,st:0.5}),{dy:-16}));
-  withA(ctx,gb,()=>T(ctx,"to the board, as drafts",620,720,{w:700,size:30,align:"center",color:"rgba(238,224,196,0.9)"}));
-  person(ctx,"ama",1060,1030,0.76,{t,pose:t>cC&&t<cC+2.0?"explain":"stand"});
+  [["decarbonisation",200],["affordability",530],["ageing assets",860],["rooftop solar",1190]].forEach(([s_,x],i)=>arrive(ctx,x,150,t,0.2+i*0.1,()=>d3_card(ctx,x,150,320,96,"driver",s_,null,{size:28,kind:false,glass:ok,st:0.5+0.5*ok}),{dy:-16}));
+  [["bills up 18%",530],["old poles",860],["one-way flow",1190]].forEach(([s_,x],i)=>arrive(ctx,x,290,t,0.5+i*0.1,()=>d3_card(ctx,x,290,320,96,"assessment",s_,null,{size:28,kind:false,glass:ok,st:0.5+0.5*ok}),{dy:-16}));
+  if(ok>0)withA(ctx,ok,()=>{kt_gtick(ctx,200,290,26,1);T(ctx,"confirmed",200,350,{w:700,size:28,align:"center",color:rgba(TRUST,1)});});
+  [["affordable bills",345],["assets renewed",675],["renewables connected",1005]].forEach(([s_,x],i)=>arrive(ctx,x,470,t,0.8+i*0.1,()=>d3_card(ctx,x,470,320,110,"goal",s_,null,{size:28,kind:false,st:0.5}),{dy:-16}));
+  [["charge flat, 2030",345],["solar in 10 days",1005]].forEach(([s_,x],i)=>arrive(ctx,x,610,t,1.0+i*0.1,()=>d3_card(ctx,x,610,320,110,"outcome",s_,null,{size:28,kind:false,st:0.5}),{dy:-16}));
+  withA(ctx,gb,()=>T(ctx,"to the board, as drafts",675,725,{w:700,size:30,align:"center",color:"rgba(238,224,196,0.9)"}));
+  person(ctx,"ama",1230,1030,0.76,{t,pose:t>cC&&t<cC+2.0?"explain":"stand"});
   person(ctx,"tomas",1800,1030,0.78,{t,pose:t>cA&&t<cA+2.2?"explain":"stand"});
-  arrive(ctx,1500,170,t,0.4,()=>sticky(ctx,1500,170,380,130,"Why must it change?",{col:NOTEC[0],size:32,st:fin(t,cA+1.4,0.5)*0.5,rot:-0.03}),{dy:-20});
-  arrive(ctx,1500,410,t,cA,()=>sticky(ctx,1500,410,500,250,"Four drivers, three goals, three principles to check every choice against.",{col:NOTEC[0],size:32,p:clamp((t-cA-0.2)/2.2,0,1),rot:0.015}),{dy:-30,from:1.06});
-  arrive(ctx,1460,690,t,w("next","what"),()=>sticky(ctx,1460,690,380,140,"What must it be able to do?",{col:NOTEC[0],size:32,st:0,rot:0.03}),{dy:-30,from:1.06});
+  arrive(ctx,1560,170,t,0.4,()=>sticky(ctx,1560,170,380,130,"Why must it change?",{col:NOTEC[0],size:32,st:fin(t,cA+1.4,0.5)*0.5,rot:-0.03}),{dy:-20});
+  arrive(ctx,1610,420,t,cA,()=>sticky(ctx,1610,420,440,250,"Four drivers, three goals, three principles to check every choice against.",{col:NOTEC[0],size:32,p:clamp((t-cA-0.2)/2.2,0,1),rot:0.015}),{dy:-30,from:1.06});
+  arrive(ctx,1500,700,t,w("next","what"),()=>sticky(ctx,1500,700,380,140,"What must it be able to do?",{col:NOTEC[0],size:32,st:0,rot:0.03}),{dy:-30,from:1.06});
   ctx.restore();vign(ctx,S);
   eaEnd(ctx,S,t,B+0.8,"Why it moves",EAC,"Know why it must change, and what it will be checked against.","Film 3 of 11");});

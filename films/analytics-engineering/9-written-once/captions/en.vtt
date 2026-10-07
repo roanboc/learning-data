@@ -1,127 +1,127 @@
 WEBVTT
 
-00:00:01.400 --> 00:00:07.358
+00:00:01.400 --> 00:00:07.354
 By the 1850s, the note A sounded different from one city to the next, and it kept creeping higher.
 
-00:00:08.058 --> 00:00:14.304
+00:00:08.054 --> 00:00:14.300
 In 1859, France fixed it by decree, and kept one tuning fork in Paris as its home.
 
-00:00:15.604 --> 00:00:21.132
+00:00:15.600 --> 00:00:21.128
 Other forks were checked against it, and instruments were tuned from those, never the other way round.
 
-00:00:22.632 --> 00:00:26.695
+00:00:22.628 --> 00:00:26.691
 Today, before it plays, a whole orchestra still tunes to one note.
 
-00:00:27.995 --> 00:00:32.840
+00:00:27.991 --> 00:00:32.836
 A definition can work like that: kept in one place, and everything else tuned from it.
 
-00:00:39.140 --> 00:00:44.796
+00:00:39.136 --> 00:00:44.792
 The agent's review of the metadata found it: the definition of an award, in four places.
 
-00:00:46.096 --> 00:00:51.139
+00:00:46.092 --> 00:00:51.135
 The wiki, a YAML description, the catalog, and the tooltip on Planning's dashboard.
 
-00:00:52.439 --> 00:00:59.390
+00:00:52.435 --> 00:00:59.386
 One says an award is given on paper. One has lost its credit points. One calls every award a degree.
 
-00:01:00.890 --> 00:01:05.544
+00:01:00.886 --> 00:01:05.540
 Only the tooltip still says what Mei approved, the words in the conceptual model.
 
-00:01:06.844 --> 00:01:11.415
+00:01:06.840 --> 00:01:11.411
 Nothing kept the others in step. They drifted, one small edit at a time.
 
-00:01:15.115 --> 00:01:22.393
+00:01:15.111 --> 00:01:22.389
 The fix isn't a fifth copy, or a better one. The definition already has a home. Everything else has to be driven from it.
 
-00:01:24.093 --> 00:01:29.312
+00:01:24.089 --> 00:01:29.308
 Meaning lives in the conceptual model: what each thing is, its key, and who owns it.
 
-00:01:30.812 --> 00:01:39.815
+00:01:30.808 --> 00:01:39.811
 And where the business glossary already defines a term, that's its home. Data governance says which term applies, and the conceptual model takes its words.
 
-00:01:41.115 --> 00:01:49.669
+00:01:41.111 --> 00:01:49.665
 Decisions live in a log beside what they're about, with why and who. The gaps the team accepted live on the model, as known limitations.
 
-00:01:51.169 --> 00:01:56.679
+00:01:51.165 --> 00:01:56.675
 Everything the build uses lives in YAML: grain, keys, contracts, tests and owners.
 
-00:01:58.179 --> 00:02:03.823
+00:01:58.175 --> 00:02:03.819
 A decision log isn't a copy. It holds why, which a model's YAML has no place for.
 
-00:02:07.523 --> 00:02:10.835
+00:02:07.519 --> 00:02:10.831
 So the award is defined once, in the conceptual model.
 
-00:02:12.335 --> 00:02:19.717
+00:02:12.331 --> 00:02:19.713
 A script turns each definition into a doc block, on a Markdown page it writes itself. Nobody edits that page.
 
-00:02:21.217 --> 00:02:27.083
+00:02:21.213 --> 00:02:27.079
 The YAML doesn't copy the definition. It names it, and dbt shows the definition there.
 
-00:02:28.583 --> 00:02:36.668
+00:02:28.579 --> 00:02:36.664
 To change the meaning, change one line, with Mei's approval. Edit the generated page instead, and the check in CI fails.
 
-00:02:38.368 --> 00:02:45.423
+00:02:38.364 --> 00:02:45.419
 The agent's review runs again: in the project, no description written twice. The wiki now links to the docs site.
 
-00:02:48.123 --> 00:02:49.562
+00:02:48.119 --> 00:02:49.558
 Diagrams drift too.
 
-00:02:50.262 --> 00:02:56.138
+00:02:50.258 --> 00:02:56.134
 The conceptual diagram is drawn by hand, for people. It changes only when the meaning does.
 
-00:02:57.438 --> 00:03:05.899
+00:02:57.434 --> 00:03:05.895
 The physical diagram is generated: every core and mart table, its columns, types and keys, read from what dbt parsed.
 
-00:03:07.199 --> 00:03:11.007
+00:03:07.195 --> 00:03:11.003
 If the YAML changes and the diagram doesn't, CI fails.
 
-00:03:11.707 --> 00:03:13.975
+00:03:11.703 --> 00:03:13.971
 Draw the meaning. Generate the structure.
 
-00:03:18.075 --> 00:03:23.030
+00:03:18.071 --> 00:03:23.026
 On Databricks, people find tables in the catalog, and read their descriptions there.
 
-00:03:24.730 --> 00:03:29.347
+00:03:24.726 --> 00:03:29.343
 So each build pushes the descriptions out to it, for each table and its columns.
 
-00:03:31.047 --> 00:03:36.513
+00:03:31.043 --> 00:03:36.509
 Nobody edits them there: a rebuild writes over the edit. Fix it at home, and it flows out.
 
-00:03:38.713 --> 00:03:50.499
+00:03:38.709 --> 00:03:50.497
 Upstream, the same rule. A sync checks the glossary on a schedule. When a term changes, it opens a pull request, so the owner sees what the new meaning touches before it reaches the build.
 
-00:03:52.399 --> 00:04:01.022
+00:03:52.397 --> 00:03:59.869
 One direction: from the glossary, through the files, out to the catalog and whatever reads it. Tuned from one source, never the other way round.
 
-00:04:03.722 --> 00:04:05.852
+00:04:02.569 --> 00:04:04.699
 Written once doesn't mean never changed.
 
-00:04:07.152 --> 00:04:15.419
+00:04:05.999 --> 00:04:14.266
 A credential can expire, and a true or false can't say so. So is_revoked becomes status: valid, expired or revoked.
 
-00:04:16.919 --> 00:04:23.057
+00:04:15.766 --> 00:04:21.904
 That breaks anyone who reads the old column. So it's a new version of the credential, beside the old one.
 
-00:04:24.557 --> 00:04:33.307
-Version one is built from version two, so the logic lives once. And it has a date to go: the 31st of March, 2027.
+00:04:23.404 --> 00:04:35.733
+Version one came first. Now it's built from version two, which holds the logic, so it can go without touching version two. It has a date to go: the 31st of March, 2027.
 
-00:04:35.007 --> 00:04:40.937
+00:04:37.433 --> 00:04:43.363
 The exposures declared with the contracts say who to tell: only the wallet app. It pins version two.
 
-00:04:42.437 --> 00:04:48.339
+00:04:44.863 --> 00:04:50.765
 Anyone still reading version one gets dbt's warning, with the date, every time they build.
 
-00:04:49.839 --> 00:04:54.503
+00:04:52.265 --> 00:04:56.929
 A breaking change arrives as a choice with a deadline, not as a surprise.
 
-00:04:58.203 --> 00:05:06.923
+00:05:00.629 --> 00:05:09.349
 That's the loop. A question, the sources, the consumers, gaps and contracts, tests, layers, the trusted number, review, written once, and change.
 
-00:05:08.023 --> 00:05:12.913
+00:05:10.449 --> 00:05:15.339
 At every step, the agent drafted and checked. At every step, a person approved.
 
-00:05:14.413 --> 00:05:19.473
+00:05:16.839 --> 00:05:21.899
 And a new question arrives, from the wallet team. The loop starts again, at the question.
 
-00:05:20.973 --> 00:05:22.475
+00:05:23.399 --> 00:05:24.901
 Declare it. Then build it.

@@ -96,7 +96,11 @@ function ee_ledger(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;co
     withA(ctx,q,()=>{if(isCur)glow(ctx,x+bw/2,y+h/2,bw*0.7,WEED,0.2);glass(ctx,x,y,bw,h,12,col,{glow:isCur?14:6,ea:0.75,fill:"rgba(7,12,24,0.95)"});
       T(ctx,(i+1)+"",x+14,y+29,{f:"mono",w:500,size:18,color:rgba(col,1)});T(ctx,nm,x+(i<9?38:46),y+29,{w:700,size:18,color:rgba(done||isCur?INK:SOFT,1)});
       if(done){const k=isCur&&!o.all?(o.counted||0):1;withA(ctx,k,()=>{const[ad,ch,de]=EE_COUNT[i];let cx=x+14;[["+"+ad,EE_ADD,ad],["~"+ch,EE_AMB,ch],["−"+de,EE_DEL,de]].forEach(([s,c,n])=>{if(!n)return;
-        T(ctx,s,cx,y+56,{f:"mono",w:500,size:18,color:rgba(c,1)});cx+=tw(ctx,s,18,500,"mono")+12;});});}});});});}
+        T(ctx,s,cx,y+56,{f:"mono",w:500,size:18,color:rgba(c,1)});cx+=tw(ctx,s,18,500,"mono")+12;});});}});});
+  // the four phases under their steps: a bracket and a name, lit for the phase of the current step (all of them at the end)
+  PHASES4.forEach(([nm,f,l])=>{const xa=x0+f*(bw+gap)+8,xb=x0+l*(bw+gap)+bw-8,on=(cur>=f&&cur<=l)||(o.all||0)>0,col=on?WEED:SOFT;
+    ctx.strokeStyle=rgba(col,on?0.85:0.4);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(xa,y+h+6);ctx.lineTo(xa,y+h+12);ctx.lineTo(xb,y+h+12);ctx.lineTo(xb,y+h+6);ctx.stroke();
+    T(ctx,nm,(xa+xb)/2,y+h+33,{w:800,size:17,align:"center",color:rgba(col,on?1:0.7)});});});}
 // one step's commit: its step and short hash, its title, then each file it touched, + added, ~ changed, − deleted, appearing as on[i] goes 0..1.
 // rows: [sign, file, folder, flag]; flag "tmp" (temporary), "gen" (generated: a cog) or "". o.hi {i:0..1} lights a row
 function ee_commit(ctx,x,y,w,step,title,rows,o){o=o||{};const a=o.a==null?1:o.a,rh=56,h=96+rows.length*rh;if(a<=0.01)return h;withA(ctx,a,()=>{

@@ -1,4 +1,5 @@
--- Version 1, built from version 2 until its deprecation date: the logic lives once.
+-- Version 1 came first. Version 2 now holds the logic, and version 1 is built from it,
+-- until its deprecation date: the logic lives once, and removing it touches nothing else.
 with
 
 credentials as (

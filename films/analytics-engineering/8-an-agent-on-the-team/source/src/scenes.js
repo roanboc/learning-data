@@ -348,7 +348,7 @@ scene("next",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
     withA(ctx,1-0.88*(1-g4),()=>lineageGraph(ctx,320,452,960,388,t,{pick:pk,heads:0.8*g4,core:0.7}));});
   ag_tag(ctx,800,200,"merged · tested · signed off",AG_GRN,fin(t,Math.max(w("merged","merged"),1.9),0.5)*(1-fin(t,cM+0.4,0.5)),{size:24});
   const lA=fin(t,0.9,0.6)*out;if(lA>0){const on=STEPS10.map((_,i)=>i===6||i===7?1:0.3);ag_stepLoop(ctx,1620,190,215,120,t,{a:lA,on,r:34,teal:on.map((_,i)=>i===6||i===7?fin(t,1.0+i*0.05,0.4):0),ticks:on.map((_,i)=>i===6||i===7?fin(t,1.4+i*0.1,0.4):0)});
-    ag_tag(ctx,1620,190,"validate · review and ship",WEED,lA,{size:18});}
+    ag_tag(ctx,1620,190,"Build · validate · review and ship",WEED,lA,{size:18});}
   // the agent: carried across the cut from where chapter 7 left it, beside the Merge button; then it opens its fifth skill
   withA(ctx,out,()=>{
   const cr=ease(fin(t,0.9,1.4)),ox=lerp(lerp(960+(420-960)*1.025,1100,cr),1400,fin(t,cM-0.3,1.0)),oy=lerp(lerp(540+(770-540)*1.025,260,cr),440,fin(t,cM-0.3,1.0));kt_agent(ctx,ox,oy,26,t,{busy:pulseAt(t,cM,1.6)});

@@ -404,7 +404,7 @@ scene("building",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   // the series: the ten steps, each lit as it's named
   const rA=fin(t,cR-0.2,0.6)*(1-fin(t,cP-0.4,0.8));
   if(rA>0.01){const on=EE_SERIES.map(s=>fin(t,w("series",s)-0.1,0.4));stepLoop(ctx,960,440,620,280,t,{a:rA,on,ticks:on.map((q,i)=>fin(t,w("series","change")+0.6+i*0.08,0.3)),teal:on.map((q,i)=>fin(t,w("series","change")+0.4+i*0.08,0.3))});
-    arrive(ctx,960,440,t,cR,()=>withA(ctx,rA,()=>{T(ctx,"In the weeds of data crafting",960,426,{w:800,size:30,align:"center",color:rgba(WEED,1)});T(ctx,"ten films · ten steps",960,464,{w:600,size:22,align:"center",color:rgba(SOFT,1)});}),{from:0.9});}
+    arrive(ctx,960,440,t,cR,()=>withA(ctx,rA,()=>{T(ctx,"In the weeds of data crafting",960,426,{w:800,size:30,align:"center",color:rgba(WEED,1)});T(ctx,"ten films · four phases · ten steps",960,464,{w:600,size:22,align:"center",color:rgba(SOFT,1)});}),{from:0.9});}
   // the blueprint over the lineage graph; declare it, then build it
   const dA=fin(t,cP-0.3,0.9);if(dA>0.01)withA(ctx,dA,()=>{lineageGraph(ctx,260,540,1400,360,t,{core:1,dim:0.35,heads:0.8});
     arrive(ctx,960,260,t,cP-0.1,()=>{bpPaper(ctx,560,110,800,280,1,{title:"CREDENTIAL MODEL · v3"});bpModel(ctx,960,290,0.62,{b:1});},{d:1.1,from:0.9,dy:-20});

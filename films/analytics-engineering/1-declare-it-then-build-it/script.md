@@ -1,14 +1,14 @@
 # In the weeds of data crafting · Declare it, then build it: script
 
-*The script of the opening film of In the weeds of data crafting, a technical series for analytics engineers, as built: 5:36, in eleven chapters, in English, 6 October 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The timings are the voiced ones (see [Pacing report](#pacing-report)). The title, *Declare it, then build it*, is the series' tagline: this film introduces the whole series.*
+*The script of the opening film of In the weeds of data crafting, a technical series for analytics engineers, as built: 5:42, in eleven chapters, in English, 6 October 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The timings are the voiced ones (see [Pacing report](#pacing-report)). The title, *Declare it, then build it*, is the series' tagline: this film introduces the whole series.*
 
 ## The promise
 
-A practitioner follows every line, and a data architect agrees with it. The film opens the series and says what it's about: the model is the blueprint, and dbt is how you build it. A data model says what data must be: its meaning, identity, grain and time. A transformation makes data that way. dbt, a widely used tool for transformations, calls each of its queries a model, but a query is one step of the building work, not the model. The model lives beside the code, in YAML, in a conceptual model and in a decision log, and tests check that the tables match it. Jun builds it in ten steps, and the next eight films take them in turn. **Declare it, then build it.**
+A practitioner follows every line, and a data architect agrees with it. The film opens the series and says what it's about: the model is the blueprint, and dbt is how you build it. A data model says what data must be: its meaning, identity, grain and time. A transformation makes data that way. dbt, a widely used tool for transformations, calls each of its queries a model, but a query is one step of the building work, not the model. The model lives beside the code, in YAML, in a conceptual model and in a decision log, and tests check that the tables match it. Jun builds it in four phases, ask, promise, build and keep, ten steps in all, and the next eight films take the steps in turn. **Declare it, then build it.**
 
 ## The story in one paragraph
 
-In the 1870s, architects began copying drawings as blueprints, one for every trade: a blueprint says exactly what a building will be, and lays no bricks. Data has blueprints too. At a university, four offices once gave four answers to how many credentials were awarded; they agreed what a credential is and wrote it down as a model, which answers four questions: meaning, identity, grain and time. Version 3 has just been approved. Many shapes can hold a model, and each holds the same four answers; this series takes a middle way. But the data arrives from three systems, each with its own keys, codes and versions, and someone has to turn it into what was agreed: Jun, the university's analytics engineer. The building work is transformation, and Jun's team does it with dbt: one SQL query per file, run in the order their references set, built as tables and views, with tests and documentation beside the code. dbt calls each query a model. It isn't. A year on, the project could hold three hundred of them, in four layers, each folder named for its domain; most are steps, and only the core holds what the blueprint names. The model lives beside the code, in YAML, in a conceptual model and in a decision log, and the tests check the tables against it. Jun works in ten steps, with an agent that helps at each and a person who approves each, and the next eight films take them in turn.
+In the 1870s, architects began copying drawings as blueprints, one for every trade: a blueprint says exactly what a building will be, and lays no bricks. Data has blueprints too. At a university, four offices once gave four answers to how many credentials were awarded; they agreed what a credential is and wrote it down as a model, which answers four questions: meaning, identity, grain and time. Version 3 has just been approved. Many shapes can hold a model, and each holds the same four answers; this series takes a middle way. But the data arrives from three systems, each with its own keys, codes and versions, and someone has to turn it into what was agreed: Jun, the university's analytics engineer. The building work is transformation, and Jun's team does it with dbt: one SQL query per file, run in the order their references set, built as tables and views, with tests and documentation beside the code. dbt calls each query a model. It isn't. A year on, the project could hold three hundred of them, in four layers, each folder named for its domain; most are steps, and only the core holds what the blueprint names. The model lives beside the code, in YAML, in a conceptual model and in a decision log, and the tests check the tables against it. Jun works in four phases, ask, promise, build and keep, ten steps in all, with an agent that helps at each step and a person who approves each, and the next eight films take the steps in turn.
 
 ## What each object stands for
 
@@ -35,7 +35,7 @@ In the 1870s, architects began copying drawings as blueprints, one for every tra
 | A few nodes glowing gold | Core models: the entities the blueprint names |
 | A YAML card, and a Markdown card with the conceptual model and the decision log, beside the graph | Where the model lives |
 | Tests ticking green between YAML and tables | Checking that the tables are what the model says |
-| A loop of ten steps, with a teal dot and a gold tick at each | The process; the agent helps (teal), a person approves (gold) |
+| A loop of ten steps in four phases (Ask, Promise, Build, Keep), with a teal dot and a gold tick at each step | The process; the agent helps (teal), a person approves (gold) |
 | Nine film cards on the loop | The series |
 
 ## Script
@@ -56,7 +56,7 @@ In the 1870s, architects began copying drawings as blueprints, one for every tra
 
 **On screen.** how many credentials did we award? · four offices · four answers · one definition · meaning · identity · grain · time · v3 · approved · From words to data · seven films
 
-### 3 · Many shapes, one model · 1:07–1:35
+### 3 · Many shapes, one model · 1:07–1:36
 
 **Narration.** A model can be written down in many shapes: a normalised core, stars, a data vault, anchors, hooks, one wide table per entity. Each has its champions. Look inside any of them, and you find the same four answers. This series takes a middle way. Integrate on business keys, keep every version, and serve each entity as one wide row, with stars where people need them.
 
@@ -66,7 +66,7 @@ In the 1870s, architects began copying drawings as blueprints, one for every tra
 
 *The only place in the series where approaches are named. The middle way is described by what it does, not by where each part came from.*
 
-### 4 · Someone has to build it · 1:35–2:01
+### 4 · Someone has to build it · 1:36–2:01
 
 **Narration.** But an approved model is still a blueprint. The data arrives from three systems, each with its own keys, its own codes, and every version it has ever had. Someone has to turn what arrives into what was agreed, and show that it matches. That's the work of an analytics engineer. At the university, that's Jun.
 
@@ -166,15 +166,15 @@ Then a Markdown card, `core/student/_student__conceptual.md`: "# Credential", it
 
 **In the repo.** [`models/core/student/_core_student__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_core_student__models.yml) · [`models/core/student/_student__conceptual.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__conceptual.md) · [`models/core/student/_student__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/core/student/_student__decisions.yml)
 
-### 9 · Ten steps · 4:08–4:41
+### 9 · Four phases · 4:08–4:47
 
-**Narration.** Jun works in ten steps. Start from a question. Learn what the sources really hold. Define what each consumer needs. Name the gaps, and write the contracts. Write the tests, before any code. Build, layer by layer. Validate against a number people trust. Review and ship. Keep each fact written once. And let the model evolve without breaking anyone. An AI agent can help at every step. At every step, a person approves.
+**Narration.** Jun works in four phases: ask, promise, build and keep. Ten steps in all. Ask. Start from a question. Learn what the sources really hold. Define what each consumer needs. Promise. Name the gaps, and write the contracts. Write the tests, before any code. Build. Layer by layer. Validate against a number people trust. Review and ship. Keep. Each fact written once, and a model that evolves without breaking anyone. An AI agent can help at every step. At every step, a person approves.
 
-**Picture.** A loop of ten stations, lighting one by one as they're named, each with a small glyph: a question mark, a magnifier over a table, two consumer badges, a gap with a contract card, tests, four layers, a scale weighing two numbers, a pull request, a single page, a version stack. The agent's teal orb from *Keeping it true* visits each station, leaving a teal dot; a gold tick follows it at each.
+**Picture.** A loop of ten stations, grouped into four phases: inside the loop, an arc under each phase's stations, with its name (Ask, Promise, Build, Keep). The four names light faintly as they're said in the first line, and each fully as its own line begins. The stations light one by one as they're named, each with a small glyph: a question mark, a magnifier over a table, two consumer badges, a gap with a contract card, tests, four layers, a scale weighing two numbers, a pull request, a single page, a version stack. The agent's teal orb from *Keeping it true* visits each station, leaving a teal dot; a gold tick follows it at each.
 
-**On screen.** 1 a question · 2 the sources · 3 the consumers · 4 gaps and contracts · 5 tests first · 6 build in layers · 7 validate · 8 review and ship · 9 written once · 10 evolve · an agent helps · a person approves
+**On screen.** Four phases, ten steps · Jun's process · Ask · Promise · Build · Keep · 1 a question · 2 the sources · 3 the consumers · 4 gaps and contracts · 5 tests first · 6 build in layers · 7 validate · 8 review and ship · 9 written once · 10 evolve · an agent helps · a person approves
 
-### 10 · The series · 4:41–5:16
+### 10 · The series · 4:47–5:22
 
 **Narration.** The next eight films take the steps in turn. Scoping a model from a question. What makes a learner the same one across systems, and how keys and hashes make it explicit. Grain and time. Contracts and tests. Building in layers. Who owns what, across domains. Working with an agent, responsibly. And writing it all down, once. Everything they show is real code and real data. It runs on dbt Core, with DuckDB, and you can run it yourself.
 
@@ -182,7 +182,7 @@ Then a Markdown card, `core/student/_student__conceptual.md`: "# Credential", it
 
 **On screen.** 2 · Start from a question · 3 · What makes it the same one · 4 · One row of what, and when · 5 · Promises and proofs · 6 · Built in layers · 7 · Who owns what · 8 · An agent on the team · 9 · Written once · real code · real data · runs on dbt Core · DuckDB
 
-### 11 · Pull back · 5:16–5:36
+### 11 · Pull back · 5:22–5:42
 
 **Narration.** A blueprint says what a building will be. The building work makes it true. In data, the model is the blueprint, and dbt is one way to build it. Declare it. Then build it.
 
@@ -199,7 +199,7 @@ Four stops, one question each.
 | 2 · Where we left off | Two teams count credentials and get different numbers. Is the data wrong, or the meaning? | Usually the meaning: each counts what it thinks a credential is. Agree the meaning first. Links to the lab of *What's in a word*. |
 | 6 · The name that misleads | dbt shows you a file called a model. What does it actually hold? | One query: a step that makes one table or view. The data model is what that table must be. |
 | 8 · Where the model lives | You need to know what one row of a table means. Where do you look? | In its YAML (the grain, the key, the contract) and the conceptual model beside it (what each thing means), not in the SQL. |
-| 9 · Ten steps | An agent drafts your tests and your SQL. What's still yours? | Approving: the meaning, the contract and the change. The agent drafts and checks, with evidence. |
+| 9 · Four phases | An agent drafts your tests and your SQL. What's still yours? | Approving: the meaning, the contract and the change. The agent drafts and checks, with evidence. |
 
 ## Rigour sheet
 
@@ -217,7 +217,7 @@ Four stops, one question each.
 | 6 | dbt calls each query a model. | dbt's documentation defines a model as a SQL or Python file that holds a `select`; the name is historical, and widely used. |
 | 7 | 300 files, in four layers: staging, intermediate, core, marts, each folder named for its domain. | Illustrative. dbt's guidance uses staging, intermediate and marts; this series adds a core layer for the enterprise contract. Large projects have hundreds to thousands of models. In the example project, staging is split by source system, intermediate and core by data domain (`student`, `course`, following the reference model, TCSI), and the marts by consumer (`planning`, `wallet`): `docs/conventions.md`, *Domains*. |
 | 8 | YAML holds grain, key, relationships and contract; a conceptual model holds meaning, with a diagram, and a decision log holds why; tests check. | `contract: {enforced: true}` checks column names and types at build; on Databricks, `not_null` and `check` constraints are enforced and primary and foreign keys are informational, so tests do the checking. `data_tests` is the current key for tests (dbt 1.8+), and recent versions of dbt expect a generic test's arguments under `arguments:`, as shown; to check against the dbt version in use. Grain has no built-in field; `meta` holds it. Doc blocks (`{% docs credential %}`) keep long text in Markdown. The example is one row per credential, so the learner is a relationship, tested against `core_learner`. In the example project, each domain's conceptual model is written by hand (`_student__conceptual.yml`, with the diagram in `_student__conceptual.md`), its definitions are generated into doc blocks (`_student__definitions.md`), and each decision is an entry in the domain's decision log (`_student__decisions.yml`, YAML that dbt doesn't read). The cards are simplified from those files. |
-| 9 | Ten steps; an agent helps at each, a person approves each. | The process is the series' own, from the author's practice. What agents can do in dbt Cloud (an AI assistant, an MCP server) is checked on the day, and named only in the rigour sheets. |
+| 9 | Four phases, ten steps; an agent helps at each step, a person approves each. The phases group the steps so they can be remembered: *ask* (what's asked, and what is there), *promise* (the contract and its tests, before any code), *build* (make it, check it against a number people trust, ship it) and *keep* (one home per fact, and change without breaking anyone). Ask and promise are "declare it"; build and keep are "then build it". | The process is the series' own, from the author's practice. What agents can do in dbt Cloud (an AI assistant, an MCP server) is checked on the day, and named only in the rigour sheets. |
 
 ## Sources
 
@@ -229,19 +229,19 @@ Four stops, one question each.
 
 ```
 chapter      duration   wpm  voice  longest quiet  notes
-plan            25.2s   117    67%           4.2s
-recap           41.6s   136    74%           1.8s
-shapes          28.7s   138    80%           1.8s
-build           25.4s   132    69%           2.4s
-work            34.9s   133    79%           2.6s
-name            25.4s   120    65%           5.4s
-models          32.8s   139    77%           1.8s
-lives           34.0s   139    72%           2.6s
-steps           33.0s   133    78%           3.2s
-series          35.5s   134    81%           2.6s
-end             19.6s   104    50%           6.0s
+plan            25.2s   117    67%           4.2s  
+recap           41.6s   136    74%           1.8s  
+shapes          28.7s   138    80%           1.8s  
+build           25.4s   132    69%           2.4s  
+work            34.9s   133    79%           2.6s  
+name            25.4s   120    65%           5.4s  
+models          32.8s   139    77%           1.8s  
+lives           34.0s   139    72%           2.6s  
+steps           38.7s   130    76%           3.2s  
+series          35.5s   134    81%           2.6s  
+end             19.6s   104    50%           6.0s  
 
-total 5:36.0, 734 words, 131 wpm, voice 73% of the time, 179 wpm while speaking
+total 5:41.6, 745 words, 131 wpm, voice 73% of the time, 179 wpm while speaking
 sentences with under 0.5 s after them: 0; stops of 2.5 s or more inside chapters: 0
 ```
 
@@ -251,6 +251,7 @@ No chapter is over the series' limit of 140 words a minute. *Three hundred model
 
 | Date | Decision |
 |---|---|
+| 6 October 2026 | The ten steps are grouped into four phases a person can remember: ask (steps 1 to 3), promise (4 and 5), build (6 to 8) and keep (9 and 10). Chapter 9 is now *Four phases*: "Jun works in four phases: ask, promise, build and keep. Ten steps in all.", then one line per phase, each opening with its name. The loop draws each phase as an arc with its name, everywhere in the series it appears, and the lab *Four phases, ten steps* shows them above the steps. |
 | 29 September 2026 | Cold open in the past, with the blueprint. |
 | 29 September 2026 | A new character, Jun, the analytics engineer; Noor, the architect, hands over the blueprint. |
 | 29 September 2026 | Alternatives to dbt have generic labels. |

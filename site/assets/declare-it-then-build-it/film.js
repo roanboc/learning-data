@@ -449,11 +449,12 @@ const NARR={
  {"id":"yaml","gap":0.8,"text":"In YAML: what one row holds, which key makes it unique, how it relates to the rest, and the contract each table promises.","say":"In yammel: what one row holds, which key makes it unique, how it relates to the rest, and the contract each table promises."},
  {"id":"md","gap":0.8,"text":"In a conceptual model, with a diagram anyone can read: what each thing means. And in a decision log beside it: why it was decided that way."},
  {"id":"check","gap":0.8,"text":"The queries make the tables. The YAML and the Markdown say what those tables must be, and the tests check that they are.","say":"The queries make the tables. The yammel and the Markdown say what those tables must be, and the tests check that they are."}]},
-"steps":{"name":"Ten steps","lead":1.0,"tail":1.0,"vo":[
- {"id":"ten","gap":0.8,"text":"Jun works in ten steps."},
- {"id":"s1","gap":0.6,"text":"Start from a question. Learn what the sources really hold. Define what each consumer needs."},
- {"id":"s4","gap":0.6,"text":"Name the gaps, and write the contracts. Write the tests, before any code. Build, layer by layer."},
- {"id":"s7","gap":0.8,"text":"Validate against a number people trust. Review and ship. Keep each fact written once. And let the model evolve without breaking anyone."},
+"steps":{"name":"Four phases","lead":1.0,"tail":1.0,"vo":[
+ {"id":"ten","gap":0.8,"text":"Jun works in four phases: ask, promise, build and keep. Ten steps in all."},
+ {"id":"s1","gap":0.6,"text":"Ask. Start from a question. Learn what the sources really hold. Define what each consumer needs."},
+ {"id":"s4","gap":0.6,"text":"Promise. Name the gaps, and write the contracts. Write the tests, before any code."},
+ {"id":"s7","gap":0.6,"text":"Build. Layer by layer. Validate against a number people trust. Review and ship."},
+ {"id":"s9","gap":0.8,"text":"Keep. Each fact written once, and a model that evolves without breaking anyone."},
  {"id":"agent","gap":0.8,"text":"An AI agent can help at every step. At every step, a person approves."}]},
 "series":{"name":"The series","lead":1.0,"tail":1.0,"vo":[
  {"id":"next","gap":0.8,"text":"The next eight films take the steps in turn."},
@@ -466,7 +467,7 @@ const NARR={
  {"id":"declare","gap":0.8,"text":"Declare it. Then build it."}]}
 };
 
-const VODUR={"plan/copy": 9.142, "plan/exact": 6.227, "plan/brick": 1.494, "recap/too": 1.491, "recap/offices": 7.044, "recap/agreed": 3.673, "recap/four": 8.242, "recap/names": 2.146, "recap/v3": 3.763, "recap/series": 4.234, "shapes/many": 8.565, "shapes/same": 4.948, "shapes/middle": 9.547, "build/still": 2.171, "build/arrive": 6.846, "build/turn": 4.255, "build/jun": 4.208, "work/transform": 4.467, "work/tools": 8.523, "work/file": 3.461, "work/order": 11.106, "name/calls": 5.599, "name/step": 4.034, "name/apart": 6.779, "models/year": 7.128, "models/steps": 7.711, "models/core": 7.92, "models/which": 2.674, "lives/beside": 1.739, "lives/yaml": 7.242, "lives/md": 8.642, "lives/check": 6.884, "steps/ten": 1.521, "steps/s1": 5.38, "steps/s4": 5.748, "steps/s7": 8.473, "steps/agent": 4.513, "series/next": 2.24, "series/list1": 9.021, "series/list2": 9.257, "series/real": 8.241, "end/bp": 3.765, "end/data": 4.698, "end/declare": 1.402};
+const VODUR={"plan/copy": 9.142, "plan/exact": 6.227, "plan/brick": 1.494, "recap/too": 1.491, "recap/offices": 7.044, "recap/agreed": 3.673, "recap/four": 8.242, "recap/names": 2.146, "recap/v3": 3.763, "recap/series": 4.234, "shapes/many": 8.565, "shapes/same": 4.948, "shapes/middle": 9.547, "build/still": 2.171, "build/arrive": 6.846, "build/turn": 4.255, "build/jun": 4.208, "work/transform": 4.467, "work/tools": 8.523, "work/file": 3.461, "work/order": 11.106, "name/calls": 5.599, "name/step": 4.034, "name/apart": 6.779, "models/year": 7.128, "models/steps": 7.711, "models/core": 7.92, "models/which": 2.674, "lives/beside": 1.739, "lives/yaml": 7.242, "lives/md": 8.642, "lives/check": 6.884, "steps/ten": 4.961, "steps/s1": 5.912, "steps/s4": 4.656, "steps/s7": 4.799, "steps/s9": 4.559, "steps/agent": 4.513, "series/next": 2.24, "series/list1": 9.021, "series/list2": 9.257, "series/real": 8.241, "end/bp": 3.765, "end/data": 4.698, "end/declare": 1.402};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -480,7 +481,7 @@ const BREATH={
 "name":{"hold":{"calls":0.4,"step":0.6},"breathe":3.6},
 "models":{"hold":{"year":1.0,"steps":0.6,"core":0.6}},
 "lives":{"hold":{"beside":0.7,"yaml":1.4,"md":1.4,"check":0.8}},
-"steps":{"hold":{"s7":0.4,"agent":1.4}},
+"steps":{"hold":{"ten":0.4,"s1":0.3,"s4":0.3,"s7":0.3,"s9":0.4,"agent":1.4}},
 "series":{"hold":{"list1":0.4,"list2":0.8,"real":0.8}},
 "end":{"hold":{"bp":0.5,"data":0.6},"breathe":4.2}
 };
@@ -1727,12 +1728,24 @@ function lineageGraph(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.0
       if(core>0||pk>0)glow(ctx,px,py,26+16*pk,c===2?TRUST:col,0.5*Math.max(core,pk));ctx.fillStyle=rgba(col,(0.55+0.45*Math.max(core,pk))*(1-0.75*dim*(1-Math.max(core,pk))));ctx.beginPath();ctx.arc(px,py,r,0,TAU);ctx.fill();});});
   return pos;}
 
-/* ---------- the process: ten steps on a loop ---------- */
+/* ---------- the process: ten steps on a loop, in four phases ---------- */
 const STEPS10=[["a question","?"],["the sources","src"],["the consumers","use"],["gaps · contracts","≠"],["tests first","✓"],["build in layers","≡"],["validate","="],["review · ship","PR"],["written once","1×"],["evolve","v2"]];
 function stepPos(i,cx,cy,rx,ry){const an=-Math.PI/2+i/10*TAU;return[cx+Math.cos(an)*rx,cy+Math.sin(an)*ry];}
-// o.on[i]: each station lit; o.agent: where the agent is (0..10, along the loop); o.ticks[i]: gold ticks; o.teal[i]: teal dots
+// the four phases the ten steps fall into, with their first and last step: ask, promise, build, keep ("declare it" is the first two, "then build it" the last two)
+const PHASES4=[["Ask",0,2],["Promise",3,4],["Build",5,7],["Keep",8,9]];
+const phaseOf=i=>PHASES4.findIndex(([,a,b])=>i>=a&&i<=b);
+// each phase as an arc just inside the loop, under its steps, with its name inside: o.on[k] lights phase k, o.a fades them all,
+// o.inset is how far inside the stations the arcs run, o.size the names' size, o.nameA fades the names alone, o.noNames draws the arcs alone
+function phaseRing(ctx,cx,cy,rx,ry,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const ins=o.inset==null?64:o.inset,ax=rx-ins,ay=ry-ins,an=k=>-Math.PI/2+k/10*TAU;
+  withA(ctx,a,()=>PHASES4.forEach(([nm,f,l],k)=>{const on=o.on?o.on[k]||0:1,a0=an(f-0.36),a1=an(l+0.36),am=an((f+l)/2);
+    ctx.save();ctx.strokeStyle=rgba(WEED,0.28+0.6*on);ctx.lineWidth=o.lw||4;ctx.lineCap="round";ctx.beginPath();ctx.ellipse(cx,cy,ax,ay,0,a0,a1);ctx.stroke();ctx.restore();
+    const na=o.nameA==null?1:o.nameA;if(!o.noNames&&na>0.01){const sz=o.size||24,lx=cx+Math.cos(am)*(ax-sz*2.4),ly=cy+Math.sin(am)*(ay-sz*1.5)+sz*0.36;
+      withA(ctx,na,()=>T(ctx,nm,lx,ly,{w:800,size:sz,align:"center",color:rgba(mix(SOFT,WEED,on),0.5+0.5*on)}));}}));}
+// o.on[i]: each station lit; o.agent: where the agent is (0..10, along the loop); o.ticks[i]: gold ticks; o.teal[i]: teal dots;
+// o.phases fades the four phases (default 1), o.phaseOn[k] lights each, o.phaseSize sizes their names
 function stepLoop(ctx,cx,cy,rx,ry,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{
   ctx.save();ctx.strokeStyle=rgba(WEED,0.25);ctx.lineWidth=2;ctx.setLineDash([4,10]);ctx.beginPath();ctx.ellipse(cx,cy,rx,ry,0,0,TAU);ctx.stroke();ctx.restore();
+  phaseRing(ctx,cx,cy,rx,ry,{a:o.phases==null?1:o.phases,on:o.phaseOn,size:o.phaseSize});
   STEPS10.forEach(([nm,gl],i)=>{const on=o.on?o.on[i]||0:1,[px,py]=stepPos(i,cx,cy,rx,ry),r=40;withA(ctx,0.25+0.75*on,()=>{if(on>0)glow(ctx,px,py,r*2,WEED,0.2*on);
       ctx.fillStyle="rgba(7,12,24,0.96)";ctx.beginPath();ctx.arc(px,py,r,0,TAU);ctx.fill();ring(ctx,px,py,r,mix(SOFT,WEED,on),1,2.4);
       T(ctx,gl,px,py+8,{w:800,size:gl.length>2?19:24,align:"center",color:rgba(mix(SOFT,WEED,on),1)});T(ctx,(i+1)+"",px-r+4,py-r+10,{f:"mono",w:500,size:15,color:rgba(SOFT,0.9)});
@@ -1863,11 +1876,15 @@ Object.assign(LV,{
   mt_lives:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1920,640);
     [[V.yaml,"yaml",TRUST,["meta: {grain: …}","data_tests: [unique]","contract: {enforced: true}"]],[V.md,"md",KIND,["definition: >","```mermaid","- id: DEC-STU-01"]],[V.sql,"sql",[150,176,214],["select …","from {{ ref(…) }}","join … using (…)"]]].forEach(([nm,k,col,ls],i)=>{
       codeFile(c,60+i*620,60,560,nm,ls,{edge:col,size:28,lh:52,h:360});tag(c,340+i*620,520,String(mt_count(st.pick,k))+" "+V.placed,col,{align:"center",size:30});});c.restore();},
-  // ten steps: the loop, lit up to the current step, with the agent beside it
+  // four phases, ten steps: the steps in a row under their phases, lit up to the current step, with the agent above it
   mt_loop:(c,w,h,st,L)=>{const V=L.vis,k=st.step||0;c.save();mt_fit(c,w,h,1920,640);
     STEPS10.forEach((s,i)=>{const x=110+i*190,on=i<=k,col=on?WEED:SOFT;glow(c,x,300,on?60:0,WEED,0.3);c.fillStyle="rgba(7,12,24,0.96)";c.beginPath();c.arc(x,300,54,0,TAU);c.fill();ring(c,x,300,54,col,1,3);
       T(c,String(i+1),x,318,{w:800,size:44,align:"center",color:rgba(col,1)});wrapT(c,V.steps[i],x,410,170,{w:700,size:24,align:"center",color:rgba(on?INK:SOFT,1)});});
-    kt_agent(c,110+k*190,150,26,0,{});tag(c,110+k*190,560,V.person,TRUST,{align:"center",size:26});c.restore();},
+    // the four phases above their steps: a bracket and a name, lit for the phase the current step is in
+    PHASES4.forEach(([nm,f,l],j)=>{const x0=110+f*190-62,x1=110+l*190+62,on=k>=f&&k<=l,col=on?WEED:SOFT,s=(V.phases||[])[j]||nm;
+      c.strokeStyle=rgba(col,on?0.95:0.6);c.lineWidth=3;c.lineCap="round";c.beginPath();c.moveTo(x0,222);c.lineTo(x0,210);c.lineTo(x1,210);c.lineTo(x1,222);c.stroke();
+      T(c,s,(x0+x1)/2,194,{w:800,size:30,align:"center",color:rgba(col,1)});});
+    kt_agent(c,110+k*190,112,26,0,{});tag(c,110+k*190,560,V.person,TRUST,{align:"center",size:26});c.restore();},
   // the scenarios
   mt_q_where:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1200,640);lineageGraph(c,60,190,620,420,0,{core:1,dim:0.5,heads:0.8});
     codeFile(c,720,190,440,"_core_student__models.yml",["meta: {grain: …}","contract: {enforced: true}","data_tests: [unique]"],{edge:TRUST,size:24,lh:46,h:260});
@@ -2079,14 +2096,16 @@ scene("lives",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   ["unique","not_null","relationships","contract"].forEach((s,i)=>{const x=760+i*260,y=940,ok=fin(t,tT+0.3+i*0.35,0.3);arrive(ctx,x,y,t,tT+i*0.12,()=>{glass(ctx,x-110,y-30,220,60,14,GOOD,{glow:8+10*ok,ea:0.6,fill:"rgba(7,12,24,0.95)"});T(ctx,s,x-10,y+7,{f:"mono",w:500,size:18,align:"center"});tick_(ctx,x+84,y,24,GOOD,ok);},{dy:20});});
   ctx.restore();vign(ctx,S);});
 
-/* ---------- 9. Ten steps ---------- */
+/* ---------- 9. Four phases ---------- */
 scene("steps",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.03});
-  const cA=c("agent"),K=[["s1","Start"],["s1","Learn"],["s1","Define"],["s4","Name"],["s4","Write the tests"],["s4","Build"],["s7","Validate"],["s7","Review"],["s7","Keep"],["s7","evolve"]];
+  const cA=c("agent"),K=[["s1","Start"],["s1","Learn"],["s1","Define"],["s4","Name"],["s4","Write the tests"],["s7","Layer"],["s7","Validate"],["s7","Review"],["s9","written once"],["s9","evolves"]];
+  // the four phases: named together in the first line, then each lit as its own line begins
+  const P=[["ask","s1","Ask"],["promise","s4","Promise"],["build","s7","Build"],["keep","s9","Keep"]],phA=fin(t,w("ten","four phases")-0.2,0.6),phaseOn=P.map(([n,id,s])=>0.35*fin(t,w("ten",n)-0.1,0.4)+0.65*fin(t,w(id,s)-0.1,0.4));
   const on=K.map(([id,s])=>fin(t,w(id,s)-0.1,0.4));const ag=clamp((t-cA-0.2)/4.4,0,1)*10,agA=fin(t,cA-0.2,0.5);
   const teal=on.map((_,i)=>fin(t,cA+0.2+(i+0.6)*0.44,0.3)),ticks=on.map((_,i)=>fin(t,w("agent","person approves")-0.4+i*0.12,0.3));
-  arrive(ctx,960,580,t,0.2,()=>{T(ctx,"Ten steps",960,560,{w:800,size:46,align:"center"});T(ctx,"Jun's process",960,604,{w:600,size:22,align:"center",color:rgba(SOFT,1)});},{from:0.9});
-  arrive(ctx,960,560,t,0.0,()=>stepLoop(ctx,960,560,640,360,t,{on,agent:ag,agentA:agA,teal,ticks}),{d:1.2,from:0.9});
+  arrive(ctx,960,580,t,0.2,()=>{T(ctx,"Four phases, ten steps",960,560,{w:800,size:46,align:"center"});T(ctx,"Jun's process",960,604,{w:600,size:22,align:"center",color:rgba(SOFT,1)});},{from:0.9});
+  arrive(ctx,960,560,t,0.0,()=>stepLoop(ctx,960,560,640,360,t,{on,agent:ag,agentA:agA,teal,ticks,phases:phA,phaseOn,phaseSize:30}),{d:1.2,from:0.9});
   arrive(ctx,760,680,t,w("agent","agent"),()=>tag(ctx,760,680,"an agent helps",KT_AI,{align:"center",size:20}),{dy:14});
   arrive(ctx,1160,680,t,w("agent","person approves")-0.2,()=>tag(ctx,1160,680,"a person approves",TRUST,{align:"center",size:20}),{dy:14});
   ctx.restore();vign(ctx,S);});
@@ -2096,7 +2115,7 @@ scene("series",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   ctx.save();drift(ctx,t,sc,{z:0.025});
   // the loop, carried from the last chapter, shrinks to make room for the films, and its labels give way to theirs
   const m=ease(fin(t,0,1.4)),cx=960,cy=lerp(560,540,m),rx=lerp(640,400,m),ry=lerp(360,250,m),words=["question","same one","Grain","Contracts","layers","owns","agent","written"],ids=["list1","list1","list1","list2","list2","list2","list2","list2"];
-  stepLoop(ctx,cx,cy,rx,ry,t,{on:STEPS10.map(()=>lerp(1,0.35,m)),labA:1-fin(t,0,0.7)});
+  stepLoop(ctx,cx,cy,rx,ry,t,{on:STEPS10.map(()=>lerp(1,0.35,m)),labA:1-fin(t,0,0.7),phases:1-fin(t,0,0.7)});
   arrive(ctx,cx,cy,t,1.0,()=>{glass(ctx,cx-200,cy-54,400,108,20,WEED,{glow:18,ea:0.85,fill:"rgba(7,12,24,0.96)"});T(ctx,"1 · this film",cx,cy-12,{f:"mono",w:500,size:18,align:"center",color:rgba(WEED,1)});T(ctx,"Declare it, then build it",cx,cy+24,{w:800,size:22,align:"center"});});
   arrive(ctx,960,76,t,0.4,()=>T(ctx,"The next eight films",960,76,{w:800,size:36,align:"center"}),{from:0.9});
   // each film arrives in its place, beside the steps it takes, and a line joins it to them

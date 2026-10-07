@@ -222,8 +222,9 @@ models:
         description: >
           Version 1: a credential issued to a learner, with is_revoked in place of status.
           Deprecated: status replaces is_revoked in version 2, because a credential can also
-          expire. Built from version 2 until 31 March 2027. Temporary: removed after its
-          deprecation date, once its consumers have moved to version 2.
+          expire. Version 1 came first; version 2 now holds the logic, and version 1 is built
+          from it until 31 March 2027. Temporary: removed after its deprecation date, once its
+          consumers have moved to version 2.
         constraints:
           - type: primary_key
             name: pk_core_credential_v1

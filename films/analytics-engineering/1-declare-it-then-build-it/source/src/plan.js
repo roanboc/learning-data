@@ -96,11 +96,15 @@ Object.assign(LV,{
   mt_lives:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1920,640);
     [[V.yaml,"yaml",TRUST,["meta: {grain: …}","data_tests: [unique]","contract: {enforced: true}"]],[V.md,"md",KIND,["definition: >","```mermaid","- id: DEC-STU-01"]],[V.sql,"sql",[150,176,214],["select …","from {{ ref(…) }}","join … using (…)"]]].forEach(([nm,k,col,ls],i)=>{
       codeFile(c,60+i*620,60,560,nm,ls,{edge:col,size:28,lh:52,h:360});tag(c,340+i*620,520,String(mt_count(st.pick,k))+" "+V.placed,col,{align:"center",size:30});});c.restore();},
-  // ten steps: the loop, lit up to the current step, with the agent beside it
+  // four phases, ten steps: the steps in a row under their phases, lit up to the current step, with the agent above it
   mt_loop:(c,w,h,st,L)=>{const V=L.vis,k=st.step||0;c.save();mt_fit(c,w,h,1920,640);
     STEPS10.forEach((s,i)=>{const x=110+i*190,on=i<=k,col=on?WEED:SOFT;glow(c,x,300,on?60:0,WEED,0.3);c.fillStyle="rgba(7,12,24,0.96)";c.beginPath();c.arc(x,300,54,0,TAU);c.fill();ring(c,x,300,54,col,1,3);
       T(c,String(i+1),x,318,{w:800,size:44,align:"center",color:rgba(col,1)});wrapT(c,V.steps[i],x,410,170,{w:700,size:24,align:"center",color:rgba(on?INK:SOFT,1)});});
-    kt_agent(c,110+k*190,150,26,0,{});tag(c,110+k*190,560,V.person,TRUST,{align:"center",size:26});c.restore();},
+    // the four phases above their steps: a bracket and a name, lit for the phase the current step is in
+    PHASES4.forEach(([nm,f,l],j)=>{const x0=110+f*190-62,x1=110+l*190+62,on=k>=f&&k<=l,col=on?WEED:SOFT,s=(V.phases||[])[j]||nm;
+      c.strokeStyle=rgba(col,on?0.95:0.6);c.lineWidth=3;c.lineCap="round";c.beginPath();c.moveTo(x0,222);c.lineTo(x0,210);c.lineTo(x1,210);c.lineTo(x1,222);c.stroke();
+      T(c,s,(x0+x1)/2,194,{w:800,size:30,align:"center",color:rgba(col,1)});});
+    kt_agent(c,110+k*190,112,26,0,{});tag(c,110+k*190,560,V.person,TRUST,{align:"center",size:26});c.restore();},
   // the scenarios
   mt_q_where:(c,w,h,st,L)=>{const V=L.vis;c.save();mt_fit(c,w,h,1200,640);lineageGraph(c,60,190,620,420,0,{core:1,dim:0.5,heads:0.8});
     codeFile(c,720,190,440,"_core_student__models.yml",["meta: {grain: …}","contract: {enforced: true}","data_tests: [unique]"],{edge:TRUST,size:24,lh:46,h:260});

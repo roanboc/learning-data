@@ -67,7 +67,7 @@ scene("gaps",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   // the loop of ten steps steps aside while the wide gap-1 card is up, and comes back with the register
   const dA=fin(t,c("revoked"),0.5)*(1-fin(t,c("ten")-0.65,0.55));
   pp_loop(ctx,1720,112,1,t,STEPS10.map((_,i)=>i===3?fin(t,0.4,0.6):0.2),fin(t,0.2,0.6)*(1-fin(t,c("revoked")-0.3,0.4)*(1-fin(t,c("ten")-0.1,0.5))));
-  arrive(ctx,140,100,t,0.3,()=>{T(ctx,"step 4",140,100,{w:800,size:22,color:rgba(WEED,1)});T(ctx,"the gap register",230,100,{w:800,size:30});},{from:0.9});
+  arrive(ctx,140,100,t,0.3,()=>{T(ctx,"Promise · step 4",140,100,{w:800,size:22,color:rgba(WEED,1)});T(ctx,"the gap register",164+tw(ctx,"Promise · step 4",22,800),100,{w:800,size:30});},{from:0.9});
   // the register: drafted by the agent, one line per gap; it steps back for gap 1 and returns for the ten decisions
   const away=fin(t,Rv-0.5,0.5)*(1-fin(t,Tn-0.05,0.6)),regA=fin(t,Rg-0.2,0.5)*(1-away);
   const p=clamp((t-w("register","register")-0.3)/0.42,0,10),tags=clamp((t-w("ten","ten decisions")+0.4)/1.2,0,1),ink=fin(t,w("ten","May")+0.2,0.8);
@@ -182,7 +182,7 @@ scene("tests",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   ctx.save();drift(ctx,t,sc,{z:0.03,y:480});
   const Va=c("values"),Tr=c("trusted"),Re=c("reconcile"),Ag=c("agent");
   pp_loop(ctx,204,122,1,t,STEPS10.map((_,i)=>i===4?fin(t,w("step","Step five"),0.6):i===3?0.5:0.2),fin(t,0.1,0.5));
-  arrive(ctx,500,110,t,0.3,()=>{T(ctx,"step 5",390,104,{w:800,size:22,color:rgba(WEED,1)});T(ctx,"tests, before the code",480,104,{w:800,size:30});},{from:0.9});
+  arrive(ctx,500,110,t,0.3,()=>{T(ctx,"Promise · step 5",390,104,{w:800,size:22,color:rgba(WEED,1)});T(ctx,"tests, before the code",414+tw(ctx,"Promise · step 5",22,800),104,{w:800,size:30});},{from:0.9});
   // the models, outlines only: not built yet
   pp_outlines(ctx,80,250,t,{p:clamp((t-0.6)/1.6,0,1)});
   withA(ctx,fin(t,1.6,0.6),()=>T(ctx,"not built yet",390,452,{w:600,size:18,align:"center",color:rgba(SOFT,1)}));

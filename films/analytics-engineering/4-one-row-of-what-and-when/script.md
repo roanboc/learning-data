@@ -67,7 +67,7 @@ In 1890 the United States counted its people as they were on one day, 1 June: co
 
 On "a test", the `unique_combination` lines light, and a thin line from `docs/conventions.md` writes below: "Every model's grain (`meta.grain`) is tested as a key". Beside it, three rows of Aisha's at census slide in (her certificate, and a master's and a second certificate her microcredentials also count towards): three rows, one learner, three awards. The test ticks green.
 
-**On screen.** step 3 · what each consumer needs · one row per learner per award · as at census date · the grain · what a row is · which day · drafted · approved · Noor · a test · no two rows, same learner, same award · runs on dbt Core · DuckDB
+**On screen.** Ask · step 3 · what each consumer needs · one row per learner per award · as at census date · the grain · what a row is · which day · drafted · approved · Noor · a test · no two rows, same learner, same award · runs on dbt Core · DuckDB
 
 **In the repo.** [`seeds/expected/planning/census_report.csv`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/expected/planning/census_report.csv) · [`models/marts/planning/_planning__models.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__models.yml) · [`docs/conventions.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/docs/conventions.md)
 
@@ -298,7 +298,7 @@ On "accepted", its two sentences light, and a tag below reads "accepted, and wri
 
 **Picture.** The core, drawn as the blueprint's gold node, with its versions stacked behind it. Above it, two consumer cards: Planning, "as it was · one row per learner per award", and the wallet, "as it is · one row per learner". Each card is still blank below its title, where a contract will go. The loop's stations 4 and 5 light. Wordless end card: *One row of what, and when* · "Say what one row is, and which day it describes, before any SQL." · In the weeds of data crafting.
 
-**On screen.** one row of what · and when · declared · tested · two consumers · one core · what each is promised · *One row of what, and when* · Say what one row is, and which day it describes, before any SQL.
+**On screen.** one row of what · and when · declared · tested · two consumers · one core · what each is promised · *One row of what, and when* · Say what one row is, and which day it describes, before any SQL. · next · Promise, steps 4 and 5
 
 ## Pause and think
 
@@ -414,6 +414,7 @@ Each scenario about a part of the project links to its files, under its answer.
 
 | Date | Decision |
 |---|---|
+| 7 October 2026 | The series now groups its ten steps into four phases (ask, promise, build, keep), which the opening film introduces. This film's step labels name their phase: "Ask · step 3 · what each consumer needs", and "next · Promise, steps 4 and 5". |
 | 30 September 2026 | Open in 1890 with the US census: one card per person, as at one day. "Counting took weeks" and "born after, not counted; died after, counted" carry "as at"; no figure for time saved is given. The past is kept to about 60 words (under 30 s). |
 | 30 September 2026 | The fan-out uses the renamed Health award, from the project's own analysis, so the doubling is real, not staged. |
 | 30 September 2026 | The film tells "twelve and nine, both right" as its key line: Planning's question asked about two days, not two consumers' answers. It pins `as_is_date` to 30 September 2026 for the nine. |

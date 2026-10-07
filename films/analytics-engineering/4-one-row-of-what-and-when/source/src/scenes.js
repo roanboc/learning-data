@@ -65,7 +65,7 @@ scene("grain",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   ctx.save();drift(ctx,t,sc,{z:0.025});
   const cS=c("sentence"),cN=c("name"),cA=c("agent"),cT=c("test"),dS=sc.ends.sentence-cS,SZ=44,
     SY=lerp(420,320,ease(fin(t,w("agent","Planning's question")-1.0,1.1)));  // the sentence sits low while it is alone, and rises as the agent's sources arrive
-  arrive(ctx,190,124,t,0.3,()=>{rw_loop(ctx,190,124,108,58,t,STEPS10.map((_,i)=>i===2?fin(t,0.8,0.6):0),1);tag(ctx,332,124,"step 3 · what each consumer needs",WEED,{size:20});},{from:0.85});
+  arrive(ctx,190,124,t,0.3,()=>{rw_loop(ctx,190,124,108,58,t,STEPS10.map((_,i)=>i===2?fin(t,0.8,0.6):0),1);tag(ctx,332,124,"Ask · step 3 · what each consumer needs",WEED,{size:20});},{from:0.85});
   arrive(ctx,1720,130,t,w("before","for Planning")-0.3,()=>rw_badge(ctx,1720,130,44,"planning","Planning",{hi:pulseAt(t,w("before","for Planning"),1.2)}),{dy:20});
   // the sentence: the two words from 1890 settle into it, then it writes itself
   const cardA=fin(t,w("before","one sentence")-0.2,0.6),p1=clamp((t-cS)/(0.6*dS),0,1),p2=clamp((t-cS-0.6*dS)/(0.4*dS),0,1);
@@ -337,7 +337,7 @@ scene("late",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
 scene("next",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.03});
   const cW=c("what"),cP=c("promise"),lp=fin(t,w("promise","write down"),0.6);
-  arrive(ctx,190,124,t,0.3,()=>{rw_loop(ctx,190,124,108,58,t,STEPS10.map((_,i)=>i===2?1:(i===3||i===4)?lp:0),1);tag(ctx,332,124,lp>0.5?"next · steps 4 and 5":"step 3",WEED,{size:20});},{from:0.85});
+  arrive(ctx,190,124,t,0.3,()=>{rw_loop(ctx,190,124,108,58,t,STEPS10.map((_,i)=>i===2?1:(i===3||i===4)?lp:0),1);tag(ctx,332,124,lp>0.5?"next · Promise, steps 4 and 5":"Ask · step 3",WEED,{size:20});},{from:0.85});
   // the core, with its versions stacked behind it
   arrive(ctx,960,610,t,0.4,()=>{for(let v=3;v>0;v--){withA(ctx,0.5,()=>{ctx.fillStyle="rgba(10,14,24,0.95)";rr(ctx,760+v*12,560-v*12,400,110,14);ctx.fill();ctx.strokeStyle=rgba(TRUST,0.35);ctx.lineWidth=1.5;rr(ctx,760+v*12,560-v*12,400,110,14);ctx.stroke();});}
     glow(ctx,960,615,260,TRUST,0.15);glass(ctx,760,560,400,110,14,TRUST,{glow:18,ea:0.85,fill:"rgba(7,12,24,0.97)"});T(ctx,"core",960,606,{w:800,size:32,align:"center",color:rgba(TRUST,1)});T(ctx,"every version kept",960,644,{w:600,size:20,align:"center",color:rgba(SOFT,1)});},{d:1.0,from:0.9});

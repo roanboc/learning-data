@@ -1,0 +1,154 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:07.006
+Diecinueve años después de conquistar Inglaterra, Guillermo el Conquistador todavía no sabía con exactitud qué gobernaba.
+
+00:00:08.206 --> 00:00:12.765
+En la Navidad de 1085, envió inspectores por casi todo el país.
+
+00:00:13.465 --> 00:00:16.413
+¿Quién tiene esta tierra? ¿Qué hay en ella? ¿Cuánto vale?
+
+00:00:17.913 --> 00:00:20.294
+Arados, molinos y prados, antes y ahora.
+
+00:00:21.394 --> 00:00:23.495
+Su registro se convirtió en el Domesday Book.
+
+00:00:24.195 --> 00:00:27.091
+Antes de gobernar un lugar, tienes que saber qué es.
+
+00:00:34.391 --> 00:00:41.236
+Hoy, Tomás empieza como arquitecto empresarial en una empresa de energía del gobierno regional.
+
+00:00:42.336 --> 00:00:49.888
+Opera la red de postes y cables de la región, tiene algunas centrales hidroeléctricas y eólicas, y vende electricidad a hogares y empresas.
+
+00:00:51.288 --> 00:00:59.371
+A la hora del almuerzo ya tiene una credencial, un organigrama, una lista de ciento cuarenta sistemas y una invitación: el programa de transición.
+
+00:01:00.971 --> 00:01:02.526
+Todos le preguntan qué opina.
+
+00:01:03.826 --> 00:01:07.325
+Todavía no sabe qué opinar. Ni siquiera sabe qué preguntar.
+
+00:01:10.025 --> 00:01:13.993
+Todo lo que le dieron es cierto. Nada de eso explica el lugar.
+
+00:01:15.593 --> 00:01:20.331
+El organigrama muestra quién reporta a quién, no lo que la empresa tiene que ser capaz de hacer.
+
+00:01:21.831 --> 00:01:24.635
+La lista de sistemas muestra lo que se compró, no para qué sirve.
+
+00:01:26.135 --> 00:01:31.111
+El manual de procesos tiene cuatrocientas páginas y se revisó por última vez hace seis años.
+
+00:01:32.411 --> 00:01:34.972
+Y la estrategia son cinco palabras en una diapositiva.
+
+00:01:36.572 --> 00:01:39.647
+Cada uno es una pieza del cuadro, pero de un rompecabezas distinto.
+
+00:01:42.347 --> 00:01:49.550
+La arquitectura empresarial es una forma de mirar una organización por capas, desde por qué existe hasta qué la hace funcionar.
+
+00:01:50.850 --> 00:01:52.588
+Tres preguntas sostienen las capas.
+
+00:01:53.288 --> 00:01:55.158
+¿Por qué existe, y para quién?
+
+00:01:56.258 --> 00:01:59.202
+¿Cómo funciona: quién hace qué, con qué información?
+
+00:02:00.302 --> 00:02:03.798
+¿Y qué la hace funcionar: qué aplicaciones, sobre qué tecnología?
+
+00:02:05.098 --> 00:02:07.259
+Cada capa se deduce de la de arriba.
+
+00:02:08.559 --> 00:02:14.226
+Si empiezas por abajo, describirás cada sistema a la perfección, y aun así no sabrás para qué sirven.
+
+00:02:16.926 --> 00:02:18.601
+Métodos no faltan.
+
+00:02:19.301 --> 00:02:25.586
+TOGAF da una forma de hacer el trabajo. ArchiMate, un lenguaje para dibujarlo. Zachman, una cuadrícula para ordenarlo.
+
+00:02:26.786 --> 00:02:39.201
+La arquitectura de negocio aporta capacidades y cadenas de valor; los marcos de procesos, catálogos; el diseño guiado por el dominio muestra dónde cambian los significados; y la gestión de datos, quién cuida la información.
+
+00:02:40.701 --> 00:02:45.563
+Cada uno tiene sus defensores. Bajo el vocabulario, coinciden en más de lo que difieren.
+
+00:02:46.863 --> 00:02:48.709
+Esta serie toma aquello en lo que coinciden.
+
+00:02:51.409 --> 00:02:52.535
+Y empieza en borrador.
+
+00:02:53.235 --> 00:02:58.083
+Un lienzo en una pared: a quién sirve la empresa, qué necesitan y cómo se paga.
+
+00:02:59.283 --> 00:03:01.831
+Con notas adhesivas, se puede discutir en una tarde.
+
+00:03:03.031 --> 00:03:09.520
+Después se convierten en un mapa de capacidades, luego en cadenas de valor y, al final, en un modelo con una notación formal.
+
+00:03:10.820 --> 00:03:12.099
+La notación se gana.
+
+00:03:13.399 --> 00:03:18.527
+Si dibujas con demasiada precisión demasiado pronto, la gente corrige tu dibujo en lugar de tu comprensión.
+
+00:03:21.227 --> 00:03:23.176
+Tomás se pone dos reglas.
+
+00:03:23.876 --> 00:03:32.042
+Cada nota dice de dónde salió: el informe anual, la decisión del regulador, la declaración de expectativas del dueño, una entrevista.
+
+00:03:33.542 --> 00:03:38.976
+Y cada nota sigue siendo un borrador hasta que la persona responsable de esa parte del negocio dice que es correcta.
+
+00:03:40.276 --> 00:03:44.527
+Un mapa que nadie confirmó es la opinión de una persona, bien dibujada.
+
+00:03:50.627 --> 00:03:52.414
+¿Por qué le importaría a un arquitecto de datos?
+
+00:03:53.114 --> 00:03:56.697
+Porque cada regla de datos es una afirmación sobre la organización.
+
+00:03:57.997 --> 00:04:03.348
+Por ejemplo: una lectura estimada del medidor vale solo hasta la siguiente lectura real.
+
+00:04:04.848 --> 00:04:08.597
+¿Qué proceso la crea? ¿Quién es responsable? ¿A qué objetivo sirve?
+
+00:04:10.097 --> 00:04:15.050
+Sin el mapa, una regla es una suposición, y cuando falla, nadie sabe quién debe corregirla.
+
+00:04:16.350 --> 00:04:18.188
+Con el mapa, la regla tiene un hogar.
+
+00:04:21.288 --> 00:04:25.445
+En once películas, Tomás construye el mapa, capa por capa.
+
+00:04:26.945 --> 00:04:36.743
+Siete películas para entender la empresa: a quién sirve, qué la mueve, qué tiene que ser capaz de hacer, cómo llega el valor a la gente, quién hace qué y qué la hace funcionar.
+
+00:04:38.643 --> 00:04:47.647
+Luego cuatro sobre lo que significa para los datos: las preguntas que importan, reglas con un hogar, un cambio de estrategia y un mapa que pueden leer personas y agentes.
+
+00:04:50.947 --> 00:04:53.094
+Las primeras preguntas de los inspectores siguen sirviendo.
+
+00:04:54.294 --> 00:04:56.871
+¿Qué es este lugar? ¿Quién lo tiene? ¿Cuánto vale?
+
+00:04:58.371 --> 00:05:00.015
+Tomás escribe la primera nota.

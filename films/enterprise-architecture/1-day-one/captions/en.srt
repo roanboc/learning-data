@@ -1,0 +1,203 @@
+1
+00:00:01,400 --> 00:00:07,006
+Nineteen years after conquering England, William the Conqueror still didn't know exactly what he ruled.
+
+2
+00:00:08,206 --> 00:00:12,765
+At Christmas 1085, he sent surveyors across most of the country.
+
+3
+00:00:13,465 --> 00:00:16,413
+Who holds this land? What is on it? What is it worth?
+
+4
+00:00:17,913 --> 00:00:20,294
+Ploughs, mills and meadows, then and now.
+
+5
+00:00:21,394 --> 00:00:23,495
+Their record became the Domesday Book.
+
+6
+00:00:24,195 --> 00:00:27,091
+Before you can govern a place, you have to know what it is.
+
+7
+00:00:34,391 --> 00:00:41,236
+Today, Tomás starts as an enterprise architect at an energy utility owned by the regional government.
+
+8
+00:00:42,336 --> 00:00:49,888
+It runs the poles and wires for the region, owns a few hydro and wind farms, and sells power to homes and businesses.
+
+9
+00:00:51,288 --> 00:00:59,371
+By lunchtime he has a badge, an org chart, a list of a hundred and forty systems, and an invitation: the transition program.
+
+10
+00:01:00,971 --> 00:01:02,526
+Everyone asks what he thinks.
+
+11
+00:01:03,826 --> 00:01:07,325
+He doesn't know what to think yet. He doesn't even know what to ask.
+
+12
+00:01:10,025 --> 00:01:13,993
+Everything he's been given is true. None of it explains the place.
+
+13
+00:01:15,593 --> 00:01:20,331
+The org chart shows who reports to whom, not what the utility must be able to do.
+
+14
+00:01:21,831 --> 00:01:24,635
+The system list shows what was bought, not what it's for.
+
+15
+00:01:26,135 --> 00:01:31,111
+The process manual runs to four hundred pages, last revised six years ago.
+
+16
+00:01:32,411 --> 00:01:34,972
+And the strategy is five words on a slide.
+
+17
+00:01:36,572 --> 00:01:39,647
+Each is a piece of the picture, cut from a different puzzle.
+
+18
+00:01:42,347 --> 00:01:49,550
+Enterprise architecture is a way of looking at an organisation in layers, from why it exists down to what runs it.
+
+19
+00:01:50,850 --> 00:01:52,588
+Three questions hold the layers.
+
+20
+00:01:53,288 --> 00:01:55,158
+Why does it exist, and for whom?
+
+21
+00:01:56,258 --> 00:01:59,202
+How does it work: who does what, with which information?
+
+22
+00:02:00,302 --> 00:02:03,798
+And what runs it: which applications, on which technology?
+
+23
+00:02:05,098 --> 00:02:07,259
+Each layer is worked out from the one above.
+
+24
+00:02:08,559 --> 00:02:14,226
+Start from the bottom, and you'll describe every system perfectly, and still not know what they're for.
+
+25
+00:02:16,926 --> 00:02:18,601
+There's no shortage of methods.
+
+26
+00:02:19,301 --> 00:02:25,586
+TOGAF gives a way to do the work. ArchiMate, a language to draw it. Zachman, a grid to sort it.
+
+27
+00:02:26,786 --> 00:02:39,201
+Business architecture brings capabilities and value streams, process frameworks bring catalogues, domain-driven design shows where meanings change, and data management shows who looks after information.
+
+28
+00:02:40,701 --> 00:02:45,563
+Each has its champions. Under the vocabulary, they agree on more than they differ.
+
+29
+00:02:46,863 --> 00:02:48,709
+This series takes what they agree on.
+
+30
+00:02:51,409 --> 00:02:52,535
+And it starts rough.
+
+31
+00:02:53,235 --> 00:02:58,083
+A canvas on a wall: who the utility serves, what they need, and how it's paid for.
+
+32
+00:02:59,283 --> 00:03:01,831
+Sticky notes can be argued with in an afternoon.
+
+33
+00:03:03,031 --> 00:03:09,520
+Later, they become a capability map, then value streams, and finally a model in a formal notation.
+
+34
+00:03:10,820 --> 00:03:12,099
+Notation is earned.
+
+35
+00:03:13,399 --> 00:03:18,527
+Draw too precisely too early, and people correct your drawing instead of your understanding.
+
+36
+00:03:21,227 --> 00:03:23,176
+Tomás sets himself two rules.
+
+37
+00:03:23,876 --> 00:03:32,042
+Every note names where it came from: the annual report, the regulator's decision, the owner's statement of expectations, an interview.
+
+38
+00:03:33,542 --> 00:03:38,976
+And every note stays a draft until the person who owns that part of the business says it's right.
+
+39
+00:03:40,276 --> 00:03:44,527
+A map nobody has confirmed is one person's opinion, drawn neatly.
+
+40
+00:03:50,627 --> 00:03:52,414
+Why would a data architect care?
+
+41
+00:03:53,114 --> 00:03:56,697
+Because every data rule is a claim about the organisation.
+
+42
+00:03:57,997 --> 00:04:03,348
+Take this one: an estimated meter reading stands only until the next actual reading.
+
+43
+00:04:04,848 --> 00:04:08,597
+Which process creates it? Who owns it? Which goal does it serve?
+
+44
+00:04:10,097 --> 00:04:15,050
+Without the map, a rule is a guess, and when it's wrong, nobody knows who should fix it.
+
+45
+00:04:16,350 --> 00:04:18,188
+With the map, the rule has a home.
+
+46
+00:04:21,288 --> 00:04:25,445
+Over eleven films, Tomás builds the map, one layer at a time.
+
+47
+00:04:26,945 --> 00:04:36,743
+Seven films to understand the utility: who it serves, why it moves, what it must be able to do, how value reaches people, who does what, and what runs it.
+
+48
+00:04:38,643 --> 00:04:47,647
+Then four on what it means for data: the questions that matter, rules with a home, a change in strategy, and a map that people and agents can read.
+
+49
+00:04:50,947 --> 00:04:53,094
+The surveyors' first questions still work.
+
+50
+00:04:54,294 --> 00:04:56,871
+What is this place? Who holds it? What is it worth?
+
+51
+00:04:58,371 --> 00:05:00,015
+Tomás writes the first note.

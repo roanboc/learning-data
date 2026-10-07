@@ -59,7 +59,7 @@ scene("ask",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);se
   ctx.save();drift(ctx,t,sc,{z:0.025});
   const cT=c("text"),cR=c("real"),cC=c("cloud"),cH=c("hash"),m=ease(fin(t,cR-0.3,1.3)),pA=w("hash","connection")-0.3,yx=lerp(400,SQ_YR[0],ease(fin(t,pA-0.5,1.1)));
   // the loop of ten steps, small, its first station lit
-  arrive(ctx,250,158,t,c("step")-0.2,()=>{sq_loop(ctx,250,158,150,85,t,STEPS10.map((_,i)=>i===0?fin(t,w("step","Step one"),0.5):0),1);tag(ctx,460,158,"step 1 · a question",WEED,{size:20});},{from:0.85});
+  arrive(ctx,250,158,t,c("step")-0.2,()=>{sq_loop(ctx,250,158,150,85,t,STEPS10.map((_,i)=>i===0?fin(t,w("step","Step one"),0.5):0),1);tag(ctx,460,158,"Ask · step 1 · a question",WEED,{size:20});},{from:0.85});
   // who asks, and who else reads the same facts
   arrive(ctx,1440,130,t,cT-0.5,()=>sq_badge(ctx,1440,130,46,"planning","Planning",{hi:pulseAt(t,cT-0.3,1.2)}),{dy:20});
   arrive(ctx,1700,130,t,w("wallet","wallet app")-0.2,()=>{sq_badge(ctx,1700,130,36,"wallet","wallet app",{size:20});withA(ctx,fin(t,w("wallet","as they are today"),0.5),()=>T(ctx,"as they are today",1700,250,{w:600,size:18,align:"center",color:rgba(SQ_CON,1)}));},{dy:20});
@@ -271,7 +271,7 @@ scene("next",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   arrive(ctx,1720,370,t,1.1,()=>{sq_face(ctx,"tom",1720,370,52,1,{t});T(ctx,"learning team",1720,452,{w:800,size:22,align:"center"});},{from:0.7});
   [["one question",300,108,"One question"],["four things",960,496,"Four things"],["two owners",200,496,"Two owners"],["nothing else",1720,496,"Nothing else"]].forEach(([s,x,y,k])=>arrive(ctx,x,y,t,w("count",k)-0.1,()=>tag(ctx,x,y,s,WEED,{align:"center",size:20}),{from:0.7}));
   // the next step: the loop's second station
-  arrive(ctx,1695,138,t,cS-0.2,()=>{sq_loop(ctx,1695,138,140,72,t,STEPS10.map((_,i)=>i===0?0.5:i===1?fin(t,cT+2.4,0.6):0),1);withA(ctx,fin(t,cT+2.4,0.6),()=>tag(ctx,1695,282,"step 2 · the sources",WEED,{align:"center",size:18}));},{from:0.85});
+  arrive(ctx,1695,138,t,cS-0.2,()=>{sq_loop(ctx,1695,138,140,72,t,STEPS10.map((_,i)=>i===0?0.5:i===1?fin(t,cT+2.4,0.6):0),1);withA(ctx,fin(t,cT+2.4,0.6),()=>tag(ctx,1695,282,"Ask · step 2 · the sources",WEED,{align:"center",size:18}));},{from:0.85});
   // beneath the blueprint, the sources arrive in their colours, and Aisha surfaces in each, under three keys
   [[480,"S-20417"],[960,"u-88213"],[1440," Aisha.K@Mail.example "]].forEach(([x,key],k)=>{const t0=cS+0.1+k*0.3;arrive(ctx,x,700,t,t0,()=>sq_stream(ctx,x,540,930,k,t,1),{dy:60,from:0.95});
     arrive(ctx,x,740,t,w("three","Aisha")+k*0.3,()=>sq_aisha(ctx,x,740,k,key,1),{from:0.7});});

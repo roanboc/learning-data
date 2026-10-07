@@ -117,7 +117,7 @@ qs:[
   repo:["models/marts/finance/mart_finance__tuition_forgone.sql","exposures/finance/_finance__exposures.yml"]},
  {type:"order",lab:"where",vis:"ee_q_next",title:"The next question",sit:"Student services asks: how many learners hold recognised credit they haven't used yet, by faculty? Put the first steps in order.",
   items:["Scope: the question, and the decision it serves, in folders of its own","Source reality: profile what the core holds","Consumer output: one row of what, before any code","Gaps and contracts: the promise, and the gaps accepted","Tests, before the logic","Build: the logic, on the public core"],
-  why:"The same ten steps. The first commit gives the new consumer folders of its own, its question in its conceptual model, and one file that won't last: its open requirements.",
+  why:"The same four phases and ten steps. The first commit gives the new consumer folders of its own, its question in its conceptual model, and one file that won't last: its open requirements.",
   repo:["docs/process.md","models/marts/finance/_finance__conceptual.yml"]}
 ],
 done:[["Every call made well.","You can give each file its home and its lifetime, follow a question to where it lasts, and move a domain out whole."],["Nearly all.","Look again at the scenarios you missed, and the labs they point to."],["A good start.","Try the labs again: most mix-ups come from keeping something past its lifetime, or in someone else's home."],["Worth another look.","Watch the film again, then try the labs before the scenarios."]]

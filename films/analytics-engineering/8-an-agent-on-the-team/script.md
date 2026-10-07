@@ -385,7 +385,7 @@ description: Review the project's YAML and Markdown for facts written twice, dri
 
 On "four places", four small cards drift apart around the graph, each holding a sentence that begins "An award is…", each tagged as the next film tags it: the wiki, a YAML description, the catalog, a dashboard's tooltip. On "three of them are wrong", three of the cards' words shift slightly, drawn "as it drifts"; one stays steady. Wordless end card: *An agent on the team* · "The agent drafts and checks, with evidence. People approve." · In the weeds of data crafting.
 
-**On screen.** merged · tested · signed off · review the metadata · in the project and beyond · something no test checks · award · four places · three wrong · *An agent on the team* · The agent drafts and checks, with evidence. People approve.
+**On screen.** merged · tested · signed off · review the metadata · in the project and beyond · something no test checks · award · four places · three wrong · *An agent on the team* · The agent drafts and checks, with evidence. People approve. · Build · validate · review and ship
 
 **In the repo.** [`skills/review-metadata/SKILL.md`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/skills/review-metadata/SKILL.md)
 
@@ -496,6 +496,7 @@ Eight situations, in this order.
 
 | Date | Decision |
 |---|---|
+| 7 October 2026 | The series now groups its ten steps into four phases (ask, promise, build, keep), which the opening film introduces. This film's small loop names its phase: "Build · validate · review and ship". |
 | 30 September 2026 | Open in England in 1766 with the Nautical Almanac: work delegated to computers, every month computed twice, and a comparer: the check built into the work. The label says 1766, the year of publication, not 1767, the year the tables were for. No computer is named; no copying incident is told. |
 | 30 September 2026 | The shortcut is real: the refactor and the warning were run on a scratch copy of the project (Business 4 against 3; with the warning, `ERROR=0`). The `severity: warn` line is drawn as a diff labelled "the agent's draft · never merged", the one line in the series not in the project. |
 | 30 September 2026 | The agent's motive is plausible, not careless: one date rule for every source looks tidy, because the platforms can only be dated by when they recorded a change. |

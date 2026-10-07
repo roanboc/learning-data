@@ -356,7 +356,7 @@ scene("loop",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   const on=K.map((s,i)=>fin(t,w("steps",s)-0.1,0.4)*(i===0?1-0.5*fin(t,cN-0.2,0.3)+0.5*fin(t,w("new","new question")+0.4,0.4):1));
   const lpA=1-fin(t,cD-0.3,0.8),teal=K.map((_,i)=>fin(t,w("approved","drafted")+i*0.1,0.3)),ticks=K.map((_,i)=>fin(t,w("approved","a person")+i*0.1,0.3));
   const ag=8.5+1.5*ease(fin(t,w("new","new question")+0.6,2.4)),agA=fin(t,cA-0.2,0.6);
-  arrive(ctx,CX,CY,t,0,()=>wr_stepLoop(ctx,CX,CY,RX,RY,t,{a:lpA,on,teal,ticks,agent:ag%10,agentA:agA,settle:fin(t,w("new","new question")+2.2,1.0)}),{d:1.2,from:0.92});
+  arrive(ctx,CX,CY,t,0,()=>wr_stepLoop(ctx,CX,CY,RX,RY,t,{a:lpA,on,teal,ticks,agent:ag%10,agentA:agA,settle:fin(t,w("new","new question")+2.2,1.0),phaseNames:1-fin(t,cA-0.6,0.5)}),{d:1.2,from:0.92});
   arrive(ctx,CX,CY-20,t,w("approved","drafted"),()=>withA(ctx,lpA,()=>tag(ctx,CX,CY-20,"the agent drafts and checks",KT_AI,{align:"center",size:20})),{dy:14});
   arrive(ctx,CX,CY+36,t,w("approved","a person"),()=>withA(ctx,lpA,()=>tag(ctx,CX,CY+36,"a person approves",TRUST,{align:"center",size:20})),{dy:14});
   // the people of the series, each at the station where they approved

@@ -67,7 +67,7 @@ const NARR={
  {"id":"move","gap":0.8,"text":"And because Finance's folders were named for it from the first commit, Finance can move out to a project of its own, whole."},
  {"id":"list","gap":0.8,"text":"Its marts, its exposure, its seeds, its decisions, and the test and two analyses it was built with."}]},
 "building":{"name":"The whole building","lead":1.0,"tail":1.0,"vo":[
- {"id":"ten","gap":0.8,"text":"Ten steps, ten commits. You can replay them one by one, in the repository."},
+ {"id":"ten","gap":0.8,"text":"Four phases, ten steps, ten commits. You can replay them one by one, in the repository."},
  {"id":"stay","gap":0.8,"text":"Some files arrived to stay: the question, the decisions, the contract, the tests, the model."},
  {"id":"work","gap":0.8,"text":"Some were for the work: three open items, and the file that held them. They're gone. The project says only what's still open."},
  {"id":"homes","gap":0.8,"text":"Every file has a home. Sources by system: application domains. The core by meaning: data domains. Marts and exposures by who decides: business domains."},

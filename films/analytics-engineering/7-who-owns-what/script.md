@@ -304,7 +304,7 @@ On "silos", the ground cracks between the two boxes for a moment, then closes.
 
 The loop of ten steps, small in a corner: stations 4 and 10 lit. On "moves out", Planning's folders gather beside the decision, under "planning, as its own project:": `models/marts/planning/`, `exposures/planning/`, `seeds/expected/planning/`, `_planning__decisions.yml`. On "many hands", the owners stand along the core's edge: Mei, Tom, Planning, the wallet team, Noor, Jun. On "isn't a person", the teal orb drifts in at the edge and waits. Wordless end card: *Who owns what* · "Owners publish. Consumers build on what's published." · In the weeds of data crafting.
 
-**On screen.** why not split now? · more to deploy · more to keep in step · DEC-PRJ-03 · 2026-10-12 · groups first · one project · projects later · when teams own their domains · planning, as its own project: · models/marts/planning/ · exposures/planning/ · seeds/expected/planning/ · _planning__decisions.yml · many owners · many hands · one isn't a person · *Who owns what* · Owners publish. Consumers build on what's published.
+**On screen.** why not split now? · more to deploy · more to keep in step · DEC-PRJ-03 · 2026-10-12 · groups first · one project · projects later · when teams own their domains · planning, as its own project: · models/marts/planning/ · exposures/planning/ · seeds/expected/planning/ · _planning__decisions.yml · many owners · many hands · one isn't a person · *Who owns what* · Owners publish. Consumers build on what's published. · Promise and Keep · steps 4 and 10
 
 **In the repo.** [`models/_shared/_shared__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/_shared/_shared__decisions.yml) · [`models/marts/planning/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/models/marts/planning) · [`exposures/planning/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/exposures/planning) · [`seeds/expected/planning/`](https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/seeds/expected/planning) · [`models/marts/planning/_planning__decisions.yml`](https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__decisions.yml)
 
@@ -413,6 +413,7 @@ Eight situations, in this order.
 
 | Date | Decision |
 |---|---|
+| 7 October 2026 | The series now groups its ten steps into four phases (ask, promise, build, keep), which the opening film introduces. This film's small loop names its phases: "Promise and Keep · steps 4 and 10". |
 | 30 September 2026 | Open in Adelaide in 1858 with the Torrens register: the register is the title, relied on by everyone, changed only by its owner. The ships story is left out as uncertain. |
 | 30 September 2026 | The refused reference is dbt's real message, from a scratch copy of the project; the allowed reference to Planning's mart was run too. Said so in the rigour sheet. |
 | 30 September 2026 | The cross-project chapter shows `examples/planning/` with the label `sketch · dbt Cloud only`. Every other card carries `runs on dbt Core · DuckDB`. |

@@ -1720,12 +1720,24 @@ function lineageGraph(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.0
       if(core>0||pk>0)glow(ctx,px,py,26+16*pk,c===2?TRUST:col,0.5*Math.max(core,pk));ctx.fillStyle=rgba(col,(0.55+0.45*Math.max(core,pk))*(1-0.75*dim*(1-Math.max(core,pk))));ctx.beginPath();ctx.arc(px,py,r,0,TAU);ctx.fill();});});
   return pos;}
 
-/* ---------- the process: ten steps on a loop ---------- */
+/* ---------- the process: ten steps on a loop, in four phases ---------- */
 const STEPS10=[["a question","?"],["the sources","src"],["the consumers","use"],["gaps · contracts","≠"],["tests first","✓"],["build in layers","≡"],["validate","="],["review · ship","PR"],["written once","1×"],["evolve","v2"]];
 function stepPos(i,cx,cy,rx,ry){const an=-Math.PI/2+i/10*TAU;return[cx+Math.cos(an)*rx,cy+Math.sin(an)*ry];}
-// o.on[i]: each station lit; o.agent: where the agent is (0..10, along the loop); o.ticks[i]: gold ticks; o.teal[i]: teal dots
+// the four phases the ten steps fall into, with their first and last step: ask, promise, build, keep ("declare it" is the first two, "then build it" the last two)
+const PHASES4=[["Ask",0,2],["Promise",3,4],["Build",5,7],["Keep",8,9]];
+const phaseOf=i=>PHASES4.findIndex(([,a,b])=>i>=a&&i<=b);
+// each phase as an arc just inside the loop, under its steps, with its name inside: o.on[k] lights phase k, o.a fades them all,
+// o.inset is how far inside the stations the arcs run, o.size the names' size, o.nameA fades the names alone, o.noNames draws the arcs alone
+function phaseRing(ctx,cx,cy,rx,ry,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const ins=o.inset==null?64:o.inset,ax=rx-ins,ay=ry-ins,an=k=>-Math.PI/2+k/10*TAU;
+  withA(ctx,a,()=>PHASES4.forEach(([nm,f,l],k)=>{const on=o.on?o.on[k]||0:1,a0=an(f-0.36),a1=an(l+0.36),am=an((f+l)/2);
+    ctx.save();ctx.strokeStyle=rgba(WEED,0.28+0.6*on);ctx.lineWidth=o.lw||4;ctx.lineCap="round";ctx.beginPath();ctx.ellipse(cx,cy,ax,ay,0,a0,a1);ctx.stroke();ctx.restore();
+    const na=o.nameA==null?1:o.nameA;if(!o.noNames&&na>0.01){const sz=o.size||24,lx=cx+Math.cos(am)*(ax-sz*2.4),ly=cy+Math.sin(am)*(ay-sz*1.5)+sz*0.36;
+      withA(ctx,na,()=>T(ctx,nm,lx,ly,{w:800,size:sz,align:"center",color:rgba(mix(SOFT,WEED,on),0.5+0.5*on)}));}}));}
+// o.on[i]: each station lit; o.agent: where the agent is (0..10, along the loop); o.ticks[i]: gold ticks; o.teal[i]: teal dots;
+// o.phases fades the four phases (default 1), o.phaseOn[k] lights each, o.phaseSize sizes their names
 function stepLoop(ctx,cx,cy,rx,ry,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{
   ctx.save();ctx.strokeStyle=rgba(WEED,0.25);ctx.lineWidth=2;ctx.setLineDash([4,10]);ctx.beginPath();ctx.ellipse(cx,cy,rx,ry,0,0,TAU);ctx.stroke();ctx.restore();
+  phaseRing(ctx,cx,cy,rx,ry,{a:o.phases==null?1:o.phases,on:o.phaseOn,size:o.phaseSize});
   STEPS10.forEach(([nm,gl],i)=>{const on=o.on?o.on[i]||0:1,[px,py]=stepPos(i,cx,cy,rx,ry),r=40;withA(ctx,0.25+0.75*on,()=>{if(on>0)glow(ctx,px,py,r*2,WEED,0.2*on);
       ctx.fillStyle="rgba(7,12,24,0.96)";ctx.beginPath();ctx.arc(px,py,r,0,TAU);ctx.fill();ring(ctx,px,py,r,mix(SOFT,WEED,on),1,2.4);
       T(ctx,gl,px,py+8,{w:800,size:gl.length>2?19:24,align:"center",color:rgba(mix(SOFT,WEED,on),1)});T(ctx,(i+1)+"",px-r+4,py-r+10,{f:"mono",w:500,size:15,color:rgba(SOFT,0.9)});
@@ -2395,7 +2407,7 @@ scene("gaps",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   // the loop of ten steps steps aside while the wide gap-1 card is up, and comes back with the register
   const dA=fin(t,c("revoked"),0.5)*(1-fin(t,c("ten")-0.65,0.55));
   pp_loop(ctx,1720,112,1,t,STEPS10.map((_,i)=>i===3?fin(t,0.4,0.6):0.2),fin(t,0.2,0.6)*(1-fin(t,c("revoked")-0.3,0.4)*(1-fin(t,c("ten")-0.1,0.5))));
-  arrive(ctx,140,100,t,0.3,()=>{T(ctx,"step 4",140,100,{w:800,size:22,color:rgba(WEED,1)});T(ctx,"the gap register",230,100,{w:800,size:30});},{from:0.9});
+  arrive(ctx,140,100,t,0.3,()=>{T(ctx,"Promise · step 4",140,100,{w:800,size:22,color:rgba(WEED,1)});T(ctx,"the gap register",164+tw(ctx,"Promise · step 4",22,800),100,{w:800,size:30});},{from:0.9});
   // the register: drafted by the agent, one line per gap; it steps back for gap 1 and returns for the ten decisions
   const away=fin(t,Rv-0.5,0.5)*(1-fin(t,Tn-0.05,0.6)),regA=fin(t,Rg-0.2,0.5)*(1-away);
   const p=clamp((t-w("register","register")-0.3)/0.42,0,10),tags=clamp((t-w("ten","ten decisions")+0.4)/1.2,0,1),ink=fin(t,w("ten","May")+0.2,0.8);
@@ -2510,7 +2522,7 @@ scene("tests",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   ctx.save();drift(ctx,t,sc,{z:0.03,y:480});
   const Va=c("values"),Tr=c("trusted"),Re=c("reconcile"),Ag=c("agent");
   pp_loop(ctx,204,122,1,t,STEPS10.map((_,i)=>i===4?fin(t,w("step","Step five"),0.6):i===3?0.5:0.2),fin(t,0.1,0.5));
-  arrive(ctx,500,110,t,0.3,()=>{T(ctx,"step 5",390,104,{w:800,size:22,color:rgba(WEED,1)});T(ctx,"tests, before the code",480,104,{w:800,size:30});},{from:0.9});
+  arrive(ctx,500,110,t,0.3,()=>{T(ctx,"Promise · step 5",390,104,{w:800,size:22,color:rgba(WEED,1)});T(ctx,"tests, before the code",414+tw(ctx,"Promise · step 5",22,800),104,{w:800,size:30});},{from:0.9});
   // the models, outlines only: not built yet
   pp_outlines(ctx,80,250,t,{p:clamp((t-0.6)/1.6,0,1)});
   withA(ctx,fin(t,1.6,0.6),()=>T(ctx,"not built yet",390,452,{w:600,size:18,align:"center",color:rgba(SOFT,1)}));

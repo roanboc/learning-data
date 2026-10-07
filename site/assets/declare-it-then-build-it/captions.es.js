@@ -66,14 +66,16 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En un modelo conceptual, con un diagrama que cualquiera puede leer: qué significa cada cosa. Y en un registro de decisiones a su lado: por qué se decidió así.",
 "The queries make the tables. The YAML and the Markdown say what those tables must be, and the tests check that they are.":
 "Las consultas hacen las tablas. El YAML y el Markdown dicen qué deben ser esas tablas, y las pruebas comprueban que lo son.",
-"Jun works in ten steps.":
-"Jun trabaja en diez pasos.",
-"Start from a question. Learn what the sources really hold. Define what each consumer needs.":
-"Empezar por una pregunta. Conocer lo que de verdad contienen las fuentes. Definir lo que necesita cada consumidor.",
-"Name the gaps, and write the contracts. Write the tests, before any code. Build, layer by layer.":
-"Nombrar las brechas, y escribir los contratos. Escribir las pruebas, antes de cualquier código. Construir, capa por capa.",
-"Validate against a number people trust. Review and ship. Keep each fact written once. And let the model evolve without breaking anyone.":
-"Validar contra una cifra en la que la gente confía. Revisar y publicar. Escribir cada dato una sola vez. Y dejar que el modelo evolucione sin romper nada a nadie.",
+"Jun works in four phases: ask, promise, build and keep. Ten steps in all.":
+"Jun trabaja en cuatro fases: preguntar, prometer, construir y mantener. Diez pasos en total.",
+"Ask. Start from a question. Learn what the sources really hold. Define what each consumer needs.":
+"Preguntar. Empezar por una pregunta. Conocer lo que de verdad contienen las fuentes. Definir lo que necesita cada consumidor.",
+"Promise. Name the gaps, and write the contracts. Write the tests, before any code.":
+"Prometer. Nombrar las brechas, y escribir los contratos. Escribir las pruebas, antes de cualquier código.",
+"Build. Layer by layer. Validate against a number people trust. Review and ship.":
+"Construir. Capa por capa. Validar contra una cifra en la que la gente confía. Revisar y publicar.",
+"Keep. Each fact written once, and a model that evolves without breaking anyone.":
+"Mantener. Cada dato escrito una sola vez, y un modelo que evoluciona sin romper nada a nadie.",
 "An AI agent can help at every step. At every step, a person approves.":
 "Un agente de IA puede ayudar en cada paso. En cada paso, aprueba una persona.",
 "The next eight films take the steps in turn.":

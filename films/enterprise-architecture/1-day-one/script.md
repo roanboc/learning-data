@@ -1,6 +1,6 @@
 # Enterprise architecture, for data · Day one: script
 
-*The script of the opening film of The map before the data (a working title), a series on enterprise architecture and why it matters for data, as built: 5:07, in ten chapters, in English, 7 October 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 10.*
+*The script of the opening film of The map before the data (a working title), a series on enterprise architecture and why it matters for data, as built: 5:07, in ten chapters, in English, 7 October 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 10. Made to read on a phone: on-screen text is at least 28 px in the frame, and the camera moves in on whatever the narration is about.*
 
 ## The promise
 
@@ -89,7 +89,7 @@ Nineteen years after conquering England, William the Conqueror still didn't know
 
 **Narration.** And it starts rough. A canvas on a wall: who the utility serves, what they need, and how it's paid for. Sticky notes can be argued with in an afternoon. Later, they become a capability map, then value streams, and finally a model in a formal notation. Notation is earned. Draw too precisely too early, and people correct your drawing instead of your understanding.
 
-**Picture.** A wall. Two canvases are drawn in marker: a value proposition canvas (a circle and a square) and a business model canvas (nine blocks). Sticky notes land: "households", "keep the lights on", "reliable supply", then "the network", "households" again and "network tariffs" on the business model canvas. "bills too high" is moved into the customer profile. Then the canvases give way to a capability map drawn in chalk (keep the lights on, connect customers, bill customers, maintain assets, manage outages, plan the network), a value stream in chevrons (report, locate, repair, restore), and both turn into crisp glass elements in the layer colours, with a stakeholder (households) and a goal (affordable, reliable power). At "too early", a too-precise diagram appears (Customer Mgmt, Grid Ops, Billing Process, Outage Process, CIS); red pen circles land on an arrowhead, a colour and an element type, and "what is it for? — nobody asked" appears under it.
+**Picture.** A wall. Two canvases are drawn in marker: a value proposition canvas (a circle and a square) and a business model canvas (nine blocks). The camera moves in on each canvas as it's talked about. Sticky notes land: "households", "keep the lights on", "reliable supply", then "the network", "households" again and "network tariffs" on the business model canvas. "bills too high" is moved into the customer profile. Then the canvases give way to a capability map drawn in chalk (keep the lights on, connect customers, bill customers, maintain assets, manage outages, plan the network), a value stream in chevrons (report, locate, repair, restore), and both turn into crisp glass elements in the layer colours, with a stakeholder (households) and a goal (affordable, reliable power). At "too early", a too-precise diagram appears (Customer Mgmt, Grid Ops, Billing Process, Outage Process, CIS); red pen circles land on an arrowhead, a colour and an element type, and "what is it for? — nobody asked" appears under it.
 
 **On screen.** value proposition canvas · business model canvas · notation is earned · wrong arrowhead · not this colour · should be a role? · what is it for? — nobody asked
 
@@ -113,7 +113,7 @@ Nineteen years after conquering England, William the Conqueror still didn't know
 
 **Narration.** Over eleven films, Tomás builds the map, one layer at a time. Seven films to understand the utility: who it serves, why it moves, what it must be able to do, how value reaches people, who does what, and what runs it. Then four on what it means for data: the questions that matter, rules with a home, a change in strategy, and a map that people and agents can read.
 
-**Picture.** The map on the left ("the map, one layer at a time"); eleven film cards in two columns, "understand the utility" (1 to 7) and "for data" (8 to 11). Each card lights as it's named, and the layers it adds light with it.
+**Picture.** The map on the left ("the map, one layer at a time"); the eleven films in one column on the right, under "understand the utility" (1 to 7) and "for data" (8 to 11). Each card lights as it's named, and the layers it adds light with it.
 
 **On screen.** Day one · Who it serves, and how it pays · Why it moves · What it must be able to do · How value reaches people · Who does it, and where meaning changes · Today, and where it's going · Now the questions appear · Rules with a home · When strategy moves · A map people and agents can read
 

@@ -42,9 +42,9 @@ function d2_meter(ctx,x,y,s,w,t){const lift=ease(clamp(w*1.5,0,1)),tip=ease(clam
 
 /* ---------- today ---------- */
 function d2_report(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.5)";ctx.shadowBlur=20;ctx.fillStyle="rgba(244,246,250,0.98)";ctx.fillRect(x,y,w,h);ctx.restore();
-  ctx.fillStyle="rgba(60,170,150,0.95)";ctx.fillRect(x,y,w,h*0.32);T(ctx,"Annual report 2025",x+28,y+h*0.2,{w:800,size:26,color:"rgba(255,255,255,1)"});
-  ["Safe.","Affordable.","Reliable.","Clean.","Ours."].forEach((s_,i)=>{const on=o.words?o.words[i]||0:1;withA(ctx,0.25+0.75*on,()=>T(ctx,s_,x+28,y+h*0.45+i*36,{w:800,size:26,color:"rgba(30,34,44,1)"}));});
-  if(o.whom)withA(ctx,o.whom,()=>{T(ctx,"for whom?",x+w-28,y+h-30,{w:800,size:28,align:"right",color:"rgba(200,80,60,1)"});});});}
+  ctx.fillStyle="rgba(60,170,150,0.95)";ctx.fillRect(x,y,w,h*0.26);T(ctx,"Annual report 2025",x+28,y+h*0.17,{w:800,size:32,color:"rgba(255,255,255,1)"});
+  ["Safe.","Affordable.","Reliable.","Clean.","Ours."].forEach((s_,i)=>{const on=o.words?o.words[i]||0:1;withA(ctx,0.25+0.75*on,()=>T(ctx,s_,x+28,y+h*0.38+i*44,{w:800,size:34,color:"rgba(30,34,44,1)"}));});
+  if(o.whom)withA(ctx,o.whom,()=>{T(ctx,"for whom?",x+w-28,y+h-30,{w:800,size:36,align:"right",color:"rgba(200,80,60,1)"});});});}
 // small icons, drawn in line: a house, a heart, a shop, solar panels, the government, the regulator's scales, a key, a bill
 function d2_icon(ctx,kind,x,y,s,col){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.fillStyle=rgba(col,1);ctx.lineWidth=Math.max(2,s*0.08);ctx.lineJoin="round";ctx.lineCap="round";
   const house=()=>{ctx.beginPath();ctx.moveTo(x-s*0.7,y-s*0.05);ctx.lineTo(x,y-s*0.7);ctx.lineTo(x+s*0.7,y-s*0.05);ctx.moveTo(x-s*0.55,y-s*0.15);ctx.lineTo(x-s*0.55,y+s*0.6);ctx.lineTo(x+s*0.55,y+s*0.6);ctx.lineTo(x+s*0.55,y-s*0.15);ctx.stroke();ctx.strokeRect(x-s*0.15,y+s*0.2,s*0.3,s*0.4);};
@@ -59,9 +59,9 @@ function d2_icon(ctx,kind,x,y,s,col){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.
   else if(kind==="bill"){ctx.strokeRect(x-s*0.45,y-s*0.65,s*0.9,s*1.3);for(let i=0;i<4;i++){ctx.beginPath();ctx.moveTo(x-s*0.28,y-s*0.35+i*s*0.25);ctx.lineTo(x+s*(i===3?0.05:0.28),y-s*0.35+i*s*0.25);ctx.stroke();}}
   ctx.restore();}
 // a card for someone who pays, uses or decides, with an icon and two lines
-function d2_who(ctx,x,y,w,kind,name,line,col,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,150,18,col,{glow:12+12*(o.hi||0),ea:0.8,fill:"rgba(7,12,24,0.94)",});
-  d2_icon(ctx,kind,x+64,y+78,44,col);T(ctx,name,x+130,y+64,{w:800,size:28});wrapT(ctx,line,x+130,y+102,w-150,{w:600,size:20,color:rgba(SOFT,1)});});}
+function d2_who(ctx,x,y,w,kind,name,line,col,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,170,18,col,{glow:12+12*(o.hi||0),ea:0.8,fill:"rgba(7,12,24,0.94)",});
+  d2_icon(ctx,kind,x+64,y+84,44,col);T(ctx,name,x+130,y+58,{w:800,size:32});wrapT(ctx,line,x+130,y+100,w-150,{w:600,size:28,color:rgba(SOFT,1),lh:32});});}
 // a small table, in glass: rows of cells, the first row a header
-function d2_table(ctx,x,y,cols,rows,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const rh=o.rh||52,w=cols.reduce((s,c)=>s+c,0),h=rh*rows.length+12,col=o.col||[200,210,230];
-  withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,col,{glow:12,ea:0.6,fill:"rgba(7,12,24,0.95)"});rows.forEach((r,i)=>{const on=o.on?o.on[i]==null?1:o.on[i]:1;withA(ctx,on,()=>{let cx=x;r.forEach((c,j)=>{T(ctx,c,cx+18,y+rh*(i+0.62)+6,{w:i===0?800:600,size:i===0?18:21,f:i===0?undefined:undefined,color:i===0?rgba(SOFT,1):rgba(INK,0.95)});cx+=cols[j];});
+function d2_table(ctx,x,y,cols,rows,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const rh=o.rh||60,w=cols.reduce((s,c)=>s+c,0),h=rh*rows.length+12,col=o.col||[200,210,230];
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,col,{glow:12,ea:0.6,fill:"rgba(7,12,24,0.95)"});rows.forEach((r,i)=>{const on=o.on?o.on[i]==null?1:o.on[i]:1;withA(ctx,on,()=>{let cx=x;r.forEach((c,j)=>{T(ctx,c,cx+18,y+rh*(i+0.62)+8,{w:i===0?800:600,size:i===0?28:30,color:i===0?rgba(SOFT,1):rgba(INK,0.95)});cx+=cols[j];});
       if(i>0){ctx.fillStyle="rgba(200,210,230,0.12)";ctx.fillRect(x+12,y+rh*i+6,w-24,1.2);}});});});}

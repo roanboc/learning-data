@@ -28,16 +28,16 @@ function d1_england(ctx,x,y,s,p,q,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)
   const pts=D1_COAST.map(([lo,la])=>d1_xy(lo,la,x,y,k));marker(ctx,pts,p,{col:rgba(INKP,0.9),lw:2.6,seed:9});
   // settlements, as the counties fill
   withA(ctx,clamp(q*2-0.6,0,1),()=>{D.dots.forEach(([lo,la])=>{const[px,py]=d1_xy(lo,la,x,y,k);ctx.fillStyle=rgba(INKP,0.75);ctx.beginPath();ctx.arc(px,py,2.6,0,TAU);ctx.fill();});});
-  withA(ctx,fin(q,0.85,0.15),()=>{const[nx,ny]=d1_xy(-1.95,54.85,x,y,k);T(ctx,"not surveyed",nx,ny,{w:700,size:15,align:"center",color:rgba(INKP,0.7)});const[wx,wy]=d1_xy(-4.0,52.35,x,y,k);T(ctx,"Wales",wx,wy,{w:700,size:15,align:"center",color:rgba(INKP,0.6)});});});}
+  withA(ctx,fin(q,0.85,0.15),()=>{const[nx,ny]=d1_xy(-1.95,54.85,x,y,k);T(ctx,"not surveyed",nx,ny,{w:700,size:28,align:"center",color:rgba(INKP,0.7)});const[wx,wy]=d1_xy(-4.0,52.35,x,y,k);T(ctx,"Wales",wx,wy,{w:700,size:28,align:"center",color:rgba(INKP,0.6)});});});}
 // a page of the survey, an entry written out line by line as p goes from 0 to 1; o.hi[i] marks a line
 const D1_ENTRY=["Ralph holds Estone from the king.","Land for 4 ploughs. 2 ploughs there now.","1 mill. 6 acres of meadow. Woodland, 40 pigs.","Worth then 40 shillings; now 60."];
 function d1_entry(ctx,x,y,w,h,p,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{sheet(ctx,x,y,w,h,{rot:0.008,fill:PARCHP});
-  T(ctx,"ESTONE · in the hundred of Wicham",x+44,y+64,{w:800,size:20,color:rgba(INKP,0.75)});ctx.fillStyle=rgba(INKP,0.25);ctx.fillRect(x+44,y+80,w-88,2);
-  const n=D1_ENTRY.length*p;D1_ENTRY.forEach((l,i)=>{if(i>=n)return;const yy=y+140+i*62,hi=o.hi?o.hi[i]||0:0;
+  T(ctx,"ESTONE · in the hundred of Wicham",x+44,y+66,{w:800,size:28,color:rgba(INKP,0.75)});ctx.fillStyle=rgba(INKP,0.25);ctx.fillRect(x+44,y+80,w-88,2);
+  const n=D1_ENTRY.length*p;D1_ENTRY.forEach((l,i)=>{if(i>=n)return;const yy=y+146+i*66,hi=o.hi?o.hi[i]||0:0;
     if(hi>0)withA(ctx,hi,()=>{ctx.fillStyle="rgba(200,120,40,0.18)";rr(ctx,x+30,yy-36,w-60,50,8);ctx.fill();});
-    T(ctx,typeOn(l,n-i),x+44,yy,{w:600,size:27,color:rgba(INKP,0.95)});});
+    T(ctx,typeOn(l,n-i),x+44,yy,{w:600,size:31,color:rgba(INKP,0.95)});});
   // the quill's point, where the writing is
-  if(p>0&&p<1){const i=Math.floor(n),l=D1_ENTRY[i]||"",tw_=tw(ctx,typeOn(l,n-i),27,600);const qx=x+44+tw_+6,qy=y+140+i*62-6;ctx.save();ctx.strokeStyle=rgba(INKP,0.9);ctx.lineWidth=2.2;ctx.beginPath();ctx.moveTo(qx,qy);ctx.lineTo(qx+70,qy-90);ctx.stroke();
+  if(p>0&&p<1){const i=Math.floor(n),l=D1_ENTRY[i]||"",tw_=tw(ctx,typeOn(l,n-i),31,600);const qx=x+44+tw_+6,qy=y+146+i*66-6;ctx.save();ctx.strokeStyle=rgba(INKP,0.9);ctx.lineWidth=2.2;ctx.beginPath();ctx.moveTo(qx,qy);ctx.lineTo(qx+70,qy-90);ctx.stroke();
     ctx.fillStyle="rgba(240,234,220,0.85)";ctx.beginPath();ctx.moveTo(qx+70,qy-90);ctx.quadraticCurveTo(qx+120,qy-150,qx+150,qy-200);ctx.quadraticCurveTo(qx+90,qy-150,qx+56,qy-80);ctx.closePath();ctx.fill();ctx.restore();}});}
 // the pages bound into a book: as p goes from 0 to 1, loose pages settle into a stack and a cover closes over them
 function d1_book(ctx,cx,cy,s,p,t){if(p<=0)return;const bw=300*s,bh=380*s,cl=ease(clamp((p-0.45)/0.55,0,1));
@@ -46,7 +46,7 @@ function d1_book(ctx,cx,cy,s,p,t){if(p<=0)return;const bw=300*s,bh=380*s,cl=ease
       ctx.fillStyle=rgba(INKP,0.25);for(let j=0;j<9;j++)ctx.fillRect(-bw/2+24*s,-bh/2+40*s+j*34*s,bw-48*s-hash(i*9+j,84)*80*s,3*s);ctx.restore();});}
   if(cl>0){ctx.save();ctx.translate(cx,cy-18*s);ctx.scale(lerp(0.05,1,cl),1);ctx.shadowColor="rgba(0,0,0,0.6)";ctx.shadowBlur=24;const g=ctx.createLinearGradient(-bw/2,0,bw/2,0);g.addColorStop(0,"#4a2a18");g.addColorStop(1,"#6b3d22");ctx.fillStyle=g;rr(ctx,-bw/2-10*s,-bh/2-10*s,bw+20*s,bh+20*s,8*s);ctx.fill();ctx.shadowBlur=0;
     ctx.strokeStyle="rgba(222,180,110,0.85)";ctx.lineWidth=3*s;rr(ctx,-bw/2+8*s,-bh/2+8*s,bw-16*s,bh-16*s,6*s);ctx.stroke();ctx.restore();
-    withA(ctx,fin(cl,0.6,0.4),()=>{T(ctx,"DOMESDAY",cx,cy-30*s,{w:800,size:40*s,align:"center",color:"rgba(232,196,128,0.95)"});T(ctx,"1086",cx,cy+20*s,{f:"mono",w:500,size:22*s,align:"center",color:"rgba(232,196,128,0.8)"});});}}
+    withA(ctx,fin(cl,0.6,0.4),()=>{T(ctx,"DOMESDAY",cx,cy-30*s,{w:800,size:40*s,align:"center",color:"rgba(232,196,128,0.95)"});T(ctx,"1086",cx,cy+24*s,{f:"mono",w:500,size:30*s,align:"center",color:"rgba(232,196,128,0.8)"});});}}
 
 /* ---------- today: the region ---------- */
 // the utility's region at night: hills, a dam and its lake, wind turbines, pylons carrying lines into town, a substation and houses
@@ -71,7 +71,7 @@ function d1_region(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;co
 /* ---------- day one: the pile ---------- */
 function d1_badge(ctx,x,y,s,o){o=o||{};withA(ctx,o.a==null?1:o.a,()=>{ctx.save();ctx.translate(x,y);ctx.rotate(o.rot||-0.06);ctx.strokeStyle="rgba(120,200,255,0.7)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-40*s,-150*s);ctx.lineTo(0,-70*s);ctx.lineTo(40*s,-150*s);ctx.stroke();
   glass(ctx,-90*s,-70*s,180*s,240*s,14*s,CYAN,{glow:14,ea:0.8,fill:"rgba(236,240,246,0.97)"});ctx.fillStyle="rgba(78,96,128,0.9)";rr(ctx,-50*s,-36*s,100*s,100*s,50*s);ctx.fill();
-  T(ctx,"TOMÁS HERRERA",0,96*s,{w:800,size:17*s,align:"center",color:"rgba(30,34,44,1)"});T(ctx,"Enterprise architect",0,122*s,{w:600,size:14*s,align:"center",color:"rgba(70,76,90,1)"});
+  T(ctx,"TOMÁS HERRERA",0,96*s,{w:800,size:17*s,align:"center",color:"rgba(30,34,44,1)",deco:1});T(ctx,"Enterprise architect",0,122*s,{w:600,size:14*s,align:"center",color:"rgba(70,76,90,1)",deco:1});
   ctx.fillStyle="rgba(60,170,150,0.9)";ctx.fillRect(-90*s,142*s,180*s,14*s);ctx.restore();});}
 // an org chart: one box, then four, then twelve
 function d1_org(ctx,x,y,w,h,o){o=o||{};withA(ctx,o.a==null?1:o.a,()=>{const col=o.col||[180,200,230],bx=(cx,cy,bw)=>{ctx.fillStyle="rgba(20,30,52,0.95)";rr(ctx,cx-bw/2,cy-12,bw,24,5);ctx.fill();ctx.strokeStyle=rgba(col,0.85);ctx.lineWidth=1.6;rr(ctx,cx-bw/2,cy-12,bw,24,5);ctx.stroke();};
@@ -80,17 +80,17 @@ function d1_org(ctx,x,y,w,h,o){o=o||{};withA(ctx,o.a==null?1:o.a,()=>{const col=
   bx(x+w/2,r0,w*0.22);for(let i=0;i<4;i++){const cx=x+w*(0.14+i*0.24);bx(cx,r1,w*0.18);for(let j=0;j<3;j++)bx(cx+(j-1)*w*0.075,r2,w*0.06);}});}
 // the list of systems, scrolling; o.n counts how many have gone by
 const D1_SYS=["OMS · outages","CIS · customers","SCADA · network control","GIS · network map","AMI head-end · meters","MDM · meter data","Billing","ERP · finance","EAM · assets","DMS · distribution","CRM","Field mobility","Data warehouse","HR · payroll","Spreadsheet · ops roster","Market gateway","Document store","Spreadsheet · tariffs"];
-function d1_sysList(ctx,x,y,w,h,o){o=o||{};withA(ctx,o.a==null?1:o.a,()=>{glass(ctx,x,y,w,h,14,[170,205,255],{glow:12,ea:0.7,fill:"rgba(6,10,20,0.95)"});T(ctx,"systems",x+20,y+32,{f:"mono",w:500,size:16,color:"rgba(170,205,255,1)"});
-  T(ctx,(o.count==null?140:o.count)+"",x+w-20,y+34,{w:800,size:24,align:"right",color:rgba(INK,1)});ctx.save();ctx.beginPath();ctx.rect(x+10,y+48,w-20,h-58);ctx.clip();const sc=(o.scroll||0)*30,rh=30;
-  for(let i=0;i<Math.ceil((h-58)/rh)+2;i++){const k=Math.floor(sc/rh)+i,yy=y+72+i*rh-(sc%rh);T(ctx,D1_SYS[k%D1_SYS.length],x+22,yy,{f:"mono",w:500,size:16,color:rgba(SOFT,0.95)});}ctx.restore();});}
-function d1_invite(ctx,x,y,w,o){o=o||{};withA(ctx,o.a==null?1:o.a,()=>{glass(ctx,x,y,w,120,14,EAC,{glow:12,ea:0.8,fill:"rgba(6,10,20,0.95)"});ctx.fillStyle=rgba(EAC,1);rr(ctx,x+16,y+18,8,84,4);ctx.fill();
-  T(ctx,"Tue 10:00 · boardroom 2",x+40,y+44,{f:"mono",w:500,size:16,color:rgba(EAC,1)});T(ctx,"The transition program",x+40,y+84,{w:800,size:26});});}
+function d1_sysList(ctx,x,y,w,h,o){o=o||{};withA(ctx,o.a==null?1:o.a,()=>{glass(ctx,x,y,w,h,14,[170,205,255],{glow:12,ea:0.7,fill:"rgba(6,10,20,0.95)"});T(ctx,"systems",x+20,y+40,{f:"mono",w:500,size:26,color:"rgba(170,205,255,1)",deco:1});
+  T(ctx,(o.count==null?140:o.count)+"",x+w-20,y+44,{w:800,size:38,align:"right",color:rgba(INK,1)});ctx.save();ctx.beginPath();ctx.rect(x+10,y+62,w-20,h-72);ctx.clip();const sc=(o.scroll||0)*30,rh=30;
+  for(let i=0;i<Math.ceil((h-58)/rh)+2;i++){const k=Math.floor(sc/rh)+i,yy=y+72+i*rh-(sc%rh);T(ctx,D1_SYS[k%D1_SYS.length],x+22,yy+14,{f:"mono",w:500,size:16,color:rgba(SOFT,0.95),deco:1});}ctx.restore();});}
+function d1_invite(ctx,x,y,w,o){o=o||{};withA(ctx,o.a==null?1:o.a,()=>{glass(ctx,x,y,w,130,14,EAC,{glow:12,ea:0.8,fill:"rgba(6,10,20,0.95)"});ctx.fillStyle=rgba(EAC,1);rr(ctx,x+16,y+18,8,94,4);ctx.fill();
+  T(ctx,"Tue 10:00 · boardroom 2",x+40,y+46,{f:"mono",w:500,size:20,color:rgba(EAC,1),deco:1});T(ctx,"The transition program",x+40,y+100,{w:800,size:32});});}
 function d1_manual(ctx,x,y,w,h,o){o=o||{};withA(ctx,o.a==null?1:o.a,()=>{for(let i=5;i>=0;i--){ctx.fillStyle=i?"rgba(225,220,205,0.95)":"rgba(48,72,110,1)";rr(ctx,x+i*5,y+i*5,w,h,8);ctx.fill();}
-  ctx.strokeStyle="rgba(220,230,245,0.5)";ctx.lineWidth=1.5;rr(ctx,x+12,y+12,w-24,h-24,6);ctx.stroke();T(ctx,"Process manual",x+w/2,y+h*0.42,{w:800,size:24,align:"center",color:"rgba(236,240,248,1)"});
-  T(ctx,"412 pages",x+w/2,y+h*0.62,{f:"mono",w:500,size:16,align:"center",color:"rgba(200,212,232,0.9)"});T(ctx,"revised 6 years ago",x+w/2,y+h*0.76,{f:"mono",w:500,size:16,align:"center",color:"rgba(200,212,232,0.9)"});});}
+  ctx.strokeStyle="rgba(220,230,245,0.5)";ctx.lineWidth=1.5;rr(ctx,x+12,y+12,w-24,h-24,6);ctx.stroke();T(ctx,"Process manual",x+w/2,y+h*0.42,{w:800,size:24,align:"center",color:"rgba(236,240,248,1)",deco:1});
+  T(ctx,"412 pages",x+w/2,y+h*0.62,{f:"mono",w:500,size:16,align:"center",color:"rgba(200,212,232,0.9)",deco:1});T(ctx,"revised 6 years ago",x+w/2,y+h*0.76,{f:"mono",w:500,size:16,align:"center",color:"rgba(200,212,232,0.9)",deco:1});});}
 function d1_slide(ctx,x,y,w,h,o){o=o||{};withA(ctx,o.a==null?1:o.a,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.5)";ctx.shadowBlur=18;ctx.fillStyle="rgba(244,246,250,0.97)";ctx.fillRect(x,y,w,h);ctx.restore();
-  ctx.fillStyle="rgba(60,170,150,0.9)";ctx.fillRect(x,y,w,10);T(ctx,"Our strategy",x+24,y+48,{w:800,size:18,color:"rgba(90,96,110,1)"});
-  T(ctx,"Safe. Affordable. Reliable.",x+24,y+h*0.55,{w:800,size:Math.min(26,w*0.075),color:"rgba(30,34,44,1)"});T(ctx,"Clean. Ours.",x+24,y+h*0.55+40,{w:800,size:Math.min(26,w*0.075),color:"rgba(30,34,44,1)"});});}
+  ctx.fillStyle="rgba(60,170,150,0.9)";ctx.fillRect(x,y,w,10);T(ctx,"Our strategy",x+24,y+48,{w:800,size:18,color:"rgba(90,96,110,1)",deco:1});
+  T(ctx,"Safe. Affordable. Reliable.",x+24,y+h*0.55,{w:800,size:Math.min(26,w*0.075),color:"rgba(30,34,44,1)",deco:1});T(ctx,"Clean. Ours.",x+24,y+h*0.55+40,{w:800,size:Math.min(26,w*0.075),color:"rgba(30,34,44,1)",deco:1});});}
 
 /* ---------- pieces from different puzzles ---------- */
 // a jigsaw piece's outline round (x,y,w,h); tabs [top, right, bottom, left]: 1 sticks out, -1 cuts in, 0 is flat
@@ -101,7 +101,7 @@ function d1_jigsaw(ctx,x,y,w,h,tabs){const edge=(x0,y0,x1,y1,tb)=>{const dx=x1-x
   ctx.beginPath();ctx.moveTo(x,y);edge(x,y,x+w,y,tabs[0]);edge(x+w,y,x+w,y+h,tabs[1]);edge(x+w,y+h,x,y+h,tabs[2]);edge(x,y+h,x,y,tabs[3]);ctx.closePath();}
 
 /* ---------- the methods, named once ---------- */
-const D1_METHODS=[["TOGAF","a way to do the work"],["ArchiMate","a language to draw it"],["Zachman","a grid to sort it"],["Business architecture","capabilities · value streams"],["Process frameworks","catalogues of processes"],["Domain-driven design","where meanings change"],["Data management","who looks after information"]];
+const D1_METHODS=[["TOGAF","a way to do the work"],["ArchiMate","a language to draw it"],["Zachman","a grid to sort it"],["Business architecture","capabilities, value streams"],["Process frameworks","process catalogues"],["Domain-driven design","where meaning changes"],["Data management","who looks after data"]];
 function d1_glyph(ctx,i,x,y,s,col){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.fillStyle=rgba(col,1);ctx.lineWidth=Math.max(2,s*0.07);ctx.lineCap="round";ctx.lineJoin="round";
   if(i===0){for(let k=0;k<4;k++){const a0=k*TAU/4+0.25,a1=a0+TAU/4-0.5;ctx.beginPath();ctx.arc(x,y,s*0.8,a0,a1);ctx.stroke();const hx=x+Math.cos(a1)*s*0.8,hy=y+Math.sin(a1)*s*0.8,d=a1+Math.PI/2;ctx.beginPath();ctx.moveTo(hx,hy);ctx.lineTo(hx-Math.cos(d-0.5)*s*0.25,hy-Math.sin(d-0.5)*s*0.25);ctx.moveTo(hx,hy);ctx.lineTo(hx-Math.cos(d+0.5)*s*0.25,hy-Math.sin(d+0.5)*s*0.25);ctx.stroke();}}
   else if(i===1){[0,1,2].forEach(k=>{rhomb(ctx,x,y-s*0.5+k*s*0.5,s*1.8,s*0.6);ctx.stroke();});}
@@ -113,9 +113,9 @@ function d1_glyph(ctx,i,x,y,s,col){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.fi
   else{ctx.beginPath();ctx.arc(x,y,s*0.85,0,TAU);ctx.stroke();for(let k=0;k<10;k++){const an=k*TAU/10;ctx.beginPath();ctx.moveTo(x+Math.cos(an)*s*0.3,y+Math.sin(an)*s*0.3);ctx.lineTo(x+Math.cos(an)*s*0.85,y+Math.sin(an)*s*0.85);ctx.stroke();}ctx.beginPath();ctx.arc(x,y,s*0.3,0,TAU);ctx.stroke();}
   ctx.restore();}
 function d1_methodCard(ctx,i,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||[190,205,240];withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,col,{glow:12+10*(o.hi||0),ea:0.75,fill:"rgba(7,12,24,0.94)"});
-  d1_glyph(ctx,i,x+62,y+h/2,30,col);T(ctx,D1_METHODS[i][0],x+118,y+h/2-6,{w:800,size:D1_METHODS[i][0].length>16?22:25});T(ctx,D1_METHODS[i][1],x+118,y+h/2+26,{w:600,size:17,color:rgba(SOFT,1)});});}
+  d1_glyph(ctx,i,x+58,y+h/2,30,col);T(ctx,D1_METHODS[i][0],x+110,y+h/2-8,{w:800,size:32});T(ctx,D1_METHODS[i][1],x+110,y+h/2+32,{w:600,size:28,color:rgba(SOFT,1)});});}
 
 /* ---------- a bill, and the data rule ---------- */
-function d1_bill(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,210,18,[200,210,230],{glow:12,ea:0.7,fill:"rgba(236,240,246,0.97)"});
-  T(ctx,"Your bill",x+26,y+44,{w:800,size:22,color:"rgba(40,44,56,1)"});T(ctx,"$"+(o.amount||"412.80"),x+26,y+108,{w:800,size:52,color:rgba(o.bad?[200,50,50]:[40,44,56],1)});
-  T(ctx,o.note||"based on an estimated reading",x+26,y+150,{w:600,size:17,color:"rgba(90,96,110,1)"});if(o.bad)withA(ctx,o.bad,()=>tag(ctx,x+26,y+186,"wrong",BAD,{size:16}));});}
+function d1_bill(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,236,18,[200,210,230],{glow:12,ea:0.7,fill:"rgba(236,240,246,0.97)"});
+  T(ctx,"Your bill",x+26,y+48,{w:800,size:30,color:"rgba(40,44,56,1)"});T(ctx,"$"+(o.amount||"412.80"),x+26,y+116,{w:800,size:52,color:rgba(o.bad?[200,50,50]:[40,44,56],1)});
+  T(ctx,o.note||"an estimated reading",x+26,y+162,{w:600,size:28,color:"rgba(90,96,110,1)"});if(o.bad)withA(ctx,o.bad,()=>tag(ctx,x+26,y+204,"wrong",BAD,{size:28}));});}

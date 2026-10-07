@@ -17,6 +17,7 @@ A new enterprise architect, Tomás, joins a publicly owned energy utility and do
 
 - **Two materials.** Drafts are paper: canvases and sticky notes on a wall, slightly crooked. The confirmed model is glass, in the colours architects conventionally give the layers. A note that moves from the wall to the model changes material.
 - **People.** Tomás, outlined in cyan (the technical side); the people who own parts of the business, outlined in gold, starting with Grace, who owns network operations, and Farah, the customer advocate.
+- **Made to read on a phone.** Text is at least 28 px in the 1920-pixel frame (about 12 px on a phone held sideways), the camera moves in on the part of a canvas being talked about, and the player's captions grow as it shrinks. `tools/legible.py` checks every frame.
 - **Its own sound.** Nylon-string plucks and a soft flute over warm pads, a lute for the past, and its own four-note mark, rising 1-3-5-8. Nothing loops, and every effect is something appearing on screen.
 
 ## How the films are made
@@ -25,7 +26,9 @@ Like the other series, each film is generated from code. The series keeps what's
 
 | File | What it holds |
 |---|---|
-| `shared/src/ea.js` | The series' components: its colours, title and end cards, the six layers (`slab`, `layerStack`), the wall, canvases and sticky notes (`wallBg`, `vpCanvas`, `bmCanvas`, `sticky`, `statusDot`), glass elements of the model (`archEl`), the data rule card (`ruleCard`), and labelled canvases to pin notes into (`vpCanvas2`, `VPC.where`, `BMC_AT`) |
+| `shared/src/ea.js` | The series' components: its colours, title and end cards, the six layers (`slab`, `layerStack`), the wall, canvases and sticky notes (`wallBg`, `vpCanvas`, `bmCanvas`, `sticky`, `statusDot`), glass elements of the model (`archEl`), the data rule card (`ruleCard`), labelled canvases to pin notes into (`vpCanvas2`, `VPC.where`, `BMC_AT`), and a camera that moves in on part of a picture (`focus`, `focusZ`) |
+| `shared/src/mobile.js` | The player's captions, sized for the screen: they grow as the player shrinks, so they're never smaller than about 15 px |
+| `shared/tools/legible.py` | Checks that every piece of text on screen is large enough to read on a phone, frame by frame; text marked as decoration is skipped |
 | `shared/src/people.js` | The series' people: Tomás Herrera, Grace Achieng and Farah Siddiqui, drawn like the cast of *When things go wrong* |
 | `shared/src/page.html` | The standalone player page |
 | `shared/tools/lang.py`, `build.py` | Where everything lives, and what a film is made of; motion and the video's finishing pass come from *In the weeds of data crafting* |

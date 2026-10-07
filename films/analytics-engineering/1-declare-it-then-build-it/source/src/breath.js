@@ -10,7 +10,7 @@ const BREATH={
 "name":{"hold":{"calls":0.4,"step":0.6},"breathe":3.6},
 "models":{"hold":{"year":1.0,"steps":0.6,"core":0.6}},
 "lives":{"hold":{"beside":0.7,"yaml":1.4,"md":1.4,"check":0.8}},
-"steps":{"hold":{"s7":0.4,"agent":1.4}},
+"steps":{"hold":{"ten":0.4,"s1":0.3,"s4":0.3,"s7":0.3,"s9":0.4,"agent":1.4}},
 "series":{"hold":{"list1":0.4,"list2":0.8,"real":0.8}},
 "end":{"hold":{"bp":0.5,"data":0.6},"breathe":4.2}
 };

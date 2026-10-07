@@ -1,6 +1,6 @@
 # Enterprise architecture, for data
 
-*Proposal for a series on enterprise architecture and why it matters for data, v0.1. The folder is named after the topic; the series title is still open. Status: proposed, 7 October 2026. Film 1 is scripted ([script](1-day-one/script.md)); nothing is built yet.*
+*Proposal for a series on enterprise architecture and why it matters for data, v0.1. The folder is named after the topic; the series title is still open. Status: proposed, 7 October 2026. *Day one* is built ([script](1-day-one/script.md), [series README](README.md)); it isn't on the site yet.*
 
 ## Decided
 
@@ -9,10 +9,12 @@
 | 7 October 2026 | A series about learning how an organisation works, before knowing what questions it needs to answer. Data is the payoff, not the starting point. |
 | 7 October 2026 | The viewer is a newcomer. The thread is the first weeks of a new enterprise architect, Tomás, in an organisation he doesn't know. |
 | 7 October 2026 | The organisation is a fictional, publicly owned energy utility: a composite of what public utilities publish, not any one company. Like the university in the other series, it stays unnamed. |
-| 7 October 2026 | No single framework. Film 1 names the known bodies of knowledge once; after that, the series teaches the insights they share. |
+| 7 October 2026 | No single framework. The opening film, *Day one*, names the known bodies of knowledge once; after that, the series teaches the insights they share. |
 | 7 October 2026 | The tools mature on screen: canvases as first drafts, then capability maps and value streams, then ArchiMate views, then a model people and agents can read. |
 | 7 October 2026 | Eleven films in two parts: seven to understand the organisation, four on how that helps data solutions. |
-| 7 October 2026 | Film 1, *Day one*, opens in 1085 with the Domesday survey: a ruler who, nineteen years on, still didn't know exactly what he ruled. The layers are held by three questions: why, and for whom; how it works; what runs it. |
+| 7 October 2026 | *Day one* opens in 1085 with the Domesday survey: a ruler who, nineteen years on, still didn't know exactly what he ruled. The layers are held by three questions: why, and for whom; how it works; what runs it. |
+| 7 October 2026 | A working title, *The map before the data*, for the title and end cards; it's one line in `shared/src/ea.js` to change. |
+| 7 October 2026 | The series' look: drafts are paper on a wall, the confirmed model is glass in the layers' conventional colours. Its sound: nylon-string plucks and a soft flute over warm pads, and its own mark, 1-3-5-8. A second character, Grace Achieng, owns network operations. |
 
 ## The brief
 
@@ -36,7 +38,7 @@ From the author (6 and 7 October 2026): a series on enterprise architecture and 
 
 ## Foundations: the insights, not one framework
 
-Film 1 names the bodies of knowledge once:
+*Day one* names the bodies of knowledge once:
 
 - **Frameworks:** TOGAF and Zachman.
 - **Notations:** ArchiMate, for architecture, and BPMN, for detailed processes.
@@ -229,5 +231,5 @@ Chapter by chapter, with narration: [the script](1-day-one/script.md).
 ## Next checkpoints
 
 1. The author agrees this proposal, and decides the points above.
-2. A treatment for film 1, and Tomás's character card.
+2. A treatment for *Day one*, and Tomás's character card.
 3. The organisation's world: its canvases, capability map, value streams and domains, written once in `shared/` so every film draws from the same model.

@@ -1,0 +1,29 @@
+{
+  "key": "day-one",
+  "title": "Day one",
+  "sub": "The map before the data, a series on enterprise architecture and why it matters for data: a new architect's first day at an energy utility, and a way of looking at an organisation before asking it questions.",
+  "howto": "Paper notes on a wall are drafts; glass in the layers' colours is the confirmed model. Cyan outlines the technical side, gold the business side.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "govern",
+    "breath",
+    2.6
+  ],
+  "say": [
+    [
+      "\\bTomás\\b",
+      "Toh-mahs"
+    ],
+    [
+      "\\bDomesday\\b",
+      "Doomsday"
+    ],
+    [
+      "\\borg chart\\b",
+      "org-chart"
+    ]
+  ]
+}

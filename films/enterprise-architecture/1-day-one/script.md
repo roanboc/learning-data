@@ -4,7 +4,7 @@
 
 ## The promise
 
-Anyone who has joined an organisation follows every line, and an enterprise architect agrees with it. The film opens the series and says what it's about. You can't ask good questions about a place you don't understand. Enterprise architecture is a way of looking at an organisation in layers, from why it exists down to what runs it. Many methods describe it, and they agree on more than they differ. The series starts rough, with canvases, and earns its notation. Every claim comes from evidence, and owners confirm it. At the end, the map gives every data rule a home. **Learn the place before you ask the questions.**
+Every line passes two tests: anyone who has joined a new organisation can follow it, and an experienced enterprise architect finds nothing wrong in it. The film opens the series and says what it's about. You can't ask good questions about a place you don't understand. Enterprise architecture is a way of looking at an organisation in layers, from why it exists down to what runs it. Many methods describe it, and they agree on more than they differ. The series starts rough, with canvases, and earns its notation. Every claim comes from evidence, and owners confirm it. At the end, the map gives every data rule a home. **Learn the place before you ask the questions.**
 
 ## The story in one paragraph
 

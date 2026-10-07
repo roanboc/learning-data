@@ -1,0 +1,29 @@
+{
+  "key": "who-it-serves",
+  "title": "Who it serves, and how it pays",
+  "sub": "The map before the data, a series on enterprise architecture and why it matters for data: who the utility serves, what they need, what it offers, and how each offering pays, drawn on two canvases before anything else.",
+  "howto": "Paper notes on a wall are drafts; glass in the layers' colours is the confirmed model. Cyan outlines the technical side, gold the business side. Pink notes are pains, green notes gains.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "edison",
+    "breath",
+    2.6
+  ],
+  "say": [
+    [
+      "\\bTomás's\\b",
+      "Toh-mahs's"
+    ],
+    [
+      "\\bTomás\\b",
+      "Toh-mahs"
+    ],
+    [
+      "\\bFarah\\b",
+      "Fah-rah"
+    ]
+  ]
+}

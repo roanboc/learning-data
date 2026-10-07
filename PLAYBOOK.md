@@ -19,6 +19,7 @@ What made the Learning Data films work, starting with *The Inner Life of Data*, 
 - **Map every object to a mechanism,** in a table that lives next to the script. If an object has no mechanism, it's decoration: cut it.
 - **Turn the place where the metaphor breaks into the twist.** The projector, which shows the original without a copy, became the film's dramatic moment.
 - **Show things failing.** The wrong sketch (312% full, every test passing), the copy that goes stale, the record a test stops. A failure teaches the mechanism better than a success does.
+- **Vary the stories, not only the ideas.** A series whose openings all come from the same place and century starts to feel like one film. Plan the openings across a series together: different cultures and regions, the past, the present and imagined futures, and different kinds of story (an invention, a failure, an everyday system). Label an imagined future as imagined, and check a story from another culture against that culture's own sources.
 - **Set guardrails early.** At most three zoom levels, only original art, and no styles that belong to other cultures, such as dot painting, which Australian cultural protocols protect.
 
 *Ask: what would an expert say is wrong with this picture?*

@@ -1,6 +1,6 @@
 # Enterprise architecture, for data
 
-*Proposal for a series on enterprise architecture and why it matters for data, v0.1. The folder is named after the topic; the series title is still open. Status: proposed, 7 October 2026. Nothing is built yet.*
+*Proposal for a series on enterprise architecture and why it matters for data, v0.1. The folder is named after the topic; the series title is still open. Status: proposed, 7 October 2026. Film 1 is scripted ([script](1-day-one/script.md)); nothing is built yet.*
 
 ## Decided
 
@@ -12,6 +12,7 @@
 | 7 October 2026 | No single framework. Film 1 names the known bodies of knowledge once; after that, the series teaches the insights they share. |
 | 7 October 2026 | The tools mature on screen: canvases as first drafts, then capability maps and value streams, then ArchiMate views, then a model people and agents can read. |
 | 7 October 2026 | Eleven films in two parts: seven to understand the organisation, four on how that helps data solutions. |
+| 7 October 2026 | Film 1, *Day one*, opens in 1085 with the Domesday survey: a ruler who, nineteen years on, still didn't know exactly what he ruled. The layers are held by three questions: why, and for whom; how it works; what runs it. |
 
 ## The brief
 
@@ -119,6 +120,8 @@ Day one is a welcome pack, an org chart, a list of 140 systems and an invitation
 **Ideas.** An org chart shows who reports to whom, not how the organisation works. A system list shows what was bought, not what's needed. Enterprise architecture is a way of looking: layers, from why down to what runs it. The known approaches, named once, and the promise to take what they agree on.
 
 **On screen.** The pile of documents, sorted into the empty layers of a map.
+
+Chapter by chapter, with narration: [the script](1-day-one/script.md).
 
 ### 2. Who it serves, and how it pays
 

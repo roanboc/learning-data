@@ -1,0 +1,151 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:07.277
+Mumbai, una mañana entre semana. Un almuerzo casero va a una lonchera, y la lonchera, a un dabbawala.
+
+00:00:08.477 --> 00:00:13.748
+En la tapa, unas pocas marcas pintadas dicen adónde va: la estación, el edificio, el piso.
+
+00:00:15.148 --> 00:00:22.603
+En bicicleta, en tren y a pie, cambia de manos varias veces y llega a un escritorio al otro lado de la ciudad a la hora del almuerzo.
+
+00:00:24.103 --> 00:00:31.351
+Antes de la pandemia, unos cinco mil dabbawalas llevaban unos doscientos mil almuerzos al día, casi sin errores.
+
+00:00:32.651 --> 00:00:37.315
+El detalle está donde las loncheras cambian de manos: marcas que se leen en cada clasificación.
+
+00:00:38.615 --> 00:00:44.091
+El cliente solo ve tres cosas: el almuerzo sale de casa, el almuerzo llega, la lonchera vuelve.
+
+00:00:51.391 --> 00:00:54.535
+La siguiente nota de Tomás: ¿cómo llega el valor a la gente?
+
+00:00:55.835 --> 00:01:02.290
+A las dos y diez, en plena tormenta, una rama cae sobre una línea en la calle Hill. Cuarenta hogares quedan a oscuras.
+
+00:01:03.990 --> 00:01:10.732
+Cuatro minutos después, un hogar llama a la línea de fallas, y Tomás sigue esa llamada hasta que vuelve la luz.
+
+00:01:12.332 --> 00:01:16.954
+En el camino, pasará por tres equipos y por una regla que nadie ha escrito.
+
+00:01:19.654 --> 00:01:23.828
+Farah, la defensora de los clientes, dibuja la noche desde el lado del hogar.
+
+00:01:24.928 --> 00:01:29.767
+El hogar no ve equipos ni sistemas. Ve unas pocas etapas, en orden.
+
+00:01:30.867 --> 00:01:36.887
+Alguien sabe que se fue la luz. La ayuda va en camino. Vuelve la luz. Y alguien explica qué pasó.
+
+00:01:38.587 --> 00:01:41.335
+Cada etapa termina con algo que el hogar recibe.
+
+00:01:42.635 --> 00:01:49.223
+Eso es un flujo de valor: cómo le llega el valor a un cliente, visto desde su lado. Este es: recuperar la luz.
+
+00:01:50.723 --> 00:01:54.283
+Una empresa tiene solo unos pocos; del medidor al cobro es otro.
+
+00:01:56.983 --> 00:02:01.377
+Debajo de cada etapa van las capacidades de su mapa que la hacen posible.
+
+00:02:02.477 --> 00:02:07.336
+Localizar fallas. Despachar cuadrillas. Restablecer el suministro. Informar a los clientes.
+
+00:02:08.636 --> 00:02:14.616
+El trabajo en sí pasa por tres equipos: el centro de contacto, la sala de control y las cuadrillas de campo.
+
+00:02:15.916 --> 00:02:20.038
+El hogar no ve a ninguno, y solo siente los traspasos que salen mal.
+
+00:02:21.338 --> 00:02:25.931
+Como con las loncheras de los dabbawalas, el detalle va donde el trabajo cambia de manos.
+
+00:02:28.631 --> 00:02:33.697
+Un flujo de valor muestra lo que le llega al cliente; un proceso, cómo se hace el trabajo.
+
+00:02:34.997 --> 00:02:40.103
+Grace le muestra el mapa de procesos de la empresa. Cada proceso está en uno de cuatro grupos.
+
+00:02:41.303 --> 00:02:50.927
+Los procesos estratégicos marcan el rumbo. Los operativos entregan a los clientes. Los de apoyo sostienen el resto. Los de evaluación miden y mejoran.
+
+00:02:52.427 --> 00:03:00.067
+Restablecer el suministro es operativo. La evaluación lo mide: cuánto tiempo, y con qué frecuencia, los clientes se quedan sin luz.
+
+00:03:02.767 --> 00:03:05.338
+Como las capacidades, los procesos tienen niveles.
+
+00:03:06.438 --> 00:03:10.991
+El nivel uno es el mapa. El nivel dos es un proceso: restablecer el suministro.
+
+00:03:12.291 --> 00:03:20.913
+El nivel tres son sus pasos. Atender la llamada. Localizar la falla. Decidir quién va primero. Enviar la cuadrilla. Reparar. Reconectar. Confirmar.
+
+00:03:22.413 --> 00:03:25.553
+Para la mayoría de estos pasos, un recuadro y una flecha bastan.
+
+00:03:28.253 --> 00:03:31.078
+Antes de profundizar, Tomás dibuja sus bordes.
+
+00:03:32.378 --> 00:03:37.609
+Quién lo abastece, qué entra, qué sale y para quién: un SIPOC, en términos de Seis Sigma.
+
+00:03:39.109 --> 00:03:42.923
+Entran llamadas, alarmas de los medidores inteligentes y dónde está cada cuadrilla.
+
+00:03:44.323 --> 00:03:48.771
+Sale la luz de vuelta, una hora para avisar a los clientes y un registro de la falla.
+
+00:03:50.271 --> 00:03:54.219
+El registro de la falla, con su inicio, su fin y su causa, va al regulador.
+
+00:03:56.919 --> 00:04:00.958
+Solo un paso necesita más detalle: decidir qué cuadrilla va primero.
+
+00:04:02.158 --> 00:04:05.707
+Esta noche la tormenta causó tres fallas, y hay dos cuadrillas libres.
+
+00:04:06.907 --> 00:04:15.393
+En la calle Hill, hay un cable caído. En Riverside, doce hogares, uno con una persona electrodependiente. En el lado este, mil doscientos hogares.
+
+00:04:16.893 --> 00:04:20.079
+Por costumbre, las dos cuadrillas irían a la falla más grande.
+
+00:04:21.379 --> 00:04:28.883
+La regla dice otra cosa: primero, los cables caídos, por seguridad. Luego, los electrodependientes. Luego, lo que devuelva la luz a más hogares.
+
+00:04:30.383 --> 00:04:37.506
+Orden y estado: ahí es donde un proceso merece detalle, paso a paso, en una notación como BPMN.
+
+00:04:43.406 --> 00:04:45.936
+A las dos de la madrugada, la regla necesita tres datos.
+
+00:04:47.336 --> 00:04:49.477
+Qué cables están caídos: de las llamadas.
+
+00:04:50.777 --> 00:04:53.173
+Quién es electrodependiente: de un registro.
+
+00:04:54.473 --> 00:05:01.015
+Cuántos hogares deja sin luz cada falla: del modelo de la red, que no sabe con certeza qué hogares cuelgan de qué transformador.
+
+00:05:02.515 --> 00:05:06.495
+Donde importan el orden, el estado o el momento, ahí están las reglas de datos.
+
+00:05:09.195 --> 00:05:15.142
+A las tres y cuarenta, vuelve la luz a la calle Hill, con un mensaje: una rama sobre la línea, ya retirada.
+
+00:05:16.642 --> 00:05:19.598
+Farah confirma las etapas, y Grace los pasos.
+
+00:05:20.698 --> 00:05:24.684
+La regla de quién va primero por fin queda escrita, y Grace es su responsable.
+
+00:05:25.984 --> 00:05:32.813
+La nota de Tomás tiene una respuesta: el valor llega a las personas en unas pocas etapas; el detalle va en un solo paso.
+
+00:05:34.313 --> 00:05:38.566
+Después, se pregunta quién hace cada paso y qué significa «cliente» para cada uno.

@@ -1,0 +1,45 @@
+{
+  "key": "how-value-reaches-people",
+  "title": "How value reaches people",
+  "sub": "The map before the data, a series on enterprise architecture and why it matters for data: one power cut followed from the first call to the lights coming back on; a value stream seen from the customer's side, the processes behind it in four groups and three levels, their edges, and detail only where a rule depends on order and state.",
+  "howto": "Paper notes on a wall are drafts; glass in the layers' colours is the confirmed model. Amber chevrons are a value stream's stages; yellow is the business layer, where processes live; salmon is information. Cyan outlines the technical side, gold the business side.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "lunch",
+    "breath",
+    2.6
+  ],
+  "say": [
+    [
+      "\\bTomás's\\b",
+      "Toh-mahs's"
+    ],
+    [
+      "\\bTomás\\b",
+      "Toh-mahs"
+    ],
+    [
+      "\\bFarah\\b",
+      "Fah-rah"
+    ],
+    [
+      "\\bdabbawalas'",
+      "dubba-wahlas'"
+    ],
+    [
+      "\\bdabbawalas\\b",
+      "dubba-wahlas"
+    ],
+    [
+      "\\bdabbawala\\b",
+      "dubba-wahla"
+    ],
+    [
+      "\\bBPMN\\b",
+      "B P M N"
+    ]
+  ]
+}

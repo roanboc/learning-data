@@ -1,0 +1,155 @@
+1
+00:00:01,400 --> 00:00:10,184
+In the 1400s, the Inca empire sent its messages along a road system thousands of kilometres long, through the Andes.
+
+2
+00:00:11,284 --> 00:00:16,544
+Runners, called chasqui, carried each message in relays, from one post to the next.
+
+3
+00:00:17,244 --> 00:00:22,240
+By one estimate, a message could cover about 240 kilometres in a day.
+
+4
+00:00:22,940 --> 00:00:29,383
+At every post, the runner changed. The road stayed, and so did the ability to carry a message along it.
+
+5
+00:00:30,683 --> 00:00:33,131
+A capability outlasts whoever performs it.
+
+6
+00:00:40,431 --> 00:00:44,179
+Tomás's new note asks what the utility must be able to do.
+
+7
+00:00:44,879 --> 00:00:48,812
+His first answer copies the org chart: one box for each team.
+
+8
+00:00:49,812 --> 00:00:55,993
+He puts them on the wall: Network Operations, Customer Service, Finance, Regulatory affairs.
+
+9
+00:00:56,693 --> 00:00:58,445
+It looks complete. It isn't.
+
+10
+00:01:01,745 --> 00:01:04,937
+He takes them to Grace, who owns network operations.
+
+11
+00:01:05,637 --> 00:01:10,035
+Network Operations, she says, is a team. A team is who does the work.
+
+12
+00:01:11,235 --> 00:01:16,880
+Ask what it does, and you get a list: manage outages, maintain assets, connect customers.
+
+13
+00:01:17,880 --> 00:01:22,446
+Those are capabilities: what the utility must be able to do, whoever does it.
+
+14
+00:01:25,146 --> 00:01:27,921
+A capability says what, not who, and not how.
+
+15
+00:01:28,621 --> 00:01:33,219
+The test is one question: would it still be needed after a reorganisation?
+
+16
+00:01:34,519 --> 00:01:37,452
+Manage outages would be. The team might not be.
+
+17
+00:01:38,152 --> 00:01:41,568
+So name each capability as an ability, in a few words.
+
+18
+00:01:44,268 --> 00:01:50,387
+The map starts with the few things the utility must always be able to do. Five of them, at level 1.
+
+19
+00:01:51,487 --> 00:01:58,014
+Under each, level 2 holds the parts. Under run the network: manage outages, and maintain assets.
+
+20
+00:01:59,314 --> 00:02:06,313
+Connect customers, from the same list, sits under serve customers. The team's list doesn't match the map, and it shouldn't.
+
+21
+00:02:07,513 --> 00:02:17,047
+Go down to level 3 only where a rule depends on order. Restoring supply is one: a fault is found, a crew is sent, and supply comes back.
+
+22
+00:02:20,247 --> 00:02:24,547
+Each capability needs an owner: the person who answers for whether it works.
+
+23
+00:02:25,247 --> 00:02:32,063
+Grace owns running the network. Farah owns serving customers. Ama owns reporting to the regulator.
+
+24
+00:02:32,763 --> 00:02:37,554
+One capability has no owner yet. Generating energy has no name on it.
+
+25
+00:02:38,854 --> 00:02:41,908
+A capability with no owner is a gap in the map.
+
+26
+00:02:44,608 --> 00:02:49,842
+Next, the heat map. Each capability is coloured by how well it works, from the evidence.
+
+27
+00:02:51,042 --> 00:02:59,011
+The hottest is connecting customers. A new connection takes about thirty-five working days. The outcome from Why it moves was ten.
+
+28
+00:03:00,311 --> 00:03:04,534
+A heat map shows where to look first. It doesn't say where the money should go.
+
+29
+00:03:05,634 --> 00:03:07,895
+That choice is made against the principles.
+
+30
+00:03:10,595 --> 00:03:16,826
+Next year the utility reorganises. Network Operations splits, and its teams move to new homes.
+
+31
+00:03:17,526 --> 00:03:20,600
+The teams move. The capabilities stay where they are.
+
+32
+00:03:22,100 --> 00:03:26,049
+Capabilities are the stable spine. Teams come and go beneath it.
+
+33
+00:03:29,149 --> 00:03:35,561
+The map could go on forever. Each capability could be split again, into level 4, and then level 5.
+
+34
+00:03:36,261 --> 00:03:38,787
+Declare how deep the map goes, and stop there.
+
+35
+00:03:39,987 --> 00:03:44,638
+Splitting detect faults further would give steps that nobody decides on separately.
+
+36
+00:03:45,338 --> 00:03:49,850
+Fewer, well-made boxes beat a complete catalogue that nobody reads.
+
+37
+00:03:55,550 --> 00:04:00,343
+Grace confirms the first two levels. The heat map goes to the board, as a draft.
+
+38
+00:04:01,043 --> 00:04:06,930
+Tomás's note has an answer: five things the utility must be able to do, each with an owner.
+
+39
+00:04:08,230 --> 00:04:10,852
+Next, he asks how value reaches a customer.

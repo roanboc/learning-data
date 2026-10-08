@@ -114,6 +114,26 @@ Day one is a welcome pack, an org chart, a list of 140 systems and an invitation
 | | 10 | **When strategy moves** | A change walked through every layer |
 | | 11 | **A map people and agents can read** | The model as something kept, not drawn once |
 
+## Openings: other places, other times
+
+Each film opens with a short, true story that holds its idea, then cuts to Tomás. To keep viewers engaged, the openings vary in **place** (not only Europe and North America), in **time** (the past, the present, and imagined futures) and in **kind** (an invention, a failure, a system people run every day). A future opening is labelled as imagined, and set in the utility's own fictional world. A story from another culture is told in the series' own drawing style, never in that culture's art (PLAYBOOK §2), and checked against a source from that culture where one exists.
+
+| Film | Opening | Where | When |
+|---|---|---|---|
+| 1 | The Domesday Book | England | 1086 |
+| 2 | Edison's Pearl Street customers | United States | 1882 |
+| 3 | The Northeast blackout | United States and Canada | 1965 |
+| 4 | The Inca's chasqui runners | The Andes | 1400s |
+| 5 | Mumbai's dabbawalas | India | Today |
+| 6 | Two frequencies in one country | Japan | 1890s and 2011 |
+| 7 | A morning in the utility's region | The series' fictional region | Imagined, 2045 |
+| 8 | Fishermen with mobile phones | Kerala, India | 1997–2001 |
+| 9 | "Once only" | Estonia | Today |
+| 10 | Money by text message | Kenya | 2007 |
+| 11 | Wayfinding by the stars, then an agent reading the map | The Pacific, then the fictional region | 1976, then imagined |
+
+The first three openings are all from the West and the past; films 4 to 11 balance them. Each opening's facts go into that film's rigour notes and are checked before recording.
+
 ## The films
 
 ### 1. Day one
@@ -144,7 +164,12 @@ Chapter by chapter, with narration: [the script](2-who-it-serves/script.md).
 
 **On screen.** A motivation view: who cares, what pressures them, what must be true.
 
+Chapter by chapter, with narration: [the script](3-why-it-moves/script.md).
+
 ### 4. What it must be able to do
+
+**Opening.** The Andes, the 1400s: the Inca's chasqui runners carried messages and knotted-string records (khipu) along the roads in relays, about 240 km a day. The runners changed at every post; the ability to move a message across an empire stayed. A capability outlasts whoever performs it.
+
 
 **Story.** Tomás's first capability map looks like the org chart. The operations manager shows him that "Network Operations" is a team, and the capabilities are things like *manage outages*, *maintain assets* and *connect customers*.
 
@@ -154,6 +179,9 @@ Chapter by chapter, with narration: [the script](2-who-it-serves/script.md).
 
 ### 5. How value reaches people
 
+**Opening.** Mumbai, today: about 5,000 dabbawalas carry some 200,000 home-cooked lunches a day from kitchens to offices and back, with a colour-and-number code on each tin and almost no errors. One value stream, from the customer's view, with detail only at the hand-offs.
+
+
 **Story.** A household reports that the power is out. Tomás follows the value stream from the call to the restored supply, and finds that the detail matters at one step only: deciding which crew goes first.
 
 **Ideas.** Value streams from the customer's view; their stages mapped to capabilities. Processes at levels 1 to 4, grouped into strategic, operational, support and evaluation. SIPOC for a process's edges. Going deeper only where a rule depends on order, state or timing.
@@ -161,6 +189,9 @@ Chapter by chapter, with narration: [the script](2-who-it-serves/script.md).
 **On screen.** Restore supply and meter to cash as value streams; one process opened to its activities.
 
 ### 6. Who does it, and where meaning changes
+
+**Opening.** Japan: in the 1890s, Tokyo bought German generators (50 Hz) and Osaka American ones (60 Hz). The country still runs on two frequencies, and in 2011, after the earthquake, the west could send the east only what a few converter stations could translate. The same word, "power", means something different on each side of an edge, and the translation is where it breaks.
+
 
 **Story.** "Customer" means a person with an account to retail, and a connection point to the network. The two businesses mustn't share what they know. Tomás draws the edge between them.
 
@@ -170,6 +201,9 @@ Chapter by chapter, with narration: [the script](2-who-it-serves/script.md).
 
 ### 7. Today, and where it's going
 
+**Opening.** An imagined morning in 2045, in the utility's own region: a street of homes trading power from their batteries, a crew sent before the fault happens. Then back to today's 140 systems. The target is drawn as carefully as the present, and the path between them is its own drawing.
+
+
 **Story.** The 140 systems, finally placed: each mapped to the capability it serves. Three systems do the same thing; one capability has nothing but a spreadsheet.
 
 **Ideas.** The application and technology layers as a register, mapped to capabilities. Overlaps, gaps, and shadow systems. Baseline, target and transition: plateaus, gaps and the order they're closed in. Decisions recorded with why. The drafts become ArchiMate views, and each canvas block finds its element.
@@ -177,6 +211,9 @@ Chapter by chapter, with narration: [the script](2-who-it-serves/script.md).
 **On screen.** The full map, layer by layer, in ArchiMate notation for the first time.
 
 ### 8. Now the questions appear
+
+**Opening.** Kerala, India, 1997 to 2001: as mobile phones reached the coast, fishermen at sea began calling markets before choosing where to land their catch. Waste fell and prices across markets converged. A question only matters once someone can act on the answer.
+
 
 **Story.** The backlog from day one, read again. Half the requests serve no goal; some goals have no measure. Tomás can now say which questions matter.
 
@@ -186,6 +223,9 @@ Chapter by chapter, with narration: [the script](2-who-it-serves/script.md).
 
 ### 9. Rules with a home
 
+**Opening.** Estonia, today: under the "once only" principle, the state may ask a citizen for a fact once; each fact is kept by the one registry that owns it, and every other agency asks that registry through a shared exchange layer (X-Road). Every rule and every fact has one home and one owner.
+
+
 **Story.** An estimated meter reading triggers a bill dispute. The rule that should have caught it exists, but no one owns it, and it lives in a script.
 
 **Ideas.** Business objects become data objects, in domains with owners. Each data rule and expectation traces to a process step, a regulation or a principle: an estimated read stands only until the next actual read; a connection point has one retailer at a time; network customer data stays on the network's side of the wall. Quality expectations come from the process: timeliness from its service level, completeness from its steps. The industry's information model as a starting point, not a blank page.
@@ -194,6 +234,9 @@ Chapter by chapter, with narration: [the script](2-who-it-serves/script.md).
 
 ### 10. When strategy moves
 
+**Opening.** Kenya, 2007: a mobile network began letting people send money by text message (M-Pesa). A change in strategy reached every layer: new agents in small shops, new rules agreed with the central bank, new accounts, new data. Within a few years most adults in the country used it.
+
+
 **Story.** The government directs the utility to offer a social tariff for households in hardship. Eligibility depends on information held by another agency.
 
 **Ideas.** A change walked down every layer: a new driver and goal, a new product, changed capabilities and processes, a data-sharing agreement, consent and privacy rules, new data objects and measures, and the systems affected. The target state and the gaps, in order. What a well-architected organisation can answer in a day, and what a poorly architected one finds out in production.
@@ -201,6 +244,9 @@ Chapter by chapter, with narration: [the script](2-who-it-serves/script.md).
 **On screen.** The change as a ripple, layer by layer, ending at the data contracts that must change.
 
 ### 11. A map people and agents can read
+
+**Opening.** The Pacific: navigators found islands across thousands of kilometres of open ocean with no instruments, using a star compass held in memory and taught person to person. In 1976 the canoe Hōkūleʻa sailed from Hawaiʻi to Tahiti that way, guided by Mau Piailug of Satawal. A map is only alive while people can read it and pass it on. The film ends in an imagined near future, with an agent reading Tomás's map.
+
 
 **Story.** Tomás's map is now useful, so it's at risk of going stale. He moves it from slides to text that is versioned, reviewed and readable by agents.
 
@@ -215,6 +261,8 @@ Chapter by chapter, with narration: [the script](2-who-it-serves/script.md).
 - ***The Inner Life of Data*** shows the platform. This series shows the organisation the platform serves.
 
 ## Rigour to check when scripting
+
+- **The openings** (see above): the chasqui's daily distance is an estimate; the dabbawalas' error rate is often quoted as "six sigma", a claim from press coverage rather than a formal study, so say "almost no errors"; Japan's converter capacity in 2011 was about 1 GW; the Kerala findings are from Robert Jensen's study (2007); Estonia's once-only principle is in law; M-Pesa's adoption figures vary by survey; Hōkūleʻa's 1976 voyage and Mau Piailug's role are well documented by the Polynesian Voyaging Society.
 
 - **Current versions of the standards:** TOGAF, ArchiMate, BIZBOK, the APQC framework (and its utilities edition), DAMA-DMBOK, ISO/IEC/IEEE 42010 and the IEC Common Information Model (IEC 61968, 61970 and 62325).
 - **Ring-fencing and unbundling** differ by jurisdiction. Keep it to "in many markets", and keep the rule generic.

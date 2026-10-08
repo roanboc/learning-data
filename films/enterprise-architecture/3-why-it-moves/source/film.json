@@ -1,0 +1,33 @@
+{
+  "key": "why-it-moves",
+  "title": "Why it moves",
+  "sub": "The map before the data, a series on enterprise architecture and why it matters for data: who cares about the utility, what pushes on it, what that means here, what must become true and how anyone will know, and the principles every choice is checked against.",
+  "howto": "Paper notes on a wall are drafts; glass in the layers' colours is the confirmed model. Purple is the motivation layer. Cyan outlines the technical side, gold the business side.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "blackout",
+    "breath",
+    2.6
+  ],
+  "say": [
+    [
+      "\\bTomás's\\b",
+      "Toh-mahs's"
+    ],
+    [
+      "\\bTomás\\b",
+      "Toh-mahs"
+    ],
+    [
+      "\\bFarah's\\b",
+      "Fah-rah's"
+    ],
+    [
+      "\\bAma\\b",
+      "Ah-mah"
+    ]
+  ]
+}

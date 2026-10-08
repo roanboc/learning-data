@@ -1,0 +1,199 @@
+1
+00:00:01,400 --> 00:00:07,277
+Mumbai, a weekday morning. A home-cooked lunch goes into a tin, and the tin to a dabbawala.
+
+2
+00:00:08,477 --> 00:00:13,748
+On its lid, a few painted marks say where it's going: the station, the building, the floor.
+
+3
+00:00:15,148 --> 00:00:22,603
+By bicycle, train and on foot, it changes hands several times, and reaches a desk across the city by lunchtime.
+
+4
+00:00:24,103 --> 00:00:31,351
+Before the pandemic, about five thousand dabbawalas carried some two hundred thousand lunches a day, with almost no errors.
+
+5
+00:00:32,651 --> 00:00:37,315
+The detail lives where the tins change hands: marks, read at every sorting.
+
+6
+00:00:38,615 --> 00:00:44,091
+The customer sees only three things: lunch leaves home, lunch arrives, the tin comes back.
+
+7
+00:00:51,391 --> 00:00:54,535
+Tomás's next note asks how value reaches people.
+
+8
+00:00:55,835 --> 00:01:02,290
+At ten past two on a stormy morning, a branch falls on a line on Hill Street. Forty homes go dark.
+
+9
+00:01:03,990 --> 00:01:10,732
+Four minutes later, one household calls the faults line, and Tomás follows that call to the lights coming back on.
+
+10
+00:01:12,332 --> 00:01:16,954
+On its way, it will pass through three teams, and a rule nobody has written down.
+
+11
+00:01:19,654 --> 00:01:23,828
+Farah, the customer advocate, draws the night from the household's side.
+
+12
+00:01:24,928 --> 00:01:29,767
+The household sees no teams and no systems. It sees a few stages, in order.
+
+13
+00:01:30,867 --> 00:01:36,887
+Someone knows the power's out. Help is on its way. The lights come back. And someone says what happened.
+
+14
+00:01:38,587 --> 00:01:41,335
+Each stage ends with something the household gets.
+
+15
+00:01:42,635 --> 00:01:49,223
+That's a value stream: how value reaches a customer, seen from their side. This one: get the power back.
+
+16
+00:01:50,723 --> 00:01:54,283
+A utility has only a handful; meter to cash is another.
+
+17
+00:01:56,983 --> 00:02:01,377
+Under each stage go the capabilities from his map that make it possible.
+
+18
+00:02:02,477 --> 00:02:07,336
+Finding faults. Dispatching crews. Restoring supply. Informing customers.
+
+19
+00:02:08,636 --> 00:02:14,616
+The work itself passes through three teams: the contact centre, the control room and the field crews.
+
+20
+00:02:15,916 --> 00:02:20,038
+The household sees none of them, and feels only the hand-offs that go wrong.
+
+21
+00:02:21,338 --> 00:02:25,931
+As with the dabbawalas' tins, the detail belongs where the work changes hands.
+
+22
+00:02:28,631 --> 00:02:33,697
+A value stream shows what reaches the customer; a process, how the work gets done.
+
+23
+00:02:34,997 --> 00:02:40,103
+Grace shows him the utility's process map. Every process sits in one of four groups.
+
+24
+00:02:41,303 --> 00:02:50,927
+Strategic processes set direction. Operational ones deliver to customers. Support keeps the rest running. Evaluation measures and improves.
+
+25
+00:02:52,427 --> 00:03:00,067
+Restoring supply is operational. Evaluation measures it: how long, and how often, customers are without power.
+
+26
+00:03:02,767 --> 00:03:05,338
+Like capabilities, processes have levels.
+
+27
+00:03:06,438 --> 00:03:10,991
+Level one is the map. Level two is one process: restore supply.
+
+28
+00:03:12,291 --> 00:03:20,913
+Level three is its steps. Take the call. Find the fault. Decide who goes first. Send the crew. Repair. Switch back on. Confirm.
+
+29
+00:03:22,413 --> 00:03:25,553
+For most of these steps, a box and an arrow say enough.
+
+30
+00:03:28,253 --> 00:03:31,078
+Before going deeper, Tomás draws its edges.
+
+31
+00:03:32,378 --> 00:03:37,609
+Who supplies it, what comes in, what goes out, to whom: a SIPOC, in Six Sigma's terms.
+
+32
+00:03:39,109 --> 00:03:42,923
+In come calls, alarms from smart meters, and where each crew is.
+
+33
+00:03:44,323 --> 00:03:48,771
+What comes out: power back on, a time to tell customers, and a fault record.
+
+34
+00:03:50,271 --> 00:03:54,219
+The fault record, with its start, end and cause, goes to the regulator.
+
+35
+00:03:56,919 --> 00:04:00,958
+Only one step needs more detail: deciding which crew goes first.
+
+36
+00:04:02,158 --> 00:04:05,707
+Tonight the storm has caused three faults, and two crews are free.
+
+37
+00:04:06,907 --> 00:04:15,393
+On Hill Street, a wire is down. On Riverside, twelve homes, one with someone on life support. On the east side, twelve hundred homes.
+
+38
+00:04:16,893 --> 00:04:20,079
+Left to habit, both crews would go to the biggest fault.
+
+39
+00:04:21,379 --> 00:04:28,883
+The rule says otherwise: wires down first, for safety. Then life support. Then whatever brings back the most homes.
+
+40
+00:04:30,383 --> 00:04:37,506
+Order and state: that's where a process earns detail, step by step, in a notation such as BPMN.
+
+41
+00:04:43,406 --> 00:04:45,936
+At two in the morning, the rule needs three facts.
+
+42
+00:04:47,336 --> 00:04:49,477
+Which wires are down: from the calls.
+
+43
+00:04:50,777 --> 00:04:53,173
+Who is on life support: from a register.
+
+44
+00:04:54,473 --> 00:05:01,015
+How many homes each fault cuts off: from the network model, which isn't sure which homes hang off which transformer.
+
+45
+00:05:02,515 --> 00:05:06,495
+Wherever order, state or timing matter, that's where the data rules are.
+
+46
+00:05:09,195 --> 00:05:15,142
+At twenty to four, Hill Street's lights come back on, with a message: a branch on the line, now cleared.
+
+47
+00:05:16,642 --> 00:05:19,598
+Farah confirms the stages, and Grace the steps.
+
+48
+00:05:20,698 --> 00:05:24,684
+The rule for who goes first is written down at last, and Grace owns it.
+
+49
+00:05:25,984 --> 00:05:32,813
+Tomás's note has an answer: value reaches people in a few stages; the detail belongs at one step.
+
+50
+00:05:34,313 --> 00:05:38,566
+Next, he asks who does each step, and what "customer" means to each of them.

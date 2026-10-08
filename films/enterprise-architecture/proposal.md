@@ -1,6 +1,6 @@
 # Enterprise architecture, for data
 
-*Proposal for a series on enterprise architecture and why it matters for data, v0.1. The folder is named after the topic; the series title is still open. Status: proposed, 7 October 2026. *Day one* and *Who it serves, and how it pays* are built ([series README](README.md)); they aren't on the site yet.*
+*Proposal for a series on enterprise architecture and why it matters for data, v0.1. The folder is named after the topic; the series title is still open. Status: proposed, 7 October 2026. *Day one*, *Who it serves, and how it pays*, *Why it moves* and *What it must be able to do* are built ([series README](README.md)); they aren't on the site yet.*
 
 ## Decided
 
@@ -16,6 +16,7 @@
 | 7 October 2026 | A working title, *The map before the data*, for the title and end cards; it's one line in `shared/src/ea.js` to change. |
 | 7 October 2026 | The series' look: drafts are paper on a wall, the confirmed model is glass in the layers' conventional colours. Its sound: nylon-string plucks and a soft flute over warm pads, and its own mark, 1-3-5-8. A second character, Grace Achieng, owns network operations. |
 | 7 October 2026 | *Who it serves, and how it pays* opens in 1882 with Edison's Pearl Street customers, who wanted light, not electricity. Farah Siddiqui, the customer advocate, joins the cast. Fit is a rule: an unmatched pain is a missing capability or a customer not served, and the canvas says which. |
+| 8 October 2026 | *What it must be able to do* opens in the Andes in the 1400s with the chasqui relay runners: the runners changed and the roads were rebuilt, and the ability to move a message stayed. Tomás's first capability map is the org chart again; the test is whether a box survives a restructure, a new system and a new process. Three levels, one owner each (a person), a heat map with evidence, and depth only where it hurts. Its present is in F major, and its past has a dark harp, with no borrowed Andean sound. |
 
 ## The brief
 
@@ -176,6 +177,8 @@ Chapter by chapter, with narration: [the script](3-why-it-moves/script.md).
 **Ideas.** Capabilities are what, not who or how. Levels 1 to 3. Each capability has an owner. A heat map shows where it hurts, and where investment goes.
 
 **On screen.** The map, drawn wrong, corrected, levelled and heat-mapped.
+
+Chapter by chapter, with narration: [the script](4-what-it-must-do/script.md).
 
 ### 5. How value reaches people
 

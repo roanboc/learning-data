@@ -1,0 +1,37 @@
+{
+  "key": "what-it-must-do",
+  "title": "What it must be able to do",
+  "sub": "The map before the data, a series on enterprise architecture and why it matters for data: the utility's capabilities, what it must be able to do whoever does it, in three levels, each with an owner, heat-mapped to show where it hurts and where the money goes.",
+  "howto": "Paper notes on a wall are drafts; glass in the layers' colours is the confirmed model. Amber is the strategy layer, where capabilities live. Green, amber and red say how well a capability works today. Cyan outlines the technical side, gold the business side.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "runners",
+    "breath",
+    2.6
+  ],
+  "say": [
+    [
+      "\\bTomás's\\b",
+      "Toh-mahs's"
+    ],
+    [
+      "\\bTomás\\b",
+      "Toh-mahs"
+    ],
+    [
+      "\\bAma\\b",
+      "Ah-mah"
+    ],
+    [
+      "\\bchasqui\\b",
+      "chahs-kee"
+    ],
+    [
+      "\\bkhipu\\b",
+      "kee-poo"
+    ]
+  ]
+}

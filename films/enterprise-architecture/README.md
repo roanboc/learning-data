@@ -4,7 +4,7 @@
 
 A new enterprise architect, Tomás, joins a publicly owned energy utility and doesn't yet know how it works, so he doesn't yet know which questions it needs to answer. Over eleven films he builds a map of it, layer by layer, from why it exists down to what runs it, and then shows what that map does for data: the questions that matter, rules with a home, a change in strategy, and a map that people and agents can read. The plan is in the [proposal](proposal.md).
 
-**Status:** *Day one*, *Who it serves, and how it pays* and *Why it moves* are built. They aren't on the site yet.
+**Status:** *Day one*, *Who it serves, and how it pays*, *Why it moves* and *What it must be able to do* are built. They aren't on the site yet.
 
 ## The films
 
@@ -13,6 +13,7 @@ A new enterprise architect, Tomás, joins a publicly owned energy utility and do
 | Day one | Why enterprise architecture, and the series | 5 min | 10 | [script](1-day-one/script.md) · [source](1-day-one/source/README.md) |
 | Who it serves, and how it pays | Customers, offerings and the canvases | 5 min | 10 | [script](2-who-it-serves/script.md) · [source](2-who-it-serves/source/README.md) |
 | Why it moves | Stakeholders, drivers, assessments, goals, outcomes and principles | 5 min | 10 | [script](3-why-it-moves/script.md) · [source](3-why-it-moves/source/README.md) |
+| What it must be able to do | Capabilities, in levels, each with an owner, and where it hurts | 4 min | 10 | [script](4-what-it-must-do/script.md) · [source](4-what-it-must-do/source/README.md) |
 
 ## The look and the sound
 

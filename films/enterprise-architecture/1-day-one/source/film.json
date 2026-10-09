@@ -7,11 +7,7 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": [
-    "govern",
-    "breath",
-    2.6
-  ],
+  "poster": ["govern", "then", 1.5],
   "say": [
     [
       "\\bTomás\\b",

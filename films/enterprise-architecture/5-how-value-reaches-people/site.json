@@ -1,0 +1,27 @@
+{
+  "kicker": "Value streams and processes",
+  "kicker_es": "Flujos de valor y procesos",
+  "title_es": "Cómo llega el valor a la gente",
+  "h1": "How value reaches people: value streams, processes, and detail where order matters",
+  "h1_es": "Cómo llega el valor a la gente: flujos de valor, procesos, y detalle donde importa el orden",
+  "lead": "A branch brings down a line on a stormy night, and forty homes go dark. Tomás follows one household's call: a value stream from their side, the teams behind it, a process map in levels, and detail only at the step whose rule depends on order.",
+  "lead_es": "Una rama derriba una línea en una noche de tormenta, y cuarenta casas quedan a oscuras. Tomás sigue la llamada de un hogar: un flujo de valor desde su lado, los equipos que hay detrás, un mapa de procesos por niveles, y detalle solo en el paso cuya regla depende del orden.",
+  "description": "A film about value streams seen from the customer's side, the capabilities and teams behind them, process maps and levels, SIPOC, and going into detail, in a notation such as BPMN, only where a rule depends on order, state or timing.",
+  "description_es": "Una película sobre flujos de valor vistos desde el lado del cliente, las capacidades y los equipos que hay detrás, mapas de procesos y niveles, SIPOC, e ir al detalle, con una notación como BPMN, solo donde una regla depende del orden, el estado o el momento.",
+  "card": "Lunch crosses Mumbai, changing hands. Power comes back to forty homes. Value from the customer's side, and detail only where order matters.",
+  "card_es": "Un almuerzo cruza Mumbai, de mano en mano. La luz vuelve a cuarenta casas. El valor desde el lado del cliente, y detalle solo donde importa el orden.",
+  "chapters_es": {
+    "lunch": "Un almuerzo que cruza la ciudad",
+    "storm": "Se apagan las luces",
+    "side": "Desde el lado del hogar",
+    "teams": "Tres equipos, un flujo",
+    "map": "Cuatro tipos de proceso",
+    "levels": "Niveles, otra vez",
+    "edges": "Los bordes",
+    "first": "Quién va primero",
+    "needs": "Lo que necesita la regla",
+    "end": "Vuelve la luz"
+  },
+  "next_h": "You've seen how value reaches people. More films in the series are on the way.",
+  "next_h_es": "Viste cómo llega el valor a la gente. Vienen más películas de la serie."
+}

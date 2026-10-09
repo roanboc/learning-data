@@ -17,3 +17,7 @@
 ## Rebuild
 
 As for [*Day one*](../../1-day-one/source/README.md), from this folder, `films/enterprise-architecture/5-how-value-reaches-people/source/`; the video is `dist/how-value-reaches-people.mp4`.
+
+## Publish
+
+As for [*Day one*](../../1-day-one/source/README.md#publish): `python tools/publish.py` copies the player, the soundtrack and the Spanish captions to `site/assets/how-value-reaches-people/` and draws the poster, then `python site-tools/build_series.py` makes the pages. "Pause and think" is `site/assets/how-value-reaches-people/think.en.js` and `think.es.js`: it stops after `side`, `teams` and `first`. Progress is stored under `ld-how-value-reaches-people`.

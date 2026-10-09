@@ -7,10 +7,6 @@
     "older.js",
     "scenes.js"
   ],
-  "poster": [
-    "model",
-    "verify",
-    7.2
-  ],
+  "poster": ["materials", "exams", 6.8],
   "say": []
 }

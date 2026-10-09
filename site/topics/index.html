@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Topics · Learning Data</title>
-<meta name="description" content="Short films on how a modern data platform works. Start with the overview, then go deeper, one topic at a time.">
-<meta property="og:title" content="Topics · Learning Data"><meta property="og:description" content="Short films on how a modern data platform works. Start with the overview, then go deeper, one topic at a time."><meta property="og:image" content="https://roanboc.github.io/learning-data/assets/poster.jpg">
+<meta name="description" content="Short films on data, in five topics: data platforms, data modelling, analytics engineering, data quality and change, and enterprise architecture. Start with how a data platform works, then pick the topic you need.">
+<meta property="og:title" content="Topics · Learning Data"><meta property="og:description" content="Short films on data, in five topics: data platforms, data modelling, analytics engineering, data quality and change, and enterprise architecture. Start with how a data platform works, then pick the topic you need."><meta property="og:image" content="https://roanboc.github.io/learning-data/assets/poster.jpg">
 <link rel="alternate" hreflang="en" href="https://roanboc.github.io/learning-data/topics/"><link rel="alternate" hreflang="es" href="https://roanboc.github.io/learning-data/es/topics/">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,21 +13,22 @@
 <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
-<header class="top"><div class="top-in"><a class="brand" href="../"><img src="../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Site"><a href="../">Start here</a><a href="./" aria-current="page">Topics</a><a href="../journey/">Making of</a><span class="lang" role="group" aria-label="Language"><a href="./" aria-current="true" lang="en">EN</a><a href="../es/topics/" lang="es" hreflang="es">ES</a></span></nav></div></header>
+<header class="top"><div class="top-in"><a class="brand" href="../"><img src="../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Site"><a href="../">Start here</a><a href="../topics/" aria-current="page">Topics</a><a href="../journey/">Making of</a><span class="lang" role="group" aria-label="Language"><a href="./" aria-current="true" lang="en">EN</a><a href="../es/topics/" lang="es" hreflang="es">ES</a></span></nav></div></header>
 <main>
-<section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="../assets/poster.jpg" alt=""><img src="../assets/sketch-poster.jpg" alt=""><img src="../assets/silent-change-poster.jpg" alt=""><img src="../assets/too-good-to-be-true-poster.jpg" alt=""><img src="../assets/poster.jpg" alt=""><img src="../assets/sketch-poster.jpg" alt=""><img src="../assets/silent-change-poster.jpg" alt=""><img src="../assets/too-good-to-be-true-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="../assets/poster.jpg" alt=""><img src="../assets/sketch-poster.jpg" alt=""><img src="../assets/whats-in-a-word-poster.jpg" alt=""><img src="../assets/declare-it-then-build-it-poster.jpg" alt=""><img src="../assets/silent-change-poster.jpg" alt=""><img src="../assets/day-one-poster.jpg" alt=""><img src="../assets/older-than-the-systems-poster.jpg" alt=""><img src="../assets/start-from-a-question-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
 <p class="eyebrow">Learning Data</p>
 <h1>Topics</h1>
-<p class="lead">Start with the overview film, then go deeper, one topic at a time. Your progress stays in this browser.</p>
+<p class="lead">Five topics, each with its films and series. Start with how a data platform works, then pick the topic you need. Your progress stays in this browser.</p>
+<nav class="topic-jump" aria-label="The five topics"><a href="#data-platforms">Data platforms</a><a href="#data-modelling">Data modelling</a><a href="#analytics-engineering">Analytics engineering</a><a href="#data-quality">Data quality and change</a><a href="#enterprise-architecture">Enterprise architecture</a></nav>
 </section>
 
-<section class="module" id="start" aria-labelledby="start-h">
-<div class="mhead"><div><h2 id="start-h">Start here</h2></div></div>
-<div class="topic-grid" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
-<article class="topic-card wide">
-<img src="../assets/poster.jpg" alt="" width="1280" height="720">
+<section class="module topic" id="data-platforms" aria-labelledby="data-platforms-h">
+<div class="mhead"><div><p class="step">Start here: for everyone</p><h2 id="data-platforms-h">Data platforms</h2><p>How data moves through a modern data platform, from a tap on a phone to a decision.</p></div></div>
+<div class="topic-grid rows" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}' data-series-text='{"films":"{n} of {of} films watched"}'>
+<article class="topic-card row">
+<img src="../assets/poster.jpg" alt="" width="1280" height="720" loading="lazy">
 <div class="tc-body">
-<p class="kicker">How a data platform works</p>
+<p class="kicker">One film</p>
 <h3><a href="../">The Inner Life of Data</a></h3>
 <p>Follow one enrolment from a tap on a phone to a decision, through Databricks and dbt.</p>
 <p class="meta">7½ min · 8 labs · 12 scenarios · English and Spanish</p>
@@ -37,240 +38,81 @@
 </div>
 </section>
 
-<section class="module" id="go-deeper" aria-labelledby="go-deeper-h">
-<div class="mhead"><div><h2 id="go-deeper-h">Go deeper</h2><p>Each topic goes deeper into part of the overview film.</p></div></div>
-<ol class="branches">
-<li><p>From the chapter <a href="../#t=75"><i>The sketch</i></a></p>
-<div class="topic-grid" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
-<article class="topic-card">
+<section class="module topic" id="data-modelling" aria-labelledby="data-modelling-h">
+<div class="mhead"><div><p class="step">For anyone who designs models, definitions or reports</p><h2 id="data-modelling-h">Data modelling</h2><p>What the numbers mean, and the shapes that hold them: words and definitions first, then models, before any system.</p></div></div>
+<div class="topic-grid rows" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}' data-series-text='{"films":"{n} of {of} films watched"}'>
+<article class="topic-card row">
 <img src="../assets/sketch-poster.jpg" alt="" width="1280" height="720" loading="lazy">
 <div class="tc-body">
-<p class="kicker">Data modelling</p>
+<p class="kicker">One film</p>
 <h3><a href="../sketch/">A Sharper Sketch</a></h3>
 <p>Two trusted numbers disagree. When does a simple model need more precision, and how do you use a reference model without copying it?</p>
 <p class="meta">5½ min · 6 labs · 12 scenarios</p>
 <p class="tc-progress" data-progress="ld3" data-labs="6" data-quiz="12" hidden></p>
 </div>
 </article>
-</div></li>
-<!-- from-words-to-data: made by site-tools/build_series.py -->
-<li class="series"><p>From <a href="../#t=75"><i>The sketch</i></a>, in depth: the series <a href="../from-words-to-data/"><i>From words to data</i></a>, seven films, in order</p>
-<div class="topic-grid" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
-<article class="topic-card">
-<img src="../assets/whats-in-a-word-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<article class="topic-card row series-card">
+<div class="sc-media"><img src="../assets/whats-in-a-word-poster.jpg" alt="" width="1280" height="720" loading="lazy"><img src="../assets/older-than-the-systems-poster.jpg" alt="" width="1280" height="720" loading="lazy"><img src="../assets/built-to-write-built-to-read-poster.jpg" alt="" width="1280" height="720" loading="lazy"></div>
 <div class="tc-body">
-<p class="kicker">Film 1 of 7 · Language and meaning</p>
-<h3><a href="../from-words-to-data/whats-in-a-word/">What's in a word</a></h3>
-<p>Four offices, four numbers, one word. Before you can count anything, you have to agree what it is.</p>
-<p class="meta">6 min · 4 labs · 8 scenarios · From words to data</p>
-<p class="tc-progress" data-progress="ld-whats-in-a-word" data-labs="4" data-quiz="8" hidden></p>
+<p class="kicker">Series · 7 films</p>
+<h3><a href="../from-words-to-data/">From words to data</a></h3>
+<p>Seven films on data modelling, from how minds turn the world into words to how AI can help keep meaning true.</p>
+<p class="meta">34 min · labs and scenarios</p>
+<p class="tc-progress" data-films="ld-whats-in-a-word ld-older-than-the-systems ld-built-to-write-built-to-read ld-many-ways-to-read ld-both-at-once ld-meaning-machines-can-read ld-keeping-it-true" hidden></p>
 </div>
 </article>
-<article class="topic-card">
-<img src="../assets/older-than-the-systems-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 2 of 7 · Models and systems</p>
-<h3><a href="../from-words-to-data/older-than-the-systems/">Older than the systems</a></h3>
-<p>Clay, wax, paper, a digital key: the materials changed, the idea didn't. Model it once, and hold every system up to that.</p>
-<p class="meta">5½ min · 3 labs · 8 scenarios · From words to data</p>
-<p class="tc-progress" data-progress="ld-older-than-the-systems" data-labs="3" data-quiz="8" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/built-to-write-built-to-read-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 3 of 7 · Shapes for data</p>
-<h3><a href="../from-words-to-data/built-to-write-built-to-read/">Built to write, built to read</a></h3>
-<p>One set of facts, two shapes: one built to write each award, one built to read ten years of them.</p>
-<p class="meta">5 min · 3 labs · 8 scenarios · From words to data</p>
-<p class="tc-progress" data-progress="ld-built-to-write-built-to-read" data-labs="3" data-quiz="8" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/many-ways-to-read-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 4 of 7 · Shapes for reading</p>
-<h3><a href="../from-words-to-data/many-ways-to-read/">Many ways to read</a></h3>
-<p>Star, vault or one wide table? Each shape has a job and a place. Choose per question, not per fashion.</p>
-<p class="meta">4 min · 3 labs · 8 scenarios · From words to data</p>
-<p class="tc-progress" data-progress="ld-many-ways-to-read" data-labs="3" data-quiz="8" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/both-at-once-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 5 of 7 · Hybrid databases</p>
-<h3><a href="../from-words-to-data/both-at-once/">Both at once</a></h3>
-<p>One database that writes and reads. It removes the copy, not the model.</p>
-<p class="meta">4 min · 3 labs · 8 scenarios · From words to data</p>
-<p class="tc-progress" data-progress="ld-both-at-once" data-labs="3" data-quiz="8" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/meaning-machines-can-read-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 6 of 7 · Meaning and AI</p>
-<h3><a href="../from-words-to-data/meaning-machines-can-read/">Meaning machines can read</a></h3>
-<p>An assistant answers from the meaning it can read. Glossary, taxonomy, ontology and semantic layer stack.</p>
-<p class="meta">4 min · 3 labs · 8 scenarios · From words to data</p>
-<p class="tc-progress" data-progress="ld-meaning-machines-can-read" data-labs="3" data-quiz="8" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/keeping-it-true-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 7 of 7 · Keeping meaning current</p>
-<h3><a href="../from-words-to-data/keeping-it-true/">Keeping it true</a></h3>
-<p>Three dashboards, three numbers for one measure. The agent recommends, people approve, and everything is versioned.</p>
-<p class="meta">5 min · 4 labs · 10 scenarios · From words to data</p>
-<p class="tc-progress" data-progress="ld-keeping-it-true" data-labs="4" data-quiz="10" hidden></p>
-</div>
-</article>
-</div></li>
-<!-- /from-words-to-data -->
-<!-- in-the-weeds: made by site-tools/build_series.py -->
-<li class="series"><p>From <a href="../from-words-to-data/"><i>From words to data</i></a>, into the weeds, for analytics engineers: the series <a href="../in-the-weeds/"><i>In the weeds of data crafting</i></a>, with dbt, in order</p>
-<div class="topic-grid" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
-<article class="topic-card">
-<img src="../assets/declare-it-then-build-it-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 1 of 10 · The series and its method</p>
-<h3><a href="../in-the-weeds/declare-it-then-build-it/">Declare it, then build it</a></h3>
-<p>dbt calls every query a model. The data model is the blueprint: declared beside the code, and checked by the tests.</p>
-<p class="meta">5½ min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
-<p class="tc-progress" data-progress="ld-declare-it-then-build-it" data-labs="4" data-quiz="8" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/start-from-a-question-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 2 of 10 · Scope and owners</p>
-<h3><a href="../in-the-weeds/start-from-a-question/">Start from a question</a></h3>
-<p>A model has no edge until a question gives it one. Model only what the question touches, and name who owns each meaning first.</p>
-<p class="meta">5 min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
-<p class="tc-progress" data-progress="ld-start-from-a-question" data-labs="4" data-quiz="8" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/what-makes-it-the-same-one-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 3 of 10 · Identity and keys</p>
-<h3><a href="../in-the-weeds/what-makes-it-the-same-one/">What makes it the same one</a></h3>
-<p>One learner, three keys, and a look-alike. Rules match most of them; a person decides the rest, and the decision becomes data and a test.</p>
-<p class="meta">4½ min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
-<p class="tc-progress" data-progress="ld-what-makes-it-the-same-one" data-labs="4" data-quiz="8" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/one-row-of-what-and-when-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 4 of 10 · Grain and time</p>
-<h3><a href="../in-the-weeds/one-row-of-what-and-when/">One row of what, and when</a></h3>
-<p>Twelve on census day, nine today: both right. Say what one row is and which day it describes, before any SQL, and test both.</p>
-<p class="meta">5 min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
-<p class="tc-progress" data-progress="ld-one-row-of-what-and-when" data-labs="4" data-quiz="8" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/promises-and-proofs-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 5 of 10 · Contracts and tests</p>
-<h3><a href="../in-the-weeds/promises-and-proofs/">Promises and proofs</a></h3>
-<p>Every gap gets a decision. Promise it in a contract; prove it with a test, written before the code it checks.</p>
-<p class="meta">5½ min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
-<p class="tc-progress" data-progress="ld-promises-and-proofs" data-labs="4" data-quiz="8" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/built-in-layers-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 6 of 10 · Layers and CTEs</p>
-<h3><a href="../in-the-weeds/built-in-layers/">Built in layers</a></h3>
-<p>Four layers turn the tests green. Each layer has one job; each CTE, one step; and the rule is written once.</p>
-<p class="meta">4½ min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
-<p class="tc-progress" data-progress="ld-built-in-layers" data-labs="4" data-quiz="8" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/who-owns-what-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 7 of 10 · Domains and ownership</p>
-<h3><a href="../in-the-weeds/who-owns-what/">Who owns what</a></h3>
-<p>Each fact's meaning has an owner. Owners publish a public, versioned core; consumers build on it, never on each other's marts.</p>
-<p class="meta">5½ min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
-<p class="tc-progress" data-progress="ld-who-owns-what" data-labs="4" data-quiz="8" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/an-agent-on-the-team-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 8 of 10 · Agents and review</p>
-<h3><a href="../in-the-weeds/an-agent-on-the-team/">An agent on the team</a></h3>
-<p>An AI agent drafts in minutes. It follows rules written in the project, shows the query behind every claim, never weakens a test, and people approve.</p>
-<p class="meta">5½ min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
-<p class="tc-progress" data-progress="ld-an-agent-on-the-team" data-labs="4" data-quiz="8" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/written-once-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 9 of 10 · Documentation and versions</p>
-<h3><a href="../in-the-weeds/written-once/">Written once</a></h3>
-<p>Every copy of a fact is a chance to drift. One home per fact, everything else generated, and a breaking change arrives as a new version with a date.</p>
-<p class="meta">5½ min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
-<p class="tc-progress" data-progress="ld-written-once" data-labs="4" data-quiz="8" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/end-to-end-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Film 10 of 10 · The whole process</p>
-<h3><a href="../in-the-weeds/end-to-end/">End to end</a></h3>
-<p>One question, ten steps, ten commits. Every file in its place, for as long as it's needed.</p>
-<p class="meta">8½ min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
-<p class="tc-progress" data-progress="ld-end-to-end" data-labs="4" data-quiz="8" hidden></p>
-</div>
-</article>
-</div></li>
-<!-- /in-the-weeds -->
-<li><p>From <a href="../#t=108"><i>Refining with dbt</i></a> and <a href="../#t=168"><i>Gold</i></a></p>
-<div class="topic-grid" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
-<article class="topic-card">
-<img src="../assets/silent-change-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Changes and data contracts</p>
-<h3><a href="../when-things-go-wrong/silent-change/">Silent change</a></h3>
-<p>A new enrolment status reaches the data overnight, and each side of the university saw only half of the change.</p>
-<p class="meta">5½ min · Pause and think · When things go wrong</p>
-<p class="tc-progress" data-progress="ld-silent-change" hidden></p>
-</div>
-</article>
-<article class="topic-card">
-<img src="../assets/too-good-to-be-true-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Data quality checks</p>
-<h3><a href="../when-things-go-wrong/too-good-to-be-true/">Too good to be true</a></h3>
-<p>Applications jump 38% overnight. A test on the total decides whether anyone acts on the number.</p>
-<p class="meta">6 min · 3 labs · 10 scenarios · When things go wrong</p>
-<p class="tc-progress" data-progress="ld-too-good-to-be-true" data-labs="3" data-quiz="10" hidden></p>
-</div>
-</article>
-</div></li>
-</ol>
-</section>
-
-<section class="module" id="by-role" aria-labelledby="by-role-h">
-<div class="mhead"><div><h2 id="by-role-h">Not sure where to start?</h2></div></div>
-<div class="cards">
-<div class="card"><h3>New to data platforms</h3><p>Start with <a href="../#watch">the overview film</a> and <a href="../labs/">its labs</a>.</p></div>
-<div class="card"><h3>You design models, definitions or reports</h3><p><a href="../sketch/">Data modelling</a>: <i>A Sharper Sketch</i>.</p></div>
-<div class="card"><h3>You build pipelines, or own a source system or a data product</h3><p><a href="../when-things-go-wrong/silent-change/">Changes and data contracts</a>: <i>Silent change</i>. <a href="../when-things-go-wrong/too-good-to-be-true/">Data quality checks</a>: <i>Too good to be true</i>.</p></div>
 </div>
 </section>
 
+<section class="module topic" id="analytics-engineering" aria-labelledby="analytics-engineering-h">
+<div class="mhead"><div><p class="step">For analytics engineers</p><h2 id="analytics-engineering-h">Analytics engineering</h2><p>How an agreed data model becomes tested, documented tables, with dbt.</p></div></div>
+<div class="topic-grid rows" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}' data-series-text='{"films":"{n} of {of} films watched"}'>
+<article class="topic-card row series-card">
+<div class="sc-media"><img src="../assets/declare-it-then-build-it-poster.jpg" alt="" width="1280" height="720" loading="lazy"><img src="../assets/start-from-a-question-poster.jpg" alt="" width="1280" height="720" loading="lazy"><img src="../assets/what-makes-it-the-same-one-poster.jpg" alt="" width="1280" height="720" loading="lazy"></div>
+<div class="tc-body">
+<p class="kicker">Series · 10 films</p>
+<h3><a href="../in-the-weeds/">In the weeds of data crafting</a></h3>
+<p>From one question to tested, versioned and documented dbt models, with an AI agent that helps at every step and a person who approves each one.</p>
+<p class="meta">55 min · labs and scenarios</p>
+<p class="tc-progress" data-films="ld-declare-it-then-build-it ld-start-from-a-question ld-what-makes-it-the-same-one ld-one-row-of-what-and-when ld-promises-and-proofs ld-built-in-layers ld-who-owns-what ld-an-agent-on-the-team ld-written-once ld-end-to-end" hidden></p>
+</div>
+</article>
+</div>
+</section>
 
+<section class="module topic" id="data-quality" aria-labelledby="data-quality-h">
+<div class="mhead"><div><p class="step">For anyone who builds pipelines, or owns a source system or a data product</p><h2 id="data-quality-h">Data quality and change</h2><p>What goes wrong on a data platform, and what catches it: changes, data contracts and tests.</p></div></div>
+<div class="topic-grid rows" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}' data-series-text='{"films":"{n} of {of} films watched"}'>
+<article class="topic-card row series-card">
+<div class="sc-media"><img src="../assets/silent-change-poster.jpg" alt="" width="1280" height="720" loading="lazy"><img src="../assets/too-good-to-be-true-poster.jpg" alt="" width="1280" height="720" loading="lazy"></div>
+<div class="tc-body">
+<p class="kicker">Series · 2 films</p>
+<h3><a href="../when-things-go-wrong/">When things go wrong</a></h3>
+<p>Two bad mornings at the university: a change only half of it saw, and a number too good to be true. Each ends with what catches it next time.</p>
+<p class="meta">12 min · labs and scenarios</p>
+<p class="tc-progress" data-films="ld-silent-change ld-too-good-to-be-true" hidden></p>
+</div>
+</article>
+</div>
+</section>
+
+<section class="module topic" id="enterprise-architecture" aria-labelledby="enterprise-architecture-h">
+<div class="mhead"><div><p class="step">For architects, and anyone new to an organisation</p><h2 id="enterprise-architecture-h">Enterprise architecture</h2><p>How an organisation works, in layers, before you ask what its data should answer.</p></div></div>
+<div class="topic-grid rows" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}' data-series-text='{"films":"{n} of {of} films watched"}'>
+<article class="topic-card row series-card">
+<div class="sc-media"><img src="../assets/day-one-poster.jpg" alt="" width="1280" height="720" loading="lazy"><img src="../assets/who-it-serves-poster.jpg" alt="" width="1280" height="720" loading="lazy"><img src="../assets/why-it-moves-poster.jpg" alt="" width="1280" height="720" loading="lazy"></div>
+<div class="tc-body">
+<p class="kicker">Series · 5 of 11 films</p>
+<h3><a href="../enterprise-architecture/">The map before the data</a></h3>
+<p>A new enterprise architect maps a public energy utility, layer by layer, before asking what its data should answer.</p>
+<p class="meta">26 min · Pause and think</p>
+<p class="tc-progress" data-films="ld-day-one ld-who-it-serves ld-why-it-moves ld-what-it-must-do ld-how-value-reaches-people" hidden></p>
+</div>
+</article>
+</div>
+</section>
 </main>
-<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Source on GitHub</a></p><p>The university, people, numbers and records in the films, the labs and the scenarios are fictional. Code: MIT licence. Films, scripts, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Source on GitHub</a></p><p>The university, the utility, people, numbers and records in the films, the labs and the scenarios are fictional. The narration is a synthetic voice. Code: MIT licence. Films, scripts, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
 <script src="../assets/learn/path.js"></script>
 <script src="../assets/ambient.js"></script>
 </body>

@@ -17,3 +17,7 @@
 ## Rebuild
 
 As for [*Day one*](../../1-day-one/source/README.md), from this folder, `films/enterprise-architecture/3-why-it-moves/source/`; the video is `dist/why-it-moves.mp4`.
+
+## Publish
+
+As for [*Day one*](../../1-day-one/source/README.md#publish): `python tools/publish.py` copies the player, the soundtrack and the Spanish captions to `site/assets/why-it-moves/` and draws the poster, then `python site-tools/build_series.py` makes the pages. "Pause and think" is `site/assets/why-it-moves/think.en.js` and `think.es.js`: it stops after `means`, `goals` and `principles`. Progress is stored under `ld-why-it-moves`.

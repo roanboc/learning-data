@@ -116,11 +116,13 @@ On 9 November 1965, one relay near Niagara Falls tripped, and thirty million peo
 
 ## Pause and think
 
-Stops after:
+The film can stop at the end of three chapters, with one question each (`site/assets/why-it-moves/think.en.js` and `think.es.js`). The series has no labs yet, so the questions link to none; most answers end with a question to take back to your own organisation, for a class or a team.
 
-- **Chapter 5:** "Pick a pressure on your organisation everyone talks about. What's the evidence for what it means for you, and where does it come from?"
-- **Chapter 6:** "Take one of your organisation's goals. What outcome would show it's been reached, and who could check it?"
-- **Chapter 8:** "Name one of your organisation's principles. Could any decision ever fail it? If not, what would make it testable?"
+| After | Question | Answer |
+|---|---|---|
+| What it means here | “A third of the poles are over fifty years old.” What turns a driver into an assessment like this one? | Working out what the driver means here, with a source for the evidence. |
+| What must become true | “Keep bills affordable” is a goal. What makes it something anyone can check? | An outcome with a number and a date: the network charge on a household bill no higher in real terms in 2030. |
+| Principles that can be tested | Why isn't “Be sustainable” a principle? | Nothing could ever fail it, so it can't settle a choice. |
 
 ## Labs (candidates)
 

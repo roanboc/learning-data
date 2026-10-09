@@ -41,63 +41,40 @@
 
 
 <section class="module" id="go-deeper" aria-labelledby="go-deeper-h"><span id="film-three"></span>
-<div class="mhead"><div><p class="step">Go deeper</p><h2 id="go-deeper-h">Pick a topic</h2><p>Each topic goes deeper into part of the film you just watched. Watch them in any order.</p></div></div>
-<div class="topic-grid" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
-<article class="topic-card">
-<img src="assets/sketch-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Data modelling</p>
-<h3><a href="sketch/">A Sharper Sketch</a></h3>
-<p>Two trusted numbers disagree. When does a simple model need more precision, and how do you use a reference model without copying it?</p>
-<p class="meta">5½ min · 6 labs · 12 scenarios</p>
-<p class="tc-progress" data-progress="ld3" data-labs="6" data-quiz="12" hidden></p>
+<div class="mhead"><div><p class="step">Go deeper</p><h2 id="go-deeper-h">Pick a topic</h2><p>Four more topics, each with its films and series. Watch them in any order.</p></div></div>
+<!-- topics: made by site-tools/build_series.py -->
+<div class="topic-tiles">
+<div class="topic-tile">
+<h3><a href="topics/#data-modelling">Data modelling</a></h3>
+<p>What the numbers mean, and the shapes that hold them: words and definitions first, then models, before any system.</p>
+<ul class="tt-items">
+<li><a href="sketch/"><img src="assets/sketch-poster.jpg" alt="" width="1280" height="720" loading="lazy"><span><b>A Sharper Sketch</b><small>One film · 5½ min</small></span></a></li>
+<li><a href="from-words-to-data/"><img src="assets/whats-in-a-word-poster.jpg" alt="" width="1280" height="720" loading="lazy"><span><b>From words to data</b><small>Series · 7 films</small></span></a></li>
+</ul>
 </div>
-</article>
-<article class="topic-card">
-<img src="assets/silent-change-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Changes and data contracts</p>
-<h3><a href="when-things-go-wrong/silent-change/">Silent change</a></h3>
-<p>A new enrolment status reaches the data overnight, and each side of the university saw only half of the change.</p>
-<p class="meta">5½ min · Pause and think · When things go wrong</p>
-<p class="tc-progress" data-progress="ld-silent-change" hidden></p>
+<div class="topic-tile">
+<h3><a href="topics/#analytics-engineering">Analytics engineering</a></h3>
+<p>How an agreed data model becomes tested, documented tables, with dbt.</p>
+<ul class="tt-items">
+<li><a href="in-the-weeds/"><img src="assets/declare-it-then-build-it-poster.jpg" alt="" width="1280" height="720" loading="lazy"><span><b>In the weeds of data crafting</b><small>Series · 10 films</small></span></a></li>
+</ul>
 </div>
-</article>
-<article class="topic-card">
-<img src="assets/too-good-to-be-true-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">Data quality checks</p>
-<h3><a href="when-things-go-wrong/too-good-to-be-true/">Too good to be true</a></h3>
-<p>Applications jump 38% overnight. A test on the total decides whether anyone acts on the number.</p>
-<p class="meta">6 min · 3 labs · 10 scenarios · When things go wrong</p>
-<p class="tc-progress" data-progress="ld-too-good-to-be-true" data-labs="3" data-quiz="10" hidden></p>
+<div class="topic-tile">
+<h3><a href="topics/#data-quality">Data quality and change</a></h3>
+<p>What goes wrong on a data platform, and what catches it: changes, data contracts and tests.</p>
+<ul class="tt-items">
+<li><a href="when-things-go-wrong/"><img src="assets/silent-change-poster.jpg" alt="" width="1280" height="720" loading="lazy"><span><b>When things go wrong</b><small>Series · 2 films</small></span></a></li>
+</ul>
 </div>
-</article>
-<!-- from-words-to-data: made by site-tools/build_series.py -->
-<article class="topic-card">
-<img src="assets/whats-in-a-word-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">From words to data: seven films</p>
-<h3><a href="from-words-to-data/whats-in-a-word/">What's in a word</a></h3>
-<p>Four offices, four numbers, one word. Before you can count anything, you have to agree what it is.</p>
-<p class="meta">6 min · 4 labs · 8 scenarios · From words to data</p>
-<p class="tc-progress" data-progress="ld-whats-in-a-word" data-labs="4" data-quiz="8" hidden></p>
+<div class="topic-tile">
+<h3><a href="topics/#enterprise-architecture">Enterprise architecture</a></h3>
+<p>How an organisation works, in layers, before you ask what its data should answer.</p>
+<ul class="tt-items">
+<li><a href="enterprise-architecture/"><img src="assets/day-one-poster.jpg" alt="" width="1280" height="720" loading="lazy"><span><b>The map before the data</b><small>Series · 5 of 11 films</small></span></a></li>
+</ul>
 </div>
-</article>
-<!-- /from-words-to-data -->
-<!-- in-the-weeds: made by site-tools/build_series.py -->
-<article class="topic-card">
-<img src="assets/declare-it-then-build-it-poster.jpg" alt="" width="1280" height="720" loading="lazy">
-<div class="tc-body">
-<p class="kicker">In the weeds of data crafting: ten films</p>
-<h3><a href="in-the-weeds/declare-it-then-build-it/">Declare it, then build it</a></h3>
-<p>dbt calls every query a model. The data model is the blueprint: declared beside the code, and checked by the tests.</p>
-<p class="meta">5½ min · 4 labs · 8 scenarios · In the weeds of data crafting</p>
-<p class="tc-progress" data-progress="ld-declare-it-then-build-it" data-labs="4" data-quiz="8" hidden></p>
 </div>
-</article>
-<!-- /in-the-weeds -->
-</div>
+<!-- /topics -->
 </section>
 
 </main>

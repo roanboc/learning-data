@@ -120,11 +120,13 @@ In the Andes, in the 1400s, the Inca sent messages across their empire by relay:
 
 ## Pause and think
 
-Stops after:
+The film can stop at the end of three chapters, with one question each (`site/assets/what-it-must-do/think.en.js` and `think.es.js`). The series has no labs yet, so the questions link to none; most answers end with a question to take back to your own organisation, for a class or a team.
 
-- **Chapter 3:** "Think of the last restructure where you work. Which boxes on the org chart changed, and what did the organisation still have to be able to do afterwards?"
-- **Chapter 4:** "Pick a box from your own team's plans. Is it a team, a system, a process, or a capability? What would it be called if it survived all three changing?"
-- **Chapter 7:** "Where does your organisation hurt today? What evidence would you clip to that card, and who owns it?"
+| After | Question | Answer |
+|---|---|---|
+| A team is who | “Network Operations” is a box on Tomás's first capability map. What's wrong with it? | It's a team, who does the work. Teams change; what must be done stays. |
+| Not how, not with what | “Run the outage system” and “Dispatch through the control room”: what one capability sits under both? | Manage outages. |
+| Where it hurts | Connecting customers is red on the heat map. What makes that colour worth acting on? | Its evidence: new solar takes thirty-four working days to connect, and the goal is ten. |
 
 ## Labs (candidates)
 

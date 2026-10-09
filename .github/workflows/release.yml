@@ -271,6 +271,56 @@ jobs:
                        "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js",
                        "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
                        "films/a-sharper-sketch/source/src",
+                       "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
+            {"name": "Day one", "key": "day-one-en",
+             "dir": "films/enterprise-architecture/1-day-one/source", "lang": "en",
+             "player": "dist/film.js", "site_player": "site/assets/day-one/film.js",
+             "video": "dist/day-one.mp4", "file": "day-one.mp4",
+             "captions": [["films/enterprise-architecture/1-day-one/captions/en.srt", "day-one.en.srt"], ["films/enterprise-architecture/1-day-one/captions/es.srt", "day-one.es.srt"]],
+             "paths": ["films/enterprise-architecture/1-day-one/source", ":(exclude)films/enterprise-architecture/1-day-one/source/src/i18n/es/captions.js", "films/enterprise-architecture/shared",
+                       "films/analytics-engineering/shared", "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js",
+                       "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
+                       "films/a-sharper-sketch/source/src",
+                       "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
+            {"name": "Who it serves, and how it pays", "key": "who-it-serves-en",
+             "dir": "films/enterprise-architecture/2-who-it-serves/source", "lang": "en",
+             "player": "dist/film.js", "site_player": "site/assets/who-it-serves/film.js",
+             "video": "dist/who-it-serves.mp4", "file": "who-it-serves.mp4",
+             "captions": [["films/enterprise-architecture/2-who-it-serves/captions/en.srt", "who-it-serves.en.srt"], ["films/enterprise-architecture/2-who-it-serves/captions/es.srt", "who-it-serves.es.srt"]],
+             "paths": ["films/enterprise-architecture/2-who-it-serves/source", ":(exclude)films/enterprise-architecture/2-who-it-serves/source/src/i18n/es/captions.js", "films/enterprise-architecture/shared",
+                       "films/analytics-engineering/shared", "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js",
+                       "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
+                       "films/a-sharper-sketch/source/src",
+                       "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
+            {"name": "Why it moves", "key": "why-it-moves-en",
+             "dir": "films/enterprise-architecture/3-why-it-moves/source", "lang": "en",
+             "player": "dist/film.js", "site_player": "site/assets/why-it-moves/film.js",
+             "video": "dist/why-it-moves.mp4", "file": "why-it-moves.mp4",
+             "captions": [["films/enterprise-architecture/3-why-it-moves/captions/en.srt", "why-it-moves.en.srt"], ["films/enterprise-architecture/3-why-it-moves/captions/es.srt", "why-it-moves.es.srt"]],
+             "paths": ["films/enterprise-architecture/3-why-it-moves/source", ":(exclude)films/enterprise-architecture/3-why-it-moves/source/src/i18n/es/captions.js", "films/enterprise-architecture/shared",
+                       "films/analytics-engineering/shared", "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js",
+                       "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
+                       "films/a-sharper-sketch/source/src",
+                       "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
+            {"name": "What it must be able to do", "key": "what-it-must-do-en",
+             "dir": "films/enterprise-architecture/4-what-it-must-do/source", "lang": "en",
+             "player": "dist/film.js", "site_player": "site/assets/what-it-must-do/film.js",
+             "video": "dist/what-it-must-do.mp4", "file": "what-it-must-do.mp4",
+             "captions": [["films/enterprise-architecture/4-what-it-must-do/captions/en.srt", "what-it-must-do.en.srt"], ["films/enterprise-architecture/4-what-it-must-do/captions/es.srt", "what-it-must-do.es.srt"]],
+             "paths": ["films/enterprise-architecture/4-what-it-must-do/source", ":(exclude)films/enterprise-architecture/4-what-it-must-do/source/src/i18n/es/captions.js", "films/enterprise-architecture/shared",
+                       "films/analytics-engineering/shared", "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js",
+                       "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
+                       "films/a-sharper-sketch/source/src",
+                       "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
+            {"name": "How value reaches people", "key": "how-value-reaches-people-en",
+             "dir": "films/enterprise-architecture/5-how-value-reaches-people/source", "lang": "en",
+             "player": "dist/film.js", "site_player": "site/assets/how-value-reaches-people/film.js",
+             "video": "dist/how-value-reaches-people.mp4", "file": "how-value-reaches-people.mp4",
+             "captions": [["films/enterprise-architecture/5-how-value-reaches-people/captions/en.srt", "how-value-reaches-people.en.srt"], ["films/enterprise-architecture/5-how-value-reaches-people/captions/es.srt", "how-value-reaches-people.es.srt"]],
+             "paths": ["films/enterprise-architecture/5-how-value-reaches-people/source", ":(exclude)films/enterprise-architecture/5-how-value-reaches-people/source/src/i18n/es/captions.js", "films/enterprise-architecture/shared",
+                       "films/analytics-engineering/shared", "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js",
+                       "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
+                       "films/a-sharper-sketch/source/src",
                        "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]}
           ]
           EOF
@@ -432,6 +482,8 @@ jobs:
           - *Too good to be true*, from the series *When things go wrong*, on data quality checks: \`too-good-to-be-true.mp4\` (English, with English and Spanish captions).
           - *Data for Films* and *That's not quite right*, the Making of films, on how the films are drawn and how they're made: \`data-for-films.mp4\` and \`thats-not-quite-right.mp4\` (English, with English and Spanish captions).
           - *From words to data*, seven films on data modelling, from language and meaning to keeping it true with AI: \`whats-in-a-word.mp4\`, \`older-than-the-systems.mp4\`, \`built-to-write-built-to-read.mp4\`, \`many-ways-to-read.mp4\`, \`both-at-once.mp4\`, \`meaning-machines-can-read.mp4\`, \`keeping-it-true.mp4\` (English, with English and Spanish captions).
+          - *In the weeds of data crafting*, ten films for analytics engineers, from a question to tested and documented dbt models: \`declare-it-then-build-it.mp4\`, \`start-from-a-question.mp4\`, \`what-makes-it-the-same-one.mp4\`, \`one-row-of-what-and-when.mp4\`, \`promises-and-proofs.mp4\`, \`built-in-layers.mp4\`, \`who-owns-what.mp4\`, \`an-agent-on-the-team.mp4\`, \`written-once.mp4\`, \`end-to-end.mp4\` (English, with English and Spanish captions).
+          - *The map before the data*, a series on enterprise architecture and why it matters for data, five of eleven films: \`day-one.mp4\`, \`who-it-serves.mp4\`, \`why-it-moves.mp4\`, \`what-it-must-do.mp4\`, \`how-value-reaches-people.mp4\` (English, with English and Spanish captions).
 
           Rendered for this release, from commit $GITHUB_SHA: ${RENDERED:-none; every video is carried over from the previous release}.
 

@@ -130,11 +130,13 @@ In Mumbai, a home-cooked lunch goes into a tin with a few painted marks on its l
 
 ## Pause and think
 
-Stops after:
+The film can stop at the end of three chapters, with one question each (`site/assets/how-value-reaches-people/think.en.js` and `think.es.js`). The series has no labs yet, so the questions link to none; most answers end with a question to take back to your own organisation, for a class or a team.
 
-- **Chapter 3:** "Pick something your organisation delivers. Draw it from the customer's side: what are the few stages, and what does the customer get at the end of each?"
-- **Chapter 4:** "Where does work change hands between teams on its way to your customers? Which hand-off do customers notice when it goes wrong?"
-- **Chapter 8:** "Find a rule in your work that depends on order or state, such as who goes first, or what happens when. Is it written down? Who owns it?"
+| After | Question | Answer |
+|---|---|---|
+| From the household's side | Drawn from the household's side, what does each stage of the value stream end with? | Something the household gets, such as help on its way. |
+| Three teams, one stream | The call passes through the contact centre, the control room and the field crews. Where does the household feel it? | Only at the hand-offs that go wrong. |
+| Who goes first | Three faults, two free crews. Which fault comes first? | Wires down first, for safety; then life support; then whatever brings back the most homes. |
 
 ## Labs (candidates)
 

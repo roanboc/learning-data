@@ -104,7 +104,7 @@ TOGAF da una forma de hacer el trabajo. ArchiMate, un lenguaje para dibujarlo. Z
 
 27
 00:02:26,786 --> 00:02:39,201
-La arquitectura de negocio aporta capacidades y cadenas de valor; los marcos de procesos, catálogos; el diseño guiado por el dominio muestra dónde cambian los significados; y la gestión de datos, quién cuida la información.
+La arquitectura de negocio aporta capacidades y flujos de valor; los marcos de procesos, catálogos; el diseño guiado por el dominio muestra dónde cambian los significados; y la gestión de datos, quién cuida la información.
 
 28
 00:02:40,701 --> 00:02:45,563
@@ -128,7 +128,7 @@ Con notas adhesivas, se puede discutir en una tarde.
 
 33
 00:03:03,031 --> 00:03:09,520
-Después se convierten en un mapa de capacidades, luego en cadenas de valor y, al final, en un modelo con una notación formal.
+Después se convierten en un mapa de capacidades, luego en flujos de valor y, al final, en un modelo con una notación formal.
 
 34
 00:03:10,820 --> 00:03:12,099

@@ -1,0 +1,27 @@
+{
+  "kicker": "Customers and offerings",
+  "kicker_es": "Clientes y ofertas",
+  "title_es": "A quién sirve, y cómo se paga",
+  "h1": "Who it serves, and how it pays: customers, offerings and the canvases",
+  "h1_es": "A quién sirve, y cómo se paga: clientes, ofertas y los lienzos",
+  "lead": "Before any capability or process, find out who the utility serves, what they're trying to get done, what hurts, what it offers, and how each offering pays. Two canvases hold it, and a canvas only means something if it fits.",
+  "lead_es": "Antes de cualquier capacidad o proceso, averigua a quién sirve la empresa, qué intentan lograr, qué les duele, qué ofrece y cómo se paga cada oferta. Dos lienzos lo contienen, y un lienzo solo significa algo si encaja.",
+  "description": "A film about customer segments, jobs, pains and gains, the value proposition canvas and the business model canvas, why fit is a rule, and how a public utility measures public value, not only profit.",
+  "description_es": "Una película sobre segmentos de clientes, trabajos, dolores y beneficios, el lienzo de propuesta de valor y el lienzo de modelo de negocio, por qué el encaje es una regla, y cómo una empresa pública mide el valor público, no solo las ganancias.",
+  "card": "Edison's customers wanted light, not electricity. Who pays, who uses and who decides, and a canvas for each.",
+  "card_es": "Los clientes de Edison querían luz, no electricidad. Quién paga, quién usa y quién decide, y un lienzo para cada uno.",
+  "chapters_es": {
+    "edison": "Luz, no electricidad",
+    "recap": "¿Para quién es?",
+    "segments": "Quién paga, quién usa, quién decide",
+    "jobs": "Lo que intentan lograr",
+    "pains": "Lo que duele, y lo que ayudaría",
+    "offers": "Lo que ofrece la empresa",
+    "fit": "El encaje es una regla",
+    "pays": "Cómo se paga cada oferta",
+    "map": "Del lienzo al mapa",
+    "end": "Una respuesta, por ahora"
+  },
+  "next_h": "You've seen who the utility serves. Next: why it has to change.",
+  "next_h_es": "Viste a quién sirve la empresa. Lo siguiente: por qué tiene que cambiar."
+}

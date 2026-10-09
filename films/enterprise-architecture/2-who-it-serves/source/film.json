@@ -7,11 +7,7 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": [
-    "edison",
-    "breath",
-    2.6
-  ],
+  "poster": ["edison", "knew", 1.0],
   "say": [
     [
       "\\bTomás's\\b",

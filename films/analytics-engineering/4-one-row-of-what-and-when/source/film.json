@@ -7,11 +7,7 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": [
-    "card",
-    "breath",
-    1.6
-  ],
+  "poster": ["card", "day", 6.4],
   "say": [
     ["\\bYAML\\b", "yammel"],
     ["\\bJun\\b", "Joon"],

@@ -7,10 +7,6 @@
     "machines.js",
     "scenes.js"
   ],
-  "poster": [
-    "four",
-    "stack",
-    2.0
-  ],
+  "poster": ["before", "linn", 7.7],
   "say": []
 }

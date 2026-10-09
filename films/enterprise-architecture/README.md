@@ -4,7 +4,7 @@
 
 A new enterprise architect, Tomás, joins a publicly owned energy utility and doesn't yet know how it works, so he doesn't yet know which questions it needs to answer. Over eleven films he builds a map of it, layer by layer, from why it exists down to what runs it, and then shows what that map does for data: the questions that matter, rules with a home, a change in strategy, and a map that people and agents can read. The plan is in the [proposal](proposal.md).
 
-**Status:** five of eleven films are built and [on the site](https://roanboc.github.io/learning-data/enterprise-architecture/), each with three Pause and think questions; the films have no labs or scenarios yet. On the site, the series sits under the topic *Enterprise architecture*.
+**Status:** five of eleven films are built and [on the site](https://roanboc.github.io/learning-data/enterprise-architecture/), each with three Pause and think questions. Labs and scenarios will come later, as one set for the whole series rather than one per film. On the site, the series sits under the topic *Enterprise architecture*.
 
 ## The films
 

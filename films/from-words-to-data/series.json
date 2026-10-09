@@ -6,6 +6,8 @@
   "lead_es": "Siete películas cortas sobre modelado de datos, desde cómo la mente convierte el mundo en palabras hasta cómo la IA puede ayudar a mantener el significado al día. Siguen una idea más antigua que cualquier sistema: la credencial, cómo las personas demuestran lo que saben.",
   "description": "Seven short films on data modelling: language and meaning, conceptual and logical models, shapes for writing and reading, hybrid databases, semantic layers and ontologies, and keeping it all true with AI.",
   "description_es": "Siete películas cortas sobre modelado de datos: lenguaje y significado, modelos conceptuales y lógicos, formas para escribir y para leer, bases de datos híbridas, capas semánticas y ontologías, y cómo mantenerlo todo al día con IA.",
+  "card": "Seven films on data modelling, from how minds turn the world into words to how AI can help keep meaning true.",
+  "card_es": "Siete películas sobre modelado de datos, desde cómo la mente convierte el mundo en palabras hasta cómo la IA puede ayudar a mantener el significado al día.",
   "order": "Watch them in order: each film stands alone, and each builds on the ones before it. They make most sense after The Inner Life of Data and A Sharper Sketch.",
   "order_es": "Míralas en orden: cada película se entiende sola, y cada una amplía las anteriores. Se entienden mejor después de La vida interior de los datos y Un boceto más preciso.",
   "thread_h": "One thread: the credential",

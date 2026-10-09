@@ -7,10 +7,6 @@
     "true.js",
     "scenes.js"
   ],
-  "poster": [
-    "e2e",
-    "breath",
-    1.0
-  ],
+  "poster": ["dict", "admit", 1.0],
   "say": []
 }

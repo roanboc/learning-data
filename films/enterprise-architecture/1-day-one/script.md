@@ -127,11 +127,13 @@ Nineteen years after conquering England, William the Conqueror still didn't know
 
 ## Pause and think
 
-Stops after:
+The film can stop at the end of three chapters, with one question each (`site/assets/day-one/think.en.js` and `think.es.js`). The series has no labs yet, so the questions link to none; most answers end with a question to take back to your own organisation, for a class or a team.
 
-- **Chapter 3:** "Think of your first week somewhere new. What were you given, and what did it leave out?"
-- **Chapter 4:** "Most handovers start with the system list. What goes wrong when you start from the bottom layer?"
-- **Chapter 8:** "Pick a data rule you know. Could you name the process that creates the data, its owner and the goal it serves?"
+| After | Question | Answer |
+|---|---|---|
+| True, and not enough | Tomás has an org chart, a list of 140 systems and a process manual. Why doesn't he understand the utility yet? | Each is true, but each is a piece cut from a different puzzle. |
+| A way of looking | Where should a map of the organisation start? | With why it exists, and for whom: each layer below is worked out from the one above. |
+| Why this matters for data | “An estimated meter reading stands only until the next actual reading.” What does the map give this rule? | A home: the process that creates the data, its owner, and the goal it serves. |
 
 ## Labs (candidates)
 

@@ -1,0 +1,27 @@
+{
+  "kicker": "Capabilities",
+  "kicker_es": "Capacidades",
+  "title_es": "Lo que tiene que ser capaz de hacer",
+  "h1": "What it must be able to do: capabilities, levels, owners and heat maps",
+  "h1_es": "Lo que tiene que ser capaz de hacer: capacidades, niveles, dueños y mapas de calor",
+  "lead": "Tomás's first capability map is the org chart again. Grace shows him that teams, processes and systems change, and what the network must be able to do stays. Three levels, one owner each, and a heat map with evidence that shows where it hurts.",
+  "lead_es": "El primer mapa de capacidades de Tomás vuelve a ser el organigrama. Grace le muestra que los equipos, los procesos y los sistemas cambian, y que lo que la red tiene que ser capaz de hacer se queda. Tres niveles, un dueño para cada capacidad, y un mapa de calor con evidencia que muestra dónde duele.",
+  "description": "A film about business capabilities: why a capability is what, not who, how or with what, the test of a restructure, a new system and a new process, three levels, one owner each, heat maps with evidence, and going deep only where it hurts.",
+  "description_es": "Una película sobre capacidades de negocio: por qué una capacidad es qué, y no quién, cómo ni con qué; la prueba de una reestructuración, un sistema nuevo y un proceso nuevo; tres niveles, un dueño para cada una, mapas de calor con evidencia, e ir a fondo solo donde duele.",
+  "card": "The runners changed; the ability to move a message stayed. A capability outlasts whoever does it, however and with whatever.",
+  "card_es": "Cambiaron los corredores; la capacidad de llevar un mensaje se quedó. Una capacidad dura más que quien la realiza, cómo y con qué.",
+  "chapters_es": {
+    "runners": "Los corredores",
+    "orgchart": "Un mapa conocido",
+    "who": "Un equipo es quién",
+    "how": "Ni cómo, ni con qué",
+    "levels": "Tres niveles",
+    "owners": "Un dueño para cada una",
+    "heat": "Dónde duele",
+    "deep": "A fondo solo donde duele",
+    "spine": "La columna vertebral",
+    "end": "Confirmado, por ahora"
+  },
+  "next_h": "You've seen what the utility must be able to do. Next: how value reaches people.",
+  "next_h_es": "Viste lo que la empresa tiene que ser capaz de hacer. Lo siguiente: cómo llega el valor a la gente."
+}

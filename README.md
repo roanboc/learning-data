@@ -6,16 +6,17 @@ Learning artifacts for data: short, visual explanations of how modern data platf
 
 ## The films
 
-Start with *The Inner Life of Data*, the overview. Then go deeper, one topic at a time, in any order. Each topic builds on part of the overview.
+The site has five big topics. Start with the first, the overview; then pick the topic you need, in any order. Each topic holds films and series.
 
-| Topic | Film | Builds on |
+| Topic | Films and series | For |
 |---|---|---|
-| How a data platform works | [The Inner Life of Data](https://roanboc.github.io/learning-data/), in English and Spanish | Start here |
-| Data modelling | [A Sharper Sketch](https://roanboc.github.io/learning-data/sketch/) | *The sketch* |
-| Changes and data contracts | [Silent change](https://roanboc.github.io/learning-data/when-things-go-wrong/silent-change/), from the series *When things go wrong* | *Refining with dbt* and *Gold* |
-| Data quality checks | [Too good to be true](https://roanboc.github.io/learning-data/when-things-go-wrong/too-good-to-be-true/), from the series *When things go wrong*, with labs and scenarios | *Refining with dbt* and *Gold* |
-| Data modelling, in depth | [From words to data](https://roanboc.github.io/learning-data/from-words-to-data/): seven films, from language and meaning to keeping models true with AI, each with labs, scenarios and Pause and think, and Spanish pages | *The sketch*, and *A Sharper Sketch* |
-| Data modelling with dbt, for analytics engineers | [In the weeds of data crafting](https://roanboc.github.io/learning-data/in-the-weeds/): a technical series of ten films, each with labs, scenarios and Pause and think, and Spanish pages; its code and data come from [an example dbt project](films/analytics-engineering/project/) that runs on dbt Core with DuckDB | *From words to data* |
+| Data platforms | [The Inner Life of Data](https://roanboc.github.io/learning-data/), in English and Spanish: how a data platform works, with eight labs and twelve scenarios | Everyone: start here |
+| Data modelling | [A Sharper Sketch](https://roanboc.github.io/learning-data/sketch/), one film; [From words to data](https://roanboc.github.io/learning-data/from-words-to-data/), seven films, from language and meaning to keeping models true with AI | Anyone who designs models, definitions or reports |
+| Analytics engineering | [In the weeds of data crafting](https://roanboc.github.io/learning-data/in-the-weeds/), ten films on data modelling with dbt; its code and data come from [an example dbt project](films/analytics-engineering/project/) that runs on dbt Core with DuckDB | Analytics engineers |
+| Data quality and change | [When things go wrong](https://roanboc.github.io/learning-data/when-things-go-wrong/), two films: *Silent change* (changes and data contracts) and *Too good to be true* (data quality checks) | Anyone who builds pipelines, or owns a source system or a data product |
+| Enterprise architecture | [The map before the data](https://roanboc.github.io/learning-data/enterprise-architecture/), five of eleven films: how an organisation works, in layers, before you ask what its data should answer | Architects, and anyone new to an organisation |
+
+Every film has chapters, Pause and think questions and Spanish pages; most have hands-on labs and scenarios too.
 
 And on the [Making of page](https://roanboc.github.io/learning-data/journey/), two short films about the films themselves: *Data for Films*, how they're drawn, and *That's not quite right*, how they're made, by a person and Claude.
 
@@ -26,7 +27,7 @@ site/                            the website, published to GitHub Pages as it is
   index.html                     Start here: The Inner Life of Data, with chapters, then "Go deeper" into the topics
   labs/                          its eight hands-on labs, one per chapter, on the platform map
   scenarios/                     its twelve scenarios, ending with the topics to go deeper
-  topics/                        Topics: every film, under the chapter of The Inner Life of Data it goes deeper on
+  topics/                        Topics: the five big topics, each with a card per film or series; made by site-tools/build_series.py
   sketch/                        Data modelling: A Sharper Sketch, with labs/ (six labs) and scenarios/ (twelve scenarios)
   when-things-go-wrong/          the series When things go wrong: a page for the series, and a folder per film
   from-words-to-data/            the series From words to data: a page for the series, and a folder per film with labs/ and scenarios/;
@@ -34,6 +35,8 @@ site/                            the website, published to GitHub Pages as it is
     silent-change/               Changes and data contracts: Silent change, with "Pause and think" questions
     too-good-to-be-true/         Data quality checks: Too good to be true, with "Pause and think", labs/ (three labs) and scenarios/ (ten)
   in-the-weeds/                  the series In the weeds of data crafting, made the same way: a page for the series, and a folder per film
+  enterprise-architecture/       the series The map before the data, made the same way: a page for the series, and a folder per film
+                                 (a Watch page with Pause and think; no labs or scenarios yet)
   journey/                       Making of: two films (Data for Films, That's not quite right), then how the films were made; index.md (source) and index.html (generated)
   films/                         redirects: films/ goes to topics/, and the old player address films/inner-life-of-data/ to the home page
   404.html                       "Page not found", in English and Spanish
@@ -47,7 +50,8 @@ site/                            the website, published to GitHub Pages as it is
     making-of/                   the Making of films' players, soundtracks, posters and Spanish captions (*.captions.es.js; built in films/making-of/*/source/)
     from-words-to-data/          the series' labs and scenarios engine (learn.js, learn.css), shared by its seven films and by In the weeds of data crafting
     whats-in-a-word/ …           each film of From words to data: its player and soundtrack, its Spanish captions (captions.es.js), its Pause and think
-                                 questions (think.en.js, think.es.js) and the words of its labs and scenarios (learn.en.js, learn.es.js)
+                                 questions (think.en.js, think.es.js) and the words of its labs and scenarios (learn.en.js, learn.es.js);
+                                 the same for each film of In the weeds of data crafting, and of The map before the data (without labs and scenarios)
     too-good-to-be-true/         Too good to be true's player and soundtrack, its Spanish captions (captions.es.js), its questions (think.en.js, think.es.js), and its labs and
                                  scenarios: learn.js, drawn with the film's own components, with their words in learn.en.js and learn.es.js
     learn/                       for every film page: path.js (the stepper and progress), think.js ("Pause and think")
@@ -68,7 +72,10 @@ films/                           one folder per film: script or story, captions/
   analytics-engineering/         the series In the weeds of data crafting, for analytics engineers: its README, series.json,
                                  proposal.md, characters/ (Jun), shared/ (its components and tools), project/ (the example dbt project the films
                                  draw from, on dbt Core and DuckDB, checked by .github/workflows/credential-project.yml) and one folder per film
-site-tools/                      build_pages.py turns the Markdown pages into site pages; build_series.py makes the pages of the series (From words to data, In the weeds of data crafting);
+  enterprise-architecture/       the series The map before the data, on enterprise architecture for data: its README, series.json, proposal.md,
+                                 shared/ (its components, people and tools) and one folder per film, each with script.md, site.json, captions/ and source/
+site-tools/                      build_pages.py turns the Markdown pages into site pages; build_series.py makes the pages of the series (From words to data, In the weeds of data crafting,
+                                 The map before the data), the Topics page, and the topics' tiles on the home page and at the end of the intro's scenarios;
                                  check_site.py and smoke.py check the site
 .github/workflows/pages.yml      publishes site/ on every push to main
 .github/workflows/release.yml    renders the films (all, the changed ones, or a list) and publishes every video to a release, when you run it
@@ -83,11 +90,12 @@ Internal names never appear as text on the site. The numbers in the series' fold
 
 ## How the site is organised
 
-- **Header, the same on every page:** *Start here · Topics · Making of · GitHub · EN/ES*. On phones, Making of and GitHub move to the footer row, which every page has. The header never lists a film's own steps. The Topics link is marked as current on every topic's page.
+- **Header, the same on every page:** *Start here · Topics · Making of*, then *EN/ES*; every link stays visible on phones. The footer's one link is the source on GitHub. The header never lists a film's own steps. The Topics link is marked as current on every page under a topic.
+- **Topics:** five big topics, set in `TOPICS` in `site-tools/build_series.py`, each holding films and series: *Data platforms* (the overview, where everyone starts), *Data modelling*, *Analytics engineering*, *Data quality and change* and *Enterprise architecture*. The Topics page has a section per topic, with who it's for and a card per film or series (a series' card counts how many of its films were watched); the home page shows the topics after the first as tiles, each listing its films and series, and so does the end of the intro's scenarios.
 - **Stepper, on a film's own pages:** the film's steps, such as *Watch · Take it apart · Make the call*, as an `ol.path` under the title. Only a film with labs or scenarios has one; Silent change has none yet, and Too good to be true has one.
-- **Breadcrumbs:** every film, labs, scenarios and series page starts with one, such as *Topics › Data modelling*.
+- **Breadcrumbs:** every film, labs, scenarios and series page starts with one that names its topic, such as *Topics › Data modelling › From words to data*; the topic links to its section of the Topics page.
 - **Guidance after a film:** a "Where next?" panel when the film ends (`next.js` shows the page's `<template id="next-panel">`), "Go deeper" on the home page and at the end of the scenarios of *The Inner Life of Data*, and "Go further" on each topic's page.
-- **No film numbers.** Each film is shown by its topic, then its title. The order comes from the chapter of *The Inner Life of Data* that each topic builds on, never from when it was made.
+- **No film numbers.** Each film is shown by its topic, then its title. Only a series numbers its films, always as *Film 2 of 7*.
 - **English and Spanish:** English pages sit at the root and Spanish ones under `es/`, at the same paths. Every page has an EN/ES toggle to the same page in the other language; A Sharper Sketch's labs and scenarios, which are in English only, toggle to `es/sketch/`. A film that exists only in English gets a Spanish page around it, with Spanish chapter names, controls and captions: the same film and video, captioned in Spanish (see the film's source README); links from there to English pages say "(en inglés)".
 
 **Progress** stays in the visitor's browser (local storage), under one prefix per film:
@@ -98,14 +106,14 @@ Internal names never appear as text on the site. The numbers in the series' fold
 | `ld3:` | A Sharper Sketch | `watched`, `visited`, `quiz`. A historical name: never rename it, or visitors lose their progress. |
 | `ld-silent-change:` | Silent change | `watched` |
 | `ld-too-good-to-be-true:` | Too good to be true | `watched`, `visited` (labs), `quiz` (scenarios) |
-| `ld-<film>:` | Each film of From words to data, such as `ld-whats-in-a-word:` | `watched`, `visited` (labs), `quiz` (scenarios) |
+| `ld-<film>:` | Each film of a series made by `build_series.py`, such as `ld-whats-in-a-word:` | `watched`, and `visited` (labs) and `quiz` (scenarios) for a film that has them |
 
-A film's page sets its prefix with `data-store` on `section#watch`, and `path.js` marks the film as watched once 85% of its length has actually played (seconds of playback, so a seek or one late chapter doesn't count). A page without `data-store` records nothing, so one film's page never marks another film as watched. Topic cards show each film's progress from `data-progress="<prefix>"`. The Sketch pages don't load `path.js`: `sketch.js` paints their stepper, records `ld3:watched` by the same rule, and fills the topic cards' progress there.
+A film's page sets its prefix with `data-store` on `section#watch`, and `path.js` marks the film as watched once 85% of its length has actually played (seconds of playback, so a seek or one late chapter doesn't count). A page without `data-store` records nothing, so one film's page never marks another film as watched. Topic cards show each film's progress from `data-progress="<prefix>"`, and a series' card how many of its films were watched, from `data-films="<prefix> <prefix> …"`. The Sketch pages don't load `path.js`: `sketch.js` paints their stepper, records `ld3:watched` by the same rule, and fills the topic cards' progress there.
 
 ## Publishing
 
 1. **Turn on GitHub Pages (once):** Settings → Pages → Build and deployment → Source: *GitHub Actions*. From then on, every push to `main` publishes `site/`. You can also run it by hand from the Actions tab (*Publish site* → *Run workflow*).
-2. **Release the videos:** in the Actions tab, open *Render and release the films* → *Run workflow*, and give a tag such as `v2.0`, and which films to render: `changed` (the default: only the films whose source, or the shared code they draw with, changed since the latest release), `all`, or a list of keys such as `silent-change-en,too-good-to-be-true-en`. It renders them from the committed source at the same time, in about 30 to 45 minutes for all of them, and publishes `inner-life-of-data.mp4`, `inner-life-of-data.es.mp4`, `a-sharper-sketch.mp4`, `silent-change.mp4`, `too-good-to-be-true.mp4`, the Making of films `data-for-films.mp4` and `thats-not-quite-right.mp4`, the seven films of *From words to data* (such as `whats-in-a-word.mp4`), the films of *In the weeds of data crafting* (such as `declare-it-then-build-it.mp4`), and their captions to a release with that tag. The videos have no captions on the picture: each comes with `.srt` files beside it, in English, and in Spanish for *The Inner Life of Data* and every film with Spanish captions. Before rendering, it checks that each film's player on the site is byte for byte the one its source builds. The videos it doesn't render are copied from the latest release, so every release carries every film, and the site's download buttons, which point to the latest release, work as soon as it's published. The run's summary lists which films changed, which were rendered and which were carried over, and warns about a film that changed but wasn't rendered. Tick *draft* to watch the videos before they go live. Keeping videos out of the repository keeps clones small. To render on your own computer instead, see each film's `source/README.md`, starting with [the build guide of *The Inner Life of Data*](films/inner-life-of-data/source/README.md).
+2. **Release the videos:** in the Actions tab, open *Render and release the films* → *Run workflow*, and give a tag such as `v2.0`, and which films to render: `changed` (the default: only the films whose source, or the shared code they draw with, changed since the latest release), `all`, or a list of keys such as `silent-change-en,too-good-to-be-true-en`. It renders them from the committed source at the same time, in about 30 to 45 minutes for all of them, and publishes `inner-life-of-data.mp4`, `inner-life-of-data.es.mp4`, `a-sharper-sketch.mp4`, `silent-change.mp4`, `too-good-to-be-true.mp4`, the Making of films `data-for-films.mp4` and `thats-not-quite-right.mp4`, the seven films of *From words to data* (such as `whats-in-a-word.mp4`), the films of *In the weeds of data crafting* (such as `declare-it-then-build-it.mp4`) and of *The map before the data* (such as `day-one.mp4`), and their captions to a release with that tag. The videos have no captions on the picture: each comes with `.srt` files beside it, in English, and in Spanish for *The Inner Life of Data* and every film with Spanish captions. Before rendering, it checks that each film's player on the site is byte for byte the one its source builds. The videos it doesn't render are copied from the latest release, so every release carries every film, and the site's download buttons, which point to the latest release, work as soon as it's published. The run's summary lists which films changed, which were rendered and which were carried over, and warns about a film that changed but wasn't rendered. Tick *draft* to watch the videos before they go live. Keeping videos out of the repository keeps clones small. To render on your own computer instead, see each film's `source/README.md`, starting with [the build guide of *The Inner Life of Data*](films/inner-life-of-data/source/README.md).
 
 ## The labs and scenarios
 
@@ -123,16 +131,16 @@ A film's page sets its prefix with `data-store` on `section#watch`, and `path.js
 
 Write pages in Markdown and turn them into site pages with `python site-tools/build_pages.py` (it needs `pip install markdown`). It builds `site/journey/index.md` and `site/es/journey/index.md` with the templates `site-tools/page.html` and `page.es.html`, which hold the header, the hero and the footer: the first heading and the italic line under it become the hero, and every section (each `##` heading, and the films at the top of the Making of page) goes into "On this page": a sidebar beside the text on wide screens, and a bar under the header on phones that names the section being read and opens the list (`assets/doc-nav.js`). Never edit the generated `index.html` by hand. Keep each Spanish page at the same path under `site/es/`, so the language toggle finds it.
 
-## Adding a topic
+## Adding a film
 
-A new film of *From words to data* needs no hand-made page: add its folder to `films/from-words-to-data/series.json`, give it a `site.json`, publish its player (`python tools/publish.py` in its source), and run `python site-tools/build_series.py`. The checks read the series from the same data.
+A new film of a series that `site-tools/build_series.py` makes (*From words to data*, *In the weeds of data crafting*, *The map before the data*) needs no hand-made page: add its folder to the series' `series.json`, give it a `site.json`, publish its player (`python tools/publish.py` in its source), and run `python site-tools/build_series.py`. A film with `learn.en.js` and `learn.es.js` in its assets gets labs and scenarios pages; one without gets a Watch page with its Pause and think questions. A new series of the same kind goes in `SERIES`, and in a topic's `items` in `TOPICS`. The checks read the series and the topics from the same data.
 
 The site is plain HTML, published as it is. For a new film:
 
 1. **Pages.** A folder `site/<topic>/` for the film, plus `labs/` and `scenarios/` if it has them, mirrored under `site/es/`. A film in a series goes under the series, as `site/when-things-go-wrong/<film>/`. Start from the closest existing page, such as Silent change's: header with Topics as current, breadcrumb, a meta row (length, labs, scenarios, language), a "Builds on" link to its chapter of *The Inner Life of Data*, and the footer row. Link the two languages with the EN/ES toggle and an `hreflang` pair. For a film in English only, the Spanish page sets the player's labels in `window.L10N` before the film's bundle and renames the chapters in `SCENES` after it (see `site/es/when-things-go-wrong/silent-change/`). Chapter links use the chapter's start rounded up (`#t=145` for a start at 144.7 s), or they land on the previous chapter.
 2. **Assets.** The player and soundtrack in `site/assets/<film>/`, copied from the film's `source/dist/`, and a 1280×720 poster in `site/assets/<film>-poster.jpg`. Load one film bundle per page: two bundles declare the same names and the second fails. Add the film to `.github/workflows/release.yml`, so each release renders it and checks the site's copy.
 3. **Progress.** A `data-store` prefix `ld-<film>`, such as `ld-silent-change`, on `section#watch`, and the same prefix in `data-progress` on its topic cards.
-4. **Cards.** A topic card on the home page and at the end of the scenarios of *The Inner Life of Data* ("Go deeper"), on `topics/` under the chapter it builds on, and on its series page if it has one, in both languages. Spanish cards link to Spanish pages.
+4. **Topic.** Put the film, or its series, in a topic: its id in a topic's `items` in `TOPICS`, and what its card says in `HAND`, both in `site-tools/build_series.py`. The Topics page, the home page's tiles and the end of the intro's scenarios come from there, in both languages. Add its card to its series page too, if it has one.
 5. **Where next.** A `<template id="next-panel">` on its own page, and a link to it in the panel of the page it builds on.
 6. **Check.** Run `python site-tools/check_site.py` and `python site-tools/smoke.py`, and fix what they find. `check_site.py` only reads the files, in a second: links, header, `hreflang`, breadcrumbs, film numbering and stated lengths. `smoke.py` opens every page in Chromium, in about five minutes: it serves `site/` on port 8110 with `npx http-server` and checks the players, chapter links, panels, keyboard focus, progress, phone and tablet layouts, heading levels and text contrast in both themes. It needs `pip install playwright` and Node. Both exit with an error when something fails. A new film page needs its chapter count in `FILMS` in `smoke.py`, and a new page under a topic needs its breadcrumb in `CRUMBS` in `check_site.py`.
 

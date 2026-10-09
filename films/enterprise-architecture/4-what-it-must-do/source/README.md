@@ -17,3 +17,7 @@
 ## Rebuild
 
 As for [*Day one*](../../1-day-one/source/README.md), from this folder, `films/enterprise-architecture/4-what-it-must-do/source/`; the video is `dist/what-it-must-do.mp4`.
+
+## Publish
+
+As for [*Day one*](../../1-day-one/source/README.md#publish): `python tools/publish.py` copies the player, the soundtrack and the Spanish captions to `site/assets/what-it-must-do/` and draws the poster, then `python site-tools/build_series.py` makes the pages. "Pause and think" is `site/assets/what-it-must-do/think.en.js` and `think.es.js`: it stops after `who`, `how` and `heat`. Progress is stored under `ld-what-it-must-do`.

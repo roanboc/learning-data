@@ -55,7 +55,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "TOGAF gives a way to do the work. ArchiMate, a language to draw it. Zachman, a grid to sort it.":
 "TOGAF da una forma de hacer el trabajo. ArchiMate, un lenguaje para dibujarlo. Zachman, una cuadrícula para ordenarlo.",
 "Business architecture brings capabilities and value streams, process frameworks bring catalogues, domain-driven design shows where meanings change, and data management shows who looks after information.":
-"La arquitectura de negocio aporta capacidades y cadenas de valor; los marcos de procesos, catálogos; el diseño guiado por el dominio muestra dónde cambian los significados; y la gestión de datos, quién cuida la información.",
+"La arquitectura de negocio aporta capacidades y flujos de valor; los marcos de procesos, catálogos; el diseño guiado por el dominio muestra dónde cambian los significados; y la gestión de datos, quién cuida la información.",
 "Each has its champions. Under the vocabulary, they agree on more than they differ.":
 "Cada uno tiene sus defensores. Bajo el vocabulario, coinciden en más de lo que difieren.",
 "This series takes what they agree on.":
@@ -67,7 +67,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Sticky notes can be argued with in an afternoon.":
 "Con notas adhesivas, se puede discutir en una tarde.",
 "Later, they become a capability map, then value streams, and finally a model in a formal notation.":
-"Después se convierten en un mapa de capacidades, luego en cadenas de valor y, al final, en un modelo con una notación formal.",
+"Después se convierten en un mapa de capacidades, luego en flujos de valor y, al final, en un modelo con una notación formal.",
 "Notation is earned.":
 "La notación se gana.",
 "Draw too precisely too early, and people correct your drawing instead of your understanding.":

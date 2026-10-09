@@ -17,3 +17,7 @@
 ## Rebuild
 
 As for [*Day one*](../../1-day-one/source/README.md), from this folder, `films/enterprise-architecture/2-who-it-serves/source/`; the video is `dist/who-it-serves.mp4`.
+
+## Publish
+
+As for [*Day one*](../../1-day-one/source/README.md#publish): `python tools/publish.py` copies the player, the soundtrack and the Spanish captions to `site/assets/who-it-serves/` and draws the poster, then `python site-tools/build_series.py` makes the pages. "Pause and think" is `site/assets/who-it-serves/think.en.js` and `think.es.js`: it stops after `segments`, `fit` and `pays`. Progress is stored under `ld-who-it-serves`.

@@ -116,11 +116,13 @@ In 1882, Edison's customers on Pearl Street didn't want electricity; they wanted
 
 ## Pause and think
 
-Stops after:
+The film can stop at the end of three chapters, with one question each (`site/assets/who-it-serves/think.en.js` and `think.es.js`). The series has no labs yet, so the questions link to none; most answers end with a question to take back to your own organisation, for a class or a team.
 
-- **Chapter 3:** "In your organisation, who pays, who uses and who decides? Are they the same people?"
-- **Chapter 7:** "Think of a customer pain your organisation doesn't relieve. Is it a missing capability, or a customer you've decided not to serve? Has anyone said which?"
-- **Chapter 8:** "Do two of your offerings share one budget line? What would change if each had its own business model canvas?"
+| After | Question | Answer |
+|---|---|---|
+| Who pays, who uses, who decides | A tenant uses the power and pays the bill, the landlord decides on solar panels, and the regulator sets the price. What does that tell you about customers? | Who pays, who uses and who decides are often different people. |
+| Fit is a rule | On the canvas for homes with solar, one pain has nothing to relieve it: waiting months to connect new panels. What must the canvas say? | Whether it's a missing capability, or a customer the utility has decided not to serve. |
+| How each offering pays | Why does each offering get its own business model canvas, instead of one for the whole utility? | Because each offering has its own economics: who pays, what it earns, and its biggest cost. |
 
 ## Labs (candidates)
 

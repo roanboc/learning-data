@@ -7,11 +7,7 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": [
-    "blackout",
-    "breath",
-    2.6
-  ],
+  "poster": ["blackout", "spread", 1.0],
   "say": [
     [
       "\\bTomás's\\b",

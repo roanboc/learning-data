@@ -1,0 +1,27 @@
+{
+  "kicker": "Why enterprise architecture",
+  "kicker_es": "Por qué arquitectura empresarial",
+  "title_es": "El primer día",
+  "h1": "Day one: learn the place before you ask the questions",
+  "h1_es": "El primer día: conoce el lugar antes de hacer las preguntas",
+  "lead": "Tomás starts as an enterprise architect at a publicly owned energy utility. He's handed an org chart, a list of 140 systems and a backlog, and none of it explains the place. The film shows a way of looking: an organisation in layers, from why it exists down to what runs it.",
+  "lead_es": "Tomás empieza como arquitecto empresarial en una empresa pública de energía. Le dan un organigrama, una lista de 140 sistemas y una lista de pedidos, y nada de eso explica el lugar. La película muestra una forma de mirar: una organización en capas, desde por qué existe hasta qué la hace funcionar.",
+  "description": "A film about enterprise architecture as a way of looking: why an org chart and a system list don't explain an organisation, its layers from why down to what runs it, what the known methods agree on, and why it matters for data.",
+  "description_es": "Una película sobre la arquitectura empresarial como forma de mirar: por qué un organigrama y una lista de sistemas no explican una organización, sus capas desde el porqué hasta lo que la hace funcionar, en qué coinciden los métodos conocidos y por qué importa para los datos.",
+  "card": "An org chart, 140 systems and a backlog: all true, none of it the place. Learn how it works before you ask the questions.",
+  "card_es": "Un organigrama, 140 sistemas y una lista de pedidos: todo cierto, y nada de eso es el lugar. Entiende cómo funciona antes de hacer las preguntas.",
+  "chapters_es": {
+    "govern": "Antes de poder gobernarlo",
+    "dayone": "El primer día",
+    "pieces": "Cierto, y no basta",
+    "looking": "Una forma de mirar",
+    "methods": "Muchos mapas, las mismas lecciones",
+    "rough": "Primero, en borrador",
+    "evidence": "Evidencia, luego confirmación",
+    "data": "Por qué importa para los datos",
+    "series": "La serie",
+    "end": "La primera nota"
+  },
+  "next_h": "You've seen the map's empty layers. Now fill the first one.",
+  "next_h_es": "Viste las capas vacías del mapa. Ahora llena la primera."
+}

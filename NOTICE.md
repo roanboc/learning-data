@@ -9,6 +9,8 @@
 
 Databricks and the Databricks logo, and dbt and the dbt logo, are trademarks of their respective owners. Other product names (such as Unity Catalog, Genie, Lakebase, Zerobus, Auto Loader, OpenSharing and Microsoft Fabric) belong to their respective owners. They appear only to identify those products. This project is not affiliated with, sponsored by or endorsed by them, and no rights to use their logos or trademarks are granted by this repository's licences.
 
+TOGAF and ArchiMate are registered trademarks of The Open Group, and Zachman is a trademark of Zachman International. *The map before the data* names them, and draws ArchiMate's element symbols, only to identify those frameworks and that notation; this project is not affiliated with or endorsed by them.
+
 ## Third-party components
 
 - **Narration:** a synthetic voice generated with [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) (Apache License 2.0), run through [kokoro-onnx](https://github.com/thewh1teagle/kokoro-onnx). The model is not included in this repository.
@@ -16,4 +18,4 @@ Databricks and the Databricks logo, and dbt and the dbt logo, are trademarks of 
 
 ## Content
 
-The university, people, numbers and records shown are fictional.
+The university, the energy utility, the people, numbers and records shown are fictional.

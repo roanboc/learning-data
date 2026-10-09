@@ -1,0 +1,27 @@
+{
+  "kicker": "Motivation",
+  "kicker_es": "Motivación",
+  "title_es": "Qué la mueve",
+  "h1": "Why it moves: stakeholders, drivers, goals and principles",
+  "h1_es": "Qué la mueve: partes interesadas, impulsores, metas y principios",
+  "lead": "A minister, a regulator and a valley community pull the utility three ways at once. Ama, the regulatory lead, sorts who cares, what pushes on them and what it means here; then goals with outcomes someone can check, and principles that settle the pull.",
+  "lead_es": "Un ministro, un regulador y una comunidad de un valle tiran de la empresa en tres direcciones a la vez. Ama, la responsable regulatoria, ordena a quién le importa, qué los empuja y qué significa aquí; luego, metas con resultados que alguien puede comprobar, y principios que resuelven el tironeo.",
+  "description": "A film about the motivation layer: stakeholders, drivers, assessments with evidence, goals and outcomes, what to do when goals pull apart, and principles that can be tested.",
+  "description_es": "Una película sobre la capa de motivación: partes interesadas, impulsores, evaluaciones con evidencia, metas y resultados, qué hacer cuando las metas chocan, y principios que se pueden comprobar.",
+  "card": "Three letters pull the utility three ways. Who cares, what pushes, what must become true, and a principle to settle it.",
+  "card_es": "Tres cartas tiran de la empresa en tres direcciones. A quién le importa, qué empuja, qué debe llegar a ser cierto, y un principio para resolverlo.",
+  "chapters_es": {
+    "blackout": "La noche en que se apagaron las luces",
+    "letters": "Tres cartas",
+    "cares": "A quién le importa",
+    "pushes": "Qué empuja",
+    "means": "Qué significa aquí",
+    "goals": "Qué debe llegar a ser cierto",
+    "collide": "Cuando las metas chocan",
+    "principles": "Principios que se pueden comprobar",
+    "chain": "La cadena",
+    "end": "Comprobado, por ahora"
+  },
+  "next_h": "You've seen why the utility must change. Next: what it must be able to do.",
+  "next_h_es": "Viste por qué la empresa tiene que cambiar. Lo siguiente: qué tiene que ser capaz de hacer."
+}

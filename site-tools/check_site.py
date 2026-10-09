@@ -54,17 +54,18 @@ CRUMBS = {  # page: (text, the pages its links go to, in order)
     "scenarios/": ("Start here › The Inner Life of Data", [""]),
     "es/labs/": ("Empieza aquí › La vida interior de los datos", ["es/"]),
     "es/scenarios/": ("Empieza aquí › La vida interior de los datos", ["es/"]),
-    "sketch/": ("Topics › Data modelling", ["topics/"]),
-    "es/sketch/": ("Temas › Modelado de datos", ["es/topics/"]),
-    "sketch/labs/": ("Topics › Data modelling", ["topics/", "sketch/"]),
-    "sketch/scenarios/": ("Topics › Data modelling", ["topics/", "sketch/"]),
-    "when-things-go-wrong/": ("Topics › When things go wrong", ["topics/"]),
-    "es/when-things-go-wrong/": ("Temas › Cuando algo sale mal", ["es/topics/"]),
-    "when-things-go-wrong/silent-change/": ("Topics › When things go wrong", ["topics/", "when-things-go-wrong/"]),
-    "es/when-things-go-wrong/silent-change/": ("Temas › Cuando algo sale mal", ["es/topics/", "es/when-things-go-wrong/"]),
+    # a page under a topic names it, and links to it on the Topics page: Topics › the topic › the film or series
+    "sketch/": ("Topics › Data modelling", ["topics/", "topics/"]),
+    "es/sketch/": ("Temas › Modelado de datos", ["es/topics/", "es/topics/"]),
+    "sketch/labs/": ("Topics › Data modelling › A Sharper Sketch", ["topics/", "topics/", "sketch/"]),
+    "sketch/scenarios/": ("Topics › Data modelling › A Sharper Sketch", ["topics/", "topics/", "sketch/"]),
+    "when-things-go-wrong/": ("Topics › Data quality and change › When things go wrong", ["topics/", "topics/"]),
+    "es/when-things-go-wrong/": ("Temas › Calidad de datos y cambios › Cuando algo sale mal", ["es/topics/", "es/topics/"]),
+    "when-things-go-wrong/silent-change/": ("Topics › Data quality and change › When things go wrong", ["topics/", "topics/", "when-things-go-wrong/"]),
+    "es/when-things-go-wrong/silent-change/": ("Temas › Calidad de datos y cambios › Cuando algo sale mal", ["es/topics/", "es/topics/", "es/when-things-go-wrong/"]),
     **{f"{lg}when-things-go-wrong/too-good-to-be-true/{sub}": crumb
-       for lg, crumb in (("", ("Topics › When things go wrong", ["topics/", "when-things-go-wrong/"])),
-                         ("es/", ("Temas › Cuando algo sale mal", ["es/topics/", "es/when-things-go-wrong/"])))
+       for lg, crumb in (("", ("Topics › Data quality and change › When things go wrong", ["topics/", "topics/", "when-things-go-wrong/"])),
+                         ("es/", ("Temas › Calidad de datos y cambios › Cuando algo sale mal", ["es/topics/", "es/topics/", "es/when-things-go-wrong/"])))
        for sub in ("", "labs/", "scenarios/")},
 }
 # the film bundles (one per page: they declare the same top-level names) and the progress prefix of each film
@@ -100,8 +101,9 @@ LENGTHS = re.compile(r"eight-minute|five-minute|six-minute|nueve minutos|seis mi
 # the stated lengths: 7½ (intro, EN), 8½ (intro, ES), 5½ (A Sharper Sketch, Silent change), and 6 min (Too good to be true)
 HALVES = {"en": {"5½", "7½"}, "es": {"5½", "8½"}}
 WHOLE = {"6 min"}
-# the series (From words to data, In the weeds of data crafting): their pages, players, packs, counts and lengths come from
-# their own data, through site-tools/build_series.py (which makes their pages), so a new film, or a new series, needs no change here
+# the series (From words to data, In the weeds of data crafting, The map before the data): their pages, players, packs, counts,
+# lengths and topics come from their own data, through site-tools/build_series.py (which makes their pages, and the Topics page),
+# so a new film, or a new series, needs no change here
 sys.path.insert(0, str(ROOT / "site-tools"))
 sys.dont_write_bytecode = True
 import build_series  # noqa: E402
@@ -110,26 +112,30 @@ for _S in build_series.SERIES:
     _sl, _nm = _S["slug"], _S["name"]
     if not build_series.films(_S)[1]:
         continue
+    _tn = build_series.topic_of(_S["id"])["name"]
     TWINS.append(f"{_sl}/")
-    CRUMBS[f"{_sl}/"] = (f"Topics › {_nm['en']}", ["topics/"])
-    CRUMBS[f"es/{_sl}/"] = (f"Temas › {_nm['es']}", ["es/topics/"])
+    CRUMBS[f"{_sl}/"] = (f"Topics › {_tn['en']} › {_nm['en']}", ["topics/", "topics/"])
+    CRUMBS[f"es/{_sl}/"] = (f"Temas › {_tn['es']} › {_nm['es']}", ["es/topics/", "es/topics/"])
 for _f in SERIES_FILMS:
-    _k, _S = _f["key"], _f["series"]; _sl, _nm = _S["slug"], _S["name"]
-    for _sub in ("", "labs/", "scenarios/"):
+    _k, _S = _f["key"], _f["series"]; _sl, _nm = _S["slug"], _S["name"]; _tn = build_series.topic_of(_S["id"])["name"]
+    for _sub in ("", "labs/", "scenarios/") if _f["labs"] else ("",):  # a film without labs and scenarios has only its Watch page
         TWINS.append(f"{_sl}/{_k}/{_sub}")
-        CRUMBS[f"{_sl}/{_k}/{_sub}"] = (f"Topics › {_nm['en']}", ["topics/", f"{_sl}/"])
-        CRUMBS[f"es/{_sl}/{_k}/{_sub}"] = (f"Temas › {_nm['es']}", ["es/topics/", f"es/{_sl}/"])
+        CRUMBS[f"{_sl}/{_k}/{_sub}"] = (f"Topics › {_tn['en']} › {_nm['en']}", ["topics/", "topics/", f"{_sl}/"])
+        CRUMBS[f"es/{_sl}/{_k}/{_sub}"] = (f"Temas › {_tn['es']} › {_nm['es']}", ["es/topics/", "es/topics/", f"es/{_sl}/"])
     BUNDLES[f"assets/{_k}/film.js"] = f"ld-{_k}"
     COMMENT_OK.add(f"assets/{_k}/film.js")  # the shared code's comments name The Inner Life of Data as the first film
     for _lg in ("en", "es"):
         PACKS.add(f"assets/{_k}/think.{_lg}.js")
-        OWN_LABS[f"assets/{_k}/think.{_lg}.js"] = (("es/" if _lg == "es" else "") + f"{_sl}/{_k}/labs/index.html", f"assets/{_k}/learn.{_lg}.js")
-    COUNTS[f"ld-{_k}"] = (str(_f["labs"]), str(_f["quiz"]))
+        if _f["labs"]:  # its questions' lab links go to its own labs; a film without labs has none (its .player data-labs is empty)
+            OWN_LABS[f"assets/{_k}/think.{_lg}.js"] = (("es/" if _lg == "es" else "") + f"{_sl}/{_k}/labs/index.html", f"assets/{_k}/learn.{_lg}.js")
+    COUNTS[f"ld-{_k}"] = (str(_f["labs"]), str(_f["quiz"])) if _f["labs"] else (None, None)
     CAPTIONS_ES[f"assets/{_k}/film.js"] = (f"assets/{_k}/captions.es.js", f"films/{_S['dir']}/{_f['dir']}/source")
     if "½" in _f["len"]:
         HALVES["en"].add(_f["len"]); HALVES["es"].add(_f["len"])
     else:
         WHOLE.add(_f["len"] + " min")
+# the Topics page states each series' length in all, in whole minutes, from the same data
+WHOLE |= build_series.series_totals()
 # the Making of page states its two films' lengths: 5 min (Data for Films) and 4½ min (That's not quite right)
 MAKING_OF_PAGES = {"journey/index.html", "es/journey/index.html", "journey/index.md", "es/journey/index.md"}
 WORDS = {"en": "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen "
@@ -703,8 +709,8 @@ def main():
                 allowed.append(f"site/{rel}:{line}")
                 continue
             s["fails"].append(f"site/{rel}:{line}: \"{m.group(0)}\"")
-        if rel in BUNDLES or rel in SEALED:
-            continue  # the players' own code (timings, comments) is not site copy
+        if rel in BUNDLES or rel in SEALED or rel in {c for c, _ in CAPTIONS_ES.values()}:
+            continue  # the players' own code (timings, comments) and their captions (time in the story) are not site copy
         mk = rel in MAKING_OF_PAGES
         for m in LENGTHS.finditer(src):
             if m.group(0).lstrip("· ") in WHOLE or mk and m.group(0).lstrip("· ") == "5 min":
@@ -802,7 +808,7 @@ def main():
                 s["notes"].append(f"{pg.file}: {cap}")
 
     # -- topic cards
-    s = rep.check("Topic cards: one link each, the linked film's progress prefix and counts, a real poster")
+    s = rep.check("Topic cards: one link each, the linked film's progress prefix and counts (a series' card: its films'), a real poster")
     ncards = 0
     for pg in normal:
         for card in pg.dom.all("article", cls="topic-card"):
@@ -827,6 +833,34 @@ def main():
             kind, target, _ = resolve(pg, links[0].attrs.get("href", ""))
             f = file_of(target)[0] if kind == "site" else None
             if not f:
+                continue
+            if "series-card" in card.cls:
+                # a series' card links to the series' page, and counts its films as watched: data-films names, in order, the
+                # progress prefix of each film the series' page has a card for
+                if pages[f].bundles:
+                    s["fails"].append(f"{where}: a series' card links to site/{f}, which plays a film: link to the series' page")
+                    continue
+                want = []
+                for c2 in pages[f].dom.all("article", cls="topic-card"):
+                    a2 = c2.first("h3").all("a") if c2.first("h3") else []
+                    k2, t2, _ = resolve(pages[f], a2[0].attrs.get("href", "")) if a2 else (None, None, None)
+                    f2 = file_of(t2)[0] if k2 == "site" else None
+                    if f2 and pages[f2].bundles and BUNDLES[pages[f2].bundles[0]] not in want:
+                        want.append(BUNDLES[pages[f2].bundles[0]])
+                sbox = card.up(lambda n: "data-series-text" in n.attrs)
+                if prog is None or sbox is None:
+                    s["fails"].append(f"{where}: a series' card needs p.tc-progress inside [data-series-text]")
+                    continue
+                try:
+                    T = json.loads(sbox.attrs["data-series-text"])
+                    if set(T) != {"films"} or ("películas" in T["films"]) != pg.es:
+                        s["fails"].append(f"{where}: data-series-text is {T}: one key, films, in the page's language")
+                except ValueError as e:
+                    s["fails"].append(f"{where}: data-series-text is not JSON ({e})")
+                if (prog.attrs.get("data-films") or "").split() != want:
+                    s["fails"].append(f"{where}: data-films=\"{prog.attrs.get('data-films')}\", but site/{f} has cards for {' '.join(want) or 'no film'}")
+                if "hidden" not in prog.attrs:
+                    s["fails"].append(f"{where}: p.tc-progress starts hidden")
                 continue
             tb = pages[f].bundles
             prefix = BUNDLES[tb[0]] if tb else None

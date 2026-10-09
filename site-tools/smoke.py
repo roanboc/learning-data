@@ -844,7 +844,7 @@ async def check_think_home(run):
 
 # ---------------------------------------------------------------- 9. progress, kept in this browser
 async def check_progress(run):
-    sec = run.rep.sec("progress", "Progress: steppers and topic-card chips from seeded storage; \"watched\" goes to the right film only")
+    sec = run.rep.sec("progress", "Progress: steppers, topic-card chips and series' counts from seeded storage; \"watched\" goes to the right film only")
     # path.js fills the chips; on A Sharper Sketch's pages, sketch.js does
     chip_pages = [k for k, pg in run.static.items() if not pg.redirect and pg.dom.first(cls="tc-progress")
                   and ("assets/learn/path.js" in pg.local_scripts or "assets/sketch/sketch.js" in pg.local_scripts)]
@@ -855,6 +855,10 @@ async def check_progress(run):
     async def chips(pg):
         return await pg.evaluate("""() => [...document.querySelectorAll('[data-progress]')].map(e => ({p: e.dataset.progress, hidden: e.hidden, t: e.textContent,
             T: JSON.parse(e.closest('[data-progress-text]').dataset.progressText), labs: e.dataset.labs, quiz: e.dataset.quiz}))""")
+
+    async def series_chips(pg):  # a series' card: how many of its films were watched
+        return await pg.evaluate("""() => [...document.querySelectorAll('[data-films]')].map(e => ({ps: e.dataset.films.split(' '), hidden: e.hidden, t: e.textContent,
+            T: JSON.parse(e.closest('[data-series-text]').dataset.seriesText)}))""")
 
     async def steps(pg):
         return await pg.evaluate("""() => { const p = document.querySelector('ol.path'); return p && {T: JSON.parse(p.dataset.text),
@@ -927,6 +931,23 @@ async def check_progress(run):
         await pg.close()
     finally:
         await ctx.close()
+    # seed 3b: two films of From words to data watched: its card on the Topics pages counts them, and no other series' card shows
+    two = ["ld-whats-in-a-word", "ld-keeping-it-true"]
+    ctx = await seeded({f"{p}:watched": True for p in two})
+    try:
+        for key in ("topics/", "es/topics/"):
+            pg, _ = await run.page(ctx, key)
+            cs = await series_chips(pg)
+            expect(sec, len(cs) >= 4, f"/{key}: {len(cs)} series cards with a count, expected one per series")
+            for c in cs:
+                if set(two) <= set(c["ps"]):
+                    want = fill(c["T"]["films"], {"n": 2, "of": len(c["ps"])})
+                    expect(sec, not c["hidden"] and c["t"] == want, f"/{key} (two films seeded): From words to data's card reads {c['t']!r}, expected {want!r}")
+                else:
+                    expect(sec, c["hidden"], f"/{key} (two films seeded): the card of {c['ps'][0]}'s series shows {c['t']!r}")
+            await pg.close()
+    finally:
+        await ctx.close()
     # seed 4: nothing. Labs pages mark their open lab as visited on load, so they come last
     ctx = await seeded({})
     try:
@@ -936,6 +957,8 @@ async def check_progress(run):
             await pg.wait_for_timeout(150)
             for c in await chips(pg):
                 expect(sec, c["hidden"], f"/{key} (empty storage): the {c['p']} chip shows {c['t']!r}")
+            for c in await series_chips(pg):
+                expect(sec, c["hidden"], f"/{key} (empty storage): the card of {c['ps'][0]}'s series shows {c['t']!r}")
             if key in stepper and not key.endswith("labs/"):
                 s = await steps(pg)
                 got = [(x["done"], x["t"]) for x in s["li"]]
@@ -984,8 +1007,9 @@ async def check_progress(run):
                 if store == "ld-silent-change":
                     tk = ("es/" if key.startswith("es/") else "") + "topics/"
                     pg, _ = await run.page(ctx, tk)
-                    c = [c for c in await chips(pg) if c["p"] == store]
-                    expect(sec, c and not c[0]["hidden"] and c[0]["t"] == c[0]["T"]["watched"], f"/{tk}: the Silent change chip reads {c and c[0]['t']!r} after watching")
+                    c = [c for c in await series_chips(pg) if store in c["ps"]]
+                    want = c and fill(c[0]["T"]["films"], {"n": 1, "of": len(c[0]["ps"])})
+                    expect(sec, c and not c[0]["hidden"] and c[0]["t"] == want, f"/{tk}: the When things go wrong card reads {c and c[0]['t']!r} after watching Silent change, expected {want!r}")
                     await pg.close()
             finally:
                 await ctx.close()
@@ -1040,13 +1064,15 @@ async def check_nostorage(run):
 # ---------------------------------------------------------------- 11. phones
 async def check_mobile(run):
     sec = run.rep.sec("mobile", "Phones and tablets: cards stack and the whole card is a link, anchors clear the header and the course bar, panels sit below the film up to 900 px and inside it above")
-    grids = [k for k, pg in run.static.items() if not pg.redirect and pg.dom.first(cls="topic-grid")]
+    grids = [k for k, pg in run.static.items() if not pg.redirect and (pg.dom.first(cls="topic-grid") or pg.dom.first(cls="topic-tiles"))]
     ctx = await run.context(390)
     try:
         for key in grids:
             pg, _ = await run.page(ctx, key)
             xs = await pg.evaluate("() => [...document.querySelectorAll('.topic-grid')].map(g => [...g.querySelectorAll(':scope > .topic-card')].map(c => Math.round(c.getBoundingClientRect().left)))")
             expect(sec, all(len(set(g)) <= 1 for g in xs), f"/{key} @390: topic cards don't stack in one column ({xs})")
+            ts = await pg.evaluate("() => [...document.querySelectorAll('.topic-tiles > .topic-tile')].map(c => Math.round(c.getBoundingClientRect().left))")
+            expect(sec, len(set(ts)) <= 1, f"/{key} @390: the topics' tiles don't stack in one column ({ts})")
             await pg.close()
         # the whole card is one link, and the buttons inside the wide card still work
         for width in (390, 1280):
@@ -1061,11 +1087,14 @@ async def check_mobile(run):
                     await pg.wait_for_timeout(200)
 
                 pg, _ = await run.page(c2, "topics/")
-                await tap("#go-deeper .topic-card:not(.soon) img")
+                await tap("#data-modelling .topic-card:not(.series-card) img")
                 expect(sec, run.key(pg.url) == "sketch/", f"/topics/ @{width}: tapping the Sketch card's picture went to /{run.key(pg.url)}")
                 await pg.goto(run.url("topics/"), wait_until="load")
-                await tap("#start .topic-card.wide .tc-body > p:not(.kicker)")
+                await tap("#data-platforms .topic-card .tc-body > p:not(.kicker)")
                 expect(sec, run.key(pg.url) == "", f"/topics/ @{width}: tapping the intro card's text went to /{run.key(pg.url)}")
+                await pg.goto(run.url("topics/"), wait_until="load")
+                await tap("#enterprise-architecture .series-card .sc-media")
+                expect(sec, run.key(pg.url) == "enterprise-architecture/", f"/topics/ @{width}: tapping The map before the data's picture went to /{run.key(pg.url)}")
                 await pg.close()
             finally:
                 await c2.close()
@@ -1073,7 +1102,7 @@ async def check_mobile(run):
         for width in (390, 1280):
             c2 = await run.context(width)
             try:
-                for key, anchor in (("", "watch"), ("", "go-deeper"), ("topics/", "go-deeper"), ("es/", "go-deeper"),
+                for key, anchor in (("", "watch"), ("", "go-deeper"), ("topics/", "data-modelling"), ("topics/", "enterprise-architecture"), ("es/", "go-deeper"),
                                     ("when-things-go-wrong/silent-change/", "think-it-through")):
                     pg, _ = await run.page(c2, f"{key}#{anchor}")
                     await run.settle(pg)

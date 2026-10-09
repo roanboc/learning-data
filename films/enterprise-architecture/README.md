@@ -4,17 +4,19 @@
 
 A new enterprise architect, Tomás, joins a publicly owned energy utility and doesn't yet know how it works, so he doesn't yet know which questions it needs to answer. Over eleven films he builds a map of it, layer by layer, from why it exists down to what runs it, and then shows what that map does for data: the questions that matter, rules with a home, a change in strategy, and a map that people and agents can read. The plan is in the [proposal](proposal.md).
 
-**Status:** *Day one*, *Who it serves, and how it pays*, *Why it moves*, *What it must be able to do* and *How value reaches people* are built. They aren't on the site yet.
+**Status:** five of eleven films are built and [on the site](https://roanboc.github.io/learning-data/enterprise-architecture/), each with three Pause and think questions; the films have no labs or scenarios yet. On the site, the series sits under the topic *Enterprise architecture*.
 
 ## The films
 
-| Film | Topic | Length | Chapters | Script |
-|---|---|---|---|---|
-| Day one | Why enterprise architecture, and the series | 5 min | 10 | [script](1-day-one/script.md) · [source](1-day-one/source/README.md) |
-| Who it serves, and how it pays | Customers, offerings and the canvases | 5 min | 10 | [script](2-who-it-serves/script.md) · [source](2-who-it-serves/source/README.md) |
-| Why it moves | Stakeholders, drivers, assessments, goals, outcomes and principles | 5 min | 10 | [script](3-why-it-moves/script.md) · [source](3-why-it-moves/source/README.md) |
-| What it must be able to do | Capabilities: levels, owners and heat maps | 5½ min | 10 | [script](4-what-it-must-do/script.md) · [source](4-what-it-must-do/source/README.md) |
-| How value reaches people | Value streams, process maps and levels, SIPOC, and detail where order matters | 5¾ min | 10 | [script](5-how-value-reaches-people/script.md) · [source](5-how-value-reaches-people/source/README.md) |
+<!-- films: made by site-tools/build_series.py's readme() -->
+| Film | Topic | Length | Chapters | Pause and think | Script |
+|---|---|---|---|---|---|
+| [Day one](https://roanboc.github.io/learning-data/enterprise-architecture/day-one/) | Why enterprise architecture | 5 min | 10 | 3 questions | [script](1-day-one/script.md) · [source](1-day-one/source/README.md) |
+| [Who it serves, and how it pays](https://roanboc.github.io/learning-data/enterprise-architecture/who-it-serves/) | Customers and offerings | 5 min | 10 | 3 questions | [script](2-who-it-serves/script.md) · [source](2-who-it-serves/source/README.md) |
+| [Why it moves](https://roanboc.github.io/learning-data/enterprise-architecture/why-it-moves/) | Motivation | 4½ min | 10 | 3 questions | [script](3-why-it-moves/script.md) · [source](3-why-it-moves/source/README.md) |
+| [What it must be able to do](https://roanboc.github.io/learning-data/enterprise-architecture/what-it-must-do/) | Capabilities | 5½ min | 10 | 3 questions | [script](4-what-it-must-do/script.md) · [source](4-what-it-must-do/source/README.md) |
+| [How value reaches people](https://roanboc.github.io/learning-data/enterprise-architecture/how-value-reaches-people/) | Value streams and processes | 6 min | 10 | 3 questions | [script](5-how-value-reaches-people/script.md) · [source](5-how-value-reaches-people/source/README.md) |
+<!-- /films -->
 
 ## The look and the sound
 

@@ -7,10 +7,6 @@
     "many.js",
     "scenes.js"
   ],
-  "poster": [
-    "where",
-    "breath",
-    1.6
-  ],
+  "poster": ["cards", "step", 2.3],
   "say": []
 }

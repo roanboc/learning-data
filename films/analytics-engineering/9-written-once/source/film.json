@@ -7,11 +7,7 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": [
-    "fork",
-    "breath",
-    1.6
-  ],
+  "poster": ["fork", "today", 3.2],
   "say": [
     ["\\bYAML\\b", "yammel"],
     ["\\bJun\\b", "Joon"],

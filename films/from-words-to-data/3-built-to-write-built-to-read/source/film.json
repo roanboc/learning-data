@@ -7,10 +7,6 @@
     "write.js",
     "scenes.js"
   ],
-  "poster": [
-    "side",
-    "read",
-    2.0
-  ],
+  "poster": ["ledger", "two", 2.9],
   "say": []
 }

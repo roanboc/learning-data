@@ -88,11 +88,13 @@ def bed(sid, chords, a=None, b=None, g=0.04, tone='warm', bassg=0.02):
     prog(sid, chords, a, b, g=g, tone=tone, bassg=bassg)
 
 
-# 1. Lunch, across the city: warm pads and the electric piano; a tock and a note as the lunch changes hands, rising along the route;
-#    soft taps as the lid's marks appear; the train's roll as it crosses; a knock for each figure; a swell as every hand-off lights;
+# 1. Lunch, across the city: warm pads and the electric piano; a soft swell as the camera goes down from the map to the kitchen, and
+#    again as it comes back up to the whole city; a tock and a note as the lunch changes hands, rising along the route; soft taps as
+#    the lid's marks appear; the train's roll as it crosses; a knock for each figure; a swell as the sorting at every station lights;
 #    a knock for each of the customer's three stages; the mark under the title
 L = 'lunch'
 T0 = W(L, 'hands', 'By')
+swell([46, 53, 58, 62], W(L, 'kitchen', 'A home-cooked', 0.3), 2.2, 0.02); swell([46, 53, 57, 62], C(L, 'scale', -0.6), 2.6, 0.022)
 bed(L, [BBMAJ9, EBMAJ7, FSUS, BBMAJ9], 0, cq(L, 'breath'), g=0.03, tone='warm', bassg=0.022)
 for k, (s_, m) in enumerate([(W(L, 'kitchen', 'the tin to', 0.5), 58), (T0 + 2.15, 62), (T0 + 5.0, 65), (T0 + 7.2, 70)]):
     tock(s_, 0.035, -0.6 + k * 0.4); keys(m, s_ + 0.02, 0.03, -0.6 + k * 0.4)
@@ -106,15 +108,16 @@ for k, word in enumerate(['lunch leaves', 'lunch arrives', 'the tin']):
     knock(W(L, 'customer', word), 0.026, -0.5 + k * 0.5); keys([58, 62, 65][k], W(L, 'customer', word, 0.05), 0.022, -0.5 + k * 0.5)
 bed(L, [BBMAJ7], cq(L, 'breath') + 0.4, None, g=0.03, tone='warm', bassg=0.024)
 mark(G(L, 'breath', 1.6), 58)
-# 2. The lights go out: paper as the note goes up; a gust as the storm comes in; the branch cracks and lands; sparks as the wire lies
-#    on the ground; low notes as the windows go dark; the phone buzzing; knocks for the two tags
+# 2. The lights go out: paper as the note goes up; a gust as the storm comes in; the limb cracks, its leaves rustle as it falls, it
+#    lands on the line, the line snaps; sparks as the wire lies on the ground; low notes as the windows go dark; the phone buzzing;
+#    knocks for the two tags
 S = 'storm'
 tF = W(S, 'branch', 'falls')
 bed(S, [BBMAJ7], 0, cq(S, 'branch') - 0.4, g=0.03)
 bed(S, [GM, CM, EBMAJ, DSUS], cq(S, 'branch') - 0.8, None, g=0.032, tone='strings', bassg=0.026)
 paper(S0(S) + 0.3, 0.035, 0.1)
 wind(C(S, 'branch', -0.8), 3.2, 0.04, -0.3); wind(tF - 0.2, 2.4, 0.03, 0.3)
-crack(tF, 0.05, -0.3); thud(tF + 0.85, 0.08); crackle(tF + 1.3, 1.4, 0.016, -0.3)
+crack(tF, 0.05, -0.3); paper(tF + 0.05, 0.022, -0.4, 1.1); thud(tF + 0.85, 0.08); knock(tF + 1.3, 0.03, -0.3); crackle(tF + 1.3, 1.4, 0.016, -0.3)
 for k, m in enumerate([43, 41, 38]):
     soft(m, W(S, 'branch', 'Forty', -0.6 + k * 0.2), 0.03, -0.3 + k * 0.3)
 buzz2(W(S, 'call', 'calls'), 0.03, 0.5)

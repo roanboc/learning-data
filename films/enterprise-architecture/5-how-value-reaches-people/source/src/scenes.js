@@ -20,38 +20,47 @@ function d5_lerpKeys(t,K){if(t<=K[0][0])return[K[0][1],K[0][2]];for(let i=1;i<K.
 // a small lid, seen from above, with a red cross and a blue mark: the marks read at a hand-off (texture: no words in it)
 function d5_miniLid(ctx,x,y,r,a){withA(ctx,a,()=>{ctx.fillStyle="#c9cfd3";ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();ctx.strokeStyle="rgba(196,52,44,0.95)";ctx.lineWidth=r*0.18;ctx.lineCap="round";
   ctx.beginPath();ctx.moveTo(x-r*0.55,y-r*0.45);ctx.lineTo(x-r*0.15,y-r*0.05);ctx.moveTo(x-r*0.15,y-r*0.45);ctx.lineTo(x-r*0.55,y-r*0.05);ctx.stroke();ctx.fillStyle="rgba(40,60,140,0.95)";ctx.fillRect(x+r*0.05,y-r*0.2,r*0.22,r*0.62);ctx.fillRect(x+r*0.35,y+r*0.1,r*0.22,r*0.32);});}
+// the dabbawala on his bicycle: rides in, stops at the kitchen door for the tin, rides off to the first station
+const D5_HOMEX=-560;
+function d5_bikeX(t,tIn,tOut,tArr){if(t<tIn)return -900;if(t<tIn+1.3)return lerp(-900,-330,1-Math.pow(1-(t-tIn)/1.3,2));if(t<tOut)return -330;if(t<tArr)return lerp(-330,520,ease((t-tOut)/(tArr-tOut)));return 520;}
 scene("lunch",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
   const T0=w("hands","By"),tH1=w("kitchen","the tin to")-0.2,tSc=c("scale"),tD=c("detail"),tC=c("customer"),pm=fin(t,w("customer","comes back")-0.4,2.0),relit=fin(t,B,1.4);
-  d5_sky(ctx,S,pm);
-  ctx.save();drift(ctx,t,sc,{z:0.02,y:640});focus(ctx,t,[[0,330,650,1.7],[T0-0.9,960,590,1.1]]);
-  d5_skyline(ctx,pm);d5_ground(ctx);d5_home(ctx,90,760,t,1);d5_tower(ctx,1650,760,230,560,fin(t,T0+6.8,0.6));
-  d5_canopy(ctx,560,920);d5_canopy(ctx,1150,1510);
-  // the train: waiting at the first station, then across to the second, with the crate in its door
-  const tx=lerp(740,1330,ease(clamp((t-T0-2.2)/2.2,0,1)));d5_train(ctx,tx,{crate:true});d5_platform(ctx,540,940);d5_platform(ctx,1130,1530);
-  // the sorters on the platforms
-  [[600,1,0],[690,-1,1],[1240,1,2],[1440,-1,3]].forEach(([x,dir,k])=>d5_man(ctx,x,680,1,{mode:"sort",dir,t,seed:k}));
-  // the cyclist, then the walker with the crate on his head
-  const bx=lerp(430,520,ease(clamp((t-T0+0.2)/1.8,0,1))),cr=(t<T0-0.2?0:t>T0+1.6?(T0+1.8-T0+0.2)*7:(t-T0+0.2)*7);
-  d5_cyclist(ctx,bx,804,1,cr,{t,n:2});
-  const wx=lerp(1560,1730,clamp((t-T0-5.0)/1.6,0,1)),wk=t>T0+5.0&&t<T0+6.6?1:0;d5_man(ctx,wx,806,1,{mode:"carry",ph:(wx-1560)/14,go:wk,t,seed:2,n:3});
-  // the lunch: from the kitchen window to the cyclist, to the platform, into the train, to the walker's crate, to a lit window
-  const K=[[0,151,700],[tH1,151,700],[tH1+0.7,bx+34,764,60],[T0-0.2,430+34,764],[T0+1.6,520+34,764],[T0+2.15,tx-127,662,70],[T0+4.4,1330-127,662],[T0+5.0,wx,654,80],[T0+6.6,1730,654],[T0+7.2,1785,404,90]];
-  let[hx,hy]=d5_lerpKeys(t,K);if(t>T0-0.2&&t<T0+1.6){hx=bx+34;hy=764;}if(t>T0+2.15&&t<T0+4.4){hx=tx-127;}if(t>T0+5.0&&t<T0+6.6){hx=wx;}
-  const ga=1-0.6*fin(t,tSc-0.3,0.6)*(1-fin(t,tC,0.6));d5_tin(ctx,hx,hy,1.25,{hi:ga,mark:[200,60,50],a:1-fin(t,T0+7.6,0.6)});
-  // the hand-offs: a ring at each, glowing as the lunch passes; at "detail", all four glow and show their marks
-  const HO=[[480,722,tH1+0.7],[612,640,T0+2.15],[1560,616,T0+5.0],[1785,380,T0+7.2]],dg=fin(t,tD,0.6)*(1-fin(t,tC+0.4,0.6));
-  HO.forEach(([x,y,t0])=>{const g=Math.max(pulseAt(t,t0-0.1,1.4),dg);if(t>t0-0.3||dg>0)d5_ring(ctx,x,y,g);d5_miniLid(ctx,x+40,y-40,22,dg);});
-  // the city at work: many lunches on the move
-  const sw=fin(t,tSc,0.8)*(1-0.5*fin(t,tD,0.6));if(sw>0){const R=mk([[150,700],[480,740],[612,650],[1203,650],[1560,640],[1785,404]].map(([x,y])=>P(x,y)));
-    for(let k=0;k<44;k++){const u=((t*0.07+hash(k,90))%1);const q=at(R,u),dy=(hash(k,91)-0.5)*40;withA(ctx,sw*sstep(0,0.05,u)*(1-sstep(0.95,1,u)),()=>{glow(ctx,q.x,q.y+dy,18,D5_WARM,0.5);ctx.fillStyle="rgba(230,234,236,0.95)";ctx.beginPath();ctx.arc(q.x,q.y+dy,4.5,0,TAU);ctx.fill();});}}
-  // the empty tin home again, high over the route, in the afternoon
-  const back=clamp((t-w("customer","comes back")+0.2)/1.8,0,1);if(back>0&&back<1){const x=lerp(1785,151,ease(back)),y=520-Math.sin(Math.PI*back)*180;d5_tin(ctx,x,y,0.9,{hi:0.6});}
-  ctx.restore();
-  // the lid, close up
-  const lp=fin(t,c("code")-0.3,0.5)*(1-fin(t,T0-0.9,0.5));if(lp>0)withA(ctx,lp,()=>{glass(ctx,1180,130,660,440,22,[200,210,230],{glow:14,ea:0.7,fill:"rgba(16,14,14,0.94)"});
-    d5_lid(ctx,1470,350,140,clamp((t-c("code"))/1.6,0,1),fin(t,w("code","the station")-0.2,0.5));});
+  const tZ=w("kitchen","A home-cooked")+0.3,tX=tZ+1.0,tIn=tX-0.2,tOut=c("code")+0.3,tArr=T0+1.6,tM=tSc-0.6;
+  const streetA=t<tX?fin(t,tX,0.8):t<tM+0.8?1:0,mapA=t<tX+0.8?1:fin(t,tM,0.8);
+  // Mumbai, from above: the city, its two main lines, a kitchen and an office; the camera goes down to the kitchen, and comes back
+  // up from the office to show the whole city at work
+  const drawMap=()=>{ctx.save();drift(ctx,t,sc,{z:0.015,y:540});const K=t<tM?[[0,900,520,1],[tZ,D5_HOMEM[0],D5_HOMEM[1],5.2]]:[[tM,D5_OFFM[0],D5_OFFM[1],3.6],[tM+0.3,900,520,1]],zd=t<tM?1.5:2.0,labA=clamp((2.2-focusZ(t,K,zd))/0.8,0,1);
+    focus(ctx,t,K,zd);
+    d5_mumbai(ctx,t,{lines:clamp((t-0.3)/2.0,0,1),labels:fin(t,0.6,0.6),home:Math.max(fin(t,w("kitchen","A home-cooked")-0.6,0.5),fin(t,tM,0.6)),office:t<tM?fin(t,tZ-0.6,0.5):1,
+      route:t<tM?clamp((t-w("kitchen","A home-cooked")+0.4)/1.2,0,1):0,flow:fin(t,tSc,0.8)*(1-fin(t,w("customer","comes back")-0.3,0.8)),back:fin(t,w("customer","comes back")-0.3,0.8),
+      sort:fin(t,tD,0.6)*(1-fin(t,tC+0.4,0.6)),pm,labA});ctx.restore();};
+  // the street: the kitchen, the bicycle, the stations, the train, the walker, the tower
+  const drawStreet=()=>{d5_sky(ctx,S,pm);ctx.save();drift(ctx,t,sc,{z:0.02,y:640});
+    const bx=d5_bikeX(t,tIn,tOut,tArr),u=easeCam(clamp((t-(T0-0.9))/1.6,0,1)),cx0=t<tOut?-330:Math.max(-330,bx+120*clamp((t-tOut)/1.5,0,1)),camX=lerp(cx0,960,u),camY=lerp(660,590,u),camZ=lerp(1.6,1.1,u);
+    ctx.translate(960,540);ctx.scale(camZ,camZ);ctx.translate(-camX,-camY);
+    d5_skyline(ctx,pm);d5_ground(ctx);d5_home(ctx,D5_HOMEX,760,t,1);d5_tower(ctx,1650,760,230,560,fin(t,T0+6.8,0.6));
+    d5_canopy(ctx,560,920);d5_canopy(ctx,1150,1510);
+    // the train: waiting at the first station, then across to the second, with the crate in its door
+    const tx=lerp(740,1330,ease(clamp((t-T0-2.2)/2.2,0,1)));d5_train(ctx,tx,{crate:true});d5_platform(ctx,540,940);d5_platform(ctx,1130,1530);
+    [[600,1,0],[690,-1,1],[1240,1,2],[1440,-1,3]].forEach(([x,dir,k])=>d5_man(ctx,x,680,1,{mode:"sort",dir,t,seed:k}));
+    // the cyclist (his pedals and wheels turn with the distance he covers), then the walker with the crate on his head
+    d5_cyclist(ctx,bx,804,1,(bx+900)/13,{t,n:2});
+    const wx=lerp(1560,1730,clamp((t-T0-5.0)/1.6,0,1)),wk=t>T0+5.0&&t<T0+6.6?1:0;d5_man(ctx,wx,806,1,{mode:"carry",ph:(wx-1560)/14,go:wk,t,seed:2,n:3});
+    // the lunch: from the kitchen window to the cyclist, to the platform, into the train, to the walker's crate, to a lit window
+    const sill=[D5_HOMEX+61,700],K=[[0,sill[0],sill[1]],[tH1,sill[0],sill[1]],[tH1+0.7,-330+34,764,60],[T0+1.6,520+34,764],[T0+2.15,tx-127,662,70],[T0+4.4,1330-127,662],[T0+5.0,wx,654,80],[T0+6.6,1730,654],[T0+7.2,1785,404,90]];
+    let[hx,hy]=d5_lerpKeys(t,K);if(t>tH1+0.7&&t<T0+1.6){hx=bx+34;hy=764;}if(t>T0+2.15&&t<T0+4.4){hx=tx-127;}if(t>T0+5.0&&t<T0+6.6){hx=wx;}
+    d5_tin(ctx,hx,hy,1.25,{hi:1,mark:[200,60,50],a:1-fin(t,T0+7.6,0.6)});
+    // the hand-offs: a ring at each, glowing as the lunch passes
+    [[-286,722,tH1+0.7],[612,640,T0+2.15],[1560,616,T0+5.0],[1785,380,T0+7.2]].forEach(([x,y,t0])=>{if(t>t0-0.3)d5_ring(ctx,x,y,pulseAt(t,t0-0.1,1.4));});
+    ctx.restore();
+    // the lid, close up
+    const lp=fin(t,c("code")-0.3,0.5)*(1-fin(t,T0-0.9,0.5));if(lp>0)withA(ctx,lp,()=>{glass(ctx,1180,130,660,440,22,[200,210,230],{glow:14,ea:0.7,fill:"rgba(16,14,14,0.94)"});
+      d5_lid(ctx,1470,350,140,clamp((t-c("code"))/1.6,0,1),fin(t,w("code","the station")-0.2,0.5));});
+    arrive(ctx,1700,150,t,T0+7.0,()=>tag(ctx,1700,150,"by lunchtime",D5_WARM,{align:"center",size:32}),{dy:10});};
+  if(t<tX+0.8){setScreen(ctx,S);drawMap();if(streetA>0)withA(ctx,streetA,drawStreet);}
+  else{if(t<tM+0.8)drawStreet();if(t>=tM)withA(ctx,mapA,()=>{setScreen(ctx,S);drawMap();});}
+  setScreen(ctx,S);
   eaYear(ctx,90,90,"Mumbai · a weekday morning",CLAY,fin(t,0.3,0.6)*(1-fin(t,tSc-0.4,0.4)));
-  arrive(ctx,1700,150,t,T0+7.0,()=>withA(ctx,1-fin(t,tSc-0.3,0.4),()=>tag(ctx,1700,150,"by lunchtime",D5_WARM,{align:"center",size:32})),{dy:10});
   [["before 2020: about 5,000 dabbawalas","five thousand",130],["some 200,000 lunches a day","two hundred",200],["almost no errors","almost no",270]].forEach(([s_,k,y])=>arrive(ctx,960,y,t,w("scale",k),()=>withA(ctx,1-fin(t,tD-0.4,0.4),()=>tag(ctx,960,y,s_,D5_WARM,{align:"center",size:32})),{dy:10}));
   arrive(ctx,960,150,t,w("detail","change hands"),()=>withA(ctx,1-fin(t,tC-0.3,0.4),()=>tag(ctx,960,150,"the detail: where the tins change hands",D5_WARM,{align:"center",size:32})),{dy:10});
   // what the customer sees: three stages
@@ -66,8 +75,8 @@ scene("storm",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   if(xA<1)withA(ctx,1-xA,()=>{wallBg(ctx,S,t);ctx.save();drift(ctx,t,sc,{z:0.03,y:420});person(ctx,"tomas",360,1030,0.8,{t,pose:t<c("note")+2.2?"explain":"stand"});
     arrive(ctx,1000,420,t,0.3,()=>sticky(ctx,1000,420,640,200,"How does value reach people?",{col:NOTEC[0],size:44,st:0,rot:-0.02}),{dy:-30});ctx.restore();vign(ctx,S);});
   // Hill Street, in the storm
-  if(xA>0)withA(ctx,xA,()=>{setScreen(ctx,S);ctx.save();drift(ctx,t,sc,{z:0.025,y:600});focus(ctx,t,[[0,960,560,1],[tF-0.6,640,600,1.22],[tC+0.2,960,560,1]]);
-    d5_street(ctx,t,{off:i=>fin(t,tDk+Math.abs(i-1.5)*0.14,0.3),br:clamp((t-tF)/0.9,0,1),wd:clamp((t-tF-0.7)/0.6,0,1),flash:pulseAt(t,tF+0.85,0.7)});
+  if(xA>0)withA(ctx,xA,()=>{setScreen(ctx,S);ctx.save();drift(ctx,t,sc,{z:0.025,y:600});focus(ctx,t,[[0,960,560,1],[tF-1.0,620,540,1.06],[tC+0.2,960,560,1]]);
+    d5_street(ctx,t,{off:i=>fin(t,tDk+Math.abs(i-1.5)*0.14,0.3),brk:t-tF,flash:pulseAt(t,tF+1.3,0.6)});
     // a phone lights up in one window
     const ph=fin(t,tC,0.4);if(ph>0){glow(ctx,395,760,40,[150,200,255],0.6*ph);ctx.fillStyle=rgba([170,210,255],ph);ctx.fillRect(388,748,12,20);}
     ctx.restore();
@@ -142,13 +151,16 @@ scene("map",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);wa
 scene("levels",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);wallBg(ctx,S,t);
   ctx.save();drift(ctx,t,sc,{z:0.02,y:420});
   const t1=w("two","Level one"),t2=w("two","Level two"),t3=w("three","Level three"),tE=c("enough");
-  [["level 1",210,t1],["level 2",470,t2],["level 3",562,t3]].forEach(([s_,y,t0])=>arrive(ctx,120,y,t,t0-0.2,()=>T(ctx,s_,60,y,{f:"mono",w:600,size:30,color:rgba(BUS,1)}),{dy:8}));
+  [["level 1",210,t1],["level 2",470,t2],["level 3",538,t3]].forEach(([s_,y,t0])=>arrive(ctx,120,y,t,t0-0.2,()=>T(ctx,s_,60,y,{f:"mono",w:600,size:30,color:rgba(BUS,1)}),{dy:8}));
   // level 1: the whole map, small; level 2: one process; level 3: its steps
   let rs=null;arrive(ctx,545,240,t,t1-0.1,()=>{ctx.save();ctx.translate(260,90);ctx.scale(0.42,0.42);const pos=d5_pmap(ctx,0,0,1360,700,{deco:true,hi:{"restore supply":fin(t,t2-0.3,0.4)}});ctx.restore();
     const[a,b,c_,d]=pos["restore supply"];rs=[260+a*0.42,90+b*0.42,c_*0.42,d*0.42];},{dy:-12});
   const z2=fin(t,t2,0.6);if(z2>0&&rs)withA(ctx,z2,()=>{ctx.strokeStyle=rgba(BUS,0.45);ctx.lineWidth=2;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(rs[0],rs[1]+rs[3]);ctx.lineTo(260,410);ctx.moveTo(rs[0]+rs[2],rs[1]+rs[3]);ctx.lineTo(700,410);ctx.stroke();ctx.setLineDash([]);});
   arrive(ctx,480,460,t,t2+0.1,()=>archEl(ctx,260,410,440,100,"restore supply",BUS,"process",{size:34,gs:15,hi:fin(t,t3-0.3,0.4)*0.6}),{dy:-12});
-  const z3=fin(t,t3,0.6);if(z3>0)withA(ctx,z3,()=>{ctx.strokeStyle=rgba(BUS,0.45);ctx.lineWidth=2;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(260,510);ctx.lineTo(220,580);ctx.moveTo(700,510);ctx.lineTo(1854,580);ctx.stroke();ctx.setLineDash([]);});
+  // level 3 hangs from level 2: a bracket from the process down to each of its steps, drawn as the steps arrive
+  const z3=fin(t,t3,0.5),TS=["Take","Find","Decide","Send","Repair","Switch","Confirm"].map(k=>w("three",k)-0.1);if(z3>0)withA(ctx,z3,()=>{ctx.save();ctx.strokeStyle=rgba(BUS,0.6);ctx.lineWidth=2.5;ctx.lineCap="round";const yb=560;
+    let xr=480,xl=480;TS.forEach((t0,i)=>{const q=ease(clamp((t-t0+0.15)/0.45,0,1));if(q>0){const x=186+i*258;xl=Math.min(xl,lerp(480,x,q));xr=Math.max(xr,lerp(480,x,q));}});
+    ctx.beginPath();ctx.moveTo(480,512);ctx.lineTo(480,yb);ctx.moveTo(xl,yb);ctx.lineTo(xr,yb);TS.forEach((t0,i)=>{const q=clamp((t-t0)/0.3,0,1);if(q>0){const x=186+i*258;ctx.moveTo(x,yb);ctx.lineTo(x,yb+26*q);}});ctx.stroke();ctx.restore();});
   D5_STEPS.forEach((s_,i)=>{const x=186+i*258,t0=w("three",["Take","Find","Decide","Send","Repair","Switch","Confirm"][i])-0.1;
     if(i>0){const q=fin(t,t0,0.4);if(q>0)arrowTo(ctx,x-258+122,650,x-124,650,BUS,0.7,{p:q,lw:2.5,head:10});}
     arrive(ctx,x,650,t,t0,()=>{d5_step(ctx,x,650,236,120,s_,{hi:i===2?fin(t,tE+0.8,0.5):0,hiCol:[232,110,96]});
@@ -222,7 +234,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   const tX=c("confirm")-0.7,xA=fin(t,tX,0.8),tB=w("back","lights")-0.3,tF=w("confirm","Farah")+0.2,tG=w("confirm","Grace"),tRu=w("rule","written"),cA=c("answer");
   // Hill Street: the lights come back, and the household gets its message
   if(xA<1)withA(ctx,1-xA,()=>{setScreen(ctx,S);ctx.save();drift(ctx,t,sc,{z:0.025,y:600});
-    d5_street(ctx,t,{off:i=>1-fin(t,tB+Math.abs(i-1.5)*0.14,0.3),br:1,wd:1,fixed:1,branchA:0,van:1,wind:0.35,rain:0.25});ctx.restore();
+    d5_street(ctx,t,{off:i=>1-fin(t,tB+Math.abs(i-1.5)*0.14,0.3),fixed:1,cleared:1,van:1,wind:0.35,rain:0.25});ctx.restore();
     eaYear(ctx,90,90,"3:40 a.m. · Hill Street",CLAY,fin(t,0.2,0.6));
     d5_phone(ctx,1450,120,360,560,[["3:40 a.m.",30,rgba(SOFT,1)],["Power back on",36],["Hill Street",32,rgba(EAC,1)],["a branch on the line, now cleared",30,rgba(SOFT,1)]],{a:fin(t,w("back","message")-0.2,0.5),t});
     vign(ctx,S);});

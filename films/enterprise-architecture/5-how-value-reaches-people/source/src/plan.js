@@ -15,14 +15,14 @@ function d5_sky(ctx,S,pm){setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,
   g.addColorStop(0,rgba(mix([84,106,140],[86,74,104],pm),1));g.addColorStop(0.42,rgba(mix([178,170,166],[206,150,116],pm),1));g.addColorStop(0.58,rgba(mix([232,208,170],[242,176,112],pm),1));g.addColorStop(1,"#241c18");
   ctx.fillStyle=g;ctx.fillRect(0,0,W,H);glow(ctx,lerp(1480,620,pm),lerp(300,400,pm),520,[255,236,196],0.22);}
 // the city behind: towers in the haze, far then near, a few windows lit
-function d5_skyline(ctx,pm){[[0.32,580,0],[0.62,624,1]].forEach(([fade,base,k])=>{for(let i=0;i<36;i++){const x=-300+i*72+hash(i,60+k)*30,w=44+hash(i,61+k)*58,h=(k?60:110)+hash(i,62+k)*(k?120:190);
+function d5_skyline(ctx,pm){[[0.32,580,0],[0.62,624,1]].forEach(([fade,base,k])=>{for(let i=0;i<46;i++){const x=-1020+i*72+hash(i,60+k)*30,w=44+hash(i,61+k)*58,h=(k?60:110)+hash(i,62+k)*(k?120:190);
     ctx.fillStyle=rgba(mix(mix([150,140,148],[104,92,98],k),[210,160,124],pm*0.3),fade);ctx.fillRect(x,base-h,w,h);
     if(k)for(let r=0;r<Math.floor(h/22)-1;r++)for(let c=0;c<Math.floor(w/16)-1;c++)if(hash(i*31+r*7+c,63)>0.74){ctx.fillStyle="rgba(255,226,170,0.16)";ctx.fillRect(x+6+c*16,base-h+10+r*22,7,9);}}});}
 // the ground: the railway on its bank, then the road in front
-function d5_ground(ctx){const g=ctx.createLinearGradient(0,620,0,1080);g.addColorStop(0,"#3a302a");g.addColorStop(1,"#18130f");ctx.fillStyle=g;ctx.fillRect(-400,620,W+800,700);
-  ctx.fillStyle="#2c2622";ctx.fillRect(-400,700,W+800,22);ctx.strokeStyle="rgba(150,140,130,0.45)";ctx.lineWidth=2;for(let x=-400;x<W+400;x+=18){ctx.beginPath();ctx.moveTo(x,701);ctx.lineTo(x+8,718);ctx.stroke();}
-  ctx.strokeStyle="rgba(206,200,192,0.75)";ctx.lineWidth=3;[698,705].forEach(y=>{ctx.beginPath();ctx.moveTo(-400,y);ctx.lineTo(W+400,y);ctx.stroke();});
-  ctx.fillStyle="#463c35";ctx.fillRect(-400,762,W+800,52);ctx.strokeStyle="rgba(230,214,180,0.3)";ctx.setLineDash([30,26]);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-400,788);ctx.lineTo(W+400,788);ctx.stroke();ctx.setLineDash([]);}
+function d5_ground(ctx){const g=ctx.createLinearGradient(0,620,0,1080);g.addColorStop(0,"#3a302a");g.addColorStop(1,"#18130f");ctx.fillStyle=g;ctx.fillRect(-1100,620,W+1500,700);
+  ctx.fillStyle="#2c2622";ctx.fillRect(-1100,700,W+1500,22);ctx.strokeStyle="rgba(150,140,130,0.45)";ctx.lineWidth=2;for(let x=-1100;x<W+400;x+=18){ctx.beginPath();ctx.moveTo(x,701);ctx.lineTo(x+8,718);ctx.stroke();}
+  ctx.strokeStyle="rgba(206,200,192,0.75)";ctx.lineWidth=3;[698,705].forEach(y=>{ctx.beginPath();ctx.moveTo(-1100,y);ctx.lineTo(W+400,y);ctx.stroke();});
+  ctx.fillStyle="#463c35";ctx.fillRect(-1100,762,W+1500,52);ctx.strokeStyle="rgba(230,214,180,0.3)";ctx.setLineDash([30,26]);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-1100,788);ctx.lineTo(W+400,788);ctx.stroke();ctx.setLineDash([]);}
 // a home: a low block of flats, its kitchen window lit (k: how bright), a door on the right
 function d5_home(ctx,x,y,t,k){ctx.save();const w=290,h=240,g=ctx.createLinearGradient(x,0,x+w,0);g.addColorStop(0,"#b98a64");g.addColorStop(1,"#8a6448");ctx.fillStyle=g;ctx.fillRect(x,y-h,w,h);
   ctx.fillStyle="#6e4e3a";ctx.fillRect(x-8,y-h-12,w+16,14);
@@ -124,11 +124,67 @@ function d5_lid(ctx,cx,cy,r,p,lab){ctx.save();const g=ctx.createRadialGradient(c
 // a hand-off: a ring on the route, glowing as a tin passes (g: 0..1)
 function d5_ring(ctx,x,y,g,col){col=col||[255,214,150];ctx.save();ctx.strokeStyle=rgba(col,0.35+0.6*g);ctx.lineWidth=2.5+2*g;ctx.beginPath();ctx.arc(x,y,18+6*g,0,TAU);ctx.stroke();ctx.restore();if(g>0.05)glow(ctx,x,y,60,col,0.35*g);}
 
+/* ---------- Mumbai, from above ---------- */
+// A sketch of the city's shape, not a survey: the long peninsula between the Arabian Sea and the harbour, the mainland across the
+// creek, and the two main suburban lines, Western and Central, from the south up through the suburbs. No national borders are drawn.
+const D5_LAND=[[800,40],[778,120],[760,200],[742,280],[730,350],[738,420],[722,490],[730,560],[752,630],[780,700],[808,770],[832,840],[850,900],[866,960],[878,1010],[892,1032],[906,1012],
+  [912,960],[924,900],[946,840],[972,790],[992,730],[1004,670],[1030,610],[1066,560],[1092,500],[1084,430],[1100,360],[1128,290],[1124,210],[1112,130],[1104,40]];
+const D5_MAIN=[[1190,-80],[1230,120],[1212,260],[1182,380],[1150,470],[1170,560],[1222,660],[1262,800],[1300,1160],[2400,1160],[2400,-80]];
+const D5_WEST=[[862,980],[850,920],[830,850],[806,780],[782,710],[766,640],[758,570],[764,500],[760,430],[768,360],[778,290],[790,220],[802,150],[812,40]];
+const D5_CENT=[[900,990],[912,930],[934,860],[960,800],[972,740],[968,680],[958,620],[972,560],[1000,500],[1030,440],[1052,380],[1070,310],[1080,230],[1088,140],[1094,40]];
+const D5_STNS=[[790,220],[766,640],[850,920],[1080,230],[968,680],[912,930]],D5_HOMEM=[738,236],D5_OFFM=[884,950];
+const D5_LW=mk(D5_WEST.map(([x,y])=>P(x,y))),D5_LC=mk(D5_CENT.map(([x,y])=>P(x,y)));
+// o.lines draws the railway in; o.home and o.office light the kitchen and the office; o.route draws the lunch's way between them;
+// o.flow (south, in the morning) and o.back (north, in the afternoon) set lunches moving along both lines; o.sort pulses the
+// sorting at the stations; o.pm warms the light towards the afternoon; o.labA fades the place names while the camera is close
+function d5_mumbai(ctx,t,o){o=o||{};const pm=o.pm||0;ctx.save();
+  const g=ctx.createLinearGradient(0,-200,0,1300);g.addColorStop(0,rgba(mix([18,38,58],[30,40,62],pm),1));g.addColorStop(1,rgba(mix([30,58,78],[46,64,84],pm),1));ctx.fillStyle=g;ctx.fillRect(-1200,-800,4400,2800);
+  ctx.strokeStyle="rgba(170,210,230,0.07)";ctx.lineWidth=2;for(let i=0;i<26;i++){const y=-100+i*48,ph=t*0.4+i;ctx.beginPath();for(let x=-1200;x<=3200;x+=40){const yy=y+Math.sin(x*0.012+ph)*4;x===-1200?ctx.moveTo(x,yy):ctx.lineTo(x,yy);}ctx.stroke();}
+  const poly=(pts,fill,edge)=>{ctx.beginPath();pts.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.fillStyle=fill;ctx.fill();if(edge){ctx.strokeStyle=edge;ctx.lineWidth=3;ctx.stroke();}};
+  poly(D5_MAIN,rgba(mix([84,78,72],[110,90,76],pm),1),"rgba(200,186,160,0.35)");
+  const lg=ctx.createLinearGradient(700,0,1120,0);lg.addColorStop(0,rgba(mix([138,122,104],[170,134,104],pm),1));lg.addColorStop(1,rgba(mix([108,96,86],[136,108,88],pm),1));poly(D5_LAND,lg,"rgba(230,210,176,0.6)");
+  // the city's texture: blocks, a little lighter where it's dense
+  ctx.save();ctx.beginPath();D5_LAND.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.clip();
+  for(let i=0;i<520;i++){const x=700+hash(i,120)*420,y=40+hash(i,121)*1000;ctx.fillStyle="rgba(240,226,200,"+(0.05+0.08*hash(i,122))+")";ctx.fillRect(x,y,6+8*hash(i,123),4+6*hash(i,124));}ctx.restore();
+  // the railway: Western and Central lines, drawn from the south up as o.lines goes to 1
+  const la=o.lines==null?1:o.lines,draw=(L,p)=>{if(p<=0)return;ctx.beginPath();for(let k=0;k<=80;k++){const q=at(L,k/80*p);k?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y);}ctx.stroke();};
+  ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle="rgba(30,24,20,0.6)";ctx.lineWidth=9;draw(D5_LW,la);draw(D5_LC,la);ctx.strokeStyle="rgba(244,218,170,0.95)";ctx.lineWidth=4.5;draw(D5_LW,la);draw(D5_LC,la);
+  D5_STNS.forEach(([x,y],i)=>{const q=clamp(la*1.4-0.2-i*0.05,0,1);if(q<=0)return;withA(ctx,q,()=>{ctx.fillStyle="#f6efe2";ctx.beginPath();ctx.arc(x,y,9,0,TAU);ctx.fill();ctx.strokeStyle="rgba(30,24,20,0.8)";ctx.lineWidth=2.5;ctx.stroke();});
+    const sp=o.sort||0;if(sp>0){const ph=pulseAt((t*0.8+i*0.37)%2.2,0,1.2);d5_ring(ctx,x,y,sp*(0.5+0.5*ph),[255,214,150]);
+      withA(ctx,sp,()=>{const dx=i<3?-46:46;ctx.fillStyle="#c9cfd3";ctx.beginPath();ctx.arc(x+dx,y-30,16,0,TAU);ctx.fill();ctx.strokeStyle="rgba(196,52,44,0.95)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x+dx-9,y-38);ctx.lineTo(x+dx-3,y-32);ctx.moveTo(x+dx-3,y-38);ctx.lineTo(x+dx-9,y-32);ctx.stroke();ctx.fillStyle="rgba(40,60,140,0.95)";ctx.fillRect(x+dx+1,y-36,4,12);});}});
+  // the lunch's way, from a kitchen in the suburbs, by bicycle to the station, by train down the line, on foot to an office
+  const rp=o.route||0;if(rp>0){const R=mk([D5_HOMEM,[790,222]].concat(D5_WEST.slice().reverse().slice(1,13)).concat([[862,980],D5_OFFM]).map(([x,y])=>P(x,y)));ctx.save();ctx.setLineDash([12,10]);ctx.strokeStyle="rgba(255,214,150,0.95)";ctx.lineWidth=4;
+    ctx.beginPath();for(let k=0;k<=120;k++){const q=at(R,k/120*rp);k?ctx.lineTo(q.x+10,q.y):ctx.moveTo(q.x+10,q.y);}ctx.stroke();ctx.restore();const q=at(R,rp);glow(ctx,q.x+10,q.y,36,[255,214,150],0.6);}
+  // lunches on the move: south in the morning, north again in the afternoon
+  const fl=o.flow||0,bk=o.back||0;[[D5_LW,0],[D5_LC,1]].forEach(([L,j])=>{for(let k=0;k<30;k++){const v=(hash(k,130+j)+t*(0.045+0.02*hash(k,132+j)))%1;
+    [[fl,1-v],[bk,v]].forEach(([a,u])=>{if(a<=0.01)return;const q=at(L,u),side=(hash(k,134+j)-0.5)*14;withA(ctx,a*sstep(0,0.06,v)*(1-sstep(0.94,1,v)),()=>{glow(ctx,q.x+side,q.y,22,[255,214,150],0.55);ctx.fillStyle="rgba(250,246,236,0.95)";ctx.beginPath();ctx.arc(q.x+side,q.y,5,0,TAU);ctx.fill();});});}});
+  // the kitchen and the office
+  const lb=o.labA==null?1:o.labA;
+  [[D5_HOMEM,o.home||0,"a kitchen in the suburbs",-1],[D5_OFFM,o.office||0,"an office in the south",1]].forEach(([[x,y],a,lab,side])=>{if(a<=0.01)return;withA(ctx,a,()=>{const pu=1+0.15*Math.sin(t*3);glow(ctx,x,y,60*pu,[255,214,150],0.5);ctx.fillStyle="#fff4dc";ctx.beginPath();ctx.arc(x,y,11,0,TAU);ctx.fill();
+    withA(ctx,lb,()=>T(ctx,lab,x+side*30,y+11,{w:800,size:30,align:side<0?"right":"left",color:rgba([255,226,180],1)}));});});
+  withA(ctx,(o.labels==null?1:o.labels)*lb,()=>{T(ctx,"Mumbai",885,488,{w:800,size:44,align:"center",color:"rgba(255,246,228,0.96)"});T(ctx,"Arabian Sea",430,700,{w:700,size:32,align:"center",color:"rgba(170,210,230,0.8)"});});
+  if(pm>0){ctx.fillStyle="rgba(255,176,110,"+(0.05*pm)+")";ctx.fillRect(-1200,-800,4400,2800);}
+  ctx.restore();}
+
 /* ---------- Hill Street, at night ---------- */
-// the houses, the poles and the line: house i is dark as off(i) goes to 1; br (0..1) brings the branch down, wd (0..1) drops the wire;
-// fixed (0..1) mends the line again, and branchA fades the branch once it's cleared
-const D5_HOUSES=[160,440,720,1000,1280,1560,1840];
-function d5_street(ctx,t,o){o=o||{};const off=o.off||(()=>0),br=o.br||0,wd=o.wd||0,fx=o.fixed||0,wind=o.wind==null?1:o.wind;
+// the houses, the poles and the line: house i is dark as off(i) goes to 1. o.brk is the time since the limb broke (negative: not yet):
+// it swings down onto the line, rests there as the line sags, then the line snaps and the limb hangs from the tree. o.fixed mends the
+// line; o.cleared takes the limb away and leaves a sawn stub; o.van brings the crew's van
+const D5_HOUSES=[160,440,720,1000,1280,1560,1840],D5_POLE=[300,860,1420],D5_PY=420;
+const d5_lineY=x=>D5_PY+56*Math.sin(Math.PI*clamp((x-D5_POLE[0])/(D5_POLE[1]-D5_POLE[0]),0,1));
+// the limb: its hinge on the trunk, its length, its angle before it breaks, and when hanging; where it lands is worked out once
+const D5_LIMB=(()=>{const H=[206,392],L=360,a0=-0.62;let lo=-0.6,hi=0.7;for(let k=0;k<40;k++){const m=(lo+hi)/2,x=H[0]+L*Math.cos(m),y=H[1]+L*Math.sin(m);if(y<d5_lineY(x))lo=m;else hi=m;}
+  const aL=(lo+hi)/2;return{H,L,a0,aL,xc:H[0]+L*Math.cos(aL),aHang:1.16};})();
+// a cluster of leaves: a bumpy, overlapping mass, lit from the upper left
+function d5_lobe(ctx,cx,cy,r,seed,t,wind,lit){const n=13,ph=t*1.8+seed;ctx.beginPath();for(let i=0;i<=n*3;i++){const an=i/(n*3)*TAU,b=1+0.09*Math.sin(an*n+seed*3)+0.03*Math.sin(an*5+ph)*wind,rr_=r*b;
+    const x=cx+Math.cos(an)*rr_+Math.sin(ph+i)*0.6*wind,y=cy+Math.sin(an)*rr_*0.86;i?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.closePath();
+  const g=ctx.createRadialGradient(cx-r*0.35,cy-r*0.4,r*0.1,cx,cy,r*1.1);g.addColorStop(0,rgba(mix([50,74,60],[96,128,104],lit),1));g.addColorStop(1,rgba([24,40,34],1));ctx.fillStyle=g;ctx.fill();
+  ctx.strokeStyle="rgba(140,180,150,"+(0.18*lit)+")";ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,cy,r*0.9,Math.PI*1.05,Math.PI*1.55);ctx.stroke();}
+// a tapering wooden limb from (x0,y0) to (x1,y1), w0 thick at its base, w1 at its tip, with a little bend
+function d5_wood(ctx,x0,y0,x1,y1,w0,w1,bend){const dx=x1-x0,dy=y1-y0,L=Math.hypot(dx,dy)||1,nx=-dy/L,ny=dx/L,mx=(x0+x1)/2+nx*bend,my=(y0+y1)/2+ny*bend;
+  ctx.beginPath();ctx.moveTo(x0+nx*w0/2,y0+ny*w0/2);ctx.quadraticCurveTo(mx+nx*(w0+w1)/4,my+ny*(w0+w1)/4,x1+nx*w1/2,y1+ny*w1/2);ctx.lineTo(x1-nx*w1/2,y1-ny*w1/2);
+  ctx.quadraticCurveTo(mx-nx*(w0+w1)/4,my-ny*(w0+w1)/4,x0-nx*w0/2,y0-ny*w0/2);ctx.closePath();const g=ctx.createLinearGradient(x0+nx*w0,y0+ny*w0,x0-nx*w0,y0-ny*w0);g.addColorStop(0,"#7a5c44");g.addColorStop(0.5,"#4a3628");g.addColorStop(1,"#2a1e18");ctx.fillStyle=g;ctx.fill();}
+function d5_street(ctx,t,o){o=o||{};const off=o.off||(()=>0),fx=o.fixed||0,wind=o.wind==null?1:o.wind,s_=o.brk==null?-1:o.brk,cl=o.cleared||0;
   // night sky, clouds moving, and rain
   const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"#0a0e1c");g.addColorStop(1,"#1c1e2a");ctx.fillStyle=g;ctx.fillRect(-300,-300,W+600,H+600);
   for(let i=0;i<9;i++){const x=((hash(i,80)*W*1.4+t*(14+10*hash(i,81)))%(W+700))-350,y=60+hash(i,82)*220;ctx.fillStyle="rgba(70,76,96,0.22)";ctx.beginPath();ctx.ellipse(x,y,220+120*hash(i,83),46+20*hash(i,84),0,0,TAU);ctx.fill();}
@@ -140,27 +196,43 @@ function d5_street(ctx,t,o){o=o||{};const off=o.off||(()=>0),br=o.br||0,wd=o.wd|
     [[x-70,y-120],[x+20,y-120],[x-70,y-62],[x+20,y-62]].forEach(([wx,wy],k)=>{const on=(1-d)*(hash(i*4+k,88)>0.25?1:0.25);ctx.fillStyle=on>0.02?rgba(mix([30,30,40],[255,210,140],on),1):"rgba(20,20,28,1)";ctx.fillRect(wx,wy,50,38);
       if(on>0.3)glow(ctx,wx+25,wy+19,50,[255,200,130],0.18*on);});
     ctx.fillStyle="#15121a";ctx.fillRect(x+66,y-60,26,60);});
-  // the poles and the line between them; the stretch over the tree drops when the wire is down
-  const P=[300,860,1420],py=420,sag=(a,b,f)=>{const x=lerp(a,b,f);return[x,py+4*Math.sin(Math.PI*f)*14];};
-  P.forEach(x=>{ctx.fillStyle="#3a3036";ctx.fillRect(x-6,py-10,12,450);ctx.fillRect(x-46,py-4,92,8);});
-  const line=(x0,x1)=>{ctx.beginPath();for(let k=0;k<=24;k++){const[x,y]=sag(x0,x1,k/24);k?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.stroke();};
-  ctx.save();ctx.strokeStyle="rgba(160,160,176,0.85)";ctx.lineWidth=2.4;line(-300,P[0]);line(P[2],W+300);
-  const down=ease(wd)*(1-fx);if(down<0.02)line(P[0],P[1]);else{const mx=640;ctx.beginPath();ctx.moveTo(P[0],py);ctx.quadraticCurveTo(lerp(P[0],mx,0.6),lerp(py,860,0.4*down),mx-30,lerp(py+30,856,down));ctx.stroke();
-    ctx.beginPath();ctx.moveTo(P[1],py);ctx.quadraticCurveTo(lerp(P[1],mx,0.6),lerp(py,860,0.4*down),mx+30,lerp(py+30,856,down));ctx.stroke();
-    if(down>0.9){const fl=0.5+0.5*Math.sin(t*23)*Math.sin(t*7.7);glow(ctx,mx,850,50,[255,190,110],0.4*fl*(1-fx));}}
-  line(P[1],P[2]);ctx.restore();
+  // the limb's state: falling (accelerating), resting on the line as it sags, then hanging once the line snaps
+  const Lb=D5_LIMB,sway=0.025*Math.sin(t*1.9)*wind;let a=Lb.a0+sway,load=0,wd=0;
+  if(s_>=0&&s_<0.85){const u=s_/0.85;a=Lb.a0+(Lb.aL-Lb.a0)*u*u;}
+  else if(s_>=0.85&&s_<1.3){load=clamp((s_-0.85)/0.15,0,1);a=Lb.aL+0.09*load+0.04*Math.sin((s_-0.85)*22)*Math.exp(-(s_-0.85)*7);}
+  else if(s_>=1.3){wd=clamp((s_-1.3)/0.6,0,1);const u=clamp((s_-1.3)/0.75,0,1);a=lerp(Lb.aL+0.09,Lb.aHang,1-Math.pow(1-u,3))+0.05*Math.sin((s_-2.05)*9)*Math.exp(-Math.max(0,s_-2.05)*3)*(u>=1?1:0);}
+  if(fx>0){load=0;wd=0;}
+  // the poles and the line: whole, sagging under the limb, or snapped and down
+  const P=D5_POLE,py=D5_PY,xc=Lb.xc;P.forEach(x=>{ctx.fillStyle="#3a3036";ctx.fillRect(x-6,py-10,12,450);ctx.fillRect(x-46,py-4,92,8);});
+  const span=(x0,x1)=>{ctx.beginPath();for(let k=0;k<=24;k++){const f=k/24,x=lerp(x0,x1,f),y=py+56*Math.sin(Math.PI*f);k?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.stroke();};
+  ctx.save();ctx.strokeStyle="rgba(160,160,176,0.85)";ctx.lineWidth=2.4;span(-300,P[0]);span(P[1],P[2]);span(P[2],W+300);
+  if(wd<0.01){if(load<0.01)span(P[0],P[1]);else{const yc=d5_lineY(xc)+34*load;ctx.beginPath();ctx.moveTo(P[0],py);ctx.quadraticCurveTo((P[0]+xc)/2,py+60+20*load,xc,yc);ctx.quadraticCurveTo((xc+P[1])/2,py+60+20*load,P[1],py);ctx.stroke();}}
+  else{const dn=ease(wd);ctx.beginPath();ctx.moveTo(P[0],py);ctx.quadraticCurveTo(lerp(P[0],xc,0.6),lerp(py,860,0.4*dn),xc-30,lerp(d5_lineY(xc)+34,856,dn));ctx.stroke();
+    ctx.beginPath();ctx.moveTo(P[1],py);ctx.quadraticCurveTo(lerp(P[1],xc,0.6),lerp(py,860,0.4*dn),xc+30,lerp(d5_lineY(xc)+34,856,dn));ctx.stroke();
+    if(dn>0.9){const fl=0.5+0.5*Math.sin(t*23)*Math.sin(t*7.7);glow(ctx,xc,850,50,[255,190,110],0.4*fl);}}
+  ctx.restore();
   // service lines to the houses
-  ctx.save();ctx.strokeStyle="rgba(120,120,136,0.6)";ctx.lineWidth=1.4;D5_HOUSES.forEach((x,i)=>{const p=x<P[1]?P[0]:P[1]+(x>P[2]?P[2]-P[1]:0);ctx.beginPath();ctx.moveTo(p,py+6);ctx.quadraticCurveTo((p+x)/2,py+70,x,690);ctx.stroke();});ctx.restore();
-  // the tree, swaying, and the branch that breaks off (br) and lands on the line
-  const tx=190,sw=Math.sin(t*1.9)*0.03*wind+Math.sin(t*3.1)*0.012*wind;ctx.save();ctx.translate(tx,860);ctx.rotate(sw);
-  ctx.fillStyle="#2a1f1a";ctx.beginPath();ctx.moveTo(-26,0);ctx.quadraticCurveTo(-14,-180,-8,-330);ctx.lineTo(10,-330);ctx.quadraticCurveTo(16,-180,28,0);ctx.closePath();ctx.fill();
-  [[-150,-420,130],[40,-470,150],[150,-400,120],[-60,-520,120],[90,-560,100]].forEach(([cx,cy,r],k)=>{ctx.fillStyle=k%2?"#1d2a24":"#22302a";ctx.beginPath();ctx.ellipse(cx+Math.sin(t*2+k)*6*wind,cy,r,r*0.7,0,0,TAU);ctx.fill();});ctx.restore();
-  const bq=ease(clamp(br,0,1)),dq=ease(clamp(wd,0,1)),bx=lerp(tx+180,600,bq)+20*dq,by=lerp(360,470,bq)+(828-470)*dq,ba=lerp(-0.5,0.08,bq)+0.18*dq;ctx.save();ctx.globalAlpha*=o.branchA==null?1:o.branchA;ctx.translate(bx,by-lerp(40,0,bq)+Math.sin(Math.PI*bq)*-30);ctx.rotate(ba);
-  ctx.fillStyle="#2e4a3a";[[-80,-40],[90,-36],[0,-20]].forEach(([x,y],k)=>{ctx.beginPath();ctx.ellipse(x,y,56,30,0,0,TAU);ctx.fill();});
-  ctx.strokeStyle="#6a4e38";ctx.lineWidth=12;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(-120,0);ctx.lineTo(120,0);ctx.moveTo(-30,0);ctx.lineTo(-70,-40);ctx.moveTo(40,0);ctx.lineTo(90,-34);ctx.stroke();
-  ctx.strokeStyle="rgba(255,226,180,0.25)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-118,-4);ctx.lineTo(118,-4);ctx.stroke();ctx.restore();
-  // the moment it lands: a flash on the line (o.flash, 0..1)
-  if(o.flash>0)glow(ctx,600,470,110,[255,214,150],0.7*o.flash);
+  ctx.save();ctx.strokeStyle="rgba(120,120,136,0.6)";ctx.lineWidth=1.4;D5_HOUSES.forEach(x=>{const p=x<P[1]?P[0]:x>P[2]?P[2]:P[1];ctx.beginPath();ctx.moveTo(p,py+6);ctx.quadraticCurveTo((p+x)/2,py+70,x,690);ctx.stroke();});ctx.restore();
+  // the tree: a tapering trunk and limbs, and overlapping masses of leaves that move in the wind
+  const tx=190,by=860,sw=Math.sin(t*1.7)*5*wind;
+  [[-150,-570,112,0],[30,-630,120,1],[-40,-530,104,2]].forEach(([dx,dy,r,k])=>d5_lobe(ctx,tx+dx+sw*0.6,by+dy,r,k+1,t,wind,0.35));
+  d5_wood(ctx,tx,by,tx+6,by-470,46,22,8);d5_wood(ctx,tx+2,by-400,tx-150+sw*0.5,by-560,20,7,-14);d5_wood(ctx,tx+6,by-450,tx+24+sw*0.6,by-640,18,6,10);
+  ctx.fillStyle="rgba(255,236,200,0.08)";ctx.fillRect(tx-20,by-460,6,440);
+  [[-190,-530,90,3],[-90,-610,102,4],[70,-570,98,5],[-20,-680,84,6],[120,-650,76,7]].forEach(([dx,dy,r,k])=>d5_lobe(ctx,tx+dx+sw,by+dy,r,k,t,wind,0.85));
+  // the limb, in its own frame about its hinge on the trunk, with its leaves; once broken, a splintered stub stays (or a sawn one)
+  const Hx=Lb.H[0],Hy=Lb.H[1],L=Lb.L,broke=s_>=0;
+  if(broke||cl>0){ctx.save();ctx.translate(Hx,Hy);ctx.rotate(Lb.a0);ctx.fillStyle="#6e5240";ctx.beginPath();ctx.moveTo(0,-11);ctx.lineTo(16,-9);ctx.lineTo(cl>0?18:24,-2);ctx.lineTo(cl>0?18:14,3);ctx.lineTo(cl>0?18:22,8);ctx.lineTo(0,11);ctx.closePath();ctx.fill();
+    ctx.fillStyle=cl>0?"#d8c09a":"#c8a678";if(cl>0)ctx.fillRect(15,-9,4,17);else{ctx.beginPath();ctx.moveTo(14,-8);ctx.lineTo(24,-2);ctx.lineTo(14,3);ctx.lineTo(22,8);ctx.lineTo(12,6);ctx.closePath();ctx.fill();}ctx.restore();
+    if(broke&&s_<0.35)glow(ctx,Hx+10,Hy,50,[255,226,180],0.5*(1-s_/0.35));}
+  if(cl<1)withA(ctx,1-cl,()=>{ctx.save();ctx.translate(Hx,Hy);ctx.rotate(a);
+    d5_wood(ctx,0,0,L,0,22,5,-10);d5_wood(ctx,L*0.42,-3,L*0.66,-60,9,3,6);d5_wood(ctx,L*0.68,2,L*0.88,48,7,3,-5);
+    [[L*0.62,-58,62,11],[L*0.86,-26,72,12],[L*0.98,14,56,13],[L*0.78,42,50,14]].forEach(([x,y,r,k])=>d5_lobe(ctx,x,y,r,k,t,broke?1.6:wind,0.75));ctx.restore();});
+  // leaves torn off as it falls, drifting down
+  if(broke&&cl<1)for(let i=0;i<18;i++){const t0=0.05+hash(i,140)*0.9,tau=s_-t0;if(tau<0)continue;const f=0.4+0.55*hash(i,141),a0=Lb.a0+(Lb.aL-Lb.a0)*Math.min(1,(t0/0.85)**2),
+      sx=Hx+Math.cos(a0)*L*f,sy=Hy+Math.sin(a0)*L*f-20,x=sx+tau*(30+40*hash(i,142))+Math.sin(tau*3+i)*18,y=Math.min(852,sy+60*tau+140*tau*tau),fade=1-clamp((tau-2.6)/1.2,0,1);if(fade<=0)continue;
+    withA(ctx,fade,()=>{ctx.save();ctx.translate(x,y);ctx.rotate(tau*4+i);ctx.fillStyle=rgba(mix([60,92,70],[110,140,100],hash(i,143)),1);ctx.beginPath();ctx.ellipse(0,0,8,4,0,0,TAU);ctx.fill();ctx.restore();});}
+  // the moment the line snaps: a flash where the limb lies on it (o.flash, 0..1)
+  if(o.flash>0)glow(ctx,xc,d5_lineY(xc)+30,120,[255,214,150],0.75*o.flash);
   // the crew's van, once it comes (o.van 0..1), with its light turning
   if(o.van>0)withA(ctx,o.van,()=>{const vx=(P[0]+P[1])/2+260,vy=856;ctx.fillStyle="#d8d2c4";rr(ctx,vx-80,vy-70,160,64,10);ctx.fill();ctx.fillStyle="#2a3038";ctx.fillRect(vx+40,vy-62,30,24);ctx.fillStyle="#e2a040";ctx.fillRect(vx-80,vy-34,160,8);
     [[vx-50,vy],[vx+50,vy]].forEach(([wx,wy])=>{ctx.fillStyle="#141418";ctx.beginPath();ctx.arc(wx,wy-4,13,0,TAU);ctx.fill();});const bl=0.5+0.5*Math.sin(t*6);glow(ctx,vx,vy-78,46,[255,180,80],0.5*bl);ctx.fillStyle=rgba([255,190,90],0.6+0.4*bl);ctx.fillRect(vx-10,vy-80,20,10);});}

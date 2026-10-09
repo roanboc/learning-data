@@ -1,6 +1,6 @@
 # Enterprise architecture, for data
 
-*Proposal for a series on enterprise architecture and why it matters for data, v0.1. The folder is named after the topic; the series title is still open. Status: proposed, 7 October 2026. *Day one*, *Who it serves, and how it pays*, *Why it moves* and *What it must be able to do* are built ([series README](README.md)); they aren't on the site yet.*
+*Proposal for a series on enterprise architecture and why it matters for data, v0.1. The folder is named after the topic; the series title is still open. Status: proposed, 7 October 2026. *Day one*, *Who it serves, and how it pays*, *Why it moves*, *What it must be able to do* and *How value reaches people* are built ([series README](README.md)); they aren't on the site yet.*
 
 ## Decided
 
@@ -17,6 +17,7 @@
 | 7 October 2026 | The series' look: drafts are paper on a wall, the confirmed model is glass in the layers' conventional colours. Its sound: nylon-string plucks and a soft flute over warm pads, and its own mark, 1-3-5-8. A second character, Grace Achieng, owns network operations. |
 | 7 October 2026 | *Who it serves, and how it pays* opens in 1882 with Edison's Pearl Street customers, who wanted light, not electricity. Farah Siddiqui, the customer advocate, joins the cast. Fit is a rule: an unmatched pain is a missing capability or a customer not served, and the canvas says which. |
 | 8 October 2026 | *What it must be able to do* opens in the Andes in the 1400s with the chasqui relay runners: the runners changed and the roads were rebuilt, and the ability to move a message stayed. Tomás's first capability map is the org chart again; the test is whether a box survives a restructure, a new system and a new process. Three levels, one owner each (a person), a heat map with evidence, and depth only where it hurts. Its present is in F major, and its past has a dark harp, with no borrowed Andean sound. |
+| 8 October 2026 | *How value reaches people* opens in Mumbai with the dabbawalas, told in the past tense for its scale: about 5,000 dabbawalas and some 200,000 lunches a day were figures from before the pandemic, and the network has shrunk since. The story follows one call on a stormy night, from the household's side (a value stream, with Farah) to the one step that needs detail (who goes first, drawn in BPMN), and ends on the facts that rule needs. Its present is in B-flat major, the storm in G minor, and Mumbai has a warm electric piano, with no borrowed Indian sound. |
 
 ## The brief
 
@@ -125,7 +126,7 @@ Each film opens with a short, true story that holds its idea, then cuts to Tomá
 | 2 | Edison's Pearl Street customers | United States | 1882 |
 | 3 | The Northeast blackout | United States and Canada | 1965 |
 | 4 | The Inca's chasqui runners | The Andes | 1400s |
-| 5 | Mumbai's dabbawalas | India | Today |
+| 5 | Mumbai's dabbawalas | India | Since 1890; figures from before 2020 |
 | 6 | Two frequencies in one country | Japan | 1890s and 2011 |
 | 7 | A morning in the utility's region | The series' fictional region | Imagined, 2045 |
 | 8 | Fishermen with mobile phones | Kerala, India | 1997–2001 |
@@ -190,6 +191,8 @@ Chapter by chapter, with narration: [the script](4-what-it-must-do/script.md).
 **Ideas.** Value streams from the customer's view; their stages mapped to capabilities. Processes at levels 1 to 4, grouped into strategic, operational, support and evaluation. SIPOC for a process's edges. Going deeper only where a rule depends on order, state or timing.
 
 **On screen.** Restore supply and meter to cash as value streams; one process opened to its activities.
+
+Chapter by chapter, with narration: [the script](5-how-value-reaches-people/script.md).
 
 ### 6. Who does it, and where meaning changes
 

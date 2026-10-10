@@ -1,16 +1,16 @@
 {
   "title": "The map before the data",
   "title_es": "El mapa antes de los datos",
-  "films": ["1-day-one", "2-who-it-serves", "3-why-it-moves", "4-what-it-must-do", "5-how-value-reaches-people"],
+  "films": ["1-day-one", "2-who-it-serves", "3-why-it-moves", "4-what-it-must-do", "5-how-value-reaches-people", "6-who-does-it"],
   "planned": 11,
-  "lead": "A series on enterprise architecture, and why it matters for data. Tomás, a new enterprise architect at a publicly owned energy utility, learns how the place works before he asks what its data should answer: who it serves, why it must change, what it must be able to do, and how value reaches people.",
-  "lead_es": "Una serie sobre arquitectura empresarial, y por qué importa para los datos. Tomás, arquitecto empresarial recién llegado a una empresa pública de energía, aprende cómo funciona antes de preguntar qué deberían responder sus datos: a quién sirve, por qué tiene que cambiar, qué tiene que ser capaz de hacer y cómo llega el valor a la gente.",
-  "description": "Short films on enterprise architecture for data: an organisation in layers, its customers and offerings, why it must change, its capabilities, its value streams and processes, and why every data rule needs a home on the map.",
-  "description_es": "Películas cortas sobre arquitectura empresarial para datos: una organización en capas, sus clientes y ofertas, por qué tiene que cambiar, sus capacidades, sus flujos de valor y procesos, y por qué cada regla de datos necesita un lugar en el mapa.",
+  "lead": "A series on enterprise architecture, and why it matters for data. Tomás, a new enterprise architect at a publicly owned energy utility, learns how the place works before he asks what its data should answer: who it serves, why it must change, what it must be able to do, how value reaches people, and who does the work.",
+  "lead_es": "Una serie sobre arquitectura empresarial, y por qué importa para los datos. Tomás, arquitecto empresarial recién llegado a una empresa pública de energía, aprende cómo funciona antes de preguntar qué deberían responder sus datos: a quién sirve, por qué tiene que cambiar, qué tiene que ser capaz de hacer, cómo llega el valor a la gente y quién hace el trabajo.",
+  "description": "Short films on enterprise architecture for data: an organisation in layers, its customers and offerings, why it must change, its capabilities, its value streams and processes, who does the work and where meaning changes, and why every data rule needs a home on the map.",
+  "description_es": "Películas cortas sobre arquitectura empresarial para datos: una organización en capas, sus clientes y ofertas, por qué tiene que cambiar, sus capacidades, sus flujos de valor y procesos, quién hace el trabajo y dónde cambia el significado, y por qué cada regla de datos necesita un lugar en el mapa.",
   "card": "A new enterprise architect maps a public energy utility, layer by layer, before asking what its data should answer.",
   "card_es": "Un arquitecto empresarial recién llegado mapea una empresa pública de energía, capa por capa, antes de preguntar qué deberían responder sus datos.",
-  "order": "Watch them in order: each film adds a layer to the map. Five of eleven films are out.",
-  "order_es": "Míralas en orden: cada película agrega una capa al mapa. Ya hay cinco de once películas.",
+  "order": "Watch them in order: each film adds a layer to the map. Six of eleven films are out.",
+  "order_es": "Míralas en orden: cada película agrega una capa al mapa. Ya hay seis de once películas.",
   "thread_h": "One thread: the first weeks",
   "thread_h_es": "Un hilo: las primeras semanas",
   "thread": "Day one is a badge, an org chart, a list of 140 systems and an invitation to a meeting about “the transition program”. Film by film, Tomás builds a map of the utility, from why it exists down to what runs it. Only then can he say which questions it needs to answer, where each data rule belongs, and what a change in strategy means for the data.",
@@ -22,21 +22,22 @@
     ["Edison's customers on Pearl Street, 1882", "People buy what an offering does for them: light, not electricity."],
     ["The north-east blackout, 1965", "When no one sees the whole, shared rules hold it together."],
     ["The Inca's relay runners, the Andes, 1400s", "Runners and roads change; the ability to move a message stays."],
-    ["Mumbai's dabbawalas, since 1890", "Value reaches people through hand-offs, and the detail lives there."]
+    ["Mumbai's dabbawalas, since 1890", "Value reaches people through hand-offs, and the detail lives there."],
+    ["Japan's two frequencies, 1890s and 2011", "The same word can mean something different on each side of a line; what crosses must be translated."]
   ],
   "past_es": [
     ["El catastro de Domesday, Inglaterra, 1086", "Antes de gobernar un lugar, hay que saber qué es."],
     ["Los clientes de Edison en Pearl Street, 1882", "La gente compra lo que una oferta hace por ella: luz, no electricidad."],
     ["El apagón del noreste, 1965", "Cuando nadie ve el conjunto, las reglas compartidas lo sostienen."],
     ["Los corredores de relevo incas, los Andes, siglo XV", "Cambian los corredores y los caminos; la capacidad de llevar un mensaje se queda."],
-    ["Los dabbawalas de Mumbai, desde 1890", "El valor llega a la gente a través de traspasos, y el detalle vive ahí."]
+    ["Los dabbawalas de Mumbai, desde 1890", "El valor llega a la gente a través de traspasos, y el detalle vive ahí."],
+    ["Las dos frecuencias de Japón, década de 1890 y 2011", "La misma palabra puede significar algo distinto a cada lado de una línea; lo que cruza hay que traducirlo."]
   ],
   "coming_h": "Still to come",
   "coming_h_es": "Lo que viene",
-  "coming_p": "Six more films: two more to understand the utility, then four on what the map does for data.",
-  "coming_p_es": "Seis películas más: dos más para entender la empresa, y luego cuatro sobre lo que el mapa hace por los datos.",
+  "coming_p": "Five more films: one more to understand the utility, then four on what the map does for data.",
+  "coming_p_es": "Cinco películas más: una más para entender la empresa, y luego cuatro sobre lo que el mapa hace por los datos.",
   "coming": [
-    [6, "Who does it, and where meaning changes", "actors, roles and domains"],
     [7, "Today, and where it's going", "applications, technology and the path to a target"],
     [8, "Now the questions appear", "decisions, questions and measures"],
     [9, "Rules with a home", "information: objects, owners and rules"],
@@ -44,7 +45,6 @@
     [11, "A map people and agents can read", "the model as something kept, not drawn once"]
   ],
   "coming_es": [
-    [6, "Quién lo hace, y dónde cambia el significado", "actores, roles y dominios"],
     [7, "Hoy, y hacia dónde va", "aplicaciones, tecnología y el camino a un objetivo"],
     [8, "Ahora aparecen las preguntas", "decisiones, preguntas y medidas"],
     [9, "Reglas con un lugar", "información: objetos, dueños y reglas"],

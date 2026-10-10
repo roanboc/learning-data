@@ -1,6 +1,6 @@
 # Enterprise architecture, for data
 
-*Proposal for a series on enterprise architecture and why it matters for data, v0.1. The folder is named after the topic; the series title is still open. Status: proposed, 7 October 2026. *Day one*, *Who it serves, and how it pays*, *Why it moves*, *What it must be able to do* and *How value reaches people* are built ([series README](README.md)); they aren't on the site yet.*
+*Proposal for a series on enterprise architecture and why it matters for data, v0.1. The folder is named after the topic; the series title is still open. Status: proposed, 7 October 2026. *Day one*, *Who it serves, and how it pays*, *Why it moves*, *What it must be able to do*, *How value reaches people* and *Who does it, and where meaning changes* are built and on the site ([series README](README.md)).*
 
 ## Decided
 
@@ -19,6 +19,7 @@
 | 8 October 2026 | *What it must be able to do* opens in the Andes in the 1400s with the chasqui relay runners: the runners changed and the roads were rebuilt, and the ability to move a message stayed. Tomás's first capability map is the org chart again; the test is whether a box survives a restructure, a new system and a new process. Three levels, one owner each (a person), a heat map with evidence, and depth only where it hurts. Its present is in F major, and its past has a dark harp, with no borrowed Andean sound. |
 | 8 October 2026 | *How value reaches people* opens in Mumbai with the dabbawalas, told in the past tense for its scale: about 5,000 dabbawalas and some 200,000 lunches a day were figures from before the pandemic, and the network has shrunk since. The story follows one call on a stormy night, from the household's side (a value stream, with Farah) to the one step that needs detail (who goes first, drawn in BPMN), and ends on the facts that rule needs. Its present is in B-flat major, the storm in G minor, and Mumbai has a warm electric piano, with no borrowed Indian sound. |
 | 9 October 2026 | On the site, under the topic *Enterprise architecture*, with Spanish pages. Labs and scenarios will cover the whole series, not each film as in the other series: one set, drawn from every film's ideas (each script's *Labs (candidates)* feed it), later. Until then, each film has three Pause and think questions. |
+| 10 October 2026 | *Who does it, and where meaning changes* opens in Japan with its two frequencies: Tokyo's German generators at 50 Hz and Osaka's American ones at 60 Hz in the 1890s, and in 2011 the converters between them too few to carry the west's spare power east. Roles do the work and actors fill them: people, teams, a contractor under a contract, and one AI agent that triages outage reports, with its rights written down and Grace as its owner. "Customer" means an account to retail and a connection point to the network; the two are domains, kept apart by a wall, and what crosses is a short, agreed list. Ama, the regulatory lead, explains the wall; the head of retail stays unseen. Its present is in G major, and Japan has a soft marimba over two low hums a minor third apart, with no borrowed Japanese sound. |
 
 ## The brief
 
@@ -205,6 +206,8 @@ Chapter by chapter, with narration: [the script](5-how-value-reaches-people/scri
 **Ideas.** Actors, roles and organisational units; partners and contracts. Domains as organisations in their own right. Meaning changes at a domain's edge; translate there, instead of forcing one definition everywhere. One AI actor appears: an agent that triages outage reports, with its autonomy and decision rights written down.
 
 **On screen.** Two domains, one word, two meanings, and the wall between them.
+
+Chapter by chapter, with narration: [the script](6-who-does-it/script.md).
 
 ### 7. Today, and where it's going
 

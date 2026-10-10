@@ -1,0 +1,29 @@
+{
+  "key": "who-does-it",
+  "title": "Who does it, and where meaning changes",
+  "sub": "The map before the data, a series on enterprise architecture and why it matters for data: who does the work (roles, the people, teams, partners and agents who fill them, and the rights each one has), and domains: parts of the organisation with their own customers and words, where meaning changes at the edge, and what crosses it is translated.",
+  "howto": "Paper notes on a wall are drafts; glass in the layers' colours is the confirmed model. Yellow is the business layer, where actors and roles live; blue is the network's domain, rose is retail's. Cyan outlines the technical side, gold the business side.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": ["two", "convert", 1.5],
+  "say": [
+    [
+      "\\bTomás's\\b",
+      "Toh-mahs's"
+    ],
+    [
+      "\\bTomás\\b",
+      "Toh-mahs"
+    ],
+    [
+      "\\bAma\\b",
+      "Ah-mah"
+    ],
+    [
+      "\\bPriya\\b",
+      "Pree-yah"
+    ]
+  ]
+}

@@ -1,0 +1,183 @@
+1
+00:00:01,400 --> 00:00:09,949
+Japan, the 1890s. Tokyo buys its generators from Germany. They make power at fifty cycles a second.
+
+2
+00:00:11,149 --> 00:00:13,721
+Osaka buys American ones, at sixty.
+
+3
+00:00:15,121 --> 00:00:22,248
+The two grids grow until they meet in the middle of the country. Both sides call it power, but they can't simply be joined.
+
+4
+00:00:23,748 --> 00:00:33,134
+In March 2011, after the earthquake and tsunami, the east loses a large share of its power stations. The west has power to spare.
+
+5
+00:00:34,534 --> 00:00:43,471
+But it can send east only what a few converter stations can translate: about one gigawatt. Around Tokyo, the power is cut in turns.
+
+6
+00:00:45,071 --> 00:00:52,254
+Making one side match the other has been studied, and judged far too costly. So Japan builds more converters.
+
+7
+00:00:53,554 --> 00:01:00,981
+The same word means something different on each side of a line. What crosses is translated at the edge, and that's where it can fail.
+
+8
+00:01:08,381 --> 00:01:12,428
+Tomás's next note asks who does the work, and where meaning changes.
+
+9
+00:01:14,028 --> 00:01:20,303
+He writes a name on each step of the night on Hill Street. Priya took the call. Sam decided who went first.
+
+10
+00:01:22,103 --> 00:01:26,460
+Grace crosses the names out. Next week, someone else is on the night shift.
+
+11
+00:01:28,160 --> 00:01:32,738
+A step is done by a role: the call-taker, the duty controller, the crew leader.
+
+12
+00:01:34,438 --> 00:01:39,979
+Whoever fills a role is an actor: a person, or a team. Actors come and go; roles stay.
+
+13
+00:01:43,179 --> 00:01:46,790
+Roles sit in teams: the contact centre, the control room.
+
+14
+00:01:48,090 --> 00:01:53,372
+But the crew that fixed Hill Street isn't the utility's. It's a contractor's: a partner.
+
+15
+00:01:54,872 --> 00:02:01,498
+What a partner must do is written in a contract: on site within two hours, under the utility's safety rules.
+
+16
+00:02:03,098 --> 00:02:08,559
+Partners change. The contract goes on the map, because it says what the next one must do too.
+
+17
+00:02:11,259 --> 00:02:14,320
+One more actor worked that night, and it isn't a person.
+
+18
+00:02:15,620 --> 00:02:22,387
+An AI agent reads every outage report as it arrives: calls, texts, alarms from smart meters.
+
+19
+00:02:23,587 --> 00:02:27,074
+It groups them into faults, and proposes which matters most.
+
+20
+00:02:28,374 --> 00:02:34,463
+Its rights are written down, like anyone's. It may group reports and propose. It may not send a crew.
+
+21
+00:02:35,963 --> 00:02:43,418
+A wire down, or someone on life support, goes straight to the duty controller. The agent recommends; a person decides.
+
+22
+00:02:46,118 --> 00:02:50,498
+Then Tomás asks a simple question: how many customers do we have?
+
+23
+00:02:51,898 --> 00:02:57,760
+Retail says three hundred and ten thousand: people and businesses with an account, who pay a bill.
+
+24
+00:02:59,160 --> 00:03:07,780
+The network says five hundred and forty thousand: connection points, the places where power is delivered, whichever retailer they buy from.
+
+25
+00:03:09,280 --> 00:03:17,794
+When a family moves out of fourteen Hill Street, retail closes one account and opens another. The network's connection point doesn't change.
+
+26
+00:03:19,394 --> 00:03:23,347
+Both numbers are right. They count different things, with the same word.
+
+27
+00:03:26,047 --> 00:03:29,755
+Ama, the regulatory lead, explains what keeps them apart.
+
+28
+00:03:30,855 --> 00:03:42,446
+In many markets, the rules separate a network from retail, even inside one group. The utility's own principle says it too: customer information stays with the business that collected it.
+
+29
+00:03:43,946 --> 00:03:51,417
+The network knows who has just applied to connect solar panels. To a retailer, that's a list of people to sell batteries to.
+
+30
+00:03:52,817 --> 00:03:53,990
+It must not cross.
+
+31
+00:03:56,690 --> 00:04:01,417
+So Tomás draws the edge. On one side, the network. On the other, retail.
+
+32
+00:04:02,717 --> 00:04:08,672
+Each is a domain: a part of the organisation, modelled as an organisation in its own right.
+
+33
+00:04:10,172 --> 00:04:19,862
+Each has its own customers, its own capabilities, and its own words. The network says connection point, feeder, outage. Retail says account, tariff, bill.
+
+34
+00:04:21,362 --> 00:04:26,021
+Meaning changes at a domain's edge. Customer is one word, for two things.
+
+35
+00:04:28,721 --> 00:04:34,377
+Tomás's first instinct is one definition of customer for everyone, kept in one place.
+
+36
+00:04:35,677 --> 00:04:40,476
+It would fit neither side. And it would carry what the network knows straight across the wall.
+
+37
+00:04:41,976 --> 00:04:49,889
+Instead, each domain keeps its own meaning, and the edge gets a translation: a short, agreed list of what crosses, and how.
+
+38
+00:04:51,289 --> 00:04:58,187
+Which connection point. Which retailer serves it. Planned outages. And who there depends on power for life support.
+
+39
+00:05:04,087 --> 00:05:08,065
+When someone on life support moves into a home, retail hears first.
+
+40
+00:05:09,765 --> 00:05:15,293
+The network must know before the next storm, because its rule for who goes first works from that list.
+
+41
+00:05:17,093 --> 00:05:20,179
+If the message is late, the rule works from the wrong list.
+
+42
+00:05:21,979 --> 00:05:27,273
+As at Japan's converters, the edge is where the translation is built, and where it can fail.
+
+43
+00:05:29,973 --> 00:05:37,556
+Grace confirms the network's roles, and the head of retail confirms theirs. Ama confirms the edge, and what may cross it.
+
+44
+00:05:38,856 --> 00:05:42,047
+The agent's rights go on the map, with an owner: Grace.
+
+45
+00:05:43,347 --> 00:05:54,375
+Tomás's note has an answer: roles do the work, and people, partners and agents fill them. Customer means two things, with a wall between them and a translation at the edge.
+
+46
+00:05:55,875 --> 00:05:59,887
+Next, at last, he opens the list of a hundred and forty systems.

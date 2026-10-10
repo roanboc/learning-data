@@ -321,6 +321,16 @@ jobs:
                        "films/analytics-engineering/shared", "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js",
                        "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
                        "films/a-sharper-sketch/source/src",
+                       "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]},
+            {"name": "Who does it, and where meaning changes", "key": "who-does-it-en",
+             "dir": "films/enterprise-architecture/6-who-does-it/source", "lang": "en",
+             "player": "dist/film.js", "site_player": "site/assets/who-does-it/film.js",
+             "video": "dist/who-does-it.mp4", "file": "who-does-it.mp4",
+             "captions": [["films/enterprise-architecture/6-who-does-it/captions/en.srt", "who-does-it.en.srt"], ["films/enterprise-architecture/6-who-does-it/captions/es.srt", "who-does-it.es.srt"]],
+             "paths": ["films/enterprise-architecture/6-who-does-it/source", ":(exclude)films/enterprise-architecture/6-who-does-it/source/src/i18n/es/captions.js", "films/enterprise-architecture/shared",
+                       "films/analytics-engineering/shared", "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js",
+                       "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
+                       "films/a-sharper-sketch/source/src",
                        "films/inner-life-of-data/source/src", "films/inner-life-of-data/source/fonts"]}
           ]
           EOF
@@ -483,7 +493,7 @@ jobs:
           - *Data for Films* and *That's not quite right*, the Making of films, on how the films are drawn and how they're made: \`data-for-films.mp4\` and \`thats-not-quite-right.mp4\` (English, with English and Spanish captions).
           - *From words to data*, seven films on data modelling, from language and meaning to keeping it true with AI: \`whats-in-a-word.mp4\`, \`older-than-the-systems.mp4\`, \`built-to-write-built-to-read.mp4\`, \`many-ways-to-read.mp4\`, \`both-at-once.mp4\`, \`meaning-machines-can-read.mp4\`, \`keeping-it-true.mp4\` (English, with English and Spanish captions).
           - *In the weeds of data crafting*, ten films for analytics engineers, from a question to tested and documented dbt models: \`declare-it-then-build-it.mp4\`, \`start-from-a-question.mp4\`, \`what-makes-it-the-same-one.mp4\`, \`one-row-of-what-and-when.mp4\`, \`promises-and-proofs.mp4\`, \`built-in-layers.mp4\`, \`who-owns-what.mp4\`, \`an-agent-on-the-team.mp4\`, \`written-once.mp4\`, \`end-to-end.mp4\` (English, with English and Spanish captions).
-          - *The map before the data*, a series on enterprise architecture and why it matters for data, five of eleven films: \`day-one.mp4\`, \`who-it-serves.mp4\`, \`why-it-moves.mp4\`, \`what-it-must-do.mp4\`, \`how-value-reaches-people.mp4\` (English, with English and Spanish captions).
+          - *The map before the data*, a series on enterprise architecture and why it matters for data, six of eleven films: \`day-one.mp4\`, \`who-it-serves.mp4\`, \`why-it-moves.mp4\`, \`what-it-must-do.mp4\`, \`how-value-reaches-people.mp4\`, \`who-does-it.mp4\` (English, with English and Spanish captions).
 
           Rendered for this release, from commit $GITHUB_SHA: ${RENDERED:-none; every video is carried over from the previous release}.
 

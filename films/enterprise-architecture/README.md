@@ -4,7 +4,7 @@
 
 A new enterprise architect, Tomás, joins a publicly owned energy utility and doesn't yet know how it works, so he doesn't yet know which questions it needs to answer. Over eleven films he builds a map of it, layer by layer, from why it exists down to what runs it, and then shows what that map does for data: the questions that matter, rules with a home, a change in strategy, and a map that people and agents can read. The plan is in the [proposal](proposal.md).
 
-**Status:** five of eleven films are built and [on the site](https://roanboc.github.io/learning-data/enterprise-architecture/), each with three Pause and think questions. Labs and scenarios will come later, as one set for the whole series rather than one per film. On the site, the series sits under the topic *Enterprise architecture*.
+**Status:** six of eleven films are built and [on the site](https://roanboc.github.io/learning-data/enterprise-architecture/), each with three Pause and think questions. Labs and scenarios will come later, as one set for the whole series rather than one per film. On the site, the series sits under the topic *Enterprise architecture*.
 
 ## The films
 
@@ -16,6 +16,7 @@ A new enterprise architect, Tomás, joins a publicly owned energy utility and do
 | [Why it moves](https://roanboc.github.io/learning-data/enterprise-architecture/why-it-moves/) | Motivation | 4½ min | 10 | 3 questions | [script](3-why-it-moves/script.md) · [source](3-why-it-moves/source/README.md) |
 | [What it must be able to do](https://roanboc.github.io/learning-data/enterprise-architecture/what-it-must-do/) | Capabilities | 5½ min | 10 | 3 questions | [script](4-what-it-must-do/script.md) · [source](4-what-it-must-do/source/README.md) |
 | [How value reaches people](https://roanboc.github.io/learning-data/enterprise-architecture/how-value-reaches-people/) | Value streams and processes | 6 min | 10 | 3 questions | [script](5-how-value-reaches-people/script.md) · [source](5-how-value-reaches-people/source/README.md) |
+| [Who does it, and where meaning changes](https://roanboc.github.io/learning-data/enterprise-architecture/who-does-it/) | Actors, roles and domains | 6 min | 10 | 3 questions | [script](6-who-does-it/script.md) · [source](6-who-does-it/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound
@@ -31,7 +32,7 @@ Like the other series, each film is generated from code. The series keeps what's
 
 | File | What it holds |
 |---|---|
-| `shared/src/ea.js` | The series' components: its colours, title and end cards, the six layers (`slab`, `layerStack`), the wall, canvases and sticky notes (`wallBg`, `vpCanvas`, `bmCanvas`, `sticky`, `statusDot`), glass elements of the model (`archEl`, with ArchiMate's glyph for each kind, `archGlyph`, value streams' chevron included), the data rule card (`ruleCard`), labelled canvases to pin notes into (`vpCanvas2`, `VPC.where`, `BMC_AT`), and a camera that moves in on part of a picture (`focus`, `focusZ`) |
+| `shared/src/ea.js` | The series' components: its colours, title and end cards, the six layers (`slab`, `layerStack`), the wall, canvases and sticky notes (`wallBg`, `vpCanvas`, `bmCanvas`, `sticky`, `statusDot`), glass elements of the model (`archEl`, with ArchiMate's glyph for each kind, `archGlyph`, value streams' chevron, actors' stick figure and contracts included), the data rule card (`ruleCard`), labelled canvases to pin notes into (`vpCanvas2`, `VPC.where`, `BMC_AT`), and a camera that moves in on part of a picture (`focus`, `focusZ`) |
 | `shared/tools/legible.py` | Checks that every piece of text on screen is large enough to read on a phone, frame by frame; text marked as decoration is skipped |
 | `shared/src/people.js` | The series' people: Tomás Herrera, Grace Achieng, Farah Siddiqui and Ama Owusu, drawn like the cast of *When things go wrong* |
 | `shared/src/page.html` | The standalone player page |

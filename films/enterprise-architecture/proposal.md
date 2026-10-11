@@ -1,6 +1,6 @@
 # Enterprise architecture, for data
 
-*Proposal for a series on enterprise architecture and why it matters for data, v0.1. The folder is named after the topic; the series title is still open. Status: proposed, 7 October 2026. *Day one*, *Who it serves, and how it pays*, *Why it moves*, *What it must be able to do*, *How value reaches people* and *Who does it, and where meaning changes* are built and on the site ([series README](README.md)).*
+*Proposal for a series on enterprise architecture and why it matters for data, v0.1. The folder is named after the topic; the series title is still open. Status: proposed, 7 October 2026. *Day one*, *Who it serves, and how it pays*, *Why it moves*, *What it must be able to do*, *How value reaches people*, *Who does it, and where meaning changes* and *Today, and where it's going* are built and on the site ([series README](README.md)).*
 
 ## Decided
 
@@ -20,6 +20,7 @@
 | 8 October 2026 | *How value reaches people* opens in Mumbai with the dabbawalas, told in the past tense for its scale: about 5,000 dabbawalas and some 200,000 lunches a day were figures from before the pandemic, and the network has shrunk since. The story follows one call on a stormy night, from the household's side (a value stream, with Farah) to the one step that needs detail (who goes first, drawn in BPMN), and ends on the facts that rule needs. Its present is in B-flat major, the storm in G minor, and Mumbai has a warm electric piano, with no borrowed Indian sound. |
 | 9 October 2026 | On the site, under the topic *Enterprise architecture*, with Spanish pages. Labs and scenarios will cover the whole series, not each film as in the other series: one set, drawn from every film's ideas (each script's *Labs (candidates)* feed it), later. Until then, each film has three Pause and think questions. |
 | 10 October 2026 | *Who does it, and where meaning changes* opens in Japan with its two frequencies: Tokyo's German generators at 50 Hz and Osaka's American ones at 60 Hz in the 1890s, and in 2011 the converters between them too few to carry the west's spare power east. Roles do the work and actors fill them: people, teams, a contractor under a contract, and one AI agent that triages outage reports, with its rights written down and Grace as its owner. "Customer" means an account to retail and a connection point to the network; the two are domains, kept apart by a wall, and what crosses is a short, agreed list. Ama, the regulatory lead, explains the wall; the head of retail stays unseen. Its present is in G major, and Japan has a soft marimba over two low hums a minor third apart, with no borrowed Japanese sound. |
+| 11 October 2026 | *Today, and where it's going* opens on an imagined morning in 2045 in the utility's own region, labelled as imagined: a street trading power from its batteries, and a crew sent before a transformer fails. The 140 systems from *Day one* are placed under the capabilities they serve: three for managing outages, a spreadsheet for assessing network capacity, and one system that serves nothing. The drafts become one ArchiMate model, and Archi and LeanIX are named once. Today, the target and the path are three drawings, the path in plateaus ordered by dependency, and one decision (one outage system) is written down with why. Part one ends here: the map of how the utility works is drawn. Its present is in E-flat major, and the imagined morning has a soft kalimba in A-flat lydian. |
 
 ## The brief
 
@@ -219,6 +220,8 @@ Chapter by chapter, with narration: [the script](6-who-does-it/script.md).
 **Ideas.** The application and technology layers as a register, mapped to capabilities. Overlaps, gaps, and shadow systems. Baseline, target and transition: plateaus, gaps and the order they're closed in. Decisions recorded with why. The drafts become ArchiMate views, and each canvas block finds its element.
 
 **On screen.** The full map, layer by layer, in ArchiMate notation for the first time.
+
+Chapter by chapter, with narration: [the script](7-today-and-where-its-going/script.md).
 
 ### 8. Now the questions appear
 

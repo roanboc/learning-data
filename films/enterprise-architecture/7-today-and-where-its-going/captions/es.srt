@@ -1,0 +1,139 @@
+1
+00:00:01,400 --> 00:00:06,128
+Una mañana imaginada, en 2045, en la región de la propia empresa.
+
+2
+00:00:07,528 --> 00:00:12,898
+Mientras sale el sol, las casas de una calle intercambian electricidad de sus baterías, de casa en casa.
+
+3
+00:00:14,498 --> 00:00:21,074
+Las lecturas de un transformador empiezan a desviarse, y envían una cuadrilla antes de que falle. Nadie en la calle se entera.
+
+4
+00:00:22,674 --> 00:00:29,205
+No es un pronóstico. Es un dibujo de adónde quiere ir la empresa, hecho con el mismo cuidado que un dibujo de hoy.
+
+5
+00:00:30,705 --> 00:00:33,810
+Y hoy funciona con ciento cuarenta sistemas.
+
+6
+00:00:40,910 --> 00:00:45,416
+La siguiente nota de Tomás: ¿qué hace funcionar hoy a la empresa, y hacia dónde va?
+
+7
+00:00:46,816 --> 00:00:51,158
+El primer día, los sistemas eran una lista: lo que se había comprado en cuarenta años.
+
+8
+00:00:52,658 --> 00:01:00,383
+Ahora hay un mapa donde ubicarlos. Cada sistema va debajo de la capacidad a la que sirve, según la evidencia: quién lo usa, y para qué.
+
+9
+00:01:01,983 --> 00:01:04,161
+La mayoría queda donde uno esperaría.
+
+10
+00:01:06,861 --> 00:01:17,696
+Debajo de gestionar cortes hay tres: un sistema de cortes, un sistema de control de la red que también maneja cortes, y una herramienta de tormentas que alguien hizo en 2015.
+
+11
+00:01:19,296 --> 00:01:26,954
+Debajo de evaluar la capacidad de la red, la capacidad que duele, no hay ningún sistema: una hoja de cálculo, que lleva un solo ingeniero.
+
+12
+00:01:28,554 --> 00:01:34,182
+Y un sistema no sirve a ninguna capacidad que alguien sepa nombrar. Igual cuesta una licencia cada año.
+
+13
+00:01:35,682 --> 00:01:40,609
+Superposiciones, huecos y sistemas en la sombra: una lista nunca podría mostrarlos. Un mapa sí.
+
+14
+00:01:43,309 --> 00:01:51,983
+Debajo de las aplicaciones está la tecnología en la que funcionan: dos centros de datos, una nube y la red de radio por la que se comunican los equipos de campo.
+
+15
+00:01:53,483 --> 00:02:00,478
+Cada capa sirve a la de arriba. El negocio necesita una capacidad; las aplicaciones la sirven; la tecnología las hace funcionar.
+
+16
+00:02:01,978 --> 00:02:07,641
+Cambias una capacidad, y puedes seguirla hacia abajo. Apagas un servidor, y puedes seguirlo hacia arriba.
+
+17
+00:02:10,341 --> 00:02:15,049
+Por primera vez, los borradores se vuelven un solo modelo, con la notación de ArchiMate.
+
+18
+00:02:16,449 --> 00:02:29,386
+Cada bloque de los primeros lienzos encuentra su elemento. Un segmento de clientes se vuelve una parte interesada. Un aliviador de dolores, una capacidad. Una actividad clave, un proceso de negocio. Un recurso clave, un recurso.
+
+19
+00:02:30,986 --> 00:02:38,860
+El mapa entero, capa por capa: por qué existe la empresa, qué tiene que ser capaz de hacer, cómo fluye el trabajo, quién lo hace y qué la hace funcionar.
+
+20
+00:02:40,460 --> 00:02:45,556
+Herramientas como Archi o LeanIX pueden guardarlo. Las ideas no dependen de ellas.
+
+21
+00:02:48,256 --> 00:02:53,555
+Hacia dónde va es un segundo dibujo: el objetivo, en el mismo mapa, para poder comparar los dos.
+
+22
+00:02:55,055 --> 00:02:59,051
+Hay dos capacidades nuevas: predecir fallas e intercambiar electricidad en el barrio.
+
+23
+00:03:00,551 --> 00:03:09,189
+Un sistema de cortes en lugar de tres. Un modelo de la capacidad de la red en lugar de una hoja de cálculo. Y la licencia que nadie usa, fuera.
+
+24
+00:03:11,889 --> 00:03:17,406
+Puestos uno al lado del otro, las diferencias entre los dos son las brechas. Cada brecha es un trabajo por hacer.
+
+25
+00:03:19,006 --> 00:03:29,788
+Unir tres sistemas de cortes en uno. Construir el modelo de capacidad. Apagar el sistema que nadie usa. Agregar sensores y predecir fallas. Abrir el intercambio en el barrio.
+
+26
+00:03:32,488 --> 00:03:39,169
+El camino es un tercer dibujo: mesetas, los estados estables intermedios, y el orden en que se cierran las brechas.
+
+27
+00:03:40,669 --> 00:03:52,267
+El orden importa. Intercambiar electricidad en una calle exige saber cuánto aguanta esa calle, así que el modelo de capacidad va primero. Predecir fallas necesita sensores, así que los sensores van antes.
+
+28
+00:03:53,867 --> 00:04:03,042
+Para 2028, un sistema de cortes y un modelo de capacidad. Para 2033, la predicción de fallas. El intercambio en el barrio, después.
+
+29
+00:04:09,342 --> 00:04:16,067
+Cada decisión del camino queda escrita con su porqué: qué se decidió, qué más se consideró y quién decidió.
+
+30
+00:04:17,767 --> 00:04:26,522
+Quedarse con el sistema de cortes más nuevo, e integrar en él la herramienta de tormentas. Se consideró: quedarse con los tres, o comprar uno nuevo. Decidió Grace.
+
+31
+00:04:28,322 --> 00:04:33,506
+Dentro de tres años, alguien preguntará por qué se apagó la herramienta de tormentas. La respuesta estará ahí.
+
+32
+00:04:36,506 --> 00:04:43,411
+Grace confirma los sistemas de la red tal como están hoy. El objetivo y el camino van al directorio, como borradores.
+
+33
+00:04:44,811 --> 00:04:52,735
+La nota de Tomás tiene una respuesta: hoy, ubicado en el mapa; un objetivo, dibujado con el mismo cuidado; y un camino entre los dos, con sus razones.
+
+34
+00:04:54,235 --> 00:04:57,175
+El mapa de cómo funciona la empresa está dibujado, por ahora.
+
+35
+00:04:58,575 --> 00:05:03,671
+Ahora, por fin, puede abrir la lista de pedidos del primer día, y preguntar qué preguntas importan.

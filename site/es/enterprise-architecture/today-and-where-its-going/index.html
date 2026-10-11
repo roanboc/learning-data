@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hoy, y hacia dónde va · El mapa antes de los datos · Learning Data</title>
+<meta name="description" content="Una película sobre ubicar las aplicaciones y la tecnología debajo de las capacidades a las que sirven, encontrar superposiciones, huecos y sistemas en la sombra, reunir los borradores en un modelo de ArchiMate, y dibujar hoy, el objetivo y el camino entre ellos como dibujos separados, con mesetas, brechas y decisiones escritas con su porqué.">
+<meta property="og:title" content="Hoy, y hacia dónde va · El mapa antes de los datos · Learning Data"><meta property="og:description" content="Una calle imaginada en 2045. Los 140 sistemas de hoy en el mapa. Un objetivo, y el camino hacia él, con sus razones."><meta property="og:image" content="https://roanboc.github.io/learning-data/assets/today-and-where-its-going-poster.jpg"><meta property="og:locale" content="es_419">
+<link rel="alternate" hreflang="en" href="https://roanboc.github.io/learning-data/enterprise-architecture/today-and-where-its-going/"><link rel="alternate" hreflang="es" href="https://roanboc.github.io/learning-data/es/enterprise-architecture/today-and-where-its-going/">
+<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../../"><img src="../../../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../../">Empieza aquí</a><a href="../../topics/" aria-current="true">Temas</a><a href="../../journey/">Cómo se hizo</a><span class="lang" role="group" aria-label="Idioma"><a href="../../../enterprise-architecture/today-and-where-its-going/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span></nav></div></header>
+<main>
+<section class="hero cine"><div class="bg" aria-hidden="true"><img src="../../../assets/today-and-where-its-going-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow crumbs"><a href="../../topics/">Temas</a> › <a href="../../topics/#enterprise-architecture">Arquitectura empresarial</a> › <a href="../">El mapa antes de los datos</a></p>
+<h1>Hoy, y hacia dónde va: los sistemas en el mapa, un objetivo, y el camino entre los dos</h1>
+<p class="lead">Una mañana imaginada en 2045: una calle que intercambia electricidad de sus baterías, una cuadrilla enviada antes de una falla. Luego, los 140 sistemas de hoy, por fin ubicados debajo de las capacidades a las que sirven: tres para un mismo trabajo, una capacidad con solo una hoja de cálculo, y un sistema que no sirve a nada. Hoy, el objetivo y el camino son tres dibujos.</p>
+<p class="meta-row"><span>5 min</span><span>Pausa para pensar</span><span>En inglés, con subtítulos en español</span></p>
+<p class="note">La película está en inglés, con subtítulos en español. Esta página, los capítulos y las preguntas están en español.</p>
+<p class="builds-on">Amplía <a href="../who-does-it/"><i>Quién lo hace, y dónde cambia el significado</i></a></p>
+</section>
+<section class="module" id="watch" data-store="ld-today-and-where-its-going" aria-labelledby="watch-h">
+<div class="mhead"><div><h2 id="watch-h">Mira la película</h2><p>Presiona Reproducir, o salta a un capítulo. Activa <b>Pausa para pensar</b> y la película se detiene con una pregunta al final de los capítulos.</p></div></div>
+<div class="player" data-labs="">
+<audio id="snd" preload="metadata" src="../../../assets/today-and-where-its-going/soundtrack.mp3"></audio><div class="poster"><img src="../../../assets/today-and-where-its-going-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Ver la película · 5 min</button><button type="button" class="think-badge" data-think>Ver con pausas para pensar</button></div></div><canvas id="film" width="1280" height="720" aria-label="Película animada, en inglés: Today, and where it's going"></canvas>
+<div class="bar"><button id="play">Reproducir</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="time">0:00</span><button id="think" aria-pressed="false" title="Detenerse al final de tres capítulos, con una pregunta cada vez">Pausa para pensar</button><button id="cc" class="on" aria-pressed="true">Subtítulos</button><button id="fs">Pantalla completa</button></div>
+</div>
+<div class="chapters" id="chapters" aria-label="Capítulos"></div>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/today-and-where-its-going.mp4">Descargar el video (en inglés)</a><a href="https://github.com/roanboc/learning-data/tree/main/films/enterprise-architecture/7-today-and-where-its-going/captions">Archivos de subtítulos</a><a href="https://github.com/roanboc/learning-data/blob/main/films/enterprise-architecture/7-today-and-where-its-going/script.md" hreflang="en">Leer el guion (en inglés)</a></p>
+<template id="next-panel"><div class="think-card"><p class="think-k">¿Y ahora?</p><h3>Viste hoy, el objetivo y el camino. Vienen más películas de la serie.</h3>
+<div class="next-opts"><a class="btn primary" href="#think-it-through">Piénsalo: 3 preguntas</a><a class="btn" href="../">Toda la serie: El mapa antes de los datos</a></div>
+<div class="think-foot"><button type="button" class="btn" data-again>Ver de nuevo</button></div></div></template>
+</section>
+
+<section class="module" id="think-it-through" aria-labelledby="think-h">
+<div class="mhead"><div><h2 id="think-h">Piénsalo</h2><p>Las tres preguntas de Pausa para pensar, para una clase o un equipo. Abre una para ver la respuesta.</p></div></div>
+<div id="think-list"></div>
+</section>
+
+<section class="module" id="in-the-series" aria-labelledby="series-h">
+<div class="mhead"><div><h2 id="series-h">En la serie: <a href="../">El mapa antes de los datos</a></h2><p>Película 7 de 11.</p></div></div>
+<div class="topic-grid series-pn" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}'>
+<article class="topic-card">
+<img src="../../../assets/who-does-it-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">← Anterior · Película 6 de 11</p>
+<h3><a href="../who-does-it/">Quién lo hace, y dónde cambia el significado</a></h3>
+<p>Japón funciona con dos frecuencias. Una empresa tiene dos tipos de cliente. Roles, actores, y una traducción en el borde.</p>
+<p class="meta">6 min · Pausa para pensar · El mapa antes de los datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-who-does-it" hidden></p>
+</div>
+</article>
+</div>
+<ol class="series-list" aria-label="Todas las películas de la serie">
+<li><a href="../day-one/"><span class="n">1</span>El primer día</a></li>
+<li><a href="../who-it-serves/"><span class="n">2</span>A quién sirve, y cómo se paga</a></li>
+<li><a href="../why-it-moves/"><span class="n">3</span>Qué la mueve</a></li>
+<li><a href="../what-it-must-do/"><span class="n">4</span>Lo que tiene que ser capaz de hacer</a></li>
+<li><a href="../how-value-reaches-people/"><span class="n">5</span>Cómo llega el valor a la gente</a></li>
+<li><a href="../who-does-it/"><span class="n">6</span>Quién lo hace, y dónde cambia el significado</a></li>
+<li><a href="../today-and-where-its-going/" aria-current="page"><span class="n">7</span>Hoy, y hacia dónde va</a></li>
+</ol>
+</section>
+</main>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La empresa de energía, las personas, las cifras y los registros de la película son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. TOGAF y ArchiMate son marcas de The Open Group, y Zachman de Zachman International, nombradas solo para identificar esos marcos; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
+<script>window.L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla completa",fsExit:"Salir de pantalla completa"}};</script>
+<script src="../../../assets/today-and-where-its-going/captions.es.js"></script>
+<script src="../../../assets/today-and-where-its-going/film.js"></script>
+<script>/* the film is in English; its chapter buttons and the Pause and think kicker use these Spanish names */
+{const N={"morning": "Una mañana imaginada", "list": "Ciento cuarenta sistemas", "find": "Tres, ninguno, y uno de más", "layers": "Lo que la hace funcionar", "views": "Un mapa, una notación", "target": "Hacia dónde va", "gaps": "Las brechas", "path": "El camino, en orden", "why": "El porqué, por escrito", "end": "Tres dibujos"};SCENES.forEach(s=>{if(N[s.id])s.name=N[s.id];});}</script>
+<script src="../../../assets/today-and-where-its-going/think.es.js"></script>
+<script src="../../../assets/learn/think.js"></script>
+<script src="../../../assets/learn/path.js"></script>
+<script src="../../../assets/learn/next.js"></script>
+<script src="../../../assets/ambient.js"></script>
+</body>
+</html>

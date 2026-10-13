@@ -39,4 +39,4 @@ cp src/i18n/es/captions.js ../../../site/assets/film3/captions.es.js
 
 `site-tools/check_site.py` checks that the copy matches, and that the Spanish page loads it before the film.
 
-A change to a shared component in `../../inner-life-of-data/source/src/` also changes this film: run `tools/check.py` here after changing one.
+A change to a shared component in `../../inner-life-of-data/source/src/`, or to the phone layer (`../../from-words-to-data/shared/src/phone.js`), also changes this film: run `tools/check.py` and `tools/legible.py --overlaps` here after changing one.

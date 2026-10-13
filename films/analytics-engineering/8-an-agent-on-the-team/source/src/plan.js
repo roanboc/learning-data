@@ -13,7 +13,7 @@ const AG_AMB=[255,200,70],AG_RED=BAD,AG_GRN=GOOD,AG_PLN=[255,170,110],AG_INK="rg
 // o.lit {i:0..1} highlights a line (o.litCol); o.lineCol {i:colour}; o.strike {i:0..1} strikes a line through in red;
 // o.dim {i:0..1} fades a line; o.diff colours "+" lines teal and "-" lines red; o.label overrides the label ("" for none).
 function ag_code(ctx,x,y,w,name,lines,o){o=o||{};const a=o.a==null?1:o.a,sz=o.size||18,lh=o.lh||Math.round(sz*1.5),col=o.edge||[170,205,255];
-  const lab=o.label===undefined?AG_DUCK:o.label,draft=!!o.draft||lab===AG_DRAFT,dbx=lab===AG_DBX,lc=draft?AG_AMB:dbx?[150,176,214]:WEED,nw=tw(ctx,name,18,500,"mono"),lw=lab?tw(ctx,lab,18,700)+28:0,two=!!lab&&nw+lw+64>w,hh=two?88:56,h=o.h||(hh+18+lines.length*lh);
+  const lab=o.label===undefined?AG_DUCK:o.label,draft=!!o.draft||lab===AG_DRAFT,dbx=lab===AG_DBX,lc=draft?AG_AMB:dbx?[150,176,214]:WEED,ls=phSz(ctx,18),nw=tw(ctx,name,ls,500,"mono"),lw=lab?tw(ctx,lab,ls,700)+28:0,two=!!lab&&nw+lw+64>w,hh=two?88:56,h=o.h||(hh+18+lines.length*lh);
   if(a<=0.01)return h;
   withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,col,{glow:12+10*(o.hi||0),ea:0.65,fill:"rgba(6,10,20,0.96)"});
     if(draft){ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(AG_AMB,0.75);ctx.lineWidth=2;rr(ctx,x-7,y-7,w+14,h+14,18);ctx.stroke();ctx.restore();}
@@ -51,7 +51,8 @@ const AG_DAYS=[["1","61.42.18","63.16.40","64.51.05","66.25.33"],["2","73.37.52"
   ["5","109.06.47","110.38.30","112.10.12","113.41.51"],["6","120.30.20","122.01.29","123.32.37","125.03.42"],["7","131.46.02","133.16.44","134.47.25","136.18.04"]];
 // a page of the almanac: laid paper with a heading, the Moon's glyph, and columns of figures drawn up as p goes 0..1 (column by column).
 // o.wrong: [row,col] of a figure computed wrongly; o.fix (0..1) writes the corrected figure over it; o.slant gives the hand
-function ag_page(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a,pos=(r,c)=>{const k=w/620,rh=(h/k-160)/(o.rows||AG_DAYS.length);return[x+(c===0?44:96+(c-1)*(w/k-150)/4+60)*k,y+(156+r*rh)*k];};if(a<=0.01)return pos;withA(ctx,a,()=>{const p=o.p==null?1:o.p,sd=o.seed||1,cols=o.cols||5;
+function ag_page(){return phAsDeco(true,()=>ag_page0.apply(this,arguments));}
+function ag_page0(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a,pos=(r,c)=>{const k=w/620,rh=(h/k-160)/(o.rows||AG_DAYS.length);return[x+(c===0?44:96+(c-1)*(w/k-150)/4+60)*k,y+(156+r*rh)*k];};if(a<=0.01)return pos;withA(ctx,a,()=>{const p=o.p==null?1:o.p,sd=o.seed||1,cols=o.cols||5;
   ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);kt_paper(ctx,0,0,w,h,t,{seed:sd,col:o.col||[236,224,196],curl:o.curl==null?0.6:o.curl,age:0.3});
   const k=w/620,hd=o.head==null?1:o.head;
   withA(ctx,hd,()=>{T(ctx,o.title||"JANUARY 1767",w/2,46*k,{w:800,size:22*k,align:"center",color:"rgba(60,40,24,0.95)"});
@@ -139,14 +140,14 @@ function ag_press(ctx,x,y,s,down,t,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.sav
 
 /* ---------- the present: the agent, the project, the process ---------- */
 // a small file chip, named, its colour on the left
-function ag_chip(ctx,x,y,s,col,a,o){o=o||{};if(a<=0.01)return 0;const sz=o.size||18,w=tw(ctx,s,sz,500,"mono")+44,h=sz+20;withA(ctx,a,()=>{if(o.hi)glow(ctx,x+w/2,y,w*0.6,col,0.3*o.hi);glass(ctx,x,y-h/2,w,h,10,col,{glow:8,ea:0.75,fill:"rgba(7,12,24,0.95)"});
+function ag_chip(ctx,x,y,s,col,a,o){o=o||{};if(a<=0.01)return 0;const sz=o.size||18,w=tw(ctx,s,phSz(ctx,sz),500,"mono")+44,h=sz+20;withA(ctx,a,()=>{if(o.hi)glow(ctx,x+w/2,y,w*0.6,col,0.3*o.hi);glass(ctx,x,y-h/2,w,h,10,col,{glow:8,ea:0.75,fill:"rgba(7,12,24,0.95)"});
   ctx.fillStyle=rgba(col,1);rr(ctx,x+12,y-6,8,12,2);ctx.fill();T(ctx,s,x+30,y+sz*0.36,{f:"mono",w:500,size:sz,color:rgba(mix(INK,col,0.35),1)});});return w;}
 // the process table, as docs/process.md has it: ten rows, three of its columns; o.agent[i] and o.appr[i] light the agent's part (teal) and who approves (gold)
 const AG_PROC=[["Scope and meaning.","Drafts it from the catalog and glossary","… Mei Tanaka, registrar's office"],["Source reality.","Profiles, and proposes the mapping …","Jun Park, analytics engineer"],["Consumer output.","Drafts it from the request …","The consumer: Planning, …"],["Gaps and contracts.","Drafts both","The owner and the consumer"],
   ["Tests.","Writes them first","Jun Park, in review"],["Build.","Drafts the SQL to pass the tests","Jun Park, in review"],["Validate.","Runs them (skills/reconcile-and-diff/)","Jun Park and the owner"],["Review and ship.","Opens the pull request","A reviewer, never the agent"],["Written once.","Finds duplicated and drifted metadata","Jun Park"],["Operate and evolve.","Flags breaking changes","The owners of what depends on it"]];
 function ag_process(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=o.rh||46,h=74+38+rh*10+14;if(a<=0.01)return h;withA(ctx,a,()=>{const col=[170,205,255];glass(ctx,x,y,w,h,14,col,{glow:12,ea:0.65,fill:"rgba(6,10,20,0.96)"});
   ctx.fillStyle=rgba(col,0.9);rr(ctx,x+18,y+22,10,10,3);ctx.fill();T(ctx,"docs/process.md",x+38,y+34,{f:"mono",w:500,size:18,color:rgba(col,1)});
-  const lw=tw(ctx,AG_DUCK,18,700)+28,lx=x+w-16-lw;ctx.fillStyle="rgba(8,14,24,0.95)";rr(ctx,lx,y+13,lw,30,15);ctx.fill();ctx.strokeStyle=rgba(WEED,0.8);ctx.lineWidth=1.5;rr(ctx,lx,y+13,lw,30,15);ctx.stroke();T(ctx,AG_DUCK,lx+14,y+34,{w:700,size:18,color:rgba(WEED,1)});
+  const lw=tw(ctx,AG_DUCK,phSz(ctx,18),700)+28,lx=x+w-16-lw;ctx.fillStyle="rgba(8,14,24,0.95)";rr(ctx,lx,y+13,lw,30,15);ctx.fill();ctx.strokeStyle=rgba(WEED,0.8);ctx.lineWidth=1.5;rr(ctx,lx,y+13,lw,30,15);ctx.stroke();T(ctx,AG_DUCK,lx+14,y+34,{w:700,size:18,color:rgba(WEED,1)});
   ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+14,y+50,w-28,1.2);
   const cx=[x+24,x+72,x+0.33*w,x+0.68*w],hy=y+88;["#","Step","The agent's part","Who approves"].forEach((s,i)=>T(ctx,s,cx[i],hy,{w:800,size:19,color:rgba(i===2?KT_AI:i===3?TRUST:SOFT,1)}));
   for(let i=0;i<10;i++){const ry=y+112+i*rh,ag=o.agent?o.agent[i]||0:0,ap=o.appr?o.appr[i]||0:0,q=o.p==null?1:clamp(o.p*10-i,0,1);if(q<=0)continue;withA(ctx,q,()=>{
@@ -167,7 +168,8 @@ function ag_door(ctx,x,y,w,h,name,col,op,t,o){o=o||{};const a=o.a==null?1:o.a;if
   ctx.strokeStyle=rgba(col,1);ctx.lineWidth=3;ctx.strokeRect(x-4,y-4,w+8,h+8);
   T(ctx,name,x+w/2,y-18,{w:800,size:22,align:"center",color:rgba(col,1)});});}
 // a key card on a lanyard: the agent's own identity
-function ag_key(ctx,x,y,s,a,o){o=o||{};if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.rotate(o.rot||0);const w=270*s,h=86*s,col=o.col||KT_AI;
+function ag_key(ctx,x,y,s,a,o){o=o||{};if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.rotate(o.rot||0);const col=o.col||KT_AI,h=86*s,
+    w=Math.max(270*s,52*s+Math.max(tw(ctx,o.title||"service principal",phSz(ctx,20*s),800),tw(ctx,o.sub||"agent-credentials",phSz(ctx,18*s),500,"mono"))+(o.cross?52*s:20*s));
   glass(ctx,-w/2,-h/2,w,h,10*s,col,{glow:14,ea:0.85,fill:"rgba(7,14,22,0.96)"});ctx.fillStyle=rgba(col,0.9);rr(ctx,-w/2+12*s,-h/2+14*s,30*s,22*s,4);ctx.fill();
   T(ctx,o.title||"service principal",-w/2+52*s,-h/2+32*s,{w:800,size:20*s,color:rgba(col,1)});T(ctx,o.sub||"agent-credentials",-w/2+52*s,-h/2+60*s,{f:"mono",w:500,size:18*s,color:rgba(SOFT,1)});
   if(o.cross)cross_(ctx,w/2-26*s,-h/2+26*s,30*s,AG_RED,o.cross);ctx.restore();});}
@@ -179,14 +181,15 @@ function ag_claim(ctx,x,y,w,claim,query,result,o){o=o||{};const a=o.a==null?1:o.
   if(!o.noq&&cl>0)withA(ctx,cl,()=>{const qy=y+66+cl*6;glass(ctx,x+18,qy,w-36,46,10,[170,205,255],{glow:6,ea:0.6,fill:"rgba(6,10,20,0.96)"});T(ctx,query,x+34,qy+30,{f:"mono",w:500,size:18,color:rgba([205,225,255],0.95)});
     const ry=qy+54;glass(ctx,x+18,ry,w-36,46,10,AG_GRN,{glow:6,ea:0.6,fill:"rgba(6,14,12,0.96)"});T(ctx,result,x+34,ry+30,{f:"mono",w:500,size:18,color:rgba(AG_GRN,0.95)});
     ctx.fillStyle=rgba(SOFT,0.9);[[x+w*0.5,qy-2],[x+w*0.5,ry-2]].forEach(([cx,cy])=>{rr(ctx,cx-14,cy-6,28,12,4);ctx.fill();});});
-  glass(ctx,x,y,w,64,14,col,{glow:12,ea:0.85,fill:"rgba(6,16,18,0.97)"});T(ctx,o.kind||"claim",x+20,y+40,{w:800,size:18,color:rgba(col,1)});T(ctx,claim,x+86,y+40,{w:700,size:21,color:rgba(mix(INK,AG_GREY,gr),1)});});}
+  glass(ctx,x,y,w,64,14,col,{glow:12,ea:0.85,fill:"rgba(6,16,18,0.97)"});T(ctx,o.kind||"claim",x+20,y+40,{w:800,size:18,color:rgba(col,1)});T(ctx,claim,Math.max(x+86,x+34+tw(ctx,o.kind||"claim",phSz(ctx,18),800)),y+40,{w:700,size:21,color:rgba(mix(INK,AG_GREY,gr),1)});});}
 // a draft pull request, as a card: title, a status pill, sections typed in, checks, approvals and the merge button
 function ag_pr(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{const col=o.col||KT_AI;glass(ctx,x,y,w,h,16,col,{glow:14,ea:0.75,fill:"rgba(6,12,20,0.96)"});
-  T(ctx,"pull request",x+24,y+40,{w:700,size:18,color:rgba(SOFT,1)});T(ctx,o.title||"Tidy the learner timeline",x+24,y+76,{w:800,size:24});
-  const rd=o.ready||0,mg=o.merged||0,pill=mg>0.5?["Merged",[178,156,255]]:rd>0.5?["Ready for review",AG_GRN]:["Draft",AG_GREY],pw=tw(ctx,pill[0],18,800)+30;
-  glass(ctx,x+w-24-pw,y+20,pw,34,17,pill[1],{glow:10*Math.max(rd,mg),ea:0.85,fill:"rgba(8,12,20,0.95)"});T(ctx,pill[0],x+w-24-pw/2,y+43,{w:800,size:18,align:"center",color:rgba(pill[1],1)});
-  kt_agent(ctx,x+w-50,y+92,10,t,{a:1});T(ctx,"opened by the agent",x+w-72,y+98,{w:600,size:18,align:"right",color:rgba(KT_AI,0.95)});
-  ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+16,y+116,w-32,1.2);});}
+  const ph=phMin(ctx)>0;T(ctx,"pull request",x+24,y+40,{w:700,size:18,color:rgba(SOFT,1)});T(ctx,o.title||"Tidy the learner timeline",x+24,y+(ph?78:76),{w:800,size:24});
+  const rd=o.ready||0,mg=o.merged||0,pill=mg>0.5?["Merged",[178,156,255]]:rd>0.5?["Ready for review",AG_GRN]:["Draft",AG_GREY],pz=phSz(ctx,18),pw=tw(ctx,pill[0],pz,800)+30,ph2=Math.max(34,pz+10);
+  glass(ctx,x+w-24-pw,y+20,pw,ph2,ph2/2,pill[1],{glow:10*Math.max(rd,mg),ea:0.85,fill:"rgba(8,12,20,0.95)"});T(ctx,pill[0],x+w-24-pw/2,y+20+ph2/2+pz*0.35,{w:800,size:18,align:"center",color:rgba(pill[1],1)});
+  if(ph){kt_agent(ctx,x+38,y+108,10,t,{a:1});T(ctx,"opened by the agent",x+58,y+114,{w:600,size:18,color:rgba(KT_AI,0.95)});}
+  else{kt_agent(ctx,x+w-50,y+92,10,t,{a:1});T(ctx,"opened by the agent",x+w-72,y+98,{w:600,size:18,align:"right",color:rgba(KT_AI,0.95)});}
+  ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+16,y+(ph?132:116),w-32,1.2);});}
 
 // a balance: the mart on one pan, the census report on the other; tilt (-1..1) leans it, level at 0
 function ag_scale(ctx,cx,cy,s,tilt,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(cx,cy);ctx.scale(s,s);const an=tilt*0.16,col=[200,215,240];
@@ -207,7 +210,7 @@ function ag_stack(ctx,x,y,w,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)retu
   for(let i=0;i<n;i++){const yy=y+(n-1-i)*rh,isNew=i>=n-(o.newRows||0),reb=clamp(rf*n*1.2-i,0,1),c=isNew?nw:mix(old,nw,reb);
     ctx.fillStyle=rgba(mix([10,16,28],c,0.18),1);rr(ctx,x,yy,w,rh-6,6);ctx.fill();ctx.strokeStyle=rgba(c,0.85);ctx.lineWidth=1.8;rr(ctx,x,yy,w,rh-6,6);ctx.stroke();
     for(let k=0;k<4;k++){ctx.fillStyle=rgba(c,0.35);rr(ctx,x+14+k*(w-28)/4,yy+10,(w-28)/4-12,8,3);ctx.fill();}}
-  const ru=o.rule||0;if(ru>0&&rf<0.05){const yy=y+(n-1)*rh+rh+10-ru*(n*rh+40);withA(ctx,Math.sin(Math.PI*clamp(ru,0,1)),()=>{ctx.save();ctx.setLineDash([8,6]);ctx.strokeStyle=rgba(KT_AI,0.9);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+w+30,yy);ctx.lineTo(x+w+30,yy-40);ctx.stroke();ctx.restore();tag(ctx,x+w+44,yy-20,"changed rule",KT_AI,{size:18});});}});}
+  const ru=o.rule||0;if(ru>0&&rf<0.05){const yy=y+(n-1)*rh+rh+10-ru*(n*rh+40);withA(ctx,Math.sin(Math.PI*clamp(ru,0,1)),()=>{const tx=Math.min(x+w+44,1900-tw(ctx,"changed rule",phSz(ctx,18),700)-26);ctx.save();ctx.setLineDash([8,6]);ctx.strokeStyle=rgba(KT_AI,0.9);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(tx-14,yy);ctx.lineTo(tx-14,yy-40);ctx.stroke();ctx.restore();tag(ctx,tx,yy-20,"changed rule",KT_AI,{size:18});});}});}
 // a dashboard tooltip, a wiki page, a catalog entry, a YAML description: one card each, holding a copy of the definition
 function ag_copy(ctx,x,y,w,kind,txt,col,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{const dr=o.drift||0,h=o.h||140;
   ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(dr*0.035*Math.sin(t*0.6+(o.seed||0)));ctx.translate(-w/2,-h/2);
@@ -374,4 +377,4 @@ Object.assign(LV,{
 
 /* ---------- on a phone ----------
    The film's code cards are drawn at sizes that read, their long lines wrapped (../../../from-words-to-data/shared/src/phone.js) */
-ag_code=phCode(ag_code,{size:18,lh:s=>Math.round(s*1.5),head:(o,ctx,w,name)=>{const lab=o.label===undefined?AG_DUCK:o.label;return(!!lab&&tw(ctx,name,18,500,"mono")+tw(ctx,lab,18,700)+28+64>w?88:56)+18;},label:o=>o.label===undefined?AG_DUCK:o.label});
+ag_code=phCode(ag_code,{size:18,lh:s=>Math.round(s*1.5),head:(o,ctx,w,name)=>{const lab=o.label===undefined?AG_DUCK:o.label,ls=phSz(ctx,18);return(!!lab&&tw(ctx,name,ls,500,"mono")+tw(ctx,lab,ls,700)+28+64>w?88:56)+18;},label:o=>o.label===undefined?AG_DUCK:o.label});

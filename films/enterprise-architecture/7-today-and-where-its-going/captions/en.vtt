@@ -48,59 +48,59 @@ Each layer serves the one above. The business needs a capability; applications s
 00:02:01.978 --> 00:02:07.641
 Change a capability, and you can follow it down. Switch off a server, and you can follow it up.
 
-00:02:10.341 --> 00:02:15.049
+00:02:10.341 --> 00:02:14.899
 For the first time, the drafts become one model, in ArchiMate's notation.
 
-00:02:16.449 --> 00:02:29.386
+00:02:16.299 --> 00:02:29.236
 Each block of the early canvases finds its element. A customer segment becomes a stakeholder. A pain reliever, a capability. A key activity, a business process. A key resource, a resource.
 
-00:02:30.986 --> 00:02:38.860
+00:02:30.836 --> 00:02:38.710
 The whole map, layer by layer: why the utility exists, what it must be able to do, how the work flows, who does it, and what runs it.
 
-00:02:40.460 --> 00:02:45.556
-Tools such as Archi or LeanIX can keep it. The ideas don't depend on them.
+00:02:40.310 --> 00:02:43.871
+Modelling tools can keep it. The ideas don't depend on them.
 
-00:02:48.256 --> 00:02:53.555
+00:02:46.571 --> 00:02:51.870
 Where it's going is a second drawing: the target, on the same map, so the two can be compared.
 
-00:02:55.055 --> 00:02:59.051
+00:02:53.370 --> 00:02:57.366
 Two capabilities are new: predicting faults, and trading power locally.
 
-00:03:00.551 --> 00:03:09.189
+00:02:58.866 --> 00:03:07.504
 One outage system instead of three. A model of the network's capacity instead of a spreadsheet. And the licence nobody uses, gone.
 
-00:03:11.889 --> 00:03:17.406
+00:03:10.204 --> 00:03:15.721
 Laid side by side, the differences between the two are the gaps. Each gap is a piece of work.
 
-00:03:19.006 --> 00:03:29.788
+00:03:17.321 --> 00:03:28.103
 Merge three outage systems into one. Build the capacity model. Switch off the system nobody uses. Add sensors, and predict faults. Open local trading.
 
-00:03:32.488 --> 00:03:39.169
+00:03:30.803 --> 00:03:37.484
 The path is a third drawing: plateaus, the steady states in between, and the order in which the gaps are closed.
 
-00:03:40.669 --> 00:03:52.267
+00:03:38.984 --> 00:03:50.582
 The order matters. Trading power on a street needs to know how much that street can take, so the capacity model comes first. Predicting faults needs sensors, so the sensors come before it.
 
-00:03:53.867 --> 00:04:03.042
+00:03:52.182 --> 00:04:01.357
 By 2028, one outage system and a capacity model. By 2033, fault prediction. Local trading, after that.
 
-00:04:09.342 --> 00:04:16.067
+00:04:07.657 --> 00:04:14.382
 Each choice on the path is written down with why: what was decided, what else was considered, and who decided.
 
-00:04:17.767 --> 00:04:26.522
+00:04:16.082 --> 00:04:24.837
 Keep the newest outage system, and fold the storm tool into it. Considered: keeping all three, or buying a new one. Decided by Grace.
 
-00:04:28.322 --> 00:04:33.506
+00:04:26.637 --> 00:04:31.821
 Three years on, someone will ask why the storm tool was switched off. The answer will be there.
 
-00:04:36.506 --> 00:04:43.411
+00:04:34.821 --> 00:04:41.726
 Grace confirms the network's systems as they stand today. The target and the path go to the board, as drafts.
 
-00:04:44.811 --> 00:04:52.735
+00:04:43.126 --> 00:04:51.050
 Tomás's note has an answer: today, placed on the map; a target, drawn as carefully; and a path between them, with reasons.
 
-00:04:54.235 --> 00:04:57.175
+00:04:52.550 --> 00:04:55.490
 The map of how the utility works is drawn, for now.
 
-00:04:58.575 --> 00:05:03.671
+00:04:56.890 --> 00:05:01.986
 Now, at last, he can open the backlog from day one, and ask which questions matter.

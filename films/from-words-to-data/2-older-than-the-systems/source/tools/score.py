@@ -121,3 +121,6 @@ stamp(G('owners', 'stewards', 2.2), 0.09, 0.5)
 [pop(G('end', 'outlive', 0.3 + k * 0.55), 0.045, 0.1 + k * 0.15) for k in range(5)]
 shimmer(G('end', 'last', 0.2), 0.04, 1047); [tick(G('end', 'last', 2.0 + k * 0.2), 0.035, 0.2 + k * 0.1) for k in range(5)]
 tbell(45, G('end', 'breath', 0.3), 0.05, 0, 6.0)
+
+# PLAYBOOK.md: the whole score, music and effects, is low-passed at 2.6 kHz last, so no instrument rings above the voice
+soften()

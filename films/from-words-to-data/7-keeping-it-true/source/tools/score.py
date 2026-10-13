@@ -126,3 +126,6 @@ ping(G('remains', 'alike', 0.6), 0.05, 0); buzz(W('remains', 'alike', 'Only the 
 seal(G('end', 'claim', 0.3), 0.08, -0.4); card(W('end', 'claim', 'So is'), 0.05, 0.4)
 [pop(G('end', 'job', 0.1 + k * 0.3), 0.04, (k - 2) * 0.3) for k in range(5)]; scratch(W('end', 'job', 'write'), 0.04, 0, 0.6); stamp(W('end', 'job', 'keep'), 0.08, 0.4)
 bell(G('end', 'breath', 0.6), 0.08, 587)
+
+# PLAYBOOK.md: the whole score, music and effects, is low-passed at 2.6 kHz last, so no instrument rings above the voice
+soften()

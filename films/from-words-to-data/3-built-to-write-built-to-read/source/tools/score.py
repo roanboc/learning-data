@@ -126,3 +126,6 @@ tick(G('side', 'job', 0.2), 0.05, -0.5); node(G('side', 'job', 0.25), 0.05, 0.5,
 node(G('end', 'often', 2.6), 0.045, 0.0, 1397); node(G('end', 'often', 4.6), 0.045, 0.5, 1760); tick(G('end', 'often', 5.6), 0.04)
 [node(G('end', 'next', 3.2 + k * 0.4), 0.04, (k - 1) * 0.5, 1568 + k * 200) for k in range(3)]
 shimmer(G('end', 'breath', 0.4), 0.05, 1165)
+
+# PLAYBOOK.md: the whole score, music and effects, is low-passed at 2.6 kHz last, so no instrument rings above the voice
+soften()

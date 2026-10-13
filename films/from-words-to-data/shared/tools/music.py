@@ -547,3 +547,10 @@ def urgent(s0, s1, bpm=104, root=40, g=0.05, fade=1.2, steps=(0, 0, 7, 0), pan=0
                 put(norm((np.sin(ph) * np.exp(-x * 9)).astype(np.float32)), t0, g * 0.9 * f, 0.0)
             x = tt(0.05); put(norm(filt(_snoise(0.05), 'band', (250, 1100)) * np.exp(-x * 100)), t0 + per / 2, g * 0.45 * f, pan + 0.2)
         t0 += per; k += 1
+
+
+def soften(f=2600, order=4):
+    """the whole score, music and effects, low-passed at f (the voice isn't touched): for a film made before effects were kept
+    below about 2.5 kHz, whose instruments still ring above the voice. Call it last, after every note is placed"""
+    for b in (ML, MR, XL, XR):
+        b[:] = filt(b, 'low', f, order)

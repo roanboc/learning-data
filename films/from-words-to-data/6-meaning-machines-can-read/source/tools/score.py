@@ -116,3 +116,6 @@ sweep(G('again', 'evid', 1.0), 1.2, 0.02, 400, 700, 0.2); sweep(G('again', 'evid
 node(G('end', 'tri', 2.9), 0.05, -0.4, 1568); pop(G('end', 'tri', 4.6), 0.04, -0.4); node(G('end', 'tri', 5.0), 0.05, 0, 1760); link(G('end', 'tri', 5.2), 0.035, -0.2)
 [node(G('end', 'tri', 5.6 + k * 0.3), 0.03, (k - 0.5) * 0.6, 2093) for k in range(2)]; link(G('end', 'tri', 7.5), 0.035, 0.2); node(G('end', 'tri', 7.9), 0.05, 0.4, 1318)
 whoosh(G('end', 'next', 0.3), 1.0, 0.03); bell(G('end', 'breath', 0.6), 0.07, 523)
+
+# PLAYBOOK.md: the whole score, music and effects, is low-passed at 2.6 kHz last, so no instrument rings above the voice
+soften()

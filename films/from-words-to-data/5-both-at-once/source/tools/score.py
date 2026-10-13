@@ -154,3 +154,6 @@ page(G('questions', 'contract', 0.1), 0.045, 0.3); link(A('questions', 'contract
 # 9. the model, the two shapes, the platform, the lesson, next; the end card
 [node(G('end', 'one', 0.4 + i * 0.25), 0.045, (i - 1) * 0.5, 1319 + 220 * i) for i in range(3)]; pop(A('end', 'one', 0.3), 0.05, -0.3); pop(A('end', 'one', 0.3, 0.2), 0.05, 0.3)
 sweep(A('end', 'one', 0.55), 1.0, 0.035, 500, 1300); chime(G('end', 'tag', 0.2), 0.06, 1319); shimmer(G('end', 'next', 0.3), 0.035, 1760); bell(G('end', 'breath', 0.6), 0.08, 659)
+
+# PLAYBOOK.md: the whole score, music and effects, is low-passed at 2.6 kHz last, so no instrument rings above the voice
+soften()

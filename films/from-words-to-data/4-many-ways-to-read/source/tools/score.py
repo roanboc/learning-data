@@ -175,3 +175,6 @@ bell(G('end', 'breath', 0.6), 0.07, 698)
 
 # the band sits about 2 dB higher than the pads alone would: lift the music bus (the voice ducking still applies)
 ML *= 1.3; MR *= 1.3
+
+# PLAYBOOK.md: the whole score, music and effects, is low-passed at 2.6 kHz last, so no instrument rings above the voice
+soften()

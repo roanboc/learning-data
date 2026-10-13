@@ -10,8 +10,8 @@ ap = argparse.ArgumentParser(description=__doc__); ap.add_argument('--json'); A 
 R = pathlib.Path(__file__).resolve().parents[1]
 wf = (R / '.github' / 'workflows' / 'release.yml').read_text()
 films = json.loads(wf[wf.index("cat > films.json <<'EOF'") + 24:wf.index("\n          EOF")])
-films += [{"name": "Day one", "dir": "films/enterprise-architecture/1-day-one/source", "player": "dist/film.js"},
-          {"name": "Who it serves, and how it pays", "dir": "films/enterprise-architecture/2-who-it-serves/source", "player": "dist/film.js"}]
+films += [x for x in [{"name": "Day one", "dir": "films/enterprise-architecture/1-day-one/source", "player": "dist/film.js"},
+          {"name": "Who it serves, and how it pays", "dir": "films/enterprise-architecture/2-who-it-serves/source", "player": "dist/film.js"}] if x["dir"] not in {f["dir"] for f in films}]
 JS = """([EV])=>{const seen={};let sid="",deco=0;
   const c=document.createElement('canvas');c.width=1920;c.height=1080;const x=c.getContext('2d');
   const T0=window.T;window.T=function(ctx,s,X,Y,o){const d=deco;if(o&&o.deco)deco++;try{return T0(ctx,s,X,Y,o);}finally{deco=d;}};

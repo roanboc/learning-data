@@ -371,3 +371,7 @@ Object.assign(LV,{
     c.save();c.setLineDash([12,10]);c.strokeStyle=rgba(AG_GREY,0.8);c.lineWidth=3;rr(c,230,300,940,110,14);c.stroke();c.restore();T(c,V.q.noquery,700,370,{w:700,size:40,align:"center",color:rgba(AG_GREY,1)});
     tag(c,700,520,V.q.named,AG_RED,{align:"center",size:40});c.restore();}
 });
+
+/* ---------- on a phone ----------
+   The film's code cards are drawn at sizes that read, their long lines wrapped (../../../from-words-to-data/shared/src/phone.js) */
+ag_code=phCode(ag_code,{size:18,lh:s=>Math.round(s*1.5),head:(o,ctx,w,name)=>{const lab=o.label===undefined?AG_DUCK:o.label;return(!!lab&&tw(ctx,name,18,500,"mono")+tw(ctx,lab,18,700)+28+64>w?88:56)+18;},label:o=>o.label===undefined?AG_DUCK:o.label});

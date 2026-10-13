@@ -487,3 +487,7 @@ Object.assign(LV,{
     bl_code(c,8,106,504,"…/student/_core_student__models.yml",["      - name: credit_points_earned","        …","        data_type: int"],{size:16,lh:22,lit:{2:1},edge:TRUST});
     c.restore();}
 });
+
+/* ---------- on a phone ----------
+   The film's code cards are drawn at sizes that read, their long lines wrapped (../../../from-words-to-data/shared/src/phone.js) */
+bl_code=phCode(bl_code,{size:18,lh:()=>29,head:()=>100,label:()=>null});

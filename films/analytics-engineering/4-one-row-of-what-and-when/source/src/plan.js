@@ -439,3 +439,7 @@ Object.assign(LV,{
     c.fillStyle=rgba(RW_RED,0.35);c.fillRect(X("2026-04-03"),30,X("2026-04-04")-X("2026-04-03"),132);rw_l_dash(c,X("2026-04-03"),24,170,RW_RED,1);
     T(c,V.overlap,X("2026-04-03"),200,{w:800,size:20,align:"center",color:rgba(RW_RED,1)});rw_l_test(c,130,236,340,"versions_do_not_overlap",[],-1,{size:17});}
 });
+
+/* ---------- on a phone ----------
+   The film's code cards are drawn at sizes that read, their long lines wrapped (../../../from-words-to-data/shared/src/phone.js) */
+rw_code=phCode(rw_code,{wrap:"chars",size:19,lh:()=>30,head:(o,ctx,w,name)=>{const lab=o.label===undefined?RW_RUN:o.label;return 76+(lab&&36+tw(ctx,name,18,500,"mono")+tw(ctx,lab,18,700)+44>w?30:0);},label:o=>o.label===undefined?RW_RUN:o.label});

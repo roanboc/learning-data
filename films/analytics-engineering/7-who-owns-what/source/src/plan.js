@@ -453,3 +453,7 @@ function wo_q_pin(c,w,h,st,L){const V=L.vis;c.save();wo_fit(c,w,h,600,320);
   wo_proj(c,320,100,272,150,"planning",WO_PLN,{dash:true});["ref('credentials',","  'core_learner',","  v=1)"].forEach((s,i)=>T(c,s,336,156+i*32,{f:"mono",w:500,size:22,color:rgba(INK,1)}));
   arrowTo(c,318,130,292,48,TRUST,1,{head:12,lw:3,bend:0.1});wo_q_mark(c,456,304);c.restore();}
 Object.assign(LV,{wo_l_access,wo_l_domains,wo_l_read,wo_l_shared,wo_q_copy,wo_q_private,wo_q_read,wo_q_hash,wo_q_five,wo_q_edit,wo_q_move,wo_q_pin});
+
+/* ---------- on a phone ----------
+   The film's code cards are drawn at sizes that read, their long lines wrapped (../../../from-words-to-data/shared/src/phone.js) */
+wo_code=phCode(wo_code,{size:19,lh:s=>Math.round(s*1.5),head:(o,ctx,w,name)=>{const lab=o.label===undefined?WO_DUCK:o.label;return(!!lab&&tw(ctx,name,18,500,"mono")+tw(ctx,lab,18,700)+28+64>w?88:56)+18;},label:o=>o.label===undefined?WO_DUCK:o.label});

@@ -4,6 +4,8 @@
 # Two rules, from the first cut's review:
 #  - Nothing loops. No drum pulse, walking bass, repeated figure or random notes: the music is a bed of sustained chords that
 #    change with the chapters, so nothing in the background repeats or competes with the pictures.
+#  - The one exception is feeling: when the story turns to an error, a low, muted pulse (music.py's urgent()) rises under
+#    the scene, leans on the semitone, and fades out once the problem is caught. It stays below about 1 kHz.
 #  - Every sound is an event on screen, at the moment it appears. Each effect below uses the same timing as the picture in
 #    src/scenes.js (the same word, and the same offset), so sound and picture stay together when the voice is re-timed.
 # And everything stays low and soft: knocks, muffled keys, paper, low felt notes and a thud for a stamp, filtered below about
@@ -157,6 +159,8 @@ soft(45, W('catalog', 'gate', 'Tuned from', -0.3), 0.04, -0.4)
 #    knock); the new version's stamp (a low stamp); keys as the versions and the SQL type; the date's stamp; a knock for each model
 #    downstream; the wallet's tick (felt); the warning (a muted knock, then keys); the decision (paper) and two approvals (felt)
 bed('version', [DMAJ9, BM7, EM9, A7, GMAJ7, DMAJ9])
+# a low urgent pulse as the change would break the old column, until it becomes a new version with a date
+urgent(G('version', 'breaks', -0.2), G('version', 'date', 0.3), bpm=92, root=38, g=0.026, steps=(0, 0, 1, 0))
 knock(S0('version') + 0.6, 0.035, -0.4)
 soft(57, W('version', 'expire', 'becomes', -0.2), 0.032, 0.2)
 dknock(G('version', 'breaks'), 0.04, 0.4)

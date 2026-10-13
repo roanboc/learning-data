@@ -6,6 +6,8 @@
 # The series' rules:
 #  - Nothing loops. No pulse, walking bass, repeated figure or random notes: the bed is sustained chords that change with the
 #    chapters, so nothing in the background repeats or competes with the pictures.
+#  - The one exception is feeling: when the story is in a rush (the Savoy's kitchen at work), a low, muted pulse (music.py's
+#    urgent()) drives under the scene and fades out with it. It stays below about 1 kHz.
 #  - Every sound is an event on screen, at the moment it appears. Each effect below uses the same timing as the picture in
 #    src/scenes.js (the same word, and the same offset), so sound and picture stay together when the voice is re-timed.
 # And everything stays low and soft, filtered below about 2.5 kHz: knocks, muffled keys, paper, felt notes, thuds.
@@ -81,6 +83,8 @@ DM9 = [38, 50, 53, 57, 64]; EM7 = [40, 52, 55, 59]; GSUS = [43, 50, 55, 60, 62];
 # 1. One station, one job: the Savoy's kitchen. A knock, a thud, a knife at each station as it works; the plate slid to the pass;
 #    the chef's check; the four stations lighting in the layers' colours; the title on the cello's mark
 bed('brigade', [AM7, FMAJ7, C, G6], 0, cq('brigade', 'breath'), g=0.036, bassg=0.018)
+# the kitchen at work: a low, driving pulse under the stations, easing as the plates reach the pass
+urgent(G('brigade', 'stations', -0.3), G('brigade', 'bridge', -0.2), bpm=116, root=33, g=0.024)
 st = [W('brigade', 'stations', s) for s in ['sauces', 'roasts', 'fish', 'vegetables']]
 knock(st[0], 0.028, -0.6)                      # a spoon against the copper pan
 lowthud(st[1], 0.07)                           # the roasting tin set down

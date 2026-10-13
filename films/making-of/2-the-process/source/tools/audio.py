@@ -87,6 +87,53 @@ def buzz(s,g=0.12):x=tt(0.35);X(np.sign(np.sin(2*np.pi*110*x))*np.exp(-x*6)*0.6+
 def tone(s,g=0.24,f=660):x=tt(3.2);X((np.sin(2*np.pi*f*x)+0.2*np.sin(4*np.pi*f*x))*np.minimum(1,x/0.3)*np.exp(-x*0.8),s,g)
 def pop(s,g=0.14,pan=0.0):x=tt(0.12);X(np.sin(2*np.pi*(900+2000*x)*x)*np.exp(-x*30),s,g,pan)
 def ping(s,g=0.1):chime(s,g,1318)          # a message arriving
+# ---- soft and low (PLAYBOOK.md): the bright effects above, redefined under the same names and with the same arguments, so every
+# cue keeps its timing: a chime, a ping or a bell becomes a low felt note, a tick or a click a muffled key, a pop a wooden knock,
+# a sweep or a whoosh a breath of air, a shimmer a warm swell; everything sits below about 2 kHz. urgent() is a rhythm for the
+# moments of error or rush: it starts and stops with them, and nothing in it is bright
+from scipy.signal import butter as _butter, sosfilt as _sosfilt
+_srng=np.random.default_rng(11)
+def _flt(x,kind,f):
+    sos=_butter(2,[f[0]/(SR/2),min(0.99,f[1]/(SR/2))],btype='band',output='sos') if kind=='band' else _butter(2,min(0.99,f/(SR/2)),btype=kind,output='sos')
+    return _sosfilt(sos,x).astype(np.float32)
+def _nz(sec):return _srng.standard_normal(max(1,int(sec*SR))).astype(np.float32)
+def _nm(s):p=float(np.abs(s).max()) if len(s) else 0;return s/p if p>0 else s
+def _down(f,top=520.0):
+    while f>top:f/=2
+    return f
+def _knock(s,g=0.05,pan=0.0,f=240):x=tt(0.18);X(_nm(_flt((np.sin(2*np.pi*f*x)*np.exp(-x*38)+0.4*np.sin(2*np.pi*f*2.17*x)*np.exp(-x*60)).astype(np.float32),'low',1400)),s,g,pan)
+def _tap(s,g=0.03,pan=0.0):x=tt(0.06);X(_nm(_flt(_nz(0.06),'band',(250,1400))*np.exp(-x*90)),s,g,pan)
+def _note(f,s,g=0.04,pan=0.0,sec=2.2):
+    f=_down(f);x=tt(sec);sig=sum(np.sin(2*np.pi*f*k*x)*np.exp(-x*(1.5+1.2*k))*w for k,w in((1,1),(2,0.3),(3,0.08)))
+    X(_nm(_flt((sig*np.minimum(1,x/0.006)).astype(np.float32),'low',1800)),s,g,pan)
+def _air(s,sec=0.8,g=0.04,pan=0.0,lo=150,hi=1100):x=tt(sec);X(_flt(_nz(sec),'band',(lo,hi))*np.sin(np.pi*x/sec)**2,s,g,pan)
+def tick(s,g=0.18,pan=0):_tap(s,g*0.3,pan)
+def click(s,g=0.3,pan=0):_tap(s,g*0.25,pan)
+def chirp(s,g=0.14,pan=0.0):_note(660,s,g*0.4,pan,1.0)
+def sweep(s,sec=1.0,g=0.08,f0=500,f1=3000,pan=0.3):_air(s,sec,g*0.5,pan,160,1000)
+def whoosh(s,sec=0.9,g=0.12,pan=0.0):_air(s,sec,g*0.6,pan,120,900)
+def glitch(s,g=0.08,pan=0.0):x=tt(0.3);X(_flt((np.sign(np.sin(2*np.pi*180*x))*(np.sin(2*np.pi*23*x)>0)*np.exp(-x*7)*0.6).astype(np.float32),'low',700),s,g,pan)
+def chime(s,g=0.16,f=880,pan=0.0):_note(f,s,g*0.4,pan,2.0)
+def shimmer(s,g=0.05,pan=0.0):f=220.0;x=tt(2.8);X(((np.sin(2*np.pi*f*x)+0.5*np.sin(2*np.pi*f*1.5*x))*np.sin(np.pi*x/2.8)**2).astype(np.float32),s,g*0.6,pan)
+def bell(s,g=0.18,f=523,pan=0.0):_note(f/2,s,g*0.4,pan,3.2)
+def buzz(s,g=0.12,pan=0.0):x=tt(0.35);X(_flt((np.sign(np.sin(2*np.pi*110*x))*np.exp(-x*6)*0.6).astype(np.float32),'low',600),s,g*0.9,pan)
+def tone(s,g=0.24,f=660,pan=0.0):_note(f,s,g*0.3,pan,2.8)
+def pop(s,g=0.14,pan=0.0):_knock(s,g*0.35,pan,300)
+def ping(s,g=0.1,pan=0.0):_note(1318,s,g*0.45,pan,1.6)
+def urgent(s0,s1,bpm=104,root=40,g=0.05,fade=1.2,steps=(0,0,7,0),pan=0.0):
+    # a short, muted bass note on every beat (steps: each beat's interval above root; (0,0,1,0) leans on the semitone for an error,
+    # (0,0,7,0) drives for a rush), a soft low drum on one and three, and a muffled key on the off-beats, all under about 1 kHz
+    per=60/bpm;t0=s0;k=0
+    while t0<s1:
+        f=min(1,(t0-s0)/fade+0.06,(s1-t0)/fade)
+        if f>0:
+            fr=mf(root+steps[k%len(steps)]);x=tt(per*0.85);b=(np.sin(2*np.pi*fr*x)+0.35*np.sin(4*np.pi*fr*x))*np.exp(-x*6)*np.minimum(1,x/0.005)
+            put(ML,MR,_nm(_flt(b.astype(np.float32),'low',700)),t0,g*f,pan)
+            if k%2==0:x=tt(0.35);ph=2*np.pi*np.cumsum(48+70*np.exp(-x*26))/SR;put(ML,MR,_nm((np.sin(ph)*np.exp(-x*9)).astype(np.float32)),t0,g*0.9*f,0.0)
+            x=tt(0.05);put(ML,MR,_nm(_flt(_nz(0.05),'band',(250,1100))*np.exp(-x*100)),t0+per/2,g*0.3*f,pan+0.2)
+        t0+=per;k+=1
+# the feeling under the picture: a light, uneasy pulse while the mistakes are listed, until the person's check catches them
+urgent(G('wrong','mistakes',0.3),G('wrong','caught',0.0),bpm=84,root=36,g=0.026,steps=(0,0,1,0),fade=1.5)
 # effects
 # 1. the message types in, the three things only a person brings, the reply, the title
 [tick(G('message','brief',0.2+k*0.35),0.05,-0.3) for k in range(12)];[pop(G('message','only',1.4+k*0.9),0.08) for k in range(3)];ping(G('message','conv',2.4));shimmer(G('message','breath',0.2),0.06);tone(G('message','breath',0.3),0.07,523)

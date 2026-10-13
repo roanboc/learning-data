@@ -4,6 +4,10 @@
 # Graduation week opens on a celesta over a warm pad; the grassland has a hand-drum pulse; the rabbit hops on the marimba;
 # the four offices' boundaries each ring one note of the series' motif; the clay tablet is pressed to the frame drum.
 
+# PLAYBOOK.md: effects stay low and soft, below about 2.5 kHz. The series' soft stand-ins replace the bright ones by name (a chime
+# or a ping becomes a low felt note, a tick a muffled key, a pop a wooden knock, a sweep a breath of air), so every cue keeps its time
+globals().update(soft_palette())
+
 # chords (MIDI note numbers)
 DMAJ9 = [50, 57, 61, 64, 66]; GMAJ7 = [43, 50, 54, 59, 62]; BM7 = [47, 54, 57, 62]; A6 = [45, 52, 57, 61, 66]
 DM9 = [50, 53, 57, 60, 64]; G69 = [43, 50, 55, 59, 64]; AM7 = [45, 52, 55, 60]; CMAJ7 = [48, 55, 59, 64]; FMAJ7 = [41, 48, 52, 57]
@@ -18,9 +22,11 @@ flute(69, G('answers', 'breath', 2.3), 2.2, 0.035, 0.2)
 # 2. Kinds without words: the kalimba, in Dorian, with the choir
 prog('kinds', [DM9, G69, AM7, DM9], g=0.05, tone='choir-oo')
 motif('kinds', [DM9, G69, AM7, DM9], every=1.25, g=0.04, inst=kalimba)
-# 3. Calls that point: the grassland, with a hand-drum pulse that stops when the names begin
+# 3. Calls that point: the grassland, with a hand-drum pulse; at the alarm calls it gives way to an urgent one, leaning on the
+#    semitone, that settles once the calls have been told apart
 prog('calls', [DM9, CMAJ7, G69, DM9], g=0.045, tone='choir-ah', bassg=0.04)
-pulse(S0('calls') + 0.5, G('calls', 'names', 0), 84, [(0, framedrum, 0.05, 0), (1.5, handdrum, 0.03, 0.3), (2, framedrum, 0.035, 0), (3, handdrum, 0.03, -0.3)])
+pulse(S0('calls') + 0.5, G('calls', 'leopard', -0.2), 84, [(0, framedrum, 0.05, 0), (1.5, handdrum, 0.03, 0.3), (2, framedrum, 0.035, 0), (3, handdrum, 0.03, -0.3)])
+urgent(G('calls', 'leopard', -0.3), G('calls', 'kind', 0.4), bpm=112, root=38, g=0.034, steps=(0, 0, 1, 0))
 motif('calls', [DM9, G69], cq('calls', 'names'), every=1.6, g=0.035, inst=kalimba)
 flute(74, G('calls', 'ids', 0.5), 2.6, 0.03, -0.2); flute(69, G('calls', 'ids', 3.2), 2.8, 0.03, 0.2)
 # 4. What words add: brighter, D major, a flute line over a harp

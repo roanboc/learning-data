@@ -1288,7 +1288,7 @@ function nightWorld(ctx,t,c,o){const y=470;
   withA(ctx,o.pair,()=>{glass(ctx,380,730,660,180,18,[170,205,255],{glow:8,ea:0.45,fill:"rgba(8,14,28,0.9)"});T(ctx,"3,100 applications, copied again with new IDs",404,768,{w:700,size:19});
     appTile(ctx,404,800,30,"A-40211 · applicant 88213 · BSc Data Science · 2027");appTile(ctx,404,852,30,"A-47988 · applicant 88213 · BSc Data Science · 2027",{dup:true});});}
 scene("night",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
-  world(ctx,S);camKeys(ctx,S,[[0,600,470,1.25],[c("twice"),600,470,1.25],[c("rows")-0.2,760,500,1.05],[c("total")-0.2,960,540,1.0],[c("red"),1180,480,1.12],[c("see")-0.3,1180,480,1.12],[c("see")+1.0,960,540,1.0],[sc.dur+1,960,540,1.0]],t);
+  world(ctx,S);camKeys(ctx,S,[[0,650,470,1.18],[c("twice"),650,470,1.18],[c("rows")-0.2,760,500,1.05],[c("total")-0.2,960,540,1.0],[c("red"),1180,480,1.12],[c("see")-0.3,1180,480,1.12],[c("see")+1.0,960,540,1.0],[sc.dur+1,960,540,1.0]],t);
   const num=roll(t,c("total")+0.6,8200,11340,1.8);
   nightWorld(ctx,t,c,{restart:fin(t,c("restart")+0.4),dup:clamp((t-c("restart")-1.2)/5,0,1),checks:clamp((t-c("rows")-1.6)/3.0,0,1)*1.001,
     panel:fin(t,c("total")+0.1,0.6),num,red:fin(t,c("red")+0.2,0.5),real:fin(t,c("total")+3.2),pair:fin(t,c("see")+0.6,0.8)});

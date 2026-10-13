@@ -13,6 +13,8 @@ function phK(ctx){const c=ctx.canvas;if(!PH_W||c.width!==PH_W)return 0;const m=c
 function phMin(ctx){if(PH_OFF)return 0;const k=phK(ctx);return k?PH_MIN/k:0;}
 // a component's options, with its text raised to the smallest size that reads, unless it's decoration
 function phSize(ctx,o,def){o=o||{};if(o.deco)return o;const m=phMin(ctx),s=o.size||def;return s<m?Object.assign({},o,{size:m}):o;}
+// the size a piece of text is really drawn at: what it asks for, or the phone's smallest, whichever is larger (to place what follows it)
+function phSz(ctx,s){return Math.max(s,phMin(ctx)||0);}
 // draw fn as decoration: its text is texture (a printed page, a far-off list), not something to read
 function phDeco(fn){return function(){PH_OFF++;try{return fn.apply(this,arguments);}finally{PH_OFF--;}};}
 // draw now, as decoration when on is true: a picture seen from afar is context, and its words are texture

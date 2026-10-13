@@ -67,7 +67,7 @@ scene("gaps",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   // the loop of ten steps steps aside while the wide gap-1 card is up, and comes back with the register
   const dA=fin(t,c("revoked"),0.5)*(1-fin(t,c("ten")-0.65,0.55));
   pp_loop(ctx,1720,112,1,t,STEPS10.map((_,i)=>i===3?fin(t,0.4,0.6):0.2),fin(t,0.2,0.6)*(1-fin(t,c("revoked")-0.3,0.4)*(1-fin(t,c("ten")-0.1,0.5))));
-  arrive(ctx,140,100,t,0.3,()=>{T(ctx,"Promise · step 4",140,100,{w:800,size:22,color:rgba(WEED,1)});T(ctx,"the gap register",164+tw(ctx,"Promise · step 4",22,800),100,{w:800,size:30});},{from:0.9});
+  arrive(ctx,140,100,t,0.3,()=>{T(ctx,"Promise · step 4",140,100,{w:800,size:22,color:rgba(WEED,1)});T(ctx,"the gap register",164+tw(ctx,"Promise · step 4",phSz(ctx,22),800),100,{w:800,size:30});},{from:0.9});
   // the register: drafted by the agent, one line per gap; it steps back for gap 1 and returns for the ten decisions
   const away=fin(t,Rv-0.5,0.5)*(1-fin(t,Tn-0.05,0.6)),regA=fin(t,Rg-0.2,0.5)*(1-away);
   const p=clamp((t-w("register","register")-0.3)/0.42,0,10),tags=clamp((t-w("ten","ten decisions")+0.4)/1.2,0,1),ink=fin(t,w("ten","May")+0.2,0.8);
@@ -80,20 +80,24 @@ scene("gaps",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   // gap 1, as the file has it
   arrive(ctx,960,290,t,Rv,()=>pp_gap1(ctx,150,160,t,{a:dA,lit:{exp:fin(t,w("revoked","expects"),0.4),real:fin(t,w("revoked","deletes"),0.4),dec:fin(t,Bo,0.4)}}),{dy:30,from:0.95});
   // three decisions drop in; gap 1 takes two of them
+  const GD=phMin(ctx)?Math.max(0,160+pp_gap1H(ctx).h+34-452):0,BD=GD?Math.max(0,GD-18):0;  // on a phone, gap 1's card is taller: what sits under it moves down
   const X=[560,960,1360],T3=[w("three","Fix it"),w("three","Write a rule"),w("three","Or accept")],toR=ease(fin(t,w("both","Anything")-0.2,0.9)),toF=ease(fin(t,w("both","asked")-0.2,0.9));
-  const tx=[lerp(X[0],1290,toF),lerp(X[1],1074,toR),X[2]],ty=[lerp(500,452,toF),lerp(500,452,toR),500];
+  const tx=[lerp(X[0],1290,toF),lerp(X[1],1074,toR),X[2]],ty=[lerp(500+GD,452+GD,toF),lerp(500+GD,452+GD,toR),500+GD];
   [0,1,2].forEach(k=>{const a=fin(t,T3[k]-0.1,0.3)*dA*(k===2?1-0.65*fin(t,Bo,0.6):1),y0=ty[k]-(1-pp_sp(t,T3[k]-0.1,0.6))*50;if(a>0)pp_dtag(ctx,tx[k],y0,k,a,{align:"center",size:22,hi:k<2?pulseAt(t,k?w("both","Anything"):w("both","asked"),1.2):0});});
   // Jordan's microcredential: deleted on 12 August, and read as revoked from that day
   const bA=fin(t,w("revoked","deletes")-0.3,0.6)*(1-fin(t,Tn-0.65,0.55)),del=fin(t,w("jordan","twelfth"),0.8),back=fin(t,w("jordan","From that day")-0.1,1.0);
-  withA(ctx,bA,()=>T(ctx,"the learning platform · badges",420,592,{w:700,size:20,color:rgba(PP_LMS,1)}));
-  [["LMS|B-5010","SQL for Analysis",420],["LMS|B-5025","Python Foundations",800]].forEach(([k,n,x],i)=>arrive(ctx,x+160,700,t,w("revoked","deletes")-0.3+i*0.15,()=>pp_cred(ctx,x,610,320,184,k,n,{a:bA*0.75}),{dy:30}));
-  arrive(ctx,1340,700,t,w("revoked","deletes")+0.0,()=>pp_cred(ctx,1180,610,320,184,"LMS|B-5028","Data Visualisation",{a:bA,fade:del,back,hi:pulseAt(t,Jo,1.4)}),{dy:30});
-  withA(ctx,bA*fin(t,Jo,0.5),()=>{T(ctx,"Jordan's",1340,594,{w:800,size:22,align:"center",color:rgba(PP_LMS,1)});withA(ctx,fin(t,w("jordan","twelfth")-0.1,0.4),()=>tag(ctx,1590,702,"12 Aug",SOFT,{size:20}));});
-  if(back>0)withA(ctx,bA*(1-fin(t,Jo+5.6,0.6)),()=>arrowTo(ctx,1110,478,1300,602,PP_DEC[1][1],0.85,{p:back,bend:-0.15,dash:[6,6],head:12}));
+  withA(ctx,bA,()=>T(ctx,"the learning platform · badges",420,592+BD,{w:700,size:20,color:rgba(PP_LMS,1)}));
+  [["LMS|B-5010","SQL for Analysis",420],["LMS|B-5025","Python Foundations",800]].forEach(([k,n,x],i)=>arrive(ctx,x+160,700+BD,t,w("revoked","deletes")-0.3+i*0.15,()=>pp_cred(ctx,x,610+BD,320,184,k,n,{a:bA*0.75}),{dy:30}));
+  arrive(ctx,1340,700+BD,t,w("revoked","deletes")+0.0,()=>pp_cred(ctx,1180,610+BD,320,184,"LMS|B-5028","Data Visualisation",{a:bA,fade:del,back,hi:pulseAt(t,Jo,1.4)}),{dy:30});
+  withA(ctx,bA*fin(t,Jo,0.5),()=>{T(ctx,"Jordan's",1340,594+BD,{w:800,size:22,align:"center",color:rgba(PP_LMS,1)});withA(ctx,fin(t,w("jordan","twelfth")-0.1,0.4),()=>tag(ctx,1590,702+BD,"12 Aug",SOFT,{size:20}));});
+  if(back>0)withA(ctx,bA*(1-fin(t,Jo+5.6,0.6)),()=>arrowTo(ctx,1110,478+GD,1300,602+BD,PP_DEC[1][1],0.85,{p:back,bend:-0.15,dash:[6,6],head:12}));
   // where each gap goes once it's settled: a decision in its source's log, a known limitation on the model, or still open
   [["a decision, in its source's log","sources/<system>/_<system>__decisions.yml",w("leave","becomes a decision"),TRUST],["a known limitation, on the model","meta.limitations",w("leave","known limitation"),PP_DEC[2][1]],
-   ["still open, until the fix arrives","requirements/sources/<system>/",w("leave","stays open"),PP_AMB]].forEach(([h,f,t0,col],k)=>{const x=140+k*480;
-    arrive(ctx,x+220,935,t,t0-0.2,()=>{glass(ctx,x,880,440,110,14,col,{glow:12,ea:0.75,fill:"rgba(7,12,24,0.96)"});T(ctx,h,x+22,922,{w:800,size:20,color:rgba(col,1)});pp_fitT(ctx,f,x+22,962,396,{f:"mono",w:500,size:18,min:14,color:rgba(INK,0.9)});},{dy:20});});
+   ["still open, until the fix arrives","requirements/sources/<system>/",w("leave","stays open"),PP_AMB]].forEach(([h,f,t0,col],k,A)=>{
+    // on a phone each card is as wide as its title, and a path that won't fit shortens from the left
+    const m=phMin(ctx),cw=A.map(([h])=>m?Math.max(440,tw(ctx,h,phSz(ctx,20),800)+44):440),x=m?960-(cw.reduce((s,v)=>s+v,0)+80)/2+cw.slice(0,k).reduce((s,v)=>s+v+40,0):140+k*480,W=cw[k];
+    arrive(ctx,x+W/2,935,t,t0-0.2,()=>{glass(ctx,x,880,W,110,14,col,{glow:12,ea:0.75,fill:"rgba(7,12,24,0.96)"});T(ctx,h,x+22,922,{w:800,size:20,color:rgba(col,1)});
+      if(m)T(ctx,phFitPath(ctx,f,W-44,phSz(ctx,18)),x+22,962,{f:"mono",w:500,size:18,color:rgba(INK,0.9)});else pp_fitT(ctx,f,x+22,962,396,{f:"mono",w:500,size:18,min:14,color:rgba(INK,0.9)});},{dy:20});});
   // Mei approves the decisions about meaning
   arrive(ctx,1700,520,t,w("ten","May")-0.2,()=>{pp_face(ctx,"mei",1700,520,64,t,{name:"Mei",role:"approves meaning"});},{from:0.85});
   ctx.restore();vign(ctx,S);});
@@ -111,14 +115,24 @@ scene("enterprise",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,
   arrive(ctx,1250,296,t,w("contracts","strongest"),()=>T(ctx,"the strongest promise",1250,302,{w:700,size:22,align:"center",color:rgba(TRUST,1)}),{dy:12});
   // the core folder's two settings
   const lA={4:fin(t,w("folder","Public"),0.4),5:fin(t,w("folder","contract, enforced"),0.4),6:fin(t,w("folder","enforced"),0.4)};
-  arrive(ctx,430,460,t,Fo-0.3,()=>pp_code(ctx,80,330,700,"dbt_project.yml",PP_PROJ,{p:clamp((t-Fo)/1.4,0,1),lit:lA,edge:TRUST}),{dy:30});
+  // on a phone the build's output is taller than there's room for under the folder's settings: it takes their place
+  const ph=phMin(ctx)>0,PY=ph?330:620,pA=ph?1-fin(t,w("stops","build")-1.3,0.4):1;
+  arrive(ctx,430,460,t,Fo-0.3,()=>pp_code(ctx,80,330,700,"dbt_project.yml",PP_PROJ,{a:pA,p:clamp((t-Fo)/1.4,0,1),lit:lA,edge:TRUST}),{dy:30});
   withA(ctx,fin(t,w("folder","Public"),0.4)*(1-fin(t,Co-0.9,0.4)),()=>tag(ctx,800,525,"other projects may build on it",TRUST,{size:18}));
   // the credential's contract: every column, its type, what can't be empty; then its grain
   const flip=fin(t,w("stops","disagree"),0.4)*(1-fin(t,No,0.5)),bLit={7:fin(t,w("columns","every column"),0.4),10:fin(t,w("columns","its type"),0.4),16:Math.max(fin(t,w("columns","its type"),0.4),flip),11:fin(t,w("columns","can't be empty"),0.4),4:fin(t,w("columns","grain"),0.4)};
   arrive(ctx,1350,580,t,Co-0.4,()=>pp_code(ctx,880,330,940,"models/core/student/_core_student__models.yml",PP_CRED,{size:18,lh:27,p:clamp((t-Co+0.2)/1.8,0,1),lit:bLit,litCols:{16:flip>0.5?BAD:TRUST},edge:TRUST,swap:{16:["        data_type: string",flip,BAD]}}),{dy:30});
   // the query and the contract disagree: the build stops before the table is made
   const run=clamp((t-w("stops","build")+0.8)/0.8,0,1),red=fin(t,w("stops","stops"),0.3),ok=fin(t,No+0.2,0.6),eA=fin(t,w("stops","build")-0.9,0.5);
-  arrive(ctx,470,740,t,w("stops","build")-0.9,()=>{const col=mix(mix([150,180,220],BAD,red),GOOD,ok);glass(ctx,80,620,780,250,16,col,{glow:14,ea:0.85,fill:"rgba(10,8,14,0.96)"});
+  if(ph)arrive(ctx,470,PY+160,t,w("stops","build")-0.9,()=>{const col=mix(mix([150,180,220],BAD,red),GOOD,ok),ms=phWrap(ctx,"This model has an enforced contract that failed.",732,phSz(ctx,18),500,"mono"),ty=PY+104+ms.length*36-10;
+    glass(ctx,80,PY,780,ty-PY+4*40+70,16,col,{glow:14,ea:0.85,fill:"rgba(10,8,14,0.96)"});T(ctx,"dbt build --select core_credential",104,PY+38,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});
+    ctx.fillStyle="rgba(255,255,255,0.08)";rr(ctx,104,PY+56,732,14,7);ctx.fill();ctx.fillStyle=rgba(col,1);rr(ctx,104,PY+56,732*(ok>0?lerp(Math.min(run,0.55),1,ok):Math.min(run,0.55)),14,7);ctx.fill();
+    withA(ctx,red*(1-ok),()=>{ms.forEach((l,i)=>T(ctx,l,104,PY+104+i*36,{f:"mono",w:500,size:18,color:rgba(mix(INK,BAD,0.3),1)}));
+      // the one mismatched column, printed down the panel rather than across it
+      pp_table(ctx,100,ty,[300,436],[["column_name","credit_points"],["definition_type","INTEGER"],["contract_type","VARCHAR"],["mismatch_reason","data type mismatch"]],{size:18,rh:40,col:BAD,mono:[1,1]});
+      T(ctx,"stopped before the table is made",104,ty+4*40+44,{w:700,size:20,color:rgba(BAD,1)});});
+    withA(ctx,ok,()=>{T(ctx,"contract and query agree · the table is made",104,PY+116,{w:700,size:22,color:rgba(GOOD,1)});T(ctx,"checked at every build",104,PY+156,{w:700,size:22,color:rgba(INK,0.95)});});},{dy:20});
+  else arrive(ctx,470,740,t,w("stops","build")-0.9,()=>{const col=mix(mix([150,180,220],BAD,red),GOOD,ok);glass(ctx,80,620,780,250,16,col,{glow:14,ea:0.85,fill:"rgba(10,8,14,0.96)"});
     T(ctx,"dbt build --select core_credential",104,658,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});withA(ctx,red*(1-ok),()=>T(ctx,"stopped before the table is made",104,852,{w:700,size:20,color:rgba(BAD,1)}));
     ctx.fillStyle="rgba(255,255,255,0.08)";rr(ctx,104,676,732,14,7);ctx.fill();ctx.fillStyle=rgba(col,1);rr(ctx,104,676,732*(ok>0?lerp(Math.min(run,0.55),1,ok):Math.min(run,0.55)),14,7);ctx.fill();
     withA(ctx,red*(1-ok),()=>{T(ctx,"This model has an enforced contract that failed.",104,724,{f:"mono",w:500,size:18,color:rgba(mix(INK,BAD,0.3),1)});
@@ -138,7 +152,9 @@ scene("consumer",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   const Ow=c("own"),Pr=c("protected"),Ex=c("exposure"),Te=c("tell"),Ap=c("approve");
   // the core band comes down from the layers of the last chapter, and the two marts rise on it
   const m=ease(fin(t,0,1.4)),bandY=lerp(140,808,m),bandX=lerp(980,140,m),bandW=lerp(540,1640,m),tell=fin(t,Te,0.5);
-  const P=pp_core(ctx,bandX,bandY,bandW,64,{chips:fin(m,0.75,0.25),pulse:{core_credential:Math.max(pulseAt(t,Te,1.6),tell*(1-fin(t,Ap,0.6))*0.7)}});
+  // on a phone the exposures' code runs down over the core band: while it's up, the band's words are behind it (texture)
+  const exUp=phMin(ctx)>0&&fin(t,Ex-0.2,0.4)*(1-fin(t,Te+0.8,0.6)*(1-fin(t,Ap,0.6)))>0.5;
+  const P=phAsDeco(exUp,()=>pp_core(ctx,bandX,bandY,bandW,64,{chips:fin(m,0.75,0.25),pulse:{core_credential:Math.max(pulseAt(t,Te,1.6),tell*(1-fin(t,Ap,0.6))*0.7)}}));
   const feeds=[["core_learner","planning"],["core_award","planning"],["core_credit_towards_award","planning"],["core_learner","wallet"],["core_credential","wallet"],["core_credit_towards_award","wallet"]];
   withA(ctx,fin(t,Ow,0.8),()=>feeds.forEach(([k,mk])=>{const[x0,y0]=P[k],x1=mk==="planning"?510:1410;ctx.strokeStyle=rgba(TRUST,0.16);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x0,y0-16);ctx.bezierCurveTo(x0,y0-300,x1,500,x1,330);ctx.stroke();}));
   const gr=[clamp((t-w("grains","Planning's"))/1.6,0,1),clamp((t-w("grains","the wallet's"))/1.2,0,1)],ch=fin(t,w("protected","enforced"),0.4),hiW=fin(t,Te+1.6,0.5)*(1-fin(t,Ap,0.5));
@@ -160,8 +176,8 @@ scene("consumer",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   const lsA=fin(t,Te+1.6,0.5)*(1-fin(t,Ap-0.4,0.4));
   // the dbt ls card sits on the left, clear of the lit path; "who to tell" waits beside the wallet mart, where the path ends
   arrive(ctx,610,545,t,Te+1.6,()=>withA(ctx,1-fin(t,Ap-0.4,0.4),()=>{glass(ctx,260,470,700,150,14,TRUST,{glow:16,ea:0.9,fill:"rgba(8,10,18,0.97)"});
-    T(ctx,"dbt ls --select core_credential+",284,512,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});T(ctx,"   --resource-type exposure",284,540,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});
-    T(ctx,"exposure:credentials.wallet_app",284,588,{f:"mono",w:500,size:22,color:rgba(TRUST,1)});}),{dy:20});
+    const lg=phMin(ctx)?8:0;T(ctx,"dbt ls --select core_credential+",284,512-lg,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});T(ctx,"   --resource-type exposure",284,540+lg,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});
+    T(ctx,"exposure:credentials.wallet_app",284,588+lg,{f:"mono",w:500,size:22,color:rgba(TRUST,1)});}),{dy:20});
   arrive(ctx,1600,400,t,w("tell","who to tell")-0.1,()=>withA(ctx,1-fin(t,Ap-0.4,0.4),()=>tag(ctx,1600,400,"who to tell",TRUST,{align:"center",size:22})),{dy:14});
   withA(ctx,lsA,()=>T(ctx,"not reached",860,300,{w:700,size:18,align:"right",color:rgba(SOFT,0.95)}));
   // each consumer approves its own
@@ -182,15 +198,17 @@ scene("tests",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   ctx.save();drift(ctx,t,sc,{z:0.03,y:480});
   const Va=c("values"),Tr=c("trusted"),Re=c("reconcile"),Ag=c("agent");
   pp_loop(ctx,204,122,1,t,STEPS10.map((_,i)=>i===4?fin(t,w("step","Step five"),0.6):i===3?0.5:0.2),fin(t,0.1,0.5));
-  arrive(ctx,500,110,t,0.3,()=>{T(ctx,"Promise · step 5",390,104,{w:800,size:22,color:rgba(WEED,1)});T(ctx,"tests, before the code",414+tw(ctx,"Promise · step 5",22,800),104,{w:800,size:30});},{from:0.9});
+  arrive(ctx,500,110,t,0.3,()=>{T(ctx,"Promise · step 5",390,104,{w:800,size:22,color:rgba(WEED,1)});T(ctx,"tests, before the code",414+tw(ctx,"Promise · step 5",phSz(ctx,22),800),104,{w:800,size:30});},{from:0.9});
   // the models, outlines only: not built yet
   pp_outlines(ctx,80,250,t,{p:clamp((t-0.6)/1.6,0,1)});
   withA(ctx,fin(t,1.6,0.6),()=>T(ctx,"not built yet",390,452,{w:600,size:18,align:"center",color:rgba(SOFT,1)}));
   // the test list types itself, a kind per line, each with its glyph; the agent's draft is teal until Jun reviews it
   const TT=[w("keys","unique"),w("keys","never empty"),w("keys","relationship"),w("values","closed list"),w("values","never overlap"),w("reconcile","compares")],rev=fin(t,w("agent","Joon")+0.3,0.8);
   arrive(ctx,390,700,t,c("step")+1.2,()=>{glass(ctx,80,500,620,380,16,mix(KT_AI,[170,205,255],rev),{glow:12,ea:0.65,fill:"rgba(6,10,20,0.96)"});T(ctx,"what done looks like",104,540,{w:800,size:22});T(ctx,"data_tests",680,540,{f:"mono",w:500,size:18,align:"right",color:rgba(SOFT,1)});
-    PP_TL.forEach(([nm,k],i)=>{const a=fin(t,TT[i]-0.1,0.3);if(a<=0)return;const yy=592+i*52,col=mix(KT_AI,INK,rev);pp_tglyph(ctx,Math.min(k,4),124,yy-6,mix(KT_AI,[170,205,255],rev),a);
-      withA(ctx,a,()=>T(ctx,typeOn(nm,clamp((t-TT[i]+0.1)/0.5,0,1)),156,yy,{f:"mono",w:500,size:18,color:rgba(col,1)}));});},{dy:30});
+    // on a phone the rows sit closer, and a name too long for the card breaks after an underscore onto a second line
+    const ph=phMin(ctx)>0,fs=phSz(ctx,18);PP_TL.forEach(([nm,k],i)=>{const a=fin(t,TT[i]-0.1,0.3);if(a<=0)return;const yy=(ph?584:592)+i*(ph?48:52),col=mix(KT_AI,INK,rev);pp_tglyph(ctx,Math.min(k,4),124,yy-6,mix(KT_AI,[170,205,255],rev),a);
+      const q=clamp((t-TT[i]+0.1)/0.5,0,1);let L=[nm];if(ph&&tw(ctx,nm,fs,500,"mono")>680-156){const b=nm.lastIndexOf("_",Math.floor((680-156)/tw(ctx,"0000000000",fs,500,"mono")*10));L=[nm.slice(0,b+1),nm.slice(b+1)];}
+      let n=Math.round(nm.length*q);withA(ctx,a,()=>L.forEach((l,j)=>{const s_=l.slice(0,Math.max(0,n));n-=l.length;if(s_)T(ctx,s_,156,yy+j*34,{f:"mono",w:500,size:18,color:rgba(col,1)});}));});},{dy:30});
   kt_agent(ctx,664,604,16,t,{a:fin(t,w("keys","unique")-0.4,0.5)*(1-rev),busy:1});
   // the order: the tests first, then the code they check (which isn't written yet)
   const oA=1-fin(t,w("values","agreed values")-1.0,0.5);
@@ -201,12 +219,14 @@ scene("tests",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   arrive(ctx,1290,290,t,w("values","agreed values")-0.4,()=>pp_code(ctx,760,150,1060,"models/core/course/_core_course__models.yml",PP_AWARD,{a:1-vOut,p:clamp((t-w("values","agreed values")+0.2)/1.2,0,1),edge:TRUST,lit:{6:fin(t,w("values","agreed values")+0.4,0.4),4:fin(t,w("values","agreed values")+0.4,0.4)}}),{dy:30});
   arrive(ctx,1290,560,t,w("values","never overlap")-0.4,()=>pp_code(ctx,760,460,1060,"tests/generic/versions_do_not_overlap.sql",PP_VER,{a:1-vOut,size:18,lh:27,p:clamp((t-w("values","never overlap")+0.2)/1.0,0,1),edge:PP_INT}),{dy:30});
   // a number people already trust: the census report, weighed against the mart that isn't built yet
-  const cA=fin(t,Tr-0.1,0.5);
-  arrive(ctx,1000,280,t,Tr-0.1,()=>{T(ctx,"seeds/expected/planning/census_report.csv",780,150,{f:"mono",w:500,size:18,color:rgba(TRUST,1)});tag(ctx,1046,144,PP_RUN,WEED,{size:18});
-    pp_table(ctx,780,172,[300,140],[["faculty","learners"],["Arts and Education",2],["Business",3],["Engineering and IT",5],["Health",2],["total",12]],{size:20,rh:42,col:TRUST,align:[0,"right"],lit:{5:fin(t,w("trusted","twelve"),0.4)}});},{dy:30,a:cA});
-  arrive(ctx,1530,420,t,w("trusted","trust")-0.2,()=>pp_scale(ctx,1530,440,0.9,-0.1+0.02*Math.sin(t*1.2),{left:"12",leftLab:"census report",rightLab:"the mart",col:TRUST}),{from:0.9});
-  arrive(ctx,1290,590,t,Re-0.3,()=>pp_code(ctx,760,460,1060,"tests/reconciliation/reconcile_planning_with_census_report.sql",PP_REC,{size:18,lh:27,p:clamp((t-Re)/1.4,0,1),edge:TRUST,lit:{5:fin(t,w("reconcile","fails"),0.4),6:fin(t,w("reconcile","fails"),0.4)}}),{dy:30});
-  withA(ctx,fin(t,w("reconcile","faculty"),0.4),()=>tag(ctx,1300,766,"faculty by faculty",TRUST,{align:"center",size:20}));
+  // on a phone the census report's path shortens and its chip follows it; the reconciliation, taller, takes the table's place
+  const ph=phMin(ctx)>0,cA=fin(t,Tr-0.1,0.5),cOut=ph?fin(t,Re-0.5,0.5):0,CP=ph?phFitPath(ctx,"seeds/expected/planning/census_report.csv",440,phSz(ctx,18)):"seeds/expected/planning/census_report.csv",CX=ph?780+tw(ctx,CP,phSz(ctx,18),500,"mono")+18:1046;
+  if(cOut<1)arrive(ctx,1000,280,t,Tr-0.1,()=>withA(ctx,1-cOut,()=>{T(ctx,CP,780,150,{f:"mono",w:500,size:18,color:rgba(TRUST,1)});tag(ctx,CX,144,PP_RUN,WEED,{size:18});
+    pp_table(ctx,780,172,[300,140],[["faculty","learners"],["Arts and Education",2],["Business",3],["Engineering and IT",5],["Health",2],["total",12]],{size:20,rh:42,col:TRUST,align:[0,"right"],lit:{5:fin(t,w("trusted","twelve"),0.4)}});}),{dy:30,a:cA});
+  if(cOut<1)arrive(ctx,1530,420,t,w("trusted","trust")-0.2,()=>withA(ctx,1-cOut,()=>pp_scale(ctx,1530,440,0.9,-0.1+0.02*Math.sin(t*1.2),{left:"12",leftLab:"census report",rightLab:"the mart",col:TRUST})),{from:0.9});
+  const RY=ph?150:460,hRc=ph?pp_code(ctx,760,RY,1060,"tests/reconciliation/reconcile_planning_with_census_report.sql",PP_REC,{a:0,size:18,lh:27}):0;
+  arrive(ctx,1290,RY+130,t,Re-0.3,()=>pp_code(ctx,760,RY,1060,"tests/reconciliation/reconcile_planning_with_census_report.sql",PP_REC,{size:18,lh:27,p:clamp((t-Re)/1.4,0,1),edge:TRUST,lit:{5:fin(t,w("reconcile","fails"),0.4),6:fin(t,w("reconcile","fails"),0.4)}}),{dy:30});
+  withA(ctx,fin(t,w("reconcile","faculty"),0.4),()=>tag(ctx,1300,ph?RY+hRc+34:766,"faculty by faculty",TRUST,{align:"center",size:20}));
   // the agent drafts; Jun reviews (both kept clear of the two-line captions)
   arrive(ctx,1010,830,t,Ag-0.2,()=>{kt_agent(ctx,800,820,14,t,{});T(ctx,"the agent drafts, from the contracts and the register",832,828,{w:700,size:20,color:rgba(KT_AI,1)});},{dy:12});
   arrive(ctx,1690,820,t,w("agent","Joon")-0.2,()=>pp_face(ctx,"jun",1610,820,40,t,{side:1,name:"Jun",role:"reviews"}),{from:0.85});
@@ -288,19 +308,26 @@ scene("levels",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
     tag(ctx,380,664,"warn if > 0",PP_AMB,{size:20,hi:0});tag(ctx,380,714,"stop if > 5",BAD,{size:20});});
   // the test, its levels lighting as they're named
   const fOut=fin(t,Fr-0.3,0.6);
-  arrive(ctx,1255,300,t,Wa+0.6,()=>pp_code(ctx,700,120,1110,"models/staging/short_courses/_short_courses__models.yml",PP_SCY,{a:1-fOut,size:18,lh:27,p:clamp((t-Wa-0.8)/1.8,0,1),edge:PP_SC,lit:{9:fin(t,t0,0.4),10:fin(t,t5,0.4),3:fin(t,w("agreed","learning team"),0.4)},litCol:PP_AMB}),{dy:30});
+  // on a phone the description is elided (the decision under the card says it in full), so the card leaves room for the decision
+  const ph=phMin(ctx)>0,SCY=ph?PP_SCY.slice(0,2).concat(["          The customer who enrolled, by email. …"],PP_SCY.slice(5)):PP_SCY,sk=ph?3:0,
+    hS=pp_code(ctx,700,120,1110,"models/staging/short_courses/_short_courses__models.yml",SCY,{a:0,size:18,lh:27}),BY=ph?120+hS+12:518,DY=ph?BY+106:624;
+  arrive(ctx,1255,300,t,Wa+0.6,()=>pp_code(ctx,700,120,1110,"models/staging/short_courses/_short_courses__models.yml",SCY,{a:1-fOut,size:18,lh:27,p:clamp((t-Wa-0.8)/1.8,0,1),edge:PP_SC,lit:ph?{6:fin(t,t0,0.4),7:fin(t,t5,0.4)}:{9:fin(t,t0,0.4),10:fin(t,t5,0.4),3:fin(t,w("agreed","learning team"),0.4)},litCol:PP_AMB}),{dy:30});
   // the learning team's decision, from the decisions log
-  arrive(ctx,1250,640,t,w("agreed","learning team")-0.2,()=>{pp_face(ctx,"tom",760,650,46,t,{name:"",role:""});T(ctx,"the learning team · DEC-SC-01 · _short_courses__decisions.yml",830,624,{w:800,size:22,color:rgba(TRUST,1)});
-    wrapT(ctx,"9 Oct 2026 · An enrolment with no email - warn when there's any, stop the build when more than five.",830,660,940,{w:600,size:20,color:rgba(INK,0.95)});},{dy:20});
-  kt_gtick(ctx,1790,612,15,fin(t,w("agreed","learning team")+0.6,0.35));
+  const DN0="the learning team · DEC-SC-01 · _short_courses__decisions.yml",DN=ph&&tw(ctx,DN0,phSz(ctx,22),800)>940?"the learning team · DEC-SC-01":DN0;
+  arrive(ctx,1250,DY+16,t,w("agreed","learning team")-0.2,()=>{pp_face(ctx,"tom",760,DY+26,46,t,{name:"",role:""});T(ctx,DN,830,DY,{w:800,size:22,color:rgba(TRUST,1)});
+    wrapT(ctx,"9 Oct 2026 · An enrolment with no email - warn when there's any, stop the build when more than five.",830,DY+36,940,ph?{w:600,size:phSz(ctx,20),lh:Math.round(phSz(ctx,20)*1.3),color:rgba(INK,0.95)}:{w:600,size:20,color:rgba(INK,0.95)});},{dy:20});
+  kt_gtick(ctx,1790,DY-12,15,fin(t,w("agreed","learning team")+0.6,0.35));
   // today's build: one warning, and it carries on
-  arrive(ctx,1060,546,t,To-0.1,()=>{glass(ctx,700,518,850,56,12,PP_AMB,{glow:14,ea:0.9,fill:"rgba(16,12,4,0.96)"});T(ctx,"today",722,554,{w:800,size:18,color:rgba(SOFT,1)});T(ctx,"WARN 1 not_null_stg_short_courses__enrolments_customer_bk",790,554,{f:"mono",w:500,size:18,color:rgba(PP_AMB,1)});},{dy:16});
+  const WX=ph?722+tw(ctx,"today",phSz(ctx,18),800)+18:790,WW=ph?Math.max(850,WX+tw(ctx,"WARN 1 "+PP_LT,phSz(ctx,18),500,"mono")+24-700):850;
+  arrive(ctx,700+WW/2,BY+28,t,To-0.1,()=>{glass(ctx,700,BY,WW,56,12,PP_AMB,{glow:14,ea:0.9,fill:"rgba(16,12,4,0.96)"});T(ctx,"today",722,BY+36,{w:800,size:18,color:rgba(SOFT,1)});T(ctx,"WARN 1 not_null_stg_short_courses__enrolments_customer_bk",WX,BY+36,{f:"mono",w:500,size:18,color:rgba(PP_AMB,1)});},{dy:16});
   // freshness works the same way: a clock on the student system's stream
   arrive(ctx,1255,210,t,Fr-0.2,()=>pp_code(ctx,700,120,1110,"sources/student_system/_student_system__sources.yml",PP_FRESH,{p:clamp((t-Fr)/1.0,0,1),edge:PP_SIS,lit:{2:fin(t,w("fresh","a day late"),0.4),3:fin(t,w("fresh","fail at three"),0.4)},litCol:PP_AMB}),{dy:30});
-  arrive(ctx,960,370,t,Fr+0.4,()=>{glass(ctx,700,336,560,68,14,PP_SIS,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.95)"});ctx.fillStyle=rgba(PP_SIS,1);rr(ctx,716,354,6,32,3);ctx.fill();T(ctx,"student system",736,378,{w:700,size:21});
-    pp_clock(ctx,1222,370,24,clamp((t-Fr-0.4)/3,0,1)*1.6,PP_SIS,1);},{dy:16});
-  withA(ctx,fin(t,w("fresh","a day late"),0.4),()=>tag(ctx,1284,370,"warn after a day",PP_AMB,{size:20}));
-  withA(ctx,fin(t,w("fresh","fail at three"),0.4),()=>tag(ctx,1500,370,"error after three",BAD,{size:20}));
+  const FY=ph?Math.max(0,120+pp_code(ctx,700,120,1110,"sources/student_system/_student_system__sources.yml",PP_FRESH,{a:0})+18-336):0;
+  arrive(ctx,960,370+FY,t,Fr+0.4,()=>{ctx.save();ctx.translate(0,FY);glass(ctx,700,336,560,68,14,PP_SIS,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.95)"});ctx.fillStyle=rgba(PP_SIS,1);rr(ctx,716,354,6,32,3);ctx.fill();T(ctx,"student system",736,378,{w:700,size:21});
+    pp_clock(ctx,1222,370,24,clamp((t-Fr-0.4)/3,0,1)*1.6,PP_SIS,1);ctx.restore();},{dy:16});
+  const E2=ph?1284+tw(ctx,"warn after a day",phSz(ctx,20),700)+26+14:1500;
+  withA(ctx,fin(t,w("fresh","a day late"),0.4),()=>tag(ctx,1284,370+FY,"warn after a day",PP_AMB,{size:20}));
+  withA(ctx,fin(t,w("fresh","fail at three"),0.4),()=>tag(ctx,E2,370+FY,"error after three",BAD,{size:20}));
   // who sets the level
   arrive(ctx,1250,800,t,w("owner","The data's owner")-0.1,()=>tag(ctx,1250,800,"the owner sets the level · the reason, written down",TRUST,{align:"center",size:22}),{dy:14});
   ctx.restore();vign(ctx,S);});

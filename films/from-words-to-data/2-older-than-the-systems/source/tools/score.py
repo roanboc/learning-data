@@ -5,6 +5,10 @@
 # moving to C major as the model is written down and joined. The series' motif opens on the lute and closes on the bell and
 # the electric piano, both in C, the relative major of A minor.
 
+# PLAYBOOK.md: effects stay low and soft, below about 2.5 kHz. The series' soft stand-ins replace the bright ones by name (a chime
+# or a ping becomes a low felt note, a tick a muffled key, a pop a wooden knock, a sweep a breath of air), so every cue keeps its time
+globals().update(soft_palette())
+
 # chords (MIDI note numbers): open fifths for the past, sevenths and ninths for the present
 A5 = [45, 52, 57, 64]; D5 = [50, 57, 62, 69]; G5 = [43, 50, 55, 62]; E5 = [40, 47, 52, 59]; C5 = [48, 55, 60, 67]; F5 = [41, 48, 53, 60]
 ADOR = [45, 52, 57, 60, 66]; DMAJ = [50, 54, 57, 62]
@@ -34,9 +38,11 @@ drone(45, G('model', 'outlast', 0), E('model') - S0('model') - cq('model', 'outl
 # 3. Every system has a model inside: the present, cleaner; glass and electric piano in A minor
 prog('inside', [AM7, FMAJ7, DM9, AM7], g=0.05, tone='glass', bassg=0.035)
 motif('inside', [AM7, FMAJ7, DM9, AM7], every=1.35, g=0.038, inst=epiano)
-# 4. Where meanings meet: tension on the ring, a cold drone at Mars, and the hub resolving
+# 4. Where meanings meet: tension on the ring, a cold drone at Mars with an urgent pulse under it as the spacecraft is lost,
+#    and the hub resolving
 prog('meet', [AM7, EM7], 0, cq('meet', 'mars') - 0.5, g=0.045, tone='glass', bassg=0.035)
 ostinato(S0('meet') + 1.4, G('meet', 'pairs', 6.4), [69, 76, 72, 76], 0.32, pluck, 0.02, 0.2)
+urgent(G('meet', 'mars', 0.2), G('meet', 'both', 0.2), bpm=100, root=33, g=0.034, steps=(0, 0, 1, 0))
 pad([33, 40, 45, 52], G('meet', 'mars', -0.8), cq('meet', 'hub') - cq('meet', 'mars') + 0.8, 0.05, 'strings')
 drone(40, G('meet', 'mars', 0), 9.0, 0.02, 'reed')
 prog('meet', [FMAJ7, G6, CMAJ7], cq('meet', 'hub') - 0.4, g=0.05, tone='glass', bassg=0.035)

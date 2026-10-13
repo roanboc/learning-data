@@ -4,11 +4,15 @@
 # over glass; the semantic layer has a soft, steady pulse; the four floors each ring one bell, rising. The series' motif opens
 # the title on FM bells and closes the film on bells and celesta.
 
+# PLAYBOOK.md: effects stay low and soft, below about 2.5 kHz. The series' soft stand-ins replace the bright ones by name (a chime
+# or a ping becomes a low felt note, a tick a muffled key, a pop a wooden knock, a sweep a breath of air), so every cue keeps its time
+globals().update(soft_palette())
+
 # an FM bell for the music bus: a bright, inharmonic strike that softens as it rings
 def fmbell(m, start, g=0.05, pan=0.0, sec=3.2):
-    f = mf(m); x = tt(sec); idx = 2.4 * np.exp(-x * 2.2) + 0.25
+    f = mf(m); x = tt(sec); idx = 1.3 * np.exp(-x * 2.6) + 0.15
     s = np.sin(2 * np.pi * f * x + idx * np.sin(2 * np.pi * f * 3.5 * x)) * np.exp(-x * 1.25) + 0.25 * np.sin(2 * np.pi * f * 2 * x) * np.exp(-x * 2.5)
-    put(norm((s * np.minimum(1, x / 0.003)).astype(np.float32)), start, g, pan)
+    put(norm(filt((s * np.minimum(1, x / 0.003)).astype(np.float32), 'low', 2200)), start, g, pan)
 
 def softpluck(m, start, g=0.035, pan=0.0):
     pluck(m, start, g, pan, sec=1.1, bright=0.7)
@@ -27,9 +31,10 @@ motif('before', [CL, AM, GM, DC], 0, cq('before', 'breath'), every=1.3, g=0.04, 
 prog('before', [EM, CL], cq('before', 'lesson'), g=0.05, tone='glass', bassg=0.03)
 theme(G('before', 'breath', 0.7), 72, fmbell, step=0.5, g=0.07)
 celesta(88, G('before', 'breath', 2.6), 0.03, 0.3)
-# 2. Genie guesses: plucks over glass, until the guess goes wrong; then the bed drops to A minor
+# 2. Genie guesses: plucks over glass, until the guess goes wrong; then the bed drops to A minor, over a short urgent pulse
 prog('guesses', [CL, DC], 0, cq('guesses', 'wrong') + 3.0, g=0.045, tone='glass', bassg=0.03)
-ostinato(G('guesses', 'ask', 2.0), G('guesses', 'wrong', 4.4), [72, 79, 76, 78, 72, 79, 74, 78], 0.34, softpluck, 0.03, 0.15)
+ostinato(G('guesses', 'ask', 2.0), G('guesses', 'wrong', 0.6), [72, 79, 76, 78, 72, 79, 74, 78], 0.34, softpluck, 0.03, 0.15)
+urgent(G('guesses', 'wrong', 0.2), G('guesses', 'read', 0.4), bpm=92, root=33, g=0.03, steps=(0, 0, 1, 0))
 prog('guesses', [AM, EM], cq('guesses', 'wrong') + 3.0, g=0.045, tone='glass', bassg=0.035)
 # 3. Four ways: glass and celesta, brighter; each floor rings a bell as it lights, rising; the four ring again in the pause
 prog('four', [CL, DC, GM, CL], g=0.05, tone='glass', bassg=0.03)

@@ -3,6 +3,10 @@
 # moving to E major at the end. The two engines get two interlocking arpeggios, three against two, one on each side of the stereo field.
 # The 1879 till is the odd one out: a felt-piano oom-pah in C, ragtime-flavoured, with the cash register's keys, bell and drawer.
 # The title and the end card play the series' four-note motif on the pluck; at the end, a felt piano answers it, an echo of the till.
+
+# PLAYBOOK.md: effects stay low and soft, below about 2.5 kHz. The series' soft stand-ins replace the bright ones by name (a chime
+# or a ping becomes a low felt note, a tick a muffled key, a pop a wooden knock, a sweep a breath of air), so every cue keeps its time
+globals().update(soft_palette())
 import json, pathlib
 
 _V = json.loads((lambda s: s[s.index('{'):s.rindex('}') + 1])(pathlib.Path('src/vodur.js').read_text()))
@@ -19,7 +23,7 @@ h_ = lambda s, g, p: hat(s, g, p)
 b_ = lambda s, g, p: brush(s, g, p, 0.12)
 
 
-def arp(s0, s1, chords, pat, step=0.15, g=0.03, pan=0.0, up=12, inst=pluck, fade=1.5, bright=1.0):
+def arp(s0, s1, chords, pat, step=0.15, g=0.03, pan=0.0, up=12, inst=pluck, fade=1.5, bright=0.6):
     """a pluck arpeggio through the chords, spread evenly over the span; pat indexes each chord's notes (past the top, an octave up)"""
     d = (s1 - s0) / len(chords); t = s0; k = 0
     while t < s1:
@@ -80,11 +84,12 @@ pulse(A('sync', 'order', 0.62), E('sync') + 0.8, 100, [(0, k_, 0.03, 0), (1, h_,
 # 5. What it removes: the texture thins as each thing goes; the two ends meet on a warm chord
 prog('removes', [CMAJ7, GMAJ7], g=0.045, tone='warm')
 arp(S0('removes') + 0.2, E('removes') - 0.2, [CMAJ7, GMAJ7], [0, 2, 4, 2], step=0.3, g=0.028, pan=-0.1, up=24)
-# 6. What it doesn't: darker, the pulse stops at the wrong count; the lesson on a held chord
+# 6. What it doesn't: darker, with an urgent low line under the pulse until it stops at the wrong count; the lesson on a held chord
 DOE = [AM9, EM9, CMAJ7, BM7]
 prog('doesnt', DOE, g=0.045, tone='strings', bassg=0.03)
 arp(S0('doesnt') + 0.3, A('doesnt', 'revoked', 0.74), [AM9, EM9], [0, 2, 3, 2], step=0.3, g=0.028, pan=0.2, up=24)
 pulse(S0('doesnt'), A('doesnt', 'revoked', 0.74, 1.0), 100, [(0, k_, 0.028, 0), (2, k_, 0.02, 0), (1, h_, 0.01, 0.2), (3, h_, 0.01, -0.2)], fade=1.0)
+urgent(S0('doesnt') + 0.4, A('doesnt', 'revoked', 0.74, 1.0), bpm=100, root=40, g=0.028, steps=(0, 0, 1, 0))
 arp(A('doesnt', 'same', 0.0), E('doesnt'), [CMAJ7, BM7, EM9], [0, 2, 4, 3], step=0.3, g=0.026, pan=-0.2, up=24)
 # 7. Data flowing back: brighter, higher plucks, the pulse back
 BAK = [GMAJ7, D6, EM9, CMAJ7]

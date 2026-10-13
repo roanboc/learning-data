@@ -36,7 +36,7 @@
 - **The same university, platform and people** as *The Inner Life of Data*, *When things go wrong* and *From words to data*, and one new character: Jun Park, the analytics engineer ([character card](characters/card-jun.jpg)). Noor, the architect, owns the model; Jun builds it.
 - **Two looks carry the idea.** The model is a blueprint, white lines on blue paper; the building work is code, in files, on the films' dark glass. Teal is an AI agent's work; gold is a person's approval.
 - **Known approaches are named once**, in the opening film. After that, the series teaches mechanisms (key sets, hashing, grain, timelines) without saying which approach each came from.
-- **Its own sound, and a quiet one.** Warm pads and a mellow electric piano, a harp for the past, and its own four-note mark, rising 1-4-5-8. Nothing loops: the music is sustained chords, and every effect is something appearing on screen, at that moment. Effects stay low and soft (knocks, muffled keys, paper, felt notes), with no chimes, pings or hi-hats.
+- **Its own sound, and a quiet one.** Warm pads and a mellow electric piano, a harp for the past, and its own four-note mark, rising 1-4-5-8. Nothing loops: the music is sustained chords, and every effect is something appearing on screen, at that moment. The one exception is feeling: where a story turns to an error or a rush, a low, muted pulse rises under the scene and fades once the problem is caught. Effects stay low and soft (knocks, muffled keys, paper, felt notes), with no chimes, pings or hi-hats.
 - **Motion with weight.** Things arrive with a spring, every shot drifts, things shared by two chapters carry across the cut, and the video adds motion blur.
 
 ## How the films are made

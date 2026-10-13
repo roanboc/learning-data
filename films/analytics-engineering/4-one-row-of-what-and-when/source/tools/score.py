@@ -4,6 +4,8 @@
 # Two rules, as in film 1:
 #  - Nothing loops. No pulse, walking bass, repeated figure or random notes: the bed is sustained chords that change with the
 #    chapters, and each effect is one event.
+#  - The one exception is feeling: when the story turns to an error, a low, muted pulse (music.py's urgent()) rises under
+#    the scene, leans on the semitone, and fades out once the problem is caught. It stays below about 1 kHz.
 #  - Every sound is an event on screen, at the moment it appears. Each effect below uses the same timing as the picture in
 #    src/scenes.js (the same word, and the same offset), so sound and picture stay together when the voice is re-timed.
 # Everything stays low and soft, filtered below about 2.5 kHz: muffled knocks (a punch through card), low felt notes (the
@@ -114,6 +116,8 @@ soft(64, W('grain', 'test', 'same award', 0.3), 0.032, 0.4)
 #    keys for the analysis; the low double thud as the rows double; a muted double knock as the grain test stops;
 #    the join gains its date; a felt note as the rows fold back to eight; a knock for dbt show's result
 bed('fan', [AM, DM7, E7, AM])
+# under the doubled rows, a low urgent pulse, until the join gains its date
+urgent(G('fan', 'double', -0.2), G('fan', 'fix', 0.3), bpm=100, root=33, g=0.03, steps=(0, 0, 1, 0))
 knock(W('fan', 'why', 'graduate certificate', -0.3), 0.03, 0.0)
 paper(W('fan', 'two', 'two versions', -0.2), 0.03, 0.0, 0.6)
 paper(G('fan', 'join', -1.7), 0.018, -0.3, 0.8)
@@ -174,6 +178,8 @@ soft(52, W('stitch', 'same', 'makes no new version'), 0.032, 0.0)
 #    two counts; a muted double knock for the cross; paper as the card moves to when it took effect; a felt note as Business
 #    reaches three; a low bass clarinet note as the 1890 page flickers in; paper for gap 6; accepted, with a stamp
 bed('late', [FSM7, DMAJ7, ESUS4, AMAJ])
+# a slow uneasy pulse while the late withdrawal counts her as studying, until it's dated by when it took effect
+urgent(W('late', 'week', 'recorded it', -0.3), G('late', 'effect', 0.3), bpm=84, root=33, g=0.026, steps=(0, 0, 1, 0), fade=1.6)
 knock(G('late', 'priya'), 0.028, -0.2)
 ta_ = W('late', 'week', 'recorded it', -0.3)
 knock(ta_, 0.024, 0.85, 170); knock(ta_ + 0.85, 0.026, 0.3)

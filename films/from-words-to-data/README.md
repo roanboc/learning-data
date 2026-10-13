@@ -62,7 +62,7 @@ The [proposal](proposal.md) records how the series was planned and the decisions
 | Many ways to read | Library jazz: an e-piano on seventh chords, a walking bass, brushes, in F; card drawers and date stamps |
 | Both at once | Two interlocking synth arpeggios over a soft pulse, in E minor to major, after a ragtime piano and a cash register for 1879 |
 | Meaning machines can read | Glass bells, glass pads and a celesta in C Lydian; a harp and strings for the eighteenth and nineteenth centuries |
-| Keeping it true | Strings over a ticking clock and a felt piano, in C, drifting to A minor and back; *What's in a word*'s kalimba and *Older than the systems*' bell return at the end |
+| Keeping it true | Strings and a felt piano, with a pulse that follows the feeling, in C, drifting to A minor and back; *What's in a word*'s kalimba and *Older than the systems*' bell return at the end |
 
 - **The same craft.** Narration only; a flowing pace of about 125 to 135 words a minute; four Pause and think questions per film (five in *Keeping it true*, for its chapter on what remains); labs and scenarios on the site, in English and Spanish. See [PLAYBOOK.md](../../PLAYBOOK.md), and its section on what this series added.
 

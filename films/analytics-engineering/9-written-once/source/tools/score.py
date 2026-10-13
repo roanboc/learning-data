@@ -160,7 +160,7 @@ soft(45, W('catalog', 'gate', 'Tuned from', -0.3), 0.04, -0.4)
 #    downstream; the wallet's tick (felt); the warning (a muted knock, then keys); the decision (paper) and two approvals (felt)
 bed('version', [DMAJ9, BM7, EM9, A7, GMAJ7, DMAJ9])
 # a low urgent pulse as the change would break the old column, until it becomes a new version with a date
-urgent(G('version', 'breaks', -0.2), G('version', 'date', 0.3), bpm=92, root=38, g=0.026, steps=(0, 0, 1, 0))
+urgent(G('version', 'breaks', -0.2), G('version', 'date', 0.3), bpm=92, root=38, g=0.047, steps=(0, 0, 1, 0))
 knock(S0('version') + 0.6, 0.035, -0.4)
 soft(57, W('version', 'expire', 'becomes', -0.2), 0.032, 0.2)
 dknock(G('version', 'breaks'), 0.04, 0.4)

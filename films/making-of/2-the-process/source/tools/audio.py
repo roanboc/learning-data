@@ -127,13 +127,13 @@ def urgent(s0,s1,bpm=104,root=40,g=0.05,fade=1.2,steps=(0,0,7,0),pan=0.0):
     while t0<s1:
         f=min(1,(t0-s0)/fade+0.06,(s1-t0)/fade)
         if f>0:
-            fr=mf(root+steps[k%len(steps)]);x=tt(per*0.85);b=(np.sin(2*np.pi*fr*x)+0.35*np.sin(4*np.pi*fr*x))*np.exp(-x*6)*np.minimum(1,x/0.005)
-            put(ML,MR,_nm(_flt(b.astype(np.float32),'low',700)),t0,g*f,pan)
+            fr=mf(root+steps[k%len(steps)]);x=tt(per*0.85);b=(np.sin(2*np.pi*fr*x)+0.7*np.sin(4*np.pi*fr*x)+0.3*np.sin(6*np.pi*fr*x))*np.exp(-x*6)*np.minimum(1,x/0.005)
+            put(ML,MR,_nm(_flt(b.astype(np.float32),'low',900)),t0,g*f,pan)
             if k%2==0:x=tt(0.35);ph=2*np.pi*np.cumsum(48+70*np.exp(-x*26))/SR;put(ML,MR,_nm((np.sin(ph)*np.exp(-x*9)).astype(np.float32)),t0,g*0.9*f,0.0)
-            x=tt(0.05);put(ML,MR,_nm(_flt(_nz(0.05),'band',(250,1100))*np.exp(-x*100)),t0+per/2,g*0.3*f,pan+0.2)
+            x=tt(0.05);put(ML,MR,_nm(_flt(_nz(0.05),'band',(250,1100))*np.exp(-x*100)),t0+per/2,g*0.45*f,pan+0.2)
         t0+=per;k+=1
 # the feeling under the picture: a light, uneasy pulse while the mistakes are listed, until the person's check catches them
-urgent(G('wrong','mistakes',0.3),G('wrong','caught',0.0),bpm=84,root=36,g=0.026,steps=(0,0,1,0),fade=1.5)
+urgent(G('wrong','mistakes',0.3),G('wrong','caught',0.0),bpm=84,root=36,g=0.047,steps=(0,0,1,0),fade=1.5)
 # effects
 # 1. the message types in, the three things only a person brings, the reply, the title
 [tick(G('message','brief',0.2+k*0.35),0.05,-0.3) for k in range(12)];[pop(G('message','only',1.4+k*0.9),0.08) for k in range(3)];ping(G('message','conv',2.4));shimmer(G('message','breath',0.2),0.06);tone(G('message','breath',0.3),0.07,523)

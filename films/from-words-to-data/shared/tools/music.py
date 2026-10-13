@@ -540,10 +540,10 @@ def urgent(s0, s1, bpm=104, root=40, g=0.05, fade=1.2, steps=(0, 0, 7, 0), pan=0
         f = min(1, (t0 - s0) / fade + 0.06, (s1 - t0) / fade)
         if f > 0:
             fr = mf(root + steps[k % len(steps)]); x = tt(per * 0.85)
-            b = (np.sin(2 * np.pi * fr * x) + 0.35 * np.sin(4 * np.pi * fr * x)) * np.exp(-x * 6) * np.minimum(1, x / 0.005)
-            put(norm(filt(b.astype(np.float32), 'low', 700)), t0, g * f, pan)
+            b = (np.sin(2 * np.pi * fr * x) + 0.7 * np.sin(4 * np.pi * fr * x) + 0.3 * np.sin(6 * np.pi * fr * x)) * np.exp(-x * 6) * np.minimum(1, x / 0.005)
+            put(norm(filt(b.astype(np.float32), 'low', 900)), t0, g * f, pan)
             if k % 2 == 0:
                 x = tt(0.35); ph = 2 * np.pi * np.cumsum(48 + 70 * np.exp(-x * 26)) / SR
                 put(norm((np.sin(ph) * np.exp(-x * 9)).astype(np.float32)), t0, g * 0.9 * f, 0.0)
-            x = tt(0.05); put(norm(filt(_snoise(0.05), 'band', (250, 1100)) * np.exp(-x * 100)), t0 + per / 2, g * 0.3 * f, pan + 0.2)
+            x = tt(0.05); put(norm(filt(_snoise(0.05), 'band', (250, 1100)) * np.exp(-x * 100)), t0 + per / 2, g * 0.45 * f, pan + 0.2)
         t0 += per; k += 1

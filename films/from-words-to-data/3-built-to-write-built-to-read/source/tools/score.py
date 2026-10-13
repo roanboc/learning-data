@@ -54,7 +54,7 @@ writing(S0('write') + 0.4, E('write') - 0.3, ['Bb', 'Gm', 'Eb', 'F'], g=0.032)
 # 3. What goes wrong without it: the same figure, darker, over a low urgent pulse on the same grid, leaning on the semitone
 prog('wrong', [GM9, CM7, EB9, GM9], g=0.04, tone='warm', bassg=0.035)
 writing(S0('wrong') + 0.4, E('wrong') - 0.3, ['Gm', 'Cm', 'Eb', 'Gm'], g=0.027, wb=0.02)
-urgent(G('wrong', 'three', 0.0), G('wrong', 'anomaly', 2.0), bpm=BPM, root=34, g=0.03, steps=(0, 0, 1, 0))
+urgent(G('wrong', 'three', 0.0), G('wrong', 'anomaly', 2.0), bpm=BPM, root=34, g=0.054, steps=(0, 0, 1, 0))
 # 4. Another way to write: a lighter figure, then a slow count
 prog('docs', [BB9, EB9, DM7, EB9], g=0.04, tone='glass', bassg=0.03)
 writing(S0('docs') + 0.4, G('docs', 'trade', 2.6), ['Bb', 'Eb', 'Bb'], g=0.024, pan=0.1, wb=0.016)

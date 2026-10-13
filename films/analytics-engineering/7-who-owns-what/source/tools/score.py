@@ -175,7 +175,7 @@ knock(W('across', 'sketch', "doesn't run", -0.1), 0.03, 0.5)
 #    a low thud as the ground cracks
 bed('shared', [BBMAJ9, EBMAJ9, GM7, FSUS, BBMAJ9])
 # a low urgent pulse as the second hash breaks the joins, and no test notices
-urgent(G('shared', 'another', -0.2), G('shared', 'package', 0.2), bpm=92, root=34, g=0.028, steps=(0, 0, 1, 0))
+urgent(G('shared', 'another', -0.2), G('shared', 'package', 0.2), bpm=92, root=34, g=0.05, steps=(0, 0, 1, 0))
 swell([34, 41, 46, 50], W('shared', 'still', 'shared', -0.2), 3.0, 0.02)
 for lid, word in [('keysets', 'key sets'), ('hash', 'One macro'), ('package', 'conventions'), ('package', 'glossary')]:
     thud(W('shared', lid, word, -0.1), 0.05); knock(W('shared', lid, word, -0.08), 0.02, 0, 160)

@@ -115,7 +115,7 @@ for j in range(3):
 #    (felt); Noor's tick
 bed('enterprise', [DM7, BBM7, C, F])
 # a low urgent pulse as the query and the contract disagree, until the build stops
-urgent(G('enterprise', 'stops', -0.2), G('enterprise', 'noor', 0.2), bpm=100, root=38, g=0.03, steps=(0, 0, 1, 0))
+urgent(G('enterprise', 'stops', -0.2), G('enterprise', 'noor', 0.2), bpm=100, root=38, g=0.054, steps=(0, 0, 1, 0))
 lines(G('enterprise', 'folder', 0.0), 7, 0.2, 0.018, -0.3)
 latch(W('enterprise', 'folder', 'enforced'), 0.05, 0.2)
 lines(G('enterprise', 'columns', -0.2), 17, 0.106, 0.016, 0.3)

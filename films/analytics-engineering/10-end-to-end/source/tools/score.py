@@ -188,7 +188,7 @@ paper(W('promise', 'accept', 'decision'), 0.026, 0.3)
 #    (keys, a muted double knock) and the mart skipped (a knock); REQ-FIN-02 struck through (paper), and done (a felt note)
 bed('tests', [EM9, ASUS, DMAJ9, A7, GMAJ7, DMAJ9])
 # a short, low urgent pulse while nothing can pass yet
-urgent(G('tests', 'fail', -0.2), G('tests', 'done', 0.2), bpm=92, root=38, g=0.026, steps=(0, 0, 1, 0))
+urgent(G('tests', 'fail', -0.2), G('tests', 'done', 0.2), bpm=92, root=38, g=0.047, steps=(0, 0, 1, 0))
 lines(G('tests', 'grain', -0.2), 13, 0.18, 0.015, 0.2)
 for word in ['tested as a key', 'Learners that exist', 'award types']:
     knock(W('tests', 'grain', word, -0.1), 0.026, 0.3)

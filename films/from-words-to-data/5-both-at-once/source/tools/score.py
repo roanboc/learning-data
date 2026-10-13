@@ -89,7 +89,7 @@ DOE = [AM9, EM9, CMAJ7, BM7]
 prog('doesnt', DOE, g=0.045, tone='strings', bassg=0.03)
 arp(S0('doesnt') + 0.3, A('doesnt', 'revoked', 0.74), [AM9, EM9], [0, 2, 3, 2], step=0.3, g=0.028, pan=0.2, up=24)
 pulse(S0('doesnt'), A('doesnt', 'revoked', 0.74, 1.0), 100, [(0, k_, 0.028, 0), (2, k_, 0.02, 0), (1, h_, 0.01, 0.2), (3, h_, 0.01, -0.2)], fade=1.0)
-urgent(S0('doesnt') + 0.4, A('doesnt', 'revoked', 0.74, 1.0), bpm=100, root=40, g=0.028, steps=(0, 0, 1, 0))
+urgent(S0('doesnt') + 0.4, A('doesnt', 'revoked', 0.74, 1.0), bpm=100, root=40, g=0.05, steps=(0, 0, 1, 0))
 arp(A('doesnt', 'same', 0.0), E('doesnt'), [CMAJ7, BM7, EM9], [0, 2, 4, 3], step=0.3, g=0.026, pan=-0.2, up=24)
 # 7. Data flowing back: brighter, higher plucks, the pulse back
 BAK = [GMAJ7, D6, EM9, CMAJ7]

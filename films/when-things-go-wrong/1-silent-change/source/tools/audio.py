@@ -122,18 +122,18 @@ def urgent(s0,s1,bpm=104,root=40,g=0.05,fade=1.2,steps=(0,0,7,0),pan=0.0):
     while t0<s1:
         f=min(1,(t0-s0)/fade+0.06,(s1-t0)/fade)
         if f>0:
-            fr=mf(root+steps[k%len(steps)]);x=tt(per*0.85);b=(np.sin(2*np.pi*fr*x)+0.35*np.sin(4*np.pi*fr*x))*np.exp(-x*6)*np.minimum(1,x/0.005)
-            put(ML,MR,_nm(_flt(b.astype(np.float32),'low',700)),t0,g*f,pan)
+            fr=mf(root+steps[k%len(steps)]);x=tt(per*0.85);b=(np.sin(2*np.pi*fr*x)+0.7*np.sin(4*np.pi*fr*x)+0.3*np.sin(6*np.pi*fr*x))*np.exp(-x*6)*np.minimum(1,x/0.005)
+            put(ML,MR,_nm(_flt(b.astype(np.float32),'low',900)),t0,g*f,pan)
             if k%2==0:x=tt(0.35);ph=2*np.pi*np.cumsum(48+70*np.exp(-x*26))/SR;put(ML,MR,_nm((np.sin(ph)*np.exp(-x*9)).astype(np.float32)),t0,g*0.9*f,0.0)
-            x=tt(0.05);put(ML,MR,_nm(_flt(_nz(0.05),'band',(250,1100))*np.exp(-x*100)),t0+per/2,g*0.3*f,pan+0.2)
+            x=tt(0.05);put(ML,MR,_nm(_flt(_nz(0.05),'band',(250,1100))*np.exp(-x*100)),t0+per/2,g*0.45*f,pan+0.2)
         t0+=per;k+=1
 # the feeling under the picture: a slow heartbeat while Ana reads the note; an urgent pulse, leaning on the semitone, from the
 # failed test until nothing wrong has been published; a steadier one while Sam follows the thread back to bronze; and a quick,
 # driving one while the numbers are rerun before nine. The calm chapters have none
 beat(G('banner','note',0.4),S0('night')-0.6,0.03,bpm=66)
-urgent(G('night','unknown',0.3),G('night','safely',0.2),bpm=96,root=33,g=0.04,steps=(0,0,1,0))
-urgent(S0('thread')+1.5,G('bronze','kept',0.6),bpm=84,root=33,g=0.03,fade=2.0)
-urgent(G('recover','rerun',0.2),G('recover','confirm',0.1),bpm=112,root=41,g=0.032)
+urgent(G('night','unknown',0.3),G('night','safely',0.2),bpm=96,root=33,g=0.072,steps=(0,0,1,0))
+urgent(S0('thread')+1.5,G('bronze','kept',0.6),bpm=84,root=33,g=0.054,fade=2.0)
+urgent(G('recover','rerun',0.2),G('recover','confirm',0.1),bpm=112,root=41,g=0.058)
 # 1. the banner, and Ana's message
 pop(G('banner','note',0.2),0.1);ping(G('banner','asks',0.9));shimmer(G('banner','breath',0.1),0.06);tone(G('banner','breath',0.2),0.08,440)
 # 2. the night: tests pass, one fails, the build stops, the alert waits

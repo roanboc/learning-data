@@ -84,7 +84,7 @@ DM9 = [38, 50, 53, 57, 64]; EM7 = [40, 52, 55, 59]; GSUS = [43, 50, 55, 60, 62];
 #    the chef's check; the four stations lighting in the layers' colours; the title on the cello's mark
 bed('brigade', [AM7, FMAJ7, C, G6], 0, cq('brigade', 'breath'), g=0.036, bassg=0.018)
 # the kitchen at work: a low, driving pulse under the stations, easing as the plates reach the pass
-urgent(G('brigade', 'stations', -0.3), G('brigade', 'bridge', -0.2), bpm=116, root=33, g=0.024)
+urgent(G('brigade', 'stations', -0.3), G('brigade', 'bridge', -0.2), bpm=116, root=33, g=0.043)
 st = [W('brigade', 'stations', s) for s in ['sauces', 'roasts', 'fish', 'vegetables']]
 knock(st[0], 0.028, -0.6)                      # a spoon against the copper pan
 lowthud(st[1], 0.07)                           # the roasting tin set down

@@ -101,7 +101,7 @@ if(typeof table==="function"){const TB0=table;table=function(ctx,x,y,name,cols,r
 /* ---------- A Sharper Sketch's number card, at sizes that read ---------- */
 // its line under the number wraps to the card's width at the larger size, and the card grows to hold it
 if(typeof numCard==="function"){const NC0=numCard;numCard=function(ctx,x,y,w,title,num,sub,col,o){const m=phMin(ctx);if(!m||!sub)return NC0.apply(this,arguments);o=o||{};
-  const ss=Math.max(18,m),ls=wrapT(ctx,sub,0,0,w-56,{w:600,size:ss,measure:true}),h=200+(ls.length-1)*ss*1.2;
+  const ss=Math.max(18,m),ls=phWrap(ctx,sub,w-56,ss,600),h=200+(ls.length-1)*ss*1.2;
   glass(ctx,x,y,w,h,18,col,{glow:18,ea:0.7,fill:"rgba(7,12,24,0.92)"});T(ctx,title,x+28,y+46,{w:700,size:24,color:rgba(SOFT,1)});T(ctx,num,x+28,y+140,{w:800,size:88,color:rgba(col,1)});
   ls.forEach((l,i)=>T(ctx,l,x+28,y+180+i*ss*1.2,{w:600,size:ss,color:rgba(SOFT,0.95)}));
   if(o.badge)tag(ctx,x+w-28-(tw(ctx,o.badge,Math.max(16,m),700)+26),y+40,o.badge,o.badgeCol||GOOD,{size:16});};}
@@ -194,3 +194,9 @@ if(typeof platformRow==="function"){const PR0=platformRow;platformRow=function(c
 if(typeof plaque==="function"){const PQ0=plaque;plaque=function(ctx,x,y,w,rows,c){const m=phMin(ctx);if(!m)return PQ0.apply(this,arguments);const rh=Math.max(52,m*2.3),h=20+rows.length*rh;
   glass(ctx,x,y,w,h,14,c,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.9)"});
   rows.forEach((r,i)=>{const yy=y+16+i*rh;let tx=x+18;if(r[2]){const lw=logo(ctx,r[2],tx,yy+8,28);tx+=Math.max(lw,26)+10;}T(ctx,r[0],tx,yy+m*0.85,{size:15,w:700,color:rgba(SOFT,0.95)});T(ctx,r[1],tx,yy+m*1.95,{size:21,w:700});});return h;};}
+
+/* ---------- A Sharper Sketch's calendar card (sketch3.js), at sizes that read ---------- */
+// the coloured band grows to hold its title, and the card grows to hold the date and its label
+if(typeof calCard==="function"){const CA0=calCard;calCard=function(ctx,x,y,title,date,col,a,hi){const m=phMin(ctx);if(!m)return CA0.apply(this,arguments);withA(ctx,a,()=>{const bh=m+16,h=bh+m*2.9+10;
+  glass(ctx,x,y,300,h,14,col,{glow:12+14*(hi||0),ea:0.7,fill:"rgba(7,12,24,0.94)"});ctx.fillStyle=rgba(col,0.9);rr(ctx,x,y,300,bh,14);ctx.fill();ctx.fillStyle="rgba(7,12,24,0.94)";ctx.fillRect(x,y+bh-8,300,10);
+  T(ctx,title,x+150,y+bh/2+m*0.3,{w:800,size:16,align:"center",color:"#0a1020"});T(ctx,date,x+150,y+bh+m*1.35,{w:800,size:28,align:"center",color:rgba(col,1)});T(ctx,"census date",x+150,y+bh+m*2.5,{w:600,size:14,align:"center",color:rgba(SOFT,1)});});};}

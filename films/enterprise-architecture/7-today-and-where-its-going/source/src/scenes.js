@@ -10,23 +10,32 @@
    tools/score.py fires at the same moment as the thing it belongs to here, so keep the two in step. */
 
 /* ---------- 1. An imagined morning ---------- */
-// the street at sunrise, in whatever transform the caller set: sky, turbines, line, homes, the car, the transformer and the crew
-function d7_scene(ctx,S,t,o){const sun=o.sun;d7_sky(ctx,S,sun,true);[300,420,560,1720,1840].forEach((x,i)=>d7_turbine(ctx,x,612+Math.sin(x*0.004)*36,0.9,t+i,rgba(mix([60,64,90],[230,220,230],sun),0.8)));
-  const g=ctx.createLinearGradient(0,D7_GY-40,0,H);g.addColorStop(0,rgba(mix([30,30,40],[120,110,100],sun),1));g.addColorStop(1,rgba(mix([14,14,20],[60,52,50],sun),1));ctx.fillStyle=g;ctx.fillRect(0,D7_GY,W,H-D7_GY);
-  d7_line(ctx,t,o.trade,sun);D7_HOMES.forEach((x,i)=>d7_home(ctx,x,t,sun,{charge:0.4+0.5*hash(i,730)+0.1*Math.sin(t*0.6+i),lit:o.trade*(0.5+0.5*Math.sin(t*1.4+i*1.7))}));
-  d7_car(ctx,640,D7_GY+30,t,1);d7_transformer(ctx,t,o.drift,o.swap);d7_van(ctx,o.vx,D7_GY+70,0.9,t,o.van);}
+// the street at sunrise, in whatever transform the caller set: the sky, and turbines on the hills; the ground in section, with power
+// moving in the cables under the street; the homes, a street light, trees, the kiosk, a car on charge, and the crew's van
+function d7_scene(ctx,S,t,o){const sun=o.sun;d7_sky(ctx,S,sun,true);[900,980,1250].forEach((x,i)=>d7_turbine(ctx,x,612+Math.sin(x*0.004)*36,0.9,t+i,rgba(mix([60,64,90],[230,220,230],sun),0.8)));
+  d7_ground(ctx,t,sun,{trade:o.trade,grid:o.grid,lab:o.lab});
+  D7_HOUSES.forEach((hs,i)=>d7_house(ctx,hs,i,t,sun,{level:0.4+0.45*hash(i,730)+0.1*Math.sin(t*0.6+i),lit:o.trade*(0.5+0.5*Math.sin(t*1.4+i*1.7)),room:1-sstep(0.25,0.7,sun)}));
+  d7_lamp(ctx,1625,D7_GY+12,sun);d7_tree(ctx,622,D7_GY+12,0.86,t,sun,1.3);d7_tree(ctx,1290,D7_GY+12,0.82,t,sun,4.1);
+  d7_kiosk(ctx,t,sun,{drift:o.drift,door:o.door,swap:o.swap});
+  d7_charger(ctx,322,D7_GY+12,470-118,D7_RY-46,t,sun);d7_ev(ctx,470,D7_RY,1,t,sun);d7_evan(ctx,o.vx,D7_RY,0.95,t,sun,o.van);}
 scene("morning",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
   const tS=c("street"),tC=c("crew"),tD=c("drawing"),tT=c("today"),tSent=w("crew","crew is sent"),k=ease(fin(t,tT-0.3,1.3));
-  const sun=clamp((t-0.3)/(tC+2),0,1),dr=clamp((t-w("crew","drift"))/2.0,0,1),vx=lerp(2200,D7_POLE+190,ease(clamp((t-tSent)/2.2,0,1))),swap=fin(t,tSent+2.6,0.8);
+  // the sun comes up; in the night the street is fed from the grid, and once the sun is up the homes trade among themselves; the readings
+  // drift, the van drives up, a door of the kiosk opens, and the transformer is changed
+  const tTr=w("street","trade"),sun=clamp((t-0.3)/(tC+2),0,1),dr=clamp((t-w("crew","drift"))/2.0,0,1),vx=lerp(2200,D7_KX+210,ease(clamp((t-tSent)/2.2,0,1)));
+  const door=fin(t,tSent+2.2,0.4)*(1-fin(t,tSent+3.8,0.5)),swap=fin(t,tSent+2.6,0.8),trade=fin(t,tTr,0.8),grid=fin(t,0.6,0.8)*(1-fin(t,tTr-0.3,1.0));
   // the street, full frame, then drawn small on the right as "the target", beside today's list
   setScreen(ctx,S);ctx.fillStyle="#05070d";ctx.fillRect(0,0,W,H);ctx.save();drift(ctx,t,sc,{z:0.02,y:600});
   ctx.translate(lerp(0,1000,k),lerp(0,250,k));ctx.scale(lerp(1,0.46,k),lerp(1,0.46,k));ctx.beginPath();ctx.rect(0,0,W,H);ctx.clip();
-  d7_scene(ctx,S,t,{sun,trade:fin(t,w("street","trade"),0.8),drift:dr,swap,vx,van:fin(t,tSent,0.4)});ctx.restore();
+  d7_scene(ctx,S,t,{sun,trade,grid,lab:fin(t,1.2,0.6)*(1-fin(t,tT-0.9,0.5)),drift:dr,door,swap,vx,van:fin(t,tSent,0.4)});
+  // the box on the pavement is the transformer
+  arrive(ctx,D7_KX,552,t,w("crew","transformer"),()=>withA(ctx,1-fin(t,tD-0.3,0.4),()=>tag(ctx,D7_KX,552,"transformer",[255,200,140],{align:"center",size:28})),{dy:8});
+  ctx.restore();
   // the frame: a drawing, not a forecast
   const fr=fin(t,w("drawing","drawing")-0.2,0.8);if(fr>0){const x0=lerp(40,1000,k),y0=lerp(40,250,k),fw=lerp(W-80,W*0.46,k),fh=lerp(H-80,H*0.46,k);withA(ctx,fr,()=>{ctx.save();ctx.strokeStyle=rgba(MIG,0.9);ctx.lineWidth=3;ctx.setLineDash([14,10]);ctx.shadowColor=rgba(MIG,0.6);ctx.shadowBlur=14;rr(ctx,x0,y0,fw,fh,18);ctx.stroke();ctx.restore();});}
   setScreen(ctx,S);
   eaYear(ctx,90,90,"imagined · 2045",CLAY,fin(t,0.3,0.6)*(1-fin(t,tT-0.4,0.4)));
-  arrive(ctx,960,160,t,w("street","trade"),()=>withA(ctx,1-fin(t,tC-0.3,0.4),()=>tag(ctx,960,160,"homes trading power, house to house",[170,245,190],{align:"center",size:32})),{dy:10});
+  arrive(ctx,960,160,t,tTr,()=>withA(ctx,1-fin(t,tC-0.3,0.4),()=>tag(ctx,960,160,"homes trading power, house to house",[170,245,190],{align:"center",size:32})),{dy:10});
   d7_trend(ctx,1360,120,500,260,clamp((t-w("crew","readings"))/2.2,0,1),t,fin(t,w("crew","readings")-0.3,0.5)*(1-fin(t,tD-0.3,0.5)));
   arrive(ctx,700,160,t,tSent,()=>withA(ctx,1-fin(t,tD-0.3,0.4),()=>tag(ctx,700,160,"a crew, before it fails",[255,214,170],{align:"center",size:32})),{dy:10});
   arrive(ctx,960,160,t,w("drawing","drawing"),()=>withA(ctx,1-fin(t,tT-0.3,0.4),()=>tag(ctx,960,160,"the target: a drawing, not a forecast",MIG,{align:"center",size:32})),{dy:10});
@@ -128,7 +137,7 @@ scene("views",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   D7_WHY.forEach(([li,s_],k)=>{const[bx,by,bw,bh]=R[li];arrive(ctx,lx-40,by+bh/2,t,w("whole",s_.split(",")[0])-0.1,()=>T(ctx,s_,lx-40,by+bh/2+10,{w:700,size:28,align:"right",color:rgba(mix(LAY6[li][1],INK,0.3),1)}),{dy:6});});
   ctx.restore();
   arrive(ctx,960,100,t,w("drafts","one model"),()=>withA(ctx,1-fin(t,tT-0.3,0.4),()=>tag(ctx,960,100,"one model, in ArchiMate's notation",PARCH,{align:"center",size:30})),{dy:8});
-  arrive(ctx,960,100,t,tT,()=>tag(ctx,960,100,"tools such as Archi or LeanIX keep it; the ideas don't depend on them",PARCH,{align:"center",size:28}),{dy:8});
+  arrive(ctx,960,100,t,tT,()=>tag(ctx,960,100,"modelling tools such as Archi or LeanIX keep it; the ideas don't depend on them",PARCH,{align:"center",size:28}),{dy:8});
   vign(ctx,S);});
 
 /* ---------- 6. Where it's going ---------- */

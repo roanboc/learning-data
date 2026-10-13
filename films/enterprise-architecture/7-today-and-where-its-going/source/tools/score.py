@@ -50,12 +50,17 @@ def press(s, g=0.1):
 def swell(ch, s, sec=3.0, g=0.03):
     """a soft pad swell, instead of a shimmer"""
     pad(ch, s, sec, g, 'warm')
-def van(s, sec=2.2, g=0.03, p0=0.0, p1=-0.8):
-    """a van driving off: a low engine that fades as it goes"""
-    x = tt(sec); r = filt(noise(sec), 'low', 260) * np.exp(-x * 0.9) * np.minimum(1, x / 0.2)
-    n = 6
-    for k in range(n):
-        a = k / n; X(r[int(a * len(r)):int((a + 1 / n) * len(r))], s + a * sec, g, p0 + (p1 - p0) * a)
+def evan(s, sec=2.2, g=0.022, x0=2200, x1=1150):
+    """the crew's electric van arriving, as the picture moves it (an ease in and out from x0 to x1): tyres on the road and a low motor
+    whine whose pitch falls as it slows to a stop, quieter while it is still off the screen, and panned with it as it comes"""
+    x = tt(sec); p = x / sec
+    v = np.where(p < 0.5, 12 * p ** 2, 12 * (1 - p) ** 2) / 3
+    pos = x0 + (x1 - x0) * np.where(p < 0.5, 4 * p ** 3, 1 - (2 - 2 * p) ** 3 / 2)
+    ph = 2 * np.pi * np.cumsum(80 + 240 * v) / SR
+    sig = filt(((np.sin(ph) + 0.35 * np.sin(2 * ph + 0.4)) * 0.5 * v + filt(noise(sec), 'band', (180, 1200)) * 0.5 * v).astype(np.float32), 'low', 1400)
+    sig = sig * (0.45 + 0.55 * np.clip((2063 - pos) / 300, 0, 1)) * np.minimum(1, x / 0.3)
+    pan = np.clip((pos - 960) / 960, -1, 1)
+    X(sig * np.sqrt(0.5 * (1 - pan)), s, g, -1.0); X(sig * np.sqrt(0.5 * (1 + pan)), s, g, 1.0)
 
 # chords (MIDI note numbers): A-flat lydian for the imagined morning; E-flat major and its neighbours for the present
 ABL9 = [44, 51, 55, 58, 62]; ABMAJ7 = [44, 51, 55, 60]; FM9 = [41, 48, 51, 55, 56]; BBSUS = [46, 53, 56, 58, 63]
@@ -71,7 +76,8 @@ def bed(sid, chords, a=None, b=None, g=0.04, tone='warm', bassg=0.02):
 
 
 # 1. An imagined morning: airy pads in A-flat lydian; a swell as the sun comes up; kalimba notes as power starts to move house to house;
-#    low felt notes as the readings drift; the van, a knock as the transformer is swapped, and the kalimba; paper as the frame is drawn
+#    low felt notes as the readings drift; the electric van arriving, a latch as the kiosk's door opens, a knock as the transformer is
+#    changed, the kalimba, and the door shutting softly; paper as the frame is drawn
 #    round the street; paper for the list; the mark under the title
 M = 'morning'
 bed(M, [ABL9, FM9, ABMAJ7, BBSUS, ABL9], 0, cq(M, 'breath'), g=0.028, tone='warm', bassg=0.018)
@@ -79,7 +85,8 @@ swell([44, 51, 55, 62], S0(M) + 0.6, 4.0, 0.022)
 for k, m in enumerate([68, 70, 72, 75, 74]):
     thumb(m, W(M, 'street', 'trade', k * 0.45), 0.022, -0.6 + k * 0.3)
 soft(41, W(M, 'crew', 'drift'), 0.026, 0.0); soft(40, W(M, 'crew', 'drift', 0.9), 0.022, 0.0)
-van(W(M, 'crew', 'crew is sent'), 2.2, 0.022, 0.9, 0.3); knock(W(M, 'crew', 'crew is sent', 2.6), 0.026, 0.1); thumb(63, W(M, 'crew', 'crew is sent', 3.0), 0.02, 0.1)
+evan(W(M, 'crew', 'crew is sent'), 2.2, 0.03); tap(W(M, 'crew', 'crew is sent', 2.2), 0.016, 0.0)
+knock(W(M, 'crew', 'crew is sent', 2.6), 0.026, 0.0); thumb(63, W(M, 'crew', 'crew is sent', 3.0), 0.02, 0.1); knock(W(M, 'crew', 'crew is sent', 4.25), 0.014, 0.0)
 paper(W(M, 'drawing', 'drawing', -0.2), 0.03, 0.0, 0.8)
 paper(C(M, 'today', -0.1), 0.035, -0.5, 0.5)
 bed(M, [EBMAJ7], cq(M, 'breath') + 0.4, None, g=0.03, tone='warm', bassg=0.022)

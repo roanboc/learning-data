@@ -1,6 +1,6 @@
 # The map before the data · Today, and where it's going: script
 
-*The script of Today, and where it's going, film 7 of 11 of The map before the data (a working title), a series on enterprise architecture and why it matters for data, as built: 5:10, in ten chapters, in English, 11 October 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 10. Made to read on a phone from the start: on-screen text is at least 28 px in the frame; the names of systems placed in bulk, in chapter 2, are texture, and each one that matters later is drawn large.*
+*The script of Today, and where it's going, film 7 of 11 of The map before the data (a working title), a series on enterprise architecture and why it matters for data, as built: 5:09, in ten chapters, in English, 13 October 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 10. Made to read on a phone from the start: on-screen text is at least 28 px in the frame; the names of systems placed in bulk, in chapter 2, are texture, and each one that matters later is drawn large.*
 
 ## The promise
 
@@ -14,9 +14,9 @@ On an imagined morning in 2045, in the utility's own region, the homes on one st
 
 | Object | Stands for |
 |---|---|
-| A street at sunrise, "imagined · 2045": homes with panels on their roofs and batteries on their walls, a car charging, wind turbines on the ridge | The target, drawn as a picture: one imagined morning in the utility's own region |
-| Lights moving along the street's line from house to house | Homes trading power from their batteries |
-| A transformer turning amber, a chart of its readings drifting towards a dashed limit, a crew's van, the transformer swapped | Faults predicted, and a crew sent before one happens |
+| A street at sunrise, "imagined · 2045", with no poles or overhead lines: modern homes with solar roofs, batteries and heat pumps, an electric car on charge, wind turbines on the ridge | The target, drawn as a picture: one imagined morning in the utility's own region |
+| A cut-away under the street, "cables under the street": blue light coming in from the grid in the night, then green light moving between the homes along the street's cable | Homes trading power from their batteries, over the street's own network |
+| A kiosk on the pavement, "transformer", outlined in amber; a chart of its readings drifting towards a dashed limit; the crew's electric van; a door opens, and the transformer inside is changed | Faults predicted, and a crew sent before one happens |
 | A dashed pink frame round the street | The target is a drawing, not a forecast |
 | The printed list of 140 systems, scrolling, beside the street drawn small | Today and where it's going: two drawings |
 | Eight capabilities in amber glass, and small blue cards flying from the list into place under them | Systems placed under the capabilities they serve |
@@ -43,9 +43,9 @@ On an imagined morning in 2045, in the utility's own region, the homes on one st
 
 **Narration.** An imagined morning, in 2045, in the utility's own region. As the sun comes up, the homes on one street trade power from their batteries, house to house. A transformer's readings start to drift, and a crew is sent before it fails. Nobody on the street notices. This isn't a forecast. It's a drawing of where the utility wants to go, made as carefully as a drawing of today. And today, it runs on a hundred and forty systems.
 
-**Picture.** "imagined · 2045". A street before dawn: six homes with panels on their roofs and batteries on their walls, a car on charge, a line from pole to pole, a transformer on the middle pole, wind turbines turning on the ridge. The sun comes up behind the hills, the panels catch it, and lights start to move along the line from house to house: "homes trading power, house to house". A panel opens, "transformer readings", its line wandering, then drifting up towards a dashed limit; the transformer turns amber. A crew's van drives in and stops under it: "a crew, before it fails"; the transformer is swapped, and turns grey again. A dashed pink frame draws itself round the whole street: "the target: a drawing, not a forecast". The street shrinks into the frame on the right, under "where it's going"; on the left, the printed list from *Day one*, "140 systems", scrolling, under "today". Wordless breather: both drawings side by side, then the title card.
+**Picture.** "imagined · 2045". A street before dawn, with no poles and no overhead lines: six modern homes (flat roofs with panels or plants, single pitches whose roofs are solar glass, a narrow townhouse with glass balconies), each with a battery on its wall and a heat pump below it; a few windows still lit; an electric car at a charge post; street trees; an LED street light; on the pavement, a kiosk (a compact substation); wind turbines turning on the ridge. Below the road, the ground in a cut-away, "cables under the street": a cable along the street with a service cable up to each home, and a deeper feeder that comes up into the kiosk. In the night, blue light comes in along the feeder and out to the homes. The sun comes up behind the hills, the solar roofs catch it, the street light goes out, and the blue gives way to green light moving between the homes, down one home's cable, along the street and up another's, as their batteries glow: "homes trading power, house to house". The kiosk is labelled "transformer"; a panel opens, "transformer readings", its line wandering, then drifting up towards a dashed limit, and the kiosk is outlined in amber, its status light amber. The crew's electric van drives in and stops beside it: "a crew, before it fails"; a door opens, the transformer inside is changed, the door closes, and the light turns green again; the green light keeps moving under the street. A dashed pink frame draws itself round the whole street: "the target: a drawing, not a forecast". The street shrinks into the frame on the right, under "where it's going"; on the left, the printed list from *Day one*, "140 systems", scrolling, under "today". Wordless breather: both drawings side by side, then the title card.
 
-**On screen.** imagined · 2045 · homes trading power, house to house · transformer readings · a crew, before it fails · the target: a drawing, not a forecast · 140 systems · today · where it's going · Today, and where it's going · applications, technology, and the path to a target · Film 7 of 11
+**On screen.** imagined · 2045 · cables under the street · homes trading power, house to house · transformer · transformer readings · a crew, before it fails · the target: a drawing, not a forecast · 140 systems · today · where it's going · Today, and where it's going · applications, technology, and the path to a target · Film 7 of 11
 
 ### 2 · A hundred and forty systems · 0:40–1:06
 
@@ -71,15 +71,15 @@ On an imagined morning in 2045, in the utility's own region, the homes on one st
 
 **On screen.** strategy · application · technology · manage outages · connect customers · bill customers · OMS · outages · DMS · control · GIS · network map · CIS · customers · Billing · data centre 1 · data centre 2 · cloud · field radio network · each layer serves the one above · change a capability: follow it down · switch off a server: follow it up
 
-### 5 · One map, one notation · 2:09–2:47
+### 5 · One map, one notation · 2:09–2:46
 
-**Narration.** For the first time, the drafts become one model, in ArchiMate's notation. Each block of the early canvases finds its element. A customer segment becomes a stakeholder. A pain reliever, a capability. A key activity, a business process. A key resource, a resource. The whole map, layer by layer: why the utility exists, what it must be able to do, how the work flows, who does it, and what runs it. Tools such as Archi or LeanIX can keep it. The ideas don't depend on them.
+**Narration.** For the first time, the drafts become one model, in ArchiMate's notation. Each block of the early canvases finds its element. A customer segment becomes a stakeholder. A pain reliever, a capability. A key activity, a business process. A key resource, a resource. The whole map, layer by layer: why the utility exists, what it must be able to do, how the work flows, who does it, and what runs it. Modelling tools can keep it. The ideas don't depend on them.
 
-**Picture.** The films' dark glass. On the right, the six layers draw themselves. On the left, four paper notes from the canvases of *Who it serves, and how it pays*, each with its canvas clipped on and its block named beside it: households (customer segment) · fewer, shorter outages (pain reliever) · restore supply (key activity) · poles, wires and crews (key resource). "one model, in ArchiMate's notation". As each block is named, its note flies into its layer and turns to glass with its glyph: households, a stakeholder, in motivation; manage outages, a capability, in strategy; restore supply, a business process; poles, wires and crews, a resource, in strategy. The layers fill one by one, each with a few more elements, and down the left: why it exists · what it must be able to do · how the work flows, who does it · what runs it. "tools such as Archi or LeanIX keep it; the ideas don't depend on them".
+**Picture.** The films' dark glass. On the right, the six layers draw themselves. On the left, four paper notes from the canvases of *Who it serves, and how it pays*, each with its canvas clipped on and its block named beside it: households (customer segment) · fewer, shorter outages (pain reliever) · restore supply (key activity) · poles, wires and crews (key resource). "one model, in ArchiMate's notation". As each block is named, its note flies into its layer and turns to glass with its glyph: households, a stakeholder, in motivation; manage outages, a capability, in strategy; restore supply, a business process; poles, wires and crews, a resource, in strategy. The layers fill one by one, each with a few more elements, and down the left: why it exists · what it must be able to do · how the work flows, who does it · what runs it. "modelling tools such as Archi or LeanIX keep it; the ideas don't depend on them".
 
-**On screen.** motivation · strategy · business · information · application · technology · households · fewer, shorter outages · restore supply · poles, wires and crews · customer segment · pain reliever · key activity · key resource · value proposition canvas · business model canvas · one model, in ArchiMate's notation · manage outages · why it exists · what it must be able to do · how the work flows, who does it · what runs it · tools such as Archi or LeanIX keep it; the ideas don't depend on them
+**On screen.** motivation · strategy · business · information · application · technology · households · fewer, shorter outages · restore supply · poles, wires and crews · customer segment · pain reliever · key activity · key resource · value proposition canvas · business model canvas · one model, in ArchiMate's notation · manage outages · why it exists · what it must be able to do · how the work flows, who does it · what runs it · modelling tools such as Archi or LeanIX keep it; the ideas don't depend on them
 
-### 6 · Where it's going · 2:47–3:11
+### 6 · Where it's going · 2:46–3:09
 
 **Narration.** Where it's going is a second drawing: the target, on the same map, so the two can be compared. Two capabilities are new: predicting faults, and trading power locally. One outage system instead of three. A model of the network's capacity instead of a spreadsheet. And the licence nobody uses, gone.
 
@@ -87,7 +87,7 @@ On an imagined morning in 2045, in the utility's own region, the homes on one st
 
 **On screen.** today · target · 2045 · manage outages · assess network capacity · OMS · outages · DMS · network control · storm tool · 2015 · spreadsheet · Fleet portal 2 · predict faults · trade power locally · new · one outage system · network capacity model · fault prediction · local trading platform · on the same map, so the two can be compared
 
-### 7 · The gaps · 3:11–3:31
+### 7 · The gaps · 3:09–3:30
 
 **Narration.** Laid side by side, the differences between the two are the gaps. Each gap is a piece of work. Merge three outage systems into one. Build the capacity model. Switch off the system nobody uses. Add sensors, and predict faults. Open local trading.
 
@@ -95,7 +95,7 @@ On an imagined morning in 2045, in the utility's own region, the homes on one st
 
 **On screen.** today · gaps · target · 2045 · three outage systems · a spreadsheet · Fleet portal 2 · no sensors · no trading · one outage system · network capacity model · — · fault prediction · local trading platform · merge three outage systems into one · build the capacity model · switch off the system nobody uses · add sensors, predict faults · open local trading · each gap: a piece of work
 
-### 8 · The path, in order · 3:31–4:08
+### 8 · The path, in order · 3:30–4:06
 
 **Narration.** The path is a third drawing: plateaus, the steady states in between, and the order in which the gaps are closed. The order matters. Trading power on a street needs to know how much that street can take, so the capacity model comes first. Predicting faults needs sensors, so the sensors come before it. By 2028, one outage system and a capacity model. By 2033, fault prediction. Local trading, after that.
 
@@ -103,7 +103,7 @@ On an imagined morning in 2045, in the utility's own region, the homes on one st
 
 **On screen.** plateaus: the steady states in between · today · 2028 · 2033 · 2045 · target · one outage system · capacity model · switch off the unused system · sensors · fault prediction · local trading · the order: what depends on what
 
-### 9 · Why, written down · 4:08–4:36
+### 9 · Why, written down · 4:06–4:34
 
 **Narration.** Each choice on the path is written down with why: what was decided, what else was considered, and who decided. Keep the newest outage system, and fold the storm tool into it. Considered: keeping all three, or buying a new one. Decided by Grace. Three years on, someone will ask why the storm tool was switched off. The answer will be there.
 
@@ -111,7 +111,7 @@ On an imagined morning in 2045, in the utility's own region, the homes on one st
 
 **On screen.** decision record · 7 · one outage system · decided · keep the newest outage system; fold the storm tool into it · considered · keep all three · buy a new one · why · three systems: three versions of every outage · decided by · Grace · October 2026 · status · accepted · what was decided, what else was considered, who decided · 2029 · Why was the storm tool switched off?
 
-### 10 · Three drawings · 4:36–5:10
+### 10 · Three drawings · 4:34–5:09
 
 **Narration.** Grace confirms the network's systems as they stand today. The target and the path go to the board, as drafts. Tomás's note has an answer: today, placed on the map; a target, drawn as carefully; and a path between them, with reasons. The map of how the utility works is drawn, for now. Now, at last, he can open the backlog from day one, and ask which questions matter.
 
@@ -140,11 +140,11 @@ The film can stop at the end of three chapters, with one question each (`site/as
 
 ## Rigour to check before recording
 
-- **The imagined morning** is labelled as imagined, and set in the series' own fictional region, as the proposal requires for an opening in the future; it's a target drawing, not a forecast. Local trading of power between neighbours (peer-to-peer or community trading) has been trialled in several countries but isn't standard practice; predicting transformer faults from sensor and meter data (condition monitoring, predictive maintenance) is in use and growing. The street and its devices are drawn in the series' own style.
+- **The imagined morning** is labelled as imagined, and set in the series' own fictional region, as the proposal requires for an opening in the future; it's a target drawing, not a forecast. Local trading of power between neighbours (peer-to-peer or community trading) has been trialled in several countries but isn't standard practice; predicting transformer faults from sensor and meter data (condition monitoring, predictive maintenance) is in use and growing. Many towns already run their low-voltage networks underground, with compact substations (kiosks) at ground level, and new streets are mostly built that way; the street is drawn so, with a cut-away to show the cables, and its homes, car and van as they might be built now. When neighbours trade, power flows on the street's own low-voltage cables, not through the transformer. In the picture the green keeps moving while the transformer is changed: in this imagined street the batteries carry it, as an island, for those minutes; today the same job is done with a short planned outage or a temporary generator. The street and its devices are drawn in the series' own style.
 - **Placing systems under capabilities** (capability-to-application mapping) is common practice in application portfolio management, and in TOGAF's and BIZBOK's guidance. "Shadow systems" (or shadow IT) are systems and tools, often spreadsheets, that run part of the business outside the official portfolio. Overlaps, gaps and systems that serve no capability are what application rationalisation looks for; the film doesn't name frameworks for it (such as tolerate, invest, migrate, eliminate).
 - **The layers** follow ArchiMate 3.2: application components serve business behaviour and are realised by, or run on, technology nodes; the film draws "serving" as a line from capability to application, a simplification (ArchiMate relates applications to capabilities through realisation and serving, often via business behaviour). TOGAF's business, data, application and technology architectures make the same split. The series' insight 5: each layer is derived from the one above.
 - **Canvas blocks to ArchiMate elements** follow the proposal's mapping: a customer segment to a stakeholder (it could also be a business actor or role), a pain reliever to a capability (it could also be a product feature or a service), a key activity to a business process (or function), a key resource to a resource. These are reasonable first mappings, not rules of either framework; ArchiMate's resource and capability are strategy elements, its stakeholder a motivation element. The canvases are Strategyzer's, as credited in *Who it serves, and how it pays*.
-- **Tools.** Archi is a free, open-source ArchiMate modelling tool; LeanIX (now SAP LeanIX) is a commercial enterprise architecture management service. Both are named once, as the proposal planned, alongside the point that the ideas don't depend on them. Check the names on the day.
+- **Tools.** Archi is a free, open-source ArchiMate modelling tool; LeanIX (now SAP LeanIX) is a commercial enterprise architecture management service. Both are named once, on screen, as the proposal planned, alongside the point that the ideas don't depend on them; the voice says only "modelling tools", because a synthetic voice misreads both names. ArchiMate is said with a hard "ch" ("ARK-ee-mate"), and the voice is given that spelling (`say` in `narration.js`). Check the names on the day.
 - **Baseline, target and transition** follow TOGAF (baseline and target architectures, gap analysis, transition architectures, migration planning) and ArchiMate 3.2's implementation and migration elements: plateau (a relatively stable state of the architecture during a limited period), gap (the difference between two plateaus) and work package; the gap and plateau glyphs on screen are ArchiMate's, the colour the series' own. The series' insight 8: today, the target and the path are drawn separately.
 - **Decision records** follow the practice of architecture decision records (Michael Nygard, 2011: context, decision, status, consequences) and TOGAF's architecture decision log; the fields on screen are a common simplification. The series' insight 9: every decision records why.
 - **Merging an outage system and a network control system** into one (often called an advanced distribution management system) is a common direction for distribution utilities; the film keeps it generic.
@@ -152,4 +152,4 @@ The film can stop at the end of three chapters, with one question each (`site/as
 
 ## Pacing report
 
-From `source/tools/pace.py`, as built: 5:10, 653 words, 126 words a minute, the voice speaking 73% of the time; no sentence with under 0.5 s after it, and no stop of 2.5 s or more inside a chapter. Three wordless moments: today's list beside the imagined street, then the title; the light moving along the path, plateau by plateau; and the end card. `source/tools/legible.py`: 299 pieces of text, none smaller than 28 px. `source/tools/check.py`: every frame draws.
+From `source/tools/pace.py`, as built: 5:09, 649 words, 126 words a minute, the voice speaking 73% of the time; no sentence with under 0.5 s after it, and no stop of 2.5 s or more inside a chapter. Three wordless moments: today's list beside the imagined street, then the title; the light moving along the path, plateau by plateau; and the end card. `source/tools/legible.py`: 302 pieces of text, none smaller than 28 px. `source/tools/check.py`: every frame draws.

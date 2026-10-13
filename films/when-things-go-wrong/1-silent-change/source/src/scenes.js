@@ -65,7 +65,7 @@ scene("thread",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
     const zf=1+(z-1)*1.5;if(zf<3.2){ctx.setTransform(S*zf,0,0,S*zf,S*(W/2-cx*zf),S*(H/2-cy*zf));personBack(ctx,"sam",420,1745,2.3,{t});}
     return;}
   // every framing holds whole boxes: the whole lineage; then the dashboard's end; then staging and the rows kept aside
-  world(ctx,S);camKeys(ctx,S,[[2.9,945,540,1.0],[c("back")+0.2,945,540,1.0],[c("back")+1.6,1275,520,1.17],[c("staging")-0.2,1275,520,1.17],[c("staging")+2.0,750,560,1.3],[sc.dur+1,750,560,1.3]],t);
+  world(ctx,S);camKeys(ctx,S,[[2.9,945,540,1.0],[c("back")+0.2,945,540,1.0],[c("back")+1.6,1185,520,1.17],[c("staging")-0.2,1185,520,1.17],[c("staging")+2.0,750,560,1.3],[sc.dur+1,750,560,1.3]],t);
   lineWorld(ctx,t,k,fin(t,c("staging")+1.6),1-fin(t,c("staging")-0.2,1.0));});
 
 /* ---------- 5. The cause, in bronze ---------- */

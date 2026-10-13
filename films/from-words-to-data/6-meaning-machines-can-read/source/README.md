@@ -10,7 +10,7 @@
 | `src/breath.js` | The few longer pauses: the title, the four floors standing together, and the ending. Every sentence already gets a beat of 0.8 s from `narration.js`. |
 | `src/machines.js` | This film's components: the organic past (tapering branches, leaves, breathing paper, the robin, Linnaeus's tree, Nightingale's forms), the four floors of meaning and their contents, Genie and the policy document, the semantic layer's metric card and the tools that ask it, the shelf of standards, the three definitions, the knowledge graph, a digital credential, and `LV`, the pictures of the labs and scenarios. |
 | `src/scenes.js` | The eight chapters. The title is part of the first one. |
-| `tools/score.py` | The film's music and sounds, in C Lydian: FM bells, glass pads and a celesta; a harp over strings for the history; plucks for Genie; a soft pulse for the semantic layer. |
+| `tools/score.py` | The film's music and sounds, in C Lydian: FM bells, glass pads and a celesta; a harp over strings for the history; plucks for Genie, and a short, low urgent pulse when its guess goes wrong; a soft pulse for the semantic layer. |
 | `tools/` | The series' tools (in `../../shared/tools/`), pointed at this film. |
 
 ## Setup (once)

@@ -52,16 +52,16 @@ The [proposal](proposal.md) records how the series was planned and the decisions
 - **The same people.** The square from *When things go wrong*, plus two: Noor Rahman, the data architect, who guides the series, and Tom Whitfield, who runs short courses. Mei Tanaka, from the registrar's office, owns the words.
 - **The series' own components**, in [`shared/src/words.js`](shared/src/words.js): the credential card in every age (clay, wax, paper, badge, digital), wax seals, the offices' cards, the word–idea–thing triangle, pencil and paper, word histories, the warm backgrounds of the past, the title and end cards, and the four dots of the series' motif.
 - **The same look for time:** the past is warm, like clay and parchment, with a date in the corner; the present is the films' dark glass.
-- **One motif, seven sounds.** Every film plays the series' four notes (1, 5, 6, 3) at its title and its end, in its own key and on its own instrument; everything else about the music differs, so no film sounds like another:
+- **One motif, seven sounds.** Every film plays the series' four notes (1, 5, 6, 3) at its title and its end, in its own key and on its own instrument; everything else about the music differs, so no film sounds like another. All seven keep their effects and their brightest instruments soft and low (`soft_palette()` in `shared/tools/music.py`: a celesta or a bell plays as a low felt note, a woodblock as a wooden knock, a hi-hat or a clock as a muffled tick), low-pass the whole score at 2.6 kHz so no instrument rings above the voice (`soften()`), and add a low, urgent pulse (`urgent()`) where the story turns to an error:
 
 | Film | Sound |
 |---|---|
-| What's in a word | A kalimba, a breathy flute, a choir and a frame drum, in D, between Dorian and major; birdsong, alarm calls and a stylus in clay |
-| Older than the systems | Organ and reed drones with a harp and a lute for the past, then glass pads and an e-piano for today's systems, in A minor to C major; seals and quills |
-| Built to write, built to read | A busy marimba and woodblock for writing against slow strings and a felt piano for reading, in B-flat; quills, keys and ledger pages |
+| What's in a word | A kalimba, a breathy flute, a choir and a frame drum, in D, between Dorian and major; birdsong, alarm calls (with an urgent pulse) and a stylus in clay |
+| Older than the systems | Organ and reed drones with a harp and a lute for the past, then glass pads and an e-piano for today's systems, in A minor to C major, with an urgent pulse at Mars; seals and quills |
+| Built to write, built to read | A busy marimba and woodblock for writing against slow strings and a felt piano for reading, in B-flat, with an urgent pulse when the books disagree; quills, keys and ledger pages |
 | Many ways to read | Library jazz: an e-piano on seventh chords, a walking bass, brushes, in F; card drawers and date stamps |
-| Both at once | Two interlocking synth arpeggios over a soft pulse, in E minor to major, after a ragtime piano and a cash register for 1879 |
-| Meaning machines can read | Glass bells, glass pads and a celesta in C Lydian; a harp and strings for the eighteenth and nineteenth centuries |
+| Both at once | Two interlocking synth arpeggios over a soft pulse, in E minor to major, with an urgent low line at the wrong count, after a ragtime piano and a cash register for 1879 |
+| Meaning machines can read | Glass bells, glass pads and a celesta in C Lydian, with a short urgent pulse when Genie guesses wrong; a harp and strings for the eighteenth and nineteenth centuries |
 | Keeping it true | Strings and a felt piano, with a pulse that follows the feeling, in C, drifting to A minor and back; *What's in a word*'s kalimba and *Older than the systems*' bell return at the end |
 
 - **The same craft.** Narration only; a flowing pace of about 125 to 135 words a minute; four Pause and think questions per film (five in *Keeping it true*, for its chapter on what remains); labs and scenarios on the site, in English and Spanish. See [PLAYBOOK.md](../../PLAYBOOK.md), and its section on what this series added.

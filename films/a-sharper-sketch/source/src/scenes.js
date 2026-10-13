@@ -115,7 +115,8 @@ scene("census",(ctx,S,t,sc)=>{
   E.Offering.hi=pulse(t,cA+1.4,2.4);diagram(ctx,E,L2R.map(r=>r.concat([{}])));
   // the census date moves from the term to the unit offering
   if(mv>0&&mv<1){const p=lerpP([1620,752],[1200,532],mv);T(ctx,"census date",p[0],p[1],{w:600,size:16,align:"center",color:rgba(REF,1)});glow(ctx,p[0],p[1]-6,60,REF,0.4);}
-  withA(ctx,fin(t,cT+0.2)*(1-sstep(cA,cA+0.5,t)),()=>tag(ctx,1620,830,"one date for everyone",EXT,{align:"center",size:18}));
+  // above the term it describes: below it, the draft stamp would hide it
+  withA(ctx,fin(t,cT+0.2)*(1-sstep(cA,cA+0.5,t)),()=>tag(ctx,1625,626,"one date for everyone",EXT,{align:"center",size:18}));
   // the same unit, two offerings, two census dates
   withA(ctx,fin(t,cS),()=>{calCard(ctx,1120,200,"DS101 · Semester 1","31 Mar",SK,1,pulse(t,cS+0.3,2)+(sc.breathe&&t>B?pulse(t,B+0.5,2)+pulse(t,B+2.9,2):0));calCard(ctx,1450,200,"DS101 · Summer","20 Jan",EXT,fin(t,cS+0.8),pulse(t,cS+1.1,2)+(sc.breathe&&t>B?pulse(t,B+1.7,2)+pulse(t,B+4.1,2):0));});
   withA(ctx,fin(t,cA+2.0),()=>tag(ctx,1200,610,"adopted from the reference",ADOPT,{align:"center",size:16}));

@@ -23,7 +23,8 @@ const pix=(x,y)=>{x=clamp(x|0,0,W-1);y=clamp(y|0,0,H-1);const i=(y*W+x)*4,d=FR.p
 // the pixel the camera dives into: on the glowing edge of the second lens, where the light fades into the dark
 const FOCUS={x:470,y:540};
 // the film itself, at any moment, full screen
-function ildAt(ctx,S,t){ctx.save();ILD.renderFrame(ctx,S,t);ctx.restore();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=1;ctx.globalCompositeOperation="source-over";}
+// a frame of The Inner Life of Data, drawn as that film draws it: a picture of another film, so the phone layer leaves its words as they are
+function ildAt(ctx,S,t){ctx.save();phAsDeco(true,()=>ILD.renderFrame(ctx,S,t));ctx.restore();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=1;ctx.globalCompositeOperation="source-over";}
 // a small copy of the film at any moment, for a picture in a picture
 const MINI=new Map();
 function ildMini(t,w){let c=MINI.get(w);if(!c){c=mkCanvas(w,Math.round(w*9/16));MINI.set(w,c);}const x=c.getContext("2d");x.save();ILD.renderFrame(x,w/W,t);x.restore();return c;}
@@ -49,14 +50,15 @@ function rgbCard(ctx,x,y,p,a,o){o=o||{};withA(ctx,a,()=>{glass(ctx,x,y,420,230,1
 
 /* ---------- code ---------- */
 // a panel of simplified code: the running line is lit, lines appear as they're reached
-function codePanel(ctx,x,y,w,lines,o){o=o||{};const lh=o.lh||44,h=o.h||(lines.length*lh+(o.title?92:44));glass(ctx,x,y,w,h,18,o.edge||CYAN,{glow:16,ea:0.5,fill:"rgba(6,10,20,0.93)"});
+function codePanel(ctx,x,y,w,lines,o){o=o||{};const fs=Math.max(o.size||24,phMin(ctx)),lh=Math.max(o.lh||44,fs*1.3),h=o.h||(lines.length*lh+(o.title?92:44));glass(ctx,x,y,w,h,18,o.edge||CYAN,{glow:16,ea:0.5,fill:"rgba(6,10,20,0.93)"});
   let yy=y+44;if(o.title){T(ctx,o.title,x+26,y+40,{w:700,size:18,color:rgba(o.edge||CYAN,1)});yy=y+88;}
   lines.forEach((l,i)=>{const sh=o.shown==null?1:clamp(o.shown-i,0,1);if(sh<=0)return;const hi=o.hi===i?1:0;
     if(hi){ctx.fillStyle=rgba(o.edge||CYAN,0.14);rr(ctx,x+12,yy-lh*0.68,w-24,lh*0.92,8);ctx.fill();ctx.fillStyle=rgba(o.edge||CYAN,0.9);rr(ctx,x+12,yy-lh*0.68,4,lh*0.92,2);ctx.fill();}
-    withA(ctx,sh,()=>{let xx=x+30;(Array.isArray(l)?l:[[l,INK]]).forEach(([s,c])=>{T(ctx,s,xx,yy,{f:"mono",w:500,size:o.size||24,color:rgba(c,hi||o.hi==null?1:0.72)});xx+=tw(ctx,s,o.size||24,500,"mono");});});yy+=lh;});}
+    withA(ctx,sh,()=>{let xx=x+30;(Array.isArray(l)?l:[[l,INK]]).forEach(([s,c])=>{T(ctx,s,xx,yy,{f:"mono",w:500,size:fs,color:rgba(c,hi||o.hi==null?1:0.72)});xx+=tw(ctx,s,fs,500,"mono");});});yy+=lh;});}
 // the real source of a function, as the film runs it: wrapped as it is, with no clean-up
 function srcLines(src,cols){const out=[];src.split("\n").forEach(line=>{for(let i=0;i<line.length;i+=cols)out.push(line.slice(i,i+cols));});return out;}
-function realCode(ctx,x,y,w,h,src,o){o=o||{};const fs=o.size||15,cw=fs*0.6,cols=Math.floor((w-48)/cw),L=srcLines(src,cols),lh=fs*1.45,max=Math.floor((h-86)/lh);
+// on a phone the lines are drawn at the size that reads, so fewer of them fit and the rest fade out under the panel's edge
+function realCode(ctx,x,y,w,h,src,o){o=o||{};const fs=Math.max(o.size||15,phMin(ctx)),cw=fs*0.6,cols=Math.floor((w-48)/cw),L=srcLines(src,cols),lh=fs*1.45,max=Math.floor((h-86)/lh);
   glass(ctx,x,y,w,h,18,AMBER,{glow:18,ea:0.55,fill:"rgba(8,8,14,0.95)"});T(ctx,o.title||"the real code",x+24,y+38,{w:700,size:18,color:rgba(AMBER,1)});if(o.file)T(ctx,o.file,x+w-24,y+38,{w:500,size:16,align:"right",f:"mono",color:rgba(SOFT,0.9)});
   const shown=o.reveal==null?L.length:Math.floor(L.length*clamp(o.reveal,0,1));
   L.slice(0,Math.min(max,shown)).forEach((l,i)=>T(ctx,l,x+24,y+76+i*lh,{f:"mono",w:500,size:fs,color:"rgba(255,226,190,0.92)"}));

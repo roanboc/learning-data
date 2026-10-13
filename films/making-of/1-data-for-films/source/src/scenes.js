@@ -117,7 +117,8 @@ scene("parts",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
 const CAM_FIT=[1460,470,0.49],CAM_IN=[1190,470,1.8];
 scene("camera",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),f0=c("fly")+0.4,f1=f0+4.0;
   const cam=camAt([[0,CAM_FIT[0],CAM_FIT[1],CAM_FIT[2]],[f0,CAM_FIT[0],CAM_FIT[1],CAM_FIT[2]],[f1,CAM_IN[0],CAM_IN[1],CAM_IN[2]],[sc.dur+2,CAM_IN[0]+40,CAM_IN[1],CAM_IN[2]*1.04]],t);
-  bgWorld(ctx,S,cam);worldBase(ctx,t);worldTiles(ctx,t+30);
+  // zoomed out, the whole platform is a picture: its labels are drawn at the world's own size, and read once the camera is in
+  bgWorld(ctx,S,cam);phAsDeco(cam.z<0.9,()=>{worldBase(ctx,t);worldTiles(ctx,t+30);});
   // what the camera will show: a screen-sized window onto the world
   const va=fin(t,c("notlens")+0.4,0.6)*(1-fin(t,f1-1.4,0.9));if(va>0){const w=W/CAM_IN[2],h=H/CAM_IN[2];withA(ctx,va,()=>{ctx.strokeStyle=rgba(AMBER,0.95);ctx.lineWidth=3/cam.z;ctx.setLineDash([16/cam.z,10/cam.z]);ctx.strokeRect(CAM_IN[0]-w/2,CAM_IN[1]-h/2,w,h);ctx.setLineDash([]);});}
   setScreen(ctx,S);
@@ -126,7 +127,7 @@ scene("camera",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),f0=c("fly")+0.4,f1=f0+4.0;
   withA(ctx,fin(t,c("notlens")-0.1,0.6),()=>{glass(ctx,1380,70,480,150,16,AMBER,{glow:12,ea:0.5,fill:"rgba(6,10,20,0.93)"});T(ctx,"the camera",1404,106,{w:700,size:19,color:rgba(AMBER,1)});
     [["across",cam.x.toFixed(0)],["down",cam.y.toFixed(0)],["zoom",cam.z.toFixed(2)]].forEach(([k,v],i)=>{const on=fin(t,c("notlens")+1.6+i*0.6,0.4);withA(ctx,0.35+0.65*on,()=>{T(ctx,k,1404+i*152,150,{w:600,size:17,color:rgba(SOFT,1)});T(ctx,v,1404+i*152,190,{f:"mono",w:500,size:30});});});});
   withA(ctx,fin(t,c("before")-0.1,0.6)*(1-fin(t,f0,0.6)),()=>{glass(ctx,60,70,1200,150,16,AMBER,{glow:14,ea:0.5,fill:"rgba(8,8,14,0.95)"});T(ctx,"the real code: setCam(), from core.js, run before anything is drawn",84,108,{w:700,size:18,color:rgba(AMBER,1)});
-    const L=srcLines(SRC.setCam,96);L.forEach((l,i)=>T(ctx,l,84,150+i*30,{f:"mono",w:500,size:19,color:"rgba(255,226,190,0.95)"}));});
+    const fs=Math.max(19,phMin(ctx)),L=srcLines(SRC.setCam,Math.min(96,Math.floor(1104/(fs*0.6))));L.forEach((l,i)=>T(ctx,l,84,150+i*fs*1.25,{f:"mono",w:500,size:19,color:"rgba(255,226,190,0.95)"}));});
   vign(ctx,S);});
 
 /* ---------- 7. Time ---------- */
@@ -145,9 +146,9 @@ scene("time",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),b0=c("back")+0.3;
   // easing, and randomness
   if(ov>0){dark(ctx,S,0.82*ov);setScreen(ctx,S);withA(ctx,ov*(1-ex),()=>{const ra=fin(t,c("random")-0.3,0.6);
     withA(ctx,1-ra,()=>{const u=((t-c("ease"))%2.6)/2.2;curvePlot(ctx,160,170,760,440,x=>x,clamp(u,0,1),[200,210,230],"constant speed: mechanical");curvePlot(ctx,1000,170,760,440,easeCam,clamp(u,0,1),CYAN,"eased in and out: calm");
-      withA(ctx,fin(t,c("ease")+2.4,0.6),()=>{glass(ctx,1000,640,760,90,14,AMBER,{glow:10,ea:0.5,fill:"rgba(8,8,14,0.95)"});T(ctx,"the real code, core.js",1022,672,{w:700,size:16,color:rgba(AMBER,1)});T(ctx,SRC.easeCam,1022,708,{f:"mono",w:500,size:17,color:"rgba(255,226,190,0.95)"});});});
-    withA(ctx,ra,()=>{glass(ctx,160,170,1600,120,14,AMBER,{glow:10,ea:0.5,fill:"rgba(8,8,14,0.95)"});T(ctx,"the real code, core.js: a number that looks random, but is always the same for the same n",184,206,{w:700,size:17,color:rgba(AMBER,1)});
-      T(ctx,SRC.hash,184,254,{f:"mono",w:500,size:19,color:"rgba(255,226,190,0.95)"});
+      withA(ctx,fin(t,c("ease")+2.4,0.6),()=>{const fs=Math.max(17,phMin(ctx)),L=srcLines(SRC.easeCam,Math.floor(716/(fs*0.6)));glass(ctx,1000,640,760,56+L.length*fs*1.25,14,AMBER,{glow:10,ea:0.5,fill:"rgba(8,8,14,0.95)"});T(ctx,"the real code, core.js",1022,672,{w:700,size:16,color:rgba(AMBER,1)});L.forEach((l,i)=>T(ctx,l,1022,708+i*fs*1.25,{f:"mono",w:500,size:17,color:"rgba(255,226,190,0.95)"}));});});
+    withA(ctx,ra,()=>{const fs=Math.max(19,phMin(ctx)),HL=srcLines(SRC.hash,Math.floor(1552/(fs*0.6)));glass(ctx,160,170,1600,84+HL.length*fs*1.25,14,AMBER,{glow:10,ea:0.5,fill:"rgba(8,8,14,0.95)"});T(ctx,"the real code, core.js: a number that looks random, but is always the same for the same n",184,206,{w:700,size:17,color:rgba(AMBER,1)});
+      HL.forEach((l,i)=>T(ctx,l,184,254+i*fs*1.25,{f:"mono",w:500,size:19,color:"rgba(255,226,190,0.95)"}));
       for(let i=0;i<10;i++){const kk=40+i,p=tileProps(kk),x=250+i*160;dtile(ctx,x,470,110,0,{cell:p.cell,q:p.err||p.dup?0:1,app:p.app,err:p.err},fin(t,c("random")+0.6+i*0.1,0.3));
         T(ctx,"hash("+kk+")",x,560,{f:"mono",w:500,size:15,align:"center",color:rgba(SOFT,0.95)});T(ctx,hash(kk,51).toFixed(3),x,586,{f:"mono",w:500,size:17,align:"center"});
         if(p.err||p.dup)withA(ctx,fin(t,c("random")+1.6,0.4),()=>tag(ctx,x,630,p.err?"error":"duplicate",p.err?BAD:APP.hr.c,{align:"center",size:15}));}});});}

@@ -147,11 +147,15 @@ scene("yaml",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   arrive(ctx,600,458,t,cO,()=>sq_code(ctx,60,270,1080,"models/core/student/_student__conceptual.yml",SQ_YL,{size:18,lh:30,p:yp,label:SQ_RUN,edge:BPL,lit:{1:on(L1,L2),2:Math.max(on(L1,L2),Lw),3:Math.max(on(L1,L2),Lw),4:on(L2,L3),5:L3,6:L3,7:L3,8:L3,9:L3}}),{dy:26});
   arrive(ctx,600,244,t,cO+0.3,()=>withA(ctx,1-fin(t,cR-0.2,0.5),()=>tag(ctx,600,244,"written once · YAML",BPL,{align:"center",size:20})),{from:0.8});
   arrive(ctx,600,244,t,cR,()=>tag(ctx,600,244,"the meaning",TRUST,{align:"center",size:20}),{from:0.8});
-  arrive(ctx,100,688,t,w("words","business's words"),()=>tag(ctx,100,688,"the business's words, not a system's",TRUST,{size:20}),{dy:14});
+  // on a phone the file wraps to more lines, so the note goes under it
+  const pm=phMin(ctx),ty=pm?Math.min(1040,270+76+phCodeRows(ctx,1080,SQ_YL,Math.max(18,pm)).length*Math.max(30,Math.round(Math.max(18,pm)*1.32))+36):688;
+  arrive(ctx,100,ty,t,w("words","business's words"),()=>tag(ctx,100,ty,"the business's words, not a system's",TRUST,{size:20}),{dy:14});
   // beside it, the diagram: its Mermaid source types, and the diagram renders from it line by line
   const mp=clamp((t-cD+0.1)/3.4,0,1),mq=SQ_MM.map((_,i)=>clamp(mp*(SQ_MM.length+0.3)-i-0.3,0,1));
-  arrive(ctx,1520,575,t,cD-0.3,()=>{sq_code(ctx,1180,270,680,"models/core/student/_student__conceptual.md",SQ_MM,{size:18,lh:28,p:mp,edge:KIND,h:620,lit:{1:fin(t,w("diagram","holds credentials"),0.4)*(1-fin(t,cR,0.5)),2:fin(t,w("diagram","holds credit"),0.4)*(1-fin(t,cR,0.5))},litCol:KIND});
-    ctx.fillStyle="rgba(170,200,245,0.12)";ctx.fillRect(1196,516,648,1.2);sq_erd(ctx,mq,t);},{dy:26});
+  // on a phone the source wraps and takes more room: the card grows, and the diagram it renders is drawn as a picture in what's left
+  arrive(ctx,1520,575,t,cD-0.3,()=>{const pm=phMin(ctx),sz=Math.max(18,pm),cb=pm?270+76+phCodeRows(ctx,680,SQ_MM,sz).length*Math.max(28,Math.round(sz*1.32)):516;
+    sq_code(ctx,1180,270,680,"models/core/student/_student__conceptual.md",SQ_MM,{size:18,lh:28,p:mp,edge:KIND,h:pm?790:620,lit:{1:fin(t,w("diagram","holds credentials"),0.4)*(1-fin(t,cR,0.5)),2:fin(t,w("diagram","holds credit"),0.4)*(1-fin(t,cR,0.5))},litCol:KIND});
+    ctx.fillStyle="rgba(170,200,245,0.12)";ctx.fillRect(1196,cb,648,1.2);if(!pm)sq_erd(ctx,mq,t);else{const k=Math.min(1,(1046-cb-18)/310);ctx.save();ctx.translate(1520,cb+18);ctx.scale(k,k);ctx.translate(-1520,-556);phAsDeco(true,()=>sq_erd(ctx,mq,t));ctx.restore();}},{dy:26});
   arrive(ctx,1520,244,t,w("diagram","drawn by hand"),()=>withA(ctx,1-fin(t,cR+0.2,0.5),()=>tag(ctx,1520,244,"drawn by hand",KIND,{align:"center",size:20})),{from:0.8});
   arrive(ctx,1520,244,t,w("read","anyone"),()=>tag(ctx,1520,244,"anyone can read it",KIND,{align:"center",size:20}),{from:0.8});
   ctx.restore();vign(ctx,S);});
@@ -179,8 +183,8 @@ scene("owners",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   // each meaning has an owner: Mei on the learner, the credential and the award; the learning team on two kinds of credential
   const mA=fin(t,w("mei","Mei")-0.2,0.5),tA=fin(t,w("mei","learning team")-0.2,0.5),mHi=fin(t,cW,0.6);
   ["learner","cred","award"].forEach((k,i)=>{const[x0,y,bw]=B[k],x=k==="award"?x0+bw:x0;arrive(ctx,x,y,t,w("mei","owns learner")+i*0.25-0.2,()=>sq_face(ctx,"mei",x,y,30,1,{t,hi:mHi}),{from:0.5});});
-  const[cx_,cy_,cw_]=B.cred;arrive(ctx,cx_+cw_-60,cy_-18,t,w("mei","microcredentials")-0.2,()=>{[["microcredential",cx_+60],["badge",cx_+232]].forEach(([s,x])=>{const tw_=tw(ctx,s,18,700)+22;
-    glass(ctx,x,cy_-32,tw_,28,8,TRUST,{glow:6,ea:0.8,fill:"rgba(20,50,110,0.95)"});T(ctx,s,x+11,cy_-12,{w:700,size:18,color:rgba(BPL,1)});});sq_face(ctx,"tom",cx_+326,cy_-18,17,1,{t});},{from:0.6});
+  const[cx_,cy_,cw_]=B.cred;arrive(ctx,cx_+cw_-60,cy_-18,t,w("mei","microcredentials")-0.2,()=>{const pm=phMin(ctx),bs=Math.max(18,pm);let bx=cx_+60;[["microcredential",cx_+60],["badge",cx_+232]].forEach(([s,x])=>{const tw_=tw(ctx,s,bs,700)+22;if(pm)x=bx;bx=x+tw_+10;
+    glass(ctx,x,cy_-18-(bs+10)/2-4,tw_,bs+10,8,TRUST,{glow:6,ea:0.8,fill:"rgba(20,50,110,0.95)"});T(ctx,s,x+11,cy_-22+bs*0.36,{w:700,size:18,color:rgba(BPL,1)});});sq_face(ctx,"tom",pm?bx+20:cx_+326,cy_-18,17,1,{t});},{from:0.6});
   // the owners, named
   arrive(ctx,1240,560,t,w("mei","Mei")-0.1,()=>{sq_face(ctx,"mei",1240,560,48,1,{t,hi:mHi});T(ctx,"Mei, registrar's office",1310,552,{w:800,size:24});T(ctx,"owns learner · credential · award",1310,582,{w:600,size:18,color:rgba(SOFT,1)});},{dy:20});
   arrive(ctx,1240,690,t,w("mei","learning team")-0.1,()=>{sq_face(ctx,"tom",1240,690,48,1,{t});T(ctx,"the learning team",1310,682,{w:800,size:24});T(ctx,"owns microcredentials · badges",1310,712,{w:600,size:18,color:rgba(SOFT,1)});},{dy:20});
@@ -217,12 +221,14 @@ scene("split",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   // one entity, with kinds, each with its owner
   withA(ctx,mg,()=>{const x=610,y=170;glass(ctx,x,y,700,280,18,TRUST,{glow:16+12*pulseAt(t,w("attend","can do"),1.4),ea:0.9,fill:"rgba(7,12,24,0.96)"});T(ctx,"credential",x+28,y+50,{w:800,size:30,color:rgba(TRUST,1)});
     T(ctx,"says",x+28,y+110,{w:600,size:18,color:rgba(SOFT,1)});T(ctx,"what someone can do",x+200,y+110,{w:700,size:22,color:rgba(mix(INK,GOOD,pulseAt(t,w("attend","can do"),1.4)),1)});
-    [["award","mei"],["microcredential","tom"],["badge","tom"]].forEach(([s,who],i)=>{const kx=x+28+[0,180,440][i],ka=fin(t,w("rule","with kinds")+0.2+i*0.2,0.4);withA(ctx,ka,()=>{const tw_=tw(ctx,s,20,700)+60;glass(ctx,kx,y+170,tw_,52,12,TRUST,{glow:8,ea:0.7,fill:"rgba(30,26,12,0.95)"});
+    const pm=phMin(ctx);let kx0=x+28;[["award","mei"],["microcredential","tom"],["badge","tom"]].forEach(([s,who],i)=>{const kx=pm?kx0:x+28+[0,180,440][i];kx0+=tw(ctx,s,Math.max(20,pm),700)+72;const ka=fin(t,w("rule","with kinds")+0.2+i*0.2,0.4);withA(ctx,ka,()=>{const tw_=tw(ctx,s,Math.max(20,pm),700)+60;glass(ctx,kx,y+170,tw_,52,12,TRUST,{glow:8,ea:0.7,fill:"rgba(30,26,12,0.95)"});
       sq_face(ctx,who,kx+24,y+196,17,1,{t});T(ctx,s,kx+48,y+203,{w:700,size:20});});});});
   arrive(ctx,960,653,t,w("rule","with kinds")-0.1,()=>sq_code(ctx,290,480,1340,"models/core/student/_student__conceptual.yml",SQ_YK,{a:yk>0?1:0,p:clamp((t-w("rule","with kinds")+0.1)/0.6,0,1),size:18,lh:30,wrap:104,label:SQ_RUN,edge:BPL,lit:{1:yk,3:yk,6:yk}}),{dy:24,a:yk});
   // the rule, and its other half
-  arrive(ctx,960,104,t,w("rule","A different")-0.2,()=>{glass(ctx,250,64,1420,80,18,TRUST,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.96)"});
-    const a1="same identity + same lifecycle → one entity, with kinds",sep="  ·  ",a2="different identity, grain or lifecycle → split",W1=tw(ctx,a1,24,700),W2=tw(ctx,sep,24,700),W3=tw(ctx,a2,24,700),x0=960-(W1+W2+W3)/2;
+  arrive(ctx,960,104,t,w("rule","A different")-0.2,()=>{const a1="same identity + same lifecycle → one entity, with kinds",sep="  ·  ",a2="different identity, grain or lifecycle → split";
+    // on a phone the rule and its other half take a line each
+    if(phMin(ctx)){glass(ctx,250,40,1420,120,18,TRUST,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.96)"});T(ctx,a1,960,90,{w:700,size:24,align:"center",color:rgba(TRUST,1)});T(ctx,a2,960,136,{w:700,size:24,align:"center",color:rgba(SQ_AMB,1)});return;}
+    glass(ctx,250,64,1420,80,18,TRUST,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.96)"});const W1=tw(ctx,a1,24,700),W2=tw(ctx,sep,24,700),W3=tw(ctx,a2,24,700),x0=960-(W1+W2+W3)/2;
     T(ctx,a1,x0,113,{w:700,size:24,color:rgba(TRUST,1)});T(ctx,sep,x0+W1,113,{w:700,size:24,color:rgba(SOFT,1)});T(ctx,a2,x0+W1+W2,113,{w:700,size:24,color:rgba(SQ_AMB,1)});},{from:0.9});
   // a certificate of attendance asks to join; it says someone was there, not what they can do; it's turned away at the edge
   const d0=c("attend")-0.2,app=ease(fin(t,d0,2.2)),bounce=spring(fin(t,w("attend","stays out")-0.5,1.2)*1.2),cxC=lerp(1960,1340,app)+bounce*130;

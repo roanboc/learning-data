@@ -127,10 +127,10 @@ const SQ_ENT={learner:["Learner",KIND],cred:["Credential",TRUST],award:["Award",
 function sq_bpBoxes(cx,top,s){const w=250*s,h=74*s,y=top+85*s-h/2;return{learner:[cx-420*s-w/2,y,w,h],cred:[cx-w/2,y,w,h],award:[cx+420*s-w/2,y,w,h]};}
 function sq_bp(ctx,cx,top,s,o){o=o||{};const a=o.a==null?1:o.a,b=o.b||0,ph=o.ph||250,p=o.p==null?1:o.p,hi=o.hi||{},m=o.m==null?1:o.m,B=sq_bpBoxes(cx,top,s);
   if(o.from)Object.keys(o.from).forEach(k=>{const f=o.from[k],e=ease(m);B[k]=B[k].map((v,i)=>lerp(f[i],v,e));});
-  const cw=330*s,ch=52*s,cy=top+(ph-48)*s,C=[cx-cw/2,cy-ch/2,cw,ch];B.credit=C;if(a<=0.01)return B;
+  const pm=phMin(ctx),cw=Math.max(330*s,pm?tw(ctx,"credit towards an award",Math.max(18,21*s,pm),700)+28:0),ch=Math.max(52*s,pm?pm+18:0),cy=top+(ph-48)*s,C=[cx-cw/2,cy-ch/2,cw,ch];B.credit=C;if(a<=0.01)return B;
   withA(ctx,a,()=>{if(o.paper!==0)bpPaper(ctx,cx-700*s,top,1400*s,ph*s,(o.paper==null?1:o.paper)*b,{});
     const lc=mix(SK,BPL,b),lab=(s_,x,y)=>T(ctx,s_,x,y,{w:600,size:Math.max(18,17*s),align:"center",color:rgba(mix(SOFT,BPL,b),0.95)});
-    const lfit=clamp((170*s-8-tw(ctx,"counts towards",Math.max(18,17*s),600))/8,0,1);
+    const lfit=clamp((170*s-8-tw(ctx,"counts towards",Math.max(18,17*s,pm),600))/8,0,1);
     const hl=(k0,k1,txt,q)=>{if(q<=0)return;const A=B[k0],Z=B[k1],x0=A[0]+A[2],x1=Z[0],y0=A[1]+A[3]/2;ctx.save();ctx.strokeStyle=rgba(lc,0.9);ctx.lineWidth=2.4*s;ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(lerp(x0,x1,q),y0);ctx.stroke();ctx.restore();const ly=lerp(A[1]-8,y0-14*s,lfit);withA(ctx,fin(q,0.6,0.4),()=>lab(txt,(x0+x1)/2,ly));};
     const dl=(k,right,q)=>{if(q<=0)return;const A=B[k],x0=A[0]+A[2]*(right?0.15:0.85),y0=A[1]+A[3],x1=right?C[0]+C[2]:C[0],y1=C[1]+C[3]/2;ctx.save();ctx.strokeStyle=rgba(lc,0.8);ctx.lineWidth=2*s;ctx.setLineDash([8*s,6*s]);ctx.beginPath();ctx.moveTo(x0,y0);
       const qx=lerp(x0,x1,q),qy=lerp(y0,y1,q);ctx.quadraticCurveTo(x0,lerp(y0,qy,0.9),qx,qy);ctx.stroke();ctx.restore();};
@@ -138,11 +138,11 @@ function sq_bp(ctx,cx,top,s,o){o=o||{};const a=o.a==null?1:o.a,b=o.b||0,ph=o.ph|
     const cq=o.credit==null?clamp(p*3-2,0,1):o.credit;dl("learner",false,cq);dl("award",true,cq);
     ["learner","cred","award"].forEach((k,i)=>{const q=clamp(p*3-i*0.5,0,1),[x,y,w,h]=B[k];bpBox(ctx,x,y,w,h,SQ_ENT[k][0],SQ_ENT[k][1],b,{a:q*(o.ea&&o.ea[k]!=null?o.ea[k]:1),hi:hi[k]||0,size:Math.max(19,26*s)});});
     if(cq>0)withA(ctx,fin(cq,0.5,0.5),()=>{if(hi.credit)glow(ctx,cx,cy,cw*0.6,TRUST,0.3*hi.credit);ctx.fillStyle=b>0.5?"rgba(20,60,130,0.6)":"rgba(7,12,24,0.94)";rr(ctx,C[0],C[1],cw,ch,ch/2);ctx.fill();
-      ctx.strokeStyle=rgba(mix(TRUST,BPL,b),0.95);ctx.lineWidth=2;rr(ctx,C[0],C[1],cw,ch,ch/2);ctx.stroke();T(ctx,"credit towards an award",cx,cy+7*s,{w:700,size:Math.max(18,21*s),align:"center",color:rgba(mix(INK,BPL,b),1)});});});
+      ctx.strokeStyle=rgba(mix(TRUST,BPL,b),0.95);ctx.lineWidth=2;rr(ctx,C[0],C[1],cw,ch,ch/2);ctx.stroke();T(ctx,"credit towards an award",cx,cy+Math.max(18,21*s,pm)*0.34,{w:700,size:Math.max(18,21*s),align:"center",color:rgba(mix(INK,BPL,b),1)});});});
   return B;}
 // a business key: its key set's prefix in the source's colour, then the rest
 const SQ_KS={SIS:SRC3[0][1],LMS:SRC3[1][1],SC:SRC3[2][1]};
-function sq_key(ctx,x,y,key,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return 0;const sz=o.size||20,[pre,...rest]=key.split("|"),r="|"+rest.join("|"),w=tw(ctx,pre+r,sz,500,"mono")+28,X=o.align==="center"?x-w/2:x,col=SQ_KS[pre];
+function sq_key(ctx,x,y,key,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return 0;const sz=Math.max(o.size||20,phMin(ctx)),[pre,...rest]=key.split("|"),r="|"+rest.join("|"),w=tw(ctx,pre+r,sz,500,"mono")+28,X=o.align==="center"?x-w/2:x,col=SQ_KS[pre];
   withA(ctx,a,()=>{glass(ctx,X,y-sz/2-9,w,sz+18,(sz+18)/2,col,{fill:"rgba(7,12,24,0.92)",glow:8,ea:0.8});withA(ctx,1-(o.lift||0),()=>T(ctx,pre,X+14,y+sz*0.36,{f:"mono",w:500,size:sz,color:rgba(col,1)}));
     T(ctx,r,X+14+tw(ctx,pre,sz,500,"mono"),y+sz*0.36,{f:"mono",w:500,size:sz,color:rgba(INK,0.95)});});return w;}
 
@@ -289,3 +289,5 @@ Object.assign(LV,{
 /* ---------- on a phone ----------
    The film's code cards are drawn at sizes that read, their long lines wrapped (../../../from-words-to-data/shared/src/phone.js) */
 sq_code=phCode(sq_code,{wrap:"chars",size:19,lh:()=>31,head:()=>76,label:o=>o.label});
+// the 1854 map's street names are part of the drawing
+sq_streetNames=phDeco(sq_streetNames);

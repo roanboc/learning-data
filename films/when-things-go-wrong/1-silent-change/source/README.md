@@ -62,4 +62,4 @@ The film follows the pacing feedback on *The Inner Life of Data* and *A Sharper 
 
 The music is the film's own: soft pads and a sparse felt piano in A minor while something is wrong, a quiet low pulse while Sam investigates, and a warm C major from the fix onwards. It sits under the voice and lifts about 4 dB in pauses, slowly, as the [pacing review](../../../inner-life-of-data/pacing-review.md) of *The Inner Life of Data* recommends.
 
-A change to a shared component in `../../../inner-life-of-data/source/src/`, to `../../../a-sharper-sketch/source/src/sketch3.js` or to `../../characters/people.js` also changes this film: run `tools/check.py` here after changing one, then build and copy the player again (see Publish), or the release stops.
+A change to a shared component in `../../../inner-life-of-data/source/src/`, to `../../../a-sharper-sketch/source/src/sketch3.js` to the phone layer (`../../../from-words-to-data/shared/src/phone.js`) or to `../../characters/people.js` also changes this film: run `tools/check.py` and `tools/legible.py --overlaps` here after changing one, then build and copy the player again (see Publish), or the release stops.

@@ -94,9 +94,10 @@ function ee_ledger(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;co
   ctx.strokeStyle=rgba(WEED,0.25);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x0+bw/2,y+h/2);ctx.lineTo(x0+9*(bw+gap)+bw/2,y+h/2);ctx.stroke();
   EE_STEPS.forEach((nm,i)=>{const x=x0+i*(bw+gap),isCur=i===cur,done=i<cur||(isCur&&(o.counted||0)>0)||(o.all||0)>0,q=isCur?1:i<cur||(o.all||0)>0?0.9:0.35,col=isCur?WEED:done?mix(WEED,SOFT,0.45):SOFT;
     withA(ctx,q,()=>{if(isCur)glow(ctx,x+bw/2,y+h/2,bw*0.7,WEED,0.2);glass(ctx,x,y,bw,h,12,col,{glow:isCur?14:6,ea:0.75,fill:"rgba(7,12,24,0.95)"});
-      T(ctx,(i+1)+"",x+14,y+29,{f:"mono",w:500,size:18,color:rgba(col,1)});T(ctx,nm,x+(i<9?38:46),y+29,{w:700,size:18,color:rgba(done||isCur?INK:SOFT,1)});
+      const nx=x+(i<9?38:46),nm2=phMin(ctx)&&tw(ctx,nm,phSz(ctx,18),700)>x+bw-6-nx?nm.split(" ").pop():nm;   // "written once" → "once" on a phone
+      T(ctx,(i+1)+"",x+14,y+29,{f:"mono",w:500,size:18,color:rgba(col,1)});T(ctx,nm2,nx,y+29,{w:700,size:18,color:rgba(done||isCur?INK:SOFT,1)});
       if(done){const k=isCur&&!o.all?(o.counted||0):1;withA(ctx,k,()=>{const[ad,ch,de]=EE_COUNT[i];let cx=x+14;[["+"+ad,EE_ADD,ad],["~"+ch,EE_AMB,ch],["−"+de,EE_DEL,de]].forEach(([s,c,n])=>{if(!n)return;
-        T(ctx,s,cx,y+56,{f:"mono",w:500,size:18,color:rgba(c,1)});cx+=tw(ctx,s,18,500,"mono")+12;});});}});});
+        T(ctx,s,cx,y+56,{f:"mono",w:500,size:18,color:rgba(c,1)});cx+=tw(ctx,s,phSz(ctx,18),500,"mono")+12;});});}});});
   // the four phases under their steps: a bracket and a name, lit for the phase of the current step (all of them at the end)
   PHASES4.forEach(([nm,f,l])=>{const xa=x0+f*(bw+gap)+8,xb=x0+l*(bw+gap)+bw-8,on=(cur>=f&&cur<=l)||(o.all||0)>0,col=on?WEED:SOFT;
     ctx.strokeStyle=rgba(col,on?0.85:0.4);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(xa,y+h+6);ctx.lineTo(xa,y+h+12);ctx.lineTo(xb,y+h+12);ctx.lineTo(xb,y+h+6);ctx.stroke();
@@ -109,9 +110,10 @@ function ee_commit(ctx,x,y,w,step,title,rows,o){o=o||{};const a=o.a==null?1:o.a,
   T(ctx,title,x+20,y+66,{w:700,size:20});ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+14,y+84,w-28,1.2);
   rows.forEach(([sg,file,folder,flag],i)=>{const q=o.on?o.on[i]||0:1;if(q<=0)return;const yy=y+96+i*rh+24,c=sg==="+"?EE_ADD:sg==="~"?EE_AMB:EE_DEL,hi=o.hi?o.hi[i]||0:0;withA(ctx,q,()=>{
     if(hi>0)withA(ctx,hi,()=>{ctx.fillStyle=rgba(c,0.13);rr(ctx,x+10,yy-24,w-20,rh-4,8);ctx.fill();});
-    T(ctx,sg,x+22,yy,{f:"mono",w:700,size:22,color:rgba(c,1)});T(ctx,file,x+50,yy,{f:"mono",w:500,size:18,color:sg==="−"?rgba(SOFT,0.85):rgba(INK,0.96)});
+    const fz=phSz(ctx,18),fl=phMin(ctx)&&tw(ctx,file,fz,500,"mono")>w-90?phFitPath(ctx,file,w-90,fz):file;
+    T(ctx,sg,x+22,yy,{f:"mono",w:700,size:22,color:rgba(c,1)});T(ctx,fl,x+50,yy,{f:"mono",w:500,size:18,color:sg==="−"?rgba(SOFT,0.85):rgba(INK,0.96)});
     if(folder)T(ctx,folder,x+50,yy+22,{f:"mono",w:500,size:18,color:rgba(SOFT,0.75)});
-    if(sg==="−"){const fw=tw(ctx,file,18,500,"mono");ctx.strokeStyle=rgba(EE_DEL,0.9);ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(x+48,yy-6);ctx.lineTo(x+52+fw,yy-6);ctx.stroke();}
+    if(sg==="−"){const fw=tw(ctx,fl,fz,500,"mono");ctx.strokeStyle=rgba(EE_DEL,0.9);ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(x+48,yy-6);ctx.lineTo(x+52+fw,yy-6);ctx.stroke();}
     if(flag==="gen")ee_cog(ctx,x+w-30,yy-6,9,0,SOFT,1,0);
     if(flag==="tmp"){ctx.save();ctx.setLineDash([6,5]);ctx.strokeStyle=rgba(EE_TMP,0.85);ctx.lineWidth=1.8;rr(ctx,x+12,yy-26,w-24,rh-2,8);ctx.stroke();ctx.restore();}});});});return h;}
 // a file on glass, as in the films before (wr_code): a name, a label that says where it runs, and lines typed out as p goes 0..1.
@@ -140,7 +142,7 @@ function ee_cog(ctx,x,y,r,t,col,a,spin){if(a<=0.01)return;withA(ctx,a,()=>{ctx.s
   ctx.closePath();ctx.fill();ctx.fillStyle="rgba(6,10,20,1)";ctx.beginPath();ctx.arc(0,0,r*0.42,0,TAU);ctx.fill();ctx.restore();});}
 // a small table of results: a header and rows in monospace, numbers right-aligned; o.on {i:0..1} shows a row, o.lit {i:0..1} lights it.
 // o.empty: the text shown when there are no rows. Returns its size.
-function ee_table(ctx,x,y,cols,rows,o){o=o||{};const a=o.a==null?1:o.a,sz=o.size||18,cw=tw(ctx,"M",sz,500,"mono"),lh=o.lh||34,
+function ee_table(ctx,x,y,cols,rows,o){o=o||{};const a=o.a==null?1:o.a,sz=o.size||18,cw=tw(ctx,"M",phSz(ctx,sz),500,"mono"),lh=o.lh||34,
   W_=cols.map((c,j)=>Math.max(c.length,...rows.map(r=>String(r[j]).length),o.min&&o.min[j]||0)*cw+28),w=W_.reduce((s,v)=>s+v,0)+16,h=62+Math.max(rows.length,o.empty?1:0)*lh;
   if(a<=0.01)return{w,h};withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,o.edge||[170,205,255],{glow:10+10*(o.hi||0),ea:0.7,fill:"rgba(6,10,20,0.95)"});
     let cx=x+8;cols.forEach((c,j)=>{const right=o.right?o.right[j]:j>0;T(ctx,c,right?cx+W_[j]-14:cx+14,y+36,{f:"mono",w:500,size:sz,align:right?"right":"left",color:rgba(SOFT,1)});cx+=W_[j];});
@@ -150,13 +152,18 @@ function ee_table(ctx,x,y,cols,rows,o){o=o||{};const a=o.a==null?1:o.a,sz=o.size
       let c2=x+8;r.forEach((v,j)=>{const right=o.right?o.right[j]:j>0,col=o.colCol&&o.colCol[j]?o.colCol[j]:INK;T(ctx,String(v),right?c2+W_[j]-14:c2+14,yy,{f:"mono",w:500,size:sz,align:right?"right":"left",color:rgba(col,0.96)});c2+=W_[j];});});});
     if(o.empty&&!rows.length)T(ctx,o.empty,x+w/2,y+50+lh*0.78,{w:700,size:18,align:"center",color:rgba(o.emptyCol||SOFT,1)});});return{w,h};}
 // a folder, named, in its domain's colour; o.dash: a temporary folder, dashed in amber; o.on lights it
-function ee_folder(ctx,x,y,name,col,o){o=o||{};const a=o.a==null?1:o.a,w=tw(ctx,name,18,500,"mono")+62;if(a<=0.01)return w;withA(ctx,a,()=>{if(o.on)glow(ctx,x+w/2,y,w*0.55,col,0.25*o.on);
+function ee_folder(ctx,x,y,name,col,o){o=o||{};const a=o.a==null?1:o.a,w=tw(ctx,name,phSz(ctx,18),500,"mono")+62;if(a<=0.01)return w;withA(ctx,a,()=>{if(o.on)glow(ctx,x+w/2,y,w*0.55,col,0.25*o.on);
   glass(ctx,x,y-24,w,48,10,col,{glow:6+10*(o.on||0),ea:0.75,fill:"rgba(7,12,24,0.95)"});ctx.fillStyle=rgba(col,0.92);ctx.beginPath();ctx.moveTo(x+14,y-9);ctx.lineTo(x+22,y-9);ctx.lineTo(x+25,y-12);
   ctx.lineTo(x+34,y-12);ctx.lineTo(x+34,y+9);ctx.lineTo(x+14,y+9);ctx.closePath();ctx.fill();
   if(o.dash){ctx.save();ctx.setLineDash([7,6]);ctx.strokeStyle=rgba(EE_TMP,0.9);ctx.lineWidth=2;rr(ctx,x-5,y-29,w+10,58,13);ctx.stroke();ctx.restore();}
   T(ctx,name,x+46,y+7,{f:"mono",w:500,size:18,color:rgba(INK,0.96)});if(o.strike>0){ctx.strokeStyle=rgba(EE_DEL,0.95);ctx.lineWidth=2.6;ctx.beginPath();ctx.moveTo(x+42,y);ctx.lineTo(x+42+(w-50)*ease(o.strike),y);ctx.stroke();}});return w;}
 // a CI check: a ring, a tick or a cross, its name, and its message
-function ee_ci(ctx,x,y,w,name,st,msg,o){o=o||{};const a=o.a==null?1:o.a;const col=st>=1.5?GOOD:st>=0.5?BAD:SOFT,h=msg?68+24*msg.split("\n").length:60;if(a<=0.01)return h;withA(ctx,a,()=>{
+function ee_ci(ctx,x,y,w,name,st,msg,o){o=o||{};const a=o.a==null?1:o.a,m=phMin(ctx);const col=st>=1.5?GOOD:st>=0.5?BAD:SOFT;
+  if(m){const N=phWrap(ctx,name,w-80,phSz(ctx,o.size||20),700),M=[];(msg?msg.split("\n"):[]).forEach(l=>phWrap(ctx,l,w-48,phSz(ctx,o.msize||18),500,"mono").forEach(q=>M.push(q)));
+    const h=60+(N.length-1)*34+(M.length?16+M.length*34:0);if(a<=0.01)return h;withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,col,{glow:8+10*(st>0?1:0),ea:0.7,fill:"rgba(7,12,24,0.95)"});const cx=x+32,cy=y+30;
+      if(st>=1.5){ctx.fillStyle="rgba(8,24,16,0.95)";ctx.beginPath();ctx.arc(cx,cy,15,0,TAU);ctx.fill();ring(ctx,cx,cy,15,GOOD,1,2.2);tick_(ctx,cx,cy+1,20,GOOD,1);}else if(st>=0.5)kt_rcross(ctx,cx,cy,15,1);else ring(ctx,cx,cy,15,SOFT,0.7,2,[4,4]);
+      N.forEach((l,i)=>T(ctx,l,x+62,y+40+i*34,{w:700,size:o.size||20}));M.forEach((l,i)=>T(ctx,l,x+24,y+40+(N.length-1)*34+50+i*34,{f:"mono",w:500,size:o.msize||18,color:rgba(col,1)}));});return h;}
+  const h=msg?68+24*msg.split("\n").length:60;if(a<=0.01)return h;withA(ctx,a,()=>{
   glass(ctx,x,y,w,h,14,col,{glow:8+10*(st>0?1:0),ea:0.7,fill:"rgba(7,12,24,0.95)"});const cx=x+32,cy=y+30;
   if(st>=1.5){ctx.fillStyle="rgba(8,24,16,0.95)";ctx.beginPath();ctx.arc(cx,cy,15,0,TAU);ctx.fill();ring(ctx,cx,cy,15,GOOD,1,2.2);tick_(ctx,cx,cy+1,20,GOOD,1);}
   else if(st>=0.5)kt_rcross(ctx,cx,cy,15,1);else ring(ctx,cx,cy,15,SOFT,0.7,2,[4,4]);
@@ -183,7 +190,7 @@ function ee_face(ctx,id,x,y,r,a,o){o=o||{};if(a<=0.01)return;const P=PEOPLE[id],
   ctx.save();ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fillStyle="rgba(12,18,30,0.97)";ctx.fill();ctx.clip();person(ctx,id,x,y-0.1*r+505*k,k/P.build.h,{t:o.t||0,expr:o.expr||"calm",glow:0.2});ctx.restore();
   ring(ctx,x,y,r,P.edge,1,2.4);if(o.name)T(ctx,o.name,x,y+r+26,{w:800,size:19,align:"center"});});}
 // a model or table, as a node: its name in monospace on a small glass pill. Returns its width
-function ee_node(ctx,x,y,name,col,o){o=o||{};const a=o.a==null?1:o.a,w=tw(ctx,name,18,500,"mono")+40;if(a<=0.01)return w;const dk=o.dark||0,c=mix(col,[70,80,95],dk);withA(ctx,a*(1-0.4*dk),()=>{
+function ee_node(ctx,x,y,name,col,o){o=o||{};if(o.maxW&&phMin(ctx)&&tw(ctx,name,phSz(ctx,18),500,"mono")+40>o.maxW)name=phFitPath(ctx,name,o.maxW-40,phSz(ctx,18));const a=o.a==null?1:o.a,w=tw(ctx,name,phSz(ctx,18),500,"mono")+40;if(a<=0.01)return w;const dk=o.dark||0,c=mix(col,[70,80,95],dk);withA(ctx,a*(1-0.4*dk),()=>{
   if(o.on>0)glow(ctx,x+w/2,y,w*0.6,col,0.25*o.on);glass(ctx,x,y-24,w,48,12,c,{glow:6+12*(o.on||0),ea:0.7,fill:"rgba(7,12,24,0.96)"});
   if(o.dash){ctx.save();ctx.setLineDash([7,6]);ctx.strokeStyle=rgba(EE_TMP,0.9);ctx.lineWidth=2;rr(ctx,x-5,y-29,w+10,58,14);ctx.stroke();ctx.restore();}
   T(ctx,name,x+20,y+7,{f:"mono",w:500,size:18,color:rgba(mix(INK,SOFT,dk),1)});});return w;}

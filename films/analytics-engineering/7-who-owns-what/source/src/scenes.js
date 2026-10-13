@@ -71,7 +71,7 @@ function wo_map(ctx,t,o){const m=o.m||0,on=o.on||WO_TER.map(()=>1),ch=o.chips||[
         withA(ctx,1-m,()=>arrive(ctx,xx+60,yy,t,q,()=>wo_chip(ctx,xx,yy,s,col,{mono:!!k,size:k===2?18:20,text:kc||INK}),{dy:10,from:0.8}));});
       // its models, each with a small flag that reads its meta.domain
       if(m>0.5)withA(ctx,fin(m,0.5,0.5),()=>{for(let d=0;d<nDots;d++){const px=x+40+d*30,py=y+h-70;wo_dot(ctx,px,py,kind==="data"?TRUST:kind==="business"?LAYER4[3][1]:LAYER4[0][1],1,7);wo_pennant(ctx,px+2,py-8,col,fin(fl,d*0.06,0.4));}
-        withA(ctx,fin(fl,0.4,0.5),()=>T(ctx,"meta.domain: "+dk,x+34,y+h-28,{f:"mono",w:500,size:18,color:rgba(col,1)}));});},{d:0.9,from:0.92});});}
+        withA(ctx,fin(fl,0.4,0.5),()=>T(ctx,(phMin(ctx)&&tw(ctx,"meta.domain: "+dk,phSz(ctx,18),500,"mono")>w-40?"":"meta.domain: ")+dk,x+34,y+h-28,{f:"mono",w:500,size:18,color:rgba(col,1)}));});},{d:0.9,from:0.92});});}
 scene("domains",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.03});
   const cR=c("registrar"),cF=c("laid"),lift=ease(fin(t,w("registrar","registrar's")-0.5,0.8)),m=ease(fin(t,cF-0.2,1.4));
@@ -90,12 +90,16 @@ scene("domains",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   arrive(ctx,960,96,t,w("domain","three kinds")-0.1,()=>withA(ctx,1-fin(t,cF-0.4,0.5),()=>tag(ctx,960,96,"three kinds of domain",INK,{align:"center",size:26})),{dy:12});
   // the project is laid out the same way: a folder for each domain, by kind; then the groups, each naming its owner
   const fT=w("laid","laid out")-0.1,fl=(s,o)=>fin(t,w("laid",s,o)-0.1,0.5);
-  arrive(ctx,1450,260,t,fT,()=>wo_code(ctx,1030,110,830,"the project's folders",["sources/student_system/          # application","sources/learning_platform/       # application","sources/short_courses/           # application",
+  // on a phone the folders' comments sit closer and the marts and exposures take a line each, so nothing wraps; then the groups take the card's place
+  const ph=phMin(ctx)>0,gT=w("follows","group")-0.1,gl=fin(t,w("follows","names an owner")-0.2,0.6),FL=ph?["sources/student_system/    # application","sources/learning_platform/ # application","sources/short_courses/     # application",
+    "models/core/student/       # data","models/core/course/        # data","models/marts/planning/     # business","exposures/planning/        # business","models/marts/wallet/       # business","exposures/wallet/          # business"]:
+    ["sources/student_system/          # application","sources/learning_platform/       # application","sources/short_courses/           # application",
     "models/core/student/             # data","models/core/course/              # data","models/marts/planning/  exposures/planning/  # business","models/marts/wallet/    exposures/wallet/    # business"],
-    {p:clamp((t-fT)/1.4,0,1),size:18,lh:28,edge:[150,190,255],lit:{0:fl("sources by system"),1:fl("sources by system"),2:fl("sources by system"),3:fl("data domain"),4:fl("data domain"),5:fl("by consumer"),6:fl("by consumer")}}),{dy:24});
-  const gT=w("follows","group")-0.1,gl=fin(t,w("follows","names an owner")-0.2,0.6);
-  arrive(ctx,1450,660,t,gT,()=>wo_code(ctx,1030,440,830,"models/_groups.yml",["groups:","  - name: credential_model","    …","    owner:","      name: Noor, data architect","  - name: planning","    …","    owner:","      name: Planning","  - name: wallet","    …","    owner:","      name: Wallet app team"],{p:clamp((t-gT)/1.6,0,1),size:18,lh:27,edge:[150,190,255],lit:{3:gl,4:gl,7:gl,8:gl,11:gl,12:gl}}),{dy:24});
-  arrive(ctx,310,800,t,w("follows","name their domain")+0.6,()=>{for(let d=0;d<8;d++)wo_dot(ctx,82+d*24,794,LAYER4[1][1],1,6);T(ctx,"intermediate: no domain, they belong to the group that builds them",290,801,{w:600,size:18,color:rgba(SOFT,1)});},{dy:12});
+    fb=fl("by consumer"),FLit=ph?{5:fb,6:fb,7:fb,8:fb}:{5:fb,6:fb};
+  arrive(ctx,1450,260,t,fT,()=>wo_code(ctx,1030,110,830,"the project's folders",FL,
+    {a:ph?1-fin(t,gT-0.4,0.4):1,p:clamp((t-fT)/1.4,0,1),size:18,lh:28,edge:[150,190,255],lit:Object.assign({0:fl("sources by system"),1:fl("sources by system"),2:fl("sources by system"),3:fl("data domain"),4:fl("data domain")},FLit)}),{dy:24});
+  arrive(ctx,1450,ph?330:660,t,gT,()=>wo_code(ctx,1030,ph?110:440,830,"models/_groups.yml",["groups:","  - name: credential_model","    …","    owner:","      name: Noor, data architect","  - name: planning","    …","    owner:","      name: Planning","  - name: wallet","    …","    owner:","      name: Wallet app team"],{p:clamp((t-gT)/1.6,0,1),size:18,lh:27,edge:[150,190,255],lit:{3:gl,4:gl,7:gl,8:gl,11:gl,12:gl}}),{dy:24});
+  arrive(ctx,310,800,t,w("follows","name their domain")+0.6,()=>{for(let d=0;d<8;d++)wo_dot(ctx,82+d*24,794,LAYER4[1][1],1,6);(ph?phWrap(ctx,"intermediate: no domain, they belong to the group that builds them",710,phSz(ctx,18),600):["intermediate: no domain, they belong to the group that builds them"]).forEach((l,i)=>T(ctx,l,290,801+i*36,{w:600,size:18,color:rgba(SOFT,1)}));},{dy:12});
   arrive(ctx,960,52,t,w("follows","Ownership follows")-0.1,()=>tag(ctx,960,52,"ownership follows meaning, not the code",TRUST,{align:"center",size:24}),{dy:14});
   ctx.restore();vign(ctx,S);});
 
@@ -109,7 +113,7 @@ scene("products",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
     WO_TER.forEach(([dk,nm,,,C],i)=>{if(i!==2)wo_terr(ctx,C[0],C[1],C[2],C[3],WO_DOM[dk][1],nm,t,{seed:i+1,a:1-out});});
     wo_code(ctx,1030,110,830,"the project's folders",["sources/student_system/          # application"],{a:1-out,size:18,lh:28,edge:[150,190,255]});
     wo_code(ctx,1030,440,830,"models/_groups.yml",["groups:"],{a:1-out,size:18,lh:27,edge:[150,190,255]});});
-  arrive(ctx,960,96,t,Math.min(1.0,w("publish","A core model")-0.2),()=>tag(ctx,960,96,"a core model, as a product",TRUST,{align:"center",size:24}),{dy:12});
+  arrive(ctx,960,96,t,Math.min(1.0,w("publish","A core model")-0.2),()=>withA(ctx,1-fin(t,w("build","not on how")-0.1,0.3),()=>tag(ctx,960,96,"a core model, as a product",TRUST,{align:"center",size:24})),{dy:12});
   // the YAML, lit line by line as each part is named
   const L=(s,k)=>fin(t,w(s,k)-0.15,0.4),lit={0:L("learner","Take the learner"),7:L("learner","grain"),8:L("owner","owner"),9:L("owner","domain"),10:L("owner","glossary"),4:L("promise","version"),1:L("promise","documentation"),3:L("promise","documentation")};
   const yo=1-fin(t,cB-0.3,0.7);
@@ -135,7 +139,7 @@ scene("products",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
 /* ---------- 4. Private, protected, public ---------- */
 const WO_C=[620,510];   // the centre of the rings
 function wo_flyCard(ctx,t,lt,a){const f=ease(fin(lt,0,1.3)),z0=1.03,x0=960+(1435-960)*z0,y0=540+(405-540)*z0,s=z0*Math.pow(0.26/z0,f);
-  withA(ctx,a==null?1:a,()=>{ctx.save();ctx.translate(lerp(x0,WO_C[0],f),lerp(y0,WO_C[1]-282,f));ctx.scale(s,s);ctx.translate(-1435,-405);wo_product(ctx,1010,150,850,t,{on:[1,1,1,1,1,1,1],rh:58,latch:1});ctx.restore();});}
+  withA(ctx,a==null?1:a,()=>{ctx.save();ctx.translate(lerp(x0,WO_C[0],f),lerp(y0,WO_C[1]-282,f));ctx.scale(s,s);ctx.translate(-1435,-405);phAsDeco(s<0.75,()=>wo_product(ctx,1010,150,850,t,{on:[1,1,1,1,1,1,1],rh:58,latch:1}));ctx.restore();});}
 const WO_PRJ=["    staging:","      +group: credential_model","      +access: private","    intermediate:","      +group: credential_model","      +access: private","    core:","      +group: credential_model","      +access: public","      …","    marts:","      +access: protected"];
 const WO_ACC=["| Access | Who can `ref()` it |","|---|---|","| `private` | Models in the same group only. … |","| `protected` | Any model in the same project. … |","| `public` | Any model in any project, … The core is public. |"];
 const WO_ERR=["Parsing Error","  Node model.credentials.mart_wallet__try_private","  attempted to reference node","  model.credentials.int_learners, which is not","  allowed because the referenced node is private","  to the 'credential_model' group."];
@@ -158,7 +162,7 @@ scene("access",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   const cardOut=1-fin(t,w("refused","refuses")-0.4,0.6),pl=(s,k)=>fin(t,w(s,k)-0.2,0.4);
   arrive(ctx,1520,300,t,w("rings","access")-0.2,()=>wo_code(ctx,1170,110,710,"dbt_project.yml",WO_PRJ,{a:cardOut,p:clamp((t-w("rings","access")+0.1)/1.6,0,1),size:19,lh:28,edge:[150,190,255],
     lit:{8:pl("public","Public"),11:pl("protected","Protected"),2:pl("private","private"),5:pl("private","private")}}),{dy:24});
-  arrive(ctx,1520,640,t,cPu-0.2,()=>wo_code(ctx,1160,540,724,"docs/conventions.md",WO_ACC,{a:cardOut,p:clamp((t-cPu)/1.2,0,1),size:18,lh:27,edge:KIND,lit:{4:pl("public","Public"),3:pl("protected","Protected"),2:pl("private","private")}}),{dy:24});
+  const ph=phMin(ctx)>0;if(!ph)arrive(ctx,1520,640,t,cPu-0.2,()=>wo_code(ctx,1160,540,724,"docs/conventions.md",WO_ACC,{a:cardOut,p:clamp((t-cPu)/1.2,0,1),size:18,lh:27,edge:KIND,lit:{4:pl("public","Public"),3:pl("protected","Protected"),2:pl("private","private")}}),{dy:24});
   const eT=w("refused","refuses")-0.2;
   arrive(ctx,1525,230,t,eT,()=>wo_code(ctx,1170,110,710,"dbt parse",WO_ERR,{p:clamp((t-eT)/1.6,0,1),size:18,lh:27,edge:BAD,lineCol:{0:BAD}}),{dy:24});
   // the wallet's new model: refused at the private ring; let through to Planning's mart; redrawn to the core
@@ -174,11 +178,12 @@ scene("access",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   withA(ctx,fin(t,w("wrong","changes")-0.3,0.5)*(1-fin(t,sc.dur-1.6,0.6)),()=>tag(ctx,px-10,py+32,"grain: as at census",WO_PLN,{align:"center",size:18}));
   const r3=fin(t,w("wrong","Consumers build")-0.3,1.0);arrowTo(ctx,tx+2,ty-10,kx+2,ky+12,GOOD,r3,{p:r3,bend:0.12,head:14,lw:3});
   // the tags on the right, and Noor, who reviews
-  arrive(ctx,1525,440,t,w("allowed","allows")-0.1,()=>tag(ctx,1525,440,"allowed: same project, protected",WO_AMB,{align:"center",size:22}),{dy:12});
-  arrive(ctx,1525,500,t,w("wrong","still wrong")-0.1,()=>tag(ctx,1525,500,"still wrong: shaped for Planning",EDGE_,{align:"center",size:22}),{dy:12});
-  arrive(ctx,1640,620,t,w("wrong","Consumers build")-0.2,()=>{glass(ctx,1420,560,440,120,16,GOOD,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.95)"});wrapT(ctx,"Consumers build on the core, not on each other's marts.",1640,606,400,{w:700,size:24,align:"center",lh:34});},{dy:16});
+  const EY=ph?110+wo_code(ctx,1170,110,710,"dbt parse",WO_ERR,{a:0,size:18,lh:27})-380:0;
+  arrive(ctx,1525,440+EY,t,w("allowed","allows")-0.1,()=>tag(ctx,1525,440+EY,"allowed: same project, protected",WO_AMB,{align:"center",size:22}),{dy:12});
+  arrive(ctx,1525,500+EY,t,w("wrong","still wrong")-0.1,()=>tag(ctx,1525,500+EY,"still wrong: shaped for Planning",EDGE_,{align:"center",size:22}),{dy:12});
+  arrive(ctx,1640,620+EY,t,w("wrong","Consumers build")-0.2,()=>{glass(ctx,1420,560+EY,440,120+(ph?12:0),16,GOOD,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.95)"});wrapT(ctx,"Consumers build on the core, not on each other's marts.",1640,606+EY,400,ph?{w:700,size:phSz(ctx,24),align:"center",lh:Math.round(phSz(ctx,24)*1.25)}:{w:700,size:24,align:"center",lh:34});},{dy:16});
   arrive(ctx,1270,780,t,w("wrong","shaped")-0.2,()=>{person(ctx,"noor",1270,790,0.36,{t,pose:"explain"});wo_role(ctx,1270,826,"noor",1,{role:"reviews the change"});},{dy:20,from:0.95});
-  kt_gtick(ctx,1340,580,18,fin(t,w("wrong","Consumers build")+0.6,0.4));
+  kt_gtick(ctx,1340,580+EY,18,fin(t,w("wrong","Consumers build")+0.6,0.4));
   ctx.restore();
   // the product card from the last chapter, one card: it flies to the core and waits there while the rings draw, until the core's dots take its place
   wo_flyCard(ctx,t,t,1-fin(t,w("public","the core")-0.6,0.5));vign(ctx,S);});
@@ -186,15 +191,20 @@ scene("access",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
 /* ---------- 5. Who can read ---------- */
 const WO_GR=["      planning:","        +group: planning","        …","        +grants: \"{{ {'select': var('planning_readers')}","          if target.type == 'databricks'","          and var('planning_readers', none)","          else {} }}\""];
 const WO_M5=[["stg_student_system__learners",270,LAYER4[0][1],"private"],["core_learner",640,TRUST,"public"],["mart_planning__near_award",1000,WO_PLN,"protected"]];
-function wo_pill(ctx,x,y,s,col,o){o=o||{};const w=tw(ctx,s,18,500,"mono")+36,h=50;glass(ctx,x-w/2,y-h/2,w,h,14,col,{glow:10,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(ctx,s,x,y+6,{f:"mono",w:500,size:18,align:"center",color:rgba(col,1)});return w;}
+function wo_pill(ctx,x,y,s,col,o){o=o||{};const fs=phSz(ctx,18);if(fs>18&&tw(ctx,s,fs,500,"mono")>340&&s.indexOf("__")>0){const k=s.lastIndexOf("__")+2,L=[s.slice(0,k),s.slice(k)],w=Math.max(...L.map(l=>tw(ctx,l,fs,500,"mono")))+36,h=L.length*34+18;
+  glass(ctx,x-w/2,y-h/2,w,h,14,col,{glow:10,ea:0.8,fill:"rgba(7,12,24,0.95)"});L.forEach((l,i)=>T(ctx,l,x,y+fs*0.36+(i-0.5)*34,{f:"mono",w:500,size:18,align:"center",color:rgba(col,1)}));return w;}
+  const w=tw(ctx,s,fs,500,"mono")+36,h=50;glass(ctx,x-w/2,y-h/2,w,h,14,col,{glow:10,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(ctx,s,x,y+6,{f:"mono",w:500,size:18,align:"center",color:rgba(col,1)});return w;}
 scene("grants",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.03});
   const cG=c("grants"),cD=c("dashboard"),cO=c("doors");
   // the rings fade into arrows between models
   const rf=1-fin(t,0,1.2);if(rf>0)withA(ctx,rf,()=>{ctx.save();ctx.translate(620,540);ctx.scale(1.025,1.025);ctx.translate(-620,-540);wo_ringScene(ctx,t,{ring:[1,1,1],lit:[0,0,0],core:1,marts:1,priv:1});ctx.restore();});   // drawn as the last chapter's camera left them
   arrive(ctx,100,150,t,0.4,()=>T(ctx,"access: who can refer",100,150,{w:800,size:26,color:rgba(INK,1)}),{dy:12});
-  WO_M5.forEach(([n,x,col,acc],i)=>arrive(ctx,x,230,t,0.6+i*0.2,()=>{wo_pill(ctx,x,230,n,col);T(ctx,acc,x,286,{w:600,size:18,align:"center",color:rgba(mix(col,INK,0.3),1)});},{dy:16}));
-  arrowTo(ctx,445,222,570,222,GOOD,fin(t,1.4,0.5),{p:fin(t,1.4,0.7),head:12});arrowTo(ctx,712,222,840,222,GOOD,fin(t,1.7,0.5),{p:fin(t,1.7,0.7),head:12});
+  // on a phone the pills are measured at the size they're drawn: the arrows run between their edges, and the access sits under the taller ones
+  const ph=phMin(ctx)>0,PW=WO_M5.map(([n])=>{const fs=phSz(ctx,18);if(fs>18&&tw(ctx,n,fs,500,"mono")>340&&n.indexOf("__")>0){const k=n.lastIndexOf("__")+2;return Math.max(tw(ctx,n.slice(0,k),fs,500,"mono"),tw(ctx,n.slice(k),fs,500,"mono"))+36;}return tw(ctx,n,fs,500,"mono")+36;}),AY=ph?306:286;
+  WO_M5.forEach(([n,x,col,acc],i)=>arrive(ctx,x,230,t,0.6+i*0.2,()=>{wo_pill(ctx,x,230,n,col);T(ctx,acc,x,AY,{w:600,size:18,align:"center",color:rgba(mix(col,INK,0.3),1)});},{dy:16}));
+  const ex=i=>[WO_M5[i][1]-PW[i]/2,WO_M5[i][1]+PW[i]/2];
+  arrowTo(ctx,ph?ex(0)[1]+6:445,222,ph?ex(1)[0]-6:570,222,GOOD,fin(t,1.4,0.5),{p:fin(t,1.4,0.7),head:12});arrowTo(ctx,ph?ex(1)[1]+6:712,222,ph?ex(2)[0]-6:840,222,GOOD,fin(t,1.7,0.5),{p:fin(t,1.7,0.7),head:12});
   withA(ctx,fin(t,w("refer","refer to"),0.5),()=>T(ctx,"ref()",640,180,{f:"mono",w:500,size:18,align:"center",color:rgba(GOOD,1)}));
   // below: the tables, each with a door
   arrive(ctx,100,400,t,w("refer","who can read")-0.2,()=>T(ctx,"grants: who can read",100,400,{w:800,size:26,color:rgba(INK,1)}),{dy:12});
@@ -203,7 +213,8 @@ scene("grants",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   arrive(ctx,1000,650,t,w("grants","the groups")-0.1,()=>withA(ctx,1-fin(t,cO,0.5),()=>tag(ctx,1000,650,"readers: the groups Planning names",WO_PLN,{align:"center",size:20})),{dy:12});
   // the grant in the project: Databricks only
   arrive(ctx,1530,260,t,cG-0.2,()=>wo_code(ctx,1180,120,700,"dbt_project.yml",WO_GR,{p:clamp((t-cG)/1.4,0,1),size:18,lh:28,edge:WO_PLN,lit:{3:fin(t,w("grants","grant reading")-0.2,0.4)}}),{dy:24});
-  arrive(ctx,1530,452,t,w("grants","Databricks")-0.1,()=>withA(ctx,1-fin(t,cO-0.3,0.5),()=>tag(ctx,1530,452,"on Databricks; on DuckDB it's empty",[150,190,255],{align:"center",size:20})),{dy:12});
+  const GY=ph?120+wo_code(ctx,1180,120,700,"dbt_project.yml",WO_GR,{a:0,size:18,lh:28}):388;
+  arrive(ctx,1530,GY+64,t,w("grants","Databricks")-0.1,()=>withA(ctx,1-fin(t,cO-0.3,0.5),()=>tag(ctx,1530,GY+64,"on Databricks; on DuckDB it's empty",[150,190,255],{align:"center",size:20})),{dy:12});
   // a dashboard reads a private staging table: the reference stays refused, the door opens
   arrive(ctx,240,760,t,cD-0.1,()=>wo_dash(ctx,120,690,240,150,WO_PLN,t,{title:"Planning's dashboard"}),{dy:20});
   const rr_=fin(t,w("dashboard","private staging")-0.2,0.8);arrowTo(ctx,1000,198,300,198,BAD,rr_*0.9,{p:rr_,bend:0.12,nohead:true,lw:2.6});
@@ -212,10 +223,12 @@ scene("grants",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   arrive(ctx,560,720,t,w("dashboard","a grant")+0.2,()=>tag(ctx,560,720,"read with a grant",GOOD,{size:20}),{dy:12});
   arrive(ctx,560,780,t,w("dashboard","Access doesn't")-0.1,()=>tag(ctx,560,780,"access doesn't stop it",SOFT,{size:20}),{dy:12});
   // two doors, two rules
-  arrive(ctx,1530,620,t,cO-0.1,()=>{glass(ctx,1180,500,700,250,18,[150,190,255],{glow:12,ea:0.7,fill:"rgba(7,12,24,0.95)"});
-    arrowTo(ctx,1220,570,1310,570,BAD,1,{nohead:true,lw:3});wo_bar(ctx,1300,570,0,1,0.8);T(ctx,"refer: access, checked when dbt parses",1340,578,{w:700,size:22});
-    ctx.strokeStyle=rgba(TRUST,0.9);ctx.lineWidth=2.4;ctx.strokeRect(1236,640,48,64);ctx.fillStyle="rgba(255,236,190,0.5)";ctx.fillRect(1236,640,48,64);ctx.fillStyle=rgba([60,70,90],1);ctx.fillRect(1236,640,16,64);
-    T(ctx,"read: grants, on the platform",1340,680,{w:700,size:22});},{dy:20});
+  // two doors: on a phone under the grant's card, each rule's words wrapped to the box
+  const DY=ph?Math.max(0,GY+16-500):0,fz=phSz(ctx,22),R1=ph?phWrap(ctx,"refer: access, checked when dbt parses",520,fz,700):["refer: access, checked when dbt parses"],R2=ph?phWrap(ctx,"read: grants, on the platform",520,fz,700):["read: grants, on the platform"],ld=Math.round(fz*1.2),ex2=(R1.length-1)*ld;
+  arrive(ctx,1530,620+DY,t,cO-0.1,()=>{ctx.save();ctx.translate(0,DY);glass(ctx,1180,500,700,250+ex2+(R2.length-1)*ld,18,[150,190,255],{glow:12,ea:0.7,fill:"rgba(7,12,24,0.95)"});
+    arrowTo(ctx,1220,570,1310,570,BAD,1,{nohead:true,lw:3});wo_bar(ctx,1300,570,0,1,0.8);R1.forEach((l,i)=>T(ctx,l,1340,578+i*ld,{w:700,size:22}));
+    ctx.translate(0,ex2);ctx.strokeStyle=rgba(TRUST,0.9);ctx.lineWidth=2.4;ctx.strokeRect(1236,640,48,64);ctx.fillStyle="rgba(255,236,190,0.5)";ctx.fillRect(1236,640,48,64);ctx.fillStyle=rgba([60,70,90],1);ctx.fillRect(1236,640,16,64);
+    R2.forEach((l,i)=>T(ctx,l,1340,680+i*ld,{w:700,size:22}));ctx.restore();},{dy:20});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 6. Across projects ---------- */
@@ -235,13 +248,14 @@ scene("across",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   withA(ctx,fin(t,0.3,0.5)*(1-fin(t,w("today","One day"),0.5)),()=>tag(ctx,960,72,"one project today",[150,190,255],{align:"center",size:22}));
   // one day: Planning's own project, a sketch
   const pd=fin(t,w("today","One day")-0.1,1.4);wo_proj(ctx,1080,120,790,720,"planning",WO_PLN,{a:fin(t,w("today","One day")-0.1,0.3),dash:true,p:pd});
-  withA(ctx,fin(t,w("today","project of its own"),0.5),()=>{const lw=tw(ctx,WO_CLOUD,18,700)+28,lx=1846-lw;ctx.fillStyle="rgba(8,12,24,0.98)";rr(ctx,lx,103,lw,32,16);ctx.fill();ctx.save();ctx.setLineDash([5,4]);ctx.strokeStyle=rgba(WO_AMB,0.9);ctx.lineWidth=1.6;rr(ctx,lx,103,lw,32,16);ctx.stroke();ctx.restore();
+  withA(ctx,fin(t,w("today","project of its own"),0.5),()=>{const lw=tw(ctx,WO_CLOUD,phSz(ctx,18),700)+28,lx=1846-lw;ctx.fillStyle="rgba(8,12,24,0.98)";rr(ctx,lx,103,lw,32,16);ctx.fill();ctx.save();ctx.setLineDash([5,4]);ctx.strokeStyle=rgba(WO_AMB,0.9);ctx.lineWidth=1.6;rr(ctx,lx,103,lw,32,16);ctx.stroke();ctx.restore();
     glow(ctx,lx+lw/2,119,lw*0.6,WO_AMB,0.4*pulseAt(t,w("sketch","sketch"),1.6));T(ctx,WO_CLOUD,lx+14,126,{w:700,size:18,color:rgba(WO_AMB,1)});});
   const labHi=pulseAt(t,w("sketch","dbt Cloud"),1.8);
   arrive(ctx,1476,250,t,cDp-0.2,()=>wo_code(ctx,1102,170,746,"examples/planning/dependencies.yml",WO_DEP,{p:clamp((t-cDp)/0.9,0,1),size:18,lh:28,edge:WO_PLN,label:WO_CLOUD,labHi,lit:{2:fin(t,w("depends","credentials")-0.2,0.4)}}),{dy:20});
-  const sqlOut=1-fin(t,w("only","Only public")-0.3,0.6);
-  arrive(ctx,1476,530,t,cP-0.3,()=>wo_code(ctx,1102,350,746,"examples/planning/models/planning_enrolments_at_census.sql",WO_SQL,{a:sqlOut,p:clamp((t-cP+0.1)/1.4,0,1),size:18,lh:28,edge:WO_PLN,label:WO_CLOUD,labHi,lit:{5:fin(t,w("pinned","by project")-0.2,0.4)},glow:{5:pulseAt(t,w("pinned","version one"),1.4)}}),{dy:20});
-  arrive(ctx,1476,450,t,w("only","Only public")-0.1,()=>wo_code(ctx,1102,350,746,"examples/planning/README.md",WO_RDM,{p:clamp((t-w("only","Only public"))/1.4,0,1),size:18,lh:28,edge:WO_PLN,label:WO_CLOUD,labHi}),{dy:20});
+  const ph=phMin(ctx)>0,sqlOut=1-fin(t,w("only","Only public")-0.3,0.6),QY=ph?Math.max(350,170+16+wo_code(ctx,1102,170,746,"examples/planning/dependencies.yml",WO_DEP,{a:0,size:18,lh:28,label:WO_CLOUD})):350,
+    QB=ph?QY+Math.max(wo_code(ctx,1102,QY,746,"examples/planning/models/planning_enrolments_at_census.sql",WO_SQL,{a:0,size:18,lh:28,label:WO_CLOUD}),wo_code(ctx,1102,QY,746,"examples/planning/README.md",WO_RDM,{a:0,size:18,lh:28,label:WO_CLOUD}))+40:790;
+  arrive(ctx,1476,530,t,cP-0.3,()=>wo_code(ctx,1102,QY,746,"examples/planning/models/planning_enrolments_at_census.sql",WO_SQL,{a:sqlOut,p:clamp((t-cP+0.1)/1.4,0,1),size:18,lh:28,edge:WO_PLN,label:WO_CLOUD,labHi,lit:{5:fin(t,w("pinned","by project")-0.2,0.4)},glow:{5:pulseAt(t,w("pinned","version one"),1.4)}}),{dy:20});
+  arrive(ctx,1476,450,t,w("only","Only public")-0.1,()=>wo_code(ctx,1102,QY,746,"examples/planning/README.md",WO_RDM,{p:clamp((t-w("only","Only public"))/1.4,0,1),size:18,lh:28,edge:WO_PLN,label:WO_CLOUD,labHi}),{dy:20});
   // the bridge to the public core, pinned to version 1
   const[kx,ky]=[rcx+WO_RN.core[3][0]*rs,rcy+WO_RN.core[3][1]*rs],bp=fin(t,w("pinned","pinned")-0.3,1.2);
   wo_dot(ctx,1080,560,WO_PLN,fin(t,cP-0.2,0.5),9);
@@ -254,7 +268,7 @@ scene("across",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
     arrowTo(ctx,1072,570+i*30,sx,sy,BAD,q*(1-0.4*fin(t,cS,0.6)),{p:q,nohead:true,lw:3});wo_bar(ctx,sx,sy,Math.atan2(qy-570,qx-1072),fin(t,t0+0.7,0.25)*(1-0.4*fin(t,cS,0.6)),0.9);});
   withA(ctx,fin(t,w("only","Only public")+0.2,0.5),()=>{T(ctx,"only public",940,720,{w:800,size:22,align:"center",color:rgba(TRUST,1)});T(ctx,"models cross",940,748,{w:800,size:22,align:"center",color:rgba(TRUST,1)});});
   withA(ctx,fin(t,w("only","meet on the core")-0.1,0.5),()=>{T(ctx,"the domains",940,250,{w:700,size:22,align:"center",color:rgba(INK,1)});T(ctx,"meet on the core",940,278,{w:700,size:22,align:"center",color:rgba(INK,1)});});
-  arrive(ctx,1496,790,t,w("sketch","doesn't run")-0.1,()=>tag(ctx,1496,790,"needs dbt Cloud · doesn't run on DuckDB",WO_AMB,{align:"center",size:22}),{dy:14});
+  arrive(ctx,1496,QB,t,w("sketch","doesn't run")-0.1,()=>tag(ctx,1496,QB,"needs dbt Cloud · doesn't run on DuckDB",WO_AMB,{align:"center",size:22}),{dy:14});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 7. What stays shared ---------- */
@@ -273,11 +287,13 @@ scene("shared",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   withA(ctx,fin(t,0.2,0.4)*(1-fin(t,cS+1.4,0.6)),()=>tag(ctx,960,72,"split into domains",INK,{align:"center",size:22}));
   // Aisha's key, hashed in each project
   const hA=fin(t,w("hash","Aisha")-0.2,0.5),lower=fin(t,w("another","lower case")-0.2,0.6),run=clamp((t-w("hash","Aisha"))/1.2,0,1);
+  const ph=phMin(ctx)>0,kz=phSz(ctx,22),AX=ph?tw(ctx,"SIS|S-20417",kz,500,"mono")+14:180,HX=ph?AX+tw(ctx,"→",kz,700)+14:220,NX=ph?HX+tw(ctx,"0905e6e2…f76a2",kz,500,"mono")+24:560,
+    TX=ph?(()=>{let x=0;return["unique","not_null","relationships"].map(s=>{const p=x;x+=tw(ctx,s,phSz(ctx,18),500,"mono")+68;return p;});})():[0,190,380],TK=s=>tw(ctx,s,phSz(ctx,18),500,"mono")+20;
   [[90,0],[1090,1]].forEach(([x,i])=>withA(ctx,hA,()=>{ctx.save();ctx.translate(i?cr:-cr,0);const lo=i&&lower>0,key=lo?"sis|s-20417":"SIS|S-20417",hsh=lo?"8c73518c…447e":"0905e6e2…f76a2";
-    T(ctx,key,x,192,{f:"mono",w:500,size:22,color:rgba(lo?EDGE_:WO_REG,1)});T(ctx,"→",x+180,192,{w:700,size:22,color:rgba(SOFT,1)});T(ctx,typeOn(hsh,run),x+220,192,{f:"mono",w:500,size:22,color:rgba(lo?EDGE_:TRUST,1)});
-    withA(ctx,fin(t,w("hash","sixty-four")-0.1,0.5)*(1-lower),()=>T(ctx,"64 characters",x+560,192,{w:600,size:18,color:rgba(SOFT,1)}));
-    if(i)withA(ctx,fin(t,w("another","second key")-0.1,0.5),()=>T(ctx,"a second key",x+560,192,{w:700,size:20,color:rgba(EDGE_,1)}));
-    withA(ctx,fin(t,w("another","no test")-0.3,0.4),()=>{["unique","not_null","relationships"].forEach((s,j)=>{const tx=x+j*190;T(ctx,s,tx,262,{f:"mono",w:500,size:18,color:rgba(GOOD,1)});tick_(ctx,tx+tw(ctx,s,18,500,"mono")+20,256,18,GOOD,1);});});
+    T(ctx,key,x,192,{f:"mono",w:500,size:22,color:rgba(lo?EDGE_:WO_REG,1)});T(ctx,"→",x+AX,192,{w:700,size:22,color:rgba(SOFT,1)});T(ctx,typeOn(hsh,run),x+HX,192,{f:"mono",w:500,size:22,color:rgba(lo?EDGE_:TRUST,1)});
+    withA(ctx,fin(t,w("hash","sixty-four")-0.1,0.5)*(1-lower),()=>T(ctx,"64 characters",x+NX,192,{w:600,size:18,color:rgba(SOFT,1)}));
+    if(i)withA(ctx,fin(t,w("another","second key")-0.1,0.5),()=>T(ctx,"a second key",x+NX,192,{w:700,size:20,color:rgba(EDGE_,1)}));
+    withA(ctx,fin(t,w("another","no test")-0.3,0.4),()=>{["unique","not_null","relationships"].forEach((s,j)=>{const tx=x+TX[j];T(ctx,s,tx,262,{f:"mono",w:500,size:18,color:rgba(GOOD,1)});tick_(ctx,tx+(ph?TK(s):tw(ctx,s,18,500,"mono")+20),256,18,GOOD,1);});});
     ctx.restore();}));
   withA(ctx,fin(t,w("hash","same sixty")-0.2,0.5)*(1-lower),()=>{T(ctx,"the same",960,232,{w:700,size:20,align:"center",color:rgba(GOOD,1)});T(ctx,"in every project",960,258,{w:700,size:20,align:"center",color:rgba(GOOD,1)});});
   // the join line between her two rows, and where it breaks
@@ -288,19 +304,21 @@ scene("shared",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   // the middle: the key sets, then the one hash macro, then the README's word on packages
   const ksA=1-fin(t,cH-0.7,0.4),hkA=1-fin(t,cP-0.3,0.5);
   arrive(ctx,960,500,t,cK-0.2,()=>wo_code(ctx,600,330,720,"sources/*/_*__sources.yml",WO_KS,{a:ksA,p:clamp((t-cK)/1.4,0,1),size:18,lh:27,edge:WO_REG,lineCol:{1:WO_REG,4:WO_LRN,7:WO_SC}}),{dy:20});
-  arrive(ctx,960,510,t,cH-0.2,()=>wo_code(ctx,540,328,840,"macros/shared/keys.sql",WO_HK,{a:hkA,p:clamp((t-cH)/1.6,0,1),size:18,lh:25,edge:TRUST,lit:{6:fin(t,w("hash","Aisha")-0.2,0.4),10:fin(t,w("hash","Aisha")-0.2,0.4)}}),{dy:20});
+  const HK=ph?WO_HK.slice(0,8).concat(["…"]):WO_HK,SD=ph?40:0;
+  arrive(ctx,960,510,t,cH-0.2,()=>wo_code(ctx,ph?500:540,328,ph?920:840,"macros/shared/keys.sql",HK,{a:hkA,p:clamp((t-cH)/1.6,0,1),size:18,lh:25,edge:TRUST,lit:{6:fin(t,w("hash","Aisha")-0.2,0.4),10:fin(t,w("hash","Aisha")-0.2,0.4)}}),{dy:20});
   const rT=w("package","Macros don't")-0.2;
-  arrive(ctx,960,400,t,rT,()=>wo_code(ctx,570,320,780,"examples/planning/README.md",WO_RD2,{p:clamp((t-rT)/1.4,0,1),size:18,lh:28,edge:WO_PLN,label:WO_CLOUD}),{dy:20});
+  const RX=ph?420:570,RW=ph?1080:780,PY=ph?Math.max(540,320+16+wo_code(ctx,RX,320,RW,"examples/planning/README.md",WO_RD2,{a:0,size:18,lh:28,label:WO_CLOUD})):540;
+  arrive(ctx,960,400,t,rT,()=>wo_code(ctx,RX,320,RW,"examples/planning/README.md",WO_RD2,{p:clamp((t-rT)/1.4,0,1),size:18,lh:28,edge:WO_PLN,label:WO_CLOUD}),{dy:20});
   // the package both projects install
-  const pk=ease(fin(t,w("package","a package")-0.2,1.0));if(pk>0){const px=lerp(-900,360,pk);withA(ctx,fin(pk,0,0.3),()=>{glass(ctx,px,540,1200,96,18,TRUST,{glow:16,ea:0.85,fill:"rgba(12,12,18,0.96)"});
-    T(ctx,"package",px+30,596,{w:800,size:24,color:rgba(TRUST,1)});T(ctx,"the key and time macros, installed by both projects",px+170,596,{w:600,size:22,color:rgba(INK,1)});});
-    withA(ctx,fin(pk,0.8,0.2),()=>{arrowTo(ctx,560,540,460,322,TRUST,0.7,{head:12,dash:[6,6]});arrowTo(ctx,1360,540,1460,322,TRUST,0.7,{head:12,dash:[6,6]});});}
+  const pk=ease(fin(t,w("package","a package")-0.2,1.0));if(pk>0){const px=lerp(-900,360,pk);const kx2=ph?px+30+tw(ctx,"package",phSz(ctx,24),800)+24:px+170;withA(ctx,fin(pk,0,0.3),()=>{glass(ctx,px,PY,1200,96,18,TRUST,{glow:16,ea:0.85,fill:"rgba(12,12,18,0.96)"});
+    T(ctx,"package",px+30,PY+56,{w:800,size:24,color:rgba(TRUST,1)});T(ctx,"the key and time macros, installed by both projects",kx2,PY+56,{w:600,size:22,color:rgba(INK,1)});});
+    withA(ctx,fin(pk,0.8,0.2),()=>{arrowTo(ctx,560,PY,460,322,TRUST,0.7,{head:12,dash:[6,6]});arrowTo(ctx,1360,PY,1460,322,TRUST,0.7,{head:12,dash:[6,6]});});}
   // the ground both projects stand on: a faint outline first, then a slab as each is named
-  withA(ctx,fin(t,w("still","shared")-0.2,0.8),()=>{ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(SOFT,0.35);ctx.lineWidth=2;rr(ctx,52,716,1816,124,14);ctx.stroke();ctx.restore();});
+  withA(ctx,fin(t,w("still","shared")-0.2,0.8),()=>{ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(SOFT,0.35);ctx.lineWidth=2;rr(ctx,52,716+SD,1816,124,14);ctx.stroke();ctx.restore();});
   WO_SLABS.forEach(([n,sub,col],i)=>{const t0=[w("keysets","key sets"),w("hash","One macro"),w("package","conventions"),w("package","glossary")][i],gl=i===3?w("package","glossary"):t0,x=60+i*450,sx=(i<2?-1:1)*cr;
-    arrive(ctx,x+216+sx,770,t,i===3?gl-0.1:t0-0.1,()=>wo_slab(ctx,x+sx,724,432,108,n,sub,col,{hi:pulseAt(t,t0,1.4)+(i===3?pulseAt(t,gl,1.4):0)}),{dy:24,from:0.95});});
-  if(crack>0)withA(ctx,crack,()=>{ctx.strokeStyle=rgba(BAD,0.9);ctx.lineWidth=2.4;ctx.beginPath();[[960,700],[952,730],[968,760],[950,790],[966,820],[958,840]].forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.stroke();});
-  arrive(ctx,960,684,t,w("silos","silos")-0.3,()=>tag(ctx,960,684,"without shared keys, domains become silos",BAD,{align:"center",size:22}),{dy:12});
+    arrive(ctx,x+216+sx,770+SD,t,i===3?gl-0.1:t0-0.1,()=>wo_slab(ctx,x+sx,724+SD,432,108,n,sub,col,{hi:pulseAt(t,t0,1.4)+(i===3?pulseAt(t,gl,1.4):0)}),{dy:24,from:0.95});});
+  if(crack>0)withA(ctx,crack,()=>{ctx.strokeStyle=rgba(BAD,0.9);ctx.lineWidth=2.4;ctx.beginPath();[[960,700],[952,730],[968,760],[950,790],[966,820],[958,840]].forEach(([x,y],i)=>i?ctx.lineTo(x,y+SD):ctx.moveTo(x,y+SD));ctx.stroke();});
+  const SY=ph?Math.max(684,PY+96+30):684;arrive(ctx,960,SY,t,w("silos","silos")-0.3,()=>tag(ctx,960,SY,"without shared keys, domains become silos",BAD,{align:"center",size:22}),{dy:12});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 8. Groups first ---------- */
@@ -322,16 +340,17 @@ scene("split",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
   arrive(ctx,1400,270,t,w("why","more to deploy")-0.1,()=>withA(ctx,why,()=>tag(ctx,1400,270,"every project: more to deploy",EDGE_,{align:"center",size:22})),{dy:12});
   arrive(ctx,1400,330,t,w("why","keep in step")-0.1,()=>withA(ctx,why,()=>tag(ctx,1400,330,"and more to keep in step",EDGE_,{align:"center",size:22})),{dy:12});
   // the decision, and Noor's gold tick
-  arrive(ctx,1410,215,t,cD-0.2,()=>wo_code(ctx,960,110,900,"models/_shared/_shared__decisions.yml",WO_DEC,{p:clamp((t-cD)/2.0,0,1),size:18,lh:28,edge:TRUST}),{dy:20});
-  kt_gtick(ctx,1826,292,20,fin(t,w("decided","Noor decided")+0.1,0.35));
-  arrive(ctx,1410,380,t,w("decided","groups first")-0.1,()=>tag(ctx,1410,380,"groups first, in one project",GOOD,{align:"center",size:22}),{dy:12});
-  arrive(ctx,1410,436,t,w("decided","Projects later")-0.1,()=>tag(ctx,1410,436,"projects later, when teams own their domains",[150,190,255],{align:"center",size:22}),{dy:12});
+  const ph=phMin(ctx)>0,lT=w("later","moves out")-0.2,dA=ph?1-fin(t,lT-0.5,0.5):1,hD=ph?wo_code(ctx,960,110,900,"models/_shared/_shared__decisions.yml",WO_DEC,{a:0,size:18,lh:28}):0,G1=ph?110+hD+30:380,LY=ph?160:500,CY=ph?204:540,CS=ph?52:46,OY=ph?770:650;
+  withA(ctx,dA,()=>{arrive(ctx,1410,215,t,cD-0.2,()=>wo_code(ctx,960,110,900,"models/_shared/_shared__decisions.yml",WO_DEC,{p:clamp((t-cD)/2.0,0,1),size:18,lh:28,edge:TRUST}),{dy:20});
+    kt_gtick(ctx,1826,292,20,fin(t,w("decided","Noor decided")+0.1,0.35));
+    arrive(ctx,1410,G1,t,w("decided","groups first")-0.1,()=>tag(ctx,1410,G1,"groups first, in one project",GOOD,{align:"center",size:22}),{dy:12});
+    arrive(ctx,1410,G1+56,t,w("decided","Projects later")-0.1,()=>tag(ctx,1410,G1+56,"projects later, when teams own their domains",[150,190,255],{align:"center",size:22}),{dy:12});});
   // when that day comes, a domain moves out with its own folders: Planning's, gathered beside the decision
-  const lT=w("later","moves out")-0.2;arrive(ctx,1100,520,t,lT,()=>T(ctx,"planning, as its own project:",960,500,{w:800,size:22,color:rgba(WO_PLN,1)}),{dy:10});
+  arrive(ctx,1100,LY+20,t,lT,()=>T(ctx,"planning, as its own project:",960,LY,{w:800,size:22,color:rgba(WO_PLN,1)}),{dy:10});
   ["models/marts/planning/","exposures/planning/","seeds/expected/planning/","_planning__decisions.yml"].forEach((s,i)=>{const q=fin(t,lT+0.3+i*0.25,0.5);
-    if(q>0)withA(ctx,q,()=>wo_chip(ctx,lerp(700,960,ease(q)),540+i*46,s,WO_PLN,{mono:true,size:18,text:INK}));});
+    if(q>0)withA(ctx,q,()=>wo_chip(ctx,lerp(700,960,ease(q)),CY+i*CS,s,WO_PLN,{mono:true,size:18,text:INK}));});
   // the ten steps, small: this film's are 4 and 10
-  arrive(ctx,1440,650,t,w("decided","Projects later")+0.6,()=>wo_loop(ctx,1440,650,190,110,{3:1,9:1},t,{label:"Promise and Keep · steps 4 and 10"}),{d:1.0,from:0.9});
+  arrive(ctx,1440,OY,t,w("decided","Projects later")+0.6,()=>wo_loop(ctx,1440,OY,190,110,{3:1,9:1},t,{label:"Promise and Keep · steps 4 and 10"}),{d:1.0,from:0.9});
   // many owners, many hands
   const own=[["mei",130],["tom",290],["Planning",450,WO_PLN],["wallet app",610,WO_WAL],["noor",770],["jun",930]];
   own.forEach(([id,x,col],i)=>arrive(ctx,x,740,t,w("hands","Many owners")-0.2+i*0.15,()=>{if(col){wo_team(ctx,x,724,0.62,col,t,{label:id,ly:200,size:22});}

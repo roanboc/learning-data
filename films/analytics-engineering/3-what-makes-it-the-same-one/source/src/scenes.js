@@ -78,9 +78,10 @@ function sm_evid(ctx,x,y,w,claims,file,rows,o){o=o||{};const a=o.a==null?1:o.a;i
   withA(ctx,a*(1-0.45*g),()=>{const h=o.h;glass(ctx,x,y,w,h,16,col,{glow:10,ea:0.7,fill:"rgba(6,10,20,0.95)"});
     claims.forEach((s,i)=>withA(ctx,o.cA?o.cA[i]:1,()=>T(ctx,s,x+20,y+38+i*30,{w:700,size:21,color:rgba(mix(INK,col,0.35),1)})));let yy=y+38+claims.length*30;
     ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+14,yy-8,w-28,1.2);
-    if(file){ctx.fillStyle=rgba(KIND,0.9);rr(ctx,x+20,yy+6,10,10,3);ctx.fill();T(ctx,file,x+38,yy+18,{f:"mono",w:500,size:18,color:rgba(KIND,1)});yy+=34;
+    // on a phone the file's path gives way from the left, and result rows too long for the card are small print under the claims
+    const pm=phMin(ctx);if(file){ctx.fillStyle=rgba(KIND,0.9);rr(ctx,x+20,yy+6,10,10,3);ctx.fill();T(ctx,pm?phFitPath(ctx,file,w-58,Math.max(18,pm)):file,x+38,yy+18,{f:"mono",w:500,size:18,color:rgba(KIND,1)});yy+=34;
       ctx.fillStyle="rgba(255,255,255,0.04)";rr(ctx,x+14,yy,w-28,rows.length*28+14,8);ctx.fill();
-      rows.forEach((r,i)=>withA(ctx,o.rA?o.rA[i]:1,()=>T(ctx,r,x+26,yy+28+i*28,{f:"mono",w:500,size:18})));yy+=rows.length*28+14;
+      rows.forEach((r,i)=>withA(ctx,o.rA?o.rA[i]:1,()=>phAsDeco(pm&&tw(ctx,r,pm,500,"mono")>w-40,()=>T(ctx,r,x+26,yy+28+i*28,{f:"mono",w:500,size:18}))));yy+=rows.length*28+14;
       if(o.note)withA(ctx,o.noteA==null?1:o.noteA,()=>T(ctx,o.note,x+26,yy+26,{w:600,size:18,color:rgba(SOFT,1)}));T(ctx,SM_RUNS,x+w-18,y+h-16,{w:600,size:18,align:"right",color:rgba(SOFT,0.9)});}
     else T(ctx,"no query",x+20,yy+20,{f:"mono",w:500,size:18,color:rgba(SOFT,0.9)});});}
 scene("profile",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
@@ -92,16 +93,18 @@ scene("profile",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   // the first claim: its query, then its result
   const cQ=c("first")+1.4;arrive(ctx,825,320,t,cQ,()=>sm_file(ctx,360,180,910,"analyses/profiling/profile_null_keys.sql",SM_NULLQ,{size:18,lh:29,wrap:true,p:clamp((t-cQ-0.2)/3.0,0,1),edge:KT_AI}),{dy:30});
   arrive(ctx,560,150,t,w("nulls","Four"),()=>tag(ctx,360,148,"4 of 42 accounts: no student ID",KT_AI,{size:20}),{from:0.85});
-  arrive(ctx,700,550,t,w("nulls","no student ID"),()=>sm_rows(ctx,360,506,["source_table","key_column","current_rows","missing"],[["learning_platform.users","student_id","42","4"]],{col:KT_AI}),{dy:20});
-  [["claim",148,w("first","every claim")],["query",330,w("first","query")],["result",550,w("nulls","no student ID")]].forEach(([s,y,t0])=>arrive(ctx,300,y,t,t0,()=>sm_tagR(ctx,348,y,s,SOFT,18),{from:0.8}));
+  // on a phone the query wraps to more lines, and its result sits under it
+  const ry=phMin(ctx)?180+sm_fileH(SM_NULLQ,910,{size:18,lh:29,wrap:true})+14:506;
+  arrive(ctx,700,ry+44,t,w("nulls","no student ID"),()=>sm_rows(ctx,360,ry,["source_table","key_column","current_rows","missing"],[["learning_platform.users","student_id","42","4"]],{col:KT_AI}),{dy:20});
+  [["claim",148,w("first","every claim")],["query",330,w("first","query")],["result",ry+44,w("nulls","no student ID")]].forEach(([s,y,t0])=>arrive(ctx,300,y,t,t0,()=>sm_tagR(ctx,348,y,s,SOFT,18),{from:0.8}));
   // two more evidence cards stack beside it as they're named, then a claim with no query
   arrive(ctx,1565,245,t,cSh-0.1,()=>sm_evid(ctx,1290,120,550,["one email, two students","one email, two accounts"],"analyses/profiling/profile_shared_emails.sql",["student_system | nguyen.family@… | 2","learning_platform | nguyen.family@… | 2"],
     {h:252,cA:[1,fin(t,w("shared","so do"),0.5)],rA:[fin(t,w("shared","family email"),0.5),fin(t,w("shared","platform accounts"),0.5)]}),{dy:30});
   arrive(ctx,1565,510,t,cO-0.1,()=>sm_evid(ctx,1290,392,550,["2 orphans as typed","0 once trimmed and lower-cased"],"analyses/profiling/profile_orphans.sql",["short_courses.enrolments -> learners | 2 | 0"],
     {h:262,cA:[1,fin(t,w("orphans","Trimmed"),0.5)],rA:[fin(t,w("orphans","no customer"),0.5)],note:"of the enrolments with an email",noteA:fin(t,w("orphans","with an email"),0.5)}),{dy:30});
   const gr=fin(t,w("guess","without"),0.6);
-  arrive(ctx,1565,712,t,cG-0.7,()=>{sm_evid(ctx,1290,676,550,["Emails are unique across the student system."],null,[],{h:108,grey:gr});withA(ctx,fin(t,w("guess","guess")-0.1,0.4),()=>sm_tagR(ctx,1822,760,"guess",EDGE_,20));},{dy:30});
-  arrive(ctx,825,660,t,w("guess","claim"),()=>T(ctx,"a claim without its query is a guess",825,668,{w:700,size:28,align:"center",color:rgba(INK,1)}),{dy:12});
+  const ey=phMin(ctx)?Math.max(676,ry+120):676;arrive(ctx,1565,ey+36,t,cG-0.7,()=>{sm_evid(ctx,1290,ey,550,["Emails are unique across the student system."],null,[],{h:108,grey:gr});withA(ctx,fin(t,w("guess","guess")-0.1,0.4),()=>sm_tagR(ctx,1822,ey+84,"guess",EDGE_,20));},{dy:30});
+  const gy=phMin(ctx)?ry+150:668;arrive(ctx,825,gy-8,t,w("guess","claim"),()=>T(ctx,"a claim without its query is a guess",825,gy,{w:700,size:28,align:"center",color:rgba(INK,1)}),{dy:12});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 4. Key sets ---------- */
@@ -171,7 +174,7 @@ scene("rules",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   withA(ctx,pA,()=>{arrive(ctx,463,110,t,acr+3,()=>tag(ctx,463,112,"Aisha",KIND,{align:"center",size:18}),{from:0.8});
     arrive(ctx,500,600,t,w("aisha","ninety"),()=>T(ctx,"90 keys",420,612,{w:800,size:40,align:"right"}),{from:0.9});
     arrive(ctx,600,600,t,w("aisha","forty-six"),()=>T(ctx,"→ 46 learners",440,612,{w:800,size:40,color:rgba(TRUST,1)}),{from:0.9});
-    [["40 student system",0],["42 learning platform",1],["8 short courses",2]].forEach(([s,k],i)=>T(ctx,s,80+i*230,690,{w:600,size:19,color:rgba(SRC3[k][1],1)}));});
+    let lx=80;[["40 student system",0],["42 learning platform",1],["8 short courses",2]].forEach(([s,k],i)=>{const x_=phMin(ctx)?lx:80+i*230;lx+=tw(ctx,s,Math.max(19,phMin(ctx)),600)+24;T(ctx,s,x_,690,{w:600,size:19,color:rgba(SRC3[k][1],1)});});});
   const yh=sm_fileH(SM_YML,900,{size:18,lh:29,wrap:true});
   arrive(ctx,1410,280,t,cOw-0.1,()=>{sm_file(ctx,960,150,900,"models/core/student/_student__conceptual.yml",SM_YML,{size:18,lh:29,wrap:true,edge:BPL,p:clamp((t-cOw)/2.0,0,1)});tag(ctx,960,112,"in words: the model",BPL,{size:18});},{dy:30});
   arrive(ctx,1100,150+yh+34,t,w("owned","in code"),()=>tag(ctx,960,150+yh+34,"in code: two models",LAYER4[1][1],{size:18}),{from:0.85});
@@ -244,13 +247,15 @@ scene("hash",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   arrive(ctx,715,200,t,h0,()=>{glass(ctx,430,136,570,128,14,hcol,{glow:12+10*pulseAt(t,red?sp:heal,1.2),ea:0.7,fill:"rgba(6,10,20,0.95)"});
     const t0=healed?heal:red?sp:h0;sm_hex(ctx,450,190,healed||!red?SM_H0:SM_H1,t,t0,{col:hcol});},{from:0.92});
   arrive(ctx,1030,176,t,w("space","Sixty-four"),()=>tag(ctx,1030,176,"64 hex characters · sha-256",INK,{size:18}),{from:0.85});
-  withA(ctx,fin(t,sp,0.4)*(1-fin(t,heal,0.4)),()=>{tag(ctx,1030,228,"one trailing space",SM_AMBER,{size:18});tag(ctx,1236,228,"a different hash",BAD,{size:18});});
+  withA(ctx,fin(t,sp,0.4)*(1-fin(t,heal,0.4)),()=>{const pm=phMin(ctx);tag(ctx,1030,228,"one trailing space",SM_AMBER,{size:18});tag(ctx,pm?1030+tw(ctx,"one trailing space",Math.max(18,pm),700)+42:1236,228,"a different hash",BAD,{size:18});});
   withA(ctx,fin(t,heal,0.4),()=>tag(ctx,1030,228,"the same hash again",GOOD,{size:18}));ctx.restore();
   // the macro arrives: the key goes through it as typed, loses its space, takes upper case, and the hash heals
   const mA=fin(t,cMc-0.2,0.6),tr=w("macro","trims"),uc=w("macro","upper case"),mk=w("macro","marks a missing"),jn=w("macro","joins");
   arrive(ctx,960,362,t,cMc-0.2,()=>sm_file(ctx,100,250,1720,"macros/shared/keys.sql",SM_KC,{size:19,lh:30,edge:[200,170,255],p:clamp((t-cMc)/1.4,0,1),
     lit:{0:fin(t,tr,0.4)*(1-fin(t,cE-0.4,0.5)),1:fin(t,mk,0.4)*(1-fin(t,cE-0.4,0.5)),2:fin(t,mk,0.4)*(1-fin(t,cE-0.4,0.5)),3:fin(t,jn,0.4)*(1-fin(t,cE-0.4,0.5))},litCol:[200,170,255]}),{dy:30});
-  [["trim",tr,100],["upper case",uc,210],["<null> for a missing part",mk,370],["joined with ",jn,650]].forEach(([s,t0,x],i)=>arrive(ctx,x+60,512,t,t0,()=>i<3?tag(ctx,x,512,s,[200,170,255],{size:20}):sm_tagBar(ctx,x,512,s,"|",[200,170,255],20),{from:0.85}));
+  // on a phone the four steps are spaced by the widths of their words
+  const CH=[["trim",tr,100],["upper case",uc,210],["<null> for a missing part",mk,370],["joined with ",jn,650]];if(phMin(ctx)){let cx_=60;CH.forEach(c_=>{c_[2]=cx_;cx_+=tw(ctx,c_[0]+(c_[0]==="joined with "?"|  ":""),Math.max(20,phMin(ctx)),700)+44;});}
+  CH.forEach(([s,t0,x],i)=>arrive(ctx,x+60,512,t,t0,()=>i<3?tag(ctx,x,512,s,[200,170,255],{size:20}):sm_tagBar(ctx,x,512,s,"|",[200,170,255],20),{from:0.85}));
   // the two engines, side by side: both give the same hash
   const eA=fin(t,cE-0.3,0.6);arrive(ctx,550,680,t,cE-0.3,()=>sm_file(ctx,100,556,900,"macros/shared/keys.sql",SM_EN,{size:19,lh:29,edge:LAYER4[2][1],lit:{1:fin(t,w("every","every engine")-0.2,0.4),5:fin(t,w("every","every engine")+0.2,0.4)}}),{dy:30});
   const gA=1-fin(t,cBs-0.9,0.4);withA(ctx,gA,()=>{

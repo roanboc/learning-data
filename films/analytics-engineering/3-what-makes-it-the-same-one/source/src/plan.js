@@ -27,15 +27,15 @@ function sm_file(ctx,x,y,w,name,lines,o){o=o||{};const a=o.a==null?1:o.a,sz=o.si
 
 // a key in a pill, in its source's colour; "·" marks a stray space and is drawn as a visible amber dot. o.pre: a qualifier
 // (SIS|, LMS|, SC|) clipped on in front as q goes 0 to 1. Returns the pill's width.
-function sm_keyW(s,sz,pre){return ((s+(pre||"")).length)*(sz||22)*0.6+28;}
-function sm_key(ctx,x,y,s,col,o){o=o||{};const a=o.a==null?1:o.a,sz=o.size||22,cw=sz*0.6,pre=o.pre||"",q=o.q==null?1:o.q,pw=pre.length*cw*ease(q),w=s.length*cw+28+pw,h=sz+20,X=o.align==="center"?x-w/2:x;if(a<=0.01)return w;
+function sm_keyW(s,sz,pre){return ((s+(pre||"")).length)*Math.max(sz||22,phOn())*0.6+28;}
+function sm_key(ctx,x,y,s,col,o){o=o||{};const a=o.a==null?1:o.a,sz=Math.max(o.size||22,phMin(ctx)),cw=sz*0.6,pre=o.pre||"",q=o.q==null?1:o.q,pw=pre.length*cw*ease(q),w=s.length*cw+28+pw,h=sz+20,X=o.align==="center"?x-w/2:x;if(a<=0.01)return w;
   withA(ctx,a,()=>{if(o.hi)glow(ctx,X+w/2,y,w*0.6,o.hiCol||col,0.3*o.hi);glass(ctx,X,y-h/2,w,h,h/2,col,{fill:"rgba(7,12,24,0.94)",glow:10+8*(o.hi||0),ea:0.85});
     if(pre&&q>0){const pa=fin(q,0,0.4);withA(ctx,pa,()=>{ctx.fillStyle=rgba(col,0.22);rr(ctx,X+4,y-h/2+4,pw+14,h-8,(h-8)/2);ctx.fill();T(ctx,pre,X+14,y+sz*0.36-(1-spring(q*1.6))*26,{f:"mono",w:500,size:sz,color:rgba(mix(col,INK,0.35),1)});});}
     let cx=X+14+pw;for(const ch of s){if(ch==="·"){const da=o.dots==null?1:o.dots;if(da>0){glow(ctx,cx+cw/2,y+sz*0.05+(1-da)*30,10,SM_AMBER,0.5*da);ctx.fillStyle=rgba(SM_AMBER,da);ctx.beginPath();ctx.arc(cx+cw/2,y+sz*0.05+(1-da)*30,sz*0.16,0,TAU);ctx.fill();}}
       else T(ctx,ch,cx,y+sz*0.36,{f:"mono",w:500,size:sz,color:rgba(o.ink||col,1)});cx+=cw;}});return w;}
 
 // a small table of query results: column headers, then rows, monospaced; o.col colours the rule; o.lit lights rows
-function sm_rows(ctx,x,y,heads,rows,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const sz=o.size||18,cw=sz*0.6,lh=o.lh||34,col=o.col||[170,205,255],pad=o.pad||3;
+function sm_rows(ctx,x,y,heads,rows,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const sz=Math.max(o.size||18,phMin(ctx)),cw=sz*0.6,lh=Math.max(o.lh||34,Math.round(sz*1.45)),col=o.col||[170,205,255],pad=o.pad||3;
   const ws=heads.map((h,j)=>Math.max(h.length,...rows.map(r=>(r[j]+"").length))*cw),W_=ws.reduce((s,v)=>s+v,0)+pad*cw*(heads.length-1)+40,H_=(rows.length+1)*lh+22;
   withA(ctx,a,()=>{glass(ctx,x,y,W_,H_,12,col,{glow:10,ea:0.6,fill:"rgba(6,10,20,0.95)"});let cx=x+20;
     heads.forEach((h,j)=>{T(ctx,h,cx,y+lh*0.5+sz*0.5+4,{f:"mono",w:500,size:sz,color:rgba(SOFT,0.95)});cx+=ws[j]+pad*cw;});ctx.fillStyle=rgba(col,0.3);ctx.fillRect(x+14,y+lh+6,W_-28,1.2);
@@ -89,7 +89,8 @@ function sm_wallet(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)retur
 // a test list: each test's name, and a tick that lands one after another as on[i] goes 0 to 1
 function sm_tests(ctx,x,y,w,names,on,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const lh=42,h=74+names.length*lh;withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,GOOD,{glow:10,ea:0.6,fill:"rgba(6,10,20,0.95)"});
   T(ctx,o.title||"dbt build · tests",x+20,y+34,{w:700,size:20,color:rgba(GOOD,1)});ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+14,y+50,w-28,1.2);
-  names.forEach((n,i)=>{const yy=y+88+i*lh,q=on[i]||0;T(ctx,n,x+20,yy,{f:"mono",w:500,size:18,color:rgba(INK,0.5+0.45*q)});tick_(ctx,x+w-30,yy-6,26,GOOD,q);});});return h;}
+  const pm=phMin(ctx),fit=n=>{if(!pm)return n;let s_=n;while(s_.length>6&&tw(ctx,s_,Math.max(18,pm),500,"mono")>w-80)s_=s_.slice(0,-2);return s_===n?n:s_.slice(0,-1)+"…";};
+  names.forEach((n,i)=>{const yy=y+88+i*lh,q=on[i]||0;T(ctx,fit(n),x+20,yy,{f:"mono",w:500,size:18,color:rgba(INK,0.5+0.45*q)});tick_(ctx,x+w-30,yy-6,26,GOOD,q);});});return h;}
 
 // ninety keys (40 student system, 42 learning platform, 8 short courses) fall into forty-six learners: p goes 0 to 1.
 // Each key is [source, learner]; the learners are 40 students and 6 keys that are learners of their own.

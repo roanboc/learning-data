@@ -75,8 +75,10 @@ scene("three",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
 const SM_NULLQ=["-- Evidence: keys that are missing or blank, in the current version of each source table.","-- Run: dbt show --select profile_null_keys --profiles-dir .","select 'learning_platform.users' as source_table, 'student_id' as key_column,","    count(*) as current_rows,","    count(case when nullif(trim(student_id), '') is null then 1 end) as missing","from {{ source('learning_platform', 'users') }}","where _is_current = 'true'"];
 // an evidence card: the claim, the query it comes from, and its result rows; o.grey turns it into a guess
 function sm_evid(ctx,x,y,w,claims,file,rows,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const g=o.grey||0,col=mix(KT_AI,SOFT,g);
-  withA(ctx,a*(1-0.45*g),()=>{const h=o.h;glass(ctx,x,y,w,h,16,col,{glow:10,ea:0.7,fill:"rgba(6,10,20,0.95)"});
-    claims.forEach((s,i)=>withA(ctx,o.cA?o.cA[i]:1,()=>T(ctx,s,x+20,y+38+i*30,{w:700,size:21,color:rgba(mix(INK,col,0.35),1)})));let yy=y+38+claims.length*30;
+  // on a phone a claim too long for the card wraps, and the card grows by the lines it adds
+  const pm=phMin(ctx),CL=claims.map(s=>pm?phWrap(ctx,s,w-40,Math.max(21,pm),700):[s]),xl=CL.reduce((p,l)=>p+l.length,0)-claims.length,lh_=pm?Math.max(30,pm*1.15):30;
+  withA(ctx,a*(1-0.45*g),()=>{const h=o.h+xl*lh_;glass(ctx,x,y,w,h,16,col,{glow:10,ea:0.7,fill:"rgba(6,10,20,0.95)"});
+    let k=0;CL.forEach((L,i)=>withA(ctx,o.cA?o.cA[i]:1,()=>L.forEach(s=>T(ctx,s,x+20,y+38+(k++)*lh_,{w:700,size:21,color:rgba(mix(INK,col,0.35),1)}))));let yy=y+38+CL.reduce((p,l)=>p+l.length,0)*lh_;
     ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+14,yy-8,w-28,1.2);
     // on a phone the file's path gives way from the left, and result rows too long for the card are small print under the claims
     const pm=phMin(ctx);if(file){ctx.fillStyle=rgba(KIND,0.9);rr(ctx,x+20,yy+6,10,10,3);ctx.fill();T(ctx,pm?phFitPath(ctx,file,w-58,Math.max(18,pm)):file,x+38,yy+18,{f:"mono",w:500,size:18,color:rgba(KIND,1)});yy+=34;

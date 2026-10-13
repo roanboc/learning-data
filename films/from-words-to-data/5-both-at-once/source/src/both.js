@@ -221,12 +221,12 @@ function bo_change(ctx,x,y,w,n,text,id,o){o=o||{};const a=o.a==null?1:o.a;if(a<=
     ctx.fillStyle=rgba(o.bad?BAD:col,0.9);ctx.beginPath();ctx.arc(x+30,y+28,17,0,TAU);ctx.fill();T(ctx,String(n),x+30,y+36,{w:800,size:21,align:"center",color:"#0a1020"});
     T(ctx,text,x+58,y+37,{w:700,size:o.fs||25,color:rgba(o.bad?BAD:INK,1)});if(id)bo_key(ctx,x+w-36,y+28,1.3,id,1,o.keyHi||0);});}
 // a table row, as the app stores it: a key and its values, drawn as one horizontal stripe
-function bo_row(ctx,x,y,w,id,vals,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||BO_W,fs=o.fs||21,h=o.h||44;withA(ctx,a,()=>{if(o.hi)glow(ctx,x+w/2,y+h/2,Math.min(w*0.4,150),o.hiCol||col,0.22*Math.min(1,o.hi));
+function bo_row(ctx,x,y,w,id,vals,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||BO_W,fs=Math.max(o.fs||21,phMin(ctx)),h=o.h||44;withA(ctx,a,()=>{if(o.hi)glow(ctx,x+w/2,y+h/2,Math.min(w*0.4,150),o.hiCol||col,0.22*Math.min(1,o.hi));
   ctx.fillStyle=rgba(o.bad?BAD:col,0.14+0.1*(o.hi||0));rr(ctx,x,y,w,h,8);ctx.fill();ctx.strokeStyle=rgba(o.bad?BAD:col,0.35+0.5*(o.hi||0));ctx.lineWidth=1.4;rr(ctx,x,y,w,h,8);ctx.stroke();
   const ty=y+h/2+fs*0.36;bo_key(ctx,x+24,y+h/2,1.15,id,1,o.keyHi||0);T(ctx,id,x+48,ty,{f:"mono",w:500,size:fs,color:rgba(bo_kc(id),1)});let cx=x+48+tw(ctx,id,fs,500,"mono")+20;
   vals.forEach((v,i)=>{const vc=o.vc&&o.vc[i];T(ctx,v,cx,ty,{f:"mono",w:500,size:fs,color:vc?rgba(vc,1):rgba(INK,0.9)});cx+=tw(ctx,v,fs,500,"mono")+20;});});}
 // a column, as the reading side stores it: a name and its values, stacked in one vertical stripe
-function bo_colStripe(ctx,x,y,w,h,name,vals,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||BO_R,fs=o.fs||19,gap=o.gap||52;withA(ctx,a,()=>{ctx.fillStyle=rgba(col,0.12);rr(ctx,x,y,w,h,8);ctx.fill();ctx.strokeStyle=rgba(col,0.35);ctx.lineWidth=1.4;rr(ctx,x,y,w,h,8);ctx.stroke();
+function bo_colStripe(ctx,x,y,w,h,name,vals,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=o.col||BO_R,fs=Math.max(o.fs||19,phMin(ctx)+1),gap=o.gap||52;withA(ctx,a,()=>{ctx.fillStyle=rgba(col,0.12);rr(ctx,x,y,w,h,8);ctx.fill();ctx.strokeStyle=rgba(col,0.35);ctx.lineWidth=1.4;rr(ctx,x,y,w,h,8);ctx.stroke();
   T(ctx,name,x+w/2,y+30,{w:700,size:20,align:"center",color:rgba(col,1)});vals.forEach((v,i)=>{if(!v)return;const vy=y+54+i*gap,va=v.a==null?1:v.a;if(va<=0.01)return;withA(ctx,va,()=>{if(v.hi)glow(ctx,x+w/2,vy+14,w*0.7,v.hc||col,0.35*v.hi);
     if(v.key){bo_key(ctx,x+20,vy+14,1.1,v.key,1,v.keyHi||0);T(ctx,v.key,x+40,vy+21,{f:"mono",w:500,size:fs-1,color:rgba(bo_kc(v.key),1)});}else T(ctx,v.t,x+w/2,vy+21,{f:"mono",w:500,size:fs,align:"center",color:v.c?rgba(v.c,1):rgba(INK,0.92)});});});});}
 // a ghost: an award that should be gone, back to life
@@ -256,15 +256,18 @@ function bo_capsule(ctx,x,y,s,t,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save()
   bo_store(ctx,24,88,186,190,"rows",{n:5,t});bo_store(ctx,230,88,186,190,"cols",{n:5,t});arrowTo(ctx,206,183,234,183,BO_ACC,1,{head:10,lw:3});ctx.restore();});}
 /* a data contract for the awards, drawn like Silent change's card: what's in it, what it means, how fresh each direction must be,
    and who owns each direction (w × h is 760 × 560; draw it scaled) */
-function bo_contract(ctx,x,y,w,h){glass(ctx,x,y,w,h,24,[236,243,255],{glow:24,ea:0.9,fill:"rgba(10,16,32,0.95)"});
-  T(ctx,"Data contract · awards",x+36,y+60,{w:800,size:34});stampV(ctx,x+w-40,y+50,"v1.0",0);
+function bo_contract(ctx,x,y,w,h,o){o=o||{};glass(ctx,x,y,w,h,24,[236,243,255],{glow:24,ea:0.9,fill:"rgba(10,16,32,0.95)"});
+  T(ctx,"Data contract · awards",x+36,y+60,{w:800,size:34});stampV(ctx,x+w-40,y+50,"v1.0",0);if(o.decoBody)PH_OFF++;
   const key=(k,yy)=>T(ctx,k,x+36,yy,{w:700,size:21,color:rgba(SOFT,0.95)}),vx=x+196;
   key("Fields",y+136);T(ctx,"award, learner, status, date",vx,y+136,{w:600,size:23});
   key("Statuses",y+192);T(ctx,"issued · revoked",vx,y+192,{w:600,size:22,f:"mono"});
   key("Meaning",y+248);T(ctx,"revoked = no longer valid;",vx,y+248,{w:600,size:22});T(ctx,"the row stays, with its date",vx,y+280,{w:600,size:22});
   key("Freshness",y+336);T(ctx,"to gold: within 5 minutes",vx,y+336,{w:600,size:23,color:rgba(BO_W,1)});T(ctx,"back to the app: within 15 minutes",vx,y+370,{w:600,size:23,color:rgba(BO_M,1)});
   ctx.strokeStyle="rgba(170,200,245,0.18)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+26,y+404);ctx.lineTo(x+w-26,y+404);ctx.stroke();
-  key("Owners",y+450);[["what the app writes","registrar's team",BO_W,450],["what gold serves back","data team",BO_M,500]].forEach(([k,own,col,yy])=>{T(ctx,k,vx,y+yy,{w:600,size:20,color:rgba(SOFT,0.95)});T(ctx,own,vx+250,y+yy,{w:700,size:22,color:rgba(col,1)});});}
+  key("Owners",y+450);[["what the app writes","registrar's team",BO_W,450],["what gold serves back","data team",BO_M,500]].forEach(([k,own,col,yy])=>{T(ctx,k,vx,y+yy,{w:600,size:20,color:rgba(SOFT,0.95)});T(ctx,own,vx+250,y+yy,{w:700,size:22,color:rgba(col,1)});});if(o.decoBody)PH_OFF--;}
+
+// the till is a picture: its keys and its drums are part of the machine
+bo_register=phDeco(bo_register);
 
 /* ---------- pictures for the labs and the scenarios (site/assets/both-at-once/learn.*.js name them in "vis") ----------
    Each draws on a canvas of w × h, with the lab's state and the page's words (window.FW). Every word they show comes from FW.vis,

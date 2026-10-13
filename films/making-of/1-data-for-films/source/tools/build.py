@@ -8,7 +8,9 @@ eng=(SS/'engine3.js').read_text();eng=eng[:eng.index('if(window.__RENDER__)')]
 ild='const ILD=(function(){\n'+'\n'.join((SS/f).read_text() for f in ILD_FILES)+'\n'+eng+'\nCAPS_ON=false;return{renderFrame,prepAssets,TL,SCENES};})();'
 # shared components and engine from The Inner Life of Data, then this film's narration, timings, pauses, components and scenes; the engine comes last,
 # and waits for the embedded film's assets too (PREP_MORE), so a render never draws it half-loaded
-FILES=[SS/'core.js',SS/'logos.js',SS/'style2.js',S/'narration.js',S/'vodur.js',S/'breath.js',SS/'ui3.js',S/'frames.js',S/'scenes.js']
+# the layer that makes the film's text read on a phone (From words to data's phone.js) comes after the scenes, before the engine
+PHONE=ROOT.parents[2]/'from-words-to-data'/'shared'/'src'/'phone.js'
+FILES=[SS/'core.js',SS/'logos.js',SS/'style2.js',S/'narration.js',S/'vodur.js',S/'breath.js',SS/'ui3.js',S/'frames.js',S/'scenes.js',PHONE]
 engine=eng=(SS/'engine3.js').read_text();hook='async function prepAssets(){'
 assert engine.count(hook)==1,'engine3.js changed: update the PREP_MORE hook in tools/build.py'
 engine=engine.replace(hook,hook+'if(typeof PREP_MORE==="function")await PREP_MORE();')

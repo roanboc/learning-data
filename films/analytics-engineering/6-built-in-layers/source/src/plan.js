@@ -201,9 +201,9 @@ function bl_kitchen(ctx,t,o){o=o||{};bl_room(ctx,t);
 // strike {i: [text, a]} (a word drawn beside line i and struck through), size, lh, edge, a. Returns its height.
 function bl_code(ctx,x,y,w,name,lines,o){o=o||{};const a=o.a==null?1:o.a,lh=o.lh||29,sz=o.size||18,col=o.edge||[170,205,255],fold=ease(o.fold||0),full=84+lines.length*lh+16,h=lerp(full,78,fold);if(a<=0.01)return h;
   withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,col,{glow:12+10*(o.hi||0),ea:0.7,fill:"rgba(6,10,20,0.96)"});
-    ctx.fillStyle=rgba(col,0.9);rr(ctx,x+18,y+18,11,11,3);ctx.fill();T(ctx,bl_fit(ctx,name,18,w-60,500,"mono"),x+38,y+30,{f:"mono",w:500,size:18,color:rgba(col,1)});
+    ctx.fillStyle=rgba(col,0.9);rr(ctx,x+18,y+18,11,11,3);ctx.fill();T(ctx,bl_fit(ctx,name,phSz(ctx,18),w-60,500,"mono"),x+38,y+30,{f:"mono",w:500,size:18,color:rgba(col,1)});
     const lab=o.label===undefined?BL_RUN:o.label;if(lab)T(ctx,lab,x+38,y+58,{w:600,size:18,color:rgba(o.labelCol||SOFT,1)});
-    if(o.sec)tag(ctx,x+w-18-tw(ctx,o.sec,18,700)-26,y+54,o.sec,col,{size:18});
+    if(o.sec)tag(ctx,x+w-18-tw(ctx,o.sec,phSz(ctx,18),700)-26,y+54,o.sec,col,{size:18});
     if(fold<1){ctx.save();ctx.beginPath();ctx.rect(x,y+72,w,h-72);ctx.clip();withA(ctx,1-fold,()=>{ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+14,y+72,w-28,1.2);
       const n=o.p==null?lines.length:lines.length*o.p;lines.forEach((l,i)=>{if(i>=n)return;const yy=y+84+lh*(i+0.78),q=clamp(n-i,0,1),cm=/^\s*(--|#|<!--|\{#)/.test(l),on=o.lit?o.lit[i]||0:0,dm=o.dim?o.dim[i]||0:0;
         if(on>0)withA(ctx,on,()=>{ctx.fillStyle=rgba(o.litCol||TRUST,0.17);rr(ctx,x+12,yy-lh*0.72,w-24,lh*0.98,6);ctx.fill();});
@@ -212,6 +212,8 @@ function bl_code(ctx,x,y,w,name,lines,o){o=o||{};const a=o.a==null?1:o.a,lh=o.lh
   return h;}
 // where line i of a card sits (for lines drawn to it)
 const bl_lineY=(y,i,lh)=>y+84+(lh||29)*(i+0.78)-6;
+// the same, for a card of width w on a phone, where its lines are drawn larger and the long ones wrap: where line i's first row sits
+function bl_rowY(ctx,y,w,lines,i,lh){const m=phMin(ctx);if(!m)return bl_lineY(y,i,lh);const sz=Math.max(18,m),L=Math.max(lh||29,Math.round(sz*1.32)),k=phCodeRows(ctx,w,lines,sz).findIndex(r=>r.i===i);return y+84+L*(Math.max(0,k)+0.78)-6;}
 
 /* ---------- the four layers, as four columns ---------- */
 // what each column holds: staging's seven views (source colour), intermediate's eight steps, the core's four, the marts' three
@@ -221,7 +223,7 @@ const BL_CHIPS=[[["learners",0],["awards",0],["results",0],["users",1],["badges"
   [["near award",3],["learners",3],["credentials",3]]];
 const BL_COUNT=["7 views","8 views","4 tables · 1 incremental","3 tables"];
 // a column's rectangle: full (o.g: x0, cw, gap, y0, h) or folded into the strip at the top (k = 1)
-function bl_colRect(i,k,g){g=g||{};const x0=g.x0==null?60:g.x0,cw=g.cw||210,gap=g.gap==null?14:g.gap,y0=g.y0||140,h=g.h||620,e=ease(k||0);
+function bl_colRect(i,k,g){g=g||{};const ph=phOn()>0,x0=g.x0==null?60:g.x0,cw=g.cw||(ph?225:210),gap=g.gap==null?(ph?8:14):g.gap,y0=g.y0||140,h=g.h||620,e=ease(k||0);
   return[lerp(x0+i*(cw+gap),60+i*452,e),lerp(y0,92,e),lerp(cw,436,e),lerp(h,72,e)];}
 function bl_chipRect(i,j,g){const[x,y,w,h]=bl_colRect(i,0,g),n=BL_CHIPS[i].length,sp=(h-104)/n,ch=Math.min(i===2?84:50,sp-8);return[x+12,y+62+j*sp+(sp-8-ch)/2,w-24,ch];}
 // o: k (fold into the strip), lit[i], chips[i] (how many have arrived, 0..n, fractional), hi[i][j], mat (0..1: views become glass, tables stone),
@@ -238,10 +240,15 @@ function bl_cols(ctx,t,o){o=o||{};const k=o.k||0,lit=o.lit||[1,1,1,1];
       const chA=1-fin(k,0,0.35);if(chA>0&&o.chips)withA(ctx,chA,()=>BL_CHIPS[i].forEach(([lab,src],j)=>{const q=clamp(o.chips[i]-j,0,1);if(q<=0)return;const[cx,cy,cw,chh]=bl_chipRect(i,j,o.g),hi=o.hi&&o.hi[i]?o.hi[i][j]||0:0;
         const ccol=i===0?SRC3[src][1]:c;
         arrive(ctx,cx+cw/2,cy+chh/2,q*1.6,0,()=>{if(hi>0)glow(ctx,cx+cw/2,cy+chh/2,cw*0.7,ccol,0.35*hi);
-          if(i===2){glass(ctx,cx,cy,cw,chh,12,TRUST,{glow:10+12*hi,ea:0.85,fill:"rgba(26,20,8,0.94)"});const ls=lab==="credit towards award"?["credit towards","an award"]:[lab];ls.forEach((s,m)=>T(ctx,s,cx+cw/2,cy+chh/2+8+(m-(ls.length-1)/2)*26,{w:800,size:20,align:"center",color:rgba(mix(INK,TRUST,0.3),1)}));}
+          if(i===2){glass(ctx,cx,cy,cw,chh,12,TRUST,{glow:10+12*hi,ea:0.85,fill:"rgba(26,20,8,0.94)"});const ls=lab==="credit towards award"?["credit towards","an award"]:[lab],pz=phSz(ctx,20),wt=pz>20?700:800,dk=ls.some(s=>tw(ctx,s,pz,wt)>cw-4);
+            phAsDeco(dk,()=>ls.forEach((s,m)=>T(ctx,s,cx+cw/2,cy+chh/2+8+(m-(ls.length-1)/2)*Math.max(26,pz*1.12),{w:wt,size:20,align:"center",color:rgba(mix(INK,TRUST,0.3),1)})));}
           else{glass(ctx,cx,cy,cw,chh,10,ccol,{glow:6+10*hi,ea:0.5+0.4*hi,fill:"rgba(8,14,28,0.95)"});ctx.fillStyle=rgba(ccol,0.95);rr(ctx,cx+10,cy+chh/2-11,6,22,3);ctx.fill();
             const say=o.say&&o.say[i]?o.say[i][j]:null;if(say&&say[1]>0){withA(ctx,1-say[1],()=>T(ctx,lab,cx+26,cy+chh/2+7,{w:700,size:18,color:rgba(INK,0.95)}));withA(ctx,say[1],()=>tag(ctx,cx+24,cy+chh/2,say[0],say[2]||ccol,{size:18}));}
+            else if(phMin(ctx)){const fs=phSz(ctx,18),L=tw(ctx,lab,fs,700)<=cw-30?lab:BL_SHORT[lab]||lab;phAsDeco(tw(ctx,L,fs,700)>cw-30,()=>T(ctx,L,cx+22,cy+chh/2+fs*0.36,{w:700,size:18,color:rgba(INK,0.95)}));}
             else{const fs=tw(ctx,lab,18,700)<=cw-34?18:16;T(ctx,bl_fit(ctx,lab,fs,cw-34,700),cx+26,cy+chh/2+7,{w:700,size:fs,color:rgba(INK,0.95)});}}},{d:1});}));});});}
+// a step's short name, for a chip on a phone: the same names the intermediate chapter's cards give them; where even that won't fit
+// (the narrow columns of the recaps), the chip's words are texture and the column's name and count say what it is
+const BL_SHORT={"keys matched":"match keys","credit towards":"credit rule"};
 // views as glass panes (light streaks, nothing stored), tables as blocks of stone (with the rows they hold)
 function bl_material(ctx,i,x,y,w,h,t,o){const c=LAYER4[i][1];ctx.save();rr(ctx,x+3,y+3,w-6,h-6,14);ctx.clip();
   if(i<2){const g=ctx.createLinearGradient(x,y,x+w,y+h);g.addColorStop(0,rgba(c,0.16));g.addColorStop(1,rgba(c,0.04));ctx.fillStyle=g;ctx.fillRect(x,y,w,h);
@@ -262,7 +269,7 @@ function bl_tests(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return
     ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+14,y+62,w-28,1.2);
     BL_TESTS.forEach((s,i)=>{const q=o.p==null?1:clamp(o.p*BL_TESTS.length-i,0,1);if(q<=0)return;const yy=y+96+i*lh,r=o.red?o.red[i]||0:0,gr=o.green?o.green[i]||0:0,col=mix(mix([120,130,150],BAD,r),GOOD,gr);
       withA(ctx,q,()=>{if(r*(1-gr)>0.05||gr>0.05)glow(ctx,x+36,yy,30,col,0.5*Math.max(r,gr));ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(x+36,yy,9,0,TAU);ctx.fill();
-        T(ctx,bl_fit(ctx,s,18,w-80,500,"mono"),x+58,yy+6,{f:"mono",w:500,size:18,color:rgba(mix([170,180,196],mix(INK,col,0.35),Math.max(r,gr)),1)});});});});}
+        T(ctx,bl_fit(ctx,s,phSz(ctx,18),w-80,500,"mono"),x+58,yy+6,{f:"mono",w:500,size:18,color:rgba(mix([170,180,196],mix(INK,col,0.35),Math.max(r,gr)),1)});});});});}
 
 /* ---------- people of the present, and the consumers ---------- */
 // a consumer's badge (film 1's consumers): a round seal with a small dashboard, and the consumer's name
@@ -291,12 +298,13 @@ function bl_wideRow(ctx,x,y,w,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)re
 /* ---------- the CTE outline of Planning's mart ---------- */
 const BL_OUT=[["import",["learners","awards","credit"]],["logical",["learners_at_census","awards_at_census","credit_at_census","learner_awards","joined","measured"]],["final",["final select"]]];
 // positions of each name; o.on[g] lights a group; o.trace {name: a}; o.cols {name: [column, a]}
-function bl_outlinePos(x,y){const P={};let yy=y;BL_OUT.forEach(([g,ns])=>{yy+=58;ns.forEach(n=>{P[n]=[x,yy];yy+=44;});yy+=8;});return P;}
+const BL_OUTC={measured:1,awards_at_census:1,credit_at_census:1};
+function bl_outlinePos(x,y){const ph=phOn()>0,P={};let yy=y;BL_OUT.forEach(([g,ns])=>{yy+=ph?54:58;ns.forEach(n=>{P[n]=[x,yy];yy+=(ph?40:44)+(ph&&BL_OUTC[n]?34:0);});yy+=8;});return P;}
 function bl_outline(ctx,x,y,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const P=bl_outlinePos(x,y),HN={import:"import CTEs",logical:"logical CTEs",final:"final select"};
-  withA(ctx,a,()=>{let yy=y;BL_OUT.forEach(([g,ns],gi)=>{const on=o.on?o.on[gi]||0:1;withA(ctx,0.3+0.7*on,()=>{T(ctx,HN[g],x-14,yy+22,{w:800,size:20,color:rgba(mix(SOFT,BL_MART,on),1)});});yy+=58;
+  const ph=phOn()>0;withA(ctx,a,()=>{BL_OUT.forEach(([g,ns],gi)=>{const on=o.on?o.on[gi]||0:1,yy=P[ns[0]][1]-(ph?54:58);withA(ctx,0.3+0.7*on,()=>{T(ctx,HN[g],x-14,yy+22,{w:800,size:20,color:rgba(mix(SOFT,BL_MART,on),1)});});
       ns.forEach((n,i)=>{const[px,py]=P[n],tr=o.trace?o.trace[n]||0:0;withA(ctx,0.3+0.7*on,()=>{if(tr>0)glow(ctx,px+90,py-6,120,TRUST,0.25*tr);ctx.fillStyle=rgba(mix(BL_MART,TRUST,tr),1);ctx.beginPath();ctx.arc(px+6,py-6,5,0,TAU);ctx.fill();
         T(ctx,n,px+22,py,{f:"mono",w:500,size:20,color:rgba(mix(INK,TRUST,tr*0.7),1)});
-        const cc=o.cols?o.cols[n]:null;if(cc&&cc[1]>0)withA(ctx,cc[1],()=>T(ctx,cc[0],px+270,py,{f:"mono",w:500,size:18,color:rgba(TRUST,1)}));});yy+=44;});yy+=8;});});
+        const cc=o.cols?o.cols[n]:null;if(cc&&cc[1]>0)withA(ctx,cc[1],()=>T(ctx,ph?"→ "+cc[0]:cc[0],ph?px+22:px+270,ph?py+34:py,{f:"mono",w:500,size:18,color:rgba(TRUST,1)}));});});});});
   return P;}
 
 /* ---------- a balance: twelve and twelve ---------- */

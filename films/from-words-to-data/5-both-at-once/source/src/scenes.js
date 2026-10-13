@@ -74,7 +74,7 @@ scene("distance",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f)
     arrowTo(ctx,780,690,1540,560,BO_AMB,0.55,{bend:-0.12,dash:[8,10],p:fin(t,at("now",0.24),0.8),nohead:true});});
   withA(ctx,wA,()=>{glass(ctx,860,642,740,170,20,TRUST,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.94)"});T(ctx,"Aisha's wallet",890,696,{w:800,size:28});
     for(let i=0;i<4;i++){const on=i<2;ctx.fillStyle=on?rgba(TRUST,0.9):"rgba(160,190,240,0.1)";rr(ctx,1120+i*46,668,38,42,6);ctx.fill();if(!on){ctx.strokeStyle="rgba(160,190,240,0.45)";ctx.lineWidth=1.4;rr(ctx,1120+i*46,668,38,42,6);ctx.stroke();}}
-    T(ctx,"2 of 4 microcredentials towards a graduate certificate",890,746,{w:600,size:23,color:rgba(SOFT,1)});T(ctx,"now?",890,794,{w:800,size:30,color:rgba(BO_AMB,1)});bo_hourglass(ctx,1540,690,1.5,(t-at("now",0.44))/13,BO_AMB,1,t);
+    T(ctx,"2 of 4 microcredentials",890,742,{w:600,size:23,color:rgba(SOFT,1)});T(ctx,"towards a graduate certificate",890,776,{w:600,size:23,color:rgba(SOFT,1)});T(ctx,"now?",1340,794,{w:800,size:30,color:rgba(BO_AMB,1)});bo_hourglass(ctx,1540,690,1.5,(t-at("now",0.44))/13,BO_AMB,1,t);
     arrowTo(ctx,1480,642,1620,560,BO_AMB,0.55,{bend:0.1,dash:[8,10],p:fin(t,at("now",0.5),0.8),nohead:true});});
   // that distance
   bo_span(ctx,350,1650,600,BO_ACC,"the distance",fin(t,c("appeal")+0.2,0.6),fin(t,c("appeal")+0.2,1.2));
@@ -106,8 +106,8 @@ scene("engines",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f);
       withA(ctx,fin(t,at("lake",0.78),0.5),()=>tag(ctx,1160,770,"synced both ways",BO_ACC,{align:"center",size:26}));}});
   // the name
   const hA=fin(t,at("htap",0.3),0.6);bo_capsule(ctx,290,64,0.54,t,hA);withA(ctx,hA,()=>{ctx.save();ctx.strokeStyle=rgba(BO_ACC,0.6);ctx.lineWidth=2;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(530,145);ctx.lineTo(560,145);ctx.stroke();ctx.restore();glass(ctx,560,70,800,150,24,BO_ACC,{glow:22,ea:0.9,fill:"rgba(7,12,24,0.95)"});T(ctx,"HTAP",960,140,{w:800,size:60,align:"center",color:rgba(BO_ACC,1)});
-    const ex=fin(t,at("htap",0.45),0.8),parts=[["hybrid ",INK],["transactional",BO_W],[" and ",INK],["analytical",BO_R],[" processing",INK]],full=parts.map(p=>p[0]).join(""),wT=tw(ctx,full,26,700);
-    withA(ctx,ex,()=>{let x=960-wT/2;parts.forEach(([s,col])=>{T(ctx,s,x,192,{w:700,size:26,color:rgba(col,1)});x+=tw(ctx,s,26,700);});});});
+    const ex=fin(t,at("htap",0.45),0.8),parts=[["hybrid ",INK],["transactional",BO_W],[" and ",INK],["analytical",BO_R],[" processing",INK]],full=parts.map(p=>p[0]).join(""),hs=Math.max(26,phMin(ctx)),wT=tw(ctx,full,hs,700);
+    withA(ctx,ex,()=>{let x=960-wT/2;parts.forEach(([s,col])=>{T(ctx,s,x,192,{w:700,size:26,color:rgba(col,1)});x+=tw(ctx,s,hs,700);});});});
   vign(ctx,S);});
 
 /* ---------- 4. Keeping two shapes in step ---------- */
@@ -189,7 +189,7 @@ scene("doesnt",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f);s
   withA(ctx,1-0.85*dim,()=>{
     // the app's own table
     withA(ctx,ta,()=>{glass(ctx,60,110,800,450,20,BO_W,{glow:16,ea:0.8,fill:"rgba(7,12,24,0.93)"});T(ctx,"awards",88,160,{w:800,size:32,color:rgba(BO_W,1)});T(ctx,"the app's own table, today",214,160,{w:600,size:22,color:rgba(SOFT,1)});
-      const hx0=128,hx1=hx0+tw(ctx,"A-0977",21,500,"mono")+20,hx2=hx1+tw(ctx,"Science",21,500,"mono")+20;
+      const rs=Math.max(21,phMin(ctx)),hx0=128,hx1=hx0+tw(ctx,"A-0977",rs,500,"mono")+20,hx2=hx1+tw(ctx,"Science",rs,500,"mono")+20;
       [["award",hx0],["faculty",hx1],["status",hx2]].forEach(([s_,x])=>T(ctx,s_,x,202,{f:"mono",w:500,size:18,color:rgba(SOFT,1)}));
       BO_AW.forEach(([id,f,st],i)=>{const y=214+i*54,isR=st==="revoked",isO=id==="A-0990";
         bo_row(ctx,80,y,760,id,[f.padEnd(7),st],{hi:isR?pulseAt(t,rvT,1.2):isO?pulseAt(t,owT,1.2):0,hiCol:isR?BAD:BO_AMB,bad:isR&&rv>0.5,vc:[isO&&ow>0.3?BO_AMB:null,isR&&rv>0.3?BAD:null]});
@@ -235,7 +235,7 @@ scene("back",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f);set
     arrowTo(ctx,1000,320,900,414,BO_M,0.8,{head:12,bend:-0.2,p:fin(t,at("serve",0.78),0.6)});});
   // features, calculated in gold and served in milliseconds
   BO_FEAT.forEach(([k,v],i)=>{const a=fin(t,fT+0.2+i*0.3,0.4),u=ease(clamp((t-fs-i*0.12)/0.55,0,1)),x=lerp(1430,420,u),y=lerp(420+i*62,300,u),fa=a*(1-fin(t,fs+0.5+i*0.12,0.25))*dim;if(fa<=0.01)return;
-    withA(ctx,fa,()=>{if(fc>0)glow(ctx,x+160,y+24,120,LAYER.gold,0.3*fc*(1-u));glass(ctx,x,y,330,54,12,u>0?BO_M:LAYER.gold,{glow:10,ea:0.9,fill:"rgba(7,12,24,0.95)"});T(ctx,k,x+18,y+35,{w:600,size:22});T(ctx,v,x+312,y+35,{f:"mono",w:500,size:22,align:"right",color:rgba(LAYER.gold,1)});});});
+    withA(ctx,fa,()=>{if(fc>0)glow(ctx,x+160,y+24,120,LAYER.gold,0.3*fc*(1-u));glass(ctx,x,y,420,54,12,u>0?BO_M:LAYER.gold,{glow:10,ea:0.9,fill:"rgba(7,12,24,0.95)"});T(ctx,k,x+18,y+37,{w:600,size:22});T(ctx,v,x+402,y+37,{f:"mono",w:500,size:22,align:"right",color:rgba(LAYER.gold,1)});});});
   withA(ctx,fin(t,fT+0.2,0.5)*(1-fin(t,fs,0.4))*dim,()=>tag(ctx,1590,716,fc>0.5?"calculated in gold":"features, for machine learning",LAYER.gold,{align:"center",size:24}));
   // an AI agent reads what's known and writes down what it did
   withA(ctx,oa,()=>{orb(ctx,1080,640,30,t);tag(ctx,1080,570,"an AI agent",[255,226,160],{align:"center",size:24});
@@ -272,7 +272,7 @@ scene("questions",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f
       tag(ctx,1330,716,"one place, not two",GOOD,{align:"center",size:30});});});
   // 5: data contracts, in both directions
   withA(ctx,vis(4),()=>{const cA=fin(t,c("contract")+0.1,0.6),bw=fin(t,at("contract",0.7),0.6);
-    ctx.save();ctx.translate(1040,110);ctx.scale(0.74,0.74);bo_contract(ctx,0,0,760,560);ctx.restore();
+    ctx.save();ctx.translate(1040,110);ctx.scale(0.74,0.74);bo_contract(ctx,0,0,760,560,{decoBody:true});ctx.restore();
     withA(ctx,cA,()=>{bo_store(ctx,740,150,270,230,"rows",{title:"the app",n:3,ts:28});vault(ctx,1640,130,230,300,LAYER.gold,(r,cc)=>hash(r*5+cc,6)<0.6?LAYER.gold:null,null);chip(ctx,1755,192,null,"Gold",null,{align:"center",edge:LAYER.gold});});
     withA(ctx,bw,()=>{ctx.save();ctx.strokeStyle=rgba(SOFT,0.4);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(875,384);ctx.lineTo(875,650);ctx.moveTo(1755,434);ctx.lineTo(1755,650);ctx.stroke();ctx.restore();
       arrowTo(ctx,880,586,1750,586,BO_W,1,{head:18,lw:3.5});arrowTo(ctx,1750,640,880,640,BO_M,1,{head:18,lw:3.5});T(ctx,"what the app writes",1315,574,{w:600,size:21,align:"center",color:rgba(BO_W,1)});T(ctx,"what gold serves back",1315,672,{w:600,size:21,align:"center",color:rgba(BO_M,1)});

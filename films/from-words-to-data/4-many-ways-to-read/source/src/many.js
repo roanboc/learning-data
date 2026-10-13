@@ -34,7 +34,7 @@ function mw_cabinet(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,t=o.t||0,open
     ctx.save();ctx.shadowColor="rgba(0,0,0,0.75)";ctx.shadowBlur=44;ctx.shadowOffsetY=16;ctx.fillStyle="#3a2313";mw_soft(ctx,x,y,w,h,12,2);ctx.fill();ctx.restore();
     mw_wood(ctx,x,y,w,h,12,WOOD,21,{lines:34});
     mw_wood(ctx,x-16,y-22,w+32,34,8,[150,100,58],23,{lines:5,knot:false});ctx.fillStyle="#24150a";mw_soft(ctx,x+14,y+h-2,w-28,18,5,4);ctx.fill();
-    mw_brass(ctx,x+w/2-105,y+28,210,32,6);T(ctx,"CATALOGUE",x+w/2,y+51,{f:"mono",w:500,size:18,align:"center",color:"rgba(60,40,16,0.95)"});
+    mw_brass(ctx,x+w/2-105,y+28,210,32,6);T(ctx,"CATALOGUE",x+w/2,y+51,{f:"mono",w:500,size:18,align:"center",color:"rgba(60,40,16,0.95)",deco:1});
     const opened=open.map(q=>q[0]),order=[...Array(rows*cols).keys()].filter(i=>!opened.includes(i)).concat(opened);
     order.forEach(i=>{const r=Math.floor(i/cols),c=i%cols,k=opened.indexOf(i),dx=x+px+c*(dw+gp),dy=y+top+r*(dh+gp),op=k>=0?ease(clamp(open[k][1]||0,0,1)):0;
       const sc=1+0.14*op,fw=dw*sc,fh=dh*sc,fx=dx+dw/2-fw/2,fy=dy+op*dh*0.62;
@@ -44,7 +44,7 @@ function mw_cabinet(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,t=o.t||0,open
         for(let k=0;k<10;k++){const u=k/10,yy=lerp(dy+8,fy-3,u),x0=lerp(dx+10,fx+6,u),x1=x0+lerp(dw-20,fw-12,u);ctx.beginPath();ctx.moveTo(x0,yy+2);ctx.quadraticCurveTo((x0+x1)/2,yy-1.5,x1,yy+2);ctx.lineTo(x1,yy+4.5);ctx.quadraticCurveTo((x0+x1)/2,yy+1,x0,yy+4.5);ctx.closePath();ctx.fillStyle=k%3?"#efe4c9":"#dccca8";ctx.fill();}}
       mw_wood(ctx,fx,fy,fw,fh,6,mix(WOOD,[160,110,64],0.35+0.2*hash(i,4)),40+i,{lines:7});
       const lw=fw*0.6,lh=fh*0.27,lx=fx+fw/2-lw/2,ly=fy+fh*0.16;mw_brass(ctx,lx-3,ly-3,lw+6,lh+6,3);ctx.fillStyle="#f2e8d0";ctx.fillRect(lx,ly,lw,lh);
-      T(ctx,MW_DRAWERS[i],fx+fw/2,ly+lh*0.8,{f:"mono",w:500,size:Math.round(lh*0.78),align:"center",color:"rgba(50,36,24,0.95)"});
+      T(ctx,MW_DRAWERS[i],fx+fw/2,ly+lh*0.8,{f:"mono",w:500,size:Math.round(lh*0.78),align:"center",color:"rgba(50,36,24,0.95)",deco:1});
       mw_pull(ctx,fx+fw/2,fy+fh*0.62,fh*0.15);
       if(k>=0)at[k]={x:fx+fw/2,y:fy,dy,w:fw,h:fh};});
     // the reading-room light drifting slowly over the wood
@@ -67,9 +67,13 @@ function mw_card(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,h=Math.round(w*0.6
     const hg=ctx.createRadialGradient(w/2-2*s,h-17*s,1,w/2,h-15*s,8*s);hg.addColorStop(0,"rgba(10,6,4,0.95)");hg.addColorStop(1,"rgba(60,40,24,0.8)");ctx.fillStyle=hg;ctx.beginPath();ctx.arc(w/2,h-15*s,7*s,0,TAU);ctx.fill();
     const bad=o.bad||0,ok=o.ok||0;
     if(bad>0.01||ok>0.01){const c=bad>ok?[200,40,30]:[40,140,80],q=Math.max(bad,ok);withA(ctx,q,()=>{ctx.fillStyle=rgba(c,0.16);rr(ctx,5*s,6*s,72*s,52*s,6*s);ctx.fill();ctx.strokeStyle=rgba(c,0.95);ctx.lineWidth=2.4*s;rr(ctx,5*s,6*s,72*s,52*s,6*s);ctx.stroke();});}
-    (o.mark||"").split(" ").forEach((m,i)=>T(ctx,m,14*s,28*s+i*22*s,{f:"mono",w:500,size:18*s,color:bad>0.5?"rgba(190,36,28,1)":"rgba(36,30,26,0.95)"}));
-    T(ctx,o.head||"",92*s,28*s,{f:"mono",w:500,size:18*s,color:o.kind==="subject"?"rgba(176,40,30,0.95)":"rgba(30,26,24,0.95)"});
-    (o.lines||[]).forEach((l,i)=>T(ctx,l,108*s,82*s+i*22*s,{f:"mono",w:500,size:15*s,color:"rgba(50,44,40,0.88)"}));
+    const m=phMin(ctx),hc=o.kind==="subject"?"rgba(176,40,30,0.95)":"rgba(30,26,24,0.95)";
+    (o.mark||"").split(" ").forEach((mk,i)=>T(ctx,mk,14*s,28*s+i*(m?m*1.05:22*s),m?{w:700,size:18*s,color:bad>0.5?"rgba(190,36,28,1)":"rgba(36,30,26,0.95)"}:{f:"mono",w:500,size:18*s,color:bad>0.5?"rgba(190,36,28,1)":"rgba(36,30,26,0.95)"}));
+    if(m){const hx=Math.max(92*s,14*s+Math.max(...(o.mark||"").split(" ").map(mk=>tw(ctx,mk,Math.max(18*s,m),700)))+16),hl=wrapT(ctx,o.head||"",0,0,w-hx-12*s,{w:700,size:Math.max(18*s,m),measure:true});
+      hl.forEach((l,i)=>T(ctx,l,hx,28*s+i*m*1.1,{w:700,size:18*s,color:hc}));
+      (o.lines||[]).forEach((l,i)=>T(ctx,l,108*s,82*s+(hl.length-1)*m*1.1+i*22*s,{f:"mono",w:500,size:15*s,color:"rgba(50,44,40,0.88)",deco:1}));}
+    else{T(ctx,o.head||"",92*s,28*s,{f:"mono",w:500,size:18*s,color:hc});
+      (o.lines||[]).forEach((l,i)=>T(ctx,l,108*s,82*s+i*22*s,{f:"mono",w:500,size:15*s,color:"rgba(50,44,40,0.88)"}));}
     if(o.tag)T(ctx,o.tag,w-12*s,h-10*s,{f:"mono",w:500,size:14*s,align:"right",color:"rgba(130,100,70,0.95)"});
     ctx.restore();});return h;}
 const MW_CARDS={author:{kind:"author",head:"Hale, Margaret.",lines:["A treatise on accounts.","London, 1908. 212 p."],tag:"author card",seed:3},
@@ -88,8 +92,8 @@ function mw_shelf(ctx,x,y,w,label,o){o=o||{};const a=o.a==null?1:o.a,slots=[],bo
     books.forEach(([bx,bw,bh,i])=>{const col=MW_SPINES[Math.floor(hash(i,seed+2)*MW_SPINES.length)],lean=hash(i,seed+8)>0.88?0.05:0;ctx.save();ctx.translate(bx,y);ctx.rotate(lean);mw_spine(ctx,0,-bh,bw-3,bh,col);
       ctx.fillStyle="rgba(240,230,205,0.85)";mw_soft(ctx,3,-30,bw-9,16,3,i,0.4);ctx.fill();ctx.restore();});
     mw_wood(ctx,x-14,y,w+28,24,5,[140,94,54],seed+30,{lines:4,knot:false});
-    const lw=tw(ctx,label,17,500,"mono")+26;mw_brass(ctx,x+w/2-lw/2,y+2,lw,20,4);
-    T(ctx,label,x+w/2,y+18,{f:"mono",w:500,size:17,align:"center",color:"rgba(60,40,16,0.95)"});
+    const ls=Math.max(17,phMin(ctx)),lw=tw(ctx,label,ls,500,"mono")+26;mw_brass(ctx,x+w/2-lw/2,y+2,lw,ls+3,4);
+    T(ctx,label,x+w/2,y+2+ls*0.86,{f:"mono",w:500,size:17,align:"center",color:"rgba(60,40,16,0.95)"});
     // the reading-room light, drifting along the shelf
     ctx.save();ctx.beginPath();ctx.rect(x-10,y-200,w+20,224);ctx.clip();glow(ctx,x+w*(0.5+0.4*Math.sin(t*0.19+seed)),y-90,220,[255,214,160],0.12);ctx.restore();});
   return slots;}
@@ -98,11 +102,11 @@ function mw_book(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;wi
   if(o.hi)glow(ctx,x,y-h/2,150,[255,214,150],0.45*o.hi);
   ctx.save();ctx.shadowColor="rgba(0,0,0,0.5)";ctx.shadowBlur=14;mw_spine(ctx,x-w/2,y-h,w,h,[40,96,74]);ctx.restore();
   ctx.strokeStyle="rgba(230,196,110,0.9)";ctx.lineWidth=2.4;[h-54].forEach(d=>{ctx.beginPath();ctx.moveTo(x-w/2+1,y-h+d+2);ctx.quadraticCurveTo(x,y-h+d-3,x+w/2-1,y-h+d+2);ctx.stroke();});
-  ctx.save();ctx.translate(x+6,y-h/2-20);ctx.rotate(-Math.PI/2);T(ctx,"HALE · ACCOUNTS",0,0,{w:800,size:13,align:"center",color:"rgba(240,214,150,0.95)"});ctx.restore();
-  ctx.fillStyle="#f2e8d0";mw_soft(ctx,x-w/2+5,y-40,w-10,28,4,2,0.5);ctx.fill();T(ctx,(o.mark||"").split(" ")[0],x,y-21,{f:"mono",w:500,size:11,align:"center",color:"rgba(40,30,20,0.95)"});
-  if(o.mark&&o.label!==false){const mw=tw(ctx,o.mark,20,500,"mono")+26,ly=y-h-46;withA(ctx,o.labA==null?1:o.labA,()=>{ctx.fillStyle="#f3ead4";mw_soft(ctx,x-mw/2,ly-18,mw,36,7,4,0.8);ctx.fill();
+  ctx.save();ctx.translate(x+6,y-h/2-20);ctx.rotate(-Math.PI/2);T(ctx,"HALE · ACCOUNTS",0,0,{w:800,size:13,align:"center",color:"rgba(240,214,150,0.95)",deco:1});ctx.restore();
+  ctx.fillStyle="#f2e8d0";mw_soft(ctx,x-w/2+5,y-40,w-10,28,4,2,0.5);ctx.fill();T(ctx,(o.mark||"").split(" ")[0],x,y-21,{f:"mono",w:500,size:11,align:"center",color:"rgba(40,30,20,0.95)",deco:1});
+  if(o.mark&&o.label!==false){const ms=Math.max(20,phMin(ctx)),mw=tw(ctx,o.mark,ms,500,"mono")+26,ly=y-h-46;withA(ctx,o.labA==null?1:o.labA,()=>{ctx.fillStyle="#f3ead4";mw_soft(ctx,x-mw/2,ly-18,mw,36,7,4,0.8);ctx.fill();
     ctx.strokeStyle=o.flash?rgba(GOOD,0.9):"rgba(120,90,50,0.6)";ctx.lineWidth=o.flash?3:1.4;mw_soft(ctx,x-mw/2,ly-18,mw,36,7,4,0.8);ctx.stroke();
-    T(ctx,o.mark,x,ly+7,{f:"mono",w:500,size:20,align:"center",color:"rgba(36,30,26,0.98)"});ctx.strokeStyle="rgba(238,224,196,0.5)";ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(x,ly+18);ctx.quadraticCurveTo(x+3,(ly+18+y-h)/2,x,y-h-4);ctx.stroke();});}});}
+    T(ctx,o.mark,x,ly+ms*0.36,{f:"mono",w:500,size:20,align:"center",color:"rgba(36,30,26,0.98)"});ctx.strokeStyle="rgba(238,224,196,0.5)";ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(x,ly+18);ctx.quadraticCurveTo(x+3,(ly+18+y-h)/2,x,y-h-4);ctx.stroke();});}});}
 // the reading room's light: soft beams from a high window, swaying very slightly
 function mw_libLight(ctx,t,a){if(a<=0.01)return;ctx.save();ctx.globalCompositeOperation="lighter";ctx.globalAlpha*=a;
   for(let i=0;i<3;i++){const sw=Math.sin(t*0.21+i*1.7)*26,x0=260+i*170+sw,g=ctx.createLinearGradient(x0,0,x0+620,1080);g.addColorStop(0,"rgba(255,214,160,0.07)");g.addColorStop(1,"rgba(255,214,160,0)");ctx.fillStyle=g;
@@ -114,7 +118,7 @@ function mw_libLight(ctx,t,a){if(a<=0.01)return;ctx.save();ctx.globalCompositeOp
 function mw_panel(ctx,x,y,w,h,col,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{if(o.hi)glow(ctx,x+w/2,y+h/2,Math.max(w,h)*0.6,col,0.22*o.hi);glass(ctx,x,y,w,h,20,col,{glow:14+12*(o.hi||0),ea:0.55+0.4*(o.hi||0),fill:"rgba(7,12,24,0.9)"});});}
 // a source system: its colour, its name
 function mw_source(ctx,x,y,k,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const c=MW_SRC[k][1],n=o.name||MW_SRC[k][0],w=o.w||320,h=o.h||76;
-  withA(ctx,a,()=>{if(o.hi)glow(ctx,x+w/2,y+h/2,w*0.6,c,0.3*o.hi);const room=tw(ctx,n,22,700)+32+74<w;sysCard(ctx,x,y,w,h,n,o.sub||"",c,room?(cx,xx,yy)=>dbGlyph(cx,xx,yy+4,c,0.8):null);if(o.isNew)tag(ctx,x+w-10,y-4,o.newLabel||"new",c,{size:o.newSize||15});});}
+  withA(ctx,a,()=>{if(o.hi)glow(ctx,x+w/2,y+h/2,w*0.6,c,0.3*o.hi);const room=tw(ctx,n,Math.max(22,phMin(ctx)),700)+32+74<w;sysCard(ctx,x,y,w,h,n,o.sub||"",c,room?(cx,xx,yy)=>dbGlyph(cx,xx,yy+4,c,0.8):null);if(o.isNew)tag(ctx,x+w-10,y-4,o.newLabel||"new",c,{size:o.newSize||15});});}
 // a tick in a small dark disc, for "unchanged" and "agrees"
 function mw_ok(ctx,x,y,r,col,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.fillStyle="rgba(7,12,24,0.95)";ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();ring(ctx,x,y,r,col,1,2);tick_(ctx,x,y+1,r*1.3,col,1);});}
 function mw_no(ctx,x,y,r,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.fillStyle="rgba(7,12,24,0.95)";ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();ring(ctx,x,y,r,BAD,1,2);cross_(ctx,x,y,r*1.2,BAD,1);});}
@@ -128,9 +132,9 @@ function mw_dot(ctx,x0,y0,x1,y1,u,col,a,r){if(a<=0.01||u<0||u>1)return;const x=l
 function mw_key(ctx,x,y,s,col){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=2.4*s;ctx.lineCap="round";ctx.beginPath();ctx.arc(x-7*s,y,6*s,0,TAU);ctx.moveTo(x-1*s,y);ctx.lineTo(x+12*s,y);ctx.moveTo(x+8*s,y);ctx.lineTo(x+8*s,y+5*s);ctx.moveTo(x+12*s,y);ctx.lineTo(x+12*s,y+5*s);ctx.stroke();ctx.restore();}
 // a hub: one row per business key, the thing that identifies a learner or a credential
 // o.key2 {key, a, label}: a second business key, a new row, grows in under the first (in the new source's pink); the hub's top stays put
-function mw_hub(ctx,x,y,name,key,o){o=o||{};const a=o.a==null?1:o.a,w=o.w||280,k2=o.key2,g=k2?ease(clamp(k2.a||0,0,1)):0,h=106+32*g,top=y-53;if(a<=0.01)return{x,y,w,h,top};
+function mw_hub(ctx,x,y,name,key,o){o=o||{};const a=o.a==null?1:o.a,m=phMin(ctx),w=o.w||(m?Math.max(280,tw(ctx,key,Math.max(17,m),500,"mono")+80,o.key2?tw(ctx,o.key2.key+"  "+(o.key2.label||""),Math.max(17,m),500,"mono")+90:0):280),k2=o.key2,g=k2?ease(clamp(k2.a||0,0,1)):0,h=106+32*g,top=y-53;if(a<=0.01)return{x,y,w,h,top};
   withA(ctx,a,()=>{const hi=o.hi||0;if(hi)glow(ctx,x,y,w*0.7,MW_V,0.3*hi);glass(ctx,x-w/2,top,w,h,14,MW_V,{glow:16+10*hi,ea:0.95,lw:2.6,fill:"rgba(30,20,56,0.94)"});
-    T(ctx,"HUB",x-w/2+16,top+24,{f:"mono",w:500,size:14,color:rgba(MW_V,0.9)});T(ctx,name,x,y-4,{w:800,size:28,align:"center",color:rgba(mix(MW_V,[255,255,255],0.35),1)});
+    T(ctx,"HUB",x-w/2+16,top+24,{f:"mono",w:500,size:14,color:rgba(MW_V,0.9),deco:1});T(ctx,name,x,y-4,{w:800,size:28,align:"center",color:rgba(mix(MW_V,[255,255,255],0.35),1)});
     mw_key(ctx,x-w/2+30,y+30,1,MW_V);T(ctx,key,x-w/2+52,y+36,{f:"mono",w:500,size:17,color:rgba(INK,0.9)});
     if(g>0.01)withA(ctx,g,()=>{ctx.strokeStyle=rgba(MW_SC,0.35);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x-w/2+16,y+49);ctx.lineTo(x+w/2-16,y+49);ctx.stroke();
       mw_key(ctx,x-w/2+30,y+64,1,MW_SC);T(ctx,k2.key,x-w/2+52,y+70,{f:"mono",w:500,size:17,color:rgba(MW_SC,1)});if(k2.label)T(ctx,k2.label,x+w/2-14,y+70,{f:"mono",w:500,size:14,align:"right",color:rgba(MW_SC,0.9)});});
@@ -139,15 +143,16 @@ function mw_hub(ctx,x,y,name,key,o){o=o||{};const a=o.a==null?1:o.a,w=o.w||280,k
 function mw_link(ctx,x,y,name,o){o=o||{};const a=o.a==null?1:o.a,w=o.w||250,h=84;if(a<=0.01)return{x,y,w,h};
   withA(ctx,a,()=>{const hi=o.hi||0,c=mix(MW_V,[255,255,255],0.2);if(hi)glow(ctx,x,y,w*0.6,MW_V,0.28*hi);ctx.save();ctx.shadowColor=rgba(MW_V,0.8);ctx.shadowBlur=14+10*hi;ctx.beginPath();
     ctx.moveTo(x-w/2+26,y-h/2);ctx.lineTo(x+w/2-26,y-h/2);ctx.lineTo(x+w/2,y);ctx.lineTo(x+w/2-26,y+h/2);ctx.lineTo(x-w/2+26,y+h/2);ctx.lineTo(x-w/2,y);ctx.closePath();ctx.fillStyle="rgba(22,16,44,0.94)";ctx.fill();ctx.strokeStyle=rgba(c,0.95);ctx.lineWidth=2.4;ctx.stroke();ctx.restore();
-    T(ctx,"LINK",x,y-14,{f:"mono",w:500,size:14,align:"center",color:rgba(MW_V,0.9)});T(ctx,name,x,y+16,{w:700,size:21,align:"center",color:rgba(INK,0.95)});
+    T(ctx,"LINK",x,y-14,{f:"mono",w:500,size:14,align:"center",color:rgba(MW_V,0.9),deco:1});T(ctx,name,x,y+16,{w:700,size:21,align:"center",color:rgba(INK,0.95)});
     if(o.ok)mw_ok(ctx,x+w/2-18,y-h/2+4,15,GOOD,o.ok);});return{x,y,w,h};}
 // a satellite: the descriptions, one version per change, each with its source and the time it arrived
-function mw_sat(ctx,x,y,w,attrs,src,time,o){o=o||{};const a=o.a==null?1:o.a,h=66;if(a<=0.01)return{x,y,w,h};const sc=MW_SRC[src][1];
+// in the film, its two lines are spaced for words that read on a phone, and its source and time sit on the second line
+function mw_sat(ctx,x,y,w,attrs,src,time,o){o=o||{};const a=o.a==null?1:o.a,m=phMin(ctx),h=m?86:66;if(a<=0.01)return{x,y,w,h};const sc=MW_SRC[src][1];
   withA(ctx,a,()=>{const hi=o.hi||0,edge=o.edge||mix(MW_V,[255,255,255],0.1);if(hi)glow(ctx,x+w/2,y+h/2,w*0.6,edge,0.26*hi);glass(ctx,x,y,w,h,10,edge,{glow:8+10*hi,ea:0.6+0.35*hi,fill:"rgba(16,14,34,0.94)"});
     ctx.fillStyle=rgba(edge,0.8);rr(ctx,x+8,y+10,5,h-20,2.5);ctx.fill();T(ctx,attrs,x+24,y+28,{w:700,size:18,color:rgba(INK,0.95)});
     const sh=o.srcHi||0;if(sh>0.01)withA(ctx,sh,()=>{ctx.fillStyle=rgba(TRUST,0.16);rr(ctx,x+18,y+36,w-28,24,6);ctx.fill();ctx.strokeStyle=rgba(TRUST,0.8);ctx.lineWidth=1.6;rr(ctx,x+18,y+36,w-28,24,6);ctx.stroke();});
-    ctx.fillStyle=rgba(sc,1);ctx.beginPath();ctx.arc(x+30,y+48,5,0,TAU);ctx.fill();T(ctx,MW_SRC[src][2],x+42,y+54,{f:"mono",w:500,size:15,color:rgba(sc,1)});
-    T(ctx,time,x+w-12,y+54,{f:"mono",w:500,size:15,align:"right",color:rgba(SOFT,1)});
+    const y2=m?y+72:y+54;ctx.fillStyle=rgba(sc,1);ctx.beginPath();ctx.arc(x+30,y2-6,5,0,TAU);ctx.fill();T(ctx,MW_SRC[src][2],x+42,y2,{f:"mono",w:500,size:15,color:rgba(sc,1)});
+    T(ctx,m?time.slice(0,10):time,x+w-12,y2,{f:"mono",w:500,size:15,align:"right",color:rgba(SOFT,1)});
     if(o.ok)mw_ok(ctx,x+w-4,y+4,13,GOOD,o.ok);});return{x,y,w,h};}
 
 /* ---------- stars: facts in the middle, dimensions around ---------- */
@@ -155,12 +160,14 @@ function mw_starShape(ctx,x,y,r,col,a){withA(ctx,a==null?1:a,()=>{ctx.beginPath(
 function mw_fact(ctx,x,y,name,grain,o){o=o||{};const a=o.a==null?1:o.a,w=o.w||300,h=o.h||112;if(a<=0.01)return{x,y,w,h};
   withA(ctx,a,()=>{const hi=o.hi||0;if(hi)glow(ctx,x,y,w*0.75,MW_S,0.35*hi);glass(ctx,x-w/2,y-h/2,w,h,16,MW_S,{glow:16+12*hi,ea:0.85+0.15*hi,lw:2.4,fill:"rgba(8,30,24,0.94)"});
     mw_starShape(ctx,x-w/2+38,y-(o.bare?0:14),18,MW_S,1);if(!o.bare)T(ctx,"FACT",x-w/2+38,y+26,{f:"mono",w:500,size:14,align:"center",color:rgba(MW_S,0.9)});
-    T(ctx,name,x-w/2+72,y+(o.bare?11:-4),{w:800,size:mw_fs(ctx,name,31,800,w-86,20),color:rgba(mix(MW_S,[255,255,255],0.3),1)});if(grain)T(ctx,grain,x-w/2+72,y+28,{w:600,size:17,color:rgba(SOFT,1)});
+    const m=phMin(ctx),gl=grain&&m?wrapT(ctx,grain,0,0,w-86,{w:600,size:Math.max(17,m),measure:true}):null,up=gl?(gl.length-1)*m*0.55:0;
+    T(ctx,name,x-w/2+72,y+(o.bare?11:-4)-up,{w:800,size:mw_fs(ctx,name,31,800,w-86,20),color:rgba(mix(MW_S,[255,255,255],0.3),1)});
+    if(gl)gl.forEach((l,i)=>T(ctx,l,x-w/2+72,y+30-up+i*m*1.1,{w:600,size:17,color:rgba(SOFT,1)}));else if(grain)T(ctx,grain,x-w/2+72,y+28,{w:600,size:17,color:rgba(SOFT,1)});
     if(o.num)T(ctx,o.num,x+w/2-16,y-6,{f:"mono",w:500,size:18,align:"right",color:rgba(MW_S,1)});});return{x,y,w,h};}
 function mw_dim(ctx,x,y,name,o){o=o||{};const a=o.a==null?1:o.a,sh=!!o.shared,w=o.w||(sh?290:220),h=sh?86:60;if(a<=0.01)return{x,y,w,h};
   withA(ctx,a,()=>{const hi=o.hi||0,c=sh?mix(MW_S,[255,255,255],0.25):mix(MW_S,[150,170,190],0.45);if(hi)glow(ctx,x,y,w*0.7,MW_S,0.3*hi);
     glass(ctx,x-w/2,y-h/2,w,h,12,c,{glow:sh?14+10*hi:6,ea:sh?0.95:0.55,lw:sh?2.4:1.4,fill:"rgba(7,16,20,0.94)"});
-    T(ctx,name,x,y+(o.sub?-2:8),{w:sh?800:700,size:sh?28:22,align:"center",color:rgba(c,1)});if(o.sub)T(ctx,o.sub,x,y+26+((o.subSize||16)-16)*0.6,{f:"mono",w:500,size:o.subSize||16,align:"center",color:rgba(o.subCol||SOFT,1)});});return{x,y,w,h};}
+    T(ctx,name,x,y+(o.sub?-2:8),{w:sh?800:700,size:sh?28:22,align:"center",color:rgba(c,1)});if(o.sub)T(ctx,o.sub,x,y+26+((o.subSize||16)-16)*0.6,phMin(ctx)?{w:600,size:o.subSize||16,align:"center",color:rgba(o.subCol||SOFT,1)}:{f:"mono",w:500,size:o.subSize||16,align:"center",color:rgba(o.subCol||SOFT,1)});});return{x,y,w,h};}
 // the edge of a box, towards a point: so lines meet boxes, not their centres
 function mw_edge(b,tx,ty){const dx=tx-b.x,dy=ty-b.y,L=Math.hypot(dx,dy)||1,ux=dx/L,uy=dy/L,k=Math.min(Math.abs(ux)>1e-6?b.w/2/Math.abs(ux):1e9,Math.abs(uy)>1e-6?b.h/2/Math.abs(uy):1e9);return[b.x+ux*k,b.y+uy*k];}
 function mw_join(ctx,A,B,col,a,o){const p=mw_edge(A,B.x,B.y),q=mw_edge(B,A.x,A.y);mw_line(ctx,p[0],p[1],q[0],q[1],col,a,o);}
@@ -175,7 +182,7 @@ function mw_bus(ctx,x,y,rows,cols,ticks,o){o=o||{};const a=o.a==null?1:o.a;if(a<
     ticks.forEach((row,i)=>row.forEach((v,j)=>{if(!v)return;const q=o.tickA?o.tickA(i,j):1;if(q<=0.01)return;const cx=x+lw+j*cw+cw/2,cy=y+hh+i*rh+rh/2;tick_(ctx,cx,cy,34,MW_S,q);}));});}
 
 /* ---------- wide tables: one row per learner ---------- */
-const MW_WCOLS=[["learner",180],["current course",320],["credit so far",190],["credentials",470],["next step",330],["…",90]];
+const MW_WCOLS=[["learner",180],["current course",320],["credit so far",240],["credentials",470],["next step",330],["…",90]];
 const MW_WROWS=[["Aisha K.","Grad Cert Data Science","45 of 60",["BSc 2022","Data viz ✦","SQL ✦"],"Machine learning ✦"],
   ["Tomás R.","Bachelor of IT","120 of 240",["Excel badge"],"Year 2 units"],
   ["Priya N.","Grad Cert Data Science","50 of 60",["BA 2019","Statistics ✦"],"Capstone"],
@@ -190,7 +197,7 @@ function mw_wide(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;co
     rows.forEach((r,i)=>{const ra=o.rowA?o.rowA(i):1;if(ra<=0.01)return;const ry=y+hh+i*rh,dim=o.dim?o.dim(i):0,rhA=o.rowHi?o.rowHi(i):0;
       withA(ctx,ra*(1-0.72*dim),()=>{if(rhA>0.01){ctx.fillStyle=rgba(o.rowHiCol||col,0.16*rhA);rr(ctx,x,ry+4,W_,rh-8,8);ctx.fill();ctx.strokeStyle=rgba(o.rowHiCol||col,0.85*rhA);ctx.lineWidth=2;rr(ctx,x,ry+4,W_,rh-8,8);ctx.stroke();}
         let cx=x;cols.forEach((c,j)=>{const ov=o.cell?o.cell(i,j):null,v=ov!=null?ov:r[j],tx=cx+14,ty=ry+rh/2+8,cA=o.colA?Math.max(o.colA(j),0):1;
-          withA(ctx,cA,()=>{if(Array.isArray(v)){let bx=tx;v.forEach(s=>{const bw=tw(ctx,s,17,700)+20;if(bx+bw>cx+c[1]-8)return;ctx.fillStyle=rgba(col,0.14);rr(ctx,bx,ty-22,bw,30,15);ctx.fill();ctx.strokeStyle=rgba(col,0.55);ctx.lineWidth=1.2;rr(ctx,bx,ty-22,bw,30,15);ctx.stroke();T(ctx,s,bx+10,ty,{w:700,size:17,color:rgba(INK,0.95)});bx+=bw+8;});}
+          withA(ctx,cA,()=>{if(Array.isArray(v)){let bx=tx;const cs=Math.max(17,phMin(ctx)),ch=cs+13;v.forEach(s=>{const bw=tw(ctx,s,cs,700)+20;if(bx+bw>cx+c[1]-8)return;ctx.fillStyle=rgba(col,0.14);rr(ctx,bx,ty-cs*0.36-ch/2,bw,ch,ch/2);ctx.fill();ctx.strokeStyle=rgba(col,0.55);ctx.lineWidth=1.2;rr(ctx,bx,ty-cs*0.36-ch/2,bw,ch,ch/2);ctx.stroke();T(ctx,s,bx+10,ty,{w:700,size:17,color:rgba(INK,0.95)});bx+=bw+8;});}
             else if(v!=null)T(ctx,v,tx,ty,{w:j===0?800:600,size:21,color:j===0?rgba(INK,1):rgba(INK,0.88)});});cx+=c[1];});
         if(i<rows.length-1){ctx.strokeStyle="rgba(255,220,170,0.08)";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,ry+rh);ctx.lineTo(x+W_,ry+rh);ctx.stroke();}});});
     // more columns, off to the right

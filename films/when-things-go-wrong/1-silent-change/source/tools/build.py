@@ -3,7 +3,9 @@ from lang import *
 S=ROOT/'src';D=DIST;SS=SHARED/'src'
 # shared components and engine from The Inner Life of Data, the sharper model's components from A Sharper Sketch, the series' characters,
 # then this episode's narration, timings, pauses and scenes; the engine comes last
-FILES=[SS/'core.js',SS/'logos.js',SS/'style2.js',S/'narration.js',S/'vodur.js',S/'breath.js',SS/'ui3.js',SKETCH/'sketch3.js',CHARS/'people.js',S/'silent.js',S/'scenes.js',SS/'engine3.js']
+# the layer that makes the film's text read on a phone (From words to data's phone.js) comes after the scenes, before the engine
+PHONE=ROOT.parents[2]/'from-words-to-data'/'shared'/'src'/'phone.js'
+FILES=[SS/'core.js',SS/'logos.js',SS/'style2.js',S/'narration.js',S/'vodur.js',S/'breath.js',SS/'ui3.js',SKETCH/'sketch3.js',CHARS/'people.js',S/'silent.js',S/'scenes.js',PHONE,SS/'engine3.js']
 js='\n'.join(f.read_text() for f in FILES if f.exists())
 GF='<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">'
 # the render page carries its own fonts, so renders need no network and look the same on every machine

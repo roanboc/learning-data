@@ -1891,7 +1891,8 @@ function sq_qpos(ctx,x,y,w,s,sz){sz=sz||34;const lines=wrapT(ctx,SQ_Q,0,0,w-60,{
 // three entities and the relationship that carries rules, round (cx, top) at scale s. o.b: glass (0) to blueprint (1);
 // both relationship labels sit on one row: above the line, or above the boxes when "counts towards" doesn't fit between them;
 // o.ph: the paper's height; o.p: how much is drawn; o.hi: {learner, cred, award, credit}; o.from {name: [x,y,w,h]} and o.m (0..1)
-// bring each box in from somewhere else. Returns each box as [x, y, w, h].
+// bring each box in from somewhere else; o.ctA (0..1) fades "counts towards" while something else needs its row.
+// Returns each box as [x, y, w, h].
 const SQ_ENT={learner:["Learner",KIND],cred:["Credential",TRUST],award:["Award",KIND]};
 function sq_bpBoxes(cx,top,s){const w=250*s,h=74*s,y=top+85*s-h/2;return{learner:[cx-420*s-w/2,y,w,h],cred:[cx-w/2,y,w,h],award:[cx+420*s-w/2,y,w,h]};}
 function sq_bp(ctx,cx,top,s,o){o=o||{};const a=o.a==null?1:o.a,b=o.b||0,ph=o.ph||250,p=o.p==null?1:o.p,hi=o.hi||{},m=o.m==null?1:o.m,B=sq_bpBoxes(cx,top,s);
@@ -1900,7 +1901,7 @@ function sq_bp(ctx,cx,top,s,o){o=o||{};const a=o.a==null?1:o.a,b=o.b||0,ph=o.ph|
   withA(ctx,a,()=>{if(o.paper!==0)bpPaper(ctx,cx-700*s,top,1400*s,ph*s,(o.paper==null?1:o.paper)*b,{});
     const lc=mix(SK,BPL,b),lab=(s_,x,y)=>T(ctx,s_,x,y,{w:600,size:Math.max(18,17*s),align:"center",color:rgba(mix(SOFT,BPL,b),0.95)});
     const lfit=clamp((170*s-8-tw(ctx,"counts towards",Math.max(18,17*s,pm),600))/8,0,1);
-    const hl=(k0,k1,txt,q)=>{if(q<=0)return;const A=B[k0],Z=B[k1],x0=A[0]+A[2],x1=Z[0],y0=A[1]+A[3]/2;ctx.save();ctx.strokeStyle=rgba(lc,0.9);ctx.lineWidth=2.4*s;ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(lerp(x0,x1,q),y0);ctx.stroke();ctx.restore();const ly=lerp(A[1]-8,y0-14*s,lfit);withA(ctx,fin(q,0.6,0.4),()=>lab(txt,(x0+x1)/2,ly));};
+    const hl=(k0,k1,txt,q)=>{if(q<=0)return;const A=B[k0],Z=B[k1],x0=A[0]+A[2],x1=Z[0],y0=A[1]+A[3]/2;ctx.save();ctx.strokeStyle=rgba(lc,0.9);ctx.lineWidth=2.4*s;ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(lerp(x0,x1,q),y0);ctx.stroke();ctx.restore();const ly=lerp(A[1]-8,y0-14*s,lfit);withA(ctx,fin(q,0.6,0.4)*(txt==="counts towards"&&o.ctA!=null?o.ctA:1),()=>lab(txt,(x0+x1)/2,ly));};
     const dl=(k,right,q)=>{if(q<=0)return;const A=B[k],x0=A[0]+A[2]*(right?0.15:0.85),y0=A[1]+A[3],x1=right?C[0]+C[2]:C[0],y1=C[1]+C[3]/2;ctx.save();ctx.strokeStyle=rgba(lc,0.8);ctx.lineWidth=2*s;ctx.setLineDash([8*s,6*s]);ctx.beginPath();ctx.moveTo(x0,y0);
       const qx=lerp(x0,x1,q),qy=lerp(y0,y1,q);ctx.quadraticCurveTo(x0,lerp(y0,qy,0.9),qx,qy);ctx.stroke();ctx.restore();};
     if(!o.noLines){hl("learner","cred","holds",clamp(p*3-1.6,0,1));hl("cred","award","counts towards",clamp(p*3-2,0,1));}
@@ -2137,14 +2138,14 @@ scene("ask",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);se
   // the number to reach, pinned just above the card's corner
   arrive(ctx,1600,298,t,w("done","census report"),()=>withA(ctx,1-m,()=>{ctx.save();ctx.translate(1600,298);ctx.rotate(-0.06);tag(ctx,0,0,"census report · 12",EDGE_,{align:"center",size:22});
     const hw=(tw(ctx,"census report · 12",22,700)+26)/2;ctx.fillStyle=rgba([200,70,60],1);ctx.beginPath();ctx.arc(-hw-12,0,6,0,TAU);ctx.fill();ctx.restore();}),{from:0.6});
-  // the card turns into the project's YAML; the label says where it runs, and where else it runs
+  // the card turns into the project's YAML; the label says where it runs, and a tag above the card where else it runs
   const lg=fin(t,w("real","real"),0.5)*(1-0.5*fin(t,cC+1,1.2));
   sq_code(ctx,yx,SQ_YR[1],SQ_YR[2],"models/marts/planning/_planning__conceptual.yml",SQ_YQ,{a:m,size:18,lh:30,label:SQ_RUN,labelGlow:lg,edge:BPL});
-  const sl=fin(t,w("cloud","Databricks")-0.1,0.8);withA(ctx,sl*0.85,()=>{const lx=yx+SQ_YR[2]-20-tw(ctx,SQ_RUN,18,700)-16;tag(ctx,lx-tw(ctx,"Databricks · dbt Cloud",18,700)-26-lerp(40,0,ease(sl)),SQ_YR[1]+24,"Databricks · dbt Cloud",[150,170,200],{size:18});});
+  const sl=fin(t,w("cloud","Databricks")-0.1,0.8);withA(ctx,sl*0.85,()=>{const s_="Databricks · dbt Cloud";tag(ctx,yx+SQ_YR[2]-tw(ctx,s_,phSz(ctx,18),700)-26-lerp(40,0,ease(sl)),SQ_YR[1]-32,s_,[150,170,200],{size:18});});
   // only the connection changes: two targets; and one function, the hash
   const dl=fin(t,w("hash","connection")+0.2,0.5);
   arrive(ctx,1530,470,t,pA,()=>{const x=1200,y=300;sq_code(ctx,x,y,660,"profiles.yml",SQ_PROF,{size:18,lh:30,edge:[150,190,255],lit:{3:dl,6:dl*0.6},litCol:WEED});
-    withA(ctx,dl,()=>tag(ctx,x+22+tw(ctx,"    duckdb: ",18,500,"mono")+16,y+80+3*30-6,SQ_RUN,WEED,{size:18}));},{dy:26});
+    withA(ctx,dl,()=>tag(ctx,x+22+tw(ctx,"    duckdb: ",phSz(ctx,18),500,"mono")+16,y+80+3*30-6,SQ_RUN,WEED,{size:18}));},{dy:26});
   const kh=w("hash","turns a key")-0.2;withA(ctx,fin(t,kh,0.3),()=>{const s="key → hash",n=typeOn(s,clamp((t-kh)/0.6,0,1));T(ctx,n,960,712,{w:800,size:28,align:"center",color:rgba(WEED,1)});});
   const kA=w("hash","into a hash")-0.1,ka=fin(t,w("hash","hash")+0.3,0.5);
   arrive(ctx,960,813,t,kA,()=>sq_code(ctx,260,730,1400,"macros/shared/keys.sql",null,{cols:SQ_KEYS,size:18,lh:30,label:SQ_RUN+" (and Databricks)",edge:[150,190,255],seg:[[1,"sha256",ka,WEED],[101,"sha2",ka,WEED],[101,", 256",ka,WEED]]}),{dy:26});
@@ -2232,7 +2233,7 @@ scene("owners",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   // behind the blueprint, the sources flicker, each with its own word for a learner
   if(dis>0)[["student",-50,-20,0,[190,300,"right"]],["user",30,-30,1,[1500,68,"center"]],["customer",54,20,2,[1734,300,"left"]]].forEach(([wd,dx,dy,k,[lx,ly,al]])=>withA(ctx,dis*(0.5+0.5*fl)*0.8,()=>{ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(SRC3[k][1],0.7);ctx.lineWidth=2;ctx.strokeRect(260+dx,120+dy,1400,320);ctx.restore();
     T(ctx,wd,lx,ly,{w:700,size:22,align:al,color:rgba(SRC3[k][1],1)});}));
-  const B=sq_bp(ctx,lerp(ax,bx,m),lerp(at,bt,m),lerp(as_,bs,m),{b:1,ph:lerp(ap,bph,m)});
+  const B=sq_bp(ctx,lerp(ax,bx,m),lerp(at,bt,m),lerp(as_,bs,m),{b:1,ph:lerp(ap,bph,m),ctA:1-fin(t,w("mei","microcredentials")-0.6,0.4)});
   arrive(ctx,960,62,t,c("before"),()=>tag(ctx,960,62,"business keys · before any source",BPL,{align:"center",size:20}),{from:0.8});
   // each entity's key, in business terms, its key set's prefix in the source's colour
   const lift=fin(t,cS+0.3,0.4)*(1-0.6*fin(t,cS+1.9,0.6)),K=[["learner","SIS|S-20417",0,"student ID",w("keys","student ID")],["award","SIS|GCDA",0,"award code",w("keys","its code")],["cred","LMS|B-5010",-90,"the ID its issuer gave it",w("keys","the ID its issuer")],["cred","SC|C-88",90,null,w("keys","the ID its issuer")+0.3]];

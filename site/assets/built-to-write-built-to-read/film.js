@@ -1571,7 +1571,7 @@ scene("ledger",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");histBg(ctx,S,
     let qx=null,qy=null;
     withA(ctx,jA,()=>BW_J.forEach((e,i)=>{const t0=cJ+0.4+i*1.0,p=clamp((t-t0)/0.8,0,1);if(p<=0)return;const y=bw_entryY(i),p1=clamp(p/0.62,0,1),p2=clamp((p-0.62)/0.2,0,1),p3=clamp((p-0.8)/0.2,0,1);
       const bl=bw_fresh(t,t0,0.8);
-      bw_ink(ctx,e[0],BW_JX+12,y,{size:19,w:700,color:"rgba(120,50,30,0.9)",p:p1,bleed:bl});bw_ink(ctx,e[1],BW_JX+98,y,{size:26,p:p1,bleed:bl});
+      bw_ink(ctx,e[0],BW_JX+12,y,{size:phSz(ctx,19),w:700,color:"rgba(120,50,30,0.9)",p:p1,bleed:bl});bw_ink(ctx,e[1],BW_JX+98,y,{size:26,p:p1,bleed:bl});
       bw_ink(ctx,e[2]+" ducats",BW_JX+BW_JW-22,y,{size:26,w:800,align:"right",p:p2,bleed:bl});bw_ink(ctx,"debit "+e[3]+" · credit "+e[4],BW_JX+98,y+38,{size:20,color:"rgba(90,60,36,0.85)",p:p3,bleed:bl});
       if(p<1){qx=p1<1?BW_JX+98+bw_inkW(ctx,typeOn(e[1],p1),26):BW_JX+BW_JW-40;qy=y;}
       const last=Math.max(...BW_POST.filter(q=>q.i===i).map(postT))+0.8;withA(ctx,fin(t,last,0.3),()=>T(ctx,"✓",BW_JX+BW_JW-18,y+38,{w:800,size:24,align:"right",color:"rgba(40,110,60,0.95)"}));}));

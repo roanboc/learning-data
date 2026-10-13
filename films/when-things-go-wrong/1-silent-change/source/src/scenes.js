@@ -60,7 +60,10 @@ scene("thread",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
   const SR={x:760,y:250,w:560,h:315},u=ease(clamp((t-0.9)/2.0,0,1)),z1=W/SR.w;
   if(u<1){const z=lerp(1,z1,u),cx=lerp(W/2,SR.x+SR.w/2,u),cy=lerp(H/2,SR.y+SR.h/2,u);room(ctx,S,t,{top:"#0d162c",cam:{z:lerp(1,1.35,u),x:cx,y:cy}});ctx.setTransform(S*z,0,0,S*z,S*(W/2-cx*z),S*(H/2-cy*z));
     ctx.save();ctx.shadowColor="rgba(120,200,255,0.5)";ctx.shadowBlur=50;ctx.fillStyle="#0e1526";rr(ctx,SR.x-18,SR.y-18,SR.w+36,SR.h+36,14);ctx.fill();ctx.restore();
-    ctx.save();rr(ctx,SR.x,SR.y,SR.w,SR.h,6);ctx.clip();ctx.translate(SR.x,SR.y);ctx.scale(SR.w/W,SR.h/H);bg2(ctx);lineWorld(ctx,t,0,0);ctx.restore();
+    // the screen seen from across the room is texture: its words keep their size until the screen nearly fills the frame, then the
+    // phone-sized ones fade in (raised to phone size inside a small screen, they would run into each other)
+    ctx.save();rr(ctx,SR.x,SR.y,SR.w,SR.h,6);ctx.clip();ctx.translate(SR.x,SR.y);ctx.scale(SR.w/W,SR.h/H);bg2(ctx);const v=clamp((u-0.8)/0.2,0,1);
+    if(v<1)withA(ctx,1-v,()=>phAsDeco(true,()=>lineWorld(ctx,t,0,0)));if(v>0)withA(ctx,v,()=>lineWorld(ctx,t,0,0));ctx.restore();
     ctx.fillStyle="#1a2338";ctx.beginPath();ctx.moveTo(SR.x-50,SR.y+SR.h+18);ctx.lineTo(SR.x+SR.w+50,SR.y+SR.h+18);ctx.lineTo(SR.x+SR.w+90,SR.y+SR.h+44);ctx.lineTo(SR.x-90,SR.y+SR.h+44);ctx.closePath();ctx.fill();
     const zf=1+(z-1)*1.5;if(zf<3.2){ctx.setTransform(S*zf,0,0,S*zf,S*(W/2-cx*zf),S*(H/2-cy*zf));personBack(ctx,"sam",420,1745,2.3,{t});}
     return;}

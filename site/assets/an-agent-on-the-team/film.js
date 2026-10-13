@@ -1781,7 +1781,7 @@ const AG_AMB=[255,200,70],AG_RED=BAD,AG_GRN=GOOD,AG_PLN=[255,170,110],AG_INK="rg
 // o.lit {i:0..1} highlights a line (o.litCol); o.lineCol {i:colour}; o.strike {i:0..1} strikes a line through in red;
 // o.dim {i:0..1} fades a line; o.diff colours "+" lines teal and "-" lines red; o.label overrides the label ("" for none).
 function ag_code(ctx,x,y,w,name,lines,o){o=o||{};const a=o.a==null?1:o.a,sz=o.size||18,lh=o.lh||Math.round(sz*1.5),col=o.edge||[170,205,255];
-  const lab=o.label===undefined?AG_DUCK:o.label,draft=!!o.draft||lab===AG_DRAFT,dbx=lab===AG_DBX,lc=draft?AG_AMB:dbx?[150,176,214]:WEED,nw=tw(ctx,name,18,500,"mono"),lw=lab?tw(ctx,lab,18,700)+28:0,two=!!lab&&nw+lw+64>w,hh=two?88:56,h=o.h||(hh+18+lines.length*lh);
+  const lab=o.label===undefined?AG_DUCK:o.label,draft=!!o.draft||lab===AG_DRAFT,dbx=lab===AG_DBX,lc=draft?AG_AMB:dbx?[150,176,214]:WEED,ls=phSz(ctx,18),nw=tw(ctx,name,ls,500,"mono"),lw=lab?tw(ctx,lab,ls,700)+28:0,two=!!lab&&nw+lw+64>w,hh=two?88:56,h=o.h||(hh+18+lines.length*lh);
   if(a<=0.01)return h;
   withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,col,{glow:12+10*(o.hi||0),ea:0.65,fill:"rgba(6,10,20,0.96)"});
     if(draft){ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(AG_AMB,0.75);ctx.lineWidth=2;rr(ctx,x-7,y-7,w+14,h+14,18);ctx.stroke();ctx.restore();}
@@ -1819,7 +1819,8 @@ const AG_DAYS=[["1","61.42.18","63.16.40","64.51.05","66.25.33"],["2","73.37.52"
   ["5","109.06.47","110.38.30","112.10.12","113.41.51"],["6","120.30.20","122.01.29","123.32.37","125.03.42"],["7","131.46.02","133.16.44","134.47.25","136.18.04"]];
 // a page of the almanac: laid paper with a heading, the Moon's glyph, and columns of figures drawn up as p goes 0..1 (column by column).
 // o.wrong: [row,col] of a figure computed wrongly; o.fix (0..1) writes the corrected figure over it; o.slant gives the hand
-function ag_page(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a,pos=(r,c)=>{const k=w/620,rh=(h/k-160)/(o.rows||AG_DAYS.length);return[x+(c===0?44:96+(c-1)*(w/k-150)/4+60)*k,y+(156+r*rh)*k];};if(a<=0.01)return pos;withA(ctx,a,()=>{const p=o.p==null?1:o.p,sd=o.seed||1,cols=o.cols||5;
+function ag_page(){return phAsDeco(true,()=>ag_page0.apply(this,arguments));}
+function ag_page0(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a,pos=(r,c)=>{const k=w/620,rh=(h/k-160)/(o.rows||AG_DAYS.length);return[x+(c===0?44:96+(c-1)*(w/k-150)/4+60)*k,y+(156+r*rh)*k];};if(a<=0.01)return pos;withA(ctx,a,()=>{const p=o.p==null?1:o.p,sd=o.seed||1,cols=o.cols||5;
   ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);kt_paper(ctx,0,0,w,h,t,{seed:sd,col:o.col||[236,224,196],curl:o.curl==null?0.6:o.curl,age:0.3});
   const k=w/620,hd=o.head==null?1:o.head;
   withA(ctx,hd,()=>{T(ctx,o.title||"JANUARY 1767",w/2,46*k,{w:800,size:22*k,align:"center",color:"rgba(60,40,24,0.95)"});
@@ -1907,14 +1908,14 @@ function ag_press(ctx,x,y,s,down,t,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.sav
 
 /* ---------- the present: the agent, the project, the process ---------- */
 // a small file chip, named, its colour on the left
-function ag_chip(ctx,x,y,s,col,a,o){o=o||{};if(a<=0.01)return 0;const sz=o.size||18,w=tw(ctx,s,sz,500,"mono")+44,h=sz+20;withA(ctx,a,()=>{if(o.hi)glow(ctx,x+w/2,y,w*0.6,col,0.3*o.hi);glass(ctx,x,y-h/2,w,h,10,col,{glow:8,ea:0.75,fill:"rgba(7,12,24,0.95)"});
+function ag_chip(ctx,x,y,s,col,a,o){o=o||{};if(a<=0.01)return 0;const sz=o.size||18,w=tw(ctx,s,phSz(ctx,sz),500,"mono")+44,h=sz+20;withA(ctx,a,()=>{if(o.hi)glow(ctx,x+w/2,y,w*0.6,col,0.3*o.hi);glass(ctx,x,y-h/2,w,h,10,col,{glow:8,ea:0.75,fill:"rgba(7,12,24,0.95)"});
   ctx.fillStyle=rgba(col,1);rr(ctx,x+12,y-6,8,12,2);ctx.fill();T(ctx,s,x+30,y+sz*0.36,{f:"mono",w:500,size:sz,color:rgba(mix(INK,col,0.35),1)});});return w;}
 // the process table, as docs/process.md has it: ten rows, three of its columns; o.agent[i] and o.appr[i] light the agent's part (teal) and who approves (gold)
 const AG_PROC=[["Scope and meaning.","Drafts it from the catalog and glossary","… Mei Tanaka, registrar's office"],["Source reality.","Profiles, and proposes the mapping …","Jun Park, analytics engineer"],["Consumer output.","Drafts it from the request …","The consumer: Planning, …"],["Gaps and contracts.","Drafts both","The owner and the consumer"],
   ["Tests.","Writes them first","Jun Park, in review"],["Build.","Drafts the SQL to pass the tests","Jun Park, in review"],["Validate.","Runs them (skills/reconcile-and-diff/)","Jun Park and the owner"],["Review and ship.","Opens the pull request","A reviewer, never the agent"],["Written once.","Finds duplicated and drifted metadata","Jun Park"],["Operate and evolve.","Flags breaking changes","The owners of what depends on it"]];
 function ag_process(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=o.rh||46,h=74+38+rh*10+14;if(a<=0.01)return h;withA(ctx,a,()=>{const col=[170,205,255];glass(ctx,x,y,w,h,14,col,{glow:12,ea:0.65,fill:"rgba(6,10,20,0.96)"});
   ctx.fillStyle=rgba(col,0.9);rr(ctx,x+18,y+22,10,10,3);ctx.fill();T(ctx,"docs/process.md",x+38,y+34,{f:"mono",w:500,size:18,color:rgba(col,1)});
-  const lw=tw(ctx,AG_DUCK,18,700)+28,lx=x+w-16-lw;ctx.fillStyle="rgba(8,14,24,0.95)";rr(ctx,lx,y+13,lw,30,15);ctx.fill();ctx.strokeStyle=rgba(WEED,0.8);ctx.lineWidth=1.5;rr(ctx,lx,y+13,lw,30,15);ctx.stroke();T(ctx,AG_DUCK,lx+14,y+34,{w:700,size:18,color:rgba(WEED,1)});
+  const lw=tw(ctx,AG_DUCK,phSz(ctx,18),700)+28,lx=x+w-16-lw;ctx.fillStyle="rgba(8,14,24,0.95)";rr(ctx,lx,y+13,lw,30,15);ctx.fill();ctx.strokeStyle=rgba(WEED,0.8);ctx.lineWidth=1.5;rr(ctx,lx,y+13,lw,30,15);ctx.stroke();T(ctx,AG_DUCK,lx+14,y+34,{w:700,size:18,color:rgba(WEED,1)});
   ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+14,y+50,w-28,1.2);
   const cx=[x+24,x+72,x+0.33*w,x+0.68*w],hy=y+88;["#","Step","The agent's part","Who approves"].forEach((s,i)=>T(ctx,s,cx[i],hy,{w:800,size:19,color:rgba(i===2?KT_AI:i===3?TRUST:SOFT,1)}));
   for(let i=0;i<10;i++){const ry=y+112+i*rh,ag=o.agent?o.agent[i]||0:0,ap=o.appr?o.appr[i]||0:0,q=o.p==null?1:clamp(o.p*10-i,0,1);if(q<=0)continue;withA(ctx,q,()=>{
@@ -1935,7 +1936,8 @@ function ag_door(ctx,x,y,w,h,name,col,op,t,o){o=o||{};const a=o.a==null?1:o.a;if
   ctx.strokeStyle=rgba(col,1);ctx.lineWidth=3;ctx.strokeRect(x-4,y-4,w+8,h+8);
   T(ctx,name,x+w/2,y-18,{w:800,size:22,align:"center",color:rgba(col,1)});});}
 // a key card on a lanyard: the agent's own identity
-function ag_key(ctx,x,y,s,a,o){o=o||{};if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.rotate(o.rot||0);const w=270*s,h=86*s,col=o.col||KT_AI;
+function ag_key(ctx,x,y,s,a,o){o=o||{};if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.rotate(o.rot||0);const col=o.col||KT_AI,h=86*s,
+    w=Math.max(270*s,52*s+Math.max(tw(ctx,o.title||"service principal",phSz(ctx,20*s),800),tw(ctx,o.sub||"agent-credentials",phSz(ctx,18*s),500,"mono"))+(o.cross?52*s:20*s));
   glass(ctx,-w/2,-h/2,w,h,10*s,col,{glow:14,ea:0.85,fill:"rgba(7,14,22,0.96)"});ctx.fillStyle=rgba(col,0.9);rr(ctx,-w/2+12*s,-h/2+14*s,30*s,22*s,4);ctx.fill();
   T(ctx,o.title||"service principal",-w/2+52*s,-h/2+32*s,{w:800,size:20*s,color:rgba(col,1)});T(ctx,o.sub||"agent-credentials",-w/2+52*s,-h/2+60*s,{f:"mono",w:500,size:18*s,color:rgba(SOFT,1)});
   if(o.cross)cross_(ctx,w/2-26*s,-h/2+26*s,30*s,AG_RED,o.cross);ctx.restore();});}
@@ -1947,14 +1949,15 @@ function ag_claim(ctx,x,y,w,claim,query,result,o){o=o||{};const a=o.a==null?1:o.
   if(!o.noq&&cl>0)withA(ctx,cl,()=>{const qy=y+66+cl*6;glass(ctx,x+18,qy,w-36,46,10,[170,205,255],{glow:6,ea:0.6,fill:"rgba(6,10,20,0.96)"});T(ctx,query,x+34,qy+30,{f:"mono",w:500,size:18,color:rgba([205,225,255],0.95)});
     const ry=qy+54;glass(ctx,x+18,ry,w-36,46,10,AG_GRN,{glow:6,ea:0.6,fill:"rgba(6,14,12,0.96)"});T(ctx,result,x+34,ry+30,{f:"mono",w:500,size:18,color:rgba(AG_GRN,0.95)});
     ctx.fillStyle=rgba(SOFT,0.9);[[x+w*0.5,qy-2],[x+w*0.5,ry-2]].forEach(([cx,cy])=>{rr(ctx,cx-14,cy-6,28,12,4);ctx.fill();});});
-  glass(ctx,x,y,w,64,14,col,{glow:12,ea:0.85,fill:"rgba(6,16,18,0.97)"});T(ctx,o.kind||"claim",x+20,y+40,{w:800,size:18,color:rgba(col,1)});T(ctx,claim,x+86,y+40,{w:700,size:21,color:rgba(mix(INK,AG_GREY,gr),1)});});}
+  glass(ctx,x,y,w,64,14,col,{glow:12,ea:0.85,fill:"rgba(6,16,18,0.97)"});T(ctx,o.kind||"claim",x+20,y+40,{w:800,size:18,color:rgba(col,1)});T(ctx,claim,Math.max(x+86,x+34+tw(ctx,o.kind||"claim",phSz(ctx,18),800)),y+40,{w:700,size:21,color:rgba(mix(INK,AG_GREY,gr),1)});});}
 // a draft pull request, as a card: title, a status pill, sections typed in, checks, approvals and the merge button
 function ag_pr(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{const col=o.col||KT_AI;glass(ctx,x,y,w,h,16,col,{glow:14,ea:0.75,fill:"rgba(6,12,20,0.96)"});
-  T(ctx,"pull request",x+24,y+40,{w:700,size:18,color:rgba(SOFT,1)});T(ctx,o.title||"Tidy the learner timeline",x+24,y+76,{w:800,size:24});
-  const rd=o.ready||0,mg=o.merged||0,pill=mg>0.5?["Merged",[178,156,255]]:rd>0.5?["Ready for review",AG_GRN]:["Draft",AG_GREY],pw=tw(ctx,pill[0],18,800)+30;
-  glass(ctx,x+w-24-pw,y+20,pw,34,17,pill[1],{glow:10*Math.max(rd,mg),ea:0.85,fill:"rgba(8,12,20,0.95)"});T(ctx,pill[0],x+w-24-pw/2,y+43,{w:800,size:18,align:"center",color:rgba(pill[1],1)});
-  kt_agent(ctx,x+w-50,y+92,10,t,{a:1});T(ctx,"opened by the agent",x+w-72,y+98,{w:600,size:18,align:"right",color:rgba(KT_AI,0.95)});
-  ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+16,y+116,w-32,1.2);});}
+  const ph=phMin(ctx)>0;T(ctx,"pull request",x+24,y+40,{w:700,size:18,color:rgba(SOFT,1)});T(ctx,o.title||"Tidy the learner timeline",x+24,y+(ph?78:76),{w:800,size:24});
+  const rd=o.ready||0,mg=o.merged||0,pill=mg>0.5?["Merged",[178,156,255]]:rd>0.5?["Ready for review",AG_GRN]:["Draft",AG_GREY],pz=phSz(ctx,18),pw=tw(ctx,pill[0],pz,800)+30,ph2=Math.max(34,pz+10);
+  glass(ctx,x+w-24-pw,y+20,pw,ph2,ph2/2,pill[1],{glow:10*Math.max(rd,mg),ea:0.85,fill:"rgba(8,12,20,0.95)"});T(ctx,pill[0],x+w-24-pw/2,y+20+ph2/2+pz*0.35,{w:800,size:18,align:"center",color:rgba(pill[1],1)});
+  if(ph){kt_agent(ctx,x+38,y+108,10,t,{a:1});T(ctx,"opened by the agent",x+58,y+114,{w:600,size:18,color:rgba(KT_AI,0.95)});}
+  else{kt_agent(ctx,x+w-50,y+92,10,t,{a:1});T(ctx,"opened by the agent",x+w-72,y+98,{w:600,size:18,align:"right",color:rgba(KT_AI,0.95)});}
+  ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+16,y+(ph?132:116),w-32,1.2);});}
 
 // a balance: the mart on one pan, the census report on the other; tilt (-1..1) leans it, level at 0
 function ag_scale(ctx,cx,cy,s,tilt,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(cx,cy);ctx.scale(s,s);const an=tilt*0.16,col=[200,215,240];
@@ -1975,7 +1978,7 @@ function ag_stack(ctx,x,y,w,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)retu
   for(let i=0;i<n;i++){const yy=y+(n-1-i)*rh,isNew=i>=n-(o.newRows||0),reb=clamp(rf*n*1.2-i,0,1),c=isNew?nw:mix(old,nw,reb);
     ctx.fillStyle=rgba(mix([10,16,28],c,0.18),1);rr(ctx,x,yy,w,rh-6,6);ctx.fill();ctx.strokeStyle=rgba(c,0.85);ctx.lineWidth=1.8;rr(ctx,x,yy,w,rh-6,6);ctx.stroke();
     for(let k=0;k<4;k++){ctx.fillStyle=rgba(c,0.35);rr(ctx,x+14+k*(w-28)/4,yy+10,(w-28)/4-12,8,3);ctx.fill();}}
-  const ru=o.rule||0;if(ru>0&&rf<0.05){const yy=y+(n-1)*rh+rh+10-ru*(n*rh+40);withA(ctx,Math.sin(Math.PI*clamp(ru,0,1)),()=>{ctx.save();ctx.setLineDash([8,6]);ctx.strokeStyle=rgba(KT_AI,0.9);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+w+30,yy);ctx.lineTo(x+w+30,yy-40);ctx.stroke();ctx.restore();tag(ctx,x+w+44,yy-20,"changed rule",KT_AI,{size:18});});}});}
+  const ru=o.rule||0;if(ru>0&&rf<0.05){const yy=y+(n-1)*rh+rh+10-ru*(n*rh+40);withA(ctx,Math.sin(Math.PI*clamp(ru,0,1)),()=>{const tx=Math.min(x+w+44,1900-tw(ctx,"changed rule",phSz(ctx,18),700)-26);ctx.save();ctx.setLineDash([8,6]);ctx.strokeStyle=rgba(KT_AI,0.9);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(tx-14,yy);ctx.lineTo(tx-14,yy-40);ctx.stroke();ctx.restore();tag(ctx,tx,yy-20,"changed rule",KT_AI,{size:18});});}});}
 // a dashboard tooltip, a wiki page, a catalog entry, a YAML description: one card each, holding a copy of the definition
 function ag_copy(ctx,x,y,w,kind,txt,col,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{const dr=o.drift||0,h=o.h||140;
   ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(dr*0.035*Math.sin(t*0.6+(o.seed||0)));ctx.translate(-w/2,-h/2);
@@ -2140,6 +2143,10 @@ Object.assign(LV,{
     tag(c,700,520,V.q.named,AG_RED,{align:"center",size:40});c.restore();}
 });
 
+/* ---------- on a phone ----------
+   The film's code cards are drawn at sizes that read, their long lines wrapped (../../../from-words-to-data/shared/src/phone.js) */
+ag_code=phCode(ag_code,{size:18,lh:s=>Math.round(s*1.5),head:(o,ctx,w,name)=>{const lab=o.label===undefined?AG_DUCK:o.label,ls=phSz(ctx,18);return(!!lab&&tw(ctx,name,ls,500,"mono")+tw(ctx,lab,ls,700)+28+64>w?88:56)+18;},label:o=>o.label===undefined?AG_DUCK:o.label});
+
 /* ===== An agent on the team: scenes =====
    Eight chapters, as in ../script.md. England, 1766: the almanac computed twice and compared before printing, and the
    comparer's desk drifting into the present as Jun's, with the agent beside it (the title). Then what's written down for
@@ -2229,12 +2236,15 @@ scene("skills",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   const row=[["AGENTS.md",KT_AI]].concat(AG_SKILLS.map(s=>[s[0],KT_AI])).concat([["docs/process.md",[170,205,255]]]);let rx=100;const RX=row.map(([s])=>{const x=rx;rx+=tw(ctx,s,18,500,"mono")+44+14;return x;});
   row.forEach(([s,col],i)=>{const t0=i===0?cF-0.3:i<6?w("five",AG_SKILLS[i-1][1])-0.2:cFi-0.2,a=fin(t,t0,0.5);if(a<=0)return;
     const x2=i===0?100:100,y2=i===0?190:250+(i-1)*62,x3=RX[i],y3=110,x4=1000,y4=250+i*72,xx=lerp(lerp(x2,x3,ph3),x4,ph4),yy=lerp(lerp(y2,y3,ph3),y4,ph4);
-    if(i===6&&ph4<0.01)return;arrive(ctx,xx+100,yy,t,t0,()=>ag_chip(ctx,xx,yy,s,col,1,{hi:pulseAt(t,t0+0.2,1.0),size:lerp(22,18,Math.max(ph3,ph4))}),{from:0.8});
-    if(ph4>0){const vA=fin(t,w("files","Versioned")+i*0.08,0.4),tA=fin(t,w("files","reviewed")+i*0.1,0.4),cw=tw(ctx,s,18,500,"mono")+44;
+    // on a phone the row along the top is too long to read at the size that reads: there, while the process is up, the chips are texture
+    const rowDeco=phMin(ctx)>0&&ph3>0.5&&ph4<0.5;
+    if(i===6&&ph4<0.01)return;arrive(ctx,xx+100,yy,t,t0,()=>phAsDeco(rowDeco,()=>ag_chip(ctx,xx,yy,s,col,1,{hi:pulseAt(t,t0+0.2,1.0),size:lerp(22,18,Math.max(ph3,ph4))})),{from:0.8});
+    if(ph4>0){const vA=fin(t,w("files","Versioned")+i*0.08,0.4),tA=fin(t,w("files","reviewed")+i*0.1,0.4),cw=tw(ctx,s,phSz(ctx,18),500,"mono")+44;
       withA(ctx,vA,()=>T(ctx,"v"+[14,6,4,9,5,3,11][i],xx+cw+16,yy+7,{f:"mono",w:500,size:18,color:rgba(SOFT,1)}));kt_gtick(ctx,xx+cw+76,yy,13,tA);}});
   ag_tag(ctx,300,190,"five skills · one file each",KT_AI,fin(t,w("five","five skills"),0.5)*(1-ph3),{size:20,align:"left"});
   arrive(ctx,1285,355,t,w("five","draft a model")-0.1,()=>ag_code(ctx,730,250,1110,"skills/draft-a-model/SKILL.md",AG_SK1,{a:1-ph3,edge:KT_AI,p:clamp((t-w("five","draft a model"))/1.2,0,1)}),{dy:24});
-  arrive(ctx,1285,595,t,w("five","reconcile and diff")-0.1,()=>ag_code(ctx,730,490,1110,"skills/reconcile-and-diff/SKILL.md",AG_SK2,{a:1-ph3,edge:KT_AI,p:clamp((t-w("five","reconcile and diff"))/1.2,0,1)}),{dy:24});
+  const K2=phMin(ctx)?Math.max(490,250+16+ag_code(ctx,730,250,1110,"skills/draft-a-model/SKILL.md",AG_SK1,{a:0})):490;
+  arrive(ctx,1285,K2+105,t,w("five","reconcile and diff")-0.1,()=>ag_code(ctx,730,K2,1110,"skills/reconcile-and-diff/SKILL.md",AG_SK2,{a:1-ph3,edge:KT_AI,p:clamp((t-w("five","reconcile and diff"))/1.2,0,1)}),{dy:24});
   // the process: the agent's part lights teal, who approves gold, row by row; validate and review stay lit
   const pA=fin(t,cPr-0.1,0.6)*(1-ph4);if(pA>0){const ag=[],ap=[],dimT=c("files")-0.4;for(let i=0;i<10;i++){const keep=i===6||i===7?1:1-0.7*fin(t,dimT,0.6);ag.push(fin(t,w("process","the agent's part")+i*0.1,0.3)*keep);ap.push(fin(t,w("process","who approves")+i*0.1,0.3)*keep);}
     arrive(ctx,960,460,t,cPr-0.1,()=>ag_process(ctx,100,160,1720,{a:pA,agent:ag,appr:ap,p:clamp((t-cPr)/1.0,0,1)}),{dy:30,from:0.94});}
@@ -2273,20 +2283,22 @@ scene("least",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     T(ctx,n,x+75,y+30,{w:700,size:18,align:"center",color:rgba(col,1)});});});
   if(wr>0)withA(ctx,wr,()=>{arrowTo(ctx,360,280,1500,262,KT_AI,0.9,{p:wr,bend:-0.4,head:14});});
   ag_tag(ctx,1050,575,"reads: sources, core, marts",SOFT,fin(t,w("reads","It reads"),0.5)*(1-fin(t,cS-0.2,0.5)),{size:22});
-  ag_tag(ctx,1680,575,"writes: its own development schemas",KT_AI,fin(t,w("reads","writes"),0.5)*(1-fin(t,cX-0.2,0.5)),{size:20});
+  const RX=s_=>Math.min(1680,1880-(tw(ctx,s_,phSz(ctx,20),700)+26)/2);   // a tag centred under the wing, kept inside the frame
+  ag_tag(ctx,RX("writes: its own development schemas"),575,"writes: its own development schemas",KT_AI,fin(t,w("reads","writes"),0.5)*(1-fin(t,cX-0.2,0.5)),{size:20});
   // the grants that say so (Databricks only)
   const gA=fin(t,w("reads","writes")+0.6,0.6)*(1-fin(t,cS-0.3,0.5));if(gA>0)arrive(ctx,690,710,t,w("reads","writes")+0.6,()=>ag_code(ctx,100,630,1180,"AGENTS.md",AG_GRANTS,{a:gA,label:AG_DBX,edge:[150,176,214],p:clamp((t-w("reads","writes")-0.7)/1.4,0,1),lit:{3:fin(t,w("reads","writes")+2.2,0.5)},litCol:KT_AI}),{dy:30});
   // counts and small samples pass through a glass wall; names, emails and student IDs stay behind it
   const sA=fin(t,cS-0.1,0.6);if(sA>0){withA(ctx,sA,()=>{glass(ctx,100,590,460,270,16,[150,176,214],{glow:8,ea:0.5,fill:"rgba(8,12,22,0.95)"});T(ctx,"the database",124,624,{w:700,size:18,color:rgba(SOFT,1)});
-      ctx.save();ctx.filter="blur(3.5px)";["Linh Nguyen · nguyen.family@…","Priya Nair · S-20431","Daniel Kim · d.kim@…","Aisha K. · S-20417","Jordan Lee · S-20422","Minh Nguyen · nguyen.family@…"].forEach((s,i)=>T(ctx,s,130,670+i*30,{f:"mono",w:500,size:18,color:rgba(SOFT,0.7)}));ctx.restore();
+      ctx.save();ctx.filter="blur(3.5px)";phAsDeco(true,()=>["Linh Nguyen · nguyen.family@…","Priya Nair · S-20431","Daniel Kim · d.kim@…","Aisha K. · S-20417","Jordan Lee · S-20422","Minh Nguyen · nguyen.family@…"].forEach((s,i)=>T(ctx,s,130,670+i*30,{f:"mono",w:500,size:18,color:rgba(SOFT,0.7)})));ctx.restore();
       const wl=ctx.createLinearGradient(590,0,630,0);wl.addColorStop(0,"rgba(150,220,255,0.06)");wl.addColorStop(0.5,"rgba(150,220,255,0.22)");wl.addColorStop(1,"rgba(150,220,255,0.06)");ctx.fillStyle=wl;ctx.fillRect(590,590,40,270);ctx.strokeStyle="rgba(170,225,255,0.6)";ctx.lineWidth=1.5;ctx.strokeRect(590,590,40,270);});
     ["42","4","12","2"].forEach((n,i)=>{const t0=w("samples","counts")+i*0.45,u=ease(fin(t,t0,1.2));if(u<=0)return;const x=lerp(470,690,u),y=650+i*52;withA(ctx,sA,()=>{tag(ctx,x,y,n,AG_GRN,{align:"center",size:20});});});
     ag_tag(ctx,330,552,"personal data stays in the database",SOFT,fin(t,w("samples","Names"),0.5),{size:20});
-    ag_tag(ctx,700,552,"counts · small samples",AG_GRN,fin(t,w("samples","counts"),0.5),{size:20});}
+    const CX=phMin(ctx)?330+(tw(ctx,"personal data stays in the database",phSz(ctx,20),700)+26)/2+14+(tw(ctx,"counts · small samples",phSz(ctx,20),700)+26)/2:700;
+    ag_tag(ctx,CX,552,"counts · small samples",AG_GRN,fin(t,w("samples","counts"),0.5),{size:20});}
   const bA=fin(t,w("samples","small samples")-0.2,0.6);if(bA>0)arrive(ctx,1320,685,t,w("samples","small samples")-0.2,()=>ag_code(ctx,790,618,1080,"AGENTS.md",AG_BULK,{a:bA,p:clamp((t-w("samples","small samples"))/1.4,0,1),edge:KT_AI,lit:{0:fin(t,w("samples","Names"),0.5),1:fin(t,w("samples","Names")+0.2,0.5)},litCol:AG_RED}),{dy:30});
   // whatever it gets wrong stays in its own room; production doesn't flicker
   ag_scribble(ctx,1765,300,60,clamp((t-w("stays","gets wrong"))/1.0,0,1));
-  ag_tag(ctx,1680,575,"mistakes stay in its own room",AG_RED,fin(t,w("stays","stays"),0.5),{size:20});
+  ag_tag(ctx,RX("mistakes stay in its own room"),575,"mistakes stay in its own room",AG_RED,fin(t,w("stays","stays"),0.5),{size:20});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 4. Evidence ---------- */
@@ -2302,21 +2314,24 @@ scene("evidence",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   ag_tag(ctx,960,320,"claim · query · result",KT_AI,fin(t,w("claim","result"),0.5)*gA,{size:22});
   // seen before: three claims from the earlier films
   const E3=["4 of 42 · no student ID","one email, two learners, two systems","recorded 7 days late"],fade3=fin(t,cM-0.8,0.6);
-  const up3=0;E3.forEach((s,i)=>{const t0=w("four",["no student ID","shared family email","a week late"][i])-0.3,x=100+i*580,yy=lerp(440,130,up3);arrive(ctx,x+260,yy+40,t,t0,()=>withA(ctx,1-fade3,()=>{glass(ctx,x,yy,520,80,14,KT_AI,{glow:12,ea:0.8,fill:"rgba(6,16,18,0.96)"});
-    T(ctx,"claim",x+20,yy+50,{w:800,size:18,color:rgba(KT_AI,1)});T(ctx,s,x+86,yy+50,{w:700,size:21});}),{dy:24});});
+  const up3=0,ph=phMin(ctx)>0;E3.forEach((s,i)=>{const t0=w("four",["no student ID","shared family email","a week late"][i])-0.3,x=100+i*580,yy=lerp(440,130,up3),L=ph?phWrap(ctx,s,480,phSz(ctx,21),700):[s],ch=ph?58+L.length*36:80;
+    arrive(ctx,x+260,yy+40,t,t0,()=>withA(ctx,1-fade3,()=>{glass(ctx,x,yy,520,ch,14,KT_AI,{glow:12,ea:0.8,fill:"rgba(6,16,18,0.96)"});
+    if(ph){T(ctx,"claim",x+20,yy+38,{w:800,size:18,color:rgba(KT_AI,1)});L.forEach((l,k)=>T(ctx,l,x+20,yy+76+k*36,{w:700,size:21}));}else{T(ctx,"claim",x+20,yy+50,{w:800,size:18,color:rgba(KT_AI,1)});T(ctx,s,x+86,yy+50,{w:700,size:21});}}),{dy:24});});
   ag_tag(ctx,960,lerp(380,250,up3),"seen before",SOFT,fin(t,w("four","seen"),0.5)*(1-fade3),{size:20});
   // now a rule, in the agent's page, with an example to copy: the claim, its query and its result clip together
   const rA=fin(t,cM-0.2,0.6);if(rA>0)arrive(ctx,710,350,t,cM-0.2,()=>ag_code(ctx,100,260,1220,"AGENTS.md",AG_EVID,{a:rA,edge:KT_AI,p:clamp((t-cM)/1.2,0,1),lit:{0:fin(t,cM+0.6,0.5),1:fin(t,cM+1.2,0.5),3:fin(t,w("guess","goes back"),0.5)},litCol:KT_AI}),{dy:30});
   ag_tag(ctx,1560,330,"now a rule · AGENTS.md",KT_AI,fin(t,w("more","a rule"),0.5)*(1-fin(t,cG-0.2,0.4)),{size:22});
-  const dA=fin(t,w("more","example")-0.4,0.6);if(dA>0)arrive(ctx,500,550,t,w("more","example")-0.4,()=>ag_code(ctx,100,480,820,"dbt show",AG_SHOW,{a:dA,edge:[170,205,255],p:clamp((t-w("more","example")+0.3)/1.2,0,1),lit:{0:fin(t,w("mei","shared email"),0.5),1:fin(t,w("mei","shared email")+0.1,0.5)}}),{dy:30});
-  const exA=fin(t,w("more","example")-0.2,0.6)*(1-fin(t,cE-0.4,0.5));if(exA>0)arrive(ctx,1250,560,t,w("more","example")-0.2,()=>ag_claim(ctx,980,480,600,"4 of 42 · no student ID","dbt show --select profile_null_keys","learning_platform.users | student_id | 42 | 4",{a:exA,clip:fin(t,w("more","example")+0.3,0.7)}),{dy:24});
+  const SY=ph?Math.max(480,260+16+ag_code(ctx,100,260,1220,"AGENTS.md",AG_EVID,{a:0})):480,kOut=ph?fin(t,w("mei","records")-0.5,0.5):0;
+  const dA=fin(t,w("more","example")-0.4,0.6)*(1-kOut);if(dA>0)arrive(ctx,500,SY+70,t,w("more","example")-0.4,()=>ag_code(ctx,100,SY,820,"dbt show",AG_SHOW,{a:dA,edge:[170,205,255],p:clamp((t-w("more","example")+0.3)/1.2,0,1),lit:{0:fin(t,w("mei","shared email"),0.5),1:fin(t,w("mei","shared email")+0.1,0.5)}}),{dy:30});
+  const exA=fin(t,w("more","example")-0.2,0.6)*(1-fin(t,cE-0.4,0.5));if(exA>0)arrive(ctx,1250,560,t,w("more","example")-0.2,()=>ag_claim(ctx,980,SY,ph?880:600,"4 of 42 · no student ID","dbt show --select profile_null_keys","learning_platform.users | student_id | 42 | 4",{a:exA,clip:fin(t,w("more","example")+0.3,0.7)}),{dy:24});
   // where rules can't decide, Mei decides, and records it
   const mA=fin(t,cE-0.1,0.7);if(mA>0){arrive(ctx,1640,700,t,cE-0.1,()=>{person(ctx,"mei",1640,850,0.5,{pose:fin(t,w("mei","records"),0.3)>0.5?"explain":"stand",t});},{dy:20,d:0.9});withA(ctx,mA,()=>ag_role(ctx,1640,878,"mei"));
-    const ar=fin(t,w("mei","asks Mei"),0.8);if(ar>0)arrowTo(ctx,930,540,1520,620,TRUST,0.85,{p:ar,bend:0.12,head:14});}
+    const ar=fin(t,w("mei","asks Mei"),0.8);if(ar>0)arrowTo(ctx,930,SY+60,1520,620,TRUST,0.85,{p:ar,bend:0.12,head:14});}
   ag_tag(ctx,1640,470,"Mei decides · D-001",TRUST,fin(t,w("mei","records a decision"),0.5),{size:22});
-  ag_tag(ctx,1230,480,"rules can't decide",AG_AMB,fin(t,w("mei","rules can't decide"),0.5)*(1-fin(t,cG,0.5)),{size:20});
-  const kA=fin(t,w("mei","records")-0.2,0.6);if(kA>0){arrive(ctx,630,720,t,w("mei","records")-0.2,()=>ag_code(ctx,100,656,1160,"seeds/reference/student/learner_identity_decisions.csv",AG_DEC,{a:kA,edge:TRUST,p:clamp((t-w("mei","records"))/1.4,0,1),lit:{1:fin(t,w("mei","records a decision")+0.4,0.5)}}),{dy:30});
-    kt_gtick(ctx,1232,768,16,fin(t,w("mei","records a decision")+0.5,0.35));ag_tag(ctx,300,820,"SC: short courses",SRC3[2][1],fin(t,w("mei","records a decision")+0.8,0.5),{size:18});}
+  ag_tag(ctx,ph?1600:1230,ph?400:480,"rules can't decide",AG_AMB,fin(t,w("mei","rules can't decide"),0.5)*(1-fin(t,cG,0.5)),{size:20});
+  const KY=ph?SY:656,hK=ph?ag_code(ctx,100,KY,1160,"seeds/reference/student/learner_identity_decisions.csv",AG_DEC,{a:0}):0;
+  const kA=fin(t,w("mei","records")-0.2,0.6);if(kA>0){arrive(ctx,630,KY+64,t,w("mei","records")-0.2,()=>ag_code(ctx,100,KY,1160,"seeds/reference/student/learner_identity_decisions.csv",AG_DEC,{a:kA,edge:TRUST,p:clamp((t-w("mei","records"))/1.4,0,1),lit:{1:fin(t,w("mei","records a decision")+0.4,0.5)}}),{dy:30});
+    kt_gtick(ctx,1232,KY+112,16,fin(t,w("mei","records a decision")+0.5,0.35));ag_tag(ctx,300,ph?KY+hK+30:820,"SC: short courses",SRC3[2][1],fin(t,w("mei","records a decision")+0.8,0.5),{size:18});}
   // a claim with no query goes back to the agent, unread
   const g0=cG-0.1,gb=ease(fin(t,w("guess","goes back"),1.4));if(t>g0){const gx=lerp(1390,ox-60,gb),gy=lerp(220,oy,gb),ga=1-fin(t,w("guess","goes back")+1.0,0.5);
     arrive(ctx,gx+230,gy+32,t,g0,()=>{ctx.save();ctx.translate(gx,gy);ctx.scale(1-0.6*gb,1-0.6*gb);ag_claim(ctx,0,0,470,"emails are unique","","",{noq:true,grey:fin(t,w("guess","goes back")-0.4,0.5),a:ga});ctx.restore();},{dy:20});}
@@ -2338,24 +2353,29 @@ function ag_build(ctx,x,y,w,t,o){o=o||{};const st=o.state||0,warn=fin(st,0,1)*(s
     warn>0.5?"PASS=143 WARN=2 ERROR=0":"PASS=143 WARN=1 ERROR=1"];
   const rc=pass?AG_GRN:mix(AG_RED,AG_AMB,warn),sm=pass?4:6,lc={0:AG_GRN,1:AG_GRN,2:AG_GRN,3:rc,[sm]:pass?AG_GRN:warn>0.5?AG_AMB:AG_RED};if(!pass)lc[5]=rc;
   const lit={3:o.lit||0,[sm]:o.lit6||0};if(!pass)lit[5]=o.lit||0;
+  if(o.short){const sh=k=>Object.fromEntries(Object.entries(k).filter(([i])=>i>=3).map(([i,v])=>[i-3,v]));return ag_code(ctx,x,y,w,"dbt build",L.slice(3),{a:o.a,p:o.p,edge:rc,lineCol:sh(lc),lit:sh(lit),litCol:rc});}
   return ag_code(ctx,x,y,w,"dbt build",L,{a:o.a,p:o.p,edge:rc,lineCol:lc,lit,litCol:rc,dim:{0:0.3,1:0.3,2:0.3}});}
 scene("shortcut",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.03});
   const cF=c("fails"),cY=c("why"),cW=c("warn"),cS=c("stop"),cN=c("news"),cX=c("fix"),rec=w("refactor","by when it was recorded");
   // the timeline's model: the lines that date the student system's versions, and their comment
-  const tlA=fin(t,0.4,0.6)*(1-fin(t,cF-1.0,0.5));if(tlA>0)arrive(ctx,690,290,t,0.4,()=>ag_code(ctx,100,110,1180,"models/intermediate/student/int_learner_timeline.sql",AG_TL,{a:tlA,edge:LAYER4[1][1],p:clamp((t-0.5)/1.8,0,1),lit:{0:fin(t,w("refactor","dates every version"),0.5),4:fin(t,w("refactor","dates every version"),0.5),5:fin(t,w("refactor","dates every version")+0.1,0.5),6:fin(t,w("refactor","dates every version")+0.1,0.5),10:fin(t,w("refactor","dates every version")+0.2,0.5)}}),{dy:30});
+  // on a phone the code is drawn larger: the draft (its own diff shows the old lines) takes the timeline's place, the build's output is
+  // shortened to the test that matters, and the cards that follow one another take turns
+  const ph=phMin(ctx)>0,tlA=fin(t,0.4,0.6)*(1-fin(t,ph?rec-0.4:cF-1.0,0.5));if(tlA>0)arrive(ctx,690,290,t,0.4,()=>ag_code(ctx,100,110,1180,"models/intermediate/student/int_learner_timeline.sql",AG_TL,{a:tlA,edge:LAYER4[1][1],p:clamp((t-0.5)/1.8,0,1),lit:{0:fin(t,w("refactor","dates every version"),0.5),4:fin(t,w("refactor","dates every version"),0.5),5:fin(t,w("refactor","dates every version")+0.1,0.5),6:fin(t,w("refactor","dates every version")+0.1,0.5),10:fin(t,w("refactor","dates every version")+0.2,0.5)}}),{dy:30});
   ag_tag(ctx,1560,160,"tidy the timeline",KT_AI,fin(t,w("refactor","tidies"),0.5)*(1-fin(t,cF-1.0,0.5)),{size:22});
   // the agent's draft: both dates from when the change was recorded
-  const up=ease(fin(t,cF-0.4,1.0)),dfA=fin(t,rec-0.3,0.6)*(1-fin(t,cS+0.2,0.6));
+  const up=ph?1:ease(fin(t,cF-0.4,1.0)),dfA=fin(t,rec-0.3,0.6)*(1-fin(t,cS+0.2,0.6));
   const orbX=lerp(lerp(1560,1000,fin(t,rec-0.5,1.0)),1000,up),orbY=lerp(lerp(300,600,fin(t,rec-0.5,1.0)),520,up);kt_agent(ctx,orbX,orbY,26,t,{a:fin(t,0.2,0.6)*(1-fin(t,cS,0.6)),busy:pulseAt(t,rec,1.6)});
   if(dfA>0)arrive(ctx,500,660,t,rec-0.3,()=>ag_code(ctx,100,lerp(520,110,up),800,"models/intermediate/student/int_learner_timeline.sql",AG_TLD,{a:dfA,label:AG_DRAFT,diff:true,p:clamp((t-rec)/1.6,0,1)}),{dy:30});
   ag_tag(ctx,1460,640,"one date for every version: when it was recorded",KT_AI,fin(t,rec+0.4,0.5)*(1-fin(t,cF-0.4,0.5)),{size:20});
   // the build: green, then one row red; Business 4 against 3
   const bState=fin(t,w("warn","The build passes")-0.3,0.6)*1;const bA=fin(t,cF-0.2,0.6)*(1-fin(t,cS-0.8,0.5));
-  if(bA>0)arrive(ctx,1460,240,t,cF-0.2,()=>ag_build(ctx,1080,110,760,t,{a:bA,p:clamp((t-cF)/1.4,0,1),state:bState,lit:fin(t,cF+1.3,0.4),lit6:fin(t,w("warn","The build passes"),0.5)}),{dy:30});
-  const nA=fin(t,w("fails","Business"),0.5)*(1-fin(t,cS-0.8,0.5));if(nA>0)withA(ctx,nA,()=>{const col=mix(AG_RED,AG_AMB,bState);glass(ctx,1080,420,760,110,16,col,{glow:14,ea:0.8,fill:"rgba(16,8,10,0.95)"});
-    T(ctx,"Business",1110,488,{w:700,size:24,color:rgba(SOFT,1)});T(ctx,"4",1260,494,{w:800,size:54,color:rgba(col,1)});withA(ctx,fin(t,w("fails","The report"),0.5),()=>{T(ctx,"the report says",1380,488,{w:700,size:24,color:rgba(SOFT,1)});T(ctx,"3",1580,494,{w:800,size:54,color:rgba(PARCH,1)});});
-    withA(ctx,fin(t,w("fails","fails"),0.4),()=>T(ctx,bState>0.5?"WARN 1":"FAIL 1",1810,486,{w:800,size:22,align:"right",color:rgba(col,1)}));});
+  const BX=ph?980:1080,BW=ph?880:760,BY=ph?110+12+ag_build(ctx,BX,110,BW,t,{a:0,state:bState,short:1})-420:0;
+  if(bA>0)arrive(ctx,1460,240,t,cF-0.2,()=>ag_build(ctx,BX,110,BW,t,{a:bA,p:clamp((t-cF)/1.4,0,1),state:bState,lit:fin(t,cF+1.3,0.4),lit6:fin(t,w("warn","The build passes"),0.5),short:ph}),{dy:30});
+  const nA=fin(t,w("fails","Business"),0.5)*(1-fin(t,cS-0.8,0.5));if(nA>0)withA(ctx,nA,()=>{const col=mix(AG_RED,AG_AMB,bState);glass(ctx,1080,420+BY,760,110,16,col,{glow:14,ea:0.8,fill:"rgba(16,8,10,0.95)"});
+    const RX3=ph?1380+tw(ctx,"the report says",phSz(ctx,24),700)+18:1580;
+    T(ctx,"Business",1110,488+BY,{w:700,size:24,color:rgba(SOFT,1)});T(ctx,"4",1260,494+BY,{w:800,size:54,color:rgba(col,1)});withA(ctx,fin(t,w("fails","The report"),0.5),()=>{T(ctx,"the report says",1380,488+BY,{w:700,size:24,color:rgba(SOFT,1)});T(ctx,"3",RX3,494+BY,{w:800,size:54,color:rgba(PARCH,1)});});
+    withA(ctx,fin(t,w("fails","fails"),0.4),()=>T(ctx,bState>0.5?"WARN 1":"FAIL 1",1810,486+BY,{w:800,size:22,align:"right",color:rgba(col,1)}));});
   // seven days late: took effect 27 March, recorded 3 April; census day between them
   const cA=fin(t,cY-0.2,0.6)*(1-fin(t,cW-0.4,0.5));if(cA>0)withA(ctx,cA,()=>{const x0=340,dx=100,day=d=>x0+(d-24)*dx,yA=800;
     glass(ctx,100,600,1740,290,18,[170,205,255],{glow:8,ea:0.4,fill:"rgba(7,12,24,0.9)"});
@@ -2370,20 +2390,22 @@ scene("shortcut",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
     [[27,"took effect 27 Mar",SRC3[0][1],-1],[34,"recorded 3 Apr",AG_AMB,1]].forEach(([d,s,col,sd])=>{const x=day(d);withA(ctx,fin(t,cY+(sd>0?1:0.3),0.5),()=>{ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(x,yA,8,0,TAU);ctx.fill();T(ctx,s,x,yA-22,{w:700,size:18,align:"center",color:rgba(col,1)});});});
     withA(ctx,fin(t,w("why","still studying"),0.5),()=>tag(ctx,cx+200,640,"studying on census day",AG_RED,{size:18}));});
   // the agent's second draft: the test set to warn
-  const svA=fin(t,cW-0.3,0.6)*(1-fin(t,cX-0.9,0.5));if(svA>0)arrive(ctx,510,700,t,cW-0.3,()=>ag_code(ctx,100,600,820,"tests/reconciliation/_reconciliation__tests.yml",AG_SEV,{a:svA,label:AG_DRAFT,diff:true,p:clamp((t-cW)/1.0,0,1),strike:{4:fin(t,w("stop","stops it"),0.6)}}),{dy:30});
-  ag_tag(ctx,1460,580,"the build passes",AG_AMB,fin(t,w("warn","The build passes"),0.5)*(1-fin(t,cS-0.8,0.5)),{size:22});
+  const svA=fin(t,cW-0.3,0.6)*(1-fin(t,ph?w("stop","The rule")-0.6:cX-0.9,0.5));if(svA>0)arrive(ctx,510,700,t,cW-0.3,()=>ag_code(ctx,100,600,820,"tests/reconciliation/_reconciliation__tests.yml",AG_SEV,{a:svA,label:AG_DRAFT,diff:true,p:clamp((t-cW)/1.0,0,1),strike:{4:fin(t,w("stop","stops it"),0.6)}}),{dy:30});
+  ag_tag(ctx,1460,580+BY,"the build passes",AG_AMB,fin(t,w("warn","The build passes"),0.5)*(1-fin(t,cS-0.8,0.5)),{size:22});
   // Jun's review of the draft pull request stops it; the rule, written down
   const prA=fin(t,cS-0.1,0.6);if(prA>0){arrive(ctx,1590,260,t,cS-0.1,()=>{ag_pr(ctx,1340,110,500,330,t,{});
       withA(ctx,fin(t,w("stop","stops it")-0.3,0.5),()=>{glass(ctx,1364,250,452,170,12,AG_RED,{glow:10,ea:0.7,fill:"rgba(20,8,10,0.95)"});T(ctx,"Jun · changes requested",1384,284,{w:800,size:19,color:rgba(AG_RED,1)});
         wrapT(ctx,"Never weaken a test to make it pass. Report the failing row.",1384,320,410,{w:600,size:19,lh:28});});},{dy:24});
     arrive(ctx,1590,700,t,cS,()=>person(ctx,"jun",1590,860,0.5,{pose:fin(t,w("stop","stops it"),0.3)>0.5?"explain":"stand",expr:"concerned",t}),{dy:20,d:0.9});withA(ctx,fin(t,cS,0.6),()=>ag_role(ctx,1590,886,"jun",1));}
   const ruA=fin(t,w("stop","The rule")-0.3,0.6)*(1-fin(t,cX-0.9,0.5));if(ruA>0)arrive(ctx,690,190,t,w("stop","The rule")-0.3,()=>ag_code(ctx,100,110,1180,"AGENTS.md",AG_RULE,{a:ruA,edge:KT_AI,p:clamp((t-w("stop","The rule"))/1.2,0,1),lit:{0:fin(t,w("stop","never weaken"),0.5),1:fin(t,w("news","A failing test"),0.5),2:fin(t,w("news","failing rows"),0.5)},litCol:AG_RED}),{dy:30});
-  const deA=fin(t,cN-0.2,0.6)*(1-fin(t,cX-0.9,0.5));if(deA>0)arrive(ctx,690,430,t,cN-0.2,()=>ag_code(ctx,100,300,1180,"tests/reconciliation/_reconciliation__tests.yml",AG_DESC,{a:deA,edge:LAYER4[3][1],p:clamp((t-cN)/1.4,0,1),lit:{3:fin(t,w("news","let a person decide"),0.5),6:fin(t,w("news","let a person decide")+0.4,0.5)},litCol:TRUST}),{dy:30});
+  const DY=ph?Math.max(300,110+16+ag_code(ctx,100,110,1180,"AGENTS.md",AG_RULE,{a:0})):300;
+  const deA=fin(t,cN-0.2,0.6)*(1-fin(t,cX-0.9,0.5));if(deA>0)arrive(ctx,690,DY+130,t,cN-0.2,()=>ag_code(ctx,100,DY,1180,"tests/reconciliation/_reconciliation__tests.yml",AG_DESC,{a:deA,edge:LAYER4[3][1],p:clamp((t-cN)/1.4,0,1),lit:{3:fin(t,w("news","let a person decide"),0.5),6:fin(t,w("news","let a person decide")+0.4,0.5)},litCol:TRUST}),{dy:30});
   // the fix: both lines return; the build runs; Business 3, green
   const fxA=fin(t,cX-0.3,0.6);if(fxA>0){arrive(ctx,690,290,t,cX-0.3,()=>ag_code(ctx,100,110,1180,"models/intermediate/student/int_learner_timeline.sql",AG_TL,{a:fxA,edge:LAYER4[1][1],lit:{4:fin(t,cX+0.2,0.5),5:fin(t,cX+0.3,0.5),6:fin(t,cX+0.3,0.5),10:fin(t,cX+0.4,0.5)},litCol:AG_GRN}),{dy:30});
-    const b2=w("fix","Business");arrive(ctx,550,640,t,b2-0.4,()=>ag_build(ctx,100,520,900,t,{state:2,p:clamp((t-b2+0.3)/1.2,0,1),lit:fin(t,b2+0.4,0.4),lit6:fin(t,b2+0.6,0.4)}),{dy:30});
-    arrive(ctx,1170,640,t,b2,()=>{glass(ctx,1040,580,260,120,16,AG_GRN,{glow:16,ea:0.85,fill:"rgba(6,18,12,0.95)"});T(ctx,"Business",1170,622,{w:700,size:22,align:"center",color:rgba(SOFT,1)});T(ctx,"3",1170,682,{w:800,size:52,align:"center",color:rgba(AG_GRN,1)});},{d:0.9});
-    ag_tag(ctx,550,830,"the fix: when each change took effect",AG_GRN,fin(t,w("fix","took effect"),0.5),{size:22});}
+    const b2=w("fix","Business"),FY=ph?110+16+ag_code(ctx,100,110,1180,"models/intermediate/student/int_learner_timeline.sql",AG_TL,{a:0}):520,FB=ph?FY+ag_build(ctx,100,FY,900,t,{a:0,state:2,short:1}):0;
+    arrive(ctx,550,FY+120,t,b2-0.4,()=>ag_build(ctx,100,FY,900,t,{state:2,p:clamp((t-b2+0.3)/1.2,0,1),lit:fin(t,b2+0.4,0.4),lit6:fin(t,b2+0.6,0.4),short:ph}),{dy:30});
+    arrive(ctx,1170,FY+120,t,b2,()=>{const g=ph?FY+60:580;glass(ctx,1040,g,260,120,16,AG_GRN,{glow:16,ea:0.85,fill:"rgba(6,18,12,0.95)"});T(ctx,"Business",1170,g+42,{w:700,size:22,align:"center",color:rgba(SOFT,1)});T(ctx,"3",1170,g+102,{w:800,size:52,align:"center",color:rgba(AG_GRN,1)});},{d:0.9});
+    ag_tag(ctx,550,ph?FB+34:830,"the fix: when each change took effect",AG_GRN,fin(t,w("fix","took effect"),0.5),{size:22});}
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 6. Reconcile and diff ---------- */
@@ -2397,21 +2419,22 @@ scene("validate",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   // two checks before sign-off
   const hA=1-fin(t,cR-0.2,0.6);ag_tag(ctx,960,420,"two checks before sign-off",WEED,fin(t,0.6,0.5)*hA,{size:26});
   ag_tag(ctx,800,520,"reconcile",TRUST,fin(t,w("two","two checks")-0.1,0.5)*hA,{size:24});ag_tag(ctx,1120,520,"diff",KT_AI,fin(t,w("two","two checks")+0.2,0.5)*hA,{size:24});
-  kt_agent(ctx,lerp(960,1780,fin(t,cR-0.3,1.0)),lerp(300,150,fin(t,cR-0.3,1.0)),24,t,{a:fin(t,0.2,0.6)*(1-fin(t,cN-0.3,0.6))});
+  kt_agent(ctx,lerp(960,1780,fin(t,cR-0.3,1.0)),lerp(300,phMin(ctx)?80:150,fin(t,cR-0.3,1.0)),24,t,{a:fin(t,0.2,0.6)*(1-fin(t,cN-0.3,0.6))});
   // reconcile: the mart against the census report, faculty by faculty; the scale levels as each difference lands on zero
   const RW=["Two","three","five","and two"],rA=fin(t,cR-0.2,0.6)*(1-fin(t,cD-0.3,0.6));
   if(rA>0){const land=RW.map(k=>fin(t,w("reconcile",k),0.4)),lv=land.reduce((s,x)=>s+x,0)/4;
-    arrive(ctx,420,520,t,cR-0.2,()=>ag_scale(ctx,420,560,1,0.7*(1-lv)+0.03*Math.sin(t*1.3)*(1-lv),t,{a:rA,left:"Planning's mart",right:"census report"}),{d:1.0,from:0.92});
-    arrive(ctx,1290,400,t,cR-0.1,()=>ag_code(ctx,760,300,1080,"dbt show --select reconcile_census_report",AG_REC,{a:rA,edge:TRUST,p:0.2+0.8*lv,lit:{1:land[0],2:land[1],3:land[2],4:land[3]},litCol:AG_GRN}),{dy:30});
-    ag_tag(ctx,1300,580,"difference 0, everywhere",AG_GRN,fin(t,w("reconcile","zero"),0.5)*rA,{size:22});}
+    const ph=phMin(ctx)>0,SX=ph?700:420,SY=ph?660:560;
+    arrive(ctx,SX,SY-40,t,cR-0.2,()=>ag_scale(ctx,SX,SY,1,0.7*(1-lv)+0.03*Math.sin(t*1.3)*(1-lv),t,{a:rA,left:"Planning's mart",right:"census report"}),{d:1.0,from:0.92});
+    arrive(ctx,1290,400,t,cR-0.1,()=>ag_code(ctx,ph?140:760,ph?130:300,ph?1720:1080,"dbt show --select reconcile_census_report",AG_REC,{a:rA,edge:TRUST,p:0.2+0.8*lv,lit:{1:land[0],2:land[1],3:land[2],4:land[3]},litCol:AG_GRN}),{dy:30});
+    ag_tag(ctx,ph?1360:1300,ph?440:580,"difference 0, everywhere",AG_GRN,fin(t,w("reconcile","zero"),0.5)*rA,{size:22});}
   // diff: main, then the branch from scratch, compared key by key; counts only
   const dA=fin(t,cD-0.2,0.6)*(1-fin(t,cN-0.3,0.6));if(dA>0){
     ag_db(ctx,400,250,170,110,"main",[150,176,214],fin(t,w("diff","build main"),0.5)*dA,{sub:"target/main.duckdb"});
     ag_db(ctx,920,250,170,110,"the branch",KT_AI,fin(t,w("diff","the branch"),0.5)*dA,{sub:"--full-refresh",hi:pulseAt(t,w("diff","from scratch"),1.2)});
     const kb=fin(t,w("diff","key by key"),0.8);withA(ctx,dA,()=>{for(let i=0;i<4;i++){const y=210+i*26,q=clamp(kb*4-i,0,1);if(q<=0)continue;ctx.save();ctx.setLineDash([4,6]);ctx.strokeStyle=rgba(KT_AI,0.6);ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(495,y);ctx.lineTo(lerp(495,825,q),y);ctx.stroke();ctx.restore();}});
     ag_tag(ctx,660,150,"key by key",KT_AI,kb*dA,{size:20});
-    arrive(ctx,690,610,t,cD+0.4,()=>ag_code(ctx,100,470,1180,"skills/reconcile-and-diff/SKILL.md",AG_DIFFSK,{a:dA,edge:KT_AI,p:clamp((t-cD-0.5)/2.0,0,1),lit:{2:fin(t,w("diff","build main"),0.5),3:fin(t,w("diff","the branch"),0.5),5:fin(t,cS,0.5),6:fin(t,cS+0.2,0.5),7:fin(t,cS+0.4,0.5)},litCol:KT_AI}),{dy:30});
-    ag_tag(ctx,660,440,"counts only · no personal data leaves",AG_GRN,fin(t,w("diff","Counts only"),0.5)*dA,{size:20});
+    const KY=phMin(ctx)?440:470;arrive(ctx,690,KY+140,t,cD+0.4,()=>ag_code(ctx,100,KY,1180,"skills/reconcile-and-diff/SKILL.md",AG_DIFFSK,{a:dA,edge:KT_AI,p:clamp((t-cD-0.5)/2.0,0,1),lit:{2:fin(t,w("diff","build main"),0.5),3:fin(t,w("diff","the branch"),0.5),5:fin(t,cS,0.5),6:fin(t,cS+0.2,0.5),7:fin(t,cS+0.4,0.5)},litCol:KT_AI}),{dy:30});
+    ag_tag(ctx,660,phMin(ctx)?410:440,"counts only · no personal data leaves",AG_GRN,fin(t,w("diff","Counts only"),0.5)*dA,{size:20});
     // from scratch: an incremental table only takes new rows on top, so a changed rule never reaches the old ones
     const stA=fin(t,cS-0.2,0.6)*dA;if(stA>0){arrive(ctx,1580,400,t,cS-0.2,()=>ag_stack(ctx,1380,300,300,t,{a:stA,newRows:fin(t,cS+0.4,0.4)>0.5?1:0,rule:clamp((t-w("scratch","incremental"))/2.0,0,1),refresh:fin(t,w("scratch","change in logic")+0.4,1.2)}),{dy:24});
       ag_tag(ctx,1560,650,"incremental hides a change in logic",AG_AMB,fin(t,w("scratch","would hide"),0.5)*stA,{size:20});
@@ -2419,11 +2442,20 @@ scene("validate",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   // the diffs: the shortcut moved one row of the mart and 55 versions in the core; with the fix, nothing
   const nA=fin(t,cN-0.2,0.6);if(nA>0){const fx=fin(t,w("none","With the fix"),0.7);
     const sh=(y,h)=>withA(ctx,fx,()=>{glow(ctx,960,y+h/2,300,AG_GRN,0.12);ctx.fillStyle=rgba(AG_GRN,0.08);rr(ctx,660,y+60,600,h-70,10);ctx.fill();ctx.strokeStyle=rgba(AG_GRN,0.5);ctx.lineWidth=1.5;rr(ctx,660,y+60,600,h-70,10);ctx.stroke();});
-    arrive(ctx,690,240,t,cN-0.2,()=>{ag_code(ctx,100,110,1180,"scripts/tools/diff_against_main.py",AG_D1,{a:nA,edge:KT_AI,p:clamp((t-cN)/1.2,0,1),lit:{5:fin(t,w("none","one learner's"),0.5),6:fin(t,w("none","one learner's")+0.1,0.5)},litCol:AG_AMB});sh(110,263);},{dy:30});
-    const c2=w("none","In the core")-0.2;arrive(ctx,690,530,t,c2,()=>{ag_code(ctx,100,410,1180,"scripts/tools/diff_against_main.py",AG_D2,{a:nA,edge:KT_AI,p:clamp((t-c2)/1.2,0,1),lit:{3:fin(t,w("none","fifty-five"),0.5),4:fin(t,w("none","fifty-five"),0.5),5:fin(t,w("none","fifty-five")+0.2,0.5)},litCol:AG_AMB});sh(410,236);},{dy:30});
+    const L1={5:fin(t,w("none","one learner's"),0.5),6:fin(t,w("none","one learner's")+0.1,0.5)},L2={3:fin(t,w("none","fifty-five"),0.5),4:fin(t,w("none","fifty-five"),0.5),5:fin(t,w("none","fifty-five")+0.2,0.5)},c2=w("none","In the core")-0.2;
+    if(phMin(ctx)){const half=(D,k)=>D.map(l=>k?l.slice(51):l.slice(0,51).replace(/\s+$/,"")),F="scripts/tools/diff_against_main.py",pair=(D,y,t0,lit)=>{const o={a:nA,edge:KT_AI,p:clamp((t-t0)/1.2,0,1),lit,litCol:AG_AMB};
+        const h=ag_code(ctx,100,y,860,F,half(D,0),o);ag_code(ctx,980,y,860,F,half(D,1),Object.assign({},o,{lit:{}}));
+        withA(ctx,fx,()=>{glow(ctx,1410,y+h/2,300,AG_GRN,0.12);ctx.fillStyle=rgba(AG_GRN,0.08);rr(ctx,990,y+76,840,h-86,10);ctx.fill();ctx.strokeStyle=rgba(AG_GRN,0.5);ctx.lineWidth=1.5;rr(ctx,990,y+76,840,h-86,10);ctx.stroke();});return h;};
+      const h1=ag_code(ctx,100,110,860,"scripts/tools/diff_against_main.py",half(AG_D1,0),{a:0}),y2=110+h1+64,h2=ag_code(ctx,100,y2,860,"scripts/tools/diff_against_main.py",half(AG_D2,0),{a:0});
+      arrive(ctx,960,240,t,cN-0.2,()=>pair(AG_D1,110,cN,L1),{dy:30});arrive(ctx,960,y2+130,t,c2,()=>pair(AG_D2,y2,c2+0.2,L2),{dy:30});
+      ag_tag(ctx,530,110+h1+32,"the mart: 1 row changed",AG_AMB,fin(t,w("none","one learner's"),0.5),{size:22});
+      ag_tag(ctx,530,y2+h2+32,"the core: 55 versions moved",AG_AMB,fin(t,w("none","fifty-five"),0.5),{size:22});
+      ag_tag(ctx,1410,y2+h2+32,"the fix: the diff is empty",AG_GRN,fin(t,w("none","the diff is empty"),0.5),{size:24});}
+    else{arrive(ctx,690,240,t,cN-0.2,()=>{ag_code(ctx,100,110,1180,"scripts/tools/diff_against_main.py",AG_D1,{a:nA,edge:KT_AI,p:clamp((t-cN)/1.2,0,1),lit:L1,litCol:AG_AMB});sh(110,263);},{dy:30});
+    arrive(ctx,690,530,t,c2,()=>{ag_code(ctx,100,410,1180,"scripts/tools/diff_against_main.py",AG_D2,{a:nA,edge:KT_AI,p:clamp((t-c2)/1.2,0,1),lit:L2,litCol:AG_AMB});sh(410,236);},{dy:30});
     ag_tag(ctx,1560,240,"the mart: 1 row changed",AG_AMB,fin(t,w("none","one learner's"),0.5),{size:22});
     ag_tag(ctx,1560,520,"the core: 55 versions moved",AG_AMB,fin(t,w("none","fifty-five"),0.5),{size:22});
-    ag_tag(ctx,960,740,"the fix: the diff is empty",AG_GRN,fin(t,w("none","the diff is empty"),0.5),{size:24});}
+    ag_tag(ctx,960,740,"the fix: the diff is empty",AG_GRN,fin(t,w("none","the diff is empty"),0.5),{size:24});}}
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 7. Review and ship ---------- */
@@ -2434,7 +2466,11 @@ const AG_CHECKS=["Build and test on DuckDB","Doc blocks and key sets match the c
 // what depends on the timeline: its node in the project's graph and everything downstream of it
 const AG_DOWN=(()=>{const down=k0=>{const set=new Set([k0]);let grown=true;while(grown){grown=false;LG.edges.forEach(([i,j])=>{if(set.has(i)&&!set.has(j)){set.add(j);grown=true;}});}return[...set];};let best=[];LG.col[1].slice(60,80).forEach(k=>{const d=down(k);if(d.length>best.length)best=d;});return best;})();
 // the pull request, filled in: four sections, the evidence from the last chapter, the checks, and the merge button
-function ag_prFull(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{ag_pr(ctx,x,y,w,h,t,{ready:o.ready,merged:o.merged});
+// on a phone: the sections closer, the two pieces of evidence one under the other, a check too long for the card on two lines, and
+// the card as tall as that makes it; ag_prMergeY gives where its Merge button sits
+function ag_prLay(ctx,y,w){const fs=phSz(ctx,19),cy=y+500,R=[];let yy=cy+36;AG_CHECKS.forEach(s=>{const L=phWrap(ctx,s,w-96,fs,600);R.push([yy,L]);yy+=L.length*34;});return{cy,R,by:yy-4,h:yy-4+44+16-y};}
+function ag_prMergeY(ctx,y,w,h){return phMin(ctx)?ag_prLay(ctx,y,w).by:y+h-62;}
+function ag_prFull(ctx,x,y,w,h,t,o){if(phMin(ctx))return ag_prFullP(ctx,x,y,w,h,t,o);o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{ag_pr(ctx,x,y,w,h,t,{ready:o.ready,merged:o.merged});
   [["What changed",o.s[0]],["Why",o.s[1]],["What was checked",o.s[2]],["Evidence",o.s[3]]].forEach(([s,q],i)=>{if(q<=0)return;const yy=y+156+i*66;withA(ctx,q,()=>{T(ctx,"## "+s,x+24,yy,{f:"mono",w:500,size:19,color:rgba(INK,0.95)});
     if(i<3){for(let k=0;k<2;k++){ctx.fillStyle=rgba(SOFT,0.25);rr(ctx,x+24,yy+14+k*16,(w-60)*(k?0.55:0.85)*clamp(q*1.4-k*0.3,0,1),7,3);ctx.fill();}}
     else{glass(ctx,x+24,yy+12,(w-64)/2,56,10,TRUST,{glow:6,ea:0.6,fill:"rgba(8,12,22,0.96)"});T(ctx,"reconcile: 0 in every faculty",x+38,yy+46,{w:700,size:18,color:rgba(AG_GRN,1)});
@@ -2442,6 +2478,13 @@ function ag_prFull(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)r
   const cy=y+452;withA(ctx,o.chk?1:0,()=>{T(ctx,"Checks",x+24,cy,{w:800,size:20,color:rgba(SOFT,1)});});
   AG_CHECKS.forEach((s,i)=>{const q=o.chk?o.chk[i]||0:0;if(q<=0)return;const yy=cy+38+i*36;withA(ctx,q,()=>{glow(ctx,x+40,yy-6,18,AG_GRN,0.3*q);ctx.fillStyle=rgba(AG_GRN,0.2);ctx.beginPath();ctx.arc(x+40,yy-6,13,0,TAU);ctx.fill();tick_(ctx,x+40,yy-6,16,AG_GRN,1);T(ctx,s,x+64,yy,{w:600,size:19});});});
   const by=y+h-62,mg=o.merged||0;glass(ctx,x+24,by,190,44,10,mg>0.5?[178,156,255]:AG_GREY,{glow:6+10*mg,ea:0.6,fill:"rgba(12,14,22,0.96)"});T(ctx,mg>0.5?"Merged":"Merge",x+119,by+29,{w:800,size:20,align:"center",color:rgba(mg>0.5?[178,156,255]:AG_GREY,1)});});}
+function ag_prFullP(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const Ly=ag_prLay(ctx,y,w);h=Ly.h;withA(ctx,a,()=>{ag_pr(ctx,x,y,w,h,t,{ready:o.ready,merged:o.merged});
+  [["What changed",o.s[0]],["Why",o.s[1]],["What was checked",o.s[2]],["Evidence",o.s[3]]].forEach(([s,q],i)=>{if(q<=0)return;const yy=y+170+i*58;withA(ctx,q,()=>{T(ctx,"## "+s,x+24,yy,{f:"mono",w:500,size:19,color:rgba(INK,0.95)});
+    if(i<3){for(let k=0;k<2;k++){ctx.fillStyle=rgba(SOFT,0.25);rr(ctx,x+24,yy+12+k*14,(w-60)*(k?0.55:0.85)*clamp(q*1.4-k*0.3,0,1),7,3);ctx.fill();}}
+    else{[["reconcile: 0 in every faculty",TRUST],["diff against main: empty",KT_AI]].forEach(([s2,c2],j)=>{glass(ctx,x+24,yy+12+j*54,w-48,48,10,c2,{glow:6,ea:0.6,fill:"rgba(8,12,22,0.96)"});T(ctx,s2,x+38,yy+46+j*54,{w:700,size:18,color:rgba(AG_GRN,1)});});}});});
+  withA(ctx,o.chk?1:0,()=>{T(ctx,"Checks",x+24,Ly.cy,{w:800,size:20,color:rgba(SOFT,1)});});
+  AG_CHECKS.forEach((s,i)=>{const q=o.chk?o.chk[i]||0:0;if(q<=0)return;const[yy,L]=Ly.R[i];withA(ctx,q,()=>{glow(ctx,x+40,yy-6,18,AG_GRN,0.3*q);ctx.fillStyle=rgba(AG_GRN,0.2);ctx.beginPath();ctx.arc(x+40,yy-6,13,0,TAU);ctx.fill();tick_(ctx,x+40,yy-6,16,AG_GRN,1);L.forEach((l,k)=>T(ctx,l,x+64,yy+k*34,{w:600,size:19}));});});
+  const by=Ly.by,mg=o.merged||0;glass(ctx,x+24,by,190,44,10,mg>0.5?[178,156,255]:AG_GREY,{glow:6+10*mg,ea:0.6,fill:"rgba(12,14,22,0.96)"});T(ctx,mg>0.5?"Merged":"Merge",x+119,by+22+phSz(ctx,20)*0.35,{w:800,size:20,align:"center",color:rgba(mg>0.5?[178,156,255]:AG_GREY,1)});});}
 scene("ship",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025});
   const cC=c("ci"),cL=c("cloud"),cP=c("people"),cA=c("approve");
@@ -2452,26 +2495,30 @@ scene("ship",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   // the evidence from the last chapter, carried across the cut: it shrinks into the pull request's evidence section
   const ev=ease(fin(t,w("pr","the evidence")-0.3,1.1)),evA=fin(t,0.6,0.5)*(1-fin(t,w("pr","the evidence")+0.5,0.4));if(evA>0)withA(ctx,evA,()=>{
     [[940,100,104,480,"dbt show --select reconcile_census_report",AG_REC.map(l=>l.slice(14)),TRUST],[940,360,488,480,"scripts/tools/diff_against_main.py",AG_D1.slice(0,5).map(l=>l.slice(51)),KT_AI]].forEach(([x0,y0,x1,y1,nm,L,col])=>{
-      const k=lerp(1,368/900,ev);ctx.save();ctx.translate(lerp(x0,x1,ev),lerp(y0,y1,ev));ctx.scale(k,k);ag_code(ctx,0,0,900,nm,L,{edge:col,lit:nm[0]==="d"?{1:1,2:1,3:1,4:1}:{3:1,4:1},litCol:AG_GRN});ctx.restore();});});
+      const k=lerp(1,368/900,ev);ctx.save();ctx.translate(lerp(x0,x1,ev),lerp(y0,y1,ev));ctx.scale(k,k);phAsDeco(k<0.8||phMin(ctx)>0,()=>ag_code(ctx,0,0,900,nm,L,{edge:col,lit:nm[0]==="d"?{1:1,2:1,3:1,4:1}:{3:1,4:1},litCol:AG_GRN}));ctx.restore();});});
   // CI: the checks that run on every pull request, from the workflow
-  const wA=fin(t,cC-0.2,0.6)*(1-fin(t,w("cloud","On dbt Cloud")-0.4,0.5));if(wA>0)arrive(ctx,1390,310,t,cC-0.2,()=>ag_code(ctx,940,100,900,".github/workflows/credential-project.yml",AG_WF,{a:wA,edge:[170,205,255],p:clamp((t-cC)/1.6,0,1),lit:{0:chk[0],1:chk[0],3:chk[1],4:chk[1],6:chk[2],7:chk[2],11:chk[3],14:chk[3]},litCol:AG_GRN}),{dy:30});
-  ag_tag(ctx,1390,580,"CI: the checks that run on every pull request",SOFT,fin(t,w("ci","the checks"),0.5)*wA,{size:20});
-  ag_tag(ctx,1390,650,"parse for Databricks",[150,176,214],fin(t,w("cloud","parses"),0.5)*(1-fin(t,w("cloud","On dbt Cloud")-0.4,0.5)),{size:20});
+  // on a phone the workflow loses its blank lines (it's drawn taller), and the tags sit under it
+  const ph=phMin(ctx)>0,WI=AG_WF.map((l,i)=>i).filter(i=>!ph||AG_WF[i]!==""),WF=WI.map(i=>AG_WF[i]),wl=o=>Object.fromEntries(Object.entries(o).map(([i,v])=>[WI.indexOf(+i),v]).filter(([i])=>i>=0));
+  const WY=ph?100+30+ag_code(ctx,940,100,900,".github/workflows/credential-project.yml",WF,{a:0}):580;
+  const wA=fin(t,cC-0.2,0.6)*(1-fin(t,w("cloud","On dbt Cloud")-0.4,0.5));if(wA>0)arrive(ctx,1390,310,t,cC-0.2,()=>ag_code(ctx,940,100,900,".github/workflows/credential-project.yml",WF,{a:wA,edge:[170,205,255],p:clamp((t-cC)/1.6,0,1),lit:wl({0:chk[0],1:chk[0],3:chk[1],4:chk[1],6:chk[2],7:chk[2],11:chk[3],14:chk[3]}),litCol:AG_GRN}),{dy:30});
+  ag_tag(ctx,1390,WY,"CI: the checks that run on every pull request",SOFT,fin(t,w("ci","the checks"),0.5)*wA,{size:20});
+  ag_tag(ctx,1390,WY+(ph?56:70),"parse for Databricks",[150,176,214],fin(t,w("cloud","parses"),0.5)*(1-fin(t,w("cloud","On dbt Cloud")-0.4,0.5)),{size:20});
   // dbt Cloud: only what changed, and what depends on it
+  const RB=ph?100+ag_code(ctx,910,100,940,"README.md",AG_README,{a:0}):0;
   const rA=fin(t,w("cloud","On dbt Cloud")-0.2,0.6)*(1-fin(t,cP-0.3,0.5));if(rA>0){arrive(ctx,1380,190,t,w("cloud","On dbt Cloud")-0.2,()=>ag_code(ctx,910,100,940,"README.md",AG_README,{a:rA,edge:[170,205,255],p:clamp((t-w("cloud","On dbt Cloud"))/1.2,0,1),lit:{2:fin(t,w("cloud","only what changed"),0.5)}}),{dy:30});
-    ag_tag(ctx,1380,330,"Databricks · dbt Cloud",[150,176,214],fin(t,w("cloud","dbt Cloud"),0.5)*rA*0.85,{size:20});
-    const pk={},lit=fin(t,w("cloud","only what changed"),0.6);AG_DOWN.forEach(k=>pk[k]=lit);withA(ctx,rA,()=>lineageGraph(ctx,960,420,840,380,t,{dim:0.6*lit,pick:pk,heads:0.8}));
-    ag_tag(ctx,1380,860,"only what changed · state:modified+",KT_AI,fin(t,w("cloud","what depends"),0.5)*rA,{size:20});}
+    ag_tag(ctx,1380,ph?RB+30:330,"Databricks · dbt Cloud",[150,176,214],fin(t,w("cloud","dbt Cloud"),0.5)*rA*0.85,{size:20});
+    const pk={},lit=fin(t,w("cloud","only what changed"),0.6),GY=ph?RB+100:420;AG_DOWN.forEach(k=>pk[k]=lit);withA(ctx,rA,()=>lineageGraph(ctx,960,GY,840,ph?Math.min(380,830-GY):380,t,{dim:0.6*lit,pick:pk,heads:0.8}));
+    ag_tag(ctx,1380,ph?Math.max(860,GY+380):860,"only what changed · state:modified+",KT_AI,fin(t,w("cloud","what depends"),0.5)*rA,{size:20});}
   // then people: Jun the code, Noor the model, Planning its number
-  const pA=fin(t,cP-0.2,0.6);if(pA>0){const P=[["jun",1100,"Jun","code"],["noor",1400,"Noor","model"],["plan",1700,"Planning","number"]];
+  const aT=w("approve","recommends")-0.7,pA=fin(t,cP-0.2,0.6)*(ph?1-fin(t,aT-0.5,0.5):1);if(pA>0)withA(ctx,pA,()=>{const P=[["jun",1100,"Jun","code"],["noor",1400,"Noor","model"],["plan",1700,"Planning","number"]];
     P.forEach(([id,x,nm,word],i)=>{const t0=cP+i*0.3;arrive(ctx,x,350,t,t0,()=>{if(id==="plan"){ag_team(ctx,x,300,1.15,AG_PLN,t,{});T(ctx,"Planning",x,470,{w:800,size:24,align:"center"});T(ctx,"Consumer",x,497,{w:600,size:18,align:"center",color:rgba(SOFT,1)});}
       else{person(ctx,id,x,450,0.42,{pose:"stand",t});ag_role(ctx,x,476,id);}},{dy:20});
       const tk=w("people",word==="code"?"the code":word==="model"?"the model":"its number");kt_gtick(ctx,x+70,200,18,fin(t,tk-0.1,0.35));
-      ag_tag(ctx,x,560,nm+": "+(word==="number"?"its number":"the "+word),TRUST,fin(t,tk,0.5),{size:20});});}
+      ag_tag(ctx,x,560,nm+": "+(word==="number"?"its number":"the "+word),TRUST,fin(t,tk,0.5),{size:20});});});
   // the agent never merges or approves its own work: the button stays grey for it
-  const reach=ease(fin(t,w("approve","never merges")-0.6,1.2));kt_agent(ctx,lerp(1860,420,reach),lerp(720,770,reach),24,t,{a:fin(t,0.2,0.6)});
-  ag_tag(ctx,490,770,"the agent never merges",AG_GREY,fin(t,w("approve","never merges")+0.6,0.5),{size:20,align:"left"});
-  const aT=w("approve","recommends")-0.7,aA=fin(t,aT,0.6);if(aA>0)arrive(ctx,1370,750,t,aT,()=>ag_code(ctx,900,610,940,"AGENTS.md",AG_WHO,{a:aA,edge:TRUST,p:clamp((t-aT)/1.0,0,1),lit:{7:fin(t,aT+1.1,0.5)},litCol:TRUST}),{dy:30});
+  const MY=ag_prMergeY(ctx,90,800,720)+22,reach=ease(fin(t,w("approve","never merges")-0.6,1.2));kt_agent(ctx,lerp(1860,420,reach),lerp(720,MY,reach),24,t,{a:fin(t,0.2,0.6)});
+  ag_tag(ctx,490,MY,"the agent never merges",AG_GREY,fin(t,w("approve","never merges")+0.6,0.5),{size:20,align:"left"});
+  const aA=fin(t,aT,0.6),HY=ph?150:610;if(aA>0)arrive(ctx,1370,HY+140,t,aT,()=>ag_code(ctx,900,HY,940,"AGENTS.md",AG_WHO,{a:aA,edge:TRUST,p:clamp((t-aT)/1.0,0,1),lit:{7:fin(t,aT+1.1,0.5)},litCol:TRUST}),{dy:30});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 8. The same words, four places ---------- */
@@ -2484,21 +2531,21 @@ scene("next",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   // centre), holds while the old picture fades (0.8 s), then folds into the project's graph, all green; the graph and the loop of
   // ten, steps 7 and 8 lit, arrive once it has moved clear. Everything fades before the end card.
   const out=1-fin(t,B-0.6,0.6),z7=1.025,fold=ease(fin(t,0.9,1.4)),zz=lerp(z7,1,fold);
-  if(fold<1)withA(ctx,(1-fold)*out,()=>{ctx.save();ctx.translate(960,540);ctx.scale(zz,zz);ctx.translate(-960,-540);ctx.translate(lerp(480,800,fold),lerp(470,600,fold));ctx.scale(1-0.9*fold,1-0.9*fold);ctx.translate(-480,-470);ag_prFull(ctx,80,90,800,720,t,{ready:1,merged:1,s:[1,1,1,1],chk:[1,1,1,1,1]});ctx.restore();});
+  if(fold<1)withA(ctx,(1-fold)*out,()=>{ctx.save();ctx.translate(960,540);ctx.scale(zz,zz);ctx.translate(-960,-540);ctx.translate(lerp(480,800,fold),lerp(470,600,fold));ctx.scale(1-0.9*fold,1-0.9*fold);ctx.translate(-480,-470);phAsDeco(fold>0.2,()=>ag_prFull(ctx,80,90,800,720,t,{ready:1,merged:1,s:[1,1,1,1],chk:[1,1,1,1,1]}));ctx.restore();});
   const gA=fin(t,1.6,0.8)*out,g4=1-fin(t,w("award","four places")-0.6,0.6);withA(ctx,gA,()=>{const bx=fin(t,cM+0.6,0.8)*g4;ctx.save();ctx.setLineDash([12,9]);ctx.strokeStyle=rgba(WEED,0.5*bx);ctx.lineWidth=2;rr(ctx,260,350,1080,520,24);ctx.stroke();ctx.restore();
     withA(ctx,bx,()=>T(ctx,"the project",284,388,{w:700,size:20,color:rgba(WEED,0.9)}));const pk={};LG.nodes.forEach((n,k)=>{if(k%3===0)pk[k]=0.6*fin(t,1.8+hash(k,5)*1.2,0.4);});
     withA(ctx,1-0.88*(1-g4),()=>lineageGraph(ctx,320,452,960,388,t,{pick:pk,heads:0.8*g4,core:0.7}));});
   ag_tag(ctx,800,200,"merged · tested · signed off",AG_GRN,fin(t,Math.max(w("merged","merged"),1.9),0.5)*(1-fin(t,cM+0.4,0.5)),{size:24});
   const lA=fin(t,0.9,0.6)*out;if(lA>0){const on=STEPS10.map((_,i)=>i===6||i===7?1:0.3);ag_stepLoop(ctx,1620,190,215,120,t,{a:lA,on,r:34,teal:on.map((_,i)=>i===6||i===7?fin(t,1.0+i*0.05,0.4):0),ticks:on.map((_,i)=>i===6||i===7?fin(t,1.4+i*0.1,0.4):0)});
-    ag_tag(ctx,1620,190,"Build · validate · review and ship",WEED,lA,{size:18});}
+    ag_tag(ctx,1620,phMin(ctx)?345:190,"Build · validate · review and ship",WEED,lA,{size:18});}
   // the agent: carried across the cut from where chapter 7 left it, beside the Merge button; then it opens its fifth skill
   withA(ctx,out,()=>{
   const cr=ease(fin(t,0.9,1.4)),ox=lerp(lerp(960+(420-960)*1.025,1100,cr),1400,fin(t,cM-0.3,1.0)),oy=lerp(lerp(540+(770-540)*1.025,260,cr),440,fin(t,cM-0.3,1.0));kt_agent(ctx,ox,oy,26,t,{busy:pulseAt(t,cM,1.6)});
   const kA=fin(t,cM-0.2,0.6)*(1-fin(t,cA-0.2,0.5));if(kA>0)arrive(ctx,690,210,t,cM-0.2,()=>ag_code(ctx,100,100,1180,"skills/review-metadata/SKILL.md",AG_REV,{a:kA,edge:KT_AI,p:clamp((t-cM)/1.2,0,1)}),{dy:30});
   ag_tag(ctx,690,200,"review the metadata",KT_AI,fin(t,cA-0.2,0.5),{size:24});
-  [["wiki",470],["catalog",620],["dashboards",770]].forEach(([n,y],i)=>{const t0=w("metadata","beyond it")+i*0.25,a=fin(t,t0,0.5);if(a<=0)return;arrive(ctx,1670,y,t,t0,()=>{glass(ctx,1500,y-44,340,88,14,[170,205,255],{glow:8,ea:0.6,fill:"rgba(8,12,22,0.95)"});T(ctx,n,1670,y+8,{w:800,size:22,align:"center"});},{dy:16});
+  const BD=phMin(ctx)?24:0;[["wiki",470+BD],["catalog",620+BD],["dashboards",770+BD]].forEach(([n,y],i)=>{const t0=w("metadata","beyond it")+i*0.25,a=fin(t,t0,0.5);if(a<=0)return;arrive(ctx,1670,y,t,t0,()=>{glass(ctx,1500,y-44,340,88,14,[170,205,255],{glow:8,ea:0.6,fill:"rgba(8,12,22,0.95)"});T(ctx,n,1670,y+8,{w:800,size:22,align:"center"});},{dy:16});
     withA(ctx,a,()=>{ctx.save();ctx.setLineDash([3,7]);ctx.strokeStyle=rgba(KT_AI,0.7);ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(ox+20,oy+20);ctx.lineTo(1500,y);ctx.stroke();ctx.restore();});});
-  ag_tag(ctx,1670,400,"in the project and beyond · read-only",KT_AI,fin(t,w("metadata","beyond it"),0.5),{size:18});
+  ag_tag(ctx,Math.min(1670,1880-(tw(ctx,"in the project and beyond · read-only",phSz(ctx,18),700)+26)/2),400+BD,"in the project and beyond · read-only",KT_AI,fin(t,w("metadata","beyond it"),0.5),{size:18});
   ag_tag(ctx,1670,880,"something no test checks",AG_AMB,fin(t,w("metadata","no test checks"),0.5),{size:20});
   // one definition, four places; three of them drift
   AG_FOUR.forEach(([k,s,dr],i)=>{const t0=w("award","four places")+i*0.25,x=300+(i%2)*530,y=430+Math.floor(i/2)*200;
@@ -2507,6 +2554,277 @@ scene("next",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   });
   ctx.restore();weedsEnd(ctx,S,t,B,"An agent on the team",WEED,"The agent drafts and checks, with evidence. People approve.");
   fadeIn(ctx,S,t,0.01);vign(ctx,S);});
+
+/* ===== Made to read on a phone =====
+   A phone held sideways shows the 1920-pixel frame about 850 pixels wide, so text under about 28 px in the frame is too small to
+   read there (PLAYBOOK.md, "Make it read on a phone"). The films made before that rule draw with this layer: every piece of text
+   that isn't marked as decoration ({deco:1}) is drawn at least 28 px high in the frame, after the camera's zoom, and the components
+   that size themselves to their text (tags) grow with it. Each film's scenes then make room for the larger words, and move the
+   camera in on the part of a dense picture the narration is about (focus). The map before the data was drawn to the rule from the
+   start and doesn't load this layer; nor does The Inner Life of Data, yet.
+   It loads after the film's own files and before the engine, and only wraps: the components it shares with other films are unchanged. */
+const PH_MIN=28;let PH_W=0,PH_OFF=0;
+// how many frame pixels one unit of the current drawing is, after the camera's zoom; 0 on a canvas that isn't a frame (a cached picture)
+function phK(ctx){const c=ctx.canvas;if(!PH_W||c.width!==PH_W)return 0;const m=ctx.getTransform();return Math.sqrt(Math.abs(m.a*m.d-m.b*m.c))*W/c.width;}
+// the smallest text size, in the current drawing's units, that reads on a phone (0 where it doesn't apply)
+function phMin(ctx){if(PH_OFF)return 0;const k=phK(ctx);return k?PH_MIN/k:0;}
+// a component's options, with its text raised to the smallest size that reads, unless it's decoration
+function phSize(ctx,o,def){o=o||{};if(o.deco)return o;const m=phMin(ctx),s=o.size||def;return s<m?Object.assign({},o,{size:m}):o;}
+// the size a piece of text is really drawn at: what it asks for, or the phone's smallest, whichever is larger (to place what follows it)
+function phSz(ctx,s){return Math.max(s,phMin(ctx)||0);}
+// draw fn as decoration: its text is texture (a printed page, a far-off list), not something to read
+function phDeco(fn){return function(){PH_OFF++;try{return fn.apply(this,arguments);}finally{PH_OFF--;}};}
+// draw now, as decoration when on is true: a picture seen from afar is context, and its words are texture
+function phAsDeco(on,fn){if(!on)return fn();PH_OFF++;try{return fn();}finally{PH_OFF--;}}
+// the lines a string breaks into at a width, for the films that don't load words.js's wrapT
+function phWrap(ctx,s,maxW,size,wt,f){const L=[];String(s).split(" ").forEach(wd=>{const c=L.length?L[L.length-1]+" "+wd:wd;if(L.length&&tw(ctx,c,size,wt||600,f)>maxW)L.push(wd);else if(L.length)L[L.length-1]=c;else L.push(wd);});return L;}
+// the camera moves in on part of a picture, as The map before the data's focus does: keys are [t, x, y, zoom], from the first
+// key's framing, each move gliding over d seconds from its time; returns the zoom
+function focus(ctx,t,keys,d){d=d||1.4;let x=keys[0][1],y=keys[0][2],z=keys[0][3];for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;
+    x=lerp(x,keys[i][1],u);y=lerp(y,keys[i][2],u);z=lerp(z,keys[i][3],u);}
+  ctx.translate(960,540);ctx.scale(z,z);ctx.translate(-x,-y);return z;}
+// a component whose text sizes are fixed inside it, drawn larger as a whole until its smallest text (base) reads: it grows from the
+// point its arguments xi and yi name, by at most kmax, so its box and its words keep their proportions
+function phBig(fn,xi,yi,base,kmax){return function(){const a=arguments,ctx=a[0],m=phMin(ctx),k=m?clamp(m/(typeof base==="function"?base.apply(null,a):base),1,kmax||1.7):1;
+  if(k<=1.001)return fn.apply(this,a);ctx.save();ctx.translate(a[xi],a[yi]);ctx.scale(k,k);ctx.translate(-a[xi],-a[yi]);try{return fn.apply(this,a);}finally{ctx.restore();}};}
+// the frame's width, set as each frame starts, so a cached picture's text isn't measured against the frame
+renderFrame=(f=>function(ctx,S,t){PH_W=ctx.canvas.width;PH_OFF=0;return f(ctx,S,t);})(renderFrame);
+T=(f=>function(ctx,s,x,y,o){return f(ctx,s,x,y,phSize(ctx,o,24));})(T);
+tag=(f=>function(ctx,x,y,s,c,o){return f(ctx,x,y,s,c,phSize(ctx,o,20));})(tag);
+// wrapped text (From words to data's wrapT) breaks its lines at the size it's drawn, with its line height grown in proportion
+if(typeof wrapT==="function"&&wrapT.length===6)wrapT=(f=>function(ctx,s,x,y,maxW,o){o=o||{};const p=phSize(ctx,o,24);if(p!==o&&o.lh)p.lh=o.lh*p.size/(o.size||24);return f(ctx,s,x,y,maxW,p);})(wrapT);
+// chips (a logo, a title, and a smaller line under it) and the year and stamp tags grow as a whole
+chip=phBig(chip,1,2,function(ctx,x,y,k,title,sub,o){o=o||{};return sub?(o.ss||17):(o.ts||22);});
+if(typeof yearTag==="function")yearTag=phBig(yearTag,1,2,20);
+if(typeof stamp==="function")stamp=phBig(stamp,1,2,20);
+
+/* ---------- From words to data's components, at sizes that read ---------- */
+// a wax seal's mark is part of the seal, not something to read
+if(typeof waxSeal==="function")waxSeal=phDeco(waxSeal);
+// a credential card (words.js) with its rows laid out for the larger words: the field names in a column as wide as the widest,
+// the values after it, and the rows spaced to fit; everything else as words.js draws it
+if(typeof credCard==="function")credCard=(f=>function(ctx,x,y,w,o){const m=phMin(ctx);if(!m)return f(ctx,x,y,w,o);o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return 0;
+  const ls=Math.max(17,m),vs=Math.max(18,m),rh=Math.max(o.rh||34,vs*1.32),rowsF=[["issuer",o.issuer],["holder",o.holder],["claim",o.claim],["evidence",o.evidence],["date",o.date]].filter(r=>r[1]);
+  // a value too long for the card goes on as many lines as it needs, and the card grows to hold them
+  const lw=Math.max(...rowsF.map(r=>tw(ctx,r[0],ls,500,"mono")),0),vw=w-56-lw,LS=rowsF.map(([k,v])=>phWrap(ctx,v,vw,vs,700)),
+    xl=LS.reduce((p,L)=>p+L.length-1,0)*vs*1.18,h0=o.h||Math.max(Math.round(w*0.68),(o.title?84:56)+rowsF.length*rh),h=xl?Math.max(h0,(o.title?44+rh:Math.max(42,16+vs))+(rowsF.length-1)*rh+xl+(o.era==="digital"||!o.era?70:34)):h0;
+  // the card itself, from words.js, with no rows; then the rows, in the same place and turn
+  f(ctx,x,y,w,Object.assign({},o,{h,issuer:null,holder:null,claim:null,evidence:null,date:null,signed:false}));
+  const era=o.era||"digital",dk=era==="digital"||era==="badge",hl=o.hl||{},ink=dk?rgba(INK,0.95):(era==="tablet"?"rgba(60,36,20,0.9)":"rgba(52,40,30,0.92)"),lab=dk?rgba(SOFT,1):(era==="tablet"?"rgba(70,44,26,0.7)":"rgba(110,86,54,0.9)");
+  withA(ctx,a,()=>{ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot||0);ctx.translate(-w/2,-h/2);const yy=o.title?44+rh:Math.max(42,16+vs);
+    // a digital card's "signed", beside its seal rather than under it, where the larger word fits
+    if(era==="digital"&&o.signed!==false)T(ctx,o.signed||"signed",w-78,h-30,{f:"mono",w:500,size:Math.max(12,m),align:"right",color:rgba(SOFT,1)});
+    let ry=yy;rowsF.forEach(([k,v],i)=>{const on=hl[k]||0,L=LS[i],ex=(L.length-1)*vs*1.18;if(on>0){ctx.fillStyle=dk?rgba(o.col||TRUST,0.16*on):"rgba(200,140,40,"+(0.22*on)+")";rr(ctx,12,ry-vs*0.95,w-24,rh+ex,8);ctx.fill();}
+      T(ctx,k,22,ry,{f:"mono",w:500,size:ls,color:lab});L.forEach((l,j)=>T(ctx,l,34+lw,ry+j*vs*1.18,{w:700,size:vs,color:ink}));ry+=rh+ex;});ctx.restore();});return h;})(credCard);
+
+/* ---------- A Sharper Sketch's entities, at sizes that read ---------- */
+// an entity (sketch3.js): its name, its note and its attributes at least the smallest size that reads, the box measured to fit them,
+// so the lines that callers draw to its edges (they ask entBox) still meet it
+if(typeof entBox==="function"){const EB0=entBox,EN0=ent;
+  const phEnt=(ctx,e)=>{const s=e.s||1,m=phMin(ctx);return{s,ns:Math.max(24*s,m),ss:Math.max(16*s,m),as:Math.max(17*s,m)};};
+  entBox=function(ctx,e){const m=phMin(ctx);if(!m)return EB0(ctx,e);const{s,ns,ss,as}=phEnt(ctx,e),sub=e.sub,at=e.attrs||[],k1=ns/(24*s),rh=Math.max(30*s,as*1.3);
+    let w=Math.max(200*s,tw(ctx,e.name,ns,700)+52*s);if(sub)w=Math.max(w,tw(ctx,sub,ss,600)+44*s);at.forEach(r=>{w=Math.max(w,tw(ctx,r[0],as,500,"mono")+84*s);});
+    const head=sub?34*s*k1+ss*1.15+18*s:58*s*k1,h=head+(at.length?at.length*rh+14*s:0);return{x:e.x,y:e.y,w,h,head,rh};};
+  ent=function(ctx,e){const m=phMin(ctx);if(!m)return EN0(ctx,e);const a=e.a==null?1:e.a;if(a<=0.01)return;const{s,ns,ss,as}=phEnt(ctx,e),k1=ns/(24*s),col=e.col||SK,b=entBox(ctx,e),x=b.x-b.w/2,y=b.y-b.h/2,hi=e.hi||0;
+    ctx.save();ctx.globalAlpha*=a;
+    if(hi>0)glow(ctx,b.x,b.y,Math.max(b.w,b.h)*0.9,e.hiCol||col,0.35*hi);
+    ctx.fillStyle=e.fill||"rgba(8,14,30,0.94)";rr(ctx,x,y,b.w,b.h,10*s);ctx.fill();
+    ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=12+10*hi;ctx.strokeStyle=rgba(e.edge||col,0.95);ctx.lineWidth=(2.2+1.2*hi)*s;if(e.dash)ctx.setLineDash([9*s,7*s]);rr(ctx,x,y,b.w,b.h,10*s);ctx.stroke();ctx.setLineDash([]);ctx.shadowBlur=0;
+    const ny=y+(e.sub?34:37)*s*k1;T(ctx,e.name,b.x,ny,{w:700,size:ns,align:"center",color:rgba(col,1)});
+    if(e.sub)withA(ctx,e.subA==null?1:e.subA,()=>T(ctx,e.sub,b.x,ny+ss*1.15,{w:600,size:ss,align:"center",color:rgba(e.subCol||SOFT,1)}));
+    if(e.attrs&&e.attrs.length){const y0=y+b.head;ctx.strokeStyle=rgba(col,0.35);ctx.lineWidth=1.2*s;ctx.beginPath();ctx.moveTo(x+12*s,y0);ctx.lineTo(x+b.w-12*s,y0);ctx.stroke();
+      e.attrs.forEach((r,i)=>withA(ctx,e.attrA==null?1:clamp(e.attrA*e.attrs.length-i,0,1),()=>{const yy=y0+b.rh*(i+0.5)+as*0.36+6*s;
+        if(r[1]==="id"){ctx.fillStyle=rgba(REF,1);ctx.beginPath();ctx.arc(x+24*s,yy-as*0.32,5*s,0,TAU);ctx.fill();}
+        T(ctx,r[0],x+40*s,yy,{f:"mono",w:500,size:as,color:r[1]==="id"?rgba(REF,1):rgba(INK,0.9)});}));}
+    if(e.pin&&(e.pinA==null||e.pinA>0))withA(ctx,e.pinA==null?1:e.pinA,()=>{const pc=e.pin==="adopt"?ADOPT:EXT,px=x+b.w-4*s,py=y+4*s,pr=(9+4*(e.pinP||0))*s;glow(ctx,px,py,34*s,pc,0.5+0.5*(e.pinP||0));
+      ctx.fillStyle=rgba(pc,1);ctx.beginPath();ctx.arc(px,py,pr,0,TAU);ctx.fill();ctx.fillStyle="rgba(255,255,255,0.85)";ctx.beginPath();ctx.arc(px-pr*0.3,py-pr*0.3,pr*0.32,0,TAU);ctx.fill();});
+    ctx.restore();return b;};}
+
+/* ---------- The Inner Life of Data's system card, at sizes that read ---------- */
+// its title and its line under it at least the smallest size that reads, the card grown about its middle to fit them, taller and wider
+if(typeof sysCard==="function"){const SC0=sysCard;sysCard=function(ctx,x,y,w,h,title,sub,c,icon){const m=phMin(ctx);if(!m)return SC0.apply(this,arguments);
+  const ts=Math.max(22,m),ss=Math.max(16,m),H=sub?Math.max(h,ts+ss*1.2+26):Math.max(h,ts+26),Y=y+(h-H)/2,W=Math.max(w,32+Math.max(tw(ctx,title,ts,700),sub?tw(ctx,sub,ss,500):0)+(icon?76:24));x+=(w-W)/2;w=W;
+  glass(ctx,x,Y,w,H,16,c,{glow:16,ea:0.6});led(ctx,x+12,Y+16,5,H-32,c);
+  if(sub){T(ctx,title,x+32,Y+H/2-ss*0.2,{w:700,size:ts});T(ctx,sub,x+32,Y+H/2+ss*0.95,{w:500,size:ss,color:rgba(SOFT,0.95)});}else T(ctx,title,x+32,Y+H/2+ts*0.36,{w:700,size:ts});
+  if(icon)icon(ctx,x+w-44,Y+H/2);};}
+
+/* ---------- A Sharper Sketch's table, at sizes that read ---------- */
+// its name, its header and its cells at least the smallest size that reads, its columns and rows measured to fit them
+if(typeof table==="function"){const TB0=table;table=function(ctx,x,y,name,cols,rows,o){const m=phMin(ctx);if(!m)return TB0.apply(this,arguments);o=o||{};
+  const cs=Math.max(16,m),ns=Math.max(18,m),cw=o.cw||cols.map(c=>Math.max(tw(ctx,c,cs,500,"mono"),...rows.map(r=>tw(ctx,r[cols.indexOf(c)],cs,500,"mono")))+30),w=cw.reduce((a,b)=>a+b,0),rh=Math.max(40,cs*1.45),hh=Math.max(46,ns*1.65),h=hh+rh*(rows.length+1);
+  glass(ctx,x,y,w,h,12,o.col||SK,{glow:14,ea:0.7,fill:"rgba(7,12,24,0.94)"});T(ctx,name,x+16,y+hh*0.67,{f:"mono",w:500,size:ns,color:rgba(o.col||SK,1)});
+  let cx=x;cols.forEach((c,i)=>{T(ctx,c,cx+15,y+hh+rh*0.68,{f:"mono",w:500,size:cs,color:rgba(REF,1)});rows.forEach((r,j)=>withA(ctx,o.rowA?o.rowA(j):1,()=>T(ctx,r[i],cx+15,y+hh+rh*(j+1)+rh*0.68,{f:"mono",w:500,size:cs,color:rgba(INK,0.9)})));cx+=cw[i];});
+  ctx.strokeStyle="rgba(170,200,245,0.18)";ctx.lineWidth=1;for(let j=0;j<=rows.length+1;j++){ctx.beginPath();ctx.moveTo(x,y+hh+rh*j);ctx.lineTo(x+w,y+hh+rh*j);ctx.stroke();}
+  return{w,h};};}
+
+/* ---------- A Sharper Sketch's number card, at sizes that read ---------- */
+// its line under the number wraps to the card's width at the larger size, and the card grows to hold it
+if(typeof numCard==="function"){const NC0=numCard;numCard=function(ctx,x,y,w,title,num,sub,col,o){const m=phMin(ctx);if(!m||!sub)return NC0.apply(this,arguments);o=o||{};
+  const ss=Math.max(18,m),ls=phWrap(ctx,sub,w-56,ss,600),h=200+(ls.length-1)*ss*1.2;
+  glass(ctx,x,y,w,h,18,col,{glow:18,ea:0.7,fill:"rgba(7,12,24,0.92)"});T(ctx,title,x+28,y+46,{w:700,size:24,color:rgba(SOFT,1)});T(ctx,num,x+28,y+140,{w:800,size:88,color:rgba(col,1)});
+  ls.forEach((l,i)=>T(ctx,l,x+28,y+180+i*ss*1.2,{w:600,size:ss,color:rgba(SOFT,0.95)}));
+  if(o.badge)tag(ctx,x+w-28-(tw(ctx,o.badge,Math.max(16,m),700)+26),y+40,o.badge,o.badgeCol||GOOD,{size:16});};}
+
+/* ---------- Silent change's pictures (silent.js), at sizes that read ---------- */
+// the counter widget: the title, the number and its comparison (under the number if it won't fit beside it), and the places.
+// The UI's small print (the source table, "last 14 days", "capacity") is texture. The small copy keeps its name, number and places
+if(typeof kpiCard==="function"&&typeof dbCard==="function"){const KC0=kpiCard;kpiCard=function(ctx,x,y,w,h,o){const m=phMin(ctx);if(!m)return KC0.apply(this,arguments);o=o||{};
+  const s=o.s||1,v=o.value==null?94:o.value,pad=20*s,shown=(o.shown||Math.round(v))+"%",nA=o.numA==null?1:o.numA,col=o.ghost?DB.red:DB.blue,bw=w-2*pad;
+  if(h/s<250){dbCard(ctx,x,y,w,h);const by=y+h-pad-m*1.25,ty=y+pad+m*0.8,foot=Math.round(v*1.2)+" of 120 places";T(ctx,o.title||"Data Science 101",x+pad,ty,{w:700,size:18*s,color:DB.text});
+    withA(ctx,nA,()=>T(ctx,shown,x+pad,ty+Math.max(48*s,m)*1.05,{w:700,size:48*s,color:o.ghost?DB.red:DB.text}));
+    ctx.fillStyle=DB.track;rr(ctx,x+pad,by,bw,10*s,5*s);ctx.fill();ctx.fillStyle=col;rr(ctx,x+pad,by,bw*Math.min(1,v/100),10*s,5*s);ctx.fill();
+    T(ctx,tw(ctx,foot,m,500)<=bw?foot:Math.round(v*1.2)+" of 120",x+pad,y+h-pad,{w:500,size:16*s,color:DB.muted});return;}
+  dbCard(ctx,x,y,w,h);const ty=y+pad+m*0.85,ny=y+pad+122*s,nw=tw(ctx,shown,78*s,700),dw=o.delta?tw(ctx,o.delta,m,700):0,beside=nw+16*s+dw<=bw;
+  T(ctx,o.title||"Places filled · Data Science 101",x+pad,ty,{w:700,size:19*s,color:DB.text});phAsDeco(true,()=>T(ctx,o.source||"fct_offering_fill",x+pad,ty+22,{w:500,size:14*s,f:"mono",color:DB.muted}));
+  withA(ctx,nA,()=>{T(ctx,shown,x+pad,ny,{w:700,size:78*s,color:o.ghost?DB.red:DB.text});
+    if(o.delta)T(ctx,o.delta,beside?x+pad+nw+16*s:x+pad,beside?y+pad+118*s:ny+m*1.25,{w:700,size:17*s,color:o.deltaCol||DB.green});});
+  const by=y+h-pad-Math.max(44*s,m+22),sy0=beside||!o.delta?y+pad+150*s:ny+m*1.25+16,sy1=by-30*s;
+  if(sy1-sy0>40*s){const tr=o.trend||[71,74,76,79,81,83,85,86,88,90,91,92,93,v],lo=60,hi=Math.max(100,...tr)+4,px=i=>x+pad+bw*i/(tr.length-1),py=q=>sy1-(sy1-sy0)*(q-lo)/(hi-lo);
+    ctx.beginPath();tr.forEach((q,i)=>i?ctx.lineTo(px(i),py(q)):ctx.moveTo(px(i),py(q)));ctx.lineTo(px(tr.length-1),sy1);ctx.lineTo(px(0),sy1);ctx.closePath();ctx.fillStyle=o.ghost?"rgba(200,45,76,0.10)":"rgba(7,122,157,0.10)";ctx.fill();
+    ctx.beginPath();tr.forEach((q,i)=>i?ctx.lineTo(px(i),py(q)):ctx.moveTo(px(i),py(q)));ctx.strokeStyle=col;ctx.lineWidth=2.5*s;ctx.stroke();
+    ctx.fillStyle=col;ctx.beginPath();ctx.arc(px(tr.length-1),py(tr[tr.length-1]),4*s,0,TAU);ctx.fill();phAsDeco(true,()=>T(ctx,"last 14 days",x+pad,sy0-4*s,{w:500,size:13*s,color:DB.muted}));}
+  ctx.fillStyle=DB.track;rr(ctx,x+pad,by,bw,12*s,6*s);ctx.fill();ctx.fillStyle=col;rr(ctx,x+pad,by,bw*Math.min(1,v/100),12*s,6*s);ctx.fill();
+  if(v>100){ctx.fillStyle=DB.red;rr(ctx,x+pad+bw-4*s,by-6*s,8*s,24*s,3*s);ctx.fill();}
+  ctx.strokeStyle=DB.text;ctx.lineWidth=2*s;ctx.beginPath();ctx.moveTo(x+pad+bw,by-8*s);ctx.lineTo(x+pad+bw,by+20*s);ctx.stroke();
+  T(ctx,o.foot||Math.round(v*1.2)+" of 120 places",x+pad,y+h-pad,{w:500,size:15*s,color:DB.muted});phAsDeco(true,()=>T(ctx,"capacity",x+pad+bw,y+h-pad,{w:500,size:13*s,align:"right",color:DB.muted}));};}
+// the dashboard: its note wraps and makes the room it needs, its icon is as large as its words, and the chart's subtitle is texture
+if(typeof dashboard==="function"&&typeof kpiCard==="function"&&typeof DB==="object"){const DS0=dashboard;dashboard=function(ctx,x,y,w,h,o){const m=phMin(ctx);if(!m)return DS0.apply(this,arguments);o=o||{};
+  const num=o.num==null?94:parseFloat(o.num),g=o.ghost||0,gIn=sstep(0.45,1,g);
+  glass(ctx,x-12,y-12,w+24,h+24,22,[170,205,255],{glow:18,ea:0.45,fill:"rgba(8,14,28,0.95)"});ctx.save();rr(ctx,x,y,w,h,12);ctx.clip();ctx.fillStyle=DB.canvas;ctx.fillRect(x,y,w,h);
+  ctx.fillStyle=DB.card;ctx.fillRect(x,y,w,64);ctx.fillStyle=DB.line;ctx.fillRect(x,y+64,w,1.2);const lw=logo(ctx,"databricks",x+20,y+18,28);
+  T(ctx,o.title||"Enrolments · census date tomorrow",x+34+lw,y+41,{w:700,size:21,color:DB.text});T(ctx,o.day||"Tuesday",x+w-22,y+40,{w:500,size:16,align:"right",color:DB.muted});
+  let cy=y+84;const ix=m*1.25+44,lines=s=>phWrap(ctx,s,w-40-ix-16,m,600),bh=L=>24+L.length*m*1.15;
+  const alert=(bg,line,col,icon,text,a)=>withA(ctx,a,()=>{const L=lines(text),H=bh(L);ctx.fillStyle=bg;rr(ctx,x+20,cy,w-40,H,6);ctx.fill();ctx.fillStyle=line;rr(ctx,x+20,cy,6,H,3);ctx.fill();
+    ctx.fillStyle=col;ctx.font=font(800,m);ctx.fillText(icon,x+40,cy+12+m*0.86);L.forEach((l,i)=>T(ctx,l,x+ix,cy+12+m*0.86+i*m*1.15,{w:600,size:m,color:col}));});
+  const room=ease(clamp((o.banner||0)+(o.ok||0),0,1)),bT="Last good data: yesterday, 23:02 · a test stopped today's refresh",oT=o.okText||"Up to date: today, 08:40";
+  if(o.banner>0)alert(DB.warnBg,DB.warnLine,DB.warn,"⚠",bT,o.banner*(1-(o.ok||0))*sstep(0.3,1,room));
+  if(o.ok>0)alert(DB.greenBg,DB.green,DB.green,"✓",oT,o.ok);
+  cy+=(Math.max(bh(lines(o.ok>0.5?oT:bT)),52)+20)*room;const gh=y+h-cy-20,kw=w*0.46;
+  kpiCard(ctx,x+20,cy,kw,gh,{value:num,delta:o.delta||("▲ "+(Math.round(num)-92)+" pts vs last week"),foot:o.foot,numA:1-sstep(0,0.5,g)});
+  if(o.flash>0)withA(ctx,o.flash,()=>{ctx.strokeStyle=DB.blue;ctx.lineWidth=3;rr(ctx,x+20,cy,kw,gh,8);ctx.stroke();});
+  if(g>0){withA(ctx,g,()=>{ctx.save();ctx.fillStyle="rgba(255,255,255,0.92)";rr(ctx,x+20,cy,kw,gh,8);ctx.fill();ctx.setLineDash([10,8]);ctx.strokeStyle=DB.red;ctx.lineWidth=3;rr(ctx,x+20,cy,kw,gh,8);ctx.stroke();ctx.restore();});
+    withA(ctx,gIn,()=>kpiCard(ctx,x+20,cy,kw,gh,{value:108,ghost:1,delta:"incl. waitlist",deltaCol:DB.red,foot:"130 of 120 places",trend:[71,74,76,79,81,83,85,86,88,90,91,92,94,108]}));}
+  const bx=x+40+kw,bwid=w-60-kw;dbCard(ctx,bx,cy,bwid,gh);T(ctx,"Places filled by unit",bx+20,cy+m*1.3,{w:700,size:19,color:DB.text});phAsDeco(true,()=>T(ctx,"first-year units · semester 2",bx+20,cy+m*1.3+22,{w:500,size:14,color:DB.muted}));
+  const rows=[["Data Science 101",num],["Statistics 110",88],["Programming 100",76],["Data Ethics 120",64]],lx=bx+20,bw2=bwid-60-tw(ctx,"108%",m,700),r0=cy+m*1.3+40,rh=Math.min(m*2.1,(gh-(r0-cy)-16)/rows.length);
+  const row=(n,v,i,c,vc)=>{const yy=r0+i*rh;T(ctx,n,lx,yy+m*0.8,{w:i?500:700,size:15,color:DB.text});const b0=yy+m*0.8+8;ctx.fillStyle=DB.track;rr(ctx,lx,b0,bw2,12,4);ctx.fill();
+    ctx.fillStyle=c;rr(ctx,lx,b0,bw2*Math.min(1,v/100),12,4);ctx.fill();if(v>100){ctx.fillStyle=DB.red;rr(ctx,lx+bw2-3,b0-5,6,22,2);ctx.fill();}T(ctx,Math.round(v)+"%",lx+bw2+14,b0+12,{w:700,size:16,color:vc||DB.text});};
+  rows.forEach(([n,v],i)=>row(n,v,i,i?"#8bcae7":DB.blue));
+  if(gIn>0)withA(ctx,gIn,()=>{ctx.fillStyle=DB.card;ctx.fillRect(lx-4,r0-4,bwid-36,rh);row("Data Science 101",108,0,DB.red,DB.red);});
+  ctx.strokeStyle=DB.muted;ctx.setLineDash([4,4]);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(lx+bw2,r0+4);ctx.lineTo(lx+bw2,r0+rows.length*rh);ctx.stroke();ctx.setLineDash([]);
+  ctx.restore();};}
+// the lineage: each step's box fits its name, and the steps are spaced by their widths (phLinPts gives where they are)
+function phLinPts(ctx,x0,y,dx){if(typeof LIN==="undefined")return[];const m=phMin(ctx);if(!m)return LIN.map((_,i)=>[x0-i*dx,y]);const ws=LIN.map(([n,sub])=>Math.max(tw(ctx,n,Math.max(22,m),700,"mono"),tw(ctx,sub,Math.max(17,m),500))+44),gap=Math.max(24,dx-ws.reduce((a,b)=>a+b,0)/LIN.length);
+  const P=[[x0,y]];for(let i=1;i<LIN.length;i++)P.push([P[i-1][0]-ws[i-1]/2-gap-ws[i]/2,y]);return P;}
+if(typeof lineage==="function"&&typeof LIN!=="undefined"){const LN0=lineage;lineage=function(ctx,x0,y,dx,o){const m=phMin(ctx);if(!m)return LN0.apply(this,arguments);o=o||{};const pts=phLinPts(ctx,x0,y,dx);
+  ctx.strokeStyle="rgba(170,200,245,0.35)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);pts.forEach(p=>ctx.lineTo(p[0],p[1]));ctx.stroke();
+  if(o.k>0){const k=Math.min(o.k,pts.length-1),i=Math.floor(k),f=k-i,end=i<pts.length-1?[lerp(pts[i][0],pts[i+1][0],f),y]:pts[i];
+    beam(ctx,[{x:pts[0][0],y},{x:end[0],y}],BAD,[[22,0.08],[9,0.22],[3,0.85],[1.5,1]]);glow(ctx,end[0],y,36,BAD,0.7);}
+  pts.forEach((p,i)=>{const [n,sub]=LIN[i],bad=i===3&&o.bad,on=o.k>=i-0.05,c=bad?BAD:i===4?LAYER.bronze:i===0?GOLDC:[170,205,255],w=Math.max(tw(ctx,n,Math.max(22,m),700,"mono"),tw(ctx,sub,Math.max(17,m),500))+44;
+    glass(ctx,p[0]-w/2,y-52,w,104,18,c,{glow:on?22:8,ea:on?0.95:0.45,fill:"rgba(8,14,28,0.92)"});T(ctx,n,p[0],y-8,{w:700,size:22,f:"mono",align:"center"});T(ctx,sub,p[0],y+30,{w:500,size:17,align:"center",color:rgba(SOFT,0.95)});
+    if(i===3){const gc=bad?BAD:GOOD;ctx.strokeStyle=rgba(gc,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(p[0],y-79);ctx.lineTo(p[0],y-52);ctx.stroke();gate(ctx,p[0],y-114,70,gc,"tests");
+      T(ctx,bad?"test failed":"tests pass",p[0]+42,y-108,{w:700,size:18,color:rgba(gc,1)});}});return pts;};}
+// the data contract: the statuses in the sans, so the new one fits on the same line
+if(typeof contract==="function"&&typeof stampV==="function"){const CT0=contract;contract=function(ctx,x,y,w,h,o){const m=phMin(ctx);if(!m)return CT0.apply(this,arguments);o=o||{};
+  const ver=o.ver||"1.0",dA=o.deferred||0,S=Math.max(22,m);glass(ctx,x,y,w,h,24,[236,243,255],{glow:24+10*(o.glow||0),ea:0.9,fill:"rgba(10,16,32,0.95)"});
+  T(ctx,"Data contract · enrolments",x+36,y+60,{w:800,size:34});stampV(ctx,x+w-40,y+50,"v"+ver,o.verFlash||0);
+  const key=(k,yy)=>T(ctx,k,x+36,yy,{w:700,size:21,color:rgba(SOFT,0.95)}),vx=x+36+tw(ctx,"Freshness",Math.max(21,m),700)+26,base="enrolled · withdrawn · waitlisted";
+  const rows=[()=>{key("Fields",y+136);T(ctx,"student, offering, status, date",vx,y+136,{w:600,size:23});},
+    ()=>{key("Statuses",y+192);T(ctx,base,vx,y+192,{w:700,size:S});if(dA>0)withA(ctx,dA,()=>T(ctx," · deferred",vx+tw(ctx,base,S,700),y+192,{w:700,size:S,color:rgba(mixc(INK,GOLDC,o.defHi||0),1)}));},
+    ()=>{key("Meaning",y+248);T(ctx,"enrolled = holds a place on census date",vx,y+248,{w:600,size:22});T(ctx,"waitlisted = no place yet · withdrawn = left",vx,y+282,{w:600,size:22});
+      if(dA>0)withA(ctx,dA,()=>T(ctx,"deferred = starts in a later term",vx,y+316,{w:600,size:22,color:rgba(mixc(INK,GOLDC,o.defHi||0),1)}));},
+    ()=>{key("Freshness",y+364);T(ctx,"by 06:00 every day",vx,y+364,{w:600,size:23});}];
+  rows.forEach((draw,i)=>withA(ctx,o.rows==null?1:clamp(o.rows*rows.length-i,0,1),draw));
+  ctx.strokeStyle="rgba(170,200,245,0.18)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+26,y+398);ctx.lineTo(x+w-26,y+398);ctx.stroke();
+  const cx1=x+w*0.44,cx2=x+w*0.7;key("Owners",y+432);T(ctx,"business",cx1,y+432,{w:700,size:18,color:rgba(BIZ,0.95)});T(ctx,"technical",cx2,y+432,{w:700,size:18,color:rgba(TECH,0.95)});
+  T(ctx,"produce",vx,y+474,{w:600,size:19,color:rgba(SOFT,0.95)});T(ctx,"use",vx,y+516,{w:600,size:19,color:rgba(SOFT,0.95)});
+  [["mei",cx1,y+474],["ben",cx2,y+474],["ana",cx1,y+516],["sam",cx2,y+516]].forEach(([id,cx,cy],i)=>{const P=PEOPLE[id],a=o.sign?clamp(o.sign*4-i,0,1):0,n=o.notice?o.notice:0;
+    withA(ctx,0.35+0.65*Math.max(a,n),()=>{led(ctx,cx,cy-15,12,12,P.edge);T(ctx,P.name.split(" ")[0],cx+22,cy,{w:700,size:22,color:rgba(P.edge,0.95)});});});};}
+// a video-call tile's name, and the clock chip's note, in labels as wide as their words
+if(typeof callTile==="function"){const CL0=callTile;callTile=function(ctx,id,x,y,w,h,o){const m=phMin(ctx);if(!m)return CL0.apply(this,arguments);o=o||{};CL0(ctx,id,x,y,w,h,Object.assign({},o,{label:0}));
+  const P=PEOPLE[id],n=P.name.replace("Prof. ",""),S=Math.max(18,m);withA(ctx,o.label==null?1:o.label,()=>{glass(ctx,x+12,y+h-S-32,tw(ctx,n,S,700)+30,S+20,12,P.edge,{glow:6,ea:0.5,fill:"rgba(6,10,20,0.85)"});T(ctx,n,x+27,y+h-22-S*0.16,{w:700,size:S});});};}
+if(typeof clockChip==="function"){const CC0=clockChip;clockChip=function(ctx,S,s,sub,a){setScreen(ctx,S);const m=phMin(ctx);if(!m||!sub)return CC0.apply(this,arguments);withA(ctx,a==null?1:a,()=>{const ss=Math.max(20,m),w=28+tw(ctx,s,32,800,"mono")+18+tw(ctx,sub,ss,600)+28;
+  glass(ctx,64,52,w,64,18,[170,205,255],{glow:10,ea:0.5,fill:"rgba(8,14,28,0.85)"});T(ctx,s,92,96,{w:800,size:32,f:"mono"});T(ctx,sub,92+tw(ctx,s,32,800,"mono")+18,95,{w:600,size:ss,color:rgba(SOFT,0.95)});});};}
+// the platform in one row: its note about the last good data stays inside the frame
+if(typeof platformRow==="function"){const PR0=platformRow;platformRow=function(ctx,t,o){const m=phMin(ctx);if(!m||!(o&&o.banner>0))return PR0.apply(this,arguments);PR0(ctx,t,Object.assign({},o,{banner:0}));
+  const y=o.y||470,s="last good data · yesterday 23:02",w=tw(ctx,s,Math.max(16,m),700)+26;withA(ctx,o.banner,()=>tag(ctx,Math.min(1725,1900-w/2),y-150,s,AMBER,{align:"center",size:16}));};}
+
+/* ---------- The Inner Life of Data's plaque (style2.js), at sizes that read ---------- */
+// each row's label and value on lines far enough apart for the larger words, and the plaque as tall as they need
+if(typeof plaque==="function"){const PQ0=plaque;plaque=function(ctx,x,y,w,rows,c){const m=phMin(ctx);if(!m)return PQ0.apply(this,arguments);const rh=Math.max(52,m*2.3),h=20+rows.length*rh;
+  glass(ctx,x,y,w,h,14,c,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.9)"});
+  rows.forEach((r,i)=>{const yy=y+16+i*rh;let tx=x+18;if(r[2]){const lw=logo(ctx,r[2],tx,yy+8,28);tx+=Math.max(lw,26)+10;}T(ctx,r[0],tx,yy+m*0.85,{size:15,w:700,color:rgba(SOFT,0.95)});T(ctx,r[1],tx,yy+m*1.95,{size:21,w:700});});return h;};}
+
+/* ---------- A Sharper Sketch's calendar card (sketch3.js), at sizes that read ---------- */
+// the coloured band grows to hold its title, and the card grows to hold the date and its label
+if(typeof calCard==="function"){const CA0=calCard;calCard=function(ctx,x,y,title,date,col,a,hi){const m=phMin(ctx);if(!m)return CA0.apply(this,arguments);withA(ctx,a,()=>{const bh=m+16,h=bh+m*2.9+10;
+  glass(ctx,x,y,300,h,14,col,{glow:12+14*(hi||0),ea:0.7,fill:"rgba(7,12,24,0.94)"});ctx.fillStyle=rgba(col,0.9);rr(ctx,x,y,300,bh,14);ctx.fill();ctx.fillStyle="rgba(7,12,24,0.94)";ctx.fillRect(x,y+bh-8,300,10);
+  T(ctx,title,x+150,y+bh/2+m*0.3,{w:800,size:16,align:"center",color:"#0a1020"});T(ctx,date,x+150,y+bh+m*1.35,{w:800,size:28,align:"center",color:rgba(col,1)});T(ctx,"census date",x+150,y+bh+m*2.5,{w:600,size:14,align:"center",color:rgba(SOFT,1)});});};}
+
+/* ---------- In the weeds' code files (weeds.js), at sizes that read ---------- */
+// a line too long for the card wraps, as an editor wraps it: at a space or a comma where it can, the rest indented under it, and a
+// highlighted line stays lit on all its rows. The file's path gives way from the left ("…/name.yml") so its label still fits beside
+// it. The card grows to hold its rows; phCodeRows says where each line starts, for scenes that point at a line
+function phCodeRows(ctx,w,lines,sz){const cw=tw(ctx,"0000000000",sz,500,"mono")/10,cols=Math.max(16,Math.floor((w-44)/cw)),R=[];
+  lines.forEach((l,i)=>{const ind=(l.match(/^\s*/)[0]).slice(0,Math.floor(cols/3))+"  ";let s=l,off=0,first=true;
+    while(true){const lim=first?cols:cols-ind.length;if(s.length<=lim){R.push({i,s:first?s:ind+s,off,pre:first?0:ind.length});break;}
+      let k=lim;for(let j=lim;j>lim*0.5;j--){if(" ,(".indexOf(s[j-1])>=0){k=j;break;}}R.push({i,s:first?s.slice(0,k):ind+s.slice(0,k),off,pre:first?0:ind.length});off+=k;s=s.slice(k);first=false;}});
+  return R;}
+if(typeof codeFile==="function"){const CF0=codeFile;codeFile=function(ctx,x,y,w,name,lines,o){const m=phMin(ctx);if(!m)return CF0.apply(this,arguments);o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return 0;
+  const sz=Math.max(o.size||19,m),LH=Math.max(o.lh||32,sz*1.22),R=phCodeRows(ctx,w,lines,sz),h=Math.max(o.h||0,70+R.length*LH),col=o.edge||[170,205,255];
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,col,{glow:12+10*(o.hi||0),ea:0.65,fill:"rgba(6,10,20,0.95)"});
+    const ns=Math.max(16,m),lw=o.label?tw(ctx,o.label,Math.max(15,m),700)+24:0;let nm=name;while(nm.length>8&&36+tw(ctx,nm,ns,500,"mono")>w-18-lw){const k=nm.indexOf("/",nm[0]==="…"?2:1);nm=k>0?"…"+nm.slice(k):"…"+nm.slice(Math.max(2,nm.length-Math.floor(nm.length*0.8)));}
+    ctx.fillStyle=rgba(col,0.9);rr(ctx,x+16,y+16,10,10,3);ctx.fill();T(ctx,nm,x+36,y+27,{f:"mono",w:500,size:16,color:rgba(col,1)});if(o.label)T(ctx,o.label,x+w-18,y+27,{w:700,size:15,align:"right",color:rgba(o.labelCol||SOFT,1)});
+    ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+14,y+42,w-28,1.2);
+    const n=o.p==null?lines.length:lines.length*o.p;R.forEach((r,k)=>{const i=r.i;if(i>=n)return;const yy=y+74+k*LH,l=lines[i],q=clamp(n-i,0,1),cm=/^\s*(--|#)/.test(l),on=o.lit?o.lit[i]||0:0;
+      if(on>0)withA(ctx,on,()=>{ctx.fillStyle=rgba(o.litCol||TRUST,0.16);rr(ctx,x+12,yy-LH*0.7,w-24,LH*0.95,6);ctx.fill();});
+      const vis=Math.round(q*l.length)-r.off;if(vis<=0)return;const body=r.s.slice(r.pre),shown=r.s.slice(0,r.pre)+body.slice(0,Math.min(body.length,vis));
+      T(ctx,shown,x+22,yy,{f:"mono",w:500,size:sz,color:cm?rgba(SOFT,0.8):rgba(mix([200,225,255],o.litCol||TRUST,on*0.6),0.95)});});});return h;};}
+
+/* ---------- In the weeds' own code cards (each film's plan.js), at sizes that read ---------- */
+// phCode(card, how) wraps a film's code card: on a phone its type is at least the smallest size that reads, its lines are far enough
+// apart, and a line too long for it wraps as an editor wraps it. how.wrap says how: "chars" passes the wrap to the card (o.wrap, in
+// characters), "bool" switches the card's own wrap on, and anything else makes the rows here, so that what a line carries (lit,
+// its colour, a strike, a swap) follows it to its rows. how.head(o) is the card's height above its first line, how.label(o) its
+// label, so a long path gives way from the left ("…/name.sql") and the label still fits. Off a phone, the card is as it was
+function phOn(){return PH_W&&!PH_OFF?PH_MIN:0;}
+function phFitPath(ctx,name,room,sz){let nm=name;while(nm.length>8&&tw(ctx,nm,sz,500,"mono")>room){const k=nm.indexOf("/",nm[0]==="…"?2:1);nm=k>0?"…"+nm.slice(k):"…"+nm.slice(Math.max(2,nm.length-Math.floor(nm.length*0.8)));}return nm;}
+function phCode(f,how){return function(ctx,x,y,w,name,lines,o){const m=phMin(ctx);if(!m)return f.apply(this,arguments);o=Object.assign({},o||{});
+  const base=o.size||how.size||19,sz=Math.max(base,m),cw=tw(ctx,"0000000000",sz,500,"mono")/10,lh=Math.max(o.lh||how.lh(base),Math.round(sz*1.32)),cols=Math.max(16,Math.floor(((o.cols?w/2:w)-44)/cw));
+  o.size=sz;o.lh=lh;const lab=how.label?how.label(o):o.label,ls=Math.max(18,m);if(lab)name=phFitPath(ctx,name,w-76-tw(ctx,lab,ls,700)-28,ls);else name=phFitPath(ctx,name,w-60,ls);
+  const rows=ls_=>phCodeRows(ctx,o.cols?w/2:w,ls_,sz),R=o.cols?o.cols.map(rows).reduce((p,q)=>p.length>q.length?p:q,[]):rows(lines),need=how.head(o,ctx,w,name)+R.length*lh+8;
+  if(o.h)o.h=Math.max(o.h,need);
+  if(how.wrap==="chars"){if(!o.wrap||o.wrap>cols)o.wrap=cols;return f.call(this,ctx,x,y,w,name,lines,o);}
+  if(how.wrap==="bool"){o.wrap=true;return f.call(this,ctx,x,y,w,name,lines,o);}
+  ["lit","lineCol","litCols","dim","glow","strike","swap","clip"].forEach(k=>{const v=o[k];if(!v||typeof v!=="object")return;const n={};R.forEach((r,j)=>{if(v[r.i]==null)return;if((k==="strike"||k==="swap"||k==="clip")&&r.off>0)return;n[j]=v[r.i];});o[k]=n;});
+  if(o.p!=null)o.p=clamp(o.p,0,1);return f.call(this,ctx,x,y,w,name,R.map(r=>r.s),o);};}
+
+/* ---------- In the weeds' credential model (weeds.js), at sizes that read ---------- */
+// each box as wide (and, with its key, as tall) as its words; a relationship's name between the boxes if it fits the gap, else just
+// above the line, over the gap; and drawn as small print when the model is a small picture of itself (the words would cover it)
+if(typeof bpModel==="function"&&typeof bpBox==="function"){const BM0=bpModel;bpModel=function(ctx,cx,cy,s,o){const m=phMin(ctx);if(!m)return BM0.apply(this,arguments);o=o||{};const a=o.a==null?1:o.a;
+  const P={learner:[cx-390*s,cy-60*s],cred:[cx,cy-60*s],award:[cx+390*s,cy-60*s]};if(a<=0.01)return P;const b=o.b||0,p=o.p==null?1:o.p,hi=o.hi||{},ns=Math.max(26*s,m),ks=Math.max(15,m);
+  const W={},H=Math.max(84*s,o.keys?ns+ks+30:ns+26);["learner","cred","award"].forEach(k=>{W[k]=Math.max(230*s,tw(ctx,BPE[k][0],ns,800)+28,o.keys&&o.keys[k]?tw(ctx,o.keys[k],ks,500,"mono")+24:0);});
+  // a small picture of the model, too small for its names at the size that reads: drawn as it was, as a picture
+  if(P.cred[0]-W.cred/2-(P.learner[0]+W.learner/2)<16)return phAsDeco(true,()=>BM0(ctx,cx,cy,s,o));const small=false;
+  withA(ctx,a,()=>{const line=(k0,k1,lab,q)=>{if(q<=0)return;const[x0,y0]=P[k0],[x1,y1]=P[k1],xa=x0+W[k0]/2,xb=x1-W[k1]/2,col=mix(SK,BPL,b);ctx.save();ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=2.4*s;ctx.beginPath();ctx.moveTo(xa,y0);ctx.lineTo(lerp(xa,xb,q),y1);ctx.stroke();
+      if(q>=0.98){ctx.beginPath();ctx.moveTo(xb-16*s,y1-11*s);ctx.lineTo(xb,y1);ctx.lineTo(xb-16*s,y1+11*s);ctx.moveTo(xb-16*s,y1-13*s);ctx.lineTo(xb-16*s,y1+13*s);ctx.stroke();}ctx.restore();
+      const fits=tw(ctx,lab,Math.max(17*s,m),600)<=xb-xa-12;
+      withA(ctx,fin(q,0.6,0.4),()=>phAsDeco(small,()=>T(ctx,lab,(xa+xb)/2,fits||small?y0-14*s:y0-H/2-12,{w:600,size:17*s,align:"center",color:rgba(mix(SOFT,BPL,b),0.95)})));};
+    line("learner","cred","holds",clamp(p*3-1.6,0,1));line("cred","award","counts towards",clamp(p*3-2,0,1));
+    ["learner","cred","award"].forEach((k,i)=>{const q=clamp(p*3-i*0.5,0,1);bpBox(ctx,P[k][0]-W[k]/2,P[k][1]-H/2,W[k],H,BPE[k][0],BPE[k][1],b,{a:q,hi:hi[k]||0,size:26*s,sub:o.keys?o.keys[k]:null});});});
+  return P;};}
+// a box of the model: its name, and its key under it, placed for the sizes they're drawn at
+if(typeof bpBox==="function"){const BB0=bpBox;bpBox=function(ctx,x,y,w,h,name,col,b,o){const m=phMin(ctx);if(!m||!(o&&o.sub))return BB0.apply(this,arguments);const ns=Math.max(o.size||26,m),ks=Math.max(15,m);
+  BB0(ctx,x,y,w,h,"",col,b,Object.assign({},o,{sub:null}));const a=o.a==null?1:o.a;if(a<=0.01)return;const c=y+h/2-(ns+ks*1.1)/2;
+  withA(ctx,a,()=>{T(ctx,name,x+w/2,c+ns*0.8,{w:800,size:ns,align:"center",color:rgba(mix(INK,BPL,b),1)});T(ctx,o.sub,x+w/2,c+ns*0.8+ks*1.15,{f:"mono",w:500,size:15,align:"center",color:rgba(mix(SOFT,BPL,b),0.85)});});};}
+// the blueprint's title block, as wide and tall as its two lines at the size they read
+if(typeof bpPaper==="function"){const BP0=bpPaper;bpPaper=function(ctx,x,y,w,h,b,o){const m=phMin(ctx);if(!m||!(o&&o.title))return BP0.apply(this,arguments);if(b<=0.01)return;
+  BP0(ctx,x,y,w,h,b,Object.assign({},o,{title:null}));const ts=Math.max(16,m),ss=Math.max(14,m),tw_=Math.min(w-60,Math.max(360,tw(ctx,o.title,ts,500,"mono")+24,tw(ctx,o.sub||"",ss,500,"mono")+24)),th=ts+ss+30;
+  withA(ctx,b,()=>{ctx.strokeStyle=rgba(BPL,0.85);ctx.lineWidth=2.2;ctx.strokeRect(x+w-14-tw_,y+h-14-th,tw_,th);ctx.beginPath();ctx.moveTo(x+w-14-tw_,y+h-14-th/2);ctx.lineTo(x+w-14,y+h-14-th/2);ctx.stroke();
+    T(ctx,o.title,x+w-tw_-2,y+h-14-th/2-ts*0.3,{f:"mono",w:500,size:16,color:rgba(BPL,0.95)});T(ctx,o.sub||"",x+w-tw_-2,y+h-14-ss*0.3-4,{f:"mono",w:500,size:14,color:rgba(BPL,0.7)});});};}
+// the project's lineage graph: its column names read when the columns are wide enough for them, and are small print when they aren't
+if(typeof lineageGraph==="function"&&typeof LAYER4!=="undefined"){const LG0=lineageGraph;lineageGraph=function(ctx,x,y,w,h,t,o){const m=phMin(ctx);if(!m)return LG0.apply(this,arguments);
+  return phAsDeco(Math.max(...LAYER4.map(([nm])=>tw(ctx,nm,Math.max(22,m),800)))>w/4-10,()=>LG0(ctx,x,y,w,h,t,o));};}
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

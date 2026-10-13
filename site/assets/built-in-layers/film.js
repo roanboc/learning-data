@@ -1967,9 +1967,9 @@ function bl_kitchen(ctx,t,o){o=o||{};bl_room(ctx,t);
 // strike {i: [text, a]} (a word drawn beside line i and struck through), size, lh, edge, a. Returns its height.
 function bl_code(ctx,x,y,w,name,lines,o){o=o||{};const a=o.a==null?1:o.a,lh=o.lh||29,sz=o.size||18,col=o.edge||[170,205,255],fold=ease(o.fold||0),full=84+lines.length*lh+16,h=lerp(full,78,fold);if(a<=0.01)return h;
   withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,col,{glow:12+10*(o.hi||0),ea:0.7,fill:"rgba(6,10,20,0.96)"});
-    ctx.fillStyle=rgba(col,0.9);rr(ctx,x+18,y+18,11,11,3);ctx.fill();T(ctx,bl_fit(ctx,name,18,w-60,500,"mono"),x+38,y+30,{f:"mono",w:500,size:18,color:rgba(col,1)});
+    ctx.fillStyle=rgba(col,0.9);rr(ctx,x+18,y+18,11,11,3);ctx.fill();T(ctx,bl_fit(ctx,name,phSz(ctx,18),w-60,500,"mono"),x+38,y+30,{f:"mono",w:500,size:18,color:rgba(col,1)});
     const lab=o.label===undefined?BL_RUN:o.label;if(lab)T(ctx,lab,x+38,y+58,{w:600,size:18,color:rgba(o.labelCol||SOFT,1)});
-    if(o.sec)tag(ctx,x+w-18-tw(ctx,o.sec,18,700)-26,y+54,o.sec,col,{size:18});
+    if(o.sec)tag(ctx,x+w-18-tw(ctx,o.sec,phSz(ctx,18),700)-26,y+54,o.sec,col,{size:18});
     if(fold<1){ctx.save();ctx.beginPath();ctx.rect(x,y+72,w,h-72);ctx.clip();withA(ctx,1-fold,()=>{ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+14,y+72,w-28,1.2);
       const n=o.p==null?lines.length:lines.length*o.p;lines.forEach((l,i)=>{if(i>=n)return;const yy=y+84+lh*(i+0.78),q=clamp(n-i,0,1),cm=/^\s*(--|#|<!--|\{#)/.test(l),on=o.lit?o.lit[i]||0:0,dm=o.dim?o.dim[i]||0:0;
         if(on>0)withA(ctx,on,()=>{ctx.fillStyle=rgba(o.litCol||TRUST,0.17);rr(ctx,x+12,yy-lh*0.72,w-24,lh*0.98,6);ctx.fill();});
@@ -1978,6 +1978,8 @@ function bl_code(ctx,x,y,w,name,lines,o){o=o||{};const a=o.a==null?1:o.a,lh=o.lh
   return h;}
 // where line i of a card sits (for lines drawn to it)
 const bl_lineY=(y,i,lh)=>y+84+(lh||29)*(i+0.78)-6;
+// the same, for a card of width w on a phone, where its lines are drawn larger and the long ones wrap: where line i's first row sits
+function bl_rowY(ctx,y,w,lines,i,lh){const m=phMin(ctx);if(!m)return bl_lineY(y,i,lh);const sz=Math.max(18,m),L=Math.max(lh||29,Math.round(sz*1.32)),k=phCodeRows(ctx,w,lines,sz).findIndex(r=>r.i===i);return y+84+L*(Math.max(0,k)+0.78)-6;}
 
 /* ---------- the four layers, as four columns ---------- */
 // what each column holds: staging's seven views (source colour), intermediate's eight steps, the core's four, the marts' three
@@ -1987,7 +1989,7 @@ const BL_CHIPS=[[["learners",0],["awards",0],["results",0],["users",1],["badges"
   [["near award",3],["learners",3],["credentials",3]]];
 const BL_COUNT=["7 views","8 views","4 tables · 1 incremental","3 tables"];
 // a column's rectangle: full (o.g: x0, cw, gap, y0, h) or folded into the strip at the top (k = 1)
-function bl_colRect(i,k,g){g=g||{};const x0=g.x0==null?60:g.x0,cw=g.cw||210,gap=g.gap==null?14:g.gap,y0=g.y0||140,h=g.h||620,e=ease(k||0);
+function bl_colRect(i,k,g){g=g||{};const ph=phOn()>0,x0=g.x0==null?60:g.x0,cw=g.cw||(ph?225:210),gap=g.gap==null?(ph?8:14):g.gap,y0=g.y0||140,h=g.h||620,e=ease(k||0);
   return[lerp(x0+i*(cw+gap),60+i*452,e),lerp(y0,92,e),lerp(cw,436,e),lerp(h,72,e)];}
 function bl_chipRect(i,j,g){const[x,y,w,h]=bl_colRect(i,0,g),n=BL_CHIPS[i].length,sp=(h-104)/n,ch=Math.min(i===2?84:50,sp-8);return[x+12,y+62+j*sp+(sp-8-ch)/2,w-24,ch];}
 // o: k (fold into the strip), lit[i], chips[i] (how many have arrived, 0..n, fractional), hi[i][j], mat (0..1: views become glass, tables stone),
@@ -2004,10 +2006,15 @@ function bl_cols(ctx,t,o){o=o||{};const k=o.k||0,lit=o.lit||[1,1,1,1];
       const chA=1-fin(k,0,0.35);if(chA>0&&o.chips)withA(ctx,chA,()=>BL_CHIPS[i].forEach(([lab,src],j)=>{const q=clamp(o.chips[i]-j,0,1);if(q<=0)return;const[cx,cy,cw,chh]=bl_chipRect(i,j,o.g),hi=o.hi&&o.hi[i]?o.hi[i][j]||0:0;
         const ccol=i===0?SRC3[src][1]:c;
         arrive(ctx,cx+cw/2,cy+chh/2,q*1.6,0,()=>{if(hi>0)glow(ctx,cx+cw/2,cy+chh/2,cw*0.7,ccol,0.35*hi);
-          if(i===2){glass(ctx,cx,cy,cw,chh,12,TRUST,{glow:10+12*hi,ea:0.85,fill:"rgba(26,20,8,0.94)"});const ls=lab==="credit towards award"?["credit towards","an award"]:[lab];ls.forEach((s,m)=>T(ctx,s,cx+cw/2,cy+chh/2+8+(m-(ls.length-1)/2)*26,{w:800,size:20,align:"center",color:rgba(mix(INK,TRUST,0.3),1)}));}
+          if(i===2){glass(ctx,cx,cy,cw,chh,12,TRUST,{glow:10+12*hi,ea:0.85,fill:"rgba(26,20,8,0.94)"});const ls=lab==="credit towards award"?["credit towards","an award"]:[lab],pz=phSz(ctx,20),wt=pz>20?700:800,dk=ls.some(s=>tw(ctx,s,pz,wt)>cw-4);
+            phAsDeco(dk,()=>ls.forEach((s,m)=>T(ctx,s,cx+cw/2,cy+chh/2+8+(m-(ls.length-1)/2)*Math.max(26,pz*1.12),{w:wt,size:20,align:"center",color:rgba(mix(INK,TRUST,0.3),1)})));}
           else{glass(ctx,cx,cy,cw,chh,10,ccol,{glow:6+10*hi,ea:0.5+0.4*hi,fill:"rgba(8,14,28,0.95)"});ctx.fillStyle=rgba(ccol,0.95);rr(ctx,cx+10,cy+chh/2-11,6,22,3);ctx.fill();
             const say=o.say&&o.say[i]?o.say[i][j]:null;if(say&&say[1]>0){withA(ctx,1-say[1],()=>T(ctx,lab,cx+26,cy+chh/2+7,{w:700,size:18,color:rgba(INK,0.95)}));withA(ctx,say[1],()=>tag(ctx,cx+24,cy+chh/2,say[0],say[2]||ccol,{size:18}));}
+            else if(phMin(ctx)){const fs=phSz(ctx,18),L=tw(ctx,lab,fs,700)<=cw-30?lab:BL_SHORT[lab]||lab;phAsDeco(tw(ctx,L,fs,700)>cw-30,()=>T(ctx,L,cx+22,cy+chh/2+fs*0.36,{w:700,size:18,color:rgba(INK,0.95)}));}
             else{const fs=tw(ctx,lab,18,700)<=cw-34?18:16;T(ctx,bl_fit(ctx,lab,fs,cw-34,700),cx+26,cy+chh/2+7,{w:700,size:fs,color:rgba(INK,0.95)});}}},{d:1});}));});});}
+// a step's short name, for a chip on a phone: the same names the intermediate chapter's cards give them; where even that won't fit
+// (the narrow columns of the recaps), the chip's words are texture and the column's name and count say what it is
+const BL_SHORT={"keys matched":"match keys","credit towards":"credit rule"};
 // views as glass panes (light streaks, nothing stored), tables as blocks of stone (with the rows they hold)
 function bl_material(ctx,i,x,y,w,h,t,o){const c=LAYER4[i][1];ctx.save();rr(ctx,x+3,y+3,w-6,h-6,14);ctx.clip();
   if(i<2){const g=ctx.createLinearGradient(x,y,x+w,y+h);g.addColorStop(0,rgba(c,0.16));g.addColorStop(1,rgba(c,0.04));ctx.fillStyle=g;ctx.fillRect(x,y,w,h);
@@ -2028,7 +2035,7 @@ function bl_tests(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return
     ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+14,y+62,w-28,1.2);
     BL_TESTS.forEach((s,i)=>{const q=o.p==null?1:clamp(o.p*BL_TESTS.length-i,0,1);if(q<=0)return;const yy=y+96+i*lh,r=o.red?o.red[i]||0:0,gr=o.green?o.green[i]||0:0,col=mix(mix([120,130,150],BAD,r),GOOD,gr);
       withA(ctx,q,()=>{if(r*(1-gr)>0.05||gr>0.05)glow(ctx,x+36,yy,30,col,0.5*Math.max(r,gr));ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(x+36,yy,9,0,TAU);ctx.fill();
-        T(ctx,bl_fit(ctx,s,18,w-80,500,"mono"),x+58,yy+6,{f:"mono",w:500,size:18,color:rgba(mix([170,180,196],mix(INK,col,0.35),Math.max(r,gr)),1)});});});});}
+        T(ctx,bl_fit(ctx,s,phSz(ctx,18),w-80,500,"mono"),x+58,yy+6,{f:"mono",w:500,size:18,color:rgba(mix([170,180,196],mix(INK,col,0.35),Math.max(r,gr)),1)});});});});}
 
 /* ---------- people of the present, and the consumers ---------- */
 // a consumer's badge (film 1's consumers): a round seal with a small dashboard, and the consumer's name
@@ -2057,12 +2064,13 @@ function bl_wideRow(ctx,x,y,w,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)re
 /* ---------- the CTE outline of Planning's mart ---------- */
 const BL_OUT=[["import",["learners","awards","credit"]],["logical",["learners_at_census","awards_at_census","credit_at_census","learner_awards","joined","measured"]],["final",["final select"]]];
 // positions of each name; o.on[g] lights a group; o.trace {name: a}; o.cols {name: [column, a]}
-function bl_outlinePos(x,y){const P={};let yy=y;BL_OUT.forEach(([g,ns])=>{yy+=58;ns.forEach(n=>{P[n]=[x,yy];yy+=44;});yy+=8;});return P;}
+const BL_OUTC={measured:1,awards_at_census:1,credit_at_census:1};
+function bl_outlinePos(x,y){const ph=phOn()>0,P={};let yy=y;BL_OUT.forEach(([g,ns])=>{yy+=ph?54:58;ns.forEach(n=>{P[n]=[x,yy];yy+=(ph?40:44)+(ph&&BL_OUTC[n]?34:0);});yy+=8;});return P;}
 function bl_outline(ctx,x,y,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const P=bl_outlinePos(x,y),HN={import:"import CTEs",logical:"logical CTEs",final:"final select"};
-  withA(ctx,a,()=>{let yy=y;BL_OUT.forEach(([g,ns],gi)=>{const on=o.on?o.on[gi]||0:1;withA(ctx,0.3+0.7*on,()=>{T(ctx,HN[g],x-14,yy+22,{w:800,size:20,color:rgba(mix(SOFT,BL_MART,on),1)});});yy+=58;
+  const ph=phOn()>0;withA(ctx,a,()=>{BL_OUT.forEach(([g,ns],gi)=>{const on=o.on?o.on[gi]||0:1,yy=P[ns[0]][1]-(ph?54:58);withA(ctx,0.3+0.7*on,()=>{T(ctx,HN[g],x-14,yy+22,{w:800,size:20,color:rgba(mix(SOFT,BL_MART,on),1)});});
       ns.forEach((n,i)=>{const[px,py]=P[n],tr=o.trace?o.trace[n]||0:0;withA(ctx,0.3+0.7*on,()=>{if(tr>0)glow(ctx,px+90,py-6,120,TRUST,0.25*tr);ctx.fillStyle=rgba(mix(BL_MART,TRUST,tr),1);ctx.beginPath();ctx.arc(px+6,py-6,5,0,TAU);ctx.fill();
         T(ctx,n,px+22,py,{f:"mono",w:500,size:20,color:rgba(mix(INK,TRUST,tr*0.7),1)});
-        const cc=o.cols?o.cols[n]:null;if(cc&&cc[1]>0)withA(ctx,cc[1],()=>T(ctx,cc[0],px+270,py,{f:"mono",w:500,size:18,color:rgba(TRUST,1)}));});yy+=44;});yy+=8;});});
+        const cc=o.cols?o.cols[n]:null;if(cc&&cc[1]>0)withA(ctx,cc[1],()=>T(ctx,ph?"→ "+cc[0]:cc[0],ph?px+22:px+270,ph?py+34:py,{f:"mono",w:500,size:18,color:rgba(TRUST,1)}));});});});});
   return P;}
 
 /* ---------- a balance: twelve and twelve ---------- */
@@ -2254,6 +2262,10 @@ Object.assign(LV,{
     c.restore();}
 });
 
+/* ---------- on a phone ----------
+   The film's code cards are drawn at sizes that read, their long lines wrapped (../../../from-words-to-data/shared/src/phone.js) */
+bl_code=phCode(bl_code,{size:18,lh:()=>29,head:()=>100,label:()=>null});
+
 /* ===== Built in layers: scenes =====
    Eight chapters, as in ../script.md. The Savoy's kitchen in the 1890s: four stations, one job each, and a pass (the title
    over it); then the project's four layers, one chapter each: staging, intermediate, core, marts; one CTE, one step; how each
@@ -2268,6 +2280,7 @@ const BL_G7={x0:60,cw:180,gap:10,y0:200,h:440};
 const BL_C2={lit:[1,0.25,0.25,0.25],chips:[7,0,0,0]},BL_C3={lit:[1,1,0.25,0.25],chips:[7,8,0,0]},BL_C4={lit:[1,1,1,0.25],chips:[7,8,4,0]};
 
 /* ---------- 1. One station, one job ---------- */
+function bl_tagRow(ctx,items,x0,y,maxX){let x=x0,yy=y;return items.map(s=>{const w=tw(ctx,s,phSz(ctx,20),700)+26;if(x>x0&&x+w>maxX){x=x0;yy+=54;}const p=[x,yy];x+=w+12;return p;});}
 scene("brigade",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");setScreen(ctx,S);
   ctx.save();drift(ctx,t,sc,{z:0.035,y:520});
   // the camera starts close on the first stations and settles back as the brigade is named
@@ -2280,7 +2293,8 @@ scene("brigade",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   ctx.restore();
   // labels stay still, over the drifting room
   setScreen(ctx,S);yearTag(ctx,60,60,"1890s · the Savoy, London",CLAY,fin(t,0.5,0.7));
-  arrive(ctx,500,60,t,w("savoy","brigade"),()=>tag(ctx,440,60,"a brigade",PARCH,{size:22}),{dy:12});
+  const BX=Math.max(440,60+phSz(ctx,20)/20*(tw(ctx,"1890s · the Savoy, London",20,500,"mono")+40)+16);
+  arrive(ctx,BX+60,60,t,w("savoy","brigade"),()=>tag(ctx,BX,60,"a brigade",PARCH,{size:22}),{dy:12});
   BL_ST.forEach(([nm,x],k)=>{const lx=lerp(820+(x-820)*1.14,x,cam);arrive(ctx,lx,124,t,st[k]-0.15,()=>{tag(ctx,lx,124,nm,mix(PARCH,LAYER4[k][1],fin(t,w("bridge","four stations")+k*0.3,0.5)),{align:"center",size:22});},{dy:14});});
   arrive(ctx,BL_PASS,124,t,w("ahead","pass")-0.1,()=>tag(ctx,BL_PASS,124,"the pass",TRUST,{align:"center",size:22}),{dy:14});
   arrive(ctx,250,786,t,w("ahead","prepared"),()=>withA(ctx,1-fin(t,c("bridge"),0.6),()=>tag(ctx,250,786,"prepared ahead",PARCH,{align:"center",size:20})),{dy:12});
@@ -2298,12 +2312,13 @@ scene("staging",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   ctx.save();drift(ctx,t,sc,{z:0.03});
   const cD=c("draft"),cF=c("first"),cJ=c("job"),cN=c("nojoin"),outA=1-fin(t,cF-0.4,0.6);
   // the tests are written, and the loop is at step 6: build
+  const ph=phMin(ctx)>0,SY=ph?Math.max(600,140+16+bl_code(ctx,80,140,860,"models/staging/short_courses/stg_short_courses__learners.sql",BL_DRAFT,{a:0})):600;
   withA(ctx,outA,()=>{arrive(ctx,330,270,t,0.2,()=>withA(ctx,1-fin(t,cD+0.4,0.6),()=>{bl_stepLoop(ctx,330,280,210,140,t,{on:STEPS10.map((s,i)=>i===5?1:0.25)});
       tag(ctx,330,490,"Build · step 6 · in layers",WEED,{align:"center",size:22});}),{d:1});
     // the tests: grey (not run), red under the agent's first draft
     const tR=w("draft","watches them fail");arrive(ctx,1420,350,t,w("red","tests")-0.2,()=>bl_tests(ctx,1000,140,840,{p:clamp((t-w("red","tests"))/1.4,0,1),red:BL_TESTS.map((s,i)=>fin(t,tR+i*0.12,0.3))}),{dy:30});
     // the agent opens its skill, drafts, runs the tests, then writes the least code; Jun reviews
-    arrive(ctx,620,680,t,cD-0.1,()=>bl_code(ctx,80,600,1100,"skills/draft-a-model/SKILL.md",["The contract and the tests say what done looks like. Write them first, then the least SQL that","turns them green, in the right layer."],{edge:KT_AI,p:clamp((t-cD)/1.4,0,1),lit:{0:fin(t,w("draft","least code"),0.5),1:fin(t,w("draft","least code"),0.5)},litCol:KT_AI}),{dy:30});
+    arrive(ctx,620,SY+80,t,cD-0.1,()=>bl_code(ctx,80,SY,1100,"skills/draft-a-model/SKILL.md",["The contract and the tests say what done looks like. Write them first, then the least SQL that","turns them green, in the right layer."],{edge:KT_AI,p:clamp((t-cD)/1.4,0,1),lit:{0:fin(t,w("draft","least code"),0.5),1:fin(t,w("draft","least code"),0.5)},litCol:KT_AI}),{dy:30});
     const dA=w("draft","first draft");arrive(ctx,500,350,t,dA-0.2,()=>bl_code(ctx,80,140,860,"models/staging/short_courses/stg_short_courses__learners.sql",BL_DRAFT,{edge:SRC3[2][1],p:clamp((t-dA)/2.2,0,0.55)+0.45*clamp((t-w("draft","least code"))/1.8,0,1),hi:pulseAt(t,w("draft","Jun reviews"),1.4)}),{dy:30});
     kt_agent(ctx,1300,690,26,t,{a:fin(t,cD-0.2,0.5),busy:fin(t,dA,0.5),label:"the agent"});
     // Jun stands clear of the three-line caption (its box reaches up to about y 840): his name and role beside him, not under
@@ -2325,11 +2340,12 @@ scene("staging",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   const L=(s,o)=>fin(t,w("job",s,o),0.4);
   arrive(ctx,1425,430,t,cJ-0.1,()=>bl_code(ctx,990,140,870,"models/staging/short_courses/stg_short_courses__learners.sql",BL_STGCODE,{edge:SRC3[2][1],p:clamp((t-cJ+0.1)/1.6,0,1),
     lit:{2:Math.max(L("renames"),L("trims")),3:L("casts")*(1-L("trims")),8:Math.max(L("readable key"),fin(t,w("nojoin","customer"),0.4)),13:L("hash")},litCol:SRC3[2][1]}),{dy:30});
-  [["rename · cast",w("job","renames")],["trim · one case",w("job","trims")],["readable key · key set",w("job","readable key")],["hash",w("job","hash")]].forEach(([s,tt],i)=>arrive(ctx,1000,800,t,tt,()=>withA(ctx,1-fin(t,cN-0.3,0.4),()=>tag(ctx,1000+[0,190,400,680][i],790,s,SRC3[2][1],{size:20})),{dy:12}));
-  arrive(ctx,1000,800,t,w("nojoin","No joins"),()=>{tag(ctx,1000,790,"no joins",BAD,{size:20});withA(ctx,fin(t,w("nojoin","no rules"),0.4),()=>tag(ctx,1140,790,"no rules",BAD,{size:20}));withA(ctx,fin(t,w("nojoin","still called"),0.4),()=>tag(ctx,1280,790,"still a customer",SRC3[2][1],{size:20}));},{dy:12});
+  const TJ=["rename · cast","trim · one case","readable key · key set","hash"],TN=["no joins","no rules","still a customer"],PJ=ph?bl_tagRow(ctx,TJ,60,800,960):[0,190,400,680].map(d=>[1000+d,790]),PN=ph?bl_tagRow(ctx,TN,60,800,960):[[1000,790],[1140,790],[1280,790]];
+  TJ.forEach((s,i)=>{const tt=w("job",["renames","trims","readable key","hash"][i]);arrive(ctx,PJ[i][0],PJ[i][1]+10,t,tt,()=>withA(ctx,1-fin(t,cN-0.3,0.4),()=>tag(ctx,PJ[i][0],PJ[i][1],s,SRC3[2][1],{size:20})),{dy:12});});
+  arrive(ctx,PN[0][0],PN[0][1]+10,t,w("nojoin","No joins"),()=>{tag(ctx,PN[0][0],PN[0][1],"no joins",BAD,{size:20});withA(ctx,fin(t,w("nojoin","no rules"),0.4),()=>tag(ctx,PN[1][0],PN[1][1],"no rules",BAD,{size:20}));withA(ctx,fin(t,w("nojoin","still called"),0.4),()=>tag(ctx,PN[2][0],PN[2][1],"still a customer",SRC3[2][1],{size:20}));},{dy:12});
   ctx.restore();vign(ctx,S);});
 // the layers table of docs/conventions.md, trimmed and drawn as the table it is; o.on[i] lights a row
-function bl_layersTable(ctx,x,y,w,t,o){o=o||{};const R=[["Staging","One model per source table: rename, cast, add keys qualified by their key set and their hashes. No joins, no rules. …","private","view"],
+function bl_layersTable(ctx,x,y,w,t,o){if(phMin(ctx))return bl_layersTableP(ctx,x,y,w,t,o);o=o||{};const R=[["Staging","One model per source table: rename, cast, add keys qualified by their key set and their hashes. No joins, no rules. …","private","view"],
     ["Intermediate","Steps, not products: match keys, stitch timelines, apply business rules. …","private","view"],["Core","One model per entity and relationship at a declared grain. The enterprise contract, versioned: …","public","table (incremental where it pays)"],
     ["Marts","Built for one consumer. The consumer contract.","protected","table"]],cx=[x+22,x+150,x+575,x+705],cw=[120,410,120,150];
   const rows=R.map(r=>[1,3].map(k=>wrapT(ctx,r[k],0,0,cw[k],{size:18,measure:true})));let h=84+44;rows.forEach(r=>{h+=Math.max(r[0].length,r[1].length)*24+18;});
@@ -2340,6 +2356,19 @@ function bl_layersTable(ctx,x,y,w,t,o){o=o||{};const R=[["Staging","One model pe
   let yy=y+128;R.forEach((r,i)=>{const on=o.on?o.on[i]:1,c=LAYER4[i][1],nl=Math.max(rows[i][0].length,rows[i][1].length);withA(ctx,0.35+0.65*on,()=>{if(on>0.6)withA(ctx,on,()=>{ctx.fillStyle=rgba(c,0.12);rr(ctx,x+10,yy,w-20,nl*24+12,8);ctx.fill();});
       T(ctx,r[0],cx[0],yy+24,{w:800,size:18,color:rgba(c,1)});rows[i][0].forEach((l,m)=>T(ctx,l,cx[1],yy+24+m*24,{size:18}));T(ctx,r[2],cx[2],yy+24,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});rows[i][1].forEach((l,m)=>T(ctx,l,cx[3],yy+24+m*24,{f:"mono",w:500,size:18,color:rgba(SOFT,1)}));});
     yy+=nl*24+18;});return h;}
+
+const BL_LAYT=[["Staging","One model per source table: rename, cast, add keys qualified by their key set and their hashes. No joins, no rules. …","private · view"],
+  ["Intermediate","Steps, not products: match keys, stitch timelines, apply business rules. …","private · view"],["Core","One model per entity and relationship at a declared grain. The enterprise contract, versioned: …","public · table (incremental where it pays)"],
+  ["Marts","Built for one consumer. The consumer contract.","protected · table"]];
+function bl_layersTableP(ctx,x,y,w,t,o){o=o||{};const fs=phSz(ctx,18),lh=Math.round(fs*1.24),c0=x+22,c1=x+22+tw(ctx,"Intermediate",fs,800)+24,jw=x+w-22-c1;
+  const rows=BL_LAYT.map(r=>[phWrap(ctx,r[1],jw,fs,600),phWrap(ctx,r[2],jw,fs,500,"mono")]);let h=84+44;rows.forEach(r=>{h+=(r[0].length+r[1].length)*lh+16;});
+  glass(ctx,x,y,w,h,14,[170,205,255],{glow:12,ea:0.7,fill:"rgba(6,10,20,0.96)"});ctx.fillStyle=rgba([170,205,255],0.9);rr(ctx,x+18,y+18,11,11,3);ctx.fill();
+  T(ctx,"docs/conventions.md",x+38,y+30,{f:"mono",w:500,size:18,color:rgba([170,205,255],1)});T(ctx,BL_RUN,x+38,y+58,{w:600,size:18,color:rgba(SOFT,1)});
+  ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+14,y+72,w-28,1.2);
+  T(ctx,"Layer",c0,y+108,{w:800,size:18,color:rgba(SOFT,1)});T(ctx,"Job · access · stored as",c1,y+108,{w:800,size:18,color:rgba(SOFT,1)});
+  let yy=y+128;BL_LAYT.forEach((r,i)=>{const on=o.on?o.on[i]:1,c=LAYER4[i][1],[J,A]=rows[i],nl=J.length+A.length;withA(ctx,0.35+0.65*on,()=>{if(on>0.6)withA(ctx,on,()=>{ctx.fillStyle=rgba(c,0.12);rr(ctx,x+10,yy,w-20,nl*lh+10,8);ctx.fill();});
+      T(ctx,r[0],c0,yy+lh,{w:800,size:18,color:rgba(c,1)});J.forEach((l,m)=>T(ctx,l,c1,yy+lh+m*lh,{size:18}));A.forEach((l,m)=>T(ctx,l,c1,yy+lh+(J.length+m)*lh,{f:"mono",w:500,size:18,color:rgba(SOFT,1)}));});
+    yy+=nl*lh+16;});return h;}
 
 /* ---------- 3. Intermediate ---------- */
 const BL_FEED=[[0,3,5],[0,3,5],[0,3,5],[0],[0,3,5],[2,4,6],[2,4],[1,2]];
@@ -2359,13 +2388,15 @@ scene("intermediate",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,i
   // the conventions' line, then four steps picked out, then one model's recipe
   const rOut=1-fin(t,cR-0.3,0.5);
   arrive(ctx,1425,220,t,w("steps","step, not a product")-0.2,()=>withA(ctx,rOut,()=>bl_code(ctx,990,140,870,"docs/conventions.md",["Steps, not products: match keys, stitch timelines, apply","business rules. Translates the source's words into the model's."],{edge:BL_VIO,lit:{0:fin(t,w("steps","step, not a product"),0.5),1:fin(t,cW,0.5)},litCol:BL_VIO})),{dy:30});
-  [["int_learner_keys_matched","match keys","Match"],["int_learner_timeline","one timeline","Stitch"],["int_credentials_unioned","three systems, one list","Gather"],["int_credit_towards_award","the credit rule","Apply"]].forEach(([f,lab,s],i)=>{const y=350+i*92;
-    arrive(ctx,1200,y,t,w("list",s)-0.2,()=>withA(ctx,rOut,()=>{glass(ctx,990,y-34,870,76,14,BL_VIO,{glow:8+10*hi[1][pk[i][0]],ea:0.6,fill:"rgba(8,10,24,0.95)"});
-      T(ctx,f,1014,y-4,{f:"mono",w:500,size:18,color:rgba(BL_VIO,1)});T(ctx,lab,1014,y+26,{w:700,size:20});}),{dy:20});});
-  arrive(ctx,1200,756,t,cW,()=>withA(ctx,rOut,()=>tag(ctx,1000,740,"customer → learner",BL_VIO,{size:20})),{dy:12});
+  const ph=phMin(ctx)>0,Y0=ph?Math.max(350,140+16+38+bl_code(ctx,990,140,870,"docs/conventions.md",["Steps, not products: match keys, stitch timelines, apply","business rules. Translates the source's words into the model's."],{a:0})):350,CH=ph?84:76;
+  [["int_learner_keys_matched","match keys","Match"],["int_learner_timeline","one timeline","Stitch"],["int_credentials_unioned","three systems, one list","Gather"],["int_credit_towards_award","the credit rule","Apply"]].forEach(([f,lab,s],i)=>{const y=Y0+i*92;
+    arrive(ctx,1200,y,t,w("list",s)-0.2,()=>withA(ctx,rOut,()=>{glass(ctx,990,y-34-(ph?4:0),870,CH,14,BL_VIO,{glow:8+10*hi[1][pk[i][0]],ea:0.6,fill:"rgba(8,10,24,0.95)"});
+      T(ctx,f,1014,y-(ph?8:4),{f:"mono",w:500,size:18,color:rgba(BL_VIO,1)});T(ctx,lab,1014,y+(ph?30:26),{w:700,size:20});}),{dy:20});});
+  const CY=ph?Y0+3*92+80:740;arrive(ctx,1200,CY+16,t,cW,()=>withA(ctx,rOut,()=>tag(ctx,1000,CY,"customer → learner",BL_VIO,{size:20})),{dy:12});
   const rp=clamp((t-w("recipe","top to bottom"))/2.8,0,1);
   arrive(ctx,1425,380,t,cR-0.1,()=>bl_code(ctx,990,140,870,"CTE names from models/intermediate/student/int_learner_timeline.sql",BL_TL,{edge:BL_VIO,lit:Object.fromEntries(BL_TL.map((s,i)=>[i,i<2?0:clamp(rp*11-(i-2),0,1)])),litCol:BL_VIO,dim:{0:0.4,1:0.4}}),{dy:30});
-  arrive(ctx,1425,660,t,w("recipe","recipe"),()=>tag(ctx,1425,660,"the recipe: one step per name",BL_VIO,{align:"center",size:20}),{dy:12});
+  const RY=ph?140+34+bl_code(ctx,990,140,870,"CTE names from models/intermediate/student/int_learner_timeline.sql",BL_TL,{a:0}):660;
+  arrive(ctx,1425,RY,t,w("recipe","recipe"),()=>tag(ctx,1425,RY,"the recipe: one step per name",BL_VIO,{align:"center",size:20}),{dy:12});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 4. Core ---------- */
@@ -2378,7 +2409,7 @@ scene("core",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   bl_cols(ctx,t,{lit:[1,1,fin(t,0.2,0.6)*0.75+0.25,0.25],chips:[7,8,nodes,0],count:[1,1,fin(t,cC,0.5),0],bp:fin(t,w("names","blueprint")-0.2,0.8)*0.35,
     hi:[{1:fin(t,cA,0.4)*(1-fin(t,cN,0.6))},{},{1:fin(t,w("award","core directly"),0.4)*(1-fin(t,cN+0.5,0.6))}],say:[{},{3:["learner",1,BL_VIO]}]});
   // the award skips intermediate: a line from its staging file, over the steps, straight to the core
-  const ap=fin(t,cA+0.2,1.4);if(ap>0){const[sx,sy,sw,sh]=bl_chipRect(0,1),[nx,ny,,nh]=bl_chipRect(2,1),pts=[[sx+sw,sy+sh/2],[277,sy+sh/2],[277,118],[501,118],[501,ny+nh/2],[nx,ny+nh/2]];
+  const ap=fin(t,cA+0.2,1.4);if(ap>0){const[sx,sy,sw,sh]=bl_chipRect(0,1),[nx,ny,,nh]=bl_chipRect(2,1),G1=(bl_colRect(0)[0]+bl_colRect(0)[2]+bl_colRect(1)[0])/2,G2=(bl_colRect(1)[0]+bl_colRect(1)[2]+bl_colRect(2)[0])/2,pts=[[sx+sw,sy+sh/2],[G1,sy+sh/2],[G1,118],[G2,118],[G2,ny+nh/2],[nx,ny+nh/2]];
     withA(ctx,1-fin(t,cN+0.6,0.6),()=>{ctx.save();ctx.strokeStyle=rgba(TRUST,0.95);ctx.lineWidth=3;ctx.shadowColor=rgba(TRUST,0.6);ctx.shadowBlur=8;ctx.beginPath();let tot=0;const seg=[];for(let i=1;i<pts.length;i++){const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);seg.push(d);tot+=d;}
       let left=ap*tot;ctx.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length&&left>0;i++){const f=Math.min(1,left/seg[i-1]);ctx.lineTo(lerp(pts[i-1][0],pts[i][0],f),lerp(pts[i-1][1],pts[i][1],f));left-=seg[i-1];}ctx.stroke();ctx.restore();
       if(ap>=0.98){ctx.fillStyle=rgba(TRUST,1);ctx.beginPath();ctx.moveTo(nx,ny+nh/2);ctx.lineTo(nx-14,ny+nh/2-8);ctx.lineTo(nx-14,ny+nh/2+8);ctx.closePath();ctx.fill();}});}
@@ -2394,8 +2425,10 @@ function bl_bpModel(ctx,t,t0,hiT){const X=[1100,1425,1750],y=380,bw=180,bh=72,K=
   // the core's folder config, then the tests, carried from staging: green in a wave
   const pA=1-fin(t,cA-0.2,0.5);
   arrive(ctx,1425,290,t,cC-0.2,()=>withA(ctx,pA,()=>bl_code(ctx,990,140,870,"dbt_project.yml",BL_COREY,{edge:TRUST,p:clamp((t-cC)/1.2,0,1),lit:{4:fin(t,w("contract","public"),0.4),5:fin(t,w("contract","enforced"),0.4),6:fin(t,w("contract","enforced"),0.4)}})),{dy:30});
-  arrive(ctx,1425,680,t,cG-0.4,()=>withA(ctx,pA,()=>bl_tests(ctx,990,470,870,{red:BL_TESTS.map(()=>1),green:BL_TESTS.map((s,i)=>fin(t,gW+i*0.16,0.3))})),{dy:30});
-  [["declared grain",w("contract","grain")],["public",w("contract","public")],["contract enforced",w("contract","enforced")]].forEach(([s,tt],i)=>arrive(ctx,560,820,t,tt,()=>withA(ctx,1-fin(t,cA-0.2,0.5),()=>tag(ctx,[60,250,380][i],820,s,TRUST,{size:20})),{dy:12}));
+  const ph=phMin(ctx)>0,TY=ph?Math.max(470,140+16+bl_code(ctx,990,140,870,"dbt_project.yml",BL_COREY,{a:0})):470;
+  arrive(ctx,1425,TY+210,t,cG-0.4,()=>withA(ctx,pA,()=>bl_tests(ctx,990,TY,870,{red:BL_TESTS.map(()=>1),green:BL_TESTS.map((s,i)=>fin(t,gW+i*0.16,0.3))})),{dy:30});
+  const PC=ph?bl_tagRow(ctx,["declared grain","public","contract enforced"],60,820,980):[[60,820],[250,820],[380,820]];
+  [["declared grain",w("contract","grain")],["public",w("contract","public")],["contract enforced",w("contract","enforced")]].forEach(([s,tt],i)=>arrive(ctx,560,820,t,tt,()=>withA(ctx,1-fin(t,cA-0.2,0.5),()=>tag(ctx,PC[i][0],PC[i][1],s,TRUST,{size:20})),{dy:12}));
   arrive(ctx,1425,350,t,cA+0.6,()=>withA(ctx,1-fin(t,cN-0.2,0.5)*0.0,()=>bl_code(ctx,990,140,870,"models/core/course/core_award.sql",BL_AWARD,{edge:TRUST,p:clamp((t-cA-0.6)/1.4,0,1),lit:{4:fin(t,w("award","nothing to resolve"),0.4),2:fin(t,w("award","staging feeds"),0.4)}})),{dy:30});
   arrive(ctx,300,820,t,w("award","one source"),()=>withA(ctx,1-fin(t,cN,0.5),()=>tag(ctx,60,820,"the award: one source, nothing to resolve",TRUST,{size:20})),{dy:12});
   // Noor reviews the core, and approves it
@@ -2465,7 +2498,7 @@ scene("ctes",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
       let left=q*tot;ctx.beginPath();ctx.moveTo(xb,y0);for(let i=1;i<4&&left>0;i++){const f=Math.min(1,left/sg[i-1]);ctx.lineTo(lerp(pts[i-1][0],pts[i][0],f),lerp(pts[i-1][1],pts[i][1],f));left-=sg[i-1];}ctx.stroke();
       if(q>0.98){ctx.fillStyle=rgba(TRUST,0.9);ctx.beginPath();ctx.moveTo(xb,y1);ctx.lineTo(xb-10,y1-6);ctx.lineTo(xb-10,y1+6);ctx.closePath();ctx.fill();}};
     hop(my-6,jy-6,mx-22,T2);hop(jy-6,ay-6,mx-40,T3);hop(jy-6,cy-6,mx-40,T3);ctx.restore();}
-  arrive(ctx,1550,870,t,tr+1.2,()=>tag(ctx,1550,870,"every column, traced back",TRUST,{align:"center",size:20}),{dy:12});
+  const EY=phMin(ctx)?150:870;arrive(ctx,1550,EY,t,tr+1.2,()=>tag(ctx,1550,EY,"every column, traced back",TRUST,{align:"center",size:20}),{dy:12});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 7. Physical choices ---------- */
@@ -2491,14 +2524,16 @@ scene("physical",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   if(rows>0)withA(ctx,rows,()=>bl_credRows(ctx,t,{n:16+Math.round(4*mg),cl,rebuild:rb}));
   const sl=fin(t,w("incr","merges")-0.6,0.4);if(sl>0&&mg<1)withA(ctx,sl*(1-mg),()=>{const yy=lerp(150,gy+200,ease(mg));for(let i=0;i<4;i++){ctx.fillStyle=rgba(GOOD,0.9);rr(ctx,gx+22,yy+i*12,gw-44,8,4);ctx.fill();}});
   const tw3=fin(t,tw2,0.4)*(1-fin(t,cK,0.5));if(tw3>0)withA(ctx,tw3,()=>{ctx.save();ctx.setLineDash([6,6]);ctx.strokeStyle=rgba(GOOD,0.8);ctx.lineWidth=2;rr(ctx,gx+16,150,gw-32,36,6);ctx.stroke();ctx.restore();});
-  arrive(ctx,gx+gw+80,168,t,w("incr","merges nothing"),()=>withA(ctx,1-fin(t,cK,0.5),()=>tag(ctx,gx+gw+8,168,"0 rows to merge",GOOD,{size:18})),{dy:10});
+  const ph=phMin(ctx)>0,ZX=ph?Math.min(gx+gw+8,836-tw(ctx,"0 rows to merge",phSz(ctx,18),700)-26):gx+gw+8;
+  arrive(ctx,ZX+72,168,t,w("incr","merges nothing"),()=>withA(ctx,1-fin(t,cK,0.5),()=>tag(ctx,ZX,168,"0 rows to merge",GOOD,{size:18})),{dy:10});
   // the cards
   const yOut=fin(t,cI-0.2,0.5);
   arrive(ctx,1355,330,t,cV-0.2,()=>withA(ctx,1-yOut,()=>bl_code(ctx,850,140,1010,"dbt_project.yml",BL_MATY,{edge:[170,205,255],p:clamp((t-cV)/1.4,0,1),lit:{1:mv,4:mv,7:mt,10:mt}})),{dy:30});
   arrive(ctx,1355,380,t,cI,()=>bl_code(ctx,850,140,1010,"models/core/student/core_credential_v2.sql",BL_INC,{edge:TRUST,p:clamp((t-cI)/1.6,0,1),
     lit:{2:fin(t,w("incr","incremental"),0.4),3:fin(t,w("incr","credential's key"),0.4),4:fin(t,w("incr","merges"),0.4),10:fin(t,tw2,0.4),11:fin(t,tw2,0.4),6:fin(t,w("cluster","Databricks"),0.4)}}),{dy:30});
-  arrive(ctx,1700,650,t,w("cluster","Databricks"),()=>tag(ctx,1860-tw(ctx,"Databricks · dbt Cloud",18,700)-26,650,"Databricks · dbt Cloud",[150,160,180],{size:18}),{dy:10});
-  arrive(ctx,1100,700,t,w("cluster","clusters"),()=>tag(ctx,850,650,"clustered by learner",TRUST,{size:18}),{dy:10});
+  const KY=ph?140+30+bl_code(ctx,850,140,1010,"models/core/student/core_credential_v2.sql",BL_INC,{a:0}):650,KX=ph?870:850;
+  arrive(ctx,1700,KY,t,w("cluster","Databricks"),()=>tag(ctx,1860-tw(ctx,"Databricks · dbt Cloud",phSz(ctx,18),700)-26,KY,"Databricks · dbt Cloud",[150,160,180],{size:18}),{dy:10});
+  arrive(ctx,1100,KY+50,t,w("cluster","clusters"),()=>tag(ctx,KX,KY,"clustered by learner",TRUST,{size:18}),{dy:10});
   arrive(ctx,450,760,t,tf-0.3,()=>bl_code(ctx,60,700,790,"terminal, in project/",["dbt build --select core_credential --full-refresh --profiles-dir ."],{edge:GOOD,p:clamp((t-tf+0.2)/1.0,0,1)}),{dy:24});
   ctx.restore();vign(ctx,S);});
 
@@ -2508,30 +2543,37 @@ const BL_MAC=["{#- Near an award: more than none left, and no more than the near
 const BL_SEM=["  - name: learners_near_graduate_certificate","    label: Learners near a graduate certificate","    …","    type: simple","    type_params:","      measure: learners","    filter: |","      {{ Dimension('learner_award__is_near_award') }} and {{ Dimension('learner_award__award_type') }} = 'graduate certificate'"];
 const BL_REC=["| census_date | faculty_name                  | in_the_mart | in_the_census_report | difference |","|  2026-03-31 | Faculty of Arts and Education |           2 |                    2 |          0 |","|  2026-03-31 | Faculty of Business           |           3 |                    3 |          0 |","|  2026-03-31 | Faculty of Engineering and IT |           5 |                    5 |          0 |","|  2026-03-31 | Faculty of Health             |           2 |                    2 |          0 |"];
 // a pill in the flow of the rule: mono text in a glass capsule
-function bl_pill(ctx,x,y,s,col,a){if(a<=0.01)return 0;const w=tw(ctx,s,20,500,"mono")+40;withA(ctx,a,()=>{glass(ctx,x,y-26,w,52,26,col,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.96)"});T(ctx,s,x+20,y+7,{f:"mono",w:500,size:20,color:rgba(col,1)});});return w;}
+function bl_pill(ctx,x,y,s,col,a){const w=tw(ctx,s,phSz(ctx,20),500,"mono")+40;if(a<=0.01)return w;withA(ctx,a,()=>{glass(ctx,x,y-26,w,52,26,col,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.96)"});T(ctx,s,x+20,y+7,{f:"mono",w:500,size:20,color:rgba(col,1)});});return w;}
 scene("once",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025});
   const cC=c("count"),cP=c("pass"),cE=c("each"),cN=c("next"),tM=w("count","the metric");
   // the columns, carried from the last chapter, fold into the strip
   const k=fin(t,0,1.4);withA(ctx,1-fin(t,cP-0.4,0.6),()=>bl_cols(ctx,t,{k,g:BL_G7,lit:[1,1,1,1],count:[1,1,1,1],mat:1-k}));
   // the rule and the count: one macro file; the var it reads, set once
-  const aA=1-fin(t,cP-0.4,0.6);
+  // on a phone the var's card is wider (its line fits) and the macro's narrower; the flow takes two rows, and the semantic layer sits under them
+  const aA=1-fin(t,cP-0.4,0.6),ph=phMin(ctx)>0,MW=ph?1220:1320,VX=ph?1300:1420,VW=ph?560:440;
   withA(ctx,aA,()=>{
-    arrive(ctx,720,450,t,0.6,()=>bl_code(ctx,60,200,1320,"macros/planning/near_award.sql",BL_MAC,{edge:TRUST,fold:fin(t,tM-0.3,0.6),p:clamp((t-0.8)/2.0,0,1),
+    arrive(ctx,720,450,t,0.6,()=>bl_code(ctx,60,200,MW,"macros/planning/near_award.sql",BL_MAC,{edge:TRUST,fold:fin(t,tM-0.3,0.6),p:clamp((t-0.8)/2.0,0,1),
       lit:{0:fin(t,w("rule","near an award"),0.4),1:fin(t,w("rule","near an award"),0.4),2:fin(t,w("rule","more than nothing"),0.4),5:fin(t,w("count","one macro")-0.3,0.4),8:fin(t,w("count","one macro"),0.4),10:fin(t,w("count","one macro")+0.2,0.4)}}),{dy:30});
-    const vA=fin(t,w("rule","fifteen"),0.4);arrive(ctx,1640,280,t,w("rule","fifteen")-0.3,()=>bl_code(ctx,1420,200,440,"dbt_project.yml",["vars:","  near_award_credit_points: 15"],{edge:TRUST,lit:{1:vA},hi:pulseAt(t,w("rule","fifteen"),1.2)}),{dy:20});
-    const ln=fin(t,w("rule","fifteen")+0.3,0.6)*(1-fin(t,tM-0.4,0.4));if(ln>0)withA(ctx,ln,()=>{ctx.save();ctx.strokeStyle=rgba(TRUST,0.9);ctx.lineWidth=2.4;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(1420,bl_lineY(200,1));ctx.lineTo(lerp(1420,1340,ln),lerp(bl_lineY(200,1),bl_lineY(200,2),ln));ctx.stroke();ctx.restore();});
+    const vA=fin(t,w("rule","fifteen"),0.4);arrive(ctx,VX+220,280,t,w("rule","fifteen")-0.3,()=>bl_code(ctx,VX,200,VW,"dbt_project.yml",["vars:","  near_award_credit_points: 15"],{edge:TRUST,lit:{1:vA},hi:pulseAt(t,w("rule","fifteen"),1.2)}),{dy:20});
+    const ln=fin(t,w("rule","fifteen")+0.3,0.6)*(1-fin(t,tM-0.4,0.4));if(ln>0)withA(ctx,ln,()=>{ctx.save();ctx.strokeStyle=rgba(TRUST,0.9);ctx.lineWidth=2.4;ctx.setLineDash([6,6]);const ya=bl_rowY(ctx,200,VW,["vars:","  near_award_credit_points: 15"],1),yb=bl_rowY(ctx,200,MW,BL_MAC,2);ctx.beginPath();ctx.moveTo(VX,ya);ctx.lineTo(lerp(VX,ph?60+MW-20:1340,ln),lerp(ya,yb,ln));ctx.stroke();ctx.restore();});
     // the flow: the rule writes one column; the count and the metric both read it
     const f0=tM+0.3,q=[fin(t,f0,0.4),fin(t,f0+0.3,0.4),fin(t,f0+0.6,0.4),fin(t,f0+0.9,0.4),fin(t,w("count","same column")-0.3,0.4)];
-    const wA=bl_pill(ctx,60,400,"is_near_award()",TRUST,q[0]),wB=bl_pill(ctx,400,400,"column · is_near_award",BL_MART,q[1]),wC=bl_pill(ctx,790,400,"learners_near_graduate_certificate()",TRUST,q[2]),wD=bl_pill(ctx,1340,400,"reconcile_planning_with_census_report",GOOD,q[3]),wE=bl_pill(ctx,790,490,"metric · learners_near_graduate_certificate",KIND,q[4]);
+    if(ph){const Y1=410,Y2=500,wA=bl_pill(ctx,60,Y1,"is_near_award()",TRUST,q[0]),xB=60+wA+40,wB=bl_pill(ctx,xB,Y1,"column · is_near_award",BL_MART,q[1]),xC=xB+wB+40;bl_pill(ctx,xC,Y1,"learners_near_graduate_certificate()",TRUST,q[2]);
+      bl_pill(ctx,xC,Y2,"reconcile_planning_with_census_report",GOOD,q[3]);bl_pill(ctx,60,Y2,"metric · learners_near_graduate_certificate",KIND,q[4]);
+      if(q[1]>0)arrowTo(ctx,60+wA+4,Y1,xB-4,Y1,TRUST,q[1],{p:q[1],head:10});if(q[2]>0)arrowTo(ctx,xB+wB+4,Y1,xC-4,Y1,BL_MART,q[2],{p:q[2],head:10});
+      if(q[3]>0)arrowTo(ctx,xC+60,Y1+28,xC+60,Y2-28,TRUST,q[3],{p:q[3],head:10});if(q[4]>0)arrowTo(ctx,xB+60,Y1+28,xB+60,Y2-28,BL_MART,q[4],{p:q[4],head:10});}
+    else{const wA=bl_pill(ctx,60,400,"is_near_award()",TRUST,q[0]),wB=bl_pill(ctx,400,400,"column · is_near_award",BL_MART,q[1]),wC=bl_pill(ctx,790,400,"learners_near_graduate_certificate()",TRUST,q[2]),wD=bl_pill(ctx,1340,400,"reconcile_planning_with_census_report",GOOD,q[3]),wE=bl_pill(ctx,790,490,"metric · learners_near_graduate_certificate",KIND,q[4]);
     if(q[1]>0)arrowTo(ctx,60+wA+4,400,396,400,TRUST,q[1],{p:q[1],head:10});if(q[2]>0)arrowTo(ctx,400+wB+4,400,786,400,BL_MART,q[2],{p:q[2],head:10});if(q[3]>0)arrowTo(ctx,790+wC+4,400,1336,400,TRUST,q[3],{p:q[3],head:10});
-    if(q[4]>0)arrowTo(ctx,400+wB-30,426,786,490,BL_MART,q[4],{p:q[4],bend:-0.15,head:10});
-    arrive(ctx,960,700,t,w("count","semantic layer")-0.3,()=>bl_code(ctx,60,536,1800,"models/marts/planning/_planning__semantic.yml",BL_SEM,{edge:KIND,p:clamp((t-w("count","semantic layer")+0.2)/1.4,0,1),lit:{7:fin(t,w("count","same column"),0.4)},litCol:KIND}),{dy:30});});
+    if(q[4]>0)arrowTo(ctx,400+wB-30,426,786,490,BL_MART,q[4],{p:q[4],bend:-0.15,head:10});}
+    arrive(ctx,960,700,t,w("count","semantic layer")-0.3,()=>bl_code(ctx,60,ph?546:536,1800,"models/marts/planning/_planning__semantic.yml",BL_SEM,{edge:KIND,p:clamp((t-w("count","semantic layer")+0.2)/1.4,0,1),lit:{7:fin(t,w("count","same column"),0.4)},litCol:KIND}),{dy:30});});
   // the pass returns: the reconciliation, faculty by faculty, and the build's line, green
   const pA=fin(t,cP-0.2,0.6)*(1-fin(t,cE-0.8,0.5));
   withA(ctx,pA,()=>{const mg=ctx.createLinearGradient(0,640,0,720);mg.addColorStop(0,"#cfc6b6");mg.addColorStop(1,"#8e8678");ctx.fillStyle=mg;ctx.fillRect(100,650,1720,60);ctx.strokeStyle=rgba(BL_BRASS,0.95);ctx.lineWidth=6;ctx.beginPath();ctx.moveTo(100,650);ctx.lineTo(1820,650);ctx.stroke();
-    arrive(ctx,960,330,t,cP,()=>bl_code(ctx,160,200,1600,"dbt show --select reconcile_census_report --profiles-dir .",BL_REC,{edge:GOOD,p:clamp((t-cP)/1.0,0,1),litCol:GOOD,lit:{1:fin(t,w("pass","faculty by faculty"),0.3),2:fin(t,w("pass","faculty by faculty")+0.25,0.3),3:fin(t,w("pass","faculty by faculty")+0.5,0.3),4:fin(t,w("pass","faculty by faculty")+0.75,0.3)}}),{dy:24});
-    arrive(ctx,560,530,t,w("pass","Green")-0.2,()=>bl_code(ctx,160,470,800,"dbt build --profiles-dir .",["PASS reconcile_planning_with_census_report"],{edge:GOOD,lit:{0:1},litCol:GOOD}),{dy:20});
+    // on a phone the printed table is wider, so its rows don't wrap; the build's line sits under it
+    const SX=ph?80:160,SW=ph?1760:1600,BY=ph?200+16+bl_code(ctx,SX,200,SW,"dbt show --select reconcile_census_report --profiles-dir .",BL_REC,{a:0}):470;
+    arrive(ctx,960,330,t,cP,()=>bl_code(ctx,SX,200,SW,"dbt show --select reconcile_census_report --profiles-dir .",BL_REC,{edge:GOOD,p:clamp((t-cP)/1.0,0,1),litCol:GOOD,lit:{1:fin(t,w("pass","faculty by faculty"),0.3),2:fin(t,w("pass","faculty by faculty")+0.25,0.3),3:fin(t,w("pass","faculty by faculty")+0.5,0.3),4:fin(t,w("pass","faculty by faculty")+0.75,0.3)}}),{dy:24});
+    arrive(ctx,560,BY+60,t,w("pass","Green")-0.2,()=>bl_code(ctx,160,BY,800,"dbt build --profiles-dir .",["PASS reconcile_planning_with_census_report"],{edge:GOOD,lit:{0:1},litCol:GOOD}),{dy:20});
     const bt=fin(t,w("pass","twelve, and twelve"),0.8);bl_balance(ctx,1400,500,bt,(1-ease(fin(t,w("pass","and twelve"),0.9)))*0.18,{});
     arrive(ctx,1400,760,t,w("pass","Green"),()=>tag(ctx,1400,760,"12 · 12 · green",GOOD,{align:"center",size:22}),{dy:12});});
   // each layer, one job: the four columns beside the Savoy's four stations
@@ -2546,7 +2588,7 @@ scene("once",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   const nA=fin(t,cN-0.2,0.6);
   if(nA>0)withA(ctx,nA,()=>{const nx=[160,430,760,1030];
     arrive(ctx,960,170,t,cN,()=>tag(ctx,700,170,"one team · one project",WEED,{align:"center",size:22}),{dy:12});
-    ["learner","award","credential","credit towards award"].forEach((s,i)=>arrive(ctx,nx[i]+120,310,t,cN+0.2+i*0.1,()=>{glass(ctx,nx[i],270,240,80,14,TRUST,{glow:12,ea:0.85,fill:"rgba(26,20,8,0.94)"});T(ctx,s,nx[i]+120,318,{w:800,size:s.length>12?19:22,align:"center",color:rgba(mix(INK,TRUST,0.3),1)});},{dy:16}));
+    ["learner","award","credential","credit towards award"].forEach((s,i)=>arrive(ctx,nx[i]+120,310,t,cN+0.2+i*0.1,()=>{glass(ctx,nx[i],270,240,80,14,TRUST,{glow:12,ea:0.85,fill:"rgba(26,20,8,0.94)"});const L=phMin(ctx)&&tw(ctx,s,phSz(ctx,19),800)>220?["credit towards","award"]:[s];L.forEach((l,m)=>T(ctx,l,nx[i]+120,318+(m-(L.length-1)/2)*34,{w:800,size:s.length>12?19:22,align:"center",color:rgba(mix(INK,TRUST,0.3),1)}));},{dy:16}));
     const mA=fin(t,w("next","registrar")-0.2,0.5),tA=fin(t,w("next","learning team")-0.2,0.5),pA2=fin(t,w("next","Planning wants")-0.2,0.5);
     withA(ctx,mA,()=>{ctx.strokeStyle=rgba(BIZ,0.6);ctx.lineWidth=2;[[280,352],[550,352]].forEach(([x,y])=>{ctx.beginPath();ctx.moveTo(415,520);ctx.lineTo(x,y);ctx.stroke();});});
     arrive(ctx,415,780,t,w("next","registrar")-0.2,()=>{person(ctx,"mei",415,770,0.46,{pose:"stand",expr:"calm",t});T(ctx,"Mei",415,800,{w:800,size:24,align:"center"});T(ctx,"the registrar",415,828,{w:600,size:18,align:"center",color:rgba(SOFT,1)});},{dy:20,from:0.94});
@@ -2558,6 +2600,277 @@ scene("once",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
     withA(ctx,pA2,()=>{const bx=lerp(1360,1520,lf),by=lerp(560,400,lf);bl_badge(ctx,bx,by,"Planning",1);glass(ctx,bx-30,by+50,240,56,10,BL_MART,{glow:10,ea:0.8,fill:"rgba(8,14,28,0.95)"});ctx.fillStyle=rgba(BL_MART,0.95);rr(ctx,bx-20,by+67,6,22,3);ctx.fill();T(ctx,"near award",bx-4,by+85,{w:700,size:18});});});
   ctx.restore();weedsEnd(ctx,S,t,B,"Built in layers",WEED,"Each layer one job; each CTE one step; each rule written once.");
   vign(ctx,S);});
+
+/* ===== Made to read on a phone =====
+   A phone held sideways shows the 1920-pixel frame about 850 pixels wide, so text under about 28 px in the frame is too small to
+   read there (PLAYBOOK.md, "Make it read on a phone"). The films made before that rule draw with this layer: every piece of text
+   that isn't marked as decoration ({deco:1}) is drawn at least 28 px high in the frame, after the camera's zoom, and the components
+   that size themselves to their text (tags) grow with it. Each film's scenes then make room for the larger words, and move the
+   camera in on the part of a dense picture the narration is about (focus). The map before the data was drawn to the rule from the
+   start and doesn't load this layer; nor does The Inner Life of Data, yet.
+   It loads after the film's own files and before the engine, and only wraps: the components it shares with other films are unchanged. */
+const PH_MIN=28;let PH_W=0,PH_OFF=0;
+// how many frame pixels one unit of the current drawing is, after the camera's zoom; 0 on a canvas that isn't a frame (a cached picture)
+function phK(ctx){const c=ctx.canvas;if(!PH_W||c.width!==PH_W)return 0;const m=ctx.getTransform();return Math.sqrt(Math.abs(m.a*m.d-m.b*m.c))*W/c.width;}
+// the smallest text size, in the current drawing's units, that reads on a phone (0 where it doesn't apply)
+function phMin(ctx){if(PH_OFF)return 0;const k=phK(ctx);return k?PH_MIN/k:0;}
+// a component's options, with its text raised to the smallest size that reads, unless it's decoration
+function phSize(ctx,o,def){o=o||{};if(o.deco)return o;const m=phMin(ctx),s=o.size||def;return s<m?Object.assign({},o,{size:m}):o;}
+// the size a piece of text is really drawn at: what it asks for, or the phone's smallest, whichever is larger (to place what follows it)
+function phSz(ctx,s){return Math.max(s,phMin(ctx)||0);}
+// draw fn as decoration: its text is texture (a printed page, a far-off list), not something to read
+function phDeco(fn){return function(){PH_OFF++;try{return fn.apply(this,arguments);}finally{PH_OFF--;}};}
+// draw now, as decoration when on is true: a picture seen from afar is context, and its words are texture
+function phAsDeco(on,fn){if(!on)return fn();PH_OFF++;try{return fn();}finally{PH_OFF--;}}
+// the lines a string breaks into at a width, for the films that don't load words.js's wrapT
+function phWrap(ctx,s,maxW,size,wt,f){const L=[];String(s).split(" ").forEach(wd=>{const c=L.length?L[L.length-1]+" "+wd:wd;if(L.length&&tw(ctx,c,size,wt||600,f)>maxW)L.push(wd);else if(L.length)L[L.length-1]=c;else L.push(wd);});return L;}
+// the camera moves in on part of a picture, as The map before the data's focus does: keys are [t, x, y, zoom], from the first
+// key's framing, each move gliding over d seconds from its time; returns the zoom
+function focus(ctx,t,keys,d){d=d||1.4;let x=keys[0][1],y=keys[0][2],z=keys[0][3];for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;
+    x=lerp(x,keys[i][1],u);y=lerp(y,keys[i][2],u);z=lerp(z,keys[i][3],u);}
+  ctx.translate(960,540);ctx.scale(z,z);ctx.translate(-x,-y);return z;}
+// a component whose text sizes are fixed inside it, drawn larger as a whole until its smallest text (base) reads: it grows from the
+// point its arguments xi and yi name, by at most kmax, so its box and its words keep their proportions
+function phBig(fn,xi,yi,base,kmax){return function(){const a=arguments,ctx=a[0],m=phMin(ctx),k=m?clamp(m/(typeof base==="function"?base.apply(null,a):base),1,kmax||1.7):1;
+  if(k<=1.001)return fn.apply(this,a);ctx.save();ctx.translate(a[xi],a[yi]);ctx.scale(k,k);ctx.translate(-a[xi],-a[yi]);try{return fn.apply(this,a);}finally{ctx.restore();}};}
+// the frame's width, set as each frame starts, so a cached picture's text isn't measured against the frame
+renderFrame=(f=>function(ctx,S,t){PH_W=ctx.canvas.width;PH_OFF=0;return f(ctx,S,t);})(renderFrame);
+T=(f=>function(ctx,s,x,y,o){return f(ctx,s,x,y,phSize(ctx,o,24));})(T);
+tag=(f=>function(ctx,x,y,s,c,o){return f(ctx,x,y,s,c,phSize(ctx,o,20));})(tag);
+// wrapped text (From words to data's wrapT) breaks its lines at the size it's drawn, with its line height grown in proportion
+if(typeof wrapT==="function"&&wrapT.length===6)wrapT=(f=>function(ctx,s,x,y,maxW,o){o=o||{};const p=phSize(ctx,o,24);if(p!==o&&o.lh)p.lh=o.lh*p.size/(o.size||24);return f(ctx,s,x,y,maxW,p);})(wrapT);
+// chips (a logo, a title, and a smaller line under it) and the year and stamp tags grow as a whole
+chip=phBig(chip,1,2,function(ctx,x,y,k,title,sub,o){o=o||{};return sub?(o.ss||17):(o.ts||22);});
+if(typeof yearTag==="function")yearTag=phBig(yearTag,1,2,20);
+if(typeof stamp==="function")stamp=phBig(stamp,1,2,20);
+
+/* ---------- From words to data's components, at sizes that read ---------- */
+// a wax seal's mark is part of the seal, not something to read
+if(typeof waxSeal==="function")waxSeal=phDeco(waxSeal);
+// a credential card (words.js) with its rows laid out for the larger words: the field names in a column as wide as the widest,
+// the values after it, and the rows spaced to fit; everything else as words.js draws it
+if(typeof credCard==="function")credCard=(f=>function(ctx,x,y,w,o){const m=phMin(ctx);if(!m)return f(ctx,x,y,w,o);o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return 0;
+  const ls=Math.max(17,m),vs=Math.max(18,m),rh=Math.max(o.rh||34,vs*1.32),rowsF=[["issuer",o.issuer],["holder",o.holder],["claim",o.claim],["evidence",o.evidence],["date",o.date]].filter(r=>r[1]);
+  // a value too long for the card goes on as many lines as it needs, and the card grows to hold them
+  const lw=Math.max(...rowsF.map(r=>tw(ctx,r[0],ls,500,"mono")),0),vw=w-56-lw,LS=rowsF.map(([k,v])=>phWrap(ctx,v,vw,vs,700)),
+    xl=LS.reduce((p,L)=>p+L.length-1,0)*vs*1.18,h0=o.h||Math.max(Math.round(w*0.68),(o.title?84:56)+rowsF.length*rh),h=xl?Math.max(h0,(o.title?44+rh:Math.max(42,16+vs))+(rowsF.length-1)*rh+xl+(o.era==="digital"||!o.era?70:34)):h0;
+  // the card itself, from words.js, with no rows; then the rows, in the same place and turn
+  f(ctx,x,y,w,Object.assign({},o,{h,issuer:null,holder:null,claim:null,evidence:null,date:null,signed:false}));
+  const era=o.era||"digital",dk=era==="digital"||era==="badge",hl=o.hl||{},ink=dk?rgba(INK,0.95):(era==="tablet"?"rgba(60,36,20,0.9)":"rgba(52,40,30,0.92)"),lab=dk?rgba(SOFT,1):(era==="tablet"?"rgba(70,44,26,0.7)":"rgba(110,86,54,0.9)");
+  withA(ctx,a,()=>{ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot||0);ctx.translate(-w/2,-h/2);const yy=o.title?44+rh:Math.max(42,16+vs);
+    // a digital card's "signed", beside its seal rather than under it, where the larger word fits
+    if(era==="digital"&&o.signed!==false)T(ctx,o.signed||"signed",w-78,h-30,{f:"mono",w:500,size:Math.max(12,m),align:"right",color:rgba(SOFT,1)});
+    let ry=yy;rowsF.forEach(([k,v],i)=>{const on=hl[k]||0,L=LS[i],ex=(L.length-1)*vs*1.18;if(on>0){ctx.fillStyle=dk?rgba(o.col||TRUST,0.16*on):"rgba(200,140,40,"+(0.22*on)+")";rr(ctx,12,ry-vs*0.95,w-24,rh+ex,8);ctx.fill();}
+      T(ctx,k,22,ry,{f:"mono",w:500,size:ls,color:lab});L.forEach((l,j)=>T(ctx,l,34+lw,ry+j*vs*1.18,{w:700,size:vs,color:ink}));ry+=rh+ex;});ctx.restore();});return h;})(credCard);
+
+/* ---------- A Sharper Sketch's entities, at sizes that read ---------- */
+// an entity (sketch3.js): its name, its note and its attributes at least the smallest size that reads, the box measured to fit them,
+// so the lines that callers draw to its edges (they ask entBox) still meet it
+if(typeof entBox==="function"){const EB0=entBox,EN0=ent;
+  const phEnt=(ctx,e)=>{const s=e.s||1,m=phMin(ctx);return{s,ns:Math.max(24*s,m),ss:Math.max(16*s,m),as:Math.max(17*s,m)};};
+  entBox=function(ctx,e){const m=phMin(ctx);if(!m)return EB0(ctx,e);const{s,ns,ss,as}=phEnt(ctx,e),sub=e.sub,at=e.attrs||[],k1=ns/(24*s),rh=Math.max(30*s,as*1.3);
+    let w=Math.max(200*s,tw(ctx,e.name,ns,700)+52*s);if(sub)w=Math.max(w,tw(ctx,sub,ss,600)+44*s);at.forEach(r=>{w=Math.max(w,tw(ctx,r[0],as,500,"mono")+84*s);});
+    const head=sub?34*s*k1+ss*1.15+18*s:58*s*k1,h=head+(at.length?at.length*rh+14*s:0);return{x:e.x,y:e.y,w,h,head,rh};};
+  ent=function(ctx,e){const m=phMin(ctx);if(!m)return EN0(ctx,e);const a=e.a==null?1:e.a;if(a<=0.01)return;const{s,ns,ss,as}=phEnt(ctx,e),k1=ns/(24*s),col=e.col||SK,b=entBox(ctx,e),x=b.x-b.w/2,y=b.y-b.h/2,hi=e.hi||0;
+    ctx.save();ctx.globalAlpha*=a;
+    if(hi>0)glow(ctx,b.x,b.y,Math.max(b.w,b.h)*0.9,e.hiCol||col,0.35*hi);
+    ctx.fillStyle=e.fill||"rgba(8,14,30,0.94)";rr(ctx,x,y,b.w,b.h,10*s);ctx.fill();
+    ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=12+10*hi;ctx.strokeStyle=rgba(e.edge||col,0.95);ctx.lineWidth=(2.2+1.2*hi)*s;if(e.dash)ctx.setLineDash([9*s,7*s]);rr(ctx,x,y,b.w,b.h,10*s);ctx.stroke();ctx.setLineDash([]);ctx.shadowBlur=0;
+    const ny=y+(e.sub?34:37)*s*k1;T(ctx,e.name,b.x,ny,{w:700,size:ns,align:"center",color:rgba(col,1)});
+    if(e.sub)withA(ctx,e.subA==null?1:e.subA,()=>T(ctx,e.sub,b.x,ny+ss*1.15,{w:600,size:ss,align:"center",color:rgba(e.subCol||SOFT,1)}));
+    if(e.attrs&&e.attrs.length){const y0=y+b.head;ctx.strokeStyle=rgba(col,0.35);ctx.lineWidth=1.2*s;ctx.beginPath();ctx.moveTo(x+12*s,y0);ctx.lineTo(x+b.w-12*s,y0);ctx.stroke();
+      e.attrs.forEach((r,i)=>withA(ctx,e.attrA==null?1:clamp(e.attrA*e.attrs.length-i,0,1),()=>{const yy=y0+b.rh*(i+0.5)+as*0.36+6*s;
+        if(r[1]==="id"){ctx.fillStyle=rgba(REF,1);ctx.beginPath();ctx.arc(x+24*s,yy-as*0.32,5*s,0,TAU);ctx.fill();}
+        T(ctx,r[0],x+40*s,yy,{f:"mono",w:500,size:as,color:r[1]==="id"?rgba(REF,1):rgba(INK,0.9)});}));}
+    if(e.pin&&(e.pinA==null||e.pinA>0))withA(ctx,e.pinA==null?1:e.pinA,()=>{const pc=e.pin==="adopt"?ADOPT:EXT,px=x+b.w-4*s,py=y+4*s,pr=(9+4*(e.pinP||0))*s;glow(ctx,px,py,34*s,pc,0.5+0.5*(e.pinP||0));
+      ctx.fillStyle=rgba(pc,1);ctx.beginPath();ctx.arc(px,py,pr,0,TAU);ctx.fill();ctx.fillStyle="rgba(255,255,255,0.85)";ctx.beginPath();ctx.arc(px-pr*0.3,py-pr*0.3,pr*0.32,0,TAU);ctx.fill();});
+    ctx.restore();return b;};}
+
+/* ---------- The Inner Life of Data's system card, at sizes that read ---------- */
+// its title and its line under it at least the smallest size that reads, the card grown about its middle to fit them, taller and wider
+if(typeof sysCard==="function"){const SC0=sysCard;sysCard=function(ctx,x,y,w,h,title,sub,c,icon){const m=phMin(ctx);if(!m)return SC0.apply(this,arguments);
+  const ts=Math.max(22,m),ss=Math.max(16,m),H=sub?Math.max(h,ts+ss*1.2+26):Math.max(h,ts+26),Y=y+(h-H)/2,W=Math.max(w,32+Math.max(tw(ctx,title,ts,700),sub?tw(ctx,sub,ss,500):0)+(icon?76:24));x+=(w-W)/2;w=W;
+  glass(ctx,x,Y,w,H,16,c,{glow:16,ea:0.6});led(ctx,x+12,Y+16,5,H-32,c);
+  if(sub){T(ctx,title,x+32,Y+H/2-ss*0.2,{w:700,size:ts});T(ctx,sub,x+32,Y+H/2+ss*0.95,{w:500,size:ss,color:rgba(SOFT,0.95)});}else T(ctx,title,x+32,Y+H/2+ts*0.36,{w:700,size:ts});
+  if(icon)icon(ctx,x+w-44,Y+H/2);};}
+
+/* ---------- A Sharper Sketch's table, at sizes that read ---------- */
+// its name, its header and its cells at least the smallest size that reads, its columns and rows measured to fit them
+if(typeof table==="function"){const TB0=table;table=function(ctx,x,y,name,cols,rows,o){const m=phMin(ctx);if(!m)return TB0.apply(this,arguments);o=o||{};
+  const cs=Math.max(16,m),ns=Math.max(18,m),cw=o.cw||cols.map(c=>Math.max(tw(ctx,c,cs,500,"mono"),...rows.map(r=>tw(ctx,r[cols.indexOf(c)],cs,500,"mono")))+30),w=cw.reduce((a,b)=>a+b,0),rh=Math.max(40,cs*1.45),hh=Math.max(46,ns*1.65),h=hh+rh*(rows.length+1);
+  glass(ctx,x,y,w,h,12,o.col||SK,{glow:14,ea:0.7,fill:"rgba(7,12,24,0.94)"});T(ctx,name,x+16,y+hh*0.67,{f:"mono",w:500,size:ns,color:rgba(o.col||SK,1)});
+  let cx=x;cols.forEach((c,i)=>{T(ctx,c,cx+15,y+hh+rh*0.68,{f:"mono",w:500,size:cs,color:rgba(REF,1)});rows.forEach((r,j)=>withA(ctx,o.rowA?o.rowA(j):1,()=>T(ctx,r[i],cx+15,y+hh+rh*(j+1)+rh*0.68,{f:"mono",w:500,size:cs,color:rgba(INK,0.9)})));cx+=cw[i];});
+  ctx.strokeStyle="rgba(170,200,245,0.18)";ctx.lineWidth=1;for(let j=0;j<=rows.length+1;j++){ctx.beginPath();ctx.moveTo(x,y+hh+rh*j);ctx.lineTo(x+w,y+hh+rh*j);ctx.stroke();}
+  return{w,h};};}
+
+/* ---------- A Sharper Sketch's number card, at sizes that read ---------- */
+// its line under the number wraps to the card's width at the larger size, and the card grows to hold it
+if(typeof numCard==="function"){const NC0=numCard;numCard=function(ctx,x,y,w,title,num,sub,col,o){const m=phMin(ctx);if(!m||!sub)return NC0.apply(this,arguments);o=o||{};
+  const ss=Math.max(18,m),ls=phWrap(ctx,sub,w-56,ss,600),h=200+(ls.length-1)*ss*1.2;
+  glass(ctx,x,y,w,h,18,col,{glow:18,ea:0.7,fill:"rgba(7,12,24,0.92)"});T(ctx,title,x+28,y+46,{w:700,size:24,color:rgba(SOFT,1)});T(ctx,num,x+28,y+140,{w:800,size:88,color:rgba(col,1)});
+  ls.forEach((l,i)=>T(ctx,l,x+28,y+180+i*ss*1.2,{w:600,size:ss,color:rgba(SOFT,0.95)}));
+  if(o.badge)tag(ctx,x+w-28-(tw(ctx,o.badge,Math.max(16,m),700)+26),y+40,o.badge,o.badgeCol||GOOD,{size:16});};}
+
+/* ---------- Silent change's pictures (silent.js), at sizes that read ---------- */
+// the counter widget: the title, the number and its comparison (under the number if it won't fit beside it), and the places.
+// The UI's small print (the source table, "last 14 days", "capacity") is texture. The small copy keeps its name, number and places
+if(typeof kpiCard==="function"&&typeof dbCard==="function"){const KC0=kpiCard;kpiCard=function(ctx,x,y,w,h,o){const m=phMin(ctx);if(!m)return KC0.apply(this,arguments);o=o||{};
+  const s=o.s||1,v=o.value==null?94:o.value,pad=20*s,shown=(o.shown||Math.round(v))+"%",nA=o.numA==null?1:o.numA,col=o.ghost?DB.red:DB.blue,bw=w-2*pad;
+  if(h/s<250){dbCard(ctx,x,y,w,h);const by=y+h-pad-m*1.25,ty=y+pad+m*0.8,foot=Math.round(v*1.2)+" of 120 places";T(ctx,o.title||"Data Science 101",x+pad,ty,{w:700,size:18*s,color:DB.text});
+    withA(ctx,nA,()=>T(ctx,shown,x+pad,ty+Math.max(48*s,m)*1.05,{w:700,size:48*s,color:o.ghost?DB.red:DB.text}));
+    ctx.fillStyle=DB.track;rr(ctx,x+pad,by,bw,10*s,5*s);ctx.fill();ctx.fillStyle=col;rr(ctx,x+pad,by,bw*Math.min(1,v/100),10*s,5*s);ctx.fill();
+    T(ctx,tw(ctx,foot,m,500)<=bw?foot:Math.round(v*1.2)+" of 120",x+pad,y+h-pad,{w:500,size:16*s,color:DB.muted});return;}
+  dbCard(ctx,x,y,w,h);const ty=y+pad+m*0.85,ny=y+pad+122*s,nw=tw(ctx,shown,78*s,700),dw=o.delta?tw(ctx,o.delta,m,700):0,beside=nw+16*s+dw<=bw;
+  T(ctx,o.title||"Places filled · Data Science 101",x+pad,ty,{w:700,size:19*s,color:DB.text});phAsDeco(true,()=>T(ctx,o.source||"fct_offering_fill",x+pad,ty+22,{w:500,size:14*s,f:"mono",color:DB.muted}));
+  withA(ctx,nA,()=>{T(ctx,shown,x+pad,ny,{w:700,size:78*s,color:o.ghost?DB.red:DB.text});
+    if(o.delta)T(ctx,o.delta,beside?x+pad+nw+16*s:x+pad,beside?y+pad+118*s:ny+m*1.25,{w:700,size:17*s,color:o.deltaCol||DB.green});});
+  const by=y+h-pad-Math.max(44*s,m+22),sy0=beside||!o.delta?y+pad+150*s:ny+m*1.25+16,sy1=by-30*s;
+  if(sy1-sy0>40*s){const tr=o.trend||[71,74,76,79,81,83,85,86,88,90,91,92,93,v],lo=60,hi=Math.max(100,...tr)+4,px=i=>x+pad+bw*i/(tr.length-1),py=q=>sy1-(sy1-sy0)*(q-lo)/(hi-lo);
+    ctx.beginPath();tr.forEach((q,i)=>i?ctx.lineTo(px(i),py(q)):ctx.moveTo(px(i),py(q)));ctx.lineTo(px(tr.length-1),sy1);ctx.lineTo(px(0),sy1);ctx.closePath();ctx.fillStyle=o.ghost?"rgba(200,45,76,0.10)":"rgba(7,122,157,0.10)";ctx.fill();
+    ctx.beginPath();tr.forEach((q,i)=>i?ctx.lineTo(px(i),py(q)):ctx.moveTo(px(i),py(q)));ctx.strokeStyle=col;ctx.lineWidth=2.5*s;ctx.stroke();
+    ctx.fillStyle=col;ctx.beginPath();ctx.arc(px(tr.length-1),py(tr[tr.length-1]),4*s,0,TAU);ctx.fill();phAsDeco(true,()=>T(ctx,"last 14 days",x+pad,sy0-4*s,{w:500,size:13*s,color:DB.muted}));}
+  ctx.fillStyle=DB.track;rr(ctx,x+pad,by,bw,12*s,6*s);ctx.fill();ctx.fillStyle=col;rr(ctx,x+pad,by,bw*Math.min(1,v/100),12*s,6*s);ctx.fill();
+  if(v>100){ctx.fillStyle=DB.red;rr(ctx,x+pad+bw-4*s,by-6*s,8*s,24*s,3*s);ctx.fill();}
+  ctx.strokeStyle=DB.text;ctx.lineWidth=2*s;ctx.beginPath();ctx.moveTo(x+pad+bw,by-8*s);ctx.lineTo(x+pad+bw,by+20*s);ctx.stroke();
+  T(ctx,o.foot||Math.round(v*1.2)+" of 120 places",x+pad,y+h-pad,{w:500,size:15*s,color:DB.muted});phAsDeco(true,()=>T(ctx,"capacity",x+pad+bw,y+h-pad,{w:500,size:13*s,align:"right",color:DB.muted}));};}
+// the dashboard: its note wraps and makes the room it needs, its icon is as large as its words, and the chart's subtitle is texture
+if(typeof dashboard==="function"&&typeof kpiCard==="function"&&typeof DB==="object"){const DS0=dashboard;dashboard=function(ctx,x,y,w,h,o){const m=phMin(ctx);if(!m)return DS0.apply(this,arguments);o=o||{};
+  const num=o.num==null?94:parseFloat(o.num),g=o.ghost||0,gIn=sstep(0.45,1,g);
+  glass(ctx,x-12,y-12,w+24,h+24,22,[170,205,255],{glow:18,ea:0.45,fill:"rgba(8,14,28,0.95)"});ctx.save();rr(ctx,x,y,w,h,12);ctx.clip();ctx.fillStyle=DB.canvas;ctx.fillRect(x,y,w,h);
+  ctx.fillStyle=DB.card;ctx.fillRect(x,y,w,64);ctx.fillStyle=DB.line;ctx.fillRect(x,y+64,w,1.2);const lw=logo(ctx,"databricks",x+20,y+18,28);
+  T(ctx,o.title||"Enrolments · census date tomorrow",x+34+lw,y+41,{w:700,size:21,color:DB.text});T(ctx,o.day||"Tuesday",x+w-22,y+40,{w:500,size:16,align:"right",color:DB.muted});
+  let cy=y+84;const ix=m*1.25+44,lines=s=>phWrap(ctx,s,w-40-ix-16,m,600),bh=L=>24+L.length*m*1.15;
+  const alert=(bg,line,col,icon,text,a)=>withA(ctx,a,()=>{const L=lines(text),H=bh(L);ctx.fillStyle=bg;rr(ctx,x+20,cy,w-40,H,6);ctx.fill();ctx.fillStyle=line;rr(ctx,x+20,cy,6,H,3);ctx.fill();
+    ctx.fillStyle=col;ctx.font=font(800,m);ctx.fillText(icon,x+40,cy+12+m*0.86);L.forEach((l,i)=>T(ctx,l,x+ix,cy+12+m*0.86+i*m*1.15,{w:600,size:m,color:col}));});
+  const room=ease(clamp((o.banner||0)+(o.ok||0),0,1)),bT="Last good data: yesterday, 23:02 · a test stopped today's refresh",oT=o.okText||"Up to date: today, 08:40";
+  if(o.banner>0)alert(DB.warnBg,DB.warnLine,DB.warn,"⚠",bT,o.banner*(1-(o.ok||0))*sstep(0.3,1,room));
+  if(o.ok>0)alert(DB.greenBg,DB.green,DB.green,"✓",oT,o.ok);
+  cy+=(Math.max(bh(lines(o.ok>0.5?oT:bT)),52)+20)*room;const gh=y+h-cy-20,kw=w*0.46;
+  kpiCard(ctx,x+20,cy,kw,gh,{value:num,delta:o.delta||("▲ "+(Math.round(num)-92)+" pts vs last week"),foot:o.foot,numA:1-sstep(0,0.5,g)});
+  if(o.flash>0)withA(ctx,o.flash,()=>{ctx.strokeStyle=DB.blue;ctx.lineWidth=3;rr(ctx,x+20,cy,kw,gh,8);ctx.stroke();});
+  if(g>0){withA(ctx,g,()=>{ctx.save();ctx.fillStyle="rgba(255,255,255,0.92)";rr(ctx,x+20,cy,kw,gh,8);ctx.fill();ctx.setLineDash([10,8]);ctx.strokeStyle=DB.red;ctx.lineWidth=3;rr(ctx,x+20,cy,kw,gh,8);ctx.stroke();ctx.restore();});
+    withA(ctx,gIn,()=>kpiCard(ctx,x+20,cy,kw,gh,{value:108,ghost:1,delta:"incl. waitlist",deltaCol:DB.red,foot:"130 of 120 places",trend:[71,74,76,79,81,83,85,86,88,90,91,92,94,108]}));}
+  const bx=x+40+kw,bwid=w-60-kw;dbCard(ctx,bx,cy,bwid,gh);T(ctx,"Places filled by unit",bx+20,cy+m*1.3,{w:700,size:19,color:DB.text});phAsDeco(true,()=>T(ctx,"first-year units · semester 2",bx+20,cy+m*1.3+22,{w:500,size:14,color:DB.muted}));
+  const rows=[["Data Science 101",num],["Statistics 110",88],["Programming 100",76],["Data Ethics 120",64]],lx=bx+20,bw2=bwid-60-tw(ctx,"108%",m,700),r0=cy+m*1.3+40,rh=Math.min(m*2.1,(gh-(r0-cy)-16)/rows.length);
+  const row=(n,v,i,c,vc)=>{const yy=r0+i*rh;T(ctx,n,lx,yy+m*0.8,{w:i?500:700,size:15,color:DB.text});const b0=yy+m*0.8+8;ctx.fillStyle=DB.track;rr(ctx,lx,b0,bw2,12,4);ctx.fill();
+    ctx.fillStyle=c;rr(ctx,lx,b0,bw2*Math.min(1,v/100),12,4);ctx.fill();if(v>100){ctx.fillStyle=DB.red;rr(ctx,lx+bw2-3,b0-5,6,22,2);ctx.fill();}T(ctx,Math.round(v)+"%",lx+bw2+14,b0+12,{w:700,size:16,color:vc||DB.text});};
+  rows.forEach(([n,v],i)=>row(n,v,i,i?"#8bcae7":DB.blue));
+  if(gIn>0)withA(ctx,gIn,()=>{ctx.fillStyle=DB.card;ctx.fillRect(lx-4,r0-4,bwid-36,rh);row("Data Science 101",108,0,DB.red,DB.red);});
+  ctx.strokeStyle=DB.muted;ctx.setLineDash([4,4]);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(lx+bw2,r0+4);ctx.lineTo(lx+bw2,r0+rows.length*rh);ctx.stroke();ctx.setLineDash([]);
+  ctx.restore();};}
+// the lineage: each step's box fits its name, and the steps are spaced by their widths (phLinPts gives where they are)
+function phLinPts(ctx,x0,y,dx){if(typeof LIN==="undefined")return[];const m=phMin(ctx);if(!m)return LIN.map((_,i)=>[x0-i*dx,y]);const ws=LIN.map(([n,sub])=>Math.max(tw(ctx,n,Math.max(22,m),700,"mono"),tw(ctx,sub,Math.max(17,m),500))+44),gap=Math.max(24,dx-ws.reduce((a,b)=>a+b,0)/LIN.length);
+  const P=[[x0,y]];for(let i=1;i<LIN.length;i++)P.push([P[i-1][0]-ws[i-1]/2-gap-ws[i]/2,y]);return P;}
+if(typeof lineage==="function"&&typeof LIN!=="undefined"){const LN0=lineage;lineage=function(ctx,x0,y,dx,o){const m=phMin(ctx);if(!m)return LN0.apply(this,arguments);o=o||{};const pts=phLinPts(ctx,x0,y,dx);
+  ctx.strokeStyle="rgba(170,200,245,0.35)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);pts.forEach(p=>ctx.lineTo(p[0],p[1]));ctx.stroke();
+  if(o.k>0){const k=Math.min(o.k,pts.length-1),i=Math.floor(k),f=k-i,end=i<pts.length-1?[lerp(pts[i][0],pts[i+1][0],f),y]:pts[i];
+    beam(ctx,[{x:pts[0][0],y},{x:end[0],y}],BAD,[[22,0.08],[9,0.22],[3,0.85],[1.5,1]]);glow(ctx,end[0],y,36,BAD,0.7);}
+  pts.forEach((p,i)=>{const [n,sub]=LIN[i],bad=i===3&&o.bad,on=o.k>=i-0.05,c=bad?BAD:i===4?LAYER.bronze:i===0?GOLDC:[170,205,255],w=Math.max(tw(ctx,n,Math.max(22,m),700,"mono"),tw(ctx,sub,Math.max(17,m),500))+44;
+    glass(ctx,p[0]-w/2,y-52,w,104,18,c,{glow:on?22:8,ea:on?0.95:0.45,fill:"rgba(8,14,28,0.92)"});T(ctx,n,p[0],y-8,{w:700,size:22,f:"mono",align:"center"});T(ctx,sub,p[0],y+30,{w:500,size:17,align:"center",color:rgba(SOFT,0.95)});
+    if(i===3){const gc=bad?BAD:GOOD;ctx.strokeStyle=rgba(gc,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(p[0],y-79);ctx.lineTo(p[0],y-52);ctx.stroke();gate(ctx,p[0],y-114,70,gc,"tests");
+      T(ctx,bad?"test failed":"tests pass",p[0]+42,y-108,{w:700,size:18,color:rgba(gc,1)});}});return pts;};}
+// the data contract: the statuses in the sans, so the new one fits on the same line
+if(typeof contract==="function"&&typeof stampV==="function"){const CT0=contract;contract=function(ctx,x,y,w,h,o){const m=phMin(ctx);if(!m)return CT0.apply(this,arguments);o=o||{};
+  const ver=o.ver||"1.0",dA=o.deferred||0,S=Math.max(22,m);glass(ctx,x,y,w,h,24,[236,243,255],{glow:24+10*(o.glow||0),ea:0.9,fill:"rgba(10,16,32,0.95)"});
+  T(ctx,"Data contract · enrolments",x+36,y+60,{w:800,size:34});stampV(ctx,x+w-40,y+50,"v"+ver,o.verFlash||0);
+  const key=(k,yy)=>T(ctx,k,x+36,yy,{w:700,size:21,color:rgba(SOFT,0.95)}),vx=x+36+tw(ctx,"Freshness",Math.max(21,m),700)+26,base="enrolled · withdrawn · waitlisted";
+  const rows=[()=>{key("Fields",y+136);T(ctx,"student, offering, status, date",vx,y+136,{w:600,size:23});},
+    ()=>{key("Statuses",y+192);T(ctx,base,vx,y+192,{w:700,size:S});if(dA>0)withA(ctx,dA,()=>T(ctx," · deferred",vx+tw(ctx,base,S,700),y+192,{w:700,size:S,color:rgba(mixc(INK,GOLDC,o.defHi||0),1)}));},
+    ()=>{key("Meaning",y+248);T(ctx,"enrolled = holds a place on census date",vx,y+248,{w:600,size:22});T(ctx,"waitlisted = no place yet · withdrawn = left",vx,y+282,{w:600,size:22});
+      if(dA>0)withA(ctx,dA,()=>T(ctx,"deferred = starts in a later term",vx,y+316,{w:600,size:22,color:rgba(mixc(INK,GOLDC,o.defHi||0),1)}));},
+    ()=>{key("Freshness",y+364);T(ctx,"by 06:00 every day",vx,y+364,{w:600,size:23});}];
+  rows.forEach((draw,i)=>withA(ctx,o.rows==null?1:clamp(o.rows*rows.length-i,0,1),draw));
+  ctx.strokeStyle="rgba(170,200,245,0.18)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+26,y+398);ctx.lineTo(x+w-26,y+398);ctx.stroke();
+  const cx1=x+w*0.44,cx2=x+w*0.7;key("Owners",y+432);T(ctx,"business",cx1,y+432,{w:700,size:18,color:rgba(BIZ,0.95)});T(ctx,"technical",cx2,y+432,{w:700,size:18,color:rgba(TECH,0.95)});
+  T(ctx,"produce",vx,y+474,{w:600,size:19,color:rgba(SOFT,0.95)});T(ctx,"use",vx,y+516,{w:600,size:19,color:rgba(SOFT,0.95)});
+  [["mei",cx1,y+474],["ben",cx2,y+474],["ana",cx1,y+516],["sam",cx2,y+516]].forEach(([id,cx,cy],i)=>{const P=PEOPLE[id],a=o.sign?clamp(o.sign*4-i,0,1):0,n=o.notice?o.notice:0;
+    withA(ctx,0.35+0.65*Math.max(a,n),()=>{led(ctx,cx,cy-15,12,12,P.edge);T(ctx,P.name.split(" ")[0],cx+22,cy,{w:700,size:22,color:rgba(P.edge,0.95)});});});};}
+// a video-call tile's name, and the clock chip's note, in labels as wide as their words
+if(typeof callTile==="function"){const CL0=callTile;callTile=function(ctx,id,x,y,w,h,o){const m=phMin(ctx);if(!m)return CL0.apply(this,arguments);o=o||{};CL0(ctx,id,x,y,w,h,Object.assign({},o,{label:0}));
+  const P=PEOPLE[id],n=P.name.replace("Prof. ",""),S=Math.max(18,m);withA(ctx,o.label==null?1:o.label,()=>{glass(ctx,x+12,y+h-S-32,tw(ctx,n,S,700)+30,S+20,12,P.edge,{glow:6,ea:0.5,fill:"rgba(6,10,20,0.85)"});T(ctx,n,x+27,y+h-22-S*0.16,{w:700,size:S});});};}
+if(typeof clockChip==="function"){const CC0=clockChip;clockChip=function(ctx,S,s,sub,a){setScreen(ctx,S);const m=phMin(ctx);if(!m||!sub)return CC0.apply(this,arguments);withA(ctx,a==null?1:a,()=>{const ss=Math.max(20,m),w=28+tw(ctx,s,32,800,"mono")+18+tw(ctx,sub,ss,600)+28;
+  glass(ctx,64,52,w,64,18,[170,205,255],{glow:10,ea:0.5,fill:"rgba(8,14,28,0.85)"});T(ctx,s,92,96,{w:800,size:32,f:"mono"});T(ctx,sub,92+tw(ctx,s,32,800,"mono")+18,95,{w:600,size:ss,color:rgba(SOFT,0.95)});});};}
+// the platform in one row: its note about the last good data stays inside the frame
+if(typeof platformRow==="function"){const PR0=platformRow;platformRow=function(ctx,t,o){const m=phMin(ctx);if(!m||!(o&&o.banner>0))return PR0.apply(this,arguments);PR0(ctx,t,Object.assign({},o,{banner:0}));
+  const y=o.y||470,s="last good data · yesterday 23:02",w=tw(ctx,s,Math.max(16,m),700)+26;withA(ctx,o.banner,()=>tag(ctx,Math.min(1725,1900-w/2),y-150,s,AMBER,{align:"center",size:16}));};}
+
+/* ---------- The Inner Life of Data's plaque (style2.js), at sizes that read ---------- */
+// each row's label and value on lines far enough apart for the larger words, and the plaque as tall as they need
+if(typeof plaque==="function"){const PQ0=plaque;plaque=function(ctx,x,y,w,rows,c){const m=phMin(ctx);if(!m)return PQ0.apply(this,arguments);const rh=Math.max(52,m*2.3),h=20+rows.length*rh;
+  glass(ctx,x,y,w,h,14,c,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.9)"});
+  rows.forEach((r,i)=>{const yy=y+16+i*rh;let tx=x+18;if(r[2]){const lw=logo(ctx,r[2],tx,yy+8,28);tx+=Math.max(lw,26)+10;}T(ctx,r[0],tx,yy+m*0.85,{size:15,w:700,color:rgba(SOFT,0.95)});T(ctx,r[1],tx,yy+m*1.95,{size:21,w:700});});return h;};}
+
+/* ---------- A Sharper Sketch's calendar card (sketch3.js), at sizes that read ---------- */
+// the coloured band grows to hold its title, and the card grows to hold the date and its label
+if(typeof calCard==="function"){const CA0=calCard;calCard=function(ctx,x,y,title,date,col,a,hi){const m=phMin(ctx);if(!m)return CA0.apply(this,arguments);withA(ctx,a,()=>{const bh=m+16,h=bh+m*2.9+10;
+  glass(ctx,x,y,300,h,14,col,{glow:12+14*(hi||0),ea:0.7,fill:"rgba(7,12,24,0.94)"});ctx.fillStyle=rgba(col,0.9);rr(ctx,x,y,300,bh,14);ctx.fill();ctx.fillStyle="rgba(7,12,24,0.94)";ctx.fillRect(x,y+bh-8,300,10);
+  T(ctx,title,x+150,y+bh/2+m*0.3,{w:800,size:16,align:"center",color:"#0a1020"});T(ctx,date,x+150,y+bh+m*1.35,{w:800,size:28,align:"center",color:rgba(col,1)});T(ctx,"census date",x+150,y+bh+m*2.5,{w:600,size:14,align:"center",color:rgba(SOFT,1)});});};}
+
+/* ---------- In the weeds' code files (weeds.js), at sizes that read ---------- */
+// a line too long for the card wraps, as an editor wraps it: at a space or a comma where it can, the rest indented under it, and a
+// highlighted line stays lit on all its rows. The file's path gives way from the left ("…/name.yml") so its label still fits beside
+// it. The card grows to hold its rows; phCodeRows says where each line starts, for scenes that point at a line
+function phCodeRows(ctx,w,lines,sz){const cw=tw(ctx,"0000000000",sz,500,"mono")/10,cols=Math.max(16,Math.floor((w-44)/cw)),R=[];
+  lines.forEach((l,i)=>{const ind=(l.match(/^\s*/)[0]).slice(0,Math.floor(cols/3))+"  ";let s=l,off=0,first=true;
+    while(true){const lim=first?cols:cols-ind.length;if(s.length<=lim){R.push({i,s:first?s:ind+s,off,pre:first?0:ind.length});break;}
+      let k=lim;for(let j=lim;j>lim*0.5;j--){if(" ,(".indexOf(s[j-1])>=0){k=j;break;}}R.push({i,s:first?s.slice(0,k):ind+s.slice(0,k),off,pre:first?0:ind.length});off+=k;s=s.slice(k);first=false;}});
+  return R;}
+if(typeof codeFile==="function"){const CF0=codeFile;codeFile=function(ctx,x,y,w,name,lines,o){const m=phMin(ctx);if(!m)return CF0.apply(this,arguments);o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return 0;
+  const sz=Math.max(o.size||19,m),LH=Math.max(o.lh||32,sz*1.22),R=phCodeRows(ctx,w,lines,sz),h=Math.max(o.h||0,70+R.length*LH),col=o.edge||[170,205,255];
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,col,{glow:12+10*(o.hi||0),ea:0.65,fill:"rgba(6,10,20,0.95)"});
+    const ns=Math.max(16,m),lw=o.label?tw(ctx,o.label,Math.max(15,m),700)+24:0;let nm=name;while(nm.length>8&&36+tw(ctx,nm,ns,500,"mono")>w-18-lw){const k=nm.indexOf("/",nm[0]==="…"?2:1);nm=k>0?"…"+nm.slice(k):"…"+nm.slice(Math.max(2,nm.length-Math.floor(nm.length*0.8)));}
+    ctx.fillStyle=rgba(col,0.9);rr(ctx,x+16,y+16,10,10,3);ctx.fill();T(ctx,nm,x+36,y+27,{f:"mono",w:500,size:16,color:rgba(col,1)});if(o.label)T(ctx,o.label,x+w-18,y+27,{w:700,size:15,align:"right",color:rgba(o.labelCol||SOFT,1)});
+    ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+14,y+42,w-28,1.2);
+    const n=o.p==null?lines.length:lines.length*o.p;R.forEach((r,k)=>{const i=r.i;if(i>=n)return;const yy=y+74+k*LH,l=lines[i],q=clamp(n-i,0,1),cm=/^\s*(--|#)/.test(l),on=o.lit?o.lit[i]||0:0;
+      if(on>0)withA(ctx,on,()=>{ctx.fillStyle=rgba(o.litCol||TRUST,0.16);rr(ctx,x+12,yy-LH*0.7,w-24,LH*0.95,6);ctx.fill();});
+      const vis=Math.round(q*l.length)-r.off;if(vis<=0)return;const body=r.s.slice(r.pre),shown=r.s.slice(0,r.pre)+body.slice(0,Math.min(body.length,vis));
+      T(ctx,shown,x+22,yy,{f:"mono",w:500,size:sz,color:cm?rgba(SOFT,0.8):rgba(mix([200,225,255],o.litCol||TRUST,on*0.6),0.95)});});});return h;};}
+
+/* ---------- In the weeds' own code cards (each film's plan.js), at sizes that read ---------- */
+// phCode(card, how) wraps a film's code card: on a phone its type is at least the smallest size that reads, its lines are far enough
+// apart, and a line too long for it wraps as an editor wraps it. how.wrap says how: "chars" passes the wrap to the card (o.wrap, in
+// characters), "bool" switches the card's own wrap on, and anything else makes the rows here, so that what a line carries (lit,
+// its colour, a strike, a swap) follows it to its rows. how.head(o) is the card's height above its first line, how.label(o) its
+// label, so a long path gives way from the left ("…/name.sql") and the label still fits. Off a phone, the card is as it was
+function phOn(){return PH_W&&!PH_OFF?PH_MIN:0;}
+function phFitPath(ctx,name,room,sz){let nm=name;while(nm.length>8&&tw(ctx,nm,sz,500,"mono")>room){const k=nm.indexOf("/",nm[0]==="…"?2:1);nm=k>0?"…"+nm.slice(k):"…"+nm.slice(Math.max(2,nm.length-Math.floor(nm.length*0.8)));}return nm;}
+function phCode(f,how){return function(ctx,x,y,w,name,lines,o){const m=phMin(ctx);if(!m)return f.apply(this,arguments);o=Object.assign({},o||{});
+  const base=o.size||how.size||19,sz=Math.max(base,m),cw=tw(ctx,"0000000000",sz,500,"mono")/10,lh=Math.max(o.lh||how.lh(base),Math.round(sz*1.32)),cols=Math.max(16,Math.floor(((o.cols?w/2:w)-44)/cw));
+  o.size=sz;o.lh=lh;const lab=how.label?how.label(o):o.label,ls=Math.max(18,m);if(lab)name=phFitPath(ctx,name,w-76-tw(ctx,lab,ls,700)-28,ls);else name=phFitPath(ctx,name,w-60,ls);
+  const rows=ls_=>phCodeRows(ctx,o.cols?w/2:w,ls_,sz),R=o.cols?o.cols.map(rows).reduce((p,q)=>p.length>q.length?p:q,[]):rows(lines),need=how.head(o,ctx,w,name)+R.length*lh+8;
+  if(o.h)o.h=Math.max(o.h,need);
+  if(how.wrap==="chars"){if(!o.wrap||o.wrap>cols)o.wrap=cols;return f.call(this,ctx,x,y,w,name,lines,o);}
+  if(how.wrap==="bool"){o.wrap=true;return f.call(this,ctx,x,y,w,name,lines,o);}
+  ["lit","lineCol","litCols","dim","glow","strike","swap","clip"].forEach(k=>{const v=o[k];if(!v||typeof v!=="object")return;const n={};R.forEach((r,j)=>{if(v[r.i]==null)return;if((k==="strike"||k==="swap"||k==="clip")&&r.off>0)return;n[j]=v[r.i];});o[k]=n;});
+  if(o.p!=null)o.p=clamp(o.p,0,1);return f.call(this,ctx,x,y,w,name,R.map(r=>r.s),o);};}
+
+/* ---------- In the weeds' credential model (weeds.js), at sizes that read ---------- */
+// each box as wide (and, with its key, as tall) as its words; a relationship's name between the boxes if it fits the gap, else just
+// above the line, over the gap; and drawn as small print when the model is a small picture of itself (the words would cover it)
+if(typeof bpModel==="function"&&typeof bpBox==="function"){const BM0=bpModel;bpModel=function(ctx,cx,cy,s,o){const m=phMin(ctx);if(!m)return BM0.apply(this,arguments);o=o||{};const a=o.a==null?1:o.a;
+  const P={learner:[cx-390*s,cy-60*s],cred:[cx,cy-60*s],award:[cx+390*s,cy-60*s]};if(a<=0.01)return P;const b=o.b||0,p=o.p==null?1:o.p,hi=o.hi||{},ns=Math.max(26*s,m),ks=Math.max(15,m);
+  const W={},H=Math.max(84*s,o.keys?ns+ks+30:ns+26);["learner","cred","award"].forEach(k=>{W[k]=Math.max(230*s,tw(ctx,BPE[k][0],ns,800)+28,o.keys&&o.keys[k]?tw(ctx,o.keys[k],ks,500,"mono")+24:0);});
+  // a small picture of the model, too small for its names at the size that reads: drawn as it was, as a picture
+  if(P.cred[0]-W.cred/2-(P.learner[0]+W.learner/2)<16)return phAsDeco(true,()=>BM0(ctx,cx,cy,s,o));const small=false;
+  withA(ctx,a,()=>{const line=(k0,k1,lab,q)=>{if(q<=0)return;const[x0,y0]=P[k0],[x1,y1]=P[k1],xa=x0+W[k0]/2,xb=x1-W[k1]/2,col=mix(SK,BPL,b);ctx.save();ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=2.4*s;ctx.beginPath();ctx.moveTo(xa,y0);ctx.lineTo(lerp(xa,xb,q),y1);ctx.stroke();
+      if(q>=0.98){ctx.beginPath();ctx.moveTo(xb-16*s,y1-11*s);ctx.lineTo(xb,y1);ctx.lineTo(xb-16*s,y1+11*s);ctx.moveTo(xb-16*s,y1-13*s);ctx.lineTo(xb-16*s,y1+13*s);ctx.stroke();}ctx.restore();
+      const fits=tw(ctx,lab,Math.max(17*s,m),600)<=xb-xa-12;
+      withA(ctx,fin(q,0.6,0.4),()=>phAsDeco(small,()=>T(ctx,lab,(xa+xb)/2,fits||small?y0-14*s:y0-H/2-12,{w:600,size:17*s,align:"center",color:rgba(mix(SOFT,BPL,b),0.95)})));};
+    line("learner","cred","holds",clamp(p*3-1.6,0,1));line("cred","award","counts towards",clamp(p*3-2,0,1));
+    ["learner","cred","award"].forEach((k,i)=>{const q=clamp(p*3-i*0.5,0,1);bpBox(ctx,P[k][0]-W[k]/2,P[k][1]-H/2,W[k],H,BPE[k][0],BPE[k][1],b,{a:q,hi:hi[k]||0,size:26*s,sub:o.keys?o.keys[k]:null});});});
+  return P;};}
+// a box of the model: its name, and its key under it, placed for the sizes they're drawn at
+if(typeof bpBox==="function"){const BB0=bpBox;bpBox=function(ctx,x,y,w,h,name,col,b,o){const m=phMin(ctx);if(!m||!(o&&o.sub))return BB0.apply(this,arguments);const ns=Math.max(o.size||26,m),ks=Math.max(15,m);
+  BB0(ctx,x,y,w,h,"",col,b,Object.assign({},o,{sub:null}));const a=o.a==null?1:o.a;if(a<=0.01)return;const c=y+h/2-(ns+ks*1.1)/2;
+  withA(ctx,a,()=>{T(ctx,name,x+w/2,c+ns*0.8,{w:800,size:ns,align:"center",color:rgba(mix(INK,BPL,b),1)});T(ctx,o.sub,x+w/2,c+ns*0.8+ks*1.15,{f:"mono",w:500,size:15,align:"center",color:rgba(mix(SOFT,BPL,b),0.85)});});};}
+// the blueprint's title block, as wide and tall as its two lines at the size they read
+if(typeof bpPaper==="function"){const BP0=bpPaper;bpPaper=function(ctx,x,y,w,h,b,o){const m=phMin(ctx);if(!m||!(o&&o.title))return BP0.apply(this,arguments);if(b<=0.01)return;
+  BP0(ctx,x,y,w,h,b,Object.assign({},o,{title:null}));const ts=Math.max(16,m),ss=Math.max(14,m),tw_=Math.min(w-60,Math.max(360,tw(ctx,o.title,ts,500,"mono")+24,tw(ctx,o.sub||"",ss,500,"mono")+24)),th=ts+ss+30;
+  withA(ctx,b,()=>{ctx.strokeStyle=rgba(BPL,0.85);ctx.lineWidth=2.2;ctx.strokeRect(x+w-14-tw_,y+h-14-th,tw_,th);ctx.beginPath();ctx.moveTo(x+w-14-tw_,y+h-14-th/2);ctx.lineTo(x+w-14,y+h-14-th/2);ctx.stroke();
+    T(ctx,o.title,x+w-tw_-2,y+h-14-th/2-ts*0.3,{f:"mono",w:500,size:16,color:rgba(BPL,0.95)});T(ctx,o.sub||"",x+w-tw_-2,y+h-14-ss*0.3-4,{f:"mono",w:500,size:14,color:rgba(BPL,0.7)});});};}
+// the project's lineage graph: its column names read when the columns are wide enough for them, and are small print when they aren't
+if(typeof lineageGraph==="function"&&typeof LAYER4!=="undefined"){const LG0=lineageGraph;lineageGraph=function(ctx,x,y,w,h,t,o){const m=phMin(ctx);if(!m)return LG0.apply(this,arguments);
+  return phAsDeco(Math.max(...LAYER4.map(([nm])=>tw(ctx,nm,Math.max(22,m),800)))>w/4-10,()=>LG0(ctx,x,y,w,h,t,o));};}
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

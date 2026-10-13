@@ -461,7 +461,7 @@ const NARR={
  {"id":"declare","gap":0.8,"text":"Declare it. Then build it."}]}
 };
 
-const VODUR={"fork/drift": 5.854, "fork/law": 6.146, "fork/copies": 5.428, "fork/today": 3.963, "fork/bridge": 4.745, "four/review": 5.556, "four/found": 4.943, "four/drift": 6.851, "four/one": 4.554, "four/step": 4.471, "where/fifth": 7.178, "where/meaning": 5.119, "where/glossary": 8.903, "where/why": 8.454, "where/build": 5.41, "where/log": 5.544, "blocks/once": 3.212, "blocks/script": 7.282, "blocks/points": 5.766, "blocks/change": 7.985, "blocks/zero": 6.955, "diagrams/too": 1.339, "diagrams/hand": 5.776, "diagrams/generated": 8.361, "diagrams/fails": 3.708, "diagrams/rule": 2.168, "catalog/find": 4.855, "catalog/push": 4.517, "catalog/there": 5.366, "catalog/upstream": 11.688, "catalog/gate": 7.372, "version/change": 2.03, "version/expire": 8.167, "version/breaks": 6.038, "version/date": 12.229, "version/tell": 5.83, "version/warn": 5.802, "version/choice": 4.564, "loop/steps": 8.62, "loop/approved": 4.79, "loop/new": 4.96, "loop/declare": 1.402};
+const VODUR={"fork/drift": 5.858, "fork/law": 6.146, "fork/copies": 5.428, "fork/today": 3.963, "fork/bridge": 4.745, "four/review": 5.556, "four/found": 4.943, "four/drift": 6.851, "four/one": 4.554, "four/step": 4.471, "where/fifth": 7.178, "where/meaning": 5.119, "where/glossary": 8.903, "where/why": 8.454, "where/build": 5.41, "where/log": 5.544, "blocks/once": 3.212, "blocks/script": 7.282, "blocks/points": 5.766, "blocks/change": 7.985, "blocks/zero": 6.955, "diagrams/too": 1.339, "diagrams/hand": 5.776, "diagrams/generated": 8.361, "diagrams/fails": 3.708, "diagrams/rule": 2.168, "catalog/find": 4.855, "catalog/push": 4.517, "catalog/there": 5.366, "catalog/upstream": 11.686, "catalog/gate": 8.523, "version/change": 2.03, "version/expire": 8.167, "version/breaks": 6.038, "version/date": 12.229, "version/tell": 5.83, "version/warn": 5.802, "version/choice": 4.564, "loop/steps": 8.62, "loop/approved": 4.79, "loop/new": 4.96, "loop/declare": 1.402};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -1941,7 +1941,7 @@ function wr_cog(ctx,x,y,r,t,col,a,spin){if(a<=0.01)return;withA(ctx,a,()=>{ctx.s
   for(let i=0;i<8;i++){const a0=i/8*TAU;ctx.lineTo(Math.cos(a0-0.2)*r,Math.sin(a0-0.2)*r);ctx.lineTo(Math.cos(a0-0.12)*r*1.32,Math.sin(a0-0.12)*r*1.32);ctx.lineTo(Math.cos(a0+0.12)*r*1.32,Math.sin(a0+0.12)*r*1.32);ctx.lineTo(Math.cos(a0+0.2)*r,Math.sin(a0+0.2)*r);}
   ctx.closePath();ctx.fill();ctx.fillStyle="rgba(6,10,20,1)";ctx.beginPath();ctx.arc(0,0,r*0.42,0,TAU);ctx.fill();ctx.restore();});}
 // a paragraph whose words can be underlined, struck or left as a gap: o.hl [[phrase, a, colour]]; the word "[gap]" is an empty, dashed slot
-function wr_para(ctx,s,x,y,w,o){o=o||{};const sz=o.size||21,lh=o.lh||sz*1.4,wt=o.w||600,words=s.split(" "),sp=tw(ctx," ",sz,wt),gapW=150;let cx=0,cy=0;const P=[];
+function wr_para(ctx,s,x,y,w,o){o=o||{};const sz0=o.size||21,sz=phSz(ctx,sz0),lh=o.lh?o.lh*sz/sz0:sz*1.4,wt=o.w||600,words=s.split(" "),sp=tw(ctx," ",sz,wt),gapW=150;let cx=0,cy=0;const P=[];
   words.forEach(wd=>{const ww=wd==="[gap]"?gapW:tw(ctx,wd,sz,wt);if(cx>0&&cx+ww>w){cx=0;cy+=lh;}P.push({wd,x:cx,y:cy,w:ww});cx+=ww+sp;});
   if(o.measure)return cy+lh;const col=o.color||rgba(INK,0.95);
   P.forEach(p=>{if(p.wd==="[gap]"){const g=o.gapA||0;ctx.save();ctx.setLineDash([6,6]);ctx.strokeStyle=rgba(WR_AMB,0.35+0.6*g);ctx.lineWidth=2;rr(ctx,x+p.x,y+p.y-sz*0.9,gapW,sz*1.25,6);ctx.stroke();ctx.restore();return;}T(ctx,p.wd,x+p.x,y+p.y,{w:wt,size:sz,color:col});});
@@ -1991,12 +1991,14 @@ function wr_link(ctx,x,y,w,name,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)re
   glass(ctx,x,y-26,w,52,26,col,{glow:6+12*on,ea:0.7,fill:"rgba(7,12,24,0.95)"});T(ctx,name,x+(o.cog?44:w/2),y+7,{f:"mono",w:500,size:18,align:o.cog?"left":"center",color:rgba(mix(SOFT,INK,0.4+0.6*on),1)});
   if(o.cog)wr_cog(ctx,x+24,y,10,o.t||0,col,1,o.spin||0);});}
 // a CI check: a status (0 waiting, 1 failed, 2 passed), its name and its message
-function wr_ci(ctx,x,y,w,name,st,msg,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=st>=1.5?GOOD:st>=0.5?BAD:SOFT,h=msg?68+24*msg.split("\n").length:60;withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,col,{glow:8+10*(st>0?1:0),ea:0.7,fill:"rgba(7,12,24,0.95)"});
+function wr_ci(ctx,x,y,w,name,st,msg,o){o=o||{};const a=o.a==null?1:o.a,m=phMin(ctx);if(m&&msg&&!o.wrapped){const ms=phSz(ctx,o.msize||18),L=[];msg.split("\n").forEach(l=>phWrap(ctx,l,w-48,ms,500,"mono").forEach(q=>L.push(q)));
+    const h=68+34*L.length;if(a<=0.01)return h;wr_ci(ctx,x,y,w,name,st,"",Object.assign({},o,{h}));withA(ctx,a,()=>{const col=st>=1.5?GOOD:st>=0.5?BAD:SOFT;L.forEach((l,i)=>T(ctx,l,x+24,y+80+i*34,{f:"mono",w:500,size:o.msize||18,color:rgba(col,1)}));});return h;}
+  if(a<=0.01)return msg?68+24*msg.split("\n").length:60;const col=st>=1.5?GOOD:st>=0.5?BAD:SOFT,h=o.h||(msg?68+24*msg.split("\n").length:60);withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,col,{glow:8+10*(st>0?1:0),ea:0.7,fill:"rgba(7,12,24,0.95)"});
   const cx=x+32,cy=y+30;if(st>=1.5){ctx.fillStyle="rgba(8,24,16,0.95)";ctx.beginPath();ctx.arc(cx,cy,15,0,TAU);ctx.fill();ring(ctx,cx,cy,15,GOOD,1,2.2);tick_(ctx,cx,cy+1,20,GOOD,1);}
   else if(st>=0.5)kt_rcross(ctx,cx,cy,15,1);else ring(ctx,cx,cy,15,SOFT,0.7,2,[4,4]);
   T(ctx,name,x+62,y+37,{w:700,size:20});if(msg)msg.split("\n").forEach((m,i)=>T(ctx,m,x+24,y+76+i*24,{f:"mono",w:500,size:o.msize||18,color:rgba(col,1)}));});return h;}
 // the docs site's page for a model: the description dbt shows, with the definition it names in full
-function wr_docs(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,KIND,{glow:10,ea:0.7,fill:"rgba(10,16,30,0.96)"});
+function wr_docs(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(phMin(ctx))h=Math.max(h,170+wr_para(ctx,"An award the university offers, as it stood from valid_from until valid_to.",0,0,w-56,{size:19,measure:true})+6+wr_para(ctx,"Award. "+WR_DEF,0,0,w-56,{size:19,measure:true})+30);if(a<=0.01)return h;withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,KIND,{glow:10,ea:0.7,fill:"rgba(10,16,30,0.96)"});
   ctx.fillStyle="rgba(140,200,255,0.12)";rr(ctx,x+2,y+2,w-4,44,12);ctx.fill();[0,1,2].forEach(i=>{ctx.fillStyle=rgba(SOFT,0.6);ctx.beginPath();ctx.arc(x+24+i*18,y+24,5,0,TAU);ctx.fill();});
   T(ctx,"the docs site · core_award",x+90,y+31,{f:"mono",w:500,size:18,color:rgba(KIND,1)});T(ctx,"core_award",x+28,y+94,{w:800,size:30});T(ctx,"Description",x+28,y+134,{w:700,size:19,color:rgba(SOFT,1)});
   const yy=y+170,d1="An award the university offers, as it stood from valid_from until valid_to.";wr_para(ctx,d1,x+28,yy,w-56,{size:19});
@@ -2020,18 +2022,18 @@ const WR_TAB=[["core_award_v1",[["award_key","string","PK"],["award_bk","string"
   ["core_learner_v1",[["learner_key","string","PK"],["learner_bk","string",""],["valid_from","date","PK"]]]];
 function wr_erdGen(ctx,x,y,w,h,p,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const amb=o.amb||0,col=mix([170,205,255],WR_AMB,amb);withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,col,{glow:10+12*amb,ea:0.7,fill:"rgba(6,10,20,0.95)"});
   wr_cog(ctx,x+w-28,y+28,12,t,col,1,o.spin||0);T(ctx,"generated",x+w-52,y+35,{w:700,size:18,align:"right",color:rgba(col,1)});
-  const tw_=(w-80)/3;WR_TAB.forEach(([nm,cols],i)=>{const q=clamp(p*3-i*0.6,0,1);if(q<=0)return;const tx=x+24+i*(tw_+16),ty=y+64,th=48+cols.length*34;withA(ctx,q,()=>{ctx.fillStyle="rgba(14,22,40,0.98)";rr(ctx,tx,ty,tw_,th,8);ctx.fill();
+  const tw_=(w-80)/3;phAsDeco(phMin(ctx)>0,()=>WR_TAB.forEach(([nm,cols],i)=>{const q=clamp(p*3-i*0.6,0,1);if(q<=0)return;const tx=x+24+i*(tw_+16),ty=y+64,th=48+cols.length*34;withA(ctx,q,()=>{ctx.fillStyle="rgba(14,22,40,0.98)";rr(ctx,tx,ty,tw_,th,8);ctx.fill();
     ctx.strokeStyle=rgba(col,0.8);ctx.lineWidth=1.6;rr(ctx,tx,ty,tw_,th,8);ctx.stroke();ctx.fillStyle=rgba(col,0.16);rr(ctx,tx,ty,tw_,38,8);ctx.fill();T(ctx,nm,tx+12,ty+26,{f:"mono",w:500,size:18,color:rgba(col,1)});
     cols.forEach(([c,ty_,k],j)=>{const yy=ty+68+j*34,isUpd=o.upd!=null&&i===0&&j===3;let type=ty_;if(isUpd&&o.upd>0.5)type="bigint";
       T(ctx,type,tx+12,yy,{f:"mono",w:500,size:16,color:rgba(isUpd?mix(SOFT,WR_AMB,amb>0.3?1:o.upd):SOFT,1)});T(ctx,c.length>15?c.slice(0,14)+"…":c,tx+12+tw(ctx,"string ",16,500,"mono"),yy,{f:"mono",w:500,size:16,color:rgba(INK,0.9)});
-      if(k)T(ctx,k,tx+tw_-10,yy,{f:"mono",w:500,size:15,align:"right",color:rgba(TRUST,0.95)});});});});});}
+      if(k)T(ctx,k,tx+tw_-10,yy,{f:"mono",w:500,size:15,align:"right",color:rgba(TRUST,0.95)});});});}));});}
 
 /* ---------- the present: the catalog ---------- */
 // Unity Catalog's page for a table: a search, the table, its description and its columns' comments (the descriptions the YAML gives them).
 // o.desc (0..1) flows the description in; o.cols (0..1) the columns'; o.edit (0..1) a hand's edit typed over it; o.reset (0..1) the build writing it back
 const WR_CCOL=[["award_key","The award's hash key: the sha-256 of award_bk."],["award_name","The award's name, as it stood in this version."],["credit_points_required","The credit points the award requires, as the student system holds it."]];
 const WR_CDESC="An award the university offers, as it stood from valid_from until valid_to. Award. A qualification the university confers, such as a graduate certificate or a master, for a set number of credit points. …";
-function wr_catalog(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const UC=[176,186,206];withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,UC,{glow:10+12*(o.hi||0),ea:0.6,fill:"rgba(12,14,20,0.96)"});
+function wr_catalog(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(phMin(ctx))h=214+wr_para(ctx,WR_CDESC,0,0,w-48,{size:18,measure:true})+20+40+72+60;if(a<=0.01)return h;const UC=[176,186,206];withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,UC,{glow:10+12*(o.hi||0),ea:0.6,fill:"rgba(12,14,20,0.96)"});
   T(ctx,"Databricks · Unity Catalog",x+24,y+38,{w:700,size:20,color:rgba(UC,1)});
   ctx.fillStyle="rgba(255,255,255,0.06)";rr(ctx,x+24,y+58,w-48,42,10);ctx.fill();ring(ctx,x+46,y+77,8,SOFT,0.9,2);ctx.strokeStyle=rgba(SOFT,0.9);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+52,y+83);ctx.lineTo(x+58,y+89);ctx.stroke();
   T(ctx,typeOn("award",o.search==null?1:o.search),x+70,y+86,{w:600,size:19,color:rgba(INK,0.9)});
@@ -2041,38 +2043,45 @@ function wr_catalog(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)
     if(ev>0)withA(ctx,ev,()=>{wr_para(ctx,typeOn("A degree the university gives on paper.",clamp(ed*1.4,0,1)),x+24,dy,w-48,{size:18,color:rgba(EDGE_,1)});tag(ctx,x+w-24-tw(ctx,"edited here, by hand",17,700)-26,y+182-6,"edited here, by hand",EDGE_,{size:17});});
     if(rs>0&&rs<1){const sx=x+24+(w-48)*rs;glow(ctx,sx,dy+40,90,KIND,0.35);ctx.fillStyle=rgba(KIND,0.7);ctx.fillRect(sx-1,dy-22,2,110);}}
   if(o.flow>0)withA(ctx,o.flow,()=>{glow(ctx,x+w/2,dy+40,w*0.45,KIND,0.12);});
-  const cy=y+h-218;T(ctx,"Columns",x+24,cy,{w:700,size:18,color:rgba(SOFT,1)});WR_CCOL.forEach(([c,cm],i)=>{const yy=cy+40+i*62;ctx.fillStyle="rgba(255,255,255,0.04)";rr(ctx,x+16,yy-26,w-32,58,8);ctx.fill();
-    T(ctx,c,x+30,yy,{f:"mono",w:500,size:18,color:rgba(INK,0.95)});withA(ctx,clamp((o.cols==null?1:o.cols)*3-i,0,1),()=>T(ctx,cm,x+30,yy+24,{w:600,size:17,color:rgba(mix(INK,KIND,0.3),1)}));});});}
+  const ph=phMin(ctx)>0,cy=ph?dy+wr_para(ctx,WR_CDESC,0,0,w-48,{size:18,measure:true})+20:y+h-218,CC=ph?WR_CCOL.slice(0,2):WR_CCOL,rh_=ph?72:62;
+  T(ctx,"Columns",x+24,cy,{w:700,size:18,color:rgba(SOFT,1)});CC.forEach(([c,cm],i)=>{const yy=cy+40+i*rh_;ctx.fillStyle="rgba(255,255,255,0.04)";rr(ctx,x+16,yy-26,w-32,rh_-4,8);ctx.fill();
+    T(ctx,c,x+30,yy,{f:"mono",w:500,size:18,color:rgba(INK,0.95)});withA(ctx,clamp((o.cols==null?1:o.cols)*3-i,0,1),()=>T(ctx,cm,x+30,yy+(ph?32:24),{w:600,size:17,color:rgba(mix(INK,KIND,0.3),1)}));});});}
 
 // the university's business glossary on Databricks, outside the project (drawn, not a project file): one term, its words, and who named it the source.
 // o.chg (0..1) marks the term as changed since the last sync; o.tick the gold tick of data governance, who names the term
-function wr_glossary(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const GL=[176,186,206],chg=o.chg||0;withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,mix(GL,WR_AMB,chg),{glow:10+12*(o.hi||0),ea:0.6,fill:"rgba(12,14,20,0.96)"});
+function wr_glossary(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(phMin(ctx)&&!o.short)h=Math.max(h,124+wr_para(ctx,WR_DEF,0,0,w-48,{size:18,measure:true})+40);if(a<=0.01)return h;const GL=[176,186,206],chg=o.chg||0;withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,mix(GL,WR_AMB,chg),{glow:10+12*(o.hi||0),ea:0.6,fill:"rgba(12,14,20,0.96)"});
   T(ctx,"Unity Catalog · Glossary",x+24,y+38,{w:700,size:20,color:rgba(GL,1)});if(!o.short){const ot="outside dbt",ow=tw(ctx,ot,16,700)+26;tag(ctx,x+w-16-ow,y+32,ot,SOFT,{size:16});}
   T(ctx,"Award",x+24,y+84,{w:800,size:26,color:rgba(INK,1)});
   if(chg>0)withA(ctx,chg,()=>tag(ctx,x+40+tw(ctx,"Award",26,800),y+76,"changed",WR_AMB,{size:17}));
   if(!o.short)wr_para(ctx,WR_DEF,x+24,y+124,w-48,{size:18,color:rgba(mix(INK,SOFT,0.2),1)});
-  if(o.tick>0)withA(ctx,o.tick,()=>{kt_gtick(ctx,x+38,y+h-30,13,1);T(ctx,"named by data governance",x+62,y+h-24,{w:700,size:18,color:rgba(TRUST,1)});});});}
+  if(o.tick>0)withA(ctx,o.tick,()=>{kt_gtick(ctx,x+38,y+h-30,13,1);T(ctx,"named by data governance",x+62,y+h-24,{w:700,size:18,color:rgba(TRUST,1)});});});return h;}
 // a pull request card: the agent's sync, what it changes and what it touches; o.tick the owner's gold tick
-function wr_pr(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,KIND,{glow:10+12*(o.hi||0),ea:0.7,fill:"rgba(7,12,24,0.96)"});
+// on a phone its two lines wrap to the card, and the card is as tall as they make it
+function wr_pr(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a,ph=phMin(ctx)>0,L1=ph?phWrap(ctx,"sync award from the glossary",w-48,phSz(ctx,18),500,"mono"):["sync award from the glossary"],
+    L2=ph?phWrap(ctx,"touches: doc(\"award\") · core_award",w-48,phSz(ctx,17),500,"mono"):["touches: doc(\"award\") · core_award"],ld=ph?34:34;if(ph)h=Math.max(h,76+ld*(L1.length+L2.length)+44);if(a<=0.01)return h;
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,KIND,{glow:10+12*(o.hi||0),ea:0.7,fill:"rgba(7,12,24,0.96)"});
   T(ctx,"pull request",x+24,y+38,{w:700,size:20,color:rgba(KIND,1)});
-  T(ctx,"sync award from the glossary",x+24,y+76,{f:"mono",w:500,size:18,color:rgba(INK,0.95)});
-  withA(ctx,o.touch==null?1:o.touch,()=>T(ctx,"touches: doc(\"award\") · core_award",x+24,y+110,{f:"mono",w:500,size:17,color:rgba(SOFT,1)}));
-  if(o.tick>0)withA(ctx,o.tick,()=>{kt_gtick(ctx,x+38,y+h-30,13,1);T(ctx,"the owner approves",x+62,y+h-24,{w:700,size:18,color:rgba(TRUST,1)});});});}
+  L1.forEach((l,i)=>T(ctx,l,x+24,y+76+i*ld,{f:"mono",w:500,size:18,color:rgba(INK,0.95)}));
+  withA(ctx,o.touch==null?1:o.touch,()=>L2.forEach((l,i)=>T(ctx,l,x+24,y+110+(L1.length-1+i)*ld,{f:"mono",w:500,size:17,color:rgba(SOFT,1)})));
+  if(o.tick>0)withA(ctx,o.tick,()=>{kt_gtick(ctx,x+38,y+h-30,13,1);T(ctx,"the owner approves",x+62,y+h-24,{w:700,size:18,color:rgba(TRUST,1)});});});return h;}
 
 /* ---------- the present: the credential and its versions ---------- */
 // core_credential's product card: its name, its version, and a few columns; o.ver ("v2"), o.dim, o.rows, o.lit {row: a}, o.strain (0..1) on the old column
 function wr_prod(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rows=o.rows||[],h=118+rows.length*40;if(a<=0.01)return h;const dim=o.dim||0;withA(ctx,a*(1-0.45*dim),()=>{glass(ctx,x,y,w,h,18,TRUST,{glow:12+8*(o.hi||0),ea:0.8,fill:"rgba(10,12,20,0.97)"});
   T(ctx,"core_credential",x+24,y+44,{f:"mono",w:500,size:24,color:rgba(TRUST,1)});if(o.ver)tag(ctx,x+w-24-tw(ctx,o.ver,20,700)-26,y+38,o.ver,TRUST,{size:20});
-  T(ctx,"public · contract enforced · Noor",x+24,y+80,{w:600,size:18,color:rgba(SOFT,1)});
+  phAsDeco(!!o.behind,()=>T(ctx,"public · contract enforced · Noor",x+24,y+80,{w:600,size:18,color:rgba(SOFT,1)}));
   rows.forEach(([c,ty,col],i)=>{const yy=y+128+i*40,on=o.lit?o.lit[i]||0:0;if(on>0)withA(ctx,on,()=>{ctx.fillStyle=rgba(col||TRUST,0.14);rr(ctx,x+14,yy-27,w-28,36,6);ctx.fill();});
-    T(ctx,c,x+28,yy,{f:"mono",w:500,size:19,color:rgba(mix(INK,col||INK,on*0.5),0.95)});T(ctx,ty,x+w-28,yy,{f:"mono",w:500,size:18,align:"right",color:rgba(SOFT,0.95)});});});return h;}
+    phAsDeco(!!o.behind,()=>{T(ctx,c,x+28,yy,{f:"mono",w:500,size:19,color:rgba(mix(INK,col||INK,on*0.5),0.95)});T(ctx,ty,x+w-28,yy,{f:"mono",w:500,size:18,align:"right",color:rgba(SOFT,0.95)});});});});return h;}
 // a model or an exposure in the lineage: a pill in its layer's colour; o.dark for what a change doesn't reach
-function wr_node(ctx,x,y,name,col,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return 0;const w=tw(ctx,name,18,500,"mono")+40,dk=o.dark||0,c=mix(col,[70,80,95],dk);withA(ctx,a*(1-0.4*dk),()=>{if(o.on>0)glow(ctx,x+w/2,y,w*0.6,col,0.25*o.on);
+function wr_node(ctx,x,y,name,col,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return 0;const w=tw(ctx,name,phSz(ctx,18),500,"mono")+40,dk=o.dark||0,c=mix(col,[70,80,95],dk);withA(ctx,a*(1-0.4*dk),()=>{if(o.on>0)glow(ctx,x+w/2,y,w*0.6,col,0.25*o.on);
   glass(ctx,x,y-24,w,48,12,c,{glow:6+12*(o.on||0),ea:0.7,fill:"rgba(7,12,24,0.96)"});T(ctx,name,x+20,y+7,{f:"mono",w:500,size:18,color:rgba(mix(INK,SOFT,dk),1)});});return w;}
 
 /* ---------- the present: more pieces ---------- */
 // a project file drawn as the blueprint (white on blue): the conceptual model, where meaning lives. o.lit {line: a} lights lines; o.tags [[line, text, a]] names them at the right
-function wr_bpCode(ctx,x,y,w,name,lines,o){o=o||{};const a=o.a==null?1:o.a,sz=o.size||18,lh=o.lh||27,h=o.h||(96+lines.length*lh);if(a<=0.01)return h;withA(ctx,a,()=>{bpPaper(ctx,x,y,w,h,1,{});
+function wr_bpCode(ctx,x,y,w,name,lines,o){o=o||{};const m=phMin(ctx);if(m&&!o.rows){const sz=Math.max(o.size||18,m),lh=Math.max(o.lh||27,Math.round(sz*1.32)),R=phCodeRows(ctx,w,lines,sz),lab=o.label===undefined?WR_RUN:o.label,ls=phSz(ctx,18),
+    rm=(v,f)=>{const n={};R.forEach((r,j)=>{if(v[r.i]!=null&&(!f||r.off===0))n[j]=v[r.i];});return n;},first=i=>R.findIndex(r=>r.i===i);
+  return wr_bpCode(ctx,x,y,w,phFitPath(ctx,name,w-90-(lab?tw(ctx,lab,ls,700):0),ls),R.map(r=>r.s),Object.assign({},o,{rows:1,size:sz,lh,lit:o.lit?rm(o.lit):undefined,tags:(o.tags||[]).map(([li,s_,ta])=>[first(li),s_,ta]),p:o.p}));}
+  const a=o.a==null?1:o.a,sz=o.size||18,lh=o.lh||27,h=o.h||(96+lines.length*lh);if(a<=0.01)return h;withA(ctx,a,()=>{bpPaper(ctx,x,y,w,h,1,{});
   if(o.hi>0)glow(ctx,x+w/2,y+h/2,w*0.5,BPL,0.1*o.hi);
   T(ctx,name,x+30,y+44,{f:"mono",w:500,size:18,color:rgba(BPL,1)});T(ctx,o.label===undefined?WR_RUN:o.label,x+w-30,y+44,{w:700,size:18,align:"right",color:rgba(BPL,0.8)});
   const n=o.p==null?lines.length:lines.length*o.p;lines.forEach((l,i)=>{if(i>=n)return;const yy=y+82+i*lh,on=o.lit?o.lit[i]||0:0;
@@ -2269,6 +2278,10 @@ Object.assign(LV,{
     T(c,V.order,300,290,{w:700,size:20,align:"center",color:rgba(SOFT,1)});c.restore();}
 });
 
+/* ---------- on a phone ----------
+   The film's code cards are drawn at sizes that read, their long lines wrapped (../../../from-words-to-data/shared/src/phone.js) */
+wr_code=phCode(wr_code,{wrap:"chars",size:19,lh:()=>31,head:()=>76,label:o=>o.label===undefined?WR_RUN:o.label});
+
 /* ===== Written once: scenes =====
    Eight chapters, as in ../script.md. Paris, 1859: one tuning fork kept as the home of the note A, and everything tuned from it;
    four copies of a definition, three drifted; what goes where; written once, shown everywhere; diagrams that can't drift;
@@ -2359,16 +2372,23 @@ scene("fork",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   fadeIn(ctx,S,t);vign(ctx,S);});
 
 /* ---------- 2. Four copies ---------- */
+function wr_tagX(ctx,items,x0,sz,gap){let x=x0;return items.map(s_=>{const p=x;x+=tw(ctx,s_,phSz(ctx,sz||20),700)+26+(gap||12);return p;});}
+// where character ci of line li falls once wr_code has wrapped the lines at wrap characters: [visual row, column]
+function wr_insAt(lines,wrap,li,ci){let row=0;for(let i=0;i<lines.length;i++){const l=lines[i];if(l.length<=wrap){if(i===li)return[row,ci];row++;continue;}const ind=" ".repeat(l.match(/^\s*/)[0].length+2);let rest=l,first=true,used=0;
+  while(rest.length){const lim=first?wrap:wrap-ind.length;let take,cut;if(rest.length<=lim){take=rest.length;cut=rest.length;}else{cut=rest.lastIndexOf(" ",lim);if(cut<=0)cut=lim;take=cut;}
+    if(i===li&&ci<=used+take)return[row,(first?0:ind.length)+ci-used];row++;used+=cut;rest=rest.slice(cut);if(rest[0]===" "){rest=rest.slice(1);used++;}first=false;if(take===rest.length+take&&!rest.length)break;}}return[0,ci];}
 scene("four",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.03,x:900,y:520});
   const cF=c("found"),cD=c("drift"),cO=c("one"),cS=c("step");
   // the agent's review, picking up where the last film left off
   kt_agent(ctx,1000,112,22,t,{a:fin(t,0.2,0.6),busy:1-fin(t,cD,1)});
-  arrive(ctx,1300,112,t,0.6,()=>{glass(ctx,1050,80,560,64,18,KT_AI,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(ctx,"the agent's review",1074,121,{w:700,size:20,color:rgba(KT_AI,1)});
-    T(ctx,"award",1290,121,{f:"mono",w:500,size:20});withA(ctx,fin(t,w("review","four places"),0.4),()=>T(ctx,"· 4 places",1360,121,{w:800,size:20,color:rgba(WR_AMB,1)}));},{dy:16});
+  // its words placed by their widths at the size they're drawn
+  const hz=phSz(ctx,20),HX1=Math.max(1290,1074+tw(ctx,"the agent's review",hz,700)+16),HX2=Math.max(1360,HX1+tw(ctx,"award",hz,500,"mono")+14),HW=Math.max(560,HX2+tw(ctx,"· 4 places",hz,800)+24-1050);
+  arrive(ctx,1300,112,t,0.6,()=>{glass(ctx,1050,80,HW,64,18,KT_AI,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(ctx,"the agent's review",1074,121,{w:700,size:20,color:rgba(KT_AI,1)});
+    T(ctx,"award",HX1,121,{f:"mono",w:500,size:20});withA(ctx,fin(t,w("review","four places"),0.4),()=>T(ctx,"· 4 places",HX2,121,{w:800,size:20,color:rgba(WR_AMB,1)}));},{dy:16});
   // the one definition, carried from the past, now found in four places
   const one=1-fin(t,w("found","wiki")-0.5,0.6);if(one>0.01)withA(ctx,one,()=>{const sp=ease(fin(t,w("review","four places")-0.2,1.0));
-    for(let k=3;k>=0;k--){const ox=k*16*sp,oy=k*16*sp;withA(ctx,k?sp*0.8:1,()=>{glass(ctx,1390-ox,340+oy,440,120,18,k?WR_AMB:TRUST,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.97)"});T(ctx,"award",1420-ox,388+oy,{f:"mono",w:500,size:24,color:rgba(k?WR_AMB:TRUST,1)});T(ctx,"one definition",1420-ox,430+oy,{w:700,size:24});});}
+    for(let k=3;k>=0;k--){const ox=k*16*sp,oy=k*16*sp;withA(ctx,k?sp*0.8:1,()=>{glass(ctx,1390-ox,340+oy,440,120,18,k?WR_AMB:TRUST,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.97)"});phAsDeco(k>0,()=>{T(ctx,"award",1420-ox,388+oy,{f:"mono",w:500,size:24,color:rgba(k?WR_AMB:TRUST,1)});T(ctx,"one definition",1420-ox,430+oy,{w:700,size:24});});});}
     withA(ctx,sp,()=>tag(ctx,1610,560,"four places",WR_AMB,{align:"center",size:20}));});
   // the four copies, each named and pinned as it's said
   const nm=[w("found","wiki"),w("found","YAML description"),w("found","catalog"),w("found","tooltip")];
@@ -2379,11 +2399,15 @@ scene("four",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   const con=WR_CP.con;arrive(ctx,con[0]+280,con[1]+160,t,w("one","conceptual model")-0.3,()=>{const h=wr_code(ctx,con[0],con[1],con[2],"models/core/course/_course__conceptual.yml",WR_C1,{label:"",wrapMark:true,wrap:54,size:18,lh:29,edge:BPL,lit:{2:fin(t,w("one","conceptual model")+0.6,0.5),3:fin(t,w("one","conceptual model")+0.6,0.5)},litCol:TRUST});
     kt_gtick(ctx,con[0]+con[2]-24,con[1]+h+30,16,fin(t,w("one","Mei approved"),0.4));withA(ctx,fin(t,w("one","Mei approved")+0.2,0.4),()=>T(ctx,"Mei · 1 Oct",con[0]+con[2]-50,con[1]+h+37,{w:700,size:19,align:"right",color:rgba(TRUST,1)}));},{dy:30});
   const ln=fin(t,w("one","words in")+0.3,0.8);if(ln>0){ctx.save();ctx.setLineDash([5,8]);ctx.strokeStyle=rgba(INK,0.5);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(1192,330);ctx.lineTo(lerp(1192,1226,ln),lerp(330,380,ln));ctx.stroke();ctx.restore();}
-  arrive(ctx,1450,640,t,w("one","words in")+0.6,()=>tag(ctx,1450,640,"same words · no wire",SOFT,{align:"center",size:19}),{dy:14});
-  arrive(ctx,1580,700,t,w("one","Only the tooltip"),()=>tag(ctx,1580,700,"only the tooltip · what Mei approved",TRUST,{align:"center",size:19}),{dy:14});
+  // on a phone the conceptual model's card is taller: its two tags sit under it
+  const ph=phMin(ctx)>0,CB=ph?con[1]+wr_code(ctx,con[0],con[1],con[2],"models/core/course/_course__conceptual.yml",WR_C1,{a:0,label:"",wrapMark:true,wrap:54,size:18,lh:29})+60:0,
+    QX=x_=>Math.min(x_,1890-(tw(ctx,"only the tooltip · what Mei approved",phSz(ctx,19),700)+26)/2);
+  arrive(ctx,1450,ph?CB+50:640,t,w("one","words in")+0.6,()=>tag(ctx,ph?QX(1450):1450,ph?CB+50:640,"same words · no wire",SOFT,{align:"center",size:19}),{dy:14});
+  arrive(ctx,1580,ph?CB+106:700,t,w("one","Only the tooltip"),()=>tag(ctx,ph?QX(1580):1580,ph?CB+106:700,"only the tooltip · what Mei approved",TRUST,{align:"center",size:19}),{dy:14});
   // nothing kept them in step: one small edit at a time
   arrive(ctx,80,140,t,cS,()=>tag(ctx,80,140,"nothing kept them in step",WR_AMB,{size:20}),{dy:14});
-  arrive(ctx,420,140,t,w("step","one small edit"),()=>tag(ctx,420,140,"one small edit at a time",WR_AMB,{size:20}),{dy:14});
+  const SX2=ph?80+tw(ctx,"nothing kept them in step",phSz(ctx,20),700)+26+12:420;
+  arrive(ctx,SX2,140,t,w("step","one small edit"),()=>tag(ctx,SX2,140,"one small edit at a time",WR_AMB,{size:20}),{dy:14});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 3. What goes where ---------- */
@@ -2405,35 +2429,41 @@ scene("where",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const mv=ease(fin(t,cM-1.0,1.3)),sh=ease(fin(t,cW-0.6,1.0)),con=WR_CP.con;
   if(mv<1){const h0=wr_code(ctx,0,0,con[2],"",WR_C1,{wrapMark:true,wrap:54,size:18,lh:29,a:0});withA(ctx,1-mv,()=>{const x=lerp(con[0],360,mv),y=lerp(con[1],110,mv);
     wr_code(ctx,x,y,con[2],"models/core/course/_course__conceptual.yml",WR_C1,{label:"",wrapMark:true,wrap:54,size:18,lh:29,edge:BPL,hi:fin(t,w("fifth","already has"),0.5),lit:{2:1,3:1}});kt_gtick(ctx,x+con[2]-24,y+h0+30,16,1);});}
-  arrive(ctx,1500,640,t,w("fifth","already has"),()=>withA(ctx,1-mv,()=>tag(ctx,1500,640,"the home already exists",TRUST,{align:"center",size:20})),{dy:14});
+  const HY=phMin(ctx)?Math.max(640,con[1]+wr_code(ctx,0,0,con[2],"",WR_C1,{wrapMark:true,wrap:54,size:18,lh:29,a:0})+70):640;
+  arrive(ctx,1500,HY,t,w("fifth","already has"),()=>withA(ctx,1-mv,()=>tag(ctx,1500,HY,"the home already exists",TRUST,{align:"center",size:20})),{dy:14});
   arrive(ctx,960,640,t,w("fifth","Everything else"),()=>withA(ctx,1-fin(t,cM-0.6,0.5),()=>T(ctx,"one home per fact",960,640,{w:800,size:44,align:"center",color:rgba(TRUST,1)})),{from:0.9});
   // where the business glossary already defines the term: data governance names it, and the conceptual model takes its words, with where they came from
   const cGl=c("glossary"),glA=fin(t,w("glossary","business glossary")-0.3,0.6)*(1-fin(t,cW-0.9,0.5)),sp=clamp((t-w("glossary","Data governance"))/2.2,0,1),tk=w("glossary","takes its words");
   if(mv>0){const lit={2:fin(t,w("meaning","what each"),0.4)*(1-fin(t,cGl,0.4))+pulseAt(t,tk,1.6),3:fin(t,w("meaning","what each"),0.4)*(1-fin(t,cGl,0.4))+pulseAt(t,tk,1.6),7:fin(t,w("meaning","its key"),0.4)*(1-fin(t,cGl,0.4)),4:fin(t,w("meaning","who owns"),0.4)*(1-fin(t,cGl,0.4)),11:fin(t,tk+0.6,0.4),12:fin(t,w("glossary","Data governance"),0.4)*fin(t,tk+0.8,0.4)};
     const src=WR_SRC.map((l,i)=>typeOn(l,clamp(sp*WR_SRC.length-i,0,1))).filter((l,i)=>sp*WR_SRC.length-i>0);
-    withA(ctx,mv*(1-sh),()=>wr_bpCode(ctx,360,110,1200,"models/core/course/_course__conceptual.yml · the conceptual model",WR_CON9.concat(src),{size:18,lh:27,lit,tags:[[2,"what it is",lit[2]],[7,"its key",lit[7]],[4,"its owner",lit[4]],[11,"the glossary's term",lit[11]]]}));
-    withA(ctx,sh,()=>{bpPaper(ctx,360,90,1200,96,1,{});T(ctx,"models/core/course/_course__conceptual.yml",390,148,{f:"mono",w:500,size:20,color:rgba(BPL,1)});T(ctx,"the conceptual model · meaning",1530,148,{w:700,size:20,align:"right",color:rgba(BPL,0.9)});});}
-  if(glA>0.01){const gy=620;arrive(ctx,760,gy+110,t,w("glossary","business glossary")-0.3,()=>wr_glossary(ctx,360,gy,800,230,t,{a:glA,tick:fin(t,w("glossary","Data governance"),0.5),hi:pulseAt(t,w("glossary","that's its home"),1.4)}),{dy:30});
-    arrive(ctx,1400,gy+60,t,w("glossary","that's its home"),()=>withA(ctx,glA,()=>tag(ctx,1400,gy+60,"its home",TRUST,{align:"center",size:20})),{dy:12});
-    withA(ctx,glA,()=>{wr_flow(ctx,[[760,gy-4],[760,gy-30]],t,fin(t,tk-0.3,0.5),BPL,{p:fin(t,tk-0.3,0.6),n:3});});
-    arrive(ctx,1400,gy+130,t,tk,()=>withA(ctx,glA,()=>tag(ctx,1400,gy+130,"takes its words",BPL,{align:"center",size:20})),{dy:12});}
+    const ph=phMin(ctx)>0;withA(ctx,mv*(1-sh),()=>wr_bpCode(ctx,ph?40:360,110,ph?1100:1200,"models/core/course/_course__conceptual.yml · the conceptual model",WR_CON9.concat(src),{size:18,lh:27,lit,tags:[[2,"what it is",ph?fin(t,w("meaning","what each"),0.4)*(1-fin(t,cGl,0.4)):lit[2]],[7,"its key",lit[7]],[4,"its owner",lit[4]],[11,"the glossary's term",lit[11]]]}));
+    withA(ctx,sh,()=>{bpPaper(ctx,360,90,1200,96,1,{});T(ctx,phFitPath(ctx,"models/core/course/_course__conceptual.yml",1500-390-tw(ctx,"the conceptual model · meaning",phSz(ctx,20),700),phSz(ctx,20)),390,148,{f:"mono",w:500,size:20,color:rgba(BPL,1)});T(ctx,"the conceptual model · meaning",1530,148,{w:700,size:20,align:"right",color:rgba(BPL,0.9)});});}
+  // on a phone the glossary sits at the top right, beside the conceptual model (which is taller there), its tags under it
+  if(glA>0.01){const ph=phMin(ctx)>0,gx=ph?1170:360,gy=ph?110:620,gw=ph?700:800,gh=ph?wr_glossary(ctx,gx,gy,gw,230,t,{a:0}):0,TX=ph?1520:1400,T1=ph?gy+gh+40:gy+60,T2=ph?T1+60:gy+130;
+    arrive(ctx,gx+gw/2,gy+110,t,w("glossary","business glossary")-0.3,()=>wr_glossary(ctx,gx,gy,gw,230,t,{a:glA,tick:fin(t,w("glossary","Data governance"),0.5),hi:pulseAt(t,w("glossary","that's its home"),1.4)}),{dy:30});
+    arrive(ctx,TX,T1,t,w("glossary","that's its home"),()=>withA(ctx,glA,()=>tag(ctx,TX,T1,"its home",TRUST,{align:"center",size:20})),{dy:12});
+    withA(ctx,glA,()=>{wr_flow(ctx,ph?[[gx-4,gy+190],[gx-26,gy+190]]:[[760,gy-4],[760,gy-30]],t,fin(t,tk-0.3,0.5),BPL,{p:fin(t,tk-0.3,0.6),n:3});});
+    arrive(ctx,TX,T2,t,tk,()=>withA(ctx,glA,()=>tag(ctx,TX,T2,"takes its words",BPL,{align:"center",size:20})),{dy:12});}
   // two columns below it: what was decided and accepted, beside what it's about; and the YAML the build uses
-  const MX=80,YX=980,CW=860;
+  // on a phone: the tags in rows by their widths; the decisions card without its "…"; the gaps leave before the log is named, its words
+  // taking their place; the conventions show their first four rules
+  const MX=80,YX=980,CW=860,ph=phMin(ctx)>0,YT=ph?wr_tagX(ctx,["YAML","grain","keys","contracts","tests","owners"],YX,18,10):[YX,YX+140,YX+250,YX+350,YX+500,YX+610],MT=ph?[MX,MX+tw(ctx,"a decision log · why · who",phSz(ctx,20),700)+26+12]:[MX,MX+400];
   arrive(ctx,YX+50,224,t,cB-0.2,()=>tag(ctx,YX,224,"YAML",TRUST,{size:22}),{dy:12});
   const whyA=fin(t,w("log","It holds why"),0.5);
-  arrive(ctx,MX+CW/2,360,t,w("why","Decisions"),()=>{wr_code(ctx,MX,260,CW,"models/_shared/_shared__decisions.yml",WR_DEC,{wrap:74,size:18,lh:28,edge:KIND,p:clamp((t-w("why","Decisions"))/1.6,0,1),hi:whyA,
+  const DEC=ph?WR_DEC.filter(l=>l.trim()!=="…"):WR_DEC,GY=ph?260+16+wr_code(ctx,MX,260,CW,"models/_shared/_shared__decisions.yml",DEC,{a:0,wrap:74,size:18,lh:28}):522;
+  arrive(ctx,MX+CW/2,360,t,w("why","Decisions"),()=>{wr_code(ctx,MX,260,CW,"models/_shared/_shared__decisions.yml",DEC,{wrap:74,size:18,lh:28,edge:KIND,p:clamp((t-w("why","Decisions"))/1.6,0,1),hi:whyA,
     seg:WR_WHY.map(s=>[-1,s,whyA,TRUST])});},{dy:30});
-  arrive(ctx,MX+150,224,t,w("why","Decisions"),()=>tag(ctx,MX,224,"a decision log · why · who",KIND,{size:20}),{dy:12});
-  arrive(ctx,MX+CW/2,650,t,w("why","gaps"),()=>wr_code(ctx,MX,522,CW,"models/core/student/_core_student__models.yml",WR_GAPS,{wrap:74,size:18,lh:28,edge:KIND,p:clamp((t-w("why","gaps"))/1.2,0,1)}),{dy:30});
-  arrive(ctx,MX+560,224,t,w("why","gaps")+0.3,()=>tag(ctx,MX+400,224,"accepted gaps · on the model",KIND,{size:20}),{dy:12});
+  arrive(ctx,MX+150,224,t,w("why","Decisions"),()=>tag(ctx,MT[0],224,"a decision log · why · who",KIND,{size:20}),{dy:12});
+  arrive(ctx,MX+CW/2,GY+128,t,w("why","gaps"),()=>wr_code(ctx,MX,GY,CW,"models/core/student/_core_student__models.yml",WR_GAPS,{a:ph?1-fin(t,cL-0.6,0.5):1,wrap:74,size:18,lh:28,edge:KIND,p:clamp((t-w("why","gaps"))/1.2,0,1)}),{dy:30});
+  arrive(ctx,MX+560,224,t,w("why","gaps")+0.3,()=>tag(ctx,MT[1],224,"accepted gaps · on the model",KIND,{size:20}),{dy:12});
   // the YAML column: what the build uses, then the conventions' rules
-  ["grain","keys","contracts","tests","owners"].forEach((s,i)=>{const x=[YX+140,YX+250,YX+350,YX+500,YX+610][i];arrive(ctx,x+30,224,t,w("build",s)-0.1,()=>tag(ctx,x,224,s,TRUST,{size:18}),{from:0.7});});
+  ["grain","keys","contracts","tests","owners"].forEach((s,i)=>{const x=YT[i+1];arrive(ctx,x+30,224,t,w("build",s)-0.1,()=>tag(ctx,x,224,s,TRUST,{size:18}),{from:0.7});});
   const cvA=1-fin(t,cL+0.2,0.6)*0.75;
-  arrive(ctx,YX+CW/2,450,t,w("build","grain")+0.6,()=>withA(ctx,cvA,()=>wr_code(ctx,YX,260,CW,"docs/conventions.md",WR_CONV,{wrap:74,size:18,lh:28,edge:TRUST,p:clamp((t-w("build","grain")-0.6)/1.8,0,1)})),{dy:30});
+  arrive(ctx,YX+CW/2,450,t,w("build","grain")+0.6,()=>withA(ctx,cvA,()=>wr_code(ctx,YX,260,CW,"docs/conventions.md",ph?WR_CONV.slice(0,6).concat(["…"]):WR_CONV,{wrap:74,size:18,lh:28,edge:TRUST,p:clamp((t-w("build","grain")-0.6)/1.8,0,1)})),{dy:30});
   // a model's YAML has no place for why
   withA(ctx,fin(t,w("log","no place"),0.5),()=>{ctx.save();ctx.setLineDash([8,8]);ctx.strokeStyle=rgba(WR_AMB,0.85);ctx.lineWidth=2;rr(ctx,YX,756,CW,96,16);ctx.stroke();ctx.restore();ctx.fillStyle="rgba(7,12,24,0.92)";rr(ctx,YX+2,758,CW-4,92,16);ctx.fill();
     T(ctx,"why: ?",YX+30,812,{f:"mono",w:500,size:22,color:rgba(WR_AMB,1)});T(ctx,"a model's YAML has no place for why",YX+CW-30,812,{w:700,size:22,align:"right",color:rgba(WR_AMB,1)});});
-  arrive(ctx,MX+CW/2,850,t,w("log","isn't a copy"),()=>T(ctx,"a decision log holds why",MX+CW/2,850,{w:700,size:26,align:"center",color:rgba(TRUST,1)}),{dy:14});
+  const LY=ph?GY+40:850;arrive(ctx,MX+CW/2,LY,t,w("log","isn't a copy"),()=>T(ctx,"a decision log holds why",MX+CW/2,LY,{w:700,size:26,align:"center",color:rgba(TRUST,1)}),{dy:14});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 4. Written once, shown everywhere ---------- */
@@ -2442,10 +2472,11 @@ const WR_PY=["\"\"\"Writes each domain's definitions, the university's map and t
 const WR_MD=["# Course domain: definitions","","*Generated by `scripts/generate/definitions.py` from `_course__conceptual.yml`, next to this file. Edit the conceptual model, then run the script; don't edit this file.*","","{% docs award %}","**Award.** "+WR_DEF,"","- Business key: The award code, qualified by its key set, SIS|GCDA. Issued by: Registrar's office.","- Owner of the meaning: Mei Tanaka, registrar's office.","- History: Every version, dated when it was recorded.","{% enddocs %}"];
 const WR_YML=["  - name: core_award","    description: >","      An award the university offers, as it stood from valid_from until valid_to.","      {{ doc(\"award\") }}"];
 const WR_CHAIN=[["_course__conceptual.yml",0,BPL],["scripts/generate/definitions.py",1,KT_AI],["_course__definitions.md",1,KIND],["doc(\"award\")",0,TRUST],["the docs site",0,KIND]];
-function wr_chainX(ctx){const W_=WR_CHAIN.map(([n,cg])=>tw(ctx,n,18,500,"mono")+(cg?76:44)),gap=(1760-W_.reduce((s,x)=>s+x,0))/4;let x=80;return W_.map(w_=>{const r=[x,w_];x+=w_+gap;return r;});}
+const WR_CHS={"scripts/generate/definitions.py":"definitions.py","the docs site":"docs site"};const wr_chN=(ctx,n)=>phMin(ctx)?WR_CHS[n]||n:n;
+function wr_chainX(ctx){const ph=phMin(ctx)>0,W_=WR_CHAIN.map(([n,cg])=>tw(ctx,wr_chN(ctx,n),phSz(ctx,18),500,"mono")+(cg?76:44)),span=ph?1840:1760,gap=(span-W_.reduce((s,x)=>s+x,0))/4;let x=ph?40:80;return W_.map(w_=>{const r=[x,w_];x+=w_+gap;return r;});}
 function wr_chain(ctx,y,t,on,a,o){o=o||{};if(a<=0.01)return;const X=wr_chainX(ctx);withA(ctx,a,()=>{WR_CHAIN.forEach(([n,cg,col],i)=>{const[x,w_]=X[i],q=on[i];if(q<=0)return;
   if(i>0){const[px,pw]=X[i-1];arrowTo(ctx,px+pw+8,y,x-8,y,col,q,{p:q,head:12});}
-  arrive(ctx,x+w_/2,y,t,o.t0?o.t0[i]:-9,()=>wr_link(ctx,x,y,w_,n,{cog:!!cg,on:o.lit?o.lit[i]:0.5,col,t,spin:cg&&o.spin?o.spin[i]:0}),{from:0.8});});});return X;}
+  arrive(ctx,x+w_/2,y,t,o.t0?o.t0[i]:-9,()=>wr_link(ctx,x,y,w_,wr_chN(ctx,n),{cog:!!cg,on:o.lit?o.lit[i]:0.5,col,t,spin:cg&&o.spin?o.spin[i]:0}),{from:0.8});});});return X;}
 scene("blocks",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025,y:420});
   const cS=c("script"),cP=c("points"),cC=c("change"),cZ=c("zero"),tPage=w("script","Markdown page");
@@ -2459,29 +2490,32 @@ scene("blocks",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   if(A1>0.01)arrive(ctx,960,420,t,0.8,()=>withA(ctx,A1,()=>wr_code(ctx,260,300,1400,"models/core/course/_course__conceptual.yml",WR_HEAD,{size:19,edge:BPL,p:clamp((t-0.9)/1.8,0,1),seg:[[0,"The course domain's conceptual model",fin(t,w("once","defined once"),0.5),TRUST]]})),{dy:30});
   if(A2>0.01)arrive(ctx,960,460,t,cS-0.1,()=>withA(ctx,A2,()=>{wr_code(ctx,260,280,1400,"scripts/generate/definitions.py",WR_PY,{size:19,edge:KT_AI,cog:true,spin:1,t,p:clamp((t-cS)/2.6,0,1),seg:[[5,"turns its entities and relationships into doc blocks",fin(t,w("script","doc block"),0.5),KT_AI]]});}),{dy:30});
   if(A3>0.01)arrive(ctx,960,470,t,tPage-0.3,()=>withA(ctx,A3,()=>wr_code(ctx,260,230,1400,"models/core/course/_course__definitions.md",WR_MD,{wrap:112,size:19,edge:KIND,cog:true,t,p:clamp((t-tPage)/2.2,0,1),seg:[[3,"don't edit this file.*",fin(t,w("script","Nobody edits"),0.5),WR_AMB]]})),{dy:30});
-  arrive(ctx,960,830,t,w("script","Nobody edits"),()=>withA(ctx,A3,()=>tag(ctx,960,830,"generated · don't edit this file",WR_AMB,{align:"center",size:20})),{dy:14});
+  const ph=phMin(ctx)>0,NY=ph?196:830;arrive(ctx,960,NY,t,w("script","Nobody edits"),()=>withA(ctx,A3,()=>tag(ctx,960,NY,"generated · don't edit this file",WR_AMB,{align:"center",size:20})),{dy:14});
   // the YAML names it; dbt shows it on the docs site
   const A4=fin(t,cP-0.3,0.4)*(1-fin(t,cC-0.5,0.5));
   if(A4>0.01){arrive(ctx,560,330,t,cP-0.2,()=>withA(ctx,A4,()=>wr_code(ctx,80,240,960,"models/core/course/_core_course__models.yml",WR_YML,{size:18,lh:30,edge:TRUST,p:clamp((t-cP)/1.4,0,1),seg:[[3,"{{ doc(\"award\") }}",fin(t,w("points","names it"),0.5),TRUST]]})),{dy:30});
-    arrive(ctx,560,470,t,w("points","names it"),()=>withA(ctx,A4,()=>tag(ctx,560,470,"named, not copied",TRUST,{align:"center",size:20})),{dy:14});
+    const NN=ph?240+30+wr_code(ctx,80,240,960,"models/core/course/_core_course__models.yml",WR_YML,{a:0,size:18,lh:30}):470;
+    arrive(ctx,560,NN,t,w("points","names it"),()=>withA(ctx,A4,()=>tag(ctx,560,NN,"named, not copied",TRUST,{align:"center",size:20})),{dy:14});
     arrive(ctx,1460,460,t,w("points","dbt shows"),()=>withA(ctx,A4,()=>wr_docs(ctx,1080,240,760,440,{def:fin(t,w("points","dbt shows")+0.5,0.6)})),{dy:30});
     withA(ctx,A4*fin(t,w("points","dbt shows")+0.5,0.6),()=>arrowTo(ctx,1040,320,1076,420,TRUST,0.9,{head:12,bend:-0.2}));}
   // change the meaning in one line, with Mei's approval; edit the generated page instead, and CI fails
   const A5=fin(t,cC-0.3,0.5)*(1-fin(t,cZ-0.5,0.4)),tE=w("change","generated page"),tF=w("change","check in CI");
   if(A5>0.01){arrive(ctx,510,380,t,cC-0.2,()=>withA(ctx,A5,()=>{const h=wr_code(ctx,80,240,860,"models/core/course/_course__conceptual.yml",WR_C1,{wrapMark:true,wrap:54,size:18,lh:30,edge:BPL,lit:{2:fin(t,w("change","one line"),0.4),3:fin(t,w("change","one line"),0.4)}});
-      kt_gtick(ctx,900,240+h-30,16,fin(t,w("change","Mei's approval"),0.4));withA(ctx,fin(t,w("change","Mei's approval")+0.2,0.4),()=>T(ctx,"Mei's approval",874,240+h-23,{w:700,size:18,align:"right",color:rgba(TRUST,1)}));}),{dy:30});
+      const my=ph?240+h+30:240+h-30;kt_gtick(ctx,900,my,16,fin(t,w("change","Mei's approval"),0.4));withA(ctx,fin(t,w("change","Mei's approval")+0.2,0.4),()=>T(ctx,"Mei's approval",874,my+7,{w:700,size:18,align:"right",color:rgba(TRUST,1)}));}),{dy:30});
     const fail=fin(t,tF,0.3),fix=fin(t,tF+1.2,0.5),edit=fin(t,tE,1.0)*(1-fix);
-    arrive(ctx,1410,420,t,tE-0.5,()=>withA(ctx,A5,()=>wr_code(ctx,980,240,860,"models/core/course/_course__definitions.md",WR_MD.slice(4,11),{wrap:64,size:18,lh:30,edge:mix(KIND,WR_AMB,edit),cog:true,t,amb:edit*0.6,ins:[1,49," on paper",edit,EDGE_]})),{dy:30});
-    arrive(ctx,1410,770,t,tF-0.2,()=>withA(ctx,A5,()=>wr_ci(ctx,980,724,860,"Doc blocks and key sets match the conceptual model",fail>0?(fix>0.5?2:1):0,fix>0.5?"the definitions, the map and seeds/reference/shared/key_sets.csv\nare up to date":"models/core/course/_course__definitions.md is out of date:\nrun python scripts/generate/definitions.py",{})),{dy:20});
-    arrive(ctx,1410,862,t,tF,()=>withA(ctx,A5*(1-fix),()=>tag(ctx,1410,862,"the check fails",BAD,{align:"center",size:20})),{dy:14});}
+    const MD=ph?WR_MD.slice(4,6).concat(["…","{% enddocs %}"]):WR_MD.slice(4,11),MW=ph?Math.floor(816/(tw(ctx,"0000000000",phSz(ctx,18),500,"mono")/10))-10:64,CY=ph?240+16+wr_code(ctx,980,240,860,"models/core/course/_course__definitions.md",MD,{a:0,wrap:MW,size:18,lh:30}):724;
+    arrive(ctx,1410,420,t,tE-0.5,()=>withA(ctx,A5,()=>wr_code(ctx,980,240,860,"models/core/course/_course__definitions.md",MD,{wrap:MW,size:18,lh:30,edge:mix(KIND,WR_AMB,edit),cog:true,t,amb:edit*0.6,ins:ph?wr_insAt(MD,MW,1,49).concat([" on paper",edit,EDGE_]):[1,49," on paper",edit,EDGE_]})),{dy:30});
+    const CH=wr_ci(ctx,980,CY,860,"Doc blocks and key sets match the conceptual model",1,"models/core/course/_course__definitions.md is out of date:\nrun python scripts/generate/definitions.py",{a:0});
+    arrive(ctx,1410,CY+46,t,tF-0.2,()=>withA(ctx,A5,()=>wr_ci(ctx,980,CY,860,"Doc blocks and key sets match the conceptual model",fail>0?(fix>0.5?2:1):0,fix>0.5?"the definitions, the map and seeds/reference/shared/key_sets.csv\nare up to date":"models/core/course/_course__definitions.md is out of date:\nrun python scripts/generate/definitions.py",{})),{dy:20});
+    const FY=ph?CY+CH+30:862;arrive(ctx,1410,FY,t,tF,()=>withA(ctx,A5*(1-fix),()=>tag(ctx,1410,FY,"the check fails",BAD,{align:"center",size:20})),{dy:14});}
   // the agent's review runs again; the wiki links to the docs site
   const A6=fin(t,cZ-0.1,0.5);
   if(A6>0.01){kt_agent(ctx,190,400,24,t,{a:A6,busy:1-fin(t,cZ+1.4,0.8)});
     arrive(ctx,690,400,t,cZ,()=>wr_code(ctx,270,332,860,"review-metadata",["$ python skills/review-metadata/find_repeats.py","0 description(s) written more than once"],{size:18,lh:30,edge:KT_AI,p:clamp((t-cZ-0.2)/1.4,0,1),seg:[[1,"0 description(s) written more than once",fin(t,w("zero","no description"),0.5),GOOD]]}),{dy:30});
     arrive(ctx,700,540,t,w("zero","in the project"),()=>tag(ctx,700,540,"in the project: 0 descriptions written twice",GOOD,{align:"center",size:20}),{dy:14});
     const lk=fin(t,w("zero","wiki now links")+0.8,0.6),st=fin(t,w("zero","wiki now links"),0.5),gone=fin(t,w("zero","wiki now links")+0.5,0.3);
-    arrive(ctx,1500,455,t,cZ+0.6,()=>wr_copy(ctx,1200,330,600,250,"wiki",WR_TXT.wiki,{amb:1-lk,hl:[["on paper",1-gone,WR_AMB]],strike:st,link:lk,out:gone}),{dy:30});
-    arrive(ctx,1500,630,t,w("zero","docs site"),()=>tag(ctx,1500,630,"the wiki links to the docs site",KIND,{align:"center",size:20}),{dy:14});}
+    const WH=ph?300:250;arrive(ctx,1500,455,t,cZ+0.6,()=>wr_copy(ctx,1200,330,600,WH,"wiki",WR_TXT.wiki,{amb:1-lk,hl:[["on paper",1-gone,WR_AMB]],strike:st,link:lk,out:gone}),{dy:30});
+    arrive(ctx,1500,330+WH+50,t,w("zero","docs site"),()=>tag(ctx,1500,330+WH+50,"the wiki links to the docs site",KIND,{align:"center",size:20}),{dy:14});}
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 5. Diagrams that can't drift ---------- */
@@ -2494,27 +2528,29 @@ scene("diagrams",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   // the wiki card, carried from the last chapter, now shows last year's diagram, going amber
   const wl=fin(t,cH-0.5,0.8),sw=ease(fin(t,0.3,0.8));
   wr_chain(ctx,128,t,[1,1,1,1,1],1-fin(t,0,0.8),{lit:[0,0,0,0,0]});
-  withA(ctx,(1-sw)*(1-wl),()=>wr_copy(ctx,1200,330,600,250,"wiki",WR_TXT.wiki,{link:1}));
+  const ph=phMin(ctx)>0;withA(ctx,(1-sw)*(1-wl),()=>wr_copy(ctx,1200,330,600,ph?300:250,"wiki",WR_TXT.wiki,{link:1}));
   wr_oldWiki(ctx,1200+300*wl,330,600,250,t,{a:sw*(1-wl),amb:fin(t,w("too","drift")-0.2,0.8)});
   arrive(ctx,1500,630,t,w("too","drift"),()=>withA(ctx,1-wl,()=>tag(ctx,1500,630,"diagrams drift too",WR_AMB,{align:"center",size:20})),{dy:14});
   // both diagrams rise into their final places for the rule
   const up=ease(fin(t,cR-0.4,1.2)),codeA=1-fin(t,cF-0.4,0.5);
   // left: the conceptual diagram, drawn by hand
-  arrive(ctx,510,280,t,cH-0.2,()=>withA(ctx,codeA,()=>wr_code(ctx,80,120,860,"models/core/student/_student__conceptual.md",WR_ERD,{size:18,lh:29,edge:BPL,p:clamp((t-cH)/2.4,0,1)})),{dy:30});
+  arrive(ctx,510,280,t,cH-0.2,()=>withA(ctx,codeA,()=>wr_code(ctx,80,120,860,"models/core/student/_student__conceptual.md",ph?WR_ERD.slice(0,4).concat(["    …","```"]):WR_ERD,{size:18,lh:29,edge:BPL,p:clamp((t-cH)/2.4,0,1)})),{dy:30});
   const hy=lerp(456,180,up);arrive(ctx,510,hy+185,t,cH+0.2,()=>{wr_erdHand(ctx,80,hy,860,370,clamp((t-cH-0.2)/2.6,0,1),t,{});
     withA(ctx,fin(t,w("hand","by hand"),0.5)*(1-up),()=>tag(ctx,96,hy+398,"conceptual · drawn by hand · for people",BPL,{size:19}));},{dy:30});
   // right: the physical diagram, generated
-  arrive(ctx,1410,300,t,cG-0.2,()=>withA(ctx,codeA,()=>wr_code(ctx,980,120,860,"models/core/student/_student__physical.md",WR_PHY,{wrap:73,size:18,lh:28,edge:[170,205,255],cog:true,t,p:clamp((t-cG)/2.0,0,1),seg:[[2,"*Generated by `scripts/generate/diagrams.py` from `target/manifest.json`.",fin(t,w("generated","generated"),0.5),KT_AI]]})),{dy:30});
+  arrive(ctx,1410,300,t,cG-0.2,()=>withA(ctx,codeA,()=>wr_code(ctx,980,120,860,"models/core/student/_student__physical.md",ph?[WR_PHY[0],"*Generated by `scripts/generate/diagrams.py` from `target/manifest.json`. …*"].concat(WR_PHY.slice(3)):WR_PHY,{wrap:73,size:18,lh:28,edge:[170,205,255],cog:true,t,p:clamp((t-cG)/2.0,0,1),seg:[[2,"*Generated by `scripts/generate/diagrams.py` from `target/manifest.json`.",fin(t,w("generated","generated"),0.5),KT_AI]]})),{dy:30});
   const tY=w("fails","YAML changes"),stale=fin(t,tY+0.4,0.4)*(1-fin(t,tY+2.6,0.5)),upd=fin(t,tY+2.4,0.3),gy=lerp(530,240,up);
   arrive(ctx,1410,gy+150,t,cG+0.2,()=>{wr_erdGen(ctx,980,gy,860,300,clamp((t-cG-0.2)/2.4,0,1),t,{amb:stale,upd:fin(t,tY,0.1)*(upd>0.5?1:0.4),spin:fin(t,tY+1.6,0.3)*(1-upd)});
     withA(ctx,fin(t,w("generated","from what dbt parsed"),0.5)*(1-up),()=>tag(ctx,996,gy+326,"physical · generated · from what dbt parsed",[170,205,255],{size:19}));},{dy:30});
   // if the YAML changes and the diagram doesn't, CI fails; the script runs, and it passes
   const wfA=fin(t,cF-0.2,0.5)*(1-fin(t,cR-0.5,0.5));
-  if(wfA>0.01){arrive(ctx,490,230,t,cF-0.2,()=>withA(ctx,wfA,()=>wr_code(ctx,80,120,820,".github/workflows/credential-project.yml",WR_WF,{size:18,lh:29,edge:[170,205,255]})),{dy:24});
+  if(wfA>0.01){arrive(ctx,490,230,t,cF-0.2,()=>withA(ctx,wfA,()=>wr_code(ctx,80,ph?80:120,820,".github/workflows/credential-project.yml",WR_WF,{size:18,lh:29,edge:[170,205,255]})),{dy:24});
     arrive(ctx,1410,166,t,cF,()=>withA(ctx,wfA,()=>wr_ci(ctx,930,120,930,"Doc blocks and key sets match the conceptual model",2,"the definitions, the map and seeds/reference/shared/key_sets.csv are up to date",{})),{dy:20});
-    arrive(ctx,1410,276,t,cF+0.2,()=>withA(ctx,wfA,()=>wr_ci(ctx,930,230,930,"Physical diagram matches the YAML",stale>0.3?1:(upd>0.5?2:0),stale>0.3?"models/core/student/_student__physical.md is out of date:\nrun dbt parse, then python scripts/generate/diagrams.py":(upd>0.5?"the physical models are up to date":""),{})),{dy:20});
-    arrive(ctx,1410,382,t,tY,()=>withA(ctx,wfA*(1-upd),()=>tag(ctx,1410,382,"_core_student__models.yml: data_type changed",WR_AMB,{align:"center",size:19})),{dy:14});
-    arrive(ctx,1410,382,t,tY+2.4,()=>withA(ctx,wfA*upd,()=>tag(ctx,1410,382,"CI fails if it's out of date",KIND,{align:"center",size:19})),{dy:14});}
+    const C2=ph?120+12+wr_ci(ctx,930,120,930,"Doc blocks and key sets match the conceptual model",2,"the definitions, the map and seeds/reference/shared/key_sets.csv are up to date",{a:0}):230,
+      C3=ph?C2+30+wr_ci(ctx,930,C2,930,"Physical diagram matches the YAML",1,"models/core/student/_student__physical.md is out of date:\nrun dbt parse, then python scripts/generate/diagrams.py",{a:0}):382;
+    arrive(ctx,1410,C2+46,t,cF+0.2,()=>withA(ctx,wfA,()=>wr_ci(ctx,930,C2,930,"Physical diagram matches the YAML",stale>0.3?1:(upd>0.5?2:0),stale>0.3?"models/core/student/_student__physical.md is out of date:\nrun dbt parse, then python scripts/generate/diagrams.py":(upd>0.5?"the physical models are up to date":""),{})),{dy:20});
+    arrive(ctx,1410,C3,t,tY,()=>withA(ctx,wfA*(1-upd),()=>tag(ctx,1410,C3,"_core_student__models.yml: data_type changed",WR_AMB,{align:"center",size:19})),{dy:14});
+    arrive(ctx,1410,C3,t,tY+2.4,()=>withA(ctx,wfA*upd,()=>tag(ctx,1410,C3,"CI fails if it's out of date",KIND,{align:"center",size:19})),{dy:14});}
   // draw the meaning; generate the structure
   arrive(ctx,510,640,t,w("rule","Draw the meaning"),()=>T(ctx,"draw the meaning",510,640,{w:800,size:36,align:"center",color:rgba(BPL,1)}),{dy:16});
   arrive(ctx,1410,640,t,w("rule","Generate the structure"),()=>T(ctx,"generate the structure",1410,640,{w:800,size:36,align:"center",color:rgba([170,205,255],1)}),{dy:16});
@@ -2523,7 +2559,9 @@ scene("diagrams",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
 /* ---------- 6. One direction ---------- */
 const WR_PROJ=["models:","  credentials:","    # Databricks only: push descriptions to Unity Catalog. DuckDB leaves them in the docs site.","    +persist_docs:","      relation: \"{{ target.type == 'databricks' }}\"","      columns: \"{{ target.type == 'databricks' }}\""];
 const WR_HOME=[["_course__conceptual.yml",BPL],["_course__definitions.md",KIND],["_core_course__models.yml",TRUST]];
-function wr_homes(ctx,y,t,on,a){if(a<=0.01)return[];let x=80;const R=[];withA(ctx,a,()=>{WR_HOME.forEach(([n,col],i)=>{const w_=tw(ctx,n,18,500,"mono")+44;if(i>0)arrowTo(ctx,x-34,y,x-6,y,col,1,{head:10});wr_link(ctx,x,y,w_,n,{on:on[i],col});R.push([x,w_]);x+=w_+40;});});return R;}
+function wr_homes(ctx,y,t,on,a){if(a<=0.01)return[];const ph=phMin(ctx)>0;let x=80;const R=[];withA(ctx,a,()=>{WR_HOME.forEach(([n,col],i)=>{const w_=tw(ctx,n,phSz(ctx,18),500,"mono")+44;
+    if(ph&&i===2){const[px,pw]=R[1],yy=y+75;arrowTo(ctx,px+pw/2,y+28,px+pw/2,yy-28,col,1,{head:10});wr_link(ctx,px,yy,w_,n,{on:on[i],col});R.push([px,w_,yy]);return;}
+    if(i>0)arrowTo(ctx,x-34,y,x-6,y,col,1,{head:10});wr_link(ctx,x,y,w_,n,{on:on[i],col});R.push([x,w_,y]);x+=w_+40;});});return R;}
 scene("catalog",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025,x:1100});
   const cP=c("push"),cT=c("there"),cG=c("gate"),cU=c("upstream"),tH=w("there","Fix it at home"),tW=w("there","writes over");
@@ -2531,28 +2569,33 @@ scene("catalog",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   arrive(ctx,1450,370,t,0.3,()=>wr_catalog(ctx,1060,100,780,540,t,{search:clamp((t-w("find","catalog"))/0.8,0,1),desc:clamp((t-cP-0.6)/1.8,0,1),cols:clamp((t-w("push","its columns"))/1.0,0,1),
     edit:fin(t,w("there","Nobody edits"),1.2),reset:clamp((t-tW)/1.0,0,1),hi:pulseAt(t,w("find","descriptions"),1.6)}),{d:1.0,from:0.92,dy:30});
   // the setting that pushes them, and the homes they come from
-  arrive(ctx,530,240,t,cP-0.3,()=>wr_code(ctx,80,100,900,"dbt_project.yml",WR_PROJ,{wrapMark:true,wrap:78,size:18,lh:30,edge:TRUST,lit:{3:fin(t,w("push","pushes"),0.4),4:fin(t,w("push","each table"),0.4),5:fin(t,w("push","its columns"),0.4)}}),{dy:30});
-  arrive(ctx,280,430,t,cP+0.4,()=>tag(ctx,80,430,"persist_docs · Databricks only",TRUST,{size:18}),{dy:12});
-  const hA=fin(t,cP+0.2,0.6),hl=pulseAt(t,tH,2.4);const R=wr_homes(ctx,510,t,[0.5+0.5*hl,0.5+0.5*pulseAt(t,tH+0.6,2),0.5+0.5*pulseAt(t,tH+1.1,2)],hA);
+  // on a phone: the settings without their comment (the tag says it), wider; the homes in two rows; the tags, the upstream cards and
+  // the dashboard placed around the catalog, which is taller there
+  const ph=phMin(ctx)>0,PJ=ph?WR_PROJ.filter((_,i)=>i!==2):WR_PROJ,pk=ph?1:0,lp={[3-pk]:fin(t,w("push","pushes"),0.4),[4-pk]:fin(t,w("push","each table"),0.4),[5-pk]:fin(t,w("push","its columns"),0.4)};
+  const PB=ph?100+wr_code(ctx,80,100,960,"dbt_project.yml",PJ,{a:0,wrapMark:true,wrap:78,size:18,lh:30}):400,CB=ph?100+wr_catalog(ctx,1060,100,780,540,t,{a:0}):640,TY=ph?610:610,UY=ph?50:0;
+  arrive(ctx,530,240,t,cP-0.3,()=>wr_code(ctx,80,100,ph?960:900,"dbt_project.yml",PJ,{wrapMark:true,wrap:78,size:18,lh:30,edge:TRUST,lit:lp}),{dy:30});
+  arrive(ctx,280,PB+30,t,cP+0.4,()=>tag(ctx,80,PB+30,"persist_docs · Databricks only",TRUST,{size:18}),{dy:12});
+  const hA=fin(t,cP+0.2,0.6),hl=pulseAt(t,tH,2.4);const R=wr_homes(ctx,ph?470:510,t,[0.5+0.5*hl,0.5+0.5*pulseAt(t,tH+0.6,2),0.5+0.5*pulseAt(t,tH+1.1,2)],hA);
   // one direction: the descriptions flow from the files out to the catalog, table then columns
-  if(R.length){const sx=R[2][0]+R[2][1]+6;wr_flow(ctx,[[sx,510],[sx+60,510],[1050,310]],t,fin(t,w("push","pushes")-0.2,0.5),KIND,{p:fin(t,w("push","pushes")-0.2,0.8),n:4});
-    wr_flow(ctx,[[R[0][0]+R[0][1]/2,540],[R[0][0]+R[0][1]/2,566],[sx+30,566],[1050,520]],t,fin(t,tH+0.4,0.5)*(1-fin(t,cG+1,0.6)),BPL,{p:fin(t,tH+0.4,1.2),n:6,sp:0.5});}
-  arrive(ctx,560,610,t,w("push","each table"),()=>withA(ctx,1-fin(t,tH,0.4),()=>tag(ctx,560,610,"each table · its columns",KIND,{align:"center",size:19})),{dy:12});
-  arrive(ctx,1450,680,t,w("there","Nobody edits"),()=>withA(ctx,1-fin(t,cG-0.3,0.5),()=>tag(ctx,1450,680,"nobody edits them there",EDGE_,{align:"center",size:20})),{dy:12});
-  arrive(ctx,1450,730,t,tW,()=>withA(ctx,1-fin(t,cG-0.3,0.5),()=>tag(ctx,1450,730,"a rebuild writes over it",KIND,{align:"center",size:20})),{dy:12});
-  arrive(ctx,560,610,t,tH,()=>withA(ctx,1-fin(t,cG-0.3,0.5),()=>tag(ctx,560,610,"fix it at home",BPL,{align:"center",size:20})),{dy:12});
+  if(R.length){const sx=R[2][0]+R[2][1]+6,sy=R[2][2],r0x=R[0][0]+R[0][1]/2;wr_flow(ctx,[[sx,sy],[sx+60,sy],[1050,310]],t,fin(t,w("push","pushes")-0.2,0.5),KIND,{p:fin(t,w("push","pushes")-0.2,0.8),n:4});
+    wr_flow(ctx,ph?[[r0x,R[0][2]-26],[r0x,R[0][2]-46],[1040,R[0][2]-46],[1050,520]]:[[r0x,540],[r0x,566],[sx+30,566],[1050,520]],t,fin(t,tH+0.4,0.5)*(1-fin(t,cG+1,0.6)),BPL,{p:fin(t,tH+0.4,1.2),n:6,sp:0.5});}
+  const TX=ph?290:560;arrive(ctx,TX,TY,t,w("push","each table"),()=>withA(ctx,1-fin(t,tH,0.4),()=>tag(ctx,TX,TY,"each table · its columns",KIND,{align:"center",size:19})),{dy:12});
+  const EY=Math.max(680,CB+40);arrive(ctx,1450,EY,t,w("there","Nobody edits"),()=>withA(ctx,1-fin(t,cG-0.3,0.5),()=>tag(ctx,1450,EY,"nobody edits them there",EDGE_,{align:"center",size:20})),{dy:12});
+  arrive(ctx,1450,EY+50,t,tW,()=>withA(ctx,1-fin(t,cG-0.3,0.5),()=>tag(ctx,1450,EY+50,"a rebuild writes over it",KIND,{align:"center",size:20})),{dy:12});
+  arrive(ctx,TX,TY,t,tH,()=>withA(ctx,1-fin(t,cG-0.3,0.5),()=>tag(ctx,TX,TY,"fix it at home",BPL,{align:"center",size:20})),{dy:12});
   // one direction: and whatever reads the catalog, like the dashboard's tooltip, reads it from there
-  arrive(ctx,560,610,t,cG,()=>tag(ctx,560,610,"one direction →",KIND,{align:"center",size:22}),{dy:12});
-  const rd=w("gate","whatever reads it");arrive(ctx,1450,760,t,rd-0.2,()=>{wr_dash(ctx,1180,700,540,140,t,{});tag(ctx,1500,668,"tooltip · reads the catalog",KIND,{size:18});},{dy:24});
-  withA(ctx,fin(t,rd,0.5),()=>arrowTo(ctx,1460,644,1460,694,KIND,1,{head:10}));
+  arrive(ctx,TX,TY,t,cG,()=>tag(ctx,TX,TY,"one direction →",KIND,{align:"center",size:22}),{dy:12});
+  const rd=w("gate","whatever reads it"),DY=ph?CB+60:700,DT=ph?1880-tw(ctx,"tooltip · reads the catalog",phSz(ctx,18),700)-26:1500,AX=ph?1300:1460;
+  arrive(ctx,1450,DY+60,t,rd-0.2,()=>{wr_dash(ctx,1180,DY,540,140,t,{});tag(ctx,DT,DY-32,"tooltip · reads the catalog",KIND,{size:18});},{dy:24});
+  withA(ctx,fin(t,rd,0.5),()=>arrowTo(ctx,AX,CB+4,AX,DY-6,KIND,1,{head:10}));
   // upstream, the same rule: a sync checks the glossary on a schedule, and a changed term arrives as a pull request, for the owner to approve
   const uA=fin(t,cU-0.2,0.6)*(1-fin(t,w("gate","Tuned from")-0.9,0.5)),tPR=w("upstream","opens a pull request");
   if(uA>0.01&&R.length){const r0=R[0][0]+R[0][1]/2;
-    arrive(ctx,730,730,t,cU-0.2,()=>wr_glossary(ctx,540,650,380,160,t,{a:uA,short:1,chg:fin(t,w("upstream","When a term changes"),0.5),hi:pulseAt(t,w("upstream","checks the glossary"),1.4)+pulseAt(t,w("gate","the glossary"),1.4)}),{dy:24});
-    withA(ctx,uA,()=>arrowTo(ctx,532,730,472,730,KIND,1,{p:fin(t,tPR-0.2,0.5),head:10}));
-    arrive(ctx,270,730,t,tPR,()=>wr_pr(ctx,40,650,424,160,t,{a:uA,touch:fin(t,w("upstream","touches"),0.5),tick:fin(t,w("upstream","the owner"),0.5)}),{dy:24});
-    withA(ctx,uA*fin(t,w("upstream","before it reaches"),0.5),()=>wr_flow(ctx,[[r0,646],[r0,542]],t,1,BPL,{p:fin(t,w("upstream","before it reaches"),0.8),n:3}));
-    arrive(ctx,880,612,t,cU,()=>withA(ctx,uA,()=>tag(ctx,760,612,"upstream · on a schedule",SOFT,{size:18})),{dy:12});}
+    arrive(ctx,730,730+UY,t,cU-0.2,()=>wr_glossary(ctx,540,650+UY,380,160,t,{a:uA,short:1,chg:fin(t,w("upstream","When a term changes"),0.5),hi:pulseAt(t,w("upstream","checks the glossary"),1.4)+pulseAt(t,w("gate","the glossary"),1.4)}),{dy:24});
+    withA(ctx,uA,()=>arrowTo(ctx,532,730+UY,472,730+UY,KIND,1,{p:fin(t,tPR-0.2,0.5),head:10}));
+    arrive(ctx,270,730+UY,t,tPR,()=>wr_pr(ctx,40,650+UY,424,160,t,{a:uA,touch:fin(t,w("upstream","touches"),0.5),tick:fin(t,w("upstream","the owner"),0.5)}),{dy:24});
+    withA(ctx,uA*fin(t,w("upstream","before it reaches"),0.5),()=>wr_flow(ctx,ph?[[730,696],[730,650],[r0,650],[r0,R[0][2]+28]]:[[r0,646],[r0,542]],t,1,BPL,{p:fin(t,w("upstream","before it reaches"),0.8),n:3}));
+    arrive(ctx,880,612+UY,t,cU,()=>withA(ctx,uA,()=>tag(ctx,ph?560:760,612+(ph?60:0),"upstream · on a schedule",SOFT,{size:18})),{dy:12});}
   // a brief echo of the past: the fork in its case, an arrow out to a violin, and none back
   const eA=fin(t,w("gate","Tuned from")-0.3,0.6);if(eA>0.01){withA(ctx,eA,()=>{ctx.save();ctx.fillStyle="rgba(26,16,8,0.92)";rr(ctx,70,650,900,220,18);ctx.fill();ctx.strokeStyle=rgba(CLAY,0.5);ctx.lineWidth=1.5;rr(ctx,70,650,900,220,18);ctx.stroke();ctx.restore();
     wr_case(ctx,110,740,360,90,t,{});wr_violin(ctx,800,750,0.3,t,{rot:-1.1});arrowTo(ctx,500,745,680,745,TRUST,1,{p:fin(t,w("gate","Tuned from"),0.6),head:12});wr_noBack(ctx,680,790,500,790,fin(t,w("gate","never the other"),0.5));
@@ -2575,7 +2618,7 @@ scene("version",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   const vx=lerp(120,80,tl),vy=lerp(lerp(260,300,split),200,tl),vw=lerp(600,520,tl);
   const rowsOld=[["credential_key","string"],["credential_kind","string"],["is_revoked","boolean",WR_AMB]],rowsNew=[["credential_key","string"],["credential_kind","string"],["status","string",TRUST]];
   arrive(ctx,vx+vw/2,vy+120,t,0.6,()=>{
-    if(split>0.01)wr_prod(ctx,vx,vy-60*split,vw,{ver:"v1",dim:0.5,rows:rowsOld,a:split});
+    if(split>0.01)wr_prod(ctx,vx,vy-60*split,vw,{ver:"v1",dim:0.5,rows:rowsOld,a:split,behind:split>0.5});
     if(split>0.01)kt_rstamp(ctx,vx+vw-200,vy-40,"31 Mar 2027",WR_AMB,fin(t,w("date","date to go"),0.3),fin(t,w("date","date to go")+0.1,0.35),{size:18,rot:0.06});
     wr_prod(ctx,vx,vy,vw,{ver:split>0.5?"v2":null,rows:split>0.5?rowsNew:rowsOld,lit:{2:fin(t,w("expire","true or false"),0.4)*(1-split)+split*fin(t,cB,0.4)},hi:split});},{d:0.9,dy:30});
   const stA=fin(t,w("expire","becomes")-0.2,0.5)*(1-fin(t,tNew,0.5));
@@ -2589,8 +2632,9 @@ scene("version",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
     wr_node(ctx,nx,ny,"a consumer · reads is_revoked",WR_AMB,{on:1});tag(ctx,nx,ny+60,"breaks the old column",WR_AMB,{size:19});});
   // the versions, beside each other; v1 came first, and is now built from v2, which holds the logic, with a date to go
   const yA=fin(t,tNew,0.5)*(1-fin(t,cT-0.6,0.5));
-  if(yA>0.01){arrive(ctx,1320,307,t,tNew,()=>withA(ctx,yA,()=>wr_code(ctx,776,80,1084,"models/core/student/_core_student__models.yml",WR_VER,{size:18,lh:23,edge:TRUST,p:clamp((t-tNew)/2.4,0,1),lit:{4:fin(t,w("date","date to go"),0.4)},litCol:WR_AMB})),{dy:30});
-    arrive(ctx,1320,680,t,w("date","built from")-0.2,()=>withA(ctx,yA,()=>wr_code(ctx,776,530,1084,"models/core/student/core_credential_v1.sql",WR_V1,{size:17,lh:25,edge:TRUST,p:clamp((t-w("date","built from"))/1.6,0,1),seg:[[6,"{{ ref('core_credential', v=2) }}",fin(t,w("date","built from")+0.8,0.4),TRUST],[0,"Version 2 now holds the logic",fin(t,w("date","holds the logic"),0.4),TRUST]]})),{dy:30});
+  const ph=phMin(ctx)>0,VER=ph?WR_VER.slice(0,7).concat(["        …"]):WR_VER,V1=ph?WR_V1.filter((l,i)=>i!==3&&i!==5):WR_V1,VY=ph?80+16+wr_code(ctx,776,80,1084,"models/core/student/_core_student__models.yml",VER,{a:0,size:18,lh:23}):530;
+  if(yA>0.01){arrive(ctx,1320,307,t,tNew,()=>withA(ctx,yA,()=>wr_code(ctx,776,80,1084,"models/core/student/_core_student__models.yml",VER,{size:18,lh:23,edge:TRUST,p:clamp((t-tNew)/2.4,0,1),lit:{4:fin(t,w("date","date to go"),0.4)},litCol:WR_AMB})),{dy:30});
+    arrive(ctx,1320,VY+150,t,w("date","built from")-0.2,()=>withA(ctx,yA,()=>wr_code(ctx,776,VY,1084,"models/core/student/core_credential_v1.sql",V1,{size:17,lh:25,edge:TRUST,p:clamp((t-w("date","built from"))/1.6,0,1),seg:[[ph?4:6,"{{ ref('core_credential', v=2) }}",fin(t,w("date","built from")+0.8,0.4),TRUST],[0,"Version 2 now holds the logic",fin(t,w("date","holds the logic"),0.4),TRUST]]})),{dy:30});
     withA(ctx,yA*fin(t,w("date","built from"),0.5),()=>{arrowTo(ctx,vx-12,vy+170,vx-12,vy-34,TRUST,1,{p:fin(t,w("date","built from"),0.8),head:12,bend:-0.3});tag(ctx,vx+20,vy+290,"v1 came first · now built from v2",TRUST,{size:19});});}
   // who to tell: lineage from core_credential to one exposure; Planning's dashboard stays dark
   const lA=fin(t,cT-0.2,0.6)*(1-fin(t,cC-0.4,0.6)*0.6),NX=720;
@@ -2607,11 +2651,12 @@ scene("version",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   if(pnA>0.01)arrive(ctx,1160,690,t,w("tell","pins")-0.2,()=>withA(ctx,pnA,()=>wr_code(ctx,760,590,880,"models/marts/wallet/mart_wallet__credentials.sql",WR_WAL,{size:18,lh:30,edge:WR_CON,seg:[[2,"{{ ref('core_credential', v=2) }}",fin(t,w("tell","pins")+0.3,0.4),WR_CON]]})),{dy:24});
   // anyone still reading v1 gets dbt's warning, with the date
   const wA=fin(t,cW-0.2,0.5);
-  if(wA>0.01){arrive(ctx,260,600,t,cW-0.2,()=>{ctx.strokeStyle=rgba(WR_AMB,0.7);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(vx+40,vy+244);ctx.lineTo(vx+40,580);ctx.stroke();wr_node(ctx,vx+60,604,"mart_wallet__old_reader",WR_AMB,{on:0.6});},{from:0.85});
-    arrive(ctx,570,742,t,w("warn","dbt's warning"),()=>wr_code(ctx,80,650,960,"dbt's warning",WR_WARN,{size:18,lh:28,edge:WR_AMB,p:clamp((t-w("warn","dbt's warning"))/2.2,0,1),seg:[[1,"'2027-03-31T00:00:00+00:00'",fin(t,w("warn","with the date"),0.4),WR_AMB]]}),{dy:30});}
+  const NY=ph?540:604,WY=ph?580:650;
+  if(wA>0.01){arrive(ctx,260,NY,t,cW-0.2,()=>{ctx.strokeStyle=rgba(WR_AMB,0.7);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(vx+40,vy+244);ctx.lineTo(vx+40,NY-24);ctx.stroke();wr_node(ctx,vx+60,NY,"mart_wallet__old_reader",WR_AMB,{on:0.6});},{from:0.85});
+    arrive(ctx,570,WY+92,t,w("warn","dbt's warning"),()=>wr_code(ctx,80,WY,960,"dbt's warning",WR_WARN,{size:18,lh:28,edge:WR_AMB,p:clamp((t-w("warn","dbt's warning"))/2.2,0,1),seg:[[1,"'2027-03-31T00:00:00+00:00'",fin(t,w("warn","with the date"),0.4),WR_AMB]]}),{dy:30});}
   // a choice with a deadline, not a surprise: the decision, with Noor's and Mei's approval
   const chA=fin(t,cC-0.2,0.5);
-  if(chA>0.01){arrive(ctx,1450,678,t,cC,()=>wr_code(ctx,1060,570,780,"models/core/student/_student__decisions.yml",["  - id: DEC-STU-07","    title: core_credential version 2 replaces is_revoked with status","    …","    decided_by: Noor and Mei Tanaka","    informed: [Wallet app team]"],{wrap:68,size:18,lh:28,edge:KIND}),{dy:30});
+  if(chA>0.01){arrive(ctx,1450,678,t,cC,()=>wr_code(ctx,1060,ph?470:570,780,"models/core/student/_student__decisions.yml",["  - id: DEC-STU-07","    title: core_credential version 2 replaces is_revoked with status","    …","    decided_by: Noor and Mei Tanaka","    informed: [Wallet app team]"],{wrap:68,size:18,lh:28,edge:KIND}),{dy:30});
     [["noor",1300],["mei",1460]].forEach(([id,x],i)=>{arrive(ctx,x,840,t,cC+0.6+i*0.3,()=>{wr_face(ctx,id,x,830,40,1,{t,name:PEOPLE[id].name.split(" ")[0]});kt_gtick(ctx,x+32,800,12,fin(t,cC+1.2+i*0.3,0.3));},{from:0.8});});
     arrive(ctx,960,140,t,w("choice","a choice"),()=>T(ctx,"a choice with a deadline",960,140,{w:800,size:40,align:"center",color:rgba(TRUST,1)}),{from:0.9});
     arrive(ctx,1660,840,t,w("choice","not as a surprise"),()=>tag(ctx,1560,840,"not a surprise",TRUST,{size:20}),{dy:14});}
@@ -2642,6 +2687,277 @@ scene("loop",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
     arrive(ctx,960,440,t,w("declare","Then build"),()=>T(ctx,"Declare it. Then build it.",960,450,{w:800,size:34,align:"center"}),{dy:14});});
   ctx.restore();weedsEnd(ctx,S,t,B,"Written once",WEED,"One home per fact. Everything else, generated.");
   vign(ctx,S);});
+
+/* ===== Made to read on a phone =====
+   A phone held sideways shows the 1920-pixel frame about 850 pixels wide, so text under about 28 px in the frame is too small to
+   read there (PLAYBOOK.md, "Make it read on a phone"). The films made before that rule draw with this layer: every piece of text
+   that isn't marked as decoration ({deco:1}) is drawn at least 28 px high in the frame, after the camera's zoom, and the components
+   that size themselves to their text (tags) grow with it. Each film's scenes then make room for the larger words, and move the
+   camera in on the part of a dense picture the narration is about (focus). The map before the data was drawn to the rule from the
+   start and doesn't load this layer; nor does The Inner Life of Data, yet.
+   It loads after the film's own files and before the engine, and only wraps: the components it shares with other films are unchanged. */
+const PH_MIN=28;let PH_W=0,PH_OFF=0;
+// how many frame pixels one unit of the current drawing is, after the camera's zoom; 0 on a canvas that isn't a frame (a cached picture)
+function phK(ctx){const c=ctx.canvas;if(!PH_W||c.width!==PH_W)return 0;const m=ctx.getTransform();return Math.sqrt(Math.abs(m.a*m.d-m.b*m.c))*W/c.width;}
+// the smallest text size, in the current drawing's units, that reads on a phone (0 where it doesn't apply)
+function phMin(ctx){if(PH_OFF)return 0;const k=phK(ctx);return k?PH_MIN/k:0;}
+// a component's options, with its text raised to the smallest size that reads, unless it's decoration
+function phSize(ctx,o,def){o=o||{};if(o.deco)return o;const m=phMin(ctx),s=o.size||def;return s<m?Object.assign({},o,{size:m}):o;}
+// the size a piece of text is really drawn at: what it asks for, or the phone's smallest, whichever is larger (to place what follows it)
+function phSz(ctx,s){return Math.max(s,phMin(ctx)||0);}
+// draw fn as decoration: its text is texture (a printed page, a far-off list), not something to read
+function phDeco(fn){return function(){PH_OFF++;try{return fn.apply(this,arguments);}finally{PH_OFF--;}};}
+// draw now, as decoration when on is true: a picture seen from afar is context, and its words are texture
+function phAsDeco(on,fn){if(!on)return fn();PH_OFF++;try{return fn();}finally{PH_OFF--;}}
+// the lines a string breaks into at a width, for the films that don't load words.js's wrapT
+function phWrap(ctx,s,maxW,size,wt,f){const L=[];String(s).split(" ").forEach(wd=>{const c=L.length?L[L.length-1]+" "+wd:wd;if(L.length&&tw(ctx,c,size,wt||600,f)>maxW)L.push(wd);else if(L.length)L[L.length-1]=c;else L.push(wd);});return L;}
+// the camera moves in on part of a picture, as The map before the data's focus does: keys are [t, x, y, zoom], from the first
+// key's framing, each move gliding over d seconds from its time; returns the zoom
+function focus(ctx,t,keys,d){d=d||1.4;let x=keys[0][1],y=keys[0][2],z=keys[0][3];for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;
+    x=lerp(x,keys[i][1],u);y=lerp(y,keys[i][2],u);z=lerp(z,keys[i][3],u);}
+  ctx.translate(960,540);ctx.scale(z,z);ctx.translate(-x,-y);return z;}
+// a component whose text sizes are fixed inside it, drawn larger as a whole until its smallest text (base) reads: it grows from the
+// point its arguments xi and yi name, by at most kmax, so its box and its words keep their proportions
+function phBig(fn,xi,yi,base,kmax){return function(){const a=arguments,ctx=a[0],m=phMin(ctx),k=m?clamp(m/(typeof base==="function"?base.apply(null,a):base),1,kmax||1.7):1;
+  if(k<=1.001)return fn.apply(this,a);ctx.save();ctx.translate(a[xi],a[yi]);ctx.scale(k,k);ctx.translate(-a[xi],-a[yi]);try{return fn.apply(this,a);}finally{ctx.restore();}};}
+// the frame's width, set as each frame starts, so a cached picture's text isn't measured against the frame
+renderFrame=(f=>function(ctx,S,t){PH_W=ctx.canvas.width;PH_OFF=0;return f(ctx,S,t);})(renderFrame);
+T=(f=>function(ctx,s,x,y,o){return f(ctx,s,x,y,phSize(ctx,o,24));})(T);
+tag=(f=>function(ctx,x,y,s,c,o){return f(ctx,x,y,s,c,phSize(ctx,o,20));})(tag);
+// wrapped text (From words to data's wrapT) breaks its lines at the size it's drawn, with its line height grown in proportion
+if(typeof wrapT==="function"&&wrapT.length===6)wrapT=(f=>function(ctx,s,x,y,maxW,o){o=o||{};const p=phSize(ctx,o,24);if(p!==o&&o.lh)p.lh=o.lh*p.size/(o.size||24);return f(ctx,s,x,y,maxW,p);})(wrapT);
+// chips (a logo, a title, and a smaller line under it) and the year and stamp tags grow as a whole
+chip=phBig(chip,1,2,function(ctx,x,y,k,title,sub,o){o=o||{};return sub?(o.ss||17):(o.ts||22);});
+if(typeof yearTag==="function")yearTag=phBig(yearTag,1,2,20);
+if(typeof stamp==="function")stamp=phBig(stamp,1,2,20);
+
+/* ---------- From words to data's components, at sizes that read ---------- */
+// a wax seal's mark is part of the seal, not something to read
+if(typeof waxSeal==="function")waxSeal=phDeco(waxSeal);
+// a credential card (words.js) with its rows laid out for the larger words: the field names in a column as wide as the widest,
+// the values after it, and the rows spaced to fit; everything else as words.js draws it
+if(typeof credCard==="function")credCard=(f=>function(ctx,x,y,w,o){const m=phMin(ctx);if(!m)return f(ctx,x,y,w,o);o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return 0;
+  const ls=Math.max(17,m),vs=Math.max(18,m),rh=Math.max(o.rh||34,vs*1.32),rowsF=[["issuer",o.issuer],["holder",o.holder],["claim",o.claim],["evidence",o.evidence],["date",o.date]].filter(r=>r[1]);
+  // a value too long for the card goes on as many lines as it needs, and the card grows to hold them
+  const lw=Math.max(...rowsF.map(r=>tw(ctx,r[0],ls,500,"mono")),0),vw=w-56-lw,LS=rowsF.map(([k,v])=>phWrap(ctx,v,vw,vs,700)),
+    xl=LS.reduce((p,L)=>p+L.length-1,0)*vs*1.18,h0=o.h||Math.max(Math.round(w*0.68),(o.title?84:56)+rowsF.length*rh),h=xl?Math.max(h0,(o.title?44+rh:Math.max(42,16+vs))+(rowsF.length-1)*rh+xl+(o.era==="digital"||!o.era?70:34)):h0;
+  // the card itself, from words.js, with no rows; then the rows, in the same place and turn
+  f(ctx,x,y,w,Object.assign({},o,{h,issuer:null,holder:null,claim:null,evidence:null,date:null,signed:false}));
+  const era=o.era||"digital",dk=era==="digital"||era==="badge",hl=o.hl||{},ink=dk?rgba(INK,0.95):(era==="tablet"?"rgba(60,36,20,0.9)":"rgba(52,40,30,0.92)"),lab=dk?rgba(SOFT,1):(era==="tablet"?"rgba(70,44,26,0.7)":"rgba(110,86,54,0.9)");
+  withA(ctx,a,()=>{ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot||0);ctx.translate(-w/2,-h/2);const yy=o.title?44+rh:Math.max(42,16+vs);
+    // a digital card's "signed", beside its seal rather than under it, where the larger word fits
+    if(era==="digital"&&o.signed!==false)T(ctx,o.signed||"signed",w-78,h-30,{f:"mono",w:500,size:Math.max(12,m),align:"right",color:rgba(SOFT,1)});
+    let ry=yy;rowsF.forEach(([k,v],i)=>{const on=hl[k]||0,L=LS[i],ex=(L.length-1)*vs*1.18;if(on>0){ctx.fillStyle=dk?rgba(o.col||TRUST,0.16*on):"rgba(200,140,40,"+(0.22*on)+")";rr(ctx,12,ry-vs*0.95,w-24,rh+ex,8);ctx.fill();}
+      T(ctx,k,22,ry,{f:"mono",w:500,size:ls,color:lab});L.forEach((l,j)=>T(ctx,l,34+lw,ry+j*vs*1.18,{w:700,size:vs,color:ink}));ry+=rh+ex;});ctx.restore();});return h;})(credCard);
+
+/* ---------- A Sharper Sketch's entities, at sizes that read ---------- */
+// an entity (sketch3.js): its name, its note and its attributes at least the smallest size that reads, the box measured to fit them,
+// so the lines that callers draw to its edges (they ask entBox) still meet it
+if(typeof entBox==="function"){const EB0=entBox,EN0=ent;
+  const phEnt=(ctx,e)=>{const s=e.s||1,m=phMin(ctx);return{s,ns:Math.max(24*s,m),ss:Math.max(16*s,m),as:Math.max(17*s,m)};};
+  entBox=function(ctx,e){const m=phMin(ctx);if(!m)return EB0(ctx,e);const{s,ns,ss,as}=phEnt(ctx,e),sub=e.sub,at=e.attrs||[],k1=ns/(24*s),rh=Math.max(30*s,as*1.3);
+    let w=Math.max(200*s,tw(ctx,e.name,ns,700)+52*s);if(sub)w=Math.max(w,tw(ctx,sub,ss,600)+44*s);at.forEach(r=>{w=Math.max(w,tw(ctx,r[0],as,500,"mono")+84*s);});
+    const head=sub?34*s*k1+ss*1.15+18*s:58*s*k1,h=head+(at.length?at.length*rh+14*s:0);return{x:e.x,y:e.y,w,h,head,rh};};
+  ent=function(ctx,e){const m=phMin(ctx);if(!m)return EN0(ctx,e);const a=e.a==null?1:e.a;if(a<=0.01)return;const{s,ns,ss,as}=phEnt(ctx,e),k1=ns/(24*s),col=e.col||SK,b=entBox(ctx,e),x=b.x-b.w/2,y=b.y-b.h/2,hi=e.hi||0;
+    ctx.save();ctx.globalAlpha*=a;
+    if(hi>0)glow(ctx,b.x,b.y,Math.max(b.w,b.h)*0.9,e.hiCol||col,0.35*hi);
+    ctx.fillStyle=e.fill||"rgba(8,14,30,0.94)";rr(ctx,x,y,b.w,b.h,10*s);ctx.fill();
+    ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=12+10*hi;ctx.strokeStyle=rgba(e.edge||col,0.95);ctx.lineWidth=(2.2+1.2*hi)*s;if(e.dash)ctx.setLineDash([9*s,7*s]);rr(ctx,x,y,b.w,b.h,10*s);ctx.stroke();ctx.setLineDash([]);ctx.shadowBlur=0;
+    const ny=y+(e.sub?34:37)*s*k1;T(ctx,e.name,b.x,ny,{w:700,size:ns,align:"center",color:rgba(col,1)});
+    if(e.sub)withA(ctx,e.subA==null?1:e.subA,()=>T(ctx,e.sub,b.x,ny+ss*1.15,{w:600,size:ss,align:"center",color:rgba(e.subCol||SOFT,1)}));
+    if(e.attrs&&e.attrs.length){const y0=y+b.head;ctx.strokeStyle=rgba(col,0.35);ctx.lineWidth=1.2*s;ctx.beginPath();ctx.moveTo(x+12*s,y0);ctx.lineTo(x+b.w-12*s,y0);ctx.stroke();
+      e.attrs.forEach((r,i)=>withA(ctx,e.attrA==null?1:clamp(e.attrA*e.attrs.length-i,0,1),()=>{const yy=y0+b.rh*(i+0.5)+as*0.36+6*s;
+        if(r[1]==="id"){ctx.fillStyle=rgba(REF,1);ctx.beginPath();ctx.arc(x+24*s,yy-as*0.32,5*s,0,TAU);ctx.fill();}
+        T(ctx,r[0],x+40*s,yy,{f:"mono",w:500,size:as,color:r[1]==="id"?rgba(REF,1):rgba(INK,0.9)});}));}
+    if(e.pin&&(e.pinA==null||e.pinA>0))withA(ctx,e.pinA==null?1:e.pinA,()=>{const pc=e.pin==="adopt"?ADOPT:EXT,px=x+b.w-4*s,py=y+4*s,pr=(9+4*(e.pinP||0))*s;glow(ctx,px,py,34*s,pc,0.5+0.5*(e.pinP||0));
+      ctx.fillStyle=rgba(pc,1);ctx.beginPath();ctx.arc(px,py,pr,0,TAU);ctx.fill();ctx.fillStyle="rgba(255,255,255,0.85)";ctx.beginPath();ctx.arc(px-pr*0.3,py-pr*0.3,pr*0.32,0,TAU);ctx.fill();});
+    ctx.restore();return b;};}
+
+/* ---------- The Inner Life of Data's system card, at sizes that read ---------- */
+// its title and its line under it at least the smallest size that reads, the card grown about its middle to fit them, taller and wider
+if(typeof sysCard==="function"){const SC0=sysCard;sysCard=function(ctx,x,y,w,h,title,sub,c,icon){const m=phMin(ctx);if(!m)return SC0.apply(this,arguments);
+  const ts=Math.max(22,m),ss=Math.max(16,m),H=sub?Math.max(h,ts+ss*1.2+26):Math.max(h,ts+26),Y=y+(h-H)/2,W=Math.max(w,32+Math.max(tw(ctx,title,ts,700),sub?tw(ctx,sub,ss,500):0)+(icon?76:24));x+=(w-W)/2;w=W;
+  glass(ctx,x,Y,w,H,16,c,{glow:16,ea:0.6});led(ctx,x+12,Y+16,5,H-32,c);
+  if(sub){T(ctx,title,x+32,Y+H/2-ss*0.2,{w:700,size:ts});T(ctx,sub,x+32,Y+H/2+ss*0.95,{w:500,size:ss,color:rgba(SOFT,0.95)});}else T(ctx,title,x+32,Y+H/2+ts*0.36,{w:700,size:ts});
+  if(icon)icon(ctx,x+w-44,Y+H/2);};}
+
+/* ---------- A Sharper Sketch's table, at sizes that read ---------- */
+// its name, its header and its cells at least the smallest size that reads, its columns and rows measured to fit them
+if(typeof table==="function"){const TB0=table;table=function(ctx,x,y,name,cols,rows,o){const m=phMin(ctx);if(!m)return TB0.apply(this,arguments);o=o||{};
+  const cs=Math.max(16,m),ns=Math.max(18,m),cw=o.cw||cols.map(c=>Math.max(tw(ctx,c,cs,500,"mono"),...rows.map(r=>tw(ctx,r[cols.indexOf(c)],cs,500,"mono")))+30),w=cw.reduce((a,b)=>a+b,0),rh=Math.max(40,cs*1.45),hh=Math.max(46,ns*1.65),h=hh+rh*(rows.length+1);
+  glass(ctx,x,y,w,h,12,o.col||SK,{glow:14,ea:0.7,fill:"rgba(7,12,24,0.94)"});T(ctx,name,x+16,y+hh*0.67,{f:"mono",w:500,size:ns,color:rgba(o.col||SK,1)});
+  let cx=x;cols.forEach((c,i)=>{T(ctx,c,cx+15,y+hh+rh*0.68,{f:"mono",w:500,size:cs,color:rgba(REF,1)});rows.forEach((r,j)=>withA(ctx,o.rowA?o.rowA(j):1,()=>T(ctx,r[i],cx+15,y+hh+rh*(j+1)+rh*0.68,{f:"mono",w:500,size:cs,color:rgba(INK,0.9)})));cx+=cw[i];});
+  ctx.strokeStyle="rgba(170,200,245,0.18)";ctx.lineWidth=1;for(let j=0;j<=rows.length+1;j++){ctx.beginPath();ctx.moveTo(x,y+hh+rh*j);ctx.lineTo(x+w,y+hh+rh*j);ctx.stroke();}
+  return{w,h};};}
+
+/* ---------- A Sharper Sketch's number card, at sizes that read ---------- */
+// its line under the number wraps to the card's width at the larger size, and the card grows to hold it
+if(typeof numCard==="function"){const NC0=numCard;numCard=function(ctx,x,y,w,title,num,sub,col,o){const m=phMin(ctx);if(!m||!sub)return NC0.apply(this,arguments);o=o||{};
+  const ss=Math.max(18,m),ls=phWrap(ctx,sub,w-56,ss,600),h=200+(ls.length-1)*ss*1.2;
+  glass(ctx,x,y,w,h,18,col,{glow:18,ea:0.7,fill:"rgba(7,12,24,0.92)"});T(ctx,title,x+28,y+46,{w:700,size:24,color:rgba(SOFT,1)});T(ctx,num,x+28,y+140,{w:800,size:88,color:rgba(col,1)});
+  ls.forEach((l,i)=>T(ctx,l,x+28,y+180+i*ss*1.2,{w:600,size:ss,color:rgba(SOFT,0.95)}));
+  if(o.badge)tag(ctx,x+w-28-(tw(ctx,o.badge,Math.max(16,m),700)+26),y+40,o.badge,o.badgeCol||GOOD,{size:16});};}
+
+/* ---------- Silent change's pictures (silent.js), at sizes that read ---------- */
+// the counter widget: the title, the number and its comparison (under the number if it won't fit beside it), and the places.
+// The UI's small print (the source table, "last 14 days", "capacity") is texture. The small copy keeps its name, number and places
+if(typeof kpiCard==="function"&&typeof dbCard==="function"){const KC0=kpiCard;kpiCard=function(ctx,x,y,w,h,o){const m=phMin(ctx);if(!m)return KC0.apply(this,arguments);o=o||{};
+  const s=o.s||1,v=o.value==null?94:o.value,pad=20*s,shown=(o.shown||Math.round(v))+"%",nA=o.numA==null?1:o.numA,col=o.ghost?DB.red:DB.blue,bw=w-2*pad;
+  if(h/s<250){dbCard(ctx,x,y,w,h);const by=y+h-pad-m*1.25,ty=y+pad+m*0.8,foot=Math.round(v*1.2)+" of 120 places";T(ctx,o.title||"Data Science 101",x+pad,ty,{w:700,size:18*s,color:DB.text});
+    withA(ctx,nA,()=>T(ctx,shown,x+pad,ty+Math.max(48*s,m)*1.05,{w:700,size:48*s,color:o.ghost?DB.red:DB.text}));
+    ctx.fillStyle=DB.track;rr(ctx,x+pad,by,bw,10*s,5*s);ctx.fill();ctx.fillStyle=col;rr(ctx,x+pad,by,bw*Math.min(1,v/100),10*s,5*s);ctx.fill();
+    T(ctx,tw(ctx,foot,m,500)<=bw?foot:Math.round(v*1.2)+" of 120",x+pad,y+h-pad,{w:500,size:16*s,color:DB.muted});return;}
+  dbCard(ctx,x,y,w,h);const ty=y+pad+m*0.85,ny=y+pad+122*s,nw=tw(ctx,shown,78*s,700),dw=o.delta?tw(ctx,o.delta,m,700):0,beside=nw+16*s+dw<=bw;
+  T(ctx,o.title||"Places filled · Data Science 101",x+pad,ty,{w:700,size:19*s,color:DB.text});phAsDeco(true,()=>T(ctx,o.source||"fct_offering_fill",x+pad,ty+22,{w:500,size:14*s,f:"mono",color:DB.muted}));
+  withA(ctx,nA,()=>{T(ctx,shown,x+pad,ny,{w:700,size:78*s,color:o.ghost?DB.red:DB.text});
+    if(o.delta)T(ctx,o.delta,beside?x+pad+nw+16*s:x+pad,beside?y+pad+118*s:ny+m*1.25,{w:700,size:17*s,color:o.deltaCol||DB.green});});
+  const by=y+h-pad-Math.max(44*s,m+22),sy0=beside||!o.delta?y+pad+150*s:ny+m*1.25+16,sy1=by-30*s;
+  if(sy1-sy0>40*s){const tr=o.trend||[71,74,76,79,81,83,85,86,88,90,91,92,93,v],lo=60,hi=Math.max(100,...tr)+4,px=i=>x+pad+bw*i/(tr.length-1),py=q=>sy1-(sy1-sy0)*(q-lo)/(hi-lo);
+    ctx.beginPath();tr.forEach((q,i)=>i?ctx.lineTo(px(i),py(q)):ctx.moveTo(px(i),py(q)));ctx.lineTo(px(tr.length-1),sy1);ctx.lineTo(px(0),sy1);ctx.closePath();ctx.fillStyle=o.ghost?"rgba(200,45,76,0.10)":"rgba(7,122,157,0.10)";ctx.fill();
+    ctx.beginPath();tr.forEach((q,i)=>i?ctx.lineTo(px(i),py(q)):ctx.moveTo(px(i),py(q)));ctx.strokeStyle=col;ctx.lineWidth=2.5*s;ctx.stroke();
+    ctx.fillStyle=col;ctx.beginPath();ctx.arc(px(tr.length-1),py(tr[tr.length-1]),4*s,0,TAU);ctx.fill();phAsDeco(true,()=>T(ctx,"last 14 days",x+pad,sy0-4*s,{w:500,size:13*s,color:DB.muted}));}
+  ctx.fillStyle=DB.track;rr(ctx,x+pad,by,bw,12*s,6*s);ctx.fill();ctx.fillStyle=col;rr(ctx,x+pad,by,bw*Math.min(1,v/100),12*s,6*s);ctx.fill();
+  if(v>100){ctx.fillStyle=DB.red;rr(ctx,x+pad+bw-4*s,by-6*s,8*s,24*s,3*s);ctx.fill();}
+  ctx.strokeStyle=DB.text;ctx.lineWidth=2*s;ctx.beginPath();ctx.moveTo(x+pad+bw,by-8*s);ctx.lineTo(x+pad+bw,by+20*s);ctx.stroke();
+  T(ctx,o.foot||Math.round(v*1.2)+" of 120 places",x+pad,y+h-pad,{w:500,size:15*s,color:DB.muted});phAsDeco(true,()=>T(ctx,"capacity",x+pad+bw,y+h-pad,{w:500,size:13*s,align:"right",color:DB.muted}));};}
+// the dashboard: its note wraps and makes the room it needs, its icon is as large as its words, and the chart's subtitle is texture
+if(typeof dashboard==="function"&&typeof kpiCard==="function"&&typeof DB==="object"){const DS0=dashboard;dashboard=function(ctx,x,y,w,h,o){const m=phMin(ctx);if(!m)return DS0.apply(this,arguments);o=o||{};
+  const num=o.num==null?94:parseFloat(o.num),g=o.ghost||0,gIn=sstep(0.45,1,g);
+  glass(ctx,x-12,y-12,w+24,h+24,22,[170,205,255],{glow:18,ea:0.45,fill:"rgba(8,14,28,0.95)"});ctx.save();rr(ctx,x,y,w,h,12);ctx.clip();ctx.fillStyle=DB.canvas;ctx.fillRect(x,y,w,h);
+  ctx.fillStyle=DB.card;ctx.fillRect(x,y,w,64);ctx.fillStyle=DB.line;ctx.fillRect(x,y+64,w,1.2);const lw=logo(ctx,"databricks",x+20,y+18,28);
+  T(ctx,o.title||"Enrolments · census date tomorrow",x+34+lw,y+41,{w:700,size:21,color:DB.text});T(ctx,o.day||"Tuesday",x+w-22,y+40,{w:500,size:16,align:"right",color:DB.muted});
+  let cy=y+84;const ix=m*1.25+44,lines=s=>phWrap(ctx,s,w-40-ix-16,m,600),bh=L=>24+L.length*m*1.15;
+  const alert=(bg,line,col,icon,text,a)=>withA(ctx,a,()=>{const L=lines(text),H=bh(L);ctx.fillStyle=bg;rr(ctx,x+20,cy,w-40,H,6);ctx.fill();ctx.fillStyle=line;rr(ctx,x+20,cy,6,H,3);ctx.fill();
+    ctx.fillStyle=col;ctx.font=font(800,m);ctx.fillText(icon,x+40,cy+12+m*0.86);L.forEach((l,i)=>T(ctx,l,x+ix,cy+12+m*0.86+i*m*1.15,{w:600,size:m,color:col}));});
+  const room=ease(clamp((o.banner||0)+(o.ok||0),0,1)),bT="Last good data: yesterday, 23:02 · a test stopped today's refresh",oT=o.okText||"Up to date: today, 08:40";
+  if(o.banner>0)alert(DB.warnBg,DB.warnLine,DB.warn,"⚠",bT,o.banner*(1-(o.ok||0))*sstep(0.3,1,room));
+  if(o.ok>0)alert(DB.greenBg,DB.green,DB.green,"✓",oT,o.ok);
+  cy+=(Math.max(bh(lines(o.ok>0.5?oT:bT)),52)+20)*room;const gh=y+h-cy-20,kw=w*0.46;
+  kpiCard(ctx,x+20,cy,kw,gh,{value:num,delta:o.delta||("▲ "+(Math.round(num)-92)+" pts vs last week"),foot:o.foot,numA:1-sstep(0,0.5,g)});
+  if(o.flash>0)withA(ctx,o.flash,()=>{ctx.strokeStyle=DB.blue;ctx.lineWidth=3;rr(ctx,x+20,cy,kw,gh,8);ctx.stroke();});
+  if(g>0){withA(ctx,g,()=>{ctx.save();ctx.fillStyle="rgba(255,255,255,0.92)";rr(ctx,x+20,cy,kw,gh,8);ctx.fill();ctx.setLineDash([10,8]);ctx.strokeStyle=DB.red;ctx.lineWidth=3;rr(ctx,x+20,cy,kw,gh,8);ctx.stroke();ctx.restore();});
+    withA(ctx,gIn,()=>kpiCard(ctx,x+20,cy,kw,gh,{value:108,ghost:1,delta:"incl. waitlist",deltaCol:DB.red,foot:"130 of 120 places",trend:[71,74,76,79,81,83,85,86,88,90,91,92,94,108]}));}
+  const bx=x+40+kw,bwid=w-60-kw;dbCard(ctx,bx,cy,bwid,gh);T(ctx,"Places filled by unit",bx+20,cy+m*1.3,{w:700,size:19,color:DB.text});phAsDeco(true,()=>T(ctx,"first-year units · semester 2",bx+20,cy+m*1.3+22,{w:500,size:14,color:DB.muted}));
+  const rows=[["Data Science 101",num],["Statistics 110",88],["Programming 100",76],["Data Ethics 120",64]],lx=bx+20,bw2=bwid-60-tw(ctx,"108%",m,700),r0=cy+m*1.3+40,rh=Math.min(m*2.1,(gh-(r0-cy)-16)/rows.length);
+  const row=(n,v,i,c,vc)=>{const yy=r0+i*rh;T(ctx,n,lx,yy+m*0.8,{w:i?500:700,size:15,color:DB.text});const b0=yy+m*0.8+8;ctx.fillStyle=DB.track;rr(ctx,lx,b0,bw2,12,4);ctx.fill();
+    ctx.fillStyle=c;rr(ctx,lx,b0,bw2*Math.min(1,v/100),12,4);ctx.fill();if(v>100){ctx.fillStyle=DB.red;rr(ctx,lx+bw2-3,b0-5,6,22,2);ctx.fill();}T(ctx,Math.round(v)+"%",lx+bw2+14,b0+12,{w:700,size:16,color:vc||DB.text});};
+  rows.forEach(([n,v],i)=>row(n,v,i,i?"#8bcae7":DB.blue));
+  if(gIn>0)withA(ctx,gIn,()=>{ctx.fillStyle=DB.card;ctx.fillRect(lx-4,r0-4,bwid-36,rh);row("Data Science 101",108,0,DB.red,DB.red);});
+  ctx.strokeStyle=DB.muted;ctx.setLineDash([4,4]);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(lx+bw2,r0+4);ctx.lineTo(lx+bw2,r0+rows.length*rh);ctx.stroke();ctx.setLineDash([]);
+  ctx.restore();};}
+// the lineage: each step's box fits its name, and the steps are spaced by their widths (phLinPts gives where they are)
+function phLinPts(ctx,x0,y,dx){if(typeof LIN==="undefined")return[];const m=phMin(ctx);if(!m)return LIN.map((_,i)=>[x0-i*dx,y]);const ws=LIN.map(([n,sub])=>Math.max(tw(ctx,n,Math.max(22,m),700,"mono"),tw(ctx,sub,Math.max(17,m),500))+44),gap=Math.max(24,dx-ws.reduce((a,b)=>a+b,0)/LIN.length);
+  const P=[[x0,y]];for(let i=1;i<LIN.length;i++)P.push([P[i-1][0]-ws[i-1]/2-gap-ws[i]/2,y]);return P;}
+if(typeof lineage==="function"&&typeof LIN!=="undefined"){const LN0=lineage;lineage=function(ctx,x0,y,dx,o){const m=phMin(ctx);if(!m)return LN0.apply(this,arguments);o=o||{};const pts=phLinPts(ctx,x0,y,dx);
+  ctx.strokeStyle="rgba(170,200,245,0.35)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);pts.forEach(p=>ctx.lineTo(p[0],p[1]));ctx.stroke();
+  if(o.k>0){const k=Math.min(o.k,pts.length-1),i=Math.floor(k),f=k-i,end=i<pts.length-1?[lerp(pts[i][0],pts[i+1][0],f),y]:pts[i];
+    beam(ctx,[{x:pts[0][0],y},{x:end[0],y}],BAD,[[22,0.08],[9,0.22],[3,0.85],[1.5,1]]);glow(ctx,end[0],y,36,BAD,0.7);}
+  pts.forEach((p,i)=>{const [n,sub]=LIN[i],bad=i===3&&o.bad,on=o.k>=i-0.05,c=bad?BAD:i===4?LAYER.bronze:i===0?GOLDC:[170,205,255],w=Math.max(tw(ctx,n,Math.max(22,m),700,"mono"),tw(ctx,sub,Math.max(17,m),500))+44;
+    glass(ctx,p[0]-w/2,y-52,w,104,18,c,{glow:on?22:8,ea:on?0.95:0.45,fill:"rgba(8,14,28,0.92)"});T(ctx,n,p[0],y-8,{w:700,size:22,f:"mono",align:"center"});T(ctx,sub,p[0],y+30,{w:500,size:17,align:"center",color:rgba(SOFT,0.95)});
+    if(i===3){const gc=bad?BAD:GOOD;ctx.strokeStyle=rgba(gc,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(p[0],y-79);ctx.lineTo(p[0],y-52);ctx.stroke();gate(ctx,p[0],y-114,70,gc,"tests");
+      T(ctx,bad?"test failed":"tests pass",p[0]+42,y-108,{w:700,size:18,color:rgba(gc,1)});}});return pts;};}
+// the data contract: the statuses in the sans, so the new one fits on the same line
+if(typeof contract==="function"&&typeof stampV==="function"){const CT0=contract;contract=function(ctx,x,y,w,h,o){const m=phMin(ctx);if(!m)return CT0.apply(this,arguments);o=o||{};
+  const ver=o.ver||"1.0",dA=o.deferred||0,S=Math.max(22,m);glass(ctx,x,y,w,h,24,[236,243,255],{glow:24+10*(o.glow||0),ea:0.9,fill:"rgba(10,16,32,0.95)"});
+  T(ctx,"Data contract · enrolments",x+36,y+60,{w:800,size:34});stampV(ctx,x+w-40,y+50,"v"+ver,o.verFlash||0);
+  const key=(k,yy)=>T(ctx,k,x+36,yy,{w:700,size:21,color:rgba(SOFT,0.95)}),vx=x+36+tw(ctx,"Freshness",Math.max(21,m),700)+26,base="enrolled · withdrawn · waitlisted";
+  const rows=[()=>{key("Fields",y+136);T(ctx,"student, offering, status, date",vx,y+136,{w:600,size:23});},
+    ()=>{key("Statuses",y+192);T(ctx,base,vx,y+192,{w:700,size:S});if(dA>0)withA(ctx,dA,()=>T(ctx," · deferred",vx+tw(ctx,base,S,700),y+192,{w:700,size:S,color:rgba(mixc(INK,GOLDC,o.defHi||0),1)}));},
+    ()=>{key("Meaning",y+248);T(ctx,"enrolled = holds a place on census date",vx,y+248,{w:600,size:22});T(ctx,"waitlisted = no place yet · withdrawn = left",vx,y+282,{w:600,size:22});
+      if(dA>0)withA(ctx,dA,()=>T(ctx,"deferred = starts in a later term",vx,y+316,{w:600,size:22,color:rgba(mixc(INK,GOLDC,o.defHi||0),1)}));},
+    ()=>{key("Freshness",y+364);T(ctx,"by 06:00 every day",vx,y+364,{w:600,size:23});}];
+  rows.forEach((draw,i)=>withA(ctx,o.rows==null?1:clamp(o.rows*rows.length-i,0,1),draw));
+  ctx.strokeStyle="rgba(170,200,245,0.18)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+26,y+398);ctx.lineTo(x+w-26,y+398);ctx.stroke();
+  const cx1=x+w*0.44,cx2=x+w*0.7;key("Owners",y+432);T(ctx,"business",cx1,y+432,{w:700,size:18,color:rgba(BIZ,0.95)});T(ctx,"technical",cx2,y+432,{w:700,size:18,color:rgba(TECH,0.95)});
+  T(ctx,"produce",vx,y+474,{w:600,size:19,color:rgba(SOFT,0.95)});T(ctx,"use",vx,y+516,{w:600,size:19,color:rgba(SOFT,0.95)});
+  [["mei",cx1,y+474],["ben",cx2,y+474],["ana",cx1,y+516],["sam",cx2,y+516]].forEach(([id,cx,cy],i)=>{const P=PEOPLE[id],a=o.sign?clamp(o.sign*4-i,0,1):0,n=o.notice?o.notice:0;
+    withA(ctx,0.35+0.65*Math.max(a,n),()=>{led(ctx,cx,cy-15,12,12,P.edge);T(ctx,P.name.split(" ")[0],cx+22,cy,{w:700,size:22,color:rgba(P.edge,0.95)});});});};}
+// a video-call tile's name, and the clock chip's note, in labels as wide as their words
+if(typeof callTile==="function"){const CL0=callTile;callTile=function(ctx,id,x,y,w,h,o){const m=phMin(ctx);if(!m)return CL0.apply(this,arguments);o=o||{};CL0(ctx,id,x,y,w,h,Object.assign({},o,{label:0}));
+  const P=PEOPLE[id],n=P.name.replace("Prof. ",""),S=Math.max(18,m);withA(ctx,o.label==null?1:o.label,()=>{glass(ctx,x+12,y+h-S-32,tw(ctx,n,S,700)+30,S+20,12,P.edge,{glow:6,ea:0.5,fill:"rgba(6,10,20,0.85)"});T(ctx,n,x+27,y+h-22-S*0.16,{w:700,size:S});});};}
+if(typeof clockChip==="function"){const CC0=clockChip;clockChip=function(ctx,S,s,sub,a){setScreen(ctx,S);const m=phMin(ctx);if(!m||!sub)return CC0.apply(this,arguments);withA(ctx,a==null?1:a,()=>{const ss=Math.max(20,m),w=28+tw(ctx,s,32,800,"mono")+18+tw(ctx,sub,ss,600)+28;
+  glass(ctx,64,52,w,64,18,[170,205,255],{glow:10,ea:0.5,fill:"rgba(8,14,28,0.85)"});T(ctx,s,92,96,{w:800,size:32,f:"mono"});T(ctx,sub,92+tw(ctx,s,32,800,"mono")+18,95,{w:600,size:ss,color:rgba(SOFT,0.95)});});};}
+// the platform in one row: its note about the last good data stays inside the frame
+if(typeof platformRow==="function"){const PR0=platformRow;platformRow=function(ctx,t,o){const m=phMin(ctx);if(!m||!(o&&o.banner>0))return PR0.apply(this,arguments);PR0(ctx,t,Object.assign({},o,{banner:0}));
+  const y=o.y||470,s="last good data · yesterday 23:02",w=tw(ctx,s,Math.max(16,m),700)+26;withA(ctx,o.banner,()=>tag(ctx,Math.min(1725,1900-w/2),y-150,s,AMBER,{align:"center",size:16}));};}
+
+/* ---------- The Inner Life of Data's plaque (style2.js), at sizes that read ---------- */
+// each row's label and value on lines far enough apart for the larger words, and the plaque as tall as they need
+if(typeof plaque==="function"){const PQ0=plaque;plaque=function(ctx,x,y,w,rows,c){const m=phMin(ctx);if(!m)return PQ0.apply(this,arguments);const rh=Math.max(52,m*2.3),h=20+rows.length*rh;
+  glass(ctx,x,y,w,h,14,c,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.9)"});
+  rows.forEach((r,i)=>{const yy=y+16+i*rh;let tx=x+18;if(r[2]){const lw=logo(ctx,r[2],tx,yy+8,28);tx+=Math.max(lw,26)+10;}T(ctx,r[0],tx,yy+m*0.85,{size:15,w:700,color:rgba(SOFT,0.95)});T(ctx,r[1],tx,yy+m*1.95,{size:21,w:700});});return h;};}
+
+/* ---------- A Sharper Sketch's calendar card (sketch3.js), at sizes that read ---------- */
+// the coloured band grows to hold its title, and the card grows to hold the date and its label
+if(typeof calCard==="function"){const CA0=calCard;calCard=function(ctx,x,y,title,date,col,a,hi){const m=phMin(ctx);if(!m)return CA0.apply(this,arguments);withA(ctx,a,()=>{const bh=m+16,h=bh+m*2.9+10;
+  glass(ctx,x,y,300,h,14,col,{glow:12+14*(hi||0),ea:0.7,fill:"rgba(7,12,24,0.94)"});ctx.fillStyle=rgba(col,0.9);rr(ctx,x,y,300,bh,14);ctx.fill();ctx.fillStyle="rgba(7,12,24,0.94)";ctx.fillRect(x,y+bh-8,300,10);
+  T(ctx,title,x+150,y+bh/2+m*0.3,{w:800,size:16,align:"center",color:"#0a1020"});T(ctx,date,x+150,y+bh+m*1.35,{w:800,size:28,align:"center",color:rgba(col,1)});T(ctx,"census date",x+150,y+bh+m*2.5,{w:600,size:14,align:"center",color:rgba(SOFT,1)});});};}
+
+/* ---------- In the weeds' code files (weeds.js), at sizes that read ---------- */
+// a line too long for the card wraps, as an editor wraps it: at a space or a comma where it can, the rest indented under it, and a
+// highlighted line stays lit on all its rows. The file's path gives way from the left ("…/name.yml") so its label still fits beside
+// it. The card grows to hold its rows; phCodeRows says where each line starts, for scenes that point at a line
+function phCodeRows(ctx,w,lines,sz){const cw=tw(ctx,"0000000000",sz,500,"mono")/10,cols=Math.max(16,Math.floor((w-44)/cw)),R=[];
+  lines.forEach((l,i)=>{const ind=(l.match(/^\s*/)[0]).slice(0,Math.floor(cols/3))+"  ";let s=l,off=0,first=true;
+    while(true){const lim=first?cols:cols-ind.length;if(s.length<=lim){R.push({i,s:first?s:ind+s,off,pre:first?0:ind.length});break;}
+      let k=lim;for(let j=lim;j>lim*0.5;j--){if(" ,(".indexOf(s[j-1])>=0){k=j;break;}}R.push({i,s:first?s.slice(0,k):ind+s.slice(0,k),off,pre:first?0:ind.length});off+=k;s=s.slice(k);first=false;}});
+  return R;}
+if(typeof codeFile==="function"){const CF0=codeFile;codeFile=function(ctx,x,y,w,name,lines,o){const m=phMin(ctx);if(!m)return CF0.apply(this,arguments);o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return 0;
+  const sz=Math.max(o.size||19,m),LH=Math.max(o.lh||32,sz*1.22),R=phCodeRows(ctx,w,lines,sz),h=Math.max(o.h||0,70+R.length*LH),col=o.edge||[170,205,255];
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,col,{glow:12+10*(o.hi||0),ea:0.65,fill:"rgba(6,10,20,0.95)"});
+    const ns=Math.max(16,m),lw=o.label?tw(ctx,o.label,Math.max(15,m),700)+24:0;let nm=name;while(nm.length>8&&36+tw(ctx,nm,ns,500,"mono")>w-18-lw){const k=nm.indexOf("/",nm[0]==="…"?2:1);nm=k>0?"…"+nm.slice(k):"…"+nm.slice(Math.max(2,nm.length-Math.floor(nm.length*0.8)));}
+    ctx.fillStyle=rgba(col,0.9);rr(ctx,x+16,y+16,10,10,3);ctx.fill();T(ctx,nm,x+36,y+27,{f:"mono",w:500,size:16,color:rgba(col,1)});if(o.label)T(ctx,o.label,x+w-18,y+27,{w:700,size:15,align:"right",color:rgba(o.labelCol||SOFT,1)});
+    ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+14,y+42,w-28,1.2);
+    const n=o.p==null?lines.length:lines.length*o.p;R.forEach((r,k)=>{const i=r.i;if(i>=n)return;const yy=y+74+k*LH,l=lines[i],q=clamp(n-i,0,1),cm=/^\s*(--|#)/.test(l),on=o.lit?o.lit[i]||0:0;
+      if(on>0)withA(ctx,on,()=>{ctx.fillStyle=rgba(o.litCol||TRUST,0.16);rr(ctx,x+12,yy-LH*0.7,w-24,LH*0.95,6);ctx.fill();});
+      const vis=Math.round(q*l.length)-r.off;if(vis<=0)return;const body=r.s.slice(r.pre),shown=r.s.slice(0,r.pre)+body.slice(0,Math.min(body.length,vis));
+      T(ctx,shown,x+22,yy,{f:"mono",w:500,size:sz,color:cm?rgba(SOFT,0.8):rgba(mix([200,225,255],o.litCol||TRUST,on*0.6),0.95)});});});return h;};}
+
+/* ---------- In the weeds' own code cards (each film's plan.js), at sizes that read ---------- */
+// phCode(card, how) wraps a film's code card: on a phone its type is at least the smallest size that reads, its lines are far enough
+// apart, and a line too long for it wraps as an editor wraps it. how.wrap says how: "chars" passes the wrap to the card (o.wrap, in
+// characters), "bool" switches the card's own wrap on, and anything else makes the rows here, so that what a line carries (lit,
+// its colour, a strike, a swap) follows it to its rows. how.head(o) is the card's height above its first line, how.label(o) its
+// label, so a long path gives way from the left ("…/name.sql") and the label still fits. Off a phone, the card is as it was
+function phOn(){return PH_W&&!PH_OFF?PH_MIN:0;}
+function phFitPath(ctx,name,room,sz){let nm=name;while(nm.length>8&&tw(ctx,nm,sz,500,"mono")>room){const k=nm.indexOf("/",nm[0]==="…"?2:1);nm=k>0?"…"+nm.slice(k):"…"+nm.slice(Math.max(2,nm.length-Math.floor(nm.length*0.8)));}return nm;}
+function phCode(f,how){return function(ctx,x,y,w,name,lines,o){const m=phMin(ctx);if(!m)return f.apply(this,arguments);o=Object.assign({},o||{});
+  const base=o.size||how.size||19,sz=Math.max(base,m),cw=tw(ctx,"0000000000",sz,500,"mono")/10,lh=Math.max(o.lh||how.lh(base),Math.round(sz*1.32)),cols=Math.max(16,Math.floor(((o.cols?w/2:w)-44)/cw));
+  o.size=sz;o.lh=lh;const lab=how.label?how.label(o):o.label,ls=Math.max(18,m);if(lab)name=phFitPath(ctx,name,w-76-tw(ctx,lab,ls,700)-28,ls);else name=phFitPath(ctx,name,w-60,ls);
+  const rows=ls_=>phCodeRows(ctx,o.cols?w/2:w,ls_,sz),R=o.cols?o.cols.map(rows).reduce((p,q)=>p.length>q.length?p:q,[]):rows(lines),need=how.head(o,ctx,w,name)+R.length*lh+8;
+  if(o.h)o.h=Math.max(o.h,need);
+  if(how.wrap==="chars"){if(!o.wrap||o.wrap>cols)o.wrap=cols;return f.call(this,ctx,x,y,w,name,lines,o);}
+  if(how.wrap==="bool"){o.wrap=true;return f.call(this,ctx,x,y,w,name,lines,o);}
+  ["lit","lineCol","litCols","dim","glow","strike","swap","clip"].forEach(k=>{const v=o[k];if(!v||typeof v!=="object")return;const n={};R.forEach((r,j)=>{if(v[r.i]==null)return;if((k==="strike"||k==="swap"||k==="clip")&&r.off>0)return;n[j]=v[r.i];});o[k]=n;});
+  if(o.p!=null)o.p=clamp(o.p,0,1);return f.call(this,ctx,x,y,w,name,R.map(r=>r.s),o);};}
+
+/* ---------- In the weeds' credential model (weeds.js), at sizes that read ---------- */
+// each box as wide (and, with its key, as tall) as its words; a relationship's name between the boxes if it fits the gap, else just
+// above the line, over the gap; and drawn as small print when the model is a small picture of itself (the words would cover it)
+if(typeof bpModel==="function"&&typeof bpBox==="function"){const BM0=bpModel;bpModel=function(ctx,cx,cy,s,o){const m=phMin(ctx);if(!m)return BM0.apply(this,arguments);o=o||{};const a=o.a==null?1:o.a;
+  const P={learner:[cx-390*s,cy-60*s],cred:[cx,cy-60*s],award:[cx+390*s,cy-60*s]};if(a<=0.01)return P;const b=o.b||0,p=o.p==null?1:o.p,hi=o.hi||{},ns=Math.max(26*s,m),ks=Math.max(15,m);
+  const W={},H=Math.max(84*s,o.keys?ns+ks+30:ns+26);["learner","cred","award"].forEach(k=>{W[k]=Math.max(230*s,tw(ctx,BPE[k][0],ns,800)+28,o.keys&&o.keys[k]?tw(ctx,o.keys[k],ks,500,"mono")+24:0);});
+  // a small picture of the model, too small for its names at the size that reads: drawn as it was, as a picture
+  if(P.cred[0]-W.cred/2-(P.learner[0]+W.learner/2)<16)return phAsDeco(true,()=>BM0(ctx,cx,cy,s,o));const small=false;
+  withA(ctx,a,()=>{const line=(k0,k1,lab,q)=>{if(q<=0)return;const[x0,y0]=P[k0],[x1,y1]=P[k1],xa=x0+W[k0]/2,xb=x1-W[k1]/2,col=mix(SK,BPL,b);ctx.save();ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=2.4*s;ctx.beginPath();ctx.moveTo(xa,y0);ctx.lineTo(lerp(xa,xb,q),y1);ctx.stroke();
+      if(q>=0.98){ctx.beginPath();ctx.moveTo(xb-16*s,y1-11*s);ctx.lineTo(xb,y1);ctx.lineTo(xb-16*s,y1+11*s);ctx.moveTo(xb-16*s,y1-13*s);ctx.lineTo(xb-16*s,y1+13*s);ctx.stroke();}ctx.restore();
+      const fits=tw(ctx,lab,Math.max(17*s,m),600)<=xb-xa-12;
+      withA(ctx,fin(q,0.6,0.4),()=>phAsDeco(small,()=>T(ctx,lab,(xa+xb)/2,fits||small?y0-14*s:y0-H/2-12,{w:600,size:17*s,align:"center",color:rgba(mix(SOFT,BPL,b),0.95)})));};
+    line("learner","cred","holds",clamp(p*3-1.6,0,1));line("cred","award","counts towards",clamp(p*3-2,0,1));
+    ["learner","cred","award"].forEach((k,i)=>{const q=clamp(p*3-i*0.5,0,1);bpBox(ctx,P[k][0]-W[k]/2,P[k][1]-H/2,W[k],H,BPE[k][0],BPE[k][1],b,{a:q,hi:hi[k]||0,size:26*s,sub:o.keys?o.keys[k]:null});});});
+  return P;};}
+// a box of the model: its name, and its key under it, placed for the sizes they're drawn at
+if(typeof bpBox==="function"){const BB0=bpBox;bpBox=function(ctx,x,y,w,h,name,col,b,o){const m=phMin(ctx);if(!m||!(o&&o.sub))return BB0.apply(this,arguments);const ns=Math.max(o.size||26,m),ks=Math.max(15,m);
+  BB0(ctx,x,y,w,h,"",col,b,Object.assign({},o,{sub:null}));const a=o.a==null?1:o.a;if(a<=0.01)return;const c=y+h/2-(ns+ks*1.1)/2;
+  withA(ctx,a,()=>{T(ctx,name,x+w/2,c+ns*0.8,{w:800,size:ns,align:"center",color:rgba(mix(INK,BPL,b),1)});T(ctx,o.sub,x+w/2,c+ns*0.8+ks*1.15,{f:"mono",w:500,size:15,align:"center",color:rgba(mix(SOFT,BPL,b),0.85)});});};}
+// the blueprint's title block, as wide and tall as its two lines at the size they read
+if(typeof bpPaper==="function"){const BP0=bpPaper;bpPaper=function(ctx,x,y,w,h,b,o){const m=phMin(ctx);if(!m||!(o&&o.title))return BP0.apply(this,arguments);if(b<=0.01)return;
+  BP0(ctx,x,y,w,h,b,Object.assign({},o,{title:null}));const ts=Math.max(16,m),ss=Math.max(14,m),tw_=Math.min(w-60,Math.max(360,tw(ctx,o.title,ts,500,"mono")+24,tw(ctx,o.sub||"",ss,500,"mono")+24)),th=ts+ss+30;
+  withA(ctx,b,()=>{ctx.strokeStyle=rgba(BPL,0.85);ctx.lineWidth=2.2;ctx.strokeRect(x+w-14-tw_,y+h-14-th,tw_,th);ctx.beginPath();ctx.moveTo(x+w-14-tw_,y+h-14-th/2);ctx.lineTo(x+w-14,y+h-14-th/2);ctx.stroke();
+    T(ctx,o.title,x+w-tw_-2,y+h-14-th/2-ts*0.3,{f:"mono",w:500,size:16,color:rgba(BPL,0.95)});T(ctx,o.sub||"",x+w-tw_-2,y+h-14-ss*0.3-4,{f:"mono",w:500,size:14,color:rgba(BPL,0.7)});});};}
+// the project's lineage graph: its column names read when the columns are wide enough for them, and are small print when they aren't
+if(typeof lineageGraph==="function"&&typeof LAYER4!=="undefined"){const LG0=lineageGraph;lineageGraph=function(ctx,x,y,w,h,t,o){const m=phMin(ctx);if(!m)return LG0.apply(this,arguments);
+  return phAsDeco(Math.max(...LAYER4.map(([nm])=>tw(ctx,nm,Math.max(22,m),800)))>w/4-10,()=>LG0(ctx,x,y,w,h,t,o));};}
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

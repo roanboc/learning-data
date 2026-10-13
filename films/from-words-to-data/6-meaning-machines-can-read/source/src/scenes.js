@@ -111,7 +111,7 @@ scene("four",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,S
   const cG=c("gloss"),cT=c("tax"),cO=c("onto"),cSm=c("sem"),cK=c("stack"),litT=[cG+4.1,cT+0.1,cO+0.1,cSm+0.2],dur=[1.6,1.8,3.9,1.6];
   const br=k=>t>B?pulseAt(t,B+0.2+k*0.65,1.3):0;
   ctx.save();const z=focus(ctx,t,[[0,960,540,1],[litT[0]-0.6,790,mm_fy(0)+70,1.57],[cT-0.3,790,mm_fy(1)+70,1.57],[cO-0.3,790,mm_fy(2)+70,1.57],[cSm-0.3,790,mm_fy(3)+70,1.57],[cK-0.2,960,540,1]],1.3);
-  const an=mm_stack(ctx,t,{decoContent:z<1.5,a:[0,1,2,3].map(k=>fin(t,cG+0.3+k*0.3,0.6)),lit:litT.map(x=>fin(t,x,0.6)),ca:litT.map((x,k)=>clamp((t-x-0.2)/dur[k],0,1)),qa:litT.map(x=>fin(t,Math.max(x+1.3,cK-0.1),0.6)),
+  const an=mm_stack(ctx,t,{decoContent:z<1.5,a:[0,1,2,3].map(k=>fin(t,cG+0.3+k*0.3,0.6)),lit:litT.map(x=>fin(t,x,0.6)),ca:litT.map((x,k)=>clamp((t-x-0.2)/dur[k],0,1)),qa:litT.map(x=>fin(t,Math.max(x+1.3,cK+0.6),0.6)),
     hi:litT.map((x,k)=>Math.max(pulseAt(t,x,2.6),pulseAt(t,cK+1.4,1.6),br(k))),mh:[0,1,2,3].map(k=>fin(t,cK+0.3,0.6))});
   withA(ctx,fin(t,cT+2.4,0.5)*(1-fin(t,cO-0.4,0.5)),()=>T(ctx,"like Linnaeus's",202,mm_fy(1)+130,{w:600,size:18,color:rgba(PARCH,0.9)}));
   mm_thread(ctx,an,clamp((t-cK-0.3)/1.4,0,1),t,[236,243,255]);ctx.restore();

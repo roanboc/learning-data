@@ -44,13 +44,13 @@ scene("sam",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
   msg(ctx,904,326,500,"Ana","Are these numbers safe to use?",BIZ,fin(t,0.6,0.4));
   msg(ctx,1036,430,460,"Sam → Ana","Yesterday's numbers are safe.\nI'm checking today's.\nBack to you by 8:45.",TECH,fin(t,c("reply")+0.6,0.4),t>c("reply")-0.3?t:0);
   // what Sam knows, and what not yet: inside the panel, under the reply
-  withA(ctx,fin(t,c("trust")+0.3),()=>{const k="known: yesterday is safe";tag(ctx,904,660,k,GOOD,{size:21});tag(ctx,904+tw(ctx,k,21,700)+26+16,660,"not yet: today",AMBER,{size:21});});
+  withA(ctx,fin(t,c("trust")+0.3),()=>{const k="known: yesterday is safe";tag(ctx,904,660,k,GOOD,{size:21});tag(ctx,904+tw(ctx,k,Math.max(21,phMin(ctx)),700)+26+16,660,"not yet: today",AMBER,{size:21});});
   setScreen(ctx,S);clockChip(ctx,S,"7:59","",fin(t,0.2));});
 
 /* ---------- 4. Follow the thread ---------- */
 // the lineage world: the steps that built the number on Ana's dashboard, from the dashboard back to bronze
 function lineWorld(ctx,t,k,trayA,kpiA){const y=540;
-  if(k>0)glow(ctx,1640-Math.min(4,k)*350,y,70,BAD,0.2+0.1*Math.sin(t*3));
+  if(k>0){const P=phLinPts(ctx,1640,y,350),i=Math.min(3,Math.floor(Math.min(4,k))),f=Math.min(4,k)-i;glow(ctx,lerp(P[i][0],P[i+1][0],f),y,70,BAD,0.2+0.1*Math.sin(t*3));}
   kpiMini(ctx,1500,236,280,190,94,kpiA==null?1:kpiA);
   lineage(ctx,1640,y,350,{k,bad:true});tray(ctx,425,650,330,15,t,trayA);}
 scene("thread",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
@@ -90,8 +90,8 @@ function campus(ctx,t,sc,c){ // the flashback: two notices, each on its own path
     if(sub.length>1)beam(ctx,sub,col,[[18,0.06],[7,0.16],[2.4,0.8],[1.2,0.95]]);return sub[sub.length-1];};
   bld(300,300,300,90,"Registrar's office",BIZ);bld(300,700,300,90,"Student system team",TECH);
   ["School of Computing","School of Business","School of Health"].forEach((s,i)=>bld(900,190+i*110,300,70,s,BIZ));bld(900,700,300,70,"release notes",TECH);
-  glass(ctx,1440,340,380,300,24,[170,205,255],{glow:14,ea:0.5,fill:"rgba(8,14,28,0.9)"});T(ctx,"Data platform",1630,390,{w:800,size:24,align:"center"});
-  kpiMini(ctx,1490,408,280,180,94);T(ctx,"and the people who use its numbers",1630,624,{w:500,size:16,align:"center",color:rgba(SOFT,0.95)});
+  const ph=phMin(ctx)>0;glass(ctx,1440,340,380,ph?336:300,24,[170,205,255],{glow:14,ea:0.5,fill:"rgba(8,14,28,0.9)"});T(ctx,"Data platform",1630,390,{w:800,size:24,align:"center"});
+  kpiMini(ctx,1490,408,280,180,94);phWrap(ctx,"and the people who use its numbers",ph?340:9999,ph?phMin(ctx):16,500).forEach((l,i)=>T(ctx,l,1630,624+i*32,{w:500,size:16,align:"center",color:rgba(SOFT,0.95)}));
   const branch=y=>{const P=[];for(let i=0;i<=14;i++){const u=i/14,a=1-u;P.push({x:a*a*a*560+3*a*a*u*660+3*a*u*u*650+u*u*u*750,y:a*a*a*300+3*a*a*u*300+3*a*u*u*y+u*u*u*y});}return P;};
   path([{x:450,y:300},{x:560,y:300}],BIZ,clamp(pA*2.2,0,1));const pb=clamp(pA*2.2-1.2,0,1);let e1=null;[190,300,410].forEach(y=>{const e=path(branch(y),BIZ,pb);if(y===300)e1=e;});if(pA<0.45)e1={x:lerp(450,560,clamp(pA*2.2,0,1)),y:300};
   const e2=path([{x:450,y:700},{x:750,y:700}],TECH,pB);
@@ -206,7 +206,8 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");
   // changes keep arriving, as events or in files, through the contract at the door; the numbers are built once a night
   platformRow(ctx,t,{door:1,gate:GOOD,y:470,num:"97%"});packets(ctx,t,[{x:360,y:470},{x:470,y:470},{x:560,y:470}],0.5,1.2,0,APP.sis.c,16,0.9);
   // a hint of the next film in the series: another number jumps overnight
-  withA(ctx,fin(t,B-0.4,0.8),()=>{const x=1590,y=660,w=270,h=150,v=ease(clamp((t-B)/2.0,0,1));dbCard(ctx,x,y,w,h);T(ctx,"Applications",x+18,y+32,{w:700,size:17,color:DB.text});T(ctx,"overnight",x+18,y+52,{w:500,size:14,color:DB.muted});
+  // on a phone the card is wider, so its name and its jump share a line; "overnight" is small print
+  withA(ctx,fin(t,B-0.4,0.8),()=>{const ph=phMin(ctx)>0,x=ph?1540:1590,y=660,w=ph?330:270,h=150,v=ease(clamp((t-B)/2.0,0,1));dbCard(ctx,x,y,w,h);T(ctx,"Applications",x+18,y+(ph?38:32),{w:700,size:17,color:DB.text});phAsDeco(ph,()=>T(ctx,"overnight",x+18,y+(ph?58:52),{w:500,size:14,color:DB.muted}));
     withA(ctx,sstep(0.6,1,v),()=>T(ctx,"+38%",x+w-18,y+44,{w:700,size:28,align:"right",color:DB.red}));
     const tr=[40,41,40,42,41,42,43,42,43,42+17*v],px=i=>x+18+(w-36)*i/(tr.length-1),py=q=>y+h-18-(q-38)*3.2;
     ctx.beginPath();tr.forEach((q,i)=>i?ctx.lineTo(px(i),py(q)):ctx.moveTo(px(i),py(q)));ctx.strokeStyle=v>0.6?DB.red:DB.blue;ctx.lineWidth=2.5;ctx.stroke();

@@ -10,7 +10,7 @@
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/older.js` | This film's components: the museum's exhibits (a clay school tablet, a guild's lock, an examination scroll, a licence under a wax seal, a diploma, a transcript, a digital badge, a signed credential), drawn with organic edges and a slow light; the conceptual model; the system cards with their own models; the vendor's box; the ring, the hub and the lost spacecraft; the learner's records and the code list; the logical model and the yardstick. It also holds `LV`, the pictures of the labs and scenarios, which take every word they draw from the page's words (`FW.vis`). |
 | `src/scenes.js` | The eight chapters. The title is part of the first one, the end card part of the last. |
-| `tools/score.py` | The film's music and sounds, played with the series' instruments (`../../shared/tools/music.py`). |
+| `tools/score.py` | The film's music and sounds, played with the series' instruments (`../../shared/tools/music.py`), with a low, urgent pulse as the spacecraft is lost at Mars. |
 | `tools/*.py` | Thin wrappers that run the series' tools (`../../shared/tools/`) on this film. |
 
 ## Setup (once)

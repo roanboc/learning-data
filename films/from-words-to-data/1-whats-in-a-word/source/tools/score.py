@@ -97,3 +97,6 @@ scratch(G('paper', 'recipe', 0.4), 0.03, -0.3, 0.6); scratch(G('paper', 'recipe'
 page(G('end', 'why', 0.4), 0.05); glitch(G('end', 'why', 3.0), 0.04); [pop(G('end', 'why', 4.6 + k * 0.15), 0.05) for k in range(3)]
 [stone(G('end', 'clay', 0.8 + k * 0.42), 0.06, (k % 5 - 2) * 0.15) for k in range(11)]; [framedrum(G('end', 'clay', 0.8 + k * 1.68), 0.04) for k in range(3)]
 [node(G('end', 'last', 0.4 + k * 0.6), 0.05, (k - 1) * 0.5) for k in range(3)]; bell(G('end', 'breath', 0.6), 0.09, 587)
+
+# PLAYBOOK.md: the whole score, music and effects, is low-passed at 2.6 kHz last, so no instrument rings above the voice
+soften()

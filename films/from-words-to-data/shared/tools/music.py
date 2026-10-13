@@ -447,3 +447,103 @@ def heartbeat(s, g=0.08):
 def stone(s, g=0.1, pan=0.0):
     """a chisel on stone, or a stylus pressed into clay: a hard, short knock"""
     x = tt(0.15); X(norm(np.sin(2 * np.pi * 520 * x) * np.exp(-x * 50) + filt(noise(0.15), 'band', (900, 4000)) * np.exp(-x * 60)), s, g, pan)
+
+
+# ---------------------------------------------------------------- soft stand-ins, and a rhythm for urgent moments
+# PLAYBOOK.md: keep effects low and soft, below about 2.5 kHz, and let a rhythm belong to a feeling on screen (an error, a rush),
+# starting and stopping with it. These are added for the films scored before that rule; the functions above stay as they were, so
+# films that use them sound the same. soft_palette() returns soft stand-ins for the bright effects, under the same names and with
+# the same arguments: a score that starts with globals().update(soft_palette()) keeps every cue and its timing, and each chime,
+# ping, tick or sweep becomes a low felt note, a wooden knock, a muffled key or a breath of air. urgent() is the rhythm.
+_srng = np.random.default_rng(11)  # their own noise, so the sounds above keep theirs
+
+
+def _snoise(sec):
+    return _srng.standard_normal(max(1, int(sec * SR))).astype(np.float32)
+
+
+def _down(f, top=520.0):
+    """the same note, an octave lower at a time, until it sits under top"""
+    while f > top:
+        f /= 2
+    return f
+
+
+def s_knock(s, g=0.05, pan=0.0, f=240):
+    """a soft wooden knock"""
+    x = tt(0.18); X(norm(filt((np.sin(2 * np.pi * f * x) * np.exp(-x * 38) + 0.4 * np.sin(2 * np.pi * f * 2.17 * x) * np.exp(-x * 60)).astype(np.float32), 'low', 1400)), s, g, pan)
+
+
+def s_tap(s, g=0.03, pan=0.0):
+    """a muffled key"""
+    x = tt(0.06); X(norm(filt(_snoise(0.06), 'band', (250, 1400)) * np.exp(-x * 90)), s, g, pan)
+
+
+def s_note(f, s, g=0.04, pan=0.0, sec=2.2):
+    """a low felt note at the pitch of f, brought down under about 500 Hz"""
+    f = _down(f); x = tt(sec)
+    sig = sum(np.sin(2 * np.pi * f * k * x) * np.exp(-x * (1.5 + 1.2 * k)) * w for k, w in ((1, 1), (2, 0.3), (3, 0.08)))
+    X(norm(filt((sig * np.minimum(1, x / 0.006)).astype(np.float32), 'low', 1800)), s, g, pan)
+
+
+def s_air(s, sec=0.8, g=0.04, pan=0.0, lo=150, hi=1100):
+    """a breath of air: filtered noise that swells and fades"""
+    x = tt(sec); X(filt(_snoise(sec), 'band', (lo, hi)) * np.sin(np.pi * x / sec) ** 2, s, g, pan)
+
+
+def s_swell(f, s, sec=2.6, g=0.03):
+    """a warm swell, instead of a shimmer: a low fifth that rises and fades"""
+    f = _down(f, 330); x = tt(sec)
+    X(((np.sin(2 * np.pi * f * x) + 0.5 * np.sin(2 * np.pi * f * 1.5 * x)) * np.sin(np.pi * x / sec) ** 2).astype(np.float32), s, g)
+
+
+def soft_palette():
+    """soft stand-ins for the bright effects, by name, with the same arguments"""
+    d = {}
+    d['tick'] = lambda s, g=0.18, pan=0: s_tap(s, g * 0.3, pan)
+    d['sweep'] = lambda s, sec=1.0, g=0.08, f0=500, f1=3000, pan=0.3: s_air(s, sec, g * 0.5, pan, 160, 1000)
+    d['whoosh'] = lambda s, sec=0.9, g=0.12, pan=0.0: s_air(s, sec, g * 0.6, pan, 120, 900)
+    d['chime'] = lambda s, g=0.16, f=880, pan=0.0: s_note(f, s, g * 0.4, pan, 2.0)
+    d['ping'] = lambda s, g=0.1, pan=0.0: s_note(1318, s, g * 0.45, pan, 1.6)
+    d['shimmer'] = lambda s, g=0.05, f=1760: s_swell(f, s, 2.8, g * 0.6)
+    d['bell'] = lambda s, g=0.18, f=523: s_note(f / 2, s, g * 0.4, 0.0, 3.2)
+    d['tone'] = lambda s, g=0.24, f=660: s_note(f, s, g * 0.3, 0.0, 2.8)
+    d['buzz'] = lambda s, g=0.12: X(filt(np.sign(np.sin(2 * np.pi * 110 * tt(0.35))) * np.exp(-tt(0.35) * 6) * 0.6, 'low', 600), s, g * 0.9)
+    d['pop'] = lambda s, g=0.14, pan=0.0: s_knock(s, g * 0.35, pan, 300)
+    d['chirp'] = lambda s, g=0.06, pan=0.0, f=3200, n=3: s_note(f, s, g * 0.6, pan, 1.0)
+    d['trill'] = lambda s, g=0.05, pan=0.0, f=2600, sec=0.6: (s_note(f, s, g * 0.5, pan, 0.9), s_note(f * 1.12, s + 0.14, g * 0.4, pan, 0.9))
+    d['whistle'] = lambda s, g=0.04, pan=0.0: s_note(1400, s, g * 0.6, pan, 1.2)
+    d['spark'] = lambda s, g=0.05, pan=0.0, f=4200: s_tap(s, g * 0.6, pan)
+    d['ding'] = lambda s, g=0.08, pan=0.0, f=2093: s_note(f, s, g * 0.45, pan, 1.8)
+    d['node'] = lambda s, g=0.05, pan=0.0, f=1568: s_note(f, s, g * 0.5, pan, 1.3)
+    d['link'] = lambda s, g=0.04, pan=0.0, sec=0.35: s_air(s, sec + 0.1, g * 0.6, pan, 200, 900)
+    d['glitch'] = lambda s, g=0.05, pan=0.0: X(filt((np.sign(np.sin(2 * np.pi * 180 * tt(0.3))) * (np.sin(2 * np.pi * 23 * tt(0.3)) > 0) * np.exp(-tt(0.3) * 7) * 0.6).astype(np.float32), 'low', 700), s, g, pan)
+    d['key'] = lambda s, g=0.06, pan=0.0: s_tap(s, g * 0.6, pan)
+    d['register'] = lambda s, g=0.1, pan=0.0: (s_knock(s, g * 0.45, pan), s_knock(s + 0.09, g * 0.3, pan, 180))
+    d['hat'] = lambda start, g=0.02, pan=0.2: s_tap(start, g * 0.8, pan)
+    d['clock'] = lambda start, g=0.05, pan=0.0, hi=True: s_tap(start, g * 0.5, pan)
+    d['shaker'] = lambda start, g=0.03, pan=0.0: s_tap(start, g * 0.6, pan)
+    d['brush'] = lambda start, g=0.03, pan=0.0, sec=0.28: s_air(start, sec, g * 0.8, pan, 300, 1600)
+    d['woodblock'] = lambda start, g=0.05, pan=0.0, f=820: s_knock(start, g * 0.6, pan, min(f, 320))
+    d['celesta'] = lambda m, start, g=0.04, pan=0.0: felt(m - 12 if m >= 72 else m, start, g, pan)
+    d['tbell'] = lambda m, start, g=0.05, pan=0.0, sec=4.0: felt(m - 12 if m >= 72 else m, start, g, pan)
+    return d
+
+
+def urgent(s0, s1, bpm=104, root=40, g=0.05, fade=1.2, steps=(0, 0, 7, 0), pan=0.0):
+    """a rhythm for a moment of error or rush, from s0 to s1, on the music bus: a short, muted bass note on every beat (steps gives
+    each beat's interval above root: (0, 0, 1, 0) leans on the semitone for an error, (0, 0, 7, 0) drives for a rush), a soft low
+    drum on one and three, and a muffled key on the off-beats. Everything sits under about 1 kHz, and it swells in and out with
+    the scene instead of stopping dead"""
+    per = 60 / bpm; t0 = s0; k = 0
+    while t0 < s1:
+        f = min(1, (t0 - s0) / fade + 0.06, (s1 - t0) / fade)
+        if f > 0:
+            fr = mf(root + steps[k % len(steps)]); x = tt(per * 0.85)
+            b = (np.sin(2 * np.pi * fr * x) + 0.35 * np.sin(4 * np.pi * fr * x)) * np.exp(-x * 6) * np.minimum(1, x / 0.005)
+            put(norm(filt(b.astype(np.float32), 'low', 700)), t0, g * f, pan)
+            if k % 2 == 0:
+                x = tt(0.35); ph = 2 * np.pi * np.cumsum(48 + 70 * np.exp(-x * 26)) / SR
+                put(norm((np.sin(ph) * np.exp(-x * 9)).astype(np.float32)), t0, g * 0.9 * f, 0.0)
+            x = tt(0.05); put(norm(filt(_snoise(0.05), 'band', (250, 1100)) * np.exp(-x * 100)), t0 + per / 2, g * 0.3 * f, pan + 0.2)
+        t0 += per; k += 1

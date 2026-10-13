@@ -200,3 +200,69 @@ if(typeof plaque==="function"){const PQ0=plaque;plaque=function(ctx,x,y,w,rows,c
 if(typeof calCard==="function"){const CA0=calCard;calCard=function(ctx,x,y,title,date,col,a,hi){const m=phMin(ctx);if(!m)return CA0.apply(this,arguments);withA(ctx,a,()=>{const bh=m+16,h=bh+m*2.9+10;
   glass(ctx,x,y,300,h,14,col,{glow:12+14*(hi||0),ea:0.7,fill:"rgba(7,12,24,0.94)"});ctx.fillStyle=rgba(col,0.9);rr(ctx,x,y,300,bh,14);ctx.fill();ctx.fillStyle="rgba(7,12,24,0.94)";ctx.fillRect(x,y+bh-8,300,10);
   T(ctx,title,x+150,y+bh/2+m*0.3,{w:800,size:16,align:"center",color:"#0a1020"});T(ctx,date,x+150,y+bh+m*1.35,{w:800,size:28,align:"center",color:rgba(col,1)});T(ctx,"census date",x+150,y+bh+m*2.5,{w:600,size:14,align:"center",color:rgba(SOFT,1)});});};}
+
+/* ---------- In the weeds' code files (weeds.js), at sizes that read ---------- */
+// a line too long for the card wraps, as an editor wraps it: at a space or a comma where it can, the rest indented under it, and a
+// highlighted line stays lit on all its rows. The file's path gives way from the left ("…/name.yml") so its label still fits beside
+// it. The card grows to hold its rows; phCodeRows says where each line starts, for scenes that point at a line
+function phCodeRows(ctx,w,lines,sz){const cw=tw(ctx,"0000000000",sz,500,"mono")/10,cols=Math.max(16,Math.floor((w-44)/cw)),R=[];
+  lines.forEach((l,i)=>{const ind=(l.match(/^\s*/)[0]).slice(0,Math.floor(cols/3))+"  ";let s=l,off=0,first=true;
+    while(true){const lim=first?cols:cols-ind.length;if(s.length<=lim){R.push({i,s:first?s:ind+s,off,pre:first?0:ind.length});break;}
+      let k=lim;for(let j=lim;j>lim*0.5;j--){if(" ,(".indexOf(s[j-1])>=0){k=j;break;}}R.push({i,s:first?s.slice(0,k):ind+s.slice(0,k),off,pre:first?0:ind.length});off+=k;s=s.slice(k);first=false;}});
+  return R;}
+if(typeof codeFile==="function"){const CF0=codeFile;codeFile=function(ctx,x,y,w,name,lines,o){const m=phMin(ctx);if(!m)return CF0.apply(this,arguments);o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return 0;
+  const sz=Math.max(o.size||19,m),LH=Math.max(o.lh||32,sz*1.22),R=phCodeRows(ctx,w,lines,sz),h=Math.max(o.h||0,70+R.length*LH),col=o.edge||[170,205,255];
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,col,{glow:12+10*(o.hi||0),ea:0.65,fill:"rgba(6,10,20,0.95)"});
+    const ns=Math.max(16,m),lw=o.label?tw(ctx,o.label,Math.max(15,m),700)+24:0;let nm=name;while(nm.length>8&&36+tw(ctx,nm,ns,500,"mono")>w-18-lw){const k=nm.indexOf("/",nm[0]==="…"?2:1);nm=k>0?"…"+nm.slice(k):"…"+nm.slice(Math.max(2,nm.length-Math.floor(nm.length*0.8)));}
+    ctx.fillStyle=rgba(col,0.9);rr(ctx,x+16,y+16,10,10,3);ctx.fill();T(ctx,nm,x+36,y+27,{f:"mono",w:500,size:16,color:rgba(col,1)});if(o.label)T(ctx,o.label,x+w-18,y+27,{w:700,size:15,align:"right",color:rgba(o.labelCol||SOFT,1)});
+    ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+14,y+42,w-28,1.2);
+    const n=o.p==null?lines.length:lines.length*o.p;R.forEach((r,k)=>{const i=r.i;if(i>=n)return;const yy=y+74+k*LH,l=lines[i],q=clamp(n-i,0,1),cm=/^\s*(--|#)/.test(l),on=o.lit?o.lit[i]||0:0;
+      if(on>0)withA(ctx,on,()=>{ctx.fillStyle=rgba(o.litCol||TRUST,0.16);rr(ctx,x+12,yy-LH*0.7,w-24,LH*0.95,6);ctx.fill();});
+      const vis=Math.round(q*l.length)-r.off;if(vis<=0)return;const body=r.s.slice(r.pre),shown=r.s.slice(0,r.pre)+body.slice(0,Math.min(body.length,vis));
+      T(ctx,shown,x+22,yy,{f:"mono",w:500,size:sz,color:cm?rgba(SOFT,0.8):rgba(mix([200,225,255],o.litCol||TRUST,on*0.6),0.95)});});});return h;};}
+
+/* ---------- In the weeds' own code cards (each film's plan.js), at sizes that read ---------- */
+// phCode(card, how) wraps a film's code card: on a phone its type is at least the smallest size that reads, its lines are far enough
+// apart, and a line too long for it wraps as an editor wraps it. how.wrap says how: "chars" passes the wrap to the card (o.wrap, in
+// characters), "bool" switches the card's own wrap on, and anything else makes the rows here, so that what a line carries (lit,
+// its colour, a strike, a swap) follows it to its rows. how.head(o) is the card's height above its first line, how.label(o) its
+// label, so a long path gives way from the left ("…/name.sql") and the label still fits. Off a phone, the card is as it was
+function phOn(){return PH_W&&!PH_OFF?PH_MIN:0;}
+function phFitPath(ctx,name,room,sz){let nm=name;while(nm.length>8&&tw(ctx,nm,sz,500,"mono")>room){const k=nm.indexOf("/",nm[0]==="…"?2:1);nm=k>0?"…"+nm.slice(k):"…"+nm.slice(Math.max(2,nm.length-Math.floor(nm.length*0.8)));}return nm;}
+function phCode(f,how){return function(ctx,x,y,w,name,lines,o){const m=phMin(ctx);if(!m)return f.apply(this,arguments);o=Object.assign({},o||{});
+  const base=o.size||how.size||19,sz=Math.max(base,m),cw=tw(ctx,"0000000000",sz,500,"mono")/10,lh=Math.max(o.lh||how.lh(base),Math.round(sz*1.32)),cols=Math.max(16,Math.floor(((o.cols?w/2:w)-44)/cw));
+  o.size=sz;o.lh=lh;const lab=how.label?how.label(o):o.label,ls=Math.max(18,m);if(lab)name=phFitPath(ctx,name,w-76-tw(ctx,lab,ls,700)-28,ls);else name=phFitPath(ctx,name,w-60,ls);
+  const rows=ls_=>phCodeRows(ctx,o.cols?w/2:w,ls_,sz),R=o.cols?o.cols.map(rows).reduce((p,q)=>p.length>q.length?p:q,[]):rows(lines),need=how.head(o,ctx,w,name)+R.length*lh+8;
+  if(o.h)o.h=Math.max(o.h,need);
+  if(how.wrap==="chars"){if(!o.wrap||o.wrap>cols)o.wrap=cols;return f.call(this,ctx,x,y,w,name,lines,o);}
+  if(how.wrap==="bool"){o.wrap=true;return f.call(this,ctx,x,y,w,name,lines,o);}
+  ["lit","lineCol","litCols","dim","glow","strike","swap","clip"].forEach(k=>{const v=o[k];if(!v||typeof v!=="object")return;const n={};R.forEach((r,j)=>{if(v[r.i]==null)return;if((k==="strike"||k==="swap"||k==="clip")&&r.off>0)return;n[j]=v[r.i];});o[k]=n;});
+  if(o.p!=null)o.p=clamp(o.p,0,1);return f.call(this,ctx,x,y,w,name,R.map(r=>r.s),o);};}
+
+/* ---------- In the weeds' credential model (weeds.js), at sizes that read ---------- */
+// each box as wide (and, with its key, as tall) as its words; a relationship's name between the boxes if it fits the gap, else just
+// above the line, over the gap; and drawn as small print when the model is a small picture of itself (the words would cover it)
+if(typeof bpModel==="function"&&typeof bpBox==="function"){const BM0=bpModel;bpModel=function(ctx,cx,cy,s,o){const m=phMin(ctx);if(!m)return BM0.apply(this,arguments);o=o||{};const a=o.a==null?1:o.a;
+  const P={learner:[cx-390*s,cy-60*s],cred:[cx,cy-60*s],award:[cx+390*s,cy-60*s]};if(a<=0.01)return P;const b=o.b||0,p=o.p==null?1:o.p,hi=o.hi||{},ns=Math.max(26*s,m),ks=Math.max(15,m);
+  const W={},H=Math.max(84*s,o.keys?ns+ks+30:ns+26);["learner","cred","award"].forEach(k=>{W[k]=Math.max(230*s,tw(ctx,BPE[k][0],ns,800)+28,o.keys&&o.keys[k]?tw(ctx,o.keys[k],ks,500,"mono")+24:0);});
+  // a small picture of the model, too small for its names at the size that reads: drawn as it was, as a picture
+  if(P.cred[0]-W.cred/2-(P.learner[0]+W.learner/2)<16)return phAsDeco(true,()=>BM0(ctx,cx,cy,s,o));const small=false;
+  withA(ctx,a,()=>{const line=(k0,k1,lab,q)=>{if(q<=0)return;const[x0,y0]=P[k0],[x1,y1]=P[k1],xa=x0+W[k0]/2,xb=x1-W[k1]/2,col=mix(SK,BPL,b);ctx.save();ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=2.4*s;ctx.beginPath();ctx.moveTo(xa,y0);ctx.lineTo(lerp(xa,xb,q),y1);ctx.stroke();
+      if(q>=0.98){ctx.beginPath();ctx.moveTo(xb-16*s,y1-11*s);ctx.lineTo(xb,y1);ctx.lineTo(xb-16*s,y1+11*s);ctx.moveTo(xb-16*s,y1-13*s);ctx.lineTo(xb-16*s,y1+13*s);ctx.stroke();}ctx.restore();
+      const fits=tw(ctx,lab,Math.max(17*s,m),600)<=xb-xa-12;
+      withA(ctx,fin(q,0.6,0.4),()=>phAsDeco(small,()=>T(ctx,lab,(xa+xb)/2,fits||small?y0-14*s:y0-H/2-12,{w:600,size:17*s,align:"center",color:rgba(mix(SOFT,BPL,b),0.95)})));};
+    line("learner","cred","holds",clamp(p*3-1.6,0,1));line("cred","award","counts towards",clamp(p*3-2,0,1));
+    ["learner","cred","award"].forEach((k,i)=>{const q=clamp(p*3-i*0.5,0,1);bpBox(ctx,P[k][0]-W[k]/2,P[k][1]-H/2,W[k],H,BPE[k][0],BPE[k][1],b,{a:q,hi:hi[k]||0,size:26*s,sub:o.keys?o.keys[k]:null});});});
+  return P;};}
+// a box of the model: its name, and its key under it, placed for the sizes they're drawn at
+if(typeof bpBox==="function"){const BB0=bpBox;bpBox=function(ctx,x,y,w,h,name,col,b,o){const m=phMin(ctx);if(!m||!(o&&o.sub))return BB0.apply(this,arguments);const ns=Math.max(o.size||26,m),ks=Math.max(15,m);
+  BB0(ctx,x,y,w,h,"",col,b,Object.assign({},o,{sub:null}));const a=o.a==null?1:o.a;if(a<=0.01)return;const c=y+h/2-(ns+ks*1.1)/2;
+  withA(ctx,a,()=>{T(ctx,name,x+w/2,c+ns*0.8,{w:800,size:ns,align:"center",color:rgba(mix(INK,BPL,b),1)});T(ctx,o.sub,x+w/2,c+ns*0.8+ks*1.15,{f:"mono",w:500,size:15,align:"center",color:rgba(mix(SOFT,BPL,b),0.85)});});};}
+// the blueprint's title block, as wide and tall as its two lines at the size they read
+if(typeof bpPaper==="function"){const BP0=bpPaper;bpPaper=function(ctx,x,y,w,h,b,o){const m=phMin(ctx);if(!m||!(o&&o.title))return BP0.apply(this,arguments);if(b<=0.01)return;
+  BP0(ctx,x,y,w,h,b,Object.assign({},o,{title:null}));const ts=Math.max(16,m),ss=Math.max(14,m),tw_=Math.min(w-60,Math.max(360,tw(ctx,o.title,ts,500,"mono")+24,tw(ctx,o.sub||"",ss,500,"mono")+24)),th=ts+ss+30;
+  withA(ctx,b,()=>{ctx.strokeStyle=rgba(BPL,0.85);ctx.lineWidth=2.2;ctx.strokeRect(x+w-14-tw_,y+h-14-th,tw_,th);ctx.beginPath();ctx.moveTo(x+w-14-tw_,y+h-14-th/2);ctx.lineTo(x+w-14,y+h-14-th/2);ctx.stroke();
+    T(ctx,o.title,x+w-tw_-2,y+h-14-th/2-ts*0.3,{f:"mono",w:500,size:16,color:rgba(BPL,0.95)});T(ctx,o.sub||"",x+w-tw_-2,y+h-14-ss*0.3-4,{f:"mono",w:500,size:14,color:rgba(BPL,0.7)});});};}
+// the project's lineage graph: its column names read when the columns are wide enough for them, and are small print when they aren't
+if(typeof lineageGraph==="function"&&typeof LAYER4!=="undefined"){const LG0=lineageGraph;lineageGraph=function(ctx,x,y,w,h,t,o){const m=phMin(ctx);if(!m)return LG0.apply(this,arguments);
+  return phAsDeco(Math.max(...LAYER4.map(([nm])=>tw(ctx,nm,Math.max(22,m),800)))>w/4-10,()=>LG0(ctx,x,y,w,h,t,o));};}

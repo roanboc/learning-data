@@ -83,8 +83,8 @@ scene("build",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   rows.forEach(([col,key,code,nv],i)=>{const y=640+i*86;arrive(ctx,910,y,t,w("arrive","its own keys")-0.3+i*0.25,()=>{
     for(let v=nv-1;v>0;v--){withA(ctx,fin(t,w("arrive","every version")+v*0.15,0.4),()=>{ctx.fillStyle="rgba(10,14,24,0.95)";rr(ctx,560+v*10,y-26-v*9,700,52,10);ctx.fill();ctx.strokeStyle=rgba(col,0.3);ctx.lineWidth=1.5;rr(ctx,560+v*10,y-26-v*9,700,52,10);ctx.stroke();});}
     ctx.fillStyle="rgba(10,14,24,0.98)";rr(ctx,560,y-26,700,52,10);ctx.fill();ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=2;rr(ctx,560,y-26,700,52,10);ctx.stroke();
-    T(ctx,"Aisha Khan",584,y+8,{w:700,size:20});T(ctx,key,800,y+8,{f:"mono",w:500,size:20,color:rgba(col,1)});
-    withA(ctx,fin(t,w("arrive","its own codes")+i*0.2,0.4),()=>T(ctx,"status: "+code,1080,y+8,{f:"mono",w:500,size:18,color:rgba(SOFT,1)}));},{from:0.96});});
+    const ph=phMin(ctx)>0;T(ctx,"Aisha Khan",584,y+8,{w:700,size:20});T(ctx,key,ph?750:800,y+8,{f:"mono",w:500,size:20,color:rgba(col,1)});
+    withA(ctx,fin(t,w("arrive","its own codes")+i*0.2,0.4),()=>T(ctx,"status: "+code,ph?1248:1080,y+8,{f:"mono",w:500,size:18,align:ph?"right":"left",color:rgba(SOFT,1)}));},{from:0.96});});
   arrive(ctx,1190,580,t,w("arrive","every version")+0.5,()=>tag(ctx,1190,580,"every version",[200,160,255],{align:"center",size:17}),{from:0.8});
   // the gap between what arrives and what was agreed
   const gA=fin(t,cT,0.6);withA(ctx,gA,()=>{ctx.save();ctx.setLineDash([10,10]);ctx.strokeStyle=rgba(EDGE_,0.8);ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(910,380);ctx.lineTo(910,530);ctx.stroke();ctx.restore();
@@ -131,13 +131,13 @@ scene("name",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   const cA=c("apart"),mv=fin(t,w("step","The model is")-0.3,1.3),rl=fin(t,w("step","The model is")+0.2,0.6),m=ease(fin(t,0,1.3));
   // the staging file, carried from the last chapter, moves to its place; the blueprint arrives beside it
   const fx=lerp(100,120,m),fy=lerp(240,330,m),fw=lerp(760,740,m);
-  codeFile(ctx,fx,fy,fw,"stg_student_system__learners.sql",MT_F1,{edge:LAYER4[0][1]});
+  const fh=codeFile(ctx,fx,fy,fw,"stg_student_system__learners.sql",MT_F1,{edge:LAYER4[0][1]});
   arrive(ctx,1410,460,t,0.3,()=>{bpPaper(ctx,1000,250,820,420,1,{title:"CREDENTIAL MODEL · v3",sub:"the blueprint"});bpModel(ctx,1410,520,0.62,{b:1,hi:{learner:fin(t,cA,0.6)}});},{d:1.0,from:0.9});
   // the label "model" lifts from the file and lands on the blueprint; the file becomes "transformation"
   const k=spring(mv*1.2),lx=lerp(490,1410,k),ly=lerp(300,212,k)-Math.sin(Math.PI*clamp(mv,0,1))*90,warn=pulseAt(t,w("calls","misleading"),1.4);
   arrive(ctx,lx,ly,t,w("calls","a model")-0.2,()=>{glow(ctx,lx,ly,70,EDGE_,0.25*warn);tag(ctx,lx,ly,mv<0.5?"model?":"model",mv<0.5?mix(TRUST,EDGE_,warn):BPL,{align:"center",size:26});},{from:0.6});
   arrive(ctx,490,300,t,w("step","The model is")+0.2,()=>tag(ctx,490,300,"transformation",[150,190,255],{align:"center",size:24}),{from:0.6});
-  withA(ctx,fin(t,w("step","one step"),0.5),()=>T(ctx,"one step of the building work",490,610,{w:600,size:22,align:"center",color:rgba(SOFT,1)}));
+  withA(ctx,fin(t,w("step","one step"),0.5),()=>T(ctx,"one step of the building work",490,Math.max(610,fy+fh+44),{w:600,size:22,align:"center",color:rgba(SOFT,1)}));
   withA(ctx,fin(t,w("step","blueprint")-0.1,0.5),()=>T(ctx,"the model",1410,720,{w:800,size:26,align:"center",color:rgba(BPL,1)}));
   // a thin line from the file to the part of the blueprint it builds
   const ln=fin(t,w("apart","connecting"),0.8);if(ln>0){ctx.save();ctx.strokeStyle=rgba(TRUST,0.9);ctx.lineWidth=2;ctx.setLineDash([6,8]);ctx.beginPath();ctx.moveTo(860,420);ctx.bezierCurveTo(960,420,1040,470,lerp(860,1110,ln),lerp(420,470,ln));ctx.stroke();ctx.restore();}
@@ -177,13 +177,14 @@ scene("lives",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const lit={6:fin(t,w("yaml","one row"),0.4),8:fin(t,w("yaml","which key"),0.4),9:fin(t,w("yaml","unique"),0.4),12:fin(t,w("yaml","relates"),0.4),13:fin(t,w("yaml","relates"),0.4),5:fin(t,w("yaml","contract"),0.4),4:fin(t,w("yaml","contract")+0.2,0.4)};
   arrive(ctx,1012,420,t,cY-0.3,()=>codeFile(ctx,648,190,728,"models/core/student/_core_student__models.yml",Y,{p:clamp((t-cY+0.2)/1.6,0,1),edge:TRUST,size:16,lh:29,lit,label:"YAML",labelCol:TRUST}),{dy:30});
   // Markdown: meaning, a diagram anyone can read, and why
-  arrive(ctx,1623,495,t,cM-0.2,()=>{const x=1392,y=190,wd=462;glass(ctx,x,y,wd,610,14,KIND,{glow:12,ea:0.65,fill:"rgba(6,10,20,0.95)"});T(ctx,"core/student/_student__conceptual.md",x+30,y+27,{f:"mono",w:500,size:14,color:rgba(KIND,1)});T(ctx,"Markdown",x+wd-16,y+27,{w:700,size:13,align:"right",color:rgba(KIND,1)});
-    T(ctx,"# Credential",x+24,y+82,{f:"mono",w:500,size:20,color:rgba(INK,0.95)});wrapT(ctx,"A trusted, checkable claim about what someone knows, issued by the university: a degree, a microcredential or a badge.",x+24,y+120,wd-48,{w:600,size:18,color:rgba(SOFT,1)});
-    withA(ctx,fin(t,w("md","diagram"),0.5),()=>{T(ctx,"```mermaid",x+24,y+212,{f:"mono",w:500,size:15,color:rgba(SOFT,0.7)});bpModel(ctx,x+wd/2,y+306,0.36,{b:0});});
-    withA(ctx,fin(t,w("md","why"),0.5),()=>{T(ctx,"_student__decisions.yml",x+24,y+400,{f:"mono",w:500,size:17,color:rgba(INK,0.95)});wrapT(ctx,"DEC-STU-01 · A microcredential is a kind of credential. Agreed 2 Oct 2026 · Mei, registrar's office",x+24,y+438,wd-48,{w:600,size:17,color:rgba(TRUST,0.95)});});},{dy:30});
+  arrive(ctx,1623,495,t,cM-0.2,()=>{const x=1392,y=190,wd=462;glass(ctx,x,y,wd,610,14,KIND,{glow:12,ea:0.65,fill:"rgba(6,10,20,0.95)"});const pm=phMin(ctx),ml=Math.max(13,pm);T(ctx,pm?phFitPath(ctx,"core/student/_student__conceptual.md",wd-76-tw(ctx,"Markdown",ml,700),Math.max(14,pm)):"core/student/_student__conceptual.md",x+30,y+27,{f:"mono",w:500,size:14,color:rgba(KIND,1)});T(ctx,"Markdown",x+wd-16,y+27,{w:700,size:13,align:"right",color:rgba(KIND,1)});
+    // on a phone the description wraps to more lines, and what follows it moves down to make room
+    T(ctx,"# Credential",x+24,y+82,{f:"mono",w:500,size:20,color:rgba(INK,0.95)});const dl=wrapT(ctx,"A trusted, checkable claim about what someone knows, issued by the university: a degree, a microcredential or a badge.",x+24,y+120,wd-48,{w:600,size:pm?Math.max(18,pm):18,lh:pm?Math.max(18,pm)*1.25:undefined,color:rgba(SOFT,1)}).length,dy=pm?Math.max(0,120+dl*pm*1.25+20-212):0;
+    withA(ctx,fin(t,w("md","diagram"),0.5),()=>{T(ctx,"```mermaid",x+24,y+212+dy,{f:"mono",w:500,size:15,color:rgba(SOFT,0.7)});bpModel(ctx,x+wd/2,y+306+dy*0.7,0.36,{b:0});});
+    withA(ctx,fin(t,w("md","why"),0.5),()=>{T(ctx,"_student__decisions.yml",x+24,y+400+dy*0.6,{f:"mono",w:500,size:17,color:rgba(INK,0.95)});wrapT(ctx,"DEC-STU-01 · A microcredential is a kind of credential. Agreed 2 Oct 2026 · Mei, registrar's office",x+24,y+438+dy*0.6,wd-48,{w:600,size:pm?Math.max(17,pm):17,lh:pm?Math.max(17,pm)*1.25:undefined,color:rgba(TRUST,0.95)});});},{dy:30});
   // the tests check that the tables are what the YAML and the Markdown say
   const tT=w("check","the tests");withA(ctx,fin(t,tT,0.5),()=>T(ctx,"tables  ←  the tests check  →  what the model says",960,880,{w:700,size:20,align:"center",color:rgba(SOFT,1)}));
-  ["unique","not_null","relationships","contract"].forEach((s,i)=>{const x=760+i*260,y=940,ok=fin(t,tT+0.3+i*0.35,0.3);arrive(ctx,x,y,t,tT+i*0.12,()=>{glass(ctx,x-110,y-30,220,60,14,GOOD,{glow:8+10*ok,ea:0.6,fill:"rgba(7,12,24,0.95)"});T(ctx,s,x-10,y+7,{f:"mono",w:500,size:18,align:"center"});tick_(ctx,x+84,y,24,GOOD,ok);},{dy:20});});
+  const ph=phMin(ctx)>0;["unique","not_null","relationships","contract"].forEach((s,i)=>{const x=760+i*260,y=940,ok=fin(t,tT+0.3+i*0.35,0.3),bw=ph?256:220;arrive(ctx,x,y,t,tT+i*0.12,()=>{glass(ctx,x-bw/2,y-30,bw,60,14,GOOD,{glow:8+10*ok,ea:0.6,fill:"rgba(7,12,24,0.95)"});T(ctx,s,x-(ph?16:10),y+(ph?10:7),{f:"mono",w:500,size:18,align:"center"});tick_(ctx,x+(ph?108:84),y,24,GOOD,ok);},{dy:20});});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 9. Four phases ---------- */

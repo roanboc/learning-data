@@ -285,3 +285,7 @@ Object.assign(LV,{
     // shuffled, in centred rows
     sq_flow(c,[3,0,4,1,2].map(k=>V.order[k]),380,qh+128,740,28,60,()=>WEED);c.restore();}
 });
+
+/* ---------- on a phone ----------
+   The film's code cards are drawn at sizes that read, their long lines wrapped (../../../from-words-to-data/shared/src/phone.js) */
+sq_code=phCode(sq_code,{wrap:"chars",size:19,lh:()=>31,head:()=>76,label:o=>o.label});

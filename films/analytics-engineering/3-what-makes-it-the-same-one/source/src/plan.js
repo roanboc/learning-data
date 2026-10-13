@@ -306,3 +306,8 @@ Object.assign(LV,{
     sm_T(c,"+ SC,INACTIVE,Inactive customer,inactive",44,294,712,{f:"mono",w:500,size:26,min:22,color:rgba(SM_AMBER,1)});
     tag(c,24,380,V.q.pr,SM_AMBER,{size:26});const ow=tw(c,V.q.owner,26,700)+26;tag(c,776-ow,380,V.q.owner,TRUST,{size:26});c.restore();}
 });
+
+/* ---------- on a phone ----------
+   The film's code cards are drawn at sizes that read, their long lines wrapped (../../../from-words-to-data/shared/src/phone.js) */
+sm_file=phCode(sm_file,{wrap:"bool",size:19,lh:s=>Math.round(s*1.6),head:()=>74,label:o=>o.label===undefined?SM_RUNS:o.label});
+sm_fileH=(f=>function(lines,w,o){const m=phOn();if(!m)return f(lines,w,o);o=Object.assign({},o||{});const b=o.size||19,sz=Math.max(b,m);o.lh=Math.max(o.lh||Math.round(b*1.6),Math.round(sz*1.32));o.size=sz;o.wrap=true;return f(lines,w,o);})(sm_fileH);

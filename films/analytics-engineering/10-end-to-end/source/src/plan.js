@@ -331,3 +331,7 @@ Object.assign(LV,{
       T(c,on?"1":"?",x,y+9,{w:800,size:24,align:"center",color:rgba(on?WEED:SOFT,1)});if(i<5)arrowTo(c,x+32,y,x+68,y,SOFT,0.5,{head:8});});
     T(c,V.order,300,290,{w:700,size:20,align:"center",color:rgba(SOFT,1)});c.restore();}
 });
+
+/* ---------- on a phone ----------
+   The film's code cards are drawn at sizes that read, their long lines wrapped (../../../from-words-to-data/shared/src/phone.js) */
+ee_code=phCode(ee_code,{wrap:"chars",size:19,lh:()=>31,head:()=>76,label:o=>o.label!==undefined?o.label:o.tmp?"temporary":""});

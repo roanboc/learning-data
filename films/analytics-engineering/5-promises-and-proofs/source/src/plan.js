@@ -565,3 +565,7 @@ Object.assign(LV,{
     T(c,"≠",300,132,{w:800,size:48,align:"center",color:rgba(BAD,1)});
     const uw=tw(c,Q.unitPass,19,700),u0=Math.max(12,300-(4*36+14+uw)/2);for(let i=0;i<4;i++)tick_(c,u0+12+i*36,256,24,GOOD,1);T(c,Q.unitPass,u0+4*36+14,264,{w:700,size:19,color:rgba(GOOD,1)});c.restore();}
 });
+
+/* ---------- on a phone ----------
+   The film's code cards are drawn at sizes that read, their long lines wrapped (../../../from-words-to-data/shared/src/phone.js) */
+pp_code=phCode(pp_code,{size:19,lh:s=>Math.round(s*1.5),head:(o,ctx,w,name)=>{const lab=o.label===undefined?PP_RUN:o.label;return(!!lab&&tw(ctx,name,18,500,"mono")+tw(ctx,lab,18,700)+28+64>w?88:56)+18;},label:o=>o.label===undefined?PP_RUN:o.label});

@@ -22,10 +22,10 @@ const NARR={
  {"id":"derive","gap":0.8,"text":"Each layer serves the one above. The business needs a capability; applications serve it; technology runs them."},
  {"id":"follow","gap":0.8,"text":"Change a capability, and you can follow it down. Switch off a server, and you can follow it up."}]},
 "views":{"name":"One map, one notation","lead":1.0,"tail":1.0,"vo":[
- {"id":"drafts","gap":0.8,"text":"For the first time, the drafts become one model, in ArchiMate's notation."},
+ {"id":"drafts","gap":0.8,"text":"For the first time, the drafts become one model, in ArchiMate's notation.","say":"For the first time, the drafts become one model, in Arky-mate's notation."},
  {"id":"blocks","gap":0.8,"text":"Each block of the early canvases finds its element. A customer segment becomes a stakeholder. A pain reliever, a capability. A key activity, a business process. A key resource, a resource."},
  {"id":"whole","gap":0.8,"text":"The whole map, layer by layer: why the utility exists, what it must be able to do, how the work flows, who does it, and what runs it."},
- {"id":"tools","gap":0.8,"text":"Tools such as Archi or LeanIX can keep it. The ideas don't depend on them.","say":"Tools such as Archie or Lean I X can keep it. The ideas don't depend on them."}]},
+ {"id":"tools","gap":0.8,"text":"Modelling tools can keep it. The ideas don't depend on them."}]},
 "target":{"name":"Where it's going","lead":1.0,"tail":1.0,"vo":[
  {"id":"second","gap":0.8,"text":"Where it's going is a second drawing: the target, on the same map, so the two can be compared."},
  {"id":"new","gap":0.8,"text":"Two capabilities are new: predicting faults, and trading power locally."},

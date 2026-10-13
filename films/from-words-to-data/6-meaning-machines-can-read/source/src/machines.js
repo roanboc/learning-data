@@ -65,7 +65,7 @@ function mm_robin(ctx,x,y,s,a,t){t=t||0;withA(ctx,a==null?1:a,()=>{ctx.save();ct
 // one of Nightingale's hospital forms: the same columns on every form, filled in by hand, on breathing paper
 const MM_FCOLS=["disease","admitted","recovered","died","days"];
 function mm_form(ctx,x,y,w,h,name,seed,o){o=o||{};mm_parch(ctx,x,y,w,h,{a:o.a,rot:o.rot,t:o.t,seed:seed+3,draw:(c,W_,H_)=>{
-  T(c,name,24,44,{w:800,size:24,color:MM_SEP});T(c,"return for the year",24,70,{f:"mono",w:500,size:14,color:MM_SEP2});
+  T(c,name,24,44,{w:800,size:24,color:MM_SEP});PH_OFF++;T(c,"return for the year",24,70,{f:"mono",w:500,size:14,color:MM_SEP2});
   const cw=(W_-40)/MM_FCOLS.length,hy=112;if(o.band>0){c.fillStyle="rgba(230,160,50,"+(0.38*o.band)+")";c.beginPath();c.moveTo(12,hy-24);c.quadraticCurveTo(W_/2,hy-27,W_-12,hy-24);c.lineTo(W_-12,hy+10);c.quadraticCurveTo(W_/2,hy+13,12,hy+10);c.closePath();c.fill();}
   MM_FCOLS.forEach((s,i)=>T(c,s,20+i*cw+(i?cw/2:0),hy,{w:700,size:16,align:i?"center":"left",color:MM_SEP}));
   c.strokeStyle="rgba(90,66,40,0.55)";c.lineWidth=1.4;c.beginPath();c.moveTo(16,hy+10);c.quadraticCurveTo(W_/2,hy+12+hash(seed,2)*3,W_-16,hy+10);c.stroke();
@@ -75,7 +75,7 @@ function mm_form(ctx,x,y,w,h,name,seed,o){o=o||{};mm_parch(ctx,x,y,w,h,{a:o.a,ro
   const dz=["fever","cholera","wounds","phthisis","dysentery","measles","typhus"],rows=Math.min(dz.length,Math.floor((H_-hy-30)/34)),fill=o.fill==null?1:o.fill;
   for(let r=0;r<rows;r++){if(r>=rows*fill)break;const yy=hy+42+r*34,hh=k=>hash(r*7+k,seed),ad=20+Math.floor(hh(1)*70),di=Math.round(ad*(0.04+0.2*hh(2))),re=Math.round((ad-di)*(0.6+0.35*hh(3)));
     T(c,dz[r],20,yy,{w:600,size:16,color:"rgba(52,40,30,0.85)"});
-    [ad,re,di,8+Math.floor(hh(4)*30)].forEach((v,k)=>T(c,""+v,20+(k+1)*cw+cw/2,yy,{w:600,size:16,align:"center",color:"rgba(52,40,30,0.8)"}));}}});}
+    [ad,re,di,8+Math.floor(hh(4)*30)].forEach((v,k)=>T(c,""+v,20+(k+1)*cw+cw/2,yy,{w:600,size:16,align:"center",color:"rgba(52,40,30,0.8)"}));}PH_OFF--;}});}
 // a tag of paper tied to a branch: a rank, and a name
 function mm_ptag(ctx,x,y,rank,name,a,t,sd,hi){const w=Math.max(150,tw(ctx,name,24,800)+40),h=62;withA(ctx,a,()=>{ctx.strokeStyle="rgba(120,90,60,0.8)";ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(x,y-26);ctx.quadraticCurveTo(x+3*Math.sin(t+sd),y-14,x,y);ctx.stroke();
   mm_parch(ctx,x-w/2,y,w,h,{t,seed:sd,flat:true,hi,draw:(c)=>{T(c,rank,16,24,{f:"mono",w:500,size:14,color:MM_SEP2});T(c,name,16,50,{w:800,size:24,color:MM_SEP});}});});}
@@ -138,9 +138,9 @@ function mm_stack(ctx,t,o){o=o||{};const g=Object.assign({},MM_FL,o.geo||{}),an=
     withA(ctx,a,()=>{if(hi>0)glow(ctx,x+w/2,y+h/2,w*0.42,c,0.16*hi);
       ctx.save();ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+34,y-24);ctx.lineTo(x+w-34,y-24);ctx.lineTo(x+w,y);ctx.closePath();ctx.fillStyle=rgba(c,(0.05+0.07*hi)*(0.4+0.6*lit));ctx.fill();ctx.strokeStyle=rgba(c,(0.3+0.4*hi)*(0.4+0.6*lit));ctx.lineWidth=1.4;ctx.stroke();ctx.restore();
       glass(ctx,x,y,w,h,14,c,{glow:(10+14*hi)*lit,ea:(0.35+0.2*lit)+0.4*hi,fill:"rgba(7,12,24,0.93)"});
-      withA(ctx,lit,()=>{led(ctx,x+18,y+24,5,h-48,c,0.9);if(!o.bare){T(ctx,L.n,x+42,y+60,{w:800,size:o.ns||30,color:rgba(c,1)});if(!o.nosub)T(ctx,L.s,x+42,y+92,{w:600,size:18,color:rgba(SOFT,1)});}
+      withA(ctx,lit,()=>{led(ctx,x+18,y+24,5,h-48,c,0.9);if(!o.bare){T(ctx,L.n,x+42,y+60,{w:800,size:o.ns||30,color:rgba(c,1)});if(!o.nosub)wrapT(ctx,L.s,x+42,y+92,250,{w:600,size:18,lh:24,color:rgba(SOFT,1)});}
         if(o.inner)o.inner(ctx,k,x,y,w,h);
-        else{an.push(MM_CONTENT[k](ctx,x+300,y,h,t,CA[k],MH[k]));
+        else{an.push(phAsDeco(!!o.decoContent,()=>MM_CONTENT[k](ctx,x+300,y,h,t,CA[k],MH[k])));
           withA(ctx,QA[k],()=>{ctx.strokeStyle=rgba(c,0.25);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x+w-400,y+22);ctx.lineTo(x+w-400,y+h-22);ctx.stroke();
             const ls=wrapT(ctx,L.q,0,0,340,{w:700,size:25,measure:true}),y1=y+h/2-(ls.length-1)*17+9;ls.forEach((l,i)=>T(ctx,l,x+w-372,y1+i*34,{w:700,size:25,color:rgba(c,1)}));});}});});
     if(an.length<=k)an.push(null);});
@@ -154,7 +154,7 @@ function mm_thread(ctx,an,p,t,col){if(p<=0)return;const pts=an.filter(Boolean);f
 /* ---------- Genie, tables, documents ---------- */
 function mm_genie(ctx,x,y,t,o){o=o||{};withA(ctx,o.a==null?1:o.a,()=>{orb(ctx,x,y,o.r||34,t);chip(ctx,x,y+118,"databricks","Genie",o.sub||"answers in plain words",{align:"center",edge:MM_GEN});});}
 // where each column of a sketch3 table sits, measured the same way table() measures it
-function mm_cols(ctx,cols,rows){let x=0;return cols.map((c,i)=>{const w=Math.max(tw(ctx,c,16,500,"mono"),...rows.map(r=>tw(ctx,r[i],16,500,"mono")))+30;const o={x,w};x+=w;return o;});}
+function mm_cols(ctx,cols,rows){let x=0;const cs=Math.max(16,phMin(ctx));return cols.map((c,i)=>{const w=Math.max(tw(ctx,c,cs,500,"mono"),...rows.map(r=>tw(ctx,r[i],cs,500,"mono")))+30;const o={x,w};x+=w;return o;});}
 // the policy document: the rules are there, but in a file no tool reads
 function mm_doc(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,grey=o.grey||0;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.6)";ctx.shadowBlur=24;ctx.fillStyle=grey>0.5?"#9aa0aa":"#eef0f4";rr(ctx,x,y,w,h,8);ctx.fill();ctx.restore();
   ctx.fillStyle="rgba(150,158,172,"+(0.55*grey)+")";rr(ctx,x,y,w,h,8);ctx.fill();ctx.fillStyle="#d9453a";rr(ctx,x+w-66,y+16,50,24,5);ctx.fill();T(ctx,"PDF",x+w-41,y+34,{w:800,size:14,align:"center",color:"#fff"});
@@ -203,9 +203,10 @@ function mm_shelf(ctx,t,x0,y,o){o=o||{};const bw=o.bw||146,bh=o.bh||196,gap=12,g
 const MM_DEFS=[["Australia","National Microcredentials Framework · 2021",[["certification of assessed learning",0],["at least one hour of learning",1],["smaller than a full award (AQF)",1]]],
   ["European Union","Council Recommendation · 2022",[["record of assessed learning outcomes",0],["after a small volume of learning",1],["owned by the learner, portable",1]]],
   ["UNESCO","Towards a common definition · 2022",[["record of assessed learning achievement",0],["awarded by a trusted provider",1],["has value on its own, and can stack",1]]]];
-function mm_def(ctx,x,y,w,h,d,o){o=o||{};withA(ctx,o.a==null?1:o.a,()=>{glass(ctx,x,y,w,h,18,MM_REFC,{glow:14+14*(o.hA==null?0:pulseAt(o.hA,0,1)),ea:0.7,fill:"rgba(12,12,20,0.94)"});withA(ctx,o.hA==null?1:o.hA,()=>{T(ctx,d[0],x+28,y+50,{w:800,size:30,color:rgba(MM_REFC,1)});T(ctx,d[1],x+28,y+80,{w:600,size:16,color:rgba(SOFT,1)});});
-  T(ctx,"“microcredential”",x+28,y+128,{w:700,size:20,color:rgba(INK,0.9)});
-  d[2].forEach(([s,diff],i)=>withA(ctx,o.p==null?1:clamp(o.p*3-i,0,1),()=>{const yy=y+156+i*(o.rh||84),col=diff?EXT:GOOD,on=diff?(o.diff||0):(o.same||0);
+function mm_def(ctx,x,y,w,h,d,o){o=o||{};const m=phMin(ctx),sl=m?wrapT(ctx,d[1],0,0,w-56,{w:600,size:Math.max(16,m),measure:true}):[d[1]],dy=(sl.length-1)*(m||16)*1.15+(m?12:0);
+  withA(ctx,o.a==null?1:o.a,()=>{glass(ctx,x,y,w,h,18,MM_REFC,{glow:14+14*(o.hA==null?0:pulseAt(o.hA,0,1)),ea:0.7,fill:"rgba(12,12,20,0.94)"});withA(ctx,o.hA==null?1:o.hA,()=>{T(ctx,d[0],x+28,y+50,{w:800,size:30,color:rgba(MM_REFC,1)});sl.forEach((l,i)=>T(ctx,l,x+28,y+84+i*(m||16)*1.15,{w:600,size:16,color:rgba(SOFT,1)}));});
+  T(ctx,"“microcredential”",x+28,y+128+dy,{w:700,size:20,color:rgba(INK,0.9)});
+  d[2].forEach(([s,diff],i)=>withA(ctx,o.p==null?1:clamp(o.p*3-i,0,1),()=>{const yy=y+156+dy+i*(o.rh||84),col=diff?EXT:GOOD,on=diff?(o.diff||0):(o.same||0);
     ctx.fillStyle=rgba(col,0.06+0.16*on);rr(ctx,x+20,yy,w-40,(o.rh||84)-14,12);ctx.fill();ctx.strokeStyle=rgba(col,0.25+0.7*on);ctx.lineWidth=1.6+on;rr(ctx,x+20,yy,w-40,(o.rh||84)-14,12);ctx.stroke();
     wrapT(ctx,s,x+40,yy+30,w-110,{w:700,size:21,lh:26,color:rgba(mix(INK,col,0.5*on),1)});if(!diff&&on>0)tick_(ctx,x+w-46,yy+33,28,GOOD,on);if(diff&&on>0)T(ctx,"≠",x+w-46,yy+42,{w:800,size:30,align:"center",color:rgba(EXT,on)});}));});}
 
@@ -233,10 +234,15 @@ function mm_kg(ctx,t,o){o=o||{};const P=o.p||{},q=k=>P[k]==null?1:P[k],aA=o.aish
 
 /* ---------- a digital credential, with the parts a standard names ---------- */
 const MM_VC=[["issuer","issuer"],["holder","holder · subject"],["claim","claim"],["evidence","evidence"],["status","status"]];
-function mm_vc(ctx,x,y,w,o){o=o||{};const rh=o.rh||46,h=70+MM_VC.length*rh+16;withA(ctx,o.a==null?1:o.a,()=>{glass(ctx,x,y,w,h,18,TRUST,{glow:16,ea:0.8,fill:"rgba(7,12,24,0.95)"});
+function mm_vc(ctx,x,y,w,o){o=o||{};const m=phMin(ctx),rh=Math.max(o.rh||46,m?m*2.1:0),h=70+MM_VC.length*rh+16,vs=Math.max(15,m),vx=m?36+Math.max(...MM_VC.map(r=>tw(ctx,r[1],Math.max(17,m),500,"mono")))+24:220;withA(ctx,o.a==null?1:o.a,()=>{glass(ctx,x,y,w,h,18,TRUST,{glow:16,ea:0.8,fill:"rgba(7,12,24,0.95)"});
   T(ctx,o.title||"Digital credential",x+24,y+42,{w:800,size:24,color:rgba(TRUST,1)});T(ctx,o.sub||"as a standard describes it",x+w-24,y+42,{w:600,size:15,align:"right",color:rgba(SOFT,1)});
-  MM_VC.forEach(([k,n],i)=>{const yy=y+70+i*rh,on=o.hl?o.hl[k]||0:0;ctx.fillStyle=rgba(TRUST,0.05+0.14*on);rr(ctx,x+16,yy,w-32,rh-8,8);ctx.fill();T(ctx,n,x+30,yy+rh/2+2,{f:"mono",w:500,size:17,color:rgba(TRUST,0.9)});
-    const v=o.vals?o.vals[k]:null;if(v)withA(ctx,1,()=>{let xx=x+220;(Array.isArray(v)?v:[v]).forEach(s=>{const col=s.col||INK,txt=s.t||s,w2=tw(ctx,txt,15,700)+20;if(xx+w2>x+w-20)return;glass(ctx,xx,yy+6,w2,rh-20,8,col,{glow:6,ea:0.7,fill:"rgba(7,12,24,0.9)"});T(ctx,txt,xx+10,yy+rh/2+1,{w:700,size:15,color:rgba(col,1)});xx+=w2+8;});});});});return h;}
+  MM_VC.forEach(([k,n],i)=>{const yy=y+70+i*rh,on=o.hl?o.hl[k]||0:0;ctx.fillStyle=rgba(TRUST,0.05+0.14*on);rr(ctx,x+16,yy,w-32,rh-8,8);ctx.fill();T(ctx,n,x+30,yy+rh/2+(m?m*0.3:2),{f:"mono",w:500,size:17,color:rgba(TRUST,0.9)});
+    const v=o.vals?o.vals[k]:null;if(v)withA(ctx,1,()=>{let xx=x+vx;(Array.isArray(v)?v:[v]).forEach(s=>{const col=s.col||INK,txt=s.t||s,w2=tw(ctx,txt,vs,700)+20;if(xx+w2>x+w-20)return;glass(ctx,xx,yy+6,w2,rh-20,8,col,{glow:6,ea:0.7,fill:"rgba(7,12,24,0.9)"});T(ctx,txt,xx+10,yy+rh/2+(m?m*0.3:1),{w:700,size:15,color:rgba(col,1)});xx+=w2+8;});});});});return h;}
+
+// a standard's binder is a picture: its name and line are part of the spine (the shelf's labels say what's what)
+mm_binder=phDeco(mm_binder);
+// the stacking policy is a document no tool can read: a picture of one, its words its texture
+mm_doc=phDeco(mm_doc);
 
 /* ---------- pictures for the labs and the scenarios (site/assets/meaning-machines-can-read/learn.*.js name them in "vis") ----------
    Each draws on a canvas of w × h, with the lab's state and the page's words (window.FW). Every word drawn comes from FW

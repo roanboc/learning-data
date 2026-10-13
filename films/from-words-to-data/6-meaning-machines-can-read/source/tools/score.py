@@ -34,7 +34,7 @@ celesta(88, G('before', 'breath', 2.6), 0.03, 0.3)
 # 2. Genie guesses: plucks over glass, until the guess goes wrong; then the bed drops to A minor, over a short urgent pulse
 prog('guesses', [CL, DC], 0, cq('guesses', 'wrong') + 3.0, g=0.045, tone='glass', bassg=0.03)
 ostinato(G('guesses', 'ask', 2.0), G('guesses', 'wrong', 0.6), [72, 79, 76, 78, 72, 79, 74, 78], 0.34, softpluck, 0.03, 0.15)
-urgent(G('guesses', 'wrong', 0.2), G('guesses', 'read', 0.4), bpm=92, root=33, g=0.03, steps=(0, 0, 1, 0))
+urgent(G('guesses', 'wrong', 0.2), G('guesses', 'read', 0.4), bpm=92, root=33, g=0.054, steps=(0, 0, 1, 0))
 prog('guesses', [AM, EM], cq('guesses', 'wrong') + 3.0, g=0.045, tone='glass', bassg=0.035)
 # 3. Four ways: glass and celesta, brighter; each floor rings a bell as it lights, rising; the four ring again in the pause
 prog('four', [CL, DC, GM, CL], g=0.05, tone='glass', bassg=0.03)

@@ -120,18 +120,18 @@ def urgent(s0,s1,bpm=104,root=40,g=0.05,fade=1.2,steps=(0,0,7,0),pan=0.0):
     while t0<s1:
         f=min(1,(t0-s0)/fade+0.06,(s1-t0)/fade)
         if f>0:
-            fr=mf(root+steps[k%len(steps)]);x=tt(per*0.85);b=(np.sin(2*np.pi*fr*x)+0.35*np.sin(4*np.pi*fr*x))*np.exp(-x*6)*np.minimum(1,x/0.005)
-            put(ML,MR,_nm(_flt(b.astype(np.float32),'low',700)),t0,g*f,pan)
+            fr=mf(root+steps[k%len(steps)]);x=tt(per*0.85);b=(np.sin(2*np.pi*fr*x)+0.7*np.sin(4*np.pi*fr*x)+0.3*np.sin(6*np.pi*fr*x))*np.exp(-x*6)*np.minimum(1,x/0.005)
+            put(ML,MR,_nm(_flt(b.astype(np.float32),'low',900)),t0,g*f,pan)
             if k%2==0:x=tt(0.35);ph=2*np.pi*np.cumsum(48+70*np.exp(-x*26))/SR;put(ML,MR,_nm((np.sin(ph)*np.exp(-x*9)).astype(np.float32)),t0,g*0.9*f,0.0)
-            x=tt(0.05);put(ML,MR,_nm(_flt(_nz(0.05),'band',(250,1100))*np.exp(-x*100)),t0+per/2,g*0.3*f,pan+0.2)
+            x=tt(0.05);put(ML,MR,_nm(_flt(_nz(0.05),'band',(250,1100))*np.exp(-x*100)),t0+per/2,g*0.45*f,pan+0.2)
         t0+=per;k+=1
 # the feeling under the picture: an urgent pulse, leaning on the semitone, as the copies pour in and the total swings into red;
 # a slow heartbeat when the first Tuesday's decision is undone; a steadier pulse while Sam follows the thread; and a quick,
 # driving one while the source is fixed and reloaded before the committee meets again. The calm chapters have none
-urgent(G('night','twice',0.2),G('night','red',1.2),bpm=100,root=33,g=0.04,steps=(0,0,1,0))
+urgent(G('night','twice',0.2),G('night','red',1.2),bpm=100,root=33,g=0.072,steps=(0,0,1,0))
 beat(G('tuesdays','later',0.2),G('tuesdays','warning',-0.6),0.03,bpm=70)
-urgent(S0('thread')+1.0,G('thread','test',0.6),bpm=84,root=33,g=0.03,fade=2.0)
-urgent(G('reload','rosa',0.5),G('reload','travel',0.0),bpm=112,root=41,g=0.032)
+urgent(S0('thread')+1.0,G('thread','test',0.6),bpm=84,root=33,g=0.054,fade=2.0)
+urgent(G('reload','rosa',0.5),G('reload','travel',0.0),bpm=112,root=41,g=0.058)
 # 1. the committee: the number, the vote, the freeze, the title
 pop(G('open','number',0.3),0.1);[pop(G('open','approve',1.2+k*1.5),0.08) for k in range(3)];whoosh(G('open','version',0.2),1.2,0.08);shimmer(G('open','breath',0.1),0.06);tone(G('open','breath',0.2),0.08,440)
 # 2. through the screen, the card, Leila, the bands

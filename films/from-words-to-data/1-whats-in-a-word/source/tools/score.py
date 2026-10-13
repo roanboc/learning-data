@@ -26,7 +26,7 @@ motif('kinds', [DM9, G69, AM7, DM9], every=1.25, g=0.04, inst=kalimba)
 #    semitone, that settles once the calls have been told apart
 prog('calls', [DM9, CMAJ7, G69, DM9], g=0.045, tone='choir-ah', bassg=0.04)
 pulse(S0('calls') + 0.5, G('calls', 'leopard', -0.2), 84, [(0, framedrum, 0.05, 0), (1.5, handdrum, 0.03, 0.3), (2, framedrum, 0.035, 0), (3, handdrum, 0.03, -0.3)])
-urgent(G('calls', 'leopard', -0.3), G('calls', 'kind', 0.4), bpm=112, root=38, g=0.034, steps=(0, 0, 1, 0))
+urgent(G('calls', 'leopard', -0.3), G('calls', 'kind', 0.4), bpm=112, root=38, g=0.061, steps=(0, 0, 1, 0))
 motif('calls', [DM9, G69], cq('calls', 'names'), every=1.6, g=0.035, inst=kalimba)
 flute(74, G('calls', 'ids', 0.5), 2.6, 0.03, -0.2); flute(69, G('calls', 'ids', 3.2), 2.8, 0.03, 0.2)
 # 4. What words add: brighter, D major, a flute line over a harp

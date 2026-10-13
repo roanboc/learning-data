@@ -136,7 +136,7 @@ press(W('rules', 'owned', 'approved'), 0.07)
 #    Mei's decision typed and stamped; the merge undoes with a rising note; keys for the code that keeps them apart
 bed('apart', [CM, ABM7, FM7, EB, EB])
 # under the wrong merge, a low urgent pulse, until May decides they're two people
-urgent(G('apart', 'merge', -0.2), G('apart', 'decide', 0.3), bpm=92, root=36, g=0.03, steps=(0, 0, 1, 0))
+urgent(G('apart', 'merge', -0.2), G('apart', 'decide', 0.3), bpm=92, root=36, g=0.054, steps=(0, 0, 1, 0))
 soft(39, S0('apart') + 0.6, 0.05); drone(39, S0('apart') + 0.6, 3.0, 0.016, 'strings')
 knock(W('apart', 'other', 'platform account'), 0.035, 0.0); knock(W('apart', 'other', 'student ID field'), 0.035, 0.0)
 soft(50, G('apart', 'merge', -0.1), 0.03, -0.1)

@@ -165,7 +165,7 @@ cG = G('evidence', 'guess'); knock(cG - 0.1, 0.028, 0.5); paper(W('evidence', 'g
 #    a low note as the withdrawal slides past census day; the struck line as a muted double knock; a rising felt pair for green
 bed('shortcut', [EMAJ9, CSM9, FSM7, GS7SUS, CSM9, AMAJ9, EMAJ9])
 # a low urgent pulse from the failing test, under the weakened test, until Jun's review stops it
-urgent(G('shortcut', 'fails', -0.3), W('shortcut', 'stop', 'stops it', 0.6), bpm=96, root=37, g=0.03, steps=(0, 0, 1, 0))
+urgent(G('shortcut', 'fails', -0.3), W('shortcut', 'stop', 'stops it', 0.6), bpm=96, root=37, g=0.054, steps=(0, 0, 1, 0))
 paper(S0('shortcut') + 0.4, 0.03); lines(S0('shortcut') + 0.5, 6, 0.3)
 rec = W('shortcut', 'refactor', 'by when it was recorded'); paper(rec - 0.3, 0.025, -0.3); lines(rec, 7, 0.23, 0.02, -0.3)
 cF = G('shortcut', 'fails'); paper(cF - 0.2, 0.025, 0.3); lines(cF, 4, 0.3, 0.016, 0.3)

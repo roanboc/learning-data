@@ -32,11 +32,11 @@ theme(G('dict', 'breath', 0.7), 60, felt, step=0.48, g=0.09); theme(G('dict', 'b
 # 2. Change arrives: C major, with a question in it; a quick, driving pulse as the month's three changes arrive
 prog('arrives', [CMAJ9, FMAJ9, AM9, GSUS], g=0.05, tone='strings')
 motif('arrives', [CMAJ9, FMAJ9, AM9, GSUS], every=1.3, g=0.035, inst=felt)
-urgent(S0('arrives') + 0.6, E('arrives') - 0.4, bpm=108, root=36, g=0.028)
+urgent(S0('arrives') + 0.6, E('arrives') - 0.4, bpm=108, root=36, g=0.05)
 # 3. How models go stale: A minor, the strings darker, a slow pulse that leans on the semitone as the model drifts
 prog('stale', [AM9, FMAJ7, DM9, EM7], g=0.055, tone='strings', bassg=0.04)
 motif('stale', [AM9, FMAJ7, DM9, EM7], every=1.7, g=0.035, inst=felt)
-urgent(G('stale', 'drift', 0.0), E('stale') - 0.4, bpm=72, root=33, g=0.026, steps=(0, 0, 1, 0), fade=2.0)
+urgent(G('stale', 'drift', 0.0), E('stale') - 0.4, bpm=72, root=33, g=0.047, steps=(0, 0, 1, 0), fade=2.0)
 drone(33, G('stale', 'gap', -0.5), 6.0, 0.03, 'strings')
 # 4. AI as a watcher: still A minor, glassier, and calm: the agent reads, and nothing is rushed
 prog('watch', [AM9, EM7, FMAJ7, AM9], g=0.05, tone='glass', bassg=0.03)
@@ -53,7 +53,7 @@ pad([48, 55, 60, 64, 67], G('decide', 'rule', 0.8), 5.0, 0.03, 'strings')
 # 7. What can go wrong: A minor again, and an urgent pulse, leaning on the semitone, until the checks stop the wrong changes
 prog('wrong', [AM9, DM9, EM7, AM9], g=0.055, tone='strings', bassg=0.04)
 motif('wrong', [AM9, DM9, EM7, AM9], every=1.6, g=0.035, inst=felt)
-urgent(S0('wrong') + 0.5, G('wrong', 'check', 0.6), bpm=100, root=33, g=0.032, steps=(0, 0, 1, 0))
+urgent(S0('wrong') + 0.5, G('wrong', 'check', 0.6), bpm=100, root=33, g=0.058, steps=(0, 0, 1, 0))
 # 8. End to end: from F to C, rising as each layer lights; the stamp reads v3 on a full C major chord
 prog('e2e', [FMAJ9, G6, AM9, G6], 0, cq('e2e', 'v3'), g=0.05, tone='strings')
 prog('e2e', [CMAJ9], cq('e2e', 'v3'), g=0.06, tone='strings', bassg=0.04)

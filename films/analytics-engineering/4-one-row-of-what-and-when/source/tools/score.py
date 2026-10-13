@@ -117,7 +117,7 @@ soft(64, W('grain', 'test', 'same award', 0.3), 0.032, 0.4)
 #    the join gains its date; a felt note as the rows fold back to eight; a knock for dbt show's result
 bed('fan', [AM, DM7, E7, AM])
 # under the doubled rows, a low urgent pulse, until the join gains its date
-urgent(G('fan', 'double', -0.2), G('fan', 'fix', 0.3), bpm=100, root=33, g=0.03, steps=(0, 0, 1, 0))
+urgent(G('fan', 'double', -0.2), G('fan', 'fix', 0.3), bpm=100, root=33, g=0.054, steps=(0, 0, 1, 0))
 knock(W('fan', 'why', 'graduate certificate', -0.3), 0.03, 0.0)
 paper(W('fan', 'two', 'two versions', -0.2), 0.03, 0.0, 0.6)
 paper(G('fan', 'join', -1.7), 0.018, -0.3, 0.8)
@@ -179,7 +179,7 @@ soft(52, W('stitch', 'same', 'makes no new version'), 0.032, 0.0)
 #    reaches three; a low bass clarinet note as the 1890 page flickers in; paper for gap 6; accepted, with a stamp
 bed('late', [FSM7, DMAJ7, ESUS4, AMAJ])
 # a slow uneasy pulse while the late withdrawal counts her as studying, until it's dated by when it took effect
-urgent(W('late', 'week', 'recorded it', -0.3), G('late', 'effect', 0.3), bpm=84, root=33, g=0.026, steps=(0, 0, 1, 0), fade=1.6)
+urgent(W('late', 'week', 'recorded it', -0.3), G('late', 'effect', 0.3), bpm=84, root=33, g=0.047, steps=(0, 0, 1, 0), fade=1.6)
 knock(G('late', 'priya'), 0.028, -0.2)
 ta_ = W('late', 'week', 'recorded it', -0.3)
 knock(ta_, 0.024, 0.85, 170); knock(ta_ + 0.85, 0.026, 0.3)

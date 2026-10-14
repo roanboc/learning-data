@@ -2,6 +2,8 @@
 
 *The third cut of* The Inner Life of Data*: the same narration, with room to think. Status: built, then revised after [a review](pacing-review.md): the first build put all the extra time into long stops, so the film felt stop-start. The revised cut is 7:32 in English and 8:38 in Spanish, at about 120 words a minute, with the voice speaking 71% (Spanish 75%) of the time. The timing lives in `source/src/breath.js`, shared by both languages; each chapter's wordless ending starts at the scene's `breath` cue.*
 
+*Superseded on 14 October 2026 by the fourth cut, which flows like the later films (PLAYBOOK.md, "Let the film flow; pause only where it matters"): a beat of its own after every sentence (0.8 s in English, 0.8 to 1.1 s in Spanish), and wordless endings only in the sketch, the people and the end. It runs 7:11 in English and 8:24 in Spanish, at 128 and 121 words a minute, with the voice speaking 75% and 77% of the time.*
+
 ## Why
 
 The film is accurate, but it doesn't stop talking. `tools/pace.py` measures it:

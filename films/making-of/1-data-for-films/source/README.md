@@ -59,3 +59,5 @@ The film plays at the top of the Making of page, `site/journey/`, and on its Spa
 ## When The Inner Life of Data changes
 
 This film draws *The Inner Life of Data* as it is in `../../../inner-life-of-data/source/src/`. A change there (a new scene, new timings, a renamed product) can change the frame at 2:31, and so the numbers this film reads from it, the pixel it dives into (`FOCUS` in `frames.js`), and the sizes in chapter 8. After such a change: build, run `check.py`, look at the stills of chapters 1, 2 and 9, check the figures in the script's rigour sheet, and copy the player again.
+
+The phone layer (`../../../from-words-to-data/shared/src/phone.js`), which raises the film's text to read on a phone, changes it too: after changing it, run `check.py` and `tools/legible.py --overlaps`, and copy the player again.

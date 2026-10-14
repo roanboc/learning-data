@@ -10,7 +10,7 @@
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/both.js` | The film's pictures. 1879, drawn soft and warm: wood with grain, a brass register with a sheen, bottles, a lamp that flickers, a wall clock, the patent, and the bartender's hand, its sleeve running out of the frame. The present, drawn as crisp glass: a store of rows and a store of columns, the phone, the lakehouse, keys that match rows, change cards, the red ghost, calendar cards, question cards, the freshness scale, a small one-database capsule and the awards' data contract. The moon, the sun and the hourglass. And `LV`, the pictures its labs and scenarios draw, with every word taken from the words pack. |
 | `src/scenes.js` | The nine chapters. The title is part of the first one. |
-| `tools/score.py` | The music and the sound effects, played with the series' instruments (`../../shared/tools/music.py`): synth-pluck arpeggios at 100 bpm over a soft kick and hi-hat, in E minor, turning to E major at the end, with two interlocking arpeggios (three against two) for the two engines; and, for 1879, a felt-piano oom-pah in C with the cash register's keys, bell and drawer. |
+| `tools/score.py` | The music and the sound effects, played with the series' instruments (`../../shared/tools/music.py`): synth-pluck arpeggios at 100 bpm over a soft kick and a muffled hi-hat, in E minor, turning to E major at the end, with a low urgent line where the count goes wrong, and two interlocking arpeggios (three against two) for the two engines; and, for 1879, a felt-piano oom-pah in C with the cash register's keys, bell and drawer. |
 
 ## Setup (once)
 

@@ -4,7 +4,7 @@
 
 It started with one film. *The Inner Life of Data* was made over two days, 25 and 26 September 2026, in one long working conversation between the author and Claude, an AI model made by Anthropic. The author brought the brief, the platform knowledge and most of the pushback. Claude proposed options, checked facts, wrote the code and rendered every frame. Sections 1 to 10 tell that story, from the first question to the published site.
 
-Then feedback turned one film into four: *A Sharper Sketch*, on data modelling, and a series, *When things go wrong*, with *Silent change* and *Too good to be true*. Section 11 tells what changed when we made more than one, and the lessons at the end cover all four.
+Then feedback turned one film into four: *A Sharper Sketch*, on data modelling, and a series, *When things go wrong*, with *Silent change* and *Too good to be true*. Section 11 tells what changed when we made more than one. Section 12 tells how, with more than twenty films, every film made before *The map before the data*, except the first, was reworked to read on a phone and to sound softer. The lessons at the end cover them all.
 
 Start with two short films: how the films are drawn, and how they are made.
 
@@ -49,6 +49,7 @@ Start with two short films: how the films are drawn, and how they are made.
 | 9. The second cut | 6:17 with narration, music and sound, timed to the voice | Varied data products, a brain, live updates |
 | 10. Publishing | A site that draws the film live, videos rendered from the same code, and this story | The site, this repository and its releases |
 | 11. More films | Feedback became a film, the films became a series, and every review became a check | *A Sharper Sketch*, *Silent change*, *Too good to be true*, and a site organised by topic |
+| 12. Phone and sound | Every word raised to read on a phone; softer effects, and rhythm where the story turns tense | 22 films reworked, and new rules in the playbook |
 
 ## 1. The brief
 
@@ -258,7 +259,32 @@ With four films, numbering them would suggest an order that doesn't exist. So th
 
 > **Lesson:** making more than one film is where a process becomes a method. Write down what worked, turn each review into a check, and let the next film start from both.
 
-## 12. What went wrong along the way
+## 12. Made for a phone, and easier on the ear
+
+By the time there were more than twenty films, two things needed fixing: the words were too small on a phone, and the sound wore on the ear.
+
+### Every word large enough to read
+
+A phone held sideways shows the 1920-pixel frame about 850 pixels wide, so text under about 28 px in the frame can't be read there. A report measured every film: in the films made before *The map before the data*, between 76% and 99% of the text was under that size. *The map before the data* was drawn to the rule from the start, so its five films became the model.
+
+The other films couldn't simply be redrawn. A shared layer now raises every word that isn't decoration to 28 px, after the camera's zoom, without changing the components the films share. Then each scene had to make room for the larger words, and that was most of the work:
+
+- **Place things by the size they're drawn at.** A label that grew ran into the card under it, because the card was placed for the old size. The layouts now measure what's really drawn.
+- **Take turns when there's no room.** Cards that sat side by side now arrive one after another. Code shows the line the narration is reading, and the lines around it, larger, instead of the whole file small. Long names are shortened on a phone.
+- **Decide what is texture.** A period page, a picture seen from afar or a card behind another sets the scene, and isn't read. Everything the narration names must read.
+- **Check every moment.** A tool draws each film every half second and lists any text under 28 px, running off the frame or drawn over other words. The few left are moments in passing, such as a card flying in or a fade, or a crop the camera makes on purpose.
+
+The result: in all 22 films, no text that isn't decoration is drawn under 28 px, where 76% to 99% of it was before. *The Inner Life of Data*, with its English and Spanish voices, comes next, on its own. The labs keep their sizes, because they're read up close.
+
+### Softer sounds, and rhythm that follows the feeling
+
+A viewer found the high tones disruptive: chimes, pings and bells carry energy far above the voice. In every film made before *In the weeds of data crafting*, except the first, the bright effects were replaced by name with soft, low stand-ins. A chime became a low felt note, a tick a muffled key and a pop a wooden knock, so every effect still lands on its cue. In *From words to data*, the instruments themselves (a kalimba, glass pads, bells) still rang above the voice, so the whole score, but not the voice, is now gently low-passed. In the twelve films that needed it, the energy above 4 kHz, where the voice is silent, fell by about two to fifteen times, depending on the film. *In the weeds of data crafting* already sat that low.
+
+The music had the opposite problem. Sustained chords made every scene feel the same, and an error landed as calmly as a success. Now the rhythm follows the feeling. Where a story turns to an error (a test that fails, a wrong merge, rows that double) or a rush (a deadline, a busy kitchen), a low, muted pulse rises under the scene and fades once the problem is caught. An error leans on the semitone; a rush drives on the fifth. The calm chapters have none, so the contrast tells the viewer that something has changed.
+
+> **Lesson:** a rule added late means reworking every film made before it. Build it as a shared layer where you can, check every moment, and write down what the rework taught, so the next film starts from it.
+
+## 13. What went wrong along the way
 
 Mistakes were part of the process, and most of them taught something:
 
@@ -271,6 +297,9 @@ Mistakes were part of the process, and most of them taught something:
 - The opening chapter had no music from the very first version, and nobody noticed until a review measured the sound.
 - The red thread that follows the lineage in *Silent change* first cut across the dashboard and the platform, and was too busy. Now it moves one lineage step at a time.
 - A pitch-shifted voice sounded robotic, and an abstract painting read as a crossed-out chart. Both were replaced by something familiar: a blended voice, and a real-looking dashboard.
+- Larger words first ran into the cards below them, because the layouts still measured the old sizes. Measuring what's drawn fixed it.
+- The site's legibility report measured the size each word asked for, not the size it was drawn at, so it couldn't see the phone layer's work until it measured the drawing itself.
+- The first urgent pulses sat 11 to 18 dB under the rest of the music, too faint to notice. Measuring the pulse on its own showed it, and it now sits about 7 to 10 dB under.
 
 ## Lessons learned
 
@@ -296,6 +325,10 @@ Mistakes were part of the process, and most of them taught something:
 20. **Use what the audience already knows.** A familiar dashboard beats an abstract picture that needs explaining.
 21. **Write decisions down, with the date.** The next session starts from them instead of arguing them again.
 22. **Turn every review finding into a check,** so the same problem can't come back.
+23. **Make it read where people watch.** Measure the text as a phone shows it, and check every moment, not only the stills.
+24. **Measure what's drawn, not what's asked for.** A word that grows needs room, and everything after it moves.
+25. **Let rhythm follow the feeling.** A pulse under an error says something went wrong before the narration does; calm scenes stay calm.
+26. **Keep the sounds below the voice.** Soft, low effects mark a moment without cutting through the narration.
 
 ## Reuse it
 

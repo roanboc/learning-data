@@ -10,7 +10,7 @@
 | `src/breath.js` | The few longer pauses: a handful of holds, and three wordless moments (the title, the chain once v3 is approved, and the end card). |
 | `src/true.js` | This film's pictures (prefixed `kt_`): the agent (a teal, geometric orb), Johnson's book, the OED page, the planets, the kilogram, the calendar, the government's form, the dashboards, the glossary and code cards, the change package, the chain of layers, the modelling patterns (data vault, anchor, hook, Puppini bridge, activity stream) with the four answers each holds, the old report, the clay tablet and the diploma. The history is drawn organically (soft curves, light and shadow, paper grain, gentle motion); the systems stay crisp glass. It also holds `LV`, the pictures of the labs and the scenarios, whose words come from `FW.vis`. |
 | `src/scenes.js` | The ten chapters. The title card is part of the first one. |
-| `tools/score.py` | The film's music and sounds: strings over a clock at 60 beats a minute and a felt piano, in C major, leaning into A minor where the model drifts, and ending on the series' motif on the kalimba in D, answered by a tubular bell. |
+| `tools/score.py` | The film's music and sounds: strings and a felt piano, in C major, leaning into A minor where the model drifts; a quick, driving pulse as the month's changes arrive, a slow uneasy one as the model drifts and an urgent one at what can go wrong; and ending on the series' motif on the kalimba in D, answered by a tubular bell. |
 | `tools/` | The series' shared tools (`../../shared/tools/`), each run on this film. |
 
 ## Setup (once)

@@ -10,7 +10,7 @@
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/write.js` | This film's components: the merchants' books of 1494 (paper, a quill, ink that bleeds in, a journal and a ledger), tables with keys and links, a transaction, a signed document, a star with its fact and dimensions, and the pictures of the labs and scenarios (`LV`), whose words come from the site's language packs. |
 | `src/scenes.js` | The eight chapters. The title is part of the first one. |
-| `tools/score.py` | The music and sounds, in B-flat major: a marimba and woodblock in sixteenths for writing, string pads and a felt piano for reading, a harp and a reed pad for 1494. |
+| `tools/score.py` | The music and sounds, in B-flat major: a marimba and woodblock in sixteenths for writing, string pads and a felt piano for reading, a harp and a reed pad for 1494; a low, urgent pulse under what goes wrong without them. |
 | `tools/*.py` | Thin wrappers that run the series' shared tools on this film. |
 
 ## Rebuild

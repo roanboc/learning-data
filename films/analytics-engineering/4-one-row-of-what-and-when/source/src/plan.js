@@ -244,7 +244,9 @@ function rw_award(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return
   [1,0].forEach(i=>{if(i===1&&sp<=0.01)return;const yy=y+(i===1?sp*(h+14):0),lit=o.lit?o.lit[i]||0:0,dim=o.dim?o.dim[i]||0:0,col=mix(KIND,TRUST,lit);
     withA(ctx,(i===1?clamp(sp*3,0,1):1)*(1-0.6*dim),()=>{if(lit>0)glow(ctx,x+w/2,yy+h/2,w*0.5,TRUST,0.22*lit);glass(ctx,x,yy,w,h,14,col,{glow:10+12*lit,ea:0.75,fill:"rgba(7,12,24,0.96)"});
       T(ctx,"SIS|GCHI",x+20,yy+30,{f:"mono",w:500,size:19,color:rgba(RW_KS.SIS,1)});T(ctx,sp>0.5||i===1?RW_GCHI[i][0]+" → "+RW_GCHI[i][1]:"",x+w-20,yy+30,{f:"mono",w:500,size:18,align:"right",color:rgba(RW_TIME,0.95)});
-      T(ctx,"Graduate Certificate in "+RW_GCHI[i][2],x+20,yy+60,{w:700,size:20});});});});return y+h+sp*(h+14);}
+      // on a phone the title shortens to fit the card: "Grad Cert in …", then the programme alone
+      const nm=RW_GCHI[i][2],m=phMin(ctx),fit=s=>!m||tw(ctx,s,Math.max(20,m),700)<=w-40,ttl=fit("Graduate Certificate in "+nm)?"Graduate Certificate in "+nm:fit("Grad Cert in "+nm)?"Grad Cert in "+nm:nm;
+      T(ctx,ttl,x+20,yy+60,{w:700,size:20});});});});return y+h+sp*(h+14);}
 // the eight learners in Health's certificate, with the credit each held at census (real rows, keys shortened)
 const RW_FAN=[["be24d334…",5],["b2620e50…",5],["dfed4e0e…",35],["4d0508d9…",5],["8cb33ef0…",5],["372b5006…",45],["fd6af2a0…",40],["7275464d…",45]];
 // Aisha's credit towards her certificate: the six versions the core builds, each from a result (+15) or a credential (+5)
@@ -439,3 +441,21 @@ Object.assign(LV,{
     c.fillStyle=rgba(RW_RED,0.35);c.fillRect(X("2026-04-03"),30,X("2026-04-04")-X("2026-04-03"),132);rw_l_dash(c,X("2026-04-03"),24,170,RW_RED,1);
     T(c,V.overlap,X("2026-04-03"),200,{w:800,size:20,align:"center",color:rgba(RW_RED,1)});rw_l_test(c,130,236,340,"versions_do_not_overlap",[],-1,{size:17});}
 });
+
+/* ---------- on a phone ----------
+   The film's code cards are drawn at sizes that read, their long lines wrapped (../../../from-words-to-data/shared/src/phone.js) */
+rw_code=phCode(rw_code,{wrap:"chars",size:19,lh:()=>30,head:(o,ctx,w,name)=>{const lab=o.label===undefined?RW_RUN:o.label;return 76+(lab&&36+tw(ctx,name,18,500,"mono")+tw(ctx,lab,18,700)+44>w?30:0);},label:o=>o.label===undefined?RW_RUN:o.label});
+// the 1890 handwriting is the period's texture: the narration says what it holds
+rw_hand_=phDeco(rw_hand_);
+// a result table's columns grow to hold their words at the phone's size, and its rows to hold the line
+const RT0=rw_table;rw_table=function(ctx,x,y,cols,rows,o){const m=phOn();if(!m)return RT0.apply(this,arguments);o=Object.assign({},o||{});const sz=Math.max(o.size||19,m),cw=sz*0.6;
+  cols=cols.map(([hd,w,al],k)=>[hd,Math.max(w,Math.ceil(Math.max(String(hd).length,...rows.map(r=>String(r[k]).length))*cw+24)),al]);o.size=sz;o.lh=Math.max(o.lh||32,Math.round(sz*1.35));return RT0.call(this,ctx,x,y,cols,rows,o);};
+// a source's four version columns: when their names don't fit side by side at the phone's size, a card whose columns the narration
+// lights shows them in two rows (it grows taller); otherwise they're the card's texture
+const RS_COLS=["_valid_from","_valid_to","_is_current","_loaded_at"];
+const RS0=rw_srcStack;rw_srcStack=function(ctx,x,y,w,k,n,t,o){const m=phOn();if(!m||RS_COLS.every(c=>tw(ctx,c,m,500,"mono")+16<(w-40)/4))return RS0.apply(this,arguments);
+  o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=SRC3[k][1],two=!!o.cols,H=two?128:84;withA(ctx,a,()=>{
+  for(let v=n-1;v>0;v--){withA(ctx,clamp((o.p==null?1:o.p)*n-(n-v),0,1),()=>{ctx.fillStyle="rgba(10,14,24,0.95)";rr(ctx,x+v*10,y-v*10,w,H,12);ctx.fill();ctx.strokeStyle=rgba(col,0.35);ctx.lineWidth=1.5;rr(ctx,x+v*10,y-v*10,w,H,12);ctx.stroke();});}
+  glass(ctx,x,y,w,H,12,col,{glow:10,ea:0.8,fill:"rgba(7,12,24,0.97)"});ctx.fillStyle=rgba(col,1);rr(ctx,x+14,y+14,6,24,3);ctx.fill();T(ctx,SRC3[k][0],x+30,y+36,{w:700,size:20});
+  RS_COLS.forEach((c,i)=>{const on=o.cols?o.cols[i]||0:0,cc=rgba(mix(mix(SOFT,col,0.4),INK,on),1);
+    if(two)T(ctx,c,x+30+(i%2)*(w-40)/2,y+76+Math.floor(i/2)*36,{f:"mono",w:500,size:18,color:cc});else T(ctx,c,x+20+i*(w-40)/4,y+68,{f:"mono",w:500,size:18,color:cc,deco:1});});});};

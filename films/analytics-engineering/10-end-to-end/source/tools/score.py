@@ -5,6 +5,8 @@
 # The same two rules as film 9:
 #  - Nothing loops. No drum pulse, walking bass, repeated figure or random notes: the music is a bed of sustained chords that
 #    change with the chapters, so nothing in the background repeats or competes with the pictures.
+#  - The one exception is feeling: when the story turns to an error, a low, muted pulse (music.py's urgent()) rises under
+#    the scene, leans on the semitone, and fades out once the problem is caught. It stays below about 1 kHz.
 #  - Every sound is an event on screen, at the moment it appears. Each effect below uses the same timing as the picture in
 #    src/scenes.js (the same word, and the same offset), so sound and picture stay together when the voice is re-timed.
 # And everything stays low and soft: knocks, muffled keys, paper, a dividers' point and a chisel, low felt notes and a thud for
@@ -185,6 +187,8 @@ paper(W('promise', 'accept', 'decision'), 0.026, 0.3)
 #    report (a knock, keys), the seed no model may read (a knock), the reconciliation's nodes (knocks); the build failing on purpose
 #    (keys, a muted double knock) and the mart skipped (a knock); REQ-FIN-02 struck through (paper), and done (a felt note)
 bed('tests', [EM9, ASUS, DMAJ9, A7, GMAJ7, DMAJ9])
+# a short, low urgent pulse while nothing can pass yet
+urgent(G('tests', 'fail', -0.2), G('tests', 'done', 0.2), bpm=92, root=38, g=0.047, steps=(0, 0, 1, 0))
 lines(G('tests', 'grain', -0.2), 13, 0.18, 0.015, 0.2)
 for word in ['tested as a key', 'Learners that exist', 'award types']:
     knock(W('tests', 'grain', word, -0.1), 0.026, 0.3)

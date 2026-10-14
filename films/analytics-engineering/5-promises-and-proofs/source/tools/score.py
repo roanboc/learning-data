@@ -5,6 +5,8 @@
 # a muted double knock, and a contract clause locking a soft wooden latch.
 # Two rules, as in the opening film:
 #  - Nothing loops. No pulse, walking bass, repeated figure or random notes: sustained chords that change with the chapters.
+#  - The one exception is feeling: when the story turns to an error, a low, muted pulse (music.py's urgent()) rises under
+#    the scene, leans on the semitone, and fades out once the problem is caught. It stays below about 1 kHz.
 #  - Every sound is an event on screen, at the moment it appears. Each effect uses the same word and offset as the picture in
 #    src/scenes.js, so sound and picture stay together when the voice is re-timed. Change one, change both.
 # Everything stays low and soft, filtered below about 2.5 kHz. No chimes, pings or shimmers.
@@ -112,6 +114,8 @@ for j in range(3):
 # 3. The enterprise contract: a key per line of each card; the latch on "enforced"; the build fails (double knock), then passes
 #    (felt); Noor's tick
 bed('enterprise', [DM7, BBM7, C, F])
+# a low urgent pulse as the query and the contract disagree, until the build stops
+urgent(G('enterprise', 'stops', -0.2), G('enterprise', 'noor', 0.2), bpm=100, root=38, g=0.054, steps=(0, 0, 1, 0))
 lines(G('enterprise', 'folder', 0.0), 7, 0.2, 0.018, -0.3)
 latch(W('enterprise', 'folder', 'enforced'), 0.05, 0.2)
 lines(G('enterprise', 'columns', -0.2), 17, 0.106, 0.016, 0.3)

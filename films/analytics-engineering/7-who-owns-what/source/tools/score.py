@@ -4,6 +4,8 @@
 # The series' rules:
 #  - Nothing loops. No pulse, walking bass, repeated figure or random notes: the bed is sustained chords that change with
 #    the chapters.
+#  - The one exception is feeling: when the story turns to an error, a low, muted pulse (music.py's urgent()) rises under
+#    the scene, leans on the semitone, and fades out once the problem is caught. It stays below about 1 kHz.
 #  - Every sound is something appearing on screen, at the moment it appears. Each effect below uses the same timing as the
 #    picture in src/scenes.js (the same word, and the same offset), so sound and picture stay together when the voice is re-timed.
 #  - Everything stays low and soft, filtered below about 2.5 kHz: a quill's soft scratch, a register page turning, the register
@@ -172,6 +174,8 @@ knock(W('across', 'sketch', "doesn't run", -0.1), 0.03, 0.5)
 #    Aisha's key is hashed; a muted double knock as the join breaks; felt notes for the tests that stay green; paper for the package;
 #    a low thud as the ground cracks
 bed('shared', [BBMAJ9, EBMAJ9, GM7, FSUS, BBMAJ9])
+# a low urgent pulse as the second hash breaks the joins, and no test notices
+urgent(G('shared', 'another', -0.2), G('shared', 'package', 0.2), bpm=92, root=34, g=0.05, steps=(0, 0, 1, 0))
 swell([34, 41, 46, 50], W('shared', 'still', 'shared', -0.2), 3.0, 0.02)
 for lid, word in [('keysets', 'key sets'), ('hash', 'One macro'), ('package', 'conventions'), ('package', 'glossary')]:
     thud(W('shared', lid, word, -0.1), 0.05); knock(W('shared', lid, word, -0.08), 0.02, 0, 160)

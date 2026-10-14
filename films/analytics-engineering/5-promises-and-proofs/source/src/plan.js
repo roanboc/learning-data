@@ -182,7 +182,7 @@ function pp_seal(ctx,x,y,r,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)retur
 // a code card with the label that says where it runs (18 px), code at o.size (18 to 20 px). Lines type out as o.p goes 0..1.
 // o.lit {i:0..1} highlights a line; o.lineCol {i:colour}; o.swap {i:[text, 0..1]} cross-fades a line to new text; o.label "" for none
 function pp_code(ctx,x,y,w,name,lines,o){o=o||{};const a=o.a==null?1:o.a,sz=o.size||19,lh=o.lh||Math.round(sz*1.5),col=o.edge||[170,205,255];
-  const lab=o.label===undefined?PP_RUN:o.label,nw=tw(ctx,name,18,500,"mono"),lw=lab?tw(ctx,lab,18,700)+28:0,two=!!lab&&nw+lw+64>w,hh=two?88:56,h=o.h||(hh+18+lines.length*lh);
+  const ls=phSz(ctx,18),lab=o.label===undefined?PP_RUN:o.label,nw=tw(ctx,name,ls,500,"mono"),lw=lab?tw(ctx,lab,ls,700)+28:0,two=!!lab&&nw+lw+64>w,hh=two?88:56,h=o.h||(hh+18+lines.length*lh);
   if(a<=0.01)return h;
   withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,col,{glow:12+10*(o.hi||0),ea:0.65,fill:"rgba(6,10,20,0.96)"});
     ctx.fillStyle=rgba(col,0.9);rr(ctx,x+18,y+22,10,10,3);ctx.fill();T(ctx,name,x+38,y+34,{f:"mono",w:500,size:18,color:rgba(col,1)});
@@ -211,7 +211,8 @@ function pp_consumer(ctx,x,y,r,kind,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.0
   ctx.restore();});}
 
 // a decision tag, in its colour: k is 0 fix at source, 1 rule in the model, 2 accept and document
-function pp_dtag(ctx,x,y,k,a,o){o=o||{};if(a<=0.01)return 0;const[s,c]=PP_DEC[k],sz=o.size||20,w=tw(ctx,s,sz,700)+(o.dot===false?28:46),h=sz+18,X=o.align==="center"?x-w/2:o.align==="right"?x-w:x;
+const PP_DECS=["fix","rule","accept"];  // the decisions' short names, for the register on a phone (the scene names them in full first)
+function pp_dtag(ctx,x,y,k,a,o){o=o||{};if(a<=0.01)return 0;const[s0,c]=PP_DEC[k],s=o.short?PP_DECS[k]:s0,sz=o.size||20,w=tw(ctx,s,sz,700)+(o.dot===false?28:46),h=sz+18,X=o.align==="center"?x-w/2:o.align==="right"?x-w:x;
   withA(ctx,a,()=>{if(o.hi)glow(ctx,X+w/2,y,w*0.6,c,0.35*o.hi);glass(ctx,X,y-h/2,w,h,h/2,c,{glow:10,ea:0.9,fill:"rgba(8,12,22,0.95)"});if(o.dot!==false){ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(X+18,y,6,0,TAU);ctx.fill();}
     T(ctx,s,X+(o.dot===false?14:32),y+sz*0.35,{w:700,size:sz,color:rgba(mix(INK,c,0.25),1)});});return w;}
 
@@ -280,22 +281,25 @@ const PP_GAPS=[["a revoked credential is known as revoked","the platform deletes
 const PP_REG={x:140,y:150,w:1400,rh:56,cols:[60,420,380,540]};
 // the register: rows type in as o.p goes 0..10; o.tags (0..1) shows the decisions; o.ink (0..1) turns the agent's teal draft to approved ink;
 // o.hiRow {i:0..1} glows a row; o.ticks {i:0..1} gold ticks at the row's end; o.gone {i:0..1} fades a row out of the register, struck through, once its gap is settled
-function pp_register(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const R=PP_REG,hh=118,h=hh+R.rh*10+14,p=o.p==null?10:o.p;
+// On a phone the columns are as wide as their words, and the decisions take their short names
+function pp_register(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const m=phMin(ctx),fs=phSz(ctx,20),hh=118,p=o.p==null?10:o.p;let R=PP_REG;
+  if(m){const c1=Math.max(...PP_GAPS.map(g=>tw(ctx,g[0],fs,600)))+36,c2=Math.max(...PP_GAPS.map(g=>tw(ctx,g[1],fs,600)))+36,w=Math.max(R.w,56+c1+c2+300);R=Object.assign({},R,{x:Math.min(R.x,1540-w),w,cols:[56,c1,c2,w-56-c1-c2]});}
+  const h=hh+R.rh*10+14;
   withA(ctx,a,()=>{glass(ctx,R.x,R.y,R.w,h,16,[170,205,255],{glow:12,ea:0.6,fill:"rgba(6,10,20,0.96)"});
     ctx.fillStyle="rgba(170,205,255,0.9)";rr(ctx,R.x+18,R.y+22,10,10,3);ctx.fill();T(ctx,"requirements/ · the open gaps",R.x+38,R.y+34,{f:"mono",w:500,size:18,color:"rgba(170,205,255,1)"});
-    const lw=tw(ctx,PP_RUN,18,700)+28,lx=R.x+R.w-16-lw;ctx.fillStyle="rgba(8,14,24,0.95)";rr(ctx,lx,R.y+13,lw,30,15);ctx.fill();ctx.strokeStyle=rgba(WEED,0.8);ctx.lineWidth=1.5;rr(ctx,lx,R.y+13,lw,30,15);ctx.stroke();T(ctx,PP_RUN,lx+14,R.y+34,{w:700,size:18,color:rgba(WEED,1)});
+    const lw=tw(ctx,PP_RUN,phSz(ctx,18),700)+28,lx=R.x+R.w-16-lw;ctx.fillStyle="rgba(8,14,24,0.95)";rr(ctx,lx,R.y+13,lw,30,15);ctx.fill();ctx.strokeStyle=rgba(WEED,0.8);ctx.lineWidth=1.5;rr(ctx,lx,R.y+13,lw,30,15);ctx.stroke();T(ctx,PP_RUN,lx+14,R.y+34,{w:700,size:18,color:rgba(WEED,1)});
     let cx=R.x;["#","expects","holds","decision"].forEach((s,j)=>{withA(ctx,j===3?(o.tags||0):1,()=>T(ctx,s,cx+16,R.y+96,{w:800,size:20,color:rgba(j===1?TRUST:j===2?EDGE_:SOFT,1)}));cx+=R.cols[j];});
     ctx.fillStyle="rgba(170,200,245,0.16)";ctx.fillRect(R.x+14,R.y+hh-8,R.w-28,1.2);
     PP_GAPS.forEach(([ex,ho,dec],i)=>{const q=clamp(p-i,0,1);if(q<=0)return;const yy=R.y+hh+i*R.rh,hi=o.hiRow?o.hiRow[i]||0:0,col=mix(KT_AI,INK,o.ink||0),gn=o.gone?o.gone[i]||0:0;withA(ctx,1-0.78*gn,()=>{
       if(hi>0)withA(ctx,hi,()=>{ctx.fillStyle=rgba(o.hiCol||PP_DEC[2][1],0.16);rr(ctx,R.x+8,yy+4,R.w-16,R.rh-8,8);ctx.fill();});
       T(ctx,String(i+1),R.x+16,yy+R.rh/2+7,{f:"mono",w:500,size:20,color:rgba(SOFT,q)});
       T(ctx,typeOn(ex,q),R.x+R.cols[0]+16,yy+R.rh/2+7,{w:600,size:20,color:rgba(col,1)});T(ctx,typeOn(ho,q),R.x+R.cols[0]+R.cols[1]+16,yy+R.rh/2+7,{w:600,size:20,color:rgba(mix(col,EDGE_,0.35),1)});
-      let tx=R.x+R.cols[0]+R.cols[1]+R.cols[2]+12;dec.forEach((k,j)=>{const ta=clamp((o.tags||0)*12-i*0.9-j*0.4,0,1);if(ta>0)tx+=pp_dtag(ctx,tx,yy+R.rh/2,k,ta,{size:18})+8;});
+      let tx=R.x+R.cols[0]+R.cols[1]+R.cols[2]+12;dec.forEach((k,j)=>{const ta=clamp((o.tags||0)*12-i*0.9-j*0.4,0,1);if(ta>0)tx+=pp_dtag(ctx,tx,yy+R.rh/2,k,ta,{size:18,short:!!m})+8;});
       if(o.ticks&&o.ticks[i]>0)kt_gtick(ctx,R.x+R.w-30,yy+R.rh/2,13,o.ticks[i]);});
       if(gn>0){ctx.fillStyle=rgba(SOFT,0.7*gn);ctx.fillRect(R.x+R.cols[0]+10,yy+R.rh/2,(R.w-R.cols[0]-60)*clamp(gn*1.4,0,1),1.6);}});});}
 
 // gap 1 as its register had it while it was open (GAP-LMS-01), rendered as a table (the decision trimmed with …). o.lit {exp, real, dec}: 0..1
-function pp_gap1(ctx,x,y,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const C=[60,300,450,540,300],w=C.reduce((s,c)=>s+c,0),h=262,lit=o.lit||{};
+function pp_gap1(ctx,x,y,t,o){o=o||{};if(phMin(ctx))return pp_gap1P(ctx,x,y,t,o);const a=o.a==null?1:o.a;if(a<=0.01)return;const C=[60,300,450,540,300],w=C.reduce((s,c)=>s+c,0),h=262,lit=o.lit||{};
   withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,[170,205,255],{glow:12,ea:0.6,fill:"rgba(6,10,20,0.96)"});
     ctx.fillStyle="rgba(170,205,255,0.9)";rr(ctx,x+18,y+22,10,10,3);ctx.fill();T(ctx,"requirements/sources/learning_platform/ · GAP-LMS-01",x+38,y+34,{f:"mono",w:500,size:18,color:"rgba(170,205,255,1)"});
     const lw=tw(ctx,PP_RUN,18,700)+28,lx=x+w-16-lw;ctx.fillStyle="rgba(8,14,24,0.95)";rr(ctx,lx,y+13,lw,30,15);ctx.fill();ctx.strokeStyle=rgba(WEED,0.8);ctx.lineWidth=1.5;rr(ctx,lx,y+13,lw,30,15);ctx.stroke();T(ctx,PP_RUN,lx+14,y+34,{w:700,size:18,color:rgba(WEED,1)});
@@ -311,6 +315,27 @@ function pp_gap1(ctx,x,y,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;
     xx=cell(4,"where",PP_INT);L("int_credentials_",xx,y+146,rgba(PP_INT,1),"mono");L("unioned",xx,y+174,rgba(PP_INT,1),"mono");});
   return{w,h,dec:[x+C[0]+C[1]+C[2],y+h]};}
 
+// gap 1 on a phone: the same table, its cells' words wrapped to the column at the phone's size, the card as tall as they need;
+// returns the same {w, h, dec} (h is what the scene places the decisions under)
+function pp_gap1H(ctx){const fs=phSz(ctx,20),C=[50,330,470,610,280],lh=Math.round(fs*1.25),wr=(s,j,wt)=>phWrap(ctx,s,C[j]-32,fs,wt||600);
+  const E=wr("A revoked credential is known as revoked.",1),R=wr("The learning platform has no revocation flag. It deletes a revoked badge.",2),D=wr("a badge that disappears is revoked from the day the platform stopped showing it.",3);
+  const n=Math.max(E.length,R.length,D.length+2,2);return{C,fs,lh,E,R,D,h:120+n*lh+24};}
+function pp_gap1P(ctx,x,y,t,o){const a=o.a==null?1:o.a,G=pp_gap1H(ctx),{C,fs,lh,h}=G,w=C.reduce((s,c)=>s+c,0),lit=o.lit||{};x=Math.min(x,1880-w);if(a<=0.01)return{w,h,dec:[x+C[0]+C[1]+C[2],y+h]};
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,[170,205,255],{glow:12,ea:0.6,fill:"rgba(6,10,20,0.96)"});
+    const lw=tw(ctx,PP_RUN,phSz(ctx,18),700)+28,lx=x+w-16-lw;ctx.fillStyle="rgba(170,205,255,0.9)";rr(ctx,x+18,y+22,10,10,3);ctx.fill();T(ctx,phFitPath(ctx,"requirements/sources/learning_platform/ · GAP-LMS-01",lx-x-60,phSz(ctx,18)),x+38,y+34,{f:"mono",w:500,size:18,color:"rgba(170,205,255,1)"});
+    ctx.fillStyle="rgba(8,14,24,0.95)";rr(ctx,lx,y+13,lw,30,15);ctx.fill();ctx.strokeStyle=rgba(WEED,0.8);ctx.lineWidth=1.5;rr(ctx,lx,y+13,lw,30,15);ctx.stroke();T(ctx,PP_RUN,lx+14,y+34,{w:700,size:18,color:rgba(WEED,1)});
+    let cx=x;["#","Expectation","Reality","Decision","Where"].forEach((s,j)=>{T(ctx,s,cx+16,y+92,{w:800,size:20,color:rgba(SOFT,1)});cx+=C[j];});
+    ctx.fillStyle="rgba(170,200,245,0.16)";ctx.fillRect(x+14,y+108,w-28,1.2);
+    const cell=(j,k,col)=>{let xx=x;for(let i=0;i<j;i++)xx+=C[i];const on=lit[k]||0;if(on>0)withA(ctx,on,()=>{ctx.fillStyle=rgba(col,0.15);rr(ctx,xx+6,y+116,C[j]-12,h-128,8);ctx.fill();});return xx+16;};
+    const L=(s,xx,i,col,f,wt)=>T(ctx,s,xx,y+150+i*lh,{f,w:wt||600,size:20,color:col||rgba(INK,0.95)});
+    L("1",x+16,0,rgba(SOFT,1),"mono");
+    let xx=cell(1,"exp",TRUST);G.E.forEach((s,i)=>L(s,xx,i));
+    xx=cell(2,"real",EDGE_);G.R.forEach((s,i)=>L(s,xx,i));
+    xx=cell(3,"dec",PP_INT);L("Rule in the model:",xx,0,rgba(PP_DEC[1][1],1),undefined,800);G.D.forEach((s,i)=>L(s,xx,i+1));
+    const f1="Fix at source";L(f1,xx,G.D.length+1,rgba(PP_DEC[0][1],1),undefined,800);L(", requested: …",xx+tw(ctx,f1,fs,800),G.D.length+1);
+    xx=cell(4,"where",PP_INT);L("int_credentials_",xx,0,rgba(PP_INT,1),"mono");L("unioned",xx,1,rgba(PP_INT,1),"mono");});
+  return{w,h,dec:[x+C[0]+C[1]+C[2],y+h]};}
+
 // a scale in the present: crisp lines; the left pan holds a trusted number, the right an empty slot. tilt in radians
 function pp_scale(ctx,x,y,s,tilt,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(s,s);const c=o.col||TRUST;ctx.strokeStyle=rgba(c,0.95);ctx.lineWidth=3;ctx.lineCap="round";
   ctx.beginPath();ctx.moveTo(-70,0);ctx.lineTo(70,0);ctx.moveTo(0,0);ctx.lineTo(0,-200);ctx.stroke();ctx.save();ctx.translate(0,-200);ctx.rotate(tilt);ctx.beginPath();ctx.moveTo(-170,0);ctx.lineTo(170,0);ctx.stroke();ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(0,0,7,0,TAU);ctx.fill();ctx.restore();
@@ -323,15 +348,21 @@ function pp_scale(ctx,x,y,s,tilt,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)r
 
 // the core, as a band the marts stand on: its four models as chips. Returns each chip's centre. o.pulse {name:0..1}
 const PP_CORE=["core_learner","core_award","core_credential","core_credit_towards_award"];
-function pp_core(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,P={};const n=PP_CORE.length,L=250,cw=(w-L)/n,ca=o.chips==null?1:o.chips;PP_CORE.forEach((m,i)=>P[m]=[x+L+cw*(i+0.5),y+h/2]);if(a<=0.01)return P;
-  withA(ctx,a,()=>{glow(ctx,x+w/2,y+h/2,w*0.5,TRUST,0.12);glass(ctx,x,y,w,h,14,TRUST,{glow:16,ea:0.85,fill:"rgba(16,13,6,0.94)"});T(ctx,"core",x+20,y+h/2-4,{w:800,size:22,color:rgba(TRUST,1)});T(ctx,"public · enforced",x+20,y+h/2+20,{w:700,size:18,color:rgba(SOFT,1)});
-    if(ca>0.01)withA(ctx,ca,()=>PP_CORE.forEach(m=>{const[cx,cy]=P[m],pu=o.pulse?o.pulse[m]||0:0,ww=tw(ctx,m,18,500,"mono")+28;if(pu>0)glow(ctx,cx,cy,ww*0.7,TRUST,0.5*pu);ctx.fillStyle=rgba(mix([30,26,12],TRUST,0.12+0.3*pu),1);rr(ctx,cx-ww/2,cy-15,ww,30,8);ctx.fill();
+// on a phone the chips are spaced by their widths at the size they're drawn, so the long names don't run into each other
+function pp_core(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,P={};const n=PP_CORE.length,L=250,cw=(w-L)/n,ca=o.chips==null?1:o.chips,ph=phMin(ctx)>0,cs=phSz(ctx,18),WW=PP_CORE.map(m=>tw(ctx,m,cs,500,"mono")+28),gp=(w-L-WW.reduce((s,v)=>s+v,0))/(n+1);
+  PP_CORE.forEach((m,i)=>P[m]=[ph&&gp>8?x+L+gp*(i+1)+WW.slice(0,i).reduce((s,v)=>s+v,0)+WW[i]/2:x+L+cw*(i+0.5),y+h/2]);if(a<=0.01)return P;
+  withA(ctx,a,()=>{glow(ctx,x+w/2,y+h/2,w*0.5,TRUST,0.12);glass(ctx,x,y,w,h,14,TRUST,{glow:16,ea:0.85,fill:"rgba(16,13,6,0.94)"});T(ctx,"core",x+20,y+h/2-(ph?8:4),{w:800,size:22,color:rgba(TRUST,1)});T(ctx,"public · enforced",x+20,y+h/2+(ph?23:20),{w:700,size:18,color:rgba(SOFT,1)});
+    if(ca>0.01)withA(ctx,ca,()=>PP_CORE.forEach((m,i)=>{const[cx,cy]=P[m],pu=o.pulse?o.pulse[m]||0:0,ww=WW[i];if(pu>0)glow(ctx,cx,cy,ww*0.7,TRUST,0.5*pu);ctx.fillStyle=rgba(mix([30,26,12],TRUST,0.12+0.3*pu),1);rr(ctx,cx-ww/2,cy-15,ww,30,8);ctx.fill();
       ctx.strokeStyle=rgba(TRUST,0.5+0.5*pu);ctx.lineWidth=1.4;rr(ctx,cx-ww/2,cy-15,ww,30,8);ctx.stroke();T(ctx,m,cx,cy+6,{f:"mono",w:500,size:18,align:"center",color:rgba(mix(INK,TRUST,0.4),1)});}));});return P;}
 
 // a consumer's mart: its badge, its name, and the grain it declared typing in as o.g goes 0..1
 function pp_mart(ctx,x,y,w,h,kind,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const pl=kind==="planning",nm=pl?"Planning":"the wallet app",mdl=pl?"mart_planning__near_award":"mart_wallet__learners",gr=pl?"One row per learner per award, as at census date":"One row per learner, as it is now";
   withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,PP_MART,{glow:12+12*(o.hi||0),ea:0.8,fill:"rgba(6,14,12,0.95)"});pp_consumer(ctx,x+62,y+64,38,kind,{hi:o.hi||0});
     T(ctx,nm,x+118,y+56,{w:800,size:26});T(ctx,mdl,x+118,y+88,{f:"mono",w:500,size:18,color:rgba(PP_MART,1)});
+    // on a phone the grain starts after its label and wraps to the card, and the contract's chip moves up beside the name
+    const m=phMin(ctx);if(m){const gx=x+24+tw(ctx,"grain",phSz(ctx,18),700)+14,G=phWrap(ctx,gr,x+w-24-gx,phSz(ctx,21),700);
+      if(o.g>0){T(ctx,"grain",x+24,y+140,{w:700,size:18,color:rgba(SOFT,1)});let k=Math.round(gr.length*clamp(o.g,0,1));G.forEach((l,i)=>{const s=l.slice(0,Math.max(0,k));k-=l.length+1;if(s)T(ctx,s,gx,y+140+i*36,{w:700,size:21,color:rgba(TRUST,1)});});}
+      if(o.chips>0)withA(ctx,o.chips,()=>{const s="contract: enforced",cw=tw(ctx,s,phSz(ctx,18),700)+26;tag(ctx,x+w-20-cw,y+44,s,TRUST,{size:18});});return;}
     if(o.g>0){T(ctx,"grain",x+24,y+146,{w:700,size:18,color:rgba(SOFT,1)});T(ctx,typeOn(gr,o.g),x+86,y+146,{w:700,size:21,color:rgba(TRUST,1)});}
     if(o.chips>0)withA(ctx,o.chips,()=>{tag(ctx,x+24,y+h-30,"contract: enforced",TRUST,{size:18});});});}
 
@@ -565,3 +596,7 @@ Object.assign(LV,{
     T(c,"≠",300,132,{w:800,size:48,align:"center",color:rgba(BAD,1)});
     const uw=tw(c,Q.unitPass,19,700),u0=Math.max(12,300-(4*36+14+uw)/2);for(let i=0;i<4;i++)tick_(c,u0+12+i*36,256,24,GOOD,1);T(c,Q.unitPass,u0+4*36+14,264,{w:700,size:19,color:rgba(GOOD,1)});c.restore();}
 });
+
+/* ---------- on a phone ----------
+   The film's code cards are drawn at sizes that read, their long lines wrapped (../../../from-words-to-data/shared/src/phone.js) */
+pp_code=phCode(pp_code,{size:19,lh:s=>Math.round(s*1.5),head:(o,ctx,w,name)=>{const lab=o.label===undefined?PP_RUN:o.label,ls=phSz(ctx,18);return(!!lab&&tw(ctx,name,ls,500,"mono")+tw(ctx,lab,ls,700)+28+64>w?88:56)+18;},label:o=>o.label===undefined?PP_RUN:o.label});

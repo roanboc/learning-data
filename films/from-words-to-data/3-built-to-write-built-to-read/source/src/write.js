@@ -9,7 +9,9 @@ const BW_TEN=[10480,10760,10990,11120,11300,11520,11640,11730,11810,11890];   //
 /* ---------- ink, paper and a quill: 1494 ----------
    Natural things are drawn soft: curved, uneven edges, a light side and a shadow side, tapered strokes, and a little motion. */
 // handwriting: Manrope, slanted, in brown ink, written out as p goes from 0 to 1; bleed (0..1) spreads fresh ink, which then settles
-function bw_ink(ctx,s,x,y,o){o=o||{};const p=o.p==null?1:o.p;if(p<=0)return;ctx.save();ctx.font="italic "+(o.w||600)+" "+(o.size||24)+"px "+FT.sans;ctx.textAlign=o.align||"left";
+// BW_DECO: the books are seen from afar, so their handwriting is texture (o.keep: still something to read)
+let BW_DECO=false;
+function bw_ink(ctx,s,x,y,o){o=o||{};const p=o.p==null?1:o.p;if(p<=0)return;if(BW_DECO&&!o.keep)return phAsDeco(true,()=>bw_ink(ctx,s,x,y,Object.assign({},o,{keep:1})));ctx.save();ctx.font="italic "+(o.w||600)+" "+(o.size||24)+"px "+FT.sans;ctx.textAlign=o.align||"left";
   const bl=o.bleed||0,c=o.color||"rgba(64,38,20,0.92)";if(bl>0.01){ctx.shadowColor=c;ctx.shadowBlur=7*bl;ctx.fillStyle=c;ctx.globalAlpha*=0.75+0.25*(1-bl);}else ctx.fillStyle=c;
   ctx.fillText(typeOn(s,p),x,y);ctx.restore();}
 function bw_inkW(ctx,s,size,w){ctx.save();ctx.font="italic "+(w||600)+" "+size+"px "+FT.sans;const m=ctx.measureText(s).width;ctx.restore();return m;}
@@ -102,9 +104,10 @@ function bw_venice(ctx,y,a,t){if(a<=0.01)return;t=t||0;withA(ctx,a,()=>{ctx.save
 function bw_cert(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,h=Math.round(w*0.7);if(a<=0.01)return h;withA(ctx,a,()=>{
   bw_paper(ctx,x,y,w,h,{t:o.t||0,seed:5,curl:22,base:"#f2ead6"});ctx.strokeStyle="rgba(150,120,60,0.55)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+16,y+16);bw_edge(ctx,x+16,y+16,x+w-16,y+16,0.6,51,0);bw_edge(ctx,x+w-16,y+16,x+w-16,y+h-30,0.6,52,0);bw_edge(ctx,x+w-16,y+h-30,x+16,y+h-16,0.6,53,0);bw_edge(ctx,x+16,y+h-16,x+16,y+16,0.6,54,0);ctx.stroke();
   T(ctx,"Certificate",x+w/2,y+66,{w:800,size:36,align:"center",color:"rgba(60,44,30,0.95)"});
-  [["issued by",o.issuer],["awarded to",o.holder],["for",o.claim],["on",o.date]].forEach(([k,v],i)=>{const yy=y+128+i*50;T(ctx,k,x+40,yy,{w:600,size:21,color:"rgba(110,86,54,0.95)"});T(ctx,v,x+190,yy,{w:800,size:27,color:"rgba(52,40,30,0.95)"});});
+  const vx=phMin(ctx)?220:190,vs=Math.max(27,phMin(ctx));
+  [["issued by",o.issuer],["awarded to",o.holder],["for",o.claim],["on",o.date]].forEach(([k,v],i)=>{const yy=y+128+i*50;T(ctx,k,x+40,yy,{w:600,size:21,color:"rgba(110,86,54,0.95)"});T(ctx,v,x+vx,yy,{w:800,size:27,color:"rgba(52,40,30,0.95)"});});
   waxSeal(ctx,x+w-70,y+h-70,34,WAX,1,1);
-  if(o.bad>0.01)withA(ctx,o.bad,()=>{ctx.strokeStyle=rgba(BAD,0.95);ctx.lineWidth=3.4;ctx.beginPath();ctx.ellipse(x+190+tw(ctx,o.holder,27,800)/2,y+178-9,tw(ctx,o.holder,27,800)/2+26,26,-0.02,0,TAU);ctx.stroke();});});
+  if(o.bad>0.01)withA(ctx,o.bad,()=>{ctx.strokeStyle=rgba(BAD,0.95);ctx.lineWidth=3.4;ctx.beginPath();ctx.ellipse(x+vx+tw(ctx,o.holder,vs,800)/2,y+178-9,tw(ctx,o.holder,vs,800)/2+26,26,-0.02,0,TAU);ctx.stroke();});});
   return h;}
 
 /* ---------- the journal and the ledger ---------- */
@@ -143,17 +146,19 @@ function bw_fkMark(ctx,x,y,s,col,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save(
   ctx.beginPath();ctx.moveTo(-7,6);ctx.lineTo(6,-7);ctx.moveTo(-1,-7);ctx.lineTo(6,-7);ctx.lineTo(6,0);ctx.stroke();ctx.restore();});}
 /* a table of rows. o: name, cols [[name,"pk"|"fk"|""]], rows, col, a, cw (column widths), size, rh (row height), keyA, fkA,
    rowA(j) (a row's opacity), rowBg(j) ([colour, alpha] behind a row), cell(j,i) ({text, col, hi, strike, bold}). Returns its geometry. */
-function bw_tbl(ctx,x,y,o){const cols=o.cols,rows=o.rows,sz=o.size||22,rh=o.rh||50,hh=o.name?48:0,ch=o.ch||44,col=o.col||BW_W,a=o.a==null?1:o.a;
-  const cw=o.cw||cols.map((c,i)=>Math.max(tw(ctx,c[0],sz-2,500,"mono")+(c[1]?30:0),...rows.map(r=>tw(ctx,String(r[i]),sz,500,"mono")))+30);
+// in the film, its words are at least the smallest size that reads on a phone (phone.js; o.ph gives that size, for a table drawn
+// smaller as it goes into the background), and its columns and rows are measured to fit them; the labs keep their own sizes
+function bw_tbl(ctx,x,y,o){const m=o.ph!=null?o.ph:phMin(ctx),cols=o.cols,rows=o.rows,sz=Math.max(o.size||22,m),hs=Math.max((o.size||22)-2,m),rh=Math.max(o.rh||50,m?sz*1.6:0),hh=o.name?(m?Math.max(48,hs*1.75):48):0,ch=Math.max(o.ch||44,m?hs*1.6:0),col=o.col||BW_W,a=o.a==null?1:o.a;
+  const cw=o.cw||cols.map((c,i)=>Math.max(tw(ctx,c[0],hs,500,"mono")+(c[1]?30:0),...rows.map(r=>tw(ctx,String(r[i]),sz,500,"mono")))+30);
   const w=cw.reduce((p,v)=>p+v,0),h=hh+ch+rh*rows.length,cx=[];let acc=x;cw.forEach(v=>{cx.push(acc);acc+=v;});
   const G={x,y,w,h,cx,cw,rh,rowY:j=>y+hh+ch+rh*j+rh/2,colX:i=>cx[i]+cw[i]/2,headY:y+hh+ch/2};if(a<=0.01)return G;
   withA(ctx,a,()=>{if(o.hi)glow(ctx,x+w/2,y+h/2,Math.max(w,h)*0.7,o.hiCol||col,0.25*o.hi);
     glass(ctx,x,y,w,h,12,col,{glow:(o.glow||14)+12*(o.hi||0),ea:0.7+0.3*(o.hi||0),fill:"rgba(7,12,24,0.95)",lw:o.dash?0.01:1.6});
     if(o.dash){ctx.save();ctx.setLineDash([9,7]);ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=1.8;rr(ctx,x,y,w,h,12);ctx.stroke();ctx.restore();}
-    if(o.name)T(ctx,o.name,x+16,y+33,{f:"mono",w:500,size:Math.max(18,sz-2),color:rgba(col,1)});
+    if(o.name)T(ctx,o.name,x+16,y+hh*0.69,{f:"mono",w:500,size:Math.max(18,hs),color:rgba(col,1)});
     ctx.fillStyle=rgba(col,0.07);ctx.fillRect(x+1,y+hh,w-2,ch);
     cols.forEach((c,i)=>{let tx=cx[i]+14;if(c[1]==="pk"){bw_key(ctx,tx+7,G.headY,1.1,REF,o.keyA==null?1:o.keyA);tx+=28;}if(c[1]==="fk"){bw_fkMark(ctx,tx+7,G.headY,1.1,col,o.fkA==null?1:o.fkA);tx+=28;}
-      T(ctx,c[0],tx,G.headY+7,{f:"mono",w:500,size:sz-2,color:rgba(c[1]==="pk"?REF:SOFT,1)});});
+      T(ctx,c[0],tx,G.headY+hs*0.34,{f:"mono",w:500,size:hs,color:rgba(c[1]==="pk"?REF:SOFT,1)});});
     ctx.strokeStyle="rgba(170,200,245,0.16)";ctx.lineWidth=1;for(let j=0;j<=rows.length;j++){ctx.beginPath();ctx.moveTo(x+8,y+hh+ch+rh*j);ctx.lineTo(x+w-8,y+hh+ch+rh*j);ctx.stroke();}
     rows.forEach((r,j)=>{const ra=o.rowA?o.rowA(j):1;if(ra<=0.01)return;withA(ctx,ra,()=>{const ry=G.rowY(j);
       if(o.rowBg){const b=o.rowBg(j);if(b&&b[1]>0.01){ctx.fillStyle=rgba(b[0],0.16*b[1]);rr(ctx,x+4,ry-rh/2+2,w-8,rh-4,6);ctx.fill();}}
@@ -175,7 +180,7 @@ function bw_rel(ctx,x0,y0,x1,y1,col,a,o){o=o||{};const p=o.p==null?1:o.p;if(a<=0
 function bw_write(ctx,x,y,w,h,title,line,st,a){if(a<=0.01)return;withA(ctx,a,()=>{const c=st==="fail"?BAD:st==="back"?SOFT:st==="done"?BW_W:BW_W;
   glass(ctx,x,y,w,h,12,c,{glow:st==="done"?16:8,ea:st==="pend"?0.01:0.85,fill:st==="done"?"rgba(12,26,52,0.95)":"rgba(7,12,24,0.9)"});
   if(st==="pend"||st==="back"){ctx.save();ctx.setLineDash([7,6]);ctx.strokeStyle=rgba(c,0.8);ctx.lineWidth=1.8;rr(ctx,x,y,w,h,12);ctx.stroke();ctx.restore();}
-  T(ctx,title,x+20,y+38,{w:800,size:25,color:rgba(c,1)});T(ctx,line,x+20,y+78,{f:"mono",w:500,size:20,color:rgba(INK,st==="back"?0.4:0.9)});
+  T(ctx,title,x+20,y+38,{w:800,size:25,color:rgba(c,1)});T(ctx,line,x+20,y+80,phMin(ctx)?{w:600,size:20,color:rgba(INK,st==="back"?0.4:0.9)}:{f:"mono",w:500,size:20,color:rgba(INK,st==="back"?0.4:0.9)});
   if(st==="back"){ctx.strokeStyle=rgba(BAD,0.8);ctx.lineWidth=2.6;ctx.beginPath();ctx.moveTo(x+14,y+71);ctx.lineTo(x+w-14,y+71);ctx.stroke();T(ctx,"↺",x+w-34,y+40,{w:800,size:30,align:"center",color:rgba(BW_AMB,1)});}
   if(st==="fail")cross_(ctx,x+w-34,y+32,30,BAD,1);if(st==="done")tick_(ctx,x+w-34,y+34,30,GOOD,1);});}
 
@@ -185,7 +190,7 @@ function bw_doc(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,col=o.col||BW_W,hl=
   const part=k=>clamp(p*7-k,0,1);
   withA(ctx,a,()=>{const f=40;ctx.save();ctx.shadowColor=rgba(col,0.55);ctx.shadowBlur=18+14*(o.glow||0);ctx.fillStyle="rgba(8,14,30,0.95)";ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+w-f,y);ctx.lineTo(x+w,y+f);ctx.lineTo(x+w,y+h);ctx.lineTo(x,y+h);ctx.closePath();ctx.fill();ctx.shadowBlur=0;
     ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=1.8;ctx.stroke();ctx.fillStyle=rgba(col,0.25);ctx.beginPath();ctx.moveTo(x+w-f,y);ctx.lineTo(x+w-f,y+f);ctx.lineTo(x+w,y+f);ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();
-    const kv=(k,v,xx,yy,q)=>withA(ctx,q,()=>{T(ctx,k,xx,yy,{f:"mono",w:500,size:21,color:rgba(REF,1)});T(ctx,v,xx+190,yy,{w:700,size:25,color:rgba(INK,0.95)});});
+    const vo=phMin(ctx)?250:190,kv=(k,v,xx,yy,q)=>withA(ctx,q,()=>{T(ctx,k,xx,yy,{f:"mono",w:500,size:21,color:rgba(REF,1)});T(ctx,v,xx+vo,yy,{w:700,size:25,color:rgba(INK,0.95)});});
     withA(ctx,part(0),()=>{T(ctx,"credential",x+30,y+52,{w:800,size:32,color:rgba(TRUST,1)});T(ctx,"one document",x+w-62,y+50,{f:"mono",w:500,size:19,align:"right",color:rgba(SOFT,1)});});
     kv("type","Microcredential",x+30,y+104,part(1));kv("issuer","the university",x+30,y+144,part(1.5));kv("awarded to","Aisha Salem",x+30,y+184,part(2));
     const blk=(yy,name,rowsK,q,hi)=>withA(ctx,q,()=>{const bh=48+rowsK.length*40;if(hi>0.01)glow(ctx,x+w/2,yy+bh/2,w*0.5,TRUST,0.2*hi);
@@ -209,19 +214,20 @@ function bw_store(ctx,x,y,w,h,col,a,t){if(a<=0.01)return;withA(ctx,a,()=>{glass(
 function bw_fact(ctx,cx,cy,o){o=o||{};const a=o.a==null?1:o.a,w=o.w||440,h=o.h||280,x=cx-w/2,y=cy-h/2,col=BW_R;if(a<=0.01)return{x:cx,y:cy,w,h};
   withA(ctx,a,()=>{if(o.hi)glow(ctx,cx,cy,w*0.8,col,0.3*o.hi);glass(ctx,x,y,w,h,16,col,{glow:18+10*(o.hi||0),ea:0.9,fill:"rgba(8,20,22,0.95)"});
     T(ctx,"FACT",x+24,y+36,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});T(ctx,"credential awarded",x+24,y+72,{w:800,size:32,color:rgba(col,1)});
-    withA(ctx,o.g==null?1:o.g,()=>{if(o.gHi)glow(ctx,cx,y+110,w*0.5,TRUST,0.3*o.gHi);T(ctx,"one row per credential awarded",x+24,y+114,{f:"mono",w:500,size:19,color:rgba(TRUST,0.75+0.25*(o.gHi||0))});});
+    const ph=phMin(ctx)>0;
+    withA(ctx,o.g==null?1:o.g,()=>{if(o.gHi)glow(ctx,cx,y+110,w*0.5,TRUST,0.3*o.gHi);T(ctx,"one row per credential awarded",x+24,y+114,ph?{w:600,size:19,color:rgba(TRUST,0.75+0.25*(o.gHi||0))}:{f:"mono",w:500,size:19,color:rgba(TRUST,0.75+0.25*(o.gHi||0))});});
     ctx.strokeStyle=rgba(col,0.3);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x+14,y+136);ctx.lineTo(x+w-14,y+136);ctx.stroke();
     [["award","count"],["credit points","sum"]].forEach(([m,how],i)=>withA(ctx,clamp((o.m==null?1:o.m)*2-i,0,1),()=>{const yy=y+178+i*40;
       T(ctx,"Σ",x+34,yy,{w:800,size:28,align:"center",color:rgba(col,1)});T(ctx,m,x+60,yy,{w:700,size:25});T(ctx,how,x+w-24,yy,{f:"mono",w:500,size:19,align:"right",color:rgba(SOFT,1)});}));
-    withA(ctx,o.k==null?1:o.k,()=>T(ctx,"+ a key to each dimension",x+24,y+h-18,{f:"mono",w:500,size:18,color:rgba(SOFT,0.9)}));});
+    withA(ctx,o.k==null?1:o.k,()=>T(ctx,"+ a key to each dimension",x+24,y+h-18,ph?{w:600,size:18,color:rgba(SOFT,0.9)}:{f:"mono",w:500,size:18,color:rgba(SOFT,0.9)}));});
   return{x:cx,y:cy,w,h};}
 // one dimension: a name, and what you can filter or group by
 function bw_dim(ctx,x,y,name,sub,o){o=o||{};return ent(ctx,{x,y,name,sub,col:o.col||BW_R,a:o.a,s:o.s||1,hi:o.hi||0,subA:1});}
 // the faculty is one of the learner's attributes, kept with its dates (a type 2 dimension), so "by faculty" reads the learner dimension
 const BW_DIMS={learner:["Learner","name · faculty · dates"],kind:["Credential kind","degree · micro · badge"],course:["Course","code · title"],date:["Date","day · month · year"]};
 // one word of a dimension's line, lit in col: where a question's word lives in the star
-function bw_dimWord(ctx,x,y,s,k,word,col,a){if(a<=0.01)return;const sub=BW_DIMS[k][1],i=sub.indexOf(word);if(i<0)return;const b=entBox(ctx,{x,y,name:BW_DIMS[k][0],sub,s}),sz=16*s;
-  const x0=b.x-tw(ctx,sub,sz,600)/2+tw(ctx,sub.slice(0,i),sz,600),ww=tw(ctx,word,sz,600),by=b.y-b.h/2+62*s;
+function bw_dimWord(ctx,x,y,s,k,word,col,a){if(a<=0.01)return;const sub=BW_DIMS[k][1],i=sub.indexOf(word);if(i<0)return;const b=entBox(ctx,{x,y,name:BW_DIMS[k][0],sub,s}),m=phMin(ctx),sz=Math.max(16*s,m);
+  const x0=b.x-tw(ctx,sub,sz,600)/2+tw(ctx,sub.slice(0,i),sz,600),ww=tw(ctx,word,sz,600),by=m?b.y-b.h/2+34*s*Math.max(24*s,m)/(24*s)+sz*1.15:b.y-b.h/2+62*s;
   withA(ctx,a,()=>{ctx.fillStyle=rgba(col,0.22);rr(ctx,x0-6,by-sz*0.95,ww+12,sz*1.3,6);ctx.fill();T(ctx,word,x0,by,{w:600,size:sz,color:rgba(col,1)});});}
 // a whole star, at (cx,cy): P maps each dimension to its place; o.dimA, o.join (0..1 per dimension: a join lit), o.hi
 function bw_star(ctx,cx,cy,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const P=o.P||{course:[-340,-230],kind:[340,-230],learner:[-340,240],date:[340,240]},da=o.dimA||{},jn=o.join||{},ds=o.ds||s;
@@ -243,10 +249,10 @@ function bw_starIcon(ctx,x,y,s,a,col){if(a<=0.01)return;col=col||BW_R;withA(ctx,
   glass(ctx,x-30*s,y-18*s,60*s,36*s,7*s,col,{glow:14,ea:1,fill:"rgba(10,30,26,0.95)"});T(ctx,"Σ",x,y+8*s,{w:800,size:20*s,align:"center",color:rgba(col,1)});});}
 // the planners' answer: awards by faculty, stacked, one bar a year
 function bw_chart(ctx,x,y,w,h,p,a,o){o=o||{};if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,BW_R,{glow:14,ea:0.8,fill:"rgba(7,14,18,0.94)"});
-  T(ctx,o.title||"awards, by faculty and year",x+20,y+38,{w:800,size:22,color:rgba(BW_R,1)});const bx=x+22,by=y+h-40,bw=(w-44)/10,mh=h-130,mx=12000;
+  const ph=phMin(ctx)>0;T(ctx,o.title||(ph?"awards by faculty":"awards, by faculty and year"),x+20,y+38,{w:800,size:22,color:rgba(BW_R,1)});const bx=x+22,by=y+h-40,bw=(w-44)/10,mh=h-(ph?170:130),mx=12000;
   BW_TEN.forEach((v,i)=>{const q=clamp(p*10-i*0.6,0,1),sh=[0.44,0.34,0.22];let acc=0;["sci","eng","arts"].forEach((k,j)=>{const hh=v/mx*mh*sh[j]*ease(q);ctx.fillStyle=rgba(BW_FAC[k].c,0.85);rr(ctx,bx+i*bw+4,by-acc-hh,bw-8,hh,3);ctx.fill();acc+=hh;});
     if(i===0||i===9)T(ctx,String(2017+i),bx+i*bw+bw/2,by+26,{f:"mono",w:500,size:18,align:"center",color:rgba(SOFT,1)});});
-  let lx=x+20;["sci","eng","arts"].forEach(k=>{ctx.fillStyle=rgba(BW_FAC[k].c,1);ctx.fillRect(lx,y+58,14,14);T(ctx,BW_FAC[k].n,lx+20,y+72,{w:600,size:18,color:rgba(SOFT,1)});lx+=tw(ctx,BW_FAC[k].n,18,600)+44;});});}
+  let lx=x+20,ly=y+58;const ls=Math.max(18,phMin(ctx));["sci","eng","arts"].forEach(k=>{const lw=tw(ctx,BW_FAC[k].n,ls,600)+44;if(lx+lw>x+w)(lx=x+20,ly+=ls*1.3);ctx.fillStyle=rgba(BW_FAC[k].c,1);ctx.fillRect(lx,ly+ls*0.5-7,14,14);T(ctx,BW_FAC[k].n,lx+20,ly+ls*0.86,{w:600,size:18,color:rgba(SOFT,1)});lx+=lw;});});}
 
 /* ---------- words the planner types, with some of them lit ---------- */
 // a question in a bubble, laid out word by word so single words can light up; hi(word index) gives 0..1

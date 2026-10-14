@@ -43,10 +43,10 @@ scene("before",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");histBg(ctx,S,
     withA(ctx,fin(t,cL+6.6,0.6),()=>tag(ctx,1420,180,"his system: still used today",[150,220,140],{align:"center",size:20}));});
   // Wilkins: a language to classify everything, sprawling off the edges, then fading
   if(aW>0)withA(ctx,aW,()=>{const g=clamp((t-cW-0.4)/3.0,0,1),g2=clamp((t-cW-1.2)/3.2,0,1),g3=clamp((t-cW-2.0)/3.4,0,1),dim=fin(t,cW+5.3,1.2),z=lerp(1.04,0.93,clamp((t-cW)/7,0,1));
-    ctx.save();ctx.translate(700,540);ctx.scale(z,z);ctx.translate(-700,-540);mm_wilkins(ctx,t,g,g2,g3,dim);ctx.restore();
-    yearTag(ctx,120,120,"1668 · Wilkins",CLAY,fin(t,cW,0.6));withA(ctx,fin(t,cW+0.8,0.6),()=>{const ls=["An Essay towards","a Real Character, and","a Philosophical Language"],w=Math.max(...ls.map(l=>tw(ctx,l,18,500,"mono")))+30;ctx.fillStyle="rgba(26,16,10,0.85)";rr(ctx,110,152,w,94,10);ctx.fill();ls.forEach((l,i)=>T(ctx,l,125,180+i*26,{f:"mono",w:500,size:18,color:rgba(PARCH,0.9)}));});
-    withA(ctx,fin(t,cW+2.2,0.6)*(1-dim*0.6),()=>{ctx.fillStyle="rgba(26,16,10,0.85)";rr(ctx,120,630,300,40,20);ctx.fill();T(ctx,"40 kinds, divided again and again",270,657,{w:600,size:16,align:"center",color:rgba(PARCH,0.95)});});
-    withA(ctx,dim,()=>tag(ctx,270,700,"never took hold",EDGE_,{align:"center",size:22}));});
+    ctx.save();ctx.translate(700,540);ctx.scale(z,z);ctx.translate(-700,-540);phAsDeco(true,()=>mm_wilkins(ctx,t,g,g2,g3,dim));ctx.restore();
+    yearTag(ctx,120,120,"1668 · Wilkins",CLAY,fin(t,cW,0.6));withA(ctx,fin(t,cW+0.8,0.6),()=>{const ls=["An Essay towards","a Real Character, and","a Philosophical Language"],fs=Math.max(18,phMin(ctx)),lh=fs*1.3,w=Math.max(...ls.map(l=>tw(ctx,l,fs,500,"mono")))+30;ctx.fillStyle="rgba(26,16,10,0.85)";rr(ctx,110,152,w,lh*3+16,10);ctx.fill();ls.forEach((l,i)=>T(ctx,l,125,152+lh*(i+0.85),{f:"mono",w:500,size:18,color:rgba(PARCH,0.9)}));});
+    withA(ctx,fin(t,cW+2.2,0.6)*(1-dim*0.6),()=>{const ps=Math.max(16,phMin(ctx)),pw=tw(ctx,"40 kinds, divided again and again",ps,600)+40;ctx.fillStyle="rgba(26,16,10,0.85)";rr(ctx,270-pw/2,630,pw,ps+24,(ps+24)/2);ctx.fill();T(ctx,"40 kinds, divided again and again",270,642+ps*0.7,{w:600,size:16,align:"center",color:rgba(PARCH,0.95)});});
+    withA(ctx,dim,()=>tag(ctx,270,720,"never took hold",EDGE_,{align:"center",size:22}));});
   // Nightingale: the same columns on every hospital's form
   if(aN>0)withA(ctx,aN,()=>{yearTag(ctx,120,120,"1860 · Nightingale",CLAY,1);withA(ctx,fin(t,cN+0.6,0.6),()=>T(ctx,"model hospital statistics",120,178,{f:"mono",w:500,size:16,color:rgba(PARCH,0.8)}));
     const band=fin(t,cN+5.3,0.6);[["Hospital A",150,-0.012],["Hospital B",710,0.006],["Hospital C",1270,-0.004]].forEach(([n,x,r],i)=>{const a=fin(t,cN+0.9+i*0.6,0.5);mm_form(ctx,x,210,500,440,n,i*2,{a,rot:r,t,band:band*(0.75+0.25*Math.sin(t*3+i)),fill:clamp((t-cN-1.2-i*0.6)/2.2,0,1)});});
@@ -57,7 +57,7 @@ scene("before",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");histBg(ctx,S,
     mm_parch(ctx,180,180,560,520,{a:fin(t,cI+0.3,0.6),rot:-0.008,t,seed:21,draw:(c)=>{wrapT(c,"International List of Causes of Death",28,50,500,{w:800,size:24,lh:30,color:MM_SEP});T(c,"Bertillon · 1893",28,120,{f:"mono",w:500,size:15,color:MM_SEP2});
       MM_DEATH.forEach((s,i)=>{const q=clamp((t-cI-0.8)/2.6*MM_DEATH.length-i,0,1);if(q<=0)return;const yy=172+i*42;c.strokeStyle="rgba(90,66,40,0.25)";c.lineWidth=1;c.beginPath();c.moveTo(28,yy+10);c.lineTo(530,yy+10);c.stroke();T(c,typeOn(s,q),40,yy,{w:600,size:21,color:"rgba(52,40,30,0.9)"});});}});
     const ar=fin(t,cI+4.5,0.6);arrowTo(ctx,770,440,1050,440,CLAY,ar,{p:ar,bend:-0.12,head:14});
-    withA(ctx,fin(t,cI+4.8,0.6),()=>{const x=1080,y=190,w=680,h=390;glass(ctx,x,y,w,h,18,[214,226,245],{glow:16,ea:0.8,fill:"rgba(8,12,22,0.95)"});T(ctx,"International Classification of Diseases",x+28,y+52,{w:800,size:28});T(ctx,"ICD-11 · World Health Organization",x+28,y+84,{w:600,size:17,color:rgba(SOFT,1)});
+    withA(ctx,fin(t,cI+4.8,0.6),()=>{const x=1060,y=190,w=740,h=390;glass(ctx,x,y,w,h,18,[214,226,245],{glow:16,ea:0.8,fill:"rgba(8,12,22,0.95)"});T(ctx,"International Classification of Diseases",x+28,y+52,{w:800,size:28});T(ctx,"ICD-11 · World Health Organization",x+28,y+84,{w:600,size:17,color:rgba(SOFT,1)});
       MM_ICD.forEach(([k,n],i)=>withA(ctx,fin(t,cI+5.2+i*0.3,0.4),()=>{const yy=y+146+i*56;ctx.fillStyle="rgba(214,226,245,0.06)";rr(ctx,x+20,yy-32,w-40,46,8);ctx.fill();T(ctx,k,x+36,yy,{f:"mono",w:500,size:21,color:rgba(MM_INK,1)});T(ctx,n,x+130,yy,{w:600,size:20});}));});
     const tr=clamp((t-cI-5.4)/2.0,0,1.15),tl=Math.min(tr,1),x0=180,x1=1740,ty=790,X=yr=>lerp(x0,x1,(yr-1893)/(2022-1893));withA(ctx,fin(t,cI+5.3,0.4),()=>{ctx.strokeStyle=rgba(CLAY,0.7);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x0,ty);ctx.lineTo(lerp(x0,x1,tl),ty);ctx.stroke();
       MM_REV.forEach(yr=>{const q=clamp((tr-(yr-1893)/129)*12,0,1);if(q<=0)return;ctx.fillStyle=rgba(CLAY,q);ctx.beginPath();ctx.arc(X(yr),ty,6,0,TAU);ctx.fill();});
@@ -85,13 +85,13 @@ scene("guesses",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const gx=760,gy=470;mm_genie(ctx,gx,gy,t,{a:fin(t,cA+2.0,0.6)});
   // what Genie can read: tables
   const tA=fin(t,cF-0.2,0.6),L=mm_cols(ctx,MM_TL.cols,MM_TL.rows),Cc=mm_cols(ctx,MM_TC.cols,MM_TC.rows),wL=L[L.length-1].x+L[L.length-1].w,wC=Cc[Cc.length-1].x+Cc[Cc.length-1].w;
-  const X1=930,X2=X1+wL+36,Y1=110,Y2=366,DY=400;
+  const X1=800,X2=X1+wL+18,Y1=100,Y2=340,DY=400;
   withA(ctx,tA,()=>{table(ctx,X1,Y1,"learners",MM_TL.cols,MM_TL.rows,{col:[150,225,255]});table(ctx,X2,Y1,"credentials",MM_TC.cols,MM_TC.rows,{col:[150,225,255]});table(ctx,X1,Y2,"certificates",MM_TG.cols,MM_TG.rows,{col:[150,225,255]});});
   // Genie looks through them: a beam to each table, and a scan across the columns
   [[X1+wL/2,Y1+100],[X2+wC/2,Y1+100],[X1+160,Y2+80]].forEach(([x,y],i)=>{const a=fin(t,cF+0.3+i*0.35,0.4)*(1-fin(t,cW+0.5,0.8));if(a<=0)return;withA(ctx,a*0.8,()=>{ctx.save();ctx.setLineDash([5,9]);ctx.strokeStyle=rgba(MM_GEN,0.55);ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(gx+30,gy);ctx.lineTo(x,y);ctx.stroke();ctx.restore();
     const u=((t-cF)*0.7+i*0.33)%1;glow(ctx,lerp(gx+30,x,u),lerp(gy,y,u),16,MM_GEN,0.7);});});
   const sc_=clamp((t-cF-1.2)/3.8,0,1);if(sc_>0&&sc_<1){const sx=X2+wC*sc_;withA(ctx,0.8,()=>{ctx.save();ctx.globalCompositeOperation="lighter";const g=ctx.createLinearGradient(sx-40,0,sx,0);g.addColorStop(0,"rgba(120,200,255,0)");g.addColorStop(1,"rgba(120,200,255,0.35)");ctx.fillStyle=g;ctx.fillRect(sx-40,Y1+50,40,166);ctx.restore();});}
-  [[2,cF+3.0],[3,cF+4.7]].forEach(([k,t0])=>{const a=fin(t,t0,0.4);if(a<=0)return;const col=Cc[k],x=X2+col.x+2,hi=pulseAt(t,t0,1.4);withA(ctx,a,()=>{glow(ctx,x+col.w/2,Y1+140,90,CYAN,0.25+0.3*hi);ctx.save();ctx.strokeStyle=rgba(CYAN,1);ctx.lineWidth=2.4+2*hi;ctx.shadowColor=rgba(CYAN,0.9);ctx.shadowBlur=14;rr(ctx,x,Y1+50,col.w-4,166,8);ctx.stroke();ctx.restore();});});
+  [[2,cF+3.0],[3,cF+4.7]].forEach(([k,t0])=>{const a=fin(t,t0,0.4);if(a<=0)return;const col=Cc[k],x=X2+col.x+2,hi=pulseAt(t,t0,1.4);withA(ctx,a,()=>{glow(ctx,x+col.w/2,Y1+140,90,CYAN,0.25+0.3*hi);const tb=Math.max(46,Math.max(18,phMin(ctx))*1.65);ctx.save();ctx.strokeStyle=rgba(CYAN,1);ctx.lineWidth=2.4+2*hi;ctx.shadowColor=rgba(CYAN,0.9);ctx.shadowBlur=14;rr(ctx,x,Y1+tb+4,col.w-4,Math.max(40,Math.max(16,phMin(ctx))*1.45)*4-8,8);ctx.stroke();ctx.restore();});});
   // the rules live in a document no tool can read
   const dA=fin(t,cW+2.0,0.6),grey=fin(t,cW+3.3,0.8),inv=fin(t,cR+2.9,0.6);
   mm_doc(ctx,1330,DY,440,420,{a:dA,grey});
@@ -103,17 +103,18 @@ scene("guesses",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   withA(ctx,fin(t,cW+5.6,0.5),()=>numCard(ctx,910,640,380,"Registrar's list","132","by the stacking policy",GOOD));
   // what it can read, and what it can't
   const bA=fin(t,cR+0.2,0.7);if(bA>0)withA(ctx,bA,()=>{const xr=X2+wC+18;ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(MM_GEN,0.85);ctx.lineWidth=2.2;ctx.shadowColor=rgba(MM_GEN,0.6);ctx.shadowBlur=10;
-    ctx.beginPath();ctx.moveTo(912,92);ctx.lineTo(xr,92);ctx.lineTo(xr,344);ctx.lineTo(1300,344);ctx.lineTo(1300,572);ctx.lineTo(912,572);ctx.closePath();ctx.stroke();ctx.restore();tag(ctx,912,70,"what Genie can read",MM_GEN,{size:18});});
+    ctx.beginPath();ctx.moveTo(782,84);ctx.lineTo(xr,84);ctx.lineTo(xr,326);ctx.lineTo(1318,326);ctx.lineTo(1318,528);ctx.lineTo(782,528);ctx.closePath();ctx.stroke();ctx.restore();tag(ctx,782,60,"what Genie can read",MM_GEN,{size:18});});
   vign(ctx,S);});
 
 /* ---------- 3. Four ways to write meaning down ---------- */
 scene("four",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,S);bg2(ctx);
   const cG=c("gloss"),cT=c("tax"),cO=c("onto"),cSm=c("sem"),cK=c("stack"),litT=[cG+4.1,cT+0.1,cO+0.1,cSm+0.2],dur=[1.6,1.8,3.9,1.6];
   const br=k=>t>B?pulseAt(t,B+0.2+k*0.65,1.3):0;
-  const an=mm_stack(ctx,t,{a:[0,1,2,3].map(k=>fin(t,cG+0.3+k*0.3,0.6)),lit:litT.map(x=>fin(t,x,0.6)),ca:litT.map((x,k)=>clamp((t-x-0.2)/dur[k],0,1)),qa:litT.map(x=>fin(t,x+1.3,0.6)),
+  ctx.save();const z=focus(ctx,t,[[0,960,540,1],[litT[0]-0.6,790,mm_fy(0)+70,1.57],[cT-0.3,790,mm_fy(1)+70,1.57],[cO-0.3,790,mm_fy(2)+70,1.57],[cSm-0.3,790,mm_fy(3)+70,1.57],[cK-0.2,960,540,1]],1.3);
+  const an=mm_stack(ctx,t,{decoContent:z<1.5,a:[0,1,2,3].map(k=>fin(t,cG+0.3+k*0.3,0.6)),lit:litT.map(x=>fin(t,x,0.6)),ca:litT.map((x,k)=>clamp((t-x-0.2)/dur[k],0,1)),qa:litT.map(x=>fin(t,Math.max(x+1.3,cK+0.6),0.6)),
     hi:litT.map((x,k)=>Math.max(pulseAt(t,x,2.6),pulseAt(t,cK+1.4,1.6),br(k))),mh:[0,1,2,3].map(k=>fin(t,cK+0.3,0.6))});
-  withA(ctx,fin(t,cT+2.4,0.5),()=>T(ctx,"like Linnaeus's",202,mm_fy(1)+125,{w:600,size:18,color:rgba(PARCH,0.9)}));
-  mm_thread(ctx,an,clamp((t-cK-0.3)/1.4,0,1),t,[236,243,255]);
+  withA(ctx,fin(t,cT+2.4,0.5)*(1-fin(t,cO-0.4,0.5)),()=>T(ctx,"like Linnaeus's",202,mm_fy(1)+130,{w:600,size:18,color:rgba(PARCH,0.9)}));
+  mm_thread(ctx,an,clamp((t-cK-0.3)/1.4,0,1),t,[236,243,255]);ctx.restore();
   withA(ctx,fin(t,cK+0.1,0.6),()=>tag(ctx,960,64,"a stack, not rivals",[236,243,255],{align:"center",size:22}));
   vign(ctx,S);});
 
@@ -142,12 +143,12 @@ scene("ontology",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx)
     const u1=fin(t,cA+1.8,0.6),u2=fin(t,cA+3.1,0.6);ctx.save();ctx.lineWidth=4;ctx.strokeStyle="rgba(40,90,200,0.85)";ctx.beginPath();ctx.moveTo(214,382);ctx.lineTo(214+tw(ctx,"a credential",30,600)*u1,382);ctx.stroke();
     ctx.strokeStyle="rgba(200,110,20,0.85)";ctx.beginPath();ctx.moveTo(214,458);ctx.lineTo(214+tw(ctx,"small, with its learning assessed,",30,600)*u2,458);ctx.moveTo(214,512);ctx.lineTo(214+tw(ctx,"that can count towards an award.",30,600)*u2,512);ctx.stroke();ctx.restore();
     withA(ctx,u1,()=>T(ctx,"the kind of thing",620,372,{w:700,size:19,color:"rgba(40,90,200,0.95)"}));withA(ctx,u2,()=>T(ctx,"what sets it apart",214,570,{w:700,size:19,color:"rgba(200,110,20,0.95)"}));ctx.restore();
-    const fA=fin(t,cA+2.2,0.6);withA(ctx,fA,()=>{glass(ctx,1030,160,730,540,20,MM_ONT,{glow:18,ea:0.85,fill:"rgba(12,8,26,0.95)"});T(ctx,"in the ontology",1066,214,{w:700,size:22,color:rgba(MM_ONT,1)});
+    const fA=fin(t,cA+2.2,0.6);withA(ctx,fA,()=>{glass(ctx,980,160,900,540,20,MM_ONT,{glow:18,ea:0.85,fill:"rgba(12,8,26,0.95)"});T(ctx,"in the ontology",1016,214,{w:700,size:22,color:rgba(MM_ONT,1)});
       // the kind in blue, what sets it apart in amber, as on the sheet; the limit belongs to the certificate, which accepts the microcredentials
       const AP=[255,190,120],fl=[["Microcredential","",0],["  subClassOf    ","Credential",[120,170,255]],["  assessed      ","true",AP],["  volume        ","less than an award",AP],["  countsTowards ","Graduate certificate",AP],["Graduate certificate","",0],["  accepts       ","max 4 approved Microcredential",[236,226,255]]];
-      fl.forEach(([a,b,col],i)=>{const q=clamp((t-cA-2.4-i*0.3)/0.5,0,1);if(q<=0)return;withA(ctx,q,()=>{T(ctx,a,1066,288+i*56,{f:"mono",w:500,size:23,color:rgba(b?SOFT:MM_ONT,1)});if(b)T(ctx,b,1066+tw(ctx,a,23,500,"mono"),288+i*56,{f:"mono",w:500,size:23,color:rgba(col,1)});});});});
-    const ar=fin(t,cA+3.6,0.6);arrowTo(ctx,890,430,1020,430,MM_ONT,ar,{p:ar,head:14});withA(ctx,ar,()=>T(ctx,"made formal",955,408,{w:700,size:17,align:"center",color:rgba(MM_ONT,1)}));
-    withA(ctx,fin(t,cA+4.3,0.6),()=>tag(ctx,1395,752,"a form a machine can use",MM_ONT,{align:"center",size:20}));});
+      fl.forEach(([a,b,col],i)=>{const q=clamp((t-cA-2.4-i*0.3)/0.5,0,1);if(q<=0)return;withA(ctx,q,()=>{T(ctx,a,1016,288+i*56,{f:"mono",w:500,size:23,color:rgba(b?SOFT:MM_ONT,1)});if(b)T(ctx,b,1016+tw(ctx,a,Math.max(23,phMin(ctx)),500,"mono"),288+i*56,{f:"mono",w:500,size:23,color:rgba(col,1)});});});});
+    const ar=fin(t,cA+3.6,0.6);arrowTo(ctx,890,430,972,430,MM_ONT,ar,{p:ar,head:14});withA(ctx,ar,()=>T(ctx,"made formal",932,384,{w:700,size:17,align:"center",color:rgba(MM_ONT,1)}));
+    withA(ctx,fin(t,cA+4.3,0.6),()=>tag(ctx,1430,752,"a form a machine can use",MM_ONT,{align:"center",size:20}));});
   vign(ctx,S);});
 
 /* ---------- 5. The semantic layer ---------- */
@@ -160,13 +161,13 @@ scene("semantic",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx)
   mm_dash(ctx,110,170,400,250,ask(0)>0.5?"11,890":"12,140",ask(0)>0.5?[39,124,67]:[200,45,76],{a:fin(t,cT-0.2,0.5),old:"own SQL: 12,140",oldA:old(0)});
   mm_xls(ctx,110,480,400,220,ask(1)>0.5?"11,890":"11,702",ask(1)>0.5?[39,124,67]:[200,45,76],{a:fin(t,cT+0.4,0.5),old:"own formula: 11,702",oldA:old(1)});
   const gA=fin(t,cT+1.1,0.5);mm_genie(ctx,1590,290,t,{a:gA});withA(ctx,gA,()=>{bubble(ctx,1420,470,380,(ask(2)>0.5?"11,890":"12,960")+" credentials",ask(2)>0.5?GOOD:BAD,{size:26});
-    withA(ctx,old(2),()=>{const s="own guess: 12,960";T(ctx,s,1446,600,{f:"mono",w:500,size:15,color:rgba(BAD,1)});ctx.strokeStyle=rgba(BAD,1);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(1442,595);ctx.lineTo(1450+tw(ctx,s,15,500,"mono"),595);ctx.stroke();});});
+    withA(ctx,old(2),()=>{const s="own guess: 12,960",gs=Math.max(15,phMin(ctx));T(ctx,s,1446,606,{f:"mono",w:500,size:15,color:rgba(BAD,1)});ctx.strokeStyle=rgba(BAD,1);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(1442,606-gs*0.3);ctx.lineTo(1450+tw(ctx,s,gs,500,"mono"),606-gs*0.3);ctx.stroke();});});
   [[510,295,mx,300],[510,590,mx,470],[1440,330,mx+mw,300]].forEach(([x0,y0,x1,y1],k)=>{const p=ask(k);if(p>0)arrowTo(ctx,x0+(k===2?0:10),y0,x1+(k===2?10:-10),y1,MM_SEM,0.9,{p,head:14,bend:k===1?0.1:-0.05});});
   withA(ctx,fin(t,cT+2.6,0.6),()=>T(ctx,"one definition, every tool",960,122,{w:700,size:22,align:"center",color:rgba(MM_SEM,1)}));
   // open formats: the definition itself, shared between tools
-  const oA=fin(t,cP+0.2,0.7),dy=lerp(-120,0,ease(oA));withA(ctx,oA,()=>{const x=740,y=654+dy;glass(ctx,x,y,440,186,14,MM_SEM,{glow:14,ea:0.8,fill:"rgba(6,14,30,0.96)"});T(ctx,"credentials_awarded · definition",x+22,y+36,{f:"mono",w:500,size:16,color:rgba(MM_SEM,1)});
-    ["measure  count(credential)","exclude  revoked","time     awarded_on · academic year","grain    one credential awarded"].forEach((s,i)=>T(ctx,s,x+22,y+74+i*28,{f:"mono",w:500,size:16,color:rgba(INK,0.9)}));});
-  withA(ctx,fin(t,cP+1.6,0.6),()=>tag(ctx,1210,748,"open formats are appearing",MM_SEM,{size:20}));
+  const oA=fin(t,cP+0.2,0.7),dy=lerp(-120,0,ease(oA));withA(ctx,oA,()=>{const x=600,y=640+dy,lh=Math.max(28,phMin(ctx)*1.3);glass(ctx,x,y,640,58+lh*4,14,MM_SEM,{glow:14,ea:0.8,fill:"rgba(6,14,30,0.96)"});T(ctx,"credentials_awarded · definition",x+22,y+36,{f:"mono",w:500,size:16,color:rgba(MM_SEM,1)});
+    ["measure  count(credential)","exclude  revoked","time     awarded_on · academic year","grain    one credential awarded"].forEach((s,i)=>T(ctx,s,x+22,y+40+lh*(i+1),{f:"mono",w:500,size:16,color:rgba(INK,0.9)}));});
+  withA(ctx,fin(t,cP+1.6,0.6),()=>tag(ctx,1270,748,"open formats are appearing",MM_SEM,{size:20}));
   vign(ctx,S);});
 
 /* ---------- 6. Standards ---------- */
@@ -181,8 +182,8 @@ scene("standards",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx
       const hl={issuer:fin(t,cC+2.7,0.4),holder:fin(t,cC+3.2,0.4),evidence:fin(t,cC+3.8,0.4)};mm_vc(ctx,860,470,760,{a:fin(t,cC+0.6,0.5),hl,rh:50,sub:"what the standards name",vals:{issuer:"the university",holder:"Aisha K.",claim:"Data Visualisation",evidence:"assessed project",status:"valid"}});});});
   // three official definitions of one word
   if(o3>0)withA(ctx,o3*(1-oH),()=>{withA(ctx,fin(t,cT+0.2,0.6),()=>{T(ctx,"“microcredential”: three official definitions",960,112,{w:700,size:26,align:"center",color:rgba(INK,0.95)});});
-    MM_DEFS.forEach((d,i)=>mm_def(ctx,130+i*570,150,520,430,d,{a:fin(t,cT+0.5+i*0.25,0.6),hA:fin(t,cT+[2.4,3.6,4.7][i],0.5),p:clamp((t-cT-[2.6,3.8,4.9][i])/1.0,0,1),diff:fin(t,cT+5.8,0.6),same:fin(t,cT+6.6,0.6)}));
-    withA(ctx,fin(t,cT+6.2,0.6),()=>tag(ctx,960,640,"same word, different edges",EXT,{align:"center",size:22}));});
+    MM_DEFS.forEach((d,i)=>mm_def(ctx,50+i*614,150,590,500,d,{rh:96,a:fin(t,cT+0.5+i*0.25,0.6),hA:fin(t,cT+[2.4,3.6,4.7][i],0.5),p:clamp((t-cT-[2.6,3.8,4.9][i])/1.0,0,1),diff:fin(t,cT+5.8,0.6),same:fin(t,cT+6.6,0.6)}));
+    withA(ctx,fin(t,cT+6.2,0.6),()=>tag(ctx,960,700,"same word, different edges",EXT,{align:"center",size:22}));});
   // choose deliberately: check, adopt, extend, record, at every layer
   if(oH>0)withA(ctx,oH,()=>{const steps=[["1  Check",REF,1.1],["2  Adopt",ADOPT,1.7],["3  Extend",EXT,2.2],["4  Record",[236,243,255],2.7]];
     steps.forEach(([s,col,d],i)=>withA(ctx,fin(t,cH+d,0.4),()=>{const x=510+i*300,hi=pulseAt(t,cH+d,1.4);glow(ctx,x,170,80,col,0.25+0.4*hi);tag(ctx,x,170,s,col,{align:"center",size:24});}));

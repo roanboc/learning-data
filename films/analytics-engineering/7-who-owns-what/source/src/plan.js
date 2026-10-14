@@ -24,7 +24,7 @@ const WO_INKP="rgba(58,40,26,0.9)";   // iron-gall ink on paper
 // a file card with the label that says where it runs; lines type out as p goes 0..1. o.lit {i:0..1} highlights lines,
 // o.lineCol {i:colour} colours a line, o.glow {i:0..1} makes a line glow, o.label overrides the label ("" for none).
 function wo_code(ctx,x,y,w,name,lines,o){o=o||{};const a=o.a==null?1:o.a,sz=o.size||19,lh=o.lh||Math.round(sz*1.5),col=o.edge||[170,205,255];
-  const lab=o.label===undefined?WO_DUCK:o.label,cloud=lab===WO_CLOUD,lc=cloud?WO_AMB:WEED,nw=tw(ctx,name,18,500,"mono"),lw=lab?tw(ctx,lab,18,700)+28:0,two=!!lab&&nw+lw+64>w,hh=two?88:56,h=o.h||(hh+18+lines.length*lh);
+  const lab=o.label===undefined?WO_DUCK:o.label,cloud=lab===WO_CLOUD,lc=cloud?WO_AMB:WEED,ls=phSz(ctx,18),nw=tw(ctx,name,ls,500,"mono"),lw=lab?tw(ctx,lab,ls,700)+28:0,two=!!lab&&nw+lw+64>w,hh=two?88:56,h=o.h||(hh+18+lines.length*lh);
   if(a<=0.01)return h;
   withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,col,{glow:12+10*(o.hi||0),ea:0.65,fill:"rgba(6,10,20,0.95)"});
     if(cloud){ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(WO_AMB,0.75);ctx.lineWidth=2;rr(ctx,x-7,y-7,w+14,h+14,18);ctx.stroke();ctx.restore();}
@@ -191,7 +191,7 @@ const WO_PROD=[["grain","One row per learner per version"],["owner","Mei Tanaka,
 function wo_product(ctx,x,y,w,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const on=o.on||[],rh=o.rh||60,h=116+rh*WO_PROD.length;withA(ctx,a,()=>{
   wo_coreCard(ctx,x,y,w,h,{name:"core_learner",sub:"a data product",hi:o.hi});
   WO_PROD.forEach(([k,v],i)=>{const q=on[i]||0,yy=y+140+i*rh;withA(ctx,0.32+0.68*q,()=>{if(q>0)withA(ctx,q,()=>{ctx.fillStyle=rgba(TRUST,0.07);rr(ctx,x+16,yy-rh*0.62,w-32,rh*0.9,8);ctx.fill();});
-    T(ctx,k,x+30,yy,{w:700,size:20,color:rgba(SOFT,1)});const vx=x+220,col=k==="domain"?WO_REG:INK;
+    T(ctx,k,x+30,yy,{w:700,size:20,color:rgba(SOFT,1)});const vx=Math.max(x+220,x+30+tw(ctx,"glossary term",phSz(ctx,20),700)+24),col=k==="domain"?WO_REG:INK;
     if(k==="contract"){wo_latch(ctx,vx+14,yy-8,0.9,o.latch||0);T(ctx,v,vx+42,yy,{w:700,size:22,color:rgba(GOOD,q)});}
     else if(k==="version"){tag(ctx,vx,yy-8,v,TRUST,{size:20});}
     else T(ctx,v,vx,yy,{f:k==="docs"?"mono":undefined,w:k==="docs"?500:700,size:k==="docs"?19:22,color:rgba(col,1)});});});});
@@ -248,7 +248,7 @@ function wo_bar(ctx,x,y,an,a,s){if(a<=0.01)return;s=s||1;withA(ctx,a,()=>{ctx.sa
 // a table in the catalogue, with a door on its front: open (0..1); o.readers lists who may read
 function wo_table(ctx,x,y,w,h,name,col,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{
   glass(ctx,x,y,w,h,12,col,{glow:8,ea:0.6,fill:"rgba(8,14,26,0.95)"});for(let r=0;r<4;r++){ctx.fillStyle=rgba(col,0.14+0.04*r);rr(ctx,x+16,y+54+r*22,w-150,10,3);ctx.fill();}
-  T(ctx,name,x+16,y+34,{f:"mono",w:500,size:18,color:rgba(col,1)});
+  phAsDeco(tw(ctx,name,phSz(ctx,18),500,"mono")>w-120,()=>T(ctx,name,x+16,y+34,{f:"mono",w:500,size:18,color:rgba(col,1)}));
   // the door: a frame, a panel that swings open, and a lock
   const dx=x+w-104,dy=y+h-112,dw=72,dh=96,op=ease(clamp(o.open||0,0,1));ctx.fillStyle="rgba(255,236,190,"+(0.1+0.5*op)+")";ctx.fillRect(dx,dy,dw,dh);
   if(op>0){const g=ctx.createRadialGradient(dx+dw/2,dy+dh/2,4,dx+dw/2,dy+dh/2,dw*1.4);g.addColorStop(0,"rgba(255,230,170,"+(0.35*op)+")");g.addColorStop(1,"rgba(255,230,170,0)");ctx.fillStyle=g;ctx.fillRect(dx-dw,dy-dh/2,dw*3,dh*2);}
@@ -453,3 +453,7 @@ function wo_q_pin(c,w,h,st,L){const V=L.vis;c.save();wo_fit(c,w,h,600,320);
   wo_proj(c,320,100,272,150,"planning",WO_PLN,{dash:true});["ref('credentials',","  'core_learner',","  v=1)"].forEach((s,i)=>T(c,s,336,156+i*32,{f:"mono",w:500,size:22,color:rgba(INK,1)}));
   arrowTo(c,318,130,292,48,TRUST,1,{head:12,lw:3,bend:0.1});wo_q_mark(c,456,304);c.restore();}
 Object.assign(LV,{wo_l_access,wo_l_domains,wo_l_read,wo_l_shared,wo_q_copy,wo_q_private,wo_q_read,wo_q_hash,wo_q_five,wo_q_edit,wo_q_move,wo_q_pin});
+
+/* ---------- on a phone ----------
+   The film's code cards are drawn at sizes that read, their long lines wrapped (../../../from-words-to-data/shared/src/phone.js) */
+wo_code=phCode(wo_code,{size:19,lh:s=>Math.round(s*1.5),head:(o,ctx,w,name)=>{const lab=o.label===undefined?WO_DUCK:o.label,ls=phSz(ctx,18);return(!!lab&&tw(ctx,name,ls,500,"mono")+tw(ctx,lab,ls,700)+28+64>w?88:56)+18;},label:o=>o.label===undefined?WO_DUCK:o.label});

@@ -9,15 +9,19 @@ const bw_label=(ctx,t,s,col)=>withA(ctx,fin(t,0.2,0.6),()=>tag(ctx,110,66,s,col,
 scene("ledger",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");histBg(ctx,S,t);
   const tp=fin(t,c("today")-0.3,1.2),cJ=c("journal"),cP=c("post"),cT=c("two");
   const postT=q=>cP+0.7+q.i*1.1+q.side*0.18;
-  if(tp<1)withA(ctx,1-tp,()=>{bw_venice(ctx,830,0.55,t);
-    yearTag(ctx,110,96,"1494 · Venice",CLAY,fin(t,0.3,0.6));
+  if(tp<1)withA(ctx,1-tp,()=>{
+    // the camera moves in on the journal as it's written, then on the ledger as it's posted, and pulls back for the two shapes:
+    // seen from afar, the books' entries are context, and their words are texture
+    ctx.save();const z=focus(ctx,t,[[0,960,540,1],[cJ-0.6,410,470,1.45],[cP-0.4,1290,470,1.45],[cT-0.2,960,500,1]],1.4),far=z<1.4;
+    bw_venice(ctx,830,0.55,t);
     const pm=fin(t,cJ-0.6,1.2);bw_plate(ctx,lerp(960,1305,pm),lerp(470,96,pm),"Summa de arithmetica","Luca Pacioli · Venice, 1494",fin(t,c("venice")+0.3,0.8),lerp(1.3,0.8,pm),t);
     // the journal: every transaction, as it happened, one after another
+    BW_DECO=far;
     const jA=fin(t,cJ-0.4,0.8);bw_book(ctx,BW_JX,BW_JY,BW_JW,BW_JH,{a:jA,t,title:"Journal",top:100,lh:37,margin:84});
     let qx=null,qy=null;
     withA(ctx,jA,()=>BW_J.forEach((e,i)=>{const t0=cJ+0.4+i*1.0,p=clamp((t-t0)/0.8,0,1);if(p<=0)return;const y=bw_entryY(i),p1=clamp(p/0.62,0,1),p2=clamp((p-0.62)/0.2,0,1),p3=clamp((p-0.8)/0.2,0,1);
       const bl=bw_fresh(t,t0,0.8);
-      bw_ink(ctx,e[0],BW_JX+12,y,{size:19,w:700,color:"rgba(120,50,30,0.9)",p:p1,bleed:bl});bw_ink(ctx,e[1],BW_JX+98,y,{size:26,p:p1,bleed:bl});
+      bw_ink(ctx,e[0],BW_JX+12,y,{size:phSz(ctx,19),w:700,color:"rgba(120,50,30,0.9)",p:p1,bleed:bl});bw_ink(ctx,e[1],BW_JX+98,y,{size:26,p:p1,bleed:bl});
       bw_ink(ctx,e[2]+" ducats",BW_JX+BW_JW-22,y,{size:26,w:800,align:"right",p:p2,bleed:bl});bw_ink(ctx,"debit "+e[3]+" · credit "+e[4],BW_JX+98,y+38,{size:20,color:"rgba(90,60,36,0.85)",p:p3,bleed:bl});
       if(p<1){qx=p1<1?BW_JX+98+bw_inkW(ctx,typeOn(e[1],p1),26):BW_JX+BW_JW-40;qy=y;}
       const last=Math.max(...BW_POST.filter(q=>q.i===i).map(postT))+0.8;withA(ctx,fin(t,last,0.3),()=>T(ctx,"✓",BW_JX+BW_JW-18,y+38,{w:800,size:24,align:"right",color:"rgba(40,110,60,0.95)"}));}));
@@ -39,15 +43,16 @@ scene("ledger",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");histBg(ctx,S,
       // the balance: every debit has its credit, so the two sides must match
       const bA=fin(t,cT+0.2,0.6);if(bA>0)withA(ctx,bA,()=>{const x=BW_ACC.Cash.x,y=BW_LY+410,dS=150-(miss>0.5?5:0),ok=dS===150;
         ctx.strokeStyle="rgba(110,70,40,0.5)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x,y-44);ctx.lineTo(x+460,y-44);ctx.stroke();
-        bw_ink(ctx,"all debits",x+10,y,{size:24});bw_ink(ctx,String(dS),x+250,y,{size:28,w:800,align:"right",color:ok?undefined:"rgba(190,40,30,0.95)"});
-        bw_ink(ctx,"all credits",x+10,y+48,{size:24});bw_ink(ctx,"150",x+250,y+48,{size:28,w:800,align:"right"});
+        bw_ink(ctx,"all debits",x+10,y,{size:28,keep:1});bw_ink(ctx,String(dS),x+250,y,{size:30,w:800,align:"right",keep:1,color:ok?undefined:"rgba(190,40,30,0.95)"});
+        bw_ink(ctx,"all credits",x+10,y+48,{size:28,keep:1});bw_ink(ctx,"150",x+250,y+48,{size:30,w:800,align:"right",keep:1});
         const cx=x+370,cy=y+14,col=ok?[40,130,70]:[200,50,40];ctx.fillStyle="rgba(244,232,206,0.95)";ctx.beginPath();ctx.arc(cx,cy,34,0,TAU);ctx.fill();ring(ctx,cx,cy,34,col,1,3);
         if(ok)tick_(ctx,cx,cy+1,40,col,1);else cross_(ctx,cx,cy,38,col,1);T(ctx,ok?"balanced":"doesn't balance",cx,cy+68,{w:800,size:21,align:"center",color:rgba(col,1)});});});
     // the correction, with the quill
     const fx=fin(t,cT+6.6,0.4)*(1-fin(t,cT+7.8,0.5));if(fx>0){const C=bw_cell("Cash",0,1);bw_quill(ctx,C.r-8,C.y-4,0.85,fx,t);}
     // two shapes for one set of facts
     withA(ctx,fin(t,cT+2.0,0.5),()=>{tag(ctx,BW_JX+BW_JW/2,BW_JY+BW_JH+46,"one shape for writing",BW_W,{align:"center",size:26});T(ctx,"in time order, as it happens",BW_JX+BW_JW/2,BW_JY+BW_JH+96,{w:600,size:22,align:"center",color:rgba(PARCH,0.9)});});
-    withA(ctx,fin(t,cT+3.2,0.5),()=>{tag(ctx,BW_LX+BW_LW/2,BW_JY+BW_JH+46,"one shape for reading",BW_R,{align:"center",size:26});T(ctx,"by account, where it's read and balanced",BW_LX+BW_LW/2,BW_JY+BW_JH+96,{w:600,size:22,align:"center",color:rgba(PARCH,0.9)});});});
+    withA(ctx,fin(t,cT+3.2,0.5),()=>{tag(ctx,BW_LX+BW_LW/2,BW_JY+BW_JH+46,"one shape for reading",BW_R,{align:"center",size:26});T(ctx,"by account, where it's read and balanced",BW_LX+BW_LW/2,BW_JY+BW_JH+96,{w:600,size:22,align:"center",color:rgba(PARCH,0.9)});});
+    BW_DECO=false;ctx.restore();yearTag(ctx,110,96,"1494 · Venice",CLAY,fin(t,0.3,0.6));});
   // five centuries later: graduation day, and planning day
   if(tp>0)withA(ctx,tp,()=>{bg2(ctx);const cy=c("today");
     const gA=fin(t,cy+0.6,0.6),pA=fin(t,cy+1.4,0.6);
@@ -75,13 +80,15 @@ scene("write",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const cO=c("once"),cK=c("keys"),cA=c("all"),cN=c("name");
   bw_label(ctx,t,"built to write",BW_W);
   // the tables, which move up to make room for the transaction, and fade back behind it
-  const g=fin(t,cA-0.2,1.2),k=lerp(1,0.55,g);ctx.save();ctx.translate(960,lerp(150,96,g));ctx.scale(k,k);ctx.translate(-960,-150);ctx.globalAlpha*=1-0.72*fin(t,cA+0.3,0.6);
+  // their words keep the size that reads at full size (m0), and once they shrink into the background they're context: decoration
+  const g=fin(t,cA-0.2,1.2),k=lerp(1,0.55,g),m0=phMin(ctx);ctx.save();ctx.translate(960,lerp(150,96,g));ctx.scale(k,k);ctx.translate(-960,-150);ctx.globalAlpha*=1-0.72*fin(t,cA+0.3,0.6);
+  const back=g>0.01;if(back)PH_OFF++;
   const nameHi=fin(t,cO+3.4,0.5)*(1-fin(t,cK-0.4,0.8)),keyP=pulseAt(t,cK+0.4,1.6),fkA=fin(t,cK+2.4,0.5),relP=clamp((t-cK-2.5)/1.0,0,1);
   const kA=0.55+0.45*fin(t,cK,0.4);
-  const Lg=bw_tbl(ctx,110,150,Object.assign({a:fin(t,cO+0.2,0.6),keyA:kA,hi:keyP*0.5,cell:(j,i)=>j===0&&i===1&&nameHi>0.01?{hi:nameHi,col:mix(INK,BW_W,nameHi)}:null},BW_LEARN));
-  const Cg=bw_tbl(ctx,1300,150,Object.assign({a:fin(t,cO+0.6,0.6),keyA:kA,hi:keyP*0.5},BW_COURSE));
+  const Lg=bw_tbl(ctx,110,150,Object.assign({ph:m0,a:fin(t,cO+0.2,0.6),keyA:kA,hi:keyP*0.5,cell:(j,i)=>j===0&&i===1&&nameHi>0.01?{hi:nameHi,col:mix(INK,BW_W,nameHi)}:null},BW_LEARN));
+  const Cg=bw_tbl(ctx,1260,150,Object.assign({ph:m0,a:fin(t,cO+0.6,0.6),keyA:kA,hi:keyP*0.5},BW_COURSE));
   const rej=fin(t,cK+4.6,0.4)*(1-fin(t,cK+6.8,0.6)),bad=fin(t,cK+5.6,0.3);
-  const Ag=bw_tbl(ctx,620,500,Object.assign({a:fin(t,cO+1.0,0.6),keyA:kA,fkA:0.3+0.7*fkA,hi:keyP*0.5,rowA:j=>fin(t,cO+1.2+j*0.25,0.4),
+  const Ag=bw_tbl(ctx,620,500,Object.assign({ph:m0,a:fin(t,cO+1.0,0.6),keyA:kA,fkA:0.3+0.7*fkA,hi:keyP*0.5,rowA:j=>fin(t,cO+1.2+j*0.25,0.4),
     cell:(j,i)=>i===1&&j<2&&nameHi>0.01?{hi:nameHi,col:mix(INK,BW_W,nameHi)}:null},BW_AWARD));
   // each award points to one learner, and to one course
   bw_rel(ctx,Lg.colX(0),Lg.y+Lg.h,Ag.colX(1),Ag.y,BW_W,fkA,{p:relP,ym:440});
@@ -91,13 +98,13 @@ scene("write",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     tag(ctx,Lg.colX(1),112,"stored once",BW_W,{align:"center",size:24});});
     withA(ctx,nameHi*fin(t,cO+5.0,0.5),()=>tag(ctx,Ag.x+Ag.w+24,Ag.rowY(1),"not on every award",BW_W,{size:24}));}
   // keys and a rule the data must meet
-  withA(ctx,fin(t,cK+0.4,0.5)*(1-fin(t,cA-0.4,0.6)),()=>tag(ctx,1000,240,"a key identifies each row",REF,{align:"center",size:24}));
-  withA(ctx,fin(t,cK+2.4,0.5)*(1-fin(t,cA-0.4,0.6)),()=>tag(ctx,1000,300,"rules the data must meet",BW_W,{align:"center",size:24}));
+  withA(ctx,fin(t,cK+0.4,0.5)*(1-fin(t,cA-0.4,0.6)),()=>tag(ctx,1050,240,"a key identifies each row",REF,{align:"center",size:24}));
+  withA(ctx,fin(t,cK+2.4,0.5)*(1-fin(t,cA-0.4,0.6)),()=>tag(ctx,1050,300,"rules the data must meet",BW_W,{align:"center",size:24}));
   if(rej>0.01){const y=Ag.y+Ag.h+14+(1-ease(fin(t,cK+4.6,0.5)))*30+ease(fin(t,cK+6.8,0.6))*40;withA(ctx,rej,()=>{const bc=bad>0.5?BAD:BW_W;
     glass(ctx,Ag.x,y,Ag.w,52,10,bc,{glow:10,ea:0.01,fill:"rgba(7,12,24,0.95)"});ctx.save();ctx.setLineDash([8,6]);ctx.strokeStyle=rgba(bc,0.9);ctx.lineWidth=2;rr(ctx,Ag.x,y,Ag.w,52,10);ctx.stroke();ctx.restore();
     ["A-9009","L-999","MC-ML","2026-09-28"].forEach((v,i)=>T(ctx,v,Ag.cx[i]+14,y+34,{f:"mono",w:500,size:22,color:i===1&&bad>0.5?rgba(BAD,1):rgba(INK,0.8)}));
     if(bad>0.01)withA(ctx,bad,()=>{cross_(ctx,Ag.x+Ag.w+34,y+26,38,BAD,1);tag(ctx,Ag.x+Ag.w+66,y+26,"no learner L-999: rejected",BAD,{size:24});});});}
-  ctx.restore();
+  if(back)PH_OFF--;ctx.restore();
   // a transaction: three writes that all happen, or none do; each writes a different fact, in its own place
   const bx=230,bw=1460,wA=fin(t,cA+0.3,0.6)*(1-0.86*fin(t,cN+0.1,0.6));
   const W3=[[["1 · award","+ row A-9004"],["2 · learner record","enrolment MC-VIS: completed"],["3 · transcript","+ Data visualisation: passed"]],
@@ -105,7 +112,7 @@ scene("write",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const box=(y,label,W,st,res,resCol,a)=>withA(ctx,a,()=>{glass(ctx,bx,y,bw,176,18,BW_W,{glow:8,ea:0.01,fill:"rgba(10,18,36,0.55)"});ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(BW_W,0.75);ctx.lineWidth=2;rr(ctx,bx,y,bw,176,18);ctx.stroke();ctx.restore();
     T(ctx,label,bx+24,y+36,{f:"mono",w:500,size:22,color:rgba(BW_W,1)});
     st.forEach((s,i)=>{if(s)bw_write(ctx,bx+24+i*476,y+56,460,106,W[i][0],W[i][1],s,1);});
-    if(res)withA(ctx,res[1],()=>tag(ctx,bx+bw-18-(tw(ctx,res[0],24,700)+26),y+30,res[0],resCol,{size:24}));});
+    if(res)withA(ctx,res[1],()=>tag(ctx,bx+bw-18-(tw(ctx,res[0],28,700)+26),y+30,res[0],resCol,{size:24}));});
   if(wA>0.01){const a0=cA,s1=[t>a0+2.7?"pend":null,t>a0+3.5?"pend":null,t>a0+4.4?"pend":null].map(s=>s&&t>a0+5.7?"done":s);
     box(452,"transaction · issue award A-9004",W3[0],s1,["commit ✓",fin(t,a0+5.7,0.4)],GOOD,wA);
     const b2=fin(t,a0+6.3,0.5);if(b2>0){const s2=[t>a0+6.6?"pend":null,t>a0+6.9?"pend":null,t>a0+7.3?"fail":null].map((s,i)=>s&&i<2&&t>a0+7.9?"back":s);
@@ -117,8 +124,8 @@ scene("write",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   vign(ctx,S);});
 
 /* ---------- 3. What goes wrong without it ---------- */
-const BW_WIDE={name:"awards · the name on every row",cols:[["award_id","pk"],["learner_name",""],["course_title",""],["credits",""],["awarded_on",""]],
-  rows:[["A-9001","Aisha Karim","BSc Data Science","240","2025-12-10"],["A-9002","Aisha Karim","Machine learning basics","12","2026-05-02"],["A-9004","Aisha Karim","Data visualisation","12","2026-09-28"],["A-9003","Ben Okafor","Data ethics","6","2026-06-20"]]};
+const BW_WIDE={name:"awards · the name on every row",cols:[["award_id","pk"],["learner_name",""],["course_title",""],["credits",""]],
+  rows:[["A-9001","Aisha Karim","BSc Data Science","240"],["A-9002","Aisha Karim","Machine learning basics","12"],["A-9004","Aisha Karim","Data visualisation","12"],["A-9003","Ben Okafor","Data ethics","6"]]};
 scene("wrong",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const c3=c("three"),cC=c("change"),cPr=c("print"),cD=c("delete"),cAn=c("anomaly");
   bw_label(ctx,t,"the name on every award",BW_AMB);
@@ -153,9 +160,9 @@ scene("wrong",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   // each fact once: the name in one place, the course in its own row
   const fx=fin(t,cAn+3.0,0.6);if(fx>0)withA(ctx,fx,()=>{glass(ctx,70,590,1780,248,22,BW_W,{glow:14,ea:0.55,fill:"rgba(10,18,36,0.7)"});tag(ctx,100,626,"each fact once",BW_W,{size:24});
     const L=bw_tbl(ctx,110,662,{cols:[["learner_id","pk"],["name",""]],rows:[["L-204","Aisha Salem"]],cell:(j,i)=>i===1?{hi:fin(t,cAn+3.8,0.5),col:BW_W}:null});
-    for(let i=0;i<3;i++){const x=560+i*150;glass(ctx,x,690,130,54,10,BW_W,{glow:6,ea:0.6,fill:"rgba(8,14,30,0.94)"});T(ctx,"award",x+65,725,{f:"mono",w:500,size:20,align:"center",color:rgba(SOFT,1)});
+    for(let i=0;i<3;i++){const x=610+i*150;glass(ctx,x,690,130,54,10,BW_W,{glow:6,ea:0.6,fill:"rgba(8,14,30,0.94)"});T(ctx,"award",x+65,725,{f:"mono",w:500,size:20,align:"center",color:rgba(SOFT,1)});
       arrowTo(ctx,x+30,690,L.x+L.w-40,L.rowY(0)-10,BW_W,0.75*fin(t,cAn+3.6+i*0.15,0.4),{bend:0.14,head:12,lw:2});}
-    withA(ctx,fin(t,cAn+4.2,0.4),()=>T(ctx,"1 edit, no copy to miss",560,800,{w:700,size:26,color:rgba(GOOD,1)}));
+    withA(ctx,fin(t,cAn+4.2,0.4),()=>T(ctx,"1 edit, no copy to miss",610,800,{w:700,size:26,color:rgba(GOOD,1)}));
     const C=bw_tbl(ctx,1120,662,{cols:[["course_id","pk"],["title",""],["cp",""]],rows:[["MC-ETH","Data ethics","6"]],cell:(j,i)=>({hi:fin(t,cAn+4.6,0.5),col:BW_W})});
     withA(ctx,fin(t,cAn+4.8,0.4),()=>{tick_(ctx,C.x+C.w+40,C.rowY(0),36,GOOD,1);T(ctx,"the course keeps its own row",1120,800,{w:700,size:26,color:rgba(GOOD,1)});});});
   vign(ctx,S);});
@@ -309,8 +316,8 @@ scene("side",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
       cell:(j,i)=>j===1&&i===1?{hi:0.4+0.6*pulseAt(t,cN+1.4,1.2),col:fx>0.5?BW_W:mix(INK,BAD,0.6),hiCol:fx>0.5?BW_W:BAD}:null});
     withA(ctx,fin(t,cN+1.8,0.4),()=>{tick_(ctx,F.x+F.w+40,F.rowY(1),36,GOOD,1);tag(ctx,F.x+F.w/2,F.y+F.h+56,"stored once: 1 edit",GOOD,{align:"center",size:26});});
     const names=["Aisha Salem","Ben Okafor","Chen Wei","Dara Singh","Eli Moreau","Farah Aziz","Gus Lind","Hana Sato"],u0=cN+2.8;
-    const R=bw_tbl(ctx,1030,250,{name:"learner dimension",col:BW_R,cols:[["learner",""],["faculty",""]],rows:names.map(n=>[n,"Enginering"]),size:21,rh:44,
-      cell:(j,i)=>i===1?(t>u0+j*0.3?{text:"Engineering",col:BW_R,hi:pulseAt(t,u0+j*0.3,0.6),hiCol:BW_AMB}:{col:mix(INK,BAD,0.6)}):null});
+    const R=bw_tbl(ctx,1030,250,{name:"learner dimension",col:BW_R,cols:[["learner",""],["faculty",""]],rows:names.map(n=>[n,"Engineering"]),size:21,rh:44,
+      cell:(j,i)=>i===1?(t>u0+j*0.3?{col:BW_R,hi:pulseAt(t,u0+j*0.3,0.6),hiCol:BW_AMB}:{text:"Enginering",col:mix(INK,BAD,0.6)}):null});
     const done=Math.min(4812,Math.floor(clamp((t-u0)/2.6,0,1)*4812));
     withA(ctx,fin(t,u0,0.4),()=>{T(ctx,"… and every other",R.x+R.w+24,R.y+R.h-60,{w:600,size:22,color:rgba(SOFT,1)});T(ctx,"Engineering learner",R.x+R.w+24,R.y+R.h-30,{w:600,size:22,color:rgba(SOFT,1)});
       tag(ctx,1430,806,"repeated on purpose: "+fmtNum(done)+" of 4,812 rows",BW_AMB,{align:"center",size:24});});});

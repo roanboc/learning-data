@@ -4,7 +4,7 @@
 
 Todo empezó con una película. *La vida interior de los datos* se hizo en dos días, el 25 y el 26 de septiembre de 2026, en una sola conversación de trabajo larga entre el autor y Claude, un modelo de IA creado por Anthropic. El autor aportó el encargo, el conocimiento de la plataforma y la mayoría de las objeciones. Claude propuso opciones, verificó datos, escribió el código y renderizó cada cuadro. Las secciones 1 a 10 cuentan esa historia, desde la primera pregunta hasta el sitio publicado.
 
-Después, los comentarios convirtieron una película en cuatro: *A Sharper Sketch*, sobre modelado de datos, y una serie, *Cuando algo sale mal*, con *Cambio silencioso* y *Demasiado bueno para ser verdad*. La sección 11 cuenta qué cambió al hacer más de una, y las lecciones del final cubren las cuatro.
+Después, los comentarios convirtieron una película en cuatro: *A Sharper Sketch*, sobre modelado de datos, y una serie, *Cuando algo sale mal*, con *Cambio silencioso* y *Demasiado bueno para ser verdad*. La sección 11 cuenta qué cambió al hacer más de una. La sección 12 cuenta cómo, con más de veinte películas, cada película hecha antes de *El mapa antes de los datos*, salvo la primera, se rehízo para leerse en un teléfono y sonar más suave. Las lecciones del final las cubren todas.
 
 Empieza con dos películas cortas, en inglés: cómo se dibujan las películas y cómo se hacen.
 
@@ -49,6 +49,7 @@ Empieza con dos películas cortas, en inglés: cómo se dibujan las películas y
 | 9. El segundo corte | 6:17 con narración, música y sonido, sincronizados con la voz | Productos de datos variados, un cerebro, actualizaciones en vivo |
 | 10. La publicación | Un sitio que dibuja la película en vivo, videos renderizados con el mismo código, y esta historia | El sitio, este repositorio y sus releases |
 | 11. Más películas | Un comentario se volvió película, las películas se volvieron serie, y cada revisión se volvió una verificación | *A Sharper Sketch*, *Cambio silencioso*, *Demasiado bueno para ser verdad*, y un sitio organizado por temas |
+| 12. Teléfono y sonido | Cada palabra agrandada para leerse en un teléfono; efectos más suaves, y ritmo donde la historia se tensa | 22 películas rehechas, y reglas nuevas en el manual |
 
 ## 1. El encargo
 
@@ -258,7 +259,32 @@ Con cuatro películas, numerarlas sugeriría un orden que no existe. Por eso las
 
 > **Lección:** hacer más de una película es lo que convierte un proceso en un método. Escribe lo que funcionó, convierte cada revisión en una verificación, y deja que la siguiente película parta de ambas.
 
-## 12. Lo que salió mal en el camino
+## 12. Hechas para un teléfono, y más amables al oído
+
+Cuando ya había más de veinte películas, había dos cosas por arreglar: las palabras se veían demasiado pequeñas en un teléfono, y el sonido cansaba el oído.
+
+### Cada palabra lo bastante grande para leerse
+
+Un teléfono en horizontal muestra el cuadro de 1920 píxeles con unos 850 píxeles de ancho, así que un texto de menos de unos 28 px en el cuadro no se puede leer ahí. Un informe midió cada película: en las películas hechas antes de *El mapa antes de los datos*, entre el 76% y el 99% del texto quedaba por debajo de ese tamaño. *El mapa antes de los datos* se dibujó con esa regla desde el principio, así que sus cinco películas fueron el modelo.
+
+Las demás películas no se podían simplemente volver a dibujar. Una capa compartida ahora sube a 28 px cada palabra que no es decoración, después del zoom de la cámara, sin cambiar los componentes que comparten las películas. Después, cada escena tuvo que hacer sitio a las palabras más grandes, y eso fue la mayor parte del trabajo:
+
+- **Coloca las cosas según el tamaño con que se dibujan.** Una etiqueta que creció chocaba con la tarjeta de abajo, porque la tarjeta estaba colocada para el tamaño anterior. Ahora la composición mide lo que de verdad se dibuja.
+- **Por turnos, cuando no hay sitio.** Las tarjetas que estaban lado a lado ahora llegan una tras otra. El código muestra la línea que lee la narración, y las de alrededor, más grandes, en lugar de todo el archivo en pequeño. Los nombres largos se acortan en un teléfono.
+- **Decide qué es textura.** Una página de época, una imagen vista de lejos o una tarjeta detrás de otra ambientan la escena, y no se leen. Todo lo que nombra la narración tiene que leerse.
+- **Revisa cada momento.** Una herramienta dibuja cada película cada medio segundo y lista cualquier texto de menos de 28 px, que se sale del cuadro o que se dibuja encima de otras palabras. Los pocos que quedan son momentos de paso, como una tarjeta que entra volando o un fundido, o un encuadre que la cámara corta a propósito.
+
+El resultado: en las 22 películas, ningún texto que no sea decoración se dibuja por debajo de 28 px, donde antes lo estaba entre el 76% y el 99%. *La vida interior de los datos*, con sus voces en inglés y en español, viene después, por separado. Los laboratorios conservan sus tamaños, porque se leen de cerca.
+
+### Sonidos más suaves, y un ritmo que sigue a la emoción
+
+A un espectador le molestaban los tonos agudos: campanillas, pings y campanas tienen energía muy por encima de la voz. En cada película hecha antes de *En las entrañas del oficio de datos*, salvo la primera, los efectos brillantes se reemplazaron por nombre con sustitutos suaves y graves. Una campanilla se volvió una nota grave de fieltro, un tic una tecla apagada y un pop un golpe de madera, así que cada efecto sigue cayendo en su momento. En *De las palabras a los datos*, los propios instrumentos (una kalimba, pads de cristal, campanas) seguían sonando por encima de la voz, así que ahora toda la música, pero no la voz, se suaviza en los agudos. En las doce películas que lo necesitaban, la energía por encima de 4 kHz, donde la voz calla, bajó entre unas dos y quince veces, según la película. *En las entrañas del oficio de datos* ya sonaba así de suave.
+
+La música tenía el problema contrario. Los acordes sostenidos hacían que todas las escenas se sintieran iguales, y un error llegaba con la misma calma que un acierto. Ahora el ritmo sigue a la emoción. Donde una historia se vuelve un error (una prueba que falla, una fusión equivocada, filas que se duplican) o una prisa (un plazo, una cocina llena de pedidos), un pulso grave y apagado crece bajo la escena y se apaga cuando se detecta el problema. Un error se apoya en el semitono; una prisa empuja sobre la quinta. Los capítulos tranquilos no tienen ninguno, así que el contraste le dice al público que algo cambió.
+
+> **Lección:** una regla que llega tarde obliga a rehacer cada película hecha antes. Constrúyela como una capa compartida cuando puedas, revisa cada momento, y escribe lo que enseñó el trabajo, para que la siguiente película parta de ahí.
+
+## 13. Lo que salió mal en el camino
 
 Los errores fueron parte del proceso, y casi todos enseñaron algo:
 
@@ -271,6 +297,9 @@ Los errores fueron parte del proceso, y casi todos enseñaron algo:
 - El capítulo inicial no tuvo música desde la primera versión, y nadie lo notó hasta que una revisión midió el sonido.
 - El hilo rojo que sigue el linaje en *Cambio silencioso* cruzaba al principio el dashboard y la plataforma, y resultaba recargado. Ahora avanza un paso del linaje a la vez.
 - Una voz con el tono subido sonaba robótica, y una pintura abstracta se leía como un gráfico tachado. Ambas se reemplazaron por algo conocido: una voz mezclada, y un dashboard realista.
+- Al principio, las palabras más grandes chocaban con las tarjetas de abajo, porque la composición seguía midiendo los tamaños anteriores. Medir lo que se dibuja lo resolvió.
+- El informe de legibilidad del sitio medía el tamaño que pedía cada palabra, no el tamaño con que se dibujaba, así que no veía el trabajo de la capa para teléfonos hasta que pasó a medir el dibujo mismo.
+- Los primeros pulsos de urgencia quedaban entre 11 y 18 dB por debajo del resto de la música, demasiado débiles para notarse. Medir el pulso por separado lo mostró, y ahora queda entre 7 y 10 dB por debajo.
 
 ## Lecciones aprendidas
 
@@ -296,6 +325,10 @@ Los errores fueron parte del proceso, y casi todos enseñaron algo:
 20. **Usa lo que el público ya conoce.** Un dashboard conocido le gana a una imagen abstracta que hay que explicar.
 21. **Escribe las decisiones, con su fecha.** La siguiente sesión parte de ellas en lugar de discutirlas otra vez.
 22. **Convierte cada hallazgo de una revisión en una verificación,** para que el mismo problema no vuelva.
+23. **Que se lea donde la gente mira.** Mide el texto como lo muestra un teléfono, y revisa cada momento, no solo las imágenes fijas.
+24. **Mide lo que se dibuja, no lo que se pide.** Una palabra que crece necesita sitio, y todo lo que viene después se mueve.
+25. **Que el ritmo siga a la emoción.** Un pulso bajo un error dice que algo salió mal antes que la narración; las escenas tranquilas siguen tranquilas.
+26. **Mantén los sonidos por debajo de la voz.** Los efectos suaves y graves marcan un momento sin cortar la narración.
 
 ## Reutilízala
 

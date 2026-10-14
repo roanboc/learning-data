@@ -30,10 +30,10 @@ scene("open",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");
 // what the platform shows, in the approved gauge frame's layout
 function limitsWorld(ctx,t,c,o){o=o||{};const card=o.card||0,leila=o.leila||0,rev=o.reveal==null?3:o.reveal;
   withA(ctx,leila,()=>{callTile(ctx,"leila",80,170,400,300,{t,expr:"calm",hi:1});
-    glass(ctx,80,500,400,260,18,BIZ,{glow:12,ea:0.6,fill:"rgba(10,16,32,0.92)"});T(ctx,"Applications per night",102,538,{w:700,size:19});T(ctx,"last year",102,562,{w:500,size:15,color:rgba(SOFT,0.95)});
+    glass(ctx,80,500,400,260,18,BIZ,{glow:12,ea:0.6,fill:"rgba(10,16,32,0.92)"});const ph=phMin(ctx)>0;T(ctx,"Applications per night",102,538,{w:700,size:19});T(ctx,"last year",102,ph?572:562,{w:500,size:15,color:rgba(SOFT,0.95)});
     const d=[1.1,0.9,1.3,1.0,1.2,0.8,1.1,1.4,1.0,1.2,5.0,1.3,1.0,1.1],bx=102,by=730,bw=356,g=ease(clamp(((o.chart||0)),0,1));
-    d.forEach((v,i)=>{const hh=v*26*(i===10?g:1),xx=bx+i*(bw/d.length);ctx.fillStyle=rgba(i===10?AMB:BIZ,i===10?0.95:0.55);rr(ctx,xx,by-hh,bw/d.length-6,Math.max(1,hh),3);ctx.fill();});
-    withA(ctx,g,()=>tag(ctx,bx+10*(bw/d.length)+10,by-160,"closing date · +15%",AMB,{align:"center",size:15}));});
+    d.forEach((v,i)=>{const hh=v*(ph?22:26)*(i===10?g:1),xx=bx+i*(bw/d.length);ctx.fillStyle=rgba(i===10?AMB:BIZ,i===10?0.95:0.55);rr(ctx,xx,by-hh,bw/d.length-6,Math.max(1,hh),3);ctx.fill();});
+    withA(ctx,g,()=>tag(ctx,bx+10*(bw/d.length)+10,ph?by-128:by-160,"closing date · +15%",AMB,{align:"center",size:15}));});
   numberPainting(ctx,560,150,880,440,{num:8200,gauge:{reveal:rev},gaugeV:0.9,stamp:"Monday · intake 2027"});
   plaque(ctx,560,630,420,[["Data product","gold.applications_daily"],["Used by","Planning committee"]],LAYER.gold);
   withA(ctx,card,()=>appContract(ctx,1010,580,830,{hi:o.hi||0,h:300}));
@@ -78,7 +78,7 @@ function nightWorld(ctx,t,c,o){const y=470;
   withA(ctx,o.pair,()=>{glass(ctx,380,730,660,180,18,[170,205,255],{glow:8,ea:0.45,fill:"rgba(8,14,28,0.9)"});T(ctx,"3,100 applications, copied again with new IDs",404,768,{w:700,size:19});
     appTile(ctx,404,800,30,"A-40211 · applicant 88213 · BSc Data Science · 2027");appTile(ctx,404,852,30,"A-47988 · applicant 88213 · BSc Data Science · 2027",{dup:true});});}
 scene("night",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
-  world(ctx,S);camKeys(ctx,S,[[0,600,470,1.25],[c("twice"),600,470,1.25],[c("rows")-0.2,760,500,1.05],[c("total")-0.2,960,540,1.0],[c("red"),1180,480,1.12],[c("see")-0.3,1180,480,1.12],[c("see")+1.0,960,540,1.0],[sc.dur+1,960,540,1.0]],t);
+  world(ctx,S);camKeys(ctx,S,[[0,650,470,1.18],[c("twice"),650,470,1.18],[c("rows")-0.2,760,500,1.05],[c("total")-0.2,960,540,1.0],[c("red"),1180,480,1.12],[c("see")-0.3,1180,480,1.12],[c("see")+1.0,960,540,1.0],[sc.dur+1,960,540,1.0]],t);
   const num=roll(t,c("total")+0.6,8200,11340,1.8);
   nightWorld(ctx,t,c,{restart:fin(t,c("restart")+0.4),dup:clamp((t-c("restart")-1.2)/5,0,1),checks:clamp((t-c("rows")-1.6)/3.0,0,1)*1.001,
     panel:fin(t,c("total")+0.1,0.6),num,red:fin(t,c("red")+0.2,0.5),real:fin(t,c("total")+3.2),pair:fin(t,c("see")+0.6,0.8)});
@@ -121,7 +121,7 @@ scene("level",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
   world(ctx,S);camKeys(ctx,S,[[0,960,520,1.0],[sc.dur+1,960,520,1.03]],t);
   const cards=fin(t,c("count")-0.2,0.8),gA=1-cards;
   withA(ctx,gA,()=>{const v=roll(t,c("real")+0.6,0.8,14,1.6);glass(ctx,160,150,760,640,28,[170,205,255],{glow:14,ea:0.5,fill:"rgba(8,14,28,0.88)"});
-    T(ctx,"Applications for next year",540,210,{w:700,size:24,align:"center"});T(ctx,t<c("real")+0.6?"an ordinary night":"a closing date",540,246,{w:600,size:19,align:"center",color:rgba(SOFT,0.95)});
+    const ph=phMin(ctx)>0;T(ctx,"Applications for next year",540,ph?200:210,{w:700,size:24,align:"center"});T(ctx,t<c("real")+0.6?"an ordinary night":"a closing date",540,ph?234:246,{w:600,size:19,align:"center",color:rgba(SOFT,0.95)});
     gauge(ctx,540,520,210,v,{});
     withA(ctx,fin(t,c("two")+0.6),()=>{tag(ctx,540,700,"amber · worth a look",AMB,{align:"center",size:20});});
     withA(ctx,fin(t,c("two")+2.0),()=>{tag(ctx,540,752,"red · must not reach a decision",RED,{align:"center",size:20});});
@@ -151,16 +151,18 @@ scene("thread",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),y=250;
   const k=clamp((t-c("upstream")-0.8)/1.3,0,3.001);
   ctx.strokeStyle="rgba(170,200,245,0.35)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(STEPS[0][2],y);ctx.lineTo(STEPS[3][2],y);ctx.stroke();
   if(k>0){const i=Math.floor(Math.min(k,3)),f=Math.min(k,3)-i,ex=i<3?lerp(STEPS[i][2],STEPS[i+1][2],ease(f)):STEPS[3][2];beam(ctx,[{x:STEPS[0][2],y},{x:ex,y}],BAD,[[22,0.08],[9,0.22],[3,0.85],[1.5,1]]);glow(ctx,ex,y,36,BAD,0.7);}
-  STEPS.forEach(([n,sub,x,col],i)=>{const on=k>=i-0.05,w=Math.max(tw(ctx,n,22,700,"mono"),tw(ctx,sub,17,500))+44;glass(ctx,x-w/2,y-48,w,96,18,col,{glow:on?22:8,ea:on?0.95:0.45,fill:"rgba(8,14,28,0.92)"});
+  const pm=phMin(ctx);STEPS.forEach(([n,sub,x,col],i)=>{const on=k>=i-0.05,w=Math.max(tw(ctx,n,Math.max(22,pm),700,"mono"),tw(ctx,sub,Math.max(17,pm),500))+44;glass(ctx,x-w/2,y-48,w,96,18,col,{glow:on?22:8,ea:on?0.95:0.45,fill:"rgba(8,14,28,0.92)"});
     T(ctx,n,x,y-6,{w:700,size:22,f:"mono",align:"center"});T(ctx,sub,x,y+26,{w:500,size:17,align:"center",color:rgba(SOFT,0.95)});});
   // bronze, as it arrived: pairs that differ only by their ID and when they were created
   const a=fin(t,c("pairs")-0.2,0.8),idHi=fin(t,c("id")+0.2),keyHi=fin(t,c("key")+0.4);
+  // on a phone the columns are spaced by the widths of their words
+  const HD=["application_id","applicant","course","intake","created"],PX=pm?HD.reduce((P,h,i)=>{if(i<4)P.push(P[i]+Math.max(tw(ctx,h,pm,700),...PAIRS.map(r=>tw(ctx,r[i],pm,600,"mono")))+24);return P;},[40]):PCX;
   withA(ctx,a,()=>{const x=160,yy=380,w=1000;glass(ctx,x,yy,w,330,20,LAYER.bronze,{glow:16,ea:0.8,fill:"rgba(20,12,6,0.9)"});
     T(ctx,"bronze.admissions.applications",x+24,yy+40,{w:700,size:20,f:"mono",color:rgba(LAYER.bronze,1)});
-    ["application_id","applicant","course","intake","created"].forEach((h,i)=>T(ctx,h,x+PCX[i],yy+80,{w:700,size:16,color:rgba(SOFT,0.9)}));
-    if(idHi>0){ctx.fillStyle=rgba(GRN,0.12*idHi);rr(ctx,x+PCX[0]-10,yy+56,150,250,8);ctx.fill();}
-    if(keyHi>0){ctx.fillStyle=rgba(RED,0.12*keyHi);rr(ctx,x+PCX[1]-10,yy+56,PCX[4]-PCX[1]-10,250,8);ctx.fill();}
-    PAIRS.forEach((r,i)=>{const ry=yy+118+i*48+(i>1?14:0);r.forEach((v,j)=>T(ctx,v,x+PCX[j],ry,{w:600,size:19,f:"mono",color:j>=1&&j<=3&&keyHi>0.5?rgba(mixc(INK,[255,170,160],keyHi),1):rgba(INK,0.9)}));});
+    HD.forEach((h,i)=>T(ctx,h,x+PX[i],yy+80,{w:700,size:16,color:rgba(SOFT,0.9)}));
+    if(idHi>0){ctx.fillStyle=rgba(GRN,0.12*idHi);rr(ctx,x+PX[0]-10,yy+56,PX[1]-PX[0]-12,250,8);ctx.fill();}
+    if(keyHi>0){ctx.fillStyle=rgba(RED,0.12*keyHi);rr(ctx,x+PX[1]-10,yy+56,PX[4]-PX[1]-10,250,8);ctx.fill();}
+    PAIRS.forEach((r,i)=>{const ry=yy+118+i*48+(i>1?14:0);r.forEach((v,j)=>T(ctx,v,x+PX[j],ry,{w:600,size:19,f:"mono",color:j>=1&&j<=3&&keyHi>0.5?rgba(mixc(INK,[255,170,160],keyHi),1):rgba(INK,0.9)}));});
     T(ctx,"3,100 pairs like these",x+24,yy+314,{w:500,size:16,color:rgba(SOFT,0.85)});});
   withA(ctx,idHi,()=>checkPill(ctx,1220,420,"unique: application_id","pass",{size:19}));
   withA(ctx,keyHi,()=>checkPill(ctx,1220,480,"unique: applicant + course + intake","fail",{size:19}));
@@ -201,7 +203,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath"),y=500;
   const late=fin(t,B+0.3,0.8);packets(ctx,t,[{x:320,y},{x:370,y},{x:420,y}],0.6,1.0,0,ADM,14,0.9,late>0?B+0.3:null);
   vault(ctx,420,y-170,240,340,LAYER.bronze,(r,c2)=>hash(r*29+c2,4)<0.8?ADM:null,"Bronze","as it arrived");
   lane(ctx,[{x:660,y},{x:740,y}],ADM,0.6);gate(ctx,740,y,150,GRN,"tests");
-  const nt=fin(t,c("behind")+0.8,0.8);["unique ID","not empty","course exists"].forEach((s,i)=>checkPill(ctx,[440,600,760][i],y+200,s,"pass",{size:17}));
+  const nt=fin(t,c("behind")+0.8,0.8);let px=440;["unique ID","not empty","course exists"].forEach((s,i)=>{const w=checkPill(ctx,phMin(ctx)>0?px:[440,600,760][i],y+200,s,"pass",{size:17});px+=w+12;});
   withA(ctx,nt,()=>{const glowA=pulse(t,c("behind")+0.8,2.4);if(glowA>0)glow(ctx,640,y+274,140,GRN,0.4*glowA);checkPill(ctx,440,y+254,"unique: applicant + course + intake","pass",{size:17});});
   lane(ctx,[{x:770,y},{x:820,y}],[214,228,255],0.6);vault(ctx,820,y-170,220,340,LAYER.silver,(r,c2)=>hash(r*7+c2,3)<0.72?[214,228,255]:null,"Silver","consistent");
   lane(ctx,[{x:1040,y},{x:1090,y}],[214,228,255],0.6);gate(ctx,1090,y,150,GRN,"tests");

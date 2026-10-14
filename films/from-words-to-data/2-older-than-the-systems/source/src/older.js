@@ -21,7 +21,7 @@ if(!PEOPLE.aisha)PEOPLE.aisha={name:"Aisha Khan",role:"Learner",side:"Learner",d
 const ot_ease=(t,a,d)=>fin(t,a,d||0.6);
 function ot_tag(ctx,x,y,s,col,a,o){if(a<=0.01)return;withA(ctx,a,()=>tag(ctx,x,y,s,col,Object.assign({align:"center",size:20},o||{})));}
 // a label under a line, on a dark pill, so it reads over anything
-function ot_pill(ctx,x,y,s,col,o){o=o||{};const sz=o.size||18,w=tw(ctx,s,sz,700,o.f)+22;ctx.save();ctx.fillStyle=o.fill||"rgba(7,12,24,0.92)";rr(ctx,x-w/2,y-sz*0.8,w,sz*1.6,sz*0.8);ctx.fill();
+function ot_pill(ctx,x,y,s,col,o){o=o||{};const sz=Math.max(o.size||18,phMin(ctx)),w=tw(ctx,s,sz,700,o.f)+22;ctx.save();ctx.fillStyle=o.fill||"rgba(7,12,24,0.92)";rr(ctx,x-w/2,y-sz*0.8,w,sz*1.6,sz*0.8);ctx.fill();
   if(o.edge!==false){ctx.strokeStyle=rgba(col,0.6);ctx.lineWidth=1.2;rr(ctx,x-w/2,y-sz*0.8,w,sz*1.6,sz*0.8);ctx.stroke();}ctx.restore();T(ctx,s,x,y+sz*0.36,{w:700,size:sz,align:"center",color:rgba(col,1),f:o.f});return w;}
 // a line from box edge to box edge (b = {x,y,w,h}), with an arrowhead and a verb in the middle
 function ot_edge(b,tx,ty){const dx=tx-b.x,dy=ty-b.y,L=Math.hypot(dx,dy)||1,ux=dx/L,uy=dy/L,k=Math.min(Math.abs(ux)>1e-6?b.w/2/Math.abs(ux):1e9,Math.abs(uy)>1e-6?b.h/2/Math.abs(uy):1e9);return[b.x+ux*(k+8),b.y+uy*(k+8)];}
@@ -150,7 +150,7 @@ function ot_diploma(ctx,x,y,s,o){o=o||{};const t=o.t||0,bw=Math.sin(t*0.7)*2;ctx
 function ot_transcript(ctx,x,y,s,o){o=o||{};const t=o.t||0,P=[244,240,232];ctx.save();ctx.translate(x,y);ctx.scale(s,s);
   ot_organic(ctx,0,-140,101,101,{n:14,amp:1.2,seed:13,t});ot_matter(ctx,-100,-240,100,-40,P,{t,seed:6,light:0.14});ot_organic(ctx,0,-140,101,101,{n:14,amp:1.2,seed:13,t});ot_rim(ctx,"rgba(120,120,130,0.35)","rgba(255,255,255,0.5)",2);
   ctx.fillStyle="rgba(40,60,110,0.85)";ctx.fillRect(-92,-232,184,26);ctx.fillStyle="rgba(255,255,255,0.8)";ctx.fillRect(-80,-222,90,6);
-  const gr=["A","B+","A","C","B","A-","B+","A"];for(let i=0;i<8;i++){const yy=-196+i*19;ctx.fillStyle="rgba(60,60,70,0.55)";ctx.fillRect(-86,yy,80+hash(i,4)*40,6);T(ctx,gr[i],72,yy+8,{f:"mono",w:500,size:13,align:"center",color:"rgba(40,40,50,0.9)"});
+  const gr=["A","B+","A","C","B","A-","B+","A"];for(let i=0;i<8;i++){const yy=-196+i*19;ctx.fillStyle="rgba(60,60,70,0.55)";ctx.fillRect(-86,yy,80+hash(i,4)*40,6);T(ctx,gr[i],72,yy+8,{f:"mono",w:500,size:13,align:"center",color:"rgba(40,40,50,0.9)",deco:1});
     ctx.strokeStyle="rgba(100,110,130,0.2)";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(-90,yy+12);ctx.lineTo(90,yy+12);ctx.stroke();}
   ot_curl(ctx,100,-40,18,P,t+1);ctx.restore();}
 // a digital badge: a glowing medal of glass
@@ -186,11 +186,13 @@ function ot_label(ctx,x,y,title,sub,a){if(a<=0.01)return;withA(ctx,a,()=>{const 
 function ot_sysCard(ctx,k,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return null;const S_=OT_SYS[k],c=S_.c,ma=o.modelA==null?1:o.modelA,hi=o.hi||0;
   const nm=o.names||S_.m;let B=null;
   withA(ctx,a,()=>{if(hi>0)glow(ctx,x+w/2,y+h/2,w*0.8,c,0.25*hi);glass(ctx,x,y,w,h,18,c,{glow:16+10*hi,ea:0.75,fill:"rgba(7,12,24,0.93)"});led(ctx,x+20,y+18,w-40,4,c);
-    T(ctx,o.title||S_.n,x+w/2,y+62,{w:800,size:o.ts||(w<300?21:24),align:"center"});
-    withA(ctx,o.holdsA==null?1:o.holdsA,()=>T(ctx,o.holdsText||"holds "+S_.holds,x+w/2,y+94,{w:600,size:19,align:"center",color:rgba(c,1)}));
+    // in the film, its words are laid out to read on a phone (phone.js); the labs keep their own sizes
+    const ph=phMin(ctx)>0;
+    T(ctx,o.title||S_.n,x+w/2,y+(ph?60:62),ph?{w:700,size:o.ts||28,align:"center"}:{w:800,size:o.ts||(w<300?21:24),align:"center"});
+    withA(ctx,o.holdsA==null?1:o.holdsA,()=>T(ctx,o.holdsText||"holds "+S_.holds,x+w/2,y+(ph?100:94),{w:600,size:ph?28:19,align:"center",color:rgba(c,1)}));
     withA(ctx,ma,()=>{const s=o.ms||0.9,top={x:x+w/2,y:y+h*0.47,name:nm[0],col:c,s,hi:o.hiTop||0},bot={x:x+w/2,y:y+h*0.8,name:nm[1],col:c,s,hi:o.hiBot||0};
-      ctx.strokeStyle=rgba(c,0.25);ctx.lineWidth=1;ctx.setLineDash([4,6]);rr(ctx,x+18,y+116,w-36,h-134,12);ctx.stroke();ctx.setLineDash([]);
-      T(ctx,o.modelLabel==null?"its model":o.modelLabel,x+32,y+142,{f:"mono",w:500,size:18,color:rgba(SOFT,0.9)});
+      ctx.strokeStyle=rgba(c,0.25);ctx.lineWidth=1;ctx.setLineDash([4,6]);rr(ctx,x+18,y+(ph?124:116),w-36,h-(ph?142:134),12);ctx.stroke();ctx.setLineDash([]);
+      T(ctx,o.modelLabel==null?"its model":o.modelLabel,x+32,y+(ph?160:142),{f:"mono",w:500,size:18,color:rgba(SOFT,0.9)});
       const b1=entBox(ctx,top),b2=entBox(ctx,bot);relLine(ctx,b1,b2,"1","*",{col:c,s});ent(ctx,top);ent(ctx,bot);B={top:b1,bot:b2};});});
   return B;}
 // the vendor's box: a closed carton that slides in, then opens (op 0..1)
@@ -201,8 +203,8 @@ function ot_crate(ctx,x,y,w,h,op,col,a,o){o=o||{};if(a<=0.01)return;withA(ctx,a,
   // the lid, folding back as it opens
   ctx.translate(x,y+h*0.18);ctx.rotate(-1.9*lid);ctx.fillStyle="rgba(150,114,80,0.97)";rr(ctx,0,-h*0.18,w,h*0.18,8);ctx.fill();ctx.strokeStyle="rgba(230,200,160,0.5)";rr(ctx,0,-h*0.18,w,h*0.18,8);ctx.stroke();ctx.restore();});}
 // a system as a node in a ring: a pill with its colour and name
-function ot_node(ctx,k,x,y,a,hi,o){o=o||{};if(a<=0.01)return;const S_=OT_SYS[k]||o.sys,c=S_.c,n=o.name||S_.n,w=tw(ctx,n,22,800)+70;withA(ctx,a,()=>{if(hi)glow(ctx,x,y,w*0.7,c,0.3*hi);glass(ctx,x-w/2,y-32,w,64,32,c,{glow:14+10*(hi||0),ea:0.85,fill:"rgba(7,12,24,0.94)"});
-  ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x-w/2+30,y,8,0,TAU);ctx.fill();T(ctx,n,x-w/2+48,y+8,{w:800,size:22});});return{x,y,w,h:64};}
+function ot_node(ctx,k,x,y,a,hi,o){o=o||{};if(a<=0.01)return;const S_=OT_SYS[k]||o.sys,c=S_.c,n=o.name||S_.n,ns=Math.max(22,phMin(ctx)),w=tw(ctx,n,ns,800)+70;withA(ctx,a,()=>{if(hi)glow(ctx,x,y,w*0.7,c,0.3*hi);glass(ctx,x-w/2,y-32,w,64,32,c,{glow:14+10*(hi||0),ea:0.85,fill:"rgba(7,12,24,0.94)"});
+  ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.arc(x-w/2+30,y,8,0,TAU);ctx.fill();T(ctx,n,x-w/2+48,y+ns*0.36,{w:800,size:ns});});return{x,y,w,h:64};}
 // the shared model, as a hub: a gold disc with three small boxes inside
 function ot_hub(ctx,x,y,r,t,a,o){o=o||{};if(a<=0.01)return;withA(ctx,a,()=>{glow(ctx,x,y,r*2.4,OT_GOLD,0.28+0.08*Math.sin(t*2));ctx.save();ctx.fillStyle="rgba(10,14,28,0.95)";ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();
   ctx.strokeStyle=rgba(OT_GOLD,1);ctx.lineWidth=3.5;ctx.shadowColor=rgba(OT_GOLD,0.9);ctx.shadowBlur=18;ctx.stroke();ctx.restore();
@@ -225,11 +227,13 @@ function ot_stars(ctx,t,n){for(let i=0;i<(n||90);i++){const x=hash(i,11)*W,y=has
 
 /* ---------- one learner, many records ---------- */
 // a record in one system: its colour, the system, the kind of ID and the ID
-function ot_idCard(ctx,x,y,w,k,kind,id,a,o){o=o||{};if(a<=0.01)return;const c=(OT_SYS[k]||{c:OT_IT}).c,n=(OT_SYS[k]||{n:"IT directory"}).n,h=o.h||92;withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,c,{glow:12+10*(o.hi||0),ea:0.75,fill:"rgba(7,12,24,0.94)"});led(ctx,x+14,y+16,5,h-32,c);
+// in the film (phone.js), the system, the kind of ID and the ID itself go on three lines, so each reads on a phone
+function ot_idCard(ctx,x,y,w,k,kind,id,a,o){o=o||{};if(a<=0.01)return;const c=(OT_SYS[k]||{c:OT_IT}).c,n=(OT_SYS[k]||{n:"IT directory"}).n,ph=phMin(ctx)>0,h=o.h||(ph?128:92);withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,c,{glow:12+10*(o.hi||0),ea:0.75,fill:"rgba(7,12,24,0.94)"});led(ctx,x+14,y+16,5,h-32,c);
+  if(ph){T(ctx,o.sysName||n,x+34,y+36,{w:700,size:28,color:rgba(c,1)});T(ctx,kind,x+34,y+72,{w:600,size:28,color:rgba(SOFT,1)});T(ctx,id,x+34,y+110,{f:"mono",w:500,size:28,color:rgba(INK,1)});return;}
   T(ctx,(o.sysName||n)+" · "+kind,x+34,y+34,{w:700,size:18,color:rgba(c,1)});T(ctx,id,x+34,y+72,{f:"mono",w:500,size:27,color:rgba(INK,1)});});}
 // a code list: one set of values every system uses
 function ot_codeList(ctx,x,y,a,hi){if(a<=0.01)return;withA(ctx,a,()=>{const w=640,h=104;if(hi)glow(ctx,x+w/2,y+h/2,380,OT_STD,0.2*hi);glass(ctx,x,y,w,h,16,OT_STD,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.95)"});
-  T(ctx,"credential kind",x+24,y+36,{f:"mono",w:500,size:20,color:rgba(OT_STD,1)});T(ctx,"one shared list",x+w-24,y+36,{w:600,size:17,align:"right",color:rgba(SOFT,1)});
+  T(ctx,"credential kind",x+24,y+38,{f:"mono",w:500,size:20,color:rgba(OT_STD,1)});T(ctx,"one shared list",x+w-24,y+38,{w:600,size:17,align:"right",color:rgba(SOFT,1)});
   ["award","microcredential","badge"].forEach((s,i)=>ot_pill(ctx,x+104+i*196,y+74,s,OT_STD,{size:21}));});}
 
 /* ---------- the logical model, and the yardstick ---------- */

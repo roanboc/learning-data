@@ -5,6 +5,10 @@
 # celesta sparkles. Effects: a drawer, cards flipping, a library date stamp, and the nodes, links and ticks of the diagrams.
 # The groove keeps one beat grid for the whole film, so chapters join without a stumble.
 
+# PLAYBOOK.md: effects stay low and soft, below about 2.5 kHz. The series' soft stand-ins replace the bright ones by name (a chime
+# or a ping becomes a low felt note, a tick a muffled key, a pop a wooden knock, a sweep a breath of air), so every cue keeps its time
+globals().update(soft_palette())
+
 BPM = 84; Q = 60 / BPM; BAR = 4 * Q; SW = 2 / 3   # a swung eighth falls two thirds of the way through the beat
 
 # chords: the bass root, a rootless voicing for the electric piano, and a pad voicing
@@ -171,3 +175,6 @@ bell(G('end', 'breath', 0.6), 0.07, 698)
 
 # the band sits about 2 dB higher than the pads alone would: lift the music bus (the voice ducking still applies)
 ML *= 1.3; MR *= 1.3
+
+# PLAYBOOK.md: the whole score, music and effects, is low-passed at 2.6 kHz last, so no instrument rings above the voice
+soften()

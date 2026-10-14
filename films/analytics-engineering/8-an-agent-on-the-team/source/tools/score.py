@@ -5,6 +5,8 @@
 # Two rules, as in the opening film:
 #  - Nothing loops. No pulse, walking bass, repeated figure or random notes: the music is sustained chords that change with
 #    the chapters.
+#  - The one exception is feeling: when the story turns to an error, a low, muted pulse (music.py's urgent()) rises under
+#    the scene, leans on the semitone, and fades out once the problem is caught. It stays below about 1 kHz.
 #  - Every sound is an event on screen, at the moment it appears. Each effect below uses the same timing as the picture in
 #    src/scenes.js (the same word, and the same offset), so sound and picture stay together when the voice is re-timed.
 # Everything stays low and soft: wooden knocks, muffled keys, paper, a pencil, low felt notes and a thud for the gold stamp,
@@ -162,6 +164,8 @@ cG = G('evidence', 'guess'); knock(cG - 0.1, 0.028, 0.5); paper(W('evidence', 'g
 # 5. The shortcut: the key turns to C-sharp minor; keys as the code and the draft are typed; the failing row as a muted double knock;
 #    a low note as the withdrawal slides past census day; the struck line as a muted double knock; a rising felt pair for green
 bed('shortcut', [EMAJ9, CSM9, FSM7, GS7SUS, CSM9, AMAJ9, EMAJ9])
+# a low urgent pulse from the failing test, under the weakened test, until Jun's review stops it
+urgent(G('shortcut', 'fails', -0.3), W('shortcut', 'stop', 'stops it', 0.6), bpm=96, root=37, g=0.054, steps=(0, 0, 1, 0))
 paper(S0('shortcut') + 0.4, 0.03); lines(S0('shortcut') + 0.5, 6, 0.3)
 rec = W('shortcut', 'refactor', 'by when it was recorded'); paper(rec - 0.3, 0.025, -0.3); lines(rec, 7, 0.23, 0.02, -0.3)
 cF = G('shortcut', 'fails'); paper(cF - 0.2, 0.025, 0.3); lines(cF, 4, 0.3, 0.016, 0.3)

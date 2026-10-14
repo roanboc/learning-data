@@ -82,9 +82,10 @@ scene("question",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
     [["models/marts/finance/",EE_FIN],["exposures/finance/",EE_FIN]].forEach(([s,col],i)=>arrive(ctx,EE_RX+800+i*0,770+i*62,t,w("kind","folders")+i*0.3,()=>ee_folder(ctx,EE_RX+780,766+i*60,s,col,{on:0.6}),{dy:12}));});
   // step one: the conceptual model holds the question; the decision log, the first decision; and the open requirements, dashed
   const fA=fin(t,cF-0.3,0.6);
-  if(fA>0.01){arrive(ctx,EE_RX+EE_RW/2,260,t,cF-0.2,()=>ee_code(ctx,EE_RX,150,EE_RW,"models/marts/finance/_finance__conceptual.yml",EE_Q1,{size:19,lh:30,wrap:92,edge:BPL,p:clamp((t-cF)/1.6,0,1),lit:{3:fin(t,w("files","holds the question"),0.5)}}),{dy:24});
-    arrive(ctx,EE_RX+280,560,t,w("files","decision log")-0.2,()=>ee_code(ctx,EE_RX,440,560,"_finance__decisions.yml",EE_D1,{size:18,lh:28,wrap:46,edge:KIND,p:clamp((t-w("files","decision log"))/1.4,0,1),lit:{2:fin(t,w("files","recognised credit"),0.5)}}),{dy:24});}
-  if(t>cO-0.4)arrive(ctx,EE_RX+870,600,t,cO-0.1,()=>ee_code(ctx,EE_RX+590,440,570,"_finance__requirements.yml",EE_REQ1,{tmp:1,size:18,lh:28,wrap:47,p:clamp((t-cO)/1.6,0,1),lit:{2:fin(t,w("open","match Finance"),0.5)},litCol:EE_TMP}),{dy:24});
+  const ph=phMin(ctx)>0,qOut=ph?fin(t,w("files","decision log")-0.5,0.4):0,QY=ph?150:440;
+  if(fA>0.01){arrive(ctx,EE_RX+EE_RW/2,260,t,cF-0.2,()=>ee_code(ctx,EE_RX,150,EE_RW,"models/marts/finance/_finance__conceptual.yml",EE_Q1,{a:1-qOut,size:19,lh:30,wrap:92,edge:BPL,p:clamp((t-cF)/1.6,0,1),lit:{3:fin(t,w("files","holds the question"),0.5)}}),{dy:24});
+    arrive(ctx,EE_RX+280,QY+120,t,w("files","decision log")-0.2,()=>ee_code(ctx,EE_RX,QY,560,"_finance__decisions.yml",EE_D1,{size:18,lh:28,wrap:46,edge:KIND,p:clamp((t-w("files","decision log"))/1.4,0,1),lit:{2:fin(t,w("files","recognised credit"),0.5)}}),{dy:24});}
+  if(t>cO-0.4)arrive(ctx,EE_RX+870,QY+160,t,cO-0.1,()=>ee_code(ctx,EE_RX+590,QY,570,"_finance__requirements.yml",EE_REQ1,{tmp:1,size:18,lh:28,wrap:47,p:clamp((t-cO)/1.6,0,1),lit:{2:fin(t,w("open","match Finance"),0.5)},litCol:EE_TMP}),{dy:24});
   // the work itself lives in the backlog tool; the project keeps only what's still open
   if(t>c("backlog")-0.4){arrive(ctx,EE_RX+260,842,t,c("backlog"),()=>tag(ctx,EE_RX,842,"the backlog tool · who, when, how big",KIND,{size:20}),{dy:12});
     arrive(ctx,EE_RX+860,842,t,w("backlog","only what's still open"),()=>tag(ctx,EE_RX+590,842,"requirements/ · only what's still open",EE_TMP,{size:20}),{dy:12});}
@@ -146,15 +147,17 @@ scene("output",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
       if(on)withA(ctx,q,()=>tag(ctx,x+160,540,"Aisha is enrolled here",TRUST,{align:"center",size:20}));},{dy:16});}));
   // the answer moves where it lasts: a rule in the conceptual model, a decision in the log; the question is deleted
   const mA=fin(t,cM-0.3,0.6)*(1-fin(t,cG-0.4,0.6));
-  if(mA>0.01)withA(ctx,mA,()=>{arrive(ctx,EE_RX+EE_RW/2,250,t,cM-0.2,()=>ee_code(ctx,EE_RX,150,EE_RW,"models/marts/finance/_finance__conceptual.yml",EE_RULE,{size:18,lh:28,wrap:100,edge:BPL,lit:{3:fin(t,w("moves","a rule"),0.5)},litCol:TRUST}),{dy:24});
-    arrive(ctx,EE_RX+280,600,t,w("moves","a decision"),()=>ee_code(ctx,EE_RX,470,560,"_finance__decisions.yml",EE_D2,{size:18,lh:28,wrap:46,edge:KIND,lit:{5:fin(t,w("deleted","where it came from"),0.5)}}),{dy:24});
-    arrive(ctx,EE_RX+870,600,t,w("moves","a decision")+0.2,()=>ee_code(ctx,EE_RX+590,470,570,"_finance__requirements.yml",EE_REQ3.slice(0,3),{tmp:1,size:18,lh:28,wrap:47,strike:{0:fin(t,w("deleted","question is deleted"),0.6),1:fin(t,w("deleted","question is deleted")+0.15,0.6),2:fin(t,w("deleted","question is deleted")+0.3,0.6)}}),{dy:24});
+  const ph=phMin(ctx)>0,rOut=ph?fin(t,w("moves","a decision")-0.5,0.4):0,DY=ph?150:470;
+  if(mA>0.01)withA(ctx,mA,()=>{arrive(ctx,EE_RX+EE_RW/2,250,t,cM-0.2,()=>ee_code(ctx,EE_RX,150,EE_RW,"models/marts/finance/_finance__conceptual.yml",EE_RULE,{a:1-rOut,size:18,lh:28,wrap:100,edge:BPL,lit:{3:fin(t,w("moves","a rule"),0.5)},litCol:TRUST}),{dy:24});
+    arrive(ctx,EE_RX+280,DY+130,t,w("moves","a decision"),()=>ee_code(ctx,EE_RX,DY,560,"_finance__decisions.yml",EE_D2,{size:18,lh:28,wrap:46,edge:KIND,lit:{5:fin(t,w("deleted","where it came from"),0.5)}}),{dy:24});
+    arrive(ctx,EE_RX+870,DY+130,t,w("moves","a decision")+0.2,()=>ee_code(ctx,EE_RX+590,DY,570,"_finance__requirements.yml",EE_REQ3.slice(0,3),{tmp:1,size:18,lh:28,wrap:47,strike:{0:fin(t,w("deleted","question is deleted"),0.6),1:fin(t,w("deleted","question is deleted")+0.15,0.6),2:fin(t,w("deleted","question is deleted")+0.3,0.6)}}),{dy:24});
     arrive(ctx,EE_RX+870,830,t,w("deleted","Git keeps"),()=>tag(ctx,EE_RX+870,830,"git keeps it · the decision says where it came from",SOFT,{align:"center",size:19}),{dy:12});});
   // then the output, before any code: the grain in one sentence, a requirement until a contract enforces it
   const gA=fin(t,cG-0.2,0.6);
   if(gA>0.01){arrive(ctx,EE_RX+EE_RW/2,260,t,cG,()=>{T(ctx,"one row per learner per award they're enrolled in,",EE_RX+EE_RW/2,250,{w:800,size:34,align:"center"});T(ctx,"as at census date",EE_RX+EE_RW/2,300,{w:800,size:34,align:"center",color:rgba(EE_FIN,1)});},{dy:16,from:0.92});
     arrive(ctx,EE_RX+EE_RW/2,560,t,cU-0.1,()=>ee_code(ctx,EE_RX+200,400,EE_RW-400,"_finance__requirements.yml",EE_REQ3.slice(3),{tmp:1,size:19,lh:30,p:clamp((t-cU)/1.2,0,1),lit:{2:fin(t,w("until","until a contract"),0.5)},litCol:EE_TMP}),{dy:24});
-    arrive(ctx,EE_RX+EE_RW/2,700,t,w("until","until a contract"),()=>tag(ctx,EE_RX+EE_RW/2,700,"open until a contract enforces it",EE_TMP,{align:"center",size:20}),{dy:12});}
+    const UY=ph?Math.max(700,400+30+ee_code(ctx,EE_RX+200,400,EE_RW-400,"_finance__requirements.yml",EE_REQ3.slice(3),{a:0,tmp:1,size:19,lh:30})):700;
+    arrive(ctx,EE_RX+EE_RW/2,UY,t,w("until","until a contract"),()=>tag(ctx,EE_RX+EE_RW/2,UY,"open until a contract enforces it",EE_TMP,{align:"center",size:20}),{dy:12});}
   const on=[w("moves","a rule"),w("moves","a decision"),w("deleted","question is deleted"),w("moves","a rule")+0.5,w("moves","a decision")+0.5].map(x=>fin(t,x,0.4));
   arrive(ctx,EE_CX+EE_CW/2,320,t,0.3,()=>ee_commit(ctx,EE_CX,150,EE_CW,2,"one award, and the rows Finance needs",EE_R3,{on,hi:{2:pulseAt(t,w("deleted","question is deleted"),2.4)}}),{dy:24});
   ee_top(ctx,S,t,2,fin(t,E-1.6,0.6));});
@@ -174,18 +177,23 @@ scene("promise",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
       EE_COLS.forEach(([cn,ty],i)=>{const q=fin(t,w("contract","columns")+i*0.12,0.3);withA(ctx,q,()=>{T(ctx,cn,EE_RX+24,270+i*40,{f:"mono",w:500,size:18});T(ctx,ty,EE_RX+556,270+i*40,{f:"mono",w:500,size:18,align:"right",color:rgba(KIND,1)});});});},{dy:24});
     arrive(ctx,EE_RX+290,860,t,w("contract","enforced"),()=>tag(ctx,EE_RX+290,860,"the promise, before the logic",TRUST,{align:"center",size:20}),{dy:12});
     // the empty table: its header, no rows
-    const eA=fin(t,cE-0.1,0.6);arrive(ctx,EE_RX+870,300,t,cE,()=>withA(ctx,eA,()=>ee_table(ctx,EE_RX+620,180,["faculty_code","credit_points_recognised","tuition_forgone"],[],{empty:"no rows, yet",edge:TRUST})),{dy:20});
+    const eA=fin(t,cE-0.1,0.6),ET=["faculty_code","credit_points_recognised","tuition_forgone"];
+    arrive(ctx,EE_RX+870,300,t,cE,()=>withA(ctx,eA,()=>{if(phMin(ctx)){glass(ctx,EE_RX+620,180,540,214,14,TRUST,{glow:10,ea:0.7,fill:"rgba(6,10,20,0.95)"});ET.forEach((c_,i)=>T(ctx,c_,EE_RX+644,224+i*38,{f:"mono",w:500,size:18,color:rgba(SOFT,1)}));
+      ctx.fillStyle="rgba(170,200,245,0.16)";ctx.fillRect(EE_RX+630,326,520,1.2);T(ctx,"no rows, yet",EE_RX+890,370,{w:700,size:18,align:"center",color:rgba(SOFT,1)});}
+      else ee_table(ctx,EE_RX+620,180,ET,[],{empty:"no rows, yet",edge:TRUST});}),{dy:20});
     arrive(ctx,EE_RX+870,420,t,w("empty","right shape"),()=>tag(ctx,EE_RX+870,420,"the right shape · no rows",SOFT,{align:"center",size:20}),{dy:12});
     arrive(ctx,EE_RX+870,620,t,w("empty","the forecast"),()=>ee_code(ctx,EE_RX+620,500,540,"exposures/finance/_finance__exposures.yml",EE_EXP,{size:18,lh:28,edge:EE_FIN,lit:{5:fin(t,w("empty","depends on it"),0.5)},litCol:EE_FIN}),{dy:24});});
   // a gap, accepted: a known limitation on the mart, and a decision that says why
   const gA=fin(t,cG-0.2,0.6);
   if(gA>0.01){arrive(ctx,EE_RX+EE_RW/2,250,t,cG,()=>{glass(ctx,EE_RX,170,EE_RW,150,18,EE_AMB,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.96)"});T(ctx,"a gap",EE_RX+28,214,{w:800,size:22,color:rgba(EE_AMB,1)});
-      T(ctx,"expects:",EE_RX+28,256,{w:700,size:20,color:rgba(SOFT,1)});T(ctx,"what each learner was charged",EE_RX+140,256,{w:700,size:22});
-      T(ctx,"holds:",EE_RX+28,296,{w:700,size:20,color:rgba(SOFT,1)});T(ctx,"the published rate, per credit point",EE_RX+140,296,{w:700,size:22});
-      withA(ctx,fin(t,w("gap","Scholarships"),0.5),()=>tag(ctx,EE_RX+900,214,"scholarships · discounts",EE_AMB,{size:19}));},{dy:20});
+      const VX=Math.max(EE_RX+140,EE_RX+44+tw(ctx,"expects:",phSz(ctx,20),700));
+      T(ctx,"expects:",EE_RX+28,256,{w:700,size:20,color:rgba(SOFT,1)});T(ctx,"what each learner was charged",VX,256,{w:700,size:22});
+      T(ctx,"holds:",EE_RX+28,296,{w:700,size:20,color:rgba(SOFT,1)});T(ctx,"the published rate, per credit point",VX,296,{w:700,size:22});
+      withA(ctx,fin(t,w("gap","Scholarships"),0.5),()=>tag(ctx,Math.min(EE_RX+900,EE_RX+EE_RW-20-tw(ctx,"scholarships · discounts",phSz(ctx,19),700)-26),214,"scholarships · discounts",EE_AMB,{size:19}));},{dy:20});
     arrive(ctx,EE_RX+EE_RW/2,500,t,cA,()=>ee_code(ctx,EE_RX,370,EE_RW,"models/marts/finance/_finance__models.yml",EE_LIM,{size:18,lh:28,edge:TRUST,lit:{1:fin(t,w("accept","known limitation"),0.5)},p:clamp((t-cA)/1.4,0,1)}),{dy:24});
-    arrive(ctx,EE_RX+EE_RW/2,700,t,w("accept","Finance accepts"),()=>{ee_badge(ctx,EE_RX+60,720,28,"finance",null,{});kt_gtick(ctx,EE_RX+84,696,13,fin(t,w("accept","Finance accepts")+0.4,0.3));
-      tag(ctx,EE_RX+110,720,"accepted: LIM-FIN-01, on the mart · DEC-FIN-03, in the log, says why",TRUST,{size:20});},{dy:12});}
+    const AY=phMin(ctx)?Math.max(720,370+40+ee_code(ctx,EE_RX,370,EE_RW,"models/marts/finance/_finance__models.yml",EE_LIM,{a:0,size:18,lh:28})):720;
+    arrive(ctx,EE_RX+EE_RW/2,AY-20,t,w("accept","Finance accepts"),()=>{ee_badge(ctx,EE_RX+60,AY,28,"finance",null,{});kt_gtick(ctx,EE_RX+84,AY-24,13,fin(t,w("accept","Finance accepts")+0.4,0.3));
+      tag(ctx,EE_RX+110,AY,"accepted: LIM-FIN-01, on the mart · DEC-FIN-03, in the log, says why",TRUST,{size:20});},{dy:12});}
   const on=[w("contract","contract"),cE,w("contract","enforced")+0.3,w("empty","the forecast"),w("accept","decision"),w("contract","columns"),w("contract","enforced"),w("accept","decision")+0.3].map(x=>fin(t,x,0.4));
   arrive(ctx,EE_CX+EE_CW/2,400,t,0.3,()=>ee_commit(ctx,EE_CX,150,EE_CW,3,"the promise, before the logic",EE_R4,{on}),{dy:24});
   ee_top(ctx,S,t,3,fin(t,E-1.6,0.6));});
@@ -205,18 +213,19 @@ scene("tests",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   if(tA>0.01)arrive(ctx,EE_RX+EE_RW/2,420,t,cG-0.3,()=>withA(ctx,tA,()=>ee_code(ctx,EE_RX,150,EE_RW,"models/marts/finance/_finance__models.yml",EE_TESTS,{size:18,lh:27,edge:TRUST,p:clamp((t-cG+0.2)/2.4,0,1),
     lit:{2:fin(t,w("grain","tested as a key"),0.5),4:fin(t,w("grain","tested as a key"),0.5),8:fin(t,w("grain","Learners that exist"),0.5),12:fin(t,w("grain","award types"),0.5)}})),{dy:24});
   const uA=fin(t,cU-0.2,0.6)*(1-fin(t,cR-0.4,0.6));
-  if(uA>0.01)arrive(ctx,EE_RX+EE_RW/2,360,t,cU,()=>withA(ctx,uA,()=>{ee_code(ctx,EE_RX,150,EE_RW,"models/marts/finance/_finance__models.yml · unit_tests",EE_UNIT,{size:18,lh:29,edge:TRUST,lit:{6:fin(t,w("unit","still saves"),0.5),7:fin(t,w("unit","still saves")+0.3,0.5)}});
-    tag(ctx,EE_RX+EE_RW/2,560,"credit that counts towards two awards · saved once",TRUST,{align:"center",size:20});}),{dy:24});
+  if(uA>0.01)arrive(ctx,EE_RX+EE_RW/2,360,t,cU,()=>withA(ctx,uA,()=>{const uh=ee_code(ctx,EE_RX,150,EE_RW,"models/marts/finance/_finance__models.yml · unit_tests",EE_UNIT,{size:18,lh:29,edge:TRUST,lit:{6:fin(t,w("unit","still saves"),0.5),7:fin(t,w("unit","still saves")+0.3,0.5)}});
+    tag(ctx,EE_RX+EE_RW/2,phMin(ctx)?Math.max(560,150+uh+30):560,"credit that counts towards two awards · saved once",TRUST,{align:"center",size:20});}),{dy:24});
   const rA=fin(t,cR-0.2,0.6)*(1-fin(t,cF-0.4,0.6));
+  const RY=phMin(ctx)?Math.max(0,150+30+ee_code(ctx,EE_RX,150,EE_RW,"seeds/expected/finance/tuition_report.csv",EE_REPORT,{a:0,size:18,lh:29})-500):0;
   if(rA>0.01)withA(ctx,rA,()=>{arrive(ctx,EE_RX+EE_RW/2,280,t,cR,()=>ee_code(ctx,EE_RX,150,EE_RW,"seeds/expected/finance/tuition_report.csv",EE_REPORT,{size:18,lh:29,edge:EE_FIN,p:clamp((t-cR)/1.4,0,1)}),{dy:24});
-    arrive(ctx,EE_RX+EE_RW/2,500,t,w("report","no model may read"),()=>tag(ctx,EE_RX+EE_RW/2,500,"an expected seed · no model may read it",EE_FIN,{align:"center",size:20}),{dy:12});
-    arrive(ctx,EE_RX+EE_RW/2,640,t,w("report","reconciliation"),()=>{ee_node(ctx,EE_RX+80,640,"mart_finance__tuition_forgone",TRUST,{});ee_node(ctx,EE_RX+760,640,"tuition_report",EE_FIN,{});
-      tag(ctx,EE_RX+EE_RW/2+60,710,"reconcile_finance_with_tuition_report",KIND,{align:"center",size:19});arrowTo(ctx,EE_RX+460,640,EE_RX+750,640,KIND,1,{head:12});},{dy:12});});
+    arrive(ctx,EE_RX+EE_RW/2,500+RY,t,w("report","no model may read"),()=>tag(ctx,EE_RX+EE_RW/2,500+RY,"an expected seed · no model may read it",EE_FIN,{align:"center",size:20}),{dy:12});
+    arrive(ctx,EE_RX+EE_RW/2,640+RY,t,w("report","reconciliation"),()=>{const nw=ee_node(ctx,EE_RX+80,640+RY,"mart_finance__tuition_forgone",TRUST,{});ee_node(ctx,EE_RX+760,640+RY,"tuition_report",EE_FIN,{});
+      tag(ctx,EE_RX+EE_RW/2+60,710+RY,"reconcile_finance_with_tuition_report",KIND,{align:"center",size:19});arrowTo(ctx,Math.max(EE_RX+460,EE_RX+84+nw),640+RY,EE_RX+750,640+RY,KIND,1,{head:12});},{dy:12});});
   // nothing can pass yet: the unit test fails, and dbt skips the mart
   const fA=fin(t,cF-0.2,0.6);
   if(fA>0.01){arrive(ctx,EE_RX+EE_RW/2,250,t,cF,()=>ee_code(ctx,EE_RX,150,EE_RW,"dbt build",EE_FAIL,{size:18,lh:30,wrap:98,edge:BAD,label:EE_RUN,lineCol:{0:BAD},lit:{2:fin(t,w("fail","doesn't even build"),0.5)},litCol:BAD}),{dy:24});
     arrive(ctx,EE_RX+300,470,t,w("fail","unit test fails"),()=>{ee_ci(ctx,EE_RX,430,560,"unit test",1,"");},{dy:16});
-    arrive(ctx,EE_RX+880,470,t,w("fail","doesn't even build"),()=>{glass(ctx,EE_RX+600,430,560,60,14,SOFT,{glow:4,ea:0.6,fill:"rgba(7,12,24,0.95)"});T(ctx,"SKIP",EE_RX+624,468,{f:"mono",w:500,size:20,color:rgba(SOFT,1)});T(ctx,"mart_finance__tuition_forgone",EE_RX+700,468,{f:"mono",w:500,size:18});},{dy:16});
+    arrive(ctx,EE_RX+880,470,t,w("fail","doesn't even build"),()=>{glass(ctx,EE_RX+600,430,560,60,14,SOFT,{glow:4,ea:0.6,fill:"rgba(7,12,24,0.95)"});T(ctx,"SKIP",EE_RX+624,468,{f:"mono",w:500,size:20,color:rgba(SOFT,1)});const kx=Math.max(EE_RX+700,EE_RX+640+tw(ctx,"SKIP",phSz(ctx,20),500,"mono"));T(ctx,phFitPath(ctx,"mart_finance__tuition_forgone",EE_RX+1140-kx,phSz(ctx,18)),kx,468,{f:"mono",w:500,size:18});},{dy:16});
     arrive(ctx,EE_RX+EE_RW/2,560,t,w("fail","Nothing can pass"),()=>tag(ctx,EE_RX+EE_RW/2,560,"on purpose: nothing can pass until the logic is built",SOFT,{align:"center",size:20}),{dy:12});
     // the output requirement is done, and deleted
     arrive(ctx,EE_RX+EE_RW/2,720,t,cD-0.1,()=>ee_code(ctx,EE_RX+200,620,EE_RW-400,"_finance__requirements.yml",["  - id: REQ-FIN-02","    title: The rows and columns the forecast needs"],{tmp:1,size:19,lh:30,strike:{0:fin(t,w("done","deleted"),0.6),1:fin(t,w("done","deleted")+0.2,0.6)}}),{dy:20});
@@ -238,9 +247,10 @@ scene("build",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   // it reads nothing but the public core and Finance's rates; no other model changes
   const lA=fin(t,cO-0.2,0.6)*(1-fin(t,cG-0.3,0.6));
   if(lA>0.01)withA(ctx,lA,()=>{const core=[["core_learner",250],["core_award",340],["core_credit_towards_award",430]];
-    core.forEach(([n,y],i)=>{arrive(ctx,EE_RX+180,y,t,cO+i*0.15,()=>ee_node(ctx,EE_RX,y,n,TRUST,{on:0.5}),{dy:12});ee_flow(ctx,[[EE_RX+(n.length*10.8+44),y],[EE_RX+640,y],[EE_RX+700,560]],t,fin(t,cO+0.4,0.5),TRUST,{p:fin(t,cO+0.4,0.8),n:3});});
-    arrive(ctx,EE_RX+180,560,t,cO+0.5,()=>ee_node(ctx,EE_RX,560,"tuition_rates",EE_FIN,{on:0.5}),{dy:12});ee_flow(ctx,[[EE_RX+190,560],[EE_RX+700,560]],t,fin(t,cO+0.6,0.5),EE_FIN,{p:fin(t,cO+0.6,0.8),n:3});
-    arrive(ctx,EE_RX+900,560,t,cO+0.8,()=>ee_node(ctx,EE_RX+710,560,"mart_finance__tuition_forgone",EE_FIN,{on:1}),{dy:12});
+    const MW=ee_node(ctx,0,0,"mart_finance__tuition_forgone",EE_FIN,{a:0}),MX=Math.min(EE_RX+710,1880-MW);
+    core.forEach(([n,y],i)=>{arrive(ctx,EE_RX+180,y,t,cO+i*0.15,()=>ee_node(ctx,EE_RX,y,n,TRUST,{on:0.5}),{dy:12});ee_flow(ctx,[[EE_RX+ee_node(ctx,0,0,n,TRUST,{a:0})+4,y],[MX-70,y],[MX-10,560]],t,fin(t,cO+0.4,0.5),TRUST,{p:fin(t,cO+0.4,0.8),n:3});});
+    arrive(ctx,EE_RX+180,560,t,cO+0.5,()=>ee_node(ctx,EE_RX,560,"tuition_rates",EE_FIN,{on:0.5}),{dy:12});ee_flow(ctx,[[EE_RX+ee_node(ctx,0,0,"tuition_rates",EE_FIN,{a:0})+4,560],[MX-10,560]],t,fin(t,cO+0.6,0.5),EE_FIN,{p:fin(t,cO+0.6,0.8),n:3});
+    arrive(ctx,MX+190,560,t,cO+0.8,()=>ee_node(ctx,MX,560,"mart_finance__tuition_forgone",EE_FIN,{on:1}),{dy:12});
     arrive(ctx,EE_RX+400,180,t,w("only","public core"),()=>tag(ctx,EE_RX,180,"the public core · Finance's own rates",TRUST,{size:20}),{dy:12});
     [["mart_planning__near_award",EE_PLN],["mart_wallet__learners",EE_WAL]].forEach(([n,col],i)=>arrive(ctx,EE_RX+900,720+i*64,t,w("only","No other team"),()=>{ee_node(ctx,EE_RX+640,720+i*64,n,col,{dark:0.6});},{dy:12}));
     arrive(ctx,EE_RX+300,752,t,w("only","No other team"),()=>tag(ctx,EE_RX,752,"no other team's model changes",SOFT,{size:20}),{dy:12});
@@ -266,14 +276,15 @@ scene("validate",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
     arrive(ctx,EE_RX+EE_RW/2,600,t,w("reconcile","is zero"),()=>tag(ctx,EE_RX+EE_RW/2,600,"difference: 0, in every faculty",GOOD,{align:"center",size:22}),{dy:12});}),{dy:24});
   // the diff against main, built from scratch: every core table, Planning's mart, the wallet's
   const dA=fin(t,cD-0.2,0.6);
-  if(dA>0.01){arrive(ctx,EE_RX+EE_RW/2,420,t,cD,()=>ee_table(ctx,EE_RX,170,["diff against main","keys only here","keys only in main","columns changed"],EE_DIFF,
+  const ph=phMin(ctx)>0,DH=["diff against main","keys only here","keys only in main","columns changed"],DT=ee_table(ctx,0,0,DH,EE_DIFF,{a:0,size:18,lh:42}),DX=ph?Math.max(EE_CX,Math.min(EE_RX,1880-DT.w)):EE_RX,DY=ph&&DX<EE_RX?320:170,TB=ph?DY+DT.h+40:620;
+  if(dA>0.01){arrive(ctx,EE_RX+EE_RW/2,420,t,cD,()=>ee_table(ctx,DX,DY,DH,EE_DIFF,
       {size:18,lh:42,edge:KT_AI,on:EE_DIFF.map((_,i)=>fin(t,cD+0.4+i*0.25,0.3)),lit:Object.fromEntries(EE_DIFF.map((_,i)=>[i,fin(t,w("nothing","No key added")+i*0.08,0.4)])),litCol:GOOD,colCol:{1:GOOD,2:GOOD,3:GOOD}}),{dy:24});
     kt_agent(ctx,EE_RX+EE_RW-40,130,20,t,{a:dA*(1-fin(t,cN+1,0.6)),busy:1-fin(t,cN,1)});
     const so=fin(t,c("signoff")-0.3,0.5);
-    arrive(ctx,EE_RX+EE_RW/2,620,t,w("nothing","A new consumer"),()=>withA(ctx,1-so,()=>T(ctx,"a new consumer moved nobody else's numbers",EE_RX+EE_RW/2,620,{w:800,size:30,align:"center",color:rgba(GOOD,1)})),{dy:14});
-    arrive(ctx,EE_RX+EE_RW/2,680,t,w("nothing","A new consumer")+0.4,()=>withA(ctx,1-so,()=>tag(ctx,EE_RX+EE_RW/2,678,"only new: mart_finance__tuition_forgone",EE_FIN,{align:"center",size:19})),{dy:12});
-    arrive(ctx,EE_RX+EE_RW/2,640,t,c("signoff"),()=>{ee_badge(ctx,EE_RX+330,640,34,"finance",null,{});kt_gtick(ctx,EE_RX+358,612,14,fin(t,w("signoff","signs off")+0.3,0.3));
-      T(ctx,"Finance signs off, with every row in front of it",EE_RX+384,648,{w:700,size:24});},{dy:14});}
+    arrive(ctx,EE_RX+EE_RW/2,TB,t,w("nothing","A new consumer"),()=>withA(ctx,1-so,()=>T(ctx,"a new consumer moved nobody else's numbers",EE_RX+EE_RW/2,TB,{w:800,size:30,align:"center",color:rgba(GOOD,1)})),{dy:14});
+    arrive(ctx,EE_RX+EE_RW/2,TB+60,t,w("nothing","A new consumer")+0.4,()=>withA(ctx,1-so,()=>tag(ctx,EE_RX+EE_RW/2,TB+58,"only new: mart_finance__tuition_forgone",EE_FIN,{align:"center",size:19})),{dy:12});
+    const SY=TB+20;arrive(ctx,EE_RX+EE_RW/2,SY,t,c("signoff"),()=>{ee_badge(ctx,EE_RX+330,SY,34,"finance",null,{});kt_gtick(ctx,EE_RX+358,SY-28,14,fin(t,w("signoff","signs off")+0.3,0.3));
+      T(ctx,"Finance signs off, with every row in front of it",EE_RX+384,SY+8,{w:700,size:24});},{dy:14});}
   arrive(ctx,EE_CX+EE_CW/2,220,t,0.3,()=>ee_commit(ctx,EE_CX,150,EE_CW,6,"Finance's number, and nothing else moved",EE_R7,{on:[fin(t,0.8,0.4)]}),{dy:24});
   ee_top(ctx,S,t,6,fin(t,E-1.6,0.6));});
 
@@ -289,17 +300,20 @@ scene("ship",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);e
   const rq=fin(t,cL-0.2,0.6),gone=fin(t,w("gone","deleted"),1.0),fold=fin(t,w("gone","its folder"),0.8);
   if(rq>0.01)withA(ctx,rq,()=>{ee_code(ctx,EE_RX,300,560,"_finance__requirements.yml",["scope: {kind: consumer, name: finance, code: FIN}","","items:","","  - id: REQ-FIN-01","    title: Match Finance's own number","    status: open"],
       {tmp:1,size:17,lh:28,strike:{4:fin(t,w("last","is done"),0.6),5:fin(t,w("last","is done")+0.2,0.6),6:fin(t,w("last","is done")+0.4,0.6)},gone:fin(t,w("gone","Finance's requirements file"),0.8)});
-    arrive(ctx,EE_RX+290,610,t,w("last","the reconciliation"),()=>tag(ctx,EE_RX+290,610,"done: the reconciliation enforces it, on every build",GOOD,{align:"center",size:19}),{dy:12});
+    const DNY=phMin(ctx)?660:610;arrive(ctx,EE_RX+290,DNY,t,w("last","the reconciliation"),()=>tag(ctx,EE_RX+290,DNY,"done: the reconciliation enforces it, on every build",GOOD,{align:"center",size:19}),{dy:12});
     arrive(ctx,EE_RX+260,700,t,w("gone","its folder")-0.3,()=>ee_folder(ctx,EE_RX+60,700,"requirements/exposures/finance/",EE_TMP,{dash:1,strike:fold,a:1-0.6*fold}),{dy:12});});
   // CI: the checks land one by one; the last makes sure nothing stays in requirements unless it's still open
   const ckA=fin(t,cC-0.6,0.6);
-  if(ckA>0.01)EE_CHECKS.forEach((s,i)=>{const t0=cC-0.4+i*0.25;arrive(ctx,EE_RX+880,180+i*96,t,t0,()=>ee_ci(ctx,EE_RX+600,150+i*96,560,s,fin(t,t0+0.3,0.2)*2,"",{a:i===4?1:0.85,size:18}),{dy:14});});
-  if(ckA>0.01)arrive(ctx,EE_RX+880,660,t,w("check","nothing stays"),()=>{T(ctx,"python scripts/check/requirements.py",EE_RX+620,656,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});tag(ctx,EE_RX+620,700,"3 requirements open · none of them Finance's",GOOD,{size:19});},{dy:12});
+  const ph=phMin(ctx)>0,CY=[];let cy_=150;EE_CHECKS.forEach(s_=>{CY.push(cy_);cy_+=ph?ee_ci(ctx,0,0,560,s_,2,"",{a:0,size:18})+12:96;});
+  if(ckA>0.01)EE_CHECKS.forEach((s,i)=>{const t0=cC-0.4+i*0.25;arrive(ctx,EE_RX+880,CY[i]+30,t,t0,()=>ee_ci(ctx,EE_RX+600,CY[i],560,s,fin(t,t0+0.3,0.2)*2,"",{a:i===4?1:0.85,size:18}),{dy:14});});
+  const PY=ph?cy_+36:656,PX=ph?Math.min(EE_RX+620,1880-tw(ctx,"python scripts/check/requirements.py",phSz(ctx,18),500,"mono")):EE_RX+620;
+  if(ckA>0.01)arrive(ctx,EE_RX+880,PY,t,w("check","nothing stays"),()=>{T(ctx,"python scripts/check/requirements.py",PX,PY,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});
+    if(ph){tag(ctx,EE_RX+700,PY+44,"3 requirements open",GOOD,{size:19});tag(ctx,EE_RX+700,PY+98,"none of them Finance's",GOOD,{size:19});}else tag(ctx,EE_RX+620,700,"3 requirements open · none of them Finance's",GOOD,{size:19});},{dy:12});
   // people approve; the agent never merges
   const apA=fin(t,cA-0.2,0.6);
   if(apA>0.01){arrive(ctx,EE_RX+120,800,t,w("approve","Jun approves"),()=>{ee_face(ctx,"jun",EE_RX+60,800,40,1,{t});kt_gtick(ctx,EE_RX+92,770,13,fin(t,w("approve","Jun approves")+0.4,0.3));T(ctx,"Jun · the code",EE_RX+114,808,{w:700,size:20});},{from:0.8});
     arrive(ctx,EE_RX+460,800,t,w("approve","Finance its number"),()=>{ee_badge(ctx,EE_RX+380,800,36,"finance",null,{});kt_gtick(ctx,EE_RX+410,770,13,fin(t,w("approve","Finance its number")+0.4,0.3));T(ctx,"Finance · its number",EE_RX+430,808,{w:700,size:20});},{from:0.8});
-    arrive(ctx,EE_RX+900,800,t,w("approve","never merges"),()=>{kt_agent(ctx,EE_RX+760,800,20,t,{});tag(ctx,EE_RX+800,800,"the agent never merges",KT_AI,{size:20});},{from:0.8});}
+    const AG=ph?Math.max(760,430+tw(ctx,"Finance · its number",phSz(ctx,20),700)+44):760;arrive(ctx,EE_RX+900,800,t,w("approve","never merges"),()=>{kt_agent(ctx,EE_RX+AG,800,20,t,{});tag(ctx,EE_RX+AG+40,800,"the agent never merges",KT_AI,{size:20});},{from:0.8});}
   arrive(ctx,EE_CX+EE_CW/2,220,t,0.3,()=>ee_commit(ctx,EE_CX,150,EE_CW,7,"the last open item is done, and deleted",EE_R8,{on:[fin(t,w("gone","deleted"),0.4)],hi:{0:pulseAt(t,w("gone","deleted"),2.4)}}),{dy:24});
   ee_top(ctx,S,t,7,fin(t,E-1.6,0.6));});
 
@@ -317,14 +331,17 @@ scene("once",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);e
   // each becomes one doc block in the course domain, which owns the award; Finance and Planning show it with doc()
   const hA=fin(t,cH-0.2,0.6)*(1-fin(t,cZ-0.3,0.6));
   if(hA>0.01)withA(ctx,hA,()=>{arrive(ctx,EE_RX+280,330,t,cH,()=>ee_code(ctx,EE_RX,150,560,"models/core/course/_course__columns.md",EE_DOCS,{size:18,lh:28,edge:KIND,lit:{0:fin(t,w("home","one doc block"),0.5),4:fin(t,w("home","one doc block")+0.2,0.5)}}),{dy:24});
-    arrive(ctx,EE_RX+280,560,t,w("home","course domain"),()=>tag(ctx,EE_RX+280,560,"the course domain owns the award",KIND,{align:"center",size:20}),{dy:12});
-    [["models/marts/finance/_finance__models.yml",EE_FIN],["models/marts/planning/_planning__models.yml",EE_PLN]].forEach(([p,col],i)=>arrive(ctx,EE_RX+880,260+i*250,t,w("home","shown everywhere")+i*0.3,()=>ee_code(ctx,EE_RX+590,170+i*250,570,p,EE_USE,{size:17,lh:27,wrap:56,edge:col,seg:[[-1,'doc("award_code")',1,KIND],[-1,'doc("award_name")',1,KIND]]}),{dy:20}));});
+    const ph=phMin(ctx)>0,KY=ph?Math.max(560,150+30+ee_code(ctx,EE_RX,150,560,"models/core/course/_course__columns.md",EE_DOCS,{a:0,size:18,lh:28})):560,
+      UH=ph?ee_code(ctx,EE_RX+590,170,570,"models/marts/finance/_finance__models.yml",EE_USE,{a:0,size:17,lh:27,wrap:56})+16:250;
+    arrive(ctx,EE_RX+280,KY,t,w("home","course domain"),()=>tag(ctx,EE_RX+280,KY,"the course domain owns the award",KIND,{align:"center",size:20}),{dy:12});
+    [["models/marts/finance/_finance__models.yml",EE_FIN],["models/marts/planning/_planning__models.yml",EE_PLN]].forEach(([p,col],i)=>arrive(ctx,EE_RX+880,260+i*UH,t,w("home","shown everywhere")+i*0.3,()=>ee_code(ctx,EE_RX+590,170+i*UH,570,p,EE_USE,{size:17,lh:27,wrap:56,edge:col,seg:[[-1,'doc("award_code")',1,KIND],[-1,'doc("award_name")',1,KIND]]}),{dy:20}));});
   // zero written twice; the generated pages keep up on their own
   const zA=fin(t,cZ-0.2,0.6);
   if(zA>0.01){arrive(ctx,EE_RX+EE_RW/2,230,t,cZ,()=>ee_ci(ctx,EE_RX,180,EE_RW,"the agent's review, again",2,"0 description(s) written more than once"),{dy:16});
     [["_finance__definitions.md","models/marts/finance/"],["_finance__physical.md","models/marts/finance/"],["decisions.md","docs/"]].forEach(([f,d],i)=>{const t0=w("zero","generated pages")+i*0.3;
-      arrive(ctx,EE_RX+EE_RW/2,420+i*96,t,t0,()=>{glass(ctx,EE_RX+180,380+i*96,EE_RW-360,76,14,[170,205,255],{glow:8,ea:0.7,fill:"rgba(7,12,24,0.95)"});ee_cog(ctx,EE_RX+222,418+i*96,12,t,SOFT,1,1);
-        T(ctx,f,EE_RX+260,412+i*96,{f:"mono",w:500,size:20});T(ctx,d,EE_RX+260,442+i*96,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});T(ctx,"generated · up to date",EE_RX+EE_RW-200,426+i*96,{w:700,size:19,align:"right",color:rgba(GOOD,1)});},{dy:14});});}
+      const gx=phMin(ctx)?EE_RX+40:EE_RX+180,gw=EE_RW-2*(gx-EE_RX),gh=phMin(ctx)?84:76,gs=phMin(ctx)?104:96;
+      arrive(ctx,EE_RX+EE_RW/2,420+i*gs,t,t0,()=>{glass(ctx,gx,380+i*gs,gw,gh,14,[170,205,255],{glow:8,ea:0.7,fill:"rgba(7,12,24,0.95)"});ee_cog(ctx,gx+42,418+i*gs,12,t,SOFT,1,1);
+        T(ctx,f,gx+80,412+i*gs,{f:"mono",w:500,size:20});T(ctx,d,gx+80,(phMin(ctx)?448:442)+i*gs,{f:"mono",w:500,size:18,color:rgba(SOFT,1)});T(ctx,"generated · up to date",gx+gw-20,426+i*gs,{w:700,size:19,align:"right",color:rgba(GOOD,1)});},{dy:14});});}
   const on=[w("home","one doc block"),w("home","one doc block")+0.3,w("home","shown everywhere"),w("home","shown everywhere")+0.3].map(x=>fin(t,x,0.4));
   arrive(ctx,EE_CX+EE_CW/2,320,t,0.3,()=>ee_commit(ctx,EE_CX,150,EE_CW,8,"two descriptions, written once",EE_R9,{on}),{dy:24});
   ee_top(ctx,S,t,8,fin(t,E-1.6,0.6));});
@@ -340,11 +357,12 @@ scene("evolve",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   const pA=1-fin(t,cM-0.3,0.6);
   if(pA>0.01)withA(ctx,pA,()=>{arrive(ctx,EE_RX+EE_RW/2,280,t,0.4,()=>ee_code(ctx,EE_RX,150,EE_RW,"models/marts/finance/mart_finance__tuition_forgone.sql",EE_PIN,{size:19,lh:30,edge:EE_FIN,seg:[[-1,"v=1",fin(t,w("pin","pins"),0.5),EE_AMB]]}),{dy:24});
     // a new version arrives as a choice with a date; the lineage names Finance among who to tell
+    const ph=phMin(ctx)>0,NW=ee_node(ctx,0,0,"core_credit_towards_award v2",TRUST,{a:0}),CX2=ph?Math.max(430,NW+16):430,MX2=ph?Math.max(520,NW+60):520,WY=ph?700:640;
     const lA=fin(t,cC-0.2,0.6);withA(ctx,lA,()=>{[["core_credit_towards_award v1",520],["core_credit_towards_award v2",620]].forEach(([n,y],i)=>arrive(ctx,EE_RX+200,y,t,cC+i*0.4,()=>{ee_node(ctx,EE_RX,y,n,TRUST,{on:i?0.3:0.6,dash:i});
-        if(i)tag(ctx,EE_RX+430,y,"a choice, with a date",EE_AMB,{size:19});},{dy:12}));
-      arrive(ctx,EE_RX+840,520,t,cC+0.3,()=>{ee_node(ctx,EE_RX+520,520,"mart_finance__tuition_forgone",EE_FIN,{on:0.5});},{dy:12});
-      arrive(ctx,EE_RX+1000,620,t,w("choice","who to tell"),()=>{ee_badge(ctx,EE_RX+580,640,26,"finance",null,{});tag(ctx,EE_RX+620,640,"revenue_forecast · who to tell",EE_FIN,{size:19});},{dy:12});
-      arrowTo(ctx,EE_RX+340,520,EE_RX+510,520,TRUST,fin(t,cC+0.4,0.4),{head:11,p:fin(t,cC+0.4,0.6)});});});
+        if(i)tag(ctx,EE_RX+CX2,y,"a choice, with a date",EE_AMB,{size:19});},{dy:12}));
+      arrive(ctx,EE_RX+840,520,t,cC+0.3,()=>{ee_node(ctx,EE_RX+MX2,520,"mart_finance__tuition_forgone",EE_FIN,{on:0.5});},{dy:12});
+      arrive(ctx,EE_RX+1000,WY-20,t,w("choice","who to tell"),()=>{ee_badge(ctx,EE_RX+580,WY,26,"finance",null,{});tag(ctx,EE_RX+620,WY,"revenue_forecast · who to tell",EE_FIN,{size:19});},{dy:12});
+      arrowTo(ctx,EE_RX+(ph?NW+4:340),520,EE_RX+MX2-10,520,TRUST,fin(t,cC+0.4,0.4),{head:11,p:fin(t,cC+0.4,0.6)});});});
   // Finance can move out to a project of its own, whole: its paths gather into one box
   const mA=fin(t,cM-0.2,0.6);
   if(mA>0.01){const g=ease(fin(t,w("list","Its marts")-0.2,1.6));
@@ -353,7 +371,7 @@ scene("evolve",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
       EE_MOVE.forEach(([p,col],i)=>{const x0=EE_RX,y0=220+i*100,x1=EE_RX+590,y1=320+i*66,q=fin(t,cM+0.2+i*0.18,0.4);ee_folder(ctx,lerp(x0,x1,g),lerp(y0,y1,g),p,col,{a:q,on:0.4*q});});
       withA(ctx,1-g,()=>tag(ctx,EE_RX,740,"Finance's folders, named for it from the first commit",EE_FIN,{size:20}));},{dy:20});
     // and the one test and two analyses it was built with: split by purpose, so they're named one by one
-    EE_TAKE.forEach((f,i)=>arrive(ctx,EE_RX+860,650+i*54,t,w("list","the test and")+i*0.25,()=>ee_node(ctx,EE_RX+600,650+i*54,f,i?SOFT:TRUST,{on:0.4}),{dy:12}));}
+    EE_TAKE.forEach((f,i)=>arrive(ctx,EE_RX+860,650+i*54,t,w("list","the test and")+i*0.25,()=>ee_node(ctx,EE_RX+600,650+i*54,f,i?SOFT:TRUST,{on:0.4,maxW:540}),{dy:12}));}
   const on=[w("pin","pins"),w("choice","choice"),w("choice","who to tell"),w("move","folders were named"),w("move","project of its own")].map(x=>fin(t,x,0.4));
   arrive(ctx,EE_CX+EE_CW/2,320,t,0.3,()=>ee_commit(ctx,EE_CX,150,EE_CW,9,"pinned, and ready to move out",EE_R10,{on}),{dy:24});
   ee_top(ctx,S,t,9,fin(t,E-1.6,0.6));});

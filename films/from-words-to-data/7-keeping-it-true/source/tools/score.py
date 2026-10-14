@@ -1,10 +1,15 @@
 # Keeping it true: the music and sounds, played by tools/audio.py with the series' instruments (shared/tools/music.py).
-# The film's palette is time and care: string swells over a ticking clock at 60 beats a minute, with a felt piano, in C major.
+# The film's palette is time and care: string swells and a felt piano, in C major. Its rhythm follows the feeling: a quick pulse
+# as three changes arrive in one month, a slow uneasy one as the model drifts, and an urgent one at what can go wrong.
 # The drift chapters (how models go stale, the agent watching, what can go wrong) lean into A minor; the decisions and the end
 # to end return to C. In the last chapter the series comes home: its motif on the kalimba in D (What's in a word's key and
 # instrument), answered by a tubular bell (Older than the systems), resolving on a warm D major chord.
-# Effects: pages for the dictionary, clock ticks, a pencil's scratch, stamps for approvals, glitches for drift, glassy nodes when
-# the agent notices something, chimes for tests that pass, and a seal when version three is approved.
+# Effects: pages for the dictionary, soft ticks, a pencil's scratch, stamps for approvals, low glitches for drift, low felt notes
+# when the agent notices something and for tests that pass, and a seal when version three is approved.
+
+# PLAYBOOK.md: effects stay low and soft, below about 2.5 kHz. The series' soft stand-ins replace the bright ones by name (a chime
+# or a ping becomes a low felt note, a tick a muffled key, a pop a wooden knock, a sweep a breath of air), so every cue keeps its time
+globals().update(soft_palette())
 
 # when a word of a line is spoken, as the film's own kt_w() estimates it: along the line's voiced length, from the words the voice reads
 import json as _json, pathlib as _pl
@@ -18,32 +23,25 @@ def W(sid, lid, word, off=0):
 CMAJ9 = [48, 55, 59, 62, 64]; FMAJ9 = [41, 48, 52, 55, 57]; G6 = [43, 50, 55, 59, 64]; GSUS = [43, 50, 55, 60, 62]
 AM9 = [45, 52, 55, 59, 60]; DM9 = [38, 45, 48, 52, 53]; EM7 = [40, 47, 50, 55, 59]; FMAJ7 = [41, 48, 52, 57]
 DMAJ9 = [50, 57, 61, 64, 66]; GMAJ7 = [43, 50, 54, 59, 62]; A6 = [45, 52, 57, 61, 66]; BM7 = [47, 54, 57, 62]
-tickhi = lambda s, g, p: clock(s, g, p, True)
-ticklo = lambda s, g, p: clock(s, g, p, False)
-def clockrun(s0, s1, g=0.035):
-    """the clock at 60 beats a minute: a high tick, then a low one"""
-    pulse(s0, s1, 60, [(0, tickhi, g, 0.25), (1, ticklo, g * 0.8, 0.2)], fade=2.0)
 
-# 1. A dictionary is never finished: a felt piano over strings, the clock already ticking; the title on the piano
+# 1. A dictionary is never finished: a felt piano over strings; the title on the piano
 prog('dict', [CMAJ9, FMAJ9, AM9, G6], 0, cq('dict', 'breath'), g=0.05, tone='strings')
 motif('dict', [CMAJ9, FMAJ9, AM9, G6], 0, cq('dict', 'breath'), every=1.5, g=0.04, inst=felt)
-clockrun(S0('dict') + 0.8, G('dict', 'breath', 0.4))
 prog('dict', [CMAJ9], cq('dict', 'breath'), g=0.05, tone='strings', bassg=0.03)
 theme(G('dict', 'breath', 0.7), 60, felt, step=0.48, g=0.09); theme(G('dict', 'breath', 0.9), 72, celesta, step=0.48, g=0.03)
-# 2. Change arrives: C major, with a question in it; the clock counts the month
+# 2. Change arrives: C major, with a question in it; a quick, driving pulse as the month's three changes arrive
 prog('arrives', [CMAJ9, FMAJ9, AM9, GSUS], g=0.05, tone='strings')
 motif('arrives', [CMAJ9, FMAJ9, AM9, GSUS], every=1.3, g=0.035, inst=felt)
-clockrun(S0('arrives'), E('arrives'), 0.03)
-# 3. How models go stale: A minor, the strings darker, the clock still going
+urgent(S0('arrives') + 0.6, E('arrives') - 0.4, bpm=108, root=36, g=0.05)
+# 3. How models go stale: A minor, the strings darker, a slow pulse that leans on the semitone as the model drifts
 prog('stale', [AM9, FMAJ7, DM9, EM7], g=0.055, tone='strings', bassg=0.04)
 motif('stale', [AM9, FMAJ7, DM9, EM7], every=1.7, g=0.035, inst=felt)
-clockrun(S0('stale'), E('stale'), 0.03)
+urgent(G('stale', 'drift', 0.0), E('stale') - 0.4, bpm=72, root=33, g=0.047, steps=(0, 0, 1, 0), fade=2.0)
 drone(33, G('stale', 'gap', -0.5), 6.0, 0.03, 'strings')
-# 4. AI as a watcher: still A minor, glassier; the clock ticks on while the agent reads
+# 4. AI as a watcher: still A minor, glassier, and calm: the agent reads, and nothing is rushed
 prog('watch', [AM9, EM7, FMAJ7, AM9], g=0.05, tone='glass', bassg=0.03)
 prog('watch', [AM9, FMAJ7], g=0.025, tone='strings', bassg=0)
 motif('watch', [AM9, EM7, FMAJ7, AM9], every=1.4, g=0.03, inst=felt)
-clockrun(S0('watch'), E('watch'), 0.03)
 # 5. AI as a drafter: moving back towards C, a felt piano figure while the cards are drafted
 prog('draft', [FMAJ9, G6, CMAJ9, AM9], g=0.05, tone='strings')
 ostinato(G('draft', 'list', -0.4), G('draft', 'cheap', 0.4), [60, 67, 64, 72, 67, 64], 0.36, felt, 0.03, -0.1)
@@ -52,10 +50,10 @@ motif('draft', [FMAJ9, G6, CMAJ9, AM9], cq('draft', 'cheap'), every=1.2, g=0.035
 prog('decide', [CMAJ9, FMAJ9, G6, CMAJ9], g=0.055, tone='strings')
 motif('decide', [CMAJ9, FMAJ9, G6, CMAJ9], every=1.3, g=0.04, inst=felt)
 pad([48, 55, 60, 64, 67], G('decide', 'rule', 0.8), 5.0, 0.03, 'strings')
-# 7. What can go wrong: A minor again, the clock back, uneasy
+# 7. What can go wrong: A minor again, and an urgent pulse, leaning on the semitone, until the checks stop the wrong changes
 prog('wrong', [AM9, DM9, EM7, AM9], g=0.055, tone='strings', bassg=0.04)
 motif('wrong', [AM9, DM9, EM7, AM9], every=1.6, g=0.035, inst=felt)
-clockrun(S0('wrong') + 0.5, G('wrong', 'check', 0.2), 0.028)
+urgent(S0('wrong') + 0.5, G('wrong', 'check', 0.6), bpm=100, root=33, g=0.058, steps=(0, 0, 1, 0))
 # 8. End to end: from F to C, rising as each layer lights; the stamp reads v3 on a full C major chord
 prog('e2e', [FMAJ9, G6, AM9, G6], 0, cq('e2e', 'v3'), g=0.05, tone='strings')
 prog('e2e', [CMAJ9], cq('e2e', 'v3'), g=0.06, tone='strings', bassg=0.04)
@@ -128,3 +126,6 @@ ping(G('remains', 'alike', 0.6), 0.05, 0); buzz(W('remains', 'alike', 'Only the 
 seal(G('end', 'claim', 0.3), 0.08, -0.4); card(W('end', 'claim', 'So is'), 0.05, 0.4)
 [pop(G('end', 'job', 0.1 + k * 0.3), 0.04, (k - 2) * 0.3) for k in range(5)]; scratch(W('end', 'job', 'write'), 0.04, 0, 0.6); stamp(W('end', 'job', 'keep'), 0.08, 0.4)
 bell(G('end', 'breath', 0.6), 0.08, 587)
+
+# PLAYBOOK.md: the whole score, music and effects, is low-passed at 2.6 kHz last, so no instrument rings above the voice
+soften()

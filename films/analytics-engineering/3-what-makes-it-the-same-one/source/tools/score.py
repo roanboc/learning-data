@@ -5,6 +5,8 @@
 # Two rules, as in film 1:
 #  - Nothing loops. No pulse, walking bass, repeated figure or random notes: the bed is sustained chords that change with the
 #    chapters, and the bassoon plays one line, once.
+#  - The one exception is feeling: when the story turns to an error, a low, muted pulse (music.py's urgent()) rises under
+#    the scene, leans on the semitone, and fades out once the problem is caught. It stays below about 1 kHz.
 #  - Every sound is an event on screen, at the moment it appears. Each effect below uses the same timing as the picture in
 #    src/scenes.js (the same word, and the same offset), so sound and picture stay together when the voice is re-timed.
 # Everything stays low and soft, filtered below about 2.5 kHz: wooden clicks, knocks, muffled keys, paper, low felt notes, thuds.
@@ -133,6 +135,8 @@ press(W('rules', 'owned', 'approved'), 0.07)
 #    the rule lights; paper for the merge; a knock for the sixth credential; one muffled key per green tick; a low held note;
 #    Mei's decision typed and stamped; the merge undoes with a rising note; keys for the code that keeps them apart
 bed('apart', [CM, ABM7, FM7, EB, EB])
+# under the wrong merge, a low urgent pulse, until May decides they're two people
+urgent(G('apart', 'merge', -0.2), G('apart', 'decide', 0.3), bpm=92, root=36, g=0.054, steps=(0, 0, 1, 0))
 soft(39, S0('apart') + 0.6, 0.05); drone(39, S0('apart') + 0.6, 3.0, 0.016, 'strings')
 knock(W('apart', 'other', 'platform account'), 0.035, 0.0); knock(W('apart', 'other', 'student ID field'), 0.035, 0.0)
 soft(50, G('apart', 'merge', -0.1), 0.03, -0.1)

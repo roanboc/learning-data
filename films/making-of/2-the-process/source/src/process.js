@@ -21,7 +21,7 @@ function bubble(ctx,x,y,w,text,from,a,o){o=o||{};if(a<=0)return;const c=from==="
 const LANE={A:{y:150,h:120},C:{y:630,h:120}};
 function lanes(ctx,t,a,o){o=o||{};withA(ctx,a,()=>{
   [["A","the author",WARM,o.authorItems||[]],["C","Claude",COOL,o.claudeItems||[]]].forEach(([k,name,c,items])=>{const L=LANE[k];glass(ctx,60,L.y,1800,L.h,20,c,{glow:18,ea:0.45,fill:"rgba(8,12,22,0.9)"});
-    T(ctx,name,96,L.y+L.h/2+10,{w:800,size:30,color:rgba(c,1)});let x=330;items.forEach(([s,ia])=>{if(ia<=0)return;const w=tw(ctx,s,20,700)+36;withA(ctx,ia,()=>{glass(ctx,x,L.y+L.h/2-22,w,44,22,c,{glow:8,ea:0.5,fill:"rgba(12,18,32,0.95)"});T(ctx,s,x+18,L.y+L.h/2+7,{w:700,size:20});});x+=w+14;});});
+    T(ctx,name,96,L.y+L.h/2+10,{w:800,size:30,color:rgba(c,1)});let x=330;const cs=Math.max(20,phMin(ctx)),ch=Math.max(44,cs+20);items.forEach(([s,ia])=>{if(ia<=0)return;const w=tw(ctx,s,cs,700)+36;withA(ctx,ia,()=>{glass(ctx,x,L.y+L.h/2-ch/2,w,ch,ch/2,c,{glow:8,ea:0.5,fill:"rgba(12,18,32,0.95)"});T(ctx,s,x+18,L.y+L.h/2+cs*0.36,{w:700,size:20});});x+=w+14;});});
   const thr=o.thread==null?1:o.thread;if(thr>0){withA(ctx,thr,()=>{for(let i=0;i<5;i++){const x=440+i*260;ctx.save();ctx.strokeStyle="rgba(200,215,240,0.12)";ctx.setLineDash([6,10]);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,LANE.A.y+LANE.A.h);ctx.lineTo(x,LANE.C.y);ctx.stroke();ctx.restore();
     const up=i%2===0,v=((t*0.45+i*0.37)%1),y=up?lerp(LANE.C.y,LANE.A.y+LANE.A.h,v):lerp(LANE.A.y+LANE.A.h,LANE.C.y,v),c=up?COOL:WARM;glow(ctx,x,y,26,c,0.7*Math.sin(Math.PI*v));}});}});}
 // a message travelling from one lane to the other

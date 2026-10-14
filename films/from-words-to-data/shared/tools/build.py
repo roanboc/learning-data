@@ -7,9 +7,9 @@ from lang import *
 SS, S = SHARED / 'src', ROOT / 'src'
 # The Inner Life of Data's engine and components; A Sharper Sketch's diagrams, tables and scene helpers; the series' people;
 # Silent change's messages, dashboards and contract card; this series' components; then the film's narration, timings, pauses,
-# its own components and scenes. The engine comes last.
+# its own components and scenes; then the layer that makes its text read on a phone (phone.js). The engine comes last.
 FILES = [SS / 'core.js', SS / 'logos.js', SS / 'style2.js', S / 'narration.js', S / 'vodur.js', S / 'breath.js', SS / 'ui3.js',
-         SKETCH / 'sketch3.js', CHARS / 'people.js', EP1 / 'silent.js', WORDS / 'words.js'] + [S / f for f in META['src']] + [SS / 'engine3.js']
+         SKETCH / 'sketch3.js', CHARS / 'people.js', EP1 / 'silent.js', WORDS / 'words.js'] + [S / f for f in META['src']] + [WORDS / 'phone.js', SS / 'engine3.js']
 js = '\n'.join(f.read_text() for f in FILES if f.exists())
 GF = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">'
 # the render page carries its own fonts, so renders need no network and look the same on every machine

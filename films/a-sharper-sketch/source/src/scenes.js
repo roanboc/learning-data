@@ -51,7 +51,7 @@ scene("two",(ctx,S,t,sc)=>{
   withA(ctx,out,()=>{asker(ctx,t,fin(t,0.2),"How many students were enrolled in Data Science 101 on census date?",fin(t,cQ-0.2));
     withA(ctx,fin(t,cN-0.1),()=>numCard(ctx,1220,250,560,"Genie","131","counted from the lakehouse",CYAN));
     withA(ctx,fin(t,cN+1.6),()=>numCard(ctx,1220,500,560,"Census report","118","sent to government",LAYER.gold,{badge:"certified",badgeCol:LAYER.gold}));
-    withA(ctx,fin(t,cC+0.2),()=>{tag(ctx,1590,430,"every test passed",GOOD,{size:16});tag(ctx,1590,680,"every test passed",GOOD,{size:16});});
+    withA(ctx,fin(t,cC+0.2),()=>{if(phMin(ctx)){tag(ctx,1500,474,"every test passed",GOOD,{align:"center",size:16});tag(ctx,1500,724,"every test passed",GOOD,{align:"center",size:16});}else{tag(ctx,1590,430,"every test passed",GOOD,{size:16});tag(ctx,1590,680,"every test passed",GOOD,{size:16});}});
     withA(ctx,fin(t,cM),()=>{glow(ctx,1500,470,160,BAD,0.18+0.06*Math.sin(t*3));tag(ctx,1500,775,"same data, different meaning",BAD,{align:"center",size:20});});});
   // before changing anything, a wider question: how does this kind of business generally work? Many industries have published models, a first template
   const cI=c("industry"),cF=c("fit"),cMc=c("mcds");
@@ -62,7 +62,9 @@ scene("two",(ctx,S,t,sc)=>{
     withA(ctx,ind,()=>{T(ctx,"published industry models: a first template",960,772,{w:600,size:18,align:"center",color:rgba(SOFT,1)});
       ["Banking","Insurance","Retail","Health","Higher education"].forEach((n,i)=>withA(ctx,fin(t,cI+0.6+i*0.35),()=>{const x=440+i*260;tag(ctx,x,820,n,i===4?REF:SOFT,{align:"center",size:18});}));});
     withA(ctx,cand,()=>{T(ctx,t>cMc+0.4?"widely used by universities: MCDS · here we check against TCSI":t>cT+0.4?"one of the choices: TCSI, public, and what universities report":"reference models for higher education: which one, and why?",960,772,{w:600,size:18,align:"center",color:rgba(t>cT+0.4?REF:SOFT,1)});
-      [["TCSI","Australia"],["HESA Data Futures","United Kingdom"],["CEDS","United States"],["MCDS","MortarCAPS"]].forEach(([n,r],i)=>withA(ctx,fin(t,cCh+0.5+i*0.35),()=>{const x=480+i*320,on=i===0?fin(t,cT+0.3):i===3?fin(t,cMc+0.3):0,dim=t>cT+0.3&&on<=0?0.45:1;
+      const RM=[["TCSI","Australia"],["HESA Data Futures","United Kingdom"],["CEDS","United States"],["MCDS","MortarCAPS"]],pm=phMin(ctx),rw=RM.map(([n,r])=>tw(ctx,n+" · "+r,Math.max(17,pm),700)+26),rx=[];
+      RM.forEach((_,i)=>rx.push(i?rx[i-1]+rw[i-1]/2+16+rw[i]/2:150+rw[0]/2));
+      RM.forEach(([n,r],i)=>withA(ctx,fin(t,cCh+0.5+i*0.35),()=>{const x=pm?rx[i]:480+i*320,on=i===0?fin(t,cT+0.3):i===3?fin(t,cMc+0.3):0,dim=t>cT+0.3&&on<=0?0.45:1;
         if(on>0)glow(ctx,x,820,130,REF,0.5*on);withA(ctx,dim,()=>tag(ctx,x,820,n+" · "+r,on>0?REF:SOFT,{align:"center",size:17}));}));});});
   const pA=fin(t,cMc+4.2,0.5);if(pA>0){const hi={};if(sc.breathe&&t>B)["Student","Admission","Course","Enrolment","Unit"].forEach((k,i)=>{hi[k]=pulse(t,B+0.3+i*0.5,1.2);});// each box lights on its own chime (tools/audio.py)
     paper(ctx,pA,slideIn(t,cMc+4.2),t,hi);withA(ctx,fin(t,cF+0.2),()=>tag(ctx,1400,835,"a reference to check against, not a model to copy",REF,{align:"center",size:18}));}
@@ -113,7 +115,8 @@ scene("census",(ctx,S,t,sc)=>{
   E.Offering.hi=pulse(t,cA+1.4,2.4);diagram(ctx,E,L2R.map(r=>r.concat([{}])));
   // the census date moves from the term to the unit offering
   if(mv>0&&mv<1){const p=lerpP([1620,752],[1200,532],mv);T(ctx,"census date",p[0],p[1],{w:600,size:16,align:"center",color:rgba(REF,1)});glow(ctx,p[0],p[1]-6,60,REF,0.4);}
-  withA(ctx,fin(t,cT+0.2)*(1-sstep(cA,cA+0.5,t)),()=>tag(ctx,1620,830,"one date for everyone",EXT,{align:"center",size:18}));
+  // above the term it describes: below it, the draft stamp would hide it
+  withA(ctx,fin(t,cT+0.2)*(1-sstep(cA,cA+0.5,t)),()=>tag(ctx,1625,626,"one date for everyone",EXT,{align:"center",size:18}));
   // the same unit, two offerings, two census dates
   withA(ctx,fin(t,cS),()=>{calCard(ctx,1120,200,"DS101 · Semester 1","31 Mar",SK,1,pulse(t,cS+0.3,2)+(sc.breathe&&t>B?pulse(t,B+0.5,2)+pulse(t,B+2.9,2):0));calCard(ctx,1450,200,"DS101 · Summer","20 Jan",EXT,fin(t,cS+0.8),pulse(t,cS+1.1,2)+(sc.breathe&&t>B?pulse(t,B+1.7,2)+pulse(t,B+4.1,2):0));});
   withA(ctx,fin(t,cA+2.0),()=>tag(ctx,1200,610,"adopted from the reference",ADOPT,{align:"center",size:16}));
@@ -201,7 +204,7 @@ scene("levels",(ctx,S,t,sc)=>{
 /* ---------- 7. Check, adopt, extend, record ---------- */
 scene("fit",(ctx,S,t,sc)=>{
   const c=id=>cue(sc,id),cLi=c("lift"),cCh=c("check"),cAd=c("adopt"),cEx=c("extend"),cRe=c("record"),cCa=c("cage"),B=c("breath");
-  const cam=camAt([[0,960,540,1],[cRe,960,540,1],[cRe+1.2,1225,530,0.86],[cCa-0.2,1225,530,0.86],[cCa+1.0,960,540,1]],t);bgW(ctx,S,cam);board(ctx,1,"Conceptual model");
+  const ph=phMin(ctx)>0,cam=camAt([[0,960,540,1],[cRe,960,540,1],[cRe+1.2,ph?1262:1225,530,ph?0.82:0.86],[cCa-0.2,ph?1262:1225,530,ph?0.82:0.86],[cCa+1.0,960,540,1]],t);bgW(ctx,S,cam);board(ctx,1,"Conceptual model");
   const pins=Object.keys(L3),pinT=k=>cLi+2.2+pins.indexOf(k)*0.25,br=sc.breathe&&t>B;
   sketchV2(ctx,{pins:true,pinA:k=>fin(t,pinT(k),0.3),pinP:k=>(PINS[k]==="adopt"?pulse(t,cAd+0.4,2.4):pulse(t,cEx+0.4,2.4))+(br?pulse(t,B+0.5+pins.indexOf(k)*0.5,1.4):0),
     hi:k=>PINS[k]==="adopt"?pulse(t,cAd+0.4,2.4):pulse(t,cEx+0.4,2.4)});
@@ -210,7 +213,11 @@ scene("fit",(ctx,S,t,sc)=>{
   const steps=[["Check",cCh,REF],["Adopt",cAd,ADOPT],["Extend",cEx,EXT],["Record",cRe,C.white]];
   steps.forEach(([s,t0,col],i)=>withA(ctx,fin(t,t0-0.1),()=>{const on=t<(steps[i+1]?steps[i+1][1]:cCa)||t>cCa?1:0.45;withA(ctx,on,()=>tag(ctx,470+i*250,212,(i+1)+"  "+s,col,{align:"center",size:20}));}));
   // the fit register: every difference, and why
-  withA(ctx,fin(t,cRe+0.8,0.8)*(1-sstep(cCa+0.2,cCa+0.9,t)),()=>{const x=1850,y=200,w=460;glass(ctx,x,y,w,620,18,C.white,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.94)"});T(ctx,"Fit register",x+26,y+48,{w:800,size:26});T(ctx,"sketch v2 · checked against TCSI",x+26,y+78,{w:500,size:16,color:rgba(SOFT,1)});
+  withA(ctx,fin(t,cRe+0.8,0.8)*(1-sstep(cCa-0.3,cCa+0.3,t)),()=>{const pm=phMin(ctx),x=1850,y=200,w=pm?566:460,RG=[["Unit offering","TCSI identifies it by unit","and census date"],["Class","a timetabled activity,","not in TCSI"],["Status change","TCSI keeps the current","status only"],["Teaching period","groups offerings in time"]];
+    if(pm){const L=RG.map(r=>phWrap(ctx,r.slice(1).join(" "),w-72,pm,500)),lh=pm*1.16;let yy=y+56+pm*2.3;const h=yy-y+L.reduce((p,l)=>p+(l.length+1)*lh+26,0);
+      glass(ctx,x,y,w,h,18,C.white,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.94)"});T(ctx,"Fit register",x+26,y+48,{w:800,size:26});T(ctx,"sketch v2 · checked against TCSI",x+26,y+48+pm*1.2,{w:500,size:16,color:rgba(SOFT,1)});
+      RG.forEach((r,i)=>{const y0=yy;withA(ctx,fin(t,cRe+1.4+i*0.5),()=>{led(ctx,x+26,y0-pm*0.8,6,(L[i].length+1)*lh-4,EXT);T(ctx,r[0]+"  ·  extended",x+46,y0,{w:700,size:20,color:rgba(EXT,1)});L[i].forEach((l,j)=>T(ctx,l,x+46,y0+(j+1)*lh,{w:500,size:17,color:rgba(SOFT,1)}));});yy+=(L[i].length+1)*lh+26;});return;}
+    glass(ctx,x,y,w,620,18,C.white,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.94)"});T(ctx,"Fit register",x+26,y+48,{w:800,size:26});T(ctx,"sketch v2 · checked against TCSI",x+26,y+78,{w:500,size:16,color:rgba(SOFT,1)});
     [["Unit offering","TCSI identifies it by unit","and census date"],["Class","a timetabled activity,","not in TCSI"],["Status change","TCSI keeps the current","status only"],["Teaching period","groups offerings in time"]].forEach((r,i)=>withA(ctx,fin(t,cRe+1.4+i*0.5),()=>{const yy=y+140+i*118;led(ctx,x+26,yy-18,6,76,EXT);T(ctx,r[0]+"  ·  extended",x+46,yy,{w:700,size:20,color:rgba(EXT,1)});T(ctx,r[1],x+46,yy+28,{w:500,size:17,color:rgba(SOFT,1)});if(r[2])T(ctx,r[2],x+46,yy+52,{w:500,size:17,color:rgba(SOFT,1)});}));});
   withA(ctx,fin(t,cCa+0.9),()=>tag(ctx,960,845,"a starting point, not a cage",C.white,{align:"center",size:18}));
   stamp(ctx,1790,845,"sketch v2 · draft",EXT,1);setCam(ctx,S,CAM0);vign(ctx,S);
@@ -228,6 +235,9 @@ scene("end",(ctx,S,t,sc)=>{
     // the sketch, version 2, with a note that says why it changed; then a new question arrives
     const vA=fin(t,cV-0.1,0.8);withA(ctx,vA,()=>{const pos=lay(L3,0.72,760,520);glass(ctx,110,170,1300,720,22,SK,{glow:18,ea:0.35,fill:"rgba(10,18,36,0.5)"});sketchV2(ctx,{pos,s:0.72,pins:true});
       const fl=t>cE+2.2?t:0;stamp(ctx,1390,845,t>cE+2.2?"sketch v3?":"sketch v2",t>cE+2.2?EXT:GOOD,1,fl?t-cE:0);
+      const pm=phMin(ctx);if(pm){const lh=pm*1.25,N=[["added: unit offering, course admission, status history",INK],["why: two numbers disagreed",SOFT],["checked against TCSI",SOFT]].map(([s,c])=>[phWrap(ctx,s,348,pm,600),c]),n=N.reduce((p,q)=>p+q[0].length,0);
+        glass(ctx,1460,210,400,66+n*lh+20,18,GOOD,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.94)"});T(ctx,"sketch v2",1486,254,{f:"mono",w:500,size:22,color:rgba(GOOD,1)});let k=0;N.forEach(([L,c])=>L.forEach(l=>T(ctx,l,1486,296+(k++)*lh,{w:600,size:18,color:rgba(c,0.95)})));
+        const Q=phWrap(ctx,"How do we count short courses and microcredentials?",348,pm,600),qy=210+66+n*lh+44;withA(ctx,fin(t,cE+0.4),()=>{glass(ctx,1460,qy,400,62+Q.length*lh,18,EXT,{glow:18+8*Math.sin(t*4),ea:0.8,fill:"rgba(7,12,24,0.94)"});T(ctx,"A new question",1486,qy+42,{w:800,size:20,color:rgba(EXT,1)});Q.forEach((l,i)=>T(ctx,l,1486,qy+42+(i+1)*lh,{w:600,size:18}));});return;}
       glass(ctx,1460,210,400,250,18,GOOD,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.94)"});T(ctx,"sketch v2",1486,254,{f:"mono",w:500,size:22,color:rgba(GOOD,1)});
       ["added: unit offering,","course admission, status history","why: two numbers disagreed","checked against TCSI"].forEach((s,i)=>T(ctx,s,1486,296+i*38,{w:600,size:18,color:rgba(i<2?INK:SOFT,0.95)}));
       withA(ctx,fin(t,cE+0.4),()=>{glass(ctx,1460,520,400,150,18,EXT,{glow:18+8*Math.sin(t*4),ea:0.8,fill:"rgba(7,12,24,0.94)"});T(ctx,"A new question",1486,562,{w:800,size:20,color:rgba(EXT,1)});T(ctx,"How do we count short courses",1486,600,{w:600,size:18});T(ctx,"and microcredentials?",1486,630,{w:600,size:18});});});

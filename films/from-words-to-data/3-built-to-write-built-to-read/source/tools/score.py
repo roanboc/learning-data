@@ -4,6 +4,10 @@
 # and page turns. The anomalies land on a dissonant cluster and a glitch; the star appears on a shimmer and a glassy node.
 # The series' four-note motif plays on the marimba at the title and on the felt piano and marimba at the end card.
 
+# PLAYBOOK.md: effects stay low and soft, below about 2.5 kHz. The series' soft stand-ins replace the bright ones by name (a chime
+# or a ping becomes a low felt note, a tick a muffled key, a pop a wooden knock, a sweep a breath of air), so every cue keeps its time
+globals().update(soft_palette())
+
 # chords (MIDI note numbers), in B-flat major
 BB9 = [46, 53, 57, 60, 62]; EB9 = [51, 58, 62, 65, 67]; GM9 = [43, 50, 53, 57, 58]; CM7 = [48, 55, 58, 63]; F69 = [41, 48, 53, 55, 57]
 DM7 = [50, 57, 60, 65]; BBD = [50, 53, 58, 62, 65]; FSUS = [41, 48, 53, 58, 60]
@@ -47,9 +51,10 @@ harp(82, G('ledger', 'breath', 2.2), 0.035, 0.3)
 # 2. Built to write: the writing voice all the way through, over a light pad
 prog('write', [BB9, GM9, EB9, F69], g=0.04, tone='warm', bassg=0.03)
 writing(S0('write') + 0.4, E('write') - 0.3, ['Bb', 'Gm', 'Eb', 'F'], g=0.032)
-# 3. What goes wrong without it: the same figure, darker
+# 3. What goes wrong without it: the same figure, darker, over a low urgent pulse on the same grid, leaning on the semitone
 prog('wrong', [GM9, CM7, EB9, GM9], g=0.04, tone='warm', bassg=0.035)
 writing(S0('wrong') + 0.4, E('wrong') - 0.3, ['Gm', 'Cm', 'Eb', 'Gm'], g=0.027, wb=0.02)
+urgent(G('wrong', 'three', 0.0), G('wrong', 'anomaly', 2.0), bpm=BPM, root=34, g=0.054, steps=(0, 0, 1, 0))
 # 4. Another way to write: a lighter figure, then a slow count
 prog('docs', [BB9, EB9, DM7, EB9], g=0.04, tone='glass', bassg=0.03)
 writing(S0('docs') + 0.4, G('docs', 'trade', 2.6), ['Bb', 'Eb', 'Bb'], g=0.024, pan=0.1, wb=0.016)
@@ -121,3 +126,6 @@ tick(G('side', 'job', 0.2), 0.05, -0.5); node(G('side', 'job', 0.25), 0.05, 0.5,
 node(G('end', 'often', 2.6), 0.045, 0.0, 1397); node(G('end', 'often', 4.6), 0.045, 0.5, 1760); tick(G('end', 'often', 5.6), 0.04)
 [node(G('end', 'next', 3.2 + k * 0.4), 0.04, (k - 1) * 0.5, 1568 + k * 200) for k in range(3)]
 shimmer(G('end', 'breath', 0.4), 0.05, 1165)
+
+# PLAYBOOK.md: the whole score, music and effects, is low-passed at 2.6 kHz last, so no instrument rings above the voice
+soften()

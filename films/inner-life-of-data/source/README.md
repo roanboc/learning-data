@@ -66,6 +66,8 @@ About `render.py`:
    cp dist/es/soundtrack.mp3 ../../../site/assets/film/soundtrack.es.mp3
    ```
 
+   Then draw the posters, the home page's background and the player's first frame, from the same build: `python tools/poster.py` and `FILM_LANG=es python tools/poster.py` write `site/assets/poster.jpg` and `poster.es.jpg`.
+
    `dist/film.html` is a standalone player with the soundtrack embedded, for sharing or watching offline. The old player addresses, `films/inner-life-of-data/` and `es/films/inner-life-of-data/`, now redirect to the home page and keep `#t=` chapter links working.
 
 2. **The captions.** `python tools/captions.py` writes `../captions/en.srt` and `en.vtt`, and `FILM_LANG=es python tools/captions.py` writes the Spanish ones.

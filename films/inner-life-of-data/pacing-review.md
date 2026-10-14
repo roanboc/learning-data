@@ -2,6 +2,8 @@
 
 *Status: fixed on 27 September 2026, in both languages; see [What changed](#what-changed) at the end.*
 
+*Superseded on 14 October 2026 by the fourth cut, which flows like the later films (PLAYBOOK.md, "Let the film flow; pause only where it matters"): a beat of its own after every sentence (0.8 s in English, 0.8 to 1.1 s in Spanish), and wordless endings only in the sketch, the people and the end. It runs 7:11 in English and 8:24 in Spanish, at 128 and 121 words a minute, with the voice speaking 75% and 77% of the time.*
+
 *A review of* The Inner Life of Data *(English, 8:01), made on 26 September 2026 from the committed source. The source matches the site's player and soundtrack exactly, so this is the film people watch. The Spanish film shares the same pauses and sound code, and has the same problems.*
 
 ## Verdict

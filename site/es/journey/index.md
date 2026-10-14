@@ -49,7 +49,7 @@ Empieza con dos películas cortas, en inglés: cómo se dibujan las películas y
 | 9. El segundo corte | 6:17 con narración, música y sonido, sincronizados con la voz | Productos de datos variados, un cerebro, actualizaciones en vivo |
 | 10. La publicación | Un sitio que dibuja la película en vivo, videos renderizados con el mismo código, y esta historia | El sitio, este repositorio y sus releases |
 | 11. Más películas | Un comentario se volvió película, las películas se volvieron serie, y cada revisión se volvió una verificación | *A Sharper Sketch*, *Cambio silencioso*, *Demasiado bueno para ser verdad*, y un sitio organizado por temas |
-| 12. Teléfono y sonido | Cada palabra agrandada para leerse en un teléfono; efectos más suaves, y ritmo donde la historia se tensa | 22 películas rehechas, y reglas nuevas en el manual |
+| 12. Teléfono y sonido | Cada palabra agrandada para leerse en un teléfono; efectos más suaves, y ritmo donde la historia se tensa | 23 películas rehechas, y reglas nuevas en el manual |
 
 ## 1. El encargo
 
@@ -274,13 +274,23 @@ Las demás películas no se podían simplemente volver a dibujar. Una capa compa
 - **Decide qué es textura.** Una página de época, una imagen vista de lejos o una tarjeta detrás de otra ambientan la escena, y no se leen. Todo lo que nombra la narración tiene que leerse.
 - **Revisa cada momento.** Una herramienta dibuja cada película cada medio segundo y lista cualquier texto de menos de 28 px, que se sale del cuadro o que se dibuja encima de otras palabras. Los pocos que quedan son momentos de paso, como una tarjeta que entra volando o un fundido, o un encuadre que la cámara corta a propósito.
 
-El resultado: en las 22 películas, ningún texto que no sea decoración se dibuja por debajo de 28 px, donde antes lo estaba entre el 76% y el 99%. *La vida interior de los datos*, con sus voces en inglés y en español, viene después, por separado. Los laboratorios conservan sus tamaños, porque se leen de cerca.
+El resultado: en las 22 películas, ningún texto que no sea decoración se dibuja por debajo de 28 px, donde antes lo estaba entre el 76% y el 99%. Los laboratorios conservan sus tamaños, porque se leen de cerca.
 
 ### Sonidos más suaves, y un ritmo que sigue a la emoción
 
-A un espectador le molestaban los tonos agudos: campanillas, pings y campanas tienen energía muy por encima de la voz. En cada película hecha antes de *En las entrañas del oficio de datos*, salvo la primera, los efectos brillantes se reemplazaron por nombre con sustitutos suaves y graves. Una campanilla se volvió una nota grave de fieltro, un tic una tecla apagada y un pop un golpe de madera, así que cada efecto sigue cayendo en su momento. En *De las palabras a los datos*, los propios instrumentos (una kalimba, pads de cristal, campanas) seguían sonando por encima de la voz, así que ahora toda la música, pero no la voz, se suaviza en los agudos. En las doce películas que lo necesitaban, la energía por encima de 4 kHz, donde la voz calla, bajó entre unas dos y quince veces, según la película. *En las entrañas del oficio de datos* ya sonaba así de suave.
+A un espectador le molestaban los tonos agudos: campanillas, pings y campanas tienen energía muy por encima de la voz. En las películas hechas antes de *En las entrañas del oficio de datos*, los efectos brillantes se reemplazaron por nombre con sustitutos suaves y graves. Una campanilla se volvió una nota grave de fieltro, un tic una tecla apagada y un pop un golpe de madera, así que cada efecto sigue cayendo en su momento. En *De las palabras a los datos*, los propios instrumentos (una kalimba, pads de cristal, campanas) seguían sonando por encima de la voz, así que ahora toda la música, pero no la voz, se suaviza en los agudos. En las doce películas que lo necesitaban, la energía por encima de 4 kHz, donde la voz calla, bajó entre unas dos y quince veces, según la película. *En las entrañas del oficio de datos* ya sonaba así de suave.
 
 La música tenía el problema contrario. Los acordes sostenidos hacían que todas las escenas se sintieran iguales, y un error llegaba con la misma calma que un acierto. Ahora el ritmo sigue a la emoción. Donde una historia se vuelve un error (una prueba que falla, una fusión equivocada, filas que se duplican) o una prisa (un plazo, una cocina llena de pedidos), un pulso grave y apagado crece bajo la escena y se apaga cuando se detecta el problema. Un error se apoya en el semitono; una prisa empuja sobre la quinta. Los capítulos tranquilos no tienen ninguno, así que el contraste le dice al público que algo cambió.
+
+### Donde empezó todo, rehecha al final
+
+*La vida interior de los datos* se rehízo al final, por separado: tiene voz en inglés y en español, su reproductor también dibuja los laboratorios, y las películas del Making of muestran sus cuadros. Ahora sigue las mismas reglas que las películas posteriores:
+
+- **Se lee en un teléfono, en los dos idiomas.** La misma capa sube sus palabras a 28 px, y sus escenas se reorganizaron como las de las demás. Las palabras en español son más largas, así que cada composición se revisó en los dos idiomas.
+- **Los laboratorios conservan sus tamaños.** Dibujan piezas de la película en lienzos propios, así que en este reproductor la capa actúa solo sobre el cuadro de la película.
+- **El Making of sigue como estaba.** *Data for Films* y su continuación muestran los cuadros de esta película tal como eran cuando se hicieron, así que ahora cargan una copia congelada de sus escenas.
+- **Tensión solo donde la tiene la historia.** Sus pulsos anteriores marcaban la maquinaria en marcha (eventos que llegan, dbt que se ejecuta) y sus arpegios sonaban agudos. Ahora sus efectos son suaves y graves, y un pulso crece solo donde el boceto sale mal, los datos llegan en bruto, una pregunta necesita respuesta ya, y las copias quedan desactualizadas.
+- **Una pausa tras cada frase.** Sus pausas se habían juntado en largas paradas sin palabras al final de la mayoría de los capítulos. Ahora cada frase tiene una pausa breve, y solo el boceto, las personas y el final cierran sin palabras. La película dura 14 segundos menos (8:24), y ningún capítulo pasa de 140 palabras por minuto.
 
 > **Lección:** una regla que llega tarde obliga a rehacer cada película hecha antes. Constrúyela como una capa compartida cuando puedas, revisa cada momento, y escribe lo que enseñó el trabajo, para que la siguiente película parta de ahí.
 
@@ -329,6 +339,7 @@ Los errores fueron parte del proceso, y casi todos enseñaron algo:
 24. **Mide lo que se dibuja, no lo que se pide.** Una palabra que crece necesita sitio, y todo lo que viene después se mueve.
 25. **Que el ritmo siga a la emoción.** Un pulso bajo un error dice que algo salió mal antes que la narración; las escenas tranquilas siguen tranquilas.
 26. **Mantén los sonidos por debajo de la voz.** Los efectos suaves y graves marcan un momento sin cortar la narración.
+27. **Congela lo que otros muestran antes de cambiarlo.** Una película que aparece dentro de otra guarda su propia copia, así que rehacer la original no cambia nada ahí.
 
 ## Reutilízala
 

@@ -5,7 +5,10 @@ S=ROOT/'src';D=DIST;SS=SHARED/'src'
 # ILD.renderFrame(ctx,S,t) draws any moment of it, and ILD.prepAssets() gets its pictures and logos ready.
 ILD_FILES=['core.js','logos.js','style2.js','narration.js','vodur.js','breath.js','ui3.js','scA.js','scB.js','scC.js','scD.js']
 eng=(SS/'engine3.js').read_text();eng=eng[:eng.index('if(window.__RENDER__)')]
-ild='const ILD=(function(){\n'+'\n'.join((SS/f).read_text() for f in ILD_FILES)+'\n'+eng+'\nCAPS_ON=false;return{renderFrame,prepAssets,TL,SCENES};})();'
+# its own files (narration, timings, pauses, scenes) come from a frozen copy (src/ild/ of Data for Films), so a rework of the first
+# film doesn't change this one; the shared components and the engine still come from its source
+ILD_OWN=S/'ild';ILD_OWN_FILES={'narration.js','vodur.js','breath.js','scA.js','scB.js','scC.js','scD.js'}
+ild='const ILD=(function(){\n'+'\n'.join(((ILD_OWN if f in ILD_OWN_FILES else SS)/f).read_text() for f in ILD_FILES)+'\n'+eng+'\nCAPS_ON=false;return{renderFrame,prepAssets,TL,SCENES};})();'
 # shared components and engine from The Inner Life of Data, then this film's narration, timings, pauses, components and scenes; the engine comes last,
 # and waits for the embedded film's assets too (PREP_MORE), so a render never draws it half-loaded
 # the layer that makes the film's text read on a phone (From words to data's phone.js) comes after the scenes, before the engine

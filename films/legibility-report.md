@@ -17,7 +17,7 @@
 |---|---|---|---|---|---|
 | The Inner Life of Data (English and Spanish) | 351 | 91% | 254 | 16.5 | Still to rework |
 | A Sharper Sketch | 323 | 0% | 0 | 28 | Reworked |
-| Silent change | 335 | 0% | 0 | 28 | Reworked |
+| Silent change | 334 | 0% | 0 | 28 | Reworked |
 | Too good to be true | 246 | 0% | 0 | 28 | Reworked |
 | Data for Films | 463 | 0% | 0 | 28 | Reworked |
 | That's not quite right | 146 | 0% | 0 | 28 | Reworked |

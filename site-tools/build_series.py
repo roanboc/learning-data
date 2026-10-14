@@ -40,8 +40,8 @@ def fw_builds_on(lg, f, all_films, R):
     i = f["index"]; by = {x["index"]: x for x in all_films}
     name = lambda x: E(x["title"] if lg == "en" else x["site"]["title_es"])
     if i == 0:
-        return (f'<p class="builds-on">Builds on <i>The Inner Life of Data</i> · <a href="{R}#t=75">The sketch</a>, and <a href="{R}sketch/"><i>A Sharper Sketch</i></a></p>' if lg == "en" else
-                f'<p class="builds-on">Amplía <a href="{R[3:]}#t=84"><i>El boceto</i></a> de <i>La vida interior de los datos</i>, y <a href="{R[3:]}sketch/"><i>Un boceto más preciso</i></a></p>')
+        return (f'<p class="builds-on">Builds on <i>The Inner Life of Data</i> · <a href="{R}#t=72">The sketch</a>, and <a href="{R}sketch/"><i>A Sharper Sketch</i></a></p>' if lg == "en" else
+                f'<p class="builds-on">Amplía <a href="{R[3:]}#t=81"><i>El boceto</i></a> de <i>La vida interior de los datos</i>, y <a href="{R[3:]}sketch/"><i>Un boceto más preciso</i></a></p>')
     prev = {1: [0], 2: [1], 3: [2], 4: [2, 3], 5: [0, 1], 6: list(range(6))}[i]
     got = [by[j] for j in prev if j in by]
     if i == 6:
@@ -166,7 +166,7 @@ def all_films():
 # prefix; a series: its films, as (key, progress prefix, source folder under films/), to time them and to count them as watched.
 HAND = {
     "intro": dict(href="", title={"en": "The Inner Life of Data", "es": "La vida interior de los datos"},
-                  poster={"en": "poster.jpg", "es": "poster.es.jpg"}, len={"en": "7½", "es": "8½"}, labs=8, quiz=12, prefix="ld",
+                  poster={"en": "poster.jpg", "es": "poster.es.jpg"}, len={"en": "7", "es": "8½"}, labs=8, quiz=12, prefix="ld",
                   card={"en": "Follow one enrolment from a tap on a phone to a decision, through Databricks and dbt.",
                         "es": "Sigue una inscripción desde un toque en el teléfono hasta una decisión, pasando por Databricks y dbt."},
                   note={"en": "English and Spanish", "es": "En español e inglés"}),

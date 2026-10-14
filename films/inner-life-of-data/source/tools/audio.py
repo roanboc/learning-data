@@ -36,15 +36,6 @@ def prog(sid,chords,a=None,b=None,g=0.05):
 prog('tap',[A9]);prog('in',[A9,F9,C9,G9]);prog('sketch',[D9],0,ST['sketch']['cues']['wrong']);prog('sketch',[X9],ST['sketch']['cues']['wrong'],ST['sketch']['cues']['right'],0.045);prog('sketch',[C9],ST['sketch']['cues']['right'])
 prog('refine',[A9,F9,C9,G9]);prog('gold',[F9,C9,A9,G9]);prog('layers',[C9,G9]);prog('meaning',[A9,F9],g=0.042);prog('speeds',[C9,G9]);tw=G('out','twist')
 prog('out',[A9,F9],0,ST['out']['cues']['twist']);prog('out',[C9,G9,C9],ST['out']['cues']['twist']);prog('people',[F9,C9]);prog('end',[A9,F9],0,ST['end']['cues']['seats']);prog('end',[C9],ST['end']['cues']['seats'],g=0.06)
-fo=lambda s,b:min(1.0,(b-s)/1.2)  # the beats fade out over their last 1.2 s instead of stopping dead
-def pulse(a,b,g=0.3):
-    k=0
-    while a+k*0.6667<b:s=a+k*0.6667;x=tt(0.35);put(ML,MR,np.sin(2*np.pi*55*x)*np.exp(-x*11),s,g*fo(s,b));k+=1
-def arp(a,b,g=0.045):
-    seq=[69,72,76,79,83,79,76,72];k=0
-    while a+k*0.3333<b:s=a+k*0.3333;x=tt(0.6);f=mf(seq[k%8]+12*(k//16%2));put(ML,MR,(np.sin(2*np.pi*f*x)+0.3*np.sin(4*np.pi*f*x))*np.exp(-x*7),s,g*fo(s,b),0.5 if k%2 else -0.5);k+=1
-pulse(G('in','events'),G('in','hot',3));pulse(G('refine','runs'),G('refine','silver'));pulse(G('out','events'),tw-1.2);pulse(G('out','projector'),G('out','one',2),0.22)
-arp(G('refine','staging'),G('refine','silver',1));arp(G('gold','split',1),G('gold','gold'));arp(G('layers','dbtgov'),G('layers','dbx',2),0.035)
 rng=np.random.default_rng(3)
 def X(sig,start,g=0.3,pan=0.0):put(XL,XR,sig.astype(np.float32),start,g,pan)
 def click(s,g=0.3):x=tt(0.08);X(rng.standard_normal(len(x))*np.exp(-x*120)*0.5+np.sin(2*np.pi*1800*x)*np.exp(-x*50),s,g)
@@ -62,6 +53,60 @@ def hum(s,sec,g=0.1):x=tt(sec);X((np.sin(2*np.pi*55*x)+0.5*np.sin(2*np.pi*110*x)
 def buzz(s,g=0.12):x=tt(0.35);X(np.sign(np.sin(2*np.pi*110*x))*np.exp(-x*6)*0.6+np.sin(2*np.pi*220*x)*np.exp(-x*8)*0.4,s,g)
 def tone(s,g=0.24):x=tt(3.2);X((np.sin(2*np.pi*660*x)+0.2*np.sin(2*np.pi*1320*x))*np.minimum(1,x/0.3)*np.exp(-x*0.8),s,g)
 def pop(s,g=0.14):x=tt(0.12);X(np.sin(2*np.pi*(900+2000*x)*x)*np.exp(-x*30),s,g)
+# ---- soft and low (PLAYBOOK.md): the bright effects above, redefined under the same names and with the same arguments, so every
+# cue keeps its timing: a chime, a ping or a bell becomes a low felt note, a tick or a click a muffled key, a pop a wooden knock,
+# a sweep or a whoosh a breath of air, a shimmer a warm swell, a thud or the projector's hum low-passed; everything sits below
+# about 2 kHz. The bell the narration names ("rings a bell") keeps its own sound. urgent() is a rhythm for the
+# moments of error or rush: it starts and stops with them, and nothing in it is bright
+from scipy.signal import butter as _butter, sosfilt as _sosfilt
+_srng=np.random.default_rng(11)
+def _flt(x,kind,f):
+    sos=_butter(2,[f[0]/(SR/2),min(0.99,f[1]/(SR/2))],btype='band',output='sos') if kind=='band' else _butter(2,min(0.99,f/(SR/2)),btype=kind,output='sos')
+    return _sosfilt(sos,x).astype(np.float32)
+def _nz(sec):return _srng.standard_normal(max(1,int(sec*SR))).astype(np.float32)
+def _nm(s):p=float(np.abs(s).max()) if len(s) else 0;return s/p if p>0 else s
+def _down(f,top=520.0):
+    while f>top:f/=2
+    return f
+def _knock(s,g=0.05,pan=0.0,f=240):x=tt(0.18);X(_nm(_flt((np.sin(2*np.pi*f*x)*np.exp(-x*38)+0.4*np.sin(2*np.pi*f*2.17*x)*np.exp(-x*60)).astype(np.float32),'low',1400)),s,g,pan)
+def _tap(s,g=0.03,pan=0.0):x=tt(0.06);X(_nm(_flt(_nz(0.06),'band',(250,1400))*np.exp(-x*90)),s,g,pan)
+def _note(f,s,g=0.04,pan=0.0,sec=2.2):
+    f=_down(f);x=tt(sec);sig=sum(np.sin(2*np.pi*f*k*x)*np.exp(-x*(1.5+1.2*k))*w for k,w in((1,1),(2,0.3),(3,0.08)))
+    X(_nm(_flt((sig*np.minimum(1,x/0.006)).astype(np.float32),'low',1800)),s,g,pan)
+def _air(s,sec=0.8,g=0.04,pan=0.0,lo=150,hi=1100):x=tt(sec);X(_flt(_nz(sec),'band',(lo,hi))*np.sin(np.pi*x/sec)**2,s,g,pan)
+def tick(s,g=0.18,pan=0):_tap(s,g*0.3,pan)
+def click(s,g=0.3,pan=0):_tap(s,g*0.25,pan)
+def chirp(s,g=0.14,pan=0.0):_note(660,s,g*0.4,pan,1.0)
+def sweep(s,sec=1.0,g=0.08,f0=500,f1=3000,pan=0.3):_air(s,sec,g*0.5,pan,160,1000)
+def whoosh(s,sec=0.9,g=0.12,pan=0.0):_air(s,sec,g*0.6,pan,120,900)
+def glitch(s,g=0.08,pan=0.0):x=tt(0.3);X(_flt((np.sign(np.sin(2*np.pi*180*x))*(np.sin(2*np.pi*23*x)>0)*np.exp(-x*7)*0.6).astype(np.float32),'low',700),s,g,pan)
+def chime(s,g=0.16,f=880,pan=0.0):_note(f,s,g*0.4,pan,2.0)
+def shimmer(s,g=0.05,pan=0.0):f=220.0;x=tt(2.8);X(((np.sin(2*np.pi*f*x)+0.5*np.sin(2*np.pi*f*1.5*x))*np.sin(np.pi*x/2.8)**2).astype(np.float32),s,g*0.6,pan)
+def thud(s,g=0.4):x=tt(0.5);X(_flt((np.sin(2*np.pi*70*x)*np.exp(-x*9)+0.2*_nz(0.5)*np.exp(-x*30)).astype(np.float32),'low',900),s,g)
+def hum(s,sec,g=0.1):x=tt(sec);X(_flt(((np.sin(2*np.pi*55*x)+0.5*np.sin(2*np.pi*110*x)+0.05*_nz(sec))*env(sec,0.8,0.8)*(1+0.1*np.sin(2*np.pi*7*x))).astype(np.float32),'low',900),s,g)
+def buzz(s,g=0.12,pan=0.0):x=tt(0.35);X(_flt((np.sign(np.sin(2*np.pi*110*x))*np.exp(-x*6)*0.6).astype(np.float32),'low',600),s,g*0.9,pan)
+def tone(s,g=0.24,f=660,pan=0.0):_note(f,s,g*0.3,pan,2.8)
+def pop(s,g=0.14,pan=0.0):_knock(s,g*0.35,pan,300)
+def urgent(s0,s1,bpm=104,root=40,g=0.05,fade=1.2,steps=(0,0,7,0),pan=0.0):
+    # a short, muted bass note on every beat (steps: each beat's interval above root; (0,0,1,0) leans on the semitone for an error,
+    # (0,0,7,0) drives for a rush), a soft low drum on one and three, and a muffled key on the off-beats, all under about 1 kHz
+    per=60/bpm;t0=s0;k=0
+    while t0<s1:
+        f=min(1,(t0-s0)/fade+0.06,(s1-t0)/fade)
+        if f>0:
+            fr=mf(root+steps[k%len(steps)]);x=tt(per*0.85);b=(np.sin(2*np.pi*fr*x)+0.7*np.sin(4*np.pi*fr*x)+0.3*np.sin(6*np.pi*fr*x))*np.exp(-x*6)*np.minimum(1,x/0.005)
+            put(ML,MR,_nm(_flt(b.astype(np.float32),'low',900)),t0,g*f,pan)
+            if k%2==0:x=tt(0.35);ph=2*np.pi*np.cumsum(48+70*np.exp(-x*26))/SR;put(ML,MR,_nm((np.sin(ph)*np.exp(-x*9)).astype(np.float32)),t0,g*0.9*f,0.0)
+            x=tt(0.05);put(ML,MR,_nm(_flt(_nz(0.05),'band',(250,1100))*np.exp(-x*100)),t0+per/2,g*0.45*f,pan+0.2)
+        t0+=per;k+=1
+# the feeling under the picture: an urgent pulse, leaning on the semitone, while the sketch is wrong; another while bronze's pieces
+# are rough, until dbt starts on them; a short drive under the question that needs an answer right now; and a slow, uneasy
+# one while the copies fall behind, until the fourth way. The calm chapters have none (PLAYBOOK.md, "Let rhythm follow the feeling")
+tpz=ST['out'].get('pauses',{}).get('twist',1.0)
+urgent(G('sketch','wrong',-0.2),G('sketch','right',0.3),bpm=96,root=33,g=0.21,steps=(0,0,1,0))
+urgent(G('refine','closer'),G('refine','sources',0.7),bpm=96,root=33,g=0.22,steps=(0,0,1,0))
+urgent(G('speeds','now',-0.2),G('speeds','years',-0.3),bpm=112,root=36,g=0.2)
+urgent(G('out','copies',1.1),tw-tpz-0.1,bpm=84,root=33,g=0.2,steps=(0,0,1,0),fade=1.6)
 tp=G('tap','tap',-0.3);click(tp,0.35);chirp(tp+0.1);whoosh(G('tap','stored',0.1));chime(G('tap','stored',1.4),0.14,1320);whoosh(G('tap','follow',0.3),1.4,0.14)
 for i in range(4):chime(G('in','colours',i*0.3),0.06,[660,784,880,988][i])
 for k in range(0,10,2):tick(G('in','events')+k*1.1,0.1,-0.4);tick(G('in','events')+0.4+k*1.3,0.08,0.4)
@@ -107,7 +152,7 @@ dk=np.empty_like(tg);v=LF
 for i,x in enumerate(tg):v=max(x,v-(LF-DK)/(0.4*CR)) if x<v else min(x,v+(LF-DK)/(1.2*CR));dk[i]=v
 duck=np.interp(t,np.arange(len(dk),dtype=np.float32)/CR,dk).astype(np.float32)
 # before "And the fourth way changes everything", the music and effects dip for the pause; cutting them to silence sounded like a fault
-tpz=ST['out'].get('pauses',{}).get('twist',1.0);mute=np.interp(t,[tw-tpz-0.35,tw-tpz,tw-0.1,tw+0.2],[1,0.4,0.4,1]).astype(np.float32)
+mute=np.interp(t,[tw-tpz-0.35,tw-tpz,tw-0.1,tw+0.2],[1,0.4,0.4,1]).astype(np.float32)
 fade=(np.clip((TOT-t)/3.5,0,1)*np.clip(t/1.5,0,1)).astype(np.float32)
 L=vo*0.95+(ML*0.55*duck+XL*0.6)*mute*fade;R=vo*0.95+(MR*0.55*duck+XR*0.6)*mute*fade
 pk=max(np.abs(L).max(),np.abs(R).max());L/=pk/0.9;R/=pk/0.9

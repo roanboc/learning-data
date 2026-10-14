@@ -9,7 +9,7 @@ from lang import *
 
 GAP,SGAP,LEAD,TAIL=0.3,0.7,0.6,1.2
 # guides for a film that gives people room to think without stopping and starting (see PLAYBOOK.md, "Narration, sound and pace")
-MAX_WPM,MAX_VOICE,MIN_BREATH,MIN_SENT,MAX_STOP=130,0.75,4.0,0.5,2.5
+MAX_WPM,MAX_VOICE,MIN_BREATH,MIN_SENT,MAX_STOP=140,0.82,1.5,0.5,2.5
 load=lambda p:(lambda s:json.loads(s[s.index('{'):s.rindex('}')+1]))(open(p).read())
 N,V=load(NARR),load(VODUR)
 B=load(ROOT/'src/breath.js') if (ROOT/'src/breath.js').exists() else {}

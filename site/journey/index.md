@@ -286,7 +286,7 @@ The music had the opposite problem. Sustained chords made every scene feel the s
 
 *The Inner Life of Data* was reworked last, on its own: it's voiced in English and Spanish, its player also draws the labs, and the Making of films show its frames. It now follows the same rules as the later films:
 
-- **Read on a phone, in both languages.** The same layer raises its words to 28 px, and its scenes were rearranged like the others'. Spanish words run longer, so every layout was checked in both languages.
+- **Read on a phone, in both languages.** The same layer raises its words to 28 px, and its scenes were rearranged like the others'. Spanish words run longer, so every layout was checked in both languages. Before, 91% of its text was under 28 px; now none is, except texture.
 - **The labs keep their sizes.** They draw the film's pieces on canvases of their own, so in this player the layer acts only on the film's own frame.
 - **The Making of stays as it was.** *Data for Films* and its sequel show this film's frames as they were when they were made, so they now load a frozen copy of its scenes.
 - **Tense only where the story is.** Its old pulses marked busy machinery (events arriving, dbt running) and its arpeggios rang high. Now its effects are soft and low, and a pulse rises only where the sketch goes wrong, the data arrives rough, questions need an answer right now, and copies go stale.

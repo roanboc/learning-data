@@ -286,7 +286,7 @@ La música tenía el problema contrario. Los acordes sostenidos hacían que toda
 
 *La vida interior de los datos* se rehízo al final, por separado: tiene voz en inglés y en español, su reproductor también dibuja los laboratorios, y las películas del Making of muestran sus cuadros. Ahora sigue las mismas reglas que las películas posteriores:
 
-- **Se lee en un teléfono, en los dos idiomas.** La misma capa sube sus palabras a 28 px, y sus escenas se reorganizaron como las de las demás. Las palabras en español son más largas, así que cada composición se revisó en los dos idiomas.
+- **Se lee en un teléfono, en los dos idiomas.** La misma capa sube sus palabras a 28 px, y sus escenas se reorganizaron como las de las demás. Las palabras en español son más largas, así que cada composición se revisó en los dos idiomas. Antes, el 91% de su texto quedaba por debajo de 28 px; ahora nada, salvo la textura.
 - **Los laboratorios conservan sus tamaños.** Dibujan piezas de la película en lienzos propios, así que en este reproductor la capa actúa solo sobre el cuadro de la película.
 - **El Making of sigue como estaba.** *Data for Films* y su continuación muestran los cuadros de esta película tal como eran cuando se hicieron, así que ahora cargan una copia congelada de sus escenas.
 - **Tensión solo donde la tiene la historia.** Sus pulsos anteriores marcaban la maquinaria en marcha (eventos que llegan, dbt que se ejecuta) y sus arpegios sonaban agudos. Ahora sus efectos son suaves y graves, y un pulso crece solo donde el boceto sale mal, los datos llegan en bruto, una pregunta necesita respuesta ya, y las copias quedan desactualizadas.

@@ -4,7 +4,7 @@ const L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla 
 "Data Science 101":"Datos 101","Tue 9:00 · B204":"Mar 9:00 · B204","Enrol":"Inscribir","Seat free?":"¿Hay cupo?","Tue 9 am · DS101":"Mar 9 am · DS101","seat left":"cupo libre","confirmed":"confirmada",
 "Student system":"Sistema académico","Learning platform":"Aula virtual","HR and payroll":"RH y nómina","Finance system":"Sistema financiero","Research grants system":"Sistema de fondos I+D","Older system":"Sistema antiguo",
 "system of record":"sistema de registro","written first, in the system of record":"escrito primero, en el sistema de registro","HR":"RH",
-"Integration platform":"Plataforma de integración","routes, retries, secures messages":"enruta, reintenta, protege mensajes","into Delta tables in seconds":"a tablas Delta en segundos",
+"Integration platform":"Plataforma de integración","routes, retries, secures":"enruta, reintenta, protege","into Delta tables in seconds":"a tablas Delta en segundos",
 "Landing zone":"Zona de aterrizaje","nightly files in cloud storage":"archivos nocturnos en la nube","Delta tables, as they arrived":"Tablas Delta, tal cual llegaron",
 "hot · seconds":"caliente · segundos","warm or cold · minutes to days":"tibio o frío · de minutos a días","raw":"en bruto","raw: glitches, mixed clocks":"en bruto: fallas, relojes mezclados","glitches":"fallas","duplicate":"duplicado","error":"error","clean":"limpio",
 "Bronze":"Bronce","Silver":"Plata","Gold":"Oro",

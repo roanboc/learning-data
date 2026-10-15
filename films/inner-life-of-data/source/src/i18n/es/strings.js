@@ -6,7 +6,7 @@ const L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla 
 "system of record":"sistema de registro","written first, in the system of record":"escrito primero, en el sistema de registro","HR":"RH",
 "Integration platform":"Plataforma de integración","routes, retries, secures":"enruta, reintenta, protege","into Delta tables in seconds":"a tablas Delta en segundos",
 "Landing zone":"Zona de aterrizaje","nightly files in cloud storage":"archivos nocturnos en la nube","Delta tables, as they arrived":"Tablas Delta, tal cual llegaron",
-"hot · seconds":"caliente · segundos","warm or cold · minutes to days":"tibio o frío · de minutos a días","raw":"en bruto","raw: glitches, mixed clocks":"en bruto: fallas, relojes mezclados","glitches":"fallas","duplicate":"duplicado","error":"error","clean":"limpio",
+"hot · seconds":"caliente · segundos","warm or cold · minutes to days":"tibio o frío · de minutos a días","raw":"en bruto","raw: glitches, mixed clocks":"en bruto: fallas, relojes mezclados","glitches":"fallas","duplicate":"duplicado","error":"error","different clocks":"relojes distintos","clean":"limpio",
 "Bronze":"Bronce","Silver":"Plata","Gold":"Oro",
 "Conceptual model":"Modelo conceptual","agreed with the business, written down once":"acordado con el negocio, escrito una vez","Student":"Estudiante","Enrolment":"Inscripción","Class":"Clase","Course":"Materia","Term":"Periodo","census date":"fecha de corte",
 "Wrong sketch":"Boceto incorrecto","Right sketch":"Boceto correcto",

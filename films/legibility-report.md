@@ -5,7 +5,7 @@
 ## What's done
 
 - **Captions grow as the player shrinks.** On a phone held upright they stay about 15 px on screen, where they used to be 8 px (`films/inner-life-of-data/source/src/engine3.js`, `drawCaption`). The videos are unaffected: their captions ship beside them as `.srt` files, which phones already size for the screen.
-- **Every film made before *The map before the data*, except *The Inner Life of Data*, was reworked.** A shared layer, `films/from-words-to-data/shared/src/phone.js`, raises every piece of text that isn't decoration to 28 px after the camera's zoom, and each film's scenes were rearranged to make room: cards that take turns, code that shows the lines the narration reads, shorter names, and the camera closer on what's being talked about. Texture (a period page, a picture seen from afar, a card behind another) is marked as decoration and not counted.
+- **Every film made before *The map before the data* was reworked,** *The Inner Life of Data* last, in English and Spanish (measured again on 15 October 2026; before, 91% of its text was under 28 px). A shared layer, `films/from-words-to-data/shared/src/phone.js`, raises every piece of text that isn't decoration to 28 px after the camera's zoom, and each film's scenes were rearranged to make room: cards that take turns, code that shows the lines the narration reads, shorter names, and the camera closer on what's being talked about. Texture (a period page, a picture seen from afar, a card behind another) is marked as decoration and not counted.
 - **Each film checks itself.** `tools/legible.py --overlaps` draws the film every half second and lists any text under 28 px, running off the frame or drawn over other words. Every reworked film passes; what it still lists are moments in passing, such as a card flying in, a fade or the camera moving in on part of a diagram.
 - **The labs and scenarios keep their sizes.** They're read up close, and size their text for their real width, so the phone layer loads only in the films.
 
@@ -15,7 +15,8 @@
 
 | Film | Texts | Under 28 px | Under 20 px | Median | Status |
 |---|---|---|---|---|---|
-| The Inner Life of Data (English and Spanish) | 351 | 91% | 254 | 16.5 | Still to rework |
+| The Inner Life of Data, English | 262 | 0% | 0 | 28 | Reworked |
+| The Inner Life of Data, Spanish | 262 | 0% | 0 | 28 | Reworked |
 | A Sharper Sketch | 323 | 0% | 0 | 28 | Reworked |
 | Silent change | 334 | 0% | 0 | 28 | Reworked |
 | Too good to be true | 246 | 0% | 0 | 28 | Reworked |
@@ -46,4 +47,4 @@
 
 ## What's left
 
-*The Inner Life of Data*, in English and Spanish, is the one film still to rework. It's the heaviest (dense pictures of a whole platform, and two languages), and it comes next, on its own. Every rework changes the picture, so a reworked film's videos are rendered again by the release workflow.
+Nothing: every film reads on a phone. Every rework changes the picture, so a reworked film's videos are rendered again by the release workflow.

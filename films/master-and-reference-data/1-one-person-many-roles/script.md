@@ -21,7 +21,7 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 | A dashed card, "alumna, next year" | A role that hasn't started yet |
 | An envelope arriving at the family inbox, Minh reading it | A contact point shared by two people, used for the wrong purpose |
 | The cards sliding off into four lanes | Person, role, contact point, identifier: kept apart |
-| A glass figure | The person, as the master record |
+| A white figure, drawn in pencil and left unpainted | The person, as the master record |
 | Bands under the figure, each with a start and an end | Roles, dated and owned |
 | Small tags on each identifier, "issued by" | An identifier belongs to the system that issued it |
 | An actor glyph with assignment lines to two role glyphs | Enterprise architecture's view: an actor (person, team or organisation) assigned to roles, for a time |
@@ -35,11 +35,13 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 
 ## The look
 
-- **Colourful.** Brighter than the other series, and every colour means something. Each role has its own saturated colour, the same in every film: student teal, platform user amber, customer coral, tutor violet, alumna green (and donor magenta later). A system's cards wear their role's colour. The master record is glass that gathers those colours: each value carries a small coloured label for its source, and each role is a coloured band with a start and an end, so a golden record reads at a glance as a mix of sources. Each industry in chapters 8 and 10 has its own colour too: health red, banking blue, energy yellow, retail orange, public sector green-blue.
-- **Backgrounds** are deep, warm indigo with soft pools of coloured light, not the plain dark glass of the other series. Reference data is drawn as bright tabs and chips; transactions as small, quick sparks.
-- **Readable, not only bright.** Every colour is paired with a label and checked for contrast against the background, so nothing depends on colour alone; `legible.py` checks text size frame by frame, as for the other series.
-- **The past is parchment and ink,** warm, with the year in the corner, as in the other series, touched with the colour of the idea it carries (the parish book's household ribbon in teal, the first role colour).
-- **People.** Linh, a new figure for the series, outlined in a soft neutral line: she's the person the data is about, so she wears the colours of her roles, not a side. Noor (cyan, the technical side) and Mei (gold, the business side), as in *From words to data* and *In the weeds of data crafting*. Minh appears once, reading an envelope.
+Watercolour, chosen from seven looks drawn from this film's moments. Reference frames: [1686 parish](../look/1686-parish.jpg), [campus today](../look/campus-today.jpg), [four lanes](../look/four-lanes.jpg).
+
+- **Colourful, and every colour means something.** Each role has its own saturated colour, the same in every film: student teal, platform user amber, customer coral, tutor violet, alumna green (and donor magenta later). A system's cards wear their role's colour as a brushstroke behind the title. The master record is Linh's figure cleared to white paper in a pencil line, gathering those colours: each value carries a small coloured label for its source, and each role is a band of wash with a start and an end, so a golden record reads at a glance as a mix of sources. Each industry in chapters 8 and 10 has its own colour too: health red, banking blue, energy yellow, retail orange, public sector green-blue.
+- **Backgrounds** are daylight landscapes in watercolour, not the dark glass of the other series: soft washes of sky and land on warm paper, clouds left as bare paper, buildings and trees drawn in pencil. They stay soft so the role colours, the strongest washes on screen, carry the meaning. Reference data is drawn as bright tabs and chips; transactions as small, quick dabs of colour.
+- **Readable, not only bright.** Text is dark ink on paper-light cards, and keeps 4.5:1 contrast or better on a role's wash. Every colour is paired with a label, so nothing depends on colour alone; `legible.py` checks text size frame by frame, as for the other series.
+- **The past is the same watercolour,** with the year in the corner; its documents are parchment and ink, as in the other series, touched with the colour of the idea they carry (the parish book's household ribbon in teal, the first role colour).
+- **People** are drawn in pencil, with paint that runs a little past the line. Linh, a new figure for the series, has no side colour: she's the person the data is about, so she wears the colours of her roles. Noor (cyan, the technical side) and Mei (gold, the business side) are edged in a soft wash of their side's colour, as they're outlined in *From words to data* and *In the weeds of data crafting*. Minh appears once, reading an envelope.
 - **Industry beats** keep Linh's figure and swap the cards: a hospital wristband, a bank card, a meter. No real organisation is named or drawn.
 
 ## Script
@@ -56,7 +58,7 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 
 **Narration.** Today, at the university. Linh Nguyen is studying health informatics. For years she shared her family's email with Minh, who studies here too. This week, Linh gets her own address, and tells the student system. Done, she thinks.
 
-**Picture.** The films' dark glass. Linh, in her neutral outline, at a laptop. A small email card, "nguyen.family@mail.example", with two names under it, Linh and Minh. A new card types in, "linh.nguyen@mail.example". She sends it to the student system's card, which updates with a soft tick.
+**Picture.** The campus in watercolour daylight. Linh, in plain pencil, at a laptop. A small email card, "nguyen.family@mail.example", with two names under it, Linh and Minh. A new card types in, "linh.nguyen@mail.example". She sends it to the student system's card, which updates with a soft tick.
 
 **On screen.** Linh Nguyen · health informatics · nguyen.family@mail.example · shared with Minh · linh.nguyen@mail.example · student system ✓
 
@@ -64,7 +66,7 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 
 **Narration.** But the student system isn't the only one that knows her. The learning platform has her account, with the family email. So does the short-course platform, where she took Health Literacy. And this semester she tutors a first-year unit, so HR has her too, with a staff number. Her certificate and her payslip still go to the family inbox, and Minh opens them. Next year, the alumni office will add one more.
 
-**Picture.** Four cards fan out around Linh, each in its system's colour: *Student · S-20436*, *Platform user · u-88236*, *Short-course customer · nguyen.family@…*, *Casual tutor · E-4417*. Three of them still show the family email, lit amber. An envelope, "certificate C-86", travels to the family inbox; another, "payslip", follows. Minh, outlined in gold for a moment, opens one and frowns. A fifth card draws in dashed, "Alumna · next year".
+**Picture.** Four cards fan out around Linh, each in its system's colour: *Student · S-20436*, *Platform user · u-88236*, *Short-course customer · nguyen.family@…*, *Casual tutor · E-4417*. Three of them still show the family email, lit amber. An envelope, "certificate C-86", travels to the family inbox; another, "payslip", follows. Minh, edged in gold for a moment, opens one and frowns. A fifth card draws in dashed, "Alumna · next year".
 
 **On screen.** student · S-20436 · platform user · u-88236 · short-course customer · tutor · E-4417 · still the family email · alumna · next year
 
@@ -74,7 +76,7 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 
 **Narration.** Linh is master data: one of the things the university is about, shared by every process and system. The lists that sort her, like "casual tutor" or a country, are reference data. What happens to her, an enrolment or a payslip, is transactional data. And the definition of a learner is metadata. This series is about the first two, and the next film tells them apart.
 
-**Picture.** Four shelves draw in. Linh's glass figure on *master data*; two short lists, "role type: casual tutor" and "country: Vietnam", on *reference data*; a stream of small events (enrolled, result, payslip) on *transactional data*; the glossary's term *learner* on *metadata*. The first two shelves stay lit, master in Linh's role colours and reference as bright chips; the others dim.
+**Picture.** Four shelves draw in. Linh's white figure on *master data*; two short lists, "role type: casual tutor" and "country: Vietnam", on *reference data*; a stream of small events (enrolled, result, payslip) on *transactional data*; the glossary's term *learner* on *metadata*. The first two shelves stay lit, master in Linh's role colours and reference as bright chips; the others dim.
 
 **On screen.** master data · the things it's about · reference data · the lists that sort them · transactional data · what happens to them · metadata · what it all means
 
@@ -82,7 +84,7 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 
 **Narration.** Noor, the university's data architect, opens the university's own model. It has a learner. A good one, with keys from three systems and a decision for every match. But a learner isn't someone. It's how someone relates to the university, for a while. The model has no person. She says so, and writes it down.
 
-**Picture.** Noor, outlined in cyan. The university's map from *In the weeds of data crafting*, with `learner` lit in the student domain; behind it, three key sets (SIS, LMS, SC) and the identity decisions. Noor circles *learner* and writes beside it, in her hand: "a role". A small gap opens above it, labelled "person?". A decision card types in: "The model has roles, not people. Add the person."
+**Picture.** Noor, edged in cyan. The university's map from *In the weeds of data crafting*, with `learner` lit in the student domain; behind it, three key sets (SIS, LMS, SC) and the identity decisions. Noor circles *learner* and writes beside it, in her hand: "a role". A small gap opens above it, labelled "person?". A decision card types in: "The model has roles, not people. Add the person."
 
 **On screen.** learner · a role, not someone · the model has no person · add the person
 
@@ -92,7 +94,7 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 
 **Narration.** So she draws four things apart. The person: someone, once. The roles: student, tutor, customer, each with a start, an end, and an owner. The contact points: an email or an address, each with a purpose, and some shared by two people. And the identifiers: a student number belongs to the student system, a staff number to HR. None of them is the person. Enterprise architects draw it the same way: a person, a team or an organisation is an actor, assigned to one or more roles, for a time.
 
-**Picture.** The four cards slide off Linh into four lanes. Linh becomes glass. *Roles*: bands under her, each with dates (student, from July 2025; customer, January to February 2026; tutor, March to June 2026; alumna, dashed). *Contact points*: two email cards, one marked "study, personal: Linh", the other "family: Linh and Minh". *Identifiers*: S-20436 tagged "issued by the student system", u-88236 "by the learning platform", E-4417 "by HR". Each lane's label settles above it. On the last sentence, a small glass card from *The map before the data* slides in at the side, in its notation: an actor glyph (*person, team or organisation*) with an assignment line to two role glyphs (*student*, *tutor*), and a tag, "for a time".
+**Picture.** The four cards slide off Linh into four lanes. Linh clears to white paper in a pencil line. *Roles*: bands under her, each with dates (student, from July 2025; customer, January to February 2026; tutor, March to June 2026; alumna, dashed). *Contact points*: two email cards, one marked "study, personal: Linh", the other "family: Linh and Minh". *Identifiers*: S-20436 tagged "issued by the student system", u-88236 "by the learning platform", E-4417 "by HR". Each lane's label settles above it. On the last sentence, a small card from *The map before the data* slides in at the side, in its notation: an actor glyph (*person, team or organisation*) with an assignment line to two role glyphs (*student*, *tutor*), and a tag, "for a time".
 
 **On screen.** the person · someone, once · roles · a start, an end, an owner · contact points · a purpose · sometimes shared · identifiers · issued by a system · none of them is the person · actor · assigned to · roles · for a time
 
@@ -100,7 +102,7 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 
 **Narration.** Then Noor and Mei write down who keeps what. For each role, which system creates it, and who owns it. For each piece of the person, which system is trusted. The registrar's office keeps the legal name. Linh keeps her own preferred name, and her personal email. HR keeps her work details. And Mei's office looks after the person: who someone is, and whether two records are one.
 
-**Picture.** Mei joins, outlined in gold. A small matrix draws in, rows for the attributes, columns for the systems, and lights cell by cell as each line is spoken: *legal name: student system*; *preferred name: Linh*; *personal email: Linh*; *work details: HR*. Below, a second strip for roles: *student: registrar's office*; *customer: short courses*; *tutor: People and culture*; *alumna: alumni office*. At the top, one row: *the person: Mei's office, steward*. Mei's gold tick lands on it.
+**Picture.** Mei joins, edged in gold. A small matrix draws in, rows for the attributes, columns for the systems, and lights cell by cell as each line is spoken: *legal name: student system*; *preferred name: Linh*; *personal email: Linh*; *work details: HR*. Below, a second strip for roles: *student: registrar's office*; *customer: short courses*; *tutor: People and culture*; *alumna: alumni office*. At the top, one row: *the person: Mei's office, steward*. Mei's gold tick lands on it.
 
 **On screen.** who creates it · who keeps it · who owns it · legal name · student system · preferred name · Linh · work details · HR · the person · steward · Mei's office
 
@@ -118,7 +120,7 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 
 **Narration.** The data management body of knowledge, DAMA, calls this reference and master data. It names four ways to keep it: a registry that only links, a copy for analysis, a master that systems read back, or one place where people are created. The series picks one later, and shows the tools that do it.
 
-**Picture.** DAMA's wheel, with *Reference and master data* lit, and the rest dim. Four small diagrams draw beside it, one by one: *registry* (lines only between cards); *consolidation* (a glass figure on the platform side); *coexistence* (lines back from the glass to each card); *centralised* (the glass first, cards drawn from it). A small tag on the last two: "film 7".
+**Picture.** DAMA's wheel, with *Reference and master data* lit, and the rest dim. Four small diagrams draw beside it, one by one: *registry* (lines only between cards); *consolidation* (a white figure on the platform side); *coexistence* (lines back from the white figure to each card); *centralised* (the white figure first, cards drawn from it). A small tag on the last two: "film 7".
 
 **On screen.** DAMA · reference and master data · registry · consolidation · coexistence · centralised · chosen in film 7
 
@@ -126,7 +128,7 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 
 **Narration.** People aren't the only master data. The university also has employers and partner universities, awards and units, campuses and rooms. A hospital has patients, practitioners and wards. A bank, customers, accounts and the firms it trades with. A utility, meters, connection points and poles. A shop, products, suppliers and stores. Which of them need mastering? Ask four questions. Is it a thing the business is about, not something that happens? Is it used by more than one process? Is it created or changed in more than one place, so the copies can disagree? And does it matter when they do: money, safety, the law, or someone's trust? Four yeses: master it.
 
-**Picture.** A gallery draws in around Linh's glass figure, each thing a bright card in its industry's colour: *employer*, *partner university*, *award*, *room* (university, teal); *patient*, *practitioner*, *ward* (health, red); *customer*, *account*, *counterparty* (banking, blue); *meter*, *connection point*, *pole* (energy, yellow); *product*, *supplier*, *store* (retail, orange). Then a checklist of four questions slides in. Three examples run through it, ticks landing as each question is asked: *a supplier* gets four ticks and turns to glass, "master it"; *a payment* fails the first ("it happens: a transaction"); *a currency code* passes the first but is a short list from outside ("a list: reference data, film 2").
+**Picture.** A gallery draws in around Linh's white figure, each thing a bright card in its industry's colour: *employer*, *partner university*, *award*, *room* (university, teal); *patient*, *practitioner*, *ward* (health, red); *customer*, *account*, *counterparty* (banking, blue); *meter*, *connection point*, *pole* (energy, yellow); *product*, *supplier*, *store* (retail, orange). Then a checklist of four questions slides in. Three examples run through it, ticks landing as each question is asked: *a supplier* gets four ticks and clears to white, like Linh, "master it"; *a payment* fails the first ("it happens: a transaction"); *a currency code* passes the first but is a short list from outside ("a list: reference data, film 2").
 
 **On screen.** employer · partner university · award · room · patient · practitioner · ward · customer · account · counterparty · meter · connection point · pole · product · supplier · store · a thing, not an event? · used by more than one process? · kept in more than one place? · does it matter if they disagree? · master it · a transaction · reference data
 
@@ -142,7 +144,7 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 
 **Narration.** Linh changes her email, once. Every role hears. Know the person, not just the role.
 
-**Picture.** Linh types her new email into a single field; the glass figure takes it; lines run out to each card, and each updates with a soft tick. The family inbox stays quiet; Minh, in passing, doesn't look up. Wordless breather on the glass figure and its bands. End card.
+**Picture.** Linh types her new email into a single field; the white figure takes it; lines run out to each card, and each updates with a soft tick. The family inbox stays quiet; Minh, in passing, doesn't look up. Wordless breather on the white figure and its bands. End card.
 
 **On screen.** once · every role hears · Know the person, not just the role.
 
@@ -178,7 +180,7 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 - **The kinds of data:** the four-way split (master, reference, transactional, metadata) is common teaching, not one standard; say it as a way of sorting, not a law.
 - **The party pattern** is not named on screen in this film; it comes in a line in film 1's narration only if time allows, credited to data model pattern books.
 - **The four questions:** a synthesis of common criteria (shared across processes, kept in more than one system, identity and cost of error), not one standard's wording; DAMA-DMBOK's own description of master data checked against it.
-- **Colour:** each role and industry colour checked for contrast on the indigo background, and for colour-blind viewers; labels carry the meaning.
+- **Colour:** each role and industry wash checked for contrast with the dark text on it (4.5:1 or better), and for colour-blind viewers; labels carry the meaning.
 - **Enterprise architecture:** in ArchiMate, a business actor (a person, team or organisation) is assigned to business roles; check the current specification's wording, and match the glyphs *The map before the data* draws (`archGlyph` in its `shared/src/ea.js`).
 - **Industry beats:** generic and plausible; no real organisation; "life support" customers kept as a general practice of energy retailers in many places.
 - **Privacy:** Minh reading Linh's certificate is shown as an everyday consequence, not a breach story; no legal claim.
@@ -187,4 +189,4 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 
 1. The author's review of this script.
 2. The project's additions it needs: the person, roles, contact points and identifiers in the conceptual model, and a small HR source.
-3. Linh's character card, and the series' components (cards, lanes, the glass figure, the inventory matrix), then the source.
+3. Linh's character card, and the series' components in watercolour (washes, pencil line and paper; cards, lanes, the white figure, the inventory matrix), then the source.

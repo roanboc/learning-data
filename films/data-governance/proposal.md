@@ -13,6 +13,9 @@
 | 16 October 2026 | A second part, *With the tools*: films on Databricks and dbt that implement the governance elements, each expanding the films of the first part it names. It includes data products and a marketplace with open formats for contracts and products, with Ontos (Databricks Labs) as the example. |
 | 16 October 2026 | Governance is about people and processes first. Tools help, and the series shows them, but governance is human work: understanding, motivation, change management, support and guidance. Every film shows its people side, and the last film, *Teachers of data*, is about it. |
 | 16 October 2026 | The governance team are the teachers of data, where all the pieces come together, as DAMA's wheel shows with governance at its centre. The proposal maps which of DAMA's knowledge areas each series and film covers. |
+| 16 October 2026 | The look is **toy town**, chosen from three looks drawn with the same two moments of *Off the shelf* (toy town, the building in section, a graphic novel). The university is a model town on a table: rooms open at the front like dollhouses, people as painted figures on small bases, a soft blur at the top and bottom of the frame. It replaces "the binder is paper, the enablers are glass". Fewer diagrams, more situations: ideas are shown as people doing things in places. |
+| 16 October 2026 | *Off the shelf* keeps the Magna Carta opening, as the checks found it: the clause promised one measure, and measures still differed for six centuries; what worked, by the late 1800s, was all of it together (one definition in law, a copy in every county, an inspector who checked, with the law behind him). Inspectors came with the Act of 1834, local measures were abolished in 1835, and the Act of 1878 gave the uniformity. |
+| 16 October 2026 | Current versions, named once in *Off the shelf*: DAMA-DMBOK, second edition, revised (2024); DCAM v3 (2025), now the EDM Association's; ISO 8000 for data quality; ISO/IEC 38505-1:2026, which replaced the 2017 edition. |
 
 ## The brief
 
@@ -85,7 +88,7 @@ The site could show the same map: the wheel on the Topics page, each area linkin
 
 **One new character: Yusuf Demir, the data governance lead,** new to the role. Yusuf inherits the binder, and is asked to "fix governance" before the university's next government submission. Yusuf is the guide of the series, as Sam is of *When things go wrong* and Noor of *From words to data*.
 
-**The look:** the binder is paper, heavy, on a shelf, like the drafts of *The map before the data*; the enablers are glass, in the work: on *In the weeds*' loop of ten steps, in the files, in a pull request. A policy line that finds where it runs changes material.
+**The look:** toy town (decided 16 October 2026). The university is a model town on a table, with the governance office on the green in the middle and the other offices round it, ten paths between them: from above, DAMA's wheel. Rooms open at the front like dollhouses; people are painted figures on small bases, gold-rimmed for the business side and blue-rimmed for the technical side. The binders are on a real shelf in Yusuf's office; a policy line that finds where it runs leaves the shelf for a place in the town.
 
 ## The thread: the number reported to the government
 

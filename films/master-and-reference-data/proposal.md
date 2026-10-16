@@ -11,6 +11,8 @@
 | 16 October 2026 | The series centres on one concept: **the person, and the roles a person can have.** The university is the thread, but the scenario stays generic, and every film shows the same pattern in other industries. |
 | 16 October 2026 | This series is made first, starting with *One person, many roles*; the governance series follows, so its films can link to these. |
 | 16 October 2026 | One film shows a master data hub at work, with LakeFusion (a Databricks-native MDM product) as the example; another tool could take its place. It shows reconciliation rules, the new agentic helpers, and the features worth seeing: explanations, undo, review, and changes sent on to other systems. |
+| 16 October 2026 | The series is more colourful than the other series: each role, system and industry has its own bright colour, and the person's record gathers them. |
+| 16 October 2026 | *One person, many roles* ends with more master entities from other industries, and the test for when an entity needs mastering. *Who is it?* opens with the difference between master and reference data, and what a master, or golden, record is. |
 | 16 October 2026 | Every film shows at least one concrete example, with real-looking values, so viewers can picture it. |
 
 ## The brief
@@ -77,7 +79,7 @@ Which of DAMA's knowledge areas each series and film covers is mapped once, in [
 
 **The same university, platform, project and people.** Mei Tanaka's office becomes the steward of the person: who someone is, and whether two records are one. Each role stays with the domain that owns it: the registrar's office for learners, People and culture for staff, Advancement for alumni and donors, Tom Whitfield's short courses for customers. Noor owns the model, Jun builds it, Yusuf (from the governance series) names who decides. **Linh Nguyen**, already in the project's data, becomes the series' person; Minh appears once.
 
-**The look:** each role is a card in its system's colour, worn by the same figure; the person is glass, with each value carrying a small label of where it came from, and each role a band with a start and an end. The *Elsewhere* beats keep the same figure and change the cards: a hospital band, a bank card, a meter.
+**The look: colourful.** Brighter than the other series. Each role has its own saturated colour, kept in every film: student teal, platform user amber, customer coral, tutor violet, alumna green, donor magenta. Each system's cards wear their role's colour; each industry in the *Elsewhere* beats has its own (health red, banking blue, energy yellow, retail orange, public sector green-blue). The person is glass that gathers the colours: each value carries a small coloured label of where it came from, and each role a coloured band with a start and an end, so a golden record reads at a glance as a mix of sources. Backgrounds are deep, warm indigo with soft colour light, not the plain dark glass of the other series; reference data is drawn as bright tabs and chips. Colour always means something (a role, a source, an industry), and every colour is checked for contrast and paired with a label, so nothing depends on colour alone.
 
 ## The series at a glance
 
@@ -119,11 +121,13 @@ Nine films of 4 to 6 minutes.
 
 **Ideas.** Master, reference, transactional and metadata, in one picture. DAMA's reference and master data area and the four ways of keeping master data, named once (they return in film 7). The party pattern in one line: a person or an organisation, and the roles that relate them. A system of record per attribute, and a system of entry per role.
 
+**More master entities, and the test.** The film ends by widening out: the university also masters organisations (employers, partner universities), awards and units of study, places (campuses, buildings, rooms); a hospital masters patients, practitioners and facilities; a bank, customers, accounts and counterparties; a utility, connection points, meters and assets; a retailer, products, suppliers and stores. Which ones need mastering? Four questions: is it a thing the business is about (a noun, not an event)? Is it used by more than one process or system? Is it created or changed in more than one place, so copies can disagree? And does it matter when they do (money, safety, the law, or a person's trust)? Yes to all four: master it. A short list that classifies things is reference data instead (film 2), and an event is a transaction.
+
 **Elsewhere.** A hospital nurse admitted as a patient: the staff system and the patient system each have her, and neither should show the other's data.
 
 **The enabler.** The person and role model in the conceptual model, beside the university's map, and an inventory of which system creates each role and keeps each attribute.
 
-**On screen.** One figure wearing four cards; the cards slide off into four bands; the figure turns to glass.
+**On screen.** One figure wearing four coloured cards; the cards slide off into four lanes; the figure turns to glass, banded in their colours. At the end, a gallery of master entities across industries, each in its industry's colour, and the four questions as a checklist that lights for some and not others.
 
 **Labs (candidates).** *Person, role, contact point or identifier?* *Fill the inventory.*
 
@@ -131,9 +135,13 @@ Nine films of 4 to 6 minutes.
 
 **Opening.** France, the 1550s: a man returns to a village after years away, claiming to be Martin Guerre. His wife, his family and the village accept him, for years, until the real Martin Guerre walks into the courtroom. A false match, believed by everyone who wanted it to be true.
 
+**First, two words people confuse.** Master data is the things the business is about: Linh, an award, a supplier, a meter. Reference data is the short lists used to sort and describe them: countries, role types, statuses, currencies. Master data has many rows, keeps growing, and its records have to be matched and reconciled across systems; reference data has few rows, changes rarely, often comes from outside (a standard's country list), and is picked from, not matched. A test: if you'd ever ask "is this the same one as that?", it's master data; if you only ever choose a value from a list, it's reference data. Some lists sit on the line (faculties, products): they're master data once they have their own attributes, owners and lifecycles.
+
+**And what a master record is.** A master record (often called a golden record) is the one trusted version of a thing, put together from every source that knows it: a stable ID of its own that never changes or gets reused; the best value for each attribute, each labelled with the source and rule that chose it; and links to every source record it came from, which stay as they arrived. It's not a copy of the best system's row, and it's not a record no one can trace: it can be explained, value by value, and undone, link by link.
+
 **Story.** HR's casual staff file has a Linh Nguyen with a different date of birth from the student system's (a typo), and the short-course platform has one email for Linh and Minh. Some pairs are clear (Linh confirmed she took the short course, decision `D-001`); some aren't. Mei's queue: the agent proposes each pair with its evidence; Mei decides same or different, with a reason; the decision is kept, never asked again, and can be undone. One pair is two people with the same student ID typed by mistake (`D-003`): merging them would have shown one person's results in the other's wallet.
 
-**Ideas.** Identifiers by type and by issuer, qualified by where they come from (key sets). Match rules: exact (a shared identifier) and likely (name, date of birth, contact point), with three outcomes: match, review, no match. False merges and missed matches, and why the first costs more. Link, don't destroy: source records stay as they arrived; the cross-reference joins them. Stewardship as a queue with an owner and a time limit.
+**Ideas.** Master data and reference data, and how to tell them apart. The master (golden) record: master ID, best values with provenance, links to sources. Identifiers by type and by issuer, qualified by where they come from (key sets). Match rules: exact (a shared identifier) and likely (name, date of birth, contact point), with three outcomes: match, review, no match. False merges and missed matches, and why the first costs more. Link, don't destroy: source records stay as they arrived; the cross-reference joins them. Stewardship as a queue with an owner and a time limit.
 
 **The example.** Linh's two records, side by side, scored by the reconciliation rules. Given name: same, +3.4. Family name: same, +3.3. Birth date: one digit apart, 14 March and 14 May, a likely typo, +0.9. Email: different, −0.4. Student ID: only one record has it, 0. Score 74, in the review band (60 to 90). What would flip it: if the birth dates agreed, 93, an automatic link. The agent's note for Mei, with the names masked: "same names; birth dates differ by one digit; HR record created three weeks after enrolment, with the university's email domain". It suggests; Mei decides.
 
@@ -143,9 +151,9 @@ Nine films of 4 to 6 minutes.
 
 **The enabler.** The steward's queue: profiling queries that propose pairs, a decisions table (`learner_identity_decisions.csv`, grown into a person queue) with who, when and why, and a test that every proposed pair is decided.
 
-**On screen.** Two cards drawn together, and a gold decision card between them: *same*, or *different*, with its reason.
+**On screen.** First, two shelves: big, varied cards of things (master) and small bright chips of lists (reference), with the test between them. A golden record assembling from coloured source cards, each value keeping its colour as a label, a master ID stamped on top. Then two cards drawn together, and a gold decision card between them: *same*, or *different*, with its reason.
 
-**Labs (candidates).** *Same person?* *Match, review or no match?*
+**Labs (candidates).** *Master or reference?* *Build the golden record.* *Same person?* *Match, review or no match?*
 
 ### 3. Which value wins
 
@@ -282,8 +290,8 @@ Nine films of 4 to 6 minutes.
 
 | Topic | Film |
 |---|---|
-| Master, reference, transactional and metadata; DAMA, named once; the party pattern; person, role, contact point, identifier | 1 |
-| Identifiers by type and issuer; matching; false merges and missed matches; link, don't destroy; stewardship queues | 2 |
+| Master, reference, transactional and metadata; DAMA, named once; the party pattern; person, role, contact point, identifier; master entities across industries; when an entity needs mastering | 1 |
+| Master versus reference data; the master (golden) record; identifiers by type and issuer; matching; false merges and missed matches; link, don't destroy; stewardship queues | 2 |
 | Survivorship per attribute; legal and preferred names; contact points by purpose; self-service corrections | 3 |
 | Role lifecycles; concurrent roles; dated relationships; as-was and as-is | 4 |
 | Reference data: internal and external lists, mappings, owners, versions, effective dates; inclusive lists about people | 5 |

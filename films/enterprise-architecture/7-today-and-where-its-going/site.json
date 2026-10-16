@@ -1,0 +1,27 @@
+{
+  "kicker": "Applications, technology and the path to a target",
+  "kicker_es": "Aplicaciones, tecnología y el camino a un objetivo",
+  "title_es": "Hoy, y hacia dónde va",
+  "h1": "Today, and where it's going: systems on the map, a target, and the path between",
+  "h1_es": "Hoy, y hacia dónde va: los sistemas en el mapa, un objetivo, y el camino entre los dos",
+  "lead": "An imagined morning in 2045: a street trading power from its batteries, a crew sent before a fault. Then today's 140 systems, finally placed under the capabilities they serve: three for one job, one capability with only a spreadsheet, and one system that serves nothing. Today, the target and the path are three drawings.",
+  "lead_es": "Una mañana imaginada en 2045: una calle que intercambia electricidad de sus baterías, una cuadrilla enviada antes de una falla. Luego, los 140 sistemas de hoy, por fin ubicados debajo de las capacidades a las que sirven: tres para un mismo trabajo, una capacidad con solo una hoja de cálculo, y un sistema que no sirve a nada. Hoy, el objetivo y el camino son tres dibujos.",
+  "description": "A film about placing applications and technology under the capabilities they serve, finding overlaps, gaps and shadow systems, bringing the drafts into one ArchiMate model, and drawing today, the target and the path between them as separate drawings, with plateaus, gaps and decisions written down with why.",
+  "description_es": "Una película sobre ubicar las aplicaciones y la tecnología debajo de las capacidades a las que sirven, encontrar superposiciones, huecos y sistemas en la sombra, reunir los borradores en un modelo de ArchiMate, y dibujar hoy, el objetivo y el camino entre ellos como dibujos separados, con mesetas, brechas y decisiones escritas con su porqué.",
+  "card": "An imagined street in 2045. Today's 140 systems on the map. A target, and the path to it, with reasons.",
+  "card_es": "Una calle imaginada en 2045. Los 140 sistemas de hoy en el mapa. Un objetivo, y el camino hacia él, con sus razones.",
+  "chapters_es": {
+    "morning": "Una mañana imaginada",
+    "list": "Ciento cuarenta sistemas",
+    "find": "Tres, ninguno, y uno de más",
+    "layers": "Lo que la hace funcionar",
+    "views": "Un mapa, una notación",
+    "target": "Hacia dónde va",
+    "gaps": "Las brechas",
+    "path": "El camino, en orden",
+    "why": "El porqué, por escrito",
+    "end": "Tres dibujos"
+  },
+  "next_h": "You've seen today, the target and the path. More films in the series are on the way.",
+  "next_h_es": "Viste hoy, el objetivo y el camino. Vienen más películas de la serie."
+}

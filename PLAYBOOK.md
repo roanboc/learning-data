@@ -4,7 +4,7 @@ What made the Learning Data films work, starting with *The Inner Life of Data*, 
 
 ## 0. Foundation first
 
-Before story or pictures, the concept is settled. [The new-film skill](.claude/skills/new-learning-film/SKILL.md) gives the order to work in.
+Before story or pictures, the concept is settled. [`AGENTS.md`](AGENTS.md) gives the order to work in, for any agent.
 
 - **Ask for the reference, and suggest others.** Name the framework the films treat as the reference, list the others worth knowing, and say where the films differ.
 - **Check it against practice.** Concepts and processes come from what practitioners really do; the author's own experience goes into the brief.

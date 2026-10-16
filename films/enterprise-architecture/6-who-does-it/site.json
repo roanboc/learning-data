@@ -1,0 +1,27 @@
+{
+  "kicker": "Actors, roles and domains",
+  "kicker_es": "Actores, roles y dominios",
+  "title_es": "Quién lo hace, y dónde cambia el significado",
+  "h1": "Who does it, and where meaning changes: roles, actors, and the edges between domains",
+  "h1_es": "Quién lo hace, y dónde cambia el significado: roles, actores, y los bordes entre dominios",
+  "lead": "Japan has run on two frequencies since the 1890s, and in 2011 the converters between them were too few. Tomás finds the same edge inside the utility: roles filled by people, partners and an AI agent, and one word, customer, that means a connection point to the network and an account to retail.",
+  "lead_es": "Japón funciona con dos frecuencias desde la década de 1890, y en 2011 las convertidoras entre ellas no alcanzaron. Tomás encuentra el mismo borde dentro de la empresa: roles que ocupan personas, socios y un agente de IA, y una palabra, cliente, que para la red es un punto de conexión y para comercialización, una cuenta.",
+  "description": "A film about who does the work (roles, and the people, teams, partners and AI agents who fill them, with their rights written down) and about domains: parts of an organisation with their own customers, capabilities and words, where meaning changes at the edge, and what crosses it is translated.",
+  "description_es": "Una película sobre quién hace el trabajo (los roles, y las personas, equipos, socios y agentes de IA que los ocupan, con sus atribuciones escritas) y sobre los dominios: partes de una organización con sus propios clientes, capacidades y palabras, donde el significado cambia en el borde, y lo que cruza se traduce.",
+  "card": "Japan runs on two frequencies. A utility has two kinds of customer. Roles, actors, and a translation at the edge.",
+  "card_es": "Japón funciona con dos frecuencias. Una empresa tiene dos tipos de cliente. Roles, actores, y una traducción en el borde.",
+  "chapters_es": {
+    "two": "Dos frecuencias",
+    "names": "Un nombre en cada paso",
+    "partner": "Un socio, y un contrato",
+    "agent": "Un agente en el turno de noche",
+    "count": "¿Cuántos clientes?",
+    "wall": "Un muro entre ellas",
+    "domains": "Dos organizaciones en una",
+    "one": "¿Una definición para todos?",
+    "fails": "Donde puede fallar",
+    "end": "Dibujado, por ahora"
+  },
+  "next_h": "You've seen who does the work, and where meaning changes. More films in the series are on the way.",
+  "next_h_es": "Viste quién hace el trabajo, y dónde cambia el significado. Vienen más películas de la serie."
+}

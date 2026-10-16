@@ -1319,10 +1319,11 @@ function mm_treeTags(ctx,t,P,labA,hi){const off={1:[-120,-8],2:[-10,40],3:[40,48
 // glossary at the bottom, the semantic layer at the top. o.a, o.hi, o.qa, o.ca: per floor, 0..1 (visible, highlighted, question shown, content shown)
 const MM_FL={x:160,w:1600,h:140,y0:650,gap:170};
 const mm_fy=(k,g)=>(g||MM_FL).y0-k*(g||MM_FL).gap;
-function mm_pill(ctx,x,y,s,col,o){o=o||{};const sz=o.size||18,w=tw(ctx,s,sz,700)+(o.pad||30),h=sz+(o.ph||14);const a=o.a==null?1:o.a;if(a<=0.01)return{x,y,w,h};
+// measured at the size its words are really drawn (the phone layer raises them in the film), so they stay inside it
+function mm_pill(ctx,x,y,s,col,o){o=o||{};const sz=o.size||18,ds=phSz(ctx,sz),w=tw(ctx,s,ds,700)+(o.pad||30),h=ds+(o.ph||14);const a=o.a==null?1:o.a;if(a<=0.01)return{x,y,w,h};
   withA(ctx,a,()=>{if(o.hi>0)glow(ctx,x,y,w*0.8,o.hiCol||col,0.4*o.hi);glass(ctx,x-w/2,y-h/2,w,h,o.r==null?h/2:o.r,o.hiCol&&o.hi>0.5?o.hiCol:col,{glow:8+12*(o.hi||0),ea:0.75+0.25*(o.hi||0),fill:o.fill||"rgba(7,12,24,0.95)"});
     if(o.dash){ctx.save();ctx.setLineDash([6,6]);ctx.strokeStyle=rgba(col,0.8);ctx.lineWidth=1.6;rr(ctx,x-w/2,y-h/2,w,h,h/2);ctx.stroke();ctx.restore();}
-    T(ctx,s,x,y+sz*0.36,{w:700,size:sz,align:"center",color:o.tc||rgba(col,1)});});return{x,y,w,h};}
+    T(ctx,s,x,y+ds*0.36,{w:700,size:sz,align:"center",color:o.tc||rgba(col,1)});});return{x,y,w,h};}
 function mm_glossC(ctx,x,y,h,t,p,hi){const W_=[["credential","a trusted, checkable claim of learning"],["microcredential","a small credential, with its learning assessed"],["stacking","counting credentials towards a bigger one"]];
   W_.forEach(([wd,df],i)=>{const cx=x+i*305,cy=y+16,cw=270,ch=h-32,on=i===1?hi:0;withA(ctx,clamp(p*3-i,0,1),()=>{if(on>0)glow(ctx,cx+cw/2,cy+ch/2,190,MM_GLO,0.35*on);
     glass(ctx,cx,cy,cw,ch,12,MM_GLO,{glow:8+12*on,ea:0.6+0.4*on,fill:"rgba(24,19,8,0.94)"});T(ctx,wd,cx+18,cy+34,{w:800,size:22,color:rgba(MM_GLO,1)});wrapT(ctx,df,cx+18,cy+62,cw-30,{w:600,size:16,lh:20,color:rgba(PARCH,0.85)});});});
@@ -1338,7 +1339,7 @@ function mm_link(ctx,A,B,label,col,o){o=o||{};const a=o.a==null?1:o.a,p=o.p==nul
   const cut=b=>Math.min(Math.abs(ux)>1e-6?b.w/2/Math.abs(ux):1e9,Math.abs(uy)>1e-6?b.h/2/Math.abs(uy):1e9)+6;const x0=A.x+ux*cut(A),y0=A.y+uy*cut(A),x1=B.x-ux*cut(B),y1=B.y-uy*cut(B);
   arrowTo(ctx,x0,y0,x1,y1,col,a,{p,dash:o.dash,head:o.head||12,lw:o.lw||2.2,nohead:o.nohead});
   if(label&&p>0.6)withA(ctx,a*fin(p,0.6,0.4),()=>{const mx=(x0+x1)/2,my=(y0+y1)/2,off=o.off==null?16:o.off,nx=-uy,ny=ux,s=o.size||16,lx=mx+nx*off*(ny>0?-1:1),ly=my+ny*off*(ny>0?-1:1);
-    const w=tw(ctx,label,s,700,o.f)+14;ctx.fillStyle="rgba(7,12,24,0.9)";rr(ctx,lx-w/2,ly-s*0.8,w,s*1.3,6);ctx.fill();T(ctx,label,lx,ly+s*0.3,{w:700,size:s,align:"center",f:o.f,color:rgba(o.lc||col,1)});});}
+    const ds=phSz(ctx,s),w=tw(ctx,label,ds,700,o.f)+14;ctx.fillStyle="rgba(7,12,24,0.9)";rr(ctx,lx-w/2,ly-ds*0.8,w,ds*1.3,6);ctx.fill();T(ctx,label,lx,ly+ds*0.3,{w:700,size:s,align:"center",f:o.f,color:rgba(o.lc||col,1)});});}
 function mm_ontoC(ctx,x,y,h,t,p,hi){const q=k=>clamp(p*4-k,0,1),yy=y+46;
   const Ln=mm_pill(ctx,x+100,yy,"Learner",MM_ONT,{size:18,a:q(0),r:10}),Mc=mm_pill(ctx,x+440,yy,"Microcredential",MM_ONT,{size:18,a:q(0.5),r:10,hi}),Gc=mm_pill(ctx,x+770,yy,"Graduate certificate",MM_ONT,{size:17,a:q(1),r:10});
   mm_link(ctx,Ln,Mc,"holds",MM_ONT,{p:q(1.4),off:18,size:15});mm_link(ctx,Mc,Gc,"counts towards",MM_ONT,{p:q(1.9),off:18,size:15});
@@ -1705,7 +1706,8 @@ scene("ontology",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx)
     withA(ctx,a2,()=>{glass(ctx,260,392,1400,290,20,MM_ONT,{glow:14,ea:0.6,fill:"rgba(12,8,26,0.93)"});T(ctx,"A graduate certificate accepts up to four approved microcredentials towards its credit.",300,446,{w:700,size:26});
       const A=mm_pill(ctx,560,540,"Graduate certificate",MM_ONT,{size:22,r:12,a:fin(t,cR+7.1,0.5),fill:"rgba(34,22,60,0.96)"}),Bb=mm_pill(ctx,1300,540,"Microcredential",MM_ONT,{size:22,r:12,a:fin(t,cR+7.4,0.5),fill:"rgba(34,22,60,0.96)"});
       mm_link(ctx,A,Bb,"accepts",MM_ONT,{p:clamp((t-cR-7.5)/0.7,0,1),size:18,off:22});
-      [["max 4",8.4],["approved only",9.1],["towards its credit",10.2]].forEach(([s,d],i)=>{const q=fin(t,cR+d,0.4);mm_pill(ctx,760+i*190+(i===2?30:0),628,s,[236,226,255],{size:17,a:q,hi:pulseAt(t,cR+d,1.2),hiCol:MM_ONT,fill:"rgba(34,22,60,0.96)"});});
+      // the three conditions side by side, each placed by the width it's drawn at
+      let px=640;[["max 4",8.4],["approved only",9.1],["towards its credit",10.2]].forEach(([s,d])=>{const q=fin(t,cR+d,0.4),pw=tw(ctx,s,phSz(ctx,17),700)+30;mm_pill(ctx,px+pw/2,628,s,[236,226,255],{size:17,a:q,hi:pulseAt(t,cR+d,1.2),hiCol:MM_ONT,fill:"rgba(34,22,60,0.96)"});px+=pw+18;});
       withA(ctx,fin(t,cR+10.8,0.5),()=>T(ctx,"a machine can check this",1640,666,{w:600,size:17,align:"right",color:rgba(MM_ONT,1)}));});});
   // the knowledge graph: the university's data, connected to the statements
   if(out1>0)withA(ctx,out1*(1-dimG),()=>{mm_kg(ctx,t,{p:{schema:clamp((t-cG+0.2)/1.2,0,1),data:clamp((t-cG-3.7)/2.2,0,1),links:clamp((t-cG-5.0)/2.4,0,1)},aisha:fin(t,cG+7.6,0.6)*(1-dimG)});
@@ -1892,7 +1894,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,S)
   trio(ctx,cx,cy,1,{t,col:MM_ONT,word:"credential",wordLab:" ",idea:"Credential",thing:(c2,x,y,s)=>{const L=mm_cols(c2,["id","holder","kind"],[["C-88","Aisha K.","micro"],["C-91","Aisha K.","micro"],["A-12","Ben O.","award"]]),w=L[2].x+L[2].w;table(c2,x-w/2,y-104,"credentials",["id","holder","kind"],[["C-88","Aisha K.","micro"],["C-91","Aisha K.","micro"],["A-12","Ben O.","award"]],{col:[150,225,255]});},
     thingLab:"the data it points to",thingDy:146,e1:clamp((t-cT-5.2)/1.0,0,1),e2:clamp((t-cT-7.5)/1.0,0,1),e3:0,wa,ia,ha});
   withA(ctx,fin(t,cT+4.6,0.5),()=>{const w=tw(ctx,"credencial",26,800)+40;glass(ctx,wx-w/2,wy+44,w,50,12,MM_ONT,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.93)"});T(ctx,"credencial",wx,wy+78,{w:800,size:26,align:"center"});
-    T(ctx,"en",wx-tw(ctx,"credential",30,800)/2-50,wy+10,{f:"mono",w:500,size:16,color:rgba(SOFT,1)});T(ctx,"es",wx-w/2-26,wy+76,{f:"mono",w:500,size:16,color:rgba(SOFT,1)});T(ctx,"the word",wx,wy+132,{w:700,size:20,align:"center",color:rgba(SOFT,1)});});
+    T(ctx,"en",wx-tw(ctx,"credential",30,800)/2-50,wy+10,{f:"mono",w:500,size:16,color:rgba(SOFT,1)});T(ctx,"es",wx-w/2-26,wy+76,{f:"mono",w:500,size:16,color:rgba(SOFT,1)});T(ctx,"the word, in the glossary",wx,wy+132,{w:700,size:20,align:"center",color:rgba(SOFT,1)});});
   // the idea, now a node in the ontology
   withA(ctx,ia,()=>{const A=mm_pill(ctx,700,128,"Award",MM_ONT,{size:16,r:10,a:fin(t,cT+5.6,0.5)}),M=mm_pill(ctx,1220,128,"Microcredential",MM_ONT,{size:16,r:10,a:fin(t,cT+5.9,0.5)});
     [A,M].forEach((b,i)=>{const q=fin(t,cT+5.8+i*0.3,0.5);if(q>0)isa(ctx,b.x+(i?-b.w/2-4:b.w/2+4),b.y+6,ix+(i?34:-34),iy-8,q,MM_ONT,{fill:"#0a0a18",s:12,lw:1.8});});

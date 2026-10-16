@@ -2,6 +2,17 @@
 
 What made the Learning Data films work, starting with *The Inner Life of Data*, written so the next film, lab or course can start from it. [The making-of story](site/journey/index.md) tells how the films came to be; this page keeps what to reuse. Each section ends with the question to ask of your own work.
 
+## 0. Foundation first
+
+Before story or pictures, the concept is settled. [The new-film skill](.claude/skills/new-learning-film/SKILL.md) gives the order to work in.
+
+- **Ask for the reference, and suggest others.** Name the framework the films treat as the reference, list the others worth knowing, and say where the films differ.
+- **Check it against practice.** Concepts and processes come from what practitioners really do; the author's own experience goes into the brief.
+- **Keep the essential.** Name the bodies of knowledge once, then teach the insights they share, as *From words to data* did with modelling techniques and *The map before the data* with EA frameworks.
+- **Tools show, they don't lead.** Databricks and dbt demonstrate the ideas; a topic never exists because a product feature does.
+
+*Ask: would an expert in each framework agree, and would a practitioner recognise it?*
+
 ## 1. Promise and audience
 
 - **Promise two audiences at once.** "A teenager understands it, and a data engineer agrees with it." Write the promise down and test every scene against both halves. The first keeps it clear; the second keeps it honest.

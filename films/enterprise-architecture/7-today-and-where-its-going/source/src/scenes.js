@@ -47,23 +47,24 @@ scene("morning",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   eaTitle(ctx,S,t,B+1.0,"Today, and where it's going","applications, technology, and the path to a target",EAC,"Film 7 of 11 · enterprise architecture, for data");});
 
 /* ---------- 2. A hundred and forty systems ---------- */
-const D7_CAPS=["plan the network","operate the network","maintain assets","connect customers","generate power","sell energy","serve customers","meet obligations"];
+// a no-break space keeps "the network" and "network control" on one line in their boxes
+const D7_CAPS=["plan the network","operate the\u00a0network","maintain assets","connect customers","generate power","sell energy","serve customers","meet obligations"];
 // the systems each capability's evidence put under it (Fleet portal 2 isn't here: it serves nothing anyone can name)
-const D7_PLACE=[["Network model","Planning studies","GIS · network map","Load forecast","Design tool"],["SCADA · network control","DMS · distribution","OMS · outages","Storm tool","Weather feed","Field mobility","Protection settings","Vegetation app"],
+const D7_PLACE=[["Network model","Planning studies","GIS · network map","Load forecast","Design tool"],["SCADA · network\u00a0control","DMS · distribution","OMS · outages","Storm tool","Weather feed","Field mobility","Protection settings","Vegetation app"],
   ["EAM · assets","Asset photos","Fleet portal","Procurement","Safety incidents","Training records"],["Connections portal","AMI head-end · meters","Contracts register","Spreadsheet · ops roster"],["Hydro scheduling","Wind SCADA","Market gateway"],
   ["Billing","Settlement","Spreadsheet · tariffs","CRM"],["CIS · customers","Contact centre phones","Website","Complaints log","Hardship register","Life support register","MDM · meter data"],["Data warehouse","Regulatory reports","Document store","HR · payroll"]];
 const d7_cx=i=>177+i*224;
 scene("list",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);wallBg(ctx,S,t);
   ctx.save();drift(ctx,t,sc,{z:0.025,y:420});
   const tB=c("bought"),tP=c("place"),tM=c("most"),nt=ease(fin(t,tB-0.4,0.7)),lo=fin(t,w("place","Each system")+3.2,0.6);
-  arrive(ctx,960,420,t,0.3,()=>{ctx.save();ctx.translate(lerp(960,1570,nt),lerp(420,120,nt));ctx.scale(lerp(1,0.6,nt),lerp(1,0.6,nt));sticky(ctx,0,0,780,220,"What runs it today, and where is it going?",{col:NOTEC[0],size:46,st:0,rot:-0.02});ctx.restore();},{dy:-30});
+  arrive(ctx,960,420,t,0.3,()=>{ctx.save();ctx.translate(lerp(960,1570,nt),lerp(420,120,nt));ctx.scale(lerp(1,0.6,nt),lerp(1,0.6,nt));sticky(ctx,0,0,780,220,D7_Q,{col:NOTEC[0],size:46,st:0,rot:-0.02});ctx.restore();},{dy:-30});
   withA(ctx,1-fin(t,tB+0.8,0.6),()=>person(ctx,"tomas",300,1030,0.8,{t,pose:t<c("note")+2.2?"explain":"stand"}));
   // the list, then the map to place it on
   arrive(ctx,700,560,t,w("bought","list")-0.2,()=>withA(ctx,1-lo,()=>d7_list(ctx,440,330,520,520,t,{})),{dy:14});
   D7_CAPS.forEach((n,i)=>arrive(ctx,d7_cx(i),250,t,w("place","map")+i*0.08,()=>archEl(ctx,d7_cx(i)-104,200,208,100,n,STR,"capability",{size:28,gs:11}),{dy:-12}));
   // each system flies from the list to the capability it serves
   let k=0;D7_CAPS.forEach((n,i)=>{for(let j=0;j<D7_PLACE[i].length;j++,k++){const t0=w("place","Each system")+k*0.07,u=ease(clamp((t-t0)/0.8,0,1));if(u<=0)continue;
-    const x=lerp(700,d7_cx(i),u),y=lerp(590,346+j*58,u),nm=D7_PLACE[i][j];withA(ctx,clamp(u*3,0,1),()=>archEl(ctx,x-100,y-23,200,46,nm,APL,"component",{size:20,gs:9,deco:1,hi:pulseAt(t,tM+0.2+((i*3+j)%7)*0.12,0.8)*0.6}));}});
+    const x=lerp(700,d7_cx(i),u),y=lerp(590,346+j*68,u),nm=D7_PLACE[i][j];withA(ctx,clamp(u*3,0,1),()=>archEl(ctx,x-104,y-28,208,56,nm,APL,"component",{size:20,gs:9,deco:1,hi:pulseAt(t,tM+0.2+((i*3+j)%7)*0.12,0.8)*0.6}));}});
   ctx.restore();
   arrive(ctx,700,110,t,w("place","capability it serves"),()=>withA(ctx,1-fin(t,w("place","from evidence")-0.3,0.4),()=>tag(ctx,700,110,"each system, under the capability it serves",APL,{align:"center",size:30})),{dy:8});
   arrive(ctx,700,110,t,w("place","from evidence"),()=>tag(ctx,700,110,"from evidence: who uses it, and for what",APL,{align:"center",size:30}),{dy:8});
@@ -202,7 +203,7 @@ scene("why",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);wa
   arrive(ctx,700,420,t,0.3,()=>d7_adr(ctx,160,150,1080,"7 · one outage system",rows,{p,hi:pulseAt(t,w("later","answer"),1.6)+fin(t,w("later","answer"),0.6)*0.5}),{dy:-16});
   arrive(ctx,1560,330,t,w("later","Three years"),()=>{eaYear(ctx,1380,200,"2029",CLAY,1);sticky(ctx,1580,360,460,150,"Why was the storm tool switched off?",{col:NOTEC[1],size:30,rot:0.03});},{dy:-20});
   const q=fin(t,w("later","answer")-0.2,0.6);if(q>0)arrowTo(ctx,1350,380,1250,380,TRUST,0.9*q,{p:q,lw:3,head:14});
-  arrive(ctx,1700,800,t,w("outage","Decided by")-0.3,()=>person(ctx,"grace",1790,1030,0.72,{t,pose:t>w("outage","Decided by")&&t<w("outage","Decided by")+1.8?"explain":"stand"}),{dy:20,from:0.96});
+  arrive(ctx,1700,800,t,w("outage","Decided by")-0.3,()=>d7_personR(ctx,"grace",1790,1030,0.72,{t,pose:t>w("outage","Decided by")&&t<w("outage","Decided by")+1.8?"explain":"stand"}),{dy:20,from:0.96});
   ctx.restore();
   arrive(ctx,700,840,t,w("each","why"),()=>tag(ctx,700,840,"what was decided, what else was considered, who decided",PARCH,{align:"center",size:28}),{dy:8});
   vign(ctx,S);});
@@ -218,9 +219,9 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   if(bd>0)withA(ctx,bd,()=>tag(ctx,430,690,"to the board, as drafts",MIG,{align:"center",size:28}));
   if(dn>0)[220,440,580].forEach(y=>glow(ctx,430,y,240,EAC,0.18*dn));
   person(ctx,"grace",1020,1030,0.74,{t,pose:t>w("confirm","Grace")&&t<w("confirm","Grace")+2.0?"explain":"stand"});
-  person(ctx,"tomas",1820,1030,0.78,{t,pose:t>cA&&t<cA+2.2?"explain":"stand"});
-  arrive(ctx,1560,140,t,0.4,()=>sticky(ctx,1560,140,500,120,"What runs it today, and where is it going?",{col:NOTEC[0],size:30,st:fin(t,cA+1.4,0.5)*0.5,rot:-0.03}),{dy:-20});
-  arrive(ctx,1580,420,t,cA,()=>sticky(ctx,1580,420,500,300,"Today, placed on the map. A target, drawn as carefully. A path between them, with reasons.",{col:NOTEC[0],size:30,p:clamp((t-cA-0.2)/2.8,0,1),rot:0.015}),{dy:-30,from:1.06});
+  d7_personR(ctx,"tomas",1820,1030,0.78,{t,pose:t>cA&&t<cA+2.2?"explain":"stand"});
+  arrive(ctx,1560,140,t,0.4,()=>sticky(ctx,1560,140,500,120,D7_Q,{col:NOTEC[0],size:30,st:fin(t,cA+1.4,0.5)*0.5,rot:-0.03}),{dy:-20});
+  arrive(ctx,1570,420,t,cA,()=>sticky(ctx,1570,420,580,260,D7_A,{col:NOTEC[0],size:30,p:clamp((t-cA-0.2)/2.8,0,1),rot:0.015}),{dy:-30,from:1.06});
   arrive(ctx,1500,730,t,w("next","backlog"),()=>sticky(ctx,1500,730,420,130,"Which questions matter?",{col:NOTEC[0],size:32,st:0,rot:0.03}),{dy:-30,from:1.06});
   ctx.restore();vign(ctx,S);
   eaEnd(ctx,S,t,B+0.8,"Today, and where it's going",EAC,"Today, a target, and the path between: three drawings.","Film 7 of 11");});

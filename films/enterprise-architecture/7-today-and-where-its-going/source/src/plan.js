@@ -11,6 +11,13 @@
 const STR=LAY6[1][1],BUS=LAY6[2][1],APL=LAY6[4][1],TEC=LAY6[5][1],MOT=LAY6[0][1];
 // the path from today to a target: ArchiMate's implementation and migration elements (plateaus, gaps), in a soft pink
 const MIG=[248,184,226],D7_RED=[232,96,84],D7_SUN=[255,196,120];
+// someone standing at the right of the frame, drawn facing the other way: the "explain" gesture then points at what they explain,
+// and the hand stays inside the frame
+function d7_personR(ctx,id,x,y,s,o){ctx.save();ctx.translate(x,0);ctx.scale(-1,1);ctx.translate(-x,0);person(ctx,id,x,y,s,o);ctx.restore();}
+// no-break spaces: words a note should keep on one line. The film's question breaks after "today,"; the answer, one sentence a line
+const d7_nb=s=>s.replace(/ /g,"\u00a0");
+const D7_Q="What runs it today, "+d7_nb("and where is it going?");
+const D7_A=["Today, placed on the map.","A target, drawn as carefully.","A path between them, with reasons."].map(d7_nb).join(" ");
 // the systems on Day one's list, and more of the same kind: placed under capabilities, they're texture, not something to read
 const D7_SYS=["OMS · outages","CIS · customers","SCADA · network control","GIS · network map","AMI head-end · meters","MDM · meter data","Billing","ERP · finance","EAM · assets","DMS · distribution","CRM","Field mobility","Data warehouse","HR · payroll","Spreadsheet · ops roster","Market gateway","Document store","Spreadsheet · tariffs",
   "Fleet portal","Fleet portal 2","Storm tool","Hardship register","Complaints log","Life support register","Connections portal","Design tool","Protection settings","Weather feed","Asset photos","Vegetation app","Load forecast","Settlement","Contracts register","Procurement","Training records","Safety incidents","Website","Contact centre phones","Network model","Planning studies","Hydro scheduling","Wind SCADA","Regulatory reports"];
@@ -155,7 +162,7 @@ function d7_ground(ctx,t,sun,o){o=o||{};const tr=o.trade||0,gr=o.grid||0;ctx.sav
   const dot=(L,v,col,a)=>{if(a<=0.01)return;const q=at(L,v);withA(ctx,a*sstep(0,0.06,v)*(1-sstep(0.94,1,v)),()=>{glow(ctx,q.x,q.y,22,col,0.75);ctx.fillStyle=rgba(mix(col,[255,255,255],0.6),1);ctx.beginPath();ctx.arc(q.x,q.y,4.6,0,TAU);ctx.fill();});};
   if(gr>0.01){for(let k=0;k<5;k++)dot(D7_GPATH,(t*0.22+k/5)%1,[150,200,255],gr);D7_LPATH.forEach((L,k)=>dot(L,(t*0.2+hash(k,755))%1,[150,200,255],gr*0.85));}
   if(tr>0.01)D7_TPATH.forEach((L,k)=>{dot(L,(t*0.17+hash(k,756))%1,[150,240,170],tr);dot(L,(t*0.17+hash(k,756)+0.5)%1,[150,240,170],tr*0.7);});
-  if(o.lab>0.01)withA(ctx,o.lab,()=>T(ctx,"cables under the street",614,D7_TY+42,{w:700,size:28,align:"center",color:"rgba(255,232,206,0.92)"}));
+  if(o.lab>0.01)withA(ctx,o.lab,()=>T(ctx,"cables under the street",1680,D7_TY+42,{w:700,size:28,align:"center",color:"rgba(255,232,206,0.92)"}));
   ctx.restore();}
 // a wheel: tyre, an aero cover, and five spokes turned by an (radians)
 function d7_wheel(ctx,wx,wy,r,an,sun){ctx.fillStyle="#121216";ctx.beginPath();ctx.arc(wx,wy,r,0,TAU);ctx.fill();ctx.fillStyle=rgba(mix([60,64,72],[188,194,202],sun),1);ctx.beginPath();ctx.arc(wx,wy,r*0.64,0,TAU);ctx.fill();

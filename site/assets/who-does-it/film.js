@@ -1978,6 +1978,11 @@ function focusZ(t,keys,d){d=d||1.4;let z=keys[0][3];for(let i=1;i<keys.length;i+
 const BUS=LAY6[2][1],STR=LAY6[1][1],MOT=LAY6[0][1],INF=LAY6[3][1];
 // the two sides of every edge in the film: the east of Japan and the network in blue, the west and retail in rose
 const D6_NET=[132,176,255],D6_RET=[255,150,186],D6_E50=D6_NET,D6_W60=[255,176,128],D6_RED=[232,96,84];
+// someone standing at the right of the frame, drawn facing the other way: the "explain" gesture then points at what they explain,
+// and the hand stays inside the frame
+function d6_personR(ctx,id,x,y,s,o){ctx.save();ctx.translate(x,0);ctx.scale(-1,1);ctx.translate(-x,0);person(ctx,id,x,y,s,o);ctx.restore();}
+// no-break spaces: words a note should keep on one line
+const d6_nb=s=>s.replace(/ /g,"\u00a0");
 
 /* ---------- Japan, from above ---------- */
 // A sketch of the four main islands, not a survey: longitude and latitude, projected simply. The frequency line runs from Itoigawa,
@@ -2228,7 +2233,7 @@ scene("names",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   ctx.restore();
   arrive(ctx,560,150,t,w("role","role")-0.1,()=>withA(ctx,1-fin(t,tA-0.2,0.4),()=>tag(ctx,560,150,"a step is done by a role",BUS,{align:"center",size:30})),{dy:8});
   arrive(ctx,560,150,t,w("actor","a person"),()=>tag(ctx,560,150,"an actor fills a role: a person, or a team",BUS,{align:"center",size:30}),{dy:8});
-  arrive(ctx,1700,800,t,tGr-0.3,()=>person(ctx,"grace",1800,1030,0.74,{t,pose:t>tGr&&t<tGr+2.2?"explain":"stand"}),{dy:20,from:0.96});
+  arrive(ctx,1700,800,t,tGr-0.3,()=>d6_personR(ctx,"grace",1800,1030,0.74,{t,pose:t>tGr&&t<tGr+2.2?"explain":"stand"}),{dy:20,from:0.96});
   vign(ctx,S);});
 
 /* ---------- 3. A partner, and a contract ---------- */
@@ -2310,7 +2315,7 @@ scene("wall",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   ctx.restore();
   arrive(ctx,960,190,t,w("rules","separate"),()=>tag(ctx,960,190,"in many markets: kept apart, even inside one group",PARCH,{align:"center",size:30}),{dy:8});
   arrive(ctx,960,870,t,hit,()=>tag(ctx,960,870,"it must not cross",D6_RED,{align:"center",size:32}),{dy:8});
-  arrive(ctx,1700,800,t,0.3,()=>{person(ctx,"ama",1790,1030,0.74,{t,pose:t>c("ama")&&t<c("ama")+2.2||(t>tRu&&t<tRu+2.0)?"explain":"stand"});tag(ctx,1720,520,"Ama · regulatory lead",TRUST,{align:"center",size:28});},{dy:20,from:0.96});
+  arrive(ctx,1700,800,t,0.3,()=>{d6_personR(ctx,"ama",1790,1030,0.74,{t,pose:t>c("ama")&&t<c("ama")+2.2||(t>tRu&&t<tRu+2.0)?"explain":"stand"});tag(ctx,1720,520,"Ama · regulatory lead",TRUST,{align:"center",size:28});},{dy:20,from:0.96});
   vign(ctx,S);});
 
 /* ---------- 7. Two organisations in one ---------- */
@@ -2386,16 +2391,16 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   if(gN>0)withA(ctx,gN,()=>{kt_gtick(ctx,110,460,20,1);T(ctx,"confirmed · Grace",142,470,{w:700,size:28,color:rgba(TRUST,1)});});
   if(gR>0)withA(ctx,gR,()=>{kt_gtick(ctx,560,368,20,1);T(ctx,"confirmed · head of retail",592,378,{w:700,size:28,color:rgba(TRUST,1)});});
   // the edge, and what may cross it
-  arrive(ctx,480,560,t,0.7,()=>sticky(ctx,480,560,780,96,"the edge · network | retail · four things may cross",{col:NOTEC[2],edge:[220,230,255],glass:gA,size:28,rot:0}),{dy:-12});
+  arrive(ctx,480,560,t,0.7,()=>sticky(ctx,480,560,780,96,"the edge · network and retail · four things may cross",{col:NOTEC[2],edge:[220,230,255],glass:gA,size:28,rot:0}),{dy:-12});
   if(gA>0)withA(ctx,gA,()=>{kt_gtick(ctx,110,646,20,1);T(ctx,"confirmed · Ama",142,656,{w:700,size:28,color:rgba(TRUST,1)});});
   // the agent's rights, with an owner
   arrive(ctx,300,740,t,c("agent"),()=>{kt_agent(ctx,140,740,30,t,{});T(ctx,"the agent's rights",200,732,{w:800,size:28,color:rgba(KT_AI,1)});withA(ctx,fin(t,w("agent","owner"),0.5),()=>tag(ctx,200,778,"owner: Grace",TRUST,{size:28}));},{dy:12});
   person(ctx,"grace",1000,1030,0.72,{t,pose:t>w("confirm","Grace")&&t<w("confirm","Grace")+1.8?"explain":"stand"});
   person(ctx,"ama",1190,1030,0.72,{t,pose:t>w("confirm","Ama")&&t<w("confirm","Ama")+1.8?"explain":"stand"});
-  person(ctx,"tomas",1820,1030,0.78,{t,pose:t>cA&&t<cA+2.2?"explain":"stand"});
+  d6_personR(ctx,"tomas",1820,1030,0.78,{t,pose:t>cA&&t<cA+2.2?"explain":"stand"});
   arrive(ctx,1560,140,t,0.4,()=>sticky(ctx,1560,140,500,120,"Who does it, and where does meaning change?",{col:NOTEC[0],size:30,st:fin(t,cA+1.4,0.5)*0.5,rot:-0.03}),{dy:-20});
   arrive(ctx,1580,420,t,cA,()=>sticky(ctx,1580,420,500,320,"Roles do the work; people, partners and agents fill them. Customer: two meanings, a wall, a translation at the edge.",{col:NOTEC[0],size:30,p:clamp((t-cA-0.2)/3.2,0,1),rot:0.015}),{dy:-30,from:1.06});
-  arrive(ctx,1500,720,t,w("next","opens"),()=>sticky(ctx,1500,720,440,140,"What runs it today, and where is it going?",{col:NOTEC[0],size:30,st:0,rot:0.03}),{dy:-30,from:1.06});
+  arrive(ctx,1500,720,t,w("next","opens"),()=>sticky(ctx,1500,720,440,140,"What runs it today, "+d6_nb("and where is it going?"),{col:NOTEC[0],size:30,st:0,rot:0.03}),{dy:-30,from:1.06});
   ctx.restore();vign(ctx,S);
   eaEnd(ctx,S,t,B+0.8,"Who does it, and where meaning changes",EAC,"Know who does the work. Translate at the edges.","Film 6 of 11");});
 

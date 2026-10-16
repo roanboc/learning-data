@@ -1,14 +1,14 @@
 # Master and reference data · One person, many roles: script
 
-*The script of the opening film of the series on master and reference data (the title is still open), as drafted: about 5 minutes, in eleven chapters, in English, 16 October 2026. Not built yet: timings are planned, and the source will set them. The title card follows chapter 1; the end card follows chapter 11. Made to read on a phone, like the other series: on-screen text at least 28 px in the frame, and the camera moves in on whatever the narration is about.*
+*The script of the opening film of the series on master and reference data (the title is still open), as drafted: about 6 minutes, in twelve chapters, in English, 16 October 2026. Not built yet: timings are planned, and the source will set them. The title card follows chapter 1; the end card follows chapter 12. Made to read on a phone, like the other series: on-screen text at least 28 px in the frame, and the camera moves in on whatever the narration is about.*
 
 ## The promise
 
-Every line passes two tests: anyone who has ever had two accounts with the same organisation can follow it, and an experienced master data manager finds nothing wrong in it. The film opens the series and says what it's about. Most systems store a role (a student, a customer, an employee) and call it the person. A person is someone, once; a role is how they relate to the organisation, for a time; a contact point can be shared and has a purpose; an identifier belongs to the system that issued it. Keep those four apart, write down who keeps each one, and most of master data management becomes a set of decisions, not a product. **Know the person, not just the role.**
+Every line passes two tests: anyone who has ever had two accounts with the same organisation can follow it, and an experienced master data manager finds nothing wrong in it. The film opens the series and says what it's about. Most systems store a role (a student, a customer, an employee) and call it the person. A person is someone, once; a role is how they relate to the organisation, for a time; a contact point can be shared and has a purpose; an identifier belongs to the system that issued it. Keep those four apart, write down who keeps each one, and most of master data management becomes a set of decisions, not a product. And the same goes for every thing a business is about that's used in many places, kept in more than one, and matters when the copies disagree. **Know the person, not just the role.**
 
 ## The story in one paragraph
 
-In 1686, Sweden's church law asked every parish to write down each person in each household, and a person who moved carried a certificate to the next parish; in 1947 the register gave everyone one number for life. Today, at the university, Linh Nguyen gets her own email address, after years of sharing her family's with Minh, and tells the student system. The learning platform, the short-course platform and the HR system, where she's a casual tutor this semester, don't hear: her certificate and her payslip still go to the family inbox, where Minh reads them. Four systems, four records, four ideas of who Linh is, and next year an alumni office will make a fifth. Noor, the data architect, looks at the university's own model and corrects it in the open: it has a learner, which is a role, and no person. She draws four things apart: the person, the roles, the contact points and the identifiers. Then she and Mei write down, for each role and each attribute, which system creates it, which keeps it, and who owns it. A hospital, a bank and an energy utility have the same problem with different names. DAMA calls this reference and master data, and names four ways to keep it; the series will choose one, and show the tools. It ends where it started: Linh changes her email once, and every role hears.
+In 1686, Sweden's church law asked every parish to write down each person in each household, and a person who moved carried a certificate to the next parish; in 1947 the register gave everyone one number for life. Today, at the university, Linh Nguyen gets her own email address, after years of sharing her family's with Minh, and tells the student system. The learning platform, the short-course platform and the HR system, where she's a casual tutor this semester, don't hear: her certificate and her payslip still go to the family inbox, where Minh reads them. Four systems, four records, four ideas of who Linh is, and next year an alumni office will make a fifth. Noor, the data architect, looks at the university's own model and corrects it in the open: it has a learner, which is a role, and no person. She draws four things apart: the person, the roles, the contact points and the identifiers. Then she and Mei write down, for each role and each attribute, which system creates it, which keeps it, and who owns it. A hospital, a bank and an energy utility have the same problem with different names. DAMA calls this reference and master data, and names four ways to keep it; the series will choose one, and show the tools. People aren't the only master data: organisations, products, places, assets and accounts are too, and four questions say which things need mastering. It ends where it started: Linh changes her email once, and every role hears.
 
 ## What each object stands for
 
@@ -25,6 +25,8 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 | Bands under the figure, each with a start and an end | Roles, dated and owned |
 | Small tags on each identifier, "issued by" | An identifier belongs to the system that issued it |
 | A small matrix lighting cell by cell | The inventory: who creates each role, and who keeps each attribute |
+| A gallery of things in industry colours: an employer, a product, a meter, a ward, an account | Other master entities |
+| Four questions as a checklist, lighting for some things and not others | The test for what needs mastering |
 | A hospital band, a bank card, a meter | The same pattern elsewhere |
 | DAMA's wheel, one slice lit | Reference and master data, named once |
 | Four small diagrams | The four ways to keep master data, named once |
@@ -32,9 +34,11 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 
 ## The look
 
-- **The series' two materials,** shared with the governance series: what systems hold is cards, each in its system's colour, slightly worn; the master record is glass, with a small label on every value saying where it came from.
-- **The past is parchment and ink,** warm, with the year in the corner, as in the other series.
-- **People.** Linh, a new figure for the series, outlined neither cyan nor gold: she's the person the data is about, so she's drawn in a soft neutral outline. Noor (cyan, the technical side) and Mei (gold, the business side), as in *From words to data* and *In the weeds of data crafting*. Minh appears once, reading an envelope.
+- **Colourful.** Brighter than the other series, and every colour means something. Each role has its own saturated colour, the same in every film: student teal, platform user amber, customer coral, tutor violet, alumna green (and donor magenta later). A system's cards wear their role's colour. The master record is glass that gathers those colours: each value carries a small coloured label for its source, and each role is a coloured band with a start and an end, so a golden record reads at a glance as a mix of sources. Each industry in chapters 8 and 10 has its own colour too: health red, banking blue, energy yellow, retail orange, public sector green-blue.
+- **Backgrounds** are deep, warm indigo with soft pools of coloured light, not the plain dark glass of the other series. Reference data is drawn as bright tabs and chips; transactions as small, quick sparks.
+- **Readable, not only bright.** Every colour is paired with a label and checked for contrast against the background, so nothing depends on colour alone; `legible.py` checks text size frame by frame, as for the other series.
+- **The past is parchment and ink,** warm, with the year in the corner, as in the other series, touched with the colour of the idea it carries (the parish book's household ribbon in teal, the first role colour).
+- **People.** Linh, a new figure for the series, outlined in a soft neutral line: she's the person the data is about, so she wears the colours of her roles, not a side. Noor (cyan, the technical side) and Mei (gold, the business side), as in *From words to data* and *In the weeds of data crafting*. Minh appears once, reading an envelope.
 - **Industry beats** keep Linh's figure and swap the cards: a hospital wristband, a bank card, a meter. No real organisation is named or drawn.
 
 ## Script
@@ -67,9 +71,9 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 
 ### 4 · The kinds of data · 1:40–2:10
 
-**Narration.** Linh is master data: one of the things the university is about, shared by every process and system. The lists that sort her, like "casual tutor" or a country, are reference data. What happens to her, an enrolment or a payslip, is transactional data. And the definition of a learner is metadata. This series is about the first two.
+**Narration.** Linh is master data: one of the things the university is about, shared by every process and system. The lists that sort her, like "casual tutor" or a country, are reference data. What happens to her, an enrolment or a payslip, is transactional data. And the definition of a learner is metadata. This series is about the first two, and the next film tells them apart.
 
-**Picture.** Four shelves draw in. Linh's glass figure on *master data*; two short lists, "role type: casual tutor" and "country: Vietnam", on *reference data*; a stream of small events (enrolled, result, payslip) on *transactional data*; the glossary's term *learner* on *metadata*. The first two shelves stay lit; the others dim.
+**Picture.** Four shelves draw in. Linh's glass figure on *master data*; two short lists, "role type: casual tutor" and "country: Vietnam", on *reference data*; a stream of small events (enrolled, result, payslip) on *transactional data*; the glossary's term *learner* on *metadata*. The first two shelves stay lit, master in Linh's role colours and reference as bright chips; the others dim.
 
 **On screen.** master data · the things it's about · reference data · the lists that sort them · transactional data · what happens to them · metadata · what it all means
 
@@ -117,7 +121,15 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 
 **On screen.** DAMA · reference and master data · registry · consolidation · coexistence · centralised · chosen in film 7
 
-### 10 · The series · 4:45–5:05
+### 10 · Not only people · 4:45–5:25
+
+**Narration.** People aren't the only master data. The university also has employers and partner universities, awards and units, campuses and rooms. A hospital has patients, practitioners and wards. A bank, customers, accounts and the firms it trades with. A utility, meters, connection points and poles. A shop, products, suppliers and stores. Which of them need mastering? Ask four questions. Is it a thing the business is about, not something that happens? Is it used by more than one process? Is it created or changed in more than one place, so the copies can disagree? And does it matter when they do: money, safety, the law, or someone's trust? Four yeses: master it.
+
+**Picture.** A gallery draws in around Linh's glass figure, each thing a bright card in its industry's colour: *employer*, *partner university*, *award*, *room* (university, teal); *patient*, *practitioner*, *ward* (health, red); *customer*, *account*, *counterparty* (banking, blue); *meter*, *connection point*, *pole* (energy, yellow); *product*, *supplier*, *store* (retail, orange). Then a checklist of four questions slides in. Three examples run through it, ticks landing as each question is asked: *a supplier* gets four ticks and turns to glass, "master it"; *a payment* fails the first ("it happens: a transaction"); *a currency code* passes the first but is a short list from outside ("a list: reference data, film 2").
+
+**On screen.** employer · partner university · award · room · patient · practitioner · ward · customer · account · counterparty · meter · connection point · pole · product · supplier · store · a thing, not an event? · used by more than one process? · kept in more than one place? · does it matter if they disagree? · master it · a transaction · reference data
+
+### 11 · The series · 5:25–5:45
 
 **Narration.** Who is it? Which value wins? Roles that come and go, the lists that sort them, what each role may see, one person in many systems, a hub at work, and how to keep it right.
 
@@ -125,7 +137,7 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 
 **On screen.** the nine films
 
-### 11 · Once · 5:05–5:20
+### 12 · Once · 5:45–6:00
 
 **Narration.** Linh changes her email, once. Every role hears. Know the person, not just the role.
 
@@ -138,11 +150,13 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 1. *After chapter 3.* Which of these are the person, and which are a role: a student number, Linh's date of birth, "casual tutor", the family email?
 2. *After chapter 6.* Why might two people rightly share a contact point, but never an identifier?
 3. *After chapter 7.* Think of an organisation you deal with in two ways (as a customer and an employee, say). Who keeps your name there, and who would know if you changed it?
+4. *After chapter 10.* Pick an organisation you know. Name one thing it should master, one list that's reference data, and one event that's a transaction.
 
 ## Labs (candidates)
 
 - **Person, role, contact point or identifier?** Sort twelve cards from Linh's systems into the four lanes.
 - **Fill the inventory.** For six attributes and four roles, choose the system that keeps each, and the owner; the lab shows what goes wrong with each wrong choice.
+- **Master it or not?** Twelve things from five industries; run each through the four questions.
 - **Spot the role called a person.** Three tables from three industries; find the one that stores a role and calls it the person.
 
 ## Where it comes from in the project
@@ -162,6 +176,8 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 - **DAMA-DMBOK:** the current edition's name for the knowledge area, and how it names the four ways of keeping master data (registry, consolidation, coexistence, centralised); some sources say "transaction hub" or "authored" for the last.
 - **The kinds of data:** the four-way split (master, reference, transactional, metadata) is common teaching, not one standard; say it as a way of sorting, not a law.
 - **The party pattern** is not named on screen in this film; it comes in a line in film 1's narration only if time allows, credited to data model pattern books.
+- **The four questions:** a synthesis of common criteria (shared across processes, kept in more than one system, identity and cost of error), not one standard's wording; DAMA-DMBOK's own description of master data checked against it.
+- **Colour:** each role and industry colour checked for contrast on the indigo background, and for colour-blind viewers; labels carry the meaning.
 - **Industry beats:** generic and plausible; no real organisation; "life support" customers kept as a general practice of energy retailers in many places.
 - **Privacy:** Minh reading Linh's certificate is shown as an everyday consequence, not a breach story; no legal claim.
 

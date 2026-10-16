@@ -14,6 +14,7 @@
 | 16 October 2026 | The series is more colourful than the other series: each role, system and industry has its own bright colour, and the person's record gathers them. |
 | 16 October 2026 | *One person, many roles* ends with more master entities from other industries, and the test for when an entity needs mastering. *Who is it?* opens with the difference between master and reference data, and what a master, or golden, record is. |
 | 16 October 2026 | Every film shows at least one concrete example, with real-looking values, so viewers can picture it. |
+| 16 October 2026 | The look is watercolour: daylight landscapes in soft washes on paper, drawn in pencil, chosen from seven looks drawn from film 1's moments ([reference frames](look/)). The role colours are the strongest washes on screen, so they carry the meaning; sky and land stay soft. |
 
 ## The brief
 
@@ -79,7 +80,7 @@ Which of DAMA's knowledge areas each series and film covers is mapped once, in [
 
 **The same university, platform, project and people.** Mei Tanaka's office becomes the steward of the person: who someone is, and whether two records are one. Each role stays with the domain that owns it: the registrar's office for learners, People and culture for staff, Advancement for alumni and donors, Tom Whitfield's short courses for customers. Noor owns the model, Jun builds it, Yusuf (from the governance series) names who decides. **Linh Nguyen**, already in the project's data, becomes the series' person; Minh appears once.
 
-**The look: colourful.** Brighter than the other series. Each role has its own saturated colour, kept in every film: student teal, platform user amber, customer coral, tutor violet, alumna green, donor magenta. Each system's cards wear their role's colour; each industry in the *Elsewhere* beats has its own (health red, banking blue, energy yellow, retail orange, public sector green-blue). The person is glass that gathers the colours: each value carries a small coloured label of where it came from, and each role a coloured band with a start and an end, so a golden record reads at a glance as a mix of sources. Backgrounds are deep, warm indigo with soft colour light, not the plain dark glass of the other series; reference data is drawn as bright tabs and chips. Colour always means something (a role, a source, an industry), and every colour is checked for contrast and paired with a label, so nothing depends on colour alone.
+**The look: watercolour.** Lighter and more colourful than the other series: daylight landscapes in soft washes on warm paper, drawn in pencil, instead of their dark glass. Each role has its own saturated colour, kept in every film: student teal, platform user amber, customer coral, tutor violet, alumna green, donor magenta. Each system's cards wear their role's colour as a brushstroke behind the title; each industry in the *Elsewhere* beats has its own (health red, banking blue, energy yellow, retail orange, public sector green-blue). The role colours are the strongest washes on screen, and sky and land stay soft, so colour reads as meaning. The person, as the master record, is the white of the paper in a pencil line, and gathers the colours: each value carries a small coloured label of where it came from, and each role a band of wash with a start and an end, so a golden record reads at a glance as a mix of sources. Reference data is drawn as bright tabs and chips. Colour always means something (a role, a source, an industry), and every colour is checked for contrast and paired with a label, so nothing depends on colour alone.
 
 ## The series at a glance
 
@@ -127,7 +128,7 @@ Nine films of 4 to 6 minutes.
 
 **The enabler.** The person and role model in the conceptual model, beside the university's map, and an inventory of which system creates each role and keeps each attribute.
 
-**On screen.** One figure wearing four coloured cards; the cards slide off into four lanes; the figure turns to glass, banded in their colours. At the end, a gallery of master entities across industries, each in its industry's colour, and the four questions as a checklist that lights for some and not others.
+**On screen.** One figure wearing four coloured cards; the cards slide off into four lanes; the figure clears to white paper, banded in their colours. At the end, a gallery of master entities across industries, each in its industry's colour, and the four questions as a checklist that lights for some and not others.
 
 **Labs (candidates).** *Person, role, contact point or identifier?* *Fill the inventory.*
 
@@ -171,7 +172,7 @@ Nine films of 4 to 6 minutes.
 
 **The enabler.** Survivorship rules in the model's YAML (`meta`), generated into the SQL and tested; a source and a date beside each value; contact points as their own table.
 
-**On screen.** Three values for one field; a rule card; the winner moves into the glass record, its source label attached.
+**On screen.** Three values for one field; a rule card; the winner moves into the person's record, its source label attached.
 
 **Labs (candidates).** *Which value wins?* *Write the rule.*
 
@@ -219,7 +220,7 @@ Nine films of 4 to 6 minutes.
 
 **The enabler.** Purposes and consent on each role, as data; policies that filter by purpose on the platform; a request workflow that finds every role from the person.
 
-**On screen.** Linh's glass record; one band lights, and only the doors marked with its purpose open.
+**On screen.** Linh's record; one band lights, and only the doors marked with its purpose open.
 
 **Labs (candidates).** *May this team use it?* *Answer the request.*
 
@@ -235,7 +236,7 @@ Nine films of 4 to 6 minutes.
 
 **The enabler.** The person published as a public, versioned data product, readable by systems; a search-before-create call at the point of entry.
 
-**On screen.** Four small diagrams side by side; one lights, and lines run from the glass record to each system.
+**On screen.** Four small diagrams side by side; one lights, and lines run from the person's record to each system.
 
 **Labs (candidates).** *Which way fits?* *Create a person, or add a role?*
 

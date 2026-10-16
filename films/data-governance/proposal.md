@@ -1,6 +1,6 @@
 # Data governance, off the shelf
 
-*Proposal for a series on data governance that works where data work happens, v0.2. The folder is named after the topic; the series title is still open. Status: proposed, 16 October 2026. A companion series on master and reference data is proposed beside it, in [`../master-and-reference-data/proposal.md`](../master-and-reference-data/proposal.md).*
+*Proposal for a series on data governance that works where data work happens, v0.3. The folder is named after the topic; the series title is still open. Status: proposed, 16 October 2026. A companion series on master and reference data is proposed beside it, in [`../master-and-reference-data/proposal.md`](../master-and-reference-data/proposal.md).*
 
 ## Decided
 
@@ -11,12 +11,16 @@
 | 16 October 2026 | Very practical, with no over-conceptualisation. The series shows governance **enablers**: things in the work that make the right thing the easy thing, and enforce it. Not assessments, plans and heavy documentation with low enforcement. |
 | 16 October 2026 | More films on data quality (a second film, on fixing at the source) and on data product ownership. |
 | 16 October 2026 | A second part, *With the tools*: films on Databricks and dbt that implement the governance elements, each expanding the films of the first part it names. It includes data products and a marketplace with open formats for contracts and products, with Ontos (Databricks Labs) as the example. |
+| 16 October 2026 | Governance is about people and processes first. Tools help, and the series shows them, but governance is human work: understanding, motivation, change management, support and guidance. Every film shows its people side, and the last film, *Teachers of data*, is about it. |
+| 16 October 2026 | The governance team are the teachers of data, where all the pieces come together, as DAMA's wheel shows with governance at its centre. The proposal maps which of DAMA's knowledge areas each series and film covers. |
 
 ## The brief
 
 From the author (16 October 2026): a data governance series, and a master and reference data series; draft the storyline and the themes to cover. They should align with the other series, especially those on definitions and modelling. Use DAMA as the reference body, but keep it very practical and avoid over-conceptualisation. Show data governance enablers: governance often becomes a body without tools, only assessments and plans, with heavy documentation, low enforcement and no real support for actual data work.
 
 Added the same day: more films on data quality and on data product ownership, and films on the tools, specifically Databricks and dbt, that implement some of those governance elements, expanded from the films they reference. Of interest: data products and marketplace solutions such as Databricks' Ontos, which help with data domains, contracts and data products in open formats.
+
+And later the same day: governance focuses on people and processes, which is why it benefits from the right tools too; but it's ultimately human work, requiring human understanding and motivation, change management, support and guidance. Data governance teams are the teachers of data, where all the pieces come together, as DAMA shows in its knowledge areas. Say which of those areas each series covers.
 
 ## Analysis
 
@@ -28,6 +32,8 @@ Added the same day: more films on data quality and on data product ownership, an
 
 **What this proposal adds**
 
+- **People and processes first; tools in support.** The enablers in this series work only because people understand them, want them and are helped to use them. Governance is human work: listening, explaining, agreeing, changing habits, supporting people when a check stops them. Each film shows its people side next to its enabler, and none shows a tool replacing a conversation.
+- **Governance as the teacher of data.** DAMA's wheel puts governance at the centre, where every other knowledge area meets. The series ends there: the governance team's lasting job is to teach how the pieces fit, for which these films, their labs and the enablers' own messages are material.
 - **One test for every policy line: where does it run?** Every line of the binder ends the series in one of three places: it runs somewhere (a required field, a check, a tag, a route, a test), it's a decision someone owns and has recorded, or it's retired.
 - **Enable first, then enforce.** An enabler first makes the right thing easier (a field pre-filled, a definition already there, a mask applied for you); only then does a check stop what's still wrong. A check without the enabler is just a new way to say no.
 - **Governance decides; the platform does.** Governance sets decision rights and a few shared rules. Owners decide meaning in their domains. The platform and the pipeline carry the rules out, on every change.
@@ -47,26 +53,31 @@ The university's governance programme starts the series with a binder: 34 polici
 | "Changes are assessed for impact before they are made." | Every pull request carries its impact: lineage, tests, exposures and their owners; a breaking change is a new version | Change without surprises |
 | "Data is managed as an asset with clear accountability." | Data products with an owner, a contract, service levels and a lifecycle, published where consumers find and request them | A product with an owner |
 | "AI use follows the organisation's data policies." | Agents read the same rules as checks and skills, with least privilege; they draft and flag, people approve | An agent that checks |
-| "Governance maturity is assessed annually." | Measures read from the metadata and the runs, every day | Make the right thing easy |
+| "Governance maturity is assessed annually." | Measures read from the metadata and the runs, every day; a stewards' community, guidance beside every check, and rollouts that warn first | Teachers of data |
 
 ## Foundations: DAMA, named once
 
 *Off the shelf* names the bodies of knowledge once: **DAMA-DMBOK** (the reference, with data governance at the centre of its wheel of knowledge areas), and, in a line, DCAM, ISO 8000 for data quality, and ISO/IEC 38505 for the governance of data. After that, the series teaches what to do.
 
-How the films cover DAMA's knowledge areas, and where the other series already do:
+Governance sits at the centre of DAMA's wheel because it's where the other knowledge areas meet, and where someone has to explain how they fit. The films across the site already teach most of them. This series and its companion fill the gaps, and *Teachers of data* closes on the wheel, each area lit with the films that teach it.
 
-| DAMA knowledge area | Here | Already in |
+**DAMA's knowledge areas, and where the films cover them:**
+
+| Knowledge area | Where it's covered | Films |
 |---|---|---|
-| Data governance | 1, 2, 8, 9, 10; tools 11, 15 | |
-| Metadata management | 3, 7; tools 11, 13 | *Written once* |
-| Data quality | 5, 6; tools 14 | *Too good to be true*, *Promises and proofs* |
-| Data security | 4; tools 12, 16 | |
-| Data modelling and design | 3 (the glossary's link to the model) | *From words to data*, *In the weeds of data crafting* |
-| Data integration and interoperability | 7 (contracts, impact); tools 15, 16 (open formats, sharing) | *Silent change* |
-| Reference and master data | Handed over | The companion series |
-| Data architecture | 2, 8 (domains, data products) | *The map before the data*, *Who owns what* |
-| Data warehousing and BI, storage and operations | Out of scope | *The Inner Life of Data* |
-| Document and content management | Parked | |
+| Data governance | This series; touched in every series that shows people approving | Here: all, centrally *Off the shelf*, *Who decides*, *Teachers of data*. Also *Keeping it true*, *An agent on the team* |
+| Data architecture | *The map before the data*; *In the weeds of data crafting* | All of *The map before the data*; *Who owns what*. Here: *Who decides*, *A product with an owner* |
+| Data modelling and design | *A Sharper Sketch*; *From words to data*; *In the weeds of data crafting* | All of *From words to data*; *Declare it, then build it* to *Built in layers*. Companion: *One person, many roles*, *Roles come and go* |
+| Data storage and operations | *The Inner Life of Data*; *From words to data* | *Into the platform*, *Two speeds* (chapters); *Both at once*; *Built in layers* (physical choices) |
+| Data security | *The Inner Life of Data*; this series; its companion | *Meaning* (chapter: access control, masks). Here: *Who may see it*, *Governed in Unity Catalog*, *The marketplace*. Companion: *For this purpose only* |
+| Data integration and interoperability | *The Inner Life of Data*; *When things go wrong*; *In the weeds of data crafting*; this series | *Into the platform*, *Ways out* (chapters); *Silent change*; *What makes it the same one*. Here: *Change without surprises*, *Products in open formats*, *The marketplace*. Companion: *One person, many systems* |
+| Document and content management | Not covered | Parked |
+| Reference and master data | The companion series; *In the weeds of data crafting* | All of the companion; *What makes it the same one* (key sets, code mappings) |
+| Data warehousing and business intelligence | *The Inner Life of Data*; *From words to data*; *In the weeds of data crafting* | *Refining with dbt*, *Gold*, *Apps and Genie* (chapters); *Built to write, built to read*, *Many ways to read*; *One row of what, and when*, *Built in layers* |
+| Metadata management | *The Inner Life of Data*; *From words to data*; *In the weeds of data crafting*; this series | *Meaning* (chapter); *Meaning machines can read*, *Keeping it true*; *Written once*. Here: *One word, one home*, *Governed in dbt*, *Meaning on the platform* |
+| Data quality | *When things go wrong*; *In the weeds of data crafting*; this series; its companion | *Too good to be true*; *Promises and proofs*. Here: *Rules that run*, *Fixed where it starts*, *Quality on the platform*. Companion: *Kept, not cleaned* |
+
+The site could show the same map: the wheel on the Topics page, each area linking to its films (a decision for the author, below).
 
 ## The world, and the people
 
@@ -97,7 +108,7 @@ Sixteen films of 4 to 6 minutes, in two parts. The first ten show what governanc
 | | 7 | **Change without surprises** | Impact on every pull request; versions; exposures | Change control is a step in the change, not a meeting. |
 | | 8 | **A product with an owner** | Data products with an owner, a contract, service levels and a lifecycle | Own the product, not only the meaning. |
 | | 9 | **An agent that checks** | A governance review skill | Agents follow what's written as a check. People decide. |
-| | 10 | **Make the right thing easy** | Measures read from the work | Measure governance by use, not by maturity. |
+| | 10 | **Teachers of data** | The stewards' community, guidance beside every check, warn-then-error rollouts, measures read from the work | Governance is people's work; tools remember what people agreed. |
 | With the tools | 11 | **Governed in dbt** | `meta`, groups and access, contracts, versions, exposures, checks in CI | The project carries governance with the code. |
 | | 12 | **Governed in Unity Catalog** | Grants, governed tags, attribute-based policies, masks, lineage, audit | The platform enforces what the metadata says. |
 | | 13 | **Meaning on the platform** | Unity Catalog's Glossary, metric views, semantic models | One meaning, read by people, BI and agents. |
@@ -132,11 +143,13 @@ The tools films (11 to 16) don't open in the past. Each opens on the screen, wit
 
 **Story.** Yusuf's first week. The shelf: 34 policies, a maturity assessment of 2.1, a RACI, the council's minutes. The same week: two numbers for awards, and a changed glossary term. Yusuf follows the number back through the platform and finds the four places a definition lives (*Written once*), none of which knows the policy exists.
 
-**Ideas.** What governance is for: deciding who decides what, and making sure that decision reaches the work. Governance and management: governance decides and oversees; owners, engineers and the platform do. DAMA-DMBOK, named once, with its wheel; DCAM, ISO 8000 and ISO/IEC 38505 in a line. The test for every policy line: where does it run? Three outcomes: it runs, it's an owned decision, or it goes.
+**Ideas.** What governance is for: deciding who decides what, and making sure that decision reaches the work. Governance is people and processes first: tools carry out what people agreed, and can't make them agree. Governance and management: governance decides and oversees; owners, engineers and the platform do. DAMA-DMBOK, named once, with its wheel; DCAM, ISO 8000 and ISO/IEC 38505 in a line. The test for every policy line: where does it run? Three outcomes: it runs, it's an owned decision, or it goes.
 
 **The enabler.** *In the weeds*' loop of ten steps, with a pin at each point where a governance decision enters the work: a term at scope, an owner, a classification at source, a rule at tests, a contract, an approval at review, a version at operate.
 
 **On screen.** The binder, paper on a shelf; the loop, glass. Policy lines lift off the page and find their pins; some find none.
+
+**The people side.** Yusuf's first week is spent listening, not writing: sitting with Jun, Mei, Sam and Planning, asking what slows them down. The people who wrote the binder aren't the problem; they wrote what they were asked for. Change starts from what people already struggle with.
 
 **Labs (candidates).** *Where does it run?* (sort policy lines into runs, owned decision, retire).
 
@@ -152,6 +165,8 @@ The tools films (11 to 16) don't open in the past. Each opens on the screen, wit
 
 **On screen.** A RACI matrix with blanks; then a pull request that asks Mei, by name.
 
+**The people side.** Mei didn't ask to be an owner. Being named needs time from her manager, a small and clear scope, and someone to ask. A role without time is a name in a spreadsheet.
+
 **Labs (candidates).** *Owner, steward or custodian?* *Route the change.*
 
 ### 3. One word, one home
@@ -165,6 +180,8 @@ The tools films (11 to 16) don't open in the past. Each opens on the screen, wit
 **The enabler.** The glossary, and the `sync-the-glossary` skill, already in the project, run on a schedule and in CI.
 
 **On screen.** A term moving one way: glossary, conceptual model, doc block, catalog. A second arrow, backwards, crossed out.
+
+**The people side.** The words were agreed in a workshop where Mei and the faculties argued them out. The glossary keeps the agreement; it doesn't make it.
 
 **Labs (candidates).** *Glossary, dictionary or catalog?* *Read the drift report.*
 
@@ -180,6 +197,8 @@ The tools films (11 to 16) don't open in the past. Each opens on the screen, wit
 
 **On screen.** One column's tag lights up, and the mask follows the column downstream, through every model it reaches.
 
+**The people side.** The planner isn't a risk to manage. They're told why the mask is there and how to get more when the purpose needs it. A refusal without a path is a reason to copy data into a spreadsheet.
+
 **Labs (candidates).** *Classify the columns.* *Who sees what?*
 
 ### 5. Rules that run
@@ -193,6 +212,8 @@ The tools films (11 to 16) don't open in the past. Each opens on the screen, wit
 **The enabler.** Tests carrying `meta` (owner, dimension, the rule they enforce); a scorecard generated from dbt's run results; failures routed as issues to owners.
 
 **On screen.** A bar chart of survey answers; beside it, a scorecard drawn from the tests, with one red cell and its owner's name.
+
+**The people side.** Governance doesn't set the thresholds; Leila does, in a conversation, and learns to read the scorecard. A rule its owner doesn't understand gets switched off.
 
 **Labs (candidates).** *Which dimension?* *Set the threshold with the owner.*
 
@@ -208,6 +229,8 @@ The tools films (11 to 16) don't open in the past. Each opens on the screen, wit
 
 **On screen.** A mop under a dripping pipe; then the pipe fixed, and the mop put away, replaced by a small gauge.
 
+**The people side.** Tom's team isn't blamed. They get the evidence, and help to change the form. Blameless, as in *When things go wrong*.
+
 **Labs (candidates).** *Where did it start?* *Rule or monitor?*
 
 ### 7. Change without surprises
@@ -221,6 +244,8 @@ The tools films (11 to 16) don't open in the past. Each opens on the screen, wit
 **The enabler.** Impact on every pull request: changed models and everything downstream, from the manifest; the exposures' owners asked; enforced contracts.
 
 **On screen.** The change as a ripple along the lineage, pausing at each owner until they nod.
+
+**The people side.** The wallet team hears early, in their own words, with a date and help to move. Communication is half of change control.
 
 **Labs (candidates).** *Breaking or not?* *Who must be told?*
 
@@ -236,6 +261,8 @@ The tools films (11 to 16) don't open in the past. Each opens on the screen, wit
 
 **On screen.** One table, three people pointing at each other; then a product card with one name on it, and a line of consumers behind it.
 
+**The people side.** Planning's lead has to want the job. Yusuf shows who depends on the mart, what it's worth to them, and what support comes with owning it.
+
 **Labs (candidates).** *Product or step?* *Write the product card.*
 
 ### 9. An agent that checks
@@ -250,21 +277,25 @@ The tools films (11 to 16) don't open in the past. Each opens on the screen, wit
 
 **On screen.** The agent's review: three findings, each with its line, the rule it breaks and a proposed fix; a person's approval in gold.
 
+**The people side.** People trust the agent's review only when they understand what it checks and can disagree with it. The agent explains; a person decides.
+
 **Labs (candidates).** *Review the agent's review.* *Turn a policy into a check.*
 
-### 10. Make the right thing easy
+### 10. Teachers of data
 
-**Opening.** Bogotá, 1995: the mayor sends mimes into the streets to mock people who cross against the lights or drive carelessly, instead of fining them. With other measures, deaths on the roads fall. People follow a rule more readily when following it is easy, visible and normal.
+**Opening.** Bogotá, 1995: the mayor sends mimes into the streets to mock people who cross against the lights or drive carelessly, instead of fining them. With other measures, deaths on the roads fall. People follow a rule more readily when they understand it, and when following it is easy, visible and normal.
 
-**Story.** Submission day. The number is the same in the submission and the census report, and its definition is the glossary's. The maturity assessment isn't repeated; the measures now come from the work: how many public models have an owner, a term and classified columns; how long a drift takes to close; how many rule failures were fixed at the source; how long access takes to grant. The binder: of 34 policies, some became checks, some became decisions with owners, and the rest were retired.
+**Story.** Submission day. The number is the same in the submission and the census report, and its definition is the glossary's. Yusuf knows why it worked: not because of the checks alone, but because people understood them. So the governance team's work changes. A stewards' community meets every month to share what broke and what helped. Office hours replace approval queues. Every check's message links to a short how-to, written for the person it stops. A new check is announced, explained, runs as a warning first, and becomes an error only on a date everyone knows. Every new analyst starts with these films and their labs. The maturity assessment isn't repeated; the measures come from the work: how many public models have an owner, a term and classified columns; how long a drift takes to close; how many failures were fixed at the source; how long access takes to grant; how many people came to office hours, and came back. The binder: of 34 policies, some became checks, some became decisions with owners, and the rest were retired.
 
-**Ideas.** Measure governance by use and by outcome. Start small: one question, one domain, three enablers (owner, term, classification), then the next. Enable first, then enforce. The council's agenda changes from approving documents to deciding exceptions. Governance as a service with users, whose job is to make the right thing the easy thing.
+**Ideas.** Governance is people and processes; tools serve them. Change management in practice: why before what, start with the willing, warn before enforcing, support at the moment of friction, celebrate what works; the common change models, named once (such as Kotter's steps and ADKAR). Guidance and support as the governance team's daily work. Communities of practice. Measure by use and outcome. Start small: one question, one domain, three enablers, then the next. The governance team as the teachers of data: at the centre of DAMA's wheel, because that's where every other area meets and someone has to show how they fit.
 
-**The enabler.** A governance scorecard generated from the metadata and the runs.
+**The enabler.** The human ones: the stewards' community, office hours, guidance beside every check, a warn-then-error rollout, an onboarding path through the films and labs. And a governance scorecard generated from the metadata and the runs.
 
-**On screen.** The shelf emptying, line by line, into the loop; a thinner binder that's still there for the decisions only people can make.
+**The people side.** The whole film.
 
-**Labs (candidates).** *Measure it from the work.* *Where to start.*
+**On screen.** Yusuf in a room with stewards, not at a shelf. Then DAMA's wheel, governance at its centre; each slice lights with the films across the site that teach it, and the lines all run back to the centre.
+
+**Labs (candidates).** *Warn first, or stop?* *Plan the rollout of a check.* *Measure it from the work.*
 
 *Part two: with the tools*
 
@@ -324,7 +355,7 @@ The films of this part show the same university, the same project and the same p
 
 **Expands** *A product with an owner* and *Who may see it*.
 
-**Story.** A faculty analyst needs learners near an award. Before, they'd ask around. Now they search the university's catalog of products, read the contract and the service levels, see the owner, and request access, stating a purpose. The owner approves; access is granted to a group, with an end date; the request is the record. For a partner outside the university (the government's reporting, a partner university), the product is shared through Delta Sharing or a private listing in the Databricks Marketplace, with the same contract.
+**Story.** A faculty analyst needs learners near an award. Before, they'd ask around. Now they search the university's catalog of products, read the contract and the service levels, see the owner, and request access, stating a purpose. The owner approves; access is granted to a group, with an end date; the request is the record. For a partner outside the university (the government's reporting, a partner university), the product is shared through OpenSharing or a private listing in the Databricks Marketplace, with the same contract.
 
 **Ideas.** Discovery, request, approval, grant and expiry as one flow. Internal marketplaces and external sharing. Consumers become known, so changes reach them (*Change without surprises*).
 
@@ -361,13 +392,13 @@ So every enabler on screen is real, the series adds to [the example dbt project]
 | Lineage, impact analysis, contracts, versions, deprecation, change control | 7 |
 | Data products, product ownership, service levels, lifecycle, domains, consumers | 8 |
 | Agents under governance, and governance by agents; evidence; human approval | 9 |
-| Measuring governance; starting small; operating model | 10 |
+| People and change: change management, guidance, support, communities of practice; measuring governance; starting small; DAMA's wheel brought together | 10 |
 | dbt: `meta`, groups and access, contracts, versions, exposures, CI checks, `CODEOWNERS`, `persist_docs` | 11 |
 | Unity Catalog: grants, governed tags, attribute-based policies, masks and row filters, lineage, audit, system tables | 12 |
 | Glossary, metric views, semantic models, Genie | 13 |
 | Tests, pipeline expectations, quality monitoring, alerting | 14 |
 | Ontos; ODPS and ODCS; approvals; compliance rules | 15 |
-| Internal marketplace, access requests, Delta Sharing, Databricks Marketplace | 16 |
+| Internal marketplace, access requests, OpenSharing, Databricks Marketplace | 16 |
 
 **Parked:** document and content management; records retention schedules in depth; regulatory specifics by country (kept generic); data ethics as its own film; comparing catalog tools beyond Databricks and dbt.
 
@@ -390,8 +421,10 @@ So every enabler on screen is real, the series adds to [the example dbt project]
 - **Databricks:** Unity Catalog's Glossary (its status, and how a term is read; see *Written once*'s rigour sheet); governed tags, attribute-based access control, column masks and row filters; how dbt-databricks applies tags; data quality monitoring. Product names change: keep them to labels and the rigour sheet.
 - **Ontos:** what it does today (domains, teams, projects, data products, data contracts, semantic models, compliance rules, approvals, MCP), which ODCS and ODPS versions it reads and writes, its licence (the repository and third-party pages disagree), and its status as a Databricks Labs project, without formal support. Checked on 16 October 2026 from [its repository](https://github.com/databrickslabs/ontos): ODCS v3.1.0 for contracts, ODPS for products, runs as a Databricks App.
 - **Open standards:** ODCS and ODPS (Bitol, the Linux Foundation), their current versions and lifecycle states; a tool that tests an ODCS contract in CI.
-- **Databricks sharing:** Delta Sharing and the Databricks Marketplace, private listings and exchanges, and their current names.
+- **Databricks sharing:** OpenSharing (formerly Delta Sharing) and the Databricks Marketplace, private listings and exchanges, and their current names.
 - **dbt:** `meta` on tests; run results; `state:modified+` for impact; exposures; model versions and deprecation.
+- **Change models:** Kotter's steps and ADKAR, named only, with their sources.
+- **DAMA's wheel:** the current edition's knowledge areas and how it draws governance at the centre; the coverage map above checked against the films as made.
 - **Privacy:** keep it generic ("in many places, the law…"); no jurisdiction-specific advice.
 
 ## Decisions for the author
@@ -400,9 +433,10 @@ So every enabler on screen is real, the series adds to [the example dbt project]
 2. **Sixteen films in one series, or two series.** The tools films could be their own series, for practitioners, as *In the weeds* is to *From words to data*.
 3. **Ontos as the example for products and contracts.** It's open and built on Unity Catalog, but a Labs project without formal support. Alternatives: Unity Catalog alone, with ODCS files in the repository; or a commercial catalog, named once.
 4. **The new character.** Yusuf Demir, the data governance lead, outlined in gold (the business side), or a name you'd prefer.
-5. **The topic on the site.** A new topic, *Data governance*, holding this series and the master and reference data series, or both under *Data quality and change*.
-6. **Labs and scenarios:** per film, as in *In the weeds*, or one set for the series, as in *The map before the data*.
-7. **Your governance enablers.** Share the checks, templates or policies you use, so the films show them rather than a generic version.
+5. **DAMA's wheel on the site.** Show the coverage map above on the Topics page, each knowledge area linking to its films.
+6. **The topic on the site.** A new topic, *Data governance*, holding this series and the master and reference data series, or both under *Data quality and change*.
+7. **Labs and scenarios:** per film, as in *In the weeds*, or one set for the series, as in *The map before the data*.
+8. **Your governance enablers.** Share the checks, templates or policies you use, so the films show them rather than a generic version.
 
 ## Next checkpoints
 

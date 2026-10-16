@@ -1,6 +1,6 @@
 # Master and reference data: one person, many roles
 
-*Proposal for a series on master and reference data, v0.2. The folder is named after the topic; the series title is still open. Status: proposed, 16 October 2026. It's the companion of the data governance series, proposed in [`../data-governance/proposal.md`](../data-governance/proposal.md), and shares its decisions.*
+*Proposal for a series on master and reference data, v0.3. The folder is named after the topic; the series title is still open. Status: proposed, 16 October 2026. It's the companion of the data governance series, proposed in [`../data-governance/proposal.md`](../data-governance/proposal.md), and shares its decisions.*
 
 ## Decided
 
@@ -9,12 +9,17 @@
 | 16 October 2026 | A series on master and reference data, beside the data governance series. Both align with the series on definitions and modelling (*From words to data*, *In the weeds of data crafting*). |
 | 16 October 2026 | DAMA-DMBOK is the reference body, named once. Very practical, with no over-conceptualisation: each film shows the enabler that keeps master or reference data right in the work, not a plan or an assessment. |
 | 16 October 2026 | The series centres on one concept: **the person, and the roles a person can have.** The university is the thread, but the scenario stays generic, and every film shows the same pattern in other industries. |
+| 16 October 2026 | This series is made first, starting with *One person, many roles*; the governance series follows, so its films can link to these. |
+| 16 October 2026 | One film shows a master data hub at work, with LakeFusion (a Databricks-native MDM product) as the example; another tool could take its place. It shows reconciliation rules, the new agentic helpers, and the features worth seeing: explanations, undo, review, and changes sent on to other systems. |
+| 16 October 2026 | Every film shows at least one concrete example, with real-looking values, so viewers can picture it. |
 
 ## The brief
 
 From the author (16 October 2026), the same brief as the governance series: draft the storyline and themes; align with the series on definitions and modelling; DAMA as the reference, kept very practical; show the enablers, because governance (and master data with it) often becomes plans, assessments and heavy documentation with little enforcement and no support for real data work.
 
 Added the same day: focus on the person concept and the roles it might have; a more generic scenario, stating the university but also considering other industries.
+
+And later: start with the first film of this series, then governance, so the pieces link. One film can show LakeFusion as an MDM tool, though it could be another. Show reconciliation rules, the new agentic helpers and other interesting features, with at least one example each time so people can picture it.
 
 ## Analysis
 
@@ -34,9 +39,9 @@ Added the same day: focus on the person concept and the roles it might have; a m
 
 ## The spine: one person, many roles
 
-**Linh Nguyen** is a graduate student at the university. She took a short course before enrolling, signing up with her family's shared email, the one her mother Minh also uses. This year she tutors a first-year unit, on a casual contract, so the HR system knows her by a staff number. Next year she'll graduate, and the alumni office will ask her to give.
+**Linh Nguyen** is a graduate student at the university. She studies health informatics, and this year took a short course too, signing up with her family's shared email, the one Minh Nguyen, also a student and in the same family, uses as well. This year she tutors a first-year unit, on a casual contract, so the HR system knows her by a staff number. Next year she'll graduate, and the alumni office will ask her to give.
 
-Four systems, four records, four ideas of who Linh is: a student, a customer, an employee, an alumna. The platform knows two of them are the same person; nobody knows all four are. When Linh changes her email, three of them don't hear. When she asks the university what it holds about her, nobody can answer in one place.
+Four systems, four records, four ideas of who Linh is: a student, a learning-platform user, a customer, an employee; and next year a fifth, an alumna. The platform knows three of them are the same person; nobody knows all of them are. When Linh changes her email, three of them don't hear. When she asks the university what it holds about her, nobody can answer in one place.
 
 By the end, the university has one person that every system can read, with roles that start and end, each value labelled with its source, matches decided once by a steward, the lists that classify people owned and dated, and each role's data used only for its purpose.
 
@@ -70,13 +75,13 @@ Which of DAMA's knowledge areas each series and film covers is mapped once, in [
 
 ## The world, and the people
 
-**The same university, platform, project and people.** Mei Tanaka's office becomes the steward of the person: who someone is, and whether two records are one. Each role stays with the domain that owns it: the registrar's office for learners, People and culture for staff, Advancement for alumni and donors, Tom Whitfield's short courses for customers. Noor owns the model, Jun builds it, Yusuf (from the governance series) names who decides. **Linh Nguyen**, already in the project's data, becomes the series' person; her mother Minh appears once.
+**The same university, platform, project and people.** Mei Tanaka's office becomes the steward of the person: who someone is, and whether two records are one. Each role stays with the domain that owns it: the registrar's office for learners, People and culture for staff, Advancement for alumni and donors, Tom Whitfield's short courses for customers. Noor owns the model, Jun builds it, Yusuf (from the governance series) names who decides. **Linh Nguyen**, already in the project's data, becomes the series' person; Minh appears once.
 
 **The look:** each role is a card in its system's colour, worn by the same figure; the person is glass, with each value carrying a small label of where it came from, and each role a band with a start and an end. The *Elsewhere* beats keep the same figure and change the cards: a hospital band, a bank card, a meter.
 
 ## The series at a glance
 
-Eight films of 4 to 6 minutes.
+Nine films of 4 to 6 minutes.
 
 | # | Working title | The enabler | The idea to take away |
 |---|---|---|---|
@@ -87,7 +92,8 @@ Eight films of 4 to 6 minutes.
 | 5 | **Lists everyone uses** | Role, identifier and relationship types as owned, dated reference data | A code list has an owner, a date and one home. |
 | 6 | **For this purpose only** | Purpose and consent on each role; one place to answer "what do you hold about me?" | Data given for one role isn't free for every role. |
 | 7 | **One person, many systems** | The person published as a data product; search before create | Choose the lightest way that solves the problem. |
-| 8 | **Kept, not cleaned** | Stewardship measures; checks at entry | A clean-up decays; prevention lasts. |
+| 8 | **A hub at work** | An MDM hub on the platform: reconciliation rules, a steward's inbox, AI helpers that suggest, undo, review, a change feed | Rules act, AI suggests, people decide, and everything can be explained and undone. |
+| 9 | **Kept, not cleaned** | Stewardship measures; checks at entry | A clean-up decays; prevention lasts. |
 
 ## Openings: other places, other times
 
@@ -100,7 +106,8 @@ Eight films of 4 to 6 minutes.
 | 5 | Three-letter airport codes: why Toronto is YYZ, and why nobody changes it | Worldwide | 1930s–today |
 | 6 | The physician's oath: what is learned in care stays for care | Greece | About 400 BC |
 | 7 | Countries keep their own post offices and agree one set of rules to exchange mail | Bern, Switzerland | 1874 |
-| 8 | Water boards that maintain the dykes, forever | The Netherlands | Since the 1200s |
+| 8 | None: it opens on the hub's screen, as the governance series' tools films do | The university | Today |
+| 9 | Water boards that maintain the dykes, forever | The Netherlands | Since the 1200s |
 
 ## The films
 
@@ -124,9 +131,13 @@ Eight films of 4 to 6 minutes.
 
 **Opening.** France, the 1550s: a man returns to a village after years away, claiming to be Martin Guerre. His wife, his family and the village accept him, for years, until the real Martin Guerre walks into the courtroom. A false match, believed by everyone who wanted it to be true.
 
-**Story.** HR's casual staff file has a Linh Nguyen with a different date of birth from the student system's (a typo), and the short-course platform has one email for Linh and Minh. Some pairs are clear (Linh gave her student ID on the enrolment form); some aren't. Mei's queue: the agent proposes each pair with its evidence; Mei decides same or different, with a reason; the decision is kept, never asked again, and can be undone. One pair is two people with the same student ID typed by mistake (`D-003`): merging them would have shown one person's results in the other's wallet.
+**Story.** HR's casual staff file has a Linh Nguyen with a different date of birth from the student system's (a typo), and the short-course platform has one email for Linh and Minh. Some pairs are clear (Linh confirmed she took the short course, decision `D-001`); some aren't. Mei's queue: the agent proposes each pair with its evidence; Mei decides same or different, with a reason; the decision is kept, never asked again, and can be undone. One pair is two people with the same student ID typed by mistake (`D-003`): merging them would have shown one person's results in the other's wallet.
 
 **Ideas.** Identifiers by type and by issuer, qualified by where they come from (key sets). Match rules: exact (a shared identifier) and likely (name, date of birth, contact point), with three outcomes: match, review, no match. False merges and missed matches, and why the first costs more. Link, don't destroy: source records stay as they arrived; the cross-reference joins them. Stewardship as a queue with an owner and a time limit.
+
+**The example.** Linh's two records, side by side, scored by the reconciliation rules. Given name: same, +3.4. Family name: same, +3.3. Birth date: one digit apart, 14 March and 14 May, a likely typo, +0.9. Email: different, −0.4. Student ID: only one record has it, 0. Score 74, in the review band (60 to 90). What would flip it: if the birth dates agreed, 93, an automatic link. The agent's note for Mei, with the names masked: "same names; birth dates differ by one digit; HR record created three weeks after enrolment, with the university's email domain". It suggests; Mei decides.
+
+**Reconciliation rules, part one: matching.** Blocking finds candidates without comparing everyone with everyone (same family name sound and birth year; same email; same identifier). Each comparison adds or subtracts weight, by how often it agrees for the same person and by chance. Two thresholds make three bands: link automatically, review, keep apart. Hard rules override the score: two different student IDs can never be one person; the same national identifier always is. A steward's "not the same" is remembered, and binds the matcher.
 
 **Elsewhere.** A hospital merges two patient records; a test result follows the wrong one. Health systems keep a person's identifiers by issuer for exactly this reason.
 
@@ -141,6 +152,10 @@ Eight films of 4 to 6 minutes.
 **Opening.** 1831: HMS Beagle sails with more than twenty chronometers, because a ship's longitude depends on the time, and clocks drift. When they disagree, the navigator needs a rule, decided before leaving port, for which to trust.
 
 **Story.** Linh's name, emails and address differ across four systems. `core_learner` already chooses: "from the student system if it knows them, then the learning platform, then short courses". The rule is real, but it's written in a description and in SQL, for one role. Jun declares it for the person, per attribute: the legal name from the student system; the preferred name from Linh herself; each email kept as a contact point with its purpose (study, work, personal) and when it was last confirmed; the family email marked as shared. Each value keeps a label of where it came from and when.
+
+**The example.** Linh's golden record, value by value: legal name from the student system (trusted first for names); preferred name, "Linh", from Linh in the wallet; study email from the student system, work email from HR, the family email kept but marked shared with Minh; birth date from the student system, because HR's is the typo. Each value shows its source, the rule that chose it and its age; the runners-up are one click away. A new rule version (recency first for emails) runs as a dry run over every person, listing every value it would change, before Mei's manager approves it.
+
+**Reconciliation rules, part two: survivorship.** A default order for each attribute (trust by source, then recency, then completeness), trust that can differ by attribute (HR for work email, the person for preferred name), source policies (a change to a critical value from a less trusted source waits for review), and a steward's pin that holds a value until a date.
 
 **Ideas.** Survivorship: source priority, recency, completeness, and a steward's override. Rules per attribute, not per system. Legal and preferred names, and why both matter. Contact points by purpose instead of one "email" column. The person correcting their own details as a source.
 
@@ -216,7 +231,23 @@ Eight films of 4 to 6 minutes.
 
 **Labs (candidates).** *Which way fits?* *Create a person, or add a role?*
 
-### 8. Kept, not cleaned
+### 8. A hub at work
+
+**Opening.** None: the film opens on the hub's screen, on a Monday morning, with one line recapping *Who is it?* and *Which value wins*.
+
+**Story.** Mei's Monday in a master data hub on the platform. LakeFusion is the example: a master data management product built on Databricks, using Unity Catalog's permissions and lineage, with AI-assisted matching and stewardship workflows; another hub, or a small one the university builds itself, would show the same things. Over the weekend, 1,240 changes arrived from four systems. 1,180 linked automatically under the published rules; 52 stayed apart; 8 wait in Mei's inbox, ranked by how many consumers they touch. She opens the first: Linh's two records, the waterfall of match weights, what would flip it, the systems that would hear of it, and an AI-drafted case note that only suggests. She links them. The decision waits in an undo tray for a minute; she could still take it back. Then it commits, and the change feed tells the wallet and HR, which update their copies. Three alike reviews (the same pattern: a work email and a typo in a birth date) are decided together after Mei checks a sample of them one by one. On Friday, a share of the week's decisions comes back to another steward, blind; if agreement falls, a breaker stops automatic linking until the data owner restores it.
+
+**Ideas.** Reconciliation rules (matching, survivorship, source policies) published, versioned and dry-run before they change anything. The new agentic helpers: AI that matches by meaning as well as by spelling, drafts a case note for each review with personal values masked, explains a score, proposes a rule change from the stewards' decisions, and answers "why is this value here?"; it suggests, deterministic rules act, and people decide. What makes a hub trustworthy: every match and every value explained; every decision undoable (undo, detach, unmerge, a compensating change); checks on the checkers (blind review, a breaker); maker and checker for big changes; personal values masked by role, and every reveal logged; changes published as a feed for other systems, not pushed into them. The same features to ask of any tool.
+
+**The example.** One review, end to end: arrival, score 74, the waterfall, the AI's note, Mei's link, the tray's countdown, the commit, the wallet updated, the provenance on the new golden value.
+
+**The enabler.** The hub, and a short checklist for choosing one: explain, undo, review, mask, publish.
+
+**On screen.** The inbox; the waterfall, bar by bar; the tray's countdown; the golden record with a source label on every value; a line from the hub to each listening system.
+
+**Labs (candidates).** *Link, review or keep apart?* *Read the waterfall.* *What should the AI be allowed to do?*
+
+### 9. Kept, not cleaned
 
 **Opening.** The Netherlands, since the 1200s: local water boards maintain the dykes. They're among the oldest public bodies in the country, because a dyke is never finished.
 
@@ -244,7 +275,8 @@ Eight films of 4 to 6 minutes.
 | Reference tables for role, identifier and relationship types, consent purposes and countries, with owners and dates; tests that read them | 5 |
 | Purposes and consent on roles; an example access request answered from the person | 6 |
 | The person served to an app, and a search-before-create example | 7 |
-| Stewardship measures in the governance scorecard | 8 |
+| Stewardship measures in the governance scorecard | 9 |
+| A small, invented demo of a hub's inbox, waterfall and provenance, drawn in the film's style from the project's data | 8 |
 
 ## What the series covers, and where
 
@@ -257,7 +289,8 @@ Eight films of 4 to 6 minutes.
 | Reference data: internal and external lists, mappings, owners, versions, effective dates; inclusive lists about people | 5 |
 | Purpose limitation, consent, access and deletion requests, from the master record | 6 |
 | Registry, consolidation, coexistence, centralised; the person as a product; search before create | 7 |
-| Stewardship as operations; prevention; measures; agents proposing | 8 |
+| A master data hub at work: reconciliation rules, inbox, AI helpers, undo, blind review, breaker, change feed, masking; choosing a tool | 8 |
+| Stewardship as operations; prevention; measures; agents proposing | 9 |
 
 **Parked:** organisations as parties in depth (employers, suppliers, partner universities); organisation hierarchies and restructures; product and asset master data; MDM tool selection; probabilistic matching algorithms in depth; address standardisation services.
 
@@ -274,6 +307,8 @@ Eight films of 4 to 6 minutes.
 - **The openings:** the 1686 Church Law and Sweden's personal identity number (1947); the Martin Guerre case and its sources; how many chronometers HMS Beagle carried; the *cursus honorum*, its order and the minimum ages, without overstating how fixed it was; the YYZ and LAX code stories and who assigns codes today; the Hippocratic oath's wording on confidentiality and its date; the Universal Postal Union's founding (the General Postal Union, 1874); the age of the Dutch water boards.
 - **DAMA-DMBOK:** the current edition, and how it names the ways of keeping master data. ISO 8000's master data parts. The party pattern's usual sources (data model pattern books), named only.
 - **Privacy:** keep it generic; no jurisdiction-specific advice; lists about people (titles, gender) checked against current inclusive practice.
+- **LakeFusion:** what it does today, from its own documentation, not only its site and partner blogs (checked 16 October 2026: Databricks-native, AI-assisted matching and entity resolution, survivorship rules, golden records with lineage, stewardship workflows, Unity Catalog governance; partner blogs describe vector similarity, language-model inference and AI match justifications). Name it once, as one example among several; no claim it can't back.
+- **Matching:** the weights shown follow the usual probabilistic record linkage (agreement and disagreement weights, two thresholds); keep the numbers plausible and invented.
 - **Industry examples:** each *Elsewhere* beat plausible and generic; no real organisation.
 - **Databricks:** how a published table is served to an app (*Both at once*'s rigour sheet); filtering by purpose with attribute-based policies (the governance series' *Governed in Unity Catalog*).
 
@@ -283,10 +318,11 @@ Eight films of 4 to 6 minutes.
 2. **The person in the project.** A new `party` domain holding the person, or the person in the student domain with roles from other domains.
 3. **Linh as the series' person,** from the project's data, or a new character.
 4. **Organisations as parties.** Parked here; a film of their own (employers, partners, suppliers), or a later series.
-5. **The same topic as governance,** or its own on the site.
+5. **The hub in *A hub at work*.** LakeFusion, named as the example; another product; or a hub drawn generically, with LakeFusion mentioned in a line.
+6. **The same topic as governance,** or its own on the site.
 
 ## Next checkpoints
 
 1. The author agrees this proposal and decides the points above.
 2. The project's additions above, starting with the person and role model and the two new sources.
-3. A script and rigour sheet for *One person, many roles*.
+3. ~~A script and rigour sheet for *One person, many roles*.~~ Drafted, 16 October 2026: [script](1-one-person-many-roles/script.md). Next for it: the author's review, then the source.

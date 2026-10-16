@@ -773,8 +773,10 @@ async def check_think_silent(run):
                 want = run.url(("es/" if lang == "es" else "") + "labs/#" + X["qs"][x["id"]]["stop"])
                 expect(sec, x["lab"] == want, f"{where}: {x['id']}'s lab link goes to {x['lab']}, expected {want}")
             # the +/− sign isn't part of a question's name
-            snap = await pg.accessibility.snapshot(root=await pg.query_selector("#think-list summary"))
-            name = (snap or {}).get("name", "")
+            # its accessible name, from Playwright's ARIA snapshot (page.accessibility is gone): "- text: …" or "- role "…""
+            snap = (await pg.locator("#think-list summary").first.aria_snapshot()).split("\n")[0]
+            m = re.match(r'- (?:text: (.*)|[\w-]+ "(.*)")', snap)
+            name = (m.group(1) or m.group(2) or "") if m else ""
             expect(sec, name and not name.rstrip().endswith(("+", "−")), f"{where}: the first question's name is {name!r}")
             await run.think(pg, False)
             # Space on a question opens it, and doesn't reach the player (which listens for Space while it is on screen)

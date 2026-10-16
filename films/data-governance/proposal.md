@@ -9,7 +9,7 @@
 | 16 October 2026 | A series on data governance, and a companion series on master and reference data. Both align with the series on definitions and modelling (*From words to data*, *In the weeds of data crafting*). |
 | 16 October 2026 | DAMA-DMBOK is the reference body. It's named once, in the opening film; after that, the series teaches what to do, not the framework's vocabulary. |
 | 16 October 2026 | Very practical, with no over-conceptualisation. The series shows governance **enablers**: things in the work that make the right thing the easy thing, and enforce it. Not assessments, plans and heavy documentation with low enforcement. |
-| 16 October 2026 | More films on data quality (a second film, on fixing at the source) and on data product ownership. |
+| 16 October 2026 | More films on data quality (another film, on fixing at the source) and on data product ownership. |
 | 16 October 2026 | A second part, *With the tools*: films on Databricks and dbt that implement the governance elements, each expanding the films of the first part it names. It includes data products and a marketplace with open formats for contracts and products, with Ontos (Databricks Labs) as the example. |
 | 16 October 2026 | Governance is about people and processes first. Tools help, and the series shows them, but governance is human work: understanding, motivation, change management, support and guidance. Every film shows its people side, and the last film, *Teachers of data*, is about it. |
 | 16 October 2026 | The governance team are the teachers of data, where all the pieces come together, as DAMA's wheel shows with governance at its centre. The proposal maps which of DAMA's knowledge areas each series and film covers. |
@@ -442,5 +442,5 @@ So every enabler on screen is real, the series adds to [the example dbt project]
 
 1. The author agrees this proposal and decides the points above.
 2. Yusuf's character card, and the binder and loop as components.
-3. The project's additions above, starting with the governance check, so the first films draw from real files.
+3. The project's additions above, starting with the governance check, so the opening films draw from real files.
 4. A script and rigour sheet for *Off the shelf*.

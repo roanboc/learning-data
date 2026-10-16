@@ -14,7 +14,7 @@
 | 16 October 2026 | The series is more colourful than the other series: each role, system and industry has its own bright colour, and the person's record gathers them. |
 | 16 October 2026 | *One person, many roles* ends with more master entities from other industries, and the test for when an entity needs mastering. *Who is it?* opens with the difference between master and reference data, and what a master, or golden, record is. |
 | 16 October 2026 | Every film shows at least one concrete example, with real-looking values, so viewers can picture it. |
-| 16 October 2026 | The look is watercolour: daylight landscapes in soft washes on paper, drawn in pencil, chosen from seven looks drawn from film 1's moments ([reference frames](look/)). The role colours are the strongest washes on screen, so they carry the meaning; sky and land stay soft. |
+| 16 October 2026 | The look is watercolour: daylight landscapes in soft washes on paper, drawn in pencil, chosen from seven looks drawn from moments of *One person, many roles* ([reference frames](look/)). The role colours are the strongest washes on screen, so they carry the meaning; sky and land stay soft. |
 
 ## The brief
 
@@ -22,7 +22,7 @@ From the author (16 October 2026), the same brief as the governance series: draf
 
 Added the same day: focus on the person concept and the roles it might have; a more generic scenario, stating the university but also considering other industries.
 
-And later: start with the first film of this series, then governance, so the pieces link. One film can show LakeFusion as an MDM tool, though it could be another. Show reconciliation rules, the new agentic helpers and other interesting features, with at least one example each time so people can picture it.
+And later: start with the opening film of this series, then governance, so the pieces link. One film can show LakeFusion as an MDM tool, though it could be another. Show reconciliation rules, the new agentic helpers and other interesting features, with at least one example each time so people can picture it.
 
 ## Analysis
 
@@ -120,9 +120,9 @@ Nine films of 4 to 6 minutes.
 
 **Story.** Linh changes her email. The student system updates; the short-course platform still writes to the family address, where Minh reads it; HR's payslips go to the old one. Noor looks at the project and corrects it in the open: `core_learner` is a role. The model has no person. She draws four things apart: the person (someone, once); the roles (learner, customer, tutor, alumna), each with its owner and dates; the contact points (an email can be shared, and has a purpose); and the identifiers (a student ID belongs to the student system, a staff number to HR).
 
-**Ideas.** Master, reference, transactional and metadata, in one picture. DAMA's reference and master data area and the four ways of keeping master data, named once (they return in film 7). The party pattern in one line: a person or an organisation, and the roles that relate them. The same idea in enterprise architecture, in one line and one picture: an actor (a person, a team or an organisation) is assigned to one or more roles, for a time, which links this series to *The map before the data*'s modelling. A system of record per attribute, and a system of entry per role.
+**Ideas.** Master, reference, transactional and metadata, in one picture. DAMA's reference and master data area and the four ways of keeping master data, named once (they return in *One person, many systems*). The party pattern in one line: a person or an organisation, and the roles that relate them. The same idea in enterprise architecture, in one line and one picture: an actor (a person, a team or an organisation) is assigned to one or more roles, for a time, which links this series to *The map before the data*'s modelling. A system of record per attribute, and a system of entry per role.
 
-**More master entities, and the test.** The film ends by widening out: the university also masters organisations (employers, partner universities), awards and units of study, places (campuses, buildings, rooms); a hospital masters patients, practitioners and facilities; a bank, customers, accounts and counterparties; a utility, connection points, meters and assets; a retailer, products, suppliers and stores. Which ones need mastering? Four questions: is it a thing the business is about (a noun, not an event)? Is it used by more than one process or system? Is it created or changed in more than one place, so copies can disagree? And does it matter when they do (money, safety, the law, or a person's trust)? Yes to all four: master it. A short list that classifies things is reference data instead (film 2), and an event is a transaction.
+**More master entities, and the test.** The film ends by widening out: the university also masters organisations (employers, partner universities), awards and units of study, places (campuses, buildings, rooms); a hospital masters patients, practitioners and facilities; a bank, customers, accounts and counterparties; a utility, connection points, meters and assets; a retailer, products, suppliers and stores. Which ones need mastering? Four questions: is it a thing the business is about (a noun, not an event)? Is it used by more than one process or system? Is it created or changed in more than one place, so copies can disagree? And does it matter when they do (money, safety, the law, or a person's trust)? Yes to all four: master it. A short list that classifies things is reference data instead (*Who is it?*), and an event is a transaction.
 
 **Elsewhere.** A hospital nurse admitted as a patient: the staff system and the patient system each have her, and neither should show the other's data.
 

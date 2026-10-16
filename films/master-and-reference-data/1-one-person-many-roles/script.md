@@ -24,6 +24,7 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 | A glass figure | The person, as the master record |
 | Bands under the figure, each with a start and an end | Roles, dated and owned |
 | Small tags on each identifier, "issued by" | An identifier belongs to the system that issued it |
+| An actor glyph with assignment lines to two role glyphs | Enterprise architecture's view: an actor (person, team or organisation) assigned to roles, for a time |
 | A small matrix lighting cell by cell | The inventory: who creates each role, and who keeps each attribute |
 | A gallery of things in industry colours: an employer, a product, a meter, a ward, an account | Other master entities |
 | Four questions as a checklist, lighting for some things and not others | The test for what needs mastering |
@@ -89,11 +90,11 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 
 ### 6 · Four things, kept apart · 2:45–3:25
 
-**Narration.** So she draws four things apart. The person: someone, once. The roles: student, tutor, customer, each with a start, an end, and an owner. The contact points: an email or an address, each with a purpose, and some shared by two people. And the identifiers: a student number belongs to the student system, a staff number to HR. None of them is the person.
+**Narration.** So she draws four things apart. The person: someone, once. The roles: student, tutor, customer, each with a start, an end, and an owner. The contact points: an email or an address, each with a purpose, and some shared by two people. And the identifiers: a student number belongs to the student system, a staff number to HR. None of them is the person. Enterprise architects draw it the same way: a person, a team or an organisation is an actor, assigned to one or more roles, for a time.
 
-**Picture.** The four cards slide off Linh into four lanes. Linh becomes glass. *Roles*: bands under her, each with dates (student, from July 2025; customer, January to February 2026; tutor, March to June 2026; alumna, dashed). *Contact points*: two email cards, one marked "study, personal: Linh", the other "family: Linh and Minh". *Identifiers*: S-20436 tagged "issued by the student system", u-88236 "by the learning platform", E-4417 "by HR". Each lane's label settles above it.
+**Picture.** The four cards slide off Linh into four lanes. Linh becomes glass. *Roles*: bands under her, each with dates (student, from July 2025; customer, January to February 2026; tutor, March to June 2026; alumna, dashed). *Contact points*: two email cards, one marked "study, personal: Linh", the other "family: Linh and Minh". *Identifiers*: S-20436 tagged "issued by the student system", u-88236 "by the learning platform", E-4417 "by HR". Each lane's label settles above it. On the last sentence, a small glass card from *The map before the data* slides in at the side, in its notation: an actor glyph (*person, team or organisation*) with an assignment line to two role glyphs (*student*, *tutor*), and a tag, "for a time".
 
-**On screen.** the person · someone, once · roles · a start, an end, an owner · contact points · a purpose · sometimes shared · identifiers · issued by a system · none of them is the person
+**On screen.** the person · someone, once · roles · a start, an end, an owner · contact points · a purpose · sometimes shared · identifiers · issued by a system · none of them is the person · actor · assigned to · roles · for a time
 
 ### 7 · Who keeps what · 3:25–4:00
 
@@ -178,6 +179,7 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 - **The party pattern** is not named on screen in this film; it comes in a line in film 1's narration only if time allows, credited to data model pattern books.
 - **The four questions:** a synthesis of common criteria (shared across processes, kept in more than one system, identity and cost of error), not one standard's wording; DAMA-DMBOK's own description of master data checked against it.
 - **Colour:** each role and industry colour checked for contrast on the indigo background, and for colour-blind viewers; labels carry the meaning.
+- **Enterprise architecture:** in ArchiMate, a business actor (a person, team or organisation) is assigned to business roles; check the current specification's wording, and match the glyphs *The map before the data* draws (`archGlyph` in its `shared/src/ea.js`).
 - **Industry beats:** generic and plausible; no real organisation; "life support" customers kept as a general practice of energy retailers in many places.
 - **Privacy:** Minh reading Linh's certificate is shown as an everyday consequence, not a breach story; no legal claim.
 

@@ -144,6 +144,12 @@ The site is plain HTML, published as it is. For a new film:
 5. **Where next.** A `<template id="next-panel">` on its own page, and a link to it in the panel of the page it builds on.
 6. **Check.** Run `python site-tools/check_site.py` and `python site-tools/smoke.py`, and fix what they find. `check_site.py` only reads the files, in a second: links, header, `hreflang`, breadcrumbs, film numbering and stated lengths. `smoke.py` opens every page in Chromium, in about five minutes: it serves `site/` on port 8110 with `npx http-server` and checks the players, chapter links, panels, keyboard focus, progress, phone and tablet layouts, heading levels and text contrast in both themes. It needs `pip install playwright` and Node. Both exit with an error when something fails. A new film page needs its chapter count in `FILMS` in `smoke.py`, and a new page under a topic needs its breadcrumb in `CRUMBS` in `check_site.py`.
 
+## Checking a change
+
+Run only the checks your change needs: `python .github/scripts/affected.py --run`. It compares your branch, uncommitted files included, with `origin/main` and picks the checks from what changed. `site-tools/check_site.py` runs when the site, its tools, a Markdown doc, a series' data or a film's Spanish captions changed. `site-tools/smoke.py`, the slow one, runs only when `site/` or `site-tools/` changed. Each film whose source changed is built, compared with the site's copy of its player, and checked frame by frame with its `tools/check.py`. A change to shared code, such as the engine in `films/inner-life-of-data/source/src` or the phone layer, checks every film that draws with it, from the paths each film lists in `.github/workflows/release.yml`. Without `--run` it only lists the checks, and `--all` picks every one.
+
+The *Checks* workflow (`.github/workflows/checks.yml`) runs the same choice on every pull request and every push to `main`. To run every check, open *Checks* in the Actions tab → *Run workflow*. The dbt project is checked by its own workflow, `credential-project.yml`, only when it changes.
+
 ## Licence
 
 - **Code:** MIT, see [LICENSE](LICENSE).

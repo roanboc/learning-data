@@ -1,5 +1,5 @@
 /* Learning Data: "Pausa para pensar" de Meaning machines can read, en español. Mantén las claves iguales a think.en.js.
-   La película se detiene al final de cuatro capítulos (before, guesses, four, standards), con una pregunta cada vez. think.js las muestra,
+   La película se detiene al final de cinco capítulos (before, guesses, four, model, standards), con una pregunta cada vez. think.js las muestra,
    y las lista otra vez en "Piénsalo" (#think-list). Cada "stop" es un lab de esta película que enseña la misma idea;
    el .player data-labs de la página dice dónde están esos labs. */
 window.LEARN={lang:"es",
@@ -14,6 +14,9 @@ think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar
   "four":{stop:"layers",q:"¿Dónde va «un diplomado de posgrado acepta hasta cuatro microcredenciales aprobadas»?",
     opts:[{t:"En el glosario."},{t:"En la ontología.",ok:true},{t:"En la capa semántica."}],
     why:"Es una relación con un límite y una condición: una regla que una máquina puede comprobar. El glosario explica palabras; la capa semántica calcula cifras."},
+  "model":{stop:"which",q:"Cuando se pregunta si Aisha tiene una cuarta microcredencial, las tablas dicen que no, y la ontología dice que no puede saberlo. ¿Cuál tiene razón?",
+    opts:[{t:"Las tablas: la ontología está rota."},{t:"Las dos, cada una en su propio trabajo.",ok:true},{t:"La ontología: las tablas están desactualizadas."}],
+    why:"Las tablas responden con lo que registró la universidad, y leen lo que no está registrado como falso: lo correcto para los registros que guarda. La ontología trata lo que no está afirmado como desconocido, así que los datos de otros lugares pueden sumarse. El modelo de datos planifica los registros; la ontología define la idea."},
   "standards":{stop:"standard",q:"Tres definiciones oficiales de microcredencial no coinciden del todo. ¿Qué haces?",
     opts:[{t:"Usar la más nueva en todas partes, sin decirlo."},{t:"Elegir una a propósito, relacionar las otras con ella, y registrar las diferencias.",ok:true},{t:"Ignorar las tres, y escribir la tuya."}],
     why:"Revisar, adoptar, extender, registrar. Un estándar ahorra empezar de cero, pero solo una elección deliberada, y escrita, mantiene las cifras comparables."}

@@ -273,6 +273,15 @@ mm_doc=phDeco(mm_doc);
    (FW.vis, or the lab's own words), so Spanish pages show Spanish. Lab pictures are 960 wide and shown at about 45%, so their
    text is 22 px or more; scenario pictures are 600 wide and shown at about 70%, so theirs is 18 px or more. */
 const mm_hex=s=>s.match(/\w\w/g).map(q=>parseInt(q,16));
+// one of the three cards that end Ontology or model?, at a lab's size: its name, its job, lit or stepping back
+function mm_card3(c,x,y,w,h,name,job,col,lit){glass(c,x,y,w,h,16,col,{glow:12*lit,ea:0.3+0.55*lit,fill:"rgba(7,12,24,0.94)"});led(c,x+12,y+18,4,48,col,0.3+0.6*lit);
+  T(c,name,x+28,y+44,{w:800,size:26,color:rgba(col,0.45+0.55*lit)});T(c,job,x+28,y+76,{w:600,size:22,color:rgba(SOFT,0.5+0.5*lit)});}
+// what each card holds of the idea, drawn as the film draws it: the glossary's word, the ontology's concept, the model's record
+function mm_card3Ex(c,k,x,y,w,V){if(k===0){T(c,V.word,x+28,y+24,{w:800,size:24,color:rgba(MM_GLO,1)});wrapT(c,V.def,x+28,y+58,w-48,{w:600,size:22,lh:28,color:rgba(PARCH,0.9)});}
+  if(k===1){mm_pill(c,x+w/2,y+16,V.micro,MM_ONT,{size:22,r:10,fill:"rgba(34,22,60,0.96)"});wrapT(c,V.isa,x+28,y+72,w-48,{w:700,size:22,lh:28,color:rgba(MM_ONT,1)});}
+  if(k===2){const tx=x+28;glass(c,tx,y-6,230,124,12,MM_DM,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.94)"});T(c,V.table,tx+14,y+24,{f:"mono",w:500,size:22,color:rgba(MM_DM,1)});
+    c.strokeStyle="rgba(170,200,245,0.25)";c.lineWidth=1;[y+38,y+76].forEach(yy=>{c.beginPath();c.moveTo(tx,yy);c.lineTo(tx+230,yy);c.stroke();});
+    V.tcols.forEach((s,i)=>T(c,s,tx+14+i*100,y+66,{f:"mono",w:500,size:22,color:rgba(REF,1)}));V.trow.forEach((s,i)=>T(c,s,tx+14+i*100,y+104,{f:"mono",w:500,size:22,color:rgba(INK,0.95)}));}}
 function mm_numChip(c,x,y,s,n,col){glass(c,x,y,s,s,12,col,{glow:10,ea:0.9,fill:"rgba(7,12,24,0.95)"});T(c,""+n,x+s/2,y+s/2+s*0.2,{w:800,size:Math.round(s*0.56),align:"center",color:rgba(col,1)});}
 const LV={
   // Glossary, taxonomy, ontology or semantic layer? Four floors; each statement's number sits where it was placed
@@ -282,6 +291,22 @@ const LV={
       glass(c,x,y,fw,92,12,col,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.94)"});led(c,x+12,y+16,4,60,col,0.9);
       T(c,B[k][1],x+28,y+40,{w:800,size:26,color:rgba(col,1)});T(c,V.q[k],x+28,y+74,{w:600,size:22,color:rgba(SOFT,1)});
       mine.forEach(([it,i],j)=>{const ok=st.checked?(it.b===bk):null;mm_numChip(c,x+500+j*54,y+23,46,i+1,ok==null?col:ok?GOOD:BAD);});});},
+  // Glossary, ontology or data model? The three cards that end the chapter; each statement's number sits on the card it was placed on
+  which:(c,w,h,st,FW)=>{const lab=FW.labs.find(x=>x.id==="which"),items=lab.w.items,B=lab.w.buckets,V=FW.vis.which,cols=[MM_GLO,MM_ONT,MM_DM];
+    B.forEach(([bk,name],k)=>{const x=16+k*314,y=16,cw=300,ch=408,col=cols[k],mine=items.map((it,i)=>[it,i]).filter(([it,i])=>st.pick[i]===bk);
+      mm_card3(c,x,y,cw,ch,name,V.jobs[k],col,1);
+      mine.forEach(([it,i],j)=>{const ok=st.checked?(it.b===bk):null;mm_numChip(c,x+28+(j%5)*52,y+102+Math.floor(j/5)*54,44,i+1,ok==null?col:ok?GOOD:BAD);});
+      mm_card3Ex(c,k,x,y+236,cw,V);});},
+  // Follow one idea: the same three cards; each step lights the card it lives in, the model's levels one by one, then the mapping and the graph
+  follow:(c,w,h,st,FW)=>{const V=FW.vis.follow,s=st.step||0,cols=[MM_GLO,MM_ONT,MM_DM],on=[s===0,s===1||s>=5,s>=2],X=k=>16+k*314;
+    if(s===6){glow(c,637,220,330,MM_ONT,0.16);c.save();c.setLineDash([8,8]);c.strokeStyle=rgba(MM_ONT,0.85);c.lineWidth=2.4;rr(c,X(1)-8,8,628,424,20);c.stroke();c.restore();}
+    V.cards.forEach(([name,job],k)=>mm_card3(c,X(k),16,300,408,name,job,cols[k],on[k]?1:0.35));
+    withA(c,on[0]?1:0.45,()=>{T(c,V.word,X(0)+28,140,{w:800,size:24,color:rgba(MM_GLO,1)});wrapT(c,V.def,X(0)+28,176,252,{w:600,size:22,lh:28,color:rgba(PARCH,0.9)});wrapT(c,V.owner,X(0)+28,300,252,{w:600,size:22,lh:28,color:rgba(SOFT,1)});});
+    let P=null;withA(c,on[1]?1:0.45,()=>{P=mm_pill(c,X(1)+150,150,V.micro,MM_ONT,{size:22,r:10,fill:"rgba(34,22,60,0.96)",hi:s===1||s===5?1:0});wrapT(c,V.isa,X(1)+28,206,252,{w:700,size:22,lh:28,color:rgba(MM_ONT,1)});});
+    V.levels.forEach(([lv,val],j)=>{const y=110+j*96,lit=s===2+j||s>=5&&j===2,a=s>=2?(lit?1:0.55):0.45;withA(c,a,()=>{c.fillStyle=rgba(MM_DM,lit?0.16:0.05);rr(c,X(2)+20,y,260,80,10);c.fill();if(lit){c.strokeStyle=rgba(MM_DM,0.9);c.lineWidth=2;rr(c,X(2)+20,y,260,80,10);c.stroke();}
+      T(c,lv,X(2)+36,y+30,{w:600,size:22,color:rgba(SOFT,1)});T(c,val,X(2)+36,y+62,{w:700,size:22,color:rgba(MM_DM,1)});});});
+    if(s>=5&&P){const y=110+2*96+40;arrowTo(c,X(2)+14,y,P.x+P.w/2+8,P.y+8,[236,243,255],1,{head:12,lw:2.4,bend:-0.18});const mw=tw(c,V.mapping,22,700)+26;tag(c,600-mw/2,y-42,V.mapping,[236,243,255],{size:22,align:"center"});}
+    if(s===6)tag(c,637,412,V.graph,MM_ONT,{size:22,align:"center"});},
   // Map to the standard: each local term's number, on the part of the credential it was placed on
   standard:(c,w,h,st,FW)=>{const lab=FW.labs.find(x=>x.id==="standard"),items=lab.w.items,B=lab.w.buckets,V=FW.vis.standard;
     glass(c,16,12,w-32,h-24,18,TRUST,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(c,V.title,44,56,{w:800,size:28,color:rgba(TRUST,1)});T(c,V.sub,w-44,56,{w:600,size:22,align:"right",color:rgba(SOFT,1)});
@@ -311,6 +336,16 @@ const LV={
   pdfgloss:(c,w,h,st,FW)=>{const V=FW.vis.pdfgloss;c.save();c.shadowColor="rgba(0,0,0,0.6)";c.shadowBlur=18;c.fillStyle="#eef0f4";rr(c,50,28,240,270,8);c.fill();c.restore();c.fillStyle="#d9453a";rr(c,216,44,58,28,5);c.fill();T(c,"PDF",245,64,{w:800,size:18,align:"center",color:"#fff"});
     T(c,V.title,70,112,{w:800,size:26,color:"#1e222c"});T(c,V.pages,70,142,{w:600,size:18,color:"#4a5160"});for(let i=0;i<5;i++){c.fillStyle="rgba(40,44,54,0.22)";c.fillRect(70,170+i*24,190*(0.6+0.4*hash(i,3)),9);}
     orb(c,450,130,28,1);c.fillStyle="rgba(7,12,24,0.9)";c.beginPath();c.arc(450,238,36,0,TAU);c.fill();mm_eyeOff(c,450,238,24,EDGE_,1);T(c,"?",520,110,{w:800,size:44,color:rgba(EDGE_,1)});},
+  copyonto:(c,w,h,st,FW)=>{const V=FW.vis.copyonto;glass(c,24,60,220,170,14,MM_DM,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(c,V.table,40,94,{f:"mono",w:500,size:20,color:rgba(MM_DM,1)});
+    c.strokeStyle="rgba(170,200,245,0.25)";c.lineWidth=1;c.beginPath();c.moveTo(24,110);c.lineTo(244,110);c.stroke();V.cols.forEach((s,i)=>T(c,s,40,148+i*40,{f:"mono",w:500,size:20,color:rgba(INK,0.95)}));
+    arrowTo(c,256,145,322,145,SOFT,0.9,{head:12,lw:2.4});V.gen.forEach((s,i)=>mm_pill(c,450,90+i*60,s,MM_ONT,{size:20,r:10,dash:true,fill:"rgba(34,22,60,0.96)"}));
+    T(c,"?",566,170,{w:800,size:44,align:"center",color:rgba(EDGE_,1)});tag(c,450,286,V.note,SOFT,{size:18,align:"center"});},
+  twojobs:(c,w,h,st,FW)=>{const V=FW.vis.twojobs;[[V.onto,V.oj,MM_ONT,24],[V.model,V.mj,MM_DM,336]].forEach(([n,j,col,x])=>{glass(c,x,30,240,196,16,col,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.95)"});led(c,x+12,46,4,44,col,0.9);
+      T(c,n,x+28,72,{w:800,size:24,color:rgba(col,1)});wrapT(c,j,x+28,104,200,{w:600,size:20,lh:24,color:rgba(SOFT,1)});});
+    mm_pill(c,144,184,V.ex[0],MM_ONT,{size:18,r:10,fill:"rgba(34,22,60,0.96)"});T(c,V.ex[1],356,190,{f:"mono",w:500,size:18,color:rgba(MM_DM,1)});
+    // the mapping joins the two, below them: the model's records to the ontology's idea
+    const W_=[236,243,255];arrowTo(c,144,202,458,202,W_,0.85,{nohead:true,lw:2.4,bend:0.26});[[144,202],[458,202]].forEach(([x,y])=>{c.fillStyle=rgba(W_,0.95);c.beginPath();c.arc(x,y,5,0,TAU);c.fill();});
+    tag(c,301,246,V.map,W_,{size:18,align:"center"});tag(c,301,294,V.q,EDGE_,{size:20,align:"center"});},
   noowner:(c,w,h,st,FW)=>{const V=FW.vis.noowner,a=mm_pill(c,170,70,V.cert,MM_ONT,{size:20,r:12}),b=mm_pill(c,440,200,V.micro,MM_ONT,{size:20,r:12});mm_link(c,a,b,V.link,BAD,{size:19,off:30});
     tag(c,40,280,V.owner,BAD,{size:19});tag(c,300,280,V.policy,GOOD,{size:19});},
   steps:(c,w,h,st,FW)=>{const V=FW.vis.steps;glass(c,30,40,380,240,18,MM_SEM,{glow:16,ea:0.85,fill:"rgba(6,14,30,0.95)"});T(c,"Σ",56,96,{w:800,size:40,color:rgba(MM_SEM,1)});wrapT(c,V.title,104,88,290,{w:800,size:22,lh:28,color:rgba(MM_SEM,1)});

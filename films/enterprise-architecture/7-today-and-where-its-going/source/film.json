@@ -1,0 +1,21 @@
+{
+  "key": "today-and-where-its-going",
+  "title": "Today, and where it's going",
+  "sub": "The map before the data, a series on enterprise architecture and why it matters for data: a hundred and forty systems placed under the capabilities they serve, with their overlaps, gaps and shadow systems; the technology beneath them; the drafts made into one ArchiMate model; and today, a target and the path between them as three drawings, with each decision written down with why.",
+  "howto": "Paper notes on a wall are drafts; glass in the layers' colours is the confirmed model. Amber is the strategy layer, where capabilities live; blue is applications; green is technology. Cyan outlines the technical side, gold the business side.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": ["morning", "crew", 4.5],
+  "say": [
+    [
+      "\\bTomás's\\b",
+      "Toh-mahs's"
+    ],
+    [
+      "\\bTomás\\b",
+      "Toh-mahs"
+    ]
+  ]
+}

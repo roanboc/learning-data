@@ -57,6 +57,8 @@ The university is the thread; each film has a short beat, *Elsewhere*, that show
 
 *One person, many roles* names DAMA-DMBOK's reference and master data knowledge area once, with the four ways master data is commonly kept (registry, consolidation, coexistence, centralised) and, in a line, the party pattern that data model pattern books describe (a party is a person or an organisation; a role is how a party relates to another) and ISO 8000's parts on master data quality. After that, the series teaches what to do.
 
+Which of DAMA's knowledge areas each series and film covers is mapped once, in [the governance proposal](../data-governance/proposal.md#foundations-dama-named-once). As there, master data is people's work first: stewards who decide, owners who agree what a person and a role are, and help for the teams whose systems change. The tools keep what they decide.
+
 **The kinds of data, as the films use them:**
 
 | Kind | What it is | Here |

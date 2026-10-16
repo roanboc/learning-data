@@ -1,0 +1,127 @@
+# Runs only the checks a change needs: the site's static and browser checks when the site changed, and each film's
+# checks (build, the site plays that build, every moment draws) when that film's source or the shared code it draws
+# with changed. .github/scripts/affected.py picks them, from the release workflow's FILMS list; run it locally too.
+# On a pull request it compares with the base branch, on a push to main with the commit before it.
+# Run every check by hand: Actions → Checks → Run workflow.
+# The dbt project has its own workflow, credential-project.yml.
+name: Checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: "all (every check), or changed (compared with main)"
+        required: true
+        default: all
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  plan:
+    name: Choose the checks
+    runs-on: ubuntu-latest
+    outputs:
+      site: ${{ steps.plan.outputs.site }}
+      browser: ${{ steps.plan.outputs.browser }}
+      films: ${{ steps.plan.outputs.films }}
+      count: ${{ steps.plan.outputs.count }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Plan
+        id: plan
+        env:
+          EVENT: ${{ github.event_name }}
+          SCOPE: ${{ inputs.scope }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          BEFORE: ${{ github.event.before }}
+        run: |
+          case "$EVENT" in
+            pull_request) args="--base $PR_BASE" ;;
+            push)
+              # a new branch, or a push git can't compare with, checks everything
+              if git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then args="--base $BEFORE"; else args="--all"; fi ;;
+            *) if [ "$SCOPE" = changed ]; then args="--base origin/main"; else args="--all"; fi ;;
+          esac
+          python3 .github/scripts/affected.py --github $args
+
+  site:
+    name: Site
+    needs: plan
+    if: needs.plan.outputs.site == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Install the tools
+        run: |
+          pip install markdown
+          if [ "${{ needs.plan.outputs.browser }}" = true ]; then
+            pip install playwright
+            python -m playwright install --with-deps chromium
+          fi
+
+      - name: Static checks
+        run: python site-tools/check_site.py
+
+      - name: Browser checks
+        if: needs.plan.outputs.browser == 'true'
+        run: python site-tools/smoke.py
+
+  film:
+    name: Film (${{ matrix.name }})
+    needs: plan
+    if: needs.plan.outputs.count != '0'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJSON(needs.plan.outputs.films) }}
+    defaults:
+      run:
+        working-directory: ${{ matrix.dir }}
+    env:
+      FILM_LANG: ${{ matrix.lang }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      # only the browser: the checks don't voice, mix or render
+      - name: Install the tools
+        run: |
+          pip install playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Build the player
+        run: python tools/build.py
+
+      - name: Check that the site plays this build
+        env:
+          PLAYER: ${{ matrix.player }}
+          SITE_PLAYER: ${{ github.workspace }}/${{ matrix.site_player }}
+        run: |
+          if ! cmp -s "$PLAYER" "$SITE_PLAYER"; then
+            echo "::error title=The site plays an older film::Build the film and copy $PLAYER to ${{ matrix.site_player }}, as the film's source README says."
+            exit 1
+          fi
+          echo "The site's player is built from this source."
+
+      - name: Check that every moment draws
+        run: python tools/check.py

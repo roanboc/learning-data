@@ -1,6 +1,6 @@
 # Rebuilding Meaning machines can read
 
-*Meaning machines can read*, a film in the series *From words to data*, on glossaries, taxonomies, ontologies, semantic layers and standards, and what an AI assistant needs to answer right, is generated from code like the series' other films. It draws with *The Inner Life of Data*'s engine and components, *A Sharper Sketch*'s diagrams and Genie, the series' people and *Silent change*'s components, and the series' own components in [`../../shared/src/words.js`](../../shared/src/words.js). Only what is new lives here:
+*Meaning machines can read*, a film in the series *From words to data*, on glossaries, taxonomies, ontologies, semantic layers and standards, how an ontology differs from a data model, and what an AI assistant needs to answer right, is generated from code like the series' other films. It draws with *The Inner Life of Data*'s engine and components, *A Sharper Sketch*'s diagrams and Genie, the series' people and *Silent change*'s components, and the series' own components in [`../../shared/src/words.js`](../../shared/src/words.js). Only what is new lives here:
 
 | File | What it holds |
 |---|---|
@@ -8,9 +8,9 @@
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). The film re-times itself to the voice. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/breath.js` | The few longer pauses: the title, the four floors standing together, and the ending. Every sentence already gets a beat of 0.8 s from `narration.js`. |
-| `src/machines.js` | This film's components: the organic past (tapering branches, leaves, breathing paper, the robin, Linnaeus's tree, Nightingale's forms), the four floors of meaning and their contents, Genie and the policy document, the semantic layer's metric card and the tools that ask it, the shelf of standards, the three definitions, the knowledge graph, a digital credential, and `LV`, the pictures of the labs and scenarios. |
-| `src/scenes.js` | The eight chapters. The title is part of the first one. |
-| `tools/score.py` | The film's music and sounds, in C Lydian: FM bells, glass pads and a celesta; a harp over strings for the history; plucks for Genie, and a short, low urgent pulse when its guess goes wrong; a soft pulse for the semantic layer. |
+| `src/machines.js` | This film's components: the organic past (tapering branches, leaves, breathing paper, the robin, Linnaeus's tree, Nightingale's forms), the four floors of meaning and their contents, Genie and the policy document, the semantic layer's metric card and the tools that ask it, the shelf of standards, the three definitions, the knowledge graph, a digital credential, the panels and the three cards of *Ontology or model?* (`mm_panel` and `mm_hthread`; `mm_card3` draws the cards in the labs), and `LV`, the pictures of the labs and scenarios. Pills and link labels are measured at the size their words are drawn (`phSz`), so the words stay inside them. |
+| `src/scenes.js` | The nine chapters. The title is part of the first one. |
+| `tools/score.py` | The film's music and sounds, in C Lydian: FM bells, glass pads and a celesta; a harp over strings for the history; plucks for Genie, and a short, low urgent pulse when its guess goes wrong; a bell for each of the three cards of *Ontology or model?*; a soft pulse for the semantic layer. |
 | `tools/` | The series' tools (in `../../shared/tools/`), pointed at this film. |
 
 ## Setup (once)
@@ -37,4 +37,4 @@ The voice files are in `build/vo/`. `tts.py` reuses a line's voice file if it ex
 
 `python tools/publish.py` copies `dist/film.js` and `dist/soundtrack.mp3` to `site/assets/meaning-machines-can-read/`, and draws the poster, `site/assets/meaning-machines-can-read-poster.jpg`, at the moment `film.json` names. Never edit the site's copies by hand: the release workflow checks that the site's `film.js` is byte for byte the one this source builds. The labs and scenarios load the same file, for their pictures (`LV` in `src/machines.js`), so a change to `machines.js` needs this copy too.
 
-The words of the labs, scenarios and "Pause and think" questions are in `site/assets/meaning-machines-can-read/learn.en.js`, `learn.es.js`, `think.en.js` and `think.es.js`; every word a lab or scenario picture draws comes from their `vis` entries. Progress is stored in the browser under `ld-meaning-machines-can-read`. The pauses stop after `before`, `guesses`, `four` and `standards`; the labs' "Watch this part" buttons find their chapters by id (`four`, `standards`, `again`).
+The words of the labs, scenarios and "Pause and think" questions are in `site/assets/meaning-machines-can-read/learn.en.js`, `learn.es.js`, `think.en.js` and `think.es.js`; every word a lab or scenario picture draws comes from their `vis` entries. Progress is stored in the browser under `ld-meaning-machines-can-read`. The pauses stop after `before`, `guesses`, `four`, `model` and `standards`; the labs' "Watch this part" buttons find their chapters by id (`four`, `model`, `standards`, `again`).

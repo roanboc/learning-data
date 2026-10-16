@@ -102,10 +102,11 @@ function mm_treeTags(ctx,t,P,labA,hi){const off={1:[-120,-8],2:[-10,40],3:[40,48
 // glossary at the bottom, the semantic layer at the top. o.a, o.hi, o.qa, o.ca: per floor, 0..1 (visible, highlighted, question shown, content shown)
 const MM_FL={x:160,w:1600,h:140,y0:650,gap:170};
 const mm_fy=(k,g)=>(g||MM_FL).y0-k*(g||MM_FL).gap;
-function mm_pill(ctx,x,y,s,col,o){o=o||{};const sz=o.size||18,w=tw(ctx,s,sz,700)+(o.pad||30),h=sz+(o.ph||14);const a=o.a==null?1:o.a;if(a<=0.01)return{x,y,w,h};
+// measured at the size its words are really drawn (the phone layer raises them in the film), so they stay inside it
+function mm_pill(ctx,x,y,s,col,o){o=o||{};const sz=o.size||18,ds=phSz(ctx,sz),w=tw(ctx,s,ds,700)+(o.pad||30),h=ds+(o.ph||14);const a=o.a==null?1:o.a;if(a<=0.01)return{x,y,w,h};
   withA(ctx,a,()=>{if(o.hi>0)glow(ctx,x,y,w*0.8,o.hiCol||col,0.4*o.hi);glass(ctx,x-w/2,y-h/2,w,h,o.r==null?h/2:o.r,o.hiCol&&o.hi>0.5?o.hiCol:col,{glow:8+12*(o.hi||0),ea:0.75+0.25*(o.hi||0),fill:o.fill||"rgba(7,12,24,0.95)"});
     if(o.dash){ctx.save();ctx.setLineDash([6,6]);ctx.strokeStyle=rgba(col,0.8);ctx.lineWidth=1.6;rr(ctx,x-w/2,y-h/2,w,h,h/2);ctx.stroke();ctx.restore();}
-    T(ctx,s,x,y+sz*0.36,{w:700,size:sz,align:"center",color:o.tc||rgba(col,1)});});return{x,y,w,h};}
+    T(ctx,s,x,y+ds*0.36,{w:700,size:sz,align:"center",color:o.tc||rgba(col,1)});});return{x,y,w,h};}
 function mm_glossC(ctx,x,y,h,t,p,hi){const W_=[["credential","a trusted, checkable claim of learning"],["microcredential","a small credential, with its learning assessed"],["stacking","counting credentials towards a bigger one"]];
   W_.forEach(([wd,df],i)=>{const cx=x+i*305,cy=y+16,cw=270,ch=h-32,on=i===1?hi:0;withA(ctx,clamp(p*3-i,0,1),()=>{if(on>0)glow(ctx,cx+cw/2,cy+ch/2,190,MM_GLO,0.35*on);
     glass(ctx,cx,cy,cw,ch,12,MM_GLO,{glow:8+12*on,ea:0.6+0.4*on,fill:"rgba(24,19,8,0.94)"});T(ctx,wd,cx+18,cy+34,{w:800,size:22,color:rgba(MM_GLO,1)});wrapT(ctx,df,cx+18,cy+62,cw-30,{w:600,size:16,lh:20,color:rgba(PARCH,0.85)});});});
@@ -121,7 +122,7 @@ function mm_link(ctx,A,B,label,col,o){o=o||{};const a=o.a==null?1:o.a,p=o.p==nul
   const cut=b=>Math.min(Math.abs(ux)>1e-6?b.w/2/Math.abs(ux):1e9,Math.abs(uy)>1e-6?b.h/2/Math.abs(uy):1e9)+6;const x0=A.x+ux*cut(A),y0=A.y+uy*cut(A),x1=B.x-ux*cut(B),y1=B.y-uy*cut(B);
   arrowTo(ctx,x0,y0,x1,y1,col,a,{p,dash:o.dash,head:o.head||12,lw:o.lw||2.2,nohead:o.nohead});
   if(label&&p>0.6)withA(ctx,a*fin(p,0.6,0.4),()=>{const mx=(x0+x1)/2,my=(y0+y1)/2,off=o.off==null?16:o.off,nx=-uy,ny=ux,s=o.size||16,lx=mx+nx*off*(ny>0?-1:1),ly=my+ny*off*(ny>0?-1:1);
-    const w=tw(ctx,label,s,700,o.f)+14;ctx.fillStyle="rgba(7,12,24,0.9)";rr(ctx,lx-w/2,ly-s*0.8,w,s*1.3,6);ctx.fill();T(ctx,label,lx,ly+s*0.3,{w:700,size:s,align:"center",f:o.f,color:rgba(o.lc||col,1)});});}
+    const ds=phSz(ctx,s),w=tw(ctx,label,ds,700,o.f)+14;ctx.fillStyle="rgba(7,12,24,0.9)";rr(ctx,lx-w/2,ly-ds*0.8,w,ds*1.3,6);ctx.fill();T(ctx,label,lx,ly+ds*0.3,{w:700,size:s,align:"center",f:o.f,color:rgba(o.lc||col,1)});});}
 function mm_ontoC(ctx,x,y,h,t,p,hi){const q=k=>clamp(p*4-k,0,1),yy=y+46;
   const Ln=mm_pill(ctx,x+100,yy,"Learner",MM_ONT,{size:18,a:q(0),r:10}),Mc=mm_pill(ctx,x+440,yy,"Microcredential",MM_ONT,{size:18,a:q(0.5),r:10,hi}),Gc=mm_pill(ctx,x+770,yy,"Graduate certificate",MM_ONT,{size:17,a:q(1),r:10});
   mm_link(ctx,Ln,Mc,"holds",MM_ONT,{p:q(1.4),off:18,size:15});mm_link(ctx,Mc,Gc,"counts towards",MM_ONT,{p:q(1.9),off:18,size:15});

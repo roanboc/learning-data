@@ -133,7 +133,8 @@ scene("ontology",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx)
     withA(ctx,a2,()=>{glass(ctx,260,392,1400,290,20,MM_ONT,{glow:14,ea:0.6,fill:"rgba(12,8,26,0.93)"});T(ctx,"A graduate certificate accepts up to four approved microcredentials towards its credit.",300,446,{w:700,size:26});
       const A=mm_pill(ctx,560,540,"Graduate certificate",MM_ONT,{size:22,r:12,a:fin(t,cR+7.1,0.5),fill:"rgba(34,22,60,0.96)"}),Bb=mm_pill(ctx,1300,540,"Microcredential",MM_ONT,{size:22,r:12,a:fin(t,cR+7.4,0.5),fill:"rgba(34,22,60,0.96)"});
       mm_link(ctx,A,Bb,"accepts",MM_ONT,{p:clamp((t-cR-7.5)/0.7,0,1),size:18,off:22});
-      [["max 4",8.4],["approved only",9.1],["towards its credit",10.2]].forEach(([s,d],i)=>{const q=fin(t,cR+d,0.4);mm_pill(ctx,760+i*190+(i===2?30:0),628,s,[236,226,255],{size:17,a:q,hi:pulseAt(t,cR+d,1.2),hiCol:MM_ONT,fill:"rgba(34,22,60,0.96)"});});
+      // the three conditions side by side, each placed by the width it's drawn at
+      let px=640;[["max 4",8.4],["approved only",9.1],["towards its credit",10.2]].forEach(([s,d])=>{const q=fin(t,cR+d,0.4),pw=tw(ctx,s,phSz(ctx,17),700)+30;mm_pill(ctx,px+pw/2,628,s,[236,226,255],{size:17,a:q,hi:pulseAt(t,cR+d,1.2),hiCol:MM_ONT,fill:"rgba(34,22,60,0.96)"});px+=pw+18;});
       withA(ctx,fin(t,cR+10.8,0.5),()=>T(ctx,"a machine can check this",1640,666,{w:600,size:17,align:"right",color:rgba(MM_ONT,1)}));});});
   // the knowledge graph: the university's data, connected to the statements
   if(out1>0)withA(ctx,out1*(1-dimG),()=>{mm_kg(ctx,t,{p:{schema:clamp((t-cG+0.2)/1.2,0,1),data:clamp((t-cG-3.7)/2.2,0,1),links:clamp((t-cG-5.0)/2.4,0,1)},aisha:fin(t,cG+7.6,0.6)*(1-dimG)});
@@ -320,7 +321,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,S)
   trio(ctx,cx,cy,1,{t,col:MM_ONT,word:"credential",wordLab:" ",idea:"Credential",thing:(c2,x,y,s)=>{const L=mm_cols(c2,["id","holder","kind"],[["C-88","Aisha K.","micro"],["C-91","Aisha K.","micro"],["A-12","Ben O.","award"]]),w=L[2].x+L[2].w;table(c2,x-w/2,y-104,"credentials",["id","holder","kind"],[["C-88","Aisha K.","micro"],["C-91","Aisha K.","micro"],["A-12","Ben O.","award"]],{col:[150,225,255]});},
     thingLab:"the data it points to",thingDy:146,e1:clamp((t-cT-5.2)/1.0,0,1),e2:clamp((t-cT-7.5)/1.0,0,1),e3:0,wa,ia,ha});
   withA(ctx,fin(t,cT+4.6,0.5),()=>{const w=tw(ctx,"credencial",26,800)+40;glass(ctx,wx-w/2,wy+44,w,50,12,MM_ONT,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.93)"});T(ctx,"credencial",wx,wy+78,{w:800,size:26,align:"center"});
-    T(ctx,"en",wx-tw(ctx,"credential",30,800)/2-50,wy+10,{f:"mono",w:500,size:16,color:rgba(SOFT,1)});T(ctx,"es",wx-w/2-26,wy+76,{f:"mono",w:500,size:16,color:rgba(SOFT,1)});T(ctx,"the word",wx,wy+132,{w:700,size:20,align:"center",color:rgba(SOFT,1)});});
+    T(ctx,"en",wx-tw(ctx,"credential",30,800)/2-50,wy+10,{f:"mono",w:500,size:16,color:rgba(SOFT,1)});T(ctx,"es",wx-w/2-26,wy+76,{f:"mono",w:500,size:16,color:rgba(SOFT,1)});T(ctx,"the word, in the glossary",wx,wy+132,{w:700,size:20,align:"center",color:rgba(SOFT,1)});});
   // the idea, now a node in the ontology
   withA(ctx,ia,()=>{const A=mm_pill(ctx,700,128,"Award",MM_ONT,{size:16,r:10,a:fin(t,cT+5.6,0.5)}),M=mm_pill(ctx,1220,128,"Microcredential",MM_ONT,{size:16,r:10,a:fin(t,cT+5.9,0.5)});
     [A,M].forEach((b,i)=>{const q=fin(t,cT+5.8+i*0.3,0.5);if(q>0)isa(ctx,b.x+(i?-b.w/2-4:b.w/2+4),b.y+6,ix+(i?34:-34),iy-8,q,MM_ONT,{fill:"#0a0a18",s:12,lw:1.8});});

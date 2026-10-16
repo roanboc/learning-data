@@ -1,6 +1,6 @@
 # From words to data
 
-*Proposal for an advanced series on data modelling, v0.2. In Spanish: De las palabras a los datos. Status: made, on 28 September 2026; the [series README](README.md) describes the films as they are. This page is the plan they were made from, kept as it was agreed.*
+*Proposal for an advanced series on data modelling, v0.2. In Spanish: De las palabras a los datos. Status: made, on 28 September 2026; the [series README](README.md) describes the films as they are. This page is the plan they were made from, kept as it was agreed, with the decisions taken since added below.*
 
 ## Decided
 
@@ -10,6 +10,7 @@
 | 28 September 2026 | The series title: *From words to data*. |
 | 28 September 2026 | The spine is the credential: how people prove what they know. The microcredential is its newest form, and the word's history shows how language and meaning evolve. |
 | 28 September 2026 | The opening film starts before writing: how language began, how the brain links words to things, and how other animals handle concepts. |
+| 16 October 2026 | *Meaning machines can read* gains a fifth chapter, *Ontology or model?*: an ontology and a data model name the same things but do different jobs, and the glossary, the ontology and the data model are linked, not merged. Two labs, two scenarios and a fifth Pause and think question go with it, and *What's in a word* names its glossary and its conceptual model on screen. |
 
 ## The brief
 

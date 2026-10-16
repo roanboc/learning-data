@@ -232,6 +232,30 @@ function mm_kg(ctx,t,o){o=o||{};const P=o.p||{},q=k=>P[k]==null?1:P[k],aA=o.aish
   if(aA>0)withA(ctx,aA,()=>{tag(ctx,330,364,"3 approved: one more completes it",GOOD,{align:"center",size:18});});
   return{L,M,C,sch};}
 
+/* ---------- ontology or model: the same things, different jobs ----------
+   The data model is drawn in A Sharper Sketch's colour (SK): boxes and crow's feet, then the tables they become. The ontology keeps
+   its violet; data (a learner, the microcredentials she holds) is warm, as in the knowledge graph. Sizes are 28 or more, so the
+   phone layer has nothing to raise and every pill is measured at the size it's drawn. */
+const MM_DM=SK,MM_WARM=[255,176,140];
+// a panel of glass in its colour: its name, a line under it, and a note on the right of the name (o.sub, o.right, each with its alpha)
+function mm_panel(ctx,R,name,col,o){o=o||{};const a=o.a==null?1:o.a,lit=o.lit==null?1:o.lit,hi=o.hi||0;if(a<=0.01)return;const{x,y,w,h}=R;
+  withA(ctx,a,()=>{if(hi>0)glow(ctx,x+w/2,y+h/2,w*0.5,col,0.14*hi);
+    glass(ctx,x,y,w,h,20,col,{glow:(10+12*hi)*lit,ea:0.3+0.5*lit+0.2*hi,fill:"rgba(7,12,24,0.93)"});led(ctx,x+16,y+26,5,58,col,0.35+0.55*lit);
+    T(ctx,name,x+38,y+58,{w:800,size:34,color:rgba(col,0.5+0.5*lit)});
+    if(o.sub)withA(ctx,o.subA==null?1:o.subA,()=>T(ctx,o.sub,x+38,y+104,{w:600,size:28,color:rgba(SOFT,1)}));
+    if(o.right)withA(ctx,o.rightA==null?1:o.rightA,()=>T(ctx,o.right,x+w-30,y+58,{w:600,size:28,align:"right",color:rgba(SOFT,1)}));});}
+// a rectangle on its way from one place to another
+const mm_lerpR=(A,B,u)=>({x:lerp(A.x,B.x,u),y:lerp(A.y,B.y,u),w:lerp(A.w,B.w,u),h:lerp(A.h,B.h,u)});
+// one idea through the three cards: a thread from the glossary's word to the ontology's concept, and on to the model's records.
+// segs: [[from, to], ...], drawn one after another as p goes from 0 to 1, each with a light that travels along it once drawn
+function mm_hthread(ctx,segs,p,t,col){if(p<=0)return;col=col||[236,243,255];const n=segs.length;
+  segs.forEach(([a,b],i)=>{const q=clamp(p*n-i,0,1);if(q<=0)return;arrowTo(ctx,a[0],a[1],b[0],b[1],col,0.9,{p:q,lw:3,nohead:true});
+    [a,b].forEach((e,j)=>{const d=j?fin(q,0.9,0.1):fin(q,0,0.1);if(d>0){glow(ctx,e[0],e[1],28,col,0.5*d);ctx.fillStyle=rgba(col,d);ctx.beginPath();ctx.arc(e[0],e[1],6,0,TAU);ctx.fill();}});
+    if(q>=1){const u=(t*0.5+i*0.4)%1;glow(ctx,lerp(a[0],b[0],u),lerp(a[1],b[1],u),26,col,0.7);}});}
+// the size A Sharper Sketch's table is drawn at, here and now (its columns too), measured as the phone layer measures it
+function mm_tsize(ctx,cols,rows){const m=phMin(ctx),cs=Math.max(16,m),ns=Math.max(18,m),C=mm_cols(ctx,cols,rows),rh=Math.max(40,cs*1.45),hh=Math.max(46,ns*1.65);
+  return{C,w:C[C.length-1].x+C[C.length-1].w,h:hh+rh*(rows.length+1),rh,hh};}
+
 /* ---------- a digital credential, with the parts a standard names ---------- */
 const MM_VC=[["issuer","issuer"],["holder","holder · subject"],["claim","claim"],["evidence","evidence"],["status","status"]];
 function mm_vc(ctx,x,y,w,o){o=o||{};const m=phMin(ctx),rh=Math.max(o.rh||46,m?m*2.1:0),h=70+MM_VC.length*rh+16,vs=Math.max(15,m),vx=m?36+Math.max(...MM_VC.map(r=>tw(ctx,r[1],Math.max(17,m),500,"mono")))+24:220;withA(ctx,o.a==null?1:o.a,()=>{glass(ctx,x,y,w,h,18,TRUST,{glow:16,ea:0.8,fill:"rgba(7,12,24,0.95)"});

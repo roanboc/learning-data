@@ -11,6 +11,11 @@
 const BUS=LAY6[2][1],STR=LAY6[1][1],MOT=LAY6[0][1],INF=LAY6[3][1];
 // the two sides of every edge in the film: the east of Japan and the network in blue, the west and retail in rose
 const D6_NET=[132,176,255],D6_RET=[255,150,186],D6_E50=D6_NET,D6_W60=[255,176,128],D6_RED=[232,96,84];
+// someone standing at the right of the frame, drawn facing the other way: the "explain" gesture then points at what they explain,
+// and the hand stays inside the frame
+function d6_personR(ctx,id,x,y,s,o){ctx.save();ctx.translate(x,0);ctx.scale(-1,1);ctx.translate(-x,0);person(ctx,id,x,y,s,o);ctx.restore();}
+// no-break spaces: words a note should keep on one line
+const d6_nb=s=>s.replace(/ /g,"\u00a0");
 
 /* ---------- Japan, from above ---------- */
 // A sketch of the four main islands, not a survey: longitude and latitude, projected simply. The frequency line runs from Itoigawa,

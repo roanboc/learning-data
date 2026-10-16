@@ -98,9 +98,9 @@ LENGTHS = re.compile(r"eight-minute|five-minute|six-minute|nueve minutos|seis mi
                      r"\b(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)-minute\b|"
                      r"\b(un|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez) minutos\b|"
                      r"(?<![\d½.,:])\d+ ?(min|minute|minutes|minuto|minutos)\b", re.I)
-# the stated lengths: 7½ (intro, EN), 8½ (intro, ES), 5½ (A Sharper Sketch, Silent change), and 6 min (Too good to be true)
-HALVES = {"en": {"5½", "7½"}, "es": {"5½", "8½"}}
-WHOLE = {"6 min"}
+# the stated lengths: 7 min (intro, EN), 8½ (intro, ES), 5½ (A Sharper Sketch, Silent change), and 6 min (Too good to be true)
+HALVES = {"en": {"5½"}, "es": {"5½", "8½"}}
+WHOLE = {"6 min", "7 min"}
 # the series (From words to data, In the weeds of data crafting, The map before the data): their pages, players, packs, counts,
 # lengths and topics come from their own data, through site-tools/build_series.py (which makes their pages, and the Topics page),
 # so a new film, or a new series, needs no change here
@@ -695,7 +695,7 @@ def main():
 
     # -- numbering and lengths
     s = rep.check("No film numbering anywhere on the site (only allowlisted code comments)")
-    t = rep.check("No stale film lengths (7½, 8½, 5½, 5½ and 6 min; the journey says \"short film\")")
+    t = rep.check("No stale film lengths (7, 8½, 5½, 5½ and 6 min; the journey says \"short film\")")
     allowed = []
     for p in sorted(WEB.rglob("*")):
         if not p.is_file() or p.suffix not in TEXT_EXT:

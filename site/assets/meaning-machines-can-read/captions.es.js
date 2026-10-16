@@ -36,16 +36,16 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Conecta los datos de la universidad con estas afirmaciones, y se vuelven un grafo de conocimiento: aprendices, credenciales y cursos, unidos por lo que significan.",
 "It's Aristotle's recipe made formal: the kind of thing, and what sets it apart, in a form a machine can use.":
 "Es la receta de Aristóteles, formalizada: la clase de cosa, y lo que la distingue, en una forma que una máquina pueda usar.",
-"Noor's data model draws the same things: learners, credentials, certificates. Is the ontology just the model again?":
-"El modelo de datos de Noor dibuja las mismas cosas: aprendices, credenciales, diplomados. ¿Es la ontología solo el modelo otra vez?",
-"No: they do different jobs. The model plans the records the university keeps. Each box becomes a table; each line, a key.":
-"No: hacen trabajos distintos. El modelo planifica los registros que guarda la universidad. Cada caja se vuelve una tabla; cada línea, una clave.",
-"The ontology says what things mean, for every system, so a machine can draw conclusions from it.":
-"La ontología dice qué significan las cosas, para todos los sistemas, y así una máquina puede sacar conclusiones de ella.",
-"Ask both: does Aisha hold a fourth microcredential? The tables say no: none is recorded. The ontology says it can't tell: one may come from elsewhere.":
-"Pregúntales a ambos: ¿tiene Aisha una cuarta microcredencial? Las tablas dicen que no: no hay ninguna registrada. La ontología dice que no puede saberlo: podría venir de otra parte.",
-"The glossary explains the word. The ontology defines the idea. The model plans the records.":
-"El glosario explica la palabra. La ontología define la idea. El modelo planifica los registros.",
+"Where does all this meaning live? In Noor's architecture map, each data domain lists its entities: learners, credentials, certificates.":
+"¿Dónde vive todo este significado? En el mapa de arquitectura de Noor, cada dominio de datos enumera sus entidades: aprendices, credenciales, diplomados.",
+"Each concept is written once: its definition, how it relates to the others, and the rules it follows.":
+"Cada concepto se escribe una sola vez: su definición, cómo se relaciona con los demás y las reglas que sigue.",
+"The glossary shows the definitions, for people. The conceptual model shows how the concepts relate. The logical model adds how many, and the keys.":
+"El glosario muestra las definiciones, para las personas. El modelo conceptual muestra cómo se relacionan los conceptos. El modelo lógico añade cuántos, y las claves.",
+"When a machine has to reason, the ontology is extracted from the same map, in OWL, the Web Ontology Language. Rules that check the data become tests.":
+"Cuando una máquina tiene que razonar, la ontología se extrae del mismo mapa, en OWL, el Lenguaje de Ontologías Web. Las reglas que verifican los datos se vuelven pruebas.",
+"They don't compete: they come from one map, so they agree. Change the map, and the views follow.":
+"No compiten: vienen de un solo mapa, así que coinciden. Cambia el mapa, y las vistas lo siguen.",
 "In the semantic layer, credentials awarded this year is defined once: what's counted, what's left out, which date, and at what grain.":
 "En la capa semántica, «credenciales otorgadas este año» se define una sola vez: qué se cuenta, qué se deja fuera, qué fecha y con qué grano.",
 "Dashboards, spreadsheets and Genie all ask it, instead of each writing its own version.":

@@ -14,9 +14,9 @@ think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",ski
   "four":{stop:"layers",q:"Where does “a graduate certificate accepts up to four approved microcredentials” belong?",
     opts:[{t:"In the glossary."},{t:"In the ontology.",ok:true},{t:"In the semantic layer."}],
     why:"It's a relationship with a limit and a condition: a rule a machine can check. The glossary explains words; the semantic layer calculates numbers."},
-  "model":{stop:"which",q:"Asked whether Aisha holds a fourth microcredential, the tables say no, and the ontology says it can't tell. Which is right?",
-    opts:[{t:"The tables: the ontology is broken."},{t:"Both, each for its own job.",ok:true},{t:"The ontology: the tables are out of date."}],
-    why:"The tables answer from what the university recorded, and read what isn't recorded as not true: right for the records it keeps. The ontology treats what isn't stated as unknown, so data from elsewhere can join it. The data model plans the records; the ontology defines the idea."},
+  "model":{stop:"follow",q:"The glossary, the conceptual model and the ontology all describe microcredential. What keeps them from drifting apart?",
+    opts:[{t:"Each team keeps its own copy, carefully."},{t:"Each concept is written once, in the architecture map, and every view is drawn from it.",ok:true},{t:"The ontology is the master, and the others copy it by hand."}],
+    why:"One map, many views. The definition, the relationships and the rules are written once, with their owners; the glossary, the models, the ontology in OWL and the tests are drawn from the map, one way, so they agree."},
   "standards":{stop:"standard",q:"Three official definitions of microcredential don't quite match. What do you do?",
     opts:[{t:"Use the newest one everywhere, without saying so."},{t:"Choose one deliberately, map the others to it, and record the differences.",ok:true},{t:"Ignore all three, and write your own."}],
     why:"Check, adopt, extend, record. A standard saves starting from blank, but only a deliberate choice, written down, keeps numbers comparable."}

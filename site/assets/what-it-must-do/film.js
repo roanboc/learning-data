@@ -1907,6 +1907,14 @@ function archGlyph(ctx,kind,x,y,s,col){ctx.save();ctx.strokeStyle=rgba(col,1);ct
   else if(kind==="driver"){ctx.beginPath();ctx.arc(x,y,s*0.55,0,TAU);ctx.stroke();ctx.beginPath();for(let i=0;i<8;i++){const an=i*TAU/8;ctx.moveTo(x+Math.cos(an)*s*0.15,y+Math.sin(an)*s*0.15);ctx.lineTo(x+Math.cos(an)*s*0.8,y+Math.sin(an)*s*0.8);}ctx.stroke();ctx.beginPath();ctx.arc(x,y,s*0.15,0,TAU);ctx.fill();}
   else if(kind==="assessment"){ctx.beginPath();ctx.arc(x+s*0.15,y-s*0.15,s*0.45,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(x-s*0.17,y+s*0.17);ctx.lineTo(x-s*0.75,y+s*0.75);ctx.stroke();}
   else if(kind==="outcome"){[0.75,0.45,0.15].forEach(r=>{ctx.beginPath();ctx.arc(x-s*0.1,y+s*0.1,s*r,0,TAU);ctx.stroke();});ctx.beginPath();ctx.moveTo(x-s*0.1,y+s*0.1);ctx.lineTo(x+s*0.8,y-s*0.8);ctx.moveTo(x+s*0.8,y-s*0.8);ctx.lineTo(x+s*0.45,y-s*0.8);ctx.moveTo(x+s*0.8,y-s*0.8);ctx.lineTo(x+s*0.8,y-s*0.45);ctx.stroke();}
+  // who does the work, as ArchiMate draws it: an actor is a stick figure; a contract is a business object with a second line
+  else if(kind==="actor"){ctx.beginPath();ctx.arc(x,y-s*0.55,s*0.25,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(x,y-s*0.3);ctx.lineTo(x,y+s*0.3);ctx.moveTo(x-s*0.45,y-s*0.08);ctx.lineTo(x+s*0.45,y-s*0.08);ctx.moveTo(x-s*0.4,y+s*0.8);ctx.lineTo(x,y+s*0.3);ctx.lineTo(x+s*0.4,y+s*0.8);ctx.stroke();}
+  else if(kind==="contract"){ctx.strokeRect(x-s*0.75,y-s*0.55,s*1.5,s*1.1);ctx.beginPath();ctx.moveTo(x-s*0.75,y-s*0.2);ctx.lineTo(x+s*0.75,y-s*0.2);ctx.moveTo(x-s*0.75,y+s*0.15);ctx.lineTo(x+s*0.75,y+s*0.15);ctx.stroke();}
+  // what it has, and the path to a target, as ArchiMate draws them: a resource is a capsule with bars, like a battery; a plateau is
+  // three stepped lines; a gap is an ellipse crossed by two lines
+  else if(kind==="resource"){rr(ctx,x-s*0.8,y-s*0.42,s*1.5,s*0.84,s*0.3);ctx.stroke();ctx.fillRect(x+s*0.7,y-s*0.16,s*0.14,s*0.32);[-0.45,-0.15,0.15].forEach(d=>{ctx.beginPath();ctx.moveTo(x+d*s,y-s*0.22);ctx.lineTo(x+d*s,y+s*0.22);ctx.stroke();});}
+  else if(kind==="plateau"){ctx.beginPath();[[-0.4,-0.45],[-0.1,0],[0.2,0.45]].forEach(([dx,dy])=>{ctx.moveTo(x+(dx-0.45)*s,y+dy*s);ctx.lineTo(x+(dx+0.45)*s,y+dy*s);});ctx.stroke();}
+  else if(kind==="gap"){ctx.beginPath();ctx.ellipse(x,y,s*0.6,s*0.45,0,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(x-s*0.9,y-s*0.15);ctx.lineTo(x+s*0.9,y-s*0.15);ctx.moveTo(x-s*0.9,y+s*0.15);ctx.lineTo(x+s*0.9,y+s*0.15);ctx.stroke();}
   else if(kind==="principle"){ctx.strokeRect(x-s*0.6,y-s*0.7,s*1.2,s*1.4);ctx.beginPath();ctx.moveTo(x,y-s*0.45);ctx.lineTo(x,y+s*0.15);ctx.stroke();ctx.beginPath();ctx.arc(x,y+s*0.42,s*0.08,0,TAU);ctx.fill();}
   ctx.restore();}
 function archEl(ctx,x,y,w,h,name,col,kind,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{const r=kind==="capability"||kind==="process"||kind==="value"?16:6;

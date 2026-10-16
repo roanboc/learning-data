@@ -2,8 +2,9 @@
    Nine chapters, as in ../script.md. People tried to write meaning down before (Linnaeus, Wilkins, Nightingale and the ICD).
    Today, Ana asks Genie who is one microcredential away from a graduate certificate, and Genie guesses: the stacking rules are in a
    document no tool can read. Four ways to write meaning down stack like floors: glossary, taxonomy, ontology, semantic layer.
-   The ontology holds the rule; the data model, which names the same things, has another job: it plans the records. The semantic
-   layer holds the calculation, standards save starting from blank, and Genie, grounded, asks back and answers right.
+   The ontology holds the rule. All of it lives in one place, Noor's architecture map, written once; the glossary, the conceptual and
+   logical models, the ontology in OWL and the tests are views drawn from it. The semantic layer holds the calculation, standards
+   save starting from blank, and Genie, grounded, asks back and answers right.
    The triangle from What's in a word returns. */
 
 /* ---------- 1. They tried before ---------- */
@@ -153,98 +154,50 @@ scene("ontology",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx)
     withA(ctx,fin(t,cA+4.3,0.6),()=>tag(ctx,1430,752,"a form a machine can use",MM_ONT,{align:"center",size:20}));});
   vign(ctx,S);});
 
-/* ---------- 5. Ontology or model? ---------- */
-// The ontology's concepts (left) and Noor's data model (right) name the same things. The model's boxes become tables and its lines
-// keys; the ontology lets a machine conclude what nobody wrote down. One question, asked of both, gets two answers, each right for
-// its job. Then the two panels move over for the glossary, and become three cards on one thread: the word, the idea, the records.
-const MM_OP={x:80,y:140,w:860,h:650},MM_MP={x:980,y:140,w:860,h:650},MM_C3=[{x:80,y:240,w:560,h:480},{x:680,y:240,w:560,h:480},{x:1280,y:240,w:560,h:480}];
-const MM_TL2={cols:["learner_id","name"],rows:[["L-1042","Aisha K."]]},MM_TG2={cols:["cert_id","name"],rows:[["GC-DA","Grad Cert DA"]]},
-  MM_TC2={cols:["credential_id","learner_id","kind"],rows:[["C-88","L-1042","micro"],["C-91","L-1042","micro"],["C-95","L-1042","micro"]]},MM_TM2={cols:["credential_id","kind"],rows:[["C-88","micro"]]};
-const MM_HELD=[["Data Visualisation",290],["SQL for Analysis",385],["Data Ethics",480]];
-scene("model",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),cS=c("same"),cJ=c("jobs"),cM=c("means"),cA=c("aisha"),cT=c("three");setScreen(ctx,S);bg2(ctx);
-  const F="rgba(34,22,60,0.96)",WH=[236,243,255];
-  // the panels' words leave first; then the panels move over, and the glossary comes in from the left
-  const out=1-fin(t,cT-0.9,0.6),u=ease(clamp((t-cT+0.4)/1.3,0,1)),OR=mm_lerpR(MM_OP,MM_C3[1],u),MR=mm_lerpR(MM_MP,MM_C3[2],u),
-    gu=ease(clamp((t-cT+0.4)/1.2,0,1)),GR={x:lerp(-620,MM_C3[0].x,gu),y:MM_C3[0].y,w:MM_C3[0].w,h:MM_C3[0].h};
-  // each thing lights on both sides as it's named: learners, credentials (and microcredentials), certificates
-  const nm=[2.7,3.5,3.5,4.2].map(d=>pulseAt(t,cS+d,1.5));
-  const litO=lerp(1-0.4*fin(t,cJ+1.5,0.6)*(1-fin(t,cM-0.4,0.6)),0.35+0.65*fin(t,cT+2.0,0.5),u),litM=lerp(1-0.4*fin(t,cM-0.4,0.6)*(1-fin(t,cA-0.2,0.6)),0.35+0.65*fin(t,cT+4.3,0.5),u);
-  // while one panel speaks, the other steps back
-  const dO=1-0.45*fin(t,cJ+1.5,0.6)*(1-fin(t,cM-0.4,0.6)),dM=1-0.45*fin(t,cM-0.4,0.6)*(1-fin(t,cA-0.2,0.6));
-  ctx.save();
-  mm_panel(ctx,OR,"Ontology",MM_ONT,{a:fin(t,0.2,0.6),lit:litO,hi:pulseAt(t,cS+1.0,1.6),sub:"says what things mean",subA:fin(t,cM+0.7,0.5)*out});
-  mm_panel(ctx,MR,"Data model",MM_DM,{a:fin(t,cS+0.2,0.6),lit:litM,hi:pulseAt(t,cS+1.0,1.6),right:"owner: Noor, data architect",rightA:fin(t,cS+0.9,0.5)*out,sub:"plans the records the university keeps",subA:fin(t,cJ+2.0,0.5)*out});
-  withA(ctx,fin(t,cM+2.1,0.5)*out,()=>{const s="for every system",w=tw(ctx,s,28,700)+26;tag(ctx,OR.x+OR.w-30-w,OR.y+50,s,MM_ONT,{size:28});});
-  // the ontology's concepts, carried over from the knowledge graph
-  const sA=fin(t,0.3,0.6)*(1-fin(t,cA+0.1,0.6))*out*dO,dimG=1-0.6*fin(t,cM+3.0,0.5)*(1-fin(t,cA-0.6,0.5));
-  if(sA>0)withA(ctx,sA,()=>{const CR=mm_pill(ctx,560,300,"Credential",MM_ONT,{size:28,r:12,fill:F,a:fin(t,0.4,0.5),hi:Math.max(nm[1],pulseAt(t,cM+3.9,1.4)),hiCol:nm[1]>0?WH:MM_ONT}),
-      MI=mm_pill(ctx,560,460,"Microcredential",MM_ONT,{size:28,r:12,fill:F,a:fin(t,0.5,0.5),hi:Math.max(nm[2],pulseAt(t,cM+3.6,1.4)),hiCol:nm[2]>0?WH:MM_ONT}),
-      LR=mm_pill(ctx,190,460,"Learner",MM_ONT,{size:28,r:12,fill:F,a:fin(t,0.6,0.5),hi:Math.max(nm[0],pulseAt(t,cM+4.2,1.4)),hiCol:nm[0]>0?WH:MM_ONT}),
-      GC=mm_pill(ctx,560,620,"Graduate certificate",MM_ONT,{size:28,r:12,fill:F,a:fin(t,0.7,0.5)*dimG,hi:nm[3],hiCol:WH});
-    mm_link(ctx,MI,CR,"is a kind of",MM_ONT,{p:clamp((t-0.9)/0.6,0,1),size:28,off:118});
-    mm_link(ctx,LR,MI,"holds",MM_ONT,{p:clamp((t-1.1)/0.6,0,1),size:28,off:-28});
-    withA(ctx,dimG,()=>mm_link(ctx,MI,GC,"counts towards",MM_ONT,{p:clamp((t-1.3)/0.6,0,1),size:28,off:-132}));
-    // a conclusion: a microcredential is a kind of credential, so whoever holds one holds a credential. Nobody wrote it down
-    const cq=clamp((t-cM-4.4)/0.7,0,1);if(cq>0){glow(ctx,375,380,150,MM_ONT,0.18*pulseAt(t,cM+4.4,2.0));mm_link(ctx,LR,CR,"holds · concluded",MM_ONT,{p:cq,size:28,off:30,dash:[9,8],lw:2.6});}});
-  // Aisha, in the knowledge graph: three microcredentials she holds, and a fourth no one has stated, either way
-  const aA=fin(t,cA+0.6,0.7)*out;
-  if(aA>0)withA(ctx,aA,()=>{const AI=mm_pill(ctx,200,460,"Aisha K.",MM_WARM,{size:28,a:fin(t,cA+0.6,0.5),hi:pulseAt(t,cA+0.9,1.6)});
-    MM_HELD.forEach(([s,y],i)=>{const P=mm_pill(ctx,620,y,s,MM_ONT,{size:28,r:12,fill:F,a:fin(t,cA+0.9+i*0.25,0.5)});mm_link(ctx,AI,P,i?null:"holds",MM_WARM,{p:clamp((t-cA-1.0-i*0.25)/0.5,0,1),size:28,off:26,lw:2,head:10});});
-    const q4=fin(t,cA+1.9,0.5),h4=pulseAt(t,cA+8.6,1.8),P4=mm_pill(ctx,620,590,"from elsewhere?",[200,205,225],{size:28,r:12,dash:true,a:q4*(0.75+0.25*h4),hi:h4,hiCol:MM_ONT,tc:rgba(SOFT,1)});
-    mm_link(ctx,AI,P4,null,[200,205,225],{p:clamp((t-cA-2.0)/0.5,0,1),dash:[7,8],lw:2,head:10,a:0.8});
-    withA(ctx,fin(t,cA+6.3,0.5),()=>tag(ctx,510,740,"can't tell: not stated",MM_ONT,{align:"center",size:28}));});
-  // the data model: Noor's boxes and lines, which become tables and keys
-  const L=mm_tsize(ctx,MM_TL2.cols,MM_TL2.rows),G=mm_tsize(ctx,MM_TG2.cols,MM_TG2.rows),C=mm_tsize(ctx,MM_TC2.cols,MM_TC2.rows);
-  const PL=[1010,290],PG=[1430,290],PC=[1250,470],mo=k=>fin(t,cJ+5.3+k*0.3,0.6),dimT=1-0.55*fin(t,cA+0.4,0.6);
-  const E={L:{x:PL[0]+L.w/2,y:PL[1]+L.h/2,name:"Learner",s:1.17,col:MM_DM,a:fin(t,cS+2.6,0.5)*(1-mo(0)),hi:nm[0],hiCol:WH},
-    C:{x:PC[0]+C.w/2,y:PC[1]+C.h/2,name:"Credential",s:1.17,col:MM_DM,a:fin(t,cS+3.4,0.5)*(1-mo(1)),hi:nm[1],hiCol:WH},
-    G:{x:PG[0]+G.w/2,y:PG[1]+G.h/2,name:"Certificate",s:1.17,col:MM_DM,a:fin(t,cS+4.1,0.5)*(1-mo(2)),hi:nm[3],hiCol:WH}};
-  const bL=entBox(ctx,E.L),bC=entBox(ctx,E.C),bG=entBox(ctx,E.G);
-  withA(ctx,out*dM,()=>{relLine(ctx,bL,bC,"1","*",{f:clamp((t-cS-3.7)/0.6,0,1),a:Math.min(E.L.a,E.C.a),s:1.17,col:MM_DM});
-    relLine(ctx,bC,bG,"*","*",{f:clamp((t-cS-4.4)/0.6,0,1),a:Math.min(E.C.a,E.G.a),s:1.17,col:MM_DM});
-    ["L","C","G"].forEach(k=>ent(ctx,E[k]));
-    withA(ctx,mo(0)*dimT,()=>table(ctx,PL[0],PL[1],"learners",MM_TL2.cols,MM_TL2.rows,{col:MM_DM}));
-    withA(ctx,mo(2)*dimT,()=>table(ctx,PG[0],PG[1],"certificates",MM_TG2.cols,MM_TG2.rows,{col:MM_DM}));
-    withA(ctx,mo(1),()=>table(ctx,PC[0],PC[1],"credentials",MM_TC2.cols,MM_TC2.rows,{col:MM_DM}));
-    // each line, a key: the learner_id in every credential points to one learner
-    const kA=fin(t,cJ+6.9,0.5),kx0=PC[0]+C.C[1].x+C.C[1].w/2,kx1=PL[0]+L.C[0].x+L.C[0].w/2,kh=pulseAt(t,cJ+7.0,1.6);
-    if(kA>0)withA(ctx,kA*dimT,()=>{ctx.save();ctx.strokeStyle=rgba(REF,0.55+0.45*kh);ctx.lineWidth=2+kh;ctx.shadowColor=rgba(REF,0.8);ctx.shadowBlur=10*kh;
-      rr(ctx,PC[0]+C.C[1].x+3,PC[1]+C.hh+3,C.C[1].w-6,C.h-C.hh-6,8);ctx.stroke();rr(ctx,PL[0]+L.C[0].x+3,PL[1]+L.hh+3,L.C[0].w-6,L.h-L.hh-6,8);ctx.stroke();ctx.restore();
-      arrowTo(ctx,kx0,PC[1]-6,kx1+20,PL[1]+L.h+8,REF,1,{p:clamp((t-cJ-6.9)/0.6,0,1),head:14,bend:0.08});
-      withA(ctx,fin(t,cJ+7.3,0.4),()=>tag(ctx,kx0+48,(PC[1]+PL[1]+L.h)/2,"key",REF,{size:28}));});
-    // asked of the tables: no fourth row, so no fourth microcredential
-    const nA=fin(t,cA+3.5,0.5),nh=pulseAt(t,cA+5.0,1.6);
-    if(nA>0)withA(ctx,nA,()=>{ctx.save();ctx.setLineDash([8,8]);ctx.strokeStyle=rgba(MM_DM,0.5+0.5*nh);ctx.lineWidth=2+nh;rr(ctx,PC[0]+4,PC[1]+C.h+8,C.w-8,C.rh-6,8);ctx.stroke();ctx.restore();
-      tag(ctx,1410,740,"no: none is recorded",MM_DM,{align:"center",size:28});});});
-  // the same things?
-  const eqA=fin(t,cS+5.5,0.5)*(1-fin(t,cA+0.1,0.6)),neq=fin(t,cJ+0.1,0.4);
-  if(eqA>0)withA(ctx,eqA,()=>{glow(ctx,960,465,70,WH,0.25+0.25*pulseAt(t,cS+5.6,1.4));ctx.fillStyle="rgba(7,12,24,0.96)";ctx.beginPath();ctx.arc(960,465,36,0,TAU);ctx.fill();ctx.strokeStyle=rgba(WH,0.8);ctx.lineWidth=2;ctx.stroke();
-    T(ctx,"=",960,481,{w:800,size:44,align:"center",color:rgba(WH,1)});if(neq>0){ctx.strokeStyle=rgba(WH,1);ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(974,445);ctx.lineTo(lerp(974,946,neq),lerp(445,485,neq));ctx.stroke();}});
-  withA(ctx,fin(t,cA+9.0,0.5)*out,()=>tag(ctx,960,740,"each right, for its job",WH,{align:"center",size:28}));
-  // the three cards: the glossary explains the word, the ontology defines the idea, the model plans the records
-  const gA=fin(t,cT-0.5,0.6);let tw0=null,tw1=null,tw2=null;
-  if(gA>0){mm_panel(ctx,GR,"Glossary",MM_GLO,{a:gA,lit:0.35+0.65*fin(t,cT,0.5),hi:pulseAt(t,cT,1.6),sub:"explains the word",subA:fin(t,cT+0.5,0.5)});
-    withA(ctx,fin(t,cT+0.6,0.5),()=>{const x=GR.x+38,y=GR.y;T(ctx,"microcredential",x,y+250,{w:800,size:30,color:rgba(MM_GLO,1)});
-      wrapT(ctx,"a small credential, whose learning has been assessed",x,y+300,GR.w-76,{w:600,size:28,lh:38,color:rgba(PARCH,0.95)});
-      T(ctx,"owner: Short courses",x,y+440,{w:600,size:28,color:rgba(SOFT,1)});tw0=[x+tw(ctx,"microcredential",30,800)+14,y+240];});}
-  if(u>0)withA(ctx,u,()=>{withA(ctx,fin(t,cT+2.6,0.5),()=>T(ctx,"defines the idea",OR.x+38,OR.y+104,{w:600,size:28,color:rgba(SOFT,1)}));
-    withA(ctx,fin(t,cT+4.8,0.5),()=>T(ctx,"plans the records",MR.x+38,MR.y+104,{w:600,size:28,color:rgba(SOFT,1)}));
-    const oq=fin(t,cT+2.7,0.5);if(oq>0)withA(ctx,oq,()=>{const cx=OR.x+OR.w/2,MI=mm_pill(ctx,cx,OR.y+240,"Microcredential",MM_ONT,{size:28,r:12,fill:F,hi:pulseAt(t,cT+2.2,1.6)}),CR=mm_pill(ctx,cx,OR.y+380,"Credential",MM_ONT,{size:28,r:12,fill:F});
-      mm_link(ctx,MI,CR,"is a kind of",MM_ONT,{p:clamp((t-cT-3.0)/0.5,0,1),size:28,off:-118});tw1=[MI.x-MI.w/2-8,MI.y];tw2=[MI.x+MI.w/2+8,MI.y];
-      // the meaning has the word's owner, in the glossary and in the ontology alike; the model is Noor's (Keeping it true: who approves what)
-      T(ctx,"owner: Short courses",OR.x+38,OR.y+440,{w:600,size:28,color:rgba(SOFT,1)});});
-    // the model's record of the same idea: a credential of kind micro, its row level with the word and the concept
-    const mq=fin(t,cT+4.9,0.5);if(mq>0)withA(ctx,mq,()=>{const M=mm_tsize(ctx,MM_TM2.cols,MM_TM2.rows),x=MR.x+38,y=MR.y+240-M.hh-M.rh*1.5;table(ctx,x,y,"credentials",MM_TM2.cols,MM_TM2.rows,{col:MM_DM});
-      const rx=x+M.C[1].x,ry=y+M.hh+M.rh*1.5,hk=Math.max(pulseAt(t,cT+4.7,1.6),0.6*fin(t,cT+6.5,0.4));if(hk>0){ctx.save();ctx.strokeStyle=rgba(WH,0.85*hk);ctx.lineWidth=2.4;rr(ctx,rx+3,ry-M.rh/2+3,M.C[1].w-6,M.rh-6,8);ctx.stroke();ctx.restore();}
-      T(ctx,"owner: Noor, data architect",MR.x+38,MR.y+440,{w:600,size:28,color:rgba(SOFT,1)});
-      if(tw1)mm_hthread(ctx,tw0?[[tw0,tw1],[tw2,[x-8,ry]]]:[[tw2,[x-8,ry]]],clamp((t-cT-5.6)/1.0,0,1),t,WH);});});
-  ctx.restore();
-  // what the picture asks, then the question both are asked, then what it all comes to
-  withA(ctx,fin(t,cS+5.4,0.5)*(1-fin(t,cJ+0.4,0.4)),()=>tag(ctx,960,82,"the same things?",WH,{align:"center",size:28}));
-  withA(ctx,fin(t,cJ+0.7,0.5)*(1-fin(t,cA+0.1,0.4)),()=>tag(ctx,960,82,"different jobs",WH,{align:"center",size:28}));
-  withA(ctx,fin(t,cA+0.5,0.5)*(1-fin(t,cT-0.8,0.5)),()=>{const s="Does Aisha hold a fourth microcredential?",w=tw(ctx,s,30,700)+64;glow(ctx,960,88,w*0.45,MM_WARM,0.1);
-    glass(ctx,960-w/2,52,w,72,20,MM_WARM,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(ctx,s,960,99,{w:700,size:30,align:"center",color:rgba(INK,1)});});
-  withA(ctx,fin(t,cT+6.2,0.6),()=>tag(ctx,960,150,"one idea, three jobs",WH,{align:"center",size:28}));
+/* ---------- 5. One map, many views ---------- */
+// Noor's architecture map: the university's data domains and their entities, with a process and an application. Each concept is
+// written once, on a card: its definition (with its owner), its relationships and its rules. Then the map steps back, and the views
+// are drawn from the card, one way: the glossary, the conceptual model, the logical model, the ontology in OWL, and the tests.
+// They come from one map, so they agree, and a change to the map reaches every view.
+const MM_BOARD={x:50,y:96,w:1820,h:764},MM_CARD={x:70,y:228,w:610,h:584},MM_FO=[680,520];
+const MM_ZONES=[["Courses",{x:90,y:228,w:270,h:280}],["Learners",{x:390,y:228,w:270,h:280}],["Credentials",{x:790,y:228,w:1040,h:604}]];
+const MM_ENTS=[["Course",225,400],["Learner",525,400],["Credential",1310,340],["Microcredential",1040,540],["Graduate certificate",1570,540]];
+const MM_PROC={x:90,y:560,w:570,h:96},MM_APP={x:90,y:716,w:570,h:96};
+const mm_rows=()=>{let y=176;return MM_VW.map(v=>{const R={x:790,y,w:1060,h:v[3]};y+=v[3]+12;return R;});};
+scene("model",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),cD=c("domain"),cO=c("once"),cV=c("views"),cW=c("owl"),cS=c("same");setScreen(ctx,S);bg2(ctx);
+  const F="rgba(16,22,40,0.96)",bo=1-fin(t,cV-0.6,0.6),cA=ease(clamp((t-cO+0.1)/0.8,0,1));
+  // the map: its owner, a process and an application, then three data domains and their entities, each lit as it's named
+  if(bo>0)withA(ctx,bo,()=>{mm_panel(ctx,MM_BOARD,"Architecture map",MM_MAP,{a:fin(t,0.2,0.6),lit:0.6+0.4*fin(t,cD+1.7,0.6),right:"owner: Noor, data architect",rightA:fin(t,cD+1.8,0.5)});
+    const nm=[pulseAt(t,cD+6.0,1.5),pulseAt(t,cD+6.72,1.5),pulseAt(t,cD+7.44,1.5)];
+    MM_ZONES.forEach(([n,R],k)=>mm_zone(ctx,R,n,fin(t,cD+3.35+k*0.18,0.5)*(k<2?1-cA:1),k===1?nm[0]:k===2?Math.max(nm[1],nm[2],fin(t,cO-0.4,0.6)):0));
+    withA(ctx,1-cA,()=>{mm_elem(ctx,MM_PROC,"Issue a credential","process",fin(t,cD+2.2,0.5)*0.85);mm_elem(ctx,MM_APP,"Student system","app",fin(t,cD+2.45,0.5)*0.85);
+      // ArchiMate's serving (the application serves the process) and access (the process writes the credentials) relationships
+      const sv=clamp((t-cD-2.7)/0.5,0,1),ac=clamp((t-cD-2.9)/0.5,0,1);if(sv>0){arrowTo(ctx,375,MM_APP.y-4,375,lerp(MM_APP.y-4,MM_PROC.y+MM_PROC.h+6,sv),MM_ELEM,0.75,{nohead:true,lw:2});
+        if(sv>=1){ctx.save();ctx.strokeStyle=rgba(MM_ELEM,0.75);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(365,MM_PROC.y+MM_PROC.h+18);ctx.lineTo(375,MM_PROC.y+MM_PROC.h+6);ctx.lineTo(385,MM_PROC.y+MM_PROC.h+18);ctx.stroke();ctx.restore();}}
+      if(ac>0)arrowTo(ctx,MM_PROC.x+MM_PROC.w+6,MM_PROC.y+MM_PROC.h/2,lerp(MM_PROC.x+MM_PROC.w+6,786,ac),MM_PROC.y+MM_PROC.h/2,MM_ELEM,0.75,{dash:[3,7],lw:2,head:10,p:1});});
+    const E=MM_ENTS.map(([n,x,y],k)=>{const hi=[0,nm[0],nm[1],Math.max(nm[1],pulseAt(t,cO+0.2,1.8)),nm[2]][k];return mm_pill(ctx,x,y,n,MM_MAP,{size:28,r:12,fill:F,a:fin(t,cD+4.3+k*0.15,0.4)*(k<2?1-cA:1),hi,hiCol:MM_MAP});});
+    // the concept's relationships and its rule, drawn on the map as the card names them: a kind of Credential (ArchiMate's
+    // specialization), counts towards a Graduate certificate (an association, named), and the certificate's rule
+    const [,,CR,MI,GC]=E,r1=clamp((t-cO-3.5)/0.6,0,1),r2=clamp((t-cO-3.9)/0.6,0,1),rl=fin(t,cO+5.1,0.5);
+    isa(ctx,MI.x+40,MI.y-MI.h/2-4,CR.x-40,CR.y+CR.h/2+4,r1,MM_MAP,{fill:"#0b1222",s:16,lw:2.4});
+    if(r2>0){arrowTo(ctx,MI.x+MI.w/2+4,MI.y,lerp(MI.x+MI.w/2+4,GC.x-GC.w/2-4,r2),GC.y,MM_MAP,0.9,{nohead:true,lw:2.4});withA(ctx,fin(t,cO+4.3,0.4),()=>T(ctx,"counts towards",(MI.x+MI.w/2+GC.x-GC.w/2)/2,MI.y+56,{w:700,size:28,align:"center",color:rgba(MM_MAP,1)}));}
+    if(rl>0)withA(ctx,rl,()=>{ctx.save();ctx.setLineDash([6,7]);ctx.strokeStyle=rgba(MM_MAP,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(GC.x,GC.y+GC.h/2+4);ctx.lineTo(GC.x,676);ctx.stroke();ctx.restore();tag(ctx,GC.x,700,"rule: up to 4 approved",MM_MAP,{size:28,align:"center"});});
+    // the card is that concept
+    const ln=clamp((t-cO-0.6)/0.5,0,1);if(ln>0){ctx.save();ctx.setLineDash([8,8]);ctx.strokeStyle=rgba(MM_MAP,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(MM_CARD.x+MM_CARD.w+6,MM_CARD.y+56);ctx.lineTo(lerp(MM_CARD.x+MM_CARD.w+6,MI.x-MI.w/2-6,ln),lerp(MM_CARD.y+56,MI.y,ln));ctx.stroke();ctx.restore();}});
+  // the views, each drawn from the card as it's named, one way; the ontology and the tests extracted from the same map
+  const RW=mm_rows(),X=mm_vwX(ctx,RW[0]),rT=[cV+0.1,cV+3.2,cV+6.45,cW+0.3,cW+7.6],run=k=>clamp((t-cS-3.6-k*0.08)/0.6,0,1),arrive=k=>pulseAt(t,cS+4.2+k*0.08,1.3),one=pulseAt(t,cS+1.2,1.8);
+  const P=[[fin(t,cV+0.6,0.5),clamp((t-cV-1.0)/1.4,0,1)],[fin(t,cV+3.8,0.5),clamp((t-cV-4.9)/0.6,0,1),fin(t,cV+5.3,0.4)],[fin(t,cV+6.8,0.5),clamp((t-cV-7.6)/0.6,0,1),pulseAt(t,cV+8.7,2.0)+0.35*fin(t,cV+9.4,0.6)],
+    [fin(t,cW+2.6,0.5),fin(t,cW+3.3,0.5)],[fin(t,cW+8.0,0.5),fin(t,cW+9.0,0.4),fin(t,cW+9.5,0.5)]];
+  RW.forEach((R,k)=>{const a=fin(t,rT[k],0.5);if(a<=0)return;const col=MM_VW[k][2],B=[R.x-4,R.y+R.h/2];
+    mm_fan(ctx,MM_FO,B,clamp((t-rT[k]-0.15)/0.6,0,1),col,t,{a,ph:k*0.2,hi:one,run:run(k)});
+    mm_view(ctx,R,k,X,{a,lit:0.55+0.45*Math.max(pulseAt(t,rT[k],2.4),fin(t,cS,0.6)),hi:Math.max(pulseAt(t,rT[k]+0.2,1.8),k===3?pulseAt(t,cW+4.7,1.4):0,arrive(k)),p:P[k]});});
+  if(t>rT[0])withA(ctx,fin(t,rT[0],0.4),()=>{glow(ctx,MM_FO[0],MM_FO[1],30,MM_MAP,0.6+0.4*one);ctx.fillStyle=rgba(MM_MAP,1);ctx.beginPath();ctx.arc(MM_FO[0],MM_FO[1],7,0,TAU);ctx.fill();});
+  // the card: the concept, written once. Each part lights as it's named, and again as a view takes it
+  const hp=[Math.max(pulseAt(t,cO+2.1,1.6),pulseAt(t,rT[0]+0.3,1.6),pulseAt(t,cW+2.6,1.6),pulseAt(t,cS+3.3,1.4)),Math.max(pulseAt(t,cO+3.3,1.8),pulseAt(t,rT[1]+0.3,1.6),pulseAt(t,rT[2]+0.3,1.6),pulseAt(t,cW+2.6,1.6)),Math.max(pulseAt(t,cO+4.8,1.6),pulseAt(t,rT[4]+0.3,1.6))];
+  const CR={x:MM_CARD.x-40*(1-cA),y:MM_CARD.y,w:MM_CARD.w,h:MM_CARD.h};
+  mm_concept(ctx,CR,{a:cA,s:[fin(t,cO+2.1,0.5),fin(t,cO+3.3,0.5),fin(t,cO+4.8,0.5)],hi:hp,lit:Math.max(one,pulseAt(t,cS+3.3,1.4)),v2:fin(t,cS+3.4,0.4)});
+  withA(ctx,fin(t,cV-0.2,0.5),()=>tag(ctx,CR.x,CR.y-32,"architecture map",MM_MAP,{size:28}));
+  withA(ctx,fin(t,cS+1.4,0.6),()=>tag(ctx,960,112,"one map, many views",MM_MAP,{align:"center",size:28}));
   vign(ctx,S);});
 
 /* ---------- 6. The semantic layer ---------- */

@@ -22,12 +22,12 @@ const NARR={
  {"id":"rules","gap":0.8,"text":"In the ontology, the rules are written as statements. A microcredential is a kind of credential. A graduate certificate accepts up to four approved microcredentials towards its credit."},
  {"id":"graph","gap":0.8,"text":"Connect the university's data to these statements, and it becomes a knowledge graph: learners, credentials and courses, linked by what they mean."},
  {"id":"aristotle","gap":0.8,"text":"It's Aristotle's recipe made formal: the kind of thing, and what sets it apart, in a form a machine can use."}]},
-"model":{"name":"Ontology or model?","lead":1.0,"tail":1.0,"vo":[
- {"id":"same","gap":0.8,"text":"Noor's data model draws the same things: learners, credentials, certificates. Is the ontology just the model again?","say":"Noor's data model draws the same things: learners, credentials, certificates. Is the ontology just the model, again?"},
- {"id":"jobs","gap":0.8,"text":"No: they do different jobs. The model plans the records the university keeps. Each box becomes a table; each line, a key."},
- {"id":"means","gap":0.8,"text":"The ontology says what things mean, for every system, so a machine can draw conclusions from it."},
- {"id":"aisha","gap":0.8,"text":"Ask both: does Aisha hold a fourth microcredential? The tables say no: none is recorded. The ontology says it can't tell: one may come from elsewhere."},
- {"id":"three","gap":0.8,"text":"The glossary explains the word. The ontology defines the idea. The model plans the records."}]},
+"model":{"name":"One map, many views","lead":1.0,"tail":1.0,"vo":[
+ {"id":"domain","gap":0.8,"text":"Where does all this meaning live? In Noor's architecture map, each data domain lists its entities: learners, credentials, certificates."},
+ {"id":"once","gap":0.8,"text":"Each concept is written once: its definition, how it relates to the others, and the rules it follows."},
+ {"id":"views","gap":0.8,"text":"The glossary shows the definitions, for people. The conceptual model shows how the concepts relate. The logical model adds how many, and the keys."},
+ {"id":"owl","gap":0.8,"text":"When a machine has to reason, the ontology is extracted from the same map, in OWL, the Web Ontology Language. Rules that check the data become tests.","say":"When a machine has to reason, the ontology is extracted from the same map, in owl, the Web Ontology Language. Rules that check the data become tests."},
+ {"id":"same","gap":0.8,"text":"They don't compete: they come from one map, so they agree. Change the map, and the views follow."}]},
 "semantic":{"name":"The semantic layer","lead":1.0,"tail":1.0,"vo":[
  {"id":"once","gap":0.8,"text":"In the semantic layer, credentials awarded this year is defined once: what's counted, what's left out, which date, and at what grain."},
  {"id":"tools","gap":0.8,"text":"Dashboards, spreadsheets and Genie all ask it, instead of each writing its own version."},

@@ -1,8 +1,8 @@
 # Meaning machines can read: the music and sounds, played by tools/audio.py with the series' instruments (shared/tools/music.py).
 # The film's palette is crystalline: FM bells, glass pads and a celesta in C Lydian (C major with an F sharp, bright and a little
 # unresolved), airy and slow. The history (Linnaeus, Wilkins, Nightingale) is played on a harp over strings; Genie is a pluck
-# over glass; the semantic layer has a soft, steady pulse; the four floors each ring one bell, rising, and so do the three cards
-# that end Ontology or model?. The series' motif opens the title on FM bells and closes the film on bells and celesta.
+# over glass; the semantic layer has a soft, steady pulse; the four floors each ring one bell, rising, and so do the five views
+# drawn from the map in One map, many views. The series' motif opens the title on FM bells and closes the film on bells and celesta.
 
 # PLAYBOOK.md: effects stay low and soft, below about 2.5 kHz. The series' soft stand-ins replace the bright ones by name (a chime
 # or a ping becomes a low felt note, a tick a muffled key, a pop a wooden knock, a sweep a breath of air), so every cue keeps its time
@@ -46,14 +46,14 @@ for i in range(4):
 # 4. The ontology: glass, a little lower; sparse bells as the statements are written; the graph brighter
 prog('ontology', [EM, CL, AM, DC], g=0.05, tone='glass', bassg=0.03)
 motif('ontology', [EM, CL, AM, DC], every=1.7, g=0.03, inst=fmbell)
-# 5. Ontology or model?: glass over A minor and E minor while the two panels compare, then G to C as the three cards light,
-# each on a bell, rising, with soft strings under them
-prog('model', [CL, AM, EM, DC], 0, cq('model', 'three'), g=0.05, tone='glass', bassg=0.03)
-motif('model', [CL, AM, EM, DC], 0, cq('model', 'three'), every=1.6, g=0.028, inst=celesta)
-prog('model', [GM, CL], cq('model', 'three'), g=0.05, tone='glass', bassg=0.03)
-prog('model', [GM, CL], cq('model', 'three'), g=0.025, tone='strings', bassg=0)
-for i, d in enumerate([0.0, 2.1, 4.4]):
-    fmbell([72, 76, 79][i], G('model', 'three', d), 0.045, (i - 1) * 0.5)
+# 5. One map, many views: glass and celesta while the map fills in and the concept is written once; then G to C as the views are
+# drawn from it, each on a bell, rising; soft strings under the ending, where they agree
+prog('model', [CL, AM, EM, DC], 0, cq('model', 'views'), g=0.05, tone='glass', bassg=0.03)
+motif('model', [CL, AM, EM, DC], 0, cq('model', 'views'), every=1.6, g=0.028, inst=celesta)
+prog('model', [GM, CL, DC, CL], cq('model', 'views'), g=0.05, tone='glass', bassg=0.03)
+prog('model', [GM, CL], cq('model', 'same'), g=0.025, tone='strings', bassg=0)
+for i, (cid, d) in enumerate([('views', 0.1), ('views', 3.2), ('views', 6.45), ('owl', 0.3), ('owl', 7.6)]):
+    fmbell([72, 74, 76, 79, 83][i], G('model', cid, d), 0.045, (i - 2) * 0.3)
 # 6. The semantic layer: a soft, steady pulse under glass, like a meter that always reads the same
 prog('semantic', [DC, CL, DC, CL], g=0.045, tone='glass', bassg=0.035)
 pulse(S0('semantic') + 0.6, E('semantic') - 0.4, 96, [(0, lambda s, g, p: kick(s, g), 0.035, 0), (1, shaker, 0.012, 0.3), (2, lambda s, g, p: kick(s, g), 0.025, 0), (3, shaker, 0.012, -0.3)])
@@ -104,19 +104,26 @@ pop(G('ontology', 'rules', 6.5), 0.045); node(G('ontology', 'rules', 7.1), 0.045
 chime(G('ontology', 'graph', 7.6), 0.05, 1568, -0.5)
 scratch(G('ontology', 'aristotle', 0.2), 0.03, -0.4, 1.8); scratch(G('ontology', 'aristotle', 1.8), 0.025, -0.4, 0.5); scratch(G('ontology', 'aristotle', 3.1), 0.025, -0.4, 0.6)
 [tick(G('ontology', 'aristotle', 2.4 + k * 0.3), 0.03, 0.4) for k in range(6)]; link(G('ontology', 'aristotle', 3.6), 0.035, 0); stamp(G('ontology', 'aristotle', 4.3), 0.07, 0.3)
-# 5. the ontology's concepts, Noor's model and its boxes, the question; the boxes become tables, a key; the ontology's conclusion;
-# the question asked of both, and their answers; the panels move over, the three cards, the thread
-[pop(S0('model') + d, 0.025, -0.5) for d in (0.4, 0.55, 0.7)]; link(S0('model') + 0.9, 0.025, -0.5); card(G('model', 'same', 0.2), 0.035, 0.5)
-[pop(G('model', 'same', d), 0.04, 0.3 + k * 0.15) for k, d in enumerate((2.6, 3.4, 4.1))]; link(G('model', 'same', 3.7), 0.03, 0.4); link(G('model', 'same', 4.4), 0.03, 0.5)
-node(G('model', 'same', 5.5), 0.045, 0, 1568); tone(G('model', 'jobs', 0.1), 0.03, 220)
-[card(G('model', 'jobs', 5.3 + k * 0.3), 0.035, 0.2 + k * 0.2) for k in range(3)]; link(G('model', 'jobs', 6.9), 0.035, 0.3, 0.6); ping(G('model', 'jobs', 7.3), 0.035, 0.4)
-ping(G('model', 'means', 2.1), 0.03, -0.3); node(G('model', 'means', 3.6), 0.03, -0.4, 1318); node(G('model', 'means', 3.9), 0.03, -0.3, 1568)
-link(G('model', 'means', 4.4), 0.035, -0.4, 0.7); chime(G('model', 'means', 4.8), 0.04, 1568, -0.4)
-ping(G('model', 'aisha', 0.5), 0.04, 0); [pop(G('model', 'aisha', 0.9 + k * 0.25), 0.03, -0.4) for k in range(3)]; [link(G('model', 'aisha', 1.0 + k * 0.25), 0.025, -0.5) for k in range(3)]
-whoosh(G('model', 'aisha', 1.9), 0.6, 0.025, -0.4); tone(G('model', 'aisha', 3.6), 0.03, 247); tick(G('model', 'aisha', 5.0), 0.03, 0.5)
-node(G('model', 'aisha', 6.3), 0.035, -0.4, 1175); whoosh(G('model', 'aisha', 8.6), 0.8, 0.025, -0.3); chime(G('model', 'aisha', 9.0), 0.035, 1318, 0)
-whoosh(G('model', 'three', -0.4), 1.0, 0.03, 0); page(G('model', 'three', 0.6), 0.03, -0.6); pop(G('model', 'three', 2.7), 0.03, 0); link(G('model', 'three', 3.0), 0.025, 0)
-card(G('model', 'three', 4.9), 0.03, 0.6); [link(G('model', 'three', 5.6 + k * 0.5), 0.035, -0.4 + k * 0.8, 0.5) for k in range(2)]; chime(G('model', 'three', 6.6), 0.045, 1568, 0.3)
+# 5. the map: its owner, a process and an application, three domains, their entities, each lit as it's named; the concept, written
+# once: its definition, its relationships (drawn on the map too) and its rule; the views, each drawn from it, one way: the glossary
+# typed, the concepts and their link, the keys; the ontology and the tests extracted; they agree, and the new version reaches each
+card(S0('model') + 0.2, 0.035, 0); ping(G('model', 'domain', 1.8), 0.03, 0.5)
+[pop(G('model', 'domain', 2.2 + k * 0.25), 0.03, -0.5) for k in range(2)]; link(G('model', 'domain', 2.7), 0.025, -0.5); link(G('model', 'domain', 2.9), 0.025, -0.3)
+[tick(G('model', 'domain', 3.35 + k * 0.18), 0.025, -0.5 + k * 0.5) for k in range(3)]
+[pop(G('model', 'domain', 4.3 + k * 0.15), 0.03, -0.4 + k * 0.25) for k in range(5)]
+[node(G('model', 'domain', d), 0.04, p, f) for d, p, f in ((6.0, -0.3, 1318), (6.72, 0.2, 1568), (7.44, 0.5, 1760))]
+page(G('model', 'once', -0.1), 0.035, -0.5); [tick(G('model', 'once', d), 0.03, -0.5) for d in (2.1, 3.3, 4.8)]
+link(G('model', 'once', 3.5), 0.03, 0.3); link(G('model', 'once', 3.9), 0.03, 0.5); pop(G('model', 'once', 5.1), 0.03, 0.5)
+whoosh(G('model', 'views', -0.6), 0.8, 0.025, 0.3)
+[link(G('model', cid, d + 0.15), 0.03, -0.2 + k * 0.1, 0.5) for k, (cid, d) in enumerate([('views', 0.1), ('views', 3.2), ('views', 6.45), ('owl', 0.3), ('owl', 7.6)])]
+[tick(G('model', 'views', 1.0 + k * 0.2), 0.02, 0.3) for k in range(6)]
+[pop(G('model', 'views', 3.8 + k * 0.12), 0.03, 0.2 + k * 0.4) for k in range(2)]; link(G('model', 'views', 4.9), 0.03, 0.4)
+[card(G('model', 'views', 6.8 + k * 0.1), 0.03, 0.2 + k * 0.4) for k in range(2)]; link(G('model', 'views', 7.6), 0.03, 0.4); node(G('model', 'views', 8.7), 0.04, 0.4, 1318)
+node(G('model', 'owl', 2.6), 0.035, -0.4, 1568); [tick(G('model', 'owl', 2.7 + k * 0.2), 0.02, 0.4) for k in range(6)]; ping(G('model', 'owl', 4.7), 0.03, 0.3)
+pop(G('model', 'owl', 8.0), 0.03, 0.4); ding(G('model', 'owl', 9.0), 0.03, 0.4, 1568)
+chime(G('model', 'same', 1.2), 0.045, 1568, 0); shimmer(G('model', 'same', 1.4), 0.03, 1318)
+page(G('model', 'same', 3.3), 0.03, -0.5); stamp(G('model', 'same', 3.4), 0.04, -0.5)
+[link(G('model', 'same', 3.6 + k * 0.08), 0.022, -0.2 + k * 0.15, 0.5) for k in range(5)]; [node(G('model', 'same', 4.2 + k * 0.08), 0.025, 0.2 + k * 0.1, 1568 + k * 120) for k in range(5)]
 # 6. the metric's four parts; the tools, each asking the one definition; the definition shared
 [tick(G('semantic', 'once', d), 0.035, 0) for d in (4.1, 4.8, 5.9, 6.9)]; chime(G('semantic', 'once', 3.3), 0.04, 1318)
 [pop(G('semantic', 'tools', d), 0.04, p) for d, p in ((-0.2, -0.6), (0.4, -0.6), (1.1, 0.6))]

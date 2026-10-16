@@ -1,5 +1,5 @@
 /* Learning Data: "Pause and think" for Meaning machines can read, in English. Keep the keys in step with think.es.js.
-   The film stops at the end of four chapters (before, guesses, four, standards), with one question each. think.js shows them,
+   The film stops at the end of five chapters (before, guesses, four, model, standards), with one question each. think.js shows them,
    and lists them again under "Think it through" (#think-list). Each "stop" is this film's own lab that teaches the same idea;
    the page's .player data-labs says where those labs are. */
 window.LEARN={lang:"en",
@@ -14,6 +14,9 @@ think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",ski
   "four":{stop:"layers",q:"Where does “a graduate certificate accepts up to four approved microcredentials” belong?",
     opts:[{t:"In the glossary."},{t:"In the ontology.",ok:true},{t:"In the semantic layer."}],
     why:"It's a relationship with a limit and a condition: a rule a machine can check. The glossary explains words; the semantic layer calculates numbers."},
+  "model":{stop:"which",q:"Asked whether Aisha holds a fourth microcredential, the tables say no, and the ontology says it can't tell. Which is right?",
+    opts:[{t:"The tables: the ontology is broken."},{t:"Both, each for its own job.",ok:true},{t:"The ontology: the tables are out of date."}],
+    why:"The tables answer from what the university recorded, and read what isn't recorded as not true: right for the records it keeps. The ontology treats what isn't stated as unknown, so data from elsewhere can join it. The data model plans the records; the ontology defines the idea."},
   "standards":{stop:"standard",q:"Three official definitions of microcredential don't quite match. What do you do?",
     opts:[{t:"Use the newest one everywhere, without saying so."},{t:"Choose one deliberately, map the others to it, and record the differences.",ok:true},{t:"Ignore all three, and write your own."}],
     why:"Check, adopt, extend, record. A standard saves starting from blank, but only a deliberate choice, written down, keeps numbers comparable."}

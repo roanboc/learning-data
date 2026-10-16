@@ -1,0 +1,106 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:06.128
+An imagined morning, in 2045, in the utility's own region.
+
+00:00:07.528 --> 00:00:12.898
+As the sun comes up, the homes on one street trade power from their batteries, house to house.
+
+00:00:14.498 --> 00:00:21.074
+A transformer's readings start to drift, and a crew is sent before it fails. Nobody on the street notices.
+
+00:00:22.674 --> 00:00:29.205
+This isn't a forecast. It's a drawing of where the utility wants to go, made as carefully as a drawing of today.
+
+00:00:30.705 --> 00:00:33.810
+And today, it runs on a hundred and forty systems.
+
+00:00:40.910 --> 00:00:45.416
+Tomás's next note asks what runs the utility today, and where it's going.
+
+00:00:46.816 --> 00:00:51.158
+On day one, the systems were a list: what had been bought, over forty years.
+
+00:00:52.658 --> 00:01:00.383
+Now there's a map to place them on. Each system goes under the capability it serves, from evidence: who uses it, and for what.
+
+00:01:01.983 --> 00:01:04.161
+Most of them land where you'd expect.
+
+00:01:06.861 --> 00:01:17.696
+Under managing outages, there are three: an outage system, a network control system that also handles outages, and a storm tool someone built in 2015.
+
+00:01:19.296 --> 00:01:26.954
+Under assessing network capacity, the capability that hurts, there's no system at all: a spreadsheet, kept by one engineer.
+
+00:01:28.554 --> 00:01:34.182
+And one system serves no capability anyone can name. It still costs a licence every year.
+
+00:01:35.682 --> 00:01:40.609
+Overlaps, gaps and shadow systems: a list could never show them. A map does.
+
+00:01:43.309 --> 00:01:51.983
+Below the applications is the technology they run on: two data centres, a cloud, and the radio network the field devices talk over.
+
+00:01:53.483 --> 00:02:00.478
+Each layer serves the one above. The business needs a capability; applications serve it; technology runs them.
+
+00:02:01.978 --> 00:02:07.641
+Change a capability, and you can follow it down. Switch off a server, and you can follow it up.
+
+00:02:10.341 --> 00:02:14.899
+For the first time, the drafts become one model, in ArchiMate's notation.
+
+00:02:16.299 --> 00:02:29.236
+Each block of the early canvases finds its element. A customer segment becomes a stakeholder. A pain reliever, a capability. A key activity, a business process. A key resource, a resource.
+
+00:02:30.836 --> 00:02:38.710
+The whole map, layer by layer: why the utility exists, what it must be able to do, how the work flows, who does it, and what runs it.
+
+00:02:40.310 --> 00:02:43.871
+Modelling tools can keep it. The ideas don't depend on them.
+
+00:02:46.571 --> 00:02:51.870
+Where it's going is a second drawing: the target, on the same map, so the two can be compared.
+
+00:02:53.370 --> 00:02:57.366
+Two capabilities are new: predicting faults, and trading power locally.
+
+00:02:58.866 --> 00:03:07.504
+One outage system instead of three. A model of the network's capacity instead of a spreadsheet. And the licence nobody uses, gone.
+
+00:03:10.204 --> 00:03:15.721
+Laid side by side, the differences between the two are the gaps. Each gap is a piece of work.
+
+00:03:17.321 --> 00:03:28.103
+Merge three outage systems into one. Build the capacity model. Switch off the system nobody uses. Add sensors, and predict faults. Open local trading.
+
+00:03:30.803 --> 00:03:37.484
+The path is a third drawing: plateaus, the steady states in between, and the order in which the gaps are closed.
+
+00:03:38.984 --> 00:03:50.582
+The order matters. Trading power on a street needs to know how much that street can take, so the capacity model comes first. Predicting faults needs sensors, so the sensors come before it.
+
+00:03:52.182 --> 00:04:01.357
+By 2028, one outage system and a capacity model. By 2033, fault prediction. Local trading, after that.
+
+00:04:07.657 --> 00:04:14.382
+Each choice on the path is written down with why: what was decided, what else was considered, and who decided.
+
+00:04:16.082 --> 00:04:24.837
+Keep the newest outage system, and fold the storm tool into it. Considered: keeping all three, or buying a new one. Decided by Grace.
+
+00:04:26.637 --> 00:04:31.821
+Three years on, someone will ask why the storm tool was switched off. The answer will be there.
+
+00:04:34.821 --> 00:04:41.726
+Grace confirms the network's systems as they stand today. The target and the path go to the board, as drafts.
+
+00:04:43.126 --> 00:04:51.050
+Tomás's note has an answer: today, placed on the map; a target, drawn as carefully; and a path between them, with reasons.
+
+00:04:52.550 --> 00:04:55.490
+The map of how the utility works is drawn, for now.
+
+00:04:56.890 --> 00:05:01.986
+Now, at last, he can open the backlog from day one, and ask which questions matter.

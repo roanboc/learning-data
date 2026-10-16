@@ -118,7 +118,7 @@
 <tr>
 <td>12. Phone and sound</td>
 <td>Every word raised to read on a phone; softer effects, and rhythm where the story turns tense</td>
-<td>22 films reworked, and new rules in the playbook</td>
+<td>23 films reworked, and new rules in the playbook</td>
 </tr>
 </tbody>
 </table>
@@ -355,10 +355,19 @@
 <li><strong>Decide what is texture.</strong> A period page, a picture seen from afar or a card behind another sets the scene, and isn't read. Everything the narration names must read.</li>
 <li><strong>Check every moment.</strong> A tool draws each film every half second and lists any text under 28 px, running off the frame or drawn over other words. The few left are moments in passing, such as a card flying in or a fade, or a crop the camera makes on purpose.</li>
 </ul>
-<p>The result: in all 22 films, no text that isn't decoration is drawn under 28 px, where 76% to 99% of it was before. <em>The Inner Life of Data</em>, with its English and Spanish voices, comes next, on its own. The labs keep their sizes, because they're read up close.</p>
+<p>The result: in all 22 films, no text that isn't decoration is drawn under 28 px, where 76% to 99% of it was before. The labs keep their sizes, because they're read up close.</p>
 <h3 id="softer-sounds-and-rhythm-that-follows-the-feeling">Softer sounds, and rhythm that follows the feeling</h3>
-<p>A viewer found the high tones disruptive: chimes, pings and bells carry energy far above the voice. In every film made before <em>In the weeds of data crafting</em>, except the first, the bright effects were replaced by name with soft, low stand-ins. A chime became a low felt note, a tick a muffled key and a pop a wooden knock, so every effect still lands on its cue. In <em>From words to data</em>, the instruments themselves (a kalimba, glass pads, bells) still rang above the voice, so the whole score, but not the voice, is now gently low-passed. In the twelve films that needed it, the energy above 4 kHz, where the voice is silent, fell by about two to fifteen times, depending on the film. <em>In the weeds of data crafting</em> already sat that low.</p>
+<p>A viewer found the high tones disruptive: chimes, pings and bells carry energy far above the voice. In the films made before <em>In the weeds of data crafting</em>, the bright effects were replaced by name with soft, low stand-ins. A chime became a low felt note, a tick a muffled key and a pop a wooden knock, so every effect still lands on its cue. In <em>From words to data</em>, the instruments themselves (a kalimba, glass pads, bells) still rang above the voice, so the whole score, but not the voice, is now gently low-passed. In the twelve films that needed it, the energy above 4 kHz, where the voice is silent, fell by about two to fifteen times, depending on the film. <em>In the weeds of data crafting</em> already sat that low.</p>
 <p>The music had the opposite problem. Sustained chords made every scene feel the same, and an error landed as calmly as a success. Now the rhythm follows the feeling. Where a story turns to an error (a test that fails, a wrong merge, rows that double) or a rush (a deadline, a busy kitchen), a low, muted pulse rises under the scene and fades once the problem is caught. An error leans on the semitone; a rush drives on the fifth. The calm chapters have none, so the contrast tells the viewer that something has changed.</p>
+<h3 id="where-it-started-reworked-last">Where it started, reworked last</h3>
+<p><em>The Inner Life of Data</em> was reworked last, on its own: it's voiced in English and Spanish, its player also draws the labs, and the Making of films show its frames. It now follows the same rules as the later films:</p>
+<ul>
+<li><strong>Read on a phone, in both languages.</strong> The same layer raises its words to 28 px, and its scenes were rearranged like the others'. Spanish words run longer, so every layout was checked in both languages. Before, 91% of its text was under 28 px; now none is, except texture.</li>
+<li><strong>The labs keep their sizes.</strong> They draw the film's pieces on canvases of their own, so in this player the layer acts only on the film's own frame.</li>
+<li><strong>The Making of stays as it was.</strong> <em>Data for Films</em> and its sequel show this film's frames as they were when they were made, so they now load a frozen copy of its scenes.</li>
+<li><strong>Tense only where the story is.</strong> Its old pulses marked busy machinery (events arriving, dbt running) and its arpeggios rang high. Now its effects are soft and low, and a pulse rises only where the sketch goes wrong, the data arrives rough, questions need an answer right now, and copies go stale.</li>
+<li><strong>A beat after every sentence.</strong> Its pauses had been gathered into long, wordless stops at the end of most chapters. Now each sentence gets a short beat, and only the sketch, the people and the end close without words. The film is 21 seconds shorter (7:11), and no chapter goes over 140 words a minute.</li>
+</ul>
 <blockquote>
 <p><strong>Lesson:</strong> a rule added late means reworking every film made before it. Build it as a shared layer where you can, check every moment, and write down what the rework taught, so the next film starts from it.</p>
 </blockquote>
@@ -406,6 +415,7 @@
 <li><strong>Measure what's drawn, not what's asked for.</strong> A word that grows needs room, and everything after it moves.</li>
 <li><strong>Let rhythm follow the feeling.</strong> A pulse under an error says something went wrong before the narration does; calm scenes stay calm.</li>
 <li><strong>Keep the sounds below the voice.</strong> Soft, low effects mark a moment without cutting through the narration.</li>
+<li><strong>Freeze what others show before you change it.</strong> A film that appears inside another keeps its own copy, so reworking the original changes nothing there.</li>
 </ol>
 <h2 id="reuse-it">Reuse it</h2>
 <p>Each film's source and rebuild guide are in this repository: <a href="https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/source/README.md"><em>The Inner Life of Data</em></a>, <a href="https://github.com/roanboc/learning-data/blob/main/films/a-sharper-sketch/README.md"><em>A Sharper Sketch</em></a> and <a href="https://github.com/roanboc/learning-data/blob/main/films/when-things-go-wrong/README.md">the series <em>When things go wrong</em></a>, with its treatments, character sheet and style frames. The <a href="https://github.com/roanboc/learning-data/blob/main/PLAYBOOK.md">playbook</a> collects what to reuse for the next film or course. To adapt <em>The Inner Life of Data</em> for another university, change the narration in <code>src/narration.js</code> (for example "class", "census date" and the domain names), regenerate the voice, and render again.</p>

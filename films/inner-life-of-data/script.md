@@ -1,8 +1,8 @@
 # The Inner Life of Data
 
-**Video script v5, university edition** · Matches the third cut of the film, the breathing cut
+**Video script v6, university edition** · Matches the fourth cut, which flows like the later films: a beat after every sentence, and wordless endings only in the sketch, the people and the end
 
-Runtime 7:32, with 922 words of narration (about 122 words a minute) read by a synthetic voice (Kokoro, American female, open source under Apache 2.0). The master is 16:9, 1080p, 30 fps, with narration, music and sound effects mixed to about -16 LUFS for the web. Captions are separate `.srt` files, in English and Spanish, not burned into the picture. Every name, place and number is fictional, and no real institution is shown.
+Runtime 7:11, with 922 words of narration (about 128 words a minute) read by a synthetic voice (Kokoro, American female, open source under Apache 2.0). The master is 16:9, 1080p, 30 fps, with narration, music and sound effects mixed to about -16 LUFS for the web. Captions are separate `.srt` files, in English and Spanish, not burned into the picture. Every name, place and number is fictional, and no real institution is shown.
 
 New in v5, the breathing cut: the same narration with room to think. The voice breathes after every sentence, each new idea gets a short beat, and each chapter ends with a wordless breather that applies its idea to a new case (see [breathing-cut.md](breathing-cut.md), revised after [a review](pacing-review.md)). The timing lives in `source/src/breath.js`. On the site, **Pause and think** can stop the film after each chapter to ask one question.
 
@@ -36,15 +36,15 @@ New in v4: the tap is stored first in the system of record; events go through an
 
 **On screen.** written first, in the system of record
 
-### Scene 1 · Into the platform · 0:25–1:15
+### Scene 1 · Into the platform · 0:25–1:11
 
 **Narration.** Every system at the university keeps its own records: students, learning, people and finance. Think of each one as its own colour of light. Some changes travel as events, the moment they happen. An integration platform routes them, retries them and keeps them secure, and Zerobus Ingest lands them in the lakehouse within seconds. Other data arrives in bulk, as files, like the nightly file of new offers. Auto Loader reads each new file exactly once, and remembers where it stopped. Everything lands in bronze, exactly as it arrived. Only what matters right now travels hot. The rest can wait for the next delivery.
 
-**Picture.** Four source systems appear, each with its own light colour: Student system, Learning platform, HR and payroll, Finance system. Events flow through the integration platform and Zerobus Ingest into the bronze vault. Nightly files drop into a landing zone; Auto Loader reads each one once while its checkpoint counts up. A magnifier shows a raw tile. Hot and warm lanes are labelled. Breather: the next night, one new file lands, and Auto Loader reads only that one (checkpoint 8 → 9).
+**Picture.** Four source systems appear, each with its own light colour: Student system, Learning platform, HR and payroll, Finance system. Events flow through the integration platform and Zerobus Ingest into the bronze vault. Nightly files drop into a landing zone; Auto Loader reads each one once while its checkpoint counts up. A magnifier shows a raw tile. Hot and warm lanes are labelled.
 
 **On screen.** Integration platform · Zerobus Ingest · Landing zone · Auto Loader · Bronze · hot · seconds · warm or cold · minutes to days
 
-### Scene 2 · The sketch · 1:15–1:47
+### Scene 2 · The sketch · 1:11–1:45
 
 **Narration.** Before any of this can make sense, we need a sketch of the world we're trying to understand. What is a student? A class? An enrolment? And how do they connect? That's the conceptual model: agreed with the business, and written down once. Get the sketch wrong, and the pieces never fit. Every picture built on top of it is wrong too, no matter how clean the data is. Get it right, and every piece has its place.
 
@@ -52,55 +52,55 @@ New in v4: the tap is stored first in the system of record; events go through an
 
 **On screen.** Conceptual model · Wrong sketch · Right sketch · Class fill: 312% · Class fill: 98%
 
-### Scene 3 · Refining with dbt · 1:47–2:48
+### Scene 3 · Refining with dbt · 1:45–2:42
 
 **Narration.** Now the refining starts. dbt holds the recipes: models, tests and documentation, all in version control. Databricks runs them, on a SQL warehouse. Look closer at bronze, and the pieces are rough: glitches, duplicates, errors, different formats, different clocks. First, dbt declares each source, and checks that it's fresh. Staging models clean each source: clear names, one format, one clock, no duplicates. Tests run at every step. A missing value stops here. Intermediate models join the sources, exactly as the sketch says. An enrolment with no matching class stops here. What comes out is silver: one clean, consistent picture of the university. And every step is recorded, so any piece can be traced back to the tap that started it.
 
-**Picture.** The dbt panel (models, tests, docs and lineage in version control) sits above the refining line; a Databricks SQL warehouse runs underneath. A freeze-frame zoom labels glitches, a duplicate, an error and different clocks. Three dbt layers light up in turn: sources (freshness checked), staging models (one format, one clock, no duplicates) and intermediate models (joined as the sketch says), each with its own tests. A missing value stops at staging; an enrolment with no matching class stops at intermediate. The clean pieces assemble the silver picture on top of the sketch, and a gold lineage thread runs back to bronze. Breather: a fresh batch runs clean, check marks ripple across the tests, new pieces land in silver, and light runs back along the lineage to bronze.
+**Picture.** The dbt panel (models, tests, docs and lineage in version control) sits above the refining line; a Databricks SQL warehouse runs underneath. A freeze-frame zoom labels glitches, a duplicate, an error and different clocks. Three dbt layers light up in turn: sources (freshness checked), staging models (one format, one clock, no duplicates) and intermediate models (joined as the sketch says), each with its own tests. A missing value stops at staging; an enrolment with no matching class stops at intermediate. The clean pieces assemble the silver picture on top of the sketch, and a gold lineage thread runs back to bronze.
 
 **On screen.** dbt · SQL warehouse · sources · staging models · intermediate models · tests · not_null · relationships · Silver · lineage
 
-### Scene 4 · Gold · 2:48–3:38
+### Scene 4 · Gold · 2:42–3:29
 
 **Narration.** Then the light is split again, this time into business domains: teaching, students, research and finance. Each domain holds many data products. Think of them as paintings. The subject is the domain. The style is what the audience needs. Analysts get every detail. Executives get the essence, in a few bold shapes. Government reports get a painting made by strict rules, like counting students on census date. Live operations get a quick impression of right now. In dbt, each painting is a mart with a contract and an owner: a data product. And its label is an exposure, recording where the painting is shown, and to whom. That's gold.
 
-**Picture.** The silver picture passes through a prism into four business-domain colours: Teaching, Students, Research, Finance. Each domain wing shows six different, named data products (for example Admissions funnel, Census count, Retention), a sample of the dozens it holds. The camera visits one painting per audience: Finance in realism for analysts, Research in bold shapes for executives, Students by strict rules (a census-date count) for government reports, Teaching as a live impression for operations. A plaque shows the data product, its dbt mart with an enforced contract, its dbt exposure and its owner. Breather: the camera glides to the Teaching wing, where a live data product shows its plaque and its exposure lights up.
+**Picture.** The silver picture passes through a prism into four business-domain colours: Teaching, Students, Research, Finance. Each domain wing shows six different, named data products (for example Admissions funnel, Census count, Retention), a sample of the dozens it holds. The camera visits one painting per audience: Finance in realism for analysts, Research in bold shapes for executives, Students by strict rules (a census-date count) for government reports, Teaching as a live impression for operations. A plaque shows the data product, its dbt mart with an enforced contract, its dbt exposure and its owner.
 
 **On screen.** for analysts · for executives · for government reports · for live operations · DATA PRODUCT · DBT MART · DBT EXPOSURE · OWNER
 
-### Scene 5 · The layers together · 3:38–4:13
+### Scene 5 · The layers together · 3:29–4:00
 
 **Narration.** Step back, and the whole system comes into view. Application domains flow in on one side. Bronze keeps what arrived. Silver makes it consistent. Gold makes it useful. Business domains flow out on the other, into dashboards, apps and Genie. dbt governs every step, from source to exposure, and its lineage maps every connection. And the Databricks lakehouse runs and stores it all, governed by Unity Catalog.
 
-**Picture.** The whole system in one view: application domains flow into bronze, silver and gold on the Databricks Lakehouse (Delta Lake storage, SQL warehouses, Unity Catalog), and business domains flow out. Above, the dbt lineage graph lights up from sources through staging, intermediate and marts to exposures, with dashed links showing that dbt compiles the SQL and Databricks runs it. On the right, consumption: Databricks Apps, Genie, and dashboards and SQL. Breather: one pulse of light travels through the whole platform, from a source system to Genie.
+**Picture.** The whole system in one view: application domains flow into bronze, silver and gold on the Databricks Lakehouse (Delta Lake storage, SQL warehouses, Unity Catalog), and business domains flow out. Above, the dbt lineage graph lights up from sources through staging, intermediate and marts to exposures, with dashed links showing that dbt compiles the SQL and Databricks runs it. On the right, consumption: Databricks Apps, Genie, and dashboards and SQL.
 
 **On screen.** dbt · sources · staging · intermediate · marts · exposures · Bronze keeps what arrived · Silver makes it consistent · Gold makes it useful · Databricks Lakehouse · Consumption: Databricks Apps, Genie, Dashboards and SQL
 
-### Scene 6 · Meaning · 4:13–5:09
+### Scene 6 · Meaning · 4:00–4:53
 
 **Narration.** But pictures without meaning are just noise. The platform is the bricks. Meaning is the shared language. In the dbt Catalog, anyone can read what each picture shows, where it came from, and who owns it. Words are defined once: an enrolled student is one still enrolled on census date. Unity Catalog marks trusted data as certified, decides who can see what, and masks personal details. And a university's knowledge lives everywhere: intranet pages, policy libraries, the handbook, process maps. Through MCP, a standard plug that lets AI connect to other systems, the platform reads those sources where they live, with your permissions. Together with the sketch, they become one map of meaning: Genie Ontology.
 
-**Picture.** A wall of data products flickers with static until shared words appear. The dbt Catalog shows what a data product shows, where it came from and who owns it, then the definition of an enrolled student. Unity Catalog marks a table as certified, shows who can see what, and masks a student's name. The camera rises to four knowledge sources (Intranet, Policy library, Handbook, Process maps); MCP connectors send snippets into the sketch, a gold thread rises from the catalogue, and together they form Genie Ontology. Breather: snippets keep arriving, and new connections light up across the brain.
+**Picture.** A wall of data products flickers with static until shared words appear. The dbt Catalog shows what a data product shows, where it came from and who owns it, then the definition of an enrolled student. Unity Catalog marks a table as certified, shows who can see what, and masks a student's name. The camera rises to four knowledge sources (Intranet, Policy library, Handbook, Process maps); MCP connectors send snippets into the sketch, a gold thread rises from the catalogue, and together they form Genie Ontology.
 
 **On screen.** Catalog in dbt · Unity Catalog · certified · MCP · Genie Ontology
 
-### Scene 7 · Two speeds · 5:09–5:39
+### Scene 7 · Two speeds · 4:53–5:20
 
 **Narration.** Some questions need one answer, right now: is there still a seat in Tuesday's 9 am class? Others need every record, over years: which classes fill up first? Different jobs, different engines. Lakebase, a Postgres database built into the platform, gives apps a fast desk copy of what they need, kept in sync automatically, with changes flowing back.
 
-**Picture.** Split screen. Left: the phone asks for a seat and Lakebase answers from a fast desk copy in 8 ms. Right: a reading room scans years of records into a heat map of classes by week. A gold vault syncs into Lakebase, and changes flow back. Breather: three more seat checks answer at once, while one long scan crosses the whole history.
+**Picture.** Split screen. Left: the phone asks for a seat and Lakebase answers from a fast desk copy in 8 ms. Right: a reading room scans years of records into a heat map of classes by week. A gold vault syncs into Lakebase, and changes flow back.
 
 **On screen.** One answer, right now · Every record, over years · Lakebase · Lakehouse · synced automatically · changes flow back
 
-### Scene 8 · Ways out · 5:39–6:39
+### Scene 8 · Ways out · 5:20–6:17
 
 **Narration.** Now the pictures go out, four ways. Events: when something changes, the integration platform rings a bell, and each system comes back for exactly what it needs. SQL endpoints: a reading room where tools can scan millions of records for big questions. Copies: for older systems that can't read the originals, the integration platform delivers copies. Useful, but every copy has to be kept up to date. [two-second pause] And the fourth way changes everything. A projector shows the original somewhere else, without making a copy. OpenSharing projects live research data to a partner university. Mirroring lets Microsoft Fabric see the same pictures in place. Federation turns the projector around, so we can see other systems where they live. One original. No copies to keep in sync.
 
-**Picture.** The gold vault feeds four ways out. The integration platform rings a bell and systems come back for what they need; a SQL endpoint fills a dashboard; the integration platform copies data to an older system, and the copies go out of date when the original changes. Everything holds for a two-second pause while the projector lens starts to glow. Then a projector shows the original, live, on a partner university screen (OpenSharing) and a Microsoft Fabric screen that shows several data products in place (mirroring); a second projector turned around shows a research grants system in place (federation). Breather: the original changes again; both projected screens show it in the same instant, while the copy falls behind.
+**Picture.** The gold vault feeds four ways out. The integration platform rings a bell and systems come back for what they need; a SQL endpoint fills a dashboard; the integration platform copies data to an older system, and the copies go out of date when the original changes. Everything holds for a two-second pause while the projector lens starts to glow. Then a projector shows the original, live, on a partner university screen (OpenSharing) and a Microsoft Fabric screen that shows several data products in place (mirroring); a second projector turned around shows a research grants system in place (federation).
 
 **On screen.** Integration platform · SQL endpoint · Older system · out of date · Projector · OpenSharing · Mirroring · Federation · Zero-copy
 
-### Scene 9 · Apps and Genie · 6:39–7:14
+### Scene 9 · Apps and Genie · 6:17–6:53
 
 **Narration.** People meet the data in two ways. Apps: a Databricks App shows an officer a student's record, she fixes a wrong degree code, and the correction flows straight back into the platform. And conversation: Genie. Ask: which first-year classes need more seats next semester? A Genie Agent answers with certified numbers and shows its sources, guided by Genie Ontology. And it only shows you what you're allowed to see.
 
@@ -108,7 +108,7 @@ New in v4: the tap is stored first in the system of record; events go through an
 
 **On screen.** Databricks App · Lakebase · back into the platform · Genie
 
-### Scene 10 · Pull back · 7:14–7:32
+### Scene 10 · Pull back · 6:53–7:11
 
 **Narration.** One tap became a snapshot, then a clear picture, and finally a decision: a new class opens, and 140 more students get a seat. Move less. Mean more.
 
@@ -133,7 +133,7 @@ New in v4: the tap is stored first in the system of record; events go through an
 
 ## LinkedIn cut (about 2 minutes)
 
-Take these ranges from the master, in order: 0:03–0:22, 0:35–0:50, 1:30–1:43, 2:17–2:36, 3:20–3:33, 6:07–6:25, 6:55–7:07, 7:26–7:32. The pauses are short, so they need little trimming. Some labels sit near the frame edges, so square or 4:5 crops need a reframing pass.
+Take these ranges from the master, in order: 0:03–0:22, 0:35–0:50, 1:27–1:41, 2:15–2:34, 3:15–3:24, 5:48–6:07, 6:33–6:45, 7:04–7:10. The pauses are short, so they need little trimming. Some labels sit near the frame edges, so square or 4:5 crops need a reframing pass.
 
 ## Production notes
 

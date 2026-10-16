@@ -49,7 +49,7 @@ Start with two short films: how the films are drawn, and how they are made.
 | 9. The second cut | 6:17 with narration, music and sound, timed to the voice | Varied data products, a brain, live updates |
 | 10. Publishing | A site that draws the film live, videos rendered from the same code, and this story | The site, this repository and its releases |
 | 11. More films | Feedback became a film, the films became a series, and every review became a check | *A Sharper Sketch*, *Silent change*, *Too good to be true*, and a site organised by topic |
-| 12. Phone and sound | Every word raised to read on a phone; softer effects, and rhythm where the story turns tense | 22 films reworked, and new rules in the playbook |
+| 12. Phone and sound | Every word raised to read on a phone; softer effects, and rhythm where the story turns tense | 23 films reworked, and new rules in the playbook |
 
 ## 1. The brief
 
@@ -274,13 +274,23 @@ The other films couldn't simply be redrawn. A shared layer now raises every word
 - **Decide what is texture.** A period page, a picture seen from afar or a card behind another sets the scene, and isn't read. Everything the narration names must read.
 - **Check every moment.** A tool draws each film every half second and lists any text under 28 px, running off the frame or drawn over other words. The few left are moments in passing, such as a card flying in or a fade, or a crop the camera makes on purpose.
 
-The result: in all 22 films, no text that isn't decoration is drawn under 28 px, where 76% to 99% of it was before. *The Inner Life of Data*, with its English and Spanish voices, comes next, on its own. The labs keep their sizes, because they're read up close.
+The result: in all 22 films, no text that isn't decoration is drawn under 28 px, where 76% to 99% of it was before. The labs keep their sizes, because they're read up close.
 
 ### Softer sounds, and rhythm that follows the feeling
 
-A viewer found the high tones disruptive: chimes, pings and bells carry energy far above the voice. In every film made before *In the weeds of data crafting*, except the first, the bright effects were replaced by name with soft, low stand-ins. A chime became a low felt note, a tick a muffled key and a pop a wooden knock, so every effect still lands on its cue. In *From words to data*, the instruments themselves (a kalimba, glass pads, bells) still rang above the voice, so the whole score, but not the voice, is now gently low-passed. In the twelve films that needed it, the energy above 4 kHz, where the voice is silent, fell by about two to fifteen times, depending on the film. *In the weeds of data crafting* already sat that low.
+A viewer found the high tones disruptive: chimes, pings and bells carry energy far above the voice. In the films made before *In the weeds of data crafting*, the bright effects were replaced by name with soft, low stand-ins. A chime became a low felt note, a tick a muffled key and a pop a wooden knock, so every effect still lands on its cue. In *From words to data*, the instruments themselves (a kalimba, glass pads, bells) still rang above the voice, so the whole score, but not the voice, is now gently low-passed. In the twelve films that needed it, the energy above 4 kHz, where the voice is silent, fell by about two to fifteen times, depending on the film. *In the weeds of data crafting* already sat that low.
 
 The music had the opposite problem. Sustained chords made every scene feel the same, and an error landed as calmly as a success. Now the rhythm follows the feeling. Where a story turns to an error (a test that fails, a wrong merge, rows that double) or a rush (a deadline, a busy kitchen), a low, muted pulse rises under the scene and fades once the problem is caught. An error leans on the semitone; a rush drives on the fifth. The calm chapters have none, so the contrast tells the viewer that something has changed.
+
+### Where it started, reworked last
+
+*The Inner Life of Data* was reworked last, on its own: it's voiced in English and Spanish, its player also draws the labs, and the Making of films show its frames. It now follows the same rules as the later films:
+
+- **Read on a phone, in both languages.** The same layer raises its words to 28 px, and its scenes were rearranged like the others'. Spanish words run longer, so every layout was checked in both languages. Before, 91% of its text was under 28 px; now none is, except texture.
+- **The labs keep their sizes.** They draw the film's pieces on canvases of their own, so in this player the layer acts only on the film's own frame.
+- **The Making of stays as it was.** *Data for Films* and its sequel show this film's frames as they were when they were made, so they now load a frozen copy of its scenes.
+- **Tense only where the story is.** Its old pulses marked busy machinery (events arriving, dbt running) and its arpeggios rang high. Now its effects are soft and low, and a pulse rises only where the sketch goes wrong, the data arrives rough, questions need an answer right now, and copies go stale.
+- **A beat after every sentence.** Its pauses had been gathered into long, wordless stops at the end of most chapters. Now each sentence gets a short beat, and only the sketch, the people and the end close without words. The film is 21 seconds shorter (7:11), and no chapter goes over 140 words a minute.
 
 > **Lesson:** a rule added late means reworking every film made before it. Build it as a shared layer where you can, check every moment, and write down what the rework taught, so the next film starts from it.
 
@@ -329,6 +339,7 @@ Mistakes were part of the process, and most of them taught something:
 24. **Measure what's drawn, not what's asked for.** A word that grows needs room, and everything after it moves.
 25. **Let rhythm follow the feeling.** A pulse under an error says something went wrong before the narration does; calm scenes stay calm.
 26. **Keep the sounds below the voice.** Soft, low effects mark a moment without cutting through the narration.
+27. **Freeze what others show before you change it.** A film that appears inside another keeps its own copy, so reworking the original changes nothing there.
 
 ## Reuse it
 

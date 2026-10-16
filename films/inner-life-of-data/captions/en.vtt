@@ -3,245 +3,245 @@ WEBVTT
 00:00:03.600 --> 00:00:06.478
 You just enrolled in your first university class.
 
-00:00:07.078 --> 00:00:09.461
+00:00:07.178 --> 00:00:09.561
 One tap. It feels like nothing happened.
 
-00:00:10.061 --> 00:00:16.243
+00:00:10.261 --> 00:00:16.443
 But that tap was written straight into the student system, the system of record: a snapshot of that moment.
 
-00:00:17.643 --> 00:00:21.487
+00:00:17.943 --> 00:00:21.787
 Now it's about to travel through a platform most people never see.
 
-00:00:22.087 --> 00:00:23.104
+00:00:22.487 --> 00:00:23.504
 Let's follow it.
 
-00:00:25.704 --> 00:00:31.523
+00:00:26.104 --> 00:00:31.923
 Every system at the university keeps its own records: students, learning, people and finance.
 
-00:00:32.123 --> 00:00:34.549
+00:00:32.623 --> 00:00:35.049
 Think of each one as its own colour of light.
 
-00:00:35.449 --> 00:00:38.709
+00:00:36.049 --> 00:00:39.309
 Some changes travel as events, the moment they happen.
 
-00:00:39.309 --> 00:00:43.697
+00:00:40.009 --> 00:00:44.397
 An integration platform routes them, retries them and keeps them secure,
 
-00:00:43.897 --> 00:00:47.636
+00:00:44.597 --> 00:00:48.336
 and Zerobus Ingest lands them in the lakehouse within seconds.
 
-00:00:49.036 --> 00:00:53.929
+00:00:49.836 --> 00:00:54.729
 Other data arrives in bulk, as files, like the nightly file of new offers.
 
-00:00:54.529 --> 00:00:59.280
+00:00:55.429 --> 00:01:00.180
 Auto Loader reads each new file exactly once, and remembers where it stopped.
 
-00:01:00.680 --> 00:01:03.936
+00:01:01.680 --> 00:01:04.936
 Everything lands in bronze, exactly as it arrived.
 
-00:01:04.536 --> 00:01:09.274
+00:01:05.636 --> 00:01:10.374
 Only what matters right now travels hot. The rest can wait for the next delivery.
 
-00:01:15.274 --> 00:01:19.907
+00:01:12.374 --> 00:01:17.007
 Before any of this can make sense, we need a sketch of the world we're trying to understand.
 
-00:01:20.507 --> 00:01:24.374
+00:01:17.707 --> 00:01:21.574
 What is a student? A class? An enrolment? And how do they connect?
 
-00:01:25.974 --> 00:01:30.166
+00:01:23.274 --> 00:01:27.466
 That's the conceptual model: agreed with the business, and written down once.
 
-00:01:31.266 --> 00:01:33.813
+00:01:28.666 --> 00:01:31.213
 Get the sketch wrong, and the pieces never fit.
 
-00:01:34.413 --> 00:01:38.818
+00:01:32.313 --> 00:01:36.718
 Every picture built on top of it is wrong too, no matter how clean the data is.
 
-00:01:39.418 --> 00:01:41.852
+00:01:37.418 --> 00:01:39.852
 Get it right, and every piece has its place.
 
-00:01:48.052 --> 00:01:56.218
+00:01:46.052 --> 00:01:54.218
 Now the refining starts. dbt holds the recipes: models, tests and documentation, all in version control.
 
-00:01:56.818 --> 00:01:59.475
+00:01:54.918 --> 00:01:57.575
 Databricks runs them, on a SQL warehouse.
 
-00:02:00.075 --> 00:02:02.756
+00:01:58.275 --> 00:02:00.956
 Look closer at bronze, and the pieces are rough:
 
-00:02:02.956 --> 00:02:06.702
+00:02:01.156 --> 00:02:04.902
 glitches, duplicates, errors, different formats, different clocks.
 
-00:02:07.802 --> 00:02:11.523
+00:02:06.102 --> 00:02:09.823
 First, dbt declares each source, and checks that it's fresh.
 
-00:02:12.123 --> 00:02:17.686
+00:02:10.523 --> 00:02:16.086
 Staging models clean each source: clear names, one format, one clock, no duplicates.
 
-00:02:18.286 --> 00:02:21.537
+00:02:16.786 --> 00:02:20.037
 Tests run at every step. A missing value stops here.
 
-00:02:22.937 --> 00:02:27.001
+00:02:21.537 --> 00:02:25.601
 Intermediate models join the sources, exactly as the sketch says.
 
-00:02:27.601 --> 00:02:30.224
+00:02:26.301 --> 00:02:28.924
 An enrolment with no matching class stops here.
 
-00:02:31.624 --> 00:02:36.440
+00:02:30.424 --> 00:02:35.240
 What comes out is silver: one clean, consistent picture of the university.
 
-00:02:37.040 --> 00:02:41.741
+00:02:35.940 --> 00:02:40.641
 And every step is recorded, so any piece can be traced back to the tap that started it.
 
-00:02:48.441 --> 00:02:54.790
+00:02:42.841 --> 00:02:49.190
 Then the light is split again, this time into business domains: teaching, students, research and finance.
 
-00:02:55.390 --> 00:02:59.427
+00:02:49.890 --> 00:02:53.927
 Each domain holds many data products. Think of them as paintings.
 
-00:03:00.027 --> 00:03:03.861
+00:02:54.627 --> 00:02:58.461
 The subject is the domain. The style is what the audience needs.
 
-00:03:04.461 --> 00:03:06.192
+00:02:59.161 --> 00:03:00.892
 Analysts get every detail.
 
-00:03:06.792 --> 00:03:09.787
+00:03:01.592 --> 00:03:04.587
 Executives get the essence, in a few bold shapes.
 
-00:03:10.387 --> 00:03:16.040
+00:03:05.287 --> 00:03:10.940
 Government reports get a painting made by strict rules, like counting students on census date.
 
-00:03:16.640 --> 00:03:19.673
+00:03:11.640 --> 00:03:14.673
 Live operations get a quick impression of right now.
 
-00:03:20.273 --> 00:03:25.706
+00:03:15.373 --> 00:03:20.806
 In dbt, each painting is a mart with a contract and an owner: a data product.
 
-00:03:26.306 --> 00:03:30.919
+00:03:22.006 --> 00:03:26.619
 And its label is an exposure, recording where the painting is shown, and to whom.
 
-00:03:31.519 --> 00:03:32.394
+00:03:27.319 --> 00:03:28.194
 That's gold.
 
-00:03:38.594 --> 00:03:41.196
+00:03:30.394 --> 00:03:32.996
 Step back, and the whole system comes into view.
 
-00:03:41.796 --> 00:03:44.150
+00:03:33.696 --> 00:03:36.050
 Application domains flow in on one side.
 
-00:03:44.750 --> 00:03:49.620
+00:03:36.750 --> 00:03:41.620
 Bronze keeps what arrived. Silver makes it consistent. Gold makes it useful.
 
-00:03:50.220 --> 00:03:54.622
+00:03:42.320 --> 00:03:46.722
 Business domains flow out on the other, into dashboards, apps and Genie.
 
-00:03:55.222 --> 00:04:01.325
+00:03:47.422 --> 00:03:53.525
 dbt governs every step, from source to exposure, and its lineage maps every connection.
 
-00:04:01.925 --> 00:04:06.645
+00:03:54.225 --> 00:03:58.945
 And the Databricks lakehouse runs and stores it all, governed by Unity Catalog.
 
-00:04:13.345 --> 00:04:15.816
+00:04:01.145 --> 00:04:03.616
 But pictures without meaning are just noise.
 
-00:04:16.416 --> 00:04:19.812
+00:04:04.316 --> 00:04:07.712
 The platform is the bricks. Meaning is the shared language.
 
-00:04:20.412 --> 00:04:26.865
+00:04:08.412 --> 00:04:14.865
 In the dbt Catalog, anyone can read what each picture shows, where it came from, and who owns it.
 
-00:04:27.465 --> 00:04:32.831
+00:04:15.565 --> 00:04:20.931
 Words are defined once: an enrolled student is one still enrolled on census date.
 
-00:04:34.431 --> 00:04:41.340
+00:04:22.631 --> 00:04:29.540
 Unity Catalog marks trusted data as certified, decides who can see what, and masks personal details.
 
-00:04:42.440 --> 00:04:49.528
+00:04:30.740 --> 00:04:37.828
 And a university's knowledge lives everywhere: intranet pages, policy libraries, the handbook, process maps.
 
-00:04:50.128 --> 00:04:54.952
+00:04:38.528 --> 00:04:43.352
 Through MCP, a standard plug that lets AI connect to other systems,
 
-00:04:55.152 --> 00:04:58.842
+00:04:43.552 --> 00:04:47.242
 the platform reads those sources where they live, with your permissions.
 
-00:04:59.442 --> 00:05:03.603
+00:04:47.942 --> 00:04:52.103
 Together with the sketch, they become one map of meaning: Genie Ontology.
 
-00:05:10.003 --> 00:05:15.799
+00:04:54.503 --> 00:05:00.299
 Some questions need one answer, right now: is there still a seat in Tuesday's 9 am class?
 
-00:05:16.399 --> 00:05:20.250
+00:05:00.999 --> 00:05:04.850
 Others need every record, over years: which classes fill up first?
 
-00:05:21.650 --> 00:05:23.578
+00:05:06.350 --> 00:05:08.278
 Different jobs, different engines.
 
-00:05:24.178 --> 00:05:30.374
+00:05:08.978 --> 00:05:15.174
 Lakebase, a Postgres database built into the platform, gives apps a fast desk copy of what they need,
 
-00:05:30.574 --> 00:05:33.872
+00:05:15.374 --> 00:05:18.672
 kept in sync automatically, with changes flowing back.
 
-00:05:39.572 --> 00:05:41.734
+00:05:20.872 --> 00:05:23.034
 Now the pictures go out, four ways.
 
-00:05:42.334 --> 00:05:50.070
+00:05:23.734 --> 00:05:31.470
 Events: when something changes, the integration platform rings a bell, and each system comes back for exactly what it needs.
 
-00:05:50.670 --> 00:05:56.269
+00:05:32.170 --> 00:05:37.769
 SQL endpoints: a reading room where tools can scan millions of records for big questions.
 
-00:05:56.869 --> 00:06:03.167
+00:05:38.469 --> 00:05:44.767
 Copies: for older systems that can't read the originals, the integration platform delivers copies.
 
-00:06:03.767 --> 00:06:06.768
+00:05:45.467 --> 00:05:48.468
 Useful, but every copy has to be kept up to date.
 
-00:06:08.668 --> 00:06:10.667
+00:05:50.468 --> 00:05:52.467
 And the fourth way changes everything.
 
-00:06:11.267 --> 00:06:15.265
+00:05:53.167 --> 00:05:57.165
 A projector shows the original somewhere else, without making a copy.
 
-00:06:15.865 --> 00:06:20.198
+00:05:57.865 --> 00:06:02.198
 OpenSharing projects live research data to a partner university.
 
-00:06:20.798 --> 00:06:24.830
+00:06:02.898 --> 00:06:06.930
 Mirroring lets Microsoft Fabric see the same pictures in place.
 
-00:06:25.430 --> 00:06:30.312
+00:06:07.630 --> 00:06:12.512
 Federation turns the projector around, so we can see other systems where they live.
 
-00:06:30.912 --> 00:06:33.658
+00:06:13.212 --> 00:06:15.958
 One original. No copies to keep in sync.
 
-00:06:40.058 --> 00:06:41.946
+00:06:18.358 --> 00:06:20.246
 People meet the data in two ways.
 
-00:06:42.546 --> 00:06:45.763
+00:06:20.946 --> 00:06:24.163
 Apps: a Databricks App shows an officer a student's record,
 
-00:06:45.963 --> 00:06:50.910
+00:06:24.363 --> 00:06:29.310
 she fixes a wrong degree code, and the correction flows straight back into the platform.
 
-00:06:52.010 --> 00:06:53.770
+00:06:30.510 --> 00:06:32.270
 And conversation: Genie.
 
-00:06:54.370 --> 00:06:57.942
+00:06:32.970 --> 00:06:36.542
 Ask: which first-year classes need more seats next semester?
 
-00:06:59.542 --> 00:07:05.960
+00:06:38.242 --> 00:06:44.660
 A Genie Agent answers with certified numbers and shows its sources, guided by Genie Ontology.
 
-00:07:06.560 --> 00:07:08.909
+00:06:45.360 --> 00:06:47.709
 And it only shows you what you're allowed to see.
 
-00:07:14.909 --> 00:07:19.321
+00:06:53.709 --> 00:06:58.121
 One tap became a snapshot, then a clear picture, and finally a decision:
 
-00:07:19.521 --> 00:07:23.419
+00:06:58.321 --> 00:07:02.219
 a new class opens, and 140 more students get a seat.
 
-00:07:25.319 --> 00:07:26.697
+00:07:04.219 --> 00:07:05.597
 Move less. Mean more.

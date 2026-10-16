@@ -51,38 +51,53 @@ Connect the university's data to these statements, and it becomes a knowledge gr
 00:02:21.277 --> 00:02:28.047
 It's Aristotle's recipe made formal: the kind of thing, and what sets it apart, in a form a machine can use.
 
-00:02:31.147 --> 00:02:39.359
+00:02:31.147 --> 00:02:38.943
+Noor's data model draws the same things: learners, credentials, certificates. Is the ontology just the model again?
+
+00:02:40.243 --> 00:02:48.336
+No: they do different jobs. The model plans the records the university keeps. Each box becomes a table; each line, a key.
+
+00:02:49.936 --> 00:02:55.759
+The ontology says what things mean, for every system, so a machine can draw conclusions from it.
+
+00:02:57.059 --> 00:03:07.083
+Ask both: does Aisha hold a fourth microcredential? The tables say no: none is recorded. The ontology says it can't tell: one may come from elsewhere.
+
+00:03:08.783 --> 00:03:14.904
+The glossary explains the word. The ontology defines the idea. The model plans the records.
+
+00:03:18.104 --> 00:03:26.316
 In the semantic layer, credentials awarded this year is defined once: what's counted, what's left out, which date, and at what grain.
 
-00:02:40.659 --> 00:02:45.833
+00:03:27.616 --> 00:03:32.790
 Dashboards, spreadsheets and Genie all ask it, instead of each writing its own version.
 
-00:02:46.933 --> 00:02:51.910
+00:03:33.890 --> 00:03:38.867
 Open formats for sharing these definitions between tools are starting to appear.
 
-00:02:54.610 --> 00:03:02.725
+00:03:41.567 --> 00:03:49.682
 You don't have to start from a blank page. Finance, health, insurance and retail all publish shared models, and so does education.
 
-00:03:03.925 --> 00:03:09.156
+00:03:50.882 --> 00:03:56.113
 Digital credentials have open standards too, with issuer, holder and evidence in them.
 
-00:03:10.256 --> 00:03:18.449
+00:03:57.213 --> 00:04:05.406
 Even microcredential has official definitions: from Australia, from the European Union, and from UNESCO. They don't quite match.
 
-00:03:19.949 --> 00:03:26.201
+00:04:06.906 --> 00:04:13.158
 So choose deliberately. Check, adopt, extend and record, as in A Sharper Sketch, at every layer.
 
-00:03:28.901 --> 00:03:35.748
+00:04:15.858 --> 00:04:22.705
 The Head of School asks again. This time, Genie asks back: approved for stacking, or all microcredentials?
 
-00:03:36.848 --> 00:03:39.691
+00:04:23.805 --> 00:04:26.648
 Then it answers, and shows the definition it used.
 
-00:03:40.991 --> 00:03:50.086
+00:04:27.948 --> 00:04:37.043
 Studies have found that grounding an assistant in explicit meaning makes its answers measurably more accurate. The difference is the meaning it can read.
 
-00:03:52.786 --> 00:04:02.782
+00:04:39.743 --> 00:04:49.739
 The triangle from the start of the series returns: the word, in English and in Spanish; the idea, now written in the ontology; and the data it points to.
 
-00:04:04.282 --> 00:04:07.593
+00:04:51.239 --> 00:04:54.550
 Next: keeping all of it true, while everything changes.

@@ -6,6 +6,7 @@ const BREATH={
 "guesses":{"hold":{"finds":0.4,"wrong":0.8,"read":0.3}},
 "four":{"hold":{"gloss":0.3,"onto":0.4},"breathe":3.0},
 "ontology":{"hold":{"rules":0.8,"graph":0.8,"aristotle":0.4}},
+"model":{"hold":{"same":0.6,"jobs":0.9,"means":0.6,"aisha":1.0,"three":0.5}},
 "semantic":{"hold":{"once":0.6,"tools":0.4}},
 "standards":{"hold":{"blank":0.5,"creds":0.4,"three":0.8}},
 "again":{"hold":{"asks":0.4,"answer":0.6}},

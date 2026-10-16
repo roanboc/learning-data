@@ -430,6 +430,12 @@ const NARR={
  {"id":"rules","gap":0.8,"text":"In the ontology, the rules are written as statements. A microcredential is a kind of credential. A graduate certificate accepts up to four approved microcredentials towards its credit."},
  {"id":"graph","gap":0.8,"text":"Connect the university's data to these statements, and it becomes a knowledge graph: learners, credentials and courses, linked by what they mean."},
  {"id":"aristotle","gap":0.8,"text":"It's Aristotle's recipe made formal: the kind of thing, and what sets it apart, in a form a machine can use."}]},
+"model":{"name":"Ontology or model?","lead":1.0,"tail":1.0,"vo":[
+ {"id":"same","gap":0.8,"text":"Noor's data model draws the same things: learners, credentials, certificates. Is the ontology just the model again?","say":"Noor's data model draws the same things: learners, credentials, certificates. Is the ontology just the model, again?"},
+ {"id":"jobs","gap":0.8,"text":"No: they do different jobs. The model plans the records the university keeps. Each box becomes a table; each line, a key."},
+ {"id":"means","gap":0.8,"text":"The ontology says what things mean, for every system, so a machine can draw conclusions from it."},
+ {"id":"aisha","gap":0.8,"text":"Ask both: does Aisha hold a fourth microcredential? The tables say no: none is recorded. The ontology says it can't tell: one may come from elsewhere."},
+ {"id":"three","gap":0.8,"text":"The glossary explains the word. The ontology defines the idea. The model plans the records."}]},
 "semantic":{"name":"The semantic layer","lead":1.0,"tail":1.0,"vo":[
  {"id":"once","gap":0.8,"text":"In the semantic layer, credentials awarded this year is defined once: what's counted, what's left out, which date, and at what grain."},
  {"id":"tools","gap":0.8,"text":"Dashboards, spreadsheets and Genie all ask it, instead of each writing its own version."},
@@ -448,7 +454,7 @@ const NARR={
  {"id":"next","gap":0.8,"text":"Next: keeping all of it true, while everything changes."}]}
 };
 
-const VODUR={"before/linn": 8.257, "before/wilkins": 7.254, "before/night": 7.888, "before/icd": 8.168, "before/lesson": 6.433, "guesses/ask": 7.493, "guesses/finds": 5.611, "guesses/wrong": 6.161, "guesses/read": 6.071, "four/gloss": 7.036, "four/tax": 3.827, "four/onto": 6.531, "four/sem": 4.139, "four/stack": 3.102, "ontology/rules": 12.123, "ontology/graph": 8.783, "ontology/aristotle": 6.67, "semantic/once": 8.112, "semantic/tools": 5.074, "semantic/open": 4.877, "standards/blank": 8.015, "standards/creds": 5.131, "standards/three": 8.093, "standards/choose": 6.152, "again/asks": 6.747, "again/answer": 2.743, "again/evid": 8.995, "end/tri": 9.896, "end/next": 3.211};
+const VODUR={"before/linn": 8.257, "before/wilkins": 7.254, "before/night": 7.888, "before/icd": 8.168, "before/lesson": 6.433, "guesses/ask": 7.493, "guesses/finds": 5.611, "guesses/wrong": 6.161, "guesses/read": 6.071, "four/gloss": 7.036, "four/tax": 3.827, "four/onto": 6.531, "four/sem": 4.139, "four/stack": 3.102, "ontology/rules": 12.123, "ontology/graph": 8.783, "ontology/aristotle": 6.67, "model/same": 7.696, "model/jobs": 7.993, "model/means": 5.723, "model/aisha": 9.924, "model/three": 6.021, "semantic/once": 8.112, "semantic/tools": 5.074, "semantic/open": 4.877, "standards/blank": 8.015, "standards/creds": 5.131, "standards/three": 8.093, "standards/choose": 6.152, "again/asks": 6.747, "again/answer": 2.743, "again/evid": 8.995, "end/tri": 9.896, "end/next": 3.211};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -458,6 +464,7 @@ const BREATH={
 "guesses":{"hold":{"finds":0.4,"wrong":0.8,"read":0.3}},
 "four":{"hold":{"gloss":0.3,"onto":0.4},"breathe":3.0},
 "ontology":{"hold":{"rules":0.8,"graph":0.8,"aristotle":0.4}},
+"model":{"hold":{"same":0.6,"jobs":0.9,"means":0.6,"aisha":1.0,"three":0.5}},
 "semantic":{"hold":{"once":0.6,"tools":0.4}},
 "standards":{"hold":{"blank":0.5,"creds":0.4,"three":0.8}},
 "again":{"hold":{"asks":0.4,"answer":0.6}},
@@ -1442,6 +1449,30 @@ function mm_kg(ctx,t,o){o=o||{};const P=o.p||{},q=k=>P[k]==null?1:P[k],aA=o.aish
   if(aA>0)withA(ctx,aA,()=>{tag(ctx,330,364,"3 approved: one more completes it",GOOD,{align:"center",size:18});});
   return{L,M,C,sch};}
 
+/* ---------- ontology or model: the same things, different jobs ----------
+   The data model is drawn in A Sharper Sketch's colour (SK): boxes and crow's feet, then the tables they become. The ontology keeps
+   its violet; data (a learner, the microcredentials she holds) is warm, as in the knowledge graph. Sizes are 28 or more, so the
+   phone layer has nothing to raise and every pill is measured at the size it's drawn. */
+const MM_DM=SK,MM_WARM=[255,176,140];
+// a panel of glass in its colour: its name, a line under it, and a note on the right of the name (o.sub, o.right, each with its alpha)
+function mm_panel(ctx,R,name,col,o){o=o||{};const a=o.a==null?1:o.a,lit=o.lit==null?1:o.lit,hi=o.hi||0;if(a<=0.01)return;const{x,y,w,h}=R;
+  withA(ctx,a,()=>{if(hi>0)glow(ctx,x+w/2,y+h/2,w*0.5,col,0.14*hi);
+    glass(ctx,x,y,w,h,20,col,{glow:(10+12*hi)*lit,ea:0.3+0.5*lit+0.2*hi,fill:"rgba(7,12,24,0.93)"});led(ctx,x+16,y+26,5,58,col,0.35+0.55*lit);
+    T(ctx,name,x+38,y+58,{w:800,size:34,color:rgba(col,0.5+0.5*lit)});
+    if(o.sub)withA(ctx,o.subA==null?1:o.subA,()=>T(ctx,o.sub,x+38,y+104,{w:600,size:28,color:rgba(SOFT,1)}));
+    if(o.right)withA(ctx,o.rightA==null?1:o.rightA,()=>T(ctx,o.right,x+w-30,y+58,{w:600,size:28,align:"right",color:rgba(SOFT,1)}));});}
+// a rectangle on its way from one place to another
+const mm_lerpR=(A,B,u)=>({x:lerp(A.x,B.x,u),y:lerp(A.y,B.y,u),w:lerp(A.w,B.w,u),h:lerp(A.h,B.h,u)});
+// one idea through the three cards: a thread from the glossary's word to the ontology's concept, and on to the model's records.
+// segs: [[from, to], ...], drawn one after another as p goes from 0 to 1, each with a light that travels along it once drawn
+function mm_hthread(ctx,segs,p,t,col){if(p<=0)return;col=col||[236,243,255];const n=segs.length;
+  segs.forEach(([a,b],i)=>{const q=clamp(p*n-i,0,1);if(q<=0)return;arrowTo(ctx,a[0],a[1],b[0],b[1],col,0.9,{p:q,lw:3,nohead:true});
+    [a,b].forEach((e,j)=>{const d=j?fin(q,0.9,0.1):fin(q,0,0.1);if(d>0){glow(ctx,e[0],e[1],28,col,0.5*d);ctx.fillStyle=rgba(col,d);ctx.beginPath();ctx.arc(e[0],e[1],6,0,TAU);ctx.fill();}});
+    if(q>=1){const u=(t*0.5+i*0.4)%1;glow(ctx,lerp(a[0],b[0],u),lerp(a[1],b[1],u),26,col,0.7);}});}
+// the size A Sharper Sketch's table is drawn at, here and now (its columns too), measured as the phone layer measures it
+function mm_tsize(ctx,cols,rows){const m=phMin(ctx),cs=Math.max(16,m),ns=Math.max(18,m),C=mm_cols(ctx,cols,rows),rh=Math.max(40,cs*1.45),hh=Math.max(46,ns*1.65);
+  return{C,w:C[C.length-1].x+C[C.length-1].w,h:hh+rh*(rows.length+1),rh,hh};}
+
 /* ---------- a digital credential, with the parts a standard names ---------- */
 const MM_VC=[["issuer","issuer"],["holder","holder · subject"],["claim","claim"],["evidence","evidence"],["status","status"]];
 function mm_vc(ctx,x,y,w,o){o=o||{};const m=phMin(ctx),rh=Math.max(o.rh||46,m?m*2.1:0),h=70+MM_VC.length*rh+16,vs=Math.max(15,m),vx=m?36+Math.max(...MM_VC.map(r=>tw(ctx,r[1],Math.max(17,m),500,"mono")))+24:220;withA(ctx,o.a==null?1:o.a,()=>{glass(ctx,x,y,w,h,18,TRUST,{glow:16,ea:0.8,fill:"rgba(7,12,24,0.95)"});
@@ -1505,11 +1536,12 @@ const LV={
 };
 
 /* ===== Meaning machines can read: scenes =====
-   Eight chapters, as in ../script.md. People tried to write meaning down before (Linnaeus, Wilkins, Nightingale and the ICD).
+   Nine chapters, as in ../script.md. People tried to write meaning down before (Linnaeus, Wilkins, Nightingale and the ICD).
    Today, Ana asks Genie who is one microcredential away from a graduate certificate, and Genie guesses: the stacking rules are in a
    document no tool can read. Four ways to write meaning down stack like floors: glossary, taxonomy, ontology, semantic layer.
-   The ontology holds the rule, the semantic layer holds the calculation, standards save starting from blank, and Genie, grounded,
-   asks back and answers right. The triangle from What's in a word returns. */
+   The ontology holds the rule; the data model, which names the same things, has another job: it plans the records. The semantic
+   layer holds the calculation, standards save starting from blank, and Genie, grounded, asks back and answers right.
+   The triangle from What's in a word returns. */
 
 /* ---------- 1. They tried before ---------- */
 const MM_HIER=[["KINGDOM","Animalia"],["CLASS","Aves"],["ORDER","Passeriformes"],["GENUS","Erithacus"],["SPECIES","Erithacus rubecula"]];
@@ -1657,7 +1689,101 @@ scene("ontology",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx)
     withA(ctx,fin(t,cA+4.3,0.6),()=>tag(ctx,1430,752,"a form a machine can use",MM_ONT,{align:"center",size:20}));});
   vign(ctx,S);});
 
-/* ---------- 5. The semantic layer ---------- */
+/* ---------- 5. Ontology or model? ---------- */
+// The ontology's concepts (left) and Noor's data model (right) name the same things. The model's boxes become tables and its lines
+// keys; the ontology lets a machine conclude what nobody wrote down. One question, asked of both, gets two answers, each right for
+// its job. Then the two panels move over for the glossary, and become three cards on one thread: the word, the idea, the records.
+const MM_OP={x:80,y:140,w:860,h:650},MM_MP={x:980,y:140,w:860,h:650},MM_C3=[{x:80,y:240,w:560,h:480},{x:680,y:240,w:560,h:480},{x:1280,y:240,w:560,h:480}];
+const MM_TL2={cols:["learner_id","name"],rows:[["L-1042","Aisha K."]]},MM_TG2={cols:["cert_id","name"],rows:[["GC-DA","Grad Cert DA"]]},
+  MM_TC2={cols:["credential_id","learner_id","kind"],rows:[["C-88","L-1042","micro"],["C-91","L-1042","micro"],["C-95","L-1042","micro"]]},MM_TM2={cols:["credential_id","kind"],rows:[["C-88","micro"]]};
+const MM_HELD=[["Data Visualisation",290],["SQL for Analysis",385],["Data Ethics",480]];
+scene("model",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),cS=c("same"),cJ=c("jobs"),cM=c("means"),cA=c("aisha"),cT=c("three");setScreen(ctx,S);bg2(ctx);
+  const F="rgba(34,22,60,0.96)",WH=[236,243,255];
+  // the panels' words leave first; then the panels move over, and the glossary comes in from the left
+  const out=1-fin(t,cT-0.9,0.6),u=ease(clamp((t-cT+0.4)/1.3,0,1)),OR=mm_lerpR(MM_OP,MM_C3[1],u),MR=mm_lerpR(MM_MP,MM_C3[2],u),
+    gu=ease(clamp((t-cT+0.4)/1.2,0,1)),GR={x:lerp(-620,MM_C3[0].x,gu),y:MM_C3[0].y,w:MM_C3[0].w,h:MM_C3[0].h};
+  // each thing lights on both sides as it's named: learners, credentials (and microcredentials), certificates
+  const nm=[2.7,3.5,3.5,4.2].map(d=>pulseAt(t,cS+d,1.5));
+  const litO=lerp(1-0.4*fin(t,cJ+1.5,0.6)*(1-fin(t,cM-0.4,0.6)),0.35+0.65*fin(t,cT+2.0,0.5),u),litM=lerp(1-0.4*fin(t,cM-0.4,0.6)*(1-fin(t,cA-0.2,0.6)),0.35+0.65*fin(t,cT+4.3,0.5),u);
+  // while one panel speaks, the other steps back
+  const dO=1-0.45*fin(t,cJ+1.5,0.6)*(1-fin(t,cM-0.4,0.6)),dM=1-0.45*fin(t,cM-0.4,0.6)*(1-fin(t,cA-0.2,0.6));
+  ctx.save();
+  mm_panel(ctx,OR,"Ontology",MM_ONT,{a:fin(t,0.2,0.6),lit:litO,hi:pulseAt(t,cS+1.0,1.6),sub:"says what things mean",subA:fin(t,cM+0.7,0.5)*out});
+  mm_panel(ctx,MR,"Data model",MM_DM,{a:fin(t,cS+0.2,0.6),lit:litM,hi:pulseAt(t,cS+1.0,1.6),right:"owner: Noor, data architect",rightA:fin(t,cS+0.9,0.5)*out,sub:"plans the records the university keeps",subA:fin(t,cJ+2.0,0.5)*out});
+  withA(ctx,fin(t,cM+2.1,0.5)*out,()=>{const s="for every system",w=tw(ctx,s,28,700)+26;tag(ctx,OR.x+OR.w-30-w,OR.y+50,s,MM_ONT,{size:28});});
+  // the ontology's concepts, carried over from the knowledge graph
+  const sA=fin(t,0.3,0.6)*(1-fin(t,cA+0.1,0.6))*out*dO,dimG=1-0.6*fin(t,cM+3.0,0.5)*(1-fin(t,cA-0.6,0.5));
+  if(sA>0)withA(ctx,sA,()=>{const CR=mm_pill(ctx,560,300,"Credential",MM_ONT,{size:28,r:12,fill:F,a:fin(t,0.4,0.5),hi:Math.max(nm[1],pulseAt(t,cM+3.9,1.4)),hiCol:nm[1]>0?WH:MM_ONT}),
+      MI=mm_pill(ctx,560,460,"Microcredential",MM_ONT,{size:28,r:12,fill:F,a:fin(t,0.5,0.5),hi:Math.max(nm[2],pulseAt(t,cM+3.6,1.4)),hiCol:nm[2]>0?WH:MM_ONT}),
+      LR=mm_pill(ctx,190,460,"Learner",MM_ONT,{size:28,r:12,fill:F,a:fin(t,0.6,0.5),hi:Math.max(nm[0],pulseAt(t,cM+4.2,1.4)),hiCol:nm[0]>0?WH:MM_ONT}),
+      GC=mm_pill(ctx,560,620,"Graduate certificate",MM_ONT,{size:28,r:12,fill:F,a:fin(t,0.7,0.5)*dimG,hi:nm[3],hiCol:WH});
+    mm_link(ctx,MI,CR,"is a kind of",MM_ONT,{p:clamp((t-0.9)/0.6,0,1),size:28,off:118});
+    mm_link(ctx,LR,MI,"holds",MM_ONT,{p:clamp((t-1.1)/0.6,0,1),size:28,off:-28});
+    withA(ctx,dimG,()=>mm_link(ctx,MI,GC,"counts towards",MM_ONT,{p:clamp((t-1.3)/0.6,0,1),size:28,off:-132}));
+    // a conclusion: a microcredential is a kind of credential, so whoever holds one holds a credential. Nobody wrote it down
+    const cq=clamp((t-cM-4.4)/0.7,0,1);if(cq>0){glow(ctx,375,380,150,MM_ONT,0.18*pulseAt(t,cM+4.4,2.0));mm_link(ctx,LR,CR,"holds · concluded",MM_ONT,{p:cq,size:28,off:30,dash:[9,8],lw:2.6});}});
+  // Aisha, in the knowledge graph: three microcredentials she holds, and a fourth no one has stated, either way
+  const aA=fin(t,cA+0.6,0.7)*out;
+  if(aA>0)withA(ctx,aA,()=>{const AI=mm_pill(ctx,200,460,"Aisha K.",MM_WARM,{size:28,a:fin(t,cA+0.6,0.5),hi:pulseAt(t,cA+0.9,1.6)});
+    MM_HELD.forEach(([s,y],i)=>{const P=mm_pill(ctx,620,y,s,MM_ONT,{size:28,r:12,fill:F,a:fin(t,cA+0.9+i*0.25,0.5)});mm_link(ctx,AI,P,i?null:"holds",MM_WARM,{p:clamp((t-cA-1.0-i*0.25)/0.5,0,1),size:28,off:26,lw:2,head:10});});
+    const q4=fin(t,cA+1.9,0.5),h4=pulseAt(t,cA+8.6,1.8),P4=mm_pill(ctx,620,590,"from elsewhere?",[200,205,225],{size:28,r:12,dash:true,a:q4*(0.75+0.25*h4),hi:h4,hiCol:MM_ONT,tc:rgba(SOFT,1)});
+    mm_link(ctx,AI,P4,null,[200,205,225],{p:clamp((t-cA-2.0)/0.5,0,1),dash:[7,8],lw:2,head:10,a:0.8});
+    withA(ctx,fin(t,cA+6.3,0.5),()=>tag(ctx,510,740,"can't tell: not stated",MM_ONT,{align:"center",size:28}));});
+  // the data model: Noor's boxes and lines, which become tables and keys
+  const L=mm_tsize(ctx,MM_TL2.cols,MM_TL2.rows),G=mm_tsize(ctx,MM_TG2.cols,MM_TG2.rows),C=mm_tsize(ctx,MM_TC2.cols,MM_TC2.rows);
+  const PL=[1010,290],PG=[1430,290],PC=[1250,470],mo=k=>fin(t,cJ+5.3+k*0.3,0.6),dimT=1-0.55*fin(t,cA+0.4,0.6);
+  const E={L:{x:PL[0]+L.w/2,y:PL[1]+L.h/2,name:"Learner",s:1.17,col:MM_DM,a:fin(t,cS+2.6,0.5)*(1-mo(0)),hi:nm[0],hiCol:WH},
+    C:{x:PC[0]+C.w/2,y:PC[1]+C.h/2,name:"Credential",s:1.17,col:MM_DM,a:fin(t,cS+3.4,0.5)*(1-mo(1)),hi:nm[1],hiCol:WH},
+    G:{x:PG[0]+G.w/2,y:PG[1]+G.h/2,name:"Certificate",s:1.17,col:MM_DM,a:fin(t,cS+4.1,0.5)*(1-mo(2)),hi:nm[3],hiCol:WH}};
+  const bL=entBox(ctx,E.L),bC=entBox(ctx,E.C),bG=entBox(ctx,E.G);
+  withA(ctx,out*dM,()=>{relLine(ctx,bL,bC,"1","*",{f:clamp((t-cS-3.7)/0.6,0,1),a:Math.min(E.L.a,E.C.a),s:1.17,col:MM_DM});
+    relLine(ctx,bC,bG,"*","*",{f:clamp((t-cS-4.4)/0.6,0,1),a:Math.min(E.C.a,E.G.a),s:1.17,col:MM_DM});
+    ["L","C","G"].forEach(k=>ent(ctx,E[k]));
+    withA(ctx,mo(0)*dimT,()=>table(ctx,PL[0],PL[1],"learners",MM_TL2.cols,MM_TL2.rows,{col:MM_DM}));
+    withA(ctx,mo(2)*dimT,()=>table(ctx,PG[0],PG[1],"certificates",MM_TG2.cols,MM_TG2.rows,{col:MM_DM}));
+    withA(ctx,mo(1),()=>table(ctx,PC[0],PC[1],"credentials",MM_TC2.cols,MM_TC2.rows,{col:MM_DM}));
+    // each line, a key: the learner_id in every credential points to one learner
+    const kA=fin(t,cJ+6.9,0.5),kx0=PC[0]+C.C[1].x+C.C[1].w/2,kx1=PL[0]+L.C[0].x+L.C[0].w/2,kh=pulseAt(t,cJ+7.0,1.6);
+    if(kA>0)withA(ctx,kA*dimT,()=>{ctx.save();ctx.strokeStyle=rgba(REF,0.55+0.45*kh);ctx.lineWidth=2+kh;ctx.shadowColor=rgba(REF,0.8);ctx.shadowBlur=10*kh;
+      rr(ctx,PC[0]+C.C[1].x+3,PC[1]+C.hh+3,C.C[1].w-6,C.h-C.hh-6,8);ctx.stroke();rr(ctx,PL[0]+L.C[0].x+3,PL[1]+L.hh+3,L.C[0].w-6,L.h-L.hh-6,8);ctx.stroke();ctx.restore();
+      arrowTo(ctx,kx0,PC[1]-6,kx1+20,PL[1]+L.h+8,REF,1,{p:clamp((t-cJ-6.9)/0.6,0,1),head:14,bend:0.08});
+      withA(ctx,fin(t,cJ+7.3,0.4),()=>tag(ctx,kx0+48,(PC[1]+PL[1]+L.h)/2,"key",REF,{size:28}));});
+    // asked of the tables: no fourth row, so no fourth microcredential
+    const nA=fin(t,cA+3.5,0.5),nh=pulseAt(t,cA+5.0,1.6);
+    if(nA>0)withA(ctx,nA,()=>{ctx.save();ctx.setLineDash([8,8]);ctx.strokeStyle=rgba(MM_DM,0.5+0.5*nh);ctx.lineWidth=2+nh;rr(ctx,PC[0]+4,PC[1]+C.h+8,C.w-8,C.rh-6,8);ctx.stroke();ctx.restore();
+      tag(ctx,1410,740,"no: none is recorded",MM_DM,{align:"center",size:28});});});
+  // the same things?
+  const eqA=fin(t,cS+5.5,0.5)*(1-fin(t,cA+0.1,0.6)),neq=fin(t,cJ+0.1,0.4);
+  if(eqA>0)withA(ctx,eqA,()=>{glow(ctx,960,465,70,WH,0.25+0.25*pulseAt(t,cS+5.6,1.4));ctx.fillStyle="rgba(7,12,24,0.96)";ctx.beginPath();ctx.arc(960,465,36,0,TAU);ctx.fill();ctx.strokeStyle=rgba(WH,0.8);ctx.lineWidth=2;ctx.stroke();
+    T(ctx,"=",960,481,{w:800,size:44,align:"center",color:rgba(WH,1)});if(neq>0){ctx.strokeStyle=rgba(WH,1);ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(974,445);ctx.lineTo(lerp(974,946,neq),lerp(445,485,neq));ctx.stroke();}});
+  withA(ctx,fin(t,cA+9.0,0.5)*out,()=>tag(ctx,960,740,"each right, for its job",WH,{align:"center",size:28}));
+  // the three cards: the glossary explains the word, the ontology defines the idea, the model plans the records
+  const gA=fin(t,cT-0.5,0.6);let tw0=null,tw1=null,tw2=null;
+  if(gA>0){mm_panel(ctx,GR,"Glossary",MM_GLO,{a:gA,lit:0.35+0.65*fin(t,cT,0.5),hi:pulseAt(t,cT,1.6),sub:"explains the word",subA:fin(t,cT+0.5,0.5)});
+    withA(ctx,fin(t,cT+0.6,0.5),()=>{const x=GR.x+38,y=GR.y;T(ctx,"microcredential",x,y+250,{w:800,size:30,color:rgba(MM_GLO,1)});
+      wrapT(ctx,"a small credential, whose learning has been assessed",x,y+300,GR.w-76,{w:600,size:28,lh:38,color:rgba(PARCH,0.95)});
+      T(ctx,"owner: Short courses",x,y+440,{w:600,size:28,color:rgba(SOFT,1)});tw0=[x+tw(ctx,"microcredential",30,800)+14,y+240];});}
+  if(u>0)withA(ctx,u,()=>{withA(ctx,fin(t,cT+2.6,0.5),()=>T(ctx,"defines the idea",OR.x+38,OR.y+104,{w:600,size:28,color:rgba(SOFT,1)}));
+    withA(ctx,fin(t,cT+4.8,0.5),()=>T(ctx,"plans the records",MR.x+38,MR.y+104,{w:600,size:28,color:rgba(SOFT,1)}));
+    const oq=fin(t,cT+2.7,0.5);if(oq>0)withA(ctx,oq,()=>{const cx=OR.x+OR.w/2,MI=mm_pill(ctx,cx,OR.y+240,"Microcredential",MM_ONT,{size:28,r:12,fill:F,hi:pulseAt(t,cT+2.2,1.6)}),CR=mm_pill(ctx,cx,OR.y+380,"Credential",MM_ONT,{size:28,r:12,fill:F});
+      mm_link(ctx,MI,CR,"is a kind of",MM_ONT,{p:clamp((t-cT-3.0)/0.5,0,1),size:28,off:-118});tw1=[MI.x-MI.w/2-8,MI.y];tw2=[MI.x+MI.w/2+8,MI.y];
+      // the meaning has the word's owner, in the glossary and in the ontology alike; the model is Noor's (Keeping it true: who approves what)
+      T(ctx,"owner: Short courses",OR.x+38,OR.y+440,{w:600,size:28,color:rgba(SOFT,1)});});
+    // the model's record of the same idea: a credential of kind micro, its row level with the word and the concept
+    const mq=fin(t,cT+4.9,0.5);if(mq>0)withA(ctx,mq,()=>{const M=mm_tsize(ctx,MM_TM2.cols,MM_TM2.rows),x=MR.x+38,y=MR.y+240-M.hh-M.rh*1.5;table(ctx,x,y,"credentials",MM_TM2.cols,MM_TM2.rows,{col:MM_DM});
+      const rx=x+M.C[1].x,ry=y+M.hh+M.rh*1.5,hk=Math.max(pulseAt(t,cT+4.7,1.6),0.6*fin(t,cT+6.5,0.4));if(hk>0){ctx.save();ctx.strokeStyle=rgba(WH,0.85*hk);ctx.lineWidth=2.4;rr(ctx,rx+3,ry-M.rh/2+3,M.C[1].w-6,M.rh-6,8);ctx.stroke();ctx.restore();}
+      T(ctx,"owner: Noor, data architect",MR.x+38,MR.y+440,{w:600,size:28,color:rgba(SOFT,1)});
+      if(tw1)mm_hthread(ctx,tw0?[[tw0,tw1],[tw2,[x-8,ry]]]:[[tw2,[x-8,ry]]],clamp((t-cT-5.6)/1.0,0,1),t,WH);});});
+  ctx.restore();
+  // what the picture asks, then the question both are asked, then what it all comes to
+  withA(ctx,fin(t,cS+5.4,0.5)*(1-fin(t,cJ+0.4,0.4)),()=>tag(ctx,960,82,"the same things?",WH,{align:"center",size:28}));
+  withA(ctx,fin(t,cJ+0.7,0.5)*(1-fin(t,cA+0.1,0.4)),()=>tag(ctx,960,82,"different jobs",WH,{align:"center",size:28}));
+  withA(ctx,fin(t,cA+0.5,0.5)*(1-fin(t,cT-0.8,0.5)),()=>{const s="Does Aisha hold a fourth microcredential?",w=tw(ctx,s,30,700)+64;glow(ctx,960,88,w*0.45,MM_WARM,0.1);
+    glass(ctx,960-w/2,52,w,72,20,MM_WARM,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(ctx,s,960,99,{w:700,size:30,align:"center",color:rgba(INK,1)});});
+  withA(ctx,fin(t,cT+6.2,0.6),()=>tag(ctx,960,150,"one idea, three jobs",WH,{align:"center",size:28}));
+  vign(ctx,S);});
+
+/* ---------- 6. The semantic layer ---------- */
 scene("semantic",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const cO=c("once"),cT=c("tools"),cP=c("open");
   const rows=[4.1,4.8,5.9,6.9].map(d=>fin(t,cO+d,0.5)),rh=[4.1,4.8,5.9,6.9].map(d=>pulseAt(t,cO+d,1.4));
@@ -1676,7 +1802,7 @@ scene("semantic",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx)
   withA(ctx,fin(t,cP+1.6,0.6),()=>tag(ctx,1270,748,"open formats are appearing",MM_SEM,{size:20}));
   vign(ctx,S);});
 
-/* ---------- 6. Standards ---------- */
+/* ---------- 7. Standards ---------- */
 scene("standards",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const cB=c("blank"),cC=c("creds"),cT=c("three"),cH=c("choose"),o3=fin(t,cT-0.3,0.7),oH=fin(t,cH-0.3,0.7);
   // a blank page, then the shelf of published models
@@ -1699,7 +1825,7 @@ scene("standards",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx
     withA(ctx,fin(t,cH+5.0,0.6),()=>tag(ctx,960,770,"at every layer",[236,243,255],{align:"center",size:22}));});
   vign(ctx,S);});
 
-/* ---------- 7. Genie, again ---------- */
+/* ---------- 8. Genie, again ---------- */
 scene("again",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const cA=c("asks"),cN=c("answer"),cE=c("evid");
   mm_asker(ctx,t,fin(t,0.2,0.6),fin(t,0.5,0.6),{qy:150,pose:t<cA+2.0||(t>cA+4.8&&t<cA+6.4)?"explain":"stand",expr:t>cN+0.6?"relieved":"calm"});
@@ -1720,7 +1846,7 @@ scene("again",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   withA(ctx,fin(t,cE+6.0,0.6),()=>tag(ctx,1375,836,"the difference is the meaning it can read",[236,243,255],{align:"center",size:20}));
   vign(ctx,S);});
 
-/* ---------- 8. Pull back ---------- */
+/* ---------- 9. Pull back ---------- */
 scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,S);bg2(ctx);
   const cT=c("tri"),cN=c("next"),cx=960,cy=430,wx=660,wy=600,ix=960,iy=240,hx=1260,hy=600;
   // the triangle from What's in a word, remembered, then filled in

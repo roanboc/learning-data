@@ -1,0 +1,193 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:11.095
+In 1686, Sweden's church law asked every parish priest to keep a book of every household: who lived there, when they were born, whether they could read.
+
+00:00:12.695 --> 00:00:17.909
+When someone moved, they carried a certificate to their new parish, and the next book took them in.
+
+00:00:19.509 --> 00:00:23.719
+In 1947, the register gave everyone a number for life.
+
+00:00:25.019 --> 00:00:28.583
+One person, written down once, followed wherever they went.
+
+00:00:35.883 --> 00:00:40.558
+Today, at the university. Linh Nguyen is studying health informatics.
+
+00:00:41.758 --> 00:00:45.721
+For years she shared her family's email with Minh, who studies here too.
+
+00:00:47.021 --> 00:00:50.689
+This week, Linh gets her own address, and tells the student system.
+
+00:00:51.789 --> 00:00:52.840
+Done, she thinks.
+
+00:00:55.340 --> 00:00:58.442
+But the student system isn't the only one that knows her.
+
+00:00:59.642 --> 00:01:02.942
+The learning platform has her account, with the family email.
+
+00:01:04.242 --> 00:01:07.594
+So does the short-course platform, where she took Health Literacy.
+
+00:01:08.994 --> 00:01:14.423
+And this semester she tutors a first-year unit, so HR has her too, with a staff number.
+
+00:01:16.023 --> 00:01:20.802
+Her certificate and her payslip still go to the family inbox, and Minh opens them.
+
+00:01:22.502 --> 00:01:25.294
+Next year, the alumni office will add one more.
+
+00:01:27.994 --> 00:01:34.452
+Linh is master data: one of the things the university is about, shared by every process and system.
+
+00:01:35.752 --> 00:01:40.147
+The lists that sort her, like “casual tutor” or a country, are reference data.
+
+00:01:41.347 --> 00:01:45.731
+What happens to her, an enrolment or a payslip, is transactional data.
+
+00:01:46.831 --> 00:01:49.473
+And the definition of a learner is metadata.
+
+00:01:50.173 --> 00:01:54.047
+This series is about the first two, and the next film tells them apart.
+
+00:01:56.747 --> 00:02:01.428
+Noor, the university's data architect, opens the university's own model.
+
+00:02:02.128 --> 00:02:07.688
+It has a learner. A good one, with keys from three systems and a decision for every match.
+
+00:02:08.988 --> 00:02:13.889
+But a learner isn't someone. It's how someone relates to the university, for a while.
+
+00:02:15.489 --> 00:02:19.096
+The model has no person. She says so, and writes it down.
+
+00:02:21.596 --> 00:02:23.426
+So she draws four things apart.
+
+00:02:24.126 --> 00:02:25.829
+The person: someone, once.
+
+00:02:27.029 --> 00:02:31.796
+The roles: student, tutor, customer, each with a start, an end, and an owner.
+
+00:02:33.096 --> 00:02:38.924
+The contact points: an email or an address, each with a purpose, and some shared by two people.
+
+00:02:40.224 --> 00:02:46.134
+And the identifiers: a student number belongs to the student system, a staff number to HR.
+
+00:02:47.234 --> 00:02:48.789
+None of them is the person.
+
+00:02:50.289 --> 00:02:59.441
+Enterprise architects draw it the same way: a person, a team or an organisation is an actor, assigned to one or more roles, for a time.
+
+00:03:04.341 --> 00:03:06.708
+Then Noor and Mei write down who keeps what.
+
+00:03:07.408 --> 00:03:10.489
+For each role, which system creates it, and who owns it.
+
+00:03:11.489 --> 00:03:14.503
+For each piece of the person, which system is trusted.
+
+00:03:15.603 --> 00:03:18.143
+The registrar's office keeps the legal name.
+
+00:03:18.843 --> 00:03:22.278
+Linh keeps her own preferred name, and her personal email.
+
+00:03:22.978 --> 00:03:24.773
+HR keeps her work details.
+
+00:03:25.473 --> 00:03:30.720
+And Mei's office looks after the person: who someone is, and whether two records are one.
+
+00:03:33.820 --> 00:03:35.347
+Every industry has a Linh.
+
+00:03:36.047 --> 00:03:39.225
+A nurse admitted as a patient, in the same hospital.
+
+00:03:40.525 --> 00:03:43.298
+A bank customer who guarantees a friend's loan.
+
+00:03:44.598 --> 00:03:49.582
+A household where the account holder moved out, and the person who stays needs the power on.
+
+00:03:50.982 --> 00:03:52.972
+Different words, the same four things.
+
+00:03:55.472 --> 00:04:00.440
+The data management body of knowledge, DAMA, calls this reference and master data.
+
+00:04:01.740 --> 00:04:11.770
+It names four ways to keep it: a registry that only links, a copy for analysis, a master that systems read back, or one place where people are created.
+
+00:04:13.270 --> 00:04:16.410
+The series picks one later, and shows the tools that do it.
+
+00:04:18.910 --> 00:04:20.878
+People aren't the only master data.
+
+00:04:21.578 --> 00:04:28.091
+The university also has employers and partner universities, awards and units, campuses and rooms.
+
+00:04:28.791 --> 00:04:31.876
+A hospital has patients, practitioners and wards.
+
+00:04:32.376 --> 00:04:35.611
+A bank, customers, accounts and the firms it trades with.
+
+00:04:36.111 --> 00:04:39.120
+A utility, meters, connection points and poles.
+
+00:04:39.620 --> 00:04:42.109
+A shop, products, suppliers and stores.
+
+00:04:43.309 --> 00:04:46.193
+Which of them need mastering? Ask four questions.
+
+00:04:47.293 --> 00:04:50.596
+Is it a thing the business is about, not something that happens?
+
+00:04:51.696 --> 00:04:53.822
+Is it used by more than one process?
+
+00:04:54.922 --> 00:04:59.507
+Is it created or changed in more than one place, so the copies can disagree?
+
+00:05:00.607 --> 00:05:04.982
+And does it matter when they do: money, safety, the law, or someone's trust?
+
+00:05:06.282 --> 00:05:07.898
+Four yeses: master it.
+
+00:05:10.398 --> 00:05:12.186
+Who is it? Which value wins?
+
+00:05:13.386 --> 00:05:16.180
+Roles that come and go, and the lists that sort them.
+
+00:05:17.380 --> 00:05:20.547
+What each role may see. One person in many systems.
+
+00:05:21.747 --> 00:05:23.900
+A hub at work, and how to keep it right.
+
+00:05:26.400 --> 00:05:28.338
+Linh changes her email, once.
+
+00:05:29.638 --> 00:05:30.779
+Every role hears.
+
+00:05:32.379 --> 00:05:34.351
+Know the person, not just the role.

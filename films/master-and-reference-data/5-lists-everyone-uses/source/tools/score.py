@@ -251,7 +251,7 @@ card(tRep - 0.3, 0.014, P(1370)); card(tRep, 0.012, P(1370))
 # 7. A change, with a date: A, then D on the first of January. Her tutor role across the years, on the tutor's note; the new name, in
 #    dashed felt tip; the pull request, its two lines typed; HR's review, and the tick as HR approves, on the tutor's note; the day it
 #    changes, a dashed line and its tag; the pen round the old name's end; her past contracts, a sheet each
-J = 'change'; tN, tSes, tPr, tOwn, tApp, tJan, tEnd, tCon = C(J, 'next'), W(J, 'next', 'Sessional'), W(J, 'pr', 'pull request'), W(J, 'pr', 'as the list'), W(J, 'pr', 'approves'), W(J, 'from', 'first of January'), W(J, 'ended', 'ended'), W(J, 'ended', 'past contracts')
+J = 'change'; tN, tSes, tPr, tOwn, tApp, tJan, tEnd, tCon = C(J, 'next'), W(J, 'next', 'Sessional'), W(J, 'pr', 'pull request'), W(J, 'pr', 'who owns'), W(J, 'pr', 'approves'), W(J, 'from', 'first of January'), W(J, 'ended', 'ended'), W(J, 'ended', 'past contracts')
 bed([(S0(J), A6), (C(J, 'pr', -0.3), FSM7), (C(J, 'from', -0.3), DMAJ9), (C(J, 'ended', -0.3), BM7)], E(J) + 1.0)
 sheet(tN - 0.4, 0.02, P(1100), 0.6); role('tutor', tN - 0.2, 0.024, P(860))
 pen(tSes - 0.2, 0.5, 0.011, P(1360))
@@ -310,7 +310,7 @@ urgent(tPer - 0.3, E(J) + 0.3, bpm=92, root=42, g=0.06, steps=(0, 0, 1, 0))
 
 # 11. Who keeps it: D major, with a turn back to the airport's B minor for its code. Linh in white paper, on the person's notes; her
 #     role on the tutor's note, her status on the student's, her country on the note for a list's value; each one's list, a card
-#     each; the airport's tag; each list's owner underlined, then each date; the series' mark on the end card
+#     each; the airport's tag; each owner underlined, then each date; the series' mark on the end card
 J = 'keeps'; B = C(J, 'breath'); tR, tSt, tCy, tOne, tA, tKe, tWh = W(J, 'linh', 'role'), W(J, 'linh', 'status'), W(J, 'linh', 'country'), W(J, 'linh', 'one list'), C(J, 'airport'), W(J, 'airport', 'who keeps'), W(J, 'airport', 'from when')
 bed([(S0(J), DMAJ9), (C(J, 'airport', -0.3), BM7), (W(J, 'airport', 'But now', -0.3), GMAJ9), (C(J, 'line', -0.3), ASUS), (B, D69)], TOT + 1.0)
 person(S0(J) + 0.4, 0.024, P(400))

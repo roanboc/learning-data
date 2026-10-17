@@ -107,73 +107,73 @@ On the platform, each list is one table, and its lineage shows the tables and re
 Next year, HR will call the role Sessional Academic.
 
 28
-00:02:53,607 --> 00:02:58,102
-The change is a pull request, and HR, as the list's owner, approves it.
+00:02:53,607 --> 00:02:57,844
+The change is a pull request, and HR, who owns tutor, approves it.
 
 29
-00:02:59,502 --> 00:03:02,074
+00:02:59,244 --> 00:03:01,816
 The new name applies from the first of January.
 
 30
-00:03:03,274 --> 00:03:08,360
+00:03:03,016 --> 00:03:08,102
 The old one isn't deleted. It's ended, because Linh's past contracts still use it.
 
 31
-00:03:10,860 --> 00:03:12,657
+00:03:10,602 --> 00:03:12,399
 Some lists belong to someone else.
 
 32
-00:03:13,357 --> 00:03:19,418
+00:03:13,099 --> 00:03:19,160
 Countries come from the international standard, ISO 3166, loaded on a schedule.
 
 33
-00:03:20,718 --> 00:03:24,702
+00:03:20,460 --> 00:03:24,444
 Like the project's glossary, the list is copied, never typed again.
 
 34
-00:03:26,002 --> 00:03:29,047
+00:03:25,744 --> 00:03:28,789
 Viet Nam appears once, with one code: VN.
 
 35
-00:03:30,247 --> 00:03:32,929
+00:03:29,989 --> 00:03:32,671
 And the count by country lists her country once.
 
 36
-00:03:35,429 --> 00:03:38,599
+00:03:35,171 --> 00:03:38,341
 Some lists describe people, like titles or gender.
 
 37
-00:03:39,699 --> 00:03:43,764
+00:03:39,441 --> 00:03:43,506
 Those stay short and inclusive, and are asked for only with a purpose.
 
 38
-00:03:45,164 --> 00:03:49,863
+00:03:44,906 --> 00:03:49,605
 A title can tell whether someone is married. If it isn't needed, it isn't asked.
 
 39
-00:03:52,363 --> 00:03:54,785
+00:03:52,105 --> 00:03:54,527
 Every industry runs on lists like these.
 
 40
-00:03:55,485 --> 00:03:59,478
+00:03:55,227 --> 00:03:59,220
 A bank's customer types decide which checks each customer goes through.
 
 41
-00:04:00,778 --> 00:04:05,069
+00:04:00,520 --> 00:04:04,811
 A hospital's relationship types decide who may be told about a patient.
 
 42
-00:04:06,369 --> 00:04:09,713
+00:04:06,111 --> 00:04:09,455
 Get a list wrong, and the wrong thing happens to a real person.
 
 43
-00:04:12,213 --> 00:04:16,305
+00:04:11,955 --> 00:04:16,047
 Now Linh's role, her status and her country each come from one list.
 
 44
-00:04:17,805 --> 00:04:24,933
+00:04:17,547 --> 00:04:24,675
 Like an airport code, a value can outlive its reason. But now everyone knows who keeps it, and from when it applies.
 
 45
-00:04:26,533 --> 00:04:28,992
+00:04:26,275 --> 00:04:28,734
 A list has an owner, a date and one home.

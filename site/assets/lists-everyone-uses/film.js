@@ -443,7 +443,7 @@ const NARR={
  {"id":"lineage","gap":0.8,"text":"On the platform, each list is one table, and its lineage shows the tables and reports that read it."}]},
 "change":{"name":"A change, with a date","lead":0.8,"tail":1.0,"vo":[
  {"id":"next","gap":0.8,"text":"Next year, HR will call the role Sessional Academic."},
- {"id":"pr","gap":0.8,"text":"The change is a pull request, and HR, as the list's owner, approves it."},
+ {"id":"pr","gap":0.8,"text":"The change is a pull request, and HR, who owns tutor, approves it."},
  {"id":"from","gap":0.8,"text":"The new name applies from the first of January."},
  {"id":"ended","gap":0.8,"text":"The old one isn't deleted. It's ended, because Linh's past contracts still use it."}]},
 "outside":{"name":"From outside","lead":0.8,"tail":1.0,"vo":[
@@ -467,7 +467,7 @@ const NARR={
  {"id":"line","gap":0.8,"text":"A list has an owner, a date and one home."}]}
 };
 
-const VODUR={"codes/three": 2.465, "codes/yyz": 5.907, "codes/sgn": 7.424, "codes/outlives": 4.406, "names/like": 2.399, "names/linh": 2.711, "names/three": 6.513, "names/match": 3.535, "names/sheet": 4.155, "names/kinds": 4.518, "typed/status": 4.892, "typed/map": 1.854, "typed/again": 3.292, "typed/country": 6.823, "typed/count": 3.502, "kinds/these": 4.3, "kinds/own": 6.466, "kinds/code": 4.123, "home/jun": 3.164, "home/five": 5.283, "home/table": 5.688, "home/owners": 3.721, "home/map": 6.044, "read/tests": 4.312, "read/once": 3.311, "read/lineage": 5.929, "change/next": 3.27, "change/pr": 4.395, "change/from": 2.472, "change/ended": 4.986, "outside/else": 1.697, "outside/iso": 5.961, "outside/glossary": 3.884, "outside/once": 2.945, "outside/count": 2.582, "people/some": 3.07, "people/short": 3.965, "people/title": 4.599, "elsewhere/every": 2.322, "elsewhere/bank": 3.893, "elsewhere/hosp": 4.191, "elsewhere/wrong": 3.244, "keeps/linh": 3.992, "keeps/airport": 7.028, "keeps/line": 2.359};
+const VODUR={"codes/three": 2.465, "codes/yyz": 5.907, "codes/sgn": 7.424, "codes/outlives": 4.406, "names/like": 2.399, "names/linh": 2.711, "names/three": 6.513, "names/match": 3.535, "names/sheet": 4.155, "names/kinds": 4.518, "typed/status": 4.892, "typed/map": 1.854, "typed/again": 3.292, "typed/country": 6.823, "typed/count": 3.502, "kinds/these": 4.3, "kinds/own": 6.466, "kinds/code": 4.123, "home/jun": 3.164, "home/five": 5.283, "home/table": 5.688, "home/owners": 3.721, "home/map": 6.044, "read/tests": 4.312, "read/once": 3.311, "read/lineage": 5.929, "change/next": 3.27, "change/pr": 4.137, "change/from": 2.472, "change/ended": 4.986, "outside/else": 1.697, "outside/iso": 5.961, "outside/glossary": 3.884, "outside/once": 2.945, "outside/count": 2.582, "people/some": 3.07, "people/short": 3.965, "people/title": 4.599, "elsewhere/every": 2.322, "elsewhere/bank": 3.893, "elsewhere/hosp": 4.191, "elsewhere/wrong": 3.244, "keeps/linh": 3.992, "keeps/airport": 7.028, "keeps/line": 2.359};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2059,7 +2059,8 @@ const wc_haze=(c,depth)=>mix(c,WC_PAPER,(1-clamp(depth==null?1:depth,0,1))*0.55)
 const WC_BARE={field:1,chipwash:1,swatch:1,mark:1,ribbon:1,dab:1};
 const WC_LINED={build:1,door:1,trim:1,tree:1,trunk:1,cover:1,page:1,wall:1,coat:1,head:1,hat:1,limb:1,arm:1,iron:1,kerb:1,clock:1,paper:1,thing:1};
 // a wash: the shape cleared to paper, then three layers of pigment that don't quite agree on the edge, a darker rim where the pigment
-// dried, grain in the paper's tooth, and on larger shapes, blotches where it dried unevenly; buildings, trees and people get a pencil line
+// dried, grain in the paper's tooth, and on larger shapes, blotches where it dried unevenly (offset by a remainder kept positive, so a
+// wash that starts left of the frame is blotched to its edge); buildings, trees and people get a pencil line
 function wc_wash(ctx,pts,col,o){o=o||{};col=wc_haze(col,o.depth);const d=o.depth==null?1:o.depth,a=(o.a==null?1:o.a)*0.95,rp=wc_resample(pts,8),b=wc_bbox(pts),seed=(o.seed||7)+Math.round(b.x0);
   if(!WC_BARE[o.kind]&&!o.bare){wc_tr(ctx,wc_jitter(rp,2,seed,0.022));ctx.fillStyle=rgba(WC_PAPER,1);ctx.fill();}
   ctx.save();ctx.globalCompositeOperation="multiply";
@@ -2067,7 +2068,7 @@ function wc_wash(ctx,pts,col,o){o=o||{};col=wc_haze(col,o.depth);const d=o.depth
   else{for(let i=0;i<3;i++){wc_tr(ctx,wc_jitter(rp,2.5+i*2.2,seed+i*13,0.022+i*0.012));ctx.fillStyle=rgba(col,a*0.36);ctx.fill();}
     wc_tr(ctx,wc_jitter(rp,2,seed+99,0.03));ctx.lineWidth=2.4;ctx.strokeStyle=rgba(wc_dim(col,0.18),a*0.4);ctx.stroke();
     ctx.save();wc_tr(ctx,rp);ctx.clip();ctx.globalAlpha=0.55;ctx.drawImage(WC.gran,0,0,W,H);
-    if(b.w>220&&o.kind!=="page"){ctx.globalAlpha=0.5*a;ctx.drawImage(wc_tint(WC.blotch,col),-(seed%420),-((seed*7)%300),W+420,H+300);
+    if(b.w>220&&o.kind!=="page"){ctx.globalAlpha=0.5*a;ctx.drawImage(wc_tint(WC.blotch,col),-(((seed%420)+420)%420),-((((seed*7)%300)+300)%300),W+420,H+300);
       ctx.globalAlpha=1;ctx.filter="blur(5px)";ctx.lineWidth=16;ctx.strokeStyle=rgba(col,a*0.2);wc_tr(ctx,rp);ctx.stroke();ctx.filter="none";}
     ctx.restore();}
   ctx.restore();
@@ -2662,8 +2663,8 @@ function m5_pr(ctx,x,y,o){o=o||{};const w=M5_PRW,h=M5_PRH;wc_panel(ctx,x,y,w,h,{
     if(a==null)a=1;if(a<=0.01)return;const ly=y+160+i*56;withA(ctx,a,()=>{wc_panel(ctx,x+20,ly-24,w-40,48,{kind:"chip",role:c,seed:i+72});
       wc_T(ctx,m,x+44,ly+10,{f:"mono",w:500,size:30,col:WC_DARK});wc_T(ctx,s,x+84,ly+10,{w:600,size:28,col:WC_DARK});});});
   const ra=o.rev==null?1:o.rev;if(ra<=0.01)return;withA(ctx,ra,()=>{wc_T(ctx,"review",x+32,y+h-36,{w:600,size:28,col:WC_MUTED});
-    wc_T(ctx,"HR, the list's owner",x+134,y+h-36,{w:800,size:30,col:WC_DARK});const ok=o.ok||0;
-    if(ok>0.01){const bx=x+134+tw(ctx,"HR, the list's owner",30,800)+24;withA(ctx,fin(ok,0,0.4),()=>wc_badge(ctx,bx,y+h-46,"approved",{role:[150,206,150]}));
+    wc_T(ctx,"HR, who owns tutor",x+134,y+h-36,{w:800,size:30,col:WC_DARK});const ok=o.ok||0;
+    if(ok>0.01){const bx=x+134+tw(ctx,"HR, who owns tutor",30,800)+24;withA(ctx,fin(ok,0,0.4),()=>wc_badge(ctx,bx,y+h-46,"approved",{role:[150,206,150]}));
       wc_tick(ctx,bx+tw(ctx,"approved",28,700)+56,y+h-50,40,WC_ROLEINK.alumna,clamp(ok*1.4-0.4,0,1),5);}});}
 // the role's names across the years: a band in the tutor's violet, a year a step; the old name until the day the new one starts
 const M5_Y0=2023,M5_YX=660,M5_YW=200,M5_BANDY=700;
@@ -2909,7 +2910,7 @@ scene("read",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
 /* ---------- 7. A change, with a date ---------- */
 const M5_PRX=560,M5_PRY=100;
 scene("change",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
-  const tN=c("next"),tSes=w("next","Sessional"),tP=c("pr"),tPr=w("pr","pull request"),tOwn=w("pr","as the list"),tApp=w("pr","approves"),tF=c("from"),tJan=w("from","first of January"),
+  const tN=c("next"),tSes=w("next","Sessional"),tP=c("pr"),tPr=w("pr","pull request"),tOwn=w("pr","who owns"),tApp=w("pr","approves"),tF=c("from"),tJan=w("from","first of January"),
     tE=c("ended"),tDel=w("ended","isn't deleted"),tEnd=w("ended","ended"),tCon=w("ended","past contracts");
   // the camera: the years; up to the pull request; back down to the years
   m5_open(ctx,S,t,sc,"office",[[0,960,540,1],[tP-0.3,1063,440,1.12],[tF-0.3,960,540,1]]);
@@ -3007,7 +3008,7 @@ scene("elsewhere",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s
 
 /* ---------- 11. Who keeps it ---------- */
 const M5_KCH=[["Studying","status","student",0],["Tutor","role","tutor",1],["Viet Nam","country of birth",WC_BADGE,4]];
-const M5_KLS=[["learner statuses","owner · registrar's office","from 2004-01-01"],["role types","owner · HR","from 2004-01-01"],["countries","owner · ISO 3166","loaded every month"]];
+const M5_KLS=[["learner statuses","owner · registrar's office","from 2004-01-01"],["role types","owner of tutor · HR","from 2004-01-01"],["countries","owner · ISO 3166","loaded every month"]];
 scene("keeps",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
   const tL=c("linh"),tR=w("linh","role"),tSt=w("linh","status"),tCy=w("linh","country"),tOne=w("linh","one list"),tA=c("airport"),tKe=w("airport","who keeps"),tWh=w("airport","from when"),tK=c("line");
   m5_open(ctx,S,t,sc,"campus",[[0,960,540,1],[tK-0.3,960,530,1.03]]);

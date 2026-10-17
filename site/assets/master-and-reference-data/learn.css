@@ -1,0 +1,109 @@
+/* The same one, everywhere: the labs' own pieces. A lab is paper, like the films, in light mode and dark: ink on warm paper, a pencil
+   edge, and the role colours as washes. The page around it (the film picker, the rail of labs, the stop, the scenario cards) is the
+   site's own, from site.css, and follows the visitor's light or dark mode. */
+.stops[hidden]{display:none}
+.mr-coming{display:inline-flex;align-items:center;padding:9px 16px;border-radius:999px;border:1px dashed var(--line);color:var(--muted);font-weight:700;font-size:14px}
+.mr-films{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 2px}
+@media (max-width:700px){.mr-films{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin;padding-bottom:6px}}
+.mr-films button{flex:0 1 auto;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:9px;align-items:center;text-align:left;padding:7px 14px 7px 8px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer;font:inherit;font-weight:700;font-size:14px;line-height:1.25;max-width:270px}
+@media (max-width:700px){.mr-films button{flex:0 0 auto;max-width:230px}}
+.mr-films button i{grid-row:1/3;font-style:normal;padding:0;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:800;background:var(--fg);color:var(--bg)}
+.mr-films button span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mr-films button small{font-weight:600;color:var(--muted);font-size:12px}
+.mr-films button[aria-pressed=true]{border-color:var(--fg);box-shadow:inset 0 0 0 1px var(--fg)}
+
+.mr-lab{--paper:#fbf7ee;--sheet:#fffdf8;--ink:#2e2a38;--imuted:#58545f;--edge:rgba(58,54,66,.24);--okc:#167844;--noc:#b83828;--warnc:#8a5a00;
+  background:var(--paper);color:var(--ink);border-radius:18px;border:1px solid rgba(58,54,66,.32);overflow:hidden;box-shadow:0 18px 50px rgba(40,30,20,.16);color-scheme:light}
+.mr-lab canvas{display:block;width:100%;height:auto;border-bottom:1px solid rgba(58,54,66,.16);touch-action:manipulation}
+.mr-lab :focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.mr-lab code{font-family:var(--mono);font-size:.9em;background:rgba(58,54,66,.07);border-radius:5px;padding:1px 5px}
+.mr-info{margin:14px 16px 12px;font-size:15px;color:var(--imuted)}
+.mr-controls{display:flex;flex-wrap:wrap;gap:8px;padding:8px 16px 12px;align-items:center}
+.mr-lbl{font-size:13px;font-weight:800;color:var(--imuted);margin-right:2px}
+.mr-pad{padding:0 16px;margin:4px 0 8px;display:block}
+.mr-seg{display:inline-flex;flex-wrap:wrap;gap:6px}
+.mr-seg button,.mr-btn{border:1.5px solid rgba(58,54,66,.42);border-radius:999px;background:var(--sheet);color:var(--ink);padding:7px 13px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;line-height:1.25;text-align:left}
+.mr-seg button:hover,.mr-btn:hover:not([disabled]){border-color:var(--ink)}
+.mr-seg button[aria-pressed=true]{background:color-mix(in srgb,var(--b,var(--c)) 30%,var(--sheet));border-color:color-mix(in srgb,var(--b,var(--c)) 65%,var(--ink));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--b,var(--c)) 65%,var(--ink))}
+.mr-btn.go{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.mr-btn.sm{padding:4px 10px;font-size:13px}
+.mr-btn[aria-pressed=true]{background:#ffe7a0;border-color:var(--warnc)}
+.mr-btn[disabled]{opacity:.45;cursor:not-allowed}
+.mr-rows{display:grid;gap:8px;padding:0 16px 12px}
+.mr-row{padding:10px 12px;border-radius:12px;background:var(--sheet);border:1.5px solid var(--edge);display:grid;gap:8px}
+.mr-row.ok{border-color:var(--okc)}.mr-row.no{border-color:var(--noc)}
+.mr-row .mr-seg button{padding:6px 11px;font-size:13px}
+.mr-item{margin:0;font-weight:700;font-size:15px}
+.mr-why{margin:0;font-size:14px;color:var(--imuted)}.mr-why b{color:var(--ink)}
+.mr-row.ok .mr-why b{color:var(--okc)}.mr-row.no .mr-why b{color:var(--noc)}
+.mr-say{margin:0;padding:12px 16px 14px;border-top:1px solid rgba(58,54,66,.18);font-size:15px;min-height:3.3em}
+.mr-checks{list-style:none;margin:0;padding:0 16px 12px;display:grid;gap:6px}
+.mr-checks li{padding:8px 12px 8px 36px;border-radius:10px;background:var(--sheet);border:1.5px solid var(--edge);position:relative;font-size:14px}
+.mr-checks li::before{position:absolute;left:12px;top:7px;font-weight:800}
+.mr-checks li.ok{border-color:var(--okc)}.mr-checks li.ok::before{content:"✓";color:var(--okc)}
+.mr-checks li.no{border-color:var(--noc)}.mr-checks li.no::before{content:"✗";color:var(--noc)}
+.mr-checks li.warn{border-color:var(--warnc)}.mr-checks li.warn::before{content:"~";color:var(--warnc)}
+.mr-checks li b{margin-left:4px}
+.mr-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;padding:0 16px 12px}
+.mr-stats:empty{display:none}
+.mr-stats p{margin:0;padding:10px 12px;border-radius:12px;background:var(--sheet);border:1.5px solid var(--edge);display:grid;gap:2px}
+.mr-stats b{font-size:24px;line-height:1.1}.mr-stats span{font-size:13px;color:var(--imuted)}
+.mr-stats p.no{border-color:var(--noc)}.mr-stats p.no b{color:var(--noc)}
+.mr-stats p.warn{border-color:var(--warnc)}.mr-stats p.warn b{color:var(--warnc)}
+.mr-steps{margin:0;padding:0 16px 12px 42px;display:grid;gap:6px;color:var(--imuted)}
+.mr-steps li{padding:4px 0}.mr-steps li b{font-weight:700}
+.mr-steps li.done b{color:var(--ink)}.mr-steps li.on b{color:var(--warnc)}
+.mr-steps li span{display:block;margin-top:4px;color:var(--ink);font-size:14px}
+.mr-slot{padding-top:2px;padding-bottom:8px}
+.mr-sentence{margin:4px 16px 12px;padding:14px 16px;border-radius:12px;background:var(--sheet);border:1.5px dashed rgba(58,54,66,.38);font-size:18px;line-height:1.5}
+.mr-sentence .gap{color:#7a746c}.mr-sentence .ok{text-decoration:underline 3px rgba(22,120,68,.7);text-underline-offset:4px}.mr-sentence .no{text-decoration:underline wavy 2px rgba(184,56,40,.85);text-underline-offset:4px}
+.mr-verdict{margin:0 16px 12px;padding:10px 14px;border-radius:12px;background:var(--sheet);border:1.5px solid var(--edge);font-size:15px}
+.mr-verdict:empty{display:none}
+.mr-verdict.ok{border-color:var(--okc)}.mr-verdict.ok b{color:var(--okc)}.mr-verdict.no{border-color:var(--noc)}.mr-verdict.no b{color:var(--noc)}
+
+/* match: the comparison, row by row, and the score's band */
+.mr-cmp{margin:0 16px 12px;border-radius:12px;border:1.5px solid var(--edge);background:var(--sheet);overflow:hidden}
+.mr-cmp-h,.mr-cmp-r{display:grid;grid-template-columns:minmax(92px,1fr) minmax(0,1fr) minmax(0,1fr) minmax(120px,1.1fr);gap:4px 10px;align-items:center;padding:8px 12px;font-size:14px}
+.mr-cmp-h{font-size:12px;font-weight:800;letter-spacing:.04em;color:var(--imuted);border-bottom:1px solid rgba(58,54,66,.16)}
+.mr-cmp-r+.mr-cmp-r{border-top:1px solid rgba(58,54,66,.1)}
+.mr-cmp-r .v{font-family:var(--mono);font-size:13px;overflow-wrap:anywhere}
+.mr-cmp-r .w{display:flex;gap:8px;justify-content:space-between;align-items:baseline}.mr-cmp-r .w em{font-style:normal;color:var(--imuted);font-size:13px}
+.mr-cmp-r .w b{font-family:var(--mono);font-weight:500}
+.mr-cmp-r.plus .w b{color:var(--okc)}.mr-cmp-r.minus .w b{color:var(--noc)}
+.mr-cmp-r button{grid-column:2/-1;justify-self:start}
+@media (max-width:620px){.mr-cmp-h{display:none}.mr-cmp-r{grid-template-columns:1fr 1fr}.mr-cmp-r>b,.mr-cmp-r .w,.mr-cmp-r button{grid-column:1/-1}}
+.mr-score{margin:0 16px 10px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;font-size:14px;color:var(--imuted)}
+.mr-score b{font-size:34px;line-height:1;color:var(--ink);font-weight:800}
+.mr-score .band,.mr-found .band{font-weight:800;font-size:13px;padding:3px 10px;border-radius:999px;border:1.5px solid}
+.band.link{color:#0f5a34;border-color:var(--okc);background:#e2f2e7}.band.review{color:#634400;border-color:var(--warnc);background:#fff0c2}.band.apart{color:#47434f;border-color:#8a8696;background:#efebe4}
+.mr-toggles{display:grid;gap:6px;padding:0 16px 12px}
+.mr-toggles label{display:flex;gap:10px;align-items:center;padding:8px 12px;border-radius:10px;background:var(--sheet);border:1.5px solid var(--edge);font-size:14px;cursor:pointer}
+.mr-toggles input{accent-color:var(--ink);width:18px;height:18px;flex:0 0 auto}
+.mr-found .mr-score{margin:0}.mr-found.link{border-color:var(--okc)}.mr-found.review{border-color:var(--warnc)}
+
+/* sliders: the bands' thresholds, and the timeline's date */
+.mr-sliders{display:grid;gap:10px;padding:2px 16px 12px}
+.mr-slider{display:grid;grid-template-columns:minmax(140px,auto) minmax(0,1fr) minmax(64px,auto);gap:12px;align-items:center;font-size:14px;font-weight:700}
+.mr-slider input{width:100%;accent-color:var(--ink);min-height:28px}
+.mr-slider output{font-family:var(--mono);font-weight:500;text-align:right;white-space:nowrap}
+@media (max-width:560px){.mr-slider{grid-template-columns:1fr auto}.mr-slider input{grid-column:1/-1;grid-row:2}}
+
+/* survive: each value with its source, the winner marked */
+.mr-vals{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.mr-vals li{display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline;padding:5px 10px;border-radius:10px;border:1.5px solid transparent;border-left:6px solid var(--b,#8a8696)}
+.mr-vals .v{font-family:var(--mono);font-size:14px}.mr-vals .src{font-size:13px;color:var(--imuted)}
+.mr-vals li.win{border-color:color-mix(in srgb,var(--b,#8a8696) 70%,var(--ink));background:color-mix(in srgb,var(--b,#8a8696) 13%,var(--sheet))}
+.mr-vals li.win .v{font-weight:600}
+
+/* timeline: the roles open on the date */
+.mr-open{margin:0 16px 10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:14px}
+.mr-chip{display:inline-block;padding:3px 10px;border-radius:999px;font-weight:700;font-size:13px;background:color-mix(in srgb,var(--b) 26%,var(--sheet));border:1.5px solid color-mix(in srgb,var(--b) 65%,var(--ink))}
+
+/* map: a system's code, and the test's log */
+.mr-sys{display:inline-block;padding:2px 8px;border-radius:6px;font-size:12px;font-weight:800;background:color-mix(in srgb,var(--b) 20%,var(--sheet));border:1px solid color-mix(in srgb,var(--b) 60%,var(--ink))}
+.mr-log{margin:0 16px 12px;background:var(--sheet);border:1.5px solid var(--edge);border-radius:10px;padding:10px 12px;font:12.5px/1.55 var(--mono);max-height:200px;overflow:auto;white-space:pre-wrap}
+.mr-log:empty{display:none}.mr-log .pass{color:var(--okc)}.mr-log .fail{color:var(--noc)}
+
+.mr-repo{margin:10px 0 0;font-size:13px;display:flex;flex-wrap:wrap;gap:2px 6px;align-items:baseline}.mr-repo code{overflow-wrap:anywhere}.mr-repo a{text-decoration:none}.mr-repo a:hover{text-decoration:underline}
+/* a scenario's picture is paper too */
+.qvis.mr-qvis{background:#fbf7ee}

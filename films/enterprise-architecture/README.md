@@ -4,7 +4,7 @@
 
 A new enterprise architect, Tomás, joins a publicly owned energy utility and doesn't yet know how it works, so he doesn't yet know which questions it needs to answer. Over eleven films he builds a map of it, layer by layer, from why it exists down to what runs it, and then shows what that map does for data: the questions that matter, rules with a home, a change in strategy, and a map that people and agents can read. The plan is in the [proposal](proposal.md).
 
-**Status:** seven of eleven films are built and [on the site](https://roanboc.github.io/learning-data/enterprise-architecture/), each with three Pause and think questions. Labs and scenarios will come later, as one set for the whole series rather than one per film. On the site, the series sits under the topic *Enterprise architecture*.
+**Status:** eight of eleven films are built and [on the site](https://roanboc.github.io/learning-data/enterprise-architecture/), each with three Pause and think questions. Labs and scenarios will come later, as one set for the whole series rather than one per film. On the site, the series sits under the topic *Enterprise architecture*.
 
 ## The films
 
@@ -18,6 +18,7 @@ A new enterprise architect, Tomás, joins a publicly owned energy utility and do
 | [How value reaches people](https://roanboc.github.io/learning-data/enterprise-architecture/how-value-reaches-people/) | Value streams and processes | 6 min | 10 | 3 questions | [script](5-how-value-reaches-people/script.md) · [source](5-how-value-reaches-people/source/README.md) |
 | [Who does it, and where meaning changes](https://roanboc.github.io/learning-data/enterprise-architecture/who-does-it/) | Actors, roles and domains | 6 min | 10 | 3 questions | [script](6-who-does-it/script.md) · [source](6-who-does-it/source/README.md) |
 | [Today, and where it's going](https://roanboc.github.io/learning-data/enterprise-architecture/today-and-where-its-going/) | Applications, technology and the path to a target | 5 min | 10 | 3 questions | [script](7-today-and-where-its-going/script.md) · [source](7-today-and-where-its-going/source/README.md) |
+| [Now the questions appear](https://roanboc.github.io/learning-data/enterprise-architecture/now-the-questions-appear/) | Decisions, questions and measures | 5½ min | 10 | 3 questions | [script](8-now-the-questions-appear/script.md) · [source](8-now-the-questions-appear/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

@@ -22,14 +22,6 @@ const m3_col=src=>src==="self"?WC_PAPER:WC_ROLE[M3_SRC[src].role],m3_ink=src=>sr
 // the business side's gold, for what the steward decides (her pin, her ticks); the warning amber; the approval stamp's brown ink
 const M3_GOLD=[214,160,40],M3_GOLDINK=[136,96,8],M3_AMBER=[244,178,60],M3_STAMP=[110,74,24];
 
-/* ---------- the wash's texture ---------- */
-// The shared wash (shared/src/wash.js) shifts its texture by a seed that grows with where the wash starts. A wash that starts left of
-// the frame gets a seed below zero, which shifts the texture right and down and leaves a bare strip along the frame's left edge. In
-// this film, such a seed moves up by a whole number of the texture's repeats (2100 is a multiple of both), so nothing else changes.
-const m3_washShared=wc_wash;
-wc_wash=function(ctx,pts,col,o){o=o||{};const s0=o.seed||7,s=s0+Math.round(wc_bbox(pts).x0);
-  if(s<0)o=Object.assign({},o,{seed:s0+2100*Math.ceil(-s/2100)});return m3_washShared(ctx,pts,col,o);};
-
 /* ---------- the places ---------- */
 // the sky, paler: winter, or the haze of a working day
 function m3_pale(ctx,hz,col,a){ctx.save();const g=ctx.createLinearGradient(0,0,0,hz);g.addColorStop(0,rgba(col,a));g.addColorStop(1,rgba(col,a*0.5));ctx.fillStyle=g;ctx.fillRect(0,0,W,hz);ctx.restore();}
@@ -300,14 +292,14 @@ const M3_MONO={mob:1,mobHR:1,eStudy:1,eWork:1,eOld:1,eNew:1};
 // the record from which each value comes (one of the five)
 const M3_FROM={legal:1,alum:2,hrn:3,ron:4,dob:1,dobHR:3,mob:1,mobHR:3,eStudy:1,eWork:3,eOld:2,eNew:1};
 // a value's tag: a paper tag with its source's dot and the value, 28 px; o.win washes it in its source's colour (the value chosen),
-// o.dim greys it (a value not chosen); (x, y) is its left edge and its middle; returns its width
+// o.dim greys it (a value not chosen); o.ta fades its dot and words alone; (x, y) is its left edge and its middle; returns its width
 const M3_VH=52;
 const m3_vf=k=>M3_MONO[k]?{w:500,f:"mono"}:{w:600,f:null};
 function m3_vw(k){const f=m3_vf(k);return Math.round(tw(m3_mc(),M3_V[k][0],28,f.w,f.f)+64);}
 function m3_val(ctx,x,y,k,o){o=o||{};const [s,src]=M3_V[k],f=m3_vf(k),w=m3_vw(k),dim=o.dim||0,win=o.win||0,seed=s.length+(o.seed||0);
   wc_panel(ctx,x,y-M3_VH/2,w,M3_VH,{kind:"tag",seed});
   if(win>0.01&&src!=="self")withA(ctx,win,()=>wc_panel(ctx,x,y-M3_VH/2,w,M3_VH,{kind:"tag",wash:m3_col(src),washA:0.45,seed}));
-  m3_dot(ctx,x+26,y,src,1-0.5*dim);wc_T(ctx,s,x+46,y+10,{w:f.f?f.w:(win>0.5?800:f.w),size:28,f:f.f,col:dim>0.01?mix(WC_DARK,[146,142,152],dim):WC_DARK});return w;}
+  const ta=o.ta==null?1:o.ta;if(ta>0.01)withA(ctx,ta,()=>{m3_dot(ctx,x+26,y,src,1-0.5*dim);wc_T(ctx,s,x+46,y+10,{w:f.f?f.w:(win>0.5?800:f.w),size:28,f:f.f,col:dim>0.01?mix(WC_DARK,[146,142,152],dim):WC_DARK});});return w;}
 // values laid out left to right from x0, wrapping at x1, a line every 62 px from y0 (the first line's middle)
 function m3_flow(keys,x0,x1,y0){const out={};let x=x0,y=y0;keys.forEach(k=>{const w=m3_vw(k);if(x>x0&&x+w>x1){x=x0;y+=62;}out[k]=[x,y];x+=w+14;});return out;}
 // the person's record: a sheet, its header, and its rows' names; rows: [[label, y], ...]
@@ -319,9 +311,11 @@ function m3_sheet(ctx,x,y,w,h,rows,o){o=o||{};wc_panel(ctx,x,y,w,h,{kind:"sheet"
 const M3_FIELDS=[["name",["legal","alum","hrn","ron"]],["birth date",["dob","dobHR"]],["mobile",["mob","mobHR"]],["email",["eStudy","eWork","eOld","eNew"]]];
 function m3_recLayout(x,y,w){const out={rows:[],at:{}};let yy=y+136;M3_FIELDS.forEach(([lab,keys])=>{const f=m3_flow(keys,x+230,x+w-26,yy);let last=yy;
     keys.forEach(k=>{out.at[k]=f[k];last=Math.max(last,f[k][1]);});out.rows.push([lab,yy+10]);yy=last+62+16;});out.h=yy-y+6;return out;}
-// a value flying from a record into its place on the sheet: it lifts, arcs over and lands as p goes 0 to 1
-function m3_fly(ctx,k,p,from,to,o){if(p<=0)return;const e=ease(clamp(p,0,1)),x=lerp(from[0],to[0],e),y=lerp(from[1],to[1],e)-Math.sin(e*Math.PI)*90;
-  withA(ctx,clamp(p*4,0,1),()=>m3_val(ctx,x,y,k,o));}
+// a value carried from a record to its place on the sheet as p goes 0 to 1: its source's dot travels over, then the value opens out
+// from it, so nothing wide sweeps over the rows already filled
+function m3_fly(ctx,k,p,from,to,o){if(p<=0)return;const src=M3_V[k][1],q=ease(clamp(p/0.55,0,1)),u=ease(clamp((p-0.5)/0.5,0,1));
+  if(u<0.99){const x=lerp(from[0]+12,to[0]+26,q),y=lerp(from[1],to[1],q)-Math.sin(q*Math.PI)*36;m3_dot(ctx,x,y,src,clamp(p*6,0,1)*(1-u));}
+  if(u>0.01){ctx.save();ctx.beginPath();ctx.rect(to[0]-6,to[1]-M3_VH/2-8,12+m3_vw(k)*u,M3_VH+16);ctx.clip();m3_val(ctx,to[0],to[1],k,o);ctx.restore();}}
 
 /* ---------- 3. one order, hidden in the SQL; the newest wins ---------- */
 // the model's SQL, as int_learner_timeline.sql has it (lines 166, 173 and 174): one order for every field; the comment wraps as an
@@ -342,7 +336,7 @@ function m3_code(ctx,o){o=o||{};const C=M3_CODE,x=C.x,y=C.y,cx=x+100;wc_panel(ct
 // HR's file, a sheet of paper stamped with the day it was sent; small, as it's sent
 function m3_file(ctx,x,y,s,label,a){if(a<=0.01)return;const c=wc_kept("hrfile",300,200,q=>{q.translate(10,10);wc_wash(q,[[0,6],[262,0],[268,160],[4,168]],[250,246,236],{kind:"paper",lw:1.6,seed:21});
     q.strokeStyle=rgba(WC_PENCIL,0.3);q.lineWidth=1.6;for(let i=0;i<4;i++){q.beginPath();q.moveTo(24,30+i*24);q.lineTo(230-i*20,28+i*24);q.stroke();}wc_wash(q,wc_rect(24,6,10,156),WC_ROLE.tutor,{kind:"ribbon",flat:true,seed:5});});
-  ctx.save();ctx.translate(x,y);ctx.scale(s,s);withA(ctx,a,()=>{ctx.drawImage(c,-140,-90);wc_T(ctx,label,8,58,{w:600,size:28,f:"mono",align:"center",col:WC_ROLEINK.tutor});});ctx.restore();}
+  ctx.save();ctx.translate(x,y);ctx.scale(s,s);withA(ctx,a,()=>{ctx.drawImage(c,-140,-90);if(label)wc_T(ctx,label,8,58,{w:600,size:28,f:"mono",align:"center",col:WC_ROLEINK.tutor});});ctx.restore();}
 // a transcript: what it would print, under "the newest wins"
 function m3_transcript(ctx,x,y,w,name,born){wc_panel(ctx,x,y,w,236,{kind:"card",seed:15});wc_T(ctx,"Transcript",x+32,y+56,{w:800,size:32,col:WC_DARK});
   wc_T(ctx,name,x+32,y+118,{w:800,size:34,col:WC_DARK});if(born)wc_T(ctx,born,x+32,y+164,{w:600,size:28,col:WC_INK});

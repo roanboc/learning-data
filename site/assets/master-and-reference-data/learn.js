@@ -216,13 +216,16 @@ const PIX={
       else if(win.length>1){let x=vx;win.forEach(j=>{const v=f.vals[j],S=V.src[v.src]||{};x+=tag(ctx,x,mid,v.note||v.v,{size:21,wash:S.c,maxW:(vmax-24)/win.length})+8;});}
       else{const v=f.vals[win[0]],S=V.src[v.src]||{},z=fit(ctx,v.v,vmax-200,26,700,null,17);tx(ctx,v.v,vx,mid+9,{size:z,w:700});tag(ctx,vx+tw(ctx,v.v,z,700)+16,mid,S.t,{size:21,wash:S.c,maxW:200});}
       mark(ctx,x0+cw-40,mid-2,30,r.ok,k);});},
-  /* film 3: the rule in words, part by part, beside the same rule as the model declares it */
-  rule(ctx,w,hh,st,Lb,k){const V=Lb.w,lw=650,n=V.slots.length,rh=(hh-150)/n;card(ctx,24,20,lw-24,hh-40,{kind:"sheet",seed:96});tx(ctx,V.title,50,72,{size:30,w:800,col:WC_DARK});
-    V.slots.forEach((sl,i)=>{const y=126+i*rh,p=st.pick[i];tx(ctx,sl.label,50,y,{size:24,w:700,col:WC_MUTED});
-      if(p==null)tx(ctx,"…",50,y+48,{size:28,col:WC_MUTED});else{const o=sl.opts[p],tw1=tag(ctx,50,y+40,o.t,{size:26,wash:o.ok?"ok":"no",washA:0.3,maxW:lw-130});mark(ctx,50+tw1+30,y+38,28,o.ok,k);}});
-    const cx=lw+24,cw2=w-cx-24;card(ctx,cx,20,cw2,hh-40,{kind:"card",seed:97});tx(ctx,V.model,cx+28,72,{size:24,w:700,col:WC_MUTED});
-    [V.field].concat(V.slots.map((sl,i)=>st.pick[i]==null?"  …":"  "+sl.opts[st.pick[i]].code)).forEach((l,i)=>{const bad=i&&st.pick[i-1]!=null&&!V.slots[i-1].opts[st.pick[i-1]].ok;
-      tx(ctx,l,cx+28,132+i*50,{size:fit(ctx,l,cw2-56,26,500,"mono",15),f:"mono",w:500,col:bad?NO:WC_DARK});});},
+  /* film 3: the rule in words, part by part, above the same rule as the model's YAML declares it */
+  rule(ctx,w,hh,st,Lb,k){const V=Lb.w,n=V.slots.length,hd=[].concat(V.field),ind=V.indent!=null?V.indent:"  ",th=104+n*62,lx=360;
+    card(ctx,20,20,w-40,th,{kind:"sheet",seed:96});tx(ctx,V.title,50,68,{size:30,w:800,col:WC_DARK});
+    V.slots.forEach((sl,i)=>{const y=126+i*62,p=st.pick[i];tx(ctx,sl.label,50,y+8,{size:fit(ctx,sl.label,lx-70,22,700,null,17),w:700,col:WC_MUTED});
+      if(p==null){tx(ctx,"…",lx,y+8,{size:28,col:WC_MUTED});return;}
+      const o=sl.opts[p],z=fit(ctx,o.t,w-lx-130,24,700,null,18),tw1=tag(ctx,lx,y,o.t,{size:z,wash:o.ok?"ok":"no",washA:0.3,maxW:w-lx-90});mark(ctx,lx+tw1+26,y-2,26,o.ok,k);});
+    const cy=th+40,L=hd.concat(V.slots.map((sl,i)=>ind+(st.pick[i]==null?"…":sl.opts[st.pick[i]].code))),lh=Math.min(40,(hh-cy-120)/Math.max(1,L.length-1));
+    card(ctx,20,cy,w-40,hh-cy-20,{kind:"card",seed:97});tx(ctx,V.model,50,cy+42,{size:fit(ctx,V.model,w-120,24,500,"mono",17),f:"mono",w:500,col:WC_MUTED});
+    L.forEach((l,i)=>{const j=i-hd.length,bad=j>=0&&st.pick[j]!=null&&!V.slots[j].opts[st.pick[j]].ok;
+      tx(ctx,l,50,cy+92+i*lh,{size:fit(ctx,l,w-120,24,500,"mono",15),f:"mono",w:500,col:bad?NO:WC_DARK});});},
   /* film 3: Linh's two names, each with the documents and screens given to it */
   names(ctx,w,hh,st,Lb,k){const V=Lb.w,B=V.buckets,pw=(w-60)/2;
     B.forEach(([key,label,hex,big],i)=>{const x=20+i*(pw+20);card(ctx,x,20,pw,hh-40,{kind:"sheet",seed:100+i});wash(ctx,x+20,36,pw-40,52,hex,0.4,110+i);
@@ -263,11 +266,11 @@ const PIX={
   /* film 5: the tutor's row on the role type list, and what each way of renaming it does */
   change(ctx,w,hh,st,Lb,k){const T=Lb.w.table,pk=st.pick;
     if(pk==="each"){const n=T.systems.length,rh=(hh-60)/n;T.systems.forEach(([s,t,c],i)=>{const y=30+i*rh+rh/2;tx(ctx,s,60,y+9,{size:26,w:700,col:WC_MUTED});tag(ctx,400,y,t,{size:26,wash:c,washA:0.3,maxW:560});cross(ctx,w-80,y-2,30,k);});return;}
-    const x0=40,W2=w-80,C4=[30,170,620,880],top=30,th=pk==="dated"?250:190;card(ctx,x0,top,W2,th,{kind:"sheet",seed:150});
+    const x0=40,W2=w-80,C4=[30,170,520,750],top=30,th=pk==="dated"?250:190;card(ctx,x0,top,W2,th,{kind:"sheet",seed:150});
     T.h.forEach((t,i)=>tx(ctx,t,x0+C4[i],top+46,{size:22,w:700,col:WC_MUTED}));pencil(ctx,[[x0+20,top+64],[x0+W2-20,top+64]],{a:0.3,lw:1.6,seed:4});
     const row=(y,v)=>v.forEach((t,i)=>tx(ctx,t,x0+C4[i],y,{size:i===1?26:24,w:i===1?700:500,f:i===1?null:"mono",col:WC_DARK}));
-    if(pk==="overwrite"){const y=top+140,ow=tw(ctx,T.old,20,600);tx(ctx,T.old,x0+C4[1],y-38,{size:20,w:600,col:WC_MUTED});pencil(ctx,[[x0+C4[1]-4,y-45],[x0+C4[1]+(ow+8)*k,y-45]],{col:NO,lw:2.8,a:0.95});row(y,["TUT",T.neu,"—","—"]);}
-    else{row(top+116,["TUT",T.old,T.since,T.until]);withA(ctx,k,()=>{wash(ctx,x0+C4[1]-12,top+152,430,46,"ok",0.25,151);row(top+186,["TUT",T.neu,T.from,"—"]);});}
+    if(pk==="overwrite"){const y=top+140,ow=tw(ctx,T.old,24,600);tx(ctx,T.old,x0+C4[1],y-40,{size:24,w:600,col:WC_MUTED});pencil(ctx,[[x0+C4[1]-4,y-48],[x0+C4[1]+(ow+8)*k,y-48]],{col:NO,lw:2.8,a:0.95});row(y,[T.code,T.neu,"—","—"]);}
+    else{row(top+116,[T.code,T.old,T.since,T.until]);withA(ctx,k,()=>{wash(ctx,x0+C4[1]-12,top+152,330,46,"ok",0.25,151);row(top+186,[T.code,T.neu,T.from,"—"]);});}
     const by=top+th+56,rw=tag(ctx,x0,by,T.report+": "+(pk==="overwrite"?T.neu:T.old),{size:26});mark(ctx,x0+rw+30,by-2,30,pk!=="overwrite",k);
     if(pk==="dated"){const aw=tag(ctx,x0,by+72,T.approved,{size:26,wash:"ok",washA:0.3});tick(ctx,x0+aw+30,by+70,30,k);}},
   /* film 6: Linh, two of her records, the appeal's email, and her wish where it's been put */

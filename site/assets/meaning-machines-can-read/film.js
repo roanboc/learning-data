@@ -418,8 +418,8 @@ const NARR={
 "guesses":{"name":"Genie guesses","lead":1.0,"tail":1.0,"vo":[
  {"id":"ask","gap":0.8,"text":"At the university, the Head of School asks Genie: which learners are one microcredential away from a graduate certificate?"},
  {"id":"finds","gap":0.8,"text":"Genie finds the tables. It finds a column called is_micro, and another called stack_ok.","say":"Genie finds the tables. It finds a column called is micro, and another called stack okay."},
- {"id":"wrong","gap":0.8,"text":"But the stacking rules live in a policy document that no tool can read. Genie guesses, and it's wrong."},
- {"id":"read","gap":0.8,"text":"An AI assistant answers from what it can read. Meaning kept only in documents is out of its reach."}]},
+ {"id":"wrong","gap":0.8,"text":"It reads the stacking rules too: in a policy document, and on an old web page. They don't agree, so Genie guesses, and it's wrong."},
+ {"id":"read","gap":0.8,"text":"An assistant answers from what it reads. Meaning outside a managed glossary, with no owner and no version, can contradict itself, or be wrong."}]},
 "four":{"name":"Four ways to write meaning down","lead":1.0,"tail":1.0,"vo":[
  {"id":"gloss","gap":0.8,"text":"There are four common ways to write meaning down, and they stack. A glossary: words and their definitions, for people."},
  {"id":"tax","gap":0.8,"text":"A taxonomy: kinds of things in a hierarchy, like Linnaeus's."},
@@ -430,6 +430,12 @@ const NARR={
  {"id":"rules","gap":0.8,"text":"In the ontology, the rules are written as statements. A microcredential is a kind of credential. A graduate certificate accepts up to four approved microcredentials towards its credit."},
  {"id":"graph","gap":0.8,"text":"Connect the university's data to these statements, and it becomes a knowledge graph: learners, credentials and courses, linked by what they mean."},
  {"id":"aristotle","gap":0.8,"text":"It's Aristotle's recipe made formal: the kind of thing, and what sets it apart, in a form a machine can use."}]},
+"model":{"name":"One map, many views","lead":1.0,"tail":1.0,"vo":[
+ {"id":"domain","gap":0.8,"text":"Where does all this meaning live? In Noor's architecture map, each data domain lists its entities: learners, credentials, certificates."},
+ {"id":"once","gap":0.8,"text":"Each concept is written once: its definition, how it relates to the others, and the rules it follows."},
+ {"id":"views","gap":0.8,"text":"The glossary shows the definitions, for people. The conceptual model shows how the concepts relate. The logical model adds how many, and the keys."},
+ {"id":"owl","gap":0.8,"text":"When a machine has to reason, the ontology is extracted from the same map, in OWL, the Web Ontology Language. Rules that check the data become tests.","say":"When a machine has to reason, the ontology is extracted from the same map, in owl, the Web Ontology Language. Rules that check the data become tests."},
+ {"id":"same","gap":0.8,"text":"They don't compete: they come from one map, so they agree. Change the map, and the views follow."}]},
 "semantic":{"name":"The semantic layer","lead":1.0,"tail":1.0,"vo":[
  {"id":"once","gap":0.8,"text":"In the semantic layer, credentials awarded this year is defined once: what's counted, what's left out, which date, and at what grain."},
  {"id":"tools","gap":0.8,"text":"Dashboards, spreadsheets and Genie all ask it, instead of each writing its own version."},
@@ -440,27 +446,29 @@ const NARR={
  {"id":"three","gap":0.8,"text":"Even microcredential has official definitions: from Australia, from the European Union, and from UNESCO. They don't quite match."},
  {"id":"choose","gap":0.8,"text":"So choose deliberately. Check, adopt, extend and record, as in A Sharper Sketch, at every layer."}]},
 "again":{"name":"Genie, again","lead":1.0,"tail":1.0,"vo":[
- {"id":"asks","gap":0.8,"text":"The Head of School asks again. This time, Genie asks back: approved for stacking, or all microcredentials?"},
+ {"id":"page","gap":0.8,"text":"This time, the meaning comes from one source of truth, the glossary. In Databricks, its definitions now sit on each table's page, next to the data."},
+ {"id":"asks","gap":0.8,"text":"The Head of School asks again. Genie reads the definitions, and asks back: approved for stacking, or all microcredentials?"},
  {"id":"answer","gap":0.8,"text":"Then it answers, and shows the definition it used."},
- {"id":"evid","gap":0.8,"text":"Studies have found that grounding an assistant in explicit meaning makes its answers measurably more accurate. The difference is the meaning it can read."}]},
+ {"id":"evid","gap":0.8,"text":"Studies have found that grounding an assistant in explicit meaning makes its answers measurably more accurate. The difference is meaning it can read, and trust."}]},
 "end":{"name":"Pull back","lead":1.0,"tail":1.0,"vo":[
- {"id":"tri","gap":0.8,"text":"The triangle from the start of the series returns: the word, in English and in Spanish; the idea, now written in the ontology; and the data it points to."},
+ {"id":"tri","gap":0.8,"text":"The triangle from the start of the series returns: the word, now in the glossary; the idea, now written in the ontology; and the data it points to."},
  {"id":"next","gap":0.8,"text":"Next: keeping all of it true, while everything changes."}]}
 };
 
-const VODUR={"before/linn": 8.257, "before/wilkins": 7.254, "before/night": 7.888, "before/icd": 8.168, "before/lesson": 6.433, "guesses/ask": 7.493, "guesses/finds": 5.611, "guesses/wrong": 6.161, "guesses/read": 6.071, "four/gloss": 7.036, "four/tax": 3.827, "four/onto": 6.531, "four/sem": 4.139, "four/stack": 3.102, "ontology/rules": 12.123, "ontology/graph": 8.783, "ontology/aristotle": 6.67, "semantic/once": 8.112, "semantic/tools": 5.074, "semantic/open": 4.877, "standards/blank": 8.015, "standards/creds": 5.131, "standards/three": 8.093, "standards/choose": 6.152, "again/asks": 6.747, "again/answer": 2.743, "again/evid": 8.995, "end/tri": 9.896, "end/next": 3.211};
+const VODUR={"before/linn": 8.257, "before/wilkins": 7.254, "before/night": 7.888, "before/icd": 8.168, "before/lesson": 6.433, "guesses/ask": 7.493, "guesses/finds": 5.611, "guesses/wrong": 7.834, "guesses/read": 9.06, "four/gloss": 7.036, "four/tax": 3.827, "four/onto": 6.531, "four/sem": 4.139, "four/stack": 3.102, "ontology/rules": 12.123, "ontology/graph": 8.783, "ontology/aristotle": 6.67, "model/domain": 8.119, "model/once": 6.095, "model/views": 9.343, "model/owl": 9.832, "model/same": 4.948, "semantic/once": 8.112, "semantic/tools": 5.074, "semantic/open": 4.877, "standards/blank": 8.015, "standards/creds": 5.131, "standards/three": 8.093, "standards/choose": 6.152, "again/page": 9.106, "again/asks": 7.821, "again/answer": 2.743, "again/evid": 9.495, "end/tri": 9.321, "end/next": 3.211};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
    Three wordless moments: the title, the four floors of meaning standing together, and the ending. */
 const BREATH={
 "before":{"hold":{"wilkins":0.5,"icd":0.5,"lesson":0.6},"breathe":3.6},
-"guesses":{"hold":{"finds":0.4,"wrong":0.8,"read":0.3}},
+"guesses":{"hold":{"finds":0.4,"wrong":1.1,"read":0.6}},
 "four":{"hold":{"gloss":0.3,"onto":0.4},"breathe":3.0},
 "ontology":{"hold":{"rules":0.8,"graph":0.8,"aristotle":0.4}},
+"model":{"hold":{"domain":0.6,"once":0.9,"views":0.8,"owl":0.9,"same":0.6}},
 "semantic":{"hold":{"once":0.6,"tools":0.4}},
 "standards":{"hold":{"blank":0.5,"creds":0.4,"three":0.8}},
-"again":{"hold":{"asks":0.4,"answer":0.6}},
+"again":{"hold":{"page":0.8,"asks":0.5,"answer":0.6}},
 "end":{"hold":{"tri":0.8},"breathe":4.2}
 };
 
@@ -1312,10 +1320,11 @@ function mm_treeTags(ctx,t,P,labA,hi){const off={1:[-120,-8],2:[-10,40],3:[40,48
 // glossary at the bottom, the semantic layer at the top. o.a, o.hi, o.qa, o.ca: per floor, 0..1 (visible, highlighted, question shown, content shown)
 const MM_FL={x:160,w:1600,h:140,y0:650,gap:170};
 const mm_fy=(k,g)=>(g||MM_FL).y0-k*(g||MM_FL).gap;
-function mm_pill(ctx,x,y,s,col,o){o=o||{};const sz=o.size||18,w=tw(ctx,s,sz,700)+(o.pad||30),h=sz+(o.ph||14);const a=o.a==null?1:o.a;if(a<=0.01)return{x,y,w,h};
+// measured at the size its words are really drawn (the phone layer raises them in the film), so they stay inside it
+function mm_pill(ctx,x,y,s,col,o){o=o||{};const sz=o.size||18,ds=phSz(ctx,sz),w=tw(ctx,s,ds,700)+(o.pad||30),h=ds+(o.ph||14);const a=o.a==null?1:o.a;if(a<=0.01)return{x,y,w,h};
   withA(ctx,a,()=>{if(o.hi>0)glow(ctx,x,y,w*0.8,o.hiCol||col,0.4*o.hi);glass(ctx,x-w/2,y-h/2,w,h,o.r==null?h/2:o.r,o.hiCol&&o.hi>0.5?o.hiCol:col,{glow:8+12*(o.hi||0),ea:0.75+0.25*(o.hi||0),fill:o.fill||"rgba(7,12,24,0.95)"});
     if(o.dash){ctx.save();ctx.setLineDash([6,6]);ctx.strokeStyle=rgba(col,0.8);ctx.lineWidth=1.6;rr(ctx,x-w/2,y-h/2,w,h,h/2);ctx.stroke();ctx.restore();}
-    T(ctx,s,x,y+sz*0.36,{w:700,size:sz,align:"center",color:o.tc||rgba(col,1)});});return{x,y,w,h};}
+    T(ctx,s,x,y+ds*0.36,{w:700,size:sz,align:"center",color:o.tc||rgba(col,1)});});return{x,y,w,h};}
 function mm_glossC(ctx,x,y,h,t,p,hi){const W_=[["credential","a trusted, checkable claim of learning"],["microcredential","a small credential, with its learning assessed"],["stacking","counting credentials towards a bigger one"]];
   W_.forEach(([wd,df],i)=>{const cx=x+i*305,cy=y+16,cw=270,ch=h-32,on=i===1?hi:0;withA(ctx,clamp(p*3-i,0,1),()=>{if(on>0)glow(ctx,cx+cw/2,cy+ch/2,190,MM_GLO,0.35*on);
     glass(ctx,cx,cy,cw,ch,12,MM_GLO,{glow:8+12*on,ea:0.6+0.4*on,fill:"rgba(24,19,8,0.94)"});T(ctx,wd,cx+18,cy+34,{w:800,size:22,color:rgba(MM_GLO,1)});wrapT(ctx,df,cx+18,cy+62,cw-30,{w:600,size:16,lh:20,color:rgba(PARCH,0.85)});});});
@@ -1331,7 +1340,7 @@ function mm_link(ctx,A,B,label,col,o){o=o||{};const a=o.a==null?1:o.a,p=o.p==nul
   const cut=b=>Math.min(Math.abs(ux)>1e-6?b.w/2/Math.abs(ux):1e9,Math.abs(uy)>1e-6?b.h/2/Math.abs(uy):1e9)+6;const x0=A.x+ux*cut(A),y0=A.y+uy*cut(A),x1=B.x-ux*cut(B),y1=B.y-uy*cut(B);
   arrowTo(ctx,x0,y0,x1,y1,col,a,{p,dash:o.dash,head:o.head||12,lw:o.lw||2.2,nohead:o.nohead});
   if(label&&p>0.6)withA(ctx,a*fin(p,0.6,0.4),()=>{const mx=(x0+x1)/2,my=(y0+y1)/2,off=o.off==null?16:o.off,nx=-uy,ny=ux,s=o.size||16,lx=mx+nx*off*(ny>0?-1:1),ly=my+ny*off*(ny>0?-1:1);
-    const w=tw(ctx,label,s,700,o.f)+14;ctx.fillStyle="rgba(7,12,24,0.9)";rr(ctx,lx-w/2,ly-s*0.8,w,s*1.3,6);ctx.fill();T(ctx,label,lx,ly+s*0.3,{w:700,size:s,align:"center",f:o.f,color:rgba(o.lc||col,1)});});}
+    const ds=phSz(ctx,s),w=tw(ctx,label,ds,700,o.f)+14;ctx.fillStyle="rgba(7,12,24,0.9)";rr(ctx,lx-w/2,ly-ds*0.8,w,ds*1.3,6);ctx.fill();T(ctx,label,lx,ly+ds*0.3,{w:700,size:s,align:"center",f:o.f,color:rgba(o.lc||col,1)});});}
 function mm_ontoC(ctx,x,y,h,t,p,hi){const q=k=>clamp(p*4-k,0,1),yy=y+46;
   const Ln=mm_pill(ctx,x+100,yy,"Learner",MM_ONT,{size:18,a:q(0),r:10}),Mc=mm_pill(ctx,x+440,yy,"Microcredential",MM_ONT,{size:18,a:q(0.5),r:10,hi}),Gc=mm_pill(ctx,x+770,yy,"Graduate certificate",MM_ONT,{size:17,a:q(1),r:10});
   mm_link(ctx,Ln,Mc,"holds",MM_ONT,{p:q(1.4),off:18,size:15});mm_link(ctx,Mc,Gc,"counts towards",MM_ONT,{p:q(1.9),off:18,size:15});
@@ -1365,16 +1374,38 @@ function mm_thread(ctx,an,p,t,col){if(p<=0)return;const pts=an.filter(Boolean);f
 function mm_genie(ctx,x,y,t,o){o=o||{};withA(ctx,o.a==null?1:o.a,()=>{orb(ctx,x,y,o.r||34,t);chip(ctx,x,y+118,"databricks","Genie",o.sub||"answers in plain words",{align:"center",edge:MM_GEN});});}
 // where each column of a sketch3 table sits, measured the same way table() measures it
 function mm_cols(ctx,cols,rows){let x=0;const cs=Math.max(16,phMin(ctx));return cols.map((c,i)=>{const w=Math.max(tw(ctx,c,cs,500,"mono"),...rows.map(r=>tw(ctx,r[i],cs,500,"mono")))+30;const o={x,w};x+=w;return o;});}
-// the policy document: the rules are there, but in a file no tool reads
-function mm_doc(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,grey=o.grey||0;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.6)";ctx.shadowBlur=24;ctx.fillStyle=grey>0.5?"#9aa0aa":"#eef0f4";rr(ctx,x,y,w,h,8);ctx.fill();ctx.restore();
-  ctx.fillStyle="rgba(150,158,172,"+(0.55*grey)+")";rr(ctx,x,y,w,h,8);ctx.fill();ctx.fillStyle="#d9453a";rr(ctx,x+w-66,y+16,50,24,5);ctx.fill();T(ctx,"PDF",x+w-41,y+34,{w:800,size:14,align:"center",color:"#fff"});
-  const ink=grey>0.5?"rgba(60,64,72,0.75)":"rgba(30,34,44,0.95)";T(ctx,o.title||"Stacking policy",x+24,y+40,{w:800,size:22,color:ink});T(ctx,o.sub||"Academic Board · v4",x+24,y+64,{f:"mono",w:500,size:14,color:ink});
-  const bar=(yy,f)=>{ctx.fillStyle=grey>0.5?"rgba(70,74,84,0.3)":"rgba(40,44,54,0.25)";ctx.fillRect(x+24,yy,(w-48)*f,9);};
-  for(let i=0;i<2;i++)bar(y+96+i*24,0.6+0.4*hash(i,4));
-  // the two rules the question needs: what four approved microcredentials complete, and the limit on how many count
-  let ry=y+160;(o.rules||["4.1 Each approved microcredential is worth 10 credits; four complete the certificate's 40.","4.2 A graduate certificate accepts up to four approved microcredentials towards its credit."]).forEach(r=>{ry+=wrapT(ctx,r,x+24,ry,w-48,{w:700,size:17,lh:22,color:ink}).length*22+12;});
-  for(let i=0;i<6;i++)bar(y+h-146+i*24,0.5+0.5*hash(i,9));});}
-function mm_eyeOff(ctx,x,y,s,col,a){withA(ctx,a,()=>{ctx.save();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x-s,y);ctx.quadraticCurveTo(x,y-s*0.8,x+s,y);ctx.quadraticCurveTo(x,y+s*0.8,x-s,y);ctx.stroke();ctx.beginPath();ctx.arc(x,y,s*0.28,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(x-s*0.9,y+s*0.7);ctx.lineTo(x+s*0.9,y-s*0.7);ctx.stroke();ctx.restore();});}
+// a page Genie reads: the stacking policy as a PDF, or an old web page. Its title and lines are texture; the scene draws the one rule
+// each says, at a size that reads, in the slot from y+150 to y+198. o.kind ("pdf" or "web"), o.title, o.sub, o.url, o.seed, o.a
+function mm_page(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.6)";ctx.shadowBlur=24;ctx.fillStyle="#eef0f4";rr(ctx,x,y,w,h,8);ctx.fill();ctx.restore();
+  const ink="rgba(30,34,44,0.95)",sd=o.seed||0,bar=(yy,f)=>{ctx.fillStyle="rgba(40,44,54,0.22)";ctx.fillRect(x+20,yy,(w-40)*f,8);};let ty=y+44;
+  if(o.kind==="web"){ctx.fillStyle="#d9dde4";rr(ctx,x,y,w,34,8);ctx.fill();ctx.fillRect(x,y+20,w,14);["#e0675c","#e8b14a","#5fbf6a"].forEach((cl,i)=>{ctx.fillStyle=cl;ctx.beginPath();ctx.arc(x+16+i*14,y+17,4.5,0,TAU);ctx.fill();});
+    ctx.fillStyle="#f7f8fa";rr(ctx,x+60,y+7,w-72,20,10);ctx.fill();T(ctx,o.url||"",x+70,y+22,{w:500,size:12,color:"rgba(70,76,88,0.9)"});ty=y+64;}
+  else{ctx.fillStyle="#d9453a";rr(ctx,x+w-62,y+14,46,22,5);ctx.fill();T(ctx,"PDF",x+w-39,y+30,{w:800,size:13,align:"center",color:"#fff"});}
+  T(ctx,o.title||"",x+20,ty,{w:800,size:20,color:ink});T(ctx,o.sub||"",x+20,ty+22,{f:"mono",w:500,size:13,color:"rgba(70,76,88,0.9)"});
+  [0,1].forEach(i=>bar(ty+44+i*18,0.55+0.4*hash(i+sd,4)));
+  for(let yy=y+212;yy<y+h-16;yy+=20)bar(yy,0.45+0.5*hash(yy+sd,9));});}
+
+/* ---------- the glossary, and the platform that carries it ---------- */
+// the glossary's entry for a term, its source of truth: the term, its definition (typed as defP goes from 0 to 1), its owner and version
+function mm_gloss(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,hi=o.hi||0;if(a<=0.01)return;withA(ctx,a,()=>{if(hi>0)glow(ctx,x+w/2,y+h/2,w*0.55,MM_GLO,0.16*hi);
+  glass(ctx,x,y,w,h,18,MM_GLO,{glow:14+10*hi,ea:0.85,fill:"rgba(20,16,8,0.95)"});led(ctx,x+14,y+24,5,48,MM_GLO,0.9);
+  T(ctx,"Glossary",x+34,y+56,{w:800,size:30,color:rgba(MM_GLO,1)});withA(ctx,o.srcA==null?1:o.srcA,()=>T(ctx,"source of truth",x+w-28,y+56,{w:600,size:28,align:"right",color:rgba(SOFT,1)}));
+  ctx.strokeStyle=rgba(MM_GLO,0.3);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x+34,y+78);ctx.lineTo(x+w-28,y+78);ctx.stroke();
+  withA(ctx,o.termA==null?1:o.termA,()=>T(ctx,o.term,x+34,y+124,{w:800,size:28,color:rgba(INK,1)}));
+  if(o.defP>0)wrapT(ctx,typeOn(o.def,o.defP),x+34,y+168,w-62,{w:600,size:28,lh:37,color:rgba(PARCH,0.95)});
+  withA(ctx,o.ownA==null?1:o.ownA,()=>T(ctx,o.owner,x+34,y+h-30,{w:600,size:28,color:rgba(SOFT,1)}));});}
+// a table's page in Databricks' catalog: its name, then each column with its description. A description the glossary supplies is
+// marked "glossary" in the glossary's gold (o.gl: how far those marks are shown); o.rowA: each row's alpha; o.hiRow lights one row
+function mm_ucpage(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const TB=[150,225,255];withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,TB,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.96)"});
+  const lw=logo(ctx,"databricks",x+26,y+24,32);T(ctx,"Catalog · university › records",x+26+lw+14,y+50,{w:600,size:28,color:rgba(SOFT,1)});
+  T(ctx,o.table,x+26,y+116,{f:"mono",w:500,size:34,color:rgba(TB,1)});T(ctx,"table",x+w-26,y+116,{w:600,size:28,align:"right",color:rgba(SOFT,1)});
+  ctx.strokeStyle=rgba(TB,0.25);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x+26,y+140);ctx.lineTo(x+w-26,y+140);ctx.stroke();
+  T(ctx,"column",x+26,y+186,{w:600,size:28,color:rgba(SOFT,1)});T(ctx,"description",x+236,y+186,{w:600,size:28,color:rgba(SOFT,1)});
+  const gw=tw(ctx,"glossary",phSz(ctx,28),700)+26;
+  o.rows.forEach(([col,desc,fromG],i)=>{const yy=y+248+i*62,ra=o.rowA?o.rowA[i]:1,hi=o.hiRow===i?(o.hi||0):0;withA(ctx,ra,()=>{
+    if(hi>0){ctx.fillStyle=rgba(MM_GLO,0.12*hi);rr(ctx,x+12,yy-38,w-24,54,10);ctx.fill();ctx.strokeStyle=rgba(MM_GLO,0.7*hi);ctx.lineWidth=2;rr(ctx,x+12,yy-38,w-24,54,10);ctx.stroke();}
+    T(ctx,col,x+26,yy,{f:"mono",w:500,size:28,color:rgba(REF,1)});T(ctx,desc,x+236,yy,{w:600,size:28,color:rgba(INK,0.95)});
+    if(fromG)withA(ctx,o.gl==null?1:o.gl,()=>tag(ctx,x+w-26-gw,yy-10,"glossary",MM_GLO,{size:28}));});});});}
 
 /* ---------- the semantic layer's metric, and the tools that ask it ---------- */
 const MM_MROWS=[["measure","count of credentials"],["left out","revoked credentials"],["date","awarded on · this academic year"],["grain","one row per credential awarded"]];
@@ -1442,6 +1473,92 @@ function mm_kg(ctx,t,o){o=o||{};const P=o.p||{},q=k=>P[k]==null?1:P[k],aA=o.aish
   if(aA>0)withA(ctx,aA,()=>{tag(ctx,330,364,"3 approved: one more completes it",GOOD,{align:"center",size:18});});
   return{L,M,C,sch};}
 
+/* ---------- one map, many views ----------
+   Noor's architecture map holds each concept once: its definition (owned by the business), how it relates to the others, and its
+   rules. The views are drawn from it, one way, each in its colour: the glossary (gold, for people), the conceptual model (the map's
+   own white: relationships with names, and no counts), the logical model (A Sharper Sketch's colour: how many, and the keys), the
+   ontology in OWL (violet, for machines that reason) and the tests (green, checks on the data). The map's other elements, a process
+   and an application, have ArchiMate's icons. Sizes are 28 or more, so the phone layer has nothing to raise, and every box is
+   measured at the size its words are drawn. */
+const MM_MAP=[236,243,255],MM_DM=SK,MM_TST=GOOD,MM_ELEM=[200,205,225];
+const MM_CON={name:"Microcredential",id:"CR-104",def:"a small credential, with its learning assessed",owner:"owner: Short courses",
+  rel:[["a kind of","Credential"],["counts towards","Graduate certificate"]],rule:"a graduate certificate accepts up to four approved"};
+// the views, top to bottom: name, what it's for, colour, and the height of its row
+const MM_VW=[["Glossary","for people",MM_GLO,112],["Conceptual model","how concepts relate",MM_MAP,112],["Logical model","how many, and keys",MM_DM,160],
+  ["Ontology · OWL","for machines",MM_ONT,112],["Tests","checks on the data",MM_TST,112]];
+// a panel of glass in its colour: its name, a line under it, and a note on the right of the name (o.sub, o.right, each with its alpha)
+function mm_panel(ctx,R,name,col,o){o=o||{};const a=o.a==null?1:o.a,lit=o.lit==null?1:o.lit,hi=o.hi||0;if(a<=0.01)return;const{x,y,w,h}=R;
+  withA(ctx,a,()=>{if(hi>0)glow(ctx,x+w/2,y+h/2,w*0.5,col,0.14*hi);
+    glass(ctx,x,y,w,h,20,col,{glow:(10+12*hi)*lit,ea:0.3+0.5*lit+0.2*hi,fill:"rgba(7,12,24,0.93)"});led(ctx,x+16,y+26,5,58,col,0.35+0.55*lit);
+    T(ctx,name,x+38,y+58,{w:800,size:34,color:rgba(col,0.5+0.5*lit)});
+    if(o.sub)withA(ctx,o.subA==null?1:o.subA,()=>T(ctx,o.sub,x+38,y+104,{w:600,size:28,color:rgba(SOFT,1)}));
+    if(o.right)withA(ctx,o.rightA==null?1:o.rightA,()=>T(ctx,o.right,x+w-30,y+58,{w:600,size:28,align:"right",color:rgba(SOFT,1)}));});}
+// a data domain on the map: a dashed group, with its name
+function mm_zone(ctx,R,name,a,lit){if(a<=0.01)return;withA(ctx,a,()=>{ctx.fillStyle=rgba(MM_MAP,0.025+0.035*lit);rr(ctx,R.x,R.y,R.w,R.h,16);ctx.fill();
+  ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(MM_MAP,0.3+0.4*lit);ctx.lineWidth=2;rr(ctx,R.x,R.y,R.w,R.h,16);ctx.stroke();ctx.restore();
+  T(ctx,name,R.x+22,R.y+42,{w:700,size:28,color:rgba(SOFT,0.75+0.25*lit)});});}
+// one of the map's other elements, with ArchiMate's icon: a business process (an arrow) or an application component
+function mm_elem(ctx,R,name,kind,a){if(a<=0.01)return;const col=MM_ELEM;withA(ctx,a,()=>{glass(ctx,R.x,R.y,R.w,R.h,kind==="process"?24:10,col,{glow:6,ea:0.5,fill:"rgba(7,12,24,0.9)"});
+  T(ctx,name,R.x+26,R.y+R.h/2+10,{w:700,size:28,color:rgba(col,1)});
+  const ix=R.x+R.w-50,iy=R.y+R.h/2;ctx.save();ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=2;ctx.lineJoin="round";ctx.beginPath();
+  if(kind==="process"){ctx.moveTo(ix-20,iy-6);ctx.lineTo(ix+4,iy-6);ctx.lineTo(ix+4,iy-14);ctx.lineTo(ix+20,iy);ctx.lineTo(ix+4,iy+14);ctx.lineTo(ix+4,iy+6);ctx.lineTo(ix-20,iy+6);ctx.closePath();ctx.stroke();}
+  else{ctx.rect(ix-10,iy-15,28,30);ctx.stroke();ctx.fillStyle="rgba(7,12,24,1)";[iy-10,iy+3].forEach(y=>{ctx.fillRect(ix-17,y,14,8);ctx.strokeRect(ix-17,y,14,8);});}
+  ctx.restore();});}
+// the concept, written once in the map: its name and id, then its definition (with its owner), its relationships and its rules.
+// o.s: how far each part is shown; o.hi: each part's highlight; o.lit; o.v2: its new version's mark. Returns where the parts sit
+function mm_concept(ctx,R,o){o=o||{};const a=o.a==null?1:o.a,S=o.s||[1,1,1],HI=o.hi||[0,0,0],x=R.x+30,mw=R.w-60,y=R.y,col=MM_MAP,
+  P=[[y+92,170],[y+268,130],[y+404,130]];if(a<=0.01)return P;
+  withA(ctx,a,()=>{glass(ctx,R.x,y,R.w,R.h,20,col,{glow:14+12*(o.lit||0),ea:0.75+0.2*(o.lit||0),fill:"rgba(7,12,24,0.96)"});
+    T(ctx,MM_CON.name,x,y+56,{w:800,size:34,color:rgba(col,1)});T(ctx,"id "+MM_CON.id,R.x+R.w-30,y+56,{f:"mono",w:500,size:28,align:"right",color:rgba(SOFT,1)});
+    ctx.strokeStyle=rgba(col,0.25);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x,y+80);ctx.lineTo(R.x+R.w-30,y+80);ctx.stroke();
+    P.forEach(([by,bh],k)=>{const q=S[k],h=HI[k];if(q<=0.01)return;withA(ctx,q,()=>{if(h>0){glow(ctx,R.x+R.w/2,by+bh/2,R.w*0.45,col,0.12*h);ctx.fillStyle=rgba(col,0.09*h);rr(ctx,R.x+12,by+4,R.w-24,bh-8,12);ctx.fill();}
+      T(ctx,["definition","relationships","rules"][k],x,by+40,{f:"mono",w:500,size:28,color:rgba(mix(SOFT,col,h),1)});
+      if(k===0){wrapT(ctx,MM_CON.def,x,by+80,mw,{w:600,size:28,lh:38,color:rgba(INK,0.95)});T(ctx,MM_CON.owner,x,by+156,{w:600,size:28,color:rgba(SOFT,1)});}
+      if(k===1)MM_CON.rel.forEach(([p,n],i)=>{const yy=by+80+i*38,pw=tw(ctx,p+" ",phSz(ctx,28),600);T(ctx,p+" ",x,yy,{w:600,size:28,color:rgba(INK,0.9)});T(ctx,n,x+pw,yy,{w:800,size:28,color:rgba(col,1)});});
+      if(k===2)wrapT(ctx,MM_CON.rule,x,by+80,mw,{w:600,size:28,lh:38,color:rgba(INK,0.95)});});});
+    if(o.v2>0)withA(ctx,o.v2,()=>tag(ctx,R.x+R.w-56-tw(ctx,"version 2",phSz(ctx,28),700),y,"version 2",col,{size:28}));});return P;}
+// an entity of the logical model, at the size its words are drawn (sz, 28 unless given): its name, then its attributes. A key that
+// identifies it has a filled dot, a key that points to another entity a ring; kh lights the keys. x is its left edge, cy its middle
+function mm_lent(ctx,x,cy,name,attrs,col,a,kh,measure,sz){sz=sz||28;const k=sz/28,ds=phSz(ctx,sz),w=Math.max(tw(ctx,name,ds,800)+44*k,...attrs.map(r=>tw(ctx,r[0],ds,500,"mono")+72*k)),h=(58+attrs.length*40)*k+10,y=cy-h/2,B={x:x+w/2,y:cy,w,h};
+  if(measure||a<=0.01)return B;withA(ctx,a,()=>{ctx.fillStyle="rgba(8,14,30,0.94)";rr(ctx,x,y,w,h,10);ctx.fill();ctx.save();ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=12;ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=2.4;rr(ctx,x,y,w,h,10);ctx.stroke();ctx.restore();
+    T(ctx,name,x+22*k,y+40*k,{w:800,size:sz,color:rgba(col,1)});ctx.strokeStyle=rgba(col,0.35);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x+12,y+58*k);ctx.lineTo(x+w-12,y+58*k);ctx.stroke();
+    attrs.forEach(([s,kd],i)=>{const yy=y+(90+i*40)*k,hk=kh||0;if(hk>0){ctx.fillStyle=rgba(REF,0.18*hk);rr(ctx,x+8,yy-29*k,w-16,38*k,8);ctx.fill();}
+      ctx.fillStyle=rgba(REF,1);ctx.strokeStyle=rgba(REF,1);ctx.lineWidth=2;ctx.beginPath();ctx.arc(x+28*k,yy-9*k,6*k,0,TAU);kd==="pk"?ctx.fill():ctx.stroke();
+      T(ctx,s,x+48*k,yy,{f:"mono",w:500,size:sz,color:rgba(REF,1)});});});return B;}
+// what each view shows of the concept, in its row from x to the row's right: P, how far each part is drawn
+const MM_VEX=[
+  // the glossary: the word, and its definition, for people
+  (ctx,x,R,P)=>{const y=R.y+R.h/2;withA(ctx,P[0],()=>T(ctx,"microcredential",x,y-6,{w:800,size:28,color:rgba(MM_GLO,1)}));if(P[1]>0)T(ctx,typeOn(MM_CON.def,P[1]),x,y+32,{w:600,size:28,color:rgba(PARCH,0.95)});},
+  // the conceptual model: the concepts and how they relate, by name (ArchiMate's specialization), with no counts
+  (ctx,x,R,P)=>{const y=R.y+R.h/2,F="rgba(16,22,40,0.96)",wA=tw(ctx,"Microcredential",phSz(ctx,28),700)+30,wB=tw(ctx,"Credential",phSz(ctx,28),700)+30;
+    const A=mm_pill(ctx,x+wA/2,y,"Microcredential",MM_MAP,{size:28,r:12,a:P[0],fill:F}),B=mm_pill(ctx,R.x+R.w-30-wB/2,y,"Credential",MM_MAP,{size:28,r:12,a:P[0],fill:F});
+    const x0=A.x+A.w/2+4,x1=B.x-B.w/2-4,lw=tw(ctx,"a kind of",phSz(ctx,28),700),lx=(x0+x1)/2,l0=lx-lw/2-12,l1=lx+lw/2+12;
+    if(P[1]>0){arrowTo(ctx,x0,y,lerp(x0,l0,clamp(P[1]*2,0,1)),y,MM_MAP,0.9,{nohead:true,lw:2.4});isa(ctx,l1,y,x1,y,clamp(P[1]*2-1,0,1),MM_MAP,{fill:"#0b1222",s:16,lw:2.4});}
+    withA(ctx,P[2],()=>T(ctx,"a kind of",lx,y+10,{w:700,size:28,align:"center",color:rgba(MM_MAP,1)}));},
+  // the logical model: how many, and the keys. A certificate counts many microcredentials; each points to one, by its cert_id
+  (ctx,x,R,P)=>{const cy=R.y+R.h/2,MA=[["micro_id","pk"],["cert_id","fk"]],CA=[["cert_id","pk"]],wC=mm_lent(ctx,0,cy,"Certificate",CA,MM_DM,1,0,true).w;
+    const A=mm_lent(ctx,x,cy,"Microcredential",MA,MM_DM,P[0],P[2]),B=mm_lent(ctx,R.x+R.w-30-wC,cy,"Certificate",CA,MM_DM,P[0],P[2]);relLine(ctx,A,B,"*","1",{f:P[1],a:P[0],s:1.17,col:MM_DM});},
+  // the ontology, in OWL: the same relationships, written for machines that reason
+  (ctx,x,R,P)=>{const y=R.y+R.h/2,ms=phSz(ctx,28),put=(parts,yy)=>{let xx=x;parts.forEach(([s,col])=>{T(ctx,s,xx,yy,{f:"mono",w:500,size:28,color:rgba(col,1)});xx+=tw(ctx,s,ms,500,"mono");});};
+    if(P[0]>0)withA(ctx,P[0],()=>put([["Microcredential",MM_ONT],[" subClassOf ",SOFT],["Credential",MM_ONT]],y-6));if(P[1]>0)withA(ctx,P[1],()=>put([["  countsTowards ",SOFT],["GraduateCertificate",MM_ONT]],y+32));},
+  // the tests: the rule, checking the data, and the forms a check takes
+  (ctx,x,R,P)=>{const y=R.y+R.h/2;withA(ctx,P[0],()=>T(ctx,"a certificate counts at most 4 approved",x+48,y-6,{w:700,size:28,color:rgba(INK,0.95)}));tick_(ctx,x+16,y-16,30,MM_TST,P[1]);
+    withA(ctx,P[2],()=>T(ctx,"as SHACL, a data contract or a test",x+48,y+32,{w:600,size:28,color:rgba(SOFT,1)}));}];
+// where the views' pictures start: past the widest name or purpose
+function mm_vwX(ctx,R){return R.x+38+Math.max(...MM_VW.map(v=>Math.max(tw(ctx,v[0],phSz(ctx,30),800),tw(ctx,v[1],phSz(ctx,28),600))))+40;}
+// one view in its row: a lamp, its name and what it's for, then what it shows. o.a, o.lit, o.hi, o.p (its picture's parts)
+function mm_view(ctx,R,k,X,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const[n,j,col]=MM_VW[k],lit=o.lit==null?1:o.lit,hi=o.hi||0;
+  withA(ctx,a,()=>{if(hi>0)glow(ctx,R.x+R.w/2,R.y+R.h/2,R.w*0.4,col,0.16*hi);glass(ctx,R.x,R.y,R.w,R.h,16,col,{glow:(8+12*hi)*lit,ea:0.3+0.5*lit+0.2*hi,fill:"rgba(7,12,24,0.94)"});
+    led(ctx,R.x+14,R.y+R.h/2-24,5,48,col,0.35+0.6*lit);T(ctx,n,R.x+38,R.y+R.h/2-6,{w:800,size:30,color:rgba(col,0.55+0.45*lit)});T(ctx,j,R.x+38,R.y+R.h/2+32,{w:600,size:28,color:rgba(SOFT,0.6+0.4*lit)});
+    MM_VEX[k](ctx,X,R,o.p||[1,1,1]);});}
+// a view's thread from the map: it leaves the card level and arrives level, with a head (views are drawn from the map, one way).
+// p draws it; once drawn, a light runs along it; o.run (0..1) sends one more, brighter, from the card to the view
+function mm_fan(ctx,A,B,p,col,t,o){o=o||{};if(p<=0)return;const mx=(A[0]+B[0])/2,at=u=>mm_bz(A,[mx,A[1]],[mx,B[1]],B,u),pts=[];for(let i=0;i<=24;i++)pts.push(at(p*i/24));
+  ctx.save();ctx.globalAlpha*=o.a==null?1:o.a;ctx.strokeStyle=rgba(col,0.85);ctx.lineWidth=2.6+1.4*(o.hi||0);ctx.lineCap="round";ctx.shadowColor=rgba(col,0.6);ctx.shadowBlur=8+10*(o.hi||0);ctx.beginPath();pts.forEach((q,i)=>i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]));ctx.stroke();
+  if(p>=0.98){ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.moveTo(B[0],B[1]);ctx.lineTo(B[0]-14,B[1]-7);ctx.lineTo(B[0]-14,B[1]+7);ctx.closePath();ctx.fill();}ctx.restore();
+  if(p>=1){const q=at((t*0.45+(o.ph||0))%1);glow(ctx,q[0],q[1],20,col,0.5);}
+  if(o.run>0&&o.run<1){const q=at(o.run);glow(ctx,q[0],q[1],36,col,0.95);ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(q[0],q[1],6,0,TAU);ctx.fill();}}
+
 /* ---------- a digital credential, with the parts a standard names ---------- */
 const MM_VC=[["issuer","issuer"],["holder","holder · subject"],["claim","claim"],["evidence","evidence"],["status","status"]];
 function mm_vc(ctx,x,y,w,o){o=o||{};const m=phMin(ctx),rh=Math.max(o.rh||46,m?m*2.1:0),h=70+MM_VC.length*rh+16,vs=Math.max(15,m),vx=m?36+Math.max(...MM_VC.map(r=>tw(ctx,r[1],Math.max(17,m),500,"mono")))+24:220;withA(ctx,o.a==null?1:o.a,()=>{glass(ctx,x,y,w,h,18,TRUST,{glow:16,ea:0.8,fill:"rgba(7,12,24,0.95)"});
@@ -1451,14 +1568,57 @@ function mm_vc(ctx,x,y,w,o){o=o||{};const m=phMin(ctx),rh=Math.max(o.rh||46,m?m*
 
 // a standard's binder is a picture: its name and line are part of the spine (the shelf's labels say what's what)
 mm_binder=phDeco(mm_binder);
-// the stacking policy is a document no tool can read: a picture of one, its words its texture
-mm_doc=phDeco(mm_doc);
+// the pages Genie reads are pictures of pages: their words are texture, and the scene draws the rule each one says
+mm_page=phDeco(mm_page);
 
 /* ---------- pictures for the labs and the scenarios (site/assets/meaning-machines-can-read/learn.*.js name them in "vis") ----------
    Each draws on a canvas of w × h, with the lab's state and the page's words (window.FW). Every word drawn comes from FW
    (FW.vis, or the lab's own words), so Spanish pages show Spanish. Lab pictures are 960 wide and shown at about 45%, so their
    text is 22 px or more; scenario pictures are 600 wide and shown at about 70%, so theirs is 18 px or more. */
 const mm_hex=s=>s.match(/\w\w/g).map(q=>parseInt(q,16));
+const MM_LCOL=[MM_GLO,MM_MAP,MM_DM,MM_ONT,MM_TST];
+// the map's card at a lab's size: its title, then the concept, with its parts (o.hi lights them), or (o.dom) its data domain and
+// entities; o.v2 marks its new version, after its id
+function mm_lcard(c,x,y,w,h,V,o){o=o||{};glass(c,x,y,w,h,16,MM_MAP,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(c,V.map,x+20,y+36,{w:600,size:22,color:rgba(SOFT,1)});
+  if(o.dom){T(c,V.dom,x+20,y+76,{w:800,size:24,color:rgba(MM_MAP,1)});T(c,V.domSub,x+20,y+106,{w:600,size:22,color:rgba(SOFT,1)});
+    V.ents.forEach((n,i)=>mm_pill(c,x+w/2,y+170+i*74,n,MM_MAP,{size:22,r:10,fill:"rgba(16,22,40,0.96)",hi:i===1?1:0,hiCol:MM_MAP}));return;}
+  T(c,V.con,x+20,y+76,{w:800,size:24,color:rgba(MM_MAP,1)});T(c,V.id,x+20,y+106,{f:"mono",w:500,size:22,color:rgba(SOFT,1)});
+  if(o.v2){const ix=x+20+tw(c,V.id+" ",22,500,"mono");glow(c,ix+30,y+99,40,MM_MAP,0.5);T(c,"· "+V.v2,ix,y+106,{f:"mono",w:500,size:22,color:rgba(MM_MAP,1)});}
+  V.parts.forEach((p,i)=>{const by=y+128+i*88,on=(o.hi||[])[i]||0;c.fillStyle=rgba(MM_MAP,0.05+0.12*on);rr(c,x+12,by,w-24,76,10);c.fill();if(on>0){c.strokeStyle=rgba(MM_MAP,0.8*on);c.lineWidth=2;rr(c,x+12,by,w-24,76,10);c.stroke();}
+    T(c,p,x+28,by+46,{f:"mono",w:500,size:22,color:rgba(mix(SOFT,MM_MAP,on),1)});});
+}
+// one view at a lab's size: its lamp, its name and what it's for, lit (1) or stepping back
+function mm_lrow(c,R,name,job,col,lit){glass(c,R.x,R.y,R.w,R.h,12,col,{glow:10*lit,ea:0.3+0.6*lit,fill:"rgba(7,12,24,0.94)"});led(c,R.x+10,R.y+14,4,R.h-28,col,0.3+0.65*lit);
+  T(c,name,R.x+26,R.y+34,{w:800,size:24,color:rgba(col,0.45+0.55*lit)});T(c,job,R.x+26,R.y+62,{w:600,size:22,color:rgba(SOFT,0.45+0.55*lit)});}
+// the threads from the map's card to each view, one way, as in the film; lit: how strongly each is drawn
+function mm_lfan(c,A,ends,lit){ends.forEach((B,k)=>{const l=lit[k],col=MM_LCOL[k],mx=(A[0]+B[0])/2,pts=[];for(let i=0;i<=16;i++)pts.push(mm_bz(A,[mx,A[1]],[mx,B[1]],B,i/16));
+    c.save();c.strokeStyle=rgba(col,0.2+0.7*l);c.lineWidth=2;c.beginPath();pts.forEach((q,i)=>i?c.lineTo(q[0],q[1]):c.moveTo(q[0],q[1]));c.stroke();
+    c.fillStyle=rgba(col,0.2+0.75*l);c.beginPath();c.moveTo(B[0],B[1]);c.lineTo(B[0]-10,B[1]-5);c.lineTo(B[0]-10,B[1]+5);c.closePath();c.fill();c.restore();});
+  c.fillStyle=rgba(MM_MAP,1);c.beginPath();c.arc(A[0],A[1],5,0,TAU);c.fill();}
+// what a step of Follow one concept shows, in the panel at the right (x, y: its inner corner; pw: its inner width)
+const MM_LPANEL=[
+  // the map: drawn in an architecture modelling language, and kept by Noor
+  (c,x,y,pw,V)=>{const L=wrapT(c,V.note,x,y,pw,{w:600,size:22,lh:29,color:rgba(INK,0.95)});wrapT(c,V.mapOwner,x,y+L.length*29+20,pw,{w:600,size:22,lh:29,color:rgba(SOFT,1)});},
+  // the concept, written once: its definition and owner, its relationships, its rule
+  (c,x,y,pw,V)=>{let yy=y;[[V.parts[0],[V.def],V.owner],[V.parts[1],V.rels,null],[V.parts[2],[V.rule],null]].forEach(([lab,lines,own])=>{T(c,lab,x,yy,{f:"mono",w:500,size:22,color:rgba(SOFT,1)});yy+=29;
+    lines.forEach(s=>{yy+=wrapT(c,s,x,yy,pw,{w:600,size:22,lh:25,color:rgba(INK,0.95)}).length*25;});if(own){T(c,own,x,yy,{w:600,size:22,color:rgba(MM_GLO,0.95)});yy+=25;}yy+=8;});},
+  // the glossary: the word, its definition and its owner, for people
+  (c,x,y,pw,V)=>{T(c,V.word,x,y,{w:800,size:24,color:rgba(MM_GLO,1)});const L=wrapT(c,V.def,x,y+38,pw,{w:600,size:22,lh:29,color:rgba(PARCH,0.95)});T(c,V.owner,x,y+38+L.length*29+14,{w:600,size:22,color:rgba(SOFT,1)});},
+  // the conceptual model: the concepts and their named relationships, with no counts
+  (c,x,y,pw,V)=>{const F="rgba(16,22,40,0.96)",P=[V.cred,V.micro,V.cert].map((n,i)=>{const w_=tw(c,n,22,700)+24;return mm_pill(c,x+w_/2,y+20+i*112,n,MM_MAP,{size:22,r:10,fill:F});}),lx=x+30;
+    isa(c,lx,P[1].y-P[1].h/2-3,lx,P[0].y+P[0].h/2+3,1,MM_MAP,{fill:"#0b1222",s:13,lw:2});T(c,V.isa,lx+16,y+84,{w:700,size:22,color:rgba(MM_MAP,1)});
+    c.strokeStyle=rgba(MM_MAP,0.9);c.lineWidth=2;c.beginPath();c.moveTo(lx,P[1].y+P[1].h/2+3);c.lineTo(lx,P[2].y-P[2].h/2-3);c.stroke();T(c,V.towards,lx+16,y+196,{w:700,size:22,color:rgba(MM_MAP,1)});
+    T(c,V.nocount,x,y+296,{w:600,size:22,color:rgba(SOFT,1)});},
+  // the logical model: how many, and the keys
+  (c,x,y,pw,V)=>{const A=mm_lent(c,x,y+66,V.lc,[[V.lca[0],"pk"]],MM_DM,1,0.6,false,22),B=mm_lent(c,x,y+236,V.lm,[[V.lma[0],"pk"],[V.lma[1],"fk"]],MM_DM,1,0.6,false,22);
+    const ax=x+40;relLine(c,{x:ax,y:A.y,w:2,h:A.h},{x:ax,y:B.y,w:2,h:B.h},"1","*",{col:MM_DM});T(c,V.many,x+70,y+150,{w:700,size:22,color:rgba(MM_DM,1)});},
+  // the ontology, in OWL: the same relationships, for machines that reason, extracted from the map
+  (c,x,y,pw,V)=>{V.owl.forEach(([s,k],i)=>T(c,s,x,y+i*32,{f:"mono",w:500,size:22,color:rgba(k?MM_ONT:SOFT,1)}));wrapT(c,V.extracted,x,y+V.owl.length*32+18,pw,{w:600,size:22,lh:27,color:rgba(SOFT,1)});},
+  // the tests: the rule, checking the data, and the forms a check takes
+  (c,x,y,pw,V)=>{tick_(c,x+12,y-8,26,MM_TST,1);const L=wrapT(c,V.test,x+40,y,pw-40,{w:700,size:22,lh:28,color:rgba(INK,0.95)}),y2=y+L.length*28+16;
+    const L2=wrapT(c,V.forms,x,y2,pw,{w:600,size:22,lh:28,color:rgba(MM_TST,1)});wrapT(c,V.notowl,x,y2+L2.length*28+16,pw,{w:600,size:22,lh:28,color:rgba(SOFT,1)});},
+  // a change, made once in the map: every view follows
+  (c,x,y,pw,V)=>{V.views.forEach(([n],k)=>{const yy=y+k*44;tick_(c,x+12,yy-8,24,MM_LCOL[k],1);T(c,n,x+40,yy,{w:700,size:22,color:rgba(MM_LCOL[k],1)});});wrapT(c,V.follows,x,y+V.views.length*44+12,pw,{w:600,size:22,lh:28,color:rgba(SOFT,1)});}];
 function mm_numChip(c,x,y,s,n,col){glass(c,x,y,s,s,12,col,{glow:10,ea:0.9,fill:"rgba(7,12,24,0.95)"});T(c,""+n,x+s/2,y+s/2+s*0.2,{w:800,size:Math.round(s*0.56),align:"center",color:rgba(col,1)});}
 const LV={
   // Glossary, taxonomy, ontology or semantic layer? Four floors; each statement's number sits where it was placed
@@ -1468,6 +1628,21 @@ const LV={
       glass(c,x,y,fw,92,12,col,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.94)"});led(c,x+12,y+16,4,60,col,0.9);
       T(c,B[k][1],x+28,y+40,{w:800,size:26,color:rgba(col,1)});T(c,V.q[k],x+28,y+74,{w:600,size:22,color:rgba(SOFT,1)});
       mine.forEach(([it,i],j)=>{const ok=st.checked?(it.b===bk):null;mm_numChip(c,x+500+j*54,y+23,46,i+1,ok==null?col:ok?GOOD:BAD);});});},
+  // Which view of the map? The map's card, and its five views; each statement's number sits on the view it was placed in
+  which:(c,w,h,st,FW)=>{const lab=FW.labs.find(x=>x.id==="which"),items=lab.w.items,B=lab.w.buckets,V=FW.vis.which,X=340,RW=w-16-X,ends=[];
+    mm_lcard(c,16,16,290,408,V,{hi:[1,1,1]});
+    B.forEach(([bk,name],k)=>{const R={x:X,y:16+k*83,w:RW,h:76},col=MM_LCOL[k],mine=items.map((it,i)=>[it,i]).filter(([it,i])=>st.pick[i]===bk);ends.push([R.x-3,R.y+R.h/2]);
+      mm_lrow(c,R,name,V.jobs[k],col,1);const x0=R.x+290,n=mine.length,dx=n>1?Math.min(50,(R.w-302-44)/(n-1)):0;
+      mine.forEach(([it,i],j)=>{const ok=st.checked?(it.b===bk):null;mm_numChip(c,x0+j*dx,R.y+16,44,i+1,ok==null?col:ok?GOOD:BAD);});});
+    mm_lfan(c,[306,220],ends,[1,1,1,1,1]);},
+  // Follow one concept through the map: the card, the five views, and a panel with what each step shows. Steps 0 and 1 are the map
+  // (its domain, then the concept), 2 to 6 one view each, and 7 a change that every view follows
+  follow:(c,w,h,st,FW)=>{const V=FW.vis.follow,s=st.step||0,X=318,RW=272,PX=606,PW=w-16-PX,lit=k=>s===7||s===k+2?1:s>k+2?0.6:0.22;
+    mm_lcard(c,16,16,290,408,V,{dom:s===0,hi:[[0,0,0],[1,1,1],[1,0,0],[0,1,0],[0,1,0],[1,1,0],[0,0,1],[1,0,0]][s],v2:s===7});
+    const ends=V.views.map(([n,j],k)=>{const R={x:X,y:16+k*83,w:RW,h:76};mm_lrow(c,R,n,j,MM_LCOL[k],s<2?0.3:lit(k));return[R.x-3,R.y+R.h/2];});
+    mm_lfan(c,[306,220],ends,V.views.map((v,k)=>s<2?0.12:lit(k)));
+    const col=s>=2&&s<=6?MM_LCOL[s-2]:MM_MAP;glass(c,PX,16,PW,408,16,col,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.95)"});
+    T(c,V.panel[s],PX+22,56,{w:800,size:24,color:rgba(col,1)});MM_LPANEL[s](c,PX+22,96,PW-44,V);},
   // Map to the standard: each local term's number, on the part of the credential it was placed on
   standard:(c,w,h,st,FW)=>{const lab=FW.labs.find(x=>x.id==="standard"),items=lab.w.items,B=lab.w.buckets,V=FW.vis.standard;
     glass(c,16,12,w-32,h-24,18,TRUST,{glow:14,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(c,V.title,44,56,{w:800,size:28,color:rgba(TRUST,1)});T(c,V.sub,w-44,56,{w:600,size:22,align:"right",color:rgba(SOFT,1)});
@@ -1494,9 +1669,25 @@ const LV={
   threedefs:(c,w,h,st,FW)=>{const V=FW.vis.threedefs;[0,1,2].forEach(i=>{const x=12+i*196;glass(c,x,30,184,260,16,MM_REFC,{glow:12,ea:0.75,fill:"rgba(12,12,20,0.95)"});T(c,V.regions[i],x+92,76,{w:800,size:22,align:"center",color:rgba(MM_REFC,1)});
     c.fillStyle=rgba(GOOD,0.16);rr(c,x+12,100,160,58,10);c.fill();T(c,V.same,x+92,136,{w:700,size:19,align:"center",color:rgba(mix(INK,GOOD,0.4),1)});
     c.fillStyle=rgba(EXT,0.18);rr(c,x+12,172,160,100,10);c.fill();wrapT(c,V.diffs[i],x+24,206,140,{w:700,size:19,lh:24,color:rgba(mix(INK,EXT,0.4),1)});});},
-  pdfgloss:(c,w,h,st,FW)=>{const V=FW.vis.pdfgloss;c.save();c.shadowColor="rgba(0,0,0,0.6)";c.shadowBlur=18;c.fillStyle="#eef0f4";rr(c,50,28,240,270,8);c.fill();c.restore();c.fillStyle="#d9453a";rr(c,216,44,58,28,5);c.fill();T(c,"PDF",245,64,{w:800,size:18,align:"center",color:"#fff"});
-    T(c,V.title,70,112,{w:800,size:26,color:"#1e222c"});T(c,V.pages,70,142,{w:600,size:18,color:"#4a5160"});for(let i=0;i<5;i++){c.fillStyle="rgba(40,44,54,0.22)";c.fillRect(70,170+i*24,190*(0.6+0.4*hash(i,3)),9);}
-    orb(c,450,130,28,1);c.fillStyle="rgba(7,12,24,0.9)";c.beginPath();c.arc(450,238,36,0,TAU);c.fill();mm_eyeOff(c,450,238,24,EDGE_,1);T(c,"?",520,110,{w:800,size:44,color:rgba(EDGE_,1)});},
+  pdfgloss:(c,w,h,st,FW)=>{const V=FW.vis.pdfgloss;V.copies.forEach((cp,i)=>{const x=40+i*40,y=36+i*52;c.save();c.shadowColor="rgba(0,0,0,0.6)";c.shadowBlur=14;c.fillStyle="#eef0f4";rr(c,x,y,220,170,8);c.fill();c.restore();
+      c.fillStyle="rgba(255,236,150,0.95)";rr(c,x+12,y+10,124,32,6);c.fill();T(c,cp,x+20,y+33,{w:700,size:19,color:"#1e222c"});c.fillStyle="#d9453a";rr(c,x+160,y+12,48,26,5);c.fill();T(c,"PDF",x+184,y+31,{w:800,size:18,align:"center",color:"#fff"});
+      T(c,V.title,x+16,y+76,{w:800,size:22,color:"#1e222c"});for(let k=0;k<3;k++){c.fillStyle="rgba(40,44,54,0.22)";c.fillRect(x+16,y+98+k*20,180*(0.6+0.4*hash(k+i,3)),8);}});
+    orb(c,470,120,28,1);T(c,"?",530,104,{w:800,size:44,color:rgba(EDGE_,1)});wrapT(c,V.q,380,220,200,{w:700,size:19,lh:24,color:rgba(EDGE_,1)});},
+  copyonto:(c,w,h,st,FW)=>{const V=FW.vis.copyonto;glass(c,24,60,220,170,14,MM_DM,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(c,V.table,40,94,{f:"mono",w:500,size:20,color:rgba(MM_DM,1)});
+    c.strokeStyle="rgba(170,200,245,0.25)";c.lineWidth=1;c.beginPath();c.moveTo(24,110);c.lineTo(244,110);c.stroke();V.cols.forEach((s,i)=>T(c,s,40,148+i*40,{f:"mono",w:500,size:20,color:rgba(INK,0.95)}));
+    arrowTo(c,256,145,322,145,SOFT,0.9,{head:12,lw:2.4});V.gen.forEach((s,i)=>mm_pill(c,450,90+i*60,s,MM_ONT,{size:20,r:10,dash:true,fill:"rgba(34,22,60,0.96)"}));
+    T(c,"?",566,170,{w:800,size:44,align:"center",color:rgba(EDGE_,1)});tag(c,450,286,V.note,SOFT,{size:18,align:"center"});},
+  twojobs:(c,w,h,st,FW)=>{const V=FW.vis.twojobs;glass(c,170,12,260,78,14,MM_MAP,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(c,V.map,300,42,{w:600,size:18,align:"center",color:rgba(SOFT,1)});T(c,V.con,300,72,{w:800,size:20,align:"center",color:rgba(MM_MAP,1)});
+    [[V.model,V.mx,MM_DM,14],[V.onto,V.ox,MM_ONT,316]].forEach(([n,ex,col,x])=>{arrowTo(c,x<300?250:350,92,x+135,132,col,0.85,{head:10,lw:2.2});glass(c,x,138,270,112,14,col,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.95)"});led(c,x+10,152,4,40,col,0.9);
+      T(c,n,x+24,174,{w:800,size:20,color:rgba(col,1)});T(c,ex,x+24,214,{f:"mono",w:500,size:18,color:rgba(INK,0.9)});});
+    tag(c,300,290,V.q,EDGE_,{size:20,align:"center"});},
+  threestreams:(c,w,h,st,FW)=>{const V=FW.vis.threestreams;V.cards.forEach(([n,sub,d],i)=>{const x=12+i*196,col=[MM_MAP,MM_GLO,MM_ONT][i];glass(c,x,26,184,224,14,col,{glow:10,ea:0.75,fill:"rgba(7,12,24,0.95)"});
+      T(c,n,x+16,60,{w:800,size:19,color:rgba(col,1)});T(c,sub,x+16,88,{w:600,size:18,color:rgba(SOFT,1)});T(c,V.word,x+16,128,{w:700,size:18,color:rgba(INK,0.95)});
+      wrapT(c,d,x+16,156,152,{w:600,size:18,lh:23,color:rgba(mix(INK,EDGE_,0.45),1)});});
+    tag(c,300,290,V.q,EDGE_,{size:20,align:"center"});},
+  reasoner:(c,w,h,st,FW)=>{const V=FW.vis.reasoner,F="rgba(34,22,60,0.96)",A=mm_pill(c,140,130,V.cert,MM_ONT,{size:20,r:12,fill:F});
+    V.micros.forEach((n,i)=>{const five=i===4,B=mm_pill(c,440,28+i*54,n,five?EDGE_:MM_ONT,{size:18,r:10,fill:F,dash:five});mm_link(c,A,B,null,five?EDGE_:MM_ONT,{lw:2,head:9,a:0.85});});
+    tag(c,140,200,V.rule,MM_ONT,{size:18,align:"center"});tag(c,140,252,V.said,SOFT,{size:18,align:"center"});tag(c,440,298,V.q,EDGE_,{size:18,align:"center"});},
   noowner:(c,w,h,st,FW)=>{const V=FW.vis.noowner,a=mm_pill(c,170,70,V.cert,MM_ONT,{size:20,r:12}),b=mm_pill(c,440,200,V.micro,MM_ONT,{size:20,r:12});mm_link(c,a,b,V.link,BAD,{size:19,off:30});
     tag(c,40,280,V.owner,BAD,{size:19});tag(c,300,280,V.policy,GOOD,{size:19});},
   steps:(c,w,h,st,FW)=>{const V=FW.vis.steps;glass(c,30,40,380,240,18,MM_SEM,{glow:16,ea:0.85,fill:"rgba(6,14,30,0.95)"});T(c,"Σ",56,96,{w:800,size:40,color:rgba(MM_SEM,1)});wrapT(c,V.title,104,88,290,{w:800,size:22,lh:28,color:rgba(MM_SEM,1)});
@@ -1505,11 +1696,13 @@ const LV={
 };
 
 /* ===== Meaning machines can read: scenes =====
-   Eight chapters, as in ../script.md. People tried to write meaning down before (Linnaeus, Wilkins, Nightingale and the ICD).
-   Today, Ana asks Genie who is one microcredential away from a graduate certificate, and Genie guesses: the stacking rules are in a
-   document no tool can read. Four ways to write meaning down stack like floors: glossary, taxonomy, ontology, semantic layer.
-   The ontology holds the rule, the semantic layer holds the calculation, standards save starting from blank, and Genie, grounded,
-   asks back and answers right. The triangle from What's in a word returns. */
+   Nine chapters, as in ../script.md. People tried to write meaning down before (Linnaeus, Wilkins, Nightingale and the ICD).
+   Today, Ana asks Genie who is one microcredential away from a graduate certificate, and Genie guesses: it reads the stacking rules in
+   a policy and on an old web page, which disagree, and no managed glossary says which is current. Four ways to write meaning down stack like floors: glossary, taxonomy, ontology, semantic layer.
+   The ontology holds the rule. All of it lives in one place, Noor's architecture map, written once; the glossary, the conceptual and
+   logical models, the ontology in OWL and the tests are views drawn from it. The semantic layer holds the calculation, standards
+   save starting from blank, and Genie, grounded, asks back and answers right.
+   The triangle from What's in a word returns. */
 
 /* ---------- 1. They tried before ---------- */
 const MM_HIER=[["KINGDOM","Animalia"],["CLASS","Aves"],["ORDER","Passeriformes"],["GENUS","Erithacus"],["SPECIES","Erithacus rubecula"]];
@@ -1587,9 +1780,9 @@ function mm_asker(ctx,t,a,qA,o){o=o||{};withA(ctx,a,()=>{person(ctx,"ana",250,90
 scene("guesses",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const cA=c("ask"),cF=c("finds"),cW=c("wrong"),cR=c("read");
   tag(ctx,120,110,"The university · today",[236,243,255],{size:20});
-  mm_asker(ctx,t,fin(t,0.3,0.6),fin(t,cA+2.6,0.6),{pose:t>cA+2.4&&t<cF+0.5?"explain":"stand",expr:t>cW+5.6?"concerned":"calm"});
+  mm_asker(ctx,t,fin(t,0.3,0.6),fin(t,cA+2.6,0.6),{pose:t>cA+2.4&&t<cF+0.5?"explain":"stand",expr:t>cW+7.3?"concerned":"calm"});
   const gx=760,gy=470;mm_genie(ctx,gx,gy,t,{a:fin(t,cA+2.0,0.6)});
-  // what Genie can read: tables
+  // what Genie reads first: the tables
   const tA=fin(t,cF-0.2,0.6),L=mm_cols(ctx,MM_TL.cols,MM_TL.rows),Cc=mm_cols(ctx,MM_TC.cols,MM_TC.rows),wL=L[L.length-1].x+L[L.length-1].w,wC=Cc[Cc.length-1].x+Cc[Cc.length-1].w;
   const X1=800,X2=X1+wL+18,Y1=100,Y2=340,DY=400;
   withA(ctx,tA,()=>{table(ctx,X1,Y1,"learners",MM_TL.cols,MM_TL.rows,{col:[150,225,255]});table(ctx,X2,Y1,"credentials",MM_TC.cols,MM_TC.rows,{col:[150,225,255]});table(ctx,X1,Y2,"certificates",MM_TG.cols,MM_TG.rows,{col:[150,225,255]});});
@@ -1598,18 +1791,31 @@ scene("guesses",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     const u=((t-cF)*0.7+i*0.33)%1;glow(ctx,lerp(gx+30,x,u),lerp(gy,y,u),16,MM_GEN,0.7);});});
   const sc_=clamp((t-cF-1.2)/3.8,0,1);if(sc_>0&&sc_<1){const sx=X2+wC*sc_;withA(ctx,0.8,()=>{ctx.save();ctx.globalCompositeOperation="lighter";const g=ctx.createLinearGradient(sx-40,0,sx,0);g.addColorStop(0,"rgba(120,200,255,0)");g.addColorStop(1,"rgba(120,200,255,0.35)");ctx.fillStyle=g;ctx.fillRect(sx-40,Y1+50,40,166);ctx.restore();});}
   [[2,cF+3.0],[3,cF+4.7]].forEach(([k,t0])=>{const a=fin(t,t0,0.4);if(a<=0)return;const col=Cc[k],x=X2+col.x+2,hi=pulseAt(t,t0,1.4);withA(ctx,a,()=>{glow(ctx,x+col.w/2,Y1+140,90,CYAN,0.25+0.3*hi);const tb=Math.max(46,Math.max(18,phMin(ctx))*1.65);ctx.save();ctx.strokeStyle=rgba(CYAN,1);ctx.lineWidth=2.4+2*hi;ctx.shadowColor=rgba(CYAN,0.9);ctx.shadowBlur=14;rr(ctx,x,Y1+tb+4,col.w-4,Math.max(40,Math.max(16,phMin(ctx))*1.45)*4-8,8);ctx.stroke();ctx.restore();});});
-  // the rules live in a document no tool can read
-  const dA=fin(t,cW+2.0,0.6),grey=fin(t,cW+3.3,0.8),inv=fin(t,cR+2.9,0.6);
-  mm_doc(ctx,1330,DY,440,420,{a:dA,grey});
-  if(grey>0)withA(ctx,grey,()=>{ctx.fillStyle="rgba(7,12,24,0.9)";ctx.beginPath();ctx.arc(1550,DY+310,40,0,TAU);ctx.fill();mm_eyeOff(ctx,1550,DY+310,26,[255,140,120],0.6+0.4*Math.abs(Math.sin(t*2))*inv+0.4*(1-inv));tag(ctx,1550,DY-30,"no tool can read this",[200,205,215],{align:"center",size:18});});
-  if(inv>0)withA(ctx,inv,()=>{ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(EDGE_,0.9);ctx.lineWidth=2.4;rr(ctx,1318,DY-12,464,444,12);ctx.stroke();ctx.restore();});
+  // Genie reads the stacking rules too, in the policy and on an old web page: they don't agree, and nothing says which is current
+  const DOC={x:1325,y:DY,w:285,h:330},WEB={x:1620,y:DY,w:285,h:330},pA=fin(t,cW+1.9,0.6),wA=fin(t,cW+3.5,0.6);
+  mm_page(ctx,DOC.x,DOC.y,DOC.w,DOC.h,{a:pA,kind:"pdf",title:"Stacking policy",sub:"Academic Board · v4",seed:1});
+  mm_page(ctx,WEB.x,WEB.y,WEB.w,WEB.h,{a:wA,kind:"web",title:"Short courses FAQ",sub:"updated 2023",url:"university.edu/short-courses/faq",seed:5});
+  // a beam to each page as Genie reads it, and to everything it reads again at "answers from what it reads"
+  const rd=pulseAt(t,cR+0.3,2.2);[[DOC,cW+2.1],[WEB,cW+3.7]].forEach(([R,t0],i)=>{const a=Math.max(fin(t,t0,0.4)*(1-fin(t,cW+6.4,0.8)),rd);if(a<=0)return;const x=R.x+R.w/2,y=R.y+174;
+    withA(ctx,a*0.8,()=>{ctx.save();ctx.setLineDash([5,9]);ctx.strokeStyle=rgba(MM_GEN,0.55);ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(gx+30,gy);ctx.lineTo(x,y);ctx.stroke();ctx.restore();
+      const u=((t-t0)*0.7+i*0.4)%1;glow(ctx,lerp(gx+30,x,u),lerp(gy,y,u),16,MM_GEN,0.7);});});
+  // the one rule each page says: the policy's, current, and the old page's, which Genie follows
+  const pick=fin(t,cW+6.1,0.4),right=fin(t,cW+7.0,0.4),snip=(R,s_,a,col,on)=>withA(ctx,a,()=>{const bw=tw(ctx,s_,phSz(ctx,28),700)+28,bx=R.x+(R.w-bw)/2,by=R.y+150;
+    if(on>0)glow(ctx,bx+bw/2,by+24,bw*0.6,col,0.3*on);ctx.fillStyle="rgba(255,236,150,0.95)";rr(ctx,bx,by,bw,48,8);ctx.fill();
+    if(on>0){ctx.strokeStyle=rgba(col,on);ctx.lineWidth=3;rr(ctx,bx,by,bw,48,8);ctx.stroke();}T(ctx,s_,bx+14,by+34,{w:700,size:28,color:"#1e222c"});});
+  snip(DOC,"up to 4 approved",fin(t,cW+2.3,0.4),GOOD,right);snip(WEB,"any 4 courses",fin(t,cW+3.9,0.4),BAD,Math.max(pick,pulseAt(t,cR+8.0,1.4)));
+  // they don't agree
+  const dis=fin(t,cW+5.1,0.4),dh=Math.max(pulseAt(t,cW+5.1,1.4),pulseAt(t,cR+6.6,1.4));if(dis>0)withA(ctx,dis,()=>{const x=1615,y=DY+250;glow(ctx,x,y,60,EDGE_,0.3+0.4*dh);
+    ctx.fillStyle="rgba(7,12,24,0.96)";ctx.beginPath();ctx.arc(x,y,28,0,TAU);ctx.fill();ctx.strokeStyle=rgba(EDGE_,0.9);ctx.lineWidth=2;ctx.stroke();T(ctx,"≠",x,y+14,{w:800,size:40,align:"center",color:rgba(EDGE_,1)});});
+  withA(ctx,fin(t,cW+5.4,0.5)*(1-fin(t,cR+2.5,0.4)),()=>tag(ctx,1615,DY-34,"which one is current?",EDGE_,{align:"center",size:28}));
+  // outside a managed glossary: no owner, no version
+  const inv=fin(t,cR+2.7,0.6);if(inv>0)withA(ctx,inv,()=>{ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(EDGE_,0.9);ctx.lineWidth=2.4;rr(ctx,DOC.x-12,DY-12,WEB.x+WEB.w-DOC.x+24,DOC.h+24,12);ctx.stroke();ctx.restore();
+    tag(ctx,1615,DY-34,"outside a managed glossary",EDGE_,{align:"center",size:28});});
+  withA(ctx,fin(t,cR+4.8,0.5),()=>tag(ctx,1615,DY+DOC.h+46,"no owner · no version",EDGE_,{align:"center",size:28}));
   // Genie guesses: a confident number, and the registrar's list
-  const gA=fin(t,cW+4.8,0.4),jit=t>cW+4.8&&t<cW+5.5?(hash(Math.floor(t*30),3)-0.5)*10:0;
-  withA(ctx,gA,()=>{glow(ctx,690,740,220,BAD,0.18+0.08*Math.sin(t*3));numCard(ctx,500+jit,640,380,"Genie","214","guessed from is_micro and stack_ok",BAD);cross_(ctx,846,672,30,BAD,fin(t,cW+5.9,0.4));});
-  withA(ctx,fin(t,cW+5.6,0.5),()=>numCard(ctx,910,640,380,"Registrar's list","132","by the stacking policy",GOOD));
-  // what it can read, and what it can't
-  const bA=fin(t,cR+0.2,0.7);if(bA>0)withA(ctx,bA,()=>{const xr=X2+wC+18;ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(MM_GEN,0.85);ctx.lineWidth=2.2;ctx.shadowColor=rgba(MM_GEN,0.6);ctx.shadowBlur=10;
-    ctx.beginPath();ctx.moveTo(782,84);ctx.lineTo(xr,84);ctx.lineTo(xr,326);ctx.lineTo(1318,326);ctx.lineTo(1318,528);ctx.lineTo(782,528);ctx.closePath();ctx.stroke();ctx.restore();tag(ctx,782,60,"what Genie can read",MM_GEN,{size:18});});
+  const gA=fin(t,cW+6.3,0.4),jit=t>cW+6.3&&t<cW+7.0?(hash(Math.floor(t*30),3)-0.5)*10:0;
+  withA(ctx,gA,()=>{glow(ctx,690,740,220,BAD,0.18+0.08*Math.sin(t*3));numCard(ctx,500+jit,640,380,"Genie","214","by the old web page",BAD);cross_(ctx,846,672,30,BAD,Math.max(fin(t,cW+7.3,0.4),0));});
+  withA(ctx,fin(t,cW+6.9,0.5),()=>numCard(ctx,910,640,380,"Registrar's list","132","by the stacking policy",GOOD));
   vign(ctx,S);});
 
 /* ---------- 3. Four ways to write meaning down ---------- */
@@ -1638,7 +1844,8 @@ scene("ontology",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx)
     withA(ctx,a2,()=>{glass(ctx,260,392,1400,290,20,MM_ONT,{glow:14,ea:0.6,fill:"rgba(12,8,26,0.93)"});T(ctx,"A graduate certificate accepts up to four approved microcredentials towards its credit.",300,446,{w:700,size:26});
       const A=mm_pill(ctx,560,540,"Graduate certificate",MM_ONT,{size:22,r:12,a:fin(t,cR+7.1,0.5),fill:"rgba(34,22,60,0.96)"}),Bb=mm_pill(ctx,1300,540,"Microcredential",MM_ONT,{size:22,r:12,a:fin(t,cR+7.4,0.5),fill:"rgba(34,22,60,0.96)"});
       mm_link(ctx,A,Bb,"accepts",MM_ONT,{p:clamp((t-cR-7.5)/0.7,0,1),size:18,off:22});
-      [["max 4",8.4],["approved only",9.1],["towards its credit",10.2]].forEach(([s,d],i)=>{const q=fin(t,cR+d,0.4);mm_pill(ctx,760+i*190+(i===2?30:0),628,s,[236,226,255],{size:17,a:q,hi:pulseAt(t,cR+d,1.2),hiCol:MM_ONT,fill:"rgba(34,22,60,0.96)"});});
+      // the three conditions side by side, each placed by the width it's drawn at
+      let px=640;[["max 4",8.4],["approved only",9.1],["towards its credit",10.2]].forEach(([s,d])=>{const q=fin(t,cR+d,0.4),pw=tw(ctx,s,phSz(ctx,17),700)+30;mm_pill(ctx,px+pw/2,628,s,[236,226,255],{size:17,a:q,hi:pulseAt(t,cR+d,1.2),hiCol:MM_ONT,fill:"rgba(34,22,60,0.96)"});px+=pw+18;});
       withA(ctx,fin(t,cR+10.8,0.5),()=>T(ctx,"a machine can check this",1640,666,{w:600,size:17,align:"right",color:rgba(MM_ONT,1)}));});});
   // the knowledge graph: the university's data, connected to the statements
   if(out1>0)withA(ctx,out1*(1-dimG),()=>{mm_kg(ctx,t,{p:{schema:clamp((t-cG+0.2)/1.2,0,1),data:clamp((t-cG-3.7)/2.2,0,1),links:clamp((t-cG-5.0)/2.4,0,1)},aisha:fin(t,cG+7.6,0.6)*(1-dimG)});
@@ -1657,7 +1864,53 @@ scene("ontology",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx)
     withA(ctx,fin(t,cA+4.3,0.6),()=>tag(ctx,1430,752,"a form a machine can use",MM_ONT,{align:"center",size:20}));});
   vign(ctx,S);});
 
-/* ---------- 5. The semantic layer ---------- */
+/* ---------- 5. One map, many views ---------- */
+// Noor's architecture map: the university's data domains and their entities, with a process and an application. Each concept is
+// written once, on a card: its definition (with its owner), its relationships and its rules. Then the map steps back, and the views
+// are drawn from the card, one way: the glossary, the conceptual model, the logical model, the ontology in OWL, and the tests.
+// They come from one map, so they agree, and a change to the map reaches every view.
+const MM_BOARD={x:50,y:96,w:1820,h:764},MM_CARD={x:70,y:228,w:610,h:584},MM_FO=[680,520];
+const MM_ZONES=[["Courses",{x:90,y:228,w:270,h:280}],["Learners",{x:390,y:228,w:270,h:280}],["Credentials",{x:790,y:228,w:1040,h:604}]];
+const MM_ENTS=[["Course",225,400],["Learner",525,400],["Credential",1310,340],["Microcredential",1040,540],["Graduate certificate",1570,540]];
+const MM_PROC={x:90,y:560,w:570,h:96},MM_APP={x:90,y:716,w:570,h:96};
+const mm_rows=()=>{let y=176;return MM_VW.map(v=>{const R={x:790,y,w:1060,h:v[3]};y+=v[3]+12;return R;});};
+scene("model",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),cD=c("domain"),cO=c("once"),cV=c("views"),cW=c("owl"),cS=c("same");setScreen(ctx,S);bg2(ctx);
+  const F="rgba(16,22,40,0.96)",bo=1-fin(t,cV-0.6,0.6),cA=ease(clamp((t-cO+0.1)/0.8,0,1));
+  // the map: its owner, a process and an application, then three data domains and their entities, each lit as it's named
+  if(bo>0)withA(ctx,bo,()=>{mm_panel(ctx,MM_BOARD,"Architecture map",MM_MAP,{a:fin(t,0.2,0.6),lit:0.6+0.4*fin(t,cD+1.7,0.6),right:"owner: Noor, data architect",rightA:fin(t,cD+1.8,0.5)});
+    const nm=[pulseAt(t,cD+6.0,1.5),pulseAt(t,cD+6.72,1.5),pulseAt(t,cD+7.44,1.5)];
+    MM_ZONES.forEach(([n,R],k)=>mm_zone(ctx,R,n,fin(t,cD+3.35+k*0.18,0.5)*(k<2?1-cA:1),k===1?nm[0]:k===2?Math.max(nm[1],nm[2],fin(t,cO-0.4,0.6)):0));
+    withA(ctx,1-cA,()=>{mm_elem(ctx,MM_PROC,"Issue a credential","process",fin(t,cD+2.2,0.5)*0.85);mm_elem(ctx,MM_APP,"Student system","app",fin(t,cD+2.45,0.5)*0.85);
+      // ArchiMate's serving (the application serves the process) and access (the process writes the credentials) relationships
+      const sv=clamp((t-cD-2.7)/0.5,0,1),ac=clamp((t-cD-2.9)/0.5,0,1);if(sv>0){arrowTo(ctx,375,MM_APP.y-4,375,lerp(MM_APP.y-4,MM_PROC.y+MM_PROC.h+6,sv),MM_ELEM,0.75,{nohead:true,lw:2});
+        if(sv>=1){ctx.save();ctx.strokeStyle=rgba(MM_ELEM,0.75);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(365,MM_PROC.y+MM_PROC.h+18);ctx.lineTo(375,MM_PROC.y+MM_PROC.h+6);ctx.lineTo(385,MM_PROC.y+MM_PROC.h+18);ctx.stroke();ctx.restore();}}
+      if(ac>0)arrowTo(ctx,MM_PROC.x+MM_PROC.w+6,MM_PROC.y+MM_PROC.h/2,lerp(MM_PROC.x+MM_PROC.w+6,786,ac),MM_PROC.y+MM_PROC.h/2,MM_ELEM,0.75,{dash:[3,7],lw:2,head:10,p:1});});
+    const E=MM_ENTS.map(([n,x,y],k)=>{const hi=[0,nm[0],nm[1],Math.max(nm[1],pulseAt(t,cO+0.2,1.8)),nm[2]][k];return mm_pill(ctx,x,y,n,MM_MAP,{size:28,r:12,fill:F,a:fin(t,cD+4.3+k*0.15,0.4)*(k<2?1-cA:1),hi,hiCol:MM_MAP});});
+    // the concept's relationships and its rule, drawn on the map as the card names them: a kind of Credential (ArchiMate's
+    // specialization), counts towards a Graduate certificate (an association, named), and the certificate's rule
+    const [,,CR,MI,GC]=E,r1=clamp((t-cO-3.5)/0.6,0,1),r2=clamp((t-cO-3.9)/0.6,0,1),rl=fin(t,cO+5.1,0.5);
+    isa(ctx,MI.x+40,MI.y-MI.h/2-4,CR.x-40,CR.y+CR.h/2+4,r1,MM_MAP,{fill:"#0b1222",s:16,lw:2.4});
+    if(r2>0){arrowTo(ctx,MI.x+MI.w/2+4,MI.y,lerp(MI.x+MI.w/2+4,GC.x-GC.w/2-4,r2),GC.y,MM_MAP,0.9,{nohead:true,lw:2.4});withA(ctx,fin(t,cO+4.3,0.4),()=>T(ctx,"counts towards",(MI.x+MI.w/2+GC.x-GC.w/2)/2,MI.y+56,{w:700,size:28,align:"center",color:rgba(MM_MAP,1)}));}
+    if(rl>0)withA(ctx,rl,()=>{ctx.save();ctx.setLineDash([6,7]);ctx.strokeStyle=rgba(MM_MAP,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(GC.x,GC.y+GC.h/2+4);ctx.lineTo(GC.x,676);ctx.stroke();ctx.restore();tag(ctx,GC.x,700,"rule: up to 4 approved",MM_MAP,{size:28,align:"center"});});
+    // the card is that concept
+    const ln=clamp((t-cO-0.6)/0.5,0,1);if(ln>0){ctx.save();ctx.setLineDash([8,8]);ctx.strokeStyle=rgba(MM_MAP,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(MM_CARD.x+MM_CARD.w+6,MM_CARD.y+56);ctx.lineTo(lerp(MM_CARD.x+MM_CARD.w+6,MI.x-MI.w/2-6,ln),lerp(MM_CARD.y+56,MI.y,ln));ctx.stroke();ctx.restore();}});
+  // the views, each drawn from the card as it's named, one way; the ontology and the tests extracted from the same map
+  const RW=mm_rows(),X=mm_vwX(ctx,RW[0]),rT=[cV+0.1,cV+3.2,cV+6.45,cW+0.3,cW+7.6],run=k=>clamp((t-cS-3.6-k*0.08)/0.6,0,1),arrive=k=>pulseAt(t,cS+4.2+k*0.08,1.3),one=pulseAt(t,cS+1.2,1.8);
+  const P=[[fin(t,cV+0.6,0.5),clamp((t-cV-1.0)/1.4,0,1)],[fin(t,cV+3.8,0.5),clamp((t-cV-4.9)/0.6,0,1),fin(t,cV+5.3,0.4)],[fin(t,cV+6.8,0.5),clamp((t-cV-7.6)/0.6,0,1),pulseAt(t,cV+8.7,2.0)+0.35*fin(t,cV+9.4,0.6)],
+    [fin(t,cW+2.6,0.5),fin(t,cW+3.3,0.5)],[fin(t,cW+8.0,0.5),fin(t,cW+9.0,0.4),fin(t,cW+9.5,0.5)]];
+  RW.forEach((R,k)=>{const a=fin(t,rT[k],0.5);if(a<=0)return;const col=MM_VW[k][2],B=[R.x-4,R.y+R.h/2];
+    mm_fan(ctx,MM_FO,B,clamp((t-rT[k]-0.15)/0.6,0,1),col,t,{a,ph:k*0.2,hi:one,run:run(k)});
+    mm_view(ctx,R,k,X,{a,lit:0.55+0.45*Math.max(pulseAt(t,rT[k],2.4),fin(t,cS,0.6)),hi:Math.max(pulseAt(t,rT[k]+0.2,1.8),k===3?pulseAt(t,cW+4.7,1.4):0,arrive(k)),p:P[k]});});
+  if(t>rT[0])withA(ctx,fin(t,rT[0],0.4),()=>{glow(ctx,MM_FO[0],MM_FO[1],30,MM_MAP,0.6+0.4*one);ctx.fillStyle=rgba(MM_MAP,1);ctx.beginPath();ctx.arc(MM_FO[0],MM_FO[1],7,0,TAU);ctx.fill();});
+  // the card: the concept, written once. Each part lights as it's named, and again as a view takes it
+  const hp=[Math.max(pulseAt(t,cO+2.1,1.6),pulseAt(t,rT[0]+0.3,1.6),pulseAt(t,cW+2.6,1.6),pulseAt(t,cS+3.3,1.4)),Math.max(pulseAt(t,cO+3.3,1.8),pulseAt(t,rT[1]+0.3,1.6),pulseAt(t,rT[2]+0.3,1.6),pulseAt(t,cW+2.6,1.6)),Math.max(pulseAt(t,cO+4.8,1.6),pulseAt(t,rT[4]+0.3,1.6))];
+  const CR={x:MM_CARD.x-40*(1-cA),y:MM_CARD.y,w:MM_CARD.w,h:MM_CARD.h};
+  mm_concept(ctx,CR,{a:cA,s:[fin(t,cO+2.1,0.5),fin(t,cO+3.3,0.5),fin(t,cO+4.8,0.5)],hi:hp,lit:Math.max(one,pulseAt(t,cS+3.3,1.4)),v2:fin(t,cS+3.4,0.4)});
+  withA(ctx,fin(t,cV-0.2,0.5),()=>tag(ctx,CR.x,CR.y-32,"architecture map",MM_MAP,{size:28}));
+  withA(ctx,fin(t,cS+1.4,0.6),()=>tag(ctx,960,112,"one map, many views",MM_MAP,{align:"center",size:28}));
+  vign(ctx,S);});
+
+/* ---------- 6. The semantic layer ---------- */
 scene("semantic",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const cO=c("once"),cT=c("tools"),cP=c("open");
   const rows=[4.1,4.8,5.9,6.9].map(d=>fin(t,cO+d,0.5)),rh=[4.1,4.8,5.9,6.9].map(d=>pulseAt(t,cO+d,1.4));
@@ -1676,7 +1929,7 @@ scene("semantic",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx)
   withA(ctx,fin(t,cP+1.6,0.6),()=>tag(ctx,1270,748,"open formats are appearing",MM_SEM,{size:20}));
   vign(ctx,S);});
 
-/* ---------- 6. Standards ---------- */
+/* ---------- 7. Standards ---------- */
 scene("standards",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const cB=c("blank"),cC=c("creds"),cT=c("three"),cH=c("choose"),o3=fin(t,cT-0.3,0.7),oH=fin(t,cH-0.3,0.7);
   // a blank page, then the shelf of published models
@@ -1699,28 +1952,41 @@ scene("standards",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx
     withA(ctx,fin(t,cH+5.0,0.6),()=>tag(ctx,960,770,"at every layer",[236,243,255],{align:"center",size:22}));});
   vign(ctx,S);});
 
-/* ---------- 7. Genie, again ---------- */
+/* ---------- 8. Genie, again ---------- */
+// This time the meaning has one source of truth, the glossary. Its definition of "approved for stacking" sits on the credentials
+// table's page in Databricks, next to the column it describes, and Genie reads it there. Then the Head of School asks again: Genie
+// asks back, answers 132, and shows the definition it used, with where each part of it comes from.
+const MM_GDEF="a microcredential that Short courses has approved to count towards a graduate certificate";
+const MM_UCROWS=[["learner_id","the learner who holds it",0],["is_micro","a microcredential",1],["stack_ok","approved for stacking",1]];
 scene("again",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
-  const cA=c("asks"),cN=c("answer"),cE=c("evid");
-  mm_asker(ctx,t,fin(t,0.2,0.6),fin(t,0.5,0.6),{qy:150,pose:t<cA+2.0||(t>cA+4.8&&t<cA+6.4)?"explain":"stand",expr:t>cN+0.6?"relieved":"calm"});
-  const gx=760,gy=470;mm_genie(ctx,gx,gy,t,{a:fin(t,0.4,0.6),sub:"reads the meaning"});
-  withA(ctx,fin(t,cA+2.3,0.5),()=>{tag(ctx,880,112,"Genie asks back",MM_GEN,{size:18});bubble(ctx,860,140,640,"Approved for stacking, or all microcredentials?",MM_GEN,{size:28});});
-  withA(ctx,fin(t,cA+4.9,0.5),()=>bubble(ctx,300,352,380,"Approved for stacking.",MM_ASK,{size:26}));
-  // the answer, and the definition it used
-  const nA=fin(t,cN+0.2,0.5);withA(ctx,nA,()=>{glow(ctx,1060,400,240,GOOD,0.14+0.06*Math.sin(t*2));numCard(ctx,860,300,400,"Genie",fmtNum(countTo(t,cN+0.3,0,132)),"matches the registrar's list",GOOD);});
-  withA(ctx,fin(t,cN+1.1,0.6),()=>{glass(ctx,1290,300,560,250,18,MM_GEN,{glow:14,ea:0.7,fill:"rgba(7,12,24,0.94)"});T(ctx,"the definition it used",1316,340,{w:700,size:19,color:rgba(SOFT,1)});
-    wrapT(ctx,"one away: holds 3 approved microcredentials; four complete a graduate certificate",1316,380,510,{w:700,size:22,lh:29});
-    tag(ctx,1316,482,"ontology · stacking rule",MM_ONT,{size:16});tag(ctx,1316,524,"semantic layer · near a certificate",MM_SEM,{size:16});});
+  const cP=c("page"),cA=c("asks"),cN=c("answer"),cE=c("evid"),gx=760,gy=470,out=1-fin(t,cA-0.4,0.6);
+  mm_asker(ctx,t,fin(t,0.2,0.6),fin(t,cA-0.1,0.6),{qy:150,pose:(t>cA-0.2&&t<cA+1.6)||(t>cA+7.8&&t<cA+9.4)?"explain":"stand",expr:t>cN+0.6?"relieved":"calm"});
+  mm_genie(ctx,gx,gy,t,{a:fin(t,0.4,0.6),sub:"reads the meaning"});
+  // the glossary, the source of truth, and the table's page in Databricks that carries its definitions next to the data
+  if(out>0)withA(ctx,out,()=>{
+    mm_gloss(ctx,80,150,580,370,{a:fin(t,cP+0.2,0.6),hi:pulseAt(t,cP+2.3,1.8),srcA:fin(t,cP+1.9,0.5),term:"approved for stacking",termA:fin(t,cP+2.5,0.4),def:MM_GDEF,defP:clamp((t-cP-2.7)/1.3,0,1),owner:"owner: Short courses · v3",ownA:fin(t,cP+3.5,0.5)});
+    mm_ucpage(ctx,1010,150,840,440,{a:fin(t,cP+4.2,0.6),table:"credentials",rows:MM_UCROWS,rowA:[0,1,2].map(i=>fin(t,cP+4.6+i*0.25,0.4)),gl:fin(t,cP+6.7,0.4),hiRow:2,hi:Math.max(pulseAt(t,cP+6.8,1.8),pulseAt(t,cP+8.3,1.6))});
+    // the definition reaches the page, next to the column it describes; Genie reads it there
+    const ar=clamp((t-cP-5.4)/1.2,0,1);if(ar>0){arrowTo(ctx,664,262,1004,516,MM_GLO,0.95,{p:ar,head:14,lw:2.6});withA(ctx,fin(t,cP+5.9,0.5),()=>T(ctx,"from the glossary",820,252,{w:700,size:28,align:"center",color:rgba(MM_GLO,1)}));}
+    const bm=fin(t,cP+8.2,0.5);if(bm>0)withA(ctx,bm,()=>{ctx.save();ctx.setLineDash([5,9]);ctx.strokeStyle=rgba(MM_GEN,0.6);ctx.lineWidth=1.8;ctx.beginPath();ctx.moveTo(gx+34,gy);ctx.lineTo(1004,536);ctx.stroke();ctx.restore();
+      const u=((t-cP)*0.7)%1;glow(ctx,lerp(gx+34,1004,u),lerp(gy,536,u),16,MM_GEN,0.7);});});
+  withA(ctx,fin(t,cA+3.9,0.5),()=>{tag(ctx,880,112,"Genie asks back",MM_GEN,{size:18});bubble(ctx,860,140,640,"Approved for stacking, or all microcredentials?",MM_GEN,{size:28});});
+  withA(ctx,fin(t,cA+7.9,0.5),()=>bubble(ctx,300,352,380,"Approved for stacking.",MM_ASK,{size:26}));
+  // the answer, and the definition it used: from the glossary, the ontology and the semantic layer
+  const nA=fin(t,cN+0.2,0.5);withA(ctx,nA,()=>{glow(ctx,1040,400,220,GOOD,0.14+0.06*Math.sin(t*2));numCard(ctx,860,300,350,"Genie",fmtNum(countTo(t,cN+0.3,0,132)),"matches the registrar's list",GOOD);});
+  withA(ctx,fin(t,cN+1.1,0.6),()=>{const x=1230,y=300;glass(ctx,x,y,640,330,18,MM_GEN,{glow:14,ea:0.7,fill:"rgba(7,12,24,0.94)"});T(ctx,"the definition it used",x+26,y+40,{w:700,size:28,color:rgba(SOFT,1)});
+    wrapT(ctx,"one away: holds 3 approved microcredentials; four complete a graduate certificate",x+26,y+80,588,{w:700,size:28,lh:37});
+    [["glossary · approved for stacking",MM_GLO],["ontology · stacking rule",MM_ONT],["semantic layer · near a certificate",MM_SEM]].forEach(([s_,col],i)=>withA(ctx,fin(t,cN+1.5+i*0.25,0.4),()=>tag(ctx,x+26,y+200+i*48,s_,col,{size:28})));});
   // grounded or not: qualitative, not to scale
-  const eA=fin(t,cE+0.3,0.6);withA(ctx,eA,()=>{const x=900,y=590,w=950;glass(ctx,x,y,w,210,18,[236,243,255],{glow:10,ea:0.5,fill:"rgba(7,12,24,0.94)"});T(ctx,"how often the answer is right",x+26,y+38,{w:700,size:19,color:rgba(SOFT,1)});
+  const eA=fin(t,cE+0.3,0.6);withA(ctx,eA,()=>{const x=900,y=660,w=950;glass(ctx,x,y,w,190,18,[236,243,255],{glow:10,ea:0.5,fill:"rgba(7,12,24,0.94)"});T(ctx,"how often the answer is right",x+26,y+40,{w:700,size:28,color:rgba(SOFT,1)});
     const b1=ease(clamp((t-cE-1.0)/1.2,0,1)),b2=ease(clamp((t-cE-1.6)/1.8,0,1));
-    [["tables only",BAD,0.28,b1,"guesses"],["tables + meaning",GOOD,0.78,b2,"grounded"]].forEach(([l,col,f,p,e],i)=>{const yy=y+84+i*58;T(ctx,l,x+26,yy+8,{w:700,size:22});ctx.fillStyle="rgba(255,255,255,0.05)";rr(ctx,x+260,yy-16,600,32,8);ctx.fill();
-      ctx.fillStyle=rgba(col,0.85);rr(ctx,x+260,yy-16,Math.max(8,600*f*p),32,8);ctx.fill();withA(ctx,fin(p,0.8,0.2),()=>T(ctx,e,x+274+600*f*p,yy+8,{w:700,size:19,color:rgba(col,1)}));});
-    T(ctx,"illustrative · not to scale",x+w-24,y+195,{f:"mono",w:500,size:18,align:"right",color:rgba(SOFT,1)});});
-  withA(ctx,fin(t,cE+6.0,0.6),()=>tag(ctx,1375,836,"the difference is the meaning it can read",[236,243,255],{align:"center",size:20}));
+    [["tables only",BAD,0.28,b1,"guesses"],["tables + meaning",GOOD,0.78,b2,"grounded"]].forEach(([l,col,f,p,e],i)=>{const yy=y+84+i*48;T(ctx,l,x+26,yy+8,{w:700,size:28});ctx.fillStyle="rgba(255,255,255,0.05)";rr(ctx,x+280,yy-16,560,32,8);ctx.fill();
+      ctx.fillStyle=rgba(col,0.85);rr(ctx,x+280,yy-16,Math.max(8,560*f*p),32,8);ctx.fill();withA(ctx,fin(p,0.8,0.2),()=>T(ctx,e,x+294+560*f*p,yy+8,{w:700,size:28,color:rgba(col,1)}));});
+    T(ctx,"illustrative · not to scale",x+w-24,y+172,{f:"mono",w:500,size:28,align:"right",color:rgba(SOFT,1)});});
+  withA(ctx,fin(t,cE+6.9,0.6),()=>tag(ctx,610,760,"meaning it can read, and trust",[236,243,255],{align:"center",size:28}));
   vign(ctx,S);});
 
-/* ---------- 8. Pull back ---------- */
+/* ---------- 9. Pull back ---------- */
 scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,S);bg2(ctx);
   const cT=c("tri"),cN=c("next"),cx=960,cy=430,wx=660,wy=600,ix=960,iy=240,hx=1260,hy=600;
   // the triangle from What's in a word, remembered, then filled in
@@ -1730,14 +1996,13 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,S)
   const wa=fin(t,cT+2.9,0.5),ia=fin(t,cT+5.0,0.6),ha=fin(t,cT+7.9,0.6);
   trio(ctx,cx,cy,1,{t,col:MM_ONT,word:"credential",wordLab:" ",idea:"Credential",thing:(c2,x,y,s)=>{const L=mm_cols(c2,["id","holder","kind"],[["C-88","Aisha K.","micro"],["C-91","Aisha K.","micro"],["A-12","Ben O.","award"]]),w=L[2].x+L[2].w;table(c2,x-w/2,y-104,"credentials",["id","holder","kind"],[["C-88","Aisha K.","micro"],["C-91","Aisha K.","micro"],["A-12","Ben O.","award"]],{col:[150,225,255]});},
     thingLab:"the data it points to",thingDy:146,e1:clamp((t-cT-5.2)/1.0,0,1),e2:clamp((t-cT-7.5)/1.0,0,1),e3:0,wa,ia,ha});
-  withA(ctx,fin(t,cT+4.6,0.5),()=>{const w=tw(ctx,"credencial",26,800)+40;glass(ctx,wx-w/2,wy+44,w,50,12,MM_ONT,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.93)"});T(ctx,"credencial",wx,wy+78,{w:800,size:26,align:"center"});
-    T(ctx,"en",wx-tw(ctx,"credential",30,800)/2-50,wy+10,{f:"mono",w:500,size:16,color:rgba(SOFT,1)});T(ctx,"es",wx-w/2-26,wy+76,{f:"mono",w:500,size:16,color:rgba(SOFT,1)});T(ctx,"the word",wx,wy+132,{w:700,size:20,align:"center",color:rgba(SOFT,1)});});
+  withA(ctx,fin(t,cT+3.9,0.5),()=>T(ctx,"the word, in the glossary",wx,wy+86,{w:700,size:20,align:"center",color:rgba(SOFT,1)}));
   // the idea, now a node in the ontology
   withA(ctx,ia,()=>{const A=mm_pill(ctx,700,128,"Award",MM_ONT,{size:16,r:10,a:fin(t,cT+5.6,0.5)}),M=mm_pill(ctx,1220,128,"Microcredential",MM_ONT,{size:16,r:10,a:fin(t,cT+5.9,0.5)});
     [A,M].forEach((b,i)=>{const q=fin(t,cT+5.8+i*0.3,0.5);if(q>0)isa(ctx,b.x+(i?-b.w/2-4:b.w/2+4),b.y+6,ix+(i?34:-34),iy-8,q,MM_ONT,{fill:"#0a0a18",s:12,lw:1.8});});
     T(ctx,"now written in the ontology",ix+44,iy+10,{w:600,size:18,color:rgba(SOFT,1)});});
   withA(ctx,fin(t,cN+0.3,0.6)*(1-fin(t,B,0.5)),()=>T(ctx,"Next: keeping it true",960,810,{w:700,size:26,align:"center",color:rgba(SOFT,1)}));
-  endCard(ctx,S,t,B+0.3,"Meaning machines can read",MM_INK,"An assistant answers from the meaning it can read.");
+  endCard(ctx,S,t,B+0.3,"Meaning machines can read",MM_INK,"An assistant answers from the meaning it can read, and trust.");
   vign(ctx,S);});
 
 /* ===== Made to read on a phone =====

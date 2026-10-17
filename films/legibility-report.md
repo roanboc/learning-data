@@ -5,7 +5,7 @@
 ## What's done
 
 - **Captions grow as the player shrinks.** On a phone held upright they stay about 15 px on screen, where they used to be 8 px (`films/inner-life-of-data/source/src/engine3.js`, `drawCaption`). The videos are unaffected: their captions ship beside them as `.srt` files, which phones already size for the screen.
-- **Every film made before *The map before the data* was reworked,** *The Inner Life of Data* last, in English and Spanish (measured again on 15 October 2026; before, 91% of its text was under 28 px). A shared layer, `films/from-words-to-data/shared/src/phone.js`, raises every piece of text that isn't decoration to 28 px after the camera's zoom, and each film's scenes were rearranged to make room: cards that take turns, code that shows the lines the narration reads, shorter names, and the camera closer on what's being talked about. Texture (a period page, a picture seen from afar, a card behind another) is marked as decoration and not counted.
+- **Every film made before *The map before the data* was reworked,** *The Inner Life of Data* last, in English and Spanish (measured again on 15 October 2026; before, 91% of its text was under 28 px). *Meaning machines can read*, with its fifth chapter, *One map, many views*, and *What's in a word*, with its two new labels, were measured again on 16 October 2026. A shared layer, `films/from-words-to-data/shared/src/phone.js`, raises every piece of text that isn't decoration to 28 px after the camera's zoom, and each film's scenes were rearranged to make room: cards that take turns, code that shows the lines the narration reads, shorter names, and the camera closer on what's being talked about. Texture (a period page, a picture seen from afar, a card behind another) is marked as decoration and not counted.
 - **Each film checks itself.** `tools/legible.py --overlaps` draws the film every half second and lists any text under 28 px, running off the frame or drawn over other words. Every reworked film passes; what it still lists are moments in passing, such as a card flying in, a fade or the camera moving in on part of a diagram.
 - **The labs and scenarios keep their sizes.** They're read up close, and size their text for their real width, so the phone layer loads only in the films.
 
@@ -22,12 +22,12 @@
 | Too good to be true | 246 | 0% | 0 | 28 | Reworked |
 | Data for Films | 463 | 0% | 0 | 28 | Reworked |
 | That's not quite right | 146 | 0% | 0 | 28 | Reworked |
-| What's in a word | 237 | 0% | 0 | 28 | Reworked |
+| What's in a word | 239 | 0% | 0 | 28 | Reworked |
 | Older than the systems | 293 | 0% | 0 | 28 | Reworked |
 | Built to write, built to read | 426 | 0% | 0 | 28 | Reworked |
 | Many ways to read | 251 | 0% | 0 | 28 | Reworked |
 | Both at once | 262 | 0% | 0 | 28 | Reworked |
-| Meaning machines can read | 352 | 0% | 0 | 28 | Reworked |
+| Meaning machines can read | 415 | 0% | 0 | 28 | Reworked |
 | Keeping it true | 475 | 0% | 0 | 28 | Reworked |
 | Declare it, then build it | 317 | 0% | 0 | 28 | Reworked |
 | Start from a question | 360 | 0% | 0 | 28 | Reworked |

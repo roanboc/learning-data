@@ -149,7 +149,8 @@ scene("direction",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s
   // the question, from the minister's office: what will it take, by tomorrow?
   arrive(ctx,930,700,t,tAsk+0.1,()=>{sticky(ctx,930,700,640,190,"What will it take? "+d10_nb("By tomorrow."),{col:NOTEC[1],size:44,rot:0.03,src:"the minister's office"});},{dy:-30,from:1.06});
   d10_clock(ctx,1222,618,38,t*(1+3*fin(t,w("ask","by tomorrow")-0.2,0.4)),fin(t,w("ask","by tomorrow")-0.2,0.4),[255,150,170]);
-  if(t>w("ask","by tomorrow"))ring(ctx,1222,618,38+30*((t-w("ask","by tomorrow"))%0.9)/0.9,[255,150,170],0.6*(1-((t-w("ask","by tomorrow"))%0.9)/0.9),2);
+  // a ring each second, in time with the pulse under it (tools/score.py: 120 a minute, its drum on every other beat)
+  if(t>w("ask","by tomorrow"))ring(ctx,1222,618,38+30*((t-w("ask","by tomorrow"))%1.0),[255,150,170],0.6*(1-((t-w("ask","by tomorrow"))%1.0)),2);
   ctx.restore();
   eaYear(ctx,90,90,"November 2026",CLAY,fin(t,tLt,0.5));
   vign(ctx,S);});

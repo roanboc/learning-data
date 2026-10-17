@@ -1,23 +1,28 @@
 /* ===== Now the questions appear: scenes =====
-   Ten chapters, as in ../script.md. Kerala in 1997: boats that could reach only one market, a catch poured back into the sea while
-   buyers nearby went without, and the phones that let a skipper agree a price at sea; then Tomás's backlog of forty-two requests, read
-   again with one test; a request traced up to a decision, a capability and a goal, and one that reaches nothing; all forty-two, half of
-   which reach nothing; a goal traced down to a decision, a question and a measure, meeting the request at one decision; a goal with no
+   Eleven chapters, as in ../script.md. Kerala in 1997: boats that could reach only one market, skippers who had to choose one at sea
+   without knowing what it would pay, a catch poured back into the sea while buyers nearby went without, and the phones that brought a
+   skipper the answer in time; then Tomás's backlog of forty-two requests, read again with the skipper's test; a request traced up to
+   a decision, a capability and a goal, and one, as live as the skipper's call, that reaches nothing; all forty-two, half of which
+   reach nothing; a goal traced down to a decision, a question and a measure, meeting the request at one decision; a goal with no
    measure; two reports that count one measure differently, and one definition; each measure's home and owner; four data products
-   instead of twenty-one reports; and Grace's measures confirmed.
+   instead of twenty-one reports; back on the coast, the phones spread and the skipper's question traced the same way, with what
+   changed; and Grace's measures confirmed.
    Made to read on a phone (tools/legible.py): text is at least 28 px in the frame; cards and names drawn small are texture. Motion:
    every shot drifts slowly and things arrive with a spring. Sound: every effect in tools/score.py fires at the same moment as the
    thing it belongs to here, so keep the two in step. */
 
 /* ---------- 1. Where to land ---------- */
-// The boats of two mornings. On the first, before the phones, each comes in to its own market, and eleven crews land at Badagara; on
-// the second, after them, the same boats spread along the coast, each to a market within reach of where it fished. One of them (the
-// skipper's) waits off Badagara and calls before it chooses.
+// The boats of two mornings. On the first, before the phones, each skipper chooses a market while still at sea and comes in to it,
+// and eleven crews land at Badagara; on the second, after them, the boats wait at sea, and one of them (the skipper's) calls the
+// markets before it chooses. Back on the coast (chapter 10), the same boats spread along the coast, each to a market within reach
+// of where it fished.
 const D8_BOATS=(()=>{const first=[2,3,3,2,3,3,2,3,3,2,3,11,2,3,3],B=[];first.forEach((n,m)=>{for(let j=0;j<n;j++)B.push({m1:m,k1:j,n1:n});});
   B.forEach((b,i)=>{b.m2=Math.min(14,Math.floor(i*15/B.length));b.out=12+hash(i,900)*16;b.al=(hash(i,901)-0.5)*12;b.go=hash(i,902);});
   const n2=Array(15).fill(0);B.forEach(b=>{b.k2=n2[b.m2]++;});B.forEach(b=>{b.n2=n2[b.m2];});return B;})();
 const D8_HERO=D8_BOATS.findIndex(b=>b.m1===D8_BA&&b.m2===D8_CH);
 Object.assign(D8_BOATS[D8_HERO],{out:12.5,al:0.5});
+// the boats that wonder, out at sea, what the markets will pay: a few along the whole coast, and two of Badagara's eleven
+const D8_WONDER=D8_BOATS.map((b,i)=>i).filter(i=>i!==D8_HERO&&(hash(i,903)<0.2||(D8_BOATS[i].m1===D8_BA&&D8_BOATS[i].k1%5===1)));
 // where a boat is: out at sea (u = 0), coming in to market m along a curve, and pulled up on its beach beside the others (u = 1);
 // it heads where it's going, rocks a little while it waits, and lies bow up the sand once it's in
 function d8_boatAt(b,m,u,mor,t,i){const S_=D8_MK[b.m1],M=D8_MK[m],k=mor===1?b.k1:b.k2,n=mor===1?b.n1:b.n2,sp=n>6?1.05:1.5,al=(k-(n-1)/2)*sp;
@@ -25,38 +30,50 @@ function d8_boatAt(b,m,u,mor,t,i){const S_=D8_MK[b.m1],M=D8_MK[m],k=mor===1?b.k1
   const cx=M.x+M.nx*6*D8_SK+M.dx*al*0.6*D8_SK,cy=M.y+M.ny*6*D8_SK+M.dy*al*0.6*D8_SK,e=ease(clamp(u,0,1)),q=1-e;
   const x=q*q*sx+2*q*e*cx+e*e*ex,y=q*q*sy+2*q*e*cy+e*e*ey,dx=2*q*(cx-sx)+2*e*(ex-cx),dy=2*q*(cy-sy)+2*e*(ey-cy);
   const an=u>=1?Math.atan2(-M.ny,-M.nx):Math.atan2(dy,dx)+(u<=0?Math.sin(t*1.1+i*1.7)*0.08:0);return{x,y,an};}
+// buyers waiting at a market, drawn as a map draws people, in rows inland of it; gone (0..1) walks them away inland, and near (0..1)
+// brings them down to the beach
+function d8_buyers(ctx,mi,n,a,gone,near){const M=D8_MK[mi],cols=Math.ceil(n/3);for(let k=0;k<n;k++){const row=k%3,col=Math.floor(k/3),inl=1.7+row*1.1+ease(gone||0)*(3+hash(k,905)*2)-ease(near||0)*1.1,al=(col-(cols-1)/2)*1.05+(row%2)*0.4;
+  d8_buyer(ctx,M.x-M.nx*inl*D8_SK+M.dx*al*D8_SK,M.y-M.ny*inl*D8_SK+M.dy*al*D8_SK,5.6,[255,226,180],a*(1-sstep(0.4,1,gone||0)));}}
 // a name on the map, with a dark halo so it reads over land and sea
 function d8_name(ctx,s,x,y,al,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.95)";ctx.shadowBlur=10;T(ctx,s,x,y,{w:800,size:30,align:al,color:"rgba(255,244,226,0.98)"});ctx.restore();});}
 // a tag that ends at x (its right edge) instead of starting there
 const d8_tagR=(ctx,x,y,s,col)=>tag(ctx,x-(tw(ctx,s,28,700)+26),y,s,col,{size:28});
+// the sea, from night (sun 0) towards day (sun 1)
+function d8_sky(ctx,S,sun){setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,rgba(mix([6,12,26],[34,72,104],sun),1));g.addColorStop(1,rgba(mix([4,8,18],[22,54,82],sun),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
 scene("kerala",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
-  const tM=c("markets"),tD=c("dump"),tP=c("phones"),tS=c("spread"),tA=c("act"),sun=clamp((t-1)/46,0,1);
-  // the sea, from night towards day
-  setScreen(ctx,S);let g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,rgba(mix([6,12,26],[34,72,104],sun),1));g.addColorStop(1,rgba(mix([4,8,18],[22,54,82],sun),1));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-  // the camera: India's south; the north Kerala coast; Badagara, close; and the coast again as the phones spread
-  const BA=D8_MK[D8_BA],CH=D8_MK[D8_CH],QU=D8_MK[D8_QU],cam=d8_camAt(t,[[0,2439,2000,0.15],[3.4,1000,545,1,4.2],[tD-0.3,BA.x-108,BA.y+15,2.6,2.2],[tS-0.4,1000,545,1,2.4]]);cam.z*=1+0.025*ease(t/sc.dur);
-  const tSp=w("spread","phones spread"),twK=fin(t,tP+0.2,1.6),twN=fin(t,tSp-0.2,1.4),twS=fin(t,tSp+0.9,1.4),near=fin(t,tD+1.6,0.6)*(1-fin(t,tS-0.7,0.5));
+  const tM=c("markets"),tBl=c("blind"),tD=c("dump"),tP=c("phones"),tA=c("act"),sun=clamp((t-1)/46,0,1);
+  d8_sky(ctx,S,sun);
+  // the camera: India's south; the north Kerala coast; then Badagara, close, for the rest of the chapter
+  const BA=D8_MK[D8_BA],CH=D8_MK[D8_CH],QU=D8_MK[D8_QU],cam=d8_camAt(t,[[0,2439,2000,0.15],[3.4,1000,545,1,4.2],[tD-0.3,BA.x-108,BA.y+15,2.6,2.2]]);cam.z*=1+0.025*ease(t/sc.dur);
+  const twK=fin(t,tP+0.2,1.6),near=fin(t,tD+1.6,0.6)*(1-fin(t,B-0.4,0.6));
   ctx.save();d8_camApply(ctx,cam);
-  d8_map(ctx,t,cam,{sun,ker:fin(t,1.8,1.2)*(1-fin(t,6.2,1.4)),labs:fin(t,0.3,1.0)*(1-fin(t,3.4,1.0)),sea:fin(t,6.6,1.0)*(1-fin(t,tS+0.3,0.6)),mk:fin(t,w("markets","beach markets")-0.4,1.4),tw:[twK,twN,twS]});
+  d8_map(ctx,t,cam,{sun,ker:fin(t,1.8,1.2)*(1-fin(t,6.2,1.4)),labs:fin(t,0.3,1.0)*(1-fin(t,3.4,1.0)),sea:fin(t,6.6,1.0)*(1-fin(t,tD-0.3,0.8)),mk:fin(t,w("markets","beach markets")-0.4,1.4),tw:[twK,0,0]});
   // fifteen kilometres round Badagara
   const rg=fin(t,w("dump","Within fifteen")-0.2,0.8)*(1-fin(t,tP-0.2,0.6));if(rg>0.01)withA(ctx,rg,()=>{ctx.save();ctx.setLineDash([10/cam.z,8/cam.z]);ctx.strokeStyle=rgba(TRUST,0.85);ctx.lineWidth=2.4/cam.z;ctx.beginPath();ctx.arc(BA.x,BA.y,15*D8_SK*ease(rg),0,TAU);ctx.stroke();ctx.restore();});
   // the catch, going back into the sea at Badagara
   d8_spill(ctx,BA.x+BA.nx*1.6*D8_SK,BA.y+BA.ny*1.6*D8_SK,3*D8_SK,t,fin(t,w("dump","goes back"),1.0)*(1-fin(t,tP,0.8)));
-  // buyers with no fish: fifteen at Chombala, twelve at Quilandi; then they leave
-  const bIn=fin(t,w("dump","Within fifteen")-0.4,0.6),bOut=clamp((t-w("dump","leave with"))/2.2,0,1);
-  [[D8_CH,15],[D8_QU,12]].forEach(([mi,n])=>{const M=D8_MK[mi],cols=Math.ceil(n/3);for(let k=0;k<n;k++){const row=k%3,col=Math.floor(k/3),inl=1.7+row*1.1+ease(bOut)*(3+hash(k,905)*2),al=(col-(cols-1)/2)*1.05+(row%2)*0.4;
-    d8_buyer(ctx,M.x-M.nx*inl*D8_SK+M.dx*al*D8_SK,M.y-M.ny*inl*D8_SK+M.dy*al*D8_SK,5.6,[255,226,180],bIn*(1-sstep(0.4,1,bOut)));}});
-  // the boats: the first morning's come in to their own markets; the second's wait at sea, then spread along the coast. The skipper's
-  // is a little bigger, and lit while the phone is on screen
-  const bs=15*Math.pow(cam.z,-0.4),lamp=1-sstep(0.3,0.65,sun),fade1=fin(t,tP-0.1,0.9),in2=fin(t,tP-0.2,0.9),bAp=fin(t,5.4,1.6),cnt=w("dump","eleven crews"),tOn=w("phones","only then");
-  const ph=fin(t,w("phones","At sea")-0.3,0.6)*(1-fin(t,tS-0.5,0.5));
+  // buyers with no fish, fifteen at Chombala and twelve at Quilandi, who leave; and, the morning the skipper calls, buyers at
+  // Chombala, who come down to the beach as his boat comes in
+  const bIn=fin(t,w("dump","Within fifteen")-0.4,0.6),bOut=clamp((t-w("dump","leave with"))/2.2,0,1),tAg=w("phones","agrees"),tOn=w("phones","only then");
+  d8_buyers(ctx,D8_CH,15,bIn,bOut,0);d8_buyers(ctx,D8_QU,12,bIn,bOut,0);d8_buyers(ctx,D8_CH,7,fin(t,tAg-0.2,0.6),0,clamp((t-tOn-2.2)/1.4,0,1));
+  // the boats: the first morning's come in from the sea to where they fished, wait there, and once each skipper has chosen, go on to
+  // that market; the second morning's wait at sea, and the skipper's, a little bigger and lit while the phone is on screen, comes in
+  // to Chombala once the price is agreed
+  const bs=15*Math.pow(cam.z,-0.4),lamp=1-sstep(0.3,0.65,sun),fade1=fin(t,tP-0.1,0.9),in2=fin(t,tP-0.2,0.9),bAp=fin(t,5.4,1.6),cnt=w("dump","eleven crews"),tCh=w("blind","must choose"),tWo=w("blind","without knowing");
+  const ph=fin(t,w("phones","At sea")-0.3,0.6)*(1-fin(t,tA-0.4,0.5));
+  // how far a first-morning boat has come: in from the sea to where it fished (0.3); then, its skipper having chosen without knowing
+  // what the markets will pay, on to that market
+  const u1=b=>{const p1=ease(clamp((t-(tM+0.2+b.go*1.6))/3.2,0,1)),p2=clamp((t-(tWo+b.go*1.0))/2.8,0,1);return[0.3*p1+0.7*p2,(p1>0&&p1<1)||(p2>0&&p2<1)];};
   D8_BOATS.forEach((b,i)=>{
-    if(fade1<1){const u=clamp((t-(tM+0.2+b.go*2.6))/4.2,0,1),q=d8_boatAt(b,b.m1,u,1,t,i),hi=b.m1===D8_BA?pulseAt(t,cnt+b.k1*0.09,0.8):0;
-      if(hi>0.01)glow(ctx,q.x,q.y,bs*1.4,TRUST,0.8*hi);d8_boat(ctx,q.x,q.y,q.an,bs,{a:bAp*(1-fade1),wake:u>0&&u<1?1:0,lamp});}
-    if(in2>0){const hero=i===D8_HERO,u=hero?clamp((t-tOn)/3.2,0,1):clamp((t-(tS+0.8+b.go*4.2))/6,0,1),q=d8_boatAt(b,b.m2,u,2,t,i);
-      if(hero&&ph>0.01)glow(ctx,q.x,q.y,bs*2.4,D8_SIG,0.6*ph);d8_boat(ctx,q.x,q.y,q.an,hero?bs*1.4:bs,{a:in2,wake:u>0&&u<1?1:0,lamp:lamp*0.6});}});
+    if(fade1<1){const[u,mv]=u1(b),q=d8_boatAt(b,b.m1,u,1,t,i),hi=b.m1===D8_BA?pulseAt(t,cnt+b.k1*0.09,0.8):0;
+      if(hi>0.01)glow(ctx,q.x,q.y,bs*1.4,TRUST,0.8*hi);d8_boat(ctx,q.x,q.y,q.an,bs,{a:bAp*(1-fade1),wake:mv?1:0,lamp});}
+    if(in2>0){const hero=i===D8_HERO,u=hero?clamp((t-tOn)/3.2,0,1):0,q=d8_boatAt(b,hero?D8_CH:b.m2,u,2,t,i);
+      if(hero&&ph>0.01)glow(ctx,q.x,q.y,bs*2.4,D8_SIG,0.6*ph);d8_boat(ctx,q.x,q.y,q.an,hero?bs*1.4:bs,{a:in2*(hero?1:0.8),wake:u>0&&u<1?1:0,lamp:lamp*0.6});}});
   const hq=d8_boatAt(D8_BOATS[D8_HERO],D8_CH,clamp((t-tOn)/3.2,0,1),2,t,D8_HERO);
+  const wq=D8_WONDER.map(i=>{const b=D8_BOATS[i],q=d8_boatAt(b,b.m1,u1(b)[0],1,t,i);return d8_toS(cam,q.x,q.y);});
   ctx.restore();
+  // out at sea, nobody knows what the markets will pay, and they go in not knowing
+  wq.forEach(([x,y],j)=>d8_qmark(ctx,x,y-30,fin(t,tCh-0.1+j*0.08,0.4)*(1-fin(t,tD-0.6,0.5))));
   // the coast, close: the three markets' names, and what each had that morning
   const[cx_,cy_]=d8_toS(cam,CH.x,CH.y),[bx_,by_]=d8_toS(cam,BA.x,BA.y),[qx_,qy_]=d8_toS(cam,QU.x,QU.y);
   // Badagara's name is on the sea side while its boats are on the beach, and moves inland when the phone's calls come in from the sea
@@ -70,28 +87,21 @@ scene("kerala",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   d8_beach(ctx,60,140,620,380,t,{a:fin(t,w("dump","their catch")-0.5,0.7)*(1-fin(t,tP-0.3,0.6)),pour:clamp((t-w("dump","goes back"))/2.4,0,1),lab:"Badagara, 7:45 a.m."});
   // the phones: the skipper at sea calls three markets in turn, agrees a price with one, and only then turns for it. The calls go out
   // from the phone over the boat and end at each market; each price comes back beside its name
-  const tC=w("phones","calls buyers"),tAg=w("phones","agrees"),[hx,hy]=d8_toS(cam,hq.x,hq.y),px_=hx,py_=hy-58;
+  const tC=w("phones","calls buyers"),[hx,hy]=d8_toS(cam,hq.x,hq.y),px_=hx,py_=hy-58;
   const CALLS=[[bx_,by_,"Rs 6",tC-0.1,"BADAGARA"],[qx_,qy_,"Rs 8",tC+0.55,"QUILANDI"],[cx_,cy_,"Rs 9.5",tC+1.2,"CHOMBALA"]];
   if(ph>0.01)withA(ctx,ph,()=>{CALLS.forEach(([mx,my,pr,t0],k)=>{const q=clamp((t-t0)/0.5,0,1);if(q<=0)return;const won=k===2?fin(t,tAg,0.4):0,lose=k<2?fin(t,tAg,0.4)*0.6:0,col=mix(D8_SIG,TRUST,won),
         dx=mx-px_,dy=my-py_,dl=Math.hypot(dx,dy)||1,s_=pr+" a kg",cw=tw(ctx,s_,28,700)+26;
       arrowTo(ctx,px_,py_,mx-dx/dl*16,my-dy/dl*16,col,0.9*(1-lose),{p:q,lw:3,head:12,dash:won>0.5?null:[9,7],bend:k===1?-0.12:0.12});
       if(q>=1)arrive(ctx,mx+96+cw/2,my-40,t,t0+0.5,()=>{withA(ctx,1-lose,()=>tag(ctx,mx+96,my-40,s_,col,{size:28}));if(k===2&&won>0.01)kt_gtick(ctx,mx+96+cw+26,my-40,16,won);},{dy:6});});
-    ctx.save();ctx.strokeStyle=rgba(D8_SIG,0.7);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(hx,hy-14);ctx.lineTo(px_,py_+24);ctx.stroke();ctx.restore();
-    glass(ctx,px_-24,py_-24,48,48,24,D8_SIG,{glow:14,ea:0.9,fill:"rgba(8,12,24,0.94)"});ctx.save();ctx.strokeStyle=rgba(D8_SIG,1);ctx.fillStyle=rgba(D8_SIG,1);ctx.lineWidth=2.2;ctx.lineCap="round";
-    rr(ctx,px_-7,py_-8,14,21,3);ctx.stroke();ctx.fillRect(px_-4,py_-5,8,6);ctx.beginPath();ctx.moveTo(px_+4,py_-8);ctx.lineTo(px_+4,py_-15);ctx.stroke();ctx.restore();});
+    ctx.save();ctx.strokeStyle=rgba(D8_SIG,0.7);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(hx,hy-14);ctx.lineTo(px_,py_+24);ctx.stroke();ctx.restore();d8_phoneIcon(ctx,px_,py_,24,1);});
   const scr=t<tC-0.1?["",""]:t<tAg?["CALLING",CALLS[Math.min(2,Math.floor((t-tC+0.1)/0.65))][4]]:["AGREED","RS 9.5"];
   d8_phone(ctx,60,130,560,560,t,{a:ph,bars:Math.floor(4*clamp((t-w("phones","At sea")-0.1)/0.8,0,1)+0.01),l1:scr[0],l2:scr[1],lab:"a skipper, at sea"});
-  // the phones spread, district by district; the waste stops, and prices move together
-  [[0,"Kozhikode · 1997",tS+0.4],[1,"Kannur · 1998",tSp+0.2],[2,"Kasaragod · 2000",tSp+1.3]].forEach(([d,s_,t0])=>{const T0=D8_TW.find(q=>q.r===d),[x,y]=d8_toS(cam,T0.x,T0.y);
-    arrive(ctx,x+70,y-30,t,t0,()=>withA(ctx,1-fin(t,B-0.4,0.6),()=>tag(ctx,x+70,y-30,s_,D8_SIG,{size:28})),{dy:8});});
-  const ch=fin(t,tS-0.1,0.6)*(1-fin(t,tA-0.5,0.6));d8_prices(ctx,60,470,660,380,clamp((t-tS-0.1)/3.6,0,1),{a:ch});
-  arrive(ctx,390,360,t,w("spread","waste stopped"),()=>withA(ctx,1-fin(t,tA-0.5,0.6),()=>tag(ctx,390,360,"the waste stopped",TRUST,{align:"center",size:30})),{dy:8});
-  arrive(ctx,390,420,t,w("spread","prices"),()=>withA(ctx,1-fin(t,tA-0.5,0.6),()=>tag(ctx,390,420,"prices evened out",TRUST,{align:"center",size:30})),{dy:8});
-  // the question was always the same; what changed is when its answer arrived
+  // the question was always the same, and it mattered because the skipper would act on its answer; what the phones changed is when
+  // the answer arrived: no longer at the market, after the choice, but at sea, before it
   const ov=1-fin(t,B-0.4,0.7);
-  arrive(ctx,430,300,t,w("act","where should")-0.3,()=>withA(ctx,ov,()=>sticky(ctx,430,300,620,150,"Where should we land?",{col:NOTEC[0],size:42,rot:-0.02})),{dy:-24,from:1.06});
-  d8_when(ctx,60,480,780,clamp((t-w("act","answer reached"))/1.8,0,1),{a:fin(t,w("act","What changed")-0.3,0.6)*ov});
-  eaYear(ctx,90,90,"January 1997 · Kerala",CLAY,fin(t,0.6,0.6)*(1-fin(t,tP-0.2,0.4)));eaYear(ctx,90,90,"February 1997",CLAY,fin(t,tP,0.4)*(1-fin(t,tS-0.2,0.4)));eaYear(ctx,90,90,"1997 to 2000",CLAY,fin(t,tS,0.4)*(1-fin(t,B-0.4,0.6)));
+  arrive(ctx,430,300,t,w("act","what will")-0.3,()=>withA(ctx,ov,()=>sticky(ctx,430,300,620,150,"What will each market pay?",{col:NOTEC[0],size:42,rot:-0.02})),{dy:-24,from:1.06});
+  d8_when(ctx,60,480,780,clamp((t-w("time","brought"))/1.8,0,1),{a:fin(t,w("act","It mattered")-0.3,0.6)*ov,hi:pulseAt(t,w("act","choosing")-0.1,1.6)});
+  eaYear(ctx,90,90,"January 1997 · Kerala",CLAY,fin(t,0.6,0.6)*(1-fin(t,tP-0.2,0.4)));eaYear(ctx,90,90,"February 1997",CLAY,fin(t,tP,0.4)*(1-fin(t,B-0.4,0.6)));
   fadeIn(ctx,S,t);vign(ctx,S);
   eaTitle(ctx,S,t,B+1.0,"Now the questions appear","decisions, questions and measures",EAC,"Film 8 of 11 · enterprise architecture, for data");});
 
@@ -114,7 +124,7 @@ const d8_urgent=n=>hash(n,875)<0.72;
 scene("backlog",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);wallBg(ctx,S,t);
   ctx.save();drift(ctx,t,sc,{z:0.025,y:420});
   const tPl=c("pile"),tT=c("test"),tMap=w("test","Now there's"),nt=ease(fin(t,tPl-0.4,0.8)),mv=ease(fin(t,tMap-0.5,1.1));
-  person(ctx,"tomas",230,1030,0.78,{t,pose:(t>0.6&&t<c("note")+2.6)||(t>w("test","one test")&&t<w("test","one test")+2.4)?"explain":"stand",expr:t>tT-0.2&&t<tMap?"concerned":"calm"});
+  person(ctx,"tomas",230,1030,0.78,{t,pose:(t>0.6&&t<c("note")+2.6)||(t>w("test","skipper's test")&&t<w("test","skipper's test")+2.4)?"explain":"stand",expr:t>tT-0.2&&t<tMap?"concerned":"calm"});
   // the note: which questions matter?
   arrive(ctx,960,360,t,0.3,()=>{ctx.save();ctx.translate(lerp(960,1560,nt),lerp(360,120,nt));ctx.scale(lerp(1,0.55,nt),lerp(1,0.55,nt));sticky(ctx,0,0,760,210,"Which questions matter?",{col:NOTEC[0],size:50,st:0,rot:-0.02});ctx.restore();},{dy:-30});
   // the backlog: a stack of cards, dealt into a grid; then, once there's a map, moved aside to be read against it
@@ -127,9 +137,10 @@ scene("backlog",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   [[2,"which lines fail most often?","reports",560],[1,"a dashboard of every outage, refreshed every minute, for the lobby","dashboards",1040],[3,"export every customer","extracts",1520]].forEach(([n,s_,word,x])=>{const t0=w("pile",word),a=fin(t,t0-0.1,0.4)*(1-fin(t,tUrg-0.3,0.5));
     if(a>0.01)arrive(ctx,x,560,t,t0-0.1,()=>withA(ctx,a,()=>d8_card(ctx,x,560,420,180,n,s_,{size:30,rot:(hash(n,882)-0.5)*0.04,hi:0.5})),{dy:-14});});
   arrive(ctx,lerp(1037,618,mv),lerp(185,255,mv),t,w("pile","forty-two"),()=>tag(ctx,lerp(1037,618,mv),lerp(185,255,mv),"42 requests",[255,176,150],{align:"center",size:30}),{dy:8});
-  // the map, and one test for every request
+  // the map, and the skipper's test for every request, with his boat on the card
   arrive(ctx,1500,380,t,tMap+0.3,()=>layerStack(ctx,1180,190,640,{p:clamp((t-tMap-0.3)/1.2,0,1),sh:54,gap:10,size:28}),{dy:-12});
-  arrive(ctx,1500,720,t,w("test","one test")-0.1,()=>ruleCard(ctx,1150,640,700,"Who will decide what with the answer, and when?",{kicker:"the test",col:TRUST,size:34,hi:pulseAt(t,w("test","who will"),2.4)}),{dy:-14});
+  arrive(ctx,1500,720,t,w("test","skipper's test")-0.1,()=>{ruleCard(ctx,1150,640,700,"Who will decide what with the answer, and when?",{kicker:"the skipper's test",col:TRUST,size:34,hi:pulseAt(t,w("test","who will"),2.4)});
+    d8_boat(ctx,1786,682,-0.12,52,{lamp:0.5});},{dy:-14});
   ctx.restore();
   eaYear(ctx,90,90,"day one",CLAY,fin(t,w("pile","day one")-0.2,0.5)*(1-fin(t,tT-0.3,0.5)));
   vign(ctx,S);});
@@ -154,8 +165,10 @@ scene("up",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);set
   if(t>top)kt_gtick(ctx,x+340,140,20,fin(t,top,0.4));
   arrive(ctx,x,96,t,top,()=>tag(ctx,x,96,"the request reaches the top",TRUST,{align:"center",size:30}),{dy:8});
   // the next: a dashboard for the lobby, which finds no decision, and fades
-  const X=1400,tW=w("lobby","Who decides"),tN=w("lobby","No one"),tR=w("lobby","reaches nothing"),dead=fin(t,tR,0.8);
+  const X=1400,tW=w("live","who decides"),tN=w("live","No one"),tR=w("live","reaches nothing"),dead=fin(t,tR,0.8),tLv=w("live","as live");
   arrive(ctx,X,760,t,tL+0.1,()=>d8_card(ctx,X,760,560,170,1,"a dashboard of every outage, refreshed every minute, for the lobby",{size:30,rot:0.01,dead:dead*0.7}),{dy:-14});
+  // it's as live as the skipper's call: the phone from Kerala beside it
+  arrive(ctx,1446,640,t,tLv-0.1,()=>{d8_phoneIcon(ctx,1446,640,22,1);tag(ctx,1476,640,"as live as the skipper's call",D8_SIG,{size:28});},{dy:8});
   withA(ctx,1-dead*0.7,()=>d8_trace(ctx,[[X,674],[X,612]],clamp((t-tW)/0.7,0,1),mix(TRUST,D8_RED,fin(t,tN,0.5)),{lw:3.5,dash:t>tN?[8,8]:null}));
   arrive(ctx,X,560,t,tW+0.4,()=>d8_slot(ctx,X-290,512,580,96,BUS,1),{dy:-12});
   arrive(ctx,X,440,t,tW,()=>withA(ctx,1-fin(t,tR,0.4),()=>tag(ctx,X,440,"who decides what with it?",BUS,{align:"center",size:30})),{dy:8});
@@ -359,7 +372,52 @@ scene("build",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   arrive(ctx,960,128,t,four,()=>tag(ctx,960,128,"scoped by capability and domain, not by request",PARCH,{align:"center",size:30}),{dy:8});
   vign(ctx,S);});
 
-/* ---------- 10. Questions that matter ---------- */
+/* ---------- 10. Back on the coast ---------- */
+// The coast from 1997 to 2001: the phones spread, district by district, and on boat after boat the skipper calls, learns what each
+// market will pay, and only then comes in, so the boats spread along the coast instead of crowding one beach. On the open sea beside
+// the map, the skipper's question is traced as the film traces a request: a measure, a question, a decision (who decides, and when)
+// and the goal it serves; then what changed. The rows: [kind, colour, name, y, height]
+const D8_KC=[["goal",MOT,"sell the whole catch",150,88],["decision",BUS,"where to land",290,124],["question",INF,"what will each market pay?",470,88],["measure",INF,"rupees a kilo, "+d8_nb("market by market"),614,88]];
+scene("coast",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);d8_sky(ctx,S,1);
+  // the camera: Badagara, close, where the opening left it; then back to the whole north coast, with the open sea on the left
+  const BA=D8_MK[D8_BA],CH=D8_MK[D8_CH],QU=D8_MK[D8_QU],cam=d8_camAt(t,[[0,BA.x-108,BA.y+15,2.6],[1.4,700,545,1,3.4]]);cam.z*=1+0.02*ease(clamp((t-4.8)/(sc.dur-4.8),0,1));
+  const tDi=w("spread","district by"),tDl=w("spread","district."),tB=w("knew","boat after");
+  ctx.save();d8_camApply(ctx,cam);
+  d8_map(ctx,t,cam,{sun:1,mk:1,tw:[1,fin(t,tDi-0.2,1.4),fin(t,tDl-0.1,1.4)]});
+  // the buyers at Chombala, as the opening left them
+  d8_buyers(ctx,D8_CH,7,1,0,1);
+  // the boats: the skipper's is in at Chombala; the rest wait at sea until, one after another, each skipper calls (a light on the
+  // boat), learns what each market will pay, and only then comes in. By 2001 more than 60% of the boats had a phone, so about two in
+  // three call; the rest come in too, to a coast where prices no longer swing
+  const bs=15*Math.pow(cam.z,-0.4);
+  D8_BOATS.forEach((b,i)=>{const hero=i===D8_HERO,tc=tB-0.4+b.go*1.8,u=hero?1:clamp((t-tc-0.6)/3.2,0,1),q=d8_boatAt(b,hero?D8_CH:b.m2,u,2,t,i),call=hero||hash(i,906)>0.66?0:fin(t,tc,0.3)*(1-fin(t,tc+2.6,0.8));
+    if(call>0.01)glow(ctx,q.x,q.y,bs*2.2,D8_SIG,0.7*call);d8_boat(ctx,q.x,q.y,q.an,hero?bs*1.4:bs,{a:hero?1:0.8+0.2*fin(t,tc,0.3),wake:u>0&&u<1?1:0});});
+  ctx.restore();
+  // the three markets' names, while the camera is close
+  const near=clamp((cam.z-1.5)/0.7,0,1),[cx_,cy_]=d8_toS(cam,CH.x,CH.y),[bx_,by_]=d8_toS(cam,BA.x,BA.y),[qx_,qy_]=d8_toS(cam,QU.x,QU.y);
+  d8_name(ctx,"Chombala",cx_+96,cy_+10,"left",near);d8_name(ctx,"Badagara",bx_+96,by_+10,"left",near);d8_name(ctx,"Quilandi",qx_+96,qy_+10,"left",near);
+  // the phones, district by district
+  [[0,"Kozhikode · 1997",w("spread","phones spread")],[1,"Kannur · 1998",tDi],[2,"Kasaragod · 2000",tDl]].forEach(([d,s_,t0])=>{const T0=D8_TW.find(q=>q.r===d),[x,y]=d8_toS(cam,T0.x,T0.y);
+    arrive(ctx,x+70,y-30,t,t0,()=>tag(ctx,x+70,y-30,s_,D8_SIG,{size:28}),{dy:8});});
+  // the skipper's question, traced up from the measure to the goal it serves, in gold, as the film traces a request
+  const X0=230,BW=560,XC=X0+BW/2,tWs=w("gain","The waste"),tEv=w("gain","evened out"),steady=fin(t,tEv-0.6,1.4);
+  const T_=[sc.ends.knew+0.3,w("knew","before choosing")-0.1,w("knew","what each"),w("knew","knew what")-0.3];
+  D8_KC.forEach(([kind,col,name,y,h],r)=>{const t0=T_[r],hi=pulseAt(t,t0+0.2,1.2)+(r===0?pulseAt(t,tWs+0.1,1.6):0)+(r===3?pulseAt(t,tEv,1.6):0);
+    withA(ctx,fin(t,t0,0.4),()=>T(ctx,kind,60,y+h/2+10,{f:"mono",w:600,size:28,color:rgba(col,0.85)}));
+    arrive(ctx,XC,y+h/2,t,t0,()=>{if(kind!=="decision")return d8_el(ctx,X0,y,BW,h,name,col,kind,{size:r===0?32:30,gs:14,hi,v:0.5+0.32*Math.sin(t*2.1)*Math.sin(t*0.63+1)*(1-steady)});
+      d8_el(ctx,X0,y,BW,h,"",col,kind,{gs:14,hi});T(ctx,name,XC,y+50,{w:700,size:32,align:"center",color:rgba(INK,0.96)});T(ctx,"the skipper · at sea, before eight",XC,y+98,{w:700,size:28,align:"center",color:rgba(BUS,1)});},{dy:-12});});
+  [[614,558,T_[2]],[470,414,T_[1]],[290,238,T_[0]]].forEach(([y0,y1,t0])=>d8_trace(ctx,[[XC,y0],[XC,y1]],clamp((t-t0+0.4)/0.5,0,1),TRUST,{lw:3.5}));
+  // the answer, in time, serves the goal: a light climbs the chain to it, and the goal is met
+  const u_=clamp((t-tWs+0.9)/1.0,0,1);if(u_>0&&u_<1)glow(ctx,XC,lerp(658,194,ease(u_)),70,TRUST,0.8*Math.sin(Math.PI*u_));
+  if(t>tWs)kt_gtick(ctx,X0+BW+20,150,20,fin(t,tWs+0.1,0.4));
+  // what changed: the outcomes, in a row of their own under the chain
+  withA(ctx,fin(t,tWs+0.2,0.4),()=>T(ctx,"outcomes",60,802,{f:"mono",w:600,size:28,color:rgba(MOT,0.85)}));
+  [["the waste stopped",X0,762,tWs+0.2],["prices evened out",603,762,tEv-0.3],["crews earned 8% more",X0,822,w("gain","Crews earned")],["fish cost 4% less",603,822,w("gain","fish cost")]].forEach(([s_,x,y,t0])=>
+    arrive(ctx,x,y,t,t0,()=>tag(ctx,x,y,s_,TRUST,{size:30}),{dy:8}));
+  eaYear(ctx,90,90,"Kerala · 1997 to 2001",CLAY,fin(t,0.8,0.6));
+  vign(ctx,S);});
+
+/* ---------- 11. Questions that matter ---------- */
 const D8_Q="Which questions matter?",D8_A=["The ones someone will act on, in time:","traced to a goal,","with a measure and an owner."].map(d8_nb).join(" ");
 scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");wallBg(ctx,S,t);
   ctx.save();drift(ctx,t,sc,{z:0.03,y:420});

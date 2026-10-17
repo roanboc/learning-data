@@ -46,7 +46,7 @@
 | How value reaches people | 207 | 0% | 0 | 30 | Drawn to the rule |
 | Who does it, and where meaning changes | 191 | 0% | 0 | 30 | Drawn to the rule |
 | Today, and where it's going | 175 | 0% | 0 | 28.5 | Drawn to the rule |
-| Now the questions appear | 228 | 0% | 0 | 28.6 | Drawn to the rule |
+| Now the questions appear | 242 | 0% | 0 | 28.7 | Drawn to the rule |
 
 ## What's left
 

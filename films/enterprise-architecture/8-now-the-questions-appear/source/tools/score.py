@@ -2,10 +2,11 @@
 # The series' palette (PLAYBOOK.md: vary the sound itself, film to film): for Kerala's coast in 1997, a celesta over bowed string pads
 # in A minor, and the sea itself, as slow, uneven waves of low, filtered noise (no borrowed Indian instruments: the story is told in the
 # series' own voice). It darkens as the catch goes back into the sea, where a low, muted pulse rises under the waste and fades as the
-# phones arrive, and it lifts to A major as the phones spread. Then nylon-string plucks and a soft flute over warm pads, here in C major,
-# for the present, and the series' own mark, four notes rising 1-3-5-8, on the flute and the nylon string together, at the title and
-# the end. The celesta comes back, softly, wherever an answer reaches someone in time: as the measure's light climbs to the goal it
-# checks, as Tomás's note gets its answer, and under the end card.
+# phones arrive. Then nylon-string plucks and a soft flute over warm pads, here in C major, for the present, and the series' own mark,
+# four notes rising 1-3-5-8, on the flute and the nylon string together, at the title and the end. Back on the coast, near the end, the
+# strings and the sea return, in A major now, as the phones spread. The celesta comes back, softly, wherever an answer reaches someone
+# in time: as the skipper's price comes back, as the measure's light climbs to the goal it checks (in Grace's chain and in the
+# skipper's), as Tomás's note gets its answer, and under the end card.
 # The rules from In the weeds of data crafting hold:
 #  - Nothing loops. The music is a bed of sustained chords that change with the chapters; nothing repeats in the background. The sea is
 #    on screen for the whole first chapter, and each of its waves has its own length and size.
@@ -114,20 +115,20 @@ def bed(sid, chords, a=None, b=None, g=0.04, tone='warm', bassg=0.02):
 
 
 # 1. Where to land: bowed strings in A minor, and the sea, from the first view of the coast to the title. The celesta as Kerala is lit
-#    and as the beach markets appear along the coast; water along the hulls as the boats come in. At Badagara, a low knock for each of
-#    the eleven boats as it's counted; the surf, close, while the beach is on screen; the catch slithering into the swash; a knock for
-#    each crowd of buyers, and a low note as they leave. A muted pulse, leaning on the semitone, under the waste, fading as the phones
-#    reach the coast. Then the celesta as the towers come up; for each call, the skipper keying the number, and the celesta as each
-#    price comes back, rising with it; a soft press as the price is agreed, and water along the hull as the boat turns for its market.
-#    The celesta for each district the phones reach, a swell as the waste stops, and as the boats spread along the coast; paper for
-#    the question; the celesta, twice, as the answer moves to "in time"; then C major, and the mark under the title
+#    and as the beach markets appear along the coast; water along the hulls as the boats come in. Muffled keys as the skippers wonder,
+#    at sea, what the markets will pay, and water again as they go in not knowing. At Badagara, a low knock for each of the eleven
+#    boats as it's counted; the surf, close, while the beach is on screen; the catch slithering into the swash; a knock for each crowd
+#    of buyers, and a low note as they leave. A muted pulse, leaning on the semitone, under the waste, fading as the phones reach the
+#    coast. Then the celesta as the towers come up; for each call, the skipper keying the number, and the celesta as each price comes
+#    back, rising with it; a soft press as the price is agreed, water along the hull as the boat turns for its market, and a breath of
+#    air as Chombala's buyers come down to the beach. Paper for the question, and softly for the morning drawn under it; a nylon note
+#    as the choice lights; the celesta, twice, as the answer moves to "in time"; then C major, and the mark under the title
 K = 'kerala'
 tK = lambda lid, off=0: C(K, lid, off)
 bed(K, [AM9], 0, cq(K, 'markets'), g=0.024, tone='strings', bassg=0.016)
 bed(K, [FMAJ7, DM9], cq(K, 'markets'), cq(K, 'dump'), g=0.024, tone='strings', bassg=0.016)
 bed(K, [FMIN], cq(K, 'dump'), cq(K, 'phones'), g=0.024, tone='strings', bassg=0.018)
-bed(K, [E7SUS], cq(K, 'phones'), cq(K, 'spread'), g=0.024, tone='strings', bassg=0.016)
-bed(K, [AMAJ9], cq(K, 'spread'), cq(K, 'act'), g=0.026, tone='strings', bassg=0.016)
+bed(K, [E7SUS], cq(K, 'phones'), cq(K, 'act'), g=0.024, tone='strings', bassg=0.016)
 bed(K, [ESUS4], cq(K, 'act'), cq(K, 'breath'), g=0.024, tone='strings', bassg=0.016)
 sea(S0(K) + 0.8, E(K) + 0.5, 0.036)
 cel(69, S0(K) + 1.8, 0.018, 0.2); cel(76, S0(K) + 2.15, 0.014, 0.25)
@@ -135,6 +136,10 @@ tMk = W(K, 'markets', 'beach markets', -0.4)
 for k, m in enumerate([69, 72, 74, 76, 79]):
     cel(m, tMk + 0.05 + k * 0.165, 0.011, -0.3 + k * 0.15)
 wake(tK('markets', 0.6), 6.0, 0.012, 0.1)
+tCh, tWo = W(K, 'blind', 'must choose'), W(K, 'blind', 'without knowing')
+for j in range(0, 10, 2):
+    tap(tCh - 0.1 + j * 0.08, 0.008, -0.2 + j * 0.06)
+wake(tWo, 3.8, 0.014, 0.1)
 cnt = W(K, 'dump', 'eleven crews')
 for k in range(11):
     s_knock(cnt + k * 0.09, 0.009, -0.1 + k * 0.02, 210 + 9 * (k % 4))
@@ -152,20 +157,18 @@ for k, (d, m) in enumerate([(-0.1, 64), (0.55, 69), (1.2, 71)]):
     dial(tC + d, 0.01, -0.6); cel(m, tC + d + 0.5, 0.016, 0.0 + 0.15 * k)
 tAg = W(K, 'phones', 'agrees')
 press(tAg + 0.05, 0.022); cel(76, tAg + 0.1, 0.018, 0.3)
-wake(W(K, 'phones', 'only then'), 3.2, 0.02, 0.2)
-tS = tK('spread'); tSp = W(K, 'spread', 'phones spread')
-cel(73, tSp - 0.15, 0.014, -0.2); cel(76, tSp + 0.95, 0.014, -0.35)
-swell([45, 52, 57, 61], W(K, 'spread', 'waste stopped'), 3.4, 0.02)
-wake(tS + 0.8, 6.0, 0.014, -0.1)
-paper(W(K, 'act', 'where should', -0.3), 0.03, -0.4, 0.5)
-paper(W(K, 'act', 'What changed', -0.3), 0.016, -0.4, 0.4)
-tAn = W(K, 'act', 'answer reached')
+tOn = W(K, 'phones', 'only then')
+wake(tOn, 3.2, 0.02, 0.2); air(tOn + 2.2, 1.4, 0.012, 0.25)
+paper(W(K, 'act', 'what will', -0.3), 0.03, -0.4, 0.5)
+paper(W(K, 'act', 'It mattered', -0.3), 0.016, -0.4, 0.4)
+nylon(64, W(K, 'act', 'choosing', -0.1), 0.016, -0.4)
+tAn = W(K, 'time', 'brought')
 cel(69, tAn + 0.95, 0.016, -0.4); cel(76, tAn + 1.3, 0.018, -0.4)
 bed(K, [CMAJ9], cq(K, 'breath') + 0.4, None, g=0.03, tone='warm', bassg=0.022)
 mark(G(K, 'breath', 1.6), 48)
 # 2. The backlog, read again: paper as Tomás's note goes up; muffled keys as the forty-two are dealt into their grid; a knock for the
 #    count, and for each of the three read close; soft stamps as most are marked urgent; a low note as he can't tell which matter; a knock
-#    for each layer of the map as it stacks, and a swell under it; a knock for the test, and a nylon note as it asks "who will"
+#    for each layer of the map as it stacks, and a swell under it; a knock for the skipper's test, and a nylon note as it asks "who will"
 L = 'backlog'
 bed(L, [CMAJ9, AM9, FMAJ9, GSUS4])
 paper(S0(L) + 0.3, 0.035, 0.0, 0.6)
@@ -182,10 +185,10 @@ tMap = W(L, 'test', "Now there's")
 for i in range(6):
     knock(tMap + 0.3 + i * 0.185, 0.011, 0.5)
 swell([36, 43, 48, 55], tMap + 0.3, 3.0, 0.02)
-knock(W(L, 'test', 'one test', -0.1), 0.02, 0.5); nylon(67, W(L, 'test', 'who will'), 0.02, 0.5)
+knock(W(L, 'test', "skipper's test", -0.1), 0.02, 0.5); nylon(67, W(L, 'test', 'who will'), 0.02, 0.5)
 # 3. Up from a request: a knock as the request arrives; a knock and a nylon note for each step it's traced up, rising, C, E, G, to
-#    the goal; a press and the octave as it reaches the top. Then the lobby's dashboard: a knock, a muffled key for the empty slot, and
-#    low felt notes for "no one" and "reaches nothing"
+#    the goal; a press and the octave as it reaches the top. Then the lobby's dashboard: a knock; the skipper's three keys as his phone
+#    is set beside it; a muffled key for the question and for the empty slot, and low felt notes for "no one" and "reaches nothing"
 U = 'up'
 bed(U, [CMAJ9, FMAJ9, GSUS4], 0, cq(U, 'lobby'))
 bed(U, [AM9, DM9], cq(U, 'lobby'), None)
@@ -196,8 +199,9 @@ tap(W(U, 'first', "Grace's"), 0.012, -0.55)
 top = W(U, 'climb', 'reaches the top')
 press(top, 0.026); nylon(72, top + 0.05, 0.022, -0.35)
 knock(C(U, 'lobby', 0.1), 0.022, 0.46)
-tap(W(U, 'lobby', 'Who decides'), 0.012, 0.46); tap(W(U, 'lobby', 'Who decides', 0.4), 0.012, 0.46)
-soft(45, W(U, 'lobby', 'No one'), 0.024, 0.46); soft(40, W(U, 'lobby', 'reaches nothing'), 0.022, 0.46)
+dial(W(U, 'live', 'as live', -0.1), 0.01, 0.55)
+tap(W(U, 'live', 'who decides'), 0.012, 0.46); tap(W(U, 'live', 'who decides', 0.4), 0.012, 0.46)
+soft(45, W(U, 'live', 'No one'), 0.024, 0.46); soft(40, W(U, 'live', 'reaches nothing'), 0.022, 0.46)
 # 4. Half of them: knocks and muffled keys as the goals, decisions and requests go up; air as all forty-two are traced; nylon notes,
 #    rising, as the goals light; a low note for the regulator; a low note as the other half reach nothing; a knock for each of the three
 #    read close; paper for each one's question, and air as they go back
@@ -339,7 +343,34 @@ for i, pan in enumerate([-0.55, -0.55, -0.55, 0.5]):
 for k in range(6):
     tap(W(B_, 'each', 'many questions', k * 0.11), 0.008, -0.1 if k % 2 == 0 else 0.85)
 soft(43, W(B_, 'each', 'own side'), 0.02, 0.0)
-# 10. Questions that matter: paper as the notes come back; a soft press as Grace confirms each measure, paper for the draft; paper for
+# 10. Back on the coast: the strings and the sea again, in A major now, through E with its fourth as the skippers learn what each
+#     market will pay, and back to A as what changed is told. The celesta for each district the phones reach, rising, A, C sharp, E;
+#     soft celesta notes, scattered, as boat after boat calls, and water along the hulls as they come in. A knock and a nylon note
+#     for each step of the skipper's chain as it's traced up, rising, A, C sharp, E, to the goal an octave up; the celesta, rising, as
+#     the light climbs from the measure to the goal, and a soft press for its tick; a swell as prices even out, and a knock and a
+#     nylon note for each of the two outcomes after it
+V = 'coast'
+bed(V, [AMAJ9], 0, cq(V, 'knew'), g=0.026, tone='strings', bassg=0.016)
+bed(V, [ESUS4], cq(V, 'knew'), cq(V, 'gain'), g=0.024, tone='strings', bassg=0.016)
+bed(V, [AMAJ9], cq(V, 'gain'), None, g=0.026, tone='strings', bassg=0.016)
+sea(S0(V) + 0.3, E(V) + 0.5, 0.03, seed=33)
+for word, m, pan in [('phones spread', 69, 0.55), ('district by', 73, 0.3), ('district.', 76, 0.15)]:
+    cel(m, W(V, 'spread', word), 0.014, pan)
+tB = W(V, 'knew', 'boat after')
+for k, m in enumerate([64, 69, 68, 73, 71, 76]):
+    cel(m, tB - 0.4 + k * 0.33, 0.007, 0.15 + 0.08 * (k % 3))
+wake(tB + 0.2, 5.0, 0.014, 0.35)
+tGo = G(V, 'knew') + _DUR[V + '/knew'] + 0.3
+for t0, m in [(W(V, 'knew', 'knew what', -0.3), 57), (W(V, 'knew', 'what each'), 61), (W(V, 'knew', 'before choosing', -0.1), 64), (tGo, 69)]:
+    knock(t0, 0.014, -0.45); nylon(m, t0 + 0.05, 0.02, -0.45)
+tWs = W(V, 'gain', 'The waste')
+for k, m in enumerate([64, 69, 73]):
+    cel(m, tWs - 0.85 + k * 0.35, 0.014, -0.45)
+press(tWs + 0.1, 0.022); cel(76, tWs + 0.15, 0.016, -0.3)
+swell([45, 52, 57, 61], W(V, 'gain', 'evened out', -0.3), 3.0, 0.018)
+for word, m, pan in [('Crews earned', 69, -0.6), ('fish cost', 73, -0.25)]:
+    t0 = W(V, 'gain', word); knock(t0, 0.012, pan); nylon(m, t0 + 0.05, 0.016, pan)
+# 11. Questions that matter: paper as the notes come back; a soft press as Grace confirms each measure, paper for the draft; paper for
 #     the answer, with the celesta, as Tomás's note gets one, and a pencil as it's written and as the dot on his question fills
 #     halfway; paper for the next question; a swell as the three notes glow; the celesta once, under the end card, before the mark
 Z = 'end'

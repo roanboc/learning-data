@@ -1,8 +1,9 @@
 /* ===== Now the questions appear: the film's own pictures (prefixed d8_) =====
    Kerala, January 1997: a sketch map of India's south and of the northern Kerala coast, with the fifteen beach markets of Jensen's
-   survey placed by their distances along the coast; sardine boats coming in at dawn; the beach at Badagara, where crews pour their
-   catch back into the sea while buyers a few kilometres away leave with nothing; the phone towers that reached the coast district
-   by district; a skipper's phone at sea; and prices that move together once the phones arrive. On the wall and on the films' dark
+   survey placed by their distances along the coast; sardine boats coming in at dawn, their skippers not knowing what the markets
+   will pay; the beach at Badagara, where crews pour their catch back into the sea while buyers a few kilometres away leave with
+   nothing; the phone towers that reached the coast district by district; a skipper's phone at sea, close up and as a small icon; and
+   one morning as a line, with the price arriving too late or in time. On the wall and on the films' dark
    glass: the reporting team's backlog as index cards; requests traced up to a decision, a capability and a goal; goals traced down
    to decisions, questions and measures; a measure's definition, its home on the map and its owner; households falling behind; and
    data products on each side of the wall between the network and retail.
@@ -253,24 +254,17 @@ function d8_phone(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)re
     ctx.fillStyle=rgba(mix(skL,[255,240,230],0.35),0.55);ctx.beginPath();ctx.ellipse(pw*0.47,yy-8,5,8,0.2,0,TAU);ctx.fill();});
   ctx.restore();ctx.restore();
   if(o.lab)tag(ctx,x+18,y+h-34,o.lab,D8_SIG,{size:28});});}
-// Prices at three markets over the months the phones arrived, drawn after Jensen's figure, not plotted from his data: before, they
-// swing from day to day and a market with too many boats drops to nothing; after, they move together. p (0..1): drawn up to
-function d8_prices(ctx,x,y,w,h,p,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,h,20,[255,214,170],{glow:14,ea:0.75,fill:"rgba(8,12,24,0.95)"});
-  T(ctx,"sardine prices at three markets",x+26,y+46,{w:800,size:28,color:rgba([255,226,190],1)});const gx=x+40,gy=y+74,gw=w-70,gh=h-120,ph_=0.42,N=64;
-  ctx.strokeStyle="rgba(220,230,255,0.25)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(gx,gy);ctx.lineTo(gx,gy+gh);ctx.lineTo(gx+gw,gy+gh);ctx.stroke();
-  T(ctx,"Rs a kg",gx+8,gy+14,{w:600,size:20,color:"rgba(200,210,230,0.7)",deco:1});T(ctx,"0",gx-10,gy+gh+6,{w:600,size:20,align:"right",color:"rgba(200,210,230,0.7)",deco:1});
-  const mx=gx+gw*ph_;ctx.save();ctx.setLineDash([8,7]);ctx.strokeStyle=rgba(D8_SIG,0.8);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(mx,gy-6);ctx.lineTo(mx,gy+gh);ctx.stroke();ctx.restore();
-  T(ctx,"phones",mx+10,gy+gh-12,{w:700,size:28,color:rgba(D8_SIG,1)});
-  [[255,214,150],[255,150,130],[160,210,255]].forEach((col,m)=>{ctx.save();ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=2.8;ctx.lineJoin="round";ctx.beginPath();
-    for(let i=0;i<=N*p;i++){const u=i/N,f=u<ph_?1:Math.exp(-(u-ph_)/0.035),vb=0.58+0.3*Math.sin(i*1.9+m*2.3)*Math.sin(i*0.37+m)+0.2*(hash(i*3+m,861)-0.5),
-        va=0.62+0.025*Math.sin(i*0.33+m*2.1)+0.018*Math.sin(i*0.91+m*4.7)+0.012*(hash(i*3+m,862)-0.5),v=u<ph_&&hash(i*3+m,860)>0.88?0:clamp(lerp(va,vb,f),0.04,1);
-      const xx=gx+u*gw,yy=gy+gh-v*gh*0.92;i?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy);}ctx.stroke();ctx.restore();});});}
+// the skipper's phone, as a small round icon: where the calls go out from, and what a live dashboard is compared with (r: its radius)
+function d8_phoneIcon(ctx,x,y,r,a){if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x-r,y-r,2*r,2*r,r,D8_SIG,{glow:14,ea:0.9,fill:"rgba(8,12,24,0.94)"});const k=r/24;ctx.save();ctx.translate(x,y);ctx.scale(k,k);
+  ctx.strokeStyle=rgba(D8_SIG,1);ctx.fillStyle=rgba(D8_SIG,1);ctx.lineWidth=2.2;ctx.lineCap="round";rr(ctx,-7,-8,14,21,3);ctx.stroke();ctx.fillRect(-4,-5,8,6);ctx.beginPath();ctx.moveTo(4,-8);ctx.lineTo(4,-15);ctx.stroke();ctx.restore();});}
+// a skipper at sea who doesn't know what the markets will pay: a small question, as a bubble over the boat
+function d8_qmark(ctx,x,y,a){if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x-20,y-16,40,32,14,INF,{glow:8,ea:0.85,fill:"rgba(16,10,8,0.94)"});d8_glyph(ctx,"question",x,y-1,9,INF);});}
 // When the answer arrives, in one morning: at sea, then the choice of where to land, then at the market. u (0..1) moves the answer
-// (a price) from after the choice, where it's too late, to before it, where it can still be acted on
+// (a price) from after the choice, where it's too late, to before it, where it can still be acted on; o.hi lights the choice
 function d8_when(ctx,x,y,w,u,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const h=250;withA(ctx,a,()=>{glass(ctx,x,y,w,h,22,[220,230,255],{glow:12,ea:0.6,fill:"rgba(8,12,24,0.95)"});
   const ly=y+150,xa=x+90,xb=x+w*0.5,xc=x+w-110,e=ease(clamp(u,0,1));ctx.save();ctx.strokeStyle="rgba(220,230,255,0.55)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(xa,ly);ctx.lineTo(xc,ly);ctx.stroke();ctx.restore();
   d8_boat(ctx,xa,ly,0,46,{});ctx.save();ctx.fillStyle=rgba([255,240,214],1);ctx.beginPath();ctx.arc(xc,ly,9,0,TAU);ctx.fill();ctx.restore();
-  ctx.save();ctx.translate(xb,ly);ctx.fillStyle="rgba(8,12,24,1)";ctx.beginPath();ctx.moveTo(0,-22);ctx.lineTo(22,0);ctx.lineTo(0,22);ctx.lineTo(-22,0);ctx.closePath();ctx.fill();ctx.strokeStyle=rgba(BUS,1);ctx.lineWidth=3;ctx.stroke();ctx.restore();
+  if(o.hi>0.01)glow(ctx,xb,ly,64,BUS,0.55*o.hi);ctx.save();ctx.translate(xb,ly);ctx.fillStyle="rgba(8,12,24,1)";ctx.beginPath();ctx.moveTo(0,-22);ctx.lineTo(22,0);ctx.lineTo(0,22);ctx.lineTo(-22,0);ctx.closePath();ctx.fill();ctx.strokeStyle=rgba(BUS,1);ctx.lineWidth=3;ctx.stroke();ctx.restore();
   T(ctx,"at sea",xa,ly+62,{w:700,size:28,align:"center",color:rgba(SOFT,1)});T(ctx,"choose where to land",xb,ly+62,{w:700,size:28,align:"center",color:rgba(BUS,1)});T(ctx,"at the market",xc,ly+62,{w:700,size:28,align:"center",color:rgba(SOFT,1)});
   const ax=lerp(xc,lerp(xa,xb,0.55),e),col=mix(D8_RED,TRUST,e);tag(ctx,ax,ly-58,"the price",col,{align:"center",size:28});ctx.save();ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(ax,ly-36);ctx.lineTo(ax,ly-12);ctx.stroke();ctx.restore();
   withA(ctx,1-sstep(0.3,0.5,u),()=>T(ctx,"too late",x+w-30,y+52,{w:800,size:30,align:"right",color:rgba(D8_RED,1)}));withA(ctx,sstep(0.6,0.85,u),()=>T(ctx,"in time",x+30,y+52,{w:800,size:30,color:rgba(TRUST,1)}));});}

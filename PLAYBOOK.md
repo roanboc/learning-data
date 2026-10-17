@@ -31,6 +31,7 @@ Before story or pictures, the concept is settled. [`AGENTS.md`](AGENTS.md) gives
 - **Turn the place where the metaphor breaks into the twist.** The projector, which shows the original without a copy, became the film's dramatic moment.
 - **Show things failing.** The wrong sketch (312% full, every test passing), the copy that goes stale, the record a test stops. A failure teaches the mechanism better than a success does.
 - **Vary the stories, not only the ideas.** A series whose openings all come from the same place and century starts to feel like one film. Plan the openings across a series together: different cultures and regions, the past, the present and imagined futures, and different kinds of story (an invention, a failure, an everyday system). Label an imagined future as imagined, and check a story from another culture against that culture's own sources.
+- **Say how the opening story carries the idea, and close it.** An opening from another place or time is there to carry the film's idea, and a viewer won't always see the link alone. Say it in one line at the end of the opening (*Now the questions appear*: the skipper's question mattered because he would act on its answer, and the phones brought it in time), let the main story borrow from it by name ("the skipper's test"), and come back to it before the end, traced with the film's own idea. Its first cut left the link unsaid and the story open, and the author read it as just a decision made from numbers.
 - **Set guardrails early.** At most three zoom levels, only original art, and no styles that belong to other cultures, such as dot painting, which Australian cultural protocols protect.
 
 *Ask: what would an expert say is wrong with this picture?*
@@ -169,6 +170,7 @@ What *From words to data*, seven films made together, added.
 - [ ] One thing to follow, from where it's born to a human outcome.
 - [ ] The metaphor is tested against the hardest mechanism, and each layer has one job.
 - [ ] A table maps every object to a mechanism.
+- [ ] The opening story's link to the idea is said in one line, the main story uses it, and the film comes back to it at the end.
 
 **Before rendering**
 - [ ] The rigour sheet covers every scene.

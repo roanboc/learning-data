@@ -10,26 +10,30 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En 1947, el registro dio a cada persona un número para toda la vida.",
 "One person, written down once, followed wherever they went.":
 "Una persona, anotada una sola vez, seguida adondequiera que fuera.",
-"Today, at the university. Linh Nguyen is studying health informatics.":
-"Hoy, en la universidad. Linh Nguyen estudia informática en salud.",
-"This month, she moves in with her brother, Minh.":
-"Este mes, se muda con su hermano, Minh.",
-"She tells the student system her new address.":
-"Avisa su nueva dirección al sistema de estudiantes.",
-"Done, she thinks.":
-"Listo, piensa.",
-"But the student system isn't the only one that knows her.":
-"Pero el sistema de estudiantes no es el único que la conoce.",
-"She did her first degree here, so the alumni office has her.":
-"Hizo aquí su primera carrera, así que la tienen en egresados.",
-"She tutors a first-year unit, so HR has her too, with a staff number.":
-"Da tutorías en primer año, así que RR. HH. también la tiene, con un número de personal.",
-"And this year she joined a research project, so the research office has her as well.":
-"Y este año entró en un proyecto de investigación, así que la oficina de investigación también la tiene.",
-"HR posts her next contract, with her pay, to the old flat, where someone else lives now.":
-"RR. HH. envía su próximo contrato, con su sueldo, a su antiguo departamento, donde ahora vive otra persona.",
-"Four records, four Linhs, and only one knows she moved.":
-"Cuatro registros, cuatro Linhs, y solo uno sabe que se mudó.",
+"Today, at the university. Linh Nguyen graduated here in 2022.":
+"Hoy, en la universidad. Linh Nguyen se graduó aquí en 2022.",
+"Last year, she came back to study health informatics.":
+"El año pasado, volvió a estudiar informática en salud.",
+"She applied online, and got a new student number.":
+"Postuló en línea y recibió otro número de estudiante.",
+"Nothing linked it to the number she graduated with.":
+"Nada lo vinculaba al número con el que se graduó.",
+"Now the university has five records of her.":
+"Ahora la universidad tiene cinco registros de ella.",
+"Two in the student system, under the old number and the new.":
+"Dos en el sistema de estudiantes: el número antiguo y el nuevo.",
+"One at the alumni office, which knows only the old one.":
+"Uno en la oficina de egresados, que solo conoce el antiguo.",
+"One in HR, which pays her to tutor a first-year unit.":
+"Uno en RR. HH., que le paga por dar tutorías en primer año.",
+"And one at the research office, for a project she joined this year.":
+"Y uno en la oficina de investigación, por un proyecto de este año.",
+"So her application asked for a transcript of the degree the university gave her.":
+"Así que su solicitud pidió el certificado de notas del título que la misma universidad le dio.",
+"And the alumni office invites her back, for a master's. She's already doing one.":
+"Y la oficina de egresados la invita a volver, para una maestría. Ya está haciendo una.",
+"Five records, five Linhs, and nobody sees that she's one person.":
+"Cinco registros, cinco Linhs, y nadie ve que es una sola persona.",
 "Linh is master data: one of the things the university is about, shared by every process and system.":
 "Linh es un dato maestro: una de las cosas de las que trata la universidad, compartida por todos sus procesos y sistemas.",
 "The lists that sort her, like “casual tutor” or a country, are reference data.":
@@ -120,10 +124,12 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Siguen ocho películas más, en cuatro partes.",
 "Who someone is. Roles and lists. Sharing it safely. And keeping it right.":
 "Quién es alguien. Roles y listas. Compartirlo con seguridad. Y mantenerlo bien.",
-"Linh changes her address, once.":
-"Linh cambia su dirección, una vez.",
-"Every role hears.":
-"Cada rol se entera.",
+"This time, when Linh applies, the university finds her first.":
+"Esta vez, cuando Linh postula, la universidad la encuentra primero.",
+"It adds a role, not a person.":
+"Agrega un rol, no una persona.",
+"Her degree is already there, and the alumni office sees she's back.":
+"Su título ya está ahí, y la oficina de egresados ve que volvió.",
 "Know the person, not just the role.":
 "Conoce a la persona, no solo el rol."
 });

@@ -1,14 +1,14 @@
 /* Learning Data: "Pausa para pensar" de One person, many roles, en español. Mantén las claves iguales a think.en.js.
-   La película se detiene al final de cuatro capítulos (four, apart, keeps, entities), con una pregunta cada vez. think.js las muestra,
+   La película se detiene al final de cuatro capítulos (five, apart, keeps, entities), con una pregunta cada vez. think.js las muestra,
    y las lista otra vez en "Piénsalo" (#think-list). La serie todavía no tiene labs, así que ninguna pregunta tiene "stop",
    y el .player data-labs de la página está vacío. */
 window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
   qs:{
-  "four":{q:"Linh le avisó su nueva dirección al sistema de estudiantes. ¿Por qué RR. HH. sigue enviando su contrato a su antiguo departamento?",
-    opts:[{t:"El sistema de estudiantes perdió el cambio."},{t:"Cada sistema guarda su propio registro de ella, y nada les dice a los demás que son la misma persona.",ok:true},{t:"Le dio a RR. HH. una dirección equivocada."}],
-    why:"Cuatro sistemas guardan cada uno un rol: una estudiante, una egresada, una tutora, una investigadora. Ninguno guarda a la persona, así que un cambio que se le avisa a uno nunca llega a los demás. ¿Cuáles de tus propios datos tendrías que cambiar en más de un lugar?"},
-  "apart":{q:"Linh y Minh pueden compartir la dirección de su casa, pero nunca un número de estudiante. ¿Por qué?",
+  "five":{q:"La solicitud de Linh le pidió el certificado de notas de un título que le dio la misma universidad. ¿Por qué no lo sabía?",
+    opts:[{t:"El título era demasiado antiguo para guardarlo."},{t:"La solicitud le dio un nuevo número de estudiante, y nada lo vinculó con el registro de su título, que está con el número anterior.",ok:true},{t:"Todavía no se había graduado."}],
+    why:"Cinco registros guardan a una sola persona, cada uno en su sistema, y el sistema de estudiantes guarda dos de ellos, con dos números. Ninguno guarda a la persona, así que lo que sabe un registro, los demás no lo ven. ¿Alguna vez una organización te pidió algo que ya tenía sobre ti?"},
+  "apart":{q:"Linh y su hermano pueden compartir la dirección de su casa, pero nunca un número de estudiante. ¿Por qué?",
     opts:[{t:"Una dirección importa menos que un número."},{t:"Un punto de contacto es una forma de llegar a las personas, y dos pueden compartirlo; un identificador lo emite un sistema para nombrar un solo registro.",ok:true},{t:"El sistema de estudiantes no guarda direcciones."}],
     why:"Un punto de contacto tiene un propósito, y la dirección de una casa puede ser de todos los que viven ahí. Un identificador pertenece al sistema que lo emitió, para nombrar exactamente un registro, así que si dos personas lo comparten, siempre es un error. ¿Qué podría salir mal si lo compartieran?"},
   "keeps":{q:"El nombre legal de Linh, su nombre preferido y sus datos laborales la describen a ella. ¿Por qué cada uno tiene un responsable distinto?",

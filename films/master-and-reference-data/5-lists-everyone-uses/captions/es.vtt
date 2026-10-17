@@ -1,0 +1,136 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:04.165
+Las aerolíneas conocen cada aeropuerto por tres letras.
+
+00:00:05.465 --> 00:00:11.472
+El aeropuerto principal de Toronto es YYZ, por el antiguo código de estación de Malton, donde está.
+
+00:00:13.072 --> 00:00:20.596
+El de Ciudad Ho Chi Minh es SGN. La ciudad tomó ese nombre en 1976, y su código aún dice Saigón.
+
+00:00:22.196 --> 00:00:26.702
+Un código sobrevive a su razón, porque cambiarlo les cuesta a todos los que lo usan.
+
+00:00:34.002 --> 00:00:36.501
+Una universidad funciona con listas como estas.
+
+00:00:37.201 --> 00:00:40.012
+Linh estudia aquí y da tutorías en primer año.
+
+00:00:41.112 --> 00:00:47.725
+RR. HH. la llama «Casual Academic». Nómina, «CAS». La plataforma de aprendizaje, «tutor».
+
+00:00:49.425 --> 00:00:53.060
+Tres nombres para un rol, y nada escrito dice que coinciden.
+
+00:00:54.360 --> 00:00:58.615
+La lista de roles de RR. HH. vive en una hoja de cálculo, adjunta a un correo.
+
+00:00:59.915 --> 00:01:04.533
+Y nadie ha anotado qué tipos de identificador emite la universidad.
+
+00:01:07.033 --> 00:01:12.025
+Su estado es «ENR» en el sistema de estudiantes, y «active» en la plataforma de aprendizaje.
+
+00:01:13.225 --> 00:01:15.179
+Un archivo mapea ambos a «studying».
+
+00:01:16.279 --> 00:01:19.671
+Luego dos pruebas vuelven a escribir la lista de estados, a mano.
+
+00:01:21.171 --> 00:01:28.094
+Su país de nacimiento es «Vietnam» en RR. HH., «Viet Nam» en el sistema de estudiantes y «VN» en la oficina de investigación.
+
+00:01:29.494 --> 00:01:33.096
+Así, un conteo de personas por país muestra su país tres veces.
+
+00:01:35.596 --> 00:01:39.996
+Estos son datos de referencia: listas cortas que clasifican y describen todo lo demás.
+
+00:01:41.296 --> 00:01:47.862
+Algunas son de la propia universidad, como los tipos de rol. Otras vienen de fuera, como los países o los códigos de aeropuerto.
+
+00:01:49.262 --> 00:01:53.485
+Cada valor tiene un código para los sistemas y una etiqueta para las personas.
+
+00:01:55.985 --> 00:01:59.249
+Jun, de ingeniería analítica, le da a cada lista un solo hogar.
+
+00:02:00.349 --> 00:02:05.732
+Tipos de rol, tipos de identificador, tipos de relación, propósitos de consentimiento y países.
+
+00:02:07.232 --> 00:02:13.020
+Cada una es una tabla: cada valor con su código y etiqueta, su responsable y la fecha desde la que aplica.
+
+00:02:14.320 --> 00:02:18.141
+«tutor» es de RR. HH., y «student», de la oficina de registro.
+
+00:02:19.241 --> 00:02:25.385
+Al lado se mapean los nombres de cada sistema: «Casual Academic», «CAS» y «tutor» significan «tutor».
+
+00:02:27.885 --> 00:02:32.297
+Ahora las pruebas leen sus valores permitidos desde la lista, en vez de escribirlos.
+
+00:02:33.597 --> 00:02:37.008
+Cambia la lista una vez, y todas las pruebas que la leen la siguen.
+
+00:02:38.308 --> 00:02:44.337
+En la plataforma, cada lista es una tabla, y su linaje muestra las tablas y los reportes que la leen.
+
+00:02:49.037 --> 00:02:52.407
+El próximo año, RR. HH. llamará al rol «Sessional Academic».
+
+00:02:53.607 --> 00:02:58.102
+El cambio es un pull request, y RR. HH., como responsable de la lista, lo aprueba.
+
+00:02:59.502 --> 00:03:02.074
+El nuevo nombre rige desde el 1 de enero.
+
+00:03:03.274 --> 00:03:08.360
+El antiguo no se borra. Se cierra, porque los contratos anteriores de Linh aún lo usan.
+
+00:03:10.860 --> 00:03:12.657
+Algunas listas son de alguien más.
+
+00:03:13.357 --> 00:03:19.418
+Los países vienen del estándar internacional, ISO 3166, que se carga de forma programada.
+
+00:03:20.718 --> 00:03:24.702
+Como el glosario del proyecto, la lista se copia, nunca se vuelve a escribir.
+
+00:03:26.002 --> 00:03:29.047
+Viet Nam aparece una vez, con un solo código: VN.
+
+00:03:30.247 --> 00:03:32.929
+Y el conteo por país muestra su país una sola vez.
+
+00:03:35.429 --> 00:03:38.599
+Algunas listas describen personas, como tratamiento o género.
+
+00:03:39.699 --> 00:03:43.764
+Esas se mantienen cortas e inclusivas, y solo se piden con un propósito.
+
+00:03:45.164 --> 00:03:49.863
+Un tratamiento puede revelar si una persona está casada. Si no hace falta, no se pregunta.
+
+00:03:52.363 --> 00:03:54.785
+Toda industria funciona con listas como estas.
+
+00:03:55.485 --> 00:03:59.478
+Los tipos de cliente de un banco deciden qué controles pasa cada cliente.
+
+00:04:00.778 --> 00:04:05.069
+En un hospital, los tipos de relación deciden quién puede saber de un paciente.
+
+00:04:06.369 --> 00:04:09.713
+Si una lista está mal, a una persona real le pasa lo que no debía.
+
+00:04:12.213 --> 00:04:16.305
+Ahora el rol, el estado y el país de Linh vienen cada uno de una sola lista.
+
+00:04:17.805 --> 00:04:24.933
+Como un código de aeropuerto, un valor puede sobrevivir a su razón. Pero ahora todos saben quién lo mantiene, y desde cuándo aplica.
+
+00:04:26.533 --> 00:04:28.992
+Una lista tiene responsable, fecha y un solo hogar.

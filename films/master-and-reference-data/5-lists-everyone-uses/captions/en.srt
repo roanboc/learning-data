@@ -1,0 +1,179 @@
+1
+00:00:01,600 --> 00:00:04,165
+Airlines know each airport by three letters.
+
+2
+00:00:05,465 --> 00:00:11,472
+Toronto's main airport is YYZ, after the old station code of Malton, where it stands.
+
+3
+00:00:13,072 --> 00:00:20,596
+Ho Chi Minh City's is SGN. The city took that name in 1976, and its code still says Saigon.
+
+4
+00:00:22,196 --> 00:00:26,702
+A code outlives its reason, because changing it costs everyone who uses it.
+
+5
+00:00:34,002 --> 00:00:36,501
+A university runs on lists like these.
+
+6
+00:00:37,201 --> 00:00:40,012
+Linh studies here, and tutors a first-year unit.
+
+7
+00:00:41,112 --> 00:00:47,725
+HR calls her a Casual Academic. Payroll calls her CAS. The learning platform calls her a tutor.
+
+8
+00:00:49,425 --> 00:00:53,060
+Three names for one role, and nothing written down says they match.
+
+9
+00:00:54,360 --> 00:00:58,615
+HR's own list of roles lives in a spreadsheet, attached to an email.
+
+10
+00:00:59,915 --> 00:01:04,533
+And no one has written down which kinds of identifier the university issues.
+
+11
+00:01:07,033 --> 00:01:12,025
+Her status is ENR in the student system, and active on the learning platform.
+
+12
+00:01:13,225 --> 00:01:15,179
+One file maps both to studying.
+
+13
+00:01:16,279 --> 00:01:19,671
+Then two tests type the list of statuses again, by hand.
+
+14
+00:01:21,171 --> 00:01:28,094
+Her country of birth is Vietnam in HR, Viet Nam in the student system, and VN at the research office.
+
+15
+00:01:29,494 --> 00:01:33,096
+So a count of people by country lists her country three times.
+
+16
+00:01:35,596 --> 00:01:39,996
+These are reference data: short lists that sort and describe everything else.
+
+17
+00:01:41,296 --> 00:01:47,862
+Some are the university's own, like role types. Others come from outside, like countries, or airport codes.
+
+18
+00:01:49,262 --> 00:01:53,485
+Each value has a code that systems store, and a label that people read.
+
+19
+00:01:55,985 --> 00:01:59,249
+Jun, the analytics engineer, gives each list one home.
+
+20
+00:02:00,349 --> 00:02:05,732
+Role types, identifier types, relationship types, consent purposes, and countries.
+
+21
+00:02:07,232 --> 00:02:13,020
+Each is a table: every value with its code and label, who owns it, and the date it applies from.
+
+22
+00:02:14,320 --> 00:02:18,141
+HR owns tutor, and the registrar's office owns student.
+
+23
+00:02:19,241 --> 00:02:25,385
+Beside it, each system's own names are mapped: Casual Academic, CAS and tutor all mean tutor.
+
+24
+00:02:27,885 --> 00:02:32,297
+Now the tests read their allowed values from the list, instead of typing them.
+
+25
+00:02:33,597 --> 00:02:37,008
+Change the list once, and every test that reads it follows.
+
+26
+00:02:38,308 --> 00:02:44,337
+On the platform, each list is one table, and its lineage shows the tables and reports that read it.
+
+27
+00:02:49,037 --> 00:02:52,407
+Next year, HR will call the role Sessional Academic.
+
+28
+00:02:53,607 --> 00:02:58,102
+The change is a pull request, and HR, as the list's owner, approves it.
+
+29
+00:02:59,502 --> 00:03:02,074
+The new name applies from the first of January.
+
+30
+00:03:03,274 --> 00:03:08,360
+The old one isn't deleted. It's ended, because Linh's past contracts still use it.
+
+31
+00:03:10,860 --> 00:03:12,657
+Some lists belong to someone else.
+
+32
+00:03:13,357 --> 00:03:19,418
+Countries come from the international standard, ISO 3166, loaded on a schedule.
+
+33
+00:03:20,718 --> 00:03:24,702
+Like the project's glossary, the list is copied, never typed again.
+
+34
+00:03:26,002 --> 00:03:29,047
+Viet Nam appears once, with one code: VN.
+
+35
+00:03:30,247 --> 00:03:32,929
+And the count by country lists her country once.
+
+36
+00:03:35,429 --> 00:03:38,599
+Some lists describe people, like titles or gender.
+
+37
+00:03:39,699 --> 00:03:43,764
+Those stay short and inclusive, and are asked for only with a purpose.
+
+38
+00:03:45,164 --> 00:03:49,863
+A title can tell whether someone is married. If it isn't needed, it isn't asked.
+
+39
+00:03:52,363 --> 00:03:54,785
+Every industry runs on lists like these.
+
+40
+00:03:55,485 --> 00:03:59,478
+A bank's customer types decide which checks each customer goes through.
+
+41
+00:04:00,778 --> 00:04:05,069
+A hospital's relationship types decide who may be told about a patient.
+
+42
+00:04:06,369 --> 00:04:09,713
+Get a list wrong, and the wrong thing happens to a real person.
+
+43
+00:04:12,213 --> 00:04:16,305
+Now Linh's role, her status and her country each come from one list.
+
+44
+00:04:17,805 --> 00:04:24,933
+Like an airport code, a value can outlive its reason. But now everyone knows who keeps it, and from when it applies.
+
+45
+00:04:26,533 --> 00:04:28,992
+A list has an owner, a date and one home.

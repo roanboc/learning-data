@@ -8,7 +8,7 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": ["read", "breath", 1.0],
+  "poster": ["keeps", "line", -0.8],
   "say": [
     ["\\bNguyen\\b", "Nwin"],
     ["\\bLinh's\\b", "Lin's"],

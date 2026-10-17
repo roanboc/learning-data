@@ -49,6 +49,9 @@ Before story or pictures, the concept is settled. [`AGENTS.md`](AGENTS.md) gives
 
 - **Use one design language.** Dark glass, luminous edges, thin line icons and one typeface. Mixing styles reads as mixing ideas.
 - **Let colour carry meaning, and never break it.** Each source system has its colour; each business domain has its own; bronze, silver and gold are materials; red means stopped; green means passed.
+- **Give a colour one job.** In *One person, many roles* each role has its colour, so the series' four parts, first painted in role colours, read as one role's films each. They now sit on plain paper, and a cross is drawn in red ink rather than in a role's colour.
+- **Check what each shape reads as, and who it shows acting.** Viewers name what they see before the voice explains it. A strip of churchyard wall, drawn level to give the church flat ground, read as an oddly placed bridge over the lake; a second person holding a phone in the last scene read as the one typing Linh's address. Shape the ground to carry what stands on it, and give an action to one person.
+- **Show each line once.** The closing line faded out while the end card faded the same words in, so for a moment it showed twice. Carry it onto the card instead, to where the card's own copy takes over. Set a tag down before writing its words, too, so a line drawn behind it never strikes through them.
 - **Vary the content, not the style.** Six different, named data products per domain look like a real organisation. Six crops of one picture look like a template.
 - **Make things look as they behave.** Live data should visibly change. Raw data should look rough: glitched, duplicated and mistimed. Clean data should look crisp.
 - **Draw living things like living things.** Animals, plants, hands and the materials of the past (clay, paper, wood) made of circles, straight strokes and rectangles look rigid next to people drawn with care: viewers of *What's in a word* noticed at once. Give them tapering bezier outlines, overlapping forms, weight, a light side and a shadow side, and a little life from time: breath, wind, a gait. Keep data, systems and diagrams crisp; the contrast says which is which.
@@ -136,6 +139,8 @@ What *A Sharper Sketch* and *When things go wrong* added once there was more tha
 - **Blameless and believable.** No villains, and small, plausible numbers: the dangerous wrong number is the one nobody questions.
 - **Show the alternatives side by side,** so the one thing that differs between them is the lesson.
 - **Draw what the audience already knows.** A dashboard in a familiar style beats an abstract picture that needs explaining.
+- **Use the domain's own words, and cases people have lived.** A university has applicants, students, staff, researchers and alumni; it doesn't call them customers. A student sharing one family email with her brother was real in the example data but hard to picture, while a move told to one office and not the others is something nearly everyone has done. When a story needs an unusual case, say in one line how it comes about.
+- **Preview a series in a few parts.** Eight films named one by one took too long. Group them into a few plain parts (*One person, many roles* uses four: who someone is, roles and lists, sharing it safely, keeping it right) and show every film inside its part.
 - **Write each decision down with its date,** in the treatment or the story outline, so the next session starts from it.
 - **Films stand alone.** No numbers on screen, and none for the site's standalone films; open with a one-line recap, and place each film under the part of the overview it goes deeper on. A series is the exception: its films are numbered, always as "Film 2 of 7", and each film's page ends with *In the series*: the previous and the next film, and the whole series in order. Seven films without numbers were hard to keep track of.
 - **Turn every review finding into a check** (`site-tools/check_site.py`, `site-tools/smoke.py`, `tools/check.py`), so it can't come back.
@@ -166,12 +171,13 @@ What *From words to data*, seven films made together, added.
 - [ ] One thing to follow, from where it's born to a human outcome.
 - [ ] The metaphor is tested against the hardest mechanism, and each layer has one job.
 - [ ] A table maps every object to a mechanism.
+- [ ] The roles, words and cases are ones the domain uses and viewers have lived; an unusual case says how it happens.
 
 **Before rendering**
 - [ ] The rigour sheet covers every scene.
 - [ ] Style frames and a short voice test are approved.
 - [ ] `tools/pace.py`: about 120 to 135 words a minute (at most 140 in a chapter), the voice speaking at most 82% of any chapter, about three wordless endings in the whole film, no sentence followed by less than 0.5 s, and no stop of 2.5 s or more inside a chapter.
-- [ ] Stills are checked at every named moment, with nothing under the captions.
+- [ ] Stills are checked at every named moment, with nothing under the captions, every shape reading as what it is, and one person doing each action.
 - [ ] Text reads on a phone: about 28 px or more in the frame, or marked as decoration, with no words drawn over other words (`tools/legible.py --overlaps`).
 - [ ] The sound: effects below about 2.5 kHz, and a rhythm only where the story turns to an error or a rush.
 - [ ] `tools/check.py`: every moment of the film draws without an error. Stills only sample a few moments.

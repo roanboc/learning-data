@@ -44,7 +44,7 @@
 | Why it moves | 158 | 0% | 0 | 30.1 | Drawn to the rule |
 | What it must be able to do | 201 | 0% | 0 | 30 | Drawn to the rule |
 | How value reaches people | 207 | 0% | 0 | 30 | Drawn to the rule |
-| One person, many roles | 314 | 0% | 0 | 30 | Drawn to the rule |
+| One person, many roles | 315 | 0% | 0 | 30 | Drawn to the rule |
 
 ## What's left
 

@@ -1,6 +1,6 @@
 # Master and reference data: one person, many roles
 
-*Proposal for a series on master and reference data, v0.3. The folder is named after the topic; the series title is still open. Status: proposed, 16 October 2026. It's the companion of the data governance series, proposed in [`../data-governance/proposal.md`](../data-governance/proposal.md), and shares its decisions.*
+*Proposal for a series on master and reference data, v0.3. The folder is named after the topic; the series title is a working one, The same one, everywhere. Status: proposed, 16 October 2026. It's the companion of the data governance series, proposed in [`../data-governance/proposal.md`](../data-governance/proposal.md), and shares its decisions.*
 
 ## Decided
 
@@ -15,6 +15,12 @@
 | 16 October 2026 | *One person, many roles* ends with more master entities from other industries, and the test for when an entity needs mastering. *Who is it?* opens with the difference between master and reference data, and what a master, or golden, record is. |
 | 16 October 2026 | Every film shows at least one concrete example, with real-looking values, so viewers can picture it. |
 | 16 October 2026 | The look is watercolour: daylight landscapes in soft washes on paper, drawn in pencil, chosen from seven looks drawn from moments of *One person, many roles* ([reference frames](look/)). The role colours are the strongest washes on screen, so they carry the meaning; sky and land stay soft. |
+| 17 October 2026 | *One person, many roles* is built: 5½ minutes, twelve chapters, in watercolour. What changed from the script on the way is in its script's *Built* section. |
+| 17 October 2026 | The working series title is *The same one, everywhere* (*El mismo, en todas partes*), on the title card and the site, until the author chooses another. |
+| 17 October 2026 | On the site, the series has its own topic, *Master and reference data*, at `master-and-reference-data/`. The governance series can join it or take its own. |
+| 17 October 2026 | Spanish is captions and page content only, never the video's pictures (the author, 16 October 2026). The captions are Latin American Spanish, about as long as each English line. |
+| 17 October 2026 | The film stops for Pause and think after chapters 3, 6, 7 and 10, one question each. No labs or scenarios until the series has more films. |
+| 17 October 2026 | The sound is the series' own: chords that bloom note by note, a clarinet for the mark (1-8-5-1), a plucked note for each role, a bowed D and A for the person. The music sits about 21 dB under the voice, as in *The map before the data*; the one pulse, at the family inbox, about 8.5 dB under the music. |
 
 ## The brief
 
@@ -324,15 +330,15 @@ Nine films of 4 to 6 minutes.
 
 ## Decisions for the author
 
-1. **The series title.** *One person, many roles* · *Who is it?* · *The same one, everywhere*.
+1. **The series title.** *One person, many roles* · *Who is it?* · *The same one, everywhere* (used for now, 17 October 2026).
 2. **The person in the project.** A new `party` domain holding the person, or the person in the student domain with roles from other domains.
 3. **Linh as the series' person,** from the project's data, or a new character.
 4. **Organisations as parties.** Parked here; a film of their own (employers, partners, suppliers), or a later series.
 5. **The hub in *A hub at work*.** LakeFusion, named as the example; another product; or a hub drawn generically, with LakeFusion mentioned in a line.
-6. **The same topic as governance,** or its own on the site.
+6. **The same topic as governance,** or its own on the site (its own for now, *Master and reference data*, 17 October 2026).
 
 ## Next checkpoints
 
 1. The author agrees this proposal and decides the points above.
 2. The project's additions above, starting with the person and role model and the two new sources.
-3. ~~A script and rigour sheet for *One person, many roles*.~~ Drafted, 16 October 2026: [script](1-one-person-many-roles/script.md). Next for it: the author's review, then the source.
+3. ~~A script and rigour sheet for *One person, many roles*.~~ Drafted, 16 October 2026: [script](1-one-person-many-roles/script.md). ~~The source.~~ Built, 17 October 2026: [source](1-one-person-many-roles/source/README.md). Next for it: the author watches it, and approves it or asks for corrections.

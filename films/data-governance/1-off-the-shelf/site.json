@@ -1,0 +1,27 @@
+{
+  "kicker": "Data governance, and where each policy runs",
+  "kicker_es": "Gobernanza de datos, y dónde se ejecuta cada política",
+  "title_es": "Fuera del estante",
+  "h1": "Off the shelf: thirty-four policies, two numbers that disagree, and the question every policy has to answer",
+  "h1_es": "Fuera del estante: treinta y cuatro políticas, dos números que no coinciden, y la pregunta que toda política debe responder",
+  "lead": "Yusuf starts as the university's data governance lead and inherits a shelf of thirty-four policies. The same week, two reports disagree on how many awards were conferred, and both are right, each by its own meaning of award. Nobody has decided which one goes to the government. Governance is for deciding who decides, and making sure each decision reaches the work. So Yusuf listens first, then asks every line of the binder one question: where does it run?",
+  "lead_es": "Yusuf empieza como líder de gobernanza de datos de la universidad y hereda un estante con treinta y cuatro políticas. Esa misma semana, dos informes no coinciden en cuántos títulos se otorgaron, y ambos son correctos, cada uno con su sentido de título. Nadie ha decidido cuál se envía al gobierno. La gobernanza sirve para decidir quién decide y asegurar que cada decisión llegue al trabajo. Así que Yusuf primero escucha, y luego le hace una pregunta a cada línea de la carpeta: ¿dónde se ejecuta?",
+  "description": "A film about data governance: one measure promised in 1215 and made true six centuries later; a shelf of policies and a maturity score; two numbers for the same awards; who decides; what governance is for, and how it differs from management; DAMA's wheel, with governance at the centre; listening before writing; where each policy line runs; and the steps of the data team's work where decisions enter.",
+  "description_es": "Una película sobre gobernanza de datos: una sola medida prometida en 1215 y cumplida seis siglos después; un estante de políticas y una puntuación de madurez; dos números para los mismos títulos; quién decide; para qué es la gobernanza, y en qué se diferencia de la gestión; la rueda de DAMA, con la gobernanza en el centro; escuchar antes de escribir; dónde se ejecuta cada línea de una política; y los pasos del trabajo del equipo de datos donde entran las decisiones.",
+  "card": "Thirty-four policies on a shelf, and two numbers that disagree. Ask every policy one question: where does it run?",
+  "card_es": "Treinta y cuatro políticas en un estante, y dos números que no coinciden. Hazle a cada política una pregunta: ¿dónde se ejecuta?",
+  "chapters_es": {
+    "measure": "Una sola medida",
+    "shelf": "El estante",
+    "numbers": "Dos números",
+    "decides": "¿Quién decide?",
+    "for": "Para qué es la gobernanza",
+    "wheel": "La gobernanza en el centro",
+    "listen": "Primero, escuchar",
+    "runs": "¿Dónde se ejecuta?",
+    "enter": "Dónde entran las decisiones",
+    "series": "La serie"
+  },
+  "next_h": "You've seen where governance enters the work. More films in the series are on the way.",
+  "next_h_es": "Viste dónde entra la gobernanza en el trabajo. Vienen más películas de la serie."
+}

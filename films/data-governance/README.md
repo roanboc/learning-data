@@ -1,0 +1,38 @@
+# Governance you can use
+
+*A series on data governance. The title is a working one.*
+
+Yusuf Demir starts as the university's data governance lead. He inherits a shelf of thirty-four policies, a maturity score of 2.1 out of 5, a chart with half its names still to be confirmed, and a brief: fix governance before the next submission to the government. The same week, two reports disagree on how many awards were conferred. Over sixteen films, he takes the binder off the shelf, one kind of policy at a time, and asks every line where it runs: who decides, one word in one home, who may see it, rules that run, fixes at the source, change without surprises, products with owners, an agent that checks, and the people who teach it all. The last six films show how to build each piece with dbt and Databricks. The plan is in the [proposal](proposal.md).
+
+**Status:** the opening film is built and [on the site](https://roanboc.github.io/learning-data/data-governance/), with three Pause and think questions. Labs and scenarios will come later. On the site, the series sits under the topic *Data governance*.
+
+## The films
+
+<!-- films: made by site-tools/build_series.py's readme() -->
+| Film | Topic | Length | Chapters | Pause and think | Script |
+|---|---|---|---|---|---|
+| [Off the shelf](https://roanboc.github.io/learning-data/data-governance/off-the-shelf/) | Data governance, and where each policy runs | 5 min | 10 | 3 questions | [script](1-off-the-shelf/script.md) · [source](1-off-the-shelf/source/README.md) |
+<!-- /films -->
+
+## The look and the sound
+
+- **Toy town.** The university is a model town on a table, chosen from three looks drawn with the same two moments. Rooms open at the front like dollhouses, people are painted figures on small bases, and a soft blur at the top and bottom of the frame makes it look small and close. Ideas are shown as people doing things in places, with few diagrams. The governance office stands on the green in the middle, with the other offices round it and ten paths between them: from above, it's DAMA's wheel. The past is the same toy town, in its own time: a market town from 1215 to the 1880s.
+- **Colour means something.** A figure's base carries their side: a gold rim for the business side, a blue rim for the technical side, plain walnut for the people of the past. Gold is governance's decisions: the pins and rings that mark where a decision enters the work. Text is dark ink on light cards, and every colour comes with a label.
+- **People.** Yusuf, the new data governance lead, Mei, who owns what *award* means, and Clara, in Planning, stand on gold; Jun, who builds the model, and Sam, who runs the platform, on blue. The crier, the stallholders and the inspector of the market town wear their own time.
+- **Made to read on a phone.** Text is at least 28 px in the 1920-pixel frame and is drawn after the blur, so it stays sharp. `tools/legible.py` checks every frame.
+- **Its own sound.** A soft brass choir, in D dorian for the market town and F major for today; a low music box for the moments that land; the series' mark, 1-5-4-8, on a horn at the title and the end; and one low pulse under the two numbers that disagree. Nothing loops, and every effect is something on screen: a knock, paper, a cork pin, a rubber stamp, a hammer's thud.
+
+## How the films are made
+
+Like the other series, each film is generated from code. The series keeps what's its own in [`shared/`](shared/):
+
+| File | What it holds |
+|---|---|
+| `shared/src/town.js` | The toy town, drawn in 3D with Canvas 2D: a camera, painted boxes lit by one sun, rooms open at the front, and the tilt-shift blur, with words drawn after it so they stay sharp |
+| `shared/src/people.js` | The series' people as painted figures on bases: the cast of *When things go wrong* and *In the weeds of data crafting*, Yusuf and Clara, and the people of the past in their own clothes |
+| `shared/src/campus.js` | The university as a town on a table (`drawCampus`): the governance office on the green, the offices round it, and the rooms a film can add to |
+| `shared/src/finish.js` | The video's finishing pass: motion blur, with no glow and no film grain |
+| `shared/src/page.html` | The standalone player page |
+| `shared/tools/lang.py`, `build.py` | Where everything lives, and what a film is made of |
+| `shared/tools/names.py`, `cues.py` | Checks `build.py` runs: no name declared in two files, and every moment timed to a word that is, whole, in its line |
+| `shared/tools/run.py` | Runs a tool on a film: this series' own `lang.py` and `build.py`, and *From words to data*'s other tools and instruments unchanged |

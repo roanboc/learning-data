@@ -438,7 +438,7 @@ function d9_chev(ctx,x,y,w,h,label,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01
   withA(ctx,a,()=>{ctx.save();ctx.shadowColor=rgba(STR,0.6);ctx.shadowBlur=16+16*(o.hi||0);path();ctx.fillStyle="rgba(7,12,24,0.95)";ctx.fill();ctx.restore();
     path();ctx.fillStyle=rgba(STR,0.13+0.1*(o.hi||0));ctx.fill();ctx.strokeStyle=rgba(STR,0.9);ctx.lineWidth=2.4+1.5*(o.hi||0);path();ctx.stroke();
     archGlyph(ctx,"stream",x+(o.first?32:n+24),y+28,12,STR);
-    T(ctx,label,o.lx==null?x+(o.first?w/2-n/4:w/2+n/4):o.lx,o.ly==null?y+h/2+sz*0.36:o.ly,{w:800,size:sz,align:"center",color:rgba(INK,0.96)});});}
+    T(ctx,label,o.lx==null?x+(o.first?w/2-n/4:w/2+n/4):o.lx,o.ly==null?y+h/2+sz*0.36:o.ly,{w:800,size:sz,align:"center",color:rgba(INK,0.96),deco:o.deco});});}
 // a data rule folded to its id, for when it's there but isn't the subject; returns its width
 function d9_rulePill(ctx,cx,cy,id,side,o){o=o||{};const a=o.a==null?1:o.a,s="data rule · "+id,w=tw(ctx,s,28,500,"mono")+100,h=58;if(a<=0.01)return w;withA(ctx,a,()=>{
   glass(ctx,cx-w/2,cy-h/2,w,h,14,MOT,{glow:12+14*(o.hi||0),ea:0.85,fill:"rgba(9,8,22,0.95)"});ctx.fillStyle=rgba(side,0.95);rr(ctx,cx-w/2+9,cy-h/2+12,6,h-24,3);ctx.fill();

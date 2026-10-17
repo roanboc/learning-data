@@ -83,6 +83,7 @@ Before story or pictures, the concept is settled. [`AGENTS.md`](AGENTS.md) gives
 - **Name things before explaining them.** A new term lands better if the picture shows it a moment before the narration explains what it does.
 - **Make intentional pauses look intentional.** A silence needs light and motion, or it reads as a glitch.
 - **Let sound support meaning.** Music sits under the voice and lifts about 4 dB in pauses, slowly, so it doesn't pump; never cut the sound to silence, which reads as a fault. About sixty effects land on story cues. Mix to about -16 LUFS for the web.
+- **Check a new palette's levels against a film that sounds right.** New instruments come out at their own loudness, and the final loudness pass can't fix the balance between them. With the voice as the yardstick, the music of *The map before the data* sits about 21 dB under the voice while it speaks, and about 18.5 dB under in the pauses. The first mix of *One person, many roles*, with its new watercolour palette, sat 26 dB under, too faint, while its one pulse sat only 3 dB under the music, too loud. Measure the music and the effects on their own, scaled as `tools/audio.py` mixes them, before rendering.
 - **Check a synthetic voice by ear and by numbers.** A naturalness model (such as UTMOS) and a speech recognizer catch what a pitch reading misses. Pitch-shifting a synthetic voice made it robotic; blending two voice styles made the Spanish voice more natural and closer to the English one.
 - **Be open about the voice.** A synthetic voice is fine; say so. Captions come from the same script as the narration, so they always match.
 
@@ -92,6 +93,7 @@ Before story or pictures, the concept is settled. [`AGENTS.md`](AGENTS.md) gives
 
 - **Make every frame a function of time.** Then any moment can be rendered, reviewed and compared, like software.
 - **Time the film to the narration.** Change a line and the whole film re-times itself: a new voice, a human narrator or another language needs no manual editing.
+- **Time each moment to a whole word, and let the build check it.** A moment that waits for a word finds the first place its letters appear in what the voice reads, so "again" lands on "against", and a word that isn't in the line falls back to the line's start. Either way the picture and its sound come early, and nothing says so. The data governance series' `build.py` stops on both (`films/data-governance/shared/tools/cues.py`).
 - **Review by looking and measuring.** Render stills at the moments the narration names something, check them, fix, and repeat. Say plainly what you can't check yourself, such as how the audio sounds.
 - **Use cheap checkpoints before expensive rebuilds:** style frames, a five-second voice test, a forty-second sound sketch.
 - **Render in resumable chunks,** and run one heavy job at a time.

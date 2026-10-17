@@ -1,0 +1,25 @@
+{
+  "key": "off-the-shelf",
+  "title": "Off the shelf",
+  "sub": "The opening film of a series on data governance: a new governance lead inherits a shelf of policies, two numbers that disagree, and the question every policy has to answer: where does it run?",
+  "howto": "The university is a toy town: rooms open at the front, people on small bases. A gold rim marks the business side, a blue rim the technical side, plain walnut the people of the past. Gold is governance's decisions.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "shelf",
+    "shelf",
+    1.5
+  ],
+  "say": [
+    [
+      "\\bYusuf Demir\\b",
+      "Yoosoof Demeer"
+    ],
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ]
+  ]
+}

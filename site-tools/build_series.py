@@ -3,10 +3,11 @@
 
     python site-tools/build_series.py
 
-The site is organised in big topics (TOPICS below), each holding films and series. Three series are built this way:
+The site is organised in big topics (TOPICS below), each holding films and series. Five series are built this way:
 From words to data (films/from-words-to-data/, on the site at from-words-to-data/), In the weeds of data crafting
-(films/analytics-engineering/, at in-the-weeds/) and The map before the data (films/enterprise-architecture/, at
-enterprise-architecture/). Each is described once, in SERIES below: its folder, its place on the site, its names, the
+(films/analytics-engineering/, at in-the-weeds/), The map before the data (films/enterprise-architecture/, at
+enterprise-architecture/), The same one, everywhere (films/master-and-reference-data/, at master-and-reference-data/) and
+Governance you can use (films/data-governance/, at data-governance/). Each is described once, in SERIES below: its folder, its place on the site, its names, the
 hand-written pages that show its cards, and what each film builds on. The films and series whose pages are written by hand
 (The Inner Life of Data, A Sharper Sketch, When things go wrong) are described, for their cards, in HAND.
 For each series: its page (site/<slug>/) and, for each film, its Watch page (site/<slug>/<film>/) and, if it has them, its
@@ -72,6 +73,28 @@ def ea_builds_on(lg, f, all_films, R):
     return after_previous(lg, f, all_films)
 
 
+def mr_builds_on(lg, f, all_films, R):
+    """The same one, everywhere: the first film builds on What makes it the same one (In the weeds of data crafting), where a learner
+    is matched across three systems, and on Who does it, and where meaning changes (The map before the data), where an actor is
+    assigned to roles; each later film builds on the one before."""
+    if f["index"] == 0:
+        RE = R if lg == "en" else R[3:]
+        return (f'<p class="builds-on">Builds on <a href="{RE}in-the-weeds/what-makes-it-the-same-one/"><i>What makes it the same one</i></a> and <a href="{RE}enterprise-architecture/who-does-it/"><i>Who does it, and where meaning changes</i></a></p>' if lg == "en" else
+                f'<p class="builds-on">Amplía <a href="{RE}in-the-weeds/what-makes-it-the-same-one/"><i>Qué lo hace el mismo</i></a> y <a href="{RE}enterprise-architecture/who-does-it/"><i>Quién lo hace, y dónde cambia el significado</i></a></p>')
+    return after_previous(lg, f, all_films)
+
+
+def gov_builds_on(lg, f, all_films, R):
+    """Governance you can use: the first film builds on Declare it, then build it (In the weeds of data crafting), where the data
+    team's loop of ten steps is drawn, which it pins governance to, and on Who owns what, where each fact's meaning has an owner;
+    each later film builds on the one before."""
+    if f["index"] == 0:
+        RE = R if lg == "en" else R[3:]
+        return (f'<p class="builds-on">Builds on <a href="{RE}in-the-weeds/declare-it-then-build-it/"><i>Declare it, then build it</i></a> and <a href="{RE}in-the-weeds/who-owns-what/"><i>Who owns what</i></a></p>' if lg == "en" else
+                f'<p class="builds-on">Amplía <a href="{RE}in-the-weeds/declare-it-then-build-it/"><i>Decláralo, luego constrúyelo</i></a> y <a href="{RE}in-the-weeds/who-owns-what/"><i>Quién es dueño de qué</i></a></p>')
+    return after_previous(lg, f, all_films)
+
+
 # ---------------------------------------------------------------- the series
 # id: the series' key; dir: its folder under films/; slug: its path on the site; name: its title; builds_on: what each film builds on;
 # place: where its films happen, as its footer says it ("The university, people, numbers and records… are fictional"); marks: the
@@ -92,6 +115,16 @@ SERIES = [
          place={"en": "utility", "es": "empresa de energía"}, blocks=[],
          marks={"en": "TOGAF and ArchiMate are trademarks of The Open Group, and Zachman of Zachman International, named only to identify those frameworks; this project is not affiliated with or endorsed by them.",
                 "es": "TOGAF y ArchiMate son marcas de The Open Group, y Zachman de Zachman International, nombradas solo para identificar esos marcos; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
+    dict(id="master-and-reference-data", dir="master-and-reference-data", slug="master-and-reference-data",
+         name={"en": "The same one, everywhere", "es": "El mismo, en todas partes"}, builds_on=mr_builds_on,
+         place={"en": "university", "es": "universidad"}, blocks=[],
+         marks={"en": "DAMA and DAMA-DMBOK are trademarks of DAMA International, and ArchiMate of The Open Group, named or drawn only to identify that body of knowledge and that notation; this project is not affiliated with or endorsed by them.",
+                "es": "DAMA y DAMA-DMBOK son marcas de DAMA International, y ArchiMate de The Open Group, nombradas o dibujadas solo para identificar ese cuerpo de conocimiento y esa notación; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
+    dict(id="data-governance", dir="data-governance", slug="data-governance",
+         name={"en": "Governance you can use", "es": "Gobernanza que puedes usar"}, builds_on=gov_builds_on,
+         place={"en": "university", "es": "universidad"}, blocks=[],
+         marks={"en": "DAMA and DAMA-DMBOK are trademarks of DAMA International, and DCAM of the EDM Association, named or drawn only to identify those bodies of knowledge; this project is not affiliated with or endorsed by them.",
+                "es": "DAMA y DAMA-DMBOK son marcas de DAMA International, y DCAM de la EDM Association, nombradas o dibujadas solo para identificar esos cuerpos de conocimiento; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
 ]
 for _S in SERIES:
     _S["root"] = ROOT / "films" / _S["dir"]
@@ -209,6 +242,16 @@ TOPICS = [
          who={"en": "For architects, and anyone new to an organisation", "es": "Para arquitectos, y para quien llega nuevo a una organización"},
          line={"en": "How an organisation works, in layers, before you ask what its data should answer.",
                "es": "Cómo funciona una organización, por capas, antes de preguntar qué deberían responder sus datos."}),
+    dict(id="master-data", items=["master-and-reference-data"],
+         name={"en": "Master and reference data", "es": "Datos maestros y de referencia"},
+         who={"en": "For data stewards and architects, and anyone whose data lives in many systems", "es": "Para custodios y arquitectos de datos, y para quien tiene sus datos en muchos sistemas"},
+         line={"en": "The people and things a business is about, kept once and shared across its systems, and the lists that sort them.",
+               "es": "Las personas y las cosas de las que trata un negocio, guardadas una vez y compartidas entre sus sistemas, y las listas que las clasifican."}),
+    dict(id="data-governance", items=["data-governance"],
+         name={"en": "Data governance", "es": "Gobernanza de datos"},
+         who={"en": "For governance teams and data owners, and anyone asked to make the rules work", "es": "Para equipos de gobernanza y dueños de datos, y para quien debe hacer que las reglas funcionen"},
+         line={"en": "Who decides what, and how each decision reaches the work: policies that run as checks, owners and tests, not on a shelf.",
+               "es": "Quién decide qué, y cómo cada decisión llega al trabajo: políticas que se ejecutan como controles, dueños y pruebas, no en un estante."}),
 ]
 
 
@@ -546,10 +589,10 @@ def topic_card(lg, e, RL, R):
 
 TOPICS_PAGE = {
     "title": {"en": "Topics · Learning Data", "es": "Temas · Learning Data"},
-    "desc": {"en": "Short films on data, in five topics: data platforms, data modelling, analytics engineering, data quality and change, and enterprise architecture. Start with how a data platform works, then pick the topic you need.",
-             "es": "Películas cortas sobre datos, en cinco temas: plataformas de datos, modelado de datos, ingeniería analítica, calidad de datos y cambios, y arquitectura empresarial. Empieza por cómo funciona una plataforma de datos y luego elige el tema que necesitas."},
-    "lead": {"en": "Five topics, each with its films and series. Start with how a data platform works, then pick the topic you need. Your progress stays in this browser.",
-             "es": "Cinco temas, cada uno con sus películas y series. Empieza por cómo funciona una plataforma de datos y luego elige el tema que necesitas. Tu progreso se guarda en este navegador."},
+    "desc": {"en": "Short films on data, in seven topics: data platforms, data modelling, analytics engineering, data quality and change, enterprise architecture, master and reference data, and data governance. Start with how a data platform works, then pick the topic you need.",
+             "es": "Películas cortas sobre datos, en siete temas: plataformas de datos, modelado de datos, ingeniería analítica, calidad de datos y cambios, arquitectura empresarial, datos maestros y de referencia, y gobernanza de datos. Empieza por cómo funciona una plataforma de datos y luego elige el tema que necesitas."},
+    "lead": {"en": "Seven topics, each with its films and series. Start with how a data platform works, then pick the topic you need. Your progress stays in this browser.",
+             "es": "Siete temas, cada uno con sus películas y series. Empieza por cómo funciona una plataforma de datos y luego elige el tema que necesitas. Tu progreso se guarda en este navegador."},
     "foot": {"en": "The university, the utility, people, numbers and records in the films, the labs and the scenarios are fictional. The narration is a synthetic voice. Code: MIT licence. Films, scripts, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them.",
              "es": "La universidad, la empresa de energía, las personas, las cifras y los registros de las películas, los labs y las situaciones son ficticios. La narración es una voz sintética. Código: licencia MIT. Películas, guiones, subtítulos, imágenes y texto: CC BY 4.0. Los logotipos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo."},
 }
@@ -567,7 +610,7 @@ def topics_page(lg):
     jump = "".join(f'<a href="#{t["id"]}">{E(t["name"][lg])}</a>' for t in TOPICS)
     body = (f'<body>\n{header(lg, path, R, cur="page")}\n<main>\n<section class="hero cine"><div class="bg mosaic" aria-hidden="true">{mosaic}</div><canvas class="fx" aria-hidden="true"></canvas>\n'
             f'<p class="eyebrow">Learning Data</p>\n<h1>{T(lg, "Topics", "Temas")}</h1>\n<p class="lead">{TOPICS_PAGE["lead"][lg]}</p>\n'
-            f'<nav class="topic-jump" aria-label="{T(lg, "The five topics", "Los cinco temas")}">{jump}</nav>\n</section>\n')
+            f'<nav class="topic-jump" aria-label="{T(lg, f"The {NUM['en'][len(TOPICS) - 1]} topics", f"Los {NUM['es'][len(TOPICS) - 1]} temas")}">{jump}</nav>\n</section>\n')
     for t in TOPICS:
         cards = "\n".join(topic_card(lg, e, RL, R) for e in es[t["id"]])
         body += (f'\n<section class="module topic" id="{t["id"]}" aria-labelledby="{t["id"]}-h">\n'

@@ -21,6 +21,7 @@
 | 9 October 2026 | On the site, under the topic *Enterprise architecture*, with Spanish pages. Labs and scenarios will cover the whole series, not each film as in the other series: one set, drawn from every film's ideas (each script's *Labs (candidates)* feed it), later. Until then, each film has three Pause and think questions. |
 | 10 October 2026 | *Who does it, and where meaning changes* opens in Japan with its two frequencies: Tokyo's German generators at 50 Hz and Osaka's American ones at 60 Hz in the 1890s, and in 2011 the converters between them too few to carry the west's spare power east. Roles do the work and actors fill them: people, teams, a contractor under a contract, and one AI agent that triages outage reports, with its rights written down and Grace as its owner. "Customer" means an account to retail and a connection point to the network; the two are domains, kept apart by a wall, and what crosses is a short, agreed list. Ama, the regulatory lead, explains the wall; the head of retail stays unseen. Its present is in G major, and Japan has a soft marimba over two low hums a minor third apart, with no borrowed Japanese sound. |
 | 11 October 2026 | *Today, and where it's going* opens on an imagined morning in 2045 in the utility's own region, labelled as imagined: a street trading power from its batteries, and a crew sent before a transformer fails. The 140 systems from *Day one* are placed under the capabilities they serve: three for managing outages, a spreadsheet for assessing network capacity, and one system that serves nothing. The drafts become one ArchiMate model, and Archi and LeanIX are named once. Today, the target and the path are three drawings, the path in plateaus ordered by dependency, and one decision (one outage system) is written down with why. Part one ends here: the map of how the utility works is drawn. Its present is in E-flat major, and the imagined morning has a soft kalimba in A-flat lydian. |
+| 16 October 2026 | Films 9 and 11 carry the vision that *Meaning machines can read* sets out in its chapter *One map, many views*. Data domains and their entities live in the architecture map, which feeds the business glossary and the conceptual model rather than competing with them. Each concept is written once there, with a stable id: its definition (owned by the business), its relationships, named as ArchiMate names them (or any other architecture modelling language), and its rules. Cardinality is decided in the logical model, not the conceptual one; a business rule's limit stays a rule. The glossary, the conceptual and logical models, an OWL ontology for reasoning and the checks on the data (SHACL shapes, data contracts, tests) are views generated from the map, one way, so they agree. |
 
 ## The brief
 
@@ -241,7 +242,7 @@ Chapter by chapter, with narration: [the script](7-today-and-where-its-going/scr
 
 **Story.** An estimated meter reading triggers a bill dispute. The rule that should have caught it exists, but no one owns it, and it lives in a script.
 
-**Ideas.** Business objects become data objects, in domains with owners. Each data rule and expectation traces to a process step, a regulation or a principle: an estimated read stands only until the next actual read; a connection point has one retailer at a time; network customer data stays on the network's side of the wall. Quality expectations come from the process: timeliness from its service level, completeness from its steps. The industry's information model as a starting point, not a blank page.
+**Ideas.** Business objects become data objects, in domains with owners. Each data rule and expectation traces to a process step, a regulation or a principle: an estimated read stands only until the next actual read; a connection point has one retailer at a time; network customer data stays on the network's side of the wall. Quality expectations come from the process: timeliness from its service level, completeness from its steps. Each rule is written once, in the map, in a form structured enough to generate its check (a SHACL shape, a data contract, a test), as *Meaning machines can read* shows; a rule's limit, such as one retailer at a time, stays a rule rather than becoming a count on a line. The industry's information model as a starting point, not a blank page.
 
 **On screen.** One rule, homeless, then placed: on a process step, with an owner and a reason.
 
@@ -263,13 +264,13 @@ Chapter by chapter, with narration: [the script](7-today-and-where-its-going/scr
 
 **Story.** Tomás's map is now useful, so it's at risk of going stale. He moves it from slides to text that is versioned, reviewed and readable by agents.
 
-**Ideas.** The model as living metadata: each fact once, each claim traced to evidence, each decision recorded. Agents read it to scope data work, find owners and flag impact; people confirm what's true. This is where *From words to data* begins: from the organisation's meaning to the data's.
+**Ideas.** The model as living metadata: each fact once, each claim traced to evidence, each decision recorded. One map, many views: the glossary, the conceptual and logical models, an ontology in OWL and the checks are generated from it, one way, with stable ids, so a change made once reaches every view, and nobody edits a view directly. Agents read it to scope data work, find owners and flag impact; people confirm what's true. This is where *From words to data* begins: from the organisation's meaning to the data's.
 
 **On screen.** The wall of drafts becomes a repository; an agent asks the map a question and gets an owner, a rule and a reason.
 
 ## Overlap with the other series
 
-- ***From words to data*** starts where this series ends: with meaning, concepts and models. Film 11 hands over to it.
+- ***From words to data*** starts where this series ends: with meaning, concepts and models. Film 11 hands over to it, and *Meaning machines can read* already shows the handover: Noor's architecture map as the one source of the glossary, the models, the ontology and the tests.
 - ***In the weeds of data crafting*** builds the contracts and tests that films 9 and 10 say where to place.
 - ***The Inner Life of Data*** shows the platform. This series shows the organisation the platform serves.
 
@@ -277,7 +278,7 @@ Chapter by chapter, with narration: [the script](7-today-and-where-its-going/scr
 
 - **The openings** (see above): the chasqui's daily distance is an estimate; the dabbawalas' error rate is often quoted as "six sigma", a claim from press coverage rather than a formal study, so say "almost no errors"; Japan's converter capacity in 2011 was about 1 GW; the Kerala findings are from Robert Jensen's study (2007); Estonia's once-only principle is in law; M-Pesa's adoption figures vary by survey; Hōkūleʻa's 1976 voyage and Mau Piailug's role are well documented by the Polynesian Voyaging Society.
 
-- **Current versions of the standards:** TOGAF, ArchiMate, BIZBOK, the APQC framework (and its utilities edition), DAMA-DMBOK, ISO/IEC/IEEE 42010 and the IEC Common Information Model (IEC 61968, 61970 and 62325).
+- **Current versions of the standards:** TOGAF, ArchiMate (3.2, October 2022, was current on 16 October 2026), SBVR (1.5, December 2019), BIZBOK, the APQC framework (and its utilities edition), DAMA-DMBOK, ISO/IEC/IEEE 42010 and the IEC Common Information Model (IEC 61968, 61970 and 62325).
 - **Ring-fencing and unbundling** differ by jurisdiction. Keep it to "in many markets", and keep the rule generic.
 - **Reliability measures** (SAIDI, SAIFI): use their standard definitions if named.
 - **The canvases** are Strategyzer's; credit them.

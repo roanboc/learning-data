@@ -285,14 +285,17 @@ function m2_src(ctx,x,y,label,col,o){o=o||{};const w=Math.round(tw(ctx,label,28,
 // the master record: the person, as white paper, an ID of her own, and the best value of each detail with its source
 const M2_MR={x:610,y:110,w:700,h:680};
 // (details only one place holds, so nothing here answers the next film's question, which value wins)
-const M2_BEST=[["preferred name","Linh","Linh",WC_SIDE.none],["student email","linh.nguyen@student.uni.example","student system",WC_ROLE.student],["work email","linh.nguyen@uni.example","HR",WC_ROLE.tutor]];
+const M2_BEST=[["preferred name","Linh","she chose it",WC_SIDE.none],["student email","linh.nguyen@student.uni.example","student system",WC_ROLE.student],["work email","linh.nguyen@uni.example","HR",WC_ROLE.tutor]];
 function m2_master(ctx,t,o){const M=M2_MR;wc_panel(ctx,M.x,M.y,M.w,M.h,{kind:"sheet",seed:12});
-  wc_white(ctx,"linh",M.x+110,M.y+330,0.34,m2_bands(o.bands||[1,1,1,1]),{a:o.fig==null?1:o.fig,shadow:false});
+  wc_white(ctx,"linh",M.x+110,M.y+330,0.42,m2_bands(o.bands||[1,1,1,1]),{a:o.fig==null?1:o.fig,shadow:false});
   wc_T(ctx,"master record",M.x+200,M.y+72,{w:800,size:36,col:WC_DARK});
   if(o.gold>0.01)withA(ctx,o.gold,()=>wc_badge(ctx,M.x+200,M.y+118,"golden record"));
   if(o.ts!=null)m2_stampOn(ctx,t,M.x+450,M.y+214,o.ts,"P-10482",0.62);
-  M2_BEST.forEach(([lab,val,src,col],i)=>{const a=(o.rows||[])[i]||0,ca=(o.srcs||[])[i]||0,y0=M.y+364+i*100;if(a<=0.01)return;
-    withA(ctx,a,()=>{wc_T(ctx,lab,M.x+40,y0+30,{w:600,size:28,col:WC_MUTED});wc_T(ctx,val,M.x+40,y0+72,{w:500,size:30,f:"mono",col:WC_DARK});});
+  // each detail: its name, and until its best value comes, a dashed place for it (o.ghost); then the value, and where it came from
+  M2_BEST.forEach(([lab,val,src,col],i)=>{const a=(o.rows||[])[i]||0,g=o.ghost||0,ca=(o.srcs||[])[i]||0,y0=M.y+364+i*100,la=Math.max(a,g);
+    if(la>0.01)withA(ctx,la,()=>wc_T(ctx,lab,M.x+40,y0+30,{w:600,size:28,col:WC_MUTED}));
+    if(g*(1-a)>0.01)withA(ctx,g*(1-a),()=>m2_dashUnder(ctx,M.x+40,y0+80,320,0.7));
+    if(a>0.01)withA(ctx,a,()=>wc_T(ctx,val,M.x+40,y0+72,{w:500,size:30,f:"mono",col:WC_DARK}));
     if(ca>0.01)withA(ctx,ca,()=>m2_src(ctx,M.x+M.w-30,y0+2,src,col,{right:true}));});}
 
 /* ---------- 4. the duplicate check ---------- */
@@ -374,7 +377,7 @@ function m2_spark(ctx,x,y,s){ctx.save();ctx.translate(x,y);ctx.beginPath();for(l
 function m2_note(ctx,x,y,o){const w=700,h=400;wc_panel(ctx,x,y,w,h,{kind:"card",seed:18});m2_spark(ctx,x+46,y+46,18);wc_T(ctx,"AI helper · a draft for Mei",x+80,y+56,{w:600,size:28,col:WC_MUTED});
   const L=o.lines||[];const line=(i,fn)=>{const a=L[i]||0;if(a>0.01)fn(a);};
   line(0,a=>{wc_T(ctx,typeOn("pair 2 · names hidden",a),x+36,y+118,{w:800,size:30,col:WC_DARK});});
-  line(1,a=>withA(ctx,a,()=>{ctx.save();ctx.fillStyle=rgba(WC_PENCIL,0.5);[[36,64],[108,104],[260,64],[332,104]].forEach(([dx,bw])=>{ctx.beginPath();rr(ctx,x+dx,y+146,bw,26,6);ctx.fill();});ctx.restore();
+  line(1,a=>withA(ctx,a,()=>{ctx.save();ctx.fillStyle=rgba(WC_PENCIL,0.5);[[36,64],[108,96],[278,64],[350,96]].forEach(([dx,bw])=>{ctx.beginPath();rr(ctx,x+dx,y+146,bw,26,6);ctx.fill();});ctx.restore();
     wc_T(ctx,"and",x+218,y+168,{w:600,size:28,col:WC_MUTED});}));
   line(2,a=>wc_T(ctx,typeOn("· birth dates one digit apart",a),x+36,y+232,{w:600,size:28,col:WC_INK}));
   line(3,a=>wc_T(ctx,typeOn("· HR email on the university's domain",a),x+36,y+280,{w:600,size:28,col:WC_INK}));

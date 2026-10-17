@@ -145,6 +145,13 @@ def minutes(sec):
     return str(h // 2) + ("½" if h % 2 else "")
 
 
+def number(d, i):
+    """A film's place in its series, from 0: its folder's number less one ("3-which-value-wins" is 2), so a series' films can come
+    out in any order; a folder without a number takes its place in series.json's list."""
+    m = re.match(r"\d+", d)
+    return int(m.group()) - 1 if m else i
+
+
 def films(S=FW):
     """Every film of a series whose player is on the site, in order, with everything its pages need."""
     series = json.loads((S["root"] / "series.json").read_text())
@@ -168,7 +175,7 @@ def films(S=FW):
         nt = len(re.findall(r'[{,]q:"', think.read_text())) if think.exists() else 0
         N = load_obj(src / "src" / "narration.js")
         out.append(dict(dir=d, key=key, title=meta["title"], site=site, labs=nl, quiz=nq, think=nt, len=minutes(length(src)), sec=length(src),
-                        chapters=[(k, v["name"]) for k, v in N.items()], prefix="ld-" + key, index=i, series=S))
+                        chapters=[(k, v["name"]) for k, v in N.items()], prefix="ld-" + key, index=number(d, i), series=S))
     return series, out
 
 
@@ -527,13 +534,15 @@ def series_page(lg, series, films_, S=FW):
             f'<section class="module" id="films" aria-labelledby="films-h">\n<div class="mhead"><div><h2 id="films-h">{T(lg, "The films", "Las películas")}</h2><p>{E(series[T(lg, "order", "order_es")])}</p></div></div>\n'
             f'<div class="topic-grid" data-progress-text=\'{PT[lg]}\'>\n' + "\n".join(card(lg, x, "", R) for x in films_) + '\n</div>\n</section>\n\n')
     if "coming" in series:
-        rows = "\n".join(f'<li><span class="n">{i}</span><span><b>{E(t)}</b> · {E(d)}</span></li>' for i, t, d in series[T(lg, "coming", "coming_es")])
+        out = {x["index"] + 1 for x in films_}  # a film that is out leaves the list by itself
+        rows = "\n".join(f'<li><span class="n">{i}</span><span><b>{E(t)}</b> · {E(d)}</span></li>' for i, t, d in series[T(lg, "coming", "coming_es")] if i not in out)
         body += (f'<section class="module" id="coming" aria-labelledby="coming-h">\n<div class="mhead"><div><h2 id="coming-h">{E(series[T(lg, "coming_h", "coming_h_es")])}</h2><p>{E(series[T(lg, "coming_p", "coming_p_es")])}</p></div></div>\n'
                  f'<ol class="series-list coming">\n{rows}\n</ol>\n</section>\n\n')
     body += f'<section class="module" id="thread" aria-labelledby="thread-h">\n<div class="mhead"><div><h2 id="thread-h">{E(series[T(lg, "thread_h", "thread_h_es")])}</h2><p>{E(series[T(lg, "thread", "thread_es")])}</p></div></div>\n</section>\n\n'
     if "past" in series:
-        past = series[T(lg, "past", "past_es")]
-        rows = "\n".join(f'<tr><td>{E(x["title"] if lg == "en" else x["site"]["title_es"])}</td><td>{E(past[x["index"]][0])}</td><td>{E(past[x["index"]][1])}</td></tr>' for x in films_)
+        # a film's row is in its own site.json ("past", "past_es") if it has one, else at its place in series.json's list
+        past = lambda x: x["site"].get(T(lg, "past", "past_es")) or series[T(lg, "past", "past_es")][x["index"]]
+        rows = "\n".join(f'<tr><td>{E(x["title"] if lg == "en" else x["site"]["title_es"])}</td><td>{E(past(x)[0])}</td><td>{E(past(x)[1])}</td></tr>' for x in films_)
         body += (f'<section class="module" id="past" aria-labelledby="past-h">\n<div class="mhead"><div><h2 id="past-h">{E(series[T(lg, "past_h", "past_h_es")])}</h2></div></div>\n'
                  f'<div class="prose"><table><thead><tr><th>{T(lg, "Film", "Película")}</th><th>{T(lg, "Opens with", "Empieza con")}</th><th>{T(lg, "Still true today", "Sigue siendo cierto")}</th></tr></thead><tbody>\n{rows}\n</tbody></table></div>\n</section>\n\n')
     people = "\n".join(f'<div class="card {k}"><h3>{E(a)}</h3><p>{E(b)}</p></div>' for k, a, b in series[T(lg, "people", "people_es")])

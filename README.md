@@ -81,8 +81,8 @@ films/                           one folder per film: script or story, captions/
   data-governance/               a proposed series on data governance, the companion of the one above: its proposal.md
 site-tools/                      build_pages.py turns the Markdown pages into site pages; build_series.py makes the pages of the series (From words to data, In the weeds of data crafting,
                                  The map before the data, The same one, everywhere), the Topics page, and the topics' tiles on the home page and at the end of the intro's scenarios;
-                                 check_site.py and smoke.py check the site; review_copy.py makes a copy of a rendered film small
-                                 enough for a chat to preview, for review
+                                 check_site.py and smoke.py check the site; review_page.py makes a page to review a rendered film on
+                                 (its chapters, captions and a 720p copy, which review_copy.py makes)
 .github/workflows/pages.yml      publishes site/ on every push to main
 .github/workflows/release.yml    renders the films (all, the changed ones, or a list) and publishes every video to a release, when you run it
 .github/scripts/plan.py          chooses which films the release renders

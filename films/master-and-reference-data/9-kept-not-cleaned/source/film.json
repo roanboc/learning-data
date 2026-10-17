@@ -1,0 +1,21 @@
+{
+  "key": "kept-not-cleaned",
+  "title": "Kept, not cleaned",
+  "sub": "The same one, everywhere, a series on master and reference data: a clean-up that merged two thousand duplicate records, and the eleven hundred new ones a year later; a search at the application that keeps new duplicates under fifty an intake; the steward's five measures, each with a limit, and the alert when one passes it; an agent that proposes a list's change and the owner who decides; the governance scorecard; and Dujiangyan, kept every dry season for more than two thousand years.",
+  "howto": "The film is drawn in watercolour. Each role has its own colour: student teal, applicant amber, tutor violet, researcher coral, alumna green. The person, as the master record, is left as white paper and banded in her roles' colours. Cyan edges the technical side, gold the business side.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": ["measures", "bars", 2.0],
+  "say": [
+    ["\\bNguyen\\b", "Nwin"],
+    ["\\bLinh's\\b", "Lin's"],
+    ["\\bLinh\\b", "Lin"],
+    ["\\bHR\\b", "H R"],
+    ["\\bSichuan\\b", "Sitchwahn"],
+    ["\\bChengdu\\b", "Cheng doo"],
+    ["\\bLi Bing\\b", "Lee Bing"],
+    ["\\bDujiangyan\\b", "Doo-jyang-yen"]
+  ]
+}

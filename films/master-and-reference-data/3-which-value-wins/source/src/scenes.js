@@ -134,17 +134,20 @@ scene("hidden",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
 scene("names",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const tL=c("legal"),tFam=w("legal","family name first"),tAcc=w("legal","with its accents"),tPass=w("legal","her passport"),tCk=c("checked"),tLo=c("lost"),tLa=w("lost","lost the accents"),
     tHR=w("lost","HR turned"),tLN=w("lost","Linh Nguyen"),tCh=c("chose"),tBo=c("both"),tTr=c("transcript"),tCl=c("class"),tID=w("class","her ID card"),tRu=c("rule"),tOwn=w("rule","its own rule");
-  m3_open(ctx,S,t,sc,"plain",[[0,960,470,1.06],[tLo-0.3,960,540,1],[tRu-0.3,960,520,1.02]]);
+  m3_open(ctx,S,t,sc,"plain",[[0,980,470,1.04],[tLo-0.3,960,540,1],[tRu-0.3,960,520,1.02]]);
   const N=M3_NAME,parts=m3_nameParts(ctx),dimV=fin(t,tBo-0.2,0.6);
   // her legal name, large: family name first, with its accents; what each part is, in pencil
   arrive(ctx,N.x+N.w/2,N.y+N.h/2,t,tL-0.3,()=>{wc_panel(ctx,N.x,N.y,N.w,N.h,{kind:"card",seed:51});wc_T(ctx,"NGUYỄN Thị Linh",N.x+N.w/2,N.y+124,{w:800,size:76,align:"center",col:WC_DARK});},{dy:16,d:0.9});
-  ["family name","middle name","given name"].forEach((s,i)=>{const [x,pw]=parts[i],lw=tw(ctx,s,28,600);m3_note(ctx,s,x+pw/2-lw/2,N.y+186,clamp((t-tFam-i*0.45)/0.7,0,1),{size:28,w:600,col:WC_MUTED});});
+  // each label under its part, nudged apart where two would touch
+  const lab=["family name","middle name","given name"].map((s,i)=>{const [x,pw]=parts[i];return {s,lw:tw(ctx,s,28,600),cx:x+pw/2};});
+  for(let k=0;k<2;k++)for(let i=1;i<lab.length;i++){const a=lab[i-1],b=lab[i],o=a.cx+a.lw/2+28-(b.cx-b.lw/2);if(o>0){a.cx-=o/2;b.cx+=o/2;}}
+  lab.forEach((l,i)=>m3_note(ctx,l.s,l.cx-l.lw/2,N.y+186,clamp((t-tFam-i*0.45)/0.7,0,1),{size:28,w:600,col:WC_MUTED}));
   // the accents, ringed
   const ac=[[0,"NGUYỄ"],[1,"Thị"]];ac.forEach(([i,s],j)=>{const [x]=parts[i],cx=x+tw(ctx,s,76,800)-tw(ctx,s.slice(-1),76,800)/2;wc_ring(ctx,cx,N.y+86,26,48,clamp((t-tAcc-j*0.3)/0.6,0,1),{seed:81+j,lw:2.6});});
   // her passport, and the student system's check
-  arrive(ctx,1640,250,t,tPass-0.3,()=>m3_passport(ctx,1420,130),{dy:16});
-  wc_tick(ctx,1790,330,54,WC_ROLEINK.student,clamp((t-tCk-0.3)/0.5,0,1),6);
-  withA(ctx,1-fin(t,tTr-0.3,0.5),()=>arrive(ctx,1630,404,t,tCk+0.4,()=>wc_tag(ctx,1630,404,"checked · student system · Jul 2025",{align:"center",col:WC_ROLEINK.student}),{dy:8}));
+  arrive(ctx,1550,250,t,tPass-0.3,()=>m3_passport(ctx,1340,130),{dy:16});
+  wc_tick(ctx,1710,330,54,WC_ROLEINK.student,clamp((t-tCk-0.3)/0.5,0,1),6);
+  withA(ctx,1-fin(t,tTr-0.3,0.5),()=>arrive(ctx,1550,404,t,tCk+0.4,()=>wc_tag(ctx,1550,404,"checked · student system · Jul 2025",{align:"center",col:WC_ROLEINK.student}),{dy:8}));
   // the other ways it's been written: without its accents, and turned round
   withA(ctx,1-0.7*dimV,()=>{arrive(ctx,380,514,t,tLo-0.1,()=>m3_variant(ctx,120,450,520,"Nguyen Thi Linh","ao","alumni office · 2019 record"),{dy:14});
     const vx=150,nw=tw(ctx,"Nguy",40,800),ew=tw(ctx,"e",40,800),tx=vx+tw(ctx,"Nguyen Th",40,800),iw=tw(ctx,"i",40,800);
@@ -155,8 +158,8 @@ scene("names",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   arrive(ctx,1570,514,t,tCh+0.2,()=>{wc_panel(ctx,1300,450,540,128,{kind:"card",seed:57});wc_T(ctx,"Linh",1330,506,{w:800,size:40,col:WC_DARK});
     m3_dot(ctx,1340,544,"self");wc_T(ctx,"preferred · set by Linh",1362,554,{w:600,size:28,col:WC_INK});},{dy:14});
   // what each is for: her transcript, the legal name; her class lists and her ID card, the one she chose
-  wc_link(ctx,520,N.y+N.h+6,520,632,WC_ROLE.student,{p:clamp((t-tTr)/0.6,0,1),vertical:true,a:0.8});
-  arrive(ctx,530,692,t,tTr+0.2,()=>m3_use(ctx,300,632,460,"Transcript","NGUYỄN Thị Linh"),{dy:12});
+  wc_link(ctx,670,N.y+N.h+6,670,632,WC_ROLE.student,{p:clamp((t-tTr)/0.6,0,1),vertical:true,a:0.8});
+  arrive(ctx,670,692,t,tTr+0.2,()=>m3_use(ctx,440,632,460,"Transcript","NGUYỄN Thị Linh"),{dy:12});
   [[1350,tCl],[1690,tID]].forEach(([x,t0])=>wc_link(ctx,1570,584,x,632,WC_PENCIL,{p:clamp((t-t0)/0.6,0,1),vertical:true,a:0.7}));
   arrive(ctx,1350,692,t,tCl+0.2,()=>m3_use(ctx,1190,632,320,"Class list","Linh"),{dy:12});
   arrive(ctx,1690,692,t,tID+0.2,()=>m3_use(ctx,1540,632,300,"ID card","Linh",{photo:true}),{dy:12});
@@ -170,7 +173,7 @@ function m3_swap(ctx,x0,x1,y,p){if(p<=0)return;const top=[],m=(x0+x1)/2;for(let 
     ctx.beginPath();ctx.moveTo(x1-14*Math.cos(a-0.5),y-14*Math.sin(a-0.5));ctx.lineTo(x1,y);ctx.lineTo(x1-14*Math.cos(a+0.5),y-14*Math.sin(a+0.5));ctx.stroke();ctx.restore();}}
 
 /* ---------- 5. A rule for each field ---------- */
-const M3_S5={x:1110,y:100,w:770,h:680};
+const M3_S5={x:1040,y:80,w:800,h:680};
 // where each row's values are: [label baseline, first line's middle, second line's middle]
 const M3_R5Y={legal:[122,160,222],pref:[282,320,320],birth:[380,418,480],mobile:[540,578,640]};
 scene("rules",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
@@ -178,7 +181,7 @@ scene("rules",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     tBi=c("birth"),tWa=c("waits"),tWM=w("waits","waits for Mei"),tPi=c("pin"),tTypo=w("pin","still has the typo"),tPins=w("pin","Mei pins"),tReason=w("pin","with a reason"),
     tMo=c("mobile"),tConf=w("mobile","she confirmed"),tSent=w("mobile","not the newest one sent"),tCh=c("chain"),tC1=w("chain","the most trusted source"),tC2=w("chain","the newest confirmed"),
     tC3=w("chain","the most complete"),tD=c("dbt"),tSQL=w("dbt","into the SQL"),tTest=w("dbt","into tests");
-  m3_open(ctx,S,t,sc,"office",[[0,960,540,1],[tLe-0.4,1000,480,1.04],[tCh-0.4,960,560,1],[tD-0.3,1060,480,1.03]]);
+  m3_open(ctx,S,t,sc,"officeB",[[0,960,540,1],[tLe-0.4,965,530,1.025],[tCh-0.4,960,540,1]]);
   const R=M3_S5,x0=R.x+30,yy=k=>R.y+M3_R5Y[k][1],yy2=k=>R.y+M3_R5Y[k][2],vw=m3_vw;
   // Jun, and his name until the camera moves in
   const ex=fin(t,tWr+0.4,0.6)*(1-fin(t,tTr+0.4,0.6))+fin(t,tD-0.3,0.6);
@@ -217,51 +220,58 @@ scene("rules",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
       [["legal",yy("legal")],["pref",yy("pref")],["dob",yy("birth")],["mob",yy("mobile")]].forEach(([k,y],i)=>wc_ring(ctx,x0+26,y,20,20,clamp((t-tMost-i*0.18)/0.5,0,1),{col:M3_GOLD,lw:3.4,seed:95+i}));});
     ctx.restore();});
   // the order every other field falls back on
-  m3_chain(ctx,960,812,[fin(t,tC1-0.1,0.5),fin(t,tC2-0.1,0.5),fin(t,tC3-0.1,0.5)]);
+  m3_chain(ctx,1095,820,[fin(t,tC1-0.1,0.5),fin(t,tC2-0.1,0.5),fin(t,tC3-0.1,0.5)]);
   // what dbt writes from the YAML: the SQL, and tests that read the same rules
-  const da=fin(t,tSQL-0.6,0.5);if(da>0.01){m3_arrow(ctx,M3_Y.x+M3_Y.w+8,250,1166,250,clamp((t-tSQL+0.5)/0.6,0,1),{lw:3});m3_arrow(ctx,M3_Y.x+M3_Y.w+8,520,1166,520,clamp((t-tTest+0.2)/0.6,0,1),{lw:3});
-    const bw=Math.round(tw(ctx,"dbt",28,700)+28);withA(ctx,da,()=>wc_badge(ctx,M3_Y.x+M3_Y.w+56-bw/2,388,"dbt"));}
-  arrive(ctx,1520,236,t,tSQL-0.3,()=>m3_sqlCard(ctx,1180,120,700,clamp((t-tSQL)/1.6,0,1)),{dy:16});
-  arrive(ctx,1520,518,t,tTest-0.2,()=>m3_testCard(ctx,1180,420,700,[clamp((t-tTest-0.2)/0.8,0,1),clamp((t-tTest-0.8)/0.8,0,1)]),{dy:16});
+  const da=fin(t,tSQL-0.6,0.5);if(da>0.01){m3_arrow(ctx,M3_Y.x+M3_Y.w+8,230,1086,230,clamp((t-tSQL+0.5)/0.6,0,1),{lw:3});m3_arrow(ctx,M3_Y.x+M3_Y.w+8,500,1086,500,clamp((t-tTest+0.2)/0.6,0,1),{lw:3});
+    const bw=Math.round(tw(ctx,"dbt",28,700)+28);withA(ctx,da,()=>wc_badge(ctx,M3_Y.x+M3_Y.w+56-bw/2,368,"dbt"));}
+  arrive(ctx,1470,216,t,tSQL-0.3,()=>m3_sqlCard(ctx,1100,100,740,clamp((t-tSQL)/1.6,0,1)),{dy:16});
+  arrive(ctx,1470,498,t,tTest-0.2,()=>m3_testCard(ctx,1100,400,740,[clamp((t-tTest-0.2)/0.8,0,1),clamp((t-tTest-0.8)/0.8,0,1)]),{dy:16});
   m3_close(ctx,S);wc_paperOver(ctx,S);});
 
 /* ---------- 6. Four emails, each for something ---------- */
-const M3_CX=180,M3_CW=1060,m3_cy=i=>150+i*140;
+const M3_CX=250,M3_CW=920,m3_cy=i=>180+i*140;
+// a pencil underline from x0 to x1, drawn on as p goes 0 to 1
+function m3_under(ctx,x0,x1,y,p,seed){if(p<=0)return;const pts=[];for(let i=0;i<=8;i++){const u=i/8;pts.push([lerp(x0,x1,u),y+Math.sin(u*Math.PI)*2.4-u*2]);}
+  wc_pencil(ctx,pts,p,{lw:3,a:0.9,seed,amp:0.8});}
 scene("emails",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const tCo=c("column"),tFour=w("column","Linh has four"),tSt=c("study"),tStaff=w("study","Her staff email"),tPe=c("personal"),tNewer=w("personal","a newer one"),tNo=c("none"),tEach=w("none","Each is for"),
     tKe=c("kept"),tCP=w("kept","a contact point"),tPu=w("kept","its purpose"),tSo=w("kept","its source"),tDay=w("kept","the day she"),tUs=c("use"),tHR=w("use","HR writes"),tAO=w("use","The alumni office");
-  m3_open(ctx,S,t,sc,"plain",[[0,960,470,1.08],[tSt-0.3,960,500,1],[tUs-0.3,1000,480,1.02]]);
+  m3_open(ctx,S,t,sc,"plain",[[0,948,465,1.16],[tSt-0.3,960,500,1.04],[tUs-0.9,1005,520,1]]);
   // one email column, one cell; the other three don't fit
   const tab=1-fin(t,tSt-0.2,0.5),cards=[tSt-0.1,tStaff-0.1,tPe+0.1,tNewer-0.1];
-  if(tab>0.01)withA(ctx,tab,()=>{arrive(ctx,960,370,t,tCo-0.3,()=>{wc_panel(ctx,660,300,600,140,{kind:"card",seed:61});wc_T(ctx,"email",690,350,{w:600,size:30,f:"mono",col:WC_DARK});
-      ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.4);ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(672,372);ctx.lineTo(1248,372);ctx.stroke();ctx.restore();
-      wc_T(ctx,M3_V.eStudy[0],690,418,{w:500,size:28,f:"mono",col:WC_DARK});},{dy:16});
-    ["eWork","eOld","eNew"].forEach((k,i)=>{const p=clamp((t-tFour-i*0.25)/0.9,0,1);if(p<=0)return;const bump=Math.sin(clamp((p-0.55)/0.45,0,1)*Math.PI)*-22,x=1290+340*(1-ease(clamp(p/0.6,0,1)))+bump;
-      m3_val(ctx,x,486+i*66,k,{});});});
-  // four contact points: each with what it's for, where it comes from, and when she last confirmed it
-  arrive(ctx,M3_CX,110,t,tCP-0.2,()=>wc_T(ctx,"contact points",M3_CX,112,{w:800,size:36,col:WC_DARK}),{dy:8});
+  if(tab>0.01)withA(ctx,tab,()=>{arrive(ctx,660,410,t,tCo-0.3,()=>{wc_panel(ctx,360,340,600,140,{kind:"card",seed:61});wc_T(ctx,"email",390,390,{w:600,size:30,f:"mono",col:WC_DARK});
+      ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.4);ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(372,412);ctx.lineTo(948,412);ctx.stroke();ctx.restore();
+      wc_T(ctx,M3_V.eStudy[0],390,458,{w:500,size:28,f:"mono",col:WC_DARK});},{dy:16});
+    ["eWork","eOld","eNew"].forEach((k,i)=>{const p=clamp((t-tFour-i*0.25)/0.9,0,1);if(p<=0)return;const bump=Math.sin(clamp((p-0.55)/0.45,0,1)*Math.PI)*-22,x=1000+340*(1-ease(clamp(p/0.6,0,1)))+bump;
+      m3_val(ctx,x,362+i*66,k,{});});});
+  // four contact points, centred until the two offices that write to her arrive: each with what it's for, where it comes from, and when she last confirmed it
+  const slide=250*(1-ease(fin(t,tUs-0.9,1.3)));ctx.save();ctx.translate(slide,0);
+  arrive(ctx,M3_CX,140,t,tCP-0.2,()=>wc_T(ctx,"contact points",M3_CX,142,{w:800,size:36,col:WC_DARK}),{dy:8});
   M3_CP.forEach((cp,i)=>arrive(ctx,M3_CX+M3_CW/2,m3_cy(i)+59,t,cards[i],()=>m3_contact(ctx,M3_CX,m3_cy(i),M3_CW,i,{pl:1+1.2*fin(t,tEach+i*0.15,0.5)*(1-fin(t,tKe,0.8))}),{dy:14}));
-  // its purpose, its source, the day she last confirmed it
-  const pw=Math.round(tw(ctx,"study",28,800)+40),sn=tw(ctx,"student system",28,600),dw=tw(ctx," · confirmed Jul 2025",28,600);
-  wc_ring(ctx,M3_CX+M3_CW-28-pw/2,m3_cy(0)+43,pw/2+18,34,clamp((t-tPu)/0.6,0,1),{seed:101});
-  wc_ring(ctx,M3_CX+62+sn/2,m3_cy(0)+86,sn/2+22,30,clamp((t-tSo)/0.6,0,1),{seed:103});
-  wc_ring(ctx,M3_CX+62+sn+dw/2+10,m3_cy(0)+86,dw/2+10,30,clamp((t-tDay)/0.6,0,1),{seed:105});
-  // who writes to which: HR to her staff email; the alumni office to the personal one it has had since 2019
-  [[tHR,"hr","HR","writes to work",1,236],[tAO,"ao","alumni office","writes to personal",2,526]].forEach(([t0,src,name,note,i,y])=>{
-    wc_link(ctx,1376,y+56,M3_CX+M3_CW+8,m3_cy(i)+59,m3_col(src),{p:clamp((t-t0-0.3)/0.6,0,1),a:0.85});
-    arrive(ctx,1610,y+56,t,t0-0.1,()=>wc_roleCard(ctx,1380,y,460,112,M3_SRC[src].role,name,null,null,{note,seed:i+5}),{dy:12});});
-  const ow=tw(ctx,M3_V.eOld[0],30,500,"mono");wc_ring(ctx,M3_CX+30+ow/2,m3_cy(2)+40,ow/2+26,36,clamp((t-tAO-0.5)/0.7,0,1),{seed:107});
+  // its purpose, ringed; its source and the day she last confirmed it, underlined
+  const pw=Math.round(tw(ctx,"study",28,800)+40),sn=tw(ctx,"student system",28,600),dot=tw(ctx," · ",28,600),dw=tw(ctx,"confirmed Jul 2025",28,600),y0=m3_cy(0);
+  wc_ring(ctx,M3_CX+M3_CW-28-pw/2,y0+43,pw/2+18,34,clamp((t-tPu)/0.6,0,1),{seed:101});
+  m3_under(ctx,M3_CX+58,M3_CX+64+sn,y0+108,clamp((t-tSo)/0.5,0,1),103);m3_under(ctx,M3_CX+60+sn+dot,M3_CX+64+sn+dot+dw,y0+108,clamp((t-tDay)/0.5,0,1),105);
+  // the address the alumni office writes to: the personal one it has had since 2019
+  const ow=tw(ctx,M3_V.eOld[0],30,500,"mono");m3_under(ctx,M3_CX+26,M3_CX+32+ow,m3_cy(2)+64,clamp((t-tAO-0.5)/0.6,0,1),107);
+  ctx.restore();
+  // who writes to which: HR to her staff email; the alumni office to that personal one
+  [[tHR,"hr","HR","writes to work",1,286],[tAO,"ao","alumni office","writes to personal",2,516]].forEach(([t0,src,name,note,i,y])=>{
+    wc_link(ctx,1336,y+56,M3_CX+M3_CW+8+Math.round(slide),m3_cy(i)+59,m3_col(src),{p:clamp((t-t0-0.3)/0.6,0,1),a:0.85});
+    arrive(ctx,1550,y+56,t,t0-0.1,()=>wc_roleCard(ctx,1340,y,420,112,M3_SRC[src].role,name,null,null,{note,seed:i+5}),{dy:12});});
   m3_close(ctx,S);wc_paperOver(ctx,S);});
 
 /* ---------- 7. Every value, with its source ---------- */
-const M3_S7={x:140,y:100,w:1080,h:690},M3_R7=[["legal name","legal","sis",["student system","trusted source","Jul 2025"]],["preferred name","pref","self",["Linh","self-service","Aug 2025"]],
+const M3_S7={x:140,y:80,w:1080,h:690},M3_R7=[["legal name","legal","sis",["student system","trusted source","Jul 2025"]],["preferred name","pref","self",["Linh","self-service","Aug 2025"]],
   ["birth date","dob","sis",["student system","pinned by Mei","until Oct 2027"]],["mobile","mob","sis",["student system","newest confirmed","Jul 2025"]]];
 const m3_y7=i=>M3_S7.y+146+i*118;
 scene("sources",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const tSa=c("says"),tWhere=w("says","where it came from"),tRule=w("says","which rule"),tOld=w("says","how old"),tLo=c("lost"),tStill=w("lost","still there"),tClick=w("lost","one click"),
     tWhy=c("why"),tMar=w("why","the fourteenth of March"),tRe=c("read"),tTrn=w("read","Her transcript"),tCls=w("read","her class list"),tAO=w("read","the alumni office");
-  m3_open(ctx,S,t,sc,"plain",[[0,700,460,1.1],[tLo-0.2,1000,420,1.04],[tWhy-0.3,720,480,1.1],[tRe-0.3,960,540,1]]);
+  m3_open(ctx,S,t,sc,"plain",[[0,960,460,1.1],[tLo-0.4,990,440,1.03],[tWhy-0.3,720,480,1.1],[tRe-0.3,960,540,1]]);
   const R=M3_S7,vx=R.x+270;
+  // the record, centred until the values that lost step out beside it
+  const slide=280*(1-ease(fin(t,tLo-0.5,1.2)));ctx.save();ctx.translate(slide,0);
   arrive(ctx,R.x+R.w/2,R.y+R.h/2,t,-0.4,()=>{m3_sheet(ctx,R.x,R.y,R.w,R.h,M3_R7.map(([lab],i)=>[lab,m3_y7(i)+10]).concat([["email",m3_y7(4)+10]]));
     M3_R7.forEach(([lab,k,src,parts],i)=>{const y=m3_y7(i);m3_val(ctx,vx,y,k,{win:1});if(k==="dob")m3_pin(ctx,vx+m3_vw("dob")-16,y-14,1);
       m3_prov(ctx,vx,y+52,src,parts,[fin(t,tWhere,0.5),fin(t,tRule,0.5),fin(t,tOld,0.5)]);});
@@ -269,14 +279,15 @@ scene("sources",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
     withA(ctx,fin(t,tWhere,0.5),()=>wc_T(ctx,"each by its purpose",vx,y4+62,{w:600,size:28,col:WC_INK}));},{dy:16,d:0.9});
   // the values that lost: still there, one click away
   const bx=vx+m3_vw("legal")+20,by=m3_y7(0);withA(ctx,fin(t,tStill-0.4,0.4),()=>wc_badge(ctx,bx,by,"+3"));
-  const press=fin(t,tClick,0.15)*(1-fin(t,tClick+0.2,0.2));m3_cursor(ctx,bx+30,by+2,fin(t,tStill,0.4)*(1-fin(t,tWhy-0.4,0.5)),press);
-  const op=fin(t,tClick+0.1,0.5);if(op>0.01)withA(ctx,op*(1-0.6*fin(t,tRe-0.3,0.6)),()=>{wc_link(ctx,bx+52,by,1272,206,WC_PENCIL,{p:clamp((t-tClick-0.1)/0.5,0,1),a:0.7});
-    arrive(ctx,1566,226,t,tClick+0.2,()=>{wc_panel(ctx,1272,104,594,250,{kind:"card",dashed:true,role:WC_PENCIL,seed:111});wc_T(ctx,"not chosen, still kept",1300,150,{w:700,size:28,col:WC_MUTED});
-      [["alum","alumni office"],["hrn","HR"],["ron","research office"]].forEach(([k,s],i)=>{const y=196+i*56;m3_val(ctx,1300,y,k,{dim:0.5});wc_T(ctx,s,1300+m3_vw(k)+16,y+10,{w:600,size:28,col:m3_ink(M3_V[k][1])});});},{dy:12});});
-  // why her record says 14 March: the answer, right there
-  const dw=Math.max(m3_vw("dob")+40,tw(ctx,"student system · pinned by Mei · until Oct 2027",28,600));wc_ring(ctx,vx+dw/2,m3_y7(2)+26,dw/2+30,66,clamp((t-tMar)/0.8,0,1),{seed:113});
+  const press=fin(t,tClick,0.15)*(1-fin(t,tClick+0.2,0.2));m3_cursor(ctx,bx+50,by-16,fin(t,tStill,0.4)*(1-fin(t,tWhy-0.4,0.5)),press);
+  // why her record says 14 March: the answer, right there under it
+  m3_under(ctx,vx-2,vx+4+tw(ctx,"student system · pinned by Mei · until Oct 2027",28,600),m3_y7(2)+66,clamp((t-tMar)/0.7,0,1),113);
+  ctx.restore();
+  const op=fin(t,tClick+0.1,0.5)*(1-fin(t,tWhy-0.5,0.5));if(op>0.01)withA(ctx,op,()=>{wc_link(ctx,bx+52,by,1272,186,WC_PENCIL,{p:clamp((t-tClick-0.1)/0.5,0,1),a:0.7});
+    arrive(ctx,1542,206,t,tClick+0.2,()=>{wc_panel(ctx,1272,84,540,250,{kind:"card",dashed:true,role:WC_PENCIL,seed:111});wc_T(ctx,"not chosen, still kept",1300,130,{w:700,size:28,col:WC_MUTED});
+      [["alum","alumni office"],["hrn","HR"],["ron","research office"]].forEach(([k,s],i)=>{const y=176+i*56;m3_val(ctx,1300,y,k,{dim:0.5});wc_T(ctx,s,1300+m3_vw(k)+16,y+10,{w:600,size:28,col:m3_ink(M3_V[k][1])});});},{dy:12});});
   // what reads from it: her transcript, her class list, the alumni office
-  [["Transcript","legal name",0,tTrn],["Class list","preferred name",1,tCls],["Alumni office","personal email",4,tAO]].forEach(([title,line,row,t0],i)=>{const y=392+i*134;
+  [["Transcript","legal name",0,tTrn],["Class list","preferred name",1,tCls],["Alumni office","personal email",4,tAO]].forEach(([title,line,row,t0],i)=>{const y=300+i*134;
     wc_link(ctx,R.x+R.w+6,m3_y7(row),1314,y+52,WC_PENCIL,{p:clamp((t-t0-0.2)/0.6,0,1),a:0.7});
     arrive(ctx,1580,y+52,t,t0-0.1,()=>m3_use(ctx,1320,y,520,title,line),{dy:12});});
   m3_close(ctx,S);wc_paperOver(ctx,S);});
@@ -286,36 +297,41 @@ scene("dryrun",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   const tCh=c("change"),tAs=c("asks"),tNew=w("asks","asks for a new one"),tPE=w("asks","for personal email"),tRec=w("asks","confirmed most recently"),tDr=c("dry"),tDry=w("dry","a dry run"),
     tList=w("dry","lists every value"),tCo=c("count"),tOne=w("count","One thousand"),tLinh=w("count","Linh's among"),tAp=c("approve"),tSmp=w("approve","checks a sample"),tReg=w("approve","the registrar"),
     tAps=w("approve","approves"),tRu=c("runs"),tV2=w("runs","version two"),tDate=w("runs","with its date");
-  m3_open(ctx,S,t,sc,"office",[[0,960,540,1],[tDr-0.3,1160,560,1.05],[tRu-0.3,760,420,1.08]]);
-  // Mei, whose office looks after the person
-  const ex=fin(t,tSmp-0.3,0.6)*(1-fin(t,tRu,0.6));
-  arrive(ctx,190,700,t,-0.3,()=>person(ctx,"mei",190,1010,0.95,{pose:"stand",pose2:"explain",mix:ex,expr:t>tAps?"relieved":"calm",t}),{d:0.8});
-  arrive(ctx,178,164,t,0.3,()=>{wc_panel(ctx,24,110,310,108,{kind:"card"});wc_T(ctx,"Mei Tanaka",52,156,{w:800,size:32,col:WC_DARK});wc_T(ctx,"registrar's office",52,196,{w:600,size:28,col:WC_MUTED});},{dy:12});
-  // the rule as it is; the alumni office's request; the new rule, a draft, until it's approved; then version two, with its date
-  const RX=360,RY=128,v1=fin(t,tCh-0.2,0.5),dr=fin(t,tNew,0.6),back=ease(dr);
-  if(v1>0.01)withA(ctx,v1,()=>{const x=lerp(RX,RX+20,back),y=lerp(RY,RY-18,back);wc_panel(ctx,x,y,560,172,{kind:"card",seed:41});
-    withA(ctx,1-back,()=>{wc_T(ctx,"personal email",x+30,y+56,{w:800,size:32,col:WC_DARK});wc_T(ctx,"trusted source",x+30,y+104,{w:600,size:30,col:WC_INK});});wc_badge(ctx,x+30+(1-back)*0+(back*480),y+142-back*110,"v1");});
+  m3_open(ctx,S,t,sc,"office",[[0,960,540,1],[tDr-0.3,906,560,1.06],[tRu-0.3,960,540,1]]);
+  // the rule as it is; the alumni office's request; the new rule, a draft, until it's approved; then version two, with its date.
+  // The old version steps back behind the new one, its tab still showing
+  const RX=80,RY=96,v1=fin(t,tCh-0.2,0.5),dr=fin(t,tNew,0.6),back=ease(dr);
+  if(v1>0.01)withA(ctx,v1,()=>{const x=RX+72*back,y=RY-14*back;wc_panel(ctx,x,y,560,172,{kind:"card",seed:41});
+    withA(ctx,1-back,()=>{wc_T(ctx,"personal email",x+30,y+56,{w:800,size:32,col:WC_DARK});wc_T(ctx,"trusted source",x+30,y+104,{w:600,size:30,col:WC_INK});});
+    wc_badge(ctx,lerp(x+30,x+494,back),lerp(y+142,y+86,back),"v1");});
   if(dr>0.01)arrive(ctx,RX+280,RY+86,t,tNew,()=>m3_rule(ctx,RX,RY,{type:clamp((t-tRec+0.4)/0.9,0,1),solid:fin(t,tV2-0.1,0.6),date:fin(t,tDate,0.5)}),{dy:16});
-  arrive(ctx,1400,186,t,tAs-0.1,()=>{wc_roleCard(ctx,980,124,840,132,"alumna","alumni office",null,null,{seed:5});
-    wc_T(ctx,typeOn("personal email: the one confirmed most recently",clamp((t-tPE)/1.4,0,1)),1012,220,{w:600,size:28,col:WC_INK});},{dy:12});
+  arrive(ctx,1120,162,t,tAs-0.1,()=>{wc_roleCard(ctx,760,96,720,132,"alumna","alumni office",null,null,{seed:5});
+    wc_T(ctx,typeOn("personal email: the one confirmed most recently",clamp((t-tPE)/1.4,0,1)),792,192,{w:600,size:28,col:WC_INK});},{dy:12});
   // the dry run: every value it would change, Linh's first; Mei's ticks on a sample; the registrar's stamp
   const D=M3_DX;arrive(ctx,D.x+D.w/2,D.y+D.h/2,t,tDry-0.3,()=>m3_dry(ctx,t,{count:fin(t,tOne-0.1,0.5),rows:[0,1,2].map(i=>clamp((t-tList-i*0.4)/1.2,0,1)),
     more:fin(t,tOne+1.2,0.5),hi:fin(t,tLinh,0.5),ticks:[clamp((t-tSmp)/0.4,0,1),0,clamp((t-tSmp-0.5)/0.4,0,1)]}),{dy:16,d:0.9});
-  m3_stamp(ctx,t,D.x+D.w-230,D.y+D.h-92,tAps-0.05,"approved","the registrar");
+  m3_stamp(ctx,t,D.x+D.w-190,D.y+D.h-84,tAps-0.05,"approved","the registrar");
+  // Mei, by her window as before, pointing to the sample she checks; her name until the dry run takes the room
+  const ex=fin(t,tSmp-0.3,0.6)*(1-fin(t,tRu,0.6));
+  arrive(ctx,1560,700,t,-0.3,()=>m3_person(ctx,"mei",1560,1010,0.95,{pose:"stand",pose2:"explain",mix:ex,expr:t>tAps?"relieved":"calm",t,flip:true}),{d:0.8});
+  withA(ctx,1-fin(t,tDry-0.8,0.5),()=>arrive(ctx,1528,354,t,0.3,()=>{wc_panel(ctx,1380,300,296,108,{kind:"card"});wc_T(ctx,"Mei Tanaka",1408,346,{w:800,size:32,col:WC_DARK});
+    wc_T(ctx,"registrar's office",1408,386,{w:600,size:28,col:WC_MUTED});},{dy:12}));
   m3_close(ctx,S);wc_paperOver(ctx,S);});
 
 /* ---------- 9. Elsewhere ---------- */
 scene("elsewhere",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const tBk=c("bank"),tSt=c("statements"),tLeg=w("statements","legal name"),tAp=c("app"),tGr=w("app","greets them"),tSh=c("shop"),tBill=w("shop","a billing address"),tDel=w("shop","a delivery address"),
     tEach=w("shop","each for"),tSa=c("same"),tQ=[w("same","which value"),w("same","for what"),w("same","who says so")];
-  m3_open(ctx,S,t,sc,"plainB",[[0,560,430,1.08],[tSh-0.3,1380,430,1.08],[tSa-0.3,960,540,1]]);
-  const on=[fin(t,tBk-0.3,0.5),fin(t,tSh-0.4,0.5)],dim=i=>1-0.55*(i===0?fin(t,tSh-0.3,0.5)*(1-fin(t,tSa-0.3,0.5)):(1-fin(t,tSh-0.4,0.5))*0.6);
-  M3_PAN.forEach(([x],i)=>withA(ctx,dim(i),()=>arrive(ctx,x+M3_PW/2,M3_PY+M3_PH/2,t,i?tBk+0.2:tBk-0.3,()=>m3_panel(ctx,i),{dy:16})));
+  m3_open(ctx,S,t,sc,"plainB",[[0,960,430,1.08],[tSh-0.3,1380,430,1.08],[tSa-0.3,960,540,1]]);
+  // the bank, centred, until the shop arrives beside it; then each dims while the other speaks
+  const dim=i=>1-0.55*(i===0?fin(t,tSh-0.3,0.5)*(1-fin(t,tSa-0.3,0.5)):0),slide=465*(1-ease(fin(t,tSh-1.2,1.0)));
+  ctx.save();ctx.translate(slide,0);withA(ctx,dim(0),()=>arrive(ctx,M3_PAN[0][0]+M3_PW/2,M3_PY+M3_PH/2,t,tBk-0.3,()=>m3_panel(ctx,0),{dy:16}));
   // a bank: her statement in her legal name; its app greets her by the one she chose
   withA(ctx,dim(0),()=>{const X=M3_PAN[0][0];arrive(ctx,X+290,420,t,tSt-0.2,()=>{wc_panel(ctx,X+40,200,500,380,{kind:"card",seed:71});wc_T(ctx,"Statement",X+70,256,{w:800,size:32,col:WC_DARK});
       wc_T(ctx,"account holder",X+70,330,{w:600,size:28,col:WC_MUTED});withA(ctx,fin(t,tLeg-0.2,0.5),()=>wc_T(ctx,"NGUYỄN THỊ LINH",X+70,378,{w:800,size:32,col:WC_DARK}));
       ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.3);ctx.lineWidth=2;for(let i=0;i<4;i++){ctx.beginPath();ctx.moveTo(X+70,430+i*34);ctx.lineTo(X+500-(i%2)*90,430+i*34);ctx.stroke();}ctx.restore();},{dy:14});
-    arrive(ctx,X+700,380,t,tGr-0.4,()=>m3_phone(ctx,X+590,180,1),{dy:14});});
+    arrive(ctx,X+700,380,t,tGr-0.4,()=>m3_phone(ctx,X+590,180,1),{dy:14});});ctx.restore();
+  arrive(ctx,M3_PAN[1][0]+M3_PW/2,M3_PY+M3_PH/2,t,tSh-0.2,()=>m3_panel(ctx,1),{dy:16});
   // a shop: a billing address and a delivery address, each for something
   withA(ctx,dim(1),()=>{const X=M3_PAN[1][0];arrive(ctx,X+435,400,t,tSh-0.2,()=>{wc_panel(ctx,X+40,190,790,430,{kind:"card",seed:73});wc_T(ctx,"Order",X+70,246,{w:800,size:32,col:WC_DARK});
       withA(ctx,fin(t,tBill-0.1,0.5),()=>{wc_T(ctx,"billing address",X+70,312,{w:600,size:28,col:WC_MUTED});wc_T(ctx,"7 Hill Road",X+70,356,{w:800,size:32,col:WC_DARK});
@@ -334,23 +350,24 @@ scene("home",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   const tH=c("home"),tCame=w("home","the Beagle came home"),tO=c("out"),tFive=w("out","five years"),tSec=w("out","thirty-three seconds"),tSe=c("settled"),tBef=w("settled","settled before"),
     tPort=w("settled","checked at every port"),tSa=c("same"),tWr=w("same","written down"),tNight=w("same","tested every night"),tK=c("declared");
   m3_open(ctx,S,t,sc,null,[[0,1100,500,1.06],[tO-0.3,900,470,1.03],[tSa-0.4,960,540,1],[tK-0.3,960,530,1.02]]);
-  const pl=fin(t,tSa-0.6,0.9);
-  if(pl<0.99){m3_place(ctx,"falmouth");m3_ship(ctx,lerp(1560,1080,1-Math.pow(1-clamp(t/18,0,1),2)),M3_FHZ+112,0.84,t,{set:true});
-    // after five years around the world, the clocks out by thirty-three seconds; and the rate book, shut, every port ticked
-    withA(ctx,1-pl,()=>{arrive(ctx,690,232,t,tFive-0.3,()=>{wc_panel(ctx,300,130,780,210,{kind:"card",seed:121});wc_T(ctx,"five years, around the world",340,190,{w:600,size:30,col:WC_INK});
-        withA(ctx,fin(t,tSec-0.2,0.5),()=>wc_T(ctx,"out by 33 seconds",340,268,{w:800,size:52,col:WC_DARK}));m3_dial(ctx,968,236,62,15*3600+33,{});},{dy:16});
-      arrive(ctx,560,560,t,tBef-0.3,()=>m3_rateBook(ctx,t,560,560,{head:-9,rows:-9,shut:1}),{dy:20});
-      const ports=7;for(let i=0;i<ports;i++){const px=820+i*80,p=clamp((t-tPort-i*0.18)/0.4,0,1);ctx.save();ctx.fillStyle=rgba(WC_PENCIL,0.8*fin(t,tPort-0.4,0.4));ctx.beginPath();ctx.arc(px,560,7,0,TAU);ctx.fill();ctx.restore();
-        if(i<ports-1)wc_link(ctx,px+10,560,px+70,560,WC_PENCIL,{p:fin(t,tPort-0.4+i*0.05,0.4),a:0.6,lw:2.4});wc_tick(ctx,px,532,30,M3_GOLDINK,p,4);}
-      arrive(ctx,1060,620,t,tPort+0.6,()=>wc_tag(ctx,1060,620,"checked at every port",{align:"center"}),{dy:8});});}
-  if(pl>0.01){m3_place(ctx,"plain",pl);withA(ctx,pl*(1-0.65*fin(t,tK-0.4,0.6)),()=>{
-    // the rate book, and Linh's rules, side by side: both written down before anything disagrees, and checked
-    m3_rateBook(ctx,t,470,440,{head:-9,rows:-9,shut:1});wc_tag(ctx,470,660,"the Beagle's clocks",{align:"center"});
+  const pl=fin(t,tSa-0.6,0.9),dk=1-0.65*fin(t,tK-0.4,0.6);
+  if(pl<0.99){m3_place(ctx,"falmouth");m3_ship(ctx,lerp(1600,1240,1-Math.pow(1-clamp(t/18,0,1),2)),M3_FHZ+112,0.84,t,{set:true});
+    // after five years around the world, the clocks out by thirty-three seconds; then, in turn, the rate book, shut, and every port ticked
+    withA(ctx,(1-pl)*(1-fin(t,tSe-0.3,0.4)),()=>arrive(ctx,690,232,t,tFive-0.3,()=>{wc_panel(ctx,300,130,780,210,{kind:"card",seed:121});wc_T(ctx,"five years, around the world",340,190,{w:600,size:30,col:WC_INK});
+      withA(ctx,fin(t,tSec-0.2,0.5),()=>wc_T(ctx,"out by 33 seconds",340,268,{w:800,size:52,col:WC_DARK}));m3_dial(ctx,968,236,62,15*3600+33,{});},{dy:16}));
+    withA(ctx,1-pl,()=>{for(let i=0;i<7;i++){const px=700+i*78,p=clamp((t-tPort-i*0.18)/0.4,0,1);ctx.save();ctx.fillStyle=rgba(WC_PENCIL,0.8*fin(t,tPort-0.4,0.4));ctx.beginPath();ctx.arc(px,290,7,0,TAU);ctx.fill();ctx.restore();
+        if(i<6)wc_link(ctx,px+10,290,px+68,290,WC_PENCIL,{p:fin(t,tPort-0.4+i*0.05,0.4),a:0.6,lw:2.4});wc_tick(ctx,px,262,30,M3_GOLDINK,p,4);}
+      arrive(ctx,934,348,t,tPort+0.6,()=>wc_tag(ctx,934,348,"checked at every port",{align:"center"}),{dy:8});});}
+  if(pl>0.01){m3_place(ctx,"plain",pl);withA(ctx,pl*dk,()=>{
+    // Linh's rules beside the rate book: both written down before anything disagrees, and checked
+    arrive(ctx,470,660,t,tSa+0.3,()=>wc_tag(ctx,470,660,"the Beagle's clocks",{align:"center"}),{dy:8});
     arrive(ctx,1250,400,t,tWr-0.2,()=>{wc_panel(ctx,860,200,780,330,{kind:"card",seed:123});wc_T(ctx,"_core_person__models.yml",890,252,{w:600,size:28,f:"mono",col:WC_DARK});
       ["legal_name","preferred_name","birth_date","mobile"].forEach((s,i)=>wc_T(ctx,"  - name: "+s+" …",890,318+i*46,{w:500,size:28,f:"mono",col:WC_DARK}));},{dy:16});
-    wc_tag(ctx,1250,580,"Linh's rules",{align:"center"});
-    wc_tick(ctx,1110,664,44,WC_ROLEINK.alumna,clamp((t-tNight)/0.5,0,1),5.5);
-    arrive(ctx,1300,664,t,tNight+0.2,()=>wc_tag(ctx,1300,664,"tested every night",{align:"center"}),{dy:8});});}
+    arrive(ctx,1250,580,t,tWr+0.3,()=>wc_tag(ctx,1250,580,"Linh's rules",{align:"center"}),{dy:8});
+    wc_tick(ctx,1088,664,44,WC_ROLEINK.alumna,clamp((t-tNight)/0.5,0,1),5.5);
+    arrive(ctx,1278,664,t,tNight+0.2,()=>wc_tag(ctx,1278,664,"tested every night",{align:"center"}),{dy:8});});}
+  // the rate book, carried across the cut from the sky over Falmouth to its place beside Linh's rules
+  {const k=ease(pl);withA(ctx,dk,()=>arrive(ctx,430,290,t,tBef-0.3,()=>m3_rateBook(ctx,t,lerp(430,470,k),lerp(290,440,k),{head:-9,rows:-9,shut:1}),{dy:20}));}
   m3_close(ctx,S);
   wc_year(ctx,64,80,"October 1836 · Falmouth",fin(t,0.4,0.6)*(1-fin(t,tSa-0.6,0.4)));wc_paperOver(ctx,S);
   // the line, then carried down onto the end card, above the veil, landing where the card's own line fades in and takes it over

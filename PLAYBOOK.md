@@ -106,6 +106,7 @@ Before story or pictures, the concept is settled. [`AGENTS.md`](AGENTS.md) gives
 - **Release from a clean machine.** A workflow renders every language from the committed source, and refuses if the site's player or the voice timings don't match it. What people download is then what the site plays, and anyone can make it again.
 - **Design for other languages from day one.** Keep words in language packs, let boxes size to the translated text, and check the longest language.
 - **Start a language with captions.** A full version needs a new voice, new on-screen text and a new video. Captions alone keep the same film and the same video, and take one file: every film after *The Inner Life of Data* has Spanish captions this way. Keep each caption about as long as the English line, so it reads in the time the voice takes. Since 16 October 2026, captions and the site's pages are the only Spanish: no film's visuals or voice are translated, because that doubled the work for every change.
+- **Keep an offset's remainder positive.** JavaScript's `%` keeps the sign, so an offset worked out from a seed or a position that can go below zero, such as a wash that starts left of the frame, moves a texture into the frame instead of past its edge, and leaves a strip without it. Use `((v % n) + n) % n`. The landscapes of *One person, many roles* had a pale strip down their left edge until work on *Which value wins* showed it.
 
 *Ask: if a product is renamed tomorrow, how long does the fix take?*
 

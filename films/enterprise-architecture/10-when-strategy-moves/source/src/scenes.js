@@ -35,8 +35,8 @@ scene("kenya",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
   const tB0=tC+0.2,bu=t=>0.94*ease(clamp((t-tB0)/4.6,0,1)),u=bu(t);
   ctx.save();d10_camApply(ctx,cam);
   d10_map(ctx,t,cam,{labs:fin(t,0.4,1.0)*(1-fin(t,3.0,1.2)),road:clamp((t-w("home","sends")+0.3)/2.2,0,1),dim});
-  // the man in Nairobi, and his family upcountry, as a map draws people
-  const pa=1-dim*0.9;
+  // the man in Nairobi, and his family upcountry, as a map draws people (gone once the map's layers come, so they don't peek out)
+  const pa=(1-dim*0.9)*(1-fin(t,w("idea","Making it real")-0.2,0.8));
   d10_icon(ctx,D10_NAI[0]+22*k,D10_NAI[1]+12*k,34*k,[255,236,206],fin(t,w("home","A man")-0.1,0.5)*pa);
   D10_FAM.forEach(([dx,dy,s_],j)=>d10_icon(ctx,D10_UP[0]+dx*k,D10_UP[1]+dy*k,s_*k,[255,236,206],fin(t,w("home","his family")-0.1+j*0.12,0.5)*pa));
   const nm=1-fin(t,tL+0.1,0.5);d10_name(ctx,cam,"Nairobi",D10_NAI[0]+46*k,D10_NAI[1]+12*k,30,null,fin(t,w("home","Nairobi")-0.2,0.6)*nm,"left");
@@ -76,7 +76,7 @@ scene("kenya",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
 
   // the idea, on paper; then the map's six layers, and what it took on each, down to an agent's counter
   const tMk=w("idea","Making it real"),tFly=w("idea","much more")+0.3,fl=ease(clamp((t-tFly)/1.2,0,1)),tLk=w("link","every layer")-0.3,tG=w("link","shop counter")-0.1,gu=ease(clamp((t-tG)/1.6,0,1));
-  const stA=1-0.88*gu,R=layerStack(ctx,700,170,1120,{a:0,sh:80,gap:18});
+  const stA=1-0.97*gu,R=layerStack(ctx,700,170,1120,{a:0,sh:80,gap:18});
   const hi=[0,0,0,0,0,0];D10_KL.forEach(([li,,ln,wd])=>{hi[li]+=pulseAt(t,w(ln,wd)+0.1,1.2)*0.8;});hi[1]+=pulseAt(t,tFly+1.1,1.2)*0.8;
   // the change, as a light that runs down every layer to the counter
   const dp=clamp((t-tLk)/1.1,0,1);for(let i=1;i<6;i++)hi[i]+=pulseAt(t,tLk+1.1*(i-1)/4,0.9)*0.9;
@@ -116,7 +116,7 @@ function d10_dirLetter(ctx,x,y,w,hl,o){o=o||{};const h=650,ink="rgba(40,38,40,0.
   sheet(ctx,x,y,w,h,{rot:0,plain:true});T(ctx,"direction",x+40,y+62,{f:"mono",w:500,size:28,color:"rgba(150,60,60,0.95)"});T(ctx,"November 2026",x+w-40,y+62,{f:"mono",w:500,size:28,align:"right",color:soft});
   T(ctx,"from the government, the utility's owner",x+40,y+108,{w:600,size:28,color:soft});ctx.fillStyle="rgba(96,86,76,0.35)";ctx.fillRect(x+40,y+134,w-80,2);
   T(ctx,"A social tariff",x+40,y+196,{w:800,size:44,color:ink});
-  D10_DIR.forEach(([s_],i)=>{const yy=y+262+i*54,hv=hl[i]||0;if(hv>0.01){const tw_=tw(ctx,s_,36,700);withA(ctx,clamp(hv,0,1),()=>{ctx.fillStyle="rgba(255,206,84,0.5)";ctx.fillRect(x+32,yy-34,(tw_+16)*ease(clamp(hv*1.4,0,1)),46);});}
+  D10_DIR.forEach(([s_],i)=>{const yy=y+262+i*54,hv=hl[i]||0;if(hv>0.01){const tw_=tw(ctx,s_,36,700);withA(ctx,clamp(hv,0,1)*(o.ha?o.ha[i]:1),()=>{ctx.fillStyle="rgba(255,206,84,0.5)";ctx.fillRect(x+32,yy-34,(tw_+16)*ease(clamp(hv*1.4,0,1)),46);});}
     T(ctx,s_,x+40,yy,{w:700,size:36,color:ink});});
   T(ctx,"the Minister",x+w-40,y+h-42,{w:600,size:28,align:"right",color:soft});ctx.restore();return h;}
 // an organisation, as a card of glass in its colour: its name, and ten homes. o.lit[i] lights home i; o.q (0..1): a question mark
@@ -137,9 +137,10 @@ scene("direction",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s
   // the note: what does a change in strategy mean for the data?
   arrive(ctx,960,330,t,0.3,()=>{ctx.save();ctx.translate(lerp(960,1612,nt),lerp(330,118,nt));ctx.scale(lerp(1,0.58,nt),lerp(1,0.58,nt));sticky(ctx,0,0,800,230,"What does a change in strategy mean for the data?",{col:NOTEC[0],size:50,st:0,rot:-0.02});ctx.restore();},{dy:-30});
   // the direction, from the utility's owner, its phrases marked as they're read
-  const hl=D10_DIR.map(([,wd])=>clamp((t-w("tariff",wd)+0.1)/0.7,0,1)*(1-0.5*fin(t,tAg-0.2,0.6))),mv=ease(fin(t,tAg-0.4,1.0));
+  // each line's highlight is drawn as it's read; at "agency", all but "every eligible household" dim (their alpha, not their length)
+  const hl=D10_DIR.map(([,wd])=>clamp((t-w("tariff",wd)+0.1)/0.7,0,1)),ha=hl.map((_,i)=>i===1?1:1-0.75*fin(t,tAg-0.2,0.6)),mv=ease(fin(t,tAg-0.4,1.0));
   hl[1]=Math.max(hl[1],fin(t,tAg-0.2,0.6));
-  arrive(ctx,925,515,t,tLt+0.2,()=>{ctx.save();ctx.translate(lerp(0,-40,mv),0);d10_dirLetter(ctx,560,190,730,hl,{});ctx.restore();},{dy:-20,from:1.04});
+  arrive(ctx,925,515,t,tLt+0.2,()=>{ctx.save();ctx.translate(lerp(0,-40,mv),0);d10_dirLetter(ctx,560,190,730,hl,{ha});ctx.restore();},{dy:-20,from:1.04});
   // who is eligible: the agency knows, and the utility doesn't; the same ten homes on both
   const ga=fin(t,tAg+0.1,0.6),tKn=w("agency","another organisation"),tNot=w("agency","not to the utility");
   arrive(ctx,1590,380,t,tKn-0.2,()=>d10_org(ctx,1330,230,520,300,"the social services agency",BUS,{lit:[0,1,2,3,4,5,6,7,8,9].map(i=>D10_ELIG.includes(i)?fin(t,w("agency","social services")+0.2+i*0.05,0.4):0),say:"knows which are eligible",sayA:fin(t,w("agency","social services")+0.6,0.5)}),{dy:-14});
@@ -299,7 +300,7 @@ scene("wall",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   const ama=fin(t,tC-0.3,0.6),ex=t>w("check","checks")-0.1&&t<tOut+1.6?1:0;
   if(ama>0.01)withA(ctx,ama,()=>person(ctx,"ama",210,1030,0.78,{t,pose:ex?"explain":"stand",expr:t>w("cross","would cross")-0.2&&t<tDe?"concerned":"calm"}));
   // the decision, written down with why, over retail's side; the wall holds; checked against each principle
-  arrive(ctx,1440,450,t,tRec,()=>{d10_adr(ctx,1000,170,880,"12 · the social tariff stays with retail",D10_ADR,{p:clamp((t-w("decide","written down"))/(w("decide","crosses the wall")+0.4-w("decide","written down")),0,1),
+  arrive(ctx,1430,450,t,tRec,()=>{d10_adr(ctx,1000,170,860,"12 · the social tariff stays with retail",D10_ADR,{p:clamp((t-w("decide","written down"))/(w("decide","crosses the wall")+0.4-w("decide","written down")),0,1),
     hi:pulseAt(t,w("same","every time")-0.2,1.6)});
     kt_rstamp(ctx,1772,262,"checked",[112,78,196],fin(t,w("same","Checked")-0.1,0.3),clamp((t-w("same","Checked")+0.1)/0.4,0,1),{size:30,rot:-0.1});},{dy:-20,from:1.04});
   ctx.restore();
@@ -329,7 +330,7 @@ scene("rules",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     const ln=["r1","r2","r3"][k],rw=[w(ln,["The discount","An answer","only billing"][k])-0.2],rt=[rw[0],rw[0],w(ln,["every bill","kept only","reads it"][k])+0.2,w(ln,"Its reason")-0.1,w(ln,["every bill","kept only","reads it"][k])+0.5,w(ln,"Its reason")+0.6];
     if(k===2){rt[2]=rt[4]=w(ln,"only billing")+0.3;rt[3]=rt[5]=w(ln,"only billing")+0.7;}
     if(fl<1){const s_=lerp(1,380/900,fl),cx=lerp(960,mx,fl),cy=lerp(200,my,fl);ctx.save();ctx.translate(cx,cy);ctx.scale(s_,s_);ctx.translate(-960,-200);
-      d10_rule(ctx,960,200,900,id,vals,{a:fin(t,t0,0.4)*(1-sstep(0.55,0.95,fl)),ra:rt.map(x=>fin(t,x,0.4))});ctx.restore();}
+      d10_rule(ctx,960,200,900,id,vals,{a:fin(t,t0,0.4)*(1-sstep(0.55,0.95,fl)),ra:rt.map(x=>fin(t,x,0.4)),deco:fl>0.05});ctx.restore();}
     const ma=sstep(0.6,1,fl);if(ma>0.01){d10_ruleMini(ctx,mx,my,380,id,nm,{a:ma,hi:pulseAt(t,tGo+1.2,1.2)});d10_realise(ctx,hx,hy,mx,my+46,MOT,clamp((t-tGo-1.0)/0.5,0,1),ma);}});
   // the catalogue: the call centre sees "on the social tariff", and nothing more
   arrive(ctx,1410,500,t,tCat+0.5,()=>d10_catalogue(ctx,960,200,900,t,{cc:fin(t,w("r3","the call centre sees")-0.2,0.5),yes:fin(t,w("r3","on the social tariff")-0.1,0.4),mask:fin(t,w("r3","nothing more")-0.1,0.4)}),{dy:-18,from:1.04});
@@ -343,13 +344,13 @@ scene("rules",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
 scene("counter",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);wallBg(ctx,S,t);
   const tDn=c("down"),tM=c("miss"),tRt=c("route"),tB=w("down","a line on the bill")-0.2,tLt=w("down","a letter")-0.2,tCc=w("down","call centre's")-0.2;
   ctx.save();drift(ctx,t,sc,{z:0.02,y:480});
-  // the three, side by side; then up and smaller, for who they miss
+  // the three, side by side; then up and smaller, for who they miss (small, their words are decoration: they've been read)
   const up=ease(fin(t,tM-0.4,1.6)),sh=(cx,cy,f)=>{ctx.translate(cx,cy);ctx.scale(f,f);ctx.translate(-cx,-cy);};
   ctx.save();ctx.translate(0,lerp(0,-40,up));sh(960,0,lerp(1,0.6,up));
   const lit=(x,y,w_,h_,t0)=>{const q=pulseAt(t,t0+0.2,1.4);if(q>0.01)withA(ctx,q,()=>{ctx.save();ctx.strokeStyle=rgba(TRUST,0.9);ctx.lineWidth=4;ctx.shadowColor=rgba(TRUST,0.8);ctx.shadowBlur=18;rr(ctx,x-10,y-10,w_+20,h_+20,12);ctx.stroke();ctx.restore();});};
-  arrive(ctx,370,420,t,tDn+0.1,()=>{lit(90,180,560,470,tB);d10_bill(ctx,90,180,560,470,{hi:pulseAt(t,tB+0.5,1.6)+fin(t,tB+0.5,0.6)*0.4});},{dy:-24,from:1.04});
-  arrive(ctx,960,420,t,tDn+0.5,()=>{lit(710,190,500,420,tLt);d10_letter(ctx,710,190,500,420,{});},{dy:-24,from:1.04});
-  arrive(ctx,1550,420,t,tDn+0.9,()=>{lit(1290,200,540,420,tCc);d10_call(ctx,1290,200,540,t,{q:fin(t,tCc+0.1,0.4),ans:fin(t,tCc+0.8,0.4)});},{dy:-24,from:1.04});
+  arrive(ctx,370,420,t,tDn+0.1,()=>{lit(90,180,560,470,tB);d10_bill(ctx,90,180,560,470,{hi:pulseAt(t,tB+0.5,1.6)+fin(t,tB+0.5,0.6)*0.4,deco:up>0.1});},{dy:-24,from:1.04});
+  arrive(ctx,960,420,t,tDn+0.5,()=>{lit(710,190,500,420,tLt);d10_letter(ctx,710,190,500,420,{deco:up>0.1});},{dy:-24,from:1.04});
+  arrive(ctx,1550,420,t,tDn+0.9,()=>{lit(1290,200,540,420,tCc);d10_call(ctx,1290,200,540,t,{q:fin(t,tCc+0.1,0.4),ans:fin(t,tCc+0.8,0.4),deco:up>0.1});},{dy:-24,from:1.04});
   withA(ctx,1-up,()=>{[[370,"a line on the bill",tB],[960,"a letter",tLt],[1560,"the call centre's answer",tCc]].forEach(([x,s_,t0])=>arrive(ctx,x,720,t,t0+0.3,()=>d10_tag(ctx,x,720,s_,[255,214,170],{align:"center",size:30}),{dy:8}));});
   ctx.restore();
   // who the match misses: the tenant the agency knows is eligible, and the account the utility holds, in the landlord's name
@@ -362,7 +363,7 @@ scene("counter",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
     // the agency knows the tenant; the utility knows the landlord's account; the match looks for one in the other and finds no one
     d10_tag(ctx,420,470,"the agency: eligible",BUS,{align:"center",size:30});d10_trace(ctx,[[480,500],[760,650]],clamp((t-w("miss","tenants")+0.1)/0.6,0,1),BUS,{lw:3,a:0.9,dash:[9,7],nohead:1});
     withA(ctx,fd,()=>{d10_tag(ctx,1300,470,"the utility: account holder",D10_RET,{align:"center",size:30});d10_trace(ctx,[[1300,500],[1300,616]],clamp((t-w("miss","landlord's name")+0.1)/0.6,0,1),D10_RET,{lw:3,a:0.9,dash:[9,7],nohead:1});});
-    const gq=fin(t,w("miss","landlord's name")+0.5,0.5)*fd;if(gq>0.01)withA(ctx,gq,()=>{d10_trace(ctx,[[600,470],[790,470]],1,[200,200,214],{lw:3,a:0.8,dash:[6,8],nohead:1});d10_trace(ctx,[[1130,470],[940,470]],1,[200,200,214],{lw:3,a:0.8,dash:[6,8],nohead:1});
+    const gq=fin(t,w("miss","landlord's name")+0.5,0.5)*fd;if(gq>0.01)withA(ctx,gq,()=>{d10_trace(ctx,[[600,470],[790,470]],1,[200,200,214],{lw:3,a:0.8,dash:[6,8],nohead:1});d10_trace(ctx,[[1080,470],[940,470]],1,[200,200,214],{lw:3,a:0.8,dash:[6,8],nohead:1});
       kt_rcross(ctx,865,470,20,1);T(ctx,"no match",865,430,{w:800,size:28,align:"center",color:rgba(D10_RED,1)});});
     withA(ctx,fin(t,tK,0.4),()=>kt_gtick(ctx,420+tw(ctx,"the agency: eligible",30,700)/2+40,470,16,1));
     withA(ctx,fin(t,tU,0.4)*(1-fin(t,tRt+0.4,0.5)),()=>T(ctx,"?",hx+70,hy-200,{w:800,size:56,align:"center",color:rgba(D10_RET,1)}));});
@@ -371,7 +372,7 @@ scene("counter",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   // found now: a second route, an application, by December
   arrive(ctx,1290,590,t,w("route","an application")-0.3,()=>d10_apply(ctx,1090,400,460,380,{tick:fin(t,w("route","later in")+0.2,0.4)}),{dy:-24,from:1.05});
   arrive(ctx,1320,830,t,w("route","later in the year")-0.1,()=>d10_tag(ctx,1320,830,"by December 2027",D10_MIG,{align:"center",size:30}),{dy:8});
-  arrive(ctx,470,700,t,w("route","Found now")-0.1,()=>d10_tag(ctx,470,700,"found now, not in the first bills",[170,245,190],{align:"center",size:30}),{dy:8});
+  arrive(ctx,444,704,t,w("route","Found now")-0.1,()=>d10_tag(ctx,444,704,"found now, not in the first bills",[170,245,190],{align:"center",size:30}),{dy:8});
   ctx.restore();
   vign(ctx,S);});
 
@@ -388,14 +389,14 @@ scene("lands",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const tV=c("version"),tL=c("lineage"),tX=c("exchange");
   ctx.save();drift(ctx,t,sc,{z:0.015,y:480});
   // A. the bill, from the counter, its new line lit; it slides out as the contract comes in
-  const mvB=easeCam(clamp((t-0.2)/1.6,0,1)),goA=fin(t,tV-0.9,0.6),bX=lerp(438,80,mvB)-60*goA,bY=lerp(68,256,mvB),bS=lerp(0.6,0.94,mvB),tLn=w("line","discount line")-0.2;
-  if(goA<1)withA(ctx,1-goA,()=>{ctx.save();ctx.translate(bX,bY);ctx.scale(bS,bS);d10_bill(ctx,0,0,560,470,{hi:pulseAt(t,tLn,1.6)+fin(t,tLn,0.6)*0.5,deco:bS<0.93});ctx.restore();});
+  const mvB=easeCam(clamp((t-0.2)/1.6,0,1)),goA=fin(t,tV-0.9,0.6),bX=lerp(438,80,mvB)-60*goA,bY=lerp(68,256,mvB),bS=lerp(0.6,0.96,mvB),tLn=w("line","discount line")-0.2;
+  if(goA<1)withA(ctx,1-goA,()=>{ctx.save();ctx.translate(bX,bY);ctx.scale(bS,bS);d10_bill(ctx,0,0,560,470,{hi:pulseAt(t,tLn,1.6)+fin(t,tLn,0.6)*0.5,deco:bS<0.955});ctx.restore();});
   // the product it comes from: accounts and bills, retail's, as Now the questions appear found it; up, for its versions
   const tP=w("line","the accounts")-0.3,mvP=easeCam(clamp((t-tV+1.0)/1.4,0,1)),goP=fin(t,tL-0.9,0.5),pX=lerp(720,80,mvP),pY=lerp(256,230,mvP),pW=lerp(1100,820,mvP);
   if(goP<1)arrive(ctx,pX+pW/2,pY+62,t,tP,()=>withA(ctx,1-goP,()=>{d10_product(ctx,pX,pY,pW,124,"accounts and bills","sell energy · serve customers",{hi:pulseAt(t,tP+0.6,1.4)});
     withA(ctx,fin(t,tP+0.5,0.5)*(1-mvP),()=>d10_owner(ctx,1820,426,"head of retail",1,{align:"right",hi:pulseAt(t,tP+0.8,1.2)}));}),{dy:-14});
   // the bill's new line flows into it
-  if(goA<1){const P=[];for(let k=0;k<=20;k++){const f=k/20,g=1-f;P.push([g*g*g*594+3*g*g*f*660+3*g*f*f*650+f*f*f*716,g*g*g*517+3*g*g*f*517+3*g*f*f*322+f*f*f*322]);}d10_trace(ctx,P,clamp((t-tP-0.3)/0.7,0,1),TRUST,{lw:3.5,a:0.9*(1-goA)});}
+  if(goA<1){const P=[];for(let k=0;k<=20;k++){const f=k/20,g=1-f;P.push([g*g*g*605+3*g*g*f*666+3*g*f*f*650+f*f*f*716,g*g*g*523+3*g*g*f*523+3*g*f*f*322+f*f*f*322]);}d10_trace(ctx,P,clamp((t-tP-0.3)/0.7,0,1),TRUST,{lw:3.5,a:0.9*(1-goA)});}
   // what amount due means: what it was, struck out, and what it is now
   const tCh=w("line","changes")-0.3;arrive(ctx,1270,615,t,tCh,()=>d10_meaning(ctx,720,470,1100,{a:1-goA,strike:clamp((t-w("line","amount due")-0.1)/0.6,0,1),now:fin(t,w("line","means")-0.2,0.5)}),{dy:-14});
 
@@ -457,8 +458,8 @@ const D10_DIFF=[[480,[["the match","the match"],["the bills","the bills"],["the 
   [1440,[["the outcome, measured","the outcome"]],"Next year"]];
 scene("path",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   const tOr=w("plateaus","in the order")-0.1,PY=250,AY=392;
-  // the camera: close on the plateaus as they arrive; back, for what changes between them
-  const cam=d10_camAt(t,[[0,960,330,1.06],[c("dates")-0.9,960,470,1.0,1.8]]);cam.z*=1+0.012*Math.sin(Math.PI*clamp(t/sc.dur,0,1));
+  // the camera: on the plateaus as they arrive; down, for what changes between them
+  const cam=d10_camAt(t,[[0,960,330,1.0],[c("dates")-0.9,960,470,1.0,1.8]]);cam.z*=1+0.012*Math.sin(Math.PI*clamp(t/sc.dur,0,1));
   ctx.save();d10_camApply(ctx,cam);
   // the plateaus, and the path between them, lit in gold, in order
   D10_PLAT.forEach(([n,x],i)=>{const t0=0.5+i*0.3,hi=i>0?pulseAt(t,w("dates",D10_DIFF[i-1][2])-0.1,1.4)+0.25*fin(t,w("dates",D10_DIFF[i-1][2]),0.6):0;
@@ -512,16 +513,28 @@ scene("page",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);w
 // A street of homes on the first of July: every home gets its bill, and the eligible ones carry the discount, about nine in ten of
 // them without asking; the one the match missed waits for the second route. Then the measure Farah has asked for since 2024,
 // confirmed by the head of retail, under the goal it lets them steer, while a few homes are marked as falling behind. Kenya, a few
-// years on: phones everywhere, and money sent home in minutes. Then Tomás's note and its answer, beside what the walk produced:
-// owners, rules and contracts, in order; the map that goes stale; and the next note
+// years on: phones everywhere, and money sent home in minutes. Then Tomás's note and its answer, beside the map: the change lands in
+// every layer, and what the walk found comes off it as a list of owners, rules and contracts, in order; the map goes stale; the next note
 // the street: 12 homes a row, 6 rows; the eligible ones (the last, a tenant the match missed); the ones falling behind
 const D10_ST=[...Array(72).keys()].map(k=>[365+(k%12)*110,300+Math.floor(k/12)*92]),D10_STE=[3,9,14,22,27,33,41,53,58,70],D10_STB=[6,19,30,50,67];
-// what the walk produced: owners, rules and contracts, each column with its heading, at the word it's read at
-const D10_OWN=["Ama","head of retail","IT","the agency"],D10_RMIN=[["RUL-023","from the agency's date"],["RUL-024","until the next match"],["RUL-025","only billing reads it"]];
+// the map, beside Tomás's answer: six layers, with a mark for every element the walk's map has on each, at the same place along it
+// (the change lights the ones it touches). Two goals share a place on the walk's map; here they sit side by side. It starts large,
+// then moves up and thins to make room for the list: D10_MS holds both places, d10_msAt(u) the one between them
+const D10_MS=[{x:960,y:250,w:860,h:62,g:16},{x:960,y:120,w:860,h:34,g:8}];
+const d10_msAt=u=>{const[a,b]=D10_MS,o={};for(const k in a)o[k]=lerp(a[k],b[k],u);return o;};
+const D10_MK=LAY6.map((_,li)=>D10_WALK.filter(e=>e[0]===li).map(e=>[e[1],e[3],1]).concat(D10_REST.filter(e=>e[0]===li).map((e,k)=>li===0?[e[1]+k*140,120,0]:[e[1],e[3],0]),li===2?[[500,300,0],[1120,110,0]]:[]));
+function d10_mkAt(m,li,mx,mw){const f=(m.w-244)/1760;return[m.x+232+(mx-100)*f+m.h*0.35,m.y+li*(m.h+m.g)+m.h/2,Math.max(14,mw*f-6)];}
+function d10_mini(ctx,m,p,lit,hi){layerStack(ctx,m.x,m.y,m.w,{p,sh:m.h,gap:m.g,size:28,hi});const mh=lerp(14,22,clamp((m.h-34)/28,0,1));
+  D10_MK.forEach((ms,li)=>{const q=clamp(p*6.5-li,0,1);if(q<=0)return;withA(ctx,clamp(q*2.2,0,1),()=>ms.forEach(([mx,mw,on])=>{const[X,Y,ww]=d10_mkAt(m,li,mx,mw),col=LAY6[li][1],v=on?lit[li]:0;
+    ctx.save();if(v>0){ctx.shadowColor=rgba(col,0.8*v);ctx.shadowBlur=14*v;}rr(ctx,X,Y-mh/2,ww,mh,mh/2);ctx.fillStyle=rgba(col,0.16+0.74*v);ctx.fill();ctx.restore();}));});}
+// what the walk found, lifted off the map into a list: each owner, rule and contract, with the element it comes off ([layer, x, width])
+const D10_OWN=[["Ama",[0,110,360]],["head of retail",[2,110,300]],["IT",[5,1000,360]],["the agency",[2,1300,300]]];
+const D10_RMIN=[["RUL-023","from the agency's date"],["RUL-024","until the next match"],["RUL-025","only billing reads it"]],D10_RSRC=[3,760,400];
+const D10_CON=[["version 2","accounts and\u00a0bills","product",[4,420,340]],["monthly","the exchange with\u00a0the\u00a0agency","object",[5,1000,360]]],D10_LX=[930,1216,1598];
 const D10_ANS="It lands in every layer. Walked down the map, it's a list of owners, rules and contracts, in order.";
 scene("july",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   const tB=c("bills"),tM=c("measure"),tK=c("kenya"),tA=c("answer"),tN=c("next");
-  const aAB=1-fin(t,tK-0.9,0.8),kA=fin(t,tK-0.9,0.8)*(1-fin(t,tA-0.9,0.8)),wA=fin(t,tA-0.9,0.8);
+  const aAB=1-fin(t,tK-0.9,0.8),kA=fin(t,tK-0.9,0.8)*(1-fin(t,tA-0.9,0.8)),wA=fin(t,tA-0.9,0.8)*(1-fin(t,B+0.8,1.0));
   // A. the street on the first of July, then, smaller, on the left, for the measure
   if(aAB>0.01)withA(ctx,aAB,()=>{ctx.save();drift(ctx,t,sc,{z:0.02,y:520});
     const mvN=easeCam(clamp((t-tM+0.6)/1.6,0,1)),sN=lerp(1,0.62,mvN);ctx.save();ctx.translate(lerp(965,500,mvN),lerp(530,600,mvN));ctx.scale(sN,sN);ctx.translate(-965,-530);
@@ -556,24 +569,42 @@ scene("july",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
       const r=clamp((t-tSn-1.0)/1.0,0,1);if(r>0&&r<1)ring(ctx,ux,uy,16+70*r,D10_SIG,0.9*(1-r),3);}
     arrive(ctx,ux-30,uy+70,t,w("kenya","in minutes")-0.2,()=>d10_tag(ctx,ux-30,uy+70,"money home, in minutes",D10_SIG,{align:"center",size:30}),{dy:8});
     eaYear(ctx,90,90,"Kenya · 2011",CLAY,fin(t,tK-0.4,0.5));});
-  // D. Tomás's note, and its answer, beside what the walk produced: owners, rules and contracts, in order
+  // D. Tomás's note and its answer, on the wall beside him. On the right, the map: the change lands in every layer, and what the walk
+  // found comes off it as a list (owners, rules, contracts), then the path's plateaus, in order. Used every week and updated less
+  // and less, the map goes grey: the next note
   if(wA>0.01)withA(ctx,wA,()=>{wallBg(ctx,S,t);ctx.save();drift(ctx,t,sc,{z:0.02,y:440});
-    const tO=w("answer","owners")-0.2,tR=w("answer","rules")-0.2,tC=w("answer","contracts")-0.2,tIo=w("answer","in order")-0.2,st=1-0.45*fin(t,w("next","goes stale")-0.3,1.2);
+    const tL=w("answer","lands")-0.2,tWk=w("answer","walked down")-0.2,tO=w("answer","owners")-0.3,tR=w("answer","rules")-0.3,tC=w("answer","contracts")-0.3,tIo=w("answer","in order")-0.2;
+    const tSt=w("next","goes stale")-0.3,sv=ease(clamp((t-tSt)/1.4,0,1));
     person(ctx,"tomas",170,1030,0.78,{t,pose:t>tA&&t<tA+2.6?"explain":"stand"});
-    withA(ctx,st,()=>{
-      [["owners",TRUST,420,tO],["rules",MOT,700,tR],["contracts",INF,1040,tC]].forEach(([h,col,x,t0])=>withA(ctx,fin(t,t0,0.4),()=>T(ctx,h,x,190,{f:"mono",w:500,size:28,color:rgba(col,1)})));
-      D10_OWN.forEach((o_,i)=>arrive(ctx,420+110,260+i*92,t,tO+0.15*i,()=>d10_owner(ctx,420,260+i*92,o_,1,{pre:"",hi:pulseAt(t,tIo+0.1,1.2)}),{dy:-10}));
-      D10_RMIN.forEach(([id,nm],i)=>arrive(ctx,700+170,214+i*112+46,t,tR+0.15*i,()=>d10_ruleMini(ctx,700,214+i*112,340,id,nm,{hi:pulseAt(t,tIo+0.3,1.2)}),{dy:-10}));
-      [["accounts and bills · v2","product"],["the exchange · monthly","object"]].forEach(([nm,kind],i)=>arrive(ctx,1040+150,214+i*112+46,t,tC+0.15*i,()=>d10_el(ctx,1040,214+i*112,300,92,nm,INF,kind,{size:28,gs:12,hi:pulseAt(t,tIo+0.5,1.2)}),{dy:-10}));
-      // in order: the path's plateaus, small, under them
-      D10_PLAT.forEach(([n,_],i)=>{const x=440+i*235,q=fin(t,tIo+i*0.2,0.4);if(q<=0.01)return;withA(ctx,q,()=>{if(i>0)arrowTo(ctx,x-235+90,610,x-90,610,TRUST,0.85,{p:1,lw:3,head:10});archEl(ctx,x-90,566,180,88,n,D10_MIG,"plateau",{size:28,gs:11});});});});
-    // the note, and its answer
-    arrive(ctx,1560,190,t,tA-0.6,()=>sticky(ctx,1560,190,560,170,"What does a change in strategy mean for the data?",{col:NOTEC[0],size:34,st:0.5*fin(t,tA+1.4,0.5),rot:-0.025}),{dy:-20});
-    arrive(ctx,1570,500,t,w("answer","has an answer")-0.1,()=>sticky(ctx,1570,500,580,300,D10_ANS,{col:NOTEC[0],size:32,p:clamp((t-w("answer","an answer"))/(tIo+0.6-w("answer","an answer")),0,1),rot:0.015}),{dy:-30,from:1.06});
-    // a map used every week goes stale: the next note
-    withA(ctx,fin(t,w("next","goes stale")-0.2,0.8)*0.5,()=>{ctx.fillStyle="rgba(60,52,40,0.35)";ctx.fillRect(380,150,1000,560);});
-    arrive(ctx,1560,770,t,w("next","Next")-0.1,()=>sticky(ctx,1560,770,480,130,"How do we keep the map alive?",{col:NOTEC[0],size:32,st:0,rot:0.03}),{dy:-30,from:1.06});
-    const dn=pulseAt(t,B+0.2,1.6);if(dn>0)glow(ctx,1570,500,320,EAC,0.2*dn);
+    ctx.save();if(sv>0.001)ctx.filter="grayscale("+(0.85*sv).toFixed(3)+") brightness("+(1-0.3*sv).toFixed(3)+")";
+    // the map, and the change as a light down its edge, as in the walk: each layer lights what it touches as the light reaches it
+    // (large at first; at "walked down the map" it moves up and thins, to make room for the list)
+    const m=d10_msAt(easeCam(clamp((t-tWk)/1.6,0,1))),LS=m.h+m.g,lit=LAY6.map((_,li)=>fin(t,tL+li*0.24,0.4)),hi=LAY6.map((_,li)=>pulseAt(t,tL+li*0.24,1.0)*0.8+pulseAt(t,tWk+li*0.18,1.0)*0.5);
+    d10_mini(ctx,m,clamp((t-tA+0.3)/1.4,0,1),lit,hi);
+    if(t>tL){const xL=m.x-26,yR=lerp(m.y-24,m.y+5*LS+m.h,clamp((t-tL)/1.5,0,1));d10_trace(ctx,[[xL,m.y-24],[xL,yR]],1,MOT,{lw:4,a:0.9,nohead:1});
+      withA(ctx,1-fin(t,tL+1.8,0.6),()=>{glow(ctx,xL,yR,26,MOT,0.9);ctx.fillStyle=rgba([236,226,255],1);ctx.beginPath();ctx.arc(xL,yR,6,0,TAU);ctx.fill();});
+      LAY6.forEach((_,li)=>{const q=clamp((t-tL-li*0.24)/1.0,0,1);if(q>0&&q<1)ring(ctx,xL,m.y+li*LS+m.h/2,10+40*q,MOT,0.8*(1-q),2.5);});}
+    // what the walk found, lifted off the map into a list: each item flies from the element it comes off to its place, the lowest
+    // first, so none passes over one that has landed
+    const fly=([li,mx,mw],x1,y1,t0,fn)=>{const q=clamp((t-t0)/0.8,0,1);if(q<=0)return;const e=easeCam(q),[X,Y,ww]=d10_mkAt(m,li,mx,mw),s=lerp(0.4,1,e);
+      ctx.save();ctx.translate(lerp(X+ww/2,x1,e),lerp(Y,y1,e)-Math.sin(Math.PI*e)*50);ctx.scale(s,s);ctx.translate(-x1,-y1);withA(ctx,clamp(q*3,0,1),()=>fn(q<1?1:0));ctx.restore();};
+    [["owners",TRUST,tO],["rules",MOT,tR],["contracts",INF,tC]].forEach(([h_,col,t0],k)=>withA(ctx,fin(t,t0-0.3,0.4),()=>T(ctx,h_,D10_LX[k],414,{f:"mono",w:500,size:28,color:rgba(col,1)})));
+    D10_OWN.forEach(([nm,src],i)=>fly(src,D10_LX[0],466+i*62,tO+0.15*(3-i),d=>d10_owner(ctx,D10_LX[0],466+i*62,nm,1,{pre:"",hi:pulseAt(t,tIo+0.1,1.2),deco:d})));
+    D10_RMIN.forEach(([id,nm],i)=>fly(D10_RSRC,D10_LX[1],486+i*100,tR+0.2*(2-i),d=>d10_ruleMini(ctx,D10_LX[1],440+i*100,356,id,nm,{hi:pulseAt(t,tIo+0.3,1.2),deco:d})));
+    D10_CON.forEach(([kk,nm,kind,src],i)=>fly(src,D10_LX[2],505+i*144,tC+0.2*(1-i),d=>d10_conMini(ctx,D10_LX[2],440+i*144,270,kk,nm,kind,{hi:pulseAt(t,tIo+0.5,1.2),deco:d})));
+    // in order: the path's plateaus, small, under the list
+    const PW=D10_PLAT.map(([n])=>tw(ctx,n,28,700)+64),gp=(934-PW.reduce((s_,v)=>s_+v,0))/3;let px=D10_LX[0];
+    D10_PLAT.forEach(([n],i)=>{const x=px,q=fin(t,tIo+i*0.2,0.4);px+=PW[i]+gp;if(q<=0.01)return;
+      withA(ctx,q,()=>{if(i>0)arrowTo(ctx,x-gp+6,812,x-8,812,TRUST,0.9,{p:1,lw:3,head:10});archEl(ctx,x,772,PW[i],80,n,D10_MIG,"plateau",{size:28,gs:11,hi:pulseAt(t,tIo+i*0.2+0.2,1.0)});});});
+    ctx.restore();
+    // used every week, and updated less and less
+    if(sv>0.01){const n=1+Math.floor(13*clamp((t-tSt-0.2)/2.2,0,1));withA(ctx,sv,()=>{glass(ctx,1170,190,450,108,18,D10_AMB,{glow:14,ea:0.85,fill:"rgba(22,14,6,0.95)"});
+      T(ctx,"used every week",1395,232,{w:700,size:28,align:"center",color:rgba(SOFT,1)});T(ctx,"last updated "+n+(n>1?" weeks":" week")+" ago",1395,274,{w:700,size:28,align:"center",color:rgba(D10_AMB,1)});});}
+    // the note, its answer, and the next note
+    arrive(ctx,620,200,t,tA-0.6,()=>sticky(ctx,620,200,480,150,"What does a change in strategy mean for the data?",{col:NOTEC[0],size:32,st:0.5*fin(t,tA+1.4,0.5),rot:-0.025}),{dy:-20});
+    arrive(ctx,620,490,t,w("answer","has an answer")-0.1,()=>sticky(ctx,620,490,500,260,D10_ANS,{col:NOTEC[0],size:32,p:clamp((t-w("answer","an answer"))/(tIo+0.6-w("answer","an answer")),0,1),rot:0.015}),{dy:-30,from:1.06});
+    arrive(ctx,640,780,t,w("next","Next")-0.1,()=>sticky(ctx,640,780,440,120,"How do we keep the map alive?",{col:NOTEC[0],size:32,st:0,rot:0.03}),{dy:-30,from:1.06});
+    const dn=pulseAt(t,B+0.2,1.6);if(dn>0)glow(ctx,620,490,300,EAC,0.2*dn);
     ctx.restore();});
   vign(ctx,S);
   eaEnd(ctx,S,t,B+0.8,"When strategy moves",EAC,"A change in strategy lands in every layer: walk it down, in order.","Film 10 of 11");});

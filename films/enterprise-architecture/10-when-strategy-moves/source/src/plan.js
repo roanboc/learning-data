@@ -384,16 +384,22 @@ function d10_rule(ctx,x,y,w,id,vals,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.0
   hs=L.map(l=>Math.max(1,l.length)*36+18),h=88+hs.reduce((s,v)=>s+v,0)+10;
   withA(ctx,a,()=>{if(o.ghost){ctx.save();ctx.fillStyle="rgba(9,8,22,0.6)";rr(ctx,x,y,w,h,16);ctx.fill();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(MOT,0.75);ctx.lineWidth=2.5;rr(ctx,x,y,w,h,16);ctx.stroke();ctx.restore();}
     else{glass(ctx,x,y,w,h,16,MOT,{glow:14+12*(o.hi||0),ea:0.85,fill:"rgba(9,8,22,0.96)"});ctx.fillStyle=rgba(D10_RET,0.9);rr(ctx,x+7,y+16,7,h-32,3.5);ctx.fill();}
-    d10_glyph(ctx,"requirement",x+w-44,y+44,14,MOT);T(ctx,"data rule"+(id?" · "+id:""),x+40,y+54,{f:"mono",w:500,size:28,color:rgba(MOT,1)});
+    d10_glyph(ctx,"requirement",x+w-44,y+44,14,MOT);T(ctx,"data rule"+(id?" · "+id:""),x+40,y+54,{f:"mono",w:500,size:28,color:rgba(MOT,1),deco:o.deco});
     let yy=y+88;D10_RL6.forEach((lab,i)=>{const lit=o.lit?clamp(o.lit[i]||0,0,1):0;if(lit>0.01)withA(ctx,lit,()=>{ctx.fillStyle=rgba(MOT,0.16);rr(ctx,x+24,yy-4,236,44,10);ctx.fill();});
-      T(ctx,lab,x+40,yy+28,{f:"mono",w:500,size:28,color:rgba(mix([160,178,205],[236,228,255],lit),0.95)});
+      T(ctx,lab,x+40,yy+28,{f:"mono",w:500,size:28,color:rgba(mix([160,178,205],[236,228,255],lit),0.95),deco:o.deco});
       if(vals){const q=o.ra?clamp(o.ra[i]||0,0,1):1;if(q>0.01)withA(ctx,q,()=>{const col=[INK,INK,TRUST,MOT,D10_RET,D10_RED][i];let vx=x+270;
-        if(i===2){archGlyph(ctx,"actor",vx+10,yy+16,12,TRUST);vx+=34;}L[i].forEach((l,j)=>T(ctx,l,vx,yy+28+j*36,{w:700,size:28,color:rgba(col,i<2?0.96:1)}));});}
+        if(i===2){archGlyph(ctx,"actor",vx+10,yy+16,12,TRUST);vx+=34;}L[i].forEach((l,j)=>T(ctx,l,vx,yy+28+j*36,{w:700,size:28,color:rgba(col,i<2?0.96:1),deco:o.deco}));});}
       yy+=hs[i];});});return h;}
 // the same rule, small, on the map: a requirement, its id and a short name (s scales it, from where it was a card)
 function d10_ruleMini(ctx,x,y,w,id,name,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,92,12,MOT,{glow:12+12*(o.hi||0),ea:0.85,fill:"rgba(9,8,22,0.96)"});
   ctx.fillStyle=rgba(D10_RET,0.9);rr(ctx,x+6,y+12,6,68,3);ctx.fill();d10_glyph(ctx,"requirement",x+w-34,y+28,11,MOT);
   T(ctx,id,x+28,y+38,{f:"mono",w:500,size:28,color:rgba(MOT,1),deco:o.deco});T(ctx,name,x+28,y+76,{w:700,size:28,color:rgba(INK,0.96),deco:o.deco});});}
+// a contract on a short card, as the list after the walk draws one: what changes in it (mono) over its name, wrapped, with its
+// element's glyph. Returns its height
+function d10_conMini(ctx,x,y,w,kick,name,kind,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return 0;const L=wrapT(ctx,name,0,0,w-44,{size:28,w:700,measure:true}),h=58+L.length*36;
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,12,INF,{glow:12+12*(o.hi||0),ea:0.85,fill:"rgba(16,10,9,0.96)"});ctx.fillStyle=rgba(INF,0.9);rr(ctx,x+6,y+12,6,h-24,3);ctx.fill();
+    if(kind==="product")d10_glyph(ctx,"product",x+w-34,y+28,11,INF);else archGlyph(ctx,kind,x+w-34,y+28,11,INF);
+    T(ctx,kick,x+28,y+38,{f:"mono",w:500,size:28,color:rgba(INF,1),deco:o.deco});L.forEach((l,j)=>T(ctx,l,x+28,y+76+j*36,{w:700,size:28,color:rgba(INK,0.96),deco:o.deco}));});return h;}
 // a realisation line, dotted, with a hollow triangle where it ends (the element realises the requirement): drawn up to p
 function d10_realise(ctx,x0,y0,x1,y1,col,p,a){if(p<=0||a<=0.01)return;const e=clamp(p,0,1),ex=lerp(x0,x1,e),ey=lerp(y0,y1,e),an=Math.atan2(y1-y0,x1-x0);withA(ctx,a,()=>{ctx.save();ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=2.5;ctx.setLineDash([3,6]);ctx.lineCap="round";
   ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(ex-Math.cos(an)*16*(e>=1?1:0),ey-Math.sin(an)*16*(e>=1?1:0));ctx.stroke();ctx.setLineDash([]);

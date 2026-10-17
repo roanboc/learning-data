@@ -35,7 +35,7 @@ Run film and visual style work at the highest reasoning or effort setting your t
 
 1. Per film, from its `source/`: `tools/build.py`, `tools/check.py` (every moment draws), `tools/legible.py --overlaps`, `tools/pace.py`, full-size stills (`tools/stills.py --size 1920`), then `tools/publish.py`. Then `site-tools/build_series.py`, `site-tools/check_site.py` and `site-tools/smoke.py`. `dist/` is gitignored and can hold a stale soundtrack.
 2. Spanish captions, pages, Pause and think questions, labs and scenarios match the film's names, numbers and colours.
-3. **Share the video for review.** Whenever a new or changed video is made, render it and share the video file in the conversation with the author (as an attachment they can play, not only a path or a link to a branch), with the pull request link. The author watches it and either asks for corrections or approves the pull request. Never call a film done before that.
+3. **Share the video for review.** Whenever a new or changed video is made, render it and share it in the conversation with the author, with the pull request link: as an attachment they can play there, not only a path or a link to a branch. A chat won't preview a full render, so attach a review copy, 720p and under 15 MB (`python site-tools/review_copy.py <video>`), with the full video beside it to download. The author watches it and either asks for corrections or approves the pull request. Never call a film done before that.
 4. Turn every review finding into a check, and write new lessons into `PLAYBOOK.md`.
 
 ## Rules that always apply

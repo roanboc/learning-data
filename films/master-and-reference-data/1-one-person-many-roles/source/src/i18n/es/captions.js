@@ -12,24 +12,24 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Una persona, anotada una sola vez, seguida adondequiera que fuera.",
 "Today, at the university. Linh Nguyen is studying health informatics.":
 "Hoy, en la universidad. Linh Nguyen estudia informática en salud.",
-"For years she shared her family's email with Minh, who studies here too.":
-"Durante años compartió el correo de su familia con Minh, que también estudia aquí.",
-"This week, Linh gets her own address, and tells the student system.":
-"Esta semana, Linh crea su propia dirección y avisa al sistema de estudiantes.",
+"This month, she moves in with her brother, Minh.":
+"Este mes, se muda con su hermano, Minh.",
+"She tells the student system her new address.":
+"Avisa su nueva dirección al sistema de estudiantes.",
 "Done, she thinks.":
 "Listo, piensa.",
 "But the student system isn't the only one that knows her.":
 "Pero el sistema de estudiantes no es el único que la conoce.",
-"The learning platform has her account, with the family email.":
-"La plataforma de aprendizaje tiene su cuenta, con el correo familiar.",
-"So does the short-course platform, where she took Health Literacy.":
-"Y la plataforma de cursos cortos, donde hizo Alfabetización en Salud.",
-"And this semester she tutors a first-year unit, so HR has her too, with a staff number.":
-"Y este semestre da tutorías en primer año, así que RR. HH. también la tiene, con un número de personal.",
-"Her certificate and her payslip still go to the family inbox, and Minh opens them.":
-"Su certificado y su recibo de sueldo siguen llegando al correo familiar, y Minh los abre.",
-"Next year, the alumni office will add one more.":
-"El año que viene, la oficina de egresados sumará uno más.",
+"She did her first degree here, so the alumni office has her.":
+"Hizo aquí su primera carrera, así que la tienen en egresados.",
+"She tutors a first-year unit, so HR has her too, with a staff number.":
+"Da tutorías en primer año, así que RR. HH. también la tiene, con un número de personal.",
+"And this year she joined a research project, so the research office has her as well.":
+"Y este año entró en un proyecto de investigación, así que la oficina de investigación también la tiene.",
+"HR posts her next contract, with her pay, to the old flat, where someone else lives now.":
+"RR. HH. envía su próximo contrato, con su sueldo, a su antiguo departamento, donde ahora vive otra persona.",
+"Four records, four Linhs, and only one knows she moved.":
+"Cuatro registros, cuatro Linhs, y solo uno sabe que se mudó.",
 "Linh is master data: one of the things the university is about, shared by every process and system.":
 "Linh es un dato maestro: una de las cosas de las que trata la universidad, compartida por todos sus procesos y sistemas.",
 "The lists that sort her, like “casual tutor” or a country, are reference data.":
@@ -52,8 +52,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Así que separa cuatro cosas.",
 "The person: someone, once.":
 "La persona: alguien, una sola vez.",
-"The roles: student, tutor, customer, each with a start, an end, and an owner.":
-"Los roles: estudiante, tutor, cliente, cada uno con un inicio, un fin y un responsable.",
+"The roles: student, tutor, researcher, each with a start, an end, and an owner.":
+"Los roles: estudiante, tutora, investigadora, cada uno con un inicio, un fin y un responsable.",
 "The contact points: an email or an address, each with a purpose, and some shared by two people.":
 "Los puntos de contacto: un correo o una dirección, cada uno con un propósito, y algunos compartidos por dos personas.",
 "And the identifiers: a student number belongs to the student system, a staff number to HR.":
@@ -70,8 +70,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Para cada dato de la persona, en qué sistema se confía.",
 "The registrar's office keeps the legal name.":
 "La oficina de registro mantiene el nombre legal.",
-"Linh keeps her own preferred name, and her personal email.":
-"Linh mantiene su propio nombre preferido y su correo personal.",
+"Linh keeps her own preferred name, and her home address.":
+"Linh mantiene ella misma su nombre preferido y su dirección.",
 "HR keeps her work details.":
 "RR. HH. mantiene sus datos laborales.",
 "And Mei's office looks after the person: who someone is, and whether two records are one.":
@@ -116,16 +116,12 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "¿Y importa cuando no coinciden: dinero, seguridad, la ley o la confianza de alguien?",
 "Four yeses: master it.":
 "Cuatro síes: dato maestro.",
-"Who is it? Which value wins?":
-"¿Quién es? ¿Qué valor gana?",
-"Roles that come and go, and the lists that sort them.":
-"Roles que van y vienen, y las listas que los clasifican.",
-"What each role may see. One person in many systems.":
-"Lo que cada rol puede ver. Una persona en muchos sistemas.",
-"A hub at work, and how to keep it right.":
-"Un hub en marcha, y cómo mantenerlo bien.",
-"Linh changes her email, once.":
-"Linh cambia su correo, una vez.",
+"Eight more films follow, in four parts.":
+"Siguen ocho películas más, en cuatro partes.",
+"Who someone is. Roles and lists. Sharing it safely. And keeping it right.":
+"Quién es alguien. Roles y listas. Compartirlo con seguridad. Y mantenerlo bien.",
+"Linh changes her address, once.":
+"Linh cambia su dirección, una vez.",
 "Every role hears.":
 "Cada rol se entera.",
 "Know the person, not just the role.":

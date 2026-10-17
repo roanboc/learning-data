@@ -1,9 +1,10 @@
 /* ===== One person, many roles: scenes =====
-   Twelve chapters, as in ../script.md: the parish book of 1686, and one person followed from parish to parish; Linh's new email, told
-   to one system; the four records that didn't hear; the kinds of data; the university's model, with a learner and no person; the
-   person, her roles, her contact points and her identifiers kept apart, and the same in enterprise architecture's notation; who keeps
-   what; the same four things in a hospital, a bank and an energy company; DAMA's name for it and its four ways to keep it; the other
-   master entities and the four questions; the nine films; and the email changed once, heard by every role.
+   Twelve chapters, as in ../script.md: the parish book of 1686, and one person followed from parish to parish; Linh's new address,
+   told to one system; the three records that didn't hear, and HR's letter at her old flat; the kinds of data; the university's model,
+   with a learner and no person; the person, her roles, her contact points and her identifiers kept apart, and the same in enterprise
+   architecture's notation; who keeps what; the same four things in a hospital, a bank and an energy company; DAMA's name for it and
+   its four ways to keep it; the other master entities and the four questions; the nine films, in four parts; and the address changed
+   once, heard by every role.
    Drawn in watercolour (shared/src/wash.js), made to read on a phone (tools/legible.py): text is at least 28 px in the frame. The camera
    moves in on whatever the narration is about, and every shot drifts slowly; things arrive with a spring. Sound: every effect in
    tools/score.py fires at the same moment as the thing it belongs to here, so keep the two in step. */
@@ -61,55 +62,55 @@ function m1_bookRows(ctx,t,cx,cy,o){const w=M1_BW,h=M1_BH,L=cx-w/2+40,R=cx+30,to
   m1_write(ctx,t,"moved to",R,top+164,o.moved+0.5,0.6,{col:WC_ROLEINK.student});m1_write(ctx,t,"Uppsala parish",R,top+210,o.moved+1.15,0.9,{col:WC_ROLEINK.student});
   const lg=clamp((t-o.read-0.8)/0.5,0,1);if(lg>0)withA(ctx,lg,()=>{wc_tick(ctx,R+12,top+h-56,24,ink,1,3);wc_T(ctx,"can read",R+36,top+h-46,{w:600,size:28,col:ink,a:0.8});});}
 
-/* ---------- 2. A new email ---------- */
-scene("email",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
-  const tToday=c("today"),tHI=w("today","health"),tSh=c("shared"),tOwn=c("own"),tGets=w("own","gets"),tTell=w("own","tells"),tDone=c("done");
+/* ---------- 2. A new address ---------- */
+scene("move",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
+  const tToday=c("today"),tHI=w("today","health"),tMv=c("moves"),tIn=w("moves","moves in"),tBro=w("moves","her brother"),
+    tTell=c("tells"),tSys=w("tells","the student system"),tAddr=w("tells","new address"),tDone=c("done");
   // the camera ends where the next chapter's starts, with no drift, so the campus and her student card don't double as the chapters cross
-  m1_open(ctx,S,t,sc,"campus",[[0,960,540,1],[tToday+0.6,880,560,1.08],[tOwn-0.3,860,500,1.1],[tDone-0.2,920,520,1.05]],{z:0});
-  // Linh, on the path; she takes out her phone to change her email, and puts it away
-  const ph=ease(fin(t,tGets+0.2,0.6))*(1-ease(fin(t,tDone+0.3,0.7))),tUp=w("own","tells")+1.1;
+  m1_open(ctx,S,t,sc,"campus",[[0,960,540,1],[tToday+0.6,880,560,1.08],[tTell-0.3,860,500,1.1],[tDone-0.2,920,520,1.05]],{z:0});
+  // Linh, on the path; she takes out her phone to tell the student system, and puts it away
+  const ph=ease(fin(t,tTell-0.1,0.6))*(1-ease(fin(t,tDone+0.3,0.7))),tUp=tAddr+0.6;
   // what she tells the student system, from her phone: a line that runs behind her to it
-  wc_link(ctx,M1_PHONE[0]+20,M1_PHONE[1]-10,490,236,WC_ROLE.student,{p:clamp((t-tTell-0.3)/0.7,0,1)*(1-fin(t,tDone+1.0,0.5)),a:0.85});
+  wc_link(ctx,M1_PHONE[0]+20,M1_PHONE[1]-10,490,236,WC_ROLE.student,{p:clamp((t-tSys)/0.7,0,1)*(1-fin(t,tDone+1.0,0.5)),a:0.85});
   arrive(ctx,M1_LX,M1_LY-300,t,tToday-0.5,()=>person(ctx,"linh",M1_LX,M1_LY,1.02,{pose:"stand",pose2:"phone",mix:ph,expr:t>tDone+0.2?"relieved":"calm",t}),{d:0.9,from:0.97});
   arrive(ctx,230,494,t,tToday+0.3,()=>{wc_panel(ctx,60,440,360,112,{kind:"card"});wc_T(ctx,"Linh Nguyen",90,488,{w:800,size:32,col:WC_DARK});
     withA(ctx,fin(t,tHI,0.5),()=>wc_T(ctx,"health informatics",90,530,{w:600,size:28,col:WC_MUTED}));},{dy:12});
-  // the email she shares with Minh; then her own, typed in
-  arrive(ctx,1040,362,t,tSh+0.2,()=>m1_famCard(ctx,760,300,1),{dy:16});
-  arrive(ctx,1040,517,t,tGets+0.3,()=>m1_ownCard(ctx,760,470,clamp((t-tGets-0.5)/1.5,0,1),1),{dy:16});
+  // the flat she leaves, struck through as she moves; then the home she shares with Minh, typed in
+  arrive(ctx,1040,362,t,tMv+0.1,()=>m1_oldCard(ctx,760,300,clamp((t-tIn-0.1)/0.6,0,1)),{dy:16});
+  arrive(ctx,1040,532,t,tBro-0.3,()=>m1_newCard(ctx,760,470,clamp((t-tBro)/1.0,0,1),fin(t,tBro+1.1,0.4)),{dy:16});
   // she tells the student system, which updates
   const up=fin(t,tUp,0.4);
-  arrive(ctx,290,230,t,tTell,()=>{withA(ctx,1-up,()=>m1_card(ctx,"student",{}));withA(ctx,up,()=>m1_card(ctx,"student",{fresh:true}));},{dy:14});
+  arrive(ctx,290,230,t,tSys-0.3,()=>{withA(ctx,1-up,()=>m1_card(ctx,"student",{ba:0}));withA(ctx,up,()=>m1_card(ctx,"student",{fresh:true}));},{dy:14});
   arrive(ctx,90,326,t,tUp,()=>{const tw0=wc_tag(ctx,90,326,"student system",{});wc_tick(ctx,90+tw0+30,320,30,WC_ROLEINK.alumna,clamp((t-tUp-0.2)/0.4,0,1),4.5);},{dy:8});
   m1_close(ctx,S);
   wc_year(ctx,64,80,"today · the university",fin(t,0.3,0.6));wc_paperOver(ctx,S);});
 
 /* ---------- 3. Four records, four Linhs ---------- */
 scene("four",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
-  const tPl=w("platform","learning platform"),tSo=w("short","So does"),tSc=w("short","short-course"),tTu=w("tutor","tutors"),tStaff=w("tutor","staff number"),
-    tIn=c("inbox"),tCert=w("inbox","certificate"),tPay=w("inbox","payslip"),tFam=w("inbox","family inbox"),tMinh=w("inbox","Minh"),tAl=c("alumni"),tAo=w("alumni","alumni office");
-  // the camera: Linh and her records; out, for the post that goes to the family's letterbox; back to her for the record still to come
-  m1_open(ctx,S,t,sc,"campus",[[0,920,520,1.05],[tIn-0.2,960,540,1],[tAl-0.2,920,520,1.04]]);
-  // the cards fan out round her, each in its system's colour, each joined to her by a line
-  const arr=[["platform",tPl],["customer",tSc],["tutor",tTu],["alumna",tAo]];
-  [["student",0]].concat(arr).forEach(([k,t0])=>{const e=m1_cardEnd(k),q=clamp((t-t0-0.1)/0.6,0,1);wc_link(ctx,e[0],e[1],M1_LX+(e[0]<M1_LX?-34:40),M1_LY-520,WC_ROLE[k],{p:k==="student"?1:q,a:k==="alumna"?0.45:0.8,dash:k==="alumna"?[2,14]:null});});
-  person(ctx,"linh",M1_LX,M1_LY,1.02,{pose:"stand",expr:t>tIn+1?"concerned":"calm",t});
+  const tAo=w("alumni","alumni office"),tTu0=c("tutor"),tTu=w("tutor","tutors"),tStaff=w("tutor","staff number"),tRo=w("research","research office"),
+    tLe=c("letter"),tPost=w("letter","posts"),tOld=w("letter","the old flat"),tElse=w("letter","someone else"),tOn=c("only"),tOne=w("only","only one");
+  // the camera: Linh and her records; out, for the letter that goes to her old flat; back to her for the one record that heard
+  m1_open(ctx,S,t,sc,"campus",[[0,920,520,1.05],[tLe-0.2,960,540,1],[tOn-0.2,920,520,1.04]]);
+  // the cards fan out round her, each in its role's colour, each joined to her by a line
+  const arr=[["alumna",tAo],["tutor",tTu],["researcher",tRo]];
+  [["student",0]].concat(arr).forEach(([k,t0])=>{const e=m1_cardEnd(k),q=clamp((t-t0-0.1)/0.6,0,1);wc_link(ctx,e[0],e[1],M1_LX+(e[0]<M1_LX?-34:40),M1_LY-520,WC_ROLE[k],{p:k==="student"?1:q,a:0.8});});
+  person(ctx,"linh",M1_LX,M1_LY,1.02,{pose:"stand",expr:t>tLe+1?"concerned":"calm",t});
   m1_card(ctx,"student",{fresh:true});
   arr.forEach(([k,t0])=>{const [x,y,ww,hh]=M1_CARDS[k];arrive(ctx,x+ww/2,y+hh/2,t,t0,()=>m1_card(ctx,k,{}),{dy:16});});
-  arrive(ctx,1190,96,t,tSo,()=>wc_tag(ctx,1190,96,"still the family email",{align:"center"}),{dy:10});
+  arrive(ctx,1190,96,t,tTu0+0.2,()=>wc_tag(ctx,1190,96,"still the old address",{align:"center"}),{dy:10});
   // HR's staff number
-  const [tx,ty,tw2]=M1_CARDS.tutor,hs=fin(t,tStaff,0.4)*(1-fin(t,tIn,0.5));if(hs>0)wc_ring(ctx,tx+tw2-62,ty+38,74,30,clamp((t-tStaff)/0.6,0,1),{a:0.85*(1-fin(t,tIn,0.5)),seed:12});
-  // the certificate and the payslip go, one after the other, to the family's letterbox, and Minh opens them
-  const slot=[M1_BOX[0],M1_BOX[1]-196],d1=Math.min(1.2,Math.max(0.7,tPay-tCert-0.05));
-  // the letterbox is named once both have gone in, so neither flies across its name
-  const tBox=Math.max(tFam,tPay+1.12);
-  arrive(ctx,M1_BOX[0],750,t,tBox,()=>withA(ctx,1-fin(t,tAl+0.4,0.6),()=>wc_tag(ctx,M1_BOX[0],750,"family inbox",{align:"center"})),{dy:10});
-  m1_flyEnvelope(ctx,t,tCert,d1,[M1_CARDS.customer[0]+476,M1_CARDS.customer[1]+64],slot,"certificate C-86");
-  m1_flyEnvelope(ctx,t,tPay,1.1,[M1_CARDS.tutor[0]+446,M1_CARDS.tutor[1]+64],slot,"payslip");
-  arrive(ctx,M1_MINH,700,t,tMinh-0.4,()=>{person(ctx,"minh",M1_MINH,1016,0.9,{pose:"letter",expr:"concerned",t});},{d:0.9,from:0.96});
-  arrive(ctx,M1_MINH,392,t,tMinh+0.2,()=>withA(ctx,1-fin(t,tAl+0.4,0.6),()=>wc_tag(ctx,M1_MINH,392,"Minh opens them",{align:"center"})),{dy:10});
+  const [tx,ty,tw2]=M1_CARDS.tutor,hs=fin(t,tStaff,0.4)*(1-fin(t,tLe,0.5));if(hs>0)wc_ring(ctx,tx+tw2-62,ty+38,74,30,clamp((t-tStaff)/0.6,0,1),{a:0.85*(1-fin(t,tLe,0.5)),seed:12});
+  // HR's letter, her next contract, goes from the tutor's record to the old flat's letterbox, where the new tenant finds it; the letterbox is
+  // named once it has gone in, so it doesn't fly across the name
+  const slot=[M1_BOX[0],M1_BOX[1]-196],tBox=Math.max(tOld,tPost+1.22);
+  arrive(ctx,M1_BOX[0],750,t,tBox,()=>withA(ctx,1-fin(t,tOn+0.4,0.6),()=>wc_tag(ctx,M1_BOX[0],750,"the old flat",{align:"center"})),{dy:10});
+  m1_flyEnvelope(ctx,t,tPost,1.1,[M1_CARDS.tutor[0]+446,M1_CARDS.tutor[1]+64],slot,"contract");
+  arrive(ctx,M1_TEN,700,t,tElse-0.4,()=>{person(ctx,"tenant",M1_TEN,1016,0.9,{pose:"letter",expr:"concerned",t});},{d:0.9,from:0.96});
+  arrive(ctx,M1_TEN,392,t,tElse+0.2,()=>withA(ctx,1-fin(t,tOn+0.4,0.6),()=>wc_tag(ctx,M1_TEN,392,"someone else lives here",{align:"center"})),{dy:10});
+  // only one record knows she moved: a pencil round the student record's new address
+  const [sx,sy]=M1_CARDS.student;wc_ring(ctx,sx+164,sy+86,150,32,clamp((t-tOne)/0.8,0,1),{seed:14});
   m1_close(ctx,S);
   wc_year(ctx,64,80,"today · the university",1);wc_paperOver(ctx,S);});
-const M1_MINH=1520;
 // an envelope that flies from a card into the letterbox's slot over d seconds from t0, with its label under it, and goes in
 function m1_flyEnvelope(ctx,t,t0,d,a,b,label){const p=clamp((t-t0)/d,0,1);if(p<=0||p>=1)return;const e=ease(p),x=lerp(a[0],b[0],e),y=lerp(a[1],b[1],e)-Math.sin(e*Math.PI)*170,
     k=fin(t,t0,0.2)*(1-clamp((p-0.88)/0.12,0,1)),s=lerp(0.9,0.5,clamp((p-0.76)/0.24,0,1));
@@ -130,7 +131,7 @@ scene("kinds",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   // master data: Linh, as the master record, in white paper; her roles' colours arrive as she's shared by every process and system
   wc_white(ctx,"linh",M1_KX[0],M1_SHELF-2,0.6,m1_bands([0,1,2,3].map(i=>fin(t,tSh+i*0.22,0.4))),{a:fin(t,tM+0.1,0.7)});
   // reference data: two short lists, each with the value that sorts her lit
-  arrive(ctx,730,503,t,tR+0.2,()=>m1_list(ctx,560,404,340,"role type",["student","casual tutor","alumna"],1,WC_ROLE.tutor,fin(t,tCas,0.5)),{dy:16});
+  arrive(ctx,730,487,t,tR+0.2,()=>m1_list(ctx,560,366,340,"role type",["student","casual tutor","researcher","alumna"],1,WC_ROLE.tutor,fin(t,tCas,0.5)),{dy:16});
   arrive(ctx,730,699,t,tR+0.6,()=>m1_list(ctx,560,622,340,"country",["Australia","Vietnam"],1,WC_BADGE,fin(t,tCo+0.3,0.5)),{dy:16});
   withA(ctx,1-0.75*dim,()=>{
     // transactional data: what happens to her, slip after slip
@@ -176,7 +177,7 @@ scene("role",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
 // a lane's name, faint until it's named; what it holds, once it is
 function m1_laneHead(ctx,y,head,sub,ha,sa){withA(ctx,ha,()=>wc_T(ctx,head,M1_AX,y,{w:800,size:36,col:WC_DARK}));if(sa>0.01)withA(ctx,sa,()=>wc_T(ctx,sub,M1_AX+tw(ctx,head,36,800)+20,y,{w:600,size:28,col:WC_MUTED}));}
 scene("apart",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
-  const tD=c("draws"),tP=c("person"),tR=c("roles"),tRole={student:w("roles","student"),tutor:w("roles","tutor"),customer:w("roles","customer"),alumna:w("roles","each with")+0.5},
+  const tD=c("draws"),tP=c("person"),tR=c("roles"),tRole={student:w("roles","student"),tutor:w("roles","tutor"),researcher:w("roles","researcher"),alumna:w("roles","each with")+0.5},
     tC=c("contacts"),tEm=w("contacts","an email"),tPu=w("contacts","each with"),tSh=w("contacts","some shared"),tI=c("ids"),tSn=w("ids","a student number"),tSf=w("ids","a staff number"),
     tN=c("none"),tE=c("ea"),tAct=w("ea","is an actor"),tAs=w("ea","assigned to"),tTime=w("ea","for a time");
   // the camera: down the lanes as each is named; out for the person; across for enterprise architecture's picture
@@ -189,13 +190,13 @@ scene("apart",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
   // the links from her to each lane
   [[0,204,tR],[1,500,tEm],[2,742,tSn]].forEach(([i,ly,t1])=>withA(ctx,i?1-0.85*dl:1,()=>wc_link(ctx,fx+92,bandY(i),M1_AX-16,ly,WC_PENCIL,{p:clamp((t-t1)/0.8,0,1),a:0.55})));
   // roles: each dated, each with an owner
-  M1_ROLES.forEach(([r,n,d,x,y])=>arrive(ctx,x+280,y+36,t,tRole[r],()=>wc_chip(ctx,x,y,560,72,r,n,d,{dashed:r==="alumna"}),{dy:12}));
+  M1_ROLES.forEach(([r,n,d,x,y])=>arrive(ctx,x+280,y+36,t,tRole[r],()=>wc_chip(ctx,x,y,560,72,r,n,d,{}),{dy:12}));
   withA(ctx,1-0.85*dl,()=>{
     // contact points: each with a purpose, and one shared by two people
     arrive(ctx,980,501,t,tEm,()=>wc_info(ctx,700,440,560,122,"linh.nguyen@mail.example","personal · Linh",{bigSize:28}),{dy:12});
-    arrive(ctx,1564,501,t,tPu,()=>wc_info(ctx,1284,440,560,122,"nguyen.family@mail.example","family · Linh and Minh",{bigSize:28,badge:"shared",ba:fin(t,tSh,0.4)}),{dy:12});
+    arrive(ctx,1564,501,t,tPu,()=>wc_info(ctx,1284,440,560,122,M1_NEW,"home · Linh and Minh",{bigSize:28,badge:"shared",ba:fin(t,tSh,0.4)}),{dy:12});
     // identifiers: each issued by a system
-    M1_IDS.forEach(([k,by,x],i)=>arrive(ctx,x+184,743,t,[tSn,tSn+0.8,tSf][i],()=>wc_info(ctx,x,682,368,122,k,by),{dy:12}));});
+    M1_IDS.forEach(([k,by,x],i)=>arrive(ctx,x+184,743,t,[tSn,tSf,tSf+1.1][i],()=>wc_info(ctx,x,682,368,122,k,by),{dy:12}));});
   // the person: someone, once, in white paper, wearing her roles' colours
   if(wp<1)withA(ctx,1-wp,()=>arrive(ctx,fx,fy-250,t,-0.3,()=>person(ctx,"linh",fx,fy,fs,{pose:"ease",t:1.2}),{d:0.8}));
   wc_white(ctx,"linh",fx,fy,fs,m1_bands(M1_BANDS.map(r=>fin(t,tRole[r],0.5))),{a:wp});
@@ -208,7 +209,7 @@ scene("apart",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
 
 /* ---------- 7. Who keeps what ---------- */
 scene("keeps",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
-  const tW=c("write"),tR=c("roles"),tA=c("attrs"),tL=c("legal"),tO=c("own"),tOe=w("own","personal email"),tH=c("hr"),tM=c("mei"),tWho=w("mei","who someone");
+  const tW=c("write"),tR=c("roles"),tA=c("attrs"),tL=c("legal"),tO=c("own"),tOe=w("own","home address"),tH=c("hr"),tM=c("mei"),tWho=w("mei","who someone");
   // the camera: the sheet as it's written, down its rows; up to the person, and Mei
   m1_open(ctx,S,t,sc,"office",[[0,960,540,1],[tR-0.3,980,450,1.08],[tA-0.3,980,560,1.08],[tM-0.4,1000,482,1.06]]);
   arrive(ctx,940,433,t,tW+0.3,()=>m1_keeps(ctx,t,{roles:[0,1,2,3].map(i=>tR+0.3+i*0.45),dets:[0,1,2,3].map(i=>tA+0.3+i*0.4),keep:[tL+0.3,tO+0.3,tOe,tH+0.3],person:tM+0.2,tick:tWho}),{d:0.9,from:0.97});
@@ -279,7 +280,7 @@ function m1_check(ctx,t,tQ,tY,t0){wc_panel(ctx,110,136,1700,668,{kind:"sheet",se
   M1_QS.forEach((q,i)=>{const y=M1_QY[i];withA(ctx,0.4+0.6*fin(t,tQ[i]-0.2,0.4),()=>{ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.8);ctx.lineWidth=2.4;ctx.beginPath();ctx.arc(176,y-2,22,0,TAU);ctx.stroke();ctx.restore();
       wc_T(ctx,String(i+1),176,y+8,{w:800,size:28,align:"center",col:WC_DARK});wc_T(ctx,q,222,y+11,{w:700,size:32,col:WC_DARK});});
     M1_EX.forEach(([ind,label,ans],j)=>{if(i>=ans.length)return;const p=clamp((t-tQ[i]-0.6-j*0.35)/0.4,0,1);if(p<=0)return;
-      if(ans[i])wc_tick(ctx,M1_QX[j],y-6,46,WC_ROLEINK.alumna,p,5.5);else wc_cross(ctx,M1_QX[j],y-4,40,WC_ROLEINK.customer,p);});});
+      if(ans[i])wc_tick(ctx,M1_QX[j],y-6,46,WC_ROLEINK.alumna,p,5.5);else wc_cross(ctx,M1_QX[j],y-4,40,WC_NO,p);});});
   M1_EX.forEach(([ind,label,ans,v],j)=>{const tv=j===0?tY:tQ[ans.length-1]+1.6;arrive(ctx,M1_QX[j],738,t,tv,()=>wc_T(ctx,v,M1_QX[j],750,{w:800,size:30,align:"center",col:j===0?WC_ROLEINK.alumna:WC_INK}),{dy:8});});}
 scene("entities",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const tO=c("only"),tWh=c("which"),tAsk=w("which","Ask four"),tQ=["q1","q2","q3","q4"].map(c),tY=c("yes");
@@ -300,11 +301,13 @@ scene("entities",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
 
 /* ---------- 11. The series ---------- */
 scene("series",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
-  const tt=[0.2,w("first","Who is it"),w("first","Which value"),w("come","Roles that"),w("come","the lists"),w("see","What each"),w("see","One person"),w("keep","A hub"),w("keep","how to keep")];
-  // the whole line in frame: the films arrive along it as they're named
+  const tFour=w("parts","four parts"),tp=[w("names","Who someone"),w("names","Roles and"),w("names","Sharing"),w("names","keeping")];
+  // the whole line in frame, and this film on it; the four parts, blank as they're counted, each named in turn, with its two films
   m1_open(ctx,S,t,sc,"plain",[[0,960,540,1]]);
   const lp=clamp(t/1.6,0,1);ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.7);ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(90,540);ctx.lineTo(lerp(90,1830,ease(lp)),540);ctx.stroke();ctx.restore();
-  tt.forEach((t0,i)=>arrive(ctx,200+i*190,i%2===0?366:714,t,t0,()=>m1_film(ctx,i,i===0),{dy:i%2===0?-16:16}));
+  arrive(ctx,200,366,t,0.2,()=>m1_film(ctx,0,true),{dy:-16});
+  M1_PX.forEach((x,g)=>{arrive(ctx,x,540,t,tFour+g*0.12,()=>m1_part(ctx,g,fin(t,tp[g]-0.1,0.4)),{dy:8});
+    [1,2].forEach(k=>{const i=g*2+k,up=k===1;arrive(ctx,x,up?366:714,t,tp[g]+(up?0.15:0.4),()=>m1_film(ctx,i,false),{dy:up?-16:16});});});
   m1_close(ctx,S);wc_paperOver(ctx,S);});
 
 /* ---------- 12. Once ---------- */
@@ -313,23 +316,20 @@ scene("once",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   m1_open(ctx,S,t,sc,"campus",[[0,960,540,1],[tK-0.3,930,530,1.04]]);
   m1_hush(ctx,0.45);
   // the records step back while the line is said, so it, and the person, read on their own
-  const rb=1-0.65*fin(t,tK-0.4,0.6),take=tC+1.5,arr=k=>take+0.7+["student","platform","customer","tutor"].indexOf(k)*0.32;
+  const rb=1-0.65*fin(t,tK-0.4,0.6),take=tC+1.5,rs=["student","alumna","tutor","researcher"],arr=k=>take+0.7+rs.indexOf(k)*0.32;
   withA(ctx,rb,()=>{
     // one field, typed once; the person takes it
     arrive(ctx,1500,259,t,tC-0.5,()=>{m1_field(ctx,1200,200,clamp((t-tC-0.1)/1.3,0,1));withA(ctx,fin(t,tC+1.4,0.4),()=>wc_badge(ctx,1690,240,"once"));},{dy:12});
     wc_link(ctx,1200,262,M1_LX+70,M1_LY-560,WC_ROLE.student,{p:clamp((t-take)/0.6,0,1),a:0.85});
-    // every role hears: a line out to each record, which takes the new email, with a tick
-    ["student","platform","customer","tutor","alumna"].forEach(k=>{const e=m1_cardEnd(k),q=clamp((t-(k==="alumna"?take+2.2:arr(k)))/0.6,0,1);
-      wc_link(ctx,M1_LX+(e[0]<M1_LX?-34:40),M1_LY-520,e[0],e[1],WC_ROLE[k],{p:q,a:k==="alumna"?0.45:0.85,dash:k==="alumna"?[2,14]:null});});});
+    // every role hears: a line out to each record, which takes the new address, with a tick
+    rs.forEach(k=>{const e=m1_cardEnd(k),q=clamp((t-arr(k))/0.6,0,1);wc_link(ctx,M1_LX+(e[0]<M1_LX?-34:40),M1_LY-520,e[0],e[1],WC_ROLE[k],{p:q,a:0.85});});});
   wc_white(ctx,"linh",M1_LX,M1_LY,1.02,m1_bands([1,1,1,1]),{});
-  withA(ctx,rb,()=>{["student","platform","customer","tutor"].forEach(k=>{const up=fin(t,arr(k)+0.6,0.4);withA(ctx,1-up,()=>m1_card(ctx,k,{}));withA(ctx,up,()=>m1_card(ctx,k,{fresh:true}));});
-    m1_card(ctx,"alumna",{});});
+  withA(ctx,rb,()=>rs.forEach(k=>{const up=fin(t,arr(k)+0.6,0.4);withA(ctx,1-up,()=>m1_card(ctx,k,{}));withA(ctx,up,()=>m1_card(ctx,k,{fresh:true}));}));
   arrive(ctx,905,620,t,tHe+0.2,()=>withA(ctx,1-fin(t,tK,0.6),()=>wc_tag(ctx,905,620,"every role hears",{align:"center"})),{dy:8});
-  // the family's letterbox stays quiet; Minh doesn't look up
-  person(ctx,"minh",M1_MINH,1016,0.9,{pose:"phone",expr:"calm",t});
   m1_close(ctx,S);wc_paperOver(ctx,S);
-  // the line, and then the end card, where it stays
-  const kl=fin(t,tK-0.1,0.6)*(1-fin(t,B+0.8,0.9));if(kl>0.01){setScreen(ctx,S);withA(ctx,kl,()=>{ctx.save();ctx.translate(960,112);ctx.scale(1,0.2);const g=ctx.createRadialGradient(0,0,10,0,0,640);
-    g.addColorStop(0,rgba(WC_PAPER,0.94));g.addColorStop(0.7,rgba(WC_PAPER,0.7));g.addColorStop(1,rgba(WC_PAPER,0));ctx.fillStyle=g;ctx.fillRect(-640,-640,1280,1280);ctx.restore();
-    wc_T(ctx,"Know the person, not just the role.",960,128,{w:700,size:48,align:"center",col:WC_DARK});});}
-  wc_end(ctx,S,t,B+0.8,"One person, many roles","Know the person, not just the role.","Film 1 of 9");});
+  // the line, then carried down onto the end card, above the veil, landing where the card's own line fades in and takes it over
+  const KL="Know the person, not just the role.",kl=fin(t,tK-0.1,0.6),ky=lerp(128,420,fin(t,B+0.3,1.1)),kg=kl*(1-fin(t,B+0.8,0.9));
+  if(kg>0.01){setScreen(ctx,S);withA(ctx,kg,()=>{ctx.save();ctx.translate(960,ky-16);ctx.scale(1,0.2);const g=ctx.createRadialGradient(0,0,10,0,0,640);
+    g.addColorStop(0,rgba(WC_PAPER,0.94));g.addColorStop(0.7,rgba(WC_PAPER,0.7));g.addColorStop(1,rgba(WC_PAPER,0));ctx.fillStyle=g;ctx.fillRect(-640,-640,1280,1280);ctx.restore();});}
+  wc_end(ctx,S,t,B+0.8,"One person, many roles",KL,"Film 1 of 9");
+  if(kl>0.01&&t<B+2.4){setScreen(ctx,S);withA(ctx,kl,()=>wc_T(ctx,KL,960,ky,{w:700,size:48,align:"center",col:WC_DARK}));}});

@@ -1,6 +1,6 @@
 # Master and reference data · One person, many roles: script
 
-*The script of the opening film of the series on master and reference data, working title The same one, everywhere: 5½ minutes, in twelve chapters, in English. Drafted on 16 October 2026 and built on 17 October 2026; the times below are the built film's, and [Built](#built) lists what changed on the way. The title card follows chapter 1; the end card follows chapter 12. Made to read on a phone, like the other series: on-screen text at least 28 px in the frame, and the camera moves in on whatever the narration is about.*
+*The script of the opening film of the series on master and reference data, working title The same one, everywhere: 5½ minutes, in twelve chapters, in English. Drafted on 16 October 2026, built on 17 October 2026, and revised the same day after the author's review; the times below are the built film's, and [Built](#built) lists what changed on the way. The title card follows chapter 1; the end card follows chapter 12. Made to read on a phone, like the other series: on-screen text at least 28 px in the frame, and the camera moves in on whatever the narration is about.*
 
 ## The promise
 
@@ -8,7 +8,7 @@ Every line passes two tests: anyone who has ever had two accounts with the same 
 
 ## The story in one paragraph
 
-In 1686, Sweden's church law asked every parish to write down each person in each household, and a person who moved carried a certificate to the next parish; in 1947 the register gave everyone one number for life. Today, at the university, Linh Nguyen gets her own email address, after years of sharing her family's with Minh, and tells the student system. The learning platform, the short-course platform and the HR system, where she's a casual tutor this semester, don't hear: her certificate and her payslip still go to the family inbox, where Minh reads them. Four systems, four records, four ideas of who Linh is, and next year an alumni office will make a fifth. Noor, the data architect, looks at the university's own model and corrects it in the open: it has a learner, which is a role, and no person. She draws four things apart: the person, the roles, the contact points and the identifiers. Then she and Mei write down, for each role and each attribute, which system creates it, which keeps it, and who owns it. A hospital, a bank and an energy utility have the same problem with different names. DAMA calls this reference and master data, and names four ways to keep it; the series will choose one, and show the tools. People aren't the only master data: organisations, products, places, assets and accounts are too, and four questions say which things need mastering. It ends where it started: Linh changes her email once, and every role hears.
+In 1686, Sweden's church law asked every parish to write down each person in each household, and a person who moved carried a certificate to the next parish; in 1947 the register gave everyone one number for life. Today, at the university, Linh Nguyen moves in with her brother, Minh, and tells the student system her new address. The alumni office, which has known her since her first degree, HR, where she's a casual tutor, and the research office, whose project she joined this year, don't hear: HR posts her next contract, with her pay, to the old flat, where someone else lives now. Four systems, four records, four ideas of who Linh is, and only one knows she moved. Noor, the data architect, looks at the university's own model and corrects it in the open: it has a learner, which is a role, and no person. She draws four things apart: the person, the roles, the contact points and the identifiers. Then she and Mei write down, for each role and each attribute, which system creates it, which keeps it, and who owns it. A hospital, a bank and an energy utility have the same problem with different names. DAMA calls this reference and master data, and names four ways to keep it; the series will choose one, and show the tools. People aren't the only master data: organisations, products, places, assets and accounts are too, and four questions say which things need mastering. It ends where it started: Linh changes her address once, and every role hears.
 
 ## What each object stands for
 
@@ -17,9 +17,9 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 | A parish book, a household's names, a moving certificate | One person, recorded once, followed wherever they go |
 | A number stamped on a card, "1947" | An identifier for life, issued by someone who keeps it |
 | Linh, drawn once, wearing different cards | One person, many roles |
-| A card in each system's colour (student, platform user, customer, tutor) | A role, as each system stores it |
-| A dashed card, "alumna, next year" | A role that hasn't started yet |
-| An envelope arriving at the family inbox, Minh reading it | A contact point shared by two people, used for the wrong purpose |
+| A card in each role's colour (student, alumna, casual tutor, researcher) | A role, as each system stores it |
+| An address struck through, a new one typed in, "shared" | A contact point: it changes, and two people can share it |
+| A contract posted to the old flat, a stranger holding it | A change told to one system only, and her data reaching someone else |
 | The cards sliding off into four lanes | Person, role, contact point, identifier: kept apart |
 | A white figure, drawn in pencil and left unpainted | The person, as the master record |
 | Bands under the figure, each with a start and an end | Roles, dated and owned |
@@ -31,17 +31,17 @@ In 1686, Sweden's church law asked every parish to write down each person in eac
 | A hospital band, a bank card, a meter | The same pattern elsewhere |
 | DAMA's wheel, one slice lit | Reference and master data, named once |
 | Four small diagrams | The four ways to keep master data, named once |
-| Nine film cards along Linh's timeline | The series |
+| Eight film cards in four parts along a line, after this one | The series |
 
 ## The look
 
 Watercolour, chosen from seven looks drawn from this film's moments. Reference frames: [1686 parish](../look/1686-parish.jpg), [campus today](../look/campus-today.jpg), [four lanes](../look/four-lanes.jpg).
 
-- **Colourful, and every colour means something.** Each role has its own saturated colour, the same in every film: student teal, platform user amber, customer coral, tutor violet, alumna green (and donor magenta later). A system's cards wear their role's colour as a brushstroke behind the title. The master record is Linh's figure cleared to white paper in a pencil line, gathering those colours: each value carries a small coloured label for its source, and each role is a band of wash with a start and an end, so a golden record reads at a glance as a mix of sources. Each industry in chapters 8 and 10 has its own colour too: health red, banking blue, energy yellow, retail orange, public sector green-blue.
+- **Colourful, and every colour means something.** Each role has its own saturated colour, the same in every film: student teal, applicant amber, researcher coral, tutor violet, alumna green (and donor magenta later). A system's cards wear their role's colour as a brushstroke behind the title. The master record is Linh's figure cleared to white paper in a pencil line, gathering those colours: each value carries a small coloured label for its source, and each role is a band of wash with a start and an end, so a golden record reads at a glance as a mix of sources. Each industry in chapters 8 and 10 has its own colour too: health red, banking blue, energy yellow, retail orange, public sector green-blue.
 - **Backgrounds** are daylight landscapes in watercolour, not the dark glass of the other series: soft washes of sky and land on warm paper, clouds left as bare paper, buildings and trees drawn in pencil. They stay soft so the role colours, the strongest washes on screen, carry the meaning. Reference data is drawn as bright tabs and chips; transactions as small, quick dabs of colour.
 - **Readable, not only bright.** Text is dark ink on paper-light cards, and keeps 4.5:1 contrast or better on a role's wash. Every colour is paired with a label, so nothing depends on colour alone; `legible.py` checks text size frame by frame, as for the other series.
 - **The past is the same watercolour,** with the year in the corner; its documents are parchment and ink, as in the other series, touched with the colour of the idea they carry (the parish book's household ribbon in teal, the first role colour).
-- **People** are drawn in pencil, with paint that runs a little past the line. Linh, a new figure for the series, has no side colour: she's the person the data is about, so she wears the colours of her roles. Noor (cyan, the technical side) and Mei (gold, the business side) are edged in a soft wash of their side's colour, as they're outlined in *From words to data* and *In the weeds of data crafting*. Minh appears once, reading an envelope.
+- **People** are drawn in pencil, with paint that runs a little past the line. Linh, a new figure for the series, has no side colour: she's the person the data is about, so she wears the colours of her roles. Noor (cyan, the technical side) and Mei (gold, the business side) are edged in a soft wash of their side's colour, as they're outlined in *From words to data* and *In the weeds of data crafting*. Minh is named, not drawn; the new tenant at Linh's old flat appears once, holding her letter.
 - **Industry beats** keep Linh's figure and swap the cards: a hospital wristband, a bank card, a meter. No real organisation is named or drawn.
 
 ## Script
@@ -54,33 +54,33 @@ Watercolour, chosen from seven looks drawn from this film's moments. Reference f
 
 **On screen.** 1686 · Sweden · every household · moved to · 1947 · a number for life · one person, followed · One person, many roles · Film 1 of 9
 
-### 2 · A new email · 0:35–0:55
+### 2 · A new address · 0:35–0:52
 
-**Narration.** Today, at the university. Linh Nguyen is studying health informatics. For years she shared her family's email with Minh, who studies here too. This week, Linh gets her own address, and tells the student system. Done, she thinks.
+**Narration.** Today, at the university. Linh Nguyen is studying health informatics. This month, she moves in with her brother, Minh. She tells the student system her new address. Done, she thinks.
 
-**Picture.** The campus in watercolour daylight. Linh, in plain pencil, with her phone. A small email card, "nguyen.family@mail.example", with two names under it, Linh and Minh. A new card types in, "linh.nguyen@mail.example". She sends it to the student system's card, which updates with a soft tick.
+**Picture.** The campus in watercolour daylight, and beside it a street of houses with a letterbox on a post. Linh, in plain pencil, with her phone. A card, "18 Park Street, her flat, until now", is struck through; a new one types in, "7 Hill Road, with Minh, her brother", marked "shared". She sends it to the student system's card, which updates with a soft tick.
 
-**On screen.** Linh Nguyen · health informatics · nguyen.family@mail.example · shared with Minh · linh.nguyen@mail.example · student system ✓
+**On screen.** today · the university · Linh Nguyen · 18 Park Street · her flat, until now · 7 Hill Road · with Minh, her brother · shared · Student · S-20436 · ✓ 7 Hill Road
 
-### 3 · Four records, four Linhs · 0:55–1:27
+### 3 · Four records, four Linhs · 0:52–1:27
 
-**Narration.** But the student system isn't the only one that knows her. The learning platform has her account, with the family email. So does the short-course platform, where she took Health Literacy. And this semester she tutors a first-year unit, so HR has her too, with a staff number. Her certificate and her payslip still go to the family inbox, and Minh opens them. Next year, the alumni office will add one more.
+**Narration.** But the student system isn't the only one that knows her. She did her first degree here, so the alumni office has her. She tutors a first-year unit, so HR has her too, with a staff number. And this year she joined a research project, so the research office has her as well. HR posts her next contract, with her pay, to the old flat, where someone else lives now. Four records, four Linhs, and only one knows she moved.
 
-**Picture.** Four cards fan out around Linh, each in its system's colour: *Student · S-20436*, *Platform user · u-88236*, *Short-course customer · nguyen.family@…*, *Casual tutor · E-4417*. Three of them still show the family email, lit amber. An envelope, "certificate C-86", travels to the family inbox; another, "payslip", follows. Minh, edged in gold for a moment, opens one and frowns. A fifth card draws in dashed, "Alumna · next year".
+**Picture.** Three more cards draw in around Linh as each office is named, each in its role's colour and each still showing "18 Park Street", marked "old": *Alumna*, *Casual tutor · E-4417* (its staff number ringed), *Researcher · R-3082*. A tag: "still the old address". An envelope, "contract", flies from the tutor card to the old flat's letterbox, under a quiet pulse, and "the old flat" is named. The new tenant steps up holding it, concerned: "someone else lives here". On "only one", a pencil ring circles the student card's "✓ 7 Hill Road".
 
-**On screen.** student · S-20436 · platform user · u-88236 · short-course customer · tutor · E-4417 · still the family email · alumna · next year
+**On screen.** Alumna · Casual tutor · E-4417 · Researcher · R-3082 · 18 Park Street · old · still the old address · contract · the old flat · someone else lives here
 
-*Linh, Minh, `S-20436`, `u-88236`, the family email and certificate C-86 are the example project's own data; the staff number and the HR system are new to it.*
+*Linh, Minh and `S-20436` are the example project's own data; the staff number, the research number, the HR and research systems and the addresses are new to it.*
 
-### 4 · The kinds of data · 1:27–1:56
+### 4 · The kinds of data · 1:27–1:55
 
 **Narration.** Linh is master data: one of the things the university is about, shared by every process and system. The lists that sort her, like “casual tutor” or a country, are reference data. What happens to her, an enrolment or a payslip, is transactional data. And the definition of a learner is metadata. This series is about the first two, and the next film tells them apart.
 
-**Picture.** Four shelves draw in. Linh's white figure on *master data*; two short lists, "role type: casual tutor" and "country: Vietnam", on *reference data*; a stream of small events (enrolled, result, payslip) on *transactional data*; the glossary's term *learner* on *metadata*. The first two shelves stay lit, master in Linh's role colours and reference as bright chips; the others dim.
+**Picture.** Four shelves draw in. Linh's white figure on *master data*; two short lists on *reference data*, "role type" (student, casual tutor, researcher, alumna) with "casual tutor" lit, and "country" with "Vietnam" lit; a stream of small events (enrolled, result, payslip) on *transactional data*; the glossary's term *learner* on *metadata*. The first two shelves stay lit, master in Linh's role colours and reference as bright chips; the others dim.
 
 **On screen.** master data · the things it's about · reference data · the lists that sort them · transactional data · what happens to them · metadata · what it all means
 
-### 5 · The role, called the person · 1:56–2:21
+### 5 · The role, called the person · 1:55–2:20
 
 **Narration.** Noor, the university's data architect, opens the university's own model. It has a learner. A good one, with keys from three systems and a decision for every match. But a learner isn't someone. It's how someone relates to the university, for a while. The model has no person. She says so, and writes it down.
 
@@ -90,25 +90,25 @@ Watercolour, chosen from seven looks drawn from this film's moments. Reference f
 
 *The correction in the open follows PLAYBOOK §8: the films say when an earlier model was too simple, and sharpen it.*
 
-### 6 · Four things, kept apart · 2:21–3:04
+### 6 · Four things, kept apart · 2:20–3:03
 
-**Narration.** So she draws four things apart. The person: someone, once. The roles: student, tutor, customer, each with a start, an end, and an owner. The contact points: an email or an address, each with a purpose, and some shared by two people. And the identifiers: a student number belongs to the student system, a staff number to HR. None of them is the person. Enterprise architects draw it the same way: a person, a team or an organisation is an actor, assigned to one or more roles, for a time.
+**Narration.** So she draws four things apart. The person: someone, once. The roles: student, tutor, researcher, each with a start, an end, and an owner. The contact points: an email or an address, each with a purpose, and some shared by two people. And the identifiers: a student number belongs to the student system, a staff number to HR. None of them is the person. Enterprise architects draw it the same way: a person, a team or an organisation is an actor, assigned to one or more roles, for a time.
 
-**Picture.** The four cards slide off Linh into four lanes. Linh clears to white paper in a pencil line. *Roles*: bands under her, each with dates (student, from July 2025; customer, January to February 2026; tutor, March to June 2026; alumna, dashed). *Contact points*: two email cards, one marked "study, personal: Linh", the other "family: Linh and Minh". *Identifiers*: S-20436 tagged "issued by the student system", u-88236 "by the learning platform", E-4417 "by HR". Each lane's label settles above it. On the last sentence, a small card from *The map before the data* slides in at the side, in its notation: an actor glyph (*person, team or organisation*) with an assignment line to two role glyphs (*student*, *tutor*), and a tag, "for a time".
+**Picture.** The four cards slide off Linh into four lanes. Linh clears to white paper in a pencil line. *Roles*: a chip for each, with its dates (student, from July 2025; tutor, since February 2023; researcher, March to December 2026; alumna, since 2022), in the order the voice names them, and a band of each colour on her. *Contact points*: "linh.nguyen@mail.example, personal: Linh", and "7 Hill Road, home: Linh and Minh", marked "shared". *Identifiers*: S-20436 "by the student system", E-4417 "by HR", R-3082 "by the research office". Each lane's label settles above it. On the last sentence, a small card from *The map before the data* slides in at the side, in its notation: an actor glyph (*person, team or organisation*) with an assignment line to two role glyphs (*student*, *tutor*), and a tag, "for a time".
 
 **On screen.** the person · someone, once · roles · a start, an end, an owner · contact points · a purpose · sometimes shared · identifiers · issued by a system · none of them is the person · actor · assigned to · roles · for a time
 
-### 7 · Who keeps what · 3:04–3:33
+### 7 · Who keeps what · 3:03–3:32
 
-**Narration.** Then Noor and Mei write down who keeps what. For each role, which system creates it, and who owns it. For each piece of the person, which system is trusted. The registrar's office keeps the legal name. Linh keeps her own preferred name, and her personal email. HR keeps her work details. And Mei's office looks after the person: who someone is, and whether two records are one.
+**Narration.** Then Noor and Mei write down who keeps what. For each role, which system creates it, and who owns it. For each piece of the person, which system is trusted. The registrar's office keeps the legal name. Linh keeps her own preferred name, and her home address. HR keeps her work details. And Mei's office looks after the person: who someone is, and whether two records are one.
 
-**Picture.** Mei joins, edged in gold. A sheet, *who keeps what*, fills in as each line is spoken. First the roles, each with the system that creates it and who owns it: *student: student system, registrar's office*; *customer: short-course platform, short courses*; *tutor: HR system, HR*; *alumna: alumni system, alumni office*. Then the pieces of the person, each with its trusted system and who keeps it: *legal name: student system, registrar's office*; *preferred name* and *personal email: student portal, Linh*; *work details: HR system, HR*. Last, one row: *the person: Mei's office, steward*. Mei's gold tick lands on it.
+**Picture.** Mei joins, edged in gold. A sheet, *who keeps what*, fills in as each line is spoken. First the roles, each with the system that creates it and who owns it: *student: student system, registrar's office*; *tutor: HR system, HR*; *researcher: research system, research office*; *alumna: alumni system, alumni office*. Then the pieces of the person, each with its trusted system and who keeps it: *legal name: student system, registrar's office*; *preferred name* and *home address: self-service, Linh*; *work details: HR system, HR*. Last, one row: *the person: Mei's office, steward*. Mei's gold tick lands on it.
 
-**On screen.** who keeps what · who creates it · who owns it · trusted system · who keeps it · legal name · student system · registrar's office · preferred name · student portal · Linh · work details · HR · the person · steward · Mei's office
+**On screen.** who keeps what · who creates it · who owns it · trusted system · who keeps it · legal name · student system · registrar's office · preferred name · home address · self-service · Linh · work details · HR · the person · steward · Mei's office
 
 *The people side, said in the picture: Mei's tick is on a row that took a conversation to agree. Each role stays with the office that owns it; only "who is who" moves to a steward.*
 
-### 8 · Elsewhere · 3:33–3:55
+### 8 · Elsewhere · 3:32–3:54
 
 **Narration.** Every industry has a Linh. A nurse admitted as a patient, in the same hospital. A bank customer who guarantees a friend's loan. A household where the account holder moved out, and the person who stays needs the power on. Different words, the same four things.
 
@@ -116,7 +116,7 @@ Watercolour, chosen from seven looks drawn from this film's moments. Reference f
 
 **On screen.** a nurse · a patient · a customer · a guarantor · an account holder · an occupant · the same four things
 
-### 9 · Named once · 3:55–4:18
+### 9 · Named once · 3:54–4:18
 
 **Narration.** The data management body of knowledge, DAMA, calls this reference and master data. It names four ways to keep it: a registry that only links, a copy for analysis, a master that systems read back, or one place where people are created. The series picks one later, and shows the tools that do it.
 
@@ -124,7 +124,7 @@ Watercolour, chosen from seven looks drawn from this film's moments. Reference f
 
 **On screen.** DAMA · reference and master data · registry · consolidation · coexistence · centralised · chosen in Film 7 of 9
 
-### 10 · Not only people · 4:18–5:10
+### 10 · Not only people · 4:18–5:09
 
 **Narration.** People aren't the only master data. The university also has employers and partner universities, awards and units, campuses and rooms. A hospital has patients, practitioners and wards. A bank, customers, accounts and the firms it trades with. A utility, meters, connection points and poles. A shop, products, suppliers and stores. Which of them need mastering? Ask four questions. Is it a thing the business is about, not something that happens? Is it used by more than one process? Is it created or changed in more than one place, so the copies can disagree? And does it matter when they do: money, safety, the law, or someone's trust? Four yeses: master it.
 
@@ -132,19 +132,19 @@ Watercolour, chosen from seven looks drawn from this film's moments. Reference f
 
 **On screen.** employer · partner university · award · room · patient · practitioner · ward · customer · account · counterparty · meter · connection point · pole · product · supplier · store · a thing, not an event? · used by more than one process? · kept in more than one place? · does it matter if they disagree? · master it · a transaction · reference data
 
-### 11 · The series · 5:10–5:26
+### 11 · The series · 5:09–5:21
 
-**Narration.** Who is it? Which value wins? Roles that come and go, and the lists that sort them. What each role may see. One person in many systems. A hub at work, and how to keep it right.
+**Narration.** Eight more films follow, in four parts. Who someone is. Roles and lists. Sharing it safely. And keeping it right.
 
-**Picture.** Linh's timeline, left to right, and nine film cards land along it as they're named: *One person, many roles* (here), *Who is it?*, *Which value wins*, *Roles come and go*, *Lists everyone uses*, *For this purpose only*, *One person, many systems*, *A hub at work*, *Kept, not cleaned*.
+**Picture.** A line, left to right, with this film's card at its start, marked "here". Four blank tags are set down on it as the parts are counted; each is named as it's said, and its two films land beside it, one above and one below: *who someone is* (*Who is it?*, *Which value wins*), *roles and lists* (*Roles come and go*, *Lists everyone uses*), *sharing it safely* (*For this purpose only*, *One person, many systems*), *keeping it right* (*A hub at work*, *Kept, not cleaned*). The tags wear no role's colour. A wordless moment to read them.
 
-**On screen.** the nine films
+**On screen.** here · who someone is · roles and lists · sharing it safely · keeping it right · each film's number and title
 
-### 12 · Once · 5:26–5:41
+### 12 · Once · 5:21–5:37
 
-**Narration.** Linh changes her email, once. Every role hears. Know the person, not just the role.
+**Narration.** Linh changes her address, once. Every role hears. Know the person, not just the role.
 
-**Picture.** Linh types her new email into a single field; the white figure takes it; lines run out to each card, and each updates with a soft tick. The family inbox stays quiet; Minh, in passing, doesn't look up. Wordless breather on the white figure and its bands. End card.
+**Picture.** Her new address types into a single field, marked "once"; the white figure takes it; lines run out to each card, and each updates with a soft tick. The records step back for the last line, which then settles onto the end card. Wordless breather. End card.
 
 **On screen.** once · every role hears · Know the person, not just the role.
 
@@ -152,8 +152,8 @@ Watercolour, chosen from seven looks drawn from this film's moments. Reference f
 
 Four questions, one at the end of each of four chapters, as the site shows them (`site/assets/one-person-many-roles/think.en.js` and `think.es.js`):
 
-1. *After chapter 3, Four records, four Linhs.* Linh told the student system her new email. Why do her certificate and her payslip still go to the family inbox? (Each system keeps its own record of her, and nothing tells the others they are the same person.)
-2. *After chapter 6, Four things, kept apart.* Linh and Minh can share the family email, but never a student number. Why? (A contact point is a way to reach people, and two can share it; an identifier is issued by one system to name one record.)
+1. *After chapter 3, Four records, four Linhs.* Linh told the student system her new address. Why does HR still post her contract to the old flat? (Each system keeps its own record of her, and nothing tells the others they are the same person.)
+2. *After chapter 6, Four things, kept apart.* Linh and Minh can share a home address, but never a student number. Why? (A contact point is a way to reach people, and two can share it; an identifier is issued by one system to name one record.)
 3. *After chapter 7, Who keeps what.* Linh's legal name, her preferred name and her work details all describe her. Why does each have a different keeper? (Each piece is trusted where it's made and checked.) It ends by asking viewers who keeps their own name in an organisation that knows them in two ways.
 4. *After chapter 10, Not only people.* An energy utility's meters are in its asset system, its billing system and its field crews' app, and a wrong meter means a wrong bill. What do the four questions say? (Master it.) It ends by asking viewers to name, for an organisation they know, one thing to master, one list that's reference data, and one event that's a transaction.
 
@@ -168,12 +168,14 @@ Four questions, one at the end of each of four chapters, as the site shows them 
 
 | On screen | In the example project |
 |---|---|
-| Linh, Minh, `S-20436`, `u-88236`, the family email | `data/student_system/learners.csv`, `data/learning_platform/users.csv` |
-| Health Literacy, certificate C-86 | `data/short_courses/enrolments.csv` (E-7007) |
-| The short-course customer decided to be Linh | `seeds/reference/student/learner_identity_decisions.csv` (D-001) |
+| Linh, Minh, `S-20436`, `u-88236` | `data/student_system/learners.csv`, `data/learning_platform/users.csv` |
+| The learner's short-course key, decided to be Linh | `seeds/reference/student/learner_identity_decisions.csv` (D-001) |
 | The learner, a role, in the student domain | `models/core/student/core_learner.sql`, `_student__conceptual.yml` |
 | The university's map | `models/_shared/_shared__conceptual.yml` |
 | The tutor role, the staff number E-4417, the HR system | New: a small HR source the series adds to the project |
+| The researcher role, R-3082, the research office | New: a small research office source the series adds to the project |
+| The alumna role and the alumni office | New: an Advancement source the series adds to the project |
+| 18 Park Street, 7 Hill Road, linh.nguyen@mail.example | Invented for the film; the project holds no addresses yet (contact points with a purpose come with *Which value wins*) |
 
 ## Rigour to check before recording
 
@@ -185,7 +187,8 @@ Four questions, one at the end of each of four chapters, as the site shows them 
 - **Colour:** each role and industry wash checked for contrast with the dark text on it (4.5:1 or better), and for colour-blind viewers; labels carry the meaning.
 - **Enterprise architecture:** in ArchiMate, a business actor (a person, team or organisation) is assigned to business roles; check the current specification's wording, and match the glyphs *The map before the data* draws (`archGlyph` in its `shared/src/ea.js`).
 - **Industry beats:** generic and plausible; no real organisation; "life support" customers kept as a general practice of energy retailers in many places.
-- **Privacy:** Minh reading Linh's certificate is shown as an everyday consequence, not a breach story; no legal claim.
+- **Privacy:** the new tenant holding HR's letter, with Linh's pay in it, is shown as an everyday consequence, not a breach story; no legal claim.
+- **Roles at a university:** a casual tutor is on HR's books with a staff number; a research project's office keeps its own list of members; an alumni office keeps graduates. Each is common practice, said without naming a real university.
 
 ## Built
 
@@ -193,20 +196,21 @@ Built on 17 October 2026, from this script, in watercolour. What changed on the 
 
 - **Chapter 1.** The household in the parish book is Anders Persson, Karin Olsdotter and their three children; Olof, the farmhand, is the one who moves, and the next book, in Uppsala, takes him in. When "1947" comes, a veil of paper quiets the parish, so the card and its stamp stand alone.
 - **Chapter 2.** Linh tells the student system on her phone. The camera ends where chapter 3's begins, so the campus and her student card don't double as the chapters cross.
-- **Chapter 3.** The family inbox is named once both envelopes are in, so neither flies across its name.
+- **Chapter 3.** "The old flat" is named once the contract is in the letterbox, so the envelope doesn't fly across its name; the tags step back as the last line starts, and a pencil ring marks the one record that knows.
 - **Chapter 4.** The camera shows the four shelves, then moves in on the first two, which the series is about.
 - **Chapter 5.** The camera moves in on the learner, with Noor at the edge of the shot, and the rest of the model fades while we look at it. She writes the decision on a card pinned behind her.
 - **Chapter 7.** The sheet has its own headers (who creates it and who owns it for the roles; the trusted system and who keeps it for the person), and HR is the tutor role's owner. Mei is drawn facing the other way, so her pointing hand stays in the frame.
 - **Chapter 8** is one wide shot: the industry being told stands out and the others step back. The account holder's role stays behind, dashed, when he moves out.
 - **Chapter 9.** The chosen way to keep master data is tagged "chosen in Film 7 of 9".
 - **Chapter 10.** The gallery stays while "which of them" is asked, and gives way to the questions.
-- **Chapter 11** holds still, with no pan, while the nine films land.
-- **Chapter 12.** The film's last line is also on the end card, and the records step back for it.
+- **Chapter 11** holds still, with no pan: four blank tags for the parts, each named in turn with its two films, then two wordless seconds to read them.
+- **Chapter 12.** The film's last line is also on the end card: the records step back for it, and it settles from the top of the frame onto the card, so it's never shown twice.
+- **After the author's review (17 October 2026).** A move instead of a new email, since a shared family email was hard to follow; a researcher instead of a customer, since a university doesn't call people customers; the roles laid out in the order the voice names them; no bridge in the opening landscape, the church on a wider hill; the series in four parts, in two lines; and an ending with no second person on a phone.
 - **Captions.** Spanish captions in Latin American Spanish, about as long as each English line.
-- **Sound.** A new palette (in `source/tools/score.py`): chords that bloom note by note, a clarinet for the series' mark, a plucked note for each role, a bowed D and A for the person, from D minor to D major. The music sits about 21 dB under the voice, as in the other series' films, and the only pulse, at the family inbox, sits about 8.5 dB under the music.
+- **Sound.** A new palette (in `source/tools/score.py`): chords that bloom note by note, a clarinet for the series' mark, a plucked note for each role, a bowed D and A for the person, from D minor to D major. The music sits about 21 dB under the voice, as in the other series' films, and the only pulse, as HR's letter goes to the old flat, sits about 8 dB under the music.
 
 ## Next
 
 1. The author watches the film, and approves it or asks for corrections.
-2. The project's additions it needs: the person, roles, contact points and identifiers in the conceptual model, and a small HR source.
+2. The project's additions it needs: the person, roles, contact points and identifiers in the conceptual model, and small HR, research office and Advancement sources.
 3. Labs, once the series has more films: the candidates above.

@@ -4,7 +4,7 @@
 
 **Tagline:** Agree what things are, write it down, and keep it true.
 
-The series starts before technology, with how minds turn the world into words, and ends with how AI can help keep a business's meaning true, end to end. In between: why conceptual and logical models matter to systems, the shapes data takes for writing and for reading, hybrid databases, and the semantic layers, ontologies and industry standards that make meaning something a machine can read. It follows one idea through all seven films, older than any system: the credential, how people prove what they know. The university's new microcredentials are its newest form, and the "sketch v3?" that ends *A Sharper Sketch* is where the series begins. The promise, as for every Learning Data film: a newcomer follows it, and an expert agrees with every line; *What's in a word* also answers to linguists and cognitive scientists.
+The series starts before technology, with how minds turn the world into words, and ends with how AI can help keep a business's meaning true, end to end. In between: why conceptual and logical models matter to systems, the shapes data takes for writing and for reading, hybrid databases, and the semantic layers, ontologies and industry standards that make meaning something a machine can read, with how an ontology differs from a data model. It follows one idea through all seven films, older than any system: the credential, how people prove what they know. The university's new microcredentials are its newest form, and the "sketch v3?" that ends *A Sharper Sketch* is where the series begins. The promise, as for every Learning Data film: a newcomer follows it, and an expert agrees with every line; *What's in a word* also answers to linguists and cognitive scientists.
 
 **On the site:** [From words to data](https://roanboc.github.io/learning-data/from-words-to-data/), in Spanish [De las palabras a los datos](https://roanboc.github.io/learning-data/es/from-words-to-data/). The films are in English, with English and Spanish captions; their pages, chapters, Pause and think questions, labs and scenarios are in English and Spanish. Each film stands alone, and each builds on the ones before it.
 
@@ -16,7 +16,7 @@ The series starts before technology, with how minds turn the world into words, a
 | [Built to write, built to read](https://roanboc.github.io/learning-data/from-words-to-data/built-to-write-built-to-read/) | Shapes for data | 5 min | 8 | 3 labs, 8 scenarios | [script](3-built-to-write-built-to-read/script.md) · [source](3-built-to-write-built-to-read/source/README.md) |
 | [Many ways to read](https://roanboc.github.io/learning-data/from-words-to-data/many-ways-to-read/) | Shapes for reading | 4 min | 8 | 3 labs, 8 scenarios | [script](4-many-ways-to-read/script.md) · [source](4-many-ways-to-read/source/README.md) |
 | [Both at once](https://roanboc.github.io/learning-data/from-words-to-data/both-at-once/) | Hybrid databases | 4 min | 9 | 3 labs, 8 scenarios | [script](5-both-at-once/script.md) · [source](5-both-at-once/source/README.md) |
-| [Meaning machines can read](https://roanboc.github.io/learning-data/from-words-to-data/meaning-machines-can-read/) | Meaning and AI | 4 min | 8 | 3 labs, 8 scenarios | [script](6-meaning-machines-can-read/script.md) · [source](6-meaning-machines-can-read/source/README.md) |
+| [Meaning machines can read](https://roanboc.github.io/learning-data/from-words-to-data/meaning-machines-can-read/) | Meaning and AI | 5½ min | 9 | 5 labs, 12 scenarios | [script](6-meaning-machines-can-read/script.md) · [source](6-meaning-machines-can-read/source/README.md) |
 | [Keeping it true](https://roanboc.github.io/learning-data/from-words-to-data/keeping-it-true/) | Keeping meaning current | 5 min | 10 | 4 labs, 10 scenarios | [script](7-keeping-it-true/script.md) · [source](7-keeping-it-true/source/README.md) |
 <!-- /films -->
 
@@ -31,7 +31,7 @@ The [proposal](proposal.md) records how the series was planned and the decisions
 | Built to write, built to read | Awards are issued one by one on graduation day, and read ten years at a time by planners. |
 | Many ways to read | Credentials from a new platform are integrated, presented and served as one learner record. |
 | Both at once | An employer checks a credential live; a learner's wallet shows, now, how close she is to a graduate certificate. |
-| Meaning machines can read | Genie is asked who is one microcredential away from a certificate, and must read the stacking rules, not guess them. |
+| Meaning machines can read | Genie is asked who is one microcredential away from a certificate, and must read one managed definition of the stacking rules, not guess between documents that disagree. Noor's architecture map holds each concept once, and the glossary, the models, the ontology in OWL and the tests are its views. |
 | Keeping it true | The government adds a reporting rule, and a credential issued in error is revoked. AI spots both and drafts the change; people approve sketch v3. New shapes for data will keep coming; the credential's meaning, identity, grain and time are what remain. |
 
 ## Every film starts in the past
@@ -64,7 +64,7 @@ The [proposal](proposal.md) records how the series was planned and the decisions
 | Meaning machines can read | Glass bells, glass pads and a celesta in C Lydian, with a short urgent pulse when Genie guesses wrong; a harp and strings for the eighteenth and nineteenth centuries |
 | Keeping it true | Strings and a felt piano, with a pulse that follows the feeling, in C, drifting to A minor and back; *What's in a word*'s kalimba and *Older than the systems*' bell return at the end |
 
-- **The same craft.** Narration only; a flowing pace of about 125 to 135 words a minute; four Pause and think questions per film (five in *Keeping it true*, for its chapter on what remains); labs and scenarios on the site, in English and Spanish. See [PLAYBOOK.md](../../PLAYBOOK.md), and its section on what this series added.
+- **The same craft.** Narration only; a flowing pace of about 125 to 135 words a minute; four Pause and think questions per film (five in *Meaning machines can read*, for its chapter *One map, many views*, and in *Keeping it true*, for its chapter on what remains); labs and scenarios on the site, in English and Spanish. See [PLAYBOOK.md](../../PLAYBOOK.md), and its section on what this series added.
 
 ## How it's built
 

@@ -1,7 +1,7 @@
 """Make a copy of a rendered film that a chat can preview, for review: python site-tools/review_copy.py <video.mp4> [--mb 15]
 A chat won't preview a full render (renders of 74 and 152 MB weren't previewed; a 19 MB copy was), so the copy is the same film at 720p, fitted under
 --mb by two passes of x264 (adaptive quantisation that keeps faint lines in dark scenes), with its sound at 96 kb/s. It's written
-beside the video as <name>.review.mp4. Share it with the full video and the pull request (AGENTS.md, "Share the video for review")."""
+beside the video as <name>.review.mp4. Share it with the pull request, and not the full video, which can't be downloaded from the chat (AGENTS.md, "Share the video for review")."""
 import argparse, os, pathlib, re, subprocess, tempfile
 import imageio_ffmpeg
 

@@ -1,6 +1,6 @@
 # Enterprise architecture, for data
 
-*Proposal for a series on enterprise architecture and why it matters for data, v0.1. The folder is named after the topic; the series title is still open. Status: proposed, 7 October 2026. *Day one*, *Who it serves, and how it pays*, *Why it moves*, *What it must be able to do*, *How value reaches people*, *Who does it, and where meaning changes*, *Today, and where it's going* and *Now the questions appear* are built and on the site ([series README](README.md)).*
+*Proposal for a series on enterprise architecture and why it matters for data, v0.2. The folder is named after the topic; the series title is still open. Status: proposed on 7 October 2026; films 9 to 11 drafted again on 17 October 2026, for the author's approval ([questions](#questions-for-films-9-to-11)). *Day one*, *Who it serves, and how it pays*, *Why it moves*, *What it must be able to do*, *How value reaches people*, *Who does it, and where meaning changes*, *Today, and where it's going* and *Now the questions appear* are built and on the site ([series README](README.md)).*
 
 ## Decided
 
@@ -137,9 +137,9 @@ Each film opens with a short, true story that holds its idea, then cuts to Tomá
 | 6 | Two frequencies in one country | Japan | 1890s and 2011 |
 | 7 | A morning in the utility's region | The series' fictional region | Imagined, 2045 |
 | 8 | Fishermen with mobile phones | Kerala, India | 1997–2001 |
-| 9 | "Once only" | Estonia | Today |
-| 10 | Money by text message | Kenya | 2007 |
-| 11 | Wayfinding by the stars, then an agent reading the map | The Pacific, then the fictional region | 1976, then imagined |
+| 9 | "Once only": a birth, registered once | Estonia | Today |
+| 10 | Money by phone | Kenya | 2007 |
+| 11 | Wayfinding by the stars | The Pacific, Hawaiʻi to Tahiti | 1976, and fifty years on |
 
 The first three openings are all from the West and the past; films 4 to 11 balance them. Each opening's facts go into that film's rigour notes and are checked before recording.
 
@@ -242,64 +242,226 @@ Chapter by chapter, with narration: [the script](8-now-the-questions-appear/scri
 
 ### 9. Rules with a home
 
-**Opening.** Estonia, today: under the "once only" principle, the state may ask a citizen for a fact once; each fact is kept by the one registry that owns it, and every other agency asks that registry through a shared exchange layer (X-Road). Every rule and every fact has one home and one owner.
+*Draft of 17 October 2026, for the author's approval. It replaces the outline of 7 October.*
 
+**The idea.** A data rule is a claim about how the organisation works, so its home is the map. Each rule is written once, in the business's words, about the concepts it governs. It's attached to the step where it applies, with an owner who can change it and a reason that says why, and every check on the data is drawn from it, one way. Rules and concepts written like this are, generally, an ontology, ready for OWL; checking the data stays with the checks.
 
-**Story.** An estimated meter reading triggers a bill dispute. The rule that should have caught it exists, but no one owns it, and it lives in a script.
+**Opening: once only.** Tartu, Estonia, today. A baby is born, and the birth is entered once, in the population register. Within days, the parents get an email from the Social Insurance Board: a family benefit is theirs if they accept it. They never applied. No office keeps its own copy of the birth; each asks the population register, over X-Road, the exchange every Estonian public office uses. The law forbids two databases for the same data, and every database is listed in one catalogue, with the office that owns it and the law that says what it holds. *The link, said in one line:* each fact has one home and one owner, so it's asked for once, and every office that needs it asks there. *Borrowed by name:* Tomás wants the same for rules, "once only". *Closed:* the film ends back in Tartu, with the benefit paid and nobody asked twice. The family is illustrative; the system is real.
 
-**Ideas.** Business objects become data objects, in domains with owners. Each data rule and expectation traces to a process step, a regulation or a principle: an estimated read stands only until the next actual read; a connection point has one retailer at a time; network customer data stays on the network's side of the wall. Quality expectations come from the process: timeliness from its service level, completeness from its steps. Each rule is written once, in the map, in a form structured enough to generate its check (a SHACL shape, a data contract, a test), as *Meaning machines can read* shows; a rule's limit, such as one retailer at a time, stays a rule rather than becoming a count on a line. Written this way, the rules and the concepts they govern are, generally, an ontology, ready for OWL: the film introduces the idea and links to the discussion of OWL in *Meaning machines can read*, without teaching OWL itself. The industry's information model as a starting point, not a blank page.
+**Story.** The data rule card from *Day one* comes back, "an estimated reading stands only until the next actual reading", with the bill of $412.80 that was flagged wrong beside it. Farah brings the household behind that bill. They were away for three weeks in June; their smart meter stopped sending readings, and the bill estimated those weeks from last year. When the meter reconnected, it sent the readings it had stored: they had used almost nothing. The actual readings arrived, and the bill was never corrected. The rule existed. A nightly script, written years ago by an analyst in the metering team as a stopgap, found estimates with an actual reading behind them and queued their bills to be corrected. In March, billing moved to its new system, and the script kept writing to the old queue, which nothing reads now. It ran every night, reported no error and corrected nothing: about 1,900 bills since March. Nobody owned it, because it lived on the wall between the network and retail, and belonged to neither side. Tomás finds it written four more ways, in the retail code, the meter system's settings, the billing system's notes and the complaints team's spreadsheet: the code says why, and the others each say how, a little differently. None of them is its home. Day one's rule turns out to be two rules, one on each side of the wall. On the network's side, an estimate is replaced when the actual reading arrives, and the replacement is sent to the retailer: Grace owns it, and its reason is the metering rules. On retail's side, a bill based on a replaced estimate is corrected on the next bill: the head of retail owns it, and its reason is the retail code. The replaced reading crosses the wall on the agreed list from *Who does it, and where meaning changes*. Ama corrects day one's draft too: "fair, accurate bills" was never one of the utility's goals; it's an obligation, in the regulator's code. Each rule is written once in the map and attached to its step of *meter to cash*, read or bill, and its checks are drawn from it. The household gets $144.40 back, the 1,900 bills are found and corrected, and when a check fails now, it tells the owner's team, not a mailbox.
 
-**On screen.** One rule, homeless, then placed: on a process step, with an owner and a reason.
+**Ideas.**
+
+- A rule builds on facts, and facts on concepts (the Business Rules Manifesto, article 3). So it's written in the business's words, about the things it governs: a reading, an estimate, a bill, a connection point.
+- Every rule traces to a reason: a regulation, a principle (such as *Why it moves*' "customer information stays with the business that collected it"), or the service level of the step it serves. A rule with no reason can't be changed safely, and one with no owner can't be fixed.
+- A rule's home is the map. It's attached to the step where it applies, in the domain that owns that step, but it isn't inside the step: rules are not process (the Manifesto, article 2), and one rule may apply at several steps.
+- A rule that crosses a domain's edge is two rules, one on each side, joined by what crosses. What lives on the wall belongs to no one.
+- The business objects a rule talks about become data objects in the domains that own them. The industry's model (the IEC Common Information Model: usage point, meter reading, reading type) gives the starting words, and the map records the utility's own beside them.
+- Quality expectations come from the process: timeliness from the step's service level (an estimate replaced within two working days of the actual reading), completeness from its steps (every estimate replaced, or explained), and validity from the rule itself (every reading marked actual or estimated).
+- Written in a structured form (what it applies to, what must be true, its owner, its reason, its home, and what happens when it fails), a rule generates its checks, one way: a dbt test, a data contract's quality rule, a SHACL shape. Nobody edits a check directly. A rule's limit stays a rule: "a connection point has one retailer at a time" is a check that no two periods overlap, not a count on a line.
+- Written this way, the rules and the concepts they govern are, generally, an ontology, ready for OWL. The film introduces the idea and links to *One map, many views* in *Meaning machines can read*, without teaching OWL. OWL reasons from what is said; in its open world, a correction that never happened is only unknown, so finding the uncorrected bill is the checks' job.
+
+**Reference and alternatives.** The film follows the Business Rules Manifesto (version 2.0, 2003) and SBVR (OMG, version 1.5) for what a rule is: a declarative statement in the business's vocabulary, built on facts and concepts, kept apart from the process and from how it's enforced, in "one cohesive body of rules" (the Manifesto, 2.3). It uses ArchiMate for where a rule sits on the map (a requirement or constraint that a step realises; ArchiMate 4 makes a constraint a kind of requirement), and DAMA-DMBOK for the quality dimensions and for stewardship. Also worth knowing: DMN (OMG, 1.5), for rules that decide, written as tables of conditions and outcomes (film 10's eligibility is one); domain-driven design's invariants, which a domain keeps inside its own edge; data contracts (the Open Data Contract Standard, 3.1), for rules on what crosses an edge; and W3C's SHACL and OWL, for checking and for reasoning. Where it differs: it doesn't teach SBVR's structured English or DMN's tables. It writes each rule as a plain sentence on a card with its parts named, and it adds what the frameworks leave to practice: an owner, a reason and a home on the map for every rule, with its checks generated from it.
+
+**In practice.**
+
+- Rules hide in code, configuration, spreadsheets and people's heads. The ones at the edge between two teams are the ones nobody owns.
+- Start with the rules that already hurt (a complaint, an incident, an audit finding), not an inventory of every rule.
+- Write the rule in the business's words first, and have its owner confirm it. Generate the check from the rule, never the rule from the check.
+- Decide what happens when a check fails (warn, stop, or send it to the owner's queue) and who hears about it. A check that reports to a mailbox nobody reads isn't a check.
+- A check that finds nothing every night may be checking nothing: give it a case that must fail.
+- Most rules are checks; few need reasoning over.
+- *From the author's experience:* to add.
+
+**Tools, shown, not leading.** dbt holds the generated checks as data tests beside the readings and billing models, each with its rule's id and the severity its owner chose (warn or error). Databricks runs them, and its catalogue shows each table's owner, its rules and the latest result on the table's page; where data arrives, a pipeline's expectations are the same checks. Names and maturity are checked when scripting.
+
+**On screen.** The rule card from *Day one*, homeless, lands on the wall between the network and retail, where the script ran. It splits into two cards, each settling on its own side with a gold owner tag and its reason, and threads run from each card, one way, to the checks it generates. The bill of $412.80, flagged wrong on day one, is corrected.
+
+**Chapters, a first outline.**
+
+1. *Once only.* Tartu: a birth registered once, and a benefit offered, unasked.
+2. *The bill from day one.* Farah brings the household behind the $412.80.
+3. *A rule on the wall.* The script, the move in March, a clean run every night, and 1,900 bills.
+4. *Five places, no home.* The same rule in five places, none of them its home; once only, for rules.
+5. *Two rules, not one.* Split at the wall, joined by what crosses.
+6. *Where a rule comes from.* A regulation, a principle, a service level; Ama corrects day one's goal.
+7. *What a rule is about.* Business objects, data objects and their domains; the industry's words.
+8. *Expectations from the process.* Timeliness, completeness and validity, each from a step.
+9. *Written once, checked everywhere.* The rule's card, the checks drawn from it, the owner's queue.
+10. *Generally, an ontology.* Concepts, relationships and rules, ready for OWL; reasoning and checking.
+11. *Back in Tartu.* $144.40 back, 1,900 bills corrected, Tomás's note answered; next, when strategy moves.
+
+**Its sound** (suggested; the thread designs it). The present in D major; Tartu in B minor, a soft vibraphone over a low clarinet; no borrowed Estonian sound.
+
+**Rigour to check.** Estonia's Public Information Act (since 2007, no separate databases for the same data; the one-request-only principle named in it since 2019), the catalogue RIHA, X-Road (since 2001), the proactive family benefit (the first event-based proactive service, with about 30,000 offers in its first year), and which offices ask the register. How estimates are made and replaced differs by market; smart meters store their readings while they can't send them; refund and back-billing rules differ (twelve months under Ofgem's rules, nine under Australia's National Energy Retail Rules). The CIM's usage point is "a logical or physical point in the network to which readings or events may be attributed". The script, the move in March, the 1,900 bills, $412.80 and $268.40 are fictional and plausible.
 
 ### 10. When strategy moves
 
-**Opening.** Kenya, 2007: a mobile network began letting people send money by text message (M-Pesa). A change in strategy reached every layer: new agents in small shops, new rules agreed with the central bank, new accounts, new data. Within a few years most adults in the country used it.
+*Draft of 17 October 2026, for the author's approval. It replaces the outline of 7 October.*
 
+**The idea.** A change in strategy is a few words at the top of the map, and it lands in every layer. With a map, the change can be walked down in a day: what changes, who owns each change, in what order, and which data contracts move. Without one, production finds out.
 
-**Story.** The government directs the utility to offer a social tariff for households in hardship. Eligibility depends on information held by another agency.
+**Opening: money by phone.** Kenya, 2007. A man working in Nairobi sends part of his wages home to his family upcountry. Until then, cash went with a bus driver or a friend, or he took it himself, and not all of it arrived. In March 2007, a mobile network launched M-Pesa: money sent from a phone, confirmed by text message. It had begun as a pilot for repaying small loans; people in the pilot used it to send money to each other, and that became the plan. The idea took a sentence. Making it real reached every layer: shops that sold airtime became agents, changing cash into mobile money and back; the central bank let it run, with customers' money held in trust at a bank; every customer registered with a national identity card; and a short menu worked on the simplest phones. *The link, said in one line:* a change of strategy reaches every layer, down to the shop counter where people meet it. *Borrowed by name:* Tomás walks the change "down to the counter". *Closed:* back in Kenya at the end, within a few years most households had someone using it, and money sent home arrived in minutes.
 
-**Ideas.** A change walked down every layer: a new driver and goal, a new product, changed capabilities and processes, a data-sharing agreement, consent and privacy rules, new data objects and measures, and the systems affected. The target state and the gaps, in order. What a well-architected organisation can answer in a day, and what a poorly architected one finds out in production.
+**Story.** The government, the utility's owner, directs it to give a social tariff, a discount on the bill, to every eligible household from 1 July, automatically, with no forms to fill in. Who is eligible is known to another organisation, the social services agency, not to the utility. The minister's office asks what it will take, by tomorrow. Tomás walks it down the map. In motivation: a new driver, the direction, and an outcome with a measure (eligible households on the tariff), under a goal from *Why it moves*, keep bills affordable, the goal *Now the questions appear* found with no measure for the people who pay. In strategy: the capabilities it touches, selling energy, serving customers and meeting obligations. In business: a new product, the social tariff, a new step in *meter to cash*, a new partner, the agency, and a data-sharing agreement with it. In information: a new business object, eligibility, with its dates, and new rules, each with a home, an owner and a reason, as *Rules with a home* taught. Then the data products and contracts that change, and the systems: billing, the customer system and a secure exchange. "Once only", borrowed from Estonia, says don't make households prove what the agency already knows. The agreement asks for the least: the utility sends its account holders' matching details, and the agency answers only "eligible, from this date", never which support a household gets. Tomás's first draft, on paper, sends the list to the network as well, to discount the network charge; Ama checks it against the third principle from *Why it moves*, customer information stays with the business that collected it, and crosses it out. The decision is written down with why: retail applies the discount, and nothing new crosses the wall. Down at the counter, Farah finds who the match will miss: tenants whose account is in a landlord's name. A second route, an application, goes on the path for later in the year. The path is drawn in plateaus, as in *Today, and where it's going*: by 1 July, the match, the bills and the call centre's answer; by December, the second route; next year, the outcome measured. By the morning, the minister's office has one page: what changes, who owns each change, what's ready by 1 July and what isn't. On 1 July the first bills carry the discount, and about nine in ten eligible households get it without asking. The head of retail confirms the measure Farah has asked for since 2024, households falling behind, so the goal can now be steered.
 
-**On screen.** The change as a ripple, layer by layer, ending at the data contracts that must change.
+**Ideas.**
+
+- A strategy change enters at the top, as a driver and a goal or outcome, and is walked down every layer: motivation, strategy, business, information, application, technology. Every element it touches has an owner, so the walk is also the list of who must agree.
+- Check the change against the principles before designing it (*Why it moves*): they settle the hard calls the same way every time.
+- Data is where a change lands: new business objects, new rules with homes, an agreement with another organisation and its legal basis, asking for the least, and the contracts of the data products that change, each as a new version beside the old one, with its readers found through lineage.
+- The target and the path are drawn separately (*Today, and where it's going*): plateaus, in the order their dependencies allow.
+- Find who an automatic route misses, at the counter, before production does.
+- Write each decision down with why, so the next change starts from it.
+- What a well-architected organisation can answer in a day, a poorly architected one finds out in production.
+
+**Reference and alternatives.** The film follows TOGAF's architecture change management (Phase H of the ADM, in the TOGAF Standard, 10th Edition: a change is assessed against the architecture, and starts a new cycle when it needs one) and capability-based planning, with the path drawn in ArchiMate's plateaus (in ArchiMate 4, a gap is an assessment of the difference between two plateaus). At the data end, it follows data mesh's data products and versioned data contracts. Also worth knowing: OMG's Business Motivation Model (a directive from the owner as an influencer, assessed for its impact); BIZBOK's strategy mapping, from a strategy to the capabilities, value streams and initiatives it touches; privacy by design and data protection impact assessments (the GDPR's articles 25 and 35, or a country's equivalent) for the agreement; and ISO/IEC/IEEE 42010's correspondences, which make an impact traceable. Where it differs: it doesn't run a whole ADM cycle. It walks one change through the series' six layers in an afternoon, then plans its plateaus. People's side of a change (training, communication) is named, not taught.
+
+**In practice.**
+
+- Ask "what will it take?" before "by when?": the first answer is the list of owners who must agree.
+- The legal basis and the agreement take longer than the code; start them on the first day.
+- Ask another organisation for a yes or a no, not for its reasons. Asking for the least shapes the design, and is easier to agree.
+- Look for whoever the automatic route misses (tenants, shared homes, accounts in someone else's name) at the start, not in the first bills.
+- Version a contract; never change it in place. Lineage says whom to tell.
+- Write the decision down with why, even when it's "no": the next change will ask again.
+- *From the author's experience:* to add.
+
+**Tools, shown, not leading.** The changed data product's contract in dbt, with version 2 beside version 1 and a date for the old one to go, and the exposures that say who reads it. In Databricks, the catalogue's lineage finds every table, dashboard and job downstream, and a column mask lets the call centre see "on the social tariff" and nothing about anyone's support. Names and maturity are checked when scripting.
+
+**On screen.** A drop lands at the top of the map, and a ripple runs down every layer, lighting each element the change touches with its owner's tag, until it reaches the contracts that must change. Tomás's first draft of the ripple, on paper, with a line through the wall that Ama crosses out. A household's bill on 1 July, with its new line.
+
+**Chapters, a first outline.**
+
+1. *Money by phone.* Nairobi to a town upcountry; every layer moved, down to the shop counter.
+2. *A direction.* A social tariff for every eligible household, automatically, from 1 July: what will it take?
+3. *Down every layer.* The ripple, from the driver to the technology, each element with its owner.
+4. *Ask once.* The agency already knows; what goes, and what comes back.
+5. *The wall holds.* The draft that sent the list to the network; the third principle; the decision and its why.
+6. *New rules, with homes.* Who is eligible and from when, how long the answer is kept, who may see it.
+7. *Down to the counter.* The bill's new line, the letter, the call centre's answer; Farah finds the tenants.
+8. *Where the data lands.* Version 2 of a product's contract; lineage finds its readers; the exchange's own contract.
+9. *The path.* Three plateaus, in order.
+10. *Answered in a day.* One page for the minister's office by morning.
+11. *1 July.* The first bills, film 8's measure confirmed, back in Kenya; next, a map that's used goes stale.
+
+**Its sound** (suggested; the thread designs it). The present in A major; Kenya in F-sharp minor, felt piano over pizzicato strings; no borrowed Kenyan sound. The ripple has its own soft, falling figure, a note for each layer.
+
+**Rigour to check.** M-Pesa: the pilot from October 2005 with a microfinance lender, Faulu Kenya; the Central Bank of Kenya's letter of no objection (February 2007) and the launch (March 2007); customers' money in a trust account; more than 20,000 customers in the first month (Hughes and Lonie, 2007); adoption figures that vary by survey; and Suri and Jack (2016) on poverty, with its critics. Automatic social tariffs from another agency's data are real practice: Portugal's automatic social energy tariff since July 2016, checked with the Tax Authority and Social Security (its beneficiaries rose from about 4% to about 20% of households; a UN Public Service Award in 2020), and the UK's Warm Home Discount, for which the government's department returns only identifiers to suppliers. Who pays for a discount differs by country (taxes, a levy on all customers, or generators, as in Portugal). The direction, its dates, the agency, the numbers and the design are fictional and plausible; rules separating network and retail differ by market.
 
 ### 11. A map people and agents can read
 
-**Opening.** The Pacific: navigators found islands across thousands of kilometres of open ocean with no instruments, using a star compass held in memory and taught person to person. In 1976 the canoe Hōkūleʻa sailed from Hawaiʻi to Tahiti that way, guided by Mau Piailug of Satawal. A map is only alive while people can read it and pass it on. The film ends in an imagined near future, with an agent reading Tomás's map.
+*Draft of 17 October 2026, for the author's approval. It replaces the outline of 7 October.*
 
+**The idea.** A map is only alive while people use it, keep it true and can pass it on. Kept as text, with each element written once with a stable id, an owner and its evidence, every change reviewed and versioned, and every view generated from it, it can be read by the next person and by agents, who scope data work, find owners and flag impact, while people confirm what's true. This is where *From words to data* begins: from the organisation's meaning to the data's.
 
-**Story.** Tomás's map is now useful, so it's at risk of going stale. He moves it from slides to text that is versioned, reviewed and readable by agents.
+**Opening: by the stars.** 1 May 1976. The double-hulled canoe Hōkūleʻa leaves Honolua Bay, on Maui, for Tahiti, about 4,000 kilometres south, with no compass, no charts and no instruments. Its navigator, Mau Piailug, from Satawal in Micronesia, reads the stars rising and setting on the horizon, the swells and the birds, holding a star compass in his memory. Thirty-one days later the crew sights Mataiva, and on 4 June they reach Papeʻete, where more than 17,000 people are waiting. Mau's knowledge had passed only from navigator to apprentice, and few still held it; he chose to teach it beyond his own island, and a young Hawaiian, Nainoa Thompson, learned it from him and taught others. *The link, said in one line:* a map lives while people use it on every voyage, keep it true and teach it to the next navigator. *Borrowed by name:* "the navigator's test": could someone else sail by it? *Closed:* the film ends fifty years on, with Hōkūleʻa still sailing, navigated by people Mau taught and people they taught.
 
-**Ideas.** The model as living metadata: each fact once, each claim traced to evidence, each decision recorded. One map, many views: the glossary, the conceptual and logical models, an ontology in OWL and the checks are generated from it, one way, with stable ids, so a change made once reaches every view, and nobody edits a view directly. Agents read it to scope data work, find owners and flag impact; people confirm what's true. This is where *From words to data* begins: from the organisation's meaning to the data's.
+**Story.** Tomás's map is used every week now: to read requests with the skipper's test, to place rules, to answer the minister. That's when a map goes stale. It lives in slides and in a modelling tool only Tomás edits; its views are copied into decks and drift; the glossary and the data catalogue keep their own words. It fails the navigator's test: without him, nobody could sail by it. So he moves it from slides to text. Each element (a capability, a step, a domain, a business object, a rule, a measure, a decision) is written once, as a short text file: a stable id, a name, a definition, an owner, its relationships, named as ArchiMate names them, its evidence (the document or the person it came from, with a date) and its status, draft or confirmed. Decisions are records, each with why. It all lives in a repository, versioned: a change is a pull request, which the owner of that part reviews (Grace for the network's, Ama for obligations), and checks on the map itself run on every change: every element has an owner, every rule a reason and a home, every measure a definition. The views are generated from it, one way, as *Meaning machines can read* showed: the ArchiMate views people read, the glossary, the conceptual model, the ontology in OWL, the checks and the heat map. Nobody edits a view; a fix goes to the map. Then agents can read it. Given a request, an agent applies the skipper's test and finds the decision, the capability and the owner, or nothing. Given a change, it walks the layers, as Tomás did for the social tariff, and lists the owners who must agree. Given a column in the catalogue, it finds the rule, the owner and the reason. It cites ids and evidence, so a person can check. The agent is itself on the map, an actor with its rights written down, like the outage agent in *Who does it, and where meaning changes*: it reads everything and drafts changes, it never confirms one, and its owner is Tomás. When the retail code changes, the agent drafts the change to the rule, with every check and view it touches; the head of retail confirms it, and a new version goes out. Next spring, a data engineer joins. Her first day, like Tomás's, brings acronyms and a list of systems, and this time a map. She asks who owns the readings data and which rules it keeps, and gets an owner, two rules and their reasons, with links; she asks Grace to confirm her first change.
 
-**On screen.** The wall of drafts becomes a repository; an agent asks the map a question and gets an owner, a rule and a reason.
+**Ideas.**
+
+- A model is living metadata: each fact once, each claim traced to its evidence with a date, each decision recorded with why (the series' insights 9 and 12).
+- Ids before names: names change, ids don't, and every view and every agent cites the id.
+- One map, many views, generated one way, and nobody edits a view. In ISO/IEC/IEEE 42010's terms, each view answers its readers' concerns, drawn from the same models.
+- Reviewed and versioned like code: owners review their part, and checks on the map catch what's missing.
+- Agents read the map to scope data work, find owners and flag impact. They draft; people confirm. The agent's own rights are on the map.
+- Keep it small, owned and current: a map nobody updates is worse than none, because people trust it.
+- The hand-over: *From words to data* starts here, with the meaning the map holds.
+
+**Reference and alternatives.** The film follows ISO/IEC/IEEE 42010:2022 for what an architecture description is (stakeholders, concerns, viewpoints and views, model kinds, and the correspondences between them), and architecture as code for how to keep it: the model as text in a repository, reviewed and versioned, with architecture decision records (Michael Nygard, 2011). TOGAF's architecture repository is the idea behind it. Also worth knowing: the C4 model and Structurizr, which generate diagrams from a text model of software; Archi, with its plug-in for working together, and ArchiMate's model exchange format; knowledge graphs (RDF, OWL, SKOS) and enterprise ontologies such as ArchiMEO; data catalogues and lineage (Unity Catalog, OpenLineage); the EA tools that keep a repository (Archi, Sparx Enterprise Architect, BiZZdesign, LeanIX, Ardoq), named once, as in *Today, and where it's going*; and the standard ways agents now reach tools and data, named on the day. Where it differs: it doesn't choose a tool or a file format. It shows what any of them must keep (stable ids, owners, evidence, decisions, generated views) and what agents need from it.
+
+**In practice.**
+
+- Keep the map small, owned and reviewed. Start with the parts data work reads most: domains, owners, rules and measures.
+- Ids before names, and never reuse an id.
+- Link every claim to its evidence, with a date, so anyone can check it.
+- Generate the views; never edit one. A fix goes back to the map.
+- Let agents draft and find; never let one confirm. Write their rights down.
+- Review the map when the organisation changes (a restructure, a new system, a new law), not only on a calendar.
+- *From the author's experience:* to add.
+
+**Tools, shown, not leading.** The map's generated views land where data people work: in dbt's YAML (descriptions, each model's owner, domain and rule ids in its meta, and the generated tests), and in Databricks' catalogue (each table's description, owner and tags, and its lineage). An agent reads the map and the catalogue together. Names and maturity are checked when scripting.
+
+**On screen.** The wall of drafts, paper and glass, folds into lines of text, each element with its id; threads run one way from the repository to each view; an agent, a small glass actor on the map, follows the lines to an owner, a rule and a reason. The star compass, a ring of rising and setting points, around the canoe at night. The last shot: day one's empty layers, now full.
+
+**Chapters, a first outline.**
+
+1. *By the stars.* Hōkūleʻa, 1976: a star compass held in memory, and taught to the next navigator.
+2. *Useful, so at risk.* Used every week, copied into decks, edited by one person; the navigator's test.
+3. *From slides to text.* Each element once: its id, owner, definition, relationships, evidence and status.
+4. *Reviewed and versioned.* A change is a pull request; owners review; checks run on the map.
+5. *One map, many views.* Generated one way; nobody edits a view.
+6. *An agent reads it.* A request, a change, a column: an owner, a rule and a reason, with ids.
+7. *An agent on the map.* Its rights written down: it reads and drafts, and never confirms.
+8. *People confirm.* The retail code changes; the agent drafts; the head of retail confirms; a new version.
+9. *Day one, again.* A newcomer's first day, with a map.
+10. *Still sailing.* Fifty years on, navigators taught by Mau's students.
+11. *The map before the data.* The series, layer by layer; over to *From words to data*.
+
+**Its sound** (suggested; the thread designs it). The present in E major; the Pacific night in C-sharp minor, a bowed vibraphone over low strings, with the sea; no borrowed Pacific sound (no drums, no nose flute, no slack-key guitar). The series' mark, 1-3-5-8, heard whole at the end.
+
+**Rigour to check.** Hōkūleʻa's 1976 voyage, from the Polynesian Voyaging Society's own record: it left Honolua Bay on 1 May, sighted Mataiva after 31 days and reached Papeʻete on 4 June, where more than 17,000 people waited; Mau Piailug of Satawal navigated. His star compass is Carolinian, and the Hawaiian star compass is Nainoa Thompson's own; Nainoa navigated to Tahiti and back in 1980; and who navigates now. Check the canoe's form against the Society's photographs, and draw nothing from Pacific art. Also ISO/IEC/IEEE 42010:2022, architecture decision records, whether ArchiMate 4 has a model exchange format yet, and the names of agent interfaces on the day. *Keeping it true* already shows an agent watching a data model and drafting its changes; this film applies the same rule (agents draft, people approve, everything versioned) to the map the data model comes from, and says so.
+
+### What carries across the last three films
+
+Films 9 to 11 are made at the same time, so what one sets up and the next uses is fixed here.
+
+| Set up in | Used in | What carries |
+|---|---|---|
+| *Day one* | 9 | The data rule card, "an estimated reading stands only until the next actual reading", and the bill of $412.80 flagged wrong |
+| *Day one* | 11 | A first day of acronyms, an org chart and 140 systems, then a newcomer's first day with a map |
+| *Why it moves* | 9, 10 | Principle 3, customer information stays with the business that collected it; the goal keep bills affordable |
+| *How value reaches people* | 9, 10 | *Meter to cash*: read · bill · paid |
+| *Who does it, and where meaning changes* | 9, 10, 11 | The wall and its agreed list; the outage agent, with its rights written down and Grace as its owner |
+| *Today, and where it's going* | 10 | Plateaus and gaps, and decisions written down with why |
+| *Now the questions appear* | 10, 11 | The skipper's test; households falling behind, a draft measure with the head of retail; the four data products, with accounts and bills on retail's side |
+| *Rules with a home* | 10, 11 | "Once only"; the two rules split at the wall (the network replaces an estimate and sends it on, Grace's; retail corrects the bill, the head of retail's), with the stable ids film 9 gives them |
+| *When strategy moves* | 11 | The social tariff and its decision record; the measure, confirmed |
+
+People: Tomás, Grace, Farah and Ama, with the head of retail still unseen. New in these films, each drawn in its own film's source, not in `shared/src/people.js`: the analyst who wrote the script (film 9, who may stay unseen), the agency (film 10, unseen), and the newcomer and the map's agent (film 11).
+
+### Making them
+
+- Once the author approves this draft, one thread per film starts, all three at once, each following AGENTS.md from stage 2: the concept is settled here. Writing all three narrations first, as *From words to data* did (PLAYBOOK §9), keeps them in step.
+- They share some files: `series.json`, the series README (generated), `films/legibility-report.md`, `PLAYBOOK.md` and the release workflow's list of films. They merge in order, 9, then 10, then 11; each brings main in before it asks for review, and re-runs `site-tools/build_series.py` rather than resolving generated pages by hand.
+- Whatever one film fixes that another uses (ids, numbers, names) goes into the *Decided* table on main, where the other threads read it.
 
 ## Overlap with the other series
 
 - ***From words to data*** starts where this series ends: with meaning, concepts and models. Film 11 hands over to it, and *Meaning machines can read* already shows the handover: Noor's architecture map as the one source of the glossary, the models, the ontology and the tests.
-- ***In the weeds of data crafting*** builds the contracts and tests that films 9 and 10 say where to place.
+- ***In the weeds of data crafting*** builds the contracts and tests that films 9 and 10 say where to place: *Promises and proofs* writes the contracts and tests, *Who owns what* the domains and owners, and *Written once* gives each fact one home and generates the rest. Films 9 and 10 stay at the map: where a rule comes from, who owns it, and what a change touches.
+- ***Keeping it true***, in *From words to data*, shows an agent watching a data model and drafting its changes, which people approve. Film 11 applies the same rule to the map the data model comes from.
 - ***The Inner Life of Data*** shows the platform. This series shows the organisation the platform serves.
 
 ## Rigour to check when scripting
 
 - **The openings** (see above): the chasqui's daily distance is an estimate; the dabbawalas' error rate is often quoted as "six sigma", a claim from press coverage rather than a formal study, so say "almost no errors"; Japan's converter capacity in 2011 was about 1 GW; the Kerala findings are from Robert Jensen's study (2007); Estonia's once-only principle is in law; M-Pesa's adoption figures vary by survey; Hōkūleʻa's 1976 voyage and Mau Piailug's role are well documented by the Polynesian Voyaging Society.
 
-- **Current versions of the standards:** TOGAF, ArchiMate (3.2, October 2022, was current on 16 October 2026), SBVR (1.5, December 2019), BIZBOK, the APQC framework (and its utilities edition), DAMA-DMBOK, ISO/IEC/IEEE 42010 and the IEC Common Information Model (IEC 61968, 61970 and 62325).
+- **Current versions of the standards** (checked on 17 October 2026): the TOGAF Standard, 10th Edition (its 2025 update); ArchiMate 4 (April 2026); SBVR 1.5 (December 2019); DMN 1.5 (2024); the Open Data Contract Standard 3.1 (December 2025); BIZBOK; the APQC framework (and its utilities edition); DAMA-DMBOK; ISO/IEC/IEEE 42010:2022; and the IEC Common Information Model (IEC 61968, 61970 and 62325, with 61968-9, for meter readings, in its third edition of 2024).
+- **ArchiMate 4.** Films 1 to 8 draw ArchiMate 3.2's notation (October 2022). ArchiMate 4, published in April 2026, says it keeps users' models compatible. It cuts the concepts from 60 to 42, calls the layers domains, merges behaviour into one common domain, makes a contract a kind of business object, a constraint a kind of requirement and a gap an assessment of the difference between two plateaus, and lets a relationship say how many sit at each end. The series keeps "layers" for its own six, and "domain" for a part of the organisation with its own meaning, as in *Who does it, and where meaning changes*. *Meaning machines can read* cites 3.2 too.
 - **Ring-fencing and unbundling** differ by jurisdiction. Keep it to "in many markets", and keep the rule generic.
 - **Reliability measures** (SAIDI, SAIFI): use their standard definitions if named.
 - **The canvases** are Strategyzer's; credit them.
 - **Public-sector governance** (statements of expectations, ministerial directions, dividends) differs by country. Keep it generic and plausible.
 - **Tool names** are checked when published.
 
-## Decisions for the author
+## Questions for films 9 to 11
 
-1. **The series title.** Some options: *The map before the data*, *Know the ground*, *Before the questions*.
-2. **Film length:** 6 to 7 minutes each, like the other series?
-3. **Labs and scenarios:** decided: one set for the whole series, not one per film, made later. Which engine? *From words to data*'s would fit. Candidate labs: sort clues into layers, fill a canvas from an annual report, correct a capability map, trace a rule to its home, walk a change through the layers.
-4. **Spanish pages:** decided: yes, as for the other series (Spanish pages around English films, with Spanish captions).
-5. **Its own sound and visual mark,** as *In the weeds* has?
+Asked on 17 October 2026, with the draft above.
+
+1. **The three stories, as drafted.** Approve them, or say what to change.
+2. **ArchiMate 4.** Recommended: films 9 to 11 keep the drawing of films 1 to 8, and their rigour notes say what version 4 changed. The other way, drawing them in version 4, would set them apart from films 1 to 8.
+3. **Film 11's last scene.** Recommended: a newcomer's first day next spring, with today's tools, so the series ends where it began. The plan of 7 October ended in an imagined near future instead.
+4. **Your experience,** for each film's practice notes: rules you've seen work or fail, a strategy change that reached the data, a map that went stale.
+
+## Still open
+
+1. **The series title:** still the working title, *The map before the data* (7 October).
+2. **Labs and scenarios:** one set for the whole series, later (9 October). Which engine is still open; *From words to data*'s would fit. Candidate labs: sort clues into layers, fill a canvas from an annual report, correct a capability map, trace a rule to its home, walk a change through the layers.
 
 ## Next checkpoints
 
-1. The author agrees this proposal, and decides the points above.
-2. A treatment for *Day one*, and Tomás's character card.
-3. The organisation's world: its canvases, capability map, value streams and domains, written once in `shared/` so every film draws from the same model.
+1. The author approves the draft of films 9 to 11.
+2. One thread per film, merged in order: 9, 10, then 11.
+3. The labs and scenarios for the whole series.

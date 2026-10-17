@@ -4,8 +4,9 @@ Every tool of the series on data governance runs from a film's source folder, fi
 which holds film.json: the film's key, title and subtitle, its own source files, the words the voice respells, and the moment
 its poster shows. The films draw with The Inner Life of Data's engine and helpers, A Sharper Sketch's scene helpers, the people
 of When things go wrong, From words to data's people and helpers (shared/src/words.js), In the weeds of data crafting's
-people and motion helpers (its shared/src/people.js and weeds.js), and this series' own, in shared/src/: the toy town
-(town.js), its people (people.js), the university as a town (campus.js) and the video's finishing pass (finish.js).
+people and motion helpers (its shared/src/people.js and weeds.js), the master and reference data series' watercolour and its
+people in pencil and wash (its shared/src/wash.js and people.js), and this series' own, in shared/src/: its people (people.js),
+the university's rooms (rooms.js), and what the films need before they start and the video's finishing pass (finish.js).
 Most tools are From words to data's, run with this lang.py (see run.py). The series is in English; another language is
 captions only, as in From words to data."""
 import json, os, pathlib, sys
@@ -21,6 +22,7 @@ SKETCH = FILMS / 'a-sharper-sketch' / 'source' / 'src'
 CHARS = FILMS / 'when-things-go-wrong' / 'characters'
 WORDS = FILMS / 'from-words-to-data' / 'shared' / 'src'
 WEEDS = FILMS / 'analytics-engineering' / 'shared' / 'src'
+MR = FILMS / 'master-and-reference-data' / 'shared' / 'src'
 GOV = SERIES / 'shared' / 'src'
 META = json.loads((ROOT / 'film.json').read_text())
 LANG = os.environ.get('FILM_LANG', 'en')

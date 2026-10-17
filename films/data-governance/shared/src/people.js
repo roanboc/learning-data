@@ -1,9 +1,13 @@
 /* ===== The data governance series: its people =====
    The cast of When things go wrong and In the weeds of data crafting (Mei, Sam, David, Jun), and two more: Yusuf Demir, the
-   university's new data governance lead, and Clara Jensen, in Planning. In the toy town they're painted figures on small round
-   bases: the base's rim carries the side, gold for the business side and blue for the technical side, plain walnut for people
-   of the past. The people of the past wear their own time: tunics and gowns of wool in 1215, a furred gown in 1497, a frock
-   coat and a top hat, or a waistcoat and an apron, in the 1880s. */
+   university's new data governance lead, and Clara Jensen, in Planning. They're drawn the way the master and reference data series
+   draws people (its shared/src/people.js, bundled as it is): a pencil line, paint in the paper's grain, and behind each person a soft
+   wash of their side's colour, gold for the business side and cyan for the technical side. The people of the past get a warm umber
+   wash, and wear their own time: tunics and gowns of wool in 1215, a furred gown in 1497, a frock coat and a top hat, or a waistcoat
+   and an apron, in the 1880s. People can hold things (a charter, a jug, a binder, a notebook, a hammer) and face either way. */
+
+// the wash behind people of the past, and the colours of what people hold
+const GV_PAST=[184,146,104],GV_HOLD={teal:[64,150,146],walnut:[156,110,74],navy:[66,86,128],gold:[232,176,52]};
 
 PEOPLE.yusuf={name:"Yusuf Demir",role:"Data governance lead",side:"Business",does:"uses",edge:BIZ,seed:15,
   skin:[204,160,124],hair:{style:"side",c:[38,30,28]},beard:[44,34,30],
@@ -106,25 +110,25 @@ head=function(ctx,P,E,po,t){const h=P.hat,hc=P.hatC||[238,232,218];
 // ---- the people of the past: invented townsfolk ----
 Object.assign(PEOPLE,{
   // 1215: in wool dyed with madder, woad and weld, or undyed
-  crier:{name:"",role:"the sheriff's crier",side:"",edge:null,seed:31,skin:[226,184,154],hair:{style:"side",c:[120,84,52]},beard:[116,80,50],
+  crier:{name:"",role:"the sheriff's crier",side:"",edge:GV_PAST,seed:31,skin:[226,184,154],hair:{style:"side",c:[120,84,52]},beard:[116,80,50],
     top:{kind:"gown",c:[60,84,140],inner:[226,214,190],belt:[96,64,40],band:[214,170,80],cape:[170,52,44]},bottom:{c:[60,60,70]},shoe:[60,42,30],build:{sh:74,hip:62,h:1.02}},
-  vintner:{name:"",role:"wine seller",side:"",edge:null,seed:32,skin:[232,190,160],hair:{style:"cropped",c:[60,44,34]},hat:"coif",hatC:[240,234,220],
+  vintner:{name:"",role:"wine seller",side:"",edge:GV_PAST,seed:32,skin:[232,190,160],hair:{style:"cropped",c:[60,44,34]},hat:"coif",hatC:[240,234,220],
     top:{kind:"tunic",c:[150,62,58],inner:[230,220,200],belt:[88,60,40],purse:true,apron:[236,226,206]},bottom:{c:[96,104,70]},shoe:[70,50,36],build:{sh:76,hip:64,h:1.0}},
-  alewife:{name:"",role:"brewer",side:"",edge:null,seed:33,skin:[236,196,170],hair:{style:"cropped",c:[150,96,56]},hat:"veil",hatC:[232,226,206],
+  alewife:{name:"",role:"brewer",side:"",edge:GV_PAST,seed:33,skin:[236,196,170],hair:{style:"cropped",c:[150,96,56]},hat:"veil",hatC:[232,226,206],
     top:{kind:"gown",c:[184,150,72],inner:[236,228,210],belt:[110,74,44],apron:[240,234,220]},bottom:{c:[90,80,70]},shoe:[70,52,40],build:{sh:66,hip:62,h:0.95}},
-  miller:{name:"",role:"corn seller",side:"",edge:null,seed:34,skin:[214,170,136],hair:{style:"side",c:[52,40,32]},beard:[60,46,36],hat:"straw",hatC:[224,190,120],
+  miller:{name:"",role:"corn seller",side:"",edge:GV_PAST,seed:34,skin:[214,170,136],hair:{style:"side",c:[52,40,32]},beard:[60,46,36],hat:"straw",hatC:[224,190,120],
     top:{kind:"tunic",c:[176,160,128],inner:[226,218,200],belt:[100,70,46]},bottom:{c:[88,72,60]},shoe:[66,48,34],build:{sh:78,hip:64,h:1.03}},
-  buyer:{name:"",role:"townswoman",side:"",edge:null,seed:35,skin:[200,150,118],hair:{style:"cropped",c:[40,30,26]},hat:"veil",hatC:[214,222,236],wimpleC:[246,244,238],
+  buyer:{name:"",role:"townswoman",side:"",edge:GV_PAST,seed:35,skin:[200,150,118],hair:{style:"cropped",c:[40,30,26]},hat:"veil",hatC:[214,222,236],wimpleC:[246,244,238],
     top:{kind:"gown",c:[70,108,150],inner:[230,226,214],belt:[90,62,44],purse:true},bottom:{c:[70,70,80]},shoe:[60,44,34],build:{sh:64,hip:60,h:0.94}},
   // 1497: a clerk of the market in a furred gown and a bonnet; a trader in a hood
-  clerk:{name:"",role:"clerk of the market",side:"",edge:null,seed:36,skin:[230,190,160],hair:{style:"cropped",c:[90,64,44]},hat:"tudor",hatC:[44,40,46],
+  clerk:{name:"",role:"clerk of the market",side:"",edge:GV_PAST,seed:36,skin:[230,190,160],hair:{style:"cropped",c:[90,64,44]},hat:"tudor",hatC:[44,40,46],
     top:{kind:"gown",c:[96,40,44],inner:[60,58,70],fur:[120,86,60]},bottom:{c:[50,46,56]},shoe:[40,32,28],build:{sh:74,hip:62,h:1.0}},
-  trader:{name:"",role:"trader",side:"",edge:null,seed:37,skin:[210,164,128],hair:{style:"side",c:[70,50,36]},beard:[80,58,40],hat:"hood",hatC:[120,130,90],
+  trader:{name:"",role:"trader",side:"",edge:GV_PAST,seed:37,skin:[210,164,128],hair:{style:"side",c:[70,50,36]},beard:[80,58,40],hat:"hood",hatC:[120,130,90],
     top:{kind:"tunic",c:[150,120,84],inner:[220,210,190],belt:[96,66,44],purse:true},bottom:{c:[96,84,70]},shoe:[66,48,34],build:{sh:76,hip:64,h:1.0}},
   // the 1880s: an inspector of weights and measures, and a grocer
-  inspector:{name:"",role:"inspector of weights and measures",side:"",edge:null,seed:38,skin:[226,186,156],hair:{style:"side",c:[96,80,70]},beard:[110,92,80],hat:"top",hatC:[36,36,42],hatBand:[24,24,28],
+  inspector:{name:"",role:"inspector of weights and measures",side:"",edge:GV_PAST,seed:38,skin:[226,186,156],hair:{style:"side",c:[96,80,70]},beard:[110,92,80],hat:"top",hatC:[36,36,42],hatBand:[24,24,28],
     top:{kind:"frock",c:[48,52,66],vest:[110,96,80],inner:[246,244,238],tie:[30,28,34]},bottom:{c:[70,70,78]},shoe:[24,22,24],build:{sh:76,hip:62,h:1.02}},
-  grocer:{name:"",role:"grocer",side:"",edge:null,seed:39,skin:[232,196,168],hair:{style:"cropped",c:[60,46,36]},beard:[70,52,40],
+  grocer:{name:"",role:"grocer",side:"",edge:GV_PAST,seed:39,skin:[232,196,168],hair:{style:"cropped",c:[60,46,36]},beard:[70,52,40],
     top:{kind:"vest",c:[246,242,232],rolled:true,vest:[96,74,58],apron:[250,248,242],tie:[110,40,40]},bottom:{c:[88,84,96]},shoe:[46,36,30],build:{sh:76,hip:64,h:0.98}}
 });
 
@@ -139,21 +143,21 @@ Object.assign(POSE,{
   stampUp:{L:[0.16,-1.9],R:[0.5,2.7],feet:30,shift:4,tilt:0.0,turn:0.15,gaze:[0.2,1],look:1},
   stampDown:{L:[0.16,-1.9],R:[0.32,-1.2],feet:30,shift:4,tilt:0.06,turn:0.15,gaze:[0.2,1],look:1},
   wave:{L:[0.12,-0.08],R:[0.9,2.9],hand:"open",feet:28,shift:5,tilt:-0.03,turn:0.15,gaze:[0.3,0],look:0},
-  shrug:{L:[0.5,1.3],R:[0.5,1.3],hand:"open",feet:30,shift:0,tilt:0.08,turn:0,gaze:[0,0],look:0}
+  shrug:{L:[0.5,1.3],R:[0.5,1.3],hand:"open",feet:30,shift:0,tilt:0.08,turn:0,gaze:[0,0],look:0},
+  // a step: the arms swing opposite ways, the stance narrows (people in these films face us, so a walk is a sway and a bob)
+  walkA:{L:[0.34,0.3],R:[-0.26,-0.32],feet:14,shift:-5,tilt:0.03,turn:0.06,gaze:[0.3,0],look:0},
+  walkB:{L:[-0.26,-0.32],R:[0.34,0.3],feet:14,shift:5,tilt:-0.03,turn:0.06,gaze:[0.3,0],look:0}
 });
 // where a hand is, in the figure's own units (it's 560 tall), for things it holds
 function handAt(P_,s,a,br){const sw=P_.build.sh,sx=s*(sw-12),sy=-416+br,e=[sx+s*Math.sin(a[0])*108,sy+Math.cos(a[0])*108],d=[s*Math.sin(a[1]),Math.cos(a[1])],w=[e[0]+d[0]*100,e[1]+d[1]*100];return[w[0]+d[0]*13,w[1]+d[1]*13];}
 
-// ---- people as painted figurines: no glow, a soft rim of light from the upper left and a darker edge below ----
-outlined=function(ctx,draw,x,y,s,edge,box,glowA){const [x0,y0,x1,y1]=box,pad=12,w=Math.ceil((x1-x0)*s+pad*2),h=Math.ceil((y1-y0)*s+pad*2);if(w<4||h<4)return;
-  const [c,cx]=pcanvas("p",w,h);cx.translate(pad-x0*s,pad-y0*s);cx.scale(s,s);draw(cx);
-  const [tc,tx]=pcanvas("t",w,h);tx.drawImage(c,0,0);tx.globalCompositeOperation="source-in";tx.fillStyle="rgba(28,34,52,1)";tx.fillRect(0,0,w,h);tx.globalCompositeOperation="source-over";
-  const ox=x+x0*s-pad,oy=y+y0*s-pad,r=Math.max(0.8,1.6*s);
-  ctx.save();ctx.globalAlpha*=0.55;ctx.drawImage(tc,ox+r*0.6,oy+r);ctx.restore();ctx.drawImage(c,ox,oy);
-  const [hc,hx]=pcanvas("h",w,h);hx.drawImage(c,0,0);hx.globalCompositeOperation="source-in";hx.fillStyle="rgba(255,250,236,1)";hx.fillRect(0,0,w,h);hx.globalCompositeOperation="destination-out";hx.drawImage(c,-r*1.6,-r*1.2);hx.globalCompositeOperation="source-over";
-  ctx.save();ctx.globalAlpha*=0.35;ctx.drawImage(hc,ox,oy);ctx.restore();};
+// a person, drawn in pencil and wash by the master data series' outlined(), with what the toy figures could do: face the other way
+// (o.flip), nod, hold something (o.carry, drawn in the figure's units at its hands, o.carryBehind to put it behind the arms), and room
+// for an arm held out (o.wide) or a tall hat. A soft shadow on the paper, except while the white figure is cut from it (WC_RAW).
 person=function(ctx,id,x,y,s,o){o=o||{};const P_=PEOPLE[id],po=blendPose(POSE[o.pose||"stand"],POSE[o.pose2],o.mix),E=o.E||EXPR[o.expr||"calm"],t=o.t||0,k=s*P_.build.h;
   const br=Math.sin(t*1.7+P_.seed)*1.4,front=a=>Math.abs(a[1])>Math.PI*0.55;
+  if(!WC_RAW&&o.shadow!==false){ctx.save();ctx.translate(x,y);ctx.scale(k,k);const g=ctx.createRadialGradient(0,-4,4,0,-4,110);g.addColorStop(0,rgba([90,80,96],0.22));g.addColorStop(1,rgba([90,80,96],0));
+    ctx.fillStyle=g;ell(ctx,0,-4,110,17);ctx.fill();ctx.restore();}
   outlined(ctx,cx=>{if(o.flip){cx.scale(-1,1);}
     if(!front(po.L))arm(cx,P_,-1,po.L,br,po);if(!front(po.R))arm(cx,P_,1,po.R,br,po);legs(cx,P_,po);
     limb(cx,[[0,-470+br],[0,-440+br]],30,30,darken(P_.skin,0.12),[-20,-470,20,-440]);torso(cx,P_,br,po.shift);
@@ -161,27 +165,11 @@ person=function(ctx,id,x,y,s,o){o=o||{};const P_=PEOPLE[id],po=blendPose(POSE[o.
     const hands=()=>[handAt(P_,-1,po.L,br),handAt(P_,1,po.R,br)];
     if(o.carry&&o.carryBehind){if(o.flip)cx.scale(-1,1);o.carry(cx,P_,o.flip?hands().map(h=>[-h[0],h[1]]):hands());if(o.flip)cx.scale(-1,1);}
     if(front(po.L))arm(cx,P_,-1,po.L,br,po);if(front(po.R))arm(cx,P_,1,po.R,br,po);
-    if(o.carry&&!o.carryBehind){if(o.flip)cx.scale(-1,1);o.carry(cx,P_,o.flip?hands().map(h=>[-h[0],h[1]]):hands());if(o.flip)cx.scale(-1,1);}},x,y,k,P_.edge,[o.wide?-400:-250,o.hat?-720:-650,o.wide?400:250,10],o.glow);};
+    if(o.carry&&!o.carryBehind){if(o.flip)cx.scale(-1,1);o.carry(cx,P_,o.flip?hands().map(h=>[-h[0],h[1]]):hands());if(o.flip)cx.scale(-1,1);}},
+    x,y,k,P_.edge,[o.wide?-400:-250,P_.hat?-720:-650,o.wide?400:250,10],o.glow);};
 // expressions in between: a little relief, a little worry
 EXPR.worried={bi:-5,bo:3,arch:-0.5,knit:2.5,eye:0.95,smile:-0.6,open:0,mw:13};
 EXPR.smile={bi:-1,bo:-2,arch:-3.5,eye:0.9,smile:0.8,open:0,mw:22};
-
-// ---- a figure on its base, standing at a point of the town (or of a room, inside mxSet) ----
-// o: pose, pose2, mix, expr, t, carry, y (the floor), hop (lifts it a little while it moves), a (opacity), flip, nod, wide (room for an arm held out)
-function tFig(ctx,C,id,x,z,o){o=o||{};const y=(o.y||0),B=pj(C,v3(x,y,z));if(B.z<NEAR+0.2)return B;const P_=PEOPLE[id],s=B.s*1.72/560;if(B.x<-600*s||B.x>W+600*s||B.y<-80||B.y-720*s>H+60)return B;
-  const rim=P_.edge===BIZ?RIM.biz:P_.edge===TECH?RIM.tech:RIM.past,rx=0.36*B.s,ry=rx*clamp(Math.abs(C.fwd.y)*0.9+0.1,0.22,1),th=0.05*B.s,hop=(o.hop||0)*B.s;
-  ctx.save();if(o.a!=null)ctx.globalAlpha*=o.a;
-  ctx.fillStyle="rgba(40,50,70,"+(0.25*(1-clamp(hop/(0.2*B.s),0,0.6)))+")";ctx.beginPath();ctx.ellipse(B.x+rx*0.12,B.y+th*0.8,rx*1.12,ry*1.2,0,0,TAU);ctx.fill();
-  ctx.translate(0,-hop);ctx.fillStyle=rgba(mix(rim,[0,0,0],0.25),1);ctx.fillRect(B.x-rx,B.y-th,rx*2,th);ctx.beginPath();ctx.ellipse(B.x,B.y,rx,ry,0,0,Math.PI);ctx.fill();
-  const g=ctx.createLinearGradient(B.x-rx,0,B.x+rx,0);g.addColorStop(0,rgba(mix(rim,[255,255,255],0.35),1));g.addColorStop(1,rgba(rim,1));ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(B.x,B.y-th,rx,ry,0,0,TAU);ctx.fill();
-  if(o.ring){ctx.strokeStyle=rgba(o.ring,0.9);ctx.lineWidth=Math.max(2,0.03*B.s);ctx.beginPath();ctx.ellipse(B.x,B.y-th,rx*1.25,ry*1.25,0,0,TAU);ctx.stroke();}
-  person(ctx,id,B.x,B.y-th,s,{pose:o.pose,expr:o.expr,E:o.E,t:o.t||0,pose2:o.pose2,mix:o.mix,glow:0,carry:o.carry,carryBehind:o.carryBehind,flip:o.flip,nod:o.nod,hat:!!P_.hat,wide:o.wide});ctx.restore();
-  B.top=B.y-th-hop-1.72*P_.build.h*B.s;return B;}
-// a figure moving along a path of [x,z] points at v metres a second from t0: where it is, and a small hop while it moves
-function along(pts,t,t0,v){v=v||1.1;let L=0;const seg_=[];for(let i=1;i<pts.length;i++){const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);seg_.push(d);L+=d;}
-  const T_=L/v,u=clamp((t-t0)/T_,0,1),e=u<=0?0:u>=1?1:(u<0.5?2*u*u:1-2*(1-u)*(1-u)),dd=e*L;let acc=0,i=0;while(i<seg_.length-1&&acc+seg_[i]<dd){acc+=seg_[i];i++;}
-  const f=seg_[i]?(dd-acc)/seg_[i]:0,x=lerp(pts[i][0],pts[i+1][0],f),z=lerp(pts[i][1],pts[i+1][1],f),moving=u>0&&u<1;
-  return{x,z,moving,done:u>=1,hop:moving?0.07*Math.abs(Math.sin(dd*Math.PI/0.42)):0,end:t0+T_};}
 
 // ---- things people hold, drawn in the figure's units ----
 function fingers(cx,P_,pts){for(const [hx,hy] of pts){cx.save();cx.translate(hx,hy);ell(cx,0,0,12,15);litFill(cx,P_.skin,-12,-15,12,15);cx.restore();}}
@@ -195,17 +183,17 @@ function heldBinder(num,col){return(cx,P_,hands)=>{const [l,r]=hands,mx=(l[0]+r[
   fingers(cx,P_,[[mx-w/2+4,my+30],[mx+w/2-2,my+24]]);};}
 // a notebook, open, with a pen
 function heldNotebook(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my+6);cx.rotate(-0.08);
-  cx.fillStyle=rgba(PAL.teal,1);rr(cx,-86,-58,172,116,8);cx.fill();cx.fillStyle="#fffdf6";rr(cx,-80,-52,78,104,4);cx.fill();rr(cx,2,-52,78,104,4);cx.fill();
+  cx.fillStyle=rgba(GV_HOLD.teal,1);rr(cx,-86,-58,172,116,8);cx.fill();cx.fillStyle="#fffdf6";rr(cx,-80,-52,78,104,4);cx.fill();rr(cx,2,-52,78,104,4);cx.fill();
   cx.strokeStyle="rgba(120,130,160,0.5)";cx.lineWidth=2;for(let i=0;i<5;i++){cx.beginPath();cx.moveTo(-72,-36+i*18);cx.lineTo(-10,-36+i*18);cx.moveTo(10,-36+i*18);cx.lineTo(72-(i===4?30:0),-36+i*18);cx.stroke();}cx.restore();
   fingers(cx,P_,[[mx-84,my+12],[mx+84,my+8]]);}
 // a clipboard held up, facing out: fn draws on its paper (in the figure's units, 200 x 250)
 function heldBoard(fn){return(cx,P_,hands)=>{const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-30);
-  cx.fillStyle=rgba(PAL.walnut,1);rr(cx,-110,-140,220,280,12);cx.fill();cx.fillStyle="#fffdf6";rr(cx,-98,-120,196,250,6);cx.fill();cx.fillStyle="rgba(170,176,190,1)";rr(cx,-34,-152,68,26,6);cx.fill();
+  cx.fillStyle=rgba(GV_HOLD.walnut,1);rr(cx,-110,-140,220,280,12);cx.fill();cx.fillStyle="#fffdf6";rr(cx,-98,-120,196,250,6);cx.fill();cx.fillStyle="rgba(170,176,190,1)";rr(cx,-34,-152,68,26,6);cx.fill();
   if(fn)fn(cx);cx.restore();fingers(cx,P_,[[mx-108,my+10],[mx+108,my+6]]);};}
 // a box of gold pins
 function heldPins(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my+10);
-  cx.fillStyle=rgba(PAL.navy,1);rr(cx,-70,-24,140,52,8);cx.fill();cx.fillStyle=rgba(mix(PAL.navy,[255,255,255],0.2),1);rr(cx,-70,-24,140,14,6);cx.fill();
-  for(let i=0;i<9;i++){const x=-56+i*14,y=-30-6*hash(i,4);cx.strokeStyle="rgba(120,110,90,1)";cx.lineWidth=2;cx.beginPath();cx.moveTo(x,y);cx.lineTo(x,y+18);cx.stroke();cx.fillStyle=rgba(PAL.gold,1);cx.beginPath();cx.arc(x,y,6,0,TAU);cx.fill();cx.fillStyle="rgba(255,250,220,0.8)";cx.beginPath();cx.arc(x-2,y-2,2,0,TAU);cx.fill();}
+  cx.fillStyle=rgba(GV_HOLD.navy,1);rr(cx,-70,-24,140,52,8);cx.fill();cx.fillStyle=rgba(mix(GV_HOLD.navy,[255,255,255],0.2),1);rr(cx,-70,-24,140,14,6);cx.fill();
+  for(let i=0;i<9;i++){const x=-56+i*14,y=-30-6*hash(i,4);cx.strokeStyle="rgba(120,110,90,1)";cx.lineWidth=2;cx.beginPath();cx.moveTo(x,y);cx.lineTo(x,y+18);cx.stroke();cx.fillStyle=rgba(GV_HOLD.gold,1);cx.beginPath();cx.arc(x,y,6,0,TAU);cx.fill();cx.fillStyle="rgba(255,250,220,0.8)";cx.beginPath();cx.arc(x-2,y-2,2,0,TAU);cx.fill();}
   cx.restore();fingers(cx,P_,[[mx-70,my+16],[mx+70,my+14]]);}
 // an open charter with a seal, a jug of ale
 function heldScroll(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-6);

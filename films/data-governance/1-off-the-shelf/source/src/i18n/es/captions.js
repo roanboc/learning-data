@@ -95,8 +95,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "El equipo de datos trabaja en un ciclo de diez pasos, de una pregunta a una nueva versión.",
 "Governance doesn't need another meeting. It needs a pin at the right steps:":
 "La gobernanza no necesita otra reunión. Necesita una tachuela en los pasos correctos:",
-"a term when the question is asked, a classification at the source, an owner and a contract, a rule as a test, an approval at review, and a version when it changes.":
-"un término al hacer la pregunta, una clasificación en la fuente, un dueño y un contrato, una regla como prueba, una aprobación en la revisión y una versión cuando cambia.",
+"a term when the question is asked, a classification at the source, an owner and a contract,":
+"un término al hacer la pregunta, una clasificación en la fuente, un dueño y un contrato,",
+"a rule as a test, an approval at review, and a version when it changes.":
+"una regla como prueba, una aprobación en la revisión y una versión cuando cambia.",
 "Over nine more films, Yusuf takes the binder off the shelf, one kind of policy at a time.":
 "En nueve películas más, Yusuf baja la carpeta del estante, un tipo de política a la vez.",
 "Then six more show how to build them, with dbt and Databricks.":

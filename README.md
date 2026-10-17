@@ -82,7 +82,7 @@ films/                           one folder per film: script or story, captions/
   master-and-reference-data/     the series The same one, everywhere, on master and reference data: its README, series.json, proposal.md, look/ (the
                                  reference frames of its watercolour), shared/ (its watercolour, people and tools) and one folder per film, made the same way
   data-governance/               the series Governance you can use, on data governance, the companion of the one above: its README, series.json,
-                                 proposal.md, shared/ (its toy town, people and tools) and one folder per film, made the same way
+                                 proposal.md, shared/ (its rooms in watercolour, people and tools) and one folder per film, made the same way
 site-tools/                      build_pages.py turns the Markdown pages into site pages; build_series.py makes the pages of the series (From words to data, In the weeds of data crafting,
                                  The map before the data, The same one, everywhere, Governance you can use), the Topics page, and the topics' tiles on the home page and at the end of the intro's scenarios;
                                  check_site.py and smoke.py check the site

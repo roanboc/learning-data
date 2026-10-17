@@ -56,7 +56,8 @@ const NARR={
  {"id":"places","gap":0.8,"text":"And the work already has places for them."},
  {"id":"loop","gap":0.8,"text":"The data team builds in a loop of ten steps, from a question to a new version."},
  {"id":"pin","gap":0.8,"text":"Governance doesn't need another meeting. It needs a pin at the right steps:"},
- {"id":"pins","gap":0.8,"text":"a term when the question is asked, a classification at the source, an owner and a contract, a rule as a test, an approval at review, and a version when it changes."}]},
+ {"id":"pins","text":"a term when the question is asked, a classification at the source, an owner and a contract,"},
+ {"id":"pins2","gap":0.8,"text":"a rule as a test, an approval at review, and a version when it changes."}]},
 "series":{"name":"The series","lead":1.0,"tail":1.0,"vo":[
  {"id":"next","gap":0.8,"text":"Over nine more films, Yusuf takes the binder off the shelf, one kind of policy at a time."},
  {"id":"tools","gap":0.8,"text":"Then six more show how to build them, with dbt and Databricks."},

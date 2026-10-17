@@ -1,0 +1,127 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:08.208
+Antes de 1874, cada par de países que se enviaban cartas necesitaba su propio tratado postal.
+
+00:00:09.808 --> 00:00:11.993
+El precio de una carta dependía de su ruta.
+
+00:00:13.293 --> 00:00:17.179
+Ese año, en Berna, veintiún países firmaron en cambio un solo tratado.
+
+00:00:17.879 --> 00:00:23.969
+Formaron un solo territorio postal, con una sola tarifa por carta, y cada país conservó el franqueo que cobraba.
+
+00:00:25.569 --> 00:00:31.009
+Nadie construyó una oficina de correos para el mundo. Cada país mantuvo la suya, y compartieron las reglas.
+
+00:00:38.109 --> 00:00:42.694
+Hoy, en la universidad, Linh Nguyen quiere postular a un doctorado.
+
+00:00:43.894 --> 00:00:49.202
+La última vez que postuló, recibió un segundo número de estudiante, y la oficina de Mei tuvo que vincularlos.
+
+00:00:50.502 --> 00:00:54.920
+La solicitud todavía crea primero una persona, y nadie revisa hasta después.
+
+00:00:56.520 --> 00:01:03.622
+Y cuatro sistemas necesitan saber quién es: el sistema de estudiantes, RR. HH., la oficina de investigación y la oficina de egresados.
+
+00:01:06.122 --> 00:01:10.324
+Noor, la arquitecta de datos, presenta cuatro formas de darles una sola persona.
+
+00:01:11.524 --> 00:01:17.756
+Un registro solo enlaza. Sabe qué registros son una misma persona, y pide el resto a cada sistema.
+
+00:01:18.956 --> 00:01:24.553
+Una copia para análisis reúne a todos en el lakehouse, así los informes cuentan a cada persona una vez.
+
+00:01:25.753 --> 00:01:31.598
+Un maestro que los sistemas vuelven a leer guarda a la persona en un solo lugar, y cada sistema la lee de ahí.
+
+00:01:32.798 --> 00:01:36.670
+O un solo lugar crea a cada persona, y los sistemas solo leen.
+
+00:01:39.170 --> 00:01:44.118
+La universidad ya tiene las dos primeras: los vínculos de Mei y la copia en el lakehouse.
+
+00:01:45.218 --> 00:01:48.684
+Ambas encuentran a Linh a posteriori. Ninguna evita un tercer número.
+
+00:01:50.084 --> 00:01:53.926
+Las dos últimas sí, pero cada sistema que vuelve a leer tiene que cambiar.
+
+00:01:56.426 --> 00:01:58.748
+¿Y cuál es la forma más liviana que funciona?
+
+00:02:00.048 --> 00:02:03.820
+Las personas nuevas entran por dos puertas: la solicitud y RR. HH.
+
+00:02:04.920 --> 00:02:11.865
+Así que esas dos vuelven a leer a la persona. Investigación y egresados solo agregan roles: les bastan los vínculos.
+
+00:02:13.165 --> 00:02:18.681
+Como en Berna: ninguna oficina de correos para el mundo. Cada sistema mantiene lo suyo, y comparten a la persona.
+
+00:02:23.581 --> 00:02:28.618
+Otros necesitan una forma más pesada. Cada sistema de productos de un banco lee su hub de clientes.
+
+00:02:29.918 --> 00:02:35.700
+Muchos países tienen un solo registro de población, y los organismos lo consultan en vez de llevar el suyo.
+
+00:02:38.200 --> 00:02:43.469
+Y un cambio en la puerta: antes de crear una persona, la solicitud busca si ya existe.
+
+00:02:44.869 --> 00:02:48.936
+Compara el nombre, la fecha de nacimiento, el correo y cualquier número anterior.
+
+00:02:50.436 --> 00:02:54.824
+Una coincidencia clara agrega un rol. Una probable espera a que decida la oficina de Mei.
+
+00:02:56.524 --> 00:02:59.465
+Solo si nadie coincide se crea una persona nueva.
+
+00:03:01.965 --> 00:03:08.174
+Noor y Mei anotan quién puede crear una persona: solo la solicitud y RR. HH., después de buscar.
+
+00:03:09.474 --> 00:03:14.441
+Las oficinas de investigación y de egresados nunca lo hacen. Agregan roles a personas que ya están.
+
+00:03:16.941 --> 00:03:19.610
+En octubre, Linh postula a su doctorado.
+
+00:03:20.610 --> 00:03:25.800
+La búsqueda la encuentra: la misma fecha de nacimiento, el mismo correo y el número de estudiante que dio.
+
+00:03:27.100 --> 00:03:34.606
+Así, la solicitud agrega un rol, postulante, a la persona que ya es. Ningún número nuevo, y nada que fusionar después.
+
+00:03:37.106 --> 00:03:41.776
+Esa misma semana, postula otra Linh Nguyen. Es un nombre vietnamita común.
+
+00:03:43.076 --> 00:03:47.983
+Pero nació otro año, escribe desde otro correo y nunca ha estudiado aquí.
+
+00:03:49.483 --> 00:03:55.398
+Solo coincide el nombre. Así que es una persona nueva, con su propio número y nada de la historia de Linh.
+
+00:03:57.898 --> 00:04:03.360
+Detrás de la búsqueda está la persona, publicada como producto de datos, a cargo de la oficina de Mei.
+
+00:04:04.760 --> 00:04:11.604
+Un contrato fija su forma, y una nueva versión marca cualquier cambio, para que nada de lo que la lee se rompa por sorpresa.
+
+00:04:13.204 --> 00:04:17.427
+dbt la construye y la prueba, y Databricks gobierna quién puede leerla.
+
+00:04:18.727 --> 00:04:22.702
+Una tabla sincronizada se la entrega a la solicitud mientras quien postula espera.
+
+00:04:25.202 --> 00:04:29.311
+En Berna, cada país mantuvo su oficina de correos, y compartieron las reglas.
+
+00:04:30.611 --> 00:04:34.252
+Aquí, cada sistema mantiene sus registros, y comparten una sola persona.
+
+00:04:35.852 --> 00:04:38.476
+Elige la forma más liviana que resuelva el problema.

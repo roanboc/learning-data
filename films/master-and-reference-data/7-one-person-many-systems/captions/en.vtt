@@ -1,0 +1,127 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:08.208
+Before 1874, every pair of countries that exchanged letters needed a postal treaty of its own.
+
+00:00:09.808 --> 00:00:11.993
+A letter's price depended on its route.
+
+00:00:13.293 --> 00:00:17.179
+That year, in Bern, twenty-one countries signed one treaty instead.
+
+00:00:17.879 --> 00:00:23.969
+They became one postal territory, with one rate for a letter, and each kept the postage it collected.
+
+00:00:25.569 --> 00:00:31.009
+Nobody built a post office for the world. Each country kept its own, and they shared the rules.
+
+00:00:38.109 --> 00:00:42.694
+Today, at the university, Linh Nguyen wants to apply for a PhD.
+
+00:00:43.894 --> 00:00:49.202
+Last time she applied, she got a second student number, and Mei's office had to link the two.
+
+00:00:50.502 --> 00:00:54.920
+The application still creates a person first, and nobody looks until later.
+
+00:00:56.520 --> 00:01:03.622
+And four systems need to know who she is: the student system, HR, the research office and the alumni office.
+
+00:01:06.122 --> 00:01:10.324
+Noor, the data architect, lays out four ways to give them one person.
+
+00:01:11.524 --> 00:01:17.756
+A registry only links. It knows which records are one person, and asks each system for the rest.
+
+00:01:18.956 --> 00:01:24.553
+A copy for analysis gathers everyone in the lakehouse, so reports count each person once.
+
+00:01:25.753 --> 00:01:31.598
+A master that systems read back keeps the person in one place, and each system reads her from it.
+
+00:01:32.798 --> 00:01:36.670
+Or one place creates every person, and the systems only read.
+
+00:01:39.170 --> 00:01:44.118
+The university already has the first two: Mei's links, and the copy in the lakehouse.
+
+00:01:45.218 --> 00:01:48.684
+Both find Linh after the fact. Neither stops a third number.
+
+00:01:50.084 --> 00:01:53.926
+The last two do, but every system that reads back has to change.
+
+00:01:56.426 --> 00:01:58.748
+So which is the lightest way that still works?
+
+00:02:00.048 --> 00:02:03.820
+New people come in at two doors: the application and HR.
+
+00:02:04.920 --> 00:02:11.865
+So those two read the person back. The research and alumni offices only add roles, so links are enough for them.
+
+00:02:13.165 --> 00:02:18.681
+Like Bern: no post office for the world. Each system keeps its own, and they share the person.
+
+00:02:23.581 --> 00:02:28.618
+Others need a heavier way. A bank's customer hub is read by every product system.
+
+00:02:29.918 --> 00:02:35.700
+Many countries keep one population register, and agencies ask it instead of keeping their own.
+
+00:02:38.200 --> 00:02:43.469
+And one change at the door: before the application creates a person, it searches for one.
+
+00:02:44.869 --> 00:02:48.936
+It compares the name, the birth date, the email, and any number from before.
+
+00:02:50.436 --> 00:02:54.824
+A clear match adds a role. A likely one waits for Mei's office to decide.
+
+00:02:56.524 --> 00:02:59.465
+Only when nobody matches is a new person made.
+
+00:03:01.965 --> 00:03:08.174
+Noor and Mei write down who may create a person: only the application and HR, after a search.
+
+00:03:09.474 --> 00:03:14.441
+The research and alumni offices never do. They add roles to people already there.
+
+00:03:16.941 --> 00:03:19.610
+In October, Linh applies for her PhD.
+
+00:03:20.610 --> 00:03:25.800
+The search finds her: the same birth date, the same email, and the student number she gave.
+
+00:03:27.100 --> 00:03:34.606
+So the application adds a role, applicant, to the person she already is. No new number, and nothing to merge later.
+
+00:03:37.106 --> 00:03:41.776
+The same week, another Linh Nguyen applies. It's a common Vietnamese name.
+
+00:03:43.076 --> 00:03:47.983
+But she was born in another year, writes from another email, and has never studied here.
+
+00:03:49.483 --> 00:03:55.398
+Only the name agrees. So she becomes a new person, with her own number, and none of Linh's history.
+
+00:03:57.898 --> 00:04:03.360
+Behind the search is the person, published as a data product, and owned by Mei's office.
+
+00:04:04.760 --> 00:04:11.604
+A contract fixes its shape, and a new version marks any change to it, so nothing that reads it breaks by surprise.
+
+00:04:13.204 --> 00:04:17.427
+dbt builds and tests it, and Databricks governs who may read it.
+
+00:04:18.727 --> 00:04:22.702
+A synced table serves it to the application, while the applicant waits.
+
+00:04:25.202 --> 00:04:29.311
+In Bern, each country kept its post office, and they shared the rules.
+
+00:04:30.611 --> 00:04:34.252
+Here, each system keeps its records, and they share one person.
+
+00:04:35.852 --> 00:04:38.476
+Choose the lightest way that solves the problem.

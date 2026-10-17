@@ -214,6 +214,7 @@ Built on 17 October 2026, from this script, in watercolour. What changed on the 
 - **After the author's second review (17 October 2026).** A return to study instead of the move, since a contract posted to an old flat isn't how universities work now ("physical addresses for contracts are not really used anymore"); the author chose it from five drafted scenarios. Chapters 2, 3 and 12 are new: *Back to study*, *Five records, five Linhs* and *Found first*. The film is 5:55.
 - **Captions.** Spanish captions in Latin American Spanish, about as long as each English line.
 - **Sound.** A new palette (in `source/tools/score.py`): chords that bloom note by note, a clarinet for the series' mark, a plucked note for each role, a bowed D and A for the person, from D minor to D major. The music sits about 21 dB under the voice, as in the other series' films, and the only pulse, under the transcript the application asks for and the alumni office's invitation, sits about 8 dB under the music.
+- **Paper.** A wash that starts left of the frame is now blotched right to its edge: the parish, the campus, the plains and the office had a pale strip down their left side until 17 October 2026, when the series' wash was fixed.
 
 ## Next
 

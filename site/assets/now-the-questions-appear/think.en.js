@@ -7,7 +7,7 @@ think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",ski
   qs:{
   "up":{q:"The next request is a dashboard of every outage, refreshed every minute, for the screen in the lobby. Why does it reach nothing?",
     opts:[{t:"Refreshing it every minute would cost too much."},{t:"No one will decide anything with it, so it reaches no decision, and no goal.",ok:true},{t:"The lobby isn't on the map."}],
-    why:"A request matters when someone will decide something with its answer, in time. Traced up, the planners' question reaches a decision, a capability and a goal; the lobby's dashboard finds no decision at all. Traced up, which of your team's reports would reach a decision?"},
+    why:"A request matters when someone will decide something with its answer, in time. Traced up, the planners' question reaches a decision, a capability and a goal. The lobby's dashboard is as live as the skipper's call, but no one decides anything with it, so it finds no decision at all. Traced up, which of your team's reports would reach a decision?"},
   "count":{q:"Two reports count the days to connect new solar: thirty-four, and twenty-one. Which one is wrong?",
     opts:[{t:"The connections report: thirty-four days is too slow to be true."},{t:"Neither: each starts and stops the clock at a different moment, and the measure needs one definition, written down.",ok:true},{t:"The network report: twenty-one is too good to be true."}],
     why:"Both are right about what they count, and neither is the measure. Grace writes it down once: from a complete application to the new meter, in working days, Monday to Friday, not public holidays. Then everyone who counts it gets the same number. Which number does your organisation count two ways?"},

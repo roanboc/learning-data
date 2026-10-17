@@ -45,6 +45,7 @@
 | What it must be able to do | 201 | 0% | 0 | 30 | Drawn to the rule |
 | How value reaches people | 207 | 0% | 0 | 30 | Drawn to the rule |
 | One person, many roles | 314 | 0% | 0 | 30 | Drawn to the rule |
+| Off the shelf | 240 | 0% | 0 | 32 | Drawn to the rule |
 
 ## What's left
 

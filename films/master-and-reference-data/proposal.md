@@ -1,6 +1,6 @@
 # Master and reference data: one person, many roles
 
-*Proposal for a series on master and reference data, v0.4. The folder is named after the topic; the series title is a working one, The same one, everywhere. Status: film 1 built; films 2 to 9 approved on 17 October 2026, each made in its own thread. It's the companion of the data governance series, proposed in [`../data-governance/proposal.md`](../data-governance/proposal.md), and shares its decisions.*
+*Proposal for a series on master and reference data, v0.4. The folder is named after the topic; the series title is a working one, The same one, everywhere. Status: the opening film built; films 2 to 9 approved on 17 October 2026, each made in its own thread. It's the companion of the data governance series, proposed in [`../data-governance/proposal.md`](../data-governance/proposal.md), and shares its decisions.*
 
 ## Decided
 
@@ -26,7 +26,7 @@
 | 17 October 2026 | A university doesn't call people customers (the author): Linh's roles are student, casual tutor, researcher and alumna (and once applicant, one day perhaps donor). The role colours: student teal, applicant amber, researcher coral, tutor violet, alumna green, donor magenta. A cross is red ink, and the series' parts wear no role's colour. |
 | 17 October 2026 | The opening landscape has no bridge: the church stands on a wider hill, with the lake on both sides (the author found the bridge oddly placed). |
 | 17 October 2026 | *One person, many roles* shows the rest of the series in four parts, in two lines: who someone is (*Who is it?*, *Which value wins*), roles and lists (*Roles come and go*, *Lists everyone uses*), sharing it safely (*For this purpose only*, *One person, many systems*), and keeping it right (*A hub at work*, *Kept, not cleaned*). Each part is named, and its two films set beside it. |
-| 17 October 2026 | The plan for films 2 to 9 is approved (the author: "Ok, implement in threads"), from the [plan](https://claude.ai/code/artifact/b5341da1-808c-4b08-8441-42ab596feb1c) below in *The films*: each film follows Linh's two student numbers and a case universities write guidance about. With it, five choices: film 6 opens in India (the Charaka oath) and film 9 in China (Dujiangyan), instead of Greece and the Netherlands, so the openings span more of the world; Linh's legal name in *Which value wins* is NGUYỄN Thị Linh, family name first, with its accents, beside her preferred "Linh"; *One person, many systems* shows Linh applying for a PhD, found by the search, and a namesake kept apart; the working title stays; and the eight films are made now, each in its own thread, alongside film 1's review. The shared family email stays out of the films. |
+| 17 October 2026 | The plan for films 2 to 9 is approved (the author: "Ok, implement in threads"), from the [plan](https://claude.ai/code/artifact/b5341da1-808c-4b08-8441-42ab596feb1c) below in *The films*: each film follows Linh's two student numbers and a case universities write guidance about. With it, five choices: film 6 opens in India (the Charaka oath) and film 9 in China (Dujiangyan), instead of Greece and the Netherlands, so the openings span more of the world; Linh's legal name in *Which value wins* is NGUYỄN Thị Linh, family name first, with its accents, beside her preferred "Linh"; *One person, many systems* shows Linh applying for a PhD, found by the search, and a namesake kept apart; the working title stays; and the eight films are made now, each in its own thread, alongside the review of *One person, many roles*. The shared family email stays out of the films. |
 | 17 October 2026 | The interactive learning and evaluation for the series (labs and scenarios) are made in their own thread, beside the films (the author). |
 
 ## The brief
@@ -91,13 +91,13 @@ Which of DAMA's knowledge areas each series and film covers is mapped once, in [
 
 ## The world, and the people
 
-**The same university, platform, project and people.** Mei Tanaka's office becomes the steward of the person: who someone is, and whether two records are one. Each role stays with the domain that owns it: the registrar's office for students, HR for staff, the research office for researchers, Advancement (the alumni office) for alumni and donors. Noor owns the model, Jun builds it, Yusuf (from the governance series) names who decides. **Linh Nguyen**, already in the project's data, becomes the series' person. Her brother, Minh, appears only in film 1, as the home address they share; the family email they share in the project's data stays out of the films.
+**The same university, platform, project and people.** Mei Tanaka's office becomes the steward of the person: who someone is, and whether two records are one. Each role stays with the domain that owns it: the registrar's office for students, HR for staff, the research office for researchers, Advancement (the alumni office) for alumni and donors. Noor owns the model, Jun builds it, Yusuf (from the governance series) names who decides. **Linh Nguyen**, already in the project's data, becomes the series' person. Her brother, Minh, appears only in *One person, many roles*, as the home address they share; the family email they share in the project's data stays out of the films.
 
 **The look: watercolour.** Lighter and more colourful than the other series: daylight landscapes in soft washes on warm paper, drawn in pencil, instead of their dark glass. Each role has its own saturated colour, kept in every film: student teal, applicant amber, researcher coral, tutor violet, alumna green, donor magenta. Each system's cards wear their role's colour as a brushstroke behind the title; each industry in the *Elsewhere* beats has its own (health red, banking blue, energy yellow, retail orange, public sector green-blue). The role colours are the strongest washes on screen, and sky and land stay soft, so colour reads as meaning. The person, as the master record, is the white of the paper in a pencil line, and gathers the colours: each value carries a small coloured label of where it came from, and each role a band of wash with a start and an end, so a golden record reads at a glance as a mix of sources. Reference data is drawn as bright tabs and chips. Colour always means something (a role, a source, an industry), and every colour is checked for contrast and paired with a label, so nothing depends on colour alone.
 
 ## What every film follows
 
-The author's two reviews of film 1 (17 October 2026) set the rules the other eight follow.
+The author's two reviews of *One person, many roles* (17 October 2026) set the rules the other eight follow.
 
 - **A case universities really have.** Each story is something registries, HR and alumni offices deal with and write guidance about, and the film's rigour sheet says where, with the date it was checked.
 - **The roles a university uses.** Applicant, student, casual tutor, researcher, alumna, and later donor. Nobody is a customer.
@@ -106,7 +106,7 @@ The author's two reviews of film 1 (17 October 2026) set the rules the other eig
 - **Tools show, they don't lead.** dbt writes and tests the rules; Databricks runs, stores and governs them; one film shows a hub (LakeFusion).
 - **The same look, a new sound.** Watercolour and the role colours in every film; each film gets its own sound palette, with the series' mark.
 - **The author's review.** Every film is shared on a review page with a small copy that plays in the browser, its chapters and both captions. Spanish stays captions and pages only.
-- **Who changes what.** Each film's thread changes its own film's folder, and adds its own entry where every film has one (`series.json`'s list of films, the release workflow, the legibility report). The shared look and people (`shared/`) and this proposal change only in film 1's thread, so threads don't overwrite each other.
+- **Who changes what.** Each film's thread changes its own film's folder, and adds its own entry where every film has one (`series.json`'s list of films, the release workflow, the legibility report). The shared look and people (`shared/`) and this proposal change only in the thread of *One person, many roles*, so threads don't overwrite each other.
 
 ## The series at a glance
 

@@ -27,89 +27,113 @@ At the university, the Head of School asks Genie: which learners are one microcr
 Genie finds the tables. It finds a column called is_micro, and another called stack_ok.
 
 8
-00:01:05,904 --> 00:01:12,165
-But the stacking rules live in a policy document that no tool can read. Genie guesses, and it's wrong.
+00:01:05,904 --> 00:01:13,838
+It reads the stacking rules too: in a policy document, and on an old web page. They don't agree, so Genie guesses, and it's wrong.
 
 9
-00:01:13,665 --> 00:01:19,836
-An AI assistant answers from what it can read. Meaning kept only in documents is out of its reach.
+00:01:15,638 --> 00:01:24,798
+An assistant answers from what it reads. Meaning outside a managed glossary, with no owner and no version, can contradict itself, or be wrong.
 
 10
-00:01:22,836 --> 00:01:29,972
+00:01:28,098 --> 00:01:35,234
 There are four common ways to write meaning down, and they stack. A glossary: words and their definitions, for people.
 
 11
-00:01:30,972 --> 00:01:34,899
+00:01:36,234 --> 00:01:40,161
 A taxonomy: kinds of things in a hierarchy, like Linnaeus's.
 
 12
-00:01:35,599 --> 00:01:42,230
+00:01:40,861 --> 00:01:47,492
 An ontology: concepts, the relationships between them, and rules that a machine can check and reason with.
 
 13
-00:01:43,330 --> 00:01:47,569
+00:01:48,592 --> 00:01:52,831
 And a semantic layer: how each number is calculated, defined once.
 
 14
-00:01:48,269 --> 00:01:51,471
+00:01:53,531 --> 00:01:56,733
 They aren't rivals. Each one answers a different question.
 
 15
-00:01:57,171 --> 00:02:09,394
+00:02:02,433 --> 00:02:14,656
 In the ontology, the rules are written as statements. A microcredential is a kind of credential. A graduate certificate accepts up to four approved microcredentials towards its credit.
 
 16
-00:02:10,894 --> 00:02:19,777
+00:02:16,156 --> 00:02:25,039
 Connect the university's data to these statements, and it becomes a knowledge graph: learners, credentials and courses, linked by what they mean.
 
 17
-00:02:21,277 --> 00:02:28,047
+00:02:26,539 --> 00:02:33,309
 It's Aristotle's recipe made formal: the kind of thing, and what sets it apart, in a form a machine can use.
 
 18
-00:02:31,147 --> 00:02:39,359
-In the semantic layer, credentials awarded this year is defined once: what's counted, what's left out, which date, and at what grain.
+00:02:36,409 --> 00:02:44,628
+Where does all this meaning live? In Noor's architecture map, each data domain lists its entities: learners, credentials, certificates.
 
 19
-00:02:40,659 --> 00:02:45,833
-Dashboards, spreadsheets and Genie all ask it, instead of each writing its own version.
+00:02:45,928 --> 00:02:52,123
+Each concept is written once: its definition, how it relates to the others, and the rules it follows.
 
 20
-00:02:46,933 --> 00:02:51,910
-Open formats for sharing these definitions between tools are starting to appear.
+00:02:53,723 --> 00:03:03,166
+The glossary shows the definitions, for people. The conceptual model shows how the concepts relate. The logical model adds how many, and the keys.
 
 21
-00:02:54,610 --> 00:03:02,725
-You don't have to start from a blank page. Finance, health, insurance and retail all publish shared models, and so does education.
+00:03:04,666 --> 00:03:14,598
+When a machine has to reason, the ontology is extracted from the same map, in OWL, the Web Ontology Language. Rules that check the data become tests.
 
 22
-00:03:03,925 --> 00:03:09,156
-Digital credentials have open standards too, with issuer, holder and evidence in them.
+00:03:16,198 --> 00:03:21,246
+They don't compete: they come from one map, so they agree. Change the map, and the views follow.
 
 23
-00:03:10,256 --> 00:03:18,449
-Even microcredential has official definitions: from Australia, from the European Union, and from UNESCO. They don't quite match.
+00:03:24,546 --> 00:03:32,758
+In the semantic layer, credentials awarded this year is defined once: what's counted, what's left out, which date, and at what grain.
 
 24
-00:03:19,949 --> 00:03:26,201
-So choose deliberately. Check, adopt, extend and record, as in A Sharper Sketch, at every layer.
+00:03:34,058 --> 00:03:39,232
+Dashboards, spreadsheets and Genie all ask it, instead of each writing its own version.
 
 25
-00:03:28,901 --> 00:03:35,748
-The Head of School asks again. This time, Genie asks back: approved for stacking, or all microcredentials?
+00:03:40,332 --> 00:03:45,309
+Open formats for sharing these definitions between tools are starting to appear.
 
 26
-00:03:36,848 --> 00:03:39,691
-Then it answers, and shows the definition it used.
+00:03:48,009 --> 00:03:56,124
+You don't have to start from a blank page. Finance, health, insurance and retail all publish shared models, and so does education.
 
 27
-00:03:40,991 --> 00:03:50,086
-Studies have found that grounding an assistant in explicit meaning makes its answers measurably more accurate. The difference is the meaning it can read.
+00:03:57,324 --> 00:04:02,555
+Digital credentials have open standards too, with issuer, holder and evidence in them.
 
 28
-00:03:52,786 --> 00:04:02,782
-The triangle from the start of the series returns: the word, in English and in Spanish; the idea, now written in the ontology; and the data it points to.
+00:04:03,655 --> 00:04:11,848
+Even microcredential has official definitions: from Australia, from the European Union, and from UNESCO. They don't quite match.
 
 29
-00:04:04,282 --> 00:04:07,593
+00:04:13,348 --> 00:04:19,600
+So choose deliberately. Check, adopt, extend and record, as in A Sharper Sketch, at every layer.
+
+30
+00:04:22,300 --> 00:04:31,506
+This time, the meaning comes from one source of truth, the glossary. In Databricks, its definitions now sit on each table's page, next to the data.
+
+31
+00:04:33,006 --> 00:04:40,927
+The Head of School asks again. Genie reads the definitions, and asks back: approved for stacking, or all microcredentials?
+
+32
+00:04:42,127 --> 00:04:44,970
+Then it answers, and shows the definition it used.
+
+33
+00:04:46,270 --> 00:04:55,865
+Studies have found that grounding an assistant in explicit meaning makes its answers measurably more accurate. The difference is meaning it can read, and trust.
+
+34
+00:04:58,565 --> 00:05:07,986
+The triangle from the start of the series returns: the word, now in the glossary; the idea, now written in the ontology; and the data it points to.
+
+35
+00:05:09,486 --> 00:05:12,797
 Next: keeping all of it true, while everything changes.

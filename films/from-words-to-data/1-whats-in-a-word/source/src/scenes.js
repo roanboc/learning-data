@@ -247,6 +247,11 @@ scene("paper",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);
   // owners, and a new version of the sketch
   const oT=c("owner");withA(ctx,fin(t,oT+0.4,0.5),()=>{pencilText(ctx,"owner: Registrar",468,664,{size:28,align:"center",color:"rgba(150,100,20,0.95)"});pencilText(ctx,"owner: Short courses",820,664,{size:28,align:"center",color:"rgba(170,60,90,0.95)"});pencilText(ctx,"agreed 28 Sep",1060,800,{size:28,color:"rgba(80,80,80,0.95)"});});
   withA(ctx,fin(t,oT+2.4,0.5),()=>stamp(ctx,sx+1010,sy+40,"sketch v3 · draft",[150,90,30],1,t<oT+3.2?t-oT:0));
+  // what each part of the sheet is: the words, each with an owner and a date, are a glossary; the boxes are the sketch, a conceptual
+  // model (Meaning machines can read tells them apart from an ontology). A dashed line from each name to its part of the sheet
+  const part=(y,s,col,x1,y1,a)=>withA(ctx,a,()=>{ctx.save();ctx.strokeStyle=rgba(col,0.75);ctx.lineWidth=2;ctx.setLineDash([6,6]);ctx.beginPath();ctx.moveTo(1376,y);ctx.lineTo(x1,y1);ctx.stroke();ctx.restore();
+    ctx.fillStyle=rgba(col,0.95);ctx.beginPath();ctx.arc(x1,y1,5,0,TAU);ctx.fill();tag(ctx,1380,y,s,col,{size:28});});
+  part(300,"the words: a glossary",TRUST,1296,196,fin(t,oT+0.6,0.5)*(1-ans));part(450,"the sketch: a conceptual model",SK,1222,526,fin(t,oT+2.3,0.5)*(1-ans));
   // people around the board
   person(ctx,"mei",150,960,0.55,{t,pose:t>c("def")&&t<c("kinds")?"explain":"stand",expr:t>c("answer")?"relieved":"calm"});
   person(ctx,"tom",1480,960,0.55,{t,pose:t>c("kinds")&&t<c("recipe")?"explain":"stand",expr:t>c("answer")?"relieved":"calm"});

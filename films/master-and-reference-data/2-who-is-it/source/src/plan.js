@@ -7,8 +7,9 @@
    the steward's decision cards; the AI helper's note; a balance of a false merge against a missed match; hospital wristbands; and
    the dbt and Databricks cards. Every name starts with m2_ (this film) or M2_. */
 
-// the logos (dbt, Databricks) load with everything else before the film starts: the series' prepAssets (post.js) doesn't load them
-const m2_prep0=prepAssets;prepAssets=async function(){await Promise.all([m2_prep0(),loadLogos()]);};
+// the logos (dbt, Databricks) and the Vietnamese letters (fonts.js) load with everything else before the film starts: the series'
+// prepAssets (post.js) doesn't load them
+const m2_prep0=prepAssets;prepAssets=async function(){await Promise.all([m2_prep0(),loadLogos(),m2_fontsVi()]);};
 
 /* ---------- the places ---------- */
 // Artigat: the near ground, where Martin's house stands and the road runs; the rise the village stands on; the far hills
@@ -283,7 +284,8 @@ function m2_src(ctx,x,y,label,col,o){o=o||{};const w=Math.round(tw(ctx,label,28,
   wc_T(ctx,label,x0+18,y+31,{w:700,size:28,col:WC_DARK});return w;}
 // the master record: the person, as white paper, an ID of her own, and the best value of each detail with its source
 const M2_MR={x:610,y:110,w:700,h:680};
-const M2_BEST=[["birth date","2001-03-14","student system",WC_ROLE.student],["work email","l.nguyen@uni.example","HR",WC_ROLE.tutor],["personal email","linh.nguyen@mail.example","Linh",WC_SIDE.none]];
+// (details only one place holds, so nothing here answers the next film's question, which value wins)
+const M2_BEST=[["preferred name","Linh","Linh",WC_SIDE.none],["student email","linh.nguyen@student.uni.example","student system",WC_ROLE.student],["work email","linh.nguyen@uni.example","HR",WC_ROLE.tutor]];
 function m2_master(ctx,t,o){const M=M2_MR;wc_panel(ctx,M.x,M.y,M.w,M.h,{kind:"sheet",seed:12});
   wc_white(ctx,"linh",M.x+110,M.y+330,0.34,m2_bands(o.bands||[1,1,1,1]),{a:o.fig==null?1:o.fig,shadow:false});
   wc_T(ctx,"master record",M.x+200,M.y+72,{w:800,size:36,col:WC_DARK});
@@ -399,8 +401,23 @@ function m2_lock(ctx,x,y,s){ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.str
 function m2_result(ctx,x,y,o){o=o||{};wc_panel(ctx,x,y,560,104,{kind:"card",seed:22,wash:WC_ROLE.student,washA:0.18});wc_T(ctx,"result",x+28,y+42,{w:600,size:28,col:WC_MUTED});
   wc_T(ctx,"Graduate Certificate, Data Analytics",x+28,y+84,{w:700,size:28,col:WC_DARK});}
 
+// the two Aishas, two students: like Linh, neither has a side, so their edge is neutral
+PEOPLE.aishar={name:"Aisha Rahman",role:"Student",side:"Person",does:"uses",edge:[236,232,226],seed:31,skin:[176,124,92],hair:{style:"long",c:[36,26,24]},earrings:[226,230,240],
+  top:{kind:"sweater",c:[196,120,96]},bottom:{c:[60,66,84]},shoe:[238,238,242],build:{sh:64,hip:58,h:0.92}};
+PEOPLE.aishak={name:"Aisha Karimi",role:"Student",side:"Person",does:"uses",edge:[236,232,226],seed:32,skin:[214,170,132],hair:{style:"curly",c:[52,36,30]},
+  top:{kind:"overshirt",c:[96,140,120],inner:[240,236,228]},bottom:{c:[48,52,66]},shoe:[60,52,50],build:{sh:66,hip:60,h:0.95}};
+// a record with a label on each row: the label in muted type, the value in mono from o.vx; o.ra fades rows in; returns its height
+function m2_fieldCard(ctx,x,y,w,role,title,id,rows,o){o=o||{};const col=WC_ROLE[role]||role,h=70+rows.length*46,tW=tw(ctx,title,30,800);
+  wc_panel(ctx,x,y,w,h,{kind:"card",role:col,sw:tW+36,seed:o.seed||title.length+5});wc_T(ctx,title,x+30,y+48,{w:800,size:30,col:WC_DARK});
+  if(id)wc_T(ctx,id,x+w-24,y+48,{w:500,size:28,f:"mono",align:"right"});
+  rows.forEach(([l,v],i)=>{const a=o.ra?o.ra[i]:1;if(a<=0.01)return;withA(ctx,a,()=>{wc_T(ctx,l,x+30,m2_rowY(y,i),{w:600,size:28,col:WC_MUTED});
+    wc_T(ctx,v,x+(o.vx||240),m2_rowY(y,i),{w:500,size:28,f:"mono",col:WC_INK});});});return h;}
+
 /* ---------- 10. elsewhere ---------- */
 // a patient's wristband: a band with a name, a number and a barcode
+// a lab's result, as a slip, for a patient
+function m2_labSlip(ctx,x,y){wc_panel(ctx,x,y,360,96,{kind:"card",seed:27,wash:WC_IND.health,washA:0.2});wc_T(ctx,"test result",x+26,y+40,{w:600,size:28,col:WC_MUTED});
+  wc_T(ctx,"Jo Lee",x+26,y+80,{w:800,size:30,col:WC_DARK});}
 function m2_band(ctx,x,y,name,mrn){wc_panel(ctx,x,y,560,92,{kind:"card",seed:mrn.length+name.length,wash:WC_IND.health,washA:0.14});
   ctx.save();ctx.fillStyle=rgba(WC_INK,0.6);for(let i=0;i<14;i++)ctx.fillRect(x+440+i*7,y+24,(i%3?2:4),44);ctx.restore();
   wc_T(ctx,name,x+28,y+40,{w:800,size:30,col:WC_DARK});wc_T(ctx,mrn,x+28,y+78,{w:500,size:28,f:"mono",col:WC_INK});}

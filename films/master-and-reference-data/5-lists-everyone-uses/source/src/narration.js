@@ -35,7 +35,7 @@ const NARR={
  {"id":"lineage","gap":0.8,"text":"On the platform, each list is one table, and its lineage shows the tables and reports that read it."}]},
 "change":{"name":"A change, with a date","lead":0.8,"tail":1.0,"vo":[
  {"id":"next","gap":0.8,"text":"Next year, HR will call the role Sessional Academic."},
- {"id":"pr","gap":0.8,"text":"The change is a pull request, and HR, as the list's owner, approves it."},
+ {"id":"pr","gap":0.8,"text":"The change is a pull request, and HR, who owns tutor, approves it."},
  {"id":"from","gap":0.8,"text":"The new name applies from the first of January."},
  {"id":"ended","gap":0.8,"text":"The old one isn't deleted. It's ended, because Linh's past contracts still use it."}]},
 "outside":{"name":"From outside","lead":0.8,"tail":1.0,"vo":[

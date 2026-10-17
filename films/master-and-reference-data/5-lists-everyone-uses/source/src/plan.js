@@ -274,8 +274,8 @@ function m5_pr(ctx,x,y,o){o=o||{};const w=M5_PRW,h=M5_PRH;wc_panel(ctx,x,y,w,h,{
     if(a==null)a=1;if(a<=0.01)return;const ly=y+160+i*56;withA(ctx,a,()=>{wc_panel(ctx,x+20,ly-24,w-40,48,{kind:"chip",role:c,seed:i+72});
       wc_T(ctx,m,x+44,ly+10,{f:"mono",w:500,size:30,col:WC_DARK});wc_T(ctx,s,x+84,ly+10,{w:600,size:28,col:WC_DARK});});});
   const ra=o.rev==null?1:o.rev;if(ra<=0.01)return;withA(ctx,ra,()=>{wc_T(ctx,"review",x+32,y+h-36,{w:600,size:28,col:WC_MUTED});
-    wc_T(ctx,"HR, the list's owner",x+134,y+h-36,{w:800,size:30,col:WC_DARK});const ok=o.ok||0;
-    if(ok>0.01){const bx=x+134+tw(ctx,"HR, the list's owner",30,800)+24;withA(ctx,fin(ok,0,0.4),()=>wc_badge(ctx,bx,y+h-46,"approved",{role:[150,206,150]}));
+    wc_T(ctx,"HR, who owns tutor",x+134,y+h-36,{w:800,size:30,col:WC_DARK});const ok=o.ok||0;
+    if(ok>0.01){const bx=x+134+tw(ctx,"HR, who owns tutor",30,800)+24;withA(ctx,fin(ok,0,0.4),()=>wc_badge(ctx,bx,y+h-46,"approved",{role:[150,206,150]}));
       wc_tick(ctx,bx+tw(ctx,"approved",28,700)+56,y+h-50,40,WC_ROLEINK.alumna,clamp(ok*1.4-0.4,0,1),5);}});}
 // the role's names across the years: a band in the tutor's violet, a year a step; the old name until the day the new one starts
 const M5_Y0=2023,M5_YX=660,M5_YW=200,M5_BANDY=700;

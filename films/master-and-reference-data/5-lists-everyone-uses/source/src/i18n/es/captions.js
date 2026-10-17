@@ -57,8 +57,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En la plataforma, cada lista es una tabla, y su linaje muestra las tablas y los reportes que la leen.",
 "Next year, HR will call the role Sessional Academic.":
 "El próximo año, RR. HH. llamará al rol «Sessional Academic».",
-"The change is a pull request, and HR, as the list's owner, approves it.":
-"El cambio es un pull request, y RR. HH., como responsable de la lista, lo aprueba.",
+"The change is a pull request, and HR, who owns tutor, approves it.":
+"El cambio es un pull request, y RR. HH., responsable de «tutor», lo aprueba.",
 "The new name applies from the first of January.":
 "El nuevo nombre rige desde el 1 de enero.",
 "The old one isn't deleted. It's ended, because Linh's past contracts still use it.":

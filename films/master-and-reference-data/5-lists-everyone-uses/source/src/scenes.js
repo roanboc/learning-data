@@ -205,7 +205,7 @@ scene("read",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
 /* ---------- 7. A change, with a date ---------- */
 const M5_PRX=560,M5_PRY=100;
 scene("change",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
-  const tN=c("next"),tSes=w("next","Sessional"),tP=c("pr"),tPr=w("pr","pull request"),tOwn=w("pr","as the list"),tApp=w("pr","approves"),tF=c("from"),tJan=w("from","first of January"),
+  const tN=c("next"),tSes=w("next","Sessional"),tP=c("pr"),tPr=w("pr","pull request"),tOwn=w("pr","who owns"),tApp=w("pr","approves"),tF=c("from"),tJan=w("from","first of January"),
     tE=c("ended"),tDel=w("ended","isn't deleted"),tEnd=w("ended","ended"),tCon=w("ended","past contracts");
   // the camera: the years; up to the pull request; back down to the years
   m5_open(ctx,S,t,sc,"office",[[0,960,540,1],[tP-0.3,1063,440,1.12],[tF-0.3,960,540,1]]);
@@ -303,7 +303,7 @@ scene("elsewhere",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s
 
 /* ---------- 11. Who keeps it ---------- */
 const M5_KCH=[["Studying","status","student",0],["Tutor","role","tutor",1],["Viet Nam","country of birth",WC_BADGE,4]];
-const M5_KLS=[["learner statuses","owner · registrar's office","from 2004-01-01"],["role types","owner · HR","from 2004-01-01"],["countries","owner · ISO 3166","loaded every month"]];
+const M5_KLS=[["learner statuses","owner · registrar's office","from 2004-01-01"],["role types","owner of tutor · HR","from 2004-01-01"],["countries","owner · ISO 3166","loaded every month"]];
 scene("keeps",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
   const tL=c("linh"),tR=w("linh","role"),tSt=w("linh","status"),tCy=w("linh","country"),tOne=w("linh","one list"),tA=c("airport"),tKe=w("airport","who keeps"),tWh=w("airport","from when"),tK=c("line");
   m5_open(ctx,S,t,sc,"campus",[[0,960,540,1],[tK-0.3,960,530,1.03]]);

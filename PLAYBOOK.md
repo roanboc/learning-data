@@ -93,6 +93,7 @@ Before story or pictures, the concept is settled. [`AGENTS.md`](AGENTS.md) gives
 
 - **Make every frame a function of time.** Then any moment can be rendered, reviewed and compared, like software.
 - **Time the film to the narration.** Change a line and the whole film re-times itself: a new voice, a human narrator or another language needs no manual editing.
+- **Time each moment to a whole word, and let the build check it.** A moment that waits for a word finds the first place its letters appear in what the voice reads, so "again" lands on "against", and a word that isn't in the line falls back to the line's start. Either way the picture and its sound come early, and nothing says so. The data governance series' `build.py` stops on both (`films/data-governance/shared/tools/cues.py`).
 - **Review by looking and measuring.** Render stills at the moments the narration names something, check them, fix, and repeat. Say plainly what you can't check yourself, such as how the audio sounds.
 - **Use cheap checkpoints before expensive rebuilds:** style frames, a five-second voice test, a forty-second sound sketch.
 - **Render in resumable chunks,** and run one heavy job at a time.

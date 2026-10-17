@@ -1,6 +1,6 @@
 # From words to data
 
-*Proposal for an advanced series on data modelling, v0.2. In Spanish: De las palabras a los datos. Status: made, on 28 September 2026; the [series README](README.md) describes the films as they are. This page is the plan they were made from, kept as it was agreed.*
+*Proposal for an advanced series on data modelling, v0.2. In Spanish: De las palabras a los datos. Status: made, on 28 September 2026; the [series README](README.md) describes the films as they are. This page is the plan they were made from, kept as it was agreed, with the decisions taken since added below.*
 
 ## Decided
 
@@ -10,6 +10,8 @@
 | 28 September 2026 | The series title: *From words to data*. |
 | 28 September 2026 | The spine is the credential: how people prove what they know. The microcredential is its newest form, and the word's history shows how language and meaning evolve. |
 | 28 September 2026 | The opening film starts before writing: how language began, how the brain links words to things, and how other animals handle concepts. |
+| 16 October 2026 | *Meaning machines can read* gains a fifth chapter, *One map, many views*: each concept is written once, in Noor's architecture map (in ArchiMate, or any other architecture modelling language), with its definition, owned by the business, its relationships and its rules; the glossary, the conceptual model, the logical model (which alone adds how many, and the keys), the ontology in OWL and the tests are views drawn from it, one way, so they agree instead of competing. A first cut, *Ontology or model?*, set the ontology and the data model side by side as rivals with different jobs; it was reworked the same day to show them as one connected thing. Two labs, four scenarios and a fifth Pause and think question go with it, and *What's in a word* names its glossary and its conceptual model on screen. |
+| 17 October 2026 | After review of *Meaning machines can read*: an assistant can read documents and web pages, so Genie's problem is not a PDF it can't open, but a policy and an old page that disagree, with no owner and no version, outside a managed glossary. *Genie, again* opens on the glossary as the source of truth, its definitions carried on each table's page in Databricks, next to the data, where Genie reads them. The closing triangle shows the word in the glossary only: a second language on screen read as forced, and Spanish stays in the captions. |
 
 ## The brief
 
@@ -200,13 +202,13 @@ About 45 minutes in all. Every film stands alone and opens with a one-line recap
 | Chapter | What happens | What it teaches |
 |---|---|---|
 | They tried before | Linnaeus gives each species one name, in a hierarchy. Wilkins, in 1668, designs a language to classify everything; it never takes hold. Nightingale, in 1860, asks every hospital to record the same things the same way; an international list of causes of death follows in 1893, today's ICD. | Shared definitions let strangers compare. Keep them bounded, and made for a purpose. |
-| Genie guesses | "Which learners are one microcredential away from a graduate certificate?" Genie finds the tables, but the stacking rules are in a policy document no tool reads. It's wrong. | An agent answers from what it can read. Meaning kept in documents is invisible to it. |
+| Genie guesses | "Which learners are one microcredential away from a graduate certificate?" Genie finds the tables, and reads the stacking rules in a policy and on an old web page. They don't agree, and it's wrong. | An agent answers from what it reads. Meaning outside a managed glossary, with no owner and no version, can contradict itself, or be wrong. |
 | Four ways to write meaning down | A glossary (words, for people). A taxonomy (kinds, in a hierarchy, like Linnaeus's). An ontology (concepts, relationships and rules a machine can reason with). A semantic layer (how each number is calculated, once). | A stack, not rivals. Each answers a different question. |
 | The ontology | "A microcredential is a credential. A graduate certificate accepts up to four approved microcredentials towards its credit." Data organised by these rules becomes a knowledge graph. | Rules a machine can check: Aristotle's definitions, made formal. |
 | The semantic layer | "Credentials awarded this year" defined once: the measure, the filters, the time and the grain. Dashboards, spreadsheets and Genie all ask it, instead of each writing its own. | One definition, every tool. Open formats for sharing these definitions between tools are emerging. |
 | Standards | Digital credentials have published standards, and so do finance, health, insurance and retail. Even *microcredential* has three official definitions, from Australia, the European Union and UNESCO, and they don't quite match. | Don't start from blank, and choose deliberately: check, adopt, extend and record, from *A Sharper Sketch*, at every layer. |
-| Genie, again | Genie asks back, "approved for stacking, or all microcredentials?", then answers with its definition. | Grounding an agent in explicit meaning makes its answers measurably more accurate. |
-| Pull back | The triangle from *What's in a word* returns: the word, with labels in English and Spanish; the idea; the data. | Next: keeping it true while everything changes. |
+| Genie, again | The glossary is the source of truth, and its definitions sit on each table's page in Databricks. Genie reads them, asks back, "approved for stacking, or all microcredentials?", then answers with its definition. | Grounding an agent in explicit meaning makes its answers measurably more accurate. |
+| Pull back | The triangle from *What's in a word* returns: the word, in the glossary; the idea, in the ontology; the data. | Next: keeping it true while everything changes. |
 
 **Labs.** *Glossary, taxonomy, ontology or semantic layer?* (sort the statements). *Map to the standard.*
 

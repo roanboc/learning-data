@@ -4,7 +4,7 @@
 
 ## The promise
 
-Anyone from 14 up understands it, and a data modeller, a linguist and a cognitive scientist agree with it. It uses no technology at all. Before you can count anything, you have to agree what it is: minds sort the world into kinds before they have words, words point at those kinds through ideas, every word hides a grain and has fuzzy edges, and meanings drift. A business that writes its words down, with an owner and a date, has its first data model.
+Anyone from 14 up understands it, and a data modeller, a linguist and a cognitive scientist agree with it. It uses no technology at all. Before you can count anything, you have to agree what it is: minds sort the world into kinds before they have words, words point at those kinds through ideas, every word hides a grain and has fuzzy edges, and meanings drift. A business that writes its words down, each with an owner and a date, has its first glossary; the sketch of how the things those words name relate is its first data model, a conceptual one.
 
 ## The story in one paragraph
 
@@ -23,7 +23,8 @@ In graduation week, the Deputy Vice-Chancellor wants one number for the speech: 
 | A rabbit with three possible outlines; Mei's three credentials, counted two ways | The grain: what one of something is |
 | A cloud of birds with a fuzzy ring; the credentials with four office rings | Typical members, fuzzy edges, and four boundaries drawn around one word |
 | Ribbons from an old word to a new one | How words, and their meanings, drift |
-| A sheet of paper, a pencil diagram, an owner and a "v3 · draft" stamp | A conceptual model: the business's agreed words, written down, before any system |
+| The definition in pencil, each word's owner and the date, labelled "the words: a glossary" | A glossary: the business's agreed words, written down for people, before any system |
+| Pencil boxes and the "sketch v3 · draft" stamp, labelled "the sketch: a conceptual model" | The conceptual model: the things those words name, and how they relate; the first data model |
 | A clay tablet being marked | The first records, and the step from minds, to marks, to systems |
 
 ## Script
@@ -98,9 +99,9 @@ Timings are the voiced film's.
 
 **Narration.** Back at the university, there's no system in sight. Just four offices, and a sheet of paper. First, what is a credential? A trusted statement, that others can check, that someone has shown what they know or can do. Awards and microcredentials are credentials. So are badges, when the learning was assessed. A badge for turning up isn't one. The recipe is Aristotle's: name the kind of thing, then say what sets it apart. Each word gets an owner and a date, and the sketch gains a box, in pencil. Version three, draft. The answer for the speech is 11,890. And each of the four numbers now has a name. Two of them counted things that aren't credentials: badges for turning up, and certificates of completion. Nobody lied. Until today, there was no agreed question.
 
-**Picture.** A sheet on a board, Mei and Tom beside it, the four offices as tags. The definition is written in pencil; the kind (statement) and what sets it apart are underlined. Credential and its kinds (award, microcredential, badge when assessed) appear as pencil boxes; a certificate of completion is crossed out. Owners and a date; a stamp: sketch v3 · draft. The answer card counts to 11,890, and each office's number gets its name; Careers' and the learning platform's get a red mark for what isn't a credential: 2,760 and 15,010.
+**Picture.** A sheet on a board, Mei and Tom beside it, the four offices as tags. The definition is written in pencil; the kind (statement) and what sets it apart are underlined. Credential and its kinds (award, microcredential, badge when assessed) appear as pencil boxes; a certificate of completion is crossed out. Owners and a date; a stamp: sketch v3 · draft. As they appear, two labels name the parts of the sheet, each with a dashed line to its part: "the words: a glossary", in gold, and "the sketch: a conceptual model", in blue; they give way to the answer. The answer card counts to 11,890, and each office's number gets its name; Careers' and the learning platform's get a red mark for what isn't a credential: 2,760 and 15,010.
 
-**On screen.** credential: a trusted statement, that others can check, that someone has shown what they know or can do · the kind of thing · what sets it apart · Credential · Award · Microcredential · Badge, when assessed · Certificate of completion · shows you finished, not what you learned · owner: Registrar · owner: Short courses · agreed 28 Sep · sketch v3 · draft · credentials awarded 11,890 · 7,420 awards + 3,180 microcredentials + 1,290 assessed badges · ✗ 2,760 aren't credentials · ✗ 15,010 aren't credentials
+**On screen.** credential: a trusted statement, that others can check, that someone has shown what they know or can do · the kind of thing · what sets it apart · Credential · Award · Microcredential · Badge, when assessed · Certificate of completion · shows you finished, not what you learned · owner: Registrar · owner: Short courses · agreed 28 Sep · the words: a glossary · sketch v3 · draft · the sketch: a conceptual model · credentials awarded 11,890 · 7,420 awards + 3,180 microcredentials + 1,290 assessed badges · ✗ 2,760 aren't credentials · ✗ 15,010 aren't credentials
 
 ### 10 · Pull back · 5:28–6:07
 
@@ -134,6 +135,7 @@ The film can stop at the end of four chapters, with one question each. Each link
 | Fuzzy edges | People rate robins and sparrows as typical birds, penguins as atypical (Rosch, 1975). | Prototype theory is one of several accounts of categories; typicality also varies by culture (the ratings were American). |
 | Words drift | "Nice" once meant foolish; credential from Medieval Latin credentialis, from credere, to believe; enrol from Anglo-French enroller, to write on a roll; diploma from Greek diplōma, a folded paper; ambassadors present letters of credence. | Word histories follow the Oxford English Dictionary's and standard etymologies; "nice" passed through several meanings (shy, precise) before "pleasant". |
 | Agreed on paper | A definition names the broader kind, then what sets it apart. | This is the classical definition by genus and differentia, recommended for terminology work by ISO 704. The definition of credential is the university's, not a standard's. The count, 7,420 + 3,180 + 1,290 = 11,890, is fictional. |
+| Agreed on paper | The words, each with an owner and a date, are a glossary; the boxes are the sketch, a conceptual model. | Two different things, often confused: a business glossary explains each term in words, for people, with its owner; a conceptual model draws the things the terms name and how they relate, the first level of a data model. *Meaning machines can read* adds the third, the ontology, which defines the same ideas formally, so a machine can reason with them, and shows how the three are linked. |
 | Pull back | People began pressing marks into clay about five thousand years ago. | Proto-cuneiform tablets from Uruk date from about 3300 to 3000 BCE; most record accounts, and many of the rest are lists of words grouped by kind (Nissen, Damerow and Englund, *Archaic Bookkeeping*, 1993). The tablet's marks follow proto-cuneiform numerals, pressed with round and angled styluses rather than wedges, which came later; the cylinder-seal rolling along its edge is a common Uruk motif. |
 
 ## Sources

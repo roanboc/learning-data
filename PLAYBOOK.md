@@ -42,6 +42,8 @@ Before story or pictures, the concept is settled. [`AGENTS.md`](AGENTS.md) gives
 - **Keep roles clear.** dbt writes and tests the recipes; Databricks runs, stores and governs. One sentence per role, repeated in picture and word.
 - **Show whose component is whose.** Use official logos, unaltered, and credit the trademarks. License code and content separately (here MIT and CC BY 4.0), and exclude the logos.
 - **List your sources with the date you checked them.**
+- **Don't say a tool can't do what it can.** The first cut of *Meaning machines can read* said Genie couldn't read the stacking policy, a PDF; assistants read documents and web pages. The real problem is a policy and an old page that disagree, with no owner and no version, outside a managed glossary. Show that, and check what today's tools can do on the day.
+- **Show the source of truth, and the platform it feeds.** Platforms now carry a glossary's definitions next to the data (in Databricks, on each table's page, where Genie reads them). Show the managed source first, then where it reaches, and say which parts are in preview.
 
 *Ask: which line would I be unable to defend in front of the product team?*
 
@@ -160,6 +162,7 @@ What *From words to data*, seven films made together, added.
 - **Check every frame, not every tenth of a second.** A ring whose radius dipped below zero for one frame stopped a full render; the checker now draws every frame the video will.
 - **Bridge every detour back to the thread.** A philosopher's rabbit made "the grain" land out of nowhere until the next line brought it home: Mei's degree and two microcredentials are one graduate, or three credentials. Every excursion into the past ends on the credential.
 - **Let the resolution follow the model.** Once the offices agree a definition, say which numbers counted things it leaves out; "none was wrong" contradicts the diagram on screen. And don't make agreement sound cheap: it takes people, trade-offs and time.
+- **Connect look-alikes, rather than rank them.** A glossary, an ontology and a data model can all draw the credential, and viewers confuse them. The first cut of *Meaning machines can read* set the ontology beside the glossary and the semantic layer, but never beside the data model, the comparison most often got wrong; the next set the two side by side as rivals with different jobs, which made a practitioner ask which one to keep. The chapter that stayed, *One map, many views*, shows where they all come from: one architecture map, where each concept is written once, and the views drawn from it, each with its job. Show the source and the flow, and the differences explain themselves. Name each part where it first appears, too: *What's in a word* now labels its glossary and its conceptual model on the sheet.
 - **Build labs from a few kinds.** Sort, count, pick, compose and step through cover most ideas; each lab is words plus one picture drawn with the film's own components. Every word a picture draws comes from the language pack, and text is sized for the lab's real width.
 
 *Ask: if someone watched only one film, would they still want the next?*
@@ -179,6 +182,8 @@ What *From words to data*, seven films made together, added.
 - [ ] `tools/pace.py`: about 120 to 135 words a minute (at most 140 in a chapter), the voice speaking at most 82% of any chapter, about three wordless endings in the whole film, no sentence followed by less than 0.5 s, and no stop of 2.5 s or more inside a chapter.
 - [ ] Stills are checked at every named moment, with nothing under the captions, every shape reading as what it is, and one person doing each action.
 - [ ] Text reads on a phone: about 28 px or more in the frame, or marked as decoration, with no words drawn over other words (`tools/legible.py --overlaps`).
+- [ ] One language on screen. A film made in English shows no words in another language: they read as forced. Show the glossary's synonyms, or nothing, and leave other languages to the captions.
+- [ ] Every claim that a tool can't do something is checked against what today's tools do.
 - [ ] The sound: effects below about 2.5 kHz, and a rhythm only where the story turns to an error or a rush.
 - [ ] `tools/check.py`: every moment of the film draws without an error. Stills only sample a few moments.
 

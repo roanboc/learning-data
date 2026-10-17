@@ -1,6 +1,6 @@
 # Data governance · Off the shelf: script
 
-*The script of the opening film of the data governance series (its title is still open), as planned: about 5:20, in ten chapters, in English, 16 October 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 10. Made to read on a phone: on-screen text is at least 28 px in the frame, and nothing sits under the captions.*
+*The script of the opening film of the data governance series (its title is still open), as made: 5:12, in ten chapters, in English, 17 October 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 10. Made to read on a phone: on-screen text is at least 28 px in the frame, and nothing sits under the captions.*
 
 ## The promise
 
@@ -15,21 +15,21 @@ In 1215, Magna Carta promised one measure of wine, ale and corn for the whole ki
 | Object | Stands for |
 |---|---|
 | A crier on the steps of a market cross, reading a charter | A policy: a promise, read out |
-| The year on the sign turning, the crier reading the same words, the stalls' measures still different | A promise repeated, not kept |
+| The year on the sign turning, the charter's page turning, the jugs on the wine stall still all different | A promise repeated, not kept |
 | The king's bronze standards in a cupboard in the market hall | A standard kept on a shelf, away from the trade |
 | A row of bushels of every size, all called "bushel" | One word, many meanings |
-| The inspector of the 1880s, his case of copies, his stamp and his book, and the Act pinned up | What works: one definition, a copy where the work happens, someone who checks, with the law behind him |
+| The inspector of the 1880s, his case of brass copies, his hammer and crown stamp, and the Act on the wall | What works: one definition, a copy where the work happens, someone who checks, with the law behind him |
 | The shelf of 34 binders, the framed 2.1 out of 5, the chart with "TBC", the council's minutes | Governance as documents: true, and nowhere in the work |
-| Two signs over two buildings: 4,812 and 4,867 | Two reports, two meanings of one word |
-| The glossary term on Jun's screen, "a microcredential, for at least 6 credit points" | A meaning that changed |
+| Two reports, on Planning's screen and in Mei's hands: 4,812 and 4,867 | Two reports, two meanings of one word |
+| The glossary term on Jun's screen, with a new row: "microcredentials, 6 credit points or more" | A meaning that changed |
 | The government's manual on the registrar's counter | An outside definition someone has to map to |
-| "to be confirmed", stamped in red | A decision nobody owns |
+| "TBC", stamped in red on the chart | A decision nobody owns |
 | Gold light running from the office on the green to every building | A decision reaching the work |
 | The town from above: an office on the green, ten paths, a signpost on each | DAMA's wheel: governance where the areas meet |
 | Speech bubbles in each room | Listening: what slows people down |
-| Three trays on Yusuf's desk: runs, owned decision, retire | The test for every line of the binder |
+| Three trays on Yusuf's desk: runs in the work, owned decisions, can go | The test for every line of the binder |
 | The data team's poster of the loop of ten steps, and gold pins on it | Where governance decisions enter the work |
-| Binders sliding off the shelf, each with a film's title | The series |
+| Nine numbered binders sliding forward on the shelf, beside a list of what governance needs; six cards on the data team's board | The series: nine films on kinds of policy, then six with the tools |
 | A gold rim on a figure's base, a blue rim, a walnut base | The business side, the technical side, people of the past |
 
 ## The look
@@ -38,93 +38,99 @@ In 1215, Magna Carta promised one measure of wine, ale and corn for the whole ki
 
 - **A model town on a table.** The university is a toy town: buildings open at the front like dollhouses, with wallpaper, rugs and furniture, and people as painted figures on small round bases. The camera moves between rooms like someone leaning over the table. A soft blur at the top and bottom of the frame makes it feel small and close; words are drawn after the blur, so they stay sharp.
 - **The town is a wheel.** The governance office stands on the green in the middle; the other offices stand round it, with ten paths between them. From above, it's the wheel the film names in chapter 6.
-- **Colour carries meaning.** A figure's base has a gold rim for the business side and a blue rim for the technical side; people of the past stand on plain walnut. Governance's decisions are gold. Yusuf's three trays are green (runs), gold (owned decision) and grey (retire).
+- **Colour carries meaning.** A figure's base has a gold rim for the business side and a blue rim for the technical side; people of the past stand on plain walnut. Governance's decisions are gold. Yusuf's three trays are green (runs in the work), gold (owned decisions) and grey (can go).
 - **The past is the same toy town in its own time,** with the place and year on a painted sign: a market square in 1215, its market hall in 1497, the square in 1871 and the 1880s. People are dressed for their time, in wool dyed with madder, woad and weld, or undyed.
 - **Fewer diagrams, more situations.** Ideas are shown as people doing things in places: reading out a charter, stamping a weight, asking around an office, sorting a binder, pinning a poster.
 
 ## Script
 
-### 1 · One measure · 0:00–1:05
+The times are the film's, from its timeline. Words on screen are signs, tags, cards and speech bubbles, drawn sharp over the town's soft blur.
+
+### 1 · One measure · 0:00–0:51
 
 **Narration.** In 1215, Magna Carta made a promise. "There is to be one measure of wine throughout our kingdom, and one measure of ale, and one measure of corn." For six hundred years, the promise was repeated, and measures still differed from town to town. Kings sent standards to the towns. Officers checked them now and then. It wasn't enough. In 1871, a member of Parliament said that in his county alone, a bushel meant thirty-two different measures. What finally worked was all of it together: one definition in law, a copy in every county, and an inspector who checked against it, again and again, with the law behind him.
 
-**Picture.** The toy town in 1215: a market square of packed earth, timber-framed houses, a church tower beyond, a wine stall with a red-striped awning and barrels, a corn stall with a blue-striped awning and sacks. The camera lowers towards the market cross, where a crier in a blue gown and red cape holds up a charter with a red seal. On the quote, his speech bubble: "One measure of wine throughout our kingdom." A wine seller, a brewer with a jug, a corn seller beside his bushel and a townswoman listen. On "repeated", the sign's year turns, 1225, 1297, 1640, 1824, and the crier reads the same charter each time, while the jugs and bushels on the stalls change size. On "kings", the camera turns to the market hall, open at the front: the king's bronze bushel, gallon and yard in a cupboard behind a grille ("the king's standard · 1497"), and the market going on outside with its own measures. On "1871", the corn stall is lined with bushels of every size, each called a bushel. On "what finally worked", the 1880s: the inspector of weights and measures, in a frock coat and top hat, at a grocer's scale. His case holds brass copies of the standard weights; he sets one against the grocer's weight, stamps it with a crown, and writes in his book. Each part lights as it's named: the Act pinned to the post, the case of copies, the inspector, his stamp and book. Wordless breather: the stamp, then the title card over the square.
+**Picture.** The toy town in 1215: a market square of packed earth, timber-framed houses, a church tower beyond, a wine stall with a red-striped awning, a corn stall with a blue one. A painted sign in the corner names the place and the year. The camera lowers towards the market cross, where a crier holds up a charter; on the quote, his speech bubble. A wine seller, an alewife with a jug, a miller and a buyer listen. On "repeated", at the wine stall, the sign turns through 1225, 1297, 1640 and 1824; each time the charter's page turns over, its seal pops, and the jugs on the stall change size, never alike. On "kings", 1497: the market hall, open at the front, the king's bronze standards in a cupboard behind a grille, lit; the clerk of the market walks out with a gallon measure to a trader with a jug, while "it wasn't enough" is said over him. On "1871", the corn stall is lined with measures of every size, each tagged "a bushel", and a board reads "32 measures in one county". On "what finally worked", the 1880s: a grocer's shop, open at the front. The inspector of weights and measures, in a frock coat and top hat, walks in to the counter. Each part lights as it's named: the Act on the wall, his case of brass copies, the inspector himself. He sets a brass weight in the scale's pan and the scale settles; on "again and again", he stamps the grocer's weight with a hammer, twice, and a crown appears on it; on "with the law behind him", the Act lights again. Wordless: the stamp once more, close, then the title card over the square.
 
-**On screen.** England · 1215 · One measure of wine throughout our kingdom. · 1225 · 1297 · 1640 · 1824 · the king's standard · 1497 · a bushel · 32 measures in one county · 1871 · England · 1880s · one definition, in law · a copy in every county · an inspector who checks · again and again · with the law behind him · Off the shelf · where a policy meets the work · Film 1 of 16 · data governance
+**On screen.** England · 1215 · One measure of wine throughout our kingdom. · England · 1225 · 1297 · 1640 · 1824 · England · 1497 · the king's standard · England · 1871 · a bushel · 32 measures in one county · England · 1880s · one definition, in law · a copy in every county · an inspector who checks · again and again · Off the shelf · where a policy meets the work · Film 1 of 16 · data governance
 
-### 2 · The shelf · 1:05–1:36
+### 2 · The shelf · 0:51–1:19
 
 **Narration.** Today, Yusuf Demir starts as the university's data governance lead. He inherits a shelf of thirty-four policies, and a maturity score: 2.1 out of 5. A chart of who's responsible for what, with half its names still to be confirmed. And the minutes of a council that meets once a month. His brief: fix governance before the next submission to the government.
 
-**Picture.** The university as a toy town on a table: a green in the middle, with the data governance office on it, open at the front; other offices in a ring round the green. Yusuf, on a base with a gold rim, walks along the path to his office ("Yusuf Demir · data governance lead"). The camera follows him in. The shelf of ring binders ("34 data policies"), the framed score on the wall ("maturity · 2.1 / 5"); the chart on the pinboard, with "TBC" in red in half its cells; on the desk, a red folder, the council's minutes ("action: name the data owners · carried forward"). Prof. David Mensah, the Deputy Vice-Chancellor, leans in at the open front: "Can you fix governance before the submission?" Yusuf holds binder 12, worried.
+**Picture.** The university as a toy town on a table: a green in the middle, with the data governance office on it, open at the front, and the other offices in a ring round the green. Yusuf, on a base with a gold rim, walks up the path to his office ("Yusuf Demir · data governance lead"). Inside: the shelf of ring binders ("34 data policies") and the framed score on the wall ("maturity · 2.1 / 5"). Close on the chart on the side wall, RACI for four things: "TBC" is written into half its cells, one by one. On the desk, the council's minutes, open: "Action: name the data owners", stamped "CARRIED FORWARD". Yusuf at his office's front, holding binder 12, worried; Prof. David Mensah, the Deputy Vice-Chancellor, leans in from the path: "Can you fix governance before the submission?"
 
-**On screen.** Yusuf Demir · data governance lead · 34 data policies · maturity · 2.1 / 5 · RACI · TBC · council minutes · carried forward · Can you fix governance before the submission?
+**On screen.** Yusuf Demir · data governance lead · 34 data policies · maturity · 2.1 / 5 · RACI · census report · award term · government submission · data access · TBC · Council minutes · Action: name the data owners · CARRIED FORWARD · Can you fix governance before the submission?
 
-### 3 · Two numbers · 1:36–1:56
+### 3 · Two numbers · 1:19–1:40
 
 **Narration.** The same week, two reports disagree. Planning's census report says 4,812 awards were conferred this year. The draft submission to the government says 4,867. Which number is right?
 
-**Picture.** The camera rises out of the office over the green. Across it, two buildings: Planning, where a planner stands at a wall dashboard, with a sign above, "census report · 4,812 awards"; and the registrar's office, where Mei has the draft submission on her counter, "draft submission · 4,867 awards". Yusuf walks out onto the green between them, and a gold question mark settles over him.
+**Picture.** From above the green, Yusuf crosses from his office and stops in the middle; Clara, the planner, and Mei, the registrar, are at their places. In Planning's office, the census report on the wall screen, "awards conferred this year: 4,812"; Clara points to it. In the registrar's office, Mei holds out the draft submission: "4,867 awards". From above again, each building named, with a tag under each, "census report · 4,812 awards" and "draft submission · 4,867 awards", and a gold question mark settles over Yusuf.
 
-**On screen.** Planning · census report · 4,812 awards · Registrar's office · draft submission · 4,867 awards · ?
+**On screen.** Census report · awards conferred this year · 4,812 · Draft submission · 4,867 · awards · Planning · Registrar's office · census report · 4,812 awards · draft submission · 4,867 awards · ?
 
-### 4 · Who decides? · 1:56–2:39
+### 4 · Who decides? · 1:40–2:15
 
 **Narration.** Yusuf follows the numbers back. Both are right, each by its own meaning of award. On Monday, the word changed: microcredentials of at least six credit points now count. One report ran before the change, the other after. But the government counts awards by its own definition. Who decides how ours maps to it? Mei owns what award means here. Jun builds what the model says. Planning reports what it's given. And the chart says: to be confirmed.
 
-**Picture.** Yusuf walks round the green to the data team's office; the camera swings round with him. Jun's screen shows the glossary term, the words that changed marked: "Award · A qualification the university confers, such as a graduate certificate, a master or a microcredential, for at least 6 credit points." Two reports on the wall, dated: "census report · ran Friday" and "draft submission · ran Wednesday", with "Monday · the term changed" between them. Then the registrar's office: on Mei's counter, a thick binder from the government, "reporting manual · award", and between it and the university's term a gap with a question mark. The camera rises to show three offices at once, each person labelled as named: Mei, "owns the meaning"; Jun, "builds it"; the planner, "reports it". Then the chart from Yusuf's pinboard, close: "government submission · accountable: TBC", stamped in red.
+**Picture.** Yusuf walks round the green towards the data team's office. On its cork board, two report cards, "census report · ran Friday · 4,812" and "draft submission · ran Wednesday · 4,867", each gets a green tick. Jun's screen shows the glossary's term: "award · what counts: graduate certificates, masters and doctorates", and a new row, lit, "microcredentials, 6 credit points or more", with a gold chip, "changed Monday"; Jun points to it. On the board, a gold card lands between the reports, "Monday · award · changed", with "before" and "after" over them. At the registrar's counter, the government's "Reporting manual · awards" stands beside the university's own term on a tent card, "award · our term"; tags name them, "the government's definition" and "ours", and an arc between them ends in a question mark. Mei shrugs. From above, three offices, each person tagged as named: "Mei · owns the meaning", "Jun · builds the model", "Planning · reports what it's given", with Yusuf among them. Back in his office, the chart's row for the government submission lights, and "TBC" is stamped in red on its A, the one accountable.
 
-**On screen.** Award · a graduate certificate, a master or a microcredential, for at least 6 credit points · Monday · the term changed · census report · ran Friday · draft submission · ran Wednesday · reporting manual · award · ? · owns the meaning · builds it · reports it · government submission · accountable · TBC
+**On screen.** census report · ran Friday · 4,812 · draft submission · ran Wednesday · 4,867 · glossary · award · what counts: · graduate certificates · masters and doctorates · microcredentials, · 6 credit points or more · changed Monday · Monday · award · changed · before · after · Reporting manual · awards · award · our term · the government's definition · ours · ? · Mei · owns the meaning · Jun · builds the model · Planning · reports what it's given · TBC
 
-### 5 · What governance is for · 2:39–3:17
+### 5 · What governance is for · 2:15–2:46
 
 **Narration.** Policy 12 says that business terms are defined consistently. It doesn't say who decides, or how a decision reaches the work. That's what governance is for: deciding who decides, and making sure each decision reaches the work. Like the inspector at the market: a rule, a copy where the work happens, and someone who checks. Governance sets the rules and checks they're kept. Management does the work.
 
-**Picture.** Back in the office, Yusuf opens binder 12: "Policy 12 · Business terms are defined consistently across the organisation." Under it, two empty slots: "who decides?" and "how does it reach the work?". On "what governance is for", the camera rises over the green, and gold light runs from the office in the middle along the paths to every building round it. On "like the inspector", the 1880s inspector stamps a weight again, with the same three labels as before. Back in the town, the office in the middle is labelled "governance · sets the rules, checks they're kept", and the offices round it "management · does the work", with Mei, Jun, Sam and the planner at their desks.
+**Picture.** On Yusuf's desk, binder 12 lies open at "Policy 12 · Business terms are defined consistently across the organisation." On the facing page, two dashed red boxes appear as they're named: "who decides?" and "how does it reach the work?". The camera rises over the green: "deciding who decides" over the office; then gold light runs from the office along the paths to every building, "each decision reaches the work", with Jun, Mei, Sam and Clara at their places. The 1880s shop again: "a rule" by the Act, "a copy where the work happens" by the case, "someone who checks" by the inspector, holding the weight. The town from higher up: the office in the middle glows, "governance · sets the rules, checks they're kept", then the offices round it, "management · does the work".
 
-**On screen.** Policy 12 · Business terms are defined consistently across the organisation. · who decides? · how does it reach the work? · decides who decides · and makes sure it reaches the work · a rule · a copy where the work happens · someone who checks · governance · sets the rules, checks they're kept · management · does the work
+**On screen.** Policy 12 · Business terms are defined consistently across the organisation. · who decides? · how does it reach the work? · deciding who decides · each decision reaches the work · England · 1880s · a rule · a copy where the work happens · someone who checks · governance · sets the rules, checks they're kept · management · does the work
 
-### 6 · Governance at the centre · 3:17–3:45
+### 6 · Governance at the centre · 2:46–3:14
 
 **Narration.** Data management has a body of knowledge: DAMA's. It draws eleven areas as a wheel, with governance at the centre, where the others meet. Others cover the same ground, or part of it: DCAM, ISO 8000 for data quality, and ISO/IEC 38505 for governing data. This series takes what they agree on, and shows where it runs.
 
-**Picture.** The camera keeps rising until the town is seen from above: the office on the green in the middle, ten paths, and the offices between them. "DAMA-DMBOK". A signpost rises on each path as the wheel is named, each with one of the ten other areas: data architecture; data modelling and design; data storage and operations; data security; data integration and interoperability; documents and content; reference and master data; data warehousing and business intelligence; metadata; data quality. The office in the middle is labelled "data governance". On "others", three small plaques: "DCAM", "ISO 8000 · data quality", "ISO/IEC 38505 · governing data". On "where it runs", the camera starts down towards the green.
+**Picture.** The camera keeps rising until the town is seen from above: the office on the green in the middle, ten paths, the offices between them. A board: "DAMA-DMBOK · the Data Management Body of Knowledge". As the wheel is named, a signpost springs up on each path, one after another, each with one of the ten other areas. The office in the middle glows, "data governance", and gold runs along the paths to it. On "others", the area boards dim: a gold ring goes round the whole wheel ("DCAM · the same ground"); the data quality post stays lit, "ISO 8000 · data quality"; and "ISO/IEC 38505 · governing data" appears over the office. On "where it runs", the camera comes down to the green.
 
-**On screen.** DAMA-DMBOK · data governance · data architecture · data modelling & design · data storage & operations · data security · data integration & interoperability · documents & content · reference & master data · data warehousing & BI · metadata · data quality · DCAM · ISO 8000 · data quality · ISO/IEC 38505 · governing data
+**On screen.** DAMA-DMBOK · the Data Management Body of Knowledge · data architecture · data modelling & design · data storage & operations · data security · data integration & interoperability · documents & content · reference & master data · data warehousing & BI · metadata · data quality · data governance · DCAM · the same ground · ISO 8000 · data quality · ISO/IEC 38505 · governing data
 
 *The only place in the series where the bodies of knowledge are named. Later films teach the idea without saying which body it came from.*
 
-### 7 · Listen first · 3:45–4:31
+### 7 · Listen first · 3:14–3:53
 
 **Narration.** Yusuf doesn't write a thirty-fifth policy. He asks everyone the same question: what slows you down? For Jun, the rules arrive after the work is built. Mei approves the words, then never sees where they're used. Sam could protect a column in minutes, if anyone said which. Planning doesn't know which number to trust. The people who wrote the binder weren't the problem. They wrote what they were asked for. Governance is people's work. Tools can carry out what people agree, but they can't make them agree.
 
-**Picture.** Yusuf puts his pen down beside a blank page headed "policy 35", and walks out with a notebook ("What slows you down?"). The camera swings round the green with him, into each office in turn, and each person answers in a speech bubble: Jun, at his desk, "The rules arrive after I've built it."; Mei, at her counter, "I never see where my words are used."; Sam, by the platform's rack, "Which columns are personal?"; the planner, at the dashboard, "Which number do I trust?". Back in his office, Yusuf pins four cards on his pinboard, one for each answer, over the chart. On "the binder", the shelf in warm light. On "tools", Yusuf, Mei and Jun round a table, agreeing; only then does a check on Jun's screen turn green.
+**Picture.** On Yusuf's desk, a blank page headed "Policy 35", a pen beside it; the page turns over, unwritten. He walks out of his office with a notebook: "What slows you down?" In each office in turn, the person answers in a speech bubble while Yusuf writes: Jun, "The rules arrive after I've built it."; Mei, "I never see where my words are used."; Sam, "No one says which columns are personal."; Clara, "Which number do I trust?". Back in his office, Yusuf pins four cards over the chart, one for each answer; on "weren't the problem", the shelf glows warm. In the data team's office, Yusuf, Mei and Jun talk and nod; on "Tools", Jun's screen shows a green tick, "test passed".
 
-**On screen.** policy 35 · What slows you down? · The rules arrive after I've built it. · I never see where my words are used. · Which columns are personal? · Which number do I trust?
+**On screen.** Policy 35 · What slows you down? · The rules arrive after I've built it. · I never see where my words are used. · No one says which columns are personal. · Which number do I trust? · test passed
 
-### 8 · Where does it run? · 4:31–4:56
+### 8 · Where does it run? · 3:53–4:18
 
 **Narration.** So he opens the binder, with one question for every line: where does it run? Some lines can run in the work itself, as a required field, a check, a tag or a test. Some are decisions: someone owns each one, and writes it down where the work can find it. And some can go.
 
-**Picture.** Yusuf at his desk with binder 12 open, and three trays: green ("runs"), gold ("owned decision"), grey ("retire"). "where does it run?" Pages lift from the binder one at a time and fly to a tray. As each is named, a small tag pops above the green tray: "a required field", "a check", "a tag", "a test". A page flies to the gold tray, and gets a name and a date ("owner · Mei · 14 Oct"). A last page drifts into the grey tray.
+**Picture.** Yusuf at his desk with binder 12 open and three trays in front of him: green, gold and grey. A board: "Where does it run?". As each line is named, a dot marks it in the binder and its page flies to a tray. Over each tray, its name as it's said: "runs in the work", "owned decisions", "can go". Above the green tray, the lines that run, one at a time: "a required field", "a check", "a tag", "a test"; above the gold one, "award mapping" and "owner: Mei · 14 Oct". The last page drifts into the grey tray.
 
-**On screen.** where does it run? · runs · owned decision · retire · a required field · a check · a tag · a test · owner · Mei
+**On screen.** Where does it run? · Policy 12 · runs in the work · a required field · a check · a tag · a test · owned decisions · award mapping · owner: Mei · 14 Oct · can go
 
-### 9 · Where decisions enter · 4:56–5:28
+### 9 · Where decisions enter · 4:18–4:49
 
 **Narration.** And the work already has places for them. The data team builds in a loop of ten steps, from a question to a new version. Governance doesn't need another meeting. It needs a pin at the right steps: a term when the question is asked, a classification at the source, an owner and a contract, a rule as a test, an approval at review, and a version when it changes.
 
-**Picture.** The camera swings round the green to the data team's office. On its wall, the team's poster of the loop of ten steps, as in *In the weeds of data crafting*: ten stations round a loop, each with its sign (?, src, use, ≠, ✓, ≡, =, PR, 1×, v2). Jun stands by it. Yusuf comes in with a box of gold pins. As each is named, he puts a gold pin with a small flag at its step: "a term" at the question, "a classification" at the sources, "an owner · a contract" at contracts, "a rule" at tests, "an approval" at review, "a version" at evolve. Jun nods.
+**Picture.** Yusuf crosses to the data team's office with a box of gold pins. On its wall, the team's poster of the loop of ten steps, as in *In the weeds of data crafting*, lights: "a loop of ten steps". Jun stands by it. Close on the poster: as each is named, a gold pin goes in at the rim of its step, a gold ring goes round the step, and a tag says what's pinned there: "a term" at the question, "a classification" at the sources, "an owner · a contract" at contracts, "a rule" at tests, "an approval" at review, "a version" at evolve. A short wordless moment on the pinned poster.
 
 **On screen.** a loop of ten steps · a term · a classification · an owner · a contract · a rule · an approval · a version
 
-### 10 · The series · 5:28–5:55
+### 10 · The series · 4:49–5:12
 
 **Narration.** Over nine more films, Yusuf takes the binder off the shelf, one kind of policy at a time. Then six more show how to build them, with dbt and Databricks. A policy that doesn't run anywhere is a wish.
 
-**Picture.** The shelf. As the films are named, nine binders slide out one by one and turn to show a title: Who decides · One word, one home · Who may see it · Rules that run · Fixed where it starts · Change without surprises · A product with an owner · An agent that checks · Teachers of data. On "six more", six binders in a second row: Governed in dbt · Governed in Unity Catalog · Meaning on the platform · Quality on the platform · Products in open formats · The marketplace. Yusuf takes binder 12 and walks out of his office into the town. The end card: "A policy that doesn't run anywhere is a wish." *Off the shelf* · Film 1 of 16.
+**Picture.** The shelf, close. As the films are named, nine binders slide forward one by one, numbered 2 to 10, and a list grows beside them, "What governance needs", a row for each. Yusuf takes binder 2 off the shelf: "Who decides". On "six more", the data team's board, "With the tools": six cards are pinned up, each with its tools' logos. Then Yusuf carries "Who decides" out of his office and across the green, towards the offices where the work is done. The end card.
 
-**On screen.** Who decides · One word, one home · Who may see it · Rules that run · Fixed where it starts · Change without surprises · A product with an owner · An agent that checks · Teachers of data · Governed in dbt · Governed in Unity Catalog · Meaning on the platform · Quality on the platform · Products in open formats · The marketplace · A policy that doesn't run anywhere is a wish. · Off the shelf · Film 1 of 16
+**On screen.** What governance needs · Who decides · One word, one home · Who may see it · Rules that run · Fixed where it starts · Change without surprises · A product with an owner · An agent that checks · Teachers of data · With the tools · Governed in dbt · Governed in Unity Catalog · Meaning on the platform · Quality on the platform · Products in open formats · The marketplace · Off the shelf · A policy that doesn't run anywhere is a wish. · Film 1 of 16 · data governance
+
+## Sound
+
+A new palette for a new series ([`source/tools/score.py`](source/tools/score.py)). A soft brass choir, like a town band heard from across the green, holds the chords: D dorian in open fifths for the market town, F major once the measures hold, and for the university today. A low music box, the toy town's own voice, marks the moments that land, and means the same thing all through: 1-3-5 rising for a rule, a copy and someone who checks (chapters 1 and 5), two notes a semitone apart for a question no one can answer yet, a note a little out of tune for each bushel. The series' mark, four notes, 1-5-4-8, on one horn with the music box above, plays under the title and the end card. One low pulse, leaning on the semitone at 96 beats a minute, runs under the two numbers that disagree, from "the same week" to "both are right". The effects are wooden knocks, paper, cork pins, rubber stamps and a hammer's thud, each at the moment its thing appears, all below about 2.5 kHz.
 
 ## Pause and think
 
@@ -153,7 +159,7 @@ Checked on 16 October 2026; the sources are listed below.
 - **1871.** Sir Charles Adderley, MP for North Staffordshire, in the Commons on 26 July 1871 (Hansard, Weights and Measures (Metric System) Bill): "In his own county, a bushel meant 32 different measures." The same debate cites the 1862 Select Committee: 61 different measures for the sale of wheat. By then the base units were uniform in law; local trade units built on them were not.
 - **What worked.** The Weights and Measures Act 1824 set up the imperial standards (in force 1 January 1826). The Act of 1834 had county magistrates buy copies of the standards, keep them at central places, and appoint inspectors, who compared and stamped every weight and measure used in trade and "shall keep a Book" of their comparisons; contracts made with unstamped measures were void. The 1835 Act abolished local and customary measures. The 1878 Act consolidated the law and gave the Board of Trade oversight of standards and inspectors. The film's inspector is in the 1880s, at a grocer's scale, because shop weights and measures were uniform by the late 1800s, while corn kept customary units until the Corn Sales Act 1921: so the film doesn't show the bushels becoming one.
 - **Clothes.** 1215: wool tunics and gowns, a coif, veils with wimples, a straw hat, a crier's cape; dyes of madder, woad and weld. 1880s: an inspector in a frock coat and top hat, a grocer in shirtsleeves, waistcoat and apron. Check against a costume history before recording.
-- **The university's numbers** (4,812 and 4,867, 55 apart) are invented, and so is the change to the term: "...a graduate certificate, a master or a microcredential, for at least 6 credit points..." is the change *Written once* tested its glossary sync with (`skills/sync-the-glossary/`, run 6 October 2026 on a scratch copy). The glossary's own term today is in `skills/sync-the-glossary/example_glossary.json`, and its copy, with `source:`, in `films/analytics-engineering/project/models/core/course/_course__conceptual.yml` (lines 18 to 31).
+- **The university's numbers** (4,812 and 4,867, 55 apart) are invented, and so is the change to the term: "...a graduate certificate, a master or a microcredential, for at least 6 credit points..." is the change *Written once* tested its glossary sync with (`films/analytics-engineering/project/skills/sync-the-glossary/`, run 6 October 2026 on a scratch copy). The glossary's own term today is in `films/analytics-engineering/project/skills/sync-the-glossary/example_glossary.json`, and its copy, with `source:`, in `films/analytics-engineering/project/models/core/course/_course__conceptual.yml` (lines 18 to 31).
 - **The government's definition** is kept generic on purpose: every reporting regime counts completions by its own rules, and the film doesn't name one. The example project's course domain takes its reference model from TCSI (Australia's Tertiary Collection of Student Information); the film doesn't say which government or rule.
 - **RACI** (responsible, accountable, consulted, informed) is a common form of the "chart of who's responsible for what"; "TBC" on it is invented, and common.
 - **Governance and management.** ISO/IEC 38505-1:2026, Introduction: "Governance is distinct from management and concerns evaluating, directing and monitoring the use of data, rather than the mechanics of storing, retrieving or managing the data." DAMA-DMBOK2 (p. 67): data governance is "the exercise of authority and control (planning, monitoring, and enforcement) over the management of data assets." "Governance sets the rules and checks they're kept. Management does the work" keeps both: direction and monitoring, against doing. "Deciding who decides" is the proposal's wording of decision rights. Plan-build-run is COBIT's, not used here.
@@ -165,4 +171,20 @@ Checked on 16 October 2026; the sources are listed below.
 
 ## Pacing report
 
-To be filled from `source/tools/pace.py` once the voice is recorded.
+From `source/tools/pace.py`, 17 October 2026, with the recorded voice:
+
+| Chapter | Length | Words a minute | Voice | Longest quiet |
+|---|---|---|---|---|
+| 1 · One measure | 50.9 s | 129 | 71% | 6.4 s (the stamp and the title, wordless) |
+| 2 · The shelf | 28.5 s | 131 | 74% | 1.8 s |
+| 3 · Two numbers | 20.6 s | 81 | 67% | 2.6 s (after "Which number is right?") |
+| 4 · Who decides? | 35.0 s | 134 | 73% | 1.8 s |
+| 5 · What governance is for | 30.9 s | 130 | 74% | 1.8 s |
+| 6 · Governance at the centre | 27.7 s | 123 | 79% | 1.8 s |
+| 7 · Listen first | 39.4 s | 133 | 70% | 2.8 s |
+| 8 · Where does it run? | 24.9 s | 132 | 64% | 2.8 s |
+| 9 · Where decisions enter | 31.1 s | 135 | 66% | 4.8 s (the pinned poster, wordless) |
+| 10 · The series | 22.7 s | 103 | 54% | 6.8 s (the end card, wordless) |
+| **Film** | **5:11.6** | **126** | **70%** | |
+
+652 words. Every sentence has at least 0.5 s after it, and no stop inside a chapter lasts 2.5 s or more, apart from the three wordless moments. Chapter 3 is slow on purpose: two numbers, read aloud, need time to land.

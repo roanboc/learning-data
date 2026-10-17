@@ -47,12 +47,12 @@ const NARR={
  {"id":"plan","gap":0.8,"text":"Planning doesn't know which number to trust."},
  {"id":"binder","gap":0.8,"text":"The people who wrote the binder weren't the problem. They wrote what they were asked for."},
  {"id":"tools","gap":0.8,"text":"Governance is people's work. Tools can carry out what people agree, but they can't make them agree."}]},
-"runs":{"name":"Where does it run?","lead":1.0,"tail":1.0,"vo":[
+"runs":{"name":"Where does it run?","lead":1.4,"tail":1.0,"vo":[
  {"id":"takes","gap":0.8,"text":"So he opens the binder, with one question for every line: where does it run?"},
  {"id":"runs","gap":0.8,"text":"Some lines can run in the work itself, as a required field, a check, a tag or a test."},
  {"id":"owned","gap":0.8,"text":"Some are decisions: someone owns each one, and writes it down where the work can find it."},
  {"id":"go","gap":0.8,"text":"And some can go."}]},
-"enter":{"name":"Where decisions enter","lead":1.0,"tail":1.0,"vo":[
+"enter":{"name":"Where decisions enter","lead":1.3,"tail":1.0,"vo":[
  {"id":"places","gap":0.8,"text":"And the work already has places for them."},
  {"id":"loop","gap":0.8,"text":"The data team builds in a loop of ten steps, from a question to a new version."},
  {"id":"pin","gap":0.8,"text":"Governance doesn't need another meeting. It needs a pin at the right steps:"},

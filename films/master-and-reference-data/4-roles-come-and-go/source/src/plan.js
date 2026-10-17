@@ -17,8 +17,9 @@ if(!PEOPLE.jun)PEOPLE.jun={name:"Jun Park",role:"Analytics engineer",side:"Techn
 PEOPLE.cato={name:"Marcus Porcius Cato",role:"Censor",side:"Person",does:"uses",edge:[236,232,226],seed:31,
   skin:[214,170,132],hair:{style:"cropped",c:[150,82,48]},
   top:{kind:"toga",c:[236,228,208],rolled:true},bottom:{kind:"skirt",c:[226,214,190]},legs:[214,170,132],shoe:[78,52,42],build:{sh:72,hip:60,h:0.98}};
-// the togate stance: the free right arm at his side, the left forearm across the waist, holding the toga's folds; he looks at the tablet
-POSE.togate={L:[0.12,-0.06],R:[0.18,-1.36],feet:20,shift:2,tilt:0.02,turn:0.12,gaze:[0.3,0],look:0};
+// the togate stance: the free right arm at his side, the left arm bent under the wool, its hand out at the waist holding the toga's
+// folds; he looks at the tablet
+POSE.togate={L:[0.12,-0.06],R:[0.14,-0.7],feet:20,shift:2,tilt:0.02,turn:0.12,gaze:[0.3,0],look:0};
 
 // a toga, drawn the character sheet's way: the tunic where the toga leaves it, then the wool, over the left shoulder, round under the
 // right arm and down to the calf, its rolled edge across the chest and its folds falling from the left shoulder
@@ -46,28 +47,42 @@ function m4_toga(ctx,P,br,sh){const sw=P.build.sh,hw=P.build.hip,y0=-448+br,c=M4
 function m4_togaEnd(ctx,P,br){const sw=P.build.sh,y0=-448+br,c=M4_TOGA;ctx.beginPath();ctx.moveTo(sw-36,y0+4);ctx.quadraticCurveTo(sw-48,-300,sw-40,-168);
   ctx.quadraticCurveTo(sw-28,-138,sw-10,-156);ctx.quadraticCurveTo(sw+4,-300,sw-2,y0+14);ctx.closePath();litFill(ctx,lighten(c,0.05),sw-48,y0,sw+4,-140,0.8);seam(ctx,c,0.5);
   ctx.beginPath();ctx.moveTo(sw-20,y0+16);ctx.quadraticCurveTo(sw-28,-280,sw-24,-162);ctx.strokeStyle=rgba(darken(c,0.3),0.45);ctx.lineWidth=1.8;ctx.stroke();}
+// the left arm under the toga: wrapped in the wool to the wrist, the hand out at the waist, under the toga's end (a, as arm() takes)
+function m4_wrapArm(ctx,P,a,br){const sw=P.build.sh,sx=sw-12,sy=-416+br,c=M4_TOGA,box=[-sw-60,-450,sw+60,-200];
+  const e=[sx+Math.sin(a[0])*108,sy+Math.cos(a[0])*108],d=[Math.sin(a[1]),Math.cos(a[1])],w=[e[0]+d[0]*100,e[1]+d[1]*100];
+  limb(ctx,[[sx,sy],e,[w[0]-d[0]*6,w[1]-d[1]*6]],34,32,c,box);
+  ctx.beginPath();ctx.moveTo(w[0]-d[0]*12-d[1]*17,w[1]-d[1]*12+d[0]*17);ctx.lineTo(w[0]-d[0]*12+d[1]*17,w[1]-d[1]*12-d[0]*17);seam(ctx,c,0.5);
+  ctx.save();ctx.translate(w[0]+d[0]*13,w[1]+d[1]*13);ctx.rotate(Math.atan2(d[1],d[0])-Math.PI/2);
+  ell(ctx,0,2,12,15);litFill(ctx,P.skin,-12,-13,12,17);seam(ctx,P.skin,0.3,1.2);ell(ctx,-9,-4,4.5,8,0.35);litFill(ctx,P.skin,-14,-12,-4,4);ctx.restore();}
 // a person in a toga: as person() draws one, but the arms come after the toga, so the hands show over its folds
 function m4_togate(ctx,id,x,y,s,o){o=o||{};const P=PEOPLE[id],po=blendPose(POSE[o.pose||"togate"],POSE[o.pose2],o.mix),E=EXPR[o.expr||"calm"],t=o.t||0,k=s*P.build.h,
     br=Math.sin(t*1.7+P.seed)*1.4;
   ctx.save();ctx.translate(x,y);ctx.scale(k,k);const g=ctx.createRadialGradient(0,-4,4,0,-4,100);g.addColorStop(0,rgba([90,80,96],0.2));g.addColorStop(1,rgba([90,80,96],0));
   ctx.fillStyle=g;ell(ctx,0,-4,100,16);ctx.fill();ctx.restore();
   outlined(ctx,cx=>{legs(cx,P,po);limb(cx,[[0,-470+br],[0,-440+br]],30,30,darken(P.skin,0.12),[-20,-470,20,-440]);m4_toga(cx,P,br,po.shift);
-    arm(cx,P,-1,po.L,br,po);arm(cx,P,1,po.R,br,po);m4_togaEnd(cx,P,br);
+    arm(cx,P,-1,po.L,br,po);m4_wrapArm(cx,P,po.R,br);m4_togaEnd(cx,P,br);
     cx.save();cx.translate(po.shift*0.2,-452+br);cx.rotate(po.tilt);cx.translate(0,-50+po.look*2);head(cx,P,E,po,t);cx.restore();},x,y,k,P.edge,[-250,-650,250,10],o.glow);}
+// a white figure in front of a painted place: paper under it first, so the place doesn't show through the white
+function m4_whiteOn(ctx,id,x,y,s,o){const a=o&&o.a!=null?o.a:1;if(a<=0.01)return;const F=wc_whiteFig(id,s),[c,q]=wc_buf("m4under",F.w,F.h);
+  q.drawImage(F.M,0,0);q.globalCompositeOperation="source-in";q.fillStyle=rgba(WC_PAPER,1);q.fillRect(0,0,F.w,F.h);q.globalCompositeOperation="source-over";
+  withA(ctx,a,()=>ctx.drawImage(c,x-F.w/2,y-F.fy));wc_white(ctx,id,x,y,s,[],o);}
 // a person facing the other way when o.flip, so a hand that points stays in the frame
 function m4_person(ctx,id,x,y,s,o){o=o||{};if(!o.flip)return person(ctx,id,x,y,s,o);ctx.save();ctx.translate(x,0);ctx.scale(-1,1);person(ctx,id,0,y,s,o);ctx.restore();}
 
 /* ---------- the places ---------- */
 // Rome before its marble: stucco on tuff, terracotta roofs and ornament, cypresses and stone pines
 const M4C={stucco:[244,236,220],cella:[222,206,184],tuff:[214,196,164],terra:[204,112,74],roof:[194,110,80],trav:[232,222,200],
-  cypress:[70,112,88],pine:[96,136,96],pineTrunk:[150,110,86],curia:[234,206,174],pave:[230,220,200],door:[116,90,72],shade:[198,184,160]};
+  cypress:[70,112,88],pine:[96,136,96],olive:[166,172,110],olive2:[156,170,114],pineTrunk:[150,110,86],curia:[234,206,174],pave:[230,220,200],door:[116,90,72],shade:[198,184,160]};
 // a cypress, tall and narrow
 function m4_cypress(ctx,x,y,h,depth){wc_wash(ctx,[[x-h*0.07,y],[x-h*0.115,y-h*0.36],[x-h*0.085,y-h*0.74],[x,y-h],[x+h*0.08,y-h*0.72],[x+h*0.12,y-h*0.34],[x+h*0.065,y]],M4C.cypress,{depth,kind:"tree"});}
-// a stone pine: a leaning trunk and a flat crown
-function m4_pine(ctx,x,y,h,depth){wc_wash(ctx,[[x-h*0.03,y],[x+h*0.05,y-h*0.5],[x+h*0.1,y-h*0.76],[x+h*0.135,y-h*0.76],[x+h*0.09,y-h*0.48],[x+h*0.03,y]],M4C.pineTrunk,{depth,kind:"trunk"});
-  const R=wc_rng(Math.round(x*5+h)),parts=[wc_ell(x+h*0.12,y-h*0.86,h*0.44,h*0.12,30)];
-  for(let i=0;i<6;i++){const dx=(R()-0.5)*h*0.7,dy=(R()-0.6)*h*0.1;parts.push(wc_ell(x+h*0.12+dx,y-h*0.86+dy,h*(0.16+R()*0.1),h*(0.07+R()*0.04),22));}
-  wc_wash(ctx,parts,M4C.pine,{depth,kind:"tree"});}
+// a stone pine: a leaning trunk that forks under one wide crown, flat below and bumpy on top
+function m4_pine(ctx,x,y,h,depth){const cx=x+h*0.12,cy=y-h*0.84,rw=h*0.46,rh=h*0.16,R=wc_rng(Math.round(x*5+h)),ph=R()*TAU,k=7+R()*2,fx=x+h*0.09,fy=y-h*0.6;
+  wc_wash(ctx,[[[x-h*0.03,y],[x+h*0.05,y-h*0.4],[fx-h*0.02,fy],[fx+h*0.03,fy],[x+h*0.08,y-h*0.38],[x+h*0.03,y]],
+    [[fx-h*0.02,fy+4],[cx-rw*0.42,cy+rh*0.2],[cx-rw*0.36,cy+rh*0.24],[fx+h*0.01,fy-2]],[[fx,fy+2],[cx+rw*0.34,cy+rh*0.22],[cx+rw*0.4,cy+rh*0.2],[fx+h*0.03,fy+6]]],
+    M4C.pineTrunk,{depth,kind:"trunk"});
+  const top=[],bot=[];for(let i=0;i<=48;i++){const u=-1+2*i/48,e=Math.pow(1-u*u,0.5);
+    top.push([cx+u*rw,cy-rh*e*(0.78+0.22*Math.sqrt(Math.abs(Math.sin(u*k+ph))))]);bot.push([cx-u*rw,cy+rh*0.34*Math.pow(1-u*u,0.8)*(0.8+0.2*Math.abs(Math.sin(u*k*1.3+ph)))]);}
+  wc_wash(ctx,top.concat(bot),M4C.pine,{depth,kind:"tree"});}
 // a house on the Palatine: a block of stucco and a terracotta roof
 function m4_house(ctx,x,y,w,depth){wc_part(ctx,wc_rect(x-w/2,y-w*0.55,w,w*0.55),M4C.stucco,depth);wc_part(ctx,[[x-w/2-6,y-w*0.55],[x+w/2+6,y-w*0.55],[x+w*0.3,y-w*0.78],[x-w*0.3,y-w*0.78]],M4C.roof,depth);
   wc_flat(ctx,wc_rect(x-w*0.12,y-w*0.3,w*0.16,w*0.3),M4C.door,depth);}
@@ -88,18 +103,17 @@ function m4_curia(ctx,x,base,depth){const C=M4C,w=220,h=150;wc_part(ctx,wc_rect(
 // a long portico of the Forum, low behind the tablet
 function m4_portico(ctx,x0,x1,base,depth){const C=M4C;wc_part(ctx,wc_rect(x0,base-96,x1-x0,96),C.cella,depth,{line:false});
   for(let x=x0+20;x<x1-10;x+=58)wc_part(ctx,wc_rect(x,base-90,14,90),C.stucco,depth);wc_part(ctx,[[x0-8,base-92],[x1+8,base-92],[x1-6,base-118],[x0+6,base-118]],C.roof,depth);}
-const M4_CAP=x=>640-226*Math.exp(-Math.pow((x-660)/400,6))+5*Math.sin(x/90),M4_PAL=x=>604-74*Math.exp(-Math.pow((x-1660)/420,4))+5*Math.sin(x/130+1),M4_FL=706;
-// 204 BC: the Capitoline with Jupiter's temple, the Palatine with its houses and pines, the Forum's portico, senate house and the temple
-// of Castor, and its paving
+const M4_CAP=x=>640-222*Math.exp(-Math.pow((x-640)/300,6))-165*Math.exp(-Math.pow((x-1090)/125,6))+5*Math.sin(x/90),M4_PAL=x=>604-74*Math.exp(-Math.pow((x-1660)/420,4))+5*Math.sin(x/130+1),M4_FL=706;
+// 204 BC: the Capitoline's two summits, Jupiter's temple on the higher and Juno's on the Arx, dry olive slopes; the Palatine with its
+// houses and pines, the Forum's portico, senate house and the temple of Castor, and its paving
 function m4_forum(ctx){const P=WCP,C=M4C;wc_sky(ctx,640,9,{sun:[1590,150],clouds:4,cx:240,cw:1500,cy:70,ch:170});
   wc_land(ctx,x=>580+16*Math.sin(x/260+0.5)+8*Math.sin(x/90),[156,176,184],0.14,{line:false});
-  wc_land(ctx,M4_PAL,P.mid2,0.4);
+  wc_land(ctx,M4_PAL,C.olive2,0.4);
   for(const [x,w] of [[1360,64],[1450,86],[1560,60],[1690,92],[1830,76]])m4_house(ctx,x,M4_PAL(x)+16,w,0.44);
   for(const [x,h] of [[1500,140],[1620,166],[1760,132],[1890,154]])m4_pine(ctx,x,M4_PAL(x)+14,h,0.46);
-  wc_land(ctx,M4_CAP,P.mid,0.5);
-  wc_wash(ctx,[[920,M4_CAP(920)+2],[1040,M4_CAP(1040)+4],[1100,M4_FL],[960,M4_FL]],C.tuff,{depth:0.52,kind:"build"});
-  m4_temple(ctx,650,M4_CAP(650)+6,1,0.56);
-  m4_pine(ctx,240,M4_CAP(240)+10,150,0.56);m4_cypress(ctx,1000,M4_CAP(1000)+8,150,0.56);m4_cypress(ctx,420,M4_CAP(420)+8,120,0.56);
+  wc_land(ctx,M4_CAP,C.olive,0.5);
+  m4_temple(ctx,650,M4_CAP(650)+6,1,0.56);m4_temple(ctx,1090,M4_CAP(1090)+6,0.42,0.54,{n:4});
+  m4_cypress(ctx,980,M4_CAP(980)+8,140,0.56);m4_cypress(ctx,420,M4_CAP(420)+8,120,0.56);
   m4_portico(ctx,260,1100,M4_FL,0.6);m4_curia(ctx,1130,M4_FL,0.62);
   m4_temple(ctx,1580,M4_FL,0.92,0.64,{w:300,ph:62,ch:116});
   m4_cypress(ctx,1392,M4_FL+4,230,0.66);m4_cypress(ctx,1792,M4_FL+4,250,0.66);m4_cypress(ctx,1850,M4_FL+6,200,0.66);
@@ -162,13 +176,15 @@ function m4_hush(ctx,a){if(a<=0.01)return;ctx.save();ctx.setTransform(1,0,0,1,0,
 const M4_TERRA=[206,112,70],M4_TERRAINK=[146,64,34];
 // his offices, as the tablet has them: the year it began (BC), how long it lasted, its name
 const M4_OFF=[[204,1,"quaestor"],[199,1,"aedile"],[198,1,"praetor"],[195,1,"consul"],[184,1.5,"censor"]];
-// the stone tablet: a slab of travertine with a handle at each side, on a pedestal; its panel (x is its middle)
+// the stone tablet: a slab of travertine with a small dovetail handle at each side, on a pedestal with a moulded cap and stepped base;
+// its panel (x is its middle)
 const M4_TB={x:760,y:496,w:480,h:300};
-function m4_tabletPaper(){const B=M4_TB;return wc_kept("tablet",B.w+260,B.h+560,q=>{q.translate(130,40);const C=M4C,w=B.w,h=B.h;
-  wc_part(q,wc_rect(40,h+196,w-80,22),wc_dim(C.trav,0.04),0.9);wc_part(q,wc_rect(70,h+18,w-140,180),C.trav,0.9);wc_part(q,wc_rect(50,h,w-100,20),wc_dim(C.trav,0.04),0.9);
-  wc_part(q,[[0,h*0.3],[-64,h*0.14],[-64,h*0.86],[0,h*0.7]],wc_dim(C.trav,0.03),0.9);wc_part(q,[[w,h*0.3],[w+64,h*0.14],[w+64,h*0.86],[w,h*0.7]],wc_dim(C.trav,0.03),0.9);
+function m4_tabletPaper(){const B=M4_TB;return wc_kept("tablet",B.w+260,B.h+560,q=>{q.translate(130,40);const C=M4C,w=B.w,h=B.h,dk=wc_dim(C.trav,0.04);
+  wc_part(q,wc_rect(76,h+34,w-152,158),C.trav,0.9);wc_part(q,wc_rect(58,h+18,w-116,18),dk,0.9);wc_part(q,wc_rect(42,h,w-84,20),dk,0.9);
+  wc_part(q,wc_rect(50,h+190,w-100,16),dk,0.9);wc_part(q,wc_rect(30,h+204,w-60,18),dk,0.9);
+  wc_part(q,[[2,h*0.4],[-42,h*0.3],[-42,h*0.7],[2,h*0.6]],wc_dim(C.trav,0.03),0.9);wc_part(q,[[w-2,h*0.4],[w+42,h*0.3],[w+42,h*0.7],[w-2,h*0.6]],wc_dim(C.trav,0.03),0.9);
   wc_part(q,wc_rect(0,0,w,h),C.trav,0.9);wc_ink(q,wc_rect(18,18,w-36,h-36),true,1.6,[120,108,92],0.7,5,0.8);wc_ink(q,wc_rect(26,26,w-52,h-52),true,1,[150,138,120],0.5,7,0.8);
-  const R=wc_rng(77);q.strokeStyle=rgba([176,160,132],0.5);q.lineWidth=1.4;for(let i=0;i<90;i++){const x=R()*(w-20)+10,y=R()*(h+190)+(R()<0.6?0:h-10);if(y>h&&(x<80||x>w-80))continue;q.beginPath();q.moveTo(x,y);q.lineTo(x+3+R()*6,y+R()*1.2);q.stroke();}});}
+  const R=wc_rng(77);q.strokeStyle=rgba([176,160,132],0.5);q.lineWidth=1.4;for(let i=0;i<90;i++){const x=R()*(w-20)+10,y=R()*(h+190)+(R()<0.6?0:h-10);if(y>h&&(x<84||x>w-84))continue;q.beginPath();q.moveTo(x,y);q.lineTo(x+3+R()*6,y+R()*1.2);q.stroke();}});}
 function m4_tablet(ctx){const B=M4_TB;ctx.drawImage(m4_tabletPaper(),B.x-B.w/2-130,B.y-40);}
 // text cut into the stone as p goes 0 to 1, with a little dust where the chisel is
 function m4_carve(ctx,s,x,y,size,wt,p){if(p<=0)return;const w=tw(ctx,s,size,wt),x0=x-w/2,q=clamp(p,0,1);ctx.save();ctx.beginPath();ctx.rect(x0-4,y-size*1.1,w*q+8,size*1.5);ctx.clip();
@@ -246,11 +262,11 @@ function m4_sys(ctx,t,i,o){o=o||{};const [r,name,st,dates]=M4_SYS[i],x=M4_SX[i],
 const M4_BX=560,M4_BY=470,M4_BW=700,M4_BH=300;
 function m4_copy(ctx,t,o){wc_panel(ctx,M4_BX,M4_BY,M4_BW,M4_BH,{kind:"card",wash:WC_SIDE.tech,washA:0.16,seed:31});
   wc_T(ctx,"the platform's copy",M4_BX+32,M4_BY+50,{w:800,size:30,col:WC_DARK});
-  // the night's date turns over: each night's date slides up and out as the next one comes in
+  // the night's date turns over: the old date lifts away, then the next one settles in its place, so the two never overlap
   const dts=["30 Mar","31 Mar","1 Apr"],n=o.nights,dx=M4_BX+M4_BW-30;let k=0;for(let i=0;i<n.length;i++)if(t>=n[i])k=i;
-  const turn=clamp((t-n[k])/0.4,0,1);ctx.save();ctx.beginPath();ctx.rect(dx-170,M4_BY+14,170,52);ctx.clip();
-  if(k>0&&turn<1)wc_T(ctx,dts[k-1],dx,M4_BY+50-24*ease(turn),{w:500,size:28,f:"mono",align:"right",a:1-turn});
-  wc_T(ctx,dts[k],dx,M4_BY+50+(k>0?24*(1-ease(turn)):0),{w:500,size:28,f:"mono",align:"right",a:k>0?ease(turn):1});ctx.restore();
+  const u0=k>0?clamp((t-n[k])/0.22,0,1):1,u1=k>0?clamp((t-n[k]-0.2)/0.28,0,1):1;ctx.save();ctx.beginPath();ctx.rect(dx-170,M4_BY+14,170,52);ctx.clip();
+  if(u0<1)wc_T(ctx,dts[k-1],dx,M4_BY+50-12*ease(u0),{w:500,size:28,f:"mono",align:"right",a:1-u0});
+  if(u1>0)wc_T(ctx,dts[k],dx,M4_BY+50+12*(1-ease(u1)),{w:500,size:28,f:"mono",align:"right",a:ease(u1)});ctx.restore();
   if(o.ring>0)wc_ring(ctx,dx-50,M4_BY+40,72,28,o.ring,{seed:13});
   M4_SYS.forEach(([r,name,st],i)=>{const y=M4_BY+118+i*46,on=o.rows[i];if(on<=0)return;withA(ctx,clamp(on*3,0,1),()=>{ctx.fillStyle=rgba(WC_ROLE[r],1);ctx.beginPath();ctx.arc(M4_BX+44,y-9,8,0,TAU);ctx.fill();
     wc_T(ctx,name,M4_BX+64,y,{w:600,size:28,col:WC_MUTED});});
@@ -265,7 +281,7 @@ function m4_planAsk(ctx,t,x,y,o){const w=560,h=300,tW=tw(ctx,"Planning",30,800);
   wc_T(ctx,"Planning",x+32,y+48,{w:800,size:30,col:WC_DARK});wc_T(ctx,typeOn("students who also work here",o.q),x+32,y+98,{w:600,size:28,col:WC_INK});
   if(o.asat>0)withA(ctx,o.asat,()=>wc_badge(ctx,x+32,y+150,"as at 31 Mar 2025"));
   if(o.ans>0){wc_tick(ctx,x+50,y+214,30,WC_ROLEINK.student,clamp(o.ans/0.4,0,1),4);withA(ctx,clamp((o.ans-0.3)/0.4,0,1),()=>{wc_T(ctx,"Linh Nguyen",x+82,y+226,{w:700,size:28,col:WC_DARK});
-    wc_T(ctx,"student",x+82+tw(ctx,"Linh Nguyen  ",28,700),y+226,{w:700,size:28,col:WC_ROLEINK.student});wc_T(ctx,"works here",x+82,y+268,{w:600,size:28,col:WC_MUTED});});}}
+    wc_T(ctx,"student",x+82,y+272,{w:700,size:28,col:WC_ROLEINK.student});wc_T(ctx,"· works here",x+82+tw(ctx,"student ",28,700),y+272,{w:600,size:28,col:WC_MUTED});});}}
 
 /* ---------- 4 to 7, and 10. Linh's timeline ---------- */
 // dates as years with a fraction, so they sit on a line: "2026-03-31" is 2026.246
@@ -472,8 +488,9 @@ function m4_heart(ctx,x,y,s,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx
 /* ---------- 9. one table, any date ---------- */
 // the role table, as Jun builds it: a row for each role, the tutor's earlier contracts folded into one line, and the day each row was
 // recorded, which comes in last
-const M4_TB2={x:460,y:84,w:1410,h:540};
-const M4_TC=[["person_key",32],["role_type",210],["owner",388],["relates_to",630],["valid_from",850],["valid_to",1036],["recorded_at",1222]];
+// columns laid out from their widest text at 28 px, about 24 apart, with room either side of valid_from for the ring round it
+const M4_TB2={x:404,y:84,w:1472,h:540};
+const M4_TC=[["person_key",32],["role_type",222],["owner",412],["relates_to",654],["valid_from",864],["valid_to",1068],["recorded_at",1260]];
 const M4_TROWS=[["applicant","admissions","bachelor's","2018-08-13","2019-02-25","2018-08-13"],["student","registrar's office","bachelor's","2019-02-25","2022-12-15","2019-02-25"],
   ["alumna","alumni office","bachelor's","2022-12-15",null,"2022-12-16"],["tutor","HR",null],["applicant","admissions","master's","2025-06-02","2025-07-21","2025-06-02"],
   ["student","registrar's office","master's","2025-07-21",null,"2025-07-21"],["tutor","HR","unit · S1 2026","2026-02-23","2026-06-27","2026-04-06"],

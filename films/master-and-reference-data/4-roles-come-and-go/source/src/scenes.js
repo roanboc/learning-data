@@ -93,7 +93,7 @@ function m4_board(ctx,t,o){const rest=o.rest==null?1:o.rest;
     for(let i=0;i<4;i++)if(o.links[i]>0)wc_link(ctx,M4_SX[i]+M4_SW/2,M4_SY+M4_SH+10,M4_BX+90+i*173,M4_BY-10,WC_PENCIL,{p:o.links[i],vertical:true,a:0.55});
     arrive(ctx,M4_BX+M4_BW/2,M4_BY+M4_BH/2,t,o.copyT,()=>m4_copy(ctx,t,o.cp),{dy:16});
     arrive(ctx,M4_PLX+280,M4_PLY+150,t,o.planT,()=>m4_planAsk(ctx,t,M4_PLX,M4_PLY,{q:o.q,asat:o.asat,ans:o.ans}),{dy:16});
-    if(o.red>0){const sx=M4_PLX+82+tw(ctx,"Linh Nguyen  ",28,700),sw=tw(ctx,"student",28,700);wc_ring(ctx,sx+sw/2,M4_PLY+216,sw/2+22,30,o.red,{col:WC_NO,seed:23,lw:3.6});}
+    if(o.red>0){const sw=tw(ctx,"student",28,700);wc_ring(ctx,M4_PLX+82+sw/2,M4_PLY+263,sw/2+18,25,o.red,{col:WC_NO,seed:23,lw:3.6});}
     if(o.note>0)wc_hand(ctx,"she came back in Jul 2025",M4_PLX+36,M4_PLY+356,{p:o.note,size:30,col:WC_NO});});}
 scene("flags",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const tN=c("night"),tNi=w("night","night"),tPf=w("night","platform"),tSt=[w("says","enrolled"),w("says","casual staff"),w("says","project member"),w("says","graduate")],
@@ -260,27 +260,28 @@ scene("elsewhere",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s
     tSt=w("need","person who stays"),tLS=w("need","life support"),tGo=w("need","goes on"),tHis=w("kept","his account"),tClose=w("kept","close"),tHer=w("kept","Kept on her"),tStays=w("kept","it stays");
   m4_open(ctx,S,t,sc,"street",[[0,960,540,1]],{z:0.02});
   // the person who stays, in the doorway; the account holder walks away down the street
-  wc_white(ctx,"leila",M4_OCC[0],M4_OCC[1],0.56,[],{a:fin(t,0.5,0.8)});
+  m4_whiteOn(ctx,"leila",M4_OCC[0],M4_OCC[1],0.56,{a:fin(t,0.5,0.8)});
   const wk=clamp((t-tOut)/2.8,0,1),aa=fin(t,0.8,0.8)*(1-clamp((wk-0.45)/0.5,0,1));
-  if(aa>0.01)wc_white(ctx,"minh",M4_AH[0]+easeCam(wk)*420,M4_AH[1]-Math.abs(Math.sin(wk*Math.PI*6))*5*Math.min(1,wk*8),0.66,[],{a:aa});
-  // her need: a heart, which beats; its tag
+  if(aa>0.01)m4_whiteOn(ctx,"minh",M4_AH[0]+easeCam(wk)*420,M4_AH[1]-Math.abs(Math.sin(wk*Math.PI*6))*5*Math.min(1,wk*8),0.66,{a:aa});
+  // her need: a heart, which beats; its tag, on the wall above the company's sheet, and a pencil arrow to it
   const hb=1+0.09*Math.pow(Math.max(0,Math.sin(t*5.4)),3)*fin(t,tGo-0.3,0.5);
   arrive(ctx,M4_CHEST[0],M4_CHEST[1],t,tLS-0.1,()=>m4_heart(ctx,M4_CHEST[0],M4_CHEST[1],1.9*hb,1),{dy:-8});
-  arrive(ctx,1124,M4_CHEST[1],t,tLS+0.25,()=>wc_tag(ctx,1222,M4_CHEST[1],"life support",{align:"right",size:28,w:600}),{dy:-6});
+  arrive(ctx,1128,448,t,tLS+0.25,()=>wc_tag(ctx,1222,448,"life support",{align:"right",size:28,w:600}),{dy:-6});
+  m4_arrow(ctx,1232,456,1318,490,clamp((t-tLS-0.45)/0.5,0,1),{lw:2.4});
   // the company's sheet: his role, to 14 June, and hers, open
   const [y1,y2]=M4_ERY,xJ=m4_em(M4_MOVE);
   arrive(ctx,M4_ES.x+M4_ES.w/2,M4_ES.y+M4_ES.h/2,t,tCo-0.4,()=>{m4_energySheet(ctx,{rowA:[fin(t,tAH-0.1,0.5),fin(t,tSt-0.1,0.5)],axis:1});
     m4_eband(ctx,M4_EX0,lerp(M4_EX0,xJ,ease(clamp((t-tAH-0.2)/(tJun-tAH+0.2),0,1))),y1,fin(t,tAH,0.4),{open:true});
     m4_edge(ctx,[[xJ,y1-20],[xJ,y1+20]],fin(t,tEnd-0.15,0.4));
     m4_eband(ctx,M4_EX0,lerp(M4_EX0,M4_EX1+10,ease(clamp((t-tSt)/1.3,0,1))),y2,fin(t,tSt,0.4),{open:true});},{dy:20,d:0.9});
-  arrive(ctx,xJ+56,y1,t,tJun-0.1,()=>wc_tag(ctx,xJ+14,y1,"14 Jun",{size:28,w:700}),{dy:-6});
+  arrive(ctx,xJ+86,y1,t,tJun-0.1,()=>wc_tag(ctx,xJ+44,y1,"14 Jun",{size:28,w:700}),{dy:-6});
   // where the company keeps her need: on his account, it would close with it; on her, it stays
   const f1=clamp((t-tHis+0.6)/0.9,0,1),f2=clamp((t-tHer+0.15)/0.9,0,1),hx=M4_EX0+64;
   if(f1>0){const q1=ease(f1),fx=f2>0?hx:lerp(M4_CHEST[0],hx,q1),fy=f2>0?lerp(y1,y2,ease(f2))-Math.sin(ease(f2)*Math.PI)*30:lerp(M4_CHEST[1],y1,q1)-Math.sin(q1*Math.PI)*90;
     m4_need(ctx,hx+22,lerp(hx+22,xJ,ease(clamp((t-tHis-0.3)/0.8,0,1))),y1,1-0.65*f2);
     m4_need(ctx,hx+22,lerp(hx+22,M4_EX1,ease(clamp((t-tHer-0.5)/1.2,0,1))),y2,1);
     m4_heart(ctx,fx,fy,1.5,1);}
-  withA(ctx,1-0.55*f2,()=>{wc_ring(ctx,xJ,y1,40,32,clamp((t-tClose+0.1)/0.7,0,1),{col:WC_NO,seed:47,lw:3.4});
+  withA(ctx,1-0.55*f2,()=>{wc_ring(ctx,xJ-2,y1,34,30,clamp((t-tClose+0.1)/0.7,0,1),{col:WC_NO,seed:47,lw:3.4});
     wc_hand(ctx,"closes with the account",M4_EX0+12,y1+54,{p:clamp((t-tClose-0.2)/1.1,0,1),size:30,col:WC_NO});});
   wc_hand(ctx,"kept on the person",M4_EX0+12,y2+54,{p:clamp((t-tStays+0.1)/0.9,0,1),size:30,col:WC_ROLEINK.alumna});
   m4_close(ctx,S);wc_paperOver(ctx,S);});
@@ -302,7 +303,7 @@ scene("table",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const on=tP.reduce((k,s,i)=>t>=s-0.2?i:k,-1),qx=M4_TB2.x+M4_TB2.w-690;
   arrive(ctx,qx+345,M4_CY2+118,t,tQ-0.3,()=>m4_query(ctx,qx,M4_CY2,{pins:tP.map(s=>fin(t,s-0.2,0.3)),t,t0:tP.map(s=>s-0.2),on}),{dy:16});
   // the contract entered late counts from the day it began
-  const X=k=>M4_TB2.x+M4_TC[k][1];m4_loop(ctx,X(4)-16,M4_TRY(6)-34,X(4)+186,M4_TRY(6)+14,clamp((t-tBeg+0.1)/0.8,0,1),{seed:71});
+  const X=k=>M4_TB2.x+M4_TC[k][1];m4_loop(ctx,X(4)-14,M4_TRY(6)-34,X(4)+182,M4_TRY(6)+14,clamp((t-tBeg+0.1)/0.8,0,1),{seed:71});
   m4_close(ctx,S);wc_paperOver(ctx,S);});
 
 /* ---------- 10. The person stays ---------- */

@@ -464,14 +464,15 @@ const NARR={
  {"id":"places","gap":0.8,"text":"And the work already has places for them."},
  {"id":"loop","gap":0.8,"text":"The data team builds in a loop of ten steps, from a question to a new version."},
  {"id":"pin","gap":0.8,"text":"Governance doesn't need another meeting. It needs a pin at the right steps:"},
- {"id":"pins","gap":0.8,"text":"a term when the question is asked, a classification at the source, an owner and a contract, a rule as a test, an approval at review, and a version when it changes."}]},
+ {"id":"pins","text":"a term when the question is asked, a classification at the source, an owner and a contract,"},
+ {"id":"pins2","gap":0.8,"text":"a rule as a test, an approval at review, and a version when it changes."}]},
 "series":{"name":"The series","lead":1.0,"tail":1.0,"vo":[
  {"id":"next","gap":0.8,"text":"Over nine more films, Yusuf takes the binder off the shelf, one kind of policy at a time."},
  {"id":"tools","gap":0.8,"text":"Then six more show how to build them, with dbt and Databricks."},
  {"id":"wish","gap":0.8,"text":"A policy that doesn't run anywhere is a wish."}]}
 };
 
-const VODUR={"measure/m1215": 2.845, "measure/quote": 5.828, "measure/repeat": 5.352, "measure/kings": 3.939, "measure/county": 8.459, "measure/worked": 2.012, "measure/three": 7.933, "shelf/starts": 4.229, "shelf/shelf": 5.754, "shelf/chart": 4.527, "shelf/council": 2.693, "shelf/brief": 3.754, "numbers/week": 2.214, "numbers/census": 5.46, "numbers/draft": 4.87, "numbers/which": 1.196, "decides/follow": 1.755, "decides/both": 2.801, "decides/monday": 5.217, "decides/before": 2.803, "decides/gov": 5.083, "decides/answers": 5.801, "decides/tbc": 1.953, "for/policy": 3.939, "for/doesnt": 3.568, "for/for": 5.76, "for/like": 5.484, "for/mgmt": 4.16, "wheel/body": 3.146, "wheel/wheel": 4.994, "wheel/others": 10.588, "wheel/takes": 3.181, "listen/ask": 6.231, "listen/jun": 2.899, "listen/mei": 3.051, "listen/sam": 3.332, "listen/plan": 2.006, "listen/binder": 4.132, "listen/tools": 5.806, "runs/takes": 4.424, "runs/runs": 5.647, "runs/owned": 4.831, "runs/go": 1.014, "enter/places": 1.837, "enter/loop": 4.584, "enter/pin": 4.036, "enter/pins": 10.025, "series/next": 5.633, "series/tools": 4.071, "series/wish": 2.455};
+const VODUR={"measure/m1215": 2.845, "measure/quote": 5.828, "measure/repeat": 5.352, "measure/kings": 3.939, "measure/county": 8.459, "measure/worked": 2.012, "measure/three": 7.933, "shelf/starts": 4.229, "shelf/shelf": 5.754, "shelf/chart": 4.527, "shelf/council": 2.693, "shelf/brief": 3.754, "numbers/week": 2.214, "numbers/census": 5.46, "numbers/draft": 4.87, "numbers/which": 1.196, "decides/follow": 1.755, "decides/both": 2.801, "decides/monday": 5.217, "decides/before": 2.803, "decides/gov": 5.083, "decides/answers": 5.801, "decides/tbc": 1.953, "for/policy": 3.939, "for/doesnt": 3.568, "for/for": 5.76, "for/like": 5.484, "for/mgmt": 4.16, "wheel/body": 3.146, "wheel/wheel": 4.994, "wheel/others": 10.588, "wheel/takes": 3.181, "listen/ask": 6.231, "listen/jun": 2.899, "listen/mei": 3.051, "listen/sam": 3.332, "listen/plan": 2.006, "listen/binder": 4.132, "listen/tools": 5.806, "runs/takes": 4.424, "runs/runs": 5.647, "runs/owned": 4.831, "runs/go": 1.014, "enter/places": 1.837, "enter/loop": 4.584, "enter/pin": 4.036, "enter/pins": 5.363, "enter/pins2": 4.272, "series/next": 5.633, "series/tools": 4.071, "series/wish": 2.455};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -485,7 +486,7 @@ const BREATH={
 "wheel":{"hold":{"wheel":0.6}},
 "listen":{"hold":{"ask":0.6,"jun":0.5,"mei":0.5,"sam":0.6,"plan":0.5,"binder":0.6,"tools":1.0}},
 "runs":{"hold":{"takes":0.6,"runs":0.9,"owned":0.9,"go":1.0}},
-"enter":{"hold":{"places":0.5,"loop":1.0,"pin":0.6,"pins":0.8},"breathe":2.2},
+"enter":{"hold":{"places":0.5,"loop":1.0,"pin":0.6,"pins2":0.8},"breathe":2.2},
 "series":{"hold":{"next":0.5,"tools":0.6},"breathe":5.0}
 };
 
@@ -1220,317 +1221,425 @@ PEOPLE.jun={name:"Jun Park",role:"Analytics engineer",side:"Technical",does:"pro
   skin:[226,186,150],hair:{style:"side",c:[24,22,26]},glasses:[40,44,54],
   top:{kind:"sweater",c:[62,120,112]},bottom:{c:[48,52,62]},shoe:[232,232,236],build:{sh:72,hip:58,h:0.99}};
 
-/* ===== The data governance series: the toy town =====
-   The university is a model town on a table, drawn in 3D with Canvas 2D: a camera, painted boxes lit by one sun, rooms open at
-   the front like dollhouses, people as painted figures on small bases, and a tilt-shift blur that makes it look small and close.
-   Words wait in a queue and are drawn after the blur, so they stay sharp. The town's coordinates: x east, y up, z north, in
-   metres of the model's own world (a person is about 1.7 tall). Buildings stand at an angle: mxSet turns their own coordinates
-   (x across the front, z from the front to the back) into the town's. */
+/* ===== The same one, everywhere: the watercolour look =====
+   Washes of pigment on warm paper, a pencil line, and colours that mean something: each role has its own, the same in every film,
+   and the person, as the master record, is left as white paper and banded in her roles' colours. Backgrounds are daylight
+   landscapes, soft, so the role colours are the strongest washes on screen. Text is dark ink on paper-light cards.
+   Everything costly is painted once and kept: the paper, the pigment's grain, each place's background and each card's paper. Only
+   the text and what moves are drawn every frame, so the site's player can draw the film live. Every name here starts with wc_ or WC,
+   because every file of the film shares one script. */
 
-// ---- vectors ----
-const v3=(x,y,z)=>({x,y,z}),vadd=(a,b)=>v3(a.x+b.x,a.y+b.y,a.z+b.z),vsub=(a,b)=>v3(a.x-b.x,a.y-b.y,a.z-b.z),vmul=(a,k)=>v3(a.x*k,a.y*k,a.z*k);
-const vdot=(a,b)=>a.x*b.x+a.y*b.y+a.z*b.z,vcross=(a,b)=>v3(a.y*b.z-a.z*b.y,a.z*b.x-a.x*b.z,a.x*b.y-a.y*b.x),vlen=a=>Math.hypot(a.x,a.y,a.z),vnorm=a=>{const l=vlen(a)||1;return v3(a.x/l,a.y/l,a.z/l);};
-const DEG=Math.PI/180;
+/* ---------- colours ---------- */
+const WC_PAPER=[251,247,238],WC_PENCIL=[58,54,66],WC_INK=[46,42,56],WC_MUTED=[100,96,112],WC_DARK=[30,26,40],WC_CARD=[253,251,245];
+// the roles, the same in every film: student teal, platform user amber, customer coral, tutor violet, alumna green, donor magenta
+const WC_ROLE={student:[14,150,146],platform:[226,150,10],customer:[238,96,78],tutor:[126,86,220],alumna:[38,160,96],donor:[200,70,150]};
+// text in a role's colour on paper, darkened to keep 4.5:1
+const WC_ROLEINK={student:[0,112,108],platform:[150,92,0],customer:[184,56,40],tutor:[100,62,190],alumna:[22,120,68]};
+// the industries: the university teal (the student's), health red, banking blue, energy yellow, retail orange, the public sector green-blue
+const WC_IND={uni:[14,150,146],health:[214,66,74],bank:[52,112,204],energy:[232,184,24],retail:[240,130,40],public:[36,148,168]};
+// the soft wash a person is edged in: cyan for the technical side, gold for the business side, a neutral grey-blue for the person herself
+const WC_SIDE={tech:[100,176,240],biz:[244,188,70],none:[150,170,200]};
+const WC_BADGE=[255,214,90];
+// the landscape, in daylight
+const WCP={skyTop:[116,174,226],sun:[255,224,150],farForest:[124,162,154],far:[176,204,176],mid:[156,198,124],mid2:[146,192,118],near:[134,182,104],field:[222,216,142],
+  water:[132,182,222],pine:[78,128,104],birchLeaf:[176,210,112],leaf:[114,172,104],leaf2:[146,190,114],trunk:[156,120,92],bark:WC_PAPER,barkMark:[72,68,74],
+  wall:[248,242,230],roofDark:[104,108,126],spire:[90,94,114],pane:[112,134,176],door:[176,124,92],falu:[202,86,68],trim:WC_PAPER,roof:[120,108,116],
+  farmDoor:[104,144,166],stoneGrey:[184,180,174],brick:[208,126,98],copper:[114,174,154],road:[238,218,176],coat:[112,126,174],skinTiny:[242,206,172],
+  hat:[94,86,94],parchment:[250,240,216],parchInk:[64,52,46],leather:[176,112,82],flowerA:[255,255,255],flowerB:[255,214,80],flowerC:[156,146,232],
+  city:[194,210,228],stone:[238,210,162],slate:[134,144,164],clock:[255,255,255],glass:[164,208,234],concrete:[228,226,222],plaster:[244,228,198],
+  brickHouse:[214,126,102],blueHouse:[164,190,220],chimney:[194,118,98],tile:[134,118,124],blueDoor:[84,134,174],paving:[236,230,218],iron:[92,96,112],
+  lampGlow:[255,232,172],mailbox:[218,92,78],lawn:[152,198,122],hedge:[98,152,102],wood:[172,138,102],wallIn:[242,232,214],floor:[214,196,170]};
 
-// ---- a building's own coordinates: front centre at (x,z), turned so its depth runs towards the angle deg (0 north, 90 east) ----
-let MX=null;
-function mxSet(x,z,deg){const a=deg*DEG;MX={x,z,c:Math.cos(a),s:Math.sin(a),deg};}
-function mxOff(){MX=null;}
-const mxP=p=>MX?v3(MX.x+p.x*MX.c+p.z*MX.s,p.y,MX.z-p.x*MX.s+p.z*MX.c):p;
-const mxN=n=>MX?v3(n.x*MX.c+n.z*MX.s,n.y,-n.x*MX.s+n.z*MX.c):n;
-// and back: where a point of the town is, in the building's coordinates (where the camera stands, seen from a room)
-const mxL=p=>{if(!MX)return p;const dx=p.x-MX.x,dz=p.z-MX.z;return v3(dx*MX.c-dz*MX.s,p.y,dx*MX.s+dz*MX.c);};
+/* ---------- randomness and textures ---------- */
+function wc_rng(seed){let s=(seed>>>0)||1;return()=>{s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function wc_noise(seed){const R=wc_rng(seed),N=new Float32Array(1024);for(let i=0;i<1024;i++)N[i]=R();const g=(ix,iy)=>N[((ix*73856093)^(iy*19349663))&1023];
+  return(x,y)=>{const ix=Math.floor(x),iy=Math.floor(y),tx=x-ix,ty=y-iy,sx=tx*tx*(3-2*tx),sy=ty*ty*(3-2*ty);return lerp(lerp(g(ix,iy),g(ix+1,iy),sx),lerp(g(ix,iy+1),g(ix+1,iy+1),sx),sy);};}
+// the paper's tooth and fibres, near white, to multiply over a whole frame; k is how strongly it shows, and the corners darken a touch
+function wc_paperTex(w,h,seed,k){const c=mkCanvas(w,h),x=c.getContext("2d"),im=x.createImageData(w,h),d=im.data,n=wc_noise(seed),R=wc_rng(seed+5);
+  for(let j=0;j<h;j++)for(let i=0;i<w;i++){const q=(j*w+i)*4,v=n(i/2.3,j/2.3)*0.45+n(i/9,j/9)*0.35+n(i/60,j/60)*0.2,t=255-(Math.pow(v,2.4)*46+R()*6)*k,
+    e=Math.pow(Math.hypot((i-w/2)/(w*0.62),(j-h*0.48)/(h*0.62)),2.2),vg=1-0.05*clamp(e-0.35,0,1);d[q]=t*vg;d[q+1]=(t-1*k)*(vg-0.003);d[q+2]=(t-3*k)*(vg-0.006);d[q+3]=255;}
+  x.putImageData(im,0,0);x.lineCap="round";
+  for(let i=0;i<w*h/2400;i++){const x0=R()*w,y0=R()*h,a=R()*TAU,l=5+R()*24;x.strokeStyle="rgba(130,118,100,"+((0.04+R()*0.07)*k)+")";x.lineWidth=0.5+R()*0.7;x.beginPath();x.moveTo(x0,y0);
+    x.quadraticCurveTo(x0+Math.cos(a+0.5)*l*0.5,y0+Math.sin(a+0.5)*l*0.5,x0+Math.cos(a)*l,y0+Math.sin(a)*l);x.stroke();}
+  return c;}
+// pigment that settles in the paper's tooth: white with clustered specks, to multiply into washes
+function wc_granTex(w,h,seed){const c=mkCanvas(w,h),x=c.getContext("2d"),im=x.createImageData(w,h),d=im.data,n=wc_noise(seed),R=wc_rng(seed+3);
+  for(let j=0;j<h;j++)for(let i=0;i<w;i++){const q=(j*w+i)*4,v=n(i/4,j/4)*0.55+n(i/19,j/19)*0.45,sp=R()<0.05*v?R()*60:0,t=255-v*36-sp;d[q]=t;d[q+1]=t;d[q+2]=t;d[q+3]=255;}
+  x.putImageData(im,0,0);return c;}
+// soft blotches, as an alpha mask, for washes that dry unevenly
+function wc_blotchTex(w,h,seed,scale,bias){const c=mkCanvas(w,h),x=c.getContext("2d"),im=x.createImageData(w,h),d=im.data,n=wc_noise(seed);
+  for(let j=0;j<h;j++)for(let i=0;i<w;i++){const q=(j*w+i)*4,v=n(i/scale,j/scale)*0.6+n(i/(scale/2.7),j/(scale/2.7))*0.3+n(i/(scale/8),j/(scale/8))*0.1;
+    d[q]=255;d[q+1]=255;d[q+2]=255;d[q+3]=clamp((v-0.22+bias)*1.7,0,1)*255;}
+  x.putImageData(im,0,0);return c;}
+// what is kept: the textures, each place's background, each card's paper, each white figure, and spare canvases
+const WC={ready:false,bg:{},paint:{},card:{},tint:{},fig:{},buf:{}};
+function wc_prep(){if(WC.ready)return;WC.gran=wc_granTex(W,H,17);WC.paper=wc_paperTex(W,H,23,0.42);WC.blotch=wc_blotchTex(480,270,31,60,0.05);WC.ready=true;}
+function wc_buf(k,w,h){let c=WC.buf[k];if(!c)c=WC.buf[k]=mkCanvas(w,h);if(c.width!==w||c.height!==h){c.width=w;c.height=h;}const x=c.getContext("2d");x.setTransform(1,0,0,1,0,0);
+  x.globalAlpha=1;x.globalCompositeOperation="source-over";x.filter="none";x.clearRect(0,0,w,h);return[c,x];}
+// a texture's alpha, filled with one colour
+function wc_tint(tex,col){const k=col.map(v=>v|0).join(",")+"|"+tex.width;if(WC.tint[k])return WC.tint[k];const c=mkCanvas(tex.width,tex.height),x=c.getContext("2d");
+  x.fillStyle=rgba(col,1);x.fillRect(0,0,c.width,c.height);x.globalCompositeOperation="destination-in";x.drawImage(tex,0,0);return WC.tint[k]=c;}
 
-// ---- the camera: an eye, a target and a focal length in pixels ----
-function cam3(eye,tgt,f,o){o=o||{};const fwd=vnorm(vsub(tgt,eye));let right=vcross(v3(0,1,0),fwd);if(vlen(right)<1e-4)right=v3(1,0,0);right=vnorm(right);
-  if(o.roll){const c=Math.cos(o.roll),s=Math.sin(o.roll),up0=vcross(fwd,right);right=vnorm(vadd(vmul(right,c),vmul(up0,s)));}
-  const up=vcross(fwd,right);return{eye,tgt,fwd,right,up,f,cx:o.cx==null?W/2:o.cx,cy:o.cy==null?H/2:o.cy,dist:vlen(vsub(tgt,eye))};}
-// a point in the camera's space (x right, y up, z ahead)
-function csp(C,p){let x=p.x,z=p.z;if(MX){x=MX.x+p.x*MX.c+p.z*MX.s;z=MX.z-p.x*MX.s+p.z*MX.c;}const dx=x-C.eye.x,dy=p.y-C.eye.y,dz=z-C.eye.z,F=C.fwd,R=C.right,U=C.up;
-  return{x:dx*R.x+dy*R.y+dz*R.z,y:dx*U.x+dy*U.y+dz*U.z,z:dx*F.x+dy*F.y+dz*F.z};}
-// a point on the screen, its depth, and how many pixels a metre is there
-function pj(C,p){const q=csp(C,p),zz=Math.max(0.05,q.z);return{x:C.cx+C.f*q.x/zz,y:C.cy-C.f*q.y/zz,z:q.z,s:C.f/zz};}
-const pjc=(C,q)=>{const zz=Math.max(0.05,q.z);return{x:C.cx+C.f*q.x/zz,y:C.cy-C.f*q.y/zz,z:q.z,s:C.f/zz};};
-// camera moves: keys [t, eye, target, focal length], the eye and the target in cylindrical coordinates round a centre
-// ([distance, angle in degrees with 0 north and 90 east, height]), so the camera swings round the town rather than cutting across it.
-// Each move eases in and out like a sine; a key may hold a blur band too (ts: [top, bottom, amount]).
-const cyl=(x,y,z,cx,cz)=>[Math.hypot(x-(cx||0),z-(cz||0)),Math.atan2(x-(cx||0),z-(cz||0))/DEG,y];
-const fromCyl=(c,cx,cz)=>v3((cx||0)+c[0]*Math.sin(c[1]*DEG),c[2],(cz||0)+c[0]*Math.cos(c[1]*DEG));
-function camK(keys,t,o){o=o||{};let a=keys[0],b=keys[0],u=0;
-  if(t>=keys[keys.length-1][0])a=b=keys[keys.length-1];else for(let i=1;i<keys.length;i++)if(t<keys[i][0]){a=keys[i-1];b=keys[i];u=t<=a[0]?0:easeCam((t-a[0])/(b[0]-a[0]));break;}
-  const L=(p,q)=>p.map((v,i)=>lerp(v,q[i],u)),e=fromCyl(L(a[1],b[1]),o.cx,o.cz),g=fromCyl(L(a[2],b[2]),o.cx,o.cz);
-  // a slow, small drift, like a hand holding the camera still
-  if(o.drift!==0){const d=o.drift||0.012;e.x+=Math.sin(t*0.37)*d;e.y+=Math.sin(t*0.29+1)*d*0.7;}
-  const C=cam3(e,g,lerp(a[3],b[3],u),o);const ta=a[4]||o.ts,tb=b[4]||o.ts;if(ta&&tb)C.ts=L(ta,tb);return C;}
+/* ---------- shapes: lists of points, so each can be painted as a wash ---------- */
+const wc_multi=p=>Array.isArray(p[0][0]);
+function wc_tr(ctx,pts){ctx.beginPath();for(const p of wc_multi(pts)?pts:[pts]){ctx.moveTo(p[0][0],p[0][1]);for(let i=1;i<p.length;i++)ctx.lineTo(p[i][0],p[i][1]);ctx.closePath();}}
+function wc_trOpen(ctx,p){ctx.beginPath();ctx.moveTo(p[0][0],p[0][1]);for(let i=1;i<p.length;i++)ctx.lineTo(p[i][0],p[i][1]);}
+function wc_bbox(pts){let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;for(const p of wc_multi(pts)?pts:[pts])for(const q of p){x0=Math.min(x0,q[0]);x1=Math.max(x1,q[0]);y0=Math.min(y0,q[1]);y1=Math.max(y1,q[1]);}
+  return{x0,y0,x1,y1,w:x1-x0,h:y1-y0};}
+function wc_rect(x,y,w,h){return[[x,y],[x+w,y],[x+w,y+h],[x,y+h]];}
+function wc_ell(cx,cy,rx,ry,n){n=n||32;const o=[];for(let i=0;i<n;i++){const a=i/n*TAU;o.push([cx+Math.cos(a)*rx,cy+Math.sin(a)*ry]);}return o;}
+function wc_arched(x,y,w,h){const r=w/2,o=[[x,y+h],[x,y+r]];for(let i=1;i<14;i++){const a=Math.PI+i/14*Math.PI;o.push([x+r+Math.cos(a)*r,y+r+Math.sin(a)*r]);}o.push([x+w,y+r],[x+w,y+h]);return o;}
+function wc_rrPts(x,y,w,h,r){const o=[],n=6;r=Math.min(r,w/2,h/2);[[x+w-r,y+r,-Math.PI/2],[x+w-r,y+h-r,0],[x+r,y+h-r,Math.PI/2],[x+r,y+r,Math.PI]].forEach(([cx,cy,a0])=>{
+  for(let i=0;i<=n;i++){const a=a0+i/n*Math.PI/2;o.push([cx+Math.cos(a)*r,cy+Math.sin(a)*r]);}});return o;}
+function wc_resample(pts,step){if(wc_multi(pts))return pts.map(p=>wc_resample(p,step));const o=[];for(let i=0;i<pts.length;i++){const a=pts[i],b=pts[(i+1)%pts.length],
+  L=Math.hypot(b[0]-a[0],b[1]-a[1]),n=Math.max(1,Math.ceil(L/step));for(let j=0;j<n;j++)o.push([lerp(a[0],b[0],j/n),lerp(a[1],b[1],j/n)]);}return o;}
+function wc_jitter(pts,amp,seed,freq){if(wc_multi(pts))return pts.map((p,i)=>wc_jitter(p,amp,seed+i*7,freq));const n=wc_noise(seed);freq=freq||0.04;
+  return pts.map(p=>[p[0]+(n(p[0]*freq,p[1]*freq)-0.5)*2*amp,p[1]+(n(p[1]*freq+31.7,p[0]*freq+11.3)-0.5)*2*amp]);}
+// a tapered band along a centre line, for roads and paths
+function wc_band(line,w0,w1){const L=[],R=[];for(let i=0;i<line.length;i++){const a=line[Math.max(0,i-1)],b=line[Math.min(line.length-1,i+1)],dx=b[0]-a[0],dy=b[1]-a[1],l=Math.hypot(dx,dy)||1,
+  w=lerp(w0,w1,i/(line.length-1))/2;L.push([line[i][0]-dy/l*w,line[i][1]+dx/l*w]);R.push([line[i][0]+dy/l*w,line[i][1]-dx/l*w]);}return L.concat(R.reverse());}
+function wc_smooth(pts,n){const o=[];for(let i=0;i<pts.length-1;i++){const p0=pts[Math.max(0,i-1)],p1=pts[i],p2=pts[i+1],p3=pts[Math.min(pts.length-1,i+2)];for(let j=0;j<n;j++){const t=j/n,t2=t*t,t3=t2*t;
+  o.push([0,1].map(k=>0.5*((2*p1[k])+(-p0[k]+p2[k])*t+(2*p0[k]-5*p1[k]+4*p2[k]-p3[k])*t2+(-p0[k]+3*p1[k]-3*p2[k]+p3[k])*t3)));}}o.push(pts[pts.length-1]);return o;}
+// a point along a polyline, at u (0..1) of its length
+function wc_along(pts,u){let L=0;const seg=[];for(let i=1;i<pts.length;i++){const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);seg.push(d);L+=d;}let left=clamp(u,0,1)*L;
+  for(let i=0;i<seg.length;i++){if(left<=seg[i]||i===seg.length-1){const k=seg[i]?clamp(left/seg[i],0,1):0;return[lerp(pts[i][0],pts[i+1][0],k),lerp(pts[i][1],pts[i+1][1],k)];}left-=seg[i];}return pts[0];}
 
-// ---- light: one sun from the upper left; inside a room, the light comes through the open front ----
-const SUN=vnorm(v3(-0.55,0.8,-0.35));
-function shadeCol(col,n){n=mxN(n);const d=Math.max(0,vdot(n,SUN)),sky=Math.max(0,n.y)*0.12,i=0.66+0.4*d+sky;return[clamp(col[0]*i,0,255),clamp(col[1]*i,0,255),clamp(col[2]*i,0,255)];}
-const ILIT={F:1.0,U:0.98,L:0.9,R:0.86,D:0.84,B:0.72};
-const ilit=(col,k)=>[clamp(col[0]*k,0,255),clamp(col[1]*k,0,255),clamp(col[2]*k,0,255)];
-// the air: far things fade towards it; how far depends on how far the camera looks
-const GV={hzA:0.8};let HAZE=[222,236,248];
-function hz(col,z){const d0=GV.hz0||16,d1=GV.hz1||80,k=clamp((z-d0)/d1,0,0.7)*GV.hzA;return k>0?mix(col,HAZE,k):col;}
-function hazeFor(C,k){GV.hz0=C.dist*(k||1.6);GV.hz1=Math.max(30,C.dist*5);}
+/* ---------- painting ---------- */
+const wc_lit=(c,k)=>mix(c,[255,255,255],k),wc_dim=(c,k)=>mix(c,[0,0,0],k);
+// distance pales a colour towards the paper
+const wc_haze=(c,depth)=>mix(c,WC_PAPER,(1-clamp(depth==null?1:depth,0,1))*0.55);
+const WC_BARE={field:1,chipwash:1,swatch:1,mark:1,ribbon:1,dab:1};
+const WC_LINED={build:1,door:1,trim:1,tree:1,trunk:1,cover:1,page:1,wall:1,coat:1,head:1,hat:1,limb:1,arm:1,iron:1,kerb:1,clock:1,paper:1,thing:1};
+// a wash: the shape cleared to paper, then three layers of pigment that don't quite agree on the edge, a darker rim where the pigment
+// dried, grain in the paper's tooth, and on larger shapes, blotches where it dried unevenly; buildings, trees and people get a pencil line
+function wc_wash(ctx,pts,col,o){o=o||{};col=wc_haze(col,o.depth);const d=o.depth==null?1:o.depth,a=(o.a==null?1:o.a)*0.95,rp=wc_resample(pts,8),b=wc_bbox(pts),seed=(o.seed||7)+Math.round(b.x0);
+  if(!WC_BARE[o.kind]&&!o.bare){wc_tr(ctx,wc_jitter(rp,2,seed,0.022));ctx.fillStyle=rgba(WC_PAPER,1);ctx.fill();}
+  ctx.save();ctx.globalCompositeOperation="multiply";
+  if(o.flat||b.w<26){wc_tr(ctx,wc_jitter(rp,0.8,seed,0.08));ctx.fillStyle=rgba(col,a*0.85);ctx.fill();}
+  else{for(let i=0;i<3;i++){wc_tr(ctx,wc_jitter(rp,2.5+i*2.2,seed+i*13,0.022+i*0.012));ctx.fillStyle=rgba(col,a*0.36);ctx.fill();}
+    wc_tr(ctx,wc_jitter(rp,2,seed+99,0.03));ctx.lineWidth=2.4;ctx.strokeStyle=rgba(wc_dim(col,0.18),a*0.4);ctx.stroke();
+    ctx.save();wc_tr(ctx,rp);ctx.clip();ctx.globalAlpha=0.55;ctx.drawImage(WC.gran,0,0,W,H);
+    if(b.w>220&&o.kind!=="page"){ctx.globalAlpha=0.5*a;ctx.drawImage(wc_tint(WC.blotch,col),-(seed%420),-((seed*7)%300),W+420,H+300);
+      ctx.globalAlpha=1;ctx.filter="blur(5px)";ctx.lineWidth=16;ctx.strokeStyle=rgba(col,a*0.2);wc_tr(ctx,rp);ctx.stroke();ctx.filter="none";}
+    ctx.restore();}
+  ctx.restore();
+  if((o.kind==="land"||o.kind==="ground")&&!o.flat){const y0=Math.max(b.y0,0),y1=Math.min(b.y1,H);if(y1-y0>120){ctx.save();wc_tr(ctx,rp);ctx.clip();
+    const g=ctx.createLinearGradient(0,y0,0,y1);g.addColorStop(0,rgba(WC_PAPER,0));g.addColorStop(0.35,rgba(WC_PAPER,0));g.addColorStop(1,rgba(WC_PAPER,0.3));ctx.fillStyle=g;ctx.fillRect(b.x0,y0,b.w,y1-y0);ctx.restore();}}
+  if(o.line!==false&&d>=0.45&&WC_LINED[o.kind])wc_ink(ctx,wc_multi(pts)?pts[0]:pts,true,o.lw||(o.kind==="tree"?1.4:1.7),o.ink||WC_INK,0.75*d,seed,o.kind==="tree"?2:1.1);}
+// a pencil line: two passes that don't quite agree
+function wc_ink(ctx,pts,closed,lw,col,a,seed,amp){const p=wc_resample(pts,6);ctx.save();ctx.lineCap="round";ctx.lineJoin="round";
+  for(const [k,aa,ww] of [[0,1,1],[1,0.45,0.55]]){const j=wc_jitter(p,amp==null?1.1:amp,(seed||3)+k*17,0.05);if(closed)wc_tr(ctx,j);else wc_trOpen(ctx,j);ctx.lineWidth=lw*ww;ctx.strokeStyle=rgba(col,a*aa);ctx.stroke();}
+  ctx.restore();}
+// a pencil line along an open path (o.closed: a loop), drawn on from its start as p goes from 0 to 1; its jitter is worked out once and kept
+function wc_resampleOpen(pts,step){const o=[];for(let i=0;i<pts.length-1;i++){const a=pts[i],b=pts[i+1],n=Math.max(1,Math.ceil(Math.hypot(b[0]-a[0],b[1]-a[1])/step));
+  for(let j=0;j<n;j++)o.push([lerp(a[0],b[0],j/n),lerp(a[1],b[1],j/n)]);}o.push(pts[pts.length-1]);return o;}
+function wc_pencil(ctx,pts,p,o){o=o||{};if(p<=0)return;const q=o.closed?pts.concat([pts[0]]):pts,key=q.map(v=>v[0].toFixed(1)+","+v[1].toFixed(1)).join(";")+"|"+(o.seed||5)+"|"+(o.amp==null?1:o.amp);
+  let J=WC.paint[key];if(!J){const r=wc_resampleOpen(q,5),amp=o.amp==null?1.0:o.amp;J=WC.paint[key]=[wc_jitter(r,amp,o.seed||5,0.05),wc_jitter(r,amp,(o.seed||5)+17,0.05)];}
+  const n=Math.max(2,Math.round(J[0].length*clamp(p,0,1)));ctx.save();ctx.lineCap="round";ctx.lineJoin="round";if(o.dash)ctx.setLineDash(o.dash);
+  J.forEach((pp,i)=>{ctx.beginPath();ctx.moveTo(pp[0][0],pp[0][1]);for(let k=1;k<n;k++)ctx.lineTo(pp[k][0],pp[k][1]);ctx.lineWidth=(o.lw||2.6)*(i?0.55:1);
+    ctx.strokeStyle=rgba(o.col||WC_PENCIL,(o.a==null?0.9:o.a)*(i?0.45:1));ctx.stroke();});ctx.restore();}
+function wc_glowAt(ctx,x,y,r,col,a){const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,rgba(col,a));g.addColorStop(1,rgba(col,0));ctx.fillStyle=g;ctx.fillRect(x-r,y-r,r*2,r*2);}
 
-// ---- painter's order: things are collected with their distance, then drawn far to near ----
-let DL=[];
-function dlAdd(z,fn){DL.push({z,fn});}
-function dlDraw(ctx){const L=DL;DL=[];L.sort((a,b)=>b.z-a.z);for(const d of L)d.fn(ctx);}
-// a point's distance from the eye, for sorting
-const eyeD=(C,p)=>{const q=mxP(p);return Math.hypot(q.x-C.eye.x,q.y-C.eye.y,q.z-C.eye.z);};
+/* ---------- land and sky ---------- */
+// the sky: a wet wash of blue, drying unevenly, with clouds lifted out with a tissue, over the paper; hz is the horizon
+function wc_sky(ctx,hz,seed,o){o=o||{};ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);
+  const [t,tx]=wc_buf("sky",W,H);const g=tx.createLinearGradient(0,0,0,hz);g.addColorStop(0,rgba(WCP.skyTop,0.85));g.addColorStop(0.7,rgba(WCP.skyTop,0.35));g.addColorStop(1,rgba(WCP.skyTop,0));
+  tx.fillStyle=g;tx.fillRect(0,0,W,hz);tx.globalCompositeOperation="destination-in";tx.drawImage(WC.blotch,0,0,W,H);tx.globalCompositeOperation="destination-out";
+  const R=wc_rng(seed*3+1);for(let i=0;i<(o.clouds==null?5:o.clouds);i++){const x=(o.cx||200)+R()*(o.cw||1500),y=(o.cy||90)+R()*(o.ch||220),s=0.6+R()*0.7;
+    for(const [dx,dy,r] of [[-80,10,60],[-20,-20,80],[60,0,64],[0,20,90]]){const q=tx.createRadialGradient(x+dx*s,y+dy*s,r*s*0.3,x+dx*s,y+dy*s,r*s);q.addColorStop(0,"rgba(0,0,0,0.95)");q.addColorStop(1,"rgba(0,0,0,0)");
+      tx.fillStyle=q;tx.fillRect(x+dx*s-r*s,y+dy*s-r*s,r*s*2,r*s*2);}}
+  ctx.save();ctx.globalCompositeOperation="multiply";ctx.drawImage(t,0,0);if(o.sun){wc_glowAt(ctx,o.sun[0],o.sun[1],120,[255,226,150],0.7);}ctx.restore();}
+function wc_land(ctx,f,col,depth,o){const pts=[];for(let x=-60;x<=W+60;x+=10)pts.push([x,f(x)]);pts.push([W+60,H+60],[-60,H+60]);wc_wash(ctx,pts,col,Object.assign({depth,kind:"land"},o||{}));return pts;}
+function wc_forest(ctx,base,col,depth,seed,o){o=o||{};const R=wc_rng(seed),pts=[];let x=-60;const hmax=o.h||24,wmax=o.w||16;
+  while(x<=W+60){const by=base(x),h=hmax*(0.45+R()*0.55),w=wmax*(0.6+R()*0.5);pts.push([x,by]);pts.push([x+w*0.5,by-h]);pts.push([x+w,by]);x+=w*(0.55+R()*0.4);}
+  pts.push([W+60,H+60],[-60,H+60]);wc_wash(ctx,pts,col,{depth,kind:"forest",line:false});}
+function wc_lake(ctx,y0,x1,depth){const pts=[];for(let x=-60;x<=x1;x+=10)pts.push([x,y0+3*Math.sin(x/90)]);pts.push([x1+40,y0+6],[x1+40,y0+80],[-60,y0+80]);wc_wash(ctx,pts,WCP.water,{depth,kind:"water",line:false});}
+function wc_fieldStrips(ctx,f,y0,y1,n,cols,depth,seed){const R=wc_rng(seed||3);let prev=x=>f(x)+y0;for(let i=1;i<=n;i++){const t=i/n,off=lerp(y0,y1,t*t),skew=(R()-0.5)*0.05,cur=x=>f(x)+off+(x-960)*skew;
+  const pts=[];for(let x=-60;x<=W+60;x+=16)pts.push([x,prev(x)]);for(let x=W+60;x>=-60;x-=16)pts.push([x,cur(x)]);wc_wash(ctx,pts,cols[i%cols.length],{depth,kind:"field",line:false});prev=cur;}}
+// tufts of grass in the near meadow
+function wc_tufts(ctx,f,x0,x1,n,depth,seed){const R=wc_rng(seed||8);for(let i=0;i<n;i++){const x=lerp(x0,x1,R()),y=f(x)+20+R()*(H-f(x)-20),s=0.7+R()*0.8*((y-700)/380);
+  ctx.save();ctx.strokeStyle=rgba(wc_haze(wc_dim(WCP.near,0.22),depth),0.85);ctx.lineWidth=2.2*s;ctx.lineCap="round";ctx.beginPath();
+  for(const a of [-0.5,-0.15,0.2,0.55]){ctx.moveTo(x,y);ctx.quadraticCurveTo(x+a*10*s,y-12*s,x+a*22*s,y-(18+R()*10)*s);}ctx.stroke();ctx.restore();}}
+// a soft shadow where something meets the ground
+function wc_contact(ctx,x0,x1,y,depth,a){ctx.save();const cx=(x0+x1)/2,rx=(x1-x0)/2*1.08,g=ctx.createRadialGradient(cx,y,1,cx,y,rx);g.addColorStop(0,rgba([110,100,90],(a||0.28)*(0.4+0.6*depth)));
+  g.addColorStop(1,rgba([110,100,90],0));ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(cx,y,rx,Math.max(6,rx*0.09),0,0,TAU);ctx.fill();ctx.restore();}
 
-// ---- polygons: projected, cut at the camera's near plane, shaded by their normal and hazed by distance ----
-const NEAR=0.12;
-function clipNear(Q){const out=[];for(let i=0;i<Q.length;i++){const a=Q[i],b=Q[(i+1)%Q.length],ia=a.z>=NEAR,ib=b.z>=NEAR;if(ia)out.push(a);
-  if(ia!==ib){const u=(NEAR-a.z)/(b.z-a.z);out.push({x:lerp(a.x,b.x,u),y:lerp(a.y,b.y,u),z:NEAR});}}return out;}
-function poly3(ctx,C,pts,col,o){o=o||{};let Q=pts.map(p=>csp(C,p));let mn=1e9,mx=-1e9;for(const q of Q){mn=Math.min(mn,q.z);mx=Math.max(mx,q.z);}if(mx<NEAR)return null;if(mn<NEAR){Q=clipNear(Q);if(Q.length<3)return null;}
-  const P_=Q.map(q=>pjc(C,q));ctx.beginPath();ctx.moveTo(P_[0].x,P_[0].y);for(let i=1;i<P_.length;i++)ctx.lineTo(P_[i].x,P_[i].y);ctx.closePath();
-  let c=o.n?shadeCol(col,o.n):col;let zc=0;for(const q of P_)zc+=q.z;c=hz(c,zc/P_.length);
-  if(o.grad){let y0=1e9,y1=-1e9;for(const q of P_){y0=Math.min(y0,q.y);y1=Math.max(y1,q.y);}if(y1-y0>0.5){const g=ctx.createLinearGradient(0,y0,0,y1);g.addColorStop(0,rgba(mix(c,[255,255,255],o.grad[0]),o.a==null?1:o.a));g.addColorStop(1,rgba(mix(c,[0,0,0],o.grad[1]),o.a==null?1:o.a));ctx.fillStyle=g;}else ctx.fillStyle=rgba(c,o.a==null?1:o.a);}
-  else ctx.fillStyle=rgba(c,o.a==null?1:o.a);
-  ctx.fill();if(o.edge){ctx.lineJoin="round";ctx.strokeStyle=rgba(mix(c,[255,255,255],0.35),o.edge);ctx.lineWidth=o.lw||1.4;ctx.stroke();}return P_;}
-const NRM={F:v3(0,0,-1),B:v3(0,0,1),L:v3(-1,0,0),R:v3(1,0,0),U:v3(0,1,0),D:v3(0,-1,0)};
-// does a face with normal n at p face the camera?
-const visible=(C,n,p)=>{const q=mxP(p),m=mxN(n);return m.x*(C.eye.x-q.x)+m.y*(C.eye.y-q.y)+m.z*(C.eye.z-q.z)>0;};
-// a box: x,z the front-left corner, w along x, d along z (away from the front), h up from y0. Only the faces towards the camera.
-function boxFaces(C,x,y0,z,w,h,d,col,o){o=o||{};const a=v3(x,y0,z),b=v3(x+w,y0,z),c=v3(x+w,y0,z+d),e=v3(x,y0,z+d),A=v3(x,y0+h,z),B=v3(x+w,y0+h,z),Cc=v3(x+w,y0+h,z+d),E=v3(x,y0+h,z+d);
-  const F=[];const add=(pts,n,cl,k)=>{const cen=v3((pts[0].x+pts[2].x)/2,(pts[0].y+pts[2].y)/2,(pts[0].z+pts[2].z)/2);if(visible(C,n,cen))F.push({pts,n,col:cl||col,k});};
-  if(!o.noFront)add([a,b,B,A],NRM.F,o.front,"F");add([b,c,Cc,B],NRM.R,o.side,"R");add([e,a,A,E],NRM.L,o.side,"L");if(!o.noTop)add([A,B,Cc,E],NRM.U,o.top,"U");if(!o.noBack)add([c,e,E,Cc],NRM.B,o.back,"B");if(o.bottom)add([a,e,c,b],NRM.D,o.bottom,"D");return F;}
-function drawBox(ctx,C,x,y0,z,w,h,d,col,o){o=o||{};const F=boxFaces(C,x,y0,z,w,h,d,col,o);for(const f of F)poly3(ctx,C,f.pts,f.col,{n:f.n,grad:o.grad||[0.06,0.06],edge:o.edge==null?0.5:o.edge,lw:o.lw});return F;}
-// furniture in a room: pastel faces lit through the open front, a fine light edge like painted wood
-function ibox(ctx,C,x,y0,z,w,h,d,col,o){o=o||{};const F=boxFaces(C,x,y0,z,w,h,d,col,o);for(const f of F)poly3(ctx,C,f.pts,ilit(f.col,ILIT[f.k]||0.9),{grad:o.grad||[0.05,0.07],edge:o.edge==null?0.45:o.edge,lw:o.lw||1.3});return F;}
-// quads on a plane of constant z (a back wall), constant x (a side wall) or constant y (a floor)
-function wq3(ctx,C,x0,y0,x1,y1,z,col,o){return poly3(ctx,C,[v3(x0,y0,z),v3(x1,y0,z),v3(x1,y1,z),v3(x0,y1,z)],col,o||{});}
-function sq3(ctx,C,x,z0,y0,z1,y1,col,o){return poly3(ctx,C,[v3(x,y0,z0),v3(x,y0,z1),v3(x,y1,z1),v3(x,y1,z0)],col,o||{});}
-function fq3(ctx,C,x0,z0,x1,z1,y,col,o){return poly3(ctx,C,[v3(x0,y,z0),v3(x1,y,z0),v3(x1,y,z1),v3(x0,y,z1)],col,o||{});}
-// a gabled roof over a box: the ridge along x, an overhang, a height
-function gable(ctx,C,x,y0,z,w,d,rh,col,o){o=o||{};const ov=o.ov==null?0.35:o.ov,X0=x-ov,X1=x+w+ov,Z0=z-ov,Z1=z+d+ov,zm=z+d/2,yt=y0+rh;
-  const fr=[v3(X0,y0,Z0),v3(X1,y0,Z0),v3(X1,yt,zm),v3(X0,yt,zm)],bk=[v3(X1,y0,Z1),v3(X0,y0,Z1),v3(X0,yt,zm),v3(X1,yt,zm)];
-  const nF=vnorm(v3(0,d/2,-rh)),nB=vnorm(v3(0,d/2,rh)),gl=[v3(x,y0,z),v3(x,y0,z+d),v3(x,yt-0.02,zm)],gr=[v3(x+w,y0,z+d),v3(x+w,y0,z),v3(x+w,yt-0.02,zm)];
-  for(const [pts,n,cl] of [[bk,nB,col],[gl,NRM.L,o.wall||col],[gr,NRM.R,o.wall||col],[fr,nF,col]]){const cen=vmul(pts.reduce((s,p)=>vadd(s,p),v3(0,0,0)),1/pts.length);if(visible(C,n,cen))poly3(ctx,C,pts,cl,{n,grad:[0.1,0.08],edge:0.6});}
-  // the tiles: soft lines along the slope that faces us
-  if(o.tiles!==false){const n=visible(C,nF,v3(x+w/2,y0+rh/2,z))?nF:visible(C,nB,v3(x+w/2,y0+rh/2,z+d))?nB:null;if(n){const front=n===nF,zA=front?Z0:Z1;ctx.save();ctx.strokeStyle=rgba(mix(col,[0,0,0],0.3),0.28);ctx.lineWidth=1.2;
-    for(let i=1;i<6;i++){const u=i/6,a=pj(C,v3(X0,lerp(y0,yt,u),lerp(zA,zm,u))),b=pj(C,v3(X1,lerp(y0,yt,u),lerp(zA,zm,u)));if(a.z<NEAR||b.z<NEAR)continue;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}ctx.restore();}}}
+/* ---------- trees ---------- */
+function wc_spruce(ctx,x,y,h,depth,col){col=col||WCP.pine;const w=h*0.44,tiers=5,L=[],R=[];
+  for(let i=0;i<tiers;i++){const t=i/tiers,yy=y-h*0.08-t*h*0.86,hw=w*(1-t)*0.5+2,nx=y-h*0.08-(i+1)/tiers*h*0.86+h*0.06;L.push([x-hw,yy],[x-hw*0.42,nx]);R.unshift([x+hw*0.42,nx],[x+hw,yy]);}
+  wc_wash(ctx,wc_rect(x-h*0.03,y-h*0.1,h*0.06,h*0.1),WCP.trunk,{depth,kind:"trunk",line:false});
+  wc_wash(ctx,[[x-w*0.08,y-h*0.08]].concat(L,[[x,y-h]],R,[[x+w*0.08,y-h*0.08]]),col,{depth,kind:"tree"});}
+function wc_birch(ctx,x,y,h,depth,lean){lean=lean||0;const top=[x+lean*h,y-h*0.82];
+  wc_wash(ctx,[[x-h*0.026,y],[top[0]-h*0.01,top[1]],[top[0]+h*0.01,top[1]],[x+h*0.026,y]],WCP.bark,{depth,kind:"trunk",lw:1.5});
+  const R=wc_rng(Math.round(x));for(let i=0;i<7;i++){const t=0.1+R()*0.75,cx=lerp(x,top[0],t),cy=lerp(y,top[1],t),ww=h*0.02*(1-t*0.5);
+    wc_wash(ctx,[[cx-ww,cy],[cx+ww*0.6,cy-2],[cx+ww,cy+3],[cx-ww*0.4,cy+4]],WCP.barkMark,{depth,kind:"mark",line:false,flat:true});}
+  const Q=wc_rng(Math.round(x*3+y)),parts=[];for(let i=0;i<9;i++){const a=Q()*TAU,r=Q()*h*0.17;parts.push(wc_ell(top[0]+Math.cos(a)*r*1.1,top[1]+h*0.12+Math.sin(a)*r*1.3,h*(0.1+Q()*0.06),h*(0.13+Q()*0.07),20));}
+  wc_wash(ctx,parts,WCP.birchLeaf,{depth,kind:"tree"});}
+function wc_roundTree(ctx,x,y,h,depth,col){col=col||WCP.leaf;wc_wash(ctx,[[x-h*0.04,y],[x-h*0.025,y-h*0.5],[x+h*0.025,y-h*0.5],[x+h*0.04,y]],WCP.trunk,{depth,kind:"trunk"});
+  const R=wc_rng(Math.round(x*7+h)),parts=[wc_ell(x,y-h*0.62,h*0.3,h*0.26,30)];for(let i=0;i<6;i++){const a=R()*TAU;parts.push(wc_ell(x+Math.cos(a)*h*0.17,y-h*0.64+Math.sin(a)*h*0.15,h*(0.15+R()*0.07),h*(0.14+R()*0.06),24));}
+  wc_wash(ctx,parts,col,{depth,kind:"tree"});}
+function wc_treeRow(ctx,f,x0,x1,step,h,depth,seed,col){const R=wc_rng(seed||5);for(let x=x0;x<x1;x+=step*(0.6+R()*0.8)){const hh=h*(0.7+R()*0.5);if(R()<0.35)wc_spruce(ctx,x,f(x)+3,hh*1.3,depth);else wc_roundTree(ctx,x,f(x)+3,hh,depth,col);}}
 
-// ---- shadows on the ground ----
-function contactShadow(ctx,C,x,z,w,d,a,y){const P_=pj(C,v3(x+w/2,y||0,z+d/2));if(P_.z<NEAR)return;const r=Math.max(w,d)*P_.s*0.62;ctx.save();ctx.translate(P_.x,P_.y);ctx.scale(1,clamp(Math.abs(C.fwd.y)*0.9+0.12,0.2,1));
-  const g=ctx.createRadialGradient(0,0,r*0.3,0,0,r);g.addColorStop(0,"rgba(40,50,70,"+(a||0.28)+")");g.addColorStop(1,"rgba(40,50,70,0)");ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,r,0,TAU);ctx.fill();ctx.restore();}
-function convexHull(P_){const p=P_.slice().sort((a,b)=>a.x-b.x||a.y-b.y),cr=(o,a,b)=>(a.x-o.x)*(b.y-o.y)-(a.y-o.y)*(b.x-o.x),lo=[],up=[];for(const q of p){while(lo.length>=2&&cr(lo[lo.length-2],lo[lo.length-1],q)<=0)lo.pop();lo.push(q);}for(let i=p.length-1;i>=0;i--){const q=p[i];while(up.length>=2&&cr(up[up.length-2],up[up.length-1],q)<=0)up.pop();up.push(q);}up.pop();lo.pop();return lo.concat(up);}
-// a box's shadow on the ground, along the sun: a soft polygon
-function castShadow(ctx,C,x,z,w,d,h,a){const sd=mxN(v3(-SUN.x,0,-SUN.z)),k=h/SUN.y;const base=[[x,z],[x+w,z],[x+w,z+d],[x,z+d]].map(([px,pz])=>mxP(v3(px,0,pz)));
-  const all=base.concat(base.map(p=>v3(p.x+(-SUN.x)*k,0,p.z+(-SUN.z)*k)));const M=MX;MX=null;const pr=all.map(p=>csp(C,v3(p.x,0.005,p.z)));if(pr.some(q=>q.z<NEAR)){MX=M;return;}
-  // darkest at the foot of the building, fading towards the far end, so the edge is soft
-  const hull=convexHull(pr.map(q=>pjc(C,q))),P0=pjc(C,pr.slice(0,4).reduce((s,q)=>({x:s.x+q.x/4,y:s.y+q.y/4,z:s.z+q.z/4}),{x:0,y:0,z:0})),P1=pjc(C,pr.slice(4).reduce((s,q)=>({x:s.x+q.x/4,y:s.y+q.y/4,z:s.z+q.z/4}),{x:0,y:0,z:0}));MX=M;
-  const A=a||0.16,g=ctx.createLinearGradient(P0.x,P0.y,P1.x,P1.y);g.addColorStop(0,"rgba(46,56,84,"+A+")");g.addColorStop(0.55,"rgba(46,56,84,"+A*0.7+")");g.addColorStop(1,"rgba(46,56,84,"+A*0.12+")");
-  ctx.save();ctx.fillStyle=g;ctx.beginPath();hull.forEach((q,i)=>i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y));ctx.closePath();ctx.fill();ctx.restore();}
-// a soft dark band where a wall meets a floor or another wall
-function aoStrip(ctx,C,a,b,dir,len,k){const Q=[a,b,vadd(b,vmul(dir,len)),vadd(a,vmul(dir,len))].map(p=>pj(C,p));if(Q.some(q=>q.z<NEAR))return;
-  const g=ctx.createLinearGradient((Q[0].x+Q[1].x)/2,(Q[0].y+Q[1].y)/2,(Q[2].x+Q[3].x)/2,(Q[2].y+Q[3].y)/2);g.addColorStop(0,"rgba(50,40,40,"+(k||0.22)+")");g.addColorStop(1,"rgba(50,40,40,0)");
-  ctx.fillStyle=g;ctx.beginPath();Q.forEach((q,i)=>i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y));ctx.closePath();ctx.fill();}
+/* ---------- buildings ---------- */
+function wc_part(ctx,pts,col,depth,o){wc_wash(ctx,pts,col,Object.assign({depth,kind:"build"},o||{}));}
+function wc_flat(ctx,pts,col,depth,kind){wc_wash(ctx,pts,col,{depth,kind:kind||"trim",line:false,flat:true});}
+function wc_bars(ctx,x,y,w,h,col,lw,depth){ctx.save();ctx.strokeStyle=rgba(wc_haze(col,depth),0.95);ctx.lineWidth=lw;ctx.beginPath();ctx.moveTo(x+w/2,y);ctx.lineTo(x+w/2,y+h);ctx.moveTo(x,y+h/2);ctx.lineTo(x+w,y+h/2);ctx.stroke();ctx.restore();}
+// a Swedish country church: west tower and spire, steep nave roof, a lower chancel
+function wc_church(ctx,x,y,k,depth){const P=WCP,tw=66*k,nw=196*k,cw=58*k;
+  wc_part(ctx,wc_rect(x+tw+nw,y-64*k,cw,64*k),P.wall,depth);wc_part(ctx,[[x+tw+nw-4*k,y-64*k],[x+tw+nw+cw+8*k,y-64*k],[x+tw+nw+cw-10*k,y-108*k],[x+tw+nw+6*k,y-108*k]],P.roofDark,depth);
+  wc_part(ctx,wc_rect(x+tw,y-82*k,nw,82*k),P.wall,depth);wc_part(ctx,[[x+tw-6*k,y-82*k],[x+tw+nw+10*k,y-82*k],[x+tw+nw-22*k,y-152*k],[x+tw+12*k,y-152*k]],P.roofDark,depth);
+  for(let i=0;i<3;i++)wc_flat(ctx,wc_arched(x+tw+40*k+i*56*k,y-66*k,18*k,40*k),P.pane,depth,"window");
+  wc_part(ctx,wc_rect(x,y-150*k,tw,150*k),P.wall,depth);wc_part(ctx,[[x-5*k,y-150*k],[x+tw+5*k,y-150*k],[x+tw/2+4*k,y-272*k],[x+tw/2-4*k,y-272*k]],P.spire,depth);
+  wc_wash(ctx,wc_arched(x+tw/2-14*k,y-50*k,28*k,50*k),P.door,{depth,kind:"door",lw:1.5});wc_flat(ctx,wc_arched(x+tw/2-7*k,y-126*k,14*k,24*k),P.pane,depth,"window");
+  wc_flat(ctx,wc_rect(x+tw/2-1.8*k,y-298*k,3.6*k,30*k),P.spire,depth,"cross");wc_flat(ctx,wc_rect(x+tw/2-9*k,y-290*k,18*k,3.4*k),P.spire,depth,"cross");}
+// a falu-red farmhouse, long side to us, white corners and window frames
+function wc_farmhouse(ctx,x,y,k,depth){const P=WCP,w=200*k,hw=78*k;
+  wc_part(ctx,wc_rect(x+138*k,y-114*k,16*k,40*k),P.trim,depth);wc_part(ctx,[[x-10*k,y-hw],[x+w+10*k,y-hw],[x+w-28*k,y-hw-64*k],[x+28*k,y-hw-64*k]],P.roof,depth);
+  wc_part(ctx,wc_rect(x,y-hw,w,hw),P.falu,depth);wc_flat(ctx,wc_rect(x,y-hw,7*k,hw),P.trim,depth);wc_flat(ctx,wc_rect(x+w-7*k,y-hw,7*k,hw),P.trim,depth);
+  for(const wx of [24,66,152]){wc_flat(ctx,wc_rect(x+wx*k,y-62*k,28*k,32*k),P.trim,depth);wc_flat(ctx,wc_rect(x+wx*k+4*k,y-58*k,20*k,24*k),P.pane,depth,"window");wc_bars(ctx,x+wx*k+4*k,y-58*k,20*k,24*k,P.trim,2*k,depth);}
+  wc_flat(ctx,wc_rect(x+104*k,y-56*k,32*k,56*k),P.trim,depth);wc_wash(ctx,wc_rect(x+108*k,y-52*k,24*k,52*k),P.farmDoor,{depth,kind:"door",line:false});
+  wc_flat(ctx,wc_rect(x-2*k,y-6*k,w+4*k,8*k),P.stoneGrey,depth,"base");}
+// Uppsala's cathedral, far off: two west towers with tall copper spires
+function wc_cathedral(ctx,x,y,k,depth){const P=WCP;wc_part(ctx,wc_rect(x+70*k,y-60*k,150*k,60*k),P.brick,depth);wc_part(ctx,[[x+66*k,y-60*k],[x+224*k,y-60*k],[x+210*k,y-92*k],[x+80*k,y-92*k]],P.copper,depth);
+  for(const tx of [0,44]){wc_part(ctx,wc_rect(x+tx*k,y-118*k,30*k,118*k),P.brick,depth);wc_part(ctx,[[x+tx*k-2*k,y-118*k],[x+tx*k+32*k,y-118*k],[x+tx*k+16*k,y-210*k]],P.copper,depth);}
+  wc_part(ctx,wc_rect(x+30*k,y-96*k,14*k,96*k),P.brick,depth);}
+// the university's old building: a sandstone front, two rows of arched windows, and a clock tower
+function wc_quad(ctx,x,y,depth,k){ctx.save();ctx.translate(x,y);ctx.scale(k,k);const P=WCP,w=980,top=-300;
+  wc_part(ctx,[[30,top-8],[w-30,top-8],[w-90,top-46],[90,top-46]],P.slate,depth);wc_part(ctx,wc_rect(0,top,w,300),P.stone,depth);
+  wc_wash(ctx,wc_rect(-10,top-12,w+20,20),wc_lit(P.stone,0.12),{depth,kind:"trim",lw:2});wc_flat(ctx,wc_rect(-6,-150,w+12,10),wc_dim(P.stone,0.06),depth);
+  for(const row of [0,1])for(let i=0;i<8;i++){const wx=44+i*120+(i>=4?40:0),wy=top+48+row*150;if(wx>380&&wx<600)continue;wc_wash(ctx,wc_arched(wx,wy,48,84),P.pane,{depth,kind:"window",lw:2});}
+  const tx=410,tw=160;wc_part(ctx,wc_rect(tx,-440,tw,440),wc_lit(P.stone,0.04),depth);wc_part(ctx,[[tx-12,-440],[tx+tw+12,-440],[tx+tw/2+8,-560],[tx+tw/2-8,-560]],P.slate,depth);
+  wc_flat(ctx,wc_rect(tx+tw/2-3,-596,6,40),P.slate,depth,"cross");wc_wash(ctx,wc_ell(tx+tw/2,-372,40,40,40),P.clock,{depth,kind:"clock",lw:2.5});
+  ctx.strokeStyle=rgba(WC_INK,0.9);ctx.lineWidth=5;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(tx+tw/2,-372);ctx.lineTo(tx+tw/2,-400);ctx.moveTo(tx+tw/2,-372);ctx.lineTo(tx+tw/2+20,-366);ctx.stroke();
+  wc_wash(ctx,wc_arched(tx+tw/2-44,-150,88,150),P.door,{depth,kind:"door",lw:2});wc_flat(ctx,wc_rect(tx-14,-10,tw+28,12),wc_lit(P.stone,0.1),depth);ctx.restore();}
+function wc_glassWing(ctx,x,y,w,h,depth){const P=WCP;wc_part(ctx,wc_rect(x,y-h,w,h),P.glass,depth,{kind:"glass"});
+  ctx.save();ctx.strokeStyle=rgba(wc_dim(P.glass,0.35),0.7);ctx.lineWidth=3;for(let i=1;i<5;i++){ctx.beginPath();ctx.moveTo(x+i*w/5,y-h);ctx.lineTo(x+i*w/5,y);ctx.stroke();}
+  for(let j=1;j<4;j++){ctx.beginPath();ctx.moveTo(x,y-h+j*h/4);ctx.lineTo(x+w,y-h+j*h/4);ctx.stroke();}ctx.restore();wc_wash(ctx,wc_rect(x-8,y-h-14,w+16,16),P.concrete,{depth,kind:"trim",lw:2});}
+// a terraced house, long side to the street
+function wc_terrace(ctx,x,y,w,col,depth,o){o=o||{};const k=o.k||1,P=WCP,top=-230;ctx.save();ctx.translate(x,y);ctx.scale(k,k);
+  wc_part(ctx,wc_rect(w*0.68,top-112,22,60),P.chimney,depth);wc_part(ctx,[[-6,top],[w+6,top],[w-40,top-80],[40,top-80]],P.tile,depth);wc_part(ctx,wc_rect(0,top,w,230),col,depth);
+  for(const [wx,wy] of [[28,40],[w-80,40],[28,140]]){wc_flat(ctx,wc_rect(wx-5,top+wy-5,62,74),P.trim,depth);wc_wash(ctx,wc_rect(wx,top+wy,52,64),P.pane,{depth,kind:"window",line:false});wc_bars(ctx,wx,top+wy,52,64,P.trim,3,depth);}
+  wc_wash(ctx,wc_rect(w-86,top+124,62,106),o.door||P.door,{depth,kind:"door",lw:2});wc_flat(ctx,wc_rect(w-64,top+170,20,5),P.trim,depth,"slot");ctx.restore();}
+function wc_skyline(ctx,base,col,depth,seed){const R=wc_rng(seed),pts=[[-60,base]];let x=-60;while(x<W+60){const w=60+R()*120,h=50+R()*150;pts.push([x,base-h],[x+w,base-h]);x+=w;
+  if(R()<0.3){pts.push([x,base-h-30-R()*40],[x+14,base-h-30-R()*40]);x+=14;}}pts.push([W+60,base],[W+60,H+60],[-60,H+60]);wc_wash(ctx,pts,col,{depth,kind:"skyline",line:false});}
+function wc_lamp(ctx,x,y,h,depth){const P=WCP;wc_wash(ctx,wc_rect(x-5,y-h,10,h),P.iron,{depth,kind:"iron",lw:1.5});wc_wash(ctx,[[x-24,y-h-6],[x+24,y-h-6],[x+16,y-h-44],[x-16,y-h-44]],P.iron,{depth,kind:"iron",lw:1.5});
+  wc_flat(ctx,wc_rect(x-14,y-h-38,28,28),P.lampGlow,depth,"lampglass");}
+// the family's letterbox, on a post
+function wc_mailbox(ctx,x,y,depth){const P=WCP;wc_wash(ctx,wc_rect(x-7,y-150,14,150),P.iron,{depth,kind:"iron",lw:2});
+  wc_part(ctx,[[x-48,y-150],[x+48,y-150],[x+48,y-206],[x+36,y-222],[x-36,y-222],[x-48,y-206]],P.mailbox,depth);wc_flat(ctx,wc_rect(x-30,y-196,60,8),wc_dim(P.mailbox,0.4),depth,"slot");}
+// a Swedish roundpole fence: pairs of posts, and thin poles laid on the slant
+function wc_fence(ctx,f,x0,x1,depth){const P=WCP;for(let x=x0;x<x1;x+=120){const y=f(x);for(const dx of [-4,4])wc_wash(ctx,wc_rect(x+dx-2.5,y-56,5,62),wc_dim(P.wood,0.15),{depth,kind:"post",lw:1.2});}
+  for(let x=x0;x<x1;x+=19){const y=f(x);wc_wash(ctx,[[x-2,y-46],[x+3,y-48],[x+46,y-6],[x+41,y-4]],(Math.round(x/19)%3)?P.wood:wc_lit(P.wood,0.12),{depth,kind:"pole",lw:1});}}
+// a small figure, for the past: a walker in a coat and hat, carrying a paper in the household ribbon's teal
+function wc_walker(ctx,x,y,h,cloth,depth,o){o=o||{};const k=h/100,P=WCP;
+  wc_wash(ctx,[[x-6*k,y-46*k],[x-14*k,y],[x-8*k,y],[x+1*k,y-36*k]],wc_dim(cloth,0.35),{depth,kind:"limb",lw:1.2});wc_wash(ctx,[[x+4*k,y-46*k],[x+16*k,y-2*k],[x+10*k,y],[x-3*k,y-38*k]],wc_dim(cloth,0.3),{depth,kind:"limb",lw:1.2});
+  wc_wash(ctx,[[x-14*k,y-80*k],[x+12*k,y-80*k],[x+16*k,y-40*k],[x-16*k,y-40*k]],cloth,{depth,kind:"coat",lw:1.4});wc_wash(ctx,wc_ell(x,y-90*k,9*k,10*k,18),P.skinTiny,{depth,kind:"head",lw:1.2});
+  wc_wash(ctx,[[x-13*k,y-96*k],[x+13*k,y-96*k],[x+9*k,y-104*k],[x-9*k,y-104*k]],P.hat,{depth,kind:"hat",lw:1.2});
+  if(o.paper){wc_wash(ctx,[[x+12*k,y-70*k],[x+34*k,y-74*k],[x+36*k,y-58*k],[x+14*k,y-54*k]],P.parchment,{depth,kind:"paper",lw:1.2,flat:true});wc_flat(ctx,wc_rect(x+22*k,y-73*k,4*k,18*k),WC_ROLE.student,1,"ribbon");}
+  wc_wash(ctx,[[x+8*k,y-78*k],[x+20*k,y-60*k],[x+15*k,y-56*k],[x+4*k,y-70*k]],cloth,{depth,kind:"arm",lw:1.2});}
 
-// ---- words: a queue drawn after the blur, and words painted on a surface ----
-let LBQ=[];
-function lbAdd(fn){LBQ.push(fn);}
-function lbDraw(ctx,S){const L=LBQ;LBQ=[];for(const f of L){ctx.save();setScreen(ctx,S);f(ctx);ctx.restore();}}
-// the screen transform of a small patch of surface at o, with ux to the right and uy up (in metres); 1 unit is a centimetre
-// (a surface whose corner is far outside the frame is left out: the flat mapping is only right near its corner, and would
-// smear the far side of a big surface, seen at a slant from close by, across the picture)
-function surfM(C,o,ux,uy){const A=pj(C,o),B=pj(C,vadd(o,vmul(ux,0.01))),D=pj(C,vsub(o,vmul(uy,0.01)));if(A.z<NEAR||B.z<NEAR||D.z<NEAR)return null;
-  if(A.x<-0.75*W||A.x>1.75*W||A.y<-0.75*H||A.y>1.75*H)return null;
-  const n=vcross(uy,ux);if(!visible(C,n,o))return null;return[B.x-A.x,B.y-A.y,D.x-A.x,D.y-A.y,A.x,A.y];}
-// text painted on a surface: size in centimetres. o.lb queues it after the blur (for words that must stay sharp)
-function surfT(ctx,C,o3,ux,uy,s,o){o=o||{};const M=surfM(C,o3,ux,uy);if(!M)return;const draw=c=>{const m=c.getTransform();c.save();c.transform(M[0],M[1],M[2],M[3],M[4],M[5]);
-    if(o.a!=null)c.globalAlpha*=o.a;T(c,s,0,0,{w:o.w||700,size:o.size||12,align:o.align||"center",color:o.color||rgba(PAL.ink,1),f:o.f,deco:o.deco});c.restore();};
-  if(o.lb)lbAdd(draw);else draw(ctx);}
-// a frame of drawing on a surface: fn draws in centimetres, with (0,0) at o3, x right, y down
-function surfDraw(ctx,C,o3,ux,uy,fn,o){o=o||{};const M=surfM(C,o3,ux,uy);if(!M)return false;const draw=c=>{c.save();c.transform(M[0],M[1],M[2],M[3],M[4],M[5]);fn(c);c.restore();};if(o.lb)lbAdd(draw);else draw(ctx);return true;}
-// the same at a point x centimetres along ux and y down uy from o3, with the slant the surface has there: a big surface seen
-// close and at an angle changes scale across it, so each word on it is placed with its own transform
-function surfAt(ctx,C,o3,ux,uy,x,y,fn,o){return surfDraw(ctx,C,vadd(o3,vadd(vmul(ux,x/100),vmul(uy,-y/100))),ux,uy,fn,o);}
-// a painted sign, on a post or a wall: words big enough to read on a phone
-function signBoard(ctx,x,y,text,o){o=o||{};const sz=o.size||30,a=o.a==null?1:o.a;if(a<=0.01)return null;ctx.save();ctx.globalAlpha*=a;ctx.font=font(o.w||800,sz);
-  const lines=Array.isArray(text)?text:[text],tw_=Math.max(...lines.map(l=>ctx.measureText(l).width)),lh=sz*1.22,pw=tw_+sz*1.3+(o.dot?sz*0.55:0),ph=sz*0.75+lh*lines.length,X=o.align==="left"?x:o.align==="right"?x-pw:x-pw/2,Y=y-ph;
-  const bg=o.bg||[255,251,240],ink=o.ink||PAL.ink,rim=o.rim||[214,170,90];
-  if(o.post){ctx.fillStyle=rgba(mix(rim,[0,0,0],0.3),1);ctx.fillRect(x-3,Y+ph-2,6,o.post);}
-  ctx.save();ctx.shadowColor="rgba(40,50,80,0.28)";ctx.shadowBlur=14;ctx.shadowOffsetY=6;rr(ctx,X,Y,pw,ph,Math.min(16,ph*0.22));ctx.fillStyle=rgba(rim,1);ctx.fill();ctx.restore();
-  rr(ctx,X,Y-3,pw,ph,Math.min(16,ph*0.22));const g=ctx.createLinearGradient(0,Y,0,Y+ph);g.addColorStop(0,rgba(mix(bg,[255,255,255],0.4),1));g.addColorStop(1,rgba(bg,1));ctx.fillStyle=g;ctx.fill();
-  if(o.dot){ctx.fillStyle=rgba(o.dot,1);ctx.beginPath();ctx.arc(X+sz*0.62,Y-3+ph/2,sz*0.2,0,TAU);ctx.fill();}
-  lines.forEach((l,i)=>T(ctx,l,X+pw/2+(o.dot?sz*0.27:0),Y-3+sz*0.38+lh*(i+0.78),{w:o.w||800,size:sz,align:"center",color:rgba(ink,1),deco:o.deco}));ctx.restore();return{X,Y,w:pw,h:ph};}
-// the scene's place and time, top left (deco: while it turns over, its words aren't there to be read)
-function marker(ctx,text,a,deco){signBoard(ctx,64,116,text,{size:30,align:"left",dot:PAL.band,w:700,a:a==null?1:a,deco});}
-// a speech bubble with its tail towards (tx,ty)
-function tSpeech(ctx,x,y,w,lines,tx,ty,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const sz=o.size||32,lh=sz*1.3,h=lines.length*lh+sz*0.9,r=sz*0.8,k=o.k==null?1:o.k;
-  ctx.save();ctx.globalAlpha*=a;ctx.translate(tx,ty);ctx.scale(k,k);ctx.translate(-tx,-ty);
-  ctx.save();ctx.shadowColor="rgba(40,50,80,0.25)";ctx.shadowBlur=18;ctx.shadowOffsetY=8;ctx.fillStyle=rgba(o.bg||[255,255,255],1);
-  rr(ctx,x,y,w,h,r);ctx.fill();const bx=clamp(tx,x+r+10,x+w-r-10),by=ty<y?y:y+h;ctx.beginPath();ctx.moveTo(bx-18,by);ctx.lineTo(tx,ty);ctx.lineTo(bx+18,by);ctx.closePath();ctx.fill();ctx.restore();
-  lines.forEach((l,i)=>T(ctx,l,x+sz*0.75,y+sz*0.5+lh*(i+0.74),{w:o.w||700,size:sz,color:rgba(o.ink||[40,46,66],1)}));ctx.restore();}
-// how wide a bubble needs to be for its lines
-const speechW=(ctx,lines,sz,w)=>Math.max(...lines.map(l=>tw(ctx,l,sz||32,w||700)))+(sz||32)*1.5;
+/* ---------- what is kept ---------- */
+// a picture painted once, by paint(ctx) on a w×h canvas (default the frame), and kept: every background, and anything still
+function wc_kept(key,w,h,paint){let c=WC.bg[key];if(c)return c;wc_prep();c=WC.bg[key]=mkCanvas(w||W,h||H);const x=c.getContext("2d");paint(x);return c;}
+// the paper's tooth, and a soft darkening at the corners, over the whole frame: the last thing every scene draws, in the frame's own space
+function wc_paperOver(ctx,S){setScreen(ctx,S);ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalCompositeOperation="multiply";ctx.drawImage(WC.paper,0,0,ctx.canvas.width,ctx.canvas.height);ctx.restore();}
+// the film opens out of the paper, and each chapter's first moment
+function wc_fadeIn(ctx,S,t,d){d=d||1.2;if(t<d){setScreen(ctx,S);ctx.fillStyle=rgba(WC_PAPER,1-ease(t/d));ctx.fillRect(0,0,W,H);}}
+// a veil of paper over the scene, for the title and end cards
+function wc_veil(ctx,S,a){if(a<=0)return;setScreen(ctx,S);ctx.fillStyle=rgba(WC_PAPER,clamp(a,0,1));ctx.fillRect(0,0,W,H);}
 
-// ---- the palette: bright pastels, like painted wood ----
-const PAL={lawn:[126,198,112],path:[240,222,186],sky0:[120,188,246],sky1:[216,236,250],cream:[250,240,216],band:[238,186,74],roof:[228,120,98],
-  paper:[253,241,206],stripe:[244,222,170],dado:[164,204,178],rail:[255,252,244],side:[250,216,186],ceil:[248,240,226],floor:[226,180,124],
-  rug:[84,166,166],rugB:[246,232,200],walnut:[156,104,66],oak:[210,164,110],navy:[58,82,132],coral:[226,112,96],teal:[64,160,156],mustard:[232,178,64],
-  lilac:[150,130,206],sage:[118,170,128],peach:[248,186,150],ink:[44,52,74],gold:[240,184,60],green:[96,178,112],grey:[160,166,178],red:[214,84,72],wood:[196,150,100],table:[186,138,96]};
-// what the colours mean: gold is governance's decisions, and the business side; blue the technical side; walnut people of the past
-const RIM={biz:[232,178,64],tech:[86,164,222],past:[176,140,104]};
+/* ---------- text ---------- */
+// text in ink; size at least 28, as everywhere in the films
+function wc_T(ctx,s,x,y,o){o=Object.assign({},o||{});if(!o.color)o.color=rgba(o.col||WC_INK,o.a==null?1:o.a);T(ctx,s,x,y,o);}
+// handwriting: the same face, leaning, as a pen writes; p reveals it letter by letter
+function wc_hand(ctx,s,x,y,o){o=o||{};const p=o.p==null?1:o.p;if(p<=0)return;const n=Math.ceil(s.length*clamp(p,0,1)),sub=s.slice(0,n);ctx.save();ctx.translate(x,y);ctx.transform(1,0,-0.2,1,0,0);
+  wc_T(ctx,sub,0,0,{size:o.size||32,w:o.w||600,col:o.col||WCP.parchInk,align:o.align,a:o.a});ctx.restore();}
 
-// ---- the sky and the table ----
-function tSky(ctx,o){o=o||{};const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,rgba(o.top||PAL.sky0,1));g.addColorStop(1,rgba(o.bottom||PAL.sky1,1));ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-  const sg=ctx.createRadialGradient(260,60,10,260,60,760);sg.addColorStop(0,"rgba(255,248,220,0.6)");sg.addColorStop(1,"rgba(255,248,220,0)");ctx.fillStyle=sg;ctx.fillRect(0,0,W,H);}
-// the ground far away: a band from the horizon down, under everything else
-function tHorizon(ctx,C,col){const hp=pj(C,vadd(C.eye,v3(C.fwd.x*4000,-C.eye.y,C.fwd.z*4000)));const hy=clamp(hp.y,-50,H+50);if(hy>=H)return;
-  const g=ctx.createLinearGradient(0,hy,0,H);g.addColorStop(0,rgba(mix(col,HAZE,0.75),1));g.addColorStop(0.25,rgba(mix(col,HAZE,0.35),1));g.addColorStop(1,rgba(col,1));ctx.fillStyle=g;ctx.fillRect(0,hy,W,H-hy+2);}
-// a flat disc or ring on the ground, as a polygon
-function discPts(cx,cz,r,n,y,a0,a1){const pts=[],A0=a0==null?0:a0,A1=a1==null?360:a1;for(let i=0;i<=n;i++){const a=lerp(A0,A1,i/n)*DEG;pts.push(v3(cx+r*Math.sin(a),y||0,cz+r*Math.cos(a)));}if(A1-A0>=360)pts.pop();return pts;}
-// grass flock, like a model's lawn mat: dots fixed to the ground, only where the camera sees them
-function tFlock(ctx,C,cx,cz,R,o){o=o||{};const step=o.step||0.55,col=o.col||[40,80,40],lite=o.lite||[255,255,220];const g=C.tgt,rr_=Math.min(R,Math.max(8,C.dist*2.6));
-  const x0=Math.floor((g.x-rr_)/step),x1=Math.ceil((g.x+rr_)/step),z0=Math.floor((g.z-rr_)/step),z1=Math.ceil((g.z+rr_)/step);ctx.save();
-  for(let i=x0;i<=x1;i++)for(let j=z0;j<=z1;j++){const x=(i+hash(i*7+j,61))*step,z=(j+hash(i*3+j*11,62))*step;if((x-cx)**2+(z-cz)**2>R*R)continue;if(o.skip&&o.skip(x,z))continue;
-    const p=pj(C,v3(x,0.003,z));if(p.z<NEAR||p.x<-4||p.x>W+4||p.y<-4||p.y>H+4)continue;const s=0.028*p.s;if(s<0.6)continue;const a=clamp((s-0.6)*0.6,0,1)*(o.a||0.2);
-    ctx.globalAlpha=a;ctx.fillStyle=hash(i,j)>0.5?rgba(lite,1):rgba(col,1);ctx.fillRect(p.x,p.y,s*1.4,s*0.7);}ctx.restore();}
+/* ---------- cards, chips, tags: paper, painted once, with the text drawn every frame ---------- */
+// the paper of a card, a chip, a tag, a badge or an envelope: a pale card with a pencil edge; a chip is washed in its role's colour, a
+// card wears its role's colour as a brushstroke behind its title (o.sw wide), and a role that hasn't started yet is dashed in its colour
+function wc_panelPaint(x,w,h,o){const r=o.kind==="card"||o.kind==="sheet"?12:o.kind==="envelope"?4:h/2,pad=8;
+  x.translate(pad,pad);wc_tr(x,wc_rrPts(0,0,w,h,r));x.fillStyle=rgba(o.fill||WC_CARD,o.dashed?0.92:0.95);x.fill();
+  if(o.kind==="chip"&&!o.dashed&&o.role)wc_wash(x,wc_resample(wc_rect(4,4,w-8,h-8),10),mix(o.role,[255,255,255],0.2),{kind:"chipwash",line:false,a:0.74,seed:o.seed});
+  if(o.kind==="card"&&o.role&&!o.dashed&&o.sw)wc_wash(x,wc_resample(wc_rect(16,o.sy||14,Math.min(w-30,o.sw),o.sh||46),10),o.role,{kind:"swatch",line:false,a:0.58,seed:o.seed});
+  if(o.kind==="badge")wc_wash(x,wc_resample(wc_rect(2,2,w-4,h-4),8),o.role||WC_BADGE,{kind:"swatch",line:false,a:0.6,seed:o.seed});
+  if(o.wash)wc_wash(x,wc_resample(wc_rect(6,6,w-12,h-12),10),o.wash,{kind:"chipwash",line:false,a:o.washA||0.3,seed:o.seed});
+  if(o.dashed){x.save();wc_tr(x,wc_rrPts(2,2,w-4,h-4,r));x.setLineDash([10,9]);x.lineWidth=2.5;x.strokeStyle=rgba(o.role||WC_PENCIL,0.95);x.stroke();x.restore();}
+  else wc_ink(x,wc_rrPts(0,0,w,h,Math.min(r,6)),true,o.kind==="tag"||o.kind==="badge"?1.5:2,WC_PENCIL,0.85,o.seed||Math.round(w+h),0.9);}
+const WC_SC=2; // cards are kept at twice the frame's resolution, so they stay sharp when the camera moves in
+function wc_panel(ctx,x,y,w,h,o){o=o||{};w=Math.round(w);h=Math.round(h);const key=[o.kind,w,h,o.role,o.dashed?1:0,o.sw|0,o.sy|0,o.sh|0,o.wash,o.washA,o.fill,o.seed|0].join("|");let c=WC.card[key];
+  if(!c){wc_prep();c=WC.card[key]=mkCanvas((w+16)*WC_SC,(h+16)*WC_SC);const cx=c.getContext("2d");cx.scale(WC_SC,WC_SC);wc_panelPaint(cx,w,h,o);}
+  ctx.drawImage(c,x-8,y-8,w+16,h+16);}
+// a label: the paper tag, its text at 28 px or more; y is its middle; returns its width
+function wc_tag(ctx,x,y,s,o){o=o||{};const size=o.size||30,wt=o.w||700,w=Math.round(tw(ctx,s,size,wt,o.f)+40),h=Math.round(size+22),x0=o.align==="center"?x-w/2:o.align==="right"?x-w:x;
+  wc_panel(ctx,x0,y-h/2,w,h,{kind:"tag",role:o.role,wash:o.wash,washA:o.washA,seed:o.seed});wc_T(ctx,s,x0+20,y+size*0.36,{w:wt,size,f:o.f,col:o.col||WC_INK});return w;}
+// the year and the place, in the top corner
+function wc_year(ctx,x,y,s,a){if(a==null)a=1;if(a<=0.01)return;withA(ctx,a,()=>{const w=Math.round(tw(ctx,s,30,500,"mono")+76),h=56;wc_panel(ctx,x,y-h/2,w,h,{kind:"pill"});
+  ctx.fillStyle=rgba(WC_ROLE.platform,1);ctx.beginPath();ctx.arc(x+30,y,6.5,0,TAU);ctx.fill();wc_T(ctx,s,x+50,y+11,{w:500,size:30,f:"mono"});});}
+// a badge: a short word on a yellow wash, such as "family" or "shared"
+function wc_badge(ctx,x,y,s,o){o=o||{};const size=o.size||28,w=Math.round(tw(ctx,s,size,700)+28),h=42;wc_panel(ctx,x,y-h/2,w,h,{kind:"badge",role:o.role,seed:o.seed});
+  wc_T(ctx,s,x+w/2,y+size*0.36,{w:700,size,align:"center",col:WC_DARK});return w;}
+// a record as one system holds it: the role, the system's own key, and the email it has on file (marked "family" while it's the shared one)
+function wc_roleCard(ctx,x,y,w,h,role,title,id,email,o){o=o||{};const col=WC_ROLE[role],tW=tw(ctx,title,30,800);
+  wc_panel(ctx,x,y,w,h,{kind:"card",role:col,dashed:o.dashed,sw:tW+36,seed:o.seed});const lx=x+32;
+  wc_T(ctx,title,lx,y+48,{w:800,size:30,col:o.dashed?WC_INK:WC_DARK});if(id)wc_T(ctx,id,x+w-24,y+48,{w:500,size:28,f:"mono",align:"right"});
+  if(email){const ok=o.fresh,s=(ok?"✓ ":"")+email;wc_T(ctx,s,lx,y+96,{w:500,size:28,f:"mono",col:ok?WC_ROLEINK.student:WC_MUTED,a:o.ea==null?1:o.ea});
+    if(!ok&&o.badge!==false){const bw=tw(ctx,s,28,500,"mono");withA(ctx,o.ba==null?1:o.ba,()=>wc_badge(ctx,lx+bw+12,y+87,"family"));}}
+  else if(o.note)wc_T(ctx,o.note,lx,y+96,{w:600,size:28,col:WC_MUTED});}
+// a role, dated: a chip in the role's wash, with its name and its dates
+function wc_chip(ctx,x,y,w,h,role,label,sub,o){o=o||{};const col=WC_ROLE[role]||role;wc_panel(ctx,x,y,w,h,{kind:"chip",role:col,dashed:o.dashed,seed:o.seed});
+  const lw=tw(ctx,label,30,800);wc_T(ctx,label,x+28,y+h/2+11,{w:800,size:30,col:WC_DARK});if(sub)wc_T(ctx," · "+sub,x+28+lw,y+h/2+10,{w:600,size:28,col:WC_DARK,a:0.88});}
+// a contact point or an identifier: a big line, mono, and what it is under it
+function wc_info(ctx,x,y,w,h,big,small,o){o=o||{};wc_panel(ctx,x,y,w,h,{kind:"card",seed:o.seed,wash:o.wash,washA:o.washA});const lx=x+30;
+  wc_T(ctx,big,lx,y+50,{w:o.mono===false?700:500,size:o.bigSize||30,f:o.mono===false?"sans":"mono",col:WC_DARK});wc_T(ctx,small,lx,y+96,{w:600,size:28,col:WC_MUTED});
+  if(o.badge){const bw=tw(ctx,small,28,600);withA(ctx,o.ba==null?1:o.ba,()=>wc_badge(ctx,lx+bw+14,y+87,o.badge));}}
+// a lane's name, and what it holds
+function wc_laneHead(ctx,x,y,t,sub,o){o=o||{};const w=tw(ctx,t,36,800);wc_T(ctx,t,x,y,{w:800,size:36,col:WC_DARK});if(sub)wc_T(ctx,sub,x+w+20,y,{w:600,size:28,col:WC_MUTED});}
+// an envelope; with o.label, a tag under it
+function wc_envelope(ctx,x,y,s,rot){ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);const w=Math.round(120*s),h=Math.round(80*s);wc_panel(ctx,-w/2,-h/2,w,h,{kind:"envelope"});
+  ctx.strokeStyle=rgba(WC_PENCIL,0.7);ctx.lineWidth=2.4;ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(-w/2+6,-h/2+6);ctx.lineTo(0,h*0.08);ctx.lineTo(w/2-6,-h/2+6);ctx.stroke();ctx.restore();}
+// a dotted pencil line from one thing to another, leaving and arriving level (o.vertical: upright), drawn on as p goes from 0 to 1; returns its tip
+function wc_link(ctx,x0,y0,x1,y1,col,o){o=o||{};const p=o.p==null?1:o.p;if(p<=0)return null;const c1=o.vertical?[x0,(y0+y1)/2]:[(x0+x1)/2,y0],c2=o.vertical?[x1,(y0+y1)/2]:[(x0+x1)/2,y1],pts=[];
+  for(let i=0;i<=24;i++){const t=i/24,u=1-t,a=u*u*u,b=3*u*u*t,c=3*u*t*t,d=t*t*t;pts.push([a*x0+b*c1[0]+c*c2[0]+d*x1,a*y0+b*c1[1]+c*c2[1]+d*y1]);}
+  const n=Math.max(2,Math.round(pts.length*clamp(p,0,1)));ctx.save();ctx.strokeStyle=rgba(col||WC_PENCIL,o.a==null?0.7:o.a);ctx.lineWidth=o.lw||3;ctx.lineCap="round";ctx.setLineDash(o.dash||[2,11]);
+  ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<n;i++)ctx.lineTo(pts[i][0],pts[i][1]);ctx.stroke();ctx.restore();return pts[n-1];}
+// a tick, drawn in pencil as p goes from 0 to 1
+function wc_tick(ctx,x,y,s,col,p,lw){p=p==null?1:p;if(p<=0)return;const a=[x-s*0.42,y],b=[x-s*0.1,y+s*0.32],c=[x+s*0.46,y-s*0.38],l1=Math.hypot(b[0]-a[0],b[1]-a[1]),l2=Math.hypot(c[0]-b[0],c[1]-b[1]),L=(l1+l2)*clamp(p,0,1);
+  ctx.save();ctx.strokeStyle=rgba(col||WC_ROLEINK.alumna,1);ctx.lineWidth=lw||Math.max(3,s*0.15);ctx.lineCap="round";ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(a[0],a[1]);
+  if(L<=l1)ctx.lineTo(lerp(a[0],b[0],L/l1),lerp(a[1],b[1],L/l1));else{ctx.lineTo(b[0],b[1]);ctx.lineTo(lerp(b[0],c[0],(L-l1)/l2),lerp(b[1],c[1],(L-l1)/l2));}ctx.stroke();ctx.restore();}
+// a cross, the same way
+function wc_cross(ctx,x,y,s,col,p){p=p==null?1:p;if(p<=0)return;ctx.save();ctx.strokeStyle=rgba(col||WC_ROLEINK.customer,1);ctx.lineWidth=Math.max(3,s*0.15);ctx.lineCap="round";
+  const q=clamp(p*2,0,1),r=clamp(p*2-1,0,1);ctx.beginPath();ctx.moveTo(x-s*0.35,y-s*0.35);ctx.lineTo(lerp(x-s*0.35,x+s*0.35,q),lerp(y-s*0.35,y+s*0.35,q));
+  if(r>0){ctx.moveTo(x+s*0.35,y-s*0.35);ctx.lineTo(lerp(x+s*0.35,x-s*0.35,r),lerp(y-s*0.35,y+s*0.35,r));}ctx.stroke();ctx.restore();}
+// a pencil circle round something, drawn on: a loop that overshoots its start, as a hand draws one
+function wc_ring(ctx,cx,cy,rx,ry,p,o){o=o||{};if(p<=0)return;const pts=[];for(let i=0;i<=60;i++){const u=i/60,a=-2.2+u*TAU*1.08,r=1+0.05*Math.sin(u*9)+0.04*u;pts.push([cx+Math.cos(a)*rx*r,cy+Math.sin(a)*ry*r]);}
+  wc_pencil(ctx,pts,p,{col:o.col||WC_PENCIL,lw:o.lw||3.4,a:o.a==null?0.92:o.a,seed:o.seed||9,amp:1.4});}
 
-// ---- trees and shrubs: a trunk and soft clay canopies ----
-function tTree(ctx,C,x,z,h,col,o){o=o||{};const B=pj(C,v3(x,o.y||0,z)),Tp=pj(C,v3(x,(o.y||0)+h*0.55,z)),r=h*0.34*B.s;if(B.z<NEAR+0.5||B.x<-r*2||B.x>W+r*2||Tp.y-r*2>H||B.y<-r*3)return;const c=hz(col,B.z),tc=hz([150,112,82],B.z);
-  ctx.save();ctx.translate(B.x,B.y);ctx.scale(1,clamp(Math.abs(C.fwd.y)+0.2,0.3,1));const sg=ctx.createRadialGradient(r*0.3,0,1,r*0.3,0,r*1.2);sg.addColorStop(0,"rgba(40,56,70,0.3)");sg.addColorStop(1,"rgba(40,56,70,0)");ctx.fillStyle=sg;ctx.beginPath();ctx.arc(r*0.3,0,r*1.2,0,TAU);ctx.fill();ctx.restore();
-  ctx.strokeStyle=rgba(tc,1);ctx.lineCap="round";ctx.lineWidth=Math.max(2,h*0.07*B.s);ctx.beginPath();ctx.moveTo(B.x,B.y);ctx.lineTo(Tp.x,Tp.y);ctx.stroke();
-  const cy=Tp.y-r*0.6,blob=(dx,dy,rr_,k)=>{const g=ctx.createRadialGradient(Tp.x+dx-rr_*0.35,cy+dy-rr_*0.4,rr_*0.1,Tp.x+dx,cy+dy,rr_);g.addColorStop(0,rgba(mix(c,[255,250,220],0.32*k),1));g.addColorStop(0.6,rgba(c,1));g.addColorStop(1,rgba(mix(c,[20,40,40],0.22),1));ctx.fillStyle=g;ctx.beginPath();ctx.arc(Tp.x+dx,cy+dy,rr_,0,TAU);ctx.fill();};
-  if(o.round)blob(0,0,r,1);else{blob(-r*0.38,r*0.12,r*0.72,0.8);blob(r*0.4,r*0.1,r*0.7,0.9);blob(0,-r*0.32,r*0.8,1);}
-  ctx.fillStyle="rgba(255,255,255,0.3)";ctx.beginPath();ctx.ellipse(Tp.x-r*0.3,cy-r*0.55,r*0.18,r*0.1,-0.5,0,TAU);ctx.fill();}
-function tShrub(ctx,C,x,z,r,col,o){o=o||{};const P_=pj(C,v3(x,(o.y||0)+r*0.6,z)),R=r*P_.s;if(P_.z<NEAR+0.3||P_.x<-R*2||P_.x>W+R*2)return;const c=hz(col,P_.z);
-  for(let i=0;i<3;i++){const dx=(i-1)*R*0.7,g=ctx.createRadialGradient(P_.x+dx-R*0.3,P_.y-R*0.4,R*0.1,P_.x+dx,P_.y,R);g.addColorStop(0,rgba(mix(c,[255,250,220],0.3),1));g.addColorStop(1,rgba(mix(c,[20,40,40],0.2),1));ctx.fillStyle=g;ctx.beginPath();ctx.arc(P_.x+dx,P_.y-(i===1?R*0.25:0),R*(i===1?1:0.8),0,TAU);ctx.fill();}}
+/* ---------- the person, as the master record ---------- */
+// the person cleared to white paper in a pencil line, gathering her roles' colours as bands; kept once per person and size. bands: [{col,
+// dashed, a}] from the shoulders down; each band's a (0..1) lets it arrive, and o.a fades the whole figure
+function wc_whiteFig(id,s){const key=id+"|"+s;if(WC.fig[key])return WC.fig[key];const P=PEOPLE[id],k=s*P.build.h,pad=44,w=Math.ceil(500*k+pad*2),h=Math.ceil(660*k+pad*2),fy=pad+650*k;
+  const fig=mkCanvas(w,h),fx=fig.getContext("2d");WC_RAW=true;try{person(fx,id,w/2,fy,s,{pose:"ease",t:1.2});}finally{WC_RAW=false;}
+  const M=mkCanvas(w,h),mx=M.getContext("2d");mx.drawImage(fig,0,0);mx.globalCompositeOperation="source-in";mx.fillStyle="#fff";mx.fillRect(0,0,w,h);
+  const G=mkCanvas(w,h),gx=G.getContext("2d");gx.fillStyle="rgba(255,255,255,0.72)";gx.fillRect(0,0,w,h);gx.globalAlpha=0.2;gx.drawImage(fig,0,0);gx.globalAlpha=1;
+  gx.globalCompositeOperation="destination-in";gx.drawImage(M,0,0);
+  // the pencil line: the silhouette grown a little in pencil, less the silhouette
+  const D=mkCanvas(w,h),dx=D.getContext("2d"),Tn=mkCanvas(w,h),tx=Tn.getContext("2d");tx.drawImage(M,0,0);tx.globalCompositeOperation="source-in";tx.fillStyle=rgba(WC_PENCIL,1);tx.fillRect(0,0,w,h);
+  for(let i=0;i<24;i++){const a=i/24*TAU;dx.drawImage(Tn,Math.cos(a)*1.8,Math.sin(a)*1.8);}dx.drawImage(Tn,0,0);dx.globalCompositeOperation="destination-out";dx.drawImage(M,0,0);
+  return WC.fig[key]={w,h,fy,k,M,G,D};}
+function wc_white(ctx,id,x,y,s,bands,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const F=wc_whiteFig(id,s),ox=x-F.w/2,oy=y-F.fy;
+  withA(ctx,a,()=>{if(o.shadow!==false){ctx.save();const tg=ctx.createRadialGradient(x,y-4,4,x,y-4,110*F.k);tg.addColorStop(0,rgba([90,80,96],0.14));tg.addColorStop(1,rgba([90,80,96],0));ctx.fillStyle=tg;
+      ctx.beginPath();ctx.ellipse(x,y-4,110*F.k,18*F.k,0,0,TAU);ctx.fill();ctx.restore();}
+    ctx.save();ctx.globalAlpha*=0.85;ctx.drawImage(F.D,ox,oy);ctx.restore();ctx.drawImage(F.G,ox,oy);
+    if(bands&&bands.length){const [bc,bx]=wc_buf("bands",F.w,F.h),by0=F.fy-436*F.k;bands.forEach((b,i)=>{const ba=(b.a==null?1:b.a);if(ba<=0.01)return;
+        bx.fillStyle=rgba(b.col,(b.dashed?0.4:1)*0.72*ba);const yy=by0+(b.i==null?i:b.i)*64*F.k;bx.fillRect(0,yy,F.w,42*F.k);});
+      bx.globalCompositeOperation="destination-in";bx.drawImage(F.M,0,0);ctx.drawImage(bc,ox,oy);}});}
+// the middle of band i on the figure, for lines that run to it
+function wc_bandY(id,s,y,i){const k=s*PEOPLE[id].build.h;return y-650*k+(650-436)*k+i*64*k+21*k;}
 
-// ---- rooms: the inner faces of a building open at the front, seen only from where the camera is ----
-// R: {X0,X1,Z0,Z1,FY,HY} in the building's coordinates, the front at Z0. o.win: a window in the back wall [x0,y0,x1,y1].
-// o.paper, o.stripe, o.dado, o.side, o.floor: the room's colours
-function tRoom(ctx,C,R,o){o=o||{};const t=0.2,xl=R.X0+t,xr=R.X1-t,bz=R.Z1-t,FY=R.FY,HY=R.HY,Z0=R.Z0,DH=FY+(o.dh||0.92),E=mxL(C.eye);
-  const paper=o.paper||PAL.paper,stripe=o.stripe||PAL.stripe,dado=o.dado||PAL.dado,side=o.side||PAL.side,floor=o.floor||PAL.floor;
-  const quad=(pts)=>{const q=pts.map(p=>pj(C,p));ctx.moveTo(q[0].x,q[0].y);for(let i=1;i<q.length;i++)ctx.lineTo(q[i].x,q[i].y);ctx.closePath();};
-  if(E.z<bz){ctx.save();ctx.beginPath();quad([v3(xl,FY,bz),v3(xr,FY,bz),v3(xr,HY,bz),v3(xl,HY,bz)]);if(o.win){const [a,b,c,d]=o.win;quad([v3(a,b,bz),v3(a,d,bz),v3(c,d,bz),v3(c,b,bz)]);}
-    ctx.fillStyle=rgba(ilit(paper,ILIT.F),1);ctx.fill("evenodd");ctx.clip("evenodd");
-    // wallpaper: soft stripes and a tiny sprig between them
-    if(o.plain!==true&&!o.lod){for(let x=xl+0.06;x<xr;x+=0.26)wq3(ctx,C,x,DH,x+0.09,HY,bz-0.002,ilit(stripe,ILIT.F),{a:0.55});
-      const sp=o.sprig||[226,150,120];ctx.fillStyle=rgba(ilit(sp,ILIT.F),0.55);for(let x=xl+0.19;x<xr;x+=0.26)for(let y=DH+0.18;y<HY-0.05;y+=0.32){const p=pj(C,v3(x,y,bz-0.003));ctx.beginPath();ctx.arc(p.x,p.y,Math.max(1.2,0.022*p.s),0,TAU);ctx.fill();}}
-    // the dado and its rail
-    wq3(ctx,C,xl,FY,xr,DH,bz-0.004,ilit(dado,ILIT.F),{grad:[0.04,0.08]});
-    for(let x=xl+0.18;x<xr-0.1;x+=0.36)wq3(ctx,C,x,FY+0.16,x+0.26,DH-0.14,bz-0.005,ilit(mix(dado,[255,255,255],0.12),ILIT.F),{edge:0.35});
-    wq3(ctx,C,xl,DH-0.02,xr,DH+0.05,bz-0.006,ilit(PAL.rail,ILIT.F),{edge:0.4});ctx.restore();
-    if(o.win){const [a,b,c,d]=o.win,fr=ilit([255,253,246],ILIT.F);
-      wq3(ctx,C,a-0.06,b-0.06,c+0.06,b,bz-0.01,fr);wq3(ctx,C,a-0.06,d,c+0.06,d+0.06,bz-0.01,fr);wq3(ctx,C,a-0.06,b,a,d,bz-0.01,fr);wq3(ctx,C,c,b,c+0.06,d,bz-0.01,fr);
-      wq3(ctx,C,(a+c)/2-0.025,b,(a+c)/2+0.025,d,bz-0.01,fr);wq3(ctx,C,a,(b+d)/2+0.12,c,(b+d)/2+0.16,bz-0.01,fr);
-      ibox(ctx,C,a-0.12,b-0.12,bz-0.16,c-a+0.24,0.07,0.16,[255,252,244],{edge:0.5});}}
-  // the ceiling, the side walls with the dado carried round, the floor: each only from the side it can be seen
-  if(E.y<HY)poly3(ctx,C,[v3(xl,HY,Z0),v3(xr,HY,Z0),v3(xr,HY,bz),v3(xl,HY,bz)],ilit(PAL.ceil,ILIT.D),{grad:[0,0.1]});
-  for(const [x,k,s] of [[xl,ILIT.L,1],[xr,ILIT.R,-1]]){if((E.x-x)*s<=0)continue;sq3(ctx,C,x,Z0,FY,bz,HY,ilit(side,k),{grad:[0.03,0.08]});sq3(ctx,C,x,Z0,FY,bz,DH,ilit(dado,k),{grad:[0.02,0.06]});sq3(ctx,C,x,Z0,DH-0.02,bz,DH+0.05,ilit(PAL.rail,k));}
-  if(E.y>FY){fq3(ctx,C,xl,Z0,xr,bz,FY,ilit(floor,ILIT.U),{grad:[0.02,0.1]});
-    // o.flags: a floor of stone flags instead of boards
-    if(o.flags&&!o.lod){ctx.save();ctx.strokeStyle="rgba(90,80,70,0.22)";ctx.lineWidth=1.5;for(let z=Z0+0.45;z<bz;z+=0.45){const a=pj(C,v3(xl,FY,z)),b=pj(C,v3(xr,FY,z));if(a.z<NEAR||b.z<NEAR)continue;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}
-      let r=0;for(let z=Z0;z<bz-0.01;z+=0.45,r++)for(let x=xl+(r%2?0.3:0.6);x<xr;x+=0.6){const a=pj(C,v3(x,FY,z)),b=pj(C,v3(x,FY,Math.min(bz,z+0.45)));if(a.z<NEAR||b.z<NEAR)continue;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}ctx.restore();}
-    else if(!o.lod){ctx.save();ctx.strokeStyle="rgba(120,74,40,0.2)";ctx.lineWidth=1.5;for(let x=xl+0.32;x<xr;x+=0.32){const a=pj(C,v3(x,FY,Z0)),b=pj(C,v3(x,FY,bz));if(a.z<NEAR||b.z<NEAR)continue;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}
-    for(let i=0;i<40;i++){const x=xl+0.32*Math.floor(hash(i,7)*(xr-xl)/0.32),z=lerp(Z0,bz,hash(i,8)),a=pj(C,v3(x,FY,z)),b=pj(C,v3(Math.min(xr,x+0.32),FY,z));if(a.z<NEAR||b.z<NEAR)continue;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}ctx.restore();}
-    // skirting, and soft shadow where the walls meet
-    if(E.z<bz)wq3(ctx,C,xl,FY,xr,FY+0.09,bz-0.02,ilit([255,252,244],ILIT.F),{edge:0.3});if(E.x>xl)sq3(ctx,C,xl+0.01,Z0,FY,bz,FY+0.09,ilit([255,252,244],ILIT.L));if(E.x<xr)sq3(ctx,C,xr-0.01,Z0,FY,bz,FY+0.09,ilit([255,252,244],ILIT.R));
-    aoStrip(ctx,C,v3(xl,FY+0.001,bz),v3(xr,FY+0.001,bz),v3(0,0,-1),0.55,0.16);aoStrip(ctx,C,v3(xl,FY+0.001,Z0),v3(xl,FY+0.001,bz),v3(1,0,0),0.45,0.13);aoStrip(ctx,C,v3(xr,FY+0.001,Z0),v3(xr,FY+0.001,bz),v3(-1,0,0),0.45,0.13);}
-  if(E.z<bz){aoStrip(ctx,C,v3(xl,FY,bz-0.002),v3(xl,HY,bz-0.002),v3(1,0,0),0.3,0.1);aoStrip(ctx,C,v3(xr,FY,bz-0.002),v3(xr,HY,bz-0.002),v3(-1,0,0),0.3,0.1);aoStrip(ctx,C,v3(xl,HY,bz-0.002),v3(xr,HY,bz-0.002),v3(0,-1,0),0.28,0.1);}
-  return{xl,xr,bz,FY,HY,Z0,E};}
-// the open front's cut edges (white, like card), the outer walls the camera can see, a coloured band and the roof
-function tShell(ctx,C,R,o){o=o||{};const t=0.2,cut=[255,253,248],w=R.X1-R.X0,d=R.Z1-R.Z0,HY=R.HY,wc=o.wall||PAL.cream,E=mxL(C.eye);
-  if(E.x<R.X0)poly3(ctx,C,[v3(R.X0,0,R.Z1),v3(R.X0,0,R.Z0),v3(R.X0,HY+0.18,R.Z0),v3(R.X0,HY+0.18,R.Z1)],wc,{n:NRM.L,grad:[0.05,0.08],edge:0.4});
-  if(E.x>R.X1)poly3(ctx,C,[v3(R.X1,0,R.Z0),v3(R.X1,0,R.Z1),v3(R.X1,HY+0.18,R.Z1),v3(R.X1,HY+0.18,R.Z0)],wc,{n:NRM.R,grad:[0.05,0.08],edge:0.4});
-  if(E.x<R.X0||E.x>R.X1)sideWins(ctx,C,R,E.x<R.X0?R.X0-0.01:R.X1+0.01,E.x<R.X0?NRM.L:NRM.R,o);
-  if(E.z<R.Z0){wq3(ctx,C,R.X0,0,R.X0+t,HY+0.18,R.Z0,cut,{edge:0.5});wq3(ctx,C,R.X1-t,0,R.X1,HY+0.18,R.Z0,cut,{edge:0.5});wq3(ctx,C,R.X0,HY,R.X1,HY+0.18,R.Z0,cut,{edge:0.5});
-    wq3(ctx,C,R.X0,0,R.X1,R.FY,R.Z0-0.001,o.plinth||[244,234,212],{edge:0.4});wq3(ctx,C,R.X0,R.FY-0.05,R.X1,R.FY,R.Z0-0.002,cut);}
-  drawBox(ctx,C,R.X0-0.06,HY+0.18,R.Z0-0.06,w+0.12,0.2,d+0.12,o.band||PAL.band,{grad:[0.12,0.08],edge:0.6});
-  if(o.flat)drawBox(ctx,C,R.X0-0.16,HY+0.38,R.Z0-0.16,w+0.32,0.22,d+0.32,o.roof||[214,208,198],{grad:[0.05,0.06],edge:0.5});
-  else gable(ctx,C,R.X0,HY+0.38,R.Z0,w,d,o.rh||1.5,o.roof||PAL.roof,{wall:o.gableWall||wc,ov:0.26});}
-// the same building seen from behind or from far away: closed, with windows
-function tClosed(ctx,C,R,o){o=o||{};const w=R.X1-R.X0,d=R.Z1-R.Z0,HY=R.HY,wc=o.wall||PAL.cream;
-  drawBox(ctx,C,R.X0,0,R.Z0,w,HY+0.18,d,wc,{grad:[0.05,0.08],edge:0.4,noTop:true,front:o.front||wc});
-  const E=mxL(C.eye);if(E.z>R.Z1)backWins(ctx,C,R,o);if(E.x<R.X0||E.x>R.X1)sideWins(ctx,C,R,E.x<R.X0?R.X0-0.01:R.X1+0.01,E.x<R.X0?NRM.L:NRM.R,o);if(E.z<R.Z0&&o.frontWins)o.frontWins(ctx,C,R);
-  drawBox(ctx,C,R.X0-0.06,HY+0.18,R.Z0-0.06,w+0.12,0.2,d+0.12,o.band||PAL.band,{grad:[0.12,0.08],edge:0.6});
-  if(o.flat)drawBox(ctx,C,R.X0-0.16,HY+0.38,R.Z0-0.16,w+0.32,0.22,d+0.32,o.roof||[214,208,198],{grad:[0.05,0.06],edge:0.5});
-  else gable(ctx,C,R.X0,HY+0.38,R.Z0,w,d,o.rh||1.5,o.roof||PAL.roof,{wall:o.gableWall||wc,ov:0.26});}
-// windows: glass with a white frame, on the outer side and back walls
-function winQ(ctx,C,pts,n,o){poly3(ctx,C,pts,[255,253,246],{n,edge:0.4});const c=pts.reduce((s,p)=>vadd(s,p),v3(0,0,0));const m=vmul(c,0.25);const k=0.8,inn=pts.map(p=>vadd(m,vmul(vsub(p,m),k)));
-  poly3(ctx,C,inn,o.glass||[170,210,240],{n,grad:[0.35,0.1]});}
-function sideWins(ctx,C,R,x,n,o){const d=R.Z1-R.Z0,cols=Math.max(1,Math.round(d/1.4)),y0=R.FY+0.75,y1=R.FY+1.95;for(let i=0;i<cols;i++){const zc=R.Z0+(i+0.5)*d/cols;winQ(ctx,C,[v3(x,y0,zc-0.35),v3(x,y0,zc+0.35),v3(x,y1,zc+0.35),v3(x,y1,zc-0.35)],n,o);}}
-function backWins(ctx,C,R,o){const w=R.X1-R.X0,cols=Math.max(2,Math.round(w/1.5)),y0=R.FY+0.75,y1=R.FY+1.95,z=R.Z1+0.01;for(let i=0;i<cols;i++){const xc=R.X0+(i+0.5)*w/cols;winQ(ctx,C,[v3(xc+0.35,y0,z),v3(xc-0.35,y0,z),v3(xc-0.35,y1,z),v3(xc+0.35,y1,z)],NRM.B,o);}}
+/* ---------- title and end cards ---------- */
+const WC_SERIES="The same one, everywhere";
+// five strokes of the role colours, the series' mark
+function wc_mark(ctx,cx,cy,w,p,a){if(a<=0.01)return;const cols=["student","platform","customer","tutor","alumna"],n=cols.length,sw=w/n;withA(ctx,a,()=>{cols.forEach((r,i)=>{const q=clamp(p*n*0.8-i*0.6,0,1);if(q<=0)return;
+  const x=cx-w/2+i*sw,c=wc_kept("mark"+i,Math.round(sw+24),40,x2=>{wc_prep();wc_wash(x2,wc_resample(wc_rect(6,6,sw+10,26),8),WC_ROLE[r],{kind:"swatch",line:false,a:0.85,seed:31+i*7});});
+  ctx.save();ctx.beginPath();ctx.rect(x-4,cy-30,(sw+30)*ease(q),60);ctx.clip();ctx.drawImage(c,x-6,cy-20);ctx.restore();});});}
+function wc_title(ctx,S,t,t0,title,sub,line){const oA=fin(t,t0,0.8),tA=fin(t,t0+0.5,0.8);if(oA<=0)return;wc_veil(ctx,S,oA*0.94);setScreen(ctx,S);
+  withA(ctx,tA,()=>{wc_T(ctx,WC_SERIES.toUpperCase(),960,400,{w:800,size:30,align:"center",col:WC_MUTED});wc_T(ctx,title,960,510,{w:800,size:92,align:"center",col:WC_DARK});
+    wc_mark(ctx,960,572,520,(t-t0-0.6)/1.2,1);if(sub)wc_T(ctx,sub,960,664,{w:600,size:36,align:"center",col:WC_MUTED});
+    withA(ctx,fin(t,t0+1.2,0.8),()=>wc_tag(ctx,960,750,line,{align:"center",size:28,w:600}));});}
+function wc_end(ctx,S,t,t0,title,line,n){const oA=fin(t,t0,1.0),tA=fin(t,t0+0.6,0.9);if(oA<=0)return;wc_veil(ctx,S,oA*0.94);setScreen(ctx,S);
+  withA(ctx,tA,()=>{if(line)wc_T(ctx,line,960,420,{w:700,size:48,align:"center",col:WC_DARK});wc_mark(ctx,960,520,400,(t-t0-0.7)/1.0,1);wc_T(ctx,title,960,622,{w:800,size:44,align:"center",col:WC_DARK});
+    wc_T(ctx,WC_SERIES+(n?" · "+n:"")+" · Learning Data",960,680,{w:600,size:28,align:"center",col:WC_MUTED});});}
 
-// ---- furniture: drawn flat at a point and scaled with distance, or built of boxes ----
-function tShelf(ctx,C,x0,z0,w,h,d,o){o=o||{};const FY=o.FY||0,cols=o.cols||[PAL.navy,PAL.coral,PAL.teal,PAL.mustard,PAL.lilac,PAL.sage,[96,120,170],[200,96,86]];let n=0;
-  ibox(ctx,C,x0,FY,z0,w,h,d,PAL.walnut,{grad:[0.08,0.1],edge:0.35});wq3(ctx,C,x0+0.05,FY+0.05,x0+w-0.05,FY+h-0.05,z0-0.002,ilit(mix(PAL.walnut,[40,24,14],0.42),1));
-  const rows=o.rows||4,rh=(h-0.1)/rows,out=o.out||(()=>0),skip=o.skip||(()=>false);
-  for(let r=0;r<rows;r++){const yy=FY+0.05+r*rh;ibox(ctx,C,x0+0.05,yy,z0-0.01,w-0.1,0.045,d-0.04,mix(PAL.walnut,[255,230,190],0.18),{edge:0.3});if(r===0&&!o.bottomRow)continue;
-    let bx=x0+0.09;for(let j=0;j<20;j++){const bw=0.12+0.03*hash(r*31+j,3),bh=Math.min(rh-0.1,0.4+0.05*hash(r*17+j,5));if(bx+bw>x0+w-0.08)break;
-      if(skip(r,j)){bx+=bw+0.012;continue;}const c=cols[(r*5+j*3)%cols.length],dz=-out(r,j);
-      ibox(ctx,C,bx,yy+0.045,z0-0.005+dz,bw,bh,0.28,c,{grad:[0.14,0.12],edge:0.3,lw:1});wq3(ctx,C,bx+bw*0.2,yy+0.045+bh*0.55,bx+bw*0.8,yy+0.045+bh*0.82,z0-0.007+dz,[250,246,234]);
-      const hp=pj(C,v3(bx+bw/2,yy+0.045+bh*0.3,z0-0.007+dz));ctx.fillStyle=rgba(mix(c,[0,0,0],0.45),0.8);ctx.beginPath();ctx.arc(hp.x,hp.y,Math.max(1.5,0.018*hp.s),0,TAU);ctx.fill();
-      bx+=bw+0.012;n++;}}
-  return n;}
-function tPlant(ctx,C,x,y,z,h){const B=pj(C,v3(x,y,z)),k=B.s*h;if(B.z<NEAR)return;const pot=[214,122,86];
-  ctx.save();ctx.translate(B.x,B.y);ctx.fillStyle="rgba(60,40,30,0.22)";ctx.beginPath();ctx.ellipse(0,0,k*0.26,k*0.06,0,0,TAU);ctx.fill();
-  const lv=[[-0.62,0.9],[-0.35,1.0],[-0.1,1.05],[0.15,1.0],[0.42,0.94],[0.66,0.8],[-0.8,0.7],[0.85,0.62]];
-  lv.forEach(([a,l],i)=>{ctx.save();ctx.translate(0,-k*0.28);ctx.rotate(a*0.9);const g=ctx.createLinearGradient(-k*0.08,0,k*0.08,0);const c=i%2?[92,164,104]:[70,142,92];g.addColorStop(0,rgba(mix(c,[255,255,220],0.25),1));g.addColorStop(1,rgba(c,1));ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(0,0);ctx.bezierCurveTo(-k*0.11,-k*0.25*l,-k*0.06,-k*0.55*l,0,-k*0.66*l);ctx.bezierCurveTo(k*0.07,-k*0.55*l,k*0.1,-k*0.25*l,0,0);ctx.fill();
-    ctx.strokeStyle="rgba(255,255,230,0.35)";ctx.lineWidth=Math.max(1,k*0.006);ctx.beginPath();ctx.moveTo(0,-k*0.04);ctx.lineTo(0,-k*0.6*l);ctx.stroke();ctx.restore();});
-  ctx.beginPath();ctx.moveTo(-k*0.17,-k*0.3);ctx.lineTo(k*0.17,-k*0.3);ctx.lineTo(k*0.13,0);ctx.lineTo(-k*0.13,0);ctx.closePath();const g=ctx.createLinearGradient(-k*0.17,0,k*0.17,0);g.addColorStop(0,rgba(mix(pot,[255,240,220],0.25),1));g.addColorStop(1,rgba(mix(pot,[0,0,0],0.18),1));ctx.fillStyle=g;ctx.fill();
-  ctx.fillStyle=rgba(mix(pot,[255,240,220],0.35),1);rr(ctx,-k*0.19,-k*0.33,k*0.38,k*0.06,k*0.02);ctx.fill();ctx.restore();}
-function tDeskLamp(ctx,C,x,y,z,h,on){const B=pj(C,v3(x,y,z)),k=B.s*h,c=[64,92,140];if(B.z<NEAR)return;ctx.save();ctx.translate(B.x,B.y);
-  if(on){const g=ctx.createRadialGradient(k*0.3,-k*0.62,1,k*0.3,-k*0.5,k*1.2);g.addColorStop(0,"rgba(255,236,180,"+(0.5*on)+")");g.addColorStop(1,"rgba(255,236,180,0)");ctx.fillStyle=g;ctx.fillRect(-k*1.2,-k*1.8,k*2.8,k*2.4);}
-  ctx.fillStyle=rgba(c,1);ctx.beginPath();ctx.ellipse(0,0,k*0.2,k*0.06,0,0,TAU);ctx.fill();ctx.strokeStyle=rgba(c,1);ctx.lineWidth=Math.max(2,k*0.04);ctx.lineCap="round";
-  ctx.beginPath();ctx.moveTo(0,-k*0.03);ctx.lineTo(-k*0.12,-k*0.58);ctx.lineTo(k*0.22,-k*0.86);ctx.stroke();
-  ctx.save();ctx.translate(k*0.25,-k*0.86);ctx.rotate(0.5);ctx.beginPath();ctx.moveTo(-k*0.1,-k*0.05);ctx.lineTo(k*0.1,-k*0.05);ctx.lineTo(k*0.2,k*0.18);ctx.lineTo(-k*0.2,k*0.18);ctx.closePath();
-  const g=ctx.createLinearGradient(-k*0.2,0,k*0.2,0);g.addColorStop(0,rgba(mix(c,[255,255,255],0.3),1));g.addColorStop(1,rgba(c,1));ctx.fillStyle=g;ctx.fill();
-  if(on){ctx.fillStyle="rgba(255,244,210,0.95)";ctx.beginPath();ctx.ellipse(0,k*0.18,k*0.19,k*0.04,0,0,TAU);ctx.fill();}ctx.restore();ctx.restore();}
-function tClock(ctx,C,x,y,z,r,hh,mm){const P_=pj(C,v3(x,y,z)),R=r*P_.s;if(P_.z<NEAR)return;ctx.save();ctx.translate(P_.x,P_.y);ctx.fillStyle="rgba(60,40,30,0.18)";ctx.beginPath();ctx.arc(R*0.08,R*0.1,R*1.05,0,TAU);ctx.fill();
-  ctx.fillStyle=rgba(PAL.navy,1);ctx.beginPath();ctx.arc(0,0,R,0,TAU);ctx.fill();ctx.fillStyle="#fffaf0";ctx.beginPath();ctx.arc(0,0,R*0.84,0,TAU);ctx.fill();
-  ctx.strokeStyle=rgba(PAL.ink,1);ctx.lineCap="round";for(let i=0;i<12;i++){const a=i*TAU/12;ctx.lineWidth=Math.max(1,R*0.05);ctx.beginPath();ctx.moveTo(Math.sin(a)*R*0.68,-Math.cos(a)*R*0.68);ctx.lineTo(Math.sin(a)*R*0.76,-Math.cos(a)*R*0.76);ctx.stroke();}
-  const ha=(hh%12+mm/60)*TAU/12,ma=mm*TAU/60;ctx.lineWidth=Math.max(1.5,R*0.09);ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(Math.sin(ha)*R*0.42,-Math.cos(ha)*R*0.42);ctx.stroke();ctx.lineWidth=Math.max(1,R*0.06);ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(Math.sin(ma)*R*0.62,-Math.cos(ma)*R*0.62);ctx.stroke();ctx.restore();}
-// a desk with drawers on two sides; returns the height of its top
-function tDesk(ctx,C,x,z,w,d,FY,col){col=col||PAL.oak;const h=0.7,pw=0.46;ibox(ctx,C,x,FY,z,pw,h,d-0.04,col,{grad:[0.08,0.12]});ibox(ctx,C,x+w-pw,FY,z,pw,h,d-0.04,col,{grad:[0.08,0.12]});
-  for(const xx of [x,x+w-pw])for(let i=0;i<3;i++){wq3(ctx,C,xx+0.05,FY+0.06+i*0.22,xx+pw-0.05,FY+0.24+i*0.22,z-0.005,ilit(mix(col,[255,255,255],0.1),ILIT.F),{edge:0.4});const p=pj(C,v3(xx+pw/2,FY+0.15+i*0.22,z-0.01));if(p.z>NEAR){ctx.fillStyle="rgba(90,60,40,0.7)";ctx.fillRect(p.x-0.06*p.s,p.y-0.012*p.s,0.12*p.s,0.024*p.s);}}
-  ibox(ctx,C,x-0.05,FY+h,z-0.05,w+0.1,0.06,d+0.06,mix(col,[255,240,210],0.15),{edge:0.6});return FY+h+0.06;}
-// a painted wooden chair, its back to the wall: four legs, a seat, two posts and a rail
-function tChair(ctx,C,x,z,FY,col){col=col||[78,128,170];const lg=mix(col,[40,30,30],0.35);
-  for(const [lx,lz] of [[0.03,0.39],[0.39,0.39],[0.03,0.03],[0.39,0.03]])ibox(ctx,C,x+lx,FY,z+lz,0.04,0.42,0.04,lg,{edge:0.2});
-  ibox(ctx,C,x,FY+0.42,z,0.46,0.05,0.46,col);for(const lx of [0.03,0.39])ibox(ctx,C,x+lx,FY+0.47,z+0.39,0.04,0.46,0.04,lg,{edge:0.2});
-  ibox(ctx,C,x-0.01,FY+0.72,z+0.38,0.48,0.2,0.05,col);}
-// a monitor on a stand, facing the front: fn(c) draws the screen in centimetres (w x h)
-function tMonitor(ctx,C,x,y,z,w,h,fn,o){o=o||{};ibox(ctx,C,x+w/2-0.04,y,z+0.06,0.08,0.18,0.06,[70,74,88]);ibox(ctx,C,x+w/2-0.16,y,z,0.32,0.02,0.2,[70,74,88]);
-  ibox(ctx,C,x-0.03,y+0.16,z-0.02,w+0.06,h+0.06,0.05,[56,62,78],{edge:0.5});const sc=wq3(ctx,C,x,y+0.19,x+w,y+0.19+h,z-0.025,o.bg||[236,244,250]);
-  if(fn)surfDraw(ctx,C,v3(x,y+0.19+h,z-0.027),v3(1,0,0),v3(0,1,0),fn,{lb:o.lb});return sc;}
-// a pinboard on a back wall (z) with cards on it; o.cards: [[u,v,du,dv,colour]] in the board's fractions
-function tPinboard(ctx,C,x0,y0,x1,y1,z,o){o=o||{};wq3(ctx,C,x0-0.04,y0-0.04,x1+0.04,y1+0.04,z,ilit(PAL.walnut,1),{edge:0.4});wq3(ctx,C,x0,y0,x1,y1,z-0.004,ilit([222,176,124],1),{grad:[0.04,0.06]});
-  for(const [u,v,du,dv,c] of (o.cards||[])){const xx=lerp(x0,x1,u),yy=lerp(y0,y1,v),dx=(x1-x0)*du,dy=(y1-y0)*dv;wq3(ctx,C,xx,yy,xx+dx,yy+dy,z-0.008,ilit(c,1),{edge:0.3});
-    for(let i=1;i<4;i++)wq3(ctx,C,xx+dx*0.12,yy+dy*(i/4.5),xx+dx*0.85,yy+dy*(i/4.5)+0.012,z-0.01,[150,150,170],{a:0.6});const p=pj(C,v3(xx+dx/2,yy+dy*0.9,z-0.012));if(p.z>NEAR){ctx.fillStyle="#d8574a";ctx.beginPath();ctx.arc(p.x,p.y,Math.max(1.5,0.02*p.s),0,TAU);ctx.fill();}}}
-// a rug on the floor, with stripes
-function tRug(ctx,C,x0,z0,x1,z1,y,col,o){o=o||{};fq3(ctx,C,x0-0.13,z0-0.11,x1+0.13,z1+0.11,y+0.006,ilit(o.border||PAL.rugB,ILIT.U));fq3(ctx,C,x0,z0,x1,z1,y+0.008,ilit(col,ILIT.U),{grad:[0.04,0.06]});
-  for(let z=z0+0.2;z<z1-0.1;z+=0.42)fq3(ctx,C,x0+0.12,z,x1-0.12,z+0.04,y+0.009,ilit(mix(col,[255,255,255],0.25),ILIT.U));}
+/* ===== The same one, everywhere: the series' people, in pencil and wash =====
+   The films' people (When things go wrong's character sheet), drawn the watercolour way: a fine pencil line, paint that runs a little
+   past it, pigment in the paper's tooth, and behind them a loose wash of their side's colour: cyan for the technical side (Noor), gold
+   for the business side (Mei, Minh). Linh, the person the data is about, has no side: a neutral edge, so she can wear her roles'
+   colours. Minh, her brother, shares the family email and studies here too. These replace how the character sheet shades and outlines
+   people, for this series only. */
 
-// ---- the finishing touches: a tilt-shift blur, fast (blurred at a quarter of the size), and a soft vignette ----
-const PC2={};function pcanvas2(k,w,h){const c=PC2[k]||(PC2[k]=document.createElement("canvas"));if(c.width!==w||c.height!==h){c.width=w;c.height=h;}return c;}
-function tiltShift(ctx,y0,y1,amt,soft){if(!(amt>0.2))return;const cv=ctx.canvas,w=cv.width,h=cv.height,q=4,bw=Math.max(2,Math.round(w/q)),bh=Math.max(2,Math.round(h/q)),sc=w/W;soft=soft||220;
-  const b=pcanvas2("ts",bw,bh),bx=b.getContext("2d");bx.setTransform(1,0,0,1,0,0);bx.globalCompositeOperation="copy";bx.imageSmoothingQuality="high";bx.filter="blur("+(amt*sc/q).toFixed(2)+"px)";bx.drawImage(cv,0,0,bw,bh);bx.filter="none";
-  bx.globalCompositeOperation="destination-in";const g=bx.createLinearGradient(0,0,0,bh),f=v=>clamp(v/H,0,1);g.addColorStop(0,"rgba(0,0,0,1)");g.addColorStop(f(y0-soft),"rgba(0,0,0,1)");g.addColorStop(f(y0),"rgba(0,0,0,0)");g.addColorStop(f(y1),"rgba(0,0,0,0)");g.addColorStop(f(y1+soft),"rgba(0,0,0,1)");g.addColorStop(1,"rgba(0,0,0,1)");
-  bx.fillStyle=g;bx.fillRect(0,0,bw,bh);bx.globalCompositeOperation="source-over";ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.imageSmoothingQuality="high";ctx.drawImage(b,0,0,w,h);ctx.restore();}
-function vignetteSoft(ctx,col,a){ctx.save();ctx.setTransform(1,0,0,1,0,0);const cv=ctx.canvas,g=ctx.createRadialGradient(cv.width/2,cv.height*0.45,cv.height*0.42,cv.width/2,cv.height*0.5,cv.height*1.05);g.addColorStop(0,rgba(col,0));g.addColorStop(1,rgba(col,a));ctx.fillStyle=g;ctx.fillRect(0,0,cv.width,cv.height);ctx.restore();}
-// blur the whole picture behind a card
-function blurAll(ctx,amt,dim){const cv=ctx.canvas,w=cv.width,h=cv.height,q=4,bw=Math.max(2,Math.round(w/q)),bh=Math.max(2,Math.round(h/q)),sc=w/W;const b=pcanvas2("ba",bw,bh),bx=b.getContext("2d");
-  bx.setTransform(1,0,0,1,0,0);bx.globalCompositeOperation="copy";bx.filter="blur("+(amt*sc/q).toFixed(2)+"px)";bx.drawImage(cv,0,0,bw,bh);bx.filter="none";bx.globalCompositeOperation="source-over";
-  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.drawImage(b,0,0,w,h);if(dim){ctx.fillStyle=rgba(dim[0],dim[1]);ctx.fillRect(0,0,w,h);}ctx.restore();}
+PEOPLE.linh={name:"Linh Nguyen",role:"Student",side:"Person",does:"uses",edge:[236,232,226],seed:21,
+  skin:[230,192,156],hair:{style:"bob",c:[30,24,26],streak:[86,72,74]},earrings:[226,230,240],
+  top:{kind:"overshirt",c:[88,124,168],inner:[246,242,234]},bottom:{c:[52,56,70]},shoe:[240,240,244],build:{sh:64,hip:58,h:0.93}};
+PEOPLE.minh={name:"Minh Nguyen",role:"Student",side:"Business",does:"uses",edge:BIZ,seed:22,
+  skin:[218,176,138],hair:{style:"cropped",c:[24,22,24]},glasses:[44,42,50],
+  top:{kind:"sweater",c:[178,100,74]},bottom:{c:[62,82,114]},shoe:[46,46,52],build:{sh:70,hip:58,h:0.97}};
+// reading a letter in the right hand; standing at ease, hands loose
+POSE.letter={L:[0.12,-0.04],R:[0.06,Math.PI+0.95],hold:"envelope",feet:24,shift:-2,tilt:0.06,turn:0.06,gaze:[-0.2,1],look:1};
+POSE.ease={L:[0.16,-0.18],R:[0.14,-0.16],feet:26,shift:2,tilt:-0.015,turn:-0.04,gaze:[0,0],look:0};
 
-// ---- timing: when a word of a line is spoken (an estimate, by its place in the spoken words) ----
-function wAt(sc,id,word,off){const ln=sc.vo.find(v=>v.id===id);if(!ln)return 0;const s=ln.say||ln.text,i=s.indexOf(word),d=sc.ends[id]-sc.cues[id];return sc.cues[id]+(i<0?0:d*i/s.length)+(off||0);}
-// a value that springs in at t0 (0 to 1, overshooting a little), and one that rises smoothly
-const pop=(t,t0,d)=>spring((t-t0)/(d||0.7));
-const rise=(t,t0,d)=>sstep(t0,t0+(d||0.6),t);
+// softer shading than the glass films: watercolour has little modelling
+const WC_SHADE=0.75,WC_SEAM=0.8;
+function litFill(ctx,c,x0,y0,x1,y1,k){k=(k||1)*WC_SHADE;const g=ctx.createLinearGradient(x0,y0,x1,y1);g.addColorStop(0,rgba(lighten(c,0.16*k),1));g.addColorStop(0.55,rgba(c,1));
+  g.addColorStop(1,rgba(darken(c,0.3*k),1));ctx.fillStyle=g;ctx.fill();}
+function seam(ctx,c,a,w){ctx.strokeStyle=rgba(darken(c,0.55),(a==null?0.45:a)*WC_SEAM);ctx.lineWidth=w||1.6;ctx.stroke();}
+function limb(ctx,pts,w0,w1,c,box){const g=ctx.createLinearGradient(box[0],box[1],box[2],box[3]);g.addColorStop(0,rgba(lighten(c,0.14*WC_SHADE),1));g.addColorStop(1,rgba(darken(c,0.28*WC_SHADE),1));
+  ctx.lineCap="round";ctx.lineJoin="round";
+  for(let i=0;i<pts.length-1;i++){const w=lerp(w0,w1,i/Math.max(1,pts.length-2));ctx.beginPath();ctx.moveTo(pts[i][0],pts[i][1]);ctx.lineTo(pts[i+1][0],pts[i+1][1]);
+    ctx.strokeStyle=rgba(darken(c,0.55),0.5*WC_SEAM);ctx.lineWidth=w+2.4;ctx.stroke();}
+  for(let i=0;i<pts.length-1;i++){const w=lerp(w0,w1,i/Math.max(1,pts.length-2));ctx.beginPath();ctx.moveTo(pts[i][0],pts[i][1]);ctx.lineTo(pts[i+1][0],pts[i+1][1]);ctx.strokeStyle=g;ctx.lineWidth=w;ctx.stroke();}}
+
+// a person, as the character sheet draws one, with a soft shadow on the paper rather than a dark one; WC_RAW draws the figure alone (no
+// shadow, no edge), for the white figure (wash.js) to be cut from
+let WC_RAW=false;
+function person(ctx,id,x,y,s,o){o=o||{};const P=PEOPLE[id],po=blendPose(POSE[o.pose||"stand"],POSE[o.pose2],o.mix),E=EXPR[o.expr||"calm"],t=o.t||0,k=s*P.build.h;
+  const br=Math.sin(t*1.7+P.seed)*1.4;
+  if(!WC_RAW){ctx.save();ctx.translate(x,y);ctx.scale(k,k);const g=ctx.createRadialGradient(0,-4,4,0,-4,100);g.addColorStop(0,rgba([90,80,96],0.2));g.addColorStop(1,rgba([90,80,96],0));ctx.fillStyle=g;ell(ctx,0,-4,100,16);ctx.fill();ctx.restore();}
+  const front=a=>a[1]>Math.PI*0.8;
+  outlined(ctx,cx=>{
+    if(!front(po.L))arm(cx,P,-1,po.L,br,po);if(!front(po.R))arm(cx,P,1,po.R,br,po);
+    legs(cx,P,po);
+    limb(cx,[[0,-470+br],[0,-440+br]],30,30,darken(P.skin,0.12),[-20,-470,20,-440]);
+    torso(cx,P,br,po.shift);
+    cx.save();cx.translate(po.shift*0.2,-452+br);cx.rotate(po.tilt);cx.translate(0,-50+po.look*2);head(cx,P,E,po,t);cx.restore();
+    if(front(po.L))arm(cx,P,-1,po.L,br,po);if(front(po.R))arm(cx,P,1,po.R,br,po);
+  },x,y,k,P.edge,[-250,-650,250,10],o.glow);}
+
+// the pencil and wash: the figure, drawn into a spare canvas, then a loose wash of its side's colour behind it, the paint bleeding a little
+// past the line, pigment in the paper's tooth, and a fine pencil line round it. Blurs are made by shrinking and growing, which is cheap.
+const wc_aura=e=>e[0]>200&&e[1]>200&&e[2]>200?WC_SIDE.none:e===TECH?WC_SIDE.tech:e===BIZ?WC_SIDE.biz:e;
+function outlined(ctx,draw,x,y,s,edge,box,glowA){const [x0,y0,x1,y1]=box,pad=40,w=Math.ceil((x1-x0)*s+pad*2),h=Math.ceil((y1-y0)*s+pad*2);
+  const [c,cx]=pcanvas("p",w,h);cx.translate(pad-x0*s,pad-y0*s);cx.scale(s,s);draw(cx);const ox=x+x0*s-pad,oy=y+y0*s-pad;
+  if(WC_RAW){ctx.drawImage(c,ox,oy);return;}
+  wc_prep();const q=8,sw=Math.max(2,Math.ceil(w/q)),sh=Math.max(2,Math.ceil(h/q)),col=wc_aura(edge);
+  // the silhouette in the side's colour, shrunk: grown again, it is a soft blur
+  const [sc,sx]=wc_buf("figS"+sw+"x"+sh,sw,sh);sx.drawImage(c,0,0,sw,sh);sx.globalCompositeOperation="source-in";sx.fillStyle=rgba(col,1);sx.fillRect(0,0,sw,sh);
+  ctx.save();ctx.globalAlpha*=0.3;ctx.globalCompositeOperation="multiply";ctx.imageSmoothingEnabled=true;ctx.drawImage(sc,ox-10*s-q,oy+6*s-q,w+2*q,h+2*q);ctx.restore();
+  // the paint, with the paper's grain and an uneven dry
+  const [fc,fx]=wc_wpaint(c,w,h);
+  const [bc,bx]=wc_buf("figB"+w+"x"+h,Math.ceil(w/4),Math.ceil(h/4));bx.drawImage(fc,0,0,bc.width,bc.height);
+  ctx.save();ctx.globalAlpha*=0.4;ctx.drawImage(bc,ox+2*s,oy+1*s,w,h);ctx.restore();
+  // the pencil line: the silhouette in pencil, a little off in four directions, under the paint
+  const [tc,tx]=wc_buf("figT"+w+"x"+h,w,h);tx.drawImage(c,0,0);tx.globalCompositeOperation="source-in";tx.fillStyle=rgba(WC_PENCIL,1);tx.fillRect(0,0,w,h);
+  ctx.save();ctx.globalAlpha*=0.8;for(const [dx,dy] of [[1.5*s,0.4*s],[-1.2*s,1.1*s],[0.3*s,-1.4*s],[-0.6*s,-0.9*s]])ctx.drawImage(tc,ox+dx,oy+dy);ctx.restore();
+  ctx.drawImage(fc,ox,oy);}
+function wc_wpaint(c,w,h){const [fc,fx]=wc_buf("figP"+w+"x"+h,w,h);fx.drawImage(c,0,0);fx.globalCompositeOperation="multiply";fx.globalAlpha=0.5;fx.drawImage(WC.gran,0,0);
+  fx.globalAlpha=0.4;fx.drawImage(wc_tint(WC.blotch,[206,196,186]),0,0,W,H);fx.globalAlpha=1;fx.globalCompositeOperation="destination-in";fx.drawImage(c,0,0);
+  fx.globalCompositeOperation="source-over";return[fc,fx];}
+
+// an envelope in the hand, for the person who opens someone else's post: the letter half out, the fingers over its edge
+function envelopeInHand(ctx,P,h,ang){ctx.save();ctx.translate(h[0]-2,h[1]+4);ctx.rotate(-0.08);const line=[110,100,96];
+  ctx.save();ctx.rotate(0.16);ctx.beginPath();rr(ctx,-30,-44,76,60,3);ctx.fillStyle="#ffffff";ctx.fill();ctx.strokeStyle=rgba(line,0.6);ctx.lineWidth=1.6;ctx.stroke();
+  ctx.fillStyle=rgba(line,0.5);for(let i=0;i<2;i++)ctx.fillRect(-20,-34+i*10,44-i*12,3.4);ctx.fillStyle=rgba(WC_ROLE.customer,0.95);ctx.beginPath();ctx.arc(30,-30,6,0,TAU);ctx.fill();ctx.restore();
+  ctx.beginPath();rr(ctx,-52,-8,104,66,5);ctx.fillStyle=rgba([250,247,240],1);ctx.fill();ctx.strokeStyle=rgba(line,0.7);ctx.lineWidth=2;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(-50,-4);ctx.lineTo(0,26);ctx.lineTo(50,-4);ctx.strokeStyle=rgba(line,0.45);ctx.stroke();
+  ell(ctx,-30,-4,13,14);litFill(ctx,P.skin,-43,-18,-17,10);ell(ctx,-12,-10,6,10,0.3);litFill(ctx,P.skin,-18,-20,-6,0);
+  ctx.restore();}
+// the character sheet's hands hold a phone; this lets one hold an envelope too, drawn where the phone would be
+const wc_arm0=arm;
+arm=function(ctx,P,s,a,br,po){if(po.hold!=="envelope")return wc_arm0(ctx,P,s,a,br,po);const keep=phoneInHand;phoneInHand=envelopeInHand;
+  try{return wc_arm0(ctx,P,s,a,br,Object.assign({},po,{hold:"phone"}));}finally{phoneInHand=keep;}};
 
 /* ===== The data governance series: its people =====
    The cast of When things go wrong and In the weeds of data crafting (Mei, Sam, David, Jun), and two more: Yusuf Demir, the
-   university's new data governance lead, and Clara Jensen, in Planning. In the toy town they're painted figures on small round
-   bases: the base's rim carries the side, gold for the business side and blue for the technical side, plain walnut for people
-   of the past. The people of the past wear their own time: tunics and gowns of wool in 1215, a furred gown in 1497, a frock
-   coat and a top hat, or a waistcoat and an apron, in the 1880s. */
+   university's new data governance lead, and Clara Jensen, in Planning. They're drawn the way the master and reference data series
+   draws people (its shared/src/people.js, bundled as it is): a pencil line, paint in the paper's grain, and behind each person a soft
+   wash of their side's colour, gold for the business side and cyan for the technical side. The people of the past get a warm umber
+   wash, and wear their own time: tunics and gowns of wool in 1215, a furred gown in 1497, a frock coat and a top hat, or a waistcoat
+   and an apron, in the 1880s. People can hold things (a charter, a jug, a binder, a notebook, a hammer) and face either way. */
+
+// the wash behind people of the past, and the colours of what people hold
+const GV_PAST=[184,146,104],GV_HOLD={teal:[64,150,146],walnut:[156,110,74],navy:[66,86,128],gold:[232,176,52]};
 
 PEOPLE.yusuf={name:"Yusuf Demir",role:"Data governance lead",side:"Business",does:"uses",edge:BIZ,seed:15,
   skin:[204,160,124],hair:{style:"side",c:[38,30,28]},beard:[44,34,30],
@@ -1633,25 +1742,25 @@ head=function(ctx,P,E,po,t){const h=P.hat,hc=P.hatC||[238,232,218];
 // ---- the people of the past: invented townsfolk ----
 Object.assign(PEOPLE,{
   // 1215: in wool dyed with madder, woad and weld, or undyed
-  crier:{name:"",role:"the sheriff's crier",side:"",edge:null,seed:31,skin:[226,184,154],hair:{style:"side",c:[120,84,52]},beard:[116,80,50],
+  crier:{name:"",role:"the sheriff's crier",side:"",edge:GV_PAST,seed:31,skin:[226,184,154],hair:{style:"side",c:[120,84,52]},beard:[116,80,50],
     top:{kind:"gown",c:[60,84,140],inner:[226,214,190],belt:[96,64,40],band:[214,170,80],cape:[170,52,44]},bottom:{c:[60,60,70]},shoe:[60,42,30],build:{sh:74,hip:62,h:1.02}},
-  vintner:{name:"",role:"wine seller",side:"",edge:null,seed:32,skin:[232,190,160],hair:{style:"cropped",c:[60,44,34]},hat:"coif",hatC:[240,234,220],
+  vintner:{name:"",role:"wine seller",side:"",edge:GV_PAST,seed:32,skin:[232,190,160],hair:{style:"cropped",c:[60,44,34]},hat:"coif",hatC:[240,234,220],
     top:{kind:"tunic",c:[150,62,58],inner:[230,220,200],belt:[88,60,40],purse:true,apron:[236,226,206]},bottom:{c:[96,104,70]},shoe:[70,50,36],build:{sh:76,hip:64,h:1.0}},
-  alewife:{name:"",role:"brewer",side:"",edge:null,seed:33,skin:[236,196,170],hair:{style:"cropped",c:[150,96,56]},hat:"veil",hatC:[232,226,206],
+  alewife:{name:"",role:"brewer",side:"",edge:GV_PAST,seed:33,skin:[236,196,170],hair:{style:"cropped",c:[150,96,56]},hat:"veil",hatC:[232,226,206],
     top:{kind:"gown",c:[184,150,72],inner:[236,228,210],belt:[110,74,44],apron:[240,234,220]},bottom:{c:[90,80,70]},shoe:[70,52,40],build:{sh:66,hip:62,h:0.95}},
-  miller:{name:"",role:"corn seller",side:"",edge:null,seed:34,skin:[214,170,136],hair:{style:"side",c:[52,40,32]},beard:[60,46,36],hat:"straw",hatC:[224,190,120],
+  miller:{name:"",role:"corn seller",side:"",edge:GV_PAST,seed:34,skin:[214,170,136],hair:{style:"side",c:[52,40,32]},beard:[60,46,36],hat:"straw",hatC:[224,190,120],
     top:{kind:"tunic",c:[176,160,128],inner:[226,218,200],belt:[100,70,46]},bottom:{c:[88,72,60]},shoe:[66,48,34],build:{sh:78,hip:64,h:1.03}},
-  buyer:{name:"",role:"townswoman",side:"",edge:null,seed:35,skin:[200,150,118],hair:{style:"cropped",c:[40,30,26]},hat:"veil",hatC:[214,222,236],wimpleC:[246,244,238],
+  buyer:{name:"",role:"townswoman",side:"",edge:GV_PAST,seed:35,skin:[200,150,118],hair:{style:"cropped",c:[40,30,26]},hat:"veil",hatC:[214,222,236],wimpleC:[246,244,238],
     top:{kind:"gown",c:[70,108,150],inner:[230,226,214],belt:[90,62,44],purse:true},bottom:{c:[70,70,80]},shoe:[60,44,34],build:{sh:64,hip:60,h:0.94}},
   // 1497: a clerk of the market in a furred gown and a bonnet; a trader in a hood
-  clerk:{name:"",role:"clerk of the market",side:"",edge:null,seed:36,skin:[230,190,160],hair:{style:"cropped",c:[90,64,44]},hat:"tudor",hatC:[44,40,46],
+  clerk:{name:"",role:"clerk of the market",side:"",edge:GV_PAST,seed:36,skin:[230,190,160],hair:{style:"cropped",c:[90,64,44]},hat:"tudor",hatC:[44,40,46],
     top:{kind:"gown",c:[96,40,44],inner:[60,58,70],fur:[120,86,60]},bottom:{c:[50,46,56]},shoe:[40,32,28],build:{sh:74,hip:62,h:1.0}},
-  trader:{name:"",role:"trader",side:"",edge:null,seed:37,skin:[210,164,128],hair:{style:"side",c:[70,50,36]},beard:[80,58,40],hat:"hood",hatC:[120,130,90],
+  trader:{name:"",role:"trader",side:"",edge:GV_PAST,seed:37,skin:[210,164,128],hair:{style:"side",c:[70,50,36]},beard:[80,58,40],hat:"hood",hatC:[120,130,90],
     top:{kind:"tunic",c:[150,120,84],inner:[220,210,190],belt:[96,66,44],purse:true},bottom:{c:[96,84,70]},shoe:[66,48,34],build:{sh:76,hip:64,h:1.0}},
   // the 1880s: an inspector of weights and measures, and a grocer
-  inspector:{name:"",role:"inspector of weights and measures",side:"",edge:null,seed:38,skin:[226,186,156],hair:{style:"side",c:[96,80,70]},beard:[110,92,80],hat:"top",hatC:[36,36,42],hatBand:[24,24,28],
+  inspector:{name:"",role:"inspector of weights and measures",side:"",edge:GV_PAST,seed:38,skin:[226,186,156],hair:{style:"side",c:[96,80,70]},beard:[110,92,80],hat:"top",hatC:[36,36,42],hatBand:[24,24,28],
     top:{kind:"frock",c:[48,52,66],vest:[110,96,80],inner:[246,244,238],tie:[30,28,34]},bottom:{c:[70,70,78]},shoe:[24,22,24],build:{sh:76,hip:62,h:1.02}},
-  grocer:{name:"",role:"grocer",side:"",edge:null,seed:39,skin:[232,196,168],hair:{style:"cropped",c:[60,46,36]},beard:[70,52,40],
+  grocer:{name:"",role:"grocer",side:"",edge:GV_PAST,seed:39,skin:[232,196,168],hair:{style:"cropped",c:[60,46,36]},beard:[70,52,40],
     top:{kind:"vest",c:[246,242,232],rolled:true,vest:[96,74,58],apron:[250,248,242],tie:[110,40,40]},bottom:{c:[88,84,96]},shoe:[46,36,30],build:{sh:76,hip:64,h:0.98}}
 });
 
@@ -1666,21 +1775,21 @@ Object.assign(POSE,{
   stampUp:{L:[0.16,-1.9],R:[0.5,2.7],feet:30,shift:4,tilt:0.0,turn:0.15,gaze:[0.2,1],look:1},
   stampDown:{L:[0.16,-1.9],R:[0.32,-1.2],feet:30,shift:4,tilt:0.06,turn:0.15,gaze:[0.2,1],look:1},
   wave:{L:[0.12,-0.08],R:[0.9,2.9],hand:"open",feet:28,shift:5,tilt:-0.03,turn:0.15,gaze:[0.3,0],look:0},
-  shrug:{L:[0.5,1.3],R:[0.5,1.3],hand:"open",feet:30,shift:0,tilt:0.08,turn:0,gaze:[0,0],look:0}
+  shrug:{L:[0.5,1.3],R:[0.5,1.3],hand:"open",feet:30,shift:0,tilt:0.08,turn:0,gaze:[0,0],look:0},
+  // a step: the arms swing opposite ways, the stance narrows (people in these films face us, so a walk is a sway and a bob)
+  walkA:{L:[0.34,0.3],R:[-0.26,-0.32],feet:14,shift:-5,tilt:0.03,turn:0.06,gaze:[0.3,0],look:0},
+  walkB:{L:[-0.26,-0.32],R:[0.34,0.3],feet:14,shift:5,tilt:-0.03,turn:0.06,gaze:[0.3,0],look:0}
 });
 // where a hand is, in the figure's own units (it's 560 tall), for things it holds
 function handAt(P_,s,a,br){const sw=P_.build.sh,sx=s*(sw-12),sy=-416+br,e=[sx+s*Math.sin(a[0])*108,sy+Math.cos(a[0])*108],d=[s*Math.sin(a[1]),Math.cos(a[1])],w=[e[0]+d[0]*100,e[1]+d[1]*100];return[w[0]+d[0]*13,w[1]+d[1]*13];}
 
-// ---- people as painted figurines: no glow, a soft rim of light from the upper left and a darker edge below ----
-outlined=function(ctx,draw,x,y,s,edge,box,glowA){const [x0,y0,x1,y1]=box,pad=12,w=Math.ceil((x1-x0)*s+pad*2),h=Math.ceil((y1-y0)*s+pad*2);if(w<4||h<4)return;
-  const [c,cx]=pcanvas("p",w,h);cx.translate(pad-x0*s,pad-y0*s);cx.scale(s,s);draw(cx);
-  const [tc,tx]=pcanvas("t",w,h);tx.drawImage(c,0,0);tx.globalCompositeOperation="source-in";tx.fillStyle="rgba(28,34,52,1)";tx.fillRect(0,0,w,h);tx.globalCompositeOperation="source-over";
-  const ox=x+x0*s-pad,oy=y+y0*s-pad,r=Math.max(0.8,1.6*s);
-  ctx.save();ctx.globalAlpha*=0.55;ctx.drawImage(tc,ox+r*0.6,oy+r);ctx.restore();ctx.drawImage(c,ox,oy);
-  const [hc,hx]=pcanvas("h",w,h);hx.drawImage(c,0,0);hx.globalCompositeOperation="source-in";hx.fillStyle="rgba(255,250,236,1)";hx.fillRect(0,0,w,h);hx.globalCompositeOperation="destination-out";hx.drawImage(c,-r*1.6,-r*1.2);hx.globalCompositeOperation="source-over";
-  ctx.save();ctx.globalAlpha*=0.35;ctx.drawImage(hc,ox,oy);ctx.restore();};
+// a person, drawn in pencil and wash by the master data series' outlined(), with what the toy figures could do: face the other way
+// (o.flip), nod, hold something (o.carry, drawn in the figure's units at its hands, o.carryBehind to put it behind the arms), and room
+// for an arm held out (o.wide) or a tall hat. A soft shadow on the paper, except while the white figure is cut from it (WC_RAW).
 person=function(ctx,id,x,y,s,o){o=o||{};const P_=PEOPLE[id],po=blendPose(POSE[o.pose||"stand"],POSE[o.pose2],o.mix),E=o.E||EXPR[o.expr||"calm"],t=o.t||0,k=s*P_.build.h;
   const br=Math.sin(t*1.7+P_.seed)*1.4,front=a=>Math.abs(a[1])>Math.PI*0.55;
+  if(!WC_RAW&&o.shadow!==false){ctx.save();ctx.translate(x,y);ctx.scale(k,k);const g=ctx.createRadialGradient(0,-4,4,0,-4,110);g.addColorStop(0,rgba([90,80,96],0.22));g.addColorStop(1,rgba([90,80,96],0));
+    ctx.fillStyle=g;ell(ctx,0,-4,110,17);ctx.fill();ctx.restore();}
   outlined(ctx,cx=>{if(o.flip){cx.scale(-1,1);}
     if(!front(po.L))arm(cx,P_,-1,po.L,br,po);if(!front(po.R))arm(cx,P_,1,po.R,br,po);legs(cx,P_,po);
     limb(cx,[[0,-470+br],[0,-440+br]],30,30,darken(P_.skin,0.12),[-20,-470,20,-440]);torso(cx,P_,br,po.shift);
@@ -1688,27 +1797,11 @@ person=function(ctx,id,x,y,s,o){o=o||{};const P_=PEOPLE[id],po=blendPose(POSE[o.
     const hands=()=>[handAt(P_,-1,po.L,br),handAt(P_,1,po.R,br)];
     if(o.carry&&o.carryBehind){if(o.flip)cx.scale(-1,1);o.carry(cx,P_,o.flip?hands().map(h=>[-h[0],h[1]]):hands());if(o.flip)cx.scale(-1,1);}
     if(front(po.L))arm(cx,P_,-1,po.L,br,po);if(front(po.R))arm(cx,P_,1,po.R,br,po);
-    if(o.carry&&!o.carryBehind){if(o.flip)cx.scale(-1,1);o.carry(cx,P_,o.flip?hands().map(h=>[-h[0],h[1]]):hands());if(o.flip)cx.scale(-1,1);}},x,y,k,P_.edge,[o.wide?-400:-250,o.hat?-720:-650,o.wide?400:250,10],o.glow);};
+    if(o.carry&&!o.carryBehind){if(o.flip)cx.scale(-1,1);o.carry(cx,P_,o.flip?hands().map(h=>[-h[0],h[1]]):hands());if(o.flip)cx.scale(-1,1);}},
+    x,y,k,P_.edge,[o.wide?-400:-250,P_.hat?-720:-650,o.wide?400:250,10],o.glow);};
 // expressions in between: a little relief, a little worry
 EXPR.worried={bi:-5,bo:3,arch:-0.5,knit:2.5,eye:0.95,smile:-0.6,open:0,mw:13};
 EXPR.smile={bi:-1,bo:-2,arch:-3.5,eye:0.9,smile:0.8,open:0,mw:22};
-
-// ---- a figure on its base, standing at a point of the town (or of a room, inside mxSet) ----
-// o: pose, pose2, mix, expr, t, carry, y (the floor), hop (lifts it a little while it moves), a (opacity), flip, nod, wide (room for an arm held out)
-function tFig(ctx,C,id,x,z,o){o=o||{};const y=(o.y||0),B=pj(C,v3(x,y,z));if(B.z<NEAR+0.2)return B;const P_=PEOPLE[id],s=B.s*1.72/560;if(B.x<-600*s||B.x>W+600*s||B.y<-80||B.y-720*s>H+60)return B;
-  const rim=P_.edge===BIZ?RIM.biz:P_.edge===TECH?RIM.tech:RIM.past,rx=0.36*B.s,ry=rx*clamp(Math.abs(C.fwd.y)*0.9+0.1,0.22,1),th=0.05*B.s,hop=(o.hop||0)*B.s;
-  ctx.save();if(o.a!=null)ctx.globalAlpha*=o.a;
-  ctx.fillStyle="rgba(40,50,70,"+(0.25*(1-clamp(hop/(0.2*B.s),0,0.6)))+")";ctx.beginPath();ctx.ellipse(B.x+rx*0.12,B.y+th*0.8,rx*1.12,ry*1.2,0,0,TAU);ctx.fill();
-  ctx.translate(0,-hop);ctx.fillStyle=rgba(mix(rim,[0,0,0],0.25),1);ctx.fillRect(B.x-rx,B.y-th,rx*2,th);ctx.beginPath();ctx.ellipse(B.x,B.y,rx,ry,0,0,Math.PI);ctx.fill();
-  const g=ctx.createLinearGradient(B.x-rx,0,B.x+rx,0);g.addColorStop(0,rgba(mix(rim,[255,255,255],0.35),1));g.addColorStop(1,rgba(rim,1));ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(B.x,B.y-th,rx,ry,0,0,TAU);ctx.fill();
-  if(o.ring){ctx.strokeStyle=rgba(o.ring,0.9);ctx.lineWidth=Math.max(2,0.03*B.s);ctx.beginPath();ctx.ellipse(B.x,B.y-th,rx*1.25,ry*1.25,0,0,TAU);ctx.stroke();}
-  person(ctx,id,B.x,B.y-th,s,{pose:o.pose,expr:o.expr,E:o.E,t:o.t||0,pose2:o.pose2,mix:o.mix,glow:0,carry:o.carry,carryBehind:o.carryBehind,flip:o.flip,nod:o.nod,hat:!!P_.hat,wide:o.wide});ctx.restore();
-  B.top=B.y-th-hop-1.72*P_.build.h*B.s;return B;}
-// a figure moving along a path of [x,z] points at v metres a second from t0: where it is, and a small hop while it moves
-function along(pts,t,t0,v){v=v||1.1;let L=0;const seg_=[];for(let i=1;i<pts.length;i++){const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);seg_.push(d);L+=d;}
-  const T_=L/v,u=clamp((t-t0)/T_,0,1),e=u<=0?0:u>=1?1:(u<0.5?2*u*u:1-2*(1-u)*(1-u)),dd=e*L;let acc=0,i=0;while(i<seg_.length-1&&acc+seg_[i]<dd){acc+=seg_[i];i++;}
-  const f=seg_[i]?(dd-acc)/seg_[i]:0,x=lerp(pts[i][0],pts[i+1][0],f),z=lerp(pts[i][1],pts[i+1][1],f),moving=u>0&&u<1;
-  return{x,z,moving,done:u>=1,hop:moving?0.07*Math.abs(Math.sin(dd*Math.PI/0.42)):0,end:t0+T_};}
 
 // ---- things people hold, drawn in the figure's units ----
 function fingers(cx,P_,pts){for(const [hx,hy] of pts){cx.save();cx.translate(hx,hy);ell(cx,0,0,12,15);litFill(cx,P_.skin,-12,-15,12,15);cx.restore();}}
@@ -1722,17 +1815,17 @@ function heldBinder(num,col){return(cx,P_,hands)=>{const [l,r]=hands,mx=(l[0]+r[
   fingers(cx,P_,[[mx-w/2+4,my+30],[mx+w/2-2,my+24]]);};}
 // a notebook, open, with a pen
 function heldNotebook(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my+6);cx.rotate(-0.08);
-  cx.fillStyle=rgba(PAL.teal,1);rr(cx,-86,-58,172,116,8);cx.fill();cx.fillStyle="#fffdf6";rr(cx,-80,-52,78,104,4);cx.fill();rr(cx,2,-52,78,104,4);cx.fill();
+  cx.fillStyle=rgba(GV_HOLD.teal,1);rr(cx,-86,-58,172,116,8);cx.fill();cx.fillStyle="#fffdf6";rr(cx,-80,-52,78,104,4);cx.fill();rr(cx,2,-52,78,104,4);cx.fill();
   cx.strokeStyle="rgba(120,130,160,0.5)";cx.lineWidth=2;for(let i=0;i<5;i++){cx.beginPath();cx.moveTo(-72,-36+i*18);cx.lineTo(-10,-36+i*18);cx.moveTo(10,-36+i*18);cx.lineTo(72-(i===4?30:0),-36+i*18);cx.stroke();}cx.restore();
   fingers(cx,P_,[[mx-84,my+12],[mx+84,my+8]]);}
 // a clipboard held up, facing out: fn draws on its paper (in the figure's units, 200 x 250)
 function heldBoard(fn){return(cx,P_,hands)=>{const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-30);
-  cx.fillStyle=rgba(PAL.walnut,1);rr(cx,-110,-140,220,280,12);cx.fill();cx.fillStyle="#fffdf6";rr(cx,-98,-120,196,250,6);cx.fill();cx.fillStyle="rgba(170,176,190,1)";rr(cx,-34,-152,68,26,6);cx.fill();
+  cx.fillStyle=rgba(GV_HOLD.walnut,1);rr(cx,-110,-140,220,280,12);cx.fill();cx.fillStyle="#fffdf6";rr(cx,-98,-120,196,250,6);cx.fill();cx.fillStyle="rgba(170,176,190,1)";rr(cx,-34,-152,68,26,6);cx.fill();
   if(fn)fn(cx);cx.restore();fingers(cx,P_,[[mx-108,my+10],[mx+108,my+6]]);};}
 // a box of gold pins
 function heldPins(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my+10);
-  cx.fillStyle=rgba(PAL.navy,1);rr(cx,-70,-24,140,52,8);cx.fill();cx.fillStyle=rgba(mix(PAL.navy,[255,255,255],0.2),1);rr(cx,-70,-24,140,14,6);cx.fill();
-  for(let i=0;i<9;i++){const x=-56+i*14,y=-30-6*hash(i,4);cx.strokeStyle="rgba(120,110,90,1)";cx.lineWidth=2;cx.beginPath();cx.moveTo(x,y);cx.lineTo(x,y+18);cx.stroke();cx.fillStyle=rgba(PAL.gold,1);cx.beginPath();cx.arc(x,y,6,0,TAU);cx.fill();cx.fillStyle="rgba(255,250,220,0.8)";cx.beginPath();cx.arc(x-2,y-2,2,0,TAU);cx.fill();}
+  cx.fillStyle=rgba(GV_HOLD.navy,1);rr(cx,-70,-24,140,52,8);cx.fill();cx.fillStyle=rgba(mix(GV_HOLD.navy,[255,255,255],0.2),1);rr(cx,-70,-24,140,14,6);cx.fill();
+  for(let i=0;i<9;i++){const x=-56+i*14,y=-30-6*hash(i,4);cx.strokeStyle="rgba(120,110,90,1)";cx.lineWidth=2;cx.beginPath();cx.moveTo(x,y);cx.lineTo(x,y+18);cx.stroke();cx.fillStyle=rgba(GV_HOLD.gold,1);cx.beginPath();cx.arc(x,y,6,0,TAU);cx.fill();cx.fillStyle="rgba(255,250,220,0.8)";cx.beginPath();cx.arc(x-2,y-2,2,0,TAU);cx.fill();}
   cx.restore();fingers(cx,P_,[[mx-70,my+16],[mx+70,my+14]]);}
 // an open charter with a seal, a jug of ale
 function heldScroll(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-6);
@@ -1753,940 +1846,1264 @@ function heldHammer(cx,P_,hands){const r=hands[1];cx.save();cx.translate(r[0],r[
 function heldBook(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my+8);cx.rotate(-0.06);cx.fillStyle="#6a3a2a";rr(cx,-70,-50,140,100,6);cx.fill();cx.fillStyle="#fbf3dc";rr(cx,-64,-44,62,88,3);cx.fill();rr(cx,2,-44,62,88,3);cx.fill();
   cx.strokeStyle="rgba(90,70,60,0.5)";cx.lineWidth=2;for(let i=0;i<6;i++){cx.beginPath();cx.moveTo(-58,-30+i*13);cx.lineTo(-8,-30+i*13);cx.moveTo(8,-30+i*13);cx.lineTo(58,-30+i*13);cx.stroke();}cx.restore();fingers(cx,P_,[[mx-68,my+10],[mx+68,my+8]]);}
 
-/* ===== The data governance series: the university as a toy town =====
-   The data governance office stands on the green in the middle, open at the front (south). The other offices stand round it in a
-   ring, each open at the front towards it, with ten paths between them: from above, it's DAMA's wheel, governance in the middle
-   where the others meet. Five offices are open, with people at work in them: the Data platform (north), the Registrar's office,
-   the Data team, Planning; the others are closed. A film adds its own things to a room through st.hooks, and its people
-   through st.figs. drawCampus(ctx,S,C,st) draws one picture of the town from the camera C. */
+/* ===== The data governance series: the university's rooms, in watercolour =====
+   The series paints with the master and reference data series' watercolour (its shared/src/wash.js and people.js, bundled as they
+   are), so the two series look like one university. This file adds what the governance films need, all of it the university's own:
+   the campus, Yusuf's office, the floor of offices behind glass where the work is done (Planning, the registrar's office, data
+   governance, the data team, the platform team), the rooms where the numbers are made, and a desk seen from above for the papers; then
+   the things on their walls and desks (binders, papers, screens, cards, pins, stamps, speech bubbles), a camera that cuts between
+   shots, and the series' title and end cards. The places are painted once and kept (finish.js); only what moves is drawn every frame.
+   Every name starts with gv_ or GV, because every file of the film shares one script. */
 
-const RINGF=10.6;
-// a building: its front centre (x,z), the angle its depth runs towards, its size, its colours, and its room's colours
-const BLD=[
-  {id:"office",name:"Data governance",x:0,z:-1.9,ang:0,w:5,d:3.8,open:true,wall:[250,240,216],roof:PAL.roof,band:PAL.band,room:{win:[0.95,1.12,2.15,2.38]}},
-  {id:"platform",name:"Data platform",ang:0,w:5.2,d:4,open:true,wall:[236,242,250],roof:[110,146,204],band:[120,180,226],
-    room:{paper:[234,242,252],stripe:[214,228,246],dado:[150,172,206],side:[222,232,248],floor:[206,174,142],sprig:[140,170,220]}},
-  {id:"registrar",name:"Registrar's office",ang:36,w:5.2,d:4,open:true,wall:[252,236,222],roof:[200,112,112],band:[232,156,124],
-    room:{paper:[252,238,228],stripe:[242,216,206],dado:[204,164,172],side:[250,224,208],floor:[216,172,122],sprig:[220,140,140],win:[-2.05,1.12,-0.95,2.38]}},
-  {id:"data",name:"Data team",ang:72,w:5.6,d:4,open:true,wall:[234,248,238],roof:[92,160,140],band:[122,194,164],
-    room:{paper:[238,250,240],stripe:[216,240,224],dado:[142,192,172],side:[228,244,228],floor:[220,178,128],sprig:[120,180,150]}},
-  {id:"library",name:"Library",ang:108,w:5.4,d:4.2,wall:[246,232,206],roof:[146,124,186],band:[204,176,124]},
-  {id:"health",name:"School of Health",ang:144,w:5.2,d:4,wall:[252,226,214],roof:[120,170,150],band:[240,170,140]},
-  {id:"eng",name:"School of Engineering",ang:-144,w:5.2,d:4,wall:[232,236,246],roof:[200,120,90],band:[150,170,214]},
-  {id:"finance",name:"Finance",ang:-108,w:5.2,d:4,wall:[248,246,232],roof:[110,130,170],band:[200,190,130]},
-  {id:"students",name:"Student services",ang:-72,w:5.2,d:4,wall:[250,236,246],roof:[224,140,120],band:[220,170,210]},
-  {id:"planning",name:"Planning",ang:-36,w:5.2,d:4,open:true,wall:[252,246,224],roof:[214,164,84],band:[238,204,112],
-    room:{paper:[252,248,228],stripe:[246,234,198],dado:[216,198,152],side:[252,238,208],floor:[222,178,130],sprig:[220,180,110],win:[1.05,1.12,2.15,2.38]}}];
-const BLDI={};BLD.forEach(b=>{if(b.id!=="office"){b.x=RINGF*Math.sin(b.ang*DEG);b.z=RINGF*Math.cos(b.ang*DEG);}b.R={X0:-b.w/2,X1:b.w/2,Z0:0,Z1:b.d,FY:0.3,HY:2.95};BLDI[b.id]=b;});
-// a point in a building's own coordinates, in the town's; and where its front centre is
-function bldP(id,x,y,z){const b=BLDI[id],M=MX;mxSet(b.x,b.z,b.ang);const p=mxP(v3(x,y,z));MX=M;return p;}
-const SPOKES=[...Array(10).keys()].map(k=>18+36*k);
+/* ---------- colours ---------- */
+// what the colours mean: gold is governance's decisions (and, behind a person, the business side, as in the master data series); cyan
+// the technical side; green what runs in the work; grey what can go; red what nobody owns yet
+const GV={gold:[236,170,34],goldInk:[146,96,0],green:[40,160,96],greenInk:[22,120,68],grey:[148,156,170],greyInk:[88,94,108],red:[204,62,50],redInk:[176,40,34],
+  cyanInk:[24,104,168],wood:[198,152,106],woodDark:[146,104,72],oak:[222,186,138],cork:[208,166,114],metal:[166,172,184],bezel:[60,64,78],glass:[198,222,238],
+  floor:[214,196,170],corridor:[230,224,212],ceiling:[246,242,234],chair:[84,92,112],paper:[253,252,248],screen:[248,250,252]};
+// each room's walls: governance warm cream, Planning sage, the registrar's office blue, the data team lilac, the platform team pale teal
+const GV_ROOM={gov:[244,230,204],plan:[218,230,206],reg:[212,222,238],data:[226,218,238],plat:[206,230,226]};
 
-// ---- what grows and stands on the green: fixed for the whole series ----
-const NATURE=(()=>{const trees=[],shrubs=[],lamps=[],benches=[];
-  // outside the ring, and between the buildings
-  for(let i=0;i<46;i++){const a=hash(i,301)*360,r=16.2+hash(i,302)*8;if(SPOKES.some(s=>Math.abs(((a-s+540)%360)-180)<5))continue;trees.push([r*Math.sin(a*DEG),r*Math.cos(a*DEG),3.6+hash(i,303)*2.2,hash(i,304)]);}
-  for(const s of SPOKES){for(const k of [-1,1]){const a=s+k*5.2,r=12.9;trees.push([r*Math.sin(a*DEG),r*Math.cos(a*DEG),3.0+hash(s+k,305)*0.9,hash(s,306)]);}}
-  // on the green: a few trees and benches, and shrubs along the fronts
-  // (away from the open offices' fronts, so the camera can look into them from the middle)
-  for(const [a,r,h] of [[118,6.6,3.0],[-120,6.8,3.1],[154,6.5,2.8],[-156,6.4,2.9],[98,7.4,2.6],[-98,7.2,2.7]])trees.push([r*Math.sin(a*DEG),r*Math.cos(a*DEG),h,0.5]);
-  for(const b of BLD){if(b.id==="office")continue;for(const k of [-1,1]){const p=bldP(b.id,k*(b.w/2+0.5),0,0.3);shrubs.push([p.x,p.z,0.42+0.1*hash(b.ang+k,307)]);}}
-  for(const s of SPOKES){const r=9.2;lamps.push([r*Math.sin((s+3.6)*DEG),r*Math.cos((s+3.6)*DEG)]);}
-  for(const [a,r] of [[54,6.4],[-54,6.4],[126,6.2],[-162,6.2]])benches.push([r*Math.sin(a*DEG),r*Math.cos(a*DEG),a]);
-  return{trees,shrubs,lamps,benches};})();
+/* ---------- timing ---------- */
+// when a word of a line is said: the line's start, plus the word's share of the line (a whole word: shared/tools/cues.py checks)
+function wAt(sc,id,word,off){const ln=sc.vo.find(v=>v.id===id);if(!ln)return 0;const s=ln.say||ln.text,i=s.indexOf(word),d=sc.ends[id]-sc.cues[id];return sc.cues[id]+(i<0?0:d*i/s.length)+(off||0);}
+// 0 to 1 from t0 over d seconds, and back to 0 from t1
+const gv_io=(t,t0,t1,d)=>fin(t,t0,d||0.4)*(1-fin(t,t1,d||0.4));
 
-// ---- the ground: the lawn, the plaza round the office, the paths, and the light along them ----
-function pathQuad(a0,r0,r1,w,y){const a=a0*DEG,s=Math.sin(a),c=Math.cos(a),nx=c*w/2,nz=-s*w/2;return[v3(r0*s-nx,y,r0*c-nz),v3(r1*s-nx,y,r1*c-nz),v3(r1*s+nx,y,r1*c+nz),v3(r0*s+nx,y,r0*c+nz)];}
-function ringQuads(r0,r1,y,n){const q=[];for(let i=0;i<n;i++){const a0=i*360/n*DEG,a1=(i+1)*360/n*DEG;q.push([v3(r0*Math.sin(a0),y,r0*Math.cos(a0)),v3(r1*Math.sin(a0),y,r1*Math.cos(a0)),v3(r1*Math.sin(a1),y,r1*Math.cos(a1)),v3(r0*Math.sin(a1),y,r0*Math.cos(a1))]);}return q;}
-const RINGQ=ringQuads(9.55,10.3,0.004,72);
-function campusGround(ctx,C,st){tHorizon(ctx,C,PAL.lawn);
-  // the plaza round the office, the ten paths, the ring path in front of the offices
-  poly3(ctx,C,discPts(0,0,3.95,48,0.003),mix(PAL.path,[255,255,255],0.15),{});poly3(ctx,C,discPts(0,0,3.75,48,0.0035),PAL.path,{});
-  for(const s of SPOKES)poly3(ctx,C,pathQuad(s,3.6,21,0.86,0.004),PAL.path,{});
-  for(const q of RINGQ)poly3(ctx,C,q,PAL.path,{});
-  // a forecourt in front of the office
-  poly3(ctx,C,[v3(-1.6,0.0045,-1.95),v3(1.6,0.0045,-1.95),v3(1.6,0.0045,-3.7),v3(-1.6,0.0045,-3.7)],mix(PAL.path,[255,255,255],0.1),{});
-  tFlock(ctx,C,0,0,40,{a:0.18});
-  // shadows of the buildings and trees, along the sun
-  for(const b of BLD){mxSet(b.x,b.z,b.ang);const R=b.R;contactShadow(ctx,C,R.X0,R.Z0,b.w,b.d,0.22);castShadow(ctx,C,R.X0,R.Z0,b.w,b.d,R.HY+1.2,0.13);}mxOff();
-  if(st.gold)goldPaths(ctx,C,st.gold);}
-// governance's decisions reaching the work: gold light from the office along the paths to every office round it
-function goldPaths(ctx,C,u){if(u<=0)return;const segs=[];
-  for(const s of SPOKES){const r0=3.7,r1=9.92,ur=clamp(u/0.6,0,1);if(ur>0){const pts=[];for(let r=r0;r<=r0+(r1-r0)*ur+1e-6;r+=0.3)pts.push([r,s]);pts.push([r0+(r1-r0)*ur,s]);segs.push(pts);}
-    const ua=clamp((u-0.6)/0.4,0,1);if(ua>0)for(const k of [-1,1]){const pts=[];for(let i=0;i<=12;i++)pts.push([r1,s+k*18*ua*i/12]);segs.push(pts);}}
-  ctx.save();ctx.globalCompositeOperation="lighter";ctx.lineCap="round";ctx.lineJoin="round";
-  for(const [w,a] of [[0.55,0.16],[0.26,0.3],[0.1,0.85]])for(const pts of segs){for(let i=1;i<pts.length;i++){const A=fromCyl([pts[i-1][0],pts[i-1][1],0.02]),B=fromCyl([pts[i][0],pts[i][1],0.02]),p=pj(C,A),q=pj(C,B);if(p.z<NEAR||q.z<NEAR)continue;
-    ctx.strokeStyle=rgba(a>0.5?[255,236,170]:PAL.gold,a);ctx.lineWidth=Math.max(1,w*(p.s+q.s)/2);ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();}}
+/* ---------- the camera ---------- */
+// keys are [time, x, y, zoom], each move eased over d seconds (1.4 at least); push closes in a little more, slowly; kept inside the frame
+function gv_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=keys[0][2],z=keys[0][3];for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;
+    x=lerp(x,keys[i][1],u);y=lerp(y,keys[i][2],u);z=lerp(z,keys[i][3],u);}
+  z=Math.max(1,z*(1+(push||0)));x=clamp(x,960/z,W-960/z);y=clamp(y,540/z,H-540/z);ctx.translate(960,540);ctx.scale(z,z);ctx.translate(-x,-y);return{x,y,z};}
+// one shot: its place under the camera, then what it draws on top, in the place's coordinates; the shot closes in slowly until the next
+function gv_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
+  const cam=gv_focus(ctx,t,sh.keys,sh.d,push);if(sh.place)ctx.drawImage(gv_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
+// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot
+function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0?clamp((t-shots[i].at)/dis,0,1):1,
+    till=k=>shots[k+1]?shots[k+1].at:end;
+  if(u<1){gv_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=wc_buf("cut",ctx.canvas.width,ctx.canvas.height);gv_shot(bx,S,t,shots[i],till(i));
+    ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
+  else gv_shot(ctx,S,t,shots[i],till(i));return i;}
+// a place, painted once by the film's painter (WC_PLACES), and kept
+function gv_place(key){return wc_kept("place:"+key,W,H,WC_PLACES[key]);}
+
+/* ---------- rooms ---------- */
+// a room's back wall to fy, its floor boards running away from us, and a skirting board
+function gv_wallFloor(ctx,wall,fy,o){o=o||{};const fl=o.floor||GV.floor;ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);
+  wc_wash(ctx,wc_rect(-40,-40,W+80,fy+40),wall,{kind:"plaster",line:false,seed:o.seed||3});
+  wc_wash(ctx,wc_rect(-40,fy,W+80,H-fy+40),fl,{kind:"ground",line:false,seed:(o.seed||3)+5});
+  ctx.save();ctx.strokeStyle=rgba(wc_dim(fl,0.2),0.3);ctx.lineWidth=2;const vx=o.vx||960;for(let i=-16;i<=16;i++){ctx.beginPath();ctx.moveTo(vx+i*64,fy);ctx.lineTo(vx+i*210,H+40);ctx.stroke();}ctx.restore();
+  wc_wash(ctx,wc_rect(-40,fy-18,W+80,20),wc_dim(wall,0.16),{kind:"trim",line:false,flat:true});}
+// a window onto the campus: the sky, the old building's clock tower among trees, the lawn; then its frame, a bar each way, and the sill
+function gv_window(ctx,x,y,w,h,o){o=o||{};ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();const hz=y+h*0.72;
+  wc_sky(ctx,hz,o.seed||4,{clouds:2,cx:x+10,cw:Math.max(40,w-120),cy:y+24,ch:h*0.22});
+  wc_land(ctx,xx=>hz+6*Math.sin(xx/80+x),WCP.far,0.3,{line:false});
+  if(o.tower!==false){const tx=x+w*(o.tx||0.64),th=h*0.46;wc_part(ctx,wc_rect(tx-24,hz-th,48,th+12),WCP.stone,0.42);wc_part(ctx,[[tx-30,hz-th],[tx+30,hz-th],[tx,hz-th-h*0.14]],WCP.slate,0.42);
+    wc_wash(ctx,wc_ell(tx,hz-th+30,11,11,20),WCP.clock,{depth:0.42,kind:"clock",lw:1.2});wc_part(ctx,wc_rect(x+w*0.08,hz-h*0.16,w*0.4,h*0.16+12),WCP.stone,0.36);}
+  wc_land(ctx,xx=>hz+34+6*Math.sin(xx/120),WCP.lawn,0.5,{line:false});
+  wc_roundTree(ctx,x+w*0.16,hz+44,h*0.36,0.5);wc_roundTree(ctx,x+w*0.9,hz+56,h*0.3,0.5,WCP.leaf2);ctx.restore();
+  const f=16;for(const r of [wc_rect(x-f,y-f,w+2*f,f),wc_rect(x-f,y-f,f,h+2*f),wc_rect(x+w,y-f,f,h+2*f),wc_rect(x+w/2-6,y,12,h),wc_rect(x,y+h*0.42-6,w,12)])wc_wash(ctx,r,WC_PAPER,{kind:"trim",lw:1.4});
+  wc_wash(ctx,wc_rect(x-30,y+h,w+60,24),wc_dim(o.wall||GV_ROOM.gov,0.1),{kind:"trim",lw:1.5});}
+// a door to the corridor: its frame, the door, a narrow pane of glass and a handle; fy is the floor
+function gv_door(ctx,x,fy,w,h,col){wc_wash(ctx,wc_rect(x-16,fy-h-16,w+32,h+16),WC_PAPER,{kind:"trim",lw:1.5});wc_wash(ctx,wc_rect(x,fy-h,w,h),col,{kind:"door",lw:1.6});
+  wc_flat(ctx,wc_rect(x+w*0.3,fy-h+h*0.1,w*0.4,h*0.36),GV.glass,1,"window");wc_wash(ctx,wc_rect(x+w-36,fy-h*0.5,22,10),GV.metal,{kind:"thing",lw:1.2});}
+// a desk from the front: its top at y, on the floor at fy; legs, a panel, and a pedestal of drawers
+function gv_desk(ctx,x,y,w,fy,o){o=o||{};const col=o.col||GV.oak;wc_contact(ctx,x-20,x+w+20,fy+2,0.9,0.3);
+  wc_part(ctx,wc_rect(x+26,y+20,w-52,(fy-y)*0.62),wc_dim(col,0.14),1);for(const lx of [x+8,x+w-34])wc_part(ctx,wc_rect(lx,y+18,26,fy-y-18),wc_dim(col,0.22),1);
+  if(o.drawers!==false){const dx=o.left?x+30:x+w-206;wc_part(ctx,wc_rect(dx,y+18,176,fy-y-18),col,1);for(let i=0;i<3;i++){const dy=y+40+i*(fy-y-40)/3;wc_flat(ctx,wc_rect(dx+60,dy+18,56,8),wc_dim(col,0.4),1,"handle");}}
+  wc_part(ctx,wc_rect(x-8,y,w+16,24),wc_lit(col,0.12),1);}
+// an office chair's back, seen over a desk
+function gv_chair(ctx,cx,y,o){o=o||{};wc_part(ctx,wc_rrPts(cx-74,y,148,o.h||150,26),o.col||GV.chair,1);}
+// a bookcase on the floor at fy: its back, shelves at the given heights, sides and plinth
+function gv_bookcase(ctx,x,fy,w,h,shelves,o){o=o||{};const col=o.col||GV.wood,top=fy-h;wc_contact(ctx,x-10,x+w+10,fy+2,0.9,0.25);
+  wc_part(ctx,wc_rect(x,top,w,h),wc_dim(col,0.3),1,{lw:1.2});for(const sy of shelves)wc_part(ctx,wc_rect(x+14,sy,w-28,16),wc_lit(col,0.06),1);
+  wc_part(ctx,wc_rect(x-10,top-16,w+20,20),col,1);wc_part(ctx,wc_rect(x-6,top,22,h),col,1);wc_part(ctx,wc_rect(x+w-16,top,22,h),col,1);wc_part(ctx,wc_rect(x-6,fy-26,w+12,26),wc_dim(col,0.06),1);}
+// a screen's frame and its stand; what it shows is drawn every frame (gv_screen)
+function gv_monitor(ctx,x,y,w,h,o){o=o||{};if(o.stand!==false){wc_part(ctx,[[x+w/2-16,y+h+8],[x+w/2+16,y+h+8],[x+w/2+22,y+h+56],[x+w/2-22,y+h+56]],GV.metal,1);
+    wc_part(ctx,wc_rect(x+w/2-78,y+h+52,156,14),GV.metal,1);}wc_part(ctx,wc_rect(x-12,y-12,w+24,h+24),GV.bezel,1,{kind:"thing"});wc_flat(ctx,wc_rect(x,y,w,h),[230,234,240],1,"screen");}
+// a cork board in a wooden frame, speckled
+function gv_cork(ctx,x,y,w,h,fw){fw=fw||14;const k=fw/14;wc_part(ctx,wc_rect(x-fw,y-fw,w+2*fw,h+2*fw),GV.woodDark,1);wc_wash(ctx,wc_rect(x,y,w,h),GV.cork,{kind:"build",lw:1.1,seed:x|0});
+  const R=wc_rng(x|0);ctx.save();for(let i=0;i<w*h/(260*k*k);i++){ctx.fillStyle=rgba(wc_dim(GV.cork,0.25+R()*0.2),0.35);ctx.beginPath();ctx.arc(x+R()*w,y+R()*h,(0.8+R()*1.6)*k,0,TAU);ctx.fill();}ctx.restore();}
+// a plant in a pot, on the floor at fy
+function gv_plant(ctx,x,fy,s){s=s||1;wc_contact(ctx,x-50*s,x+50*s,fy+2,0.9,0.25);const R=wc_rng(Math.round(x)),parts=[];for(let i=0;i<9;i++){const a=-Math.PI*0.5+(R()-0.5)*2.2,r=60*s+R()*70*s;
+    parts.push(wc_ell(x+Math.cos(a)*r*0.7,fy-150*s+Math.sin(a)*r*0.9,(18+R()*14)*s,(42+R()*20)*s,18));}
+  wc_wash(ctx,parts,WCP.leaf,{kind:"tree",seed:Math.round(x)});wc_part(ctx,[[x-46*s,fy-110*s],[x+46*s,fy-110*s],[x+36*s,fy],[x-36*s,fy]],[200,126,96],1);}
+// a frame on the wall, with a paper mount; what's in it is drawn every frame
+function gv_frame(ctx,x,y,w,h){wc_part(ctx,wc_rect(x-14,y-14,w+28,h+28),GV.woodDark,1);wc_flat(ctx,wc_rect(x,y,w,h),WC_CARD,1,"mount");}
+// a ceiling light's glow on the wall
+function gv_lightGlow(ctx,x,y,r){ctx.save();ctx.globalCompositeOperation="screen";wc_glowAt(ctx,x,y,r,[255,246,222],0.5);ctx.restore();}
+
+/* ---------- the university's places ---------- */
+// The campus: the old sandstone building with its clock tower and glass wing, the newer building where the offices are, lawns, a
+// path to its door. Nothing but the university's own.
+const GV_CP={fy:742,door:[1462,742],path:[[700,1090],[900,980],[1160,880],[1380,800],[1462,750]]};
+function gv_paintCampus(ctx){const P=WCP;wc_sky(ctx,700,8,{sun:[1640,160],cx:120,cw:1500});
+  wc_forest(ctx,x=>620+12*Math.sin(x/230)+6*Math.sin(x/70),P.farForest,0.08,5,{h:34,w:22});wc_treeRow(ctx,()=>640,-40,1980,62,74,0.22,21,P.leaf2);
+  wc_land(ctx,x=>660+5*Math.sin(x/300),P.lawn,0.42);
+  wc_contact(ctx,30,640,668,0.46,0.22);wc_quad(ctx,40,668,0.46,0.6);wc_glassWing(ctx,628,668,140,160,0.48);
+  // the newer building: a frame of pale concrete, bands of glass, a canopy over the door
+  const bx=1040,bw=780,top=300,by=GV_CP.fy;wc_contact(ctx,bx-20,bx+bw+20,by+4,0.6,0.3);wc_part(ctx,wc_rect(bx,top,bw,by-top),P.concrete,0.6);
+  for(let r=0;r<4;r++){const ry=top+40+r*100;wc_part(ctx,wc_rect(bx+30,ry,bw-60,64),P.glass,0.6,{kind:"glass"});
+    ctx.save();ctx.strokeStyle=rgba(wc_dim(P.glass,0.35),0.6);ctx.lineWidth=3;for(let i=1;i<10;i++){ctx.beginPath();ctx.moveTo(bx+30+i*(bw-60)/10,ry);ctx.lineTo(bx+30+i*(bw-60)/10,ry+64);ctx.stroke();}ctx.restore();}
+  wc_part(ctx,wc_rect(bx-14,top-20,bw+28,24),wc_lit(P.concrete,0.1),0.6);
+  const [dx]=GV_CP.door;wc_part(ctx,wc_rect(dx-70,by-150,140,150),P.glass,0.62,{kind:"glass"});wc_part(ctx,wc_rect(dx-110,by-176,220,22),P.slate,0.62);
+  wc_roundTree(ctx,980,700,230,0.5);wc_roundTree(ctx,1870,712,210,0.5,P.leaf2);
+  wc_wash(ctx,[[-60,766],[W+60,754],[W+60,H+60],[-60,H+60]],P.lawn,{depth:0.7,kind:"ground",line:false});
+  wc_wash(ctx,wc_band(wc_smooth(GV_CP.path,8),260,46),P.paving,{depth:0.66,kind:"path",line:false});
+  wc_lamp(ctx,860,960,320,0.8);wc_lamp(ctx,1690,820,240,0.66);wc_tufts(ctx,x=>760,0,620,40,0.9,6);}
+
+// Yusuf's office: a door to the corridor, a window onto the campus, the chart pinned to a board, the framed score, his desk and chair,
+// the shelf of binders. GV_OFF says where each is, for the scenes.
+const GV_OFF={fy:850,door:[50,250,520],win:[318,150,330,430],board:[690,150,410,410],score:[1150,200,176,136],
+  shelf:{x:1366,w:510,h:690,rows:[372,542,712]},desk:[700,664,600],chair:1000,plant:1318};
+function gv_paintOffice(ctx){const O=GV_OFF,wall=GV_ROOM.gov;gv_wallFloor(ctx,wall,O.fy,{seed:11,vx:900});gv_lightGlow(ctx,960,0,520);
+  gv_door(ctx,O.door[0],O.fy,O.door[1]-O.door[0],O.door[2],[176,140,108]);gv_window(ctx,O.win[0],O.win[1],O.win[2],O.win[3],{wall,seed:6});
+  gv_cork(ctx,O.board[0],O.board[1],O.board[2],O.board[3]);gv_frame(ctx,O.score[0],O.score[1],O.score[2],O.score[3]);
+  const S=O.shelf;gv_bookcase(ctx,S.x,O.fy,S.w,S.h,S.rows.concat([O.fy-40]),{});
+  // the top shelf's books and boxes, which never move
+  const R=wc_rng(9);let bx=S.x+30;while(bx<S.x+S.w-60){const bw=26+R()*22,bh=110+R()*40;wc_part(ctx,wc_rect(bx,S.rows[0]-bh,bw,bh),[[150,90,80],[96,118,150],[120,140,104],[196,170,120]][Math.floor(R()*4)],1,{lw:1.2});bx+=bw+4;
+    if(R()<0.15){wc_part(ctx,wc_rect(bx+6,S.rows[0]-80,120,80),[214,196,160],1);bx+=130;}}
+  // under the shelves, a cupboard: two doors and their knobs
+  for(const j of [0,1]){const dx=S.x+22+j*(S.w/2-18);wc_part(ctx,wc_rect(dx,S.rows[2]+20,S.w/2-26,O.fy-62-S.rows[2]),wc_lit(GV.wood,0.05),1);
+    wc_wash(ctx,wc_ell(dx+(j?22:S.w/2-48),S.rows[2]+62,6,6,12),GV.metal,{kind:"thing",lw:1});}
+  gv_plant(ctx,O.plant,O.fy,0.9);gv_chair(ctx,O.chair,O.desk[1]-130);gv_desk(ctx,O.desk[0],O.desk[1],O.desk[2],O.fy+6,{left:true});
+  // on the desk: a tray of papers and a pot of pens
+  const dx=O.desk[0]+O.desk[2];wc_part(ctx,wc_rect(dx-210,O.desk[1]-30,120,30),[226,218,204],1);wc_flat(ctx,wc_rect(dx-200,O.desk[1]-38,100,10),WC_CARD,1,"papers");
+  wc_part(ctx,[[dx-70,O.desk[1]],[dx-30,O.desk[1]],[dx-34,O.desk[1]-58],[dx-66,O.desk[1]-58]],[96,118,150],1);
+  for(const [px,a,c] of [[-58,-0.2,[60,60,70]],[-48,0.1,[204,62,50]],[-40,0.25,[60,60,70]]]){ctx.save();ctx.translate(dx+px,O.desk[1]-56);ctx.rotate(a);wc_flat(ctx,wc_rect(-2,-40,5,42),c,1,"pen");ctx.restore();}}
+
+// The floor where the work is done, from the corridor: five offices behind glass, each with its name on the glass. GV_FL gives each
+// office's left edge and its person's spot; the people are drawn every frame, then the glass over them (gv_floorGlass), then the names.
+const GV_FL={fy:830,top:140,inner:700,rooms:[["plan","Planning"],["reg","Registrar's office"],["gov","Data governance"],["data","Data team"],["plat","Platform team"]],
+  x:i=>i*384+16,w:352,spot:i=>i*384+16+(i%2?120:236),walk:905};
+function gv_paintFloor(ctx){const F=GV_FL;ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);
+  wc_wash(ctx,wc_rect(-40,-40,W+80,F.top+40),GV.ceiling,{kind:"plaster",line:false,seed:3});
+  F.rooms.forEach(([k],i)=>{const x=F.x(i),w=F.w,wall=GV_ROOM[k],odd=i%2;
+    // inside: the room's back wall and floor, a window, a desk and a screen, and what each office has of its own
+    wc_wash(ctx,wc_rect(x,F.top,w,F.inner-F.top),wall,{kind:"plaster",line:false,seed:7+i*5});wc_wash(ctx,wc_rect(x,F.inner,w,F.fy-F.inner),wc_lit(GV.floor,0.12),{kind:"ground",line:false,seed:9+i});
+    wc_flat(ctx,wc_rect(x,F.inner-10,w,12),wc_dim(wall,0.16),1,"skirting");
+    const wx=odd?x+w-170:x+34;gv_window(ctx,wx,F.top+130,136,190,{wall,seed:20+i,tx:0.5,tower:i===2});
+    const ox=odd?x+20:x+w-176,oy=F.top+140;
+    // Planning: a chart of this year's numbers; the registrar's office: archive boxes on a shelf; data governance: two shelves of
+    // binders; the data team: a whiteboard, written on; the platform team: a rack of servers under the window
+    if(k==="plan"){wc_part(ctx,wc_rect(ox+6,oy,150,120),WC_CARD,0.9,{lw:1.2});[0.5,0.7,0.45,0.85,0.62].forEach((v,j)=>wc_flat(ctx,wc_rect(ox+26+j*24,oy+104-v*80,16,v*80),j===4?GV.gold:[140,176,210],0.9,"bar"));}
+    if(k==="reg"){wc_part(ctx,wc_rect(ox,oy+96,160,10),GV.wood,0.9);for(let j=0;j<3;j++){wc_part(ctx,wc_rect(ox+8+j*50,oy+34,44,62),[214,200,170],0.9,{lw:1.1});wc_flat(ctx,wc_rect(ox+18+j*50,oy+48,24,12),WC_CARD,0.9,"label");}}
+    if(k==="gov")for(const sy of [oy+60,oy+150]){wc_part(ctx,wc_rect(ox,sy,160,10),GV.wood,0.9);for(let j=0;j<9;j++)wc_part(ctx,wc_rect(ox+6+j*17,sy-64,14,64),[[96,118,150],[150,90,80],[120,140,104],[186,160,110]][j%4],0.9,{lw:1});}
+    if(k==="data"){wc_part(ctx,wc_rect(ox,oy,160,116),[248,248,246],0.9,{lw:1.2});ctx.save();ctx.lineWidth=3;ctx.lineCap="round";
+      [[[24,30],[70,30]],[[24,52],[110,52]],[[24,74],[90,74]],[[118,40],[140,60]],[[140,60],[118,88]]].forEach(([a,b],j)=>{ctx.strokeStyle=rgba(j>2?[204,62,50]:[60,110,170],0.7);ctx.beginPath();ctx.moveTo(ox+a[0],oy+a[1]);ctx.lineTo(ox+b[0],oy+b[1]);ctx.stroke();});ctx.restore();}
+    if(k==="plat"){const rx=x+44,ry=F.inner-236;wc_part(ctx,wc_rect(rx,ry,74,236),[70,76,90],0.9);for(let j=0;j<6;j++){wc_flat(ctx,wc_rect(rx+8,ry+12+j*36,58,26),[96,104,120],0.9,"unit");
+      [[120,220,160],[120,200,255]].forEach((c,l)=>{ctx.fillStyle=rgba(c,0.85);ctx.beginPath();ctx.arc(rx+18+l*12,ry+25+j*36,3,0,TAU);ctx.fill();});}}
+    const dx=odd?x+20:x+w-190;wc_part(ctx,wc_rect(dx,F.inner-120,170,16),wc_lit(GV.oak,0.1),0.9);wc_part(ctx,wc_rect(dx+10,F.inner-104,14,104),wc_dim(GV.oak,0.2),0.9);wc_part(ctx,wc_rect(dx+146,F.inner-104,14,104),wc_dim(GV.oak,0.2),0.9);
+    wc_part(ctx,wc_rect(dx+50,F.inner-212,92,62),GV.bezel,0.9,{kind:"thing"});wc_flat(ctx,wc_rect(dx+56,F.inner-206,80,50),[226,232,240],0.9,"screen");wc_part(ctx,wc_rect(dx+90,F.inner-150,12,30),GV.metal,0.9);});
+  // the walls between the offices
+  for(let i=0;i<=5;i++){const x=i*384-4;wc_part(ctx,wc_rect(x,F.top-6,24,F.fy-F.top+6),GV.ceiling,1,{lw:1.3});}
+  // the corridor's floor, and a long rug where people walk
+  wc_wash(ctx,wc_rect(-40,F.fy,W+80,H-F.fy+40),GV.corridor,{kind:"ground",line:false,seed:31});
+  ctx.save();ctx.strokeStyle=rgba(wc_dim(GV.corridor,0.18),0.32);ctx.lineWidth=2;for(let i=-16;i<=16;i++){ctx.beginPath();ctx.moveTo(960+i*64,F.fy);ctx.lineTo(960+i*190,H+40);ctx.stroke();}ctx.restore();
+  wc_wash(ctx,[[-60,F.fy+28],[W+60,F.fy+28],[W+60,F.fy+100],[-60,F.fy+100]],[176,190,206],{kind:"ground",line:false,seed:33,a:0.75});
+  for(let i=0;i<5;i++)gv_lightGlow(ctx,192+i*384,F.top-10,300);}
+// the glass in front of the offices, over the people inside: a pale wash, light across it, the door's edge and handle, a bottom rail
+function gv_floorGlass(ctx){const F=GV_FL;ctx.drawImage(wc_kept("floorGlass",W,H,c=>{F.rooms.forEach(([k],i)=>{const x=F.x(i),w=F.w,h=F.fy-F.top;
+    c.save();c.globalAlpha=0.16;c.fillStyle=rgba(GV.glass,1);c.fillRect(x,F.top,w,h);c.restore();
+    c.save();c.beginPath();c.rect(x,F.top,w,h);c.clip();c.globalCompositeOperation="screen";for(const [o,ww] of [[0.16,70],[0.34,24],[0.72,46]]){const g=c.createLinearGradient(x+w*o,0,x+w*o+ww,0);
+      g.addColorStop(0,"rgba(255,255,255,0)");g.addColorStop(0.5,"rgba(255,255,255,0.16)");g.addColorStop(1,"rgba(255,255,255,0)");c.fillStyle=g;c.beginPath();c.moveTo(x+w*o,F.top);c.lineTo(x+w*o+ww,F.top);c.lineTo(x+w*o+ww-160,F.fy);c.lineTo(x+w*o-160,F.fy);c.closePath();c.fill();}c.restore();
+    const dx=i%2?x+w-96:x+96;c.save();c.strokeStyle=rgba(GV.metal,0.9);c.lineWidth=3;c.beginPath();c.moveTo(dx,F.top);c.lineTo(dx,F.fy);c.stroke();c.lineWidth=6;c.lineCap="round";c.beginPath();c.moveTo(dx+(i%2?14:-14),F.top+330);c.lineTo(dx+(i%2?14:-14),F.top+420);c.stroke();c.restore();});
+  wc_wash(c,wc_rect(-20,F.fy-14,W+40,16),GV.metal,{kind:"trim",lw:1.2});wc_wash(c,wc_rect(-20,F.top-8,W+40,14),GV.metal,{kind:"trim",lw:1.2});}),0,0);}
+// an office's name on its glass, on a frosted band
+function gv_floorName(ctx,i,a){if(a<=0.01)return;const F=GV_FL,x=F.x(i),name=F.rooms[i][1];withA(ctx,a,()=>{ctx.save();ctx.fillStyle="rgba(255,255,255,0.62)";ctx.fillRect(x+12,F.top+28,F.w-24,56);ctx.restore();
+  wc_T(ctx,name,x+F.w/2,F.top+67,{w:800,size:30,align:"center",col:WC_DARK});});}
+
+// The data team's room: a window, the cork board where the reports go, the poster of the loop they build in, Jun's desk and two
+// screens.
+const GV_DT={fy:856,win:[70,150,330,440],board:[450,150,430,380],poster:[920,130,560,360],desk:[1470,668,430],mon:[[1490,474,180,126],[1690,474,180,126]]};
+function gv_paintData(ctx){const D=GV_DT,wall=GV_ROOM.data;gv_wallFloor(ctx,wall,D.fy,{seed:21,vx:1000});gv_lightGlow(ctx,980,0,560);
+  gv_window(ctx,D.win[0],D.win[1],D.win[2],D.win[3],{wall,seed:12,tx:0.4});gv_cork(ctx,D.board[0],D.board[1],D.board[2],D.board[3]);
+  gv_poster(ctx,D.poster[0],D.poster[1],D.poster[2],D.poster[3]);
+  gv_chair(ctx,1690,D.desk[1]-128,{col:[96,84,120]});gv_desk(ctx,D.desk[0],D.desk[1],D.desk[2],D.fy+6,{});D.mon.forEach(m=>gv_monitor(ctx,m[0],m[1],m[2],m[3]));
+  gv_plant(ctx,428,D.fy,0.6);}
+// the data team's poster: how they build, in ten steps round a loop (In the weeds of data crafting's loop, as they'd pin it up), from
+// a question to a new version. Drawn for a poster 1260 wide (the close-up) and scaled to any other size; gv_loopPos says where step i is.
+const GV_LOOPC=[96,160,176];
+function gv_loopPos(i,x,y,w,h){const k=w/1260,an=-Math.PI/2+i/10*TAU;return[x+w/2+Math.cos(an)*330*k,y+h*450/810+Math.sin(an)*270*k];}
+function gv_loopArt(ctx,x,y,w,h){const k=w/1260,cx=x+w/2,cy=y+h*450/810;
+  wc_T(ctx,"How we build",cx,y+86*k,{w:800,size:50*k,align:"center",col:WC_DARK});
+  // the loop: a pencil line round it, a chevron between each two steps, going round clockwise
+  ctx.save();ctx.strokeStyle=rgba(wc_dim(GV_LOOPC,0.2),0.6);ctx.lineWidth=3.2*k;ctx.setLineDash([3*k,11*k]);ctx.lineCap="round";ctx.beginPath();ctx.ellipse(cx,cy,330*k,270*k,0,0,TAU);ctx.stroke();ctx.restore();
+  for(let i=0;i<10;i++){const an=-Math.PI/2+(i+0.5)/10*TAU,px=cx+Math.cos(an)*330*k,py=cy+Math.sin(an)*270*k,d=Math.atan2(Math.cos(an)*270,-Math.sin(an)*330);
+    ctx.save();ctx.translate(px,py);ctx.rotate(d);ctx.strokeStyle=rgba(wc_dim(GV_LOOPC,0.3),0.8);ctx.lineWidth=3.4*k;ctx.lineCap="round";ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(-7*k,-9*k);ctx.lineTo(4*k,0);ctx.lineTo(-7*k,9*k);ctx.stroke();ctx.restore();}
+  // each step: a chip with its mark, and its name outside the loop
+  STEPS10.forEach(([nm,sym],i)=>{const [sx,sy]=gv_loopPos(i,x,y,w,h),an=-Math.PI/2+i/10*TAU,c=Math.cos(an),s=Math.sin(an),r=30*k;
+    wc_wash(ctx,wc_ell(sx,sy,r,r,28),wc_lit(GV_LOOPC,0.5),{kind:"thing",lw:1.4*Math.max(0.6,k),seed:40+i});
+    wc_T(ctx,sym,sx,sy+(sym.length>1?8:10)*k,{w:800,size:(sym.length>2?21:sym.length>1?24:28)*k,align:"center",col:wc_dim(GV_LOOPC,0.55)});
+    const top=i===0,bot=i===5,al=top||bot?"center":c>0?"left":"right",nx=top||bot?sx:sx+(c>0?1:-1)*(r+16*k),ny=top?sy-r-16*k:bot?sy+r+40*k:sy+10*k;
+    wc_T(ctx,nm,nx,ny,{w:700,size:29*k,align:al,col:WC_INK});});}
+// the poster on the wall: paper, a pin in each top corner, the loop
+function gv_poster(ctx,x,y,w,h){const k=w/1260;ctx.save();ctx.filter="blur("+Math.max(2,8*k)+"px)";ctx.fillStyle="rgba(70,60,50,0.18)";ctx.fillRect(x+8*k,y+12*k,w,h);ctx.restore();
+  wc_wash(ctx,wc_rect(x,y,w,h),[251,250,245],{kind:"paper",lw:Math.max(1,1.6*k),seed:5});gv_loopArt(ctx,x,y,w,h);for(const px of [x+30*k,x+w-30*k])gv_pin(ctx,px,y+28*k,GV.red,Math.max(0.5,1.5*k));}
+
+// The platform team's room: two racks of servers, a whiteboard of what's connected to what, a desk and two screens, a window.
+const GV_PF={fy:856,win:[1500,150,330,430],rack:[[80,250,170,606],[262,250,170,606]],board:[540,190,420,300],desk:[1000,668,520],mon:[[1060,470,190,130],[1290,470,190,130]]};
+// a rack of servers: a dark cabinet, its units, a green and a blue light on each
+function gv_rack(ctx,x,y,w,h,seed){wc_contact(ctx,x-10,x+w+10,y+h+2,0.9,0.3);wc_part(ctx,wc_rect(x,y,w,h),[70,76,90],1,{seed});const n=Math.floor((h-40)/52);
+  for(let j=0;j<n;j++){const uy=y+22+j*52;wc_flat(ctx,wc_rect(x+14,uy,w-28,40),[96,104,120],1,"unit");ctx.save();ctx.strokeStyle="rgba(40,44,54,0.5)";ctx.lineWidth=2;for(let v=0;v<5;v++){ctx.beginPath();ctx.moveTo(x+70+v*12,uy+10);ctx.lineTo(x+70+v*12,uy+30);ctx.stroke();}ctx.restore();
+    [[120,220,160],[120,200,255]].forEach((c,l)=>{ctx.fillStyle=rgba(c,0.9);ctx.beginPath();ctx.arc(x+30+l*18,uy+20,4.5,0,TAU);ctx.fill();});}}
+// a whiteboard, written on in marker: boxes and the arrows between them
+function gv_whiteboard(ctx,x,y,w,h){wc_part(ctx,wc_rect(x-10,y-10,w+20,h+20),GV.metal,1,{lw:1.2});wc_flat(ctx,wc_rect(x,y,w,h),[250,251,250],1,"board");
+  ctx.save();ctx.lineWidth=4;ctx.lineCap="round";ctx.lineJoin="round";const k=w/420,box=(bx,by,bw,bh,c)=>{ctx.strokeStyle=rgba(c,0.75);ctx.beginPath();ctx.rect(x+bx*k,y+by*k,bw*k,bh*k);ctx.stroke();};
+  box(30,40,110,64,[60,110,170]);box(250,30,130,70,[60,110,170]);box(150,180,130,70,[40,140,90]);
+  ctx.strokeStyle=rgba([204,62,50],0.75);[[[140,72],[250,64]],[[86,104],[180,180]],[[316,100],[250,180]]].forEach(([a,b])=>{ctx.beginPath();ctx.moveTo(x+a[0]*k,y+a[1]*k);ctx.lineTo(x+b[0]*k,y+b[1]*k);ctx.stroke();});
+  ctx.strokeStyle=rgba([60,60,70],0.5);ctx.lineWidth=3;for(const [bx,by,bw] of [[44,66,70],[264,58,90],[166,208,90]]){ctx.beginPath();ctx.moveTo(x+bx*k,y+by*k);ctx.lineTo(x+(bx+bw)*k,y+by*k);ctx.stroke();}ctx.restore();
+  wc_part(ctx,wc_rect(x+w*0.3,y+h+10,w*0.4,12),GV.metal,1);}
+function gv_paintPlatform(ctx){const P=GV_PF,wall=GV_ROOM.plat;gv_wallFloor(ctx,wall,P.fy,{seed:61,vx:960});gv_lightGlow(ctx,960,0,540);
+  gv_window(ctx,P.win[0],P.win[1],P.win[2],P.win[3],{wall,seed:18,tx:0.5});P.rack.forEach((r,i)=>gv_rack(ctx,r[0],r[1],r[2],r[3],7+i));
+  gv_whiteboard(ctx,P.board[0],P.board[1],P.board[2],P.board[3]);
+  gv_chair(ctx,1260,P.desk[1]-128,{col:[70,96,110]});gv_desk(ctx,P.desk[0],P.desk[1],P.desk[2],P.fy+6,{});P.mon.forEach(m=>gv_monitor(ctx,m[0],m[1],m[2],m[3]));
+  gv_plant(ctx,1884,P.fy,0.7);}
+
+// Close-ups: a cork board filling the frame, on its room's wall; a screen on a desk; the data team's poster
+const GV_BC=[210,50,1500,820],GV_SC=[330,70,1260,690],GV_PC=[330,40,1260,810];
+function gv_paintBoardClose(ctx,wall){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),wall,{kind:"plaster",line:false,seed:71});
+  gv_lightGlow(ctx,960,-80,900);const [x,y,w,h]=GV_BC;gv_cork(ctx,x,y,w,h,34);}
+function gv_paintScreenDesk(ctx,wall){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_wash(ctx,wc_rect(-40,-40,W+80,960),wall,{kind:"plaster",line:false,seed:73});
+  wc_wash(ctx,wc_rect(-40,900,W+80,220),GV.oak,{kind:"plaster",line:false,seed:74});wc_wash(ctx,wc_rect(-40,894,W+80,14),wc_dim(GV.oak,0.25),{kind:"trim",line:false,flat:true});
+  const [x,y,w,h]=GV_SC;wc_part(ctx,[[x+w/2-40,y+h+12],[x+w/2+40,y+h+12],[x+w/2+52,912],[x+w/2-52,912]],GV.metal,1);wc_wash(ctx,wc_ell(x+w/2,918,190,22,30),GV.metal,{kind:"thing",lw:1.4});
+  gv_monitor(ctx,x,y,w,h,{stand:false});
+  wc_part(ctx,wc_rect(1660,960,420,160),[226,228,234],1);wc_wash(ctx,wc_ell(160,990,70,40,30),[236,240,244],{kind:"thing",lw:1.4});}
+function gv_paintPosterClose(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),GV_ROOM.data,{kind:"plaster",line:false,seed:75});
+  gv_lightGlow(ctx,960,-60,900);const [x,y,w,h]=GV_PC;gv_poster(ctx,x,y,w,h);}
+
+// Planning's office: a big screen on the wall, a desk, a window.
+const GV_PL={fy:856,screen:[560,172,700,390],win:[1500,150,320,430],desk:[90,668,470]};
+function gv_paintPlanning(ctx){const P=GV_PL,wall=GV_ROOM.plan;gv_wallFloor(ctx,wall,P.fy,{seed:31,vx:900});gv_lightGlow(ctx,900,0,520);
+  gv_window(ctx,P.win[0],P.win[1],P.win[2],P.win[3],{wall,seed:14,tx:0.3});gv_monitor(ctx,P.screen[0],P.screen[1],P.screen[2],P.screen[3],{stand:false});
+  gv_chair(ctx,330,P.desk[1]-128,{col:[90,110,96]});gv_desk(ctx,P.desk[0],P.desk[1],P.desk[2],P.fy+6,{});gv_monitor(ctx,250,476,180,124);gv_plant(ctx,1400,P.fy,0.9);}
+
+// The registrar's office: shelves of archive boxes, a desk, a window.
+const GV_RG={fy:856,shelf:[70,520],desk:[700,664,640],win:[1530,150,300,430]};
+function gv_paintRegistrar(ctx){const G=GV_RG,wall=GV_ROOM.reg;gv_wallFloor(ctx,wall,G.fy,{seed:41,vx:1000});gv_lightGlow(ctx,1000,0,520);
+  gv_window(ctx,G.win[0],G.win[1],G.win[2],G.win[3],{wall,seed:16,tx:0.55});
+  gv_bookcase(ctx,G.shelf[0],G.fy,G.shelf[1],680,[350,520,690],{col:[176,150,120]});
+  const R=wc_rng(4);for(const sy of [350,520,690])for(let i=0;i<4;i++){const bx=G.shelf[0]+34+i*118;wc_part(ctx,wc_rect(bx,sy-118,104,118),[[214,200,170],[196,186,160],[222,210,184]][i%3],1);
+    wc_flat(ctx,wc_rect(bx+28,sy-90,48,28),WC_CARD,1,"label");if(R()<0.5)wc_flat(ctx,wc_rect(bx+40,sy-40,24,10),wc_dim([196,186,160],0.4),1,"hole");}
+  gv_chair(ctx,1020,G.desk[1]-128,{col:[70,84,120]});gv_desk(ctx,G.desk[0],G.desk[1],G.desk[2],G.fy+6,{});gv_plant(ctx,1440,G.fy,0.85);}
+
+// Yusuf's desk from above, for the papers on it: oak with its grain, a mug, a pencil, the edge of a keyboard
+function gv_paintDesk(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),GV.oak,{kind:"plaster",line:false,seed:51});
+  ctx.save();ctx.globalCompositeOperation="multiply";const R=wc_rng(3);for(let i=0;i<70;i++){const y=R()*H;ctx.strokeStyle=rgba(wc_dim(GV.oak,0.2+R()*0.12),0.18+R()*0.14);ctx.lineWidth=1+R()*2.4;ctx.beginPath();ctx.moveTo(-20,y);
+    for(let x=0;x<=W+40;x+=80)ctx.lineTo(x,y+6*Math.sin(x/300+i)+3*Math.sin(x/90+i*2));ctx.stroke();}ctx.restore();
+  wc_part(ctx,wc_rect(1500,-40,460,120),[226,228,234],1);for(let i=0;i<9;i++)for(let j=0;j<2;j++)wc_flat(ctx,wc_rect(1516+i*48,-24+j*44,40,36),[244,245,248],1,"key");
+  wc_wash(ctx,wc_ell(150,140,82,82,40),[236,240,244],{kind:"thing",lw:1.6});wc_wash(ctx,wc_ell(150,140,62,62,40),[150,104,70],{kind:"thing",line:false});
+  wc_part(ctx,[[1640,980],[1900,900],[1906,912],[1646,994]],[244,196,80],1);wc_flat(ctx,[[1900,900],[1930,892],[1906,912]],[60,54,58],1,"tip");}
+
+/* ---------- things: paper painted once and kept, the words drawn every frame ---------- */
+// a ring binder's spine, standing: its colour, a label near the top, a finger hole; kept per size and colour
+function gv_binder(ctx,x,y,w,h,col,o){o=o||{};const c=wc_kept("binder|"+[w,h,col].join(","),w+24,h+24,q=>{q.translate(12,12);wc_wash(q,wc_rect(0,0,w,h),col,{kind:"cover",lw:1.4,seed:w+h});
+    wc_flat(q,wc_rect(w*0.18,h*0.1,w*0.64,h*0.26),WC_CARD,1,"label");wc_wash(q,wc_ell(w/2,h*0.8,w*0.17,w*0.17,16),wc_dim(col,0.45),{kind:"thing",line:false,flat:true});});
+  ctx.drawImage(c,x-12,y-12);}
+// a sheet of paper, white, with a soft shadow; kept per size; o.rot turns it about its centre
+function gv_sheetPaper(w,h,o){o=o||{};return wc_kept("sheet|"+w+"x"+h+"|"+(o.col||"w"),w+40,h+40,q=>{q.translate(20,20);q.save();q.filter="blur(6px)";q.fillStyle="rgba(70,60,50,0.22)";q.fillRect(6,10,w,h);q.restore();
+  wc_wash(q,wc_rect(0,0,w,h),o.col||GV.paper,{kind:"page",lw:1.4,seed:w*3+h});});}
+function gv_sheet(ctx,x,y,w,h,o){o=o||{};ctx.save();ctx.translate(x+w/2,y+h/2);if(o.rot)ctx.rotate(o.rot);ctx.drawImage(gv_sheetPaper(w,h,o),-w/2-20,-h/2-20);ctx.restore();}
+// a typed line on paper: a grey bar, for the lines no one needs to read
+function gv_lines(ctx,x,y,w,n,gap,a){ctx.save();ctx.fillStyle=rgba(WC_MUTED,0.32*(a==null?1:a));for(let i=0;i<n;i++)ctx.fillRect(x,y+i*gap,w*(i===n-1?0.6:0.92+0.08*Math.sin(i*7)),5);ctx.restore();}
+// what a screen shows: a light panel with a title bar; fn draws the rest
+function gv_screen(ctx,x,y,w,h,title,fn,o){o=o||{};ctx.save();ctx.fillStyle=rgba(GV.screen,1);ctx.fillRect(x,y,w,h);ctx.fillStyle=rgba(o.bar||[70,96,140],1);ctx.fillRect(x,y,w,o.barH||40);
+  if(title)wc_T(ctx,title,x+18,y+(o.barH||40)*0.72,{w:700,size:o.titleSize||28,col:[255,255,255]});if(fn)fn(ctx);ctx.restore();}
+// a speech bubble: a paper card with a pencil edge and a tail towards (tx,ty); k springs it in
+function gv_say(ctx,x,y,lines,tx,ty,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const sz=o.size||32,lh=Math.round(sz*1.3),w=Math.round(Math.max(...lines.map(l=>tw(ctx,l,sz,o.w||700)))+sz*1.5),
+    h=Math.round(lines.length*lh+sz*0.9),k=o.k==null?1:o.k,bx=clamp(tx,x+40,x+w-40),by=ty<y?y:y+h;
+  withA(ctx,a,()=>{ctx.save();ctx.translate(tx,ty);ctx.scale(k,k);ctx.translate(-tx,-ty);
+    ctx.beginPath();ctx.moveTo(bx-20,by);ctx.lineTo(tx,ty);ctx.lineTo(bx+20,by);ctx.closePath();ctx.fillStyle=rgba(WC_CARD,1);ctx.fill();ctx.strokeStyle=rgba(WC_PENCIL,0.85);ctx.lineWidth=2;ctx.stroke();
+    wc_panel(ctx,x,y,w,h,{kind:"card",wash:o.wash,washA:o.washA||0.22,seed:o.seed||(w+h)});ctx.fillStyle=rgba(WC_CARD,1);ctx.fillRect(bx-17,by-(ty<y?-1:3),34,4);
+    lines.forEach((l,i)=>wc_T(ctx,l,x+sz*0.75,y+sz*0.5+lh*(i+0.74),{w:o.w||700,size:sz,col:WC_DARK}));ctx.restore();});return w;}
+// a push pin, seen from the front
+function gv_pin(ctx,x,y,col,s){s=s||1;ctx.save();ctx.fillStyle="rgba(60,50,40,0.25)";ctx.beginPath();ctx.ellipse(x+3*s,y+5*s,9*s,5*s,0,0,TAU);ctx.fill();ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(x,y,9*s,0,TAU);ctx.fill();
+  ctx.strokeStyle=rgba(wc_dim(col,0.35),0.8);ctx.lineWidth=1.5;ctx.stroke();ctx.fillStyle="rgba(255,255,255,0.65)";ctx.beginPath();ctx.arc(x-3*s,y-3*s,3*s,0,TAU);ctx.fill();ctx.restore();}
+// a card pinned to a board: paper, a pin at the top, lines of text; o.wash tints it
+function gv_card(ctx,x,y,w,h,lines,o){o=o||{};wc_panel(ctx,x,y,w,h,{kind:"card",wash:o.wash,washA:o.washA||0.3,seed:o.seed||(x|0)});const sz=o.size||28;
+  lines.forEach((l,i)=>{const big=i===0&&o.head!==false;wc_T(ctx,l,x+(o.align==="center"?w/2:22),y+(o.y0||46)+i*(sz+12),{w:big?800:600,size:big?(o.headSize||sz+2):sz,col:big?WC_DARK:WC_INK,align:o.align});});
+  if(o.pin!==false)gv_pin(ctx,x+w/2,y+12,o.pinCol||GV.red);}
+// a rubber stamp's impression: the word in ink inside a double rule, landing a little large and settling (p 0 to 1), uneven where it
+// pressed less
+function gv_stampRule(w,h,col){return wc_kept("stamp|"+[w,h,col].join(","),w*2+20,h*2+20,q=>{q.scale(2,2);q.translate(5,5);
+  wc_ink(q,wc_rrPts(0,0,w,h,8),true,3.6,col,0.9,41,0.6);wc_ink(q,wc_rrPts(7,7,w-14,h-14,5),true,1.8,col,0.85,43,0.6);q.globalCompositeOperation="destination-out";q.globalAlpha=0.45;q.drawImage(WC.blotch,-40,-30,w+120,h+90);});}
+function gv_stamp(ctx,x,y,s,p,o){o=o||{};if(p<=0)return;const size=o.size||40,col=o.col||GV.redInk,w=Math.round(tw(ctx,s,size,800)+56),h=Math.round(size+36),k=lerp(1.35,1,1-Math.pow(1-clamp(p,0,1),3));
+  ctx.save();ctx.translate(x,y);ctx.rotate(o.rot==null?-0.06:o.rot);ctx.scale(k,k);withA(ctx,clamp(p*1.4,0,1)*(o.a==null?1:o.a),()=>{ctx.drawImage(gv_stampRule(w,h,col),-w/2-5,-h/2-5,w+10,h+10);
+    wc_T(ctx,s,0,size*0.36,{w:800,size,align:"center",col,a:0.88});});ctx.restore();}
+// a question mark in gold, settling with a spring
+function gv_qmark(ctx,x,y,s,p){if(p<=0)return;const k=spring(p);ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,clamp(p*2,0,1),()=>{wc_glowAt(ctx,0,-s*0.3,s*0.9,[255,226,140],0.5);
+  wc_T(ctx,"?",0,0,{w:800,size:s,align:"center",col:GV.goldInk});});ctx.restore();}
+// a glow round something that lights up: a soft halo in a colour
+function gv_halo(ctx,x,y,w,h,col,a){if(a<=0.01)return;ctx.save();ctx.globalCompositeOperation="multiply";ctx.globalAlpha=a;const r=Math.max(w,h)*0.7,g=ctx.createRadialGradient(x+w/2,y+h/2,Math.min(w,h)*0.2,x+w/2,y+h/2,r);
+  g.addColorStop(0,rgba(wc_lit(col,0.35),0.9));g.addColorStop(1,rgba(wc_lit(col,0.35),0));ctx.fillStyle=g;ctx.fillRect(x+w/2-r,y+h/2-r,r*2,r*2);ctx.restore();}
+// a soft wash of colour over a shape, as something lights up (multiplied, so what's under it still shows)
+function gv_tint(ctx,x,y,w,h,col,a){if(a<=0.01)return;ctx.save();ctx.globalCompositeOperation="multiply";ctx.globalAlpha=a;ctx.fillStyle=rgba(wc_lit(col,0.45),1);ctx.fillRect(x,y,w,h);ctx.restore();}
+
+/* ---------- people moving ---------- */
+// someone walking from x0 to x1 from t0 at v px a second: where they are, the step's bob and swing, when they arrive, which way they face
+function gv_walk(t,t0,x0,x1,v){const L=Math.abs(x1-x0),T_=Math.max(0.3,L/(v||300)),u=clamp((t-t0)/T_,0,1),e=u<0.5?2*u*u:1-2*(1-u)*(1-u),moving=u>0&&u<1,ph=(t-t0)*Math.PI*3.4;
+  return{x:lerp(x0,x1,e),moving,bob:moving?Math.abs(Math.sin(ph))*7*Math.sin(u*Math.PI):0,swing:moving?Math.sin(ph)*Math.sin(u*Math.PI):0,end:t0+T_,flip:x1<x0};}
+// a person walking: the arms swing and the body bobs while they move
+function gv_walker(ctx,id,w,y,s,o){o=o||{};const sw=w.swing;person(ctx,id,w.x,y-w.bob,s,Object.assign({pose:o.pose||"stand",pose2:w.moving&&!o.pose?(sw>0?"walkA":"walkB"):o.pose2,mix:w.moving&&!o.pose?Math.abs(sw):o.mix,flip:w.moving?w.flip:o.flip},o));}
+
+/* ---------- title and end cards ---------- */
+// the series' mark: three strokes, the colours of where a line of the binder can end up: green, it runs in the work; gold, a decision
+// someone owns; grey, it can go
+const GV_MARK=[GV.green,GV.gold,GV.grey];
+function gv_mark(ctx,cx,cy,w,p,a){if(a<=0.01)return;const n=GV_MARK.length,sw=w/n;withA(ctx,a,()=>{GV_MARK.forEach((col,i)=>{const q=clamp(p*n*0.8-i*0.6,0,1);if(q<=0)return;
+  const x=cx-w/2+i*sw,c=wc_kept("gvmark"+i+"|"+Math.round(sw),Math.round(sw+24),40,x2=>{wc_prep();wc_wash(x2,wc_resample(wc_rect(6,6,sw+10,26),8),col,{kind:"swatch",line:false,a:0.85,seed:31+i*7});});
+  ctx.save();ctx.beginPath();ctx.rect(x-4,cy-30,(sw+30)*ease(q),60);ctx.clip();ctx.drawImage(c,x-6,cy-20);ctx.restore();});});}
+function gv_title(ctx,S,t,t0,title,sub,line){const oA=fin(t,t0,0.8),tA=fin(t,t0+0.5,0.8);if(oA<=0)return;wc_veil(ctx,S,oA*0.94);setScreen(ctx,S);
+  withA(ctx,tA,()=>{wc_T(ctx,title,960,500,{w:800,size:92,align:"center",col:WC_DARK});gv_mark(ctx,960,566,420,(t-t0-0.6)/1.2,1);
+    if(sub)wc_T(ctx,sub,960,660,{w:600,size:36,align:"center",col:WC_MUTED});withA(ctx,fin(t,t0+1.2,0.8),()=>wc_tag(ctx,960,748,line,{align:"center",size:28,w:600}));});}
+function gv_end(ctx,S,t,t0,title,line,n){const oA=fin(t,t0,1.0),tA=fin(t,t0+0.6,0.9);if(oA<=0)return;wc_veil(ctx,S,oA*0.94);setScreen(ctx,S);
+  withA(ctx,tA,()=>{if(line)wc_T(ctx,line,960,420,{w:700,size:48,align:"center",col:WC_DARK});gv_mark(ctx,960,520,360,(t-t0-0.7)/1.0,1);wc_T(ctx,title,960,622,{w:800,size:44,align:"center",col:WC_DARK});
+    wc_T(ctx,(n?n+" · ":"")+"data governance · Learning Data",960,680,{w:600,size:28,align:"center",col:WC_MUTED});});}
+
+/* ===== Off the shelf: the places and the pictures =====
+   The places are painted once and kept (shared/src/finish.js). The past: the market by the town wall in 1215, the market hall in 1497,
+   a corn exchange in 1871 and a grocer's shop in the 1880s, places of trade and of the people who checked it. Today, only the
+   university's own places (the series' rooms.js): the campus, Yusuf's office, the floor of offices, Planning, the registrar's office,
+   the data team's room, and his desk from above. The pictures are the film's own things: the charter and the jugs, the king's
+   standards, the bushels, the scale, the inspector's case and the Act; the shelf of binders, the score, the chart, the minutes, the two
+   reports, the glossary's term, the government's manual, binder 12 and the highlighters, DAMA's book and its wheel, the loop of ten
+   steps and the cards. Every name starts with os_ or OS_. */
+
+/* ---------- 1215: the market by the town wall ---------- */
+// the ground, the market cross (its steps' top is where the crier stands), the two stalls' tables
+const OS_MK={fy:640,cross:840,shaft:770,step:662,crier:896,wine:[70,540,722],corn:[1190,1700,730]};
+const OS_EARTH=[218,194,154],OS_STONE=[204,194,172],OS_TIMBER=[150,112,78],OS_REDSTRIPE=[196,70,58],OS_BLUESTRIPE=[78,110,170],OS_CLOTH=[244,234,212];
+// a stall's awning: cloth in stripes between two poles, sloping towards us
+function os_awning(ctx,x0,x1,y,col,seed){const n=Math.round((x1-x0)/56),pts=k=>{const a=x0+(x1-x0)*k/n,b=x0+(x1-x0)*(k+1)/n;return[[a,y],[b,y],[b+(b-(x0+x1)/2)*0.08,y+86],[a+(a-(x0+x1)/2)*0.08,y+86]];};
+  for(let k=0;k<n;k++)wc_wash(ctx,pts(k),k%2?OS_CLOTH:col,{kind:"build",lw:1.2,seed:seed+k});
+  for(let k=0;k<n;k++){const p=pts(k);wc_wash(ctx,[p[3],p[2],[p[2][0],p[2][1]+16],[(p[2][0]+p[3][0])/2,p[2][1]+30],[p[3][0],p[3][1]+16]],k%2?OS_CLOTH:col,{kind:"build",lw:1.2,seed:seed+40+k});}}
+// a trestle table: a plank top at y, two trestles to the ground at fy
+function os_trestle(ctx,x0,x1,y,fy){for(const x of [x0+50,x1-70])wc_part(ctx,[[x,y+10],[x+20,y+10],[x+44,fy],[x+24,fy],[x+10,y+60],[x-4,fy],[x-24,fy]],wc_dim(OS_TIMBER,0.1),1);
+  wc_part(ctx,wc_rect(x0,y,x1-x0,22),OS_TIMBER,1);}
+// a barrel, standing
+function os_barrel(ctx,x,y,h){const w=h*0.72;wc_part(ctx,[[x-w*0.42,y],[x-w*0.5,y-h*0.5],[x-w*0.42,y-h],[x+w*0.42,y-h],[x+w*0.5,y-h*0.5],[x+w*0.42,y]],[172,128,88],1);
+  for(const k of [0.18,0.82])wc_flat(ctx,wc_rect(x-w*0.47,y-h*k-5,w*0.94,10),[92,84,84],1,"hoop");}
+// a sack of corn: a full body, the cloth gathered into a neck and tied with a cord, a tuft of cloth above the cord
+function os_sack(ctx,x,y,h,seed){const w=h*0.8,R=wc_rng(seed),j=v=>v*(0.94+0.12*R()),nk=y-h*0.8;
+  const body=wc_smooth([[x-w*0.46,y],[x-j(w*0.54),y-h*0.36],[x-j(w*0.42),y-h*0.66],[x-w*0.14,nk+4],[x+w*0.12,nk+4],[x+j(w*0.44),y-h*0.64],[x+j(w*0.54),y-h*0.34],[x+w*0.46,y],[x,y+4],[x-w*0.46,y]],6);
+  wc_wash(ctx,body,[226,206,156],{kind:"build",lw:1.4,seed});
+  wc_wash(ctx,wc_smooth([[x-w*0.12,nk+6],[x-w*0.2,nk-h*0.14],[x-w*0.04,nk-h*0.2],[x+w*0.1,nk-h*0.17],[x+w*0.2,nk-h*0.1],[x+w*0.12,nk+6],[x-w*0.12,nk+6]],5),[220,198,146],{kind:"build",lw:1.2,seed:seed+3});
+  wc_flat(ctx,wc_rect(x-w*0.17,nk-4,w*0.34,9),[150,110,70],1,"tie");
+  ctx.save();ctx.strokeStyle=rgba([170,146,100],0.45);ctx.lineWidth=2;ctx.lineCap="round";for(const k of [-0.22,0.02,0.24]){ctx.beginPath();ctx.moveTo(x+k*w*0.6,nk+12);ctx.quadraticCurveTo(x+k*w*1.1,y-h*0.4,x+k*w*0.9,y-6);ctx.stroke();}ctx.restore();}
+function os_paintMarket(ctx){const P=WCP;wc_sky(ctx,560,3,{sun:[1580,150],cx:120,cw:1500,cy:70,ch:180});
+  wc_land(ctx,x=>486+18*Math.sin(x/260+1)+7*Math.sin(x/90),P.far,0.2);wc_treeRow(ctx,x=>500+8*Math.sin(x/200),-40,1980,70,58,0.2,13,P.leaf2);
+  // the town wall, with merlons along its top, and the gatehouse behind the cross: two towers and an arched gate
+  const top=452,base=OS_MK.fy,wall=[[-60,base],[-60,top]];for(let x=-60;x<W+60;x+=56)wall.push([x,top],[x+30,top],[x+30,top+18],[x+56,top+18]);wall.push([W+60,top+18],[W+60,base]);
+  wc_part(ctx,wall,OS_STONE,0.55);ctx.save();ctx.strokeStyle=rgba(wc_dim(OS_STONE,0.25),0.28);ctx.lineWidth=1.6;for(let y=top+40;y<base;y+=26){const o=(y/26)%2?0:28;for(let x=-60+o;x<W+60;x+=56){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+50,y);ctx.stroke();}}ctx.restore();
+  const cx=OS_MK.cross;for(const tx of [cx-210,cx+90]){const tw_=120,tt=330;const tp=[[tx,base],[tx,tt]];for(let x=tx;x<tx+tw_;x+=30)tp.push([x,tt],[x+16,tt],[x+16,tt+16],[x+30,tt+16]);tp.push([tx+tw_,tt+16],[tx+tw_,base]);
+    wc_part(ctx,tp,wc_lit(OS_STONE,0.05),0.6);for(const sy of [400,480])wc_flat(ctx,wc_rect(tx+tw_/2-6,sy,12,34),[70,62,60],0.6,"slit");}
+  wc_part(ctx,wc_rect(cx-90,372,180,base-372),OS_STONE,0.6);wc_wash(ctx,wc_arched(cx-62,430,124,base-430),[96,86,80],{depth:0.6,kind:"door",lw:1.4});
+  // the market place: beaten earth, worn paler where people walk
+  wc_land(ctx,x=>base+4*Math.sin(x/140),OS_EARTH,0.8);wc_wash(ctx,wc_band(wc_smooth([[cx,base+10],[cx-20,800],[cx+40,1100]],8),120,520),wc_lit(OS_EARTH,0.12),{depth:0.8,kind:"path",line:false});
+  // the market cross: three steps, a shaft and its head
+  for(const [w,y] of [[300,OS_MK.step+44],[250,OS_MK.step+22],[200,OS_MK.step]])wc_part(ctx,wc_rect(cx-w/2,y,w,22),wc_lit(OS_STONE,0.06),1);
+  const sx=OS_MK.shaft;wc_part(ctx,wc_rect(sx-24,OS_MK.step-26,48,26),OS_STONE,1);wc_part(ctx,wc_rect(sx-11,300,22,OS_MK.step-326),OS_STONE,1);
+  wc_part(ctx,[[sx-34,322],[sx+34,322],[sx+34,340],[sx+11,340],[sx+11,346],[sx-11,346],[sx-11,340],[sx-34,340]],OS_STONE,1);wc_part(ctx,wc_rect(sx-11,276,22,30),OS_STONE,1);
+  // the wine stall: barrels, the table, the striped awning on its poles
+  const [w0,w1,wy]=OS_MK.wine;os_barrel(ctx,w0+30,base+90,110);os_barrel(ctx,w1-20,base+100,120);for(const x of [w0+14,w1-14])wc_part(ctx,wc_rect(x-7,452,14,wy-452+150),OS_TIMBER,1);
+  os_trestle(ctx,w0+40,w1-30,wy,wy+150);os_awning(ctx,w0-20,w1+20,440,OS_REDSTRIPE,11);
+  // the corn stall: sacks, the table, its awning
+  const [c0,c1,cy]=OS_MK.corn;for(const x of [c0+14,c1-14])wc_part(ctx,wc_rect(x-7,452,14,cy-452+150),OS_TIMBER,1);os_sack(ctx,c1-60,cy+150,120,5);os_sack(ctx,c1-150,cy+150,100,7);
+  os_trestle(ctx,c0+40,c1-30,cy,cy+150);[[c0+110,96],[c0+230,110],[c0+360,90]].forEach(([x,h],i)=>os_sack(ctx,x,cy+4,h,20+i));os_awning(ctx,c0-20,c1+20,440,OS_BLUESTRIPE,31);
+  const R=wc_rng(8);for(let i=0;i<40;i++){const x=R()*W,y=base+40+R()*(H-base-40);wc_wash(ctx,[[x,y],[x+16+R()*20,y-3],[x+20,y+2]],[220,196,120],{kind:"dab",flat:true});}}
+// an earthenware jug, kept once, and drawn at any height and width
+function os_jugAt(ctx,x,y,w,h){const c=wc_kept("jug",140,180,q=>{q.translate(20,10);wc_wash(q,[[30,0],[70,0],[74,10],[96,50],[100,110],[86,150],[50,160],[14,150],[0,110],[4,50],[26,10]],[188,124,86],{kind:"thing",lw:1.6,seed:3});
+    q.strokeStyle=rgba([150,94,60],1);q.lineWidth=9;q.beginPath();q.arc(96,64,24,-1.3,1.25);q.stroke();wc_flat(q,wc_rect(28,0,44,10),[120,74,48],1,"lip");});ctx.drawImage(c,x-w*70/100,y-h*170/160,w*140/100,h*180/160);}
+// the proclamation nailed to the stall's post: parchment, written lines and a red seal; flip (0 to 1) turns it over for the next year
+function os_proclaim(ctx,x,y,flip,seal){const c=wc_kept("proclaim",170,200,q=>{q.translate(14,10);wc_wash(q,[[0,4],[140,0],[144,150],[4,156]],WCP.parchment,{kind:"paper",lw:1.4});
+    q.strokeStyle=rgba(WCP.parchInk,0.55);q.lineWidth=2.2;for(let i=0;i<7;i++){q.beginPath();q.moveTo(16,24+i*16);q.lineTo(124-(i===6?50:0),22+i*16);q.stroke();}});
+  const k=Math.abs(Math.cos(flip*Math.PI));ctx.save();ctx.translate(x,y);ctx.scale(Math.max(0.04,k),1);ctx.drawImage(c,-85,-10);ctx.restore();
+  if(seal>0){const s=spring(seal);ctx.save();ctx.translate(x+40,y+122);ctx.scale(s,s);ctx.fillStyle=rgba([184,40,36],0.95);ctx.beginPath();ctx.arc(0,0,15,0,TAU);ctx.fill();ctx.strokeStyle=rgba([120,20,20],0.8);ctx.lineWidth=2;ctx.stroke();ctx.restore();}
+  wc_flat(ctx,wc_rect(x-4,y-4,8,8),[70,64,70],1,"nail");}
+
+/* ---------- 1497: the market hall ---------- */
+// the cupboard where the king's standards are kept, and the arch onto the square
+const OS_HL={fy:870,cup:[230,240,520,570],arch:[1120,250,560,620]};
+function os_paintHall(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);const F=OS_HL.fy,[ax,ay,aw]=OS_HL.arch;
+  // through the arch: the square in daylight, the town wall across it, the market cross on its steps, a stall under its awning
+  ctx.save();wc_tr(ctx,wc_arched(ax,ay,aw,F-ay));ctx.clip();wc_sky(ctx,640,5,{clouds:2,cx:ax,cw:aw-100,cy:ay+70,ch:110});
+  const wt=520,wb=652,wl=[[ax-60,wb],[ax-60,wt+14]];for(let x=ax-60;x<ax+aw+60;x+=40)wl.push([x,wt+14],[x,wt],[x+22,wt],[x+22,wt+14]);wl.push([ax+aw+60,wt+14],[ax+aw+60,wb]);wc_part(ctx,wl,OS_STONE,0.42);
+  wc_land(ctx,x=>wb+3*Math.sin(x/90),OS_EARTH,0.55);
+  const qx=ax+aw*0.3;for(const [w,y] of [[150,704],[120,692],[94,680]])wc_part(ctx,wc_rect(qx-w/2,y,w,12),wc_lit(OS_STONE,0.06),0.55);
+  wc_part(ctx,wc_rect(qx-7,486,14,194),OS_STONE,0.55);wc_part(ctx,wc_rect(qx-22,504,44,11),OS_STONE,0.55);
+  const s0=ax+aw*0.58,s1=ax+aw+30;for(const x of [s0+8,s1-8])wc_part(ctx,wc_rect(x-5,566,10,180),OS_TIMBER,0.6);os_trestle(ctx,s0+16,s1-16,700,746);
+  os_sack(ctx,s0+80,700,56,77);os_sack(ctx,s0+150,700,48,78);os_awning(ctx,s0-14,s1+14,556,OS_BLUESTRIPE,51);ctx.restore();
+  // the walls: stone in courses, the arch's frame, oak beams overhead, a flagged floor
+  const wall=[[-40,-40],[W+40,-40],[W+40,F],[ax+aw,F]].concat(wc_arched(ax,ay,aw,F-ay).slice().reverse()).concat([[ax,F],[-40,F]]);
+  wc_wash(ctx,wall,[222,210,186],{kind:"build",lw:1.4,seed:5});ctx.save();wc_tr(ctx,wall);ctx.clip();ctx.strokeStyle=rgba([150,136,112],0.25);ctx.lineWidth=1.6;
+  for(let y=40;y<F;y+=48){const o=(y/48)%2?0:60;ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();for(let x=o;x<W;x+=120){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y+48);ctx.stroke();}}ctx.restore();
+  wc_ink(ctx,wc_arched(ax-14,ay-14,aw+28,F-ay+14).slice(1,-1),false,3,WC_INK,0.5,7);
+  for(const by of [0,96])wc_part(ctx,wc_rect(-40,by,W+80,40),[124,90,62],1);
+  wc_wash(ctx,wc_rect(-40,F,W+80,H-F+40),[200,188,166],{kind:"ground",line:false,seed:8});ctx.save();ctx.strokeStyle=rgba([150,138,116],0.4);ctx.lineWidth=2;
+  for(let i=0;i<5;i++){const y=F+i*i*12+10;ctx.beginPath();ctx.moveTo(-20,y);ctx.lineTo(W+20,y);ctx.stroke();}for(let i=-12;i<=12;i++){ctx.beginPath();ctx.moveTo(960+i*90,F);ctx.lineTo(960+i*260,H+20);ctx.stroke();}ctx.restore();
+  // the cupboard: an oak frame, two shelves, its doors open to the sides
+  const [x,y,w,h]=OS_HL.cup;wc_contact(ctx,x-30,x+w+30,y+h+4,1,0.3);wc_part(ctx,wc_rect(x,y,w,h),[110,78,52],1);wc_part(ctx,wc_rect(x+24,y+24,w-48,h-48),[70,50,36],1);
+  for(const sy of [y+250,y+h-24])wc_part(ctx,wc_rect(x+24,sy-12,w-48,16),[150,110,76],1);
+  wc_part(ctx,[[x-90,y+10],[x,y],[x,y+h],[x-90,y+h-10]],[136,98,66],1);wc_part(ctx,[[x+w,y],[x+w+90,y+10],[x+w+90,y+h-10],[x+w,y+h]],[136,98,66],1);
+  wc_part(ctx,wc_rect(x-14,y-26,w+28,30),[136,98,66],1);}
+// the king's standards on the cupboard's shelves: a bushel, a gallon (until the clerk takes it), a quart, the yard, a pile of weights,
+// all of bronze; then the grille in front of them. glow lights them.
+const OS_BRONZE=[210,150,62];
+function os_vessel(ctx,x,y,w,h){wc_wash(ctx,[[x-w/2,y-h],[x+w/2,y-h],[x+w/2-3,y],[x-w/2+3,y]],OS_BRONZE,{kind:"thing",lw:1.6,seed:x|0});wc_wash(ctx,wc_ell(x,y-h,w/2,w*0.12,24),wc_dim(OS_BRONZE,0.3),{kind:"thing",lw:1.2,seed:(x|0)+3});
+  for(const k of [0.25,0.72])wc_flat(ctx,wc_rect(x-w/2+2,y-h*k-3,w-4,6),wc_dim(OS_BRONZE,0.2),1,"band");
+  // the shine of polished bronze: a pale stripe down one side
+  ctx.save();ctx.globalCompositeOperation="screen";ctx.fillStyle="rgba(255,236,190,0.42)";ctx.fillRect(x-w*0.3,y-h+w*0.1,w*0.09,h-w*0.14);ctx.restore();}
+function os_standards(ctx,taken,glow){const [x,y,w,h]=OS_HL.cup;ctx.drawImage(wc_kept("standards",W,H,q=>{os_vessel(q,x+130,y+238,170,130);os_vessel(q,x+380,y+238,84,104);
+    q.save();wc_part(q,wc_rect(x+60,y+h-140,w-120,14),OS_BRONZE,1);for(let i=0;i<4;i++)wc_wash(q,wc_rect(x+90+i*16-i*i*2,y+h-36-i*20,150-i*34,20),OS_BRONZE,{kind:"thing",lw:1.2,seed:60+i});q.restore();
+    os_vessel(q,x+380,y+h-36,50,62);}),0,0);
+  if(!taken)ctx.drawImage(os_gallonC(),x+215,y+120);gv_halo(ctx,x+40,y+40,w-80,h-80,[255,214,120],glow*0.7);
+  ctx.drawImage(wc_kept("grille",W,H,q=>{for(let gx=x+40;gx<x+w-30;gx+=36)wc_wash(q,wc_rect(gx,y+28,7,h-56),[70,66,72],{kind:"iron",lw:1});wc_wash(q,wc_rect(x+30,y+h/2-5,w-60,10),[70,66,72],{kind:"iron",lw:1});}),0,0);}
+// the gallon the clerk carries, kept
+function os_gallonC(){return wc_kept("gallon",120,140,q=>os_vessel(q,60,128,70,96));}
+
+/* ---------- 1871: a corn exchange ---------- */
+const OS_EX={fy:880,table:[150,1770,716]};
+function os_paintExchange(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);const F=OS_EX.fy;
+  // the hall: a warm wall with three tall arched windows, iron columns, a glass roof's ribs above
+  wc_wash(ctx,wc_rect(-40,-40,W+80,F+40),[232,214,186],{kind:"plaster",line:false,seed:9});
+  for(const wx of [210,850,1490]){ctx.save();wc_tr(ctx,wc_arched(wx,150,220,470));ctx.clip();wc_sky(ctx,560,wx,{clouds:1,cx:wx,cw:120,cy:200,ch:80});ctx.restore();
+    wc_ink(ctx,wc_arched(wx,150,220,470),true,3,WC_INK,0.6,wx);ctx.save();ctx.strokeStyle=rgba([240,236,226],0.95);ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(wx+110,150);ctx.lineTo(wx+110,620);ctx.moveTo(wx,400);ctx.lineTo(wx+220,400);ctx.stroke();ctx.restore();
+    wc_wash(ctx,wc_rect(wx-24,616,268,22),[214,196,166],{kind:"trim",lw:1.4});}
+  // the glass roof: panes of pale sky between iron ribs, on a beam the columns hold up
+  wc_wash(ctx,wc_rect(-40,-40,W+80,104),[206,222,234],{kind:"glass",line:false,seed:13});ctx.save();ctx.strokeStyle=rgba([84,86,98],0.75);ctx.lineWidth=5;
+  for(let x=-20;x<W+40;x+=96){ctx.beginPath();ctx.moveTo(x,-10);ctx.lineTo(x,64);ctx.stroke();}ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-40,24);ctx.lineTo(W+40,24);ctx.stroke();ctx.restore();
+  wc_part(ctx,wc_rect(-40,54,W+80,22),[96,98,112],1,{kind:"iron"});
+  for(const cx of [120,700,1340,1800]){wc_part(ctx,wc_rect(cx-14,60,28,F-60),[96,98,112],1,{kind:"iron"});wc_part(ctx,wc_rect(cx-26,F-40,52,40),[96,98,112],1,{kind:"iron"});wc_part(ctx,[[cx-30,60],[cx+30,60],[cx+14,90],[cx-14,90]],[96,98,112],1,{kind:"iron"});}
+  wc_wash(ctx,wc_rect(-40,F,W+80,H-F+40),[206,186,152],{kind:"ground",line:false,seed:4});ctx.save();ctx.strokeStyle=rgba([150,128,96],0.35);ctx.lineWidth=2;for(let i=-14;i<=14;i++){ctx.beginPath();ctx.moveTo(960+i*70,F);ctx.lineTo(960+i*210,H+20);ctx.stroke();}ctx.restore();
+  // sacks of corn behind the merchant's table
+  [[260,120],[380,104],[1520,116],[1640,98],[1440,90]].forEach(([x,h],i)=>os_sack(ctx,x,OS_EX.table[2]-6,h,70+i));}
+// the merchant's table, drawn after the merchant behind it
+function os_exTable(ctx){const [x0,x1,y]=OS_EX.table;ctx.drawImage(wc_kept("exTable",W,H,q=>{wc_contact(q,x0,x1,OS_EX.fy+4,1,0.3);wc_part(q,wc_rect(x0+20,y+24,x1-x0-40,OS_EX.fy-y-24),[150,106,70],1);
+    for(let i=0;i<8;i++)wc_flat(q,wc_rect(x0+60+i*(x1-x0-120)/8,y+50,(x1-x0-120)/8-20,OS_EX.fy-y-80),[166,120,82],1,"panel");wc_part(q,wc_rect(x0,y,x1-x0,26),[176,128,88],1);}),0,0);}
+// a wooden measure, a bushel of one size or another: staves and two iron hoops, kept once and drawn at any size
+function os_measureAt(ctx,x,y,w,h){const c=wc_kept("measure",200,170,q=>{q.translate(10,20);wc_wash(q,[[0,22],[180,22],[176,140],[4,140]],[198,150,98],{kind:"thing",lw:1.6,seed:9});
+    q.strokeStyle=rgba([140,98,62],0.5);q.lineWidth=2;for(let i=1;i<9;i++){q.beginPath();q.moveTo(i*20,24);q.lineTo(i*20-1,138);q.stroke();}
+    wc_wash(q,wc_ell(90,22,90,20,32),[120,84,54],{kind:"thing",lw:1.4,seed:4});for(const k of [46,118])wc_flat(q,wc_rect(2,k,176,8),[84,80,84],1,"hoop");});
+  ctx.drawImage(c,x-w/2-w*10/180,y-h*160/118,w*200/180,h*170/118);}
+
+/* ---------- the 1880s: a grocer's shop ---------- */
+// the counter's top, where the scale stands, and where the inspector stands in front of it
+const OS_SH={fy:880,counter:[330,1560,646],scale:990};
+function os_paintShop(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);const F=OS_SH.fy;
+  wc_wash(ctx,wc_rect(-40,-40,W+80,F+40),[228,214,184],{kind:"plaster",line:false,seed:12});
+  // shelves of goods behind the counter: jars, tins, packets
+  const sx0=360,sx1=1720;wc_part(ctx,wc_rect(sx0,120,sx1-sx0,470),[136,96,66],1);const R=wc_rng(14);
+  for(const sy of [240,360,480,590]){wc_part(ctx,wc_rect(sx0-10,sy,sx1-sx0+20,16),[160,116,80],1);let x=sx0+24;while(x<sx1-60){const k=Math.floor(R()*4),w=k===0?44:k===1?52:k===2?36:60,h=k===0?70:k===1?84:k===2?96:56;
+      const col=[[226,232,236],[176,64,52],[214,180,96],[92,126,150]][k];if(k===0){wc_wash(ctx,wc_rect(x,sy-h,w,h),col,{kind:"thing",lw:1.2,seed:x|0});wc_flat(ctx,wc_rect(x+4,sy-h-8,w-8,10),[150,110,70],1,"lid");}
+      else wc_part(ctx,wc_rect(x,sy-h,w,h),col,1,{lw:1.2});x+=w+8+R()*10;}}
+  // the shop's window, onto the market square in daylight: the town wall across it, a stall under its awning, the market cross
+  ctx.save();ctx.beginPath();ctx.rect(30,170,250,520);ctx.clip();wc_sky(ctx,560,9,{clouds:1,cx:40,cw:150,cy:220,ch:80});
+  const wt=452,wb=540,wl=[[0,wb],[0,wt+12]];for(let x=0;x<320;x+=34)wl.push([x,wt+12],[x,wt],[x+18,wt],[x+18,wt+12]);wl.push([320,wt+12],[320,wb]);wc_part(ctx,wl,OS_STONE,0.42);
+  wc_land(ctx,x=>wb+2*Math.sin(x/40),OS_EARTH,0.55,{line:false});
+  const qx=222;for(const [w,y] of [[92,622],[72,610],[54,598]])wc_part(ctx,wc_rect(qx-w/2,y,w,12),wc_lit(OS_STONE,0.06),0.55);
+  wc_part(ctx,wc_rect(qx-6,452,12,148),OS_STONE,0.55);wc_part(ctx,wc_rect(qx-18,470,36,9),OS_STONE,0.55);
+  for(const x of [40,128])wc_part(ctx,wc_rect(x-4,500,8,124),OS_TIMBER,0.6);wc_part(ctx,wc_rect(36,580,100,10),OS_TIMBER,0.6);
+  for(const [x,h] of [[62,34],[98,28]])wc_wash(ctx,wc_rect(x-14,580-h,28,h),[226,206,156],{depth:0.6,kind:"build",lw:1,seed:x});
+  ctx.save();ctx.translate(30,490);ctx.scale(0.42,0.42);os_awning(ctx,0,250,0,OS_REDSTRIPE,61);ctx.restore();ctx.restore();
+  for(const r of [wc_rect(18,158,274,14),wc_rect(18,158,14,544),wc_rect(278,158,14,544),wc_rect(150,170,10,520),wc_rect(30,420,250,10)])wc_wash(ctx,r,[118,84,58],{kind:"trim",lw:1.2});
+  wc_wash(ctx,wc_rect(-40,F,W+80,H-F+40),[196,164,124],{kind:"ground",line:false,seed:6});ctx.save();ctx.strokeStyle=rgba([140,108,74],0.4);ctx.lineWidth=2;for(let i=-14;i<=14;i++){ctx.beginPath();ctx.moveTo(960+i*70,F);ctx.lineTo(960+i*220,H+20);ctx.stroke();}ctx.restore();
+  wc_wash(ctx,wc_rect(-40,F-18,W+80,20),[150,116,84],{kind:"trim",line:false,flat:true});}
+// the counter, drawn after the grocer behind it
+function os_counter(ctx){const [x0,x1,y]=OS_SH.counter;ctx.drawImage(wc_kept("counter",W,H,q=>{wc_contact(q,x0-10,x1+10,OS_SH.fy+4,1,0.3);wc_part(q,wc_rect(x0+10,y+26,x1-x0-20,OS_SH.fy-y-26),[132,72,52],1);
+    for(let i=0;i<6;i++)wc_flat(q,wc_rect(x0+44+i*(x1-x0-60)/6,y+60,(x1-x0-60)/6-30,OS_SH.fy-y-100),[150,86,62],1,"panel");wc_part(q,wc_rect(x0-10,y,x1-x0+20,28),[164,98,70],1);}),0,0);}
+// the beam scale on the counter: its pillar, the beam tilting by tilt (radians), two brass pans hanging level; what's in each pan
+function os_scaleAt(ctx,x,y,tilt,left,right){const L=150;ctx.drawImage(wc_kept("scaleStand",140,260,q=>{wc_part(q,wc_rect(54,40,22,200),[160,120,62],1);wc_part(q,wc_rect(20,236,90,16),[120,90,60],1);
+    wc_wash(q,wc_ell(65,40,14,14,16),[200,160,80],{kind:"thing",lw:1.2});}),x-65,y-252);
+  const py=y-212,c=Math.cos(tilt),s=Math.sin(tilt),ends=[[x-L*c,py-L*s],[x+L*c,py+L*s]];ctx.save();ctx.strokeStyle=rgba([140,104,48],1);ctx.lineWidth=8;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(ends[0][0],ends[0][1]);ctx.lineTo(ends[1][0],ends[1][1]);ctx.stroke();ctx.restore();
+  ends.forEach(([ex,ey],i)=>{ctx.save();ctx.strokeStyle=rgba([110,92,70],0.8);ctx.lineWidth=2;for(const d of [-40,40]){ctx.beginPath();ctx.moveTo(ex,ey);ctx.lineTo(ex+d,ey+110);ctx.stroke();}ctx.restore();
+    ctx.drawImage(wc_kept("pan",120,40,q=>wc_wash(q,[[6,6],[114,6],[96,30],[24,30]],[214,170,84],{kind:"thing",lw:1.4})),ex-60,ey+104);const what=i?right:left;if(what)what(ctx,ex,ey+110);});
+  return ends;}
+// a brass weight, an iron one, and the crown stamped on it (c, 0 to 1)
+function os_brass(ctx,x,y,s){s=s||1;ctx.drawImage(wc_kept("brass",80,80,q=>{wc_wash(q,[[12,70],[68,70],[60,26],[20,26]],[226,180,90],{kind:"thing",lw:1.4});wc_wash(q,wc_ell(40,20,12,9,14),[226,180,90],{kind:"thing",lw:1.2});}),x-40*s,y-74*s,80*s,80*s);}
+function os_iron(ctx,x,y,crown,s){s=s||1;ctx.drawImage(wc_kept("iron|"+s,Math.ceil(90*s),Math.ceil(80*s),q=>{q.scale(s,s);wc_wash(q,[[10,72],[80,72],[72,30],[18,30]],[96,96,104],{kind:"thing",lw:1.4/s});wc_wash(q,wc_ell(45,24,16,10,14),[96,96,104],{kind:"thing",lw:1.2/s});}),x-45*s,y-76*s);
+  if(crown>0){const k=s*lerp(1.4,1,ease(clamp(crown,0,1)));ctx.save();ctx.translate(x,y-30*s);ctx.scale(k,k);ctx.globalAlpha*=clamp(crown*2,0,1);ctx.fillStyle=rgba([244,224,170],0.95);ctx.beginPath();
+    ctx.moveTo(-14,8);ctx.lineTo(-16,-8);ctx.lineTo(-8,-1);ctx.lineTo(0,-12);ctx.lineTo(8,-1);ctx.lineTo(16,-8);ctx.lineTo(14,8);ctx.closePath();ctx.fill();ctx.restore();}}
+// the inspector's case: a wooden box, open, its lid up, brass weights in their velvet holes; and the Act, a printed book, on the counter
+function os_case(ctx,x,y,open){ctx.drawImage(wc_kept("caseBox",340,140,q=>{q.translate(10,10);wc_part(q,wc_rect(0,40,320,80),[120,80,52],1);wc_wash(q,wc_rect(14,44,292,46),[110,40,52],{kind:"thing",line:false});
+    [[50,26],[110,22],[166,18],[214,15],[254,12],[286,10]].forEach(([cx,r])=>{wc_wash(q,wc_ell(cx,64,r,r*0.5,16),[80,26,34],{kind:"thing",line:false,flat:true});wc_wash(q,[[cx-r*0.8,70],[cx+r*0.8,70],[cx+r*0.6,70-r*1.1],[cx-r*0.6,70-r*1.1]],[226,180,90],{kind:"thing",lw:1});});}),x-170,y-130);
+  if(open<1){const k=1-open;ctx.save();ctx.translate(x,y-80);ctx.scale(1,k);ctx.drawImage(wc_kept("caseLid",340,120,q=>{q.translate(10,10);wc_part(q,wc_rect(0,0,320,90),[120,80,52],1);wc_flat(q,wc_rect(140,40,40,12),[200,160,80],1,"clasp");}),-170,-10);ctx.restore();}
+  else{ctx.drawImage(wc_kept("caseLidUp",340,100,q=>{q.translate(10,6);wc_part(q,[[0,80],[320,80],[300,0],[20,0]],[120,80,52],1);wc_wash(q,[[16,72],[304,72],[290,10],[30,10]],[110,40,52],{kind:"thing",line:false});}),x-170,y-168);}}
+function os_act(ctx,x,y,s){s=s||1;ctx.drawImage(wc_kept("act|"+s,Math.ceil(300*s),Math.ceil(120*s),q=>{q.scale(s,s);q.translate(10,10);wc_part(q,[[0,90],[280,90],[262,0],[18,0]],[90,60,50],1);wc_wash(q,[[14,82],[136,82],[126,8],[26,8]],WCP.parchment,{kind:"page",lw:1});wc_wash(q,[[144,82],[266,82],[254,8],[154,8]],WCP.parchment,{kind:"page",lw:1});
+    q.strokeStyle=rgba(WCP.parchInk,0.45);q.lineWidth=1.6;for(let i=0;i<5;i++){q.beginPath();q.moveTo(36,24+i*12);q.lineTo(118,24+i*12);q.moveTo(162,24+i*12);q.lineTo(244,24+i*12);q.stroke();}
+    q.fillStyle=rgba(WCP.parchInk,0.7);q.beginPath();q.arc(80,14,6,0,TAU);q.fill();}),x-150*s,y-110*s);}
+
+/* ---------- the 1880s, close: the inspector's mark on the counter ---------- */
+// three iron weights in a row on the counter, and the Act open at the back of it; the punch, the mallet and his hands are drawn every
+// frame
+const OS_ST={top:540,base:812,s:3.2,weights:[540,900,1260],act:[1500,604,1.25]};
+function os_paintStamp(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);
+  // behind: the shop's shelves, close and out of focus, in shadow
+  ctx.save();ctx.filter="blur(7px)";wc_wash(ctx,wc_rect(-40,-40,W+80,OS_ST.top+40),[118,84,60],{kind:"plaster",line:false,seed:81});const R=wc_rng(31);
+  for(const sy of [150,400]){let x=-30;while(x<W+20){const k=Math.floor(R()*4),w=[96,110,80,128][k],h=[150,176,196,116][k];
+      wc_part(ctx,wc_rect(x,sy-h,w,h),mix([[226,232,236],[176,64,52],[214,180,96],[92,126,150]][k],[118,84,60],0.35),1,{lw:1});x+=w+20+R()*28;}
+    wc_part(ctx,wc_rect(-40,sy,W+80,30),[150,108,74],1);}ctx.restore();
+  // the counter's top, its grain running away from us, and its back edge
+  wc_wash(ctx,wc_rect(-40,OS_ST.top,W+80,H-OS_ST.top+40),[186,118,84],{kind:"plaster",line:false,seed:82});
+  ctx.save();ctx.globalCompositeOperation="multiply";ctx.strokeStyle=rgba([150,90,60],0.2);ctx.lineWidth=2.4;
+  for(let i=-14;i<=14;i++){ctx.beginPath();ctx.moveTo(960+i*80,OS_ST.top);ctx.quadraticCurveTo(960+i*130,OS_ST.top+300,960+i*190,H+40);ctx.stroke();}ctx.restore();
+  wc_wash(ctx,wc_rect(-40,OS_ST.top-8,W+80,14),[206,140,100],{kind:"trim",line:false,flat:true});
+  const [ax,ay,as]=OS_ST.act;wc_contact(ctx,ax-200*as,ax+200*as,ay+2,1,0.3);os_act(ctx,ax,ay,as);
+  for(const x of OS_ST.weights){wc_contact(ctx,x-150,x+150,OS_ST.base+2,1,0.45);os_iron(ctx,x,OS_ST.base,0,OS_ST.s);}}
+// the inspector's hands at a weight standing at (x,y), s times its usual size: from below the frame, the left holds a steel punch to
+// the weight's face, where the mark goes; the right brings a mallet down on the punch's head as u goes from 0 (raised) to 1 (struck).
+// lift raises both while they move to the next weight.
+const OS_CUFF=[246,244,238],OS_SLEEVE=[48,52,66];
+function os_fist(ctx,x,y,a,seed){const P=PEOPLE.inspector,dk=rgba(wc_dim(P.skin,0.35),0.6);ctx.save();ctx.translate(x,y);ctx.rotate(a);
+  wc_wash(ctx,wc_smooth([[-56,-40],[-20,-58],[30,-56],[58,-30],[60,26],[40,54],[-20,58],[-58,30],[-56,-40]],5),P.skin,{kind:"limb",lw:1.4,seed});
+  // the knuckles, the fingers curled round, and the thumb across them
+  ctx.strokeStyle=dk;ctx.lineWidth=3;ctx.lineCap="round";for(let i=0;i<3;i++){ctx.beginPath();ctx.moveTo(18,-26+i*26);ctx.quadraticCurveTo(40,-20+i*26,52,-28+i*26);ctx.stroke();}
+  wc_wash(ctx,wc_smooth([[-44,-30],[-6,-44],[30,-40],[34,-28],[-4,-22],[-40,-12],[-44,-30]],4),wc_dim(P.skin,0.06),{kind:"limb",lw:1.2,seed:seed+2});ctx.restore();}
+// a forearm in its sleeve, coming up from below the frame to the wrist at (wx,wy), widening as it nears us; then the white cuff
+function os_forearm(ctx,wx,wy,bx,seed){const d=Math.atan2(H+80-wy,bx-wx),nx=-Math.sin(d),ny=Math.cos(d),w0=56,w1=110;
+  wc_wash(ctx,[[wx+nx*w0,wy+ny*w0],[bx+nx*w1,H+80],[bx-nx*w1,H+80],[wx-nx*w0,wy-ny*w0]],OS_SLEEVE,{kind:"coat",lw:1.4,seed});
+  const c=[Math.cos(d),Math.sin(d)];wc_wash(ctx,[[wx+nx*58,wy+ny*58],[wx+nx*60+c[0]*44,wy+ny*60+c[1]*44],[wx-nx*60+c[0]*44,wy-ny*60+c[1]*44],[wx-nx*58,wy-ny*58]],OS_CUFF,{kind:"coat",lw:1.2,seed:seed+1});}
+function os_markTools(ctx,x,y,s,u,lift){lift=lift||0;const tip=[x,y-30*s-lift],a=-0.42,L=250,dir=[Math.sin(a),-Math.cos(a)],top=[tip[0]+dir[0]*L,tip[1]+dir[1]*L],
+    grip=[tip[0]+dir[0]*L*0.5,tip[1]+dir[1]*L*0.5];
+  // the left forearm and the punch it holds
+  os_forearm(ctx,grip[0]-56,grip[1]+66,grip[0]-300,5);
+  ctx.save();ctx.translate(tip[0],tip[1]);ctx.rotate(a);wc_wash(ctx,[[-10,0],[10,0],[13,-L+30],[-13,-L+30]],[160,166,176],{kind:"thing",lw:1.4,seed:9});
+  wc_wash(ctx,wc_rect(-18,-L,36,32),[128,134,146],{kind:"thing",lw:1.4,seed:10});ctx.restore();os_fist(ctx,grip[0],grip[1],a,11);
+  // the mallet turns about the right hand, from raised to its head on the punch's head; the right forearm below it
+  const hand=[top[0]+250,top[1]+130],hl=260,h1=Math.atan2(top[1]-44-hand[1],top[0]-hand[0]),th=lerp(h1+1.15,h1,u);
+  ctx.save();ctx.translate(hand[0],hand[1]);ctx.rotate(th);wc_wash(ctx,[[0,-9],[hl-34,-8],[hl-34,8],[0,9]],[156,112,72],{kind:"thing",lw:1.2,seed:12});
+  wc_wash(ctx,wc_rrPts(hl-40,-50,84,100,14),[120,84,56],{kind:"thing",lw:1.4,seed:13});ctx.restore();
+  os_forearm(ctx,hand[0]+44,hand[1]+62,hand[0]+300,14);os_fist(ctx,hand[0],hand[1],th+Math.PI/2,16);return{tip,top};}
+
+/* ---------- today: Yusuf's first day, and what he inherits ---------- */
+// a cardboard box of his things, the first day, a plant and a mug in it; kept, about 280 x 250, the box's middle at (140,170)
+function os_boxC(){return wc_kept("box",280,250,q=>{
+  for(const [a,l,c] of [[-0.5,92,[96,150,84]],[-0.15,104,[120,168,96]],[0.25,96,[104,156,88]],[-0.85,70,[132,176,104]],[0.6,74,[96,150,84]]]){q.save();q.translate(92,112);q.rotate(a);
+    wc_wash(q,[[0,0],[-15,-l*0.45],[0,-l],[15,-l*0.45]],c,{kind:"thing",lw:1.1,seed:Math.round(l)});q.restore();}
+  wc_wash(q,wc_rect(168,70,52,52),[226,232,238],{kind:"thing",lw:1.3,seed:5});wc_wash(q,wc_ell(222,94,11,15,14),[226,232,238],{kind:"thing",lw:1.3,seed:6});
+  wc_wash(q,[[24,104],[256,104],[250,240],[30,240]],[204,168,118],{kind:"cover",lw:1.5,seed:7});
+  wc_flat(q,[[30,104],[250,104],[248,124],[32,124]],[176,140,94],1,"flap");wc_flat(q,wc_rect(124,124,32,114),[226,206,160],1,"tape");
+  wc_wash(q,wc_rrPts(110,150,60,16,8),[120,92,60],{kind:"thing",line:false,flat:true});});}
+// held in both hands, in the figure's units, the hands at its sides
+function os_heldBox(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.drawImage(os_boxC(),mx-140,my-130);fingers(cx,P_,[[mx-112,my+40],[mx+112,my+40]]);}
+
+// the shelf's 34 binders, standing on its two middle shelves, numbered 1 to 34 along each row from the left; missing() leaves one
+// out (binder 12 is in Yusuf's hands), out(i) slides one forward (0 to 1), glow(i) lights one: its label gold, a warm light round it
+const OS_BIND={w:24,h:146,gap:26.6,x:1393,cols:[[96,118,150],[150,90,80],[120,140,104],[186,160,110],[132,136,150],[110,96,130]]};
+const os_bindCol=i=>OS_BIND.cols[Math.floor(hash(i,17)*OS_BIND.cols.length)];
+function os_bindPos(i){const B=OS_BIND,row=i<17?0:1;return[B.x+(i%17)*B.gap,GV_OFF.shelf.rows[1+row]];}
+function os_binders(ctx,o){o=o||{};const B=OS_BIND;for(let i=0;i<34;i++){if(o.missing&&o.missing(i))continue;const [x,y]=os_bindPos(i),u=o.out?o.out(i):0,g=o.glow?o.glow(i):0,bw=B.w+u*6;
+  ctx.save();ctx.translate(0,-10*u);gv_binder(ctx,x-u*3,y-B.h,bw,B.h,os_bindCol(i));
+  if(g>0.01){ctx.fillStyle=rgba(GV.gold,0.95*g);ctx.fillRect(x-u*3+bw*0.18,y-B.h*0.9,bw*0.64,B.h*0.26);
+    ctx.globalCompositeOperation="screen";wc_glowAt(ctx,x+B.w/2,y-B.h*0.55,70,[255,206,110],0.5*g);}
+  ctx.restore();}}
+
+// the framed score on the office wall: the maturity assessment's result, 2.1 of 5, as a bar of five
+function os_score(ctx,a){const [x,y,w,h]=GV_OFF.score,cx=x+w/2;
+  wc_T(ctx,"maturity",cx,y+40,{w:600,size:24,align:"center",col:WC_MUTED,deco:1});wc_T(ctx,"2.1 / 5",cx,y+88,{w:800,size:42,align:"center",col:WC_DARK,deco:1});
+  for(let i=0;i<5;i++){const bx=x+24+i*26;ctx.fillStyle=rgba(WC_MUTED,0.25);ctx.fillRect(bx,y+104,22,12);const f=clamp(2.1-i,0,1);if(f>0){ctx.fillStyle=rgba(GV.gold,0.95);ctx.fillRect(bx,y+104,22*f,12);}}}
+
+// the chart of who's responsible for what, pinned to the board: four things, and for each, the one responsible, the one
+// accountable, who's consulted and who's informed; half the names are "TBC", written in by hand (tbc(k), 0 to 1, for the k-th)
+const OS_RACI={things:["census report","award term","government submission","data access"],cols:["responsible","accountable","consulted","informed"],
+  names:[["Clara",0,"Jun",0],["Mei",0,0,"Jun"],[0,0,"Clara","Mei"],["Sam",0,0,"Jun"]]};
+// the cells with no name, in the order they're filled in
+const OS_TBC=[];OS_RACI.names.forEach((r,i)=>r.forEach((n,j)=>{if(!n)OS_TBC.push([i,j]);}));
+const OS_CH={x:300,y:96,w:1320,h:700,c0:420,cw:205,head:212,row:116};
+function os_cellAt(i,j){const C=OS_CH;return[C.x+40+C.c0+j*C.cw+C.cw/2,C.y+C.head+56+i*C.row];}
+function os_chart(ctx,tbc,o){o=o||{};const C=OS_CH;gv_sheet(ctx,C.x,C.y,C.w,C.h);[[C.x+40,C.y+22],[C.x+C.w-40,C.y+22]].forEach(([px,py])=>gv_pin(ctx,px,py,GV.red,1.4));
+  wc_T(ctx,"Who's responsible for what",C.x+40,C.y+96,{w:800,size:44,col:WC_DARK});
+  const gx=C.x+40,gw=C.c0+4*C.cw;ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.55);ctx.lineWidth=2;
+  for(let i=0;i<=4;i++){const y=C.y+C.head+i*C.row;ctx.beginPath();ctx.moveTo(gx,y);ctx.lineTo(gx+gw,y);ctx.stroke();}
+  for(let j=0;j<4;j++){const x=gx+C.c0+j*C.cw;ctx.beginPath();ctx.moveTo(x,C.y+C.head-60);ctx.lineTo(x,C.y+C.head+4*C.row);ctx.stroke();}ctx.restore();
+  if(o.light!=null)gv_tint(ctx,gx,C.y+C.head+o.light*C.row,gw,C.row,GV.gold,o.lightA||0);
+  OS_RACI.cols.forEach((s,j)=>wc_T(ctx,s,gx+C.c0+j*C.cw+C.cw/2,C.y+C.head-20,{w:700,size:28,align:"center",col:WC_MUTED}));
+  OS_RACI.things.forEach((s,i)=>wc_T(ctx,s,gx+8,C.y+C.head+i*C.row+68,{w:700,size:30,col:WC_DARK}));
+  OS_RACI.names.forEach((r,i)=>r.forEach((n,j)=>{if(n){const [cx,cy]=os_cellAt(i,j);wc_T(ctx,n,cx,cy+12,{w:600,size:32,align:"center",col:WC_INK});}}));
+  OS_TBC.forEach(([i,j],k)=>{const p=tbc(k);if(p<=0||(o.hide&&o.hide[0]===i&&o.hide[1]===j))return;const [cx,cy]=os_cellAt(i,j);wc_hand(ctx,"TBC",cx-42,cy+14,{size:40,col:GV.redInk,p});});}
+// the same chart, small on the office's board: lines for the words, a red mark for each TBC once they're there
+function os_chartSmall(ctx,tbc){const [bx,by]=GV_OFF.board,x=bx+40,y=by+50,w=330,h=190;gv_sheet(ctx,x,y,w,h);gv_pin(ctx,x+16,y+10,GV.red,0.8);gv_pin(ctx,x+w-16,y+10,GV.red,0.8);
+  gv_lines(ctx,x+18,y+28,170,1,0);ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.45);ctx.lineWidth=1.5;for(let i=0;i<=4;i++){ctx.beginPath();ctx.moveTo(x+14,y+56+i*30);ctx.lineTo(x+w-14,y+56+i*30);ctx.stroke();}ctx.restore();
+  for(let i=0;i<4;i++){gv_lines(ctx,x+20,y+68+i*30,70,1,0,0.8);OS_RACI.names[i].forEach((n,j)=>{const cx=x+128+j*48;if(n)gv_lines(ctx,cx,y+68+i*30,32,1,0,0.8);else if(tbc>0){ctx.fillStyle=rgba(GV.redInk,0.8*tbc);ctx.fillRect(cx,y+64+i*30,30,9);}});}}
+
+// the council's minutes on the desk: this month's on top, the months before under it; the action that is carried forward each time
+const OS_MIN={x:620,y:248,w:680,h:840};
+function os_minutes(ctx,stamp){const M=OS_MIN;
+  [["July",-0.07,-46,-150],["August",-0.035,-22,-76]].forEach(([m,r,dx,dy],k)=>{gv_sheet(ctx,M.x+dx,M.y+dy,M.w,M.h,{rot:r});ctx.save();ctx.translate(M.x+dx+M.w/2,M.y+dy+M.h/2);ctx.rotate(r);
+    wc_T(ctx,"Minutes · "+m,-M.w/2+44,-M.h/2+52,{w:700,size:30,col:WC_INK});ctx.restore();});
+  gv_sheet(ctx,M.x,M.y,M.w,M.h,{rot:0.01});
+  wc_T(ctx,"Data council",M.x+44,M.y+70,{w:800,size:40,col:WC_DARK});wc_T(ctx,"Minutes · September",M.x+44,M.y+118,{w:600,size:30,col:WC_MUTED});
+  gv_lines(ctx,M.x+44,M.y+170,M.w-110,4,30);
+  wc_panel(ctx,M.x+30,M.y+302,M.w-60,104,{kind:"card",wash:GV.gold,washA:0.25,seed:5});wc_T(ctx,"Action: name the data owners",M.x+56,M.y+366,{w:800,size:34,col:WC_DARK});
+  gv_stamp(ctx,M.x+M.w/2,M.y+500,"CARRIED FORWARD",stamp,{size:40,rot:-0.07});gv_lines(ctx,M.x+44,M.y+590,M.w-110,3,30,0.8);}
+
+/* ---------- today: the two reports ---------- */
+const OS_NUM=[40,96,150];
+// a number that springs in, n from 0 to 1
+function os_numIn(ctx,s,x,y,size,n,col){if(n<=0)return;const k=0.7+0.3*spring(n);ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,clamp(n*2,0,1),()=>wc_T(ctx,s,0,0,{w:800,size,align:"center",col:col||OS_NUM}));ctx.restore();}
+// Planning's census report on its wall screen: this year's awards, by month, and the total, n
+function os_census(ctx,n){const [x,y,w,h]=GV_PL.screen;gv_screen(ctx,x,y,w,h,"Census report",q=>{wc_T(q,"awards conferred this year",x+34,y+100,{w:600,size:30,col:WC_MUTED});
+  for(let i=0;i<6;i++){const bh=50+150*hash(i,41);q.fillStyle=rgba(i===5?GV.gold:[150,186,222],1);q.fillRect(x+44+i*50,y+h-34-bh,36,bh);}
+  os_numIn(q,"4,812",x+w*0.74,y+h*0.7,104,n);},{titleSize:30,barH:46});}
+// the registrar's draft submission, held in both hands at her chest (in the figure's units), the total n
+const os_draft=n=>(cx,P_,hands)=>{const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my+46);cx.rotate(-0.04);
+  cx.fillStyle="rgba(60,50,40,0.22)";cx.fillRect(-94,-118,200,250);cx.fillStyle="#fffdf6";cx.fillRect(-100,-125,200,250);cx.fillStyle=rgba([84,120,170],1);cx.fillRect(-100,-125,200,92);
+  wc_T(cx,"Draft",0,-88,{w:800,size:34,align:"center",col:[255,255,255]});wc_T(cx,"submission",0,-48,{w:800,size:31,align:"center",col:[255,255,255]});
+  os_numIn(cx,"4,867",0,40,70,n);wc_T(cx,"awards",0,100,{w:700,size:34,align:"center",col:WC_MUTED});cx.restore();
+  fingers(cx,P_,[[mx-98,my+62],[mx+98,my+56]]);};
+
+/* ---------- today: who decides? ---------- */
+// the two reports' cards on the data team's board, close: what each is, when it ran, its number; a green tick once it's found right.
+// Monday's card, gold, goes between them.
+const OS_RC={census:[290,330,470,300],draft:[1160,330,470,300],monday:[830,372,260,226]};
+function os_reportCard(ctx,[x,y,w,h],name,ran,num,tick){wc_panel(ctx,x,y,w,h,{kind:"card",seed:x|0});gv_pin(ctx,x+w/2,y+14,GV.red,1.3);
+  wc_T(ctx,name,x+w/2,y+80,{w:800,size:38,align:"center",col:WC_DARK});wc_T(ctx,ran,x+w/2,y+130,{w:600,size:30,align:"center",col:WC_MUTED});
+  wc_T(ctx,num,x+w/2,y+238,{w:800,size:76,align:"center",col:OS_NUM});wc_tick(ctx,x+w-60,y+176,74,GV.green,tick,9);}
+function os_mondayCard(ctx){const [x,y,w,h]=OS_RC.monday;wc_panel(ctx,x,y,w,h,{kind:"card",wash:GV.gold,washA:0.35,seed:9});gv_pin(ctx,x+w/2,y+14,GV.red,1.3);
+  wc_T(ctx,"Monday",x+w/2,y+84,{w:800,size:40,align:"center",col:WC_DARK});wc_T(ctx,"award",x+w/2,y+140,{w:700,size:34,align:"center",col:GV.goldInk});
+  wc_T(ctx,"changed",x+w/2,y+188,{w:600,size:32,align:"center",col:WC_INK});}
+// the glossary's term on Jun's screen, close: what counts as an award; the row added on Monday lights (row), with a gold chip (chip)
+function os_glossary(ctx,row,chip){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,"Glossary",q=>{
+  wc_T(q,"award",x+56,y+146,{w:800,size:64,col:WC_DARK});wc_T(q,"what counts:",x+56,y+222,{w:600,size:34,col:WC_MUTED});
+  ["graduate certificates","masters and doctorates"].forEach((s,i)=>wc_T(q,"·  "+s,x+76,y+300+i*66,{w:600,size:38,col:WC_INK}));
+  if(row>0){gv_tint(q,x+40,y+392,w-80,72,GV.gold,0.75*row);withA(q,row,()=>wc_T(q,"·  microcredentials, 6 credit points or more",x+76,y+442,{w:700,size:38,col:WC_DARK}));}
+  if(chip>0){q.save();q.translate(x+w-250,y+130);const k=0.85+0.15*spring(chip);q.scale(k,k);withA(q,clamp(chip*2,0,1),()=>wc_badge(q,-110,0,"changed Monday",{size:32}));q.restore();}},
+  {titleSize:32,barH:54});}
+// on the registrar's desk: the government's reporting manual, standing, and the university's own term on a tent card
+const OS_RD={manual:[770,416,180,248],tent:[1100,548,240,116]};
+function os_manual(ctx){const [x,y,w,h]=OS_RD.manual;ctx.drawImage(wc_kept("manual",w+40,h+40,q=>{q.translate(20,20);wc_wash(q,wc_rect(0,0,w,h),[70,92,140],{kind:"cover",lw:1.6,seed:3});
+    wc_flat(q,wc_rect(0,h*0.55,w,18),[214,186,110],1,"band");wc_wash(q,wc_ell(w/2,h*0.78,22,22,24),[214,186,110],{kind:"thing",lw:1.2,seed:4});}),x-20,y-20);
+  wc_T(ctx,"Reporting",x+w/2,y+58,{w:800,size:28,align:"center",col:[255,255,255]});wc_T(ctx,"manual",x+w/2,y+92,{w:800,size:28,align:"center",col:[255,255,255]});
+  wc_T(ctx,"awards",x+w/2,y+124,{w:600,size:26,align:"center",col:[226,232,244]});}
+function os_tent(ctx){const [x,y,w,h]=OS_RD.tent;ctx.drawImage(wc_kept("tent",w+40,h+40,q=>{q.translate(20,20);wc_wash(q,[[10,0],[w-10,0],[w,h],[0,h]],WC_CARD,{kind:"paper",lw:1.4,seed:5});}),x-20,y-20);
+  wc_T(ctx,"award",x+w/2,y+52,{w:800,size:34,align:"center",col:WC_DARK});wc_T(ctx,"our term",x+w/2,y+92,{w:600,size:28,align:"center",col:WC_MUTED});}
+// a gold arc drawn from one thing to another (p, 0 to 1), with a head at its end
+function os_arc(ctx,x0,y0,x1,y1,lift,p){if(p<=0)return;const cx=(x0+x1)/2,cy=Math.min(y0,y1)-lift,n=40,m=Math.max(2,Math.round(n*clamp(p,0,1))),pt=u=>[(1-u)*(1-u)*x0+2*(1-u)*u*cx+u*u*x1,(1-u)*(1-u)*y0+2*(1-u)*u*cy+u*u*y1];
+  ctx.save();ctx.strokeStyle=rgba(GV.goldInk,0.85);ctx.lineWidth=6;ctx.lineCap="round";ctx.setLineDash([14,12]);ctx.beginPath();for(let i=0;i<=m;i++){const [a,b]=pt(i/n);i?ctx.lineTo(a,b):ctx.moveTo(a,b);}ctx.stroke();ctx.restore();
+  return pt(0.5);}
+
+/* ---------- today: what governance is for ---------- */
+// binder 12, open on the desk, from above: the cover open flat round the pages, the rings down the middle, the back of the page before
+// on the left, policy 12 on the right
+const OS_OPEN={x:230,y:110,w:1460,h:830,mid:960,pw:660,rings:[280,525,770]};
+function os_open12(ctx,o){const B=OS_OPEN,top=B.y+26,ph=B.h-52,L=B.mid-46-B.pw,R=B.mid+46;ctx.drawImage(wc_kept("open12",W,H,q=>{const col=os_bindCol(11);
+    q.save();q.filter="blur(16px)";q.fillStyle="rgba(70,50,30,0.32)";q.fillRect(B.x+16,B.y+24,B.w,B.h);q.restore();
+    wc_wash(q,wc_rrPts(B.x,B.y,B.w,B.h,18),col,{kind:"cover",lw:1.6,seed:12});wc_flat(q,wc_rect(B.mid-40,B.y+8,80,B.h-16),wc_dim(col,0.22),1,"spine");
+    // each side: the pages under the top one, their edges showing; the top page, and the holes the rings go through
+    for(const px of [L,R]){const s=px<B.mid?-1:1;for(let k=3;k>=1;k--)wc_flat(q,wc_rect(px+s*k*3,top+k*3,B.pw,ph),wc_dim(GV.paper,0.05*k),1,"pages");
+      wc_wash(q,wc_rect(px,top,B.pw,ph),GV.paper,{kind:"page",lw:1.3,seed:px|0});
+      for(const ry of B.rings)wc_wash(q,wc_ell(B.mid+s*80,ry,11,11,16),wc_dim(col,0.1),{kind:"thing",line:false,flat:true});}
+    // the back of the page before, its lines showing through faintly
+    gv_lines(q,L+70,top+110,B.pw-170,13,50,0.3);
+    // the rings' mechanism down the middle, and the three rings through the pages
+    wc_wash(q,wc_rrPts(B.mid-26,B.rings[0]-60,52,B.rings[2]-B.rings[0]+120,14),GV.metal,{kind:"thing",lw:1.4,seed:13});
+    for(const ry of B.rings){q.save();q.strokeStyle=rgba(wc_dim(GV.metal,0.28),1);q.lineWidth=10;q.beginPath();q.ellipse(B.mid,ry,80,17,0,0,TAU);q.stroke();
+      q.strokeStyle="rgba(255,255,255,0.65)";q.lineWidth=3;q.beginPath();q.ellipse(B.mid,ry-3,76,13,0,Math.PI*1.15,Math.PI*1.85);q.stroke();q.restore();}}),0,0);
+  // policy 12, on the right-hand page; o.text fades it while the cover still lies over it
+  const x=R+64;withA(ctx,o&&o.text!=null?o.text:1,()=>{wc_T(ctx,"Data policies",x,top+80,{w:600,size:28,col:WC_MUTED,deco:1});wc_T(ctx,"Policy 12",x,top+184,{w:800,size:66,col:WC_DARK});
+  wc_T(ctx,"Data definitions",x,top+244,{w:600,size:36,col:WC_MUTED});
+  ["Business terms are","defined consistently","across the organisation."].forEach((s,i)=>wc_T(ctx,s,x,top+350+i*58,{w:600,size:42,col:WC_INK}));
+  gv_lines(ctx,x,top+560,B.pw-150,4,40);});}
+// a sticky note, pale red, pressed on at an angle as land goes from 0 to 1; then its words written in red pencil as write does
+const OS_STICK=[250,214,208];
+function os_sticky(ctx,cx,cy,w,h,rot,lines,size,land,write){if(land<=0)return;const k=lerp(1.2,1,easeCam(clamp(land,0,1)));
+  ctx.save();ctx.translate(cx,cy);ctx.rotate(rot);ctx.scale(k,k);withA(ctx,clamp(land*2.5,0,1),()=>{
+    ctx.drawImage(wc_kept("sticky|"+w+"x"+h,w+60,h+60,q=>{q.translate(30,30);q.save();q.filter="blur(8px)";q.fillStyle="rgba(70,50,30,0.26)";q.fillRect(8,14,w,h);q.restore();
+      wc_wash(q,wc_rect(0,0,w,h),OS_STICK,{kind:"page",lw:1.2,seed:w});wc_flat(q,wc_rect(0,0,w,h*0.15),wc_dim(OS_STICK,0.07),1,"glue");}),-w/2-30,-h/2-30);
+    // the words in the middle of the space under the glue strip, written one letter after another, line by line
+    const n=lines.join("").length,y0=-h/2+h*0.15+(h*0.85-lines.length*size*1.2)/2+size*0.92;let before=0;
+    lines.forEach((s,i)=>{const p=clamp((write*n-before)/s.length,0,1);before+=s.length;wc_hand(ctx,s,-w/2+40,y0+i*size*1.2,{size,w:700,col:GV.redInk,p});});});
   ctx.restore();}
+/* ---------- today: governance at the centre ---------- */
+// binder 12 closed on the desk, from above: its cover and label, the pages' edge, Yusuf's two notes sticking out as flags
+function os_closed12(ctx){ctx.drawImage(wc_kept("closed12",W,H,q=>{const col=os_bindCol(11),x=300,y=170,w=560,h=740;
+    q.save();q.filter="blur(14px)";q.fillStyle="rgba(70,50,30,0.3)";q.fillRect(x+14,y+20,w,h);q.restore();
+    for(const [fy,r] of [[330,-0.06],[520,0.05]]){q.save();q.translate(x+w+20,fy);q.rotate(r);wc_wash(q,wc_rect(-70,-28,110,56),OS_STICK,{kind:"page",lw:1.1,seed:fy});q.restore();}
+    wc_flat(q,wc_rect(x+16,y+h-6,w-20,16),wc_dim(GV.paper,0.08),1,"pages");wc_flat(q,wc_rect(x+w-6,y+16,16,h-20),wc_dim(GV.paper,0.08),1,"pages");
+    wc_wash(q,wc_rrPts(x,y,w,h,16),col,{kind:"cover",lw:1.6,seed:21});wc_flat(q,wc_rect(x,y+8,54,h-16),wc_dim(col,0.2),1,"spine");
+    wc_wash(q,wc_rect(x+150,y+170,300,190),WC_CARD,{kind:"page",lw:1.3,seed:22});}),0,0);
+  wc_T(ctx,"12",600,435,{w:800,size:84,align:"center",col:WC_DARK});wc_T(ctx,"Data definitions",600,500,{w:600,size:30,align:"center",col:WC_MUTED});}
+// DAMA's book, closed, from above: a plain cloth cover, its title, the pages' edge; kept, drawn round its middle at (x,y)
+function os_dmbok(ctx,x,y){const w=620,h=820;ctx.drawImage(wc_kept("dmbok",w+80,h+80,q=>{q.translate(40,40);q.save();q.filter="blur(14px)";q.fillStyle="rgba(70,50,30,0.32)";q.fillRect(14,20,w,h);q.restore();
+    wc_flat(q,wc_rect(16,h-8,w-20,20),wc_dim(GV.paper,0.08),1,"pages");wc_flat(q,wc_rect(w-8,16,20,h-20),wc_dim(GV.paper,0.08),1,"pages");
+    wc_wash(q,wc_rrPts(0,0,w,h,10),[44,92,108],{kind:"cover",lw:1.6,seed:23});wc_flat(q,wc_rect(0,6,40,h-12),[34,74,88],1,"spine");
+    for(const ry of [196,540])wc_flat(q,wc_rect(90,ry,w-150,5),[226,214,180],0.9,"rule");}),x-w/2-40,y-h/2-40);
+  const cx=x+16;wc_T(ctx,"DAMA-DMBOK",cx,y-120,{w:800,size:58,align:"center",col:[246,238,214]});
+  wc_T(ctx,"Data Management",cx,y+10,{w:600,size:38,align:"center",col:[226,232,226]});wc_T(ctx,"Body of Knowledge",cx,y+62,{w:600,size:38,align:"center",col:[226,232,226]});}
+// a page of the book, close: the paper filling the frame, the fold into the spine on the left, the next pages' edges on the right
+function os_paintPage(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),[250,247,238],{kind:"paper",line:false,seed:91});
+  const g=ctx.createLinearGradient(0,0,170,0);g.addColorStop(0,"rgba(90,70,50,0.34)");g.addColorStop(0.45,"rgba(90,70,50,0.1)");g.addColorStop(1,"rgba(90,70,50,0)");ctx.fillStyle=g;ctx.fillRect(0,0,170,H);
+  ctx.save();ctx.strokeStyle="rgba(150,136,112,0.35)";ctx.lineWidth=1.5;for(let i=0;i<6;i++){ctx.beginPath();ctx.moveTo(W-14+i*2.6,0);ctx.lineTo(W-14+i*2.6,H);ctx.stroke();}ctx.restore();}
+// the wheel the book draws: ten areas of data management round data governance, the centre, where they meet; each area's name outside it
+const OS_WH={x:960,y:448,r0:122,r1:290,rl:342},OS_WHC=[[188,202,230],[204,196,230]];
+const OS_AREAS=[["data","architecture"],["data modelling","& design"],["data storage","& operations"],["data security"],["data integration","& interoperability"],["documents","& content"],
+  ["reference","& master data"],["data warehousing","& BI"],["metadata"],["data quality"]];
+const os_whAng=k=>-Math.PI/2+k*TAU/10;
+// an area's shape, a ring's slice, about the wheel's middle at (cx,cy)
+function os_wedgePts(k,cx,cy){const R=OS_WH,a0=os_whAng(k)-TAU/20+0.014,a1=os_whAng(k)+TAU/20-0.014,p=[];
+  for(let i=0;i<=12;i++){const a=lerp(a0,a1,i/12);p.push([cx+Math.cos(a)*R.r1,cy+Math.sin(a)*R.r1]);}for(let i=12;i>=0;i--){const a=lerp(a0,a1,i/12);p.push([cx+Math.cos(a)*(R.r0+8),cy+Math.sin(a)*(R.r0+8)]);}return p;}
+function os_wedgeC(k){const s=OS_WH.r1+30;return wc_kept("wedge"+k,2*s,2*s,q=>wc_wash(q,os_wedgePts(k,s,s),OS_WHC[k%2],{kind:"thing",lw:1.4,seed:30+k}));}
+// o: area(k) brings each area in (0 to 1); centre lights data governance; joins draws the gold where the areas meet it; ring goes round
+// the whole wheel; dim pales every area but hi; outline draws round area hi (a number) or the centre ("centre"); labels and fade take
+// the names and the areas away again
+function os_wheel(ctx,o){const R=OS_WH,s=R.r1+30,lab=o.labels==null?1:o.labels,fd=o.fade==null?1:o.fade;
+  OS_AREAS.forEach((lines,k)=>{const u=o.area(k);if(u<=0)return;const sp=0.6+0.4*spring(u),a=clamp(u*2.5,0,1)*(1-(o.dim||0)*(k===o.hi?0:0.55))*fd;
+    ctx.save();ctx.translate(R.x,R.y);ctx.scale(sp,sp);withA(ctx,a,()=>ctx.drawImage(os_wedgeC(k),-s,-s));ctx.restore();
+    const an=os_whAng(k),c=Math.cos(an),sn=Math.sin(an),ax=R.x+c*R.rl,ay=R.y+sn*R.rl,al=Math.abs(c)<0.3?"center":c>0?"left":"right",n=lines.length,
+      y0=al!=="center"?ay-(n-1)*18+10:sn<0?ay-(n-1)*38-6:ay+32;
+    if(lab>0.01)withA(ctx,clamp(u*2,0,1)*lab,()=>lines.forEach((l,i)=>wc_T(ctx,l,ax,y0+i*38,{w:i?600:700,size:30,align:al,col:WC_INK})));});
+  if(o.joins>0&&fd>0.01){const e=easeCam(clamp(o.joins,0,1)),r=lerp(R.r1,R.r0,e);ctx.save();ctx.strokeStyle=rgba(GV.goldInk,0.85*fd);ctx.lineWidth=6;ctx.lineCap="round";
+    for(let k=0;k<10;k++){const b=os_whAng(k)-TAU/20;ctx.beginPath();ctx.moveTo(R.x+Math.cos(b)*R.r1,R.y+Math.sin(b)*R.r1);ctx.lineTo(R.x+Math.cos(b)*r,R.y+Math.sin(b)*r);ctx.stroke();}ctx.restore();}
+  if(o.centre>0){const k=0.7+0.3*spring(o.centre);ctx.save();ctx.translate(R.x,R.y);ctx.scale(k,k);withA(ctx,clamp(o.centre*2,0,1),()=>{wc_glowAt(ctx,0,0,R.r0*1.6,[255,226,140],0.45);
+    ctx.drawImage(wc_kept("whCentre",2*R.r0+40,2*R.r0+40,q=>wc_wash(q,wc_ell(R.r0+20,R.r0+20,R.r0-2,R.r0-2,40),wc_lit(GV.gold,0.2),{kind:"thing",lw:1.6,seed:44})),-R.r0-20,-R.r0-20);
+    wc_T(ctx,"data",0,-6,{w:800,size:34,align:"center",col:GV.goldInk});wc_T(ctx,"governance",0,36,{w:800,size:34,align:"center",col:GV.goldInk});});ctx.restore();}
+  if(o.ring>0){ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.9);ctx.lineWidth=4;ctx.setLineDash([16,12]);ctx.lineCap="round";ctx.beginPath();
+    ctx.arc(R.x,R.y,R.r1+16,-Math.PI/2,-Math.PI/2+TAU*easeCam(clamp(o.ring,0,1)));ctx.stroke();ctx.restore();}
+  if(o.outline>0){ctx.save();ctx.globalAlpha*=clamp(o.outline,0,1);ctx.strokeStyle=rgba(WC_DARK,0.85);ctx.lineWidth=5;ctx.lineJoin="round";ctx.beginPath();
+    if(o.hi==="centre")ctx.arc(R.x,R.y,R.r0+4,0,TAU);else os_wedgePts(o.hi,R.x,R.y).forEach(([px,py],i)=>i?ctx.lineTo(px,py):ctx.moveTo(px,py));ctx.closePath();ctx.stroke();ctx.restore();}}
 
-// ---- small things of the green ----
-function tLamp(ctx,C,x,z,on){drawBox(ctx,C,x-0.04,0,z-0.04,0.08,1.9,0.08,[70,80,100],{edge:0.3});const P_=pj(C,v3(x,2.0,z));if(P_.z<NEAR)return;const r=0.14*P_.s;
-  if(on){const g=ctx.createRadialGradient(P_.x,P_.y,1,P_.x,P_.y,r*5);g.addColorStop(0,"rgba(255,236,180,"+0.45*on+")");g.addColorStop(1,"rgba(255,236,180,0)");ctx.fillStyle=g;ctx.fillRect(P_.x-r*5,P_.y-r*5,r*10,r*10);}
-  const g=ctx.createRadialGradient(P_.x-r*0.3,P_.y-r*0.3,1,P_.x,P_.y,r);g.addColorStop(0,"#fffbe8");g.addColorStop(1,"#f0d890");ctx.fillStyle=g;ctx.beginPath();ctx.arc(P_.x,P_.y,r,0,TAU);ctx.fill();}
-function tBench(ctx,C,x,z,a){const M=MX;mxSet(x,z,a+180);drawBox(ctx,C,-0.6,0.36,-0.2,1.2,0.06,0.4,PAL.wood,{edge:0.4});drawBox(ctx,C,-0.6,0.5,0.14,1.2,0.34,0.06,PAL.wood,{edge:0.4});
-  for(const k of [-0.5,0.46])drawBox(ctx,C,k,0,-0.18,0.06,0.36,0.36,[90,96,110],{edge:0.3});MX=M;}
-// a signpost on a path: a post, and a board the scene writes on (drawn with the words, after the blur)
-function tPost(ctx,C,x,z,h){drawBox(ctx,C,x-0.05,0,z-0.05,0.1,h,0.1,[150,104,66],{edge:0.3});}
+// a decision, on a small gold card: a pin, typed lines; and a green tick once someone has checked it's kept (tick, 0 to 1)
+function os_decision(ctx,x,y,k,tick){ctx.save();ctx.translate(x,y);ctx.scale(k,k);wc_panel(ctx,-76,-56,152,112,{kind:"card",wash:GV.gold,washA:0.5,seed:7});
+  gv_lines(ctx,-50,-14,100,3,22,0.9);gv_pin(ctx,0,-42,GV.red,0.9);ctx.restore();if(tick>0)wc_tick(ctx,x+58,y+30,62,GV.green,tick,9);}
 
-// ---- the rooms: what's in each office (in the building's own coordinates) ----
-// add(x,y,z,fn) puts a thing in the room's painter's order; lod 1 leaves out the small things, when the room is far
-const FURNISH={
-  office(ctx,C,b,R,Q,add,st,lod){const FY=R.FY,bz=Q.bz,o=st.office||{};
-    poly3(ctx,C,[v3(0.95,FY+0.004,bz-0.05),v3(2.15,FY+0.004,bz-0.05),v3(1.75,FY+0.004,bz-1.6),v3(0.55,FY+0.004,bz-1.6)],[255,240,196],{a:0.28});
-    // the framed assessment, the clock
-    wq3(ctx,C,-0.32,1.5,0.62,2.4,bz-0.03,ilit([196,150,96],1),{edge:0.5});wq3(ctx,C,-0.25,1.57,0.55,2.33,bz-0.035,[255,251,240]);
-    surfDraw(ctx,C,v3(0.15,2.33,bz-0.04),v3(1,0,0),v3(0,1,0),c=>{Tw(c,"maturity",0,22,{w:700,size:12,align:"center",color:rgba([100,104,124],1)});Tw(c,"2.1 / 5",0,52,{w:800,size:20,align:"center",color:rgba([196,78,62],1)});});
-    if(o.maturity>0)glowQuad(ctx,C,[v3(-0.36,1.46,bz-0.05),v3(0.66,1.46,bz-0.05),v3(0.66,2.44,bz-0.05),v3(-0.36,2.44,bz-0.05)],o.maturity);
-    if(!lod)tClock(ctx,C,1.55,2.66,bz-0.03,0.16,9,10);
-    // the pinboard on the left wall: the chart of who's responsible for what, with names still to be confirmed
-    officePinboard(ctx,C,Q.xl+0.012,o,lod);
-    tRug(ctx,C,-1.62,0.66,0.82,2.64,FY,PAL.rug);
-    const SX=Q.xl+0.08,SZ=bz-0.42;
-    add(SX+0.9,1,SZ+0.2,ctx=>{const n=tShelf(ctx,C,SX,SZ,1.85,2.22,0.42,{FY,skip:o.shelfSkip||((r,j)=>r===2&&j===4),out:o.shelfOut});
-      if(o.shelfSign>0){const P_=pj(C,v3(SX+0.92,FY+2.26,SZ));lbAdd(c=>signBoard(c,P_.x,P_.y-4,"34 data policies",{size:32,bg:[255,226,150],rim:[200,150,60],ink:[74,52,20],a:o.shelfSign}));}});
-    if(!lod)add(2.05,1,bz-0.3,ctx=>tPlant(ctx,C,2.02,FY,bz-0.3,1.25));
-    add(1.45,1,2.95,ctx=>tChair(ctx,C,1.2,2.75,FY));
-    add(1.45,1,2.1,ctx=>{const top=tDesk(ctx,C,0.55,1.75,1.8,0.78,FY);
-      // the council's minutes in a red folder, a laptop, a lamp (o.bare clears the desk for the film's own things)
-      if(!o.bare){ibox(ctx,C,0.7,top,1.85,0.48,0.08,0.36,[250,246,236],{edge:0.5});ibox(ctx,C,0.69,top+0.08,1.84,0.5,0.025,0.38,[214,84,72],{edge:0.4});
-        ibox(ctx,C,1.38,top,1.9,0.52,0.025,0.36,[176,184,200],{edge:0.5});poly3(ctx,C,[v3(1.4,top+0.025,2.25),v3(1.88,top+0.025,2.25),v3(1.88,top+0.34,2.34),v3(1.4,top+0.34,2.34)],[70,80,104],{edge:0.5});}
-      if(!lod)tDeskLamp(ctx,C,2.15,top,2.3,0.62,1);
-      if(st.hooks&&st.hooks.officeDesk)st.hooks.officeDesk(ctx,C,top);});},
-  platform(ctx,C,b,R,Q,add,st,lod){const FY=R.FY,bz=Q.bz;
-    // a big screen of a table's columns, two racks with their lights, a desk
-    wq3(ctx,C,-1.9,1.25,0.3,2.5,bz-0.03,[56,62,78],{edge:0.5});wq3(ctx,C,-1.84,1.31,0.24,2.44,bz-0.035,[230,240,250]);
-    surfDraw(ctx,C,v3(-1.84,2.44,bz-0.04),v3(1,0,0),v3(0,1,0),c=>{Tw(c,"students",8,12,{w:800,size:9,color:rgba(PAL.ink,1)});
-      ["student_id","name","date_of_birth","award_code","email"].forEach((s,i)=>{c.fillStyle=i%2?"rgba(214,226,242,1)":"rgba(240,246,252,1)";c.fillRect(6,18+i*19,196,18);Tw(c,s,12,31+i*19,{w:600,size:9,f:"mono",color:rgba([60,70,100],1)});});});
-    for(const x of [1.0,1.62])add(x+0.28,1,bz-0.5,ctx=>{ibox(ctx,C,x,FY,bz-0.75,0.56,1.95,0.6,[70,78,98],{edge:0.4});
-      if(!lod)for(let i=0;i<9;i++){const yy=FY+0.2+i*0.19;wq3(ctx,C,x+0.06,yy,x+0.5,yy+0.13,bz-0.755,[90,100,124],{edge:0.25});
-        const p=pj(C,v3(x+0.44,yy+0.065,bz-0.76)),on=0.5+0.5*Math.sin((st.t||0)*3+i*1.7+x*5);if(p.z>NEAR){ctx.fillStyle=rgba(i%3?[120,230,160]:[120,200,255],0.5+0.5*on);ctx.beginPath();ctx.arc(p.x,p.y,Math.max(1.2,0.025*p.s),0,TAU);ctx.fill();}}});
-    add(-1.0,1,1.9,ctx=>{const top=tDesk(ctx,C,-1.9,1.55,1.7,0.72,FY,[200,206,220]);ibox(ctx,C,-1.5,top,1.65,0.5,0.025,0.34,[176,184,200],{edge:0.5});poly3(ctx,C,[v3(-1.48,top+0.025,1.98),v3(-1.02,top+0.025,1.98),v3(-1.02,top+0.32,2.07),v3(-1.48,top+0.32,2.07)],[60,70,96],{edge:0.5});
-      if(st.hooks&&st.hooks.platformDesk)st.hooks.platformDesk(ctx,C,top);});
-    if(!lod)add(-2.15,1,bz-0.3,ctx=>tPlant(ctx,C,-2.15,FY,bz-0.3,1.1));},
-  registrar(ctx,C,b,R,Q,add,st,lod){const FY=R.FY,bz=Q.bz;
-    // framed certificates on the wall: the awards the office confers
-    for(let i=0;i<3;i++){const x=-0.35+i*0.78;wq3(ctx,C,x,1.62,x+0.56,2.3,bz-0.03,ilit([196,160,96],1),{edge:0.5});wq3(ctx,C,x+0.06,1.68,x+0.5,2.24,bz-0.035,[255,252,240]);
-      if(!lod){const p=pj(C,v3(x+0.28,1.82,bz-0.04));if(p.z>NEAR){ctx.fillStyle="#c8463a";ctx.beginPath();ctx.arc(p.x,p.y,0.05*p.s,0,TAU);ctx.fill();}
-        for(let k=0;k<3;k++)wq3(ctx,C,x+0.12,2.12-k*0.08,x+0.44-(k===2?0.1:0),2.135-k*0.08,bz-0.04,[150,140,130],{a:0.7});}}
-    // filing cabinets, and the counter across the room
-    for(const x of [1.45,1.95])add(x+0.22,0.6,bz-0.35,ctx=>{ibox(ctx,C,x,FY,bz-0.62,0.46,1.3,0.58,[176,186,200],{edge:0.4});for(let i=0;i<3;i++){wq3(ctx,C,x+0.05,FY+0.1+i*0.4,x+0.41,FY+0.44+i*0.4,bz-0.625,ilit([196,204,216],1),{edge:0.3});}});
-    add(0,0.6,1.5,ctx=>{ibox(ctx,C,-1.75,FY,1.3,3.1,0.95,0.42,[226,206,180],{edge:0.45});for(let i=0;i<4;i++)wq3(ctx,C,-1.68+i*0.76,FY+0.1,-1.02+i*0.76,FY+0.84,1.295,ilit([236,220,198],1),{edge:0.35});
-      ibox(ctx,C,-1.82,FY+0.95,1.25,3.24,0.06,0.52,[204,150,104],{edge:0.6});const top=FY+1.01;
-      // the draft submission, in a neat stack
-      ibox(ctx,C,-0.95,top,1.32,0.42,0.1,0.3,[250,248,240],{edge:0.5});ibox(ctx,C,-0.96,top+0.1,1.31,0.44,0.02,0.32,[100,150,200],{edge:0.4});
-      if(st.hooks&&st.hooks.registrarCounter)st.hooks.registrarCounter(ctx,C,top);});
-    if(!lod)add(-2.15,1,bz-0.3,ctx=>tPlant(ctx,C,-2.15,FY,bz-0.3,1.15));},
-  data(ctx,C,b,R,Q,add,st,lod){const FY=R.FY,bz=Q.bz;
-    // the team's poster of its loop of ten steps and a cork board for reports share the back wall; a desk with a big screen
-    // stands well forward, so a camera close in looks over it at both
-    loopPoster(ctx,C,-2.45,0.98,-0.2,2.72,bz-0.03,st,lod);
-    wq3(ctx,C,0.01,1.18,2.49,2.72,bz-0.03,ilit(PAL.walnut,1),{edge:0.4});wq3(ctx,C,0.05,1.22,2.45,2.68,bz-0.034,ilit([222,176,124],1));
-    if(st.hooks&&st.hooks.dataBoard)st.hooks.dataBoard(ctx,C,bz-0.04);
-    add(0.85,1,1.4,ctx=>{const top=tDesk(ctx,C,-0.2,1.05,2.1,0.75,FY,[214,170,118]);
-      tMonitor(ctx,C,0.4,top,1.25,1.02,0.62,st.hooks&&st.hooks.dataScreen?(c=>st.hooks.dataScreen(c,top)):(c=>{for(let i=0;i<6;i++){c.fillStyle=rgba(i%2?[120,170,220]:[160,200,140],0.8);c.fillRect(8,10+i*9,30+40*hash(i,5),4);}}),{bg:[246,250,252]});
-      ibox(ctx,C,0.0,top,1.15,0.34,0.02,0.24,[190,196,210],{edge:0.4});});
-    add(0.85,1,2.05,ctx=>tChair(ctx,C,0.66,1.95,FY,[96,160,140]));
-    if(!lod)add(-2.3,1,0.6,ctx=>tPlant(ctx,C,-2.3,FY,0.6,1.2));},
-  planning(ctx,C,b,R,Q,add,st,lod){const FY=R.FY,bz=Q.bz;
-    // a dashboard on the wall: bars and a line, and the number of awards
-    wq3(ctx,C,-2.05,1.15,0.6,2.6,bz-0.03,[56,62,78],{edge:0.5});wq3(ctx,C,-1.99,1.21,0.54,2.54,bz-0.035,[244,248,252]);
-    surfDraw(ctx,C,v3(-1.99,2.54,bz-0.04),v3(1,0,0),v3(0,1,0),c=>{for(let i=0;i<7;i++){const h=24+40*hash(i,41);c.fillStyle=rgba(i===6?PAL.gold:[140,180,220],1);c.fillRect(14+i*20,124-h,13,h);}
-      c.strokeStyle=rgba(PAL.coral,1);c.lineWidth=2.4;c.beginPath();for(let i=0;i<8;i++){const x=160+i*12,y=96-26*hash(i,43)-i*3;i?c.lineTo(x,y):c.moveTo(x,y);}c.stroke();
-      if(st.hooks&&st.hooks.planningScreen)st.hooks.planningScreen(c);});
-    add(0.9,1,1.9,ctx=>{const top=tDesk(ctx,C,0.1,1.55,1.9,0.74,FY,[220,186,130]);ibox(ctx,C,0.4,top,1.7,0.5,0.025,0.34,[176,184,200],{edge:0.5});poly3(ctx,C,[v3(0.42,top+0.025,2.03),v3(0.88,top+0.025,2.03),v3(0.88,top+0.32,2.12),v3(0.42,top+0.32,2.12)],[60,70,96],{edge:0.5});
-      for(let i=0;i<3;i++)ibox(ctx,C,1.2,top+i*0.03,1.7,0.36,0.03,0.26,[250,248,240],{edge:0.4});});
-    add(1.0,1,2.6,ctx=>tChair(ctx,C,0.8,2.45,FY,[200,150,80]));
-    if(!lod)add(2.2,1,bz-0.3,ctx=>tPlant(ctx,C,2.2,FY,bz-0.3,1.2));}};
-// text in the world: decoration when it's drawn too small to read, words to read when it's big enough. The line is the one
-// tools/legible.py draws: 28 px, less the 5% it allows for things still settling
-function Tw(ctx,s,x,y,o){o=o||{};const m=ctx.getTransform(),k=Math.sqrt(Math.abs(m.a*m.d-m.b*m.c))/(ctx.canvas.width/W);T(ctx,s,x,y,Object.assign({},o,{deco:o.deco||(o.size||24)*k<26.6?1:0}));}
-// a soft gold light on a quad, for what's being named
-function glowQuad(ctx,C,pts,a){if(a<=0.01)return;ctx.save();ctx.globalCompositeOperation="lighter";poly3(ctx,C,pts,[255,214,120],{a:0.22*a});ctx.restore();
-  const Q=pts.map(p=>pj(C,p));if(Q.some(q=>q.z<NEAR))return;ctx.save();ctx.strokeStyle=rgba(PAL.gold,0.9*a);ctx.lineWidth=4;ctx.lineJoin="round";ctx.shadowColor=rgba(PAL.gold,0.8*a);ctx.shadowBlur=16;ctx.beginPath();Q.forEach((q,i)=>i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y));ctx.closePath();ctx.stroke();ctx.restore();}
-// the office's pinboard, on the left wall (facing east, into the room): the chart, notes, and later the answers Yusuf pins up
-const RACI={rows:["census report","award term","government submission","data access"],
-  cells:[["Clara","TBC","Jun","TBC"],["Mei","TBC","TBC","Jun"],["Mei","TBC","TBC","Clara"],["Sam","TBC","Jun","TBC"]]};
-function officePinboard(ctx,C,x,o,lod){const z0=0.5,z1=2.2,y0=1.28,y1=2.34,k=ILIT.L,n=v3(1,0,0);
-  sq3(ctx,C,x,z0-0.04,y0-0.04,z1+0.04,y1+0.04,ilit(PAL.walnut,k),{edge:0.4});sq3(ctx,C,x+0.004,z0,y0,z1,y1,ilit([222,176,124],k),{grad:[0.04,0.06]});
-  // notes round the chart
-  for(const [za,ya,dz,dy,c] of [[1.62,1.95,0.3,0.3,[255,226,140]],[1.95,1.62,0.2,0.36,[196,226,240]],[1.66,1.38,0.26,0.24,[250,200,190]]]){sq3(ctx,C,x+0.008,za,ya,za+dz,ya+dy,ilit(c,k),{edge:0.3});const p=pj(C,v3(x+0.012,ya+dy*0.85,za+dz/2));if(p.z>NEAR){ctx.fillStyle="#d8574a";ctx.beginPath();ctx.arc(p.x,p.y,Math.max(1.5,0.02*p.s),0,TAU);ctx.fill();}}
-  // the chart: who's responsible, accountable, consulted and informed, for four things; half its names to be confirmed.
-  // o.tbc (0..1) writes the TBCs in, one by one; o.raciHi lights the government submission's row; o.stamp (0..1) stamps its A
-  sq3(ctx,C,x+0.008,0.56,1.32,1.58,2.28,ilit([255,253,246],k),{edge:0.4});
-  {const O=v3(x+0.012,2.28,0.56),UX=v3(0,0,1),UY=v3(0,1,0),at=(X_,Y_,fn)=>surfAt(ctx,C,O,UX,UY,X_,Y_,fn),tbc=o.tbc==null?1:o.tbc,hi=o.raciHi||0,X=[60,70.5,81,91.5];
-    // a line or a band across the chart, from y0 to y1 centimetres down
-    const band=(y0,y1,col,a)=>sq3(ctx,C,x+0.01,0.57,2.28-y1/100,1.57,2.28-y0/100,col,{a});
-    if(hi>0)band(57,72,[255,222,140],0.75*hi);
-    at(5,12,c=>Tw(c,"RACI",0,0,{w:800,size:9,color:rgba(PAL.ink,1)}));["R","A","C","I"].forEach((s,j)=>at(X[j],24,c=>Tw(c,s,0,0,{w:800,size:6.2,align:"center",color:rgba([90,96,120],1)})));
-    let n=0;RACI.rows.forEach((s,i)=>{const y=34+i*15;band(y-6.3,y-5.7,[200,204,220],0.9);at(4,y+4,c=>Tw(c,s,0,0,{w:700,size:4.2,color:rgba([70,76,100],1)}));
-      RACI.cells[i].forEach((v,j)=>{if(v==="TBC"){const u=clamp(tbc*8-n,0,1);n++;if(u>0)at(X[j],y+4,c=>Tw(c,"TBC",0,0,{w:800,size:3.7*(0.6+0.4*spring(u)),align:"center",color:rgba(PAL.red,u)}));}
-        else at(X[j],y+4,c=>Tw(c,v,0,0,{w:600,size:3.3,align:"center",color:rgba([70,76,100],1)}));});});
-    const st=o.stamp||0;if(st>0)at(X[1],64,c=>{const k_=1.15*(1+1.3*(1-spring(st))),a=clamp(st*3,0,1);c.rotate(-0.14);c.scale(k_,k_);c.globalAlpha*=a;
-      c.strokeStyle=rgba([200,52,44],0.9);c.lineWidth=1.1;rr(c,-9.5,-5.6,19,9.2,1.6);c.stroke();Tw(c,"TBC",0,1.7,{w:800,size:5.6,align:"center",color:rgba([200,52,44],0.95)});});}
-  // the four answers, pinned over the chart one by one
-  const cards=o.cards||0;[[0.66,1.86,[255,226,140]],[1.08,1.9,[250,200,190]],[0.7,1.44,[196,226,240]],[1.12,1.46,[214,236,214]]].forEach(([za,ya,c],i)=>{const u=clamp(cards-i,0,1);if(u<=0)return;const dz=0.36,dy=0.34,lift=(1-spring(u))*0.3;
-    sq3(ctx,C,x+0.016+lift,za,ya,za+dz,ya+dy,ilit(c,k),{edge:0.4});for(let j=1;j<4;j++)sq3(ctx,C,x+0.018+lift,za+0.04,ya+dy*(j/4.5),za+dz-0.06,ya+dy*(j/4.5)+0.014,[120,120,150],{a:0.7});
-    const p=pj(C,v3(x+0.02+lift,ya+dy*0.86,za+dz/2));if(p.z>NEAR){ctx.fillStyle=rgba(PAL.gold,1);ctx.beginPath();ctx.arc(p.x,p.y,Math.max(2,0.025*p.s),0,TAU);ctx.fill();}});}
-// the data team's poster: the loop of ten steps it builds in, as drawn in In the weeds of data crafting
-const LOOPP={cx:0.5,cy:0.53,rx:0.38,ry:0.36};
-function loopPos(i,x0,y0,x1,y1,z){const an=-Math.PI/2+i/10*TAU,u=LOOPP.cx+Math.cos(an)*LOOPP.rx,v=LOOPP.cy+Math.sin(an)*LOOPP.ry;return v3(lerp(x0,x1,u),lerp(y1,y0,v),z);}
-function loopPoster(ctx,C,x0,y0,x1,y1,z,st,lod){wq3(ctx,C,x0-0.04,y0-0.04,x1+0.04,y1+0.04,z,ilit([60,84,132],1),{edge:0.5});wq3(ctx,C,x0,y0,x1,y1,z-0.004,[252,250,244]);
-  const w=(x1-x0)*100,h=(y1-y0)*100,hi=(st.data&&st.data.loopHi)||0;
-  surfDraw(ctx,C,v3(x0,y1,z-0.006),v3(1,0,0),v3(0,1,0),c=>{const cx=w*LOOPP.cx,cy=h*LOOPP.cy,rx=w*LOOPP.rx,ry=h*LOOPP.ry;
-    c.strokeStyle=rgba([150,170,210],1);c.lineWidth=4;c.beginPath();c.ellipse(cx,cy,rx,ry,0,0,TAU);c.stroke();
-    // arrows round the loop, clockwise
-    for(let i=0;i<10;i++){const an=-Math.PI/2+(i+0.5)/10*TAU,px=cx+Math.cos(an)*rx,py=cy+Math.sin(an)*ry,ta=an+Math.PI/2;c.save();c.translate(px,py);c.rotate(Math.atan2(Math.sin(ta)*ry,Math.cos(ta)*rx));c.fillStyle=rgba([150,170,210],1);c.beginPath();c.moveTo(6,0);c.lineTo(-4,-5);c.lineTo(-4,5);c.closePath();c.fill();c.restore();}
-    STEPS10.forEach(([nm,sg],i)=>{const an=-Math.PI/2+i/10*TAU,px=cx+Math.cos(an)*rx,py=cy+Math.sin(an)*ry,ph=phaseOf(i),col=[[120,170,240],[240,170,90],[130,200,150],[190,150,230]][ph];
-      c.fillStyle=rgba(mix(col,[255,255,255],0.75),1);c.beginPath();c.arc(px,py,15,0,TAU);c.fill();c.strokeStyle=rgba(col,1);c.lineWidth=3;c.stroke();
-      Tw(c,sg,px,py+5.5,{w:800,size:sg.length>2?11:14,align:"center",color:rgba(mix(col,[0,0,0],0.45),1)});});
-    Tw(c,"build",cx,cy+4,{w:800,size:16,align:"center",color:rgba([90,110,150],1)});});
-  if(hi>0)glowQuad(ctx,C,[v3(x0-0.05,y0-0.05,z-0.01),v3(x1+0.05,y0-0.05,z-0.01),v3(x1+0.05,y1+0.05,z-0.01),v3(x0-0.05,y1+0.05,z-0.01)],hi);}
-
-// ---- one building: open and furnished when the camera is in front of it, closed otherwise ----
-function drawBuilding(ctx,C,b,st,figs){mxSet(b.x,b.z,b.ang);const R=b.R,E=mxL(C.eye);
-  if(b.open&&(E.z<R.Z0+0.05||st.inside===b.id)){const fs=pj(C,v3(0,1.5,0)),lod=fs.z>NEAR&&b.w*fs.s<380?1:0;
-    const Q=tRoom(ctx,C,R,Object.assign({lod},b.room||{}));const items=[];const add=(x,y,z,fn)=>items.push({z:eyeD(C,v3(x,y,z)),fn});
-    FURNISH[b.id](ctx,C,b,R,Q,add,st,lod);if(st.hooks&&st.hooks[b.id])st.hooks[b.id](ctx,C,R,Q,add,lod);
-    for(const f of figs)add(f.x,1,f.z+(f.dz||0),ctx=>{const B=tFig(ctx,C,f.id,f.x,f.z,Object.assign({y:R.FY},f));if(f.onDraw)f.onDraw(ctx,B);});
-    items.sort((a,b)=>b.z-a.z);for(const it of items)it.fn(ctx);
-    tShell(ctx,C,R,{wall:b.wall,roof:b.roof,band:b.band,plinth:mix(b.wall,[0,0,0],0.04)});}
-  else tClosed(ctx,C,R,{wall:b.wall,roof:b.roof,band:b.band,frontWins:b.open?null:(ctx,C,R)=>frontDoor(ctx,C,R,b)});
-  if(st.glowFront&&st.glowFront[b.id]>0){const a=st.glowFront[b.id];glowQuad(ctx,C,[v3(R.X0,0.02,R.Z0-0.02),v3(R.X1,0.02,R.Z0-0.02),v3(R.X1,R.HY+0.2,R.Z0-0.02),v3(R.X0,R.HY+0.2,R.Z0-0.02)],a);}
-  // a name over the front, when the picture asks for it: drawn after the blur, so it stays sharp
-  const nm=st.names&&st.names[b.id];if(nm>0){const P_=pj(C,v3(0,R.HY+0.32,R.Z0-0.1));if(P_.z>NEAR)lbAdd(c=>signBoard(c,clamp(P_.x,260,W-260),Math.max(P_.y+20,108),b.name,{size:32,dot:b.band,bg:[255,252,244],rim:mix(b.band,[120,90,40],0.25),a:nm}));}
-  mxOff();}
-// the front of a closed building: a door and windows
-function frontDoor(ctx,C,R,b){const z=R.Z0-0.01,w=R.X1-R.X0;winQ(ctx,C,[v3(-0.45,R.FY-0.3,z),v3(0.45,R.FY-0.3,z),v3(0.45,R.FY+1.75,z),v3(-0.45,R.FY+1.75,z)],NRM.F,{glass:mix(b.band,[60,50,40],0.35)});
-  for(const k of [-1,1])for(const yy of [[R.FY+0.75,R.FY+1.95]]){const xc=k*w*0.3;winQ(ctx,C,[v3(xc-0.4,yy[0],z),v3(xc+0.4,yy[0],z),v3(xc+0.4,yy[1],z),v3(xc-0.4,yy[1],z)],NRM.F,{});}}
-
-// ---- the whole picture ----
-// st: t, figs [{id,x,z,at?,dz?,onDraw?,...tFig options}], hooks, office/data states, names {id:alpha}, gold, glowFront, inside (a room the camera
-// stands in), posts(C,add) and extra(C,add) (things in the painter's order), over(ctx,C) (on top, before the blur), ts (blur band), after(ctx)
-function drawCampus(ctx,S,C,st){setScreen(ctx,S);LBQ=[];DL=[];hazeFor(C,1.8);tSky(ctx);campusGround(ctx,C,st);
-  // people in a room are drawn with the room; everyone else stands on the green
-  const inB={},out=[];BLD.forEach(b=>inB[b.id]=[]);
-  for(const f of (st.figs||[])){if(f.at){inB[f.at].push(f);continue;}let placed=false;for(const b of BLD){if(!b.open)continue;mxSet(b.x,b.z,b.ang);const L=mxL(v3(f.x,0,f.z));mxOff();
-      if(L.x>b.R.X0&&L.x<b.R.X1&&L.z>b.R.Z0-0.05&&L.z<b.R.Z1){inB[b.id].push(Object.assign({},f,{x:L.x,z:L.z}));placed=true;break;}}if(!placed)out.push(f);}
-  for(const b of BLD){const c=bldP(b.id,0,1.5,b.d/2);const vis=csp(C,c);if(vis.z<-6)continue;const P_=pjc(C,vis);if(vis.z>NEAR&&(P_.x<-P_.s*8||P_.x>W+P_.s*8||P_.y<-P_.s*7||P_.y>H+P_.s*6))continue;
-    dlAdd(Math.hypot(c.x-C.eye.x,c.y-C.eye.y,c.z-C.eye.z),ctx=>drawBuilding(ctx,C,b,st,inB[b.id]));}
-  for(const [x,z,h,k] of NATURE.trees)dlAdd(eyeD(C,v3(x,h*0.4,z)),ctx=>tTree(ctx,C,x,z,h,mix([104,178,104],[150,190,96],k*0.4),{round:k>0.7}));
-  for(const [x,z,r] of NATURE.shrubs)dlAdd(eyeD(C,v3(x,r,z)),ctx=>tShrub(ctx,C,x,z,r,[84,160,96]));
-  for(const [x,z] of NATURE.lamps)dlAdd(eyeD(C,v3(x,1,z)),ctx=>tLamp(ctx,C,x,z,st.lamps||0));
-  for(const [x,z,a] of NATURE.benches)dlAdd(eyeD(C,v3(x,0.4,z)),ctx=>tBench(ctx,C,x,z,a));
-  const addAt=(p,fn)=>dlAdd(eyeD(C,p),fn);if(st.posts)st.posts(C,addAt);
-  for(const f of out)dlAdd(eyeD(C,v3(f.x,0.8,f.z))-0.3,ctx=>{const B=tFig(ctx,C,f.id,f.x,f.z,f);if(f.onDraw)f.onDraw(ctx,B);});
-  if(st.extra)st.extra(C,addAt);
-  dlDraw(ctx);
-  if(st.over)st.over(ctx,C);
-  const ts=st.ts||C.ts||[250,860,7];tiltShift(ctx,ts[0],ts[1],ts[2],ts[3]);vignetteSoft(ctx,[60,70,110],0.14);
-  lbDraw(ctx,S);setScreen(ctx,S);if(st.after)st.after(ctx);}
-
-/* ===== Off the shelf: the film's own pictures (prefixed os_) =====
-   A market town on the same table, in its own time: a square of packed earth with a stone cross, stalls and timber-framed
-   houses in 1215; its market hall in 1497, with the king's bronze standards in a cupboard behind a grille; the corn stall in
-   1871, lined with bushels that don't agree; a grocer's shop in the 1880s, where the inspector checks a weight against his
-   copy of the standard. Then what the chapters share: cameras that move between keys, dissolves between shots, labels and
-   speech bubbles drawn after the blur, the place-and-year sign, and the title and end cards. */
-
-// ---- the market town's buildings: timber-framed houses, a church, a stone cross ----
-// a beam on a wall: from (x0,y0) to (x1,y1) on the plane z (a front) or x (a side), as a thin quad
-function os_beamZ(ctx,C,x0,y0,x1,y1,z,wd,col){const dx=x1-x0,dy=y1-y0,l=Math.hypot(dx,dy)||1,nx=-dy/l*wd/2,ny=dx/l*wd/2;poly3(ctx,C,[v3(x0+nx,y0+ny,z),v3(x1+nx,y1+ny,z),v3(x1-nx,y1-ny,z),v3(x0-nx,y0-ny,z)],col,{n:NRM.F});}
-function os_beamX(ctx,C,z0,y0,z1,y1,x,wd,col){const dz=z1-z0,dy=y1-y0,l=Math.hypot(dz,dy)||1,nz=-dy/l*wd/2,ny=dz/l*wd/2;poly3(ctx,C,[v3(x,y0+ny,z0+nz),v3(x,y1+ny,z1+nz),v3(x,y1-ny,z1-nz),v3(x,y0-ny,z0-nz)],col,{n:NRM.R});}
-// a house: plaster between oak beams, the upper floor jutting out over the street, a steep roof
-function os_timber(ctx,C,x,z,w,d,o){o=o||{};const h1=o.h1||2.1,h2=o.h2||1.9,jut=0.3,pl=o.plaster||[240,228,200],tb=[92,64,44],roof=o.roof||[204,166,100];
-  drawBox(ctx,C,x,0,z,w,h1,d,pl,{grad:[0.04,0.08],edge:0.3});drawBox(ctx,C,x-0.05,h1,z-jut,w+0.1,h2,d+jut,pl,{grad:[0.04,0.08],edge:0.3});
-  const fz=z-0.012,uz=z-jut-0.012,seeF=visible(C,NRM.F,v3(x+w/2,1,z)),seeR=visible(C,NRM.R,v3(x+w,1,z+d/2)),seeL=visible(C,NRM.L,v3(x,1,z+d/2));
-  if(seeF){const n=Math.max(2,Math.round(w/0.9));for(let i=0;i<=n;i++){const xx=x+i*w/n;os_beamZ(ctx,C,xx,0,xx,h1,fz,0.12,tb);os_beamZ(ctx,C,xx,h1,xx,h1+h2,uz,0.12,tb);}
-    os_beamZ(ctx,C,x,h1-0.06,x+w,h1-0.06,fz,0.14,tb);os_beamZ(ctx,C,x-0.05,h1+0.06,x+w+0.05,h1+0.06,uz,0.16,tb);os_beamZ(ctx,C,x-0.05,h1+h2-0.06,x+w+0.05,h1+h2-0.06,uz,0.14,tb);
-    for(let i=0;i<n;i+=2){const a=x+i*w/n,b=x+(i+1)*w/n;os_beamZ(ctx,C,a,h1+0.12,b,h1+h2-0.12,uz,0.1,tb);}
-    // a door and a shuttered window below, small windows above
-    const dx=x+w*(o.door==null?0.3:o.door);poly3(ctx,C,[v3(dx,0,fz-0.002),v3(dx+0.8,0,fz-0.002),v3(dx+0.8,1.75,fz-0.002),v3(dx,1.75,fz-0.002)],[110,76,52],{n:NRM.F,grad:[0.1,0.2]});
-    const wx=x+w*0.65;poly3(ctx,C,[v3(wx,0.95,fz-0.002),v3(wx+0.7,0.95,fz-0.002),v3(wx+0.7,1.6,fz-0.002),v3(wx,1.6,fz-0.002)],[60,52,58],{n:NRM.F});
-    for(const k of [0.25,0.7]){const ux=x+w*k-0.3;poly3(ctx,C,[v3(ux,h1+0.7,uz-0.002),v3(ux+0.6,h1+0.7,uz-0.002),v3(ux+0.6,h1+1.35,uz-0.002),v3(ux,h1+1.35,uz-0.002)],[70,62,70],{n:NRM.F});}}
-  if(seeR||seeL){const X=seeR?x+w+0.012:x-0.012,XU=seeR?x+w+0.062:x-0.062,n=Math.max(2,Math.round(d/1.0));for(let i=0;i<=n;i++){const zz=z+i*d/n;os_beamX(ctx,C,zz,0,zz,h1,X,0.12,tb);}
-    for(let i=0;i<=n;i++){const zz=z-jut+i*(d+jut)/n;os_beamX(ctx,C,zz,h1,zz,h1+h2,XU,0.12,tb);}os_beamX(ctx,C,z-jut,h1+0.06,z+d,h1+0.06,XU,0.16,tb);}
-  gable(ctx,C,x-0.05,h1+h2,z-jut,w+0.1,d+jut,o.rh||2.4,roof,{wall:pl,ov:0.3});}
-// a stone market cross on three steps
-function os_cross(ctx,C,x,z){const st=[214,206,190];for(let i=0;i<3;i++){const r=1.1-i*0.3;drawBox(ctx,C,x-r,i*0.22,z-r,r*2,0.22,r*2,st,{grad:[0.08,0.1],edge:0.5});}
-  drawBox(ctx,C,x-0.12,0.66,z-0.12,0.24,2.4,0.24,st,{grad:[0.1,0.1],edge:0.5});drawBox(ctx,C,x-0.42,2.7,z-0.08,0.84,0.18,0.16,st,{edge:0.5});drawBox(ctx,C,x-0.08,2.5,z-0.08,0.16,0.7,0.16,st,{edge:0.5});}
-// a stone church, its tower, far off
-function os_church(ctx,C,x,z){const st=[206,200,186];drawBox(ctx,C,x+2.6,0,z+0.5,6,4.2,4,st,{grad:[0.05,0.1],edge:0.3});gable(ctx,C,x+2.6,4.2,z+0.5,6,4,2.4,[150,140,150],{wall:st});
-  drawBox(ctx,C,x,0,z,2.8,8.6,2.8,st,{grad:[0.06,0.12],edge:0.3});for(let i=0;i<4;i++)drawBox(ctx,C,x+i*0.75,8.6,z,0.4,0.45,0.4,st,{edge:0.3});
-  for(const yy of [5.6,7.2])poly3(ctx,C,[v3(x+1.15,yy,z-0.01),v3(x+1.65,yy,z-0.01),v3(x+1.65,yy+0.9,z-0.01),v3(x+1.15,yy+0.9,z-0.01)],[70,66,80],{n:NRM.F});}
-
-// ---- stalls and what's sold on them: drawn flat at a point and scaled with distance, like the figures ----
-// a stall: a trestle table and a striped awning on four posts
-function os_stall(ctx,C,x,z,w,d,col){const wood=[160,112,72];for(const [px,pz] of [[x,z+d],[x+w,z+d],[x,z],[x+w,z]])drawBox(ctx,C,px-0.05,0,pz-0.05,0.1,pz===z?1.9:2.3,0.1,wood,{edge:0.3});
-  drawBox(ctx,C,x+0.1,0.78,z+0.05,w-0.2,0.08,d-0.1,[196,150,100],{grad:[0.1,0.1],edge:0.4});for(const [lx,lz] of [[x+0.2,z+d-0.23],[x+w-0.28,z+d-0.23],[x+0.2,z+0.15],[x+w-0.28,z+0.15]])drawBox(ctx,C,lx,0,lz,0.08,0.78,0.08,wood,{edge:0.3});
-  const n=6;for(let i=0;i<n;i++){const a=x-0.1+i*(w+0.2)/n,b=a+(w+0.2)/n,c=i%2?[250,244,228]:col;poly3(ctx,C,[v3(a,1.9,z-0.25),v3(b,1.9,z-0.25),v3(b,2.32,z+d+0.1),v3(a,2.32,z+d+0.1)],c,{n:vnorm(v3(0,1,-0.35)),grad:[0.08,0.06],edge:0.3});
-    poly3(ctx,C,[v3(a,1.9,z-0.25),v3(b,1.9,z-0.25),v3(b,1.72,z-0.27),v3(a,1.72,z-0.27)],c,{n:NRM.F});}}
-const os_fill=(ctx,c,x0,x1,k)=>{const g=ctx.createLinearGradient(x0,0,x1,0);g.addColorStop(0,rgba(mix(c,[255,240,210],0.3*(k||1)),1));g.addColorStop(1,rgba(mix(c,[0,0,0],0.25*(k||1)),1));ctx.fillStyle=g;ctx.fill();};
-function os_barrel(ctx,C,x,z,h,y){const B=pj(C,v3(x,y||0,z));if(B.z<NEAR)return;const k=B.s*h,w=k*0.66,c=[170,118,72];ctx.save();ctx.translate(B.x,B.y);ctx.fillStyle="rgba(50,40,30,0.25)";ctx.beginPath();ctx.ellipse(0,0,w*0.62,w*0.16,0,0,TAU);ctx.fill();
-  ctx.beginPath();ctx.moveTo(-w*0.46,0);ctx.quadraticCurveTo(-w*0.6,-k*0.5,-w*0.46,-k);ctx.lineTo(w*0.46,-k);ctx.quadraticCurveTo(w*0.6,-k*0.5,w*0.46,0);ctx.closePath();os_fill(ctx,c,-w*0.55,w*0.55);
-  ctx.strokeStyle="rgba(70,60,56,0.85)";ctx.lineWidth=Math.max(1.5,k*0.05);for(const v of [0.18,0.82]){ctx.beginPath();ctx.moveTo(-w*0.52,-k*v);ctx.quadraticCurveTo(0,-k*v+k*0.04,w*0.52,-k*v);ctx.stroke();}
-  ctx.fillStyle=rgba(mix(c,[255,230,200],0.2),1);ctx.beginPath();ctx.ellipse(0,-k,w*0.46,w*0.12,0,0,TAU);ctx.fill();ctx.restore();}
-function os_sack(ctx,C,x,z,h){const B=pj(C,v3(x,0,z));if(B.z<NEAR)return;const k=B.s*h,c=[214,196,150];ctx.save();ctx.translate(B.x,B.y);ctx.fillStyle="rgba(50,40,30,0.22)";ctx.beginPath();ctx.ellipse(0,0,k*0.42,k*0.1,0,0,TAU);ctx.fill();
-  ctx.beginPath();ctx.moveTo(-k*0.36,0);ctx.bezierCurveTo(-k*0.5,-k*0.5,-k*0.24,-k*0.86,-k*0.1,-k*0.9);ctx.lineTo(k*0.1,-k*0.9);ctx.bezierCurveTo(k*0.24,-k*0.86,k*0.5,-k*0.5,k*0.36,0);ctx.closePath();os_fill(ctx,c,-k*0.4,k*0.4,0.8);
-  ctx.strokeStyle="rgba(120,96,60,0.8)";ctx.lineWidth=Math.max(1.5,k*0.04);ctx.beginPath();ctx.moveTo(-k*0.13,-k*0.8);ctx.lineTo(k*0.13,-k*0.8);ctx.stroke();ctx.fillStyle="rgba(232,206,120,1)";ctx.beginPath();ctx.ellipse(0,-k*0.92,k*0.12,k*0.05,0,0,TAU);ctx.fill();ctx.restore();}
-// a wooden measure of corn, heaped: w is how much wider than tall it is
-function os_bushel(ctx,C,x,y,z,h,w){const B=pj(C,v3(x,y,z));if(B.z<NEAR)return null;const k=B.s*h,r=k*(w||1)*0.6,c=[180,128,80];ctx.save();ctx.translate(B.x,B.y);
-  ctx.fillStyle="rgba(50,40,30,0.22)";ctx.beginPath();ctx.ellipse(r*0.1,0,r*1.08,r*0.2,0,0,TAU);ctx.fill();
-  ctx.beginPath();ctx.moveTo(-r,0);ctx.lineTo(-r*1.03,-k);ctx.lineTo(r*1.03,-k);ctx.lineTo(r,0);ctx.closePath();os_fill(ctx,c,-r,r);ctx.strokeStyle="rgba(70,60,56,0.8)";ctx.lineWidth=Math.max(1.5,k*0.05);for(const v of [0.18,0.62]){ctx.beginPath();ctx.moveTo(-r*1.01,-k*v);ctx.lineTo(r*1.01,-k*v);ctx.stroke();}
-  ctx.fillStyle="rgba(232,200,110,1)";ctx.beginPath();ctx.ellipse(0,-k,r*1.03,Math.max(2,r*0.22),0,0,TAU);ctx.fill();ctx.beginPath();ctx.ellipse(0,-k-r*0.06,r*0.8,r*0.16,0,Math.PI,TAU);ctx.fill();
-  ctx.fillStyle="rgba(200,160,80,0.7)";for(let i=0;i<24;i++){ctx.beginPath();ctx.arc((hash(i,4)-0.5)*r*1.6,-k+(hash(i,5)-0.5)*r*0.26,Math.max(1,k*0.03),0,TAU);ctx.fill();}ctx.restore();return B;}
-// a handcart of apples: its bed, sides, a wheel on the side towards us, two handles and a leg
-function os_cart(ctx,C,x,z){const wood=[170,124,80],dk=[150,104,66];
-  for(const k of [0.25,0.65])drawBox(ctx,C,x-1.1,0.5,z+k,1.2,0.05,0.05,dk,{edge:0.3});drawBox(ctx,C,x+1.25,0,z+0.12,0.06,0.44,0.06,dk,{edge:0.3});drawBox(ctx,C,x+1.25,0,z+0.72,0.06,0.44,0.06,dk,{edge:0.3});
-  drawBox(ctx,C,x,0.42,z,1.5,0.1,0.9,wood,{grad:[0.1,0.1],edge:0.4});drawBox(ctx,C,x,0.52,z,1.5,0.3,0.06,dk);drawBox(ctx,C,x,0.52,z+0.84,1.5,0.3,0.06,dk);drawBox(ctx,C,x+1.44,0.52,z,0.06,0.3,0.9,dk);
-  for(let i=0;i<11;i++){const p=pj(C,v3(x+0.2+(i%5)*0.26,0.86,z+0.25+Math.floor(i/5)*0.24));if(p.z<NEAR)continue;ctx.fillStyle=i%3?"#c8463a":"#d9a640";ctx.beginPath();ctx.arc(p.x,p.y,0.12*p.s,0,TAU);ctx.fill();ctx.fillStyle="rgba(255,240,220,0.4)";ctx.beginPath();ctx.arc(p.x-0.04*p.s,p.y-0.04*p.s,0.04*p.s,0,TAU);ctx.fill();}
-  // the wheel, round in the plane of the cart's side, with its spokes
-  const wc=v3(x+0.7,0.34,z-0.06),ring=[];for(let i=0;i<=24;i++){const a=i/24*TAU;ring.push(pj(C,v3(wc.x+Math.cos(a)*0.34,wc.y+Math.sin(a)*0.34,wc.z)));}if(ring.some(q=>q.z<NEAR))return;
-  const c=pj(C,wc);ctx.save();ctx.strokeStyle="rgba(96,66,44,1)";ctx.lineCap="round";ctx.lineWidth=Math.max(2,0.05*c.s);ctx.beginPath();ring.forEach((q,i)=>i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y));ctx.stroke();
-  ctx.lineWidth=Math.max(1.5,0.025*c.s);for(let i=0;i<6;i++){const q=ring[i*4];ctx.beginPath();ctx.moveTo(c.x,c.y);ctx.lineTo(q.x,q.y);ctx.stroke();}ctx.fillStyle="rgba(96,66,44,1)";ctx.beginPath();ctx.arc(c.x,c.y,Math.max(2,0.05*c.s),0,TAU);ctx.fill();ctx.restore();}
-// a glazed jug: a round belly, a narrow neck, a lip, a handle from the neck to the shoulder
-function os_jug(ctx,C,x,y,z,h,c){const B=pj(C,v3(x,y,z));if(B.z<NEAR)return;const k=B.s*h;c=c||[176,120,84];ctx.save();ctx.translate(B.x,B.y);ctx.fillStyle="rgba(50,40,30,0.2)";ctx.beginPath();ctx.ellipse(k*0.05,0,k*0.3,k*0.06,0,0,TAU);ctx.fill();
-  ctx.strokeStyle=rgba(mix(c,[0,0,0],0.2),1);ctx.lineWidth=Math.max(1.5,k*0.07);ctx.lineCap="round";ctx.beginPath();ctx.moveTo(k*0.12,-k*0.86);ctx.bezierCurveTo(k*0.42,-k*0.86,k*0.44,-k*0.5,k*0.26,-k*0.46);ctx.stroke();
-  ctx.beginPath();ctx.moveTo(-k*0.2,0);ctx.bezierCurveTo(-k*0.34,-k*0.1,-k*0.36,-k*0.44,-k*0.24,-k*0.6);ctx.quadraticCurveTo(-k*0.12,-k*0.74,-k*0.13,-k*0.88);ctx.lineTo(-k*0.17,-k);ctx.lineTo(k*0.17,-k);ctx.lineTo(k*0.13,-k*0.88);
-  ctx.quadraticCurveTo(k*0.12,-k*0.74,k*0.24,-k*0.6);ctx.bezierCurveTo(k*0.36,-k*0.44,k*0.34,-k*0.1,k*0.2,0);ctx.closePath();os_fill(ctx,c,-k*0.34,k*0.34);
-  ctx.fillStyle=rgba(mix(c,[0,0,0],0.35),1);ctx.beginPath();ctx.ellipse(0,-k,k*0.17,k*0.045,0,0,TAU);ctx.fill();ctx.fillStyle="rgba(255,250,230,0.35)";ctx.beginPath();ctx.ellipse(-k*0.14,-k*0.4,k*0.04,k*0.12,0.2,0,TAU);ctx.fill();ctx.restore();}
-// the king's bronze gallon, held in both hands, in the figure's units
-function os_heldGallon(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my+30);const w=96,h=84;
-  for(const s of [-1,1]){cx.strokeStyle="rgba(150,104,44,1)";cx.lineWidth=9;cx.beginPath();cx.arc(s*w*0.54,-h*0.6,15,s>0?-1.4:Math.PI-1.7,s>0?1.4:Math.PI+1.7,s<0);cx.stroke();}
-  cx.beginPath();cx.moveTo(-w/2,0);cx.lineTo(-w/2-2,-h);cx.lineTo(w/2+2,-h);cx.lineTo(w/2,0);cx.closePath();const g=cx.createLinearGradient(-w/2,0,w/2,0);g.addColorStop(0,"#fbe2a0");g.addColorStop(0.35,"#d8a850");g.addColorStop(1,"#8c6424");cx.fillStyle=g;cx.fill();
-  cx.strokeStyle="rgba(110,76,30,0.8)";cx.lineWidth=3;for(const v of [0.12,0.88]){cx.beginPath();cx.moveTo(-w/2,-h*v);cx.lineTo(w/2,-h*v);cx.stroke();}cx.fillStyle="#6a4a20";cx.beginPath();cx.ellipse(0,-h,w/2+2,10,0,0,TAU);cx.fill();cx.restore();
-  fingers(cx,P_,[[mx-w/2-6,my+4],[mx+w/2+6,my+4]]);}
-// a bronze standard: a drum with two handles (the bushel, the gallon), drawn like the measures, in metal
-function os_bronze(ctx,C,x,y,z,h,w){const B=pj(C,v3(x,y,z));if(B.z<NEAR)return;const k=B.s*h,r=k*w*0.5;ctx.save();ctx.translate(B.x,B.y);
-  for(const s of [-1,1]){ctx.strokeStyle="rgba(150,104,44,1)";ctx.lineWidth=Math.max(2,k*0.09);ctx.beginPath();ctx.arc(s*r*1.04,-k*0.62,k*0.17,s>0?-1.4:Math.PI-1.7,s>0?1.4:Math.PI+1.7,s<0);ctx.stroke();}
-  ctx.beginPath();ctx.moveTo(-r,0);ctx.lineTo(-r*1.02,-k);ctx.lineTo(r*1.02,-k);ctx.lineTo(r,0);ctx.closePath();const g=ctx.createLinearGradient(-r,0,r,0);g.addColorStop(0,"#fbe2a0");g.addColorStop(0.35,"#d8a850");g.addColorStop(1,"#8c6424");ctx.fillStyle=g;ctx.fill();
-  ctx.strokeStyle="rgba(110,76,30,0.8)";ctx.lineWidth=Math.max(1.2,k*0.04);for(const v of [0.12,0.88]){ctx.beginPath();ctx.moveTo(-r*1.01,-k*v);ctx.lineTo(r*1.01,-k*v);ctx.stroke();}
-  ctx.fillStyle="#6a4a20";ctx.beginPath();ctx.ellipse(0,-k,r*1.02,Math.max(2,r*0.2),0,0,TAU);ctx.fill();ctx.fillStyle="rgba(255,240,200,0.5)";ctx.fillRect(-r*0.7,-k*0.8,r*0.12,k*0.6);ctx.restore();}
-
-// ---- the market hall, 1497: open at the front like the offices of the university, with the king's standards in a cupboard ----
-const OS_HALL={id:"os_hall",name:"market hall",x:6.6,z:13.4,ang:0,w:6.4,d:3.8,open:true,wall:[244,232,206],roof:[178,98,74],band:[120,84,56],
-  room:{paper:[242,232,210],stripe:[236,224,200],dado:[150,110,76],side:[236,224,200],floor:[200,190,172],plain:true,flags:true,win:[-2.5,1.25,-1.6,2.3]}};
-const OS_SHOP={id:"os_shop",name:"grocer's shop",x:-4.4,z:13.4,ang:0,w:6.4,d:3.8,open:true,wall:[236,228,214],roof:[150,96,80],band:[70,96,84],
-  room:{paper:[236,226,196],stripe:[222,206,170],dado:[76,108,92],side:[232,220,190],floor:[196,150,104],sprig:[170,120,90]}};
-for(const b of [OS_HALL,OS_SHOP])b.R={X0:-b.w/2,X1:b.w/2,Z0:0,Z1:b.d,FY:0.3,HY:2.95};
-// the cupboard: oak, a dark inside behind an iron grille, the bushel and the gallon on its floor, a quart and the yard on its shelf
-function os_cupboard(ctx,C,cx,FY,bz,a){const w=1.7,h=2.05,d=0.5,x0=cx-w/2,z0=bz-d,oak=[122,84,54];
-  ibox(ctx,C,x0,FY,z0,w,h,d,oak,{edge:0.4});const ox0=x0+0.12,ox1=x0+w-0.12,oy0=FY+0.56,oy1=FY+h-0.14,fz=z0-0.004;
-  wq3(ctx,C,ox0,oy0,ox1,oy1,fz,ilit([50,38,32],1));wq3(ctx,C,ox0,FY+1.22,ox1,FY+1.27,fz-0.003,ilit([140,100,66],1));
-  os_bronze(ctx,C,cx-0.32,oy0+0.02,fz-0.01,0.5,1.45);os_bronze(ctx,C,cx+0.42,oy0+0.02,fz-0.01,0.34,1.1);os_bronze(ctx,C,cx-0.42,FY+1.28,fz-0.01,0.22,1.0);
-  ibox(ctx,C,cx-0.2,FY+1.3,fz-0.06,0.62,0.035,0.035,[210,160,80],{edge:0.5});ibox(ctx,C,cx-0.2,FY+1.33,fz-0.06,0.02,0.05,0.035,[180,130,60]);ibox(ctx,C,cx+0.4,FY+1.33,fz-0.06,0.02,0.05,0.035,[180,130,60]);
-  // the grille, and a drawer with a lock below
-  for(let x=ox0+0.06;x<ox1;x+=0.115)wq3(ctx,C,x-0.012,oy0,x+0.012,oy1,fz-0.05,[64,66,76],{edge:0.25});for(const y of [oy0+0.3,oy1-0.25])wq3(ctx,C,ox0,y-0.014,ox1,y+0.014,fz-0.052,[64,66,76]);
-  wq3(ctx,C,x0+0.1,FY+0.1,x0+w-0.1,FY+0.48,fz,ilit(mix(oak,[255,255,255],0.1),1),{edge:0.4});const p=pj(C,v3(cx,FY+0.29,fz-0.01));if(p.z>NEAR){ctx.fillStyle="#3a2c22";ctx.beginPath();ctx.arc(p.x,p.y,Math.max(1.5,0.03*p.s),0,TAU);ctx.fill();}
-  if(a>0)glowQuad(ctx,C,[v3(x0-0.05,FY-0.02,z0-0.06),v3(x0+w+0.05,FY-0.02,z0-0.06),v3(x0+w+0.05,FY+h+0.05,z0-0.06),v3(x0-0.05,FY+h+0.05,z0-0.06)],a);}
-FURNISH.os_hall=function(ctx,C,b,R,Q,add,st,lod){const FY=R.FY,bz=Q.bz,oak=[110,76,50],h=st.hall||{};
-  // oak posts and a rail on the plaster
-  for(const x of [-1.25,1.25,2.75])wq3(ctx,C,x-0.07,FY,x+0.07,R.HY,bz-0.012,ilit(oak,ILIT.F),{edge:0.3});wq3(ctx,C,Q.xl,2.36,Q.xr,2.48,bz-0.013,ilit(oak,ILIT.F),{edge:0.3});
-  add(0,1,bz-0.3,ctx=>os_cupboard(ctx,C,0,FY,bz,h.glow||0));
-  // a trestle table with the clerk's roll, and a bench
-  add(2.0,0.6,1.9,ctx=>{ibox(ctx,C,1.3,FY,1.75,0.08,0.7,0.6,oak);ibox(ctx,C,2.62,FY,1.75,0.08,0.7,0.6,oak);ibox(ctx,C,1.2,FY+0.7,1.7,1.6,0.06,0.7,[170,124,82],{edge:0.5});
-    ibox(ctx,C,1.5,FY+0.76,1.85,0.5,0.03,0.34,[246,236,206],{edge:0.4});});
-  if(!lod)add(-2.4,0.4,2.9,ctx=>{ibox(ctx,C,-2.9,FY,2.75,1.0,0.42,0.36,oak,{edge:0.3});});};
-// the grocer's shop, the 1880s: shelves of jars and tins, a counter with a scale, the Act pinned to a post, the inspector's case
-function os_scale(ctx,C,x,y,z,tilt,o){const P=(dx,dy)=>pj(C,v3(x+dx,y+dy,z));const b0=P(0,0);if(b0.z<NEAR)return;const s=b0.s;
-  ctx.save();ctx.lineCap="round";ctx.strokeStyle="#5c4a3a";ctx.lineWidth=Math.max(2,0.03*s);const top=P(0,0.5);ctx.beginPath();ctx.moveTo(b0.x,b0.y);ctx.lineTo(top.x,top.y);ctx.stroke();
-  ctx.fillStyle="#6a5444";ctx.beginPath();ctx.ellipse(b0.x,b0.y,0.13*s,0.03*s,0,0,TAU);ctx.fill();
-  const L=0.34,c=Math.cos(tilt),sn=Math.sin(tilt),ends=[P(-L*c,0.5+L*sn),P(L*c,0.5-L*sn)];ctx.strokeStyle="#c8a058";ctx.lineWidth=Math.max(2,0.022*s);ctx.beginPath();ctx.moveTo(ends[0].x,ends[0].y);ctx.lineTo(ends[1].x,ends[1].y);ctx.stroke();
-  ctx.fillStyle="#d8b064";ctx.beginPath();ctx.arc(top.x,top.y,Math.max(2,0.025*s),0,TAU);ctx.fill();
-  ends.forEach((e,i)=>{const py=e.y+0.27*s;ctx.strokeStyle="rgba(120,100,70,0.9)";ctx.lineWidth=Math.max(1,0.006*s);ctx.beginPath();ctx.moveTo(e.x,e.y);ctx.lineTo(e.x-0.1*s,py);ctx.moveTo(e.x,e.y);ctx.lineTo(e.x+0.1*s,py);ctx.stroke();
-    // a weight in each pan: the grocer's iron one on the right, by the inspector; his brass copy on the left, once it's set down
-    if(i===1)os_weight(ctx,e.x,py-0.005*s,0.07*s,[70,72,80],o.crown);else if(o.brass)os_weight(ctx,e.x,py-0.005*s,0.07*s,null,0);
-    const g=ctx.createLinearGradient(e.x-0.12*s,0,e.x+0.12*s,0);g.addColorStop(0,"#f6dc9a");g.addColorStop(1,"#a87c34");ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(e.x,py,0.13*s,0.028*s,0,0,Math.PI);ctx.fill();ctx.beginPath();ctx.ellipse(e.x,py,0.13*s,0.022*s,0,0,TAU);ctx.fill();});
+/* ---------- today: listen first ---------- */
+// a fresh page for a thirty-fifth policy, on the desk from above: its heading and nothing else; th (0 to π) turns it over, unwritten,
+// lifting it a little as it goes
+const OS_P35={x:960,y:500,w:620,h:800};
+function os_page35(ctx,th){const P=OS_P35,c=Math.cos(th),lift=Math.sin(clamp(th,0,Math.PI)),k=1+0.05*lift;
+  ctx.save();ctx.translate(P.x+30*lift,P.y-20*lift);ctx.scale(Math.max(0.03,Math.abs(c))*k,k);
+  gv_sheet(ctx,-P.w/2,-P.h/2,P.w,P.h,c<0?{col:wc_dim(GV.paper,0.035)}:{});
+  if(c>0){const x=-P.w/2+60,y=-P.h/2;wc_T(ctx,"Data policies",x,y+92,{w:600,size:28,col:WC_MUTED,deco:1});wc_T(ctx,"Policy 35",x,y+190,{w:800,size:66,col:WC_DARK});}
   ctx.restore();}
-// a weight standing at (x,y) on screen, h tall: iron, or brass when col is null; crown (0..1) is the inspector's stamp on it
-function os_weight(ctx,x,y,h,col,crown){ctx.save();ctx.translate(x,y);const w=h*1.15;ctx.beginPath();ctx.moveTo(-w*0.5,0);ctx.lineTo(w*0.5,0);ctx.lineTo(w*0.38,-h*0.8);ctx.lineTo(-w*0.38,-h*0.8);ctx.closePath();
-  const g=ctx.createLinearGradient(-w*0.5,0,w*0.5,0);if(col){g.addColorStop(0,rgba(mix(col,[255,255,255],0.3),1));g.addColorStop(1,rgba(mix(col,[0,0,0],0.3),1));}else{g.addColorStop(0,"#fbe6a8");g.addColorStop(0.5,"#d8a850");g.addColorStop(1,"#8c6424");}ctx.fillStyle=g;ctx.fill();
-  ctx.beginPath();ctx.ellipse(0,-h*0.86,w*0.16,h*0.12,0,0,TAU);ctx.fill();
-  if(crown>0){ctx.globalAlpha*=clamp(crown*2,0,1);const k=h*0.26*(1+0.5*(1-spring(crown)));ctx.fillStyle="#f4c84a";ctx.beginPath();ctx.moveTo(-k,-h*0.3);ctx.lineTo(-k,-h*0.3-k*1.1);ctx.lineTo(-k*0.5,-h*0.3-k*0.6);ctx.lineTo(0,-h*0.3-k*1.3);ctx.lineTo(k*0.5,-h*0.3-k*0.6);ctx.lineTo(k,-h*0.3-k*1.1);ctx.lineTo(k,-h*0.3);ctx.closePath();ctx.fill();}
+// what Yusuf heard, on index cards in his hand, pinned over the chart in the board's close-up: his question on top, then who said
+// what slows them down (u, 0 to 1, pins each one)
+const OS_ANS=[["Jun",["rules arrive","after the build"]],["Mei",["never sees where","the words go"]],["Sam",["no one says","which column"]],
+  ["Planning",["which number","to trust?"]]];
+const OS_ANSC={w:330,h:262,x:[440,790,1140,1490],y:570,rot:[-0.03,0.02,-0.012,0.028]};
+function os_asked(ctx){ctx.save();ctx.translate(960,254);ctx.rotate(-0.012);wc_panel(ctx,-330,-66,660,132,{kind:"card",seed:61});gv_pin(ctx,0,-52,GV.red,1.2);
+  wc_hand(ctx,"What slows you down?",0,22,{size:50,w:700,align:"center",col:WC_INK});ctx.restore();}
+function os_ansCard(ctx,k,u){if(u<=0)return;const A=OS_ANSC,[name,lines]=OS_ANS[k],s=lerp(1.12,1,easeCam(clamp(u,0,1)));
+  ctx.save();ctx.translate(A.x[k],A.y-14*(1-easeCam(clamp(u,0,1))));ctx.rotate(A.rot[k]);ctx.scale(s,s);withA(ctx,clamp(u*2.5,0,1),()=>{
+    wc_panel(ctx,-A.w/2,-A.h/2,A.w,A.h,{kind:"card",seed:70+k});gv_pin(ctx,0,-A.h/2+18,GV.red,1.1);
+    wc_hand(ctx,name,-A.w/2+30,-A.h/2+92,{size:42,w:800,col:WC_DARK});lines.forEach((l,i)=>wc_hand(ctx,l,-A.w/2+30,-A.h/2+156+i*48,{size:34,w:600,col:WC_INK}));});
   ctx.restore();}
-// the inspector's stamp: a hammer swung from above the shoulder down onto the weight in the pan beside him; os_hammer draws the
-// hammer in the hand, its handle at angle th (0 points straight out from the body, larger turns it up), its face striking downwards
-Object.assign(POSE,{os_hitUp:{L:[0.16,-0.08],R:[2.15,2.9],feet:30,shift:4,tilt:0,turn:0.15,gaze:[0.5,0.3],look:1},
-  os_hitDown:{L:[0.16,-0.08],R:[1.08,1.9],feet:30,shift:4,tilt:0.04,turn:0.15,gaze:[0.6,0.5],look:1}});
-function os_hammer(th,flip){return(cx,P_,hands)=>{const r=hands[1],s=flip?-1:1;cx.save();cx.translate(r[0],r[1]);cx.scale(s,1);cx.rotate(-th);
-  cx.fillStyle="#8a6040";rr(cx,-6,-4.5,92,9,4);cx.fill();const g=cx.createLinearGradient(0,-24,0,24);g.addColorStop(0,"#c8ccd4");g.addColorStop(1,"#7a808c");cx.fillStyle=g;rr(cx,72,-14,24,40,4);cx.fill();
-  cx.fillStyle="rgba(255,255,255,0.35)";cx.fillRect(75,-11,5,34);cx.restore();fingers(cx,P_,[r]);};}
-function os_case(ctx,C,x,FY,z,glow){const wood=[110,70,44];ibox(ctx,C,x-0.22,FY,z-0.2,0.44,0.46,0.4,[150,110,74],{edge:0.3});
-  const y=FY+0.46;ibox(ctx,C,x-0.3,y,z-0.22,0.6,0.1,0.42,wood,{edge:0.4});ibox(ctx,C,x-0.27,y+0.1,z-0.19,0.54,0.012,0.36,[120,40,46]);
-  poly3(ctx,C,[v3(x-0.3,y+0.1,z+0.2),v3(x+0.3,y+0.1,z+0.2),v3(x+0.3,y+0.48,z+0.27),v3(x-0.3,y+0.48,z+0.27)],wood,{n:NRM.F,edge:0.4});poly3(ctx,C,[v3(x-0.27,y+0.12,z+0.19),v3(x+0.27,y+0.12,z+0.19),v3(x+0.27,y+0.45,z+0.255),v3(x-0.27,y+0.45,z+0.255)],[130,46,52],{n:NRM.F});
-  // brass copies of the standard weights, largest first
-  for(let i=0;i<6;i++){const p=pj(C,v3(x-0.21+i*0.085,y+0.11,z-0.02));if(p.z>NEAR)os_weight(ctx,p.x,p.y,(0.1-i*0.012)*p.s,null,0);}
-  if(glow>0)glowQuad(ctx,C,[v3(x-0.34,FY-0.02,z-0.26),v3(x+0.34,FY-0.02,z-0.26),v3(x+0.34,y+0.55,z-0.26),v3(x-0.34,y+0.55,z-0.26)],glow);}
-function os_act(ctx,C,x,FY,z,glow){ibox(ctx,C,x-0.08,0,z-0.08,0.16,2.95,0.16,[96,70,52],{edge:0.35});const y0=FY+0.92,y1=FY+1.56,zz=z-0.085;
-  wq3(ctx,C,x-0.24,y0,x+0.24,y1,zz,[250,244,226],{edge:0.5});surfAt(ctx,C,v3(x-0.24,y1,zz-0.002),v3(1,0,0),v3(0,1,0),24,8,c=>{Tw(c,"WEIGHTS AND",0,0,{w:800,size:4.4,align:"center",color:rgba([60,52,48],1)});Tw(c,"MEASURES ACT",0,6,{w:800,size:4.4,align:"center",color:rgba([60,52,48],1)});});
-  for(let i=0;i<7;i++)wq3(ctx,C,x-0.19,y1-0.2-i*0.05,x+0.19-(i===6?0.12:0),y1-0.188-i*0.05,zz-0.003,[150,140,130],{a:0.7});const p=pj(C,v3(x,y1-0.03,zz-0.01));if(p.z>NEAR){ctx.fillStyle="#d8574a";ctx.beginPath();ctx.arc(p.x,p.y,Math.max(1.5,0.02*p.s),0,TAU);ctx.fill();}
-  if(glow>0)glowQuad(ctx,C,[v3(x-0.29,y0-0.05,zz-0.01),v3(x+0.29,y0-0.05,zz-0.01),v3(x+0.29,y1+0.05,zz-0.01),v3(x-0.29,y1+0.05,zz-0.01)],glow);}
-FURNISH.os_shop=function(ctx,C,b,R,Q,add,st,lod){const FY=R.FY,bz=Q.bz,s=st.shop||{};
-  // shelves along the back wall, full of jars and tins
-  for(let r=0;r<3;r++){const y=FY+1.05+r*0.55;ibox(ctx,C,Q.xl+0.05,y,bz-0.32,Q.xr-Q.xl-0.1,0.04,0.3,[150,104,66],{edge:0.3});
-    if(!lod)for(let i=0;i<22;i++){const x=Q.xl+0.2+i*0.27;if(x>Q.xr-0.2)break;const tall=0.18+0.14*hash(i,r+7),c=[[196,72,60],[70,110,150],[220,180,90],[110,150,110],[236,226,200]][Math.floor(hash(i*3,r)*5)];
-      ibox(ctx,C,x,y+0.04,bz-0.26,0.17,tall,0.16,c,{edge:0.3,grad:[0.16,0.12]});wq3(ctx,C,x+0.03,y+0.04+tall*0.35,x+0.14,y+0.04+tall*0.7,bz-0.262,[250,244,226]);}}
-  add(-2.55,1,0.45,ctx=>os_act(ctx,C,-2.55,FY,0.45,s.act||0));
-  // the counter, and on it the scale, a few parcels and the grocer's ledger
-  add(-0.6,0.6,1.95,ctx=>{ibox(ctx,C,-2.3,FY,1.75,3.4,0.9,0.5,[160,112,74],{edge:0.4});for(let i=0;i<4;i++)wq3(ctx,C,-2.22+i*0.84,FY+0.1,-1.5+i*0.84,FY+0.8,1.745,ilit([176,128,86],1),{edge:0.35});
-    ibox(ctx,C,-2.36,FY+0.9,1.7,3.52,0.05,0.6,[196,150,104],{edge:0.6});const top=FY+0.95;
-    os_scale(ctx,C,-0.55,top,1.98,s.tilt||0,{brass:s.brass,crown:s.crown||0});
-    ibox(ctx,C,-1.9,top,1.86,0.3,0.16,0.22,[214,190,150],{edge:0.4});ibox(ctx,C,-1.55,top,1.9,0.22,0.12,0.18,[226,206,170],{edge:0.4});ibox(ctx,C,0.35,top,1.86,0.4,0.03,0.28,[120,60,50],{edge:0.4});});
-  add(1.75,0.5,1.05,ctx=>os_case(ctx,C,1.75,FY,1.05,s.caseGlow||0));
-  if(!lod)add(2.6,0.5,2.9,ctx=>{for(let i=0;i<2;i++)os_barrel(ctx,C,2.45+i*0.4,2.95-i*0.1,0.7,FY);os_sack(ctx,C,2.1,3.1,0.6);});};
+// the same cards, small, on the office's board below the chart: paper and a line or two each
+function os_ansSmall(ctx){const [bx,by]=GV_OFF.board;for(let k=0;k<4;k++){const x=bx+28+k*92,y=by+290;ctx.save();ctx.translate(x+40,y+42);ctx.rotate(OS_ANSC.rot[k]);
+  wc_panel(ctx,-40,-42,80,84,{kind:"card",seed:80+k});gv_lines(ctx,-26,-6,52,3,14,0.9);gv_pin(ctx,0,-34,GV.red,0.6);ctx.restore();}
+  ctx.save();ctx.translate(bx+205,by+266);ctx.rotate(-0.012);wc_panel(ctx,-90,-18,180,36,{kind:"card",seed:79});gv_lines(ctx,-70,-2,140,1,0,0.9);ctx.restore();}
+// the data team's board, in the room: the two reports' cards and Monday's between them, small, as they were left
+function os_dataBoard(ctx){const [bx,by]=GV_DT.board;[[bx+8,by+42,160,124,0],[bx+178,by+66,80,92,1],[bx+268,by+42,160,124,0]].forEach(([x,y,w,h,mon],k)=>{
+  wc_panel(ctx,x,y,w,h,{kind:"card",wash:mon?GV.gold:null,washA:0.35,seed:90+k});gv_pin(ctx,x+w/2,y+10,GV.red,0.7);
+  if(mon)gv_lines(ctx,x+16,y+36,w-32,3,16,0.9);else{gv_lines(ctx,x+18,y+34,w-60,2,14,0.9);ctx.fillStyle=rgba(OS_NUM,0.75);ctx.fillRect(x+34,y+82,w-68,14);wc_tick(ctx,x+w-26,y+64,30,GV.green,1,4);}});}
+// Jun's screen, close: the data team's tests on award. The first is the rule Mei and Jun agreed on Monday: it runs (run, 0 to 1), then
+// passes (pass), and the agreement behind it lights gold (gold); the second has no test, as there's no agreed rule to test (row2).
+function os_tests(ctx,run,pass,gold,row2){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,"Tests · award",q=>{const r1=y+262,r2=y+486,cx=x+96;
+  if(gold>0)gv_tint(q,x+28,r1-86,w-56,160,GV.gold,0.7*gold);
+  // the first test: a ring while it runs, a green tick once it passes
+  if(pass>0)wc_tick(q,cx,r1-20,58,GV.green,pass,9);
+  else{q.save();q.lineWidth=6;q.lineCap="round";q.strokeStyle=rgba(WC_MUTED,0.35);q.beginPath();q.arc(cx,r1-20,24,0,TAU);q.stroke();
+    if(run>0){const a=run*TAU*1.6;q.strokeStyle=rgba(GV.cyanInk,0.9);q.beginPath();q.arc(cx,r1-20,24,a-1.8,a);q.stroke();}q.restore();}
+  wc_T(q,"award counts microcredentials",x+160,r1-30,{w:700,size:38,col:WC_DARK});wc_T(q,"of 6 credit points or more",x+160,r1+22,{w:600,size:38,col:WC_INK});
+  if(pass>0)withA(q,clamp(pass*2,0,1),()=>wc_badge(q,x+w-196,r1-22,"passed",{size:30,role:GV.green}));
+  // the second: no test yet, only the question, dashed
+  if(row2>0)withA(q,row2,()=>{q.save();q.lineWidth=5;q.setLineDash([9,9]);q.strokeStyle=rgba(WC_MUTED,0.7);q.beginPath();q.arc(cx,r2-20,24,0,TAU);q.stroke();q.restore();
+    wc_T(q,"award mapped to the",x+160,r2-30,{w:700,size:38,col:WC_MUTED});wc_T(q,"government's definition",x+160,r2+22,{w:600,size:38,col:WC_MUTED});
+    wc_badge(q,x+w-330,r2-22,"no agreed rule yet",{size:30,role:GV.red});});},{titleSize:32,barH:54});}
 
-// ---- the market square: everything in one picture, dressed for its year ----
-// st: t, era (1215, 1497, 1871 or 1880), figs [{id,x,z,y?,at?,...}] (at "hall" or "shop": in that building's own coordinates),
-// jugs [h,h,h] (the wine stall's), charter (the seal's pop), bushels (0..1 their tags), hall, shop, ts (blur band), after(ctx)
-const OS_HOUSES=[{x:-11.4,z:14.6,w:3.4,d:3.2,roof:[206,170,104]},{x:-7.6,z:15,w:3.2,d:3,roof:[178,98,74],plaster:[248,236,210],shop:1},{x:-4.0,z:14.8,w:3.4,d:3.2,roof:[206,170,104],plaster:[244,230,200],shop:1},
-  {x:3.2,z:15,w:3.2,d:3,roof:[178,98,74],hall:1},{x:6.8,z:14.6,w:3.6,d:3.2,roof:[206,170,104],plaster:[246,232,204],hall:1},{x:10.8,z:14.8,w:3.2,d:3.2,roof:[178,98,74]},
-  {x:-15.2,z:8.6,w:3.2,d:3.4,roof:[178,98,74],plaster:[246,234,206]},{x:13.6,z:8.2,w:3.2,d:3.4,roof:[206,170,104]}];
-const OS_TREES=[[-12,22,6],[9,24,6.5],[14,18,5],[-16,16,6],[0.9,17.5,5.4],[12.6,11.4,4.4],[-10.2,11.0,4.2],[-17,4,5],[17,3,5.2]];
-const OS_STALL={wine:[-5.6,5.4,2.6,1.3,[178,62,56]],corn:[3.0,5.4,2.6,1.3,[64,98,160]]};
-function os_market(ctx,S,C,st){setScreen(ctx,S);LBQ=[];DL=[];MX=null;const era=st.era||1215,t=st.t||0;
-  GV.hz0=14;GV.hz1=70;GV.hzA=0.85;HAZE=[226,236,246];
-  tSky(ctx);tHorizon(ctx,C,[132,190,106]);tFlock(ctx,C,0,8,30,{a:0.14,skip:(x,z)=>x>-12.2&&x<13.2&&z>-16.2&&z<14.6});
-  // the square: packed earth with stones in it, from the houses at the back to well behind the camera, and a lane out between the houses
-  poly3(ctx,C,[v3(-12,0.005,-16),v3(13,0.005,-16),v3(13,0.005,14.4),v3(-12,0.005,14.4)],[222,198,156],{n:NRM.U,grad:[0.02,0.04]});
-  poly3(ctx,C,[v3(-0.9,0.006,14.4),v3(2.9,0.006,14.4),v3(2.9,0.006,24),v3(-0.9,0.006,24)],[214,192,152],{n:NRM.U});
-  ctx.save();ctx.fillStyle="rgba(150,120,90,0.25)";for(let i=0;i<1500;i++){const x=-11.6+hash(i,11)*24.2,z=-6+hash(i,12)*20,p=pj(C,v3(x,0.006,z));if(p.z<NEAR||p.x<-20||p.x>W+20||p.y<-20||p.y>H+20)continue;ctx.beginPath();ctx.ellipse(p.x,p.y,0.07*p.s,0.03*p.s,0,0,TAU);ctx.fill();}ctx.restore();
-  // shadows first, on the ground under everything
-  const houses=OS_HOUSES.filter(h=>!(era>=1497&&h.hall)&&!(era>=1880&&h.shop)),bld=[];if(era>=1497)bld.push(OS_HALL);if(era>=1880)bld.push(OS_SHOP);
-  for(const h of houses){contactShadow(ctx,C,h.x,h.z,h.w,h.d,0.22);castShadow(ctx,C,h.x,h.z,h.w,h.d,5.4,0.13);}
-  for(const b of bld){mxSet(b.x,b.z,b.ang);contactShadow(ctx,C,b.R.X0,0,b.w,b.d,0.22);castShadow(ctx,C,b.R.X0,0,b.w,b.d,4.3,0.13);mxOff();}
-  for(const [k,s] of Object.entries(OS_STALL))contactShadow(ctx,C,s[0],s[1],s[2],s[3],0.18);contactShadow(ctx,C,-1.5,5.3,2.2,2.2,0.2);
-  // the buildings, the cross, the stalls and the people, far to near
-  const add=(p,fn)=>dlAdd(eyeD(C,p),fn);
-  for(const h of houses)add(v3(h.x+h.w/2,2,h.z+h.d/2),ctx=>os_timber(ctx,C,h.x,h.z,h.w,h.d,h));
-  add(v3(1.7,4,26),ctx=>os_church(ctx,C,-1.2,24));for(const [x,z,h] of OS_TREES)add(v3(x,h*0.4,z),ctx=>tTree(ctx,C,x,z,h,[104,170,100]));
-  const inB={os_hall:[],os_shop:[]},out=[];for(const f of (st.figs||[])){if(f.at==="hall")inB.os_hall.push(f);else if(f.at==="shop")inB.os_shop.push(f);else out.push(f);}
-  for(const b of bld)add(v3(b.x,1.5,b.z+b.d/2),ctx=>drawBuilding(ctx,C,b,st,inB[b.id]));
-  add(v3(-0.4,1.2,6.4),ctx=>os_cross(ctx,C,-0.4,6.4));
-  const w=OS_STALL.wine,cn=OS_STALL.corn,jugs=st.jugs||[0.32,0.24,0.4];
-  add(v3(w[0]+w[2]/2,1,w[1]+w[3]/2),ctx=>{os_stall(ctx,C,...w);[[-5.1,5.9],[-4.5,5.85],[-3.7,5.95]].forEach(([x,z],i)=>os_jug(ctx,C,x,0.86,z,jugs[i],[[176,120,84],[160,108,80],[186,130,90]][i]));
-    if(st.charter){const ch=st.charter,P_=pj(C,v3(-5.6,1.34,5.33));if(P_.z>NEAR)os_charter(ctx,P_.x,P_.y,P_.s,ch);}});
-  for(const [x,z] of [[-5.3,7.4],[-4.6,7.5],[-3.9,7.35]])add(v3(x,0.5,z),ctx=>os_barrel(ctx,C,x,z,0.95));
-  add(v3(cn[0]+cn[2]/2,1,cn[1]+cn[3]/2),ctx=>{os_stall(ctx,C,...cn);if(era===1871)os_bushels(ctx,C,st.bushels||0);});
-  for(const [x,z,h] of [[3.4,7.3,0.9],[4.1,7.4,0.95],[4.8,7.3,0.85],[5.4,7.5,0.8]])add(v3(x,0.45,z),ctx=>os_sack(ctx,C,x,z,h));
-  if(era===1215){add(v3(5.3,0.3,5.0),ctx=>os_sack(ctx,C,5.3,5.0,0.7));add(v3(3.55,0.3,4.3),ctx=>os_bushel(ctx,C,3.55,0,4.3,0.38,1.3));
-    // close to us, out of focus: a handcart of apples, a barrel and a sack
-    add(v3(-3.15,0.5,1.4),ctx=>os_cart(ctx,C,-3.9,1.0));
-    add(v3(4.6,0.5,1.4),ctx=>os_barrel(ctx,C,4.6,1.4,1.0));add(v3(5.4,0.4,1.6),ctx=>os_sack(ctx,C,5.4,1.6,0.8));}
-  for(const f of out)add(v3(f.x,0.8,f.z),ctx=>{const B=tFig(ctx,C,f.id,f.x,f.z,f);if(f.onDraw)f.onDraw(ctx,B);});
-  if(st.extra)st.extra(C,add);
-  dlDraw(ctx);if(st.over)st.over(ctx,C);
-  const ts=st.ts||C.ts||[300,860,8];tiltShift(ctx,ts[0],ts[1],ts[2],ts[3]);vignetteSoft(ctx,[60,70,110],0.14);
-  lbDraw(ctx,S);setScreen(ctx,S);if(st.after)st.after(ctx);GV.hzA=0.8;HAZE=[222,236,248];}
-// the charter pinned to the stall's post, with its seal; flip (0..1) turns it over, as each new year reads it again
-function os_charter(ctx,x,y,s,ch){const k=Math.abs(Math.cos(Math.PI*(ch.flip||0))),w=0.34*s,h=0.42*s;ctx.save();ctx.translate(x,y);ctx.scale(Math.max(0.04,k),1);
-  ctx.fillStyle="rgba(60,40,20,0.2)";ctx.fillRect(-w/2+0.012*s,-h/2+0.016*s,w,h);const g=ctx.createLinearGradient(0,-h/2,0,h/2);g.addColorStop(0,"#fbf3dc");g.addColorStop(1,"#e6d2a4");ctx.fillStyle=g;ctx.fillRect(-w/2,-h/2,w,h);
-  ctx.strokeStyle="rgba(90,70,50,0.45)";ctx.lineWidth=Math.max(1,0.008*s);for(let i=0;i<7;i++){ctx.beginPath();ctx.moveTo(-w/2+0.04*s,-h/2+0.06*s+i*0.042*s);ctx.lineTo(w/2-0.04*s-(i===6?0.1*s:0),-h/2+0.06*s+i*0.042*s);ctx.stroke();}
-  ctx.strokeStyle="rgba(160,40,40,0.9)";ctx.beginPath();ctx.moveTo(0,h/2);ctx.lineTo(-0.01*s,h/2+0.06*s);ctx.stroke();const r=0.035*s*(1+0.4*(1-spring(clamp(ch.seal==null?1:ch.seal,0,1))));ctx.fillStyle="#b8322c";ctx.beginPath();ctx.arc(-0.01*s,h/2+0.08*s,r,0,TAU);ctx.fill();
-  ctx.fillStyle="#d8574a";ctx.beginPath();ctx.arc(0,-h/2+0.015*s,Math.max(1.5,0.012*s),0,TAU);ctx.fill();ctx.restore();}
-// 1871: the corn stall lined with measures, every one of them called a bushel; tags (0..1) puts a tag on each, one by one
-const OS_BUSHELS=[[3.3,0.86,5.95,0.22,1.2],[3.7,0.86,5.92,0.3,1.0],[4.1,0.86,5.96,0.18,1.35],[4.5,0.86,5.92,0.34,0.95],[4.9,0.86,5.94,0.26,1.15],[5.3,0.86,5.98,0.2,1.3],
-  [3.5,0,5.0,0.36,1.0],[4.35,0,4.9,0.28,1.25],[5.2,0,5.05,0.4,0.9]];
-function os_bushels(ctx,C,tags){OS_BUSHELS.forEach(([x,y,z,h,w],i)=>{const B=os_bushel(ctx,C,x,y,z,h,w);if(!B||i>5)return;const u=clamp(tags*7-i,0,1);if(u<=0)return;
-  // the tags take turns, high and low, so each has room
-  const top=B.y-h*B.s-0.1*B.s,st_=i%2?104:24;lbAdd(c=>{c.save();c.translate(B.x,top);const k=0.6+0.4*spring(u);c.scale(k,k);c.globalAlpha*=clamp(u*2,0,1);
-    c.strokeStyle="rgba(120,96,60,0.9)";c.lineWidth=2;c.beginPath();c.moveTo(0,0);c.lineTo(0,-st_);c.stroke();signBoard(c,0,-st_+2,"a bushel",{size:28,w:800,bg:[255,250,236],rim:[200,170,110]});c.restore();});});}
+/* ---------- today: where does it run? ---------- */
+// binder 12 opening on the desk, from above (u, 0 to 1): its cover lies over the right-hand page, then swings over the rings to the left
+function os_cover12(ctx){const B=OS_OPEN;ctx.drawImage(wc_kept("cover12",W,H,q=>{const col=os_bindCol(11),x=B.mid-40,w=B.x+B.w-x;
+    wc_wash(q,wc_rrPts(x,B.y,w,B.h,18),col,{kind:"cover",lw:1.6,seed:24});wc_flat(q,wc_rect(x,B.y+8,54,B.h-16),wc_dim(col,0.2),1,"spine");
+    wc_wash(q,wc_rect(x+w/2-130,B.y+250,300,190),WC_CARD,{kind:"page",lw:1.3,seed:25});}),0,0);
+  const cx=B.mid-40+(B.x+B.w-B.mid+40)/2+20;wc_T(ctx,"12",cx,B.y+352,{w:800,size:84,align:"center",col:WC_DARK});
+  wc_T(ctx,"Data definitions",cx,B.y+414,{w:600,size:30,align:"center",col:WC_MUTED});}
+function os_opening12(ctx,u){const B=OS_OPEN;if(u>=1)return os_open12(ctx);
+  const c=Math.cos(Math.PI*clamp(u,0,1));ctx.save();ctx.beginPath();ctx.rect(B.mid-46,0,W,H);ctx.clip();os_open12(ctx,{text:c>0?clamp((0.82-c)/0.67,0,1):1});ctx.restore();
+  ctx.save();ctx.translate(B.mid,0);ctx.scale(Math.max(0.02,Math.abs(c)),1);ctx.translate(-B.mid,0);
+  if(c>0)os_cover12(ctx);else{ctx.beginPath();ctx.rect(0,0,B.mid-46,H);ctx.clip();os_open12(ctx,{text:0});}ctx.restore();}
+// a highlighter lying on the desk, from above: a pale body, the cap and the felt tip in its colour; kept per colour
+function os_marker(ctx,x,y,rot,col){ctx.save();ctx.translate(x,y);ctx.rotate(rot);ctx.drawImage(wc_kept("marker|"+col,300,100,q=>{
+    q.save();q.filter="blur(5px)";q.fillStyle="rgba(70,50,30,0.26)";q.fillRect(30,46,236,30);q.restore();
+    wc_wash(q,wc_rrPts(26,30,196,42,14),mix(col,[255,255,255],0.6),{kind:"thing",lw:1.3,seed:col[0]});
+    wc_wash(q,wc_rrPts(204,27,70,48,12),col,{kind:"thing",lw:1.3,seed:col[1]});wc_wash(q,[[28,40],[8,46],[8,56],[28,62]],wc_dim(col,0.1),{kind:"thing",lw:1.1,seed:col[2]});}),-150,-50);
+  ctx.restore();}
+// policy 12's page, close, as he goes through it line by line: the paper filling the frame, the holes for the rings down the left
+function os_paintPolicy(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),GV.paper,{kind:"paper",line:false,seed:93});
+  for(const y of [170,540,910])wc_wash(ctx,wc_ell(96,y,24,24,24),wc_dim(GV.oak,0.08),{kind:"thing",lw:1.3,seed:y});
+  const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"rgba(255,250,236,0)");g.addColorStop(1,"rgba(150,130,100,0.1)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
+// what policy 12 says, line by line; where each line runs (0: in the work, green; 1: a decision someone owns, gold; 2: it can go, grey),
+// and what Yusuf writes beside it
+const OS_LINES=[["12.1","Each term has a named owner."],["12.2","Each term used in a report is in the glossary."],["12.3","Terms about people are marked as personal data."],
+  ["12.4","Reports count by the glossary's definitions."],["12.5","Each term's owner decides its definition,","and how it maps to the government's."],
+  ["12.6","Each decision is written down with the term."],["12.7","Staff take care to use terms correctly."]];
+const OS_WHERE=[0,0,0,0,1,1,2],OS_NOTES=["a required field","a check","a tag","a test","award: Mei decides","in the glossary",null];
+const OS_HIC=[GV.green,GV.gold,GV.grey],OS_HINK=[GV.greenInk,GV.goldInk,GV.greyInk],OS_KEY=["runs in the work","a decision someone owns","can go"];
+const OS_PG={x:300,tx:384,y0:290,dy:78,lh:44,size:34,note:1350};
+// a highlighter's stroke behind a line of text, as long as the text, drawn from the left as p goes from 0 to 1; kept per colour.
+// h: how tall it is (a line of the page, or a swatch in his key)
+function os_hiStroke(ctx,x,y,w,col,p,seed,h=64){if(p<=0)return;const c=wc_kept("hiStroke|"+col+"|"+seed,1200,70,q=>wc_wash(q,wc_resample(wc_rect(8,10,1180,48),12),col,{kind:"swatch",line:false,a:0.5,seed}));
+  const top=y-12-h/2;ctx.save();ctx.beginPath();ctx.rect(x-12,top-6,(w+24)*clamp(p,0,1),h+12);ctx.clip();ctx.globalCompositeOperation="multiply";ctx.drawImage(c,x-12,top,w+24,h);ctx.restore();}
+// the page: its heading, the lines, a stroke behind each as it's sorted (hi(k), 0 to 1), Yusuf's note beside it (note(k)), his key at the
+// top (key(j)), and the line that can go struck through (strike)
+function os_policy(ctx,hi,note,key,strike){const P=OS_PG;wc_T(ctx,"Policy 12 · Data definitions",P.x,128,{w:800,size:50,col:WC_DARK});
+  wc_T(ctx,"Business terms are defined consistently across the organisation.",P.x,188,{w:600,size:30,col:WC_MUTED});
+  let y=P.y0;OS_LINES.forEach((L,k)=>{const rows=L.slice(1),c=OS_WHERE[k],u=hi(k),n=rows.length;
+    rows.forEach((s,i)=>os_hiStroke(ctx,P.tx,y+i*P.lh,tw(ctx,s,P.size,600),OS_HIC[c],clamp(u*n-i,0,1),40+k*3+i));
+    wc_T(ctx,L[0],P.x,y,{w:700,size:P.size,col:WC_MUTED});rows.forEach((s,i)=>wc_T(ctx,s,P.tx,y+i*P.lh,{w:600,size:P.size,col:c===2&&strike>0.5?WC_MUTED:WC_INK}));
+    if(c===2&&strike>0){const w=tw(ctx,rows[0],P.size,600)*easeCam(clamp(strike,0,1));ctx.save();ctx.strokeStyle=rgba(GV.greyInk,0.9);ctx.lineWidth=4;ctx.lineCap="round";
+      ctx.beginPath();ctx.moveTo(P.tx-8,y-11);ctx.quadraticCurveTo(P.tx+w/2,y-15,P.tx-8+w+16,y-10);ctx.stroke();ctx.restore();}
+    if(OS_NOTES[k])wc_hand(ctx,OS_NOTES[k],P.note,y+(n-1)*P.lh/2,{size:36,w:700,col:OS_HINK[c],p:note(k)});y+=P.dy+(n-1)*P.lh;});
+  // the key: a stroke of each colour, and what it means, in his hand
+  OS_KEY.forEach((s,j)=>{const u=key(j);if(u<=0)return;const ky=84+j*44;os_hiStroke(ctx,P.note,ky,44,OS_HIC[j],clamp(u*2,0,1),70+j,34);
+    wc_hand(ctx,s,P.note+70,ky,{size:30,w:700,col:OS_HINK[j],p:clamp(u*2-0.6,0,1)});});}
 
-// ---- cameras: keys [t, eye, target, focal length, blur band?], eased like a sine between them ----
-// A key's sixth item says how the move into it goes: "orbit" swings eye and target round the town's middle (so a move from one
-// office to the next goes round the green, not across it), "line" goes straight (inside a room, or in the market).
-function os_keys(list,o){o=o||{};const cx=o.cx||0,cz=o.cz||0;let pe=null,pg=null;
-  return{cx,cz,keys:list.map(k=>{const e=cyl(k[1].x,k[1].y,k[1].z,cx,cz),g=cyl(k[2].x,k[2].y,k[2].z,cx,cz);
-    if(pe)e[1]=pe[1]+(((e[1]-pe[1])%360+540)%360-180);if(pg)g[1]=pg[1]+(((g[1]-pg[1])%360+540)%360-180);pe=e;pg=g;
-    return{t:k[0],e,g,E:k[1],G:k[2],f:k[3],ts:k[4],mode:k[5]||o.mode||"line"};})};}
-function os_cam(K,t,o){o=o||{};const ks=K.keys;let a=ks[0],b=ks[0],u=0;
-  if(t>=ks[ks.length-1].t)a=b=ks[ks.length-1];else for(let i=1;i<ks.length;i++)if(t<ks[i].t){a=ks[i-1];b=ks[i];u=t<=a.t?0:easeCam((t-a.t)/(b.t-a.t));break;}
-  let e,g;if(b.mode==="orbit"){const L=(p,q)=>p.map((v,i)=>lerp(v,q[i],u));e=fromCyl(L(a.e,b.e),K.cx,K.cz);g=fromCyl(L(a.g,b.g),K.cx,K.cz);}
-  else{e=vadd(a.E,vmul(vsub(b.E,a.E),u));g=vadd(a.G,vmul(vsub(b.G,a.G),u));}
-  if(o.drift!==0){const d=o.drift||0.01;e=v3(e.x+Math.sin(t*0.37)*d,e.y+Math.sin(t*0.29+1)*d*0.7,e.z);}
-  const C=cam3(e,g,lerp(a.f,b.f,u));if(a.ts&&b.ts)C.ts=a.ts.map((v,i)=>lerp(v,b.ts[i],u));else if(a.ts||b.ts)C.ts=a.ts||b.ts;return C;}
-// a point in an office's own coordinates (x across its front, z from the front to the back), in the town's
-const os_in=(id,x,y,z)=>bldP(id,x,y,z);
+/* ---------- today: where decisions enter ---------- */
+// a warm light coming up on something (a, 0 to 1), as on the shelf when he listened
+function os_warm(ctx,cx,cy,r,a){if(a<=0.01)return;ctx.save();ctx.globalCompositeOperation="soft-light";wc_glowAt(ctx,cx,cy+50,r*1.1,[255,190,90],0.9*a);
+  ctx.globalCompositeOperation="screen";wc_glowAt(ctx,cx,cy,r,[255,222,160],0.42*a);ctx.restore();}
+// the steps of the data team's loop where a decision enters: the step, the words that name it, and what Yusuf writes there
+const OS_PINS=[[0,"a term",["a term"]],[1,"a classification",["a classification"]],[3,"an owner",["an owner","a contract"]],[4,"a rule",["a rule"]],
+  [7,"an approval",["an approval"]],[9,"a version",["a version"]]];
+// the loop going round on the poster (x,y,w,h), from the first step (u 0) past the last (u 0.9) and back to the first (u 1): a firmer
+// line along it, and each step darkening, with a little lift, as the line reaches it
+function os_loopRun(ctx,x,y,w,h,u){if(u<=0)return;const k=w/1260,cx=x+w/2,cy=y+h*450/810,a0=-Math.PI/2,gap=0.13;
+  ctx.save();ctx.strokeStyle=rgba(wc_dim(GV_LOOPC,0.15),0.8);ctx.lineWidth=6*k;ctx.lineCap="round";
+  for(let i=0;i<10;i++){const s=a0+i/10*TAU+gap,e=Math.min(a0+(i+1)/10*TAU-gap,a0+u*TAU);if(e<=s)break;ctx.beginPath();ctx.ellipse(cx,cy,330*k,270*k,0,s,e);ctx.stroke();}
+  ctx.restore();
+  for(let i=0;i<10;i++){const v=clamp((u-i/10)*12,0,1);if(v<=0)break;const [sx,sy]=gv_loopPos(i,x,y,w,h),r=30*k*(1+0.14*Math.sin(Math.PI*clamp(v*1.4,0,1)));
+    ctx.save();ctx.globalCompositeOperation="multiply";ctx.fillStyle=rgba(wc_lit(GV_LOOPC,0.25),0.6*v);ctx.beginPath();ctx.arc(sx,sy,r,0,TAU);ctx.fill();ctx.restore();}}
+// at step i of the poster (x,y,w,h): a gold pin pushed in at its edge (u), a gold ring drawn round it (ring), and what Yusuf writes
+// there, a line at a time (lab(j), 0 to 1): under the step's name or, for the first step, inside the loop
+function os_goldPin(ctx,i,x,y,w,h,u,ring,lines,lab){const k=w/1260,[sx,sy]=gv_loopPos(i,x,y,w,h),c=Math.cos(-Math.PI/2+i/10*TAU);
+  if(ring>0){ctx.save();ctx.strokeStyle=rgba(GV.gold,0.95);ctx.lineWidth=Math.max(2,5*k);ctx.lineCap="round";ctx.beginPath();
+    ctx.arc(sx,sy,38*k,-Math.PI/2,-Math.PI/2+TAU*easeCam(clamp(ring,0,1)));ctx.stroke();ctx.restore();}
+  if(u>0){const d=easeCam(clamp(u,0,1));withA(ctx,clamp(u*3,0,1),()=>gv_pin(ctx,sx+26*k,sy-30*k-(1-d)*40*k,GV.gold,lerp(2.4,1.6,d)*k));}
+  if(!lab)return;const top=i===0,al=top?"center":c>0?"left":"right",nx=top?sx:sx+(c>0?1:-1)*(i===1||i===9?100:46)*k,ny=top?sy+80*k:sy+56*k;
+  lines.forEach((s,j)=>{const p=lab(j);if(p>0)wc_hand(ctx,s,nx,ny+j*38*k,{size:32*k,w:700,align:al,col:GV.goldInk,p});});}
 
-// ---- shots: a chapter can cut between pictures, with a short dissolve ----
-// list: [[start, draw(ctx,S,t)], ...] in order; each draw paints the whole frame. From its start, a shot fades in over xf seconds.
-function os_shots(ctx,S,t,list,xf){xf=xf==null?0.7:xf;let i=0;for(let k=0;k<list.length;k++)if(t>=list[k][0])i=k;
-  list[i][1](ctx,S,t);const u=i>0?(t-list[i][0])/xf:1;if(u>=1)return;
-  const cv=ctx.canvas,off=pcanvas2("os_x",cv.width,cv.height),o=off.getContext("2d");o.save();o.setTransform(1,0,0,1,0,0);o.globalAlpha=1;o.globalCompositeOperation="source-over";list[i-1][1](o,S,t);o.restore();
-  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=1-easeCam(u);ctx.drawImage(off,0,0);ctx.restore();}
-
-// ---- words: labels and speech bubbles, drawn after the blur, kept inside the frame and clear of the captions ----
-const OS_SAFE={x0:40,x1:W-40,y0:40,y1:868};
-// a sign whose bottom centre is at (x,y), nudged inside the frame; k scales it from its foot (for a pop)
-function os_board(c,x,y,text,o){o=o||{};const sz=o.size||30,lines=Array.isArray(text)?text:[text];c.save();c.font=font(o.w||800,sz);
-  const pw=Math.max(...lines.map(l=>c.measureText(l).width))+sz*1.3+(o.dot?sz*0.55:0),ph=sz*0.75+sz*1.22*lines.length;
-  const X=clamp(x,OS_SAFE.x0+pw/2,OS_SAFE.x1-pw/2),Y=clamp(y,OS_SAFE.y0+ph,OS_SAFE.y1);c.restore();
-  const k=o.k==null?1:o.k;c.save();c.translate(X,Y);c.scale(k,k);signBoard(c,0,0,lines,{size:sz,w:o.w||800,dot:o.dot,bg:o.bg,ink:o.ink,rim:o.rim,a:o.a});c.restore();return{X,Y,w:pw,h:ph};}
-// a label at a point of the world, lifted dy pixels above it; it pops in as a goes from 0 to 1
-function os_tag(C,p,text,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const P_=pj(C,p);if(P_.z<NEAR)return;
-  lbAdd(c=>os_board(c,P_.x+(o.dx||0),P_.y-(o.dy==null?16:o.dy),text,Object.assign({},o,{a:clamp(a*1.6,0,1),k:o.pop===false?1:0.7+0.3*spring(clamp(a,0,1))})));}
-// a label over a figure (B is what tFig returned)
-function os_figTag(B,text,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01||!B||!B.top)return;
-  lbAdd(c=>os_board(c,B.x+(o.dx||0),B.top-(o.dy==null?14:o.dy),text,Object.assign({},o,{a:clamp(a*1.6,0,1),k:0.7+0.3*spring(clamp(a,0,1))})));}
-// a speech bubble from a figure's head; o.left puts it on the figure's left
-function os_say(B,lines,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01||!B||!B.top)return;
-  lbAdd(c=>{const sz=o.size||32,w=speechW(c,lines,sz,o.w||700),h=lines.length*sz*1.3+sz*0.9,tx=B.x+(o.tdx||0),ty=B.top+(o.tdy==null?18:o.tdy);
-    const x=clamp(o.left?tx-w+90:tx-90,OS_SAFE.x0,OS_SAFE.x1-w),y=clamp(ty-h-(o.gap||64),OS_SAFE.y0,OS_SAFE.y1-h);
-    tSpeech(c,x,y,w,lines,tx,ty,{size:sz,a:clamp(a*1.6,0,1),k:0.85+0.15*spring(clamp(a,0,1)),w:o.w||700});});}
-// the place and the year, top left; list [[t, text], ...]: the sign turns over to show the next
-function os_marker(ctx,t,list,a){let i=0;for(let k=0;k<list.length;k++)if(t>=list[k][0])i=k;const u=i>0?clamp((t-list[i][0])/0.4,0,1):1;
-  let txt=list[i][1],sy=1;if(u<1){sy=Math.abs(Math.cos(Math.PI*u));if(u<0.5)txt=list[i-1][1];}
-  ctx.save();ctx.translate(0,96);ctx.scale(1,Math.max(0.03,sy));ctx.translate(0,-96);marker(ctx,txt,a==null?1:a,u<1);ctx.restore();}
-// how far a moment is into a fade: 0 before t0, 1 after t0+d
-const os_in01=(t,t0,d)=>clamp((t-t0)/(d||0.5),0,1);
-// in and out: up from t0, down from t1
-const os_io=(t,t0,t1,d)=>Math.min(os_in01(t,t0,d||0.4),1-os_in01(t,t1,d||0.4));
-
-// ---- the title and the end: a painted board over the town, blurred behind it ----
-function os_card(ctx,a,big,small,foot){if(a<=0.01)return;blurAll(ctx,10*a,[[44,52,80],0.18*a]);ctx.save();ctx.globalAlpha*=clamp(a*1.4,0,1);const k=0.94+0.06*easeCam(a);
-  ctx.translate(W/2,450);ctx.scale(k,k);ctx.translate(-W/2,-450);ctx.font=font(800,big[1]);const bw=Math.max(ctx.measureText(big[0]).width+160,tw(ctx,small,40,700)+160,980),bh=small?320:240,bx=W/2-bw/2,by=450-bh/2-30;
-  ctx.save();ctx.shadowColor="rgba(30,36,60,0.35)";ctx.shadowBlur=40;ctx.shadowOffsetY=16;rr(ctx,bx,by+8,bw,bh,28);ctx.fillStyle=rgba([206,160,72],1);ctx.fill();ctx.restore();
-  const g=ctx.createLinearGradient(0,by,0,by+bh);g.addColorStop(0,"#fffaf0");g.addColorStop(1,"#f6ecd4");rr(ctx,bx,by,bw,bh,28);ctx.fillStyle=g;ctx.fill();
-  ctx.strokeStyle="rgba(214,170,90,0.6)";ctx.lineWidth=3;rr(ctx,bx+16,by+16,bw-32,bh-32,18);ctx.stroke();
-  T(ctx,big[0],W/2,by+(small?150:150),{w:800,size:big[1],align:"center",color:rgba(PAL.ink,1)});if(small)T(ctx,small,W/2,by+232,{w:700,size:40,align:"center",color:rgba([110,90,60],1)});
-  if(foot)signBoard(ctx,W/2,by+bh+110,foot,{size:30,w:700,dot:PAL.band,bg:[255,252,244]});ctx.restore();}
-
-// ---- things on Yusuf's desk, in the office's own coordinates (the desk top is at y; x across, z from the front) ----
-// a sheet of paper lying flat, its top edge away from us; fn(c) writes on it in centimetres from its top left corner
-function os_paper(ctx,C,x0,z0,x1,z1,y,fn,o){o=o||{};fq3(ctx,C,x0+0.01,z0-0.008,x1+0.01,z1-0.008,y+0.001,[120,100,80],{a:0.18});fq3(ctx,C,x0,z0,x1,z1,y+0.003,o.col||[255,252,244],{edge:0.4});
-  if(fn)surfDraw(ctx,C,v3(x0,y+0.004,z1),v3(1,0,0),v3(0,0,1),fn);}
-// an open ring binder lying on the desk: its cover, two pages and the rings; left(c), right(c) write on the pages
-function os_binderOpen(ctx,C,cx,cz,y,o){o=o||{};const pw=o.pw||0.3,pd=o.pd||0.4,col=o.col||PAL.navy;
-  fq3(ctx,C,cx-pw-0.04,cz-pd/2-0.03,cx+pw+0.04,cz+pd/2+0.03,y+0.002,mix(col,[0,0,0],0.15),{edge:0.4});
-  os_paper(ctx,C,cx-pw,cz-pd/2,cx-0.01,cz+pd/2,y+0.008,o.left);os_paper(ctx,C,cx+0.01,cz-pd/2,cx+pw,cz+pd/2,y+0.008,o.right);
-  for(let i=0;i<3;i++){const p=pj(C,v3(cx,y+0.02,cz-pd/2+0.08+i*pd*0.4));if(p.z<NEAR)continue;ctx.save();ctx.strokeStyle="rgba(170,176,190,1)";ctx.lineWidth=Math.max(1.5,0.008*p.s);ctx.beginPath();ctx.ellipse(p.x,p.y,0.012*p.s,0.02*p.s,0,0,TAU);ctx.stroke();ctx.restore();}}
-// the three trays Yusuf sorts the binder into: runs, owned decision, retire
-const OS_TRAYS=[{x:0.8,col:[96,176,120],name:"runs in the work"},{x:1.32,col:[226,178,64],name:"owned decisions"},{x:1.84,col:[160,164,176],name:"can go"}];
-function os_tray(ctx,C,x,z,y,col,n){const w=0.44,d=0.32,h=0.06;ibox(ctx,C,x-w/2,y,z-d/2,w,0.012,d,mix(col,[0,0,0],0.1));for(const [a,b,c_,e] of [[x-w/2,z-d/2,w,0.012],[x-w/2,z+d/2-0.012,w,0.012]])ibox(ctx,C,a,y,b,c_,h,e,col,{edge:0.4});
-  for(const xx of [x-w/2,x+w/2-0.012])ibox(ctx,C,xx,y,z-d/2,0.012,h,d,col,{edge:0.4});for(let i=0;i<(n||0);i++)fq3(ctx,C,x-w/2+0.03+i*0.004,z-d/2+0.03,x+w/2-0.03,z+d/2-0.03,y+0.014+i*0.006,[255,252,244],{edge:0.3});}
-// a page flying from one place to another along an arc, turning a little as it goes (u: 0 to 1)
-function os_flyPage(ctx,C,a,b,u,lift){if(u<=0||u>=1)return;const e=easeCam(u),p=v3(lerp(a.x,b.x,e),lerp(a.y,b.y,e)+Math.sin(Math.PI*e)*(lift||0.35),lerp(a.z,b.z,e)),w=0.13,d=0.17,r=Math.sin(Math.PI*e)*0.5;
-  const cs=Math.cos(r),sn=Math.sin(r),q=[[-w,-d],[w,-d],[w,d],[-w,d]].map(([x,z])=>v3(p.x+x*cs-z*sn*0.3,p.y+x*sn*0.4,p.z+z*cs+x*sn*0.3));poly3(ctx,C,q,[255,252,244],{edge:0.5});}
-
-// ---- the registrar's counter: the government's reporting manual, thick, and the university's own term on a card ----
-function os_manual(ctx,C,x,z,y){ibox(ctx,C,x,y,z,0.44,0.16,0.34,[46,72,120],{edge:0.5});ibox(ctx,C,x+0.02,y+0.02,z-0.006,0.4,0.12,0.02,[246,242,230],{edge:0.3});
-  wq3(ctx,C,x+0.08,y+0.05,x+0.36,y+0.11,z-0.008,[250,248,240]);}
-function os_tent(ctx,C,x,z,y,fn){const h=0.2,w=0.3;poly3(ctx,C,[v3(x,y,z),v3(x+w,y,z),v3(x+w,y+h,z+0.07),v3(x,y+h,z+0.07)],[255,252,244],{n:vnorm(v3(0,0.33,-1)),edge:0.5});
-  if(fn)surfDraw(ctx,C,v3(x,y+h,z+0.07),v3(1,0,0),vnorm(v3(0,h,0.07)),fn);}
-
-// ---- the data team's cork board: the two reports, when each ran, and the day the term changed ----
-function os_reportCard(ctx,C,x0,y0,x1,y1,z,col,lines,a){if(a<=0.01)return;const lift=(1-spring(a))*0.25;wq3(ctx,C,x0,y0,x1,y1,z-0.006-lift,ilit(col,1),{edge:0.4});
-  surfDraw(ctx,C,v3(x0,y1,z-0.008-lift),v3(1,0,0),v3(0,1,0),c=>lines.forEach(([s,sz,w,cl],i)=>Tw(c,s,(x1-x0)*50,lines.slice(0,i+1).reduce((m,l)=>m+l[1]*1.3,0)+2,{w:w||700,size:sz,align:"center",color:rgba(cl||PAL.ink,1)})));
-  const p=pj(C,v3((x0+x1)/2,y1-0.04,z-0.01-lift));if(p.z>NEAR){ctx.fillStyle="#d8574a";ctx.beginPath();ctx.arc(p.x,p.y,Math.max(2,0.02*p.s),0,TAU);ctx.fill();}}
-
-// ---- the wheel: a signpost on each of the ten paths, its board one of DAMA's ten other knowledge areas ----
-const OS_AREAS=[["data","architecture"],["data modelling","& design"],["data storage","& operations"],["data security"],["data integration","& interoperability"],["documents","& content"],["reference","& master data"],["data warehousing","& BI"],["metadata"],["data quality"]];
-// the loop's pins: the steps where a governance decision enters the work, and what's pinned there
-const OS_PINS=[[0,["a term"]],[1,["a classification"]],[3,["an owner","a contract"]],[4,["a rule"]],[7,["an approval"]],[9,["a version"]]];
-function os_pin(ctx,C,p,a,big){if(a<=0.01)return;const P_=pj(C,p);if(P_.z<NEAR)return;const k=(0.6+0.4*spring(a))*(big||1),r=0.03*P_.s*k,lift=(1-spring(a))*40;ctx.save();ctx.globalAlpha*=clamp(a*2,0,1);
-  ctx.fillStyle="rgba(60,40,20,0.3)";ctx.beginPath();ctx.ellipse(P_.x+r*0.4,P_.y+r*0.5,r,r*0.6,0,0,TAU);ctx.fill();const g=ctx.createRadialGradient(P_.x-r*0.3,P_.y-r*0.4-lift,1,P_.x,P_.y-lift,r);g.addColorStop(0,"#fff6c8");g.addColorStop(1,rgba(PAL.gold,1));ctx.fillStyle=g;ctx.beginPath();ctx.arc(P_.x,P_.y-lift,r,0,TAU);ctx.fill();ctx.restore();}
-
-// ---- a document held out in front at chest height, below the face; fn writes on its page (figure units, 200 x 250 round its middle) ----
-function os_heldDoc(fn,col){return(cx,P_,hands)=>{const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my+112);
-  cx.fillStyle="rgba(40,40,60,0.18)";rr(cx,-104,-122,216,262,8);cx.fill();cx.fillStyle=rgba(col||[250,248,240],1);rr(cx,-110,-130,220,262,8);cx.fill();
-  cx.fillStyle="#fffdf6";rr(cx,-100,-122,200,246,5);cx.fill();if(fn)fn(cx);cx.restore();fingers(cx,P_,[[mx-104,my-6],[mx+104,my-8]]);};}
-
-// ---- the data team's cork board, Jun's screen, the registrar's counter (chapter 4) ----
-// a round green tick, pinned to a card's corner (u: 0 to 1, for a pop)
-function os_tick(ctx,C,p,u){if(u<=0.01)return;const P_=pj(C,p);if(P_.z<NEAR)return;const r=0.045*P_.s*(0.6+0.4*spring(u));ctx.save();ctx.globalAlpha*=clamp(u*2,0,1);
-  ctx.fillStyle=rgba([70,160,100],1);ctx.beginPath();ctx.arc(P_.x,P_.y,r,0,TAU);ctx.fill();ctx.strokeStyle="#fff";ctx.lineWidth=r*0.28;ctx.lineCap="round";ctx.lineJoin="round";
-  ctx.beginPath();ctx.moveTo(P_.x-r*0.45,P_.y+r*0.02);ctx.lineTo(P_.x-r*0.1,P_.y+r*0.36);ctx.lineTo(P_.x+r*0.48,P_.y-r*0.34);ctx.stroke();ctx.restore();}
-// the glossary's entry for award, on Jun's screen (102 x 62 cm): n brings in Monday's new line, m the note that it changed
-function os_term(c,n,m){c.fillStyle="#f6f9fc";c.fillRect(0,0,102,62);c.fillStyle=rgba([226,236,246],1);c.fillRect(0,0,102,10);
-  Tw(c,"glossary",4,7,{w:700,size:4,color:rgba([96,104,128],1)});Tw(c,"award",4,21,{w:800,size:7.5,color:rgba(PAL.ink,1)});
-  const tick=(x,y)=>{c.strokeStyle=rgba([70,160,100],1);c.lineWidth=0.9;c.lineCap="round";c.beginPath();c.moveTo(x,y-1.2);c.lineTo(x+1.2,y);c.lineTo(x+3.2,y-2.8);c.stroke();};
-  Tw(c,"what counts:",4,29.5,{w:600,size:4,color:rgba([96,104,128],1)});["graduate certificates","masters and doctorates"].forEach((s,i)=>{tick(5,36.2+i*6.6);Tw(c,s,10.5,37+i*6.6,{w:600,size:4.2,color:rgba([60,70,100],1)});});
-  if(n>0){c.save();c.globalAlpha*=clamp(n*2,0,1);c.fillStyle=rgba([255,226,150],0.9);rr(c,2.5,45.5-4*(1-spring(n)),97,14.5,1.6);c.fill();tick(5,51.2);
-    Tw(c,"microcredentials,",10.5,52,{w:800,size:4.2,color:rgba([120,80,20],1)});Tw(c,"6 credit points or more",10.5,57.6,{w:700,size:4.2,color:rgba([120,80,20],1)});c.restore();}
-  if(m>0){c.save();c.globalAlpha*=clamp(m*2,0,1);c.fillStyle=rgba(PAL.gold,1);rr(c,62,14.5,36,8.6,4.3);c.fill();Tw(c,"changed Monday",80,20.4,{w:800,size:3.6,align:"center",color:rgba([74,52,20],1)});c.restore();}}
-// a book standing on the counter, its cover to us; fn writes on the cover in centimetres from its top left
-function os_bookUp(ctx,C,x,z,y,w,h,col,fn){ibox(ctx,C,x+0.012,y,z+0.004,w,h,0.08,mix(col,[255,255,255],0.75),{edge:0.4});ibox(ctx,C,x,y,z,w,h,0.012,col,{edge:0.5});
-  if(fn)surfDraw(ctx,C,v3(x,y+h,z-0.002),v3(1,0,0),v3(0,1,0),fn);}
-// a dashed gold arc between two points of the world, drawn with the words (u: how much of it is drawn); o.label sits on its top
-function os_arc(C,a,b,u,o){o=o||{};if(u<=0.01)return;lbAdd(c=>{const A=pj(C,a),B=pj(C,b);if(A.z<NEAR||B.z<NEAR)return;const mx=(A.x+B.x)/2,my=Math.min(A.y,B.y)-(o.lift||90);c.save();
-  c.strokeStyle=rgba(PAL.gold,0.95);c.lineWidth=5;c.lineCap="round";c.setLineDash([14,12]);c.beginPath();const n=24;for(let i=0;i<=n*u;i++){const s=i/n,x=(1-s)*(1-s)*A.x+2*s*(1-s)*mx+s*s*B.x,y=(1-s)*(1-s)*A.y+2*s*(1-s)*my+s*s*B.y;i?c.lineTo(x,y):c.moveTo(x,y);}c.stroke();c.restore();
-  const la=o.la==null?1:o.la;if(o.label&&la>0.01)os_board(c,mx,(A.y+B.y)/4+my/2+(o.size||56)*0.9,o.label,Object.assign({},o,{a:clamp(la*1.6,0,1),k:0.7+0.3*spring(clamp(la,0,1))}));});}
-
-// ---- the wheel (chapter 6): a signpost on each path, its board drawn with the words; a ring traced round the green ----
-const OS_POSTR=7.6;
-const os_postP=(k,y)=>{const a=(18+36*k)*DEG;return v3(OS_POSTR*Math.sin(a),y||0,OS_POSTR*Math.cos(a));};
-function os_signpost(ctx,C,k,u,lab){if(u<=0.01)return;const p=os_postP(k),h=1.7*spring(u);tPost(ctx,C,p.x,p.z,h);if(!lab)return;const P_=pj(C,v3(p.x,h+0.12,p.z));if(P_.z<NEAR)return;
-  lbAdd(c=>{c.save();c.translate(P_.x,P_.y);const s=0.7+0.3*spring(u);c.scale(s,s);signBoard(c,0,0,OS_AREAS[k],{size:28,w:800,bg:[255,252,244],rim:[150,104,66],a:clamp(u*2,0,1)*lab});c.restore();});}
-// a dashed gold ring round the green at radius r (u: how much of it is drawn), with the words
-function os_ring(C,r,u,y){if(u<=0.01)return;lbAdd(c=>{c.save();c.strokeStyle=rgba(PAL.gold,0.95);c.lineWidth=5;c.setLineDash([16,12]);c.lineCap="round";c.beginPath();let on=false;
-  for(let i=0;i<=96*u;i++){const a=i/96*TAU,P_=pj(C,v3(r*Math.sin(a),y||0.05,r*Math.cos(a)));if(P_.z<NEAR){on=false;continue;}on?c.lineTo(P_.x,P_.y):c.moveTo(P_.x,P_.y);on=true;}c.stroke();c.restore();});}
-
-// ---- a sheet turned over where it lies, about its left edge (th: 0 to PI); fn writes on its face while it can be seen ----
-function os_pageFlip(ctx,C,x0,z0,x1,z1,y,th,fn){const w=x1-x0,cs=Math.cos(th),sn=Math.sin(th),P=(u,z)=>v3(x0+u*cs,y+0.004+u*sn,z);
-  fq3(ctx,C,x0-(th>1.2?w:0)+0.01,z0-0.008,x0+(th>1.2?0:w)+0.01,z1-0.008,y+0.001,[120,100,80],{a:0.18*(Math.abs(cs)*0.6+0.4)});
-  poly3(ctx,C,[P(0,z0),P(w,z0),P(w,z1),P(0,z1)],th<Math.PI/2?[255,252,244]:[244,240,230],{edge:0.4});
-  if(fn&&th<1.35)surfDraw(ctx,C,v3(x0,y+0.005,z1),v3(cs,sn,0),v3(0,0,1),fn);}
-// a pen lying on the desk
-function os_pen(ctx,C,x,z,y){ibox(ctx,C,x,y,z,0.15,0.012,0.012,[44,56,92],{edge:0.3});ibox(ctx,C,x+0.15,y,z,0.025,0.012,0.012,[200,170,90],{edge:0.3});}
-// Jun's screen once the agreement runs: a test that passes
-function os_testScreen(c,u){c.fillStyle="#f6f9fc";c.fillRect(0,0,102,62);if(u<=0)return;c.save();c.globalAlpha*=clamp(u*2,0,1);const k=0.7+0.3*spring(u);
-  c.translate(51,26);c.scale(k,k);c.fillStyle=rgba([70,160,100],1);c.beginPath();c.arc(0,0,12,0,TAU);c.fill();c.strokeStyle="#fff";c.lineWidth=3;c.lineCap="round";c.lineJoin="round";
-  c.beginPath();c.moveTo(-5.5,0.5);c.lineTo(-1.5,4.5);c.lineTo(6,-4.5);c.stroke();c.restore();
-  Tw(c,"test passed",51,52,{w:800,size:9,align:"center",color:rgba([50,120,76],clamp(u*2,0,1))});}
-// a pin, drawn with the words so it sits on top of the poster
-const os_pinQ=(C,p,u)=>lbAdd(c=>os_pin(c,C,p,u,1.75));
-// a gold ring round a step of the loop poster, once it's pinned (r: the ring's radius in metres)
-const os_stepRing=(C,p,r,u)=>lbAdd(c=>{const P_=pj(C,p);if(P_.z<NEAR||u<=0)return;c.save();c.globalAlpha*=clamp(u*1.5,0,1);c.strokeStyle=rgba(PAL.gold,0.95);c.lineWidth=Math.max(3,0.02*P_.s);
-  c.beginPath();c.arc(P_.x,P_.y,r*P_.s*(1.12-0.12*spring(u)),0,TAU);c.stroke();c.restore();});
-
-// ---- 10 · the series: nine binders for the policy films, six cards for the films on the tools ----
-const OS_NEEDS=["Who decides","One word, one home","Who may see it","Rules that run","Fixed where it starts","Change without surprises","A product with an owner","An agent that checks","Teachers of data"];
-const OS_TOOLS=[["Governed in dbt",["dbt"]],["Governed in Unity Catalog",["databricks"]],["Meaning on the platform",["databricks"]],["Quality on the platform",["dbt","databricks"]],["Products in open formats",["databricks"]],["The marketplace",["databricks"]]];
-// which of the shelf's binders (row, place) stands for each policy film; the first is the one Yusuf takes
-const OS_SHELF9=[[2,7],[3,2],[1,5],[2,1],[3,6],[1,1],[3,4],[1,7],[2,5]];
-// each binder on the shelf, as tShelf lays them out (rows 1 to 3, places 0 to 10): its left edge, width and height, across the office
-const OS_SHELFB=[0,1,2,3].map(r=>{if(!r)return null;const SX=-2.22,rh=(2.22-0.1)/4,bs=[];let bx=SX+0.09;for(let j=0;j<20;j++){const bw=0.12+0.03*hash(r*31+j,3),bh=Math.min(rh-0.1,0.4+0.05*hash(r*17+j,5));
-  if(bx+bw>SX+1.85-0.08)break;bs.push([bx,bw,bh]);bx+=bw+0.012;}return bs;});
-// a gold label on a binder that has come forward by out metres, with the number of its film
-function os_binderTag(ctx,C,r,j,out,num,a){const [x0,w,h]=OS_SHELFB[r][j],y0=0.3+0.05+r*(2.22-0.1)/4+0.045,z=3.18-0.009-out;
-  wq3(ctx,C,x0+w*0.14,y0+h*0.5,x0+w*0.86,y0+h*0.86,z,mix([250,246,234],[244,190,70],a));
-  if(a>0.3)surfDraw(ctx,C,v3(x0+w*0.14,y0+h*0.86,z-0.001),v3(1,0,0),v3(0,1,0),c=>Tw(c,String(num),w*36,h*24,{w:800,size:6,align:"center",color:rgba([110,70,20],clamp(a*2-0.6,0,1))}));}
-// the list of the policy films, its rows showing as their binders come forward (u[k]: 0 to 1); hi lights the first
-function os_needsList(c,x,y,u,hi,a){if(a<=0.01)return;const rw=486,rh=52,top=86,h=top+u.reduce((s_,v)=>s_+easeCam(v),0)*rh+18;c.save();c.globalAlpha*=a;
-  c.fillStyle="rgba(40,44,70,0.22)";rr(c,x+6,y+10,rw,h,22);c.fill();c.fillStyle="#fffaf0";rr(c,x,y,rw,h,22);c.fill();c.strokeStyle=rgba([214,170,90],0.9);c.lineWidth=3;rr(c,x+10,y+10,rw-20,h-20,16);c.stroke();
-  T(c,"What governance needs",x+rw/2,y+58,{w:800,size:32,align:"center",color:rgba([120,88,40],1)});
-  // the list unrolls: rows still below the board's edge are cut off by it
-  c.beginPath();c.rect(x,y,rw,h-12);c.clip();
-  OS_NEEDS.forEach((s,k)=>{const v=u[k];if(v<=0.01)return;const ry=y+top+k*rh,dx=(1-easeCam(v))*30;c.save();c.globalAlpha*=clamp(v*2,0,1);
-    if(k===0&&hi>0){c.fillStyle=rgba([255,226,150],hi);rr(c,x+18,ry+2,rw-36,rh-6,12);c.fill();}
-    c.fillStyle=rgba(PAL.gold,1);c.beginPath();c.arc(x+52+dx,ry+rh/2,20,0,TAU);c.fill();Tw(c,String(k+2),x+52+dx,ry+rh/2+8.5,{w:800,size:k===8?21:24,align:"center",color:"#fff"});
-    T(c,s,x+86+dx,ry+rh/2+11,{w:700,size:30,color:rgba(PAL.ink,1)});c.restore();});c.restore();}
-// a binder held out in front, its title on the label (lines in the figure's units)
+/* ---------- today: the films to come ---------- */
+// which of the shelf's binders stand for the nine films on what governance needs; he takes the first
+const OS_NINE=[1,5,8,14,18,21,25,28,31];
+// a binder held in both hands, its label saying what it's about (in the figure's units, like the series' heldBinder)
 function os_heldTitled(lines,col){return(cx,P_,hands)=>{const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my+4);cx.rotate(-0.06);
   const w=168,h=214;cx.fillStyle=rgba(mix(col,[0,0,0],0.35),1);rr(cx,-w/2+9,-h/2+7,w,h,10);cx.fill();
   const g=cx.createLinearGradient(-w/2,-h/2,w/2,h/2);g.addColorStop(0,rgba(mix(col,[255,255,255],0.28),1));g.addColorStop(1,rgba(col,1));cx.fillStyle=g;rr(cx,-w/2,-h/2,w,h,10);cx.fill();
   cx.fillStyle="rgba(250,246,236,0.95)";for(let i=0;i<7;i++)cx.fillRect(w/2-2,-h/2+12+i*5,10,3.2);
   cx.fillStyle="rgba(255,252,242,0.97)";rr(cx,-w/2+16,-h/2+26,w-32,112,10);cx.fill();
-  cx.fillStyle=rgba(mix(col,[0,0,0],0.5),1);cx.textAlign="center";cx.font=font(800,34);lines.forEach((s,i)=>cx.fillText(s,0,-h/2+72+i*40-(lines.length-1)*8));cx.restore();
+  cx.fillStyle=rgba(mix(col,[0,0,0],0.5),1);cx.textAlign="center";cx.font=font(800,32);lines.forEach((s,i)=>cx.fillText(s,0,-h/2+74+i*38-(lines.length-1)*6));cx.restore();
   fingers(cx,P_,[[mx-w/2+4,my+30],[mx+w/2-2,my+24]]);};}
-// a card on the data team's cork board for one of the films on the tools (in centimetres: 70 x 54, from its top left)
-function os_toolCard(c,k,u){const [s,tools]=OS_TOOLS[k];c.save();c.globalAlpha*=clamp(u*2,0,1);
-  c.fillStyle="rgba(60,40,20,0.28)";c.fillRect(1.2,1.6,70,54);c.fillStyle=k%2?"#f3f8ff":"#fffaf0";c.fillRect(0,0,70,54);
-  c.fillStyle=rgba([90,130,200],1);c.fillRect(0,0,70,3);
-  c.fillStyle=rgba([60,90,150],1);c.beginPath();c.arc(9,13,5.6,0,TAU);c.fill();Tw(c,String(k+11),9,15.2,{w:800,size:5.4,align:"center",color:"#fff"});
-  let lx=19;tools.forEach(id=>{lx+=logo(c,id,lx,8.6,8.4)+3;});
-  const words=s.split(" "),lines=[];let cur="";c.font=font(800,6.4);words.forEach(w=>{const tr=cur?cur+" "+w:w;if(c.measureText(tr).width>60&&cur){lines.push(cur);cur=w;}else cur=tr;});lines.push(cur);
-  lines.forEach((l,i)=>Tw(c,l,35,34+i*8.6-(lines.length-1)*4,{w:800,size:6.4,align:"center",color:rgba(PAL.ink,1)}));c.restore();}
+// the films on the tools, on the data team's board: a card each, with its number, the tools' logos and its title
+const OS_TOOLS=[["Governed in dbt",["dbt"]],["Governed in Unity Catalog",["databricks"]],["Meaning on the platform",["databricks"]],
+  ["Quality on the platform",["dbt","databricks"]],["Products in open formats",["databricks"]],["The marketplace",["databricks"]]];
+const OS_TC={w:410,h:236,x:[505,960,1415],y:[440,712],rot:[-0.018,0.012,-0.008,0.016,-0.012,0.008]};
+function os_toolsHead(ctx,u){if(u<=0)return;ctx.save();ctx.translate(960,192);ctx.rotate(0.01);withA(ctx,clamp(u*2.5,0,1),()=>{wc_panel(ctx,-250,-60,500,120,{kind:"card",seed:63});
+  gv_pin(ctx,0,-46,GV.red,1.2);wc_hand(ctx,"With the tools",0,20,{size:52,w:700,align:"center",col:WC_INK,p:clamp(u*1.6-0.3,0,1)});});ctx.restore();}
+// a title in up to two lines no wider than mw, the break at the last space that fits
+function os_wrap(ctx,s,size,mw){if(tw(ctx,s,size,800)<=mw)return[s];const ws=s.split(" ");for(let i=ws.length-1;i>0;i--){const a=ws.slice(0,i).join(" ");
+  if(tw(ctx,a,size,800)<=mw)return[a,ws.slice(i).join(" ")];}return[s];}
+function os_toolCard(ctx,k,u){if(u<=0)return;const T=OS_TC,[s,tools]=OS_TOOLS[k],e=easeCam(clamp(u,0,1)),sc=lerp(1.12,1,e),w=T.w,h=T.h;
+  ctx.save();ctx.translate(T.x[k%3],T.y[Math.floor(k/3)]-14*(1-e));ctx.rotate(T.rot[k]);ctx.scale(sc,sc);withA(ctx,clamp(u*2.5,0,1),()=>{
+    wc_panel(ctx,-w/2,-h/2,w,h,{kind:"card",seed:110+k});gv_pin(ctx,0,-h/2+18,GV.red,1.1);
+    wc_wash(ctx,wc_ell(-w/2+56,-h/2+72,28,28,24),wc_lit(GV.cyanInk,0.25),{kind:"thing",lw:1.2,seed:120+k});
+    wc_T(ctx,String(k+11),-w/2+56,-h/2+83,{w:800,size:28,align:"center",col:[255,255,255]});
+    let lx=-w/2+104;tools.forEach(id=>{lx+=logo(ctx,id,lx,-h/2+48,48)+18;});
+    os_wrap(ctx,s,36,w-64).forEach((l,i,a)=>wc_T(ctx,l,-w/2+32,-h/2+(a.length>1?160:178)+i*46,{w:800,size:36,col:WC_DARK}));});ctx.restore();}
+
+const WC_PLACES={market:os_paintMarket,hall:os_paintHall,exchange:os_paintExchange,shop:os_paintShop,stamp:os_paintStamp,campus:gv_paintCampus,office:gv_paintOffice,
+  boardGov:c=>gv_paintBoardClose(c,GV_ROOM.gov),desk:gv_paintDesk,floor:gv_paintFloor,planning:gv_paintPlanning,registrar:gv_paintRegistrar,data:gv_paintData,
+  boardData:c=>gv_paintBoardClose(c,GV_ROOM.data),screen:c=>gv_paintScreenDesk(c,GV_ROOM.data),platform:gv_paintPlatform,poster:gv_paintPosterClose,page:os_paintPage,
+  policy:os_paintPolicy};
 
 /* ===== Off the shelf: the ten chapters =====
-   Each chapter is a few shots in the toy town, cut together with short dissolves. Times inside a chapter come from its cues
-   (when each line starts), so the pictures stay with the voice if it's recorded again. Words on screen are signs, tags and
-   speech bubbles, drawn after the blur, at least 28 px, and kept above the captions. */
+   Each chapter is a few shots in the places of plan.js and the series' rooms.js, cut together with short dissolves (gv_shots). Times
+   inside a chapter come from its cues (when each line starts) and the words of its lines (wAt), so the pictures stay with the voice if
+   it's recorded again. Words on screen are on paper, screens, boards, tags and speech bubbles, at least 28 px as seen, and above the
+   captions. */
 
 // made once per chapter, the first time it draws: its cues are known by then
 const os_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
-// a hammer's strike: 0 (raised) to 1 (down) and back, over d seconds from t0
+// a mallet's blow: 0 (raised) to 1 (down) and back, over d seconds from t0; down at a third of the way
 const os_strike=(t,t0,d)=>{const u=(t-t0)/(d||0.6);return u<=0||u>=1?0:u<0.35?easeCam(u/0.35):1-easeCam((u-0.35)/0.65);};
-// the shop's own coordinates in the town's (it faces the square, so only a shift)
-const os_shopP=(x,y,z)=>v3(OS_SHOP.x+x,y,OS_SHOP.z+z),os_hallP=(x,y,z)=>v3(OS_HALL.x+x,y,OS_HALL.z+z);
+// the year and the place in the top corner: the latest one passed, dissolving from the one before
+function os_pill(ctx,t,mk,a){if(a<=0.01)return;let i=0;for(let k=1;k<mk.length;k++)if(t>=mk[k][0])i=k;const u=i>0?fin(t,mk[i][0],0.35):1;
+  if(u<1)wc_year(ctx,56,72,mk[i-1][1],a*(1-u));wc_year(ctx,56,72,mk[i][1],a*u);}
+// a tag that springs in at t0 and goes at t1 (or stays)
+function os_tagAt(ctx,t,t0,t1,x,y,s,o){const a=t1==null?fin(t,t0,0.35):gv_io(t,t0,t1,0.35);if(a<=0.01)return;const k=0.9+0.1*spring(fin(t,t0,0.5));
+  ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,a,()=>wc_tag(ctx,0,0,s,Object.assign({align:"center"},o||{})));ctx.restore();}
 
-// ---- 1 · One measure: the market town, from 1215 to the 1880s ----
-// the jugs on the wine stall, year by year: none of them the same
+// ---- 1 · One measure: from a market in 1215 to an inspector in the 1880s ----
+// the wine stall's three measures, era by era: never the same three
 const OS_JUGS=[[0.32,0.24,0.4],[0.26,0.38,0.3],[0.4,0.28,0.22],[0.3,0.34,0.26],[0.24,0.42,0.33]];
-scene("measure",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{
-    const years=[c.repeat+0.2,c.repeat+1.5,c.repeat+2.8,c.repeat+4.1],hall=c.kings-0.4,y1871=wAt(sc,"county","In eighteen")-0.5,shop=c.worked-0.4,close=c.breath-1.8,title=c.breath+0.7;
-    return{years,hall,y1871,shop,close,title,
-      // where each shot's camera goes
-      kA:os_keys([[0,v3(0,9.5,-12),v3(0,1.2,7),1450],[4.6,v3(0.5,4.4,-3.2),v3(0,1.25,6.0),1400],[c.repeat-0.6,v3(0.1,2.6,1.3),v3(-0.3,1.6,6.0),1400]]),
-      kB:os_keys([[years[0]-0.3,v3(-4.4,2.0,1.6),v3(-4.4,1.0,6.0),1400],[hall+0.7,v3(-4.6,1.8,2.4),v3(-4.5,1.05,6.0),1400]]),
-      kC:os_keys([[hall,v3(3.4,3.0,6.2),v3(6.2,1.5,14.0),1400],[hall+4.2,v3(4.6,2.7,7.6),v3(6.9,1.5,15.6),1400]]),
-      kD:os_keys([[y1871,v3(4.3,2.3,1.2),v3(4.3,1.0,6.0),1400],[shop+0.7,v3(4.3,1.95,2.3),v3(4.3,1.05,6.0),1400]]),
-      kE:os_keys([[shop,os_shopP(0.2,2.8,-6.0),os_shopP(0,1.4,2.0),1400],[shop+3.4,os_shopP(0.2,2.35,-4.4),os_shopP(0,1.4,2.0),1400],[close+0.7,os_shopP(0.15,2.25,-3.8),os_shopP(-0.05,1.4,2.0),1400]]),
-      kF:os_keys([[close,os_shopP(-1.0,1.95,-0.6),os_shopP(-0.45,1.5,2.0),1450],[title+0.7,os_shopP(-0.85,1.9,-0.25),os_shopP(-0.45,1.5,2.0),1450]]),
-      kG:os_keys([[title,v3(0,8.6,-10.4),v3(0,1.0,7.0),1500],[sc.dur+1,v3(0.6,9.2,-11.4),v3(0,1.0,7.0),1500]])};});
-  const years=["England · 1225","England · 1297","England · 1640","England · 1824"];
-  const mk=[[0,"England · 1215"],...P.years.map((y,i)=>[y,years[i]]),[P.hall,"England · 1497"],[P.y1871,"England · 1871"],[P.shop,"England · 1880s"]];
-  const marker_=c_=>os_marker(c_,t,mk,os_in01(t,0.8,0.5)*(1-os_in01(t,P.close,0.5)));
-  // the crier, his listeners: 1215
-  const shotA=(ctx,S,t)=>{const C=os_cam(P.kA,t),say=os_io(t,c.quote-0.1,c.repeat-0.2,0.35);
-    os_market(ctx,S,C,{t,era:1215,figs:[{id:"crier",x:-0.4,z:5.72,y:0.44,pose:"hold",t,carry:heldScroll,nod:0.05*Math.sin(t*2.2)*say,onDraw:(c_,B)=>os_say(B,["One measure of wine","throughout our kingdom."],{size:34,a:say})},
-      {id:"vintner",x:-3.9,z:4.7,pose:"listen",t,flip:true},{id:"alewife",x:-2.4,z:4.2,pose:"hold",t,carry:heldJug},{id:"miller",x:3.3,z:4.6,pose:"listen",t},{id:"buyer",x:1.5,z:4.0,pose:"listen",t}],after:marker_});};
-  // the years turn over at the wine stall: the charter read again, the jugs still all different
-  const shotB=(ctx,S,t)=>{const C=os_cam(P.kB,t);let k=0;P.years.forEach((y,i)=>{if(t>=y)k=i+1;});const y0=k?P.years[k-1]:-9,u=clamp((t-y0)/0.45,0,1),g=spring(clamp((t-y0-0.2)/0.6,0,1));
-    const jugs=OS_JUGS[k].map((h,i)=>k?lerp(OS_JUGS[k-1][i],h,g):h);
-    os_market(ctx,S,C,{t,era:1215,jugs,charter:{flip:k?u:0,seal:k?clamp((t-y0-0.25)/0.5,0,1):1},after:marker_});};
-  // 1497: the king's standards in a cupboard in the market hall; the clerk of the market checks a trader's jug now and then
-  const shotC=(ctx,S,t)=>{const C=os_cam(P.kC,t),off=wAt(sc,"kings","Officers"),cl=along([[-1.4,2.3],[-0.9,0.8]],t,off-0.6,0.9),tr=along([[9.8,12.1],[7.5,12.6]],t,off-1.4,1.4);
-    os_market(ctx,S,C,{t,era:1497,hall:{glow:os_io(t,wAt(sc,"kings","standards")-0.3,P.y1871+0.5,0.5)},
-      figs:[{id:"clerk",at:"hall",x:cl.x,z:cl.z,hop:cl.hop,pose:"hold",t,carry:os_heldGallon},{id:"trader",x:tr.x,z:tr.z,hop:tr.hop,pose:"hold",t,carry:heldJug,flip:true}],
-      extra:(C_,add)=>os_tag(C_,os_hallP(0,2.5,3.1),"the king's standard",{a:os_io(t,wAt(sc,"kings","standards"),P.y1871+0.3,0.4),size:30}),after:marker_});};
-  // 1871: the corn stall, every measure on it called a bushel
-  const shotD=(ctx,S,t)=>{const C=os_cam(P.kD,t),n32=wAt(sc,"county","thirty");
-    os_market(ctx,S,C,{t,era:1871,figs:[{id:"grocer",x:4.7,z:7.1,pose:"listen",t}],bushels:clamp((t-wAt(sc,"county","bushel")+0.3)/2.2,0,1),after:c_=>{marker_(c_);const a=os_io(t,n32,P.shop+0.6,0.4);if(a>0)os_board(c_,W/2,214,"32 measures in one county",{size:36,a:clamp(a*1.6,0,1),k:0.8+0.2*spring(a),bg:[255,236,200],rim:[214,150,80]});}});};
-  // the 1880s: what worked, all of it together: the Act, a copy of the standard, an inspector who checks, and stamps
-  const law=c.three,copy=wAt(sc,"three","a copy"),insp=wAt(sc,"three","an inspector"),chk=wAt(sc,"three","checked"),again=wAt(sc,"three","again and"),behind=wAt(sc,"three","with the law");
-  const shopState=(t,o)=>{const set=os_in01(t,chk+0.2,0.3),s1=os_strike(t,again,0.55),s2=os_strike(t,again+0.6,0.55);
-    return Object.assign({tilt:0.2*(1-spring(clamp((t-chk-0.3)/0.9,0,1))),brass:set>=1,crown:clamp((t-again-0.2)/0.4,0,1),act:Math.max(os_io(t,law-0.1,copy,0.4),os_io(t,behind-0.1,P.close+0.4,0.4)),caseGlow:os_io(t,copy-0.1,insp+0.6,0.4),strike:Math.max(s1,s2)},o||{});};
-  // he walks in to the counter beside the scale, shows a brass copy, sets it in the pan, and stamps the grocer's weight
-  const inspector=(t,s,o)=>{const w=along([[-1.9,0.25],[0.75,1.4]],t,P.shop+0.1,1.0),hammer=t>=again-0.5,hold=t>=insp&&t<chk+0.2;
-    return Object.assign({id:"inspector",at:"shop",x:w.x,z:w.z,hop:w.hop,t,flip:true,pose:hammer?"os_hitUp":hold?"hold":"stand",pose2:hammer?"os_hitDown":null,mix:s.strike,
-      carry:hammer?os_hammer(lerp(1.35,0,s.strike),true):hold?heldWeight:null,wide:hammer},o||{});};
-  const shotE=(ctx,S,t)=>{const C=os_cam(P.kE,t),s=shopState(t);
-    os_market(ctx,S,C,{t,era:1880,shop:s,figs:[inspector(t,s,{onDraw:(c_,B)=>os_figTag(B,"an inspector who checks",{a:os_io(t,insp,P.close+0.3,0.4),size:30,dy:20,dx:130})}),{id:"grocer",at:"shop",x:-1.4,z:2.6,pose:"listen",t}],
-      extra:(C_,add)=>{os_tag(C_,os_shopP(-2.55,2.0,0.36),"one definition, in law",{a:os_io(t,law,P.close+0.3,0.4),size:30});os_tag(C_,os_shopP(1.75,1.42,1.05),"a copy in every county",{a:os_io(t,copy,P.close+0.3,0.4),size:30});
-        os_tag(C_,os_shopP(-0.55,1.32,1.75),"again and again",{a:os_io(t,again,P.close+0.3,0.4),size:30,dy:-70});},after:marker_});};
-  // the stamp, close; then the title over the square
-  const shotF=(ctx,S,t)=>{const C=os_cam(P.kF,t),hit=c.breath-0.6,s=shopState(t,{tilt:0,brass:true,act:0,caseGlow:0,crown:clamp((t-hit-0.18)/0.4,0,1),strike:os_strike(t,hit-0.2,0.7)});
-    os_market(ctx,S,C,{t,era:1880,inside:"os_shop",shop:s,figs:[inspector(t,s,{x:0.75,z:1.4,hop:0}),{id:"grocer",at:"shop",x:-1.4,z:2.6,pose:"listen",t}],ts:[150,950,5]});};
-  const shotG=(ctx,S,t)=>{const C=os_cam(P.kG,t);os_market(ctx,S,C,{t,era:1880,after:c_=>os_card(c_,os_in01(t,P.title+0.2,0.8),["Off the shelf",110],"where a policy meets the work","Film 1 of 16 · data governance")});};
-  os_shots(ctx,S,t,[[0,shotA],[P.years[0]-0.3,shotB],[P.hall,shotC],[P.y1871,shotD],[P.shop,shotE],[P.close,shotF],[P.title,shotG]]);});
+function os_jugs(ctx,era,a,k){[230,330,440].forEach((x,j)=>{const h=OS_JUGS[era][j]*200;withA(ctx,a,()=>{ctx.save();ctx.translate(x,OS_MK.wine[2]+4);ctx.scale(k,k);os_jugAt(ctx,0,0,h*0.62,h);ctx.restore();});});}
+// the clerk's gallon, carried in both hands
+function os_heldGallon(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.drawImage(os_gallonC(),mx-60,my-112);fingers(cx,P_,[[mx-36,my-26],[mx+36,my-26]]);}
+// a hand set level with the scale's pan, holding the weight out over it
+POSE.os_place={L:[0.14,-0.06],R:[1.2,-4.38],hand:"open",feet:30,shift:4,tilt:-0.03,turn:0.22,gaze:[0.7,0.3],look:1};
 
-// ---- the people at work round the green, where they stand in their rooms ----
-const OS_AT={jun:{id:"jun",at:"data",x:1.85,z:2.25,pose:"stand"},mei:{id:"mei",at:"registrar",x:0.35,z:2.2,pose:"stand"},sam:{id:"sam",at:"platform",x:0.55,z:2.5,pose:"stand"},clara:{id:"clara",at:"planning",x:-0.75,z:2.05,pose:"explain"}};
-const os_at=(id,t,o)=>Object.assign({},OS_AT[id],{t},o||{});
-// a camera in a room, in the room's own coordinates: [t, eye, target, f]
-const os_rk=(id,t,e,g,f,mode)=>[t,bldP(id,...e),bldP(id,...g),f||1400,null,mode];
-// Yusuf's way in, along a path from the south to his office's front, and up onto its floor
-const OS_IN=[[-0.3,-7.4],[-0.4,-3.0],[-0.5,-0.9]];
-const os_floor=z=>clamp((z+2.12)/0.3,0,1)*0.3;
+scene("measure",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const again=wAt(sc,"three","again and");
+    return{years:[0,1,2,3].map(i=>c.repeat+0.2+1.3*i),hall:c.kings-0.4,y1871:wAt(sc,"county","In eighteen")-0.5,shop:c.worked-0.4,close:again-0.3,
+      hits:[again+0.19,again+0.79,c.breath-0.555],title:c.breath+0.7,magna:wAt(sc,"m1215","Magna"),stds:wAt(sc,"kings","standards"),officers:wAt(sc,"kings","Officers"),
+      now:wAt(sc,"kings","now and"),bushel:wAt(sc,"county","bushel"),thirty:wAt(sc,"county","thirty"),copy:wAt(sc,"three","a copy"),insp:wAt(sc,"three","an inspector"),
+      chk:wAt(sc,"three","checked"),law:wAt(sc,"three","with the law")};});
+  const mk=[[0,"England · 1215"],...P.years.map((y,i)=>[y,["England · 1225","England · 1297","England · 1640","England · 1824"][i]]),[P.hall,"England · 1497"],[P.y1871,"England · 1871"],[P.shop,"England · 1880s"]];
+  gv_shots(ctx,S,t,sc.dur,[
+    // 1215: the sheriff's crier reads the charter at the market cross; the stalls listen
+    {at:0,place:"market",keys:[[0,960,540,1],[c.quote-0.8,940,480,1.16]],d:3.4,draw:(x,tt)=>{const M=OS_MK;
+      person(x,"miller",1460,880,0.64,{pose:"listen",t:tt,flip:true});os_jugs(x,0,1,1);os_proclaim(x,M.wine[1]-14,470,0,1);
+      person(x,"vintner",650,872,0.6,{pose:"listen",t:tt,flip:true});person(x,"crier",M.crier,M.step+4,0.58,{pose:"hold",t:tt,carry:heldScroll});
+      person(x,"buyer",1130,915,0.64,{pose:"listen",t:tt});person(x,"alewife",760,940,0.66,{pose:"hold",t:tt,carry:heldJug,flip:true});
+      os_tagAt(x,tt,P.magna-0.1,P.years[0]-0.6,620,250,"Magna Carta");
+      const q=gv_io(tt,c.quote-0.1,P.years[0]-0.5,0.35);gv_say(x,1000,150,["One measure of wine","throughout our kingdom."],934,360,{a:q,k:0.92+0.08*spring(fin(tt,c.quote-0.1,0.5))});}},
+    // the centuries pass at the wine stall: the charter read again, the measures still not the same
+    {at:P.years[0]-0.3,place:"market",keys:[[P.years[0]-0.3,500,560,1.9],[P.years[3]+0.4,470,580,1.98]],d:2.6,push:0,draw:(x,tt)=>{let e=0;P.years.forEach((y,i)=>{if(tt>=y)e=i+1;});
+      const u=e>0?fin(tt,P.years[e-1],0.45):1;if(u<1)os_jugs(x,e-1,1-u,1);os_jugs(x,e,u,0.6+0.4*spring(u));
+      let f=1,seal=1;P.years.forEach(y=>{const v=(tt-(y-0.3))/0.6;if(v>0&&v<1){f=v;seal=0;}else if(v>=1&&v<1.8)seal=spring(clamp((v-1)/0.6,0,1));});
+      os_proclaim(x,OS_MK.wine[1]-14,470,f>=1?0:f,seal);}},
+    // 1497: the king's standards in the market hall's cupboard; the clerk of the market takes the gallon to a trader's jug
+    {at:P.hall,place:"hall",keys:[[P.hall,960,560,1.04],[P.officers,1060,590,1.12]],d:2.6,draw:(x,tt)=>{const [cx,cy,cw]=OS_HL.cup,take=P.officers-0.6,
+        g=fin(tt,P.stds-0.3,0.6),u=clamp((tt-take)/0.55,0,1),w=gv_walk(tt,P.officers+0.1,860,1150,260),near=fin(tt,P.now-0.4,0.5);
+      os_standards(x,u>0,g);os_tagAt(x,tt,P.stds-0.3,P.officers-0.3,cx+cw/2,cy-62,"the king's standards");
+      person(x,"trader",1390,930,0.78,{pose:"hold",t:tt,carry:heldJug,flip:true});
+      if(u>0&&u<1){const a=easeCam(u),gx=lerp(cx+215+60,w.x-22,a),gy=lerp(cy+120+70,700,a)-90*Math.sin(Math.PI*a);x.drawImage(os_gallonC(),gx-60,gy-70);}
+      if(tt<P.officers+0.1)person(x,"clerk",860,960,0.8,{pose:"stand",pose2:"reach",mix:clamp((tt-take)/0.4,0,1)*(1-fin(tt,take+0.55,0.3)),t:tt,flip:true,carry:u>=1?os_heldGallon:null});
+      else gv_walker(x,"clerk",w,960,0.8,{t:tt,carry:os_heldGallon,pose:near>0?"hold":null});
+      os_tagAt(x,tt,P.now-0.3,null,1270,250,"checked now and then");}},
+    // 1871: a corn exchange, and one county's bushels, every one a different size
+    {at:P.y1871,place:"exchange",keys:[[P.y1871,960,540,1],[P.thirty,960,520,1.06]],d:2.4,draw:(x,tt)=>{
+      person(x,"grocer",1640,880,0.74,{pose:"listen",t:tt,flip:true});os_exTable(x);
+      [124,150,96,170,112,140].forEach((h,i)=>{const t0=P.bushel-0.3+2.2*i/7,u=fin(tt,t0,0.5),bx=330+i*250;if(u<=0)return;const k=spring(u);
+        x.save();x.translate(bx,OS_EX.table[2]+4);x.scale(k,k);os_measureAt(x,0,0,h*1.1,h*0.8);x.restore();
+        os_tagAt(x,tt,t0+0.15,null,bx,OS_EX.table[2]-h*0.8-52,"bushel",{size:28});});
+      os_tagAt(x,tt,P.thirty-0.15,null,960,190,"32 measures in one county",{size:34});}},
+    // the 1880s: a grocer's shop: the law on the counter, a copy in the inspector's case, the inspector checking the shop's weight
+    {at:P.shop,place:"shop",keys:[[P.shop,960,540,1],[P.insp,1060,520,1.06]],d:2.4,draw:(x,tt)=>{const top=OS_SH.counter[2],land=P.chk+0.5,
+        tilt=tt<land?-0.2:-0.2*Math.exp(-(tt-land)*3)*Math.cos((tt-land)*9);
+      person(x,"grocer",440,860,0.78,{pose:"listen",t:tt});os_counter(x);os_act(x,650,top+6);
+      os_scaleAt(x,OS_SH.scale,top+4,tilt,(q,ex,ey)=>os_iron(q,ex,ey,0),tt>=land?(q,ex,ey)=>os_brass(q,ex,ey):null);
+      os_case(x,1712,905,fin(tt,P.copy-0.3,0.6));
+      const m=clamp((tt-(P.chk-0.4))/0.5,0,1),back=fin(tt,land+0.3,0.5);
+      person(x,"inspector",1380,905,0.86,{pose:"hold",pose2:"os_place",mix:m*(1-back),t:tt,flip:true,wide:true,carry:tt<land?heldWeight:null});
+      os_tagAt(x,tt,c.three,null,650,500,"one definition, in law");os_tagAt(x,tt,P.copy-0.05,null,1712,652,"a copy in every county");
+      os_tagAt(x,tt,P.insp-0.05,null,1380,186,"an inspector who checks");}},
+    // close: his mark on each weight, again and again, with the law beside him
+    {at:P.close,place:"stamp",keys:[[P.close,960,540,1]],push:0.03,draw:(x,tt)=>{const s=OS_ST.s,ws=OS_ST.weights,y=OS_ST.base,h=P.hits,[ax,ay,as]=OS_ST.act;
+      gv_halo(x,ax-200*as,ay-150*as,400*as,170*as,GV.gold,0.9*fin(tt,P.law-0.1,0.8));
+      ws.forEach((wx,i)=>os_iron(x,wx,y,fin(tt,h[i],0.25),s));
+      // the tools go from weight to weight between the blows, lifting as they go
+      const leg=(a,b,t0,t1)=>{const v=clamp((tt-t0)/(t1-t0),0,1);return[lerp(a,b,easeCam(v)),80*Math.sin(Math.PI*v)];},
+        [tx,lift]=tt<h[1]-0.2?leg(ws[0],ws[1],h[0]+0.08,h[1]-0.16):leg(ws[1],ws[2],h[1]+0.25,h[2]-0.55),u=Math.max(...h.map(hh=>os_strike(tt,hh-0.21,0.6))),
+        away=easeCam(clamp((tt-h[2]-0.35)/1.1,0,1));
+      // done: the hands go, and the last mark shows
+      x.save();x.translate(300*away,860*away);os_markTools(x,tx,y,s,u,lift);x.restore();}}]);
+  os_pill(ctx,t,mk,fin(t,0.6,0.5)*(1-fin(t,P.close,0.4)));
+  gv_title(ctx,S,t,P.title,"Off the shelf","where a policy meets the work","Film 1 of 16 · data governance");
+  wc_paperOver(ctx,S);});
 
 // ---- 2 · The shelf: Yusuf's first day, and what he inherits ----
-scene("shelf",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const b=c.shelf-0.6,ch=c.chart-0.5,co=c.council-0.6,br=c.brief-0.5;
-    return{b,ch,co,br,kA:os_keys([[0,v3(-4,9,-21),v3(-0.8,0.9,-4),1500],[c.starts+3.6,v3(0.2,2.7,-8.8),v3(-0.3,1.3,-1.2),1450]]),
-      kB:os_keys([[b,v3(0.55,2.62,-6.45),v3(-0.12,1.36,0.3),1360],[ch+0.7,v3(-0.6,2.3,-4.2),v3(-0.95,1.6,1.0),1400]]),
-      kC:os_keys([os_rk("office",ch,[-0.72,1.8,1.12],[-2.29,1.8,1.07],1400),os_rk("office",co+0.7,[-0.8,1.8,1.05],[-2.29,1.8,1.07],1400)]),
-      kD:os_keys([os_rk("office",co,[0.95,2.05,1.2],[0.95,1.06,2.05],1450),os_rk("office",br+0.7,[0.98,1.95,1.32],[0.95,1.06,2.05],1450)]),
-      kE:os_keys([[br,v3(0.6,2.45,-6.2),v3(0,1.4,0.2),1360],[sc.dur+1,v3(0.45,2.35,-5.5),v3(0,1.45,0.2),1360]])};});
-  const yu=(t,o)=>{const w=along(OS_IN,t,0.5,1.25);return Object.assign({id:"yusuf",x:w.x,z:w.z,y:os_floor(w.z),hop:w.hop,pose:"stand",t},o||{});};
-  const shotA=(ctx,S,t)=>{const C=os_cam(P.kA,t);drawCampus(ctx,S,C,{t,figs:[Object.assign(yu(t),{onDraw:(c_,B)=>os_figTag(B,["Yusuf Demir","data governance lead"],{a:os_io(t,c.starts+0.3,P.b+0.6,0.4),size:30})})]});};
-  const shotB=(ctx,S,t)=>{const C=os_cam(P.kB,t);drawCampus(ctx,S,C,{t,figs:[yu(t,{x:-0.45,z:-0.75,y:0.3,hop:0,pose:"listen"})],
-    office:{shelfSign:os_in01(t,wAt(sc,"shelf","thirty")-0.2,0.5),maturity:os_io(t,wAt(sc,"shelf","maturity"),P.ch+0.6,0.4),tbc:0},
-    extra:(C_,add)=>os_tag(C_,bldP("office",0.15,2.5,3.55),"maturity · 2.1 / 5",{a:os_io(t,wAt(sc,"shelf","maturity"),P.ch+0.6,0.4),size:32})});};
-  const shotC=(ctx,S,t)=>{const C=os_cam(P.kC,t);drawCampus(ctx,S,C,{t,inside:"office",office:{tbc:clamp((t-wAt(sc,"chart","half")+0.2)/2.2,0,1)},ts:[120,960,5]});};
-  // the council's minutes, open on the desk: the same action, carried forward again
-  const shotD=(ctx,S,t)=>{const C=os_cam(P.kD,t),st=pop(t,wAt(sc,"council","once")-0.1,0.6);
-    drawCampus(ctx,S,C,{t,inside:"office",office:{bare:1,tbc:1},ts:[110,980,5],hooks:{officeDesk:(ctx,C_,top)=>{fq3(ctx,C_,0.5,1.8,1.42,2.36,top+0.002,[200,70,60],{edge:0.4});
-      os_paper(ctx,C_,0.56,1.84,0.96,2.32,top+0.006,c_=>{Tw(c_,"Council minutes",20,6,{w:800,size:3.6,align:"center",color:rgba(PAL.ink,1)});[0,1,2].forEach(i=>{c_.fillStyle="rgba(150,150,170,0.6)";c_.fillRect(4,12+i*3,32-(i===2?10:0),0.6);});
-        Tw(c_,"Action: name",20,27.3,{w:700,size:3.5,align:"center",color:rgba([70,76,100],1)});Tw(c_,"the data owners",20,32.2,{w:700,size:3.5,align:"center",color:rgba([70,76,100],1)});
-        if(st>0){c_.save();c_.translate(20,40.5);c_.rotate(-0.12);const k=1+1.2*(1-st);c_.scale(k,k);c_.globalAlpha*=clamp(st*3,0,1);c_.strokeStyle=rgba([200,52,44],0.9);c_.lineWidth=0.5;rr(c_,-17,-4.2,34,7,1);c_.stroke();
-          Tw(c_,"CARRIED FORWARD",0,1.3,{w:800,size:3.3,align:"center",color:rgba([200,52,44],0.95)});c_.restore();}});
-      os_paper(ctx,C_,0.98,1.84,1.38,2.32,top+0.006,c_=>{[0,1,2,3,4,5].forEach(i=>{c_.fillStyle="rgba(150,150,170,0.55)";c_.fillRect(4,8+i*5,32-(i%3===2?12:0),0.6);});});}}});};
-  const shotE=(ctx,S,t)=>{const C=os_cam(P.kE,t),say=os_in01(t,c.brief+0.1,0.4);
-    drawCampus(ctx,S,C,{t,office:{tbc:1},figs:[yu(t,{x:-0.5,z:-0.7,y:0.3,hop:0,pose:"hold",expr:"worried",carry:heldBinder("12",PAL.navy)}),
-      {id:"david",x:1.75,z:-2.6,pose:"explain",t,flip:true,onDraw:(c_,B)=>os_say(B,["Can you fix governance","before the submission?"],{size:32,a:say,left:true})}]});};
-  os_shots(ctx,S,t,[[0,shotA],[P.b,shotB],[P.ch,shotC],[P.co,shotD],[P.br,shotE]]);});
+// a box carried in both hands, looking up at the building; and a step either way with it
+POSE.os_box={L:[0.16,-2.05],R:[0.16,-2.05],feet:24,shift:0,tilt:0,turn:0.12,gaze:[0.5,-0.45],look:0};
+POSE.os_boxA=Object.assign({},POSE.os_box,{feet:14,shift:-5,tilt:0.03,gaze:[0.4,-0.2]});POSE.os_boxB=Object.assign({},POSE.os_boxA,{shift:5,tilt:-0.03});
+// the campus path's middle: its height at each x
+const OS_PATH=wc_smooth(GV_CP.path,8);
+function os_pathY(x){const p=OS_PATH;for(let i=1;i<p.length;i++)if(p[i][0]>=x)return lerp(p[i-1][1],p[i][1],clamp((x-p[i-1][0])/Math.max(1e-6,p[i][0]-p[i-1][0]),0,1));return p[p.length-1][1];}
+// a name card, as master data's films introduce people: the name, then the role; it rises a little as it comes
+function os_nameCard(ctx,x,y,name,role,a){if(a<=0.01)return;const w=Math.round(Math.max(tw(ctx,name,32,800),tw(ctx,role,28,600))+60);
+  withA(ctx,a,()=>{ctx.save();ctx.translate(0,12*(1-a));wc_panel(ctx,x,y,w,112,{kind:"card",seed:3});wc_T(ctx,name,x+30,y+48,{w:800,size:32,col:WC_DARK});
+    wc_T(ctx,role,x+30,y+90,{w:600,size:28,col:WC_MUTED});ctx.restore();});}
+// his box, on the desk once he's in
+const os_deskBox=x=>x.drawImage(os_boxC(),748,GV_OFF.desk[1]-192,224,200);
 
-// ---- 3 · Two numbers: two reports across the green that don't agree ----
-// Planning's census report, on the wall screen in its office (in centimetres from the screen's top left, 253 x 133)
-function os_census(c,n){c.fillStyle="#f4f8fc";c.fillRect(0,0,253,133);Tw(c,"Census report",14,24,{w:800,size:15,color:rgba(PAL.ink,1)});Tw(c,"awards conferred this year",14,44,{w:600,size:12,color:rgba([96,104,128],1)});
-  for(let i=0;i<6;i++){const h=22+46*hash(i,41);c.fillStyle=rgba(i===5?PAL.gold:[150,186,222],1);c.fillRect(16+i*19,122-h,13,h);}
-  if(n>0){c.save();c.translate(190,96);const k=0.7+0.3*spring(n);c.scale(k,k);c.globalAlpha*=clamp(n*2,0,1);Tw(c,"4,812",0,0,{w:800,size:44,align:"center",color:rgba([40,96,150],1)});c.restore();}}
-// the registrar's draft submission, held out (in the figure's units, the page 200 x 246 round its middle)
-const os_draft=n=>c=>{c.fillStyle="rgba(100,150,200,1)";c.fillRect(-100,-122,200,86);c.fillStyle="#fff";c.textAlign="center";c.font=font(800,34);c.fillText("Draft",0,-86);c.fillText("submission",0,-50);
-  for(let i=0;i<2;i++){c.fillStyle="rgba(150,150,170,0.6)";c.fillRect(-74,-16+i*16,148-(i===1?50:0),6);}
-  if(n>0){c.save();c.translate(0,72);const k=0.7+0.3*spring(n);c.scale(k,k);c.globalAlpha*=clamp(n*2,0,1);c.fillStyle=rgba([40,96,150],1);c.font=font(800,70);c.fillText("4,867",0,0);c.restore();}
-  c.fillStyle=rgba([96,104,128],1);c.font=font(700,30);c.fillText("awards",0,110);};
-scene("numbers",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const pl=c.census-0.6,rg=c.draft-0.6,wh=c.which-0.6;
-    return{pl,rg,wh,kA:os_keys([[0,v3(0.2,11,-6.5),v3(0,0.8,9.5),950],[pl+0.7,v3(0.05,9.0,0.6),v3(0,0.8,9.5),950]]),
-      kB:os_keys([os_rk("planning",pl,[-0.2,1.95,-0.6],[-0.4,1.7,3.8],1400),os_rk("planning",rg+0.7,[-0.3,1.9,-0.1],[-0.45,1.7,3.8],1400)]),
-      kC:os_keys([os_rk("registrar",rg,[0.75,1.75,-2.3],[0.75,1.42,2.5],1250),os_rk("registrar",wh+0.7,[0.75,1.7,-1.8],[0.78,1.45,2.5],1250)]),
-      kD:os_keys([[wh,v3(0,8.6,1.8),v3(0,0.8,9.5),950],[sc.dur+1,v3(0.25,8.2,2.4),v3(0,0.8,9.5),950]])};});
-  const cen=wAt(sc,"census","four"),dr=wAt(sc,"draft","four");
-  // Yusuf crosses the green from his office, and stops in the middle of it
-  const yu=t=>{const w=along([[-1.4,2.4],[-0.6,4.2],[0,5.9]],t,0.6,1.1);return{id:"yusuf",x:w.x,z:w.z,hop:w.hop,pose:w.done?"listen":"stand",t,expr:t>c.which?"concerned":"calm"};};
-  const shotA=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kA,t),{t,office:{tbc:1},figs:[yu(t),os_at("clara",t),os_at("mei",t)]});
-  const shotB=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kB,t),{t,inside:"planning",ts:[110,980,5],hooks:{planningScreen:c_=>os_census(c_,os_in01(t,cen-0.1,0.5))},
-    figs:[os_at("clara",t,{x:1.3,z:3.05,pose:"point",flip:true})]});
-  const shotC=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kC,t),{t,inside:"registrar",ts:[110,980,5],figs:[os_at("mei",t,{x:0.75,z:0.85,pose:"hold",carry:os_heldDoc(os_draft(os_in01(t,dr-0.1,0.5)))})]});
-  const shotD=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kD,t),{t,office:{tbc:1},names:{planning:1,registrar:1},
-    figs:[Object.assign(yu(t),{onDraw:(c_,B)=>os_figTag(B,"?",{a:os_in01(t,c.which,0.5),size:64,bg:[255,226,150],rim:[214,160,60],ink:[120,80,20],dy:24})}),os_at("clara",t),os_at("mei",t)],
-    extra:(C_,add)=>{os_tag(C_,bldP("planning",0.8,0.3,-0.15),["census report","4,812 awards"],{size:34,pop:false});os_tag(C_,bldP("registrar",-0.95,0.3,-0.15),["draft submission","4,867 awards"],{size:34,pop:false});}});
-  os_shots(ctx,S,t,[[0,shotA],[P.pl,shotB],[P.rg,shotC],[P.wh,shotD]]);});
+scene("shelf",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b:c.shelf-0.6,ch:c.chart-0.5,co:c.council-0.6,br:c.brief-0.5,walk:c.starts+2.7,
+    thirty:wAt(sc,"shelf","thirty"),mat:wAt(sc,"shelf","maturity"),half:wAt(sc,"chart","half"),once:wAt(sc,"council","once")}));
+  gv_shots(ctx,S,t,sc.dur,[
+    // the campus: Yusuf's first day, a box of his things in his arms; he looks up at the building, then goes in
+    {at:0,place:"campus",keys:[[0,1080,760,1.7],[0.4,1090,770,1.82],[P.walk,1250,730,1.82]],d:3.4,draw:(x,tt)=>{const w=gv_walk(tt,P.walk,1060,1360,90),k=(w.x-1060)/300;
+      person(x,"yusuf",w.x,os_pathY(w.x)+2-w.bob,lerp(0.235,0.19,k),{pose:"os_box",pose2:w.moving?(w.swing>0?"os_boxA":"os_boxB"):null,mix:Math.abs(w.swing),t:tt,carry:os_heldBox});}},
+    // his office: the shelf of binders, 34 policies, and the score on the wall
+    {at:P.b,place:"office",keys:[[P.b,1100,560,1.2],[P.b+0.1,1180,540,1.32]],d:5,draw:(x,tt)=>{const [sx,sy,sw,sh]=GV_OFF.score;
+      os_chartSmall(x,0);gv_halo(x,sx-30,sy-30,sw+60,sh+60,GV.gold,0.85*gv_io(tt,P.mat-0.1,P.ch,0.5));os_score(x);os_binders(x);os_deskBox(x);
+      person(x,"yusuf",1190,895,0.8,{pose:"listen",t:tt});os_tagAt(x,tt,P.thirty-0.2,null,1621,290,"34 data policies");}},
+    // the chart, close: half its names are still to be confirmed
+    {at:P.ch,place:"boardGov",keys:[[P.ch,960,520,1],[P.ch+0.1,960,500,1.05]],d:4,push:0,draw:(x,tt)=>os_chart(x,k=>fin(tt,P.half-0.2+2.2*k/8,0.3))},
+    // the council's minutes: the same action, carried forward again
+    {at:P.co,place:"desk",keys:[[P.co,960,560,1],[P.co+0.1,960,520,1.08]],d:3.2,draw:(x,tt)=>os_minutes(x,fin(tt,P.once-0.16,0.3))},
+    // the office again: Yusuf has taken binder 12 down; David, at the door, gives him his brief
+    {at:P.br,place:"office",keys:[[P.br,960,540,1],[P.br+0.1,940,540,1.04]],d:4,draw:(x,tt)=>{
+      os_chartSmall(x,1);os_score(x);os_binders(x,{missing:i=>i===11});os_deskBox(x);
+      person(x,"david",190,868,0.8,{pose:"explain",t:tt});person(x,"yusuf",1240,905,0.8,{pose:"hold",expr:"worried",t:tt,flip:true,carry:heldBinder("12",os_bindCol(11))});
+      const q=c.brief+0.1;gv_say(x,250,190,["Can you fix governance","before the submission?"],205,400,{a:fin(tt,q,0.35),k:0.92+0.08*spring(fin(tt,q,0.5))});}}]);
+  // today, and who Yusuf is
+  wc_year(ctx,56,72,"Today",fin(t,0.3,0.5)*(1-fin(t,P.b,0.4)));os_nameCard(ctx,470,560,"Yusuf Demir","data governance lead",gv_io(t,c.starts+0.3,P.b-0.3,0.4));
+  wc_paperOver(ctx,S);});
 
-// ---- 4 · Who decides? Yusuf follows the numbers back to the data team, the registrar, and his own chart ----
-scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const b1=c.both-0.5,b2=c.monday-0.6,b3=c.before-0.6,cc=c.gov-0.6,d=c.answers-0.6,e=c.tbc-0.6;
-    return{b1,b2,b3,cc,d,e,kA:os_keys([[0,v3(0.25,8.2,2.4),v3(0,0.8,9.5),950],[b1+0.7,v3(-1.4,4.4,7.0),v3(9.6,1.2,3.1),1150]]),
-      kB:os_keys([os_rk("data",b1,[1.25,2.04,1.3],[1.25,1.93,3.8],1400),os_rk("data",b2+0.7,[1.25,2.03,1.55],[1.25,1.93,3.8],1400)]),
-      kS:os_keys([os_rk("data",b2,[0.8,1.6,0.05],[0.95,1.55,1.25],1400),os_rk("data",b3+0.7,[0.84,1.6,0.25],[0.95,1.55,1.25],1400)]),
-      kB3:os_keys([os_rk("data",b3,[1.25,2.03,1.55],[1.25,1.93,3.8],1400),os_rk("data",cc+0.7,[1.25,2.02,1.75],[1.25,1.93,3.8],1400)]),
-      kC:os_keys([os_rk("registrar",cc,[0.1,1.85,-0.75],[0.1,1.45,1.5],1400),os_rk("registrar",d+0.7,[0.1,1.8,-0.4],[0.1,1.45,1.5],1400)]),
-      kD:os_keys([[d,v3(0.5,13,0.8),v3(2.2,0,8.6),900],[e+0.7,v3(0.75,12.6,1.4),v3(2.2,0,8.6),900]]),
-      kE:os_keys([[e,v3(-0.9,1.95,-1.95),v3(-2.28,1.8,-0.84),1360],[sc.dur+1,v3(-1.05,1.93,-1.72),v3(-2.28,1.8,-0.84),1360]])};});
-  const right=wAt(sc,"both","right"),mon=wAt(sc,"monday","microcredentials"),chg=wAt(sc,"monday","the word"),bef=wAt(sc,"before","before"),aft=wAt(sc,"before","after");
-  // the cork board: the two reports and when each ran; later, Monday's change between them
-  const board=(ctx,C,z,o)=>{const card=(x0,x1,lines,a)=>os_reportCard(ctx,C,x0,1.62,x1,2.22,z,[255,252,244],lines,a);
-    card(0.1,1.02,[["census report",8.5,800],["ran Friday",7.5,600],["4,812",18,800,[40,96,150]]],1);card(1.48,2.4,[["draft submission",8.5,800],["ran Wednesday",7.5,600],["4,867",18,800,[40,96,150]]],1);
-    os_tick(ctx,C,v3(0.97,2.17,z-0.012),o.tick);os_tick(ctx,C,v3(2.35,2.17,z-0.012),o.tick);
-    if(o.mon>0)os_reportCard(ctx,C,1.06,1.74,1.44,2.12,z,[255,226,150],[["Monday",8.5,800],["award",7,700],["changed",7,700]],o.mon);
-    surfDraw(ctx,C,v3(0.1,1.6,z-0.006),v3(1,0,0),v3(0,1,0),c_=>{if(o.bef>0)Tw(c_,"before",46,6,{w:800,size:7.5,align:"center",color:rgba([40,96,150],clamp(o.bef*2,0,1))});if(o.aft>0)Tw(c_,"after",184,6,{w:800,size:7.5,align:"center",color:rgba([40,96,150],clamp(o.aft*2,0,1))});});};
-  const yu=t=>{const w=along([[0,5.9],[4.4,4.5]],t,0.3,1.25);return{id:"yusuf",x:w.x,z:w.z,hop:w.hop,pose:"stand",t,expr:"concerned"};};
-  const shotA=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kA,t),{t,office:{tbc:1},figs:[yu(t),os_at("jun",t),os_at("mei",t),os_at("clara",t)]});
-  const shotB=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kB,t),{t,inside:"data",ts:[100,990,4],hooks:{dataBoard:(ctx,C,z)=>board(ctx,C,z,{tick:os_in01(t,right-0.1,0.5)})}});
-  const shotS=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kS,t),{t,inside:"data",ts:[100,990,4],hooks:{dataScreen:c_=>os_term(c_,os_in01(t,mon-0.1,0.6),os_in01(t,chg,0.5))},figs:[os_at("jun",t,{x:1.95,z:2.0,pose:"point"})]});
-  const shotB3=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kB3,t),{t,inside:"data",ts:[100,990,4],hooks:{dataBoard:(ctx,C,z)=>board(ctx,C,z,{tick:1,mon:os_in01(t,P.b3+0.5,0.6),bef:os_in01(t,bef,0.4),aft:os_in01(t,aft,0.4)})}});
-  // the registrar's counter: the government's reporting manual, the university's own term, and no one who maps one to the other
-  const who=wAt(sc,"gov","Who");
-  const shotC=(ctx,S,t)=>{const top=1.31;drawCampus(ctx,S,os_cam(P.kC,t),{t,inside:"registrar",ts:[100,990,4],
-    figs:[os_at("mei",t,{x:1.05,z:2.3,pose:t>who?"shrug":"listen",expr:"concerned"})],
-    hooks:{registrarCounter:(ctx,C,top_)=>{os_bookUp(ctx,C,-0.46,1.38,top_,0.36,0.46,[46,72,120],c_=>{Tw(c_,"Reporting",18,13,{w:800,size:5,align:"center",color:"#fff"});Tw(c_,"manual",18,20,{w:800,size:5,align:"center",color:"#fff"});
-        c_.fillStyle="rgba(255,255,255,0.5)";c_.fillRect(8,26,20,0.6);Tw(c_,"awards",18,33,{w:700,size:4,align:"center",color:"rgba(255,255,255,0.85)"});});
-      os_tent(ctx,C,0.42,1.4,top_,c_=>{Tw(c_,"award",15,9,{w:800,size:5.4,align:"center",color:rgba(PAL.ink,1)});Tw(c_,"our term",15,16.4,{w:600,size:4.0,align:"center",color:rgba([96,104,128],1)});});}},
-    extra:(C_,add)=>{const g=c.gov;os_tag(C_,bldP("registrar",-0.28,top+0.5,1.38),"the government's definition",{a:os_in01(t,g+0.2,0.5),size:30,dy:20});os_tag(C_,bldP("registrar",0.57,top+0.24,1.42),"ours",{a:os_in01(t,wAt(sc,"gov","ours"),0.4),size:30,dy:20});
-      os_arc(C_,bldP("registrar",0.5,top+0.26,1.42),bldP("registrar",-0.12,top+0.42,1.38),os_in01(t,who,0.9),{lift:150,label:"?",la:os_in01(t,who+0.6,0.4),size:56,bg:[255,226,150],rim:[214,160,60],ink:[120,80,20]});}});};
-  // three people, three answers, and nobody's is the mapping
-  const ans=[wAt(sc,"answers","Mei"),wAt(sc,"answers","Jun"),wAt(sc,"answers","Planning")];
-  const shotD=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kD,t),{t,office:{tbc:1},
-    figs:[os_at("mei",t,{onDraw:(c_,B)=>os_figTag(B,["Mei","owns the meaning"],{a:os_in01(t,ans[0]-0.1,0.4),size:30})}),os_at("jun",t,{onDraw:(c_,B)=>os_figTag(B,["Jun","builds the model"],{a:os_in01(t,ans[1]-0.1,0.4),size:30})}),
-      os_at("clara",t,{onDraw:(c_,B)=>os_figTag(B,["Planning","reports what it's given"],{a:os_in01(t,ans[2]-0.1,0.4),size:30})}),{id:"yusuf",x:4.4,z:4.5,pose:"listen",t,expr:"concerned"}]});
-  // back in his office: the chart, the government submission's row, and its answer
-  const shotE=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kE,t),{t,inside:"office",ts:[150,950,5],office:{tbc:1,raciHi:os_in01(t,P.e+0.5,0.6),stamp:os_in01(t,wAt(sc,"tbc","to be")-0.15,0.5)}});
-  os_shots(ctx,S,t,[[0,shotA],[P.b1,shotB],[P.b2,shotS],[P.b3,shotB3],[P.cc,shotC],[P.d,shotD],[P.e,shotE]]);});
+// ---- 3 · Two numbers: Planning's report and the draft submission don't agree ----
+// the floor: the people at work behind the glass (o.out leaves someone out), then the glass, then the offices' names (a name the
+// frame would cut fades out)
+const OS_AT={clara:0,mei:1,yusuf:2,jun:3,sam:4},OS_WORK={clara:{pose:"reach"},mei:{pose:"hold",carry:heldNotebook},jun:{pose:"reach"},sam:{pose:"phone"}};
+function os_floor(x,tt,o){o=o||{};const F=GV_FL;Object.keys(OS_AT).forEach(id=>{const i=OS_AT[id];if(id==="yusuf"?!o.yusufIn:(o.out||[]).includes(id))return;
+    person(x,id,F.spot(i),806,0.5,Object.assign({pose:"stand",t:tt,flip:i%2===1},OS_WORK[id]||{},(o.pose||{})[id]||{}));});
+  gv_floorGlass(x);const m=x.getTransform(),vl=-m.e/m.a,vr=(x.canvas.width-m.e)/m.a,a=o.names==null?1:o.names;
+  F.rooms.forEach((r,i)=>{const cx=F.x(i)+F.w/2,hw=tw(x,r[1],30,800)/2+6;gv_floorName(x,i,a*clamp(Math.min(cx-hw-vl,vr-cx-hw)/30,0,1));});}
 
-// ---- 5 · What governance is for: policy 12, open on the desk, and the market's answer ----
-scene("for",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const b=c.for-0.6,cc=c.like-0.6,d=c.mgmt-0.6;
-    return{b,cc,d,kA:os_keys([os_rk("office",0,[1.2,1.82,1.6],[1.2,1.06,2.1],1450),os_rk("office",b+0.7,[1.2,1.74,1.68],[1.2,1.06,2.1],1450)]),
-      kB:os_keys([[b,v3(0.4,2.6,-7.2),v3(0,1.4,0),1400],[b+4.2,v3(0,14,-11.5),v3(0,0,3.2),1300],[cc+0.7,v3(0.3,14.4,-11.8),v3(0,0,3.2),1300]]),
-      kC:os_keys([[cc,os_shopP(0.2,2.6,-5.2),os_shopP(0,1.4,2.0),1400],[d+0.7,os_shopP(0.15,2.35,-4.2),os_shopP(-0.05,1.4,2.0),1400]]),
-      kD:os_keys([[d,v3(0,13,-13),v3(0,0.5,2.5),1350],[sc.dur+1,v3(0.4,12.6,-12.4),v3(0,0.5,2.5),1350]])};});
-  // the open binder: what policy 12 says, and the two things it leaves out
-  const who=wAt(sc,"doesnt","who"),how=wAt(sc,"doesnt","how");
-  const shotA=(ctx,S,t)=>{const g1=os_in01(t,who-0.1,0.5),g2=os_in01(t,how-0.1,0.5);drawCampus(ctx,S,os_cam(P.kA,t),{t,inside:"office",office:{bare:1,tbc:1},ts:[90,990,4],hooks:{officeDesk:(ctx,C_,top)=>{
-    os_binderOpen(ctx,C_,1.2,2.1,top,{pw:0.3,pd:0.4,col:PAL.navy,left:c_=>{Tw(c_,"Policy 12",14.5,7,{w:800,size:3.6,align:"center",color:rgba(PAL.navy,1)});c_.fillStyle=rgba(PAL.navy,0.5);c_.fillRect(5,9.6,19,0.3);
-        ["Business terms","are defined","consistently","across the","organisation."].forEach((s,i)=>Tw(c_,s,14.5,15.5+i*4.4,{w:600,size:2.7,align:"center",color:rgba([60,70,100],1)}));},
-      right:c_=>{const box=(y0,y1,u,lines)=>{if(u<=0)return;c_.save();c_.globalAlpha*=clamp(u*2,0,1);c_.strokeStyle=rgba(PAL.red,0.8);c_.lineWidth=0.35;c_.setLineDash([1.4,1]);rr(c_,1.8,y0,25.4,y1-y0,1.2);c_.stroke();c_.setLineDash([]);
-          lines.forEach((s,i)=>Tw(c_,s,14.5,y0+5.2+i*4.2,{w:800,size:2.6,align:"center",color:rgba(PAL.red,1)}));c_.restore();};
-        box(5,14,g1,["who decides?"]);box(18,30,g2,["how does it","reach the work?"]);}});}}});};
-  // what governance is for: from the office, gold along every path to the work round the green
-  const shotB=(ctx,S,t)=>{const dd=wAt(sc,"for","deciding"),mk=wAt(sc,"for","making");drawCampus(ctx,S,os_cam(P.kB,t),{t,office:{tbc:1},gold:clamp((t-mk+0.2)/3.2,0,1),
-    figs:[os_at("jun",t),os_at("mei",t),os_at("sam",t),os_at("clara",t),{id:"yusuf",x:-0.5,z:-2.35,pose:"stand",t}],
-    extra:(C_,add)=>{os_tag(C_,v3(0,4.7,0),"deciding who decides",{a:os_io(t,dd-0.1,P.cc+0.2,0.4),size:34});os_tag(C_,v3(0,3.2,9.9),"each decision reaches the work",{a:os_io(t,mk+0.6,P.cc+0.2,0.4),size:34});}});};
-  // the 1880s shop again: a rule, a copy where the work happens, someone who checks
-  const rule=wAt(sc,"like","a rule"),copy=wAt(sc,"like","a copy"),chk=wAt(sc,"like","someone");
-  const shotC=(ctx,S,t)=>{const C=os_cam(P.kC,t),out=P.d+0.3;
-    os_market(ctx,S,C,{t,era:1880,shop:{tilt:0,brass:true,crown:1,act:os_io(t,rule-0.1,out,0.4),caseGlow:os_io(t,copy-0.1,out,0.4),strike:0},
-      figs:[{id:"inspector",at:"shop",x:0.75,z:1.4,t,flip:true,pose:"hold",carry:heldWeight,onDraw:(c_,B)=>os_figTag(B,"someone who checks",{a:os_io(t,chk,out,0.4),size:30,dy:20})},{id:"grocer",at:"shop",x:-1.4,z:2.6,pose:"listen",t}],
-      extra:(C_,add)=>{os_tag(C_,os_shopP(-2.55,2.0,0.36),"a rule",{a:os_io(t,rule,out,0.4),size:30});os_tag(C_,os_shopP(1.75,1.42,1.05),["a copy where","the work happens"],{a:os_io(t,copy,out,0.4),size:30,dx:40,dy:40});},
-      after:c_=>os_marker(c_,t,[[0,"England · 1880s"]],os_io(t,P.cc+0.3,out,0.5))});};
-  // governance and management: the office that sets the rules and checks, the offices that do the work
-  const gv=wAt(sc,"mgmt","Governance"),mg=wAt(sc,"mgmt","Management");
-  const shotD=(ctx,S,t)=>{const a=os_in01(t,mg-0.2,0.6);drawCampus(ctx,S,os_cam(P.kD,t),{t,office:{tbc:1},gold:1,glowFront:{platform:a,registrar:a,data:a,planning:a,office:os_in01(t,gv-0.2,0.6)},
-    figs:[os_at("jun",t),os_at("mei",t),os_at("sam",t),os_at("clara",t),{id:"yusuf",x:-0.5,z:-2.35,pose:"stand",t}],
-    extra:(C_,add)=>{os_tag(C_,v3(0,4.7,0),["governance","sets the rules, checks they're kept"],{a:os_in01(t,gv-0.1,0.4),size:32});os_tag(C_,bldP("platform",0,3.9,1.9),["management","does the work"],{a:os_in01(t,mg-0.1,0.4),size:32});}});};
-  os_shots(ctx,S,t,[[0,shotA],[P.b,shotB],[P.cc,shotC],[P.d,shotD]]);});
+scene("numbers",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({pl:c.census-0.6,rg:c.draft-0.6,wh:c.which-0.6,
+    four1:wAt(sc,"census","four"),four2:wAt(sc,"draft","four")}));
+  gv_shots(ctx,S,t,sc.dur,[
+    // the same week: Yusuf walks down the floor, past the offices where the work is done
+    {at:0,place:"floor",keys:[[0,1080,560,1.14],[0.3,760,560,1.14]],d:3.0,draw:(x,tt)=>{const w=gv_walk(tt,0.3,1180,640,190);
+      os_floor(x,tt,{names:fin(tt,0.4,0.6)});gv_walker(x,"yusuf",w,GV_FL.walk,0.62,{t:tt,flip:true});}},
+    // Planning: Clara shows him the census report
+    {at:P.pl,place:"planning",keys:[[P.pl,900,540,1.1],[P.pl+0.1,880,520,1.16]],d:5,draw:(x,tt)=>{os_census(x,fin(tt,P.four1-0.1,0.5));
+      person(x,"clara",440,905,0.8,{pose:"point",t:tt});person(x,"yusuf",1270,905,0.8,{pose:"listen",t:tt,flip:true});}},
+    // the registrar's office: Mei holds up the draft submission
+    {at:P.rg,place:"registrar",keys:[[P.rg,1180,540,1.12],[P.rg+0.1,1200,520,1.18]],d:5,draw:(x,tt)=>{
+      person(x,"mei",1000,905,0.84,{pose:"hold",t:tt,carry:os_draft(fin(tt,P.four2-0.1,0.5))});person(x,"yusuf",1290,905,0.8,{pose:"listen",t:tt,flip:true});}},
+    // the floor again: two reports, two numbers, and Yusuf between them
+    {at:P.wh,place:"floor",keys:[[P.wh,700,540,1.22],[P.wh+0.1,690,530,1.28]],d:4,draw:(x,tt)=>{const F=GV_FL;
+      os_floor(x,tt,{pose:{clara:{pose:"listen"},mei:{pose:"listen"}}});
+      person(x,"yusuf",F.x(1)-16,F.walk,0.62,{pose:"stand",expr:"concerned",t:tt});
+      [[0,"census report","4,812 awards"],[1,"draft submission","4,867 awards"]].forEach(([i,a,b],k)=>os_glassCard(x,tt,i,P.wh+0.1+0.15*k,[a,b]));
+      gv_qmark(x,F.x(1)-16,F.walk-0.62*560-50,96,fin(tt,c.which+0.1,0.6));}}]);
+  wc_paperOver(ctx,S);});
 
-// ---- 6 · Governance at the centre: DAMA's wheel, drawn on the green ----
-scene("wheel",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const d=c.takes-0.3;
-    return{d,k:os_keys([[0,v3(0.4,12.6,-12.4),v3(0,0.5,2.5),1350],[c.wheel,v3(0,19,-6.5),v3(0,0,-1.0),905],[d,v3(0.12,18.8,-6.35),v3(0,0,-1.0),905],[sc.dur+0.8,v3(0.6,2.9,-8.2),v3(0,1.25,0),1400]])};});
-  const C=os_cam(P.k,t),w0=wAt(sc,"wheel","eleven"),gv=wAt(sc,"wheel","governance"),mt=wAt(sc,"wheel","where"),oth=c.others,dc=wAt(sc,"others","Dee"),iso8=wAt(sc,"others","eight thousand"),iso38=wAt(sc,"others","thirty"),out=c.takes;
-  // each area's board dims while the others are named, except the one a standard covers
-  const lab=k=>{const dim=os_io(t,oth+0.2,out,0.5)*(k===9?1-os_in01(t,iso8-0.3,0.4):1);return(1-0.62*dim)*(1-os_in01(t,out+0.6,0.6));};
-  drawCampus(ctx,S,C,{t,office:{tbc:1},gold:os_in01(t,mt-0.2,2.4)*(1-os_in01(t,out+0.6,0.8)),glowFront:{office:os_io(t,gv-0.2,out+0.6,0.5)},
-    figs:[os_at("jun",t),os_at("mei",t),os_at("sam",t),os_at("clara",t)],
-    posts:(C_,add)=>{for(let k=0;k<10;k++){const p=os_postP(k,0.8);add(p,ctx=>os_signpost(ctx,C_,k,os_in01(t,w0+k*0.24,0.6),lab(k)));}},
-    extra:(C_,add)=>{const fade=1-os_in01(t,out+0.6,0.6);
-      os_tag(C_,v3(0,4.9,0),"data governance",{a:os_in01(t,gv-0.1,0.5)*fade*(1-0.62*os_io(t,oth+0.2,iso38-0.3,0.5)),size:34,bg:[255,226,150],rim:[214,160,60],ink:[74,52,20]});
-      os_ring(C_,9.92,os_in01(t,dc-0.2,1.4)*(1-os_in01(t,out+0.3,0.5)));
-      os_tag(C_,os_postP(9,1.7),"ISO 8000 · data quality",{a:os_io(t,iso8-0.1,out+0.4,0.4),size:30,dx:-330,dy:20,bg:[230,244,236],rim:[96,160,120]});
-      os_tag(C_,v3(0,4.9,0),"ISO/IEC 38505 · governing data",{a:os_io(t,iso38-0.1,out+0.4,0.4),size:30,dy:-84,bg:[230,244,236],rim:[96,160,120]});},
-    after:c_=>{os_board(c_,W/2,150,["DAMA-DMBOK","the Data Management Body of Knowledge"],{size:30,a:os_io(t,wAt(sc,"body","body")-0.2,w0-0.2,0.5)});
-      os_board(c_,1660,150,["DCAM","the same ground"],{size:32,a:os_io(t,dc-0.1,out+0.4,0.4),bg:[230,244,236],rim:[96,160,120]});}});});
+// ---- 4 · Who decides? Both numbers are right; no one has decided how ours maps to the government's ----
+// something carried in both hands while walking: the arms stay, the legs step
+POSE.os_carry=Object.assign({},POSE.os_box,{gaze:[0.3,0.1],turn:0.06});
+function os_carrier(x,id,w,y,s,carry,o){person(x,id,w.x,y-w.bob,s,Object.assign({pose:"os_carry",pose2:w.moving?(w.swing>0?"os_boxA":"os_boxB"):null,mix:Math.abs(w.swing),flip:w.flip,carry},o||{}));}
+// a card on an office's glass on the floor: two lines, coming in at t0
+function os_glassCard(x,tt,i,t0,lines,o){o=o||{};const u=fin(tt,t0,0.45);if(u<=0)return;const F=GV_FL,k=0.92+0.08*spring(u),sz=o.size||30,h=82+(lines.length-1)*(sz+12);
+  x.save();x.translate(F.x(i)+F.w/2,F.top+(o.top||250)+h/2);x.scale(k,k);withA(x,u,()=>gv_card(x,-F.w/2+(o.pad||22),-h/2,F.w-2*(o.pad||22),h,lines,{size:sz,align:"center",pin:false,y0:52,wash:o.wash||OS_NUM,washA:o.washA||0.14}));x.restore();}
 
-// ---- 7 · Listen first: no thirty-fifth policy; one question, asked in every office ----
-scene("listen",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const a2=wAt(sc,"ask","He asks")-0.3,b=c.jun-0.6,m=c.mei-0.6,s=c.sam-0.6,p=c.plan-0.6,f=c.binder-0.6,g=c.tools-0.6;
-    const room=(id,t0,t1,e,g_,f_)=>os_keys([os_rk(id,t0,e,g_,f_||1200),os_rk(id,t1+0.7,[e[0]+0.05,e[1]-0.05,e[2]+0.35],g_,f_||1200)]);
-    return{a2,b,m,s,p,f,g,kA:os_keys([os_rk("office",0,[1.16,1.78,1.62],[1.16,1.06,2.12],1450),os_rk("office",a2+0.7,[1.1,1.9,1.45],[1.12,1.06,2.12],1450)]),
-      kA2:os_keys([[a2,v3(0.6,2.3,-7.8),v3(0.1,1.3,-1.6),1400],[b+0.7,v3(0.4,2.2,-7.2),v3(0.1,1.3,-1.6),1400]]),
-      kB:room("data",b,m,[0.6,1.95,-2.7],[0.7,1.35,2.2]),kC:room("registrar",m,s,[-0.25,1.9,-2.8],[-0.25,1.4,2.2]),kD:room("platform",s,p,[-0.3,1.95,-2.8],[-0.4,1.5,2.4]),
-      kE:room("planning",p,f,[0.1,1.9,-2.8],[0,1.4,2.2]),kF:room("office",f,g,[1.0,1.95,-0.7],[-1.45,1.55,2.2],1250),kG:os_keys([os_rk("data",g,[0.3,2.0,-2.6],[0.4,1.3,2.2],1150),os_rk("data",sc.dur+1,[0.35,1.95,-2.1],[0.4,1.3,2.2],1150)])};});
-  // a person's answer, in a bubble from their head
-  const ans=(lines,t0,t1,o)=>(c_,B)=>os_say(B,lines,Object.assign({size:32,a:os_io(t,t0,t1,0.4)},o||{}));
-  const note={pose:"write",carry:heldNotebook,t};
-  // the thirty-fifth policy: a blank page he turns over instead of writing
-  const flip=wAt(sc,"ask","doesn't")+0.3;
-  const shotA=(ctx,S,t)=>{const th=Math.PI*easeCam(clamp((t-flip)/1.1,0,1));drawCampus(ctx,S,os_cam(P.kA,t),{t,inside:"office",office:{bare:1,tbc:1},ts:[90,990,4],hooks:{officeDesk:(ctx,C_,top)=>{
-    os_pen(ctx,C_,1.38,1.98,top);os_pageFlip(ctx,C_,1.0,1.9,1.32,2.32,top,th,c_=>{Tw(c_,"Policy 35",16,6.5,{w:800,size:3.4,align:"center",color:rgba(PAL.navy,1)});c_.fillStyle=rgba(PAL.navy,0.45);c_.fillRect(6,9,20,0.3);});}}});};
-  // he goes out with a notebook and one question
-  const q=wAt(sc,"ask","what slows");
-  const shotA2=(ctx,S,t)=>{const w=along([[0.9,-0.9],[0.5,-2.0],[0.2,-3.0]],t,P.a2+0.2,1.0);drawCampus(ctx,S,os_cam(P.kA2,t),{t,office:{tbc:1},
-    figs:[{id:"yusuf",x:w.x,z:w.z,y:os_floor(w.z),hop:w.hop,pose:"hold",carry:heldNotebook,t,onDraw:ans(["What slows you down?"],q-0.1,P.b+0.4,{size:34})}]});};
-  const visit=(K,id,who,lines,t0,t1,o,yo,extra)=>(ctx,S,t)=>drawCampus(ctx,S,os_cam(K,t),{t,inside:id,ts:[100,990,4],
-    figs:[os_at(who,t,Object.assign({onDraw:ans(lines,t0,t1,o.say)},o.fig)),Object.assign({id:"yusuf",at:id},note,yo)],extra});
-  const shotB=visit(P.kB,"data","jun",["The rules arrive","after I've built it."],c.jun+0.2,P.m+0.5,{fig:{x:2.25,z:1.5,pose:"explain",flip:true},say:{left:true}},{x:-1.0,z:1.0});
-  const shotC=visit(P.kC,"registrar","mei",["I never see where","my words are used."],c.mei+0.2,P.s+0.5,{fig:{pose:"explain"}},{x:-1.2,z:0.9});
-  const shotD=visit(P.kD,"platform","sam",["No one says which","columns are personal."],c.sam+0.2,P.p+0.5,{fig:{x:0.75,z:2.55,pose:"point"},say:{left:true}},{x:-1.45,z:1.0});
-  const shotE=visit(P.kE,"planning","clara",["Which number","do I trust?"],c.plan+0.1,P.f+0.5,{fig:{pose:"shrug",expr:"concerned"}},{x:1.2,z:1.0,flip:true});
-  // back at the office: the four answers pinned up, beside the shelf the binder came from
-  const shotF=(ctx,S,t)=>{const lit=os_io(t,wAt(sc,"binder","weren't")-0.3,P.g+0.6,0.6);drawCampus(ctx,S,os_cam(P.kF,t),{t,inside:"office",ts:[110,980,5],office:{tbc:1,cards:clamp((t-P.f-0.4)/1.8*4,0,4)},
-    figs:[{id:"yusuf",x:-2.0,z:0.1,y:0.3,pose:t<P.f+2.4?"reach":"stand",carry:t<P.f+2.4?heldPins:null,flip:true,t}],
-    over:(ctx,C_)=>{if(lit>0)glowQuad(ctx,C_,[bldP("office",-2.34,0.3,3.36),bldP("office",-0.49,0.3,3.36),bldP("office",-0.49,2.52,3.36),bldP("office",-2.34,2.52,3.36)],lit);}});};
-  // people agree; then a tool carries it out
-  const run=wAt(sc,"tools","Tools");
-  const shotG=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kG,t),{t,inside:"data",ts:[100,990,4],hooks:{dataScreen:c_=>os_testScreen(c_,os_in01(t,run,0.6))},
-    figs:[os_at("jun",t,{x:2.25,z:1.5,pose:"listen",nod:0.06*Math.sin(t*3.1)*os_io(t,P.g+0.4,run,0.4)}),{id:"mei",at:"data",x:-0.9,z:1.6,pose:"explain",t},{id:"yusuf",at:"data",x:-1.75,z:0.9,pose:"listen",t,nod:0.05*Math.sin(t*2.7+1)*os_io(t,P.g+0.4,run,0.4)}]});
-  os_shots(ctx,S,t,[[0,shotA],[P.a2,shotA2],[P.b,shotB],[P.m,shotC],[P.s,shotD],[P.p,shotE],[P.f,shotF],[P.g,shotG]]);});
+scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b1:c.both-0.5,s:c.monday-0.6,b3:c.before-0.6,cc:c.gov-0.6,d:c.answers-0.6,e:c.tbc-0.6,
+    right:wAt(sc,"both","right"),word:wAt(sc,"monday","the word"),micro:wAt(sc,"monday","microcredentials"),bef:wAt(sc,"before","before"),aft:wAt(sc,"before","after"),
+    ours:wAt(sc,"gov","ours"),who:wAt(sc,"gov","Who"),mei:wAt(sc,"answers","Mei"),jun:wAt(sc,"answers","Jun"),plan:wAt(sc,"answers","Planning"),tobe:wAt(sc,"tbc","to be")}));
+  const board=(x,tt,mon)=>{os_reportCard(x,OS_RC.census,"census report","ran Friday","4,812",fin(tt,P.right-0.1,0.35));
+    os_reportCard(x,OS_RC.draft,"draft submission","ran Wednesday","4,867",fin(tt,P.right-0.02,0.35));
+    if(mon>0){const [mx,my,mw,mh]=OS_RC.monday;x.save();x.translate(0,-60*(1-easeCam(mon)));withA(x,clamp(mon*3,0,1),()=>os_mondayCard(x));x.restore();}};
+  gv_shots(ctx,S,t,sc.dur,[
+    // Yusuf follows the numbers back, down the floor to the data team; it starts as the last chapter left the floor, so nothing doubles
+    // as the two dissolve
+    {at:0,place:"floor",keys:[[0,732,530,1.312],[0.4,1180,560,1.14]],d:2.6,draw:(x,tt)=>{const w=gv_walk(tt,0.2,368,1090,300);
+      os_floor(x,tt,{pose:{clara:{pose:"listen"},mei:{pose:"listen"},jun:{pose:"wave"}}});os_carrier(x,"yusuf",w,GV_FL.walk,0.62,heldNotebook,{t:tt});}},
+    // the data team's board: both reports are right, each by its own meaning of award
+    {at:P.b1,place:"boardData",keys:[[P.b1,960,500,1.08],[P.b1+0.1,960,490,1.12]],d:3,push:0,draw:(x,tt)=>board(x,tt,0)},
+    // Jun's screen: the glossary's term, and the row added on Monday
+    {at:P.s,place:"screen",keys:[[P.s,960,470,1.06],[P.micro-0.3,960,440,1.18]],d:2.4,push:0,draw:(x,tt)=>os_glossary(x,fin(tt,P.micro-0.1,0.6),fin(tt,P.word+0.08-0.1,0.5))},
+    // the board again: Monday's card goes up between them, one report before it, one after
+    {at:P.b3,place:"boardData",keys:[[P.b3,960,480,1.12]],push:0.02,draw:(x,tt)=>{board(x,tt,fin(tt,c.before-0.1,0.3));
+      os_tagAt(x,tt,P.bef,null,OS_RC.census[0]+OS_RC.census[2]/2,268,"before");os_tagAt(x,tt,P.aft,null,OS_RC.draft[0]+OS_RC.draft[2]/2,268,"after");}},
+    // the registrar's desk: the government's definition and ours, and nobody to say how one maps to the other
+    {at:P.cc,place:"registrar",keys:[[P.cc,1000,560,1.22],[P.cc+0.1,1010,540,1.26]],d:5,draw:(x,tt)=>{const [mx,my,mw]=OS_RD.manual,[tx,ty,tw_]=OS_RD.tent;
+      withA(x,fin(tt,c.gov+0.1,0.3),()=>os_manual(x));withA(x,fin(tt,P.ours-0.1,0.3),()=>os_tent(x));
+      os_tagAt(x,tt,c.gov+0.2,null,mx+mw/2,770,"the government's definition",{size:26});os_tagAt(x,tt,P.ours,null,tx+tw_/2,770,"ours",{size:26});
+      const top=os_arc(x,tx+tw_/2,ty-14,mx+mw/2,my-14,200,fin(tt,P.who-0.1,0.9));if(top)gv_qmark(x,top[0],top[1]-14,84,fin(tt,P.who+0.5,0.6));
+      person(x,"mei",560,905,0.8,{pose:"listen",pose2:"shrug",mix:fin(tt,P.who+0.3,0.5),expr:"concerned",t:tt});}},
+    // the floor: who does what with the word, as each is named
+    {at:P.d,place:"floor",keys:[[P.d,960,540,1]],push:0,draw:(x,tt)=>{os_floor(x,tt,{});person(x,"yusuf",GV_FL.x(2)+176,GV_FL.walk,0.62,{pose:"listen",t:tt});
+      os_glassCard(x,tt,1,P.mei-0.1,["Mei","owns the meaning"]);os_glassCard(x,tt,3,P.jun-0.1,["Jun","builds the model"]);os_glassCard(x,tt,0,P.plan-0.1,["Planning","reports what","it's given"]);}},
+    // and the chart, close: the government submission's row lights; the one accountable is still to be confirmed
+    {at:P.e,place:"boardGov",keys:[[P.e,960,520,1],[P.e+0.1,960,540,1.06]],d:3,push:0,draw:(x,tt)=>{const st=fin(tt,P.tobe-0.2,0.3);os_chart(x,()=>1,{light:2,lightA:fin(tt,c.tbc-0.1,0.8),hide:st>0.4?[2,1]:null});
+      const [sx,sy]=os_cellAt(2,1);gv_stamp(x,sx,sy+4,"TBC",st,{size:44,rot:-0.1});}}]);
+  wc_paperOver(ctx,S);});
 
-// ---- 8 · Where does it run? Every line of the binder, sorted into three trays ----
-// the binder's lines, in the order they're sorted: which tray each goes to, and the word it goes on
-const OS_SORT=[[0,"runs","required"],[0,"runs","a check"],[0,"runs","a tag"],[0,"runs","a test"],[1,"owned","decisions"],[1,"owned","writes"],[2,"go","go"]];
-scene("runs",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const b=c.runs-0.6;
-    return{b,when:OS_SORT.map(([k,id,w])=>wAt(sc,id,w)-0.5),kA:os_keys([os_rk("office",0,[0.75,2.15,-1.4],[1.05,1.3,2.3],1350),os_rk("office",b+0.7,[0.85,2.05,-0.9],[1.05,1.25,2.3],1350)]),
-      kB:os_keys([os_rk("office",b,[1.32,1.98,1.02],[1.32,1.06,2.2],1300),os_rk("office",sc.dur+1,[1.32,1.92,1.2],[1.32,1.06,2.2],1300)])};});
-  const y0=1.06,where=wAt(sc,"takes","where");
-  // the desk: the open binder, its lines marked as they're sorted, the three trays and the pages flying into them
-  const desk=(ctx,C_,top,t)=>{const fly=P.when.map(w=>clamp((t-w)/0.8,0,1)),n=[0,0,0];OS_SORT.forEach(([k],i)=>{if(fly[i]>=1)n[k]++;});
-    OS_TRAYS.forEach((tr,k)=>os_tray(ctx,C_,tr.x,2.36,top,tr.col,n[k]));
-    os_binderOpen(ctx,C_,1.32,1.97,top,{pw:0.24,pd:0.36,col:PAL.navy,left:c_=>{Tw(c_,"Policy 12",12,6,{w:800,size:3,align:"center",color:rgba(PAL.navy,1)});for(let i=0;i<6;i++){c_.fillStyle="rgba(150,150,170,0.6)";c_.fillRect(3,11+i*3.6,18-(i%3===2?6:0),0.6);}},
-      right:c_=>OS_SORT.forEach(([k],i)=>{const y=5+i*4.4,u=clamp((t-P.when[i]+0.2)/0.4,0,1);c_.fillStyle="rgba(150,150,170,0.6)";c_.fillRect(5,y,15-(i%2?4:0),0.7);
-        if(u>0){c_.fillStyle=rgba(OS_TRAYS[k].col,u);c_.beginPath();c_.arc(2.6,y+0.35,1.1*(0.6+0.4*spring(u)),0,TAU);c_.fill();}})});
-    OS_SORT.forEach(([k],i)=>os_flyPage(ctx,C_,bldP("office",1.44,top+0.02,1.97),bldP("office",OS_TRAYS[k].x,top+0.03,2.36),fly[i],0.3));};
-  const shotA=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kA,t),{t,inside:"office",office:{bare:1,tbc:1,cards:4},ts:[110,980,5],
-    hooks:{officeDesk:(ctx,C_,top)=>desk(ctx,C_,top,t)},figs:[{id:"yusuf",x:-0.12,z:0.1,y:0.3,pose:"listen",t}],
-    after:c_=>os_board(c_,1190,190,"Where does it run?",{size:44,a:os_io(t,where-0.1,P.b+0.9,0.5),bg:[255,236,200],rim:[214,150,80]})});
-  // over each tray, its name when the voice says it, and above that what goes in it, a line at a time
-  const T8=os_once(sc,"T",()=>[{name:wAt(sc,"runs","run")-0.1,items:[["a required field",wAt(sc,"runs","required")],["a check",wAt(sc,"runs","a check")],["a tag",wAt(sc,"runs","a tag")],["a test",wAt(sc,"runs","a test")]]},
-    {name:wAt(sc,"owned","decisions")-0.1,items:[["award mapping",wAt(sc,"owned","owns")],["owner: Mei · 14 Oct",wAt(sc,"owned","writes")]]},{name:wAt(sc,"go","go")-0.2,items:[]}]);
-  const shotB=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kB,t),{t,inside:"office",office:{bare:1,tbc:1,cards:4},ts:[90,990,4],hooks:{officeDesk:(ctx,C_,top)=>desk(ctx,C_,top,t)},
-    extra:(C_,add)=>OS_TRAYS.forEach((tr,k)=>{const q=T8[k],a=os_in01(t,q.name,0.4);if(a<=0)return;const p=bldP("office",tr.x,y0+0.08,2.44),bg=mix(tr.col,[255,255,255],0.84);
-      os_tag(C_,p,tr.name,{a,size:30,bg,rim:tr.col,dy:24});const it=q.items.filter(([,w])=>t>=w).map(([s_])=>s_);if(it.length)os_tag(C_,p,it,{size:28,pop:false,bg:[255,252,244],rim:tr.col,dy:24+64});})});
-  os_shots(ctx,S,t,[[0,shotA],[P.b,shotB]]);});
+// ---- 5 · What governance is for: deciding who decides, and making sure each decision reaches the work ----
+// an office on the floor washed in a colour (behind its person), or lit up, brighter
+function os_roomLit(x,i,col,a){const F=GV_FL;gv_tint(x,F.x(i),F.top,F.w,F.fy-F.top,col,a);}
+function os_roomGlow(x,i,a){if(a<=0.01)return;const F=GV_FL;x.save();x.beginPath();x.rect(F.x(i),F.top,F.w,F.fy-F.top);x.clip();x.globalCompositeOperation="screen";
+  wc_glowAt(x,F.x(i)+F.w/2,F.top+300,430,[255,238,204],0.42*a);x.restore();}
+// a decision's card, flying from the governance office to the glass of an office where the work is done (u, 0 to 1), and pinned there
+const OS_DEC_Y=GV_FL.top+300;
+function os_decFly(x,i,u,tick){if(u<=0)return;const F=GV_FL,e=easeCam(clamp(u,0,1));
+  os_decision(x,lerp(F.x(2)+F.w/2,F.x(i)+F.w/2,e),lerp(OS_DEC_Y+20,OS_DEC_Y,e)-130*Math.sin(Math.PI*e),lerp(0.5,1,e),tick);}
+// a label over two offices of the floor, in the band above their glass, with a pencil bracket out to their edges
+function os_overRooms(x,tt,t0,i0,i1,s,o){const F=GV_FL,x0=F.x(i0)+16,x1=F.x(i1)+F.w-16,m=(x0+x1)/2,y=108,u=easeCam(fin(tt,t0,0.7));if(u<=0)return;
+  x.save();x.strokeStyle=rgba(WC_PENCIL,0.8);x.lineWidth=3;x.lineCap="round";x.beginPath();x.moveTo(m-(m-x0)*u,y);x.lineTo(m+(x1-m)*u,y);
+  if(u>0.9){const d=20*(u-0.9)/0.1;x.moveTo(x0,y);x.lineTo(x0,y+d);x.moveTo(x1,y);x.lineTo(x1,y+d);}x.stroke();x.restore();os_tagAt(x,tt,t0,null,m,y-40,s,o);}
+// a label on paper of two lines or more, springing in at t0
+function os_note(x,tt,t0,cx,cy,lines,o){o=o||{};const a=fin(tt,t0,0.35)*(o.out==null?1:1-fin(tt,o.out,0.4));if(a<=0.01)return;const sz=o.size||30,w=Math.round(Math.max(...lines.map(l=>tw(x,l,sz,700)))+48),h=lines.length*(sz+12)+28,
+    k=0.9+0.1*spring(fin(tt,t0,0.5));
+  x.save();x.translate(cx,cy);x.scale(k,k);withA(x,a,()=>{wc_panel(x,-w/2,-h/2,w,h,{kind:"card",wash:o.wash,washA:o.washA,seed:w});
+    lines.forEach((l,i)=>wc_T(x,l,0,-h/2+14+(i+0.8)*(sz+12),{w:700,size:sz,align:"center",col:WC_INK}));});x.restore();}
 
-// ---- 9 · Where decisions enter: the data team's loop, and a pin at the right steps ----
-scene("enter",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const b=c.pin-0.6;
-    return{b,pins:OS_PINS.map(([i,lab])=>wAt(sc,"pins",lab[0])-0.15),kA:os_keys([[0,bldP("data",-0.2,3.4,-7.6),bldP("data",-0.5,1.2,2.5),1300],[b+0.7,bldP("data",-0.5,2.1,-1.9),bldP("data",-0.8,1.7,3.8),1300]]),
-      kB:os_keys([[b,bldP("data",-1.32,1.86,0.45),bldP("data",-1.32,1.86,3.8),1250],[sc.dur+1,bldP("data",-1.32,1.86,0.85),bldP("data",-1.32,1.86,3.8),1250]])};});
-  const X0=-2.45,Y0=0.98,X1=-0.2,Y1=2.72,Z=4-0.2-0.03;
-  // Yusuf brings a box of pins to the data team; Jun's at his desk, the poster of their loop on the wall
-  const shotA=(ctx,S,t)=>{const w=along([[-1.0,-3.6],[-1.7,-1.2],[-2.0,1.0]],t,0.6,1.0),lp=wAt(sc,"loop","loop");
-    drawCampus(ctx,S,os_cam(P.kA,t),{t,inside:t>P.b-1.5?"data":null,data:{loopHi:os_io(t,lp-0.2,P.b+0.6,0.5)},
-      figs:[Object.assign({id:"yusuf",at:"data",x:w.x,z:w.z,hop:w.hop,pose:"hold",carry:heldPins,t},w.z<0?{at:null,x:bldP("data",w.x,0,w.z).x,z:bldP("data",w.x,0,w.z).z}:{}),os_at("jun",t,{x:0.5,z:0.95,pose:"listen"})],
-      extra:(C_,add)=>os_tag(C_,bldP("data",-1.32,2.8,3.75),"a loop of ten steps",{a:os_io(t,lp,P.b+0.4,0.4),size:32})});};
-  // the poster, close: a pin at each step where a decision enters, with what's pinned there
-  const shotB=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kB,t),{t,inside:"data",ts:[80,1000,3],
-    extra:(C_,add)=>OS_PINS.forEach(([i,lab],k)=>{const u=os_in01(t,P.pins[k],0.5);if(u<=0)return;const an=-Math.PI/2+i/10*TAU,q=loopPos(i,X0,Y0,X1,Y1,Z-0.01),p=bldP("data",q.x,q.y,q.z),rim=bldP("data",q.x+Math.cos(an)*0.155,q.y-Math.sin(an)*0.155,q.z);
-      os_stepRing(C_,p,0.195,u);os_pinQ(C_,rim,u);os_tag(C_,p,lab,{a:u,size:30,dx:Math.cos(an)*190,dy:-Math.sin(an)*96+18,bg:[255,236,190],rim:[214,160,60]});})});
-  os_shots(ctx,S,t,[[0,shotA],[P.b,shotB]]);});
+scene("for",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b:c.for-0.6,cc:c.like-0.6,d:c.mgmt-0.6,who:wAt(sc,"doesnt","who"),how:wAt(sc,"doesnt","how"),
+    dd:wAt(sc,"for","deciding"),mk:wAt(sc,"for","making"),rule:wAt(sc,"like","a rule"),copy:wAt(sc,"like","a copy"),chk:wAt(sc,"like","someone"),
+    gv:wAt(sc,"mgmt","Governance"),kept:wAt(sc,"mgmt","checks"),mg:wAt(sc,"mgmt","Management")}));
+  // the four offices where the work is done; each one's decision sets off, the nearest first, and lands on its glass
+  const WORK=[0,1,3,4],ID=["clara","mei",0,"jun","sam"],go=i=>P.mk-0.35+(i===1||i===3?0:0.12),lands=i=>go(i)+0.85;
+  gv_shots(ctx,S,t,sc.dur,[
+    // binder 12, open on his desk: what policy 12 says; then a note stuck beside it for each thing it doesn't say
+    {at:0,place:"desk",keys:[[0,1250,500,1.22],[P.who-1.0,960,520,1.0]],d:1.8,draw:(x,tt)=>{os_open12(x);
+      os_sticky(x,560,330,420,200,-0.05,["who decides?"],54,fin(tt,P.who-0.3,0.25),clamp((tt-P.who+0.05)/0.8,0,1));
+      os_sticky(x,590,650,460,260,0.04,["how does it","reach the work?"],50,fin(tt,P.how-0.3,0.25),clamp((tt-P.how+0.05)/1.2,0,1));}},
+    // the floor: in the governance office, deciding who decides; then each decision goes out to an office where the work is done, and
+    // the people there look up
+    {at:P.b,place:"floor",keys:[[P.b,960,450,1.26],[P.mk-0.5,960,540,1.0]],d:1.8,draw:(x,tt)=>{
+      os_roomLit(x,2,GV.gold,0.32*fin(tt,P.dd-0.1,0.6));WORK.forEach(i=>os_roomLit(x,i,GV.gold,0.14*fin(tt,lands(i)-0.1,0.6)));
+      const pose={yusuf:{pose:"write",carry:heldNotebook}};WORK.forEach(i=>{if(ID[i]!=="mei")pose[ID[i]]={pose2:"listen",mix:fin(tt,lands(i)-0.1,0.5)};});
+      os_floor(x,tt,{yusufIn:true,pose});os_glassCard(x,tt,2,P.dd-0.1,["deciding","who decides"],{wash:GV.gold,washA:0.32});
+      WORK.forEach(i=>os_decFly(x,i,clamp((tt-go(i))/0.85,0,1),0));
+      os_tagAt(x,tt,P.mk+0.6,null,960,66,"each decision reaches the work",{size:32,wash:GV.gold,washA:0.3});}},
+    // the 1880s shop again, on the market square: the Act, the inspector's case of brass copies, and the inspector, who checks the shop's
+    // weight against his
+    {at:P.cc,place:"shop",keys:[[P.cc,960,540,1],[P.cc+0.1,980,530,1.04]],d:5,draw:(x,tt)=>{const top=OS_SH.counter[2],land=P.chk+0.3,
+        tilt=tt<land?-0.2:-0.2*Math.exp(-(tt-land)*3)*Math.cos((tt-land)*9);
+      gv_halo(x,500,top-130,300,150,GV.gold,0.85*fin(tt,P.rule-0.1,0.6));gv_halo(x,1540,700,340,220,GV.gold,0.85*fin(tt,P.copy-0.1,0.6));
+      gv_halo(x,1250,380,260,540,GV.gold,0.6*fin(tt,P.chk-0.1,0.6));
+      person(x,"grocer",440,860,0.78,{pose:"listen",t:tt});os_counter(x);os_act(x,650,top+6);
+      os_scaleAt(x,OS_SH.scale,top+4,tilt,(q,ex,ey)=>os_iron(q,ex,ey,1),tt>=land?(q,ex,ey)=>os_brass(q,ex,ey):null);os_case(x,1712,905,1);
+      const m=clamp((tt-(P.chk-0.4))/0.45,0,1),back=fin(tt,land+0.3,0.5);
+      person(x,"inspector",1380,905,0.86,{pose:"hold",pose2:"os_place",mix:m*(1-back),t:tt,flip:true,wide:true,carry:tt<land?heldWeight:null});
+      os_tagAt(x,tt,P.rule,null,650,500,"a rule");os_note(x,tt,P.copy,1690,630,["a copy where","the work happens"]);os_tagAt(x,tt,P.chk,null,1380,186,"someone who checks");}},
+    // the floor again: governance sets the rules and checks they're kept, a tick on each decision; management does the work
+    {at:P.d,place:"floor",keys:[[P.d,960,540,1]],push:0.02,draw:(x,tt)=>{const F=GV_FL;
+      os_roomLit(x,2,GV.gold,0.14+0.22*fin(tt,P.gv-0.1,0.5));WORK.forEach((i,k)=>{os_roomLit(x,i,GV.gold,0.14);os_roomGlow(x,i,fin(tt,P.mg-0.2+0.06*Math.min(k,2),0.5));});
+      const pose={yusuf:{pose:"write",carry:heldNotebook}};WORK.forEach((i,k)=>{if(ID[i]!=="mei")pose[ID[i]]={pose:"listen",pose2:OS_WORK[ID[i]].pose,mix:fin(tt,P.mg-0.2+0.06*Math.min(k,2),0.5)};});
+      os_floor(x,tt,{yusufIn:true,pose});os_glassCard(x,tt,2,P.gv-0.1,["governance","sets the rules,","checks they're kept"],{wash:GV.gold,washA:0.32,top:196,pad:8});
+      WORK.forEach((i,k)=>os_decision(x,F.x(i)+F.w/2,OS_DEC_Y,1,fin(tt,P.kept+0.12*k,0.4)));
+      os_overRooms(x,tt,P.mg-0.2,0,1,"management · does the work");os_overRooms(x,tt,P.mg-0.14,3,4,"management · does the work");}}]);
+  wc_year(ctx,56,72,"England · 1880s",gv_io(t,P.cc+0.2,P.d,0.4));
+  wc_paperOver(ctx,S);});
 
-// ---- 10 · The series: the binders still on the shelf, the films on the tools, and the policy taken to the work ----
-scene("series",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const b=c.tools-0.6,w=c.wish-0.6,n0=wAt(sc,"next","nine")-0.1,tk=wAt(sc,"next","takes")-0.2;
-    return{b,w,tk,slide:OS_SHELF9.map((_,k)=>n0+k*0.24),cards:OS_TOOLS.map((_,k)=>wAt(sc,"tools","six")-0.1+k*0.3),
-      kA:os_keys([os_rk("office",0,[-0.55,1.6,0.0],[-1.95,1.4,3.2],1050),os_rk("office",b+0.7,[-0.6,1.6,0.45],[-1.95,1.4,3.2],1050)]),
-      kB:os_keys([os_rk("data",b,[1.25,2.4,0.35],[1.25,1.95,3.77],2050),os_rk("data",w+0.7,[1.25,2.38,0.6],[1.25,1.95,3.77],2050)]),
-      kC:os_keys([[w,v3(-3.2,4.6,-10.5),v3(1.6,0.8,-1.4),1050],[sc.dur+1,v3(-2.4,10.5,-14.5),v3(4.2,0.4,1.6),1000]])};});
-  // the shelf: nine binders come forward, one for each film on a kind of policy; Yusuf takes the first
-  const shotA=(ctx,S,t)=>{const u=P.slide.map(t0=>os_in01(t,t0,0.45)),took=t>P.tk+0.9,hi=os_in01(t,P.tk+0.9,0.4);
-    drawCampus(ctx,S,os_cam(P.kA,t),{t,inside:"office",ts:[110,980,5],office:{tbc:1,shelfSkip:(r,j)=>(r===2&&j===4)||(took&&r===2&&j===9),
-        shelfOut:(r,j)=>{const k=OS_SHELF9.findIndex(([a,b_])=>a===r&&b_===j);return k<0?0:0.09*easeCam(u[k])+(k===0?0.1*os_in01(t,P.tk+0.3,0.6):0);}},
-      figs:[{id:"yusuf",at:"office",x:-0.45,z:2.7,pose:t>P.tk&&!took?"reach":took?"hold":"stand",flip:true,carry:took?os_heldTitled(["Who","decides"],PAL.gold):null,t}],
-      over:(ctx,C_)=>{const M_=MX;mxSet(BLDI.office.x,BLDI.office.z,BLDI.office.ang);OS_SHELF9.forEach(([r,j],k)=>{if(u[k]<=0||(k===0&&t>P.tk-0.1))return;os_binderTag(ctx,C_,r,j,0.09*easeCam(u[k]),k+2,u[k]);});MX=M_;},
-      after:c_=>os_needsList(c_,74,96,u,hi,os_in01(t,P.slide[0]-0.3,0.5))});};
-  // the data team's board: six cards, one for each film on the tools
-  const shotB=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kB,t),{t,inside:"data",ts:[80,1000,3],hooks:{dataBoard:(ctx,C_,z)=>OS_TOOLS.forEach((_,k)=>{const u=os_in01(t,P.cards[k],0.45);if(u<=0)return;
-      const col=k%3,row=(k/3)|0,x0=0.13+col*0.785,y1=2.6-row*0.66,lift=(1-spring(u))*0.05;surfDraw(ctx,C_,v3(x0,y1+lift,z-0.004),v3(1,0,0),v3(0,1,0),c_=>os_toolCard(c_,k,u));
-      const p=pj(C_,v3(x0+0.35,y1-0.03+lift,z-0.008));if(p.z>NEAR){ctx.fillStyle=rgba([200,70,60],1);ctx.beginPath();ctx.arc(p.x,p.y,Math.max(3,0.016*p.s),0,TAU);ctx.fill();}})},
-    after:c_=>os_board(c_,W/2,128,"With the tools",{size:34,a:os_in01(t,P.cards[0]-0.2,0.5),bg:[236,244,255],rim:[90,130,200],ink:[40,60,110]})});
-  // the policy leaves the shelf: Yusuf takes it out across the green, to where the work is done
-  const shotC=(ctx,S,t)=>{const wk=along([[0.5,-2.35],[2.4,-2.6],[3.9,0.0],[6.4,2.1]],t,P.w+0.2,1.05);
-    drawCampus(ctx,S,os_cam(P.kC,t),{t,office:{tbc:1},figs:[{id:"yusuf",x:wk.x,z:wk.z,y:os_floor(wk.z),hop:wk.hop,pose:"hold",carry:os_heldTitled(["Who","decides"],PAL.gold),t}],
-      after:c_=>os_card(c_,os_in01(t,c.breath-0.2,0.8),["Off the shelf",110],"A policy that doesn't run anywhere is a wish.","Film 1 of 16 · data governance")});};
-  os_shots(ctx,S,t,[[0,shotA],[P.b,shotB],[P.w,shotC]]);});
+// ---- 6 · Governance at the centre: DAMA's book and its wheel; the other frameworks on the same ground; then where it runs ----
+scene("wheel",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b:c.wheel-0.6,d:c.takes-0.6,body:wAt(sc,"body","body"),eleven:wAt(sc,"wheel","eleven"),
+    gov:wAt(sc,"wheel","governance"),where:wAt(sc,"wheel","where"),dee:wAt(sc,"others","Dee"),i8:wAt(sc,"others","eight thousand"),i38:wAt(sc,"others","thirty"),
+    shows:wAt(sc,"takes","shows")}));
+  const out=P.d-1.4,ring=[[1,3],[0,4]];
+  gv_shots(ctx,S,t,sc.dur,[
+    // his desk: binder 12, closed, his two notes sticking out of it; DAMA's book set down beside it
+    {at:0,place:"desk",keys:[[0,960,540,1],[P.body,1170,520,1.1]],d:2,draw:(x,tt)=>{os_closed12(x);const u=fin(tt,P.body-0.5,0.3);if(u<=0)return;
+      x.save();x.translate(1330,520);const k=lerp(1.25,1,easeCam(u));x.scale(k,k);withA(x,clamp(u*3,0,1),()=>os_dmbok(x,0,0));x.restore();}},
+    // the book open at its wheel: ten areas round the centre, data governance, where they meet; then the frameworks that cover the same
+    // ground, or part of it; then close in on the centre
+    {at:P.b,place:"page",keys:[[P.b,960,500,1.04],[P.b+0.1,960,480,1.0],[out,960,448,2.3]],d:1.6,push:0.02,draw:(x,tt)=>{
+      const hi=tt>=P.i38-0.3?"centre":tt>=P.i8-0.2?9:-1;
+      os_wheel(x,{area:k=>fin(tt,P.eleven-0.1+k*0.24,0.5),centre:fin(tt,P.gov-0.1,0.6),joins:clamp((tt-P.where+0.2)/1.2,0,1),
+        ring:clamp((tt-P.dee+0.2)/1.4,0,1)*(1-fin(tt,out,0.4)),dim:gv_io(tt,P.dee-0.2,out,0.5),hi,
+        outline:hi==="centre"?gv_io(tt,P.i38-0.1,out,0.4):hi===9?fin(tt,P.i8-0.1,0.4):0,labels:1-fin(tt,out,0.4),fade:1-0.6*fin(tt,out,0.6)});
+      os_note(x,tt,P.dee-0.1,1660,150,["DCAM","the same ground"],{out});os_note(x,tt,P.i8-0.1,262,150,["ISO 8000","data quality"],{out});
+      os_note(x,tt,P.i38-0.1,1660,780,["ISO/IEC 38505","governing data"],{out});}},
+    // where it runs: the governance office at the centre of the floor, and the offices round it, at work
+    {at:P.d,place:"floor",keys:[[P.d,960,485,1.9],[P.d+0.4,960,540,1.0]],d:2.4,push:0.02,draw:(x,tt)=>{
+      os_roomLit(x,2,GV.gold,0.32+0.16*(1-fin(tt,P.d+0.4,1.6)));ring.forEach((r,j)=>r.forEach(i=>os_roomGlow(x,i,fin(tt,P.shows-0.1+0.3*j,0.6))));
+      os_floor(x,tt,{yusufIn:true,pose:{yusuf:{pose:"listen"}}});}}]);
+  wc_paperOver(ctx,S);});
+
+// ---- 7 · Listen first: no thirty-fifth policy; one question in every office, and what slows each one down ----
+// someone answering while Yusuf writes it down: their bubble springs in at t0 and goes at t1
+function os_answer(x,tt,t0,t1,bx,by,lines,tx,ty){gv_say(x,bx,by,lines,tx,ty,{a:gv_io(tt,t0,t1,0.35),k:0.92+0.08*spring(fin(tt,t0,0.5)),size:34});}
+const os_noting=tt=>({pose:"write",carry:heldNotebook,t:tt});
+
+scene("listen",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({a2:wAt(sc,"ask","He asks")-0.4,flip:wAt(sc,"ask","doesn't")+0.3,every:wAt(sc,"ask","everyone"),
+    q:wAt(sc,"ask","what slows"),b:c.jun-0.6,m:c.mei-0.6,s:c.sam-0.6,p:c.plan-0.6,f:c.binder-0.6,they:wAt(sc,"binder","They"),g:c.tools-1.15,
+    h:wAt(sc,"tools","Tools")-0.5,trust:wAt(sc,"plan","trust"),carry:wAt(sc,"tools","carry"),agree:wAt(sc,"tools","agree"),cant:wAt(sc,"tools","can't")}));
+  gv_shots(ctx,S,t,sc.dur,[
+    // his desk: a fresh page for a thirty-fifth policy, its heading and nothing else; it turns over, unwritten
+    {at:0,place:"desk",keys:[[0,960,520,1],[P.flip-0.3,960,500,1.06]],d:1.8,draw:(x,tt)=>os_page35(x,Math.PI*easeCam(clamp((tt-P.flip)/1.1,0,1)))},
+    // the floor: he goes out with his notebook, past every office, and asks the same question; each one looks up
+    {at:P.a2,place:"floor",keys:[[P.a2,960,540,1]],push:0.04,draw:(x,tt)=>{const F=GV_FL,w=gv_walk(tt,P.a2+0.15,F.x(2)+76,F.x(3)-18,200),pose={};
+      ["clara","jun","sam"].forEach((id,k)=>pose[id]={pose2:"listen",mix:fin(tt,P.every-0.1+0.14*k,0.5)});
+      os_floor(x,tt,{pose});os_carrier(x,"yusuf",w,F.walk,0.62,heldNotebook,{t:tt});
+      os_answer(x,tt,P.q-0.15,99,w.x-190,420,["What slows you down?"],w.x+6,540);}},
+    // the data team: Jun
+    {at:P.b,place:"data",keys:[[P.b,1240,520,1.12],[P.b+0.1,1260,510,1.16]],d:4,draw:(x,tt)=>{os_dataBoard(x);person(x,"yusuf",960,905,0.8,os_noting(tt));
+      person(x,"jun",1480,905,0.8,{pose:"explain",t:tt,flip:true});os_answer(x,tt,c.jun+0.2,P.m+0.6,1540,250,["The rules arrive","after I've built it."],1505,452);}},
+    // the registrar's office: Mei, her word on the desk
+    {at:P.m,place:"registrar",keys:[[P.m,1080,520,1.12],[P.m+0.1,1060,510,1.16]],d:4,draw:(x,tt)=>{os_tent(x);
+      person(x,"mei",860,905,0.8,{pose:"explain",t:tt});person(x,"yusuf",1450,905,0.8,Object.assign(os_noting(tt),{flip:true}));
+      os_answer(x,tt,c.mei+0.2,P.s+0.6,560,262,["I approve the words,","then never see them used."],850,456);}},
+    // the platform team: Sam
+    {at:P.s,place:"platform",keys:[[P.s,900,520,1.12],[P.s+0.1,880,510,1.16]],d:4,draw:(x,tt)=>{
+      person(x,"sam",640,905,0.8,{pose:"explain",t:tt});person(x,"yusuf",1180,905,0.8,Object.assign(os_noting(tt),{flip:true}));
+      os_answer(x,tt,c.sam+0.2,P.p+0.6,330,262,["Tell me which column,","I'll protect it in minutes."],630,456);}},
+    // Planning: Clara, her census on the screen and the draft's number stuck beside it
+    {at:P.p,place:"planning",keys:[[P.p,900,520,1.1],[P.p+0.1,880,510,1.14]],d:4,draw:(x,tt)=>{os_census(x,1);
+      os_sticky(x,1222,238,212,160,0.06,["4,867?"],46,fin(tt,P.p+0.25,0.25),1);
+      person(x,"clara",440,905,0.8,{pose:"listen",pose2:"shrug",mix:fin(tt,P.trust-0.2,0.5),expr:"concerned",t:tt});
+      person(x,"yusuf",1270,905,0.8,Object.assign(os_noting(tt),{flip:true}));os_answer(x,tt,c.plan+0.1,P.f+0.6,270,214,["Which number","do I trust?"],440,462);}},
+    // his office's board, close: his question, and the four answers pinned up under it one by one
+    {at:P.f,place:"boardGov",keys:[[P.f,960,500,1],[P.f+0.1,960,490,1.04]],d:3,push:0.02,draw:(x,tt)=>{os_asked(x);
+      for(let k=0;k<4;k++)os_ansCard(x,k,fin(tt,c.binder-0.2+0.45*k,0.35));}},
+    // his office: the shelf the binder came from, in a warm light; what they wrote is what they were asked for
+    {at:P.they-0.5,place:"office",keys:[[P.they-0.5,1320,520,1.16],[P.they-0.4,1360,520,1.2]],d:3,draw:(x,tt)=>{os_chartSmall(x,1);os_ansSmall(x);os_score(x);
+      os_binders(x,{missing:i=>i===11});const g=fin(tt,P.they-0.2,0.9),[sx,,sw]=[GV_OFF.shelf.x,0,GV_OFF.shelf.w];
+      if(g>0){x.save();x.globalCompositeOperation="soft-light";wc_glowAt(x,sx+sw/2,520,560,[255,190,90],0.9*g);x.globalCompositeOperation="screen";
+        wc_glowAt(x,sx+sw/2,470,500,[255,222,160],0.42*g);x.restore();}
+      person(x,"yusuf",1200,905,0.8,{pose:"listen",expr:"smile",t:tt});}},
+    // the data team's room: Mei, Jun and Yusuf, working it out together
+    {at:P.g,place:"data",keys:[[P.g,1300,520,1.14],[P.g+0.1,1320,520,1.18]],d:3,draw:(x,tt)=>{const nod=k=>0.05*Math.sin(tt*3.1+k)*gv_io(tt,P.g+0.3,P.h,0.4);os_dataBoard(x);
+      person(x,"yusuf",900,905,0.8,{pose:"listen",t:tt,nod:nod(1)});person(x,"mei",1330,905,0.8,{pose:"explain",t:tt});
+      person(x,"jun",1600,905,0.8,{pose:"listen",t:tt,flip:true,nod:nod(2)});}},
+    // Jun's screen: what they agreed on Monday runs as a test, and passes; how award maps to the government's has no test, as no
+    // one has agreed it
+    {at:P.h,place:"screen",keys:[[P.h,960,450,1],[P.cant-0.3,960,500,1.06]],d:1.8,push:0.02,draw:(x,tt)=>
+      os_tests(x,fin(tt,P.carry-0.3,0.5),fin(tt,P.carry+0.25,0.4),fin(tt,P.agree-0.1,0.6),fin(tt,P.cant-0.15,0.5))}]);
+  wc_paperOver(ctx,S);});
+
+// ---- 8 · Where does it run? Binder 12 open again, and every line of policy 12 marked by where it runs ----
+scene("runs",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{open:w("takes","opens",-0.2),where:w("takes","where"),b:c.runs-0.6,key:[w("runs","run in",-0.1),w("owned","decisions",-0.1),w("go","go",-0.2)],
+      hi:[w("runs","required"),w("runs","a check"),w("runs","a tag"),w("runs","a test"),w("owned","owns"),w("owned","writes"),w("go","go")],
+      note:[w("runs","required"),w("runs","a check"),w("runs","a tag"),w("runs","a test"),w("owned","owns",0.3),w("owned","where the"),99]};});
+  gv_shots(ctx,S,t,sc.dur,[
+    // his desk: binder 12, closed, and three highlighters; he opens it, and sticks his question beside policy 12
+    {at:0,place:"desk",keys:[[0,1300,520,1.1],[P.open,960,520,1],[P.b-0.9,1300,500,1.25]],d:1.6,draw:(x,tt)=>{
+      [[1792,330,1.4,GV.green],[1836,530,1.52,GV.gold],[1798,736,1.44,GV.grey]].forEach(([mx,my,r,col])=>os_marker(x,mx,my,r,col));
+      os_opening12(x,easeCam(clamp((tt-P.open)/0.9,0,1)));
+      os_sticky(x,560,380,440,230,-0.04,["where does","it run?"],56,fin(tt,P.where-0.35,0.25),clamp((tt-P.where+0.1)/1.0,0,1));}},
+    // the page, close: each line marked as it's sorted, green where it can run in the work, gold where it's a decision someone owns,
+    // grey where it can go; what he writes beside it; his key at the top
+    {at:P.b,place:"policy",keys:[[P.b,960,540,1]],push:0.035,draw:(x,tt)=>os_policy(x,k=>fin(tt,P.hi[k]-0.45,k===4?0.8:0.45),k=>fin(tt,P.note[k],0.7),
+      j=>fin(tt,P.key[j],0.6),fin(tt,P.hi[6]+0.35,0.5))}]);
+  wc_paperOver(ctx,S);});
+
+// ---- 9 · Where decisions enter: the data team's loop, and a gold pin at each step where a decision enters it ----
+// a face between two expressions (m, 0 to 1)
+function os_face(a,b,m){const A=EXPR[a],B=EXPR[b];if(m<=0)return A;if(m>=1)return B;const o={};new Set([...Object.keys(A),...Object.keys(B)]).forEach(k=>o[k]=lerp(A[k]||0,B[k]||0,m));return o;}
+scene("enter",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{places:w("places","places"),lp:c.loop-0.6,go:w("loop","loop",-0.1),end:w("loop","new version",0.1),m:c.pin-0.6,meet:w("pin","another meeting"),
+      needs:w("pin","It needs"),pin:w("pin","a pin"),q:c.pins-0.6,
+      pins:OS_PINS.map(([,word])=>w(sc.vo.find(v=>v.id==="pins").text.includes(word)?"pins":"pins2",word,-0.15)),two:w("pins","a contract",-0.1),br:c.breath-0.3};});
+  const [qx,qy,qw,qh]=GV_PC,[px,py,pw,ph]=GV_DT.poster,
+    pins=(x,tt,R,lab)=>OS_PINS.forEach(([i,,lines],k)=>os_goldPin(x,i,R[0],R[1],R[2],R[3],fin(tt,P.pins[k],0.3),clamp((tt-P.pins[k]-0.05)/0.5,0,1),lines,
+      lab&&(j=>clamp((tt-(j?P.two:P.pins[k]+0.1))/0.6,0,1))));
+  gv_shots(ctx,S,t,sc.dur,[
+    // the data team's room: Yusuf comes in with a box of gold pins; Jun turns from his desk; the poster of how they build catches the light
+    {at:0,place:"data",keys:[[0,1000,520,1.08],[0.4,1060,515,1.14]],d:3.2,draw:(x,tt)=>{const wk=gv_walk(tt,0.2,300,860,220);
+      os_dataBoard(x);os_warm(x,px+pw/2,py+ph/2,420,fin(tt,P.places-0.4,0.8));
+      person(x,"jun",1600,905,0.8,{pose:"stand",pose2:"listen",mix:fin(tt,wk.end-0.7,0.6),t:tt,flip:true});os_carrier(x,"yusuf",wk,905,0.8,heldPins,{t:tt});}},
+    // the poster, close: the loop they build in, going round from a question to a new version
+    {at:P.lp,place:"poster",keys:[[P.lp,960,500,1.06],[P.lp+0.1,960,490,1]],d:2.4,push:0.02,draw:(x,tt)=>
+      withA(x,1-fin(tt,P.m-0.7,0.6),()=>os_loopRun(x,qx,qy,qw,qh,clamp((tt-P.go)/((P.end-P.go)/0.9),0,1)))},
+    // the room again: Jun expects another meeting; Yusuf holds up the pins instead
+    {at:P.m,place:"data",keys:[[P.m,1120,520,1.16],[P.m+0.1,1100,515,1.2]],d:4,draw:(x,tt)=>{os_dataBoard(x);os_warm(x,px+pw/2,py+ph/2,420,1);
+      person(x,"yusuf",880,905,0.8,{pose:"hold",pose2:"holdUp",mix:fin(tt,P.needs-0.1,0.5),E:os_face("calm","smile",fin(tt,P.needs,0.5)),t:tt,carry:heldPins});
+      person(x,"jun",1480,905,0.8,{pose:"listen",E:os_face("concerned","relieved",fin(tt,P.pin,0.6)),t:tt,flip:true});
+      os_answer(x,tt,P.meet-0.25,P.pin+0.3,1500,330,["Another meeting?"],1462,456);}},
+    // the poster, close: a gold pin at each step where a decision enters, and what enters there
+    {at:P.q,place:"poster",keys:[[P.q,960,500,1.04],[P.q+0.1,960,490,1]],d:2.4,push:0.02,draw:(x,tt)=>pins(x,tt,GV_PC,true)},
+    // the room: the team's own loop, with six gold pins in it
+    {at:P.br,place:"data",keys:[[P.br,1060,520,1.1],[P.br+0.1,1060,515,1.13]],d:2.4,draw:(x,tt)=>{os_dataBoard(x);os_warm(x,px+pw/2,py+ph/2,420,1);pins(x,99,GV_DT.poster,false);
+      person(x,"yusuf",860,905,0.8,{pose:"hold",expr:"smile",t:tt,carry:heldPins});person(x,"jun",1560,905,0.8,{pose:"listen",expr:"smile",t:tt,flip:true});}}]);
+  wc_paperOver(ctx,S);});
+
+// ---- 10 · The series: nine binders for the films on what governance needs, six cards for the films on the tools ----
+scene("series",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{nine:w("next","nine",-0.1),take:w("next","takes"),tl:c.tools-0.6,six:w("tools","six",-0.1),f:c.wish-0.6,end:c.breath-0.2};});
+  const B1=OS_NINE[0],held=os_heldTitled(["Who","decides"],os_bindCol(B1));
+  gv_shots(ctx,S,t,sc.dur,[
+    // his office: nine binders on the shelf light up, one for each film to come; he takes the first down
+    {at:0,place:"office",keys:[[0,1120,520,1.2],[P.take+0.5,1270,560,1.4]],d:1.8,draw:(x,tt)=>{const n=j=>fin(tt,P.nine+0.12*j,0.35),got=tt>=P.take+0.55,
+        r1=fin(tt,P.take-0.1,0.5),r2=fin(tt,P.take+0.55,0.5);
+      os_chartSmall(x,1);os_ansSmall(x);os_score(x);
+      os_binders(x,{missing:i=>i===11||(got&&i===B1),glow:i=>{const j=OS_NINE.indexOf(i);return j<0?0:0.85*n(j);},
+        out:i=>{const j=OS_NINE.indexOf(i);return j<0?0:Math.max(0.5*n(j),i===B1?fin(tt,P.take+0.1,0.35):0);}});
+      person(x,"yusuf",1250,905,0.8,got?{pose:"reach",pose2:"hold",mix:r2,t:tt,carry:held}:{pose:"listen",pose2:"reach",mix:r1,t:tt});}},
+    // the data team's board, close: six cards, one for each film on the tools
+    {at:P.tl,place:"boardData",keys:[[P.tl,960,500,1.04],[P.tl+0.1,960,490,1]],d:2.4,push:0.02,draw:(x,tt)=>{os_toolsHead(x,fin(tt,P.tl+0.3,0.6));
+      for(let k=0;k<6;k++)os_toolCard(x,k,fin(tt,P.six+0.3*k,0.35));}},
+    // the floor: he takes the binder to where the work is done; Jun looks up
+    {at:P.f,place:"floor",keys:[[P.f,1000,560,1.2],[P.f+0.1,1100,555,1.22]],d:4,draw:(x,tt)=>{const F=GV_FL,wk=gv_walk(tt,P.f+0.2,880,1400,150);
+      os_floor(x,tt,{pose:{jun:{pose2:"listen",mix:fin(tt,wk.end-0.8,0.6)}}});os_carrier(x,"yusuf",wk,F.walk,0.62,held,{t:tt});}}]);
+  gv_end(ctx,S,t,P.end,"Off the shelf","A policy that doesn't run anywhere is a wish.","Film 1 of 16");
+  wc_paperOver(ctx,S);});
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});
@@ -2755,11 +3172,18 @@ window.addEventListener("DOMContentLoaded",async()=>{
   Object.assign(FILM,{seek,time:()=>t,playing:()=>playing,play:()=>{if(!playing)toggle();},pause:()=>{if(playing)toggle();},playScene:(id,once)=>{const s=SCENES.find(x=>x.id===id);seek(FILM.sceneStart(id)+0.01);if(once&&s)stopAt=s.start+s.dur-0.05;if(!playing)toggle();}});
   await prepAssets();readyRes();const hm=location.hash.match(/t=([0-9:.]+)/);if(hm){const q=hm[1].split(":").map(Number);seek(q.length>1?q[0]*60+q[1]:q[0]);}dirty=true;requestAnimationFrame(loop);});}
 
-/* ===== The data governance series: the video's finishing pass =====
-   Loaded after the engine. Only the rendered video uses it (tools/render.py calls renderAt); the site's player draws live.
-   Motion blur: each video frame is the average of MB moments across a third of a frame (a 126-degree shutter), so movement reads as
-   filmed. No glow (it washes out the town's pastels) and no film grain (noise doesn't compress). Stills (tools/stills.py) don't show it. */
-if(window.__RENDER__){(function(){const MB=6,SHUT=0.35/30,out=document.querySelector("canvas"),ox=out.getContext("2d"),
+/* ===== The data governance series: what the films need before they start, and the video's finishing pass =====
+   Loaded after the engine, so its prepAssets is the one the engine calls: the fonts and the tools' logos, then the paper and the
+   pigment's grain of the master data series' watercolour (its wash.js), then each place the film paints (WC_PLACES, in the film's own
+   pictures). The rendered video and the checks paint every place before they start; the site's player paints the first, then the
+   others one by one while the film plays, so it starts quickly. The same as the master data series' post.js, with the logos.
+   Then, for the video only (tools/render.py calls renderAt), motion blur: each video frame is the average of MB moments across a third
+   of a frame (a 126-degree shutter), so movement reads as filmed. No glow: it would wash out the paper. No film grain: the paper is
+   the grain. */
+async function prepAssets(){await fontsReady3();await loadLogos();wc_prep();const ks=typeof WC_PLACES!=="undefined"?Object.keys(WC_PLACES):[];
+  if(window.__RENDER__){ks.forEach(gv_place);return;}
+  if(ks.length)gv_place(ks[0]);let i=1;const next=()=>{if(i>=ks.length)return;gv_place(ks[i++]);setTimeout(next,60);};setTimeout(next,200);}
+if(window.__RENDER__){(function(){const MB=8,SHUT=0.35/30,out=document.querySelector("canvas"),ox=out.getContext("2d"),
     M=mkCanvas(W,H),mx=M.getContext("2d"),A=mkCanvas(W,H),ax=A.getContext("2d");
   window.renderAt=function(t,q){
     for(let i=0;i<MB;i++){const tt=Math.max(0,t-SHUT*i/(MB-1));mx.setTransform(1,0,0,1,0,0);mx.globalAlpha=1;mx.globalCompositeOperation="source-over";renderFrame(mx,1,tt);ax.globalAlpha=1/(i+1);ax.drawImage(M,0,0);}

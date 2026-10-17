@@ -6,18 +6,20 @@ const NARR={
  {"id":"moved","gap":0.8,"text":"When someone moved, they carried a certificate to their new parish, and the next book took them in."},
  {"id":"number","gap":0.8,"text":"In 1947, the register gave everyone a number for life.","say":"In nineteen forty-seven, the register gave everyone a number for life."},
  {"id":"once","gap":0.8,"text":"One person, written down once, followed wherever they went."}]},
-"move":{"name":"A new address","lead":1.0,"tail":1.0,"vo":[
- {"id":"today","gap":0.8,"text":"Today, at the university. Linh Nguyen is studying health informatics."},
- {"id":"moves","gap":0.8,"text":"This month, she moves in with her brother, Minh."},
- {"id":"tells","gap":0.8,"text":"She tells the student system her new address."},
- {"id":"done","gap":0.8,"text":"Done, she thinks."}]},
-"four":{"name":"Four records, four Linhs","lead":0.8,"tail":1.0,"vo":[
- {"id":"others","gap":0.8,"text":"But the student system isn't the only one that knows her."},
- {"id":"alumni","gap":0.8,"text":"She did her first degree here, so the alumni office has her."},
- {"id":"tutor","gap":0.8,"text":"She tutors a first-year unit, so HR has her too, with a staff number."},
- {"id":"research","gap":0.8,"text":"And this year she joined a research project, so the research office has her as well."},
- {"id":"letter","gap":0.8,"text":"HR posts her next contract, with her pay, to the old flat, where someone else lives now."},
- {"id":"only","gap":0.8,"text":"Four records, four Linhs, and only one knows she moved."}]},
+"back":{"name":"Back to study","lead":1.0,"tail":1.0,"vo":[
+ {"id":"today","gap":0.8,"text":"Today, at the university. Linh Nguyen graduated here in 2022.","say":"Today, at the university. Linh Nguyen graduated here in twenty twenty-two."},
+ {"id":"back","gap":0.8,"text":"Last year, she came back to study health informatics."},
+ {"id":"applies","gap":0.8,"text":"She applied online, and got a new student number."},
+ {"id":"nothing","gap":0.8,"text":"Nothing linked it to the number she graduated with."}]},
+"five":{"name":"Five records, five Linhs","lead":0.8,"tail":1.0,"vo":[
+ {"id":"now","gap":0.8,"text":"Now the university has five records of her."},
+ {"id":"students","gap":0.8,"text":"Two in the student system, under the old number and the new."},
+ {"id":"alumni","gap":0.8,"text":"One at the alumni office, which knows only the old one."},
+ {"id":"hr","gap":0.8,"text":"One in HR, which pays her to tutor a first-year unit."},
+ {"id":"research","gap":0.8,"text":"And one at the research office, for a project she joined this year."},
+ {"id":"transcript","gap":0.8,"text":"So her application asked for a transcript of the degree the university gave her."},
+ {"id":"invite","gap":0.8,"text":"And the alumni office invites her back, for a master's. She's already doing one."},
+ {"id":"none","gap":0.8,"text":"Five records, five Linhs, and nobody sees that she's one person."}]},
 "kinds":{"name":"The kinds of data","lead":1.0,"tail":1.0,"vo":[
  {"id":"master","gap":0.8,"text":"Linh is master data: one of the things the university is about, shared by every process and system."},
  {"id":"reference","gap":0.8,"text":"The lists that sort her, like “casual tutor” or a country, are reference data."},
@@ -71,8 +73,9 @@ const NARR={
 "series":{"name":"The series","lead":0.8,"tail":1.0,"vo":[
  {"id":"parts","gap":0.8,"text":"Eight more films follow, in four parts."},
  {"id":"names","gap":0.8,"text":"Who someone is. Roles and lists. Sharing it safely. And keeping it right."}]},
-"once":{"name":"Once","lead":0.8,"tail":1.0,"vo":[
- {"id":"change","gap":0.8,"text":"Linh changes her address, once."},
- {"id":"hears","gap":0.8,"text":"Every role hears."},
+"found":{"name":"Found first","lead":0.8,"tail":1.0,"vo":[
+ {"id":"now","gap":0.8,"text":"This time, when Linh applies, the university finds her first."},
+ {"id":"adds","gap":0.8,"text":"It adds a role, not a person."},
+ {"id":"there","gap":0.8,"text":"Her degree is already there, and the alumni office sees she's back."},
  {"id":"know","gap":0.8,"text":"Know the person, not just the role."}]}
 };

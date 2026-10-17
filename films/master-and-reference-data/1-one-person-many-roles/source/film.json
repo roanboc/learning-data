@@ -7,7 +7,7 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": ["apart", "roles", 3.0],
+  "poster": ["apart", "none", 2.0],
   "say": [
     ["\\bNguyen\\b", "Nwin"],
     ["\\bLinh's\\b", "Lin's"],

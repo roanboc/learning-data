@@ -9,6 +9,9 @@ Linh Nguyen studies health informatics at the university, took a short course, t
 ## The films
 
 <!-- films: made by site-tools/build_series.py's readme() -->
+| Film | Topic | Length | Chapters | Pause and think | Script |
+|---|---|---|---|---|---|
+| [One person, many roles](https://roanboc.github.io/learning-data/master-and-reference-data/one-person-many-roles/) | Master data, and the person behind the role | 5½ min | 12 | 4 questions | [script](1-one-person-many-roles/script.md) · [source](1-one-person-many-roles/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

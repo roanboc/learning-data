@@ -421,30 +421,91 @@ function d10_catalogue(ctx,x,y,w,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01
 // a household's bill, on paper: its lines, with the new one (o.hi lights it) and the amount due
 const D10_BILL=[["energy used","$118.40"],["network charge","$46.20"],["social tariff discount","−$32.92"]];
 function d10_bill(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const ink="rgba(40,38,40,0.96)",soft="rgba(96,86,76,0.95)";withA(ctx,a,()=>{ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot==null?-0.015:o.rot);ctx.translate(-x-w/2,-y-h/2);
-  sheet(ctx,x,y,w,h,{rot:0,plain:true});T(ctx,"your bill",x+32,y+58,{f:"mono",w:500,size:28,color:"rgba(150,60,60,0.95)"});T(ctx,"July 2027",x+w-32,y+58,{f:"mono",w:500,size:28,align:"right",color:soft});
+  sheet(ctx,x,y,w,h,{rot:0,plain:true});T(ctx,"your bill",x+32,y+58,{deco:o.deco,f:"mono",w:500,size:28,color:"rgba(150,60,60,0.95)"});T(ctx,"July 2027",x+w-32,y+58,{deco:o.deco,f:"mono",w:500,size:28,align:"right",color:soft});
   ctx.fillStyle="rgba(96,86,76,0.35)";ctx.fillRect(x+32,y+84,w-64,2);
   D10_BILL.forEach(([k,v],i)=>{const yy=y+150+i*70,nw=i===2;if(nw){const hi=clamp(o.hi||0,0,1);ctx.fillStyle="rgba(255,206,84,"+(0.18+0.4*hi)+")";ctx.fillRect(x+22,yy-40,w-44,58);}
-    T(ctx,k,x+32,yy,{w:nw?800:600,size:30,color:ink});T(ctx,v,x+w-32,yy,{w:nw?800:600,size:30,align:"right",color:nw?"rgba(30,110,60,1)":ink});});
-  ctx.fillStyle="rgba(40,38,40,0.6)";ctx.fillRect(x+32,y+356,w-64,2.5);T(ctx,"amount due",x+32,y+410,{w:800,size:34,color:ink});T(ctx,"$131.68",x+w-32,y+410,{w:800,size:34,align:"right",color:ink});
+    T(ctx,k,x+32,yy,{deco:o.deco,w:nw?800:600,size:30,color:ink});T(ctx,v,x+w-32,yy,{deco:o.deco,w:nw?800:600,size:30,align:"right",color:nw?"rgba(30,110,60,1)":ink});});
+  ctx.fillStyle="rgba(40,38,40,0.6)";ctx.fillRect(x+32,y+356,w-64,2.5);T(ctx,"amount due",x+32,y+410,{deco:o.deco,w:800,size:34,color:ink});T(ctx,"$131.68",x+w-32,y+410,{deco:o.deco,w:800,size:34,align:"right",color:ink});
   ctx.restore();});}
 // the letter that tells a household it has the tariff
 function d10_letter(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const ink="rgba(40,38,40,0.96)";withA(ctx,a,()=>{ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot==null?0.02:o.rot);ctx.translate(-x-w/2,-y-h/2);
-  sheet(ctx,x,y,w,h,{rot:0,plain:true});T(ctx,"letter",x+32,y+58,{f:"mono",w:500,size:28,color:"rgba(150,60,60,0.95)"});T(ctx,"You have the social tariff",x+32,y+120,{w:800,size:32,color:ink});
-  wrapT(ctx,"From 1 July, your bill is 20% lower. You don't need to do anything.",x+32,y+178,w-64,{size:28,w:600,color:"rgba(60,56,58,0.95)",lh:38});ctx.restore();});}
+  sheet(ctx,x,y,w,h,{rot:0,plain:true});T(ctx,"letter",x+32,y+58,{deco:o.deco,f:"mono",w:500,size:28,color:"rgba(150,60,60,0.95)"});T(ctx,"You have the social tariff",x+32,y+120,{deco:o.deco,w:800,size:32,color:ink});
+  wrapT(ctx,"From 1 July, your bill is 20% lower. You don't need to do anything.",x+32,y+178,w-64,{deco:o.deco,size:28,w:600,color:"rgba(60,56,58,0.95)",lh:38});ctx.restore();});}
 // the call centre's answer, as a script on paper: the household's question, and the answer from what the catalogue lets the call
 // centre see (o.q, o.ans: each, 0..1)
 function d10_call(ctx,x,y,w,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const ink="rgba(40,38,40,0.96)",h=420;withA(ctx,a,()=>{ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot==null?-0.012:o.rot);ctx.translate(-x-w/2,-y-h/2);
   sheet(ctx,x,y,w,h,{rot:0,plain:true});
   // a headset, drawn simply, in ink
   ctx.strokeStyle="rgba(40,60,110,0.9)";ctx.fillStyle="rgba(40,60,110,0.9)";ctx.lineWidth=3.5;ctx.lineCap="round";ctx.beginPath();ctx.arc(x+54,y+58,20,Math.PI*1.05,Math.PI*1.95);ctx.stroke();rr(ctx,x+30,y+54,9,18,4);ctx.fill();rr(ctx,x+69,y+54,9,18,4);ctx.fill();
-  ctx.beginPath();ctx.moveTo(x+74,y+72);ctx.quadraticCurveTo(x+72,y+88,x+58,y+90);ctx.stroke();T(ctx,"call centre",x+96,y+68,{f:"mono",w:500,size:28,color:"rgba(150,60,60,0.95)"});
+  ctx.beginPath();ctx.moveTo(x+74,y+72);ctx.quadraticCurveTo(x+72,y+88,x+58,y+90);ctx.stroke();T(ctx,"call centre",x+96,y+68,{deco:o.deco,f:"mono",w:500,size:28,color:"rgba(150,60,60,0.95)"});
   const q=o.q==null?1:o.q,an=o.ans==null?1:o.ans;
-  withA(ctx,q,()=>{T(ctx,"asked",x+30,y+148,{f:"mono",w:500,size:28,color:"rgba(110,90,60,0.95)"});T(ctx,"Am I on the social tariff?",x+30,y+190,{w:700,size:30,color:ink});});
-  withA(ctx,an,()=>{T(ctx,"answer",x+30,y+262,{f:"mono",w:500,size:28,color:"rgba(110,90,60,0.95)"});T(ctx,"Yes, you are.",x+30,y+304,{w:800,size:30,color:ink});
-    T(ctx,"from: on the social tariff, yes",x+30,y+370,{w:600,size:28,color:"rgba(40,60,110,0.9)"});});ctx.restore();});}
+  withA(ctx,q,()=>{T(ctx,"asked",x+30,y+148,{deco:o.deco,f:"mono",w:500,size:28,color:"rgba(110,90,60,0.95)"});T(ctx,"Am I on the social tariff?",x+30,y+190,{deco:o.deco,w:700,size:30,color:ink});});
+  withA(ctx,an,()=>{T(ctx,"answer",x+30,y+262,{deco:o.deco,f:"mono",w:500,size:28,color:"rgba(110,90,60,0.95)"});T(ctx,"Yes, you are.",x+30,y+304,{deco:o.deco,w:800,size:30,color:ink});
+    T(ctx,"from: on the social tariff, yes",x+30,y+370,{deco:o.deco,w:600,size:28,color:"rgba(40,60,110,0.9)"});});ctx.restore();});}
 // an application, for those the match misses: a tenant asks, and agrees that the utility checks with the agency
 function d10_apply(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const ink="rgba(40,38,40,0.96)",soft="rgba(96,86,76,0.95)";withA(ctx,a,()=>{ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot==null?-0.02:o.rot);ctx.translate(-x-w/2,-y-h/2);
   sheet(ctx,x,y,w,h,{rot:0,plain:true});T(ctx,"application",x+30,y+56,{f:"mono",w:500,size:28,color:"rgba(150,60,60,0.95)"});T(ctx,"The social tariff, for tenants",x+30,y+112,{w:800,size:30,color:ink});
   ["tenant's name","address"].forEach((s,i)=>{const yy=y+172+i*76;T(ctx,s,x+30,yy,{w:700,size:28,color:soft});ctx.strokeStyle="rgba(96,86,76,0.45)";ctx.lineWidth=2;ctx.strokeRect(x+30,yy+12,w-60,28);});
   const yy=y+330;ctx.strokeStyle="rgba(96,86,76,0.7)";ctx.lineWidth=2.5;ctx.strokeRect(x+30,yy-24,28,28);if(o.tick)withA(ctx,o.tick,()=>tick_(ctx,x+44,yy-10,26,[40,110,60],1));
   wrapT(ctx,"I agree that the utility checks with the agency",x+74,yy,w-104,{size:28,w:600,color:ink,lh:34});ctx.restore();});}
+
+/* ---------- where the data lands ---------- */
+// a data product, as Now the questions appear draws one: glass in information's colour, a stripe in its side's colour (retail's
+// rose), the hexagon, its name and the capabilities it serves (o.hi lights it)
+function d10_product(ctx,x,y,w,h,name,caps,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,INF,{glow:14+14*(o.hi||0),ea:0.85,fill:"rgba(12,10,14,0.95)"});
+  ctx.fillStyle=rgba(INF,0.12+0.1*(o.hi||0));rr(ctx,x,y,w,h,18);ctx.fill();ctx.fillStyle=rgba(D10_RET,0.9);rr(ctx,x,y+14,6,h-28,3);ctx.fill();
+  d10_glyph(ctx,"product",x+w-34,y+34,15,INF);T(ctx,name,x+28,y+52,{w:800,size:34,color:rgba(INK,0.97)});T(ctx,caps,x+28,y+h-24,{w:700,size:28,color:rgba(STR,0.95)});});}
+// what amount due means, on the product: what it was, struck out as o.strike goes to 1, and what it is now (o.now, 0..1), each with
+// what it comes to on the bill at the counter
+function d10_meaning(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const h=290,st=clamp(o.strike||0,0,1),now=clamp(o.now||0,0,1),f0="energy used + network charge",GR=[150,240,170];
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,INF,{glow:12,ea:0.75,fill:"rgba(12,10,14,0.95)"});
+    T(ctx,"amount_due",x+30,y+58,{f:"mono",w:500,size:30,color:rgba(INF,1)});T(ctx,"what the household must pay",x+54+tw(ctx,"amount_due",30,500,"mono"),y+58,{w:700,size:28,color:rgba(SOFT,0.95)});
+    ctx.fillStyle=rgba(INF,0.25);ctx.fillRect(x+24,y+88,w-48,1.5);
+    T(ctx,"was",x+30,y+156,{f:"mono",w:500,size:28,color:rgba(SOFT,0.95)});T(ctx,f0,x+130,y+156,{w:700,size:30,color:rgba(INK,0.96-0.4*st)});T(ctx,"$164.60",x+w-30,y+156,{f:"mono",w:500,size:30,align:"right",color:rgba(INK,0.96-0.4*st)});
+    if(st>0){ctx.save();ctx.strokeStyle=rgba(D10_RED,0.95);ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x+124,y+146);ctx.lineTo(lerp(x+124,x+w-24,ease(st)),y+146);ctx.stroke();ctx.restore();}
+    if(now>0.01)withA(ctx,now,()=>{T(ctx,"now",x+30,y+246,{f:"mono",w:500,size:28,color:rgba(GR,1)});T(ctx,f0,x+130,y+246,{w:700,size:30,color:rgba(INK,0.96)});
+      T(ctx," − discount",x+130+tw(ctx,f0,30,700),y+246,{w:800,size:30,color:rgba(GR,1)});T(ctx,"$131.68",x+w-30,y+246,{f:"mono",w:500,size:30,align:"right",color:rgba(GR,1)});});});}
+// a version of the product's contract: its number, then rows [label, value, colour, how far it's shown]; o.badge shows "new"
+function d10_ver(ctx,x,y,w,v,rows,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return 0;const h=86+rows.length*92;withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,INF,{glow:12+12*(o.hi||0),ea:0.8,fill:"rgba(12,10,14,0.95)"});
+  ctx.fillStyle=rgba(INF,0.1+0.08*(o.hi||0));rr(ctx,x,y,w,h,16);ctx.fill();d10_glyph(ctx,"product",x+w-34,y+38,13,INF);T(ctx,"version "+v,x+26,y+52,{f:"mono",w:500,size:30,color:rgba(INF,1)});
+  ctx.fillStyle=rgba(INF,0.22);ctx.fillRect(x+20,y+76,w-40,1.2);
+  rows.forEach(([k,val,col,q],i)=>{const yy=y+86+i*92;withA(ctx,q==null?1:clamp(q,0,1),()=>{T(ctx,k,x+26,yy+32,{f:"mono",w:500,size:28,color:rgba(col||SOFT,0.95)});T(ctx,val,x+26,yy+72,{w:700,size:28,color:rgba(col||INK,0.96)});});});
+  if(o.badge)d10_new(ctx,x+w-64,y-8,o.badge,0);});return h;}
+// a properties file, as dbt reads it: dbt's logo and the file's name, then its lines, each {s, at (its row, which can move), a,
+// hi (0..1, lit), col (the light's colour)}: keys in blue, values in ink
+function d10_yml(ctx,x,y,w,h,name,lines,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,[170,205,255],{glow:12,ea:0.6,fill:"rgba(6,10,20,0.95)"});
+  const lw=logo(ctx,"dbt",x+26,y+21,32);T(ctx,name,x+44+lw,y+48,{f:"mono",w:500,size:28,color:rgba(SOFT,1)});ctx.fillStyle="rgba(170,200,245,0.15)";ctx.fillRect(x+14,y+74,w-28,1.2);
+  const cw=tw(ctx,"0",28,500,"mono");lines.forEach(l=>{const q=l.a==null?1:clamp(l.a,0,1);if(q<=0.01)return;const ind=l.s.match(/^ */)[0].length,s=l.s.slice(ind),yy=y+126+l.at*44,x0=x+30+ind*cw,ci=s.indexOf(":"),
+    k=ci<0?s:s.slice(0,ci+1),v=ci<0?"":s.slice(ci+1);withA(ctx,q,()=>{const hi=clamp(l.hi||0,0,1);if(hi>0.01)withA(ctx,hi,()=>{const col=l.col||TRUST;ctx.fillStyle=rgba(col,0.2);rr(ctx,x0-12,yy-31,tw(ctx,s,28,500,"mono")+24,42,8);ctx.fill();ctx.fillStyle=rgba(col,1);rr(ctx,x0-12,yy-31,4,42,2);ctx.fill();});
+      T(ctx,k,x0,yy,{f:"mono",w:500,size:28,color:"rgba(150,200,255,0.98)"});if(v)T(ctx,v,x0+tw(ctx,k,28,500,"mono"),yy,{f:"mono",w:500,size:28,color:rgba(INK,0.96)});});});});}
+// what reads version 1, downstream, as the catalogue's lineage finds it: [kind, name, the node's centre y, its owner]
+const D10_LIN=[["dashboard","households falling behind",292,"head of retail"],["table","report for the regulator",482,"Ama"],["job","collections",672,"head of retail"]];
+// where the lineage panel draws its table, and its readers
+const D10_LSRC=[140,420,540,124],D10_LNX=960,D10_LNW=520;
+// a point on the edge from the table to reader i (u, 0..1)
+function d10_linAt(i,u){const x0=D10_LSRC[0]+D10_LSRC[2],y0=D10_LSRC[1]+D10_LSRC[3]/2,x1=D10_LNX,y1=D10_LIN[i][2],f=clamp(u,0,1),g=1-f;
+  return[g*g*g*x0+3*g*g*f*(x0+130)+3*g*f*f*(x1-130)+f*f*f*x1,g*g*g*y0+3*g*g*f*y0+3*g*f*f*y1+f*f*f*y1];}
+// a node's icon, as Databricks marks a table, a dashboard or a job
+function d10_dbIcon(ctx,kind,x,y,s,col){ctx.save();ctx.strokeStyle=col;ctx.fillStyle=col;ctx.lineWidth=2.4;ctx.lineJoin="round";ctx.lineCap="round";
+  if(kind==="table"){rr(ctx,x-s,y-s*0.8,2*s,1.6*s,3);ctx.stroke();ctx.beginPath();ctx.moveTo(x-s,y-s*0.27);ctx.lineTo(x+s,y-s*0.27);ctx.moveTo(x-s,y+s*0.27);ctx.lineTo(x+s,y+s*0.27);ctx.moveTo(x-s*0.3,y-s*0.27);ctx.lineTo(x-s*0.3,y+s*0.8);ctx.stroke();}
+  else if(kind==="dashboard"){rr(ctx,x-s,y-s*0.8,2*s,1.6*s,3);ctx.stroke();[[-0.62,0.15],[-0.15,-0.2],[0.32,-0.48]].forEach(([dx,top])=>ctx.fillRect(x+dx*s,y+top*s,s*0.3,(0.55-top)*s));}
+  else{[[-0.5,-0.42],[0.5,0.42]].forEach(([dx,dy])=>{rr(ctx,x+dx*s-s*0.45,y+dy*s-s*0.33,s*0.9,s*0.66,3);ctx.stroke();});ctx.beginPath();ctx.moveTo(x-s*0.05,y-s*0.42);ctx.lineTo(x+s*0.5,y-s*0.42);ctx.lineTo(x+s*0.5,y+s*0.09);ctx.stroke();}
+  ctx.restore();}
+// the lineage panel, as Databricks draws it: its logo and the table's name; the table, focused; and each reader downstream, with
+// its edge, as lineage finds it (o.e[i], 0..1; o.draft: the measure's "draft" label)
+function d10_lineage(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x-12,y-12,w+24,h+24,22,[170,205,255],{glow:18,ea:0.45,fill:"rgba(8,14,28,0.95)"});
+  ctx.save();rr(ctx,x,y,w,h,12);ctx.clip();ctx.fillStyle=DB.canvas;ctx.fillRect(x,y,w,h);ctx.fillStyle="rgba(95,114,129,0.22)";for(let gx=x+24;gx<x+w;gx+=36)for(let gy=y+100;gy<y+h;gy+=36)ctx.fillRect(gx,gy,2.4,2.4);
+  ctx.fillStyle=DB.card;ctx.fillRect(x,y,w,72);ctx.fillStyle=DB.line;ctx.fillRect(x,y+72,w,1.2);
+  const lw=logo(ctx,"databricks",x+24,y+21,30);T(ctx,"Lineage",x+44+lw,y+48,{w:700,size:28,color:DB.text});T(ctx,"retail.accounts_and_bills_v1",x+70+lw+tw(ctx,"Lineage",28,700),y+48,{f:"mono",w:500,size:28,color:DB.muted});
+  // the edges, each drawn as it's found, with its arrow
+  D10_LIN.forEach((_,i)=>{const p=clamp(o.e?o.e[i]||0:0,0,1);if(p<=0)return;const P=[];for(let k=0;k<=30;k++)P.push(d10_linAt(i,k/30*p));ctx.save();ctx.strokeStyle=rgba([7,122,157],0.9);ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();
+    P.forEach(([px,py],k)=>k?ctx.lineTo(px,py):ctx.moveTo(px,py));ctx.stroke();if(p>=1){const[ex,ey]=d10_linAt(i,1);ctx.fillStyle=rgba([7,122,157],0.9);ctx.beginPath();ctx.moveTo(ex,ey);ctx.lineTo(ex-16,ey-8);ctx.lineTo(ex-16,ey+8);ctx.closePath();ctx.fill();}
+    else{const[hx,hy]=P[P.length-1];glow(ctx,hx,hy,22,[7,122,157],0.5);}ctx.restore();});
+  // the table, focused, as the panel opens on it
+  const[sx,sy,sw,sh]=D10_LSRC;dbCard(ctx,sx,sy,sw,sh);ctx.save();ctx.strokeStyle=rgba([7,122,157],1);ctx.lineWidth=3;rr(ctx,sx,sy,sw,sh,8);ctx.stroke();ctx.restore();
+  d10_dbIcon(ctx,"table",sx+46,sy+sh/2,17,DB.blue);T(ctx,"table",sx+86,sy+50,{w:600,size:28,color:DB.muted});T(ctx,"accounts_and_bills_v1",sx+86,sy+94,{f:"mono",w:500,size:28,color:DB.text});
+  // the readers, each as its edge reaches it
+  D10_LIN.forEach(([kind,nm,cy],i)=>{const q=clamp(o.e?(o.e[i]||0)*3-2:0,0,1);if(q<=0.01)return;withA(ctx,q,()=>{const nx=D10_LNX,ny=cy-56;dbCard(ctx,nx,ny,D10_LNW,112);d10_dbIcon(ctx,kind,nx+46,cy,17,DB.blue);
+    T(ctx,kind,nx+86,cy-10,{w:600,size:28,color:DB.muted});T(ctx,nm,nx+86,cy+30,{w:700,size:28,color:DB.text});
+    if(i===0&&o.draft){const dx=nx+86+tw(ctx,kind,28,600)+20;ctx.fillStyle=rgba(NOTEC[0],1);rr(ctx,dx,cy-40,92,40,6);ctx.fill();T(ctx,"draft",dx+46,cy-11,{w:700,size:28,align:"center",color:"rgba(60,48,20,0.95)"});}});});
+  ctx.restore();});}

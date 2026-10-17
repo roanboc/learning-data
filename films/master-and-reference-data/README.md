@@ -12,6 +12,7 @@ Linh Nguyen graduated from the university in 2022 and came back to study health 
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [One person, many roles](https://roanboc.github.io/learning-data/master-and-reference-data/one-person-many-roles/) | Master data, and the person behind the role | 6 min | 12 | 4 questions | [script](1-one-person-many-roles/script.md) · [source](1-one-person-many-roles/source/README.md) |
+| [A hub at work](https://roanboc.github.io/learning-data/master-and-reference-data/a-hub-at-work/) | A master data hub, at work every day | 4½ min | 11 | 4 questions | [script](8-a-hub-at-work/script.md) · [source](8-a-hub-at-work/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

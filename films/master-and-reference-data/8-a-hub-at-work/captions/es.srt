@@ -1,0 +1,199 @@
+1
+00:00:01,400 --> 00:00:06,124
+Lunes por la mañana. Mei, cuya oficina decide quién es alguien, abre el hub.
+
+2
+00:00:07,224 --> 00:00:14,321
+Antes en esta serie, la universidad escribió sus reglas: cuándo dos registros son una persona, y qué valor gana.
+
+3
+00:00:15,621 --> 00:00:18,126
+Un hub pone esas reglas a trabajar, cada día.
+
+4
+00:00:19,126 --> 00:00:24,821
+Este es LakeFusion, que funciona dentro de Databricks. Otro hub podría ocupar su lugar.
+
+5
+00:00:26,121 --> 00:00:30,924
+Durante el fin de semana, llegaron 1240 cambios de cuatro sistemas.
+
+6
+00:00:37,624 --> 00:00:39,670
+Las reglas resolvieron casi todos.
+
+7
+00:00:40,670 --> 00:00:44,918
+1180 coincidieron con alguien que la universidad ya conoce.
+
+8
+00:00:46,118 --> 00:00:47,661
+52 eran personas nuevas.
+
+9
+00:00:48,661 --> 00:00:51,405
+8 eran demasiado dudosos, así que esperan a Mei.
+
+10
+00:00:52,705 --> 00:00:55,036
+Empieza por el que alguien está esperando.
+
+11
+00:00:57,536 --> 00:01:02,710
+El sábado, Rafael Souza postuló para volver a hacer una maestría, como Linh el año pasado.
+
+12
+00:01:04,010 --> 00:01:07,893
+Antes de crear una persona nueva, la solicitud ahora busca una.
+
+13
+00:01:08,993 --> 00:01:11,378
+Encontró una coincidencia probable, pero no segura.
+
+14
+00:01:12,778 --> 00:01:16,796
+Así que, en vez de un nuevo número de estudiante, su solicitud espera a Mei.
+
+15
+00:01:19,296 --> 00:01:22,047
+El hub muestra por qué las reglas le dieron 74.
+
+16
+00:01:23,147 --> 00:01:25,675
+Los mismos nombres y apellidos suman mucho.
+
+17
+00:01:26,875 --> 00:01:30,666
+Dos fechas que difieren en un dígito, quizá un error, suman un poco.
+
+18
+00:01:31,866 --> 00:01:36,126
+Un correo nuevo resta un poco: el de estudiante se cerró cuando se graduó.
+
+19
+00:01:37,426 --> 00:01:40,487
+74 está en la franja donde decide una persona.
+
+20
+00:01:41,787 --> 00:01:46,235
+Si las fechas coincidieran, sería 93, y se vincularía sin preguntar a nadie.
+
+21
+00:01:48,735 --> 00:01:51,759
+Un asistente de IA leyó el caso y redactó una nota.
+
+22
+00:01:52,959 --> 00:01:57,900
+En el formulario, escribió que estudió aquí: una licenciatura, terminada en 2019.
+
+23
+00:01:59,300 --> 00:02:02,092
+El registro antiguo dice lo mismo, con otras palabras.
+
+24
+00:02:03,192 --> 00:02:05,629
+El asistente lee el sentido, no solo la ortografía.
+
+25
+00:02:06,729 --> 00:02:09,914
+Sugiere que son la misma persona. No decide.
+
+26
+00:02:12,414 --> 00:02:15,306
+Mei decide. Los vincula y anota por qué.
+
+27
+00:02:16,606 --> 00:02:19,347
+El hub guarda su nombre, la hora y su razón.
+
+28
+00:02:20,647 --> 00:02:22,701
+Su decisión también le enseña al asistente.
+
+29
+00:02:23,701 --> 00:02:28,173
+Y se puede deshacer: desvincular es un paso, y se guarda cada versión.
+
+30
+00:02:30,673 --> 00:02:35,137
+Luego el cambio se publica, no se envía: cada sistema lee lo que le concierne.
+
+31
+00:02:36,437 --> 00:02:41,181
+Su solicitud sigue con su número antiguo, con su título ya registrado.
+
+32
+00:02:42,481 --> 00:02:44,939
+La oficina de egresados deja de invitarlo a volver.
+
+33
+00:02:46,139 --> 00:02:48,943
+Y nunca ve su fecha de nacimiento. No la necesita.
+
+34
+00:02:51,443 --> 00:02:53,936
+Su registro muestra de dónde vino cada valor.
+
+35
+00:02:54,936 --> 00:02:59,874
+Sus nombres y su fecha de nacimiento vienen del sistema de estudiantes, verificados al matricularse.
+
+36
+00:03:01,174 --> 00:03:05,241
+Su correo viene de la solicitud: el más reciente que confirmó.
+
+37
+00:03:06,441 --> 00:03:09,570
+El error queda en la solicitud, pero no gana.
+
+38
+00:03:12,070 --> 00:03:19,944
+El viernes, Leila, responsable de datos en admisiones, revisa 50 vínculos automáticos de la semana, sobre todo los que apenas pasaron.
+
+39
+00:03:21,244 --> 00:03:26,159
+Ve cada par de registros, pero no lo que decidieron las reglas, para no dejarse influir.
+
+40
+00:03:27,559 --> 00:03:30,008
+Esta semana, uno estaba mal, y Mei lo desvincula.
+
+41
+00:03:31,408 --> 00:03:34,672
+Si más de tres estuvieran mal, la vinculación automática se detendría.
+
+42
+00:03:35,672 --> 00:03:39,397
+Cada coincidencia esperaría a una persona, hasta acordar reglas nuevas.
+
+43
+00:03:43,297 --> 00:03:48,433
+Sea cual sea el hub, en una universidad, un hospital o un banco, hazle cinco preguntas.
+
+44
+00:03:49,633 --> 00:03:52,225
+¿Puede explicar cada coincidencia, y cada valor?
+
+45
+00:03:53,425 --> 00:03:55,185
+¿Se puede deshacer cada decisión?
+
+46
+00:03:56,385 --> 00:03:59,416
+¿Las personas deciden lo dudoso, y revisan lo que no lo es?
+
+47
+00:04:00,616 --> 00:04:02,630
+¿Cada oficina ve solo lo que necesita?
+
+48
+00:04:03,830 --> 00:04:07,351
+¿Y los sistemas leen los cambios, en vez de ser sobrescritos?
+
+49
+00:04:09,851 --> 00:04:12,733
+Las reglas actúan. La IA sugiere. La gente decide.
+
+50
+00:04:14,233 --> 00:04:16,650
+Y todo se puede explicar, y deshacer.

@@ -13,6 +13,8 @@ TOGAF and ArchiMate are registered trademarks of The Open Group, and Zachman is 
 
 DAMA and DAMA-DMBOK are registered trademarks of DAMA International. *The same one, everywhere* names them, and draws its own picture of the knowledge areas, only to identify that body of knowledge; *One person, many roles* also draws ArchiMate's actor and role symbols. This project is not affiliated with or endorsed by DAMA International or The Open Group.
 
+LakeFusion is a product name that belongs to its owner. *A hub at work* names it, in words and without its logo, only as one example of a master data hub; the film's screens are drawn for it, not taken from the product, and this project is not affiliated with or endorsed by LakeFusion.
+
 ## Third-party components
 
 - **Narration:** a synthetic voice generated with [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) (Apache License 2.0), run through [kokoro-onnx](https://github.com/thewh1teagle/kokoro-onnx). The model is not included in this repository.

@@ -1,0 +1,151 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:06.124
+Monday morning. Mei, whose office decides who someone is, opens the hub.
+
+00:00:07.224 --> 00:00:14.321
+Earlier in this series, the university wrote down its rules: when two records are one person, and which value wins.
+
+00:00:15.621 --> 00:00:18.126
+A hub puts those rules to work, every day.
+
+00:00:19.126 --> 00:00:24.821
+This one is LakeFusion, which runs inside Databricks. Another hub could take its place.
+
+00:00:26.121 --> 00:00:30.924
+Over the weekend, 1,240 changes came in from four systems.
+
+00:00:37.624 --> 00:00:39.670
+The rules dealt with nearly all of them.
+
+00:00:40.670 --> 00:00:44.918
+1,180 matched someone the university already knows.
+
+00:00:46.118 --> 00:00:47.661
+52 were new people.
+
+00:00:48.661 --> 00:00:51.405
+8 were too close to call, so they wait for Mei.
+
+00:00:52.705 --> 00:00:55.036
+She starts with the one someone is waiting on.
+
+00:00:57.536 --> 00:01:02.710
+On Saturday, Rafael Souza applied to come back for a master's, like Linh last year.
+
+00:01:04.010 --> 00:01:07.893
+Before it makes a new person, the application now searches for one.
+
+00:01:08.993 --> 00:01:11.378
+It found a likely match, but not a sure one.
+
+00:01:12.778 --> 00:01:16.796
+So instead of a new student number, his application waits for Mei.
+
+00:01:19.296 --> 00:01:22.047
+The hub shows why the rules gave it 74.
+
+00:01:23.147 --> 00:01:25.675
+The same given and family names add a lot.
+
+00:01:26.875 --> 00:01:30.666
+Birth dates one digit apart, probably a typo, add a little.
+
+00:01:31.866 --> 00:01:36.126
+A new email takes a little away: his student one closed when he graduated.
+
+00:01:37.426 --> 00:01:40.487
+74 is in the band where a person decides.
+
+00:01:41.787 --> 00:01:46.235
+If the dates agreed, it would be 93, and linked without asking anyone.
+
+00:01:48.735 --> 00:01:51.759
+An AI helper has read the case, and drafted a note.
+
+00:01:52.959 --> 00:01:57.900
+On the form, he wrote that he'd studied here: a bachelor's, finished in 2019.
+
+00:01:59.300 --> 00:02:02.092
+The old record says the same thing, in other words.
+
+00:02:03.192 --> 00:02:05.629
+The helper reads meaning, not only spelling.
+
+00:02:06.729 --> 00:02:09.914
+It suggests they're the same person. It doesn't decide.
+
+00:02:12.414 --> 00:02:15.306
+Mei decides. She links them, and writes down why.
+
+00:02:16.606 --> 00:02:19.347
+The hub keeps her name, the time, and her reason.
+
+00:02:20.647 --> 00:02:22.701
+Her decision teaches the helper, too.
+
+00:02:23.701 --> 00:02:28.173
+And it can be undone: unlinking is one step, and every version is kept.
+
+00:02:30.673 --> 00:02:35.137
+Then the change is published, not pushed: each system reads what concerns it.
+
+00:02:36.437 --> 00:02:41.181
+His application moves on under his old number, with his degree already on file.
+
+00:02:42.481 --> 00:02:44.939
+The alumni office stops inviting him back.
+
+00:02:46.139 --> 00:02:48.943
+And it never sees his birth date. It doesn't need it.
+
+00:02:51.443 --> 00:02:53.936
+His record shows where each value came from.
+
+00:02:54.936 --> 00:02:59.874
+His names and his birth date come from the student system, checked when he first enrolled.
+
+00:03:01.174 --> 00:03:05.241
+His email comes from the application: the newest one he's confirmed.
+
+00:03:06.441 --> 00:03:09.570
+The typo stays on the application, but it doesn't win.
+
+00:03:12.070 --> 00:03:19.944
+On Friday, Leila, a steward in admissions, checks fifty of the week's automatic links, mostly ones that only just passed.
+
+00:03:21.244 --> 00:03:26.159
+She sees each pair of records, but not what the rules decided, so she isn't swayed.
+
+00:03:27.559 --> 00:03:30.008
+This week, one was wrong, and Mei unlinks it.
+
+00:03:31.408 --> 00:03:34.672
+If more than three were wrong, automatic linking would stop.
+
+00:03:35.672 --> 00:03:39.397
+Every match would wait for a person, until new rules were agreed.
+
+00:03:43.297 --> 00:03:48.433
+Whatever the hub, at a university, a hospital or a bank, ask it five questions.
+
+00:03:49.633 --> 00:03:52.225
+Can it explain every match, and every value?
+
+00:03:53.425 --> 00:03:55.185
+Can every decision be undone?
+
+00:03:56.385 --> 00:03:59.416
+Do people decide what's unsure, and check what isn't?
+
+00:04:00.616 --> 00:04:02.630
+Does each office see only what it needs?
+
+00:04:03.830 --> 00:04:07.351
+And do systems read the changes, instead of being overwritten?
+
+00:04:09.851 --> 00:04:12.733
+Rules act. AI suggests. People decide.
+
+00:04:14.233 --> 00:04:16.650
+And everything can be explained, and undone.

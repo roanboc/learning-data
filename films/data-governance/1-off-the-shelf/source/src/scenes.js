@@ -1,311 +1,391 @@
 /* ===== Off the shelf: the ten chapters =====
-   Each chapter is a few shots in the toy town, cut together with short dissolves. Times inside a chapter come from its cues
-   (when each line starts), so the pictures stay with the voice if it's recorded again. Words on screen are signs, tags and
-   speech bubbles, drawn after the blur, at least 28 px, and kept above the captions. */
+   Each chapter is a few shots in the places of plan.js and the series' rooms.js, cut together with short dissolves (gv_shots). Times
+   inside a chapter come from its cues (when each line starts) and the words of its lines (wAt), so the pictures stay with the voice if
+   it's recorded again. Words on screen are on paper, screens, boards, tags and speech bubbles, at least 28 px as seen, and above the
+   captions. */
 
 // made once per chapter, the first time it draws: its cues are known by then
 const os_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
-// a hammer's strike: 0 (raised) to 1 (down) and back, over d seconds from t0
+// a mallet's blow: 0 (raised) to 1 (down) and back, over d seconds from t0; down at a third of the way
 const os_strike=(t,t0,d)=>{const u=(t-t0)/(d||0.6);return u<=0||u>=1?0:u<0.35?easeCam(u/0.35):1-easeCam((u-0.35)/0.65);};
-// the shop's own coordinates in the town's (it faces the square, so only a shift)
-const os_shopP=(x,y,z)=>v3(OS_SHOP.x+x,y,OS_SHOP.z+z),os_hallP=(x,y,z)=>v3(OS_HALL.x+x,y,OS_HALL.z+z);
+// the year and the place in the top corner: the latest one passed, dissolving from the one before
+function os_pill(ctx,t,mk,a){if(a<=0.01)return;let i=0;for(let k=1;k<mk.length;k++)if(t>=mk[k][0])i=k;const u=i>0?fin(t,mk[i][0],0.35):1;
+  if(u<1)wc_year(ctx,56,72,mk[i-1][1],a*(1-u));wc_year(ctx,56,72,mk[i][1],a*u);}
+// a tag that springs in at t0 and goes at t1 (or stays)
+function os_tagAt(ctx,t,t0,t1,x,y,s,o){const a=t1==null?fin(t,t0,0.35):gv_io(t,t0,t1,0.35);if(a<=0.01)return;const k=0.9+0.1*spring(fin(t,t0,0.5));
+  ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,a,()=>wc_tag(ctx,0,0,s,Object.assign({align:"center"},o||{})));ctx.restore();}
 
-// ---- 1 · One measure: the market town, from 1215 to the 1880s ----
-// the jugs on the wine stall, year by year: none of them the same
+// ---- 1 · One measure: from a market in 1215 to an inspector in the 1880s ----
+// the wine stall's three measures, era by era: never the same three
 const OS_JUGS=[[0.32,0.24,0.4],[0.26,0.38,0.3],[0.4,0.28,0.22],[0.3,0.34,0.26],[0.24,0.42,0.33]];
-scene("measure",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{
-    const years=[c.repeat+0.2,c.repeat+1.5,c.repeat+2.8,c.repeat+4.1],hall=c.kings-0.4,y1871=wAt(sc,"county","In eighteen")-0.5,shop=c.worked-0.4,close=c.breath-1.8,title=c.breath+0.7;
-    return{years,hall,y1871,shop,close,title,
-      // where each shot's camera goes
-      kA:os_keys([[0,v3(0,9.5,-12),v3(0,1.2,7),1450],[4.6,v3(0.5,4.4,-3.2),v3(0,1.25,6.0),1400],[c.repeat-0.6,v3(0.1,2.6,1.3),v3(-0.3,1.6,6.0),1400]]),
-      kB:os_keys([[years[0]-0.3,v3(-4.4,2.0,1.6),v3(-4.4,1.0,6.0),1400],[hall+0.7,v3(-4.6,1.8,2.4),v3(-4.5,1.05,6.0),1400]]),
-      kC:os_keys([[hall,v3(3.4,3.0,6.2),v3(6.2,1.5,14.0),1400],[hall+4.2,v3(4.6,2.7,7.6),v3(6.9,1.5,15.6),1400]]),
-      kD:os_keys([[y1871,v3(4.3,2.3,1.2),v3(4.3,1.0,6.0),1400],[shop+0.7,v3(4.3,1.95,2.3),v3(4.3,1.05,6.0),1400]]),
-      kE:os_keys([[shop,os_shopP(0.2,2.8,-6.0),os_shopP(0,1.4,2.0),1400],[shop+3.4,os_shopP(0.2,2.35,-4.4),os_shopP(0,1.4,2.0),1400],[close+0.7,os_shopP(0.15,2.25,-3.8),os_shopP(-0.05,1.4,2.0),1400]]),
-      kF:os_keys([[close,os_shopP(-1.0,1.95,-0.6),os_shopP(-0.45,1.5,2.0),1450],[title+0.7,os_shopP(-0.85,1.9,-0.25),os_shopP(-0.45,1.5,2.0),1450]]),
-      kG:os_keys([[title,v3(0,8.6,-10.4),v3(0,1.0,7.0),1500],[sc.dur+1,v3(0.6,9.2,-11.4),v3(0,1.0,7.0),1500]])};});
-  const years=["England · 1225","England · 1297","England · 1640","England · 1824"];
-  const mk=[[0,"England · 1215"],...P.years.map((y,i)=>[y,years[i]]),[P.hall,"England · 1497"],[P.y1871,"England · 1871"],[P.shop,"England · 1880s"]];
-  const marker_=c_=>os_marker(c_,t,mk,os_in01(t,0.8,0.5)*(1-os_in01(t,P.close,0.5)));
-  // the crier, his listeners: 1215
-  const shotA=(ctx,S,t)=>{const C=os_cam(P.kA,t),say=os_io(t,c.quote-0.1,c.repeat-0.2,0.35);
-    os_market(ctx,S,C,{t,era:1215,figs:[{id:"crier",x:-0.4,z:5.72,y:0.44,pose:"hold",t,carry:heldScroll,nod:0.05*Math.sin(t*2.2)*say,onDraw:(c_,B)=>os_say(B,["One measure of wine","throughout our kingdom."],{size:34,a:say})},
-      {id:"vintner",x:-3.9,z:4.7,pose:"listen",t,flip:true},{id:"alewife",x:-2.4,z:4.2,pose:"hold",t,carry:heldJug},{id:"miller",x:3.3,z:4.6,pose:"listen",t},{id:"buyer",x:1.5,z:4.0,pose:"listen",t}],after:marker_});};
-  // the years turn over at the wine stall: the charter read again, the jugs still all different
-  const shotB=(ctx,S,t)=>{const C=os_cam(P.kB,t);let k=0;P.years.forEach((y,i)=>{if(t>=y)k=i+1;});const y0=k?P.years[k-1]:-9,u=clamp((t-y0)/0.45,0,1),g=spring(clamp((t-y0-0.2)/0.6,0,1));
-    const jugs=OS_JUGS[k].map((h,i)=>k?lerp(OS_JUGS[k-1][i],h,g):h);
-    os_market(ctx,S,C,{t,era:1215,jugs,charter:{flip:k?u:0,seal:k?clamp((t-y0-0.25)/0.5,0,1):1},after:marker_});};
-  // 1497: the king's standards in a cupboard in the market hall; the clerk of the market checks a trader's jug now and then
-  const shotC=(ctx,S,t)=>{const C=os_cam(P.kC,t),off=wAt(sc,"kings","Officers"),cl=along([[-1.4,2.3],[-0.9,0.8]],t,off-0.6,0.9),tr=along([[9.8,12.1],[7.5,12.6]],t,off-1.4,1.4);
-    os_market(ctx,S,C,{t,era:1497,hall:{glow:os_io(t,wAt(sc,"kings","standards")-0.3,P.y1871+0.5,0.5)},
-      figs:[{id:"clerk",at:"hall",x:cl.x,z:cl.z,hop:cl.hop,pose:"hold",t,carry:os_heldGallon},{id:"trader",x:tr.x,z:tr.z,hop:tr.hop,pose:"hold",t,carry:heldJug,flip:true}],
-      extra:(C_,add)=>os_tag(C_,os_hallP(0,2.5,3.1),"the king's standard",{a:os_io(t,wAt(sc,"kings","standards"),P.y1871+0.3,0.4),size:30}),after:marker_});};
-  // 1871: the corn stall, every measure on it called a bushel
-  const shotD=(ctx,S,t)=>{const C=os_cam(P.kD,t),n32=wAt(sc,"county","thirty");
-    os_market(ctx,S,C,{t,era:1871,figs:[{id:"grocer",x:4.7,z:7.1,pose:"listen",t}],bushels:clamp((t-wAt(sc,"county","bushel")+0.3)/2.2,0,1),after:c_=>{marker_(c_);const a=os_io(t,n32,P.shop+0.6,0.4);if(a>0)os_board(c_,W/2,214,"32 measures in one county",{size:36,a:clamp(a*1.6,0,1),k:0.8+0.2*spring(a),bg:[255,236,200],rim:[214,150,80]});}});};
-  // the 1880s: what worked, all of it together: the Act, a copy of the standard, an inspector who checks, and stamps
-  const law=c.three,copy=wAt(sc,"three","a copy"),insp=wAt(sc,"three","an inspector"),chk=wAt(sc,"three","checked"),again=wAt(sc,"three","again and"),behind=wAt(sc,"three","with the law");
-  const shopState=(t,o)=>{const set=os_in01(t,chk+0.2,0.3),s1=os_strike(t,again,0.55),s2=os_strike(t,again+0.6,0.55);
-    return Object.assign({tilt:0.2*(1-spring(clamp((t-chk-0.3)/0.9,0,1))),brass:set>=1,crown:clamp((t-again-0.2)/0.4,0,1),act:Math.max(os_io(t,law-0.1,copy,0.4),os_io(t,behind-0.1,P.close+0.4,0.4)),caseGlow:os_io(t,copy-0.1,insp+0.6,0.4),strike:Math.max(s1,s2)},o||{});};
-  // he walks in to the counter beside the scale, shows a brass copy, sets it in the pan, and stamps the grocer's weight
-  const inspector=(t,s,o)=>{const w=along([[-1.9,0.25],[0.75,1.4]],t,P.shop+0.1,1.0),hammer=t>=again-0.5,hold=t>=insp&&t<chk+0.2;
-    return Object.assign({id:"inspector",at:"shop",x:w.x,z:w.z,hop:w.hop,t,flip:true,pose:hammer?"os_hitUp":hold?"hold":"stand",pose2:hammer?"os_hitDown":null,mix:s.strike,
-      carry:hammer?os_hammer(lerp(1.35,0,s.strike),true):hold?heldWeight:null,wide:hammer},o||{});};
-  const shotE=(ctx,S,t)=>{const C=os_cam(P.kE,t),s=shopState(t);
-    os_market(ctx,S,C,{t,era:1880,shop:s,figs:[inspector(t,s,{onDraw:(c_,B)=>os_figTag(B,"an inspector who checks",{a:os_io(t,insp,P.close+0.3,0.4),size:30,dy:20,dx:130})}),{id:"grocer",at:"shop",x:-1.4,z:2.6,pose:"listen",t}],
-      extra:(C_,add)=>{os_tag(C_,os_shopP(-2.55,2.0,0.36),"one definition, in law",{a:os_io(t,law,P.close+0.3,0.4),size:30});os_tag(C_,os_shopP(1.75,1.42,1.05),"a copy in every county",{a:os_io(t,copy,P.close+0.3,0.4),size:30});
-        os_tag(C_,os_shopP(-0.55,1.32,1.75),"again and again",{a:os_io(t,again,P.close+0.3,0.4),size:30,dy:-70});},after:marker_});};
-  // the stamp, close; then the title over the square
-  const shotF=(ctx,S,t)=>{const C=os_cam(P.kF,t),hit=c.breath-0.6,s=shopState(t,{tilt:0,brass:true,act:0,caseGlow:0,crown:clamp((t-hit-0.18)/0.4,0,1),strike:os_strike(t,hit-0.2,0.7)});
-    os_market(ctx,S,C,{t,era:1880,inside:"os_shop",shop:s,figs:[inspector(t,s,{x:0.75,z:1.4,hop:0}),{id:"grocer",at:"shop",x:-1.4,z:2.6,pose:"listen",t}],ts:[150,950,5]});};
-  const shotG=(ctx,S,t)=>{const C=os_cam(P.kG,t);os_market(ctx,S,C,{t,era:1880,after:c_=>os_card(c_,os_in01(t,P.title+0.2,0.8),["Off the shelf",110],"where a policy meets the work","Film 1 of 16 · data governance")});};
-  os_shots(ctx,S,t,[[0,shotA],[P.years[0]-0.3,shotB],[P.hall,shotC],[P.y1871,shotD],[P.shop,shotE],[P.close,shotF],[P.title,shotG]]);});
+function os_jugs(ctx,era,a,k){[230,330,440].forEach((x,j)=>{const h=OS_JUGS[era][j]*200;withA(ctx,a,()=>{ctx.save();ctx.translate(x,OS_MK.wine[2]+4);ctx.scale(k,k);os_jugAt(ctx,0,0,h*0.62,h);ctx.restore();});});}
+// the clerk's gallon, carried in both hands
+function os_heldGallon(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.drawImage(os_gallonC(),mx-60,my-112);fingers(cx,P_,[[mx-36,my-26],[mx+36,my-26]]);}
+// a hand set level with the scale's pan, holding the weight out over it
+POSE.os_place={L:[0.14,-0.06],R:[1.2,-4.38],hand:"open",feet:30,shift:4,tilt:-0.03,turn:0.22,gaze:[0.7,0.3],look:1};
 
-// ---- the people at work round the green, where they stand in their rooms ----
-const OS_AT={jun:{id:"jun",at:"data",x:1.85,z:2.25,pose:"stand"},mei:{id:"mei",at:"registrar",x:0.35,z:2.2,pose:"stand"},sam:{id:"sam",at:"platform",x:0.55,z:2.5,pose:"stand"},clara:{id:"clara",at:"planning",x:-0.75,z:2.05,pose:"explain"}};
-const os_at=(id,t,o)=>Object.assign({},OS_AT[id],{t},o||{});
-// a camera in a room, in the room's own coordinates: [t, eye, target, f]
-const os_rk=(id,t,e,g,f,mode)=>[t,bldP(id,...e),bldP(id,...g),f||1400,null,mode];
-// Yusuf's way in, along a path from the south to his office's front, and up onto its floor
-const OS_IN=[[-0.3,-7.4],[-0.4,-3.0],[-0.5,-0.9]];
-const os_floor=z=>clamp((z+2.12)/0.3,0,1)*0.3;
+scene("measure",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const again=wAt(sc,"three","again and");
+    return{years:[0,1,2,3].map(i=>c.repeat+0.2+1.3*i),hall:c.kings-0.4,y1871:wAt(sc,"county","In eighteen")-0.5,shop:c.worked-0.4,close:again-0.3,
+      hits:[again+0.19,again+0.79,c.breath-0.555],title:c.breath+0.7,magna:wAt(sc,"m1215","Magna"),stds:wAt(sc,"kings","standards"),officers:wAt(sc,"kings","Officers"),
+      now:wAt(sc,"kings","now and"),bushel:wAt(sc,"county","bushel"),thirty:wAt(sc,"county","thirty"),copy:wAt(sc,"three","a copy"),insp:wAt(sc,"three","an inspector"),
+      chk:wAt(sc,"three","checked"),law:wAt(sc,"three","with the law")};});
+  const mk=[[0,"England · 1215"],...P.years.map((y,i)=>[y,["England · 1225","England · 1297","England · 1640","England · 1824"][i]]),[P.hall,"England · 1497"],[P.y1871,"England · 1871"],[P.shop,"England · 1880s"]];
+  gv_shots(ctx,S,t,sc.dur,[
+    // 1215: the sheriff's crier reads the charter at the market cross; the stalls listen
+    {at:0,place:"market",keys:[[0,960,540,1],[c.quote-0.8,940,480,1.16]],d:3.4,draw:(x,tt)=>{const M=OS_MK;
+      person(x,"miller",1460,880,0.64,{pose:"listen",t:tt,flip:true});os_jugs(x,0,1,1);os_proclaim(x,M.wine[1]-14,470,0,1);
+      person(x,"vintner",650,872,0.6,{pose:"listen",t:tt,flip:true});person(x,"crier",M.crier,M.step+4,0.58,{pose:"hold",t:tt,carry:heldScroll});
+      person(x,"buyer",1130,915,0.64,{pose:"listen",t:tt});person(x,"alewife",760,940,0.66,{pose:"hold",t:tt,carry:heldJug,flip:true});
+      os_tagAt(x,tt,P.magna-0.1,P.years[0]-0.6,620,250,"Magna Carta");
+      const q=gv_io(tt,c.quote-0.1,P.years[0]-0.5,0.35);gv_say(x,1000,150,["One measure of wine","throughout our kingdom."],934,360,{a:q,k:0.92+0.08*spring(fin(tt,c.quote-0.1,0.5))});}},
+    // the centuries pass at the wine stall: the charter read again, the measures still not the same
+    {at:P.years[0]-0.3,place:"market",keys:[[P.years[0]-0.3,500,560,1.9],[P.years[3]+0.4,470,580,1.98]],d:2.6,push:0,draw:(x,tt)=>{let e=0;P.years.forEach((y,i)=>{if(tt>=y)e=i+1;});
+      const u=e>0?fin(tt,P.years[e-1],0.45):1;if(u<1)os_jugs(x,e-1,1-u,1);os_jugs(x,e,u,0.6+0.4*spring(u));
+      let f=1,seal=1;P.years.forEach(y=>{const v=(tt-(y-0.3))/0.6;if(v>0&&v<1){f=v;seal=0;}else if(v>=1&&v<1.8)seal=spring(clamp((v-1)/0.6,0,1));});
+      os_proclaim(x,OS_MK.wine[1]-14,470,f>=1?0:f,seal);}},
+    // 1497: the king's standards in the market hall's cupboard; the clerk of the market takes the gallon to a trader's jug
+    {at:P.hall,place:"hall",keys:[[P.hall,960,560,1.04],[P.officers,1060,590,1.12]],d:2.6,draw:(x,tt)=>{const [cx,cy,cw]=OS_HL.cup,take=P.officers-0.6,
+        g=fin(tt,P.stds-0.3,0.6),u=clamp((tt-take)/0.55,0,1),w=gv_walk(tt,P.officers+0.1,860,1150,260),near=fin(tt,P.now-0.4,0.5);
+      os_standards(x,u>0,g);os_tagAt(x,tt,P.stds-0.3,P.officers-0.3,cx+cw/2,cy-62,"the king's standards");
+      person(x,"trader",1390,930,0.78,{pose:"hold",t:tt,carry:heldJug,flip:true});
+      if(u>0&&u<1){const a=easeCam(u),gx=lerp(cx+215+60,w.x-22,a),gy=lerp(cy+120+70,700,a)-90*Math.sin(Math.PI*a);x.drawImage(os_gallonC(),gx-60,gy-70);}
+      if(tt<P.officers+0.1)person(x,"clerk",860,960,0.8,{pose:"stand",pose2:"reach",mix:clamp((tt-take)/0.4,0,1)*(1-fin(tt,take+0.55,0.3)),t:tt,flip:true,carry:u>=1?os_heldGallon:null});
+      else gv_walker(x,"clerk",w,960,0.8,{t:tt,carry:os_heldGallon,pose:near>0?"hold":null});
+      os_tagAt(x,tt,P.now-0.3,null,1270,250,"checked now and then");}},
+    // 1871: a corn exchange, and one county's bushels, every one a different size
+    {at:P.y1871,place:"exchange",keys:[[P.y1871,960,540,1],[P.thirty,960,520,1.06]],d:2.4,draw:(x,tt)=>{
+      person(x,"grocer",1640,880,0.74,{pose:"listen",t:tt,flip:true});os_exTable(x);
+      [124,150,96,170,112,140].forEach((h,i)=>{const t0=P.bushel-0.3+2.2*i/7,u=fin(tt,t0,0.5),bx=330+i*250;if(u<=0)return;const k=spring(u);
+        x.save();x.translate(bx,OS_EX.table[2]+4);x.scale(k,k);os_measureAt(x,0,0,h*1.1,h*0.8);x.restore();
+        os_tagAt(x,tt,t0+0.15,null,bx,OS_EX.table[2]-h*0.8-52,"bushel",{size:28});});
+      os_tagAt(x,tt,P.thirty-0.15,null,960,190,"32 measures in one county",{size:34});}},
+    // the 1880s: a grocer's shop: the law on the counter, a copy in the inspector's case, the inspector checking the shop's weight
+    {at:P.shop,place:"shop",keys:[[P.shop,960,540,1],[P.insp,1060,520,1.06]],d:2.4,draw:(x,tt)=>{const top=OS_SH.counter[2],land=P.chk+0.5,
+        tilt=tt<land?-0.2:-0.2*Math.exp(-(tt-land)*3)*Math.cos((tt-land)*9);
+      person(x,"grocer",440,860,0.78,{pose:"listen",t:tt});os_counter(x);os_act(x,650,top+6);
+      os_scaleAt(x,OS_SH.scale,top+4,tilt,(q,ex,ey)=>os_iron(q,ex,ey,0),tt>=land?(q,ex,ey)=>os_brass(q,ex,ey):null);
+      os_case(x,1712,905,fin(tt,P.copy-0.3,0.6));
+      const m=clamp((tt-(P.chk-0.4))/0.5,0,1),back=fin(tt,land+0.3,0.5);
+      person(x,"inspector",1380,905,0.86,{pose:"hold",pose2:"os_place",mix:m*(1-back),t:tt,flip:true,wide:true,carry:tt<land?heldWeight:null});
+      os_tagAt(x,tt,c.three,null,650,500,"one definition, in law");os_tagAt(x,tt,P.copy-0.05,null,1712,652,"a copy in every county");
+      os_tagAt(x,tt,P.insp-0.05,null,1380,186,"an inspector who checks");}},
+    // close: his mark on each weight, again and again, with the law beside him
+    {at:P.close,place:"stamp",keys:[[P.close,960,540,1]],push:0.03,draw:(x,tt)=>{const s=OS_ST.s,ws=OS_ST.weights,y=OS_ST.base,h=P.hits,[ax,ay,as]=OS_ST.act;
+      gv_halo(x,ax-200*as,ay-150*as,400*as,170*as,GV.gold,0.9*fin(tt,P.law-0.1,0.8));
+      ws.forEach((wx,i)=>os_iron(x,wx,y,fin(tt,h[i],0.25),s));
+      // the tools go from weight to weight between the blows, lifting as they go
+      const leg=(a,b,t0,t1)=>{const v=clamp((tt-t0)/(t1-t0),0,1);return[lerp(a,b,easeCam(v)),80*Math.sin(Math.PI*v)];},
+        [tx,lift]=tt<h[1]-0.2?leg(ws[0],ws[1],h[0]+0.08,h[1]-0.16):leg(ws[1],ws[2],h[1]+0.25,h[2]-0.55),u=Math.max(...h.map(hh=>os_strike(tt,hh-0.21,0.6))),
+        away=easeCam(clamp((tt-h[2]-0.35)/1.1,0,1));
+      // done: the hands go, and the last mark shows
+      x.save();x.translate(300*away,860*away);os_markTools(x,tx,y,s,u,lift);x.restore();}}]);
+  os_pill(ctx,t,mk,fin(t,0.6,0.5)*(1-fin(t,P.close,0.4)));
+  gv_title(ctx,S,t,P.title,"Off the shelf","where a policy meets the work","Film 1 of 16 · data governance");
+  wc_paperOver(ctx,S);});
 
 // ---- 2 · The shelf: Yusuf's first day, and what he inherits ----
-scene("shelf",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const b=c.shelf-0.6,ch=c.chart-0.5,co=c.council-0.6,br=c.brief-0.5;
-    return{b,ch,co,br,kA:os_keys([[0,v3(-4,9,-21),v3(-0.8,0.9,-4),1500],[c.starts+3.6,v3(0.2,2.7,-8.8),v3(-0.3,1.3,-1.2),1450]]),
-      kB:os_keys([[b,v3(0.55,2.62,-6.45),v3(-0.12,1.36,0.3),1360],[ch+0.7,v3(-0.6,2.3,-4.2),v3(-0.95,1.6,1.0),1400]]),
-      kC:os_keys([os_rk("office",ch,[-0.72,1.8,1.12],[-2.29,1.8,1.07],1400),os_rk("office",co+0.7,[-0.8,1.8,1.05],[-2.29,1.8,1.07],1400)]),
-      kD:os_keys([os_rk("office",co,[0.95,2.05,1.2],[0.95,1.06,2.05],1450),os_rk("office",br+0.7,[0.98,1.95,1.32],[0.95,1.06,2.05],1450)]),
-      kE:os_keys([[br,v3(0.6,2.45,-6.2),v3(0,1.4,0.2),1360],[sc.dur+1,v3(0.45,2.35,-5.5),v3(0,1.45,0.2),1360]])};});
-  const yu=(t,o)=>{const w=along(OS_IN,t,0.5,1.25);return Object.assign({id:"yusuf",x:w.x,z:w.z,y:os_floor(w.z),hop:w.hop,pose:"stand",t},o||{});};
-  const shotA=(ctx,S,t)=>{const C=os_cam(P.kA,t);drawCampus(ctx,S,C,{t,figs:[Object.assign(yu(t),{onDraw:(c_,B)=>os_figTag(B,["Yusuf Demir","data governance lead"],{a:os_io(t,c.starts+0.3,P.b+0.6,0.4),size:30})})]});};
-  const shotB=(ctx,S,t)=>{const C=os_cam(P.kB,t);drawCampus(ctx,S,C,{t,figs:[yu(t,{x:-0.45,z:-0.75,y:0.3,hop:0,pose:"listen"})],
-    office:{shelfSign:os_in01(t,wAt(sc,"shelf","thirty")-0.2,0.5),maturity:os_io(t,wAt(sc,"shelf","maturity"),P.ch+0.6,0.4),tbc:0},
-    extra:(C_,add)=>os_tag(C_,bldP("office",0.15,2.5,3.55),"maturity · 2.1 / 5",{a:os_io(t,wAt(sc,"shelf","maturity"),P.ch+0.6,0.4),size:32})});};
-  const shotC=(ctx,S,t)=>{const C=os_cam(P.kC,t);drawCampus(ctx,S,C,{t,inside:"office",office:{tbc:clamp((t-wAt(sc,"chart","half")+0.2)/2.2,0,1)},ts:[120,960,5]});};
-  // the council's minutes, open on the desk: the same action, carried forward again
-  const shotD=(ctx,S,t)=>{const C=os_cam(P.kD,t),st=pop(t,wAt(sc,"council","once")-0.1,0.6);
-    drawCampus(ctx,S,C,{t,inside:"office",office:{bare:1,tbc:1},ts:[110,980,5],hooks:{officeDesk:(ctx,C_,top)=>{fq3(ctx,C_,0.5,1.8,1.42,2.36,top+0.002,[200,70,60],{edge:0.4});
-      os_paper(ctx,C_,0.56,1.84,0.96,2.32,top+0.006,c_=>{Tw(c_,"Council minutes",20,6,{w:800,size:3.6,align:"center",color:rgba(PAL.ink,1)});[0,1,2].forEach(i=>{c_.fillStyle="rgba(150,150,170,0.6)";c_.fillRect(4,12+i*3,32-(i===2?10:0),0.6);});
-        Tw(c_,"Action: name",20,27.3,{w:700,size:3.5,align:"center",color:rgba([70,76,100],1)});Tw(c_,"the data owners",20,32.2,{w:700,size:3.5,align:"center",color:rgba([70,76,100],1)});
-        if(st>0){c_.save();c_.translate(20,40.5);c_.rotate(-0.12);const k=1+1.2*(1-st);c_.scale(k,k);c_.globalAlpha*=clamp(st*3,0,1);c_.strokeStyle=rgba([200,52,44],0.9);c_.lineWidth=0.5;rr(c_,-17,-4.2,34,7,1);c_.stroke();
-          Tw(c_,"CARRIED FORWARD",0,1.3,{w:800,size:3.3,align:"center",color:rgba([200,52,44],0.95)});c_.restore();}});
-      os_paper(ctx,C_,0.98,1.84,1.38,2.32,top+0.006,c_=>{[0,1,2,3,4,5].forEach(i=>{c_.fillStyle="rgba(150,150,170,0.55)";c_.fillRect(4,8+i*5,32-(i%3===2?12:0),0.6);});});}}});};
-  const shotE=(ctx,S,t)=>{const C=os_cam(P.kE,t),say=os_in01(t,c.brief+0.1,0.4);
-    drawCampus(ctx,S,C,{t,office:{tbc:1},figs:[yu(t,{x:-0.5,z:-0.7,y:0.3,hop:0,pose:"hold",expr:"worried",carry:heldBinder("12",PAL.navy)}),
-      {id:"david",x:1.75,z:-2.6,pose:"explain",t,flip:true,onDraw:(c_,B)=>os_say(B,["Can you fix governance","before the submission?"],{size:32,a:say,left:true})}]});};
-  os_shots(ctx,S,t,[[0,shotA],[P.b,shotB],[P.ch,shotC],[P.co,shotD],[P.br,shotE]]);});
+// a box carried in both hands, looking up at the building; and a step either way with it
+POSE.os_box={L:[0.16,-2.05],R:[0.16,-2.05],feet:24,shift:0,tilt:0,turn:0.12,gaze:[0.5,-0.45],look:0};
+POSE.os_boxA=Object.assign({},POSE.os_box,{feet:14,shift:-5,tilt:0.03,gaze:[0.4,-0.2]});POSE.os_boxB=Object.assign({},POSE.os_boxA,{shift:5,tilt:-0.03});
+// the campus path's middle: its height at each x
+const OS_PATH=wc_smooth(GV_CP.path,8);
+function os_pathY(x){const p=OS_PATH;for(let i=1;i<p.length;i++)if(p[i][0]>=x)return lerp(p[i-1][1],p[i][1],clamp((x-p[i-1][0])/Math.max(1e-6,p[i][0]-p[i-1][0]),0,1));return p[p.length-1][1];}
+// a name card, as master data's films introduce people: the name, then the role; it rises a little as it comes
+function os_nameCard(ctx,x,y,name,role,a){if(a<=0.01)return;const w=Math.round(Math.max(tw(ctx,name,32,800),tw(ctx,role,28,600))+60);
+  withA(ctx,a,()=>{ctx.save();ctx.translate(0,12*(1-a));wc_panel(ctx,x,y,w,112,{kind:"card",seed:3});wc_T(ctx,name,x+30,y+48,{w:800,size:32,col:WC_DARK});
+    wc_T(ctx,role,x+30,y+90,{w:600,size:28,col:WC_MUTED});ctx.restore();});}
+// his box, on the desk once he's in
+const os_deskBox=x=>x.drawImage(os_boxC(),748,GV_OFF.desk[1]-192,224,200);
 
-// ---- 3 · Two numbers: two reports across the green that don't agree ----
-// Planning's census report, on the wall screen in its office (in centimetres from the screen's top left, 253 x 133)
-function os_census(c,n){c.fillStyle="#f4f8fc";c.fillRect(0,0,253,133);Tw(c,"Census report",14,24,{w:800,size:15,color:rgba(PAL.ink,1)});Tw(c,"awards conferred this year",14,44,{w:600,size:12,color:rgba([96,104,128],1)});
-  for(let i=0;i<6;i++){const h=22+46*hash(i,41);c.fillStyle=rgba(i===5?PAL.gold:[150,186,222],1);c.fillRect(16+i*19,122-h,13,h);}
-  if(n>0){c.save();c.translate(190,96);const k=0.7+0.3*spring(n);c.scale(k,k);c.globalAlpha*=clamp(n*2,0,1);Tw(c,"4,812",0,0,{w:800,size:44,align:"center",color:rgba([40,96,150],1)});c.restore();}}
-// the registrar's draft submission, held out (in the figure's units, the page 200 x 246 round its middle)
-const os_draft=n=>c=>{c.fillStyle="rgba(100,150,200,1)";c.fillRect(-100,-122,200,86);c.fillStyle="#fff";c.textAlign="center";c.font=font(800,34);c.fillText("Draft",0,-86);c.fillText("submission",0,-50);
-  for(let i=0;i<2;i++){c.fillStyle="rgba(150,150,170,0.6)";c.fillRect(-74,-16+i*16,148-(i===1?50:0),6);}
-  if(n>0){c.save();c.translate(0,72);const k=0.7+0.3*spring(n);c.scale(k,k);c.globalAlpha*=clamp(n*2,0,1);c.fillStyle=rgba([40,96,150],1);c.font=font(800,70);c.fillText("4,867",0,0);c.restore();}
-  c.fillStyle=rgba([96,104,128],1);c.font=font(700,30);c.fillText("awards",0,110);};
-scene("numbers",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const pl=c.census-0.6,rg=c.draft-0.6,wh=c.which-0.6;
-    return{pl,rg,wh,kA:os_keys([[0,v3(0.2,11,-6.5),v3(0,0.8,9.5),950],[pl+0.7,v3(0.05,9.0,0.6),v3(0,0.8,9.5),950]]),
-      kB:os_keys([os_rk("planning",pl,[-0.2,1.95,-0.6],[-0.4,1.7,3.8],1400),os_rk("planning",rg+0.7,[-0.3,1.9,-0.1],[-0.45,1.7,3.8],1400)]),
-      kC:os_keys([os_rk("registrar",rg,[0.75,1.75,-2.3],[0.75,1.42,2.5],1250),os_rk("registrar",wh+0.7,[0.75,1.7,-1.8],[0.78,1.45,2.5],1250)]),
-      kD:os_keys([[wh,v3(0,8.6,1.8),v3(0,0.8,9.5),950],[sc.dur+1,v3(0.25,8.2,2.4),v3(0,0.8,9.5),950]])};});
-  const cen=wAt(sc,"census","four"),dr=wAt(sc,"draft","four");
-  // Yusuf crosses the green from his office, and stops in the middle of it
-  const yu=t=>{const w=along([[-1.4,2.4],[-0.6,4.2],[0,5.9]],t,0.6,1.1);return{id:"yusuf",x:w.x,z:w.z,hop:w.hop,pose:w.done?"listen":"stand",t,expr:t>c.which?"concerned":"calm"};};
-  const shotA=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kA,t),{t,office:{tbc:1},figs:[yu(t),os_at("clara",t),os_at("mei",t)]});
-  const shotB=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kB,t),{t,inside:"planning",ts:[110,980,5],hooks:{planningScreen:c_=>os_census(c_,os_in01(t,cen-0.1,0.5))},
-    figs:[os_at("clara",t,{x:1.3,z:3.05,pose:"point",flip:true})]});
-  const shotC=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kC,t),{t,inside:"registrar",ts:[110,980,5],figs:[os_at("mei",t,{x:0.75,z:0.85,pose:"hold",carry:os_heldDoc(os_draft(os_in01(t,dr-0.1,0.5)))})]});
-  const shotD=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kD,t),{t,office:{tbc:1},names:{planning:1,registrar:1},
-    figs:[Object.assign(yu(t),{onDraw:(c_,B)=>os_figTag(B,"?",{a:os_in01(t,c.which,0.5),size:64,bg:[255,226,150],rim:[214,160,60],ink:[120,80,20],dy:24})}),os_at("clara",t),os_at("mei",t)],
-    extra:(C_,add)=>{os_tag(C_,bldP("planning",0.8,0.3,-0.15),["census report","4,812 awards"],{size:34,pop:false});os_tag(C_,bldP("registrar",-0.95,0.3,-0.15),["draft submission","4,867 awards"],{size:34,pop:false});}});
-  os_shots(ctx,S,t,[[0,shotA],[P.pl,shotB],[P.rg,shotC],[P.wh,shotD]]);});
+scene("shelf",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b:c.shelf-0.6,ch:c.chart-0.5,co:c.council-0.6,br:c.brief-0.5,walk:c.starts+2.7,
+    thirty:wAt(sc,"shelf","thirty"),mat:wAt(sc,"shelf","maturity"),half:wAt(sc,"chart","half"),once:wAt(sc,"council","once")}));
+  gv_shots(ctx,S,t,sc.dur,[
+    // the campus: Yusuf's first day, a box of his things in his arms; he looks up at the building, then goes in
+    {at:0,place:"campus",keys:[[0,1080,760,1.7],[0.4,1090,770,1.82],[P.walk,1250,730,1.82]],d:3.4,draw:(x,tt)=>{const w=gv_walk(tt,P.walk,1060,1360,90),k=(w.x-1060)/300;
+      person(x,"yusuf",w.x,os_pathY(w.x)+2-w.bob,lerp(0.235,0.19,k),{pose:"os_box",pose2:w.moving?(w.swing>0?"os_boxA":"os_boxB"):null,mix:Math.abs(w.swing),t:tt,carry:os_heldBox});}},
+    // his office: the shelf of binders, 34 policies, and the score on the wall
+    {at:P.b,place:"office",keys:[[P.b,1100,560,1.2],[P.b+0.1,1180,540,1.32]],d:5,draw:(x,tt)=>{const [sx,sy,sw,sh]=GV_OFF.score;
+      os_chartSmall(x,0);gv_halo(x,sx-30,sy-30,sw+60,sh+60,GV.gold,0.85*gv_io(tt,P.mat-0.1,P.ch,0.5));os_score(x);os_binders(x);os_deskBox(x);
+      person(x,"yusuf",1190,895,0.8,{pose:"listen",t:tt});os_tagAt(x,tt,P.thirty-0.2,null,1621,290,"34 data policies");}},
+    // the chart, close: half its names are still to be confirmed
+    {at:P.ch,place:"boardGov",keys:[[P.ch,960,520,1],[P.ch+0.1,960,500,1.05]],d:4,push:0,draw:(x,tt)=>os_chart(x,k=>fin(tt,P.half-0.2+2.2*k/8,0.3))},
+    // the council's minutes: the same action, carried forward again
+    {at:P.co,place:"desk",keys:[[P.co,960,560,1],[P.co+0.1,960,520,1.08]],d:3.2,draw:(x,tt)=>os_minutes(x,fin(tt,P.once-0.16,0.3))},
+    // the office again: Yusuf has taken binder 12 down; David, at the door, gives him his brief
+    {at:P.br,place:"office",keys:[[P.br,960,540,1],[P.br+0.1,940,540,1.04]],d:4,draw:(x,tt)=>{
+      os_chartSmall(x,1);os_score(x);os_binders(x,{missing:i=>i===11});os_deskBox(x);
+      person(x,"david",190,868,0.8,{pose:"explain",t:tt});person(x,"yusuf",1240,905,0.8,{pose:"hold",expr:"worried",t:tt,flip:true,carry:heldBinder("12",os_bindCol(11))});
+      const q=c.brief+0.1;gv_say(x,250,190,["Can you fix governance","before the submission?"],205,400,{a:fin(tt,q,0.35),k:0.92+0.08*spring(fin(tt,q,0.5))});}}]);
+  // today, and who Yusuf is
+  wc_year(ctx,56,72,"Today",fin(t,0.3,0.5)*(1-fin(t,P.b,0.4)));os_nameCard(ctx,470,560,"Yusuf Demir","data governance lead",gv_io(t,c.starts+0.3,P.b-0.3,0.4));
+  wc_paperOver(ctx,S);});
 
-// ---- 4 · Who decides? Yusuf follows the numbers back to the data team, the registrar, and his own chart ----
-scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const b1=c.both-0.5,b2=c.monday-0.6,b3=c.before-0.6,cc=c.gov-0.6,d=c.answers-0.6,e=c.tbc-0.6;
-    return{b1,b2,b3,cc,d,e,kA:os_keys([[0,v3(0.25,8.2,2.4),v3(0,0.8,9.5),950],[b1+0.7,v3(-1.4,4.4,7.0),v3(9.6,1.2,3.1),1150]]),
-      kB:os_keys([os_rk("data",b1,[1.25,2.04,1.3],[1.25,1.93,3.8],1400),os_rk("data",b2+0.7,[1.25,2.03,1.55],[1.25,1.93,3.8],1400)]),
-      kS:os_keys([os_rk("data",b2,[0.8,1.6,0.05],[0.95,1.55,1.25],1400),os_rk("data",b3+0.7,[0.84,1.6,0.25],[0.95,1.55,1.25],1400)]),
-      kB3:os_keys([os_rk("data",b3,[1.25,2.03,1.55],[1.25,1.93,3.8],1400),os_rk("data",cc+0.7,[1.25,2.02,1.75],[1.25,1.93,3.8],1400)]),
-      kC:os_keys([os_rk("registrar",cc,[0.1,1.85,-0.75],[0.1,1.45,1.5],1400),os_rk("registrar",d+0.7,[0.1,1.8,-0.4],[0.1,1.45,1.5],1400)]),
-      kD:os_keys([[d,v3(0.5,13,0.8),v3(2.2,0,8.6),900],[e+0.7,v3(0.75,12.6,1.4),v3(2.2,0,8.6),900]]),
-      kE:os_keys([[e,v3(-0.9,1.95,-1.95),v3(-2.28,1.8,-0.84),1360],[sc.dur+1,v3(-1.05,1.93,-1.72),v3(-2.28,1.8,-0.84),1360]])};});
-  const right=wAt(sc,"both","right"),mon=wAt(sc,"monday","microcredentials"),chg=wAt(sc,"monday","the word"),bef=wAt(sc,"before","before"),aft=wAt(sc,"before","after");
-  // the cork board: the two reports and when each ran; later, Monday's change between them
-  const board=(ctx,C,z,o)=>{const card=(x0,x1,lines,a)=>os_reportCard(ctx,C,x0,1.62,x1,2.22,z,[255,252,244],lines,a);
-    card(0.1,1.02,[["census report",8.5,800],["ran Friday",7.5,600],["4,812",18,800,[40,96,150]]],1);card(1.48,2.4,[["draft submission",8.5,800],["ran Wednesday",7.5,600],["4,867",18,800,[40,96,150]]],1);
-    os_tick(ctx,C,v3(0.97,2.17,z-0.012),o.tick);os_tick(ctx,C,v3(2.35,2.17,z-0.012),o.tick);
-    if(o.mon>0)os_reportCard(ctx,C,1.06,1.74,1.44,2.12,z,[255,226,150],[["Monday",8.5,800],["award",7,700],["changed",7,700]],o.mon);
-    surfDraw(ctx,C,v3(0.1,1.6,z-0.006),v3(1,0,0),v3(0,1,0),c_=>{if(o.bef>0)Tw(c_,"before",46,6,{w:800,size:7.5,align:"center",color:rgba([40,96,150],clamp(o.bef*2,0,1))});if(o.aft>0)Tw(c_,"after",184,6,{w:800,size:7.5,align:"center",color:rgba([40,96,150],clamp(o.aft*2,0,1))});});};
-  const yu=t=>{const w=along([[0,5.9],[4.4,4.5]],t,0.3,1.25);return{id:"yusuf",x:w.x,z:w.z,hop:w.hop,pose:"stand",t,expr:"concerned"};};
-  const shotA=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kA,t),{t,office:{tbc:1},figs:[yu(t),os_at("jun",t),os_at("mei",t),os_at("clara",t)]});
-  const shotB=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kB,t),{t,inside:"data",ts:[100,990,4],hooks:{dataBoard:(ctx,C,z)=>board(ctx,C,z,{tick:os_in01(t,right-0.1,0.5)})}});
-  const shotS=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kS,t),{t,inside:"data",ts:[100,990,4],hooks:{dataScreen:c_=>os_term(c_,os_in01(t,mon-0.1,0.6),os_in01(t,chg,0.5))},figs:[os_at("jun",t,{x:1.95,z:2.0,pose:"point"})]});
-  const shotB3=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kB3,t),{t,inside:"data",ts:[100,990,4],hooks:{dataBoard:(ctx,C,z)=>board(ctx,C,z,{tick:1,mon:os_in01(t,P.b3+0.5,0.6),bef:os_in01(t,bef,0.4),aft:os_in01(t,aft,0.4)})}});
-  // the registrar's counter: the government's reporting manual, the university's own term, and no one who maps one to the other
-  const who=wAt(sc,"gov","Who");
-  const shotC=(ctx,S,t)=>{const top=1.31;drawCampus(ctx,S,os_cam(P.kC,t),{t,inside:"registrar",ts:[100,990,4],
-    figs:[os_at("mei",t,{x:1.05,z:2.3,pose:t>who?"shrug":"listen",expr:"concerned"})],
-    hooks:{registrarCounter:(ctx,C,top_)=>{os_bookUp(ctx,C,-0.46,1.38,top_,0.36,0.46,[46,72,120],c_=>{Tw(c_,"Reporting",18,13,{w:800,size:5,align:"center",color:"#fff"});Tw(c_,"manual",18,20,{w:800,size:5,align:"center",color:"#fff"});
-        c_.fillStyle="rgba(255,255,255,0.5)";c_.fillRect(8,26,20,0.6);Tw(c_,"awards",18,33,{w:700,size:4,align:"center",color:"rgba(255,255,255,0.85)"});});
-      os_tent(ctx,C,0.42,1.4,top_,c_=>{Tw(c_,"award",15,9,{w:800,size:5.4,align:"center",color:rgba(PAL.ink,1)});Tw(c_,"our term",15,16.4,{w:600,size:4.0,align:"center",color:rgba([96,104,128],1)});});}},
-    extra:(C_,add)=>{const g=c.gov;os_tag(C_,bldP("registrar",-0.28,top+0.5,1.38),"the government's definition",{a:os_in01(t,g+0.2,0.5),size:30,dy:20});os_tag(C_,bldP("registrar",0.57,top+0.24,1.42),"ours",{a:os_in01(t,wAt(sc,"gov","ours"),0.4),size:30,dy:20});
-      os_arc(C_,bldP("registrar",0.5,top+0.26,1.42),bldP("registrar",-0.12,top+0.42,1.38),os_in01(t,who,0.9),{lift:150,label:"?",la:os_in01(t,who+0.6,0.4),size:56,bg:[255,226,150],rim:[214,160,60],ink:[120,80,20]});}});};
-  // three people, three answers, and nobody's is the mapping
-  const ans=[wAt(sc,"answers","Mei"),wAt(sc,"answers","Jun"),wAt(sc,"answers","Planning")];
-  const shotD=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kD,t),{t,office:{tbc:1},
-    figs:[os_at("mei",t,{onDraw:(c_,B)=>os_figTag(B,["Mei","owns the meaning"],{a:os_in01(t,ans[0]-0.1,0.4),size:30})}),os_at("jun",t,{onDraw:(c_,B)=>os_figTag(B,["Jun","builds the model"],{a:os_in01(t,ans[1]-0.1,0.4),size:30})}),
-      os_at("clara",t,{onDraw:(c_,B)=>os_figTag(B,["Planning","reports what it's given"],{a:os_in01(t,ans[2]-0.1,0.4),size:30})}),{id:"yusuf",x:4.4,z:4.5,pose:"listen",t,expr:"concerned"}]});
-  // back in his office: the chart, the government submission's row, and its answer
-  const shotE=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kE,t),{t,inside:"office",ts:[150,950,5],office:{tbc:1,raciHi:os_in01(t,P.e+0.5,0.6),stamp:os_in01(t,wAt(sc,"tbc","to be")-0.15,0.5)}});
-  os_shots(ctx,S,t,[[0,shotA],[P.b1,shotB],[P.b2,shotS],[P.b3,shotB3],[P.cc,shotC],[P.d,shotD],[P.e,shotE]]);});
+// ---- 3 · Two numbers: Planning's report and the draft submission don't agree ----
+// the floor: the people at work behind the glass (o.out leaves someone out), then the glass, then the offices' names (a name the
+// frame would cut fades out)
+const OS_AT={clara:0,mei:1,yusuf:2,jun:3,sam:4},OS_WORK={clara:{pose:"reach"},mei:{pose:"hold",carry:heldNotebook},jun:{pose:"reach"},sam:{pose:"phone"}};
+function os_floor(x,tt,o){o=o||{};const F=GV_FL;Object.keys(OS_AT).forEach(id=>{const i=OS_AT[id];if(id==="yusuf"?!o.yusufIn:(o.out||[]).includes(id))return;
+    person(x,id,F.spot(i),806,0.5,Object.assign({pose:"stand",t:tt,flip:i%2===1},OS_WORK[id]||{},(o.pose||{})[id]||{}));});
+  gv_floorGlass(x);const m=x.getTransform(),vl=-m.e/m.a,vr=(x.canvas.width-m.e)/m.a,a=o.names==null?1:o.names;
+  F.rooms.forEach((r,i)=>{const cx=F.x(i)+F.w/2,hw=tw(x,r[1],30,800)/2+6;gv_floorName(x,i,a*clamp(Math.min(cx-hw-vl,vr-cx-hw)/30,0,1));});}
 
-// ---- 5 · What governance is for: policy 12, open on the desk, and the market's answer ----
-scene("for",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const b=c.for-0.6,cc=c.like-0.6,d=c.mgmt-0.6;
-    return{b,cc,d,kA:os_keys([os_rk("office",0,[1.2,1.82,1.6],[1.2,1.06,2.1],1450),os_rk("office",b+0.7,[1.2,1.74,1.68],[1.2,1.06,2.1],1450)]),
-      kB:os_keys([[b,v3(0.4,2.6,-7.2),v3(0,1.4,0),1400],[b+4.2,v3(0,14,-11.5),v3(0,0,3.2),1300],[cc+0.7,v3(0.3,14.4,-11.8),v3(0,0,3.2),1300]]),
-      kC:os_keys([[cc,os_shopP(0.2,2.6,-5.2),os_shopP(0,1.4,2.0),1400],[d+0.7,os_shopP(0.15,2.35,-4.2),os_shopP(-0.05,1.4,2.0),1400]]),
-      kD:os_keys([[d,v3(0,13,-13),v3(0,0.5,2.5),1350],[sc.dur+1,v3(0.4,12.6,-12.4),v3(0,0.5,2.5),1350]])};});
-  // the open binder: what policy 12 says, and the two things it leaves out
-  const who=wAt(sc,"doesnt","who"),how=wAt(sc,"doesnt","how");
-  const shotA=(ctx,S,t)=>{const g1=os_in01(t,who-0.1,0.5),g2=os_in01(t,how-0.1,0.5);drawCampus(ctx,S,os_cam(P.kA,t),{t,inside:"office",office:{bare:1,tbc:1},ts:[90,990,4],hooks:{officeDesk:(ctx,C_,top)=>{
-    os_binderOpen(ctx,C_,1.2,2.1,top,{pw:0.3,pd:0.4,col:PAL.navy,left:c_=>{Tw(c_,"Policy 12",14.5,7,{w:800,size:3.6,align:"center",color:rgba(PAL.navy,1)});c_.fillStyle=rgba(PAL.navy,0.5);c_.fillRect(5,9.6,19,0.3);
-        ["Business terms","are defined","consistently","across the","organisation."].forEach((s,i)=>Tw(c_,s,14.5,15.5+i*4.4,{w:600,size:2.7,align:"center",color:rgba([60,70,100],1)}));},
-      right:c_=>{const box=(y0,y1,u,lines)=>{if(u<=0)return;c_.save();c_.globalAlpha*=clamp(u*2,0,1);c_.strokeStyle=rgba(PAL.red,0.8);c_.lineWidth=0.35;c_.setLineDash([1.4,1]);rr(c_,1.8,y0,25.4,y1-y0,1.2);c_.stroke();c_.setLineDash([]);
-          lines.forEach((s,i)=>Tw(c_,s,14.5,y0+5.2+i*4.2,{w:800,size:2.6,align:"center",color:rgba(PAL.red,1)}));c_.restore();};
-        box(5,14,g1,["who decides?"]);box(18,30,g2,["how does it","reach the work?"]);}});}}});};
-  // what governance is for: from the office, gold along every path to the work round the green
-  const shotB=(ctx,S,t)=>{const dd=wAt(sc,"for","deciding"),mk=wAt(sc,"for","making");drawCampus(ctx,S,os_cam(P.kB,t),{t,office:{tbc:1},gold:clamp((t-mk+0.2)/3.2,0,1),
-    figs:[os_at("jun",t),os_at("mei",t),os_at("sam",t),os_at("clara",t),{id:"yusuf",x:-0.5,z:-2.35,pose:"stand",t}],
-    extra:(C_,add)=>{os_tag(C_,v3(0,4.7,0),"deciding who decides",{a:os_io(t,dd-0.1,P.cc+0.2,0.4),size:34});os_tag(C_,v3(0,3.2,9.9),"each decision reaches the work",{a:os_io(t,mk+0.6,P.cc+0.2,0.4),size:34});}});};
-  // the 1880s shop again: a rule, a copy where the work happens, someone who checks
-  const rule=wAt(sc,"like","a rule"),copy=wAt(sc,"like","a copy"),chk=wAt(sc,"like","someone");
-  const shotC=(ctx,S,t)=>{const C=os_cam(P.kC,t),out=P.d+0.3;
-    os_market(ctx,S,C,{t,era:1880,shop:{tilt:0,brass:true,crown:1,act:os_io(t,rule-0.1,out,0.4),caseGlow:os_io(t,copy-0.1,out,0.4),strike:0},
-      figs:[{id:"inspector",at:"shop",x:0.75,z:1.4,t,flip:true,pose:"hold",carry:heldWeight,onDraw:(c_,B)=>os_figTag(B,"someone who checks",{a:os_io(t,chk,out,0.4),size:30,dy:20})},{id:"grocer",at:"shop",x:-1.4,z:2.6,pose:"listen",t}],
-      extra:(C_,add)=>{os_tag(C_,os_shopP(-2.55,2.0,0.36),"a rule",{a:os_io(t,rule,out,0.4),size:30});os_tag(C_,os_shopP(1.75,1.42,1.05),["a copy where","the work happens"],{a:os_io(t,copy,out,0.4),size:30,dx:40,dy:40});},
-      after:c_=>os_marker(c_,t,[[0,"England · 1880s"]],os_io(t,P.cc+0.3,out,0.5))});};
-  // governance and management: the office that sets the rules and checks, the offices that do the work
-  const gv=wAt(sc,"mgmt","Governance"),mg=wAt(sc,"mgmt","Management");
-  const shotD=(ctx,S,t)=>{const a=os_in01(t,mg-0.2,0.6);drawCampus(ctx,S,os_cam(P.kD,t),{t,office:{tbc:1},gold:1,glowFront:{platform:a,registrar:a,data:a,planning:a,office:os_in01(t,gv-0.2,0.6)},
-    figs:[os_at("jun",t),os_at("mei",t),os_at("sam",t),os_at("clara",t),{id:"yusuf",x:-0.5,z:-2.35,pose:"stand",t}],
-    extra:(C_,add)=>{os_tag(C_,v3(0,4.7,0),["governance","sets the rules, checks they're kept"],{a:os_in01(t,gv-0.1,0.4),size:32});os_tag(C_,bldP("platform",0,3.9,1.9),["management","does the work"],{a:os_in01(t,mg-0.1,0.4),size:32});}});};
-  os_shots(ctx,S,t,[[0,shotA],[P.b,shotB],[P.cc,shotC],[P.d,shotD]]);});
+scene("numbers",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({pl:c.census-0.6,rg:c.draft-0.6,wh:c.which-0.6,
+    four1:wAt(sc,"census","four"),four2:wAt(sc,"draft","four")}));
+  gv_shots(ctx,S,t,sc.dur,[
+    // the same week: Yusuf walks down the floor, past the offices where the work is done
+    {at:0,place:"floor",keys:[[0,1080,560,1.14],[0.3,760,560,1.14]],d:3.0,draw:(x,tt)=>{const w=gv_walk(tt,0.3,1180,640,190);
+      os_floor(x,tt,{names:fin(tt,0.4,0.6)});gv_walker(x,"yusuf",w,GV_FL.walk,0.62,{t:tt,flip:true});}},
+    // Planning: Clara shows him the census report
+    {at:P.pl,place:"planning",keys:[[P.pl,900,540,1.1],[P.pl+0.1,880,520,1.16]],d:5,draw:(x,tt)=>{os_census(x,fin(tt,P.four1-0.1,0.5));
+      person(x,"clara",440,905,0.8,{pose:"point",t:tt});person(x,"yusuf",1270,905,0.8,{pose:"listen",t:tt,flip:true});}},
+    // the registrar's office: Mei holds up the draft submission
+    {at:P.rg,place:"registrar",keys:[[P.rg,1180,540,1.12],[P.rg+0.1,1200,520,1.18]],d:5,draw:(x,tt)=>{
+      person(x,"mei",1000,905,0.84,{pose:"hold",t:tt,carry:os_draft(fin(tt,P.four2-0.1,0.5))});person(x,"yusuf",1290,905,0.8,{pose:"listen",t:tt,flip:true});}},
+    // the floor again: two reports, two numbers, and Yusuf between them
+    {at:P.wh,place:"floor",keys:[[P.wh,700,540,1.22],[P.wh+0.1,690,530,1.28]],d:4,draw:(x,tt)=>{const F=GV_FL;
+      os_floor(x,tt,{pose:{clara:{pose:"listen"},mei:{pose:"listen"}}});
+      person(x,"yusuf",F.x(1)-16,F.walk,0.62,{pose:"stand",expr:"concerned",t:tt});
+      [[0,"census report","4,812 awards"],[1,"draft submission","4,867 awards"]].forEach(([i,a,b],k)=>os_glassCard(x,tt,i,P.wh+0.1+0.15*k,[a,b]));
+      gv_qmark(x,F.x(1)-16,F.walk-0.62*560-50,96,fin(tt,c.which+0.1,0.6));}}]);
+  wc_paperOver(ctx,S);});
 
-// ---- 6 · Governance at the centre: DAMA's wheel, drawn on the green ----
-scene("wheel",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const d=c.takes-0.3;
-    return{d,k:os_keys([[0,v3(0.4,12.6,-12.4),v3(0,0.5,2.5),1350],[c.wheel,v3(0,19,-6.5),v3(0,0,-1.0),905],[d,v3(0.12,18.8,-6.35),v3(0,0,-1.0),905],[sc.dur+0.8,v3(0.6,2.9,-8.2),v3(0,1.25,0),1400]])};});
-  const C=os_cam(P.k,t),w0=wAt(sc,"wheel","eleven"),gv=wAt(sc,"wheel","governance"),mt=wAt(sc,"wheel","where"),oth=c.others,dc=wAt(sc,"others","Dee"),iso8=wAt(sc,"others","eight thousand"),iso38=wAt(sc,"others","thirty"),out=c.takes;
-  // each area's board dims while the others are named, except the one a standard covers
-  const lab=k=>{const dim=os_io(t,oth+0.2,out,0.5)*(k===9?1-os_in01(t,iso8-0.3,0.4):1);return(1-0.62*dim)*(1-os_in01(t,out+0.6,0.6));};
-  drawCampus(ctx,S,C,{t,office:{tbc:1},gold:os_in01(t,mt-0.2,2.4)*(1-os_in01(t,out+0.6,0.8)),glowFront:{office:os_io(t,gv-0.2,out+0.6,0.5)},
-    figs:[os_at("jun",t),os_at("mei",t),os_at("sam",t),os_at("clara",t)],
-    posts:(C_,add)=>{for(let k=0;k<10;k++){const p=os_postP(k,0.8);add(p,ctx=>os_signpost(ctx,C_,k,os_in01(t,w0+k*0.24,0.6),lab(k)));}},
-    extra:(C_,add)=>{const fade=1-os_in01(t,out+0.6,0.6);
-      os_tag(C_,v3(0,4.9,0),"data governance",{a:os_in01(t,gv-0.1,0.5)*fade*(1-0.62*os_io(t,oth+0.2,iso38-0.3,0.5)),size:34,bg:[255,226,150],rim:[214,160,60],ink:[74,52,20]});
-      os_ring(C_,9.92,os_in01(t,dc-0.2,1.4)*(1-os_in01(t,out+0.3,0.5)));
-      os_tag(C_,os_postP(9,1.7),"ISO 8000 · data quality",{a:os_io(t,iso8-0.1,out+0.4,0.4),size:30,dx:-330,dy:20,bg:[230,244,236],rim:[96,160,120]});
-      os_tag(C_,v3(0,4.9,0),"ISO/IEC 38505 · governing data",{a:os_io(t,iso38-0.1,out+0.4,0.4),size:30,dy:-84,bg:[230,244,236],rim:[96,160,120]});},
-    after:c_=>{os_board(c_,W/2,150,["DAMA-DMBOK","the Data Management Body of Knowledge"],{size:30,a:os_io(t,wAt(sc,"body","body")-0.2,w0-0.2,0.5)});
-      os_board(c_,1660,150,["DCAM","the same ground"],{size:32,a:os_io(t,dc-0.1,out+0.4,0.4),bg:[230,244,236],rim:[96,160,120]});}});});
+// ---- 4 · Who decides? Both numbers are right; no one has decided how ours maps to the government's ----
+// something carried in both hands while walking: the arms stay, the legs step
+POSE.os_carry=Object.assign({},POSE.os_box,{gaze:[0.3,0.1],turn:0.06});
+function os_carrier(x,id,w,y,s,carry,o){person(x,id,w.x,y-w.bob,s,Object.assign({pose:"os_carry",pose2:w.moving?(w.swing>0?"os_boxA":"os_boxB"):null,mix:Math.abs(w.swing),flip:w.flip,carry},o||{}));}
+// a card on an office's glass on the floor: two lines, coming in at t0
+function os_glassCard(x,tt,i,t0,lines,o){o=o||{};const u=fin(tt,t0,0.45);if(u<=0)return;const F=GV_FL,k=0.92+0.08*spring(u),sz=o.size||30,h=82+(lines.length-1)*(sz+12);
+  x.save();x.translate(F.x(i)+F.w/2,F.top+(o.top||250)+h/2);x.scale(k,k);withA(x,u,()=>gv_card(x,-F.w/2+(o.pad||22),-h/2,F.w-2*(o.pad||22),h,lines,{size:sz,align:"center",pin:false,y0:52,wash:o.wash||OS_NUM,washA:o.washA||0.14}));x.restore();}
 
-// ---- 7 · Listen first: no thirty-fifth policy; one question, asked in every office ----
-scene("listen",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const a2=wAt(sc,"ask","He asks")-0.3,b=c.jun-0.6,m=c.mei-0.6,s=c.sam-0.6,p=c.plan-0.6,f=c.binder-0.6,g=c.tools-0.6;
-    const room=(id,t0,t1,e,g_,f_)=>os_keys([os_rk(id,t0,e,g_,f_||1200),os_rk(id,t1+0.7,[e[0]+0.05,e[1]-0.05,e[2]+0.35],g_,f_||1200)]);
-    return{a2,b,m,s,p,f,g,kA:os_keys([os_rk("office",0,[1.16,1.78,1.62],[1.16,1.06,2.12],1450),os_rk("office",a2+0.7,[1.1,1.9,1.45],[1.12,1.06,2.12],1450)]),
-      kA2:os_keys([[a2,v3(0.6,2.3,-7.8),v3(0.1,1.3,-1.6),1400],[b+0.7,v3(0.4,2.2,-7.2),v3(0.1,1.3,-1.6),1400]]),
-      kB:room("data",b,m,[0.6,1.95,-2.7],[0.7,1.35,2.2]),kC:room("registrar",m,s,[-0.25,1.9,-2.8],[-0.25,1.4,2.2]),kD:room("platform",s,p,[-0.3,1.95,-2.8],[-0.4,1.5,2.4]),
-      kE:room("planning",p,f,[0.1,1.9,-2.8],[0,1.4,2.2]),kF:room("office",f,g,[1.0,1.95,-0.7],[-1.45,1.55,2.2],1250),kG:os_keys([os_rk("data",g,[0.3,2.0,-2.6],[0.4,1.3,2.2],1150),os_rk("data",sc.dur+1,[0.35,1.95,-2.1],[0.4,1.3,2.2],1150)])};});
-  // a person's answer, in a bubble from their head
-  const ans=(lines,t0,t1,o)=>(c_,B)=>os_say(B,lines,Object.assign({size:32,a:os_io(t,t0,t1,0.4)},o||{}));
-  const note={pose:"write",carry:heldNotebook,t};
-  // the thirty-fifth policy: a blank page he turns over instead of writing
-  const flip=wAt(sc,"ask","doesn't")+0.3;
-  const shotA=(ctx,S,t)=>{const th=Math.PI*easeCam(clamp((t-flip)/1.1,0,1));drawCampus(ctx,S,os_cam(P.kA,t),{t,inside:"office",office:{bare:1,tbc:1},ts:[90,990,4],hooks:{officeDesk:(ctx,C_,top)=>{
-    os_pen(ctx,C_,1.38,1.98,top);os_pageFlip(ctx,C_,1.0,1.9,1.32,2.32,top,th,c_=>{Tw(c_,"Policy 35",16,6.5,{w:800,size:3.4,align:"center",color:rgba(PAL.navy,1)});c_.fillStyle=rgba(PAL.navy,0.45);c_.fillRect(6,9,20,0.3);});}}});};
-  // he goes out with a notebook and one question
-  const q=wAt(sc,"ask","what slows");
-  const shotA2=(ctx,S,t)=>{const w=along([[0.9,-0.9],[0.5,-2.0],[0.2,-3.0]],t,P.a2+0.2,1.0);drawCampus(ctx,S,os_cam(P.kA2,t),{t,office:{tbc:1},
-    figs:[{id:"yusuf",x:w.x,z:w.z,y:os_floor(w.z),hop:w.hop,pose:"hold",carry:heldNotebook,t,onDraw:ans(["What slows you down?"],q-0.1,P.b+0.4,{size:34})}]});};
-  const visit=(K,id,who,lines,t0,t1,o,yo,extra)=>(ctx,S,t)=>drawCampus(ctx,S,os_cam(K,t),{t,inside:id,ts:[100,990,4],
-    figs:[os_at(who,t,Object.assign({onDraw:ans(lines,t0,t1,o.say)},o.fig)),Object.assign({id:"yusuf",at:id},note,yo)],extra});
-  const shotB=visit(P.kB,"data","jun",["The rules arrive","after I've built it."],c.jun+0.2,P.m+0.5,{fig:{x:2.25,z:1.5,pose:"explain",flip:true},say:{left:true}},{x:-1.0,z:1.0});
-  const shotC=visit(P.kC,"registrar","mei",["I never see where","my words are used."],c.mei+0.2,P.s+0.5,{fig:{pose:"explain"}},{x:-1.2,z:0.9});
-  const shotD=visit(P.kD,"platform","sam",["No one says which","columns are personal."],c.sam+0.2,P.p+0.5,{fig:{x:0.75,z:2.55,pose:"point"},say:{left:true}},{x:-1.45,z:1.0});
-  const shotE=visit(P.kE,"planning","clara",["Which number","do I trust?"],c.plan+0.1,P.f+0.5,{fig:{pose:"shrug",expr:"concerned"}},{x:1.2,z:1.0,flip:true});
-  // back at the office: the four answers pinned up, beside the shelf the binder came from
-  const shotF=(ctx,S,t)=>{const lit=os_io(t,wAt(sc,"binder","weren't")-0.3,P.g+0.6,0.6);drawCampus(ctx,S,os_cam(P.kF,t),{t,inside:"office",ts:[110,980,5],office:{tbc:1,cards:clamp((t-P.f-0.4)/1.8*4,0,4)},
-    figs:[{id:"yusuf",x:-2.0,z:0.1,y:0.3,pose:t<P.f+2.4?"reach":"stand",carry:t<P.f+2.4?heldPins:null,flip:true,t}],
-    over:(ctx,C_)=>{if(lit>0)glowQuad(ctx,C_,[bldP("office",-2.34,0.3,3.36),bldP("office",-0.49,0.3,3.36),bldP("office",-0.49,2.52,3.36),bldP("office",-2.34,2.52,3.36)],lit);}});};
-  // people agree; then a tool carries it out
-  const run=wAt(sc,"tools","Tools");
-  const shotG=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kG,t),{t,inside:"data",ts:[100,990,4],hooks:{dataScreen:c_=>os_testScreen(c_,os_in01(t,run,0.6))},
-    figs:[os_at("jun",t,{x:2.25,z:1.5,pose:"listen",nod:0.06*Math.sin(t*3.1)*os_io(t,P.g+0.4,run,0.4)}),{id:"mei",at:"data",x:-0.9,z:1.6,pose:"explain",t},{id:"yusuf",at:"data",x:-1.75,z:0.9,pose:"listen",t,nod:0.05*Math.sin(t*2.7+1)*os_io(t,P.g+0.4,run,0.4)}]});
-  os_shots(ctx,S,t,[[0,shotA],[P.a2,shotA2],[P.b,shotB],[P.m,shotC],[P.s,shotD],[P.p,shotE],[P.f,shotF],[P.g,shotG]]);});
+scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b1:c.both-0.5,s:c.monday-0.6,b3:c.before-0.6,cc:c.gov-0.6,d:c.answers-0.6,e:c.tbc-0.6,
+    right:wAt(sc,"both","right"),word:wAt(sc,"monday","the word"),micro:wAt(sc,"monday","microcredentials"),bef:wAt(sc,"before","before"),aft:wAt(sc,"before","after"),
+    ours:wAt(sc,"gov","ours"),who:wAt(sc,"gov","Who"),mei:wAt(sc,"answers","Mei"),jun:wAt(sc,"answers","Jun"),plan:wAt(sc,"answers","Planning"),tobe:wAt(sc,"tbc","to be")}));
+  const board=(x,tt,mon)=>{os_reportCard(x,OS_RC.census,"census report","ran Friday","4,812",fin(tt,P.right-0.1,0.35));
+    os_reportCard(x,OS_RC.draft,"draft submission","ran Wednesday","4,867",fin(tt,P.right-0.02,0.35));
+    if(mon>0){const [mx,my,mw,mh]=OS_RC.monday;x.save();x.translate(0,-60*(1-easeCam(mon)));withA(x,clamp(mon*3,0,1),()=>os_mondayCard(x));x.restore();}};
+  gv_shots(ctx,S,t,sc.dur,[
+    // Yusuf follows the numbers back, down the floor to the data team; it starts as the last chapter left the floor, so nothing doubles
+    // as the two dissolve
+    {at:0,place:"floor",keys:[[0,732,530,1.312],[0.4,1180,560,1.14]],d:2.6,draw:(x,tt)=>{const w=gv_walk(tt,0.2,368,1090,300);
+      os_floor(x,tt,{pose:{clara:{pose:"listen"},mei:{pose:"listen"},jun:{pose:"wave"}}});os_carrier(x,"yusuf",w,GV_FL.walk,0.62,heldNotebook,{t:tt});}},
+    // the data team's board: both reports are right, each by its own meaning of award
+    {at:P.b1,place:"boardData",keys:[[P.b1,960,500,1.08],[P.b1+0.1,960,490,1.12]],d:3,push:0,draw:(x,tt)=>board(x,tt,0)},
+    // Jun's screen: the glossary's term, and the row added on Monday
+    {at:P.s,place:"screen",keys:[[P.s,960,470,1.06],[P.micro-0.3,960,440,1.18]],d:2.4,push:0,draw:(x,tt)=>os_glossary(x,fin(tt,P.micro-0.1,0.6),fin(tt,P.word+0.08-0.1,0.5))},
+    // the board again: Monday's card goes up between them, one report before it, one after
+    {at:P.b3,place:"boardData",keys:[[P.b3,960,480,1.12]],push:0.02,draw:(x,tt)=>{board(x,tt,fin(tt,c.before-0.1,0.3));
+      os_tagAt(x,tt,P.bef,null,OS_RC.census[0]+OS_RC.census[2]/2,268,"before");os_tagAt(x,tt,P.aft,null,OS_RC.draft[0]+OS_RC.draft[2]/2,268,"after");}},
+    // the registrar's desk: the government's definition and ours, and nobody to say how one maps to the other
+    {at:P.cc,place:"registrar",keys:[[P.cc,1000,560,1.22],[P.cc+0.1,1010,540,1.26]],d:5,draw:(x,tt)=>{const [mx,my,mw]=OS_RD.manual,[tx,ty,tw_]=OS_RD.tent;
+      withA(x,fin(tt,c.gov+0.1,0.3),()=>os_manual(x));withA(x,fin(tt,P.ours-0.1,0.3),()=>os_tent(x));
+      os_tagAt(x,tt,c.gov+0.2,null,mx+mw/2,770,"the government's definition",{size:26});os_tagAt(x,tt,P.ours,null,tx+tw_/2,770,"ours",{size:26});
+      const top=os_arc(x,tx+tw_/2,ty-14,mx+mw/2,my-14,200,fin(tt,P.who-0.1,0.9));if(top)gv_qmark(x,top[0],top[1]-14,84,fin(tt,P.who+0.5,0.6));
+      person(x,"mei",560,905,0.8,{pose:"listen",pose2:"shrug",mix:fin(tt,P.who+0.3,0.5),expr:"concerned",t:tt});}},
+    // the floor: who does what with the word, as each is named
+    {at:P.d,place:"floor",keys:[[P.d,960,540,1]],push:0,draw:(x,tt)=>{os_floor(x,tt,{});person(x,"yusuf",GV_FL.x(2)+176,GV_FL.walk,0.62,{pose:"listen",t:tt});
+      os_glassCard(x,tt,1,P.mei-0.1,["Mei","owns the meaning"]);os_glassCard(x,tt,3,P.jun-0.1,["Jun","builds the model"]);os_glassCard(x,tt,0,P.plan-0.1,["Planning","reports what","it's given"]);}},
+    // and the chart, close: the government submission's row lights; the one accountable is still to be confirmed
+    {at:P.e,place:"boardGov",keys:[[P.e,960,520,1],[P.e+0.1,960,540,1.06]],d:3,push:0,draw:(x,tt)=>{const st=fin(tt,P.tobe-0.2,0.3);os_chart(x,()=>1,{light:2,lightA:fin(tt,c.tbc-0.1,0.8),hide:st>0.4?[2,1]:null});
+      const [sx,sy]=os_cellAt(2,1);gv_stamp(x,sx,sy+4,"TBC",st,{size:44,rot:-0.1});}}]);
+  wc_paperOver(ctx,S);});
 
-// ---- 8 · Where does it run? Every line of the binder, sorted into three trays ----
-// the binder's lines, in the order they're sorted: which tray each goes to, and the word it goes on
-const OS_SORT=[[0,"runs","required"],[0,"runs","a check"],[0,"runs","a tag"],[0,"runs","a test"],[1,"owned","decisions"],[1,"owned","writes"],[2,"go","go"]];
-scene("runs",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const b=c.runs-0.6;
-    return{b,when:OS_SORT.map(([k,id,w])=>wAt(sc,id,w)-0.5),kA:os_keys([os_rk("office",0,[0.75,2.15,-1.4],[1.05,1.3,2.3],1350),os_rk("office",b+0.7,[0.85,2.05,-0.9],[1.05,1.25,2.3],1350)]),
-      kB:os_keys([os_rk("office",b,[1.32,1.98,1.02],[1.32,1.06,2.2],1300),os_rk("office",sc.dur+1,[1.32,1.92,1.2],[1.32,1.06,2.2],1300)])};});
-  const y0=1.06,where=wAt(sc,"takes","where");
-  // the desk: the open binder, its lines marked as they're sorted, the three trays and the pages flying into them
-  const desk=(ctx,C_,top,t)=>{const fly=P.when.map(w=>clamp((t-w)/0.8,0,1)),n=[0,0,0];OS_SORT.forEach(([k],i)=>{if(fly[i]>=1)n[k]++;});
-    OS_TRAYS.forEach((tr,k)=>os_tray(ctx,C_,tr.x,2.36,top,tr.col,n[k]));
-    os_binderOpen(ctx,C_,1.32,1.97,top,{pw:0.24,pd:0.36,col:PAL.navy,left:c_=>{Tw(c_,"Policy 12",12,6,{w:800,size:3,align:"center",color:rgba(PAL.navy,1)});for(let i=0;i<6;i++){c_.fillStyle="rgba(150,150,170,0.6)";c_.fillRect(3,11+i*3.6,18-(i%3===2?6:0),0.6);}},
-      right:c_=>OS_SORT.forEach(([k],i)=>{const y=5+i*4.4,u=clamp((t-P.when[i]+0.2)/0.4,0,1);c_.fillStyle="rgba(150,150,170,0.6)";c_.fillRect(5,y,15-(i%2?4:0),0.7);
-        if(u>0){c_.fillStyle=rgba(OS_TRAYS[k].col,u);c_.beginPath();c_.arc(2.6,y+0.35,1.1*(0.6+0.4*spring(u)),0,TAU);c_.fill();}})});
-    OS_SORT.forEach(([k],i)=>os_flyPage(ctx,C_,bldP("office",1.44,top+0.02,1.97),bldP("office",OS_TRAYS[k].x,top+0.03,2.36),fly[i],0.3));};
-  const shotA=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kA,t),{t,inside:"office",office:{bare:1,tbc:1,cards:4},ts:[110,980,5],
-    hooks:{officeDesk:(ctx,C_,top)=>desk(ctx,C_,top,t)},figs:[{id:"yusuf",x:-0.12,z:0.1,y:0.3,pose:"listen",t}],
-    after:c_=>os_board(c_,1190,190,"Where does it run?",{size:44,a:os_io(t,where-0.1,P.b+0.9,0.5),bg:[255,236,200],rim:[214,150,80]})});
-  // over each tray, its name when the voice says it, and above that what goes in it, a line at a time
-  const T8=os_once(sc,"T",()=>[{name:wAt(sc,"runs","run")-0.1,items:[["a required field",wAt(sc,"runs","required")],["a check",wAt(sc,"runs","a check")],["a tag",wAt(sc,"runs","a tag")],["a test",wAt(sc,"runs","a test")]]},
-    {name:wAt(sc,"owned","decisions")-0.1,items:[["award mapping",wAt(sc,"owned","owns")],["owner: Mei · 14 Oct",wAt(sc,"owned","writes")]]},{name:wAt(sc,"go","go")-0.2,items:[]}]);
-  const shotB=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kB,t),{t,inside:"office",office:{bare:1,tbc:1,cards:4},ts:[90,990,4],hooks:{officeDesk:(ctx,C_,top)=>desk(ctx,C_,top,t)},
-    extra:(C_,add)=>OS_TRAYS.forEach((tr,k)=>{const q=T8[k],a=os_in01(t,q.name,0.4);if(a<=0)return;const p=bldP("office",tr.x,y0+0.08,2.44),bg=mix(tr.col,[255,255,255],0.84);
-      os_tag(C_,p,tr.name,{a,size:30,bg,rim:tr.col,dy:24});const it=q.items.filter(([,w])=>t>=w).map(([s_])=>s_);if(it.length)os_tag(C_,p,it,{size:28,pop:false,bg:[255,252,244],rim:tr.col,dy:24+64});})});
-  os_shots(ctx,S,t,[[0,shotA],[P.b,shotB]]);});
+// ---- 5 · What governance is for: deciding who decides, and making sure each decision reaches the work ----
+// an office on the floor washed in a colour (behind its person), or lit up, brighter
+function os_roomLit(x,i,col,a){const F=GV_FL;gv_tint(x,F.x(i),F.top,F.w,F.fy-F.top,col,a);}
+function os_roomGlow(x,i,a){if(a<=0.01)return;const F=GV_FL;x.save();x.beginPath();x.rect(F.x(i),F.top,F.w,F.fy-F.top);x.clip();x.globalCompositeOperation="screen";
+  wc_glowAt(x,F.x(i)+F.w/2,F.top+300,430,[255,238,204],0.42*a);x.restore();}
+// a decision's card, flying from the governance office to the glass of an office where the work is done (u, 0 to 1), and pinned there
+const OS_DEC_Y=GV_FL.top+300;
+function os_decFly(x,i,u,tick){if(u<=0)return;const F=GV_FL,e=easeCam(clamp(u,0,1));
+  os_decision(x,lerp(F.x(2)+F.w/2,F.x(i)+F.w/2,e),lerp(OS_DEC_Y+20,OS_DEC_Y,e)-130*Math.sin(Math.PI*e),lerp(0.5,1,e),tick);}
+// a label over two offices of the floor, in the band above their glass, with a pencil bracket out to their edges
+function os_overRooms(x,tt,t0,i0,i1,s,o){const F=GV_FL,x0=F.x(i0)+16,x1=F.x(i1)+F.w-16,m=(x0+x1)/2,y=108,u=easeCam(fin(tt,t0,0.7));if(u<=0)return;
+  x.save();x.strokeStyle=rgba(WC_PENCIL,0.8);x.lineWidth=3;x.lineCap="round";x.beginPath();x.moveTo(m-(m-x0)*u,y);x.lineTo(m+(x1-m)*u,y);
+  if(u>0.9){const d=20*(u-0.9)/0.1;x.moveTo(x0,y);x.lineTo(x0,y+d);x.moveTo(x1,y);x.lineTo(x1,y+d);}x.stroke();x.restore();os_tagAt(x,tt,t0,null,m,y-40,s,o);}
+// a label on paper of two lines or more, springing in at t0
+function os_note(x,tt,t0,cx,cy,lines,o){o=o||{};const a=fin(tt,t0,0.35)*(o.out==null?1:1-fin(tt,o.out,0.4));if(a<=0.01)return;const sz=o.size||30,w=Math.round(Math.max(...lines.map(l=>tw(x,l,sz,700)))+48),h=lines.length*(sz+12)+28,
+    k=0.9+0.1*spring(fin(tt,t0,0.5));
+  x.save();x.translate(cx,cy);x.scale(k,k);withA(x,a,()=>{wc_panel(x,-w/2,-h/2,w,h,{kind:"card",wash:o.wash,washA:o.washA,seed:w});
+    lines.forEach((l,i)=>wc_T(x,l,0,-h/2+14+(i+0.8)*(sz+12),{w:700,size:sz,align:"center",col:WC_INK}));});x.restore();}
 
-// ---- 9 · Where decisions enter: the data team's loop, and a pin at the right steps ----
-scene("enter",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const b=c.pin-0.6;
-    return{b,pins:OS_PINS.map(([i,lab])=>wAt(sc,"pins",lab[0])-0.15),kA:os_keys([[0,bldP("data",-0.2,3.4,-7.6),bldP("data",-0.5,1.2,2.5),1300],[b+0.7,bldP("data",-0.5,2.1,-1.9),bldP("data",-0.8,1.7,3.8),1300]]),
-      kB:os_keys([[b,bldP("data",-1.32,1.86,0.45),bldP("data",-1.32,1.86,3.8),1250],[sc.dur+1,bldP("data",-1.32,1.86,0.85),bldP("data",-1.32,1.86,3.8),1250]])};});
-  const X0=-2.45,Y0=0.98,X1=-0.2,Y1=2.72,Z=4-0.2-0.03;
-  // Yusuf brings a box of pins to the data team; Jun's at his desk, the poster of their loop on the wall
-  const shotA=(ctx,S,t)=>{const w=along([[-1.0,-3.6],[-1.7,-1.2],[-2.0,1.0]],t,0.6,1.0),lp=wAt(sc,"loop","loop");
-    drawCampus(ctx,S,os_cam(P.kA,t),{t,inside:t>P.b-1.5?"data":null,data:{loopHi:os_io(t,lp-0.2,P.b+0.6,0.5)},
-      figs:[Object.assign({id:"yusuf",at:"data",x:w.x,z:w.z,hop:w.hop,pose:"hold",carry:heldPins,t},w.z<0?{at:null,x:bldP("data",w.x,0,w.z).x,z:bldP("data",w.x,0,w.z).z}:{}),os_at("jun",t,{x:0.5,z:0.95,pose:"listen"})],
-      extra:(C_,add)=>os_tag(C_,bldP("data",-1.32,2.8,3.75),"a loop of ten steps",{a:os_io(t,lp,P.b+0.4,0.4),size:32})});};
-  // the poster, close: a pin at each step where a decision enters, with what's pinned there
-  const shotB=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kB,t),{t,inside:"data",ts:[80,1000,3],
-    extra:(C_,add)=>OS_PINS.forEach(([i,lab],k)=>{const u=os_in01(t,P.pins[k],0.5);if(u<=0)return;const an=-Math.PI/2+i/10*TAU,q=loopPos(i,X0,Y0,X1,Y1,Z-0.01),p=bldP("data",q.x,q.y,q.z),rim=bldP("data",q.x+Math.cos(an)*0.155,q.y-Math.sin(an)*0.155,q.z);
-      os_stepRing(C_,p,0.195,u);os_pinQ(C_,rim,u);os_tag(C_,p,lab,{a:u,size:30,dx:Math.cos(an)*190,dy:-Math.sin(an)*96+18,bg:[255,236,190],rim:[214,160,60]});})});
-  os_shots(ctx,S,t,[[0,shotA],[P.b,shotB]]);});
+scene("for",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b:c.for-0.6,cc:c.like-0.6,d:c.mgmt-0.6,who:wAt(sc,"doesnt","who"),how:wAt(sc,"doesnt","how"),
+    dd:wAt(sc,"for","deciding"),mk:wAt(sc,"for","making"),rule:wAt(sc,"like","a rule"),copy:wAt(sc,"like","a copy"),chk:wAt(sc,"like","someone"),
+    gv:wAt(sc,"mgmt","Governance"),kept:wAt(sc,"mgmt","checks"),mg:wAt(sc,"mgmt","Management")}));
+  // the four offices where the work is done; each one's decision sets off, the nearest first, and lands on its glass
+  const WORK=[0,1,3,4],ID=["clara","mei",0,"jun","sam"],go=i=>P.mk-0.35+(i===1||i===3?0:0.12),lands=i=>go(i)+0.85;
+  gv_shots(ctx,S,t,sc.dur,[
+    // binder 12, open on his desk: what policy 12 says; then a note stuck beside it for each thing it doesn't say
+    {at:0,place:"desk",keys:[[0,1250,500,1.22],[P.who-1.0,960,520,1.0]],d:1.8,draw:(x,tt)=>{os_open12(x);
+      os_sticky(x,560,330,420,200,-0.05,["who decides?"],54,fin(tt,P.who-0.3,0.25),clamp((tt-P.who+0.05)/0.8,0,1));
+      os_sticky(x,590,650,460,260,0.04,["how does it","reach the work?"],50,fin(tt,P.how-0.3,0.25),clamp((tt-P.how+0.05)/1.2,0,1));}},
+    // the floor: in the governance office, deciding who decides; then each decision goes out to an office where the work is done, and
+    // the people there look up
+    {at:P.b,place:"floor",keys:[[P.b,960,450,1.26],[P.mk-0.5,960,540,1.0]],d:1.8,draw:(x,tt)=>{
+      os_roomLit(x,2,GV.gold,0.32*fin(tt,P.dd-0.1,0.6));WORK.forEach(i=>os_roomLit(x,i,GV.gold,0.14*fin(tt,lands(i)-0.1,0.6)));
+      const pose={yusuf:{pose:"write",carry:heldNotebook}};WORK.forEach(i=>{if(ID[i]!=="mei")pose[ID[i]]={pose2:"listen",mix:fin(tt,lands(i)-0.1,0.5)};});
+      os_floor(x,tt,{yusufIn:true,pose});os_glassCard(x,tt,2,P.dd-0.1,["deciding","who decides"],{wash:GV.gold,washA:0.32});
+      WORK.forEach(i=>os_decFly(x,i,clamp((tt-go(i))/0.85,0,1),0));
+      os_tagAt(x,tt,P.mk+0.6,null,960,66,"each decision reaches the work",{size:32,wash:GV.gold,washA:0.3});}},
+    // the 1880s shop again, on the market square: the Act, the inspector's case of brass copies, and the inspector, who checks the shop's
+    // weight against his
+    {at:P.cc,place:"shop",keys:[[P.cc,960,540,1],[P.cc+0.1,980,530,1.04]],d:5,draw:(x,tt)=>{const top=OS_SH.counter[2],land=P.chk+0.3,
+        tilt=tt<land?-0.2:-0.2*Math.exp(-(tt-land)*3)*Math.cos((tt-land)*9);
+      gv_halo(x,500,top-130,300,150,GV.gold,0.85*fin(tt,P.rule-0.1,0.6));gv_halo(x,1540,700,340,220,GV.gold,0.85*fin(tt,P.copy-0.1,0.6));
+      gv_halo(x,1250,380,260,540,GV.gold,0.6*fin(tt,P.chk-0.1,0.6));
+      person(x,"grocer",440,860,0.78,{pose:"listen",t:tt});os_counter(x);os_act(x,650,top+6);
+      os_scaleAt(x,OS_SH.scale,top+4,tilt,(q,ex,ey)=>os_iron(q,ex,ey,1),tt>=land?(q,ex,ey)=>os_brass(q,ex,ey):null);os_case(x,1712,905,1);
+      const m=clamp((tt-(P.chk-0.4))/0.45,0,1),back=fin(tt,land+0.3,0.5);
+      person(x,"inspector",1380,905,0.86,{pose:"hold",pose2:"os_place",mix:m*(1-back),t:tt,flip:true,wide:true,carry:tt<land?heldWeight:null});
+      os_tagAt(x,tt,P.rule,null,650,500,"a rule");os_note(x,tt,P.copy,1690,630,["a copy where","the work happens"]);os_tagAt(x,tt,P.chk,null,1380,186,"someone who checks");}},
+    // the floor again: governance sets the rules and checks they're kept, a tick on each decision; management does the work
+    {at:P.d,place:"floor",keys:[[P.d,960,540,1]],push:0.02,draw:(x,tt)=>{const F=GV_FL;
+      os_roomLit(x,2,GV.gold,0.14+0.22*fin(tt,P.gv-0.1,0.5));WORK.forEach((i,k)=>{os_roomLit(x,i,GV.gold,0.14);os_roomGlow(x,i,fin(tt,P.mg-0.2+0.06*Math.min(k,2),0.5));});
+      const pose={yusuf:{pose:"write",carry:heldNotebook}};WORK.forEach((i,k)=>{if(ID[i]!=="mei")pose[ID[i]]={pose:"listen",pose2:OS_WORK[ID[i]].pose,mix:fin(tt,P.mg-0.2+0.06*Math.min(k,2),0.5)};});
+      os_floor(x,tt,{yusufIn:true,pose});os_glassCard(x,tt,2,P.gv-0.1,["governance","sets the rules,","checks they're kept"],{wash:GV.gold,washA:0.32,top:196,pad:8});
+      WORK.forEach((i,k)=>os_decision(x,F.x(i)+F.w/2,OS_DEC_Y,1,fin(tt,P.kept+0.12*k,0.4)));
+      os_overRooms(x,tt,P.mg-0.2,0,1,"management · does the work");os_overRooms(x,tt,P.mg-0.14,3,4,"management · does the work");}}]);
+  wc_year(ctx,56,72,"England · 1880s",gv_io(t,P.cc+0.2,P.d,0.4));
+  wc_paperOver(ctx,S);});
 
-// ---- 10 · The series: the binders still on the shelf, the films on the tools, and the policy taken to the work ----
-scene("series",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const b=c.tools-0.6,w=c.wish-0.6,n0=wAt(sc,"next","nine")-0.1,tk=wAt(sc,"next","takes")-0.2;
-    return{b,w,tk,slide:OS_SHELF9.map((_,k)=>n0+k*0.24),cards:OS_TOOLS.map((_,k)=>wAt(sc,"tools","six")-0.1+k*0.3),
-      kA:os_keys([os_rk("office",0,[-0.55,1.6,0.0],[-1.95,1.4,3.2],1050),os_rk("office",b+0.7,[-0.6,1.6,0.45],[-1.95,1.4,3.2],1050)]),
-      kB:os_keys([os_rk("data",b,[1.25,2.4,0.35],[1.25,1.95,3.77],2050),os_rk("data",w+0.7,[1.25,2.38,0.6],[1.25,1.95,3.77],2050)]),
-      kC:os_keys([[w,v3(-3.2,4.6,-10.5),v3(1.6,0.8,-1.4),1050],[sc.dur+1,v3(-2.4,10.5,-14.5),v3(4.2,0.4,1.6),1000]])};});
-  // the shelf: nine binders come forward, one for each film on a kind of policy; Yusuf takes the first
-  const shotA=(ctx,S,t)=>{const u=P.slide.map(t0=>os_in01(t,t0,0.45)),took=t>P.tk+0.9,hi=os_in01(t,P.tk+0.9,0.4);
-    drawCampus(ctx,S,os_cam(P.kA,t),{t,inside:"office",ts:[110,980,5],office:{tbc:1,shelfSkip:(r,j)=>(r===2&&j===4)||(took&&r===2&&j===9),
-        shelfOut:(r,j)=>{const k=OS_SHELF9.findIndex(([a,b_])=>a===r&&b_===j);return k<0?0:0.09*easeCam(u[k])+(k===0?0.1*os_in01(t,P.tk+0.3,0.6):0);}},
-      figs:[{id:"yusuf",at:"office",x:-0.45,z:2.7,pose:t>P.tk&&!took?"reach":took?"hold":"stand",flip:true,carry:took?os_heldTitled(["Who","decides"],PAL.gold):null,t}],
-      over:(ctx,C_)=>{const M_=MX;mxSet(BLDI.office.x,BLDI.office.z,BLDI.office.ang);OS_SHELF9.forEach(([r,j],k)=>{if(u[k]<=0||(k===0&&t>P.tk-0.1))return;os_binderTag(ctx,C_,r,j,0.09*easeCam(u[k]),k+2,u[k]);});MX=M_;},
-      after:c_=>os_needsList(c_,74,96,u,hi,os_in01(t,P.slide[0]-0.3,0.5))});};
-  // the data team's board: six cards, one for each film on the tools
-  const shotB=(ctx,S,t)=>drawCampus(ctx,S,os_cam(P.kB,t),{t,inside:"data",ts:[80,1000,3],hooks:{dataBoard:(ctx,C_,z)=>OS_TOOLS.forEach((_,k)=>{const u=os_in01(t,P.cards[k],0.45);if(u<=0)return;
-      const col=k%3,row=(k/3)|0,x0=0.13+col*0.785,y1=2.6-row*0.66,lift=(1-spring(u))*0.05;surfDraw(ctx,C_,v3(x0,y1+lift,z-0.004),v3(1,0,0),v3(0,1,0),c_=>os_toolCard(c_,k,u));
-      const p=pj(C_,v3(x0+0.35,y1-0.03+lift,z-0.008));if(p.z>NEAR){ctx.fillStyle=rgba([200,70,60],1);ctx.beginPath();ctx.arc(p.x,p.y,Math.max(3,0.016*p.s),0,TAU);ctx.fill();}})},
-    after:c_=>os_board(c_,W/2,128,"With the tools",{size:34,a:os_in01(t,P.cards[0]-0.2,0.5),bg:[236,244,255],rim:[90,130,200],ink:[40,60,110]})});
-  // the policy leaves the shelf: Yusuf takes it out across the green, to where the work is done
-  const shotC=(ctx,S,t)=>{const wk=along([[0.5,-2.35],[2.4,-2.6],[3.9,0.0],[6.4,2.1]],t,P.w+0.2,1.05);
-    drawCampus(ctx,S,os_cam(P.kC,t),{t,office:{tbc:1},figs:[{id:"yusuf",x:wk.x,z:wk.z,y:os_floor(wk.z),hop:wk.hop,pose:"hold",carry:os_heldTitled(["Who","decides"],PAL.gold),t}],
-      after:c_=>os_card(c_,os_in01(t,c.breath-0.2,0.8),["Off the shelf",110],"A policy that doesn't run anywhere is a wish.","Film 1 of 16 · data governance")});};
-  os_shots(ctx,S,t,[[0,shotA],[P.b,shotB],[P.w,shotC]]);});
+// ---- 6 · Governance at the centre: DAMA's book and its wheel; the other frameworks on the same ground; then where it runs ----
+scene("wheel",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b:c.wheel-0.6,d:c.takes-0.6,body:wAt(sc,"body","body"),eleven:wAt(sc,"wheel","eleven"),
+    gov:wAt(sc,"wheel","governance"),where:wAt(sc,"wheel","where"),dee:wAt(sc,"others","Dee"),i8:wAt(sc,"others","eight thousand"),i38:wAt(sc,"others","thirty"),
+    shows:wAt(sc,"takes","shows")}));
+  const out=P.d-1.4,ring=[[1,3],[0,4]];
+  gv_shots(ctx,S,t,sc.dur,[
+    // his desk: binder 12, closed, his two notes sticking out of it; DAMA's book set down beside it
+    {at:0,place:"desk",keys:[[0,960,540,1],[P.body,1170,520,1.1]],d:2,draw:(x,tt)=>{os_closed12(x);const u=fin(tt,P.body-0.5,0.3);if(u<=0)return;
+      x.save();x.translate(1330,520);const k=lerp(1.25,1,easeCam(u));x.scale(k,k);withA(x,clamp(u*3,0,1),()=>os_dmbok(x,0,0));x.restore();}},
+    // the book open at its wheel: ten areas round the centre, data governance, where they meet; then the frameworks that cover the same
+    // ground, or part of it; then close in on the centre
+    {at:P.b,place:"page",keys:[[P.b,960,500,1.04],[P.b+0.1,960,480,1.0],[out,960,448,2.3]],d:1.6,push:0.02,draw:(x,tt)=>{
+      const hi=tt>=P.i38-0.3?"centre":tt>=P.i8-0.2?9:-1;
+      os_wheel(x,{area:k=>fin(tt,P.eleven-0.1+k*0.24,0.5),centre:fin(tt,P.gov-0.1,0.6),joins:clamp((tt-P.where+0.2)/1.2,0,1),
+        ring:clamp((tt-P.dee+0.2)/1.4,0,1)*(1-fin(tt,out,0.4)),dim:gv_io(tt,P.dee-0.2,out,0.5),hi,
+        outline:hi==="centre"?gv_io(tt,P.i38-0.1,out,0.4):hi===9?fin(tt,P.i8-0.1,0.4):0,labels:1-fin(tt,out,0.4),fade:1-0.6*fin(tt,out,0.6)});
+      os_note(x,tt,P.dee-0.1,1660,150,["DCAM","the same ground"],{out});os_note(x,tt,P.i8-0.1,262,150,["ISO 8000","data quality"],{out});
+      os_note(x,tt,P.i38-0.1,1660,780,["ISO/IEC 38505","governing data"],{out});}},
+    // where it runs: the governance office at the centre of the floor, and the offices round it, at work
+    {at:P.d,place:"floor",keys:[[P.d,960,485,1.9],[P.d+0.4,960,540,1.0]],d:2.4,push:0.02,draw:(x,tt)=>{
+      os_roomLit(x,2,GV.gold,0.32+0.16*(1-fin(tt,P.d+0.4,1.6)));ring.forEach((r,j)=>r.forEach(i=>os_roomGlow(x,i,fin(tt,P.shows-0.1+0.3*j,0.6))));
+      os_floor(x,tt,{yusufIn:true,pose:{yusuf:{pose:"listen"}}});}}]);
+  wc_paperOver(ctx,S);});
+
+// ---- 7 · Listen first: no thirty-fifth policy; one question in every office, and what slows each one down ----
+// someone answering while Yusuf writes it down: their bubble springs in at t0 and goes at t1
+function os_answer(x,tt,t0,t1,bx,by,lines,tx,ty){gv_say(x,bx,by,lines,tx,ty,{a:gv_io(tt,t0,t1,0.35),k:0.92+0.08*spring(fin(tt,t0,0.5)),size:34});}
+const os_noting=tt=>({pose:"write",carry:heldNotebook,t:tt});
+
+scene("listen",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({a2:wAt(sc,"ask","He asks")-0.4,flip:wAt(sc,"ask","doesn't")+0.3,every:wAt(sc,"ask","everyone"),
+    q:wAt(sc,"ask","what slows"),b:c.jun-0.6,m:c.mei-0.6,s:c.sam-0.6,p:c.plan-0.6,f:c.binder-0.6,they:wAt(sc,"binder","They"),g:c.tools-1.15,
+    h:wAt(sc,"tools","Tools")-0.5,trust:wAt(sc,"plan","trust"),carry:wAt(sc,"tools","carry"),agree:wAt(sc,"tools","agree"),cant:wAt(sc,"tools","can't")}));
+  gv_shots(ctx,S,t,sc.dur,[
+    // his desk: a fresh page for a thirty-fifth policy, its heading and nothing else; it turns over, unwritten
+    {at:0,place:"desk",keys:[[0,960,520,1],[P.flip-0.3,960,500,1.06]],d:1.8,draw:(x,tt)=>os_page35(x,Math.PI*easeCam(clamp((tt-P.flip)/1.1,0,1)))},
+    // the floor: he goes out with his notebook, past every office, and asks the same question; each one looks up
+    {at:P.a2,place:"floor",keys:[[P.a2,960,540,1]],push:0.04,draw:(x,tt)=>{const F=GV_FL,w=gv_walk(tt,P.a2+0.15,F.x(2)+76,F.x(3)-18,200),pose={};
+      ["clara","jun","sam"].forEach((id,k)=>pose[id]={pose2:"listen",mix:fin(tt,P.every-0.1+0.14*k,0.5)});
+      os_floor(x,tt,{pose});os_carrier(x,"yusuf",w,F.walk,0.62,heldNotebook,{t:tt});
+      os_answer(x,tt,P.q-0.15,99,w.x-190,420,["What slows you down?"],w.x+6,540);}},
+    // the data team: Jun
+    {at:P.b,place:"data",keys:[[P.b,1240,520,1.12],[P.b+0.1,1260,510,1.16]],d:4,draw:(x,tt)=>{os_dataBoard(x);person(x,"yusuf",960,905,0.8,os_noting(tt));
+      person(x,"jun",1480,905,0.8,{pose:"explain",t:tt,flip:true});os_answer(x,tt,c.jun+0.2,P.m+0.6,1540,250,["The rules arrive","after I've built it."],1505,452);}},
+    // the registrar's office: Mei, her word on the desk
+    {at:P.m,place:"registrar",keys:[[P.m,1080,520,1.12],[P.m+0.1,1060,510,1.16]],d:4,draw:(x,tt)=>{os_tent(x);
+      person(x,"mei",860,905,0.8,{pose:"explain",t:tt});person(x,"yusuf",1450,905,0.8,Object.assign(os_noting(tt),{flip:true}));
+      os_answer(x,tt,c.mei+0.2,P.s+0.6,560,262,["I approve the words,","then never see them used."],850,456);}},
+    // the platform team: Sam
+    {at:P.s,place:"platform",keys:[[P.s,900,520,1.12],[P.s+0.1,880,510,1.16]],d:4,draw:(x,tt)=>{
+      person(x,"sam",640,905,0.8,{pose:"explain",t:tt});person(x,"yusuf",1180,905,0.8,Object.assign(os_noting(tt),{flip:true}));
+      os_answer(x,tt,c.sam+0.2,P.p+0.6,330,262,["Tell me which column,","I'll protect it in minutes."],630,456);}},
+    // Planning: Clara, her census on the screen and the draft's number stuck beside it
+    {at:P.p,place:"planning",keys:[[P.p,900,520,1.1],[P.p+0.1,880,510,1.14]],d:4,draw:(x,tt)=>{os_census(x,1);
+      os_sticky(x,1222,238,212,160,0.06,["4,867?"],46,fin(tt,P.p+0.25,0.25),1);
+      person(x,"clara",440,905,0.8,{pose:"listen",pose2:"shrug",mix:fin(tt,P.trust-0.2,0.5),expr:"concerned",t:tt});
+      person(x,"yusuf",1270,905,0.8,Object.assign(os_noting(tt),{flip:true}));os_answer(x,tt,c.plan+0.1,P.f+0.6,270,214,["Which number","do I trust?"],440,462);}},
+    // his office's board, close: his question, and the four answers pinned up under it one by one
+    {at:P.f,place:"boardGov",keys:[[P.f,960,500,1],[P.f+0.1,960,490,1.04]],d:3,push:0.02,draw:(x,tt)=>{os_asked(x);
+      for(let k=0;k<4;k++)os_ansCard(x,k,fin(tt,c.binder-0.2+0.45*k,0.35));}},
+    // his office: the shelf the binder came from, in a warm light; what they wrote is what they were asked for
+    {at:P.they-0.5,place:"office",keys:[[P.they-0.5,1320,520,1.16],[P.they-0.4,1360,520,1.2]],d:3,draw:(x,tt)=>{os_chartSmall(x,1);os_ansSmall(x);os_score(x);
+      os_binders(x,{missing:i=>i===11});const g=fin(tt,P.they-0.2,0.9),[sx,,sw]=[GV_OFF.shelf.x,0,GV_OFF.shelf.w];
+      if(g>0){x.save();x.globalCompositeOperation="soft-light";wc_glowAt(x,sx+sw/2,520,560,[255,190,90],0.9*g);x.globalCompositeOperation="screen";
+        wc_glowAt(x,sx+sw/2,470,500,[255,222,160],0.42*g);x.restore();}
+      person(x,"yusuf",1200,905,0.8,{pose:"listen",expr:"smile",t:tt});}},
+    // the data team's room: Mei, Jun and Yusuf, working it out together
+    {at:P.g,place:"data",keys:[[P.g,1300,520,1.14],[P.g+0.1,1320,520,1.18]],d:3,draw:(x,tt)=>{const nod=k=>0.05*Math.sin(tt*3.1+k)*gv_io(tt,P.g+0.3,P.h,0.4);os_dataBoard(x);
+      person(x,"yusuf",900,905,0.8,{pose:"listen",t:tt,nod:nod(1)});person(x,"mei",1330,905,0.8,{pose:"explain",t:tt});
+      person(x,"jun",1600,905,0.8,{pose:"listen",t:tt,flip:true,nod:nod(2)});}},
+    // Jun's screen: what they agreed on Monday runs as a test, and passes; how award maps to the government's has no test, as no
+    // one has agreed it
+    {at:P.h,place:"screen",keys:[[P.h,960,450,1],[P.cant-0.3,960,500,1.06]],d:1.8,push:0.02,draw:(x,tt)=>
+      os_tests(x,fin(tt,P.carry-0.3,0.5),fin(tt,P.carry+0.25,0.4),fin(tt,P.agree-0.1,0.6),fin(tt,P.cant-0.15,0.5))}]);
+  wc_paperOver(ctx,S);});
+
+// ---- 8 · Where does it run? Binder 12 open again, and every line of policy 12 marked by where it runs ----
+scene("runs",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{open:w("takes","opens",-0.2),where:w("takes","where"),b:c.runs-0.6,key:[w("runs","run in",-0.1),w("owned","decisions",-0.1),w("go","go",-0.2)],
+      hi:[w("runs","required"),w("runs","a check"),w("runs","a tag"),w("runs","a test"),w("owned","owns"),w("owned","writes"),w("go","go")],
+      note:[w("runs","required"),w("runs","a check"),w("runs","a tag"),w("runs","a test"),w("owned","owns",0.3),w("owned","where the"),99]};});
+  gv_shots(ctx,S,t,sc.dur,[
+    // his desk: binder 12, closed, and three highlighters; he opens it, and sticks his question beside policy 12
+    {at:0,place:"desk",keys:[[0,1300,520,1.1],[P.open,960,520,1],[P.b-0.9,1300,500,1.25]],d:1.6,draw:(x,tt)=>{
+      [[1792,330,1.4,GV.green],[1836,530,1.52,GV.gold],[1798,736,1.44,GV.grey]].forEach(([mx,my,r,col])=>os_marker(x,mx,my,r,col));
+      os_opening12(x,easeCam(clamp((tt-P.open)/0.9,0,1)));
+      os_sticky(x,560,380,440,230,-0.04,["where does","it run?"],56,fin(tt,P.where-0.35,0.25),clamp((tt-P.where+0.1)/1.0,0,1));}},
+    // the page, close: each line marked as it's sorted, green where it can run in the work, gold where it's a decision someone owns,
+    // grey where it can go; what he writes beside it; his key at the top
+    {at:P.b,place:"policy",keys:[[P.b,960,540,1]],push:0.035,draw:(x,tt)=>os_policy(x,k=>fin(tt,P.hi[k]-0.45,k===4?0.8:0.45),k=>fin(tt,P.note[k],0.7),
+      j=>fin(tt,P.key[j],0.6),fin(tt,P.hi[6]+0.35,0.5))}]);
+  wc_paperOver(ctx,S);});
+
+// ---- 9 · Where decisions enter: the data team's loop, and a gold pin at each step where a decision enters it ----
+// a face between two expressions (m, 0 to 1)
+function os_face(a,b,m){const A=EXPR[a],B=EXPR[b];if(m<=0)return A;if(m>=1)return B;const o={};new Set([...Object.keys(A),...Object.keys(B)]).forEach(k=>o[k]=lerp(A[k]||0,B[k]||0,m));return o;}
+scene("enter",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{places:w("places","places"),lp:c.loop-0.6,go:w("loop","loop",-0.1),end:w("loop","new version",0.1),m:c.pin-0.6,meet:w("pin","another meeting"),
+      needs:w("pin","It needs"),pin:w("pin","a pin"),q:c.pins-0.6,
+      pins:OS_PINS.map(([,word])=>w(sc.vo.find(v=>v.id==="pins").text.includes(word)?"pins":"pins2",word,-0.15)),two:w("pins","a contract",-0.1),br:c.breath-0.3};});
+  const [qx,qy,qw,qh]=GV_PC,[px,py,pw,ph]=GV_DT.poster,
+    pins=(x,tt,R,lab)=>OS_PINS.forEach(([i,,lines],k)=>os_goldPin(x,i,R[0],R[1],R[2],R[3],fin(tt,P.pins[k],0.3),clamp((tt-P.pins[k]-0.05)/0.5,0,1),lines,
+      lab&&(j=>clamp((tt-(j?P.two:P.pins[k]+0.1))/0.6,0,1))));
+  gv_shots(ctx,S,t,sc.dur,[
+    // the data team's room: Yusuf comes in with a box of gold pins; Jun turns from his desk; the poster of how they build catches the light
+    {at:0,place:"data",keys:[[0,1000,520,1.08],[0.4,1060,515,1.14]],d:3.2,draw:(x,tt)=>{const wk=gv_walk(tt,0.2,300,860,220);
+      os_dataBoard(x);os_warm(x,px+pw/2,py+ph/2,420,fin(tt,P.places-0.4,0.8));
+      person(x,"jun",1600,905,0.8,{pose:"stand",pose2:"listen",mix:fin(tt,wk.end-0.7,0.6),t:tt,flip:true});os_carrier(x,"yusuf",wk,905,0.8,heldPins,{t:tt});}},
+    // the poster, close: the loop they build in, going round from a question to a new version
+    {at:P.lp,place:"poster",keys:[[P.lp,960,500,1.06],[P.lp+0.1,960,490,1]],d:2.4,push:0.02,draw:(x,tt)=>
+      withA(x,1-fin(tt,P.m-0.7,0.6),()=>os_loopRun(x,qx,qy,qw,qh,clamp((tt-P.go)/((P.end-P.go)/0.9),0,1)))},
+    // the room again: Jun expects another meeting; Yusuf holds up the pins instead
+    {at:P.m,place:"data",keys:[[P.m,1120,520,1.16],[P.m+0.1,1100,515,1.2]],d:4,draw:(x,tt)=>{os_dataBoard(x);os_warm(x,px+pw/2,py+ph/2,420,1);
+      person(x,"yusuf",880,905,0.8,{pose:"hold",pose2:"holdUp",mix:fin(tt,P.needs-0.1,0.5),E:os_face("calm","smile",fin(tt,P.needs,0.5)),t:tt,carry:heldPins});
+      person(x,"jun",1480,905,0.8,{pose:"listen",E:os_face("concerned","relieved",fin(tt,P.pin,0.6)),t:tt,flip:true});
+      os_answer(x,tt,P.meet-0.25,P.pin+0.3,1500,330,["Another meeting?"],1462,456);}},
+    // the poster, close: a gold pin at each step where a decision enters, and what enters there
+    {at:P.q,place:"poster",keys:[[P.q,960,500,1.04],[P.q+0.1,960,490,1]],d:2.4,push:0.02,draw:(x,tt)=>pins(x,tt,GV_PC,true)},
+    // the room: the team's own loop, with six gold pins in it
+    {at:P.br,place:"data",keys:[[P.br,1060,520,1.1],[P.br+0.1,1060,515,1.13]],d:2.4,draw:(x,tt)=>{os_dataBoard(x);os_warm(x,px+pw/2,py+ph/2,420,1);pins(x,99,GV_DT.poster,false);
+      person(x,"yusuf",860,905,0.8,{pose:"hold",expr:"smile",t:tt,carry:heldPins});person(x,"jun",1560,905,0.8,{pose:"listen",expr:"smile",t:tt,flip:true});}}]);
+  wc_paperOver(ctx,S);});
+
+// ---- 10 · The series: nine binders for the films on what governance needs, six cards for the films on the tools ----
+scene("series",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{nine:w("next","nine",-0.1),take:w("next","takes"),tl:c.tools-0.6,six:w("tools","six",-0.1),f:c.wish-0.6,end:c.breath-0.2};});
+  const B1=OS_NINE[0],held=os_heldTitled(["Who","decides"],os_bindCol(B1));
+  gv_shots(ctx,S,t,sc.dur,[
+    // his office: nine binders on the shelf light up, one for each film to come; he takes the first down
+    {at:0,place:"office",keys:[[0,1120,520,1.2],[P.take+0.5,1270,560,1.4]],d:1.8,draw:(x,tt)=>{const n=j=>fin(tt,P.nine+0.12*j,0.35),got=tt>=P.take+0.55,
+        r1=fin(tt,P.take-0.1,0.5),r2=fin(tt,P.take+0.55,0.5);
+      os_chartSmall(x,1);os_ansSmall(x);os_score(x);
+      os_binders(x,{missing:i=>i===11||(got&&i===B1),glow:i=>{const j=OS_NINE.indexOf(i);return j<0?0:0.85*n(j);},
+        out:i=>{const j=OS_NINE.indexOf(i);return j<0?0:Math.max(0.5*n(j),i===B1?fin(tt,P.take+0.1,0.35):0);}});
+      person(x,"yusuf",1250,905,0.8,got?{pose:"reach",pose2:"hold",mix:r2,t:tt,carry:held}:{pose:"listen",pose2:"reach",mix:r1,t:tt});}},
+    // the data team's board, close: six cards, one for each film on the tools
+    {at:P.tl,place:"boardData",keys:[[P.tl,960,500,1.04],[P.tl+0.1,960,490,1]],d:2.4,push:0.02,draw:(x,tt)=>{os_toolsHead(x,fin(tt,P.tl+0.3,0.6));
+      for(let k=0;k<6;k++)os_toolCard(x,k,fin(tt,P.six+0.3*k,0.35));}},
+    // the floor: he takes the binder to where the work is done; Jun looks up
+    {at:P.f,place:"floor",keys:[[P.f,1000,560,1.2],[P.f+0.1,1100,555,1.22]],d:4,draw:(x,tt)=>{const F=GV_FL,wk=gv_walk(tt,P.f+0.2,880,1400,150);
+      os_floor(x,tt,{pose:{jun:{pose2:"listen",mix:fin(tt,wk.end-0.8,0.6)}}});os_carrier(x,"yusuf",wk,F.walk,0.62,held,{t:tt});}}]);
+  gv_end(ctx,S,t,P.end,"Off the shelf","A policy that doesn't run anywhere is a wish.","Film 1 of 16");
+  wc_paperOver(ctx,S);});

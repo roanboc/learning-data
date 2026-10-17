@@ -183,17 +183,21 @@ El equipo de datos trabaja en un ciclo de diez pasos, de una pregunta a una nuev
 La gobernanza no necesita otra reunión. Necesita una tachuela en los pasos correctos:
 
 47
-00:04:34,128 --> 00:04:44,253
-un término al hacer la pregunta, una clasificación en la fuente, un dueño y un contrato, una regla como prueba, una aprobación en la revisión y una versión cuando cambia.
+00:04:34,128 --> 00:04:39,591
+un término al hacer la pregunta, una clasificación en la fuente, un dueño y un contrato,
 
 48
-00:04:49,953 --> 00:04:55,686
-En nueve películas más, Yusuf baja la carpeta del estante, un tipo de política a la vez.
+00:04:39,791 --> 00:04:44,163
+una regla como prueba, una aprobación en la revisión y una versión cuando cambia.
 
 49
-00:04:56,886 --> 00:05:01,057
-Luego, seis más muestran cómo construirlas, con dbt y Databricks.
+00:04:49,863 --> 00:04:55,596
+En nueve películas más, Yusuf baja la carpeta del estante, un tipo de política a la vez.
 
 50
-00:05:02,357 --> 00:05:04,912
+00:04:56,796 --> 00:05:00,967
+Luego, seis más muestran cómo construirlas, con dbt y Databricks.
+
+51
+00:05:02,267 --> 00:05:04,822
 Una política que no se ejecuta en ningún lado es un deseo.

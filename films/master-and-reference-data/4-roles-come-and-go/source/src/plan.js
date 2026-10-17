@@ -284,13 +284,15 @@ const M4_TUT=M4_TERMS.map(([s,a,b],i)=>({k:"t"+i,r:"tutor",s,a,b,A:m4_d(a),B:m4_
 // the story's today: after the census report was published, in April 2026; census date, and the same day a year before
 const M4_NOW=m4_d("2026-04-20"),M4_CEN=m4_d("2026-03-31"),M4_CEN0=m4_d("2025-03-31");
 // her white figure at the left: each band on her sits at the height of its row
-const M4_FX=200,M4_FY=872,M4_FS=1.25,M4_LX=330,M4_X0=760,M4_X1=1880,M4_AXY=732;
+const M4_FX=200,M4_FY=872,M4_FS=1.25,M4_LX=330,M4_X0=760,M4_XR=1880,M4_AXY=732;
 const m4_rowY=i=>wc_bandY("linh",M4_FS,M4_FY,i),M4_ROWH=44;
-// the years in view, set by each scene: the line of years can close in on a few months, so the figure and the rows stay where they are
-let M4_R=[2018.5,2027];
+// the years in view, set by each scene: the line of years can close in on a few months, so the figure and the rows stay where they are;
+// and where the timeline ends on the right, which moves in only when someone needs to stand there
+let M4_R=[2018.5,2027],M4_X1=M4_XR;
 const m4_x=y=>M4_X0+(y-M4_R[0])/(M4_R[1]-M4_R[0])*(M4_X1-M4_X0),m4_pxy=()=>(M4_X1-M4_X0)/(M4_R[1]-M4_R[0]);
-// keys are [time, from year, to year], each change eased over d seconds, as the camera moves
-function m4_range(t,keys,d){d=d||1.6;let a=keys[0][1],b=keys[0][2];for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;
+// keys are [time, from year, to year], each change eased over d seconds, as the camera moves; x1: the timeline's right end, if not the
+// usual one
+function m4_range(t,keys,d,x1){M4_X1=x1||M4_XR;d=d||1.6;let a=keys[0][1],b=keys[0][2];for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;
   // ease the span's logarithm, so closing in feels even
   const s0=Math.log(b-a),s1=Math.log(keys[i][2]-keys[i][1]),m0=(a+b)/2,m1=(keys[i][1]+keys[i][2])/2,s=Math.exp(lerp(s0,s1,u)),m=lerp(m0,m1,u);a=m-s/2;b=m+s/2;}
   M4_R=[a,b];return M4_R;}
@@ -299,9 +301,9 @@ function m4_fig(ctx,a,o){wc_white(ctx,"linh",M4_FX,M4_FY,M4_FS,M4_ROWS.map((r,i)
 // which of her rows have a role open on date d (soft at the edges, so bands never blink); split: the tutor as HR's contracts
 function m4_periods(split){return split?M4_PER.filter(p=>p.k!=="tut").concat(M4_TUT):M4_PER;}
 function m4_openAt(d,split){const a=[0,0,0,0,0];for(const p of m4_periods(split)){const B=p.B==null?1e9:p.B;if(d>=p.A&&d<B){const e=Math.min(d-p.A,B-d);const i=M4_ROWS.indexOf(p.r);a[i]=Math.max(a[i],clamp(e/0.01,0,1));}}return a;}
-// a row's lane: a pale wash of its colour from the figure to the right edge, kept
-function m4_lane(ctx,i,a){if(a<=0.01)return;const r=M4_ROWS[i],c=wc_kept("lane"+i,M4_X1-M4_FX+40,70,q=>wc_wash(q,wc_resample(wc_rect(20,13,M4_X1-M4_FX,44),10),WC_ROLE[r],{kind:"chipwash",line:false,a:0.16,seed:50+i*7}));
-  withA(ctx,a,()=>ctx.drawImage(c,M4_FX-20,m4_rowY(i)-35));}
+// a row's lane: a pale wash of its colour from the figure to the timeline's right end, kept, and drawn to the end's width
+function m4_lane(ctx,i,a){if(a<=0.01)return;const r=M4_ROWS[i],c=wc_kept("lane"+i,M4_XR-M4_FX+40,70,q=>wc_wash(q,wc_resample(wc_rect(20,13,M4_XR-M4_FX,44),10),WC_ROLE[r],{kind:"chipwash",line:false,a:0.16,seed:50+i*7}));
+  withA(ctx,a,()=>ctx.drawImage(c,M4_FX-20,m4_rowY(i)-35,M4_X1-M4_FX+40,70));}
 // a row's name, and its owner beside it
 let M4_OX=0;
 function m4_label(ctx,i,a,oa){const r=M4_ROWS[i],y=m4_rowY(i)+10;if(!M4_OX)M4_OX=M4_LX+Math.max(...M4_ROWS.map(s=>tw(ctx,s,30,800)))+22;
@@ -312,25 +314,31 @@ const M4_STW=1900;
 function m4_strip(r){return wc_kept("strip:"+r,M4_STW,64,q=>wc_wash(q,wc_resample(wc_rect(0,10,M4_STW,M4_ROWH),10),mix(WC_ROLE[r],[255,255,255],0.12),{kind:"swatch",line:false,a:0.86,seed:7+r.length*13}));}
 function m4_slice(ctx,r,x0,x1,yc,a,seed){if(x1-x0<0.5||a<=0.004)return;const c=m4_strip(r);let sx=(seed*211)%(M4_STW-600),x=x0;ctx.save();ctx.globalAlpha*=a;
   while(x<x1-0.5){const w=Math.min(x1-x,M4_STW-sx);ctx.drawImage(c,sx,0,w,64,x,yc-32,w,64);x+=w;sx=0;}ctx.restore();}
-// a slice whose opacity changes along it: drawn in short pieces where it fades
-function m4_ramp(ctx,r,x0,x1,yc,seed,af){const n=Math.max(1,Math.ceil((x1-x0)/10));if(typeof af!=="function"){m4_slice(ctx,r,x0,x1,yc,af.flat,seed);return;}
-  for(let i=0;i<n;i++){const a=x0+(x1-x0)*i/n,b=x0+(x1-x0)*(i+1)/n;m4_slice(ctx,r,a,b+0.6,yc,af((a+b)/2),seed);}}
+// a paint faded along x by af (0 to 1): painted whole into a buffer, then masked by one gradient, so a fade shows no seams; brk: the x
+// where af jumps, kept crisp
+function m4_faded(ctx,x0,x1,y0,h,af,paint,brk){const w=Math.ceil(x1-x0)+2;if(w<3)return;const [c,q]=wc_buf("m4fade"+h,W,h);q.save();q.translate(1-x0,-y0);paint(q);q.restore();
+  q.globalCompositeOperation="destination-in";const g=q.createLinearGradient(0,0,w,0),stop=x=>g.addColorStop(clamp((x-x0+1)/w,0,1),"rgba(0,0,0,"+clamp(af(x),0,1).toFixed(4)+")");
+  const n=Math.max(2,Math.ceil(w/6));for(let i=0;i<=n;i++)stop(x0-1+i*w/n);(brk||[]).forEach(b=>{if(b>x0+1&&b<x1-1){stop(b-0.5);stop(b+0.5);}});
+  q.fillStyle=g;q.fillRect(0,0,w,h);ctx.drawImage(c,0,0,w,h,x0-1,y0,w,h);}
+// a slice whose opacity changes along it
+function m4_ramp(ctx,r,x0,x1,yc,seed,af,brk){if(typeof af!=="function"){m4_slice(ctx,r,x0,x1,yc,af.flat,seed);return;}
+  m4_faded(ctx,x0,x1,yc-32,64,af,q=>m4_slice(q,r,x0,x1,yc,1,seed),brk);}
 function m4_edge(ctx,pts,a,dash){if(a<=0.01)return;ctx.save();ctx.lineCap="round";ctx.lineJoin="round";if(dash)ctx.setLineDash(dash);
   for(const [k,aa,lw] of [[0,0.72,1.9],[1,0.3,1.1]]){ctx.beginPath();pts.forEach(([x,y],j)=>{const xx=x+k*0.8,yy=y-k*0.7;j?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy);});ctx.strokeStyle=rgba(WC_PENCIL,aa*a);ctx.lineWidth=lw;ctx.stroke();}ctx.restore();}
 function m4_per(ctx,p,yc,o){o=o||{};const pr=o.p==null?1:o.p,A=o.a==null?1:o.a;if(pr<=0||A<=0.004)return;const open=p.B==null,xs=m4_x(p.A),xeFull=open?M4_X1+60:m4_x(p.B),
     xe=lerp(xs,xeFull,ease(clamp(pr,0,1))),L=Math.max(xs,M4_X0-6),R=Math.min(xe,M4_X1);if(R-L<0.5)return;const xn=o.noFuture?1e9:m4_x(M4_NOW),seed=o.seed||p.k.length*7+Math.round(p.A*3);
-  // its opacity along it: fading in from the left edge of the years in view, fading out where an open role runs off the right, and
-  // faint where it's ahead of today
-  const fadeL=xs<M4_X0-6,fadeR=open&&xe>M4_X1-90;
-  const af=x=>A*(fadeL?clamp((x-M4_X0+6)/50,0,1):1)*(fadeR?clamp((M4_X1-x)/90,0,1):1)*(x>xn?0.4:1);
-  if(!fadeL&&!fadeR&&(R<=xn||L>=xn))m4_ramp(ctx,p.r,L,R,yc,seed,{flat:af((L+R)/2)});else m4_ramp(ctx,p.r,L,R,yc,seed,af);
-  // the pencil: top and bottom; the start if it's in view; the end if it has one, dashed if it's ahead
-  const t=yc-M4_ROWH/2,b=yc+M4_ROWH/2,ea=A*(fadeL?0.5:1);
-  const pc=Math.min(R,xn),fadeEdge=fadeR?Math.min(R,M4_X1-90):R;
-  if(pc>L){m4_edge(ctx,[[Math.max(L,fadeL?M4_X0+30:L),t],[Math.min(pc,fadeEdge),t]],ea);m4_edge(ctx,[[Math.max(L,fadeL?M4_X0+30:L),b],[Math.min(pc,fadeEdge),b]],ea);}
-  if(R>xn&&fadeEdge>Math.max(L,xn)){m4_edge(ctx,[[Math.max(L,xn),t],[fadeEdge,t]],ea*0.8,[8,8]);m4_edge(ctx,[[Math.max(L,xn),b],[fadeEdge,b]],ea*0.8,[8,8]);}
+  // its opacity along it: fading in from the left edge of the years in view, fading out where it runs off the right (an open role
+  // always; one with an end, only while its end is out of view), and faint where it's ahead of today
+  const fadeL=xs<M4_X0-6,fr=open?1:clamp((xeFull-M4_X1)/60,0,1),fadeR=fr>0&&xe>M4_X1-90;
+  const af=x=>A*(fadeL?clamp((x-M4_X0+6)/50,0,1):1)*(fadeR?lerp(1,clamp((M4_X1-x)/90,0,1),fr):1)*(x>xn?0.4:1);
+  if(!fadeL&&!fadeR&&(R<=xn||L>=xn))m4_ramp(ctx,p.r,L,R,yc,seed,{flat:af((L+R)/2)});else m4_ramp(ctx,p.r,L,R,yc,seed,af,[xn]);
+  // the pencil: top and bottom, solid to today and dashed after; the start if it's in view; the end if it has one and it's in view
+  const t=yc-M4_ROWH/2,b=yc+M4_ROWH/2,ea=A*(fadeL?0.5:1),x0=fadeL?Math.max(L,M4_X0+30):L;
+  const fadeEdge=fadeR?Math.min(R,lerp(R,M4_X1-90,fr)):R,x1=Math.min(R,xn,fadeEdge),x2=Math.max(x0,xn);
+  if(x1>x0+1){m4_edge(ctx,[[x0,t],[x1,t]],ea);m4_edge(ctx,[[x0,b],[x1,b]],ea);}
+  if(fadeEdge>x2+1){m4_edge(ctx,[[x2,t],[fadeEdge,t]],ea*0.8,[8,8]);m4_edge(ctx,[[x2,b],[fadeEdge,b]],ea*0.8,[8,8]);}
   if(!fadeL&&xs>=M4_X0-6)m4_edge(ctx,[[xs,t],[xs,b]],ea);
-  if(!open&&pr>=0.98&&xeFull<=M4_X1)m4_edge(ctx,[[xeFull,t],[xeFull,b]],ea,xeFull>xn?[8,8]:null);}
+  if(!open&&pr>=0.98&&xeFull<=M4_X1){const ee=ea*clamp((xeFull-M4_X0-16)/40,0,1)*clamp((M4_X1-xeFull)/20,0,1);if(ee>0.01)m4_edge(ctx,[[xeFull,t],[xeFull,b]],ee,xeFull>xn?[8,8]:null);}}
 // the line of years: a pencil line with a tick at each new year, each year's name in the middle of what's in view of it; when it closes
 // in on months, the quarters are named too, and the years move to a second line
 function m4_axis(ctx,a){if(a<=0.01)return;const [ya,yb]=M4_R,q=sstep(300,460,m4_pxy());withA(ctx,a,()=>{ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.75);ctx.lineWidth=2.4;ctx.lineCap="round";
@@ -358,38 +366,41 @@ function m4_arrow(ctx,x0,y0,x1,y1,p,o){o=o||{};if(p<=0)return;const q=ease(clamp
 function m4_loop(ctx,x0,y0,x1,y1,p,o){o=o||{};if(p<=0)return;const cx=(x0+x1)/2,cy=(y0+y1)/2;wc_ring(ctx,cx,cy,(x1-x0)/2,(y1-y0)/2,p,{seed:o.seed||17,a:o.a,col:o.col});}
 
 // the tutor row: one band (film 1's picture), or HR's contracts, one a semester; split (0 to 1) breaks the band into them, each piece closing
-// in from the middle of its gaps onto its own dates, and names each piece's semester once it's wide enough to read
-function m4_tutor(ctx,pr,split,a){if(pr<=0||a<=0.01)return;const y=m4_rowY(1),T=M4_TUT,n=T.length;
+// in from the middle of its gaps onto its own dates, and names each piece's semester once it's wide enough to read; a name steps aside
+// from a date's line at x avoid, to whichever side of it has room, as ak goes 0 to 1
+function m4_tutor(ctx,pr,split,a,avoid,ak){if(pr<=0||a<=0.01)return;const y=m4_rowY(1),T=M4_TUT,n=T.length;ak=avoid==null?0:(ak==null?1:clamp(ak,0,1));
   if(split<=0){m4_per(ctx,M4_PER[3],y,{p:pr,a});return;}
   const u=ease(clamp(split,0,1));
   T.forEach((c,i)=>{const c0=i===0?c.A:(T[i-1].B+c.A)/2,last=i===n-1,A=lerp(c0,c.A,u),seed=40+i*13;let B;
     if(last){const v=clamp(u*2,0,1);B=lerp(M4_R[1]+0.5,c.B,u);if(v<1)m4_per(ctx,{k:c.k,r:"tutor",A,B:null},y,{a:a*(1-v),seed});if(v>0)m4_per(ctx,{k:c.k,r:"tutor",A,B},y,{a:a*v,seed});}
     else{B=lerp((c.B+T[i+1].A)/2,c.B,u);m4_per(ctx,{k:c.k,r:"tutor",A,B},y,{a,seed});}
-    const xa=Math.max(m4_x(A),M4_X0),xb=Math.min(m4_x(B),M4_X1),wd=xb-xa,la=a*clamp((u-0.3)/0.4,0,1)*clamp((wd-56)/24,0,1)*(m4_x((A+B)/2)>m4_x(M4_NOW)?0.7:1);
-    if(la>0.01)withA(ctx,la,()=>wc_T(ctx,c.s,(xa+xb)/2,y+10,{w:800,size:28,align:"center",col:WC_DARK}));});}
+    const xa=Math.max(m4_x(A),M4_X0),xb=Math.min(m4_x(B),M4_X1),wd=xb-xa,la=a*clamp((u-0.3)/0.4,0,1)*clamp((wd-56)/24,0,1)*clamp((m4_x(A)-M4_X0+40)/30,0,1)*(m4_x((A+B)/2)>m4_x(M4_NOW)?0.7:1);
+    if(la<=0.01)return;const name=(x,k)=>{if(la*k>0.01)withA(ctx,la*k,()=>wc_T(ctx,c.s,x,y+10,{w:800,size:28,align:"center",col:WC_DARK}));};
+    const mid=(xa+xb)/2;if(ak<=0||avoid<xa-30||avoid>xb+30){name(mid,1);return;}
+    // the room either side of the line, clear of its dot; the name crosses over as the line passes the piece's middle
+    const hw=24,gap=18,rL=avoid-gap-(xa+4),rR=(xb-4)-(avoid+gap),wR=clamp((mid-avoid)/24+0.5,0,1);name(mid,1-ak);
+    name(Math.min(mid,(xa+4+avoid-gap)/2),ak*(1-wR)*clamp((rL-2*hw)/10,0,1));name(Math.max(mid,(avoid+gap+xb-4)/2),ak*wR*clamp((rR-2*hw)/10,0,1));});}
 // a soft light behind a figure: the person, staying
 function m4_glow(ctx,x,y,a,r){if(a<=0.01)return;r=r||330;ctx.save();const g=ctx.createRadialGradient(x,y,10,x,y,r);g.addColorStop(0,rgba([255,250,232],0.9*a));g.addColorStop(0.6,rgba([255,246,220],0.45*a));
   g.addColorStop(1,rgba([255,246,220],0));ctx.fillStyle=g;ctx.fillRect(x-r,y-r,r*2,r*2);ctx.restore();}
-// today, on the line of years: a small pencil mark under it, and the word
-function m4_today(ctx,a){const x=m4_x(M4_NOW);if(a<=0.01||x<M4_X0||x>M4_X1)return;withA(ctx,a,()=>{ctx.save();ctx.fillStyle=rgba(WC_PENCIL,0.85);ctx.beginPath();ctx.moveTo(x,M4_AXY+6);
-  ctx.lineTo(x-9,M4_AXY+22);ctx.lineTo(x+9,M4_AXY+22);ctx.closePath();ctx.fill();ctx.restore();wc_T(ctx,"today",x,M4_AXY+80,{w:700,size:28,align:"center",col:WC_INK});});}
-// paper lifted back on the right of the timeline, so someone can stand there: a soft-edged mask, kept
-function m4_clear(ctx,x0,a){if(a<=0.01)return;const w=W-x0+40,h=640,c=wc_kept("clear"+x0,w,h,q=>{const g=q.createLinearGradient(0,0,150,0);g.addColorStop(0,rgba(WC_PAPER,0));
-    g.addColorStop(1,rgba(WC_PAPER,0.95));q.fillStyle=g;q.fillRect(0,0,w,h);q.globalCompositeOperation="destination-in";const v=q.createLinearGradient(0,0,0,h);v.addColorStop(0,"rgba(0,0,0,0)");
-    v.addColorStop(0.12,"rgba(0,0,0,1)");v.addColorStop(0.88,"rgba(0,0,0,1)");v.addColorStop(1,"rgba(0,0,0,0)");q.fillStyle=v;q.fillRect(0,0,w,h);});
-  withA(ctx,a,()=>ctx.drawImage(c,x0,300));}
+// today, on the timeline, as the last chapter draws it: a pencil line down through the rows, drawn on as p goes 0 to 1, and its tag
+// above them (ta: the tag's own fade)
+const M4_LTY=330,M4_LY0=358;
+function m4_today(ctx,p,ta){const x=m4_x(M4_NOW);if(p<=0||x<M4_X0||x>M4_X1)return;m4_rule(ctx,x,M4_LY0,M4_AXY+12,p,{lw:3.4});
+  if(ta>0.01)withA(ctx,ta,()=>m4_tagAt(ctx,x,M4_LTY,"today",{size:28,w:700,wash:WC_BADGE,washA:0.5}));}
 // Linh's timeline, all of it: the rows' lanes, her figure, the rows' names and owners, the periods, the line of years. o.row dims a row
 // (0 to 1); o.lane, o.lab and o.own bring each row's lane, name and owner in; o.per: how far each period is painted, by key (o.all: every
-// period); o.over: a period's dates changed, by key; o.split: the tutor band broken into contracts; o.fig: her bands, by row; o.axis: the
-// line of years, drawn on from the left; o.glow: the light behind her
+// period); o.over: a period's dates, or its fade, changed, by key; o.split: the tutor band broken into contracts; o.fig: her bands, by row; o.axis: the
+// line of years, drawn on from the left; o.glow: the light behind her; o.avoid: the x of a date's line, which the tutor's names step
+// aside from as o.avoidK goes 0 to 1
 function m4_tl(ctx,t,o){const row=i=>o.row?o.row[i]:1,P=o.per||{},pv=k=>P[k]==null?(o.all?1:0):P[k];
   for(let i=0;i<5;i++)m4_lane(ctx,i,(o.lane?o.lane[i]:1)*row(i));
   m4_glow(ctx,M4_FX,M4_FY-360,o.glow||0);
   m4_fig(ctx,(o.fig||[0,0,0,0,0]).map((v,i)=>v*row(i)),{a:o.figA==null?1:o.figA});
   for(let i=0;i<5;i++)if(row(i)>0.01)withA(ctx,row(i),()=>m4_label(ctx,i,o.lab?o.lab[i]:1,o.own?o.own[i]:(o.lab?o.lab[i]:1)));
   for(const p of M4_PER){if(p.k==="tut")continue;const v=pv(p.k);if(v<=0)continue;const i=M4_ROWS.indexOf(p.r),q=o.over&&o.over[p.k]?Object.assign({},p,o.over[p.k]):p;
-    m4_per(ctx,q,m4_rowY(i),{p:v,a:row(i)*(q.a==null?1:q.a),seed:p.k.length*7+Math.round(p.A*3)});}
-  m4_tutor(ctx,pv("tut"),o.split||0,row(1));
+    m4_per(ctx,q,m4_rowY(i),{p:v,a:row(i)*(q.fade==null?1:q.fade),seed:p.k.length*7+Math.round(p.A*3)});}
+  m4_tutor(ctx,pv("tut"),o.split||0,row(1),o.avoid,o.avoidK);
   const ax=o.axis==null?1:o.axis;if(ax>0){ctx.save();ctx.beginPath();ctx.rect(0,0,lerp(M4_X0-10,M4_X1+40,ease(clamp(ax,0,1))),H);ctx.clip();m4_axis(ctx,1);ctx.restore();}}
 
 /* ---------- 4. the shape every role takes ---------- */
@@ -450,8 +461,8 @@ function m4_energySheet(ctx,o){const S=M4_ES;wc_panel(ctx,S.x,S.y,S.w,S.h,{kind:
 // an energy-yellow band on the sheet, from x0 to x1, faded in at the left (it started before this year) and, if open, out at the right
 function m4_eband(ctx,x0,x1,y,a,o){if(a<=0.01||x1-x0<1)return;m4_eslice(ctx,x0,x1,y,a,o||{});}
 function m4_estrip(){return wc_kept("strip:energy",M4_STW,64,q=>wc_wash(q,wc_resample(wc_rect(0,10,M4_STW,40),10),M4_EN,{kind:"swatch",line:false,a:0.78,seed:91}));}
-function m4_eslice(ctx,x0,x1,y,a,o){const c=m4_estrip(),n=Math.max(1,Math.ceil((x1-x0)/10));for(let i=0;i<n;i++){const xa=x0+(x1-x0)*i/n,xb=x0+(x1-x0)*(i+1)/n,xm=(xa+xb)/2;
-    const f=a*clamp((xm-M4_EX0+4)/60,0,1)*(o.open?clamp((M4_EX1+10-xm)/80,0,1):1);if(f<=0.004)continue;ctx.save();ctx.globalAlpha*=f;ctx.drawImage(c,200+(xa-x0),0,xb-xa+0.6,64,xa,y-32,xb-xa+0.6,64);ctx.restore();}
+function m4_eslice(ctx,x0,x1,y,a,o){const c=m4_estrip();
+  m4_faded(ctx,x0,x1,y-32,64,x=>a*clamp((x-M4_EX0+4)/60,0,1)*(o.open?clamp((M4_EX1+10-x)/80,0,1):1),q=>q.drawImage(c,200,0,x1-x0,64,x0,y-32,x1-x0,64));
   if(!o.open&&x1<M4_EX1)m4_edge(ctx,[[x1,y-20],[x1,y+20]],a);}
 // the heart: life support at home
 const M4_HEART=[238,96,78];

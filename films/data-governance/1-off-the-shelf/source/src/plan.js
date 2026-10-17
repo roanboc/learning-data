@@ -4,8 +4,8 @@
    university's own places (the series' rooms.js): the campus, Yusuf's office, the floor of offices, Planning, the registrar's office,
    the data team's room, and his desk from above. The pictures are the film's own things: the charter and the jugs, the king's
    standards, the bushels, the scale, the inspector's case and the Act; the shelf of binders, the score, the chart, the minutes, the two
-   reports, the glossary's term, the government's manual, binder 12, DAMA's book and its wheel, the trays, the loop of ten steps and the
-   cards. Every name starts with os_ or OS_. */
+   reports, the glossary's term, the government's manual, binder 12 and the highlighters, DAMA's book and its wheel, the loop of ten
+   steps and the cards. Every name starts with os_ or OS_. */
 
 /* ---------- 1215: the market by the town wall ---------- */
 // the ground, the market cross (its steps' top is where the crier stands), the two stalls' tables

@@ -1,0 +1,201 @@
+# Master and reference data · Roles come and go: script
+
+*The script of the fourth film of the series on master and reference data, working title The same one, everywhere: about 5½ minutes, in ten chapters, in English. Written on 17 October 2026 from the approved plan for films 2 to 9 ([proposal](../proposal.md#4-roles-come-and-go)). The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 10. Made to read on a phone, like the other films: on-screen text at least 28 px in the frame, and the camera moves in on whatever the narration is about.*
+
+## The promise
+
+Every line passes two tests: anyone who has ever been a student and an employee of the same place, or left a job and come back, can follow it, and an experienced master data manager finds nothing wrong in it. A role is how a person relates to the organisation for a time, so it has a start, an end and an owner, and the person outlives all of them. A status that each system overwrites every night is true for one day only: ask it about another day and it still answers for today. Give every role the same shape (the person, the role type, its owner, what it relates to, when it's valid from and to), and any question can be asked as at any date: census date, last year, today. Counted that way, someone with three roles open is one person, not three. **A role has a start and an end; the person stays.**
+
+## The story in one paragraph
+
+In the Roman Republic, an ambitious citizen climbed a ladder of public offices, each held for one year: Marcus Porcius Cato was quaestor in 204 BC, aedile, praetor, consul in 195 and censor in 184, and the censors wrote down every citizen: the census. Today, at the university, census date is 31 March 2026, the day it counts who's enrolled. Planning asks how many of its students also work there; the alumni office, which invited Linh back for the master's she was already doing (*One person, many roles*), asks which of its alumni are studying again. Each night, every system tells the platform how it sees Linh that day, as a status written over the next night, so when Planning asks about last year's census date, every answer still says today, and Linh counts as a student four months before she came back. Each office knows when its role starts and ends, so Noor and Mei give every role the same shape, and Linh's roles become dated bands under her white figure: applicant, student from 2019 to 2022, alumna, casual tutor from 2023, applicant and student again from July 2025, researcher from March to December 2026. The first film drew her tutoring as one band; HR offers her work one semester at a time, so the tutor role starts and ends every term, and in January she isn't staff. Planning draws one line at census date: student, tutor, researcher and alumna are open, so she counts once, as a student who works here; moved back a year, the line finds a tutor and an alumna, and last year's number stays as it was. The alumni office's question becomes a filter: alumni with an open student role. Each role says what it relates to (a course, a contract, a project), and people relate to each other: Ana Ruiz supervises Linh on the project, a relationship with dates of its own. In an energy company, the account holder moves out and his role ends, but the person who stays depends on life support, and her need goes on. On the platform it's one table, a row for each role, tested in dbt, asked as at any date, with the day each row was recorded kept beside the day it began. Today Linh is a student, a tutor, a researcher and an alumna; in December the project ends. Roles come and go; the person stays.
+
+## What each object stands for
+
+| Object | Stands for |
+|---|---|
+| A stone tablet, one name and five offices, each with its year | A person and a sequence of roles, each with a start and an end |
+| The tablet's lines lifting into bands on a line of years, 205 to 183 BC | The same record, drawn as a timeline: who held what, when |
+| A census list, name by name, with age and property | The first count of everyone, as at one time |
+| A calendar page, "31 March · census date" | The day the university counts |
+| Planning's card and the alumni office's card, each with its question | Two questions about who someone is on a date |
+| Four system cards, each with a status that a pencil rubs out and writes again every night | A status, true for a day and written over the next |
+| A small moon, "each night" | Each system's nightly copy to the platform |
+| Planning's card asking about 31 March 2025, and a red ring on "student" | Asked about another day, a status still answers for today |
+| A blank form, "person · role type · owner · starts · ends" | One shape for every role |
+| Linh's white figure, and bands that run from her into rows of a timeline | Her roles, dated, each in its colour, owned by one office |
+| An owner's tag at each row: admissions, registrar's office, alumni office, HR, research office | Who owns each role |
+| The tutor band breaking into eight pieces, one per semester | A role that starts and ends with each contract |
+| A pencil line drawn top to bottom at 31 March 2026, and her bands lit where it crosses an open role | As at one date: which roles are open |
+| Three rows from three lists folding into one figure | One person with three roles, counted once |
+| The line sliding back to 31 March 2025 | As it was: last year's question, answered as it was |
+| A filter card, "alumni with an open student role" | A question about people, asked of their roles |
+| "relates to" tags: a master's, a unit and a semester, a project | What each role is for |
+| Ana's white figure, and a dated line between her and Linh, "supervises" | A relationship between two people, with its own dates |
+| A house, a meter, an account holder walking away, the person who stays, and a heart | Elsewhere: a role ends, the person and the need don't |
+| A table with a row for each role, two pencil ticks beside its tests | The enabler: one dated role table, tested in dbt |
+| Three date pins: 31 Mar 2026, 31 Mar 2025, today | Any question, as at any date |
+| "recorded 6 Apr" beside "valid from 23 Feb" | When a row was known, kept apart from when it was true |
+| The line at today, bands ending to the right, the white figure unchanged | Roles come and go; the person stays |
+
+## The look
+
+The series' watercolour, as in *One person, many roles* ([look](../look/)): daylight landscapes in soft washes on warm paper, pencil lines, and the role colours as the strongest washes on screen: student teal, applicant amber, researcher coral, tutor violet, alumna green. Linh, as the person, is the white of the paper in a pencil line, banded in the colours of the roles she holds; in this film her bands answer the date the census line stands on, so she wears only the roles that are open on that day.
+
+- **The timeline is the film's own component.** Linh's white figure stands at the left; each band on her body runs out to the right as a row of the timeline, at the same height, so a band on her and a period on the line read as one thing. The rows keep film 1's order (student, tutor, researcher, alumna), with applicant last. Each period is a wash in its role's colour with a pencil edge; a period still open runs to the right edge and fades; a period not yet begun is dashed. Labels are dark ink, 28 px or more.
+- **Rome** is the same watercolour, with the year in the corner: the Forum in daylight, temples of stucco and terracotta (not the white marble of later centuries), cypresses and stone pines on the hills, and Cato in a toga: off-white wool, a tunic under it, the dark red shoes of a senator, and red hair (Plutarch). The offices are one colour, a terracotta wash, because they're one kind of thing and wear no role's colour.
+- **People.** Noor (cyan) and Mei (gold) as in film 1; Jun (cyan), from *In the weeds of data crafting*, builds the table; Ana Ruiz, the Head of School from *When things go wrong*, is drawn as the person too, white, when the film shows the relationship between her and Linh. The energy company's two people are white figures in its yellow, as in film 1's *Elsewhere*.
+- **The error** is drawn in red ink, as in film 1: a ring and a note on the one wrong answer.
+
+## Script
+
+### 1 · A ladder of offices
+
+**Narration.** In the Roman Republic, an ambitious citizen climbed a ladder of public offices, each held for one year. Marcus Porcius Cato was quaestor, then aedile, then praetor, and in 195 BC, consul. Each office had its year, and his name: one man, a sequence of roles, each with a start and an end. His last office was censor. Censors wrote down every citizen, their age and what they owned: the census.
+
+**Picture.** The Forum in watercolour daylight, "204 BC · Rome" in the corner: the Capitoline hill with its temple, terracotta roofs, a portico, cypresses and stone pines. Cato in his toga on the paving. A stone tablet stands at the right, carved with his name; as each office is named, its line is cut: *204 BC · quaestor*, *199 BC · aedile*, *198 BC · praetor*, *195 BC · consul*. On "a sequence of roles", the four lines lift off the stone and settle as terracotta bands on a line of years under him, each a year long, with gaps between. On "censor", "184 BC" in the corner, and a fifth band, *censor*, eighteen months long. A census list unrolls beside him, name by name, with an age and a holding on each line, and "census" is written large under it in pencil. Wordless breather, then the title card, *Roles come and go*.
+
+**On screen.** 204 BC · Rome · Marcus Porcius Cato · quaestor · aedile · praetor · consul · 195 BC · one man, a sequence of roles · censor · 184 BC · every citizen · age · property · census · Roles come and go · Film 4 of 9
+
+### 2 · Census date
+
+**Narration.** At the university, census date is the 31st of March: the day it counts who's enrolled, for its official numbers. Planning has a question for that day. How many of our students also work here? And the alumni office, which invited Linh back for a master's she was already doing, asks: which of our alumni are studying again?
+
+**Picture.** The campus of film 1. The word "census" carries over from Rome onto a calendar page, *31 March · census date*, pinned up at the left; "31 March 2026 · the university" in the corner. Linh crosses the lawn. Planning's card arrives at the right with its question; then the alumni office's card, with the ghost of film 1's email under it (*Come back for a master's*), and its question.
+
+**On screen.** 31 March 2026 · the university · census date · 31 March · Planning · How many of our students also work here? · Alumni office · Come back for a master's · Which of our alumni are studying again?
+
+### 3 · True for a day
+
+**Narration.** Each night, every system tells the platform how it sees Linh that day. The student system says enrolled. HR says casual staff. The research office, project member. The alumni office, graduate. Each answer is true for a day, and written over the next. So when Planning asks again about last year's census date, to compare, every answer still says today. Linh counts as a student in March 2025, four months before she came back.
+
+**Picture.** Plain paper. Four system cards in a row, each with its role's brushstroke and Linh's name: *student system*, *HR*, *research office*, *alumni office*. A small moon, "each night", and a dotted line from each card down to one box, *the platform's copy*. Each card's status writes in as it's named: *enrolled*, *casual staff*, *project member*, *graduate*. A pencil rubs each one out and writes it again, under a date that turns over: *30 Mar*, *31 Mar*, *1 Apr*. Planning's card arrives: *students who also work here · as at 31 Mar 2025*. It reads the four statuses, and ticks Linh as a student; a red ring closes on "student", and a red note: *she came back in Jul 2025*. A quiet pulse runs under the last two lines.
+
+**On screen.** each night · student system · HR · research office · alumni office · Linh Nguyen · enrolled · casual staff · project member · graduate · the platform's copy · Planning · students who also work here · as at 31 Mar 2025 · student · she came back in Jul 2025
+
+### 4 · A start and an end
+
+**Narration.** Yet each office knows when its role starts and ends. So Noor and Mei give every role the same shape: the person, the kind of role, the office that owns it, when it starts, and when it ends. Linh's roles become bands, under her. Applicant, then student, from 2019 to 2022. Then alumna. Casual tutor, from 2023. Applicant again in 2025, and student again, from July. And researcher, from March to December this year. Some follow each other, and some run at once. The person under them stays the same.
+
+**Picture.** Noor and Mei, and a blank form between them that fills in as it's said: *person · role type · owner · starts · ends*. The form shrinks to the top of the frame, and Linh's white figure stands at the left of a line of years, 2019 to 2026. As each role is named, its band paints onto her and runs out to the right as a dated period on its row, with its owner's tag at the start of the row: *applicant · admissions* (Aug 2018 to Feb 2019), *student · registrar's office* (Feb 2019 to Dec 2022), *alumna · alumni office* (from Dec 2022, open), *tutor · HR* (from Feb 2023, one band for now), *applicant* again (Jun to Jul 2025), *student* again (from Jul 2025, open), *researcher · research office* (Mar to Dec 2026, its end dashed: it's ahead). On "some follow each other", a pencil arrow joins applicant to student to alumna; on "some run at once", a soft bracket holds the four bands of 2026.
+
+**On screen.** person · role type · owner · starts · ends · applicant · admissions · student · registrar's office · alumna · alumni office · tutor · HR · researcher · research office · 2019 · 2020 · 2021 · 2022 · 2023 · 2024 · 2025 · 2026 · follow each other · at once
+
+### 5 · A contract each term
+
+**Narration.** The first film drew her tutoring as one band, since 2023. HR sees it differently: it offers her work one teaching period at a time, a new contract each semester, for one unit. So the tutor role starts and ends every semester. In January, between contracts, she isn't staff. On census date, she is.
+
+**Picture.** In on the tutor row. A small pencil note, *film 1: one band*, and the band breaks into eight pieces, one per semester, the gaps opening between them, each piece tagged *S1* or *S2*. HR's card: *an offer of work · each teaching period · one unit*. A pin at *15 Jan 2026* finds a gap: *not staff*. A pin at *31 Mar 2026* finds Semester 1's contract: *staff*.
+
+**On screen.** film 1: one band · S1 · S2 · HR · an offer of work · each teaching period · one unit · 15 Jan 2026 · not staff · 31 Mar 2026 · staff
+
+### 6 · One line, one date
+
+**Narration.** Now Planning draws one line across her bands, at census date. Student, tutor and researcher are open, and so is alumna. So Linh counts once, as a student who works here: one person with three roles, not three people. Move the line back a year, and she's a tutor and an alumna, not a student. Last year's number stays as it was. And the alumni office's question becomes a filter: alumni with an open student role. Linh is back, since July 2025.
+
+**Picture.** A pencil line is drawn top to bottom at 31 March 2026, with its tag, *census date · 31 Mar 2026*. Where it crosses an open period, a dot lands, and on her figure only those bands stay lit: student, tutor, researcher, alumna. Planning's card: three rows, *student · Linh*, *tutor · Linh*, *researcher · Linh*, fold into one, *1 person · a student who works here*. The line slides back to *31 Mar 2025*: her student and researcher bands fade from her figure; tutor and alumna stay. The card reads *as at 31 Mar 2025 · not a student*. The line returns. The alumni office's card: *alumni with an open student role*, and a tick beside *Linh · back since Jul 2025*.
+
+**On screen.** census date · 31 Mar 2026 · Planning · students who also work here · student · tutor · researcher · Linh · 1 person · a student who works here · 31 Mar 2025 · a tutor and an alumna · not a student · Alumni office · alumni with an open student role · Linh · back since Jul 2025
+
+*Planning's question is about people, so it counts persons; the roles open at one date are the filter. That's the difference between "three rows" and "one person".*
+
+### 7 · What a role is for
+
+**Narration.** Each role also says what it relates to. Her student role, a master's in health informatics. Each tutor contract, one unit in one semester. Her researcher role, one project. People relate to each other, too. On the project, Ana Ruiz supervises Linh. That relationship has its own dates, and ends with the project. Both people stay.
+
+**Picture.** The 2026 end of the timeline. A *relates to* tag hangs from each open period as it's named: *master's · health informatics*; *a first-year unit · S1 2026*; *project · wait times in emergency care*. Then Ana's white figure joins at the right, with her name card, *Ana Ruiz · Head of School · leads the project*, and a coral band of her own. A dotted line runs from her to Linh, and its tag writes in: *supervises · Mar–Dec 2026*. At "ends with the project", the line's far end, December, is dashed; both figures stay.
+
+**On screen.** relates to · master's · health informatics · a first-year unit · S1 2026 · project · wait times in emergency care · Ana Ruiz · Head of School · leads the project · supervises · Mar–Dec 2026
+
+### 8 · Elsewhere
+
+**Narration.** An energy company has the same problem. The account holder moves out in June, and his role ends that day. The person who stays depends on life support at home. Her need goes on, and so does the risk. Kept on his account, the need would close with it. Kept on her, it stays.
+
+**Picture.** A street of terraced houses in watercolour, in the energy company's yellow. A meter on the wall. Two white figures at the door: the account holder walks away down the street; the person who stays stands in the doorway. Under them, a short timeline: *account holder* (yellow, ends *14 Jun*), *occupant* (yellow, open), and a heart, *life support*. First the heart sits on the account holder's band and ends with it: a red ring, *closes with the account*. Then it moves to her band, and runs on: *kept on the person*.
+
+**On screen.** an energy company · account holder · 14 Jun · occupant · life support · closes with the account · kept on the person
+
+### 9 · One table, any date
+
+**Narration.** On the platform, it's one table, a row for each role: the person, the role type, its owner, what it relates to, and the dates it's valid from and to. Jun builds it in dbt, with two tests. A role can't end before it starts, and every role belongs to a person. Then every question takes a date: as at census date, as at last year, or as at today. Each row also keeps when it was recorded, so a contract entered late still counts from the day it began.
+
+**Picture.** Jun, edged in cyan, beside a sheet: `core_person_role`, with its columns (*person · role_type · owner · relates_to · valid_from · valid_to*) and Linh's rows, one per role, each with a dot in its colour; the tutor's rows say *one per semester since 2023*. Beside it, the model's YAML: `versions_do_not_overlap` and `relationships` to `core_person`, each with its plain words (*ends after it starts · belongs to a person*) and a pencil tick. Then the query, `where {{ valid_at(census_date()) }}`, and three date pins along its edge: *31 Mar 2026*, *31 Mar 2025*, *today*. Last, a column, *recorded_at*, on the Semester 1 2026 row: *recorded 6 Apr*, beside *valid from 23 Feb*.
+
+**On screen.** core_person_role · person · role_type · owner · relates_to · valid_from · valid_to · student · tutor · researcher · alumni · applicant · one per semester since 2023 · versions_do_not_overlap · ends after it starts · relationships · core_person · belongs to a person · valid_at(census_date()) · 31 Mar 2026 · 31 Mar 2025 · today · recorded_at · recorded 6 Apr · valid from 23 Feb
+
+*The tests are the project's own: `versions_do_not_overlap` (`tests/generic/versions_do_not_overlap.sql`) checks that every period ends after it starts and doesn't overlap the next one for the same role and thing; dbt's `relationships` checks that each row's person exists.*
+
+### 10 · The person stays
+
+**Narration.** Today, Linh is a student, a tutor, a researcher and an alumna. In December, the project ends. One day, she'll graduate again. Roles come and go. A role has a start and an end. The person stays.
+
+**Picture.** Back to the timeline, the line at *today*, and Linh's figure wearing four bands. On "December", the researcher period's dashed end fills in and closes; on "graduate again", the student period runs on to the right, dashed, ending somewhere ahead. The camera draws back until the whole line of years is in frame, bands starting and ending all along it, and the white figure unchanged at the left. The last line settles onto the end card. Wordless breather. End card.
+
+**On screen.** today · A role has a start and an end. The person stays.
+
+## Pause and think
+
+Four questions, one at the end of each of four chapters, as the site shows them (`site/assets/roles-come-and-go/think.en.js` and `think.es.js`):
+
+1. *After chapter 3, True for a day.* Planning ran last year's census count again, and Linh was in it as a student, months before she came back. What went wrong? (Each system sends the platform only how it sees her today, written over every night, so a question about last year still gets today's answer.) It ends by asking viewers what a yes-or-no list they keep would say about last year.
+2. *After chapter 5, A contract each term.* On 15 January 2026, between semesters, is Linh a tutor? (No: no contract is open that day; she's still the same person, and her next contract starts with Semester 1.)
+3. *After chapter 6, One line, one date.* On census date, Linh has four roles open. Planning counts students who also work here. How many times does she count? (Once: it counts people with a student role and a work role open on that day.) It ends by asking viewers which of their reports count roles when they mean people.
+4. *After chapter 9, One table, any date.* Linh's Semester 1 contract began on 23 February but was entered on 6 April, before the census report was published on 14 April. Is she in Planning's census-date count as staff? (Yes: it's valid from 23 February; `recorded_at` says when the platform learned of it, which matters only for "what did we know on 1 April?")
+
+## Labs (candidates)
+
+- **Which roles, on census day?** Drag a date line across three people's bands (Linh; a graduate who applied again but hasn't enrolled; a tutor between contracts) and choose which roles are open.
+- **Draw Linh's timeline.** Place her roles as dated bands from clues in her four systems.
+- **Status or dates?** Sort ten questions by whether a status kept for today can answer them.
+- **Write the as-at filter.** Compose the filter for "alumni with an open student role" as at a date, with `valid_at`.
+
+## Where it comes from in the project
+
+| On screen | In the example project |
+|---|---|
+| Census date, 31 March 2026 | `dbt_project.yml` line 19, the `census_date` var ("Planning's census date: the 'as at' of the Planning mart") |
+| As at a date: valid from inclusive, valid to exclusive | `macros/shared/time.sql`, `valid_at` (lines 7–13); used by `models/marts/planning/mart_planning__near_award.sql` |
+| *Recorded* beside *valid from* | `models/_shared/_shared__columns.md`, the `recorded_at` doc (lines 36–39): "a withdrawal entered a week after it happened is valid from the day it happened" |
+| The census report, published 14 April 2026 by the registrar's census team | `seeds/expected/planning/census_report.csv` (from *One row of what, and when*) |
+| A role can't end before it starts | `tests/generic/versions_do_not_overlap.sql` |
+| The role table, `core_person_role`, and the person, `core_person` | New: the series adds the person and a dated role table (the proposal's *What the example project gains*, for films 1, 2 and 4) |
+| Her tutor contracts, one per semester | New: the small HR source the series adds |
+| The research project and Ana Ruiz as its lead | New: the research office source the series adds |
+| The alumni office's question | New: the Advancement source the series adds |
+| The statuses each system sends nightly | Invented for the film, as the failure the dated roles fix |
+
+## Rigour to check before recording
+
+- **Cato's offices** (read 17 October 2026): quaestor 204 BC, plebeian aedile 199, praetor 198 (Sardinia), consul 195 with Lucius Valerius Flaccus, censor 184 ([Wikipedia, *Cato the Elder*](https://en.wikipedia.org/wiki/Cato_the_Elder); [Encyclopedia.com](https://www.encyclopedia.com/people/history/ancient-history-rome-biographies/cato-elder): "successively quaestor (204), aedile (199), praetor (198)"). He held no magistracy after the censorship and died in 149 BC, so "his last office" holds.
+- **The ladder, not overstated.** From the third century BC careers "followed more or less the same track": quaestor, aedile, praetor, consul ([Livius, *Cursus honorum*](https://www.livius.org/articles/concept/cursus-honorum/)); minimum ages were set in law only in 180 BC, by the *lex Villia annalis*, after Cato's career ([Wikipedia](https://en.wikipedia.org/wiki/Lex_Villia_Annalis)); sources disagree on the exact ages, so the film gives none. The aedileship wasn't required; Cato held it. The film says "a ladder" and "each held for one year", both true of these four offices.
+- **The census** (read 17 October 2026): censors "not only wrote down the names of the citizens, but also registered their property and age", every five years, and served eighteen months ([Livius, *Censor*](https://livius.org/articles/concept/censor)). The censor band is eighteen months long.
+- **Cato's look:** red hair and grey eyes, from Plutarch's *Life of Cato the Elder*, 1; the toga as off-white wool, a tunic under it, and a senator's dark red shoes. Temples of the time in stucco and terracotta, before Rome's marble.
+- **Census date** (read 17 October 2026): the last day to withdraw from a unit without financial penalty, and the date enrolments are counted for government reporting; 31 March at some Australian universities in some years ([Monash](https://www.monash.edu/students/admin/enrolments/dates/census/archive/2023), [ANU](https://www.anu.edu.au/students/program-administration/program-management/census-dates)), and the example project's own `census_date` (2026-03-31). The film says it plainly: "the day it counts who's enrolled, for its official numbers", with no jurisdiction.
+- **Tutors, one teaching period at a time** (read 17 October 2026): Sussex's terms for doctoral tutors, clause 9: "written Offers of Work will be made to a Doctoral Tutor for each module for each defined Teaching Period (usually a semester)" ([Sussex](https://sussex.ac.uk/humanresources/documents/terms-and-conditions-for-doctoral-tutors-2024.pdf)); Australian universities advertise casual tutoring one semester at a time ([ANU](https://jobs.anu.edu.au/jobs/casual-sessional-academic-in-school-of-sociology-canberra-act-act-australia), [Melbourne](https://msd.unimelb.edu.au/__data/assets/pdf_file/0020/5532005/ABP-PD-Sessional-Tutor-SM2-2026.pdf)). The film says "a new contract each semester", generic; neither university is named.
+- **Statuses written over each night:** a common way sources reach a platform (a nightly copy of each record as it is), and the reason *One row of what, and when* dates versions by when a change took effect. The film doesn't blame any system: each office does know its dates.
+- **Counting people, not rows:** Planning's question is about people; the roles open at one date are the filter. Said without a statistic.
+- **Gendered words:** Linh's band says "alumna" because it's hers; the role type in the table is "alumni", a word for anyone. The reference list of role types and its codes is *Lists everyone uses*' to settle; this film shows plain words.
+- **The supervisor:** a project lead who supervises the people on the project is common practice; Ana Ruiz is the Head of School from *When things go wrong*, here also the project's lead. The project, *wait times in emergency care*, is invented.
+- **Energy** (read 17 October 2026): retailers keep a register of homes with life support equipment, and move-outs are where it goes wrong: a new account holder has to register again, and the flag on the old account can lapse ([ERAWA, *Moving in or out*](https://www.erawa.com.au/customer-protection-codes/switched-on-consumer-guide/moving-in-or-out); AEMC submissions on life support reforms, 2020 and 2026). Generic in the film; no retailer or jurisdiction named.
+- **Dated roles in the pattern books:** Silverston's party role and party relationship patterns carry from and thru dates (*The Data Model Resource Book*, volumes 1 and 3). Not named in the film.
+- **Two kinds of time:** a role's dates say when it was true; `recorded_at` says when the platform learned of it (often called bitemporal, as *One row of what, and when*'s rigour sheet says). The film doesn't use Delta time travel for this: its history is kept for days, not years, by default (30 days of log, 7 of files), so the table keeps `recorded_at` itself.
+- **dbt:** `versions_do_not_overlap` is the project's own generic test; `relationships` is dbt's, written with `arguments:` as the project writes it.
+- **Colour:** the role washes and the energy yellow checked for contrast with the dark text on them (4.5:1 or better); every band is labelled, so nothing depends on colour alone.
+
+## Decided
+
+| Date | Decision |
+|---|---|
+| 17 October 2026 | The opening follows Cato the Elder's offices, 204 to 184 BC, and ends on the census his last office kept, so the word carries into census date. |
+| 17 October 2026 | The failure is a status each system overwrites nightly: true for a day, so last year's question gets today's answer. No system is blamed; each office knows its own dates. |
+| 17 October 2026 | The tutor role is corrected in the open: one band in film 1, one period per semester here, from an offer of work each teaching period. |
+| 17 October 2026 | The supervisor is Ana Ruiz, the Head of School from *When things go wrong*, as the project's lead. |
+| 17 October 2026 | The role table uses the project's own conventions: `valid_from` inclusive, `valid_to` exclusive, `recorded_at`, `valid_at(census_date())`, and its `versions_do_not_overlap` test. The role type for alumni is "alumni" in the data; Linh's band says "alumna". |
+| 17 October 2026 | No student numbers on screen: *Who is it?* decides which of her two numbers the registry keeps. |
+| 17 October 2026 | Pause and think after chapters 3, 5, 6 and 9, one question each; no labs until the series' labs thread adds them. |
+
+## Next
+
+1. The author watches the film, and approves it or asks for corrections.
+2. The project's additions it needs: the person and the dated role table (`core_person`, `core_person_role`), with the HR, research office and Advancement sources film 1 asked for.
+3. Labs, with the series' interactive learning: the candidates above.

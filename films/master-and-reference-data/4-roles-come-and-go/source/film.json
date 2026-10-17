@@ -1,0 +1,18 @@
+{
+  "key": "roles-come-and-go",
+  "title": "Roles come and go",
+  "sub": "The same one, everywhere, a series on master and reference data: a Roman career of offices, each with its year; census date at the university, and two questions about who someone is on a day; statuses that are true for a day; every role given a person, an owner, a start and an end; a tutor contract each semester; one line at census date, and the same line a year back; what each role relates to, and the people who relate to each other; the same in an energy company; and one dated role table, tested in dbt and asked as at any date.",
+  "howto": "The film is drawn in watercolour. Each role has its own colour: student teal, applicant amber, tutor violet, researcher coral, alumna green. The person, as the master record, is left as white paper and banded in the colours of the roles she holds on the day the line stands on. Cyan edges the technical side, gold the business side.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": ["line", "once", 2.2],
+  "say": [
+    ["\\bNguyen\\b", "Nwin"],
+    ["\\bLinh's\\b", "Lin's"],
+    ["\\bLinh\\b", "Lin"],
+    ["\\bHR\\b", "H R"],
+    ["\\bCato\\b", "Kayto"]
+  ]
+}

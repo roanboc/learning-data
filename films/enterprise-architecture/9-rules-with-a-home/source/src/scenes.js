@@ -78,7 +78,7 @@ scene("bill",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);w
   ctx.save();drift(ctx,t,sc,{z:0.025,y:440});focus(ctx,t,[[0,960,540,1],[tHh-0.6,990,500,1.08],[tN-0.8,970,510,1.04]],1.6);
   person(ctx,"tomas",250,1030,0.78,{t,pose:"stand",pose2:"explain",mix:d9_pz(t,0.5,3.6),expr:t>tNc-0.2?"concerned":"calm"});
   // the note: where does each rule belong? Then aside, to the corner
-  const nt=ease(fin(t,tD1-0.7,1.5));arrive(ctx,960,330,t,0.3,()=>{ctx.save();ctx.translate(lerp(960,1610,nt),lerp(330,112,nt));ctx.scale(lerp(1,0.5,nt),lerp(1,0.5,nt));sticky(ctx,0,0,760,210,D9_Q,{col:NOTEC[0],size:50,st:0,rot:-0.02});ctx.restore();},{dy:-30});
+  const nt=ease(fin(t,tD1-0.7,1.5));arrive(ctx,960,330,t,0.3,()=>{ctx.save();ctx.translate(lerp(960,1590,nt),lerp(330,118,nt));ctx.scale(lerp(1,0.58,nt),lerp(1,0.58,nt));sticky(ctx,0,0,760,210,D9_Q,{col:NOTEC[0],size:50,st:0,rot:-0.02});ctx.restore();},{dy:-30});
   // day one's rule, and the bill beside it, flagged wrong
   const rA=1-fin(t,tFa-0.3,0.8);if(rA>0.01)arrive(ctx,730,387,t,tSh-0.2,()=>withA(ctx,rA,()=>ruleCard(ctx,330,300-30*(1-rA),800,D9_R0,{kicker:"data rule",size:36,hi:pulseAt(t,tSh+0.4,1.6)})),{dy:-14});
   const bm=ease(fin(t,tFa-0.2,1.5)),bx=lerp(1200,830,bm),by=lerp(280,52,bm),fix=fin(t,tNc+0.1,0.5);
@@ -149,7 +149,7 @@ scene("script",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
 // Back at the wall: the rule written five ways, the regulator's code saying why and the rest how, a little differently; and an empty
 // place where its home should be, beside Tartu's register, asked once.
 scene("five",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");wallBg(ctx,S,t);
-  const tFo=w("four","four more"),tW=[0.5,w("four","retail code"),w("four","settings"),w("four","notes"),w("four","spreadsheet")],tWhy=w("how","says why"),tHow=w("how","each say how"),tDif=w("how","differently"),tNone=w("how","None of them"),tO=c("once"),tTa=w("once","Tartu"),tOo=w("once","once only");
+  const tFo=w("four","four more"),tW=[0.5,w("where","retail code"),w("where","settings"),w("where","notes"),w("where","spreadsheet")],tWhy=w("how","says why"),tHow=w("how","each say how"),tDif=w("how","differently"),tNone=w("how","None of them"),tO=c("once"),tTa=w("once","Tartu"),tOo=w("once","once only");
   ctx.save();drift(ctx,t,sc,{z:0.025,y:440});
   person(ctx,"tomas",230,1030,0.78,{t,pose:"stand",pose2:"explain",mix:d9_pz(t,0.6,3.2)+d9_pz(t,tO-0.2,tO+2.6),expr:t>tNone-0.3&&t<tO?"concerned":"calm"});
   const dW=332,dH=262,dx=i=>84+i*352,dy=176;
@@ -214,8 +214,8 @@ scene("why",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);se
     const ob=fin(t,tOb-0.3,0.7),ex=1130,ey=470,ew=620,eh=100;arrive(ctx,ex+ew/2,ey+eh/2,t,tFa-0.3,()=>{glass(ctx,ex,ey,ew,eh,8,MOT,{glow:12+14*pulseAt(t,tOb,1.6),ea:0.85,fill:"rgba(7,12,24,0.94)"});ctx.fillStyle=rgba(MOT,0.16);rr(ctx,ex,ey,ew,eh,8);ctx.fill();
       const gx=ex+56,gy=ey+eh/2;withA(ctx,1-ob,()=>archGlyph(ctx,"goal",gx,gy,26,MOT));withA(ctx,ob,()=>d9_reqGlyph(ctx,gx,gy,30,MOT));T(ctx,"fair, accurate bills",ex+108,ey+eh/2+12,{w:800,size:34,color:rgba(INK,0.97)});},{dy:-12});
     arrive(ctx,ex+ew/2,ey-34,t,tFa-0.1,()=>tag(ctx,ex+ew/2,ey-34,"day one's draft",PARCH,{align:"center",size:28}),{dy:8});
-    const gl=fin(t,tGo-0.6,0.5);if(gl>0.01){withA(ctx,gl*(1-ob),()=>{tag(ctx,ex+ew/2,ey+eh+44,"a goal",MOT,{align:"center",size:30});});const st=clamp((t-tGo+0.1)/0.4,0,1);if(st>0)withA(ctx,1-ob,()=>{ctx.save();ctx.strokeStyle=rgba(BAD,0.95);ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(ex+ew/2-70,ey+eh+44);ctx.lineTo(ex+ew/2-70+140*st,ey+eh+44);ctx.stroke();ctx.restore();});}
-    if(ob>0.01)arrive(ctx,ex+ew/2,ey+eh+44,t,tOb-0.2,()=>tag(ctx,ex+ew/2,ey+eh+44,"an obligation",MOT,{align:"center",size:30}),{dy:8});
+    const gl=fin(t,tGo-0.6,0.5)*(1-fin(t,tOb-0.55,0.3));if(gl>0.01){withA(ctx,gl,()=>{tag(ctx,ex+ew/2,ey+eh+44,"a goal",MOT,{align:"center",size:30});});const st=clamp((t-tGo+0.1)/0.4,0,1);if(st>0)withA(ctx,gl,()=>{ctx.save();ctx.strokeStyle=rgba(BAD,0.95);ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(ex+ew/2-70,ey+eh+44);ctx.lineTo(ex+ew/2-70+140*st,ey+eh+44);ctx.stroke();ctx.restore();});}
+    if(ob>0.01)arrive(ctx,ex+ew/2,ey+eh+44,t,tOb-0.15,()=>tag(ctx,ex+ew/2,ey+eh+44,"an obligation",MOT,{align:"center",size:30}),{dy:8});
     d9_infl(ctx,x+w_/2,y+h_,ex+ew/2,ey-62,MOT,clamp((t-tCo+0.2)/0.7,0,1),off);}
   arrive(ctx,1770,900,t,tA-0.6,()=>d9_personR(ctx,"ama",1770,1030,0.74,{t,pose:"stand",pose2:"explain",mix:d9_pz(t,tA,tA+3.0)+d9_pz(t,tOb-0.2,tOb+2.2)}),{dy:-10});
   ctx.restore();vign(ctx,S);});
@@ -227,7 +227,7 @@ scene("why",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);se
 const D9_FACTS=[[90,"a reading is taken at a connection point",[0,1]],[690,"a reading is actual or estimated",[1,2]],[1290,"a bill is based on readings",[1,3]]];
 const D9_TERMS=[["connection point",290],["reading",650],["estimate",1010],["bill",1520]];
 scene("about",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
-  const tF=w("words","on facts"),tC=w("words","on concepts"),tBw=w("words","business's words"),tT=[w("words","a connection point"),w("words","a reading"),w("words","an estimate"),w("words","a bill")],tO=c("objects"),tDo=w("objects","data object"),tNs=w("objects","network's side"),tRs=w("objects","bills on"),tCi=c("cim"),tUp=w("cim","usage point"),tOw=w("cim","own words");
+  const tF=w("words","on facts"),tC=w("words","on concepts"),tBw=w("terms","business's words"),tT=[w("terms","a connection point"),w("terms","a reading"),w("terms","an estimate"),w("terms","a bill")],tO=c("objects"),tDo=w("objects","data object"),tNs=w("objects","network's side"),tRs=w("objects","bills on"),tCi=c("cim"),tUp=w("cim","usage point"),tOw=w("own","own words");
   ctx.save();drift(ctx,t,sc,{z:0.02,y:440});
   const sd=fin(t,tO-0.3,1.0),mvO=ease(fin(t,tDo-0.6,1.4)),pyr=1-fin(t,tO-0.5,0.8);
   d9_sides(ctx,{a:sd});d9_wall(ctx,t,{a:sd});
@@ -242,7 +242,7 @@ scene("about",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     if(o){const k=nm==="reading"?0:nm==="connection point"?1:2,mo=ease(fin(t,tDo-0.6+k*0.25,1.2)),cx=lerp(x,o[0]+o[2]/2,mo),cy=lerp(640,o[1]+o[3]/2,mo);
       if(mo<0.5)arrive(ctx,x,640,t,t0,()=>withA(ctx,1-mo*2,()=>d9_term(ctx,cx,cy,nm,{hi})),{dy:-10});
       if(mo>0.3){const sv=nm==="reading"?fin(t,tDo+1.4,0.6):0;withA(ctx,clamp((mo-0.3)/0.5,0,1),()=>d9_obj(ctx,lerp(cx-o[2]/2,o[0],mo),lerp(cy-o[3]/2,o[1],mo),o[2],o[3],nm==="reading"?"meter reading":nm,nm==="reading"?"actual or estimated":null,{sv,hi:pulseAt(t,nm==="bill"?tRs:tNs,1.4)+0.6*pulseAt(t,tOw+(k===1?0:0.4),1.4)}));}}
-    else{const me=ease(fin(t,tDo+0.6,1.0)),tx=OBJ.reading[0]+180,ty=OBJ.reading[1]+92;arrive(ctx,x,640,t,t0,()=>withA(ctx,1-sstep(0.7,1,me),()=>{ctx.save();ctx.translate(lerp(x,tx,me),lerp(640,ty,me));ctx.scale(lerp(1,0.6,me),lerp(1,0.6,me));d9_term(ctx,0,0,nm,{hi});ctx.restore();}),{dy:-10});}});
+    else{const me=ease(fin(t,tDo+0.6,1.0)),tx=OBJ.reading[0]+180,ty=OBJ.reading[1]+92;arrive(ctx,x,640,t,t0,()=>withA(ctx,1-sstep(0.7,1,me),()=>{ctx.save();ctx.translate(lerp(x,tx,me),lerp(640,ty,me));ctx.scale(lerp(1,0.6,me),lerp(1,0.6,me));d9_term(ctx,0,0,nm,{hi,deco:me>0.02?1:0});ctx.restore();}),{dy:-10});}});
   // the industry's model gives the starting words; the map keeps the utility's own beside them
   arrive(ctx,470,420,t,tCi+0.6,()=>d9_ind(ctx,470,420,"reading type",1,{hi:pulseAt(t,tOw+0.4,1.4)}),{dy:-8});
   arrive(ctx,470,624,t,tUp-0.2,()=>d9_ind(ctx,470,624,"usage point",1,{hi:pulseAt(t,tUp,1.4)+pulseAt(t,tOw,1.4)}),{dy:-8});
@@ -253,7 +253,7 @@ scene("about",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
 // from where it comes: timeliness from its service level, completeness from its steps, validity from another rule.
 const D9_VS=[["read",80,830],["bill",1010,490],["paid",1470,390]],D9_VY=290,D9_VH=150,D9_RY=510,D9_EX=[80,600,830,110,126];
 scene("expect",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
-  const tMc=w("step","meter to cash"),tNw=w("step","network's"),tRt=w("step","retail's"),tAt=w("step","Attached,"),tNi=w("step","not inside"),tIp=w("step","isn't the process"),
+  const tMc=w("step","meter to cash"),tNw=w("step","network's"),tRt=w("step","retail's"),tAt=w("inside","Attached,"),tNi=w("inside","not inside"),tIp=w("inside","isn't the process"),
     tTi=c("time"),tEx=w("time","what to expect"),tTl=w("time","Timeliness"),tSl=w("time","service level"),tEr=w("time","an estimate replaced"),
     tCo=c("comp"),tSt=w("comp","its steps"),tEv=w("comp","every estimate"),tVa=w("comp","Validity"),tAr=w("comp","another rule"),tMk=w("comp","every reading");
   ctx.save();drift(ctx,t,sc,{z:0.02,y:440});focus(ctx,t,[[0,960,540,1],[tTi-0.9,560,670,1.04]],1.8);
@@ -262,7 +262,7 @@ scene("expect",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   d9_sides(ctx,{});d9_wall(ctx,t,{gate:1,gy:mid,a:1-0.4*fo});
   withA(ctx,fin(t,tMc-0.3,0.5),()=>T(ctx,"meter to cash",84,D9_VY-24,{f:"mono",w:600,size:30,color:rgba(STR,1)}));
   D9_VS.forEach(([nm,x,w_],i)=>{const r=i===0,lx=r?lerp(x+w_/2-12,196,op):null,ly=r?lerp(mid+12,D9_VY+62,op):null;
-    arrive(ctx,x+w_/2,mid,t,tMc-0.2+i*0.18,()=>d9_chev(ctx,x,D9_VY,w_,D9_VH,nm,{first:r,a:r?1:dimR+0.1*fo,lx,ly,hi:pulseAt(t,r?tNw+0.2:tRt+0.2,1.4)*(r||i===1?1:0)}),{dy:-14});});
+    arrive(ctx,x+w_/2,mid,t,tMc-0.2+i*0.18,()=>d9_chev(ctx,x,D9_VY,w_,D9_VH,nm,{first:r,a:r?1:dimR+0.1*fo,deco:!r&&fo>0.3?1:0,lx,ly,hi:pulseAt(t,r?tNw+0.2:tRt+0.2,1.4)*(r||i===1?1:0)}),{dy:-14});});
   // each rule, attached to its step by a realisation: it rises to meet the line
   const h21=d9_rule(ctx,0,0,830,"",D9_R21,null,{a:0,size:30}),h22=d9_rule(ctx,0,0,850,"",D9_R22,null,{a:0,size:30}),rx=lerp(495,285,fo),u21=26*(1-ease(fin(t,tNw+0.2,0.6))),u22=26*(1-ease(fin(t,tRt+0.2,0.6)));
   withA(ctx,1-fo,()=>arrive(ctx,495,RY+h21/2,t,0.4,()=>d9_rule(ctx,80,RY+u21,830,"RUL-021",D9_R21,D9_NET,{size:30,hi:pulseAt(t,tNw+0.5,1.4)}),{dy:-12}));
@@ -271,8 +271,8 @@ scene("expect",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   d9_real(ctx,rx,D9_VY+D9_VH+2,rx,RY+u21,MOT,clamp((t-tNw+0.1)/0.7,0,1),1);d9_real(ctx,1255,D9_VY+D9_VH+2,1255,RY+u22,MOT,clamp((t-tRt+0.1)/0.7,0,1),dimR);
   // written inside the step, a rule would be the process: it doesn't go there
   const gq=clamp((t-tAt+0.2)/1.1,0,1),gOut=fin(t,tIp+0.5,0.6);
-  if(gq>0&&gOut<1){const e=ease(gq),cy=lerp(RY+h21/2,mid,e),k=lerp(1,0.46,e);ctx.save();ctx.translate(495,cy);ctx.scale(k,k);ctx.translate(-495,-(RY+h21/2));
-    withA(ctx,0.8*(1-gOut),()=>d9_rule(ctx,80,RY,830,"RUL-021",D9_R21,D9_NET,{size:30,deco:1}));ctx.restore();cross_(ctx,495,mid,74,BAD,fin(t,tNi+0.2,0.3)*(1-gOut));}
+  if(gq>0&&gOut<1){const e=ease(gq),cx=lerp(495,700,e),cy=lerp(RY+h21/2,mid,e),k=lerp(1,0.4,e);ctx.save();ctx.translate(cx,cy);ctx.scale(k,k);ctx.translate(-495,-(RY+h21/2));
+    withA(ctx,0.8*(1-gOut),()=>d9_rule(ctx,80,RY,830,"RUL-021",D9_R21,D9_NET,{size:30,deco:1}));ctx.restore();cross_(ctx,700,mid,74,BAD,fin(t,tNi+0.2,0.3)*(1-gOut));}
   arrive(ctx,520,RY-36,t,tNi-0.1,()=>withA(ctx,1-fin(t,tTi-0.6,0.5),()=>tag(ctx,520,RY-36,"attached, not inside",MOT,{size:28})),{dy:8});
   // what the step expects of the data: a bracket from the step to each expectation
   const br=clamp((t-tEx+0.2)/1.2,0,1),[ex,ey,ew,eh,eg]=D9_EX;
@@ -335,7 +335,8 @@ scene("checks",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   arrive(ctx,fx_,688,t,tMa+0.5,()=>tag(ctx,fx_,688,"1 bill not corrected",D9_RED,{align:"center",size:28}),{dy:8});
   // a failure goes to the owner's team, not to a shared mailbox
   arrive(ctx,1440,D9_TY,t,tTl-0.3,()=>d9_pill(ctx,1440,D9_TY,"billing team",TRUST,"team",{hi:pulseAt(t,tTl+1.0,1.4)}),{dy:-10});
-  arrive(ctx,620,D9_TY,t,tMb-0.4,()=>{d9_pill(ctx,620,D9_TY,"a shared mailbox",[150,160,180],"mail",{});cross_(ctx,620,D9_TY,84,D9_RED,fin(t,tMb+0.2,0.3));},{dy:-10});
+  arrive(ctx,620,D9_TY,t,tMb-0.4,()=>{const st=fin(t,tMb+0.2,0.4),pw=d9_pill(ctx,620,D9_TY,"a shared mailbox",[150,160,180],"mail",{a:1-0.35*st});
+    if(st>0){const x0=620-pw/2+60,x1=620+pw/2-18;ctx.save();ctx.strokeStyle=rgba(D9_RED,0.95);ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x0,D9_TY+2);ctx.lineTo(lerp(x0,x1,ease(st)),D9_TY+2);ctx.stroke();ctx.restore();}},{dy:-10});
   const al=clamp((t-tTl+0.1)/1.0,0,1);if(al>0&&al<1){const e=ease(al),x=lerp(fx_,1440,e),y=lerp(D9_L2+34,D9_TY-34,e)-Math.sin(e*Math.PI)*70;d9_msg(ctx,x,y,0.8,D9_RED,1);}
   ctx.restore();vign(ctx,S);});
 /* ---------- 10. Generally, an ontology ---------- */
@@ -345,9 +346,9 @@ scene("checks",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
 const D9_VW=[["glossary","terms and their definitions","book"],["models","data objects and their keys","object"],["ontology","concepts, relations and rules, in OWL","graph"],["checks","tests, contracts and shapes","tick"]];
 const D9_VR=[860,166,980,138,22],D9_IN=[["June bill · $412.80",330,360],["June estimate",900,360],["actual readings",1470,360]];
 scene("onto",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
-  const tCo=w("onto","the concepts"),tRel=w("onto","how they relate"),tRu=w("onto","the rules about"),tOn=w("onto","an ontology"),tOwl=w("onto","ready for OWL"),
+  const tCo=w("onto","the concepts"),tRel=w("onto","how they relate"),tRu=w("onto","the rules about"),tOn=w("onto","an ontology"),tOwl=w("owl","ready for OWL"),
     tV=c("views"),tGl=w("views","the glossary"),tMo=w("views","the models"),tOt=w("views","the ontology"),tCh=w("views","the checks"),tOm=w("views","one map"),
-    tO=c("open"),tSaid=w("open","what is said"),tNev=w("open","never happened"),tUnk=w("open","simply unknown"),tFind=w("open","Finding"),tJob=w("open","checks' job");
+    tO=c("open"),tSaid=w("open","what is said"),tNev=w("open","never happened"),tUnk=w("open","simply unknown"),tFind=w("job","Finding"),tJob=w("job","checks' job");
   ctx.save();drift(ctx,t,sc,{z:0.02,y:440});
   const[vx,vy0,vw,vh,vg]=D9_VR,shr=ease(fin(t,tV-0.4,1.6)),gone=fin(t,tO-0.9,0.7),k=lerp(1,0.17,shr),gx=lerp(975,vx+vw-180,shr),gy=lerp(455,vy0+2*(vh+vg)+vh/2,shr),dc=shr>0.001?1:0;
   // the map, the one source; each view drawn from it as it's named
@@ -365,8 +366,8 @@ scene("onto",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
     D9_OR.forEach(([id,cid,x,y],i)=>{const t0=tRu+i*0.25,q=fin(t,t0-0.2,0.5);if(q<=0)return;const[cx,cy]=P[cid],side=x>cx+200;
       withA(ctx,q,()=>{ctx.save();ctx.setLineDash([6,7]);ctx.strokeStyle=rgba(MOT,0.75);ctx.lineWidth=2.2;ctx.beginPath();if(side){ctx.moveTo(x-212,y);ctx.lineTo(cx+6,y);}else{ctx.moveTo(x,y<cy?y+29:y-29);ctx.lineTo(cx,y<cy?cy-32:cy+32);}ctx.stroke();ctx.restore();});
       arrive(ctx,x,y,t,t0,()=>d9_rulePill(ctx,x,y,id,id==="RUL-022"?D9_RET:D9_NET,{deco:dc,hi:pulseAt(t,t0+0.2,1.2)}),{dy:-8});});
-    withA(ctx,fin(t,tOn-0.2,0.5)*(1-shr),()=>T(ctx,"an ontology",90,150,{w:800,size:44,color:rgba(INK,0.97),deco:dc}));
-    arrive(ctx,470,138,t,tOwl-0.2,()=>withA(ctx,1-shr,()=>tag(ctx,470,138,"ready for OWL",[176,196,222],{size:28})),{dy:8});});ctx.restore();}
+    const ttl=1-fin(t,tV-1.0,0.5);withA(ctx,fin(t,tOn-0.2,0.5)*ttl,()=>T(ctx,"an ontology",90,150,{w:800,size:44,color:rgba(INK,0.97),deco:dc}));
+    arrive(ctx,470,138,t,tOwl-0.2,()=>withA(ctx,ttl,()=>tag(ctx,470,138,"ready for OWL",[176,196,222],{size:28})),{dy:8});});ctx.restore();}
   // one bill, as facts: what was said about it, and the correction nobody said
   const iA=fin(t,tO-0.4,0.6);if(iA>0.01){const W=D9_IN.map(([l])=>tw(ctx,l,30,800)+56),[b,e,ac]=D9_IN;
     d9_rel(ctx,[b[1],b[2],W[0]],[e[1],e[2],W[1]],"based on","above",clamp((t-tO)/0.7,0,1),{a:iA});
@@ -384,10 +385,10 @@ scene("onto",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
 const D9_E21=[590,110,560],D9_E22=[590,400,560],D9_ETC=[590,676,560,186];
 scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");wallBg(ctx,S,t);
   const tBk=w("refund","forty back"),t19=w("refund","nineteen hundred"),tFc=w("refund","found and corrected"),tC=c("confirm"),tG=w("confirm","Grace"),tHr=w("confirm","head of retail"),
-    tT=c("tartu"),tPd=w("tartu","is paid"),tTw=w("tartu","asked twice"),tA=c("answer"),tAn=w("answer","an answer"),tGf=w("answer","generated from it"),tN=c("next"),tNx=w("next","Next:");
-  ctx.save();drift(ctx,t,sc,{z:0.02,y:420});focus(ctx,t,[[0,330,330,1.3],[tC-0.9,870,385,1.25],[tT-0.9,870,560,1.1],[tA-0.9,1420,450,1.15],[tN-0.4,960,520,1.0]],1.6);
-  // what the camera leaves behind dims as it goes, and comes back for the whole wall
-  const back=fin(t,tN-0.4,0.8),zB=1-0.7*fin(t,tT-0.9,0.8)*(1-back),zR=1-0.7*fin(t,tA-0.9,0.8)*(1-back);
+    tT=c("tartu"),tPd=w("tartu","is paid"),tTw=w("tartu","asked twice"),tA=c("answer"),tAn=w("answer","an answer"),tGf=w("owner","generated from it"),tN=c("next"),tNx=w("next","Next:");
+  ctx.save();drift(ctx,t,sc,{z:0.02,y:420});focus(ctx,t,[[0,330,330,1.3],[tC-0.9,840,385,1.25],[tT-0.9,870,560,1.1],[tA-0.9,1420,450,1.15],[tN-0.4,960,520,1.0]],1.6);
+  // what the camera leaves behind dims as it goes, and comes back for the whole wall (the bill and the count once they are back in frame)
+  const back=fin(t,tN-0.4,0.8),zB=1-0.7*fin(t,tT-0.9,0.8)*(1-fin(t,tN+0.7,0.7)),zR=1-0.7*fin(t,tA-0.9,0.8)*(1-back);
   // the household's bill, corrected on the next bill: $144.40 back; and the 1,900 like it, found and corrected
   const fix=fin(t,tBk-0.6,0.6);arrive(ctx,310,228,t,0.3,()=>d9_bill(ctx,90,110,440,{a:zB,amount:fix>0.5?"268.40":"412.80",good:fix>0.5,was:"412.80",wa:fix,note:fix>0.5?"corrected on the next bill":"an estimated reading",
     stamp:"$144.40 back",st:fin(t,tBk,0.5),stampCol:[40,130,70],hi:pulseAt(t,tBk,1.6)}),{dy:-14});
@@ -400,7 +401,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   // Tartu: the benefit paid, and nobody asked twice
   arrive(ctx,D9_ETC[0]+D9_ETC[2]/2,D9_ETC[1]+D9_ETC[3]/2,t,tT-0.6,()=>d9_tartuCard(ctx,...D9_ETC,t,{a:zR,paid:fin(t,tPd-0.2,0.5),once:fin(t,tTw-0.4,0.5),hi:pulseAt(t,tPd,1.4)}),{dy:-14});
   // Tomás's note, and its answer; then the next question
-  person(ctx,"tomas",1840,1030,0.74,{t,pose:"stand",pose2:"explain",mix:d9_pz(t,tA,tA+2.6)});
+  person(ctx,"tomas",1790,1030,0.74,{t,pose:"stand",pose2:"explain",mix:d9_pz(t,tA,tA+2.6)});
   arrive(ctx,1480,150,t,tA-1.0,()=>sticky(ctx,1480,150,500,120,D9_Q,{col:NOTEC[0],size:32,st:fin(t,tAn+0.4,0.5)*0.5,rot:-0.03}),{dy:-20});
   arrive(ctx,1480,440,t,tAn-0.2,()=>sticky(ctx,1480,440,540,300,D9_A,{col:NOTEC[0],size:30,p:clamp((t-tAn)/(tGf-tAn+0.8),0,1),rot:0.012}),{dy:-30,from:1.06});
   arrive(ctx,1460,770,t,tNx-0.1,()=>sticky(ctx,1460,770,460,150,D9_NEXT,{col:NOTEC[0],size:30,st:0,rot:0.03}),{dy:-30,from:1.06});

@@ -34,3 +34,4 @@ Like the other series, each film is generated from code. The series keeps what's
 | `shared/src/page.html` | The standalone player page |
 | `shared/tools/lang.py`, `build.py` | Where everything lives, and what a film is made of |
 | `shared/tools/run.py` | Runs a tool on a film: this series' own `lang.py` and `build.py`, and *From words to data*'s other tools and instruments unchanged |
+| `shared/tools/review_page.py` | The page the author reviews a film on: it runs `site-tools/review_page.py`, then lays the page out on watercolour paper, with the new chapters marked (`--new 2,3`) and the copy under a new name for each version (`--name`) |

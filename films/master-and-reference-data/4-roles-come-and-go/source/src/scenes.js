@@ -118,8 +118,8 @@ scene("bands",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
     tF=[w("shape","the person"),w("shape","kind of role"),w("shape","office that owns"),w("shape","when it starts"),w("shape","when it ends")],
     tUn=c("under"),tB=w("under","bands"),tApp=c("first"),tStu=w("first","then student"),t19=w("first","nineteen"),t22=w("first","twenty-two"),tAlu=w("first","Then alumna"),
     tTut=c("tutor"),tTf=w("tutor","from"),tAg=c("again"),tJul=w("again","July"),tRes=c("research"),tMarch=w("research","March"),tDec=w("research","December"),
-    tFol=w("stays","follow"),tOnce=w("stays","run at once"),tPer=w("stays","The person");
-  m4_open(ctx,S,t,sc,"plain",[[0,960,540,1]],{z:0});
+    tFol=w("stays","follow"),tOnce=w("stays","run at once"),tPer=w("stays","The person"),tYr=w("research","this year");
+  m4_open(ctx,S,t,sc,"plain",[[0,960,540,1]],{z:0});m4_range(t,[[0,2018.5,2027]]);
   // chapter 3's board: all but the four systems step back, and each system writes in the dates it knows; then they go
   const out=1-fin(t,tSh-0.5,0.6);
   if(out>0.01)m4_board(ctx,t,{cards:[out,out,out,out],cardT:[-9,-9,-9,-9],night:[0,1,2,3].map(()=>({p:1,rub:0})),dates:[0,1,2,3].map(i=>clamp((t-tKnow+0.2-i*0.4)/0.8,0,1)),
@@ -138,7 +138,8 @@ scene("bands",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
     glow:0.6*fin(t,tPer,0.8)*(1-fin(t,tEnd-0.7,0.8)),
     per:{app1:clamp((t-tApp-0.1)/0.6,0,1),stu1:clamp((t-t19+0.25)/(t22-t19+0.5),0,1),alu:clamp((t-tAlu)/1.0,0,1),tut:clamp((t-tTf+0.1)/1.0,0,1),
       app2:clamp((t-tAg-0.05)/0.5,0,1),stu2:clamp((t-tJul+0.2)/1.0,0,1),res:clamp((t-tMarch+0.1)/(tDec-tMarch+0.4),0,1)}});
-  m4_today(ctx,fin(t,tRes-0.2,0.6)*(1-fin(t,tEnd-1.2,0.8)));
+  // this year: today's line, its tag giving way to the loop round the roles that run at once
+  withA(ctx,1-fin(t,tEnd-1.2,0.8),()=>m4_today(ctx,clamp((t-tYr+0.3)/0.9,0,1),fin(t,tYr,0.5)*(1-fin(t,tOnce-0.5,0.4))));
   // some follow each other: applicant to student, student to alumna; some run at once: the four bands of 2026
   const fo=1-fin(t,tEnd-1.8,0.7);
   if(fo>0.01)withA(ctx,fo,()=>{const xa=m4_x(M4_PER[0].B),xb=m4_x(M4_PER[1].B);
@@ -178,7 +179,7 @@ scene("terms",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
 
 /* ---------- 6. One line, one date ---------- */
 // the line's tag, the line's top; Planning's card, top left
-const M4_LTY=330,M4_LY0=358,M4_PCX=330,M4_PCY=20;
+const M4_PCX=330,M4_PCY=20;
 scene("line",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const tPlan=w("draw","Planning"),tLine=w("draw","one line"),tCen=w("draw","census"),tDot=[c("open"),w("open","tutor"),w("open","researcher"),w("open","alumna")],
     tCnt=w("once","counts once"),tOneP=w("once","one person"),tMove=c("back"),tTA=w("back","a tutor"),tKept=w("kept","stays"),
@@ -189,7 +190,7 @@ scene("line",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const bk=easeCam(clamp((t-tMove+0.1)/1.5,0,1))-easeCam(clamp((t-tFil+0.5)/1.5,0,1)),ld=M4_CEN-bk*(M4_CEN-M4_CEN0),lx=m4_x(ld);
   // her figure wears only the roles open where the line stands
   const unh=fin(t,0.8,0.8),open=m4_openAt(ld,true),fp=fin(t,tLine+0.3,0.9);
-  m4_tl(ctx,t,{row:[0,1,2,3,4].map(i=>i===1?1:lerp(0.38,1,unh)),all:true,split:1,fig:[0,1,2,3,4].map(i=>lerp(1,open[i],fp))});
+  m4_tl(ctx,t,{row:[0,1,2,3,4].map(i=>i===1?1:lerp(0.38,1,unh)),all:true,split:1,fig:[0,1,2,3,4].map(i=>lerp(1,open[i],fp)),avoid:lx,avoidK:fin(t,tLine-0.3,0.6)});
   // chapter 5's pins go
   const pa=1-fin(t,0.7,0.5);
   m4_datePin(ctx,t,m4_x(M4_JAN),"15 Jan 2026","not staff",WC_INK,{t0:-9,pn:1,nt:1,a:pa});m4_datePin(ctx,t,m4_x(M4_CEN),"31 Mar 2026","staff",WC_ROLEINK.tutor,{t0:-9,pn:1,nt:1,a:pa});
@@ -214,11 +215,11 @@ scene("relates",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   const tRel=w("for","relates"),tMa=w("items","master's"),tUnit=w("items","one unit"),tProj=w("items","one project"),tPeo=c("people"),tRl=w("people","relate"),
     tAna=w("people","Ana"),tSup=w("people","supervises"),tDates=w("ends","own dates"),tEnds=w("ends","ends with"),tBoth=w("ends","Both");
   m4_open(ctx,S,t,sc,"plain",[[0,960,540,1]],{z:0});
-  m4_range(t,[[0,2024.55,2027],[0.9,2025.4,2027],[tPeo-0.3,2025.4,2028]],1.6);
-  const gl=0.55*fin(t,tBoth-0.1,0.7);
-  m4_tl(ctx,t,{all:true,split:1,fig:[1,1,1,1,0],glow:gl});
+  // when Ana joins, the timeline draws in from the right to give her room, with the project's end still in view
+  m4_range(t,[[0,2024.55,2027],[0.9,2025.4,2027],[tPeo-0.3,2025.45,2027.05]],1.6,lerp(M4_XR,1440,easeCam(clamp((t-tPeo+0.3)/1.6,0,1))));
+  const gl=0.55*fin(t,tBoth-0.1,0.7),oa=1-fin(t,0.7,0.6),lx=m4_x(M4_CEN);
+  m4_tl(ctx,t,{all:true,split:1,fig:[1,1,1,1,0],glow:gl,avoid:lx,avoidK:oa});
   // chapter 6's line, dots, card and ring go
-  const oa=1-fin(t,0.7,0.6),lx=m4_x(M4_CEN);
   if(oa>0.01)withA(ctx,oa,()=>{m4_rule(ctx,lx,M4_LY0,M4_AXY+12,1,{lw:3.4});m4_tagAt(ctx,lx,M4_LTY,"census date · 31 Mar 2026",{size:28,w:700,wash:WC_BADGE,washA:0.5});
     [0,1,2,3].forEach(i=>m4_dot(ctx,lx,m4_rowY(i),M4_ROWS[i],i===1||i===2?0.3:1));m4_alumFilter(ctx,t,M4_PCX,M4_PCY,{q:1,found:1});});
   const ra=1-fin(t,0.3,0.5);if(ra>0.01)withA(ctx,ra,()=>{const xj=m4_x(M4_PER[5].A);m4_loop(ctx,xj-44,m4_rowY(0)-36,xj+44,m4_rowY(0)+36,1,{seed:37});});
@@ -230,7 +231,6 @@ scene("relates",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
     arrive(ctx,xc,m4_rowY(1),t,tUnit-0.3,()=>m4_rel(ctx,xc-199,m4_rowY(1),"tutor","a first-year unit · S1 2026",1),{dy:8});
     arrive(ctx,xr+287,m4_rowY(2),t,tProj-0.3,()=>m4_rel(ctx,xr,m4_rowY(2),"researcher","project · wait times in emergency care",1),{dy:8});});
   // Ana joins at the right, in white, with her own coral band, and her name
-  m4_clear(ctx,1450,fin(t,tPeo-0.2,0.8));
   const anaA=fin(t,tRl-0.1,0.8);m4_glow(ctx,M4_ANA[0],M4_ANA[1]-330,gl,280);
   wc_white(ctx,"ana",M4_ANA[0],M4_ANA[1],M4_ANS,[{col:WC_ROLE.researcher,a:fin(t,tAna,0.6),i:1}],{a:anaA});
   arrive(ctx,1705,165,t,tAna-0.2,()=>{wc_panel(ctx,1530,90,350,150,{kind:"card",role:WC_ROLE.researcher,sw:tw(ctx,"Ana Ruiz",30,800)+36,seed:57});
@@ -315,7 +315,7 @@ scene("stays",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
   // the 2026 end of her timeline; on "roles come and go", the whole of it
   m4_range(t,[[0,2025.4,2028],[tCome-0.4,2018.5,2028]],1.8);
   const gr=fin(t,tGrad-0.1,0.8),xn=m4_x(M4_NOW),stu=M4_PER[5];
-  m4_tl(ctx,t,{all:true,split:1,fig:[1,1,1,1,0],glow:0.6*fin(t,tSt-0.1,0.8),over:{stu2:{a:1-gr}}});
+  m4_tl(ctx,t,{all:true,split:1,fig:[1,1,1,1,0],glow:0.6*fin(t,tSt-0.1,0.8),over:{stu2:{fade:1-gr}},avoid:xn,avoidK:fin(t,tTo-0.3,0.6)});
   if(gr>0.01)m4_per(ctx,Object.assign({},stu,{B:M4_GRAD}),m4_rowY(0),{a:gr,seed:stu.k.length*7+Math.round(stu.A*3)});
   // today: the line, and a dot on each of the four roles open on it
   m4_rule(ctx,xn,M4_LY0,M4_AXY+12,clamp((t-tTo+0.2)/0.9,0,1),{lw:3.4});

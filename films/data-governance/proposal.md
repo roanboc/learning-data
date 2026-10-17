@@ -1,6 +1,6 @@
 # Data governance, off the shelf
 
-*Proposal for a series on data governance that works where data work happens, v0.3. The folder is named after the topic; the series title is still open. Status: proposed, 16 October 2026. A companion series on master and reference data is proposed beside it, in [`../master-and-reference-data/proposal.md`](../master-and-reference-data/proposal.md).*
+*Proposal for a series on data governance that works where data work happens, v0.3. The folder is named after the topic; the series title is still open. Status: proposed, 16 October 2026; the opening film, *Off the shelf*, made 17 October 2026. A companion series on master and reference data is proposed beside it, in [`../master-and-reference-data/proposal.md`](../master-and-reference-data/proposal.md).*
 
 ## Decided
 
@@ -16,6 +16,12 @@
 | 16 October 2026 | The look is **toy town**, chosen from three looks drawn with the same two moments of *Off the shelf* (toy town, the building in section, a graphic novel). The university is a model town on a table: rooms open at the front like dollhouses, people as painted figures on small bases, a soft blur at the top and bottom of the frame. It replaces "the binder is paper, the enablers are glass". Fewer diagrams, more situations: ideas are shown as people doing things in places. |
 | 16 October 2026 | *Off the shelf* keeps the Magna Carta opening, as the checks found it: the clause promised one measure, and measures still differed for six centuries; what worked, by the late 1800s, was all of it together (one definition in law, a copy in every county, an inspector who checked, with the law behind him). Inspectors came with the Act of 1834, local measures were abolished in 1835, and the Act of 1878 gave the uniformity. |
 | 16 October 2026 | Current versions, named once in *Off the shelf*: DAMA-DMBOK, second edition, revised (2024); DCAM v3 (2025), now the EDM Association's; ISO 8000 for data quality; ISO/IEC 38505-1:2026, which replaced the 2017 edition. |
+| 17 October 2026 | *Off the shelf* has its own sound: a soft brass choir, in D dorian for the market town and F major for today; a low music box for the moments that land; the series' mark, 1-5-4-8, on a horn at the title and the end; and one low pulse, only under the two numbers that disagree. Every effect is something on screen (a knock, paper, a cork pin, a rubber stamp, a hammer's thud). |
+| 17 October 2026 | In Spanish, data governance is *gobernanza de datos*, never *gobierno de datos*: the films also speak of the government (*el gobierno*), and the two must not be confused. An award is a *título*, and Planning is *Planificación*, as in the other series. |
+| 17 October 2026 | On the site, until the author chooses the series' title, it goes by *Governance you can use* (*Gobernanza que puedes usar*), the one option of the three that isn't also a film's title. The films' pictures and voice never name the series, so changing it needs no new render. |
+| 17 October 2026 | On the site, the series has a topic of its own, *Data governance*, the seventh, after *Master and reference data*, which its own series opened. *Off the shelf* builds on *Declare it, then build it*, whose loop of ten steps it pins, and *Who owns what*. Until the author decides otherwise. |
+| 17 October 2026 | *Off the shelf* stops for Pause and think after three chapters: *Who decides?*, *What governance is for* and *Where does it run?*, one question each. Labs and scenarios come later, with the series' first lab, *Where does it run?* |
+| 17 October 2026 | A moment timed to a word must find that word, whole, in its line: the series' `build.py` stops when one doesn't (`shared/tools/cues.py`). Review found three in *Off the shelf* that came early: "again" had landed on "against", and two words weren't in their lines at all. |
 
 ## The brief
 
@@ -432,12 +438,12 @@ So every enabler on screen is real, the series adds to [the example dbt project]
 
 ## Decisions for the author
 
-1. **The series title.** *Off the shelf* · *Rules that run* · *Governance you can use*.
+1. **The series title.** *Off the shelf* · *Rules that run* · *Governance you can use*. The site uses *Governance you can use* until you choose (17 October 2026).
 2. **Sixteen films in one series, or two series.** The tools films could be their own series, for practitioners, as *In the weeds* is to *From words to data*.
 3. **Ontos as the example for products and contracts.** It's open and built on Unity Catalog, but a Labs project without formal support. Alternatives: Unity Catalog alone, with ODCS files in the repository; or a commercial catalog, named once.
 4. **The new character.** Yusuf Demir, the data governance lead, outlined in gold (the business side), or a name you'd prefer.
 5. **DAMA's wheel on the site.** Show the coverage map above on the Topics page, each knowledge area linking to its films.
-6. **The topic on the site.** A new topic, *Data governance*, holding this series and the master and reference data series, or both under *Data quality and change*.
+6. **The topic on the site.** A new topic, *Data governance*, holding this series and the master and reference data series, or both under *Data quality and change*. The master and reference data series opened its own topic; this series now has *Data governance* to itself until you decide (17 October 2026).
 7. **Labs and scenarios:** per film, as in *In the weeds*, or one set for the series, as in *The map before the data*.
 8. **Your governance enablers.** Share the checks, templates or policies you use, so the films show them rather than a generic version.
 

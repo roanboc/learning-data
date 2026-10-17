@@ -13,6 +13,8 @@ TOGAF and ArchiMate are registered trademarks of The Open Group, and Zachman is 
 
 DAMA and DAMA-DMBOK are registered trademarks of DAMA International. *The same one, everywhere* names them, and draws its own picture of the knowledge areas, only to identify that body of knowledge; *One person, many roles* also draws ArchiMate's actor and role symbols. This project is not affiliated with or endorsed by DAMA International or The Open Group.
 
+DCAM is a trademark of the EDM Association (formerly the EDM Council). *Off the shelf*, from the series on data governance, names DAMA-DMBOK and DCAM, and draws its own picture of DAMA's knowledge areas, only to identify those bodies of knowledge; this project is not affiliated with or endorsed by DAMA International or the EDM Association.
+
 ## Third-party components
 
 - **Narration:** a synthetic voice generated with [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) (Apache License 2.0), run through [kokoro-onnx](https://github.com/thewh1teagle/kokoro-onnx). The model is not included in this repository.

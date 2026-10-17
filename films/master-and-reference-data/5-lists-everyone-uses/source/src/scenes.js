@@ -254,7 +254,7 @@ scene("outside",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
 
 /* ---------- 9. Lists about people ---------- */
 const M5_FX=600,M5_FY=110,M5_FW=860;
-const M5_TITLES=["Mr","Mrs","Miss","Ms","Mx"],M5_GEN=["woman","man","another term"],M5_GEN2=["prefer not to say"];
+const M5_TITLES=["Mr","Mrs","Miss","Ms","Mx"],M5_GEN=["woman","man","non-binary"],M5_GEN2=["prefer not to say"];
 scene("people",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const tS=c("some"),tTi=w("some","titles"),tGe=w("some","gender"),tSh=c("short"),tInc=w("short","inclusive"),tPur=w("short","purpose"),tT=c("title"),tMar=w("title","married"),tIf=w("title","If it"),tAsk=w("title","isn't asked");
   m5_open(ctx,S,t,sc,"plain",[[0,960,540,1]]);
@@ -272,10 +272,12 @@ scene("people",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
     // gender: short, and inclusive
     ctx.save();ctx.translate(0,-up);const gy=M5_FY+290;wc_T(ctx,"gender",M5_FX+40,gy,{w:600,size:28,col:WC_MUTED});
     const lit=fin(t,tInc,0.5);
-    const g1=m5_choices(ctx,M5_FX+40,gy+18,M5_GEN,{a:M5_GEN.map((s,i)=>fin(t,tGe+i*0.1,0.3))});m5_choices(ctx,M5_FX+40,gy+88,M5_GEN2,{a:[fin(t,tGe+0.3,0.3)]});
-    // another term: a line to write it on
-    const ax=g1[2]+tw(ctx,"another term",28,600)+74+12;withA(ctx,fin(t,tGe+0.3,0.3),()=>{ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.7);ctx.lineWidth=2.4;ctx.setLineDash([8,8]);ctx.beginPath();ctx.moveTo(ax,gy+66);ctx.lineTo(ax+170,gy+66);ctx.stroke();ctx.restore();});
-    if(lit>0.01)withA(ctx,lit,()=>{wc_ring(ctx,g1[2]+150,gy+46,170,40,clamp((t-tInc)/0.6,0,1),{seed:97});wc_ring(ctx,M5_FX+40+150,gy+116,170,40,clamp((t-tInc-0.3)/0.6,0,1),{seed:98});});
+    m5_choices(ctx,M5_FX+40,gy+18,M5_GEN,{a:M5_GEN.map((s,i)=>fin(t,tGe+i*0.1,0.3))});
+    // another term, with a line to write it on, and prefer not to say
+    const x2=M5_FX+40,wA=tw(ctx,"another term",28,600)+74,ax=x2+wA+12,px=ax+196,wP=tw(ctx,M5_GEN2[0],28,600)+74;
+    m5_choices(ctx,x2,gy+88,["another term"],{a:[fin(t,tGe+0.3,0.3)]});m5_choices(ctx,px,gy+88,M5_GEN2,{a:[fin(t,tGe+0.4,0.3)]});
+    withA(ctx,fin(t,tGe+0.3,0.3),()=>{ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.7);ctx.lineWidth=2.4;ctx.setLineDash([8,8]);ctx.beginPath();ctx.moveTo(ax,gy+136);ctx.lineTo(ax+140,gy+136);ctx.stroke();ctx.restore();});
+    if(lit>0.01)withA(ctx,lit,()=>{wc_ring(ctx,x2+(wA+152)/2,gy+116,(wA+152)/2+14,40,clamp((t-tInc)/0.6,0,1),{seed:97});wc_ring(ctx,px+wP/2,gy+116,wP/2+14,40,clamp((t-tInc-0.3)/0.6,0,1),{seed:98});});
     // why it's asked
     arrive(ctx,M5_FX+M5_FW/2,gy+232,t,tPur-0.2,()=>{wc_panel(ctx,M5_FX+40,gy+176,M5_FW-80,112,{kind:"card",dashed:true,role:WC_PENCIL,seed:99});
       wc_T(ctx,"why we ask",M5_FX+70,gy+222,{w:800,size:28,col:WC_DARK});wc_T(ctx,"the government asks universities to report it",M5_FX+70,gy+264,{w:600,size:28,col:WC_INK});},{dy:10});
@@ -295,8 +297,8 @@ scene("elsewhere",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s
       wc_white(ctx,"linh",x+108,M5_PY+600,0.5,[],{a:fin(t,t1-0.2,0.6)});
       arrive(ctx,x+500,M5_PY+330,t,t1-0.1,()=>m5_grid(ctx,x+196,M5_PY+210,604,list,cols,rows,{rowA:rows.map((r,k)=>fin(t,t1+0.2+k*0.15,0.4)),
         hi:[[bad,1,WC_BADGE,fin(t,t2,0.5)],[bad,0,WC_NO,fin(t,tW+0.3,0.5)*0.5]]}),{dy:14});
-      // the wrong value, and a real person it happens to
-      const wp=fin(t,tPer-0.3,0.5);if(wp>0.01){const pulse=0.5+0.5*Math.sin((t-tPer)*4);wc_ring(ctx,x+108,M5_PY+460,78,180,clamp((t-tPer+0.3)/0.7,0,1),{seed:100+i,col:WC_NO,a:0.6+0.3*pulse});}});});
+      // the wrong value, and a real person it happens to; the ring pulses with the score's beat (92 a minute, from tPer - 0.3)
+      const wp=fin(t,tPer-0.3,0.5);if(wp>0.01){const pulse=0.5+0.5*Math.cos((t-tPer+0.3)*Math.PI*2*92/60);wc_ring(ctx,x+108,M5_PY+460,78,180,clamp((t-tPer+0.3)/0.7,0,1),{seed:100+i,col:WC_NO,a:0.6+0.3*pulse});}});});
   m5_close(ctx,S);wc_paperOver(ctx,S);});
 
 /* ---------- 11. Who keeps it ---------- */
@@ -314,8 +316,8 @@ scene("keeps",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
       arrive(ctx,780,y+30,t,ta[i],()=>wc_chip(ctx,640,y,Math.round(tw(ctx,v,30,800)+tw(ctx," · "+f,28,600)+60),60,r,v,f,{seed:i+110}),{dy:10});
       wc_link(ctx,640+Math.round(tw(ctx,v,30,800)+tw(ctx," · "+f,28,600)+60)+8,y+30,1084,y+30,WC_PENCIL,{p:clamp((t-tOne-i*0.15)/0.6,0,1),a:0.6});
       arrive(ctx,1310,y+30,t,tOne+i*0.15,()=>{const [n,l1,l2]=M5_KLS[i];m5_mini(ctx,1090,y-48,460,n,{line:l1,line2:l2});
-        wc_ring(ctx,1090+28+tw(ctx,l1,28,600)/2,y+44,tw(ctx,l1,28,600)/2+18,26,clamp((t-tKe-i*0.15)/0.6,0,1),{seed:120+i,a:0.8});
-        wc_ring(ctx,1090+28+tw(ctx,l2,28,600)/2,y+82,tw(ctx,l2,28,600)/2+18,26,clamp((t-tWh-i*0.15)/0.6,0,1),{seed:124+i,a:0.8});},{dy:12});});
+        // who keeps it, then from when: underlined in pencil, one line after the other (rings round two lines this close would cross)
+        [[l1,51,tKe],[l2,89,tWh]].forEach(([l,dy,t0],k)=>wc_pencil(ctx,[[1114,y+dy],[1122+tw(ctx,l,28,600),y+dy]],clamp((t-t0-i*0.15)/0.5,0,1),{col:WC_INK,lw:3,a:0.75,seed:120+4*k+i,amp:0.6}));},{dy:12});});
     // like an airport code
     m5_smallTag(ctx,t,1700,96,0.5,"YYZ","Toronto",tA-0.2,{});});
   m5_close(ctx,S);

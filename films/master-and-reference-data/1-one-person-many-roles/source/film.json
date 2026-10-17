@@ -1,0 +1,19 @@
+{
+  "key": "one-person-many-roles",
+  "title": "One person, many roles",
+  "sub": "The same one, everywhere, a series on master and reference data: one person, Linh, held as four records in four systems; the kinds of data; a model with a learner but no person; the person, her roles, her contact points and her identifiers kept apart; who keeps what; the same pattern in other industries; and the four questions that say what needs mastering.",
+  "howto": "The film is drawn in watercolour. Each role has its own colour: student teal, platform user amber, customer coral, tutor violet, alumna green. The person, as the master record, is left as white paper and banded in her roles' colours. Cyan edges the technical side, gold the business side.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": ["apart", "none", 2.0],
+  "say": [
+    ["\\bNguyen\\b", "Nwin"],
+    ["\\bLinh's\\b", "Lin's"],
+    ["\\bLinh\\b", "Lin"],
+    ["\\bMinh\\b", "Min"],
+    ["\\bDAMA\\b", "Dahma"],
+    ["\\bHR\\b", "H R"]
+  ]
+}

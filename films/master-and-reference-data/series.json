@@ -1,0 +1,62 @@
+{
+  "title": "The same one, everywhere",
+  "title_es": "El mismo, en todas partes",
+  "films": ["1-one-person-many-roles"],
+  "planned": 9,
+  "lead": "A series on master and reference data. Linh, a graduate student who tutors this semester, is four records in four systems, and none of them knows the others are her. Film by film, the university learns to keep the person apart from her roles, decide once who is who and which value wins, date the roles, own the lists that sort people, use each role's data only for its purpose, share one person across its systems, and keep it right.",
+  "lead_es": "Una serie sobre datos maestros y de referencia. Linh, estudiante de posgrado que da tutorías este semestre, es cuatro registros en cuatro sistemas, y ninguno sabe que los otros también son ella. Película a película, la universidad aprende a separar a la persona de sus roles, decidir una vez quién es quién y qué valor gana, poner fechas a los roles, tener un responsable para las listas que clasifican a las personas, usar los datos de cada rol solo para su propósito, compartir una persona entre sus sistemas, y mantenerla bien.",
+  "description": "Short films on master and reference data: the person behind the roles, deciding who is who, which value wins, roles with dates, the lists everyone uses, purpose and consent, one person shared across systems, a master data hub at work, and keeping it right.",
+  "description_es": "Películas cortas sobre datos maestros y de referencia: la persona detrás de los roles, decidir quién es quién, qué valor gana, roles con fechas, las listas que todos usan, propósito y consentimiento, una persona compartida entre sistemas, un hub de datos maestros en marcha, y mantenerlo bien.",
+  "card": "One person, four systems, four records. A series on master and reference data, from the person behind the role to a hub at work.",
+  "card_es": "Una persona, cuatro sistemas, cuatro registros. Una serie sobre datos maestros y de referencia, desde la persona detrás del rol hasta un hub en marcha.",
+  "order": "Watch them in order: each film builds on the one before. The first of nine films is out.",
+  "order_es": "Míralas en orden: cada película se apoya en la anterior. Ya está la primera de nueve películas.",
+  "thread_h": "One thread: one person, Linh",
+  "thread_h_es": "Un hilo: una persona, Linh",
+  "thread": "Linh studies health informatics, took a short course, tutors a first-year unit this semester, and will be an alumna next year. Each system knows one part of her, by its own number. Film by film, the university gives her one record that every system can read: roles that start and end, each value labelled with where it came from, matches decided once by the people who look after them, the lists that sort people owned and dated, and each role's data used only for its purpose.",
+  "thread_es": "Linh estudia informática en salud, hizo un curso corto, da tutorías en una materia de primer año este semestre, y el año que viene será egresada. Cada sistema conoce una parte de ella, con su propio número. Película a película, la universidad le da un registro que todos los sistemas pueden leer: roles que empiezan y terminan, cada valor con la etiqueta de dónde vino, coincidencias decididas una vez por quienes las cuidan, las listas que clasifican a las personas con responsable y fecha, y los datos de cada rol usados solo para su propósito.",
+  "past_h": "Every film opens somewhere else, at another time",
+  "past_h_es": "Cada película empieza en otro lugar, en otra época",
+  "past": [
+    ["Sweden's parish books, 1686, and a number for life, 1947", "One person, written down once, and followed wherever they go."]
+  ],
+  "past_es": [
+    ["Los libros parroquiales de Suecia, 1686, y un número para toda la vida, 1947", "Una persona, anotada una sola vez, y seguida adondequiera que vaya."]
+  ],
+  "coming_h": "Still to come",
+  "coming_h_es": "Lo que viene",
+  "coming_p": "Eight more films, from deciding who is who to keeping it right.",
+  "coming_p_es": "Ocho películas más, desde decidir quién es quién hasta mantenerlo bien.",
+  "coming": [
+    [2, "Who is it?", "master or reference data, the golden record, and deciding a match"],
+    [3, "Which value wins", "a rule for each piece of the person"],
+    [4, "Roles come and go", "roles and relationships, with dates"],
+    [5, "Lists everyone uses", "reference data with an owner and a date"],
+    [6, "For this purpose only", "purpose and consent on each role"],
+    [7, "One person, many systems", "the ways to keep master data, and the lightest that works"],
+    [8, "A hub at work", "a master data hub: rules, a review queue, AI helpers, and undo"],
+    [9, "Kept, not cleaned", "looking after it every day, and checks at entry"]
+  ],
+  "coming_es": [
+    [2, "¿Quién es?", "dato maestro o de referencia, el registro maestro, y decidir una coincidencia"],
+    [3, "Qué valor gana", "una regla para cada dato de la persona"],
+    [4, "Los roles van y vienen", "roles y relaciones, con fechas"],
+    [5, "Listas que todos usan", "datos de referencia con responsable y fecha"],
+    [6, "Solo para este propósito", "propósito y consentimiento en cada rol"],
+    [7, "Una persona, muchos sistemas", "las formas de mantener datos maestros, y la más liviana que sirve"],
+    [8, "Un hub en marcha", "un hub de datos maestros: reglas, una cola de revisión, ayudantes de IA y deshacer"],
+    [9, "Mantenido, no limpiado", "cuidarlo cada día, y controles al ingresar los datos"]
+  ],
+  "people_h": "Who knows the person",
+  "people_h_es": "Quién conoce a la persona",
+  "people": [
+    ["person", "The person", "Linh Nguyen, a graduate student who tutors this semester, known to four systems"],
+    ["tech", "Draws the model", "Noor, the university's data architect"],
+    ["biz", "Looks after the person", "Mei, whose office decides who someone is, and whether two records are one"]
+  ],
+  "people_es": [
+    ["person", "La persona", "Linh Nguyen, estudiante de posgrado que da tutorías este semestre, conocida por cuatro sistemas"],
+    ["tech", "Dibuja el modelo", "Noor, la arquitecta de datos de la universidad"],
+    ["biz", "Cuida a la persona", "Mei, cuya oficina decide quién es alguien, y si dos registros son uno"]
+  ]
+}

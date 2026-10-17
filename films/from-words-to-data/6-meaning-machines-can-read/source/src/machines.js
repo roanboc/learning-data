@@ -156,16 +156,38 @@ function mm_thread(ctx,an,p,t,col){if(p<=0)return;const pts=an.filter(Boolean);f
 function mm_genie(ctx,x,y,t,o){o=o||{};withA(ctx,o.a==null?1:o.a,()=>{orb(ctx,x,y,o.r||34,t);chip(ctx,x,y+118,"databricks","Genie",o.sub||"answers in plain words",{align:"center",edge:MM_GEN});});}
 // where each column of a sketch3 table sits, measured the same way table() measures it
 function mm_cols(ctx,cols,rows){let x=0;const cs=Math.max(16,phMin(ctx));return cols.map((c,i)=>{const w=Math.max(tw(ctx,c,cs,500,"mono"),...rows.map(r=>tw(ctx,r[i],cs,500,"mono")))+30;const o={x,w};x+=w;return o;});}
-// the policy document: the rules are there, but in a file no tool reads
-function mm_doc(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,grey=o.grey||0;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.6)";ctx.shadowBlur=24;ctx.fillStyle=grey>0.5?"#9aa0aa":"#eef0f4";rr(ctx,x,y,w,h,8);ctx.fill();ctx.restore();
-  ctx.fillStyle="rgba(150,158,172,"+(0.55*grey)+")";rr(ctx,x,y,w,h,8);ctx.fill();ctx.fillStyle="#d9453a";rr(ctx,x+w-66,y+16,50,24,5);ctx.fill();T(ctx,"PDF",x+w-41,y+34,{w:800,size:14,align:"center",color:"#fff"});
-  const ink=grey>0.5?"rgba(60,64,72,0.75)":"rgba(30,34,44,0.95)";T(ctx,o.title||"Stacking policy",x+24,y+40,{w:800,size:22,color:ink});T(ctx,o.sub||"Academic Board · v4",x+24,y+64,{f:"mono",w:500,size:14,color:ink});
-  const bar=(yy,f)=>{ctx.fillStyle=grey>0.5?"rgba(70,74,84,0.3)":"rgba(40,44,54,0.25)";ctx.fillRect(x+24,yy,(w-48)*f,9);};
-  for(let i=0;i<2;i++)bar(y+96+i*24,0.6+0.4*hash(i,4));
-  // the two rules the question needs: what four approved microcredentials complete, and the limit on how many count
-  let ry=y+160;(o.rules||["4.1 Each approved microcredential is worth 10 credits; four complete the certificate's 40.","4.2 A graduate certificate accepts up to four approved microcredentials towards its credit."]).forEach(r=>{ry+=wrapT(ctx,r,x+24,ry,w-48,{w:700,size:17,lh:22,color:ink}).length*22+12;});
-  for(let i=0;i<6;i++)bar(y+h-146+i*24,0.5+0.5*hash(i,9));});}
-function mm_eyeOff(ctx,x,y,s,col,a){withA(ctx,a,()=>{ctx.save();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x-s,y);ctx.quadraticCurveTo(x,y-s*0.8,x+s,y);ctx.quadraticCurveTo(x,y+s*0.8,x-s,y);ctx.stroke();ctx.beginPath();ctx.arc(x,y,s*0.28,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(x-s*0.9,y+s*0.7);ctx.lineTo(x+s*0.9,y-s*0.7);ctx.stroke();ctx.restore();});}
+// a page Genie reads: the stacking policy as a PDF, or an old web page. Its title and lines are texture; the scene draws the one rule
+// each says, at a size that reads, in the slot from y+150 to y+198. o.kind ("pdf" or "web"), o.title, o.sub, o.url, o.seed, o.a
+function mm_page(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.6)";ctx.shadowBlur=24;ctx.fillStyle="#eef0f4";rr(ctx,x,y,w,h,8);ctx.fill();ctx.restore();
+  const ink="rgba(30,34,44,0.95)",sd=o.seed||0,bar=(yy,f)=>{ctx.fillStyle="rgba(40,44,54,0.22)";ctx.fillRect(x+20,yy,(w-40)*f,8);};let ty=y+44;
+  if(o.kind==="web"){ctx.fillStyle="#d9dde4";rr(ctx,x,y,w,34,8);ctx.fill();ctx.fillRect(x,y+20,w,14);["#e0675c","#e8b14a","#5fbf6a"].forEach((cl,i)=>{ctx.fillStyle=cl;ctx.beginPath();ctx.arc(x+16+i*14,y+17,4.5,0,TAU);ctx.fill();});
+    ctx.fillStyle="#f7f8fa";rr(ctx,x+60,y+7,w-72,20,10);ctx.fill();T(ctx,o.url||"",x+70,y+22,{w:500,size:12,color:"rgba(70,76,88,0.9)"});ty=y+64;}
+  else{ctx.fillStyle="#d9453a";rr(ctx,x+w-62,y+14,46,22,5);ctx.fill();T(ctx,"PDF",x+w-39,y+30,{w:800,size:13,align:"center",color:"#fff"});}
+  T(ctx,o.title||"",x+20,ty,{w:800,size:20,color:ink});T(ctx,o.sub||"",x+20,ty+22,{f:"mono",w:500,size:13,color:"rgba(70,76,88,0.9)"});
+  [0,1].forEach(i=>bar(ty+44+i*18,0.55+0.4*hash(i+sd,4)));
+  for(let yy=y+212;yy<y+h-16;yy+=20)bar(yy,0.45+0.5*hash(yy+sd,9));});}
+
+/* ---------- the glossary, and the platform that carries it ---------- */
+// the glossary's entry for a term, its source of truth: the term, its definition (typed as defP goes from 0 to 1), its owner and version
+function mm_gloss(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,hi=o.hi||0;if(a<=0.01)return;withA(ctx,a,()=>{if(hi>0)glow(ctx,x+w/2,y+h/2,w*0.55,MM_GLO,0.16*hi);
+  glass(ctx,x,y,w,h,18,MM_GLO,{glow:14+10*hi,ea:0.85,fill:"rgba(20,16,8,0.95)"});led(ctx,x+14,y+24,5,48,MM_GLO,0.9);
+  T(ctx,"Glossary",x+34,y+56,{w:800,size:30,color:rgba(MM_GLO,1)});withA(ctx,o.srcA==null?1:o.srcA,()=>T(ctx,"source of truth",x+w-28,y+56,{w:600,size:28,align:"right",color:rgba(SOFT,1)}));
+  ctx.strokeStyle=rgba(MM_GLO,0.3);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x+34,y+78);ctx.lineTo(x+w-28,y+78);ctx.stroke();
+  withA(ctx,o.termA==null?1:o.termA,()=>T(ctx,o.term,x+34,y+124,{w:800,size:28,color:rgba(INK,1)}));
+  if(o.defP>0)wrapT(ctx,typeOn(o.def,o.defP),x+34,y+168,w-62,{w:600,size:28,lh:37,color:rgba(PARCH,0.95)});
+  withA(ctx,o.ownA==null?1:o.ownA,()=>T(ctx,o.owner,x+34,y+h-30,{w:600,size:28,color:rgba(SOFT,1)}));});}
+// a table's page in Databricks' catalog: its name, then each column with its description. A description the glossary supplies is
+// marked "glossary" in the glossary's gold (o.gl: how far those marks are shown); o.rowA: each row's alpha; o.hiRow lights one row
+function mm_ucpage(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const TB=[150,225,255];withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,TB,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.96)"});
+  const lw=logo(ctx,"databricks",x+26,y+24,32);T(ctx,"Catalog · university › records",x+26+lw+14,y+50,{w:600,size:28,color:rgba(SOFT,1)});
+  T(ctx,o.table,x+26,y+116,{f:"mono",w:500,size:34,color:rgba(TB,1)});T(ctx,"table",x+w-26,y+116,{w:600,size:28,align:"right",color:rgba(SOFT,1)});
+  ctx.strokeStyle=rgba(TB,0.25);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x+26,y+140);ctx.lineTo(x+w-26,y+140);ctx.stroke();
+  T(ctx,"column",x+26,y+186,{w:600,size:28,color:rgba(SOFT,1)});T(ctx,"description",x+236,y+186,{w:600,size:28,color:rgba(SOFT,1)});
+  const gw=tw(ctx,"glossary",phSz(ctx,28),700)+26;
+  o.rows.forEach(([col,desc,fromG],i)=>{const yy=y+248+i*62,ra=o.rowA?o.rowA[i]:1,hi=o.hiRow===i?(o.hi||0):0;withA(ctx,ra,()=>{
+    if(hi>0){ctx.fillStyle=rgba(MM_GLO,0.12*hi);rr(ctx,x+12,yy-38,w-24,54,10);ctx.fill();ctx.strokeStyle=rgba(MM_GLO,0.7*hi);ctx.lineWidth=2;rr(ctx,x+12,yy-38,w-24,54,10);ctx.stroke();}
+    T(ctx,col,x+26,yy,{f:"mono",w:500,size:28,color:rgba(REF,1)});T(ctx,desc,x+236,yy,{w:600,size:28,color:rgba(INK,0.95)});
+    if(fromG)withA(ctx,o.gl==null?1:o.gl,()=>tag(ctx,x+w-26-gw,yy-10,"glossary",MM_GLO,{size:28}));});});});}
 
 /* ---------- the semantic layer's metric, and the tools that ask it ---------- */
 const MM_MROWS=[["measure","count of credentials"],["left out","revoked credentials"],["date","awarded on · this academic year"],["grain","one row per credential awarded"]];
@@ -328,8 +350,8 @@ function mm_vc(ctx,x,y,w,o){o=o||{};const m=phMin(ctx),rh=Math.max(o.rh||46,m?m*
 
 // a standard's binder is a picture: its name and line are part of the spine (the shelf's labels say what's what)
 mm_binder=phDeco(mm_binder);
-// the stacking policy is a document no tool can read: a picture of one, its words its texture
-mm_doc=phDeco(mm_doc);
+// the pages Genie reads are pictures of pages: their words are texture, and the scene draws the rule each one says
+mm_page=phDeco(mm_page);
 
 /* ---------- pictures for the labs and the scenarios (site/assets/meaning-machines-can-read/learn.*.js name them in "vis") ----------
    Each draws on a canvas of w × h, with the lab's state and the page's words (window.FW). Every word drawn comes from FW
@@ -429,9 +451,10 @@ const LV={
   threedefs:(c,w,h,st,FW)=>{const V=FW.vis.threedefs;[0,1,2].forEach(i=>{const x=12+i*196;glass(c,x,30,184,260,16,MM_REFC,{glow:12,ea:0.75,fill:"rgba(12,12,20,0.95)"});T(c,V.regions[i],x+92,76,{w:800,size:22,align:"center",color:rgba(MM_REFC,1)});
     c.fillStyle=rgba(GOOD,0.16);rr(c,x+12,100,160,58,10);c.fill();T(c,V.same,x+92,136,{w:700,size:19,align:"center",color:rgba(mix(INK,GOOD,0.4),1)});
     c.fillStyle=rgba(EXT,0.18);rr(c,x+12,172,160,100,10);c.fill();wrapT(c,V.diffs[i],x+24,206,140,{w:700,size:19,lh:24,color:rgba(mix(INK,EXT,0.4),1)});});},
-  pdfgloss:(c,w,h,st,FW)=>{const V=FW.vis.pdfgloss;c.save();c.shadowColor="rgba(0,0,0,0.6)";c.shadowBlur=18;c.fillStyle="#eef0f4";rr(c,50,28,240,270,8);c.fill();c.restore();c.fillStyle="#d9453a";rr(c,216,44,58,28,5);c.fill();T(c,"PDF",245,64,{w:800,size:18,align:"center",color:"#fff"});
-    T(c,V.title,70,112,{w:800,size:26,color:"#1e222c"});T(c,V.pages,70,142,{w:600,size:18,color:"#4a5160"});for(let i=0;i<5;i++){c.fillStyle="rgba(40,44,54,0.22)";c.fillRect(70,170+i*24,190*(0.6+0.4*hash(i,3)),9);}
-    orb(c,450,130,28,1);c.fillStyle="rgba(7,12,24,0.9)";c.beginPath();c.arc(450,238,36,0,TAU);c.fill();mm_eyeOff(c,450,238,24,EDGE_,1);T(c,"?",520,110,{w:800,size:44,color:rgba(EDGE_,1)});},
+  pdfgloss:(c,w,h,st,FW)=>{const V=FW.vis.pdfgloss;V.copies.forEach((cp,i)=>{const x=40+i*40,y=36+i*52;c.save();c.shadowColor="rgba(0,0,0,0.6)";c.shadowBlur=14;c.fillStyle="#eef0f4";rr(c,x,y,220,170,8);c.fill();c.restore();
+      c.fillStyle="rgba(255,236,150,0.95)";rr(c,x+12,y+10,124,32,6);c.fill();T(c,cp,x+20,y+33,{w:700,size:19,color:"#1e222c"});c.fillStyle="#d9453a";rr(c,x+160,y+12,48,26,5);c.fill();T(c,"PDF",x+184,y+31,{w:800,size:18,align:"center",color:"#fff"});
+      T(c,V.title,x+16,y+76,{w:800,size:22,color:"#1e222c"});for(let k=0;k<3;k++){c.fillStyle="rgba(40,44,54,0.22)";c.fillRect(x+16,y+98+k*20,180*(0.6+0.4*hash(k+i,3)),8);}});
+    orb(c,470,120,28,1);T(c,"?",530,104,{w:800,size:44,color:rgba(EDGE_,1)});wrapT(c,V.q,380,220,200,{w:700,size:19,lh:24,color:rgba(EDGE_,1)});},
   copyonto:(c,w,h,st,FW)=>{const V=FW.vis.copyonto;glass(c,24,60,220,170,14,MM_DM,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(c,V.table,40,94,{f:"mono",w:500,size:20,color:rgba(MM_DM,1)});
     c.strokeStyle="rgba(170,200,245,0.25)";c.lineWidth=1;c.beginPath();c.moveTo(24,110);c.lineTo(244,110);c.stroke();V.cols.forEach((s,i)=>T(c,s,40,148+i*40,{f:"mono",w:500,size:20,color:rgba(INK,0.95)}));
     arrowTo(c,256,145,322,145,SOFT,0.9,{head:12,lw:2.4});V.gen.forEach((s,i)=>mm_pill(c,450,90+i*60,s,MM_ONT,{size:20,r:10,dash:true,fill:"rgba(34,22,60,0.96)"}));

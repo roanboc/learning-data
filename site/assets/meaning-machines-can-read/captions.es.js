@@ -16,10 +16,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En la universidad, la directora de la escuela le pregunta a Genie: ¿qué aprendices están a una microcredencial de un diplomado de posgrado?",
 "Genie finds the tables. It finds a column called is_micro, and another called stack_ok.":
 "Genie encuentra las tablas. Encuentra una columna llamada is_micro, y otra llamada stack_ok.",
-"But the stacking rules live in a policy document that no tool can read. Genie guesses, and it's wrong.":
-"Pero las reglas de apilamiento viven en un documento de política que ninguna herramienta lee. Genie adivina, y se equivoca.",
-"An AI assistant answers from what it can read. Meaning kept only in documents is out of its reach.":
-"Un asistente de IA responde con lo que puede leer. El significado guardado solo en documentos queda fuera de su alcance.",
+"It reads the stacking rules too: in a policy document, and on an old web page. They don't agree, so Genie guesses, and it's wrong.":
+"También lee las reglas de apilamiento: en un documento de política y en una página web antigua. No coinciden, así que Genie adivina, y se equivoca.",
+"An assistant answers from what it reads. Meaning outside a managed glossary, with no owner and no version, can contradict itself, or be wrong.":
+"Un asistente responde con lo que lee. El significado fuera de un glosario gestionado, sin responsable ni versión, puede contradecirse, o estar mal.",
 "There are four common ways to write meaning down, and they stack. A glossary: words and their definitions, for people.":
 "Hay cuatro formas comunes de escribir el significado, y se apilan. Un glosario: palabras y sus definiciones, para personas.",
 "A taxonomy: kinds of things in a hierarchy, like Linnaeus's.":
@@ -60,14 +60,16 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Hasta «microcredencial» tiene definiciones oficiales: de Australia, de la Unión Europea y de la UNESCO. No coinciden del todo.",
 "So choose deliberately. Check, adopt, extend and record, as in A Sharper Sketch, at every layer.":
 "Así que elige a propósito. Revisa, adopta, extiende y registra, como en Un boceto más preciso, en cada capa.",
-"The Head of School asks again. This time, Genie asks back: approved for stacking, or all microcredentials?":
-"La directora vuelve a preguntar. Esta vez, Genie repregunta: ¿aprobadas para apilar, o todas las microcredenciales?",
+"This time, the meaning comes from one source of truth, the glossary. In Databricks, its definitions now sit on each table's page, next to the data.":
+"Esta vez, el significado viene de una sola fuente de verdad: el glosario. En Databricks, sus definiciones ahora están en la página de cada tabla, junto a los datos.",
+"The Head of School asks again. Genie reads the definitions, and asks back: approved for stacking, or all microcredentials?":
+"La directora vuelve a preguntar. Genie lee las definiciones, y repregunta: ¿aprobadas para apilar, o todas las microcredenciales?",
 "Then it answers, and shows the definition it used.":
 "Luego responde, y muestra la definición que usó.",
-"Studies have found that grounding an assistant in explicit meaning makes its answers measurably more accurate. The difference is the meaning it can read.":
-"Varios estudios han encontrado que basar un asistente en significado explícito aumenta de forma medible sus aciertos. La diferencia es el significado que puede leer.",
-"The triangle from the start of the series returns: the word, in English and in Spanish; the idea, now written in the ontology; and the data it points to.":
-"Vuelve el triángulo del comienzo de la serie: la palabra, en inglés y en español; la idea, ahora escrita en la ontología; y los datos a los que apunta.",
+"Studies have found that grounding an assistant in explicit meaning makes its answers measurably more accurate. The difference is meaning it can read, and trust.":
+"Varios estudios han encontrado que basar un asistente en significado explícito aumenta de forma medible sus aciertos. La diferencia es un significado que puede leer, y en el que puede confiar.",
+"The triangle from the start of the series returns: the word, now in the glossary; the idea, now written in the ontology; and the data it points to.":
+"Vuelve el triángulo del comienzo de la serie: la palabra, ahora en el glosario; la idea, ahora escrita en la ontología; y los datos a los que apunta.",
 "Next: keeping all of it true, while everything changes.":
 "Siguiente: que todo siga siendo verdad, mientras todo cambia."
 });

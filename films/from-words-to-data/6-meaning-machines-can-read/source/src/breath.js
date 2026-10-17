@@ -3,12 +3,12 @@
    Three wordless moments: the title, the four floors of meaning standing together, and the ending. */
 const BREATH={
 "before":{"hold":{"wilkins":0.5,"icd":0.5,"lesson":0.6},"breathe":3.6},
-"guesses":{"hold":{"finds":0.4,"wrong":0.8,"read":0.3}},
+"guesses":{"hold":{"finds":0.4,"wrong":1.1,"read":0.6}},
 "four":{"hold":{"gloss":0.3,"onto":0.4},"breathe":3.0},
 "ontology":{"hold":{"rules":0.8,"graph":0.8,"aristotle":0.4}},
 "model":{"hold":{"domain":0.6,"once":0.9,"views":0.8,"owl":0.9,"same":0.6}},
 "semantic":{"hold":{"once":0.6,"tools":0.4}},
 "standards":{"hold":{"blank":0.5,"creds":0.4,"three":0.8}},
-"again":{"hold":{"asks":0.4,"answer":0.6}},
+"again":{"hold":{"page":0.8,"asks":0.5,"answer":0.6}},
 "end":{"hold":{"tri":0.8},"breathe":4.2}
 };

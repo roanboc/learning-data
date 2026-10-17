@@ -16,7 +16,7 @@ The series starts before technology, with how minds turn the world into words, a
 | [Built to write, built to read](https://roanboc.github.io/learning-data/from-words-to-data/built-to-write-built-to-read/) | Shapes for data | 5 min | 8 | 3 labs, 8 scenarios | [script](3-built-to-write-built-to-read/script.md) · [source](3-built-to-write-built-to-read/source/README.md) |
 | [Many ways to read](https://roanboc.github.io/learning-data/from-words-to-data/many-ways-to-read/) | Shapes for reading | 4 min | 8 | 3 labs, 8 scenarios | [script](4-many-ways-to-read/script.md) · [source](4-many-ways-to-read/source/README.md) |
 | [Both at once](https://roanboc.github.io/learning-data/from-words-to-data/both-at-once/) | Hybrid databases | 4 min | 9 | 3 labs, 8 scenarios | [script](5-both-at-once/script.md) · [source](5-both-at-once/source/README.md) |
-| [Meaning machines can read](https://roanboc.github.io/learning-data/from-words-to-data/meaning-machines-can-read/) | Meaning and AI | 5 min | 9 | 5 labs, 12 scenarios | [script](6-meaning-machines-can-read/script.md) · [source](6-meaning-machines-can-read/source/README.md) |
+| [Meaning machines can read](https://roanboc.github.io/learning-data/from-words-to-data/meaning-machines-can-read/) | Meaning and AI | 5½ min | 9 | 5 labs, 12 scenarios | [script](6-meaning-machines-can-read/script.md) · [source](6-meaning-machines-can-read/source/README.md) |
 | [Keeping it true](https://roanboc.github.io/learning-data/from-words-to-data/keeping-it-true/) | Keeping meaning current | 5 min | 10 | 4 labs, 10 scenarios | [script](7-keeping-it-true/script.md) · [source](7-keeping-it-true/source/README.md) |
 <!-- /films -->
 
@@ -31,7 +31,7 @@ The [proposal](proposal.md) records how the series was planned and the decisions
 | Built to write, built to read | Awards are issued one by one on graduation day, and read ten years at a time by planners. |
 | Many ways to read | Credentials from a new platform are integrated, presented and served as one learner record. |
 | Both at once | An employer checks a credential live; a learner's wallet shows, now, how close she is to a graduate certificate. |
-| Meaning machines can read | Genie is asked who is one microcredential away from a certificate, and must read the stacking rules, not guess them. Noor's architecture map holds each concept once, and the glossary, the models, the ontology in OWL and the tests are its views. |
+| Meaning machines can read | Genie is asked who is one microcredential away from a certificate, and must read one managed definition of the stacking rules, not guess between documents that disagree. Noor's architecture map holds each concept once, and the glossary, the models, the ontology in OWL and the tests are its views. |
 | Keeping it true | The government adds a reporting rule, and a credential issued in error is revoked. AI spots both and drafts the change; people approve sketch v3. New shapes for data will keep coming; the credential's meaning, identity, grain and time are what remain. |
 
 ## Every film starts in the past

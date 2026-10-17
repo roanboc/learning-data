@@ -8,7 +8,7 @@ A newcomer understands it, and a data architect agrees with it. An AI assistant 
 
 ## The story in one paragraph
 
-People tried to write meaning down long before computers: Linnaeus gave every species a two-part name and a place in a hierarchy, and scientists still use it; Wilkins tried to classify everything in the universe, and it never took hold; Nightingale asked hospitals to record the same things the same way, and a shared list of causes of death became today's ICD. The ones that last are made for a purpose. At the university, Ana, the Head of School, asks Genie which learners are one microcredential away from a graduate certificate. Genie finds the tables and the columns `is_micro` and `stack_ok`, but the stacking rule lives in a policy PDF that no tool reads, so it guesses: 214, against the registrar's 132. The film then builds the four floors of meaning, writes the stacking rule in the ontology and connects the university's data to it as a knowledge graph, and asks where all this meaning lives: in Noor's architecture map, each data domain lists its entities, and microcredential is written once, with its definition, its relationships and its rule. The glossary, the conceptual and logical models, the ontology in OWL and the tests are drawn from the map, one way, and a change to the map reaches every view. The film then defines "credentials awarded this year" once in the semantic layer for every tool, and shows the shelf of published standards and the three official definitions of *microcredential*. Ana asks again; Genie asks back, "approved for stacking, or all microcredentials?", and answers 132 with the definition it used. The triangle from *What's in a word* returns, with the word in English and Spanish, in the glossary, the idea in the ontology, and the data.
+People tried to write meaning down long before computers: Linnaeus gave every species a two-part name and a place in a hierarchy, and scientists still use it; Wilkins tried to classify everything in the universe, and it never took hold; Nightingale asked hospitals to record the same things the same way, and a shared list of causes of death became today's ICD. The ones that last are made for a purpose. At the university, Ana, the Head of School, asks Genie which learners are one microcredential away from a graduate certificate. Genie finds the tables and the columns `is_micro` and `stack_ok`, and reads the stacking rules too, in the policy and on an old web page; they don't agree, and nothing says which is current, so it guesses: 214, against the registrar's 132. The film then builds the four floors of meaning, writes the stacking rule in the ontology and connects the university's data to it as a knowledge graph, and asks where all this meaning lives: in Noor's architecture map, each data domain lists its entities, and microcredential is written once, with its definition, its relationships and its rule. The glossary, the conceptual and logical models, the ontology in OWL and the tests are drawn from the map, one way, and a change to the map reaches every view. The film then defines "credentials awarded this year" once in the semantic layer for every tool, and shows the shelf of published standards and the three official definitions of *microcredential*. This time the meaning comes from one source of truth, the glossary, whose definitions sit on each table's page in Databricks, next to the data. Ana asks again; Genie asks back, "approved for stacking, or all microcredentials?", and answers 132 with the definition it used. The triangle from *What's in a word* returns, with the word in the glossary, the idea in the ontology, and the data.
 
 ## What each object stands for
 
@@ -22,7 +22,8 @@ Everything from *What's in a word* (the warm past, the dark glass of the present
 | A handwritten list becoming a glass card of codes, a line of revisions | The 1893 list of causes of death becoming today's ICD, revised again and again |
 | Four floors stacked like a building, each with its question | Glossary (gold), taxonomy (green), ontology (violet), semantic layer (blue): a stack, not rivals |
 | A white thread through the four floors | One idea, *microcredential*, written down at every layer |
-| Tables with two columns outlined; a greyed PDF with a crossed-out eye | What Genie can read, and meaning kept where no tool reads it |
+| Tables with two columns outlined; a policy PDF and an old web page, each with its rule highlighted, and a "≠" between them | What Genie reads: tables, and documents that disagree, with no owner and no version |
+| A gold glossary card, "source of truth", and a table's page in Databricks with "glossary" beside two columns | One managed definition, carried by the platform next to the data it describes |
 | Red 214 beside green 132 | A confident answer from guessed meaning, against the registrar's list |
 | Violet statements, then a graph of learners, microcredentials and a certificate | The ontology's rules, and the data connected to them: a knowledge graph |
 | A pencil sheet beside a violet panel of formal lines | Aristotle's recipe (the kind, and what sets it apart), made formal |
@@ -51,15 +52,15 @@ Timings are the voiced film's, from `tools/pace.py` and the timeline.
 
 **On screen.** 1750s · Linnaeus · Erithacus rubecula · genus · species · 1668 · Wilkins · 40 kinds, divided again and again · never took hold · 1860 · Nightingale · same columns, same way: now they compare · 1893 → today · International Classification of Diseases · made for a purpose, not for everything · *Meaning machines can read* · what an AI assistant needs to answer right
 
-### 2 · Genie guesses · 0:50–1:22
+### 2 · Genie guesses · 0:50–1:27
 
-**Narration.** At the university, the Head of School asks Genie: which learners are one microcredential away from a graduate certificate? Genie finds the tables. It finds a column called is_micro, and another called stack_ok. But the stacking rules live in a policy document that no tool can read. Genie guesses, and it's wrong. An AI assistant answers from what it can read. Meaning kept only in documents is out of its reach.
+**Narration.** At the university, the Head of School asks Genie: which learners are one microcredential away from a graduate certificate? Genie finds the tables. It finds a column called is_micro, and another called stack_ok. It reads the stacking rules too: in a policy document, and on an old web page. They don't agree, so Genie guesses, and it's wrong. An assistant answers from what it reads. Meaning outside a managed glossary, with no owner and no version, can contradict itself, or be wrong.
 
-**Picture.** Ana in her bubble; Genie's orb and chip. Three tables appear (learners, credentials, certificates); dashed beams run from the orb to each, a scan crosses the columns, and `is_micro` and `stack_ok` are outlined. A policy PDF appears, its two rules legible ("4.1 Each approved microcredential is worth 10 credits; four complete the certificate's 40." and "4.2 A graduate certificate accepts up to four approved microcredentials towards its credit."), then greys out behind a crossed-out eye: "no tool can read this". Genie's card glitches in red, 214, "guessed from is_micro and stack_ok"; the registrar's list, 132, in green; a red cross. A dashed border draws around the tables, "what Genie can read"; the document gets its own border, outside it.
+**Picture.** Ana in her bubble; Genie's orb and chip. Three tables appear (learners, credentials, certificates); dashed beams run from the orb to each, a scan crosses the columns, and `is_micro` and `stack_ok` are outlined. Then two pages appear, each reached by a beam from Genie: the stacking policy as a PDF ("Academic Board · v4"), its rule highlighted, "up to 4 approved"; and an old web page, "Short courses FAQ, updated 2023", its rule highlighted, "any 4 courses". A "≠" lands between them: "which one is current?". Genie follows the old page: its card glitches in red, 214, "by the old web page"; the registrar's list, 132, "by the stacking policy", in green, and the policy's rule is outlined green; a red cross. A dashed border draws around both pages, "outside a managed glossary", and under them, "no owner · no version".
 
-**On screen.** Ana Ruiz · Head of School · learners · credentials · certificates · no tool can read this · Genie 214 · Registrar's list 132 · what Genie can read
+**On screen.** Ana Ruiz · Head of School · learners · credentials · certificates · up to 4 approved · any 4 courses · ≠ · which one is current? · Genie 214 · by the old web page · Registrar's list 132 · by the stacking policy · outside a managed glossary · no owner · no version
 
-### 3 · Four ways to write meaning down · 1:22–1:56
+### 3 · Four ways to write meaning down · 1:27–2:01
 
 **Narration.** There are four common ways to write meaning down, and they stack. A glossary: words and their definitions, for people. A taxonomy: kinds of things in a hierarchy, like Linnaeus's. An ontology: concepts, the relationships between them, and rules that a machine can check and reason with. And a semantic layer: how each number is calculated, defined once. They aren't rivals. Each one answers a different question.
 
@@ -67,7 +68,7 @@ Timings are the voiced film's, from `tools/pace.py` and the timeline.
 
 **On screen.** Glossary · what does it mean? · Taxonomy · what kind is it? · Ontology · how does it relate, and what's allowed? · Semantic layer · how is it calculated? · a stack, not rivals
 
-### 4 · The ontology · 1:56–2:30
+### 4 · The ontology · 2:01–2:35
 
 **Narration.** In the ontology, the rules are written as statements. A microcredential is a kind of credential. A graduate certificate accepts up to four approved microcredentials towards its credit. Connect the university's data to these statements, and it becomes a knowledge graph: learners, credentials and courses, linked by what they mean. It's Aristotle's recipe made formal: the kind of thing, and what sets it apart, in a form a machine can use.
 
@@ -75,7 +76,7 @@ Timings are the voiced film's, from `tools/pace.py` and the timeline.
 
 **On screen.** Ontology: rules, written as statements · is a kind of · accepts · max 4 · approved only · towards its credit · a knowledge graph · accepts max 4 · approved · 3 approved: one more completes it · the kind of thing · what sets it apart · made formal · a form a machine can use
 
-### 5 · One map, many views · 2:30–3:18
+### 5 · One map, many views · 2:35–3:24
 
 **Narration.** Where does all this meaning live? In Noor's architecture map, each data domain lists its entities: learners, credentials, certificates. Each concept is written once: its definition, how it relates to the others, and the rules it follows. The glossary shows the definitions, for people. The conceptual model shows how the concepts relate. The logical model adds how many, and the keys. When a machine has to reason, the ontology is extracted from the same map, in OWL, the Web Ontology Language. Rules that check the data become tests. They don't compete: they come from one map, so they agree. Change the map, and the views follow.
 
@@ -83,7 +84,7 @@ Timings are the voiced film's, from `tools/pace.py` and the timeline.
 
 **On screen.** Architecture map · owner: Noor, data architect · Issue a credential · Student system · Courses · Learners · Credentials · Course · Learner · Credential · Microcredential · Graduate certificate · id CR-104 · definition · a small credential, with its learning assessed · owner: Short courses · relationships · a kind of Credential · counts towards Graduate certificate · rules · a graduate certificate accepts up to four approved · counts towards · rule: up to 4 approved · architecture map · Glossary · for people · microcredential · Conceptual model · how concepts relate · a kind of · Logical model · how many, and keys · Certificate · micro_id · cert_id · Ontology · OWL · for machines · Microcredential subClassOf Credential · countsTowards GraduateCertificate · Tests · checks on the data · a certificate counts at most 4 approved · as SHACL, a data contract or a test · one map, many views · version 2
 
-### 6 · The semantic layer · 3:18–3:42
+### 6 · The semantic layer · 3:24–3:47
 
 **Narration.** In the semantic layer, credentials awarded this year is defined once: what's counted, what's left out, which date, and at what grain. Dashboards, spreadsheets and Genie all ask it, instead of each writing its own version. Open formats for sharing these definitions between tools are starting to appear.
 
@@ -91,7 +92,7 @@ Timings are the voiced film's, from `tools/pace.py` and the timeline.
 
 **On screen.** credentials awarded this year · semantic layer · defined once · measure · left out · date · grain · = 11,890 · one definition, every tool · open formats are appearing
 
-### 7 · Standards · 3:42–4:16
+### 7 · Standards · 3:47–4:21
 
 **Narration.** You don't have to start from a blank page. Finance, health, insurance and retail all publish shared models, and so does education. Digital credentials have open standards too, with issuer, holder and evidence in them. Even microcredential has official definitions: from Australia, from the European Union, and from UNESCO. They don't quite match. So choose deliberately. Check, adopt, extend and record, as in A Sharper Sketch, at every layer.
 
@@ -99,28 +100,28 @@ Timings are the voiced film's, from `tools/pace.py` and the timeline.
 
 **On screen.** the standards' names and industries · DIGITAL CREDENTIALS · issuer · holder · subject · claim · evidence · status · "microcredential": three official definitions · same word, different edges · 1 Check · 2 Adopt · 3 Extend · 4 Record · at every layer
 
-### 8 · Genie, again · 4:16–4:40
+### 8 · Genie, again · 4:21–4:58
 
-**Narration.** The Head of School asks again. This time, Genie asks back: approved for stacking, or all microcredentials? Then it answers, and shows the definition it used. Studies have found that grounding an assistant in explicit meaning makes its answers measurably more accurate. The difference is the meaning it can read.
+**Narration.** This time, the meaning comes from one source of truth, the glossary. In Databricks, its definitions now sit on each table's page, next to the data. The Head of School asks again. Genie reads the definitions, and asks back: approved for stacking, or all microcredentials? Then it answers, and shows the definition it used. Studies have found that grounding an assistant in explicit meaning makes its answers measurably more accurate. The difference is meaning it can read, and trust.
 
-**Picture.** Ana's question again. Genie's bubble asks back; Ana answers, "Approved for stacking." Genie's card counts up to 132, green, "matches the registrar's list", beside the definition it used ("one away: holds 3 approved microcredentials; four complete a graduate certificate"), with its sources (ontology · stacking rule; semantic layer · near a certificate). Two bars grow, "tables only: guesses" short and red, "tables + meaning: grounded" long and green, marked "illustrative · not to scale": "the difference is the meaning it can read".
+**Picture.** A gold glossary card, "Glossary · source of truth": "approved for stacking", typed in as "a microcredential that Short courses has approved to count towards a graduate certificate", "owner: Short courses · v3". Beside it, the credentials table's page in Databricks' catalog ("Catalog · university › records"), with its columns and their descriptions: learner_id, "the learner who holds it"; is_micro, "a microcredential"; stack_ok, "approved for stacking". A gold arrow, "from the glossary", reaches the stack_ok row, and "glossary" marks the two descriptions it supplies; a beam runs from Genie to the row. Then Ana's question again. Genie's bubble asks back; Ana answers, "Approved for stacking." Genie's card counts up to 132, green, "matches the registrar's list", beside the definition it used ("one away: holds 3 approved microcredentials; four complete a graduate certificate"), with its sources: glossary · approved for stacking; ontology · stacking rule; semantic layer · near a certificate. Two bars grow, "tables only: guesses" short and red, "tables + meaning: grounded" long and green, marked "illustrative · not to scale": "meaning it can read, and trust".
 
-**On screen.** Genie asks back · Approved for stacking, or all microcredentials? · Approved for stacking. · Genie 132 · the definition it used · one away: holds 3 approved microcredentials; four complete a graduate certificate · how often the answer is right · illustrative · not to scale · the difference is the meaning it can read
+**On screen.** Glossary · source of truth · approved for stacking · a microcredential that Short courses has approved to count towards a graduate certificate · owner: Short courses · v3 · Catalog · university › records · credentials · table · column · description · learner_id · the learner who holds it · is_micro · a microcredential · stack_ok · approved for stacking · glossary · from the glossary · Genie asks back · Approved for stacking, or all microcredentials? · Approved for stacking. · Genie 132 · the definition it used · one away: holds 3 approved microcredentials; four complete a graduate certificate · glossary · approved for stacking · ontology · stacking rule · semantic layer · near a certificate · how often the answer is right · illustrative · not to scale · meaning it can read, and trust
 
-### 9 · Pull back · 4:40–5:02
+### 9 · Pull back · 4:58–5:19
 
-**Narration.** The triangle from the start of the series returns: the word, in English and in Spanish; the idea, now written in the ontology; and the data it points to. Next: keeping all of it true, while everything changes.
+**Narration.** The triangle from the start of the series returns: the word, now in the glossary; the idea, now written in the ontology; and the data it points to. Next: keeping all of it true, while everything changes.
 
-**Picture.** The dashed triangle from *What's in a word* (word, idea, thing) fills in: the word *credential*, with *credencial* under it, "the word, in the glossary"; the idea as a violet node, with Award and Microcredential as its kinds; the data as a small table of credentials. "Next: keeping it true." The end card.
+**Picture.** The dashed triangle from *What's in a word* (word, idea, thing) fills in: the word *credential*, "the word, in the glossary"; the idea as a violet node, with Award and Microcredential as its kinds; the data as a small table of credentials. "Next: keeping it true." The end card.
 
-**On screen.** from What's in a word · credential · credencial · the word, in the glossary · Credential · now written in the ontology · the data it points to · Next: keeping it true · *An assistant answers from the meaning it can read.*
+**On screen.** from What's in a word · credential · the word, in the glossary · Credential · now written in the ontology · the data it points to · Next: keeping it true · *An assistant answers from the meaning it can read, and trust.*
 
 ## Pause and think
 
 The film stops at the end of five chapters (`site/assets/meaning-machines-can-read/think.en.js`):
 
 1. **They tried before.** Wilkins tried to classify everything; the list of causes of death was made so that hospitals and countries could compare. Why did the list last? *It was made for one purpose, and shared by the people who needed to compare.*
-2. **Genie guesses.** Genie found the right tables and still gave the wrong number. What was missing? *The stacking rule, in a form it could read.*
+2. **Genie guesses.** Genie read the tables, the policy and an old web page, and still gave the wrong number. What was missing? *One managed definition of the stacking rule, with an owner and a version.*
 3. **Four ways to write meaning down.** Where does "a graduate certificate accepts up to four approved microcredentials" belong? *In the ontology.*
 4. **One map, many views.** The glossary, the conceptual model and the ontology all describe microcredential. What keeps them from drifting apart? *Each concept is written once, in the architecture map, and every view is drawn from it.*
 5. **Standards.** Three official definitions of microcredential don't quite match. What do you do? *Choose one deliberately, map the others to it, and record the differences.*
@@ -133,7 +134,7 @@ The film stops at the end of five chapters (`site/assets/meaning-machines-can-re
 | They tried before | Wilkins, "nearly a century earlier" (1668), designed a language to classify everything; it never took hold. | About 85 to 90 years earlier. The *Essay* sorts things into 40 genera, then differences, then species (about 251 and 2,030 in most counts); the slips show all 40, shortened (his "Oeconomical" relation, of household and family, is "household relation"). It influenced later thesauri (Roget cites it). |
 | They tried before | Nightingale, 1860, asked hospitals to record the same things the same way. | Her model hospital statistical forms were endorsed by the International Statistical Congress in London in 1860; only some London and Paris hospitals used them. At that congress she urged the adoption of Farr's classification of diseases (prepared with d'Espine for the congresses of 1853 and 1855) for hospital statistics, which WHO's history of the ICD counts in its lineage: hence the "Nightingale → ICD" card. The columns and numbers on screen are illustrative. |
 | They tried before | An international list of causes of death followed in 1893; today it's the ICD. | Bertillon's classification, adopted by the International Statistical Institute in Chicago in 1893; WHO took over with the sixth revision in 1948, which added diseases, not only deaths. ICD-11 came into effect in 2022; the codes shown are ICD-11 MMS. Many countries still report with ICD-10. The listed early causes are typical of the 1893 lists, without their numbers. |
-| Genie guesses | Genie finds the tables and columns, but not the rule in a PDF, and guesses 214 against 132; meaning kept only in documents is out of its reach. | The university, the policy, the numbers and the columns are fictional. In this fictional policy, each approved microcredential is worth 10 credits, so four approved microcredentials complete a certificate's 40 (rule 4.1 on screen), and three make a learner "one away"; rule 4.2 caps how many count. Assistants can be given documents (retrieval over documents is common), but this Genie isn't given the PDF, and a rule buried in prose is not something a query can check or count by. |
+| Genie guesses | Genie reads the tables, the policy and an old web page; the two pages disagree, nothing says which is current, and it follows the old one: 214 against 132. Meaning outside a managed glossary, with no owner and no version, can contradict itself, or be wrong. | The university, the policy, the page, the numbers and the columns are fictional. In the fictional policy, a graduate certificate accepts up to four approved microcredentials, each worth 10 credits, so three make a learner "one away"; the old page says any four courses count, and counting every microcredential gives 214. Assistants read documents and web pages (retrieval over documents is common); the film's point is that documents without an owner or a version can disagree, go stale, or be wrong, and an assistant can't tell which copy is current. A managed glossary gives each definition one home, an owner and a version (*Keeping it true*). |
 | Four ways | Glossary, taxonomy, ontology and semantic layer stack; each answers a different question. | The boundaries blur in practice: a thesaurus (SKOS) sits between glossary and taxonomy; an ontology usually contains a taxonomy of classes; some semantic layers carry relationships. The four jobs are what matter. |
 | The ontology | Rules are written as statements; data connected to them becomes a knowledge graph. | Real ontologies are written in RDF and OWL (or a vendor's language); "accepts up to four approved" would be a cardinality restriction plus a condition, often checked with SHACL rather than inferred with OWL. The formal lines on screen are simplified, not a real syntax; the limit sits on the certificate (it accepts at most four approved microcredentials), not on the microcredential. |
 | One map, many views | In Noor's architecture map, each data domain lists its entities. | The map is the enterprise architecture's model of the university: business, application and data elements and how they relate, here a process and an application with ArchiMate's icons (The Open Group, ArchiMate 3.2, 2022). ArchiMate has business objects and data objects but no element called a data domain; domains are usually drawn as groupings, as here. Any other architecture modelling language that names its relationships and gives each element a stable id would do, and the labs say so. |
@@ -143,8 +144,9 @@ The film stops at the end of five chapters (`site/assets/meaning-machines-can-re
 | One map, many views | They don't compete: they come from one map, so they agree. Change the map, and the views follow. | In practice, the glossary, the models and the OWL file are generated or synchronised from the repository, and nobody edits a view directly: a fix goes back to the map, is reviewed, versioned and drawn again (*Keeping it true*). The logical model is derived and then designed (its keys, how many); it follows the map, and doesn't feed back into it. The ontology still answers a different question from the data model: what may be concluded, for every system, rather than how one system's records are kept (Spyns, Meersman and Jarrar, 2002). |
 | Standards | Finance, health, insurance, retail and education publish shared models; digital credentials have open standards with issuer, holder and evidence. | FIBO is an ontology; ISO 20022 and HL7 FHIR are message and exchange standards; SNOMED CT is a terminology; ICD a classification; GS1 identifiers; CEDS, HERM and TCSI education models. They sit at different layers. W3C Verifiable Credentials 2.0 became a Recommendation in May 2025; Open Badges 3.0 aligns with it; the European Learning Model underpins Europass digital credentials. In the VC model, the claims are about a subject, usually the holder; "holder" is a role (and a property of verifiable presentations), not a property of the credential, so the card's row reads "holder · subject". |
 | Standards | Australia, the European Union and UNESCO define microcredential; they don't quite match. | Each definition has more parts than the three shown: Australia's National Microcredentials Framework (2021) sets at least one hour and less than an AQF award; the EU's Council Recommendation (2022) speaks of a small volume of learning, assessed against transparent criteria, owned by the learner and portable; UNESCO (2022) of a trusted provider and standalone value. All three require assessment. |
+| Genie, again | The glossary is the source of truth; in Databricks, its definitions sit on each table's page, next to the data, and Genie reads them. | Unity Catalog keeps a description for each table and column, shown on its page in the catalog; a glossary's definitions can be carried there, by hand or by a tool that syncs them, and governed tags (generally available since April 2026) can mark a column with its term. Genie Agents (formerly Genie spaces) take a table's description from Unity Catalog by default, and can add column descriptions, synonyms and instructions of their own. Databricks' business semantics go further, with Pages for authoritative terms and Domains, announced in June 2026 and in preview when checked; the film shows only what a table's page already carries. The fictional glossary entry is owned by Short courses, as in *Keeping it true*. |
 | Genie, again | Studies found that grounding an assistant in explicit meaning makes it measurably more accurate. | Sequeda, Allemang and Jacob (2023): GPT-4 answered 16.7% of enterprise questions correctly over the SQL schema alone and 54.2% over a knowledge graph of the same data. Later benchmarks on semantic layers point the same way. The bars on screen are illustrative, not to scale. Genie's asking back is shown as the ideal; real assistants ask back only when configured and prompted well. |
-| Pull back | The triangle returns, with the word in two languages, in the glossary, the idea in the ontology, and the data. | Labels in several languages for one concept are what SKOS and OWL labels (with language tags) are for; a glossary can keep the word in each language too. |
+| Pull back | The triangle returns: the word in the glossary, the idea in the ontology, and the data. | A glossary also records the other words people use for a concept (its synonyms, such as the short-course platform's "customers" for learners in *Older than the systems*); *credential* has no exact synonym in this world (a microcredential is a credential but not a qualification), so the film shows the word alone. Its Spanish word is in the Spanish captions, not on screen. |
 
 ## Sources
 
@@ -176,6 +178,12 @@ Checked 16 October 2026, for *One map, many views*:
 - W3C, *R2RML: RDB to RDF Mapping Language*, a W3C Recommendation since 27 September 2012.
 - W3C, *Shapes Constraint Language (SHACL)*, a W3C Recommendation since 20 July 2017.
 
+Checked 17 October 2026, for *Genie guesses* and *Genie, again*:
+
+- Databricks, "Tune Genie Agent quality" (docs.databricks.com, last updated 9 October 2026): Genie Agents were formerly known as Genie spaces; "The default table description shows the Unity Catalog metadata associated with your data asset"; column descriptions, synonyms and text instructions are added per agent.
+- Databricks, "What's new with Unity Catalog at Data + AI Summit 2026" (16 June 2026): a Glossary of authoritative concepts, terms and taxonomies whose pages connect to the data ("Preview of Glossary is coming soon"), and Domains in Public Preview; and the Unity Catalog business semantics product page (Pages, Domains, Metrics, certifications).
+- Databricks platform release notes, April 2026: governed tags generally available.
+
 To check:
 
 - The exact wording of the Council of the European Union's Recommendation of 16 June 2022 (checked here only through secondary sources that quote the European Commission's wording).
@@ -188,15 +196,15 @@ To check:
 ```
 chapter      duration   wpm  voice  longest quiet  notes
 before          49.8s   114    76%           6.0s  
-guesses         32.0s   133    79%           2.1s  
+guesses         37.3s   132    80%           2.4s  
 four            34.3s   117    72%           4.8s  
 ontology        34.0s   125    81%           2.2s  
 model           48.1s   132    80%           2.4s  
 semantic        23.5s   123    77%           1.8s  
 standards       34.3s   121    80%           1.8s  
-again           23.9s   126    77%           1.8s  
-end             21.7s   105    60%           6.0s  
+again           36.3s   131    80%           1.8s  
+end             21.1s   105    59%           6.0s  
 
-total 5:01.6, 615 words, 122 wpm, voice 77% of the time, 160 wpm while speaking
+total 5:18.7, 654 words, 123 wpm, voice 77% of the time, 160 wpm while speaking
 sentences with under 0.5 s after them: 0; stops of 2.5 s or more inside chapters: 0
 ```

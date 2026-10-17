@@ -418,8 +418,8 @@ const NARR={
 "guesses":{"name":"Genie guesses","lead":1.0,"tail":1.0,"vo":[
  {"id":"ask","gap":0.8,"text":"At the university, the Head of School asks Genie: which learners are one microcredential away from a graduate certificate?"},
  {"id":"finds","gap":0.8,"text":"Genie finds the tables. It finds a column called is_micro, and another called stack_ok.","say":"Genie finds the tables. It finds a column called is micro, and another called stack okay."},
- {"id":"wrong","gap":0.8,"text":"But the stacking rules live in a policy document that no tool can read. Genie guesses, and it's wrong."},
- {"id":"read","gap":0.8,"text":"An AI assistant answers from what it can read. Meaning kept only in documents is out of its reach."}]},
+ {"id":"wrong","gap":0.8,"text":"It reads the stacking rules too: in a policy document, and on an old web page. They don't agree, so Genie guesses, and it's wrong."},
+ {"id":"read","gap":0.8,"text":"An assistant answers from what it reads. Meaning outside a managed glossary, with no owner and no version, can contradict itself, or be wrong."}]},
 "four":{"name":"Four ways to write meaning down","lead":1.0,"tail":1.0,"vo":[
  {"id":"gloss","gap":0.8,"text":"There are four common ways to write meaning down, and they stack. A glossary: words and their definitions, for people."},
  {"id":"tax","gap":0.8,"text":"A taxonomy: kinds of things in a hierarchy, like Linnaeus's."},
@@ -446,28 +446,29 @@ const NARR={
  {"id":"three","gap":0.8,"text":"Even microcredential has official definitions: from Australia, from the European Union, and from UNESCO. They don't quite match."},
  {"id":"choose","gap":0.8,"text":"So choose deliberately. Check, adopt, extend and record, as in A Sharper Sketch, at every layer."}]},
 "again":{"name":"Genie, again","lead":1.0,"tail":1.0,"vo":[
- {"id":"asks","gap":0.8,"text":"The Head of School asks again. This time, Genie asks back: approved for stacking, or all microcredentials?"},
+ {"id":"page","gap":0.8,"text":"This time, the meaning comes from one source of truth, the glossary. In Databricks, its definitions now sit on each table's page, next to the data."},
+ {"id":"asks","gap":0.8,"text":"The Head of School asks again. Genie reads the definitions, and asks back: approved for stacking, or all microcredentials?"},
  {"id":"answer","gap":0.8,"text":"Then it answers, and shows the definition it used."},
- {"id":"evid","gap":0.8,"text":"Studies have found that grounding an assistant in explicit meaning makes its answers measurably more accurate. The difference is the meaning it can read."}]},
+ {"id":"evid","gap":0.8,"text":"Studies have found that grounding an assistant in explicit meaning makes its answers measurably more accurate. The difference is meaning it can read, and trust."}]},
 "end":{"name":"Pull back","lead":1.0,"tail":1.0,"vo":[
- {"id":"tri","gap":0.8,"text":"The triangle from the start of the series returns: the word, in English and in Spanish; the idea, now written in the ontology; and the data it points to."},
+ {"id":"tri","gap":0.8,"text":"The triangle from the start of the series returns: the word, now in the glossary; the idea, now written in the ontology; and the data it points to."},
  {"id":"next","gap":0.8,"text":"Next: keeping all of it true, while everything changes."}]}
 };
 
-const VODUR={"before/linn": 8.257, "before/wilkins": 7.254, "before/night": 7.888, "before/icd": 8.168, "before/lesson": 6.433, "guesses/ask": 7.493, "guesses/finds": 5.611, "guesses/wrong": 6.161, "guesses/read": 6.071, "four/gloss": 7.036, "four/tax": 3.827, "four/onto": 6.531, "four/sem": 4.139, "four/stack": 3.102, "ontology/rules": 12.123, "ontology/graph": 8.783, "ontology/aristotle": 6.67, "model/domain": 8.119, "model/once": 6.095, "model/views": 9.343, "model/owl": 9.832, "model/same": 4.948, "semantic/once": 8.112, "semantic/tools": 5.074, "semantic/open": 4.877, "standards/blank": 8.015, "standards/creds": 5.131, "standards/three": 8.093, "standards/choose": 6.152, "again/asks": 6.747, "again/answer": 2.743, "again/evid": 8.995, "end/tri": 9.896, "end/next": 3.211};
+const VODUR={"before/linn": 8.257, "before/wilkins": 7.254, "before/night": 7.888, "before/icd": 8.168, "before/lesson": 6.433, "guesses/ask": 7.493, "guesses/finds": 5.611, "guesses/wrong": 7.834, "guesses/read": 9.06, "four/gloss": 7.036, "four/tax": 3.827, "four/onto": 6.531, "four/sem": 4.139, "four/stack": 3.102, "ontology/rules": 12.123, "ontology/graph": 8.783, "ontology/aristotle": 6.67, "model/domain": 8.119, "model/once": 6.095, "model/views": 9.343, "model/owl": 9.832, "model/same": 4.948, "semantic/once": 8.112, "semantic/tools": 5.074, "semantic/open": 4.877, "standards/blank": 8.015, "standards/creds": 5.131, "standards/three": 8.093, "standards/choose": 6.152, "again/page": 9.106, "again/asks": 7.821, "again/answer": 2.743, "again/evid": 9.495, "end/tri": 9.321, "end/next": 3.211};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
    Three wordless moments: the title, the four floors of meaning standing together, and the ending. */
 const BREATH={
 "before":{"hold":{"wilkins":0.5,"icd":0.5,"lesson":0.6},"breathe":3.6},
-"guesses":{"hold":{"finds":0.4,"wrong":0.8,"read":0.3}},
+"guesses":{"hold":{"finds":0.4,"wrong":1.1,"read":0.6}},
 "four":{"hold":{"gloss":0.3,"onto":0.4},"breathe":3.0},
 "ontology":{"hold":{"rules":0.8,"graph":0.8,"aristotle":0.4}},
 "model":{"hold":{"domain":0.6,"once":0.9,"views":0.8,"owl":0.9,"same":0.6}},
 "semantic":{"hold":{"once":0.6,"tools":0.4}},
 "standards":{"hold":{"blank":0.5,"creds":0.4,"three":0.8}},
-"again":{"hold":{"asks":0.4,"answer":0.6}},
+"again":{"hold":{"page":0.8,"asks":0.5,"answer":0.6}},
 "end":{"hold":{"tri":0.8},"breathe":4.2}
 };
 
@@ -1373,16 +1374,38 @@ function mm_thread(ctx,an,p,t,col){if(p<=0)return;const pts=an.filter(Boolean);f
 function mm_genie(ctx,x,y,t,o){o=o||{};withA(ctx,o.a==null?1:o.a,()=>{orb(ctx,x,y,o.r||34,t);chip(ctx,x,y+118,"databricks","Genie",o.sub||"answers in plain words",{align:"center",edge:MM_GEN});});}
 // where each column of a sketch3 table sits, measured the same way table() measures it
 function mm_cols(ctx,cols,rows){let x=0;const cs=Math.max(16,phMin(ctx));return cols.map((c,i)=>{const w=Math.max(tw(ctx,c,cs,500,"mono"),...rows.map(r=>tw(ctx,r[i],cs,500,"mono")))+30;const o={x,w};x+=w;return o;});}
-// the policy document: the rules are there, but in a file no tool reads
-function mm_doc(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,grey=o.grey||0;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.6)";ctx.shadowBlur=24;ctx.fillStyle=grey>0.5?"#9aa0aa":"#eef0f4";rr(ctx,x,y,w,h,8);ctx.fill();ctx.restore();
-  ctx.fillStyle="rgba(150,158,172,"+(0.55*grey)+")";rr(ctx,x,y,w,h,8);ctx.fill();ctx.fillStyle="#d9453a";rr(ctx,x+w-66,y+16,50,24,5);ctx.fill();T(ctx,"PDF",x+w-41,y+34,{w:800,size:14,align:"center",color:"#fff"});
-  const ink=grey>0.5?"rgba(60,64,72,0.75)":"rgba(30,34,44,0.95)";T(ctx,o.title||"Stacking policy",x+24,y+40,{w:800,size:22,color:ink});T(ctx,o.sub||"Academic Board · v4",x+24,y+64,{f:"mono",w:500,size:14,color:ink});
-  const bar=(yy,f)=>{ctx.fillStyle=grey>0.5?"rgba(70,74,84,0.3)":"rgba(40,44,54,0.25)";ctx.fillRect(x+24,yy,(w-48)*f,9);};
-  for(let i=0;i<2;i++)bar(y+96+i*24,0.6+0.4*hash(i,4));
-  // the two rules the question needs: what four approved microcredentials complete, and the limit on how many count
-  let ry=y+160;(o.rules||["4.1 Each approved microcredential is worth 10 credits; four complete the certificate's 40.","4.2 A graduate certificate accepts up to four approved microcredentials towards its credit."]).forEach(r=>{ry+=wrapT(ctx,r,x+24,ry,w-48,{w:700,size:17,lh:22,color:ink}).length*22+12;});
-  for(let i=0;i<6;i++)bar(y+h-146+i*24,0.5+0.5*hash(i,9));});}
-function mm_eyeOff(ctx,x,y,s,col,a){withA(ctx,a,()=>{ctx.save();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x-s,y);ctx.quadraticCurveTo(x,y-s*0.8,x+s,y);ctx.quadraticCurveTo(x,y+s*0.8,x-s,y);ctx.stroke();ctx.beginPath();ctx.arc(x,y,s*0.28,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(x-s*0.9,y+s*0.7);ctx.lineTo(x+s*0.9,y-s*0.7);ctx.stroke();ctx.restore();});}
+// a page Genie reads: the stacking policy as a PDF, or an old web page. Its title and lines are texture; the scene draws the one rule
+// each says, at a size that reads, in the slot from y+150 to y+198. o.kind ("pdf" or "web"), o.title, o.sub, o.url, o.seed, o.a
+function mm_page(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.shadowColor="rgba(0,0,0,0.6)";ctx.shadowBlur=24;ctx.fillStyle="#eef0f4";rr(ctx,x,y,w,h,8);ctx.fill();ctx.restore();
+  const ink="rgba(30,34,44,0.95)",sd=o.seed||0,bar=(yy,f)=>{ctx.fillStyle="rgba(40,44,54,0.22)";ctx.fillRect(x+20,yy,(w-40)*f,8);};let ty=y+44;
+  if(o.kind==="web"){ctx.fillStyle="#d9dde4";rr(ctx,x,y,w,34,8);ctx.fill();ctx.fillRect(x,y+20,w,14);["#e0675c","#e8b14a","#5fbf6a"].forEach((cl,i)=>{ctx.fillStyle=cl;ctx.beginPath();ctx.arc(x+16+i*14,y+17,4.5,0,TAU);ctx.fill();});
+    ctx.fillStyle="#f7f8fa";rr(ctx,x+60,y+7,w-72,20,10);ctx.fill();T(ctx,o.url||"",x+70,y+22,{w:500,size:12,color:"rgba(70,76,88,0.9)"});ty=y+64;}
+  else{ctx.fillStyle="#d9453a";rr(ctx,x+w-62,y+14,46,22,5);ctx.fill();T(ctx,"PDF",x+w-39,y+30,{w:800,size:13,align:"center",color:"#fff"});}
+  T(ctx,o.title||"",x+20,ty,{w:800,size:20,color:ink});T(ctx,o.sub||"",x+20,ty+22,{f:"mono",w:500,size:13,color:"rgba(70,76,88,0.9)"});
+  [0,1].forEach(i=>bar(ty+44+i*18,0.55+0.4*hash(i+sd,4)));
+  for(let yy=y+212;yy<y+h-16;yy+=20)bar(yy,0.45+0.5*hash(yy+sd,9));});}
+
+/* ---------- the glossary, and the platform that carries it ---------- */
+// the glossary's entry for a term, its source of truth: the term, its definition (typed as defP goes from 0 to 1), its owner and version
+function mm_gloss(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,hi=o.hi||0;if(a<=0.01)return;withA(ctx,a,()=>{if(hi>0)glow(ctx,x+w/2,y+h/2,w*0.55,MM_GLO,0.16*hi);
+  glass(ctx,x,y,w,h,18,MM_GLO,{glow:14+10*hi,ea:0.85,fill:"rgba(20,16,8,0.95)"});led(ctx,x+14,y+24,5,48,MM_GLO,0.9);
+  T(ctx,"Glossary",x+34,y+56,{w:800,size:30,color:rgba(MM_GLO,1)});withA(ctx,o.srcA==null?1:o.srcA,()=>T(ctx,"source of truth",x+w-28,y+56,{w:600,size:28,align:"right",color:rgba(SOFT,1)}));
+  ctx.strokeStyle=rgba(MM_GLO,0.3);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x+34,y+78);ctx.lineTo(x+w-28,y+78);ctx.stroke();
+  withA(ctx,o.termA==null?1:o.termA,()=>T(ctx,o.term,x+34,y+124,{w:800,size:28,color:rgba(INK,1)}));
+  if(o.defP>0)wrapT(ctx,typeOn(o.def,o.defP),x+34,y+168,w-62,{w:600,size:28,lh:37,color:rgba(PARCH,0.95)});
+  withA(ctx,o.ownA==null?1:o.ownA,()=>T(ctx,o.owner,x+34,y+h-30,{w:600,size:28,color:rgba(SOFT,1)}));});}
+// a table's page in Databricks' catalog: its name, then each column with its description. A description the glossary supplies is
+// marked "glossary" in the glossary's gold (o.gl: how far those marks are shown); o.rowA: each row's alpha; o.hiRow lights one row
+function mm_ucpage(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const TB=[150,225,255];withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,TB,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.96)"});
+  const lw=logo(ctx,"databricks",x+26,y+24,32);T(ctx,"Catalog · university › records",x+26+lw+14,y+50,{w:600,size:28,color:rgba(SOFT,1)});
+  T(ctx,o.table,x+26,y+116,{f:"mono",w:500,size:34,color:rgba(TB,1)});T(ctx,"table",x+w-26,y+116,{w:600,size:28,align:"right",color:rgba(SOFT,1)});
+  ctx.strokeStyle=rgba(TB,0.25);ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x+26,y+140);ctx.lineTo(x+w-26,y+140);ctx.stroke();
+  T(ctx,"column",x+26,y+186,{w:600,size:28,color:rgba(SOFT,1)});T(ctx,"description",x+236,y+186,{w:600,size:28,color:rgba(SOFT,1)});
+  const gw=tw(ctx,"glossary",phSz(ctx,28),700)+26;
+  o.rows.forEach(([col,desc,fromG],i)=>{const yy=y+248+i*62,ra=o.rowA?o.rowA[i]:1,hi=o.hiRow===i?(o.hi||0):0;withA(ctx,ra,()=>{
+    if(hi>0){ctx.fillStyle=rgba(MM_GLO,0.12*hi);rr(ctx,x+12,yy-38,w-24,54,10);ctx.fill();ctx.strokeStyle=rgba(MM_GLO,0.7*hi);ctx.lineWidth=2;rr(ctx,x+12,yy-38,w-24,54,10);ctx.stroke();}
+    T(ctx,col,x+26,yy,{f:"mono",w:500,size:28,color:rgba(REF,1)});T(ctx,desc,x+236,yy,{w:600,size:28,color:rgba(INK,0.95)});
+    if(fromG)withA(ctx,o.gl==null?1:o.gl,()=>tag(ctx,x+w-26-gw,yy-10,"glossary",MM_GLO,{size:28}));});});});}
 
 /* ---------- the semantic layer's metric, and the tools that ask it ---------- */
 const MM_MROWS=[["measure","count of credentials"],["left out","revoked credentials"],["date","awarded on · this academic year"],["grain","one row per credential awarded"]];
@@ -1545,8 +1568,8 @@ function mm_vc(ctx,x,y,w,o){o=o||{};const m=phMin(ctx),rh=Math.max(o.rh||46,m?m*
 
 // a standard's binder is a picture: its name and line are part of the spine (the shelf's labels say what's what)
 mm_binder=phDeco(mm_binder);
-// the stacking policy is a document no tool can read: a picture of one, its words its texture
-mm_doc=phDeco(mm_doc);
+// the pages Genie reads are pictures of pages: their words are texture, and the scene draws the rule each one says
+mm_page=phDeco(mm_page);
 
 /* ---------- pictures for the labs and the scenarios (site/assets/meaning-machines-can-read/learn.*.js name them in "vis") ----------
    Each draws on a canvas of w × h, with the lab's state and the page's words (window.FW). Every word drawn comes from FW
@@ -1646,9 +1669,10 @@ const LV={
   threedefs:(c,w,h,st,FW)=>{const V=FW.vis.threedefs;[0,1,2].forEach(i=>{const x=12+i*196;glass(c,x,30,184,260,16,MM_REFC,{glow:12,ea:0.75,fill:"rgba(12,12,20,0.95)"});T(c,V.regions[i],x+92,76,{w:800,size:22,align:"center",color:rgba(MM_REFC,1)});
     c.fillStyle=rgba(GOOD,0.16);rr(c,x+12,100,160,58,10);c.fill();T(c,V.same,x+92,136,{w:700,size:19,align:"center",color:rgba(mix(INK,GOOD,0.4),1)});
     c.fillStyle=rgba(EXT,0.18);rr(c,x+12,172,160,100,10);c.fill();wrapT(c,V.diffs[i],x+24,206,140,{w:700,size:19,lh:24,color:rgba(mix(INK,EXT,0.4),1)});});},
-  pdfgloss:(c,w,h,st,FW)=>{const V=FW.vis.pdfgloss;c.save();c.shadowColor="rgba(0,0,0,0.6)";c.shadowBlur=18;c.fillStyle="#eef0f4";rr(c,50,28,240,270,8);c.fill();c.restore();c.fillStyle="#d9453a";rr(c,216,44,58,28,5);c.fill();T(c,"PDF",245,64,{w:800,size:18,align:"center",color:"#fff"});
-    T(c,V.title,70,112,{w:800,size:26,color:"#1e222c"});T(c,V.pages,70,142,{w:600,size:18,color:"#4a5160"});for(let i=0;i<5;i++){c.fillStyle="rgba(40,44,54,0.22)";c.fillRect(70,170+i*24,190*(0.6+0.4*hash(i,3)),9);}
-    orb(c,450,130,28,1);c.fillStyle="rgba(7,12,24,0.9)";c.beginPath();c.arc(450,238,36,0,TAU);c.fill();mm_eyeOff(c,450,238,24,EDGE_,1);T(c,"?",520,110,{w:800,size:44,color:rgba(EDGE_,1)});},
+  pdfgloss:(c,w,h,st,FW)=>{const V=FW.vis.pdfgloss;V.copies.forEach((cp,i)=>{const x=40+i*40,y=36+i*52;c.save();c.shadowColor="rgba(0,0,0,0.6)";c.shadowBlur=14;c.fillStyle="#eef0f4";rr(c,x,y,220,170,8);c.fill();c.restore();
+      c.fillStyle="rgba(255,236,150,0.95)";rr(c,x+12,y+10,124,32,6);c.fill();T(c,cp,x+20,y+33,{w:700,size:19,color:"#1e222c"});c.fillStyle="#d9453a";rr(c,x+160,y+12,48,26,5);c.fill();T(c,"PDF",x+184,y+31,{w:800,size:18,align:"center",color:"#fff"});
+      T(c,V.title,x+16,y+76,{w:800,size:22,color:"#1e222c"});for(let k=0;k<3;k++){c.fillStyle="rgba(40,44,54,0.22)";c.fillRect(x+16,y+98+k*20,180*(0.6+0.4*hash(k+i,3)),8);}});
+    orb(c,470,120,28,1);T(c,"?",530,104,{w:800,size:44,color:rgba(EDGE_,1)});wrapT(c,V.q,380,220,200,{w:700,size:19,lh:24,color:rgba(EDGE_,1)});},
   copyonto:(c,w,h,st,FW)=>{const V=FW.vis.copyonto;glass(c,24,60,220,170,14,MM_DM,{glow:12,ea:0.85,fill:"rgba(7,12,24,0.95)"});T(c,V.table,40,94,{f:"mono",w:500,size:20,color:rgba(MM_DM,1)});
     c.strokeStyle="rgba(170,200,245,0.25)";c.lineWidth=1;c.beginPath();c.moveTo(24,110);c.lineTo(244,110);c.stroke();V.cols.forEach((s,i)=>T(c,s,40,148+i*40,{f:"mono",w:500,size:20,color:rgba(INK,0.95)}));
     arrowTo(c,256,145,322,145,SOFT,0.9,{head:12,lw:2.4});V.gen.forEach((s,i)=>mm_pill(c,450,90+i*60,s,MM_ONT,{size:20,r:10,dash:true,fill:"rgba(34,22,60,0.96)"}));
@@ -1673,8 +1697,8 @@ const LV={
 
 /* ===== Meaning machines can read: scenes =====
    Nine chapters, as in ../script.md. People tried to write meaning down before (Linnaeus, Wilkins, Nightingale and the ICD).
-   Today, Ana asks Genie who is one microcredential away from a graduate certificate, and Genie guesses: the stacking rules are in a
-   document no tool can read. Four ways to write meaning down stack like floors: glossary, taxonomy, ontology, semantic layer.
+   Today, Ana asks Genie who is one microcredential away from a graduate certificate, and Genie guesses: it reads the stacking rules in
+   a policy and on an old web page, which disagree, and no managed glossary says which is current. Four ways to write meaning down stack like floors: glossary, taxonomy, ontology, semantic layer.
    The ontology holds the rule. All of it lives in one place, Noor's architecture map, written once; the glossary, the conceptual and
    logical models, the ontology in OWL and the tests are views drawn from it. The semantic layer holds the calculation, standards
    save starting from blank, and Genie, grounded, asks back and answers right.
@@ -1756,9 +1780,9 @@ function mm_asker(ctx,t,a,qA,o){o=o||{};withA(ctx,a,()=>{person(ctx,"ana",250,90
 scene("guesses",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   const cA=c("ask"),cF=c("finds"),cW=c("wrong"),cR=c("read");
   tag(ctx,120,110,"The university · today",[236,243,255],{size:20});
-  mm_asker(ctx,t,fin(t,0.3,0.6),fin(t,cA+2.6,0.6),{pose:t>cA+2.4&&t<cF+0.5?"explain":"stand",expr:t>cW+5.6?"concerned":"calm"});
+  mm_asker(ctx,t,fin(t,0.3,0.6),fin(t,cA+2.6,0.6),{pose:t>cA+2.4&&t<cF+0.5?"explain":"stand",expr:t>cW+7.3?"concerned":"calm"});
   const gx=760,gy=470;mm_genie(ctx,gx,gy,t,{a:fin(t,cA+2.0,0.6)});
-  // what Genie can read: tables
+  // what Genie reads first: the tables
   const tA=fin(t,cF-0.2,0.6),L=mm_cols(ctx,MM_TL.cols,MM_TL.rows),Cc=mm_cols(ctx,MM_TC.cols,MM_TC.rows),wL=L[L.length-1].x+L[L.length-1].w,wC=Cc[Cc.length-1].x+Cc[Cc.length-1].w;
   const X1=800,X2=X1+wL+18,Y1=100,Y2=340,DY=400;
   withA(ctx,tA,()=>{table(ctx,X1,Y1,"learners",MM_TL.cols,MM_TL.rows,{col:[150,225,255]});table(ctx,X2,Y1,"credentials",MM_TC.cols,MM_TC.rows,{col:[150,225,255]});table(ctx,X1,Y2,"certificates",MM_TG.cols,MM_TG.rows,{col:[150,225,255]});});
@@ -1767,18 +1791,31 @@ scene("guesses",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
     const u=((t-cF)*0.7+i*0.33)%1;glow(ctx,lerp(gx+30,x,u),lerp(gy,y,u),16,MM_GEN,0.7);});});
   const sc_=clamp((t-cF-1.2)/3.8,0,1);if(sc_>0&&sc_<1){const sx=X2+wC*sc_;withA(ctx,0.8,()=>{ctx.save();ctx.globalCompositeOperation="lighter";const g=ctx.createLinearGradient(sx-40,0,sx,0);g.addColorStop(0,"rgba(120,200,255,0)");g.addColorStop(1,"rgba(120,200,255,0.35)");ctx.fillStyle=g;ctx.fillRect(sx-40,Y1+50,40,166);ctx.restore();});}
   [[2,cF+3.0],[3,cF+4.7]].forEach(([k,t0])=>{const a=fin(t,t0,0.4);if(a<=0)return;const col=Cc[k],x=X2+col.x+2,hi=pulseAt(t,t0,1.4);withA(ctx,a,()=>{glow(ctx,x+col.w/2,Y1+140,90,CYAN,0.25+0.3*hi);const tb=Math.max(46,Math.max(18,phMin(ctx))*1.65);ctx.save();ctx.strokeStyle=rgba(CYAN,1);ctx.lineWidth=2.4+2*hi;ctx.shadowColor=rgba(CYAN,0.9);ctx.shadowBlur=14;rr(ctx,x,Y1+tb+4,col.w-4,Math.max(40,Math.max(16,phMin(ctx))*1.45)*4-8,8);ctx.stroke();ctx.restore();});});
-  // the rules live in a document no tool can read
-  const dA=fin(t,cW+2.0,0.6),grey=fin(t,cW+3.3,0.8),inv=fin(t,cR+2.9,0.6);
-  mm_doc(ctx,1330,DY,440,420,{a:dA,grey});
-  if(grey>0)withA(ctx,grey,()=>{ctx.fillStyle="rgba(7,12,24,0.9)";ctx.beginPath();ctx.arc(1550,DY+310,40,0,TAU);ctx.fill();mm_eyeOff(ctx,1550,DY+310,26,[255,140,120],0.6+0.4*Math.abs(Math.sin(t*2))*inv+0.4*(1-inv));tag(ctx,1550,DY-30,"no tool can read this",[200,205,215],{align:"center",size:18});});
-  if(inv>0)withA(ctx,inv,()=>{ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(EDGE_,0.9);ctx.lineWidth=2.4;rr(ctx,1318,DY-12,464,444,12);ctx.stroke();ctx.restore();});
+  // Genie reads the stacking rules too, in the policy and on an old web page: they don't agree, and nothing says which is current
+  const DOC={x:1325,y:DY,w:285,h:330},WEB={x:1620,y:DY,w:285,h:330},pA=fin(t,cW+1.9,0.6),wA=fin(t,cW+3.5,0.6);
+  mm_page(ctx,DOC.x,DOC.y,DOC.w,DOC.h,{a:pA,kind:"pdf",title:"Stacking policy",sub:"Academic Board · v4",seed:1});
+  mm_page(ctx,WEB.x,WEB.y,WEB.w,WEB.h,{a:wA,kind:"web",title:"Short courses FAQ",sub:"updated 2023",url:"university.edu/short-courses/faq",seed:5});
+  // a beam to each page as Genie reads it, and to everything it reads again at "answers from what it reads"
+  const rd=pulseAt(t,cR+0.3,2.2);[[DOC,cW+2.1],[WEB,cW+3.7]].forEach(([R,t0],i)=>{const a=Math.max(fin(t,t0,0.4)*(1-fin(t,cW+6.4,0.8)),rd);if(a<=0)return;const x=R.x+R.w/2,y=R.y+174;
+    withA(ctx,a*0.8,()=>{ctx.save();ctx.setLineDash([5,9]);ctx.strokeStyle=rgba(MM_GEN,0.55);ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(gx+30,gy);ctx.lineTo(x,y);ctx.stroke();ctx.restore();
+      const u=((t-t0)*0.7+i*0.4)%1;glow(ctx,lerp(gx+30,x,u),lerp(gy,y,u),16,MM_GEN,0.7);});});
+  // the one rule each page says: the policy's, current, and the old page's, which Genie follows
+  const pick=fin(t,cW+6.1,0.4),right=fin(t,cW+7.0,0.4),snip=(R,s_,a,col,on)=>withA(ctx,a,()=>{const bw=tw(ctx,s_,phSz(ctx,28),700)+28,bx=R.x+(R.w-bw)/2,by=R.y+150;
+    if(on>0)glow(ctx,bx+bw/2,by+24,bw*0.6,col,0.3*on);ctx.fillStyle="rgba(255,236,150,0.95)";rr(ctx,bx,by,bw,48,8);ctx.fill();
+    if(on>0){ctx.strokeStyle=rgba(col,on);ctx.lineWidth=3;rr(ctx,bx,by,bw,48,8);ctx.stroke();}T(ctx,s_,bx+14,by+34,{w:700,size:28,color:"#1e222c"});});
+  snip(DOC,"up to 4 approved",fin(t,cW+2.3,0.4),GOOD,right);snip(WEB,"any 4 courses",fin(t,cW+3.9,0.4),BAD,Math.max(pick,pulseAt(t,cR+8.0,1.4)));
+  // they don't agree
+  const dis=fin(t,cW+5.1,0.4),dh=Math.max(pulseAt(t,cW+5.1,1.4),pulseAt(t,cR+6.6,1.4));if(dis>0)withA(ctx,dis,()=>{const x=1615,y=DY+250;glow(ctx,x,y,60,EDGE_,0.3+0.4*dh);
+    ctx.fillStyle="rgba(7,12,24,0.96)";ctx.beginPath();ctx.arc(x,y,28,0,TAU);ctx.fill();ctx.strokeStyle=rgba(EDGE_,0.9);ctx.lineWidth=2;ctx.stroke();T(ctx,"≠",x,y+14,{w:800,size:40,align:"center",color:rgba(EDGE_,1)});});
+  withA(ctx,fin(t,cW+5.4,0.5)*(1-fin(t,cR+2.5,0.4)),()=>tag(ctx,1615,DY-34,"which one is current?",EDGE_,{align:"center",size:28}));
+  // outside a managed glossary: no owner, no version
+  const inv=fin(t,cR+2.7,0.6);if(inv>0)withA(ctx,inv,()=>{ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(EDGE_,0.9);ctx.lineWidth=2.4;rr(ctx,DOC.x-12,DY-12,WEB.x+WEB.w-DOC.x+24,DOC.h+24,12);ctx.stroke();ctx.restore();
+    tag(ctx,1615,DY-34,"outside a managed glossary",EDGE_,{align:"center",size:28});});
+  withA(ctx,fin(t,cR+4.8,0.5),()=>tag(ctx,1615,DY+DOC.h+46,"no owner · no version",EDGE_,{align:"center",size:28}));
   // Genie guesses: a confident number, and the registrar's list
-  const gA=fin(t,cW+4.8,0.4),jit=t>cW+4.8&&t<cW+5.5?(hash(Math.floor(t*30),3)-0.5)*10:0;
-  withA(ctx,gA,()=>{glow(ctx,690,740,220,BAD,0.18+0.08*Math.sin(t*3));numCard(ctx,500+jit,640,380,"Genie","214","guessed from is_micro and stack_ok",BAD);cross_(ctx,846,672,30,BAD,fin(t,cW+5.9,0.4));});
-  withA(ctx,fin(t,cW+5.6,0.5),()=>numCard(ctx,910,640,380,"Registrar's list","132","by the stacking policy",GOOD));
-  // what it can read, and what it can't
-  const bA=fin(t,cR+0.2,0.7);if(bA>0)withA(ctx,bA,()=>{const xr=X2+wC+18;ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(MM_GEN,0.85);ctx.lineWidth=2.2;ctx.shadowColor=rgba(MM_GEN,0.6);ctx.shadowBlur=10;
-    ctx.beginPath();ctx.moveTo(782,84);ctx.lineTo(xr,84);ctx.lineTo(xr,326);ctx.lineTo(1318,326);ctx.lineTo(1318,528);ctx.lineTo(782,528);ctx.closePath();ctx.stroke();ctx.restore();tag(ctx,782,60,"what Genie can read",MM_GEN,{size:18});});
+  const gA=fin(t,cW+6.3,0.4),jit=t>cW+6.3&&t<cW+7.0?(hash(Math.floor(t*30),3)-0.5)*10:0;
+  withA(ctx,gA,()=>{glow(ctx,690,740,220,BAD,0.18+0.08*Math.sin(t*3));numCard(ctx,500+jit,640,380,"Genie","214","by the old web page",BAD);cross_(ctx,846,672,30,BAD,Math.max(fin(t,cW+7.3,0.4),0));});
+  withA(ctx,fin(t,cW+6.9,0.5),()=>numCard(ctx,910,640,380,"Registrar's list","132","by the stacking policy",GOOD));
   vign(ctx,S);});
 
 /* ---------- 3. Four ways to write meaning down ---------- */
@@ -1916,24 +1953,37 @@ scene("standards",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx
   vign(ctx,S);});
 
 /* ---------- 8. Genie, again ---------- */
+// This time the meaning has one source of truth, the glossary. Its definition of "approved for stacking" sits on the credentials
+// table's page in Databricks, next to the column it describes, and Genie reads it there. Then the Head of School asks again: Genie
+// asks back, answers 132, and shows the definition it used, with where each part of it comes from.
+const MM_GDEF="a microcredential that Short courses has approved to count towards a graduate certificate";
+const MM_UCROWS=[["learner_id","the learner who holds it",0],["is_micro","a microcredential",1],["stack_ok","approved for stacking",1]];
 scene("again",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
-  const cA=c("asks"),cN=c("answer"),cE=c("evid");
-  mm_asker(ctx,t,fin(t,0.2,0.6),fin(t,0.5,0.6),{qy:150,pose:t<cA+2.0||(t>cA+4.8&&t<cA+6.4)?"explain":"stand",expr:t>cN+0.6?"relieved":"calm"});
-  const gx=760,gy=470;mm_genie(ctx,gx,gy,t,{a:fin(t,0.4,0.6),sub:"reads the meaning"});
-  withA(ctx,fin(t,cA+2.3,0.5),()=>{tag(ctx,880,112,"Genie asks back",MM_GEN,{size:18});bubble(ctx,860,140,640,"Approved for stacking, or all microcredentials?",MM_GEN,{size:28});});
-  withA(ctx,fin(t,cA+4.9,0.5),()=>bubble(ctx,300,352,380,"Approved for stacking.",MM_ASK,{size:26}));
-  // the answer, and the definition it used
-  const nA=fin(t,cN+0.2,0.5);withA(ctx,nA,()=>{glow(ctx,1060,400,240,GOOD,0.14+0.06*Math.sin(t*2));numCard(ctx,860,300,400,"Genie",fmtNum(countTo(t,cN+0.3,0,132)),"matches the registrar's list",GOOD);});
-  withA(ctx,fin(t,cN+1.1,0.6),()=>{glass(ctx,1290,300,560,250,18,MM_GEN,{glow:14,ea:0.7,fill:"rgba(7,12,24,0.94)"});T(ctx,"the definition it used",1316,340,{w:700,size:19,color:rgba(SOFT,1)});
-    wrapT(ctx,"one away: holds 3 approved microcredentials; four complete a graduate certificate",1316,380,510,{w:700,size:22,lh:29});
-    tag(ctx,1316,482,"ontology · stacking rule",MM_ONT,{size:16});tag(ctx,1316,524,"semantic layer · near a certificate",MM_SEM,{size:16});});
+  const cP=c("page"),cA=c("asks"),cN=c("answer"),cE=c("evid"),gx=760,gy=470,out=1-fin(t,cA-0.4,0.6);
+  mm_asker(ctx,t,fin(t,0.2,0.6),fin(t,cA-0.1,0.6),{qy:150,pose:(t>cA-0.2&&t<cA+1.6)||(t>cA+7.8&&t<cA+9.4)?"explain":"stand",expr:t>cN+0.6?"relieved":"calm"});
+  mm_genie(ctx,gx,gy,t,{a:fin(t,0.4,0.6),sub:"reads the meaning"});
+  // the glossary, the source of truth, and the table's page in Databricks that carries its definitions next to the data
+  if(out>0)withA(ctx,out,()=>{
+    mm_gloss(ctx,80,150,580,370,{a:fin(t,cP+0.2,0.6),hi:pulseAt(t,cP+2.3,1.8),srcA:fin(t,cP+1.9,0.5),term:"approved for stacking",termA:fin(t,cP+2.5,0.4),def:MM_GDEF,defP:clamp((t-cP-2.7)/1.3,0,1),owner:"owner: Short courses · v3",ownA:fin(t,cP+3.5,0.5)});
+    mm_ucpage(ctx,1010,150,840,440,{a:fin(t,cP+4.2,0.6),table:"credentials",rows:MM_UCROWS,rowA:[0,1,2].map(i=>fin(t,cP+4.6+i*0.25,0.4)),gl:fin(t,cP+6.7,0.4),hiRow:2,hi:Math.max(pulseAt(t,cP+6.8,1.8),pulseAt(t,cP+8.3,1.6))});
+    // the definition reaches the page, next to the column it describes; Genie reads it there
+    const ar=clamp((t-cP-5.4)/1.2,0,1);if(ar>0){arrowTo(ctx,664,262,1004,516,MM_GLO,0.95,{p:ar,head:14,lw:2.6});withA(ctx,fin(t,cP+5.9,0.5),()=>T(ctx,"from the glossary",820,252,{w:700,size:28,align:"center",color:rgba(MM_GLO,1)}));}
+    const bm=fin(t,cP+8.2,0.5);if(bm>0)withA(ctx,bm,()=>{ctx.save();ctx.setLineDash([5,9]);ctx.strokeStyle=rgba(MM_GEN,0.6);ctx.lineWidth=1.8;ctx.beginPath();ctx.moveTo(gx+34,gy);ctx.lineTo(1004,536);ctx.stroke();ctx.restore();
+      const u=((t-cP)*0.7)%1;glow(ctx,lerp(gx+34,1004,u),lerp(gy,536,u),16,MM_GEN,0.7);});});
+  withA(ctx,fin(t,cA+3.9,0.5),()=>{tag(ctx,880,112,"Genie asks back",MM_GEN,{size:18});bubble(ctx,860,140,640,"Approved for stacking, or all microcredentials?",MM_GEN,{size:28});});
+  withA(ctx,fin(t,cA+7.9,0.5),()=>bubble(ctx,300,352,380,"Approved for stacking.",MM_ASK,{size:26}));
+  // the answer, and the definition it used: from the glossary, the ontology and the semantic layer
+  const nA=fin(t,cN+0.2,0.5);withA(ctx,nA,()=>{glow(ctx,1040,400,220,GOOD,0.14+0.06*Math.sin(t*2));numCard(ctx,860,300,350,"Genie",fmtNum(countTo(t,cN+0.3,0,132)),"matches the registrar's list",GOOD);});
+  withA(ctx,fin(t,cN+1.1,0.6),()=>{const x=1230,y=300;glass(ctx,x,y,640,330,18,MM_GEN,{glow:14,ea:0.7,fill:"rgba(7,12,24,0.94)"});T(ctx,"the definition it used",x+26,y+40,{w:700,size:28,color:rgba(SOFT,1)});
+    wrapT(ctx,"one away: holds 3 approved microcredentials; four complete a graduate certificate",x+26,y+80,588,{w:700,size:28,lh:37});
+    [["glossary · approved for stacking",MM_GLO],["ontology · stacking rule",MM_ONT],["semantic layer · near a certificate",MM_SEM]].forEach(([s_,col],i)=>withA(ctx,fin(t,cN+1.5+i*0.25,0.4),()=>tag(ctx,x+26,y+200+i*48,s_,col,{size:28})));});
   // grounded or not: qualitative, not to scale
-  const eA=fin(t,cE+0.3,0.6);withA(ctx,eA,()=>{const x=900,y=590,w=950;glass(ctx,x,y,w,210,18,[236,243,255],{glow:10,ea:0.5,fill:"rgba(7,12,24,0.94)"});T(ctx,"how often the answer is right",x+26,y+38,{w:700,size:19,color:rgba(SOFT,1)});
+  const eA=fin(t,cE+0.3,0.6);withA(ctx,eA,()=>{const x=900,y=660,w=950;glass(ctx,x,y,w,190,18,[236,243,255],{glow:10,ea:0.5,fill:"rgba(7,12,24,0.94)"});T(ctx,"how often the answer is right",x+26,y+40,{w:700,size:28,color:rgba(SOFT,1)});
     const b1=ease(clamp((t-cE-1.0)/1.2,0,1)),b2=ease(clamp((t-cE-1.6)/1.8,0,1));
-    [["tables only",BAD,0.28,b1,"guesses"],["tables + meaning",GOOD,0.78,b2,"grounded"]].forEach(([l,col,f,p,e],i)=>{const yy=y+84+i*58;T(ctx,l,x+26,yy+8,{w:700,size:22});ctx.fillStyle="rgba(255,255,255,0.05)";rr(ctx,x+260,yy-16,600,32,8);ctx.fill();
-      ctx.fillStyle=rgba(col,0.85);rr(ctx,x+260,yy-16,Math.max(8,600*f*p),32,8);ctx.fill();withA(ctx,fin(p,0.8,0.2),()=>T(ctx,e,x+274+600*f*p,yy+8,{w:700,size:19,color:rgba(col,1)}));});
-    T(ctx,"illustrative · not to scale",x+w-24,y+195,{f:"mono",w:500,size:18,align:"right",color:rgba(SOFT,1)});});
-  withA(ctx,fin(t,cE+6.0,0.6),()=>tag(ctx,1375,836,"the difference is the meaning it can read",[236,243,255],{align:"center",size:20}));
+    [["tables only",BAD,0.28,b1,"guesses"],["tables + meaning",GOOD,0.78,b2,"grounded"]].forEach(([l,col,f,p,e],i)=>{const yy=y+84+i*48;T(ctx,l,x+26,yy+8,{w:700,size:28});ctx.fillStyle="rgba(255,255,255,0.05)";rr(ctx,x+280,yy-16,560,32,8);ctx.fill();
+      ctx.fillStyle=rgba(col,0.85);rr(ctx,x+280,yy-16,Math.max(8,560*f*p),32,8);ctx.fill();withA(ctx,fin(p,0.8,0.2),()=>T(ctx,e,x+294+560*f*p,yy+8,{w:700,size:28,color:rgba(col,1)}));});
+    T(ctx,"illustrative · not to scale",x+w-24,y+172,{f:"mono",w:500,size:28,align:"right",color:rgba(SOFT,1)});});
+  withA(ctx,fin(t,cE+6.9,0.6),()=>tag(ctx,610,760,"meaning it can read, and trust",[236,243,255],{align:"center",size:28}));
   vign(ctx,S);});
 
 /* ---------- 9. Pull back ---------- */
@@ -1946,14 +1996,13 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,S)
   const wa=fin(t,cT+2.9,0.5),ia=fin(t,cT+5.0,0.6),ha=fin(t,cT+7.9,0.6);
   trio(ctx,cx,cy,1,{t,col:MM_ONT,word:"credential",wordLab:" ",idea:"Credential",thing:(c2,x,y,s)=>{const L=mm_cols(c2,["id","holder","kind"],[["C-88","Aisha K.","micro"],["C-91","Aisha K.","micro"],["A-12","Ben O.","award"]]),w=L[2].x+L[2].w;table(c2,x-w/2,y-104,"credentials",["id","holder","kind"],[["C-88","Aisha K.","micro"],["C-91","Aisha K.","micro"],["A-12","Ben O.","award"]],{col:[150,225,255]});},
     thingLab:"the data it points to",thingDy:146,e1:clamp((t-cT-5.2)/1.0,0,1),e2:clamp((t-cT-7.5)/1.0,0,1),e3:0,wa,ia,ha});
-  withA(ctx,fin(t,cT+4.6,0.5),()=>{const w=tw(ctx,"credencial",26,800)+40;glass(ctx,wx-w/2,wy+44,w,50,12,MM_ONT,{glow:10,ea:0.7,fill:"rgba(7,12,24,0.93)"});T(ctx,"credencial",wx,wy+78,{w:800,size:26,align:"center"});
-    T(ctx,"en",wx-tw(ctx,"credential",30,800)/2-50,wy+10,{f:"mono",w:500,size:16,color:rgba(SOFT,1)});T(ctx,"es",wx-w/2-26,wy+76,{f:"mono",w:500,size:16,color:rgba(SOFT,1)});T(ctx,"the word, in the glossary",wx,wy+132,{w:700,size:20,align:"center",color:rgba(SOFT,1)});});
+  withA(ctx,fin(t,cT+3.9,0.5),()=>T(ctx,"the word, in the glossary",wx,wy+86,{w:700,size:20,align:"center",color:rgba(SOFT,1)}));
   // the idea, now a node in the ontology
   withA(ctx,ia,()=>{const A=mm_pill(ctx,700,128,"Award",MM_ONT,{size:16,r:10,a:fin(t,cT+5.6,0.5)}),M=mm_pill(ctx,1220,128,"Microcredential",MM_ONT,{size:16,r:10,a:fin(t,cT+5.9,0.5)});
     [A,M].forEach((b,i)=>{const q=fin(t,cT+5.8+i*0.3,0.5);if(q>0)isa(ctx,b.x+(i?-b.w/2-4:b.w/2+4),b.y+6,ix+(i?34:-34),iy-8,q,MM_ONT,{fill:"#0a0a18",s:12,lw:1.8});});
     T(ctx,"now written in the ontology",ix+44,iy+10,{w:600,size:18,color:rgba(SOFT,1)});});
   withA(ctx,fin(t,cN+0.3,0.6)*(1-fin(t,B,0.5)),()=>T(ctx,"Next: keeping it true",960,810,{w:700,size:26,align:"center",color:rgba(SOFT,1)}));
-  endCard(ctx,S,t,B+0.3,"Meaning machines can read",MM_INK,"An assistant answers from the meaning it can read.");
+  endCard(ctx,S,t,B+0.3,"Meaning machines can read",MM_INK,"An assistant answers from the meaning it can read, and trust.");
   vign(ctx,S);});
 
 /* ===== Made to read on a phone =====

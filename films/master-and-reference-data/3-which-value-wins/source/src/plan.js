@@ -22,6 +22,14 @@ const m3_col=src=>src==="self"?WC_PAPER:WC_ROLE[M3_SRC[src].role],m3_ink=src=>sr
 // the business side's gold, for what the steward decides (her pin, her ticks); the warning amber; the approval stamp's brown ink
 const M3_GOLD=[214,160,40],M3_GOLDINK=[136,96,8],M3_AMBER=[244,178,60],M3_STAMP=[110,74,24];
 
+/* ---------- the wash's texture ---------- */
+// The shared wash (shared/src/wash.js) shifts its texture by a seed that grows with where the wash starts. A wash that starts left of
+// the frame gets a seed below zero, which shifts the texture right and down and leaves a bare strip along the frame's left edge. In
+// this film, such a seed moves up by a whole number of the texture's repeats (2100 is a multiple of both), so nothing else changes.
+const m3_washShared=wc_wash;
+wc_wash=function(ctx,pts,col,o){o=o||{};const s0=o.seed||7,s=s0+Math.round(wc_bbox(pts).x0);
+  if(s<0)o=Object.assign({},o,{seed:s0+2100*Math.ceil(-s/2100)});return m3_washShared(ctx,pts,col,o);};
+
 /* ---------- the places ---------- */
 // the sky, paler: winter, or the haze of a working day
 function m3_pale(ctx,hz,col,a){ctx.save();const g=ctx.createLinearGradient(0,0,0,hz);g.addColorStop(0,rgba(col,a));g.addColorStop(1,rgba(col,a*0.5));ctx.fillStyle=g;ctx.fillRect(0,0,W,hz);ctx.restore();}
@@ -43,9 +51,20 @@ function m3_sound(ctx){wc_sky(ctx,M3_HZ,11,{sun:[1480,236],clouds:5,cx:620,cw:12
   const R=wc_rng(23);for(let x=990;x<1770;x+=24+R()*24){const w=14+R()*20,h=10+R()*16,y=FS(x)+5;wc_flat(ctx,wc_rect(x,y-h,w,h),[216,208,196],0.24,"build");
     wc_flat(ctx,[[x-2,y-h],[x+w+2,y-h],[x+w/2,y-h-7-R()*6]],[164,152,152],0.24,"build");}
   const cy=FS(1330);wc_flat(ctx,wc_rect(1324,cy-62,15,58),[204,196,186],0.26,"build");wc_flat(ctx,[[1321,cy-62],[1342,cy-62],[1331,cy-82]],[160,150,150],0.26,"build");
-  wc_land(ctx,M3_HEAD,[120,142,118],0.42);wc_forest(ctx,x=>M3_HEAD(x)+8,[92,116,98],0.46,13,{h:30,w:22});wc_forest(ctx,x=>M3_HEAD(x)+30,[150,136,118],0.46,17,{h:22,w:28});
+  // the headland's woods in winter, dabbed on as a painter sponges a far wood: bare oaks and beeches brown and mauve, evergreens dark
+  // among them, the crowns breaking the skyline
+  wc_land(ctx,M3_HEAD,[146,142,124],0.42,{line:false});m3_dabs(ctx,M3_HEAD,-40,830,1700,[[[156,128,114],5],[[136,124,132],3],[[124,134,108],2],[[84,108,92],3]],29);
   wc_wash(ctx,[[-60,M3_HZ],[W+60,M3_HZ],[W+60,H+60],[-60,H+60]],[132,160,160],{depth:0.72,kind:"water",line:false});
   m3_waves(ctx,M3_HZ,1480,29);}
+// a wood seen from afar: small soft dabs of paint, each a crown, spread evenly over the slope under top(x) between x0 and x1, a few
+// standing above the line so its edge is broken by crowns; pal is [colour, weight] pairs; darker where the dabs overlap
+function m3_dabs(ctx,top,x0,x1,n,pal,seed){const R=wc_rng(seed),tw=pal.reduce((s,p)=>s+p[1],0);let y0=H;for(let x=x0;x<x1;x+=10)y0=Math.min(y0,top(x));
+  ctx.save();ctx.globalCompositeOperation="multiply";
+  for(let i=0,k=0;i<n&&k<n*8;k++){const x=x0+R()*(x1-x0),y=y0-8+R()*(M3_HZ-y0+6),t=top(x);if(y<t-7||y>M3_HZ-3)continue;i++;
+    const r=6+R()*9,a=0.14+0.16*R();let w=R()*tw,c=pal[0][0];for(const [cc,ww] of pal){if((w-=ww)<=0){c=cc;break;}}
+    const g=ctx.createRadialGradient(x,y-r*0.2,r*0.2,x,y,r);g.addColorStop(0,rgba(c,a));g.addColorStop(0.7,rgba(c,a*0.8));g.addColorStop(1,rgba(c,0));
+    ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(x,y,r,r*0.9,0,0,TAU);ctx.fill();}
+  ctx.restore();}
 // Falmouth in October 1836: a warmer sky, the headland green and gold, the town at the water, the sea in the late sun
 const M3_FHZ=600;
 const M3_FHEAD=x=>M3_FHZ+8-150*Math.exp(-Math.pow((x-1700)/360,2))-40*Math.exp(-Math.pow((x-1260)/200,2))+3*Math.sin(x/41)+(x<1020?Math.pow((1020-x)/110,2)*30:0);
@@ -60,7 +79,7 @@ function m3_falmouth(ctx){wc_sky(ctx,M3_FHZ,31,{sun:[420,250],clouds:4,cx:300,cw
   m3_waves(ctx,M3_FHZ,420,43,true);}
 // the chronometer cabin: honey-coloured planks, the stern windows full of sea light, two long shelves for the twenty-two boxed clocks,
 // and the table the rate book lies on
-const M3_SH=[392,624],M3_TABLE=780;
+const M3_SH=[392,624],M3_TABLE=780,M3_DUST=[232,208,162];
 function m3_cabin(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);const dark=[132,90,54];
   wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),[226,190,138],{kind:"plaster",line:false,seed:3});
   ctx.save();ctx.globalCompositeOperation="multiply";const R=wc_rng(7);for(let x=-30;x<W+40;x+=92){ctx.strokeStyle=rgba([166,118,70],0.42);ctx.lineWidth=2.2;
@@ -75,7 +94,10 @@ function m3_cabin(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);cons
   // the deck beams overhead
   wc_wash(ctx,wc_rect(-40,-40,W+80,100),[150,104,62],{kind:"trim",lw:1.6});for(let x=40;x<W;x+=320)wc_wash(ctx,wc_rect(x,52,46,52),[128,86,50],{kind:"trim",lw:1.2});
   // the shelves, on brackets
-  M3_SH.forEach((y,i)=>{wc_wash(ctx,wc_rect(110,y,1700,20),dark,{kind:"trim",lw:1.6,seed:11+i});for(const x of [170,960,1750])wc_wash(ctx,[[x-14,y+20],[x+14,y+20],[x,y+52]],dark,{kind:"trim",lw:1.2});});
+  M3_SH.forEach((y,i)=>{wc_wash(ctx,wc_rect(110,y,1700,20),dark,{kind:"trim",lw:1.6,seed:11+i});for(const x of [170,960,1750])wc_wash(ctx,[[x-14,y+20],[x+14,y+20],[x,y+52]],dark,{kind:"trim",lw:1.2});
+    // the sawdust the clocks are bedded in, along the shelf
+    const sd=[];for(let x=118;x<=1802;x+=8)sd.push([x,y-6+2.2*Math.sin(x/23+i)+1.4*Math.sin(x/7)]);sd.push([1802,y+3],[118,y+3]);wc_wash(ctx,sd,M3_DUST,{kind:"trim",line:false,seed:21+i});
+    const R2=wc_rng(31+i);ctx.fillStyle=rgba([160,120,78],0.55);for(let k=0;k<260;k++)ctx.fillRect(120+R2()*1680,y-4+R2()*6,1.6+R2()*1.6,1.4);});
   // the table
   wc_wash(ctx,wc_rect(-40,M3_TABLE,W+80,24),[118,78,46],{kind:"trim",lw:1.6});wc_wash(ctx,wc_rect(-40,M3_TABLE+24,W+80,H),[146,100,60],{kind:"ground",line:false});}
 // today: the university, from across its lawn (One person, many roles shows it from the street): the old building and its glass wing,
@@ -86,17 +108,23 @@ function m3_campus(ctx){const P=WCP;wc_sky(ctx,700,8,{sun:[360,160],clouds:4});
   wc_contact(ctx,820,1460,680,0.46,0.22);wc_quad(ctx,830,680,0.46,0.62);wc_glassWing(ctx,1442,680,150,170,0.48);
   wc_roundTree(ctx,180,716,262,0.5);wc_roundTree(ctx,560,700,226,0.5,P.leaf2);wc_roundTree(ctx,1700,712,240,0.52);
   wc_wash(ctx,[[-60,790],[W+60,780],[W+60,H+60],[-60,H+60]],P.lawn,{depth:0.66,kind:"ground",line:false});
-  wc_wash(ctx,wc_band(wc_smooth([[1140,682],[1110,740],[1020,820],[880,920],[700,1090]],8),26,260),P.paving,{depth:0.62,kind:"path",line:false});
-  wc_tufts(ctx,x=>790,0,1920,40,0.9,12);wc_lamp(ctx,1360,860,300,0.72);}
+  wc_wash(ctx,wc_band(wc_smooth(M3_PATH,8),26,260),P.paving,{depth:0.62,kind:"path",line:false});
+  m3_tufts(ctx,x=>790,0,1920,40,0.9,12,(x,y)=>{const i=M3_PATH.findIndex(q=>q[1]>=y);if(i<1)return false;const a=M3_PATH[i-1],b=M3_PATH[i],cx=lerp(a[0],b[0],(y-a[1])/(b[1]-a[1]));
+    return Math.abs(x-cx)<lerp(13,130,(y-682)/408)+24;});wc_lamp(ctx,1360,860,300,0.72);}
+// the path across the lawn, and the grass tufts, as the shared ones (shared/src/wash.js) but none on the path (skip)
+const M3_PATH=[[1140,682],[1110,740],[1020,820],[880,920],[700,1090]];
+function m3_tufts(ctx,f,x0,x1,n,depth,seed,skip){const R=wc_rng(seed||8);for(let i=0;i<n;i++){const x=lerp(x0,x1,R()),y=f(x)+20+R()*(H-f(x)-20),s=0.7+R()*0.8*((y-700)/380),
+  r=[R(),R(),R(),R()];if(skip&&skip(x,y))continue;ctx.save();ctx.strokeStyle=rgba(wc_haze(wc_dim(WCP.near,0.22),depth),0.85);ctx.lineWidth=2.2*s;ctx.lineCap="round";ctx.beginPath();
+  [-0.5,-0.15,0.2,0.55].forEach((a,k)=>{ctx.moveTo(x,y);ctx.quadraticCurveTo(x+a*10*s,y-12*s,x+a*22*s,y-(18+r[k]*10)*s);});ctx.stroke();ctx.restore();}}
 // the data team's office (One person, many roles shows it too): a warm wall, a tall window onto the campus, a floor
 function m3_office(ctx){const P=WCP;ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);
   wc_wash(ctx,wc_rect(-40,-40,W+80,900),P.wallIn,{kind:"plaster",line:false});wc_wash(ctx,wc_rect(-40,858,W+80,260),P.floor,{kind:"ground",line:false});
   wc_wash(ctx,wc_rect(-40,846,W+80,18),wc_dim(P.wallIn,0.14),{kind:"trim",line:false,flat:true});
-  ctx.save();ctx.beginPath();ctx.rect(1412,112,436,560);ctx.clip();wc_sky(ctx,560,6,{clouds:2,cx:1420,cw:380,cy:150,ch:120});
-  wc_land(ctx,x=>600+8*Math.sin(x/90),P.lawn,0.42,{line:false});wc_part(ctx,wc_rect(1520,330,70,270),WCP.stone,0.4);wc_part(ctx,[[1512,330],[1598,330],[1555,250]],WCP.slate,0.4);
-  wc_roundTree(ctx,1460,640,220,0.5,P.leaf2);wc_roundTree(ctx,1790,650,190,0.5);ctx.restore();
-  for(const r of [wc_rect(1400,100,460,16),wc_rect(1400,100,16,584),wc_rect(1844,100,16,584),wc_rect(1622,100,16,584),wc_rect(1400,384,460,12)])wc_wash(ctx,r,WC_PAPER,{kind:"trim",lw:1.4});
-  wc_wash(ctx,wc_rect(1380,676,500,22),wc_dim(P.wallIn,0.1),{kind:"trim",lw:1.5});}
+  ctx.save();ctx.beginPath();ctx.rect(1712,112,436,560);ctx.clip();wc_sky(ctx,560,6,{clouds:2,cx:1720,cw:380,cy:150,ch:120});
+  wc_land(ctx,x=>600+8*Math.sin(x/90),P.lawn,0.42,{line:false});wc_part(ctx,wc_rect(1820,330,70,270),WCP.stone,0.4);wc_part(ctx,[[1812,330],[1898,330],[1855,250]],WCP.slate,0.4);
+  wc_roundTree(ctx,1760,640,220,0.5,P.leaf2);ctx.restore();
+  for(const r of [wc_rect(1700,100,460,16),wc_rect(1700,100,16,584),wc_rect(1922,100,16,584),wc_rect(1700,384,460,12)])wc_wash(ctx,r,WC_PAPER,{kind:"trim",lw:1.4});
+  wc_wash(ctx,wc_rect(1680,676,500,22),wc_dim(P.wallIn,0.1),{kind:"trim",lw:1.5});}
 // paper, with a little sky and a strip of land, for the chapters that explain; a second, for the other places
 function m3_plain(ctx){wc_sky(ctx,836,13,{clouds:3});wc_land(ctx,x=>826+16*Math.sin(x/320+2),WCP.far,0.35,{line:false});wc_land(ctx,x=>882+10*Math.sin(x/240+1),WCP.near,0.75,{line:false});}
 function m3_plainB(ctx){wc_sky(ctx,846,17,{clouds:4,cx:120,cw:1680});wc_land(ctx,x=>842+20*Math.sin(x/380+1),WCP.far,0.35,{line:false});wc_land(ctx,x=>898+12*Math.sin(x/260+2),WCP.near,0.75,{line:false});}
@@ -177,8 +205,9 @@ function m3_shipPaint(set){const K=2,S=M3_SHIP;return wc_kept("beagle"+(set?"S":
   q.strokeStyle=rgba([238,226,196],0.35);q.lineWidth=1.4;q.beginPath();for(let x=-238;x<=224;x+=6){const y=m3_hullTop(x)+26;x===-238?q.moveTo(x,y):q.lineTo(x,y);}q.stroke();});}
 // the Beagle on the water at (x, y), rocking a little; her reflection, and the water lapping along her waterline
 function m3_ship(ctx,x,y,s,t,o){o=o||{};const S=M3_SHIP,c=m3_shipPaint(!!o.set),rock=Math.sin(t*0.8+0.5)*0.006,bob=Math.sin(t*0.62)*2.2;
-  ctx.save();ctx.beginPath();ctx.rect(x-560*s,y,1000*s,200*s);ctx.clip();ctx.globalCompositeOperation="multiply";const g=ctx.createLinearGradient(0,y,0,y+90*s);
-  g.addColorStop(0,rgba([66,72,78],0.55));g.addColorStop(1,rgba([66,72,78],0));ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(x-6*s,y,236*s,90*s,0,0,TAU);ctx.fill();ctx.restore();
+  // her reflection: her picture upside down and squashed, in strips that the ripples push sideways, fading with depth
+  ctx.save();ctx.globalCompositeOperation="multiply";const K=2,band=4,sq=0.62;for(let h=0;h<S.T-60;h+=band){const k=h/(S.T-60),a=0.5*(1-k)*(1-k);if(a<0.012)break;
+    ctx.globalAlpha=a;ctx.drawImage(c,0,(S.T-h-band)*K,S.W*K,band*K,x-S.L*s+Math.sin(h*0.19+t*1.5)*(1.2+6*k)*s,y+bob*0.6+h*sq*s,S.W*s,band*sq*s+0.6);}ctx.restore();
   ctx.save();ctx.translate(x,y+bob);ctx.rotate(rock);ctx.scale(s,s);ctx.drawImage(c,-S.L,-S.T,S.W,S.H);ctx.restore();
   ctx.save();for(let i=0;i<9;i++){const u=(i/9+t*0.035)%1,xx=x+(u-0.5)*470*s,ww=(18+14*Math.sin(i*2.3))*s;ctx.fillStyle=rgba([250,248,236],0.5);ctx.beginPath();ctx.ellipse(xx,y+3*s+bob*0.6,ww,2.2*s,0,0,TAU);ctx.fill();}ctx.restore();}
 
@@ -190,7 +219,9 @@ function m3_boxPaint(){return wc_kept("clockbox",(M3_BW+16)*2,(M3_BHT+16)*2,q=>{
   wc_wash(q,wc_ell(M3_BW/2,56,42,42,40),[206,168,88],{kind:"build",lw:1.2,seed:7});wc_wash(q,wc_ell(M3_BW/2,56,34,34,40),[252,250,244],{kind:"clock",lw:1,seed:9});
   q.strokeStyle=rgba(WC_INK,0.75);q.lineCap="round";for(let i=0;i<12;i++){const a=i*TAU/12,r0=i%3?27:24;q.lineWidth=i%3?1.3:2.4;q.beginPath();
     q.moveTo(M3_BW/2+Math.cos(a)*r0,56+Math.sin(a)*r0);q.lineTo(M3_BW/2+Math.cos(a)*31,56+Math.sin(a)*31);q.stroke();}
-  wc_wash(q,wc_rrPts(M3_BW/2-18,102,36,14,3),[214,180,104],{kind:"trim",lw:1,seed:11});});}
+  wc_wash(q,wc_rrPts(M3_BW/2-18,102,36,14,3),[214,180,104],{kind:"trim",lw:1,seed:11});
+  const sd=[];for(let x=-6;x<=M3_BW+6;x+=4)sd.push([x,M3_BHT-7-2.4*Math.sin((x+6)/(M3_BW+12)*Math.PI)+1.2*Math.sin(x/5)]);sd.push([M3_BW+6,M3_BHT+2],[-6,M3_BHT+2]);
+  wc_wash(q,sd,M3_DUST,{kind:"trim",line:false,flat:true,seed:13});const R=wc_rng(17);q.fillStyle=rgba([160,120,78],0.6);for(let k=0;k<40;k++)q.fillRect(-4+R()*(M3_BW+8),M3_BHT-6+R()*7,1.4+R()*1.2,1.2);});}
 // a dial's hands at a time of day, in seconds: hours, minutes, and a thin second hand
 function m3_hands(ctx,cx,cy,r,sec,o){o=o||{};const h=(sec/3600)%12,m=(sec/60)%60,s=sec%60;ctx.save();ctx.lineCap="round";
   const hand=(a,len,lw,col,tail)=>{ctx.strokeStyle=rgba(col,1);ctx.lineWidth=lw;ctx.beginPath();ctx.moveTo(cx-Math.sin(a)*len*(tail||0),cy+Math.cos(a)*len*(tail||0));ctx.lineTo(cx+Math.sin(a)*len,cy-Math.cos(a)*len);ctx.stroke();};
@@ -220,34 +251,34 @@ function m3_lon(ctx,t,o){const L=M3_LON,x=L.x,y=L.y;wc_panel(ctx,x,y,L.w,L.h,{ki
   const sx=x+190,hy=y+196;ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.55);ctx.lineWidth=2.2;ctx.setLineDash([2,9]);ctx.lineCap="round";ctx.beginPath();ctx.ellipse(sx,hy,130,108,0,Math.PI,TAU);ctx.stroke();
   ctx.setLineDash([]);ctx.strokeStyle=rgba(WC_PENCIL,0.75);ctx.lineWidth=2.6;ctx.beginPath();ctx.moveTo(sx-150,hy);ctx.lineTo(sx+150,hy);ctx.stroke();ctx.restore();
   m3_sun(ctx,sx,hy-108,22);wc_T(ctx,"noon here",sx,y+252,{w:800,size:30,align:"center",col:WC_DARK});wc_T(ctx,"12:00",sx,y+296,{w:500,size:28,f:"mono",align:"center",col:WC_MUTED});
-  const hx=x+790,cy=y+136;m3_dial(ctx,hx,cy,84,o.home);wc_T(ctx,"home time",hx,y+266,{w:800,size:30,align:"center",col:WC_DARK});
+  const k=o.two||0,hx=x+lerp(915,790,ease(clamp(k,0,1))),cy=y+136;m3_dial(ctx,hx,cy,84,o.home);wc_T(ctx,"home time",hx,y+266,{w:800,size:30,align:"center",col:WC_DARK});
   wc_T(ctx,m3_clockStr(o.home),hx,y+308,{w:500,size:28,f:"mono",align:"center",col:WC_MUTED});
   // the difference: 3 hours 20 minutes is 50 degrees west; once the clock has drifted, the answer is in doubt
   const dq=o.drift||0,mx=x+500;withA(ctx,1-0.55*dq,()=>{wc_T(ctx,"3 h 20 min",mx,y+128,{w:600,size:30,align:"center",col:WC_INK});wc_T(ctx,"50° west",mx,y+184,{w:800,size:40,align:"center",col:WC_DARK});});
   m3_arrow(ctx,x+340,y+224,x+676,y+224,clamp((o.arrow==null?1:o.arrow),0,1),{start:true,a:0.7,lw:2.6});
   if(dq>0.01)m3_note(ctx,"?",mx+104,y+190,dq,{size:52,col:WC_NO});
   // a second clock, which disagrees
-  const k=o.two||0;if(k>0.01)withA(ctx,k,()=>{const h2=x+1040;m3_dial(ctx,h2,cy,84,o.home2);wc_T(ctx,"home time",h2,y+266,{w:800,size:30,align:"center",col:WC_DARK});
+  if(k>0.01)withA(ctx,k,()=>{const h2=x+1040;m3_dial(ctx,h2,cy,84,o.home2);wc_T(ctx,"home time",h2,y+266,{w:800,size:30,align:"center",col:WC_DARK});
     wc_T(ctx,m3_clockStr(o.home2),h2,y+308,{w:500,size:28,f:"mono",align:"center",col:WC_MUTED});});}
 // the rate book: a leather cover, two parchment pages, the gutter, a rule every rs from r0, and a gold ribbon; painted once
 function m3_bookPaper(w,h,r0,rs){return wc_kept("book"+w+"x"+h,w+64,h+120,ctx=>{ctx.translate(32,24);const P=WCP;
   wc_wash(ctx,wc_rect(-12,-10,w+24,h+22),P.leather,{kind:"cover",lw:2.5});wc_wash(ctx,wc_rect(0,0,w/2,h),P.parchment,{kind:"page",lw:2});wc_wash(ctx,wc_rect(w/2,0,w/2,h),P.parchment,{kind:"page",lw:2,seed:9});
   const g=ctx.createLinearGradient(w/2-30,0,w/2+30,0),gc=wc_dim(P.parchment,0.35);g.addColorStop(0,rgba(gc,0));g.addColorStop(0.5,rgba(gc,0.5));g.addColorStop(1,rgba(gc,0));ctx.fillStyle=g;ctx.fillRect(w/2-30,0,60,h);
   ctx.strokeStyle=rgba(P.parchInk,0.12);ctx.lineWidth=1.2;for(let y=r0;y<h-20;y+=rs){ctx.beginPath();ctx.moveTo(30,y);ctx.lineTo(w/2-30,y);ctx.moveTo(w/2+30,y);ctx.lineTo(w-30,y);ctx.stroke();}
-  wc_wash(ctx,[[w/2-6,h-6],[w/2+10,h-6],[w/2+10,h+72],[w/2+2,h+60],[w/2-6,h+72]],M3_GOLD,{kind:"ribbon",flat:true});});}
+  wc_wash(ctx,[[w/2-6,h-6],[w/2+10,h-6],[w/2+10,h+26],[w/2+2,h+18],[w/2-6,h+26]],M3_GOLD,{kind:"ribbon",flat:true});});}
 // the book shut: its leather cover, a label, and the ribbon hanging out of it
 function m3_bookShutPaper(w,h){return wc_kept("bookShut"+w+"x"+h,w+40,h+110,ctx=>{ctx.translate(20,20);const P=WCP;
   wc_wash(ctx,wc_rect(0,0,w,h),P.leather,{kind:"cover",lw:2.5,seed:13});wc_wash(ctx,wc_rect(-6,-4,16,h+8),wc_dim(P.leather,0.18),{kind:"cover",lw:1.6,seed:15});
   wc_wash(ctx,wc_rect(w*0.24,h*0.3,w*0.56,h*0.26),P.parchment,{kind:"page",lw:1.6,seed:17});
-  wc_wash(ctx,[[w*0.6,h-4],[w*0.6+16,h-4],[w*0.6+16,h+70],[w*0.6+8,h+58],[w*0.6,h+70]],M3_GOLD,{kind:"ribbon",flat:true});});}
+  wc_wash(ctx,[[w*0.6,h-4],[w*0.6+16,h-4],[w*0.6+16,h+26],[w*0.6+8,h+18],[w*0.6,h+26]],M3_GOLD,{kind:"ribbon",flat:true});});}
 // the rate book, open at (cx, cy), its rows written as o's moments come; it closes as o.shut goes 0 to 1
-const M3_BK={w:700,h:260};
+const M3_BK={w:620,h:236};
 const M3_RATES=[["A · loses 1.6 s"],["B · gains 0.8 s"],["K · gains 0.4 s"]];
 function m3_rateBook(ctx,t,cx,cy,o){const {w,h}=M3_BK,sh=ease(clamp(o.shut||0,0,1)),L=cx-w/2+36,R=cx+30,top=cy-h/2,ink=WCP.parchInk;
-  if(sh<0.99){ctx.save();ctx.translate(cx,cy);ctx.scale(1-0.5*sh,1);ctx.translate(-cx,-cy);withA(ctx,1-sh,()=>{ctx.drawImage(m3_bookPaper(w,h,96,48),cx-w/2-32,cy-h/2-24);
+  if(sh<0.99){ctx.save();ctx.translate(cx,cy);ctx.scale(1-0.5*sh,1);ctx.translate(-cx,-cy);withA(ctx,1-sh,()=>{ctx.drawImage(m3_bookPaper(w,h,92,46),cx-w/2-32,cy-h/2-24);
     m3_note(ctx,"daily rates",L,top+62,clamp((t-o.head)/0.8,0,1),{size:34,col:ink});m3_note(ctx,"Dec 1831",L,top+112,clamp((t-o.head-0.6)/0.6,0,1),{size:30,col:ink,w:600});
-    M3_RATES.forEach(([s],i)=>m3_note(ctx,s,R,top+70+i*50,clamp((t-o.rows-i*0.45)/0.6,0,1),{size:32,col:ink,w:600}));
-    m3_note(ctx,"…",R,top+70+3*50,clamp((t-o.rows-1.5)/0.3,0,1),{size:32,col:ink});});ctx.restore();}
+    M3_RATES.forEach(([s],i)=>m3_note(ctx,s,R,top+68+i*46,clamp((t-o.rows-i*0.45)/0.6,0,1),{size:32,col:ink,w:600}));
+    m3_note(ctx,"…",R,top+68+3*46,clamp((t-o.rows-1.5)/0.3,0,1),{size:32,col:ink});});ctx.restore();}
   if(sh>0.01)withA(ctx,sh,()=>{const sw=w*0.5;ctx.drawImage(m3_bookShutPaper(sw,h),cx-sw/2-20,cy-h/2-20);m3_note(ctx,"rates",cx-sw*0.02,cy-h/2+h*0.3+h*0.18,1,{size:30,col:ink,align:"center"});});}
 
 /* ---------- 2 and 3. Linh's records, and her record, the person ---------- */
@@ -290,11 +321,11 @@ function m3_fly(ctx,k,p,from,to,o){if(p<=0)return;const e=ease(clamp(p,0,1)),x=l
 /* ---------- 3. one order, hidden in the SQL; the newest wins ---------- */
 // the model's SQL, as int_learner_timeline.sql has it (lines 166, 173 and 174): one order for every field; the comment wraps as an
 // editor shows it, and the third source is left out
-const M3_CODE={x:110,y:150,w:1270,h:420};
+const M3_CODE={x:80,y:150,w:1210,h:420};
 const M3_SQL=[["166","-- one value per attribute: the student system first,",1],["","   then the learning platform, then short courses",1],["","",0],
   ["173","coalesce(student_full_name, platform_full_name, …) as full_name,",0],["174","coalesce(student_email, platform_email, …) as email,",0]];
 const m3_cw=()=>tw(m3_mc(),"0",28,500,"mono");
-function m3_code(ctx,o){o=o||{};const C=M3_CODE,x=C.x,y=C.y,cx=x+120;wc_panel(ctx,x,y,C.w,C.h,{kind:"card",seed:7});
+function m3_code(ctx,o){o=o||{};const C=M3_CODE,x=C.x,y=C.y,cx=x+100;wc_panel(ctx,x,y,C.w,C.h,{kind:"card",seed:7});
   wc_T(ctx,"int_learner_timeline.sql",x+34,y+56,{w:600,size:28,f:"mono",col:WC_DARK});
   ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.35);ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(x+30,y+82);ctx.lineTo(x+C.w-30,y+82);ctx.stroke();ctx.restore();
   M3_SQL.forEach(([n,s,cm],i)=>{const yy=y+150+i*54;if(n)wc_T(ctx,n,x+34,yy,{w:500,size:28,f:"mono",col:WC_MUTED,a:0.8});

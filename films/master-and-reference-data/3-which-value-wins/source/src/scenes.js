@@ -84,7 +84,7 @@ scene("linked",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   // her record, the person: a field for each thing she needs; then each field's values, from the records that hold them
   arrive(ctx,M3_S2.x+M3_S2.w/2,M3_S2.y+Lay.h/2,t,tN-0.3,()=>m3_sheet(ctx,M3_S2.x,M3_S2.y,M3_S2.w,Lay.h,
     Lay.rows.map(([lab,y],i)=>[lab,y,fin(t,[tNm,tBd,tReach,tReach+0.3][i]-0.1,0.5)])),{dy:20,d:0.9});
-  M3_FIELDS.forEach(([lab,keys],g)=>keys.forEach((k,j)=>m3_fly(ctx,k,clamp((t-tGroups[g]-j*0.22)/0.9,0,1),m3_recFrom(M3_FROM[k]),Lay.at[k])));
+  M3_FIELDS.forEach(([lab,keys],g)=>keys.forEach((k,j)=>m3_fly(ctx,k,clamp((t-tGroups[g]-j*0.3)/0.9,0,1),m3_recFrom(M3_FROM[k]),Lay.at[k])));
   const q="which value wins?";m3_note(ctx,q,M3_S2.x+M3_S2.w-36-tw(ctx,q,32,700),M3_S2.y+60,clamp((t-tWh+0.1)/0.9,0,1),{size:32});
   m3_close(ctx,S);
   wc_year(ctx,64,80,"today · the university",fin(t,0.3,0.6)*(1-fin(t,tL-0.2,0.5)));wc_paperOver(ctx,S);});
@@ -116,10 +116,12 @@ scene("hidden",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
       M3_FIELDS.forEach(([lab,keys])=>keys.forEach(k=>{const [x,y]=Lay.at[k];m3_val(ctx,x,y,k,hrK[k]?{win:hw}:{dim:0.8*hw});}));},{dy:16,d:0.9});
     const rs="newest wins",rw=Math.round(tw(ctx,rs,28,700)+44),rx=R.x+R.w-30-rw;arrive(ctx,rx+rw/2,R.y+46,t,tNw,()=>{wc_panel(ctx,rx,R.y+20,rw,52,{kind:"tag",dashed:true,role:WC_PENCIL,seed:3});
       wc_T(ctx,rs,rx+22,R.y+56,{w:700,size:28,col:WC_DARK});},{dy:6});
-    // HR, and its file, sent again: once in February, once in July
+    // HR, and its file, sent again: once in February, once in July, each coming out from behind HR's card, its date written on as it lands
+    const files=[[tF1,"Feb 2026",1290,330],[tF2,"Jul 2026",1560,366]];
+    files.forEach(([t0,s,x1,y1])=>{const p=clamp((t-t0)/0.9,0,1);if(p<=0)return;const e=ease(p);
+      m3_file(ctx,lerp(1610,x1,e),lerp(200,y1,e)-Math.sin(e*Math.PI)*60,lerp(0.4,0.82,e),"",clamp(p*3,0,1));});
     arrive(ctx,1610,180,t,tHR-0.3,()=>wc_roleCard(ctx,1380,120,460,120,"tutor","HR","E-4417",null,{note:"sends its whole file"}),{dy:12});
-    [[tF1,"sent Feb 2026",1290,330],[tF2,"sent Jul 2026",1560,366]].forEach(([t0,s,x1,y1])=>{const p=clamp((t-t0)/0.9,0,1);if(p<=0)return;const e=ease(p);
-      m3_file(ctx,lerp(1610,x1,e),lerp(200,y1,e)-Math.sin(e*Math.PI)*60,lerp(0.4,0.82,e),s,clamp(p*3,0,1));});
+    files.forEach(([t0,s,x1,y1])=>{const a=fin(t,t0+0.6,0.4);if(a>0.01)withA(ctx,a,()=>wc_T(ctx,s,x1+17,y1+50,{w:600,size:28,f:"mono",align:"center",col:WC_ROLEINK.tutor}));});
     // the typo and the old mobile; the name as HR typed it, on her transcript
     const ring=(k,t0,seed)=>{const [x,y]=Lay.at[k],vw=m3_vw(k);wc_ring(ctx,x+vw/2,y,vw/2+20,40,clamp((t-t0)/0.7,0,1),{col:WC_NO,seed});return x+vw;};
     const xd=ring("dobHR",tTypo,73);m3_note(ctx,"typo",xd+30,Lay.at.dobHR[1]+10,clamp((t-tTypo-0.4)/0.5,0,1),{size:32,col:WC_NO});
@@ -199,7 +201,7 @@ scene("rules",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
       // legal name: the student system's, which checked her passport; the three others fold away behind it
       const dL=fin(t,tPass,0.8),wL=vw("legal");
       [["ron",x0+vw("hrn")+14,yy2("legal"),3],["hrn",x0,yy2("legal"),2],["alum",x0+wL+14,yy("legal"),1]].forEach(([k,sx,sy,i])=>{const e=ease(dL);
-        m3_val(ctx,lerp(sx,x0+6*i,e),lerp(sy,yy("legal")+5*i,e),k,{dim:0.85*dL});});
+        m3_val(ctx,lerp(sx,x0+6*i,e),lerp(sy,yy("legal")+5*i,e),k,{dim:0.85*dL,ta:1-clamp(dL/0.35,0,1)});});
       m3_val(ctx,x0,yy("legal"),"legal",{win:dL});withA(ctx,fin(t,tPass+0.5,0.4),()=>wc_badge(ctx,x0+wL+20,yy("legal"),"+3"));
       withA(ctx,fin(t,tPass+0.6,0.5),()=>m3_prov(ctx,x0,yy2("legal")+10,"sis",["student system","trusted source"]));
       // preferred name: hers
@@ -322,7 +324,7 @@ scene("dryrun",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
 scene("elsewhere",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const tBk=c("bank"),tSt=c("statements"),tLeg=w("statements","legal name"),tAp=c("app"),tGr=w("app","greets them"),tSh=c("shop"),tBill=w("shop","a billing address"),tDel=w("shop","a delivery address"),
     tEach=w("shop","each for"),tSa=c("same"),tQ=[w("same","which value"),w("same","for what"),w("same","who says so")];
-  m3_open(ctx,S,t,sc,"plainB",[[0,960,430,1.08],[tSh-0.3,1380,430,1.08],[tSa-0.3,960,540,1]]);
+  m3_open(ctx,S,t,sc,"plainB",[[0,960,430,1.08],[tSh-1.3,960,500,1],[tSa-0.3,960,540,1]]);
   // the bank, centred, until the shop arrives beside it; then each dims while the other speaks
   const dim=i=>1-0.55*(i===0?fin(t,tSh-0.3,0.5)*(1-fin(t,tSa-0.3,0.5)):0),slide=465*(1-ease(fin(t,tSh-1.2,1.0)));
   ctx.save();ctx.translate(slide,0);withA(ctx,dim(0),()=>arrive(ctx,M3_PAN[0][0]+M3_PW/2,M3_PY+M3_PH/2,t,tBk-0.3,()=>m3_panel(ctx,0),{dy:16}));

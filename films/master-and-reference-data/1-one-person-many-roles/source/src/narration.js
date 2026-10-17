@@ -6,18 +6,18 @@ const NARR={
  {"id":"moved","gap":0.8,"text":"When someone moved, they carried a certificate to their new parish, and the next book took them in."},
  {"id":"number","gap":0.8,"text":"In 1947, the register gave everyone a number for life.","say":"In nineteen forty-seven, the register gave everyone a number for life."},
  {"id":"once","gap":0.8,"text":"One person, written down once, followed wherever they went."}]},
-"email":{"name":"A new email","lead":1.0,"tail":1.0,"vo":[
+"move":{"name":"A new address","lead":1.0,"tail":1.0,"vo":[
  {"id":"today","gap":0.8,"text":"Today, at the university. Linh Nguyen is studying health informatics."},
- {"id":"shared","gap":0.8,"text":"For years she shared her family's email with Minh, who studies here too."},
- {"id":"own","gap":0.8,"text":"This week, Linh gets her own address, and tells the student system."},
+ {"id":"moves","gap":0.8,"text":"This month, she moves in with her brother, Minh."},
+ {"id":"tells","gap":0.8,"text":"She tells the student system her new address."},
  {"id":"done","gap":0.8,"text":"Done, she thinks."}]},
 "four":{"name":"Four records, four Linhs","lead":0.8,"tail":1.0,"vo":[
  {"id":"others","gap":0.8,"text":"But the student system isn't the only one that knows her."},
- {"id":"platform","gap":0.8,"text":"The learning platform has her account, with the family email."},
- {"id":"short","gap":0.8,"text":"So does the short-course platform, where she took Health Literacy."},
- {"id":"tutor","gap":0.8,"text":"And this semester she tutors a first-year unit, so HR has her too, with a staff number."},
- {"id":"inbox","gap":0.8,"text":"Her certificate and her payslip still go to the family inbox, and Minh opens them."},
- {"id":"alumni","gap":0.8,"text":"Next year, the alumni office will add one more."}]},
+ {"id":"alumni","gap":0.8,"text":"She did her first degree here, so the alumni office has her."},
+ {"id":"tutor","gap":0.8,"text":"She tutors a first-year unit, so HR has her too, with a staff number."},
+ {"id":"research","gap":0.8,"text":"And this year she joined a research project, so the research office has her as well."},
+ {"id":"letter","gap":0.8,"text":"HR posts her next contract, with her pay, to the old flat, where someone else lives now."},
+ {"id":"only","gap":0.8,"text":"Four records, four Linhs, and only one knows she moved."}]},
 "kinds":{"name":"The kinds of data","lead":1.0,"tail":1.0,"vo":[
  {"id":"master","gap":0.8,"text":"Linh is master data: one of the things the university is about, shared by every process and system."},
  {"id":"reference","gap":0.8,"text":"The lists that sort her, like “casual tutor” or a country, are reference data."},
@@ -32,7 +32,7 @@ const NARR={
 "apart":{"name":"Four things, kept apart","lead":0.8,"tail":1.0,"vo":[
  {"id":"draws","gap":0.8,"text":"So she draws four things apart."},
  {"id":"person","gap":0.8,"text":"The person: someone, once."},
- {"id":"roles","gap":0.8,"text":"The roles: student, tutor, customer, each with a start, an end, and an owner."},
+ {"id":"roles","gap":0.8,"text":"The roles: student, tutor, researcher, each with a start, an end, and an owner."},
  {"id":"contacts","gap":0.8,"text":"The contact points: an email or an address, each with a purpose, and some shared by two people."},
  {"id":"ids","gap":0.8,"text":"And the identifiers: a student number belongs to the student system, a staff number to HR."},
  {"id":"none","gap":0.8,"text":"None of them is the person."},
@@ -42,7 +42,7 @@ const NARR={
  {"id":"roles","gap":0.8,"text":"For each role, which system creates it, and who owns it."},
  {"id":"attrs","gap":0.8,"text":"For each piece of the person, which system is trusted."},
  {"id":"legal","gap":0.8,"text":"The registrar's office keeps the legal name."},
- {"id":"own","gap":0.8,"text":"Linh keeps her own preferred name, and her personal email."},
+ {"id":"own","gap":0.8,"text":"Linh keeps her own preferred name, and her home address."},
  {"id":"hr","gap":0.8,"text":"HR keeps her work details."},
  {"id":"mei","gap":0.8,"text":"And Mei's office looks after the person: who someone is, and whether two records are one."}]},
 "elsewhere":{"name":"Elsewhere","lead":0.8,"tail":1.0,"vo":[
@@ -69,12 +69,10 @@ const NARR={
  {"id":"q4","gap":0.8,"text":"And does it matter when they do: money, safety, the law, or someone's trust?"},
  {"id":"yes","gap":0.8,"text":"Four yeses: master it."}]},
 "series":{"name":"The series","lead":0.8,"tail":1.0,"vo":[
- {"id":"first","gap":0.8,"text":"Who is it? Which value wins?"},
- {"id":"come","gap":0.8,"text":"Roles that come and go, and the lists that sort them."},
- {"id":"see","gap":0.8,"text":"What each role may see. One person in many systems."},
- {"id":"keep","gap":0.8,"text":"A hub at work, and how to keep it right."}]},
+ {"id":"parts","gap":0.8,"text":"Eight more films follow, in four parts."},
+ {"id":"names","gap":0.8,"text":"Who someone is. Roles and lists. Sharing it safely. And keeping it right."}]},
 "once":{"name":"Once","lead":0.8,"tail":1.0,"vo":[
- {"id":"change","gap":0.8,"text":"Linh changes her email, once."},
+ {"id":"change","gap":0.8,"text":"Linh changes her address, once."},
  {"id":"hears","gap":0.8,"text":"Every role hears."},
  {"id":"know","gap":0.8,"text":"Know the person, not just the role."}]}
 };

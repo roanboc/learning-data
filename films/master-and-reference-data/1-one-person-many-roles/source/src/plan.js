@@ -1,12 +1,13 @@
 /* ===== One person, many roles: the places and the pictures =====
    The places are painted once and kept (post.js): the parish in 1686, the campus today, the paper with a little sky and land for the
    chapters that explain, a second one for the industries, and the data architect's office. The pictures are the film's own things:
-   the parish books, the moving certificate, the 1947 card, Linh's email and her four records, the shelves of the kinds of data, the
-   university's model, the inventory, the industries, DAMA's wheel and the four ways to keep master data, the gallery and the four
-   questions, and the nine films. Every name starts with m1_ (this film) or M1_. */
+   the parish books, the moving certificate, the 1947 card, Linh's move and her four records, the new tenant at her old flat, the
+   shelves of the kinds of data, the university's model, the inventory, the industries, DAMA's wheel and the four ways to keep master
+   data, the gallery and the four questions, and the nine films in four parts. Every name starts with m1_ (this film) or M1_. */
 
 /* ---------- the places ---------- */
-const M1_G1=x=>650-96*Math.exp(-Math.pow((x-450)/250,4))+6*Math.sin(x/150);
+// the church's hill, flat across the top so the church stands on it; the ground the church stands on
+const M1_G1=x=>650-100*Math.exp(-Math.pow((x-480)/310,8))+4*Math.sin(x/150),M1_CH=557;
 const M1_G2=x=>712+14*Math.sin(x/260+2)-44*Math.exp(-Math.pow((x-1010)/320,2));
 const M1_G3=x=>812+22*Math.sin((x+200)/420)+8*Math.sin(x/130);
 const M1_FF=x=>540+18*Math.sin(x/300+0.4)+6*Math.sin(x/110);
@@ -16,19 +17,23 @@ const M1_ROAD=wc_smooth([[1036,M1_G2(1036)+8],[1120,M1_G2(1120)-4],[1210,646],[1
 function m1_parish(ctx){const P=WCP;wc_sky(ctx,604,1,{sun:[1660,170]});
   wc_forest(ctx,x=>500+14*Math.sin(x/210)+8*Math.sin(x/80+1.3),P.farForest,0.05,11,{h:30,w:18});wc_cathedral(ctx,1430,532,0.8,0.14);
   wc_land(ctx,M1_FF,P.far,0.22);wc_fieldStrips(ctx,M1_FF,4,64,4,[P.far,P.field],0.24,3);
-  wc_treeRow(ctx,x=>M1_FF(x)+2,1120,1420,46,34,0.24,7);wc_treeRow(ctx,x=>M1_FF(x)+2,1560,1900,44,32,0.24,9);wc_lake(ctx,574,820,0.34);
-  wc_land(ctx,M1_G1,P.mid,0.5);wc_contact(ctx,270,700,M1_G1(450)+6,0.52);wc_church(ctx,296,M1_G1(450)+4,1.18,0.52);
-  wc_wash(ctx,[[250,M1_G1(450)-1],[732,M1_G1(450)-1],[738,M1_G1(450)+16],[244,M1_G1(450)+16]],P.wall,{depth:0.55,kind:"wall",lw:1.5});
+  wc_treeRow(ctx,x=>M1_FF(x)+2,1120,1420,46,34,0.24,7);wc_treeRow(ctx,x=>M1_FF(x)+2,1560,1900,44,32,0.24,9);wc_lake(ctx,574,860,0.34);
+  wc_land(ctx,M1_G1,P.mid,0.5);wc_contact(ctx,276,694,M1_CH+3,0.52);wc_church(ctx,296,M1_CH,1.18,0.52);
   wc_birch(ctx,208,M1_G1(208)+8,210,0.56,-0.03);wc_birch(ctx,770,M1_G1(770)+6,236,0.58,0.03);wc_birch(ctx,800,M1_G1(800)+8,190,0.58,-0.03);
   wc_land(ctx,M1_G2,P.mid2,0.6);for(const [x,h] of [[1196,150],[1236,178],[1272,140],[1716,140],[1760,170],[1804,128]])wc_spruce(ctx,x,M1_G2(x)+6,h,0.6);
   wc_contact(ctx,860,1130,M1_G2(1000)+6,0.64);wc_farmhouse(ctx,876,M1_G2(1000)+4,1.24,0.64);
   wc_wash(ctx,wc_band(M1_ROAD,30,6),P.road,{depth:0.62,kind:"road",line:false});
   wc_land(ctx,M1_G3,P.near,0.86);wc_fence(ctx,x=>M1_G3(x)+34,-40,1000,0.86);wc_tufts(ctx,M1_G3,0,1030,56,0.95,8);
   const R=wc_rng(5);for(let i=0;i<46;i++){const x=R()*1020,y=M1_G3(x)+90+R()*(H-M1_G3(x)-90),r=3+R()*3+(y-880)/60;wc_wash(ctx,wc_ell(x,y,r,r*0.9,12),[P.flowerA,P.flowerB,P.flowerC][i%3],{kind:"dab",flat:true});}}
-// today: the university's old building and its glass wing, a lawn, terraced houses across the street, a lamp, the family's letterbox
+// today: the university's old building and its glass wing, a lawn, terraced houses across the street, a lamp, the letterbox of Linh's old flat
 const M1_LAWN=x=>664+5*Math.sin(x/300);
-// the family's letterbox, where the post for nguyen.family goes
+// the letterbox of the flat Linh leaves, across the street, where HR's letter still goes
 const M1_BOX=[1740,1012];
+// the new tenant there, who finds it: a stranger to the university, so on no side, with a neutral edge like Linh's; where they stand
+PEOPLE.tenant={name:"The new tenant",role:"Tenant",side:"Person",does:"uses",edge:[236,232,226],seed:24,
+  skin:[204,150,112],hair:{style:"curly",c:[118,110,106]},beard:[128,120,114],glasses:[52,48,46],
+  top:{kind:"sweater",c:[150,118,92]},bottom:{c:[66,72,84]},shoe:[58,48,44],build:{sh:74,hip:60,h:0.98}};
+const M1_TEN=1520;
 function m1_campus(ctx){const P=WCP;wc_sky(ctx,716,2,{sun:[1560,170]});
   wc_skyline(ctx,624,P.city,0.1,5);wc_treeRow(ctx,()=>640,-40,1980,58,70,0.24,21,P.leaf2);wc_land(ctx,M1_LAWN,P.lawn,0.42);
   wc_contact(ctx,140,770,668,0.46,0.22);wc_quad(ctx,150,668,0.46,0.62);wc_glassWing(ctx,762,668,150,170,0.48);
@@ -113,29 +118,31 @@ function m1_stampRule(){return wc_kept("stampRule",840,240,q=>{q.scale(2,2);q.tr
   wc_ink(q,wc_rrPts(0,0,412,112,10),true,3.6,M1_STAMP,0.9,41,0.6);wc_ink(q,wc_rrPts(9,9,394,94,6),true,1.8,M1_STAMP,0.85,43,0.6);
   q.globalCompositeOperation="destination-out";q.globalAlpha=0.5;q.drawImage(WC.blotch,-40,-30,520,300);});}
 
-/* ---------- 2 and 3. the campus, Linh's email and her four records ---------- */
+/* ---------- 2 and 3. the campus, Linh's move and her four records ---------- */
 const M1_LX=560,M1_LY=1018;
 // where Linh's phone is, when she holds it up
 const M1_PHONE=[548,632];
-// the email the family shares, and the one that is only hers
-function m1_famCard(ctx,x,y,a,o){o=o||{};withA(ctx,a,()=>wc_info(ctx,x,y,560,124,"nguyen.family@mail.example","shared with Minh",{bigSize:28,badge:o.badge?"family":null}));}
-function m1_ownCard(ctx,x,y,p,a){withA(ctx,a,()=>{wc_panel(ctx,x,y,560,94,{kind:"card",wash:WC_ROLE.student,washA:0.16});const s="linh.nguyen@mail.example",n=typeOn(s,p);
-  wc_T(ctx,n,x+30,y+58,{f:"mono",w:500,size:28,col:WC_DARK});if(p<1&&p>0){const cx=x+30+tw(ctx,n,28,500,"mono")+3;ctx.fillStyle=rgba(WC_DARK,0.8);ctx.fillRect(cx,y+30,3,34);}});}
-// Linh's four records, as each system holds them (and the fifth, next year), where they sit around her
-const M1_CARDS={student:[90,170,400,120],platform:[640,130,446,120],customer:[40,330,476,120],tutor:[680,290,446,120],alumna:[700,450,410,102]};
-function m1_card(ctx,k,o){o=o||{};const [x,y,w,h]=M1_CARDS[k];
-  if(k==="student")wc_roleCard(ctx,x,y,w,h,"student","Student","S-20436",o.fresh?"linh.nguyen@…":"nguyen.family@…",{fresh:o.fresh,ba:o.ba});
-  else if(k==="platform")wc_roleCard(ctx,x,y,w,h,"platform","Platform user","u-88236",o.fresh?"linh.nguyen@…":"nguyen.family@…",{fresh:o.fresh,ba:o.ba});
-  else if(k==="customer")wc_roleCard(ctx,x,y,w,h,"customer","Short-course customer",null,o.fresh?"linh.nguyen@…":"nguyen.family@…",{fresh:o.fresh,ba:o.ba});
-  else if(k==="tutor")wc_roleCard(ctx,x,y,w,h,"tutor","Casual tutor","E-4417",o.fresh?"linh.nguyen@…":"nguyen.family@…",{fresh:o.fresh,ba:o.ba});
-  else wc_roleCard(ctx,x,y,w,h,"alumna","Alumna",null,null,{dashed:true,note:"next year"});}
+// the flat she leaves, and the home she moves into, which she shares with her brother
+const M1_OLD="18 Park Street",M1_NEW="7 Hill Road";
+// her old address, struck through as she moves (s goes 0 to 1), as the priest struck Olof through in 1686
+function m1_oldCard(ctx,x,y,s){wc_info(ctx,x,y,560,124,M1_OLD,"her flat, until now",{});if(s<=0)return;const w0=tw(ctx,M1_OLD,30,500,"mono");
+  ctx.save();ctx.strokeStyle=rgba(WC_INK,0.85);ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x+22,y+41);ctx.lineTo(x+22+(w0+16)*ease(clamp(s,0,1)),y+39);ctx.stroke();ctx.restore();}
+// the new one, typed in as p goes 0 to 1; who she shares it with, and the badge that says so, as b goes 0 to 1
+function m1_newCard(ctx,x,y,p,b){wc_panel(ctx,x,y,560,124,{kind:"card",wash:WC_ROLE.student,washA:0.16});const n=typeOn(M1_NEW,p);
+  wc_T(ctx,n,x+30,y+50,{f:"mono",w:500,size:30,col:WC_DARK});if(p<1&&p>0){const cx=x+30+tw(ctx,n,30,500,"mono")+3;ctx.fillStyle=rgba(WC_DARK,0.8);ctx.fillRect(cx,y+22,3,36);}
+  if(b>0.01)withA(ctx,b,()=>{const s="with Minh, her brother";wc_T(ctx,s,x+30,y+96,{w:600,size:28,col:WC_MUTED});wc_badge(ctx,x+30+tw(ctx,s,28,600)+14,y+87,"shared");});}
+// Linh's four records, as each system holds them, where they sit around her: the address each has for her, ticked once it's the new one
+const M1_CARDS={student:[90,170,400,120],researcher:[640,130,446,120],alumna:[40,330,476,120],tutor:[680,290,446,120]};
+const M1_CARD={student:["Student","S-20436"],alumna:["Alumna",null],tutor:["Casual tutor","E-4417"],researcher:["Researcher","R-3082"]};
+function m1_card(ctx,k,o){o=o||{};const [x,y,w,h]=M1_CARDS[k],[title,id]=M1_CARD[k];
+  wc_roleCard(ctx,x,y,w,h,k,title,id,o.fresh?M1_NEW:M1_OLD,{fresh:o.fresh,badge:"old",ba:o.ba});}
 // where a card's line to Linh starts
 const m1_cardEnd=k=>{const [x,y,w,h]=M1_CARDS[k];return x+w/2<M1_LX?[x+w,y+h/2]:[x,y+h/2];};
 
 /* ---------- 4. the kinds of data ---------- */
 // Linh's roles, as bands on her white figure: the same order wherever she's drawn as the master record
-const M1_BANDS=["student","customer","tutor","alumna"];
-const m1_bands=a=>M1_BANDS.map((r,i)=>({col:WC_ROLE[r],dashed:r==="alumna",a:a[i]==null?1:a[i]}));
+const M1_BANDS=["student","tutor","researcher","alumna"];
+const m1_bands=a=>M1_BANDS.map((r,i)=>({col:WC_ROLE[r],a:a[i]==null?1:a[i]}));
 // a shelf: a plank on two brackets, drawn in from the left as p goes 0 to 1
 function m1_shelf(ctx,cx,y,p){if(p<=0)return;const c=wc_kept("shelf",440,70,q=>{q.translate(20,10);wc_wash(q,wc_rect(0,0,400,18),WCP.wood,{kind:"trim",lw:1.6});
     for(const x of [34,366])wc_wash(q,[[x-12,18],[x+12,18],[x,44]],wc_dim(WCP.wood,0.12),{kind:"trim",lw:1.2});});
@@ -185,9 +192,10 @@ function m1_map(ctx,o){o=o||{};const M=M1_MAP,sp=o.spot||0;ctx.drawImage(m1_mapP
     es.forEach(e=>{const [ex,ey,ew,eh]=m1_ent(e),hi=e==="learner"?(o.hi||0):0;wc_panel(ctx,ex,ey,ew,eh,{kind:"card",seed:e.length});
       if(hi>0.01)withA(ctx,hi,()=>wc_panel(ctx,ex,ey,ew,eh,{kind:"card",wash:WC_ROLE.student,washA:0.5,seed:e.length}));
       wc_T(ctx,e,ex+18,ey+33,{w:hi>0.5?800:600,size:28,col:WC_INK});});}));}
-// the learner's keys, one per system that knows her, and the decision that says two of them are the same learner
+// the learner's keys, one per system that knows learners (the short-course system knows them by email), and the decision that says two
+// of them are the same learner; every key is the learner's, one role, so every dot is the student's colour
 function m1_keys(ctx,x,y){const w=620,h=262;wc_panel(ctx,x,y,w,h,{kind:"card"});wc_T(ctx,"the learner's keys",x+28,y+48,{w:800,size:30,col:WC_DARK});
-  [["student","SIS | S-20436"],["platform","LMS | u-88236"],["customer","SC | nguyen.family@…"]].forEach(([r,k],i)=>{const yy=y+96+i*44;ctx.fillStyle=rgba(WC_ROLE[r],1);
+  [["student","SIS | S-20436"],["student","LMS | u-88236"],["student","SC | email"]].forEach(([r,k],i)=>{const yy=y+96+i*44;ctx.fillStyle=rgba(WC_ROLE[r],1);
     ctx.beginPath();ctx.arc(x+38,yy-9,8,0,TAU);ctx.fill();wc_T(ctx,k,x+58,yy,{w:500,size:28,f:"mono",col:WC_INK});});
   const bw=wc_badge(ctx,x+28,y+h-40,"D-001");wc_T(ctx,"same learner, decided by Mei",x+28+bw+14,y+h-30,{w:600,size:28,col:WC_INK});}
 // the model's decision, typed in: what's wrong, and what to do; a note the size of her name card, which it replaces
@@ -199,8 +207,8 @@ function m1_decision(ctx,x,y,p){const w=380,h=196;wc_panel(ctx,x,y,w,h,{kind:"ca
 // the person, with the label above her; the lanes start at M1_AX
 const M1_AX=700,M1_FIG=[350,860,0.82];
 // Linh's roles, dated; her contact points, each with its purpose; her identifiers, each with the system that issued it
-const M1_ROLES=[["student","Student","from Jul 2025",700,168],["customer","Customer","Jan–Feb 2026",1284,168],["tutor","Tutor","Mar–Jun 2026",700,260],["alumna","Alumna","next year",1284,260]];
-const M1_IDS=[["S-20436","by the student system",700],["u-88236","by the platform",1088],["E-4417","by HR",1476]];
+const M1_ROLES=[["student","Student","from Jul 2025",700,168],["tutor","Tutor","since Feb 2023",1284,168],["researcher","Researcher","Mar–Dec 2026",700,260],["alumna","Alumna","since 2022",1284,260]];
+const M1_IDS=[["S-20436","by the student system",700],["E-4417","by HR",1088],["R-3082","by the research office",1476]];
 // the same idea in enterprise architecture's notation (The map before the data): an actor, assigned to roles, for a time
 function m1_ea(ctx,t,x,y,t0,tAs,tTime){const w=1144,h=440;wc_panel(ctx,x,y,w,h,{kind:"card",seed:5});wc_T(ctx,"in enterprise architecture",x+30,y+50,{w:600,size:28,col:WC_MUTED});
   const ax=x+250,ay=y+226;withA(ctx,fin(t,t0,0.5),()=>{archGlyph(ctx,"actor",ax,ay-10,92,WC_INK);wc_T(ctx,"actor",ax,ay+108,{w:800,size:32,align:"center",col:WC_DARK});
@@ -217,8 +225,8 @@ function m1_ea(ctx,t,x,y,t0,tAs,tTime){const w=1144,h=440;wc_panel(ctx,x,y,w,h,{
 // the sheet Noor and Mei write: for each role, where it's created and who owns it; for each detail of the person, the system trusted
 // for it and who keeps it; and at the top, who looks after the person
 const M1_KS={x:400,y:76,w:1080,h:714},M1_KC=[440,780,1150];
-const M1_KROLES=[["student","student system","registrar's office"],["customer","short-course platform","short courses"],["tutor","HR system","HR"],["alumna","alumni system","alumni office"]];
-const M1_KDET=[["legal name","student system","registrar's office"],["preferred name","student portal","Linh"],["personal email","student portal","Linh"],["work details","HR system","HR"]];
+const M1_KROLES=[["student","student system","registrar's office"],["tutor","HR system","HR"],["researcher","research system","research office"],["alumna","alumni system","alumni office"]];
+const M1_KDET=[["legal name","student system","registrar's office"],["preferred name","self-service","Linh"],["home address","self-service","Linh"],["work details","HR system","HR"]];
 // o: the moment each row is written (roles, dets), each detail's keeper is lit (keep), the person's row arrives (person), Mei ticks it (tick)
 function m1_keeps(ctx,t,o){const K=M1_KS,[c1,c2,c3]=M1_KC;wc_panel(ctx,K.x,K.y,K.w,K.h,{kind:"sheet",seed:3});wc_T(ctx,"who keeps what",c1,K.y+64,{w:800,size:36,col:WC_DARK});
   const head=(y,a,cols)=>withA(ctx,a,()=>{cols.forEach((s,i)=>wc_T(ctx,s,M1_KC[i],y,{w:600,size:28,col:WC_MUTED}));ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.45);ctx.lineWidth=1.6;
@@ -229,7 +237,7 @@ function m1_keeps(ctx,t,o){const K=M1_KS,[c1,c2,c3]=M1_KC;wc_panel(ctx,K.x,K.y,K
     const bw=wc_badge(ctx,c3,K.y+123,"steward");wc_tick(ctx,c3+bw+34,K.y+120,40,[176,124,10],clamp((t-o.tick)/0.45,0,1),5.5);});
   head(K.y+210,fin(t,o.roles[0]-0.4,0.4),["role","who creates it","who owns it"]);
   M1_KROLES.forEach(([r,a,b],i)=>{const k=fin(t,o.roles[i],0.35);if(k<=0.01)return;const y=K.y+256+i*46;withA(ctx,k,()=>{ctx.save();ctx.beginPath();ctx.arc(c1+9,y-9,9,0,TAU);
-      if(r==="alumna"){ctx.setLineDash([4,4]);ctx.strokeStyle=rgba(WC_ROLE[r],1);ctx.lineWidth=2.5;ctx.stroke();}else{ctx.fillStyle=rgba(WC_ROLE[r],1);ctx.fill();}ctx.restore();
+      ctx.fillStyle=rgba(WC_ROLE[r],1);ctx.fill();ctx.restore();
     wc_T(ctx,r,c1+30,y,{w:700,size:28,col:WC_DARK});wc_T(ctx,a,c2,y,{w:600,size:28,col:WC_INK});wc_T(ctx,b,c3,y,{w:600,size:28,col:WC_INK});});});
   head(K.y+480,fin(t,o.dets[0]-0.4,0.4),["detail","trusted system","who keeps it"]);
   M1_KDET.forEach(([d,a,b],i)=>{const k=fin(t,o.dets[i],0.35),kk=fin(t,o.keep[i],0.45);if(k<=0.01)return;const y=K.y+526+i*46;withA(ctx,k,()=>{
@@ -252,8 +260,9 @@ function m1_wall(ctx,x,y,w){const c=wc_kept("wall"+w,w+20,46,q=>{q.translate(10,
 function m1_meter(ctx,x,y){const c=wc_kept("meter",110,140,q=>{q.translate(15,10);wc_wash(q,wc_rrPts(0,0,80,110,10),[206,206,214],{kind:"build",lw:1.6});
     wc_wash(q,wc_ell(40,44,24,24,28),WC_PAPER,{kind:"clock",lw:1.5});q.strokeStyle=rgba(WC_INK,0.9);q.lineWidth=3;q.lineCap="round";q.beginPath();q.moveTo(40,44);q.lineTo(54,30);q.stroke();
     wc_wash(q,wc_rect(18,82,44,14),[90,96,110],{kind:"trim",flat:true});});ctx.drawImage(c,x-15,y-10);}
+const M1_HEART=[238,96,78];
 function m1_heart(ctx,x,y,s){ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.beginPath();ctx.moveTo(0,8);ctx.bezierCurveTo(-20,-6,-12,-22,0,-12);ctx.bezierCurveTo(12,-22,20,-6,0,8);
-  ctx.fillStyle=rgba(WC_ROLE.customer,0.92);ctx.fill();ctx.strokeStyle=rgba(wc_dim(WC_ROLE.customer,0.35),0.9);ctx.lineWidth=1.6/s;ctx.stroke();ctx.restore();}
+  ctx.fillStyle=rgba(M1_HEART,0.92);ctx.fill();ctx.strokeStyle=rgba(wc_dim(M1_HEART,0.35),0.9);ctx.lineWidth=1.6/s;ctx.stroke();ctx.restore();}
 
 /* ---------- 9. named once ---------- */
 // DAMA's wheel: data governance at the hub, ten knowledge areas round it; only reference and master data is lit and named
@@ -272,7 +281,7 @@ function m1_arrow(ctx,x0,y0,x1,y1,p,o){o=o||{};if(p<=0)return;const ex=lerp(x0,x
   ctx.strokeStyle=rgba(o.col||WC_INK,0.9);ctx.fillStyle=rgba(o.col||WC_INK,0.9);ctx.lineWidth=o.lw||3;ctx.lineCap="round";if(o.dash)ctx.setLineDash(o.dash);ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(ex,ey);ctx.stroke();ctx.setLineDash([]);
   const head=(x,y,a)=>{ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x-15*Math.cos(a-0.45),y-15*Math.sin(a-0.45));ctx.lineTo(x-15*Math.cos(a+0.45),y-15*Math.sin(a+0.45));ctx.closePath();ctx.fill();};
   if(p>=1){if(o.end!==false)head(x1,y1,an);if(o.start)head(x0,y0,an+Math.PI);}ctx.restore();}
-function m1_style(ctx,t,i,t0){const p=clamp((t-t0)/1.1,0,1);if(p<=0)return;const x=M1_SX[i%2],y=M1_SY[i>>1],src=["student","platform","customer"],fx=x+190,fy=y+128;
+function m1_style(ctx,t,i,t0){const p=clamp((t-t0)/1.1,0,1);if(p<=0)return;const x=M1_SX[i%2],y=M1_SY[i>>1],src=["student","tutor","researcher"],fx=x+190,fy=y+128;
   arrive(ctx,x+190,y+150,t,t0,()=>{wc_panel(ctx,x,y,380,320,{kind:"card",seed:60+i});
     src.forEach((r,k)=>wc_panel(ctx,x+34+k*112,y+186,90,46,{kind:"chip",role:WC_ROLE[r],seed:k+i}));
     wc_T(ctx,M1_STYLES[i][0],x+190,y+272,{w:800,size:30,align:"center",col:WC_DARK});wc_T(ctx,M1_STYLES[i][1],x+190,y+306,{w:600,size:28,align:"center",col:WC_MUTED});},{dy:14});
@@ -282,7 +291,7 @@ function m1_style(ctx,t,i,t0){const p=clamp((t-t0)/1.1,0,1);if(p<=0)return;const
   else{wc_white(ctx,"linh",fx,fy,0.18,m1_bands([1,1,1,1]),{a:ease(q),shadow:false});
     xs.forEach((sx,k)=>{const pk=clamp(q*1.5-k*0.2,0,1);if(i===1)m1_arrow(ctx,sx,y+182,fx+(sx-fx)*0.25,fy+6,pk);else if(i===2)m1_arrow(ctx,sx,y+182,fx+(sx-fx)*0.25,fy+6,pk,{start:true});
       else m1_arrow(ctx,fx+(sx-fx)*0.25,fy+6,sx,y+182,pk);});
-    if(i===1){ctx.save();ctx.fillStyle=rgba(WC_ROLEINK.platform,0.85);[[0,30],[16,46],[32,22]].forEach(([dx,hh])=>ctx.fillRect(x+262+dx,y+112-hh,11,hh));ctx.restore();}}}
+    if(i===1){ctx.save();ctx.fillStyle=rgba([150,92,0],0.85);[[0,30],[16,46],[32,22]].forEach(([dx,hh])=>ctx.fillRect(x+262+dx,y+112-hh,11,hh));ctx.restore();}}}
 
 /* ---------- 10. not only people ---------- */
 // the other things a business is about, by industry, each in its industry's colour
@@ -294,14 +303,22 @@ const M1_EX=[["retail","a supplier",[1,1,1,1],"master it"],[[150,146,160],"a pay
 const M1_QX=[1000,1320,1640],M1_QY=[340,440,540,640];
 
 /* ---------- 11. the series ---------- */
+// the nine films: this one, here, on its own; the eight to come in four parts, each part's name on the line in one of the series' colours,
+// with its two films, one above the line and one below
 const M1_FILMS=[["One person,","many roles"],["Who is it?"],["Which value wins"],["Roles come","and go"],["Lists everyone","uses"],["For this","purpose only"],["One person,","many systems"],["A hub at work"],["Kept, not","cleaned"]];
-function m1_film(ctx,i,here){const x=200+i*190,up=i%2===0,y=up?296:644,w=330,h=140,col=WC_ROLE[["student","platform","customer","tutor","alumna"][i%5]];
-  ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,up?y+h:y);ctx.lineTo(x,540);ctx.stroke();ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(x,540,11,0,TAU);ctx.fill();ctx.restore();
-  wc_panel(ctx,x-w/2,y,w,h,{kind:"card",role:col,seed:40+i});wc_T(ctx,"Film "+(i+1),x-w/2+26,y+42,{w:600,size:28,col:WC_MUTED});
+const M1_PARTS=["who someone is","roles and lists","sharing it safely","keeping it right"],M1_PX=[590,960,1330,1700];
+// a part: a paper tag on the line, in no role's colour; blank while the parts are counted, its name written in (a) as it's said
+function m1_part(ctx,g,a){const s=M1_PARTS[g],w=Math.round(tw(ctx,s,30,700)+40),x0=M1_PX[g]-w/2;
+  wc_panel(ctx,x0,514,w,52,{kind:"tag",seed:g+5});if(a>0.01)wc_T(ctx,s,x0+20,551,{w:700,size:30,col:WC_DARK,a});}
+// film i (0 is this one), as a card joined to the line
+function m1_film(ctx,i,here){const g=i?Math.floor((i-1)/2):-1,x=i?M1_PX[g]:200,up=!i||i%2===1,y=up?296:644,w=330,h=140;
+  ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,up?y+h:y);ctx.lineTo(x,i?(up?514:566):540);ctx.stroke();
+  if(!i){ctx.fillStyle=rgba(WC_ROLE.student,1);ctx.beginPath();ctx.arc(x,540,11,0,TAU);ctx.fill();}ctx.restore();
+  wc_panel(ctx,x-w/2,y,w,h,{kind:"card",seed:40+i});wc_T(ctx,"Film "+(i+1),x-w/2+26,y+42,{w:600,size:28,col:WC_MUTED});
   M1_FILMS[i].forEach((l,k)=>wc_T(ctx,l,x-w/2+26,y+84+k*36,{w:800,size:30,col:WC_DARK}));if(here)wc_badge(ctx,x+w/2-26-Math.round(tw(ctx,"here",28,700)+28),y+34,"here");}
 
 /* ---------- 12. once ---------- */
-// one field: her email, typed once
-function m1_field(ctx,x,y,p){const w=600,h=118;wc_panel(ctx,x,y,w,h,{kind:"card",wash:WC_ROLE.student,washA:0.14});wc_T(ctx,"email",x+28,y+44,{w:600,size:28,col:WC_MUTED});
-  const s="linh.nguyen@mail.example",n=typeOn(s,p);wc_T(ctx,n,x+28,y+90,{f:"mono",w:500,size:30,col:WC_DARK});
+// one field: her home address, typed once
+function m1_field(ctx,x,y,p){const w=600,h=118;wc_panel(ctx,x,y,w,h,{kind:"card",wash:WC_ROLE.student,washA:0.14});wc_T(ctx,"home address",x+28,y+44,{w:600,size:28,col:WC_MUTED});
+  const s=M1_NEW,n=typeOn(s,p);wc_T(ctx,n,x+28,y+90,{f:"mono",w:500,size:30,col:WC_DARK});
   if(p<1){const cx=x+28+tw(ctx,n,30,500,"mono")+3;ctx.fillStyle=rgba(WC_DARK,0.8);ctx.fillRect(cx,y+62,3,36);}}

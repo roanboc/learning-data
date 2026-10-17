@@ -1,0 +1,25 @@
+{
+  "key": "when-strategy-moves",
+  "title": "When strategy moves",
+  "sub": "The map before the data, a series on enterprise architecture and why it matters for data: one change in strategy, a social tariff for every eligible household, walked down every layer of the map to the owners who must agree; checked against the principles before it's designed; asking another organisation for the least; new rules with homes; the households an automatic route would miss; a data product's contract versioned, its readers found through lineage; and the path in plateaus, answered in a day.",
+  "howto": "Paper on a wall is a draft or a request; glass in the layers' colours is the confirmed model. Purple is motivation, where goals live; amber is strategy, where capabilities live; yellow is the business layer; peach is information; blue is what runs it. Gold tags name owners. The network's side of the wall is blue, retail's is rose.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": ["kenya", "agents", 1.4],
+  "say": [
+    [
+      "\\bTomás's\\b",
+      "Toh-mahs's"
+    ],
+    [
+      "\\bTomás\\b",
+      "Toh-mahs"
+    ],
+    [
+      "\\bM-Pesa\\b",
+      "Em-Pesa"
+    ]
+  ]
+}

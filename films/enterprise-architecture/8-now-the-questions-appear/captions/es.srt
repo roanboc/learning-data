@@ -1,0 +1,175 @@
+1
+00:00:01,400 --> 00:00:07,090
+Kerala, en la costa suroeste de la India, una mañana de enero de 1997.
+
+2
+00:00:08,390 --> 00:00:15,286
+Los botes sardineros se dirigen con su pesca a los mercados de playa. Los mercados cierran a las ocho, y un bote solo puede llegar a uno.
+
+3
+00:00:16,786 --> 00:00:21,493
+Cada capitán tiene que elegir uno todavía en el mar, sin saber cuánto pagarán los mercados.
+
+4
+00:00:22,793 --> 00:00:32,286
+En Badagara, once tripulaciones no encuentran compradores, y su pesca vuelve al mar. A menos de quince kilómetros, veintisiete compradores se van sin pescado.
+
+5
+00:00:33,986 --> 00:00:43,826
+En pocas semanas, los celulares llegan a la costa. En el mar, un capitán llama a compradores de varios mercados, acuerda un precio, y solo entonces elige dónde desembarcar.
+
+6
+00:00:45,426 --> 00:00:53,555
+La pregunta siempre fue la misma: ¿cuánto pagará cada mercado? Importaba porque el capitán actuaría con la respuesta, al elegir dónde desembarcar.
+
+7
+00:00:54,855 --> 00:00:56,778
+Los celulares la trajeron a tiempo.
+
+8
+00:01:03,878 --> 00:01:06,535
+La nota de Tomás pregunta qué preguntas importan.
+
+9
+00:01:07,935 --> 00:01:16,878
+El primer día, el equipo de informes le entregó su lista de pedidos: cuarenta y dos, de informes, tableros y extracciones, la mayoría marcados como urgentes.
+
+10
+00:01:18,478 --> 00:01:26,589
+Entonces, no podía saber cuáles importaban. Ahora hay un mapa, y la prueba del capitán para cada pedido: ¿quién va a decidir qué con la respuesta, y cuándo?
+
+11
+00:01:29,289 --> 00:01:37,099
+El primero pregunta qué líneas fallan con más frecuencia. Los planificadores de Grace lo necesitan cada primavera, para decidir qué líneas renovar primero.
+
+12
+00:01:38,599 --> 00:01:46,772
+Esa decisión pertenece a mantener los activos, y sirve a una meta: reemplazar los activos antes de que fallen. El pedido llega hasta arriba.
+
+13
+00:01:48,472 --> 00:01:54,189
+El siguiente pide un tablero de todos los cortes, actualizado cada minuto, para la pantalla de la recepción.
+
+14
+00:01:55,789 --> 00:02:01,319
+Es tan inmediato como la llamada del capitán, pero ¿quién decide qué con él? Nadie. No llega a nada.
+
+15
+00:02:04,019 --> 00:02:12,942
+Sigue el recorrido de los cuarenta y dos. Veintiuno llegan a una decisión y a una meta. Algunos llegan a través de una obligación: el regulador decide con ellos.
+
+16
+00:02:14,442 --> 00:02:22,544
+Los otros veintiuno no llegan a nada: un informe que alguien necesitó una vez, un tablero con el que nadie actúa, una exportación que nadie sabe explicar.
+
+17
+00:02:24,144 --> 00:02:28,873
+Cada uno vuelve a quien lo pidió, con una pregunta: ¿qué decidirías con esto?
+
+18
+00:02:31,573 --> 00:02:39,452
+Ahora en sentido contrario, desde arriba. Una meta implica decisiones. Una decisión necesita preguntas respondidas. Una pregunta necesita una medida.
+
+19
+00:02:41,052 --> 00:02:47,545
+Por ejemplo, reemplazar los activos antes de que fallen. Su resultado solo decía «una red mejor», y nadie podía comprobarlo.
+
+20
+00:02:49,145 --> 00:02:54,771
+Su decisión es qué líneas renovar primero, y su pregunta es la que hicieron los planificadores.
+
+21
+00:02:55,471 --> 00:02:59,251
+La medida: interrupciones por cliente, por año, línea por línea.
+
+22
+00:03:00,951 --> 00:03:06,159
+Desde arriba y desde abajo, se encuentran en una decisión. Ahora la meta se puede comprobar.
+
+23
+00:03:11,859 --> 00:03:17,246
+Mantener las facturas asequibles tiene una medida para el cargo de la red, pero no para quienes lo pagan.
+
+24
+00:03:18,746 --> 00:03:26,593
+Comercialización decide a quién ofrecer ayuda, antes de que un hogar se atrase demasiado con sus pagos. Su pregunta: ¿cuántos se están atrasando?
+
+25
+00:03:27,293 --> 00:03:30,735
+El registro de vulnerabilidad solo cuenta a quienes ya reciben ayuda.
+
+26
+00:03:32,435 --> 00:03:38,993
+Farah, que habla por los clientes, lleva años pidiendo ese número. Una meta sin medida no se puede dirigir.
+
+27
+00:03:41,693 --> 00:03:47,319
+Conectar energía renovable sí tiene una medida: nueva energía solar conectada en diez días hábiles.
+
+28
+00:03:48,019 --> 00:03:52,035
+Dos informes la cuentan, y no coinciden: treinta y cuatro días, y veintiuno.
+
+29
+00:03:53,635 --> 00:03:58,861
+Ponen en marcha y detienen el reloj en momentos distintos. Los dos tienen razón. Ninguno es la medida.
+
+30
+00:04:00,461 --> 00:04:09,459
+Así que Grace escribe una sola definición: desde una solicitud completa hasta el medidor nuevo, en días hábiles, de lunes a viernes, sin feriados.
+
+31
+00:04:11,059 --> 00:04:13,617
+Ahora, quien la cuente obtiene el mismo número.
+
+32
+00:04:16,317 --> 00:04:20,419
+Cada medida recibe un hogar en el mapa: la capacidad cuyo trabajo mide.
+
+33
+00:04:21,119 --> 00:04:30,223
+Interrupciones, debajo de mantener los activos. Días para conectar, debajo de conectar clientes. Hogares que se atrasan, debajo de atender a los clientes.
+
+34
+00:04:31,923 --> 00:04:37,783
+Y cada una, al responsable de esa capacidad: Grace las dos primeras; quien dirige comercialización, la tercera.
+
+35
+00:04:38,483 --> 00:04:41,685
+Un responsable dice qué significa el número y actúa cuando cambia.
+
+36
+00:04:44,385 --> 00:04:50,831
+Ahora, qué construir. Veintiún pedidos podrían convertirse en veintiún informes, cada uno a cargo de alguien distinto.
+
+37
+00:04:52,331 --> 00:05:01,240
+Agrupados por capacidad, y por el dominio al que pertenecen, necesitan cuatro productos de datos: tres del lado del muro de la red, uno del de comercialización.
+
+38
+00:05:02,940 --> 00:05:07,676
+Cada uno responde muchas preguntas, tiene un solo responsable y se queda de su propio lado del muro.
+
+39
+00:05:10,376 --> 00:05:14,385
+De vuelta en la costa de Kerala, los celulares se extendieron distrito por distrito.
+
+40
+00:05:15,885 --> 00:05:21,201
+Bote tras bote, el capitán ya sabía cuánto pagaría cada mercado antes de elegir dónde desembarcar.
+
+41
+00:05:22,901 --> 00:05:30,480
+Se acabó el desperdicio, y los precios de la costa se igualaron. Las tripulaciones ganaron un ocho por ciento más, y el pescado bajó un cuatro por ciento.
+
+42
+00:05:33,180 --> 00:05:39,372
+Grace confirma sus medidas y sus definiciones. La tercera va a quien dirige comercialización, como borrador.
+
+43
+00:05:40,772 --> 00:05:49,785
+La nota de Tomás tiene una respuesta: las preguntas que importan son aquellas con las que alguien va a actuar, a tiempo, vinculadas a una meta, con una medida y un responsable.
+
+44
+00:05:51,385 --> 00:05:58,973
+Pero una medida solo es tan cierta como los datos que tiene debajo, y las reglas que esos datos deben cumplir. Después: dónde va cada regla.

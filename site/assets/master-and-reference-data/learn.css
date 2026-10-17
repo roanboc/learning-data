@@ -66,7 +66,7 @@
 .mr-cmp-h,.mr-cmp-r{display:grid;grid-template-columns:minmax(92px,1fr) minmax(0,1fr) minmax(0,1fr) minmax(120px,1.1fr);gap:4px 10px;align-items:center;padding:8px 12px;font-size:14px}
 .mr-cmp-h{font-size:12px;font-weight:800;letter-spacing:.04em;color:var(--imuted);border-bottom:1px solid rgba(58,54,66,.16)}
 .mr-cmp-r+.mr-cmp-r{border-top:1px solid rgba(58,54,66,.1)}
-.mr-cmp-r .v{font-family:var(--mono);font-size:13px;overflow-wrap:anywhere}
+.mr-cmp-r .v{font-family:var(--mono);font-size:13px;overflow-wrap:break-word;min-width:0}
 .mr-cmp-r .w{display:flex;gap:8px;justify-content:space-between;align-items:baseline}.mr-cmp-r .w em{font-style:normal;color:var(--imuted);font-size:13px}
 .mr-cmp-r .w b{font-family:var(--mono);font-weight:500}
 .mr-cmp-r.plus .w b{color:var(--okc)}.mr-cmp-r.minus .w b{color:var(--noc)}

@@ -92,8 +92,11 @@ function head(ctx,x,y,t,sub,o){o=o||{};tx(ctx,t,x,y,{size:o.size||34,w:800,col:W
 const short=(it)=>it.s||it.t;
 // a record, compact: its role's brushstroke behind the title, the system's own number, and a note under it
 function rec(ctx,x,y,w,hh,c,o){o=o||{};const t0=tw(ctx,c.title,26,800);card(ctx,x,y,w,hh,{kind:"card",role:c.role||null,sw:c.role?t0+30:0,dashed:o.dashed,seed:o.seed});
-  tx(ctx,c.title,x+24,y+42,{size:fit(ctx,c.title,w*0.6,26,800,null,17),w:800,col:WC_DARK});if(c.id)tx(ctx,c.id,x+w-20,y+42,{size:24,w:500,f:"mono",align:"right"});
-  if(c.note&&hh>70)tx(ctx,c.note,x+24,y+78,{size:fit(ctx,c.note,w-44,24,600,null,15),w:600,col:WC_MUTED});}
+  // the number sits beside the title, or under it (o.stack) when the card is narrow
+  const st=!!(o.stack&&c.id),iw=c.id&&!st?tw(ctx,c.id,24,500,"mono")+18:0;
+  tx(ctx,c.title,x+24,y+42,{size:fit(ctx,c.title,w-44-iw,26,800,null,17),w:800,col:WC_DARK});
+  if(c.id)tx(ctx,c.id,st?x+24:x+w-20,st?y+78:y+42,{size:24,w:500,f:"mono",align:st?"left":"right"});
+  if(c.note&&hh>(st?104:70))tx(ctx,c.note,x+24,st?y+112:y+78,{size:fit(ctx,c.note,w-44,24,600,null,15),w:600,col:WC_MUTED});}
 
 /* ---------- the pictures ---------- */
 const PIX={
@@ -217,24 +220,28 @@ const PIX={
       else{const v=f.vals[win[0]],S=V.src[v.src]||{},z=fit(ctx,v.v,vmax-200,26,700,null,17);tx(ctx,v.v,vx,mid+9,{size:z,w:700});tag(ctx,vx+tw(ctx,v.v,z,700)+16,mid,S.t,{size:21,wash:S.c,maxW:200});}
       mark(ctx,x0+cw-40,mid-2,30,r.ok,k);});},
   /* film 3: the rule in words, part by part, above the same rule as the model's YAML declares it */
-  rule(ctx,w,hh,st,Lb,k){const V=Lb.w,n=V.slots.length,hd=[].concat(V.field),ind=V.indent!=null?V.indent:"  ",th=104+n*62,lx=360;
+  rule(ctx,w,hh,st,Lb,k){const V=Lb.w,n=V.slots.length,hd=[].concat(V.field),ind=V.indent!=null?V.indent:"  ",th=104+n*62,lx=410;
     card(ctx,20,20,w-40,th,{kind:"sheet",seed:96});tx(ctx,V.title,50,68,{size:30,w:800,col:WC_DARK});
     V.slots.forEach((sl,i)=>{const y=126+i*62,p=st.pick[i];tx(ctx,sl.label,50,y+8,{size:fit(ctx,sl.label,lx-70,22,700,null,17),w:700,col:WC_MUTED});
       if(p==null){tx(ctx,"…",lx,y+8,{size:28,col:WC_MUTED});return;}
       const o=sl.opts[p],z=fit(ctx,o.t,w-lx-130,24,700,null,18),tw1=tag(ctx,lx,y,o.t,{size:z,wash:o.ok?"ok":"no",washA:0.3,maxW:w-lx-90});mark(ctx,lx+tw1+26,y-2,26,o.ok,k);});
-    const cy=th+40,L=hd.concat(V.slots.map((sl,i)=>ind+(st.pick[i]==null?"…":sl.opts[st.pick[i]].code))),lh=Math.min(40,(hh-cy-120)/Math.max(1,L.length-1));
+    const cy=th+40,L=hd.concat(V.slots.map((sl,i)=>ind+(st.pick[i]==null?"…":sl.opts[st.pick[i]].code))),lh=Math.min(40,(hh-cy-130)/Math.max(1,L.length-1));
     card(ctx,20,cy,w-40,hh-cy-20,{kind:"card",seed:97});tx(ctx,V.model,50,cy+42,{size:fit(ctx,V.model,w-120,24,500,"mono",17),f:"mono",w:500,col:WC_MUTED});
     L.forEach((l,i)=>{const j=i-hd.length,bad=j>=0&&st.pick[j]!=null&&!V.slots[j].opts[st.pick[j]].ok;
-      tx(ctx,l,50,cy+92+i*lh,{size:fit(ctx,l,w-120,24,500,"mono",15),f:"mono",w:500,col:bad?NO:WC_DARK});});},
+      tx(ctx,l,50,cy+86+i*lh,{size:fit(ctx,l,w-120,24,500,"mono",15),f:"mono",w:500,col:bad?NO:WC_DARK});});},
   /* film 3: Linh's two names, each with the documents and screens given to it */
   names(ctx,w,hh,st,Lb,k){const V=Lb.w,B=V.buckets,pw=(w-60)/2;
     B.forEach(([key,label,hex,big],i)=>{const x=20+i*(pw+20);card(ctx,x,20,pw,hh-40,{kind:"sheet",seed:100+i});wash(ctx,x+20,36,pw-40,52,hex,0.4,110+i);
       tx(ctx,label,x+pw/2,72,{size:28,w:800,align:"center",col:WC_DARK});const bs=fit(ctx,big,pw-60,54,800,null,30);tx(ctx,big,x+pw/2,162,{size:bs,w:800,align:"center",col:WC_DARK});
       if(key==="legal"&&V.parts){const words=big.split(" "),sp=tw(ctx," ",bs,800);let wx=x+pw/2-tw(ctx,big,bs,800)/2;
-        words.forEach((wd,j)=>{const ww=tw(ctx,wd,bs,800);tx(ctx,V.parts[j]||"",wx+ww/2,198,{size:18,w:600,col:WC_MUTED,align:"center"});wx+=ww+sp;});}
-      pencil(ctx,[[x+30,222],[x+pw-30,222]],{a:0.3,lw:2,seed:7+i});
-      V.items.map((it,j)=>[it,j]).filter(([it,j])=>st.pick[j]===key).forEach(([it,j],n)=>{const tx0=x+30+(n%2)*(pw/2-10),ty=268+Math.floor(n/2)*58,drop=j===st.last?1-k:0;
-        withA(ctx,1-drop*0.8,()=>{const tw1=tag(ctx,tx0,ty-drop*24,short(it),{size:22,maxW:pw/2-64});if(st.checked)mark(ctx,tx0+tw1+18,ty-4,24,it.b===key,k);});});});},
+        // each part's name under its word, pushed apart where the words are short, with a pencil stroke from the word to its name
+        const cs=words.map(wd=>{const ww=tw(ctx,wd,bs,800),c0=wx+ww/2;wx+=ww+sp;return c0;}),lw=words.map((wd,j)=>tw(ctx,V.parts[j]||"",22,600)),at=cs.slice();
+        for(let j=1;j<at.length;j++)at[j]=Math.max(at[j],at[j-1]+(lw[j-1]+lw[j])/2+18);
+        const over=at.length?at[at.length-1]+lw[lw.length-1]/2-(x+pw-24):0;if(over>0)for(let j=0;j<at.length;j++)at[j]-=over;
+        at.forEach((ax,j)=>{pencil(ctx,[[cs[j],176],[ax,190]],{a:0.4,lw:1.6,seed:30+j});tx(ctx,V.parts[j]||"",ax,212,{size:22,w:600,col:WC_MUTED,align:"center"});});}
+      pencil(ctx,[[x+30,232],[x+pw-30,232]],{a:0.3,lw:2,seed:7+i});
+      V.items.map((it,j)=>[it,j]).filter(([it,j])=>st.pick[j]===key).forEach(([it,j],n)=>{const tx0=x+30+(n%2)*(pw/2-10),ty=278+Math.floor(n/2)*58,drop=j===st.last?1-k:0;
+        withA(ctx,1-drop*0.8,()=>{const tw1=tag(ctx,tx0,ty-drop*24,short(it),{size:fit(ctx,short(it),pw/2-108,22,700,null,17),maxW:pw/2-64});if(st.checked)mark(ctx,tx0+tw1+18,ty-4,24,it.b===key,k);});});});},
   /* film 4: her dated roles across the years, a line at the date, and her figure wearing the roles open that day */
   timeline(ctx,w,hh,st,Lb,k){const V=Lb.w,[y0]=V.from.split("-").map(Number),[y1]=V.to.split("-").map(Number),N=(y1-y0)*12,x0=300,x1=w-30,top=46,lh=(hh-top-70)/V.roles.length;
     const X=s=>{const [y,m,d]=s.split("-").map(Number);return x0+(x1-x0)*(((y-y0)*12+(m-1)+((d||1)-1)/31)/N);};
@@ -284,9 +291,9 @@ const PIX={
     tag(ctx,ax,ay+136,held?P.held:P.sent,{size:26,align:"center",wash:held?"ok":"no",washA:0.3});},
   /* film 6: her request, and the records a search finds or misses */
   request(ctx,w,hh,st,Lb,k){const P=Lb.w.pic,pk=st.pick;card(ctx,w/2-310,16,620,84,{kind:"card",seed:170});tx(ctx,P.ask,w/2,68,{size:28,w:800,align:"center",col:WC_DARK});
-    const cols=4,gx=24,cw=(w-2*gx-3*16)/4,ch=96,gy=140,all=P.recs.map(c=>[c,true]).concat(pk==="name"?P.others.map(c=>[c,false]):[]);
+    const cols=4,gx=24,cw=(w-2*gx-3*16)/4,ch=128,gy=140,all=P.recs.map(c=>[c,true]).concat(pk==="name"?P.others.map(c=>[c,false]):[]);
     all.forEach(([c,mine],i)=>{const x=gx+(i%cols)*(cw+16),y=gy+Math.floor(i/cols)*(ch+96),found=mine?(pk==="person"?1:pk==="name"?c.name:c.num):1;
-      rec(ctx,x,y,cw,ch,mine?c:{title:c.title,id:c.id,note:c.note},{dashed:!found,seed:175+i});
+      rec(ctx,x,y,cw,ch,mine?c:{title:c.title,id:c.id,note:c.note},{dashed:!found,stack:true,seed:175+i});
       if(mine&&found)tick(ctx,x+cw-30,y+ch+34,30,k);else if(mine)tag(ctx,x,y+ch+34,P.missed,{size:20,wash:"no",washA:0.25});
       else{tag(ctx,x,y+ch+34,P.notHer,{size:20,wash:"no",washA:0.25});cross(ctx,x+cw-30,y+ch+32,30,k);}});
     if(pk==="person"){const fx=gx+3*(cw+16)+cw/2,fy=gy+ch+96+ch+70;linh(ctx,fx,fy,0.2,["student","tutor","researcher","alumna"]);
@@ -303,7 +310,7 @@ const PIX={
           else if(key==="consolidation")dot(wc_link(ctx,px,py-22,cx,fy-60,c,{p:q,a:0.75,vertical:true}),c);
           else if(key==="coexistence"){dot(wc_link(ctx,px-6,py-22,cx-6,fy-60,c,{p:q,a:0.75,vertical:true}),c);dot(wc_link(ctx,cx+6,fy-60,px+6,py-22,c,{p:q,a:0.75,vertical:true}),c);}
           else dot(wc_link(ctx,cx,fy-60,px,py-22,c,{p:q,a:0.8,vertical:true}),c);});
-        pos.forEach(([px,py],j)=>tag(ctx,px,py,P.systems[j][1],{size:18,align:"center",wash:P.systems[j][0],washA:0.45,maxW:pw/2-8}));});});},
+        pos.forEach(([px,py],j)=>tag(ctx,px,py,P.systems[j][1],{size:fit(ctx,P.systems[j][1],pw/2-46,20,700,null,15),align:"center",wash:P.systems[j][0],washA:0.45,maxW:pw/2-6}));});});},
   /* film 7: an application, what it gives the search, the people found with their scores, and what it does */
   search(ctx,w,hh,st,Lb,k){const V=Lb.w,a=st.app,ax=24,aw=430;card(ctx,ax,20,aw,hh-40,{kind:"card",role:"applicant",sw:tw(ctx,a.t,26,800)+36,seed:190});
     tx(ctx,a.t,ax+30,64,{size:fit(ctx,a.t,aw-60,26,800,null,17),w:800,col:WC_DARK});
@@ -346,7 +353,7 @@ const PIX={
   /* film 9: one value from an outside list to the university's own, by pull request */
   agentpr(ctx,w,hh,st,Lb,k){const P=Lb.w.pic,s=st.step,A=i=>s===i?1:s>i?0.72:0.28;
     withA(ctx,A(0),()=>{card(ctx,24,40,300,230,{kind:"card",wash:"public",washA:0.18,seed:230});tx(ctx,P.outside,46,88,{size:24,w:800,col:WC_DARK});tx(ctx,P.gov,46,120,{size:20,col:WC_MUTED});
-      tag(ctx,46,182,P.value,{size:20,wash:"amber",washA:0.4,maxW:256});wc_badge(ctx,46,232,P.isNew);});
+      tag(ctx,46,182,P.value,{size:fit(ctx,P.value,216,20,700,null,16),wash:"amber",washA:0.4,maxW:256});wc_badge(ctx,46,232,P.isNew);});
     const px=360,pw=480;
     withA(ctx,Math.max(A(1),A(3)),()=>{card(ctx,px,40,pw,hh-80,{kind:"sheet",seed:231});tx(ctx,P.pr,px+28,90,{size:fit(ctx,P.pr,pw-56,26,800,null,17),w:800,col:WC_DARK});
       tx(ctx,P.drafted,px+28,124,{size:20,col:WC_MUTED});P.lines.forEach((l,i)=>tx(ctx,l,px+28,176+i*40,{size:fit(ctx,l,pw-56,22,500,"mono",14),f:"mono",w:500}));});
@@ -424,6 +431,8 @@ function labTest(Lb){const V=Lb.w;let cur=0;const ans=V.items.map(()=>V.qs.map((
 // odds before any field is compared (film 2's matcher: 5.69, a prior of one in 52); without it, a straight line, base + scale × total
 const scoreOf=(V,tot)=>Math.max(0,Math.min(100,Math.round(V.mid!=null?100/(1+Math.pow(2,-(tot-V.mid))):(V.base||0)+(V.scale||10)*tot)));
 const bandOf=(V,s)=>s>=V.hi?"link":s>=V.lo?"review":"apart";
+// an email may break before its @, and nowhere else unless it must
+const wb=s=>String(s).split(/(?=@)/).flatMap((p,i)=>i?[h("wbr"),p]:[p]);
 function labMatch(Lb){const V=Lb.w;return V.mode==="search"?labSearch(Lb):labPair(Lb);}
 function labPair(Lb){const V=Lb.w;let cur=0;const alt=V.pairs.map(p=>p.rows.map(()=>false)),call=V.pairs.map(()=>null);
   const say=h("p",{class:"mr-say",role:"status"}),rows=h("div",{class:"mr-cmp"}),sc=h("p",{class:"mr-score"}),yours=h("div",{class:"mr-controls"}),fb=h("div");
@@ -433,7 +442,7 @@ function labPair(Lb){const V=Lb.w;let cur=0;const alt=V.pairs.map(p=>p.rows.map(
   const pic=picture(Lb,()=>{const p=V.pairs[cur],{s,b}=now();return{p,rows:p.rows.map((r,i)=>row(p,i)),score:s,band:b,call:call[cur],ok:call[cur]===b};});
   function draw(){const p=V.pairs[cur];
     rows.replaceChildren(h("div",{class:"mr-cmp-h"},h("span",null,V.field),h("span",null,p.a.id||p.a.title),h("span",null,p.b.id||p.b.title),h("span",null,V.weight)),
-      ...p.rows.map((r0,i)=>{const r=row(p,i);return h("div",{class:"mr-cmp-r"+(r.w>0?" plus":r.w<0?" minus":"")},h("b",null,r.f),h("span",{class:"v"},r.av),h("span",{class:"v"},r.bv),
+      ...p.rows.map((r0,i)=>{const r=row(p,i);return h("div",{class:"mr-cmp-r"+(r.w>0?" plus":r.w<0?" minus":"")},h("b",null,r.f),h("span",{class:"v"},wb(r.av)),h("span",{class:"v"},wb(r.bv)),
         h("span",{class:"w"},h("em",null,r.how),h("b",null,dec(r.w))),
         r0.alt?h("button",{type:"button",class:"mr-btn sm","aria-pressed":String(alt[cur][i]),onclick:()=>{alt[cur][i]=!alt[cur][i];call[cur]=null;draw();upd(true);}},r0.alt.t):null);}));
     yours.replaceChildren(h("span",{class:"mr-lbl"},V.your),seg(V.calls,call[cur],k=>{call[cur]=k;draw();upd(true);},V.your));

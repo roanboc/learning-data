@@ -1,0 +1,28 @@
+{
+  "kicker": "Decisions, questions and measures",
+  "kicker_es": "Decisiones, preguntas y medidas",
+  "title_es": "Ahora aparecen las preguntas",
+  "h1": "Now the questions appear: requests traced up, goals traced down, and the measures where they meet",
+  "h1_es": "Ahora aparecen las preguntas: los pedidos hacia arriba, las metas hacia abajo, y las medidas donde se encuentran",
+  "lead": "Kerala, 1997: each skipper must choose a market while still at sea, without knowing what it will pay, and a catch goes back into the sea while buyers nearby go without, until phones bring the answer in time. Then Tomás's backlog of 42 requests, read again with the skipper's test: who will decide what with the answer, and when? Half reach a goal and half reach nothing. Traced down from the goals, each decision needs a question, and each question a measure, defined once, with a home on the map and an owner.",
+  "lead_es": "Kerala, 1997: cada capitán tiene que elegir un mercado todavía en el mar, sin saber cuánto pagará, y una pesca vuelve al mar mientras los compradores cercanos se quedan sin pescado, hasta que los celulares traen la respuesta a tiempo. Luego, la lista de 42 pedidos de Tomás, leída otra vez con la prueba del capitán: ¿quién va a decidir qué con la respuesta, y cuándo? La mitad llega a una meta, y la otra mitad, a nada. Desde las metas hacia abajo, cada decisión necesita una pregunta, y cada pregunta, una medida, definida una sola vez, con un hogar en el mapa y un responsable.",
+  "description": "A film about tracing requests for data up to the decisions, capabilities and goals they serve, and goals down to the decisions, questions and measures they imply; finding a goal with no measure, and a measure counted two ways; defining each measure once, giving it a home on the capability map and an owner; and scoping data products by capability and domain, not by request.",
+  "description_es": "Una película sobre seguir los pedidos de datos hacia arriba, hasta las decisiones, capacidades y metas a las que sirven, y las metas hacia abajo, hasta las decisiones, preguntas y medidas que implican; encontrar una meta sin medida, y una medida que se cuenta de dos maneras; definir cada medida una sola vez, darle un hogar en el mapa de capacidades y un responsable; y delimitar los productos de datos por capacidad y dominio, no por pedido.",
+  "card": "Kerala's fishermen, 1997. Forty-two requests, the skipper's test. Goals traced down to the measures that check them.",
+  "card_es": "Los pescadores de Kerala, 1997. Cuarenta y dos pedidos, la prueba del capitán. Metas seguidas hasta las medidas que las comprueban.",
+  "chapters_es": {
+    "kerala": "Dónde desembarcar",
+    "backlog": "La lista de pedidos, otra vez",
+    "up": "Desde un pedido, hacia arriba",
+    "half": "La mitad",
+    "down": "Desde una meta, hacia abajo",
+    "missing": "Una meta sin medida",
+    "count": "Qué cuenta",
+    "home": "Un hogar y un responsable",
+    "build": "Por capacidad, no por pedido",
+    "coast": "De vuelta en la costa",
+    "end": "Las preguntas que importan"
+  },
+  "next_h": "You've seen which questions matter. More films in the series are on the way.",
+  "next_h_es": "Viste qué preguntas importan. Vienen más películas de la serie."
+}

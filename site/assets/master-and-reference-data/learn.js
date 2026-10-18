@@ -313,7 +313,8 @@ const PIX={
       else{tag(ctx,x,y+ch+34,P.notHer,{size:20,wash:"no",washA:0.25});cross(ctx,x+cw-30,y+ch+32,30,k);}});
     if(pk==="person"){const fx=gx+3*(cw+16)+cw/2,fy=gy+ch+96+ch+70;linh(ctx,fx,fy,0.2,["student","tutor","researcher","alumna"]);
       all.forEach(([c],i)=>{const x=gx+(i%cols)*(cw+16)+cw/2,y=gy+Math.floor(i/cols)*(ch+96)+ch;wc_link(ctx,fx,fy-110,x,y+6,C(c.role),{p:k,a:0.45,vertical:true});});}},
-  /* One person, many systems: the four ways to keep master data, side by side; the chosen one stands out */
+  /* One person, many systems: the four ways to keep master data, side by side; the chosen one stands out.
+     pic.back: the systems that read the person back (the others are only linked to it); all of them when it is missing */
   styles(ctx,w,hh,st,Lb,k){const V=Lb.w,P=V.pic,ks=V.opts.map(o=>o[0]),pw=(w-40)/ks.length;
     ks.forEach((key,i)=>{const x=20+i*pw,on=key===st.pick,cx=x+pw/2,fy=hh*0.53,sy=[hh*0.72,hh*0.86],pos=P.systems.map((s,j)=>[x+pw*(j%2?0.73:0.27),sy[Math.floor(j/2)]]);
       withA(ctx,on?1:0.4,()=>{card(ctx,x+5,16,pw-10,hh-32,{kind:"sheet",wash:on?Lb.c:null,washA:0.12,seed:180+i});
@@ -323,7 +324,7 @@ const PIX={
         pos.forEach(([px,py],j)=>{const c=C(P.systems[j][0]),q=on?k:1;
           if(key==="registry"){const [qx,qy]=pos[(j+1)%pos.length];wc_link(ctx,px,py-16,qx,qy-16,WC_PENCIL,{p:q,a:0.55});}
           else if(key==="consolidation")dot(wc_link(ctx,px,py-22,cx,fy-60,c,{p:q,a:0.75,vertical:true}),c);
-          else if(key==="coexistence"){dot(wc_link(ctx,px-6,py-22,cx-6,fy-60,c,{p:q,a:0.75,vertical:true}),c);dot(wc_link(ctx,cx+6,fy-60,px+6,py-22,c,{p:q,a:0.75,vertical:true}),c);}
+          else if(key==="coexistence"){if(!P.back||P.back.includes(P.systems[j][0])){dot(wc_link(ctx,px-6,py-22,cx-6,fy-60,c,{p:q,a:0.75,vertical:true}),c);dot(wc_link(ctx,cx+6,fy-60,px+6,py-22,c,{p:q,a:0.75,vertical:true}),c);}else wc_link(ctx,px,py-22,cx,fy-60,WC_PENCIL,{p:q,a:0.55,vertical:true});}
           else dot(wc_link(ctx,cx,fy-60,px,py-22,c,{p:q,a:0.8,vertical:true}),c);});
         pos.forEach(([px,py],j)=>tag(ctx,px,py,P.systems[j][1],{size:fit(ctx,P.systems[j][1],pw/2-46,20,700,null,15),align:"center",wash:P.systems[j][0],washA:0.45,maxW:pw/2-6}));});});},
   /* One person, many systems: an application, what it gives the search, the people found with their scores, and what it does */

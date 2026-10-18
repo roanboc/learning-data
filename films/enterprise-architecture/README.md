@@ -19,6 +19,7 @@ A new enterprise architect, Tomás, joins a publicly owned energy utility and do
 | [Who does it, and where meaning changes](https://roanboc.github.io/learning-data/enterprise-architecture/who-does-it/) | Actors, roles and domains | 6 min | 10 | 3 questions | [script](6-who-does-it/script.md) · [source](6-who-does-it/source/README.md) |
 | [Today, and where it's going](https://roanboc.github.io/learning-data/enterprise-architecture/today-and-where-its-going/) | Applications, technology and the path to a target | 5 min | 10 | 3 questions | [script](7-today-and-where-its-going/script.md) · [source](7-today-and-where-its-going/source/README.md) |
 | [Now the questions appear](https://roanboc.github.io/learning-data/enterprise-architecture/now-the-questions-appear/) | Decisions, questions and measures | 6 min | 11 | 3 questions | [script](8-now-the-questions-appear/script.md) · [source](8-now-the-questions-appear/source/README.md) |
+| [A map people and agents can read](https://roanboc.github.io/learning-data/enterprise-architecture/a-map-people-and-agents-can-read/) | Keeping the map: text, views and agents | 7½ min | 11 | 3 questions | [script](11-a-map-people-and-agents-can-read/script.md) · [source](11-a-map-people-and-agents-can-read/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

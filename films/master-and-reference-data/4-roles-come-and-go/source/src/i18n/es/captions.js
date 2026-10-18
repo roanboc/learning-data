@@ -43,8 +43,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "E investigadora, de marzo a diciembre de este año.",
 "Some follow each other, and some run at once. The person under them stays the same.":
 "Unos se suceden, y otros van a la vez. La persona debajo de ellos sigue siendo la misma.",
-"The first film drew her tutoring as one band, since 2023.":
-"La primera película dibujó sus tutorías como una franja, desde 2023.",
+"So far, her tutoring is one band, since 2023.":
+"Hasta ahora, sus tutorías son una franja, desde 2023.",
 "HR sees it differently: it offers her work one teaching period at a time, a new contract each semester, for one unit.":
 "RR. HH. lo ve distinto: le ofrece trabajo un periodo lectivo a la vez, un contrato nuevo cada semestre, para una asignatura.",
 "So the tutor role starts and ends every semester.":

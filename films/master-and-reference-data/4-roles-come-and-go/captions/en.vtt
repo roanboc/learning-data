@@ -60,86 +60,86 @@ And researcher, from March to December this year.
 00:02:15.296 --> 00:02:20.182
 Some follow each other, and some run at once. The person under them stays the same.
 
-00:02:23.282 --> 00:02:27.154
-The first film drew her tutoring as one band, since 2023.
+00:02:23.282 --> 00:02:26.992
+So far, her tutoring is one band, since 2023.
 
-00:02:28.354 --> 00:02:36.153
+00:02:28.192 --> 00:02:35.991
 HR sees it differently: it offers her work one teaching period at a time, a new contract each semester, for one unit.
 
-00:02:37.453 --> 00:02:40.276
+00:02:37.291 --> 00:02:40.114
 So the tutor role starts and ends every semester.
 
-00:02:41.476 --> 00:02:45.978
+00:02:41.314 --> 00:02:45.816
 In January, between contracts, she isn't staff. On census date, she is.
 
-00:02:49.078 --> 00:02:52.962
+00:02:48.916 --> 00:02:52.800
 Now Planning draws one line across her bands, at census date.
 
-00:02:54.062 --> 00:02:57.738
+00:02:53.900 --> 00:02:57.576
 Student, tutor and researcher are open, and so is alumna.
 
-00:02:59.038 --> 00:03:04.989
+00:02:58.876 --> 00:03:04.827
 So Linh counts once, as a student who works here: one person with three roles, not three people.
 
-00:03:06.489 --> 00:03:10.706
+00:03:06.327 --> 00:03:10.544
 Move the line back a year, and she's a tutor and an alumna, not a student.
 
-00:03:12.406 --> 00:03:14.362
+00:03:12.244 --> 00:03:14.200
 Last year's number stays as it was.
 
-00:03:15.562 --> 00:03:20.904
+00:03:15.400 --> 00:03:20.742
 And the alumni office's question becomes a filter: alumni with an open student role.
 
-00:03:22.004 --> 00:03:24.705
+00:03:21.842 --> 00:03:24.543
 Linh is back, since July 2025.
 
-00:03:27.705 --> 00:03:30.001
+00:03:27.543 --> 00:03:29.839
 Each role also says what it relates to.
 
-00:03:30.901 --> 00:03:39.787
+00:03:30.739 --> 00:03:39.625
 Her student role, a master's in health informatics. Each tutor contract, one unit in one semester. Her researcher role, one project.
 
-00:03:40.987 --> 00:03:45.924
+00:03:40.825 --> 00:03:45.762
 People relate to each other, too. On the project, Ana Ruiz supervises Linh.
 
-00:03:47.124 --> 00:03:52.048
+00:03:46.962 --> 00:03:51.886
 That relationship has its own dates, and ends with the project. Both people stay.
 
-00:03:55.048 --> 00:03:57.507
+00:03:54.886 --> 00:03:57.345
 An energy company has the same problem.
 
-00:03:58.807 --> 00:04:02.515
+00:03:58.645 --> 00:04:02.353
 The account holder moves out in June, and his role ends that day.
 
-00:04:04.615 --> 00:04:10.267
+00:04:04.453 --> 00:04:10.105
 The person who stays depends on life support at home. Her need goes on, and so does the risk.
 
-00:04:12.167 --> 00:04:16.360
+00:04:12.005 --> 00:04:16.198
 Kept on his account, the need would close with it. Kept on her, it stays.
 
-00:04:20.360 --> 00:04:23.736
+00:04:20.198 --> 00:04:23.574
 On the platform, it's one table, with a row for each role.
 
-00:04:25.036 --> 00:04:31.696
+00:04:24.874 --> 00:04:31.534
 Each row holds the person, the role type, its owner, what it relates to, and the dates it's valid from and to.
 
-00:04:33.796 --> 00:04:41.436
+00:04:33.634 --> 00:04:41.274
 Jun builds it in dbt, with two tests. A role can't end before it starts, and every role belongs to a person.
 
-00:04:43.536 --> 00:04:47.842
+00:04:43.374 --> 00:04:47.680
 Then any question can take a date: census date, last year, or today.
 
-00:04:49.742 --> 00:04:55.970
+00:04:49.580 --> 00:04:55.808
 Each row also keeps when it was recorded, so a contract entered late still counts from the day it began.
 
-00:05:01.070 --> 00:05:04.994
+00:05:00.908 --> 00:05:04.832
 Today, Linh is a student, a tutor, a researcher and an alumna.
 
-00:05:06.294 --> 00:05:10.059
+00:05:06.132 --> 00:05:09.897
 In December, the project ends. One day, she'll graduate again.
 
-00:05:11.559 --> 00:05:12.799
+00:05:11.397 --> 00:05:12.637
 Roles come and go.
 
-00:05:14.099 --> 00:05:17.134
+00:05:13.937 --> 00:05:16.972
 A role has a start and an end. The person stays.

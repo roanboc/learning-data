@@ -32,7 +32,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "So Noor and Mei give every role the same shape: the person, the kind of role, the office that owns it, when it starts, and when it ends.":
 "Así que Noor y Mei le dan a cada rol la misma forma: la persona, el tipo de rol, la oficina responsable, cuándo empieza y cuándo termina.",
 "Linh's roles become bands, under her.":
-"Los roles de Linh se vuelven franjas bajo ella.",
+"Los roles de Linh son ahora franjas bajo ella.",
 "Applicant, then student, from 2019 to 2022. Then alumna.":
 "Postulante, luego estudiante, de 2019 a 2022. Luego egresada.",
 "Casual tutor, from 2023.":

@@ -365,7 +365,7 @@ typing(tFw - 0.1, tRole - tFw + 0.6, 0.011, P(650), 8)
 tick_(W(J, 'since', 'back', -0.05), 0.016, P(380)); role('student', W(J, 'since', 'back', 0.15), 0.022, P(420)); role('alumna', W(J, 'since', 'back', 0.15), 0.016, P(420))
 ring(W(J, 'since', 'July', -0.1), 0.8, 0.015, P(X6(2025.55)))
 
-# 7. What a role is for: C major. A "relates to" tag on each open role as it's named, set down on its note; the line of years drawing in;
+# 7. What a role is for: C major. A "relates to" tag over each open role as it's named, set down on its note; the line of years drawing in;
 #    Ana in white paper, on the person's notes, from her side; her coral band, on the researcher's note; her card; the dotted line from
 #    her to Linh, and its tag; the dates; the dashed line to the project's end, and the pencil round December; both people, on the
 #    person's notes, from either side
@@ -373,10 +373,9 @@ J = 'relates'; tMa, tUnit, tProj = W(J, 'items', "master's"), W(J, 'items', 'one
 tRl, tAna, tSup, tEnds, tBoth = W(J, 'people', 'relate'), W(J, 'people', 'Ana'), W(J, 'people', 'supervises'), W(J, 'ends', 'ends with'), W(J, 'ends', 'Both')
 chords([(S0(J), CMAJ9), (C(J, 'items', -0.3), AM7), (W(J, 'items', 'Each tutor', -0.3), FMAJ9), (W(J, 'items', 'Her researcher', -0.3), G6), (C(J, 'people', -0.3), FMAJ9),
         (W(J, 'people', 'Ana Ruiz', -0.3), DM9C), (C(J, 'ends', -0.3), EM7), (W(J, 'ends', 'Both', -0.3), CMAJ9)])
-X7 = lambda d: 760 + (d - 2025.4) / 1.6 * 1120
-knock(tMa - 0.1, 0.018, P(X7(2025.6) + 224)); role('student', tMa, 0.024, P(X7(2025.6) + 224))
-knock(tUnit - 0.2, 0.018, P(X7(2026.3))); role('tutor', tUnit - 0.1, 0.024, P(X7(2026.3)))
-knock(tProj - 0.2, 0.018, P(X7(2026.2) + 287)); role('researcher', tProj - 0.1, 0.024, P(X7(2026.2) + 287))
+knock(tMa - 0.1, 0.018, P(1105)); role('student', tMa, 0.024, P(1105))
+knock(tUnit - 0.2, 0.018, P(1509)); role('tutor', tUnit - 0.1, 0.024, P(1509))
+knock(tProj - 0.2, 0.018, P(1602)); role('researcher', tProj - 0.1, 0.024, P(1602))
 person(tRl, 0.016, P(1716), 3.0)
 role('researcher', tAna, 0.022, P(1716)); paper(tAna - 0.1, 0.026, P(1705))
 dotted(tSup - 0.2, 1.1, 0.012, P(1640), P(280))

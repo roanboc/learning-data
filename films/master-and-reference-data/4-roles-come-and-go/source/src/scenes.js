@@ -223,13 +223,17 @@ scene("relates",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   if(oa>0.01)withA(ctx,oa,()=>{m4_rule(ctx,lx,M4_LY0,M4_AXY+12,1,{lw:3.4});m4_tagAt(ctx,lx,M4_LTY,"census date · 31 Mar 2026",{size:28,w:700,wash:WC_BADGE,washA:0.5});
     [0,1,2,3].forEach(i=>m4_dot(ctx,lx,m4_rowY(i),M4_ROWS[i],i===1||i===2?0.3:1));m4_alumFilter(ctx,t,M4_PCX,M4_PCY,{q:1,found:1});});
   const ra=1-fin(t,0.3,0.5);if(ra>0.01)withA(ctx,ra,()=>{const xj=m4_x(M4_PER[5].A);m4_loop(ctx,xj-44,m4_rowY(0)-36,xj+44,m4_rowY(0)+36,1,{seed:37});});
-  // what each open role relates to: a tag on its row
+  // what each open role relates to: a tag in the sky over the timeline, hung from its period by a pencil line, so the periods stay in
+  // sight (a tag on the row would hide the shorter ones). Laid out from their widths so no line crosses a tag or a name: the tutor's
+  // hangs from the start of its contract, clear of "S1", and the researcher's, above it, from the end of the project
   const tg=1-fin(t,tPeo-0.5,0.6);
-  if(tg>0.01)withA(ctx,tg,()=>{const xs=m4_x(M4_PER[5].A)+16,tc=M4_TUT[6],xc=(m4_x(tc.A)+m4_x(tc.B))/2,xr=m4_x(M4_PER[6].A)+4;
-    withA(ctx,fin(t,tRel-0.2,0.6),()=>wc_hand(ctx,"relates to",xs+4,M4_LTY+8,{size:30,col:WC_INK}));
-    arrive(ctx,xs+224,m4_rowY(0),t,tMa-0.2,()=>m4_rel(ctx,xs,m4_rowY(0),"student","master's · health informatics",1),{dy:8});
-    arrive(ctx,xc,m4_rowY(1),t,tUnit-0.3,()=>m4_rel(ctx,xc-199,m4_rowY(1),"tutor","a first-year unit · S1 2026",1),{dy:8});
-    arrive(ctx,xr+287,m4_rowY(2),t,tProj-0.3,()=>m4_rel(ctx,xr,m4_rowY(2),"researcher","project · wait times in emergency care",1),{dy:8});});
+  if(tg>0.01)withA(ctx,tg,()=>{const tc=M4_TUT[6],xs=m4_x(M4_PER[5].A)+16,W=s=>tw(ctx,s,28,700)+64;
+    withA(ctx,fin(t,tRel-0.2,0.6),()=>wc_hand(ctx,"relates to",xs+4,130,{size:30,col:WC_INK}));
+    const sR="project · wait times in emergency care",xR=1890-W(sR),xT=m4_x(tc.A)+6;
+    [["student","master's · health informatics",tMa-0.2,184,xs,xs+24],["tutor","a first-year unit · S1 2026",tUnit-0.3,328,xT,xT+24],
+     ["researcher",sR,tProj-0.3,256,xR,Math.min(m4_x(M4_PER[6].B)-60,xR+W(sR)-40)]].forEach(([r,s,t0,y,x,lx])=>{
+      m4_rule(ctx,lx,y+26,m4_rowY(M4_ROWS.indexOf(r))-22,clamp((t-t0-0.15)/0.5,0,1),{lw:2.4,dash:[6,7]});
+      arrive(ctx,x+W(s)/2,y,t,t0,()=>m4_rel(ctx,x,y,r,s,1),{dy:8});});});
   // Ana joins at the right, in white, with her own coral band, and her name
   const anaA=fin(t,tRl-0.1,0.8);m4_glow(ctx,M4_ANA[0],M4_ANA[1]-330,gl,280);
   wc_white(ctx,"ana",M4_ANA[0],M4_ANA[1],M4_ANS,[{col:WC_ROLE.researcher,a:fin(t,tAna,0.6),i:1}],{a:anaA});

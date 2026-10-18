@@ -103,7 +103,7 @@ The series' watercolour, as in *One person, many roles* ([look](../look/)): dayl
 
 **Narration.** Each role also says what it relates to. Her student role, a master's in health informatics. Each tutor contract, one unit in one semester. Her researcher role, one project. People relate to each other, too. On the project, Ana Ruiz supervises Linh. That relationship has its own dates, and ends with the project. Both people stay.
 
-**Picture.** The 2026 end of the timeline. A *relates to* tag hangs from each open period as it's named: *master's · health informatics*; *a first-year unit · S1 2026*; *project · wait times in emergency care*. Then the line of years draws in from the right to make room, and Ana's white figure joins at the right, with her name card, *Ana Ruiz · Head of School · leads the project*, and a coral band of her own. A dotted line runs from her to Linh, and its tag writes in: *supervises · Mar–Dec 2026*. At "ends with the project", a pencil ring closes on December, the project's end; both figures stay.
+**Picture.** The 2026 end of the timeline. Under the words *relates to*, a tag for each open role writes in above the timeline as it's named, hung from its period by a dashed pencil line, so the periods stay in sight: *master's · health informatics*; *a first-year unit · S1 2026*; *project · wait times in emergency care*. Then the line of years draws in from the right to make room, and Ana's white figure joins at the right, with her name card, *Ana Ruiz · Head of School · leads the project*, and a coral band of her own. A dotted line runs from her to Linh, and its tag writes in: *supervises · Mar–Dec 2026*. At "ends with the project", a pencil ring closes on December, the project's end; both figures stay.
 
 **On screen.** relates to · master's · health informatics · a first-year unit · S1 2026 · project · wait times in emergency care · Ana Ruiz · Head of School · leads the project · supervises · Mar–Dec 2026
 
@@ -201,6 +201,15 @@ Four questions, one at the end of each of four chapters, as the site shows them 
 | 17 October 2026 | The energy company's two people are the white figures of film 1's *Elsewhere*, standing on paper so the street doesn't show through them. |
 | 18 October 2026 | Cato is drawn as in 204 BC throughout: a quaestor's plain toga, his left arm wrapped in it, and dark leather calcei. The censor's dress is uncertain in the sources, so it doesn't change in 184. |
 | 18 October 2026 | The Capitoline has its two summits, with Jupiter's temple on the Capitolium and Juno Moneta's on the Arx, on dry olive slopes. |
+| 18 October 2026 | The *relates to* tags hang above the timeline on dashed pencil lines: drawn on the rows, they hid the shorter periods, the Semester 1 contract among them. |
+| 18 October 2026 | The sound is the film's own: a choir humming, one voice to a note, a felt piano note for each role, a glass harmonica for the person, and the series' clarinet mark, from G minor to D major. Two voices on one note beat into a slow pulse on a phone's speaker, so each note has one. |
+
+## Built
+
+Built on 18 October 2026, from this script, in watercolour. What changed on the way is in the *Decided* table above; besides that:
+
+- **Captions.** Spanish captions in Latin American Spanish, about as long as each English line.
+- **Sound.** A new palette (in `source/tools/score.py`): a choir humming "oo" that holds the notes two chords share, a felt piano note for each role, a glass harmonica's D and A for the person, and the clarinet's mark (1-8-5-1) on G under the title and on D at the end, from G minor to D major. The music sits about 21 dB under the voice, as in film 1, and the only pulse, under last year's count answered with today's statuses, about 9 dB under the music.
 
 ## Next
 

@@ -15,7 +15,7 @@ The site has six big topics. Start with the first, the overview; then pick the t
 | Analytics engineering | [In the weeds of data crafting](https://roanboc.github.io/learning-data/in-the-weeds/), ten films on data modelling with dbt; its code and data come from [an example dbt project](films/analytics-engineering/project/) that runs on dbt Core with DuckDB | Analytics engineers |
 | Data quality and change | [When things go wrong](https://roanboc.github.io/learning-data/when-things-go-wrong/), two films: *Silent change* (changes and data contracts) and *Too good to be true* (data quality checks) | Anyone who builds pipelines, or owns a source system or a data product |
 | Enterprise architecture | [The map before the data](https://roanboc.github.io/learning-data/enterprise-architecture/), seven of eleven films: how an organisation works, in layers, before you ask what its data should answer | Architects, and anyone new to an organisation |
-| Master and reference data | [The same one, everywhere](https://roanboc.github.io/learning-data/master-and-reference-data/), one of nine films: the people and things a business is about, kept once and shared across its systems, and the lists that sort them | Data stewards and architects, and anyone whose data lives in many systems |
+| Master and reference data | [The same one, everywhere](https://roanboc.github.io/learning-data/master-and-reference-data/), two of nine films: the people and things a business is about, kept once and shared across its systems, and the lists that sort them | Data stewards and architects, and anyone whose data lives in many systems |
 
 Every film has chapters, Pause and think questions and Spanish pages; most have hands-on labs and scenarios too.
 

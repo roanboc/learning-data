@@ -515,3 +515,9 @@ function d10_lineage(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01
     T(ctx,kind,nx+86,cy-10,{w:600,size:28,color:DB.muted});T(ctx,nm,nx+86,cy+30,{w:700,size:28,color:DB.text});
     if(i===0&&o.draft){const dx=nx+86+tw(ctx,kind,28,600)+20;ctx.fillStyle=rgba(NOTEC[0],1);rr(ctx,dx,cy-40,92,40,6);ctx.fill();T(ctx,"draft",dx+46,cy-11,{w:700,size:28,align:"center",color:"rgba(60,48,20,0.95)"});}});});
   ctx.restore();});}
+// draws fn(c) through a CSS filter (such as "grayscale(0.5)") applied once, to a copy of all it draws, not to each stroke: a filter
+// on each of the hundreds of strokes in the answer's map and list took about 41 s a frame to render. With no filter, fn draws as it is
+function d10_filtered(ctx,filter,fn){ctx.save();if(!filter){fn(ctx);ctx.restore();return;}const cv=ctx.canvas;let L=d10_filtered.L;
+  if(!L||L.width!==cv.width||L.height!==cv.height)L=d10_filtered.L=mkCanvas(cv.width,cv.height);
+  const g=L.getContext("2d");g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,L.width,L.height);g.save();g.setTransform(ctx.getTransform());g.globalAlpha=ctx.globalAlpha;fn(g);g.restore();
+  ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=1;ctx.filter=filter;ctx.drawImage(L,0,0);ctx.restore();}

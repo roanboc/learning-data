@@ -382,7 +382,7 @@ function d11_pencil(ctx,x,y,s,a,rot){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save
 // the map's elements as lines of text, one per element, in the layers' order: what the slide's boxes become
 const D11_LINES=[["GOL-002","keep bills affordable"],["PRN-003","customer information stays put"],["DRV-001","the energy transition"],
   ["CAP-001","operate the network"],["CAP-004","connect customers"],["CAP-007","manage outages"],["CAP-009","generate power"],
-  ["STP-004","read"],["STP-005","bill"],["STP-006","paid"],["ROL-002","duty controller"],["ACT-003","outage agent"],
+  ["STP-004","read"],["STP-005","bill"],["STP-006","paid"],["ROL-001","call-taker"],["ROL-002","duty controller"],
   ["OBJ-003","reading"],["OBJ-007","bill"],["OBJ-011","eligibility"],["MSR-002","working days to connect new solar"],
   ["APP-001","meter data"],["APP-004","billing"],["APP-006","outage system"],["APP-009","customer records"],["APP-012","network model"],
   ["TEC-002","meter network"],["TEC-005","data platform"],["TEC-008","control system"]];
@@ -440,8 +440,8 @@ function d11_source(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)
 /* ---------- an agent on the map ---------- */
 // the outage agent, from Who does it: its ID, its owner and its rights, for comparison
 function d11_outage(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,h=150;if(a<=0.01)return h;
-  withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,BUS,{glow:10,ea:0.7,fill:"rgba(10,10,14,0.95)"});T(ctx,"like the outage agent's",x+28,y+44,{f:"mono",w:500,size:28,color:rgba(SOFT,0.95)});
-    d11_glyph(ctx,"actor",x+42,y+86,13,BUS);T(ctx,"ACT-003",x+68,y+96,{f:"mono",w:500,size:28,color:rgba(SOFT,0.95)});T(ctx,"outage agent",x+68+tw(ctx,"ACT-003",28,500,"mono")+16,y+96,{w:800,size:30,color:rgba(mix(BUS,INK,0.5),1)});
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,APL,{glow:10,ea:0.7,fill:"rgba(10,10,14,0.95)"});T(ctx,"like the outage agent's",x+28,y+44,{f:"mono",w:500,size:28,color:rgba(SOFT,0.95)});
+    d11_glyph(ctx,"component",x+42,y+86,13,APL);T(ctx,"APP-015",x+68,y+96,{f:"mono",w:500,size:28,color:rgba(SOFT,0.95)});T(ctx,"outage agent",x+68+tw(ctx,"APP-015",28,500,"mono")+16,y+96,{w:800,size:30,color:rgba(mix(APL,INK,0.5),1)});
     archGlyph(ctx,"actor",x+w-tw(ctx,"owner: Grace Achieng",28,700)-50,y+86,12,TRUST);T(ctx,"owner: Grace Achieng",x+w-28,y+96,{w:700,size:28,align:"right",color:rgba(TRUST,1)});
     T(ctx,"may: group reports, propose  ·  may not: send a crew",x+28,y+136,{w:700,size:28,color:rgba(SOFT,0.95)});});return h;}
 // two sources that disagree: the metering rules (paper) and the meter data system's setting (a screen)

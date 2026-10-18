@@ -46,7 +46,7 @@ const NARR={
  {"id":"column","gap":0.8,"text":"Given a column in the catalogue, it finds the rule behind it, with its owner and its reason."},
  {"id":"cites","gap":0.8,"text":"Every answer cites IDs and evidence, so a person can check it."}]},
 "rights":{"name":"An agent on the map","lead":1.0,"tail":1.0,"vo":[
- {"id":"on","gap":0.8,"text":"The agent is on the map itself: an actor, with its rights written down, like the outage agent's."},
+ {"id":"on","gap":0.8,"text":"The agent is on the map itself: software, filling a role, with its rights written down, like the outage agent's."},
  {"id":"may","gap":0.8,"text":"It may read everything, and draft changes. It may not confirm one."},
  {"id":"asks","gap":0.8,"text":"Where two sources disagree, it doesn't choose. It asks the owner."},
  {"id":"owner","gap":0.8,"text":"Its owner is Tomás."},

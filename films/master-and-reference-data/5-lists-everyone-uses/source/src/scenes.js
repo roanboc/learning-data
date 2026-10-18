@@ -264,7 +264,7 @@ scene("people",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   // (rings and the note at "married", struck at "If it isn't needed", gone at "it isn't asked", well before the chapter's crossfade)
   const gone=fin(t,tAsk,0.5),up=ease(fin(t,tAsk+0.3,0.8))*136;
   arrive(ctx,M5_FX+M5_FW/2,450,t,tS-0.3,()=>{wc_panel(ctx,M5_FX,M5_FY,M5_FW,lerp(690,560,ease(fin(t,tAsk+0.3,0.8))),{kind:"sheet",seed:93});wc_T(ctx,"about you",M5_FX+40,M5_FY+66,{w:800,size:36,col:WC_DARK});
-    // the title: four of its five choices say whether someone is married
+    // the title: two of its five choices, Mrs and Miss, say whether someone is married
     withA(ctx,1-gone,()=>{wc_T(ctx,"title",M5_FX+40,M5_FY+130,{w:600,size:28,col:WC_MUTED});const xs=m5_choices(ctx,M5_FX+40,M5_FY+148,M5_TITLES,{a:M5_TITLES.map((s,i)=>fin(t,tTi+i*0.1,0.3))});
       [1,2].forEach((k,i)=>{const ww=tw(ctx,M5_TITLES[k],28,600)+74;wc_ring(ctx,xs[k]+ww/2,M5_FY+176,ww/2+14,40,clamp((t-tMar+0.2-i*0.2)/0.5,0,1),{seed:95+i});});
       m5_note(ctx,t,"married?",xs[1]+20,M5_FY+260,tMar-0.1,0.5);

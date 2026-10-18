@@ -1,18 +1,20 @@
 # Kept, not cleaned: the music and sounds, played by tools/audio.py with From words to data's instruments (shared/tools/music.py).
-# The palette is this film's own (PLAYBOOK.md: vary the sound itself, film to film; the series' reed organs, viols, strings and sines
-# are left to the films that have them), and it keeps what the series carries from film to film:
-#  - The bed is a small choir, humming: each chord comes in voice by voice, low to high, each singer holding the note at their own
-#    slight waver, the way people keep something going together. Only on the last line, and the end card, does the choir open to "oo".
-#  - A felt piano is the roles, each on the note it has had since One person, many roles: student D, applicant E, researcher G, tutor A,
-#    alumna the D above.
+# The palette is this film's own (PLAYBOOK.md: vary the sound itself, film to film; the series' reed organs, viols, strings, choir,
+# pianos, harps and glass are left to the films that have them), and it keeps what the series carries from film to film:
+#  - The bed is a choir of flutes, from a contrabass flute up: each chord comes in player by player, low to high, and in a long chord
+#    each player takes a breath at their own moment while the others hold, so the sound is kept going, never stopped and started
+#    again. Only on the last line, and the end card, do the high flutes come in above them.
+#  - A celesta is the roles, each on the note it has had since One person, many roles: student D, applicant E, researcher G, tutor A,
+#    alumna the D above. A list's new value is on B, the one note the roles leave out.
 #  - The cello, bowed, is the person, as in film 1: whenever someone stands in white paper as one person, it plays the same D and the
 #    A above it; when Daniel's two records are linked, it plays them too. The clarinet carries the series' mark (1-8-5-1), here on B flat
 #    under the title, and on D on the end card.
-#  - Each of the steward's measures is a glass of water struck softly, as its gauge is lit: their levels are the river's, kept at a mark.
+#  - Each of the steward's measures is a tubular bell, its iron bar, struck softly as its gauge is lit, each on its own note. When the
+#    oldest case goes past its limit, its bar is struck with the note a semitone above it; once the case is decided, alone again.
 # The film moves from G minor, at the river in the dry season, to D major, when the water is let back in. The effects are the river's
 # and the paper's: the river itself, softly, while it's on screen; the water parting, draining and let back in; gravel rolling; the
 # tripods' wooden poles set down and lifted; spades in gravel; the stone horse and the iron bars at the mark; a strip of paper
-# unrolling; and on paper, a pencil, cards and sheets set down, stamps, muffled keys, a small bell, and a gauge filling like a bottle.
+# unrolling; and on paper, a pencil, cards and sheets set down, stamps, muffled keys, and a gauge filling like a bottle.
 # The rules from In the weeds of data crafting hold:
 #  - Nothing loops. The music is a bed of sustained chords that change with the narration; where the picture repeats (the diggers'
 #    spades, the gravel going round), the sound plays the first round, and the second softer, and stops.
@@ -32,51 +34,62 @@ def W(sid, lid, word, off=0):
 def C(sid, lid, off=0):
     return G(sid, lid, off)
 P = lambda x: max(-0.85, min(0.85, (x - 960) / 960 * 0.9))  # where something is across the frame, as a pan
-R9 = np.random.default_rng(9)  # this film's own randomness: the singers' wavers, the gravel, the spades
+R9 = np.random.default_rng(9)  # this film's own randomness: the players' wavers and breaths, the gravel, the spades
 
 # ---- the music's levels: the bed sits about 21 dB under the voice, as in the series' other films, and the notes over it a little less
-BED, NOTE = 2.4, 1.5  # the choir's hum is quieter than a sine at the same gain: this puts it where film 1's bed sits
+BED, NOTE = 2.4, 1.5  # the flutes, low-passed and breathing, sit where film 1's bed does at this gain
 
-# ---- the choir
-# each singer is a buzz of harmonics shaped by the mouth: closed, as in "mm", it keeps one low resonance and almost nothing above it, so
-# a low note is warm and a high one nearly pure; "oo" opens a second resonance. One cycle of the wave is worked out for each pitch and
-# read at the singer's own wavering pitch, so a chord of a dozen voices costs little
-VOWEL = {'mm': [(270, 1.0, 85), (1050, 0.08, 160), (2300, 0.02, 200)], 'oo': [(330, 1.0, 95), (790, 0.42, 110), (2300, 0.05, 200)]}
+# ---- the flute choir
+# a flute is nearly a pure note, with a little of the octave and the twelfth above it, less the higher it plays, and air in the tone,
+# more the lower the flute: a contrabass flute below C3, a bass flute below G3, an alto flute below C4, flutes above. One cycle of the
+# wave is worked out for each pitch and read at the player's own wavering pitch, so a chord of a dozen players costs little
+FLUTES = ((48, 0.16, (1, 0.5, 0.16, 0.06)), (55, 0.11, (1, 0.4, 0.12, 0.04)), (60, 0.08, (1, 0.32, 0.09, 0.03)), (128, 0.055, (1, 0.24, 0.06, 0.02)))
+_kind = lambda m: next(k for k in FLUTES if m < k[0])
 _TB = {}
-def _table(m, vowel):
-    k0 = (m, vowel)
-    if k0 not in _TB:
-        f0 = mf(m); n = 2048; ph = np.arange(n) / n * 2 * np.pi; tb = np.zeros(n)
-        for k in range(1, int(1900 / f0) + 1):
-            fk = k * f0; a = (sum(A * np.exp(-((fk - c) / bw) ** 2 / 2) for c, A, bw in VOWEL[vowel]) + 0.03) * k ** -0.7
-            tb += a * np.sin(k * ph + 0.9 * k)
-        _TB[k0] = (tb / np.abs(tb).max()).astype(np.float32)
-    return _TB[k0]
-def _singer(m, sec, vowel):
-    """one voice holding one note: a slight detune of its own, a slow wander, and a vibrato that comes in late"""
-    x = tt(sec); f0 = mf(m) * 2 ** (R9.uniform(-5, 5) / 1200)
-    vib = R9.uniform(0.0022, 0.0038) * np.sin(2 * np.pi * R9.uniform(4.6, 5.4) * x + R9.uniform(0, 6.3)) * np.clip((x - R9.uniform(0.7, 1.4)) / 1.2, 0, 1)
-    wan = 0.0016 * np.sin(2 * np.pi * R9.uniform(0.04, 0.11) * x + R9.uniform(0, 6.3))
-    ph = (np.cumsum(f0 * (1 + vib + wan)) / SR * 2048) % 2048; i0 = ph.astype(np.int32); fr = (ph - i0).astype(np.float32); tb = _table(m, vowel)
-    return tb[i0] * (1 - fr) + tb[(i0 + 1) % 2048] * fr
-def hum(ch, start, sec, g=0.03, vowel='mm', bloom=0.35):
-    """a held chord, sung: two singers on each note, one on each side, coming in low to high a little after each other, each swelling at
-    their own slow rate, with a breath of air in the hum; nothing above about 1.6 kHz"""
+def _table(m):
+    if m not in _TB:
+        ph = np.arange(2048) / 2048 * 2 * np.pi; tb = sum(a * np.sin((k + 1) * ph + 0.7 * k) for k, a in enumerate(_kind(m)[2]))
+        _TB[m] = (tb / np.abs(tb).max()).astype(np.float32)
+    return _TB[m]
+def _player(m, sec, on):
+    """one flute holding one note from `on`: its own slight detune and slow wander, a vibrato that comes in late (more in the loudness
+    than in the pitch, as a flute's does), and air in the tone; in a long note, a breath every five to seven seconds at its own moments,
+    never near either end, when it lets the note go for half a second and comes back. Returns the tone, its gain, and where it speaks"""
+    x = tt(sec); f = mf(m); f0 = f * 2 ** (R9.uniform(-4, 4) / 1200); rate, p0 = R9.uniform(4.8, 5.6), R9.uniform(0, 6.3)
+    vd = np.clip((x - on - R9.uniform(0.8, 1.5)) / 1.0, 0, 1)
+    vib = 0.002 * np.sin(2 * np.pi * rate * x + p0) * vd; wan = 0.0012 * np.sin(2 * np.pi * R9.uniform(0.05, 0.12) * x + R9.uniform(0, 6.3))
+    ph = (np.cumsum(f0 * (1 + vib + wan)) / SR * 2048) % 2048; i0 = ph.astype(np.int32); fr = (ph - i0).astype(np.float32); tb = _table(m)
+    s = (tb[i0] * (1 - fr) + tb[(i0 + 1) % 2048] * fr) * (1 + 0.1 * np.sin(2 * np.pi * rate * x + p0 + 0.6) * vd)
+    a = filt(noise(sec), 'band', (f * 0.8, min(f * 4, 2200))); s = s + _kind(m)[1] * 0.7 * a / (np.std(a) + 1e-9)
+    gn = np.ones_like(x); starts = [on]; t0 = on + R9.uniform(3.0, 5.5)
+    while t0 < sec - 3.0:
+        gn *= 1 - 0.92 * np.clip((x - t0) / 0.25, 0, 1) * np.clip((t0 + 1.0 - x) / 0.45, 0, 1); starts.append(t0 + 0.55); t0 += R9.uniform(5.0, 7.0)
+    return s, gn, starts
+def _chiff(s, t0, f, g):
+    """the breath catching as a flute speaks: a short puff of air a little above the note"""
+    c = filt(noise(0.09), 'band', (min(f * 2, 1500), min(f * 6, 2300))); c = c / (np.std(c) + 1e-9) * np.exp(-tt(0.09) * 45) * g
+    i = int(t0 * SR); k = min(len(c), len(s) - i)
+    if k > 0:
+        s[i:i + k] += c[:k]
+def flutes(ch, start, sec, g=0.03, bloom=0.35):
+    """a held chord on the flute choir: two players on each note, one on each side, coming in low to high a little after each other,
+    each swelling at its own slow rate; nothing above about 1.8 kHz"""
     x = tt(sec); n = len(ch)
     for side in (-1, 1):
         s = np.zeros_like(x)
         for k, m in enumerate(ch):
-            e = np.clip((x - k * bloom - (0.12 if side > 0 else 0)) / 2.0, 0, 1) ** 1.6 * np.clip((sec - x) / 3.0, 0, 1)
-            sw = 1 + 0.1 * np.sin(2 * np.pi * R9.uniform(0.04, 0.09) * x + R9.uniform(0, 6.3))
-            s += _singer(m, sec, vowel) * e * sw
-        s += 0.025 * filt(noise(sec), 'band', (300, 1400)) * np.clip(x / 2.0, 0, 1) * np.clip((sec - x) / 3.0, 0, 1) * n
-        put(filt((s / n).astype(np.float32), 'low', 1600), start, g * BED, 0.55 * side)
+            on = k * bloom + (0.12 if side > 0 else 0)
+            e = np.clip((x - on) / 0.9, 0, 1) ** 1.3 * np.clip((sec - x) / 3.0, 0, 1)
+            sw = 1 + 0.08 * np.sin(2 * np.pi * R9.uniform(0.04, 0.09) * x + R9.uniform(0, 6.3))
+            tone, gn, starts = _player(m, sec, on); s += tone * gn * e * sw
+            for t0 in starts:
+                _chiff(s, t0, mf(m), 0.18 if t0 == on else 0.18 * float(e[min(len(e) - 1, int(t0 * SR))]))
+        put(filt((s / n).astype(np.float32), 'low', 1800), start, g * BED, 0.55 * side)
 def bed(keys, end, g=0.03):
-    """the chapter's chords, each from its moment (a little early, so it has bloomed by then) until a little after the next one starts;
-    a key may name its vowel: (time, chord, 'oo')"""
-    for i, key in enumerate(keys):
-        t0, ch = key[0], key[1]; t1 = keys[i + 1][0] if i + 1 < len(keys) else end
-        hum(ch, t0 - 1.2, t1 - t0 + 3.6, g, key[2] if len(key) > 2 else 'mm')
+    """the chapter's chords, each from its moment (a little early, so it has bloomed by then) until a little after the next one starts"""
+    for i, (t0, ch) in enumerate(keys):
+        t1 = keys[i + 1][0] if i + 1 < len(keys) else end
+        flutes(ch, t0 - 1.2, t1 - t0 + 3.6, g)
 
 # ---- the series' instruments, as in film 1
 def clarinet(m, start, sec, g=0.04, pan=0.0):
@@ -95,37 +108,38 @@ def cello(m, start, sec, g=0.03, pan=0.0):
 def person(s, g=0.026, pan=0.0):
     """the person: the bowed D, and the A above it, the same two notes wherever someone stands in white paper as one person"""
     cello(50, s, 3.2, g, pan); cello(57, s + 0.55, 2.6, g * 0.55, pan + 0.15)
+def lowflute(m, s, sec, g=0.03, pan=0.0):
+    """one flute of the choir alone, holding a note"""
+    x = tt(sec); tone, gn, starts = _player(m, sec, 0.0); sig = tone * gn * np.clip(x / 0.5, 0, 1) * np.clip((sec - x) / 1.4, 0, 1)
+    _chiff(sig, 0.0, mf(m), 0.18); put(norm(filt(sig.astype(np.float32), 'low', 1800)), s, g * NOTE, pan)
 def mark(start, root=62, g=0.05):
-    """the series' mark, 1-8-5-1, on the clarinet, over the root, here on the felt piano"""
+    """the series' mark, 1-8-5-1, on the clarinet, over its root an octave down, held by one low flute of the choir"""
     for i, iv in enumerate([0, 12, 7, 0]):
         clarinet(root + iv, start + i * 0.42, 0.9 if i < 3 else 2.8, g * (1 if i == 0 else 0.85), (i - 1.5) * 0.1)
-    piano(root - 12, start, g * 0.7); piano(root - 12, start + 1.26, g * 0.55)
+    lowflute(root - 12, start - 0.1, 4.2, g * 0.6)
 
 # ---- this film's instruments
-def piano(m, s, g=0.03, pan=0.0, sec=3.0):
-    """a felt piano, softly: two strings a hair apart, a round hammer, the top dying first and the note lingering after"""
-    f = mf(m); x = tt(sec); sig = np.zeros_like(x)
-    for k in range(1, 8):
-        fk = f * k * np.sqrt(1 + 0.0004 * k * k); a = k ** -1.5 * np.exp(-0.15 * k); d = 0.7 + 0.6 * k
-        for det in (0.9994, 1.0006):
-            sig += a * np.sin(2 * np.pi * fk * det * x + k) * (0.7 * np.exp(-x * d) + 0.3 * np.exp(-x * d / 4))
-    sig = (sig + 0.12 * filt(noise(sec), 'band', (60, 420)) * np.exp(-x * 60)) * np.minimum(1, x / 0.006) * np.clip((sec - x) / 0.4, 0, 1)
-    put(norm(filt(sig.astype(np.float32), 'low', 1800)), s, g * NOTE, pan)
+def cel(m, s, g=0.03, pan=0.0, sec=2.6):
+    """a celesta, softly: a small steel bar struck by a felt hammer over its wooden resonator, so the note is nearly pure, with the bar's
+    own ring above it, dying first"""
+    f = mf(m); x = tt(sec)
+    sig = (np.sin(2 * np.pi * f * x) + 0.4 * np.sin(2 * np.pi * f * 1.0011 * x + 1)) * (0.65 * np.exp(-x * 1.7) + 0.35 * np.exp(-x * 0.6)) \
+        + 0.1 * np.sin(2 * np.pi * f * 2 * x + 0.5) * np.exp(-x * 2.6) + 0.1 * np.sin(2 * np.pi * f * 2.76 * x + 2) * np.exp(-x * 5) \
+        + 0.03 * np.sin(2 * np.pi * f * 5.4 * x) * np.exp(-x * 9)
+    sig = (sig + 0.06 * filt(noise(sec), 'band', (700, 2200)) * np.exp(-x * 300)) * np.minimum(1, x / 0.003) * np.clip((sec - x) / 0.3, 0, 1)
+    put(norm(filt(sig.astype(np.float32), 'low', 2400)), s, g * NOTE, pan)
 ROLE = {'student': 50, 'applicant': 52, 'researcher': 55, 'tutor': 57, 'alumna': 62}
 def role(r, s, g=0.03, pan=0.0):
-    piano(ROLE[r], s, g, pan)
-def glass(m, s, g=0.024, pan=0.0, sec=3.2):
-    """a glass of water struck softly: almost a pure note, beating slowly, and a faint ring above it; a measure lit"""
-    f = mf(m); x = tt(sec)
-    sig = (np.sin(2 * np.pi * f * x) + 0.55 * np.sin(2 * np.pi * f * 1.0035 * x + 1)) * np.exp(-x * 1.0) + 0.16 * np.sin(2 * np.pi * f * 2.32 * x) * np.exp(-x * 3.2) \
-        + 0.05 * np.sin(2 * np.pi * f * 4.1 * x) * np.exp(-x * 7)
-    put(norm(filt((sig * np.minimum(1, x / 0.004)).astype(np.float32), 'low', 2200)), s, g * NOTE, pan)
-def bell_(s, m=57, g=0.03, pan=0.0, sec=4.0):
-    """a small bell, low and padded: an alert arriving, not a fire bell"""
-    f = mf(m); x = tt(sec)
-    sig = sum(a * np.sin(2 * np.pi * f * r * x + r) * np.exp(-x / d) for r, a, d in
-              ((0.5, 0.3, 2.4), (1.0, 1.0, 1.7), (1.19, 0.38, 1.3), (1.5, 0.22, 0.9), (2.0, 0.3, 0.7), (2.52, 0.1, 0.45), (3.0, 0.06, 0.3)))
-    put(norm(filt((sig * np.minimum(1, x / 0.005)).astype(np.float32), 'low', 2000)), s, g * NOTE, pan)
+    """a role, on the celesta: an octave above the note it has had since film 1, where the celesta sings"""
+    cel(ROLE[r] + 12, s, g, pan)
+TUBE = ((1.0, 0.05, 5.0), (2.756, 0.12, 4.2), (5.404, 0.38, 3.4), (8.933, 1.0, 2.8), (13.344, 0.62, 1.9), (18.64, 0.36, 1.3), (24.81, 0.14, 0.8))
+def ironbar(m, s, g=0.02, pan=0.0, sec=4.5):
+    """a tubular bell, struck softly with a padded mallet: one of the steward's iron bars. A chime rings in a bar's modes (each ratio above,
+    with its level and how long it rings); its note is heard an octave under the fourth mode, which the fifth and sixth fill out"""
+    f1 = 2 * mf(m) / 8.933; x = tt(sec)
+    sig = sum(a * np.sin(2 * np.pi * f1 * r * x + r) * np.exp(-x / d) for r, a, d in TUBE if f1 * r < 2400)
+    sig = sig + 0.12 * filt(noise(sec), 'band', (250, 1400)) * np.exp(-x * 140)
+    put(norm(filt((sig * np.minimum(1, x / 0.003) * np.clip((sec - x) / 0.6, 0, 1)).astype(np.float32), 'low', 2200)), s, g * NOTE, pan)
 
 # ---- the river's sounds, all on the effects bus
 def _sweep(sec, f0, f1, bw=0.5, n=10):
@@ -226,7 +240,7 @@ def stamp(s, g=0.06, pan=0.0):
     """a stamp: a low thud and a knock, nothing bright"""
     thud(s, g); s_knock(s + 0.01, g * 0.4, pan, 200)
 
-# chords (MIDI note numbers), low to high, voiced for the choir
+# chords (MIDI note numbers), low to high, voiced for the flutes; the last two open upward, the high flutes coming in above
 GM9 = [43, 50, 55, 58, 62, 69]; EBMAJ9 = [39, 46, 55, 58, 62, 65]; CM9 = [36, 43, 51, 55, 58, 62]; D7SUS = [38, 45, 50, 55, 57, 60]
 D7 = [38, 45, 54, 57, 60, 62]; EBMAJ7 = [39, 46, 50, 55, 58]; F69 = [41, 48, 55, 57, 60, 62]; BBMAJ9 = [46, 53, 57, 60, 62, 65]
 FMAJ9 = [41, 48, 52, 55, 57, 64]; C69 = [36, 43, 52, 57, 62]; FADD9 = [41, 48, 55, 57, 60, 65]; DM9 = [38, 45, 50, 53, 57, 64]
@@ -234,6 +248,7 @@ BBMAJ7 = [46, 53, 57, 62, 65]; GM7 = [43, 50, 53, 58, 62]; A7SUS = [45, 52, 55, 
 CMAJ9 = [36, 43, 52, 55, 59, 62]; AM7 = [45, 52, 55, 60, 64]; G6 = [43, 50, 55, 59, 64]; E7SUS4 = [40, 47, 52, 57, 62]
 AM9 = [45, 52, 55, 60, 64, 71]; FMAJ7 = [41, 48, 52, 57, 60]; GMAJ9 = [43, 50, 54, 59, 62, 69]; DMAJ9 = [38, 45, 54, 57, 61, 64]
 GADD9 = [38, 43, 54, 57, 59, 62]; BM7 = [47, 54, 57, 62, 66]; A69 = [45, 52, 54, 59, 61]; DMAJ7 = [38, 45, 54, 57, 61]
+DMAJ9_OPEN = [38, 45, 54, 57, 61, 64, 69, 76]; DMAJ7_OPEN = [38, 45, 54, 57, 61, 66, 69, 73]
 
 
 # 1. Kept, every dry season: G minor. The river, softly, closer on the split; the water parting as it's split in two; the gravel rolling
@@ -359,8 +374,8 @@ gravel(tR + 0.2, 3.6, 0.006, 9, P(1000))
 knock(tSk + 0.05, 0.012, P(1150)); knock(tMq + 0.05, 0.012, P(880))
 
 # 5. The steward's iron bars: C major. Mei's name; the clean-up's board, back on her wall, and the badge; the dashboard set down and its
-#    gauges with it, everyday work; the iron bars laid across them as they're named, a soft clank each; each measure lit, a glass of water
-#    struck, rising through the chord, and its tick once it's read; the tutor's role, on the tutor's note, ringed and closed; the tools
+#    gauges with it, everyday work; the iron bars laid across them as they're named, a soft clank each; each measure lit, its iron bar
+#    struck, a tubular bell rising through the chord, and its tick once it's read; the tutor's role, on the tutor's note, ringed and closed; the tools
 #    set in the sixth place
 J = 'measures'; B = C(J, 'breath'); tPj, tEv, tIron = W(J, 'process', 'a project'), W(J, 'process', 'everyday work'), W(J, 'bars', 'iron bars')
 tTut, tAct, tT, tDbx = W(J, 'roles', 'like a tutor'), W(J, 'roles', 'still active'), C(J, 'tools'), W(J, 'tools', 'Databricks')
@@ -374,22 +389,22 @@ for i in range(5):
     knock(tEv + 0.4 + i * 0.15 + 0.3, 0.011, P(CELLX[i]), 230 + 15 * i)
     clank(tIron + 0.1 + i * 0.1 + 0.4, 0.009, P(CELLX[i] - 120), 300 + 12 * i)
 for i, m in enumerate((60, 64, 67, 71, 72)):
-    glass(m, ts[i] - 0.1, 0.02, P(CELLX[i]))
+    ironbar(m, ts[i] - 0.1, 0.02, P(CELLX[i]))
     tick_(ts[i] + 0.95, 0.012, P(CELLX[i]))
 role('tutor', tTut - 0.1, 0.026, P(1325)); knock(tTut, 0.012, P(1325))
 ring(tAct, 0.7, 0.015, P(1325))
 tick_(te[2] + 0.45, 0.014, P(1250))
 knock(tT + 0.3, 0.014, P(1343)); knock(tDbx + 0.3, 0.014, P(1343))
 
-# 6. Past its limit: A minor. The alert, a small bell; the oldest case's gauge filling past its bar, a cross as it goes over; under it all,
-#    a low pulse; the case brought forward, its two records on the student's and the researcher's notes, a pencil round the birth dates;
+# 6. Past its limit: A minor. The alert: the oldest case's iron bar struck, and the note a semitone above it; its gauge filling past its
+#    bar, a cross as it goes over; under it all, a low pulse; the case brought forward, its two records on the student's and the researcher's notes, a pencil round the birth dates;
 #    Mei's phone; HR's answer written in; the stamp, the two records linked into one person, on the person's notes; the case put back,
-#    the gauge emptying to two days, its tick back; the tag
+#    the gauge emptying to two days, its bar struck alone and its tick back; the tag
 J = 'alert'; tAl, tTw, tW, tBd = W(J, 'monday', 'an alert'), W(J, 'monday', 'twelve days'), C(J, 'waiting'), W(J, 'waiting', 'birth date')
 tR, tDec, tRea, tB, tNot = C(J, 'rang'), W(J, 'rang', 'decided'), W(J, 'rang', 'with its reason'), C(J, 'blame'), W(J, 'blame', 'not at a person')
 t0 = tAl - 0.2; DA = tTw + 0.5 - t0; tX = t0 + 0.6185 * DA
 bed([(S0(J), AM9), (tW - 0.3, FMAJ7), (tR - 0.3, E7SUS4), (tDec - 0.1, CMAJ9), (tB - 0.3, FMAJ9)], E(J) + 1.0)
-bell_(tAl + 0.35, 57, 0.026, P(1580))
+ironbar(64, tAl + 0.35, 0.024, P(1580)); ironbar(65, tAl + 0.55, 0.017, P(1580))
 fill(t0, DA, True, 0.014, P(711))
 cross(tX + 0.05, 0.016, P(760))
 urgent(tAl + 0.3, tDec + 0.6, bpm=92, root=45, g=0.036, steps=(0, 0, 1, 0))
@@ -403,7 +418,7 @@ stamp(tRea + 0.12, 0.05, P(884))
 person(tRea + 0.5, 0.022, P(700))
 air(tB - 0.4, 0.6, 0.012, P(670))
 fill(tB - 0.2, 1.0, False, 0.012, P(711))
-tick_(tB + 0.55, 0.014, P(760))
+ironbar(64, tB + 0.5, 0.016, P(760)); tick_(tB + 0.55, 0.014, P(760))
 knock(tNot - 0.25, 0.014, P(1580))
 
 # 7. Proposed, then decided: F major. The government's list set down, and its new row, on the note the roles leave out; the list moving
@@ -413,18 +428,18 @@ J = 'agent'; tL, tAddOne, tD, tFee, tChg = C(J, 'list'), W(J, 'list', 'added one
 tO, tApp, tDe = C(J, 'owner'), W(J, 'owner', 'approved it'), C(J, 'decides')
 bed([(S0(J), FMAJ9), (tD - 0.3, DM9), (tO - 0.3, BBMAJ9), (tApp - 0.1, C69), (tDe - 0.3, FADD9)], E(J) + 1.0)
 paper(tL + 0.1, 0.026, 0.0, 0.6)
-knock(tAddOne + 0.05, 0.012, P(1000)); piano(59, tAddOne + 0.1, 0.022, P(1000))
+knock(tAddOne + 0.05, 0.012, P(1000)); cel(71, tAddOne + 0.1, 0.022, P(1000))
 air(tD - 0.4, 1.2, 0.01, P(600))
 paper(tFee - 0.3, 0.024, P(400), 0.6)
 paper(tD + 1.0, 0.026, P(1100), 0.6)
 typing(tD + 1.3, tChg + 0.4 - tD - 1.3, 0.011, P(1150), int((tChg + 0.4 - tD - 1.3) * 5))
 knock(tO + 0.85, 0.014, P(1700))
 tick_(tApp + 0.05, 0.016, P(842))
-knock(tApp + 0.95, 0.012, P(400)); piano(59, tApp + 1.0, 0.022, P(400)); brush(tApp + 0.95, 0.01, P(400), 0.6)
+knock(tApp + 0.95, 0.012, P(400)); cel(71, tApp + 1.0, 0.022, P(400)); brush(tApp + 0.95, 0.01, P(400), 0.6)
 knock(tDe + 0.15, 0.014, P(1100))
 
-# 8. On the scorecard: B flat major. Yusuf's name; the scorecard set down; the person's row, a brush; the three things, a note each as
-#    they're named, rising; and the person, on the person's notes, as the line says the person has all three
+# 8. On the scorecard: B flat major. Yusuf's name; the scorecard set down; the person's row, a brush; the three things, a note each on the
+#    celesta as they're named, rising; and the person, on the person's notes, as the line says the person has all three
 J = 'scorecard'; tSc, tOther, tTh = W(J, 'yusuf', 'his scorecard'), W(J, 'yusuf', 'every other domain'), C(J, 'three')
 tLim, tWay, tPer = W(J, 'three', 'limits'), W(J, 'three', 'a way to change them'), W(J, 'three', 'the person')
 bed([(S0(J), BBMAJ9), (tSc - 0.3, EBMAJ9), (tTh - 0.3, GM7), (tPer - 0.3, BBMAJ9)], E(J) + 1.0)
@@ -432,12 +447,12 @@ knock(S0(J) + 0.65, 0.016, P(300))
 paper(tSc - 0.3, 0.03, P(1200), 0.6)
 brush(tOther, 0.014, P(1200), 0.7); knock(tOther + 0.3, 0.012, P(1200))
 for t0, x, m in ((tTh, 590, 58), (tLim, 1060, 62), (tWay, 1500, 65)):
-    knock(t0 + 0.05, 0.012, P(x)); piano(m, t0 + 0.08, 0.02, P(x))
+    knock(t0 + 0.05, 0.012, P(x)); cel(m + 12, t0 + 0.08, 0.02, P(x))
 person(tPer + 0.1, 0.022, 0.0)
 
 # 9. Elsewhere: G minor, until one check at entry, then G major. The two industries' tags; the bank's chart set down; the line drawn as
 #    it climbs, and at each clean-up three years apart, its fall, swept down; the clean-up's tag, the bracket and its tag; then the check
-#    at entry, and the line staying down
+#    at entry, an iron bar struck, and the line staying down
 J = 'elsewhere'; tBank, tBackT, tO = W(J, 'bank', 'A bank cleans up'), W(J, 'bank', 'come back every time'), C(J, 'one')
 t9 = tBackT + 0.6; YR = lambda v: tBank + (v / 9.3) * (t9 - tBank); tDrop = YR(3)
 bed([(S0(J), GM9), (tBank - 0.3, EBMAJ7), (YR(4.5), CM9), (YR(7.5), D7SUS), (tO - 0.3, GMAJ9)], E(J) + 1.0)
@@ -447,16 +462,16 @@ for v, x in ((3, 590), (6, 960), (9, 1330)):
     s_air(YR(v) - 0.05, 0.4, 0.012, P(x), 200, 900); knock(YR(v) + 0.3, 0.01, P(x), 170)
 knock(tDrop + 0.05, 0.012, P(590))
 quill(tDrop + 1.2, 0.6, 0.012, P(775)); knock(tDrop + 1.6, 0.01, P(775))
-knock(tO + 0.25, 0.014, P(1540)); glass(67, tO + 0.6, 0.016, P(1540))
+knock(tO + 0.25, 0.014, P(1540)); ironbar(67, tO + 0.6, 0.016, P(1540))
 
 # 10. Kept: D major. Linh in white paper, on the person's notes; her new role painted on, a brush and the student's note, the line to its
 #     chip, and the chip; the intake's gauge set down, filling to 38, its tick; the tag; then the river in spring: the tripods lifted, the
-#     water let back into the inner channel and out to the canals, the land greening; the choir opens on the last line; the series' mark
+#     water let back into the inner channel and out to the canals, the land greening; the high flutes come in on the last line; the mark
 #     on the end card, in D
 J = 'kept'; B = C(J, 'breath'); tRole, tTh, tShe = W(J, 'phd', 'a new role'), W(J, 'count', 'thirty-eight'), W(J, 'count', "She isn't")
 tDu, tRep, tLet, tLine = W(J, 'spring', 'at Dujiangyan'), W(J, 'spring', 'repairs are done'), W(J, 'spring', 'let back in'), C(J, 'line')
 bed([(S0(J), DMAJ9), (tRole - 0.3, GADD9), (C(J, 'count', -0.3), BM7), (tShe - 0.2, A69), (C(J, 'spring', -0.3), DMAJ7), (tLet - 0.3, GMAJ9),
-     (tLine - 0.3, DMAJ9, 'oo'), (B + 0.8, DMAJ7, 'oo')], TOT + 1.0)
+     (tLine - 0.3, DMAJ9_OPEN), (B + 0.8, DMAJ7_OPEN)], TOT + 1.0)
 person(S0(J) + 0.6, 0.026, P(640))
 brush(tRole, 0.018, P(640), 0.8); role('student', tRole + 0.1, 0.032, P(640))
 air(tRole + 0.2, 0.4, 0.012, P(720)); knock(tRole + 0.4, 0.014, P(1035))

@@ -34,4 +34,5 @@ Like the other series, each film is generated from code. The series keeps what's
 | `shared/src/page.html` | The standalone player page |
 | `shared/tools/lang.py`, `build.py` | Where everything lives, and what a film is made of |
 | `shared/tools/names.py`, `cues.py` | Checks `build.py` runs: no name declared in two files, and every moment timed to a word that is, whole, in its line. `build.py` also stops a caption that would run to three lines |
-| `shared/tools/run.py` | Runs a tool on a film: this series' own `lang.py` and `build.py`, and *From words to data*'s other tools and instruments unchanged |
+| `shared/tools/check.py` | *From words to data*'s check that every moment draws, then this series' own: each place the film paints lets the page draw again within two seconds |
+| `shared/tools/run.py` | Runs a tool on a film: this series' own `lang.py`, `build.py` and `check.py`, and *From words to data*'s other tools and instruments unchanged |

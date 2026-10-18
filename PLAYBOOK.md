@@ -45,6 +45,7 @@ Before story or pictures, the concept is settled. [`AGENTS.md`](AGENTS.md) gives
 - **List your sources with the date you checked them.**
 - **Don't say a tool can't do what it can.** The first cut of *Meaning machines can read* said Genie couldn't read the stacking policy, a PDF; assistants read documents and web pages. The real problem is a policy and an old page that disagree, with no owner and no version, outside a managed glossary. Show that, and check what today's tools can do on the day.
 - **Show the source of truth, and the platform it feeds.** Platforms now carry a glossary's definitions next to the data (in Databricks, on each table's page, where Genie reads them). Show the managed source first, then where it reaches, and say which parts are in preview.
+- **Draw only the columns a table holds.** A table on screen is a claim about the model, and an expert reads every column. The first draft of *For this purpose only* put an email in the student system's results, which the film's own purposes keep apart; the table became the alumni list as the appeals team sees it, with the final grade hidden. Check each column against the model and against what the film teaches.
 
 *Ask: which line would I be unable to defend in front of the product team?*
 
@@ -69,6 +70,7 @@ Before story or pictures, the concept is settled. [`AGENTS.md`](AGENTS.md) gives
 - **Fade what the camera leaves behind.** As the camera moves in on part of a map, the names it leaves slide off the frame before they fade: in *Now the questions appear*, India's ran off the edge as the camera moved in on Kerala's coast. Start their fade as the move starts; `legible.py --overlaps` lists them as text off the frame.
 - **Give motion weight, and carry things across cuts.** Things that arrive with a small spring and settle, a camera that drifts slowly in every shot, and a thing shared by two chapters that travels across the cut instead of fading (a model, a file, a graph) read as animation, not slides. In the video, motion blur (several moments averaged into each frame) makes movement read as filmed; with too few moments, a fast label shows doubled copies instead of a smear. Skip film grain: noise doesn't compress, and a fine grain made one video more than twice as large (123 MB against 53 MB). Motion itself costs space too: drift and blur doubled that video against its still-framed cut (53 MB against 27 MB), which is still small. *In the weeds of data crafting* keeps these helpers in `films/analytics-engineering/shared/src/weeds.js` and `post.js`.
 - **Build components, not drawings.** The same vault, data tile, sketch and plaque drawn by one function appear in the film, the labs and the scenarios. Viewers recognise them, and a fix lands everywhere.
+- **Make a request look unlike the answer.** In *For this purpose only*, a request and a door's purposes are both paper slips, so a request held up to a door could read as a second purpose. The request is held up a little askew, with a dashed edge, a shadow under it and the colour of who asks.
 
 *Ask: if I removed every label, could someone still tell what is what?*
 

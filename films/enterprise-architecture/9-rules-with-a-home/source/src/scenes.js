@@ -169,7 +169,7 @@ const D9_C21=[70,200,820],D9_C22=[1030,200,820];
 scene("split",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   const tTw=w("two","two rules"),tSd=w("two","each side"),tN1=w("net","an estimate"),tG=w("net","Grace"),tR1=w("ret","a bill"),tH=w("ret","head of retail"),tX=c("cross"),tL=w("cross","agreed list"),tSc=w("cross","the script"),tU=w("cross","unseen");
   ctx.save();drift(ctx,t,sc,{z:0.02,y:440});
-  d9_sides(ctx,{a:fin(t,0.1,0.8)});d9_wall(ctx,t,{gate:fin(t,tL-0.7,0.8),gy:520,hi:pulseAt(t,tSd,1.6)});
+  d9_sides(ctx,{a:fin(t,0.1,0.8)});d9_wall(ctx,t,{gate:fin(t,tX-0.3,0.8),gy:520,hi:pulseAt(t,tSd,1.6)});
   // day one's rule cracks down the wall, and its halves part
   const cr=fin(t,tTw-0.35,0.4),pt=ease(fin(t,tTw,1.0)),gone=fin(t,tTw+0.5,0.8);
   if(gone<1)arrive(ctx,960,284,t,0.2,()=>withA(ctx,1-gone,()=>{[[-1,0,960],[1,960,W]].forEach(([d,x0,x1])=>{ctx.save();ctx.beginPath();ctx.rect(x0,0,x1-x0,H);ctx.clip();ctx.translate(d*130*pt,d*6*pt);ruleCard(ctx,560,200,800,D9_R0,{kicker:"data rule · day one",size:34});ctx.restore();});
@@ -181,13 +181,13 @@ scene("split",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
   arrive(ctx,480,D9_C21[1]+h21+44,t,tG-0.1,()=>d9_owner(ctx,480,D9_C21[1]+h21+44,"Grace",1,{align:"center",hi:pulseAt(t,tG+0.2,1.4)}),{dy:8});
   arrive(ctx,1440,D9_C22[1]+h22+44,t,tH-0.1,()=>d9_owner(ctx,1440,D9_C22[1]+h22+44,"head of retail",1,{align:"center",hi:pulseAt(t,tH+0.2,1.4)}),{dy:8});
   arrive(ctx,210,900,t,tG-0.7,()=>person(ctx,"grace",210,1030,0.72,{t,pose:"stand",pose2:"explain",mix:d9_pz(t,tG-0.2,tG+2.4)}),{dy:-10});
-  // the gate, and the agreed list of what crosses: the replaced reading is written onto it, and crosses
+  // the gate opens and the replaced reading crosses through it; below, the agreed list of what crosses, with the replaced reading on it
   arrive(ctx,960,710,t,tL-0.5,()=>d9_list(ctx,660,590,600,"what crosses, and how",["which connection point","planned outages","replaced readings"],{p:clamp((t-tL+0.4)/1.5,0,1),hi:fin(t,tL+0.7,0.5),rot:0.004}),{dy:12});
-  if(t>tX+0.2){const u=((t-tX-0.2)/2.6)%1,e=ease(clamp(u*1.15,0,1)),x=lerp(700,1220,e),a=sstep(0,0.08,u)*(1-sstep(0.86,0.98,u));d9_msg(ctx,x,520+Math.sin(u*TAU)*4,0.9,mix(D9_NET,D9_RET,sstep(0.42,0.58,e)),a);}
+  if(t>tX+0.6){const u=((t-tX-0.6)/2.6)%1,e=ease(clamp(u*1.15,0,1)),x=lerp(700,1220,e),a=sstep(0,0.08,u)*(1-sstep(0.86,0.98,u));d9_msg(ctx,x,520+Math.sin(u*TAU)*4,0.9,mix(D9_NET,D9_RET,sstep(0.42,0.58,e)),a);}
   // where the script once reached across, unseen
-  const gh=fin(t,tSc-0.3,0.6)*(1-fin(t,tU+1.2,0.8));if(gh>0.01){d9_trace_(ctx,[[720,452],[840,404],[960,392],[1080,404],[1200,452]],clamp((t-tSc+0.3)/1.0,0,1),[210,170,170],{dash:[8,8],a:0.8*gh,nohead:true});
-    withA(ctx,gh,()=>{ctx.save();ctx.setLineDash([7,6]);ctx.strokeStyle="rgba(210,170,170,0.8)";ctx.lineWidth=2;rr(ctx,898,366,124,52,10);ctx.fillStyle="rgba(10,12,22,0.9)";ctx.fill();ctx.stroke();ctx.restore();T(ctx,"script",960,401,{f:"mono",w:500,size:28,align:"center",color:"rgba(210,170,170,0.9)"});});
-    arrive(ctx,960,330,t,tU-0.2,()=>withA(ctx,gh,()=>tag(ctx,960,330,"unseen",[200,200,210],{align:"center",size:28})),{dy:8});}
+  const gh=fin(t,tSc-0.3,0.6)*(1-fin(t,tU+1.2,0.8));if(gh>0.01){d9_trace_(ctx,[[720,476],[840,428],[960,416],[1080,428],[1200,476]],clamp((t-tSc+0.3)/1.0,0,1),[210,170,170],{dash:[8,8],a:0.8*gh,nohead:true});
+    withA(ctx,gh,()=>{ctx.save();ctx.setLineDash([7,6]);ctx.strokeStyle="rgba(210,170,170,0.8)";ctx.lineWidth=2;rr(ctx,898,390,124,52,10);ctx.fillStyle="rgba(10,12,22,0.9)";ctx.fill();ctx.stroke();ctx.restore();T(ctx,"script",960,425,{f:"mono",w:500,size:28,align:"center",color:"rgba(210,170,170,0.9)"});});
+    arrive(ctx,960,346,t,tU-0.2,()=>withA(ctx,gh,()=>tag(ctx,960,346,"unseen",[200,200,210],{align:"center",size:28})),{dy:8});}
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 6. Where a rule comes from ---------- */
@@ -244,7 +244,7 @@ scene("about",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
       if(mo>0.3){const sv=nm==="reading"?fin(t,tDo+1.4,0.6):0;withA(ctx,clamp((mo-0.3)/0.5,0,1),()=>d9_obj(ctx,lerp(cx-o[2]/2,o[0],mo),lerp(cy-o[3]/2,o[1],mo),o[2],o[3],nm==="reading"?"meter reading":nm,nm==="reading"?"actual or estimated":null,{sv,hi:pulseAt(t,nm==="bill"?tRs:tNs,1.4)+0.6*pulseAt(t,tOw+(k===1?0:0.4),1.4)}));}}
     else{const me=ease(fin(t,tDo+0.6,1.0)),tx=OBJ.reading[0]+180,ty=OBJ.reading[1]+92;arrive(ctx,x,640,t,t0,()=>withA(ctx,1-sstep(0.7,1,me),()=>{ctx.save();ctx.translate(lerp(x,tx,me),lerp(640,ty,me));ctx.scale(lerp(1,0.6,me),lerp(1,0.6,me));d9_term(ctx,0,0,nm,{hi,deco:me>0.02?1:0});ctx.restore();}),{dy:-10});}});
   // the industry's model gives the starting words; the map keeps the utility's own beside them
-  arrive(ctx,470,420,t,tCi+0.6,()=>d9_ind(ctx,470,420,"reading type",1,{hi:pulseAt(t,tOw+0.4,1.4)}),{dy:-8});
+  arrive(ctx,470,420,t,tCi+0.6,()=>d9_ind(ctx,470,420,"reading quality",1,{hi:pulseAt(t,tOw+0.4,1.4)}),{dy:-8});
   arrive(ctx,470,624,t,tUp-0.2,()=>d9_ind(ctx,470,624,"usage point",1,{hi:pulseAt(t,tUp,1.4)+pulseAt(t,tOw,1.4)}),{dy:-8});
   ctx.restore();vign(ctx,S);});
 /* ---------- 8. What the process expects ---------- */
@@ -402,7 +402,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   arrive(ctx,D9_ETC[0]+D9_ETC[2]/2,D9_ETC[1]+D9_ETC[3]/2,t,tT-0.6,()=>d9_tartuCard(ctx,...D9_ETC,t,{a:zR,paid:fin(t,tPd-0.2,0.5),once:fin(t,tTw-0.4,0.5),hi:pulseAt(t,tPd,1.4)}),{dy:-14});
   // Tomás's note, and its answer; then the next question
   person(ctx,"tomas",1790,1030,0.74,{t,pose:"stand",pose2:"explain",mix:d9_pz(t,tA,tA+2.6)});
-  arrive(ctx,1480,150,t,tA-1.0,()=>sticky(ctx,1480,150,500,120,D9_Q,{col:NOTEC[0],size:32,st:fin(t,tAn+0.4,0.5)*0.5,rot:-0.03}),{dy:-20});
+  arrive(ctx,1480,150,t,tA-1.0,()=>sticky(ctx,1480,150,500,120,D9_Q,{col:NOTEC[0],size:32,st:fin(t,tAn+0.4,0.5),rot:-0.03}),{dy:-20});
   arrive(ctx,1480,440,t,tAn-0.2,()=>sticky(ctx,1480,440,540,300,D9_A,{col:NOTEC[0],size:30,p:clamp((t-tAn)/(tGf-tAn+0.8),0,1),rot:0.012}),{dy:-30,from:1.06});
   arrive(ctx,1460,770,t,tNx-0.1,()=>sticky(ctx,1460,770,460,150,D9_NEXT,{col:NOTEC[0],size:30,st:0,rot:0.03}),{dy:-30,from:1.06});
   ctx.restore();vign(ctx,S);

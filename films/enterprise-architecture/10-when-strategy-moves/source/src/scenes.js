@@ -577,7 +577,7 @@ scene("july",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
     const tL=w("answer","lands")-0.2,tWk=w("answer","walked down")-0.2,tO=w("answer","owners")-0.3,tR=w("answer","rules")-0.3,tC=w("answer","contracts")-0.3,tIo=w("answer","in order")-0.2;
     const tSt=w("next","goes stale")-0.3,sv=ease(clamp((t-tSt)/1.4,0,1));
     person(ctx,"tomas",170,1030,0.78,{t,pose:t>tA&&t<tA+2.6?"explain":"stand"});
-    ctx.save();if(sv>0.001)ctx.filter="grayscale("+(0.85*sv).toFixed(3)+") brightness("+(1-0.3*sv).toFixed(3)+")";
+    d10_filtered(ctx,sv>0.001?"grayscale("+(0.85*sv).toFixed(3)+") brightness("+(1-0.3*sv).toFixed(3)+")":"",ctx=>{
     // the map, and the change as a light down its edge, as in the walk: each layer lights what it touches as the light reaches it
     // (large at first; at "walked down the map" it moves up and thins, to make room for the list)
     const m=d10_msAt(easeCam(clamp((t-tWk)/1.6,0,1))),LS=m.h+m.g,lit=LAY6.map((_,li)=>fin(t,tL+li*0.24,0.4)),hi=LAY6.map((_,li)=>pulseAt(t,tL+li*0.24,1.0)*0.8+pulseAt(t,tWk+li*0.18,1.0)*0.5);
@@ -597,7 +597,7 @@ scene("july",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
     const PW=D10_PLAT.map(([n])=>tw(ctx,n,28,700)+64),gp=(934-PW.reduce((s_,v)=>s_+v,0))/3;let px=D10_LX[0];
     D10_PLAT.forEach(([n],i)=>{const x=px,q=fin(t,tIo+i*0.2,0.4);px+=PW[i]+gp;if(q<=0.01)return;
       withA(ctx,q,()=>{if(i>0)arrowTo(ctx,x-gp+6,812,x-8,812,TRUST,0.9,{p:1,lw:3,head:10});archEl(ctx,x,772,PW[i],80,n,D10_MIG,"plateau",{size:28,gs:11,hi:pulseAt(t,tIo+i*0.2+0.2,1.0)});});});
-    ctx.restore();
+    });
     // used every week, and updated less and less
     if(sv>0.01){const n=1+Math.floor(13*clamp((t-tSt-0.2)/2.2,0,1));withA(ctx,sv,()=>{glass(ctx,1170,190,450,108,18,D10_AMB,{glow:14,ea:0.85,fill:"rgba(22,14,6,0.95)"});
       T(ctx,"used every week",1395,232,{w:700,size:28,align:"center",color:rgba(SOFT,1)});T(ctx,"last updated "+n+(n>1?" weeks":" week")+" ago",1395,274,{w:700,size:28,align:"center",color:rgba(D10_AMB,1)});});}

@@ -1,0 +1,191 @@
+1
+00:00:01,600 --> 00:00:08,039
+En la República romana, un ciudadano ambicioso subía una escalera de cargos públicos, cada uno por un año.
+
+2
+00:00:08,739 --> 00:00:15,824
+Marco Porcio Catón fue cuestor, luego edil, luego pretor, y en el 195 a. C., cónsul.
+
+3
+00:00:17,124 --> 00:00:23,254
+Cada cargo tenía su año, y su nombre: un hombre, una serie de roles, cada uno con un inicio y un fin.
+
+4
+00:00:24,854 --> 00:00:31,615
+Su último cargo fue censor. Los censores anotaban a cada ciudadano, su edad y sus bienes: el censo.
+
+5
+00:00:38,515 --> 00:00:45,898
+En la universidad, la fecha de censo es el 31 de marzo: el día en que cuenta a los inscritos, para sus cifras oficiales.
+
+6
+00:00:47,598 --> 00:00:52,033
+Planificación pregunta, para ese día: ¿cuántos de nuestros estudiantes también trabajan aquí?
+
+7
+00:00:53,933 --> 00:01:01,810
+Y la oficina de egresados, que invitó a Linh a una maestría que ya cursaba, pregunta: ¿cuáles de nuestros egresados vuelven a estudiar?
+
+8
+00:01:05,510 --> 00:01:09,365
+Cada noche, cada sistema le dice a la plataforma cómo ve a Linh ese día.
+
+9
+00:01:10,465 --> 00:01:18,675
+El sistema de estudiantes dice inscrita. RR. HH., personal eventual. Investigación, miembro de proyecto. Egresados, egresada.
+
+10
+00:01:20,175 --> 00:01:23,318
+Cada respuesta es cierta por un día, y se sobrescribe al siguiente.
+
+11
+00:01:24,618 --> 00:01:30,749
+Así, cuando Planificación pregunta por el censo del año pasado, para comparar, cada respuesta sigue diciendo hoy.
+
+12
+00:01:32,049 --> 00:01:37,163
+Linh cuenta como estudiante en marzo de 2025, cuatro meses antes de volver.
+
+13
+00:01:40,563 --> 00:01:43,444
+Pero cada oficina sabe cuándo empieza y termina su rol.
+
+14
+00:01:44,444 --> 00:01:52,397
+Así que Noor y Mei le dan a cada rol la misma forma: la persona, el tipo de rol, la oficina responsable, cuándo empieza y cuándo termina.
+
+15
+00:01:53,897 --> 00:01:56,065
+Los roles de Linh son ahora franjas bajo ella.
+
+16
+00:01:57,165 --> 00:02:01,981
+Postulante, luego estudiante, de 2019 a 2022. Luego egresada.
+
+17
+00:02:03,081 --> 00:02:05,380
+Tutora eventual, desde 2023.
+
+18
+00:02:06,280 --> 00:02:10,556
+Postulante otra vez en 2025, y estudiante otra vez, desde julio.
+
+19
+00:02:11,556 --> 00:02:14,196
+E investigadora, de marzo a diciembre de este año.
+
+20
+00:02:15,296 --> 00:02:20,182
+Unos se suceden, y otros van a la vez. La persona debajo de ellos sigue siendo la misma.
+
+21
+00:02:23,282 --> 00:02:27,154
+La primera película dibujó sus tutorías como una franja, desde 2023.
+
+22
+00:02:28,354 --> 00:02:36,153
+RR. HH. lo ve distinto: le ofrece trabajo un periodo lectivo a la vez, un contrato nuevo cada semestre, para una asignatura.
+
+23
+00:02:37,453 --> 00:02:40,276
+Así que el rol de tutora empieza y termina cada semestre.
+
+24
+00:02:41,476 --> 00:02:45,978
+En enero, entre contratos, no es parte del personal. En la fecha de censo, sí.
+
+25
+00:02:49,078 --> 00:02:52,962
+Ahora Planificación traza una línea sobre sus franjas, en la fecha de censo.
+
+26
+00:02:54,062 --> 00:02:57,738
+Estudiante, tutora e investigadora están abiertos, y egresada también.
+
+27
+00:02:59,038 --> 00:03:04,989
+Así que Linh cuenta una vez, como estudiante que trabaja aquí: una persona con tres roles, no tres personas.
+
+28
+00:03:06,489 --> 00:03:10,706
+Mueve la línea un año atrás, y es tutora y egresada, no estudiante.
+
+29
+00:03:12,406 --> 00:03:14,362
+La cifra del año pasado queda como era.
+
+30
+00:03:15,562 --> 00:03:20,904
+Y la pregunta de egresados se vuelve un filtro: egresados con un rol de estudiante abierto.
+
+31
+00:03:22,004 --> 00:03:24,705
+Linh volvió, desde julio de 2025.
+
+32
+00:03:27,705 --> 00:03:30,001
+Cada rol dice también con qué se relaciona.
+
+33
+00:03:30,901 --> 00:03:39,787
+Su rol de estudiante, una maestría en informática de la salud. Cada contrato de tutora, una asignatura en un semestre. Su rol de investigadora, un proyecto.
+
+34
+00:03:40,987 --> 00:03:45,924
+Las personas también se relacionan entre sí. En el proyecto, Ana Ruiz supervisa a Linh.
+
+35
+00:03:47,124 --> 00:03:52,048
+Esa relación tiene sus propias fechas, y termina con el proyecto. Las dos personas siguen.
+
+36
+00:03:55,048 --> 00:03:57,507
+Una empresa de energía tiene el mismo problema.
+
+37
+00:03:58,807 --> 00:04:02,515
+El titular de la cuenta se muda en junio, y su rol termina ese día.
+
+38
+00:04:04,615 --> 00:04:10,267
+La persona que se queda depende de soporte vital en casa. Su necesidad sigue, y el riesgo también.
+
+39
+00:04:12,167 --> 00:04:16,360
+Guardada en su cuenta, la necesidad se cerraría con ella. Guardada en ella, se queda.
+
+40
+00:04:20,360 --> 00:04:23,736
+En la plataforma, es una tabla, con una fila por cada rol.
+
+41
+00:04:25,036 --> 00:04:31,696
+Cada fila guarda la persona, el tipo de rol, su responsable, con qué se relaciona, y las fechas en que es válido.
+
+42
+00:04:33,796 --> 00:04:41,436
+Jun la construye en dbt, con dos pruebas. Un rol no puede terminar antes de empezar, y cada rol pertenece a una persona.
+
+43
+00:04:43,536 --> 00:04:47,842
+Así, cualquier pregunta puede llevar una fecha: la del censo, el año pasado, o hoy.
+
+44
+00:04:49,742 --> 00:04:55,970
+Cada fila guarda también cuándo se registró, así que un contrato cargado tarde cuenta desde el día en que empezó.
+
+45
+00:05:01,070 --> 00:05:04,994
+Hoy, Linh es estudiante, tutora, investigadora y egresada.
+
+46
+00:05:06,294 --> 00:05:10,059
+En diciembre, el proyecto termina. Algún día, se graduará otra vez.
+
+47
+00:05:11,559 --> 00:05:12,799
+Los roles van y vienen.
+
+48
+00:05:14,099 --> 00:05:17,134
+Un rol tiene un inicio y un fin. La persona se queda.

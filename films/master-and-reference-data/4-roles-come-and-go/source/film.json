@@ -7,7 +7,7 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": ["line", "once", 2.2],
+  "poster": ["stays", "come", 1.95],
   "say": [
     ["\\bNguyen\\b", "Nwin"],
     ["\\bLinh's\\b", "Lin's"],

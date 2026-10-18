@@ -1,6 +1,6 @@
 """Run a tool of the series on the film in the current folder: each film's tools/<tool>.py calls run.tool('<tool>.py').
-This series keeps its own lang.py (where everything lives) and build.py (what the film is made of), and reuses From words to
-data's other tools and its instruments (music.py) unchanged: they import lang from here, because this folder comes first."""
+This series keeps its own lang.py (where everything lives), build.py (what the film is made of) and check.py (every moment draws,
+and every place paints without holding the page), and reuses From words to data's other tools and its instruments (music.py) unchanged: they import lang from here, because this folder comes first."""
 import pathlib, runpy, sys
 
 HERE = pathlib.Path(__file__).resolve().parent

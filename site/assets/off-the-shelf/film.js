@@ -2337,11 +2337,11 @@ function os_act(ctx,x,y,s){s=s||1;ctx.drawImage(wc_kept("act|"+s,Math.ceil(300*s
 // frame
 const OS_ST={top:540,base:812,s:3.2,weights:[540,900,1260],act:[1500,604,1.25]};
 function os_paintStamp(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);
-  // behind: the shop's shelves, close and out of focus, in shadow
-  ctx.save();ctx.filter="blur(7px)";wc_wash(ctx,wc_rect(-40,-40,W+80,OS_ST.top+40),[118,84,60],{kind:"plaster",line:false,seed:81});const R=wc_rng(31);
+  // behind: the shop's shelves, close and out of focus, in shadow: painted sharp on a layer, then blurred once (a blur on each stroke stalled the page for seconds)
+  const L=mkCanvas(W+80,OS_ST.top+80),q=L.getContext("2d");q.translate(40,40);wc_wash(q,wc_rect(-40,-40,W+80,OS_ST.top+40),[118,84,60],{kind:"plaster",line:false,seed:81});const R=wc_rng(31);
   for(const sy of [150,400]){let x=-30;while(x<W+20){const k=Math.floor(R()*4),w=[96,110,80,128][k],h=[150,176,196,116][k];
-      wc_part(ctx,wc_rect(x,sy-h,w,h),mix([[226,232,236],[176,64,52],[214,180,96],[92,126,150]][k],[118,84,60],0.35),1,{lw:1});x+=w+20+R()*28;}
-    wc_part(ctx,wc_rect(-40,sy,W+80,30),[150,108,74],1);}ctx.restore();
+      wc_part(q,wc_rect(x,sy-h,w,h),mix([[226,232,236],[176,64,52],[214,180,96],[92,126,150]][k],[118,84,60],0.35),1,{lw:1});x+=w+20+R()*28;}
+    wc_part(q,wc_rect(-40,sy,W+80,30),[150,108,74],1);}ctx.save();ctx.filter="blur(7px)";ctx.drawImage(L,-40,-40);ctx.restore();
   // the counter's top, its grain running away from us, and its back edge
   wc_wash(ctx,wc_rect(-40,OS_ST.top,W+80,H-OS_ST.top+40),[186,118,84],{kind:"plaster",line:false,seed:82});
   ctx.save();ctx.globalCompositeOperation="multiply";ctx.strokeStyle=rgba([150,90,60],0.2);ctx.lineWidth=2.4;

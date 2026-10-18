@@ -87,9 +87,9 @@ Watercolour, as in every film of the series ([film 1's script](../1-one-person-m
 
 **Narration.** One Monday, an alert: the oldest case had waited twelve days. It was waiting for HR to confirm a birth date, one digit apart. Mei rang HR, and the case was decided that morning, with its reason. The alert pointed at a case, not at a person to blame.
 
-**Picture.** "Monday" in the corner. The oldest case's gauge rises past its iron bar, "12 days", and a red-ink mark lands beside it, "past its limit". An alert card slides in, *alert · 7:00*: "the queue's oldest case: 12 days · its limit: 10". The case comes forward: two records, *S-21907* and *E-5263*, with their birth dates, 3 June and 8 June, ringed, and a note, "waiting for HR". Mei takes out her phone; the note becomes "HR: 3 June, a typo", and the case is stamped "linked · reason kept". The gauge falls back to "2 days" and ticks. A tag: "a case, not a person to blame".
+**Picture.** "Monday" in the corner. The oldest case's gauge rises past its iron bar, "12 days", and a red-ink mark lands beside it, "past its limit". An alert card slides in, *alert · 7:00*: "the queue's oldest case: 12 days · its limit: 10". The case comes forward: two records, *S-21388* and *E-5263*, with their birth dates, 3 June and 8 June, ringed, and a note, "waiting for HR". Mei takes out her phone; the note becomes "HR: 3 June, a typo", and the case is stamped "linked · reason kept". The gauge falls back to "2 days" and ticks. A tag: "a case, not a person to blame".
 
-**On screen.** Monday · 12 days · past its limit · alert · the queue's oldest case · its limit: 10 · S-21907 · E-5263 · 3 June · 8 June · waiting for HR · HR: 3 June, a typo · linked · reason kept · 2 days · a case, not a person to blame
+**On screen.** Monday · 12 days · past its limit · alert · the queue's oldest case · its limit: 10 · S-21388 · E-5263 · 3 June · 8 June · waiting for HR · HR: 3 June, a typo · linked · reason kept · 2 days · a case, not a person to blame
 
 ### 7 · Proposed, then decided · 3:02–3:27
 
@@ -154,7 +154,7 @@ Four questions, one at the end of each of four chapters, as the site shows them 
 | The search before create at the application | New with *One person, many systems* |
 | The five measures, their limits, the dashboard and the alert | New with this film: a model of the steward's measures, read from the queue, the role table, the tests and the request log, with a test for each limit; a dashboard and an alert on the platform |
 | The governance scorecard, with a row for the person | New: stewardship measures in the governance scorecard (the governance series' *Rules that run*) |
-| The clean-up, the intakes' numbers, the case S-21907 and E-5263, the visa type, the bank | Invented for the film, kept plausible |
+| The clean-up, the intakes' numbers, the case S-21388 and E-5263, the visa type, the bank | Invented for the film, kept plausible |
 
 ## Rigour to check before recording
 

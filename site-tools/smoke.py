@@ -859,7 +859,7 @@ async def check_progress(run):
             T: JSON.parse(e.closest('[data-progress-text]').dataset.progressText), labs: e.dataset.labs, quiz: e.dataset.quiz}))""")
 
     async def series_chips(pg):  # a series' card: how many of its films were watched
-        return await pg.evaluate("""() => [...document.querySelectorAll('[data-films]')].map(e => ({ps: e.dataset.films.split(' '), hidden: e.hidden, t: e.textContent,
+        return await pg.evaluate("""() => [...document.querySelectorAll('[data-series-text] [data-films]')].map(e => ({ps: e.dataset.films.split(' '), hidden: e.hidden, t: e.textContent,
             T: JSON.parse(e.closest('[data-series-text]').dataset.seriesText)}))""")
 
     async def steps(pg):

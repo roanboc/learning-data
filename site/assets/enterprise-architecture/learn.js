@@ -310,9 +310,9 @@ PIC.skipper=(Lb,S)=>{const W=Lb.w,its=W.items,R=W.rungs,AC=rgb(Lb.c);
   return{lay,draw};};
 
 // 12 · Redraw it in ArchiMate 4: the element as version 3.2 drew it, and how version 4 draws it; the ones done so far, below
-const KIND_COL=k=>({contract:K.lay[2],object:K.lay[2],role:K.lay[2],process:K.lay[2],interaction:K.lay[2],collaboration:K.lay[2],gap:K.mig,assessment:K.lay[0],
+const KIND_COL=k=>({actor:K.lay[2],contract:K.lay[2],object:K.lay[2],role:K.lay[2],process:K.lay[2],interaction:K.lay[2],collaboration:K.lay[2],gap:K.mig,assessment:K.lay[0],
   requirement:K.lay[0],constraint:K.lay[0],component:K.lay[4],capability:K.lay[1]})[k]||K.soft;
-const V4=it=>({kind:it.to,g2:it.to==="role"?"component":it.to==="process"&&it.from==="interaction"?"collaboration":null});
+const V4=it=>({kind:it.to,g2:it.to==="role"?"component":it.to==="actor"?"role":it.to==="process"&&it.from==="interaction"?"collaboration":null});
 PIC.notation=(Lb,S)=>{const W=Lb.w,its=W.items;
   // the ones done so far go in rows, in order, each as tall as its longer name (up to two lines)
   const lay=(lw,ctx)=>{const m=12,gap=Math.round(cl(lw*0.1,34,64)),cw=Math.floor((lw-m*2-gap)/2),o={lw,m,gap,cw,y:34,eh:54,ly:34+54+26,row:[]};let y=o.ly;
@@ -534,12 +534,14 @@ function labWalk(Lb){const W=Lb.w,Ls=W.layers,box=h("div",{class:"lab ea-lab"}),
 /* ---------- navigator: the map's own checks, then its agent ---------- */
 function labNavigator(Lb){const W=Lb.w,E=W.els,AG=[120,200,255],box=h("div",{class:"lab ea-lab"}),say=say0(),S={mine:new Set(),ran:0,fixed:0,ask:-1,askT:0};
   const fails=E.map((e,i)=>e.fail!=null?i:-1).filter(i=>i>=0);
+  // what the agent says: until the fixes, what the map is missing, where its answer needs one (x.no)
+  const said=x=>S.fixed?x.a:(x.no||x.a);
   const st=picOf(Lb,()=>1)?stage((lw,ctx)=>{const m=10,cols=lw>=560?2:1,g=8,cw=Math.floor((lw-m*2-g*(cols-1))/cols),rh=34,o={lw,m,cols,cw,rh,g,top:58};o.h=o.top+Math.ceil(E.length/cols)*(rh+g)+6;return o;},(ctx,o,now)=>{ground(ctx,o.lw,o.h,rgb(Lb.c));
-      // the map's agent, reading the map
-      const ax=o.m+18,ay=26;glass(ctx,ax-14,ay-14,28,28,14,AG,{fill:"rgba(7,12,24,0.95)",glow:12});archGlyph(ctx,"component",ax,ay,7,AG);T(ctx,W.pic.agent,ax+22,ay+5,{w:800,size:13.5,color:"rgba(120,200,255,1)"});
+      // the map's agent, an actor on the map (ACT-008), reading it
+      const ax=o.m+18,ay=26;glass(ctx,ax-14,ay-14,28,28,14,AG,{fill:"rgba(7,12,24,0.95)",glow:12});archGlyph(ctx,"actor",ax,ay,7,AG);T(ctx,W.pic.agent,ax+22,ay+5,{w:800,size:13.5,color:"rgba(120,200,255,1)"});
       // the agent cites what it read: those elements light in its colour
-      const ca=S.ask>=0&&S.fixed?eo(since(now,S.askT)/600):0,cited=e=>ca>0&&W.ask.qs[S.ask].a.indexOf(e.eid)>=0;
-      E.forEach((e,i)=>{const c=i%o.cols,r=Math.floor(i/o.cols),x=o.m+c*(o.cw+o.g),y=o.top+r*(o.rh+o.g),f=e.fail!=null,res=S.ran?(f&&!S.fixed?"fail":"pass"):null,col=res==="fail"?K.bad:res==="pass"?K.good:K.soft;
+      const ca=S.ask>=0?eo(since(now,S.askT)/600):0,cited=e=>ca>0&&said(W.ask.qs[S.ask]).indexOf(e.eid)>=0;
+      E.forEach((e,i)=>{const c=i%o.cols,r=Math.floor(i/o.cols),x=o.m+c*(o.cw+o.g),y=o.top+r*(o.rh+o.g),f=e.fail!=null,res=S.ran?(f&&!(S.fixed&&e.fix)?"fail":"pass"):null,col=res==="fail"?K.bad:res==="pass"?K.good:K.soft;
         glass(ctx,x,y,o.cw,o.rh,8,col,{fill:"rgba(7,12,24,0.94)",glow:res?10:0,ea:res?0.85:0.4});if(S.mine.has(i)&&!S.ran){ctx.save();ctx.strokeStyle=rgbaS(K.gold,1);ctx.lineWidth=2.4;rr(ctx,x-1.5,y-1.5,o.cw+3,o.rh+3,9);ctx.stroke();ctx.restore();}
         if(cited(e))withA(ctx,ca,()=>{ctx.save();ctx.shadowColor="rgba(120,200,255,0.8)";ctx.shadowBlur=14;ctx.strokeStyle="rgba(120,200,255,1)";ctx.lineWidth=2.4;rr(ctx,x-1.5,y-1.5,o.cw+3,o.rh+3,9);ctx.stroke();ctx.restore();});
         line1(ctx,e.eid,x+10,y+o.rh/2+4.5,o.cw-60,12.5,{w:500,color:rgbaS(K.ink,0.95)});
@@ -553,12 +555,13 @@ function labNavigator(Lb){const W=Lb.w,E=W.els,AG=[120,200,255],box=h("div",{cla
     E.forEach((e,i)=>{const b=g.querySelector('[data-i="'+i+'"]'),f=e.fail!=null,ok=S.mine.has(i)===f;b.disabled=true;b.classList.add(f?"fail":"pass");b.append(h("span",{class:"ea-res "+(f?"no":"ok")},f?W.pic.fail:W.pic.pass));
       if(f)b.after(h("p",{class:"ea-why sm"},h("b",{class:"no"},W.checks[e.fail]+":")," ",e.why));else if(!ok)b.after(h("p",{class:"ea-why sm"},h("b",{class:"no"},U.notQuite)," ",W.passes));});
     sayIt(say,fill(W.ran,{n:found}));const fx=btn(W.fixAll,()=>{S.fixed=performance.now();if(st)st.kick(800);fx.remove();
-      E.forEach((e,i)=>{if(!e.fix)return;const b=g.querySelector('[data-i="'+i+'"]');b.classList.remove("fail");b.classList.add("pass","fixed");b.querySelector(".ea-res").className="ea-res ok";b.querySelector(".ea-res").textContent=W.pic.pass;
+      // a gap with no fix stays flagged, and says why under its own reason
+      E.forEach((e,i)=>{const b=g.querySelector('[data-i="'+i+'"]');if(!e.fix){if(e.stays)(b.nextElementSibling||b).after(h("p",{class:"ea-why sm"},e.stays));return;}b.classList.remove("fail");b.classList.add("pass","fixed");b.querySelector(".ea-res").className="ea-res ok";b.querySelector(".ea-res").textContent=W.pic.pass;
         const L2=b.querySelector(".ea-lines");e.fix.forEach(([k,v])=>{const ex=[...L2.children].find(x=>x.firstChild.textContent===k+": ");if(ex)ex.lastChild.textContent=v;else L2.append(h("span",{class:"ea-line new"},h("i",null,k+": "),v));});});
-      sayIt(say,W.ask.t);askers();},"go");ctl.append(fx);askers();focusIn(fx);}
+      sayIt(say,(W.fixed?W.fixed+" ":"")+W.ask.t);askers();},"go");ctl.append(fx);askers();focusIn(fx);}
   // the answer is said where it appears (.ea-answer); the first good one brings the end, and the line below says it once
   function askers(){const A=W.ask,list=h("div",{class:"ea-opts ask",role:"group","aria-label":A.t}),ans=h("p",{class:"ea-answer",role:"status"});
-    A.qs.forEach((x,k)=>list.append(h("button",{type:"button",onclick:()=>{S.ask=k;S.askT=performance.now();if(st)st.kick(800);ans.textContent=S.fixed?x.a:A.broken;
+    A.qs.forEach((x,k)=>list.append(h("button",{type:"button",onclick:()=>{S.ask=k;S.askT=performance.now();if(st)st.kick(800);ans.textContent=said(x);
       if(S.fixed&&!more.querySelector(".ea-end")){more.append(h("p",{class:"ea-rights"},W.rights),h("p",{class:"ea-end"},W.end),h("div",{class:"lab-controls"},btn(U.again,reset,"sm")));endSay(say,W.rights+" "+W.end);}}},x.q)));
     more.replaceChildren(h("p",{class:"ea-q"},A.t),list,ans);}
   function reset(){const nb=labNavigator(Lb);box.replaceWith(nb);focusIn(nb.querySelector("button"));}
@@ -685,13 +688,13 @@ VIS.checks=(ctx,o,now,q,S)=>{ground(ctx,o.lw,o.h,K.good);T(ctx,PK.checks,14,24,{
   for(let i=0;i<n;i++){const x=m+i*(w+g),y=o.h/2-w/2,last=i===n-1&&S.done;glass(ctx,x,y,w,w,8,last?K.bad:K.good,{fill:"rgba(7,12,24,0.92)",glow:8});mark(ctx,x+w/2,y+w/2,last?"no":"ok");}};
 VIS.plateaus=(ctx,o,now,q)=>{ground(ctx,o.lw,o.h,K.mig);const P2=PK.plateaus,m=12,n=P2.length,w=(o.lw-m*2-8*(n-1))/n;
   P2.forEach((nm,i)=>{const x=m+i*(w+8),y=o.h-40-i*((o.h-90)/(n-1));glass(ctx,x,y,w,30,6,K.mig,{fill:"rgba(7,12,24,0.92)",glow:8});glyph(ctx,"plateau",x+14,y+15,7,K.mig);line1(ctx,nm,x+26,y+20,w-32,13);if(i<n-1)arrow(ctx,x+w/2,y-4,x+w+8+w/2,y-((o.h-90)/(n-1))+30+4,K.mig,0.5,{lw:1.4,head:6,dash:[3,3]});});};
-VIS.agent=(ctx,o,now,q,S)=>{ground(ctx,o.lw,o.h,[120,200,255]);const ax=o.lw*0.22,ay=o.h/2;glass(ctx,ax-30,ay-30,60,60,30,[120,200,255],{fill:"rgba(7,12,24,0.95)",glow:16});archGlyph(ctx,"component",ax,ay,14,[120,200,255]);
+VIS.agent=(ctx,o,now,q,S)=>{ground(ctx,o.lw,o.h,[120,200,255]);const ax=o.lw*0.22,ay=o.h/2;glass(ctx,ax-30,ay-30,60,60,30,[120,200,255],{fill:"rgba(7,12,24,0.95)",glow:16});archGlyph(ctx,"actor",ax,ay,14,[120,200,255]);
   T(ctx,PK.agent,ax,ay+52,{w:800,size:13.5,align:"center",color:"rgba(120,200,255,1)"});const mx=o.lw*0.48,mw=o.lw-mx-14;for(let i=0;i<4;i++){const y=24+i*((o.h-48)/4),hh=(o.h-48)/4-8;chip(ctx,mx,y,mw,hh,"",i===1?K.dom[1]:K.soft,{tint:0.1,glow:0,dash:i===1&&!S.done});
     ctx.fillStyle="rgba(200,215,235,0.35)";rr(ctx,mx+12,y+hh/2-3,mw*0.5,6,3);ctx.fill();}arrow(ctx,ax+34,ay,mx-6,24+((o.h-48)/4)*1.5-4,[120,200,255],0.8,{dash:[4,4],lw:1.6});};
 VIS.views=(ctx,o,now,q,S)=>{ground(ctx,o.lw,o.h,K.lay[3]);const V=PK.views,cx=o.lw*0.26,cy=o.h/2,mw=Math.min(130,o.lw*0.3);el(ctx,cx-mw/2,cy-26,mw,52,V.map,K.gold,"",{center:1,size:15,hi:1});
   const vx=o.lw*0.55,vw=o.lw-vx-12,hh=(o.h-24-3*8)/4;V.v.forEach((nm,i)=>{const y=12+i*(hh+8);chip(ctx,vx,y,vw,hh,nm,K.lay[3],{size:13.5});arrow(ctx,cx+mw/2+2,cy,vx-4,y+hh/2,K.gold,0.7,{lw:1.4,head:6});});};
-VIS.glyphs=(ctx,o,now,q,S)=>{ground(ctx,o.lw,o.h,K.lay[0]);const it=(L.labs.find(x=>x.id==="notation").w.items).find(x=>x.from===q.vis.from)||{fromT:"",from:"",toT:"",to:""},m=12,gap=34,w=(o.lw-m*2-gap)/2,hh=60,y=o.h/2-hh/2+8;
+VIS.glyphs=(ctx,o,now,q,S)=>{ground(ctx,o.lw,o.h,K.lay[0]);const it=(L.labs.find(x=>x.id==="notation").w.items).find(x=>x.from===q.vis.from)||{fromT:"",from:"",toT:"",to:""},to=q.vis.toT?{from:it.from,to:q.vis.to,toT:q.vis.toT}:it,m=12,gap=34,w=(o.lw-m*2-gap)/2,hh=60,y=o.h/2-hh/2+8;
   T(ctx,(L.labs.find(x=>x.id==="notation").w.pic||{}).v3||"3.2",m+w/2,y-16,{w:800,size:13,align:"center",color:rgbaS(K.soft,1)});T(ctx,(L.labs.find(x=>x.id==="notation").w.pic||{}).v4||"4",m+w+gap+w/2,y-16,{w:800,size:13,align:"center",color:rgbaS(K.ink,0.95)});
   el(ctx,m,y,w,hh,it.fromT,KIND_COL(it.from),it.from,{size:14});arrow(ctx,m+w+5,y+hh/2,m+w+gap-5,y+hh/2,K.soft,0.8,{dash:[4,4]});
-  if(!S.done)chip(ctx,m+w+gap,y,w,hh,"?",K.soft,{dash:1,tint:0.04,glow:0,size:20});else{const t=since(now,S.done),v=V4(it);scaled(ctx,m+w+gap,y,w,hh,lp(0.85,1,sp(t/600)),()=>el(ctx,m+w+gap,y,w,hh,it.toT,KIND_COL(v.kind),v.kind,{size:14,g2:v.g2,c2:KIND_COL(v.g2),a:eo(t/500),hi:0.5}));}};
+  if(!S.done)chip(ctx,m+w+gap,y,w,hh,"?",K.soft,{dash:1,tint:0.04,glow:0,size:20});else{const t=since(now,S.done),v=V4(to);scaled(ctx,m+w+gap,y,w,hh,lp(0.85,1,sp(t/600)),()=>el(ctx,m+w+gap,y,w,hh,to.toT,KIND_COL(v.kind),v.kind,{size:14,g2:v.g2,c2:KIND_COL(v.g2),a:eo(t/500),hi:0.5}));}};
 })();

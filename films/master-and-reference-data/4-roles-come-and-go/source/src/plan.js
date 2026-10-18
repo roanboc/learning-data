@@ -12,8 +12,8 @@
 if(!PEOPLE.jun)PEOPLE.jun={name:"Jun Park",role:"Analytics engineer",side:"Technical",does:"produces",edge:TECH,seed:10,
   skin:[226,186,150],hair:{style:"side",c:[24,22,26]},glasses:[40,44,54],
   top:{kind:"sweater",c:[62,120,112]},bottom:{c:[48,52,62]},shoe:[232,232,236],build:{sh:72,hip:58,h:0.99}};
-// Marcus Porcius Cato, censor in 184 BC: red hair (Plutarch), a toga of undyed wool over a tunic, a senator's dark leather shoes. He's
-// on no side, so his edge is neutral, as Linh's is
+// Marcus Porcius Cato, as in 204 BC: red hair (Plutarch), a toga of undyed wool over a tunic, and calcei of dark tanned leather (the red
+// ones came with curule office, which he hadn't held yet). He's on no side, so his edge is neutral, as Linh's is
 PEOPLE.cato={name:"Marcus Porcius Cato",role:"Censor",side:"Person",does:"uses",edge:[236,232,226],seed:31,
   skin:[214,170,132],hair:{style:"cropped",c:[150,82,48]},
   top:{kind:"toga",c:[236,228,208],rolled:true},bottom:{kind:"skirt",c:[226,214,190]},legs:[214,170,132],shoe:[78,52,42],build:{sh:72,hip:60,h:0.98}};

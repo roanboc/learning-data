@@ -198,7 +198,7 @@ scene("line",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   m4_rule(ctx,lx,M4_LY0,M4_AXY+12,clamp((t-tLine+0.1)/0.9,0,1),{lw:3.4});
   const ta=fin(t,tCen-0.2,0.5);if(ta>0.01)withA(ctx,ta,()=>{withA(ctx,1-bk,()=>m4_tagAt(ctx,lx,M4_LTY,"census date · 31 Mar 2026",{size:28,w:700,wash:WC_BADGE,washA:0.5}));
     if(bk>0.01)withA(ctx,bk,()=>m4_tagAt(ctx,lx,M4_LTY,"census date · 31 Mar 2025",{size:28,w:700,wash:WC_BADGE,washA:0.5}));});
-  const dim=fin(t,tFil+0.6,0.6);[0,1,2,3].forEach(i=>m4_dot(ctx,lx,m4_rowY(i),M4_ROWS[i],fin(t,tDot[i]-0.05,0.35)*open[i]*(i===1||i===2?1-0.7*dim:1)));
+  const dim=fin(t,tFil+0.6,0.6);[0,1,2,3,4].forEach(i=>m4_dot(ctx,lx,m4_rowY(i),M4_ROWS[i],fin(t,tDot[Math.min(i,3)]-0.05,0.35)*open[i]*(i===1||i===2?1-0.7*dim:1)));
   // Planning counts: three rows from three lists fold into one person; a year back, a tutor and an alumna; last year's answer, kept
   const pcA=1-fin(t,tFil-0.4,0.5);
   if(pcA>0.01)withA(ctx,pcA,()=>arrive(ctx,M4_PCX+320,M4_PCY+140,t,tPlan-0.3,()=>m4_planCount(ctx,t,M4_PCX,M4_PCY,{rows:clamp((t-tCnt+0.1)/0.9,0,1),

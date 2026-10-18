@@ -351,6 +351,16 @@ jobs:
                        "films/analytics-engineering/shared", "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js",
                        "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
                        "films/a-sharper-sketch/source/src",
+                       "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts"]},
+            {"name": "A map people and agents can read", "key": "a-map-people-and-agents-can-read-en",
+             "dir": "films/enterprise-architecture/11-a-map-people-and-agents-can-read/source", "lang": "en",
+             "player": "dist/film.js", "site_player": "site/assets/a-map-people-and-agents-can-read/film.js",
+             "video": "dist/a-map-people-and-agents-can-read.mp4", "file": "a-map-people-and-agents-can-read.mp4",
+             "captions": [["films/enterprise-architecture/11-a-map-people-and-agents-can-read/captions/en.srt", "a-map-people-and-agents-can-read.en.srt"], ["films/enterprise-architecture/11-a-map-people-and-agents-can-read/captions/es.srt", "a-map-people-and-agents-can-read.es.srt"]],
+             "paths": ["films/enterprise-architecture/11-a-map-people-and-agents-can-read/source", ":(exclude)films/enterprise-architecture/11-a-map-people-and-agents-can-read/source/src/i18n/es/captions.js", "films/enterprise-architecture/shared",
+                       "films/analytics-engineering/shared", "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js",
+                       "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
+                       "films/a-sharper-sketch/source/src",
                        "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts"]}
           ]
           EOF

@@ -190,9 +190,9 @@ tNone = W(F, 'how', 'None of them'); soft(39, tNone - 0.1, 0.022, -0.1); air(tNo
 bell(54, W(F, 'once', 'Tartu', -0.3), 0.018, 0.5); bell(61, W(F, 'once', 'once only', -0.2), 0.02, 0.5)
 # 5. Two rules, not one: D-flat, settling in the breath. A knock as day one's rule is set down on the wall; a dry crack as it splits,
 #    and air as its halves part. A knock for each of the two rules, on its side, a pencil as each is written, and a knock and a nylon
-#    note for each owner. Air as the gate opens, paper for the agreed list, a nylon note as "replaced readings" lights, and air as
-#    the reading crosses; a low note where the script once reached across, a muffled key for "unseen"; air again as the reading
-#    crosses in the breath
+#    note for each owner. Air as the gate opens, and again as the reading crosses through it; paper for the agreed list, and a nylon
+#    note as "replaced readings" lights; a low note where the script once reached across, a muffled key for "unseen"; air again as
+#    the reading crosses in the breath
 P = 'split'
 bed(P, [DBMAJ9, ABSUS4, GBMAJ9], 0, cq(P, 'breath'))
 bed(P, [DBMAJ9], cq(P, 'breath'), None, g=0.034)
@@ -202,11 +202,11 @@ knock(tTw + 0.4, 0.018, -0.5); knock(tTw + 0.55, 0.018, 0.5)
 pencil(W(P, 'net', 'an estimate', -0.1), 0.01, -0.5, 2.6); pencil(W(P, 'ret', 'a bill', -0.1), 0.01, 0.5, 2.2)
 tG = W(P, 'net', 'Grace'); knock(tG - 0.1, 0.014, -0.5); nylon(61, tG, 0.018, -0.5)
 tH = W(P, 'ret', 'head of retail'); knock(tH - 0.1, 0.014, 0.5); nylon(65, tH, 0.018, 0.5)
-tL = W(P, 'cross', 'agreed list'); air(tL - 0.7, 0.8, 0.014); paper(tL - 0.5, 0.026, 0.0, 0.5); nylon(68, tL + 0.7, 0.016, 0.0)
-tX = C(P, 'cross'); air(tX + 0.2, 2.2, 0.012, 0.0)
+tX = C(P, 'cross'); air(tX - 0.3, 0.8, 0.014); air(tX + 0.6, 2.2, 0.012, 0.0)
+tL = W(P, 'cross', 'agreed list'); paper(tL - 0.5, 0.026, 0.0, 0.5); nylon(68, tL + 0.7, 0.016, 0.0)
 soft(42, W(P, 'cross', 'the script', -0.3), 0.016, 0.0); tap(W(P, 'cross', 'unseen', -0.2), 0.01, 0.0)
 import math as _m
-k_ = _m.ceil((C(P, 'breath') - tX - 0.2) / 2.6); air(tX + 0.2 + k_ * 2.6, 2.2, 0.012, 0.0)
+k_ = _m.ceil((C(P, 'breath') - tX - 0.6) / 2.6); air(tX + 0.6 + k_ * 2.6, 2.2, 0.012, 0.0)
 # 6. Where a rule comes from: E-flat minor to A-flat with its fourth. Air as the two rules move down; a knock and a nylon note, rising,
 #    for each kind of reason; a knock and a nylon note for the metering rules and for the regulator's retail code. A low note as a
 #    rule loses its reason, and another as it loses its owner. Then Ama: a knock for day one's draft, a muffled key for its goal, a

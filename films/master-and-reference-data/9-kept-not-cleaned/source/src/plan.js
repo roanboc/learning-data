@@ -15,10 +15,6 @@ if(!PEOPLE.yusuf)PEOPLE.yusuf={name:"Yusuf Demir",role:"Data governance lead",si
   skin:[204,160,124],hair:{style:"side",c:[38,30,28]},beard:[44,34,30],
   top:{kind:"blazer",c:[150,84,62],inner:[236,232,222]},bottom:{c:[52,56,70]},shoe:[70,48,36],build:{sh:74,hip:60,h:1.0}};
 
-// wash.js shifts each wash's blotches by its seed plus its left edge; when a shape starts left of the frame with a small seed the sum is
-// negative, the blotches start inside the frame, and a lighter strip runs down its left edge. Here such a seed is moved up by whole
-// turns of 420, so every wash is blotched to the edge; washes whose seed and edge already sum to zero or more are untouched
-{const w0=wc_wash;wc_wash=function(ctx,pts,col,o){o=o||{};const s=(o.seed||7)+Math.round(wc_bbox(pts).x0);if(s<0)o=Object.assign({},o,{seed:(o.seed||7)+420*Math.ceil(-s/420)});return w0(ctx,pts,col,o);};}
 
 /* ---------- lines ---------- */
 // a line's length, kept on it
@@ -133,8 +129,9 @@ function m9_crescent(x,y,rx,ry){const o=[],a0=-0.35,da=Math.PI+0.2;for(let i=0;i
   for(let i=10;i>=0;i--){const a=a0+i/10*da;o.push([x-rx*0.18+Math.cos(a)*rx*0.8,y-ry*0.3+Math.sin(a)*ry*0.72]);}return o;}
 // a wood over an area: one wash whose edge is the crowns', then each crown's shaded side, the crescents joining where they meet, so the
 // trees read as a wood, not as spots. cols: [shade, body]; n crowns of size sz (nearer, lower ones a little larger)
-function m9_canopy(ctx,pts,cols,n,seed,sz,dp){dp=dp||0.75;sz=sz||1;const R=wc_rng(seed),b=wc_bbox(pts),sh=[];ctx.save();wc_tr(ctx,pts);
-  for(let i=0,tries=0;i<n&&tries<n*20;tries++){const x=b.x0+R()*b.w,y=b.y0+R()*b.h;if(!ctx.isPointInPath(x,y))continue;i++;
+function m9_canopy(ctx,pts,cols,n,seed,sz,dp){dp=dp||0.75;sz=sz||1;const R=wc_rng(seed),b=wc_bbox(pts),sh=[],M=ctx.getTransform();ctx.save();wc_tr(ctx,pts);
+  // (the path test is in the canvas's own pixels, so each point goes through the drawing's transform first, for a valley painted larger)
+  for(let i=0,tries=0;i<n&&tries<n*20;tries++){const x=b.x0+R()*b.w,y=b.y0+R()*b.h,d=M.transformPoint(new DOMPoint(x,y));if(!ctx.isPointInPath(d.x,d.y))continue;i++;
     const s=sz*(0.75+clamp((y-b.y0)/Math.max(1,b.h),0,1)*0.5)*(0.8+R()*0.4);sh.push(m9_crescent(x,y,17*s,14*s));}ctx.restore();
   wc_wash(ctx,m9_scallop(pts,24*sz,seed),cols[1],{kind:"land",line:false,depth:dp,seed});wc_wash(ctx,sh,cols[0],{kind:"dab",flat:true,depth:dp,a:0.62,seed:seed+1});}
 // a thin shape washed flat: cleared to paper and filled along the same edge, so no paper shows round it
@@ -253,8 +250,10 @@ function m9_flow(ctx,t,line,w,n,speed,seed,a,k,ua){if(a<=0.01)return;ua=ua||0;co
     ox=-Math.sin(p[2])*off*ww,oy=Math.cos(p[2])*off*ww,f=Math.sin(Math.PI*clamp((u-ua)*8,0,1))*Math.sin(Math.PI*clamp((1-u)*8,0,1));
     ctx.strokeStyle=rgba([255,255,255],0.55*a*clamp(f+0.4,0,1));ctx.lineWidth=2+ww/60;ctx.beginPath();ctx.moveTo(p[0]+ox,p[1]+oy);ctx.lineTo(p[0]+ox-Math.cos(p[2])*len*(0.6+ww/300),p[1]+oy-Math.sin(p[2])*len*(0.6+ww/300));ctx.stroke();}
   ctx.restore();}
-// the gravel the river carries: grains down the Min, most of them turning down the outer channel; one in five takes the inner
-function m9_gravel(ctx,t,t0,a){if(a<=0.01)return;const R=wc_rng(61),n=26;for(let i=0;i<n;i++){const ph=R()*3.6,inner=i%5===2,off=(R()*2-1)*0.3,r=4.5+R()*3,col=M9_GRAVEL[i%3];
+// the gravel the river carries: grains down the Min, most of them turning down the outer channel; one in five takes the inner (none, when
+// the inner channel is closed: outer)
+function m9_gravel(ctx,t,t0,a,outer){if(a<=0.01)return;const R=wc_rng(61),n=26;for(let i=0;i<n;i++){const ph=R()*3.6,inner=i%5===2,off=(R()*2-1)*0.3,r=4.5+R()*3,col=M9_GRAVEL[i%3];
+  if(outer&&inner)continue;
   const u=((t-t0)+ph)/3.6;if(u<0)continue;const k=u%1,cyc=Math.floor(u);if((t-t0)+ph<3.6*cyc)continue;
   let p,w,of=off;if(k<0.42||!inner){const v=inner?lerp(M9_SEEN,M9_HEAD,k/0.42):lerp(M9_SEEN,0.62,k);p=m9_at(M9_MAIN,v);w=M9_WMAIN(v);if(inner)of=lerp(off,0.17,clamp(k/0.3,0,1));}
   else{const v=(k-0.42)/0.58*0.7;p=m9_at(M9_IN,v);w=M9_WIN(v);of=0;}
@@ -351,3 +350,208 @@ function m9_rule(ctx,cx,cy,p){if(p<=0)return;const w=1180,h=96,x0=cx-w/2,vis=w*e
   wc_hand(ctx,M9_RULE,cx,cy+15,{size:46,w:700,col:WCP.parchInk,align:"center"});ctx.restore();
   // the roll, moving right as it unrolls
   if(p<1){const rx=x0+vis;ctx.save();ctx.fillStyle=rgba([236,226,198],1);ctx.beginPath();ctx.ellipse(rx,cy,13,h/2+4,0,0,TAU);ctx.fill();ctx.strokeStyle=rgba(WC_PENCIL,0.7);ctx.lineWidth=1.6;ctx.stroke();ctx.restore();}}
+
+/* ---------- 2 to 10: things on paper ---------- */
+// a pencil arrow from one point to another, drawn on as p goes from 0 to 1
+function m9_arrow(ctx,x0,y0,x1,y1,p,o){o=o||{};if(p<=0)return;const q=ease(clamp(p,0,1)),ex=lerp(x0,x1,q),ey=lerp(y0,y1,q),an=Math.atan2(y1-y0,x1-x0),c=rgba(o.col||WC_PENCIL,o.a==null?0.85:o.a);
+  ctx.save();ctx.strokeStyle=c;ctx.fillStyle=c;ctx.lineWidth=o.lw||3;ctx.lineCap="round";if(o.dash)ctx.setLineDash(o.dash);ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(ex,ey);ctx.stroke();ctx.setLineDash([]);
+  if(p>=1){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x1-16*Math.cos(an-0.45),y1-16*Math.sin(an-0.45));ctx.lineTo(x1-16*Math.cos(an+0.45),y1-16*Math.sin(an+0.45));ctx.closePath();ctx.fill();}ctx.restore();}
+// a rubber stamp landing at ts: its words inside a double rule, in the stamp's ink, pressed unevenly; the rule is kept for each size
+const M9_STAMP=[46,78,132];
+function m9_stampRule(w,h,col){return wc_kept("stamp"+w+"x"+h+"|"+col.join(","),(w+16)*2,(h+16)*2,q=>{q.scale(2,2);q.translate(8,8);
+  wc_ink(q,wc_rrPts(0,0,w,h,10),true,3.4,col,0.9,41,0.6);wc_ink(q,wc_rrPts(8,8,w-16,h-16,6),true,1.6,col,0.85,43,0.6);
+  q.globalCompositeOperation="destination-out";q.globalAlpha=0.45;q.drawImage(WC.blotch,-30,-20,w+60,h+40);});}
+function m9_stamp(ctx,t,cx,cy,ts,s,o){o=o||{};const p=clamp((t-ts)/0.2,0,1);if(p<=0)return;const size=o.size||36,col=o.col||M9_STAMP,
+  w=Math.round(tw(ctx,s,size,500,"mono")+52),h=Math.round(size+38),z=lerp(1.3,1,1-Math.pow(1-p,3));
+  ctx.save();ctx.translate(cx,cy);ctx.rotate(o.rot==null?-0.04:o.rot);ctx.scale(z,z);withA(ctx,p*(o.a==null?1:o.a),()=>{ctx.drawImage(m9_stampRule(w,h,col),-w/2-8,-h/2-8,w+16,h+16);
+    wc_T(ctx,s,0,size*0.36,{f:"mono",w:500,size,col,a:0.9,align:"center"});});ctx.restore();}
+// someone's name, and where they work
+function m9_name(ctx,x,y,name,role){const w=Math.round(Math.max(tw(ctx,name,32,800),tw(ctx,role,28,600))+56);wc_panel(ctx,x-w/2,y,w,108,{kind:"card",seed:name.length});
+  wc_T(ctx,name,x-w/2+28,y+46,{w:800,size:32,col:WC_DARK});wc_T(ctx,role,x-w/2+28,y+86,{w:600,size:28,col:WC_MUTED});}
+// someone no one has met yet: only ever drawn as a white figure, so only the outline matters
+if(!PEOPLE.newcomer)PEOPLE.newcomer={name:"A new person",role:"Applicant",side:"Person",does:"uses",edge:[236,232,226],seed:23,
+  skin:[200,160,128],hair:{style:"curly",c:[40,32,30]},top:{kind:"sweater",c:[120,140,120]},bottom:{c:[60,64,80]},shoe:[50,50,56],build:{sh:72,hip:58,h:0.98}};
+
+/* ---------- 2 to 4. the clean-up's board, and the charts of duplicates ---------- */
+// the clean-up's board: fifteen pairs of records, each pair sliding together and becoming one white card as o.merge goes 0 to 1, a
+// counter running to 2,000 (o.count), its months from June to December filling (o.months)
+const M9_BD={x:150,y:130,w:880,h:470},M9_BPAIRS=[["student","applicant"],["alumna","student"],["tutor","student"],["applicant","applicant"],["student","alumna"],
+  ["researcher","tutor"],["student","student"],["applicant","alumna"],["tutor","tutor"],["student","applicant"],["alumna","alumna"],["student","researcher"],["applicant","student"],["tutor","alumna"],["student","student"]],
+  M9_BORDER=[3,11,7,0,13,5,9,1,14,6,2,10,4,12,8];
+function m9_board(ctx,t,o){const B=M9_BD;wc_panel(ctx,B.x,B.y,B.w,B.h,{kind:"sheet",seed:8});
+  wc_T(ctx,"Duplicate clean-up · 2024",B.x+36,B.y+60,{w:800,size:34,col:WC_DARK});
+  const n=Math.round(2000*clamp(o.count,0,1)/10)*10,mw=tw(ctx," merged",30,700);
+  wc_T(ctx,"merged",B.x+B.w-36,B.y+60,{w:700,size:30,align:"right",col:WC_MUTED});wc_T(ctx,n.toLocaleString("en-US"),B.x+B.w-36-mw,B.y+61,{w:500,size:40,f:"mono",align:"right",col:WC_DARK});
+  M9_BPAIRS.forEach(([r1,r2],i)=>{const cx=B.x+118+(i%5)*161,cy=B.y+148+Math.floor(i/5)*88,s0=M9_BORDER[i]/15*0.78,k=ease(clamp((o.merge-s0)/0.2,0,1)),sl=30*k,wa=clamp((k-0.55)/0.35,0,1);
+    if(wa<1)withA(ctx,1-wa,()=>{wc_panel(ctx,cx-68+sl,cy-20,62,40,{kind:"chip",role:WC_ROLE[r1],seed:i});wc_panel(ctx,cx+6-sl,cy-20,62,40,{kind:"chip",role:WC_ROLE[r2],seed:i+20});});
+    if(wa>0)withA(ctx,wa,()=>{wc_panel(ctx,cx-40,cy-24,80,48,{kind:"card",seed:i+40});[r1,r2].forEach((r,j)=>{ctx.fillStyle=rgba(WC_ROLE[r],1);ctx.beginPath();ctx.arc(cx-20+j*16,cy,6,0,TAU);ctx.fill();});});});
+  // the six months, as a strip that fills from June to December
+  const sy=B.y+B.h-62,sx=B.x+250,sw=330,f=ease(clamp(o.months,0,1));wc_T(ctx,"Jun–Dec 2024",B.x+36,sy+10,{w:700,size:28,col:WC_INK});
+  ctx.save();wc_tr(ctx,wc_rrPts(sx,sy-16,sw,32,10));ctx.fillStyle=rgba([244,240,230],1);ctx.fill();ctx.clip();if(f>0){ctx.fillStyle=rgba(wc_lit(WC_ROLE.student,0.35),0.9);ctx.fillRect(sx,sy-16,sw*f,32);}
+  ctx.strokeStyle=rgba(WC_PENCIL,0.35);ctx.lineWidth=1.5;for(let i=1;i<6;i++){ctx.beginPath();ctx.moveTo(sx+sw*i/6,sy-16);ctx.lineTo(sx+sw*i/6,sy+16);ctx.stroke();}ctx.restore();
+  wc_ink(ctx,wc_rrPts(sx,sy-16,sw,32,10),true,1.8,WC_PENCIL,0.8,17,0.6);}
+// the sheet a chart is drawn on: kept when it's still; while it grows, drawn each frame, with a plain pencil edge
+function m9_sheet(ctx,b,still){if(still)return wc_panel(ctx,b.x,b.y,b.w,b.h,{kind:"sheet",seed:5});ctx.save();wc_tr(ctx,wc_rrPts(b.x,b.y,b.w,b.h,12));
+  ctx.fillStyle=rgba(WC_CARD,0.95);ctx.fill();ctx.lineWidth=2;ctx.strokeStyle=rgba(WC_PENCIL,0.8);ctx.stroke();ctx.restore();}
+// where things sit on a chart: months from June 2024 (0) to mEnd across, and duplicates from 0 to top up
+function m9_plot(b,mEnd,top){const x0=b.x+136,x1=b.x+b.w-48,y0=b.y+108,y1=b.y+b.h-82;return{x0,x1,y0,y1,X:m=>lerp(x0,x1,m/mEnd),Y:n=>lerp(y1,y0,n/top)};}
+function m9_axes(ctx,P,grid){ctx.save();if(grid){ctx.strokeStyle=rgba(WC_PENCIL,0.22);ctx.lineWidth=1.5;ctx.setLineDash([6,8]);grid.forEach(n=>{ctx.beginPath();ctx.moveTo(P.x0,P.Y(n));ctx.lineTo(P.x1,P.Y(n));ctx.stroke();});}
+  ctx.setLineDash([]);ctx.strokeStyle=rgba(WC_PENCIL,0.8);ctx.lineWidth=2.2;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(P.x0,P.y0-12);ctx.lineTo(P.x0,P.y1);ctx.lineTo(P.x1,P.y1);ctx.stroke();ctx.restore();}
+// duplicates waiting, month by month: the clean-up takes them from 2,000 to none by December 2024; each intake of 2025 brings more
+const M9_WAIT=[[0,2000],[1,1720],[2,1390],[3,1020],[4,660],[5,310],[6,0],[8,0],[8.25,640],[13,640],[13.25,1100],[18,1100]];
+// a block of new duplicates: small record cards in twos, stacked in the roles' colours; kept, then clipped to each block (cut: it runs
+// off the top of the chart, torn)
+function m9_pairsTex(){return wc_kept("pairs",112,1200,q=>{q.scale(2,2);const R=wc_rng(83),cols=["student","applicant","alumna","tutor","researcher"];
+  for(let r=0;r<50;r++)for(let k=0;k<2;k++){const y=588-r*12,x=3+k*26,c=WC_ROLE[cols[Math.floor(R()*5)]];
+    for(const xx of [x,x+12]){q.fillStyle=rgba(wc_lit(c,0.2),0.92);q.fillRect(xx,y,10,9);q.strokeStyle=rgba(WC_PENCIL,0.45);q.lineWidth=0.8;q.strokeRect(xx+0.5,y+0.5,9,8);}}});}
+function m9_block(ctx,x,yTop,yBot,w,cut){if(yBot-yTop<1)return;const top=[];if(cut)for(let i=0;i<=6;i++)top.push([x+w*(1-i/6),yTop+(i%2?0:9)]);else top.push([x+w,yTop],[x,yTop]);
+  const pts=[[x,yBot],[x+w,yBot]].concat(top);ctx.save();wc_tr(ctx,pts);ctx.fillStyle=rgba(WC_CARD,1);ctx.fill();ctx.clip();ctx.drawImage(m9_pairsTex(),x+(w-56)/2,yBot-600,56,600);ctx.restore();
+  ctx.save();wc_tr(ctx,pts);ctx.strokeStyle=rgba(WC_PENCIL,0.75);ctx.lineWidth=2;ctx.lineJoin="round";ctx.stroke();ctx.restore();}
+// the chart of duplicates waiting, in box b, months 0 to o.mEnd; its line drawn to month o.mL; the 2025 blocks risen as far as o.rise;
+// each label's alpha in o
+const M9_BW=48,m9_bx=(P,m)=>P.X(m+0.25)+6;
+function m9_waiting(ctx,t,b,o){const P=m9_plot(b,o.mEnd,2000);m9_sheet(ctx,b,o.still);
+  wc_T(ctx,"duplicates waiting",b.x+36,b.y+62,{w:800,size:32,col:WC_DARK});m9_axes(ctx,P,[1000,2000]);
+  [["2,000",2000],["0",0]].forEach(([s,n])=>wc_T(ctx,s,P.x0-16,P.Y(n)+10,{w:600,size:28,align:"right",col:WC_MUTED}));
+  const xl=(s,m,a)=>{if(a>0.01)withA(ctx,a,()=>wc_T(ctx,s,m,P.y1+46,{w:600,size:28,align:"center",col:WC_MUTED}));};
+  xl("Jun 2024",P.X(0),1);xl("Dec 2024",P.X(6),o.dec==null?1:o.dec);
+  // the blocks of 2025, one for each intake, stacked on what was already waiting
+  const r=o.rise||[0,0];[[8,0,640,0],[13,640,460,1]].forEach(([m,n0,dn,i])=>{if(r[i]<=0)return;const x=m9_bx(P,m);m9_block(ctx,x,P.Y(n0+dn*ease(r[i])),P.Y(n0),M9_BW);
+    xl(["Feb 2025","Jul 2025"][i],x+M9_BW/2,clamp(r[i]*2,0,1));const la=(o.vals||[0,0])[i];
+    if(la>0.01)withA(ctx,la,()=>wc_T(ctx,String(dn),x-14,P.Y(n0+dn/2)+10,{w:800,size:30,align:"right",col:WC_DARK}));});
+  // the line, as far as it's been drawn; the months with none waiting, marked while they're the subject
+  const mL=clamp(o.mL,0,18);if(o.hi>0.01){ctx.save();ctx.strokeStyle=rgba(WC_BADGE,0.55*o.hi);ctx.lineWidth=18;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(P.X(6),P.y1-2);ctx.lineTo(P.X(Math.min(mL,8)),P.y1-2);ctx.stroke();ctx.restore();}
+  if(mL>0){const pts=[];for(let i=0;i<M9_WAIT.length;i++){const [m,n]=M9_WAIT[i];if(m<=mL)pts.push([P.X(m),P.Y(n)]);else{const [m0,n0]=M9_WAIT[i-1];pts.push([P.X(mL),P.Y(lerp(n0,n,(mL-m0)/(m-m0)))]);break;}}
+    ctx.save();ctx.strokeStyle=rgba(WC_INK,0.9);ctx.lineWidth=4.5;ctx.lineCap="round";ctx.lineJoin="round";wc_trOpen(ctx,pts);ctx.stroke();ctx.restore();}
+  if(o.end>0.01)withA(ctx,o.end,()=>wc_T(ctx,"1,100 new",P.x1,P.Y(1100)-24,{w:800,size:30,align:"right",col:WC_DARK}));
+  return P;}
+// new duplicates per intake, against the limit of 50: 2025's run off the top; o.rise: how far each of 2026's has risen
+const M9_INTAKES=[[8,640,"Feb 2025"],[13,460,"Jul 2025"],[20,44,"Feb 2026"],[25,29,"Jul 2026"]],M9_IRON=[92,96,112];
+// (months counted from Jan 2025, so the four intakes spread across the chart)
+function m9_intakes(ctx,t,b,o){const P=m9_plot(b,23,100);m9_sheet(ctx,b,true);wc_T(ctx,"new duplicates per intake",b.x+36,b.y+62,{w:800,size:32,col:WC_DARK});m9_axes(ctx,P);
+  wc_T(ctx,"0",P.x0-16,P.Y(0)+10,{w:600,size:28,align:"right",col:WC_MUTED});
+  M9_INTAKES.forEach(([m,n,s],i)=>{const r=i<2?1:ease(clamp((o.rise||[0,0])[i-2],0,1)),x=P.X(m-5+0.5)-26,cut=n>100,top=cut?P.Y(91):P.Y(n*r);if(r<=0)return;
+    m9_block(ctx,x,top,P.y1,52,cut);wc_T(ctx,s,x+26,P.y1+46,{w:600,size:28,align:"center",col:WC_MUTED});
+    withA(ctx,clamp(r*3-2,0,1),()=>wc_T(ctx,String(n),x+26,top-(cut?8:14),{w:800,size:30,align:"center",col:WC_DARK}));});
+  // the limit, dashed in the iron bars' grey, drawn on, with its name
+  const lp=clamp(o.lim||0,0,1);if(lp>0){ctx.save();ctx.strokeStyle=rgba(M9_IRON,0.95);ctx.lineWidth=3.5;ctx.setLineDash([16,10]);ctx.beginPath();ctx.moveTo(P.x0,P.Y(50));ctx.lineTo(lerp(P.x0,P.x1,ease(lp)),P.Y(50));ctx.stroke();ctx.restore();
+    withA(ctx,clamp(lp*2-1,0,1),()=>wc_T(ctx,"limit: 50",P.x1,P.Y(50)-16,{w:800,size:30,align:"right",col:M9_IRON}));}
+  return P;}
+// an application, in amber, and its route
+function m9_app(ctx,x,y,w,h,sub,seed){const tW=tw(ctx,"Application",30,800);wc_panel(ctx,x,y,w,h,{kind:"card",role:WC_ROLE.applicant,sw:tW+36,seed});
+  wc_T(ctx,"Application",x+32,y+48,{w:800,size:30,col:WC_DARK});wc_T(ctx,sub,x+32,y+96,{w:600,size:28,col:WC_MUTED});}
+// the number it gives whoever applies, a new one each beat from t0, stamped in the student's ink
+function m9_stamping(ctx,t,cx,cy,t0,base,beat){if(t<t0)return;const k=Math.floor((t-t0)/beat);m9_stamp(ctx,t,cx,cy,t0+k*beat,"S-"+(base+k),{size:30,col:WC_ROLEINK.student,rot:-0.05+0.03*(k%3)});}
+// the step the application gains: it looks for the person first, the glass moving over what's already known
+function m9_glass(ctx,x,y,s,col){ctx.save();ctx.strokeStyle=rgba(col||WC_INK,0.9);ctx.lineWidth=4*s;ctx.lineCap="round";ctx.beginPath();ctx.arc(x,y,15*s,0,TAU);ctx.stroke();
+  ctx.lineWidth=6*s;ctx.beginPath();ctx.moveTo(x+11*s,y+11*s);ctx.lineTo(x+24*s,y+24*s);ctx.stroke();ctx.restore();}
+function m9_search(ctx,t,x,y,w,h,sweep){wc_panel(ctx,x,y,w,h,{kind:"card",seed:12});const k=Math.sin(t*3.2)*sweep;m9_glass(ctx,x+54+k*8,y+h/2-4+Math.cos(t*3.2)*sweep*4,1.1);
+  wc_T(ctx,"search first",x+100,y+h/2+11,{w:800,size:30,col:WC_DARK});}
+// Mei's queue: a few cases, each a pair of records waiting for her to decide, stacked
+function m9_stack(ctx,x,y,n){for(let i=n-1;i>=0;i--){const ox=i*12,oy=-i*12;wc_panel(ctx,x+ox,y+oy,156,86,{kind:"card",seed:30+i});
+  wc_panel(ctx,x+ox+16,y+oy+23,56,40,{kind:"chip",role:WC_ROLE.applicant,seed:i});wc_panel(ctx,x+ox+84,y+oy+23,56,40,{kind:"chip",role:WC_ROLE.student,seed:i+5});}}
+// a small picture of the river's split, in the dry season, cut from the valley: the river going down the outer channel, the inner one
+// closed and being dug out; returns where a point of the valley lands in it
+const M9_INSET={x:600,y:338,w:700,h:394};
+// (the valley under it is painted at twice the inset's size, so it stays sharp drawn large)
+function m9_insetTex(){const C=M9_INSET;return wc_kept("insetDry",C.w*2,C.h*2,q=>{q.scale(2,2);q.translate(-C.x,-C.y);m9_valley(q,{dry:true});});}
+function m9_inset(ctx,t,x,y,w,h){const C=M9_INSET,s=w/C.w;wc_panel(ctx,x-12,y-12,w+24,h+24,{kind:"sheet",seed:19});
+  ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();ctx.translate(x,y);ctx.scale(s,s);ctx.translate(-C.x,-C.y);ctx.drawImage(m9_insetTex(),C.x,C.y,C.w,C.h);
+  m9_tripods(ctx,t,-9,1e9);m9_diggers(ctx,t,-9,1);m9_flow(ctx,t,M9_MAIN,M9_WMAIN,40,80,3,1,0.34,M9_SEEN);m9_gravel(ctx,t,-9,1,true);ctx.restore();
+  wc_ink(ctx,wc_rect(x,y,w,h),true,1.8,WC_PENCIL,0.7,23,0.5);return(px,py)=>[x+(px-C.x)*s,y+(py-C.y)*s];}
+
+/* ---------- 5, 6 and 10. the steward's measures ---------- */
+// the dashboard on Mei's wall: six places, five gauges and the tools; each gauge is a column with its level, and an iron bar lying across
+// it at its limit, as in the river's bed; beside it, what it measures, its value and limit, what it's read from, and whether it's within
+// its limit (a tick in green ink) or past it (a cross in red ink), said in words too
+const M9_DB={x:60,y:70,w:1300,h:780};
+function m9_cell(i){return[80+(i%3)*424,92+Math.floor(i/3)*364,414,350];}
+const M9_G=[{l:["new duplicates","this intake"],v:"29",lim:"limit: 50",src:"from the queue",max:80,n:29,bar:50},
+  {l:["oldest case","in the queue"],v:"3 days",lim:"limit: 10 days",src:"from the queue",max:16,n:3,bar:10},
+  {l:["roles past","their end date"],v:"0",lim:"limit: 0",src:"from the role table",max:4,n:0,bar:0},
+  {l:["values with","no source"],v:"0",lim:"limit: 0",src:"from the tests",max:4,n:0,bar:0},
+  {l:["requests","answered on time"],v:"14 of 14",lim:"limit: all of them",src:"from the request log",max:16,n:14,bar:14}];
+const M9_LEVEL=[150,172,204];
+function m9_levelTex(){return wc_kept("level",160,520,q=>{q.scale(2,2);wc_wash(q,wc_rect(4,4,72,252),M9_LEVEL,{kind:"swatch",line:false,a:0.8,seed:13});});}
+function m9_barPic(){return wc_kept("ironBar",248,48,q=>{q.scale(2,2);q.translate(6,6);[[0,0],[58,1]].forEach(([x,y],i)=>wc_wash(q,wc_rrPts(x,y,54,11,5),i?wc_lit(M9_IRON,0.08):M9_IRON,{kind:"iron",lw:1.2,seed:7+i}));});}
+function m9_gauge(ctx,t,i,o){o=o||{};const g=Object.assign({},M9_G[i],o.g||{}),[x,y,w,h]=o.box||m9_cell(i),lit=o.lit||0,n=o.n==null?g.n:o.n;
+  wc_panel(ctx,x,y,w,h,{kind:"card",seed:40+i});if(lit>0.01)withA(ctx,lit,()=>wc_panel(ctx,x,y,w,h,{kind:"card",wash:WC_BADGE,washA:0.34,seed:40+i}));
+  const cx=x+30,cy=y+52,cw=66,ch=250,lv=clamp(n/g.max,0,1),by=cy+ch-ch*g.bar/g.max;
+  ctx.save();wc_tr(ctx,wc_rrPts(cx,cy,cw,ch,8));ctx.fillStyle=rgba([246,243,234],1);ctx.fill();ctx.clip();if(lv>0)ctx.drawImage(m9_levelTex(),0,260*(1-lv),80,260*lv,cx-6,cy+ch*(1-lv),80,ch*lv+4);ctx.restore();
+  wc_ink(ctx,wc_rrPts(cx,cy,cw,ch,8),true,2,WC_PENCIL,0.8,11+i,0.8);
+  // the iron bar, laid across at its limit (o.barIn: as it's laid)
+  const bi=o.barIn==null?1:o.barIn;if(bi>0)withA(ctx,clamp(bi*3,0,1),()=>ctx.drawImage(m9_barPic(),cx+cw/2-62,by-12-26*(1-ease(bi)),124,24));
+  const tx=x+126;g.l.forEach((s,k)=>wc_T(ctx,s,tx,y+66+k*36,{w:800,size:30,col:WC_DARK}));wc_T(ctx,g.v,tx,y+172,{w:800,size:48,col:WC_DARK});
+  wc_T(ctx,g.lim,tx,y+216,{w:600,size:28,col:WC_INK});wc_T(ctx,g.src,tx,y+256,{w:600,size:28,col:WC_MUTED});
+  const ok=o.ok==null?1:o.ok,past=o.past||0;
+  if(past>0.01){wc_cross(ctx,tx+18,y+298,30,WC_NO,clamp(past/0.4,0,1));withA(ctx,clamp((past-0.3)/0.5,0,1),()=>wc_T(ctx,"past its limit",tx+46,y+308,{w:700,size:28,col:WC_NO}));}
+  else if(ok>0){wc_tick(ctx,tx+18,y+296,30,WC_ROLEINK.alumna,clamp(ok/0.4,0,1),4);withA(ctx,clamp((ok-0.3)/0.5,0,1),()=>wc_T(ctx,"within its limit",tx+46,y+308,{w:700,size:28,col:WC_ROLEINK.alumna}));}}
+// the tools, each a card with its logo: dbt writes and tests the measures; Databricks runs them, keeps them and shows them
+function m9_tool(ctx,x,y,w,h,k,name,lines){wc_panel(ctx,x,y,w,h,{kind:"card",seed:k.length+50});logo(ctx,k,x+24,y+20,46);wc_T(ctx,name,x+84,y+56,{w:800,size:32,col:WC_DARK});
+  lines.forEach((s,i)=>wc_T(ctx,s,x+24,y+104+i*36,{w:600,size:28,col:WC_INK}));}
+// a tutor's role, its term contract ended, still active: the kind of thing the third measure finds; o.ring draws the pencil round it, o.close
+// closes it
+function m9_tutor(ctx,t,x,y,o){const cl=o.close||0,a=clamp(1-cl*2,0,1),b=clamp(cl*2-1,0,1);withA(ctx,1-0.45*cl,()=>wc_chip(ctx,x,y,346,58,"tutor","term contract ended",null,{seed:3}));
+  // one word, then the other: "still active" goes before "closed" comes, so the two never show at once
+  if(a>0.01)withA(ctx,a,()=>wc_badge(ctx,x,y+110,"still active"));if(b>0.01)withA(ctx,b,()=>{wc_tick(ctx,x+22,y+108,30,WC_ROLEINK.alumna,b,4);wc_badge(ctx,x+48,y+110,"closed");});
+  wc_ring(ctx,x+173,y+72,236,98,o.ring||0,{seed:5});}
+// the alert, as it arrives on Monday at seven: which measure, how far it's gone, and its limit
+function m9_bell(ctx,x,y){ctx.save();ctx.strokeStyle=rgba(WC_INK,0.9);ctx.fillStyle=rgba(wc_lit(WC_NO,0.55),1);ctx.lineWidth=2.6;ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(x-13,y+8);
+  ctx.quadraticCurveTo(x-12,y-14,x,y-15);ctx.quadraticCurveTo(x+12,y-14,x+13,y+8);ctx.lineTo(x+16,y+11);ctx.lineTo(x-16,y+11);ctx.closePath();ctx.fill();ctx.stroke();
+  ctx.beginPath();ctx.arc(x,y+15,4,0,TAU);ctx.stroke();ctx.restore();}
+function m9_alert(ctx,x,y){const w=520,h=196,tW=tw(ctx,"alert · Monday 7:00",30,800);wc_panel(ctx,x,y,w,h,{kind:"card",role:WC_NO,sw:tW+92,seed:61});m9_bell(ctx,x+50,y+38);
+  wc_T(ctx,"alert · Monday 7:00",x+80,y+48,{w:800,size:30,col:WC_DARK});wc_T(ctx,"the queue's oldest case: 12 days",x+32,y+112,{w:600,size:28,col:WC_INK});
+  wc_T(ctx,"its limit: 10",x+32,y+156,{w:600,size:28,col:WC_MUTED});}
+// the case: two records the queue couldn't decide alone, their birth dates one digit apart; the note on it, and its stamp
+function m9_case(ctx,t,x,y,o){wc_panel(ctx,x,y,900,380,{kind:"sheet",seed:66});
+  [["student","Student","S-21388","born 3 June"],["researcher","Researcher","E-5263","born 8 June"]].forEach(([r,title,id,bd],i)=>{const cx=x+30+i*440;
+    wc_roleCard(ctx,cx,y+36,400,180,r,title,id,null,{note:"Daniel Okoye",seed:i+3});wc_T(ctx,bd,cx+32,y+180,{w:600,size:28,col:WC_INK});
+    wc_ring(ctx,cx+32+tw(ctx,"born ",28,600)+tw(ctx,bd.slice(5),28,600)/2,y+170,62,26,o.ring||0,{seed:7+i,col:WC_NO});});
+  // the note: waiting, then what HR said
+  const nx=x+30,ny=y+252,nw=360;wc_panel(ctx,nx,ny,nw,92,{kind:"card",wash:WC_BADGE,washA:0.5,seed:68});const hr=o.hr||0;
+  withA(ctx,1-hr,()=>wc_hand(ctx,"waiting for HR",nx+26,ny+58,{size:32,w:700,col:WC_INK}));withA(ctx,hr,()=>wc_hand(ctx,"HR: 3 June, a typo",nx+26,ny+58,{size:32,w:700,col:WC_INK,p:clamp(hr*1.4,0,1)}));
+  m9_stamp(ctx,t,x+664,y+302,o.ts==null?1e9:o.ts,"linked · reason kept",{size:30});}
+
+/* ---------- 7. a list from outside, and a change to the university's ---------- */
+// the government's list of visa types, its title on the public sector's green-blue; its new row, when it's added (o.add)
+function m9_govList(ctx,t,x,y,o){wc_panel(ctx,x,y,680,370,{kind:"card",role:WC_IND.public,sw:648,sh:92,seed:73});
+  wc_T(ctx,"visa types",x+36,y+54,{w:800,size:32,col:WC_DARK});wc_T(ctx,"the government's list",x+36,y+92,{w:600,size:28,col:WC_DARK});
+  ["student visa","graduate visa","visitor visa"].forEach((s,i)=>wc_T(ctx,s,x+40,y+156+i*48,{w:600,size:28,col:WC_INK}));
+  const a=o.add||0;if(a>0.01)arrive(ctx,x+200,y+300,t,o.tAdd,()=>{wc_T(ctx,"graduate research visa",x+40,y+310,{w:700,size:28,col:WC_DARK});
+    wc_badge(ctx,x+60+tw(ctx,"graduate research visa",28,700),y+300,"new");},{dy:10});}
+// the university's own list: each visa type with its fee category; the new row joins it (o.join), carried from the change
+const M9_UNIROWS=[["student visa","international fees"],["graduate visa","international fees"],["visitor visa","not eligible"]];
+function m9_uniList(ctx,t,x,y,o){wc_panel(ctx,x,y,680,330,{kind:"card",role:WC_IND.uni,sw:648,sh:92,seed:75});
+  wc_T(ctx,"visa types",x+36,y+54,{w:800,size:32,col:WC_DARK});wc_T(ctx,"the university's list",x+36,y+92,{w:600,size:28,col:WC_DARK});
+  M9_UNIROWS.forEach(([a,b],i)=>{wc_T(ctx,a,x+40,y+156+i*44,{w:600,size:28,col:WC_INK});wc_T(ctx,b,x+640,y+156+i*44,{w:600,size:28,align:"right",col:WC_INK});});}
+// the change an agent drafts, typed in as o.type goes 0 to 1: what, its evidence, and whose decision it is; the owner's tick (o.ok)
+const M9_CHG=[["Map a new visa type",34,800,WC_DARK],["graduate research visa",30,700,WC_DARK],["→ international fees",30,700,WC_DARK],
+  ["the government's notice",28,600,WC_MUTED],["closest value: student visa",28,600,WC_MUTED],["for: the admissions office",28,600,WC_INK]],M9_CHGY=[112,166,206,268,306,358];
+function m9_change(ctx,t,x,y,o){wc_panel(ctx,x,y,620,476,{kind:"card",seed:71});wc_badge(ctx,x+32,y+44,"drafted by an agent");
+  const n=M9_CHG.length,ty=clamp(o.type||0,0,1)*n;M9_CHG.forEach(([s,size,wt,col],i)=>{const p=clamp(ty-i,0,1);if(p>0)wc_T(ctx,typeOn(s,p),x+32,y+M9_CHGY[i],{w:wt,size,col});});
+  ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.3);ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+32,y+232);ctx.lineTo(x+588,y+232);ctx.stroke();ctx.restore();
+  const ok=o.ok||0;if(ok>0){wc_tick(ctx,x+52,y+418,34,WC_ROLEINK.alumna,clamp(ok/0.4,0,1),4.5);withA(ctx,clamp((ok-0.3)/0.5,0,1),()=>wc_T(ctx,"approved by the admissions office",x+84,y+430,{w:700,size:28,col:WC_ROLEINK.alumna}));}}
+
+/* ---------- 8. the governance scorecard ---------- */
+// a row for each domain: its owner, and how many of its measures are within their limits; the person's row arrives (o.row), lit
+const M9_SC=[["course","academic registrar","6 of 6"],["fees","finance office","4 of 4"],["research","research office","5 of 6"]],M9_SCX=[40,260,660];
+function m9_scorecard(ctx,t,x,y,o){wc_panel(ctx,x,y,1240,560,{kind:"sheet",seed:81});wc_T(ctx,"governance scorecard",x+40,y+66,{w:800,size:36,col:WC_DARK});
+  ["domain","owner","within limits"].forEach((s,i)=>wc_T(ctx,s,x+M9_SCX[i],y+132,{w:600,size:28,col:WC_MUTED}));
+  ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.35);ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+36,y+152);ctx.lineTo(x+1204,y+152);ctx.stroke();ctx.restore();
+  M9_SC.forEach((r,i)=>r.forEach((s,k)=>wc_T(ctx,s,x+M9_SCX[k],y+204+i*60,{w:k?600:800,size:30,col:WC_INK})));
+  const ra=o.row||0;if(ra>0.01)arrive(ctx,x+620,y+410,t,o.tRow,()=>{wc_panel(ctx,x+20,y+364,1200,76,{kind:"card",wash:WC_BADGE,washA:0.4,seed:83});
+    ["person","Mei's office","5 of 5"].forEach((s,k)=>wc_T(ctx,s,x+M9_SCX[k],y+414,{w:800,size:30,col:WC_DARK}));},{dy:14});}
+
+/* ---------- 9. elsewhere ---------- */
+// a bank's duplicate customers over twelve years: they climb, and a clean-up every three years takes them back down; after one check at
+// entry, they stay down. The line is drawn to year p*12; the chart's title is on the right, clear of the tag over the clean-ups
+function m9_bankAt(y){if(y>=9.4)return 0.07+0.02*Math.sin(y*5);const k=y%3;return y<0.02?0.04:lerp(0.06,0.94,Math.pow(k/3,0.8));}
+function m9_bankLine(ctx,t,b,p){const x0=b.x+60,x1=b.x+b.w-60,y0=b.y+120,y1=b.y+b.h-60,X=v=>lerp(x0,x1,v/12),Y=v=>lerp(y1,y0,v);wc_panel(ctx,b.x,b.y,b.w,b.h,{kind:"sheet",seed:91});
+  wc_T(ctx,"a bank's duplicate customers",b.x+b.w-40,b.y+64,{w:800,size:32,col:wc_dim(WC_IND.bank,0.25),align:"right"});
+  ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.8);ctx.lineWidth=2.2;ctx.beginPath();ctx.moveTo(x0,y0-12);ctx.lineTo(x0,y1);ctx.lineTo(x1,y1);ctx.stroke();ctx.restore();
+  const yE=clamp(p,0,1)*12;if(yE<=0)return{X,Y};const pts=[];for(let v=0;v<=yE+1e-6;v+=0.05){if(v>0&&Math.abs(v%3)<0.05&&v<9.2){pts.push([X(v-0.001),Y(m9_bankAt(v-0.06))]);}pts.push([X(v),Y(m9_bankAt(v))]);}
+  ctx.save();ctx.strokeStyle=rgba(WC_IND.bank,0.95);ctx.lineWidth=5;ctx.lineCap="round";ctx.lineJoin="round";wc_trOpen(ctx,pts);ctx.stroke();ctx.restore();return{X,Y};}
+// another industry with the same picture: a chip in its colour, with the same climb and fall, small, beside its name
+function m9_indChip(ctx,x,y,ind,label){const w=Math.round(tw(ctx,label,30,800)+150);wc_chip(ctx,x,y,w,60,WC_IND[ind],label,null,{seed:label.length});
+  const sx=x+w-104,sy=y+44;ctx.save();ctx.strokeStyle=rgba(wc_dim(WC_IND[ind],0.3),0.95);ctx.lineWidth=3;ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(sx,sy);
+  for(let i=0;i<3;i++){ctx.lineTo(sx+i*26+22,sy-26);ctx.lineTo(sx+i*26+24,sy);}ctx.lineTo(sx+90,sy-2);ctx.stroke();ctx.restore();return w;}

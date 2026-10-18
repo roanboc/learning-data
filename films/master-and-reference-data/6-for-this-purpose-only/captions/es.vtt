@@ -1,0 +1,157 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:07.274
+Hace unos dos mil años, el Charaka Samhita de la India, un libro de medicina, dejó escrito un juramento.
+
+00:00:08.574 --> 00:00:13.680
+Un maestro se lo daba a cada alumno nuevo, junto al fuego sagrado, antes de enseñarle nada.
+
+00:00:14.980 --> 00:00:20.334
+Una línea dice: las costumbres propias del hogar del paciente no se harán públicas.
+
+00:00:21.934 --> 00:00:25.885
+Un sanador entra en una casa para curar, y ve cómo vive la familia.
+
+00:00:27.485 --> 00:00:28.742
+Eso se queda en esa casa.
+
+00:00:30.442 --> 00:00:33.941
+Lo que aprendes para un propósito no es tuyo para cualquier propósito.
+
+00:00:41.241 --> 00:00:47.377
+Hoy, en la universidad. Desarrollo, la oficina de egresados, prepara una campaña para una nueva beca.
+
+00:00:48.577 --> 00:00:53.775
+Owen, que la dirige, pide a la oficina de registro los mejores alumnos del año, para destacarlos.
+
+00:00:54.975 --> 00:01:00.012
+Sus notas se reunieron para enseñarles y otorgarles sus títulos, no para recaudar fondos.
+
+00:01:01.112 --> 00:01:03.918
+Pero nada en los datos lo dice, y la lista sale.
+
+00:01:07.218 --> 00:01:11.628
+Ese mismo mes, el correo de la campaña llega a los estudiantes y egresados de la facultad.
+
+00:01:12.928 --> 00:01:16.335
+Le llega a Linh, como estudiante. Volvió para hacer una maestría.
+
+00:01:17.835 --> 00:01:23.732
+Cuando se graduó en 2022, pidió a la oficina de egresados que no le pidieran donaciones.
+
+00:01:25.232 --> 00:01:29.112
+Lo anotaron en su registro de egresada. El sistema de estudiantes nunca se enteró.
+
+00:01:30.812 --> 00:01:34.983
+Sus registros ya están vinculados, pero su deseo se anotó en uno de ellos, no en ella.
+
+00:01:38.583 --> 00:01:43.332
+Así que la universidad escribe su propio juramento en datos: para qué son los de cada rol.
+
+00:01:44.532 --> 00:01:47.065
+Las notas de la estudiante: enseñanza y titulación.
+
+00:01:47.765 --> 00:01:51.262
+Los datos de la egresada: noticias, eventos y donaciones.
+
+00:01:51.962 --> 00:01:53.742
+El sueldo de la tutora: empleo.
+
+00:01:54.442 --> 00:01:57.491
+Los datos de la investigadora: su proyecto, como aceptó.
+
+00:01:58.591 --> 00:02:01.899
+Cada propósito viene de una sola lista, con un responsable y una fecha.
+
+00:02:03.099 --> 00:02:06.802
+Un equipo usa los datos de un rol solo para un propósito escrito en él.
+
+00:02:07.902 --> 00:02:11.017
+Así, la campaña puede abrir la puerta de la egresada, y no otra.
+
+00:02:14.717 --> 00:02:17.640
+Y los deseos de Linh van en la persona, no en un rol.
+
+00:02:18.840 --> 00:02:23.944
+Cada uno es un dato: qué pidió, para qué propósito, cuándo, a quién, y cómo cambiarlo.
+
+00:02:25.444 --> 00:02:28.726
+Su no a las donaciones también cierra la puerta de la egresada.
+
+00:02:30.226 --> 00:02:35.599
+Un no que dio a la oficina de egresados ahora vale dondequiera que aparezca, hasta que lo cambie.
+
+00:02:38.899 --> 00:02:44.156
+En la plataforma, Jun escribe cada propósito en dbt, como una etiqueta en las columnas.
+
+00:02:45.456 --> 00:02:49.430
+Una prueba falla si una columna con datos personales no tiene propósito.
+
+00:02:51.130 --> 00:02:54.188
+Luego, dos políticas en Unity Catalog leen las etiquetas.
+
+00:02:55.188 --> 00:02:59.171
+Una le oculta al equipo de campañas cada columna etiquetada para enseñanza.
+
+00:03:00.471 --> 00:03:03.182
+La otra deja fuera a cualquiera cuyos deseos digan que no.
+
+00:03:04.482 --> 00:03:08.153
+Cada una se escribe una vez, y toda tabla con esas etiquetas la sigue.
+
+00:03:11.453 --> 00:03:14.898
+Así, la siguiente campaña va a egresados, como su rol permite.
+
+00:03:15.998 --> 00:03:19.085
+Selecciona a 2.140 de ellos.
+
+00:03:20.385 --> 00:03:25.165
+37 quedan fuera, porque su no está en la persona, y Linh está entre ellos.
+
+00:03:26.665 --> 00:03:28.887
+Las notas de los mejores se quedan en la enseñanza.
+
+00:03:33.187 --> 00:03:36.366
+Luego Linh pregunta a la universidad qué guarda sobre ella.
+
+00:03:37.666 --> 00:03:41.171
+Antes eran cuatro oficinas, cada una buscando en su propio sistema.
+
+00:03:42.871 --> 00:03:46.765
+Ahora la oficina de Mei parte de la persona, y los vínculos encuentran cada rol.
+
+00:03:48.465 --> 00:03:51.804
+Cada valor vuelve diciendo de dónde vino y para qué es.
+
+00:03:53.404 --> 00:03:56.213
+Una corrección va a la oficina que mantiene ese valor.
+
+00:03:57.813 --> 00:04:00.206
+Su respuesta está lista en días, no semanas.
+
+00:04:01.706 --> 00:04:05.465
+Si pidiera que la olvidaran, cada rol guardaría solo lo que debe.
+
+00:04:06.665 --> 00:04:11.363
+Su título para siempre, y los datos de su proyecto mientras sus reglas lo exijan.
+
+00:04:15.263 --> 00:04:17.186
+Toda industria tiene estas puertas.
+
+00:04:18.086 --> 00:04:23.038
+La tarjeta de puntos de una tienda era para descuentos, no para decidir quién recibe crédito.
+
+00:04:24.338 --> 00:04:26.892
+Un paciente de un hospital aceptó un estudio.
+
+00:04:27.892 --> 00:04:29.389
+El siguiente pregunta de nuevo.
+
+00:04:32.689 --> 00:04:34.885
+Lo que vio el sanador se quedó dentro de la casa.
+
+00:04:36.385 --> 00:04:41.406
+La universidad mantiene los datos de cada rol dentro de su propósito, y los deseos de Linh con ella.
+
+00:04:43.006 --> 00:04:46.183
+Los datos dados para un rol no son libres para todo rol.

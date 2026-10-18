@@ -1,0 +1,29 @@
+{
+  "kicker": "Purpose and consent, on each role and on the person",
+  "kicker_es": "Propósito y consentimiento, en cada rol y en la persona",
+  "title_es": "Solo para este propósito",
+  "h1": "For this purpose only: each role's data used for what it was given for, and the person's wishes kept with her",
+  "h1_es": "Solo para este propósito: los datos de cada rol usados para lo que se dieron, y los deseos de la persona guardados con ella",
+  "lead": "Advancement plans an appeal and takes this year's top students' results, collected to teach them and award their degrees. The appeal's email reaches Linh as a student, although she told the alumni office in 2022 not to ask her for donations: her no was written on her alumni record, and the student system never heard it. Write each role's purposes beside its data, from one list, and keep the person's wishes on the person. Then dbt tags the columns, two policies in Unity Catalog read the tags, and her request to see what the university holds about her is answered from the person.",
+  "lead_es": "Desarrollo, la oficina de egresados, prepara una campaña y toma las notas de los mejores estudiantes del año, que se reunieron para enseñarles y otorgarles sus títulos. El correo de la campaña le llega a Linh como estudiante, aunque en 2022 pidió a la oficina de egresados que no le pidieran donaciones: su no se anotó en su registro de egresada, y el sistema de estudiantes nunca se enteró. Escribe los propósitos de cada rol junto a sus datos, desde una sola lista, y guarda los deseos de la persona en la persona. Luego dbt etiqueta las columnas, dos políticas en Unity Catalog leen las etiquetas, y su pedido de saber qué guarda la universidad sobre ella se responde desde la persona.",
+  "description": "A film about purpose and consent in master data: an oath from India's Charaka Samhita; an appeal that takes students' results given for teaching; a no to fundraising written on one record and missed by another; each role's purposes written beside its data, from one list; the person's wishes kept on the person; purposes as tags in dbt, and two policies in Unity Catalog that read them; a request to see what the university holds, answered from the person; and the same rule in a shop and a hospital.",
+  "description_es": "Una película sobre propósito y consentimiento en los datos maestros: un juramento del Charaka Samhita de la India; una campaña que toma notas de estudiantes dadas para la enseñanza; un no a las donaciones anotado en un registro y que otro no vio; los propósitos de cada rol escritos junto a sus datos, desde una sola lista; los deseos de la persona guardados en la persona; los propósitos como etiquetas en dbt, y dos políticas en Unity Catalog que las leen; un pedido de saber qué guarda la universidad, respondido desde la persona; y la misma regla en una tienda y en un hospital.",
+  "card": "Data given for one role isn't free for every role. Write each role's purposes beside its data, and keep the person's wishes with her.",
+  "card_es": "Los datos dados para un rol no son libres para todo rol. Escribe los propósitos de cada rol junto a sus datos, y guarda los deseos de la persona con ella.",
+  "chapters_es": {
+    "house": "Lo que se queda en la casa",
+    "appeal": "Una campaña",
+    "wish": "Un deseo que quedó atrás",
+    "purposes": "Para qué es cada rol",
+    "wishes": "Deseos en la persona",
+    "platform": "Escrito en la plataforma",
+    "again": "La campaña, otra vez",
+    "request": "¿Qué guardan sobre mí?",
+    "elsewhere": "En otros lugares",
+    "only": "Solo para este propósito"
+  },
+  "past": ["India's Charaka Samhita, about two thousand years ago", "What a healer sees in a home stays in that home."],
+  "past_es": ["El Charaka Samhita de la India, hace unos dos mil años", "Lo que un sanador ve en una casa se queda en esa casa."],
+  "next_h": "You've kept each role's data to its purpose, and her wishes with her. More films in the series are on the way.",
+  "next_h_es": "Mantuviste los datos de cada rol en su propósito, y sus deseos con ella. Vienen más películas de la serie."
+}

@@ -50,7 +50,7 @@ Watercolour, the series' own ([reference frames](../look/)), with the role colou
 
 ## Script
 
-### 1 · What stays in the house · 0:00–0:44
+### 1 · What stays in the house · 0:00–0:40
 
 **Narration.** About two thousand years ago, India's Charaka Samhita, a book of medicine, set down an oath. A teacher gave it to each new student, by the sacred fire, before teaching them anything. One line says: the peculiar customs of the patient's household shall not be made public. A healer comes into a home to heal, and sees how the family lives. It stays in that home. What you learn for one purpose isn't yours for every purpose.
 
@@ -58,75 +58,75 @@ Watercolour, the series' own ([reference frames](../look/)), with the role colou
 
 **On screen.** about 2,000 years ago · India · Charaka Samhita · the peculiar customs of the patient's household shall not be made public · from the oath, in translation · to heal · For this purpose only · Film 6 of 9
 
-### 2 · An appeal · 0:44–1:07
+### 2 · An appeal · 0:40–1:06
 
 **Narration.** Today, at the university. Advancement, the alumni office, plans an appeal for a new scholarship. Owen, who runs it, asks the registry for this year's top students, to feature them. Their results were collected to teach them and award their degrees, not to raise money. But nothing in the data says so, and the list goes.
 
-**Picture.** The campus in daylight, "today · the university". Owen, edged in gold, and his card. The appeal's card, its title on a magenta stroke: *Scholarship appeal · health informatics*. A request types itself in: "this year's top students". The student system's card, *Results*, in teal, and on it an empty, dashed tag where a purpose would be. The list leaves it and settles on the appeal: *top students · 24*.
+**Picture.** The campus in daylight, "today · the university". Owen, edged in gold, and his card. The appeal's card, its title on a magenta stroke: *Scholarship appeal · health informatics*. A request types itself in: "this year's top students". The student system's card, *Results*, in teal, and on it an empty, dashed tag where a purpose would be; under it, in a hand outside the data, "given for teaching and awards", and a pencil ring finds the empty tag. The list leaves it and settles on the appeal: *top students · 24*.
 
-**On screen.** today · the university · Owen Price · Advancement · Scholarship appeal · health informatics · this year's top students · Results · student system · top students · 24
+**On screen.** today · the university · Owen Price · Advancement · Scholarship appeal · health informatics · this year's top students · Results · student system · given for teaching and awards · top students · 24
 
-### 3 · A wish left behind · 1:07–1:40
+### 3 · A wish left behind · 1:06–1:38
 
 **Narration.** The same month, the appeal's email goes to the faculty's students and alumni. It reaches Linh, as a student. She's back for a master's. When she graduated in 2022, she asked the alumni office not to ask her for donations. They wrote it on her alumni record. The student system never heard it. Her records are linked now, but the wish was written on one of them, not on her.
 
-**Picture.** Linh on the campus path, her phone in her hand. The email arrives beside her, magenta: *Give to the new scholarship*, "to: Linh Nguyen, student". Her two records: *Alumna · S-17142 · since 2022*, with a note pinned to it, "no fundraising · Dec 2022", and *Student · S-20436 · master's, from Jul 2025*, with none. The email's line runs from the student record to her phone. A pencil line sets out from the note towards the student record and stops at a red cross. Then a teal line joins the two records, "linked: one person", and a pencil ring finds the note, still on the alumni record. A quiet pulse runs under the chapter.
+**Picture.** Linh on the campus path, her phone in her hand. The email, magenta, *Give to the new scholarship*, goes "to: students and alumni"; it reaches her through her student record and settles beside her phone, "to: Linh Nguyen, student", and she frowns. Her two records: *Alumna · S-17142 · since 2022*, with a note pinned to it, "no fundraising · Dec 2022", and *Student · S-20436 · master's, from Jul 2025*, with none. The email's line runs from the student record to her phone. A pencil line sets out from the note towards the student record and stops at a red cross. Then a teal line joins the two records, "linked: one person", and a pencil ring finds the note, still on the alumni record. A quiet pulse runs under the chapter.
 
-**On screen.** Advancement · Give to the new scholarship · to: Linh Nguyen, student · Alumna · S-17142 · since 2022 · no fundraising · Dec 2022 · Student · S-20436 · master's, from Jul 2025 · linked: one person
+**On screen.** today · the university · Advancement · Give to the new scholarship · to: students and alumni · to: Linh Nguyen, student · Alumna · S-17142 · since 2022 · no fundraising · Dec 2022 · Student · S-20436 · master's, from Jul 2025 · linked: one person
 
-### 4 · What each role is for · 1:40–2:15
+### 4 · What each role is for · 1:38–2:14
 
 **Narration.** So the university writes its own oath, as data: what each role's data is for. The student's results: teaching and awards. The alumna's details: news, events and fundraising. The tutor's pay: employment. The researcher's data: her project, as she agreed. Each purpose comes from one list, with an owner and a date. A team may use a role's data only for a purpose written on it. So the appeal can open the alumna's door, and no other.
 
-**Picture.** Paper, with a little sky. Linh as the person, white paper in a pencil line, banded in her roles' colours. Her four records stand around her, each with its values behind a painted door: *Student*, *Alumna*, *Casual tutor*, *Researcher*. As each is named, its purposes are written on the tag on its door. The list of purposes slides in below: *purposes · owner: privacy office · from Mar 2026*. Then the appeal's magenta tag, "fundraising", goes from door to door: the student's stays shut with a soft knock, the alumna's swings open on her details, the tutor's and the researcher's stay shut.
+**Picture.** Paper, with a little sky. Linh as the person, white paper in a pencil line, banded in her roles' colours. Her four records stand around her, each with its values behind a painted door: *Student*, *Alumna*, *Casual tutor*, *Researcher*. As each is named, its purposes are written on the tag on its door. The list of purposes slides in below: *purposes · owner: privacy office · from Mar 2026*. Then the appeal's request, a magenta slip, "fundraising", "from the appeal", goes from door to door: the student's stays shut with a soft knock, the alumna's swings open on her details, the tutor's and the researcher's stay shut.
 
-**On screen.** Student · teaching and awards · Alumna · news, events, fundraising · Casual tutor · employment · Researcher · her project, as agreed · purposes · owner: privacy office · from Mar 2026 · fundraising · only for a purpose written on it
+**On screen.** Student · teaching and awards · Alumna · news, events, fundraising · Casual tutor · employment · Researcher · her project, as agreed · purposes · owner: privacy office · from Mar 2026 · fundraising · from the appeal · only for a purpose written on it
 
-### 5 · Wishes on the person · 2:15–2:40
+### 5 · Wishes on the person · 2:14–2:38
 
 **Narration.** And Linh's wishes go on the person, not on a role. Each one is data: what she asked, for which purpose, when, to whom, and how to change it. Her no to fundraising closes the alumna's door too. A no she gave the alumni office now holds wherever she appears, until she changes it.
 
-**Picture.** The note lifts off the alumni record and settles on Linh's white figure, and opens into its fields, one by one as they're said: *no · fundraising · Dec 2022 · told the alumni office · change it: her settings*. The magenta tag tries the alumna's door again; a pencil latch runs from the note to it, and it stays shut. The latch reaches every one of her doors. A tag settles: "a no, wherever she appears".
+**Picture.** The note lifts off the alumni record and settles on Linh's white figure, and opens into its fields, one by one as they're said: *no · fundraising · Dec 2022 · told the alumni office · change it: her settings*. Her no swings the alumna's door shut, a pencil latch holds it, and the request knocks there in vain. A pencil rail runs from the note on her, under her records, to that door, then on to every door, each with its latch. A tag settles: "a no, wherever she appears", and a pencil ring finds "change it: her settings".
 
 **On screen.** no · fundraising · Dec 2022 · told the alumni office · change it: her settings · a no, wherever she appears
 
-### 6 · Written into the platform · 2:40–3:22
+### 6 · Written into the platform · 2:38–3:10
 
 **Narration.** On the platform, Jun writes each purpose in dbt, as a tag on the columns. A test fails if a column with personal data has no purpose. Then two policies in Unity Catalog read the tags. One hides every column tagged for teaching from the appeals team. The other leaves out anyone whose wishes say no. Each is written once, and every table with those tags follows it.
 
-**Picture.** Jun, edged in cyan, at the left. A dbt YAML card types in: a column, `grade`, with `databricks_tags: {purpose: teaching}`. Beside it, the test: `personal_data_has_a_purpose`, failing on one column, then passing once its tag is written. Two cards in Unity Catalog's SQL slide in, one after the other: a column mask on columns tagged `purpose = teaching`, to `appeals`; a row filter that reads each person's wishes. Then the table as the appeals team sees it: names and emails, the grade column hidden, two rows gone. Last, three tables' names light under the policies: every table with those tags.
+**Picture.** Jun, edged in cyan, at the left. A dbt YAML card types in: the results model's columns, `student_bk`, marked as personal data, and `grade`, with `databricks_tags: {purpose: teaching}`. Beside it, the test: `personal_data_has_a_purpose`, failing on one column, `student_bk`, then passing once its tag is written. Two cards in Unity Catalog's SQL slide in, one after the other: a column mask on columns tagged `purpose = teaching`, to `appeals`; a row filter that reads each person's wishes. Then the table of alumni as the appeals team sees them: names and the emails they gave the alumni office, the final grade hidden, and two rows struck through in red, gone. Last, three tables light under the policies, *results*, *enrolments* and *assessments*: every table with those tags.
 
-**On screen.** dbt · grade · databricks_tags · purpose: teaching · personal_data_has_a_purpose · 1 column with no purpose · passed · Unity Catalog · COLUMN MASK · TO `appeals` · MATCH COLUMNS has_tag_value('purpose', 'teaching') · ROW FILTER · USING COLUMNS (p, 'fundraising') · as the appeals team sees it · hidden · every table with these tags
+**On screen.** Jun Park · analytics engineer · dbt · the model's YAML · stg_student_system__results · student_bk · personal_data: direct · grade · databricks_tags · purpose: teaching · dbt test · personal_data_has_a_purpose · 1 column with no purpose · passed · Unity Catalog · a column mask · a row filter · CREATE POLICY · COLUMN MASK · TO `appeals` · MATCH COLUMNS has_tag_value('purpose', 'teaching') · ROW FILTER · USING COLUMNS (p, 'fundraising') · alumni, as the appeals team sees them · name · email · final grade · hidden · results · enrolments · assessments · every table with these tags
 
-### 7 · The appeal, again · 3:22–3:42
+### 7 · The appeal, again · 3:10–3:32
 
 **Narration.** So the next appeal goes to alumni, as their role allows. It selects 2,140 of them. 37 come off, because their no sits on the person, and Linh is one of them. The top students' results stay with teaching.
 
-**Picture.** The appeal's card, its list counting up: *alumni selected · 2,140*. Then *said no · 37* subtracts, and *to ask · 2,103* settles. In the list, Linh's line is struck through in red ink, her note beside it. The results card, back in teal, with its tag, "teaching and awards", and its door shut. A wordless moment to read the numbers.
+**Picture.** The appeal's card, its count running up: *alumni selected · 2,140*. The alumni's record, its door marked "news, events, fundraising", opens to the appeal's request. Then *said no · 37* subtracts, and *to ask · 2,103* settles. In the list of who was selected, Linh's and Leo's lines are struck through in red ink, each with "no fundraising" beside it, and a pencil ring finds Linh's. The results record, in teal, its door marked "teaching, awards": the request knocks, and it stays shut. A wordless moment to read the numbers.
 
-**On screen.** Scholarship appeal · alumni selected · 2,140 · said no · 37 · to ask · 2,103 · Linh Nguyen · no fundraising · Results · teaching and awards
+**On screen.** Scholarship appeal · to alumni · alumni selected · 2,140 · said no · − 37 · to ask · 2,103 · Sofia Marin · Daniel Osei · Linh Nguyen · Priya Nair · Leo Becker · no fundraising · Alumni · details · news · events · fundraising · Results · student system · teaching · awards
 
-### 8 · What do you hold about me? · 3:42–4:30
+### 8 · What do you hold about me? · 3:32–4:14
 
 **Narration.** Then Linh asks the university what it holds about her. That used to mean four offices, each searching its own system. Now Mei's office starts from the person, and the links find every role. Each value comes back with where it came from, and what it's for. A correction goes to the office that keeps the value. Her answer is ready in days, not weeks. If she asked to be forgotten, each role would keep only what it must. Her degree for good, and her project's data for as long as its rules require.
 
-**Picture.** Mei's office. Linh's request arrives as a card, "What do you hold about me?", dated 3 Nov. Four offices' cards appear dimmed, each with its own search, then step back. Mei, edged in gold, faces the person: Linh's white figure, and from her bands, lines to every record: two student records, the alumna, the casual tutor, the researcher. An answer builds on the right, *What we hold about you*, a section per role, each value with a small label in its source's colour and its purpose. A correction arrow runs from one value back to its office. "answered 7 Nov". Then a chip on each record: *degree · kept for good*, *project data · kept as its rules require*.
+**Picture.** Mei's office, the camera still. Linh's request arrives as a card, "What do you hold about me?", from Linh Nguyen, dated 3 Nov. Four offices' cards appear dimmed, each with its own search, then step back. Mei, edged in gold, turns to the person: Linh's white figure, and from her bands, lines to every record: two student records, the alumna, the casual tutor, the researcher, each with the office that keeps it. An answer builds on the right, *What we hold about you*, a section per role, each with its values, a label in its source's colour and its purpose. A correction arrow in red runs from her address back to the alumni office. "answered 7 Nov". Then, beside each record, what it would keep if she asked to be forgotten, and pencil rings find two: *degree · kept for good*, *project data · kept as its rules require*.
 
-**On screen.** What do you hold about me? · 3 Nov · What we hold about you · Student · Alumna · Casual tutor · Researcher · source · purpose · answered 7 Nov · degree · kept for good · project data · kept as its rules require
+**On screen.** Mei Tanaka · registrar's office · What do you hold about me? · 3 Nov · from Linh Nguyen · registrar's office · alumni office · HR · research office · Student · S-17142 · S-20436 · Alumna · Casual tutor · E-4417 · Researcher · R-3082 · What we hold about you · name, results · for teaching and awards · address, email · for news, events · bank details, pay · for employment · interviews · for her project · answered 7 Nov · degree · kept for good · enrolment · while she studies · her no · so it still holds · pay · as the law requires · project data · kept as its rules require
 
-### 9 · Elsewhere · 4:30–4:48
+### 9 · Elsewhere · 4:14–4:32
 
 **Narration.** Every industry has these doors. A shop's loyalty card was given for discounts, not to decide who gets credit. A hospital patient agreed to one study. The next study asks again.
 
-**Picture.** Two panels. A shop, in orange: a loyalty card behind a door marked "discounts"; a request marked "credit" knocks, and it stays shut. A hospital, in red: a patient's consent behind a door marked "study A"; "study B" knocks and stays shut; a new consent card, "study B · asked", is written, and its own door opens.
+**Picture.** Two panels, the one being told brighter than the other. A shop, in orange: a loyalty card's data, what she buys, behind a door marked "discounts"; a credit check, in the bank's colour, asks; its request, "credit", knocks, and the door stays shut. A hospital, in red: a patient's consent, given for study A, behind a door marked "study A"; "study B" knocks and it stays shut; a new consent, "study B · asked", is written, and its own door opens.
 
-**On screen.** a shop · loyalty card · discounts · credit · a hospital · consent · study A · study B · asked
+**On screen.** a shop · Loyalty card · what she buys · discounts · Credit check · who gets credit · credit · a hospital · Consent · given for study A · study A · study B · asked · the patient's · data, for B
 
-### 10 · For this purpose only · 4:48–5:08
+### 10 · For this purpose only · 4:32–4:53
 
 **Narration.** What the healer saw stayed inside the house. The university keeps each role's data inside its purpose, and Linh's wishes with her. Data given for one role isn't free for every role.
 
-**Picture.** The house from the opening, its door closed on its light. It gives way to Linh as the person, her four doors closed, each with its tag, and her note on her. The cards step back for the last line, which settles onto the end card. Wordless breather. End card.
+**Picture.** The house from the opening, its door closed on its light. It gives way to Linh as the person, her four doors closed, each with its tags, and her note on her, ringed in pencil as her wishes are named. The cards step back for the last line, written below them, which is carried up onto the end card. Wordless breather. End card.
 
 **On screen.** Data given for one role isn't free for every role. · For this purpose only · Film 6 of 9
 
@@ -178,7 +178,17 @@ Four questions, one at the end of each of four chapters, as the site shows them 
 
 ## Built
 
-Built on 17 October 2026, from this script, in watercolour.
+Built on 17 and 18 October 2026, from this script, in watercolour: 4:53, in ten chapters. What changed on the way:
+
+- **Chapter 1.** The healer's feet fall in step with his footsteps on the street. The "to heal" tag fades as the wordless moment begins, so the closed door and its light stand alone before the title.
+- **Chapter 4.** Each door's face is painted once and kept as a picture, so a door swinging on its hinge is the same door as when it's shut. The appeal's request is a slip held up a little askew, with a shadow under it, so it never reads as one of a door's own tags.
+- **Chapter 5.** The pencil rail runs under the records and rises in the gap beside each one to its door's latch, so it never crosses a record's values.
+- **Chapter 6.** The table the policies act on is *alumni, as the appeals team sees them*, with the final grade hidden. The first draft showed the results table with an email in it, which the purposes contradict: results don't hold the email alumni gave the alumni office. The three tables under the policies are *results*, *enrolments* and *assessments*, which the student system has. The policies type in a line at a time, and the test's "passed" stays long enough to read.
+- **Chapter 8** holds still, with no camera move, so Mei's card and the answer stay in the frame as it builds.
+- **Chapter 9.** The credit check wears the bank's colour, as the series' industries do; the shop keeps orange.
+- **Chapter 10.** The last line is written below the doors, then carried up onto the end card, so it's never shown twice.
+- **Captions.** Spanish captions in Latin American Spanish, each at most about a quarter longer than its English line.
+- **Sound.** A new palette (in `source/tools/score.py`): a string section holds the chords, a harp plucks each role on its note in the series, a horn plays the person's D and A, and the clarinet carries the series' mark; from E minor by the fire to E major at the end. The effects are the house's: a book's board, the fire, footsteps, a latch, hinges and a knock, cards and tags, a pencil, a few keys, drawers, a phone. Measured as `tools/audio.py` mixes them: the music sits 21 dB under the voice while it speaks (19 in the pauses), the only pulse, when the appeal's email reaches Linh, 7.5 dB under the music, and the effects' peaks a median 13 dB over the music, close to *The map before the data*'s 14. The mix is -16 LUFS.
 
 ## Next
 

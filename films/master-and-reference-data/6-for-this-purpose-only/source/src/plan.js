@@ -1,6 +1,6 @@
 /* ===== For this purpose only: the places and the pictures of today =====
    The places are painted once and kept (post.js): the plain and the village of the opening (past.js), the campus today, paper with a
-   little sky for the chapters that explain, a second one for the industries, and the privacy office. The pictures are the film's own:
+   little sky for the chapters that explain, a second one for the industries, and the registrar's office. The pictures are the film's own:
    Owen and Jun; the appeal and its email; Linh's records, each with its values behind a door painted in its role's colour and its
    purposes on tags on the door; her wish, a note that moves from her alumni record to her; the list of purposes; the dbt and Unity
    Catalog cards; the table as the appeals team sees it; her request and its answer; and the shop's and the hospital's doors. Every name
@@ -24,7 +24,7 @@ function m6_campus(ctx){const P=WCP;wc_sky(ctx,716,2,{sun:[1560,170]});
 // paper, with a little sky and a strip of land, for the chapters that explain; a second, for the industries
 function m6_plain(ctx){wc_sky(ctx,836,3,{clouds:3});m6_land(ctx,x=>826+16*Math.sin(x/320+1),WCP.far,0.35,{line:false});m6_land(ctx,x=>882+10*Math.sin(x/240),WCP.near,0.75,{line:false,seed:83});}
 function m6_plainB(ctx){wc_sky(ctx,846,7,{clouds:4,cx:120,cw:1680});m6_land(ctx,x=>842+20*Math.sin(x/380+2),WCP.far,0.35,{line:false});m6_land(ctx,x=>898+12*Math.sin(x/260+1),WCP.near,0.75,{line:false,seed:83});}
-// the privacy office, where Mei works: a warm wall, a tall window onto the campus, a floor
+// the registrar's office, where Mei works: a warm wall, a tall window onto the campus, a floor
 function m6_office(ctx){const P=WCP;ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);
   wc_wash(ctx,wc_rect(-40,-40,W+80,900),P.wallIn,{kind:"plaster",line:false,seed:71});wc_wash(ctx,wc_rect(-40,858,W+80,260),P.floor,{kind:"ground",line:false,seed:71});
   wc_wash(ctx,wc_rect(-40,846,W+80,18),wc_dim(P.wallIn,0.14),{kind:"trim",line:false,flat:true,seed:71});

@@ -4,7 +4,7 @@
 
 Linh Nguyen graduated from the university in 2022 and came back to study health informatics, under a new student number that nothing linked to her old one. She tutors a first-year unit, and this year she joined a research project. Four systems hold five records of her, and none of them knows the others are her. Over nine films the university learns to keep the person apart from her roles, decide once who is who and which value wins, date the roles, own the lists that sort people, use each role's data only for its purpose, share one person across its systems, and keep it right, with the same pattern shown in other industries each time. The plan is in the [proposal](proposal.md).
 
-**Status:** the opening film is built and [on the site](https://roanboc.github.io/learning-data/master-and-reference-data/), with four Pause and think questions. Labs and scenarios will come later. On the site, the series sits under the topic *Master and reference data*.
+**Status:** two films are built and [on the site](https://roanboc.github.io/learning-data/master-and-reference-data/), *One person, many roles* and *Which value wins*, each with four Pause and think questions. Labs and scenarios will come later. On the site, the series sits under the topic *Master and reference data*.
 
 ## The films
 
@@ -12,6 +12,7 @@ Linh Nguyen graduated from the university in 2022 and came back to study health 
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [One person, many roles](https://roanboc.github.io/learning-data/master-and-reference-data/one-person-many-roles/) | Master data, and the person behind the role | 6 min | 12 | 4 questions | [script](1-one-person-many-roles/script.md) · [source](1-one-person-many-roles/source/README.md) |
+| [Which value wins](https://roanboc.github.io/learning-data/master-and-reference-data/which-value-wins/) | Survivorship: a rule declared for each field | 6 min | 10 | 4 questions | [script](3-which-value-wins/script.md) · [source](3-which-value-wins/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound
@@ -20,7 +21,7 @@ Linh Nguyen graduated from the university in 2022 and came back to study health 
 - **Colour means something.** Each role has its own colour, the same in every film: student teal, applicant amber, researcher coral, tutor violet, alumna green. The person, as the master record, is the white of the paper in a pencil line, banded in her roles' colours. Each industry has its own colour too. Text is dark ink on paper-light cards, and every colour comes with a label.
 - **People.** Linh, the person the data is about, has no side colour, so she can wear her roles'. Noor, the data architect, is edged in cyan (the technical side); Mei, whose office looks after the person, in gold (the business side).
 - **Made to read on a phone.** Text is at least 28 px in the 1920-pixel frame, the camera moves in on what the narration is about, and `tools/legible.py` checks every frame.
-- **Its own sound.** Chords that bloom note by note, like paint on wet paper; a clarinet for the series' mark, rising 1-8-5-1; a plucked cello note for each role, the same in every chapter; a bowed D and A for the person. Nothing loops, and every effect is something on screen: a quill, a wet brush, paper, a stamp, keys typing an application.
+- **A sound for each film.** Each film has its own palette, and plays the series' mark, rising 1-8-5-1, in its own key and on its own instrument. *One person, many roles*: chords that bloom note by note, like paint on wet paper; the mark on a clarinet; a plucked cello note for each role, the same in every chapter; a bowed D and A for the person. *Which value wins*: a reed organ, as a ship might have carried in 1831; the mark on a horn, in E flat; a harp note for each source, the same all film long, so a value carried from a record sounds where it came from; E flat and B flat on the horn for the person; and the Beagle's chronometers, each ticking at its own rate. Nothing loops, and every effect is something on screen: a quill or a pencil, a wet brush, paper, a book shut, a stamp, keys typing.
 
 ## How the films are made
 

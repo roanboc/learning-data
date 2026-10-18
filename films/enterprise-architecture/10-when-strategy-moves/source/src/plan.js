@@ -405,8 +405,8 @@ function d10_realise(ctx,x0,y0,x1,y1,col,p,a){if(p<=0||a<=0.01)return;const e=cl
   ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(ex-Math.cos(an)*16*(e>=1?1:0),ey-Math.sin(an)*16*(e>=1?1:0));ctx.stroke();ctx.setLineDash([]);
   if(e>=1){ctx.lineWidth=2.5;ctx.fillStyle="rgba(9,8,22,1)";ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x1-Math.cos(an)*18+Math.sin(an)*10,y1-Math.sin(an)*18-Math.cos(an)*10);ctx.lineTo(x1-Math.cos(an)*18-Math.sin(an)*10,y1-Math.sin(an)*18+Math.cos(an)*10);ctx.closePath();ctx.fill();ctx.stroke();}
   ctx.restore();});}
-// the catalogue's page for eligibility, as Databricks shows a table: its columns, the three that only billing reads behind a column
-// mask, and the table as the call centre sees it (o.cc, 0..1: that view; o.yes lights "yes"; o.mask lights what's masked)
+// the catalogue's page for eligibility, as Databricks shows a table: its columns, the two dates that only billing reads behind a
+// column mask, and the table as the call centre sees it (o.cc, 0..1: that view; o.yes lights "yes"; o.mask lights what's masked)
 function d10_catalogue(ctx,x,y,w,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const h=600;withA(ctx,a,()=>{glass(ctx,x-12,y-12,w+24,h+24,22,[170,205,255],{glow:18,ea:0.45,fill:"rgba(8,14,28,0.95)"});
   ctx.save();rr(ctx,x,y,w,h,12);ctx.clip();ctx.fillStyle=DB.canvas;ctx.fillRect(x,y,w,h);ctx.fillStyle=DB.card;ctx.fillRect(x,y,w,72);ctx.fillStyle=DB.line;ctx.fillRect(x,y+72,w,1.2);
   const lw=logo(ctx,"databricks",x+24,y+21,30);T(ctx,"retail.eligibility",x+44+lw,y+48,{f:"mono",w:600,size:28,color:DB.text});

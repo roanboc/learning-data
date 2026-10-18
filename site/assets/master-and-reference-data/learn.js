@@ -9,7 +9,7 @@
      pick      choose one option, and see what it gets right and wrong
      steps     walk through a sequence, one step at a time
      compose   build a sentence from parts, such as a rule
-     test      answer the same questions of several things, and see the verdict (the four questions of film 1)
+     test      answer the same questions of several things, and see the verdict (the four questions of One person, many roles)
      match     compare two records field by field: each comparison adds or takes away weight, and the score lands in a band; or, as a
                search, see which details find a person
      bands     set the two thresholds that make three bands, and see what each costs
@@ -100,7 +100,7 @@ function rec(ctx,x,y,w,hh,c,o){o=o||{};const t0=tw(ctx,c.title,26,800);card(ctx,
 
 /* ---------- the pictures ---------- */
 const PIX={
-  /* film 1: the four shelves, each with what's been put on it */
+  /* One person, many roles: the four shelves, each with what's been put on it */
   kinds(ctx,w,hh,st,Lb,k){const V=Lb.w,cols=V.buckets,cw=(w-60)/cols.length;
     cols.forEach(([key,label,hex,sub],i)=>{const x=30+i*cw,cx=x+cw/2;card(ctx,x+8,22,cw-16,hh-44,{kind:"sheet",seed:3+i});
       wash(ctx,x+24,38,cw-48,58,hex||"person",0.45,11+i);tx(ctx,label,cx,78,{size:fit(ctx,label,cw-60,30,800),w:800,align:"center",col:WC_DARK});
@@ -116,7 +116,7 @@ const PIX={
       mine.slice(0,8).forEach(([it,j])=>{const drop=j===st.last?1-k:0;withA(ctx,1-drop*0.8,()=>{const tw0=tag(ctx,x+26,y-drop*30,short(it),{size:24,maxW:cw-96});
         if(st.checked)mark(ctx,x+26+tw0+22,y-4,28,it.b===key,k);});y+=48;});
       if(mine.length>8)tx(ctx,"+"+(mine.length-8),cx,y,{size:24,align:"center",col:WC_MUTED});});},
-  /* film 1: Linh, and four lanes: the person, her roles, her contact points, her identifiers */
+  /* One person, many roles: Linh, and four lanes: the person, her roles, her contact points, her identifiers */
   lanes(ctx,w,hh,st,Lb,k){const V=Lb.w,lanes=V.buckets,x0=290,lh=(hh-40)/lanes.length;
     const roles=V.items.map((it,j)=>[it,j]).filter(([it,j])=>st.pick[j]==="role"&&it.role).map(([it])=>it.role);
     linh(ctx,148,hh/2+190,0.52,roles);
@@ -126,14 +126,14 @@ const PIX={
       const mine=V.items.map((it,j)=>[it,j]).filter(([it,j])=>st.pick[j]===key);let x=x0+236,row=0;const rows=[y+lh/2-26,y+lh/2+28];
       mine.forEach(([it,j])=>{const s=short(it),ww=Math.min(tw(ctx,s,24,700)+40,300)+(st.checked?44:0);if(x+ww>w-44){if(row)return;row=1;x=x0+236;}
         const drop=j===st.last?1-k:0;withA(ctx,1-drop*0.8,()=>{const tw0=tag(ctx,x,rows[row]-drop*24,s,{size:24,maxW:300,wash:it.role||null});if(st.checked)mark(ctx,x+tw0+20,rows[row]-4,26,it.b===key,k);});x+=ww+12;});});},
-  /* film 1: who keeps what, as Noor and Mei's sheet */
+  /* One person, many roles: who keeps what, as Noor and Mei's sheet */
   keeps(ctx,w,hh,st,Lb,k){const V=Lb.w,rows=V.items,top=96,rh=(hh-top-26)/rows.length;card(ctx,24,20,w-48,hh-40,{kind:"sheet",seed:8});
     tx(ctx,V.sheet,48,70,{size:32,w:800,col:WC_DARK});tx(ctx,V.keeper,w*0.5,70,{size:26,w:700,col:WC_MUTED});
     rows.forEach((it,j)=>{const y=top+j*rh+rh/2,b=st.pick[j],B=V.buckets.find(x=>x[0]===b);
       pencil(ctx,[[44,top+j*rh],[w-44,top+j*rh]],{a:0.25,lw:1.6,seed:j+3});tx(ctx,short(it),48,y+10,{size:fit(ctx,short(it),w*0.44,28,700),w:700});
       if(B){tag(ctx,w*0.5,y,B[1],{size:fit(ctx,B[1],w*0.38,26,700),wash:B[3]||B[2],maxW:w*0.46});if(st.checked)mark(ctx,w-70,y,32,it.b===b,k);}
       else tx(ctx,"…",w*0.5,y+10,{size:28,col:WC_MUTED});});},
-  /* film 1: a thing, and the four questions */
+  /* One person, many roles: a thing, and the four questions */
   test(ctx,w,hh,st,Lb,k){const V=Lb.w,it=V.items[st.cur],ans=st.ans[st.cur]||[],done=st.done[st.cur],cw=Math.min(380,w*0.32),cx=40+cw/2;
     // a thing in its industry's colour; mastered, it clears to white paper and takes the series' mark
     const white=done&&it.verdict==="master";card(ctx,40,50,cw,hh-100,{kind:"card",wash:white?null:it.ind,washA:0.55,seed:12});
@@ -166,7 +166,7 @@ const PIX={
   person(ctx,w,hh,st){linh(ctx,w*0.27,hh-50,0.62,st.bands||[]);const ts=st.tags||[],gap=Math.min(110,(hh-80)/Math.max(1,ts.length)),y0=hh/2-gap*(ts.length-1)/2;
     ts.forEach((t,i)=>{const o=typeof t==="string"?{t}:t;tag(ctx,w*0.5,y0+i*gap,o.t,{size:fit(ctx,o.t,w*0.44,32,700),wash:o.c,maxW:w*0.47});});},
   /* ---------- films 2 to 9 ---------- */
-  /* film 2: Linh's five records, and what the chosen way of making one Linh does with them */
+  /* Who is it?: Linh's five records, and what the chosen way of making one Linh does with them */
   golden(ctx,w,hh,st,Lb,k){const V=Lb.w,R=V.recs,W0=V.words,pk=st.pick,x0=30,cw=420,ch=100,gap=(hh-40-R.length*ch)/(R.length-1),ys=R.map((c,i)=>20+i*(ch+gap)),ex=x0+cw+10;
     R.forEach((c,i)=>{const gone=pk==="merge"&&i===1;rec(ctx,x0,ys[i],cw,ch,c,{dashed:gone,seed:60+i});if(gone)cross(ctx,x0+cw-34,ys[i]+ch-30,30,k);});
     if(pk==="merge"){const my=(ys[0]+ys[1])/2,mx=600;[0,1].forEach(i=>wc_link(ctx,ex,ys[i]+ch/2,mx-6,my+ch/2,C("student"),{p:k,lw:3,a:0.8}));
@@ -180,7 +180,7 @@ const PIX={
       const mx=880,mw=w-mx-20,M=V.master;card(ctx,mx,30,mw,hh-60,{kind:"sheet",seed:90});tx(ctx,M.id,mx+mw/2,94,{size:38,w:600,f:"mono",align:"center",col:WC_DARK});
       pencil(ctx,[[mx+24,122],[mx+mw-24,122]],{a:0.4,lw:2});
       M.fields.forEach(([f,s,c],i)=>{const y=184+i*126;tx(ctx,f,mx+24,y,{size:fit(ctx,f,mw-48,26,800,null,18),w:800,col:WC_DARK});tag(ctx,mx+24,y+46,s,{size:22,wash:c,maxW:mw-40});});}},
-  /* film 2: two records, field by field, the weight each comparison adds, and the score on a line from 0 to 100 */
+  /* Who is it?: two records, field by field, the weight each comparison adds, and the score on a line from 0 to 100 */
   match(ctx,w,hh,st,Lb,k){const V=Lb.w,p=st.p,cw=(w-120)/2,cx=w/2;rec(ctx,40,18,cw,100,p.a,{seed:61});rec(ctx,w-40-cw,18,cw,100,p.b,{seed:62});
     const y0=140,rh=Math.min(70,(hh-320)/st.rows.length);
     st.rows.forEach((r,i)=>{const mid=y0+i*rh+rh/2,c=r.w>0?OK:r.w<0?NO:WC_MUTED,bw=Math.min(120,Math.abs(r.w)*20);
@@ -196,7 +196,7 @@ const PIX={
     const sx=X(st.score);pencil(ctx,[[sx,gy-30],[sx,gy+22]],{lw:4,a:0.95,col:WC_DARK});tx(ctx,String(st.score),sx,gy-40,{size:42,w:800,align:"center",col:WC_DARK});
     if(st.call){const t=(V.calls.find(c=>c[0]===st.call)||[,""])[1],right=sx>w*0.6;withA(ctx,k,()=>{const tw1=tag(ctx,right?sx-50:sx+50,gy-56,t,{size:24,align:right?"right":"left",wash:st.ok?"ok":"no",washA:0.3});
       mark(ctx,right?sx-70-tw1:sx+70+tw1,gy-58,28,st.ok,k);});}},
-  /* film 2: an intake's pairs on a line from 0 to 100; the two lines split them into three bands */
+  /* Who is it?: an intake's pairs on a line from 0 to 100; the two lines split them into three bands */
   bands(ctx,w,hh,st,Lb,k){const V=Lb.w,gx0=160,gx1=w-40,X=s=>gx0+(gx1-gx0)*s/100,top=64,bot=hh-110,rows=[top+(bot-top)*0.27,top+(bot-top)*0.74];
     [[0,st.lo,"apart",WC_SIDE.none],[st.lo,st.hi,"review",WC_ROLE.applicant],[st.hi,100,"link",OK]].forEach(([a,b,key,c],i)=>{if(b<=a)return;wash(ctx,X(a),top,X(b)-X(a),bot-top,c,0.22,90+i);
       const t=V.zones[key];if(X(b)-X(a)>70)tx(ctx,t,(X(a)+X(b))/2,top-18,{size:fit(ctx,t,X(b)-X(a)-8,24,700,null,14),w:700,align:"center",col:WC_MUTED});});
@@ -207,7 +207,7 @@ const PIX={
     const near=Math.abs(X(st.hi)-X(st.lo))<260;
     [[st.lo,V.loL,0],[st.hi,V.hiL,near?1:0]].forEach(([s,t,row],i)=>{const x=X(s);pencil(ctx,[[x,top-6],[x,bot+8]],{lw:3.4,a:0.95,col:WC_DARK,seed:3+i});
       tag(ctx,x,bot+34+row*50,t+" "+s,{size:22,align:x>w-160?"right":x<gx0+100?"left":"center"});});},
-  /* film 3: Linh's master record, field by field: the value each rule chooses, with its source */
+  /* Which value wins: Linh's master record, field by field: the value each rule chooses, with its source */
   golden2(ctx,w,hh,st,Lb,k){const V=Lb.w,F=V.fields;linh(ctx,150,hh-26,0.44,["student","tutor","researcher","alumna"]);
     const x0=310,cw=w-x0-20;card(ctx,x0,20,cw,hh-40,{kind:"sheet",seed:95});tx(ctx,V.title,x0+30,72,{size:30,w:800,col:WC_DARK});
     const top=96,rh=(hh-top-34)/F.length,vx=x0+232,vmax=cw-232-70;
@@ -219,7 +219,7 @@ const PIX={
       else if(win.length>1){let x=vx;win.forEach(j=>{const v=f.vals[j],S=V.src[v.src]||{};x+=tag(ctx,x,mid,v.note||v.v,{size:21,wash:S.c,maxW:(vmax-24)/win.length})+8;});}
       else{const v=f.vals[win[0]],S=V.src[v.src]||{},z=fit(ctx,v.v,vmax-200,26,700,null,17);tx(ctx,v.v,vx,mid+9,{size:z,w:700});tag(ctx,vx+tw(ctx,v.v,z,700)+16,mid,S.t,{size:21,wash:S.c,maxW:200});}
       mark(ctx,x0+cw-40,mid-2,30,r.ok,k);});},
-  /* film 3: the rule in words, part by part, above the same rule as the model's YAML declares it */
+  /* Which value wins: the rule in words, part by part, above the same rule as the model's YAML declares it */
   rule(ctx,w,hh,st,Lb,k){const V=Lb.w,n=V.slots.length,hd=[].concat(V.field),ind=V.indent!=null?V.indent:"  ",th=104+n*62,lx=410;
     card(ctx,20,20,w-40,th,{kind:"sheet",seed:96});tx(ctx,V.title,50,68,{size:30,w:800,col:WC_DARK});
     V.slots.forEach((sl,i)=>{const y=126+i*62,p=st.pick[i];tx(ctx,sl.label,50,y+8,{size:fit(ctx,sl.label,lx-70,22,700,null,17),w:700,col:WC_MUTED});
@@ -229,7 +229,7 @@ const PIX={
     card(ctx,20,cy,w-40,hh-cy-20,{kind:"card",seed:97});tx(ctx,V.model,50,cy+42,{size:fit(ctx,V.model,w-120,24,500,"mono",17),f:"mono",w:500,col:WC_MUTED});
     L.forEach((l,i)=>{const j=i-hd.length,bad=j>=0&&st.pick[j]!=null&&!V.slots[j].opts[st.pick[j]].ok;
       tx(ctx,l,50,cy+86+i*lh,{size:fit(ctx,l,w-120,24,500,"mono",15),f:"mono",w:500,col:bad?NO:WC_DARK});});},
-  /* film 3: Linh's two names, each with the documents and screens given to it */
+  /* Which value wins: Linh's two names, each with the documents and screens given to it */
   names(ctx,w,hh,st,Lb,k){const V=Lb.w,B=V.buckets,pw=(w-60)/2;
     B.forEach(([key,label,hex,big],i)=>{const x=20+i*(pw+20);card(ctx,x,20,pw,hh-40,{kind:"sheet",seed:100+i});wash(ctx,x+20,36,pw-40,52,hex,0.4,110+i);
       tx(ctx,label,x+pw/2,72,{size:28,w:800,align:"center",col:WC_DARK});const bs=fit(ctx,big,pw-60,54,800,null,30);tx(ctx,big,x+pw/2,162,{size:bs,w:800,align:"center",col:WC_DARK});
@@ -242,7 +242,7 @@ const PIX={
       pencil(ctx,[[x+30,232],[x+pw-30,232]],{a:0.3,lw:2,seed:7+i});
       V.items.map((it,j)=>[it,j]).filter(([it,j])=>st.pick[j]===key).forEach(([it,j],n)=>{const tx0=x+30+(n%2)*(pw/2-10),ty=278+Math.floor(n/2)*58,drop=j===st.last?1-k:0;
         withA(ctx,1-drop*0.8,()=>{const tw1=tag(ctx,tx0,ty-drop*24,short(it),{size:fit(ctx,short(it),pw/2-108,22,700,null,17),maxW:pw/2-64});if(st.checked)mark(ctx,tx0+tw1+18,ty-4,24,it.b===key,k);});});});},
-  /* film 4: her dated roles across the years, a line at the date, and her figure wearing the roles open that day */
+  /* Roles come and go: her dated roles across the years, a line at the date, and her figure wearing the roles open that day */
   timeline(ctx,w,hh,st,Lb,k){const V=Lb.w,[y0]=V.from.split("-").map(Number),[y1]=V.to.split("-").map(Number),N=(y1-y0)*12,x0=300,x1=w-30,top=46,lh=(hh-top-70)/V.roles.length;
     const X=s=>{const [y,m,d]=s.split("-").map(Number);return x0+(x1-x0)*(((y-y0)*12+(m-1)+((d||1)-1)/31)/N);};
     const end=s=>{if(s==null)return x1;const [y,m]=s.split("-").map(Number);return X(m===12?(y+1)+"-01":y+"-"+String(m+1).padStart(2,"0"));};
@@ -253,7 +253,7 @@ const PIX={
       r.spans.forEach((sp,j)=>{const a=X(sp[0]+(sp[0].length<8?"-01":"")),b=end(sp[1]);wash(ctx,a,y+38,Math.max(5,b-a-2),lh-52,r.c,inSpan(sp,d)?0.85:0.32,120+i*9+j);});
       if(on)tick(ctx,x0-24,y+lh/2+4,26,k);});
     const ax=X(st.at);pencil(ctx,[[ax,top-6],[ax,hh-62]],{lw:3.6,a:0.95,col:WC_DARK,seed:2});tag(ctx,ax,hh-34,fdate(st.at),{size:22,align:ax>w-110?"right":ax<x0+90?"left":"center"});},
-  /* film 4: Linh on census date, and what each way of counting adds up for her */
+  /* Roles come and go: Linh on census date, and what each way of counting adds up for her */
   count(ctx,w,hh,st,Lb,k){const V=Lb.w,T=V.tally,pk=st.pick,S=V.stats[pk],x0=380;linh(ctx,170,hh-26,0.44,["student","tutor","researcher","alumna"]);
     tx(ctx,S[0][0],x0,98,{size:64,w:800,col:WC_DARK});tx(ctx,S[0][1],x0,142,{size:fit(ctx,S[0][1],w-x0-40,26,600,null,17),w:600,col:WC_MUTED});
     const y0=196;
@@ -261,7 +261,7 @@ const PIX={
     else if(pk==="roles")T.roles.forEach(([r,t],i)=>{wc_chip(ctx,x0,y0+i*82,360,62,r,t);withA(ctx,k,()=>tag(ctx,x0+390,y0+i*82+31,"+1",{size:30,wash:"no",washA:0.3}));});
     else{wc_ring(ctx,170,hh-26-150,120,172,k,{col:OK});withA(ctx,k,()=>tag(ctx,x0,y0+50,"+1 · "+T.person,{size:30,wash:"ok",washA:0.35}));}
     tx(ctx,S[1][0]+" "+S[1][1],x0,hh-40,{size:28,w:800,col:pk==="people"?OK:NO});},
-  /* film 5: each system's codes, the list, and a line from each code to the value it's mapped to */
+  /* Lists everyone uses: each system's codes, the list, and a line from each code to the value it's mapped to */
   map(ctx,w,hh,st,Lb,k){const V=Lb.w,l=V.lists[st.cur],n=l.codes.length,rh=(hh-40)/n,lw=410,lx=w-lw-24,lrh=Math.min(92,(hh-200)/l.rows.length);
     card(ctx,lx,20,lw,hh-40,{kind:"sheet",seed:140});tx(ctx,l.name,lx+lw/2,66,{size:28,w:800,align:"center",col:WC_DARK});
     const cwid=Math.max(...l.rows.map(r=>tw(ctx,r[0],24,500,"mono")+40)),ry={};
@@ -270,7 +270,7 @@ const PIX={
     const ny=hh-74;ry[""]=ny;card(ctx,lx+16,ny-34,lw-32,68,{kind:"card",dashed:true,seed:141});tx(ctx,V.notList,lx+lw/2,ny+8,{size:24,w:700,align:"center",col:WC_MUTED});
     l.codes.forEach((c,i)=>{const y=20+i*rh+rh/2,p=st.pick[i];tx(ctx,c.sys,40,y-16,{size:20,w:600,col:WC_MUTED});const tw1=tag(ctx,40,y+14,c.v,{size:24,f:"mono",w:500,wash:c.c,washA:0.3,maxW:lx-200});
       if(p!=null){const good=p===c.ok;wc_link(ctx,40+tw1+6,y+14,lx+(p===""?16:20),ry[p],st.ran?(good?OK:NO):WC_PENCIL,{p:k,a:st.ran?0.9:0.5,lw:3});if(st.ran)mark(ctx,40+tw1+30,y-16,24,good,1);}});},
-  /* film 5: the tutor's row on the role type list, and what each way of renaming it does */
+  /* Lists everyone uses: the tutor's row on the role type list, and what each way of renaming it does */
   change(ctx,w,hh,st,Lb,k){const T=Lb.w.table,pk=st.pick;
     if(pk==="each"){const n=T.systems.length,rh=(hh-60)/n;T.systems.forEach(([s,t,c],i)=>{const y=30+i*rh+rh/2;tx(ctx,s,60,y+9,{size:26,w:700,col:WC_MUTED});tag(ctx,400,y,t,{size:26,wash:c,washA:0.3,maxW:560});cross(ctx,w-80,y-2,30,k);});return;}
     const x0=40,W2=w-80,C4=[30,170,520,750],top=30,th=pk==="dated"?250:190;card(ctx,x0,top,W2,th,{kind:"sheet",seed:150});
@@ -280,7 +280,7 @@ const PIX={
     else{row(top+116,[T.code,T.old,T.since,T.until]);withA(ctx,k,()=>{wash(ctx,x0+C4[1]-12,top+152,330,46,"ok",0.25,151);row(top+186,[T.code,T.neu,T.from,"—"]);});}
     const by=top+th+56,rw=tag(ctx,x0,by,T.report+": "+(pk==="overwrite"?T.neu:T.old),{size:26});mark(ctx,x0+rw+30,by-2,30,pk!=="overwrite",k);
     if(pk==="dated"){const aw=tag(ctx,x0,by+72,T.approved,{size:26,wash:"ok",washA:0.3});tick(ctx,x0+aw+30,by+70,30,k);}},
-  /* film 6: Linh, two of her records, the appeal's email, and her wish where it's been put */
+  /* For this purpose only: Linh, two of her records, the appeal's email, and her wish where it's been put */
   wish(ctx,w,hh,st,Lb,k){const P=Lb.w.pic,pk=st.pick,held=pk==="person";linh(ctx,170,hh-26,0.44,["student","tutor","researcher","alumna"]);
     const rx=400,rw=400,ys=[40,236];P.recs.forEach((c,i)=>rec(ctx,rx,ys[i],rw,100,c,{seed:160+i}));
     const ax=w-150,ay=210;wc_envelope(ctx,ax,ay,1.2,0);tx(ctx,P.appeal,ax,ay+76,{size:24,w:700,align:"center",col:WC_DARK});
@@ -289,7 +289,7 @@ const PIX={
     const wp=pk==="old"?[rx,ys[0]+128]:pk==="sheet"?[rx+12,hh-84]:[24,66],ww=tag(ctx,wp[0],wp[1],P.wish,{size:24,wash:"donor",washA:0.35,maxW:held?360:rw+120});
     if(held)wc_link(ctx,24+ww/2,wp[1]+26,160,hh-320,C("donor"),{p:k,vertical:true,a:0.6});
     tag(ctx,ax,ay+136,held?P.held:P.sent,{size:26,align:"center",wash:held?"ok":"no",washA:0.3});},
-  /* film 6: her request, and the records a search finds or misses */
+  /* For this purpose only: her request, and the records a search finds or misses */
   request(ctx,w,hh,st,Lb,k){const P=Lb.w.pic,pk=st.pick;card(ctx,w/2-310,16,620,84,{kind:"card",seed:170});tx(ctx,P.ask,w/2,68,{size:28,w:800,align:"center",col:WC_DARK});
     const cols=4,gx=24,cw=(w-2*gx-3*16)/4,ch=128,gy=140,all=P.recs.map(c=>[c,true]).concat(pk==="name"?P.others.map(c=>[c,false]):[]);
     all.forEach(([c,mine],i)=>{const x=gx+(i%cols)*(cw+16),y=gy+Math.floor(i/cols)*(ch+96),found=mine?(pk==="person"?1:pk==="name"?c.name:c.num):1;
@@ -298,7 +298,7 @@ const PIX={
       else{tag(ctx,x,y+ch+34,P.notHer,{size:20,wash:"no",washA:0.25});cross(ctx,x+cw-30,y+ch+32,30,k);}});
     if(pk==="person"){const fx=gx+3*(cw+16)+cw/2,fy=gy+ch+96+ch+70;linh(ctx,fx,fy,0.2,["student","tutor","researcher","alumna"]);
       all.forEach(([c],i)=>{const x=gx+(i%cols)*(cw+16)+cw/2,y=gy+Math.floor(i/cols)*(ch+96)+ch;wc_link(ctx,fx,fy-110,x,y+6,C(c.role),{p:k,a:0.45,vertical:true});});}},
-  /* film 7: the four ways to keep master data, side by side; the chosen one stands out */
+  /* One person, many systems: the four ways to keep master data, side by side; the chosen one stands out */
   styles(ctx,w,hh,st,Lb,k){const V=Lb.w,P=V.pic,ks=V.opts.map(o=>o[0]),pw=(w-40)/ks.length;
     ks.forEach((key,i)=>{const x=20+i*pw,on=key===st.pick,cx=x+pw/2,fy=hh*0.53,sy=[hh*0.72,hh*0.86],pos=P.systems.map((s,j)=>[x+pw*(j%2?0.73:0.27),sy[Math.floor(j/2)]]);
       withA(ctx,on?1:0.4,()=>{card(ctx,x+5,16,pw-10,hh-32,{kind:"sheet",wash:on?Lb.c:null,washA:0.12,seed:180+i});
@@ -311,7 +311,7 @@ const PIX={
           else if(key==="coexistence"){dot(wc_link(ctx,px-6,py-22,cx-6,fy-60,c,{p:q,a:0.75,vertical:true}),c);dot(wc_link(ctx,cx+6,fy-60,px+6,py-22,c,{p:q,a:0.75,vertical:true}),c);}
           else dot(wc_link(ctx,cx,fy-60,px,py-22,c,{p:q,a:0.8,vertical:true}),c);});
         pos.forEach(([px,py],j)=>tag(ctx,px,py,P.systems[j][1],{size:fit(ctx,P.systems[j][1],pw/2-46,20,700,null,15),align:"center",wash:P.systems[j][0],washA:0.45,maxW:pw/2-6}));});});},
-  /* film 7: an application, what it gives the search, the people found with their scores, and what it does */
+  /* One person, many systems: an application, what it gives the search, the people found with their scores, and what it does */
   search(ctx,w,hh,st,Lb,k){const V=Lb.w,a=st.app,ax=24,aw=430;card(ctx,ax,20,aw,hh-40,{kind:"card",role:"applicant",sw:tw(ctx,a.t,26,800)+36,seed:190});
     tx(ctx,a.t,ax+30,64,{size:fit(ctx,a.t,aw-60,26,800,null,17),w:800,col:WC_DARK});
     a.given.forEach((g,i)=>{const on=st.on[i];withA(ctx,on?1:0.38,()=>tag(ctx,ax+24,134+i*76,g.t,{size:21,wash:on?"applicant":null,washA:0.35,maxW:aw-48}));});
@@ -321,7 +321,7 @@ const PIX={
       tx(ctx,String(s),cx+cw-30,y+62,{size:44,w:800,align:"right",col});tag(ctx,cx+cw-26,y+104,V.bands[b],{size:19,align:"right",wash:b==="link"?"ok":b==="review"?"amber":null,washA:0.3});
       wc_link(ctx,ax+aw+4,150,cx-6,y+ch/2,b==="link"?OK:WC_PENCIL,{p:k,a:b==="apart"?0.22:0.7,lw:3});});
     const [o,best]=st.out,good=o===a.want,ot=fill(V.outcomes[o],{who:best?best.c.title+" ("+best.c.id+")":""}),ow=tag(ctx,cx,hh-56,ot,{size:24,wash:good?"ok":"no",washA:0.3,maxW:cw-60});mark(ctx,cx+ow+30,hh-58,30,good,k);},
-  /* film 8: the hub's screen; the part of it each step is about stands out */
+  /* A hub at work: the hub's screen; the part of it each step is about stands out */
   hub(ctx,w,hh,st,Lb,k){const P=Lb.w.pic,s=st.step,A=i=>s===i?1:s>i?0.72:0.28,B=(i,x,y,ww,h2)=>card(ctx,x,y,ww,h2,{kind:"card",wash:s===i?"steward":null,washA:0.16,seed:200+i});
     withA(ctx,A(0),()=>{B(0,24,24,300,hh-48);tx(ctx,P.inbox+" · "+P.items.length,48,74,{size:26,w:800,col:WC_DARK});P.items.forEach((t,i)=>tag(ctx,46,118+i*58,t,{size:20,wash:i===0?"steward":null,washA:0.45,maxW:256}));});
     const px=344,pw=430;
@@ -337,12 +337,12 @@ const PIX={
       wc_badge(ctx,nx+24,270,P.suggests);});
     withA(ctx,A(5),()=>{B(5,nx,340,nw,hh-364);P.hears.forEach((t,i)=>{const y=394+i*62,tw1=tag(ctx,nx+24,y,t,{size:22,maxW:nw-100});if(s>=5)tick(ctx,nx+24+tw1+26,y-2,26,s===5?k:1);});
       tag(ctx,nx+24,hh-74,P.source,{size:20,wash:"student",washA:0.3,maxW:nw-48});});},
-  /* film 8: three hubs, each with the five things a hub must do */
+  /* A hub at work: three hubs, each with the five things a hub must do */
   choose(ctx,w,hh,st,Lb,k){const V=Lb.w,ks=V.opts.map(o=>o[0]),pw=(w-60)/ks.length;
     ks.forEach((key,i)=>{const x=20+i*(pw+10),on=key===st.pick,r=V.res[key],rh=(hh-190)/V.short.length;withA(ctx,on?1:0.45,()=>{card(ctx,x,20,pw,hh-40,{kind:"sheet",wash:on?Lb.c:null,washA:0.14,seed:210+i});
       tx(ctx,V.opts[i][1],x+pw/2,76,{size:32,w:800,align:"center",col:WC_DARK});pencil(ctx,[[x+30,100],[x+pw-30,100]],{a:0.3,lw:2,seed:i+2});
       V.short.forEach((t,j)=>{const y=150+j*rh;tx(ctx,t,x+40,y+9,{size:26,w:700});mark(ctx,x+pw-60,y,30,r[j]===1,on?k:1);});});});},
-  /* film 9: open duplicates over two years, one line for each way; the chosen one stands out */
+  /* Kept, not cleaned: open duplicates over two years, one line for each way; the chosen one stands out */
   chart(ctx,w,hh,st,Lb,k){const G=Lb.w.chart,x0=120,x1=w-270,y0=50,y1=hh-80,X=t=>x0+(x1-x0)*t/(G.x.length-1),Y=v=>y1-(y1-y0)*v/G.max;
     [0,1000,2000,3000,4000].forEach(v=>{pencil(ctx,[[x0,Y(v)],[x1,Y(v)]],{a:0.12,lw:1.2,seed:v+1});tx(ctx,num(v),x0-14,Y(v)+7,{size:20,col:WC_MUTED,align:"right"});});
     G.x.forEach((t,i)=>tx(ctx,t,X(i),hh-42,{size:20,col:WC_MUTED,align:"center"}));tx(ctx,G.y,x0,28,{size:20,w:700,col:WC_MUTED});
@@ -350,7 +350,7 @@ const PIX={
     order.forEach((key,i)=>{const on=key===st.pick,pts=G.lines[key].map(([t,v])=>[X(t),Y(v)]),col=key==="entry"?OK:key==="cleanup"?WC_ROLE.applicant:NO,last=pts[pts.length-1];
       wc_pencil(ctx,pts,on?k:1,{col:on?col:WC_PENCIL,lw:on?5:2.4,a:on?0.95:0.3,seed:220+i});
       tx(ctx,G.names[key],last[0]+14,last[1]+8,{size:on?22:20,w:on?800:600,col:on?col:WC_MUTED,a:on?1:0.7});});},
-  /* film 9: one value from an outside list to the university's own, by pull request */
+  /* Kept, not cleaned: one value from an outside list to the university's own, by pull request */
   agentpr(ctx,w,hh,st,Lb,k){const P=Lb.w.pic,s=st.step,A=i=>s===i?1:s>i?0.72:0.28;
     withA(ctx,A(0),()=>{card(ctx,24,40,300,230,{kind:"card",wash:"public",washA:0.18,seed:230});tx(ctx,P.outside,46,88,{size:24,w:800,col:WC_DARK});tx(ctx,P.gov,46,120,{size:20,col:WC_MUTED});
       tag(ctx,46,182,P.value,{size:fit(ctx,P.value,216,20,700,null,16),wash:"amber",washA:0.4,maxW:256});wc_badge(ctx,46,232,P.isNew);});
@@ -428,7 +428,7 @@ function labTest(Lb){const V=Lb.w;let cur=0;const ans=V.items.map(()=>V.qs.map((
 /* ---------- match: two records compared, field by field; or a search, and what it finds ---------- */
 // the score: the weights added up, on a scale of 0 to 100 (base + scale × total, as the films show it)
 // a pair's score from its total weight: with mid, the weights are log-odds (base 2) that the two are one person, and mid sets the
-// odds before any field is compared (film 2's matcher: 5.69, a prior of one in 52); without it, a straight line, base + scale × total
+// odds before any field is compared (the matcher of Who is it?: 5.69, a prior of one in 52); without it, a straight line, base + scale × total
 const scoreOf=(V,tot)=>Math.max(0,Math.min(100,Math.round(V.mid!=null?100/(1+Math.pow(2,-(tot-V.mid))):(V.base||0)+(V.scale||10)*tot)));
 const bandOf=(V,s)=>s>=V.hi?"link":s>=V.lo?"review":"apart";
 // an email may break before its @, and nowhere else unless it must
@@ -538,7 +538,7 @@ if(labsApp&&LABS.length){labsApp.textContent="";const visited=new Set(get("visit
   function paintFilms(){films.replaceChildren(...FILMS.filter(f=>ofFilm(f.n).length).map(f=>{const ls=ofFilm(f.n),seen=ls.filter(x=>visited.has(x.id)).length;
     return h("button",{type:"button","aria-pressed":String(f.n===film),onclick:()=>show(ofFilm(f.n)[0].id)},h("i",null,String(f.n)),h("span",null,f.title),h("small",null,fill(U.seen,{n:seen,of:ls.length})));}));}
   // one rail of tabs for each film, all on the page; only the open film's shows
-  rails.append(...FILMS.filter(f=>ofFilm(f.n).length).map(f=>h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel+" · "+U.film+" "+f.n,"data-film":String(f.n)},
+  rails.append(...FILMS.filter(f=>ofFilm(f.n).length).map(f=>h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel+" · "+f.title,"data-film":String(f.n)},
     ...ofFilm(f.n).map((Lb,i)=>h("button",{type:"button",role:"tab","data-id":Lb.id,style:"--c:"+Lb.c,onclick:()=>show(Lb.id)},h("i",null,String(i+1)),Lb.name)))));
   const tabs=()=>[...rails.querySelectorAll("[role=tab]")];
   function paintRail(){[...rails.children].forEach(r=>{r.hidden=r.dataset.film!==String(film);});}
@@ -546,7 +546,7 @@ if(labsApp&&LABS.length){labsApp.textContent="";const visited=new Set(get("visit
     tabs().forEach(b=>{const on=b.dataset.id===Lb.id;b.setAttribute("aria-selected",String(on));b.tabIndex=on?0:-1;b.classList.toggle("done",visited.has(b.dataset.id));});
     const ls=ofFilm(film),i=ls.indexOf(Lb),nxt=ls[i+1],f=filmOf(film);
     holder.replaceChildren(h("div",{class:"stop",style:"--c:"+Lb.c},
-      h("div",{class:"stop-text"},h("p",{class:"kicker"},h("b",null,U.lab+" "+(i+1))," "+U.of+" "+ls.length+" · "+U.film+" "+f.n),h("h3",null,Lb.name),h("p",{class:"idea"},Lb.idea),h("ul",null,...Lb.points.map(p=>h("li",null,p))),
+      h("div",{class:"stop-text"},h("p",{class:"kicker"},h("b",null,U.lab+" "+(i+1))," "+U.of+" "+ls.length+" · "+f.title),h("h3",null,Lb.name),h("p",{class:"idea"},Lb.idea),h("ul",null,...Lb.points.map(p=>h("li",null,p))),
         h("details",{class:"real"},h("summary",null,U.inPractice),h("p",null,Lb.real),repoLinks(Lb)),
         h("div",{class:"stop-nav"},watchHref(Lb)?h("a",{class:"btn",href:watchHref(Lb)},U.watch):h("span",{class:"mr-coming"},fill(U.coming,{n:f.n})),nxt?h("button",{type:"button",class:"btn primary",onclick:()=>show(nxt.id,true)},U.next+" "+nxt.name+" →"):h("a",{class:"btn primary",href:"../scenarios/#film-"+film},U.makeCall))),
       BUILD[Lb.kind]?BUILD[Lb.kind](Lb):h("p",null,"")));
@@ -573,7 +573,7 @@ if(quizApp&&QS.length){quizApp.textContent="";const ans=get("quiz",{});let sel=0
     h("button",{type:"button",class:"btn primary",onclick:()=>{if(last)results();else{cur+=1;render();}}},last?U.results:U.nextQ));}
   function render(){paintBar();const q=list[cur],f=PIX[q.vis],body=h("div",{class:"qbody"}),out=h("div"),prev=A(q),Lq=labOf(q.lab)||{};
     const vis=stage(1000,760,c=>{if(f)f(c,1000,760,q.st||{},Lq,1);},q.alt||q.title);
-    body.append(h("p",{class:"qtag",style:"--c:"+(Lq.c||"#0e9692")},h("i"),U.scenario+" "+(cur+1)+" "+U.of+" "+list.length+(sel?"":" · "+U.film+" "+q.film)),h("h3",null,q.title),h("p",{class:"qsit"},q.sit));
+    body.append(h("p",{class:"qtag",style:"--c:"+(Lq.c||"#0e9692")},h("i"),U.scenario+" "+(cur+1)+" "+U.of+" "+list.length+(sel?"":" · "+filmOf(q.film).title)),h("h3",null,q.title),h("p",{class:"qsit"},q.sit));
     if(q.type==="choice"){const box=h("div",{class:"qopts"});
       const answer=(i,save)=>{[...box.children].forEach((b,j)=>{b.disabled=true;if(q.opts[j].ok)b.classList.add("ok");});const o=q.opts[i];
         if(!o.ok){box.children[i].classList.add("no");box.children[i].append(h("small",null,o.why));}if(save)done(q,!!o.ok,i);out.replaceChildren(feed(!!o.ok,q),foot(q));};

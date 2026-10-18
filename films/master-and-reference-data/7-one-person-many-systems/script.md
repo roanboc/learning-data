@@ -19,12 +19,12 @@ Before 1874, every pair of countries that exchanged letters needed a postal trea
 | An envelope that takes two different stamps on its way | A letter whose price depended on its route |
 | The treaty of 1874, on parchment | One set of rules, agreed once |
 | One pencil line round the whole valley, the seals lifting | One postal territory |
-| A coin dropping into each office's box | Each country kept the postage it collected |
+| A coin by each office's door | Each country kept the postage it collected |
 | A great post office for the world, drawn faint and crossed out | The heaviest way, not taken |
 | Linh, in pencil, and later in white paper with bands | The person; the bands are her roles, dated and owned |
 | A dashed card under a stamp that hovers | A third student number, about to be made |
 | Four cards on Noor's wall, each a small diagram | The four ways to give many systems one person |
-| An index card with lines to each system | A registry: it only links, and asks each system for the rest |
+| An index card with lines to each system, a question running down each | A registry: it only links, and asks each system for the rest |
 | A white figure in the lakehouse, and a small chart | A copy for analysis: everyone counted once, in reports |
 | Arrows both ways between the white figure and two systems | A master the systems read back |
 | Arrows only out of the white figure | One place where people are created |
@@ -35,7 +35,7 @@ Before 1874, every pair of countries that exchanged letters needed a postal trea
 | A sheet, *who may create a person* | The rule: who creates, and who only adds roles |
 | An amber band added under Linh | The applicant role, added to the person she already is |
 | A second Linh Nguyen, drawn differently, and her own stamp | A namesake kept apart: a new person, rightly made |
-| A card with tabs: owner, contract, version, access | The person as a data product |
+| A card with four fields: owner, contract, version, access | The person as a data product |
 | The dbt logo and four lines of its settings; the Databricks logo; a synced table | What builds, tests, governs and serves it |
 
 ## The look
@@ -44,78 +44,78 @@ The series' watercolour, unchanged: role colours as the strongest washes (studen
 
 - **1874.** A wide valley under pointed, snow-capped peaks, with "1874" in the corner, and seven small post offices of different roofs, each with a post horn over its door, standing for the countries. The treaties between pairs are fine pencil lines, each with a dot of red sealing wax; the treaty of Bern is parchment and ink. The territory the treaty makes is one pencil line round the valley, with the paper inside it brightened a little, and the offices keep their own colours inside it. The great post office that nobody built is drawn in a faint, dashed pencil, and crossed out in red ink.
 - **No season.** The university's year starts in February, as in the southern hemisphere, so the film gives months and never a season; the campus is *One person, many roles*' own, unchanged.
-- **The four ways** are larger copies of film 1's four small diagrams, pinned to Noor's wall, so a viewer who saw film 1 knows them at once.
+- **The four ways** are larger copies of the four small diagrams in *One person, many roles*, on Noor's wall, so a viewer who saw it knows them at once. In chapter 5 the coexistence card's diagram opens out into the picture: its frame lifts away, its small white figure grows into Linh, and each system's chip flies to its own card.
 - **The search** is an amber line, the applicant's colour, from the application to the person; a likely match is a gold card in Mei's queue, gold being the business side's colour, Mei's.
 - **The second Linh Nguyen** is drawn as differently from Linh as two people are: longer hair, a cardigan, younger. When she becomes a person, she's white paper with her own amber band, and nothing joins her to Linh.
-- **The person as a product** is a card with tabs, as the governance series draws a product with an owner, and the tools' logos are the official ones, unaltered.
+- **The person as a product** is a card with four fields, lit as each is said: the owner in gold, the business side's colour, and the technical promises in cyan, like dbt's lines beside it. The parts never wear a role's colour. The tools' logos are the official ones, unaltered.
 
 ## Script
 
-### 1 · A treaty for every pair · 0:00–0:41
+### 1 · A treaty for every pair · 0:00–0:37
 
 **Narration.** Before 1874, every pair of countries that exchanged letters needed a postal treaty of its own. A letter's price depended on its route. That year, in Bern, twenty-one countries signed one treaty instead. They became one postal territory, with one rate for a letter, and each kept the postage it collected. Nobody built a post office for the world. Each country kept its own, and they shared the rules.
 
-**Picture.** A wide valley in 1874, seven post offices across it, each with a post horn over its door. As "every pair" is said, pencil lines draw between them, one pair after another, each with a dot of sealing wax, until the valley is crossed by twenty-one of them: "a treaty for every pair". An envelope sets out from the office on the left and travels to the far right through a third; at each office a different stamp lands on it: "a price for each route". "That year, in Bern": the camera moves to the town in the middle, by its clock tower, and the treaty arrives on parchment, *General Postal Union · Bern, 9 October 1874*, its signatures written in. The pencil lines lift away, and one line draws round the whole valley: "one postal territory". A single stamp, "25 c", lands on a new envelope: "one rate for a letter". A coin drops into each office's box: "each kept its postage". A great post office for the world draws in faint and dashed over the valley, and is crossed out; the seven offices stay, each lit in turn, and the treaty stays pinned at the centre: "one set of rules". Wordless breather: the envelope crosses the valley with its one stamp. Then the title card, *One person, many systems*.
+**Picture.** A wide valley in 1874, seven post offices across it, each with a post horn over its door. As "every pair" is said, pencil lines draw between them, neighbours first, each with a dot of sealing wax, until the valley is crossed by twenty-one of them: "a treaty for every pair". An envelope sets out from the office on the left and travels to the far right through a third; at each office a different stamp lands on it: "a price for each route". "That year, in Bern": the camera moves to the town in the middle, by its clock tower, and the treaty arrives on parchment, *General Postal Union · Bern, 9 October 1874*; twenty-one signatures are written in, and its seal is pressed. The pencil lines lift away, the treaty is pinned up above the town, and one line draws round the whole valley: "one postal territory". A new envelope, and a single stamp lands on it, "25 c": "one rate for a letter". A coin spins down by each office's door, bounces and stays: "each kept its postage". A great post office for the world draws in faint and dashed over the valley, and is crossed out: "no post office for the world". Each office lifts in turn, and a line runs from the treaty to each: "one set of rules". The envelope is posted at the office on the left. Wordless breather: it crosses the valley with its one stamp. Then the title card, *One person, many systems*.
 
-**On screen.** 1874 · a treaty for every pair · a price for each route · General Postal Union · Bern, 9 October 1874 · one postal territory · 25 c · one rate for a letter · each kept its postage · no post office for the world · one set of rules · One person, many systems · Film 7 of 9
+**On screen.** before 1874 · a treaty for every pair · a price for each route · 1874 · Bern · General Postal Union · Bern, 9 October 1874 · one postal territory · 25 c · one rate for a letter · each kept its postage · no post office for the world · one set of rules · The same one, everywhere · One person, many systems · four ways to share the person, and the lightest that works · Film 7 of 9 · master and reference data
 
-### 2 · Applying again · 0:41–1:10
+### 2 · Applying again · 0:37–1:05
 
 **Narration.** Today, at the university, Linh Nguyen wants to apply for a PhD. Last time she applied, she got a second student number, and Mei's office had to link the two. The application still creates a person first, and nobody looks until later. And four systems need to know who she is: the student system, HR, the research office and the alumni office.
 
-**Picture.** The campus, late in 2025. Linh, in pencil, and her card: "Linh Nguyen · planning a PhD". Her two student records arrive on the left, *S-17142 · bachelor's · 2019–22* and *S-20436 · master's · from Jul 2025*, and a gold pencil line joins them: "linked by Mei's office". On the right, the application, in amber, *PhD · health informatics*, and an arrow down from it, "creates a person first", to a dashed card with a stamp hovering over its empty number: "a third number?". A low pulse runs under it. Then the four system cards settle in a row above her, each in its role's colour, as each is named, with a line from each down to her.
+**Picture.** The campus, late in 2025. Linh, in pencil, and her card: "Linh Nguyen · planning a PhD". Her two student records arrive on the left, *S-17142 · bachelor's · 2019–22* and *master's · from Jul 2025*, whose number, *S-20436*, is stamped on, and a dotted pencil line joins them: "linked by Mei's office". On the right, the application, in amber, *PhD · health informatics*, and an arrow down from it, "creates a person first", to a dashed applicant's card with a stamp hovering over its empty number: "a third number?". A low pulse runs under it. Then her records give way to the four system cards, settling in a row along the top, each in its role's colour, as each is named, with a line from each down to her.
 
-**On screen.** late 2025 · the university · Linh Nguyen · planning a PhD · Student · S-17142 · bachelor's · 2019–22 · Student · S-20436 · master's · from Jul 2025 · linked by Mei's office · Application · PhD · health informatics · creates a person first · a third number? · student system · HR · research office · alumni office
+**On screen.** late 2025 · the university · Linh Nguyen · planning a PhD · Student · S-17142 · bachelor's · 2019–22 · master's · from Jul 2025 · S-20436 · linked by Mei's office · Application · PhD · health informatics · Applicant · creates a person first · a third number? · student system · students, applicants · HR · staff, tutors · research office · researchers · alumni office · graduates
 
-### 3 · Four ways · 1:10–1:52
+### 3 · Four ways · 1:05–1:38
 
 **Narration.** Noor, the data architect, lays out four ways to give them one person. A registry only links. It knows which records are one person, and asks each system for the rest. A copy for analysis gathers everyone in the lakehouse, so reports count each person once. A master that systems read back keeps the person in one place, and each system reads her from it. Or one place creates every person, and the systems only read.
 
-**Picture.** Noor's office. Noor, edged in cyan, pins four cards to the wall, left to right, as each is named; each is a small diagram over four system chips (teal, violet, coral, green). *Registry*: an index card, with a line down to each chip, then a dashed line back up from each, "asks each system". *Consolidation*: a white figure in a box marked "lakehouse", arrows up into it from each chip, and a small bar chart beside it. *Coexistence*: the white figure, with arrows both ways between it and each chip. *Centralised*: the white figure first, and arrows only out of it, down to the chips. Under each, its name and a short line.
+**Picture.** Noor's office. Noor, edged in cyan, lays out four cards on the wall, left to right; each is a small diagram over four system chips (teal, violet, coral, green), and the camera moves in on each as it's named. *Registry*: an index card, with a line down to each chip, and a question running down each line and its answer back up. *Consolidation*: a white figure in a box marked "lakehouse", arrows up into it from each chip, and a small bar chart beside it. *Coexistence*: the white figure, with arrows both ways between it and each chip. *Centralised*: the white figure first, and arrows only out of it, down to the chips. Under each, its name and a short line.
 
-**On screen.** Noor Rahman · data architect · registry · only links · asks each system · consolidation · a copy for analysis · lakehouse · coexistence · systems read it back · centralised · people created here
+**On screen.** Noor Rahman · data architect · registry · only links · consolidation · a copy for analysis · lakehouse · coexistence · systems read it back · centralised · people created here
 
-### 4 · After the fact · 1:52–2:12
+### 4 · After the fact · 1:38–1:56
 
 **Narration.** The university already has the first two: Mei's links, and the copy in the lakehouse. Both find Linh after the fact. Neither stops a third number. The last two do, but every system that reads back has to change.
 
-**Picture.** The two cards on the left take a small badge, "already here". Under each, the dashed card of a third number arrives with its hovering stamp, and a pencil note: "after the fact". The two on the right each take a tick, "stops it". A line under the first two, "neither stops a third number", and one under the last two, its cost: "every system that reads it changes".
+**Picture.** The two cards on the left take a small badge, "already here", and a note under each, "after the fact", while the two on the right step back. A line under the first two: "neither stops a third number". Then the two on the right come forward, each with a tick, "stops it", and under them, their cost: "every system that reads it changes".
 
 **On screen.** already here · after the fact · neither stops a third number · stops it · every system that reads it changes
 
-### 5 · The lightest that works · 2:12–2:50
+### 5 · The lightest that works · 1:56–2:23
 
 **Narration.** So which is the lightest way that still works? New people come in at two doors: the application and HR. So those two read the person back. The research and alumni offices only add roles, so links are enough for them. Like Bern: no post office for the world. Each system keeps its own, and they share the person.
 
-**Picture.** The coexistence card comes off the wall and grows into the chapter's picture: Linh's white figure at the top, with her roles' bands; four system cards below. Two of them, the student system and HR, take a door each, "where people are created", and arrows both ways join them to her: "reads it back". The research office and the alumni office keep thin pencil links: "links". A badge, "the lightest that works". On "Like Bern", the valley of 1874 comes in small at the corner, its seven offices inside one line. Wordless breather on the settled picture.
+**Picture.** The coexistence card comes forward, and its diagram opens out into the chapter's picture: its frame lifts away, the small white figure grows into Linh, with her roles' bands, and each system's chip flies down to its own card. Two of them, the student system and HR, take a door each, "where people are created", and keep their arrows both ways to her: "reads it back". The research office's and the alumni office's arrows turn to thin pencil links: "links". A badge, "the lightest that works". On "Like Bern", the valley of 1874 comes in small at the corner, its seven offices inside one line. Each system lifts in turn, and a light glows behind her as they share the person. Wordless breather on the settled picture.
 
-**On screen.** student system · HR · research office · alumni office · where people are created · reads it back · links · the lightest that works · like Bern
+**On screen.** student system · students, applicants · HR · staff, tutors · research office · researchers · alumni office · graduates · where people are created · reads it back · links · the lightest that works · like Bern
 
-### 6 · Elsewhere · 2:50–3:10
+### 6 · Elsewhere · 2:23–2:37
 
 **Narration.** Others need a heavier way. A bank's customer hub is read by every product system. Many countries keep one population register, and agencies ask it instead of keeping their own.
 
-**Picture.** Two panels. *A bank*, in banking blue: a white figure in a hub, and arrows from it to three product chips, *current account*, *card*, *mortgage*. *A country*, in the public sector's green-blue: a register, a white figure in it, and three agencies, *tax office*, *health service*, *schools*, each with a line to it, asking.
+**Picture.** Two panels, each marked "centralised". *A bank*, in banking blue: a white figure in its customer hub, and arrows from it to three product chips, *current account*, *card*, *mortgage*. *A country*, in the public sector's green-blue: a population register, a white figure in it, and arrows to three agencies, *tax office*, *health service*, *schools*. The one being told about stands out; the other steps back.
 
-**On screen.** a heavier way · a bank · customer hub · current account · card · mortgage · a country · population register · tax office · health service · schools
+**On screen.** a heavier way · a bank · centralised · customer hub · current account · card · mortgage · a country · population register · tax office · health service · schools
 
-### 7 · Search before create · 3:10–3:44
+### 7 · Search before create · 2:37–3:01
 
 **Narration.** And one change at the door: before the application creates a person, it searches for one. It compares the name, the birth date, the email, and any number from before. A clear match adds a role. A likely one waits for Mei's office to decide. Only when nobody matches is a new person made.
 
-**Picture.** Plain paper. The application, in amber, *before it creates a person*, with four empty fields: *name*, *birth date*, *email*, *number from before*. Each field lights as it's named. An amber line runs from it to a magnifying glass: "search first". Three lanes open on the right: a tick and an amber band added to a white figure, "found: add a role"; a gold card set into a queue under Mei's name, "likely: Mei's office decides"; a new white figure drawn in, "nobody: a new person".
+**Picture.** Plain paper. The application, in amber, *before it creates a person*, with its door and four empty fields: *name*, *birth date*, *email*, *number from before*. Each field lights as it's named. An amber line runs from it to a magnifying glass: "search first". Three lanes open on the right, each as it's said: a white figure takes an amber band and a tick, "found: add a role"; a gold card slides into a tray where two wait, "likely: Mei's office decides"; a new white figure takes her first amber band, "nobody: a new person".
 
 **On screen.** Application · before it creates a person · name · birth date · email · number from before · search first · found: add a role · likely: Mei's office decides · nobody: a new person
 
-### 8 · Who may create a person · 3:44–4:06
+### 8 · Who may create a person · 3:01–3:16
 
 **Narration.** Noor and Mei write down who may create a person: only the application and HR, after a search. The research and alumni offices never do. They add roles to people already there.
 
-**Picture.** Noor's office again. A sheet, *who may create a person*, fills in row by row: *the application · creates, after a search*; *HR · creates, after a search*; *research office · adds roles*; *alumni office · adds roles*. Each row has its system's dot of colour. Mei, edged in gold, ticks the sheet.
+**Picture.** Noor's office again. A sheet, *who may create a person*, fills in row by row under *system* and *may it create a person?*: *the application · creates, after a search* and *HR · creates, after a search*, each with a tick; *research office · adds roles*; *alumni office · adds roles*. Each row has its system's dot of colour. Mei, edged in gold, agrees it: a gold bar, "agreed by Mei's office", and her tick.
 
-**On screen.** who may create a person · the application · HR · creates, after a search · research office · alumni office · adds roles · Mei Tanaka · registrar's office
+**On screen.** who may create a person · Mei Tanaka · registrar's office · system · may it create a person? · the application · creates, after a search · HR · research office · adds roles · alumni office · agreed by Mei's office
 
-### 9 · Found · 4:06–4:34
+### 9 · Found · 3:16–3:36
 
 **Narration.** In October, Linh applies for her PhD. The search finds her: the same birth date, the same email, and the student number she gave. So the application adds a role, applicant, to the person she already is. No new number, and nothing to merge later.
 
@@ -123,29 +123,29 @@ The series' watercolour, unchanged: role colours as the strongest washes (studen
 
 **On screen.** October 2026 · the university · Application · PhD · health informatics · name · birth date · email · number from before · Linh Nguyen · 14 Mar 2001 · linh.nguyen@mail.example · S-20436 · found: Linh Nguyen · Applicant · PhD · from Oct 2026 · no new number · nothing to merge later
 
-### 10 · Kept apart · 4:34–5:05
+### 10 · Kept apart · 3:36–3:57
 
 **Narration.** The same week, another Linh Nguyen applies. It's a common Vietnamese name. But she was born in another year, writes from another email, and has never studied here. Only the name agrees. So she becomes a new person, with her own number, and none of Linh's history.
 
-**Picture.** Linh steps back to the left. On the right, another young woman, in pencil, with her phone; her card, *Linh Nguyen · applying for a bachelor's*. The search lays her application beside Linh's person, two columns, *already here* and *applying*: the same name, with a tick; *14 Mar 2001* and *9 Aug 2007*, *linh.nguyen@mail.example* and *linh.n07@mail.example*, *S-20436* and *none*, each with a cross: "only the name agrees". She clears to white paper, a person of her own, with an amber band, and her card turns into her own record, *Applicant · bachelor's · from Oct 2026*, with the stamp landing on it at last, *S-21907*: "a new person". No line joins the two.
+**Picture.** Linh, in white paper, on the left. On the right, another young woman, in pencil, with her phone; her card, *Linh Nguyen · applying for a bachelor's*. The search lays her application beside Linh's person, two columns, *already here* and *applying*: the same name, with a tick; *14 Mar 2001* and *9 Aug 2007*, *linh.nguyen@mail.example* and *linh.n07@mail.example*, *S-20436* and *none*, each with a cross: "only the name agrees". She clears to white paper, a person of her own, with an amber band, and her card turns into her own record, *Applicant · bachelor's · from Oct 2026*, with the stamp landing on it at last, *S-21907*: "a new person". No line joins the two.
 
 **On screen.** October 2026 · the university · Linh Nguyen · applying for a bachelor's · already here · applying · 14 Mar 2001 · 9 Aug 2007 · linh.nguyen@mail.example · linh.n07@mail.example · S-20436 · none · only the name agrees · Applicant · bachelor's · from Oct 2026 · S-21907 · a new person
 
-### 11 · The person, published · 5:05–5:40
+### 11 · The person, published · 3:57–4:24
 
 **Narration.** Behind the search is the person, published as a data product, and owned by Mei's office. A contract fixes its shape, and a new version marks any change to it, so nothing that reads it breaks by surprise. dbt builds and tests it, and Databricks governs who may read it. A synced table serves it to the application, while the applicant waits.
 
-**Picture.** Plain paper. A card for the person, a white figure on it, with tabs: *data product*, *owner: Mei's office*, *contract: enforced*, *version 1*, *access: public*. Beside it, the dbt logo and four lines of the model's settings, the lines lighting as they're said; then the Databricks logo, and Unity Catalog's grant, *read: student system, HR*. Last, a *synced table* card, and an amber line from it to the application: "while the applicant waits".
+**Picture.** Plain paper. A card for the person, a white figure on it, a badge, *data product*, and four fields that light as they're said: *owner: Mei's office* in gold, then *contract: enforced*, *version 1* and *access: public* in cyan. Beside it, the dbt logo and four lines of the model's settings, lighting with them; then the Databricks logo, and Unity Catalog's grant, *may read: student system, HR*. The tools step back for a *synced table* card, an arrow to it from the person, and an amber arrow from it to the application, which *searches before it creates*: "while the applicant waits".
 
-**On screen.** the person · data product · owner: Mei's office · contract: enforced · version 1 · access: public · group: person · contract: {enforced: true} · latest_version: 1 · builds and tests it · Unity Catalog · governs who may read it · may read: student system, HR · synced table · the person, for the search · while the applicant waits
+**On screen.** the person · data product · owner · Mei's office · contract · enforced · version · 1 · access · public · dbt · builds and tests it · group: person · access: public · contract: {enforced: true} · latest_version: 1 · Unity Catalog · governs who may read it · may read: student system, HR · synced table · the person, for the search · Application · searches before it creates · while the applicant waits
 
-### 12 · One person, shared · 5:40–6:05
+### 12 · One person, shared · 4:24–4:45
 
 **Narration.** In Bern, each country kept its post office, and they shared the rules. Here, each system keeps its records, and they share one person. Choose the lightest way that solves the problem.
 
-**Picture.** The valley of 1874 again, small and framed, its offices inside one line; it gives way to the campus, Linh in white paper with all five of her bands, and the four system cards round her, two joined both ways and two by links. The cards step back for the last line, which then settles onto the end card. Wordless breather. End card.
+**Picture.** The valley of 1874 again, its offices inside one line, each lifting in turn, and a dot running from the treaty to each. It gives way to the campus: Linh in white paper with all five of her bands, and the four system cards above her, two joined both ways and two by links, each lifting in turn, and a light behind her on "one person". The cards step back for the last line, which then settles onto the end card. Wordless breather. End card.
 
-**On screen.** 1874 · today · student system · HR · research office · alumni office · Choose the lightest way that solves the problem.
+**On screen.** 1874 · Bern · student system · students, applicants · HR · staff, tutors · research office · researchers · alumni office · graduates · Choose the lightest way that solves the problem. · One person, many systems · The same one, everywhere · Film 7 of 9
 
 ## Pause and think
 
@@ -181,7 +181,7 @@ Sources checked on 17 October 2026.
 
 - **The postal union.** The treaty concerning the formation of a General Postal Union was signed at Bern on 9 October 1874; its preamble lists 21 countries (Germany, Austria-Hungary, Belgium, Denmark, Egypt, Spain, the United States, France, Great Britain, Greece, Italy, Luxembourg, Norway, the Netherlands, Portugal, Romania, Russia, Serbia, Sweden, Switzerland and Turkey). Article 1 makes them "a single postal territory for the reciprocal exchange of correspondence"; the general rate is 25 centimes for a single prepaid letter of up to 15 grams; under Article 9 each administration keeps the whole of the sums it collects; it took effect on 1 July 1875 (the treaty's text, Avalon Project, Yale Law School). It was renamed the Universal Postal Union in 1878 (Wikipedia, "Universal Postal Union"). Some sources count 22 countries, from the delegates at the congress; the film follows the treaty's own list. "One rate" simplifies: countries could round the rate into their own currency within limits, and sea transit over long distances could cost more; transit through a third country was still paid for, by weight, between administrations. The film says "each kept the postage it collected", which is exact.
 - **Before the union.** "Every pair of countries that exchanged mail had to negotiate a postal treaty with each other", and without one, mail went through a third country (Wikipedia, "Universal Postal Union"). The US Postmaster General, Montgomery Blair, reported in 1862 that rates "vary greatly according to the route of carriage", with no common standard weight for a single rate (quoted by the Mystic Stamp Company's history of the 1863 Paris conference; to check against the report itself). Seven offices stand for the countries: the picture is a valley, not a map, so no border is drawn.
-- **The four ways.** Registry, consolidation, coexistence and centralised (also called transaction or transactional) are the usual names of master data management's implementation styles, usually credited to Gartner, and taught as a range from the lightest to the most invasive. The film names them as *One person, many roles* did, without naming a source again. DAMA-DMBOK's own wording wasn't checked against the book: a CDMP study guide lists the same four for DMBOK2; other summaries of DMBOK2 give three hub approaches (registry, transaction hub, and consolidated as a hybrid of the two). Film 1 attributes the four to DAMA; its thread keeps that check.
+- **The four ways.** Registry, consolidation, coexistence and centralised (also called transaction or transactional) are the usual names of master data management's implementation styles, usually credited to Gartner, and taught as a range from the lightest to the most invasive. The film names them as *One person, many roles* did, without naming a source again. DAMA-DMBOK's own wording wasn't checked against the book: a CDMP study guide lists the same four for DMBOK2; other summaries of DMBOK2 give three hub approaches (registry, transaction hub, and consolidated as a hybrid of the two). *One person, many roles* attributes the four to DAMA; its thread keeps that check.
 - **What each way does.** A registry keeps cross-references and match keys and reads values from the sources when asked; consolidation builds golden records downstream, usually for analysis, and the sources don't see them; coexistence keeps the master and the sources both, and the sources read the master back (often each way); the centralised style makes the hub the system of entry and of record, and other systems take their master data from it. Mixing styles by system or by domain is common, and moving from one style to the next over time is the usual path.
 - **Search before create.** Real student systems do this. Ellucian Banner's Common Matching "checks for existing identification records before a new one is added", with three results: the record is new, one match is found (no new identifier is made), or potential matches are found, and the user decides (Otis College, *Banner Common Matching* procedure, 2013; Lehigh University and others document the same). The same procedure lists the offices allowed to create person records: Advancement for alumni and donors, HR for employees, Admissions and the registrar for students. The film's university is invented and its rule is its own; the film names no product.
 - **Why it's common.** The University of Galway keeps a returning student's whole history under their first number, asks applicants to say whether they studied there before, and lists what goes wrong when two numbers aren't merged in time: the fees record, email, course pages, a new ID card, the library (registration office notice *Merging numbers*, read 17 October 2026). The film names no university.
@@ -196,11 +196,16 @@ Sources checked on 17 October 2026.
 
 ## Built
 
-Built on 17 October 2026, from this script, in watercolour. What changed on the way, also in the series' *Decided* table:
+Built on 17 October 2026, from this script, in watercolour. What changed on the way, sent for the series' *Decided* table:
 
 - **Names.** The plan's "student app" is *the student system*, as in *One person, many roles*; the online application writes to it. The applicant role is added by the application, and the student number stays the one she already has.
 - **The rule.** Only the application and HR may create a person, after a search; the research and alumni offices add roles.
-- **Sound.** A new palette (in `source/tools/score.py`): a reed organ's chords that swell with the chapters; a soft horn for the series' mark (1-8-5-1), a nod to the post horn of 1874; a harp for each role, on the notes the roles have had since film 1; a low flute, D and A, for the person. The only pulse is under the third number that the application would make, in chapter 2.
+- **Dates.** Agreed with *Kept, not cleaned*: the search before create runs from the February 2026 intake; chapter 2 is late 2025; Linh applies in October 2026 for a PhD that starts in February 2027, so her applicant role runs from October 2026; the second Linh applies for a bachelor's and becomes S-21907. The film states no counts of duplicates.
+- **1874.** A coin spins down by each office's door, where the plan had a box; the treaty is sealed after its twenty-one signatures, then pinned up above the town.
+- **Chapter 5.** The coexistence card's diagram opens out into the picture, instead of a cut to a new one: its frame lifts away, the small white figure grows into Linh, and each system's chip flies to its own card.
+- **Colours.** The person's fields as a product, and dbt's lit lines, wear the side colours, gold for the owner and cyan for the technical settings, never a role's.
+- **Layouts.** Chapter 7's lanes and tags are spaced so nothing overlaps; chapter 9's application is wide enough for the email, and its ticks clear the values; chapter 11 no longer moves in on the application at the end, since the camera, kept inside the frame, pulled a card half out of view: the tools step back instead.
+- **Sound.** A new palette (in `source/tools/score.py`): a reed organ's chords that swell with the chapters, from F major in 1874 to D major at the end; a soft horn for the series' mark (1-8-5-1), a nod to the post horn of 1874, with its echo off the valley; a harp for each role, on the notes the roles have had since *One person, many roles*; a low flute, D and A, for the person. Each instrument is set to come out as loud as its part in that film at the same gain, so the music sits about 21 dB under the voice, as in the other series' films, and the only pulse, under the third number the application would make in chapter 2, sits about 9 dB under the music.
 
 ## Next
 

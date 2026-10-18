@@ -161,9 +161,9 @@ scene("terms",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   m4_range(t,[[0,2018.5,2027],[0.9,2022.6,2027],[tJan-0.7,2025.55,2026.6]],1.6);
   const hush=fin(t,0.8,0.8),row=[0,1,2,3,4].map(i=>i===1?1:1-0.62*hush);
   m4_tl(ctx,t,{row,all:true,split:clamp((t-tNew+0.1)/1.6,0,1),fig:[1,1,1,1,1]});
-  // film 1's picture, named: one band
+  // the picture so far, named: one band (as One person, many roles drew it)
   const nA=1-fin(t,tNew-0.2,0.6),nx=m4_x(M4_TUT[0].A);
-  if(nA>0.01)withA(ctx,nA,()=>{wc_hand(ctx,"film 1: one band",nx+4,300,{p:clamp((t-tOneB+0.4)/0.9,0,1),size:30,col:WC_INK});
+  if(nA>0.01)withA(ctx,nA,()=>{wc_hand(ctx,"so far: one band",nx+4,300,{p:clamp((t-tOneB+0.4)/0.9,0,1),size:30,col:WC_INK});
     m4_arrow(ctx,nx+40,318,nx+40,m4_rowY(1)-28,clamp((t-tOneB)/0.5,0,1),{lw:2.4});});
   // HR's card: an offer of work, each teaching period, for one unit
   const hA=1-fin(t,tJan-1.0,0.6);

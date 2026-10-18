@@ -381,7 +381,7 @@ function m4_arrow(ctx,x0,y0,x1,y1,p,o){o=o||{};if(p<=0)return;const q=ease(clamp
 // a soft bracket: a pencil loop round a box, drawn on as p goes 0 to 1 (its path is fixed, so it's kept)
 function m4_loop(ctx,x0,y0,x1,y1,p,o){o=o||{};if(p<=0)return;const cx=(x0+x1)/2,cy=(y0+y1)/2;wc_ring(ctx,cx,cy,(x1-x0)/2,(y1-y0)/2,p,{seed:o.seed||17,a:o.a,col:o.col});}
 
-// the tutor row: one band (film 1's picture), or HR's contracts, one a semester; split (0 to 1) breaks the band into them, each piece closing
+// the tutor row: one band (One person, many roles' picture), or HR's contracts, one a semester; split (0 to 1) breaks the band into them, each piece closing
 // in from the middle of its gaps onto its own dates, and names each piece's semester once it's wide enough to read; a name steps aside
 // from a date's line at x avoid, to whichever side of it has room, as ak goes 0 to 1
 function m4_tutor(ctx,pr,split,a,avoid,ak){if(pr<=0||a<=0.01)return;const y=m4_rowY(1),T=M4_TUT,n=T.length;ak=avoid==null?0:(ak==null?1:clamp(ak,0,1));

@@ -79,113 +79,113 @@ E investigadora, de marzo a diciembre de este año.
 Unos se suceden, y otros van a la vez. La persona debajo de ellos sigue siendo la misma.
 
 21
-00:02:23,282 --> 00:02:27,154
-La primera película dibujó sus tutorías como una franja, desde 2023.
+00:02:23,282 --> 00:02:26,992
+Hasta ahora, sus tutorías son una franja, desde 2023.
 
 22
-00:02:28,354 --> 00:02:36,153
+00:02:28,192 --> 00:02:35,991
 RR. HH. lo ve distinto: le ofrece trabajo un periodo lectivo a la vez, un contrato nuevo cada semestre, para una asignatura.
 
 23
-00:02:37,453 --> 00:02:40,276
+00:02:37,291 --> 00:02:40,114
 Así que el rol de tutora empieza y termina cada semestre.
 
 24
-00:02:41,476 --> 00:02:45,978
+00:02:41,314 --> 00:02:45,816
 En enero, entre contratos, no es parte del personal. En la fecha de censo, sí.
 
 25
-00:02:49,078 --> 00:02:52,962
+00:02:48,916 --> 00:02:52,800
 Ahora Planificación traza una línea sobre sus franjas, en la fecha de censo.
 
 26
-00:02:54,062 --> 00:02:57,738
+00:02:53,900 --> 00:02:57,576
 Estudiante, tutora e investigadora están abiertos, y egresada también.
 
 27
-00:02:59,038 --> 00:03:04,989
+00:02:58,876 --> 00:03:04,827
 Así que Linh cuenta una vez, como estudiante que trabaja aquí: una persona con tres roles, no tres personas.
 
 28
-00:03:06,489 --> 00:03:10,706
+00:03:06,327 --> 00:03:10,544
 Mueve la línea un año atrás, y es tutora y egresada, no estudiante.
 
 29
-00:03:12,406 --> 00:03:14,362
+00:03:12,244 --> 00:03:14,200
 La cifra del año pasado queda como era.
 
 30
-00:03:15,562 --> 00:03:20,904
+00:03:15,400 --> 00:03:20,742
 Y la pregunta de egresados se vuelve un filtro: egresados con un rol de estudiante abierto.
 
 31
-00:03:22,004 --> 00:03:24,705
+00:03:21,842 --> 00:03:24,543
 Linh volvió, desde julio de 2025.
 
 32
-00:03:27,705 --> 00:03:30,001
+00:03:27,543 --> 00:03:29,839
 Cada rol dice también con qué se relaciona.
 
 33
-00:03:30,901 --> 00:03:39,787
+00:03:30,739 --> 00:03:39,625
 Su rol de estudiante, una maestría en informática de la salud. Cada contrato de tutora, una asignatura en un semestre. Su rol de investigadora, un proyecto.
 
 34
-00:03:40,987 --> 00:03:45,924
+00:03:40,825 --> 00:03:45,762
 Las personas también se relacionan entre sí. En el proyecto, Ana Ruiz supervisa a Linh.
 
 35
-00:03:47,124 --> 00:03:52,048
+00:03:46,962 --> 00:03:51,886
 Esa relación tiene sus propias fechas, y termina con el proyecto. Las dos personas siguen.
 
 36
-00:03:55,048 --> 00:03:57,507
+00:03:54,886 --> 00:03:57,345
 Una empresa de energía tiene el mismo problema.
 
 37
-00:03:58,807 --> 00:04:02,515
+00:03:58,645 --> 00:04:02,353
 El titular de la cuenta se muda en junio, y su rol termina ese día.
 
 38
-00:04:04,615 --> 00:04:10,267
+00:04:04,453 --> 00:04:10,105
 La persona que se queda depende de soporte vital en casa. Su necesidad sigue, y el riesgo también.
 
 39
-00:04:12,167 --> 00:04:16,360
+00:04:12,005 --> 00:04:16,198
 Guardada en su cuenta, la necesidad se cerraría con ella. Guardada en ella, se queda.
 
 40
-00:04:20,360 --> 00:04:23,736
+00:04:20,198 --> 00:04:23,574
 En la plataforma, es una tabla, con una fila por cada rol.
 
 41
-00:04:25,036 --> 00:04:31,696
+00:04:24,874 --> 00:04:31,534
 Cada fila guarda la persona, el tipo de rol, su responsable, con qué se relaciona, y las fechas en que es válido.
 
 42
-00:04:33,796 --> 00:04:41,436
+00:04:33,634 --> 00:04:41,274
 Jun la construye en dbt, con dos pruebas. Un rol no puede terminar antes de empezar, y cada rol pertenece a una persona.
 
 43
-00:04:43,536 --> 00:04:47,842
+00:04:43,374 --> 00:04:47,680
 Así, cualquier pregunta puede llevar una fecha: la del censo, el año pasado, o hoy.
 
 44
-00:04:49,742 --> 00:04:55,970
+00:04:49,580 --> 00:04:55,808
 Cada fila guarda también cuándo se registró, así que un contrato cargado tarde cuenta desde el día en que empezó.
 
 45
-00:05:01,070 --> 00:05:04,994
+00:05:00,908 --> 00:05:04,832
 Hoy, Linh es estudiante, tutora, investigadora y egresada.
 
 46
-00:05:06,294 --> 00:05:10,059
+00:05:06,132 --> 00:05:09,897
 En diciembre, el proyecto termina. Algún día, se graduará otra vez.
 
 47
-00:05:11,559 --> 00:05:12,799
+00:05:11,397 --> 00:05:12,637
 Los roles van y vienen.
 
 48
-00:05:14,099 --> 00:05:17,134
+00:05:13,937 --> 00:05:16,972
 Un rol tiene un inicio y un fin. La persona se queda.

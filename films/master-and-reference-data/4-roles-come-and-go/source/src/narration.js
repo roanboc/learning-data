@@ -26,7 +26,7 @@ const NARR={
  {"id":"research","gap":0.8,"text":"And researcher, from March to December this year."},
  {"id":"stays","gap":0.8,"text":"Some follow each other, and some run at once. The person under them stays the same."}]},
 "terms":{"name":"A contract each term","lead":0.8,"tail":1.0,"vo":[
- {"id":"drew","gap":0.8,"text":"The first film drew her tutoring as one band, since 2023.","say":"The first film drew her tutoring as one band, since twenty twenty-three."},
+ {"id":"drew","gap":0.8,"text":"So far, her tutoring is one band, since 2023.","say":"So far, her tutoring is one band, since twenty twenty-three."},
  {"id":"hr","gap":0.8,"text":"HR sees it differently: it offers her work one teaching period at a time, a new contract each semester, for one unit."},
  {"id":"every","gap":0.8,"text":"So the tutor role starts and ends every semester."},
  {"id":"jan","gap":0.8,"text":"In January, between contracts, she isn't staff. On census date, she is."}]},

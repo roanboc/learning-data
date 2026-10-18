@@ -54,10 +54,14 @@ lab: async (id) => {
   } else if (Lb.kind === "navigator") {
     W.els.forEach((e, i) => { if (e.fail != null) q('.ea-el[data-i="' + i + '"]').click(); });
     click(byText(".chip-btn", W.run), "run the checks"); await wait(20);
-    const ask = qa(".ea-opts.ask button")[0]; click(ask, "ask before fixing"); await wait(20);
-    if (!(q(".ea-answer") || {}).textContent) out.push("asking before the fixes answers nothing");
+    const k = Math.max(0, W.ask.qs.findIndex(x => x.no)), ans = () => (q(".ea-answer") || {}).textContent;
+    click(qa(".ea-opts.ask button")[k], "ask before fixing"); await wait(20);
+    if (!ans()) out.push("asking before the fixes answers nothing");
     click(byText(".chip-btn", W.fixAll), "fix what fails"); await wait(20);
-    click(qa(".ea-opts.ask button")[1], "ask the agent");
+    const open = W.els.filter(e => e.fail != null && !e.fix).length, flagged = qa(".ea-el.fail").length;
+    if (flagged !== open) out.push(flagged + " still flagged after the fixes, where " + open + " has no fix");
+    click(qa(".ea-opts.ask button")[k], "ask the agent"); await wait(20);
+    if (ans() !== W.ask.qs[k].a) out.push("after the fixes, the agent doesn't give its answer");
   } else out.push("no play for a lab of kind " + Lb.kind);
   await wait(60);
   const end = q(".ea-end"), say = q(".lab-say");

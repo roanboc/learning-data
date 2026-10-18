@@ -401,8 +401,8 @@ tCi = C(RD, 'cites'); ck = W(RD, 'cites', 'check')
 paper(tCi - 0.3, 0.024, px(1270), 0.5); pencil(W(RD, 'cites', 'IDs', -0.1), 0.01, px(1270), 0.5)
 tap(ck - 0.1, 0.012, px(1400)); paper(ck + 0.1, 0.02, px(1490), 0.4); pencil(ck + 0.5, 0.01, px(1490), 0.6)
 press(ck + 0.9, 0.018); vib(73, ck + 0.95, 0.013, px(1270))
-# 7. An agent on the map: air as the agent goes into the map, and a knock and a struck note as it lands there, an actor; a knock and
-#    paper for its file, keys for its lines; a knock for the outage agent's; a nylon note for what it may do, a low knock and a low
+# 7. An agent on the map: air as the agent goes into the map, and a knock and a struck note as it lands there, in application/; a
+#    knock and paper for its file, keys for its lines; a knock for the outage agent's; a nylon note for what it may do, a low knock and a low
 #    note for what it may not. Two knocks for the two sources, a low note that doesn't fit the chord for their disagreement, a key for
 #    the arrow, paper and a nylon note for the question to the owner. A key for its owner, a press for the tick, a pencil as draft
 #    becomes confirmed, and a press and a nylon note for that tick. Then a knock for the rule, a nylon note, rising, for each of its
@@ -412,9 +412,9 @@ bed(RG, [DBMAJ9, GBMAJ9, BBM9, ABSUS4], 0, cq(RG, 'same'))
 bed(RG, [DBMAJ9], cq(RG, 'same'), None)
 fa, fb = C(RG, 'on', -0.2), W(RG, 'on', 'map itself', 0.2)
 air(fa, fb - fa, 0.012, -0.3); knock(fb - 0.1, 0.012, px(404)); vib(68, fb, 0.013, px(404))
-tAc, rw, own = W(RG, 'on', 'actor'), W(RG, 'on', 'rights'), W(RG, 'owner', 'Tomás')
+tAc, tRl, rw, own = W(RG, 'on', 'software'), W(RG, 'on', 'role'), W(RG, 'on', 'rights'), W(RG, 'owner', 'Tomás')
 knock(tAc - 0.4, 0.016, px(1270)); paper(tAc - 0.35, 0.018, px(1270), 0.4)
-for t0 in [tAc - 0.2, tAc, tAc + 0.2, rw - 0.3, rw - 0.05, rw + 0.2, rw + 0.45, rw + 0.9, rw + 1.1]:
+for t0 in [tAc - 0.2, tAc, tAc + 0.2, tRl - 0.1, rw - 0.3, rw - 0.05, rw + 0.2, rw + 0.45, rw + 0.9, rw + 1.1]:
     tap(t0, 0.007, px(1270))
 knock(W(RG, 'on', 'outage', -0.5), 0.012, px(1270))
 nylon(65, W(RG, 'may', 'read'), 0.016, px(1790)); s_knock(W(RG, 'may', 'may not'), 0.016, px(1790), 160); soft(44, W(RG, 'may', 'may not', 0.05), 0.018, px(1790))

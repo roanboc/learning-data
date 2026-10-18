@@ -282,28 +282,28 @@ scene("reads",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
 scene("rights",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   const tOn=c("on"),tM=c("may"),tAs=c("asks"),tO=c("owner"),tS=c("same");
   ctx.save();focus(ctx,t,[[0,960,540,1.0]],1.8);
-  // the agent goes into the map, as an actor in business/
+  // the agent goes into the map, as software in application/
   const f0=tOn-0.2,f1=w("on","map itself")+0.2,fu=ease(clamp((t-f0)/(f1-f0),0,1)),land=fin(t,f1-0.1,0.4);
-  d11_tree(ctx,80,150,440,{p:1,plus:[0,0,land,0,0,0,0],hi:D11_TREE.map((_,i)=>i===2?pulseAt(t,f1,1.6)*0.9+fin(t,tS+0.4,0.5)*0.5:0)});
-  const ox=lerp(600,404,fu),oy=lerp(270,382,fu)-Math.sin(fu*Math.PI)*60;kt_agent(ctx,ox,oy,lerp(30,12,fu),t,{busy:fu<1?0.6:0});
-  // its file: an actor, with its rights written down
-  const fA=fin(t,w("on","actor")-0.4,0.5),rw=w("on","rights"),own=w("owner","Tomás");
-  if(fA>0.01){d11_thread(ctx,522,382,694,300,fA,BUS,{a:0.5});
-    const L=[["id","ACT-008"],["name","map agent"],["kind","actor"],["rights",""],[null,"- may: read everything, draft changes",{ind:1,vcol:mix(D11_OK,INK,0.35),hiCol:D11_OK}],[null,"- may not: confirm a change",{ind:1,vcol:mix(D11_RED,INK,0.35),hiCol:D11_RED}],
+  d11_tree(ctx,80,150,440,{p:1,plus:[0,0,0,0,land,0,0],hi:D11_TREE.map((_,i)=>i===4?pulseAt(t,f1,1.6)*0.9+fin(t,tS+0.4,0.5)*0.5:0)});
+  const ox=lerp(600,404,fu),oy=lerp(270,494,fu)-Math.sin(fu*Math.PI)*60;kt_agent(ctx,ox,oy,lerp(30,12,fu),t,{busy:fu<1?0.6:0});
+  // its file: software, an application component, filling a role, with its rights written down
+  const fA=fin(t,w("on","software")-0.4,0.5),rl=w("on","role"),rw=w("on","rights"),own=w("owner","Tomás"),FY=84;
+  if(fA>0.01){d11_thread(ctx,522,494,694,300,fA,APL,{a:0.5});
+    const L=[["id","APP-030"],["name","map agent"],["kind","application component"],["assigned to","ROL-009 · map drafter"],["rights",""],[null,"- may: read everything, draft changes",{ind:1,vcol:mix(D11_OK,INK,0.35),hiCol:D11_OK}],[null,"- may not: confirm a change",{ind:1,vcol:mix(D11_RED,INK,0.35),hiCol:D11_RED}],
       [null,"- asks: the owner, when sources disagree",{ind:1,vcol:mix(TRUST,INK,0.35),hiCol:TRUST}],["owner","Tomás Herrera",{tick:fin(t,own+0.5,0.4)}],["evidence","DEC-015 · an agent for the map · Sep 2027"],["status","confirmed",{from:"draft",u:clamp((t-own-0.8)/0.6,0,1),tick:fin(t,own+1.3,0.4)}]];
-    const rows=L.map((_,i)=>i<3?fin(t,w("on","actor")-0.2+i*0.2,0.4):i<7?fin(t,rw-0.3+(i-3)*0.25,0.4):i===7?fin(t,own-0.2,0.5):fin(t,rw+0.9+(i-8)*0.2,0.4));
-    const hi=L.map((_,i)=>i===4?fin(t,w("may","read")-0.2,0.4)*(1-fin(t,tAs-0.3,0.5)):i===5?fin(t,w("may","may not")-0.1,0.4)*(1-fin(t,tAs-0.3,0.5)):i===6?fin(t,tAs,0.4)*(1-fin(t,tO-0.3,0.5)):i===7?fin(t,own-0.2,0.4)*(1-fin(t,tS-0.3,0.5)):0);
-    arrive(ctx,1270,400,t,w("on","actor")-0.4,()=>d11_file(ctx,700,120,1140,"business/ACT-008.yml",L,{col:BUS,a:fA,rows,hi,glow:pulseAt(t,own+1.3,1.2)}),{dy:-14});
+    const rows=L.map((_,i)=>i<3?fin(t,w("on","software")-0.2+i*0.2,0.4):i===3?fin(t,rl-0.1,0.4):i<8?fin(t,rw-0.3+(i-4)*0.25,0.4):i===8?fin(t,own-0.2,0.5):fin(t,rw+0.9+(i-9)*0.2,0.4));
+    const hi=L.map((_,i)=>i===3?fin(t,rl,0.4)*(1-fin(t,rw-0.2,0.5)):i===5?fin(t,w("may","read")-0.2,0.4)*(1-fin(t,tAs-0.3,0.5)):i===6?fin(t,w("may","may not")-0.1,0.4)*(1-fin(t,tAs-0.3,0.5)):i===7?fin(t,tAs,0.4)*(1-fin(t,tO-0.3,0.5)):i===8?fin(t,own-0.2,0.4)*(1-fin(t,tS-0.3,0.5)):0);
+    arrive(ctx,1270,390,t,w("on","software")-0.4,()=>d11_file(ctx,700,FY,1140,"application/APP-030.yml",L,{col:APL,a:fA,rows,hi,glow:pulseAt(t,own+1.3,1.2)}),{dy:-14});
     // a tick for what it may do, a cross for what it may not
-    const mk=(i,k,at)=>{const q=fin(t,at,0.4);if(q<=0.01)return;const yy=120+66+i*48+48*0.66-10,xx=1790;if(k===0)withA(ctx,q,()=>tick_(ctx,xx,yy+2,30,D11_OK,1));else if(k===1)withA(ctx,q,()=>cross_(ctx,xx,yy,26,D11_RED,1));else withA(ctx,q,()=>{ctx.save();ctx.strokeStyle=rgba(TRUST,1);ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(xx-14,yy);ctx.lineTo(xx+12,yy);ctx.moveTo(xx+3,yy-9);ctx.lineTo(xx+12,yy);ctx.lineTo(xx+3,yy+9);ctx.stroke();ctx.restore();});};
-    mk(4,0,w("may","read"));mk(5,1,w("may","may not"));mk(6,2,tAs+0.2);}
+    const mk=(i,k,at)=>{const q=fin(t,at,0.4);if(q<=0.01)return;const yy=FY+66+i*48+48*0.66-10,xx=1790;if(k===0)withA(ctx,q,()=>tick_(ctx,xx,yy+2,30,D11_OK,1));else if(k===1)withA(ctx,q,()=>cross_(ctx,xx,yy,26,D11_RED,1));else withA(ctx,q,()=>{ctx.save();ctx.strokeStyle=rgba(TRUST,1);ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(xx-14,yy);ctx.lineTo(xx+12,yy);ctx.moveTo(xx+3,yy-9);ctx.lineTo(xx+12,yy);ctx.lineTo(xx+3,yy+9);ctx.stroke();ctx.restore();});};
+    mk(5,0,w("may","read"));mk(6,1,w("may","may not"));mk(7,2,tAs+0.2);}
   // like the outage agent's
-  const oA=fin(t,w("on","outage")-0.5,0.5)*(1-fin(t,tAs-0.7,0.5));if(oA>0.01)arrive(ctx,1270,780,t,w("on","outage")-0.5,()=>d11_outage(ctx,700,704,1140,{a:oA}),{dy:-12});
+  const oA=fin(t,w("on","outage")-0.5,0.5)*(1-fin(t,tAs-0.7,0.5));if(oA>0.01)arrive(ctx,1270,800,t,w("on","outage")-0.5,()=>d11_outage(ctx,700,724,1140,{a:oA}),{dy:-12});
   // where two sources disagree, it doesn't choose: it asks the owner
-  const dA=fin(t,tAs-0.2,0.5)*(1-fin(t,tS-0.6,0.5));if(dA>0.01){d11_disagree(ctx,700,704,t,{a:dA,pa:fin(t,tAs-0.2,0.4),pb:fin(t,tAs+0.2,0.4),ne:fin(t,w("asks","disagree")-0.1,0.4)});
-    const qA=fin(t,w("asks","owner")-0.4,0.5)*dA;if(qA>0.01)arrive(ctx,1678,780,t,w("asks","owner")-0.4,()=>d11_question(ctx,1516,704,324,t,{a:qA,glow:pulseAt(t,w("asks","owner"),1.2)}),{dy:-12});}
+  const dA=fin(t,tAs-0.2,0.5)*(1-fin(t,tS-0.6,0.5));if(dA>0.01){d11_disagree(ctx,700,724,t,{a:dA,pa:fin(t,tAs-0.2,0.4),pb:fin(t,tAs+0.2,0.4),ne:fin(t,w("asks","disagree")-0.1,0.4)});
+    const qA=fin(t,w("asks","owner")-0.4,0.5)*dA;if(qA>0.01)arrive(ctx,1678,800,t,w("asks","owner")-0.4,()=>d11_question(ctx,1516,724,324,t,{a:qA,glow:pulseAt(t,w("asks","owner"),1.2)}),{dy:-12});}
   // agents draft, people confirm, every version is kept: the rule that keeps data models true, applied to the map
-  const rA=fin(t,tS-0.3,0.5);if(rA>0.01)arrive(ctx,1270,780,t,tS-0.3,()=>d11_rule3(ctx,700,704,1140,t,{a:rA,rows:[fin(t,w("same","Agents")-0.1,0.4),fin(t,w("same","people")-0.1,0.4),fin(t,w("same","every version")-0.1,0.4)],sw:clamp((t-(w("same","applied")-0.1))/0.6,0,1),glow:pulseAt(t,w("same","applied")+0.4,1.4)}),{dy:-12});
+  const rA=fin(t,tS-0.3,0.5);if(rA>0.01)arrive(ctx,1270,800,t,tS-0.3,()=>d11_rule3(ctx,700,724,1140,t,{a:rA,rows:[fin(t,w("same","Agents")-0.1,0.4),fin(t,w("same","people")-0.1,0.4),fin(t,w("same","every version")-0.1,0.4)],sw:clamp((t-(w("same","applied")-0.1))/0.6,0,1),glow:pulseAt(t,w("same","applied")+0.4,1.4)}),{dy:-12});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 8. People confirm ---------- */
@@ -311,10 +311,10 @@ const D11_VERS2=[["v2.9","1 Oct"],["v3.0","14 Jan"],["v3.1","4 Feb"]];
 scene("confirm",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   const tCo=c("code"),tCl=c("clause"),tF=c("finds"),tD=c("drafts"),tC=c("confirms"),tV=c("version");
   ctx.save();focus(ctx,t,[[0,960,540,1.0]],1.8);
-  // the agent leaves business/ to search the rules; then signs its draft
+  // the agent leaves application/ to search the rules; then signs its draft
   const out=ease(clamp((t-(tF-0.6))/0.8,0,1)),toPR=ease(clamp((t-(tD-0.3))/0.9,0,1)),scan=fin(t,tF+0.2,0.4)*(1-fin(t,w("finds","reason")+0.3,0.5));
-  d11_tree(ctx,80,150,440,{p:1,plus:[0,0,1,0,0,0,0],hi:D11_TREE.map((_,i)=>i===0?scan:0)});
-  const ox=lerp(lerp(404,600,out),742,toPR),oy=lerp(lerp(382,270,out),396,toPR)-Math.sin(toPR*Math.PI)*50,orr=lerp(lerp(12,26,out),14,toPR);
+  d11_tree(ctx,80,150,440,{p:1,plus:[0,0,0,0,1,0,0],hi:D11_TREE.map((_,i)=>i===0?scan:0)});
+  const ox=lerp(lerp(404,600,out),742,toPR),oy=lerp(lerp(494,270,out),396,toPR)-Math.sin(toPR*Math.PI)*50,orr=lerp(lerp(12,26,out),14,toPR);
   if(scan>0.01)kt_scan(ctx,ox-26,oy,320,270,scan,t,{w:26});
   // the regulator changes the retail code: a sentence added to clause 4.2, written in as it's read
   const pA=fin(t,tCo-0.2,0.6);if(pA>0.01)arrive(ctx,1270,209,t,tCo-0.2,()=>d11_code(ctx,700,84,1140,250,t,{a:pA,hl:fin(t,tCl,0.6)*(1-fin(t,tD-0.4,0.6)),nw:clamp((t-(tCl-0.1))/(w("clause","not")-tCl),0,1)}),{dy:-16});

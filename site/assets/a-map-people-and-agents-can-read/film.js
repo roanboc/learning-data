@@ -454,7 +454,7 @@ const NARR={
  {"id":"column","gap":0.8,"text":"Given a column in the catalogue, it finds the rule behind it, with its owner and its reason."},
  {"id":"cites","gap":0.8,"text":"Every answer cites IDs and evidence, so a person can check it."}]},
 "rights":{"name":"An agent on the map","lead":1.0,"tail":1.0,"vo":[
- {"id":"on","gap":0.8,"text":"The agent is on the map itself: an actor, with its rights written down, like the outage agent's."},
+ {"id":"on","gap":0.8,"text":"The agent is on the map itself: software, filling a role, with its rights written down, like the outage agent's."},
  {"id":"may","gap":0.8,"text":"It may read everything, and draft changes. It may not confirm one."},
  {"id":"asks","gap":0.8,"text":"Where two sources disagree, it doesn't choose. It asks the owner."},
  {"id":"owner","gap":0.8,"text":"Its owner is Tomás."},
@@ -485,7 +485,7 @@ const NARR={
  {"id":"over","gap":0.8,"text":"The map holds what the organisation means. Turning that meaning into data is where From words to data begins."}]}
 };
 
-const VODUR={"stars/coast": 10.583, "stars/mau": 7.198, "stars/ring": 5.677, "stars/land": 7.801, "stars/few": 4.441, "stars/teach": 7.25, "stars/link": 4.842, "stars/test": 2.812, "risk/note": 2.964, "risk/used": 5.388, "risk/stale": 1.383, "risk/slides": 3.966, "risk/copies": 6.118, "risk/worse": 3.136, "risk/fails": 5.241, "text/move": 1.937, "text/once": 7.605, "text/id": 5.9, "text/fields": 6.052, "text/rules": 6.538, "text/decisions": 2.54, "review/repo": 3.751, "review/pr": 4.554, "review/owner": 5.16, "review/checks": 2.527, "review/list": 5.56, "review/power": 4.276, "views/gen": 3.632, "views/list": 5.5, "views/readers": 2.868, "views/dbt": 5.768, "views/dbx": 5.803, "views/nobody": 4.139, "reads/now": 1.642, "reads/request": 6.478, "reads/change": 6.904, "reads/column": 5.552, "reads/cites": 3.939, "rights/on": 5.852, "rights/may": 3.894, "rights/asks": 3.718, "rights/owner": 1.354, "rights/same": 6.932, "confirm/code": 2.425, "confirm/clause": 6.651, "confirm/finds": 5.42, "confirm/drafts": 4.334, "confirm/confirms": 2.814, "confirm/version": 3.365, "again/spring": 2.913, "again/day": 5.344, "again/map": 1.683, "again/asks": 4.181, "again/gets": 4.835, "again/first": 4.349, "sailing/pwo": 7.134, "sailing/died": 3.173, "sailing/now": 7.81, "end/confirm": 4.389, "end/answer": 6.811, "end/layers": 7.205, "end/data": 5.996, "end/over": 6.609};
+const VODUR={"stars/coast": 10.583, "stars/mau": 7.198, "stars/ring": 5.677, "stars/land": 7.801, "stars/few": 4.441, "stars/teach": 7.25, "stars/link": 4.842, "stars/test": 2.812, "risk/note": 2.964, "risk/used": 5.388, "risk/stale": 1.383, "risk/slides": 3.966, "risk/copies": 6.118, "risk/worse": 3.136, "risk/fails": 5.241, "text/move": 1.937, "text/once": 7.605, "text/id": 5.9, "text/fields": 6.052, "text/rules": 6.538, "text/decisions": 2.54, "review/repo": 3.751, "review/pr": 4.554, "review/owner": 5.16, "review/checks": 2.527, "review/list": 5.56, "review/power": 4.276, "views/gen": 3.632, "views/list": 5.5, "views/readers": 2.868, "views/dbt": 5.768, "views/dbx": 5.803, "views/nobody": 4.139, "reads/now": 1.642, "reads/request": 6.478, "reads/change": 6.904, "reads/column": 5.552, "reads/cites": 3.939, "rights/on": 6.714, "rights/may": 3.894, "rights/asks": 3.718, "rights/owner": 1.354, "rights/same": 6.932, "confirm/code": 2.425, "confirm/clause": 6.651, "confirm/finds": 5.42, "confirm/drafts": 4.334, "confirm/confirms": 2.814, "confirm/version": 3.365, "again/spring": 2.913, "again/day": 5.344, "again/map": 1.683, "again/asks": 4.181, "again/gets": 4.835, "again/first": 4.349, "sailing/pwo": 7.134, "sailing/died": 3.173, "sailing/now": 7.81, "end/confirm": 4.389, "end/answer": 6.811, "end/layers": 7.205, "end/data": 5.996, "end/over": 6.609};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2369,7 +2369,7 @@ function d11_pencil(ctx,x,y,s,a,rot){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save
 // the map's elements as lines of text, one per element, in the layers' order: what the slide's boxes become
 const D11_LINES=[["GOL-002","keep bills affordable"],["PRN-003","customer information stays put"],["DRV-001","the energy transition"],
   ["CAP-001","operate the network"],["CAP-004","connect customers"],["CAP-007","manage outages"],["CAP-009","generate power"],
-  ["STP-004","read"],["STP-005","bill"],["STP-006","paid"],["ROL-002","duty controller"],["ACT-003","outage agent"],
+  ["STP-004","read"],["STP-005","bill"],["STP-006","paid"],["ROL-001","call-taker"],["ROL-002","duty controller"],
   ["OBJ-003","reading"],["OBJ-007","bill"],["OBJ-011","eligibility"],["MSR-002","working days to connect new solar"],
   ["APP-001","meter data"],["APP-004","billing"],["APP-006","outage system"],["APP-009","customer records"],["APP-012","network model"],
   ["TEC-002","meter network"],["TEC-005","data platform"],["TEC-008","control system"]];
@@ -2427,8 +2427,8 @@ function d11_source(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)
 /* ---------- an agent on the map ---------- */
 // the outage agent, from Who does it: its ID, its owner and its rights, for comparison
 function d11_outage(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,h=150;if(a<=0.01)return h;
-  withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,BUS,{glow:10,ea:0.7,fill:"rgba(10,10,14,0.95)"});T(ctx,"like the outage agent's",x+28,y+44,{f:"mono",w:500,size:28,color:rgba(SOFT,0.95)});
-    d11_glyph(ctx,"actor",x+42,y+86,13,BUS);T(ctx,"ACT-003",x+68,y+96,{f:"mono",w:500,size:28,color:rgba(SOFT,0.95)});T(ctx,"outage agent",x+68+tw(ctx,"ACT-003",28,500,"mono")+16,y+96,{w:800,size:30,color:rgba(mix(BUS,INK,0.5),1)});
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,APL,{glow:10,ea:0.7,fill:"rgba(10,10,14,0.95)"});T(ctx,"like the outage agent's",x+28,y+44,{f:"mono",w:500,size:28,color:rgba(SOFT,0.95)});
+    d11_glyph(ctx,"component",x+42,y+86,13,APL);T(ctx,"APP-015",x+68,y+96,{f:"mono",w:500,size:28,color:rgba(SOFT,0.95)});T(ctx,"outage agent",x+68+tw(ctx,"APP-015",28,500,"mono")+16,y+96,{w:800,size:30,color:rgba(mix(APL,INK,0.5),1)});
     archGlyph(ctx,"actor",x+w-tw(ctx,"owner: Grace Achieng",28,700)-50,y+86,12,TRUST);T(ctx,"owner: Grace Achieng",x+w-28,y+96,{w:700,size:28,align:"right",color:rgba(TRUST,1)});
     T(ctx,"may: group reports, propose  ·  may not: send a crew",x+28,y+136,{w:700,size:28,color:rgba(SOFT,0.95)});});return h;}
 // two sources that disagree: the metering rules (paper) and the meter data system's setting (a screen)
@@ -2787,28 +2787,28 @@ scene("reads",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
 scene("rights",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   const tOn=c("on"),tM=c("may"),tAs=c("asks"),tO=c("owner"),tS=c("same");
   ctx.save();focus(ctx,t,[[0,960,540,1.0]],1.8);
-  // the agent goes into the map, as an actor in business/
+  // the agent goes into the map, as software in application/
   const f0=tOn-0.2,f1=w("on","map itself")+0.2,fu=ease(clamp((t-f0)/(f1-f0),0,1)),land=fin(t,f1-0.1,0.4);
-  d11_tree(ctx,80,150,440,{p:1,plus:[0,0,land,0,0,0,0],hi:D11_TREE.map((_,i)=>i===2?pulseAt(t,f1,1.6)*0.9+fin(t,tS+0.4,0.5)*0.5:0)});
-  const ox=lerp(600,404,fu),oy=lerp(270,382,fu)-Math.sin(fu*Math.PI)*60;kt_agent(ctx,ox,oy,lerp(30,12,fu),t,{busy:fu<1?0.6:0});
-  // its file: an actor, with its rights written down
-  const fA=fin(t,w("on","actor")-0.4,0.5),rw=w("on","rights"),own=w("owner","Tomás");
-  if(fA>0.01){d11_thread(ctx,522,382,694,300,fA,BUS,{a:0.5});
-    const L=[["id","ACT-008"],["name","map agent"],["kind","actor"],["rights",""],[null,"- may: read everything, draft changes",{ind:1,vcol:mix(D11_OK,INK,0.35),hiCol:D11_OK}],[null,"- may not: confirm a change",{ind:1,vcol:mix(D11_RED,INK,0.35),hiCol:D11_RED}],
+  d11_tree(ctx,80,150,440,{p:1,plus:[0,0,0,0,land,0,0],hi:D11_TREE.map((_,i)=>i===4?pulseAt(t,f1,1.6)*0.9+fin(t,tS+0.4,0.5)*0.5:0)});
+  const ox=lerp(600,404,fu),oy=lerp(270,494,fu)-Math.sin(fu*Math.PI)*60;kt_agent(ctx,ox,oy,lerp(30,12,fu),t,{busy:fu<1?0.6:0});
+  // its file: software, an application component, filling a role, with its rights written down
+  const fA=fin(t,w("on","software")-0.4,0.5),rl=w("on","role"),rw=w("on","rights"),own=w("owner","Tomás"),FY=84;
+  if(fA>0.01){d11_thread(ctx,522,494,694,300,fA,APL,{a:0.5});
+    const L=[["id","APP-030"],["name","map agent"],["kind","application component"],["assigned to","ROL-009 · map drafter"],["rights",""],[null,"- may: read everything, draft changes",{ind:1,vcol:mix(D11_OK,INK,0.35),hiCol:D11_OK}],[null,"- may not: confirm a change",{ind:1,vcol:mix(D11_RED,INK,0.35),hiCol:D11_RED}],
       [null,"- asks: the owner, when sources disagree",{ind:1,vcol:mix(TRUST,INK,0.35),hiCol:TRUST}],["owner","Tomás Herrera",{tick:fin(t,own+0.5,0.4)}],["evidence","DEC-015 · an agent for the map · Sep 2027"],["status","confirmed",{from:"draft",u:clamp((t-own-0.8)/0.6,0,1),tick:fin(t,own+1.3,0.4)}]];
-    const rows=L.map((_,i)=>i<3?fin(t,w("on","actor")-0.2+i*0.2,0.4):i<7?fin(t,rw-0.3+(i-3)*0.25,0.4):i===7?fin(t,own-0.2,0.5):fin(t,rw+0.9+(i-8)*0.2,0.4));
-    const hi=L.map((_,i)=>i===4?fin(t,w("may","read")-0.2,0.4)*(1-fin(t,tAs-0.3,0.5)):i===5?fin(t,w("may","may not")-0.1,0.4)*(1-fin(t,tAs-0.3,0.5)):i===6?fin(t,tAs,0.4)*(1-fin(t,tO-0.3,0.5)):i===7?fin(t,own-0.2,0.4)*(1-fin(t,tS-0.3,0.5)):0);
-    arrive(ctx,1270,400,t,w("on","actor")-0.4,()=>d11_file(ctx,700,120,1140,"business/ACT-008.yml",L,{col:BUS,a:fA,rows,hi,glow:pulseAt(t,own+1.3,1.2)}),{dy:-14});
+    const rows=L.map((_,i)=>i<3?fin(t,w("on","software")-0.2+i*0.2,0.4):i===3?fin(t,rl-0.1,0.4):i<8?fin(t,rw-0.3+(i-4)*0.25,0.4):i===8?fin(t,own-0.2,0.5):fin(t,rw+0.9+(i-9)*0.2,0.4));
+    const hi=L.map((_,i)=>i===3?fin(t,rl,0.4)*(1-fin(t,rw-0.2,0.5)):i===5?fin(t,w("may","read")-0.2,0.4)*(1-fin(t,tAs-0.3,0.5)):i===6?fin(t,w("may","may not")-0.1,0.4)*(1-fin(t,tAs-0.3,0.5)):i===7?fin(t,tAs,0.4)*(1-fin(t,tO-0.3,0.5)):i===8?fin(t,own-0.2,0.4)*(1-fin(t,tS-0.3,0.5)):0);
+    arrive(ctx,1270,390,t,w("on","software")-0.4,()=>d11_file(ctx,700,FY,1140,"application/APP-030.yml",L,{col:APL,a:fA,rows,hi,glow:pulseAt(t,own+1.3,1.2)}),{dy:-14});
     // a tick for what it may do, a cross for what it may not
-    const mk=(i,k,at)=>{const q=fin(t,at,0.4);if(q<=0.01)return;const yy=120+66+i*48+48*0.66-10,xx=1790;if(k===0)withA(ctx,q,()=>tick_(ctx,xx,yy+2,30,D11_OK,1));else if(k===1)withA(ctx,q,()=>cross_(ctx,xx,yy,26,D11_RED,1));else withA(ctx,q,()=>{ctx.save();ctx.strokeStyle=rgba(TRUST,1);ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(xx-14,yy);ctx.lineTo(xx+12,yy);ctx.moveTo(xx+3,yy-9);ctx.lineTo(xx+12,yy);ctx.lineTo(xx+3,yy+9);ctx.stroke();ctx.restore();});};
-    mk(4,0,w("may","read"));mk(5,1,w("may","may not"));mk(6,2,tAs+0.2);}
+    const mk=(i,k,at)=>{const q=fin(t,at,0.4);if(q<=0.01)return;const yy=FY+66+i*48+48*0.66-10,xx=1790;if(k===0)withA(ctx,q,()=>tick_(ctx,xx,yy+2,30,D11_OK,1));else if(k===1)withA(ctx,q,()=>cross_(ctx,xx,yy,26,D11_RED,1));else withA(ctx,q,()=>{ctx.save();ctx.strokeStyle=rgba(TRUST,1);ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(xx-14,yy);ctx.lineTo(xx+12,yy);ctx.moveTo(xx+3,yy-9);ctx.lineTo(xx+12,yy);ctx.lineTo(xx+3,yy+9);ctx.stroke();ctx.restore();});};
+    mk(5,0,w("may","read"));mk(6,1,w("may","may not"));mk(7,2,tAs+0.2);}
   // like the outage agent's
-  const oA=fin(t,w("on","outage")-0.5,0.5)*(1-fin(t,tAs-0.7,0.5));if(oA>0.01)arrive(ctx,1270,780,t,w("on","outage")-0.5,()=>d11_outage(ctx,700,704,1140,{a:oA}),{dy:-12});
+  const oA=fin(t,w("on","outage")-0.5,0.5)*(1-fin(t,tAs-0.7,0.5));if(oA>0.01)arrive(ctx,1270,800,t,w("on","outage")-0.5,()=>d11_outage(ctx,700,724,1140,{a:oA}),{dy:-12});
   // where two sources disagree, it doesn't choose: it asks the owner
-  const dA=fin(t,tAs-0.2,0.5)*(1-fin(t,tS-0.6,0.5));if(dA>0.01){d11_disagree(ctx,700,704,t,{a:dA,pa:fin(t,tAs-0.2,0.4),pb:fin(t,tAs+0.2,0.4),ne:fin(t,w("asks","disagree")-0.1,0.4)});
-    const qA=fin(t,w("asks","owner")-0.4,0.5)*dA;if(qA>0.01)arrive(ctx,1678,780,t,w("asks","owner")-0.4,()=>d11_question(ctx,1516,704,324,t,{a:qA,glow:pulseAt(t,w("asks","owner"),1.2)}),{dy:-12});}
+  const dA=fin(t,tAs-0.2,0.5)*(1-fin(t,tS-0.6,0.5));if(dA>0.01){d11_disagree(ctx,700,724,t,{a:dA,pa:fin(t,tAs-0.2,0.4),pb:fin(t,tAs+0.2,0.4),ne:fin(t,w("asks","disagree")-0.1,0.4)});
+    const qA=fin(t,w("asks","owner")-0.4,0.5)*dA;if(qA>0.01)arrive(ctx,1678,800,t,w("asks","owner")-0.4,()=>d11_question(ctx,1516,724,324,t,{a:qA,glow:pulseAt(t,w("asks","owner"),1.2)}),{dy:-12});}
   // agents draft, people confirm, every version is kept: the rule that keeps data models true, applied to the map
-  const rA=fin(t,tS-0.3,0.5);if(rA>0.01)arrive(ctx,1270,780,t,tS-0.3,()=>d11_rule3(ctx,700,704,1140,t,{a:rA,rows:[fin(t,w("same","Agents")-0.1,0.4),fin(t,w("same","people")-0.1,0.4),fin(t,w("same","every version")-0.1,0.4)],sw:clamp((t-(w("same","applied")-0.1))/0.6,0,1),glow:pulseAt(t,w("same","applied")+0.4,1.4)}),{dy:-12});
+  const rA=fin(t,tS-0.3,0.5);if(rA>0.01)arrive(ctx,1270,800,t,tS-0.3,()=>d11_rule3(ctx,700,724,1140,t,{a:rA,rows:[fin(t,w("same","Agents")-0.1,0.4),fin(t,w("same","people")-0.1,0.4),fin(t,w("same","every version")-0.1,0.4)],sw:clamp((t-(w("same","applied")-0.1))/0.6,0,1),glow:pulseAt(t,w("same","applied")+0.4,1.4)}),{dy:-12});
   ctx.restore();vign(ctx,S);});
 
 /* ---------- 8. People confirm ---------- */
@@ -2816,10 +2816,10 @@ const D11_VERS2=[["v2.9","1 Oct"],["v3.0","14 Jan"],["v3.1","4 Feb"]];
 scene("confirm",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   const tCo=c("code"),tCl=c("clause"),tF=c("finds"),tD=c("drafts"),tC=c("confirms"),tV=c("version");
   ctx.save();focus(ctx,t,[[0,960,540,1.0]],1.8);
-  // the agent leaves business/ to search the rules; then signs its draft
+  // the agent leaves application/ to search the rules; then signs its draft
   const out=ease(clamp((t-(tF-0.6))/0.8,0,1)),toPR=ease(clamp((t-(tD-0.3))/0.9,0,1)),scan=fin(t,tF+0.2,0.4)*(1-fin(t,w("finds","reason")+0.3,0.5));
-  d11_tree(ctx,80,150,440,{p:1,plus:[0,0,1,0,0,0,0],hi:D11_TREE.map((_,i)=>i===0?scan:0)});
-  const ox=lerp(lerp(404,600,out),742,toPR),oy=lerp(lerp(382,270,out),396,toPR)-Math.sin(toPR*Math.PI)*50,orr=lerp(lerp(12,26,out),14,toPR);
+  d11_tree(ctx,80,150,440,{p:1,plus:[0,0,0,0,1,0,0],hi:D11_TREE.map((_,i)=>i===0?scan:0)});
+  const ox=lerp(lerp(404,600,out),742,toPR),oy=lerp(lerp(494,270,out),396,toPR)-Math.sin(toPR*Math.PI)*50,orr=lerp(lerp(12,26,out),14,toPR);
   if(scan>0.01)kt_scan(ctx,ox-26,oy,320,270,scan,t,{w:26});
   // the regulator changes the retail code: a sentence added to clause 4.2, written in as it's read
   const pA=fin(t,tCo-0.2,0.6);if(pA>0.01)arrive(ctx,1270,209,t,tCo-0.2,()=>d11_code(ctx,700,84,1140,250,t,{a:pA,hl:fin(t,tCl,0.6)*(1-fin(t,tD-0.4,0.6)),nw:clamp((t-(tCl-0.1))/(w("clause","not")-tCl),0,1)}),{dy:-16});

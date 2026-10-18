@@ -40,7 +40,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Given a change, it walks the layers, as Tomás did for the social tariff, and lists the owners who must agree.":"Ante un cambio, recorre las capas, como hizo Tomás con la tarifa social, y nombra a los responsables que deben estar de acuerdo.",
 "Given a column in the catalogue, it finds the rule behind it, with its owner and its reason.":"Ante una columna del catálogo, encuentra la regla que hay detrás, con su responsable y su razón.",
 "Every answer cites IDs and evidence, so a person can check it.":"Cada respuesta cita ID y evidencia, para que una persona pueda comprobarla.",
-"The agent is on the map itself: an actor, with its rights written down, like the outage agent's.":"El agente está en el propio mapa: un actor, con sus atribuciones por escrito, como las del agente de cortes.",
+"The agent is on the map itself: software, filling a role, with its rights written down, like the outage agent's.":"El agente está en el propio mapa: software que ocupa un rol, con sus atribuciones por escrito, como las del agente de cortes.",
 "It may read everything, and draft changes. It may not confirm one.":"Puede leer todo y redactar cambios. No puede confirmar ninguno.",
 "Where two sources disagree, it doesn't choose. It asks the owner.":"Donde dos fuentes no coinciden, no elige. Le pregunta al responsable.",
 "Its owner is Tomás.":"Su responsable es Tomás.",

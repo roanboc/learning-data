@@ -98,6 +98,7 @@ SERIES = [
     dict(id="enterprise-architecture", dir="enterprise-architecture", slug="enterprise-architecture",
          name={"en": "The map before the data", "es": "El mapa antes de los datos"}, builds_on=ea_builds_on,
          place={"en": "utility", "es": "empresa de energía"}, blocks=[],
+         learn=dict(dir="enterprise-architecture", bundle="now-the-questions-appear", coming=True),
          marks={"en": "TOGAF and ArchiMate are trademarks of The Open Group, and Zachman of Zachman International, named only to identify those frameworks; this project is not affiliated with or endorsed by them.",
                 "es": "TOGAF y ArchiMate son marcas de The Open Group, y Zachman de Zachman International, nombradas solo para identificar esos marcos; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
 ]

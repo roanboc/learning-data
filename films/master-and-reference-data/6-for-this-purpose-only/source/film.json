@@ -1,0 +1,46 @@
+{
+  "key": "for-this-purpose-only",
+  "title": "For this purpose only",
+  "sub": "The same one, everywhere, a series on master and reference data: an oath from India's Charaka Samhita, about two thousand years ago, that what a healer sees in a home stays there; an appeal that takes this year's top students' results, given for teaching; Linh's no to fundraising, written on her alumni record and missed by the student system; each role's purposes written beside its data, from one list; her wishes kept on the person; purposes as tags in dbt, and two policies in Unity Catalog that read them; the appeal again; her request to see what the university holds about her, answered from the person; and the same rule in a shop and a hospital.",
+  "howto": "The film is drawn in watercolour. Each role has its own colour: student teal, alumna green, tutor violet, researcher coral, and the donor role, which the appeal asks Linh to take, magenta. Each role's data sits behind a door, with its purposes on a tag. The person, as the master record, is left as white paper and banded in her roles' colours, and her wishes are a note pinned to her. Cyan edges the technical side, gold the business side.",
+  "src": [
+    "past.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "purposes",
+    "open",
+    2.0
+  ],
+  "say": [
+    [
+      "\\bCharaka Samhita\\b",
+      "Charakuh Sumhitta"
+    ],
+    [
+      "\\bNguyen\\b",
+      "Nwin"
+    ],
+    [
+      "\\bLinh's\\b",
+      "Lin's"
+    ],
+    [
+      "\\bLinh\\b",
+      "Lin"
+    ],
+    [
+      "\\bMei's\\b",
+      "May's"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ]
+  ]
+}

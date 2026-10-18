@@ -7,10 +7,10 @@
    object here starts with an id, and no other key is called kind or starts an object with type (they're counted).
    Names, numbers and dates follow each film's script: check a film's labs and scenarios against it when it's published. */
 window.MR={lang:"en",store:"ld-master-and-reference-data",bundleFilm:1,repoBase:"https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/",
-ui:{lab:"Lab",of:"of",film:"Film",inPractice:"In practice",watch:"Watch this part",next:"Next:",makeCall:"Make the call →",
+ui:{lab:"Lab",of:"of",inPractice:"In practice",watch:"Watch this part",next:"Next:",makeCall:"Make the call →",
   scenario:"Scenario",score:"Score",answered:"answered",toGo:"to go",good:"Good call",notQuite:"Not quite",
   explore:"Explore this in the lab:",nextQ:"Next scenario",results:"See your results",again:"Start again",check:"Check",
-  up:"Move up",down:"Move down",labsLabel:"Labs",coming:"Film {n} is coming",qsLabel:"Scenarios",filmsLabel:"Films",allFilms:"All films",seen:"{n} of {of} labs explored",done:"{n} of {of} answered",
+  up:"Move up",down:"Move down",labsLabel:"Labs",coming:"The film is coming soon",qsLabel:"Scenarios",filmsLabel:"Films",allFilms:"All films",seen:"{n} of {of} labs explored",done:"{n} of {of} answered",
   right:"Right.",wrong:"Not quite.",belongs:"Not quite: it belongs in “{b}”.",
   placed:"{n} of {of} placed.",ready:"All placed: check your answers.",back:"Back",nextStep:"Next step",stepOf:"Step {n} of {of}.",repo:"See it in the project:",
   months:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]},
@@ -44,7 +44,7 @@ films:[{n:1,key:"one-person-many-roles",title:"One person, many roles",
     done:[["Every call a good one.","You can keep master data right: checks at the doors, and measures that show where to fix."],["Nearly all.","Look again at the ones you missed, and the labs they lead to."],
       ["A good start.","Try the labs again: most slips come from trusting a clean-up to last."],["Worth another look.","Watch the film again, then do the labs before the scenarios."]]}],
 labs:[
-/* ---------- film 1: One person, many roles ---------- */
+/* ---------- One person, many roles ---------- */
 {id:"kinds",kind:"sort",film:1,chapter:"kinds",c:"#0e9692",name:"Four kinds of data",vis:"kinds",vh:640,
   alt:"Four shelves: master data, reference data, transactional data and metadata, with the things you've put on each.",
   idea:"Linh is master data: one of the things the university is about. The lists that sort her are reference data, what happens to her is transactional data, and what it all means is metadata.",
@@ -129,7 +129,7 @@ labs:[
         why:["The list is a thing, kept over time.","Only the club's newsletter uses it.","Only the club keeps it.","With one copy, there's nothing to disagree with."]}],
     sayAsk:"{n} of {of} questions answered.",sayDone:"{n} of {of} things checked. Pick another one."}}
 ,
-/* ---------- film 2: Who is it? ---------- */
+/* ---------- Who is it? ---------- */
 {id:"golden",kind:"pick",film:2,chapter:"golden",c:"#0e9692",name:"What a master record is",vis:"golden",vh:640,
   alt:"Linh's five records on the left; on the right, what the way you've chosen does with them.",
   idea:"Once two records are found to be one person, something has to say so. A master record does: an ID of its own, the best value for each field with where it came from, and a link to every record it came from.",
@@ -197,7 +197,7 @@ labs:[
     sayFm:"False merges: {n}. Raise the top line, so the rules link only pairs that are surely one person.",
     sayMm:"Missed matches: {n}. Lower the bottom line, so more pairs reach a person.",
     sayRv:"For a person to decide: {n}, more than Mei's office can do well. Narrow the middle band."}},
-/* ---------- film 3: Which value wins ---------- */
+/* ---------- Which value wins ---------- */
 {id:"which_value",kind:"survive",film:3,chapter:"rules",c:"#7e56dc",name:"Which value wins",vis:"golden2",vh:660,
   alt:"Linh's master record, field by field: the value each rule chooses, and the system it came from.",
   idea:"Once records are linked, their values disagree. For each field, a rule declares which value wins, and the winner keeps its source and its date.",
@@ -255,7 +255,7 @@ labs:[
       {t:"The research project's team page",s:"team page",b:"preferred",why:"How she's known at work, and her choice."},
       {t:"Her email's display name",s:"email name",b:"preferred",why:"Everyone she writes to sees it."}],
     sayAll:"Every one has the right name: the legal one where others check it, the preferred one where people meet her.",saySome:"{n} of {of} right. Read why under the ones in red."}},
-/* ---------- film 4: Roles come and go ---------- */
+/* ---------- Roles come and go ---------- */
 {id:"on_a_date",kind:"timeline",film:4,chapter:"bands",c:"#0e9692",name:"Who is she on a date?",vis:"timeline",vh:620,
   alt:"Linh's dated roles as bands across the years, a line at the chosen date, and her figure wearing the roles open that day.",
   idea:"Each role has a start, an end and an owner. Draw a line on any date, and the roles open that day say who she is; the person stays the same.",
@@ -305,7 +305,7 @@ labs:[
       {t:"Researcher · a visiting scholar · Mar 2026 to Feb 2026 · research office",s:"researcher · Mar–Feb 2026",b:"ends",why:"It ends a month before it starts: a typo the test catches."},
       {t:"Casual tutor · Linh · Jul to Nov 2025 · no owner",s:"tutor · no owner",b:"noowner",why:"A contract with no owner: nobody would end it, so it stays open."}],
     sayAll:"All {of} right. The tests run on every load, so a broken role never reaches a report.",saySome:"{n} of {of} right. Read why under the ones in red."}},
-/* ---------- film 5: Lists everyone uses ---------- */
+/* ---------- Lists everyone uses ---------- */
 {id:"map_codes",kind:"map",film:5,chapter:"home",c:"#e2960a",name:"One list, every code",vis:"map",vh:620,
   alt:"Each system's codes on the left, the list on the right, and a line from each code to the value you've mapped it to.",
   idea:"Each system types the lists its own way. Give each list one home, with an owner and dates, map every system's codes to it, and let the tests read it instead of repeating it.",
@@ -373,7 +373,7 @@ labs:[
       dated:"A pull request HR approves: “Sessional Academic” means tutor from 1 January 2027, and “Casual Academic” ends on 31 December 2026, kept for the contracts that used it."},
     table:{h:["means","HR's name","from","to"],code:"tutor",old:"Casual Academic",neu:"Sessional Academic",from:"1 Jan 2027",until:"31 Dec 2026",since:"1 Jan 2004",report:"Linh's 2025 contract",approved:"approved by HR",
       systems:[["HR","Sessional Academic · 1 Jan","tutor"],["Payroll","SESS · 15 Jan","tutor"],["Learning platform","tutor · not yet","student"],["Research office","Casual Academic","researcher"]]}}},
-/* ---------- film 6: For this purpose only ---------- */
+/* ---------- For this purpose only ---------- */
 {id:"may_use",kind:"sort",film:6,chapter:null,c:"#26a060",name:"May they use it?",vis:"keeps",vh:720,
   alt:"A sheet of requests to use Linh's data, each with the answer you've given it.",
   idea:"Data given for one role isn't free for every role. Each role carries the purposes its data may be used for, and a wish about her, such as “don't ask me for donations”, sits on the person.",
@@ -421,7 +421,7 @@ labs:[
     pic:{ask:"What do you hold about me?",from:"Linh",recs:[{role:"student",title:"Student",id:"S-17142",note:"NGUYỄN Thị Linh",name:0,num:0},{role:"student",title:"Student",id:"S-20436",note:"Linh Nguyen",name:1,num:1},
         {role:"alumna",title:"Alumna",id:"S-17142",note:"Nguyen Thi Linh",name:0,num:0},{role:"tutor",title:"Casual tutor",id:"E-4417",note:"Linh Nguyen",name:1,num:0},{role:"researcher",title:"Researcher",id:"R-3082",note:"Linh Nguyen",name:1,num:0}],
       others:[{title:"Student",id:"S-19810",note:"another Linh Nguyen"},{title:"Short course",id:"C-2207",note:"another Linh Nguyen"}],missed:"missed",notHer:"not her"}}},
-/* ---------- film 7: One person, many systems ---------- */
+/* ---------- One person, many systems ---------- */
 {id:"which_way",kind:"pick",film:7,chapter:null,c:"#7e56dc",name:"Four ways to keep it",vis:"styles",vh:560,
   alt:"Four small diagrams of how systems and the person connect; the one you've chosen stands out.",
   idea:"There are four ways to keep master data: a registry that only links, a copy for analysis, a master that systems read back, or one place where people are created. Choose the lightest one that solves the problem.",
@@ -449,7 +449,7 @@ labs:[
         cands:[{title:"Linh Nguyen",id:"P-10482",note:"student, alumna, tutor, researcher",rows:[{need:"name",w:6.7},{need:"dob",w:2.8},{need:"email",w:1.6},{need:"num",w:4.0}]},
           {title:"Linh Nguyen",id:"P-39054",note:"a graduate of 2018",rows:[{need:"name",w:6.7},{need:"dob",w:-3.0},{need:"email",w:-0.4},{need:"num",w:-1.0}]}],
         want:"add",good:"Found: the application adds an applicant role to the person she already is, and no new number is made.",
-        bad:{review:"On her name alone, two Linh Nguyens score the same: it goes to Mei's queue. Add a detail she gave, such as her birth date.",create:"A new person, and a third number for Linh: film 1's mistake again."}},
+        bad:{review:"On her name alone, two Linh Nguyens score the same: it goes to Mei's queue. Add a detail she gave, such as her birth date.",create:"A new person, and a third number for Linh: the same mistake that gave her a second."}},
       {t:"Another Linh Nguyen",given:[{k:"name",t:"Name: Linh Nguyen",on:true},{k:"dob",t:"Birth date: 2 Sep 1996"},{k:"email",t:"Email: nguyenlinh96@mail.example"},{k:"num",t:"Studied here before: no"}],
         cands:[{title:"Linh Nguyen",id:"P-10482",note:"student, alumna, tutor, researcher",rows:[{need:"name",w:6.7},{need:"dob",w:-3.0},{need:"email",w:-0.4},{need:"num",w:-1.0}]},
           {title:"Linh Nguyen",id:"P-39054",note:"a graduate of 2018",rows:[{need:"name",w:6.7},{need:"dob",w:-3.0},{need:"email",w:-0.4},{need:"num",w:-1.0}]}],
@@ -472,7 +472,7 @@ labs:[
       {t:"The library",s:"library",b:"read",why:"It lends to people the university already knows."},
       {t:"Planning's reports",s:"Planning",b:"read",why:"Reports read the person; they never change it."}],
     sayAll:"Three doors create people, and each searches first; the rest add roles or read.",saySome:"{n} of {of} right. Read why under the ones in red."}},
-/* ---------- film 8: A hub at work ---------- */
+/* ---------- A hub at work ---------- */
 {id:"one_review",kind:"steps",film:8,chapter:null,c:"#f4bc46",name:"One review, end to end",vis:"hub",vh:640,
   alt:"The hub's screen: the inbox, a pair and its weights, the AI's note, the undo tray and the systems that read the result; the part for each step stands out.",
   idea:"A master data hub does the series' work every day: rules act, AI suggests, people decide, and every decision can be explained and undone.",
@@ -520,7 +520,7 @@ labs:[
     say:{a:"Accurate in the demo, but a wrong link can't be undone, and the AI reads real names.",
       b:"It can undo and mask, but its score is one number nobody can explain: a reviewer can't tell why.",
       c:"All five: it explains, undoes, reviews, masks and publishes. Check each claim in its documentation before you choose."}}},
-/* ---------- film 9: Kept, not cleaned ---------- */
+/* ---------- Kept, not cleaned ---------- */
 {id:"cleanup_or_entry",kind:"pick",film:9,chapter:"entry",c:"#26a060",name:"Clean up, or check at entry?",vis:"chart",vh:540,
   alt:"Open duplicates over two years, intake by intake: a line for doing nothing, one for a yearly clean-up and one for a search at every door; the one you've chosen stands out.",
   idea:"In 2024 a clean-up merged 2,000 duplicate records. A year later there were 1,100 new ones, because every intake made more. A clean-up decays; a check at entry lasts.",
@@ -570,7 +570,7 @@ labs:[
       tests:["maps once","dates in order","has an owner"],drafted:"drafted by an agent",approved:"approved by the admissions office",from:"joins the university's list"}}}
 ],
 qs:[
-/* ---------- film 1 ---------- */
+/* ---------- One person, many roles ---------- */
 {type:"choice",n:11,lab:"kinds",film:1,vis:"person",st:{bands:["student","tutor","researcher","alumna"],tags:[{t:"payslip · Jan 2026",c:"tutor"},{t:"payslip · Feb 2026",c:"tutor"},{t:"payslip · Mar 2026",c:"tutor"},{t:"…and every month after"}]},
   title:"Payslips on the person?",sit:"Payroll asks to put every one of Linh's payslips on her master record, so everything about her is in one place.",
   opts:[{t:"Yes: the master record should hold everything about her.",why:"Then it grows with every payslip, enrolment and result, and the person gets lost in what happened to her."},
@@ -620,13 +620,13 @@ qs:[
     {t:"Treat them as reference data: adopt the international standard's list, with an owner and dates.",ok:true},
     {t:"Let each system keep its own list.",why:"That's how EUR, Euro and € end up in one report."},
     {t:"Leave them alone: they never change.",why:"They do, rarely: a new currency, a retired one. Dates keep the old ones readable."}],
-  why:"A currency code is a short list from outside, picked from, never matched: reference data. Adopt the standard, give it an owner and dates, and let every system read it. Film 5 shows how."},
+  why:"A currency code is a short list from outside, picked from, never matched: reference data. Adopt the standard, give it an owner and dates, and let every system read it. A later film in the series shows how."},
 {type:"order",n:18,lab:"apart",film:1,vis:"person",st:{bands:["student","tutor","researcher","alumna"],tags:[{t:"the person",c:"person"},{t:"roles",c:"tutor"},{t:"contact points"},{t:"identifiers"}]},
   title:"Fix the model, in order",sit:"Put Noor and Mei's steps in the order the film takes them.",
   items:["See that the model stores a role, the learner, and calls it the person","Draw the person apart from her roles, contact points and identifiers","Write down which system creates each role, and who owns it","Name who decides whether two records are one person"],
   why:"First see the mistake in the open, then draw the four things apart. Only then can you say who keeps each piece, and who decides who is who."}
 ,
-/* ---------- film 2 ---------- */
+/* ---------- Who is it? ---------- */
 {type:"choice",n:21,lab:"golden",film:2,vis:"records",st:{person:["student","tutor","researcher","alumna"],cards:[{role:"student",title:"Student",id:"S-17142",note:"bachelor's · 2019–22"},{role:"student",title:"Student",id:"S-20436",note:"master's · from 2025"},{role:"tutor",title:"Casual tutor",id:"E-4417",note:"HR"},{role:"researcher",title:"Researcher",id:"R-3082",note:"research office"}],say:"one person: which ID?"},
   title:"Which ID?",sit:"Linh's master record links her two student numbers, her staff number and her research number. The student app wants one ID for her. Which?",
   opts:[{t:"S-17142, the number she graduated with.",why:"A student number belongs to the student system. If one day she's only staff, it means nothing to HR."},
@@ -673,14 +673,14 @@ qs:[
   title:"Same one, or picked from a list?",sit:"Which of these pairs would you ask “is this the same one?” about, and send to a duplicate check?",
   opts:[{t:"The suppliers Riverside Catering and Riverside Catering Ltd.",ok:true},
     {t:"The country codes VN and VNM.",why:"Two codes for one value on a list: you map them to the list, you don't match them."},
-    {t:"The role types Casual Academic and CAS.",why:"Two systems' codes for one role type: mapped to one list, as film 5 shows."},
+    {t:"The role types Casual Academic and CAS.",why:"Two systems' codes for one role type: each is mapped to one list of role types."},
     {t:"All three.",why:"Only one is a thing with records of its own; the others are values on a list."}],
   why:"You ask “is this the same one?” about master data: things kept as records in many systems, like a supplier. Reference data is a short list you pick from; two codes for one value are mapped, not matched."},
 {type:"order",n:28,lab:"same_person",film:2,vis:"records",st:{cards:[{role:"student",title:"Student",id:"S-17142",note:"bachelor's · 2019–22"},{role:"student",title:"Student",id:"S-20436",note:"master's · from 2025"}],say:"from a pair to a decision"},
   title:"From a pair to a decision",sit:"Put the steps of a duplicate check in order.",
   items:["Propose pairs, comparing only records that share something cheap to check","Add up each field's weight into a score","Let the score's band decide: link, ask a person, or keep apart","Between the lines, the steward decides, with a reason","Keep the decision, so the pair is never asked again"],
   why:"Propose, score, band, decide, keep. Keeping each decision is what makes the next intake faster, and lets a wrong one be undone."},
-/* ---------- film 3 ---------- */
+/* ---------- Which value wins ---------- */
 {type:"choice",n:31,lab:"which_value",film:3,vis:"tags",st:{title:"Her mobile",tags:[{t:"HR, sent again Jul 2026: ••• 172 · confirmed 2023",c:"tutor"},{t:"student system: ••• 038 · confirmed Jul 2025",c:"student"},{t:"rule: the newest she confirmed"}]},
   title:"An old number comes back",sit:"HR sends its whole file again, as it does every teaching period, and Linh's 2023 mobile arrives looking new. The rule for her mobile is “the newest she confirmed”. What happens?",
   opts:[{t:"HR's number wins: it arrived last.",why:"Arriving isn't confirming. The rule asks when she last confirmed a number."},
@@ -735,12 +735,12 @@ qs:[
   title:"From disagreement to a master record",sit:"Put the steps in order.",
   items:["Link her records to one person","For each field, list the values and where each came from","Declare a rule for each field, in words its owner approves","Run the rules as a dry run, and list what would change","Approve them, and keep the source beside every value"],
   why:"Link first, then compare, declare, try and approve. The source beside each value is what lets anyone check it later."},
-/* ---------- film 4 ---------- */
+/* ---------- Roles come and go ---------- */
 {type:"choice",n:41,lab:"count_once",film:4,vis:"person",st:{bands:["student","tutor","researcher","alumna"],tags:[{t:"31 Mar 2026 · census date"},{t:"student · open",c:"student"},{t:"casual tutor · open",c:"tutor"},{t:"researcher · open",c:"researcher"}]},
   title:"How many times does she count?",sit:"On census date, Planning counts current students who also work for the university. Linh studies, tutors and researches. How many times does she count?",
   opts:[{t:"Three times: once for each role.",why:"Then the count is of roles, not people."},
     {t:"Once: one person with an open student role and an open working role.",ok:true},
-    {t:"Five times: once for each record.",why:"Records aren't people: that's the mistake film 1 started from."},
+    {t:"Five times: once for each record.",why:"Records aren't people: that's how one Linh became five."},
     {t:"Not at all: she's a student, not staff.",why:"She's both, on that date. That's the question."}],
   why:"Count people, on a date. Linh has an open student role and two open working roles on census date: she counts once."},
 {type:"choice",n:42,lab:"on_a_date",film:4,vis:"records",st:{cards:[{role:"alumna",title:"Alumna",id:"S-17142",note:"graduated 2022"},{role:"student",title:"Student",id:"S-20436",note:"master's · from 2025"}],say:"which alumni are studying again?"},
@@ -789,7 +789,7 @@ qs:[
   title:"Make roles answer a date",sit:"Put the steps in order.",
   items:["Give each role a person, a type and an owner","Add when it starts and when it ends","Test every row: it ends after it starts, and it belongs to a person","Ask each question as at a date"],
   why:"A role needs its person and owner, then its dates; the tests keep them right, and every question names its date."},
-/* ---------- film 5 ---------- */
+/* ---------- Lists everyone uses ---------- */
 {type:"choice",n:51,lab:"map_codes",film:5,vis:"tags",st:{title:"The test fails",tags:[{t:"student system sends: DEF",c:"student"},{t:"not on the status list",c:"no"}]},
   title:"A new code arrives",sit:"The student system starts sending a new status, DEF, for a deferred offer. The test that reads the status list fails. What next?",
   opts:[{t:"Add DEF to the test's own list of values.",why:"Then the list is typed twice again, and the next code fails the same way."},
@@ -843,7 +843,7 @@ qs:[
   title:"Give a list a home",sit:"Put the steps in order.",
   items:["Find every place the list is typed","Move it into one table, with its owner and dates","Map each system's codes to it","Make the tests read their values from it","Change it only through its owner's approval"],
   why:"Find the copies, give the list one home, map the codes, and let the tests read it. From then on, a change is one approved pull request."},
-/* ---------- film 6 ---------- */
+/* ---------- For this purpose only ---------- */
 {type:"choice",n:61,lab:"may_use",film:6,vis:"tags",st:{title:"Advancement asks",tags:[{t:"this year's top 10 students, by results",c:"donor"},{t:"for an appeal"}]},
   title:"Top students for an appeal",sit:"Advancement plans an appeal and asks for this year's ten top students, by their results. What do you say?",
   opts:[{t:"Send it: it's the university's data.",why:"Held by the university, yes, but given to award degrees."},
@@ -897,7 +897,7 @@ qs:[
   title:"Keep data to its purpose",sit:"Put the steps in order.",
   items:["Write down the purposes each role's data is collected for","Put her wishes, such as “don't ask me”, on the person","Let each use read only what its purpose allows","Answer “what do you hold about me?” from the person"],
   why:"Purposes first, then wishes on the person; then the platform can filter each use, and a request is answered from one place."},
-/* ---------- film 7 ---------- */
+/* ---------- One person, many systems ---------- */
 {type:"choice",n:71,lab:"search_first",film:7,vis:"records",st:{person:["student","alumna"],cards:[{role:"student",title:"Student",id:"S-17142",note:"bachelor's · 2019–22"},{role:"student",title:"Student",id:"S-20436",note:"master's · from 2025",ring:true}],say:"not merged in time"},
   title:"Not merged in time",sit:"A returning student's two numbers aren't merged before term starts. What goes wrong?",
   opts:[{t:"Only their transcript is split.",why:"Much more follows one number than a transcript."},
@@ -950,8 +950,8 @@ qs:[
 {type:"order",n:78,lab:"search_first",film:7,vis:"records",st:{person:["student","tutor","researcher","alumna"],cards:[{role:"applicant",title:"Applicant",id:"PhD",note:"to start in 2027",dashed:true}],say:"a role, not a new person"},
   title:"Stop the second number",sit:"Put the steps in order.",
   items:["The applicant gives her name, birth date, email and any earlier number","The application searches for the person before creating one","A clear match adds a role; a likely one goes to the steward","Only when nothing matches is a new person created"],
-  why:"Ask, search, then add a role or send it to a person; create only when nobody matches. That's the fix for film 1."},
-/* ---------- film 8 ---------- */
+  why:"Ask, search, then add a role or send it to a person; create only when nobody matches. That's what would have kept Linh to one number."},
+/* ---------- A hub at work ---------- */
 {type:"choice",n:81,lab:"one_review",film:8,vis:"tags",st:{title:"Monday morning",tags:[{t:"1,180 linked by the rules",c:"ok"},{t:"52 kept apart"},{t:"8 for Mei",c:"steward"}]},
   title:"Monday's inbox",sit:"Over the weekend 1,240 changes arrived. How many should Mei look at?",
   opts:[{t:"All 1,240.",why:"Then the queue never empties, and the clear cases wait for no reason."},
@@ -1005,7 +1005,7 @@ qs:[
   title:"One review, in order",sit:"Put Mei's review in order.",
   items:["The pair arrives in her inbox, ranked","She reads the weights, and what would flip it","She reads the AI's note, with values masked","She decides, with a reason","It waits in the undo tray, then is published"],
   why:"Ranked, explained, suggested, decided, then published after a moment to undo: every step leaves something to check."},
-/* ---------- film 9 ---------- */
+/* ---------- Kept, not cleaned ---------- */
 {type:"choice",n:91,lab:"cleanup_or_entry",film:9,vis:"tags",st:{title:"A year after the clean-up",tags:[{t:"2,000 merged in 2024",c:"ok"},{t:"1,100 new a year later",c:"no"}]},
   title:"They came back",sit:"A clean-up project merged 2,000 duplicate records in 2024, on time. A year later there were 1,100 new ones. Why?",
   opts:[{t:"The clean-up was done badly.",why:"It merged what was there. Nothing stopped new ones."},

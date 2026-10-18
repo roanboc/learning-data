@@ -25,8 +25,8 @@
   ],
   "coming_h": "Still to come",
   "coming_h_es": "Lo que viene",
-  "coming_p": "The other eight films come in four parts: who someone is, roles and lists, sharing it safely, and keeping it right.",
-  "coming_p_es": "Las otras ocho películas vienen en cuatro partes: quién es alguien, roles y listas, compartirlo con seguridad, y mantenerlo bien.",
+  "coming_p": "After the opening film, the series continues in four parts: who someone is, roles and lists, sharing it safely, and keeping it right.",
+  "coming_p_es": "Tras la película que la abre, la serie sigue en cuatro partes: quién es alguien, roles y listas, compartirlo con seguridad, y mantenerlo bien.",
   "coming": [
     [2, "Who is it?", "master or reference data, the golden record, and deciding a match"],
     [3, "Which value wins", "a rule for each piece of the person"],
@@ -52,11 +52,13 @@
   "people": [
     ["person", "The person", "Linh Nguyen, a master's student, alumna, tutor and researcher, held as five records in four systems"],
     ["tech", "Draws the model", "Noor, the university's data architect"],
-    ["biz", "Looks after the person", "Mei, whose office decides who someone is, and whether two records are one"]
+    ["biz", "Looks after the person", "Mei, whose office decides who someone is, and whether two records are one"],
+    ["tech", "Builds the model", "Jun, the analytics engineer, who turns what's decided into code, with tests"]
   ],
   "people_es": [
     ["person", "La persona", "Linh Nguyen, estudiante de maestría, egresada, tutora e investigadora, guardada como cinco registros en cuatro sistemas"],
     ["tech", "Dibuja el modelo", "Noor, la arquitecta de datos de la universidad"],
-    ["biz", "Cuida a la persona", "Mei, cuya oficina decide quién es alguien, y si dos registros son uno"]
+    ["biz", "Cuida a la persona", "Mei, cuya oficina decide quién es alguien, y si dos registros son uno"],
+    ["tech", "Construye el modelo", "Jun, de ingeniería analítica, que convierte lo decidido en código, con pruebas"]
   ]
 }

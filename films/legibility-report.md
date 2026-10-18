@@ -48,6 +48,7 @@
 | Today, and where it's going | 175 | 0% | 0 | 28.5 | Drawn to the rule |
 | Now the questions appear | 242 | 0% | 0 | 28.7 | Drawn to the rule |
 | One person, many roles | 314 | 0% | 0 | 30 | Drawn to the rule |
+| One person, many systems | 193 | 0% | 0 | 29.1 | Drawn to the rule |
 
 ## What's left
 

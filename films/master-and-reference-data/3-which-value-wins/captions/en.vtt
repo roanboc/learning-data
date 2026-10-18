@@ -1,0 +1,199 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:07.086
+Plymouth, December 1831. HMS Beagle is about to sail around the world.
+
+00:00:08.586 --> 00:00:13.060
+At sea, the time back home tells a ship how far east or west it has come.
+
+00:00:14.960 --> 00:00:17.322
+So it carries clocks. And clocks drift.
+
+00:00:18.622 --> 00:00:21.634
+With two that disagree, you can't tell which one is wrong.
+
+00:00:23.134 --> 00:00:24.756
+The Beagle carries twenty-two.
+
+00:00:26.656 --> 00:00:29.707
+In port, each one's drift is measured and written down.
+
+00:00:31.407 --> 00:00:35.512
+The two thought best are the standards, and the others are checked against them.
+
+00:00:37.112 --> 00:00:40.631
+Which clock to trust is decided before the clocks disagree.
+
+00:00:47.931 --> 00:00:49.612
+Today, at the university.
+
+00:00:50.812 --> 00:00:55.576
+Linh's five records are linked now: Mei's office decided they're one person.
+
+00:00:56.876 --> 00:01:00.849
+So the person needs one name, one birth date, and a way to reach her.
+
+00:01:01.949 --> 00:01:03.408
+But her records don't agree.
+
+00:01:04.108 --> 00:01:09.166
+Four ways of writing her name. Two birth dates. Two mobile numbers. Four emails.
+
+00:01:10.666 --> 00:01:11.808
+Which value wins?
+
+00:01:14.308 --> 00:01:16.731
+The university's model already picks one.
+
+00:01:17.431 --> 00:01:22.952
+For the learner, it takes the student system first, then the learning platform, then short courses.
+
+00:01:24.252 --> 00:01:29.607
+One order, for every field, inside the SQL, where the people who own the data can't see it.
+
+00:01:31.107 --> 00:01:34.735
+For the person, the quick fix is to let the newest value win.
+
+00:01:35.835 --> 00:01:41.297
+But HR sends its whole file again every teaching period, so its values always look new.
+
+00:01:42.597 --> 00:01:46.850
+Her birth date becomes HR's typo, and her old mobile comes back.
+
+00:01:48.150 --> 00:01:51.318
+Her transcript would print her name as HR typed it.
+
+00:01:52.618 --> 00:01:53.961
+Newest isn't truest.
+
+00:01:56.661 --> 00:02:02.482
+Her legal name is Nguyễn Thị Linh: family name first, with its accents, as on her passport.
+
+00:02:03.982 --> 00:02:06.521
+The student system checked it when she enrolled.
+
+00:02:07.621 --> 00:02:12.191
+Her old record lost the accents, and HR turned it round: Linh Nguyen.
+
+00:02:13.691 --> 00:02:16.218
+The name she goes by, Linh, she set herself.
+
+00:02:17.418 --> 00:02:19.363
+Both are hers, for different things.
+
+00:02:20.063 --> 00:02:22.142
+Her transcript carries her legal name.
+
+00:02:23.142 --> 00:02:26.449
+Her class lists and her ID card, the one she chose.
+
+00:02:27.749 --> 00:02:31.114
+So the person keeps two names, and each needs its own rule.
+
+00:02:33.814 --> 00:02:37.970
+So Jun writes the rules down, field by field, in the model's YAML.
+
+00:02:39.170 --> 00:02:42.949
+Like the Beagle's standards, each field has the source it trusts most.
+
+00:02:43.649 --> 00:02:47.261
+Her legal name, from the student system, which checked her passport.
+
+00:02:48.561 --> 00:02:50.639
+Her preferred name, from Linh herself.
+
+00:02:51.839 --> 00:02:53.897
+Her birth date, from the student system.
+
+00:02:54.897 --> 00:02:57.989
+If another system sends a different one, it waits for Mei.
+
+00:02:59.089 --> 00:03:04.382
+HR's still has the typo, so Mei pins the right one, with a reason, until next year.
+
+00:03:05.882 --> 00:03:09.828
+Her mobile: the newest one she confirmed, not the newest one sent.
+
+00:03:11.328 --> 00:03:18.980
+Every other field falls back on the same order: the most trusted source, then the newest confirmed value, then the most complete.
+
+00:03:20.480 --> 00:03:24.960
+And dbt turns the rules into the SQL, and into tests that check them.
+
+00:03:29.660 --> 00:03:32.910
+An email column holds one email. Linh has four.
+
+00:03:34.210 --> 00:03:38.337
+Her student email, for her studies. Her staff email, for her tutoring.
+
+00:03:39.537 --> 00:03:43.743
+A personal one from 2019, and a newer one from her application.
+
+00:03:45.043 --> 00:03:47.583
+None of them is wrong. Each is for something.
+
+00:03:48.683 --> 00:03:54.443
+So each is kept as a contact point: its purpose, its source, and the day she last confirmed it.
+
+00:03:55.943 --> 00:04:00.469
+HR writes to her staff email. The alumni office, to a personal one.
+
+00:04:03.169 --> 00:04:08.939
+Now each value in Linh's record says where it came from, which rule chose it, and how old it is.
+
+00:04:10.639 --> 00:04:13.588
+The values that lost are still there, one click away.
+
+00:04:15.288 --> 00:04:20.210
+So if anyone asks why her record says 14 March, the answer is right there.
+
+00:04:21.910 --> 00:04:25.923
+Her transcript, her class list and the alumni office all read from it.
+
+00:04:28.623 --> 00:04:29.854
+Rules change too.
+
+00:04:30.554 --> 00:04:36.887
+The alumni office asks for a new one: for personal email, the one people confirmed most recently.
+
+00:04:38.187 --> 00:04:41.838
+Before it runs, a dry run lists every value it would change.
+
+00:04:42.938 --> 00:04:46.185
+1,284, Linh's among them.
+
+00:04:47.685 --> 00:04:51.823
+Mei checks a sample, and the registrar, who owns the data, approves.
+
+00:04:53.323 --> 00:04:55.792
+Then it runs, as version two, with its date.
+
+00:04:58.492 --> 00:05:00.096
+A bank knows two names too.
+
+00:05:01.096 --> 00:05:03.722
+Statements carry the account holder's legal name.
+
+00:05:04.822 --> 00:05:07.071
+The app greets them by the one they chose.
+
+00:05:08.271 --> 00:05:12.187
+A shop keeps a billing address and a delivery address, each for something.
+
+00:05:13.487 --> 00:05:17.933
+Different places, the same question: which value, for what, and who says so.
+
+00:05:20.833 --> 00:05:23.970
+In October 1836, the Beagle came home.
+
+00:05:25.570 --> 00:05:30.425
+After five years around the world, its clocks were out by just thirty-three seconds.
+
+00:05:32.025 --> 00:05:36.651
+Which clock to trust was settled before they disagreed, and checked at every port.
+
+00:05:38.151 --> 00:05:44.360
+Linh's rules work the same way: written down before her records disagree, and tested every night.
+
+00:05:45.960 --> 00:05:48.608
+The rule is declared, not hidden in the SQL.

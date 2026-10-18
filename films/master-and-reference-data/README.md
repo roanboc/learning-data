@@ -4,7 +4,7 @@
 
 Linh Nguyen graduated from the university in 2022 and came back to study health informatics, under a new student number that nothing linked to her old one. She tutors a first-year unit, and this year she joined a research project. Four systems hold five records of her, and none of them knows the others are her. Over nine films the university learns to keep the person apart from her roles, decide once who is who and which value wins, date the roles, own the lists that sort people, use each role's data only for its purpose, share one person across its systems, and keep it right, with the same pattern shown in other industries each time. The plan is in the [proposal](proposal.md).
 
-**Status:** the opening film is built and [on the site](https://roanboc.github.io/learning-data/master-and-reference-data/), with four Pause and think questions. Labs and scenarios will come later. On the site, the series sits under the topic *Master and reference data*.
+**Status:** the first two films are built and [on the site](https://roanboc.github.io/learning-data/master-and-reference-data/), each with four Pause and think questions. Labs and scenarios will come later. On the site, the series sits under the topic *Master and reference data*.
 
 ## The films
 
@@ -12,6 +12,7 @@ Linh Nguyen graduated from the university in 2022 and came back to study health 
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [One person, many roles](https://roanboc.github.io/learning-data/master-and-reference-data/one-person-many-roles/) | Master data, and the person behind the role | 6 min | 12 | 4 questions | [script](1-one-person-many-roles/script.md) · [source](1-one-person-many-roles/source/README.md) |
+| [Who is it?](https://roanboc.github.io/learning-data/master-and-reference-data/who-is-it/) | Master or reference data, the golden record, and deciding a match | 5½ min | 11 | 4 questions | [script](2-who-is-it/script.md) · [source](2-who-is-it/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

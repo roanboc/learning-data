@@ -195,6 +195,7 @@ What *From words to data*, seven films made together, added.
 - [ ] Product names, maturity and sources are checked on the day.
 - [ ] Captions are generated in every language.
 - [ ] Logos are unaltered and credited, and the licences are stated.
+- [ ] The poster is looked at after `tools/publish.py` draws it: its moment comes after every fade has settled, so no two texts show in one place. *Who is it?*'s first poster caught a date changing into another.
 - [ ] The labs and scenarios still match the film: same names, numbers and colours.
 - [ ] Tested on a phone, in dark mode and with the keyboard only.
 - [ ] The videos are released by the release workflow, and watched once from the release.

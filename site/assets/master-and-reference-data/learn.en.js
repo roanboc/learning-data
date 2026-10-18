@@ -905,7 +905,7 @@ qs:[
     {t:"Nothing, as long as they use the new number.",why:"Their history, fees and access sit under the old one."},
     {t:"Only Planning's reports are wrong.",why:"Reports are wrong too, but the student feels it first."}],
   why:"Registries that write about it list exactly these: fees, email, course materials, the ID card, the library. Each system follows one number, so a search at the application is worth more than any fix later."},
-{type:"choice",n:72,lab:"search_first",film:7,vis:"records",st:{cards:[{role:"applicant",title:"Applicant",id:"new",note:"Linh Nguyen · born 1996"},{role:"student",title:"Student",id:"P-10482",note:"Linh Nguyen · born 2000"}],say:"69 on the name alone"},
+{type:"choice",n:72,lab:"search_first",film:7,vis:"records",st:{cards:[{role:"applicant",title:"Applicant",id:"new",note:"Linh Nguyen · born 1996"},{role:"student",title:"Student",id:"P-10482",note:"Linh Nguyen · born 2001"}],say:"69 on the name alone"},
   title:"Another Linh Nguyen",sit:"A Linh Nguyen new to the university applies. On her name alone, the search scores our Linh at 69. What should the application do?",
   opts:[{t:"Add a role to our Linh: same name.",why:"Then a stranger would see Linh's record."},
     {t:"Use another detail she gave, such as her birth date, or send it to the steward's queue.",ok:true},

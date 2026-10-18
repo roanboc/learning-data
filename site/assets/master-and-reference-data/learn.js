@@ -113,9 +113,11 @@ const PIX={
       pencil(ctx,[[x+30,ey+130],[x+cw-30,ey+130]],{a:0.35,lw:2,seed:7+i});
       // what's been put on the shelf; the last one put there drops in
       const mine=V.items.map((it,j)=>[it,j]).filter(([it,j])=>st.pick[j]===key);let y=ey+170;
-      mine.slice(0,8).forEach(([it,j])=>{const drop=j===st.last?1-k:0;withA(ctx,1-drop*0.8,()=>{const tw0=tag(ctx,x+26,y-drop*30,short(it),{size:24,maxW:cw-96});
+      // as many as the shelf holds, each label shrunk to fit before it's cut; a count says how many more
+      const cap=Math.max(1,Math.floor((hh-ey-190)/48));
+      mine.slice(0,cap).forEach(([it,j])=>{const drop=j===st.last?1-k:0,s=short(it);withA(ctx,1-drop*0.8,()=>{const tw0=tag(ctx,x+26,y-drop*30,s,{size:fit(ctx,s,cw-136,24,700,null,17),maxW:cw-96});
         if(st.checked)mark(ctx,x+26+tw0+22,y-4,28,it.b===key,k);});y+=48;});
-      if(mine.length>8)tx(ctx,"+"+(mine.length-8),cx,y,{size:24,align:"center",col:WC_MUTED});});},
+      if(mine.length>cap)tx(ctx,"+"+(mine.length-cap),cx,y,{size:24,align:"center",col:WC_MUTED});});},
   /* One person, many roles: Linh, and four lanes: the person, her roles, her contact points, her identifiers */
   lanes(ctx,w,hh,st,Lb,k){const V=Lb.w,lanes=V.buckets,x0=290,lh=(hh-40)/lanes.length;
     const roles=V.items.map((it,j)=>[it,j]).filter(([it,j])=>st.pick[j]==="role"&&it.role).map(([it])=>it.role);
@@ -124,11 +126,11 @@ const PIX={
       tx(ctx,label,x0+30,y+52,{size:fit(ctx,label,180,28,800),w:800,col:WC_DARK});
       // the lane's things, in up to two rows; the last one put there drops in
       const mine=V.items.map((it,j)=>[it,j]).filter(([it,j])=>st.pick[j]===key);let x=x0+236,row=0;const rows=[y+lh/2-26,y+lh/2+28];
-      mine.forEach(([it,j])=>{const s=short(it),ww=Math.min(tw(ctx,s,24,700)+40,300)+(st.checked?44:0);if(x+ww>w-44){if(row)return;row=1;x=x0+236;}
-        const drop=j===st.last?1-k:0;withA(ctx,1-drop*0.8,()=>{const tw0=tag(ctx,x,rows[row]-drop*24,s,{size:24,maxW:300,wash:it.role||null});if(st.checked)mark(ctx,x+tw0+20,rows[row]-4,26,it.b===key,k);});x+=ww+12;});});},
+      mine.forEach(([it,j])=>{const s=short(it),z=fit(ctx,s,260,24,700,null,17),ww=Math.min(tw(ctx,s,z,700)+40,300)+(st.checked?44:0);if(x+ww>w-44){if(row)return;row=1;x=x0+236;}
+        const drop=j===st.last?1-k:0;withA(ctx,1-drop*0.8,()=>{const tw0=tag(ctx,x,rows[row]-drop*24,s,{size:z,maxW:300,wash:it.role||null});if(st.checked)mark(ctx,x+tw0+20,rows[row]-4,26,it.b===key,k);});x+=ww+12;});});},
   /* One person, many roles: who keeps what, as Noor and Mei's sheet */
   keeps(ctx,w,hh,st,Lb,k){const V=Lb.w,rows=V.items,top=96,rh=(hh-top-26)/rows.length;card(ctx,24,20,w-48,hh-40,{kind:"sheet",seed:8});
-    tx(ctx,V.sheet,48,70,{size:32,w:800,col:WC_DARK});tx(ctx,V.keeper,w*0.5,70,{size:26,w:700,col:WC_MUTED});
+    tx(ctx,V.sheet,48,70,{size:fit(ctx,V.sheet,w*0.5-72,32,800,null,22),w:800,col:WC_DARK});tx(ctx,V.keeper,w*0.5,70,{size:26,w:700,col:WC_MUTED});
     rows.forEach((it,j)=>{const y=top+j*rh+rh/2,b=st.pick[j],B=V.buckets.find(x=>x[0]===b);
       pencil(ctx,[[44,top+j*rh],[w-44,top+j*rh]],{a:0.25,lw:1.6,seed:j+3});tx(ctx,short(it),48,y+10,{size:fit(ctx,short(it),w*0.44,28,700),w:700});
       if(B){tag(ctx,w*0.5,y,B[1],{size:fit(ctx,B[1],w*0.38,26,700),wash:B[3]||B[2],maxW:w*0.46});if(st.checked)mark(ctx,w-70,y,32,it.b===b,k);}
@@ -147,13 +149,21 @@ const PIX={
       if(done&&a!=null&&it.a[i]!=null)mark(ctx,w-110,cy-2,30,a===it.a[i],k);else if(done&&it.a[i]==null)tx(ctx,"–",w-110,cy+10,{size:30,col:WC_MUTED,align:"center"});});},
   /* ---------- scenario vignettes: drawn from each scenario's words (st) ---------- */
   // records, as each system holds them: cards in their role's colour; a pencil ring on one, and a person above if st.person
-  records(ctx,w,hh,st){const cs=st.cards||[],n=cs.length,top=st.person?hh*0.42:60,cw=Math.min(440,(w-60)/Math.min(n,2)-20),ch=st.tall?150:118,per=Math.min(n,2);
+  records(ctx,w,hh,st){const cs=st.cards||[],n=cs.length,cw=Math.min(440,(w-60)/Math.min(n,2)-20),ch=st.tall?150:118,per=Math.min(n,2),
+      // with no person above them, the cards and their line sit together in the middle
+      cardsH=Math.ceil(n/per)*(ch+22)-22,top=st.person?hh*0.42:Math.max(60,(hh-cardsH-(st.say?84:0))/2);
     if(st.person)linh(ctx,w/2,top-14,0.26,st.person===true?[]:st.person);
     cs.forEach((c,i)=>{const col=i%per,row=Math.floor(i/per),x=w/2-(per*(cw+20)-20)/2+col*(cw+20),y=top+row*(ch+22);
-      wc_roleCard(ctx,x,y,cw,ch,c.role,c.title,c.id,c.note,{dashed:c.dashed,fresh:c.fresh,seed:30+i});
+      // the film's card writes a note in mono 28 and never shrinks it: a longer one is written here, at a size that fits
+      const nt=c.note?(c.fresh?"✓ ":"")+c.note:null,fits=!nt||tw(ctx,nt,28,500,"mono")<=cw-56;
+      // and its number shrinks when a long title would run into it
+      const room=c.id?cw-56-tw(ctx,c.title,30,800)-18:0,idz=c.id?fit(ctx,c.id,room,28,500,"mono",18):28;
+      wc_roleCard(ctx,x,y,cw,ch,c.role,c.title,idz<28?null:c.id,fits?c.note:null,{dashed:c.dashed,fresh:c.fresh,seed:30+i});
+      if(idz<28)tx(ctx,c.id,x+cw-24,y+48,{size:idz,w:500,f:"mono",align:"right"});
+      if(!fits)tx(ctx,nt,x+32,y+96,{size:fit(ctx,nt,cw-56,28,500,"mono",16),w:500,f:"mono",col:c.fresh?WC_ROLEINK.student:WC_MUTED});
       if(c.ring)wc_ring(ctx,x+cw/2,y+ch/2,cw/2+16,ch/2+14,1,{col:NO});
       if(c.mark!=null)mark(ctx,x+cw-26,y+ch-30,30,c.mark,1);});
-    if(st.say)tag(ctx,w/2,hh-40,st.say,{size:28,align:"center",maxW:w-40});},
+    if(st.say)tag(ctx,w/2,st.person?hh-40:top+cardsH+62,st.say,{size:28,align:"center",maxW:w-40});},
   // a few tags in a row or a column, optionally washed, with a heading
   tags(ctx,w,hh,st){if(st.title)head(ctx,w/2,64,st.title,st.sub,{align:"center",size:34});const ts=st.tags||[],y0=st.title?(st.sub?190:150):80,gap=(hh-y0-30)/Math.max(1,ts.length);
     ts.forEach((t,i)=>{const o=typeof t==="string"?{t}:t,y=y0+i*gap+gap/2;tag(ctx,w/2,y,o.t,{size:fit(ctx,o.t,w-140,30,700),align:"center",wash:o.c,maxW:w-60});if(o.mark!=null)mark(ctx,w-60,y-4,34,o.mark,1);});},
@@ -164,7 +174,7 @@ const PIX={
       if(t.tag)tag(ctx,x+cw/2,hh-70,t.tag,{size:24,align:"center",maxW:cw-30});});},
   // the person, banded, with a few tags around her
   person(ctx,w,hh,st){linh(ctx,w*0.27,hh-50,0.62,st.bands||[]);const ts=st.tags||[],gap=Math.min(110,(hh-80)/Math.max(1,ts.length)),y0=hh/2-gap*(ts.length-1)/2;
-    ts.forEach((t,i)=>{const o=typeof t==="string"?{t}:t;tag(ctx,w*0.5,y0+i*gap,o.t,{size:fit(ctx,o.t,w*0.44,32,700),wash:o.c,maxW:w*0.47});});},
+    ts.forEach((t,i)=>{const o=typeof t==="string"?{t}:t;tag(ctx,w*0.5,y0+i*gap,o.t,{size:fit(ctx,o.t,w*0.47-40,32,700),wash:o.c,maxW:w*0.47});});},
   /* ---------- films 2 to 9 ---------- */
   /* Who is it?: Linh's five records, and what the chosen way of making one Linh does with them */
   golden(ctx,w,hh,st,Lb,k){const V=Lb.w,R=V.recs,W0=V.words,pk=st.pick,x0=30,cw=420,ch=100,gap=(hh-40-R.length*ch)/(R.length-1),ys=R.map((c,i)=>20+i*(ch+gap)),ex=x0+cw+10;
@@ -179,7 +189,7 @@ const PIX={
       R.forEach((c,i)=>wc_link(ctx,ex,ys[i]+ch/2,fx-60,fy-200+(i-2)*26,C(c.role),{p:k,a:0.75,lw:3}));
       const mx=880,mw=w-mx-20,M=V.master;card(ctx,mx,30,mw,hh-60,{kind:"sheet",seed:90});tx(ctx,M.id,mx+mw/2,94,{size:38,w:600,f:"mono",align:"center",col:WC_DARK});
       pencil(ctx,[[mx+24,122],[mx+mw-24,122]],{a:0.4,lw:2});
-      M.fields.forEach(([f,s,c],i)=>{const y=184+i*126;tx(ctx,f,mx+24,y,{size:fit(ctx,f,mw-48,26,800,null,18),w:800,col:WC_DARK});tag(ctx,mx+24,y+46,s,{size:22,wash:c,maxW:mw-40});});}},
+      M.fields.forEach(([f,s,c],i)=>{const y=184+i*126;tx(ctx,f,mx+24,y,{size:fit(ctx,f,mw-48,26,800,null,18),w:800,col:WC_DARK});tag(ctx,mx+24,y+46,s,{size:fit(ctx,s,mw-80,22,700,null,16),wash:c,maxW:mw-40});});}},
   /* Who is it?: two records, field by field, the weight each comparison adds, and the score on a line from 0 to 100 */
   match(ctx,w,hh,st,Lb,k){const V=Lb.w,p=st.p,cw=(w-120)/2,cx=w/2;rec(ctx,40,18,cw,100,p.a,{seed:61});rec(ctx,w-40-cw,18,cw,100,p.b,{seed:62});
     const y0=140,rh=Math.min(70,(hh-320)/st.rows.length);
@@ -204,25 +214,30 @@ const PIX={
     V.pts.forEach(([s,same],i)=>{const x=X(s),y=rows[same?0:1]+(((i*37)%5)-2)*20;
       if(same){ctx.fillStyle=rgba(WC_ROLE.student,0.85);ctx.beginPath();ctx.arc(x,y,10,0,TAU);ctx.fill();}else{ctx.strokeStyle=rgba(WC_PENCIL,0.85);ctx.lineWidth=2.6;ctx.beginPath();ctx.arc(x,y,9,0,TAU);ctx.stroke();}
       if(!same&&s>=st.hi)cross(ctx,x,y,32,k);if(same&&s<st.lo)wc_ring(ctx,x,y,18,18,k,{col:WC_ROLE.applicant,lw:3.4});});
-    const near=Math.abs(X(st.hi)-X(st.lo))<260;
-    [[st.lo,V.loL,0],[st.hi,V.hiL,near?1:0]].forEach(([s,t,row],i)=>{const x=X(s);pencil(ctx,[[x,top-6],[x,bot+8]],{lw:3.4,a:0.95,col:WC_DARK,seed:3+i});
-      tag(ctx,x,bot+34+row*50,t+" "+s,{size:22,align:x>w-160?"right":x<gx0+100?"left":"center"});});},
+    // the two lines' tags, each as wide as its words: the second drops to a row of its own only when they would touch
+    const L2=[[st.lo,V.loL],[st.hi,V.hiL]].map(([s,t])=>{const x=X(s),q=t+" "+s,wd=tw(ctx,q,22,700)+40,al=x>w-160?"right":x<gx0+100?"left":"center",l=al==="left"?x:al==="right"?x-wd:x-wd/2;return {x,q,al,l,r:l+wd};}),
+      near=L2[1].l<L2[0].r+14;
+    L2.forEach((o,i)=>{pencil(ctx,[[o.x,top-6],[o.x,bot+8]],{lw:3.4,a:0.95,col:WC_DARK,seed:3+i});tag(ctx,o.x,bot+34+(i&&near?50:0),o.q,{size:22,align:o.al});});},
   /* Which value wins: Linh's master record, field by field: the value each rule chooses, with its source */
   golden2(ctx,w,hh,st,Lb,k){const V=Lb.w,F=V.fields;linh(ctx,150,hh-26,0.44,["student","tutor","researcher","alumna"]);
     const x0=310,cw=w-x0-20;card(ctx,x0,20,cw,hh-40,{kind:"sheet",seed:95});tx(ctx,V.title,x0+30,72,{size:30,w:800,col:WC_DARK});
     const top=96,rh=(hh-top-34)/F.length,vx=x0+232,vmax=cw-232-70;
     F.forEach((f,i)=>{const y=top+i*rh,mid=y+rh/2,p=st.pick[i];pencil(ctx,[[x0+20,y],[x0+cw-20,y]],{a:0.22,lw:1.6,seed:i+11});
-      tx(ctx,f.f,x0+30,mid+9,{size:fit(ctx,f.f,190,26,800,null,17),w:800,col:WC_DARK});
+      const fl=tw(ctx,f.f,26,800)>190?wrap(ctx,f.f,190,24,800).slice(0,2):[f.f],fz=fl.length>1?Math.min(...fl.map(l=>fit(ctx,l,190,24,800,null,17))):fit(ctx,f.f,190,26,800,null,17);
+      fl.forEach((l,j)=>tx(ctx,l,x0+30,mid+9+(fl.length>1?(j-0.5)*28:0),{size:fz,w:800,col:WC_DARK}));
       if(p==null){tx(ctx,"…",vx,mid+9,{size:28,col:WC_MUTED});return;}
       const r=f.rules[p],win=r.win==null?[]:[].concat(r.win);
       if(!win.length)tx(ctx,"—",vx,mid+9,{size:30,col:WC_MUTED});
       else if(win.length>1){let x=vx;win.forEach(j=>{const v=f.vals[j],S=V.src[v.src]||{};x+=tag(ctx,x,mid,v.note||v.v,{size:21,wash:S.c,maxW:(vmax-24)/win.length})+8;});}
-      else{const v=f.vals[win[0]],S=V.src[v.src]||{},z=fit(ctx,v.v,vmax-200,26,700,null,17);tx(ctx,v.v,vx,mid+9,{size:z,w:700});tag(ctx,vx+tw(ctx,v.v,z,700)+16,mid,S.t,{size:21,wash:S.c,maxW:200});}
+      else{const v=f.vals[win[0]],S=V.src[v.src]||{},z=fit(ctx,v.v,vmax-200,26,700,null,17),vw=tw(ctx,v.v,z,700)+16;tx(ctx,v.v,vx,mid+9,{size:z,w:700});tag(ctx,vx+vw,mid,S.t,{size:21,wash:S.c,maxW:Math.max(120,vmax-vw)});}
       mark(ctx,x0+cw-40,mid-2,30,r.ok,k);});},
   /* Which value wins: the rule in words, part by part, above the same rule as the model's YAML declares it */
   rule(ctx,w,hh,st,Lb,k){const V=Lb.w,n=V.slots.length,hd=[].concat(V.field),ind=V.indent!=null?V.indent:"  ",th=104+n*62,lx=410;
     card(ctx,20,20,w-40,th,{kind:"sheet",seed:96});tx(ctx,V.title,50,68,{size:30,w:800,col:WC_DARK});
-    V.slots.forEach((sl,i)=>{const y=126+i*62,p=st.pick[i];tx(ctx,sl.label,50,y+8,{size:fit(ctx,sl.label,lx-70,22,700,null,17),w:700,col:WC_MUTED});
+    V.slots.forEach((sl,i)=>{const y=126+i*62,p=st.pick[i];
+      // a label too long for its column takes two lines rather than shrinking
+      const ls=tw(ctx,sl.label,22,700)>lx-70?wrap(ctx,sl.label,lx-70,20,700).slice(0,2):[sl.label],lz=ls.length>1?Math.min(...ls.map(l=>fit(ctx,l,lx-70,20,700,null,16))):fit(ctx,sl.label,lx-70,22,700,null,17);
+      ls.forEach((l,j)=>tx(ctx,l,50,y+(ls.length>1?j*24-4:8),{size:lz,w:700,col:WC_MUTED}));
       if(p==null){tx(ctx,"…",lx,y+8,{size:28,col:WC_MUTED});return;}
       const o=sl.opts[p],z=fit(ctx,o.t,w-lx-130,24,700,null,18),tw1=tag(ctx,lx,y,o.t,{size:z,wash:o.ok?"ok":"no",washA:0.3,maxW:w-lx-90});mark(ctx,lx+tw1+26,y-2,26,o.ok,k);});
     const cy=th+40,L=hd.concat(V.slots.map((sl,i)=>ind+(st.pick[i]==null?"…":sl.opts[st.pick[i]].code))),lh=Math.min(40,(hh-cy-130)/Math.max(1,L.length-1));
@@ -269,7 +284,7 @@ const PIX={
       tx(ctx,t,lx+22+cwid+14,y+8,{size:fit(ctx,t,lw-cwid-60,24,600,null,15),w:600});});
     const ny=hh-74;ry[""]=ny;card(ctx,lx+16,ny-34,lw-32,68,{kind:"card",dashed:true,seed:141});tx(ctx,V.notList,lx+lw/2,ny+8,{size:24,w:700,align:"center",col:WC_MUTED});
     l.codes.forEach((c,i)=>{const y=20+i*rh+rh/2,p=st.pick[i];tx(ctx,c.sys,40,y-16,{size:20,w:600,col:WC_MUTED});const tw1=tag(ctx,40,y+14,c.v,{size:24,f:"mono",w:500,wash:c.c,washA:0.3,maxW:lx-200});
-      if(p!=null){const good=p===c.ok;wc_link(ctx,40+tw1+6,y+14,lx+(p===""?16:20),ry[p],st.ran?(good?OK:NO):WC_PENCIL,{p:k,a:st.ran?0.9:0.5,lw:3});if(st.ran)mark(ctx,40+tw1+30,y-16,24,good,1);}});},
+      if(p!=null){const good=p===c.ok;wc_link(ctx,40+tw1+6,y+14,lx+(p===""?16:20),ry[p],st.ran?(good?OK:NO):WC_PENCIL,{p:k,a:st.ran?0.9:0.5,lw:3});if(st.ran)mark(ctx,40+Math.max(tw1,tw(ctx,c.sys,20,600)+8)+30,y-16,24,good,1);}});},
   /* Lists everyone uses: the tutor's row on the role type list, and what each way of renaming it does */
   change(ctx,w,hh,st,Lb,k){const T=Lb.w.table,pk=st.pick;
     if(pk==="each"){const n=T.systems.length,rh=(hh-60)/n;T.systems.forEach(([s,t,c],i)=>{const y=30+i*rh+rh/2;tx(ctx,s,60,y+9,{size:26,w:700,col:WC_MUTED});tag(ctx,400,y,t,{size:26,wash:c,washA:0.3,maxW:560});cross(ctx,w-80,y-2,30,k);});return;}
@@ -314,10 +329,10 @@ const PIX={
   /* One person, many systems: an application, what it gives the search, the people found with their scores, and what it does */
   search(ctx,w,hh,st,Lb,k){const V=Lb.w,a=st.app,ax=24,aw=430;card(ctx,ax,20,aw,hh-40,{kind:"card",role:"applicant",sw:tw(ctx,a.t,26,800)+36,seed:190});
     tx(ctx,a.t,ax+30,64,{size:fit(ctx,a.t,aw-60,26,800,null,17),w:800,col:WC_DARK});
-    a.given.forEach((g,i)=>{const on=st.on[i];withA(ctx,on?1:0.38,()=>tag(ctx,ax+24,134+i*76,g.t,{size:21,wash:on?"applicant":null,washA:0.35,maxW:aw-48}));});
+    a.given.forEach((g,i)=>{const on=st.on[i];withA(ctx,on?1:0.38,()=>tag(ctx,ax+24,134+i*76,g.t,{size:fit(ctx,g.t,aw-88,21,700,null,15),wash:on?"applicant":null,washA:0.35,maxW:aw-48}));});
     const cx=500,cw=w-cx-24,ch=130;
     st.sc.forEach(({c,s,b},i)=>{const y=34+i*(ch+28),col=b==="link"?OK:b==="review"?CI("applicant"):WC_MUTED;card(ctx,cx,y,cw,ch,{kind:"card",seed:195+i});
-      tx(ctx,c.title+" · "+c.id,cx+26,y+46,{size:fit(ctx,c.title+" · "+c.id,cw-190,26,800,null,17),w:800,col:WC_DARK});tx(ctx,c.note,cx+26,y+84,{size:fit(ctx,c.note,cw-190,22,600,null,15),w:600,col:WC_MUTED});
+      tx(ctx,c.title+" · "+c.id,cx+26,y+46,{size:fit(ctx,c.title+" · "+c.id,cw-190,26,800,null,17),w:800,col:WC_DARK});tx(ctx,c.note,cx+26,y+84,{size:fit(ctx,c.note,Math.min(cw-190,cw-tw(ctx,V.bands[b],19,700)-110),22,600,null,15),w:600,col:WC_MUTED});
       tx(ctx,String(s),cx+cw-30,y+62,{size:44,w:800,align:"right",col});tag(ctx,cx+cw-26,y+104,V.bands[b],{size:19,align:"right",wash:b==="link"?"ok":b==="review"?"amber":null,washA:0.3});
       wc_link(ctx,ax+aw+4,150,cx-6,y+ch/2,b==="link"?OK:WC_PENCIL,{p:k,a:b==="apart"?0.22:0.7,lw:3});});
     const [o,best]=st.out,good=o===a.want,ot=fill(V.outcomes[o],{who:best?best.c.title+" ("+best.c.id+")":""}),ow=tag(ctx,cx,hh-56,ot,{size:24,wash:good?"ok":"no",washA:0.3,maxW:cw-60});mark(ctx,cx+ow+30,hh-58,30,good,k);},

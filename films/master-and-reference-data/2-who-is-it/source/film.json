@@ -8,7 +8,7 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": ["weights", "flip", 1.2],
+  "poster": ["weights", "total", 3.4],
   "say": [
     ["\\bNguyen\\b", "Nwin"],
     ["\\bLinh's\\b", "Lin's"],

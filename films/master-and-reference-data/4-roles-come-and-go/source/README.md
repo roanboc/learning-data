@@ -12,7 +12,7 @@
 | `src/scenes.js` | The ten chapters. The title card ends chapter 1, the end card chapter 10. In the timeline chapters the camera stays still and the line of years widens or narrows to the dates the narration is about, so labels keep their size; elsewhere the camera moves in on whatever the narration is about. Things arrive with a spring. |
 | `src/i18n/es/captions.js` | The Spanish captions, one per English line, in Latin American Spanish. |
 | `tools/score.py` | The film's music and sounds, a new palette: a choir humming "oo", one voice to a note, that holds the notes two chords share; a felt piano note for each role, the same in every chapter; a glass harmonica's D and A for the person; the series' clarinet mark (1-8-5-1), on G under the title and on D at the end; from G minor in Rome to D major at the end. A low, muted pulse rises only under last year's census count, answered with today's statuses. Each effect (a chisel, parchment, a pencil and its rubber, a card, a pin, a brush, keys, footsteps, a heartbeat) fires at the same moment, with the same word and offset, as the thing it belongs to in `src/scenes.js`: change one, change both. |
-| `tools/` | Each tool runs the series' tool (`../../shared/tools/run.py`) on this film. |
+| `tools/` | Each tool runs the series' tool (`../../shared/tools/run.py`) on this film. `check.py` first compares every date the film shows (the offices' cards, her bands and the role table) with the example project's data, in `films/analytics-engineering/project/data/`. |
 
 ## Setup (once)
 
@@ -25,7 +25,7 @@ Run from this folder, `films/master-and-reference-data/4-roles-come-and-go/sourc
 ```
 python tools/tts.py        # voices each line into build/vo/ and writes src/vodur.js
 python tools/build.py      # dist/render.html, dist/film.js, dist/film.html
-python tools/check.py      # every frame must draw without an error
+python tools/check.py      # the film's dates must be the example project's, and every frame must draw without an error
 python tools/legible.py --overlaps   # every piece of text must read on a phone (28 px or more in the frame), and none may overlap
 python tools/pace.py       # pacing per chapter
 python tools/stills.py [chapter ...] [--at 12.5 ...] [--every 2] --size 1920   # review stills -> build/stills/

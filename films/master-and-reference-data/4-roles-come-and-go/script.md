@@ -159,9 +159,10 @@ Four questions, one at the end of each of four chapters, as the site shows them 
 | The census report, published 14 April 2026 by the registrar's census team | `seeds/expected/planning/census_report.csv` (from *One row of what, and when*) |
 | A role can't end before it starts | `tests/generic/versions_do_not_overlap.sql` |
 | The role table, `core_person_role`, and the person, `core_person` | New: the series adds the person and a dated role table (the proposal's *What the example project gains*, for films 1, 2 and 4) |
-| Her tutor contracts, one per semester | New: the small HR source the series adds |
-| The research project and Ana Ruiz as its lead | New: the research office source the series adds |
-| The alumni office's question | New: the Advancement source the series adds |
+| Her two student roles | `data/student_system/past_learners.csv` (her first degree: enrolled 25 February 2019, completed 15 December 2022) and `learners.csv` (enrolled again 21 July 2025); the platform recorded each change the night after (`_valid_from`) |
+| Her tutor contracts, one per semester | `data/hr_system/contracts.csv`: her contracts from 2023-S1 to 2026-S1, each with `starts_on` and its last day, `ends_on`. The 2026-S1 contract was recorded on 6 April 2026, and 2026-S2's on 14 July, after the story's today |
+| The research project and Ana Ruiz as its lead | `data/research_system/projects.csv` and `project_members.csv`: *Wait times in emergency care*, 2 March to 19 December 2026, led by Ana Ruiz, who supervises Linh on it; recorded on 25 February 2026 |
+| The alumni office's question | `data/alumni_system/alumni.csv`: her alumni record, from her graduation on 15 December 2022, recorded when the alumni office's records first reached the platform, 1 November 2024 |
 | The statuses each system sends nightly | Invented for the film, as the failure the dated roles fix |
 
 ## Rigour to check before recording
@@ -179,6 +180,7 @@ Four questions, one at the end of each of four chapters, as the site shows them 
 - **Energy** (read 17 October 2026): retailers keep a register of homes with life support equipment, and move-outs are where it goes wrong: a new account holder has to register again, and the flag on the old account can lapse ([ERAWA, *Moving in or out*](https://www.erawa.com.au/customer-protection-codes/switched-on-consumer-guide/moving-in-or-out); AEMC submissions on life support reforms, 2020 and 2026). Generic in the film; no retailer or jurisdiction named.
 - **Dated roles in the pattern books:** Silverston's party role and party relationship patterns carry from and thru dates (*The Data Model Resource Book*, volumes 1 and 3). Not named in the film.
 - **Two kinds of time:** a role's dates say when it was true; `recorded_at` says when the platform learned of it (often called bitemporal, as *One row of what, and when*'s rigour sheet says). The film doesn't use Delta time travel for this: its history is kept for days, not years, by default (30 days of log, 7 of files), so the table keeps `recorded_at` itself.
+- **Her dates, from the project's data** (checked 20 October 2026): each office's card in chapter 4 shows its own last day (*23 Feb – 27 Jun 2026*, *2 Mar – 19 Dec 2026*), the project's `ends_on`. The table's `valid_to` is exclusive, so it's the day after: `2026-06-28` and `2026-12-20`. `recorded_at` follows the project's doc: when the platform recorded the latest change behind the row, from each source's `_valid_from`. So a role that has ended was recorded with its end, the night after, and no row claims an end before it was known. Each role is keyed by the record that grants it (the project's DEC-PER-03, proposed), so the alumna row was recorded with her alumni record, on 1 November 2024, when the alumni office's records first reached the platform. The project was recorded a week before it began, and the 2026-S1 contract on 6 April, six weeks after it began. The applicant rows have no admissions source in the project yet, so their dates are the film's.
 - **dbt:** `versions_do_not_overlap` is the project's own generic test; `relationships` is dbt's, written with `arguments:` as the project writes it.
 - **Colour:** the role washes and the energy yellow checked for contrast with the dark text on them (4.5:1 or better); every band is labelled, so nothing depends on colour alone.
 
@@ -204,6 +206,7 @@ Four questions, one at the end of each of four chapters, as the site shows them 
 | 18 October 2026 | Films stand alone and aren't numbered, so the tutor's correction opens with "so far": chapter 4 drew one band, as *One person, many roles* did. That film is named by its title wherever this one refers to it. |
 | 18 October 2026 | The *relates to* tags hang above the timeline on dashed pencil lines: drawn on the rows, they hid the shorter periods, the Semester 1 contract among them. |
 | 18 October 2026 | The sound is the film's own: a choir humming, one voice to a note, a felt piano note for each role, a glass harmonica for the person, and the series' clarinet mark, from G minor to D major. Two voices on one note beat into a slow pulse on a phone's speaker, so each note has one. |
+| 20 October 2026 | The role table follows the project's new data. Each office's card keeps its own last day, and `valid_to` is the day after: `2026-06-28` for the Semester 1 2026 contract, `2026-12-20` for the project. The tutor's contracts end on the project's dates. `recorded_at` is when the platform recorded each row's latest change, as the project defines it: the night after an ended role's end, 1 November 2024 for the alumna row (with her alumni record), 25 February for the project, and 6 April for the late contract. |
 
 ## Built
 
@@ -211,9 +214,10 @@ Built on 18 October 2026, from this script, in watercolour. What changed on the 
 
 - **Captions.** Spanish captions in Latin American Spanish, about as long as each English line.
 - **Sound.** A new palette (in `source/tools/score.py`): a choir humming "oo" that holds the notes two chords share, a felt piano note for each role, a glass harmonica's D and A for the person, and the clarinet's mark (1-8-5-1) on G under the title and on D at the end, from G minor to D major. The music sits about 21 dB under the voice, as in *One person, many roles*, and the only pulse, under last year's count answered with today's statuses, about 9 dB under the music.
+- **Rebuilt, 20 October 2026,** with the project's dates for her roles (see *Decided*). The words, captions and sound didn't change.
 
 ## Next
 
 1. The author watches the film, and approves it or asks for corrections.
-2. The project's additions it needs: the person and the dated role table (`core_person`, `core_person_role`), with the HR, research office and Advancement sources *One person, many roles* asked for.
+2. The project's additions it needs: the person and the dated role table (`core_person`, `core_person_role`), reading the HR, research office and alumni sources added on 20 October 2026. The applicant rows still need an admissions source.
 3. Labs, with the series' interactive learning: the candidates above.

@@ -5,7 +5,9 @@
    are id, kind, film, chapter (a chapter id of its film, or null until the film is made), c and name, in that order, its id made of
    letters, digits and _ only; each scenario's are type, n (its film's number times ten, plus its place), lab and film. No other
    object here starts with an id, and no other key is called kind or starts an object with type (they're counted).
-   Names, numbers and dates follow each film's script: check a film's labs and scenarios against it when it's published. */
+   Names, numbers and dates follow each film's script: check a film's labs and scenarios against it when it's published.
+   close: the series' last words, under the scenarios' results for all films and for the last film: that film's closing chapter
+   (chapter), in its own words, and in learn.es.js in its Spanish captions. */
 window.MR={lang:"en",store:"ld-master-and-reference-data",bundleFilm:1,repoBase:"https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/",
 ui:{lab:"Lab",of:"of",inPractice:"In practice",watch:"Watch this part",next:"Next:",makeCall:"Make the call →",
   scenario:"Scenario",score:"Score",answered:"answered",toGo:"to go",good:"Good call",notQuite:"Not quite",
@@ -1081,4 +1083,11 @@ qs:[
 done:[["Every call a good one.","You can tell the person from her roles, and you know how to keep master and reference data right."],
   ["Nearly all.","Look again at the ones you missed, and the labs they lead to."],
   ["A good start.","Try the labs again: most slips come from taking a role, a list or a number for the person."],
-  ["Worth another look.","Watch the films again, then do the labs before the scenarios."]]};
+  ["Worth another look.","Watch the films again, then do the labs before the scenarios."]],
+close:{film:9,chapter:"series",title:"The same one, everywhere",lead:"Nine films followed Linh, until the university knew her as the same one, everywhere.",
+  parts:[["Who someone is","decide each match once, with a reason, and declare which value wins."],
+    ["Roles and lists","give each role a start and an end, and each list an owner and one home."],
+    ["Sharing it safely","use each role's data for its purpose only, and share the person the lightest way that works."],
+    ["Keeping it right","make every change one you can explain and undo, and stop duplicates at the door."]],
+  gov:"Master data is one of the things data governance looks after. And it needs the rest of governance: someone who decides, one meaning for each word, access for a purpose, and rules that run.",
+  next:"a series on data governance, following Yusuf as he puts each of these in place, for all of the university's data."}};

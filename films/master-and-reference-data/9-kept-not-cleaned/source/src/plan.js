@@ -554,3 +554,86 @@ function m9_bankLine(ctx,t,b,p){const x0=b.x+60,x1=b.x+b.w-60,y0=b.y+120,y1=b.y+
 function m9_indChip(ctx,x,y,ind,label){const w=Math.round(tw(ctx,label,30,800)+150);wc_chip(ctx,x,y,w,60,WC_IND[ind],label,null,{seed:label.length});
   const sx=x+w-104,sy=y+44;ctx.save();ctx.strokeStyle=rgba(wc_dim(WC_IND[ind],0.3),0.95);ctx.lineWidth=3;ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(sx,sy);
   for(let i=0;i<3;i++){ctx.lineTo(sx+i*26+22,sy-26);ctx.lineTo(sx+i*26+24,sy);}ctx.lineTo(sx+90,sy-2);ctx.stroke();ctx.restore();return w;}
+
+/* ---------- 11. the series, and data governance ---------- */
+// the series' line, as One person, many roles drew it at its end, now with all nine films and this one marked "here": each part's name
+// is written in as it's said, and on each of its films' cards, by hand, what the film showed
+const M9_FILMS=[["One person,","many roles"],["Who is it?"],["Which value wins"],["Roles come","and go"],["Lists everyone","uses"],["For this","purpose only"],
+  ["One person,","many systems"],["A hub at work"],["Kept, not","cleaned"]];
+const M9_PARTS=["who someone is","roles and lists","sharing it safely","keeping it right"],M9_PX=[590,960,1330,1700];
+const M9_LESSON=[null,"once, with a reason","declare which wins","a start and an end","an owner, one home","not for every role","the lightest way",
+  "explain and undo","at the door"];
+// film i's part, place on the line, and whether it sits above it
+function m9_fpos(i){const g=i?Math.floor((i-1)/2):-1;return{g,x:i?M9_PX[g]:200,up:!i||i%2===1};}
+// a part: a paper tag on the line, in no role's colour; blank until it's named (a: its name's alpha)
+function m9_part(ctx,g,a){const s=M9_PARTS[g],w=Math.round(tw(ctx,s,30,700)+40),x0=M9_PX[g]-w/2;
+  wc_panel(ctx,x0,514,w,52,{kind:"tag",seed:g+5});if(a>0.01)wc_T(ctx,s,x0+20,551,{w:700,size:30,col:WC_DARK,a});}
+// film i, as a card joined to the line by its stem: the first as One person, many roles drew it, with Linh's teal at the line; each of
+// the others taller, with what it showed written in by hand as lp goes 0 to 1; this one wears the badge
+function m9_film(ctx,i,lp){const {x,up}=m9_fpos(i),w=330,h=i?190:140,y=up?436-h:644;
+  ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,up?y+h:y);ctx.lineTo(x,i?(up?514:566):540);ctx.stroke();
+  if(!i){ctx.fillStyle=rgba(WC_ROLE.student,1);ctx.beginPath();ctx.arc(x,540,11,0,TAU);ctx.fill();}ctx.restore();
+  wc_panel(ctx,x-w/2,y,w,h,{kind:"card",seed:40+i});wc_T(ctx,"Film "+(i+1),x-w/2+26,y+42,{w:600,size:28,col:WC_MUTED});
+  M9_FILMS[i].forEach((l,k)=>wc_T(ctx,l,x-w/2+26,y+84+k*36,{w:800,size:30,col:WC_DARK}));
+  if(i&&lp>0)wc_hand(ctx,M9_LESSON[i],x-w/2+26,y+164,{p:lp,size:30,w:700,col:WC_INK});
+  if(i===8)wc_badge(ctx,x+w/2-26-Math.round(tw(ctx,"here",28,700)+28),y+34,"here");}
+// the whole line: drawn on as o.line goes 0 to 1; film i arriving from o.tf[i] (each part's tag with its first film), part g's name at
+// alpha o.name[g], and what film i showed written from o.tl[i]; o.dim[g] fades part g back, o.dim0 the rest; o.head shows the series'
+// name over it all, its mark drawn as o.headP goes 0 to 1
+function m9_series(ctx,t,o){const d0=o.dim0||0;
+  withA(ctx,1-d0,()=>{const lp=clamp(o.line,0,1);if(lp>0){ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.7);ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();
+      ctx.moveTo(90,540);ctx.lineTo(lerp(90,1830,ease(lp)),540);ctx.stroke();ctx.restore();}
+    arrive(ctx,200,366,t,o.tf[0],()=>m9_film(ctx,0,0),{dy:-16});});
+  if(o.head>0.01)withA(ctx,o.head,()=>{wc_T(ctx,WC_SERIES,960,166,{w:800,size:40,align:"center",col:WC_DARK});wc_mark(ctx,960,206,360,o.headP==null?1:o.headP,1);});
+  M9_PX.forEach((x,g)=>withA(ctx,1-(o.dim?o.dim[g]:0),()=>{arrive(ctx,x,540,t,o.tf[g*2+1],()=>m9_part(ctx,g,o.name[g]),{dy:8});
+    [1,2].forEach(k=>{const i=g*2+k,up=k===1;arrive(ctx,x,up?341:739,t,o.tf[i],()=>m9_film(ctx,i,clamp((t-o.tl[i])/0.9,0,1)),{dy:up?-16:16});});}));}
+// the line as it ends, kept as one picture, so that it can shrink into master data's place on the wheel: by then its words are too small
+// to read, on purpose (it's the series, seen from further off)
+const M9_LINE={x:30,y:120,w:1860,h:730};
+function m9_seriesPic(){return wc_kept("seriesLine",W,H,q=>m9_series(q,1e4,{line:1,head:1,name:[1,1,1,1],tf:Array(9).fill(0),tl:Array(9).fill(0)}));}
+// the picture drawn into the rectangle r (x, y, w, h)
+function m9_seriesAt(ctx,r){const S=M9_LINE,k=r.w/S.w;ctx.save();ctx.imageSmoothingQuality="high";ctx.drawImage(m9_seriesPic(),S.x,S.y,S.w,S.h,r.x,r.y,r.w,S.h*k);ctx.restore();}
+
+// data governance as a wheel: its hub, and on its rim what it looks after and the work it's made of: master data (this series, seen
+// from further off) on the left, and four pieces, named one by one, each with a small picture of its own. Cards and hub are opaque
+// paper, so the rim and the spokes run behind them
+const M9_HUB=[1220,470],M9_HR=[250,120],M9_RIM=[540,330],M9_MC={x:450,y:342,w:460,h:256};
+const M9_PIECES=[{a:108,l:["someone","who decides"],ic:"decide"},{a:36,l:["one meaning","for each word"],ic:"book"},{a:-36,l:["access for","a purpose"],ic:"key"},
+  {a:-108,l:["rules","that run"],ic:"gauge"}];
+const M9_PW=360,M9_PH=112;
+// a piece's middle, on the rim (180 degrees is master data's)
+function m9_rimAt(a){const r=a*Math.PI/180;return[M9_HUB[0]+M9_RIM[0]*Math.cos(r),M9_HUB[1]-M9_RIM[1]*Math.sin(r)];}
+// opaque paper under a card, as wide as its pencil edge
+function m9_base(ctx,x,y,w,h){wc_tr(ctx,wc_rrPts(x+3,y+3,w-6,h-6,10));ctx.fillStyle=rgba(WC_CARD,1);ctx.fill();}
+// the hub: data governance, in the business side's gold; o.next: the badge that says it's the next series; o.sub: what it covers, written
+// under its name
+function m9_hub(ctx,o){const [x,y]=M9_HUB,[rx,ry]=M9_HR,k=wc_kept("hub",1120,600,q=>{q.scale(2,2);q.translate(280,150);const e=wc_ell(0,0,rx,ry,48);
+    wc_tr(q,e);q.fillStyle=rgba(WC_PAPER,1);q.fill();wc_wash(q,e,wc_lit(WC_SIDE.biz,0.55),{kind:"swatch",line:false,a:0.55,seed:91});wc_ink(q,e,true,2.2,WC_PENCIL,0.85,93,0.9);});
+  ctx.drawImage(k,x-280,y-150,560,300);const sub=o.sub||0;
+  if(o.next>0.01)withA(ctx,o.next,()=>wc_badge(ctx,x-Math.round(tw(ctx,"next series",28,700)+28)/2,y-70,"next series"));
+  wc_T(ctx,"data governance",x,y+14-20*sub,{w:800,size:40,align:"center",col:WC_DARK});
+  if(sub>0.01)wc_T(ctx,"all of the university's data",x,y+38,{w:600,size:28,align:"center",col:WC_INK,a:sub});}
+// a spoke, from the hub's edge out to a piece's card, drawn on as p goes 0 to 1
+function m9_spoke(ctx,a,p){if(p<=0)return;const [hx,hy]=M9_HUB,[cx,cy]=a===180?[M9_MC.x+M9_MC.w/2,M9_MC.y+M9_MC.h/2]:m9_rimAt(a),hw=a===180?M9_MC.w/2:M9_PW/2,hh=a===180?M9_MC.h/2:M9_PH/2;
+  const L=Math.hypot(cx-hx,cy-hy),dx=(cx-hx)/L,dy=(cy-hy)/L,r0=1/Math.hypot(dx/M9_HR[0],dy/M9_HR[1]),r1=L-Math.min(hw/Math.max(1e-6,Math.abs(dx)),hh/Math.max(1e-6,Math.abs(dy))),
+    q=lerp(r0,r1,ease(clamp(p,0,1)));
+  ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.6);ctx.lineWidth=2.4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(hx+dx*r0,hy+dy*r0);ctx.lineTo(hx+dx*q,hy+dy*q);ctx.stroke();ctx.restore();}
+// a piece's small picture, about 64 px across, centred on x, y: a decision, ticked; an open glossary; a key; a measure with its iron bar
+function m9_icon(ctx,kind,x,y){ctx.save();ctx.lineCap="round";ctx.lineJoin="round";const P=rgba(WC_PENCIL,0.9);
+  if(kind==="decide"){wc_panel(ctx,x-32,y-24,64,48,{kind:"card",wash:WC_BADGE,washA:0.7,seed:95});wc_tick(ctx,x,y,30,WC_ROLEINK.alumna,1,4);}
+  else if(kind==="book"){[-1,1].forEach(sd=>{const pg=[[x,y-20],[x+sd*30,y-26],[x+sd*30,y+20],[x,y+26]];wc_tr(ctx,pg);ctx.fillStyle=rgba(WC_CARD,1);ctx.fill();ctx.strokeStyle=P;ctx.lineWidth=2;ctx.stroke();
+      ctx.strokeStyle=rgba(WC_PENCIL,0.45);ctx.lineWidth=1.6;for(let i=0;i<3;i++){const yy=y-10+i*11;ctx.beginPath();ctx.moveTo(x+sd*6,yy);ctx.lineTo(x+sd*24,yy-2);ctx.stroke();}});}
+  else if(kind==="key"){ctx.strokeStyle=P;ctx.lineWidth=3.4;ctx.beginPath();ctx.arc(x-16,y,12,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(x-4,y);ctx.lineTo(x+28,y);ctx.moveTo(x+18,y);ctx.lineTo(x+18,y+11);
+    ctx.moveTo(x+27,y);ctx.lineTo(x+27,y+9);ctx.stroke();ctx.fillStyle=rgba(WC_SIDE.biz,0.55);ctx.beginPath();ctx.arc(x-16,y,7,0,TAU);ctx.fill();}
+  else if(kind==="gauge"){const cx=x-14,cy=y-28,cw=24,ch=56;wc_tr(ctx,wc_rrPts(cx,cy,cw,ch,5));ctx.fillStyle=rgba([246,243,234],1);ctx.fill();ctx.save();ctx.clip();
+    ctx.fillStyle=rgba(M9_LEVEL,0.85);ctx.fillRect(cx,cy+ch*0.55,cw,ch*0.45);ctx.restore();ctx.strokeStyle=P;ctx.lineWidth=2;wc_tr(ctx,wc_rrPts(cx,cy,cw,ch,5));ctx.stroke();
+    ctx.strokeStyle=rgba(M9_IRON,1);ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(cx-7,cy+ch*0.35);ctx.lineTo(cx+cw+7,cy+ch*0.35);ctx.stroke();wc_tick(ctx,x+20,y+6,24,WC_ROLEINK.alumna,1,3.5);}
+  ctx.restore();}
+// piece i: a dashed space while it's still to come (n is 0), then its card, its picture and its name, as n goes to 1
+function m9_piece(ctx,i,n){const P=M9_PIECES[i],[cx,cy]=m9_rimAt(P.a),x=cx-M9_PW/2,y=cy-M9_PH/2;m9_base(ctx,x,y,M9_PW,M9_PH);
+  if(n<0.99)withA(ctx,1-n,()=>wc_panel(ctx,x,y,M9_PW,M9_PH,{kind:"card",dashed:true,seed:100+i}));
+  if(n>0.01)withA(ctx,n,()=>{wc_panel(ctx,x,y,M9_PW,M9_PH,{kind:"card",seed:100+i});m9_icon(ctx,P.ic,x+54,cy);P.l.forEach((s,k)=>wc_T(ctx,s,x+100,y+48+k*38,{w:800,size:30,col:WC_DARK}));});}
+// master data's card: its name, and the series' line in it, seen from further off (o.pic: drawn here once it has shrunk into it)
+function m9_master(ctx,o){const M=M9_MC;m9_base(ctx,M.x,M.y,M.w,M.h);wc_panel(ctx,M.x,M.y,M.w,M.h,{kind:"card",seed:110});
+  if(o.l>0.01)withA(ctx,o.l,()=>{wc_T(ctx,"master data",M.x+26,M.y+48,{w:800,size:32,col:WC_DARK});wc_T(ctx,"this series",M.x+M.w-24,M.y+48,{w:600,size:28,align:"right",col:WC_MUTED});});
+  if(o.pic)m9_seriesAt(ctx,{x:M.x+20,y:M.y+72,w:M.w-40});}

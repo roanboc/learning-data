@@ -14,7 +14,8 @@
 #    under the title, and on D on the end card.
 #  - Each of the steward's measures is a tubular bell, its iron bar, struck softly as its gauge is lit, each on its own note. When the
 #    oldest case goes past its limit, its bar is struck again; once the case is decided, once more, as its tick comes back.
-# The film moves from G minor, at the river in the dry season, to D major, when the water is let back in. The effects are the river's
+# The film moves from G minor, at the river in the dry season, to D major, when the water is let back in; the closing chapter turns to G
+# major once, as the series is seen as one part of data governance, and comes back to D on the end card. The effects are the river's
 # and the paper's: the river itself, softly, while it's on screen; the water parting, draining and let back in; gravel rolling; the
 # tripods' wooden poles set down and lifted; spades in gravel; the stone horse and the iron bars at the mark; a strip of paper
 # unrolling; and on paper, a pencil, cards and sheets set down, stamps, muffled keys, and a gauge filling like a bottle.
@@ -248,7 +249,7 @@ def stamp(s, g=0.06, pan=0.0):
 GM9 = [43, 50, 55, 58, 62, 69]; EBMAJ9 = [39, 46, 55, 58, 62, 65]; CM9 = [36, 43, 51, 55, 58, 62]; D7SUS = [38, 45, 50, 55, 57, 60]
 D7 = [38, 45, 54, 57, 60, 62]; EBMAJ7 = [39, 46, 50, 55, 58]; F69 = [41, 48, 55, 57, 60, 62]; BBMAJ9 = [46, 53, 57, 60, 62, 65]
 FMAJ9 = [41, 48, 52, 55, 57, 64]; DM9 = [38, 45, 50, 53, 57, 64]; CMAJ9 = [36, 43, 52, 55, 59, 62]; E7SUS4 = [40, 47, 52, 57, 62]
-DMAJ9_OPEN = [38, 45, 54, 57, 61, 64, 69, 76]
+DMAJ9_OPEN = [38, 45, 54, 57, 61, 64, 69, 76]; GMAJ9 = [43, 50, 59, 62, 66, 69]
 
 
 # 1. Kept, every dry season: G minor. The river, softly, closer on the split; the water parting as it's split in two; the gravel rolling
@@ -461,11 +462,11 @@ knock(tO + 0.25, 0.014, P(1540)); ironbar(67, tO + 0.6, 0.016, P(1540))
 
 # 10. Kept: no chord at its turn; it opens on the person's notes, Linh in white paper. Her new role painted on, a brush and the student's note, the line to its
 #     chip, and the chip; the intake's gauge set down, filling to 38, its tick; the tag; then the river in spring: the tripods lifted, the
-#     water let back into the inner channel and out to the canals, the land greening; after the last line, the music again, to the
-#     end: D major, blooming in the pause, the high flutes coming in last; the mark on the end card, in D
+#     water let back into the inner channel and out to the canals, the land greening; after the last line, the music again: D major,
+#     blooming in the pause, the high flutes coming in last, carried across the cut and fading under the closing chapter's first words
 J = 'kept'; B = C(J, 'breath'); tRole, tTh, tShe = W(J, 'phd', 'a new role'), W(J, 'count', 'thirty-eight'), W(J, 'count', "She isn't")
 tDu, tRep, tLet = W(J, 'spring', 'at Dujiangyan'), W(J, 'spring', 'repairs are done'), W(J, 'spring', 'let back in')
-flutes(DMAJ9_OPEN, B - 1.6, TOT - B + 2.6)
+flutes(DMAJ9_OPEN, B - 1.6, S0('series') + 3.0 - (B - 1.6))
 person(S0(J) + 0.6, 0.026, P(640))
 brush(tRole, 0.018, P(640), 0.8); role('student', tRole + 0.1, 0.032, P(640))
 air(tRole + 0.2, 0.4, 0.012, P(720)); knock(tRole + 0.4, 0.014, P(1035))
@@ -478,7 +479,32 @@ rush(tLet - 0.3, 2.6, 0.03, P(800))
 for k, x in enumerate((560, 380, 200)):
     trickle(tLet + 1.1 + k * 0.25, 1.6, 0.01, P(x))
 brush(tLet + 1.2, 0.016, 0.0, 1.6)
+
+# 11. The same one, everywhere: its turn is Kept's D major, fading under its first words. The series' line drawn, its first card,
+#     the other eight set down, the series' mark painted under its name; a pencil for each film's lesson as it's written in its card.
+#     In the pause after the four parts, its one chord, G major, as the line is seen from further off; the line shrinking into its
+#     place on the wheel; the rim drawn round, data governance's wash, its spokes, the spaces on the rim; master data's card; each
+#     piece set in its space as it's named; the next series' badge, Yusuf's card; after the last line, D major again, the high
+#     flutes coming in last; the mark on the end card, in D, and its last card
+J = 'series'; B = C(J, 'breath'); tNine, tSame = W(J, 'nine', 'Nine films'), W(J, 'nine', 'the same one')
+tGv, tLk, tSer, tY = W(J, 'gov', 'data governance'), W(J, 'gov', 'looks after'), W(J, 'next', 'next series'), W(J, 'next', 'Yusuf')
+tS, tRt = C(J, 'gov') - 0.3, C(J, 'right') + _DUR[J + '/right']
+air(S0(J) + 0.2, 1.6, 0.01, P(500)); knock(S0(J) + 0.35, 0.01, P(200))
+paper(tNine + 0.25, 0.016, P(780), 0.6); paper(tNine + 0.75, 0.012, P(1520), 0.6)
+brush(tSame + 0.2, 0.012, 0.0, 1.0)
+for (lid, word), x in zip((('who', 'once'), ('who', 'declare'), ('roles', 'a start'), ('roles', 'an owner'), ('safe', 'its purpose'),
+                           ('safe', 'the lightest'), ('right', 'explain'), ('right', 'stop duplicates')), (768, 768, 960, 960, 1152, 1152, 1633, 1633)):
+    quill(W(J, lid, word), 0.9, 0.008, P(x))
+flutes(GMAJ9, tRt - 0.2, 6.4, 0.03, 0.25)
+air(tS + 0.1, 1.6, 0.01, P(700)); knock(tS + 1.65, 0.01, P(680))
+ring(tGv, 1.8, 0.008, P(1220)); brush(tGv - 0.05, 0.012, P(1220), 0.9); quill(tGv + 0.4, 0.5, 0.006, P(950))
+quill(tLk + 0.1, 1.0, 0.006, P(1350)); paper(tLk + 0.15, 0.012, P(1350), 0.7)
+for word, x in (('someone', 1053), ('one meaning', 1657), ('access', 1657), ('rules', 1053)):
+    knock(W(J, 'rest', word), 0.012, P(x))
+knock(tSer + 0.05, 0.012, P(1220)); knock(tY + 0.3, 0.012, P(222))
+flutes(DMAJ9_OPEN, B - 1.6, TOT - B + 2.6)
 mark(B + 1.0, 62)
+knock(B + 2.1, 0.01, 0.0)
 
 # and the effects kept under about 2.5 kHz: the pencil's and the keys' edges, softened
 for _b in (XL, XR):

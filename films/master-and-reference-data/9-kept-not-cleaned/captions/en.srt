@@ -169,3 +169,35 @@ And at Dujiangyan, every spring, when the repairs are done, the water is let bac
 43
 00:04:15,685 --> 00:04:18,752
 Clean it once, and it decays. Keep it, and it lasts.
+
+44
+00:04:24,452 --> 00:04:29,529
+Nine films followed Linh, until the university knew her as the same one, everywhere.
+
+45
+00:04:30,829 --> 00:04:36,083
+Who someone is: decide each match once, with a reason, and declare which value wins.
+
+46
+00:04:37,083 --> 00:04:42,624
+Roles and lists: give each role a start and an end, and each list an owner and one home.
+
+47
+00:04:43,624 --> 00:04:50,332
+Sharing it safely: use each role's data for its purpose only, and share the person the lightest way that works.
+
+48
+00:04:51,332 --> 00:04:57,267
+Keeping it right: make every change one you can explain and undo, and stop duplicates at the door.
+
+49
+00:04:59,767 --> 00:05:03,491
+Master data is one of the things data governance looks after.
+
+50
+00:05:05,091 --> 00:05:12,713
+And it needs the rest of governance: someone who decides, one meaning for each word, access for a purpose, and rules that run.
+
+51
+00:05:14,313 --> 00:05:20,166
+The next series follows Yusuf as he puts each of these in place, for all of the university's data.

@@ -1,6 +1,7 @@
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
-   Three wordless moments: the river in spring, then the title; the steward's five measures, settled; and the end card. */
+   Four wordless moments: the river in spring, then the title; the steward's five measures, settled; the river in spring again, under
+   the last line; and the end card. */
 const BREATH={
 "river":{"hold":{"split":0.6,"gravel":0.6,"dry":0.6,"mark":0.8,"rule":0.9,"still":0.4},"breathe":4.6},
 "cleanup":{"hold":{"merged":0.5,"team":0.6}},
@@ -11,5 +12,6 @@ const BREATH={
 "agent":{"hold":{"list":0.6,"draft":0.8,"owner":0.5}},
 "scorecard":{"hold":{"yusuf":0.8}},
 "elsewhere":{"hold":{"bank":0.6}},
-"kept":{"hold":{"phd":0.9,"count":0.8,"spring":0.9},"breathe":5.0}
+"kept":{"hold":{"phd":0.9,"count":0.8,"spring":0.9},"breathe":3.0},
+"series":{"hold":{"nine":0.6,"who":0.3,"roles":0.3,"safe":0.3,"right":1.8,"gov":0.9,"rest":0.9},"breathe":5.5}
 };

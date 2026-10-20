@@ -461,14 +461,24 @@ const NARR={
  {"id":"phd","gap":0.8,"text":"February 2027. Linh starts her PhD: a new role, on the person she already is.","say":"February twenty twenty-seven. Linh starts her PhD: a new role, on the person she already is."},
  {"id":"count","gap":0.8,"text":"That intake made thirty-eight new duplicates. She isn't one of them."},
  {"id":"spring","gap":0.8,"text":"And at Dujiangyan, every spring, when the repairs are done, the water is let back in."},
- {"id":"line","gap":0.8,"text":"Clean it once, and it decays. Keep it, and it lasts."}]}
+ {"id":"line","gap":0.8,"text":"Clean it once, and it decays. Keep it, and it lasts."}]},
+"series":{"name":"The same one, everywhere","lead":1.0,"tail":1.0,"vo":[
+ {"id":"nine","gap":0.8,"text":"Nine films followed Linh, until the university knew her as the same one, everywhere."},
+ {"id":"who","gap":0.8,"text":"Who someone is: decide each match once, with a reason, and declare which value wins."},
+ {"id":"roles","gap":0.8,"text":"Roles and lists: give each role a start and an end, and each list an owner and one home."},
+ {"id":"safe","gap":0.8,"text":"Sharing it safely: use each role's data for its purpose only, and share the person the lightest way that works."},
+ {"id":"right","gap":0.8,"text":"Keeping it right: make every change one you can explain and undo, and stop duplicates at the door."},
+ {"id":"gov","gap":0.8,"text":"Master data is one of the things data governance looks after."},
+ {"id":"rest","gap":0.8,"text":"And it needs the rest of governance: someone who decides, one meaning for each word, access for a purpose, and rules that run."},
+ {"id":"next","gap":0.8,"text":"The next series follows Yusuf as he puts each of these in place, for all of the university's data."}]}
 };
 
-const VODUR={"river/split": 9.482, "river/gravel": 3.417, "river/dry": 5.957, "river/mark": 3.263, "river/rule": 4.498, "river/still": 3.243, "river/kept": 3.289, "cleanup/merged": 6.551, "cleanup/team": 3.368, "cleanup/gone": 2.001, "return/year": 2.527, "return/every": 1.41, "return/why": 5.427, "return/linh": 3.759, "return/fixed": 3.374, "entry/search": 4.788, "entry/match": 4.936, "entry/fell": 3.275, "entry/shape": 5.003, "measures/process": 4.351, "measures/bars": 4.338, "measures/dups": 1.614, "measures/oldest": 2.298, "measures/roles": 5.607, "measures/source": 1.381, "measures/requests": 4.059, "measures/nightly": 6.466, "alert/monday": 3.829, "alert/waiting": 3.91, "alert/rang": 4.21, "alert/blame": 3.042, "agent/list": 5.322, "agent/draft": 6.501, "agent/owner": 3.163, "agent/decides": 2.539, "scorecard/yusuf": 6.392, "scorecard/three": 4.257, "elsewhere/bank": 8.041, "elsewhere/one": 2.01, "kept/phd": 6.246, "kept/count": 3.792, "kept/spring": 4.849, "kept/line": 2.967};
+const VODUR={"river/split": 9.482, "river/gravel": 3.417, "river/dry": 5.957, "river/mark": 3.263, "river/rule": 4.498, "river/still": 3.243, "river/kept": 3.289, "cleanup/merged": 6.551, "cleanup/team": 3.368, "cleanup/gone": 2.001, "return/year": 2.527, "return/every": 1.41, "return/why": 5.427, "return/linh": 3.759, "return/fixed": 3.374, "entry/search": 4.788, "entry/match": 4.936, "entry/fell": 3.275, "entry/shape": 5.003, "measures/process": 4.351, "measures/bars": 4.338, "measures/dups": 1.614, "measures/oldest": 2.298, "measures/roles": 5.607, "measures/source": 1.381, "measures/requests": 4.059, "measures/nightly": 6.466, "alert/monday": 3.829, "alert/waiting": 3.91, "alert/rang": 4.21, "alert/blame": 3.042, "agent/list": 5.322, "agent/draft": 6.501, "agent/owner": 3.163, "agent/decides": 2.539, "scorecard/yusuf": 6.392, "scorecard/three": 4.257, "elsewhere/bank": 8.041, "elsewhere/one": 2.01, "kept/phd": 6.246, "kept/count": 3.792, "kept/spring": 4.849, "kept/line": 2.967, "series/nine": 4.977, "series/who": 5.154, "series/roles": 5.441, "series/safe": 6.608, "series/right": 5.835, "series/gov": 3.624, "series/rest": 7.522, "series/next": 5.753};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
-   Three wordless moments: the river in spring, then the title; the steward's five measures, settled; and the end card. */
+   Four wordless moments: the river in spring, then the title; the steward's five measures, settled; the river in spring again, under
+   the last line; and the end card. */
 const BREATH={
 "river":{"hold":{"split":0.6,"gravel":0.6,"dry":0.6,"mark":0.8,"rule":0.9,"still":0.4},"breathe":4.6},
 "cleanup":{"hold":{"merged":0.5,"team":0.6}},
@@ -479,7 +489,8 @@ const BREATH={
 "agent":{"hold":{"list":0.6,"draft":0.8,"owner":0.5}},
 "scorecard":{"hold":{"yusuf":0.8}},
 "elsewhere":{"hold":{"bank":0.6}},
-"kept":{"hold":{"phd":0.9,"count":0.8,"spring":0.9},"breathe":5.0}
+"kept":{"hold":{"phd":0.9,"count":0.8,"spring":0.9},"breathe":3.0},
+"series":{"hold":{"nine":0.6,"who":0.3,"roles":0.3,"safe":0.3,"right":1.8,"gov":0.9,"rest":0.9},"breathe":5.5}
 };
 
 /* ===== Shared components for the v4 film ===== */
@@ -2932,12 +2943,95 @@ function m9_indChip(ctx,x,y,ind,label){const w=Math.round(tw(ctx,label,30,800)+1
   const sx=x+w-104,sy=y+44;ctx.save();ctx.strokeStyle=rgba(wc_dim(WC_IND[ind],0.3),0.95);ctx.lineWidth=3;ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(sx,sy);
   for(let i=0;i<3;i++){ctx.lineTo(sx+i*26+22,sy-26);ctx.lineTo(sx+i*26+24,sy);}ctx.lineTo(sx+90,sy-2);ctx.stroke();ctx.restore();return w;}
 
+/* ---------- 11. the series, and data governance ---------- */
+// the series' line, as One person, many roles drew it at its end, now with all nine films and this one marked "here": each part's name
+// is written in as it's said, and on each of its films' cards, by hand, what the film showed
+const M9_FILMS=[["One person,","many roles"],["Who is it?"],["Which value wins"],["Roles come","and go"],["Lists everyone","uses"],["For this","purpose only"],
+  ["One person,","many systems"],["A hub at work"],["Kept, not","cleaned"]];
+const M9_PARTS=["who someone is","roles and lists","sharing it safely","keeping it right"],M9_PX=[590,960,1330,1700];
+const M9_LESSON=[null,"once, with a reason","declare which wins","a start and an end","an owner, one home","not for every role","the lightest way",
+  "explain and undo","at the door"];
+// film i's part, place on the line, and whether it sits above it
+function m9_fpos(i){const g=i?Math.floor((i-1)/2):-1;return{g,x:i?M9_PX[g]:200,up:!i||i%2===1};}
+// a part: a paper tag on the line, in no role's colour; blank until it's named (a: its name's alpha)
+function m9_part(ctx,g,a){const s=M9_PARTS[g],w=Math.round(tw(ctx,s,30,700)+40),x0=M9_PX[g]-w/2;
+  wc_panel(ctx,x0,514,w,52,{kind:"tag",seed:g+5});if(a>0.01)wc_T(ctx,s,x0+20,551,{w:700,size:30,col:WC_DARK,a});}
+// film i, as a card joined to the line by its stem: the first as One person, many roles drew it, with Linh's teal at the line; each of
+// the others taller, with what it showed written in by hand as lp goes 0 to 1; this one wears the badge
+function m9_film(ctx,i,lp){const {x,up}=m9_fpos(i),w=330,h=i?190:140,y=up?436-h:644;
+  ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,up?y+h:y);ctx.lineTo(x,i?(up?514:566):540);ctx.stroke();
+  if(!i){ctx.fillStyle=rgba(WC_ROLE.student,1);ctx.beginPath();ctx.arc(x,540,11,0,TAU);ctx.fill();}ctx.restore();
+  wc_panel(ctx,x-w/2,y,w,h,{kind:"card",seed:40+i});wc_T(ctx,"Film "+(i+1),x-w/2+26,y+42,{w:600,size:28,col:WC_MUTED});
+  M9_FILMS[i].forEach((l,k)=>wc_T(ctx,l,x-w/2+26,y+84+k*36,{w:800,size:30,col:WC_DARK}));
+  if(i&&lp>0)wc_hand(ctx,M9_LESSON[i],x-w/2+26,y+164,{p:lp,size:30,w:700,col:WC_INK});
+  if(i===8)wc_badge(ctx,x+w/2-26-Math.round(tw(ctx,"here",28,700)+28),y+34,"here");}
+// the whole line: drawn on as o.line goes 0 to 1; film i arriving from o.tf[i] (each part's tag with its first film), part g's name at
+// alpha o.name[g], and what film i showed written from o.tl[i]; o.dim[g] fades part g back, o.dim0 the rest; o.head shows the series'
+// name over it all, its mark drawn as o.headP goes 0 to 1
+function m9_series(ctx,t,o){const d0=o.dim0||0;
+  withA(ctx,1-d0,()=>{const lp=clamp(o.line,0,1);if(lp>0){ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.7);ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();
+      ctx.moveTo(90,540);ctx.lineTo(lerp(90,1830,ease(lp)),540);ctx.stroke();ctx.restore();}
+    arrive(ctx,200,366,t,o.tf[0],()=>m9_film(ctx,0,0),{dy:-16});});
+  if(o.head>0.01)withA(ctx,o.head,()=>{wc_T(ctx,WC_SERIES,960,166,{w:800,size:40,align:"center",col:WC_DARK});wc_mark(ctx,960,206,360,o.headP==null?1:o.headP,1);});
+  M9_PX.forEach((x,g)=>withA(ctx,1-(o.dim?o.dim[g]:0),()=>{arrive(ctx,x,540,t,o.tf[g*2+1],()=>m9_part(ctx,g,o.name[g]),{dy:8});
+    [1,2].forEach(k=>{const i=g*2+k,up=k===1;arrive(ctx,x,up?341:739,t,o.tf[i],()=>m9_film(ctx,i,clamp((t-o.tl[i])/0.9,0,1)),{dy:up?-16:16});});}));}
+// the line as it ends, kept as one picture, so that it can shrink into master data's place on the wheel: by then its words are too small
+// to read, on purpose (it's the series, seen from further off)
+const M9_LINE={x:30,y:120,w:1860,h:730};
+function m9_seriesPic(){return wc_kept("seriesLine",W,H,q=>m9_series(q,1e4,{line:1,head:1,name:[1,1,1,1],tf:Array(9).fill(0),tl:Array(9).fill(0)}));}
+// the picture drawn into the rectangle r (x, y, w, h)
+function m9_seriesAt(ctx,r){const S=M9_LINE,k=r.w/S.w;ctx.save();ctx.imageSmoothingQuality="high";ctx.drawImage(m9_seriesPic(),S.x,S.y,S.w,S.h,r.x,r.y,r.w,S.h*k);ctx.restore();}
+
+// data governance as a wheel: its hub, and on its rim what it looks after and the work it's made of: master data (this series, seen
+// from further off) on the left, and four pieces, named one by one, each with a small picture of its own. Cards and hub are opaque
+// paper, so the rim and the spokes run behind them
+const M9_HUB=[1220,470],M9_HR=[250,120],M9_RIM=[540,330],M9_MC={x:450,y:342,w:460,h:256};
+const M9_PIECES=[{a:108,l:["someone","who decides"],ic:"decide"},{a:36,l:["one meaning","for each word"],ic:"book"},{a:-36,l:["access for","a purpose"],ic:"key"},
+  {a:-108,l:["rules","that run"],ic:"gauge"}];
+const M9_PW=360,M9_PH=112;
+// a piece's middle, on the rim (180 degrees is master data's)
+function m9_rimAt(a){const r=a*Math.PI/180;return[M9_HUB[0]+M9_RIM[0]*Math.cos(r),M9_HUB[1]-M9_RIM[1]*Math.sin(r)];}
+// opaque paper under a card, as wide as its pencil edge
+function m9_base(ctx,x,y,w,h){wc_tr(ctx,wc_rrPts(x+3,y+3,w-6,h-6,10));ctx.fillStyle=rgba(WC_CARD,1);ctx.fill();}
+// the hub: data governance, in the business side's gold; o.next: the badge that says it's the next series; o.sub: what it covers, written
+// under its name
+function m9_hub(ctx,o){const [x,y]=M9_HUB,[rx,ry]=M9_HR,k=wc_kept("hub",1120,600,q=>{q.scale(2,2);q.translate(280,150);const e=wc_ell(0,0,rx,ry,48);
+    wc_tr(q,e);q.fillStyle=rgba(WC_PAPER,1);q.fill();wc_wash(q,e,wc_lit(WC_SIDE.biz,0.55),{kind:"swatch",line:false,a:0.55,seed:91});wc_ink(q,e,true,2.2,WC_PENCIL,0.85,93,0.9);});
+  ctx.drawImage(k,x-280,y-150,560,300);const sub=o.sub||0;
+  if(o.next>0.01)withA(ctx,o.next,()=>wc_badge(ctx,x-Math.round(tw(ctx,"next series",28,700)+28)/2,y-70,"next series"));
+  wc_T(ctx,"data governance",x,y+14-20*sub,{w:800,size:40,align:"center",col:WC_DARK});
+  if(sub>0.01)wc_T(ctx,"all of the university's data",x,y+38,{w:600,size:28,align:"center",col:WC_INK,a:sub});}
+// a spoke, from the hub's edge out to a piece's card, drawn on as p goes 0 to 1
+function m9_spoke(ctx,a,p){if(p<=0)return;const [hx,hy]=M9_HUB,[cx,cy]=a===180?[M9_MC.x+M9_MC.w/2,M9_MC.y+M9_MC.h/2]:m9_rimAt(a),hw=a===180?M9_MC.w/2:M9_PW/2,hh=a===180?M9_MC.h/2:M9_PH/2;
+  const L=Math.hypot(cx-hx,cy-hy),dx=(cx-hx)/L,dy=(cy-hy)/L,r0=1/Math.hypot(dx/M9_HR[0],dy/M9_HR[1]),r1=L-Math.min(hw/Math.max(1e-6,Math.abs(dx)),hh/Math.max(1e-6,Math.abs(dy))),
+    q=lerp(r0,r1,ease(clamp(p,0,1)));
+  ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.6);ctx.lineWidth=2.4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(hx+dx*r0,hy+dy*r0);ctx.lineTo(hx+dx*q,hy+dy*q);ctx.stroke();ctx.restore();}
+// a piece's small picture, about 64 px across, centred on x, y: a decision, ticked; an open glossary; a key; a measure with its iron bar
+function m9_icon(ctx,kind,x,y){ctx.save();ctx.lineCap="round";ctx.lineJoin="round";const P=rgba(WC_PENCIL,0.9);
+  if(kind==="decide"){wc_panel(ctx,x-32,y-24,64,48,{kind:"card",wash:WC_BADGE,washA:0.7,seed:95});wc_tick(ctx,x,y,30,WC_ROLEINK.alumna,1,4);}
+  else if(kind==="book"){[-1,1].forEach(sd=>{const pg=[[x,y-20],[x+sd*30,y-26],[x+sd*30,y+20],[x,y+26]];wc_tr(ctx,pg);ctx.fillStyle=rgba(WC_CARD,1);ctx.fill();ctx.strokeStyle=P;ctx.lineWidth=2;ctx.stroke();
+      ctx.strokeStyle=rgba(WC_PENCIL,0.45);ctx.lineWidth=1.6;for(let i=0;i<3;i++){const yy=y-10+i*11;ctx.beginPath();ctx.moveTo(x+sd*6,yy);ctx.lineTo(x+sd*24,yy-2);ctx.stroke();}});}
+  else if(kind==="key"){ctx.strokeStyle=P;ctx.lineWidth=3.4;ctx.beginPath();ctx.arc(x-16,y,12,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(x-4,y);ctx.lineTo(x+28,y);ctx.moveTo(x+18,y);ctx.lineTo(x+18,y+11);
+    ctx.moveTo(x+27,y);ctx.lineTo(x+27,y+9);ctx.stroke();ctx.fillStyle=rgba(WC_SIDE.biz,0.55);ctx.beginPath();ctx.arc(x-16,y,7,0,TAU);ctx.fill();}
+  else if(kind==="gauge"){const cx=x-14,cy=y-28,cw=24,ch=56;wc_tr(ctx,wc_rrPts(cx,cy,cw,ch,5));ctx.fillStyle=rgba([246,243,234],1);ctx.fill();ctx.save();ctx.clip();
+    ctx.fillStyle=rgba(M9_LEVEL,0.85);ctx.fillRect(cx,cy+ch*0.55,cw,ch*0.45);ctx.restore();ctx.strokeStyle=P;ctx.lineWidth=2;wc_tr(ctx,wc_rrPts(cx,cy,cw,ch,5));ctx.stroke();
+    ctx.strokeStyle=rgba(M9_IRON,1);ctx.lineWidth=5;ctx.beginPath();ctx.moveTo(cx-7,cy+ch*0.35);ctx.lineTo(cx+cw+7,cy+ch*0.35);ctx.stroke();wc_tick(ctx,x+20,y+6,24,WC_ROLEINK.alumna,1,3.5);}
+  ctx.restore();}
+// piece i: a dashed space while it's still to come (n is 0), then its card, its picture and its name, as n goes to 1
+function m9_piece(ctx,i,n){const P=M9_PIECES[i],[cx,cy]=m9_rimAt(P.a),x=cx-M9_PW/2,y=cy-M9_PH/2;m9_base(ctx,x,y,M9_PW,M9_PH);
+  if(n<0.99)withA(ctx,1-n,()=>wc_panel(ctx,x,y,M9_PW,M9_PH,{kind:"card",dashed:true,seed:100+i}));
+  if(n>0.01)withA(ctx,n,()=>{wc_panel(ctx,x,y,M9_PW,M9_PH,{kind:"card",seed:100+i});m9_icon(ctx,P.ic,x+54,cy);P.l.forEach((s,k)=>wc_T(ctx,s,x+100,y+48+k*38,{w:800,size:30,col:WC_DARK}));});}
+// master data's card: its name, and the series' line in it, seen from further off (o.pic: drawn here once it has shrunk into it)
+function m9_master(ctx,o){const M=M9_MC;m9_base(ctx,M.x,M.y,M.w,M.h);wc_panel(ctx,M.x,M.y,M.w,M.h,{kind:"card",seed:110});
+  if(o.l>0.01)withA(ctx,o.l,()=>{wc_T(ctx,"master data",M.x+26,M.y+48,{w:800,size:32,col:WC_DARK});wc_T(ctx,"this series",M.x+M.w-24,M.y+48,{w:600,size:28,align:"right",col:WC_MUTED});});
+  if(o.pic)m9_seriesAt(ctx,{x:M.x+20,y:M.y+72,w:M.w-40});}
+
 /* ===== Kept, not cleaned: scenes =====
-   Ten chapters, as in ../script.md: Dujiangyan, split without a dam, its inner channel dug out every dry season down to a mark in its
+   Eleven chapters, as in ../script.md: Dujiangyan, split without a dam, its inner channel dug out every dry season down to a mark in its
    bed; the university's clean-up of 2024; the duplicates coming back, intake by intake; the search before create at the application;
    the steward's five measures, each with a limit; an alert, and the case it points at; a change to a list, drafted by an agent and
-   decided by its owner; the governance scorecard; a bank that cleans up every three years; and Linh's PhD, with the water let back
-   into the inner channel in spring.
+   decided by its owner; the governance scorecard; a bank that cleans up every three years; Linh's PhD, with the water let back
+   into the inner channel in spring; and the series in one picture, then data governance, which the next series takes up.
    Drawn in watercolour (shared/src/wash.js), made to read on a phone (tools/legible.py): text is at least 28 px in the frame. The camera
    moves in on whatever the narration is about, and every shot drifts slowly; things arrive with a spring. Sound: every effect in
    tools/score.py fires at the same moment as the thing it belongs to here, so keep the two in step. */
@@ -3185,9 +3279,10 @@ scene("elsewhere",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s
   m9_close(ctx,S);wc_paperOver(ctx,S);});
 
 /* ---------- 10. Kept ---------- */
+const M9_KL="Clean it once, and it decays. Keep it, and it lasts.";
 // Linh, as the person, in February 2027: a tutor and an alumna, and now a student again, for her PhD; then the river in spring
 const M9_LX=640,M9_LY=1010;
-scene("kept",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
+scene("kept",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const tLs=w("phd","Linh starts"),tRole=w("phd","a new role"),tTh=w("count","thirty-eight"),tShe=w("count","She isn't"),tDu=w("spring","at Dujiangyan"),tEs=w("spring","every spring"),
     tRep=w("spring","repairs are done"),tLet=w("spring","let back in"),tLine=c("line");
   const k=fin(t,tDu-0.6,1.2);
@@ -3203,12 +3298,44 @@ scene("kept",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
     arrive(ctx,1507,640,t,tShe-0.1,()=>wc_tag(ctx,1507,640,"Linh: not one of them",{align:"center"}),{dy:8});
     m9_close(ctx,S);});
   wc_year(ctx,64,80,"February 2027 · the university",fin(t,0.3,0.6)*(1-fin(t,tDu-0.4,0.5)));wc_year(ctx,64,80,"every spring",fin(t,tEs,0.5));wc_paperOver(ctx,S);
-  // the line, then carried down onto the end card, above the veil, landing where the card's own line fades in and takes it over
-  const KL="Clean it once, and it decays. Keep it, and it lasts.",kl=fin(t,tLine-0.1,0.6),ky=lerp(128,420,fin(t,B+0.3,1.1)),kg=kl*(1-fin(t,B+0.8,0.9));
-  if(kg>0.01){setScreen(ctx,S);withA(ctx,kg,()=>{ctx.save();ctx.translate(960,ky-16);ctx.scale(1,0.2);const g=ctx.createRadialGradient(0,0,10,0,0,700);
-    g.addColorStop(0,rgba(WC_PAPER,0.94));g.addColorStop(0.7,rgba(WC_PAPER,0.7));g.addColorStop(1,rgba(WC_PAPER,0));ctx.fillStyle=g;ctx.fillRect(-700,-700,1400,1400);ctx.restore();});}
-  wc_end(ctx,S,t,B+0.8,"Kept, not cleaned",KL,"Film 9 of 9");
-  if(kl>0.01&&t<B+2.4){setScreen(ctx,S);withA(ctx,kl,()=>wc_T(ctx,KL,960,ky,{w:700,size:48,align:"center",col:WC_DARK}));}});
+  // the line, over the river in spring, on a glow of paper; the end card that carries it again closes the next chapter
+  const kl=fin(t,tLine-0.1,0.6);if(kl>0.01){setScreen(ctx,S);withA(ctx,kl,()=>{ctx.save();ctx.translate(960,112);ctx.scale(1,0.2);const g=ctx.createRadialGradient(0,0,10,0,0,700);
+    g.addColorStop(0,rgba(WC_PAPER,0.94));g.addColorStop(0.7,rgba(WC_PAPER,0.7));g.addColorStop(1,rgba(WC_PAPER,0));ctx.fillStyle=g;ctx.fillRect(-700,-700,1400,1400);ctx.restore();
+    wc_T(ctx,M9_KL,960,128,{w:700,size:48,align:"center",col:WC_DARK});});}});
+
+/* ---------- 11. The same one, everywhere ---------- */
+// the series in one picture, as One person, many roles first drew it: the nine films on a line, each part named and what each film showed;
+// then the line seen from further off, as master data's place on a wheel: data governance, and the four pieces of it that master data
+// needs; then Yusuf, whose series is next, and the end card
+scene("series",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
+  const tNine=w("nine","Nine films"),tSame=w("nine","the same one"),tp=["who","roles","safe","right"].map(c),
+    tl=[1e9,w("who","once"),w("who","declare"),w("roles","a start"),w("roles","an owner"),w("safe","its purpose"),w("safe","the lightest"),w("right","explain"),w("right","stop duplicates")],
+    tBack=sc.ends.right+0.2,tGv=w("gov","data governance"),tLk=w("gov","looks after"),tq=[w("rest","someone"),w("rest","one meaning"),w("rest","access"),w("rest","rules")],
+    tSer=w("next","next series"),tY=w("next","Yusuf"),tAll=w("next","all of"),tS=c("gov")-0.3,sh=clamp((t-tS)/1.8,0,1);
+  // the camera: the whole line; in on each part as it's named; out to the whole line again, before it's seen from further off
+  const CX=g=>clamp(M9_PX[g],960/1.3,W-960/1.3);
+  m9_open(ctx,S,t,sc,"plain",[[0,960,540,1]].concat(tp.map((t0,g)=>[t0-0.4,CX(g),570,1.3]),[[tBack,960,540,1]]));m9_hush(ctx,0.3);
+  // the part in focus, and how far the others step back meanwhile
+  const on=fin(t,tp[0]-0.4,0.6)*(1-fin(t,tBack,0.8)),foc=g=>fin(t,tp[g]-0.4,0.6)*(g<3?1-fin(t,tp[g+1]-0.4,0.6):1);
+  if(t<tS){const tf=[0.3].concat([1,2,3,4,5,6,7,8].map(i=>tNine+0.15+i*0.13));
+    m9_series(ctx,t,{line:clamp((t-0.2)/1.6,0,1),head:fin(t,tSame,0.6)*(1-on),headP:(t-tSame-0.2)/1.0,
+      name:tp.map(t0=>fin(t,t0-0.1,0.4)),tf,tl,dim:[0,1,2,3].map(g=>0.55*on*(1-foc(g))),dim0:0.55*on});}
+  else withA(ctx,1-fin(t,B+0.8,1.0),()=>{// fades as the end card comes, so no word shows through it
+    // the line, seen from further off: it shrinks into master data's place on the wheel, and the card gathers under it
+    const M=M9_MC,R={x:M.x+20,y:M.y+72,w:M.w-40},k0=R.w/M9_LINE.w,k=Math.exp(Math.log(k0)*ease(sh)),v=(1-k)/(1-k0);
+    // data governance: the rim drawn round, the hub, its spokes; the four pieces still to name, as spaces on the rim
+    wc_ring(ctx,M9_HUB[0],M9_HUB[1],M9_RIM[0],M9_RIM[1],clamp((t-tGv)/1.8,0,1),{lw:2.6,a:0.5,seed:21});
+    m9_spoke(ctx,180,clamp((t-tGv-0.4)/0.6,0,1));M9_PIECES.forEach((P,i)=>m9_spoke(ctx,P.a,clamp((t-tLk-0.1-i*0.15)/0.6,0,1)));
+    arrive(ctx,M9_HUB[0],M9_HUB[1],t,tGv-0.1,()=>m9_hub(ctx,{sub:fin(t,tAll,0.6),next:fin(t,tSer,0.5)}),{d:0.9,from:0.96});
+    M9_PIECES.forEach((P,i)=>{const [x,y]=m9_rimAt(P.a);arrive(ctx,x,y,t,tLk+0.1+i*0.15,()=>m9_piece(ctx,i,fin(t,tq[i]-0.1,0.5)),{dy:10});});
+    if(sh>=1)m9_master(ctx,{l:fin(t,tS+1.6,0.6),pic:true});
+    else{withA(ctx,clamp((v-0.55)/0.45,0,1),()=>m9_master(ctx,{l:0}));m9_seriesAt(ctx,{x:lerp(M9_LINE.x,R.x,v),y:lerp(M9_LINE.y,R.y,v),w:M9_LINE.w*k});}
+    // Yusuf, whose series is next, beside it all
+    arrive(ctx,165,700,t,tY-0.2,()=>person(ctx,"yusuf",165,1010,0.95,{pose:"stand",pose2:"explain",mix:fin(t,tY+0.5,0.6),expr:"calm",t}),{d:0.9,from:0.97});
+    arrive(ctx,222,304,t,tY+0.2,()=>m9_name(ctx,222,250,"Yusuf Demir","data governance lead"),{dy:12});});
+  m9_close(ctx,S);wc_paperOver(ctx,S);
+  wc_end(ctx,S,t,B+0.8,"Kept, not cleaned",M9_KL,"Film 9 of 9");
+  const na=fin(t,B+2.0,0.9);if(na>0.01){setScreen(ctx,S);withA(ctx,na,()=>wc_tag(ctx,960,770,"Next: a series on data governance",{align:"center",size:28,w:600}));}});
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

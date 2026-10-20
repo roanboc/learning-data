@@ -335,9 +335,9 @@ knock(W(J, 'only', 'name agrees'), 0.018, P(932))
 air(tNp - 0.1, 0.9, 0.016, P(1660)); paper(tNp + 0.2, 0.024, P(1630)); role('applicant', tNp + 0.4, 0.026, P(1660))
 knock(tNp + 0.6, 0.016, P(1630)); stamp(W(J, 'only', 'own number', 0.06), 0.06)
 
-# 11. The person, published: C major. The product's card; its badge; each promise lit with a brush as it's said, and dbt's lines with
-#     it; dbt, and Unity Catalog's grant, each set down, and who may read it typed in; the synced table, its arrow, and the application
-#     on the applicant's note, its arrow and its tag
+# 11. The person, published: C major. The product's card; its badge; each promise lit with a brush as it's said, and the platform's
+#     lines with it; the platform's card, and its grant, each set down, and who may read it typed in; the synced table, its arrow,
+#     and the application on the applicant's note, its arrow and its tag
 J = 'product'; tCn, tVe, tNo, tSt, tAp = W(J, 'contract', 'contract'), W(J, 'contract', 'new version'), W(J, 'contract', 'nothing that reads'), W(J, 'synced', 'synced table'), W(J, 'synced', 'application')
 bed([(S0(J), CMAJ9), (C(J, 'contract', -0.3), AM7), (C(J, 'tools', -0.3), FMAJ9), (C(J, 'synced', -0.3), G6)], E(J) + 1.0)
 paper(W(J, 'behind', 'the person', -0.4), 0.03, P(840)); knock(W(J, 'behind', 'data product'), 0.018, P(1100))
@@ -346,7 +346,7 @@ paper(C(J, 'contract', -0.3), 0.026, P(1330)); brush(C(J, 'contract'), 0.014, P(
 for t0 in [tCn, tVe, tNo]:
     brush(t0, 0.018, P(1100), 0.6)
 knock(C(J, 'tools'), 0.014, P(1700))
-paper(W(J, 'tools', 'Databricks', -0.3), 0.026, P(1330)); typing(W(J, 'tools', 'who may read'), 0.8, 0.011, P(1000), 5)
+paper(W(J, 'tools', 'governs', -0.3), 0.026, P(1330)); typing(W(J, 'tools', 'who may read'), 0.8, 0.011, P(1000), 5)
 paper(tSt - 0.3, 0.026, P(1060)); air(tSt, 0.5, 0.014, P(790))
 air(tAp, 0.5, 0.014, P(1340)); role('applicant', tAp + 0.1, 0.024, P(1630)); knock(W(J, 'synced', 'applicant waits'), 0.016, P(1630))
 

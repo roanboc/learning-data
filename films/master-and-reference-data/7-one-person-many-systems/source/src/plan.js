@@ -6,9 +6,6 @@
    country's register; the search and its three outcomes; who may create a person; the second Linh Nguyen; and the person as a data
    product. Every name starts with m7_ (this film) or M7_. */
 
-// the tools' logos (style2.js), for chapter 11: the series' finishing pass doesn't load them
-loadLogos();
-
 // the second Linh Nguyen: as unlike the first as two people are, younger, with long hair and a cardigan; no side, as Linh has none
 PEOPLE.linh2={name:"Linh Nguyen",role:"Applicant",side:"Person",does:"uses",edge:[236,232,226],seed:23,
   skin:[222,182,146],hair:{style:"long",c:[22,18,20]},
@@ -342,13 +339,15 @@ function m7_product(ctx,t,x,y,o){const w=640,h=600;wc_panel(ctx,x,y,w,h,{kind:"c
   M7_PROD.forEach(([k,v],i)=>{const yy=y+150+i*96,lit=o.lit[i]||0,col=i?WC_SIDE.tech:WC_SIDE.biz;wc_panel(ctx,x+300,yy-44,300,72,{kind:"tag",seed:i+60});
     if(lit>0.01)withA(ctx,lit,()=>wc_panel(ctx,x+300,yy-44,300,72,{kind:"chip",role:col,seed:i+60}));
     wc_T(ctx,k,x+324,yy-10,{w:600,size:28,col:lit>0.5?WC_DARK:WC_MUTED});wc_T(ctx,v,x+324,yy+22,{w:800,size:28,col:WC_DARK});});}
-// the model's settings in dbt, one line lit at a time
+// the person's settings on the data platform, in their simplest form, YAML, one line lit at a time. No tool is named: master data
+// solutions keep such settings in many ways, often behind a screen of their own
 const M7_YAML=["group: person","access: public","contract: {enforced: true}","latest_version: 1"];
-function m7_yaml(ctx,t,x,y,o){const w=980,h=330;wc_panel(ctx,x,y,w,h,{kind:"card",seed:52});const lw=logo(ctx,"dbt",x+32,y+26,52);
-  wc_T(ctx,"dbt",x+40+Math.max(lw,50),y+64,{w:800,size:32,col:WC_DARK});wc_T(ctx,"builds and tests it",x+w-36,y+64,{w:600,size:28,align:"right",col:WC_MUTED,a:fin(t,o.tests,0.5)});
+function m7_yaml(ctx,t,x,y,o){const w=980,h=330;wc_panel(ctx,x,y,w,h,{kind:"card",seed:52});
+  wc_T(ctx,"the data platform",x+36,y+64,{w:800,size:32,col:WC_DARK});wc_T(ctx,"builds and tests it",x+w-36,y+64,{w:600,size:28,align:"right",col:WC_MUTED,a:fin(t,o.tests,0.5)});
   M7_YAML.forEach((s,i)=>{const yy=y+140+i*48,lit=o.lit[i]||0;if(lit>0.01)withA(ctx,lit,()=>wc_panel(ctx,x+24,yy-34,Math.round(tw(ctx,s,28,500,"mono")+40),46,{kind:"chip",role:WC_SIDE.tech,seed:i+70}));
-    wc_T(ctx,s,x+44,yy,{w:500,size:28,f:"mono",col:WC_DARK});});}
-// Databricks: Unity Catalog's grant, who may read the person
-function m7_grant(ctx,t,x,y,o){const w=980,h=150;wc_panel(ctx,x,y,w,h,{kind:"card",seed:53});const lw=logo(ctx,"databricks",x+32,y+24,50);
-  wc_T(ctx,"Unity Catalog",x+44+Math.max(lw,46),y+60,{w:800,size:32,col:WC_DARK});wc_T(ctx,"governs who may read it",x+w-36,y+60,{w:600,size:28,align:"right",col:WC_MUTED});
+    wc_T(ctx,s,x+44,yy,{w:500,size:28,f:"mono",col:WC_DARK});});
+  wc_T(ctx,"in its simplest form, YAML",x+w-36,y+284,{w:600,size:28,align:"right",col:WC_MUTED,a:fin(t,o.tests+0.4,0.5)});}
+// and who may read the person, as the platform governs it
+function m7_grant(ctx,t,x,y,o){const w=980,h=150;wc_panel(ctx,x,y,w,h,{kind:"card",seed:53});
+  wc_T(ctx,"governs who may read it",x+36,y+60,{w:800,size:32,col:WC_DARK});
   withA(ctx,fin(t,o.read,0.5),()=>wc_T(ctx,"may read: student system, HR",x+44,y+116,{w:500,size:28,f:"mono",col:WC_DARK}));}

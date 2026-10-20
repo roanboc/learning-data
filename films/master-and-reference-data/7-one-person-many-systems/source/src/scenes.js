@@ -295,15 +295,15 @@ scene("apart",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
 /* ---------- 11. The person, published ---------- */
 scene("product",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const tPer=w("behind","the person"),tDp=w("behind","data product"),tOw=w("behind","owned by"),tCo=c("contract"),tCn=w("contract","contract"),tVe=w("contract","new version"),tNo=w("contract","nothing that reads"),
-    tTo=c("tools"),tDbx=w("tools","Databricks"),tWho=w("tools","who may read"),tSy=c("synced"),tSt=w("synced","synced table"),tAp=w("synced","application"),tWa=w("synced","applicant waits");
+    tTo=c("tools"),tGov=w("tools","governs"),tWho=w("tools","who may read"),tSy=c("synced"),tSt=w("synced","synced table"),tAp=w("synced","application"),tWa=w("synced","applicant waits");
   // the camera: the product; out for its settings. Then the tools step back for the synced table and the application
   m7_open(ctx,S,t,sc,"plain",[[0,520,430,1.22],[tCo-0.4,960,470,1]]);
   arrive(ctx,420,410,t,tPer-0.4,()=>m7_product(ctx,t,100,110,{badge:tDp,lit:[fin(t,tOw,0.5),fin(t,tCn,0.5),fin(t,tVe,0.5),fin(t,tNo,0.5)]}),{dy:16});
-  // what dbt holds for each promise, lit as each is said; dbt builds and tests it
+  // what the data platform holds for each promise, lit as each is said; it builds and tests it
   const back=1-0.55*fin(t,tSt-0.4,0.6);
   withA(ctx,back,()=>arrive(ctx,1330,275,t,tCo-0.3,()=>m7_yaml(ctx,t,840,110,{tests:tTo,lit:[fin(t,tCo,0.5),fin(t,tNo,0.5),fin(t,tCn+0.1,0.5),fin(t,tVe,0.5)]}),{dy:16}));
-  // and Databricks governs who may read it
-  withA(ctx,back,()=>arrive(ctx,1330,545,t,tDbx-0.3,()=>m7_grant(ctx,t,840,470,{read:tWho}),{dy:16}));
+  // and it governs who may read it
+  withA(ctx,back,()=>arrive(ctx,1330,545,t,tGov-0.3,()=>m7_grant(ctx,t,840,470,{read:tWho}),{dy:16}));
   // a synced table serves the person to the application, while the applicant waits
   arrive(ctx,1060,716,t,tSt-0.3,()=>{wc_panel(ctx,840,660,440,112,{kind:"card",wash:[132,182,222],washA:0.22,seed:55});wc_T(ctx,"synced table",872,708,{w:800,size:30,col:WC_DARK});
     wc_T(ctx,"the person, for the search",872,750,{w:600,size:28,col:WC_MUTED});},{dy:12});

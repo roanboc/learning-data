@@ -147,21 +147,21 @@ Detrás de la búsqueda está la persona, publicada como producto de datos, a ca
 Un contrato fija su forma, y una nueva versión marca cualquier cambio, para que nada de lo que la lee se rompa por sorpresa.
 
 38
-00:04:13,097 --> 00:04:17,320
-dbt la construye y la prueba, y Databricks gobierna quién puede leerla.
+00:04:13,097 --> 00:04:16,959
+La plataforma de datos la construye y la prueba, y gobierna quién puede leerla.
 
 39
-00:04:18,620 --> 00:04:22,595
+00:04:18,759 --> 00:04:22,734
 Una tabla sincronizada se la entrega a la solicitud mientras quien postula espera.
 
 40
-00:04:25,095 --> 00:04:29,204
+00:04:25,234 --> 00:04:29,343
 En Berna, cada país mantuvo su oficina de correos, y compartieron las reglas.
 
 41
-00:04:30,504 --> 00:04:34,145
+00:04:30,643 --> 00:04:34,284
 Aquí, cada sistema mantiene sus registros, y comparten una sola persona.
 
 42
-00:04:35,745 --> 00:04:38,369
+00:04:35,884 --> 00:04:38,508
 Elige la forma más liviana que resuelva el problema.

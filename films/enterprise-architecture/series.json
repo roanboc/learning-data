@@ -47,7 +47,7 @@
     [11, "A map people and agents can read", "the model as something kept, not drawn once"]
   ],
   "coming_es": [
-    [9, "Reglas con un lugar", "información: objetos, dueños y reglas"],
+    [9, "Reglas con un hogar", "información: objetos, dueños y reglas"],
     [10, "Cuando la estrategia se mueve", "un cambio, recorrido por todas las capas"],
     [11, "Un mapa que personas y agentes pueden leer", "el modelo como algo que se mantiene, no que se dibuja una vez"]
   ],
@@ -64,5 +64,11 @@
     ["biz", "Hace funcionar la red", "Grace, dueña de las operaciones de la red"],
     ["biz", "Habla por los clientes", "Farah, la defensora de los clientes"],
     ["biz", "Conoce las reglas", "Ama, la responsable regulatoria"]
-  ]
+  ],
+  "learn_p": "{Labs} hands-on labs, one for each film and one on ArchiMate 4, then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs interactivos, uno por película y uno sobre ArchiMate 4, y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} hands-on labs: one for each film, and one on ArchiMate 4, the standard of the later films. Each puts one idea from a film in your hands, and shows you why it matters.",
+  "labs_lead_es": "{Labs} labs interactivos: uno por película, y uno sobre ArchiMate 4, el estándar de las últimas películas. Cada uno pone en tus manos una idea de una película, y te muestra por qué importa.",
+  "quiz_lead": "{quiz} situations an architect or a data team really faces, from every film. Decide what you'd do; each answer explains why, and points back to the lab that covers it.",
+  "quiz_lead_es": "{quiz} situaciones que de verdad enfrenta un arquitecto o un equipo de datos, de todas las películas. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

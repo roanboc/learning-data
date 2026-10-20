@@ -19,6 +19,8 @@ What it checks, page by page (every .html under site/):
 - one film bundle per page, scripts in order, and each film's progress prefix where it belongs.
 - Spanish captions: a Spanish page that plays an English film loads the film's captions first, each a copy of its source.
 - Spanish pages: in Spanish, linking to Spanish pages when a twin exists, and marking links to English-only pages.
+- a series' own labs and scenarios (build_series.series_learn): the same in both languages, each lab on one of its film's
+  chapters, each scenario numbered by its film and pointing to a lab; its films' "Pause and think" questions stop at its labs.
 - the journey pages are what site-tools/build_pages.py makes from their Markdown.
 """
 import html.parser
@@ -116,6 +118,23 @@ for _S in build_series.SERIES:
     TWINS.append(f"{_sl}/")
     CRUMBS[f"{_sl}/"] = (f"Topics › {_tn['en']} › {_nm['en']}", ["topics/", "topics/"])
     CRUMBS[f"es/{_sl}/"] = (f"Temas › {_tn['es']} › {_nm['es']}", ["es/topics/", "es/topics/"])
+# a series' own labs and scenarios (build_series.series_learn): their two pages, the ids learn.js makes on them (each lab's, and
+# #film-<n> for a film's situations), and their progress prefix, the series'
+SERIES_LEARN, LEARN_IDS, LEARN_STORE = {}, {}, {}
+for _S in build_series.SERIES:
+    _SL = build_series.series_learn(_S) if build_series.films(_S)[1] else None
+    if not _SL:
+        continue
+    _sl, _nm = _S["slug"], _S["name"]; _tn = build_series.topic_of(_S["id"])["name"]
+    SERIES_LEARN[_S["id"]] = (_S, _SL)
+    for _sub in ("labs/", "scenarios/"):
+        TWINS.append(f"{_sl}/{_sub}")
+        CRUMBS[f"{_sl}/{_sub}"] = (f"Topics › {_tn['en']} › {_nm['en']}", ["topics/", "topics/", f"{_sl}/"])
+        CRUMBS[f"es/{_sl}/{_sub}"] = (f"Temas › {_tn['es']} › {_nm['es']}", ["es/topics/", "es/topics/", f"es/{_sl}/"])
+    for _lg, _pre in (("en", ""), ("es", "es/")):
+        LEARN_IDS[f"{_pre}{_sl}/labs/"] = {x["id"] for x in _SL[_lg]["labs"]}
+        LEARN_IDS[f"{_pre}{_sl}/scenarios/"] = {f"film-{f}" for _, f, _ in _SL[_lg]["qs"]}
+        LEARN_STORE[f"{_pre}{_sl}/labs/"] = LEARN_STORE[f"{_pre}{_sl}/scenarios/"] = _SL["prefix"]
 for _f in SERIES_FILMS:
     _k, _S = _f["key"], _f["series"]; _sl, _nm = _S["slug"], _S["name"]; _tn = build_series.topic_of(_S["id"])["name"]
     for _sub in ("", "labs/", "scenarios/") if _f["labs"] else ("",):  # a film without labs and scenarios has only its Watch page
@@ -128,6 +147,8 @@ for _f in SERIES_FILMS:
         PACKS.add(f"assets/{_k}/think.{_lg}.js")
         if _f["labs"]:  # its questions' lab links go to its own labs; a film without labs has none (its .player data-labs is empty)
             OWN_LABS[f"assets/{_k}/think.{_lg}.js"] = (("es/" if _lg == "es" else "") + f"{_sl}/{_k}/labs/index.html", f"assets/{_k}/learn.{_lg}.js")
+        elif _S["id"] in SERIES_LEARN:  # or to its series' own
+            OWN_LABS[f"assets/{_k}/think.{_lg}.js"] = (("es/" if _lg == "es" else "") + f"{_sl}/labs/index.html", f"assets/{SERIES_LEARN[_S['id']][1]['dir']}/learn.{_lg}.js")
     COUNTS[f"ld-{_k}"] = (str(_f["labs"]), str(_f["quiz"])) if _f["labs"] else (None, None)
     CAPTIONS_ES[f"assets/{_k}/film.js"] = (f"assets/{_k}/captions.es.js", f"films/{_S['dir']}/{_f['dir']}/source")
     if "½" in _f["len"]:
@@ -466,6 +487,8 @@ def main():
             return
         if tp.key == "sketch/labs/" and frag in sketch_labs:
             return
+        if frag in LEARN_IDS.get(tp.key, ()):  # made by the series' learn.js
+            return
         if tp.dom.first(cls="path", data_home=True) and re.fullmatch(r"(explore|practise)([-/]\w+)?", frag):
             return
         s["fails"].append(f"{where}: {ref}: no id \"{frag}\" on {tp.file}")
@@ -770,7 +793,10 @@ def main():
             except ValueError as e:
                 s["fails"].append(f"{pg.file}: .path data-text is not JSON ({e})")
             ds = path.attrs.get("data-store", "ld")
-            if film and ds != BUNDLES[film]:
+            if pg.key in LEARN_STORE:  # a series' own labs and scenarios keep their progress under the series' prefix
+                if ds != LEARN_STORE[pg.key]:
+                    s["fails"].append(f"{pg.file}: .path data-store=\"{ds}\", but this series' labs and scenarios keep theirs as {LEARN_STORE[pg.key]}")
+            elif film and ds != BUNDLES[film]:
                 s["fails"].append(f"{pg.file}: .path data-store=\"{ds}\", but the film here is {BUNDLES[film]}")
 
     # -- the Making of films: sealed players, each with its own prefixed elements
@@ -936,6 +962,38 @@ def main():
         if build_series.readme(S) != (S["root"] / "README.md").read_text():
             s["fails"].append(f"films/{S['dir']}/README.md: its table of films is not what build_series.py makes")
         s["notes"].append(f"{S['name']['en']}: {len(build_series.films(S)[1])} films")
+
+    s = rep.check("A series' own labs and scenarios: the same in both languages, each lab on one of its film's chapters, each scenario on a lab")
+    for S, SL in SERIES_LEARN.values():
+        words = f"site/assets/{SL['dir']}/learn"
+        en, es = SL["en"], SL["es"]
+        key = lambda x: (x["id"], x["film"], x["chapter"])
+        if [key(x) for x in en["labs"]] != [key(x) for x in es["labs"]]:
+            s["fails"].append(f"{words}.es.js: its labs (ids, films, chapters, in order) differ from {words}.en.js's")
+        if en["qs"] != es["qs"]:
+            s["fails"].append(f"{words}.es.js: its scenarios (numbers, films, labs, in order) differ from {words}.en.js's")
+        ids, ns = [x["id"] for x in en["labs"]], [n for n, _, _ in en["qs"]]
+        for k, c in Counter(ids).items():
+            if c > 1:
+                s["fails"].append(f"{words}.en.js: {c} labs have the id \"{k}\"")
+        for k, c in Counter(ns).items():
+            if c > 1:
+                s["fails"].append(f"{words}.en.js: {c} scenarios have the number {k}, which keeps their answers apart")
+        on = {x["index"] + 1: x for x in build_series.films(S)[1]}
+        for x in en["labs"]:
+            f = on.get(x["film"])
+            if f and x["chapter"] not in dict(f["chapters"]):
+                s["fails"].append(f"{words}.en.js: lab \"{x['id']}\" plays chapter {x['chapter']!r} of {f['title']}, which has "
+                                  + ", ".join(k for k, _ in f["chapters"]) + " (a lab of a film still being made has chapter null)")
+        for n, f, lab in en["qs"]:
+            if n // 10 != f:
+                s["fails"].append(f"{words}.en.js: scenario {n} is from film {f}, but its number isn't film × 10 + its place")
+            if lab not in ids:
+                s["fails"].append(f"{words}.en.js: scenario {n} points to lab \"{lab}\", which isn't one of the labs")
+        for n, f in on.items():
+            if not f["labs"] and not any(x["film"] == n for x in en["labs"]) and not any(q[1] == n for q in en["qs"]):
+                s["notes"].append(f"{f['title']}: no lab or scenario among the series' own")
+        s["notes"].append(f"{S['name']['en']}: {SL['labs']} labs and {SL['quiz']} scenarios, for films {', '.join(map(str, SL['films']))}")
 
     s = rep.check("Journey pages: the same as site-tools/build_pages.py makes from their Markdown")
     try:

@@ -7,10 +7,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Lunes por la mañana. Mei, cuya oficina decide quién es alguien, abre el hub.",
 "Earlier in this series, the university wrote down its rules: when two records are one person, and which value wins.":
 "Antes en esta serie, la universidad escribió sus reglas: cuándo dos registros son una persona, y qué valor gana.",
-"A hub puts those rules to work, every day.":
-"Un hub pone esas reglas a trabajar, cada día.",
-"This one is LakeFusion, which runs inside Databricks. Another hub could take its place.":
-"Este es LakeFusion, que funciona dentro de Databricks. Otro hub podría ocupar su lugar.",
+"The hub, a master data solution, puts those rules to work, every day.":
+"El hub, una solución de datos maestros, aplica esas reglas cada día.",
 "Over the weekend, 1,240 changes came in from four systems.":
 "Durante el fin de semana, llegaron 1240 cambios de cuatro sistemas.",
 "The rules dealt with nearly all of them.":

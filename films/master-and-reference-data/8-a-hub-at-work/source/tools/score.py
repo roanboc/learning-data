@@ -137,8 +137,8 @@ BBADD9 = [46, 53, 58, 60, 62]
 # 1. Monday morning, the opening: B flat major. Music plays under it: the hub's chords change with the narration, through the weekend's
 #    count on the hub's screen and the title. Mei opens the hub: a key, and the screen waking; the two rules fly into the hub and land
 #    as its rules, a breath and two marimba notes; the camera going in; the series' mark under the title
-J = 'monday'; B = C(J, 'breath'); tOpen = W(J, 'monday', 'opens'); land = C(J, 'hub', 0.2); tPush = END(J, 'lf', 0.5)
-bed([(S0(J), BB9), (C(J, 'rules', -0.3), GM9), (C(J, 'hub', -0.3), EBMAJ9), (C(J, 'lf', -0.3), CM9), (C(J, 'weekend', -0.3), FSUS), (B + 0.3, BB9)], E(J) + 0.4)
+J = 'monday'; B = C(J, 'breath'); tOpen = W(J, 'monday', 'opens'); land = C(J, 'hub', 0.2); tPush = END(J, 'hub', 0.5)
+bed([(S0(J), BB9), (C(J, 'rules', -0.3), GM9), (C(J, 'hub', -0.3), EBMAJ9), (C(J, 'weekend', -0.3), FSUS), (B + 0.3, BB9)], E(J) + 0.4)
 tap(tOpen - 0.12, 0.018, P(470)); wake(tOpen, 0.02)
 air(land, 1.0, 0.02, P(1216)); mallet(58, land + 0.8, 0.03, P(1200)); mallet(65, land + 0.95, 0.026, P(1200))
 air(tPush, 1.6, 0.016, 0.0)

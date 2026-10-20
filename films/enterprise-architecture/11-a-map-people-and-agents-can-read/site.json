@@ -24,5 +24,7 @@
     "end": "El mapa antes de los datos"
   },
   "next_h": "You've seen the whole map. From words to data turns its meaning into data.",
-  "next_h_es": "Viste el mapa completo. De las palabras a los datos convierte su significado en datos."
+  "next_h_es": "Viste el mapa completo. De las palabras a los datos convierte su significado en datos.",
+  "past": ["Hōkūleʻa's voyage to Tahiti, 1976", "A map lives while people use it, keep it true and can pass it on."],
+  "past_es": ["El viaje de Hōkūleʻa a Tahití, 1976", "Un mapa vive mientras la gente lo usa, lo mantiene fiel y puede transmitirlo."]
 }

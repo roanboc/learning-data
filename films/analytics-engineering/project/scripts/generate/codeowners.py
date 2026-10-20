@@ -104,6 +104,11 @@ def main():
             if seed["name"] != "key_sets":  # generated from the sources
                 rules.append(("/" + csv.relative_to(ROOT).as_posix(), reach(meta(seed).get("owner")), None))
 
+    rules.append((None, None, "Data products: each product's owner"))
+    for spec in sorted((ROOT / "products").glob("*.yml")):
+        product = load(spec)
+        rules.append((f"/products/{spec.name}", reach(product.get("owner")), None))
+
     rules.append((None, None, "Who uses it: each consumer"))
     for spec in sorted((ROOT / "exposures").glob("*/_*__exposures.yml")):
         owners = [exposure["owner"].get("email") for exposure in load(spec).get("exposures", [])]

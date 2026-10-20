@@ -50,6 +50,13 @@
 /seeds/reference/student/learner_identity_decisions.csv  mei.tanaka@uni.example
 /seeds/reference/student/credit_recognition.csv          faculties@uni.example
 
+# Data products: each product's owner
+/products/awards.yml                                     mei.tanaka@uni.example
+/products/learner_records.yml                            mei.tanaka@uni.example
+/products/learner_wallet.yml                             wallet@uni.example
+/products/learners_near_an_award.yml                     planning@uni.example
+/products/tuition_forgone.yml                            finance@uni.example
+
 # Who uses it: each consumer
 /exposures/finance/                                      finance@uni.example
 /exposures/planning/                                     planning@uni.example

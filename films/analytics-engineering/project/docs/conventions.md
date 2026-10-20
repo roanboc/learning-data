@@ -117,7 +117,7 @@ Every file in the project has one of four lifecycles. A file's header, or its fo
 | Lifecycle | Files | How they change |
 |---|---|---|
 | **Permanent**, written by hand | Sources, models, exposures, seeds, tests, macros, analyses, scripts; conceptual models (`_<domain>__conceptual.yml`, `_<domain>__conceptual.md`); decision logs (`_<scope>__decisions.yml`); `meta.limitations`; `docs/process.md`, `docs/conventions.md` | Edited in a pull request and reviewed. A decision is never deleted: when it's replaced, it's marked `superseded` and relates to what replaced it |
-| **Generated**, never edited by hand | `_<domain>__definitions.md`, `_<domain>__physical.md`, `models/_shared/_shared__conceptual.md`, `docs/decisions.md`, `seeds/reference/shared/key_sets.csv`, `CODEOWNERS`, `docs/scorecard.md` | Rewritten by `scripts/generate/*` from the permanent files. Each says so in its first lines. CI fails if one is out of date: change the source, then run the script |
+| **Generated**, never edited by hand | `_<domain>__definitions.md`, `_<domain>__physical.md`, `models/_shared/_shared__conceptual.md`, `docs/decisions.md`, `seeds/reference/shared/key_sets.csv`, `CODEOWNERS`, `docs/scorecard.md`, `products/odps/`, `products/odcs/` | Rewritten by `scripts/generate/*` from the permanent files. Each says so in its first lines. CI fails if one is out of date: change the source, then run the script |
 | **Temporary**, deleted when done | Items in `requirements/`; a deprecated model version (`core_credential` v1) | Live only while the work they're about is under way, then go (below). CI fails on a requirement that's done |
 | **Build output**, never committed | `target/`, `logs/`, `*.duckdb`, `dbt_packages/` | Written by dbt, ignored by git, removed by `dbt clean` |
 
@@ -285,3 +285,12 @@ base: the models, seeds and tests that changed, what's downstream, each public m
 contract (an added column is additive; a removed, renamed or retyped one breaks consumers and needs
 a new version, and the check fails without one), the entities whose meaning changed, the decisions
 implemented in them, the exposures, and the owners to ask. CI writes it into the run's summary.
+
+Every public model and mart is an output of one data product, in `products/<name>.yml`: its owner,
+domain, status (draft, active, deprecated or retired), purpose and usage, outputs, service levels
+and support, written by its owner. `scripts/generate/products.py` writes each product in the open
+standards, from that file and the dbt contracts: an ODPS descriptor (`products/odps/`) and an ODCS
+contract for each output (`products/odcs/`), with the columns, types, keys, classes, tests and known
+limitations taken from the models' YAML, and the consumers from the lineage. `--check` in CI fails
+if they're out of date, don't validate against the standards' schemas, or a shared model is in no
+product.

@@ -859,7 +859,7 @@ async def check_progress(run):
             T: JSON.parse(e.closest('[data-progress-text]').dataset.progressText), labs: e.dataset.labs, quiz: e.dataset.quiz}))""")
 
     async def series_chips(pg):  # a series' card: how many of its films were watched
-        return await pg.evaluate("""() => [...document.querySelectorAll('[data-films]')].map(e => ({ps: e.dataset.films.split(' '), hidden: e.hidden, t: e.textContent,
+        return await pg.evaluate("""() => [...document.querySelectorAll('[data-series-text] [data-films]')].map(e => ({ps: e.dataset.films.split(' '), hidden: e.hidden, t: e.textContent,
             T: JSON.parse(e.closest('[data-series-text]').dataset.seriesText)}))""")
 
     async def steps(pg):
@@ -1211,6 +1211,89 @@ async def check_a11y(run):
     sec["notes"].append(f"{len(keys)} pages × 2 themes, after their scripts ran")
 
 
+# ---------------------------------------------------------------- 11c. a series' own labs and scenarios
+# Each series draws them with its own engine (site/assets/<dir>/learn.js), which keeps to what build_series.py's pages expect:
+# the labs app (#series-labs) has a tab for each lab ([role=tab][data-id]), selected when it's open, and opens #<lab id> on load;
+# its "Watch this part" is a link with #t= to the lab's chapter; the scenarios app (#series-quiz) shows #film-<n> as data-film.
+# A series can also have a play script, site-tools/smoke/<series id>.js: one expression, ({lab: async id => [...], quiz: async
+# () => [...]}), run in the page, that plays a lab (or every scenario) through and returns what went wrong, as text.
+SMOKE_DIR = pathlib.Path(__file__).resolve().parent / "smoke"
+LEARN_JS = """() => { const app = document.getElementById('series-labs'), on = app && app.querySelector('[role=tab][aria-selected=true]');
+  return {on: on && on.dataset.id, tabs: app ? app.querySelectorAll('[role=tab][data-id]').length : 0,
+    watch: app ? [...app.querySelectorAll('a[href*="#t="]')].map(a => a.getAttribute('href')) : [],
+    sw: document.documentElement.scrollWidth - innerWidth}; }"""
+
+
+async def check_series_learn(run):
+    sec = run.rep.sec("series-learn", "A series' own labs and scenarios: each lab opens from its link and plays through on a phone, "
+                                      "\"Watch this part\" goes to its chapter, each film's situations open, the course bar counts them")
+    for S, SL in check_site.SERIES_LEARN.values():
+        on_site = {x["index"] + 1: x for x in check_site.build_series.films(S)[1]}
+        play = (SMOKE_DIR / f"{S['id']}.js").read_text() if (SMOKE_DIR / f"{S['id']}.js").exists() else None
+        for lg, pre in (("en", ""), ("es", "es/")):
+            ctx = await run.context(320, "dark")
+            try:
+                for x in SL[lg]["labs"]:
+                    key = f"{pre}{S['slug']}/labs/"
+                    where = f"/{key}#{x['id']}"
+                    pg, log = await run.page(ctx, key + "#" + x["id"])
+                    await run.ready(pg)
+                    await pg.wait_for_timeout(300)
+                    r = await pg.evaluate(LEARN_JS)
+                    expect(sec, r["tabs"] == SL["labs"], f"{where}: {r['tabs']} lab tabs, expected {SL['labs']}")
+                    expect(sec, r["on"] == x["id"], f"{where}: the lab open is {r['on']!r}")
+                    f = on_site.get(x["film"])
+                    if f:  # a film still being made has no "Watch this part"
+                        want = f"../{f['key']}/#t={math.ceil(f['starts'][x['chapter']])}" if x["chapter"] else None
+                        expect(sec, r["watch"] == ([want] if want else []), f"{where}: \"Watch this part\" goes to {r['watch']}, expected {want}")
+                    if play:
+                        try:
+                            probs = await pg.evaluate("async id => { const P = (" + play + "); return P.lab ? await P.lab(id) : []; }", x["id"])
+                        except Exception as e:  # noqa: BLE001
+                            probs = [f"its play stopped: {str(e).splitlines()[0][:200]}"]
+                        for p in probs or []:
+                            expect(sec, False, f"{where}: {p}")
+                        await pg.wait_for_timeout(200)
+                        sw = await pg.evaluate("() => document.documentElement.scrollWidth - innerWidth")
+                        expect(sec, sw <= 0, f"{where}: scrolls sideways once played ({sw} px)")
+                    for p in log_problems(log):
+                        expect(sec, False, f"{where}: {p}")
+                    await pg.close()
+                for n in sorted({f for _, f, _ in SL[lg]["qs"]}):
+                    key = f"{pre}{S['slug']}/scenarios/"
+                    pg, log = await run.page(ctx, f"{key}#film-{n}")
+                    await pg.wait_for_timeout(300)
+                    got = await pg.evaluate("() => { const a = document.getElementById('series-quiz'); return a && a.dataset.film; }")
+                    expect(sec, got == str(n), f"/{key}#film-{n}: the scenarios show film {got!r}")
+                    for p in log_problems(log):
+                        expect(sec, False, f"/{key}#film-{n}: {p}")
+                    await pg.close()
+                if play:
+                    key = f"{pre}{S['slug']}/scenarios/"
+                    pg, log = await run.page(ctx, key)
+                    await pg.wait_for_timeout(300)
+                    try:
+                        probs = await pg.evaluate("async () => { const P = (" + play + "); return P.quiz ? await P.quiz() : []; }")
+                    except Exception as e:  # noqa: BLE001
+                        probs = [f"its play stopped: {str(e).splitlines()[0][:200]}"]
+                    for p in (probs or []) + log_problems(log):
+                        expect(sec, False, f"/{key}: {p}")
+                    await pg.close()
+                # every lab was opened, so the course bar counts them all (and the scenarios answered)
+                key = f"{pre}{S['slug']}/"
+                pg, _ = await run.page(ctx, key)
+                r = await pg.evaluate("""() => [...document.querySelectorAll('nav.course .path li')].map(li => ({done: li.classList.contains('done'),
+                  t: li.querySelector('span:last-child').textContent}))""")
+                expect(sec, len(r) == 3 and r[1]["done"], f"/{key}: the course bar doesn't count every lab as explored: {r}")
+                if play and len(r) == 3:
+                    expect(sec, str(SL["quiz"]) in r[2]["t"] and r[2]["done"], f"/{key}: the course bar doesn't count every scenario as answered: {r[2]}")
+                await pg.close()
+            finally:
+                await ctx.close()
+        sec["notes"].append(f"{S['name']['en']}: {SL['labs']} labs and {SL['quiz']} scenarios, in English and Spanish"
+                            + ("" if play else f"; no play script (site-tools/smoke/{S['id']}.js), so no lab was played"))
+
+
 # ---------------------------------------------------------------- 12. the words drawn in the films
 NUM = check_site.NUMBERING
 DRAWN_JS = """async (step) => {
@@ -1268,7 +1351,7 @@ async def take_shots(run):
 CHECKS = {"pages": check_pages, "notfound": check_404, "deeplinks": check_deeplinks, "chapters": check_chapter_links,
           "players": check_players, "sealed": check_sealed, "nextpanel": check_next, "think-silent": check_think_silent,
           "think-home": check_think_home, "progress": check_progress, "nostorage": check_nostorage,
-          "mobile": check_mobile, "a11y": check_a11y, "drawn": check_drawn}
+          "mobile": check_mobile, "a11y": check_a11y, "series-learn": check_series_learn, "drawn": check_drawn}
 
 
 async def amain(args):

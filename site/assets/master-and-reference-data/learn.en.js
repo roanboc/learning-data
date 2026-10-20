@@ -796,7 +796,7 @@ qs:[
     {t:"Give every role the start and end its office already knows.",ok:true},
     {t:"Take Linh out of last year's count by hand, and run it again.",why:"That fixes one person, once. Everyone else who came back or left still gets today's answer, on every run."}],
   why:"A status is true for a day, and written over the next, so every question gets today's answer. Each office knows when its role starts and ends: Linh's student role starts on 21 July 2025. With those dates, last year's question gets last year's answer: a tutor and an alumna, not a student."},
-{type:"choice",n:47,lab:"role_tests",film:4,vis:"records",st:{cards:[{role:"researcher",title:"Researcher",id:"R-3082",note:"Linh · Mar–Dec 2026"},{role:"researcher",title:"Project lead",id:"E-1290",note:"Ana Ruiz · Head of School"}],say:"supervises · Mar–Dec 2026"},
+{type:"choice",n:47,lab:"role_tests",film:4,vis:"records",st:{cards:[{role:"researcher",title:"Researcher",id:"R-3082",note:"Linh · Mar–Dec 2026"},{role:"researcher",title:"Project lead",id:"R-0457",note:"Ana Ruiz · Head of School"}],say:"supervises · Mar–Dec 2026"},
   title:"Her supervisor",sit:"On Linh's research project, Ana Ruiz, the Head of School, supervises her. Where does that belong in the data?",
   opts:[{t:"A relationship between two people, with dates of its own.",ok:true},
     {t:"A note in Linh's name field.",why:"Then it's text nobody can query, and it outlives the project."},

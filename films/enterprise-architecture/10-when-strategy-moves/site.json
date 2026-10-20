@@ -24,5 +24,7 @@
     "july": "El primero de julio"
   },
   "next_h": "You've seen what a change in strategy means for the data. One more film in the series is on the way.",
-  "next_h_es": "Viste qué significa para los datos un cambio de estrategia. Viene una película más de la serie."
+  "next_h_es": "Viste qué significa para los datos un cambio de estrategia. Viene una película más de la serie.",
+  "past": ["M-Pesa in Kenya, 2007", "An idea fits in a sentence; making it real reaches every layer, down to the counter."],
+  "past_es": ["M-Pesa en Kenia, 2007", "Una idea cabe en una frase; hacerla realidad llega a cada capa, hasta el mostrador."]
 }

@@ -46,3 +46,16 @@ decisions:
     status: agreed
     implemented_in: [int_credentials_unioned]
     relates_to: [GAP-SIS-03]
+
+  - id: DEC-SIS-04
+    step: source_reality
+    title: Records closed before November 2024 come from the archive
+    text: The student system's records closed before 1 November 2024, when its history here starts, are read
+      from its archive, as their own table, past_learners. The learner doesn't read it, since the questions
+      it answers start in 2025. The person domain will, to find who a new record already is.
+    why: 'Expected: Every student record the student system holds. Found: Its history here starts on
+      1 November 2024, so graduates and withdrawals from before then are only in its archive
+      (analyses/profiling/profile_keys_held.sql).'
+    status: proposed
+    evidence: [analyses/profiling/profile_keys_held.sql]
+    relates_to: [LIM-SIS-01, DEC-PER-01]

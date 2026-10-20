@@ -294,3 +294,9 @@ contract for each output (`products/odcs/`), with the columns, types, keys, clas
 limitations taken from the models' YAML, and the consumers from the lineage. `--check` in CI fails
 if they're out of date, don't validate against the standards' schemas, or a shared model is in no
 product.
+
+On Databricks, the class goes to the platform too (DEC-PRJ-13, `macros/governance/personal_data.sql`):
+after each table builds, every classified column gets a Unity Catalog tag, `personal_data`, with its
+class; and when the var `personal_data_readers` names a group, each column of direct personal data
+gets a mask, so only that group sees the value. Nothing repeats the class: change it in the YAML and
+the next build changes the tag. DuckDB has no tags or masks, and leaves both out.

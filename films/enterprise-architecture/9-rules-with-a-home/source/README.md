@@ -12,7 +12,7 @@
 | `src/scenes.js` | The eleven chapters, and what they share: the offices and their roads (`D9_OFF`, `D9_OTH`, `D9_ROADS`), a camera over Tartu (`d9_cam`), the rules' places on the wall (`D9_C21`, `D9_C22`), their reasons (`D9_RS`), the facts and terms (`D9_FACTS`, `D9_TERMS`), meter to cash and its expectations (`D9_VS`, `D9_EX`), the rule's set form (`D9_FROWS`), the map's views (`D9_VW`) and one bill as facts (`D9_IN`). |
 | `src/i18n/es/captions.js` | The Spanish captions, one per English line. Spanish is the captions and the page; the pictures stay in English. |
 | `tools/score.py` | The film's music and sounds, as the series has them since 20 October 2026: music under the opening story, then only at a chapter's turn, a moment on screen or a wordless pause, one voice per note. Soft reed pads in G-flat for Tartu, with a low tuned bell for the population register, which rings as it answers the offices that ask; then the series' palette (nylon plucks, a soft flute, warm chords that come and go), here in D-flat major, with the series' mark at the title and the end; three soft taps for the nightly script's first nights; and the register's bell again, softly, wherever something finds its one home. Each effect fires with the thing it belongs to in `src/scenes.js`. |
-| `tools/` | Each tool runs the series' tool (`../../shared/tools/run.py`) on this film; `tools/quiet.py`, after `tools/audio.py`, checks when the music plays. |
+| `tools/` | Each tool runs the series' tool (`../../shared/tools/run.py`) on this film; `tools/quiet.py`, after `tools/audio.py`, checks when the music plays: a copy of the master data films' check, kept here so a change to it checks only this film. |
 
 ## Rebuild
 

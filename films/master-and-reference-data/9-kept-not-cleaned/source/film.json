@@ -7,7 +7,7 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": ["measures", "bars", 2.0],
+  "poster": ["measures", "breath", 1.7],
   "say": [
     ["\\bNguyen\\b", "Nwin"],
     ["\\bLinh's\\b", "Lin's"],

@@ -73,12 +73,15 @@ function C(k){if(Array.isArray(k))return k;if(!k)return WC_PENCIL;if(k[0]==="#")
 const CI=k=>(typeof k==="string"&&WC_ROLEINK[k])||(k==="no"?WC_NO:k==="ok"?WC_ROLEINK.alumna:WC_INK);
 const OK=[22,120,68],NO=[184,56,40];
 function tx(ctx,s,x,y,o){o=o||{};wc_T(ctx,String(s),x,y,{size:o.size||30,w:o.w||600,f:o.f,align:o.align,col:o.col||WC_INK,a:o.a});}
+// words a picture had to cut, or that still overflow at the smallest size: kept in window.MR_MISS, so checks can list them
+const MISS=(window.MR_MISS=window.MR_MISS||[]);function miss(s){s=String(s);if(MISS.indexOf(s)<0)MISS.push(s);}
 // the biggest size, from size down to min, at which s fits in maxW
-function fit(ctx,s,maxW,size,w,f,min){let z=size;while(z>(min||22)&&tw(ctx,String(s),z,w||600,f)>maxW)z-=1;return z;}
+function fit(ctx,s,maxW,size,w,f,min){let z=size;while(z>(min||22)&&tw(ctx,String(s),z,w||600,f)>maxW)z-=1;if(tw(ctx,String(s),z,w||600,f)>maxW+1)miss(s);return z;}
 function wrap(ctx,s,maxW,size,w,f){const words=String(s).split(" "),out=[];let cur="";words.forEach(wd=>{const t=cur?cur+" "+wd:wd;if(cur&&tw(ctx,t,size,w||600,f)>maxW){out.push(cur);cur=wd;}else cur=t;});if(cur)out.push(cur);return out;}
-function lines(ctx,s,x,y,maxW,o){o=o||{};const z=o.size||30,ls=wrap(ctx,s,maxW,z,o.w,o.f).slice(0,o.max||9);ls.forEach((l,i)=>tx(ctx,l,x,y+i*(o.lh||z*1.28),Object.assign({},o,{size:z})));return ls.length*(o.lh||z*1.28);}
+function wrapN(ctx,s,maxW,size,w,f,n){const l=wrap(ctx,s,maxW,size,w,f);if(l.length>n)miss(s);return l.slice(0,n);}
+function lines(ctx,s,x,y,maxW,o){o=o||{};const z=o.size||30,ls=wrapN(ctx,s,maxW,z,o.w,o.f,o.max||9);ls.forEach((l,i)=>tx(ctx,l,x,y+i*(o.lh||z*1.28),Object.assign({},o,{size:z})));return ls.length*(o.lh||z*1.28);}
 // a paper tag; y is its middle; returns its width
-function tag(ctx,x,y,s,o){o=o||{};const size=o.size||28;let t=String(s);if(o.maxW){while(t.length>3&&tw(ctx,t,size,o.w||700,o.f)+40>o.maxW)t=t.slice(0,-2);if(t!==String(s))t=t.replace(/\s+$/,"")+"…";}
+function tag(ctx,x,y,s,o){o=o||{};const size=o.size||28;let t=String(s);if(o.maxW){while(t.length>3&&tw(ctx,t,size,o.w||700,o.f)+40>o.maxW)t=t.slice(0,-2);if(t!==String(s)){t=t.replace(/\s+$/,"")+"…";miss(s);}}
   return wc_tag(ctx,x,y,t,{size,w:o.w||700,f:o.f,align:o.align,wash:o.wash?C(o.wash):null,washA:o.washA||0.42,col:o.col});}
 function card(ctx,x,y,w,hh,o){o=o||{};wc_panel(ctx,x,y,w,hh,{kind:o.kind||"card",role:o.role?C(o.role):null,sw:o.sw||0,wash:o.wash?C(o.wash):null,washA:o.washA,dashed:o.dashed,seed:o.seed});}
 // Linh, as the master record: white paper in a pencil line, banded in her roles' colours
@@ -103,8 +106,8 @@ const PIX={
   /* One person, many roles: the four shelves, each with what's been put on it */
   kinds(ctx,w,hh,st,Lb,k){const V=Lb.w,cols=V.buckets,cw=(w-60)/cols.length;
     cols.forEach(([key,label,hex,sub],i)=>{const x=30+i*cw,cx=x+cw/2;card(ctx,x+8,22,cw-16,hh-44,{kind:"sheet",seed:3+i});
-      wash(ctx,x+24,38,cw-48,58,hex||"person",0.45,11+i);tx(ctx,label,cx,78,{size:fit(ctx,label,cw-60,30,800),w:800,align:"center",col:WC_DARK});
-      if(sub)tx(ctx,sub,cx,124,{size:fit(ctx,sub,cw-50,24,600),align:"center",col:WC_MUTED});
+      wash(ctx,x+24,38,cw-48,58,hex||"person",0.45,11+i);tx(ctx,label,cx,78,{size:fit(ctx,label,cw-60,30,800,null,20),w:800,align:"center",col:WC_DARK});
+      if(sub)tx(ctx,sub,cx,124,{size:fit(ctx,sub,cw-50,24,600,null,17),align:"center",col:WC_MUTED});
       // the shelf's emblem: the person, a few chips, a stream of dabs, a glossary card
       const ey=150;if(key==="master")linh(ctx,cx,ey+118,0.2,["student","tutor","researcher","alumna"]);
       else if(key==="reference"){["student","applicant","tutor"].forEach((c,j)=>wash(ctx,cx-92+j*64,ey+38,52,30,c,0.8,20+j));pencil(ctx,[[cx-104,ey+84],[cx+104,ey+84]],{a:0.5});}
@@ -223,7 +226,7 @@ const PIX={
     const x0=310,cw=w-x0-20;card(ctx,x0,20,cw,hh-40,{kind:"sheet",seed:95});tx(ctx,V.title,x0+30,72,{size:30,w:800,col:WC_DARK});
     const top=96,rh=(hh-top-34)/F.length,vx=x0+232,vmax=cw-232-70;
     F.forEach((f,i)=>{const y=top+i*rh,mid=y+rh/2,p=st.pick[i];pencil(ctx,[[x0+20,y],[x0+cw-20,y]],{a:0.22,lw:1.6,seed:i+11});
-      const fl=tw(ctx,f.f,26,800)>190?wrap(ctx,f.f,190,24,800).slice(0,2):[f.f],fz=fl.length>1?Math.min(...fl.map(l=>fit(ctx,l,190,24,800,null,17))):fit(ctx,f.f,190,26,800,null,17);
+      const fl=tw(ctx,f.f,26,800)>190?wrapN(ctx,f.f,190,24,800,null,2):[f.f],fz=fl.length>1?Math.min(...fl.map(l=>fit(ctx,l,190,24,800,null,17))):fit(ctx,f.f,190,26,800,null,17);
       fl.forEach((l,j)=>tx(ctx,l,x0+30,mid+9+(fl.length>1?(j-0.5)*28:0),{size:fz,w:800,col:WC_DARK}));
       if(p==null){tx(ctx,"…",vx,mid+9,{size:28,col:WC_MUTED});return;}
       const r=f.rules[p],win=r.win==null?[]:[].concat(r.win);
@@ -236,7 +239,7 @@ const PIX={
     card(ctx,20,20,w-40,th,{kind:"sheet",seed:96});tx(ctx,V.title,50,68,{size:30,w:800,col:WC_DARK});
     V.slots.forEach((sl,i)=>{const y=126+i*62,p=st.pick[i];
       // a label too long for its column takes two lines rather than shrinking
-      const ls=tw(ctx,sl.label,22,700)>lx-70?wrap(ctx,sl.label,lx-70,20,700).slice(0,2):[sl.label],lz=ls.length>1?Math.min(...ls.map(l=>fit(ctx,l,lx-70,20,700,null,16))):fit(ctx,sl.label,lx-70,22,700,null,17);
+      const ls=tw(ctx,sl.label,22,700)>lx-70?wrapN(ctx,sl.label,lx-70,20,700,null,2):[sl.label],lz=ls.length>1?Math.min(...ls.map(l=>fit(ctx,l,lx-70,20,700,null,16))):fit(ctx,sl.label,lx-70,22,700,null,17);
       ls.forEach((l,j)=>tx(ctx,l,50,y+(ls.length>1?j*24-4:8),{size:lz,w:700,col:WC_MUTED}));
       if(p==null){tx(ctx,"…",lx,y+8,{size:28,col:WC_MUTED});return;}
       const o=sl.opts[p],z=fit(ctx,o.t,w-lx-130,24,700,null,18),tw1=tag(ctx,lx,y,o.t,{size:z,wash:o.ok?"ok":"no",washA:0.3,maxW:w-lx-90});mark(ctx,lx+tw1+26,y-2,26,o.ok,k);});

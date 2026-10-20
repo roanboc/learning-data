@@ -26,8 +26,8 @@ three kinds, and the project's folders follow them:
 
 | Kind | What it is | Here | Folders |
 |---|---|---|---|
-| Application domain | A system, and the team that runs it | `registrar` (the student system), `learning` (the learning platform and the short-course platform) | `sources/<system>/`, `models/staging/<system>/` |
-| Data domain | What the facts mean, following the reference model | `student`, `course` | `models/intermediate/<domain>/`, `models/core/<domain>/` |
+| Application domain | A system, and the team that runs it | `registrar` (the student system), `learning` (the learning platform and the short-course platform), `hr` (the HR system), `research` (the research system), `alumni` (the alumni system) | `sources/<system>/`, `models/staging/<system>/` |
+| Data domain | What the facts mean, following the reference model | `person`, `student`, `course` | `models/intermediate/<domain>/`, `models/core/<domain>/` |
 | Business domain | Who decides with the data | `planning`, `wallet`, `finance` | `models/marts/<consumer>/`, `exposures/<consumer>/` |
 
 Staging is split by source system, because one system can feed several data domains.
@@ -36,6 +36,7 @@ and business domains:
 
 | Domain | Folders | Holds | Reference |
 |---|---|---|---|
+| `person` | `models/core/person/` | The person behind every role, the roles they hold, how to reach them, the numbers each system knows them by (a draft: no model yet) | TCSI Student and Staff packets, extended to one person in any role |
 | `student` | `models/intermediate/student/`, `models/core/student/`, `seeds/reference/student/` | Learners, the credentials they hold, the credit they hold towards an award | TCSI Student packet, extended to learners with no award and to microcredentials and badges |
 | `course` | `models/core/course/` | The awards the university offers | TCSI Course packet |
 | `planning` | `models/marts/planning/`, `seeds/expected/planning/` | Planning's marts, as at census | |
@@ -43,9 +44,8 @@ and business domains:
 | `finance` | `models/marts/finance/`, `seeds/reference/finance/`, `seeds/expected/finance/` | Finance's marts, as at census, and the tuition rates it publishes | |
 | shared | `models/_shared/`, `seeds/reference/shared/` | The university's map (domains and key entities), the key sets seed (generated from the sources), the version columns, the time spine | |
 
-The domains follow the reference model, TCSI (Tertiary Collection of Student Information): check
-it, adopt what fits, extend where the business needs more, and record each extension in the
-domain's conceptual model.
+The domains follow the reference model, TCSI (Tertiary Collection of Student Information): check it, adopt
+what fits, extend where the business needs more, and record each extension in the domain's conceptual model.
 
 Sources, models and exposures each have their own top-level folder, so what comes in, what's
 built and who uses it are never lost in each other's YAML:
@@ -209,7 +209,7 @@ to itself, and they meet only on the public core. `examples/planning/` sketches 
 
 ## Keys and hashes
 
-- **Key sets.** Every key is qualified by where it comes from: `SIS` (student system), `LMS` (learning platform), `SC` (short-course platform). Each key set is written once, on the source that issues it (`meta.key_set` in `sources/<system>/_<system>__sources.yml`); `scripts/generate/definitions.py` generates `seeds/reference/shared/key_sets.csv` from them.
+- **Key sets.** Every key is qualified by where it comes from: `SIS` (student system), `LMS` (learning platform), `SC` (short-course platform), `HR` (HR system), `RES` (research system), `ALU` (alumni system). Each key set is written once, on the source that issues it (`meta.key_set` in `sources/<system>/_<system>__sources.yml`); `scripts/generate/definitions.py` generates `seeds/reference/shared/key_sets.csv` from them, in the order the project first read each (`since`).
 - **One case per key.** Staging writes each system key in one case: IDs and codes upper case (`S-20417`, `GCDA`), platform user IDs and emails lower case (`u-88213`). So `s-20417` typed into the platform is the same key as `S-20417`, and a readable key and its hash are one to one.
 - **Readable key.** `business_key('SIS', 'student_id')` gives `SIS|S-20417`; null when any part is missing or blank.
 - **Hash.** `hash_key(['learner_bk'])`: sha-256, as 64 hex characters, of the parts trimmed, upper-cased and joined with `|`, with a sentinel for a missing part. Every key in these sources is case-insensitive. The exact rules are in the macro's comment, `macros/shared/keys.sql`. DuckDB's `sha256` and Databricks' `sha2(..., 256)` give the same value.
@@ -235,7 +235,7 @@ to itself, and they meet only on the public core. `examples/planning/` sketches 
 
 - `meta.grain`: on every core and mart model, the grain in one sentence ("One row per credential"). Each domain's physical diagram (`_<domain>__physical.md`) reads it; a test proves it.
 - `meta.owner`: who owns the meaning (models) or the data (sources, seeds).
-- `meta.domain`: the domain that owns the model, seed or source: `registrar` or `learning` (application domains: the teams whose systems are the sources), `student` or `course` (data domains), `planning`, `wallet` or `finance` (business domains), or `shared`.
+- `meta.domain`: the domain that owns the model, seed or source: `registrar`, `learning`, `hr`, `research` or `alumni` (application domains: the teams whose systems are the sources), `person`, `student` or `course` (data domains), `planning`, `wallet` or `finance` (business domains), or `shared`.
 - `meta.glossary_term`: the term in the domain's conceptual model a model or key holds.
 - `meta.limitations` on a model or a source table: what anyone using it needs to know and can't change, as `[{id: LIM-<SCOPE>-<nn>, text}]`, with `was:` naming the gap it came from, if any. An accepted gap ends here, with the decision that accepted it in the scope's log.
 - `meta.personal_data` on columns: `direct` (identifies a person: name, email, student ID, or a key that contains one) or `pseudonymous` (a hash of one). A column with neither holds no personal data.

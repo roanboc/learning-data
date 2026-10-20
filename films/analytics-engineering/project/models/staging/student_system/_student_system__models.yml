@@ -107,3 +107,57 @@ models:
       - name: result_date
         description: '{{ doc("result_date") }}'
         data_tests: [not_null]
+
+  - name: stg_student_system__past_learners
+    description: >
+      One row per version of a student record closed before November 2024, from the student
+      system's archive. No model reads it yet: it's for finding who a new record already is
+      (DEC-SIS-04).
+    config:
+      meta: {owner: Registrar's office, domain: registrar}
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [student_bk, recorded_from]
+    columns:
+      - name: student_key
+        description: The hash of student_bk.
+      - name: student_bk
+        description: '{{ doc("qualified_key") }}'
+        data_tests: [not_null]
+        config:
+          meta: {personal_data: direct}
+      - name: award_bk
+        description: The award of the time, qualified like SIS|BHIM. The awards table doesn't hold it (LIM-SIS-01).
+      - name: email
+        description: The email the student system held, trimmed and lower case.
+        config:
+          meta: {personal_data: direct}
+      - name: given_name
+        config:
+          meta: {personal_data: direct}
+      - name: family_name
+        config:
+          meta: {personal_data: direct}
+      - name: status_code
+        description: The student system's status code. Every record here ended completed or withdrawn.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [ENR, LOA, WD, CMP]
+          - accepted_values:
+              arguments:
+                values: [CMP, WD]
+              config:
+                where: is_current_version
+      - name: effective_date
+        description: '{{ doc("effective_date") }}'
+        data_tests: [not_null]
+      - name: recorded_from
+        description: When the student system recorded this version, from the archive's history.
+      - name: recorded_to
+        description: When the student system recorded the next version, from the archive's history. Null for the last version.
+      - name: is_current_version
+        description: '{{ doc("is_current_version") }}'
+      - name: loaded_at
+        description: '{{ doc("loaded_at") }}'

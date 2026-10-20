@@ -792,7 +792,7 @@ qs:[
     {t:"Darle a cada rol el inicio y el fin que su oficina ya conoce.",ok:true},
     {t:"Sacar a Linh a mano del conteo del año pasado, y volver a ejecutarlo.",why:"Eso arregla a una persona, una vez. Todos los demás que volvieron o se fueron siguen recibiendo la respuesta de hoy, en cada ejecución."}],
   why:"Un estado es cierto por un día, y se sobrescribe al siguiente, así que cada pregunta recibe la respuesta de hoy. Cada oficina sabe cuándo empieza y termina su rol: el rol de estudiante de Linh empieza el 21 de julio de 2025. Con esas fechas, la pregunta del año pasado recibe la respuesta del año pasado: tutora y egresada, no estudiante."},
-{type:"choice",n:47,lab:"role_tests",film:4,vis:"records",st:{cards:[{role:"researcher",title:"Investigadora",id:"R-3082",note:"Linh · mar–dic 2026"},{role:"researcher",title:"Jefa de proyecto",id:"E-1290",note:"Ana Ruiz · directora"}],say:"supervisa · mar–dic 2026"},
+{type:"choice",n:47,lab:"role_tests",film:4,vis:"records",st:{cards:[{role:"researcher",title:"Investigadora",id:"R-3082",note:"Linh · mar–dic 2026"},{role:"researcher",title:"Jefa de proyecto",id:"R-0457",note:"Ana Ruiz · directora"}],say:"supervisa · mar–dic 2026"},
   title:"Su supervisora",sit:"En el proyecto de investigación de Linh, Ana Ruiz, directora de la Escuela, la supervisa. ¿Dónde va eso en los datos?",
   opts:[{t:"Una relación entre dos personas, con sus propias fechas.",ok:true},
     {t:"Una nota en el campo de nombre de Linh.",why:"Entonces es texto que nadie puede consultar, y dura más que el proyecto."},

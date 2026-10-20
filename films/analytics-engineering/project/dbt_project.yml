@@ -100,13 +100,9 @@ seeds:
 # it's defined (tests/generic/). The governance check fails on a test with no owner or dimension.
 data_tests:
   credentials:
-    # Tests on a source, in sources/<system>/: its owner.
-    student_system: {+meta: {owner: "Registrar's office"}}
-    learning_platform: {+meta: {owner: Learning team}}
+    # Tests on a source, in sources/<system>/: its owner. Only systems with source tests are listed
+    # (an unused path fails the Databricks parse); the governance check asks for any new one.
     short_courses: {+meta: {owner: Learning team}}
-    hr_system: {+meta: {owner: HR}}
-    research_system: {+meta: {owner: Research office}}
-    alumni_system: {+meta: {owner: Alumni office}}
     staging:
       student_system: {+meta: {owner: "Registrar's office"}}
       learning_platform: {+meta: {owner: Learning team}}

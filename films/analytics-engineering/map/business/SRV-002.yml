@@ -1,0 +1,10 @@
+id: SRV-002
+name: define or change a term
+kind: business service
+promise: A term decided by its owner within ten working days, published in the glossary and synced to
+  every tool that reads it.
+how_to_ask: a request in the tracker
+owner: Yusuf Demir, data governance lead
+relationships:
+- realization: CAP-002 · define what words mean
+status: confirmed

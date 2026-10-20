@@ -1,0 +1,12 @@
+id: CAP-002
+name: define what words mean
+kind: capability
+definition: Every business term has one definition, an owner and one home, and every tool that shows it
+  uses that definition.
+owner: Yusuf Demir, data governance lead
+relationships:
+- composition: CAP-001 · govern data
+heat: amber
+evidence: 'one glossary term synced (award); the other core entities have governance''s confirmation there''s
+  none (project: governance.py, sync-the-glossary) · 20 Oct 2026'
+status: confirmed

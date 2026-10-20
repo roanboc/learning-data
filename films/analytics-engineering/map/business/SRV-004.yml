@@ -1,0 +1,10 @@
+id: SRV-004
+name: is this product fit to use
+kind: business service
+promise: The product's contract, owner, service levels and last night's scorecard, at any time, without
+  asking.
+how_to_ask: the product catalogue
+owner: Yusuf Demir, data governance lead
+relationships:
+- realization: CAP-007 · provide data products
+status: confirmed

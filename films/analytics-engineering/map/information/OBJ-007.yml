@@ -1,0 +1,13 @@
+id: OBJ-007
+name: owner and column class
+kind: business object
+owner: Noor, data architect
+home: APP-004 · dbt project
+copies:
+- in: APP-005 · data platform
+  synced from: APP-004 · dbt project
+  drift check: 'yes'
+- in: APP-006 · product catalogue
+  synced from: APP-004 · dbt project
+  drift check: 'yes'
+status: confirmed

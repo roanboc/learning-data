@@ -1,10 +1,11 @@
 # A data product: what it's for, who answers for it, what it promises and to whom. Written by hand,
 # owned by its owner. scripts/generate/products.py writes its ODPS descriptor and an ODCS contract
-# for each output, from this file and the dbt contracts.
+# for each output, from this file and the dbt contracts. The product's owner answers for the product;
+# the owners in the models' meta answer for what the data means.
 
 name: learners_near_an_award
 title: Learners near an award
-owner: Planning
+owner: "Clara Jensen, Planning"
 domain: planning
 status: active
 version: 1.0.0

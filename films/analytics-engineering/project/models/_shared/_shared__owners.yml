@@ -19,8 +19,10 @@ owners:
   - {name: Graduate research school, email: research.school@uni.example}
   - {name: Alumni office, email: alumni@uni.example}
   - {name: Planning, email: planning@uni.example}
+  - {name: "Clara Jensen, Planning", email: clara.jensen@uni.example}
   - {name: Finance, email: finance@uni.example}
   - {name: Wallet app team, email: wallet@uni.example}
+  - {name: "Sam, platform team", email: platform@uni.example}
   - {name: "Noor, data architect", email: noor@uni.example}
 
 # Who reviews what isn't owned by a business owner (AGENTS.md, Who approves what).

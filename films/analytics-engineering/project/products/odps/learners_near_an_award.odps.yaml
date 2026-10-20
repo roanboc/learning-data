@@ -31,10 +31,10 @@ outputPorts:
   version: 1.0.0
   contractId: 1c505961-0592-540a-986e-d88961c21672
 team:
-  name: Planning
+  name: Clara Jensen, Planning
   members:
-  - username: planning@uni.example
-    name: Planning
+  - username: clara.jensen@uni.example
+    name: Clara Jensen, Planning
     role: owner
 support:
 - channel: planning-data

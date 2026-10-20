@@ -1,0 +1,10 @@
+id: STP-005
+name: sync to every tool
+kind: business process
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: ROL-007 · analytics engineer
+- access (reads): OBJ-004
+- access (writes): OBJ-004
+- realization: SRV-002 · define or change a term
+status: confirmed

@@ -40,6 +40,7 @@ Then, if you like:
 | `python scripts/generate/diagrams.py` | Regenerates each domain's physical diagram (`_<domain>__physical.md`) from `target/manifest.json` |
 | `python scripts/generate/decisions.py` | Checks every decision log and regenerates their index, `docs/decisions.md` |
 | `python scripts/check/requirements.py` | Checks the open requirements in `requirements/`, and lists them |
+| `python scripts/check/impact.py --base origin/main` | What a branch's change touches: changed and downstream models, contracts (additive or breaking), the meaning, decisions, tests, exposures, and who to ask. CI writes it on every pull request |
 | `python scripts/generate/scorecard.py` | After a build: the data quality scorecard, `docs/scorecard.md`, every test by domain and quality dimension, with what didn't pass and its owner |
 | `python scripts/generate/codeowners.py` | Regenerates `CODEOWNERS` from the owners in the metadata, so a change asks its owner to review it |
 | `python scripts/check/governance.py --measures` | Checks data governance's rules (an owner, a glossary term or a confirmed absence, classified columns, tests with an owner and a dimension), and measures them |
@@ -191,7 +192,8 @@ project/
 │   │                         scorecard.py: write the [generated] files; --check in CI
 │   ├── check/                check_metric.py: the metric against the census report; requirements.py:
 │   │                         only open requirements, with what shows they're done; governance.py:
-│   │                         data governance's rules, and their measures; all in CI
+│   │                         data governance's rules, and their measures; impact.py: what a pull
+│   │                         request touches, and who to tell; all in CI
 │   ├── tools/                diff_against_main.py: a branch's table against main's, for review
 │   └── setup/                load_databricks.sql: loads the sample sources into Databricks
 ├── examples/planning/        Planning's own project, refing the core across projects (dbt Cloud only)

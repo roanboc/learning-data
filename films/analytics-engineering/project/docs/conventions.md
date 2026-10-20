@@ -278,3 +278,9 @@ with where their reviews go, or the script stops.
 The tests' owners and dimensions make the scorecard: `scripts/generate/scorecard.py` reads the last
 run and writes `docs/scorecard.md`, every test by the domain of the data it checks and its quality
 dimension, and what didn't pass, with its owner. It's read from what ran, never from a survey.
+
+Every pull request says what it touches. `scripts/check/impact.py` compares the branch with its
+base: the models, seeds and tests that changed, what's downstream, each public model's and mart's
+contract (an added column is additive; a removed, renamed or retyped one breaks consumers and needs
+a new version, and the check fails without one), the entities whose meaning changed, the decisions
+implemented in them, the exposures, and the owners to ask. CI writes it into the run's summary.

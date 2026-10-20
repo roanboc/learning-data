@@ -1,6 +1,8 @@
 # A hub at work: the music and sounds, played by tools/audio.py with From words to data's helpers (shared/tools/music.py). The
 # palette is new for this film (PLAYBOOK.md: vary the sound itself, film to film), and it follows the film's three parts:
-#  - a reed organ holds the chords, a working room's warmth; its bellows swell slowly, and its chords change with the narration;
+#  - a soft synthesiser holds the chords, the hub's own sound under the week: one voice to a note, each chord blooming note by note
+#    from the lowest as its filter opens, and changing with the narration. The first cut's reed organ was One person, many systems'
+#    instrument too, and its two reeds to a note pulsed on a phone's speaker;
 #  - the rules are a felt marimba: round wooden notes when the rules sort the weekend, weigh a match or link on their own;
 #  - the AI helper is a vibraphone, its motor slowly turning, when it drafts its note and when it learns;
 #  - people deciding are a horn: when the badge says "for Mei", when Mei links the records, and when she unlinks the wrong one.
@@ -31,22 +33,36 @@ P = lambda x: max(-0.85, min(0.85, (x - 960) / 960 * 0.9))  # where something is
 
 # ---- the film's instruments, all low-passed ----
 # the levels: the music sits about 21 dB under the voice while it speaks, as in the other series' films, and the effects just over it
-BED, NOTE, FX = 1.75, 1.6, 2.0
-def organ(ch, start, sec, g=0.03):
-    """a reed organ's chord: two reeds a hair apart on every note, rich in harmonics but kept under about 1.1 kHz; it speaks softly,
-    the bellows swell it a little, and it fades when the next chord has come in"""
-    x = tt(sec); e = np.clip(x / 0.9, 0, 1) ** 1.6 * np.clip((sec - x) / 2.6, 0, 1); bel = 1 + 0.07 * np.sin(2 * np.pi * 0.11 * x + start)
-    for pan, det in ((-0.6, 0.9982), (0.6, 1.0018)):
-        s = np.zeros_like(x)
-        for k, m in enumerate(ch):
-            f = mf(m) * det; ph = 2 * np.pi * f * x + k
-            s += sum(np.sin(h * ph) * (0.9 / h ** 1.15) for h in range(1, 9)) * (1.0 if k else 1.15)
-        put(filt(filt((s / len(ch) * e * bel).astype(np.float32), 'low', 1100), 'high', 70), start, g * BED, pan)
+BED, NOTE, FX = 1.9, 1.6, 2.0
+def pure(ch):
+    """how far, in cents, to move each note of a chord so that its fifths, fourths and octaves are pure. An equal-tempered fifth is
+    2 cents narrow, so a low note's third harmonic and its fifth's second beat about once every two or three seconds, which a phone's
+    one speaker turns into a slow pulse; 2 cents is too little to hear against the other instruments"""
+    ch = sorted(ch); c = {ch[0]: 0.0}; todo = [ch[0]]
+    while todo:
+        a = todo.pop()
+        for b in ch:
+            if b not in c and (b - a) % 12 in (0, 5, 7):
+                c[b] = c[a] + {0: 0.0, 7: 1.955, 5: -1.955}[(b - a) % 12]; todo.append(b)
+    return [c.get(m, 0.0) for m in ch]
+def synth(ch, start, sec, g=0.03):
+    """a soft synthesiser's chord: a sawtooth's harmonics through a gently resonant filter that opens as each note comes in (from
+    300 to 800 Hz) and then settles (to about 560 Hz), nothing above 1.8 kHz; one voice to a note (two voices a hair apart beat into
+    a pulse on a phone), its fifths pure; the notes come in one after another from the lowest, so the chord blooms as the series'
+    chords do; it fades when the next chord has come in"""
+    x = tt(sec); ch = sorted(ch)
+    for k, (m, c) in enumerate(zip(ch, pure(ch))):
+        f = mf(m) * 2 ** (c / 1200); d = 0.14 * k
+        e = np.clip((x - d) / 1.6, 0, 1) ** 1.8 * np.clip((sec - x) / 2.6, 0, 1)
+        fc = 300 + 500 * np.clip((x - d) / 2.5, 0, 1) ** 0.7 - 240 * np.clip((x - d - 2.5) / 5.0, 0, 1)
+        s = sum(np.sin(2 * np.pi * f * h * x + 0.7 * h + k) / h / np.sqrt((1 - (f * h / fc) ** 2) ** 2 + (f * h / fc / 1.3) ** 2)
+                for h in range(1, int(1800 / f) + 1))
+        put(filt((s * e / len(ch)).astype(np.float32), 'high', 60), start, g * BED, (k - (len(ch) - 1) / 2) * 0.16)
 def bed(keys, end, g=0.03):
     """the chapter's chords, each from its moment (a little early, so it has come in by then) until a little after the next one starts"""
     for i, (t0, ch) in enumerate(keys):
         t1 = keys[i + 1][0] if i + 1 < len(keys) else end
-        organ(ch, t0 - 0.8, t1 - t0 + 3.2, g)
+        synth(ch, t0 - 0.8, t1 - t0 + 3.2, g)
 def mallet(m, start, g=0.03, pan=0.0, sec=1.6):
     """a felt marimba: the round fundamental, its fourth partial (two octaves up) dying fast, a felt attack; the rules at work"""
     f = mf(m); x = tt(sec)

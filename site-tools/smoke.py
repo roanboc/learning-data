@@ -13,6 +13,9 @@ Options:
   --base URL        test a copy of this checkout that is already served, such as https://roanboc.github.io/learning-data/
                     after a push (the pages and links to test still come from site/ here)
   --only a,b        run only these checks (see --list)
+  --pages JSON      run each check only on these pages, a JSON list of page keys ("" is the home page, "topics/" the Topics
+                    page), as .github/scripts/affected.py chooses them from what a change touched; a check that covers none
+                    of them is skipped
   --shots DIR       also save screenshots for a visual review
   --list            list the checks
 
@@ -97,11 +100,15 @@ class Report:
         return self.sections[name]
 
     def done(self):
-        bad = 0
+        bad = skipped = 0
         for k in self.order:
             s = self.sections[k]
             ok = not s["fails"]
             bad += not ok
+            if s.get("skip"):
+                skipped += 1
+                print(f"SKIP  {s['title']}  (no page it checks changed)")
+                continue
             print(f"{'PASS' if ok else 'FAIL'}  {s['title']}" + (f"  [{s['n']} checks]" if s["n"] else "") +
                   ("" if ok else f"  ({len(s['fails'])} failed)"))
             for f in s["fails"][:60]:
@@ -111,7 +118,12 @@ class Report:
             for n in s["notes"]:
                 print(f"      · {n}")
         print()
-        print(f"{len(self.order) - bad} of {len(self.order)} checks passed." + (" All good." if not bad else f" {bad} failed."))
+        ran = len(self.order) - skipped
+        if not ran:
+            print(f"All {skipped} checks skipped: no page they check changed.")
+        else:
+            print(f"{ran - bad} of {ran} checks passed." + (" All good." if not bad else f" {bad} failed.")
+                  + (f" {skipped} skipped: no page they check changed." if skipped else ""))
         return 1 if bad else 0
 
 
@@ -196,8 +208,9 @@ async def route_external(route):
 
 # ---------------------------------------------------------------- browser helpers
 class Run:
-    def __init__(self, browser, base, rep, shots):
+    def __init__(self, browser, base, rep, shots, scope=None):
         self.browser, self.base, self.rep, self.shots = browser, base, rep, shots
+        self.scope = scope  # the page keys to check (--pages), or None for every page
         self.origin = "{0.scheme}://{0.netloc}".format(urllib.parse.urlsplit(base))
         self.sem = asyncio.Semaphore(6)
         self.static = {}
@@ -207,6 +220,13 @@ class Run:
 
     def url(self, key):
         return self.base + key
+
+    def want(self, key):
+        """whether the checks cover this page: every page, or only those a change touched (--pages)"""
+        return self.scope is None or key in self.scope
+
+    def pick(self, keys):
+        return [k for k in keys if self.want(k)]
 
     def key(self, url):
         u = url.split("#")[0]
@@ -291,7 +311,7 @@ def log_problems(log):
 # ---------------------------------------------------------------- 1. every page, every width, both themes
 async def check_pages(run):
     sec = run.rep.sec("pages", f"Every page at {', '.join(map(str, WIDTHS))} px, light and dark: no errors, no failed request, no sideways scroll, a compact header")
-    keys = [k for k, pg in run.static.items() if not pg.redirect and not pg.is404]
+    keys = run.pick(k for k, pg in run.static.items() if not pg.redirect and not pg.is404)
 
     async def one(key, width, theme):
         async with run.sem:
@@ -330,7 +350,8 @@ async def check_pages(run):
                 await ctx.close()
 
     await asyncio.gather(*(one(k, w, t) for k in keys for w in WIDTHS for t in THEMES))
-    sec["notes"].append(f"{len(keys)} pages × {len(WIDTHS)} widths × 2 themes = {len(keys) * len(WIDTHS) * 2} loads")
+    if keys:
+        sec["notes"].append(f"{len(keys)} pages × {len(WIDTHS)} widths × 2 themes = {len(keys) * len(WIDTHS) * 2} loads")
     if FONT_STATE["failed"] and not FONT_STATE["ok"]:
         sec["notes"].append("Google Fonts couldn't be fetched: fallback fonts were used")
 
@@ -338,6 +359,8 @@ async def check_pages(run):
 # ---------------------------------------------------------------- 2. the 404 page, at a deep missing path
 async def check_404(run):
     sec = run.rep.sec("notfound", "404: served at a deep missing path, its stylesheet and links load")
+    if not run.want("404.html"):
+        return
     body = (WEB / "404.html").read_bytes()
     deep = run.base + "no/such/page/"
     ctx = await run.context(390)
@@ -360,8 +383,15 @@ async def check_404(run):
 
 
 # ---------------------------------------------------------------- 3. deep links
+DEEP = ["", "es/", "labs/", "es/labs/", "scenarios/", "films/inner-life-of-data/", "es/films/inner-life-of-data/", "films/", "es/films/",
+        "topics/", "es/topics/", "sketch/", "es/sketch/", "sketch/labs/", "when-things-go-wrong/silent-change/",
+        "es/when-things-go-wrong/silent-change/"]
+
+
 async def check_deeplinks(run):
     sec = run.rep.sec("deeplinks", "Deep links and old links land where they should")
+    if not run.pick(DEEP):
+        return
     ctx = await run.context(1280)
     try:
         async def land(src, want, hash_re=None):
@@ -459,20 +489,24 @@ async def check_deeplinks(run):
 # ---------------------------------------------------------------- 4. every #t= link, on the site and in the docs
 async def check_chapter_links(run):
     sec = run.rep.sec("chapters", "Every #t= link, on the site and in the docs, lands on a chapter start (rounded up)")
-    links = []  # (source, target page key, n)
+    links = []  # (source, target page key, n), on a page in scope or to one
     for key, pg in run.static.items():
         for n in pg.dom.walk():
             href = n.attrs.get("href") or ""
             if "#t=" in href:
                 kind, target, frag = check_site.resolve(pg, href)
-                if kind == "site":
-                    links.append((f"site/{pg.file}:{n.line}", check_site.key_of(check_site.file_of(target)[0] or target), frag[2:]))
+                t = check_site.key_of(check_site.file_of(target)[0] or target) if kind == "site" else None
+                if t is not None and (run.want(key) or run.want(t)):
+                    links.append((f"site/{pg.file}:{n.line}", t, frag[2:]))
     for md in sorted(ROOT.rglob("*.md")):
         if any(part in ("build", "dist", "models", "node_modules", ".git") for part in md.parts):
             continue
         for i, line in enumerate(md.read_text(errors="replace").splitlines(), 1):
             for m in re.finditer(re.escape(PUBLIC) + r"([\w\-/]*)#t=([0-9.:]+)", line):
-                links.append((f"{md.relative_to(ROOT)}:{i}", m.group(1), m.group(2)))
+                if run.want(m.group(1)):
+                    links.append((f"{md.relative_to(ROOT)}:{i}", m.group(1), m.group(2)))
+    if not links:
+        return
     targets = sorted({t for _, t, _ in links})
     ctx = await run.context(1280)
     starts = {}
@@ -502,9 +536,13 @@ async def check_chapter_links(run):
 # ---------------------------------------------------------------- 5. the players
 async def check_players(run):
     sec = run.rep.sec("players", "Players: play with sound, chapters, captions, full screen, Spanish controls and chapter names")
+    if not run.pick(FILMS):
+        return
     ctx = await run.context(1280)
     try:
         for key, count in FILMS.items():
+            if not run.want(key):
+                continue
             lang = "es" if key.startswith("es/") else "en"
             pg, log = await run.page(ctx, key)
             await run.ready(pg)
@@ -584,9 +622,12 @@ ES_SEALED = {"dff": ["Un cuadro", "Una imagen son datos", "Instrucciones, no pí
 
 async def check_sealed(run):
     sec = run.rep.sec("sealed", "Making of: both films play on one page, each with its own chapters, sound, captions and labels")
+    keys = run.pick(("journey/", "es/journey/"))
+    if not keys:
+        return
     ctx = await run.context(1280)
     try:
-        for key in ("journey/", "es/journey/"):
+        for key in keys:
             lang = "es" if key.startswith("es/") else "en"
             pg, log = await run.page(ctx, key)
             await pg.wait_for_function("() => ['dff', 'nqr'].every(p => document.querySelectorAll('#' + p + '-chapters button').length)", timeout=30000)
@@ -622,9 +663,12 @@ async def check_sealed(run):
 # ---------------------------------------------------------------- 6. "Where next?" when a film ends
 async def check_next(run):
     sec = run.rep.sec("nextpanel", "\"Where next?\": appears when a film ends, with the page's links; Watch again and Escape work; keyboard focus behaves")
+    keys = run.pick(FILMS)
+    if not keys:
+        return
     ctx = await run.context(1280)
     try:
-        for key in FILMS:
+        for key in keys:
             where = "/" + key
             pg, log = await run.page(ctx, key)
             await run.ready(pg)
@@ -702,10 +746,13 @@ async def end_panel(pg):
 # ---------------------------------------------------------------- 7. "Pause and think" on Silent change
 async def check_think_silent(run):
     sec = run.rep.sec("think-silent", "\"Pause and think\" on Silent change: the pause, its lab link, the answer, the question list, the keyboard")
+    keys = run.pick(("when-things-go-wrong/silent-change/", "es/when-things-go-wrong/silent-change/"))
+    if not keys:
+        return
     ctx = await run.context(1280)
     en_q = None
     try:
-        for key in ("when-things-go-wrong/silent-change/", "es/when-things-go-wrong/silent-change/"):
+        for key in keys:
             lang = "es" if key.startswith("es/") else "en"
             where = "/" + key
             pg, log = await run.page(ctx, key)
@@ -812,9 +859,12 @@ async def check_think_silent(run):
 # ---------------------------------------------------------------- 8. "Pause and think" on the home page
 async def check_think_home(run):
     sec = run.rep.sec("think-home", "\"Pause and think\" on the home page: lab links stay labs/#…, and \"Go deeper\" appears after an answer")
+    keys = run.pick(("", "es/"))
+    if not keys:
+        return
     ctx = await run.context(1280)
     try:
-        for key in ("", "es/"):
+        for key in keys:
             where = "/" + key
             pg, log = await run.page(ctx, key)
             await run.ready(pg)
@@ -848,18 +898,25 @@ async def check_think_home(run):
 async def check_progress(run):
     sec = run.rep.sec("progress", "Progress: steppers, topic-card chips and series' counts from seeded storage; \"watched\" goes to the right film only")
     # path.js fills the chips; on A Sharper Sketch's pages, sketch.js does
-    chip_pages = [k for k, pg in run.static.items() if not pg.redirect and pg.dom.first(cls="tc-progress")
-                  and ("assets/learn/path.js" in pg.local_scripts or "assets/sketch/sketch.js" in pg.local_scripts)]
-    missing = [k for k, pg in run.static.items() if not pg.redirect and pg.dom.first(cls="tc-progress") and k not in chip_pages]
-    expect(sec, not missing, f"topic cards whose progress no script fills: {missing}")
+    chip_all = [k for k, pg in run.static.items() if not pg.redirect and pg.dom.first(cls="tc-progress")
+                and ("assets/learn/path.js" in pg.local_scripts or "assets/sketch/sketch.js" in pg.local_scripts)]
     stepper = {k: pg for k, pg in run.static.items() if pg.dom.first("ol", cls="path")}
+    # the films "watched" is played on, and the other pages the seeds below open
+    films = (("", "ld", ["ld3", "ld-silent-change"]), ("sketch/", "ld3", ["ld", "ld-silent-change"]),
+             ("when-things-go-wrong/silent-change/", "ld-silent-change", ["ld", "ld3"]),
+             ("es/when-things-go-wrong/silent-change/", "ld-silent-change", ["ld", "ld3"]))
+    if not run.pick(set(chip_all) | set(stepper) | {f[0] for f in films} | {"es/", "es/sketch/", "topics/", "es/topics/", "labs/"}):
+        return
+    chip_pages = run.pick(chip_all)
+    missing = run.pick(k for k, pg in run.static.items() if not pg.redirect and pg.dom.first(cls="tc-progress") and k not in chip_all)
+    expect(sec, not missing, f"topic cards whose progress no script fills: {missing}")
 
     async def chips(pg):
         return await pg.evaluate("""() => [...document.querySelectorAll('[data-progress]')].map(e => ({p: e.dataset.progress, hidden: e.hidden, t: e.textContent,
             T: JSON.parse(e.closest('[data-progress-text]').dataset.progressText), labs: e.dataset.labs, quiz: e.dataset.quiz}))""")
 
     async def series_chips(pg):  # a series' card: how many of its films were watched
-        return await pg.evaluate("""() => [...document.querySelectorAll('[data-films]')].map(e => ({ps: e.dataset.films.split(' '), hidden: e.hidden, t: e.textContent,
+        return await pg.evaluate("""() => [...document.querySelectorAll('[data-series-text] [data-films]')].map(e => ({ps: e.dataset.films.split(' '), hidden: e.hidden, t: e.textContent,
             T: JSON.parse(e.closest('[data-series-text]').dataset.seriesText)}))""")
 
     async def steps(pg):
@@ -880,7 +937,7 @@ async def check_progress(run):
     # seed 1: the intro watched, every lab, two answers
     ctx = await seeded({"ld:watched": True, "ld:visited": stops, "ld:quiz": {"cur": 3, "ans": {"0": {"ok": True}, "1": {"ok": False}}, "sum": {}}})
     try:
-        for key in ("", "es/"):
+        for key in run.pick(("", "es/")):
             pg, _ = await run.page(ctx, key)
             s = await steps(pg)
             want = [(True, s["T"]["watched"]), (True, fill(s["T"]["labs"], {"n": len(stops)})), (False, fill(s["T"]["quiz"], {"n": 2, "ok": 1}))]
@@ -911,7 +968,7 @@ async def check_progress(run):
                     expect(sec, c["hidden"], f"/{key} (Sketch seeded): the {c['p']} chip shows {c['t']!r}")
             await pg.close()
         got = {}
-        for key in ("sketch/", "es/sketch/"):
+        for key in run.pick(("sketch/", "es/sketch/")):
             pg, _ = await run.page(ctx, key)
             s = await steps(pg)
             d = defaults(key)
@@ -924,20 +981,22 @@ async def check_progress(run):
     # seed 3: a scenario started, nothing answered
     ctx = await seeded({"ld:quiz": {"cur": 0}})
     try:
-        pg, _ = await run.page(ctx, "")
-        s = await steps(pg)
-        expect(sec, [(x["done"], x["t"]) for x in s["li"]][2] == (False, defaults("")[2]), f"/ (ld:quiz={{cur:0}}): step 3 reads {s['li'][2]}")
-        await pg.close()
-        pg, _ = await run.page(ctx, "topics/")
-        expect(sec, all(c["hidden"] for c in await chips(pg)), "/topics/ (ld:quiz={cur:0}): a chip shows; the cur key is not an answer")
-        await pg.close()
+        if run.want(""):
+            pg, _ = await run.page(ctx, "")
+            s = await steps(pg)
+            expect(sec, [(x["done"], x["t"]) for x in s["li"]][2] == (False, defaults("")[2]), f"/ (ld:quiz={{cur:0}}): step 3 reads {s['li'][2]}")
+            await pg.close()
+        if run.want("topics/"):
+            pg, _ = await run.page(ctx, "topics/")
+            expect(sec, all(c["hidden"] for c in await chips(pg)), "/topics/ (ld:quiz={cur:0}): a chip shows; the cur key is not an answer")
+            await pg.close()
     finally:
         await ctx.close()
     # seed 3b: two films of From words to data watched: its card on the Topics pages counts them, and no other series' card shows
     two = ["ld-whats-in-a-word", "ld-keeping-it-true"]
     ctx = await seeded({f"{p}:watched": True for p in two})
     try:
-        for key in ("topics/", "es/topics/"):
+        for key in run.pick(("topics/", "es/topics/")):
             pg, _ = await run.page(ctx, key)
             cs = await series_chips(pg)
             expect(sec, len(cs) >= 4, f"/{key}: {len(cs)} series cards with a count, expected one per series")
@@ -953,7 +1012,7 @@ async def check_progress(run):
     # seed 4: nothing. Labs pages mark their open lab as visited on load, so they come last
     ctx = await seeded({})
     try:
-        order = sorted(set(chip_pages) | set(stepper), key=lambda k: k.endswith("labs/"))
+        order = sorted(set(chip_pages) | set(run.pick(stepper)), key=lambda k: k.endswith("labs/"))
         for key in order:
             pg, _ = await run.page(ctx, key)
             await pg.wait_for_timeout(150)
@@ -972,7 +1031,6 @@ async def check_progress(run):
     # "watched" counts seconds actually played: a seek to the end, or one late chapter, isn't the film.
     # To play most of a film quickly, the soundtrack runs 16 times faster and the page's clock (performance.now) 20 times.
     fast = "{ const pn = performance.now.bind(performance); performance.now = () => pn() * 20; }"
-    sec["notes"].append("\"watched\": each film played at 16× with the page clock at 20×")
 
     async def watch_film(key, store, others):
         async with run.sem:
@@ -1016,10 +1074,13 @@ async def check_progress(run):
             finally:
                 await ctx.close()
 
-    await asyncio.gather(*(watch_film(*a) for a in (("", "ld", ["ld3", "ld-silent-change"]), ("sketch/", "ld3", ["ld", "ld-silent-change"]),
-                                                    ("when-things-go-wrong/silent-change/", "ld-silent-change", ["ld", "ld3"]),
-                                                    ("es/when-things-go-wrong/silent-change/", "ld-silent-change", ["ld", "ld3"]))))
+    watch = [f for f in films if run.want(f[0])]
+    if watch:
+        sec["notes"].append("\"watched\": each film played at 16× with the page clock at 20×")
+    await asyncio.gather(*(watch_film(*a) for a in watch))
     # the pop-up player on /labs/ never marks the intro as watched
+    if not run.want("labs/"):
+        return
     ctx = await seeded({})
     try:
         pg, _ = await run.page(ctx, "labs/#people")
@@ -1044,7 +1105,7 @@ async def check_progress(run):
 async def check_nostorage(run):
     sec = run.rep.sec("nostorage", "Storage blocked (private window): every page still renders, with no chips and no errors")
     init = "Object.defineProperty(window, 'localStorage', {get() { throw new DOMException('blocked', 'SecurityError'); }});"
-    keys = [k for k, pg in run.static.items() if not pg.redirect and not pg.is404]
+    keys = run.pick(k for k, pg in run.static.items() if not pg.redirect and not pg.is404)
 
     async def one(key):
         async with run.sem:
@@ -1066,7 +1127,12 @@ async def check_nostorage(run):
 # ---------------------------------------------------------------- 11. phones
 async def check_mobile(run):
     sec = run.rep.sec("mobile", "Phones and tablets: cards stack and the whole card is a link, anchors clear the header and the course bar, panels sit below the film up to 900 px and inside it above")
-    grids = [k for k, pg in run.static.items() if not pg.redirect and (pg.dom.first(cls="topic-grid") or pg.dom.first(cls="topic-tiles"))]
+    grids = run.pick(k for k, pg in run.static.items() if not pg.redirect and (pg.dom.first(cls="topic-grid") or pg.dom.first(cls="topic-tiles")))
+    anchors = [(k, a) for k, a in (("", "watch"), ("", "go-deeper"), ("topics/", "data-modelling"), ("topics/", "enterprise-architecture"),
+                                   ("es/", "go-deeper"), ("when-things-go-wrong/silent-change/", "think-it-through")) if run.want(k)]
+    panels = run.pick(("", "when-things-go-wrong/silent-change/", "es/when-things-go-wrong/silent-change/", "sketch/"))
+    if not (grids or anchors or panels or run.want("topics/")):
+        return
     ctx = await run.context(390)
     try:
         for key in grids:
@@ -1077,7 +1143,7 @@ async def check_mobile(run):
             expect(sec, len(set(ts)) <= 1, f"/{key} @390: the topics' tiles don't stack in one column ({ts})")
             await pg.close()
         # the whole card is one link, and the buttons inside the wide card still work
-        for width in (390, 1280):
+        for width in (390, 1280) if run.want("topics/") else ():
             c2 = await run.context(width)
             try:
                 async def tap(sel):  # a real tap at the element's centre: the card's link covers the whole card
@@ -1104,8 +1170,7 @@ async def check_mobile(run):
         for width in (390, 1280):
             c2 = await run.context(width)
             try:
-                for key, anchor in (("", "watch"), ("", "go-deeper"), ("topics/", "data-modelling"), ("topics/", "enterprise-architecture"), ("es/", "go-deeper"),
-                                    ("when-things-go-wrong/silent-change/", "think-it-through")):
+                for key, anchor in anchors:
                     pg, _ = await run.page(c2, f"{key}#{anchor}")
                     await run.settle(pg)
                     r = await pg.evaluate("a => ({top: document.getElementById(a).getBoundingClientRect().top, head: Math.max(...[...document.querySelectorAll('header.top, nav.course')].map(e => e.getBoundingClientRect().bottom)), ih: innerHeight})", anchor)
@@ -1122,7 +1187,7 @@ async def check_mobile(run):
         for width in (390, 768, 1024):
             c2 = await run.context(width)
             try:
-                for key in ("", "when-things-go-wrong/silent-change/", "es/when-things-go-wrong/silent-change/", "sketch/"):
+                for key in panels:
                     pg, _ = await run.page(c2, key)
                     await run.ready(pg)
                     ok = (lambda r: r["below"] and r["fits"] and r["page"]) if width <= 900 else (lambda r: r["inside"] and r["page"])
@@ -1185,7 +1250,7 @@ CONTRAST_JS = """() => {
 
 async def check_a11y(run):
     sec = run.rep.sec("a11y", "Headings never skip a level, and page text meets WCAG AA contrast, in light and dark")
-    keys = [k for k, pg in run.static.items() if not pg.redirect]
+    keys = run.pick(k for k, pg in run.static.items() if not pg.redirect)
     # some progress, so the cards' chips show too
     seed = "try { localStorage.setItem('ld:watched', 'true'); localStorage.setItem('ld3:visited', '[\"grain\"]'); localStorage.setItem('ld-silent-change:watched', 'true'); } catch (e) {}"
 
@@ -1211,6 +1276,92 @@ async def check_a11y(run):
     sec["notes"].append(f"{len(keys)} pages × 2 themes, after their scripts ran")
 
 
+# ---------------------------------------------------------------- 11c. a series' own labs and scenarios
+# Each series draws them with its own engine (site/assets/<dir>/learn.js), which keeps to what build_series.py's pages expect:
+# the labs app (#series-labs) has a tab for each lab ([role=tab][data-id]), selected when it's open, and opens #<lab id> on load;
+# its "Watch this part" is a link with #t= to the lab's chapter; the scenarios app (#series-quiz) shows #film-<n> as data-film.
+# A series can also have a play script, site-tools/smoke/<series id>.js: one expression, ({lab: async id => [...], quiz: async
+# () => [...]}), run in the page, that plays a lab (or every scenario) through and returns what went wrong, as text.
+SMOKE_DIR = pathlib.Path(__file__).resolve().parent / "smoke"
+LEARN_JS = """() => { const app = document.getElementById('series-labs'), on = app && app.querySelector('[role=tab][aria-selected=true]');
+  return {on: on && on.dataset.id, tabs: app ? app.querySelectorAll('[role=tab][data-id]').length : 0,
+    watch: app ? [...app.querySelectorAll('a[href*="#t="]')].map(a => a.getAttribute('href')) : [],
+    sw: document.documentElement.scrollWidth - innerWidth}; }"""
+
+
+async def check_series_learn(run):
+    sec = run.rep.sec("series-learn", "A series' own labs and scenarios: each lab opens from its link and plays through on a phone, "
+                                      "\"Watch this part\" goes to its chapter, each film's situations open, the course bar counts them")
+    for S, SL in check_site.SERIES_LEARN.values():
+        on_site = {x["index"] + 1: x for x in check_site.build_series.films(S)[1]}
+        play = (SMOKE_DIR / f"{S['id']}.js").read_text() if (SMOKE_DIR / f"{S['id']}.js").exists() else None
+        langs = [(lg, pre) for lg, pre in (("en", ""), ("es", "es/")) if run.pick(f"{pre}{S['slug']}/{p}" for p in ("labs/", "scenarios/"))]
+        if not langs:
+            continue
+        for lg, pre in langs:
+            ctx = await run.context(320, "dark")
+            try:
+                for x in SL[lg]["labs"]:
+                    key = f"{pre}{S['slug']}/labs/"
+                    where = f"/{key}#{x['id']}"
+                    pg, log = await run.page(ctx, key + "#" + x["id"])
+                    await run.ready(pg)
+                    await pg.wait_for_timeout(300)
+                    r = await pg.evaluate(LEARN_JS)
+                    expect(sec, r["tabs"] == SL["labs"], f"{where}: {r['tabs']} lab tabs, expected {SL['labs']}")
+                    expect(sec, r["on"] == x["id"], f"{where}: the lab open is {r['on']!r}")
+                    f = on_site.get(x["film"])
+                    if f:  # a film still being made has no "Watch this part"
+                        want = f"../{f['key']}/#t={math.ceil(f['starts'][x['chapter']])}" if x["chapter"] else None
+                        expect(sec, r["watch"] == ([want] if want else []), f"{where}: \"Watch this part\" goes to {r['watch']}, expected {want}")
+                    if play:
+                        try:
+                            probs = await pg.evaluate("async id => { const P = (" + play + "); return P.lab ? await P.lab(id) : []; }", x["id"])
+                        except Exception as e:  # noqa: BLE001
+                            probs = [f"its play stopped: {str(e).splitlines()[0][:200]}"]
+                        for p in probs or []:
+                            expect(sec, False, f"{where}: {p}")
+                        await pg.wait_for_timeout(200)
+                        sw = await pg.evaluate("() => document.documentElement.scrollWidth - innerWidth")
+                        expect(sec, sw <= 0, f"{where}: scrolls sideways once played ({sw} px)")
+                    for p in log_problems(log):
+                        expect(sec, False, f"{where}: {p}")
+                    await pg.close()
+                for n in sorted({f for _, f, _ in SL[lg]["qs"]}):
+                    key = f"{pre}{S['slug']}/scenarios/"
+                    pg, log = await run.page(ctx, f"{key}#film-{n}")
+                    await pg.wait_for_timeout(300)
+                    got = await pg.evaluate("() => { const a = document.getElementById('series-quiz'); return a && a.dataset.film; }")
+                    expect(sec, got == str(n), f"/{key}#film-{n}: the scenarios show film {got!r}")
+                    for p in log_problems(log):
+                        expect(sec, False, f"/{key}#film-{n}: {p}")
+                    await pg.close()
+                if play:
+                    key = f"{pre}{S['slug']}/scenarios/"
+                    pg, log = await run.page(ctx, key)
+                    await pg.wait_for_timeout(300)
+                    try:
+                        probs = await pg.evaluate("async () => { const P = (" + play + "); return P.quiz ? await P.quiz() : []; }")
+                    except Exception as e:  # noqa: BLE001
+                        probs = [f"its play stopped: {str(e).splitlines()[0][:200]}"]
+                    for p in (probs or []) + log_problems(log):
+                        expect(sec, False, f"/{key}: {p}")
+                    await pg.close()
+                # every lab was opened, so the course bar counts them all (and the scenarios answered)
+                key = f"{pre}{S['slug']}/"
+                pg, _ = await run.page(ctx, key)
+                r = await pg.evaluate("""() => [...document.querySelectorAll('nav.course .path li')].map(li => ({done: li.classList.contains('done'),
+                  t: li.querySelector('span:last-child').textContent}))""")
+                expect(sec, len(r) == 3 and r[1]["done"], f"/{key}: the course bar doesn't count every lab as explored: {r}")
+                if play and len(r) == 3:
+                    expect(sec, str(SL["quiz"]) in r[2]["t"] and r[2]["done"], f"/{key}: the course bar doesn't count every scenario as answered: {r[2]}")
+                await pg.close()
+            finally:
+                await ctx.close()
+        sec["notes"].append(f"{S['name']['en']}: {SL['labs']} labs and {SL['quiz']} scenarios, in " + " and ".join("English" if lg == "en" else "Spanish" for lg, _ in langs)
+                            + ("" if play else f"; no play script (site-tools/smoke/{S['id']}.js), so no lab was played"))
+
+
 # ---------------------------------------------------------------- 12. the words drawn in the films
 NUM = check_site.NUMBERING
 DRAWN_JS = """async (step) => {
@@ -1228,6 +1379,8 @@ async def check_drawn(run):
     ctx = await run.context(1280)
     try:
         for key, step in (("", 1.0), ("es/", 1.0), ("sketch/", 0.5), ("when-things-go-wrong/silent-change/", 1.0)):
+            if not run.want(key):
+                continue
             pg, log = await run.page(ctx, key)
             await run.ready(pg)
             texts = await pg.evaluate(DRAWN_JS, step)
@@ -1268,12 +1421,18 @@ async def take_shots(run):
 CHECKS = {"pages": check_pages, "notfound": check_404, "deeplinks": check_deeplinks, "chapters": check_chapter_links,
           "players": check_players, "sealed": check_sealed, "nextpanel": check_next, "think-silent": check_think_silent,
           "think-home": check_think_home, "progress": check_progress, "nostorage": check_nostorage,
-          "mobile": check_mobile, "a11y": check_a11y, "drawn": check_drawn}
+          "mobile": check_mobile, "a11y": check_a11y, "series-learn": check_series_learn, "drawn": check_drawn}
 
 
 async def amain(args):
     from playwright.async_api import async_playwright
     rep = Report()
+    scope = None
+    if args.pages is not None:
+        scope = set(json.loads(args.pages))
+        missing = sorted(k for k in scope if not (WEB / (k + "index.html" if k == "" or k.endswith("/") else k)).is_file())
+        if missing:
+            sys.exit(f"--pages names pages that aren't in site/: {missing}")
     proc = root = None
     if args.base:
         base = args.base if args.base.endswith("/") else args.base + "/"
@@ -1282,19 +1441,23 @@ async def amain(args):
     try:
         async with async_playwright() as p:
             browser = await p.chromium.launch(args=["--autoplay-policy=no-user-gesture-required"])
-            run = Run(browser, base, rep, args.shots)
+            run = Run(browser, base, rep, args.shots, scope)
             names = args.only.split(",") if args.only else list(CHECKS)
             for n in names:
                 if n not in CHECKS:
                     sys.exit(f"no check named {n!r}; see --list")
-            print(f"Testing {base} in Chromium {browser.version}: {', '.join(names)}", flush=True)
+            where = "" if scope is None else f", on {len(scope)} of {len(run.static)} pages"
+            print(f"Testing {base} in Chromium {browser.version}: {', '.join(names)}{where}", flush=True)
             for n in names:
                 t0 = time.time()
                 try:
                     await CHECKS[n](run)
                 except Exception as e:  # noqa: BLE001
                     rep.sec(n, n)["fails"].append(f"the check stopped: {type(e).__name__}: {str(e).splitlines()[0][:300]}")
-                print(f"  {n}: {time.time() - t0:.0f} s", flush=True)
+                s = rep.sections.get(n)
+                if scope is not None and s and not s["n"] and not s["fails"]:
+                    s["skip"] = True  # none of its pages is in scope
+                print(f"  {n}: {time.time() - t0:.0f} s" + (" (skipped)" if s and s.get("skip") else ""), flush=True)
             if args.shots:
                 await take_shots(run)
             await browser.close()
@@ -1310,6 +1473,7 @@ def main():
     ap.add_argument("--port", type=int, default=8110)
     ap.add_argument("--base")
     ap.add_argument("--only")
+    ap.add_argument("--pages")
     ap.add_argument("--shots")
     ap.add_argument("--list", action="store_true")
     args = ap.parse_args()

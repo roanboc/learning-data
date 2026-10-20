@@ -24,6 +24,7 @@ sources:
             - {key: staff_id, case: upper, example: E-4417}
             - {key: contract_id, case: upper, example: T-26041}
           example: HR|E-4417
+        domain: hr
     tables:
       - name: staff
         description: One row per version of a staff member's record. The system key is the staff ID.

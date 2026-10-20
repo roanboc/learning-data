@@ -1,0 +1,123 @@
+# The person domain's conceptual model: the person behind every role the university records, the
+# roles they hold, how to reach them, and the numbers each system knows them by. Owned by the
+# registrar's office, which decides who someone is.
+#
+# Not parsed by dbt (.dbtignore). scripts/generate/definitions.py turns each definition into a
+# doc block in _person__definitions.md, next to this file. The diagram is drawn by hand in
+# _person__conceptual.md. The university's map, with this domain on it, is in models/_shared/.
+# A draft: the owners named here approve it (_person__decisions.yml), and no core model reads it
+# yet. What's still open is in requirements/models/person/.
+
+domain: person
+reference:
+  model: TCSI
+  packet: Student and Staff
+  adopted: The student's and the staff member's identifiers, each kept with the system that issued it.
+  extended:
+    - A person is wider than a TCSI student or staff member. It is anyone the university knows, in any role, now or before, once.
+    - Roles are kept apart from the person, each with its dates and its owner. TCSI collects a student and a staff member apart; here they can be one person.
+    - How to reach a person is kept for a purpose, and every number a system gives them is kept. None replaces another.
+
+entities:
+
+  - name: person
+    definition: >
+      A human being the university knows, in any role, now or before: one person, however many
+      roles they hold and however many systems record them.
+    owner: Mei Tanaka, registrar's office
+    business_key:
+      issued_by: Registrar's office
+      rule: >
+        The person's own key, given once and never reused. It is no system's number: the numbers
+        the systems give (SIS|S-20436, HR|E-4417) are the person's identifiers.
+    identity:
+      - Each record a system holds is a person of its own, until a rule or a recorded decision says it's someone already known.
+      - A record that holds another system's number is the person that number belongs to. A research record that holds a staff ID is that staff member.
+      - Two records are one person only when the registrar's office decides it, or a rule it agreed does. The decision is recorded, with its reason, and can be undone.
+      - A decision that two records are different people stops any rule from joining them.
+      - Sharing an email or an address doesn't make two records one person.
+    rules:
+      - "Legal name: from the student system, which checks it against an identity document. Kept by the registrar's office."
+      - "Preferred name and home address: set by the person, through self-service."
+      - "Work details: from the HR system. Kept by HR."
+    history: Every version of every record is kept. Joining two records into one person, or parting them, is dated and recorded.
+
+  - name: role
+    definition: >
+      A part a person plays for the university, for a time: applicant, student, tutor,
+      researcher or alumni. A person can hold several roles at once, and the same role more than
+      once.
+    owner: Mei Tanaka, registrar's office
+    business_key:
+      issued_by: The system that creates the role
+      rule: >
+        The record that grants the role, qualified by its key set: a student ID in an award
+        (SIS|S-20436|GCHI), a contract (HR|T-26041), a place on a project (RES|R-3082|RP-26017),
+        an alumni record (ALU|A-61207).
+    kinds:
+      - name: applicant
+        definition: Someone who has applied to study, until the application is decided. Created by the application.
+        owner: Admissions office
+      - name: student
+        definition: "Someone learning with the university, in an award or not: the student domain's learner. Created in the student system, or by the learning platforms for a learner with no award."
+        owner: Mei Tanaka, registrar's office
+      - name: tutor
+        definition: Someone who teaches a unit under a contract, one teaching period at a time. Created in the HR system.
+        owner: HR
+      - name: researcher
+        definition: Someone who works on a research project, for the time they're on it. Created in the research system.
+        owner: Research office
+      - name: alumni
+        definition: Someone the university has conferred an award on, from the day it was conferred. Created in the alumni system.
+        owner: Alumni office
+    rules:
+      - A role starts on a date, and ends on a date once it ends.
+      - "Each role relates to what it's for: a student role to an award, a tutor role to a unit in a teaching period, a researcher role to a project."
+      - The owner of each kind of role decides what it means and who holds it. The registrar's office decides who the person is.
+    history: Every role keeps its dates, and every change to them is a new version.
+
+  - name: contact_point
+    label: contact point
+    definition: >
+      A way to reach a person, kept for a purpose: an email, a phone number or an address, with
+      what it's for (study, work or personal) and when it was last confirmed.
+    owner: Mei Tanaka, registrar's office
+    business_key:
+      rule: The kind and the value, written one way to be compared, such as an email in lower case.
+    rules:
+      - Each system writes to the contact point for its purpose. The person decides their personal ones.
+      - A contact point can reach more than one person. A shared home address is one contact point, for each person who lives there.
+      - A contact point is never the person. Two records that share one aren't one person for that alone.
+    history: Every contact point keeps when it was added, last confirmed and closed.
+
+  - name: identifier
+    definition: >
+      A number a system gives a person, kept with the system that issued it: a student ID, a
+      staff ID, a research member ID, an alumni ID.
+    owner: Mei Tanaka, registrar's office
+    business_key:
+      issued_by: The issuing system
+      rule: The number, qualified by the key set of the system that issued it, SIS|S-17142 or HR|E-4417.
+    rules:
+      - A person can have many identifiers, from one system or several. None replaces another.
+      - An identifier belongs to one person, and is never given to anyone else.
+      - When two records turn out to be one person, both identifiers stay. The issuing system says which one it keeps as its main one.
+      - A number one system holds for another (a staff ID in the research system) is the issuer's identifier, not a new one.
+    history: An identifier is kept for good, with the day it was issued and, if it's retired, the day it was retired.
+
+relationships:
+
+  - name: holds
+    between: [person, role]
+    cardinality: one person to many roles
+    definition: A person holds a role for a time. Each role belongs to one person.
+
+  - name: reached_at
+    between: [person, contact_point]
+    cardinality: many people to many contact points
+    definition: A person is reached at a contact point for its purpose. A shared address reaches each person who lives there.
+
+  - name: known_by
+    between: [person, identifier]
+    cardinality: one person to many identifiers
+    definition: A person is known by every identifier a system gave them.

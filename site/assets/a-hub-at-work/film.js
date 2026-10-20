@@ -412,8 +412,7 @@ const NARR={
 "monday":{"name":"Monday morning","lead":1.4,"tail":1.0,"vo":[
  {"id":"monday","gap":0.8,"text":"Monday morning. Mei, whose office decides who someone is, opens the hub."},
  {"id":"rules","gap":0.8,"text":"Earlier in this series, the university wrote down its rules: when two records are one person, and which value wins."},
- {"id":"hub","gap":0.8,"text":"A hub puts those rules to work, every day."},
- {"id":"lf","gap":0.8,"text":"This one is LakeFusion, which runs inside Databricks. Another hub could take its place."},
+ {"id":"hub","gap":0.8,"text":"The hub, a master data solution, puts those rules to work, every day."},
  {"id":"weekend","gap":0.8,"text":"Over the weekend, 1,240 changes came in from four systems.","say":"Over the weekend, twelve hundred and forty changes came in from four systems."}]},
 "rules":{"name":"Rules act","lead":0.8,"tail":1.0,"vo":[
  {"id":"most","gap":0.8,"text":"The rules dealt with nearly all of them."},
@@ -472,14 +471,14 @@ const NARR={
  {"id":"end","gap":0.8,"text":"And everything can be explained, and undone."}]}
 };
 
-const VODUR={"monday/monday": 4.624, "monday/rules": 6.997, "monday/hub": 2.405, "monday/lf": 5.595, "monday/weekend": 4.703, "rules/most": 1.946, "rules/known": 4.148, "rules/new": 1.443, "rules/close": 2.644, "rules/first": 2.231, "saturday/applied": 5.074, "saturday/search": 3.783, "saturday/likely": 2.285, "saturday/waits": 3.918, "why/why": 2.651, "why/names": 2.428, "why/dates": 3.691, "why/email": 4.16, "why/band": 2.961, "why/flip": 4.348, "ai/note": 2.924, "ai/form": 4.841, "ai/same": 2.692, "ai/meaning": 2.337, "ai/suggests": 3.085, "decide/links": 2.792, "decide/keeps": 2.641, "decide/teaches": 1.954, "decide/undo": 4.372, "publish/published": 4.364, "publish/app": 4.644, "publish/alumni": 2.358, "publish/mask": 2.704, "source/where": 2.393, "source/names": 4.838, "source/email": 3.967, "source/typo": 3.029, "friday/friday": 7.774, "friday/blind": 4.815, "friday/wrong": 2.349, "friday/stop": 3.164, "friday/until": 3.625, "five/ask": 5.036, "five/explain": 2.492, "five/undo": 1.66, "five/review": 2.931, "five/mask": 1.914, "five/publish": 3.421, "end/three": 2.782, "end/end": 2.317};
+const VODUR={"monday/monday": 4.624, "monday/rules": 6.997, "monday/hub": 4.314, "monday/weekend": 4.703, "rules/most": 1.946, "rules/known": 4.148, "rules/new": 1.443, "rules/close": 2.644, "rules/first": 2.231, "saturday/applied": 5.074, "saturday/search": 3.783, "saturday/likely": 2.285, "saturday/waits": 3.918, "why/why": 2.651, "why/names": 2.428, "why/dates": 3.691, "why/email": 4.16, "why/band": 2.961, "why/flip": 4.348, "ai/note": 2.924, "ai/form": 4.841, "ai/same": 2.692, "ai/meaning": 2.337, "ai/suggests": 3.085, "decide/links": 2.792, "decide/keeps": 2.641, "decide/teaches": 1.954, "decide/undo": 4.372, "publish/published": 4.364, "publish/app": 4.644, "publish/alumni": 2.358, "publish/mask": 2.704, "source/where": 2.393, "source/names": 4.838, "source/email": 3.967, "source/typo": 3.029, "friday/friday": 7.774, "friday/blind": 4.815, "friday/wrong": 2.349, "friday/stop": 3.164, "friday/until": 3.625, "five/ask": 5.036, "five/explain": 2.492, "five/undo": 1.66, "five/review": 2.931, "five/mask": 1.914, "five/publish": 3.421, "end/three": 2.782, "end/end": 2.317};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
    Three wordless moments: the weekend's count on the hub's screen, then the title; this week's result, under the Friday rule;
    and the end card. */
 const BREATH={
-"monday":{"hold":{"monday":0.4,"rules":0.6,"hub":0.3,"lf":0.6},"breathe":4.2},
+"monday":{"hold":{"monday":0.4,"rules":0.6,"hub":0.6},"breathe":4.2},
 "rules":{"hold":{"most":0.3,"known":0.5,"new":0.3,"close":0.6}},
 "saturday":{"hold":{"applied":0.6,"search":0.4,"likely":0.7}},
 "why":{"hold":{"why":0.4,"names":0.5,"dates":0.5,"email":0.6,"band":0.6}},
@@ -2822,7 +2821,7 @@ const m8_shotWeek=()=>m8_shot("week",q=>{m8_when(q,"Friday · 17:30");m8_week(q)
 /* ---------- 1. Monday morning ---------- */
 scene("monday",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
   const tMei=w("monday","Mei,"),tOpen=w("monday","opens"),tRules=c("rules"),tR1=w("rules","its rules"),tR2=w("rules","which value"),tHub=c("hub"),
-    tLF=w("lf","LakeFusion"),tDbx=w("lf","runs inside"),tAno=w("lf","Another hub"),tPush=sc.ends.lf+0.5,tN=w("weekend","twelve"),tChg=w("weekend","changes"),tFour=w("weekend","four systems");
+    tSol=w("hub","a master"),tPush=sc.ends.hub+0.5,tN=w("weekend","twelve"),tChg=w("weekend","changes"),tFour=w("weekend","four systems");
   // the camera: over Mei's shoulder, closing in slowly; then into the monitor, until the hub's screen fills the frame exactly
   m8_open(ctx,S,t,sc,"office",[[0,960,540,1],[0.6,990,520,1.05,6],[tPush,M8_MCX,M8_MCY,M8_MZ,1.6]],{z:0});
   m8_hands(ctx,9,t/13);
@@ -2839,12 +2838,8 @@ scene("monday",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   if(fly<1)[[tR1-0.2,250],[tR2-0.3,410]].forEach(([t0,y],i)=>{const cx=1216,cy=y+62,f=ease(fly),k=lerp(1,0.4,f);
     ctx.save();ctx.translate(lerp(cx,1201,f),lerp(cy,332,f));ctx.scale(k,k);ctx.translate(-cx,-cy);
     withA(ctx,1-f*f,()=>arrive(ctx,cx,cy,t,t0,()=>m8_ruleCard(ctx,cx-280,y,i),{dy:16}));ctx.restore();});
-  // an example: LakeFusion, which runs inside Databricks; another hub would do; and the screens are drawn for this film
-  withA(ctx,1-fin(t,tPush-0.3,0.35),()=>{
-    arrive(ctx,1015,712,t,tLF-0.2,()=>wc_tag(ctx,1200,712,"an example: LakeFusion",{align:"right"}),{dy:10});
-    arrive(ctx,1417,712,t,tDbx-0.1,()=>wc_tag(ctx,1232,712,"runs inside Databricks"),{dy:10});
-    wc_hand(ctx,"or another hub",846,808,{p:clamp((t-tAno)/0.9,0,1),size:34,w:600,col:WC_INK});
-    arrive(ctx,1358,794,t,tAno+0.6,()=>wc_tag(ctx,1602,794,"the screens: drawn for this film",{align:"right",size:28,w:600}),{dy:10});});
+  // what the hub is: a master data solution, named by its kind, not as any product
+  withA(ctx,1-fin(t,tPush-0.3,0.35),()=>arrive(ctx,1216,712,t,tSol-0.2,()=>wc_tag(ctx,1216,712,"a master data solution",{align:"center"}),{dy:10}));
   m8_close(ctx,S);
   wc_year(ctx,64,80,"Monday · 9:00",fin(t,0.4,0.6)*(1-fin(t,tPush-0.4,0.4)));wc_paperOver(ctx,S);wc_fadeIn(ctx,S,t,1.4);
   wc_title(ctx,S,t,B+0.6,"A hub at work","rules act, AI suggests, people decide","Film 8 of 9 · master and reference data");});
@@ -2852,9 +2847,9 @@ scene("monday",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
 /* ---------- 2. Rules act ---------- */
 scene("rules",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const tMost=c("most"),tKnown=c("known"),tNew=c("new"),tClose=c("close"),tMei=w("close","wait for Mei"),tFirst=c("first"),tWait=w("first","waiting on");
-  // the camera: the whole screen; then right, to Mei's inbox
+  // the camera: the whole screen; then right, to Mei's inbox. The weekend's sources, which it leaves behind, fade before they reach the edge
   m8_open(ctx,S,t,sc,"screen",[[0,960,540,1],[tFirst-0.3,1100,470,1.14]]);
-  m8_when(ctx,"Monday · 9:02");m8_weekendHead(ctx);m8_count(ctx,1);for(let i=0;i<4;i++)m8_source(ctx,i);m8_rulesBox(ctx);
+  m8_when(ctx,"Monday · 9:02");withA(ctx,1-fin(t,tFirst-0.5,0.7),()=>{m8_weekendHead(ctx);m8_count(ctx,1);for(let i=0;i<4;i++)m8_source(ctx,i);});m8_rulesBox(ctx);
   // the changes go through the rules: nearly all to someone known, a few new, eight too close to call
   const win=[[tMost+0.1,tKnown+2.4],[tNew-1.3,tNew-0.3],[tClose-0.9,tClose+0.1]],ib=fin(t,tFirst-0.5,0.3);
   m8_dabs(ctx,t,win);
@@ -2952,7 +2947,7 @@ scene("publish",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   if(sk>0){ctx.save();ctx.strokeStyle=rgba(WC_NO,0.9);ctx.lineWidth=3.4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(1266,241);ctx.lineTo(1266+(tw(ctx,M8_INVITE,28,600)+12)*ease(sk),241);ctx.stroke();ctx.restore();}
   m8_read(ctx,1272,304,"he's applying",clamp((t-tStop-0.4)/0.9,0,1),WC_ROLEINK.alumna);
   withA(ctx,fin(t,tNever-0.3,0.5),()=>{wc_T(ctx,"birth date",1272,410,{w:600,size:28,col:WC_MUTED});m8_masked(ctx,1430,400,220,1);});
-  arrive(ctx,1550,512,t,tNeed-0.1,()=>wc_tag(ctx,1550,512,"a column mask, in Unity Catalog",{align:"center",size:28,w:600}),{dy:10});
+  arrive(ctx,1550,512,t,tNeed-0.1,()=>wc_tag(ctx,1550,512,"a column mask",{align:"center",size:28,w:600}),{dy:10});
   m8_close(ctx,S);wc_paperOver(ctx,S);});
 
 /* ---------- 8. Where it came from ---------- */

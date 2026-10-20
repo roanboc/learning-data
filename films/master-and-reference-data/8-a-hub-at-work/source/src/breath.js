@@ -3,7 +3,7 @@
    Three wordless moments: the weekend's count on the hub's screen, then the title; this week's result, under the Friday rule;
    and the end card. */
 const BREATH={
-"monday":{"hold":{"monday":0.4,"rules":0.6,"hub":0.3,"lf":0.6},"breathe":4.2},
+"monday":{"hold":{"monday":0.4,"rules":0.6,"hub":0.6},"breathe":4.2},
 "rules":{"hold":{"most":0.3,"known":0.5,"new":0.3,"close":0.6}},
 "saturday":{"hold":{"applied":0.6,"search":0.4,"likely":0.7}},
 "why":{"hold":{"why":0.4,"names":0.5,"dates":0.5,"email":0.6,"band":0.6}},

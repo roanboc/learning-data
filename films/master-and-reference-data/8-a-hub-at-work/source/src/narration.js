@@ -4,8 +4,7 @@ const NARR={
 "monday":{"name":"Monday morning","lead":1.4,"tail":1.0,"vo":[
  {"id":"monday","gap":0.8,"text":"Monday morning. Mei, whose office decides who someone is, opens the hub."},
  {"id":"rules","gap":0.8,"text":"Earlier in this series, the university wrote down its rules: when two records are one person, and which value wins."},
- {"id":"hub","gap":0.8,"text":"A hub puts those rules to work, every day."},
- {"id":"lf","gap":0.8,"text":"This one is LakeFusion, which runs inside Databricks. Another hub could take its place."},
+ {"id":"hub","gap":0.8,"text":"The hub, a master data solution, puts those rules to work, every day."},
  {"id":"weekend","gap":0.8,"text":"Over the weekend, 1,240 changes came in from four systems.","say":"Over the weekend, twelve hundred and forty changes came in from four systems."}]},
 "rules":{"name":"Rules act","lead":0.8,"tail":1.0,"vo":[
  {"id":"most","gap":0.8,"text":"The rules dealt with nearly all of them."},

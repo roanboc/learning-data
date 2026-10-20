@@ -1,9 +1,9 @@
 # Which value wins: the music and sounds, played by tools/audio.py with From words to data's instruments (shared/tools/music.py).
 # The palette is this film's own (PLAYBOOK.md: vary the sound itself, film to film), and it keeps what the series carries from film to
 # film: the clarinet's mark (1-8-5-1), each role's note, and the D and the A above it for the person.
-#  - The bed is low voices, humming with their mouths closed: two singers on each note of the chord, a hair apart, each with their
-#    own breath and vibrato, as twenty-two clocks keep one time between them. The chords change with the narration, in E flat and
-#    its relative C minor.
+#  - The bed is low voices, humming with their mouths closed: one singer on each note of the chord, placed across the room by pitch,
+#    each with their own breath and vibrato, as twenty-two clocks keep one time between them. The chords change with the narration,
+#    in E flat and its relative C minor. A second singer on a note would beat against the first, a slow pulse on a phone's speaker.
 #  - A felt piano gives each source its note: the note of the role whose colour it wears, the same as in every film of the series
 #    (the student system the student's D, HR the tutor's A, the research office the researcher's G, the alumni office the alumna's
 #    D above), so a value carried from a record sounds where it came from.
@@ -39,25 +39,24 @@ def speaking(t):
 
 # ---- this film's instruments, all low-passed ----
 # the music's levels against the voice, set by measuring (PLAYBOOK.md §5): the bed about 21 dB under the voice as it speaks
-BED, NOTE, FX = 1.5, 1.2, 1.2
+BED, NOTE, FX = 2.1, 1.2, 1.2
 def _hum(F):
     """how loud a hummed harmonic at F Hz is, mouth closed: strong through the chest, a nasal ring near 260 Hz, little above 1 kHz"""
     return 1 / (1 + (F / 420) ** 2) + 0.5 * np.exp(-((F - 260) / 90) ** 2) + 0.06 * np.exp(-((F - 1050) / 220) ** 2)
 def hum(ch, start, sec, g=0.03):
-    """low voices humming a chord, mouths closed: on each side a singer on every note, a hair apart, each coming in at their own
-    moment, with their own slow vibrato and swell; dark, nothing above about 1.2 kHz. A note too low to hum is sung an octave up"""
+    """low voices humming a chord, mouths closed: one singer on each note, placed across the room by pitch, each coming in at their
+    own moment, with their own slow vibrato and swell; dark, nothing above about 1.2 kHz. A note too low to hum is sung an octave up.
+    Two singers on one note, a hair apart, beat against each other, and a phone's one speaker turns that into a slow pulse"""
     x = tt(sec); e = (np.clip(x / 1.2, 0, 1) ** 1.5 * np.clip((sec - x) / 2.4, 0, 1)).astype(np.float32)
     R = np.random.default_rng(int(start * 100) % 2 ** 31); notes = sorted(set(m + 12 if m < 38 else m for m in ch))
-    for side in (-1, 1):
-        s = np.zeros_like(x)
-        for m in notes:
-            f = mf(m) * (1 + side * 0.0011 + (R.random() - 0.5) * 0.0012)
-            vib = 1 + (0.0028 + 0.0016 * R.random()) * np.sin(2 * np.pi * (4.4 + 0.8 * R.random()) * x + 6.28 * R.random()) * np.clip((x - 0.8) / 1.2, 0, 1)
-            ph = 2 * np.pi * np.cumsum(f * vib) / SR + 6.28 * R.random()
-            tone = sum(np.sin(h * ph) * _hum(h * f) / h ** 0.6 for h in range(1, 10))
-            s += tone * (1 + 0.12 * np.sin(2 * np.pi * (0.045 + 0.02 * R.random()) * x + 6.28 * R.random())) * np.clip((x - 0.5 * R.random()) / 0.9, 0, 1)
-        s += 0.012 * filt(noise(sec), 'band', (180, 900)) * len(notes)  # their breath
-        put(filt((s * e / len(notes)).astype(np.float32), 'low', 1200), start, g * BED, 0.5 * side)
+    for m in notes:
+        f = mf(m) * (1 + (R.random() - 0.5) * 0.0012)
+        vib = 1 + (0.0028 + 0.0016 * R.random()) * np.sin(2 * np.pi * (4.4 + 0.8 * R.random()) * x + 6.28 * R.random()) * np.clip((x - 0.8) / 1.2, 0, 1)
+        ph = 2 * np.pi * np.cumsum(f * vib) / SR + 6.28 * R.random()
+        tone = sum(np.sin(h * ph) * _hum(h * f) / h ** 0.6 for h in range(1, 10))
+        s = tone * (1 + 0.06 * np.sin(2 * np.pi * (0.045 + 0.02 * R.random()) * x + 6.28 * R.random())) * np.clip((x - 0.5 * R.random()) / 0.9, 0, 1)
+        s += 0.012 * filt(noise(sec), 'band', (180, 900)) * np.sqrt(len(notes))  # their breath
+        put(filt((s * e / len(notes)).astype(np.float32), 'low', 1200), start, g * BED, max(-0.5, min(0.5, (m - 52) / 26)))
 def bed(keys, end, g=0.03):
     """the chapter's chords, each from its moment (a little early, so the singers have come in by then) until a little after the next"""
     for i, (t0, ch) in enumerate(keys):

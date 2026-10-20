@@ -80,6 +80,7 @@
 | 18 October 2026 | The sound of *Roles come and go* is a new palette: a choir humming, one voice to a note, a felt piano note for each role, a glass harmonica for the person, and the series' mark on the clarinet, from G minor to D major. Two voices on one note beat into a slow pulse on a phone's speaker, so each note has one. The music sits about 21 dB under the voice, and the one pulse, under last year's count, about 9 dB under the music. |
 | 20 October 2026 | The person queue's time limit is 7 days in every film: in *Who is it?* a test fails when a pair waits more than a week, and in *Kept, not cleaned* the oldest case's gauge and its alert use the same limit. |
 | 20 October 2026 | Linh's two student numbers are first linked on 8 October 2026 by Mei's office, as D-005 in *Who is it?*, and nothing links them before. *One person, many systems* shows them still apart in late 2025, as *One person, many roles* leaves her. |
+| 20 October 2026 | The series' labs and scenarios cover all nine films: 29 labs (*Take it apart*) and 72 situations (*Make the call*), in English and Spanish, checked against each film as its thread built it. Each lab follows one of its film's chapters, and each situation sits on a lab of its own film, numbered by film and place (11 to 18 for *One person, many roles*). They use the same format as *The map before the data*'s labs, so the site's page builder can make the series' two pages; adding the series to it waits on the author. |
 
 ## The brief
 

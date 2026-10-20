@@ -1,9 +1,9 @@
 /* ===== Kept, not cleaned: scenes =====
-   Ten chapters, as in ../script.md: Dujiangyan, split without a dam, its inner channel dug out every dry season down to a mark in its
+   Eleven chapters, as in ../script.md: Dujiangyan, split without a dam, its inner channel dug out every dry season down to a mark in its
    bed; the university's clean-up of 2024; the duplicates coming back, intake by intake; the search before create at the application;
    the steward's five measures, each with a limit; an alert, and the case it points at; a change to a list, drafted by an agent and
-   decided by its owner; the governance scorecard; a bank that cleans up every three years; and Linh's PhD, with the water let back
-   into the inner channel in spring.
+   decided by its owner; the governance scorecard; a bank that cleans up every three years; Linh's PhD, with the water let back
+   into the inner channel in spring; and the series in one picture, then data governance, which the next series takes up.
    Drawn in watercolour (shared/src/wash.js), made to read on a phone (tools/legible.py): text is at least 28 px in the frame. The camera
    moves in on whatever the narration is about, and every shot drifts slowly; things arrive with a spring. Sound: every effect in
    tools/score.py fires at the same moment as the thing it belongs to here, so keep the two in step. */
@@ -251,9 +251,10 @@ scene("elsewhere",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s
   m9_close(ctx,S);wc_paperOver(ctx,S);});
 
 /* ---------- 10. Kept ---------- */
+const M9_KL="Clean it once, and it decays. Keep it, and it lasts.";
 // Linh, as the person, in February 2027: a tutor and an alumna, and now a student again, for her PhD; then the river in spring
 const M9_LX=640,M9_LY=1010;
-scene("kept",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
+scene("kept",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const tLs=w("phd","Linh starts"),tRole=w("phd","a new role"),tTh=w("count","thirty-eight"),tShe=w("count","She isn't"),tDu=w("spring","at Dujiangyan"),tEs=w("spring","every spring"),
     tRep=w("spring","repairs are done"),tLet=w("spring","let back in"),tLine=c("line");
   const k=fin(t,tDu-0.6,1.2);
@@ -269,9 +270,41 @@ scene("kept",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
     arrive(ctx,1507,640,t,tShe-0.1,()=>wc_tag(ctx,1507,640,"Linh: not one of them",{align:"center"}),{dy:8});
     m9_close(ctx,S);});
   wc_year(ctx,64,80,"February 2027 · the university",fin(t,0.3,0.6)*(1-fin(t,tDu-0.4,0.5)));wc_year(ctx,64,80,"every spring",fin(t,tEs,0.5));wc_paperOver(ctx,S);
-  // the line, then carried down onto the end card, above the veil, landing where the card's own line fades in and takes it over
-  const KL="Clean it once, and it decays. Keep it, and it lasts.",kl=fin(t,tLine-0.1,0.6),ky=lerp(128,420,fin(t,B+0.3,1.1)),kg=kl*(1-fin(t,B+0.8,0.9));
-  if(kg>0.01){setScreen(ctx,S);withA(ctx,kg,()=>{ctx.save();ctx.translate(960,ky-16);ctx.scale(1,0.2);const g=ctx.createRadialGradient(0,0,10,0,0,700);
-    g.addColorStop(0,rgba(WC_PAPER,0.94));g.addColorStop(0.7,rgba(WC_PAPER,0.7));g.addColorStop(1,rgba(WC_PAPER,0));ctx.fillStyle=g;ctx.fillRect(-700,-700,1400,1400);ctx.restore();});}
-  wc_end(ctx,S,t,B+0.8,"Kept, not cleaned",KL,"Film 9 of 9");
-  if(kl>0.01&&t<B+2.4){setScreen(ctx,S);withA(ctx,kl,()=>wc_T(ctx,KL,960,ky,{w:700,size:48,align:"center",col:WC_DARK}));}});
+  // the line, over the river in spring, on a glow of paper; the end card that carries it again closes the next chapter
+  const kl=fin(t,tLine-0.1,0.6);if(kl>0.01){setScreen(ctx,S);withA(ctx,kl,()=>{ctx.save();ctx.translate(960,112);ctx.scale(1,0.2);const g=ctx.createRadialGradient(0,0,10,0,0,700);
+    g.addColorStop(0,rgba(WC_PAPER,0.94));g.addColorStop(0.7,rgba(WC_PAPER,0.7));g.addColorStop(1,rgba(WC_PAPER,0));ctx.fillStyle=g;ctx.fillRect(-700,-700,1400,1400);ctx.restore();
+    wc_T(ctx,M9_KL,960,128,{w:700,size:48,align:"center",col:WC_DARK});});}});
+
+/* ---------- 11. The same one, everywhere ---------- */
+// the series in one picture, as One person, many roles first drew it: the nine films on a line, each part named and what each film showed;
+// then the line seen from further off, as master data's place on a wheel: data governance, and the four pieces of it that master data
+// needs; then Yusuf, whose series is next, and the end card
+scene("series",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
+  const tNine=w("nine","Nine films"),tSame=w("nine","the same one"),tp=["who","roles","safe","right"].map(c),
+    tl=[1e9,w("who","once"),w("who","declare"),w("roles","a start"),w("roles","an owner"),w("safe","its purpose"),w("safe","the lightest"),w("right","explain"),w("right","stop duplicates")],
+    tBack=sc.ends.right+0.2,tGv=w("gov","data governance"),tLk=w("gov","looks after"),tq=[w("rest","someone"),w("rest","one meaning"),w("rest","access"),w("rest","rules")],
+    tSer=w("next","next series"),tY=w("next","Yusuf"),tAll=w("next","all of"),tS=c("gov")-0.3,sh=clamp((t-tS)/1.8,0,1);
+  // the camera: the whole line; in on each part as it's named; out to the whole line again, before it's seen from further off
+  const CX=g=>clamp(M9_PX[g],960/1.3,W-960/1.3);
+  m9_open(ctx,S,t,sc,"plain",[[0,960,540,1]].concat(tp.map((t0,g)=>[t0-0.4,CX(g),570,1.3]),[[tBack,960,540,1]]));m9_hush(ctx,0.3);
+  // the part in focus, and how far the others step back meanwhile
+  const on=fin(t,tp[0]-0.4,0.6)*(1-fin(t,tBack,0.8)),foc=g=>fin(t,tp[g]-0.4,0.6)*(g<3?1-fin(t,tp[g+1]-0.4,0.6):1);
+  if(t<tS){const tf=[0.3].concat([1,2,3,4,5,6,7,8].map(i=>tNine+0.15+i*0.13));
+    m9_series(ctx,t,{line:clamp((t-0.2)/1.6,0,1),head:fin(t,tSame,0.6)*(1-on),headP:(t-tSame-0.2)/1.0,
+      name:tp.map(t0=>fin(t,t0-0.1,0.4)),tf,tl,dim:[0,1,2,3].map(g=>0.55*on*(1-foc(g))),dim0:0.55*on});}
+  else withA(ctx,1-fin(t,B+0.8,1.0),()=>{// fades as the end card comes, so no word shows through it
+    // the line, seen from further off: it shrinks into master data's place on the wheel, and the card gathers under it
+    const M=M9_MC,R={x:M.x+20,y:M.y+72,w:M.w-40},k0=R.w/M9_LINE.w,k=Math.exp(Math.log(k0)*ease(sh)),v=(1-k)/(1-k0);
+    // data governance: the rim drawn round, the hub, its spokes; the four pieces still to name, as spaces on the rim
+    wc_ring(ctx,M9_HUB[0],M9_HUB[1],M9_RIM[0],M9_RIM[1],clamp((t-tGv)/1.8,0,1),{lw:2.6,a:0.5,seed:21});
+    m9_spoke(ctx,180,clamp((t-tGv-0.4)/0.6,0,1));M9_PIECES.forEach((P,i)=>m9_spoke(ctx,P.a,clamp((t-tLk-0.1-i*0.15)/0.6,0,1)));
+    arrive(ctx,M9_HUB[0],M9_HUB[1],t,tGv-0.1,()=>m9_hub(ctx,{sub:fin(t,tAll,0.6),next:fin(t,tSer,0.5)}),{d:0.9,from:0.96});
+    M9_PIECES.forEach((P,i)=>{const [x,y]=m9_rimAt(P.a);arrive(ctx,x,y,t,tLk+0.1+i*0.15,()=>m9_piece(ctx,i,fin(t,tq[i]-0.1,0.5)),{dy:10});});
+    if(sh>=1)m9_master(ctx,{l:fin(t,tS+1.6,0.6),pic:true});
+    else{withA(ctx,clamp((v-0.55)/0.45,0,1),()=>m9_master(ctx,{l:0}));m9_seriesAt(ctx,{x:lerp(M9_LINE.x,R.x,v),y:lerp(M9_LINE.y,R.y,v),w:M9_LINE.w*k});}
+    // Yusuf, whose series is next, beside it all
+    arrive(ctx,165,700,t,tY-0.2,()=>person(ctx,"yusuf",165,1010,0.95,{pose:"stand",pose2:"explain",mix:fin(t,tY+0.5,0.6),expr:"calm",t}),{d:0.9,from:0.97});
+    arrive(ctx,222,304,t,tY+0.2,()=>m9_name(ctx,222,250,"Yusuf Demir","data governance lead"),{dy:12});});
+  m9_close(ctx,S);wc_paperOver(ctx,S);
+  wc_end(ctx,S,t,B+0.8,"Kept, not cleaned",M9_KL,"Film 9 of 9");
+  const na=fin(t,B+2.0,0.9);if(na>0.01){setScreen(ctx,S);withA(ctx,na,()=>wc_tag(ctx,960,770,"Next: a series on data governance",{align:"center",size:28,w:600}));}});

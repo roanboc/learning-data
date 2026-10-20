@@ -37,7 +37,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "A clear match adds a role to someone already known. A likely one goes to Mei's queue.":
 "Una coincidencia clara agrega un rol a alguien ya conocido. Una probable va a la cola de Mei.",
 "New duplicates fell under fifty an intake, and stayed there.":
-"Los duplicados nuevos bajaron de cincuenta por admisión, y ahí se quedaron.",
+"Los duplicados nuevos bajaron de cincuenta por admisión, y ahí quedaron.",
 "Like the river's shape, the search keeps most of them out. Mei's queue digs out the rest.":
 "Como la forma del río, la búsqueda deja fuera a la mayoría. La cola de Mei saca el resto.",
 "So keeping the person right isn't a project that ends. It's everyday work.":
@@ -69,11 +69,11 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "An agent drafted how it maps to the university's fee categories, with its evidence, as a change to the list.":
 "Un agente redactó cómo encaja en las categorías de arancel, con su evidencia, como un cambio a la lista.",
 "The list's owner, the admissions office, checked it and approved it.":
-"La responsable de la lista, la oficina de admisiones, lo revisó y lo aprobó.",
+"La oficina de admisiones, responsable de la lista, lo revisó y aprobó.",
 "The agent proposes. The owner decides.":
 "El agente propone. El responsable decide.",
 "Yusuf, who leads data governance, reads the same measures on his scorecard, beside every other domain's.":
-"Yusuf, que dirige el gobierno de datos, lee los mismos indicadores en su cuadro de mando, junto a los de los demás dominios.",
+"Yusuf, que dirige la gobernanza de datos, lee los mismos indicadores en su cuadro de mando, junto a los de los demás dominios.",
 "Owners, limits, and a way to change them: the person now has all three.":
 "Responsables, límites y una forma de cambiarlos: la persona ya tiene los tres.",
 "Every industry knows this picture. A bank cleans up its customer records every three years, and the duplicates come back every time.":
@@ -87,5 +87,21 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "And at Dujiangyan, every spring, when the repairs are done, the water is let back in.":
 "Y en Dujiangyan, cada primavera, cuando terminan las reparaciones, se deja volver el agua.",
 "Clean it once, and it decays. Keep it, and it lasts.":
-"Límpialo una vez, y se deteriora. Mantenlo, y perdura."
+"Límpialo una vez, y se deteriora. Mantenlo, y perdura.",
+"Nine films followed Linh, until the university knew her as the same one, everywhere.":
+"Nueve películas siguieron a Linh, hasta que la universidad la reconoció como la misma, en todas partes.",
+"Who someone is: decide each match once, with a reason, and declare which value wins.":
+"Quién es alguien: decide cada coincidencia una vez, con un motivo, y declara qué valor gana.",
+"Roles and lists: give each role a start and an end, and each list an owner and one home.":
+"Roles y listas: da a cada rol un inicio y un fin, y a cada lista un responsable y un solo hogar.",
+"Sharing it safely: use each role's data for its purpose only, and share the person the lightest way that works.":
+"Compartirlo con seguridad: usa los datos de cada rol solo para su propósito, y comparte a la persona de la forma más liviana que sirva.",
+"Keeping it right: make every change one you can explain and undo, and stop duplicates at the door.":
+"Mantenerlo bien: haz que cada cambio se pueda explicar y deshacer, y detén los duplicados en la puerta.",
+"Master data is one of the things data governance looks after.":
+"Los datos maestros son una de las cosas que cuida la gobernanza de datos.",
+"And it needs the rest of governance: someone who decides, one meaning for each word, access for a purpose, and rules that run.":
+"Y necesitan el resto de la gobernanza: alguien que decida, un significado para cada palabra, acceso con un propósito y reglas que se ejecuten.",
+"The next series follows Yusuf as he puts each of these in place, for all of the university's data.":
+"La próxima serie sigue a Yusuf mientras pone en marcha cada una, para todos los datos de la universidad."
 });

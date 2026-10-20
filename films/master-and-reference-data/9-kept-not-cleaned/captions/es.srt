@@ -68,7 +68,7 @@ Una coincidencia clara agrega un rol a alguien ya conocido. Una probable va a la
 
 18
 00:01:45,290 --> 00:01:48,665
-Los duplicados nuevos bajaron de cincuenta por admisión, y ahí se quedaron.
+Los duplicados nuevos bajaron de cincuenta por admisión, y ahí quedaron.
 
 19
 00:01:50,165 --> 00:01:55,268
@@ -132,7 +132,7 @@ Un agente redactó cómo encaja en las categorías de arancel, con su evidencia,
 
 34
 00:03:17,096 --> 00:03:20,359
-La responsable de la lista, la oficina de admisiones, lo revisó y lo aprobó.
+La oficina de admisiones, responsable de la lista, lo revisó y aprobó.
 
 35
 00:03:21,559 --> 00:03:24,198
@@ -140,7 +140,7 @@ El agente propone. El responsable decide.
 
 36
 00:03:26,698 --> 00:03:33,190
-Yusuf, que dirige el gobierno de datos, lee los mismos indicadores en su cuadro de mando, junto a los de los demás dominios.
+Yusuf, que dirige la gobernanza de datos, lee los mismos indicadores en su cuadro de mando, junto a los de los demás dominios.
 
 37
 00:03:34,690 --> 00:03:39,047
@@ -169,3 +169,35 @@ Y en Dujiangyan, cada primavera, cuando terminan las reparaciones, se deja volve
 43
 00:04:15,685 --> 00:04:18,752
 Límpialo una vez, y se deteriora. Mantenlo, y perdura.
+
+44
+00:04:24,452 --> 00:04:29,529
+Nueve películas siguieron a Linh, hasta que la universidad la reconoció como la misma, en todas partes.
+
+45
+00:04:30,829 --> 00:04:36,083
+Quién es alguien: decide cada coincidencia una vez, con un motivo, y declara qué valor gana.
+
+46
+00:04:37,083 --> 00:04:42,624
+Roles y listas: da a cada rol un inicio y un fin, y a cada lista un responsable y un solo hogar.
+
+47
+00:04:43,624 --> 00:04:50,332
+Compartirlo con seguridad: usa los datos de cada rol solo para su propósito, y comparte a la persona de la forma más liviana que sirva.
+
+48
+00:04:51,332 --> 00:04:57,267
+Mantenerlo bien: haz que cada cambio se pueda explicar y deshacer, y detén los duplicados en la puerta.
+
+49
+00:04:59,767 --> 00:05:03,491
+Los datos maestros son una de las cosas que cuida la gobernanza de datos.
+
+50
+00:05:05,091 --> 00:05:12,713
+Y necesitan el resto de la gobernanza: alguien que decida, un significado para cada palabra, acceso con un propósito y reglas que se ejecuten.
+
+51
+00:05:14,313 --> 00:05:20,166
+La próxima serie sigue a Yusuf mientras pone en marcha cada una, para todos los datos de la universidad.

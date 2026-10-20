@@ -53,5 +53,14 @@ const NARR={
  {"id":"phd","gap":0.8,"text":"February 2027. Linh starts her PhD: a new role, on the person she already is.","say":"February twenty twenty-seven. Linh starts her PhD: a new role, on the person she already is."},
  {"id":"count","gap":0.8,"text":"That intake made thirty-eight new duplicates. She isn't one of them."},
  {"id":"spring","gap":0.8,"text":"And at Dujiangyan, every spring, when the repairs are done, the water is let back in."},
- {"id":"line","gap":0.8,"text":"Clean it once, and it decays. Keep it, and it lasts."}]}
+ {"id":"line","gap":0.8,"text":"Clean it once, and it decays. Keep it, and it lasts."}]},
+"series":{"name":"The same one, everywhere","lead":1.0,"tail":1.0,"vo":[
+ {"id":"nine","gap":0.8,"text":"Nine films followed Linh, until the university knew her as the same one, everywhere."},
+ {"id":"who","gap":0.8,"text":"Who someone is: decide each match once, with a reason, and declare which value wins."},
+ {"id":"roles","gap":0.8,"text":"Roles and lists: give each role a start and an end, and each list an owner and one home."},
+ {"id":"safe","gap":0.8,"text":"Sharing it safely: use each role's data for its purpose only, and share the person the lightest way that works."},
+ {"id":"right","gap":0.8,"text":"Keeping it right: make every change one you can explain and undo, and stop duplicates at the door."},
+ {"id":"gov","gap":0.8,"text":"Master data is one of the things data governance looks after."},
+ {"id":"rest","gap":0.8,"text":"And it needs the rest of governance: someone who decides, one meaning for each word, access for a purpose, and rules that run."},
+ {"id":"next","gap":0.8,"text":"The next series follows Yusuf as he puts each of these in place, for all of the university's data."}]}
 };

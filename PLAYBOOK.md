@@ -152,7 +152,7 @@ What *A Sharper Sketch* and *When things go wrong* added once there was more tha
 - **Preview a series in a few parts.** Eight films named one by one took too long. Group them into a few plain parts (*One person, many roles* uses four: who someone is, roles and lists, sharing it safely, keeping it right) and show every film inside its part.
 - **Write each decision down with its date,** in the treatment or the story outline, so the next session starts from it.
 - **Films stand alone.** No numbers on screen, and none for the site's standalone films; open with a one-line recap, and place each film under the part of the overview it goes deeper on. A series is the exception: its films are numbered, always as "Film 2 of 7", and each film's page ends with *In the series*: the previous and the next film, and the whole series in order. Seven films without numbers were hard to keep track of.
-- **Keep one number per rule across the series.** *Who is it?* tested the person queue against 7 days while *Kept, not cleaned* drew a 10-day limit, and learners see both films and the labs. Settle a shared number in the series' *Decided* table before a second film draws it.
+- **Keep one number per rule across the series.** *Who is it?* tested the person queue against 7 days while *Kept, not cleaned* drew a 10-day limit, and learners see both films and the labs. Settle a shared number in the series' *Decided* table before another film draws it.
 - **Turn every review finding into a check** (`site-tools/check_site.py`, `site-tools/smoke.py`, `tools/check.py`), so it can't come back.
 
 *Ask: what did the last film teach us, and where is it written down?*

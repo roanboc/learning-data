@@ -468,13 +468,13 @@ const NARR={
  {"id":"hospital","gap":0.8,"text":"Hospitals match people too. Merge two patients by mistake, and a test result follows the wrong one."},
  {"id":"issuer","gap":0.8,"text":"So they keep each identifier with the system that issued it, and undoing a merge is part of the job."}]},
 "once":{"name":"Decided once","lead":0.8,"tail":1.0,"vo":[
- {"id":"dbt","gap":0.8,"text":"On the platform, in dbt, a query proposes the pairs without comparing everyone, and the decisions table becomes the person's queue."},
+ {"id":"pairs","gap":0.8,"text":"Where the data is transformed, a query proposes the pairs without comparing everyone, and the decisions table becomes the person's queue."},
  {"id":"test","gap":0.8,"text":"A test fails when a pair waits more than a week: the queue has an owner, and a limit."},
- {"id":"tables","gap":0.8,"text":"In Databricks, the master records and their links, each with who decided and why."},
+ {"id":"links","gap":0.8,"text":"On the platform, the master records and their links, each with who decided and why."},
  {"id":"decide","gap":0.8,"text":"Decide a match once, with a reason, and keep it."}]}
 };
 
-const VODUR={"guerre/left": 6.078, "guerre/back": 6.207, "guerre/court": 4.898, "guerre/leg": 5.903, "guerre/two": 2.799, "words/first": 1.155, "words/master": 5.34, "words/many": 3.157, "words/ref": 8.452, "words/test": 4.126, "words/pick": 3.23, "words/line": 5.122, "golden/builds": 3.985, "golden/id": 3.811, "golden/best": 3.489, "golden/links": 3.614, "golden/undo": 4.041, "check/linh": 2.781, "check/runs": 6.107, "check/billion": 3.232, "check/share": 7.3, "check/three": 4.511, "first/pair": 4.287, "first/score": 4.748, "first/term": 4.946, "first/before": 2.801, "first/links": 2.202, "first/merge": 3.089, "weights/second": 5.139, "weights/weigh": 2.66, "weights/names": 5.353, "weights/date": 6.362, "weights/total": 3.731, "weights/flip": 3.913, "note/drafts": 8.573, "note/asks": 5.04, "note/links": 1.567, "note/next": 2.959, "aisha/third": 5.122, "aisha/rahman": 4.061, "aisha/results": 4.808, "aisha/worse": 2.432, "aisha/apart": 3.852, "link/five": 3.414, "link/kept": 7.306, "link/rule": 5.376, "elsewhere/hospital": 6.242, "elsewhere/issuer": 5.784, "once/dbt": 8.725, "once/test": 4.516, "once/tables": 4.734, "once/decide": 2.498};
+const VODUR={"guerre/left": 6.078, "guerre/back": 6.207, "guerre/court": 4.898, "guerre/leg": 5.903, "guerre/two": 2.799, "words/first": 1.155, "words/master": 5.34, "words/many": 3.157, "words/ref": 8.452, "words/test": 4.126, "words/pick": 3.23, "words/line": 5.122, "golden/builds": 3.985, "golden/id": 3.811, "golden/best": 3.489, "golden/links": 3.614, "golden/undo": 4.041, "check/linh": 2.781, "check/runs": 6.107, "check/billion": 3.232, "check/share": 7.3, "check/three": 4.511, "first/pair": 4.287, "first/score": 4.748, "first/term": 4.946, "first/before": 2.801, "first/links": 2.202, "first/merge": 3.089, "weights/second": 5.139, "weights/weigh": 2.66, "weights/names": 5.353, "weights/date": 6.362, "weights/total": 3.731, "weights/flip": 3.913, "note/drafts": 8.573, "note/asks": 5.04, "note/links": 1.567, "note/next": 2.959, "aisha/third": 5.122, "aisha/rahman": 4.061, "aisha/results": 4.808, "aisha/worse": 2.432, "aisha/apart": 3.852, "link/five": 3.414, "link/kept": 7.306, "link/rule": 5.376, "elsewhere/hospital": 6.242, "elsewhere/issuer": 5.784, "once/pairs": 8.414, "once/test": 4.516, "once/links": 4.754, "once/decide": 2.498};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -490,7 +490,7 @@ const BREATH={
 "aisha":{"hold":{"third":0.6,"rahman":0.8,"results":0.9,"worse":0.8}},
 "link":{"hold":{"five":0.8,"kept":0.7},"breathe":1.6},
 "elsewhere":{"hold":{"hospital":1.2}},
-"once":{"hold":{"dbt":0.6,"test":0.6,"tables":0.7},"breathe":5.0}
+"once":{"hold":{"pairs":0.6,"test":0.6,"links":0.7},"breathe":5.0}
 };
 
 /* ===== Shared components for the v4 film ===== */
@@ -2411,11 +2411,11 @@ async function m2_fontsVi(){try{const f=[];
    witnesses' record, the judges and their bench; the two shelves of master and reference data; the master record and its stamp;
    the university's systems, their records and the pairs a duplicate check proposes; records side by side, the score's gauge and
    the steward's decision cards; the AI helper's note; a balance of a false merge against a missed match; hospital wristbands; and
-   the dbt and Databricks cards. Every name starts with m2_ (this film) or M2_. */
+   the cards of the pairs, the queue, its test and the links. Every name starts with m2_ (this film) or M2_. */
 
-// the logos (dbt, Databricks) and the Vietnamese letters (fonts.js) load with everything else before the film starts: the series'
-// prepAssets (post.js) doesn't load them
-const m2_prep0=prepAssets;prepAssets=async function(){await Promise.all([m2_prep0(),loadLogos(),m2_fontsVi()]);};
+// the Vietnamese letters (fonts.js) load with everything else before the film starts: the series' prepAssets (post.js) doesn't load
+// them
+const m2_prep0=prepAssets;prepAssets=async function(){await Promise.all([m2_prep0(),m2_fontsVi()]);};
 
 /* ---------- the places ---------- */
 // Artigat: the near ground, where Martin's house stands and the road runs; the rise the village stands on; the far hills
@@ -2832,9 +2832,10 @@ function m2_band(ctx,x,y,name,mrn){wc_panel(ctx,x,y,560,92,{kind:"card",seed:mrn
   wc_T(ctx,name,x+28,y+40,{w:800,size:30,col:WC_DARK});wc_T(ctx,mrn,x+28,y+78,{w:500,size:28,f:"mono",col:WC_INK});}
 
 /* ---------- 11. decided once ---------- */
-// a card with a tool's logo, its name, and lines of code or rows, in mono; returns its height
-function m2_tool(ctx,x,y,w,logoK,name,file,lines,o){o=o||{};const h=o.h||(150+lines.length*46);wc_panel(ctx,x,y,w,h,{kind:"sheet",seed:name.length+3});
-  const lw=logo(ctx,logoK,x+30,y+28,46);wc_T(ctx,name,x+44+Math.max(lw,46),y+66,{w:800,size:36,col:WC_DARK});
+// a card with its name, the file or table it is in, and lines of code or rows, in mono; returns its height. No tool's logo: the series
+// names no tool as the home of its rules (its Decided table, 20 October 2026)
+function m2_tool(ctx,x,y,w,name,file,lines,o){o=o||{};const h=o.h||(150+lines.length*46);
+  wc_panel(ctx,x,y,w,h,{kind:"sheet",seed:[...name].reduce((a,ch)=>a+ch.charCodeAt(0),0)});wc_T(ctx,name,x+36,y+66,{w:800,size:36,col:WC_DARK});
   if(file)wc_T(ctx,file,x+w-30,y+64,{w:500,size:28,f:"mono",align:"right",col:WC_MUTED});
   lines.forEach((l,i)=>{const a=o.la?o.la[i]:1;if(a<=0.01)return;const s=typeof l==="string"?l:l[0],col=typeof l==="string"?(s.startsWith("--")?WC_MUTED:WC_INK):l[1];
     withA(ctx,a,()=>wc_T(ctx,s,x+36,y+140+i*46,{w:500,size:28,f:"mono",col}));});return h;}
@@ -3216,21 +3217,25 @@ function m2_underline(ctx,x,y,w,p){if(p<=0)return;ctx.save();ctx.strokeStyle=rgb
 const M2_SQL=["-- pairs that share a key, not everyone","select a.record_key, b.record_key","from blocked_records a","join blocked_records b using (block_key)","where a.record_key < b.record_key"];
 const M2_QROWS=["-- each pair, and its decision","S-17142 · S-20436   D-005","S-20436 · E-4417    D-006","u-88231 · S-20417   D-003",["S-20512 · E-5120    waiting 2 days",[150,92,0]]];
 const M2_TROWS=["-- fails when a pair waits over 7 days",["S-20577 · S-19902   8 days   FAIL",WC_NO],["owner: Mei's office · limit: 7 days",WC_DARK]];
+const M2_FORM="the simplest form: SQL";
 const M2_LROWS=["-- master records and their links","P-10482 · S-17142 · D-005","P-10482 · S-20436 · D-005","P-10482 · E-4417  · D-006",["D-006 · Mei Tanaka · contract: a typo",WC_ROLEINK.tutor]];
 scene("once",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
-  const tD=c("dbt"),tQ=w("dbt","a query"),tWo=w("dbt","without comparing"),tDec=w("dbt","the decisions table"),tQu=w("dbt","the person's queue"),tT=c("test"),tFa=w("test","fails"),tWk=w("test","more than a week"),
-    tOw=w("test","an owner"),tTb=c("tables"),tMr=w("tables","the master records"),tLk=w("tables","their links"),tWho=w("tables","who decided"),tK=c("decide");
+  const tQ=w("pairs","a query"),tWo=w("pairs","without comparing"),tDec=w("pairs","the decisions table"),tQu=w("pairs","the person's queue"),tT=c("test"),tFa=w("test","fails"),tWk=w("test","more than a week"),
+    tOw=w("test","an owner"),tTb=c("links"),tMr=w("links","the master records"),tLk=w("links","their links"),tWho=w("links","who decided"),tK=c("decide");
   // the camera stays back: the card being talked about is lit, and the ones already told step back
   m2_open(ctx,S,t,sc,"plain",[[0,960,540,1]]);
   const turn=[tQ-0.4,tDec-0.3,tT-0.3,tTb-0.3,1e9],end=fin(t,tK-0.4,0.6),lit=i=>0.48+0.52*Math.max(fin(t,turn[i],0.5)*(1-fin(t,turn[i+1],0.5)),end);
   // and all of them step back while the line is said, so it reads on its own
   const rb=1-0.7*end;
-  withA(ctx,rb*lit(0),()=>arrive(ctx,510,270,t,tQ-0.3,()=>{m2_tool(ctx,100,80,820,"dbt","dbt","int_person_pairs.sql",M2_SQL,{la:M2_SQL.map((s,i)=>fin(t,tQ+0.3+i*0.18,0.4))});
+  withA(ctx,rb*lit(0),()=>arrive(ctx,510,270,t,tQ-0.3,()=>{m2_tool(ctx,100,80,820,"the pairs",null,M2_SQL,{la:M2_SQL.map((s,i)=>fin(t,tQ+0.3+i*0.18,0.4))});
+    // master data tools often keep the rules in screens; SQL is their simplest form, and the card says so, on a tag where the others
+    // name their file
+    const fw=tw(ctx,M2_FORM,28,600)+40;arrive(ctx,894-fw/2,133,t,tQ+1.1,()=>wc_tag(ctx,894,133,M2_FORM,{size:28,w:600,align:"right",col:WC_DARK}),{dy:8});
     // without comparing everyone: the comment that says so, underlined
     m2_underline(ctx,136,232,tw(ctx,M2_SQL[0],28,500,"mono"),clamp((t-tWo)/0.6,0,1));},{dy:16}));
-  withA(ctx,rb*lit(1),()=>arrive(ctx,1410,270,t,tDec-0.3,()=>m2_tool(ctx,1000,80,820,"dbt","the person queue","person_queue.sql",M2_QROWS,{la:M2_QROWS.map((s,i)=>fin(t,(i<4?tDec+0.2:tQu)+i*0.15,0.4))}),{dy:16}));
-  withA(ctx,rb*lit(2),()=>arrive(ctx,510,644,t,tFa-0.4,()=>m2_tool(ctx,100,500,820,"dbt","a test","decided_within_a_week",M2_TROWS,{la:[fin(t,tFa,0.4),fin(t,tWk,0.4),fin(t,tOw-0.1,0.4)]}),{dy:16}));
-  withA(ctx,rb*lit(3),()=>arrive(ctx,1410,690,t,tMr-0.4,()=>m2_tool(ctx,1000,500,820,"databricks","person_link",null,M2_LROWS,{la:[fin(t,tMr,0.4),fin(t,tLk,0.4),fin(t,tLk+0.2,0.4),fin(t,tLk+0.4,0.4),fin(t,tWho,0.4)]}),{dy:16}));
+  withA(ctx,rb*lit(1),()=>arrive(ctx,1410,270,t,tDec-0.3,()=>m2_tool(ctx,1000,80,820,"the person queue","person_queue.sql",M2_QROWS,{la:M2_QROWS.map((s,i)=>fin(t,(i<4?tDec+0.2:tQu)+i*0.15,0.4))}),{dy:16}));
+  withA(ctx,rb*lit(2),()=>arrive(ctx,510,644,t,tFa-0.4,()=>m2_tool(ctx,100,500,820,"a test","decided_within_a_week",M2_TROWS,{la:[fin(t,tFa,0.4),fin(t,tWk,0.4),fin(t,tOw-0.1,0.4)]}),{dy:16}));
+  withA(ctx,rb*lit(3),()=>arrive(ctx,1410,690,t,tMr-0.4,()=>m2_tool(ctx,1000,500,820,"the links","person_link",M2_LROWS,{la:[fin(t,tMr,0.4),fin(t,tLk,0.4),fin(t,tLk+0.2,0.4),fin(t,tLk+0.4,0.4),fin(t,tWho,0.4)]}),{dy:16}));
   m2_close(ctx,S);wc_paperOver(ctx,S);
   // the line, then carried down onto the end card, above the veil, landing where the card's own line fades in and takes it over
   const KL="Decide a match once, with a reason, and keep it.",kl=fin(t,tK-0.1,0.6),ky=lerp(128,420,fin(t,B+0.3,1.1)),kg=kl*(1-fin(t,B+0.8,0.9));

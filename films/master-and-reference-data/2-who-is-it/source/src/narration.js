@@ -60,8 +60,8 @@ const NARR={
  {"id":"hospital","gap":0.8,"text":"Hospitals match people too. Merge two patients by mistake, and a test result follows the wrong one."},
  {"id":"issuer","gap":0.8,"text":"So they keep each identifier with the system that issued it, and undoing a merge is part of the job."}]},
 "once":{"name":"Decided once","lead":0.8,"tail":1.0,"vo":[
- {"id":"dbt","gap":0.8,"text":"On the platform, in dbt, a query proposes the pairs without comparing everyone, and the decisions table becomes the person's queue."},
+ {"id":"pairs","gap":0.8,"text":"Where the data is transformed, a query proposes the pairs without comparing everyone, and the decisions table becomes the person's queue."},
  {"id":"test","gap":0.8,"text":"A test fails when a pair waits more than a week: the queue has an owner, and a limit."},
- {"id":"tables","gap":0.8,"text":"In Databricks, the master records and their links, each with who decided and why."},
+ {"id":"links","gap":0.8,"text":"On the platform, the master records and their links, each with who decided and why."},
  {"id":"decide","gap":0.8,"text":"Decide a match once, with a reason, and keep it."}]}
 };

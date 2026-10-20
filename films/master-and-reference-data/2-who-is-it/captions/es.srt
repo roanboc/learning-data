@@ -191,17 +191,17 @@ Los hospitales también cotejan personas. Si fusionan dos pacientes por error, u
 Por eso guardan cada identificador con el sistema que lo emitió, y deshacer una fusión es parte del trabajo.
 
 49
-00:05:07,205 --> 00:05:16,030
-En la plataforma, en dbt, una consulta propone los pares sin comparar a todos, y la tabla de decisiones se vuelve la cola de la persona.
+00:05:07,205 --> 00:05:15,719
+Donde se transforman los datos, una consulta propone los pares sin comparar a todos, y la tabla de decisiones se vuelve la cola de la persona.
 
 50
-00:05:17,330 --> 00:05:21,946
+00:05:17,019 --> 00:05:21,635
 Una prueba falla cuando un par espera más de una semana: la cola tiene un responsable, y un límite.
 
 51
-00:05:23,246 --> 00:05:28,080
-En Databricks, los registros maestros y sus vínculos, cada uno con quién decidió y por qué.
+00:05:22,935 --> 00:05:27,789
+En la plataforma, los registros maestros y sus vínculos, cada uno con quién decidió y por qué.
 
 52
-00:05:29,480 --> 00:05:32,078
+00:05:29,189 --> 00:05:31,787
 Decide una coincidencia una vez, con un motivo, y consérvala.

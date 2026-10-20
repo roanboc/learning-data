@@ -98,12 +98,12 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Los hospitales también cotejan personas. Si fusionan dos pacientes por error, un resultado sigue al equivocado.",
 "So they keep each identifier with the system that issued it, and undoing a merge is part of the job.":
 "Por eso guardan cada identificador con el sistema que lo emitió, y deshacer una fusión es parte del trabajo.",
-"On the platform, in dbt, a query proposes the pairs without comparing everyone, and the decisions table becomes the person's queue.":
-"En la plataforma, en dbt, una consulta propone los pares sin comparar a todos, y la tabla de decisiones se vuelve la cola de la persona.",
+"Where the data is transformed, a query proposes the pairs without comparing everyone, and the decisions table becomes the person's queue.":
+"Donde se transforman los datos, una consulta propone los pares sin comparar a todos, y la tabla de decisiones se vuelve la cola de la persona.",
 "A test fails when a pair waits more than a week: the queue has an owner, and a limit.":
 "Una prueba falla cuando un par espera más de una semana: la cola tiene un responsable, y un límite.",
-"In Databricks, the master records and their links, each with who decided and why.":
-"En Databricks, los registros maestros y sus vínculos, cada uno con quién decidió y por qué.",
+"On the platform, the master records and their links, each with who decided and why.":
+"En la plataforma, los registros maestros y sus vínculos, cada uno con quién decidió y por qué.",
 "Decide a match once, with a reason, and keep it.":
 "Decide una coincidencia una vez, con un motivo, y consérvala."
 });

@@ -144,14 +144,14 @@ Hospitals match people too. Merge two patients by mistake, and a test result fol
 00:04:58.421 --> 00:05:04.305
 So they keep each identifier with the system that issued it, and undoing a merge is part of the job.
 
-00:05:07.205 --> 00:05:16.030
-On the platform, in dbt, a query proposes the pairs without comparing everyone, and the decisions table becomes the person's queue.
+00:05:07.205 --> 00:05:15.719
+Where the data is transformed, a query proposes the pairs without comparing everyone, and the decisions table becomes the person's queue.
 
-00:05:17.330 --> 00:05:21.946
+00:05:17.019 --> 00:05:21.635
 A test fails when a pair waits more than a week: the queue has an owner, and a limit.
 
-00:05:23.246 --> 00:05:28.080
-In Databricks, the master records and their links, each with who decided and why.
+00:05:22.935 --> 00:05:27.789
+On the platform, the master records and their links, each with who decided and why.
 
-00:05:29.480 --> 00:05:32.078
+00:05:29.189 --> 00:05:31.787
 Decide a match once, with a reason, and keep it.

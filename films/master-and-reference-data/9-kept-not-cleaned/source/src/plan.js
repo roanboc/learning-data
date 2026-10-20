@@ -8,8 +8,6 @@
    change an agent drafts; the governance scorecard; and a bank's duplicates, cleaned up every three years. Every name starts with
    m9_ (this film) or M9_. */
 
-// post.js's prepAssets doesn't load the logos; this film shows dbt's and Databricks', so the wait for the fonts waits for them too
-{const f0=fontsReady3;fontsReady3=async function(){await f0();await loadLogos();};}
 // Yusuf Demir, the data governance lead, as the series on data governance draws him (its shared people.js)
 if(!PEOPLE.yusuf)PEOPLE.yusuf={name:"Yusuf Demir",role:"Data governance lead",side:"Business",does:"uses",edge:BIZ,seed:15,
   skin:[204,160,124],hair:{style:"side",c:[38,30,28]},beard:[44,34,30],
@@ -461,7 +459,7 @@ function m9_inset(ctx,t,x,y,w,h){const C=M9_INSET,s=w/C.w;wc_panel(ctx,x-12,y-12
   wc_ink(ctx,wc_rect(x,y,w,h),true,1.8,WC_PENCIL,0.7,23,0.5);return(px,py)=>[x+(px-C.x)*s,y+(py-C.y)*s];}
 
 /* ---------- 5, 6 and 10. the steward's measures ---------- */
-// the dashboard on Mei's wall: six places, five gauges and the tools; each gauge is a column with its level, and an iron bar lying across
+// the dashboard on Mei's wall: six places, five gauges and two cards; each gauge is a column with its level, and an iron bar lying across
 // it at its limit, as in the river's bed; beside it, what it measures, its value and limit, what it's read from, and whether it's within
 // its limit (a tick in green ink) or past it (a cross in red ink), said in words too
 const M9_DB={x:60,y:70,w:1300,h:780};
@@ -486,8 +484,9 @@ function m9_gauge(ctx,t,i,o){o=o||{};const g=Object.assign({},M9_G[i],o.g||{}),[
   const ok=o.ok==null?1:o.ok,past=o.past||0;
   if(past>0.01){wc_cross(ctx,tx+18,y+298,30,WC_NO,clamp(past/0.4,0,1));withA(ctx,clamp((past-0.3)/0.5,0,1),()=>wc_T(ctx,"past its limit",tx+46,y+308,{w:700,size:28,col:WC_NO}));}
   else if(ok>0){wc_tick(ctx,tx+18,y+296,30,WC_ROLEINK.alumna,clamp(ok/0.4,0,1),4);withA(ctx,clamp((ok-0.3)/0.5,0,1),()=>wc_T(ctx,"within its limit",tx+46,y+308,{w:700,size:28,col:WC_ROLEINK.alumna}));}}
-// the tools, each a card with its logo: dbt writes and tests the measures; Databricks runs them, keeps them and shows them
-function m9_tool(ctx,x,y,w,h,k,name,lines){wc_panel(ctx,x,y,w,h,{kind:"card",seed:k.length+50});logo(ctx,k,x+24,y+20,46);wc_T(ctx,name,x+84,y+56,{w:800,size:32,col:WC_DARK});
+// a small card on the dashboard, its name and two lines: each measure has a test for its limit; the platform works them out every night,
+// keeps them and shows them. No tool is named (the series' rule, 20 October 2026)
+function m9_tool(ctx,x,y,w,h,k,name,lines){wc_panel(ctx,x,y,w,h,{kind:"card",seed:k.length+50});wc_T(ctx,name,x+24,y+56,{w:800,size:32,col:WC_DARK});
   lines.forEach((s,i)=>wc_T(ctx,s,x+24,y+104+i*36,{w:600,size:28,col:WC_INK}));}
 // a tutor's role, its term contract ended, still active: the kind of thing the third measure finds; o.ring draws the pencil round it, o.close
 // closes it

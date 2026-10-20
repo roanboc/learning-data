@@ -440,7 +440,7 @@ const NARR={
  {"id":"roles","gap":0.6,"text":"Roles past their end date, like a tutor whose term contract ended, but who's still active."},
  {"id":"source","gap":0.6,"text":"Values with no source."},
  {"id":"requests","gap":0.8,"text":"And requests for what the university holds about someone, answered on time."},
- {"id":"tools","gap":0.8,"text":"dbt writes the measures and tests them. Databricks runs them every night, keeps them, and shows them on a dashboard."}]},
+ {"id":"nightly","gap":0.8,"text":"Each has a test for its limit. Every night, the platform works them out, keeps them, and shows them on a dashboard."}]},
 "alert":{"name":"Past its limit","lead":0.8,"tail":1.0,"vo":[
  {"id":"monday","gap":0.8,"text":"One Monday, an alert: the oldest case had waited twelve days."},
  {"id":"waiting","gap":0.8,"text":"It was waiting for HR to confirm a birth date, one digit apart."},
@@ -464,7 +464,7 @@ const NARR={
  {"id":"line","gap":0.8,"text":"Clean it once, and it decays. Keep it, and it lasts."}]}
 };
 
-const VODUR={"river/split": 9.482, "river/gravel": 3.417, "river/dry": 5.957, "river/mark": 3.263, "river/rule": 4.498, "river/still": 3.243, "river/kept": 3.289, "cleanup/merged": 6.551, "cleanup/team": 3.368, "cleanup/gone": 2.001, "return/year": 2.527, "return/every": 1.41, "return/why": 5.427, "return/linh": 3.759, "return/fixed": 3.374, "entry/search": 4.788, "entry/match": 4.936, "entry/fell": 3.275, "entry/shape": 5.003, "measures/process": 4.351, "measures/bars": 4.338, "measures/dups": 1.614, "measures/oldest": 2.298, "measures/roles": 5.607, "measures/source": 1.381, "measures/requests": 4.059, "measures/tools": 7.407, "alert/monday": 3.829, "alert/waiting": 3.91, "alert/rang": 4.21, "alert/blame": 3.042, "agent/list": 5.322, "agent/draft": 6.501, "agent/owner": 3.163, "agent/decides": 2.539, "scorecard/yusuf": 6.392, "scorecard/three": 4.257, "elsewhere/bank": 8.041, "elsewhere/one": 2.01, "kept/phd": 6.246, "kept/count": 3.792, "kept/spring": 4.849, "kept/line": 2.967};
+const VODUR={"river/split": 9.482, "river/gravel": 3.417, "river/dry": 5.957, "river/mark": 3.263, "river/rule": 4.498, "river/still": 3.243, "river/kept": 3.289, "cleanup/merged": 6.551, "cleanup/team": 3.368, "cleanup/gone": 2.001, "return/year": 2.527, "return/every": 1.41, "return/why": 5.427, "return/linh": 3.759, "return/fixed": 3.374, "entry/search": 4.788, "entry/match": 4.936, "entry/fell": 3.275, "entry/shape": 5.003, "measures/process": 4.351, "measures/bars": 4.338, "measures/dups": 1.614, "measures/oldest": 2.298, "measures/roles": 5.607, "measures/source": 1.381, "measures/requests": 4.059, "measures/nightly": 6.466, "alert/monday": 3.829, "alert/waiting": 3.91, "alert/rang": 4.21, "alert/blame": 3.042, "agent/list": 5.322, "agent/draft": 6.501, "agent/owner": 3.163, "agent/decides": 2.539, "scorecard/yusuf": 6.392, "scorecard/three": 4.257, "elsewhere/bank": 8.041, "elsewhere/one": 2.01, "kept/phd": 6.246, "kept/count": 3.792, "kept/spring": 4.849, "kept/line": 2.967};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2385,8 +2385,6 @@ arm=function(ctx,P,s,a,br,po){if(po.hold!=="envelope")return wc_arm0(ctx,P,s,a,b
    change an agent drafts; the governance scorecard; and a bank's duplicates, cleaned up every three years. Every name starts with
    m9_ (this film) or M9_. */
 
-// post.js's prepAssets doesn't load the logos; this film shows dbt's and Databricks', so the wait for the fonts waits for them too
-{const f0=fontsReady3;fontsReady3=async function(){await f0();await loadLogos();};}
 // Yusuf Demir, the data governance lead, as the series on data governance draws him (its shared people.js)
 if(!PEOPLE.yusuf)PEOPLE.yusuf={name:"Yusuf Demir",role:"Data governance lead",side:"Business",does:"uses",edge:BIZ,seed:15,
   skin:[204,160,124],hair:{style:"side",c:[38,30,28]},beard:[44,34,30],
@@ -2838,7 +2836,7 @@ function m9_inset(ctx,t,x,y,w,h){const C=M9_INSET,s=w/C.w;wc_panel(ctx,x-12,y-12
   wc_ink(ctx,wc_rect(x,y,w,h),true,1.8,WC_PENCIL,0.7,23,0.5);return(px,py)=>[x+(px-C.x)*s,y+(py-C.y)*s];}
 
 /* ---------- 5, 6 and 10. the steward's measures ---------- */
-// the dashboard on Mei's wall: six places, five gauges and the tools; each gauge is a column with its level, and an iron bar lying across
+// the dashboard on Mei's wall: six places, five gauges and two cards; each gauge is a column with its level, and an iron bar lying across
 // it at its limit, as in the river's bed; beside it, what it measures, its value and limit, what it's read from, and whether it's within
 // its limit (a tick in green ink) or past it (a cross in red ink), said in words too
 const M9_DB={x:60,y:70,w:1300,h:780};
@@ -2863,8 +2861,9 @@ function m9_gauge(ctx,t,i,o){o=o||{};const g=Object.assign({},M9_G[i],o.g||{}),[
   const ok=o.ok==null?1:o.ok,past=o.past||0;
   if(past>0.01){wc_cross(ctx,tx+18,y+298,30,WC_NO,clamp(past/0.4,0,1));withA(ctx,clamp((past-0.3)/0.5,0,1),()=>wc_T(ctx,"past its limit",tx+46,y+308,{w:700,size:28,col:WC_NO}));}
   else if(ok>0){wc_tick(ctx,tx+18,y+296,30,WC_ROLEINK.alumna,clamp(ok/0.4,0,1),4);withA(ctx,clamp((ok-0.3)/0.5,0,1),()=>wc_T(ctx,"within its limit",tx+46,y+308,{w:700,size:28,col:WC_ROLEINK.alumna}));}}
-// the tools, each a card with its logo: dbt writes and tests the measures; Databricks runs them, keeps them and shows them
-function m9_tool(ctx,x,y,w,h,k,name,lines){wc_panel(ctx,x,y,w,h,{kind:"card",seed:k.length+50});logo(ctx,k,x+24,y+20,46);wc_T(ctx,name,x+84,y+56,{w:800,size:32,col:WC_DARK});
+// a small card on the dashboard, its name and two lines: each measure has a test for its limit; the platform works them out every night,
+// keeps them and shows them. No tool is named (the series' rule, 20 October 2026)
+function m9_tool(ctx,x,y,w,h,k,name,lines){wc_panel(ctx,x,y,w,h,{kind:"card",seed:k.length+50});wc_T(ctx,name,x+24,y+56,{w:800,size:32,col:WC_DARK});
   lines.forEach((s,i)=>wc_T(ctx,s,x+24,y+104+i*36,{w:600,size:28,col:WC_INK}));}
 // a tutor's role, its term contract ended, still active: the kind of thing the third measure finds; o.ring draws the pencil round it, o.close
 // closes it
@@ -3093,7 +3092,7 @@ function m9_mei(ctx,t,o){const [x,y,s]=M9_MEI;m9_person(ctx,"mei",x,y,s,Object.a
 function m9_dash(ctx,t,o){wc_panel(ctx,M9_DB.x,M9_DB.y,M9_DB.w,M9_DB.h,{kind:"sheet",seed:44});}
 scene("measures",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
   const tPj=w("process","a project"),tEv=w("process","everyday work"),tIron=w("bars","iron bars"),tTut=w("roles","like a tutor"),
-    tAct=w("roles","still active"),tT=c("tools"),tDbx=w("tools","Databricks");
+    tAct=w("roles","still active"),tT=c("nightly"),tPf=w("nightly","the platform");
   const ts=["dups","oldest","roles","source","requests"].map(c),te=ts.slice(1).concat([tT]);
   // the camera: Mei's office; in on the whole dashboard as the measures are named, each lit in turn (all six places in the frame, so nothing
   // is cut at its edge, and every line above the captions); out, for a moment, on all five
@@ -3108,9 +3107,9 @@ scene("measures",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
       barIn:clamp((t-tIron-0.1-i*0.1)/0.5,0,1),ok:clamp((t-ts[i]-0.9)/0.8,0,1)}),{dy:14,d:0.7});}
     // what the third measure finds: a tutor whose contract ended, still active; ringed, then closed
     const [rx,ry]=m9_cell(5);arrive(ctx,rx+190,ry+90,t,tTut-0.2,()=>withA(ctx,1-fin(t,tT-0.9,0.5),()=>m9_tutor(ctx,t,rx+34,ry+40,{ring:clamp((t-tAct)/0.7,0,1),close:clamp((t-te[2]+0.1)/1.0,0,1)})),{dy:12});
-    // the tools, in the sixth place
-    arrive(ctx,rx+207,ry+90,t,tT,()=>m9_tool(ctx,rx+8,ry+10,398,160,"dbt","dbt",["writes and tests","the measures"]),{dy:12});
-    arrive(ctx,rx+207,ry+262,t,tDbx,()=>m9_tool(ctx,rx+8,ry+182,398,160,"databricks","Databricks",["runs them nightly,","keeps them, shows them"]),{dy:12});},{dy:24,d:0.9,from:0.96});
+    // in the sixth place, two cards: each measure has a test for its limit, and the platform works them out every night
+    arrive(ctx,rx+207,ry+90,t,tT,()=>m9_tool(ctx,rx+8,ry+10,398,160,"test","each measure",["has a test","for its limit"]),{dy:12});
+    arrive(ctx,rx+207,ry+262,t,tPf,()=>m9_tool(ctx,rx+8,ry+182,398,160,"platform","the platform",["works them out nightly,","keeps them, shows them"]),{dy:12});},{dy:24,d:0.9,from:0.96});
   m9_close(ctx,S);wc_paperOver(ctx,S);});
 
 /* ---------- 6. Past its limit ---------- */
@@ -3123,7 +3122,7 @@ scene("alert",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   // the oldest case's wait: past its limit (7 days, as in Who is it?) on Monday, at 0.4807 of its eased rise; back to two days once decided
   const t0=tAl-0.2,D=tTw+0.5-t0,up=ease(clamp((t-t0)/D,0,1)),dn=ease(clamp((t-tB+0.2)/1.0,0,1)),n=lerp(lerp(3,12,up),2,dn),tX=t0+0.4807*D,tBk=tB-0.2+0.3;
   m9_dash(ctx,t);for(let i=0;i<5;i++)m9_gauge(ctx,t,i,i===1?{n,g:{v:Math.round(n)+" days"},past:t<tBk?clamp((t-tX)/0.8,0,1):0,ok:t<tX?1:clamp((t-tBk-0.4)/0.8,0,1),lit:fin(t,tAl-0.3,0.5)*(1-fin(t,tW,0.6))}:{});
-  const [rx,ry]=m9_cell(5);m9_tool(ctx,rx+8,ry+10,398,160,"dbt","dbt",["writes and tests","the measures"]);m9_tool(ctx,rx+8,ry+182,398,160,"databricks","Databricks",["runs them nightly,","keeps them, shows them"]);
+  const [rx,ry]=m9_cell(5);m9_tool(ctx,rx+8,ry+10,398,160,"test","each measure",["has a test","for its limit"]);m9_tool(ctx,rx+8,ry+182,398,160,"platform","the platform",["works them out nightly,","keeps them, shows them"]);
   arrive(ctx,1580,198,t,tAl+0.3,()=>withA(ctx,1-fin(t,tW-0.4,0.5),()=>m9_alert(ctx,1320,100)),{dy:-20,d:0.7});
   // the case it points at comes forward over the dashboard, and goes back once it's decided; Mei, after the veil, stays clear on the phone
   const ca=fin(t,tW-0.3,0.5)*(1-fin(t,tB-0.4,0.6));m9_hush(ctx,0.72*ca);

@@ -375,10 +375,10 @@ knock(tSk + 0.05, 0.012, P(1150)); knock(tMq + 0.05, 0.012, P(880))
 
 # 5. The steward's iron bars: C major. Mei's name; the clean-up's board, back on her wall, and the badge; the dashboard set down and its
 #    gauges with it, everyday work; the iron bars laid across them as they're named, a soft clank each; each measure lit, its iron bar
-#    struck, a tubular bell rising through the chord, and its tick once it's read; the tutor's role, on the tutor's note, ringed and closed; the tools
+#    struck, a tubular bell rising through the chord, and its tick once it's read; the tutor's role, on the tutor's note, ringed and closed; the two cards
 #    set in the sixth place
 J = 'measures'; B = C(J, 'breath'); tPj, tEv, tIron = W(J, 'process', 'a project'), W(J, 'process', 'everyday work'), W(J, 'bars', 'iron bars')
-tTut, tAct, tT, tDbx = W(J, 'roles', 'like a tutor'), W(J, 'roles', 'still active'), C(J, 'tools'), W(J, 'tools', 'Databricks')
+tTut, tAct, tT, tPf = W(J, 'roles', 'like a tutor'), W(J, 'roles', 'still active'), C(J, 'nightly'), W(J, 'nightly', 'the platform')
 ts = [C(J, k) for k in ('dups', 'oldest', 'roles', 'source', 'requests')]; te = ts[1:] + [tT]
 CELLX = [287, 711, 1135, 287, 711, 1135]  # each place's middle across the dashboard
 bed([(S0(J), CMAJ9), (C(J, 'bars', -0.3), AM7), (ts[0] - 0.3, FMAJ9), (ts[2] - 0.3, DM9), (ts[3] - 0.3, G6), (tT - 0.3, CMAJ9), (B, E7SUS4)], E(J) + 1.0)
@@ -394,7 +394,7 @@ for i, m in enumerate((60, 64, 67, 71, 72)):
 role('tutor', tTut - 0.1, 0.026, P(1325)); knock(tTut, 0.012, P(1325))
 ring(tAct, 0.7, 0.015, P(1325))
 tick_(te[2] + 0.45, 0.014, P(1250))
-knock(tT + 0.3, 0.014, P(1343)); knock(tDbx + 0.3, 0.014, P(1343))
+knock(tT + 0.3, 0.014, P(1343)); knock(tPf + 0.3, 0.014, P(1343))
 
 # 6. Past its limit: A minor. The alert: the oldest case's iron bar struck, and the note a semitone above it; its gauge filling past its
 #    bar, a cross as it goes over; under it all, a low pulse; the case brought forward, its two records on the student's and the researcher's notes, a pencil round the birth dates;

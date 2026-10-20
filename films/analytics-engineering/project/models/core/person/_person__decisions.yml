@@ -1,0 +1,41 @@
+# Decisions about the person domain: what was decided, why, and who decided.
+# Permanent: a decision is never deleted; a replaced one is marked superseded and relates to
+# what replaced it. The schema is in requirements/README.md, and docs/decisions.md indexes
+# every log. Not parsed by dbt (.dbtignore).
+
+scope: {kind: domain, name: person, code: PER}
+
+decisions:
+
+  - id: DEC-PER-01
+    step: scope
+    title: The person is a domain of its own
+    text: The person, the roles they hold, how to reach them and the numbers they're known by are a data
+      domain of their own, person, owned by the registrar's office. It holds people only, so it's called
+      person, not party; organisations can join it later. The student, staff and research domains keep
+      their own roles.
+    why: One person can hold roles in several domains at once, each recorded in its own system. Kept in one
+      of those domains, the person can't be seen by the others; kept apart, every domain reads the same
+      person.
+    status: proposed
+    relates_to: [GAP-PER-01]
+
+  - id: DEC-PER-02
+    step: scope
+    title: The learner is a role
+    text: The learner stays in the student domain, defined as it is. It's the student role, a person
+      learning with the university; the person behind it is the person domain's.
+    why: The model had a learner and no person. Taking the learner for the person makes a graduate who comes
+      back to study, or a student who tutors, two people.
+    status: proposed
+    relates_to: [DEC-PER-01]
+
+  - id: DEC-PER-03
+    step: scope
+    title: A role is the record that grants it, with its own dates
+    text: Each role is keyed by the record that grants it (a student ID in an award, a contract, a place on a
+      project, an alumni record) and has its own start and end dates. A person can hold the same role many
+      times.
+    why: A casual tutor has a contract for each teaching period, and a researcher a place on each project.
+      One row per person and kind of role would lose the gaps between them, and what each was for.
+    status: proposed

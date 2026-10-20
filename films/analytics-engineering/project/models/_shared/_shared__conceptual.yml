@@ -17,6 +17,15 @@ max_entities: 50
 
 domains:
 
+  - name: person
+    owner: Registrar's office
+    reference: TCSI Student and Staff packets, extended
+    entities:
+      - {name: person, status: modelled, reference: "Extension: the person behind a TCSI student or staff member"}
+      - {name: role, status: modelled, reference: "Extension: student, staff member and applicant, as parts a person plays for a time"}
+      - {name: contact_point, status: modelled, reference: "Extension: how to reach a person, for a purpose"}
+      - {name: identifier, status: modelled, reference: "Student and staff identifiers, each with the system that issued it"}
+
   - name: student
     owner: Registrar's office
     reference: TCSI Student packet
@@ -60,7 +69,7 @@ domains:
       - {name: offer, status: planned, reference: Offer}
 
   - name: staff
-    owner: People and culture
+    owner: HR
     reference: TCSI Staff packet
     entities:
       - {name: staff_member, status: planned, reference: Staff}
@@ -114,3 +123,9 @@ relationships:
   - [unit_enrolment, charges, student_fee]
   - [student_fee, paid by, help_loan]
   - [learner, awarded, scholarship]
+  - [person, holds, role]
+  - [person, reached at, contact_point]
+  - [person, known by, identifier]
+  - [learner, is a, role]
+  - [applicant, is a, role]
+  - [staff_member, is a, role]

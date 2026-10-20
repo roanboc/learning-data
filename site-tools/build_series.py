@@ -116,8 +116,8 @@ SERIES = [
     dict(id="master-and-reference-data", dir="master-and-reference-data", slug="master-and-reference-data",
          name={"en": "The same one, everywhere", "es": "El mismo, en todas partes"}, builds_on=mr_builds_on,
          place={"en": "university", "es": "universidad"}, blocks=[],
-         marks={"en": "DAMA and DAMA-DMBOK are trademarks of DAMA International, and ArchiMate of The Open Group, named or drawn only to identify that body of knowledge and that notation. LakeFusion is a product name of its owner, named only as one example of a master data hub. This project is not affiliated with or endorsed by them.",
-                "es": "DAMA y DAMA-DMBOK son marcas de DAMA International, y ArchiMate de The Open Group, nombradas o dibujadas solo para identificar ese cuerpo de conocimiento y esa notación. LakeFusion es un nombre de producto de su titular, nombrado solo como un ejemplo de hub de datos maestros. Este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
+         marks={"en": "DAMA and DAMA-DMBOK are trademarks of DAMA International, and ArchiMate of The Open Group, named or drawn only to identify that body of knowledge and that notation. This project is not affiliated with or endorsed by them.",
+                "es": "DAMA y DAMA-DMBOK son marcas de DAMA International, y ArchiMate de The Open Group, nombradas o dibujadas solo para identificar ese cuerpo de conocimiento y esa notación. Este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
 ]
 for _S in SERIES:
     _S["root"] = ROOT / "films" / _S["dir"]

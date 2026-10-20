@@ -95,7 +95,8 @@ def mr_builds_on(lg, f, all_films, R):
 # trademarks its footer names, if not the Databricks and dbt logos; learn: the series' own labs and scenarios, for all its films,
 # if it has them (see series_learn below): dir, the folder under site/assets/ of their engine and words; bundle, the film whose
 # bundle their pages load for its parts (the newest film's if not given); coming, True to count and show those of the films still
-# being made (series.json's "coming") too;
+# being made (series.json's "coming") too; next: the id of the series to watch after this one, which its last film's page offers
+# (in Where next? and beside the series' films) once that series has a film on the site;
 # blocks: the hand-written pages that show its first film's card, between <!-- <id>: made by site-tools/build_series.py --> and
 # <!-- /<id> -->: (path under site/, language, "card", the path from that page to the site's root, and to the series' folder).
 # The series' place among the topics, and its card on the Topics and home pages, are in TOPICS below.
@@ -115,7 +116,7 @@ SERIES = [
                 "es": "TOGAF y ArchiMate son marcas de The Open Group, y Zachman de Zachman International, nombradas solo para identificar esos marcos; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
     dict(id="master-and-reference-data", dir="master-and-reference-data", slug="master-and-reference-data",
          name={"en": "The same one, everywhere", "es": "El mismo, en todas partes"}, builds_on=mr_builds_on,
-         place={"en": "university", "es": "universidad"}, blocks=[],
+         place={"en": "university", "es": "universidad"}, blocks=[], next="data-governance",
          marks={"en": "DAMA and DAMA-DMBOK are trademarks of DAMA International, and ArchiMate of The Open Group, named or drawn only to identify that body of knowledge and that notation. This project is not affiliated with or endorsed by them.",
                 "es": "DAMA y DAMA-DMBOK son marcas de DAMA International, y ArchiMate de The Open Group, nombradas o dibujadas solo para identificar ese cuerpo de conocimiento y esa notación. Este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
 ]
@@ -452,13 +453,26 @@ def builds_on(lg, f, all_films_, R):
     return f["series"]["builds_on"](lg, f, all_films_, R)
 
 
+def next_series(f):
+    """The series to watch after f's ("next" in SERIES), with its films on the site, if f is the last film its series plans and that
+    series has a film on the site; else None."""
+    S = f["series"]; ser = json.loads((S["root"] / "series.json").read_text())
+    if not S.get("next") or f["index"] + 1 < ser.get("planned", len(ser["films"])):
+        return None
+    after = next((x for x in SERIES if x["id"] == S["next"]), None)
+    shown = films(after)[1] if after else []
+    return (after, shown) if shown else None
+
+
 def series_nav(lg, f, films_, R, rel):
     """In the series: the previous and the next film, as cards, and every film of the series, numbered, with this one marked.
     rel is the path from the page to the series folder."""
     by = {x["index"]: x for x in films_}; prv, nxt = by.get(f["index"] - 1), by.get(f["index"] + 1)
     nm = lambda x: E(x["title"] if lg == "en" else x["site"]["title_es"])
+    after = None if nxt else next_series(f)  # the last film: the next series' first film
     cards = ([card(lg, prv, rel, R, kicker=f'← {T(lg, "Previous", "Anterior")} · {num(lg, prv)}')] if prv else []) + \
-            ([card(lg, nxt, rel, R, kicker=f'{T(lg, "Next", "Siguiente")} · {num(lg, nxt)} →')] if nxt else [])
+            ([card(lg, nxt, rel, R, kicker=f'{T(lg, "Next", "Siguiente")} · {num(lg, nxt)} →')] if nxt else []) + \
+            ([card(lg, after[1][0], f'{R if lg == "en" else R[3:]}{after[0]["slug"]}/', R, kicker=f'{T(lg, "Next series", "Siguiente serie")} · {SN(lg, after[0])} →')] if after else [])
     lis = "\n".join(f'<li><a href="{rel}{x["key"]}/"' + (' aria-current="page"' if x is f else "") + f'><span class="n">{x["index"] + 1}</span>{nm(x)}</a></li>' for x in films_)
     return (f'<section class="module" id="in-the-series" aria-labelledby="series-h">\n<div class="mhead"><div><h2 id="series-h">{T(lg, "In the series", "En la serie")}: <a href="{rel}">{SN(lg, f["series"])}</a></h2>'
             f'<p>{num(lg, f)}.</p></div></div>\n'
@@ -515,7 +529,9 @@ def film_page(lg, f, films_, series):
     meta = (f'<p class="meta-row"><span>{f["len"]} min</span>{extra}<span>Pause and think</span><span>English captions</span></p>' if lg == "en" else
             f'<p class="meta-row"><span>{f["len"]} min</span>{extra}<span>Pausa para pensar</span><span>En inglés, con subtítulos en español</span></p>')
     nm = lambda x: E(x["title"] if lg == "en" else x["site"]["title_es"])
+    after = None if nxt else next_series(f)  # the last film: the series to watch next, once it's on the site
     third = (f'<a class="btn" href="../{nxt["key"]}/">{T(lg, "Next in the series", "Sigue en la serie")}: {nm(nxt)}</a>' if nxt else
+             f'<a class="btn" href="{R if lg == "en" else R[3:]}{after[0]["slug"]}/">{T(lg, "Next series", "Siguiente serie")}: {SN(lg, after[0])}</a>' if after else
              f'<a class="btn" href="../">{T(lg, "The whole series", "Toda la serie")}: {SN(lg, S)}</a>')
     player = (f'<div class="player" data-labs="{"labs/" if learn else "../labs/" if SL else ""}">\n<audio id="snd" preload="metadata" src="{R}assets/{key}/soundtrack.mp3"></audio><div class="poster"><img src="{R}assets/{key}-poster.jpg" alt="" width="1280" height="720" data-play>'
               f'<div class="poster-cta"><button type="button" class="play-badge" data-play>{T(lg, "▶ Play the film", "▶ Ver la película")} · {f["len"]} min</button><button type="button" class="think-badge" data-think>{T(lg, "Play with pauses to think", "Ver con pausas para pensar")}</button></div></div>'

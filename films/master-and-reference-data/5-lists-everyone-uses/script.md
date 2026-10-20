@@ -170,10 +170,12 @@ The example project is *In the weeds of data crafting*'s dbt project, in `films/
 | The two tests that type the statuses | `seeds/reference/student/_student__seeds.yml` lines 29–32 and `models/core/student/_core_student__models.yml` lines 80–86 |
 | The statuses' owner, the registrar's office | `seeds/reference/student/_student__seeds.yml` line 10 (`owner: "Mei Tanaka, registrar's office"`) |
 | The statuses as a table, `learner_status`, with labels, an owner and dates, and the relationships test that reads it | New: the series adds it to the project |
-| Role types, identifier types, relationship types and consent purposes, and each system's names mapped to them | New: lists the series adds to the project |
+| The role types and their owners: student, the registrar's office; tutor, HR; researcher, the research office; alumni, the alumni office | `models/core/person/_person__conceptual.yml` lines 61–72, the person domain's kinds of role, a draft for their owners to approve. The film leaves out applicant (lines 58–60), and its labels and dates are its own. |
+| The role types as a table, identifier types, relationship types and consent purposes, and each system's names mapped to them | New: lists the series adds to the project |
 | Countries copied from ISO 3166 every month | New: a scheduled copy the series adds |
-| The award's definition, copied from the glossary with its source | `models/core/course/_course__conceptual.yml` lines 18–30, under decision DEC-PRJ-11 (`models/_shared/_shared__decisions.yml` line 125, `docs/decisions.md` line 73). The film shortens it: it cuts the definition short and leaves out the owner, the business key, the history, and the source's `glossary` and `named_by` lines. |
-| E-4417, R-3082, the HR, payroll and research office systems | New: the small sources *One person, many roles* adds to the project |
+| The award's definition, copied from the glossary with its source | `models/core/course/_course__conceptual.yml` lines 18–30, under decision DEC-PRJ-11 (`models/_shared/_shared__decisions.yml` line 125, `docs/decisions.md` line 77). The film shortens it: it cuts the definition short and leaves out the owner, the business key, the history, and the source's `glossary` and `named_by` lines. |
+| Her role's three names: HR's Casual Academic, payroll's CAS and the learning platform's tutor | `data/hr_system/contracts.csv` lines 3–7, 9, 11 and 13, Linh's eight contracts: `position_type` Casual Academic, `position_title` Tutor and `pay_type` CAS. The project has no payroll system of its own: payroll reads the contracts' `pay_type`. Its learning platform holds no tutor role, so the platform's tutor is the film's own. |
+| `E-4417` with Vietnam at HR, `R-3082` with VN at the research office, and Viet Nam in the student system | `data/hr_system/staff.csv` line 3 and `data/research_system/researchers.csv` line 4, each in `country_of_birth`. The project's student system holds no country of birth, so its Viet Nam is the film's own. |
 | The census report and the fees dashboard; the counts 214, 61, 18 and 293 | Invented for the film |
 
 ## Rigour to check before recording

@@ -99,7 +99,7 @@ def render_key_sets():
     out = io.StringIO()
     writer = csv.writer(out, lineterminator="\n")
     writer.writerow(["key_set", "system_name", "owner"])
-    for key_set in key_sets.values():
+    for key_set in sorted(key_sets.values(), key=lambda key_set: str(key_set.get("since", ""))):
         writer.writerow([one_line(key_set[field]) for field in ("code", "system", "owner")])
     return out.getvalue()
 

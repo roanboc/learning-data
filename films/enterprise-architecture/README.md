@@ -19,8 +19,9 @@ A new enterprise architect, Tomás, joins a publicly owned energy utility and do
 | [Who does it, and where meaning changes](https://roanboc.github.io/learning-data/enterprise-architecture/who-does-it/) | Actors, roles and domains | 6 min | 10 | 3 questions | [script](6-who-does-it/script.md) · [source](6-who-does-it/source/README.md) |
 | [Today, and where it's going](https://roanboc.github.io/learning-data/enterprise-architecture/today-and-where-its-going/) | Applications, technology and the path to a target | 5 min | 10 | 3 questions | [script](7-today-and-where-its-going/script.md) · [source](7-today-and-where-its-going/source/README.md) |
 | [Now the questions appear](https://roanboc.github.io/learning-data/enterprise-architecture/now-the-questions-appear/) | Decisions, questions and measures | 6 min | 11 | 3 questions | [script](8-now-the-questions-appear/script.md) · [source](8-now-the-questions-appear/source/README.md) |
+| [Rules with a home](https://roanboc.github.io/learning-data/enterprise-architecture/rules-with-a-home/) | Objects, owners and rules | 8 min | 12 | 4 questions | [script](9-rules-with-a-home/script.md) · [source](9-rules-with-a-home/source/README.md) |
 
-For the whole series, on the site: [12 labs](https://roanboc.github.io/learning-data/enterprise-architecture/labs/) and [25 scenarios](https://roanboc.github.io/learning-data/enterprise-architecture/scenarios/), in English and Spanish, from the words in [site/assets/enterprise-architecture/](../../site/assets/enterprise-architecture/).
+For the whole series, on the site: [12 labs](https://roanboc.github.io/learning-data/enterprise-architecture/labs/) and [26 scenarios](https://roanboc.github.io/learning-data/enterprise-architecture/scenarios/), in English and Spanish, from the words in [site/assets/enterprise-architecture/](../../site/assets/enterprise-architecture/).
 <!-- /films -->
 
 ## The look and the sound
@@ -28,7 +29,7 @@ For the whole series, on the site: [12 labs](https://roanboc.github.io/learning-
 - **Two materials.** Drafts are paper: canvases and sticky notes on a wall, slightly crooked. The confirmed model is glass, in the colours architects conventionally give the layers. A note that moves from the wall to the model changes material.
 - **People.** Tomás, outlined in cyan (the technical side); the people who own parts of the business, outlined in gold, starting with Grace, who owns network operations, Farah, the customer advocate, and Ama, the regulatory lead.
 - **Made to read on a phone.** Text is at least 28 px in the 1920-pixel frame (about 12 px on a phone held sideways), the camera moves in on the part of a canvas being talked about, and the player's captions grow as it shrinks (the shared engine does this for every film). `tools/legible.py` checks every frame.
-- **Its own sound.** Nylon-string plucks and a soft flute over warm pads, a lute for the past, and its own four-note mark, rising 1-3-5-8. Nothing loops, and every effect is something appearing on screen.
+- **Its own sound.** Nylon-string plucks and a soft flute over warm pads, a lute for the past, and its own four-note mark, rising 1-3-5-8. Nothing loops, and every effect is something appearing on screen. From *Rules with a home* (20 October 2026), the music plays as it does in the master data films: under the opening story, then only at a chapter's turn, a moment on screen or a wordless pause, never as a constant bed, with no urgent pulse and one voice per note, so nothing beats on a phone's speaker. Each film's `tools/quiet.py`, a copy of the master data films' check kept in the film's own folder, checks it.
 
 ## How the films are made
 

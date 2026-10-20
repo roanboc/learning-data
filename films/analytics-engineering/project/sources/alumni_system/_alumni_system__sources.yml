@@ -1,0 +1,40 @@
+sources:
+  - name: alumni_system
+    description: '{{ doc("source_alumni_system") }}'
+    database: "{{ env_var('DBT_SOURCES_CATALOG', target.database) }}"
+    schema: "{{ env_var('DBT_SOURCES_SCHEMA_PREFIX', '') }}alumni_system"
+    config:
+      # Read by dbt-duckdb only: on DuckDB each table is a CSV file in data/. Databricks reads the ingested table.
+      external_location: "read_csv('data/alumni_system/{name}.csv', header = true, all_varchar = true)"
+      # on DuckDB the column is text; on Databricks the cast does nothing
+      loaded_at_field: "cast(_loaded_at as timestamp)"
+      freshness:
+        warn_after: {count: 2, period: day}
+        error_after: {count: 7, period: day}
+      meta:
+        owner: Alumni office
+        key_set:
+          code: ALU
+          system: alumni system
+          owner: Alumni office
+          # The day the project first read this system's keys: the key sets seed lists them in that order.
+          since: 2026-10-20
+          # Each key the system issues, and the case staging writes it in (docs/conventions.md).
+          system_keys:
+            - {key: alumni_id, case: upper, example: A-61207}
+          example: ALU|A-61207
+    tables:
+      - name: alumni
+        description: One row per version of a graduate's record. The system key is the alumni ID.
+        config:
+          meta:
+            system_key: [alumni_id]
+        columns:
+          - name: alumni_id
+            description: The alumni ID the alumni office issues, like A-61207.
+          - name: student_id
+            description: >
+              The student ID the graduate graduated under, from the student system's list of
+              graduates. The alumni office isn't told of a later one.
+          - name: graduated_on
+            description: The day the award was conferred, from the student system's list of graduates.

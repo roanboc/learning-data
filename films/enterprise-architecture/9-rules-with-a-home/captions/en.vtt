@@ -117,50 +117,59 @@ Completeness, from its steps: every estimate replaced, or explained. Validity, f
 00:04:52.930 --> 00:05:01.333
 Written in a set form, a rule says what it applies to, what must be true, its owner, its reason, its home, and what happens when it fails.
 
-00:05:02.833 --> 00:05:10.473
-Its checks are generated from it, one way: a dbt test, a data contract's quality rule, a shape for linked data.
+00:05:02.833 --> 00:05:09.995
+A rule about the data, such as every reading marked actual or estimated, gets tests: they check the data is right.
 
-00:05:11.773 --> 00:05:13.592
+00:05:11.295 --> 00:05:18.356
+They're generated from it, one way: a dbt test, a data contract's quality rule, a shape for linked data.
+
+00:05:19.856 --> 00:05:21.675
 Nobody edits a check by hand.
 
-00:05:14.892 --> 00:05:18.197
-They check what the rule promises, not whether a job ran.
+00:05:22.975 --> 00:05:29.122
+Retail's rule is about what the business does: the data can all be right while a bill goes uncorrected.
 
-00:05:19.297 --> 00:05:23.211
-The first uncorrected bill would have shown up the morning after the move.
+00:05:30.922 --> 00:05:36.788
+So a tracking table is generated from it instead, listing every bill not corrected on the next bill.
 
-00:05:24.811 --> 00:05:28.390
-When a check fails, it tells the owner's team, not a mailbox.
+00:05:38.388 --> 00:05:41.752
+It tracks what the rule promises, not whether a job ran.
 
-00:05:31.890 --> 00:05:37.990
+00:05:43.052 --> 00:05:47.074
+The first uncorrected bill would have been listed the morning after the move.
+
+00:05:48.674 --> 00:05:52.701
+Each morning, the list goes to the owner's team, not a shared mailbox.
+
+00:05:56.201 --> 00:06:02.301
 Written like this, the concepts, how they relate, and the rules about them are, generally, an ontology.
 
-00:05:38.690 --> 00:05:42.387
+00:06:03.001 --> 00:06:06.698
 It's ready for OWL, a language machines reason with.
 
-00:05:43.987 --> 00:05:51.687
+00:06:08.298 --> 00:06:15.998
 As the film Meaning machines can read shows, the glossary, the models, the ontology and the checks are all views of that one map.
 
-00:05:53.187 --> 00:05:59.859
+00:06:17.498 --> 00:06:24.170
 But OWL reasons only from what is said. To it, a correction that never happened is simply unknown.
 
-00:06:00.559 --> 00:06:03.487
-Finding the uncorrected bill stays the checks' job.
+00:06:24.870 --> 00:06:28.627
+Finding the uncorrected bill stays the tracking table's job.
 
-00:06:07.187 --> 00:06:13.628
+00:06:32.327 --> 00:06:38.768
 The household gets a hundred and forty-four dollars forty back, and the nineteen hundred bills are found and corrected.
 
-00:06:14.328 --> 00:06:17.129
+00:06:39.468 --> 00:06:42.269
 Grace and the head of retail confirm their rules.
 
-00:06:18.529 --> 00:06:22.233
+00:06:43.669 --> 00:06:47.373
 In Tartu, the benefit is paid, and nobody was asked twice.
 
-00:06:23.833 --> 00:06:30.062
+00:06:48.973 --> 00:06:55.202
 Tomás's note has an answer: each rule belongs in the map, written once, at the step where it applies.
 
-00:06:30.762 --> 00:06:34.691
+00:06:55.902 --> 00:06:59.831
 Each has an owner and a reason, and its checks are generated from it.
 
-00:06:36.291 --> 00:06:41.251
+00:07:01.431 --> 00:07:06.391
 Rules hold while the organisation holds still. Next: when strategy moves.

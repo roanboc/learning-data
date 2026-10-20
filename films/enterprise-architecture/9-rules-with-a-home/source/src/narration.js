@@ -47,19 +47,22 @@ const NARR={
  {"id":"inside","gap":0.8,"text":"Attached, not inside: a rule isn't the process."},
  {"id":"time","gap":0.8,"text":"The step also says what to expect of the data. Timeliness, from its service level: an estimate replaced within two working days."},
  {"id":"comp","gap":0.8,"text":"Completeness, from its steps: every estimate replaced, or explained. Validity, from another rule: every reading marked actual or estimated."}]},
-"checks":{"name":"Written once, checked everywhere","lead":1.2,"tail":1.0,"vo":[
+"checks":{"name":"Test the data, track the business","lead":1.2,"tail":1.0,"vo":[
  {"id":"form","gap":0.8,"text":"Written in a set form, a rule says what it applies to, what must be true, its owner, its reason, its home, and what happens when it fails."},
- {"id":"gen","gap":0.8,"text":"Its checks are generated from it, one way: a dbt test, a data contract's quality rule, a shape for linked data."},
+ {"id":"data","gap":0.8,"text":"A rule about the data, such as every reading marked actual or estimated, gets tests: they check the data is right."},
+ {"id":"gen","gap":0.8,"text":"They're generated from it, one way: a dbt test, a data contract's quality rule, a shape for linked data."},
  {"id":"hand","gap":0.8,"text":"Nobody edits a check by hand."},
- {"id":"promise","gap":0.8,"text":"They check what the rule promises, not whether a job ran."},
- {"id":"first","gap":0.8,"text":"The first uncorrected bill would have shown up the morning after the move."},
- {"id":"team","gap":0.8,"text":"When a check fails, it tells the owner's team, not a mailbox."}]},
+ {"id":"biz","gap":0.8,"text":"Retail's rule is about what the business does: the data can all be right while a bill goes uncorrected."},
+ {"id":"track","gap":0.8,"text":"So a tracking table is generated from it instead, listing every bill not corrected on the next bill."},
+ {"id":"promise","gap":0.8,"text":"It tracks what the rule promises, not whether a job ran."},
+ {"id":"first","gap":0.8,"text":"The first uncorrected bill would have been listed the morning after the move."},
+ {"id":"team","gap":0.8,"text":"Each morning, the list goes to the owner's team, not a shared mailbox."}]},
 "onto":{"name":"Generally, an ontology","lead":1.0,"tail":1.0,"vo":[
  {"id":"onto","gap":0.8,"text":"Written like this, the concepts, how they relate, and the rules about them are, generally, an ontology."},
  {"id":"owl","gap":0.8,"text":"It's ready for OWL, a language machines reason with."},
  {"id":"views","gap":0.8,"text":"As the film Meaning machines can read shows, the glossary, the models, the ontology and the checks are all views of that one map."},
  {"id":"open","gap":0.8,"text":"But OWL reasons only from what is said. To it, a correction that never happened is simply unknown."},
- {"id":"job","gap":0.8,"text":"Finding the uncorrected bill stays the checks' job."}]},
+ {"id":"job","gap":0.8,"text":"Finding the uncorrected bill stays the tracking table's job."}]},
 "end":{"name":"Back in Tartu","lead":1.0,"tail":1.0,"vo":[
  {"id":"refund","gap":0.8,"text":"The household gets a hundred and forty-four dollars forty back, and the nineteen hundred bills are found and corrected."},
  {"id":"confirm","gap":0.8,"text":"Grace and the head of retail confirm their rules."},

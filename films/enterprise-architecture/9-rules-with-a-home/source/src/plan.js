@@ -274,20 +274,22 @@ function d9_reqGlyph(ctx,x,y,s,col){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.l
 // an element of the model, with a requirement's glyph where archEl puts its own
 function d9_el(ctx,x,y,w,h,name,col,kind,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const own=kind==="requirement";archEl(ctx,x,y,w,h,name,col,own?"none":kind,o);
   if(own){const gs=o.gs||13;withA(ctx,a,()=>d9_reqGlyph(ctx,x+w-gs-13,y+gs+9,gs,col));}}
+// what kind of rule an id is: RUL-020 is about the data itself; the network's and retail's are about what the business does
+const d9_kind=id=>id&&id!=="RUL-020"?"business rule":"data rule";
 // A data rule, as the series draws one from here on: dark glass with motivation's purple edge, ArchiMate's requirement glyph, a
 // stripe in the colour of the side it belongs to, and its id in a monospaced kicker. o.p writes its words; o.hi lights it; o.ink: its
 // words' colour; o.deco: drawn small on purpose. Returns its height.
 function d9_rule(ctx,x,y,w,id,text,side,o){o=o||{};const a=o.a==null?1:o.a,sz=o.size||30,ls=wrapT(ctx,text,0,0,w-76,{size:sz,w:700,measure:true}),h=86+ls.length*sz*1.25;if(a<=0.01)return h;
   withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,MOT,{glow:14+14*(o.hi||0),ea:0.85,fill:"rgba(9,8,22,0.95)"});
     if(side){ctx.fillStyle=rgba(side,0.95);rr(ctx,x+9,y+14,7,h-28,3.5);ctx.fill();}
-    d9_reqGlyph(ctx,x+w-36,y+36,16,MOT);T(ctx,"data rule"+(id?" · "+id:""),x+34,y+46,{f:"mono",w:500,size:28,color:rgba(MOT,1),deco:o.deco});
+    d9_reqGlyph(ctx,x+w-36,y+36,16,MOT);T(ctx,d9_kind(id)+(id?" · "+id:""),x+34,y+46,{f:"mono",w:500,size:28,color:rgba(MOT,1),deco:o.deco});
     let left=text.length*(o.p==null?1:o.p);ls.forEach((l,i)=>{const s_=l.slice(0,Math.max(0,Math.min(l.length,Math.round(left))));left-=l.length+1;T(ctx,s_,x+34,y+90+i*sz*1.25,{w:700,size:sz,color:o.ink||rgba(INK,0.97),deco:o.deco});});});return h;}
 // The rule in a set form: its kicker, then a row for each part, a label in mono and its value. rows: [label, value, colour, kind];
 // kind "owner" puts ArchiMate's actor before the value. o.r[i] (0..1) brings in row i; o.hiRow lights one; o.tick: the owner's
 // gold tick. Returns its height.
 function d9_ruleForm(ctx,x,y,w,id,rows,o){o=o||{};const a=o.a==null?1:o.a,side=o.side||D9_RET,rh=o.rh||100,h=104+rows.length*rh;if(a<=0.01)return h;
   withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,MOT,{glow:14+14*(o.hi||0),ea:0.85,fill:"rgba(9,8,22,0.96)"});ctx.fillStyle=rgba(side,0.95);rr(ctx,x+9,y+16,7,h-32,3.5);ctx.fill();
-    d9_reqGlyph(ctx,x+w-40,y+42,18,MOT);T(ctx,"data rule · "+id,x+36,y+60,{f:"mono",w:500,size:32,color:rgba(MOT,1)});
+    d9_reqGlyph(ctx,x+w-40,y+42,18,MOT);T(ctx,d9_kind(id)+" · "+id,x+36,y+60,{f:"mono",w:500,size:32,color:rgba(MOT,1)});
     rows.forEach(([lab,val,col,kind],i)=>{const q=o.r?clamp(o.r[i]||0,0,1):1;if(q<=0.01)return;const ry=y+92+i*rh;withA(ctx,q,()=>{
       if(o.hiRow===i){ctx.save();ctx.fillStyle=rgba(col,0.1);rr(ctx,x+22,ry+6,w-44,rh-10,10);ctx.fill();ctx.restore();}
       ctx.strokeStyle="rgba(200,186,255,0.16)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+30,ry);ctx.lineTo(x+w-24,ry);ctx.stroke();
@@ -360,7 +362,8 @@ function d9_readings(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=56,h=86+D9_
   dbGlyph(ctx,x+36,y+44,D9_NET,0.7);T(ctx,"meter readings",x+64,y+52,{w:800,size:30,color:rgba(D9_NET,1)});
   D9_ROWS.forEach(([pt,day,kind],i)=>{const yy=y+82+i*rh,hi=o.hi?o.hi[i]||0:0;if(hi>0.01){ctx.fillStyle=rgba(kind==="actual"?D9_OK:[255,196,110],0.16*hi);rr(ctx,x+12,yy,w-24,rh-8,8);ctx.fill();}
     T(ctx,pt,x+28,yy+34,{f:"mono",w:500,size:20,color:rgba(SOFT,0.8),deco:1});T(ctx,day,x+178,yy+34,{f:"mono",w:500,size:20,color:rgba(SOFT,0.8),deco:1});
-    T(ctx,kind,x+w-28,yy+36,{f:"mono",w:500,size:28,align:"right",color:rgba(kind==="actual"?D9_OK:[255,196,110],1)});});
+    T(ctx,kind,x+w-28,yy+36,{f:"mono",w:500,size:28,align:"right",color:rgba(kind==="actual"?D9_OK:[255,196,110],1)});
+    if(o.ok>0)tick_(ctx,x+w-196,yy+26,26,D9_OK,clamp(o.ok*D9_ROWS.length-i,0,1));});
   (o.pairs||[]).forEach(([e,b],k)=>{const q=o.pp?clamp(o.pp[k]||0,0,1):1;if(q<=0)return;const y0=y+82+e*rh+24,y1=y+82+b*rh+24,bx=x+w+14;ctx.save();ctx.strokeStyle=rgba([255,220,140],0.9);ctx.lineWidth=2.5;ctx.lineCap="round";
     ctx.beginPath();ctx.moveTo(bx-10,y0);ctx.lineTo(bx,y0);ctx.lineTo(bx,lerp(y0,y1,ease(q)));if(q>0.95)ctx.lineTo(bx-10,y1);ctx.stroke();ctx.restore();});});return h;}
 // a queue of bills to be corrected: a tray, its bills stacked, o.n of them; o.dead (0..1) greys it: nothing reads it
@@ -439,10 +442,11 @@ function d9_chev(ctx,x,y,w,h,label,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01
     path();ctx.fillStyle=rgba(STR,0.13+0.1*(o.hi||0));ctx.fill();ctx.strokeStyle=rgba(STR,0.9);ctx.lineWidth=2.4+1.5*(o.hi||0);path();ctx.stroke();
     archGlyph(ctx,"stream",x+(o.first?32:n+24),y+28,12,STR);
     T(ctx,label,o.lx==null?x+(o.first?w/2-n/4:w/2+n/4):o.lx,o.ly==null?y+h/2+sz*0.36:o.ly,{w:800,size:sz,align:"center",color:rgba(INK,0.96),deco:o.deco});});}
-// a data rule folded to its id, for when it's there but isn't the subject; returns its width
-function d9_rulePill(ctx,cx,cy,id,side,o){o=o||{};const a=o.a==null?1:o.a,s="data rule · "+id,w=tw(ctx,s,28,500,"mono")+100,h=58;if(a<=0.01)return w;withA(ctx,a,()=>{
+// a rule folded to its kind and id, for when it's there but isn't the subject (its kind names it a rule, so it needs no glyph);
+// returns its width
+function d9_rulePill(ctx,cx,cy,id,side,o){o=o||{};const a=o.a==null?1:o.a,s=d9_kind(id)+" · "+id,w=tw(ctx,s,28,500,"mono")+52,h=58;if(a<=0.01)return w;withA(ctx,a,()=>{
   glass(ctx,cx-w/2,cy-h/2,w,h,14,MOT,{glow:12+14*(o.hi||0),ea:0.85,fill:"rgba(9,8,22,0.95)"});ctx.fillStyle=rgba(side,0.95);rr(ctx,cx-w/2+9,cy-h/2+12,6,h-24,3);ctx.fill();
-  T(ctx,s,cx-w/2+30,cy+10,{f:"mono",w:500,size:28,color:rgba(MOT,1),deco:o.deco});d9_reqGlyph(ctx,cx+w/2-36,cy,15,MOT);});return w;}
+  T(ctx,s,cx-w/2+30,cy+10,{f:"mono",w:500,size:28,color:rgba(MOT,1),deco:o.deco});});return w;}
 // the step's own steps, as business processes: an estimate, then replaced or explained; p brings them in, left to right
 function d9_steps(ctx,x,cy,p,o){o=o||{};if(p<=0.01)return;let X=x;const q=i=>clamp(p*5-i,0,1),pill=(s,a)=>{const w=tw(ctx,s,28,700)+36;withA(ctx,a,()=>{glass(ctx,X,cy-23,w,46,23,BUS,{glow:8+12*(o.hi||0),ea:0.8,fill:"rgba(20,18,6,0.94)"});T(ctx,s,X+18,cy+10,{w:700,size:28,color:rgba(BUS,1)});});X+=w;};
   pill("estimate",q(0));withA(ctx,q(1),()=>{ctx.save();ctx.strokeStyle=rgba(BUS,0.9);ctx.lineWidth=2.6;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(X+10,cy);ctx.lineTo(X+40,cy);ctx.moveTo(X+31,cy-8);ctx.lineTo(X+40,cy);ctx.lineTo(X+31,cy+8);ctx.stroke();ctx.restore();});X+=50;
@@ -457,18 +461,24 @@ function d9_expect(ctx,x,y,w,h,dim,src,text,g,o){o=o||{};const a=o.a==null?1:o.a
 function d9_src(ctx,g,x,y,a){if(a<=0.01)return;withA(ctx,a,()=>{if(g==="clock")d9_clock(ctx,x,y,30,MOT);else if(g==="requirement")d9_reqGlyph(ctx,x,y,22,MOT);else archGlyph(ctx,"process",x,y,26,BUS);});}
 
 /* ---------- written once, checked everywhere ---------- */
-// The checks generated from retail's rule, as each tool writes them: [title, lines]. Its id stands out in purple wherever it appears.
-const D9_GEN=[["dbt test",["data_tests:","  - rul_022_corrected_on_next_bill:","      config: {severity: error,","               meta: {rule_id: RUL-022}}"]],
-  ["data contract · quality rule",["quality:","  - id: RUL-022","    dimension: consistency","    severity: error"]],
-  ["shape for linked data",["ex:RUL-022 a sh:NodeShape ;","  sh:targetClass ex:Bill ;","  sh:sparql ex:correctedOnNextBill ;","  sh:severity sh:Violation ."]]];
+// The tests generated from the data rule, RUL-020, as each tool writes its check that a reading's mark, its kind, is one of the two
+// the readings hold: [title, lines]. Its id stands out in purple wherever it appears. (Each also requires the mark: the column can't
+// be empty.)
+const D9_GEN=[["dbt test",["data_tests:","  - accepted_values:","      arguments: {values: [actual, estimate]}","      config: {meta: {rule_id: RUL-020}}"]],
+  ["data contract · quality rule",["- id: RUL-020","  metric: invalidValues","  arguments: {validValues: [actual, estimate]}","  mustBe: 0"]],
+  ["shape for linked data",["ex:RUL-020 a sh:NodeShape ;","  sh:targetClass ex:Reading ;","  sh:property [ sh:path ex:kind ;",'    sh:in ( "actual" "estimate" ) ] .']]];
+// and the tracking table generated from retail's rule, RUL-022, a model like any other: the bills the rule applies to that the next
+// bill didn't correct, each with the rule's id and its owner's team, who work through it each morning
+const D9_TRK=["select bill_id, next_bill_id,","       'RUL-022' as rule_id,","       'billing team' as owner","  from bills_on_replaced_estimates"," where not corrected_on_next_bill"];
 // a padlock
 function d9_lock(ctx,x,y,s,col){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.fillStyle=rgba(col,1);ctx.lineWidth=Math.max(1.6,s*0.15);ctx.beginPath();ctx.arc(x,y-s*0.18,s*0.36,Math.PI,0);ctx.stroke();rr(ctx,x-s*0.55,y-s*0.18,s*1.1,s*0.78,s*0.12);ctx.fill();ctx.restore();}
-// a line of code, in mono, with the rule's id in purple
-function d9_code(ctx,s,x,y,col){const parts=s.split("RUL-022");let X=x;parts.forEach((p,i)=>{if(p){T(ctx,p,X,y,{f:"mono",w:500,size:28,color:col});X+=tw(ctx,p,28,500,"mono");}
-  if(i<parts.length-1){T(ctx,"RUL-022",X,y,{f:"mono",w:700,size:28,color:rgba(MOT,1)});X+=tw(ctx,"RUL-022",28,700,"mono");}});}
+// a line of code, in mono, with a rule's id in purple
+function d9_code(ctx,s,x,y,col){let X=x;s.split(/(RUL-0[0-9][0-9])/).forEach(p=>{if(!p)return;const id=/^RUL-0[0-9][0-9]$/.test(p);
+  T(ctx,p,X,y,{f:"mono",w:id?700:500,size:28,color:id?rgba(MOT,1):col});X+=tw(ctx,p,28,id?700:500,"mono");});}
 // a check generated from a rule, as a card of code: its title, a padlock with "generated", and its lines (o.p types them); o.lock
-// (0..1) reddens the padlock, for a hand that tries to edit it
+// (0..1) reddens the padlock, for a hand that tries to edit it; o.hiLine lights one line, by o.hl (0..1)
 function d9_gen(ctx,x,y,w,h,title,lines,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,TECH,{glow:12+14*(o.hi||0),ea:0.85,fill:"rgba(6,10,20,0.96)"});
+  if(o.hl>0.01){ctx.save();ctx.fillStyle=rgba(D9_RET,0.16*o.hl);rr(ctx,x+16,y+100+o.hiLine*34-27,w-32,36,8);ctx.fill();ctx.restore();}
   T(ctx,title,x+30,y+48,{w:800,size:30,color:rgba(mix(TECH,INK,0.45),1)});const lc=mix([150,166,190],D9_RED,o.lock||0),gw=tw(ctx,"generated",28,500,"mono");
   if(o.lock>0.01)glow(ctx,x+w-gw-60,y+40,40,D9_RED,0.6*o.lock);d9_lock(ctx,x+w-gw-60,y+40,24,lc);T(ctx,"generated",x+w-gw-28,y+50,{f:"mono",w:500,size:28,color:rgba(lc,1)});
   let left=lines.join(" ").length*(o.p==null?1:clamp(o.p,0,1));lines.forEach((l,i)=>{const s_=l.slice(0,Math.max(0,Math.min(l.length,Math.round(left))));left-=l.length+1;if(s_)d9_code(ctx,s_,x+30,y+100+i*34,rgba(mix(TECH,INK,0.25),0.95));});});}
@@ -482,17 +492,22 @@ function d9_res(ctx,x,y,r,ok,col,a){if(a<=0.01)return;withA(ctx,a,()=>{glow(ctx,
 // the sun, for a morning
 function d9_sun(ctx,x,y,r,col){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.fillStyle=rgba(col,1);ctx.lineWidth=2.4;ctx.lineCap="round";ctx.beginPath();ctx.arc(x,y,r*0.42,0,TAU);ctx.fill();
   for(let i=0;i<8;i++){const an=i*TAU/8;ctx.beginPath();ctx.moveTo(x+Math.cos(an)*r*0.66,y+Math.sin(an)*r*0.66);ctx.lineTo(x+Math.cos(an)*r,y+Math.sin(an)*r);ctx.stroke();}ctx.restore();}
-// a pill with a glyph and a label: kind "mail" (an envelope) or "team" (ArchiMate's actor); returns its width
+// a pill with a glyph and a label: kind "mail" (an envelope), "team" (ArchiMate's actor), "ok" (a tick, for a test that passes) or
+// "table" (a small table, for a tracking table); returns its width
 function d9_pill(ctx,cx,cy,label,col,kind,o){o=o||{};const a=o.a==null?1:o.a,w=tw(ctx,label,30,700)+(kind?86:44),h=58;if(a<=0.01)return w;withA(ctx,a,()=>{glass(ctx,cx-w/2,cy-h/2,w,h,h/2,col,{glow:10+14*(o.hi||0),ea:0.85,fill:"rgba(10,12,22,0.94)"});
   const gx=cx-w/2+36;if(kind==="mail"){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=2.4;ctx.lineJoin="round";rr(ctx,gx-15,cy-11,30,22,3);ctx.stroke();ctx.beginPath();ctx.moveTo(gx-15,cy-10);ctx.lineTo(gx,cy+2);ctx.lineTo(gx+15,cy-10);ctx.stroke();ctx.restore();}
-  else if(kind==="team")archGlyph(ctx,"actor",gx,cy-2,14,col);T(ctx,label,cx-w/2+(kind?64:22),cy+11,{w:700,size:30,color:rgba(col,1)});});return w;}
+  else if(kind==="team")archGlyph(ctx,"actor",gx,cy-2,14,col);
+  else if(kind==="ok")tick_(ctx,gx,cy+1,26,D9_OK,1);
+  else if(kind==="table"){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=2.2;rr(ctx,gx-16,cy-13,32,26,3);ctx.stroke();ctx.beginPath();ctx.moveTo(gx-16,cy-4);ctx.lineTo(gx+16,cy-4);
+    ctx.moveTo(gx-16,cy+5);ctx.lineTo(gx+16,cy+5);ctx.moveTo(gx-4,cy-13);ctx.lineTo(gx-4,cy+13);ctx.stroke();ctx.restore();}
+  T(ctx,label,cx-w/2+(kind?64:22),cy+11,{w:700,size:30,color:rgba(col,1)});});return w;}
 
 /* ---------- generally, an ontology ---------- */
 // The concepts, as the map holds them: [id, label, x, y]; how they relate: [from, to, label, where the label sits]; the rules about
 // them: [id, concept, x, y]. Then one bill, as facts: what was said about it, and the correction nobody said.
-const D9_ON=[["cp","connection point",260,330],["rd","reading",820,330],["bl","bill",1360,330],["ac","actual reading",580,590],["es","estimate",1060,590],["nb","next bill",1360,590]];
+const D9_ON=[["cp","connection point",260,330],["rd","reading",820,330],["bl","bill",1310,330],["ac","actual reading",580,590],["es","estimate",1060,590],["nb","next bill",1310,590]];
 const D9_OE=[["rd","cp","taken at","above"],["bl","rd","based on","above"],["ac","rd","is a","left"],["es","rd","is a","right"],["es","ac","replaced by","below"],["bl","nb","corrected on","left"]];
-const D9_OR=[["RUL-020","rd",820,196],["RUL-021","es",1060,740],["RUL-022","nb",1640,470]];
+const D9_OR=[["RUL-020","rd",820,196],["RUL-021","es",1060,740],["RUL-022","nb",1590,470]];
 // a concept's chip: its width, for edges to stop at
 function d9_termW(ctx,label){return tw(ctx,label,30,800)+82;}
 // a relation between two chips, as an arrow with its name, drawn up to p; o.dash for one nobody said
@@ -511,7 +526,7 @@ function d9_verdict(ctx,x,y,w,h,who,q,ans,col,kind,o){o=o||{};const a=o.a==null?
   const v=o.v==null?1:o.v;if(v>0.01)withA(ctx,v,()=>{const mx=x+w-60,my=y+h/2;if(kind==="?"){ctx.fillStyle="rgba(8,12,22,0.95)";ctx.beginPath();ctx.arc(mx,my,30,0,TAU);ctx.fill();ring(ctx,mx,my,30,col,1,2.6);T(ctx,"?",mx,my+12,{w:800,size:34,align:"center",color:rgba(col,1)});}
     else d9_res(ctx,mx,my,30,false,col,1);T(ctx,ans,mx-50,y+96,{w:800,size:34,align:"right",color:rgba(col,1)});});});}
 // one of the map's views, as a row: its glyph, its name and what it holds; on the right, a small picture of it (texture, drawn small on
-// purpose), except the ontology's, which is the graph itself, shrunk into place
+// purpose), except the ontology's, which is the graph itself, shrunk into place; the checks' shows two passing tests and a tracking table
 function d9_view(ctx,x,y,w,h,title,sub,g,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col={book:[214,226,240],object:INF,graph:[176,196,222],tick:TECH}[g];withA(ctx,a,()=>{
   glass(ctx,x,y,w,h,16,col,{glow:10+14*(o.hi||0),ea:0.8,fill:"rgba(8,11,20,0.95)"});const gx=x+52,gy=y+h/2;ctx.save();ctx.strokeStyle=rgba(col,1);ctx.fillStyle=rgba(col,1);ctx.lineWidth=2.4;ctx.lineCap="round";ctx.lineJoin="round";
   if(g==="book"){ctx.beginPath();ctx.moveTo(gx,gy-16);ctx.quadraticCurveTo(gx-11,gy-20,gx-20,gy-16);ctx.lineTo(gx-20,gy+16);ctx.quadraticCurveTo(gx-11,gy+12,gx,gy+16);ctx.quadraticCurveTo(gx+11,gy+12,gx+20,gy+16);ctx.lineTo(gx+20,gy-16);ctx.quadraticCurveTo(gx+11,gy-20,gx,gy-16);ctx.lineTo(gx,gy+16);ctx.stroke();}
@@ -523,7 +538,9 @@ function d9_view(ctx,x,y,w,h,title,sub,g,o){o=o||{};const a=o.a==null?1:o.a;if(a
   const px=x+w-330,py=y+16,pw=300,ph=h-32;ctx.save();ctx.strokeStyle=rgba(col,0.35);ctx.lineWidth=1.5;rr(ctx,px,py,pw,ph,10);ctx.stroke();ctx.restore();
   if(g==="book")[["reading",0],["estimate",1],["bill",2]].forEach(([s_,i])=>{const yy=py+28+i*32;T(ctx,s_,px+20,yy,{w:800,size:16,color:rgba(INK,0.85),deco:1});ctx.fillStyle=rgba(col,0.35);ctx.fillRect(px+120,yy-6,150-i*24,4);});
   else if(g==="object")[[px+24,py+18],[px+164,py+36]].forEach(([bx,by],i)=>{ctx.strokeStyle=rgba(INF,0.8);ctx.lineWidth=1.6;ctx.strokeRect(bx,by,112,58);ctx.beginPath();ctx.moveTo(bx,by+18);ctx.lineTo(bx+112,by+18);ctx.stroke();T(ctx,i?"bill":"meter reading",bx+8,by+14,{w:700,size:12,color:rgba(INK,0.85),deco:1});});
-  else if(g==="tick")[0,1,2].forEach(i=>{const yy=py+24+i*32;tick_(ctx,px+28,yy,16,i===2?D9_RED:D9_OK,1);ctx.fillStyle=rgba(col,0.35);ctx.fillRect(px+50,yy-2,200-i*30,4);});});}
+  else if(g==="tick")[0,1,2].forEach(i=>{const yy=py+24+i*32;if(i<2)tick_(ctx,px+28,yy,16,D9_OK,1);
+    else{ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=1.5;ctx.strokeRect(px+17,yy-9,22,18);ctx.beginPath();ctx.moveTo(px+17,yy-3);ctx.lineTo(px+39,yy-3);ctx.moveTo(px+25,yy-9);ctx.lineTo(px+25,yy+9);ctx.stroke();}
+    ctx.fillStyle=rgba(col,0.35);ctx.fillRect(px+50,yy-2,200-i*30,4);});});}
 
 /* ---------- back in Tartu ---------- */
 // the 1,900 bills, found and corrected: the count as it rises (n), and a row of ticks

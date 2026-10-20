@@ -1,7 +1,7 @@
 {
   "key": "rules-with-a-home",
   "title": "Rules with a home",
-  "sub": "The map before the data, a series on enterprise architecture and why it matters for data: one rule found in five places and none of them its home; split at the wall into the network's rule and retail's, joined by what crosses; each with an owner and a reason; written in the business's words, about data objects in the domains that own them; attached to the step whose service level sets what to expect of the data; with tests generated, one way, from a rule about the data, and a tracking table from a rule about what the business does; and, written this way, generally an ontology.",
+  "sub": "The map before the data, a series on enterprise architecture and why it matters for data: one rule found in five places and none of them its home; split at the wall into the network's rule and retail's, joined by what crosses; each with an owner and a reason; written in the business's words, about data objects in the domains that own them; attached to the step whose service level sets what to expect of the data; in ArchiMate 4, the standard the map follows, a requirement, with its reason, its step, its owner and its data linked to it; with tests generated, one way, from a rule about the data, and a tracking table from a rule about what the business does; and, written this way, generally an ontology.",
   "howto": "Paper on a wall is a draft, or a rule found somewhere; glass in the layers' colours is the confirmed model. Purple is motivation, where reasons and rules live; amber is strategy, where meter to cash and its stages are; yellow is the business layer, the work inside a stage; peach is information, where the data objects live. Blue is the network's side of the wall, rose is retail's. Cyan outlines the technical side, gold the business side.",
   "src": [
     "plan.js",
@@ -16,6 +16,10 @@
     [
       "\\bTomás\\b",
       "Toh-mahs"
+    ],
+    [
+      "\\bArchiMate\\b",
+      "Arky-mate"
     ]
   ]
 }

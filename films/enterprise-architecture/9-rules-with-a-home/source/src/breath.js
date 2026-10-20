@@ -11,6 +11,7 @@ const BREATH={
 "why":{"hold":{"these":0.6,"safe":0.9,"ama":0.8}},
 "about":{"hold":{"terms":0.7,"objects":0.8,"own":0.7}},
 "expect":{"hold":{"inside":0.9,"time":0.7,"comp":0.8}},
+"std":{"hold":{"req":0.6,"sym":0.8,"kinds":1.0,"drv":0.6,"real":0.6,"assoc":0.8,"where":0.9}},
 "checks":{"hold":{"form":0.8,"data":0.6,"gen":0.8,"hand":0.6,"biz":1.1,"track":0.9,"promise":0.6,"first":0.9,"team":0.8}},
 "onto":{"hold":{"owl":0.9,"views":0.8,"job":1.0}},
 "end":{"hold":{"confirm":0.7,"tartu":0.9,"owner":0.9},"breathe":5.0}

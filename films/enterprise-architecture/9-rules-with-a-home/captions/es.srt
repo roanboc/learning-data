@@ -151,81 +151,109 @@ El paso también dice qué esperar de los datos. Oportunidad, de su nivel de ser
 Completitud, de sus pasos: toda estimación reemplazada, o explicada. Validez, de otra regla: toda lectura marcada como real o estimada.
 
 39
-00:04:52,930 --> 00:05:01,333
-Escrita en una forma fija, una regla dice a qué se aplica, qué debe cumplirse, su responsable, su razón, su hogar y qué pasa cuando falla.
+00:04:52,730 --> 00:04:59,195
+En ArchiMate 4, el estándar que sigue el mapa, una regla es un requisito, uno de los elementos de motivación.
 
 40
-00:05:02,833 --> 00:05:09,995
-Una regla sobre los datos, como toda lectura marcada como real o estimada, recibe pruebas: comprueban que los datos estén bien.
+00:05:00,495 --> 00:05:04,198
+El paralelogramo de cada tarjeta de regla es el símbolo del requisito.
 
 41
-00:05:11,295 --> 00:05:18,356
-Se generan de ella, en un solo sentido: prueba dbt, regla de calidad de un contrato de datos, forma para datos enlazados.
+00:05:05,698 --> 00:05:12,381
+ArchiMate no tiene un elemento llamado regla. El mapa hace de las reglas de datos y de negocio dos tipos de requisito.
 
 42
-00:05:19,856 --> 00:05:21,675
-Nadie edita un control a mano.
+00:05:14,081 --> 00:05:20,212
+Su razón es un impulsor, unido por una influencia: para la regla de comercialización, el código del regulador.
 
 43
-00:05:22,975 --> 00:05:29,122
-La regla de comercialización es sobre lo que hace el negocio: los datos pueden estar bien y una factura, sin corregir.
+00:05:21,512 --> 00:05:27,354
+Su hogar es el paso que la aplica, unido por una realización: la facturación, en «del medidor al cobro».
 
 44
-00:05:30,922 --> 00:05:36,788
-Así que de ella se genera una tabla de seguimiento, con cada factura que no se corrigió en la siguiente.
+00:05:28,654 --> 00:05:33,336
+Su responsable, y los objetos de datos a los que se aplica, se unen por una asociación.
 
 45
-00:05:38,388 --> 00:05:41,752
-Sigue lo que la regla promete, no si un proceso corrió.
+00:05:34,836 --> 00:05:39,750
+ArchiMate dice dónde va una regla, no cómo se controla. Los controles salen de la regla.
 
 46
-00:05:43,052 --> 00:05:47,074
-La primera factura sin corregir habría estado en la lista la mañana después del cambio.
+00:05:43,550 --> 00:05:51,953
+Escrita en una forma fija, una regla dice a qué se aplica, qué debe cumplirse, su responsable, su razón, su hogar y qué pasa cuando falla.
 
 47
-00:05:48,674 --> 00:05:52,701
-Cada mañana, la lista va al equipo del responsable, no a un buzón compartido.
+00:05:53,453 --> 00:06:00,615
+Una regla sobre los datos, como toda lectura marcada como real o estimada, recibe pruebas: comprueban que los datos estén bien.
 
 48
-00:05:56,201 --> 00:06:02,301
-Escritos así, los conceptos, cómo se relacionan y las reglas sobre ellos son, en general, una ontología.
+00:06:01,915 --> 00:06:08,976
+Se generan de ella, en un solo sentido: prueba dbt, regla de calidad de un contrato de datos, forma para datos enlazados.
 
 49
-00:06:03,001 --> 00:06:06,698
-Está lista para OWL, un lenguaje con el que razonan las máquinas.
+00:06:10,476 --> 00:06:12,295
+Nadie edita un control a mano.
 
 50
-00:06:08,298 --> 00:06:15,998
-Como muestra la película Significado que las máquinas pueden leer, el glosario, los modelos, la ontología y los controles son vistas de ese único mapa.
+00:06:13,595 --> 00:06:19,742
+La regla de comercialización es sobre lo que hace el negocio: los datos pueden estar bien y una factura, sin corregir.
 
 51
-00:06:17,498 --> 00:06:24,170
-Pero OWL razona solo a partir de lo que se dice. Para OWL, una corrección que nunca ocurrió es simplemente desconocida.
+00:06:21,542 --> 00:06:27,408
+Así que de ella se genera una tabla de seguimiento, con cada factura que no se corrigió en la siguiente.
 
 52
-00:06:24,870 --> 00:06:28,627
-Encontrar la factura sin corregir le toca a la tabla de seguimiento.
+00:06:29,008 --> 00:06:32,372
+Sigue lo que la regla promete, no si un proceso corrió.
 
 53
-00:06:32,327 --> 00:06:38,768
-La familia recibe de vuelta ciento cuarenta y cuatro dólares con cuarenta, y las mil novecientas facturas se encuentran y se corrigen.
+00:06:33,672 --> 00:06:37,694
+La primera factura sin corregir habría estado en la lista la mañana después del cambio.
 
 54
-00:06:39,468 --> 00:06:42,269
-Grace y quien dirige comercialización confirman sus reglas.
+00:06:39,294 --> 00:06:43,321
+Cada mañana, la lista va al equipo del responsable, no a un buzón compartido.
 
 55
-00:06:43,669 --> 00:06:47,373
-En Tartu, la prestación se paga, y a nadie se le preguntó dos veces.
+00:06:46,821 --> 00:06:52,921
+Escritos así, los conceptos, cómo se relacionan y las reglas sobre ellos son, en general, una ontología.
 
 56
-00:06:48,973 --> 00:06:55,202
-La nota de Tomás tiene una respuesta: cada regla va en el mapa, escrita una vez, en el paso donde se aplica.
+00:06:53,621 --> 00:06:57,318
+Está lista para OWL, un lenguaje con el que razonan las máquinas.
 
 57
-00:06:55,902 --> 00:06:59,831
-Cada una tiene un responsable y una razón, y sus controles se generan a partir de ella.
+00:06:58,918 --> 00:07:06,618
+Como muestra la película Significado que las máquinas pueden leer, el glosario, los modelos, la ontología y los controles son vistas de ese único mapa.
 
 58
-00:07:01,431 --> 00:07:06,391
+00:07:08,118 --> 00:07:14,790
+Pero OWL razona solo a partir de lo que se dice. Para OWL, una corrección que nunca ocurrió es simplemente desconocida.
+
+59
+00:07:15,490 --> 00:07:19,247
+Encontrar la factura sin corregir le toca a la tabla de seguimiento.
+
+60
+00:07:22,947 --> 00:07:29,388
+La familia recibe de vuelta ciento cuarenta y cuatro dólares con cuarenta, y las mil novecientas facturas se encuentran y se corrigen.
+
+61
+00:07:30,088 --> 00:07:32,889
+Grace y quien dirige comercialización confirman sus reglas.
+
+62
+00:07:34,289 --> 00:07:37,993
+En Tartu, la prestación se paga, y a nadie se le preguntó dos veces.
+
+63
+00:07:39,593 --> 00:07:45,822
+La nota de Tomás tiene una respuesta: cada regla va en el mapa, escrita una vez, en el paso donde se aplica.
+
+64
+00:07:46,522 --> 00:07:50,451
+Cada una tiene un responsable y una razón, y sus controles se generan a partir de ella.
+
+65
+00:07:52,051 --> 00:07:57,011
 Las reglas valen mientras la organización está quieta. Después: cuando la estrategia se mueve.

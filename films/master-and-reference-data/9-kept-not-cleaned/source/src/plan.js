@@ -467,7 +467,7 @@ function m9_inset(ctx,t,x,y,w,h){const C=M9_INSET,s=w/C.w;wc_panel(ctx,x-12,y-12
 const M9_DB={x:60,y:70,w:1300,h:780};
 function m9_cell(i){return[80+(i%3)*424,92+Math.floor(i/3)*364,414,350];}
 const M9_G=[{l:["new duplicates","this intake"],v:"29",lim:"limit: 50",src:"from the queue",max:80,n:29,bar:50},
-  {l:["oldest case","in the queue"],v:"3 days",lim:"limit: 10 days",src:"from the queue",max:16,n:3,bar:10},
+  {l:["oldest case","in the queue"],v:"3 days",lim:"limit: 7 days",src:"from the queue",max:16,n:3,bar:7},
   {l:["roles past","their end date"],v:"0",lim:"limit: 0",src:"from the role table",max:4,n:0,bar:0},
   {l:["values with","no source"],v:"0",lim:"limit: 0",src:"from the tests",max:4,n:0,bar:0},
   {l:["requests","answered on time"],v:"14 of 14",lim:"limit: all of them",src:"from the request log",max:16,n:14,bar:14}];
@@ -501,7 +501,7 @@ function m9_bell(ctx,x,y){ctx.save();ctx.strokeStyle=rgba(WC_INK,0.9);ctx.fillSt
   ctx.beginPath();ctx.arc(x,y+15,4,0,TAU);ctx.stroke();ctx.restore();}
 function m9_alert(ctx,x,y){const w=520,h=196,tW=tw(ctx,"alert · Monday 7:00",30,800);wc_panel(ctx,x,y,w,h,{kind:"card",role:WC_NO,sw:tW+92,seed:61});m9_bell(ctx,x+50,y+38);
   wc_T(ctx,"alert · Monday 7:00",x+80,y+48,{w:800,size:30,col:WC_DARK});wc_T(ctx,"the queue's oldest case: 12 days",x+32,y+112,{w:600,size:28,col:WC_INK});
-  wc_T(ctx,"its limit: 10",x+32,y+156,{w:600,size:28,col:WC_MUTED});}
+  wc_T(ctx,"its limit: 7",x+32,y+156,{w:600,size:28,col:WC_MUTED});}
 // the case: two records the queue couldn't decide alone, their birth dates one digit apart; the note on it, and its stamp
 function m9_case(ctx,t,x,y,o){wc_panel(ctx,x,y,900,380,{kind:"sheet",seed:66});
   [["student","Student","S-21388","born 3 June"],["researcher","Researcher","E-5263","born 8 June"]].forEach(([r,title,id,bd],i)=>{const cx=x+30+i*440;

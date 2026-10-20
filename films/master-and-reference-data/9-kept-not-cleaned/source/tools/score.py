@@ -6,7 +6,7 @@
 #    again. Only on the last line, and the end card, do the high flutes come in above them.
 #  - A celesta is the roles, each on the note it has had since One person, many roles: student D, applicant E, researcher G, tutor A,
 #    alumna the D above. A list's new value is on B, the one note the roles leave out.
-#  - The cello, bowed, is the person, as in film 1: whenever someone stands in white paper as one person, it plays the same D and the
+#  - The cello, bowed, is the person, as in One person, many roles: whenever someone stands in white paper as one person, it plays the same D and the
 #    A above it; when Daniel's two records are linked, it plays them too. The clarinet carries the series' mark (1-8-5-1), here on B flat
 #    under the title, and on D on the end card.
 #  - Each of the steward's measures is a tubular bell, its iron bar, struck softly as its gauge is lit, each on its own note. When the
@@ -130,7 +130,7 @@ def cel(m, s, g=0.03, pan=0.0, sec=2.6):
     put(norm(filt(sig.astype(np.float32), 'low', 2400)), s, g * NOTE, pan)
 ROLE = {'student': 50, 'applicant': 52, 'researcher': 55, 'tutor': 57, 'alumna': 62}
 def role(r, s, g=0.03, pan=0.0):
-    """a role, on the celesta: an octave above the note it has had since film 1, where the celesta sings"""
+    """a role, on the celesta: an octave above the note it has had since One person, many roles, where the celesta sings"""
     cel(ROLE[r] + 12, s, g, pan)
 TUBE = ((1.0, 0.05, 5.0), (2.756, 0.12, 4.2), (5.404, 0.38, 3.4), (8.933, 1.0, 2.8), (13.344, 0.62, 1.9), (18.64, 0.36, 1.3), (24.81, 0.14, 0.8))
 def ironbar(m, s, g=0.02, pan=0.0, sec=4.5):
@@ -402,7 +402,7 @@ knock(tT + 0.3, 0.014, P(1343)); knock(tDbx + 0.3, 0.014, P(1343))
 #    the gauge emptying to two days, its bar struck alone and its tick back; the tag
 J = 'alert'; tAl, tTw, tW, tBd = W(J, 'monday', 'an alert'), W(J, 'monday', 'twelve days'), C(J, 'waiting'), W(J, 'waiting', 'birth date')
 tR, tDec, tRea, tB, tNot = C(J, 'rang'), W(J, 'rang', 'decided'), W(J, 'rang', 'with its reason'), C(J, 'blame'), W(J, 'blame', 'not at a person')
-t0 = tAl - 0.2; DA = tTw + 0.5 - t0; tX = t0 + 0.6185 * DA
+t0 = tAl - 0.2; DA = tTw + 0.5 - t0; tX = t0 + 0.4807 * DA  # where the wait passes its limit, 7 days, as in src/scenes.js
 bed([(S0(J), AM9), (tW - 0.3, FMAJ7), (tR - 0.3, E7SUS4), (tDec - 0.1, CMAJ9), (tB - 0.3, FMAJ9)], E(J) + 1.0)
 ironbar(64, tAl + 0.35, 0.024, P(1580)); ironbar(65, tAl + 0.55, 0.017, P(1580))
 fill(t0, DA, True, 0.014, P(711))

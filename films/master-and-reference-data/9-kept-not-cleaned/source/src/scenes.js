@@ -185,8 +185,8 @@ scene("alert",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   // the camera: in on the dashboard and the alert as it comes in; across to the case it points at; out to Mei on the phone, and the gauge
   // back within its limit. The alert goes before the camera turns from it, so it's never cut at the frame's edge
   m9_open(ctx,S,t,sc,"office",[[0,960,540,1],[tAl-0.5,990,510,1.06],[tW-0.5,768,520,1.25],[tR-0.3,960,540,1]],{z:0});
-  // the oldest case's wait: past its limit on Monday, back to two days once it's decided
-  const t0=tAl-0.2,D=tTw+0.5-t0,up=ease(clamp((t-t0)/D,0,1)),dn=ease(clamp((t-tB+0.2)/1.0,0,1)),n=lerp(lerp(3,12,up),2,dn),tX=t0+0.6185*D,tBk=tB-0.2+0.3;
+  // the oldest case's wait: past its limit (7 days, as in Who is it?) on Monday, at 0.4807 of its eased rise; back to two days once decided
+  const t0=tAl-0.2,D=tTw+0.5-t0,up=ease(clamp((t-t0)/D,0,1)),dn=ease(clamp((t-tB+0.2)/1.0,0,1)),n=lerp(lerp(3,12,up),2,dn),tX=t0+0.4807*D,tBk=tB-0.2+0.3;
   m9_dash(ctx,t);for(let i=0;i<5;i++)m9_gauge(ctx,t,i,i===1?{n,g:{v:Math.round(n)+" days"},past:t<tBk?clamp((t-tX)/0.8,0,1):0,ok:t<tX?1:clamp((t-tBk-0.4)/0.8,0,1),lit:fin(t,tAl-0.3,0.5)*(1-fin(t,tW,0.6))}:{});
   const [rx,ry]=m9_cell(5);m9_tool(ctx,rx+8,ry+10,398,160,"dbt","dbt",["writes and tests","the measures"]);m9_tool(ctx,rx+8,ry+182,398,160,"databricks","Databricks",["runs them nightly,","keeps them, shows them"]);
   arrive(ctx,1580,198,t,tAl+0.3,()=>withA(ctx,1-fin(t,tW-0.4,0.5),()=>m9_alert(ctx,1320,100)),{dy:-20,d:0.7});

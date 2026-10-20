@@ -126,7 +126,7 @@ const PIX={
     const roles=V.items.map((it,j)=>[it,j]).filter(([it,j])=>st.pick[j]==="role"&&it.role).map(([it])=>it.role);
     linh(ctx,148,hh/2+190,0.52,roles);
     lanes.forEach(([key,label,hex],i)=>{const y=20+i*lh;card(ctx,x0,y+6,w-x0-24,lh-12,{kind:"sheet",seed:5+i});wash(ctx,x0+18,y+22,200,40,hex||"person",0.4,9+i);
-      tx(ctx,label,x0+30,y+52,{size:fit(ctx,label,180,28,800),w:800,col:WC_DARK});
+      tx(ctx,label,x0+30,y+52,{size:fit(ctx,label,180,28,800,null,17),w:800,col:WC_DARK});
       // the lane's things, in up to two rows; the last one put there drops in
       const mine=V.items.map((it,j)=>[it,j]).filter(([it,j])=>st.pick[j]===key);let x=x0+236,row=0;const rows=[y+lh/2-26,y+lh/2+28];
       mine.forEach(([it,j])=>{const s=short(it),z=fit(ctx,s,260,24,700,null,17),ww=Math.min(tw(ctx,s,z,700)+40,300)+(st.checked?44:0);if(x+ww>w-44){if(row)return;row=1;x=x0+236;}
@@ -135,8 +135,8 @@ const PIX={
   keeps(ctx,w,hh,st,Lb,k){const V=Lb.w,rows=V.items,top=96,rh=(hh-top-26)/rows.length;card(ctx,24,20,w-48,hh-40,{kind:"sheet",seed:8});
     tx(ctx,V.sheet,48,70,{size:fit(ctx,V.sheet,w*0.5-72,32,800,null,22),w:800,col:WC_DARK});tx(ctx,V.keeper,w*0.5,70,{size:26,w:700,col:WC_MUTED});
     rows.forEach((it,j)=>{const y=top+j*rh+rh/2,b=st.pick[j],B=V.buckets.find(x=>x[0]===b);
-      pencil(ctx,[[44,top+j*rh],[w-44,top+j*rh]],{a:0.25,lw:1.6,seed:j+3});tx(ctx,short(it),48,y+10,{size:fit(ctx,short(it),w*0.44,28,700),w:700});
-      if(B){tag(ctx,w*0.5,y,B[1],{size:fit(ctx,B[1],w*0.38,26,700),wash:B[3]||B[2],maxW:w*0.46});if(st.checked)mark(ctx,w-70,y,32,it.b===b,k);}
+      pencil(ctx,[[44,top+j*rh],[w-44,top+j*rh]],{a:0.25,lw:1.6,seed:j+3});tx(ctx,short(it),48,y+10,{size:fit(ctx,short(it),w*0.44,28,700,null,17),w:700});
+      if(B){tag(ctx,w*0.5,y,B[1],{size:fit(ctx,B[1],w*0.5-150,26,700,null,16),wash:B[3]||B[2],maxW:w*0.5-110});if(st.checked)mark(ctx,w-70,y,32,it.b===b,k);}
       else tx(ctx,"…",w*0.5,y+10,{size:28,col:WC_MUTED});});},
   /* One person, many roles: a thing, and the four questions */
   test(ctx,w,hh,st,Lb,k){const V=Lb.w,it=V.items[st.cur],ans=st.ans[st.cur]||[],done=st.done[st.cur],cw=Math.min(380,w*0.32),cx=40+cw/2;
@@ -159,8 +159,8 @@ const PIX={
     cs.forEach((c,i)=>{const col=i%per,row=Math.floor(i/per),x=w/2-(per*(cw+20)-20)/2+col*(cw+20),y=top+row*(ch+22);
       // the film's card writes a note in mono 28 and never shrinks it: a longer one is written here, at a size that fits
       const nt=c.note?(c.fresh?"✓ ":"")+c.note:null,fits=!nt||tw(ctx,nt,28,500,"mono")<=cw-56;
-      // and its number shrinks when a long title would run into it
-      const room=c.id?cw-56-tw(ctx,c.title,30,800)-18:0,idz=c.id?fit(ctx,c.id,room,28,500,"mono",18):28;
+      // and its number shrinks when a long title, or the wash that runs 20 past it, would run into it
+      const room=c.id?cw-56-tw(ctx,c.title,30,800)-32:0,idz=c.id?fit(ctx,c.id,room,28,500,"mono",18):28;
       wc_roleCard(ctx,x,y,cw,ch,c.role,c.title,idz<28?null:c.id,fits?c.note:null,{dashed:c.dashed,fresh:c.fresh,seed:30+i});
       if(idz<28)tx(ctx,c.id,x+cw-24,y+48,{size:idz,w:500,f:"mono",align:"right"});
       if(!fits)tx(ctx,nt,x+32,y+96,{size:fit(ctx,nt,cw-56,28,500,"mono",16),w:500,f:"mono",col:c.fresh?WC_ROLEINK.student:WC_MUTED});
@@ -231,8 +231,8 @@ const PIX={
       if(p==null){tx(ctx,"…",vx,mid+9,{size:28,col:WC_MUTED});return;}
       const r=f.rules[p],win=r.win==null?[]:[].concat(r.win);
       if(!win.length)tx(ctx,"—",vx,mid+9,{size:30,col:WC_MUTED});
-      else if(win.length>1){let x=vx;win.forEach(j=>{const v=f.vals[j],S=V.src[v.src]||{};x+=tag(ctx,x,mid,v.note||v.v,{size:21,wash:S.c,maxW:(vmax-24)/win.length})+8;});}
-      else{const v=f.vals[win[0]],S=V.src[v.src]||{},z=fit(ctx,v.v,vmax-200,26,700,null,17),vw=tw(ctx,v.v,z,700)+16;tx(ctx,v.v,vx,mid+9,{size:z,w:700});tag(ctx,vx+vw,mid,S.t,{size:21,wash:S.c,maxW:Math.max(120,vmax-vw)});}
+      else if(win.length>1){let x=vx;win.forEach(j=>{const v=f.vals[j],S=V.src[v.src]||{};const t=v.note||v.v,mw=(vmax-24)/win.length;x+=tag(ctx,x,mid,t,{size:fit(ctx,t,mw-40,21,700,null,15),wash:S.c,maxW:mw})+8;});}
+      else{const v=f.vals[win[0]],S=V.src[v.src]||{},z=fit(ctx,v.v,vmax-250,26,700,null,17),vw=tw(ctx,v.v,z,700)+16;tx(ctx,v.v,vx,mid+9,{size:z,w:700});const mw=Math.max(120,vmax-vw);tag(ctx,vx+vw,mid,S.t,{size:fit(ctx,S.t,mw-40,21,700,null,15),wash:S.c,maxW:mw});}
       mark(ctx,x0+cw-40,mid-2,30,r.ok,k);});},
   /* Which value wins: the rule in words, part by part, above the same rule as the model's YAML declares it */
   rule(ctx,w,hh,st,Lb,k){const V=Lb.w,n=V.slots.length,hd=[].concat(V.field),ind=V.indent!=null?V.indent:"  ",th=104+n*62,lx=410;

@@ -100,6 +100,13 @@ seeds:
 # it's defined (tests/generic/). The governance check fails on a test with no owner or dimension.
 data_tests:
   credentials:
+    # Tests on a source, in sources/<system>/: its owner.
+    student_system: {+meta: {owner: "Registrar's office"}}
+    learning_platform: {+meta: {owner: Learning team}}
+    short_courses: {+meta: {owner: Learning team}}
+    hr_system: {+meta: {owner: HR}}
+    research_system: {+meta: {owner: Research office}}
+    alumni_system: {+meta: {owner: Alumni office}}
     staging:
       student_system: {+meta: {owner: "Registrar's office"}}
       learning_platform: {+meta: {owner: Learning team}}

@@ -15,11 +15,13 @@ Four rules, each a line of the university's data governance policy that runs on 
    dbt_project.yml, or its own) and meta.dimension, one of DAMA's six (tests/generic/builtin.sql).
    Tests in tests/governance/ check the project, not the data, so they need an owner only.
 
-It reads the conceptual models and target/manifest.json, so run dbt parse first. Each problem says
+It reads the conceptual models and target/manifest.json, so run dbt parse first, with
+--no-partial-parse: a partial parse can drop a test's meta. Each problem says
 what to add, and where; the rules are explained in docs/conventions.md, *Governance*.
 
-    dbt parse --profiles-dir . && python scripts/check/governance.py   # fail on any problem
-    python scripts/check/governance.py --measures                       # and print the measures
+    dbt parse --profiles-dir . --no-partial-parse
+    python scripts/check/governance.py              # fail on any problem
+    python scripts/check/governance.py --measures   # and print the measures
 """
 import argparse
 import json

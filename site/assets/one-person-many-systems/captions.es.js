@@ -14,8 +14,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Nadie construyó una oficina de correos para el mundo. Cada país mantuvo la suya, y compartieron las reglas.",
 "Today, at the university, Linh Nguyen wants to apply for a PhD.":
 "Hoy, en la universidad, Linh Nguyen quiere postular a un doctorado.",
-"Last time she applied, she got a second student number, and Mei's office had to link the two.":
-"La última vez que postuló, recibió un segundo número de estudiante, y la oficina de Mei tuvo que vincularlos.",
+"Last time she applied, she got a second student number, and nothing linked the two.":
+"La última vez que postuló, recibió un segundo número de estudiante, y nada los vinculó.",
 "The application still creates a person first, and nobody looks until later.":
 "La solicitud todavía crea primero una persona, y nadie revisa hasta después.",
 "And four systems need to know who she is: the student system, HR, the research office and the alumni office.":
@@ -32,8 +32,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "O un solo lugar crea a cada persona, y los sistemas solo leen.",
 "The university already has the first two: Mei's links, and the copy in the lakehouse.":
 "La universidad ya tiene las dos primeras: los vínculos de Mei y la copia en el lakehouse.",
-"Both find Linh after the fact. Neither stops a third number.":
-"Ambas encuentran a Linh a posteriori. Ninguna evita un tercer número.",
+"At best, both find Linh after the fact. Neither stops a third number.":
+"A lo sumo, ambas encuentran a Linh a posteriori. Ninguna evita un tercer número.",
 "The last two do, but every system that reads back has to change.":
 "Las dos últimas sí, pero cada sistema que vuelve a leer tiene que cambiar.",
 "So which is the lightest way that still works?":

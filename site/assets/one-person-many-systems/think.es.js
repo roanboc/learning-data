@@ -5,7 +5,7 @@
 window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
   qs:{
-  "after":{q:"La universidad ya vincula los registros de Linh y la cuenta una sola vez en sus informes. ¿Por qué igual podría recibir un tercer número de estudiante?",
+  "after":{q:"La universidad ya tiene los vínculos de la oficina de Mei y una copia que cuenta a cada persona una sola vez. ¿Por qué igual podría Linh recibir un tercer número de estudiante?",
     opts:[{t:"La oficina de Mei vincula registros solo una vez al año."},{t:"Las dos actúan cuando el registro ya existe, y a ninguna se le pregunta antes de que la solicitud cree uno.",ok:true},{t:"El lakehouse no guarda números de estudiante."}],
     why:"La forma de registro vincula los registros que ya están, y una copia para análisis los reúne después. Ninguno está en el camino de la solicitud, así que esta todavía crea primero una persona, y el duplicado se encuentra más tarde, si es que se encuentra. En una organización que conozcas, ¿un duplicado se detecta cuando se crea, o después?"},
   "lightest":{q:"¿Por qué no dejar que un solo lugar cree a todas las personas de la universidad?",

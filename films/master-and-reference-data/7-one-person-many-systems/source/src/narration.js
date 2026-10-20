@@ -9,7 +9,7 @@ const NARR={
  {"id":"own","gap":0.8,"text":"Nobody built a post office for the world. Each country kept its own, and they shared the rules."}]},
 "again":{"name":"Applying again","lead":1.0,"tail":1.0,"vo":[
  {"id":"today","gap":0.8,"text":"Today, at the university, Linh Nguyen wants to apply for a PhD."},
- {"id":"last","gap":0.8,"text":"Last time she applied, she got a second student number, and Mei's office had to link the two."},
+ {"id":"last","gap":0.8,"text":"Last time she applied, she got a second student number, and nothing linked the two."},
  {"id":"still","gap":0.8,"text":"The application still creates a person first, and nobody looks until later."},
  {"id":"four","gap":0.8,"text":"And four systems need to know who she is: the student system, HR, the research office and the alumni office."}]},
 "ways":{"name":"Four ways","lead":0.8,"tail":1.0,"vo":[
@@ -20,7 +20,7 @@ const NARR={
  {"id":"central","gap":0.8,"text":"Or one place creates every person, and the systems only read."}]},
 "after":{"name":"After the fact","lead":0.8,"tail":1.0,"vo":[
  {"id":"have","gap":0.8,"text":"The university already has the first two: Mei's links, and the copy in the lakehouse."},
- {"id":"late","gap":0.8,"text":"Both find Linh after the fact. Neither stops a third number."},
+ {"id":"late","gap":0.8,"text":"At best, both find Linh after the fact. Neither stops a third number."},
  {"id":"cost","gap":0.8,"text":"The last two do, but every system that reads back has to change."}]},
 "lightest":{"name":"The lightest that works","lead":0.8,"tail":1.0,"vo":[
  {"id":"which","gap":0.8,"text":"So which is the lightest way that still works?"},

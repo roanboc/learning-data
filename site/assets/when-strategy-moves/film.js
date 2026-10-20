@@ -2173,7 +2173,8 @@ function d10_phone(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)r
 // A hand, seen from above, its wrist at (0,0) and its fingers pointing up (−y), drawn as a living thing: a palm that widens to the
 // knuckles and four fingers held together in one outline (each with its own length and a rounded tip, a notch where they part), and
 // a thumb, lit from the upper left, with a soft shadow under it. side: 1 or −1 mirrors it (the thumb on the left, or the right);
-// o.palm: palm up, the lighter palm showing; o.curl (0..1) closes the fingers; o.sleeve: the cuff's colour
+// o.palm: palm up, the lighter palm showing; o.curl (0..1) closes the fingers; o.sleeve: the cuff's colour; o.over: only the
+// fingers, from where they bend, drawn again over what the hand holds as they close round it
 function d10_hand(ctx,x,y,an,s,skin,side,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.rotate(an);ctx.scale(s*side,s);
   const palm=!!o.palm,base=palm?mix(skin,[226,170,138],0.22):skin,skL=mix(base,[255,232,206],0.3),skD=mix(base,[24,12,8],0.32),curl=clamp(o.curl||0,0,1),K=-70;
   const lit=(x0,y0,x1,y1)=>{const g=ctx.createLinearGradient(x0,y0,x1,y1);g.addColorStop(0,rgba(skL,1));g.addColorStop(0.55,rgba(base,1));g.addColorStop(1,rgba(skD,1));return g;};
@@ -2188,26 +2189,29 @@ function d10_hand(ctx,x,y,an,s,skin,side,o){o=o||{};const a=o.a==null?1:o.a;if(a
     ctx.bezierCurveTo(9.5,-TL*0.8,11.5,-TL*0.4,10.5,8);ctx.closePath();ctx.restore();};
   // the forearm, and the cuff of a sleeve
   const arm=palm?mix(skin,[226,170,138],0.08):skin,aL=mix(arm,[255,232,206],0.26),aD=mix(arm,[24,12,8],0.32),ag=ctx.createLinearGradient(-30,0,30,0);ag.addColorStop(0,rgba(aL,1));ag.addColorStop(0.55,rgba(arm,1));ag.addColorStop(1,rgba(aD,1));
-  ctx.save();ctx.shadowColor="rgba(0,0,0,0.38)";ctx.shadowBlur=14;ctx.shadowOffsetX=6;ctx.shadowOffsetY=8;ctx.fillStyle=ag;ctx.beginPath();ctx.moveTo(-22,0);ctx.bezierCurveTo(-25,60,-29,120,-31,220);ctx.lineTo(31,220);ctx.bezierCurveTo(29,120,25,60,22,0);ctx.closePath();ctx.fill();ctx.restore();
-  if(o.sleeve){ctx.fillStyle=rgba(o.sleeve,1);ctx.beginPath();ctx.moveTo(-34,90);ctx.quadraticCurveTo(0,82,34,90);ctx.lineTo(40,230);ctx.lineTo(-40,230);ctx.closePath();ctx.fill();ctx.strokeStyle=rgba(mix(o.sleeve,[0,0,0],0.35),0.8);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-34,90);ctx.quadraticCurveTo(0,82,34,90);ctx.stroke();}
+  if(o.over){ctx.save();shape();ctx.clip();const sg=ctx.createLinearGradient(0,K+5,0,K+19);sg.addColorStop(0,"rgba(20,10,6,0.4)");sg.addColorStop(1,"rgba(20,10,6,0)");ctx.fillStyle=sg;ctx.fillRect(-46,K+3,92,16);ctx.restore();
+    ctx.beginPath();ctx.moveTo(-46,K-100);ctx.lineTo(-46,K+4);ctx.lineTo(-31,K+4);F.forEach((f,i)=>ctx.quadraticCurveTo(f.bx,K+15,i<3?(f.bx+F[i+1].bx)/2:32,K+3));ctx.lineTo(46,K+4);ctx.lineTo(46,K-100);ctx.closePath();ctx.clip();}
+  else{ctx.save();ctx.shadowColor="rgba(0,0,0,0.38)";ctx.shadowBlur=14;ctx.shadowOffsetX=6;ctx.shadowOffsetY=8;ctx.fillStyle=ag;ctx.beginPath();ctx.moveTo(-22,0);ctx.bezierCurveTo(-25,60,-29,120,-31,220);ctx.lineTo(31,220);ctx.bezierCurveTo(29,120,25,60,22,0);ctx.closePath();ctx.fill();ctx.restore();}
+  if(o.sleeve&&!o.over){ctx.fillStyle=rgba(o.sleeve,1);ctx.beginPath();ctx.moveTo(-34,90);ctx.quadraticCurveTo(0,82,34,90);ctx.lineTo(40,230);ctx.lineTo(-40,230);ctx.closePath();ctx.fill();ctx.strokeStyle=rgba(mix(o.sleeve,[0,0,0],0.35),0.8);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-34,90);ctx.quadraticCurveTo(0,82,34,90);ctx.stroke();}
   // the thumb under the hand's edge, then the hand, in one outline, with its shadow
-  ctx.save();ctx.shadowColor="rgba(0,0,0,0.38)";ctx.shadowBlur=14;ctx.shadowOffsetX=6;ctx.shadowOffsetY=8;ctx.fillStyle=lit(-36,-60,24,0);thumb();ctx.fill();ctx.fillStyle=lit(-34,K-60,34,0);shape();ctx.fill();ctx.restore();
-  thumb();ctx.strokeStyle=rgba(skD,0.5);ctx.lineWidth=1.2;ctx.stroke();shape();ctx.stroke();
+  ctx.save();if(!o.over){ctx.shadowColor="rgba(0,0,0,0.38)";ctx.shadowBlur=14;ctx.shadowOffsetX=6;ctx.shadowOffsetY=8;ctx.fillStyle=lit(-36,-60,24,0);thumb();ctx.fill();}ctx.fillStyle=lit(-34,K-60,34,0);shape();ctx.fill();ctx.restore();
+  ctx.strokeStyle=rgba(skD,0.5);ctx.lineWidth=1.2;if(!o.over){thumb();ctx.stroke();}shape();ctx.stroke();
   // where the fingers part, below the notches, and their joints
   ctx.strokeStyle=rgba(skD,0.32);ctx.lineWidth=1;for(let i=0;i<3;i++){const f=F[i],g=F[i+1],cx=(f.bx+g.bx)/2,cy=K-Math.min(f.l,g.l)*0.3;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx,K-2);ctx.stroke();}
   F.forEach(f=>{[0.42,0.72].forEach(q=>{const jx=f.bx+f.d[0]*f.l*q,jy=K+f.d[1]*f.l*q;ctx.beginPath();ctx.moveTo(jx-f.n[0]*f.r*0.6,jy-f.n[1]*f.r*0.6);ctx.lineTo(jx+f.n[0]*f.r*0.6,jy+f.n[1]*f.r*0.6);ctx.stroke();});});
   // nails, or the pads of the fingertips; the thumb's too
   F.forEach(f=>{const ex=f.tx-f.d[0]*f.r*0.55,ey=f.ty-f.d[1]*f.r*0.55;ctx.fillStyle=rgba(mix(base,[255,236,220],palm?0.25:0.45),palm?0.4:0.7);ctx.beginPath();ctx.ellipse(ex,ey,f.r*0.62,f.r*(palm?0.7:0.95),f.ang,0,TAU);ctx.fill();});
-  if(!palm){ctx.save();ctx.translate(-25,-26);ctx.rotate(-0.9+curl*0.38);ctx.fillStyle=rgba(mix(base,[255,236,220],0.45),0.7);ctx.beginPath();ctx.ellipse(0,-50*(1-curl*0.22)+3,5.2,7,0,0,TAU);ctx.fill();ctx.restore();}
+  if(!palm&&!o.over){ctx.save();ctx.translate(-25,-26);ctx.rotate(-0.9+curl*0.38);ctx.fillStyle=rgba(mix(base,[255,236,220],0.45),0.7);ctx.beginPath();ctx.ellipse(0,-50*(1-curl*0.22)+3,5.2,7,0,0,TAU);ctx.fill();ctx.restore();}
   // the light: knuckles catching it, or the palm's creases
   if(palm){ctx.strokeStyle=rgba(skD,0.38);ctx.lineWidth=1.3;ctx.beginPath();ctx.moveTo(-26,-54);ctx.quadraticCurveTo(0,-46,28,-60);ctx.moveTo(-27,-38);ctx.quadraticCurveTo(-6,-32,16,-16);ctx.moveTo(-14,-8);ctx.quadraticCurveTo(-20,-30,-28,-44);ctx.stroke();}
   else{ctx.fillStyle=rgba(mix(base,[255,240,226],0.35),0.35);F.forEach(f=>{ctx.beginPath();ctx.ellipse(f.bx,K+1,5.5,3.5,0,0,TAU);ctx.fill();});}
   ctx.restore();});}
 // An agent's counter, from above, close up: a wooden counter, the agent's ledger (each customer signs for what they take), the
 // agent's phone, a pile of notes, and airtime cards, what the shop sold before it became an agent. The agent's hand rests at the top,
-// the customer's at the bottom. o.in (0..1): cash going into mobile money (the customer's notes go to the agent, and the agent's
-// phone lights as the money is sent); o.give (0..1): cash out (the agent takes notes from the pile and counts them into the
-// customer's palm, which closes round them and draws back); o.lab: the panel's name
+// the customer's at the bottom. o.in (0..1): cash going into mobile money (the customer holds two notes out, the agent takes them
+// by the far end and lays them on the pile, and the agent's phone lights as the money is sent); o.give (0..1): cash out (the
+// agent takes the two from the pile and lets them go over the customer's open palm, which closes round them and draws back);
+// o.lab: the panel's name
 function d10_counter(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x-8,y-8,w+16,h+16,22,[255,206,160],{glow:18,ea:0.75,fill:"rgba(12,10,8,0.95)"});
   ctx.save();rr(ctx,x,y,w,h,16);ctx.clip();ctx.translate(x,y);
   // the counter's top: warm, worn wood, with its grain, lit from the shop's door
@@ -2225,28 +2229,45 @@ function d10_counter(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01
   // airtime cards, fanned, in three colours, each with its silver strip to scratch
   [[0.13,[76,160,98]],[0.03,[232,146,64]],[-0.08,[74,124,204]],[-0.18,[76,160,98]]].forEach(([r,col],k)=>{ctx.save();ctx.translate(w*0.86,h*0.58);ctx.rotate(r);ctx.shadowColor="rgba(0,0,0,0.4)";ctx.shadowBlur=8;ctx.shadowOffsetY=3;
     ctx.fillStyle=rgba(col,1);rr(ctx,-34,-58,68,46,5);ctx.fill();ctx.shadowBlur=0;ctx.shadowOffsetY=0;ctx.fillStyle="rgba(214,218,226,0.9)";rr(ctx,-24,-30,48,9,3);ctx.fill();ctx.fillStyle="rgba(255,255,255,0.5)";ctx.fillRect(-26,-50,22,5);ctx.restore();});
-  // the agent's phone, and the pile of notes beside it
+  // the agent's phone
   ctx.save();ctx.translate(w*0.82,h*0.26);ctx.rotate(0.18);ctx.shadowColor="rgba(0,0,0,0.5)";ctx.shadowBlur=12;ctx.shadowOffsetY=5;ctx.fillStyle="#2c3036";rr(ctx,-34,-64,68,128,16);ctx.fill();ctx.shadowBlur=0;ctx.shadowOffsetY=0;
   g=ctx.createLinearGradient(0,-50,0,-6);g.addColorStop(0,"#d6e6ee");g.addColorStop(1,"#a9c4d2");ctx.fillStyle=g;rr(ctx,-25,-52,50,42,4);ctx.fill();glow(ctx,0,-31,46,[200,236,255],0.2+0.45*(o.lit||0));
   ctx.fillStyle="#9aa0a8";for(let r=0;r<4;r++)for(let c=0;c<3;c++){rr(ctx,-22+c*16,0+r*13,12,9,3);ctx.fill();}ctx.restore();
-  const PILE=[w*0.6,h*0.2];for(let k=0;k<5;k++)d10_note(ctx,PILE[0]+k*3,PILE[1]-k*2,0.1+k*0.03,w*0.17,k%2?[150,112,104]:[132,118,96],1);
-  // the hands: where each rests, where they meet, and where the agent's goes for the notes
-  const gv=clamp(o.give||0,0,1),cin=clamp(o.in||0,0,1),sk1=o.skinA||[96,60,40],sk2=o.skinB||[124,82,58],L=(A,B,u)=>[lerp(A[0],B[0],u),lerp(A[1],B[1],u)];
-  const AR=[w*0.5,h*0.12],AP=[PILE[0]+6,PILE[1]+10],AX=[w*0.5,h*0.46],CR=[w*0.46,h*1.0],CX=[w*0.47,h*0.66],CW=[w*0.44,h*0.86];
-  let ah=AR,ch=CR,cc=0.12,ac=0.3,nt=null,under=false;
-  if(cin>0&&cin<1){ch=cin<0.45?L(CR,CX,sstep(0,0.3,cin)):L(CX,CR,sstep(0.45,0.75,cin));ah=cin<0.5?L(AR,AX,sstep(0.22,0.42,cin)):cin<0.76?L(AX,AP,sstep(0.5,0.72,cin)):L(AP,AR,sstep(0.78,1,cin));
-    nt=cin<0.44?[ch[0],ch[1]-8]:cin<0.74?[ah[0]-6,ah[1]+28]:[AP[0]-4,AP[1]+4];under=cin>=0.44&&cin<0.74;}
-  if(gv>0){ah=gv<0.2?L(AR,AP,sstep(0,0.18,gv)):gv<0.55?L(AP,AX,sstep(0.2,0.42,gv)):L(AX,AR,sstep(0.58,0.85,gv));ch=gv<0.64?L(CR,CX,sstep(0.22,0.44,gv)):L(CX,CW,sstep(0.66,0.95,gv));cc=0.12+0.66*sstep(0.5,0.62,gv);
-    nt=gv<0.18?null:gv<0.5?[ah[0]-6,ah[1]+28]:[ch[0],ch[1]-8];under=gv<0.5||cc>0.5;}
-  const notes=()=>{if(!nt)return;d10_note(ctx,nt[0],nt[1],-0.2,w*0.17,[150,112,104],1);d10_note(ctx,nt[0]+8,nt[1]-6,-0.12,w*0.17,[132,118,96],1);};
-  const sway=Math.sin(t*1.4)*2;
-  // the customer's hand, palm up from the bottom; the agent's, from the top, fingers down
-  if(under&&nt&&nt[1]>h*0.5)notes();
-  d10_hand(ctx,ch[0],ch[1]+80+sway,0,1.25,sk2,1,{palm:true,curl:cc,sleeve:o.sleeveB||[150,64,72]});
-  if(!under&&nt&&nt[1]>h*0.5)notes();
-  if(under&&nt&&nt[1]<=h*0.5)notes();
-  d10_hand(ctx,ah[0],ah[1]-120-sway,Math.PI,1.2,sk1,-1,{curl:ac,sleeve:o.sleeveA||[64,86,116]});
-  if(!under&&nt&&nt[1]<=h*0.5)notes();
+  // the pile of notes beside it, lengthways to the agent, the way hands pass them: two more on top once cash has come in, and gone
+  // again when it goes out
+  const NS=w*0.2,NC=[[132,118,96],[150,112,104]],PILE=[w*0.64,h*0.25],SLOT=[[0,0,0.02],[3,-2,-0.04],[-2,-3,0.05],[4,-5,0],[1,-6,-0.03],[3,-8,0.03],[6,-11,-0.02]];
+  const gv=clamp(o.give||0,0,1),cin=clamp(o.in||0,0,1),pn=cin>=0.78&&gv<0.2?7:5;
+  for(let k=0;k<pn;k++)d10_note(ctx,PILE[0]+SLOT[k][0],PILE[1]+SLOT[k][1],Math.PI/2+SLOT[k][2],NS,NC[k%2],1);
+  // the hands. Notes in a hand lie along it: on an open palm, on top of it; in a hand seen from its back, pinched under the
+  // fingertips and reaching out beyond them; and fingers that close go over them. aR: how far the agent's middle fingertip reaches
+  // from its wrist at a curl; held: the centre of the two notes the agent pinches, from its wrist; grip: the agent's wrist that
+  // pinches two notes centred at c
+  const sk1=o.skinA||[96,60,40],sk2=o.skinB||[124,82,58],L=(A,B,u)=>[lerp(A[0],B[0],u),lerp(A[1],B[1],u)],P=(A,d)=>[A[0]+d[0],A[1]+d[1]];
+  const aR=c=>1.2*(78.6+68*(1-0.45*c)+0.86*c),GR=0.42,held=(W,c)=>[W[0],W[1]+aR(c)+NS*0.3],grip=c=>[c[0],c[1]-aR(GR)-NS*0.3];
+  // the wrists: at rest, and the agent's pinching the pile's top two; cash in, the notes held out on flat fingers, beyond their
+  // tips, for the agent to pinch the far end; cash out, the agent's fingertips at the customer's, and the notes, let go, settling
+  // into the open palm; then the customer's hand drawn back
+  const ARW=[w*0.5,h*0.12-120],CRW=[w*0.46,h+80],APW=grip(P(PILE,SLOT[5])),OFF=[3,-187.5],CIW=[w*0.486,h*0.84],AIW=grip(P(CIW,OFF)),
+    PALM=[0,-68],COW=[w*0.486,h*0.854],AOW=[COW[0]+2,COW[1]-160-aR(GR)],CBW=[w*0.44,h*0.86+80];
+  let aW=ARW,cW=CRW,ac=0.3,cc=0.12,np=null;
+  if(gv>0){aW=gv<0.2?L(ARW,APW,sstep(0,0.16,gv)):gv<0.52?L(APW,AOW,sstep(0.21,0.42,gv)):L(AOW,ARW,sstep(0.52,0.8,gv));
+    ac=gv<0.2?lerp(0.3,GR,sstep(0.12,0.2,gv)):lerp(GR,0.25,sstep(0.44,0.5,gv))+0.05*sstep(0.6,0.8,gv);
+    cW=gv<0.6?L(CRW,COW,sstep(0.22,0.42,gv)):L(COW,CBW,sstep(0.66,0.95,gv));cc=0.12+0.66*sstep(0.5,0.62,gv);}
+  else{cW=cin<0.47?L(CRW,CIW,sstep(0,0.3,cin)):L(CIW,CRW,sstep(0.48,0.74,cin));
+    aW=cin<0.47?L(ARW,AIW,sstep(0.14,0.44,cin)):cin<0.79?L(AIW,APW,sstep(0.5,0.76,cin)):L(APW,ARW,sstep(0.82,1,cin));
+    ac=cin<0.47?lerp(0.3,GR,sstep(0.38,0.46,cin)):lerp(GR,0.25,sstep(0.78,0.84,cin))+0.05*sstep(0.86,1,cin);}
+  // a slight sway while the hands wait, still while they pass the notes
+  const act=Math.max(sstep(0,0.08,cin)*(1-sstep(0.92,1,cin)),sstep(0,0.06,gv)*(1-sstep(0.94,1,gv))),SW=[0,Math.sin(t*1.4)*2*(1-act)];aW=P(aW,SW);cW=P(cW,SW);
+  if(gv>0)np=gv<0.2?null:gv<0.44?held(aW,ac):gv<0.5?L(held(AOW,GR),P(cW,PALM),1-Math.pow(1-(gv-0.44)/0.06,3)):P(cW,PALM);
+  else np=cin<0.46?P(cW,OFF):cin<0.78?held(aW,ac):null;
+  const notes=c=>[0,1].forEach(k=>{const q=SLOT[5+k];d10_note(ctx,c[0]+q[0]-SLOT[5][0],c[1]+q[1]-SLOT[5][1],Math.PI/2+q[2],NS,NC[(5+k)%2],1);});
+  // the customer's hand, palm up from the bottom; the notes; its fingers again as they close round them; the agent's, from the
+  // top, fingers down
+  const CH={palm:true,curl:cc,sleeve:o.sleeveB||[150,64,72]};
+  d10_hand(ctx,cW[0],cW[1],0,1.25,sk2,1,CH);
+  if(np)notes(np);
+  if(np&&cc>0.2)d10_hand(ctx,cW[0],cW[1],0,1.25,sk2,1,{...CH,over:true,a:sstep(0.2,0.5,cc)});
+  d10_hand(ctx,aW[0],aW[1],Math.PI,1.2,sk1,-1,{curl:ac,sleeve:o.sleeveA||[64,86,116]});
   ctx.restore();
   if(o.lab)tag(ctx,x+18,y+34,o.lab,[255,214,170],{size:28});});}
 

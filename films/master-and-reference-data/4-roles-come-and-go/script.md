@@ -49,7 +49,7 @@ The series' watercolour, as in *One person, many roles* ([look](../look/)): dayl
 
 ## Script
 
-### 1 · A ladder of offices
+### 1 · A ladder of offices · 0:00–0:38
 
 **Narration.** In the Roman Republic, an ambitious citizen climbed a ladder of public offices, each held for one year. Marcus Porcius Cato was quaestor, then aedile, then praetor, and in 195 BC, consul. Each office had its year, and his name: one man, a sequence of roles, each with a start and an end. His last office was censor. Censors wrote down every citizen, their age and what they owned: the census.
 
@@ -57,7 +57,7 @@ The series' watercolour, as in *One person, many roles* ([look](../look/)): dayl
 
 **On screen.** 204 BC · Rome · Marcus Porcius Cato · 204 BC · quaestor · 199 BC · aedile · 198 BC · praetor · 195 BC · consul · one man, a sequence of roles · 205 BC · 200 BC · 195 BC · 190 BC · 185 BC · censor · 184 BC · citizen · age · property · census · Roles come and go · Film 4 of 9
 
-### 2 · Census date
+### 2 · Census date · 0:38–1:05
 
 **Narration.** At the university, census date is the 31st of March: the day it counts who's enrolled, for its official numbers. Planning has a question for that day. How many of our students also work here? And the alumni office, which invited Linh back for a master's she was already doing, asks: which of our alumni are studying again?
 
@@ -65,7 +65,7 @@ The series' watercolour, as in *One person, many roles* ([look](../look/)): dayl
 
 **On screen.** 31 March 2026 · the university · census date · 31 March · Planning · How many of our students also work here? · Alumni office · Come back for a master's · Which of our alumni are studying again?
 
-### 3 · True for a day
+### 3 · True for a day · 1:05–1:40
 
 **Narration.** Each night, every system tells the platform how it sees Linh that day. The student system says enrolled. HR says casual staff. The research office, project member. The alumni office, graduate. Each answer is true for a day, and written over the next. So when Planning asks again about last year's census date, to compare, every answer still says today. Linh counts as a student in March 2025, four months before she came back.
 
@@ -73,7 +73,7 @@ The series' watercolour, as in *One person, many roles* ([look](../look/)): dayl
 
 **On screen.** each night · student system · HR · research office · alumni office · Linh Nguyen · enrolled · casual staff · project member · graduate · the platform's copy · Planning · students who also work here · as at 31 Mar 2025 · student · she came back in Jul 2025
 
-### 4 · A start and an end
+### 4 · A start and an end · 1:40–2:23
 
 **Narration.** Yet each office knows when its role starts and ends. So Noor and Mei give every role the same shape: the person, the kind of role, the office that owns it, when it starts, and when it ends. Linh's roles become bands, under her. Applicant, then student, from 2019 to 2022. Then alumna. Casual tutor, from 2023. Applicant again in 2025, and student again, from July. And researcher, from March to December this year. Some follow each other, and some run at once. The person under them stays the same.
 
@@ -81,7 +81,7 @@ The series' watercolour, as in *One person, many roles* ([look](../look/)): dayl
 
 **On screen.** from 21 Jul 2025 · 23 Feb – 27 Jun 2026 · 2 Mar – 19 Dec 2026 · since 15 Dec 2022 · every role · person · role type · owner · starts · ends · applicant · admissions · student · registrar's office · alumna · alumni office · tutor · HR · researcher · research office · 2019 · 2020 · 2021 · 2022 · 2023 · 2024 · 2025 · 2026 · today
 
-### 5 · A contract each term
+### 5 · A contract each term · 2:23–2:49
 
 **Narration.** So far, her tutoring is one band, since 2023. HR sees it differently: it offers her work one teaching period at a time, a new contract each semester, for one unit. So the tutor role starts and ends every semester. In January, between contracts, she isn't staff. On census date, she is.
 
@@ -89,7 +89,7 @@ The series' watercolour, as in *One person, many roles* ([look](../look/)): dayl
 
 **On screen.** so far: one band · S1 · S2 · HR · an offer of work · each teaching period · one unit · 15 Jan 2026 · not staff · 31 Mar 2026 · staff
 
-### 6 · One line, one date
+### 6 · One line, one date · 2:49–3:27
 
 **Narration.** Now Planning draws one line across her bands, at census date. Student, tutor and researcher are open, and so is alumna. So Linh counts once, as a student who works here: one person with three roles, not three people. Move the line back a year, and she's a tutor and an alumna, not a student. Last year's number stays as it was. And the alumni office's question becomes a filter: alumni with an open student role. Linh is back, since July 2025.
 
@@ -99,7 +99,7 @@ The series' watercolour, as in *One person, many roles* ([look](../look/)): dayl
 
 *Planning's question is about people, so it counts persons; the roles open at one date are the filter. That's the difference between "three rows" and "one person".*
 
-### 7 · What a role is for
+### 7 · What a role is for · 3:27–3:55
 
 **Narration.** Each role also says what it relates to. Her student role, a master's in health informatics. Each tutor contract, one unit in one semester. Her researcher role, one project. People relate to each other, too. On the project, Ana Ruiz supervises Linh. That relationship has its own dates, and ends with the project. Both people stay.
 
@@ -107,7 +107,7 @@ The series' watercolour, as in *One person, many roles* ([look](../look/)): dayl
 
 **On screen.** relates to · master's · health informatics · a first-year unit · S1 2026 · project · wait times in emergency care · Ana Ruiz · Head of School · leads the project · supervises · Mar–Dec 2026
 
-### 8 · Elsewhere
+### 8 · Elsewhere · 3:55–4:20
 
 **Narration.** An energy company has the same problem. The account holder moves out in June, and his role ends that day. The person who stays depends on life support at home. Her need goes on, and so does the risk. Kept on his account, the need would close with it. Kept on her, it stays.
 
@@ -115,7 +115,7 @@ The series' watercolour, as in *One person, many roles* ([look](../look/)): dayl
 
 **On screen.** an energy company · account holder · 14 Jun · occupant · life support · closes with the account · kept on the person
 
-### 9 · One table, any date
+### 9 · One table, any date · 4:20–5:01
 
 **Narration.** On the platform, it's one table, with a row for each role. Each row holds the person, the role type, its owner, what it relates to, and the dates it's valid from and to. Jun builds it in dbt, with two tests. A role can't end before it starts, and every role belongs to a person. Then any question can take a date: census date, last year, or today. Each row also keeps when it was recorded, so a contract entered late still counts from the day it began.
 
@@ -125,7 +125,7 @@ The series' watercolour, as in *One person, many roles* ([look](../look/)): dayl
 
 *The tests are the project's own: `versions_do_not_overlap` (`tests/generic/versions_do_not_overlap.sql`) checks that every period ends after it starts and doesn't overlap the next one for the same role and thing; dbt's `relationships` checks that each row's person exists.*
 
-### 10 · The person stays
+### 10 · The person stays · 5:01–5:24
 
 **Narration.** Today, Linh is a student, a tutor, a researcher and an alumna. In December, the project ends. One day, she'll graduate again. Roles come and go. A role has a start and an end. The person stays.
 

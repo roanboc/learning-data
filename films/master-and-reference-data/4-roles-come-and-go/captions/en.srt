@@ -163,29 +163,29 @@ On the platform, it's one table, with a row for each role.
 Each row holds the person, the role type, its owner, what it relates to, and the dates it's valid from and to.
 
 42
-00:04:33,634 --> 00:04:41,274
-Jun builds it in dbt, with two tests. A role can't end before it starts, and every role belongs to a person.
+00:04:33,634 --> 00:04:40,162
+Jun builds it, with two tests. A role can't end before it starts, and every role belongs to a person.
 
 43
-00:04:43,374 --> 00:04:47,680
+00:04:42,262 --> 00:04:46,568
 Then any question can take a date: census date, last year, or today.
 
 44
-00:04:49,580 --> 00:04:55,808
+00:04:48,468 --> 00:04:54,696
 Each row also keeps when it was recorded, so a contract entered late still counts from the day it began.
 
 45
-00:05:00,908 --> 00:05:04,832
+00:04:59,796 --> 00:05:03,720
 Today, Linh is a student, a tutor, a researcher and an alumna.
 
 46
-00:05:06,132 --> 00:05:09,897
+00:05:05,020 --> 00:05:08,785
 In December, the project ends. One day, she'll graduate again.
 
 47
-00:05:11,397 --> 00:05:12,637
+00:05:10,285 --> 00:05:11,525
 Roles come and go.
 
 48
-00:05:13,937 --> 00:05:16,972
+00:05:12,825 --> 00:05:15,860
 A role has a start and an end. The person stays.

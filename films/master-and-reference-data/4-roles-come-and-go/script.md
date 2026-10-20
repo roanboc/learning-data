@@ -115,9 +115,9 @@ The series' watercolour, as in *One person, many roles* ([look](../look/)): dayl
 
 **On screen.** an energy company · account holder · 14 Jun · occupant · life support · closes with the account · kept on the person
 
-### 9 · One table, any date · 4:20–5:01
+### 9 · One table, any date · 4:20–4:59
 
-**Narration.** On the platform, it's one table, with a row for each role. Each row holds the person, the role type, its owner, what it relates to, and the dates it's valid from and to. Jun builds it in dbt, with two tests. A role can't end before it starts, and every role belongs to a person. Then any question can take a date: census date, last year, or today. Each row also keeps when it was recorded, so a contract entered late still counts from the day it began.
+**Narration.** On the platform, it's one table, with a row for each role. Each row holds the person, the role type, its owner, what it relates to, and the dates it's valid from and to. Jun builds it, with two tests. A role can't end before it starts, and every role belongs to a person. Then any question can take a date: census date, last year, or today. Each row also keeps when it was recorded, so a contract entered late still counts from the day it began.
 
 **Picture.** The data architect's office. A sheet, `core_person_role`, with its columns (*person_key · role_type · owner · relates_to · valid_from · valid_to*), each lit as it's named, the two dates together, and Linh's rows, one per role, each with a dot in its colour; the earlier tutor contracts are folded into one line, *one per semester since 2023 · six rows*. Jun, edged in cyan, arrives beside it, and under it the model's tests: `versions_do_not_overlap` and `relationships: core_person`, each with its plain words (*ends after it starts · belongs to a person*) and a pencil tick. Then the query, `where {{ valid_at(census_date()) }}`, and three date pins along its edge, lit in turn: *31 Mar 2026*, *31 Mar 2025*, *today*. Last, a column comes in, `recorded_at`; the Semester 1 2026 row lights in tutor violet, its `recorded_at` *2026-04-06* in violet ink, and a pencil ring closes round its `valid_from`, *2026-02-23*.
 
@@ -125,7 +125,7 @@ The series' watercolour, as in *One person, many roles* ([look](../look/)): dayl
 
 *The tests are the project's own: `versions_do_not_overlap` (`tests/generic/versions_do_not_overlap.sql`) checks that every period ends after it starts and doesn't overlap the next one for the same role and thing; dbt's `relationships` checks that each row's person exists.*
 
-### 10 · The person stays · 5:01–5:24
+### 10 · The person stays · 4:59–5:23
 
 **Narration.** Today, Linh is a student, a tutor, a researcher and an alumna. In December, the project ends. One day, she'll graduate again. Roles come and go. A role has a start and an end. The person stays.
 
@@ -207,6 +207,7 @@ Four questions, one at the end of each of four chapters, as the site shows them 
 | 18 October 2026 | The *relates to* tags hang above the timeline on dashed pencil lines: drawn on the rows, they hid the shorter periods, the Semester 1 contract among them. |
 | 18 October 2026 | The sound is the film's own: a choir humming, one voice to a note, a felt piano note for each role, a glass harmonica for the person, and the series' clarinet mark, from G minor to D major. Two voices on one note beat into a slow pulse on a phone's speaker, so each note has one. |
 | 20 October 2026 | The role table follows the project's new data. Each office's card keeps its own last day, and `valid_to` is the day after: `2026-06-28` for the Semester 1 2026 contract, `2026-12-20` for the project. The tutor's contracts end on the project's dates. `recorded_at` is when the platform recorded each row's latest change, as the project defines it: the night after an ended role's end, 1 November 2024 for the alumna row (with her alumni record), 25 February for the project, and 6 April for the late contract. |
+| 20 October 2026 | The narration names no tool for the role table and its tests, after the author's note for the series: rules are defined where transformations are implemented, whatever the master data solution. So chapter 9 says "Jun builds it, with two tests", after "On the platform, it's one table". The screen still shows the tests and the query as YAML and SQL, the simplest form. |
 
 ## Built
 
@@ -214,7 +215,7 @@ Built on 18 October 2026, from this script, in watercolour. What changed on the 
 
 - **Captions.** Spanish captions in Latin American Spanish, about as long as each English line.
 - **Sound.** A new palette (in `source/tools/score.py`): a choir humming "oo" that holds the notes two chords share, a felt piano note for each role, a glass harmonica's D and A for the person, and the clarinet's mark (1-8-5-1) on G under the title and on D at the end, from G minor to D major. The music sits about 21 dB under the voice, as in *One person, many roles*, and the only pulse, under last year's count answered with today's statuses, about 9 dB under the music.
-- **Rebuilt, 20 October 2026,** with the project's dates for her roles (see *Decided*). The words, captions and sound didn't change.
+- **Rebuilt, 20 October 2026,** with the project's dates for her roles, and chapter 9's line about the tests naming no tool (see *Decided*). That line was voiced again, and the film re-timed, re-mixed and re-captioned around it: 5:23.
 
 ## Next
 

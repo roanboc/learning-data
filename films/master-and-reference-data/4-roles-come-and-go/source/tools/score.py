@@ -411,7 +411,7 @@ quill(tStays - 0.1, 0.9, 0.013, P(560)); person(tStays + 0.3, 0.02, P(1357), 3.4
 # 9. One table, any date: F major, then waiting on A. The table set down, and its rows; each column lit as it's named, the two dates
 #    together; the tests' card, and a tick for each; the question's card, and a pin for each date; the recorded_at column typed in; the
 #    late contract's row lit, on the tutor's note; a pencil round the day it began
-J = 'table'; tPf, tRow, tDbt, tQ = W(J, 'row', 'platform'), W(J, 'row', 'a row'), W(J, 'tests', 'dbt'), W(J, 'asat', 'question')
+J = 'table'; tPf, tRow, tTwo, tQ = W(J, 'row', 'platform'), W(J, 'row', 'a row'), W(J, 'tests', 'two tests'), W(J, 'asat', 'question')
 tCol = [W(J, 'cols', 'the person'), W(J, 'cols', 'role type'), W(J, 'cols', 'its owner'), W(J, 'cols', 'relates'), W(J, 'cols', 'valid from'), W(J, 'cols', 'and to')]
 tP = [W(J, 'asat', 'census date'), W(J, 'asat', 'last year'), W(J, 'asat', 'today')]
 chords([(S0(J), FMAJ7B), (C(J, 'cols', -0.3), DM9D), (C(J, 'tests', -0.3), BBMAJ9), (C(J, 'asat', -0.3), C69), (C(J, 'late', -0.3), AM7), (C(J, 'breath', -0.6), A7SUS4)])
@@ -421,7 +421,7 @@ for i in range(8):
     tap(tRow - 0.2 + i * 0.2, 0.012, P(1140))
 for k in range(6):
     knock(tCol[k] - 0.05, 0.013, P(TCX[k]), 250 + 10 * k)
-paper(tDbt - 0.1, 0.026, P(749)); tick_(W(J, 'tests', 'end before', 0.18), 0.015, P(454)); tick_(W(J, 'tests', 'belongs', 0.18), 0.015, P(454))
+paper(tTwo - 0.1, 0.026, P(749)); tick_(W(J, 'tests', 'end before', 0.18), 0.015, P(454)); tick_(W(J, 'tests', 'belongs', 0.18), 0.015, P(454))
 paper(tQ - 0.2, 0.026, P(1531))
 for k, (t0, x) in enumerate(zip(tP, [1286, 1500, 1690])):
     pin(t0 - 0.1, 0.017, P(x))

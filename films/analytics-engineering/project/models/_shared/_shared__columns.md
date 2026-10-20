@@ -13,8 +13,8 @@ keys that look alike in different systems stay apart.
 {% enddocs %}
 
 {% docs key_set %}
-Where a key comes from: `SIS` (student system), `LMS` (learning platform) or `SC` (short-course
-platform). Each key set is an attribute of the source that issues it (`meta.key_set` in `sources/<system>/`), and they're listed in the `key_sets` seed.
+Where a key comes from: `SIS` (student system), `LMS` (learning platform), `SC` (short-course platform),
+`HR` (HR system), `RES` (research system) or `ALU` (alumni system). Each key set is an attribute of the source that issues it (`meta.key_set` in `sources/<system>/`), and they're listed in the `key_sets` seed.
 {% enddocs %}
 
 ## Time

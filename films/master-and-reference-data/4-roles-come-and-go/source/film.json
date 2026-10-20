@@ -8,6 +8,7 @@
     "scenes.js"
   ],
   "poster": ["stays", "come", 1.95],
+  "story": ["rome"],
   "say": [
     ["\\bNguyen\\b", "Nwin"],
     ["\\bLinh's\\b", "Lin's"],

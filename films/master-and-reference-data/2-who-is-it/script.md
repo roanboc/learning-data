@@ -164,18 +164,20 @@ For the series' labs and scenarios, which are made in their own thread:
 
 | On screen | In the example project |
 |---|---|
-| Linh, `S-20436` | `data/student_system/learners.csv` |
+| Linh, `S-20436`, NGUYỄN Thị Linh, a master's | `data/student_system/learners.csv` (line 50), as "Linh Nguyen" on the Graduate Certificate in Health Informatics (GCHI), with the family's shared email. The film shows the name as on her passport, keeps the series' master's, and gives her own email |
+| Her first-degree record, `S-17142`, "Nguyen Thi Linh", linh.nguyen2001@mail.example | `data/student_system/past_learners.csv` (lines 4–5), as "Thi Linh" "Nguyen", 2019 to 2022 |
+| 2001-03-14 on her student records | Invented for the film: the project's student system holds no birth dates |
+| HR's `E-4417`, "Linh Nguyen", 2001-05-14, linh.nguyen@uni.example | `data/hr_system/staff.csv` (line 3). The typo stays in HR's record as it arrived, for *Which value wins* |
+| Her contract's "born 14 March 2001" | Invented for the film: `data/hr_system/contracts.csv` holds no birth date |
+| The research office's `R-3082`, which holds `E-4417`; the alumna's record, which holds `S-17142` | `data/research_system/researchers.csv` (line 4) and `data/alumni_system/alumni.csv` (line 3, `A-61207`). `analyses/profiling/profile_keys_held.sql` shows which numbers each record holds: by key alone her five records make three groups, and joining them is the match the film shows |
 | The two Aishas, `S-20417`, `u-88231` | `data/student_system/learners.csv`, `data/learning_platform/users.csv` |
 | D-003: "not the same", Mei Tanaka, 7 October 2026 | `seeds/reference/student/learner_identity_decisions.csv` (D-003) |
 | A "not the same" that binds the matcher | `tests/rules/keys_decided_different_stay_apart.sql` (lines 1–2) |
 | Records matched to a learner by identity rules and decisions | `models/intermediate/student/int_learner_key_candidates.sql`, `int_learner_keys_matched.sql` |
 | D-005 and D-006 | New: two decisions the series adds to the decisions table |
-| Her first-degree record, S-17142; HR's E-4417; the research office's R-3082; the alumni office | New, as in *One person, many roles*: the sources the series adds to the project |
-| P-10482, `int_person_pairs.sql`, `person_queue.sql`, `decided_within_a_week`, `person_link` | New: the person's master record, the pairs query, the queue, its test and the links table the series adds; the names are as drawn |
-| HR's birth date, 2001-05-14, and her contract's 14 March 2001 | New: kept in HR's record as it arrived, for *Which value wins* |
-| linh.nguyen@mail.example, linh.nguyen2001@mail.example, linh.nguyen@student.uni.example, linh.nguyen@uni.example | Invented for the film; the project's `S-20436` carries the family's shared email (`D-001`), which stays out of the films |
+| P-10482, `int_person_pairs.sql`, `person_queue.sql`, `decided_within_a_week`, `person_link` | New: the person's master record, the pairs query, the queue, its test and the links table the series adds, in `models/core/person/` beside the person domain's conceptual model; the names are as drawn |
+| linh.nguyen@mail.example, linh.nguyen@student.uni.example | Invented for the film. The project's `S-20436` carries the family's shared email (`D-001`), which stays out of the films |
 | Jo Lee, MRN 448120 and 448210 | Invented for the film |
-
 ## Rigour to check before recording
 
 Sources checked on 18 October 2026.
@@ -217,5 +219,5 @@ Built on 17 and 18 October 2026, from the plan, in watercolour. What changed on 
 ## Next
 
 1. The author watches the film on its review page, and approves it or asks for corrections.
-2. The project's additions it needs: decisions D-005 and D-006; the person's master record and links, the pairs query, the person queue and its week-limit test; HR's E-4417, with the birth date typed wrong, for *Which value wins*.
+2. The project's additions it needs: decisions D-005 and D-006; the person's master record and links, the pairs query, the person queue and its week-limit test. ~~HR's E-4417, with the birth date typed wrong.~~ In the project since 20 October 2026, with the research office's and the alumni office's records.
 3. Labs and scenarios, in the series' own thread: the candidates above.

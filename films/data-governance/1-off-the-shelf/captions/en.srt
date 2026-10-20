@@ -195,9 +195,13 @@ a rule as a test, an approval at review, and a version when it changes.
 Over nine more films, Yusuf takes the binder off the shelf, one kind of policy at a time.
 
 50
-00:04:56,796 --> 00:05:00,967
-Then six more show how to build them, with dbt and Databricks.
+00:04:56,796 --> 00:05:00,432
+Then three more design governance as a capability that lasts.
 
 51
-00:05:02,267 --> 00:05:04,822
+00:05:01,132 --> 00:05:05,239
+And six show how to build each piece, with dbt and Databricks.
+
+52
+00:05:06,539 --> 00:05:09,094
 A policy that doesn't run anywhere is a wish.

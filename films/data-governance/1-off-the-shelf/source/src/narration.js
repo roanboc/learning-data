@@ -60,6 +60,7 @@ const NARR={
  {"id":"pins2","gap":0.8,"text":"a rule as a test, an approval at review, and a version when it changes."}]},
 "series":{"name":"The series","lead":1.0,"tail":1.0,"vo":[
  {"id":"next","gap":0.8,"text":"Over nine more films, Yusuf takes the binder off the shelf, one kind of policy at a time."},
- {"id":"tools","gap":0.8,"text":"Then six more show how to build them, with dbt and Databricks."},
+ {"id":"map","gap":0.8,"text":"Then three more design governance as a capability that lasts."},
+ {"id":"tools","gap":0.8,"text":"And six show how to build each piece, with dbt and Databricks."},
  {"id":"wish","gap":0.8,"text":"A policy that doesn't run anywhere is a wish."}]}
 };

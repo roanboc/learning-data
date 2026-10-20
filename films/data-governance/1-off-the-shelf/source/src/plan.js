@@ -542,9 +542,31 @@ function os_toolCard(ctx,k,u){if(u<=0)return;const T=OS_TC,[s,tools]=OS_TOOLS[k]
   ctx.save();ctx.translate(T.x[k%3],T.y[Math.floor(k/3)]-14*(1-e));ctx.rotate(T.rot[k]);ctx.scale(sc,sc);withA(ctx,clamp(u*2.5,0,1),()=>{
     wc_panel(ctx,-w/2,-h/2,w,h,{kind:"card",seed:110+k});gv_pin(ctx,0,-h/2+18,GV.red,1.1);
     wc_wash(ctx,wc_ell(-w/2+56,-h/2+72,28,28,24),wc_lit(GV.cyanInk,0.25),{kind:"thing",lw:1.2,seed:120+k});
-    wc_T(ctx,String(k+11),-w/2+56,-h/2+83,{w:800,size:28,align:"center",col:[255,255,255]});
+    wc_T(ctx,String(k+14),-w/2+56,-h/2+83,{w:800,size:28,align:"center",col:[255,255,255]});
     let lx=-w/2+104;tools.forEach(id=>{lx+=logo(ctx,id,lx,-h/2+48,48)+18;});
     os_wrap(ctx,s,36,w-64).forEach((l,i,a)=>wc_T(ctx,l,-w/2+32,-h/2+(a.length>1?160:178)+i*46,{w:800,size:36,col:WC_DARK}));});ctx.restore();}
+// the films on governance as a capability, on Yusuf's board: a card each, with its number, a pencil sign where the tools' cards
+// have logos, and its title in two lines
+const OS_CAP=[["A capability,","not a project"],["Who does what,","end to end"],["Where each","piece lives"]];
+const OS_CC={y:600,rot:[0.014,-0.012,0.01]};
+function os_capHead(ctx,u){if(u<=0)return;ctx.save();ctx.translate(960,326);ctx.rotate(-0.008);withA(ctx,clamp(u*2.5,0,1),()=>{wc_panel(ctx,-380,-60,760,120,{kind:"card",seed:66});
+  gv_pin(ctx,0,-46,GV.red,1.2);wc_hand(ctx,"Governance as a capability",0,20,{size:52,w:700,align:"center",col:WC_INK,p:clamp(u*1.6-0.3,0,1)});});ctx.restore();}
+// the signs: a capability above the three it holds; three steps, end to end; a home, and its copy made one way
+function os_capSign(ctx,k,x,y){ctx.save();ctx.translate(x,y);ctx.lineWidth=2.4;ctx.lineJoin="round";ctx.lineCap="round";
+  const ink=rgba(WC_PENCIL,0.85),fill=rgba(wc_lit(GV.gold,0.55),1);
+  const box=(bx,by,bw,bh,copy)=>{rr(ctx,bx,by,bw,bh,4);ctx.fillStyle=copy?rgba(WC_CARD,1):fill;ctx.fill();ctx.setLineDash(copy?[6,5]:[]);ctx.strokeStyle=ink;ctx.stroke();ctx.setLineDash([]);};
+  const arrow=(x0,x1,yy)=>{ctx.beginPath();ctx.moveTo(x0,yy);ctx.lineTo(x1,yy);ctx.moveTo(x1-8,yy-6);ctx.lineTo(x1,yy);ctx.lineTo(x1-8,yy+6);ctx.strokeStyle=ink;ctx.stroke();};
+  if(k===0){box(0,0,112,18);for(let i=0;i<3;i++)box(i*39,26,34,22);}
+  else if(k===1){for(let i=0;i<3;i++){ctx.beginPath();ctx.arc(12+i*48,24,11,0,TAU);ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=ink;ctx.stroke();if(i<2)arrow(28+i*48,44+i*48,24);}}
+  else{box(0,4,44,40);arrow(52,82,24);box(90,4,44,40,true);}
+  ctx.restore();}
+function os_capCard(ctx,k,u){if(u<=0)return;const T=OS_TC,lines=OS_CAP[k],e=easeCam(clamp(u,0,1)),sc=lerp(1.12,1,e),w=T.w,h=T.h;
+  ctx.save();ctx.translate(T.x[k],OS_CC.y-14*(1-e));ctx.rotate(OS_CC.rot[k]);ctx.scale(sc,sc);withA(ctx,clamp(u*2.5,0,1),()=>{
+    wc_panel(ctx,-w/2,-h/2,w,h,{kind:"card",seed:130+k});gv_pin(ctx,0,-h/2+18,GV.red,1.1);
+    wc_wash(ctx,wc_ell(-w/2+56,-h/2+72,28,28,24),wc_lit(GV.goldInk,0.1),{kind:"thing",lw:1.2,seed:140+k});
+    wc_T(ctx,String(k+11),-w/2+56,-h/2+83,{w:800,size:28,align:"center",col:[255,255,255]});
+    os_capSign(ctx,k,-w/2+104,-h/2+48);
+    lines.forEach((l,i)=>wc_T(ctx,l,-w/2+32,-h/2+160+i*46,{w:800,size:36,col:WC_DARK}));});ctx.restore();}
 
 const WC_PLACES={market:os_paintMarket,hall:os_paintHall,exchange:os_paintExchange,shop:os_paintShop,stamp:os_paintStamp,campus:gv_paintCampus,office:gv_paintOffice,
   boardGov:c=>gv_paintBoardClose(c,GV_ROOM.gov),desk:gv_paintDesk,floor:gv_paintFloor,planning:gv_paintPlanning,registrar:gv_paintRegistrar,data:gv_paintData,

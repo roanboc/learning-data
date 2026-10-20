@@ -238,13 +238,16 @@ for k, (lab, pan) in enumerate([('a term', 0.0), ('a classification', 0.2), ('an
     lid = 'pins' if k < 3 else 'pins2'
     pin(W('enter', lid, lab, -0.15 + 0.09), 0.032, pan)
     comb([65, 67, 69, 72, 74, 77][k], W('enter', lid, lab, -0.15 + 0.09), 0.045, pan)
-# 10. The series: a music box note rising as each of the nine binders lights; the first slid off the shelf; a knock for the board's
-#     heading, and a pin for each film on the tools; the mark under the end card
+# 10. The series: a music box note rising as each of the nine binders lights; the first slid off the shelf; a knock for each board's
+#     heading, and a pin for each film on governance as a capability and each film on the tools; the mark under the end card
 bed('series', [BBMAJ9, FMAJ9, DM9, CSUS], 0, cq('series', 'breath'))
 bed('series', [FMAJ9], cq('series', 'breath'), None, g=0.04)
 for k, m in enumerate([60, 62, 64, 65, 67, 69, 70, 72, 74]):
     comb(m, W('series', 'next', 'nine', -0.1 + k * 0.12 + 0.05), 0.036, 0.3 + 0.05 * k)
 slide(W('series', 'next', 'takes', 0.1), 0.026, 0.4, 0.45)
+knock(G('series', 'map', -0.25), 0.028, 0.0)
+for k in range(3):
+    pin(W('series', 'map', 'three', -0.1 + 0.3 * k + 0.08), 0.028, [-0.47, 0.0, 0.47][k])
 knock(G('series', 'tools', -0.25), 0.028, 0.0)
 for k in range(6):
     pin(W('series', 'tools', 'six', -0.1 + 0.3 * k + 0.08), 0.028, [-0.47, 0.0, 0.47][k % 3])

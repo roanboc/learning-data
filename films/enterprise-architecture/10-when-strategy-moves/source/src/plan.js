@@ -366,16 +366,16 @@ function d10_adr(ctx,x,y,w,title,rows,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0
   let yy=y+150;rows.forEach(([k,v,hh],i)=>{const q=o.p==null?1:clamp(o.p*rows.length-i,0,1);if(q>0)withA(ctx,q,()=>{T(ctx,k,x+30,yy+30,{w:800,size:28,color:"rgba(110,90,60,0.95)"});wrapT(ctx,v,x+220,yy+30,w-250,{size:28,w:700,color:"rgba(40,38,40,0.92)",lh:34});});yy+=hh;});});return h;}
 
 /* ---------- new rules, with homes ---------- */
-// a data rule, in the form Rules with a home sets for it: dark glass with motivation's purple edge (ArchiMate 4 draws a rule as a
-// requirement: the parallelogram, top right), a stripe down its left edge in its home domain's colour, its id, then six rows, each a
-// label and a value. vals: the six values (o.ra[i], 0..1, writes value i in); o.ghost draws the empty form, its labels only (o.lit[i]
-// lights label i)
+// a rule, in the form Rules with a home sets for it: dark glass with motivation's purple edge (ArchiMate 4 draws a rule as a
+// requirement: the parallelogram, top right), a stripe down its left edge in its home domain's colour, its kind (o.kind: a data rule,
+// unless it's about what the business does) and id, then six rows, each a label and a value. vals: the six values (o.ra[i], 0..1,
+// writes value i in); o.ghost draws the empty form, its labels only (o.lit[i] lights label i)
 const D10_RL6=["applies to","must be true","owner","reason","home","when it fails"];
 function d10_rule(ctx,x,y,w,id,vals,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return 0;const vw=w-300,L=D10_RL6.map((_,i)=>vals?wrapT(ctx,vals[i],0,0,vw,{size:28,w:700,measure:true}):[""]),
   hs=L.map(l=>Math.max(1,l.length)*36+18),h=88+hs.reduce((s,v)=>s+v,0)+10;
   withA(ctx,a,()=>{if(o.ghost){ctx.save();ctx.fillStyle="rgba(9,8,22,0.6)";rr(ctx,x,y,w,h,16);ctx.fill();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(MOT,0.75);ctx.lineWidth=2.5;rr(ctx,x,y,w,h,16);ctx.stroke();ctx.restore();}
     else{glass(ctx,x,y,w,h,16,MOT,{glow:14+12*(o.hi||0),ea:0.85,fill:"rgba(9,8,22,0.96)"});ctx.fillStyle=rgba(D10_RET,0.9);rr(ctx,x+7,y+16,7,h-32,3.5);ctx.fill();}
-    d10_glyph(ctx,"requirement",x+w-44,y+44,14,MOT);T(ctx,"data rule"+(id?" · "+id:""),x+40,y+54,{f:"mono",w:500,size:28,color:rgba(MOT,1),deco:o.deco});
+    d10_glyph(ctx,"requirement",x+w-44,y+44,14,MOT);T(ctx,(o.kind||"data rule")+(id?" · "+id:""),x+40,y+54,{f:"mono",w:500,size:28,color:rgba(MOT,1),deco:o.deco});
     let yy=y+88;D10_RL6.forEach((lab,i)=>{const lit=o.lit?clamp(o.lit[i]||0,0,1):0;if(lit>0.01)withA(ctx,lit,()=>{ctx.fillStyle=rgba(MOT,0.16);rr(ctx,x+24,yy-4,236,44,10);ctx.fill();});
       T(ctx,lab,x+40,yy+28,{f:"mono",w:500,size:28,color:rgba(mix([160,178,205],[236,228,255],lit),0.95),deco:o.deco});
       if(vals){const q=o.ra?clamp(o.ra[i]||0,0,1):1;if(q>0.01)withA(ctx,q,()=>{const col=[INK,INK,TRUST,MOT,D10_RET,D10_RED][i];let vx=x+270;

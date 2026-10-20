@@ -306,11 +306,12 @@ scene("wall",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
   vign(ctx,S);});
 
 /* ---------- 6. New rules, with homes ---------- */
-// A slice of the map, on the left: billing's new step, and eligibility, with its dates. On the right, the form every data rule is
-// written in, as in Rules with a home: its labels first, home, owner and reason lit as they're named; then each rule, written in,
-// and moved onto the map beside its home, joined by a realisation line; and, for the last, the catalogue, where a column mask lets
+// A slice of the map, on the left: billing's new step, and eligibility, with its dates. On the right, the form every rule is
+// written in, as in Rules with a home: its labels first, home, owner and reason lit as they're named; then each rule, written in
+// (RUL-023, about what billing does, a business rule: a bill without it is listed, not failed as a test), and moved onto the
+// map beside its home, joined by a realisation line; and, for the last, the catalogue, where a column mask lets
 // the call centre see "on the social tariff", and nothing more
-const D10_RULES=[["RUL-023","from the agency's date",["bills on the social tariff","the discount applies to every bill from the date the agency gives","head of retail","the direction","apply the discount","error, to the billing team"],[500,222],[420,272]],
+const D10_RULES=[["RUL-023","from the agency's date",["bills on the social tariff","the discount applies to every bill from the date the agency gives","head of retail","the direction","apply the discount","listed for the billing team"],[500,222],[420,272],"business rule"],
  ["RUL-024","until the next match",["eligibility answers","an answer is kept only until the next match","Ama","the agreement","eligibility","error, to the data team"],[500,512],[420,602]],
  ["RUL-025","only billing reads it",["eligibility","only billing reads it; the call centre sees “on the social tariff”","head of retail","the agreement","eligibility","access refused, and logged"],[500,632],[420,610]]];
 scene("rules",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
@@ -323,13 +324,13 @@ scene("rules",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     T(ctx,"eligibility",247,596,{w:700,size:28,align:"center",color:rgba(INK,0.96)});T(ctx,"from · until",247,638,{f:"mono",w:500,size:28,align:"center",color:rgba(INF,1)});},{dy:-12});
   // the form: its labels, and home, owner and reason lit as they're named
   const gA=fin(t,w("new","new rules")-0.3,0.5)*(1-fin(t,tR[0]-0.3,0.4));
-  d10_rule(ctx,960,200,900,"",null,{a:gA,ghost:1,lit:[0,0,fin(t,w("new","an owner")-0.1,0.3),fin(t,w("new","a reason")-0.1,0.3),fin(t,w("new","a home")-0.1,0.3),0]});
+  d10_rule(ctx,960,200,900,"",null,{a:gA,ghost:1,kind:"rule",lit:[0,0,fin(t,w("new","an owner")-0.1,0.3),fin(t,w("new","a reason")-0.1,0.3),fin(t,w("new","a home")-0.1,0.3),0]});
   // each rule: written into the form; then moved onto the map, beside its home
-  D10_RULES.forEach(([id,nm,vals,[mx,my],[hx,hy]],k)=>{const t0=tR[k]-0.3,tGo=k<2?tR[k+1]-0.5:tCat,fl=ease(clamp((t-tGo)/1.2,0,1));if(t<t0)return;
+  D10_RULES.forEach(([id,nm,vals,[mx,my],[hx,hy],kind],k)=>{const t0=tR[k]-0.3,tGo=k<2?tR[k+1]-0.5:tCat,fl=ease(clamp((t-tGo)/1.2,0,1));if(t<t0)return;
     const ln=["r1","r2","r3"][k],rw=[w(ln,["The discount","An answer","only billing"][k])-0.2],rt=[rw[0],rw[0],w(ln,["every bill","kept only","reads it"][k])+0.2,w(ln,"Its reason")-0.1,w(ln,["every bill","kept only","reads it"][k])+0.5,w(ln,"Its reason")+0.6];
     if(k===2){rt[2]=rt[4]=w(ln,"only billing")+0.3;rt[3]=rt[5]=w(ln,"only billing")+0.7;}
     if(fl<1){const s_=lerp(1,380/900,fl),cx=lerp(960,mx,fl),cy=lerp(200,my,fl);ctx.save();ctx.translate(cx,cy);ctx.scale(s_,s_);ctx.translate(-960,-200);
-      d10_rule(ctx,960,200,900,id,vals,{a:fin(t,t0,0.4)*(1-sstep(0.55,0.95,fl)),ra:rt.map(x=>fin(t,x,0.4)),deco:fl>0.05});ctx.restore();}
+      d10_rule(ctx,960,200,900,id,vals,{kind,a:fin(t,t0,0.4)*(1-sstep(0.55,0.95,fl)),ra:rt.map(x=>fin(t,x,0.4)),deco:fl>0.05});ctx.restore();}
     const ma=sstep(0.6,1,fl);if(ma>0.01){d10_ruleMini(ctx,mx,my,380,id,nm,{a:ma,hi:pulseAt(t,tGo+1.2,1.2)});d10_realise(ctx,hx,hy,mx,my+46,MOT,clamp((t-tGo-1.0)/0.5,0,1),ma);}});
   // the catalogue: the call centre sees "on the social tariff", and nothing more
   arrive(ctx,1410,500,t,tCat+0.5,()=>d10_catalogue(ctx,960,200,900,t,{cc:fin(t,w("r3","the call centre sees")-0.2,0.5),yes:fin(t,w("r3","on the social tariff")-0.1,0.4),mask:fin(t,w("r3","nothing more")-0.1,0.4)}),{dy:-18,from:1.04});

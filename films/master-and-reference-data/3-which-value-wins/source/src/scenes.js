@@ -144,8 +144,10 @@ scene("names",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const lab=["family name","middle name","given name"].map((s,i)=>{const [x,pw]=parts[i];return {s,lw:tw(ctx,s,28,600),cx:x+pw/2};});
   for(let k=0;k<2;k++)for(let i=1;i<lab.length;i++){const a=lab[i-1],b=lab[i],o=a.cx+a.lw/2+28-(b.cx-b.lw/2);if(o>0){a.cx-=o/2;b.cx+=o/2;}}
   lab.forEach((l,i)=>m3_note(ctx,l.s,l.cx-l.lw/2,N.y+186,clamp((t-tFam-i*0.45)/0.7,0,1),{size:28,w:600,col:WC_MUTED}));
-  // the accents, ringed
-  const ac=[[0,"NGUYỄ"],[1,"Thị"]];ac.forEach(([i,s],j)=>{const [x]=parts[i],cx=x+tw(ctx,s,76,800)-tw(ctx,s.slice(-1),76,800)/2;wc_ring(ctx,cx,N.y+86,26,48,clamp((t-tAcc-j*0.3)/0.6,0,1),{seed:81+j,lw:2.6});});
+  // the accents, ringed: each ring fits its letter's ink, the marks above and below included, as the font draws them
+  const ac=[[0,"NGUYỄ"],[1,"Thị"]];ac.forEach(([i,s],j)=>{const [x]=parts[i],ch=s.slice(-1),cx=x+tw(ctx,s,76,800)-tw(ctx,ch,76,800)/2;
+    ctx.save();ctx.font=font(800,76);const m=ctx.measureText(ch),up=m.actualBoundingBoxAscent,dn=m.actualBoundingBoxDescent;ctx.restore();
+    wc_ring(ctx,cx,N.y+124-(up-dn)/2,m.width/2+8,(up+dn)/2+12,clamp((t-tAcc-j*0.3)/0.6,0,1),{seed:81+j,lw:2.6});});
   // her passport, and the student system's check
   arrive(ctx,1550,250,t,tPass-0.3,()=>m3_passport(ctx,1340,130),{dy:16});
   wc_tick(ctx,1710,330,54,WC_ROLEINK.student,clamp((t-tCk-0.3)/0.5,0,1),6);

@@ -34,8 +34,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "El modelo de la universidad ya elige uno.",
 "For the learner, it takes the student system first, then the learning platform, then short courses.":
 "Para el estudiante, toma primero el sistema de estudiantes, después la plataforma de aprendizaje y los cursos cortos.",
-"One order, for every field, inside the SQL, where the people who own the data can't see it.":
-"Un solo orden, para todos los campos, dentro del SQL, donde los responsables de los datos no pueden verlo.",
+"One order, for every field, inside the code, where the people who own the data can't see it.":
+"Un solo orden, para todos los campos, dentro del código, donde los responsables de los datos no pueden verlo.",
 "For the person, the quick fix is to let the newest value win.":
 "Para la persona, la solución rápida es dejar que gane el valor más nuevo.",
 "But HR sends its whole file again every teaching period, so its values always look new.":
@@ -62,8 +62,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Sus listas de clase y su credencial, el que eligió.",
 "So the person keeps two names, and each needs its own rule.":
 "Así que la persona tiene dos nombres, y cada uno, su propia regla.",
-"So Jun writes the rules down, field by field, in the model's YAML.":
-"Así que Jun anota las reglas, campo por campo, en el YAML del modelo.",
+"So Jun writes the rules down, field by field, in one place, where the steps that build her record read them.":
+"Así que Jun anota las reglas, campo por campo, en un solo lugar, donde las leen los pasos que arman su registro.",
 "Like the Beagle's standards, each field has the source it trusts most.":
 "Como los relojes patrón del Beagle, cada campo tiene su fuente más confiable.",
 "Her legal name, from the student system, which checked her passport.":
@@ -80,8 +80,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Su celular: el más nuevo que ella confirmó, no el más nuevo que llegó.",
 "Every other field falls back on the same order: the most trusted source, then the newest confirmed value, then the most complete.":
 "Todos los demás campos recurren al mismo orden: la fuente más confiable, luego el valor confirmado más nuevo, luego el más completo.",
-"And dbt turns the rules into the SQL, and into tests that check them.":
-"Y dbt convierte las reglas en el SQL, y en pruebas que las verifican.",
+"Master data tools let people set rules like these on screens of their own.":
+"Las herramientas de datos maestros permiten fijar reglas como estas en sus propias pantallas.",
+"In the simplest form, they're a file like this one, and the code and the tests are written from it.":
+"En su forma más simple, son un archivo como este, y el código y las pruebas se escriben a partir de él.",
 "An email column holds one email. Linh has four.":
 "Una columna de correo guarda un correo. Linh tiene cuatro.",
 "Her student email, for her studies. Her staff email, for her tutoring.":
@@ -132,6 +134,6 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En qué reloj confiar se decidió antes de que discreparan, y se comprobó en cada puerto.",
 "Linh's rules work the same way: written down before her records disagree, and tested every night.":
 "Las reglas de Linh funcionan igual: escritas antes de que sus registros discrepen, y probadas cada noche.",
-"The rule is declared, not hidden in the SQL.":
-"La regla se declara, no se esconde en el SQL."
+"The rule is declared, not hidden in the code.":
+"La regla se declara, no se esconde en el código."
 });

@@ -6,7 +6,7 @@ const BREATH={
 "linked":{"hold":{"today":0.5,"linked":0.6,"needs":0.4,"counts":0.8}},
 "hidden":{"hold":{"order":0.6,"every":0.8,"quick":0.4,"resend":0.6,"typo":0.6,"transcript":0.6}},
 "names":{"hold":{"legal":0.8,"checked":0.4,"lost":0.8,"chose":0.5,"transcript":0.3,"class":0.6}},
-"rules":{"hold":{"writes":0.5,"legal":0.6,"preferred":0.5,"birth":0.3,"waits":0.4,"pin":0.8,"mobile":0.8,"chain":0.8},"breathe":2.0},
+"rules":{"hold":{"writes":1.0,"trust":0.4,"legal":0.8,"preferred":0.5,"birth":0.5,"waits":0.4,"pin":0.8,"mobile":0.8,"chain":1.0,"tools":0.9},"breathe":2.0},
 "emails":{"hold":{"column":0.6,"study":0.5,"personal":0.6,"none":0.4,"kept":0.8}},
 "sources":{"hold":{"says":1.0,"lost":1.0,"why":1.0}},
 "dryrun":{"hold":{"asks":0.6,"dry":0.4,"count":0.8,"approve":0.8}},

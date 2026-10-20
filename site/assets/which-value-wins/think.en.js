@@ -7,7 +7,7 @@ think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",ski
   qs:{
   "hidden":{q:"The quick fix lets the newest value win. Why does Linh's birth date become HR's typo?",
     opts:[{t:"HR is the source the university trusts most."},{t:"HR sends its whole file again every teaching period, so its values always look newest, typo included.",ok:true},{t:"The student system lost her birth date."}],
-    why:"Newest means the last one received, not the last one confirmed, so a source that sends everything again wins every time. And one order for every field, inside the SQL, hides the choice from the people who own the data. Which of your systems sends its whole file again every night?"},
+    why:"Newest means the last one received, not the last one confirmed, so a source that sends everything again wins every time. And one order for every field, inside the code, hides the choice from the people who own the data. Which of your systems sends its whole file again every night?"},
   "rules":{q:"HR sends a birth date that differs from the student system's. What does Jun's rule do?",
     opts:[{t:"HR's value takes the field, because it's newer."},{t:"The student system's value stays, and HR's waits for Mei, who can pin the right one with a reason, until a date.",ok:true},{t:"The record keeps both birth dates and shows them side by side."}],
     why:"Each field has the source it trusts most, like the Beagle's two standards. A different value from another source doesn't take over: it waits for a person to decide. Every other field falls back on the same order: the most trusted source, then the newest confirmed value, then the most complete. Which field in your data would you trust to one source only?"},

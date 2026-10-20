@@ -305,8 +305,8 @@ for g, ks in enumerate(FIELDS):
         src(k, GR[g] + j * 0.3 + 0.47, 0.024, P(1300))
 pencil(tWh - 0.05, 0.9, 0.012, P(1700))
 
-# 3. One order, hidden in the SQL: C minor. The code card; the three sources numbered as they're named; the pencil round both lines and
-#    its tag; "in the SQL"; Mei's card, and her question mark. Then her record, under "newest wins"; HR's card on its note, and its file
+# 3. One order, hidden in the code: C minor. The code card; the three sources numbered as they're named; the pencil round both lines and
+#    its tag; "in the code"; Mei's card, and her question mark. Then her record, under "newest wins"; HR's card on its note, and its file
 #    sent twice; HR's values take the fields, and the pulse rises; the typo and the old mobile ringed and written; the name as HR typed
 #    it ringed; the transcript; the cross, and "newest isn't truest" written as the pulse fades
 J = 'hidden'; tQ, tF1, tF2, tTru = C(J, 'quick'), W(J, 'resend', 'its whole file'), W(J, 'resend', 'every teaching'), C(J, 'truest')
@@ -318,7 +318,7 @@ for word in ('the student system', 'the learning platform', 'short courses'):
     pencil(W(J, 'order', word), 0.16, 0.013, P(260))
 pring(W(J, 'every', 'for every field'), 0.9, 0.013, P(680))
 card(W(J, 'every', 'for every field', 0.6), 0.016, P(640), 0.3)
-knock(W(J, 'every', 'inside the SQL', 0.1), 0.018, P(1180))
+knock(W(J, 'every', 'inside the code', 0.1), 0.018, P(1180))
 card(W(J, 'every', 'the people who own', -0.2), 0.022, P(1480))
 pencil(W(J, 'every', "can't see"), 0.4, 0.013, P(1650))
 slide(tQ - 1.0, 0.6, 0.014, P(600))
@@ -364,13 +364,15 @@ for i, x in enumerate([340, 1420]):
 
 # 5. A rule for each field: E flat. Jun's card; the YAML card and her record set down; each field's rule typed in, a few muffled keys;
 #    the four most trusted sources ringed in gold, as the standards were; each winner taking its field on its source's note, the
-#    losers sliding aside; "waits for Mei", the typo written, Mei's pin; the order every other field falls back on, three chips; what
-#    dbt writes, the SQL typed and the tests ticked; and a wordless moment for the rules, written and tested
-J = 'rules'; tLe, tPf, tBi, tMo, tCh, tD = C(J, 'legal'), C(J, 'preferred'), C(J, 'birth'), C(J, 'mobile'), C(J, 'chain'), C(J, 'dbt')
+#    losers sliding aside; "waits for Mei", the typo written, Mei's pin; the order every other field falls back on, three chips; her
+#    record sliding away for a master data tool's screen, set down, its trusted source on the student system's note, and the rule
+#    saved with a click and a tick; the screen sliding away, the file opening out, its name underlined, the SQL typed and the tests
+#    ticked; and a wordless moment for the rules, written and tested
+J = 'rules'; tLe, tPf, tBi, tMo, tCh, tTo, tSi = C(J, 'legal'), C(J, 'preferred'), C(J, 'birth'), C(J, 'mobile'), C(J, 'chain'), C(J, 'tools'), C(J, 'simplest')
 tMost, tPass, tFL, tWM, tTy, tPins, tConf = W(J, 'trust', 'trusts most'), W(J, 'legal', 'checked her passport'), W(J, 'preferred', 'from Linh'), W(J, 'waits', 'waits for Mei'), W(J, 'pin', 'still has the typo'), W(J, 'pin', 'Mei pins'), W(J, 'mobile', 'she confirmed')
-tSQL, tTest = W(J, 'dbt', 'into the SQL'), W(J, 'dbt', 'into tests')
+tSet, tFile, tSQL, tTest = W(J, 'tools', 'set rules'), W(J, 'simplest', 'a file like this'), W(J, 'simplest', 'the code'), W(J, 'simplest', 'the tests')
 bed([(S0(J), EB_MAJ9), (C(J, 'trust', -0.3), AB_MAJ9), (tLe - 0.3, EB_ADD9), (tPf - 0.3, CM9), (tBi - 0.3, AB_MAJ7), (C(J, 'waits', -0.3), FM9),
-     (C(J, 'pin', -0.3), DB_MAJ9), (tMo - 0.3, BB6), (tCh - 0.3, BB_SUS4), (tD - 0.3, EB_MAJ7), (C(J, 'breath'), EB_69)], E(J) + 1.0)
+     (C(J, 'pin', -0.3), DB_MAJ9), (tMo - 0.3, BB6), (tCh - 0.3, BB_SUS4), (tTo - 0.3, AB_MAJ9), (tSi - 0.3, EB_MAJ7), (C(J, 'breath'), EB_69)], E(J) + 1.0)
 card(C(J, 'writes', -0.1), 0.022, P(180), 0.35)
 card(C(J, 'writes', 0.0), 0.028, P(670), 0.5); card(C(J, 'writes', 0.4), 0.024, P(1440), 0.45)
 for t0, sec, n in ((tLe - 0.2, 1.9, 7), (tPf - 0.2, 1.3, 5), (tBi - 0.2, 1.9, 7), (tMo - 0.2, 1.4, 5)):
@@ -386,7 +388,10 @@ pin(tPins + 0.35, 0.02, P(1260))
 src('sis', tConf + 0.1, 0.026, P(1250)); slide(tConf, 0.6, 0.011, P(1300))
 for i, word in enumerate(['the most trusted source', 'the newest confirmed', 'the most complete']):
     knock(W(J, 'chain', word, 0.1), 0.018, P(1250 + 300 * (i - 1)), 220 + 20 * i)
-slide(tSQL - 0.5, 0.6, 0.014, P(1020)); knock(tSQL - 0.45, 0.014, P(1020))
+slide(tTo - 0.3, 0.6, 0.011, P(1440)); card(tTo + 0.2, 0.024, P(1470), 0.45); src('sis', tSet + 0.05, 0.02, P(1520))
+click(tSet + 1.8, 0.016, P(1786)); ptick(tSet + 2.15, 0.012, P(1662))
+slide(tSi - 0.2, 0.6, 0.011, P(1470)); slide(tSi + 0.1, 0.9, 0.008, P(670)); pencil(tFile, 0.6, 0.011, P(510))
+slide(tSQL - 0.5, 0.6, 0.014, P(1020))
 card(tSQL - 0.2, 0.024, P(1470)); typing(tSQL, 1.6, 0.011, P(1470), 7)
 slide(tTest - 0.2, 0.6, 0.014, P(1020)); card(tTest - 0.1, 0.022, P(1470))
 ptick(tTest + 0.45, 0.014, P(1150)); ptick(tTest + 1.05, 0.014, P(1150))

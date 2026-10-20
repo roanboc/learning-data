@@ -1,7 +1,7 @@
 /* ===== Which value wins: scenes =====
    Ten chapters, as in ../script.md: HMS Beagle in Plymouth Sound in 1831, and her twenty-two clocks; Linh's records, linked and still
-   different; one order for every field, hidden in the SQL, and the newest value winning; her two names; a rule for each field, in the
-   model's YAML; her four emails, each a contact point; every value with its source; a rule change, seen before it runs; a bank and a
+   different; one order for every field, hidden in the code, and the newest value winning; her two names; a rule for each field, in one
+   place; her four emails, each a contact point; every value with its source; a rule change, seen before it runs; a bank and a
    shop; and the Beagle coming home, thirty-three seconds out. Drawn in watercolour (shared/src/wash.js), made to read on a phone
    (tools/legible.py): text is at least 28 px in the frame. The camera moves in on whatever the narration is about, and every shot
    drifts slowly; things arrive with a spring. Sound: every effect in tools/score.py fires at the same moment as the thing it belongs
@@ -89,11 +89,11 @@ scene("linked",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
   m3_close(ctx,S);
   wc_year(ctx,64,80,"today · the university",fin(t,0.3,0.6)*(1-fin(t,tL-0.2,0.5)));wc_paperOver(ctx,S);});
 
-/* ---------- 3. One order, hidden in the SQL ---------- */
+/* ---------- 3. One order, hidden in the code ---------- */
 const M3_S3={x:110,y:96,w:870};let M3_L3=null;
 scene("hidden",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const tPk=c("picks"),tO=c("order"),tN1=w("order","the student system"),tN2=w("order","the learning platform"),tN3=w("order","short courses"),tE=c("every"),tEv=w("every","for every field"),
-    tIn=w("every","inside the SQL"),tOwn=w("every","the people who own"),tSee=w("every","can't see"),tQ=c("quick"),tNw=w("quick","the newest value"),tRs=c("resend"),tHR=w("resend","HR sends"),
+    tIn=w("every","inside the code"),tOwn=w("every","the people who own"),tSee=w("every","can't see"),tQ=c("quick"),tNw=w("quick","the newest value"),tRs=c("resend"),tHR=w("resend","HR sends"),
     tF1=w("resend","its whole file"),tF2=w("resend","every teaching"),tNew=w("resend","always look new"),tTy=c("typo"),tTypo=w("typo","HR's typo"),tOld=w("typo","her old mobile"),
     tTr=c("transcript"),tPr=w("transcript","print her name"),tTru=c("truest");
   if(!M3_L3)M3_L3=m3_recLayout(M3_S3.x,M3_S3.y,M3_S3.w);const Lay=M3_L3;
@@ -105,7 +105,7 @@ scene("hidden",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
     arrive(ctx,C.x+C.w/2,C.y+C.h/2,t,tPk-0.4,()=>m3_code(ctx,{nums:[fin(t,tN1,0.4),fin(t,tN2,0.4),fin(t,tN3,0.4)]}),{dy:20,d:0.9});
     const cw=m3_cw(),rx=64*cw/2+2;wc_ring(ctx,C.x+106+64*cw/2,C.y+331,rx,56,clamp((t-tEv)/0.9,0,1),{seed:71});
     arrive(ctx,C.x+C.w/2-40,C.y+C.h+44,t,tEv+0.6,()=>wc_tag(ctx,C.x+C.w/2-40,C.y+C.h+44,"one order · every field",{align:"center"}),{dy:8});
-    const bw=Math.round(tw(ctx,"in the SQL",28,700)+28);arrive(ctx,C.x+C.w-34-bw/2,C.y+46,t,tIn,()=>wc_badge(ctx,C.x+C.w-34-bw,C.y+46,"in the SQL"),{dy:6});ctx.restore();
+    const bw=Math.round(tw(ctx,"in the code",28,700)+28);arrive(ctx,C.x+C.w-34-bw/2,C.y+46,t,tIn,()=>wc_badge(ctx,C.x+C.w-34-bw,C.y+46,"in the code"),{dy:6});ctx.restore();
     const ex=fin(t,tOwn-0.2,0.6);arrive(ctx,1530,700,t,tOwn-0.6,()=>m3_person(ctx,"mei",1530,1010,0.95,{pose:"stand",pose2:"explain",mix:ex,expr:t>tSee?"concerned":"calm",t,flip:true}),{d:0.9,from:0.97});
     arrive(ctx,1480,354,t,tOwn-0.3,()=>{wc_panel(ctx,1310,300,340,108,{kind:"card"});wc_T(ctx,"Mei Tanaka",1338,346,{w:800,size:32,col:WC_DARK});wc_T(ctx,"registrar's office",1338,386,{w:600,size:28,col:WC_MUTED});},{dy:12});
     m3_note(ctx,"?",1650,530,clamp((t-tSee)/0.4,0,1),{size:76,col:WC_INK,align:"center"});});
@@ -184,19 +184,22 @@ scene("rules",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const tWr=c("writes"),tTr=c("trust"),tStd=w("trust","the Beagle's standards"),tMost=w("trust","trusts most"),tLe=c("legal"),tPass=w("legal","checked her passport"),tPf=c("preferred"),tFL=w("preferred","from Linh"),
     tBi=c("birth"),tWa=c("waits"),tWM=w("waits","waits for Mei"),tPi=c("pin"),tTypo=w("pin","still has the typo"),tPins=w("pin","Mei pins"),tReason=w("pin","with a reason"),
     tMo=c("mobile"),tConf=w("mobile","she confirmed"),tSent=w("mobile","not the newest one sent"),tCh=c("chain"),tC1=w("chain","the most trusted source"),tC2=w("chain","the newest confirmed"),
-    tC3=w("chain","the most complete"),tD=c("dbt"),tSQL=w("dbt","into the SQL"),tTest=w("dbt","into tests");
+    tC3=w("chain","the most complete"),tTo=c("tools"),tSet=w("tools","set rules"),tSi=c("simplest"),tFile=w("simplest","a file like this"),
+    tSQL=w("simplest","the code"),tTest=w("simplest","the tests");
   m3_open(ctx,S,t,sc,"officeB",[[0,960,540,1],[tLe-0.4,965,530,1.025],[tCh-0.4,960,540,1]]);
   const R=M3_S5,x0=R.x+30,yy=k=>R.y+M3_R5Y[k][1],yy2=k=>R.y+M3_R5Y[k][2],vw=m3_vw;
   // Jun, and his name until the camera moves in
-  const ex=fin(t,tWr+0.4,0.6)*(1-fin(t,tTr+0.4,0.6))+fin(t,tD-0.3,0.6);
-  arrive(ctx,180,700,t,-0.3,()=>person(ctx,"jun",180,1010,0.92,{pose:"stand",pose2:"explain",mix:clamp(ex,0,1),expr:t>tD+1?"relieved":"calm",t}),{d:0.8});
+  const ex=fin(t,tWr+0.4,0.6)*(1-fin(t,tTr+0.4,0.6))+fin(t,tSi-0.3,0.6);
+  arrive(ctx,180,700,t,-0.3,()=>person(ctx,"jun",180,1010,0.92,{pose:"stand",pose2:"explain",mix:clamp(ex,0,1),expr:t>tTest+1?"relieved":"calm",t}),{d:0.8});
   withA(ctx,1-fin(t,tLe-0.5,0.5),()=>arrive(ctx,180,164,t,tWr-0.2,()=>{wc_panel(ctx,24,110,316,108,{kind:"card"});wc_T(ctx,"Jun Park",52,156,{w:800,size:32,col:WC_DARK});
     wc_T(ctx,"analytics engineer",52,196,{w:600,size:28,col:WC_MUTED});},{dy:12}));
-  // the YAML: one field's rule at a time, typed, then folded to its line
-  const ty=[clamp((t-tLe+0.2)/1.9,0,1),clamp((t-tPf+0.2)/1.3,0,1),clamp((t-tBi+0.2)/1.9,0,1),clamp((t-tMo+0.2)/1.4,0,1)],fo=[fin(t,tPf-0.4,0.6),fin(t,tBi-0.4,0.6),fin(t,tMo-0.4,0.6),fin(t,tCh-0.2,0.6)];
+  // the rules, a file of YAML: one field's rule at a time, typed, then folded to its line; all of them opened again as the file
+  // they're written in, in the simplest form
+  const un=i=>1-fin(t,tSi+i*0.15,0.7),ty=[clamp((t-tLe+0.2)/1.9,0,1),clamp((t-tPf+0.2)/1.3,0,1),clamp((t-tBi+0.2)/1.9,0,1),clamp((t-tMo+0.2)/1.4,0,1)],
+    fo=[fin(t,tPf-0.4,0.6)*un(0),fin(t,tBi-0.4,0.6)*un(1),fin(t,tMo-0.4,0.6)*un(2),fin(t,tCh-0.2,0.6)*un(3)];
   arrive(ctx,M3_Y.x+M3_Y.w/2,M3_Y.y+M3_Y.h/2,t,tWr-0.1,()=>m3_yaml(ctx,{type:ty,fold:fo}),{dy:20,d:0.9});
-  // her record: each row's values, until its rule decides; the record steps away for what dbt writes
-  const ra=1-fin(t,tD-0.3,0.6);
+  // her record: each row's values, until its rule decides; the record steps away for a master data tool's screen
+  const ra=1-fin(t,tTo-0.3,0.6);
   if(ra>0.01)withA(ctx,ra,()=>{ctx.save();ctx.translate(140*(1-ra),0);arrive(ctx,R.x+R.w/2,R.y+R.h/2,t,tWr+0.3,()=>{m3_sheet(ctx,R.x,R.y,R.w,R.h,[["legal name",R.y+M3_R5Y.legal[0]],
       ["preferred name",R.y+M3_R5Y.pref[0]],["birth date",R.y+M3_R5Y.birth[0]],["mobile",R.y+M3_R5Y.mobile[0]]]);},{dy:16,d:0.9});
     const ap=fin(t,tWr+0.6,0.6);if(ap<=0.01){ctx.restore();return;}withA(ctx,ap,()=>{
@@ -225,9 +228,14 @@ scene("rules",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     ctx.restore();});
   // the order every other field falls back on
   m3_chain(ctx,1095,820,[fin(t,tC1-0.1,0.5),fin(t,tC2-0.1,0.5),fin(t,tC3-0.1,0.5)]);
-  // what dbt writes from the YAML: the SQL, and tests that read the same rules
-  const da=fin(t,tSQL-0.6,0.5);if(da>0.01){m3_arrow(ctx,M3_Y.x+M3_Y.w+8,230,1086,230,clamp((t-tSQL+0.5)/0.6,0,1),{lw:3});m3_arrow(ctx,M3_Y.x+M3_Y.w+8,500,1086,500,clamp((t-tTest+0.2)/0.6,0,1),{lw:3});
-    const bw=Math.round(tw(ctx,"dbt",28,700)+28);withA(ctx,da,()=>wc_badge(ctx,M3_Y.x+M3_Y.w+56-bw/2,368,"dbt"));}
+  // the same rule on a master data tool's screen, chosen from its lists and saved; it steps away for the simplest form
+  const so=fin(t,tSi-0.2,0.6);
+  if(so<0.99)withA(ctx,1-so,()=>{ctx.save();ctx.translate(140*so,0);const SX=1100,SY=150,mv=ease(clamp((t-tSet-0.8)/0.9,0,1)),pr=fin(t,tSet+1.8,0.12)*(1-fin(t,tSet+2.0,0.15));
+    arrive(ctx,SX+370,SY+186,t,tTo+0.1,()=>m3_screen(ctx,SX,SY,740,clamp((t-tSet+0.2)/1.4,0,1),{saved:clamp((t-tSet-2.0)/0.5,0,1)}),{dy:16,d:0.9});
+    m3_cursor(ctx,lerp(1520,SX+M3_SAVE.dx,mv),lerp(660,SY+M3_SAVE.dy,mv),fin(t,tSet+0.6,0.4),pr);ctx.restore();});
+  // the simplest form: this file; and what's written from it, the SQL that applies the rules and the tests that read them
+  m3_under(ctx,M3_Y.x+28,M3_Y.x+32+tw(ctx,M3_YT,28,500,"mono"),M3_Y.y+68,clamp((t-tFile)/0.6,0,1),97);
+  if(t>tSQL-0.6){m3_arrow(ctx,M3_Y.x+M3_Y.w+8,230,1086,230,clamp((t-tSQL+0.5)/0.6,0,1),{lw:3});m3_arrow(ctx,M3_Y.x+M3_Y.w+8,500,1086,500,clamp((t-tTest+0.2)/0.6,0,1),{lw:3});}
   arrive(ctx,1470,216,t,tSQL-0.3,()=>m3_sqlCard(ctx,1100,100,740,clamp((t-tSQL)/1.6,0,1)),{dy:16});
   arrive(ctx,1470,498,t,tTest-0.2,()=>m3_testCard(ctx,1100,400,740,[clamp((t-tTest-0.2)/0.8,0,1),clamp((t-tTest-0.8)/0.8,0,1)]),{dy:16});
   m3_close(ctx,S);wc_paperOver(ctx,S);});
@@ -365,8 +373,8 @@ scene("home",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   if(pl>0.01){m3_place(ctx,"plain",pl);withA(ctx,pl*dk,()=>{
     // Linh's rules beside the rate book: both written down before anything disagrees, and checked
     arrive(ctx,470,660,t,tSa+0.3,()=>wc_tag(ctx,470,660,"the Beagle's clocks",{align:"center"}),{dy:8});
-    arrive(ctx,1250,400,t,tWr-0.2,()=>{wc_panel(ctx,860,200,780,330,{kind:"card",seed:123});wc_T(ctx,"_core_person__models.yml",890,252,{w:600,size:28,f:"mono",col:WC_DARK});
-      ["legal_name","preferred_name","birth_date","mobile"].forEach((s,i)=>wc_T(ctx,"  - name: "+s+" …",890,318+i*46,{w:500,size:28,f:"mono",col:WC_DARK}));},{dy:16});
+    arrive(ctx,1250,400,t,tWr-0.2,()=>{wc_panel(ctx,860,200,780,330,{kind:"card",seed:123});wc_T(ctx,M3_YT,890,252,{w:600,size:28,f:"mono",col:WC_DARK});
+      ["legal_name","preferred_name","birth_date","mobile"].forEach((s,i)=>wc_T(ctx,"  "+s+": …",890,318+i*46,{w:500,size:28,f:"mono",col:WC_DARK}));},{dy:16});
     arrive(ctx,1250,580,t,tWr+0.3,()=>wc_tag(ctx,1250,580,"Linh's rules",{align:"center"}),{dy:8});
     wc_tick(ctx,1088,664,44,WC_ROLEINK.alumna,clamp((t-tNight)/0.5,0,1),5.5);
     arrive(ctx,1278,664,t,tNight+0.2,()=>wc_tag(ctx,1278,664,"tested every night",{align:"center"}),{dy:8});});}
@@ -375,7 +383,7 @@ scene("home",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   m3_close(ctx,S);
   wc_year(ctx,64,80,"October 1836 · Falmouth",fin(t,0.4,0.6)*(1-fin(t,tSa-0.6,0.4)));wc_paperOver(ctx,S);
   // the line, then carried down onto the end card, above the veil, landing where the card's own line fades in and takes it over
-  const KL="The rule is declared, not hidden in the SQL.",kl=fin(t,tK-0.1,0.6),ky=lerp(830,420,fin(t,B+0.3,1.1)),kg=kl*(1-fin(t,B+0.8,0.9));
+  const KL="The rule is declared, not hidden in the code.",kl=fin(t,tK-0.1,0.6),ky=lerp(830,420,fin(t,B+0.3,1.1)),kg=kl*(1-fin(t,B+0.8,0.9));
   if(kg>0.01){setScreen(ctx,S);withA(ctx,kg,()=>{ctx.save();ctx.translate(960,ky-16);ctx.scale(1,0.2);const g=ctx.createRadialGradient(0,0,10,0,0,640);
     g.addColorStop(0,rgba(WC_PAPER,0.94));g.addColorStop(0.7,rgba(WC_PAPER,0.7));g.addColorStop(1,rgba(WC_PAPER,0));ctx.fillStyle=g;ctx.fillRect(-640,-640,1280,1280);ctx.restore();});}
   wc_end(ctx,S,t,B+0.8,"Which value wins",KL,"Film 3 of 9");

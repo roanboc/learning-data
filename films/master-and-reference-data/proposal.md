@@ -80,6 +80,10 @@
 | 18 October 2026 | The sound of *Roles come and go* is a new palette: a choir humming, one voice to a note, a felt piano note for each role, a glass harmonica for the person, and the series' mark on the clarinet, from G minor to D major. Two voices on one note beat into a slow pulse on a phone's speaker, so each note has one. The music sits about 21 dB under the voice, and the one pulse, under last year's count, about 9 dB under the music. |
 | 20 October 2026 | The person queue's time limit is 7 days in every film: in *Who is it?* a test fails when a pair waits more than a week, and in *Kept, not cleaned* the oldest case's gauge and its alert use the same limit. |
 | 20 October 2026 | Linh's two student numbers are first linked on 8 October 2026 by Mei's office, as D-005 in *Who is it?*, and nothing links them before. *One person, many systems* shows them still apart in late 2025, as *One person, many roles* leaves her. |
+| 20 October 2026 | The chords of *A hub at work* move from a reed organ, the instrument of *One person, many systems*, whose two reeds to a note pulsed on a phone's speaker, to a soft synthesiser: one voice to a note, its fifths tuned pure, blooming note by note. Its marimba, vibraphone, horn and clarinet stay. |
+| 20 October 2026 | The example project gains the person, as a draft for its owners: a data domain of its own, `person` (not `party`: it holds people only, and organisations are parked), with the person, roles, contact points and identifiers apart, and the learner as a role. Its three decisions are proposed, for the registrar's office and each role's owner to approve. |
+| 20 October 2026 | Linh's five records are in the project's data: her first-degree record, S-17142, in the student system's archive of records closed before November 2024; E-4417 in the HR system, with a contract each semester since February 2023; R-3082 at the research office, on Ana Ruiz's project from 2 March to 19 December 2026; and A-61207 at the alumni office, which holds S-17142 only. No number *In the weeds of data crafting* shows changes: none of its models reads them, and the key sets file lists the new systems after its first four lines. |
+| 20 October 2026 | The new systems hold the values the films show. HR: Linh Nguyen, born 2001-05-14 (the typo), Vietnam, linh.nguyen@uni.example, Casual Academic and pay type CAS, tutoring a first-year unit, with an eighth contract for Semester 2 2026, so she still tutors in October. The research office: L. Nguyen, VN, supervised by Ana Ruiz. The alumni office: Thi Linh Nguyen, linh.nguyen2001@mail.example. The student system holds no birth date or country of birth, so a film that shows one from it says so in its rigour sheet. |
 
 ## The brief
 
@@ -400,8 +404,8 @@ Nine films of 4 to 6 minutes; the case is what happens to Linh at the university
 
 | Addition | For film |
 |---|---|
-| A person entity in the university's map and the student domain's conceptual model (or a new `party` domain), with roles, contact points and identifiers apart; `core_learner` becomes a role | 1 |
-| A small HR source with casual staff, a research office source with project members, and an Advancement source with alumni, each a new key set, and Linh's first-degree record under her old student number, so she appears five times in four systems | 1, 2, 4 |
+| A person domain on the university's map, with the person, roles, contact points and identifiers apart, and the learner as a role (added as a draft, 20 October 2026) | 1 |
+| A small HR source with casual staff, a research office source with project members, and an Advancement source with alumni, each a new key set, and Linh's first-degree record under her old student number, so she appears five times in four systems (added, 20 October 2026) | 1, 2, 4 |
 | `learner_identity_decisions` grown into a person queue, with a test that every proposed pair is decided | 2 |
 | Survivorship declared in YAML per attribute, with each value's source and date; contact points with purpose | 3 |
 | A dated role table, and an as-at-census question across roles | 4 |
@@ -449,15 +453,16 @@ Nine films of 4 to 6 minutes; the case is what happens to Linh at the university
 ## Decisions for the author
 
 1. **The series title.** *One person, many roles* · *Who is it?* · *The same one, everywhere* (kept with the plan, 17 October 2026).
-2. **The person in the project.** A new `party` domain holding the person, or the person in the student domain with roles from other domains.
+2. ~~**The person in the project.** A new `party` domain holding the person, or the person in the student domain with roles from other domains.~~ A data domain of its own, `person`, as a draft for its owners (20 October 2026).
 3. ~~**Linh as the series' person,** from the project's data, or a new character.~~ Linh, from the project's data (16 October 2026).
 4. **Organisations as parties.** Parked here; a film of their own (employers, partners, suppliers), or a later series.
 5. ~~**The hub in *A hub at work*.**~~ LakeFusion, named as the example, with the film showing nothing its documentation can't back (the plan, 17 October 2026).
 6. **The same topic as governance,** or its own on the site (its own for now, *Master and reference data*, 17 October 2026).
+7. **Linh's course.** The films say she came back for a master's; the project has S-20436 in the Graduate Certificate in Health Informatics, and changing that would change *In the weeds of data crafting*'s numbers. For now the films stay as they are, and each rigour sheet says so (20 October 2026).
 
 ## Next checkpoints
 
 1. ~~The author agrees this proposal.~~ The plan for films 2 to 9 approved, 17 October 2026: each film is made in its own thread, and the labs and scenarios in another. The open points above stay open.
-2. The project's additions above, starting with the person and role model and the two new sources.
+2. ~~The project's additions above, starting with the person and role model and the two new sources.~~ The person domain, as a draft, and the HR, research and alumni systems with Linh's first-degree record, added 20 October 2026. Next: the owners approve the person domain's decisions, and each film adds its own part of the table above.
 3. ~~A script and rigour sheet for *One person, many roles*.~~ Drafted, 16 October 2026: [script](1-one-person-many-roles/script.md). ~~The source.~~ Built, 17 October 2026: [source](1-one-person-many-roles/source/README.md). Rebuilt the same day as a return to study, after the author's second review. Next for it: the author watches it, and approves it or asks for corrections.
 4. The other eight films, each made in its own thread and pull request, whose files arrive with it. Built, 17 October 2026: *Lists everyone uses* ([script](5-lists-everyone-uses/script.md), [source](5-lists-everyone-uses/source/README.md)), *One person, many systems* ([script](7-one-person-many-systems/script.md), [source](7-one-person-many-systems/source/README.md)) and *A hub at work* ([script](8-a-hub-at-work/script.md), [source](8-a-hub-at-work/source/README.md)). Built, 18 October 2026: *Who is it?* ([script](2-who-is-it/script.md), [source](2-who-is-it/source/README.md)), *Roles come and go* ([script](4-roles-come-and-go/script.md), [source](4-roles-come-and-go/source/README.md)) and *For this purpose only* ([script](6-for-this-purpose-only/script.md), [source](6-for-this-purpose-only/source/README.md)). Next for each: the author watches it, and approves it or asks for corrections.

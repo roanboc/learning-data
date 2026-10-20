@@ -2,16 +2,17 @@
 # (shared/tools/music.py). The palette is new for this series (PLAYBOOK.md: vary the sound itself, film to film), and it follows the
 # watercolour: the chords bloom note by note, each note coming in a little after the one below it, like paint spreading on wet paper;
 # a clarinet carries the series' mark, one note, its octave, its fifth and the note again (1-8-5-1), the same one wherever it goes;
-# a cello, plucked, is the roles: each role has its own note, the same in every chapter, so when every role hears the new email at
-# the end, the notes they arrived on come back in order; and the cello, bowed, is the person: whenever Linh stands in white paper,
-# it plays the same D and the A above it, whatever the chapter's key. The film starts in D minor, in the parish of 1686, and ends in
-# D major. The effects are the paper's: a quill or a pencil, a wet brush, a card or an envelope, a stamp, a letterbox's flap.
+# a cello, plucked, is the roles: each role has its own note, the same in every chapter, so when the student role is added to the
+# person at the end, it comes in on the note it has had all along; and the cello, bowed, is the person: whenever Linh stands in white
+# paper, it plays the same D and the A above it, whatever the chapter's key. The film starts in D minor, in the parish of 1686, and
+# ends in D major. The effects are the paper's: a quill or a pencil, a wet brush, a card or an envelope, a stamp, a few muffled keys.
 # The rules from In the weeds of data crafting hold:
 #  - Nothing loops. The music is a bed of sustained chords that change with the narration; nothing repeats in the background.
 #  - Every sound is an event on screen, at the moment it appears. Each effect below uses the same timing as the picture in
 #    src/scenes.js (the same word, and the same offset), so sound and picture stay together when the voice is re-timed.
-#  - The one exception is feeling: when the certificate and the payslip go to the family's letterbox and Minh opens them, a low,
-#    muted pulse (music.py's urgent()) rises under the scene, leaning on the semitone, and fades as the chapter moves on.
+#  - The one exception is feeling: when her application asks her for a transcript of the degree the university gave her, and the
+#    alumni office invites her to the master's she's already doing, a low, muted pulse (music.py's urgent()) rises under the scene,
+#    leaning on the semitone, and fades as the chapter ends.
 # And everything stays low and soft: knocks, paper, muffled keys, a pencil, low notes, filtered below about 2.5 kHz.
 
 # when a word of a line is spoken, as the film's own kt_w() estimates it: along the line's voiced length, from the words the voice reads
@@ -67,9 +68,9 @@ def person(s, g=0.026, pan=0.0):
     """the person: the bowed D, and the A above it, the same two notes wherever she stands in white paper"""
     cello(50, s, 3.2, g, pan); cello(57, s + 0.55, 2.6, g * 0.55, pan + 0.15)
 # each role's note, the same in every chapter
-ROLE = {'student': 50, 'platform': 52, 'customer': 55, 'tutor': 57, 'alumna': 62}
+ROLE = {'student': 50, 'applicant': 52, 'researcher': 55, 'tutor': 57, 'alumna': 62}
 def role(r, s, g=0.03, pan=0.0):
-    pizz(ROLE[r], s, g * (0.6 if r == 'alumna' else 1), pan)
+    pizz(ROLE[r], s, g, pan)
 def mark(start, root=62, g=0.05):
     """the series' mark, 1-8-5-1, on the clarinet, over the plucked root"""
     for i, iv in enumerate([0, 12, 7, 0]):
@@ -110,10 +111,6 @@ def air(s, sec=0.7, g=0.02, pan=0.0):
 def stamp(s, g=0.075):
     """a stamp: a low thud and a knock, nothing bright"""
     thud(s, g); s_knock(s + 0.01, g * 0.4, 0, 200)
-def flap(s, g=0.03, pan=0.0):
-    """a letterbox's flap: a soft, low clack and a short ring of thin metal, kept under about 1.5 kHz"""
-    x = tt(0.35); b = np.sin(2 * np.pi * 310 * x) * np.exp(-x * 30) + 0.5 * np.sin(2 * np.pi * 740 * x) * np.exp(-x * 22) + 0.3 * filt(noise(0.35), 'band', (200, 1500)) * np.exp(-x * 60)
-    X(norm(filt(b.astype(np.float32), 'low', 1500)), s, g, pan)
 def heart(s, g=0.04, pan=0.0):
     """a heartbeat, once: two low knocks"""
     s_knock(s, g, pan, 90); s_knock(s + 0.28, g * 0.7, pan, 80)
@@ -148,35 +145,40 @@ air(C(J, 'once', 0.9), 1.4, 0.026, P(1100))
 person(W(J, 'once', 'followed'), 0.024, P(1228))
 mark(B + 0.8)
 
-# 2. A new email: F major. Her name card; the email she shares with Minh; her phone; her own address, typed in; the line to the student
-#    system; the record taking it, on the student's note; a tick
-J = 'email'; tGets, tTell = W(J, 'own', 'gets'), W(J, 'own', 'tells')
-bed([(S0(J), FMAJ9), (C(J, 'shared', -0.3), BBMAJ7), (C(J, 'own', -0.3), C69), (C(J, 'done', -0.2), FMAJ7)], E(J) + 1.0)
-knock(C(J, 'today', 0.3), 0.024, P(230))
-paper(C(J, 'shared', 0.2), 0.03, P(1040))
-tap(tGets + 0.2, 0.018, P(620))
-knock(tGets + 0.3, 0.022, P(1040)); typing(tGets + 0.5, 1.5, 0.013, P(1040))
-air(tTell + 0.3, 0.7, 0.022, P(450))
-knock(tTell, 0.024, P(290))
-role('student', tTell + 1.1, 0.034, P(290))
-tick_(tTell + 1.3, 0.016, P(400))
+# 2. Back to study: F major. Her name card; her record from her first degree, on the student's note; her phone, and a few muffled keys
+#    as she applies; the new record, on the same note, and its number stamped on, as in 1947; the line towards the old record, a breath,
+#    and the pencil's cross where it stops
+J = 'back'; tGrad, tOnl, tNum = W(J, 'today', 'graduated'), W(J, 'applies', 'online'), W(J, 'applies', 'number')
+bed([(S0(J), FMAJ9), (C(J, 'back', -0.3), BBMAJ7), (C(J, 'applies', -0.3), C69), (C(J, 'nothing', -0.2), DM7)], E(J) + 1.0)
+knock(W(J, 'today', 'Linh Nguyen', -0.2), 0.024, P(230))
+paper(tGrad, 0.028, P(270)); role('student', tGrad + 0.1, 0.032, P(270))
+tap(C(J, 'applies', -0.1), 0.018, P(560)); typing(C(J, 'applies', 0.3), 1.2, 0.012, P(560), 5)
+paper(tOnl, 0.028, P(930)); role('student', tOnl + 0.1, 0.03, P(930))
+stamp(tNum - 0.05, 0.06)
+air(W(J, 'nothing', 'linked'), 0.7, 0.018, P(645))
+cross(W(J, 'nothing', 'graduated with'), 0.016, P(595))
 
-# 3. Four records, four Linhs: A minor. Each record arrives on its role's note; the tag that says it's still the family email; a pencil
-#    round the staff number; the certificate and the payslip, each picked up and through the letterbox's flap, under the pulse; the
-#    letterbox's name; Minh's letter; the alumna's record, next year, quietly
-J = 'four'; tCert, tPay = W(J, 'inbox', 'certificate'), W(J, 'inbox', 'payslip'); d1 = min(1.2, max(0.7, tPay - tCert - 0.05))
-bed([(S0(J), AM7), (C(J, 'short', -0.3), FMAJ7), (C(J, 'tutor', -0.3), DM7), (C(J, 'inbox', -0.3), E7SUS4), (C(J, 'alumni', -0.2), AM7)], E(J) + 1.0)
-role('platform', W(J, 'platform', 'learning platform'), 0.032, P(870))
-role('customer', W(J, 'short', 'short-course'), 0.032, P(270))
-knock(W(J, 'short', 'So does'), 0.022, P(1190))
-role('tutor', W(J, 'tutor', 'tutors'), 0.032, P(900))
-ring(W(J, 'tutor', 'staff number'), 0.6, 0.015, P(1070))
-paper(tCert, 0.028, P(560)); flap(tCert + d1 * 0.9, 0.032, P(1765))
-paper(tPay, 0.028, P(1130)); flap(tPay + 0.99, 0.032, P(1765))
-knock(max(W(J, 'inbox', 'family inbox'), tPay + 1.12), 0.022, P(1765))
-paper(W(J, 'inbox', 'Minh', 0.1), 0.03, P(1520), 0.6)
-role('alumna', W(J, 'alumni', 'alumni office'), 0.032, P(940))
-urgent(tCert - 0.3, C(J, 'alumni', 0.4), bpm=96, root=40, g=0.044, steps=(0, 0, 1, 0))
+# 3. Five records, five Linhs: A minor. Three blank cards set down as the five are counted; a pencil round the old number and the new;
+#    each record named on its role's note; a pencil round the alumni office's number, the old one; her application, on the applicant's
+#    note, and the transcript it asks for typed in, under the pulse; "required"; a pencil round the degree her own record holds; the
+#    alumni office's email, on the alumna's note; a pencil round the master's she's already doing; the lines to her fading; the tag
+J = 'five'; tFive, tApp, tTr = W(J, 'now', 'five records'), W(J, 'transcript', 'her application'), W(J, 'transcript', 'a transcript')
+bed([(S0(J), AM7), (C(J, 'alumni', -0.3), FMAJ7), (C(J, 'research', -0.3), DM7), (C(J, 'transcript', -0.3), E7SUS4), (C(J, 'none', -0.2), AM7)], E(J) + 1.0)
+for i, x in enumerate([270, 930, 930]):
+    knock(tFive + i * 0.15, 0.016, P(x), 220 + 20 * i)
+ring(W(J, 'students', 'the old number'), 0.7, 0.015, P(400)); ring(W(J, 'students', 'the new'), 0.7, 0.015, P(1032))
+role('alumna', W(J, 'alumni', 'alumni office'), 0.032, P(270))
+ring(W(J, 'alumni', 'only the old'), 0.7, 0.015, P(400))
+role('tutor', W(J, 'hr', 'HR'), 0.032, P(930))
+role('researcher', W(J, 'research', 'research office'), 0.032, P(930))
+paper(tApp - 0.2, 0.03, P(1540)); role('applicant', tApp - 0.1, 0.026, P(1540))
+typing(tTr, 1.0, 0.012, P(1430), 5); knock(tTr + 1.0, 0.018, P(1720))
+ring(W(J, 'transcript', 'the university gave'), 0.8, 0.016, P(200))
+paper(W(J, 'invite', 'invites her', -0.2), 0.03, P(1540), 0.5); role('alumna', W(J, 'invite', 'invites her', -0.1), 0.026, P(1540))
+ring(W(J, 'invite', 'already doing'), 0.8, 0.016, P(880))
+air(W(J, 'none', 'nobody'), 1.4, 0.016, P(600))
+knock(W(J, 'none', 'one person', -0.3), 0.02, P(930))
+urgent(tApp - 0.3, C(J, 'none', 0.4), bpm=96, root=40, g=0.044, steps=(0, 0, 1, 0))
 
 # 4. The kinds of data: C major. A shelf for each kind as it's named; Linh in white paper, master data, and the person's notes; her roles'
 #    colours, a brush; the two lists, and the value that sorts her; the slips of what happens to her; the glossary's card; the arrow
@@ -218,11 +220,11 @@ bed([(S0(J), GMAJ9), (C(J, 'roles', -0.3), EM9), (C(J, 'contacts', -0.3), CMAJ9)
 brush(C(J, 'draws', 0.3), 0.02, P(900), 1.2)
 person(C(J, 'person'), 0.026, P(210))
 knock(C(J, 'person', 0.3), 0.022, P(210))
-role('student', W(J, 'roles', 'student'), 0.032, P(980)); role('tutor', W(J, 'roles', 'tutor'), 0.032, P(980))
-role('customer', W(J, 'roles', 'customer'), 0.032, P(1560)); role('alumna', W(J, 'roles', 'each with', 0.5), 0.032, P(1560))
+role('student', W(J, 'roles', 'student'), 0.032, P(980)); role('tutor', W(J, 'roles', 'tutor'), 0.032, P(1560))
+role('researcher', W(J, 'roles', 'researcher'), 0.032, P(980)); role('alumna', W(J, 'roles', 'each with', 0.5), 0.032, P(1560))
 knock(W(J, 'contacts', 'an email'), 0.02, P(980)); knock(W(J, 'contacts', 'each with'), 0.02, P(1564))
 pizz(50, W(J, 'contacts', 'some shared'), 0.022, P(1700)); pizz(57, W(J, 'contacts', 'some shared'), 0.018, P(1760))
-for k, t0 in enumerate([W(J, 'ids', 'a student number'), W(J, 'ids', 'a student number', 0.8), W(J, 'ids', 'a staff number')]):
+for k, t0 in enumerate([W(J, 'ids', 'a student number'), W(J, 'ids', 'a staff number'), W(J, 'ids', 'a staff number', 1.1)]):
     tap(t0, 0.026, P(880 + 400 * k))
 knock(C(J, 'none', 0.1), 0.02, P(210))
 air(C(J, 'ea'), 0.7, 0.024, P(1300))
@@ -237,7 +239,7 @@ bed([(S0(J), DMAJ9), (C(J, 'roles', -0.3), BM7), (C(J, 'attrs', -0.3), GADD9), (
 paper(C(J, 'write', 0.3), 0.034, P(940), 0.6)
 knock(C(J, 'write', 0.9), 0.022, P(1675))
 quill(C(J, 'roles', 0.3), 1.8, 0.013, P(900)); quill(C(J, 'attrs', 0.3), 1.6, 0.013, P(900))
-for t0 in (C(J, 'legal', 0.3), C(J, 'own', 0.3), W(J, 'own', 'personal email'), C(J, 'hr', 0.3)):
+for t0 in (C(J, 'legal', 0.3), C(J, 'own', 0.3), W(J, 'own', 'home address'), C(J, 'hr', 0.3)):
     brush(t0, 0.018, P(1250), 0.6)
 person(C(J, 'mei', 0.2), 0.024, P(900))
 tick_(W(J, 'mei', 'who someone'), 0.017, P(1300))
@@ -293,26 +295,28 @@ for i, q in enumerate(['q1', 'q2', 'q3', 'q4']):
 knock(C(J, 'q1', 1.6), 0.016, P(QX[1])); knock(C(J, 'q3', 1.6), 0.016, P(QX[2]))
 pizz(50, tY + 0.3, 0.03, P(QX[0])); pizz(57, tY + 0.42, 0.024, P(QX[0]))
 
-# 11. The series: G major. The line drawn in pencil; each film set on it as it's named, nine notes rising along it, left to right
-J = 'series'
-bed([(S0(J), GMAJ9), (C(J, 'come', -0.3), EM9), (C(J, 'see', -0.3), CMAJ9), (C(J, 'keep', -0.3), DSUS2), (E(J) - 2.0, GMAJ7)], E(J) + 1.0)
+# 11. The series: G major. The line drawn in pencil, and this film on it; the four parts set down blank, a soft knock each as they're
+#     counted; then each part named, and its two films set on the line, nine notes rising along it, left to right; and a wordless
+#     moment to read them, on the last chord
+J = 'series'; PX = [590, 960, 1330, 1700]
+bed([(S0(J), GMAJ9), (C(J, 'names', -0.3), EM9), (W(J, 'names', 'Sharing', -0.3), CMAJ9), (C(J, 'breath'), GMAJ7)], E(J) + 1.0)
 quill(S0(J), 1.6, 0.013, 0.0)
-FILMS = [S0(J) + 0.2, W(J, 'first', 'Who is it'), W(J, 'first', 'Which value'), W(J, 'come', 'Roles that'), W(J, 'come', 'the lists'),
-         W(J, 'see', 'What each'), W(J, 'see', 'One person'), W(J, 'keep', 'A hub'), W(J, 'keep', 'how to keep')]
-for i, (t0, m) in enumerate(zip(FILMS, [50, 52, 55, 57, 59, 62, 64, 67, 69])):
-    pizz(m, t0, 0.026 if i else 0.032, P(200 + i * 190))
+pizz(50, S0(J) + 0.2, 0.032, P(200))
+for g, x in enumerate(PX):
+    knock(W(J, 'parts', 'four parts', 0.12 * g), 0.014, P(x), 220 + 20 * g)
+for g, (word, (a, b)) in enumerate(zip(['Who someone', 'Roles and', 'Sharing', 'keeping'], [(52, 55), (57, 59), (62, 64), (67, 69)])):
+    pizz(a, W(J, 'names', word, 0.15), 0.026, P(PX[g])); pizz(b, W(J, 'names', word, 0.4), 0.026, P(PX[g]))
 
-# 12. Once: D major. The field, and the new email typed in; "once", on the student's note an octave up; the line to Linh; every role
-#     hears, each record taking the new email on the note it arrived on; the alumna's, faintly; the tag; the person's notes under the
-#     line; the series' mark on the end card
-J = 'once'; B = C(J, 'breath'); take = C(J, 'change', 1.5)
-bed([(S0(J), DMAJ9), (C(J, 'hears', -0.3), GADD9), (C(J, 'know', -0.3), A69), (B, DMAJ9)], TOT + 1.0)
-knock(C(J, 'change', -0.5), 0.022, P(1500)); typing(C(J, 'change', 0.1), 1.3, 0.013, P(1500))
-pizz(62, C(J, 'change', 1.4), 0.03, P(1690))
-air(take, 0.6, 0.02, P(900))
-for k, (r, x) in enumerate([('student', 290), ('platform', 820), ('customer', 270), ('tutor', 900)]):
-    role(r, take + 0.7 + k * 0.32 + 0.5, 0.03, P(x))
-role('alumna', take + 2.7, 0.026, P(940))
-knock(C(J, 'hears', 0.2), 0.02, P(905))
+# 12. Found first: D major. Her application, on the applicant's note; the line that finds her, a breath, and a tick; the student's band
+#    painted in, a brush and the student's note; its chip; a tick for her degree, already on file; the alumni office's card, and its
+#    tick; the person's notes under the line; the series' mark on the end card
+J = 'found'; B = C(J, 'breath'); tAp, tFind, tRole = W(J, 'now', 'Linh applies'), W(J, 'now', 'finds her'), W(J, 'adds', 'a role')
+bed([(S0(J), DMAJ9), (C(J, 'adds', -0.3), GADD9), (C(J, 'there', -0.3), DMAJ7), (C(J, 'know', -0.3), A69), (B, DMAJ9)], TOT + 1.0)
+paper(tAp - 0.3, 0.03, P(1540)); role('applicant', tAp - 0.2, 0.026, P(1540))
+air(tFind, 0.8, 0.02, P(900)); tick_(tFind + 0.7, 0.016, P(1260))
+brush(tRole, 0.02, P(560), 0.8); role('student', tRole + 0.1, 0.034, P(560))
+knock(tRole + 0.3, 0.02, P(920))
+tick_(W(J, 'there', 'Her degree'), 0.016, P(1260))
+paper(W(J, 'there', 'the alumni', -0.3), 0.028, P(1540)); tick_(W(J, 'there', 'sees'), 0.016, P(1260))
 person(C(J, 'know', -0.1), 0.026, 0.0)
 mark(B + 1.0)

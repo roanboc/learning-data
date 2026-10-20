@@ -1,11 +1,11 @@
 /* Learning Data: "Pausa para pensar" de Today, and where it's going, en español. Mantén las claves iguales a think.en.js.
    La película se detiene al final de tres capítulos (find, path, why), con una pregunta cada vez. think.js las muestra,
-   y las lista otra vez en "Piénsalo" (#think-list). La serie todavía no tiene labs, así que ninguna pregunta tiene "stop",
-   y el .player data-labs de la página está vacío. */
+   y las lista otra vez en "Piénsalo" (#think-list). El "stop" de una pregunta es el lab de la serie que abre, en la
+   página de labs de la serie (el .player data-labs de la página es "../labs/"); una pregunta sin él no tiene enlace a un lab. */
 window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
   qs:{
-  "find":{q:"Ubicados en el mapa, los sistemas muestran tres debajo de una capacidad, una capacidad con solo una hoja de cálculo, y un sistema debajo de ninguna. ¿Por qué la lista de 140 no podía mostrarlo?",
+  "find":{stop:"place",q:"Ubicados en el mapa, los sistemas muestran tres debajo de una capacidad, una capacidad con solo una hoja de cálculo, y un sistema debajo de ninguna. ¿Por qué la lista de 140 no podía mostrarlo?",
     opts:[{t:"La lista estaba desactualizada."},{t:"Una lista solo dice qué se compró; solo ubicados frente a las capacidades muestran superposiciones, huecos y sistemas en la sombra.",ok:true},{t:"La lista no incluía las hojas de cálculo."}],
     why:"Una lista dice qué se compró; un mapa dice para qué sirve cada sistema. Las superposiciones, los huecos y los sistemas en la sombra aparecen solo cuando los sistemas se ubican debajo de las capacidades a las que sirven. ¿Qué mostrarían los sistemas de tu organización, ubicados así?"},
   "path":{q:"¿Por qué el modelo de capacidad va antes que el intercambio en el barrio en el camino?",

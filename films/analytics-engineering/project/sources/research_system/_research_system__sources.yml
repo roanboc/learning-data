@@ -1,0 +1,51 @@
+sources:
+  - name: research_system
+    description: '{{ doc("source_research_system") }}'
+    database: "{{ env_var('DBT_SOURCES_CATALOG', target.database) }}"
+    schema: "{{ env_var('DBT_SOURCES_SCHEMA_PREFIX', '') }}research_system"
+    config:
+      # Read by dbt-duckdb only: on DuckDB each table is a CSV file in data/. Databricks reads the ingested table.
+      external_location: "read_csv('data/research_system/{name}.csv', header = true, all_varchar = true)"
+      # on DuckDB the column is text; on Databricks the cast does nothing
+      loaded_at_field: "cast(_loaded_at as timestamp)"
+      freshness:
+        warn_after: {count: 2, period: day}
+        error_after: {count: 7, period: day}
+      meta:
+        owner: Research office
+        key_set:
+          code: RES
+          system: research system
+          owner: Research office
+          # The day the project first read this system's keys: the key sets seed lists them in that order.
+          since: 2026-10-20
+          # Each key the system issues, and the case staging writes it in (docs/conventions.md).
+          system_keys:
+            - {key: member_id, case: upper, example: R-3082}
+            - {key: project_code, case: upper, example: RP-26017}
+          example: RES|R-3082
+    tables:
+      - name: researchers
+        description: One row per version of a researcher's record. The system key is the member ID.
+        config:
+          meta:
+            system_key: [member_id]
+        columns:
+          - name: member_id
+            description: The member ID the research office issues, like R-3082. One per person, whatever projects they join.
+          - name: staff_id
+            description: The researcher's staff ID, from HR, when they're on the staff.
+          - name: country_of_birth
+            description: The country of birth, as its two-letter code from ISO 3166.
+      - name: projects
+        description: One row per version of a research project. The system key is the project code.
+        config:
+          meta:
+            system_key: [project_code]
+      - name: project_members
+        description: >
+          One row per version of a researcher's place on a project. The system key is the member
+          ID and the project code.
+        config:
+          meta:
+            system_key: [member_id, project_code]

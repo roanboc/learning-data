@@ -163,8 +163,9 @@ decisions:
     text: 'On Databricks, every classified column of a table gets a Unity Catalog tag, personal_data, with
       its class from the model''s YAML (direct, pseudonymous or none). When the var personal_data_readers
       names a group, each column of direct personal data also gets a mask: that group sees the value,
-      everyone else sees ***. The identity that runs dbt is in the group. On DuckDB, neither: it has no
-      tags or masks, as DEC-PRJ-09 leaves keys out there.'
+      everyone else sees ***. The identity that runs dbt is in the group. Or, with the var
+      personal_data_policy, one Unity Catalog policy masks every column tagged direct, instead of a mask
+      per column. On DuckDB, neither: it has no tags or masks, as DEC-PRJ-09 leaves keys out there.'
     why: The class is decided once, where the model is, and checked on every pull request (DEC-PRJ-12).
       Pushed to the platform from there, the platform protects what the project says is personal, and
       the two can't drift.

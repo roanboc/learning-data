@@ -15,7 +15,9 @@
 #    in the pause between chapters and fades under the first words; under a moment on screen, an instrument's few notes or one effect;
 #    and in a pause without words (this week's result on Friday, and the end card).
 #  - Nothing loops, trembles or pulses: no urgent pulse (the first cut had one under Friday's wrong link), no vibraphone motor, and one
-#    voice to a note everywhere, so nothing beats on a phone's speaker.
+#    voice to a note everywhere, all in equal temperament, so nothing beats on a phone's speaker (tools/quiet.py checks it).
+#  - No chapter after the opening has music for more than half its length, so the end, with its short lines, names the three parts
+#    in silence, and its music is the last chord and the mark.
 #  - Every sound is an event on screen, at the moment it appears. Each effect below uses the same timing as the picture in
 #    src/scenes.js (the same word, and the same offset), so sound and picture stay together when the voice is re-timed.
 # And everything stays low and soft: a pen, muffled keys, a breath, low notes, filtered below about 2.5 kHz.
@@ -37,30 +39,21 @@ P = lambda x: max(-0.85, min(0.85, (x - 960) / 960 * 0.9))  # where something is
 # ---- the film's instruments, all low-passed ----
 # the levels: the music sits about 21 dB under the voice while it speaks, as in the other series' films, and the effects just over it
 BED, NOTE, FX = 1.9, 1.6, 2.0
-def pure(ch):
-    """how far, in cents, to move each note of a chord so that its fifths, fourths and octaves are pure. An equal-tempered fifth is
-    2 cents narrow, so a low note's third harmonic and its fifth's second beat about once every two or three seconds, which a phone's
-    one speaker turns into a slow pulse; 2 cents is too little to hear against the other instruments"""
-    ch = sorted(ch); c = {ch[0]: 0.0}; todo = [ch[0]]
-    while todo:
-        a = todo.pop()
-        for b in ch:
-            if b not in c and (b - a) % 12 in (0, 5, 7):
-                c[b] = c[a] + {0: 0.0, 7: 1.955, 5: -1.955}[(b - a) % 12]; todo.append(b)
-    return [c.get(m, 0.0) for m in ch]
 def synth(ch, start, sec, g=0.03):
-    """a soft synthesiser's chord: a sawtooth's harmonics through a gently resonant filter that opens as each note comes in (from
-    300 to 800 Hz) and then settles (to about 560 Hz), nothing above 1.8 kHz; one voice to a note (two voices a hair apart beat into
-    a pulse on a phone), its fifths pure; the notes come in one after another from the lowest, so the chord blooms as the series'
-    chords do; it fades over its last 2.6 seconds"""
+    """a soft synthesiser's chord: odd harmonics only, falling a little faster than a triangle wave's, through a gently resonant filter
+    that opens as each note comes in (from 300 to 800 Hz) and then settles (to about 560 Hz), nothing above 1.8 kHz. One voice to a
+    note, in equal temperament like the other instruments, so a note that two chords or two instruments share is the same note
+    (version 2 tuned each chord's fifths pure, so a note two chords shared was a little different in each, and the two beat as one
+    chord gave way to the next); and the overtones two notes share are too unequal to beat. The notes come in one after another from
+    the lowest, so the chord blooms as the series' chords do; it fades over its last 2.6 seconds"""
     x = tt(sec); ch = sorted(ch)
-    for k, (m, c) in enumerate(zip(ch, pure(ch))):
-        f = mf(m) * 2 ** (c / 1200); d = 0.14 * k
+    for k, m in enumerate(ch):
+        f = mf(m); d = 0.14 * k
         e = np.clip((x - d) / 1.6, 0, 1) ** 1.8 * np.clip((sec - x) / 2.6, 0, 1)
         fc = 300 + 500 * np.clip((x - d) / 2.5, 0, 1) ** 0.7 - 240 * np.clip((x - d - 2.5) / 5.0, 0, 1)
-        s = sum(np.sin(2 * np.pi * f * h * x + 0.7 * h + k) / h / np.sqrt((1 - (f * h / fc) ** 2) ** 2 + (f * h / fc / 1.3) ** 2)
-                for h in range(1, int(1800 / f) + 1))
-        put(filt((s * e / len(ch)).astype(np.float32), 'high', 60), start, g * BED, (k - (len(ch) - 1) / 2) * 0.16)
+        s = sum(np.sin(2 * np.pi * f * h * x + 0.7 * h + k) / h ** 2.4 / np.sqrt((1 - (f * h / fc) ** 2) ** 2 + (f * h / fc / 1.3) ** 2)
+                for h in range(1, int(1800 / f) + 1, 2))
+        put(filt((s * e * 1.3 / len(ch)).astype(np.float32), 'high', 60), start, g * BED, (k - (len(ch) - 1) / 2) * 0.16)  # as loud as version 3's sawtooth
 def bed(keys, end, g=0.03):
     """the opening's chords, each from its moment (a little early, so it has come in by then) until a little after the next one starts"""
     for i, (t0, ch) in enumerate(keys):
@@ -211,10 +204,9 @@ J = 'five'
 for q, m in zip(['explain', 'undo', 'review', 'mask', 'publish'], [51, 53, 55, 58, 60]):
     mallet(m, C(J, q, -0.2), 0.026, P(600))
 
-# 11. Explained and undone: B flat major, Friday evening. At the turn, home; the three parts, each on its own instrument: the rules'
-#     marimba, the helper's vibraphone, the people's horn; and after the last words, the last chord, and the series' mark on the end card
+# 11. Explained and undone: B flat major, Friday evening. No music under the voice: the three parts are named, and everything explained
+#     and undone, in silence (each part's instrument has played at its moments). After the last words, the last chord blooms, and the
+#     series' mark plays on the end card
 J = 'end'; B = C(J, 'breath'); tLast = END(J, 'end', 0.2)
-turn(J, BB9)
-mallet(58, W(J, 'three', 'Rules', -0.1), 0.03, P(800)); vibe(65, W(J, 'three', 'AI', -0.1), 0.026, P(1150)); horn(62, W(J, 'three', 'People', -0.1), 2.0, 0.024, P(1520))
 synth(BBADD9, tLast, TOT - tLast + 1.0)
 mark(B + 1.0)

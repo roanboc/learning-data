@@ -457,7 +457,7 @@ const NARR={
 "product":{"name":"The person, published","lead":0.8,"tail":1.0,"vo":[
  {"id":"behind","gap":0.8,"text":"Behind the search is the person, published as a data product, and owned by Mei's office."},
  {"id":"contract","gap":0.8,"text":"A contract fixes its shape, and a new version marks any change to it, so nothing that reads it breaks by surprise."},
- {"id":"tools","gap":0.8,"text":"dbt builds and tests it, and Databricks governs who may read it."},
+ {"id":"tools","gap":1.3,"text":"The data platform builds and tests it, and governs who may read it."},
  {"id":"synced","gap":0.8,"text":"A synced table serves it to the application, while the applicant waits."}]},
 "shared":{"name":"One person, shared","lead":0.8,"tail":1.0,"vo":[
  {"id":"bern","gap":0.8,"text":"In Bern, each country kept its post office, and they shared the rules."},
@@ -465,7 +465,7 @@ const NARR={
  {"id":"idea","gap":0.8,"text":"Choose the lightest way that solves the problem."}]}
 };
 
-const VODUR={"bern/pairs": 6.508, "bern/route": 2.085, "bern/signed": 3.786, "bern/one": 5.99, "bern/own": 5.34, "again/today": 4.485, "again/last": 4.485, "again/still": 4.318, "again/four": 7.002, "ways/noor": 4.102, "ways/registry": 6.132, "ways/copy": 5.497, "ways/master": 5.745, "ways/central": 3.772, "after/have": 4.848, "after/late": 3.982, "after/cost": 3.742, "lightest/which": 2.222, "lightest/doors": 3.672, "lightest/those": 6.845, "lightest/bern": 5.416, "elsewhere/bank": 4.937, "elsewhere/country": 5.682, "search/door": 5.169, "search/compares": 3.967, "search/clear": 4.288, "search/nobody": 2.841, "rule/write": 6.109, "rule/add": 4.867, "found/applies": 2.569, "found/finds": 5.09, "found/adds": 7.406, "apart/other": 4.57, "apart/born": 4.807, "apart/only": 5.815, "product/behind": 5.362, "product/contract": 6.744, "product/tools": 4.123, "product/synced": 3.875, "shared/bern": 4.009, "shared/here": 3.541, "shared/idea": 2.524};
+const VODUR={"bern/pairs": 6.508, "bern/route": 2.085, "bern/signed": 3.786, "bern/one": 5.99, "bern/own": 5.34, "again/today": 4.485, "again/last": 4.485, "again/still": 4.318, "again/four": 7.002, "ways/noor": 4.102, "ways/registry": 6.132, "ways/copy": 5.497, "ways/master": 5.745, "ways/central": 3.772, "after/have": 4.848, "after/late": 3.982, "after/cost": 3.742, "lightest/which": 2.222, "lightest/doors": 3.672, "lightest/those": 6.845, "lightest/bern": 5.416, "elsewhere/bank": 4.937, "elsewhere/country": 5.682, "search/door": 5.169, "search/compares": 3.967, "search/clear": 4.288, "search/nobody": 2.841, "rule/write": 6.109, "rule/add": 4.867, "found/applies": 2.569, "found/finds": 5.09, "found/adds": 7.406, "apart/other": 4.57, "apart/born": 4.807, "apart/only": 5.815, "product/behind": 5.362, "product/contract": 6.744, "product/tools": 3.762, "product/synced": 3.875, "shared/bern": 4.009, "shared/here": 3.541, "shared/idea": 2.524};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2387,9 +2387,6 @@ arm=function(ctx,P,s,a,br,po){if(po.hold!=="envelope")return wc_arm0(ctx,P,s,a,b
    country's register; the search and its three outcomes; who may create a person; the second Linh Nguyen; and the person as a data
    product. Every name starts with m7_ (this film) or M7_. */
 
-// the tools' logos (style2.js), for chapter 11: the series' finishing pass doesn't load them
-loadLogos();
-
 // the second Linh Nguyen: as unlike the first as two people are, younger, with long hair and a cardigan; no side, as Linh has none
 PEOPLE.linh2={name:"Linh Nguyen",role:"Applicant",side:"Person",does:"uses",edge:[236,232,226],seed:23,
   skin:[222,182,146],hair:{style:"long",c:[22,18,20]},
@@ -2723,15 +2720,17 @@ function m7_product(ctx,t,x,y,o){const w=640,h=600;wc_panel(ctx,x,y,w,h,{kind:"c
   M7_PROD.forEach(([k,v],i)=>{const yy=y+150+i*96,lit=o.lit[i]||0,col=i?WC_SIDE.tech:WC_SIDE.biz;wc_panel(ctx,x+300,yy-44,300,72,{kind:"tag",seed:i+60});
     if(lit>0.01)withA(ctx,lit,()=>wc_panel(ctx,x+300,yy-44,300,72,{kind:"chip",role:col,seed:i+60}));
     wc_T(ctx,k,x+324,yy-10,{w:600,size:28,col:lit>0.5?WC_DARK:WC_MUTED});wc_T(ctx,v,x+324,yy+22,{w:800,size:28,col:WC_DARK});});}
-// the model's settings in dbt, one line lit at a time
+// the person's settings on the data platform, in their simplest form, YAML, one line lit at a time. No tool is named: master data
+// solutions keep such settings in many ways, often behind a screen of their own
 const M7_YAML=["group: person","access: public","contract: {enforced: true}","latest_version: 1"];
-function m7_yaml(ctx,t,x,y,o){const w=980,h=330;wc_panel(ctx,x,y,w,h,{kind:"card",seed:52});const lw=logo(ctx,"dbt",x+32,y+26,52);
-  wc_T(ctx,"dbt",x+40+Math.max(lw,50),y+64,{w:800,size:32,col:WC_DARK});wc_T(ctx,"builds and tests it",x+w-36,y+64,{w:600,size:28,align:"right",col:WC_MUTED,a:fin(t,o.tests,0.5)});
+function m7_yaml(ctx,t,x,y,o){const w=980,h=330;wc_panel(ctx,x,y,w,h,{kind:"card",seed:52});
+  wc_T(ctx,"the data platform",x+36,y+64,{w:800,size:32,col:WC_DARK});wc_T(ctx,"builds and tests it",x+w-36,y+64,{w:600,size:28,align:"right",col:WC_MUTED,a:fin(t,o.tests,0.5)});
   M7_YAML.forEach((s,i)=>{const yy=y+140+i*48,lit=o.lit[i]||0;if(lit>0.01)withA(ctx,lit,()=>wc_panel(ctx,x+24,yy-34,Math.round(tw(ctx,s,28,500,"mono")+40),46,{kind:"chip",role:WC_SIDE.tech,seed:i+70}));
-    wc_T(ctx,s,x+44,yy,{w:500,size:28,f:"mono",col:WC_DARK});});}
-// Databricks: Unity Catalog's grant, who may read the person
-function m7_grant(ctx,t,x,y,o){const w=980,h=150;wc_panel(ctx,x,y,w,h,{kind:"card",seed:53});const lw=logo(ctx,"databricks",x+32,y+24,50);
-  wc_T(ctx,"Unity Catalog",x+44+Math.max(lw,46),y+60,{w:800,size:32,col:WC_DARK});wc_T(ctx,"governs who may read it",x+w-36,y+60,{w:600,size:28,align:"right",col:WC_MUTED});
+    wc_T(ctx,s,x+44,yy,{w:500,size:28,f:"mono",col:WC_DARK});});
+  wc_T(ctx,"in its simplest form, YAML",x+w-36,y+284,{w:600,size:28,align:"right",col:WC_MUTED,a:fin(t,o.tests+0.4,0.5)});}
+// and who may read the person, as the platform governs it
+function m7_grant(ctx,t,x,y,o){const w=980,h=150;wc_panel(ctx,x,y,w,h,{kind:"card",seed:53});
+  wc_T(ctx,"governs who may read it",x+36,y+60,{w:800,size:32,col:WC_DARK});
   withA(ctx,fin(t,o.read,0.5),()=>wc_T(ctx,"may read: student system, HR",x+44,y+116,{w:500,size:28,f:"mono",col:WC_DARK}));}
 
 /* ===== One person, many systems: scenes =====
@@ -3031,15 +3030,15 @@ scene("apart",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
 /* ---------- 11. The person, published ---------- */
 scene("product",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const tPer=w("behind","the person"),tDp=w("behind","data product"),tOw=w("behind","owned by"),tCo=c("contract"),tCn=w("contract","contract"),tVe=w("contract","new version"),tNo=w("contract","nothing that reads"),
-    tTo=c("tools"),tDbx=w("tools","Databricks"),tWho=w("tools","who may read"),tSy=c("synced"),tSt=w("synced","synced table"),tAp=w("synced","application"),tWa=w("synced","applicant waits");
+    tTo=c("tools"),tGov=w("tools","governs"),tWho=w("tools","who may read"),tSy=c("synced"),tSt=w("synced","synced table"),tAp=w("synced","application"),tWa=w("synced","applicant waits");
   // the camera: the product; out for its settings. Then the tools step back for the synced table and the application
   m7_open(ctx,S,t,sc,"plain",[[0,520,430,1.22],[tCo-0.4,960,470,1]]);
   arrive(ctx,420,410,t,tPer-0.4,()=>m7_product(ctx,t,100,110,{badge:tDp,lit:[fin(t,tOw,0.5),fin(t,tCn,0.5),fin(t,tVe,0.5),fin(t,tNo,0.5)]}),{dy:16});
-  // what dbt holds for each promise, lit as each is said; dbt builds and tests it
+  // what the data platform holds for each promise, lit as each is said; it builds and tests it
   const back=1-0.55*fin(t,tSt-0.4,0.6);
   withA(ctx,back,()=>arrive(ctx,1330,275,t,tCo-0.3,()=>m7_yaml(ctx,t,840,110,{tests:tTo,lit:[fin(t,tCo,0.5),fin(t,tNo,0.5),fin(t,tCn+0.1,0.5),fin(t,tVe,0.5)]}),{dy:16}));
-  // and Databricks governs who may read it
-  withA(ctx,back,()=>arrive(ctx,1330,545,t,tDbx-0.3,()=>m7_grant(ctx,t,840,470,{read:tWho}),{dy:16}));
+  // and it governs who may read it
+  withA(ctx,back,()=>arrive(ctx,1330,545,t,tGov-0.3,()=>m7_grant(ctx,t,840,470,{read:tWho}),{dy:16}));
   // a synced table serves the person to the application, while the applicant waits
   arrive(ctx,1060,716,t,tSt-0.3,()=>{wc_panel(ctx,840,660,440,112,{kind:"card",wash:[132,182,222],washA:0.22,seed:55});wc_T(ctx,"synced table",872,708,{w:800,size:30,col:WC_DARK});
     wc_T(ctx,"the person, for the search",872,750,{w:600,size:28,col:WC_MUTED});},{dy:12});

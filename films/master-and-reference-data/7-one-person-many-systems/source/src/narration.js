@@ -49,7 +49,7 @@ const NARR={
 "product":{"name":"The person, published","lead":0.8,"tail":1.0,"vo":[
  {"id":"behind","gap":0.8,"text":"Behind the search is the person, published as a data product, and owned by Mei's office."},
  {"id":"contract","gap":0.8,"text":"A contract fixes its shape, and a new version marks any change to it, so nothing that reads it breaks by surprise."},
- {"id":"tools","gap":0.8,"text":"dbt builds and tests it, and Databricks governs who may read it."},
+ {"id":"tools","gap":1.3,"text":"The data platform builds and tests it, and governs who may read it."},
  {"id":"synced","gap":0.8,"text":"A synced table serves it to the application, while the applicant waits."}]},
 "shared":{"name":"One person, shared","lead":0.8,"tail":1.0,"vo":[
  {"id":"bern","gap":0.8,"text":"In Bern, each country kept its post office, and they shared the rules."},

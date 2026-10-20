@@ -111,17 +111,17 @@ Behind the search is the person, published as a data product, and owned by Mei's
 00:04:04.653 --> 00:04:11.497
 A contract fixes its shape, and a new version marks any change to it, so nothing that reads it breaks by surprise.
 
-00:04:13.097 --> 00:04:17.320
-dbt builds and tests it, and Databricks governs who may read it.
+00:04:13.097 --> 00:04:16.959
+The data platform builds and tests it, and governs who may read it.
 
-00:04:18.620 --> 00:04:22.595
+00:04:18.759 --> 00:04:22.734
 A synced table serves it to the application, while the applicant waits.
 
-00:04:25.095 --> 00:04:29.204
+00:04:25.234 --> 00:04:29.343
 In Bern, each country kept its post office, and they shared the rules.
 
-00:04:30.504 --> 00:04:34.145
+00:04:30.643 --> 00:04:34.284
 Here, each system keeps its records, and they share one person.
 
-00:04:35.745 --> 00:04:38.369
+00:04:35.884 --> 00:04:38.508
 Choose the lightest way that solves the problem.

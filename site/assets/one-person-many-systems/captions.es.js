@@ -76,8 +76,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Detrás de la búsqueda está la persona, publicada como producto de datos, a cargo de la oficina de Mei.",
 "A contract fixes its shape, and a new version marks any change to it, so nothing that reads it breaks by surprise.":
 "Un contrato fija su forma, y una nueva versión marca cualquier cambio, para que nada de lo que la lee se rompa por sorpresa.",
-"dbt builds and tests it, and Databricks governs who may read it.":
-"dbt la construye y la prueba, y Databricks gobierna quién puede leerla.",
+"The data platform builds and tests it, and governs who may read it.":
+"La plataforma de datos la construye y la prueba, y gobierna quién puede leerla.",
 "A synced table serves it to the application, while the applicant waits.":
 "Una tabla sincronizada se la entrega a la solicitud mientras quien postula espera.",
 "In Bern, each country kept its post office, and they shared the rules.":

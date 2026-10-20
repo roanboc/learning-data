@@ -1,0 +1,48 @@
+models:
+
+  - name: stg_alumni_system__alumni
+    description: One row per version of a graduate's record, as the alumni system recorded it.
+    config:
+      meta: {owner: Alumni office, domain: alumni}
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [alumni_bk, recorded_from]
+    columns:
+      - name: alumni_key
+        description: The hash of alumni_bk.
+      - name: alumni_bk
+        description: '{{ doc("qualified_key") }}'
+        data_tests: [not_null]
+        config:
+          meta: {personal_data: direct}
+      - name: student_bk
+        description: >
+          The student ID the graduate graduated under, qualified: SIS|S-17142. The student system
+          issued it, in its current table or its archive (tests/rules/).
+        data_tests: [not_null]
+        config:
+          meta: {personal_data: direct}
+      - name: given_name
+        config:
+          meta: {personal_data: direct}
+      - name: family_name
+        config:
+          meta: {personal_data: direct}
+      - name: email
+        description: The email the alumni office holds, trimmed and lower case.
+        config:
+          meta: {personal_data: direct}
+      - name: award_name
+        description: The award's name on the day it was conferred.
+      - name: graduated_on
+        description: The day the award was conferred.
+        data_tests: [not_null]
+      - name: recorded_from
+        description: '{{ doc("recorded_from") }}'
+      - name: recorded_to
+        description: '{{ doc("recorded_to") }}'
+      - name: is_current_version
+        description: '{{ doc("is_current_version") }}'
+      - name: loaded_at
+        description: '{{ doc("loaded_at") }}'

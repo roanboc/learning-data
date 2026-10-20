@@ -99,6 +99,7 @@
 | 20 October 2026 | The sound of *Which value wins* changes instruments, since its humming choir and felt piano were *Roles come and go*'s. Sackbuts, the trombone's softer ancestors, hold the chords, one player to a note, and a note the next chord keeps is held through the change; a harpsichord plays each source's note, on the note of its role, and the low note under the mark. The cor anglais for the person and the clarinet's mark stay. No other film of the series uses sackbuts or a harpsichord. The music sits about 21 dB under the voice, and the pulse about 9 dB under the music. |
 | 20 October 2026 | *For this purpose only* follows the series' dates: Mei's office links Linh's two student numbers on 8 October 2026, and the film says her records are linked when the appeal's email reaches her, so its today is that October. Its list of purposes applies from November 2026, and her request comes on 3 December, answered on 7 December. |
 | 20 October 2026 | In *For this purpose only*, the appeals team's table and the appeal's list show Linh as the alumni office holds her in the example project, Thi Linh Nguyen, linh.nguyen2001@mail.example. Her alumna's door opens on S-17142, and Anika Rao takes the row of Priya Nair, who is a learner in the project. Its rigour sheet cites A-61207 and says the films' master's is the project's Graduate Certificate in Health Informatics. |
+| 20 October 2026 | Master data rules (when two records are one person, which value wins, how one list's codes map to another's) are a specification, kept where the data is transformed. Master data tools often let stewards set them in screens, and each solution keeps them its own way; in the simplest form they're YAML and SQL, and a film may show them so. No film presents the rules as living in SQL or dbt, or names a tool as their home (the author, in *Which value wins*' thread). *A hub at work* keeps LakeFusion as its one example of a hub. |
 
 ## The brief
 
@@ -174,7 +175,7 @@ The author's two reviews of *One person, many roles* (17 October 2026) set the r
 - **The roles a university uses.** Applicant, student, casual tutor, researcher, alumna, and later donor. Nobody is a customer.
 - **Nothing that needs explaining.** No letters posted to old addresses, and no family email shared by two people.
 - **One thread.** Linh's two student numbers run through the series: *Who is it?* links them, *One person, many systems* stops a third, and *Kept, not cleaned* counts how many more appear each intake.
-- **Tools show, they don't lead.** dbt writes and tests the rules; Databricks runs, stores and governs them; one film shows a hub (LakeFusion).
+- **Tools show, they don't lead.** The rules are a specification, kept where the data is transformed: master data tools often let stewards set them in screens, and in the simplest form they're YAML and SQL. No film presents them as living in SQL or dbt, or names a tool as their home; the platform runs, stores and governs the data, and one film shows a hub (LakeFusion) as an example.
 - **The same look, a new sound.** Watercolour and the role colours in every film; each film gets its own sound palette, with the series' mark.
 - **The author's review.** Every film is shared on a review page with a small copy that plays in the browser, its chapters and both captions. Spanish stays captions and pages only.
 - **Who changes what.** Each film's thread changes its own film's folder, and adds its own entry where every film has one (`series.json`'s list of films, the release workflow, the legibility report). The shared look and people (`shared/`) and this proposal change only in the thread of *One person, many roles*, so threads don't overwrite each other.
@@ -187,7 +188,7 @@ Nine films of 4 to 6 minutes; the case is what happens to Linh at the university
 |---|---|---|---|---|
 | 1 | **One person, many roles** | Linh comes back to study, and a new student number leaves five records of one person | Person, role, contact point and identifier, modelled apart | Don't store the role and call it the person. |
 | 2 | **Who is it?** | The registry's duplicate check finds her two student numbers, and HR's record with a typo in her birth date | A steward's queue of proposed matches, each decided once, with a reason | Decide a match once, with a reason, and keep it. |
-| 3 | **Which value wins** | Her name, emails and phone differ across the linked records | Survivorship rules declared per field, each value labelled with its source | The rule is declared, not hidden in SQL. |
+| 3 | **Which value wins** | Her name, emails and phone differ across the linked records | Survivorship rules declared per field, each value labelled with its source | The rule is declared, not hidden in code. |
 | 4 | **Roles come and go** | On census date, who is a student, who also tutors, and which alumni are back? | Dated roles, with an owner, a start and an end | A role has a start and an end; the person stays. |
 | 5 | **Lists everyone uses** | Each system types the role types, statuses and countries its own way | Reference lists with an owner, dates and one home; tests that read them | A list has an owner, a date and one home. |
 | 6 | **For this purpose only** | A fundraising appeal reaches Linh through her new number, though she opted out years ago | Purpose and consent on each role; one place to answer "what do you hold about me?" | Data given for one role isn't free for every role. |
@@ -253,7 +254,7 @@ Nine films of 4 to 6 minutes; the case is what happens to Linh at the university
 
 **Elsewhere.** A hospital merges two patients' records, and a test result follows the wrong one. Health systems keep a person's identifiers by issuer for exactly this reason.
 
-**The enabler.** In dbt: queries that propose pairs without comparing everyone with everyone, the example project's decisions table (`learner_identity_decisions.csv`) grown into a person queue, and a test that every proposed pair is decided. On Databricks: the master record table and its links.
+**The enabler.** Where the data is transformed (in the example project, YAML and SQL): queries that propose pairs without comparing everyone with everyone, the example project's decisions table (`learner_identity_decisions.csv`) grown into a person queue, and a test that every proposed pair is decided. On the platform: the master record table and its links.
 
 **Why it's common.** Glasgow's registry names students who return among the causes of duplicate records, and merges them into the number the student graduated on ([guidance](https://www.gla.ac.uk/myglasgow/registry/staff/studentrecords/duplicatestudentrecords)); Galway asks past students to give their old number so it can keep their full history under it ([notice](https://www.ugal.ie/media/registrationoffice/files/Merging-numbers.pdf)).
 
@@ -277,7 +278,7 @@ Nine films of 4 to 6 minutes; the case is what happens to Linh at the university
 
 **Elsewhere.** A bank keeps the legal name on the account and the preferred name in its app.
 
-**The enabler.** Survivorship rules in the model's YAML (`meta`), which dbt turns into the SQL and tests; a source and a date beside every value; contact points as their own table.
+**The enabler.** Survivorship rules declared per field where the data is transformed: a hub's rule screens, or in the simplest form the model's YAML, with the SQL and tests written from it; a source and a date beside every value; contact points as their own table.
 
 **Why it's common.** University name policies keep the legal name on transcripts and verifications and the preferred one on rosters and ID cards ([Case Western](https://case.edu/registrar/forms-services/forms/preferred-name-policy/)). Vietnamese names put the family name first, Thị is a common middle name for women, and names are often reversed in English-speaking countries ([Cultural Atlas](https://theculturalatlas.org/vietnamese-culture/vietnamese-culture-naming)). One of the Beagle's chronometers is going on show at Greenwich ([Royal Museums Greenwich](https://www.rmg.co.uk/press-release/pocket-chronometer-used-on-darwins-beagle-voyage-acquired-national-maritime-museum)).
 
@@ -299,7 +300,7 @@ Nine films of 4 to 6 minutes; the case is what happens to Linh at the university
 
 **Elsewhere.** An energy account holder moves out; the person who stays is on life support. The role ended; the person, and the risk, didn't (*How value reaches people*).
 
-**The enabler.** A role table with the person, the role type, its owner, `valid_from` and `valid_to`, and what it relates to (a course, a contract, a project). dbt tests that a role never ends before it starts and that every role has a person; the platform answers "as at" any date.
+**The enabler.** A role table with the person, the role type, its owner, `valid_from` and `valid_to`, and what it relates to (a course, a contract, a project). Tests that a role never ends before it starts and that every role has a person; the platform answers "as at" any date.
 
 **Why it's common.** Tutors are often offered work one teaching period at a time: "for each module for each defined Teaching Period (usually a semester)" ([Sussex](https://sussex.ac.uk/humanresources/documents/terms-and-conditions-for-doctoral-tutors-2024.pdf)).
 
@@ -321,7 +322,7 @@ Nine films of 4 to 6 minutes; the case is what happens to Linh at the university
 
 **Elsewhere.** A bank's list of customer types decides which checks a customer goes through; a hospital's list of relationship types decides who may be told about a patient.
 
-**The enabler.** Reference tables with `published_by`, `approved_on`, `valid_from` and `valid_to`; dbt tests that read their allowed values from them; outside lists loaded on a schedule, as the project already loads its glossary.
+**The enabler.** Reference tables with `published_by`, `approved_on`, `valid_from` and `valid_to`; tests that read their allowed values from them; outside lists loaded on a schedule, as the project already loads its glossary.
 
 **Why it's common.** The same country, three spellings: the country and the UN use "Viet Nam", British English "Vietnam" ([UK place names factfile](https://assets.publishing.service.gov.uk/media/6981e349015e2ba11991bb6f/Vietnam_Toponymic_Factfile.pdf)). Airport codes: [IATA airport code](https://en.wikipedia.org/wiki/IATA_airport_code).
 

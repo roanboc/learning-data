@@ -8,6 +8,7 @@
     "scenes.js"
   ],
   "poster": ["apart", "none", 2.0],
+  "story": ["parish", "back", "five"],
   "say": [
     ["\\bNguyen\\b", "Nwin"],
     ["\\bLinh's\\b", "Lin's"],

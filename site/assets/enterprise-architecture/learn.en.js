@@ -252,7 +252,7 @@ labs:[
  points:["<b>A change enters at the top,</b> as a driver and an outcome, and is walked down every layer to the systems.",
   "<b>Every element it touches has an owner,</b> so the walk is also the list of who must agree.",
   "<b>Check it against the principles first,</b> and ask another organisation for the least: a yes or a no, not its reasons."],
- real:"Ask “what will it take?” before “by when?”: the first answer is the list of owners. Start the agreement with the other organisation on day one, because the legal basis takes longer than the code.",
+ real:"Ask “what will it take?” before “by when?”: the first answer is the list of owners. Start the agreement with the other organisation on day one, because agreeing it takes longer than changing the systems.",
  w:{prompt:"In November, the government, the utility's owner, sends a direction: from 1 July, every eligible household gets a social tariff, a discount on its bill, automatically. Who is eligible is known to the social services agency. What does it touch, layer by layer?",
   drop:"a social tariff, automatically, from 1 July",
   layers:[
@@ -261,7 +261,8 @@ labs:[
    {k:"business",items:[{t:"A new product: the social tariff",s:"the social tariff",x:1},{t:"A new partner, the agency, and an agreement with it",s:"the agency, by agreement",x:1},{t:"A new step in billing: apply the discount, between calculate and issue",s:"apply the discount",x:1},
      {t:"The network gets the list too, to discount its charge",s:"the network gets the list",x:0,trap:1,why:"Principle 3: customer information stays with the business that collected it. Ama crosses it out, and decision record 12 says why: the social tariff stays with retail, and nothing new crosses the wall."}]},
    {k:"information",items:[{t:"A new business object: eligibility, from and until",s:"eligibility, from · until",x:1},{t:"Three new rules: from the agency's date, until the next match, only billing reads it",s:"three new rules",x:1},
-     {t:"Accounts and bills: version 2 of its contract, beside version 1 until 30 September 2027",s:"contract version 2",x:1},{t:"Which support each household gets",s:"which support",x:0,why:"Ask for the least: the agency answers only “eligible, from this date”."}]},
+     {t:"Accounts and bills: a new column for the discount, in version 1 of its contract",s:"a new column",x:1},
+     {t:"Accounts and bills: version 2 of its contract, beside version 1",s:"contract version 2",x:0,why:"A new column breaks nothing that reads the product, so the contract stays at version 1. A second version is the last resort, for removing or redefining a column."},{t:"Which support each household gets",s:"which support",x:0,why:"Ask for the least: the agency answers only “eligible, from this date”."}]},
    {k:"application",items:[{t:"The billing system",s:"billing system",x:1},{t:"The customer system",s:"customer system",x:1},{t:"The outage system",s:"outage system",x:0,why:"Outages don't change."}]},
    {k:"technology",items:[{t:"A secure exchange with the agency, a node owned by IT",s:"secure exchange",x:1},{t:"New smart meters",s:"new smart meters",x:0,why:"The meters already read what the bill needs."}]}],
   names:{motivation:"motivation",strategy:"strategy",business:"business",information:"information",application:"application",technology:"technology"},

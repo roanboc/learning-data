@@ -1,0 +1,50 @@
+sources:
+  - name: hr_system
+    description: '{{ doc("source_hr_system") }}'
+    database: "{{ env_var('DBT_SOURCES_CATALOG', target.database) }}"
+    schema: "{{ env_var('DBT_SOURCES_SCHEMA_PREFIX', '') }}hr_system"
+    config:
+      # Read by dbt-duckdb only: on DuckDB each table is a CSV file in data/. Databricks reads the ingested table.
+      external_location: "read_csv('data/hr_system/{name}.csv', header = true, all_varchar = true)"
+      # on DuckDB the column is text; on Databricks the cast does nothing
+      loaded_at_field: "cast(_loaded_at as timestamp)"
+      freshness:
+        warn_after: {count: 2, period: day}
+        error_after: {count: 7, period: day}
+      meta:
+        owner: HR
+        key_set:
+          code: HR
+          system: HR system
+          owner: HR
+          # The day the project first read this system's keys: the key sets seed lists them in that order.
+          since: 2026-10-20
+          # Each key the system issues, and the case staging writes it in (docs/conventions.md).
+          system_keys:
+            - {key: staff_id, case: upper, example: E-4417}
+            - {key: contract_id, case: upper, example: T-26041}
+          example: HR|E-4417
+    tables:
+      - name: staff
+        description: One row per version of a staff member's record. The system key is the staff ID.
+        config:
+          meta:
+            system_key: [staff_id]
+        columns:
+          - name: staff_id
+            description: The staff ID HR issues, like E-4417.
+          - name: birth_date
+            description: The date of birth HR holds, as it was typed when the person was hired.
+      - name: contracts
+        description: >
+          One row per version of a contract of employment: a continuing or fixed-term appointment,
+          or a casual contract to teach one unit in one teaching period. The system key is the
+          contract ID.
+        config:
+          meta:
+            system_key: [contract_id]
+        columns:
+          - name: contract_id
+            description: The contract ID HR issues, like T-26041.
+          - name: pay_type
+            description: '{{ doc("pay_type") }}'

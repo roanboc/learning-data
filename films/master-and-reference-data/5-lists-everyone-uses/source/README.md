@@ -30,6 +30,7 @@ python tools/legible.py --overlaps   # every piece of text must read on a phone 
 python tools/pace.py       # pacing per chapter
 python tools/stills.py [chapter ...] [--at 12.5 ...] [--every 2] --size 1920   # review stills -> build/stills/
 python tools/audio.py      # mixes dist/soundtrack.mp3 from build/vo and tools/score.py
+python tools/quiet.py      # the series' sound: after the opening, music only from time to time, and nothing beats or pulses
 python tools/build.py      # again, to embed the soundtrack
 python tools/captions.py   # ../captions/en.srt and en.vtt
 FILM_LANG=es python tools/captions.py   # ../captions/es.srt and es.vtt

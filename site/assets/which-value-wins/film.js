@@ -2736,7 +2736,7 @@ function m3_fly(ctx,k,p,from,to,o){if(p<=0)return;const src=M3_V[k][1],q=ease(cl
   if(u<0.99){const x=lerp(from[0]+12,to[0]+26,q),y=lerp(from[1],to[1],q)-Math.sin(q*Math.PI)*36;m3_dot(ctx,x,y,src,clamp(p*6,0,1)*(1-u));}
   if(u>0.01){ctx.save();ctx.beginPath();ctx.rect(to[0]-6,to[1]-M3_VH/2-8,12+m3_vw(k)*u,M3_VH+16);ctx.clip();m3_val(ctx,to[0],to[1],k,o);ctx.restore();}}
 
-/* ---------- 3. one order, hidden in the SQL; the newest wins ---------- */
+/* ---------- 3. one order, hidden in the code; the newest wins ---------- */
 // the model's SQL, as int_learner_timeline.sql has it (lines 166, 173 and 174): one order for every field; the comment wraps as an
 // editor shows it, and the third source is left out
 const M3_CODE={x:80,y:150,w:1210,h:420};

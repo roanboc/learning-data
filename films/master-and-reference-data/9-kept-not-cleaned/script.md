@@ -144,7 +144,7 @@ Four questions, one at the end of each of four chapters, as the site shows them 
 | On screen | In the example project |
 |---|---|
 | Linh, `S-20436` | `data/student_system/learners.csv` |
-| Her first-degree record, S-17142 | New with *One person, many roles*: a graduate's record the series adds to the student system's data |
+| Her first-degree record, S-17142 | `data/student_system/past_learners.csv`, lines 4–5: the student system's archive of records closed before November 2024 |
 | Mei's decisions, each with a reason | `seeds/reference/student/learner_identity_decisions.csv`, grown into a person queue in *Who is it?* |
 | A limit agreed with its owner: warn above it, stop the build above another | The project's tests already do this: `customer_bk` in `models/staging/short_courses/_short_courses__models.yml`, lines 46–57 (`warn_if`, `error_if`, decision DEC-SC-01) |
 | The role table, and a tutor's term contract with an end date | New with *Roles come and go*: a dated role table |
@@ -154,7 +154,7 @@ Four questions, one at the end of each of four chapters, as the site shows them 
 | The search before create at the application | New with *One person, many systems* |
 | The five measures, their limits, the dashboard and the alert | New with this film: a model of the steward's measures, read from the queue, the role table, the tests and the request log, with a test for each limit; a dashboard and an alert on the platform |
 | The governance scorecard, with a row for the person | New: stewardship measures in the governance scorecard (the governance series' *Rules that run*) |
-| The clean-up, the intakes' numbers, the case S-21388 and E-5263, the visa type, the bank | Invented for the film, kept plausible |
+| The clean-up, the intakes' numbers, the case S-21388 and E-5263, the visa type, the bank | Invented for the film, kept plausible. The project's student system holds no birth date, so the case's two dates are the film's own |
 
 ## Rigour to check before recording
 

@@ -5,7 +5,7 @@ sounds come in from time to time, at a chapter's turn, under a moment on screen 
 under the voice; and nothing in it trembles or pulses. This plays the film's score (tools/score.py) on its own and checks three things:
   - after the opening, no chapter has music for more than half its length, or for more than 12 seconds without a break;
   - no two held sounds are a little out of tune with each other, so that they beat, 0.3 to 12 times a second, when a phone's one
-    speaker adds the two channels together;
+    speaker adds the two channels together, loud enough to move the music's level by a fifth or more;
   - nothing pulses: the score plays none of urgent(), pulse() or ostinato().
 The opening is the chapters film.json lists in "story" (by default, the first). Music is what the score puts on the music bus (put()),
 not the effects (X()), and it counts while it's within 24 dB of the music's loudest three seconds. A break is a second or more without.
@@ -113,8 +113,9 @@ for s in info['scenes']:
     print('%-12s %6.1fs %6.0f%% %8.1fs  %s' % (s['id'], s['dur'], share * 100, full, '; '.join(bad) or 'ok'))
     fails += ['%s: %s' % (s['id'], x) for x in bad]
 
-# beats: two held partials a little apart, sounding together for a second and a half or more, both loud enough to hear
-H = sorted(HELD, key=lambda h: h[0]); quiet = ref * np.sqrt(2) * 10 ** (-30 / 20); beats = []
+# beats: two held partials a little apart, sounding together for a second and a half or more, the weaker within 10 dB of the stronger
+# and within 20 dB of the music's loudest three seconds, so the beat moves the music's level by a fifth or more
+H = sorted(HELD, key=lambda h: h[0]); quiet = ref * np.sqrt(2) * 10 ** (-20 / 20); beats = []
 for i, (s1, d1, p1) in enumerate(H):
     for j in range(i, len(H)):
         s2, d2, p2 = H[j]
@@ -134,7 +135,8 @@ if beats:
     print('\n%d pairs of held notes beat, from %s to %s (%d places), on a phone\'s one speaker:' % (len(beats), mmss(beats[0][0]), mmss(beats[-1][0]), len(seen)))
     for t, df, fa, fb in (beats if '--all' in sys.argv else beats[:6]):
         print('  %s  %.1f Hz and %.1f Hz beat %.1f times a second' % (mmss(t), fa, fb, df))
-    fails.append('%d pairs of held notes a little out of tune with each other, so they beat (a note on two voices, detuned?)' % len(beats))
+    fails.append('%d pairs of held notes a little out of tune with each other, so they beat: one note on two voices a little apart (give it one), '
+                 'or, in a timbre rich in overtones, a tempered fifth whose overtones meet (tune the fifth pure, or soften its overtones)' % len(beats))
 for name, t in PULSES:
     fails.append('%s() at %s: nothing pulses' % (name, mmss(t)))
 

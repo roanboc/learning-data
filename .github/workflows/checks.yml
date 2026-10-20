@@ -1,6 +1,7 @@
-# Runs only the checks a change needs: the site's static and browser checks when the site changed, and each film's
-# checks (build, the site plays that build, every moment draws) when that film's source or the shared code it draws
-# with changed. .github/scripts/affected.py picks them, from the release workflow's FILMS list; run it locally too.
+# Runs only the checks a change needs: the site's static checks when the site changed, its browser checks on the pages
+# the change touched (a changed page, or one that loads a changed file), and each film's checks (build, the site plays
+# that build, every moment draws) when that film's source or the shared code it draws with changed, or its entry in the
+# release workflow's FILMS list. .github/scripts/affected.py picks them; run it locally too.
 # On a pull request it compares with the base branch, on a push to main with the commit before it.
 # Run every check by hand: Actions → Checks → Run workflow.
 # The dbt project has its own workflow, credential-project.yml.
@@ -31,6 +32,7 @@ jobs:
     outputs:
       site: ${{ steps.plan.outputs.site }}
       browser: ${{ steps.plan.outputs.browser }}
+      pages: ${{ steps.plan.outputs.pages }}
       films: ${{ steps.plan.outputs.films }}
       count: ${{ steps.plan.outputs.count }}
     steps:
@@ -78,9 +80,13 @@ jobs:
       - name: Static checks
         run: python site-tools/check_site.py
 
+      # on the pages the change touched, or on every page ("all")
       - name: Browser checks
         if: needs.plan.outputs.browser == 'true'
-        run: python site-tools/smoke.py
+        env:
+          PAGES: ${{ needs.plan.outputs.pages }}
+        run: |
+          if [ "$PAGES" = all ]; then python site-tools/smoke.py; else python site-tools/smoke.py --pages "$PAGES"; fi
 
   film:
     name: Film (${{ matrix.name }})

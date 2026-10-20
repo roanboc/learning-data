@@ -181,7 +181,7 @@ Four questions, one at the end of each of four chapters, as the site shows them 
 
 ## Built
 
-Built on 17 and 18 October 2026, from this script, in watercolour: 5 minutes 55 seconds, ten chapters, 736 words at 124 a minute (137 at most, in *Every value, with its source*), the voice 72% of a chapter at most. Every moment draws; 300 pieces of text, none under 28 px and none overlapping (`tools/legible.py --overlaps`). What changed on the way, for the series' *Decided* table:
+Built on 17 and 18 October 2026, from this script, in watercolour: 5 minutes 55 seconds, ten chapters, 736 words at 124 a minute (137 at most, in *Every value, with its source*), the voice 72% of a chapter at most. Every moment draws; 319 pieces of text, none under 28 px and none overlapping (`tools/legible.py --overlaps`). What changed on the way, for the series' *Decided* table:
 
 - **Values are carried, then opened.** In *Linked, and still different*, a value flying whole from its record into a filled row piled over the values already there. Each now travels as a dot in its source's colour and opens into its tag where it lands.
 - **The counts follow the sheet.** The narration counts names, birth dates, mobiles, then emails, the order of the rows, so the camera reads down the sheet once.

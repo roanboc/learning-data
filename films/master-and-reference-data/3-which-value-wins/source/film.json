@@ -9,6 +9,7 @@
     "scenes.js"
   ],
   "poster": ["linked", "which", 1.5],
+  "story": ["clocks"],
   "say": [
     ["\\bNguyễn\\b", "Nwin"],
     ["\\bNguyen\\b", "Nwin"],

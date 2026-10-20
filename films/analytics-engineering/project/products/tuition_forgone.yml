@@ -1,0 +1,20 @@
+# A data product: what it's for, who answers for it, what it promises and to whom. Written by hand,
+# owned by its owner. scripts/generate/products.py writes its ODPS descriptor and an ODCS contract
+# for each output, from this file and the dbt contracts.
+
+name: tuition_forgone
+title: Tuition forgone
+owner: Finance
+domain: finance
+status: active
+version: 1.0.0
+description:
+  purpose: How much tuition recognised credit saves learners, by award and faculty, as at census date,
+    at the published rate.
+  usage: For Finance's revenue forecast. Reconciles with Finance's tuition report.
+outputs:
+  - {model: mart_finance__tuition_forgone}
+service_levels:
+  - {property: latency, value: 1, unit: d, description: Built every night.}
+support:
+  - {channel: finance-data, tool: email, url: "mailto:finance@uni.example", scope: issues}

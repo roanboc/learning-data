@@ -34,9 +34,9 @@ const NARR={
  {"id":"closes","gap":0.8,"text":"Her no to fundraising closes the alumna's door too."},
  {"id":"holds","gap":0.8,"text":"A no she gave the alumni office now holds wherever she appears, until she changes it."}]},
 "platform":{"name":"Written into the platform","lead":1.0,"tail":1.0,"vo":[
- {"id":"tags","gap":0.8,"text":"On the platform, Jun writes each purpose in dbt, as a tag on the columns."},
+ {"id":"tags","gap":0.8,"text":"Where the data is transformed, Jun writes each purpose as a tag on the columns."},
  {"id":"test","gap":0.8,"text":"A test fails if a column with personal data has no purpose."},
- {"id":"policy","gap":0.8,"text":"Then two policies in Unity Catalog read the tags."},
+ {"id":"policy","gap":0.8,"text":"Then two policies on the platform read the tags."},
  {"id":"mask","gap":0.8,"text":"One hides every column tagged for teaching from the appeals team."},
  {"id":"filter","gap":0.8,"text":"The other leaves out anyone whose wishes say no."},
  {"id":"once","gap":0.8,"text":"Each is written once, and every table with those tags follows it."}]},

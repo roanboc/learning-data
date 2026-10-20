@@ -192,28 +192,28 @@ scene("wishes",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
 /* ---------- 6. Written into the platform ---------- */
 const M6_JUN=[214,1006,0.9],M6_YX=440,M6_CY=96,M6_PA=[440,70,710],M6_PB=[1170,70,710];
 scene("platform",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
-  const tJun=w("tags","Jun writes"),tDbt=w("tags","in dbt"),tTag=w("tags","as a tag"),tTest=c("test"),tFails=w("test","fails"),tNoP=w("test","has no purpose"),
+  const tJun=w("tags","Jun writes"),tYaml=w("tags","transformed"),tTag=w("tags","as a tag"),tTest=c("test"),tFails=w("test","fails"),tNoP=w("test","has no purpose"),
     tTwo=w("policy","two policies"),tRead=w("policy","read the tags"),tMask=c("mask"),tHides=w("mask","hides"),tTagged=w("mask","tagged for teaching"),
     tFil=c("filter"),tLeaves=w("filter","leaves out"),tOnce=c("once"),tEvery=w("once","every table");
   m6_open(ctx,S,t,sc,"plain",[[0,960,540,1]],{z:0});
   // Jun, edged in cyan, and his card
-  arrive(ctx,M6_JUN[0],M6_JUN[1]-300,t,0.3,()=>person(ctx,"jun",M6_JUN[0],M6_JUN[1],M6_JUN[2],{pose:"stand",pose2:"explain",mix:fin(t,tDbt-0.4,0.6)*(1-fin(t,tTest-0.2,0.6)),expr:"calm",t}),{d:0.9,from:0.97});
+  arrive(ctx,M6_JUN[0],M6_JUN[1]-300,t,0.3,()=>person(ctx,"jun",M6_JUN[0],M6_JUN[1],M6_JUN[2],{pose:"stand",pose2:"explain",mix:fin(t,tYaml-0.4,0.6)*(1-fin(t,tTest-0.2,0.6)),expr:"calm",t}),{d:0.9,from:0.97});
   arrive(ctx,220,168,t,tJun,()=>wc_info(ctx,40,110,360,116,"Jun Park","analytics engineer",{mono:false}),{dy:12});
-  // first, dbt: the model's columns and their purposes, and the test that no personal data goes without one
+  // first, where the data is transformed: the model's columns and their purposes, and the test that no personal data goes without one
   const p1=1-fin(t,tTwo-0.3,0.5);
   if(p1>0.01)withA(ctx,p1,()=>{const fix=tNoP+0.6;
-    const ps=M6_YAML.map((s,i)=>i===5?clamp((t-fix)/0.7,0,1):clamp((t-tDbt-0.1-(i>5?i-1:i)*0.32)/0.4,0,1));
-    arrive(ctx,M6_YX+390,M6_CY+208,t,tDbt-0.4,()=>m6_code(ctx,M6_YX,M6_CY,780,"dbt · the model's YAML",M6_YAML,ps,{lit:[0,0,0,0,0,fin(t,fix+0.7,0.4),0,fin(t,tTag,0.5)]}),{dy:16});
+    const ps=M6_YAML.map((s,i)=>i===5?clamp((t-fix)/0.7,0,1):clamp((t-tYaml-0.1-(i>5?i-1:i)*0.32)/0.4,0,1));
+    arrive(ctx,M6_YX+390,M6_CY+208,t,tYaml-0.4,()=>m6_code(ctx,M6_YX,M6_CY,780,"the model's YAML",M6_YAML,ps,{lit:[0,0,0,0,0,fin(t,fix+0.7,0.4),0,fin(t,tTag,0.5)]}),{dy:16});
     arrive(ctx,1250+315,M6_CY+116,t,tTest-0.2,()=>m6_test(ctx,1250,M6_CY,{fail:clamp((t-tFails)/1.2,0,1),pass:clamp((t-fix-0.8)/0.8,0,1)}),{dy:16});});
-  // then Unity Catalog: two policies that read the tags; and the table as the appeals team sees it, its grades hidden, two rows left out
+  // then the platform: two policies that read the tags; and the table as the appeals team sees it, its grades hidden, two rows left out
   const p2=fin(t,tTwo+0.1,0.6),tb=1-fin(t,tOnce-0.2,0.6);
   if(p2>0.01)withA(ctx,p2,()=>{
     const litA=[0,0,fin(t,tHides,0.4),fin(t,tHides+0.4,0.4),fin(t,tRead,0.4)*(1-0.6*fin(t,tFil,0.4)),fin(t,tRead,0.4)*(1-0.6*fin(t,tFil,0.4)),0];
     const litB=[0,0,fin(t,tLeaves-0.2,0.4),0,fin(t,tRead+0.3,0.4)*(1-0.6*fin(t,tHides,0.4)),fin(t,tRead+0.3,0.4)*(1-0.6*fin(t,tHides,0.4)),fin(t,tLeaves+0.3,0.4)];
     // each card types a line at a time, the second a little after the first
     const pa=M6_POLA.map((s,i)=>clamp((t-tTwo-0.3-i*0.2)/0.2,0,1)),pb=M6_POLB.map((s,i)=>clamp((t-tTwo-0.7-i*0.2)/0.2,0,1));
-    arrive(ctx,M6_PA[0]+M6_PA[2]/2,M6_PA[1]+188,t,tTwo+0.1,()=>m6_code(ctx,M6_PA[0],M6_PA[1],M6_PA[2],"Unity Catalog · a column mask",M6_POLA,pa,{lit:litA,seed:31}),{dy:16});
-    arrive(ctx,M6_PB[0]+M6_PB[2]/2,M6_PB[1]+188,t,tTwo+0.5,()=>m6_code(ctx,M6_PB[0],M6_PB[1],M6_PB[2],"Unity Catalog · a row filter",M6_POLB,pb,{lit:litB,seed:32}),{dy:16});
+    arrive(ctx,M6_PA[0]+M6_PA[2]/2,M6_PA[1]+188,t,tTwo+0.1,()=>m6_code(ctx,M6_PA[0],M6_PA[1],M6_PA[2],"a column mask",M6_POLA,pa,{lit:litA,seed:31}),{dy:16});
+    arrive(ctx,M6_PB[0]+M6_PB[2]/2,M6_PB[1]+188,t,tTwo+0.5,()=>m6_code(ctx,M6_PB[0],M6_PB[1],M6_PB[2],"a row filter",M6_POLB,pb,{lit:litB,seed:32}),{dy:16});
     if(tb>0.01)withA(ctx,tb,()=>arrive(ctx,M6_TB.x+M6_TB.w/2,M6_TB.y+200,t,tMask-0.2,()=>m6_table(ctx,{mask:clamp((t-tTagged)/0.8,0,1),gone:clamp((t-tLeaves-0.1)/1.8,0,1)}),{dy:20}));
     // every table with those tags follows them
     const ys=600;M6_TBLS.forEach((s,i)=>{const x=700+i*460,t0=tEvery-0.3+i*0.25;

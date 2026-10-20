@@ -107,101 +107,101 @@ Su no a las donaciones también cierra la puerta de la egresada.
 Un no que dio a la oficina de egresados ahora vale dondequiera que aparezca, hasta que lo cambie.
 
 28
-00:02:38,899 --> 00:02:44,156
-En la plataforma, Jun escribe cada propósito en dbt, como una etiqueta en las columnas.
+00:02:38,899 --> 00:02:43,700
+Donde se transforman los datos, Jun escribe cada propósito como una etiqueta en las columnas.
 
 29
-00:02:45,456 --> 00:02:49,430
+00:02:45,000 --> 00:02:48,974
 Una prueba falla si una columna con datos personales no tiene propósito.
 
 30
-00:02:51,130 --> 00:02:54,188
-Luego, dos políticas en Unity Catalog leen las etiquetas.
+00:02:50,674 --> 00:02:53,416
+Luego, dos políticas en la plataforma leen las etiquetas.
 
 31
-00:02:55,188 --> 00:02:59,171
+00:02:54,416 --> 00:02:58,399
 Una le oculta al equipo de campañas cada columna etiquetada para enseñanza.
 
 32
-00:03:00,471 --> 00:03:03,182
+00:02:59,699 --> 00:03:02,410
 La otra deja fuera a cualquiera cuyos deseos digan que no.
 
 33
-00:03:04,482 --> 00:03:08,153
+00:03:03,710 --> 00:03:07,381
 Cada una se escribe una vez, y toda tabla con esas etiquetas la sigue.
 
 34
-00:03:11,453 --> 00:03:14,898
+00:03:10,681 --> 00:03:14,126
 Así, la siguiente campaña va a egresados, como su rol permite.
 
 35
-00:03:15,998 --> 00:03:19,085
+00:03:15,226 --> 00:03:18,313
 Selecciona a 2.140 de ellos.
 
 36
-00:03:20,385 --> 00:03:25,165
+00:03:19,613 --> 00:03:24,393
 37 quedan fuera, porque su no está en la persona, y Linh está entre ellos.
 
 37
-00:03:26,665 --> 00:03:28,887
+00:03:25,893 --> 00:03:28,115
 Las notas de los mejores se quedan en la enseñanza.
 
 38
-00:03:33,187 --> 00:03:36,366
+00:03:32,415 --> 00:03:35,594
 Luego Linh pregunta a la universidad qué guarda sobre ella.
 
 39
-00:03:37,666 --> 00:03:41,171
+00:03:36,894 --> 00:03:40,399
 Antes eran cuatro oficinas, cada una buscando en su propio sistema.
 
 40
-00:03:42,871 --> 00:03:46,765
+00:03:42,099 --> 00:03:45,993
 Ahora la oficina de Mei parte de la persona, y los vínculos encuentran cada rol.
 
 41
-00:03:48,465 --> 00:03:51,804
+00:03:47,693 --> 00:03:51,032
 Cada valor vuelve diciendo de dónde vino y para qué es.
 
 42
-00:03:53,404 --> 00:03:56,213
+00:03:52,632 --> 00:03:55,441
 Una corrección va a la oficina que mantiene ese valor.
 
 43
-00:03:57,813 --> 00:04:00,206
+00:03:57,041 --> 00:03:59,434
 Su respuesta está lista en días, no semanas.
 
 44
-00:04:01,706 --> 00:04:05,465
+00:04:00,934 --> 00:04:04,693
 Si pidiera que la olvidaran, cada rol guardaría solo lo que debe.
 
 45
-00:04:06,665 --> 00:04:11,363
+00:04:05,893 --> 00:04:10,591
 Su título para siempre, y los datos de su proyecto mientras sus reglas lo exijan.
 
 46
-00:04:15,263 --> 00:04:17,186
+00:04:14,491 --> 00:04:16,414
 Toda industria tiene estas puertas.
 
 47
-00:04:18,086 --> 00:04:23,038
+00:04:17,314 --> 00:04:22,266
 La tarjeta de puntos de una tienda era para descuentos, no para decidir quién recibe crédito.
 
 48
-00:04:24,338 --> 00:04:26,892
+00:04:23,566 --> 00:04:26,120
 Un paciente de un hospital aceptó un estudio.
 
 49
-00:04:27,892 --> 00:04:29,389
+00:04:27,120 --> 00:04:28,617
 El siguiente pregunta de nuevo.
 
 50
-00:04:32,689 --> 00:04:34,885
+00:04:31,917 --> 00:04:34,113
 Lo que vio el sanador se quedó dentro de la casa.
 
 51
-00:04:36,385 --> 00:04:41,406
+00:04:35,613 --> 00:04:40,634
 La universidad mantiene los datos de cada rol dentro de su propósito, y los deseos de Linh con ella.
 
 52
-00:04:43,006 --> 00:04:46,183
+00:04:42,234 --> 00:04:45,411
 Los datos dados para un rol no son libres para todo rol.

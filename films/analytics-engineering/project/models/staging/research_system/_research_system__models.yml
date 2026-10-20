@@ -1,0 +1,146 @@
+models:
+
+  - name: stg_research_system__researchers
+    description: One row per version of a researcher's record, as the research system recorded it.
+    config:
+      meta: {owner: Research office, domain: research}
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [member_bk, recorded_from]
+    columns:
+      - name: member_key
+        description: The hash of member_bk.
+      - name: member_bk
+        description: '{{ doc("qualified_key") }}'
+        data_tests: [not_null]
+        config:
+          meta: {personal_data: direct}
+      - name: staff_bk
+        description: The staff ID the researcher holds, qualified by HR's key set, HR|E-4417. Null for a researcher who isn't on the staff.
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_hr_system__staff')
+                field: staff_bk
+        config:
+          meta: {personal_data: direct}
+      - name: display_name
+        description: The name the research office shows, like on a paper.
+        config:
+          meta: {personal_data: direct}
+      - name: email
+        description: The email the research office holds, trimmed and lower case.
+        config:
+          meta: {personal_data: direct}
+      - name: country_of_birth
+        description: The country of birth, as its two-letter code from ISO 3166.
+        config:
+          meta: {personal_data: direct}
+      - name: recorded_from
+        description: '{{ doc("recorded_from") }}'
+      - name: recorded_to
+        description: '{{ doc("recorded_to") }}'
+      - name: is_current_version
+        description: '{{ doc("is_current_version") }}'
+      - name: loaded_at
+        description: '{{ doc("loaded_at") }}'
+
+  - name: stg_research_system__projects
+    description: One row per version of a research project, as the research system recorded it.
+    config:
+      meta: {owner: Research office, domain: research}
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [project_bk, recorded_from]
+    columns:
+      - name: project_key
+        description: The hash of project_bk.
+      - name: project_bk
+        description: '{{ doc("qualified_key") }}'
+        data_tests: [not_null]
+      - name: lead_member_bk
+        description: The researcher who leads the project.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_research_system__researchers')
+                field: member_bk
+      - name: starts_on
+        description: The project's first day.
+        data_tests: [not_null]
+      - name: ends_on
+        description: The project's last day, inclusive.
+      - name: recorded_from
+        description: '{{ doc("recorded_from") }}'
+      - name: recorded_to
+        description: '{{ doc("recorded_to") }}'
+      - name: is_current_version
+        description: '{{ doc("is_current_version") }}'
+      - name: loaded_at
+        description: '{{ doc("loaded_at") }}'
+
+  - name: stg_research_system__project_members
+    description: One row per version of a researcher's place on a project, as the research system recorded it.
+    config:
+      meta: {owner: Research office, domain: research}
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [project_member_bk, recorded_from]
+    columns:
+      - name: project_member_key
+        description: The hash of project_member_bk.
+      - name: project_member_bk
+        description: The researcher and the project together, qualified, like RES|R-3082|RP-26017.
+        data_tests: [not_null]
+        config:
+          meta: {personal_data: direct}
+      - name: member_bk
+        description: The researcher.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_research_system__researchers')
+                field: member_bk
+        config:
+          meta: {personal_data: direct}
+      - name: project_bk
+        description: The project.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_research_system__projects')
+                field: project_bk
+      - name: project_role
+        description: The researcher's part in the project.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [lead, researcher]
+      - name: supervisor_member_bk
+        description: The researcher who supervises them on the project. Null for the lead.
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_research_system__researchers')
+                field: member_bk
+        config:
+          meta: {personal_data: direct}
+      - name: starts_on
+        description: The first day on the project.
+        data_tests: [not_null]
+      - name: ends_on
+        description: The last day on the project, inclusive.
+      - name: recorded_from
+        description: '{{ doc("recorded_from") }}'
+      - name: recorded_to
+        description: '{{ doc("recorded_to") }}'
+      - name: is_current_version
+        description: '{{ doc("is_current_version") }}'
+      - name: loaded_at
+        description: '{{ doc("loaded_at") }}'

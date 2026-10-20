@@ -251,6 +251,16 @@ Engineering and IT 5, Business 3, Health 2, Arts and Education 2. The census rep
 same, and `tests/reconciliation/reconcile_planning_with_census_report.sql` checks it on every build. As things
 are now, the answer is 9 (`analyses/validation/diff_as_was_as_is.sql`).
 
+The people behind the roles also come from the student system's archive and three small systems:
+`past_learners` (the student records closed before November 2024), the HR system (staff and their
+contracts), the research system (researchers, projects and who is on them) and the alumni system
+(graduates). Linh Nguyen, who graduated in 2022 and came back to study, is five records in four
+systems: `S-17142` in the archive and `S-20436` in the student system; `E-4417` in HR, which gives
+her a contract each semester to tutor a first-year unit; `R-3082` at the research office; and
+`A-61207` at the alumni office, which knows only her old number. No model reads them yet: the
+person domain's conceptual model (`models/core/person/`) is a draft, and
+`analyses/profiling/profile_keys_held.sql` shows which other system's numbers each record holds.
+
 ## A new version, and who it touches
 
 `core_credential` has two versions. The wallet's mart pins version 2 with

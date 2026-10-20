@@ -170,14 +170,15 @@ Four questions, one at the end of each of four chapters, as the site shows them 
 
 | On screen | In the example project |
 |---|---|
-| Linh, `S-20436`, `u-88236` | `data/student_system/learners.csv`, `data/learning_platform/users.csv` |
-| Her first-degree record, S-17142, never linked to S-20436 | New: a graduate's record the series adds to the student system's data |
+| Linh, `S-20436`, `u-88236` | `data/student_system/learners.csv`, `data/learning_platform/users.csv`. The project has her in the Graduate Certificate in Health Informatics (GCHI) where the film says a master's: an open point in the proposal's *Decisions for the author* |
+| Her first-degree record, S-17142, never linked to S-20436 | `data/student_system/past_learners.csv`, the student system's archive of records closed before November 2024 (enrolled 25 February 2019, completed 15 December 2022), added for the series on 20 October 2026. No key joins it to S-20436: `analyses/profiling/profile_keys_held.sql` |
 | The learner's short-course key, decided to be Linh | `seeds/reference/student/learner_identity_decisions.csv` (D-001) |
-| The learner, a role, in the student domain | `models/core/student/core_learner.sql`, `_student__conceptual.yml` |
-| The university's map | `models/_shared/_shared__conceptual.yml` |
-| The tutor role, the staff number E-4417, the HR system | New: a small HR source the series adds to the project |
-| The researcher role, R-3082, the research office | New: a small research office source the series adds to the project |
-| The alumna role and the alumni office | New: an Advancement source the series adds to the project |
+| The learner, a role, in the student domain | `models/core/student/core_learner.sql`, `_student__conceptual.yml`; on the map, `[learner, is a, role]`, with the decision proposed as DEC-PER-02 |
+| The university's map | `models/_shared/_shared__conceptual.yml`; before 20 October 2026 it had the learner and no person |
+| The tutor role, the staff number E-4417, the HR system | `data/hr_system/staff.csv` and `contracts.csv` (a contract each semester since 20 February 2023, Casual Academic, CAS), `sources/hr_system/` |
+| The researcher role, R-3082, the research office | `data/research_system/researchers.csv` (R-3082 holds E-4417), `projects.csv` and `project_members.csv` (RP-26017, 2 March to 19 December 2026), `sources/research_system/` |
+| The alumna role and the alumni office | `data/alumni_system/alumni.csv`: A-61207, which holds S-17142 only (graduated 15 December 2022), `sources/alumni_system/` |
+| The person apart from her roles, contact points and identifiers; who keeps what | `models/core/person/_person__conceptual.yml`, a draft for its owners (DEC-PER-01 to 03, proposed), and the person domain on the map |
 | 7 Hill Road, linh.nguyen@mail.example | Invented for the film; the project holds no addresses yet (contact points with a purpose come with *Which value wins*) |
 
 ## Rigour to check before recording
@@ -219,5 +220,5 @@ Built on 17 October 2026, from this script, in watercolour. What changed on the 
 ## Next
 
 1. The author watches the film, and approves it or asks for corrections.
-2. The project's additions it needs: the person, roles, contact points and identifiers in the conceptual model; small HR, research office and Advancement sources; and Linh's first-degree record, under S-17142.
+2. ~~The project's additions it needs.~~ Added on 20 October 2026, as a draft for the owners: the person domain's conceptual model (the person, roles, contact points and identifiers), the HR, research and alumni systems, and her first-degree record in the student system's archive. Next for them: the owners approve the person domain's decisions.
 3. Labs, once the series has more films: the candidates above.

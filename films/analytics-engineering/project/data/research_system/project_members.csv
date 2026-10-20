@@ -1,0 +1,5 @@
+member_id,project_code,project_role,supervisor_member_id,starts_on,ends_on,_valid_from,_valid_to,_is_current,_loaded_at
+R-0457,RP-25031,lead,,2025-03-03,2026-02-27,2025-02-26 02:00:00,,true,2025-02-26 02:00:00
+R-2961,RP-25031,researcher,R-0457,2025-03-03,2026-02-27,2025-02-26 02:00:00,,true,2025-02-26 02:00:00
+R-0457,RP-26017,lead,,2026-03-02,2026-12-19,2026-02-25 02:00:00,,true,2026-02-25 02:00:00
+R-3082,RP-26017,researcher,R-0457,2026-03-02,2026-12-19,2026-02-25 02:00:00,,true,2026-02-25 02:00:00

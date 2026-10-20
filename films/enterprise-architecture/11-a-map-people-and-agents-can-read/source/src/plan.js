@@ -3,10 +3,11 @@
    two crab-claw sails, drawn as a dark shape against the stars with the starlight on its edges; its navigator, a figure at the stern;
    the star compass he holds in memory, as a ring on the sea around the canoe with a point wherever a star rises or sets; dawn, the
    atoll of Mataiva on the horizon, and Papeʻete's crowd on the shore; and a chart of the Pacific with a light for each person who
-   holds the knowledge, passed on. Then, on the films' dark glass and on the wall: the map kept as text (files, each element once,
-   with its ID, owner, evidence and status), the repository and its versions, a change proposed line by line, the checks on the map,
-   the views generated from it one way (with dbt's YAML and Databricks' catalogue), the map's agent and its rights, the retail code
-   changing, and a newcomer's first day.
+   holds the knowledge, passed on. Then, on the films' dark glass and on the wall: the map kept in an enterprise architecture tool
+   (its window, its layers and a graph, fed by the systems that already keep many of its elements), each element once, with its ID,
+   owner, evidence and status, and once as a text file, the simplest approach; its versions, a change proposed as a draft, the
+   checks on the map, the views generated from it one way (with dbt's YAML and Databricks' catalogue), the map's agent and its
+   rights, the retail code changing, and a newcomer's first day.
    The Pacific is drawn in the series' own style, not in the style of Pacific art: the canoe and the people aboard are silhouettes,
    and the real people of the story (Mau Piailug, Nainoa Thompson) are never given a face. The star compass is a diagram, not a
    copy of anyone's teaching chart: its points are where fifteen bright stars rise and set at Satawal's latitude, unnamed. */
@@ -224,8 +225,8 @@ function d11_slide(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)ret
   ctx.fillStyle="rgba(16,22,36,0.94)";const py=o.head?h*0.05+46:h*0.1;rr(ctx,14,py,w-28,h-py-14,6);ctx.fill();d11_mini(ctx,30,py+10,w-60,h-py-36,{missing:o.missing,wrong:o.wrong,stale:o.stale});
   if(o.stamp)withA(ctx,o.stampA==null?1:o.stampA,()=>kt_rstamp(ctx,w-110,h-60,o.stamp,o.stampCol||[110,110,120],1,1,{size:28,rot:-0.1}));ctx.restore();});}
 
-/* ---------- the map as text: files ---------- */
-// each kind of element: its folder, its colour (the layers', and the data series' blue for a rule), and how it's drawn as a glyph
+/* ---------- the map's elements ---------- */
+// each kind of element: where the map files it, its colour (the layers', and the data series' blue for a rule), and how it's drawn as a glyph
 const D11_KIND={capability:["strategy",STR,"capability"],step:["business",BUS,"process"],domain:["domains",D11_NET,"domain"],object:["information",INF,"object"],
   rule:["motivation",D11_RULE,"requirement"],measure:["information",INF,"measure"],decision:["decisions",[236,170,206],"decision"],actor:["business",BUS,"actor"],obligation:["motivation",MOT,"requirement"],node:["technology",TEC,"node"],app:["application",APL,"component"]};
 // glyphs this film adds: a requirement (a slanted box, as ArchiMate draws one), a domain (a region with its edge), a measure (a
@@ -245,34 +246,112 @@ function d11_fileMini(ctx,x,y,w,kind,id,name,o){o=o||{};const a=o.a==null?1:o.a,
   withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,col,{glow:10+14*(o.hi||0),ea:0.8,fill:"rgba(6,10,20,0.95)"});ctx.fillStyle=rgba(col,0.06+0.08*(o.hi||0));rr(ctx,x,y,w,h,14);ctx.fill();
     T(ctx,o.label||kind.replace("object","business object"),x+24,y+44,{f:"mono",w:500,size:28,color:rgba(col,1)});d11_glyph(ctx,gk,x+w-34,y+34,15,col);
     T(ctx,id,x+24,y+96,{f:"mono",w:500,size:30,color:rgba(INK,0.96)});T(ctx,name,x+24,y+142,{w:700,size:tw(ctx,name,30,700)>w-48?28:30,color:rgba(mix(col,INK,0.55),1)});});return h;}
-// An element's file, open: its path, then "key: value" lines in mono. lines: [key, value, opts] (a null key: text that carries on, indented
-// by opts.ind); opts.tick: an owner's gold tick
-// after the value; opts.from: an old value the new one replaces as opts.u goes 0..1; opts.col: the key's colour. o.rows[i] shows
-// each line (0..1), o.hi[i] lights it. Returns its height.
+// An element, open: its page in the tool, a form (a breadcrumb made from its path, then a label and a value on each line), or, with
+// o.files, its text file (the path itself, then "key: value" lines in mono, as YAML writes them). lines: [key, value, opts] (a null
+// key: text that carries on, under the value in the tool, indented by opts.ind in the file); opts.tick: an owner's gold tick after
+// the value; opts.from: an old value the new one replaces as opts.u goes 0..1; opts.col: the key's colour. o.rows[i] shows each
+// line (0..1), o.hi[i] lights it. Returns its height.
 function d11_file(ctx,x,y,w,path,lines,o){o=o||{};const a=o.a==null?1:o.a,lh=o.lh||48,sz=o.size||28,col=o.col||EAC,h=o.h||(84+lines.length*lh);if(a<=0.01)return h;
+  const F=o.files,vf=F?{f:"mono",w:500}:{w:600},vw=s_=>F?tw(ctx,s_,sz,500,"mono"):tw(ctx,s_,sz,600),LW=F?0:Math.max(0,...lines.filter(l=>l[0]!=null).map(l=>tw(ctx,l[0],sz,600)))+34;
   withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,col,{glow:12+14*(o.glow||0),ea:0.75,fill:"rgba(6,10,20,0.96)"});
-    ctx.fillStyle=rgba(col,0.9);ctx.beginPath();ctx.moveTo(x+20,y+22);ctx.lineTo(x+32,y+22);ctx.lineTo(x+38,y+28);ctx.lineTo(x+38,y+42);ctx.lineTo(x+20,y+42);ctx.closePath();ctx.fill();
-    T(ctx,path,x+52,y+42,{f:"mono",w:500,size:sz,color:rgba(col,1)});ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+14,y+62,w-28,1.2);
-    lines.forEach((ln,i)=>{const q=o.rows?(o.rows[i]==null?1:o.rows[i]):1;if(q<=0.01)return;const[k,v,op]=ln,O=op||{},yy=y+66+i*lh+lh*0.66,hi=o.hi?o.hi[i]||0:0,kc=O.col||mix(col,INK,0.2);
+    if(F){ctx.fillStyle=rgba(col,0.9);ctx.beginPath();ctx.moveTo(x+20,y+22);ctx.lineTo(x+32,y+22);ctx.lineTo(x+38,y+28);ctx.lineTo(x+38,y+42);ctx.lineTo(x+20,y+42);ctx.closePath();ctx.fill();
+      T(ctx,path,x+52,y+42,{f:"mono",w:500,size:sz,color:rgba(col,1)});}
+    else{glow(ctx,x+30,y+33,14,col,0.35);ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(x+30,y+33,7,0,TAU);ctx.fill();T(ctx,d11_crumb(path),x+52,y+42,{f:"mono",w:500,size:sz,color:rgba(col,1)});
+      if(o.chip)withA(ctx,o.chip[2]==null?1:o.chip[2],()=>tag(ctx,x+w-24-tw(ctx,o.chip[0],28,700)-26,y+34,o.chip[0],o.chip[1],{size:28}));}ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+14,y+62,w-28,1.2);
+    lines.forEach((ln,i)=>{const q=o.rows?(o.rows[i]==null?1:o.rows[i]):1;if(q<=0.01)return;const[k,v,op]=ln,O=op||{},yy=y+66+i*lh+lh*0.66,hi=o.hi?o.hi[i]||0:0;
       withA(ctx,clamp(q*1.6,0,1),()=>{if(hi>0.01){ctx.fillStyle=rgba(O.hiCol||col,0.16*hi);rr(ctx,x+12,yy-lh*0.7,w-24,lh*0.92,6);ctx.fill();ctx.fillStyle=rgba(O.hiCol||col,0.9*hi);rr(ctx,x+12,yy-lh*0.7,5,lh*0.92,2);ctx.fill();}
-        const kx=x+26+(O.ind||0)*34;if(k!=null)T(ctx,k+":",kx,yy,{f:"mono",w:500,size:sz,color:rgba(kc,0.95)});const vx=k==null?kx:kx+tw(ctx,k+": ",sz,500,"mono"),vs=typeOn(v,clamp(q*1.4-0.2,0,1));
-        if(O.from!=null&&(O.u||0)<1){const u=ease(clamp(O.u||0,0,1));withA(ctx,1-u,()=>T(ctx,O.from,vx,yy-u*14,{f:"mono",w:500,size:sz,color:rgba(INK,0.9)}));withA(ctx,u,()=>T(ctx,v,vx,yy+(1-u)*14,{f:"mono",w:500,size:sz,color:rgba(INK,0.96)}));}
-        else T(ctx,vs,vx,yy,{f:"mono",w:500,size:sz,color:rgba(O.vcol||INK,0.96)});
-        if(O.tick&&O.tick>0.01)kt_gtick(ctx,vx+tw(ctx,v,sz,500,"mono")+30,yy-sz*0.34,15,O.tick);});});});return h;}
+        let vx;if(F){const kx=x+26+(O.ind||0)*34;if(k!=null)T(ctx,k+":",kx,yy,{f:"mono",w:500,size:sz,color:rgba(O.col||mix(col,INK,0.2),0.95)});vx=k==null?kx:kx+tw(ctx,k+": ",sz,500,"mono");}
+        else{if(k!=null){if(i>0){ctx.fillStyle="rgba(170,200,245,0.07)";ctx.fillRect(x+20,y+66+i*lh,w-40,1.2);}T(ctx,k,x+26,yy,{w:600,size:sz,color:rgba(O.col||mix(SOFT,col,0.3),0.95)});}vx=x+26+LW;}
+        if(O.from!=null&&(O.u||0)<1){const u=ease(clamp(O.u||0,0,1));withA(ctx,1-u,()=>T(ctx,O.from,vx,yy-u*14,{...vf,size:sz,color:rgba(INK,0.9)}));withA(ctx,u,()=>T(ctx,v,vx,yy+(1-u)*14,{...vf,size:sz,color:rgba(INK,0.96)}));}
+        else T(ctx,typeOn(v,clamp(q*1.4-0.2,0,1)),vx,yy,{...vf,size:sz,color:rgba(O.vcol||INK,0.96)});
+        if(O.tick&&O.tick>0.01)kt_gtick(ctx,vx+vw(v)+30,yy-sz*0.34,15,O.tick);});});});return h;}
 
-/* ---------- the repository: folders and versions ---------- */
+/* ---------- the tool: one map, many sources ---------- */
+// The map kept in an enterprise architecture tool, drawn as no product in particular: a window with the map's name and the people who
+// use it, the layers down its side, and a graph of the map. What it brings in from other systems is drawn in sand, the colour of
+// records kept elsewhere; what's written in the map itself keeps the layers' colours.
+const D11_SAND=[226,200,150];
+const d11_crumb=p=>p.replace(/\.yml$/,"").replace("/"," › ");
+// the map's mark: three nodes and their links
+function d11_gglyph(ctx,x,y,s,col){const P=[[x-s*0.42,y+s*0.28],[x,y-s*0.36],[x+s*0.42,y+s*0.22]];ctx.save();ctx.strokeStyle=rgba(col,0.8);ctx.lineWidth=Math.max(1.4,s*0.07);
+  ctx.beginPath();ctx.moveTo(P[0][0],P[0][1]);ctx.lineTo(P[1][0],P[1][1]);ctx.lineTo(P[2][0],P[2][1]);ctx.moveTo(P[0][0],P[0][1]);ctx.lineTo(P[2][0],P[2][1]);ctx.stroke();
+  ctx.fillStyle=rgba(col,1);P.forEach(([px,py])=>{ctx.beginPath();ctx.arc(px,py,s*0.14,0,TAU);ctx.fill();});ctx.restore();}
+// a database: a cylinder
+function d11_db(ctx,x,y,s,col){const rx=s*0.42,ry=s*0.13,h=s*0.62;ctx.save();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=Math.max(1.4,s*0.07);
+  ctx.beginPath();ctx.ellipse(x,y-h/2,rx,ry,0,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(x-rx,y-h/2);ctx.lineTo(x-rx,y+h/2);ctx.ellipse(x,y+h/2,rx,ry,0,Math.PI,0,true);ctx.lineTo(x+rx,y-h/2);ctx.stroke();
+  ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,Math.PI);ctx.stroke();ctx.restore();}
+// an open book, for the glossary
+function d11_book(ctx,x,y,s,col){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=Math.max(1.4,s*0.07);ctx.lineJoin="round";
+  [-1,1].forEach(d=>{ctx.beginPath();ctx.moveTo(x,y-s*0.3);ctx.quadraticCurveTo(x+d*s*0.22,y-s*0.42,x+d*s*0.5,y-s*0.34);ctx.lineTo(x+d*s*0.5,y+s*0.34);ctx.quadraticCurveTo(x+d*s*0.22,y+s*0.26,x,y+s*0.38);ctx.stroke();});
+  ctx.beginPath();ctx.moveTo(x,y-s*0.3);ctx.lineTo(x,y+s*0.38);ctx.stroke();ctx.restore();}
+// where the map's elements are already kept: [name, what it holds]. Which elements each one holds is in D11_GN
+const D11_SRC=[["documents","strategy · plans"],["project management","goals · initiatives"],["IT service management","applications · servers"]];
+// a source's icon, with no words, s across and centred on (cx, cy): a document, a project plan's bars, a rack of servers
+function d11_srcIcon(ctx,k,cx,cy,s,col){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.fillStyle=rgba(col,1);ctx.lineWidth=Math.max(1.6,s*0.05);ctx.lineJoin="round";ctx.lineCap="round";
+  if(k===0){const w=s*0.7,x=cx-w/2,y=cy-s/2,f=s*0.22;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+w-f,y);ctx.lineTo(x+w,y+f);ctx.lineTo(x+w,y+s);ctx.lineTo(x,y+s);ctx.closePath();ctx.stroke();
+    ctx.beginPath();ctx.moveTo(x+w-f,y);ctx.lineTo(x+w-f,y+f);ctx.lineTo(x+w,y+f);ctx.stroke();for(let i=0;i<4;i++){const yy=y+s*(0.4+i*0.15);ctx.beginPath();ctx.moveTo(x+s*0.12,yy);ctx.lineTo(x+w-s*(i===3?0.3:0.12),yy);ctx.stroke();}}
+  else if(k===1){const x=cx-s/2,y=cy-s/2;[[0,0.42],[0.2,0.5],[0.42,0.4],[0.6,0.32]].forEach(([u,l],i)=>{ctx.fillStyle=rgba(col,0.9);rr(ctx,x+u*s,y+s*(0.1+i*0.22),l*s,s*0.13,s*0.05);ctx.fill();});
+    ctx.strokeStyle=rgba(col,0.6);ctx.beginPath();ctx.moveTo(x+s*0.56,y);ctx.lineTo(x+s*0.56,y+s);ctx.stroke();}
+  else{const w=s*0.8,x=cx-w/2;for(let i=0;i<3;i++){const yy=cy-s/2+i*s*0.36;rr(ctx,x,yy,w,s*0.28,s*0.05);ctx.stroke();ctx.beginPath();ctx.arc(x+s*0.12,yy+s*0.14,s*0.045,0,TAU);ctx.fill();
+    ctx.beginPath();ctx.moveTo(x+s*0.3,yy+s*0.14);ctx.lineTo(x+w-s*0.1,yy+s*0.14);ctx.stroke();}}
+  ctx.restore();}
+// a source as a card: its icon, its name and what it holds; o.hi lights it
+function d11_srcCard(ctx,k,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const col=D11_SAND,hi=o.hi||0,s=Math.min(h-40,60);
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,col,{glow:10+14*hi,ea:0.75+0.2*hi,fill:"rgba(22,16,8,0.95)"});if(hi>0.01){ctx.fillStyle=rgba(col,0.1*hi);rr(ctx,x,y,w,h,14);ctx.fill();}
+    d11_srcIcon(ctx,k,x+24+s/2,y+h/2,s,col);const[nm,sub]=D11_SRC[k];T(ctx,nm,x+s+48,y+h/2-6,{w:800,size:30,color:rgba(mix(col,INK,0.4),1)});T(ctx,sub,x+s+48,y+h/2+34,{f:"mono",w:500,size:28,color:rgba(col,0.95)});});}
+// the map as a graph, a band for each row of D11_TREE: [row, u across (0..1), where it comes from: a source of D11_SRC, or -1 for
+// written in the map]. Goals and plans come from documents and the project tool, applications and servers from IT service
+// management; capabilities, rules, steps, business objects (the glossary's terms) and decisions are written in the map
+const D11_GN=[[0,0.12,0],[0,0.38,1],[0,0.62,1],[0,0.88,-1],[1,0.1,0],[1,0.3,1],[1,0.5,-1],[1,0.7,-1],[1,0.9,-1],
+  [2,0.1,-1],[2,0.3,-1],[2,0.5,-1],[2,0.7,-1],[2,0.9,-1],[3,0.1,-1],[3,0.3,-1],[3,0.5,-1],[3,0.7,-1],[3,0.9,-1],
+  [4,0.1,2],[4,0.3,2],[4,0.5,2],[4,0.7,2],[4,0.9,-1],[5,0.15,2],[5,0.38,2],[5,0.62,2],[5,0.85,2],[6,0.2,-1],[6,0.5,-1],[6,0.8,-1]].map(([r,u,s_],i)=>[r,u+(hash(i,621)-0.5)*0.05,s_]);
+// its links: each node to the nearest in the next layer down (and sometimes a second), then a few that reach further: capabilities
+// to the applications that serve them, a rule to its business object, and decisions to what they decided
+const D11_GE=(()=>{const E=[],by=r=>D11_GN.map((n,i)=>[n,i]).filter(([n])=>n[0]===r);
+  for(let r=0;r<5;r++)by(r).forEach(([n,i])=>{const nx=by(r+1).sort((A,B)=>Math.abs(A[0][1]-n[1])-Math.abs(B[0][1]-n[1]));E.push([i,nx[0][1]]);if(hash(i,631)>0.55)E.push([i,nx[1][1]]);});
+  E.push([6,20],[7,21],[8,22],[3,16],[28,21],[29,7],[30,23]);return E;})();
+// the graph, with row 0's middle at y=gy and u=0..1 across gx..gx+gw. Each node's and link's look comes from callbacks (index → 0..1):
+// o.na shows a node, o.nl lights it, o.nh empties it (a dashed ring: kept elsewhere), o.ns rings it in sand (brought in from its
+// source); o.ea shows a link, o.el lights it. o.pos(i) can move a node (as it arrives)
+function d11_graph(ctx,gx,gy,gw,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const rh=o.rh||56,P=i=>o.pos?o.pos(i):[gx+D11_GN[i][1]*gw,gy+D11_GN[i][0]*rh],f=(fn,i,d)=>fn?fn(i):d;
+  withA(ctx,a,()=>{ctx.save();ctx.lineCap="round";
+    D11_GE.forEach(([i,j],e)=>{const q=Math.min(f(o.ea,e,1),f(o.na,i,1),f(o.na,j,1));if(q<=0.01)return;const[x0,y0]=P(i),[x1,y1]=P(j),lt=f(o.el,e,0),far=Math.abs(D11_GN[i][0]-D11_GN[j][0])>1,mx=(x0+x1)/2+(far?(y1-y0)*0.22:0),my=(y0+y1)/2;
+      ctx.strokeStyle=rgba(mix([150,180,230],EAC,lt),(0.24+0.5*lt)*q);ctx.lineWidth=1.6+1.4*lt;ctx.beginPath();ctx.moveTo(x0,y0);ctx.quadraticCurveTo(mx,my,x1,y1);ctx.stroke();});
+    D11_GN.forEach(([r,u,src],i)=>{const q=f(o.na,i,1);if(q<=0.01)return;const[x,y]=P(i),col=D11_TREE[r][1],lt=f(o.nl,i,0),hol=f(o.nh,i,0),sr=src>=0?f(o.ns,i,0):0,rad=9+3*lt;
+      withA(ctx,q,()=>{if(lt>0.01)glow(ctx,x,y,22+10*lt,col,0.35*lt);ctx.fillStyle=rgba(col,0.95*(1-hol));ctx.beginPath();ctx.arc(x,y,rad,0,TAU);ctx.fill();
+        if(hol>0.01){ctx.save();ctx.setLineDash([4,4]);ctx.strokeStyle=rgba(col,0.85*hol);ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,rad,0,TAU);ctx.stroke();ctx.restore();}
+        if(sr>0.01){ctx.strokeStyle=rgba(D11_SAND,0.9*sr);ctx.lineWidth=2.4;ctx.beginPath();ctx.arc(x,y,rad+5,0,TAU);ctx.stroke();}});});
+    ctx.restore();});}
+// the tool's window: the map's mark and name, o.sub saying what it is, and the people who use it (o.people 0..1 shows them in turn)
+function d11_window(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,20,EAC,{glow:14+12*(o.glow||0),ea:0.8,fill:"rgba(6,10,20,0.93)"});ctx.fillStyle="rgba(170,230,210,0.05)";rr(ctx,x+1,y+1,w-2,56,20);ctx.fill();ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+14,y+57,w-28,1.2);
+    d11_gglyph(ctx,x+38,y+29,26,EAC);T(ctx,"the map",x+64,y+40,{f:"mono",w:500,size:30,color:rgba(EAC,1)});
+    if(o.sub)withA(ctx,o.subA==null?1:o.subA,()=>T(ctx,o.sub,x+64+tw(ctx,"the map",30,500,"mono")+28,y+40,{w:700,size:28,color:rgba(SOFT,1)}));
+    const PP=[TRUST,EAC,TECH,D11_RET];PP.forEach((col,i)=>{const q=o.people==null?0:clamp(o.people*PP.length-i,0,1);if(q<=0.01)return;const px=x+w-40-i*46;withA(ctx,q,()=>{glow(ctx,px,y+29,18,col,0.3);archGlyph(ctx,"actor",px,y+29,13,col);});});});}
+// a glossary term, as the map holds it: a business object, defined once by the business (o.by shows who; o.tick, their confirmation)
+function d11_term(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,h=186;if(a<=0.01)return h;
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,INF,{glow:12+14*(o.glow||0),ea:0.8,fill:"rgba(16,10,8,0.95)"});d11_book(ctx,x+38,y+36,30,INF);
+    T(ctx,"glossary term",x+70,y+46,{f:"mono",w:500,size:28,color:rgba(INF,1)});T(ctx,"information › OBJ-003",x+w-26,y+46,{f:"mono",w:500,size:28,align:"right",color:rgba(SOFT,0.95)});ctx.fillStyle="rgba(170,200,245,0.14)";ctx.fillRect(x+14,y+66,w-28,1.2);
+    T(ctx,"reading",x+28,y+114,{w:800,size:32,color:rgba(mix(INF,INK,0.3),1)});T(ctx,"a meter's record of energy used",x+52+tw(ctx,"reading",32,800),y+114,{w:600,size:28,color:rgba(INK,0.95)});
+    const by=o.by==null?1:o.by;if(by>0.01)withA(ctx,by,()=>{T(ctx,"defined by",x+28,y+162,{f:"mono",w:500,size:28,color:rgba(SOFT,0.95)});T(ctx,"Grace Achieng · network",x+40+tw(ctx,"defined by",28,500,"mono"),y+162,{w:800,size:30,color:rgba(TRUST,1)});
+      kt_gtick(ctx,x+w-44,y+152,15,o.tick==null?1:o.tick);});});return h;}
+
+/* ---------- the map's side panel, and its versions ---------- */
 const D11_TREE=[["motivation",MOT,24],["strategy",STR,31],["business",BUS,46],["information",INF,38],["application",APL,27],["technology",TEC,19],["decisions",[236,170,206],12]];
-// the repository's folders, one per layer and one for decisions, with how many files each holds; o.p opens it from the top.
-// o.scan (0..1) sweeps a check down the folders; o.warn[i] (0..1) marks a folder amber; o.plus[i] adds to a folder's count
+// the map in the tool, as its side panel shows it: one row per layer and one for decisions, each with a dot in its colour and how many
+// elements it holds; with o.files, the same map as a repository of text files, a folder per row. o.p opens it from the top.
+// o.scan (0..1) sweeps a check down the rows; o.warn[i] (0..1) marks a row amber; o.plus[i] adds to a row's count
 function d11_tree(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=o.rh||56,h=110+D11_TREE.length*rh;if(a<=0.01)return h;
-  withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,EAC,{glow:12+14*(o.glow||0),ea:0.8,fill:"rgba(6,10,20,0.95)"});T(ctx,o.title||"the map · repository",x+26,y+48,{f:"mono",w:500,size:28,color:rgba(EAC,1)});
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,EAC,{glow:12+14*(o.glow||0),ea:0.8,fill:"rgba(6,10,20,0.95)"});
+    if(o.files)T(ctx,o.title||"repository · text files",x+26,y+48,{f:"mono",w:500,size:28,color:rgba(EAC,1)});else{d11_gglyph(ctx,x+40,y+38,26,EAC);T(ctx,o.title||"the map",x+68,y+48,{f:"mono",w:500,size:28,color:rgba(EAC,1)});}
     const sc=o.scan,sy=sc>0&&sc<1?y+92+sc*D11_TREE.length*rh:null;
     if(sy!=null){const g=ctx.createLinearGradient(x,0,x+w,0);g.addColorStop(0,"rgba(170,205,255,0)");g.addColorStop(0.5,"rgba(170,205,255,0.75)");g.addColorStop(1,"rgba(170,205,255,0)");ctx.fillStyle=g;ctx.fillRect(x+12,sy-1.5,w-24,3);}
     D11_TREE.forEach(([nm,col,n],i)=>{const q=o.p==null?1:clamp(o.p*D11_TREE.length-i,0,1);if(q<=0)return;const yy=y+92+i*rh+rh*0.5,wa=o.warn?o.warn[i]||0:0,hi=Math.max(o.hi?o.hi[i]||0:0,sy!=null?clamp(1-Math.abs(sy-yy)/rh,0,1)*0.8:0);
       withA(ctx,q,()=>{if(hi>0.01){ctx.fillStyle=rgba(col,0.14*hi);rr(ctx,x+12,yy-rh*0.45,w-24,rh*0.9,8);ctx.fill();}
         if(wa>0.01){withA(ctx,wa,()=>{ctx.fillStyle=rgba(AMBER,0.13);rr(ctx,x+12,yy-rh*0.45,w-24,rh*0.9,8);ctx.fill();glass(ctx,x+w-124,yy-18,36,36,18,AMBER,{glow:10,ea:0.85,fill:"rgba(30,20,6,0.95)"});T(ctx,"!",x+w-106,yy+11,{w:800,size:28,align:"center",color:rgba(AMBER,1)});});}
-        ctx.fillStyle=rgba(col,0.85);ctx.beginPath();ctx.moveTo(x+30,yy-12);ctx.lineTo(x+42,yy-12);ctx.lineTo(x+47,yy-7);ctx.lineTo(x+62,yy-7);ctx.lineTo(x+62,yy+12);ctx.lineTo(x+30,yy+12);ctx.closePath();ctx.fill();
-        T(ctx,nm+"/",x+78,yy+10,{f:"mono",w:500,size:28,color:rgba(mix(col,INK,0.3),1)});if(o.counts!==false){const pl=o.plus?o.plus[i]||0:0;T(ctx,(n+Math.round(pl))+"",x+w-28,yy+10,{f:"mono",w:500,size:28,align:"right",color:rgba(mix(SOFT,KT_AI,clamp(pl,0,1)),0.85+0.15*clamp(pl,0,1))});}});});});return h;}
+        if(o.files){ctx.fillStyle=rgba(col,0.85);ctx.beginPath();ctx.moveTo(x+30,yy-12);ctx.lineTo(x+42,yy-12);ctx.lineTo(x+47,yy-7);ctx.lineTo(x+62,yy-7);ctx.lineTo(x+62,yy+12);ctx.lineTo(x+30,yy+12);ctx.closePath();ctx.fill();}
+        else{glow(ctx,x+46,yy,14,col,0.3);ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.arc(x+46,yy,8,0,TAU);ctx.fill();}
+        T(ctx,nm+(o.files?"/":""),x+78,yy+10,{f:"mono",w:500,size:28,color:rgba(mix(col,INK,0.3),1)});if(o.counts!==false){const pl=o.plus?o.plus[i]||0:0;T(ctx,(n+Math.round(pl))+"",x+w-28,yy+10,{f:"mono",w:500,size:28,align:"right",color:rgba(mix(SOFT,KT_AI,clamp(pl,0,1)),0.85+0.15*clamp(pl,0,1))});}});});});return h;}
 // the versions, as a line of dots, oldest on the left, each number above its dot; the first and the newest show their dates.
 // o.n shows them one by one; o.la fades the numbers and dates; o.warn[i] (0..1) turns a dot into the check's amber mark
 function d11_vline(ctx,x,y,w,vers,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const n=o.n==null?vers.length:o.n,dx=w/Math.max(1,vers.length-1),la=o.la==null?1:o.la;
@@ -293,19 +372,20 @@ function d11_history(ctx,x,y,w,rows,o){o=o||{};const a=o.a==null?1:o.a,lh=64,h=9
       kt_gtick(ctx,x+w-170,yy,15,1);T(ctx,who,x+w-144,yy+10,{w:800,size:30,color:rgba(TRUST,1)});});});});return h;}
 
 /* ---------- a change, proposed line by line ---------- */
-// A pull request: what it changes, line by line (- removed, + added), the file it's in, and who must review it.
-// o.diff: [sign, text]; o.rows (0..1) shows each diff line; o.rev: [[name, side, tick 0..1]]; o.state: a word for where it stands;
-// o.fold (0..1) folds it to its title once merged
+// A change request in the tool (with o.files, a pull request): what it changes, line by line (- removed, + added), the element it's on
+// (a breadcrumb made from its path), and who must approve it.
+// o.diff: [sign, text]; o.rows (0..1) shows each diff line; o.rev: [[name, side, tick 0..1]], each ticked with o.okWord (approved);
+// o.state: a word for where it stands; o.fold (0..1) folds it to its title once approved
 function d11_pr(ctx,x,y,w,title,file,o){o=o||{};const a=o.a==null?1:o.a,D=o.diff||[],R=o.rev||[],lh=50,fo=ease(clamp(o.fold||0,0,1)),h=lerp(196+D.length*lh+(R.length?36+R.length*58:0),124,fo);if(a<=0.01)return h;
   withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,EAC,{glow:12+14*(o.glow||0),ea:0.8,fill:"rgba(6,10,20,0.96)"});
-    T(ctx,o.kicker||"pull request",x+26,y+46,{f:"mono",w:500,size:28,color:rgba(EAC,1)});if(o.state)tag(ctx,x+w-24-tw(ctx,o.state,28,700)-26,y+38,o.state,o.stateCol||EAC,{size:28});
-    T(ctx,title,x+26,y+100,{w:800,size:38});ctx.save();ctx.beginPath();ctx.rect(x,y,w,h-8);ctx.clip();withA(ctx,1-fo,()=>{T(ctx,file,x+26,y+152,{f:"mono",w:500,size:28,color:rgba(SOFT,0.95)});
+    T(ctx,o.kicker||(o.files?"pull request":"change request"),x+26,y+46,{f:"mono",w:500,size:28,color:rgba(EAC,1)});if(o.state)tag(ctx,x+w-24-tw(ctx,o.state,28,700)-26,y+38,o.state,o.stateCol||EAC,{size:28});
+    T(ctx,title,x+26,y+100,{w:800,size:38});ctx.save();ctx.beginPath();ctx.rect(x,y,w,h-8);ctx.clip();withA(ctx,1-fo,()=>{T(ctx,o.files?file:d11_crumb(file),x+26,y+152,{f:"mono",w:500,size:28,color:rgba(SOFT,0.95)});
     D.forEach(([sg,s],i)=>{const q=o.rows?o.rows[i]||0:1;if(q<=0.01)return;const yy=y+176+i*lh,col=sg==="-"?D11_RED:sg==="+"?D11_OK:[150,165,190];withA(ctx,clamp(q*2,0,1),()=>{
       ctx.fillStyle=rgba(col,sg===" "?0.0:0.13);ctx.fillRect(x+14,yy,w-28,lh-4);T(ctx,sg,x+30,yy+35,{f:"mono",w:500,size:28,color:rgba(col,1)});T(ctx,typeOn(s,clamp(q*1.5-0.3,0,1)),x+62,yy+35,{f:"mono",w:500,size:28,color:rgba(mix(col,INK,0.55),1)});
       if(sg==="-"&&q>0.6){const sw=tw(ctx,s,28,500,"mono");ctx.strokeStyle=rgba(D11_RED,0.7);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+62,yy+26);ctx.lineTo(x+62+sw*clamp((q-0.6)/0.4,0,1),yy+26);ctx.stroke();}});});
-    if(R.length){const ry=y+196+D.length*lh+10;T(ctx,"review",x+26,ry+20,{f:"mono",w:500,size:28,color:rgba(SOFT,0.9)});
+    if(R.length){const ry=y+196+D.length*lh+10;T(ctx,o.files?"review":"approval",x+26,ry+20,{f:"mono",w:500,size:28,color:rgba(SOFT,0.9)});
       R.forEach(([nm,side,tk,ra],i)=>{const q=ra==null?1:ra;if(q<=0.01)return;const yy=ry+64+i*58;withA(ctx,q,()=>{archGlyph(ctx,"actor",x+40,yy-10,13,TRUST);T(ctx,nm,x+66,yy,{w:800,size:30,color:rgba(TRUST,1)});
-        T(ctx,side,x+66+tw(ctx,nm,30,800)+16,yy,{w:700,size:28,color:rgba(SOFT,0.95)});if(tk>0.01){kt_gtick(ctx,x+w-50,yy-10,17,tk);withA(ctx,tk,()=>T(ctx,"approved",x+w-80,yy,{w:700,size:28,align:"right",color:rgba(TRUST,1)}));}});});}});ctx.restore();});return h;}
+        T(ctx,side,x+66+tw(ctx,nm,30,800)+16,yy,{w:700,size:28,color:rgba(SOFT,0.95)});if(tk>0.01){kt_gtick(ctx,x+w-50,yy-10,17,tk);withA(ctx,tk,()=>T(ctx,o.okWord||"approved",x+w-80,yy,{w:700,size:28,align:"right",color:rgba(TRUST,1)}));}});});}});ctx.restore();});return h;}
 // the checks that run on the map, on every change: each row is running (0), passed (1) or flagged (2), with a note
 function d11_checks(ctx,x,y,w,rows,o){o=o||{};const a=o.a==null?1:o.a,lh=62,h=92+rows.length*lh;if(a<=0.01)return h;
   withA(ctx,a,()=>{glass(ctx,x,y,w,h,18,[170,205,255],{glow:12+12*(o.glow||0),ea:0.75,fill:"rgba(6,10,20,0.96)"});T(ctx,o.title||"checks on the map · every change",x+26,y+46,{f:"mono",w:500,size:28,color:rgba([170,205,255],1)});
@@ -317,7 +397,7 @@ function d11_checks(ctx,x,y,w,rows,o){o=o||{};const a=o.a==null?1:o.a,lh=62,h=92
 
 /* ---------- one map, many views ---------- */
 // the six views generated from the map, then dbt and Databricks, which carry it too
-const D11_VIEWS=["ArchiMate views","glossary","conceptual model","ontology · OWL","checks","heat map","dbt","Databricks"],D11_VCOL=[170,205,255];
+const D11_VIEWS=["ArchiMate views","glossary","conceptual model","ontology · OWL","tests · tracking","heat map","dbt","Databricks"],D11_VCOL=[170,205,255];
 // a view's icon, a small picture of what it holds, with no words, in the box (x, y, w, h)
 function d11_vicon(ctx,k,x,y,w,h,col){ctx.save();ctx.lineWidth=1.6;
   if(k===0){LAY6.forEach(([,c],i)=>{const yy=y+i*h/6,n=2+i%2,bw=(w-8)/n;for(let j=0;j<n;j++){ctx.fillStyle=rgba(c,0.6);rr(ctx,x+4+j*bw,yy+1.5,bw-5,h/6-3.5,2.5);ctx.fill();}});}
@@ -387,9 +467,9 @@ const D11_LINES=[["GOL-002","keep bills affordable"],["PRN-003","customer inform
   ["APP-001","meter data"],["APP-004","billing"],["APP-006","outage system"],["APP-009","customer records"],["APP-012","network model"],
   ["TEC-002","meter network"],["TEC-005","data platform"],["TEC-008","control system"]];
 // the rule's file, as Tomás writes it: RUL-021, the network's half of day one's rule (from Rules with a home)
-const D11_RUL021=[["id","RUL-021"],["name","estimate replaced by actual"],["kind","requirement"],["definition",">"],[null,"An estimate is replaced when the actual reading arrives,",{ind:1}],[null,"and the replacement is sent to the retailer.",{ind:1}],
-  ["owner","Grace Achieng"],["relationships",""],[null,"- realization: STP-004 · read",{ind:1}],[null,"- association: OBJ-003 · reading",{ind:1}],["evidence","metering rules 7.4 · 14 Mar 2027"],["status","confirmed"]];
-// a decision, as a file: film 7's, written down with why
+const D11_RUL021=[["id","RUL-021"],["name","estimate replaced by actual"],["kind","requirement"],["definition",""],[null,"An estimate is replaced when the actual reading arrives,",{ind:1}],[null,"and the replacement is sent to the retailer.",{ind:1}],
+  ["owner","Grace Achieng"],["relationships",""],[null,"realization: STP-004 · read",{ind:1}],[null,"association: OBJ-003 · reading",{ind:1}],["evidence","metering rules 7.4 · 14 Mar 2027"],["status","confirmed"]];
+// a decision, as the map keeps it: film 7's, written down with why
 const D11_DEC007=[["id","DEC-007"],["name","one outage system"],["decided","keep the newest outage system"],["why","three systems, three versions"],[null,"of every outage",{ind:2}],["decided by","Grace · October 2026"],["status","accepted"]];
 
 /* ---------- an agent reads the map ---------- */
@@ -474,18 +554,36 @@ function d11_code(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)re
   T(ctx,"4.2",x+32,y+124,{w:800,size:28,color:rgba(ink,1)});T(ctx,"A bill must reflect actual readings.",x+92,y+124,{w:700,size:28,color:rgba(ink,1)});
   const L1="When an actual reading replaces an estimate,",L2="the bill must be corrected within ten working days.",n=Math.round(clamp(o.nw||0,0,1)*(L1.length+L2.length));
   [[L1.slice(0,n),y+172],[L2.slice(0,Math.max(0,n-L1.length)),y+216]].forEach(([s_,yy])=>{if(!s_)return;T(ctx,s_,x+92,yy,{w:800,size:28,color:rgba(red,1)});ctx.fillStyle=rgba(red,0.75);ctx.fillRect(x+92,yy+7,tw(ctx,s_,28,800),2);});});}
-// what a change touches: a check and the views generated from the rule, as chips after a kicker
+// what a change touches: the tracking table and the views built from the rule, as chips after a kicker (k: 2 meter to cash, 3 the
+// ontology, 4 the tracking table)
 function d11_touches(ctx,x,y,items,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{T(ctx,"it touches",x,y+10,{f:"mono",w:500,size:28,color:rgba(KT_AI,1)});let cx=x+tw(ctx,"it touches",28,500,"mono")+24;
-  items.forEach(([k,s_],i)=>{const q=o.rows?o.rows[i]||0:1;if(q<=0.01)return;const sw=tw(ctx,s_,28,700)+(k?64:30);withA(ctx,q,()=>{const col=k===1?D11_OK:D11_VCOL;glass(ctx,cx,y-24,sw,48,24,col,{glow:8,ea:0.75,fill:"rgba(6,10,20,0.95)"});
-    if(k===1)tick_(ctx,cx+26,y+2,22,D11_OK,1);else if(k===2)d11_vicon(ctx,0,cx+12,y-12,30,24,D11_VCOL);else if(k===3)d11_vicon(ctx,3,cx+12,y-12,30,24,D11_VCOL);T(ctx,s_,cx+(k?50:15),y+10,{w:700,size:28,color:rgba(mix(col,INK,0.5),1)});});cx+=sw+16;});});}
-// dbt's YAML for the bills, changed with the rule: a diff, with the dbt mark
-function d11_dbtdiff(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,L=[[" ","models:"],[" ","  - name: bills"],[" ","    data_tests:"],["-","      - rul_022_corrected_on_next_bill"],["+","      - rul_022_corrected_within_ten_working_days"],[" ","    config: {meta: {rules: [RUL-022]}}"]],lh=46,h=92+L.length*lh;if(a<=0.01)return h;const col=[255,150,120];
-  withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,col,{glow:12+12*(o.glow||0),ea:0.75,fill:"rgba(8,8,14,0.96)"});const lw_=logo(ctx,"dbt",x+24,y+18,34);T(ctx,"models/retail/bills.yml",x+36+lw_,y+46,{f:"mono",w:500,size:28,color:rgba(SOFT,0.95)});
-    ctx.fillStyle="rgba(255,190,170,0.16)";ctx.fillRect(x+14,y+66,w-28,1.2);
-    L.forEach(([sg,s_],i)=>{const q=o.rows?o.rows[i]==null?1:o.rows[i]:1;if(q<=0.01)return;const yy=y+70+i*lh,c2=sg==="-"?D11_RED:sg==="+"?D11_OK:null;withA(ctx,q,()=>{
-      if(c2){ctx.fillStyle=rgba(c2,0.13);ctx.fillRect(x+14,yy+2,w-28,lh-4);T(ctx,sg,x+28,yy+lh*0.7,{f:"mono",w:500,size:28,color:rgba(c2,1)});}
-      T(ctx,c2?typeOn(s_,clamp(q*1.5-0.3,0,1)):s_,x+56,yy+lh*0.7,{f:"mono",w:500,size:28,color:rgba(c2?mix(c2,INK,0.55):INK,c2?1:0.9)});
-      if(sg==="-"&&q>0.6){const sw=tw(ctx,s_.trimStart(),28,500,"mono"),x0=x+56+tw(ctx,s_.length-s_.trimStart().length?" ".repeat(s_.length-s_.trimStart().length):"",28,500,"mono");ctx.strokeStyle=rgba(D11_RED,0.7);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x0,yy+lh*0.7-9);ctx.lineTo(x0+sw*clamp((q-0.6)/0.4,0,1),yy+lh*0.7-9);ctx.stroke();}});});});return h;}
+  items.forEach(([k,s_],i)=>{const q=o.rows?o.rows[i]||0:1;if(q<=0.01)return;const sw=tw(ctx,s_,28,700)+(k?64:30);withA(ctx,q,()=>{const col=k===4?D11_RET:D11_VCOL;glass(ctx,cx,y-24,sw,48,24,col,{glow:8,ea:0.75,fill:"rgba(6,10,20,0.95)"});
+    if(k===4)d11_tgrid(ctx,cx+14,y-11,28,22,D11_RET);else if(k===2)d11_vicon(ctx,0,cx+12,y-12,30,24,D11_VCOL);else if(k===3)d11_vicon(ctx,3,cx+12,y-12,30,24,D11_VCOL);T(ctx,s_,cx+(k?50:15),y+10,{w:700,size:28,color:rgba(mix(col,INK,0.5),1)});});cx+=sw+16;});});}
+// a table's glyph, with no words: a header row and two rows, in the box (x, y, w, h)
+function d11_tgrid(ctx,x,y,w,h,col){ctx.save();ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=1.6;rr(ctx,x,y,w,h,3);ctx.stroke();ctx.fillStyle=rgba(col,0.45);ctx.fillRect(x+1,y+1,w-2,h/3-1);
+  ctx.beginPath();ctx.moveTo(x,y+h*2/3);ctx.lineTo(x+w,y+h*2/3);ctx.moveTo(x+w*0.42,y+h/3);ctx.lineTo(x+w*0.42,y+h);ctx.stroke();ctx.restore();}
+// retail's rule is about what the business does, so it isn't a data test: it builds a tracking table, as Rules with a home shows,
+// which the billing team reads each morning. Each bill based on a replaced estimate, and the working days it has waited to be
+// corrected; the window is the rule's, so it changes with it (o.sw 0..1: from the next bill to ten working days), and then a bill
+// past it shows as late (o.late 0..1). o.rows shows each row
+const D11_TRACK=[["B-20417","2"],["B-20388","7"],["B-20211","11"]];
+function d11_track(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,lh=56,h=196+D11_TRACK.length*lh;if(a<=0.01)return h;const col=D11_RET,sw=ease(clamp(o.sw||0,0,1)),lt=clamp(o.late||0,0,1);
+  withA(ctx,a,()=>{glass(ctx,x,y,w,h,16,col,{glow:12+12*(o.glow||0),ea:0.75,fill:"rgba(14,8,12,0.96)"});d11_tgrid(ctx,x+26,y+26,40,30,col);
+    T(ctx,"bills to correct",x+84,y+52,{f:"mono",w:500,size:30,color:rgba(col,1)});T(ctx,"the billing team · each morning",x+w-28,y+50,{w:700,size:28,align:"right",color:rgba(SOFT,0.95)});
+    ctx.fillStyle=rgba(col,0.2);ctx.fillRect(x+14,y+76,w-28,1.2);
+    // the window, from the rule: "on the next bill" struck out, and "within 10 working days" written in
+    const k0="RUL-022 · corrected ",kw=tw(ctx,k0,28,500,"mono");T(ctx,k0,x+28,y+124,{f:"mono",w:500,size:28,color:rgba(D11_RULE,1)});
+    const o1="on the next bill",ow=tw(ctx,o1,28,700);withA(ctx,1-sw,()=>{T(ctx,o1,x+28+kw,y+124-sw*14,{w:700,size:28,color:rgba(INK,0.9)});});
+    if(sw>0.02&&sw<0.98){ctx.strokeStyle=rgba(D11_RED,0.8*(1-sw));ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+28+kw,y+115);ctx.lineTo(x+28+kw+ow*clamp(sw*2,0,1),y+115);ctx.stroke();}
+    withA(ctx,sw,()=>T(ctx,"within 10 working days",x+28+kw,y+124+(1-sw)*14,{w:800,size:28,color:rgba(TRUST,1)}));
+    // the columns, and a row for each bill
+    const cX=[x+28,x+330,x+w-200];[["bill",0],["working days waiting",1],["status",2]].forEach(([s_,i])=>T(ctx,s_,cX[i],y+176,{w:700,size:28,color:rgba(SOFT,0.85)}));
+    D11_TRACK.forEach(([b,d],i)=>{const q=o.rows?o.rows[i]==null?1:o.rows[i]:1;if(q<=0.01)return;const yy=y+196+i*lh,late=+d>10,L=late?lt:0;withA(ctx,q,()=>{
+      if(L>0.01){ctx.fillStyle=rgba(D11_RED,0.14*L);ctx.fillRect(x+14,yy+4,w-28,lh-8);}
+      T(ctx,b,cX[0],yy+lh*0.68,{f:"mono",w:500,size:28,color:rgba(INK,0.92)});T(ctx,d,cX[1],yy+lh*0.68,{f:"mono",w:500,size:28,color:rgba(mix(INK,D11_RED,L),0.92)});
+      withA(ctx,1-sw,()=>T(ctx,"next bill",cX[2],yy+lh*0.68,{w:700,size:28,color:rgba(SOFT,0.9)}));
+      withA(ctx,sw,()=>{if(late){withA(ctx,1-L,()=>T(ctx,"on time",cX[2],yy+lh*0.68,{w:700,size:28,color:rgba(D11_OK,1)}));withA(ctx,L,()=>{glow(ctx,cX[2]+30,yy+lh*0.5,26,D11_RED,0.35);T(ctx,"late",cX[2],yy+lh*0.68,{w:800,size:28,color:rgba(D11_RED,1)});});}
+        else T(ctx,"on time",cX[2],yy+lh*0.68,{w:700,size:28,color:rgba(D11_OK,1)});});});});});return h;}
 
 /* ---------- day one, again ---------- */
 // Zofia's badge, on its lanyard, as Tomás's was on his first day

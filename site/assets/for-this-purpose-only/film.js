@@ -442,9 +442,9 @@ const NARR={
  {"id":"closes","gap":0.8,"text":"Her no to fundraising closes the alumna's door too."},
  {"id":"holds","gap":0.8,"text":"A no she gave the alumni office now holds wherever she appears, until she changes it."}]},
 "platform":{"name":"Written into the platform","lead":1.0,"tail":1.0,"vo":[
- {"id":"tags","gap":0.8,"text":"On the platform, Jun writes each purpose in dbt, as a tag on the columns."},
+ {"id":"tags","gap":0.8,"text":"Where the data is transformed, Jun writes each purpose as a tag on the columns."},
  {"id":"test","gap":0.8,"text":"A test fails if a column with personal data has no purpose."},
- {"id":"policy","gap":0.8,"text":"Then two policies in Unity Catalog read the tags."},
+ {"id":"policy","gap":0.8,"text":"Then two policies on the platform read the tags."},
  {"id":"mask","gap":0.8,"text":"One hides every column tagged for teaching from the appeals team."},
  {"id":"filter","gap":0.8,"text":"The other leaves out anyone whose wishes say no."},
  {"id":"once","gap":0.8,"text":"Each is written once, and every table with those tags follows it."}]},
@@ -473,7 +473,7 @@ const NARR={
  {"id":"line","gap":0.8,"text":"Data given for one role isn't free for every role."}]}
 };
 
-const VODUR={"house/book": 5.574, "house/fire": 5.006, "house/line": 5.254, "house/home": 3.851, "house/stays": 1.157, "house/purpose": 3.399, "appeal/today": 6.036, "appeal/top": 5.098, "appeal/given": 4.937, "appeal/goes": 2.706, "wish/month": 4.31, "wish/reaches": 3.307, "wish/said": 5.797, "wish/kept": 3.78, "wish/linked": 4.071, "purposes/each": 4.649, "purposes/student": 2.433, "purposes/alumna": 3.397, "purposes/tutor": 1.68, "purposes/researcher": 2.949, "purposes/list": 3.208, "purposes/rule": 3.603, "purposes/open": 3.015, "wishes/on": 2.823, "wishes/data": 5.004, "wishes/closes": 3.182, "wishes/holds": 5.273, "platform/tags": 5.157, "platform/test": 3.874, "platform/policy": 2.958, "platform/mask": 3.883, "platform/filter": 2.611, "platform/once": 3.571, "again/next": 3.345, "again/select": 2.987, "again/off": 4.68, "again/results": 2.122, "request/asks": 3.079, "request/used": 3.405, "request/now": 3.794, "request/source": 3.239, "request/fix": 2.709, "request/days": 2.293, "request/forget": 3.659, "request/must": 4.598, "elsewhere/every": 1.823, "elsewhere/shop": 4.852, "elsewhere/hospital": 2.454, "elsewhere/next": 1.397, "only/house": 2.096, "only/keeps": 4.921, "only/line": 3.077};
+const VODUR={"house/book": 5.574, "house/fire": 5.006, "house/line": 5.254, "house/home": 3.851, "house/stays": 1.157, "house/purpose": 3.399, "appeal/today": 6.036, "appeal/top": 5.098, "appeal/given": 4.937, "appeal/goes": 2.706, "wish/month": 4.31, "wish/reaches": 3.307, "wish/said": 5.797, "wish/kept": 3.78, "wish/linked": 4.071, "purposes/each": 4.649, "purposes/student": 2.433, "purposes/alumna": 3.397, "purposes/tutor": 1.68, "purposes/researcher": 2.949, "purposes/list": 3.208, "purposes/rule": 3.603, "purposes/open": 3.015, "wishes/on": 2.823, "wishes/data": 5.004, "wishes/closes": 3.182, "wishes/holds": 5.273, "platform/tags": 4.701, "platform/test": 3.874, "platform/policy": 2.642, "platform/mask": 3.883, "platform/filter": 2.611, "platform/once": 3.571, "again/next": 3.345, "again/select": 2.987, "again/off": 4.68, "again/results": 2.122, "request/asks": 3.079, "request/used": 3.405, "request/now": 3.794, "request/source": 3.239, "request/fix": 2.709, "request/days": 2.293, "request/forget": 3.659, "request/must": 4.598, "elsewhere/every": 1.823, "elsewhere/shop": 4.852, "elsewhere/hospital": 2.454, "elsewhere/next": 1.397, "only/house": 2.096, "only/keeps": 4.921, "only/line": 3.077};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2709,8 +2709,8 @@ function m6_windowGlow(ctx,Wn,lit,t){if(lit<=0.01)return;ctx.save();ctx.globalCo
    The places are painted once and kept (post.js): the plain and the village of the opening (past.js), the campus today, paper with a
    little sky for the chapters that explain, a second one for the industries, and the registrar's office. The pictures are the film's own:
    Owen and Jun; the appeal and its email; Linh's records, each with its values behind a door painted in its role's colour and its
-   purposes on tags on the door; her wish, a note that moves from her alumni record to her; the list of purposes; the dbt and Unity
-   Catalog cards; the table as the appeals team sees it; her request and its answer; and the shop's and the hospital's doors. Every name
+   purposes on tags on the door; her wish, a note that moves from her alumni record to her; the list of purposes; the YAML and the
+   policies' cards; the table as the appeals team sees it; her request and its answer; and the shop's and the hospital's doors. Every name
    starts with m6_ or M6_. */
 
 /* ---------- the places ---------- */
@@ -2907,14 +2907,14 @@ function m6_code(ctx,x,y,w,head,lines,ps,o){o=o||{};const lh=40,h=78+lines.lengt
     if(o.lit&&o.lit[i]>0.01){const ind=tw(ctx,s.slice(0,s.length-s.trimStart().length),28,500,"mono"),lx=x+30+ind-12,lw=Math.min(x+w-16-lx,tw(ctx,s.trim(),28,500,"mono")+24);
       withA(ctx,o.lit[i],()=>wc_panel(ctx,lx,yy-30,lw,42,{kind:"chip",role:o.litCol||WC_SIDE.tech,seed:i+5}));}
     wc_T(ctx,typeOn(s,p),x+30,yy,{w:500,size:28,f:"mono",col:WC_DARK});});return h;}
-// dbt's YAML for the student system's results, the columns and their purposes
+// the model's YAML for the student system's results, the columns and their purposes (dbt's, as the example project writes it)
 const M6_YAML=["- name: stg_student_system__results","  columns:","    - name: student_bk","      config:","        meta: {personal_data: direct}",
   "      databricks_tags: {purpose: teaching}","    - name: grade","      databricks_tags: {purpose: teaching}"];
-// the two policies, in Unity Catalog's SQL
+// the two policies, in the platform's SQL (Unity Catalog's, as in the example project)
 const M6_POLA=["CREATE POLICY hide_teaching","ON CATALOG university","COLUMN MASK hidden","TO `appeals` FOR TABLES","MATCH COLUMNS has_tag_value(","  'purpose', 'teaching') AS c","ON COLUMN c"];
 const M6_POLB=["CREATE POLICY honour_wishes","ON CATALOG university","ROW FILTER no_wish_against","TO `appeals` FOR TABLES","MATCH COLUMNS has_tag_value(","  'key', 'person') AS p","USING COLUMNS (p, 'fundraising')"];
 // the test: what it checks, and how it came out (o.fail, o.pass, 0 to 1)
-function m6_test(ctx,x,y,o){o=o||{};const w=630,h=232;wc_panel(ctx,x,y,w,h,{kind:"card",seed:16});wc_T(ctx,"dbt test",x+28,y+46,{w:700,size:28,col:WC_MUTED});
+function m6_test(ctx,x,y,o){o=o||{};const w=630,h=232;wc_panel(ctx,x,y,w,h,{kind:"card",seed:16});wc_T(ctx,"a test",x+28,y+46,{w:700,size:28,col:WC_MUTED});
   wc_T(ctx,"personal_data_has_a_purpose",x+30,y+98,{w:500,size:28,f:"mono",col:WC_DARK});
   const f=o.fail||0,p=o.pass||0;
   if(f>0&&p<0.5)withA(ctx,1-clamp(p*2,0,1),()=>{wc_cross(ctx,x+50,y+160,30,WC_NO,clamp(f/0.4,0,1));wc_T(ctx,typeOn("1 column with no purpose",clamp((f-0.3)/0.7,0,1)),x+80,y+170,{w:700,size:28,col:WC_NO});
@@ -3194,28 +3194,28 @@ scene("wishes",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
 /* ---------- 6. Written into the platform ---------- */
 const M6_JUN=[214,1006,0.9],M6_YX=440,M6_CY=96,M6_PA=[440,70,710],M6_PB=[1170,70,710];
 scene("platform",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
-  const tJun=w("tags","Jun writes"),tDbt=w("tags","in dbt"),tTag=w("tags","as a tag"),tTest=c("test"),tFails=w("test","fails"),tNoP=w("test","has no purpose"),
+  const tJun=w("tags","Jun writes"),tYaml=w("tags","transformed"),tTag=w("tags","as a tag"),tTest=c("test"),tFails=w("test","fails"),tNoP=w("test","has no purpose"),
     tTwo=w("policy","two policies"),tRead=w("policy","read the tags"),tMask=c("mask"),tHides=w("mask","hides"),tTagged=w("mask","tagged for teaching"),
     tFil=c("filter"),tLeaves=w("filter","leaves out"),tOnce=c("once"),tEvery=w("once","every table");
   m6_open(ctx,S,t,sc,"plain",[[0,960,540,1]],{z:0});
   // Jun, edged in cyan, and his card
-  arrive(ctx,M6_JUN[0],M6_JUN[1]-300,t,0.3,()=>person(ctx,"jun",M6_JUN[0],M6_JUN[1],M6_JUN[2],{pose:"stand",pose2:"explain",mix:fin(t,tDbt-0.4,0.6)*(1-fin(t,tTest-0.2,0.6)),expr:"calm",t}),{d:0.9,from:0.97});
+  arrive(ctx,M6_JUN[0],M6_JUN[1]-300,t,0.3,()=>person(ctx,"jun",M6_JUN[0],M6_JUN[1],M6_JUN[2],{pose:"stand",pose2:"explain",mix:fin(t,tYaml-0.4,0.6)*(1-fin(t,tTest-0.2,0.6)),expr:"calm",t}),{d:0.9,from:0.97});
   arrive(ctx,220,168,t,tJun,()=>wc_info(ctx,40,110,360,116,"Jun Park","analytics engineer",{mono:false}),{dy:12});
-  // first, dbt: the model's columns and their purposes, and the test that no personal data goes without one
+  // first, where the data is transformed: the model's columns and their purposes, and the test that no personal data goes without one
   const p1=1-fin(t,tTwo-0.3,0.5);
   if(p1>0.01)withA(ctx,p1,()=>{const fix=tNoP+0.6;
-    const ps=M6_YAML.map((s,i)=>i===5?clamp((t-fix)/0.7,0,1):clamp((t-tDbt-0.1-(i>5?i-1:i)*0.32)/0.4,0,1));
-    arrive(ctx,M6_YX+390,M6_CY+208,t,tDbt-0.4,()=>m6_code(ctx,M6_YX,M6_CY,780,"dbt · the model's YAML",M6_YAML,ps,{lit:[0,0,0,0,0,fin(t,fix+0.7,0.4),0,fin(t,tTag,0.5)]}),{dy:16});
+    const ps=M6_YAML.map((s,i)=>i===5?clamp((t-fix)/0.7,0,1):clamp((t-tYaml-0.1-(i>5?i-1:i)*0.32)/0.4,0,1));
+    arrive(ctx,M6_YX+390,M6_CY+208,t,tYaml-0.4,()=>m6_code(ctx,M6_YX,M6_CY,780,"the model's YAML",M6_YAML,ps,{lit:[0,0,0,0,0,fin(t,fix+0.7,0.4),0,fin(t,tTag,0.5)]}),{dy:16});
     arrive(ctx,1250+315,M6_CY+116,t,tTest-0.2,()=>m6_test(ctx,1250,M6_CY,{fail:clamp((t-tFails)/1.2,0,1),pass:clamp((t-fix-0.8)/0.8,0,1)}),{dy:16});});
-  // then Unity Catalog: two policies that read the tags; and the table as the appeals team sees it, its grades hidden, two rows left out
+  // then the platform: two policies that read the tags; and the table as the appeals team sees it, its grades hidden, two rows left out
   const p2=fin(t,tTwo+0.1,0.6),tb=1-fin(t,tOnce-0.2,0.6);
   if(p2>0.01)withA(ctx,p2,()=>{
     const litA=[0,0,fin(t,tHides,0.4),fin(t,tHides+0.4,0.4),fin(t,tRead,0.4)*(1-0.6*fin(t,tFil,0.4)),fin(t,tRead,0.4)*(1-0.6*fin(t,tFil,0.4)),0];
     const litB=[0,0,fin(t,tLeaves-0.2,0.4),0,fin(t,tRead+0.3,0.4)*(1-0.6*fin(t,tHides,0.4)),fin(t,tRead+0.3,0.4)*(1-0.6*fin(t,tHides,0.4)),fin(t,tLeaves+0.3,0.4)];
     // each card types a line at a time, the second a little after the first
     const pa=M6_POLA.map((s,i)=>clamp((t-tTwo-0.3-i*0.2)/0.2,0,1)),pb=M6_POLB.map((s,i)=>clamp((t-tTwo-0.7-i*0.2)/0.2,0,1));
-    arrive(ctx,M6_PA[0]+M6_PA[2]/2,M6_PA[1]+188,t,tTwo+0.1,()=>m6_code(ctx,M6_PA[0],M6_PA[1],M6_PA[2],"Unity Catalog · a column mask",M6_POLA,pa,{lit:litA,seed:31}),{dy:16});
-    arrive(ctx,M6_PB[0]+M6_PB[2]/2,M6_PB[1]+188,t,tTwo+0.5,()=>m6_code(ctx,M6_PB[0],M6_PB[1],M6_PB[2],"Unity Catalog · a row filter",M6_POLB,pb,{lit:litB,seed:32}),{dy:16});
+    arrive(ctx,M6_PA[0]+M6_PA[2]/2,M6_PA[1]+188,t,tTwo+0.1,()=>m6_code(ctx,M6_PA[0],M6_PA[1],M6_PA[2],"a column mask",M6_POLA,pa,{lit:litA,seed:31}),{dy:16});
+    arrive(ctx,M6_PB[0]+M6_PB[2]/2,M6_PB[1]+188,t,tTwo+0.5,()=>m6_code(ctx,M6_PB[0],M6_PB[1],M6_PB[2],"a row filter",M6_POLB,pb,{lit:litB,seed:32}),{dy:16});
     if(tb>0.01)withA(ctx,tb,()=>arrive(ctx,M6_TB.x+M6_TB.w/2,M6_TB.y+200,t,tMask-0.2,()=>m6_table(ctx,{mask:clamp((t-tTagged)/0.8,0,1),gone:clamp((t-tLeaves-0.1)/1.8,0,1)}),{dy:20}));
     // every table with those tags follows them
     const ys=600;M6_TBLS.forEach((s,i)=>{const x=700+i*460,t0=tEvery-0.3+i*0.25;

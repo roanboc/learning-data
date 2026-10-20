@@ -2,8 +2,8 @@
    The places are painted once and kept (post.js): the plain and the village of the opening (past.js), the campus today, paper with a
    little sky for the chapters that explain, a second one for the industries, and the registrar's office. The pictures are the film's own:
    Owen and Jun; the appeal and its email; Linh's records, each with its values behind a door painted in its role's colour and its
-   purposes on tags on the door; her wish, a note that moves from her alumni record to her; the list of purposes; the dbt and Unity
-   Catalog cards; the table as the appeals team sees it; her request and its answer; and the shop's and the hospital's doors. Every name
+   purposes on tags on the door; her wish, a note that moves from her alumni record to her; the list of purposes; the YAML and the
+   policies' cards; the table as the appeals team sees it; her request and its answer; and the shop's and the hospital's doors. Every name
    starts with m6_ or M6_. */
 
 /* ---------- the places ---------- */
@@ -200,14 +200,14 @@ function m6_code(ctx,x,y,w,head,lines,ps,o){o=o||{};const lh=40,h=78+lines.lengt
     if(o.lit&&o.lit[i]>0.01){const ind=tw(ctx,s.slice(0,s.length-s.trimStart().length),28,500,"mono"),lx=x+30+ind-12,lw=Math.min(x+w-16-lx,tw(ctx,s.trim(),28,500,"mono")+24);
       withA(ctx,o.lit[i],()=>wc_panel(ctx,lx,yy-30,lw,42,{kind:"chip",role:o.litCol||WC_SIDE.tech,seed:i+5}));}
     wc_T(ctx,typeOn(s,p),x+30,yy,{w:500,size:28,f:"mono",col:WC_DARK});});return h;}
-// dbt's YAML for the student system's results, the columns and their purposes
+// the model's YAML for the student system's results, the columns and their purposes (dbt's, as the example project writes it)
 const M6_YAML=["- name: stg_student_system__results","  columns:","    - name: student_bk","      config:","        meta: {personal_data: direct}",
   "      databricks_tags: {purpose: teaching}","    - name: grade","      databricks_tags: {purpose: teaching}"];
-// the two policies, in Unity Catalog's SQL
+// the two policies, in the platform's SQL (Unity Catalog's, as in the example project)
 const M6_POLA=["CREATE POLICY hide_teaching","ON CATALOG university","COLUMN MASK hidden","TO `appeals` FOR TABLES","MATCH COLUMNS has_tag_value(","  'purpose', 'teaching') AS c","ON COLUMN c"];
 const M6_POLB=["CREATE POLICY honour_wishes","ON CATALOG university","ROW FILTER no_wish_against","TO `appeals` FOR TABLES","MATCH COLUMNS has_tag_value(","  'key', 'person') AS p","USING COLUMNS (p, 'fundraising')"];
 // the test: what it checks, and how it came out (o.fail, o.pass, 0 to 1)
-function m6_test(ctx,x,y,o){o=o||{};const w=630,h=232;wc_panel(ctx,x,y,w,h,{kind:"card",seed:16});wc_T(ctx,"dbt test",x+28,y+46,{w:700,size:28,col:WC_MUTED});
+function m6_test(ctx,x,y,o){o=o||{};const w=630,h=232;wc_panel(ctx,x,y,w,h,{kind:"card",seed:16});wc_T(ctx,"a test",x+28,y+46,{w:700,size:28,col:WC_MUTED});
   wc_T(ctx,"personal_data_has_a_purpose",x+30,y+98,{w:500,size:28,f:"mono",col:WC_DARK});
   const f=o.fail||0,p=o.pass||0;
   if(f>0&&p<0.5)withA(ctx,1-clamp(p*2,0,1),()=>{wc_cross(ctx,x+50,y+160,30,WC_NO,clamp(f/0.4,0,1));wc_T(ctx,typeOn("1 column with no purpose",clamp((f-0.3)/0.7,0,1)),x+80,y+170,{w:700,size:28,col:WC_NO});

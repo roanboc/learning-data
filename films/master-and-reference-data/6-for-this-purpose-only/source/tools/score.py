@@ -336,12 +336,12 @@ ringp(tUnt, 0.8, 0.0192, P(216))
 #    the table, the wash over its grades, the red lines through the rows of those who said no, and the rows closing up; each table the
 #    policies reach, and its chip; the tag
 J = 'platform'
-tJun, tDbt, tTest, tFails, tNoP = W(J, 'tags', 'Jun writes'), W(J, 'tags', 'in dbt'), C(J, 'test'), W(J, 'test', 'fails'), W(J, 'test', 'has no purpose')
+tJun, tYaml, tTest, tFails, tNoP = W(J, 'tags', 'Jun writes'), W(J, 'tags', 'transformed'), C(J, 'test'), W(J, 'test', 'fails'), W(J, 'test', 'has no purpose')
 tTwo, tMask, tTagged, tLeaves, tEvery = W(J, 'policy', 'two policies'), C(J, 'mask'), W(J, 'mask', 'tagged for teaching'), W(J, 'filter', 'leaves out'), W(J, 'once', 'every table')
 fix = tNoP + 0.6
 bed([(S0(J), DMAJ9), (C(J, 'test', -0.3), BM9), (C(J, 'policy', -0.3), GMAJ7), (C(J, 'mask', -0.3), EM9), (C(J, 'filter', -0.3), A7SUS), (C(J, 'once', -0.3), DMAJ7)], E(J) + 1.0)
 card(tJun, 0.02, P(220))
-card(tDbt - 0.4, 0.026, P(830), 0.5); keys(tDbt + 0.1, 2.3, 0.02, P(780), 14)
+card(tYaml - 0.4, 0.026, P(830), 0.5); keys(tYaml + 0.1, 2.3, 0.02, P(780), 14)
 card(tTest - 0.2, 0.024, P(1565))
 crossp(tFails, 0.021, P(1300)); keys(tFails + 0.36, 0.9, 0.018, P(1460), 7)
 keys(fix, 0.7, 0.02, P(760), 5); tickp(fix + 1.2, 0.021, P(1300))

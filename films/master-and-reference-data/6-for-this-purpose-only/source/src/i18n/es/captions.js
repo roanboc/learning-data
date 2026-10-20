@@ -56,12 +56,12 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Su no a las donaciones también cierra la puerta de la egresada.",
 "A no she gave the alumni office now holds wherever she appears, until she changes it.":
 "Un no que dio a la oficina de egresados ahora vale dondequiera que aparezca, hasta que lo cambie.",
-"On the platform, Jun writes each purpose in dbt, as a tag on the columns.":
-"En la plataforma, Jun escribe cada propósito en dbt, como una etiqueta en las columnas.",
+"Where the data is transformed, Jun writes each purpose as a tag on the columns.":
+"Donde se transforman los datos, Jun escribe cada propósito como una etiqueta en las columnas.",
 "A test fails if a column with personal data has no purpose.":
 "Una prueba falla si una columna con datos personales no tiene propósito.",
-"Then two policies in Unity Catalog read the tags.":
-"Luego, dos políticas en Unity Catalog leen las etiquetas.",
+"Then two policies on the platform read the tags.":
+"Luego, dos políticas en la plataforma leen las etiquetas.",
 "One hides every column tagged for teaching from the appeals team.":
 "Una le oculta al equipo de campañas cada columna etiquetada para enseñanza.",
 "The other leaves out anyone whose wishes say no.":

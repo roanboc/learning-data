@@ -5,7 +5,7 @@
 window.LEARN={lang:"en",
 think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
   qs:{
-  "after":{q:"The university already links Linh's records and counts her once in its reports. Why could she still get a third student number?",
+  "after":{q:"The university already has Mei's links and a copy that counts each person once. Why could Linh still get a third student number?",
     opts:[{t:"Mei's office links records only once a year."},{t:"Both work after a record exists, and neither is asked before the application creates one.",ok:true},{t:"The lakehouse doesn't hold student numbers."}],
     why:"A registry links records that are already there, and a copy for analysis gathers them afterwards. Neither is in the application's path, so it still creates a person first, and the duplicate is found later, if at all. In an organisation you know, is a duplicate found when it's made, or after?"},
   "lightest":{q:"Why not let one place create every person at the university?",

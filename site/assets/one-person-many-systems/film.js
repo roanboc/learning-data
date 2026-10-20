@@ -417,7 +417,7 @@ const NARR={
  {"id":"own","gap":0.8,"text":"Nobody built a post office for the world. Each country kept its own, and they shared the rules."}]},
 "again":{"name":"Applying again","lead":1.0,"tail":1.0,"vo":[
  {"id":"today","gap":0.8,"text":"Today, at the university, Linh Nguyen wants to apply for a PhD."},
- {"id":"last","gap":0.8,"text":"Last time she applied, she got a second student number, and Mei's office had to link the two."},
+ {"id":"last","gap":0.8,"text":"Last time she applied, she got a second student number, and nothing linked the two."},
  {"id":"still","gap":0.8,"text":"The application still creates a person first, and nobody looks until later."},
  {"id":"four","gap":0.8,"text":"And four systems need to know who she is: the student system, HR, the research office and the alumni office."}]},
 "ways":{"name":"Four ways","lead":0.8,"tail":1.0,"vo":[
@@ -428,7 +428,7 @@ const NARR={
  {"id":"central","gap":0.8,"text":"Or one place creates every person, and the systems only read."}]},
 "after":{"name":"After the fact","lead":0.8,"tail":1.0,"vo":[
  {"id":"have","gap":0.8,"text":"The university already has the first two: Mei's links, and the copy in the lakehouse."},
- {"id":"late","gap":0.8,"text":"Both find Linh after the fact. Neither stops a third number."},
+ {"id":"late","gap":0.8,"text":"At best, both find Linh after the fact. Neither stops a third number."},
  {"id":"cost","gap":0.8,"text":"The last two do, but every system that reads back has to change."}]},
 "lightest":{"name":"The lightest that works","lead":0.8,"tail":1.0,"vo":[
  {"id":"which","gap":0.8,"text":"So which is the lightest way that still works?"},
@@ -465,7 +465,7 @@ const NARR={
  {"id":"idea","gap":0.8,"text":"Choose the lightest way that solves the problem."}]}
 };
 
-const VODUR={"bern/pairs": 6.508, "bern/route": 2.085, "bern/signed": 3.786, "bern/one": 5.99, "bern/own": 5.34, "again/today": 4.485, "again/last": 5.208, "again/still": 4.318, "again/four": 7.002, "ways/noor": 4.102, "ways/registry": 6.132, "ways/copy": 5.497, "ways/master": 5.745, "ways/central": 3.772, "after/have": 4.848, "after/late": 3.366, "after/cost": 3.742, "lightest/which": 2.222, "lightest/doors": 3.672, "lightest/those": 6.845, "lightest/bern": 5.416, "elsewhere/bank": 4.937, "elsewhere/country": 5.682, "search/door": 5.169, "search/compares": 3.967, "search/clear": 4.288, "search/nobody": 2.841, "rule/write": 6.109, "rule/add": 4.867, "found/applies": 2.569, "found/finds": 5.09, "found/adds": 7.406, "apart/other": 4.57, "apart/born": 4.807, "apart/only": 5.815, "product/behind": 5.362, "product/contract": 6.744, "product/tools": 4.123, "product/synced": 3.875, "shared/bern": 4.009, "shared/here": 3.541, "shared/idea": 2.524};
+const VODUR={"bern/pairs": 6.508, "bern/route": 2.085, "bern/signed": 3.786, "bern/one": 5.99, "bern/own": 5.34, "again/today": 4.485, "again/last": 4.485, "again/still": 4.318, "again/four": 7.002, "ways/noor": 4.102, "ways/registry": 6.132, "ways/copy": 5.497, "ways/master": 5.745, "ways/central": 3.772, "after/have": 4.848, "after/late": 3.982, "after/cost": 3.742, "lightest/which": 2.222, "lightest/doors": 3.672, "lightest/those": 6.845, "lightest/bern": 5.416, "elsewhere/bank": 4.937, "elsewhere/country": 5.682, "search/door": 5.169, "search/compares": 3.967, "search/clear": 4.288, "search/nobody": 2.841, "rule/write": 6.109, "rule/add": 4.867, "found/applies": 2.569, "found/finds": 5.09, "found/adds": 7.406, "apart/other": 4.57, "apart/born": 4.807, "apart/only": 5.815, "product/behind": 5.362, "product/contract": 6.744, "product/tools": 4.123, "product/synced": 3.875, "shared/bern": 4.009, "shared/here": 3.541, "shared/idea": 2.524};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2811,13 +2811,13 @@ scene("bern",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   wc_title(ctx,S,t,B+0.6,"One person, many systems","four ways to share the person, and the lightest that works","Film 7 of 9 · master and reference data");});
 
 /* ---------- 2. Applying again ---------- */
-// Linh, on the path; her two student records on the left, linked by Mei's office; the application on the right, and the record it
+// Linh, on the path; her two student records on the left, nothing linking them; the application on the right, and the record it
 // would make; then the four systems in a row along the top
 const M7_LIX=800,M7_LIY=1018,M7_OLD=[150,144,440,120],M7_NEW=[150,304,440,120],M7_AX=1180,M7_AW=700,M7_GHR=[1320,452,540];
 const M7_SROW=[60,520,980,1440],M7_SRW=420,M7_SRY=150;
-const M7_MEILINK=(()=>{const o=[];for(let i=0;i<=20;i++){const a=-Math.PI/2+i/20*Math.PI;o.push([596+52*Math.cos(a),284+80*Math.sin(a)]);}return o;})();
+const M7_NOLINK=(()=>{const o=[];for(let i=0;i<=20;i++){const a=Math.PI/2-i/20*Math.PI;o.push([596+52*Math.cos(a),284+80*Math.sin(a)]);}return o;})(),M7_NOX=648,M7_NOY=284;
 scene("again",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
-  const tT=c("today"),tName=w("today","Linh Nguyen"),tPhd=w("today","a PhD"),tL=c("last"),tSec=w("last","second student"),tNum=w("last","number"),tMei=w("last","Mei's office"),
+  const tT=c("today"),tName=w("today","Linh Nguyen"),tPhd=w("today","a PhD"),tL=c("last"),tSec=w("last","second student"),tNum=w("last","number"),tLnk=w("last","linked"),tTwo=w("last","the two"),
     tSt=c("still"),tApp=w("still","application"),tCre=w("still","creates a person"),tNob=w("still","nobody looks"),tF=c("four"),tSys=[w("four","student system"),w("four","HR"),w("four","research office"),w("four","alumni office")];
   // the camera: Linh; her records; the application; out for the four systems
   m7_open(ctx,S,t,sc,"campus",[[0,960,540,1],[tT+0.6,900,560,1.06],[tL-0.3,760,500,1.08],[tSt-0.3,1000,500,1.03],[tF-0.3,960,540,1]]);
@@ -2829,9 +2829,9 @@ scene("again",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     // her two student records: the one she graduated with, and the one her last application made
     arrive(ctx,370,204,t,tL,()=>wc_roleCard(ctx,M7_OLD[0],M7_OLD[1],M7_OLD[2],M7_OLD[3],"student","Student","S-17142",null,{note:"bachelor's · 2019–22"}),{dy:16});
     arrive(ctx,370,364,t,tSec-0.2,()=>{wc_roleCard(ctx,M7_NEW[0],M7_NEW[1],M7_NEW[2],M7_NEW[3],"student","Student",null,null,{note:"master's · from Jul 2025"});m7_stampOn(ctx,t,M7_NEW[0]+M7_NEW[2]-128,M7_NEW[1]+38,tNum,"S-20436",0.52);},{dy:16});
-    // Mei's office linked the two, afterwards
-    wc_pencil(ctx,M7_MEILINK,clamp((t-tMei)/0.7,0,1),{col:WC_PENCIL,lw:3,a:0.85,seed:91,dash:[2,10]});
-    arrive(ctx,800,284,t,tMei+0.4,()=>wc_badge(ctx,660,284,"linked by Mei's office"),{dy:8});
+    // nothing linked the two: a pencil line from the new one towards the old that stops halfway, at a cross, as One person, many roles left her
+    wc_pencil(ctx,M7_NOLINK,clamp((t-tLnk)/0.7,0,1)*0.5,{col:WC_PENCIL,lw:3,a:0.85,seed:91});wc_cross(ctx,M7_NOX,M7_NOY,46,WC_NO,clamp((t-tTwo)/0.5,0,1));
+    arrive(ctx,773,284,t,tTwo+0.4,()=>wc_badge(ctx,684,284,"not linked"),{dy:8});
     // the application still creates a person first: an empty record, and the stamp over its number
     arrive(ctx,M7_AX+M7_AW/2,206,t,tApp-0.3,()=>m7_app(ctx,M7_AX,144,M7_AW,{sub:"PhD · health informatics",nof:true}),{dy:16});
     m7_arrow(ctx,1360,276,1360,442,clamp((t-tCre)/0.6,0,1),{col:WC_ROLEINK.applicant,lw:3.2});

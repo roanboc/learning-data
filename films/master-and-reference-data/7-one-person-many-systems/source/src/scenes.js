@@ -75,13 +75,13 @@ scene("bern",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   wc_title(ctx,S,t,B+0.6,"One person, many systems","four ways to share the person, and the lightest that works","Film 7 of 9 · master and reference data");});
 
 /* ---------- 2. Applying again ---------- */
-// Linh, on the path; her two student records on the left, linked by Mei's office; the application on the right, and the record it
+// Linh, on the path; her two student records on the left, nothing linking them; the application on the right, and the record it
 // would make; then the four systems in a row along the top
 const M7_LIX=800,M7_LIY=1018,M7_OLD=[150,144,440,120],M7_NEW=[150,304,440,120],M7_AX=1180,M7_AW=700,M7_GHR=[1320,452,540];
 const M7_SROW=[60,520,980,1440],M7_SRW=420,M7_SRY=150;
-const M7_MEILINK=(()=>{const o=[];for(let i=0;i<=20;i++){const a=-Math.PI/2+i/20*Math.PI;o.push([596+52*Math.cos(a),284+80*Math.sin(a)]);}return o;})();
+const M7_NOLINK=(()=>{const o=[];for(let i=0;i<=20;i++){const a=Math.PI/2-i/20*Math.PI;o.push([596+52*Math.cos(a),284+80*Math.sin(a)]);}return o;})(),M7_NOX=648,M7_NOY=284;
 scene("again",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
-  const tT=c("today"),tName=w("today","Linh Nguyen"),tPhd=w("today","a PhD"),tL=c("last"),tSec=w("last","second student"),tNum=w("last","number"),tMei=w("last","Mei's office"),
+  const tT=c("today"),tName=w("today","Linh Nguyen"),tPhd=w("today","a PhD"),tL=c("last"),tSec=w("last","second student"),tNum=w("last","number"),tLnk=w("last","linked"),tTwo=w("last","the two"),
     tSt=c("still"),tApp=w("still","application"),tCre=w("still","creates a person"),tNob=w("still","nobody looks"),tF=c("four"),tSys=[w("four","student system"),w("four","HR"),w("four","research office"),w("four","alumni office")];
   // the camera: Linh; her records; the application; out for the four systems
   m7_open(ctx,S,t,sc,"campus",[[0,960,540,1],[tT+0.6,900,560,1.06],[tL-0.3,760,500,1.08],[tSt-0.3,1000,500,1.03],[tF-0.3,960,540,1]]);
@@ -93,9 +93,9 @@ scene("again",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
     // her two student records: the one she graduated with, and the one her last application made
     arrive(ctx,370,204,t,tL,()=>wc_roleCard(ctx,M7_OLD[0],M7_OLD[1],M7_OLD[2],M7_OLD[3],"student","Student","S-17142",null,{note:"bachelor's · 2019–22"}),{dy:16});
     arrive(ctx,370,364,t,tSec-0.2,()=>{wc_roleCard(ctx,M7_NEW[0],M7_NEW[1],M7_NEW[2],M7_NEW[3],"student","Student",null,null,{note:"master's · from Jul 2025"});m7_stampOn(ctx,t,M7_NEW[0]+M7_NEW[2]-128,M7_NEW[1]+38,tNum,"S-20436",0.52);},{dy:16});
-    // Mei's office linked the two, afterwards
-    wc_pencil(ctx,M7_MEILINK,clamp((t-tMei)/0.7,0,1),{col:WC_PENCIL,lw:3,a:0.85,seed:91,dash:[2,10]});
-    arrive(ctx,800,284,t,tMei+0.4,()=>wc_badge(ctx,660,284,"linked by Mei's office"),{dy:8});
+    // nothing linked the two: a pencil line from the new one towards the old that stops halfway, at a cross, as One person, many roles left her
+    wc_pencil(ctx,M7_NOLINK,clamp((t-tLnk)/0.7,0,1)*0.5,{col:WC_PENCIL,lw:3,a:0.85,seed:91});wc_cross(ctx,M7_NOX,M7_NOY,46,WC_NO,clamp((t-tTwo)/0.5,0,1));
+    arrive(ctx,773,284,t,tTwo+0.4,()=>wc_badge(ctx,684,284,"not linked"),{dy:8});
     // the application still creates a person first: an empty record, and the stamp over its number
     arrive(ctx,M7_AX+M7_AW/2,206,t,tApp-0.3,()=>m7_app(ctx,M7_AX,144,M7_AW,{sub:"PhD · health informatics",nof:true}),{dy:16});
     m7_arrow(ctx,1360,276,1360,442,clamp((t-tCre)/0.6,0,1),{col:WC_ROLEINK.applicant,lw:3.2});

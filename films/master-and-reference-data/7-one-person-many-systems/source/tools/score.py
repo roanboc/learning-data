@@ -204,16 +204,17 @@ fly(tE + 0.1, 2.2, 0.02, P(220), P(1700)); paper(tE + 2.2, 0.016, P(1700), 0.3)
 mark(B + 0.8)
 
 # 2. Applying again: D minor, late 2025. Her name card; her two student records, each on the student's note, and the second one's
-#    number stamped on; Mei's pencil link between them, and its badge; the PhD application, on the applicant's note; the arrow to the
-#    person it would create, the empty record, and the stamp over it, under the pulse; then the four systems, each on its role's note
+#    number stamped on; the pencil line between them, stopped by a cross, and its badge; the PhD application, on the applicant's
+#    note; the arrow to the person it would create, the empty record, and the stamp over it, under the pulse; then the four systems,
+#    each on its role's note
 J = 'again'; tSt, tApp, tCre, tNob, tF = C(J, 'still'), W(J, 'still', 'application'), W(J, 'still', 'creates a person'), W(J, 'still', 'nobody looks'), C(J, 'four')
-tL, tSec, tNum, tMei = C(J, 'last'), W(J, 'last', 'second student'), W(J, 'last', 'number'), W(J, 'last', "Mei's office")
+tL, tSec, tNum, tLnk, tTwo = C(J, 'last'), W(J, 'last', 'second student'), W(J, 'last', 'number'), W(J, 'last', 'linked'), W(J, 'last', 'the two')
 bed([(S0(J), DM9), (tL - 0.3, BBMAJ7), (tSt - 0.3, GM7D), (tF - 0.2, F69)], E(J) + 1.0)
 knock(W(J, 'today', 'Linh Nguyen', -0.2), 0.022, P(340))
 paper(tL, 0.026, P(370)); role('student', tL + 0.1, 0.03, P(370))
 paper(tSec - 0.2, 0.026, P(370)); role('student', tSec - 0.1, 0.028, P(370))
 stamp(tNum + 0.06, 0.06)
-quill(tMei, 0.7, 0.014, P(620)); knock(tMei + 0.4, 0.018, P(800))
+quill(tLnk, 0.7, 0.014, P(630)); cross(tTwo, 0.016, P(648)); knock(tTwo + 0.4, 0.018, P(773))
 paper(tApp - 0.3, 0.03, P(1530)); role('applicant', tApp - 0.2, 0.026, P(1530))
 air(tCre, 0.6, 0.016, P(1360)); paper(tCre + 0.2, 0.024, P(1590)); knock(tCre + 0.3, 0.018, P(1360))
 air(tCre + 0.6, 0.5, 0.014, P(1660))

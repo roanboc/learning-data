@@ -200,8 +200,9 @@ project/
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
 ├── CODEOWNERS                [generated] who reviews a change, from the owners in the metadata. An
 │                             example here: GitHub reads it only at a repository's root
-├── skills/                   six skills for an agent: draft the conceptual model, profile, draft
-│                             a model, reconcile and diff, review metadata, sync the glossary
+├── skills/                   seven skills for an agent: draft the conceptual model, profile, draft
+│                             a model, reconcile and diff, review metadata, sync the glossary,
+│                             review a pull request for governance
 └── target/, logs/            [build output] dbt's artifacts and the DuckDB database; dbt clean
 ```
 

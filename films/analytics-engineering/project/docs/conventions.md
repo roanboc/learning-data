@@ -229,6 +229,7 @@ to itself, and they meet only on the public core. `examples/planning/` sketches 
 - Every relationship is tested (`relationships`); every closed set of values too (`accepted_values`).
 - A rule with logic gets unit tests, with mock rows (`unit_tests:`).
 - Severity is agreed with the data's owner, and written in the test's description.
+- A test checks the data: values, keys, links, numbers that add up. A rule about what people or processes do (a bill corrected on the next one) isn't a failing build: it's an exceptions model, owned by the team that acts on it, that tracks each case.
 - **A failing test is never weakened, deleted or given a lower severity to make it pass.** Fix the data, the code, or, with the owner's agreement, the expectation.
 
 ## Metadata

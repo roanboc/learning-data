@@ -223,3 +223,4 @@ Built on 17 October 2026, from this script, in watercolour. What changed on the 
 1. The author watches the film, and approves it or asks for corrections.
 2. ~~The project's additions it needs.~~ Added on 20 October 2026, as a draft for the owners: the person domain's conceptual model (the person, roles, contact points and identifiers), the HR, research and alumni systems, and her first-degree record in the student system's archive. Next for them: the owners approve the person domain's decisions.
 3. Labs, once the series has more films: the candidates above.
+4. With the next version: sum the clarinet's and the cello's phase in float64 in `source/tools/score.py` (`np.cumsum(..., dtype=np.float64)`). Summed in float32, as now, a held note's pitch slips by up to about a hertz over a few seconds (found by *Kept, not cleaned*'s and *One person, many systems*' threads); `tools/quiet.py` finds no beat from it in this film, so version 5 keeps it.

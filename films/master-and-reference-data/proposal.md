@@ -101,6 +101,7 @@
 | 20 October 2026 | In *For this purpose only*, the appeals team's table and the appeal's list show Linh as the alumni office holds her in the example project, Thi Linh Nguyen, linh.nguyen2001@mail.example. Her alumna's door opens on S-17142, and Anika Rao takes the row of Priya Nair, who is a learner in the project. Its rigour sheet cites A-61207 and says the films' master's is the project's Graduate Certificate in Health Informatics. |
 | 20 October 2026 | Master data rules (when two records are one person, which value wins, how one list's codes map to another's) are a specification, kept where the data is transformed. Master data tools often let stewards set them in screens, and each solution keeps them its own way; in the simplest form they're YAML and SQL, and a film may show them so. No film presents the rules as living in SQL or dbt, or names a tool as their home (the author, in *Which value wins*' thread). *A hub at work* keeps LakeFusion as its one example of a hub. |
 | 20 October 2026 | The narration of *Roles come and go* names no tool for the role table and its tests, after the author's note for the series: rules are defined where transformations are implemented, whatever the master data solution. Chapter 9 says "Jun builds it, with two tests", after "On the platform, it's one table"; the screen still shows the tests and the query as YAML and SQL, the simplest form. |
+| 20 October 2026 | *Which value wins* names no tool for its rules, after the author's review. Jun writes them down "in one place, where the steps that build her record read them"; a master data tool's screen, no product's, shows the legal name's rule chosen from lists and saved; then the rules file, `person_rules.yml`, opens in full as the simplest form, with the SQL and the tests written from it. Chapter 3 is now *One order, hidden in the code*, and the film runs 6:06. |
 
 ## The brief
 
@@ -189,7 +190,7 @@ Nine films of 4 to 6 minutes; the case is what happens to Linh at the university
 |---|---|---|---|---|
 | 1 | **One person, many roles** | Linh comes back to study, and a new student number leaves five records of one person | Person, role, contact point and identifier, modelled apart | Don't store the role and call it the person. |
 | 2 | **Who is it?** | The registry's duplicate check finds her two student numbers, and HR's record with a typo in her birth date | A steward's queue of proposed matches, each decided once, with a reason | Decide a match once, with a reason, and keep it. |
-| 3 | **Which value wins** | Her name, emails and phone differ across the linked records | Survivorship rules declared per field, each value labelled with its source | The rule is declared, not hidden in code. |
+| 3 | **Which value wins** | Her name, emails and phone differ across the linked records | Survivorship rules declared per field, each value labelled with its source | The rule is declared, not hidden in the code. |
 | 4 | **Roles come and go** | On census date, who is a student, who also tutors, and which alumni are back? | Dated roles, with an owner, a start and an end | A role has a start and an end; the person stays. |
 | 5 | **Lists everyone uses** | Each system types the role types, statuses and countries its own way | Reference lists with an owner, dates and one home; tests that read them | A list has an owner, a date and one home. |
 | 6 | **For this purpose only** | A fundraising appeal reaches Linh through her new number, though she opted out years ago | Purpose and consent on each role; one place to answer "what do you hold about me?" | Data given for one role isn't free for every role. |
@@ -279,7 +280,7 @@ Nine films of 4 to 6 minutes; the case is what happens to Linh at the university
 
 **Elsewhere.** A bank keeps the legal name on the account and the preferred name in its app.
 
-**The enabler.** Survivorship rules declared per field where the data is transformed: a hub's rule screens, or in the simplest form the model's YAML, with the SQL and tests written from it; a source and a date beside every value; contact points as their own table.
+**The enabler.** Survivorship rules declared per field where the data is transformed: a master data tool's screens, or in the simplest form a rules file in YAML, with the SQL and tests written from it; a source and a date beside every value; contact points as their own table.
 
 **Why it's common.** University name policies keep the legal name on transcripts and verifications and the preferred one on rosters and ID cards ([Case Western](https://case.edu/registrar/forms-services/forms/preferred-name-policy/)). Vietnamese names put the family name first, Thị is a common middle name for women, and names are often reversed in English-speaking countries ([Cultural Atlas](https://theculturalatlas.org/vietnamese-culture/vietnamese-culture-naming)). One of the Beagle's chronometers is going on show at Greenwich ([Royal Museums Greenwich](https://www.rmg.co.uk/press-release/pocket-chronometer-used-on-darwins-beagle-voyage-acquired-national-maritime-museum)).
 

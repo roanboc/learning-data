@@ -295,7 +295,44 @@ tAr = W(X_, 'comp', 'another rule'); knock(tAr - 0.2, 0.018, -0.2); nylon(63, tA
 for k, (t0, t1) in enumerate([(W(X_, 'time', 'Timeliness'), W(X_, 'time', 'an estimate replaced')), (C(X_, 'comp'), W(X_, 'comp', 'every estimate')),
                                (W(X_, 'comp', 'Validity'), W(X_, 'comp', 'every reading'))]):
     knock(t0 - 0.2, 0.018, -0.5); air(t1 - 0.5, 1.0, 0.013, -0.7); nylon([56, 58, 61][k], t1 + 0.4, 0.016, -0.5)
-# 9. Test the data, track the business: D-flat at the turn, and A-flat with its fourth as the tracking table is generated. Paper for
+# 9. A rule in ArchiMate 4: no chords at the turn; it goes on from what the process expects, and D-flat swells once, as each card's
+#    parallelogram rises to the requirement's own. A knock for each rule as it arrives, a muffled key for "ArchiMate 4", a knock and a
+#    nylon note for the requirement, and a muffled key for each of the other motivation elements, out from it; a nylon note, rising,
+#    as each card's parallelogram lights. A muffled key for the name ArchiMate has no element for, and a pencil as it's struck; a knock
+#    and a nylon note for each kind of requirement. Air as the other rules make way and retail's moves to the middle. Then each link:
+#    a knock as what it links arrives, and a nylon note, rising, as the link reaches the rule. A low felt note as the lights run into
+#    the rule; a muffled key for the place the standard leaves open, air as the line runs to it, and a press and a nylon note as the
+#    checks fill it
+R_ = 'std'
+for i, x in enumerate([340, 960, 1580]):
+    knock(S0(R_) + 0.3 + i * 0.15, 0.016, pan_x(x))
+tap(W(R_, 'req', 'ArchiMate 4', -0.2), 0.011, -0.8)
+tRq = W(R_, 'req', 'a requirement'); knock(tRq - 0.15, 0.016, 0.0); nylon(61, tRq, 0.016, 0.0)
+tMo = W(R_, 'req', 'motivation elements')
+for k, x in [(1, 711), (3, 1193), (0, 462), (4, 1410)]:
+    tap(tMo - 0.25 + abs(k - 2) * 0.14, 0.008, pan_x(x))
+tPa = W(R_, 'sym', 'parallelogram')
+for i, (x, m) in enumerate(zip([564, 1184, 1804], [56, 58, 61])):
+    nylon(m, tPa + 0.2 + i * 0.3, 0.014, pan_x(x))
+swell(DBMAJ7, W(R_, 'sym', 'symbol', -0.2), 5.0, 0.024)
+tap(W(R_, 'kinds', 'no element', -0.2), 0.01, 0.75); pencil(W(R_, 'kinds', 'called a rule', 0.2), 0.012, 0.75, 0.5)
+for word, x, m in [('data rules', 340, 63), ('business rules', 1270, 65)]:
+    t0 = W(R_, 'kinds', word, -0.2); knock(t0, 0.014, pan_x(x)); nylon(m, t0 + 0.3, 0.014, pan_x(x))
+air(C(R_, 'drv', -1.6), 1.4, 0.014)
+knock(W(R_, 'drv', 'Its reason', 0.3), 0.016, 0.0); nylon(61, W(R_, 'drv', 'an influence', 0.6), 0.016, 0.0)
+tSt_ = W(R_, 'real', 'the step')
+for i, x in enumerate([688, 960, 1227]):
+    knock(tSt_ - 0.2 + i * 0.15, 0.014, pan_x(x))
+nylon(63, W(R_, 'real', 'a realisation', 0.6), 0.016, 0.0)
+knock(W(R_, 'assoc', 'Its owner', -0.1), 0.015, pan_x(270))
+tDo_ = W(R_, 'assoc', 'the data objects')
+for i in range(2):
+    knock(tDo_ - 0.1 + i * 0.15, 0.014, pan_x(1665))
+tAs_ = W(R_, 'assoc', 'an association'); nylon(65, tAs_ + 0.6, 0.014, pan_x(470)); nylon(68, tAs_ + 0.7, 0.014, pan_x(1370))
+soft(44, W(R_, 'where', 'where a rule', 0.1), 0.018, 0.0)
+tap(W(R_, 'where', 'not how', -0.1), 0.011, pan_x(1631)); air(W(R_, 'where', 'The checks', -0.1), 0.8, 0.012, 0.45)
+tFr_ = W(R_, 'where', 'from the rule'); press(tFr_ + 0.1, 0.018); nylon(68, tFr_ + 0.15, 0.016, pan_x(1631))
+# 10. Test the data, track the business: D-flat at the turn, and A-flat with its fourth as the tracking table is generated. Paper for
 #    retail's rule in its set form, and a pencil for each part as it's named; air as it folds away. A knock for the data rule, and
 #    paper for the readings it's about; a nylon note as each mark is ticked. A knock and muffled keys as each test is generated from
 #    it; air as the pencil comes for the code, a low note as it's stopped, and a knock for the lock. Air as the tests fold into their
@@ -341,7 +378,7 @@ knock(C(Q, 'team', -0.2), 0.014, 0.5)
 tTl = W(Q, 'team', 'the list goes'); air(tTl + 0.1, 1.0, 0.014, 0.4)
 press(tTl + 1.1, 0.018); nylon(61, tTl + 1.15, 0.016, 0.5)
 tMb = W(Q, 'team', 'mailbox'); tap(tMb - 0.5, 0.01, -0.36); pencil(tMb + 0.2, 0.012, -0.36, 0.4)
-# 10. Generally, an ontology: F minor at the turn, and G-flat for "one map, many views". A knock for each concept as it arrives, a
+# 11. Generally, an ontology: F minor at the turn, and G-flat for "one map, many views". A knock for each concept as it arrives, a
 #     muffled key for a few of the relations as they're drawn, and a knock and a nylon note for each rule attached; a muffled key for
 #     "ready for OWL". Air as the graph shrinks into its place in the map, and a knock and a nylon note, rising, for each view as it's
 #     drawn from it. Then one bill as facts: a knock for each, a pencil for the correction nobody said, a low note for its empty
@@ -366,7 +403,7 @@ tNev = W(O, 'open', 'never happened'); pencil(tNev - 0.6, 0.012, -0.65, 0.7); so
 tap(tNev + 0.1, 0.01, -0.5)
 soft(42, W(O, 'open', 'simply unknown', -0.1), 0.02, -0.5)
 press(W(O, 'job', "tracking table's job", -0.5), 0.022)
-# 11. Back in Tartu: no chords until Tartu, where the reeds come back with the bell; then D-flat and the mark on the end card. Paper
+# 12. Back in Tartu: no chords until Tartu, where the reeds come back with the bell; then D-flat and the mark on the end card. Paper
 #     as the household's bill comes back; a nylon note as it's corrected, and a press and a nylon note for its $144.40 back. Muffled
 #     keys as the 1,900 are counted and ticked, and a press. A knock for each rule, and a press and a nylon note as each owner
 #     confirms it. The bell for Tartu's card, again as the benefit is paid, and once more for "nobody asked twice". Paper for Tomás's

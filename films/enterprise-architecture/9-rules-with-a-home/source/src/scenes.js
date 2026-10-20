@@ -1,11 +1,12 @@
 /* ===== Rules with a home: scenes =====
-   Eleven chapters, as in ../script.md. Tartu today: a birth entered once in the population register, a benefit offered to parents
+   Twelve chapters, as in ../script.md. Tartu today: a birth entered once in the population register, a benefit offered to parents
    who never applied, and no office asking the parents again, each asking the register over X-Road; then day one's data rule
    and the bill of $412.80 beside it; the household away in June, whose meter stored its readings; the nightly script on the wall
    between the network and retail, writing since March to a queue nothing reads; the rule in five places, none of them its home;
    the rule split in two, one on each side, joined by what crosses; where each comes from, and the goal that was an obligation;
-   what a rule is about; the step it's attached to and what that step expects of the data; the rule in a set form and the checks
-   generated from it; generally, an ontology; and back in Tartu.
+   what a rule is about; the step it's attached to and what that step expects of the data; where ArchiMate 4 puts a rule, a
+   requirement, with what it's linked to; the rule in a set form and the checks generated from it; generally, an ontology; and
+   back in Tartu.
    Made to read on a phone (tools/legible.py): text is at least 28 px in the frame; what's drawn small is texture. Motion: every
    shot drifts slowly and things arrive with a spring. Sound: every effect in tools/score.py fires at the same moment as the thing
    it belongs to here, so keep the two in step. */
@@ -289,7 +290,77 @@ scene("expect",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
     const fl=clamp((t-t1+0.5)/1.0,0,1);if(fl>0&&fl<1){const P=[[100,D9_VY+D9_VH+2],[56,D9_VY+D9_VH+40],[56,y+eh/2],[ex+20,y+eh/2]],L=[0];for(let k=1;k<P.length;k++)L.push(L[k-1]+Math.hypot(P[k][0]-P[k-1][0],P[k][1]-P[k-1][1]));
       const d_=L[3]*ease(fl);let k=1;while(k<3&&L[k]<d_)k++;const u=(d_-L[k-1])/Math.max(1,L[k]-L[k-1]),x=lerp(P[k-1][0],P[k][0],u),yy=lerp(P[k-1][1],P[k][1],u);glow(ctx,x,yy,34,STR,0.8*Math.sin(Math.PI*fl));}});
   ctx.restore();vign(ctx,S);});
-/* ---------- 9. Test the data, track the business ---------- */
+/* ---------- 9. A rule in ArchiMate 4 ---------- */
+// Where the standard puts a rule. The three rules, on their cards: each is a requirement, one of the motivation elements ArchiMate 4
+// lists, and the parallelogram on each card is the requirement's symbol. ArchiMate has no element called a rule; the map makes data
+// rules and business rules two kinds of requirement, each a specialisation of it. Then retail's rule, in the middle, with what's
+// linked to it, each link drawn as ArchiMate draws it and each part in the words of the set form (chapter 10): its reason, a driver,
+// by an influence; its home, billing in meter to cash, by a realisation; its owner and the data objects it applies to, by
+// associations. The standard says where a rule sits; how it's checked comes from the rule.
+const D9_ST=[["RUL-020",D9_R20,D9_NET,80],["RUL-021",D9_R21,D9_NET,700],["RUL-022",D9_R22,D9_RET,1320]],D9_SY=450,D9_SW=520;
+// retail's rule in the middle: its top-left corner and scale; the motivation elements' row, and where the requirement's chip settles,
+// above the rule's corner; the driver above, the steps of meter to cash below, the owner on the left and the data objects on the right;
+// and the place for its checks, outside the map
+const D9_HX=674,D9_HY=330,D9_HK=1.1,D9_MY=150,D9_RQ=[787,295],D9_DV=[660,70,600,104],D9_VSY=700,D9_VSH=110,D9_VSS=[["read",543,290],["bill",810,300],["paid",1087,280]],D9_OB=[1500,330,330,90,120],
+  D9_CK=[1466,690,330,100];
+scene("std",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
+  const tA4=w("req","ArchiMate 4"),tRq=w("req","a requirement"),tMo=w("req","motivation elements"),tPa=w("sym","parallelogram"),tSy=w("sym","symbol"),
+    tNo=w("kinds","no element"),tRu=w("kinds","called a rule"),tDr=w("kinds","data rules"),tBr=w("kinds","business rules"),tTk=w("kinds","two kinds"),
+    tD=c("drv"),tRs=w("drv","Its reason"),tIn=w("drv","an influence"),tRc=w("drv","retail code"),
+    tSt=w("real","the step"),tRl=w("real","a realisation"),tBi=w("real","billing"),tMc=w("real","meter to cash"),
+    tOw=w("assoc","Its owner"),tDo=w("assoc","the data objects"),tAs=w("assoc","an association"),
+    tWh=w("where","where a rule"),tNh=w("where","not how"),tCk=w("where","The checks"),tFr=w("where","from the rule");
+  ctx.save();drift(ctx,t,sc,{z:0.02,y:440});
+  // from the three rules to retail's, in the middle: what was about all three leaves as it moves
+  const tB=tD-1.4,m=ease(fin(t,tB+0.2,1.5)),gA=1-fin(t,tB-0.2,0.6);
+  arrive(ctx,186,96,t,tA4-0.2,()=>T(ctx,"ArchiMate 4",80,108,{f:"mono",w:600,size:32,color:rgba(EAC,1)}),{dy:8});
+  const MW=D9_MOTS.map(([l])=>tw(ctx,l,30,700)+86);
+  // the three rules: each card lights as its kind is named, and its parallelogram as the symbol is; then each card's rises to the
+  // requirement's chip
+  const hs=D9_ST.map(([id,txt])=>d9_rule(ctx,0,0,D9_SW,id,txt,null,{a:0,size:28})),hH=hs[2]*D9_HK,
+    hiH=pulseAt(t,tIn+0.5,1.2)+pulseAt(t,tRl+0.5,1.2)+pulseAt(t,tAs+0.5,1.2)+pulseAt(t,tWh+0.8,1.6)+pulseAt(t,tFr,1.4);
+  D9_ST.forEach(([id,txt,side,x],i)=>{const h=hs[i],hi=(i?pulseAt(t,tBr+0.1+(i-1)*0.2,1.4):pulseAt(t,tDr+0.1,1.4)),gp=pulseAt(t,tPa+0.2+i*0.3,1.2);let gx=x+D9_SW-36,gy=D9_SY+36;
+    if(i<2){const out=ease(fin(t,tB-0.3+i*0.1,0.7));if(out>=1)return;arrive(ctx,x+D9_SW/2,D9_SY+h/2,t,0.3+i*0.15,()=>withA(ctx,1-out,()=>d9_rule(ctx,x,D9_SY+70*out,D9_SW,id,txt,side,{size:28,hi})),{dy:-12});}
+    else{const X=lerp(x,D9_HX,m),Y=lerp(D9_SY,D9_HY,m),k=lerp(1,D9_HK,m);ctx.save();ctx.translate(X,Y);ctx.scale(k,k);arrive(ctx,D9_SW/2,h/2,t,0.6,()=>d9_rule(ctx,0,0,D9_SW,id,txt,side,{size:28,hi:hi+hiH}),{dy:-12});ctx.restore();gx=X+k*(D9_SW-36);gy=Y+k*36;}
+    if(gp>0.01){glow(ctx,gx,gy,56,MOT,0.85*gp);ring(ctx,gx,gy,30,MOT,gp,2.4);}
+    const fq=clamp((t-tSy+0.75-i*0.08)/0.8,0,1);if(fq>0&&fq<1){const e=ease(fq),ex=960-MW[2]/2+36,px=lerp(gx,ex,e),py=lerp(gy,D9_MY,e)-Math.sin(e*Math.PI)*60;
+      glow(ctx,px,py,30,MOT,0.7*Math.sin(Math.PI*fq));withA(ctx,Math.sin(Math.PI*fq),()=>d9_reqGlyph(ctx,px,py,16,mix(MOT,INK,0.3)));}});
+  // the motivation elements: the requirement first, then the others, out from it; they step back as the parallelogram is named
+  const MX=[];MX[2]=960;MX[1]=960-MW[2]/2-24-MW[1]/2;MX[0]=MX[1]-MW[1]/2-24-MW[0]/2;MX[3]=960+MW[2]/2+24+MW[3]/2;MX[4]=MX[3]+MW[3]/2+24+MW[4]/2;
+  D9_MOTS.forEach(([l,g],i)=>{if(i===2)return;const a=gA*(1-0.45*fin(t,tPa-0.3,0.8));arrive(ctx,MX[i],D9_MY,t,tMo-0.25+Math.abs(i-2)*0.14,()=>d9_why(ctx,MX[i],D9_MY,l,g,a,{}),{dy:-10});});
+  // ArchiMate has no element called a rule
+  const nX=MX[4]+MW[4]/2+110;arrive(ctx,nX,D9_MY,t,tNo-0.2,()=>{d9_noEl(ctx,nX,D9_MY,"rule",gA,clamp((t-tRu-0.2)/0.5,0,1));withA(ctx,gA*fin(t,tRu+0.4,0.5),()=>tag(ctx,nX,D9_MY+68,"not an element",SOFT,{align:"center",size:28}));},{dy:-10});
+  // the map's two kinds of requirement, the data rule and the business rule, each a specialisation of it
+  [["data rule",340,tDr,925],["business rule",1270,tBr,995]].forEach(([l,x,t0,ex])=>{arrive(ctx,x,318,t,t0-0.2,()=>d9_why(ctx,x,318,l,"requirement",gA,{hi:pulseAt(t,t0+0.1,1.4)}),{dy:-10});
+    d9_spec(ctx,x,289,ex,D9_MY+30,MOT,clamp((t-t0-0.1)/0.7,0,1),gA);});
+  d9_relName(ctx,960,262,"specialisation",gA*fin(t,tTk-0.3,0.5),{align:"center"});
+  // the requirement: in the middle of the row, then settled above retail's rule
+  const rqx=lerp(960,D9_RQ[0],m),rqy=lerp(D9_MY,D9_RQ[1],m);arrive(ctx,rqx,rqy,t,tRq-0.15,()=>d9_why(ctx,rqx,rqy,"requirement","requirement",1,{hi:pulseAt(t,tRq+0.2,1.4)+pulseAt(t,tSy,1.4)+0.6*pulseAt(t,tTk+0.3,1.2)}),{dy:-10});
+  glow(ctx,rqx-MW[2]/2+36,rqy,50,MOT,0.85*pulseAt(t,tSy,1.2));
+  // its reason: a driver, linked by an influence
+  const[dx,dy,dw,dh]=D9_DV;arrive(ctx,dx+dw/2,dy+dh/2,t,tRs+0.3,()=>d9_hubEl(ctx,dx,dy,dw,dh,"reason · driver","the regulator's retail code",MOT,"driver",{hi:pulseAt(t,tRc,1.4)+pulseAt(t,tWh+0.1,1.4)}),{dy:-12});
+  d9_infl(ctx,960,dy+dh,960,D9_HY-2,MOT,clamp((t-tIn+0.1)/0.7,0,1),1);d9_relName(ctx,984,262,"influence",fin(t,tIn,0.5));
+  // its home: the step that applies it, linked by a realisation: billing, in meter to cash
+  withA(ctx,fin(t,tSt-0.3,0.6),()=>{T(ctx,"home · value stream",515,D9_VSY+46,{f:"mono",w:500,size:28,align:"right",color:rgba(STR,1)});T(ctx,"meter to cash",515,D9_VSY+88,{w:700,size:30,align:"right",color:rgba(INK,0.97)});});
+  D9_VSS.forEach(([nm,x,w_],i)=>arrive(ctx,x+w_/2,D9_VSY+D9_VSH/2,t,tSt-0.2+i*0.15,()=>d9_chev(ctx,x,D9_VSY,w_,D9_VSH,nm,{first:i===0,size:30,a:i===1?1:0.62,hi:i===1?pulseAt(t,tBi,1.4)+pulseAt(t,tWh+0.25,1.4):0.4*pulseAt(t,tMc,1.2)}),{dy:-12}));
+  d9_real(ctx,958,D9_VSY,958,D9_HY+hH+2,MOT,clamp((t-tRl+0.1)/0.7,0,1),1);d9_relName(ctx,982,650,"realisation",fin(t,tRl,0.5));
+  // its owner, and the data objects it applies to, linked by associations
+  const opw=tw(ctx,"owner · head of retail",28,700)+70,ox0=270+opw/2;
+  arrive(ctx,270,435,t,tOw-0.1,()=>d9_owner(ctx,270,435,"head of retail",1,{align:"center",hi:pulseAt(t,tOw+0.3,1.4)+pulseAt(t,tWh+0.4,1.4)}),{dy:8});
+  const[ox,oy,ow,oh,og]=D9_OB;withA(ctx,fin(t,tDo-0.2,0.5),()=>T(ctx,"applies to · data objects",ox+ow,oy-18,{f:"mono",w:500,size:28,align:"right",color:rgba(INF,1)}));
+  [["bill",tDo],["meter reading",tDo+0.15]].forEach(([nm,t0],i)=>arrive(ctx,ox+ow/2,oy+i*og+oh/2,t,t0-0.1,()=>d9_obj(ctx,ox,oy+i*og,ow,oh,nm,null,{hi:pulseAt(t,t0+0.3,1.2)+pulseAt(t,tWh+0.55+i*0.1,1.4)}),{dy:-10}));
+  const pa=clamp((t-tAs+0.1)/0.7,0,1),hR=D9_HX+D9_SW*D9_HK;d9_assoc(ctx,ox0+2,435,D9_HX-2,435,MOT,pa,1);d9_assoc(ctx,hR+2,395,ox-2,oy+oh/2,MOT,pa,1);d9_assoc(ctx,hR+2,475,ox-2,oy+og+oh/2,MOT,pa,1);
+  d9_relName(ctx,(ox0+D9_HX)/2,404,"association",fin(t,tAs,0.5),{align:"center"});d9_relName(ctx,(hR+ox)/2,447,"association",fin(t,tAs+0.1,0.5),{align:"center"});
+  // where a rule sits: a light along each link, into the rule
+  if(t>tWh-0.2)[[960,dy+dh,960,D9_HY],[958,D9_VSY,958,D9_HY+hH],[ox0,435,D9_HX,435],[ox,oy+oh/2,hR,395],[ox,oy+og+oh/2,hR,475]].forEach(([x0,y0,x1,y1],i)=>{const f=clamp((t-tWh-0.1-i*0.15)/0.9,0,1);
+    if(f>0&&f<1)glow(ctx,lerp(x0,x1,ease(f)),lerp(y0,y1,ease(f)),32,MOT,0.85*Math.sin(Math.PI*f));});
+  // not how it's checked: a place the standard leaves open; the checks come from the rule
+  const[cx_,cy_,cw,ch]=D9_CK,ax=cx_-8,ay=cy_+ch/2,ap=clamp((t-tCk+0.1)/0.8,0,1);
+  arrive(ctx,cx_+cw/2,cy_+ch/2,t,tNh-0.1,()=>d9_checks(ctx,cx_,cy_,cw,ch,fin(t,tFr-0.2,0.6),1,{hi:pulseAt(t,tFr+0.2,1.4)}),{dy:-8});
+  if(ap>0){d9_trace_(ctx,[[1238,546],[ax,ay]],ap,MOT,{lw:3,nohead:ap>=1});if(ap>=1){const an=Math.atan2(ay-546,ax-1238);ctx.save();ctx.strokeStyle=rgba(MOT,0.95);ctx.lineWidth=3;ctx.lineCap="round";ctx.lineJoin="round";ctx.beginPath();
+    ctx.moveTo(ax-Math.cos(an-0.45)*16,ay-Math.sin(an-0.45)*16);ctx.lineTo(ax,ay);ctx.lineTo(ax-Math.cos(an+0.45)*16,ay-Math.sin(an+0.45)*16);ctx.stroke();ctx.restore();}}
+  ctx.restore();vign(ctx,S);});
+/* ---------- 10. Test the data, track the business ---------- */
 // Retail's rule in its set form, each part as it's named. Then the two kinds of rule, each with what's generated from it, one way.
 // The data rule, RUL-020, gets its tests, as each tool writes them, and a hand that would edit one is stopped. Retail's rule is about
 // what the business does: every test passes while a bill goes uncorrected, so a tracking table is generated from it instead. Then what
@@ -372,7 +443,7 @@ scene("checks",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
     if(st>0){const x0=620-pw/2+60,x1=620+pw/2-18;ctx.save();ctx.strokeStyle=rgba(D9_RED,0.95);ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x0,D9_TY+2);ctx.lineTo(lerp(x0,x1,ease(st)),D9_TY+2);ctx.stroke();ctx.restore();}},{dy:-10});
   const al=clamp((t-tTl-0.1)/1.0,0,1);if(al>0&&al<1){const e=ease(al),x=lerp(fx_,1440,e),y=lerp(D9_L2+34,D9_TY-34,e)-Math.sin(e*Math.PI)*70;d9_msg(ctx,x,y,0.8,D9_RED,1);}
   ctx.restore();vign(ctx,S);});
-/* ---------- 10. Generally, an ontology ---------- */
+/* ---------- 11. Generally, an ontology ---------- */
 // The concepts the rules are about, how they relate, and the rules attached: generally, an ontology, ready for OWL. Then the map as the
 // one source, with the glossary, the models, the ontology (the graph, shrunk into place) and the checks as its views, as in Meaning
 // machines can read. Then one bill, as facts: OWL, reasoning only from what is said, finds its correction unknown; the tracking table
@@ -413,7 +484,7 @@ scene("onto",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
     arrive(ctx,495,770,t,tUnk-0.6,()=>d9_verdict(ctx,90,700,810,140,"OWL","was it corrected?","unknown",[176,186,206],"?",{v:fin(t,tUnk-0.1,0.5),hi:pulseAt(t,tUnk,1.4)}),{dy:-12});
     arrive(ctx,1425,770,t,tFind-0.3,()=>d9_verdict(ctx,1020,700,810,140,"the tracking table","was it corrected?","no",D9_RED,"x",{v:fin(t,tJob-0.5,0.5),hi:pulseAt(t,tJob,1.4)}),{dy:-12});}
   ctx.restore();vign(ctx,S);});
-/* ---------- 11. Back in Tartu ---------- */
+/* ---------- 12. Back in Tartu ---------- */
 // The wall again, toured left to right: the household's bill corrected and the 1,900 found; the two rules, confirmed by their owners;
 // Tartu, where the benefit is paid and nobody was asked twice; Tomás's note answered; then the whole wall, and the next question.
 const D9_E21=[590,110,560],D9_E22=[590,400,560],D9_ETC=[590,676,560,186];

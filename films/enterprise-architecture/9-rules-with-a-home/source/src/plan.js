@@ -415,9 +415,10 @@ function d9_real(ctx,x0,y0,x1,y1,col,p,a){if(p<=0||a<=0.01)return;withA(ctx,a,()
   if(q>0.98){ctx.fillStyle="rgba(9,8,22,1)";ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x1-Math.cos(an-0.5)*20,y1-Math.sin(an-0.5)*20);ctx.lineTo(x1-Math.cos(an+0.5)*20,y1-Math.sin(an+0.5)*20);ctx.closePath();ctx.fill();ctx.stroke();}ctx.restore();});}
 // a clock, for a service level
 function d9_clock(ctx,x,y,s,col){ctx.save();ctx.strokeStyle=rgba(col,1);ctx.lineWidth=Math.max(1.6,s*0.12);ctx.lineCap="round";ctx.beginPath();ctx.arc(x,y,s*0.7,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y-s*0.42);ctx.moveTo(x,y);ctx.lineTo(x+s*0.32,y+s*0.1);ctx.stroke();ctx.restore();}
-// a kind of reason, as a chip: o.kind "driver", "principle" or "clock", in motivation's purple
+// a kind of reason, as a chip: o.kind "driver", "principle" or "clock", in motivation's purple; or any motivation element's glyph,
+// "requirement" among them
 function d9_why(ctx,cx,cy,label,kind,a,o){o=o||{};if(a<=0.01)return;withA(ctx,a,()=>{const w=tw(ctx,label,30,700)+86,h=58;glass(ctx,cx-w/2,cy-h/2,w,h,h/2,MOT,{glow:10+12*(o.hi||0),ea:0.85,fill:"rgba(12,10,26,0.94)"});
-  if(kind==="clock")d9_clock(ctx,cx-w/2+34,cy,22,MOT);else archGlyph(ctx,kind,cx-w/2+34,cy,15,MOT);T(ctx,label,cx-w/2+62,cy+11,{w:700,size:30,color:rgba(mix(MOT,INK,0.4),1)});});}
+  if(kind==="clock")d9_clock(ctx,cx-w/2+34,cy,22,MOT);else if(kind==="requirement")d9_reqGlyph(ctx,cx-w/2+36,cy,18,MOT);else archGlyph(ctx,kind,cx-w/2+34,cy,15,MOT);T(ctx,label,cx-w/2+62,cy+11,{w:700,size:30,color:rgba(mix(MOT,INK,0.4),1)});});}
 // a fact, as a statement about concepts: glass, with a mono kicker
 function d9_fact(ctx,x,y,w,text,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const ls=wrapT(ctx,text,0,0,w-48,{size:28,w:700,measure:true}),h=70+ls.length*34;withA(ctx,a,()=>{glass(ctx,x,y,w,h,14,[190,200,220],{glow:10+12*(o.hi||0),ea:0.75,fill:"rgba(8,12,24,0.94)"});
   T(ctx,"fact",x+24,y+36,{f:"mono",w:500,size:28,color:rgba(SOFT,0.95)});ls.forEach((l,i)=>T(ctx,l,x+24,y+76+i*34,{w:700,size:28,color:rgba(INK,0.95)}));});return h;}
@@ -555,3 +556,33 @@ function d9_tartuCard(ctx,x,y,w,h,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.0
   const tx=x+236;T(ctx,"Tartu · today",tx,y+52,{f:"mono",w:600,size:28,color:rgba(D9_TAR,1)});
   withA(ctx,o.paid||0,()=>{tick_(ctx,tx+14,y+98,24,D9_OK,1);T(ctx,"benefit paid",tx+40,y+108,{w:800,size:30,color:rgba(D9_OK,1)});});
   withA(ctx,o.once||0,()=>T(ctx,"nobody asked twice",tx,y+156,{w:700,size:30,color:rgba(D9_DAWN,1)}));});}
+
+/* ---------- a rule in ArchiMate 4 ---------- */
+// The motivation elements ArchiMate 4 lists (Linked.Archi's comparison of 3.2 and 4.0, read 20 October 2026), as chips: [name,
+// glyph]; the requirement in the middle. The film doesn't say whether the list is complete, and doesn't need to.
+const D9_MOTS=[["stakeholder","stakeholder"],["driver","driver"],["requirement","requirement"],["goal","goal"],["principle","principle"]];
+// a name ArchiMate has no element for: a dashed chip, struck through as st goes to 1
+function d9_noEl(ctx,cx,cy,label,a,st){if(a<=0.01)return;withA(ctx,a,()=>{const w=tw(ctx,label,30,700)+48,h=58;ctx.save();ctx.setLineDash([8,7]);ctx.strokeStyle=rgba(SOFT,0.85);ctx.lineWidth=2.4;rr(ctx,cx-w/2,cy-h/2,w,h,h/2);ctx.stroke();ctx.restore();
+  T(ctx,label,cx,cy+11,{w:700,size:30,align:"center",color:rgba(SOFT,0.95)});
+  if(st>0){ctx.save();ctx.strokeStyle=rgba(D9_RED,0.95);ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(cx-w/2+12,cy);ctx.lineTo(cx-w/2+12+(w-24)*ease(clamp(st,0,1)),cy);ctx.stroke();ctx.restore();}});}
+// an element of the map around a rule: glass in its domain's colour, a mono kicker (its part of the rule, then its kind) and its
+// glyph, then its name
+function d9_hubEl(ctx,x,y,w,h,kicker,name,col,glyph,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{glass(ctx,x,y,w,h,8,col,{glow:12+14*(o.hi||0),ea:0.85,fill:"rgba(9,9,22,0.95)"});
+  ctx.fillStyle=rgba(col,0.12+0.1*(o.hi||0));rr(ctx,x,y,w,h,8);ctx.fill();archGlyph(ctx,glyph,x+w-32,y+30,14,col);
+  T(ctx,kicker,x+24,y+42,{f:"mono",w:500,size:28,color:rgba(col,1)});T(ctx,name,x+24,y+h-24,{w:700,size:30,color:rgba(INK,0.97)});});}
+// a relationship's name, as ArchiMate calls it: mono, on a dark plate, so it reads beside the lines
+function d9_relName(ctx,x,y,label,a,o){o=o||{};if(a<=0.01)return;const w=tw(ctx,label,28,500,"mono"),al=o.align||"left",X=al==="center"?x-w/2:al==="right"?x-w:x;
+  withA(ctx,a,()=>{ctx.fillStyle="rgba(7,8,20,0.9)";rr(ctx,X-10,y-29,w+20,40,8);ctx.fill();T(ctx,label,X,y,{f:"mono",w:500,size:28,color:rgba(o.col||MOT,1)});});}
+// an association, as ArchiMate draws it: a plain line, drawn up to p
+function d9_assoc(ctx,x0,y0,x1,y1,col,p,a){if(p<=0||a<=0.01)return;withA(ctx,a,()=>{const q=ease(clamp(p,0,1));ctx.save();ctx.strokeStyle=rgba(col,0.92);ctx.lineWidth=2.6;ctx.lineCap="round";
+  ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(lerp(x0,x1,q),lerp(y0,y1,q));ctx.stroke();ctx.restore();});}
+// a specialisation, as ArchiMate draws it: a solid line with a hollow triangle at the general end, (x1, y1), drawn up to p
+function d9_spec(ctx,x0,y0,x1,y1,col,p,a){if(p<=0||a<=0.01)return;withA(ctx,a,()=>{const q=ease(clamp(p,0,1)),an=Math.atan2(y1-y0,x1-x0),L=Math.hypot(x1-x0,y1-y0),xe=x0+Math.cos(an)*Math.max(0,L*q-20),ye=y0+Math.sin(an)*Math.max(0,L*q-20);
+  ctx.save();ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=2.6;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(xe,ye);ctx.stroke();
+  if(q>0.98){ctx.fillStyle="rgba(9,8,22,1)";ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x1-Math.cos(an-0.45)*22,y1-Math.sin(an-0.45)*22);ctx.lineTo(x1-Math.cos(an+0.45)*22,y1-Math.sin(an+0.45)*22);ctx.closePath();ctx.fill();ctx.stroke();}ctx.restore();});}
+// the place for a rule's checks, which the standard leaves open: dashed, with its question, until f (0..1) fills it with the checks
+// that come from the rule
+function d9_checks(ctx,x,y,w,h,f,a,o){o=o||{};if(a<=0.01)return;withA(ctx,a,()=>{const q=clamp(f,0,1);
+  if(q<1)withA(ctx,1-q,()=>{ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(SOFT,0.8);ctx.lineWidth=2.5;rr(ctx,x,y,w,h,14);ctx.stroke();ctx.restore();T(ctx,"how it's checked?",x+w/2,y+h/2+11,{w:700,size:30,align:"center",color:rgba(SOFT,0.95)});});
+  if(q>0)withA(ctx,q,()=>{glass(ctx,x,y,w,h,14,TECH,{glow:12+14*(o.hi||0),ea:0.85,fill:"rgba(6,10,20,0.95)"});const tx=x+w/2-tw(ctx,"checks",30,700)/2+20;tick_(ctx,tx-34,y+h/2+1,26,D9_OK,1);T(ctx,"checks",tx,y+h/2+11,{w:700,size:30,color:rgba(TECH,1)});});});}
+

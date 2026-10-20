@@ -47,6 +47,14 @@ const NARR={
  {"id":"inside","gap":0.8,"text":"Attached, not inside: a rule isn't the process."},
  {"id":"time","gap":0.8,"text":"The step also says what to expect of the data. Timeliness, from its service level: an estimate replaced within two working days."},
  {"id":"comp","gap":0.8,"text":"Completeness, from its steps: every estimate replaced, or explained. Validity, from another rule: every reading marked actual or estimated."}]},
+"std":{"name":"A rule in ArchiMate 4","lead":1.0,"tail":1.0,"vo":[
+ {"id":"req","gap":0.8,"text":"In ArchiMate 4, the standard the map follows, a rule is a requirement, one of the motivation elements."},
+ {"id":"sym","gap":0.8,"text":"The parallelogram on every rule card is the requirement's symbol."},
+ {"id":"kinds","gap":0.8,"text":"ArchiMate has no element called a rule. The map makes data rules and business rules two kinds of requirement."},
+ {"id":"drv","gap":0.8,"text":"Its reason is a driver, linked by an influence: for retail's rule, the regulator's retail code."},
+ {"id":"real","gap":0.8,"text":"Its home is the step that applies it, linked by a realisation: billing, in meter to cash."},
+ {"id":"assoc","gap":0.8,"text":"Its owner, and the data objects it applies to, are linked by an association."},
+ {"id":"where","gap":0.8,"text":"ArchiMate says where a rule sits, not how it's checked. The checks come from the rule."}]},
 "checks":{"name":"Test the data, track the business","lead":1.2,"tail":1.0,"vo":[
  {"id":"form","gap":0.8,"text":"Written in a set form, a rule says what it applies to, what must be true, its owner, its reason, its home, and what happens when it fails."},
  {"id":"data","gap":0.8,"text":"A rule about the data, such as every reading marked actual or estimated, gets tests: they check the data is right."},

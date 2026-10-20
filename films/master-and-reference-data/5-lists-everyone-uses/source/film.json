@@ -1,0 +1,24 @@
+{
+  "key": "lists-everyone-uses",
+  "title": "Lists everyone uses",
+  "sub": "The same one, everywhere, a series on master and reference data: airport codes that outlive their reasons; the lists that sort Linh at the university, each system with its own names, and a list of statuses typed again by hand; reference data, the university's own and from outside; one home for each list, with its owner and the date each value applies from; tests that read the list instead of typing it; a change made as a pull request its owner approves; countries from the international standard; lists about people kept short; and the same lists in a bank and a hospital.",
+  "howto": "The film is drawn in watercolour. Each role has its own colour: student teal, applicant amber, tutor violet, researcher coral, alumna green. A list is a paper card with a yellow tab, its codes in type and its labels in words. Cyan edges the technical side, gold the business side.",
+  "src": [
+    "../../../../analytics-engineering/shared/src/people.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": ["keeps", "line", -0.8],
+  "say": [
+    ["\\bNguyen\\b", "Nwin"],
+    ["\\bLinh's\\b", "Lin's"],
+    ["\\bLinh\\b", "Lin"],
+    ["\\bHR's\\b", "H R's"],
+    ["\\bHR\\b", "H R"],
+    ["\\bYYZ\\b", "Y Y Z"],
+    ["\\bSGN\\b", "S G N"],
+    ["\\bENR\\b", "E N R"],
+    ["\\bCAS\\b", "C A S"],
+    ["\\bVN\\b", "V N"]
+  ]
+}

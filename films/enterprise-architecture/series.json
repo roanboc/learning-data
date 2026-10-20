@@ -25,8 +25,7 @@
     ["Mumbai's dabbawalas, since 1890", "Value reaches people through hand-offs, and the detail lives there."],
     ["Japan's two frequencies, 1890s and 2011", "The same word can mean something different on each side of a line; what crosses must be translated."],
     ["An imagined morning in the utility's region, 2045", "Where it's going is drawn as carefully as where it is, and the path between is its own drawing."],
-    ["Kerala's fishermen, 1997", "A question matters when someone will act on its answer, in time."],
-    ["M-Pesa in Kenya, 2007", "An idea fits in a sentence; making it real reaches every layer, down to the counter."]
+    ["Kerala's fishermen, 1997", "A question matters when someone will act on its answer, in time."]
   ],
   "past_es": [
     ["El catastro de Domesday, Inglaterra, 1086", "Antes de gobernar un lugar, hay que saber qué es."],
@@ -36,8 +35,7 @@
     ["Los dabbawalas de Mumbai, desde 1890", "El valor llega a la gente a través de traspasos, y el detalle vive ahí."],
     ["Las dos frecuencias de Japón, década de 1890 y 2011", "La misma palabra puede significar algo distinto a cada lado de una línea; lo que cruza hay que traducirlo."],
     ["Una mañana imaginada en la región de la empresa, 2045", "Hacia dónde va se dibuja con el mismo cuidado que dónde está, y el camino entre los dos es su propio dibujo."],
-    ["Los pescadores de Kerala, 1997", "Una pregunta importa cuando alguien va a actuar a partir de su respuesta, a tiempo."],
-    ["M-Pesa en Kenia, 2007", "Una idea cabe en una frase; hacerla realidad llega a cada capa, hasta el mostrador."]
+    ["Los pescadores de Kerala, 1997", "Una pregunta importa cuando alguien va a actuar a partir de su respuesta, a tiempo."]
   ],
   "coming_h": "Still to come",
   "coming_h_es": "Lo que viene",
@@ -45,10 +43,12 @@
   "coming_p_es": "Dos películas más, sobre lo que el mapa hace por los datos.",
   "coming": [
     [9, "Rules with a home", "information: objects, owners and rules"],
+    [10, "When strategy moves", "one change, walked through every layer"],
     [11, "A map people and agents can read", "the model as something kept, not drawn once"]
   ],
   "coming_es": [
-    [9, "Reglas con un lugar", "información: objetos, dueños y reglas"],
+    [9, "Reglas con un hogar", "información: objetos, dueños y reglas"],
+    [10, "Cuando la estrategia se mueve", "un cambio, recorrido por todas las capas"],
     [11, "Un mapa que personas y agentes pueden leer", "el modelo como algo que se mantiene, no que se dibuja una vez"]
   ],
   "people_h": "Who knows the place",
@@ -64,5 +64,11 @@
     ["biz", "Hace funcionar la red", "Grace, dueña de las operaciones de la red"],
     ["biz", "Habla por los clientes", "Farah, la defensora de los clientes"],
     ["biz", "Conoce las reglas", "Ama, la responsable regulatoria"]
-  ]
+  ],
+  "learn_p": "{Labs} hands-on labs, one for each film and one on ArchiMate 4, then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs interactivos, uno por película y uno sobre ArchiMate 4, y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} hands-on labs: one for each film, and one on ArchiMate 4, the standard of the later films. Each puts one idea from a film in your hands, and shows you why it matters.",
+  "labs_lead_es": "{Labs} labs interactivos: uno por película, y uno sobre ArchiMate 4, el estándar de las últimas películas. Cada uno pone en tus manos una idea de una película, y te muestra por qué importa.",
+  "quiz_lead": "{quiz} situations an architect or a data team really faces, from every film. Decide what you'd do; each answer explains why, and points back to the lab that covers it.",
+  "quiz_lead_es": "{quiz} situaciones que de verdad enfrenta un arquitecto o un equipo de datos, de todas las películas. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

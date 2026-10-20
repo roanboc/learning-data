@@ -438,7 +438,7 @@ Nine films of 4 to 6 minutes; the case is what happens to Linh at the university
 
 **On screen.** Two lines over two years: after a clean-up, duplicates climb back; after the check at entry, they stay down.
 
-**The close.** As the series' last film, it ends with a chapter of its own, *The same one, everywhere*: a quick summary of the nine films, then master data as one part of data governance (owners, rules and change). Its end card reads "Next: a series on data governance", and its page links to that series once it's on the site (the author, 20 October 2026).
+**The close.** As the series' last film, it ends with a chapter of its own, *The same one, everywhere*: a quick summary of the nine films, then master data as part of data governance, with the four pieces the film names: someone who decides, one meaning for each word, access for a purpose, and rules that run. Its end card reads "Next: a series on data governance", and its page links to that series once it's on the site (the author, 20 October 2026).
 
 **Labs (candidates).** *Clean-up or prevention?* *Read the steward's measures.*
 

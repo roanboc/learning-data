@@ -2879,15 +2879,15 @@ function m6_rec3(ctx,k){const [x,y,w,h]=M6_R3[k];if(k==="student")wc_roleCard(ct
 /* ---------- 4 and 5. what each role is for; wishes on the person ---------- */
 // Linh as the person, and her four records in a row, as they're named
 const M6_LP=[205,860,0.74],M6_RX=[470,825,1180,1535],M6_RY=110;
-const M6_ROLES=[["student","Student","results",["teaching","awards"],["S-20436","results","HD · D · C"]],
-  ["alumna","Alumna","details",["news","events","fundraising"],["Linh Nguyen","class of 2022","email · address"]],
+const M6_ROLES=[["student","Student","results",["teaching","awards"],["S-20436","results","P · C"]],
+  ["alumna","Alumna","details",["news","events","fundraising"],["S-17142","class of 2022","email · address"]],
   ["tutor","Casual tutor","pay",["employment"],["E-4417","pay","bank details"]],
   ["researcher","Researcher","project data",["her project"],["R-3082","interviews","as she agreed"]]];
 // the list every purpose comes from: its owner and its date, and the purposes
 const M6_PL={x:470,y:680,w:1395,h:200},M6_PURP=["teaching","awards","news","events","fundraising","employment","her project"];
 function m6_purposes(ctx,lit){const {x,y,w,h}=M6_PL;wc_panel(ctx,x,y,w,h,{kind:"card",seed:14});
   wc_T(ctx,"purposes",x+30,y+50,{w:800,size:30,col:WC_DARK});const pw=tw(ctx,"purposes",30,800);
-  wc_T(ctx," · owner: privacy office · from Mar 2026",x+30+pw,y+50,{w:600,size:28,col:WC_MUTED});
+  wc_T(ctx," · owner: privacy office · from Nov 2026",x+30+pw,y+50,{w:600,size:28,col:WC_MUTED});
   let cx=x+30;M6_PURP.forEach((s,i)=>{const tw0=Math.round(tw(ctx,s,28,700)+40);wc_tag(ctx,cx,y+140,s,{size:28,w:700,wash:s==="fundraising"?M6_DONOR:null,washA:0.45});
     if(lit&&lit[i]>0.01)wc_ring(ctx,cx+tw0/2,y+140,tw0/2+14,34,lit[i],{seed:i+3});cx+=tw0+16;});}
 // where each record sits, and the door it opens
@@ -2923,7 +2923,7 @@ function m6_test(ctx,x,y,o){o=o||{};const w=630,h=232;wc_panel(ctx,x,y,w,h,{kind
 // alumni with their final grades, as the appeals team sees them: names and the emails they gave the alumni office; the grades, tagged
 // for teaching, hidden (o.mask); and the rows of anyone whose wishes say no struck through, faded and closed up (o.gone)
 const M6_TB={x:440,y:470,w:1440},M6_ROWS=[["Sofia Marin","sofia.marin@mail.example","HD",0],["Daniel Osei","d.osei@mail.example","D",0],
-  ["Linh Nguyen","linh.nguyen@mail.example","C",1],["Priya Nair","priya.n@mail.example","HD",0],["Leo Becker","leo.becker@mail.example","D",1]];
+  ["Thi Linh Nguyen","linh.nguyen2001@mail.example","C",1],["Anika Rao","anika.r@mail.example","HD",0],["Leo Becker","leo.becker@mail.example","D",1]];
 function m6_table(ctx,o){o=o||{};const {x,y,w}=M6_TB,rh=50,gone=o.gone||0,mask=o.mask||0;
   // rows close up as the struck ones leave
   const ys=[];let yy=y+144;M6_ROWS.forEach(r=>{ys.push(yy);yy+=rh*(r[3]?1-ease(clamp((gone-0.62)/0.38,0,1)):1);});
@@ -2956,7 +2956,7 @@ function m6_count(ctx,p1,p2,p3){const {x,y,w,h}=M6_AC,tW=tw(ctx,"Scholarship app
     wc_T(ctx,"to ask",x+32,y+272,{w:800,size:30,col:WC_DARK});wc_T(ctx,"2,103",x+w-32,y+272,{w:800,size:40,f:"mono",col:WC_DARK,align:"right"});});}
 // the list it was going to send, the alumni the platform showed: Linh's line, and Leo's, struck through in red ink, each with the note that
 // took it off
-const M6_AL={x:110,y:460,w:640},M6_ANAMES=[["Sofia Marin",0],["Daniel Osei",0],["Linh Nguyen",1],["Priya Nair",0],["Leo Becker",1]];
+const M6_AL={x:110,y:460,w:640},M6_ANAMES=[["Sofia Marin",0],["Daniel Osei",0],["Thi Linh Nguyen",1],["Anika Rao",0],["Leo Becker",1]];
 function m6_alist(ctx,st){const {x,y,w}=M6_AL,h=78+M6_ANAMES.length*50;wc_panel(ctx,x,y,w,h,{kind:"card",seed:19});wc_T(ctx,"alumni selected",x+30,y+46,{w:700,size:28,col:WC_MUTED});
   M6_ANAMES.forEach(([nm,no],i)=>{const yy=y+100+i*50;wc_T(ctx,nm,x+30,yy,{w:600,size:28,col:no&&st>0.5?WC_MUTED:WC_INK});
     if(no&&st>0){const nw=tw(ctx,nm,28,600),p=clamp(st*1.6-(i===2?0.2:0),0,1);ctx.save();ctx.strokeStyle=rgba(WC_NO,0.9);ctx.lineWidth=3.4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x+24,yy-10);ctx.lineTo(x+24+(nw+16)*p,yy-10);ctx.stroke();ctx.restore();
@@ -2966,7 +2966,7 @@ function m6_alist(ctx,st){const {x,y,w}=M6_AL,h=78+M6_ANAMES.length*50;wc_panel(
 // her request, as it arrives: what she asks, and the date
 const M6_RQW=620;
 function m6_request(ctx,x,y){const w=M6_RQW,h=118;wc_panel(ctx,x,y,w,h,{kind:"card",fill:[255,250,236],seed:22});wc_T(ctx,"What do you hold about me?",x+30,y+50,{w:800,size:30,col:WC_DARK});
-  wc_T(ctx,"3 Nov",x+w-24,y+50,{w:500,size:28,f:"mono",align:"right",col:WC_MUTED});wc_T(ctx,"from Linh Nguyen",x+30,y+94,{w:600,size:28,col:WC_MUTED});}
+  wc_T(ctx,"3 Dec",x+w-24,y+50,{w:500,size:28,f:"mono",align:"right",col:WC_MUTED});wc_T(ctx,"from Linh Nguyen",x+30,y+94,{w:600,size:28,col:WC_MUTED});}
 // an office searching its own system: dimmed, with a magnifying glass that circles as it searches
 function m6_search(ctx,x,y,name,t){const w=330,h=92;wc_panel(ctx,x,y,w,h,{kind:"card",seed:name.length+24});wc_T(ctx,name,x+28,y+56,{w:700,size:28,col:WC_INK});
   const a=t*2.4,mx=x+w-48+Math.cos(a)*7,my=y+44+Math.sin(a)*6;ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.85);ctx.lineWidth=3.6;ctx.lineCap="round";ctx.beginPath();ctx.arc(mx,my,13,0,TAU);
@@ -3140,7 +3140,7 @@ scene("purposes",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   const tt=[[w("student","teaching"),w("student","awards")],[w("alumna","news"),w("alumna","events"),w("alumna","fundraising")],[w("tutor","employment")],[w("researcher","her project")]];
   // the appeal's request knocks at each door: the student's stays shut, the alumna's opens, the tutor's and the researcher's stay shut
   const kS=tWr+0.1,kA=tDoor,kT=tNo+0.45,kR=tNo+1.25;
-  const ring=clamp((t-tOwn-0.1)/0.8,0,1),xs=M6_PL.x+30+tw(ctx,"purposes",30,800)+tw(ctx," · ",28,600),xe=M6_PL.x+30+tw(ctx,"purposes",30,800)+tw(ctx," · owner: privacy office · from Mar 2026",28,600);
+  const ring=clamp((t-tOwn-0.1)/0.8,0,1),xs=M6_PL.x+30+tw(ctx,"purposes",30,800)+tw(ctx," · ",28,600),xe=M6_PL.x+30+tw(ctx,"purposes",30,800)+tw(ctx," · owner: privacy office · from Nov 2026",28,600);
   m6_doors(ctx,t,{fig:fin(t,0.2,0.8),ra:[0,1,2,3].map(i=>tOath+i*0.2),tt,open:[0,fin(t,kA+0.15,0.9),0,0],shake:[m6_shake(t,kS),0,m6_shake(t,kT),m6_shake(t,kR)],list:tOne-0.3});
   if(ring>0)wc_ring(ctx,(xs+xe)/2+6,M6_PL.y+40,(xe-xs)/2+2,32,ring,{seed:13});
   arrive(ctx,M6_TOP[0],M6_TOP[1],t,tOnly-0.2,()=>wc_tag(ctx,M6_TOP[0],M6_TOP[1],"only for a purpose written on it",{align:"center"}),{dy:8});
@@ -3234,7 +3234,7 @@ scene("again",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   arrive(ctx,M6_AC.x+M6_AC.w/2,M6_AC.y+M6_AC.h/2,t,tNext-0.2,()=>m6_count(ctx,clamp((t-tSels)/1.6,0,1),clamp((t-tOff)/0.5,0,1),clamp((t-tSits)/0.6,0,1)),{dy:16});
   const lh=78+M6_ANAMES.length*50;
   arrive(ctx,M6_AL.x+M6_AL.w/2,M6_AL.y+lh/2,t,tSels+0.3,()=>m6_alist(ctx,clamp((t-tBec)/1.2,0,1)),{dy:16});
-  const nw=tw(ctx,"Linh Nguyen",28,600);wc_ring(ctx,M6_AL.x+30+nw/2,M6_AL.y+190,nw/2+30,32,clamp((t-tLinh)/0.8,0,1),{seed:23});
+  const nw=tw(ctx,"Thi Linh Nguyen",28,600);wc_ring(ctx,M6_AL.x+30+nw/2,M6_AL.y+190,nw/2+30,32,clamp((t-tLinh)/0.8,0,1),{seed:23});
   // the alumni's details open to the appeal, as their role allows; the results, behind the student's door, stay shut
   const aOpen=fin(t,tAllow+0.2,0.9),kR=tStay+0.05;
   arrive(ctx,M6_AX[0]+M6_RW/2,M6_RY+M6_RH/2,t,tAlu-0.2,()=>m6_rec(ctx,t,M6_AX[0],M6_RY,"alumna","Alumni","details",{tags:["news","events","fundraising"],tt:[-9,-9,-9],open:aOpen,vals:["alumni","email · address"]}),{dy:16});
@@ -3258,7 +3258,7 @@ scene("request",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   arrive(ctx,220,154,t,0.6,()=>wc_info(ctx,40,100,360,108,"Mei Tanaka","registrar's office",{mono:false}),{dy:12});
   // her request, and later, when it was answered
   arrive(ctx,620+M6_RQW/2,149,t,tAsks-0.3,()=>{m6_request(ctx,620,90);const b=fin(t,w("days","ready in days")-0.1,0.5);
-    if(b>0.01)withA(ctx,b,()=>{const bw=Math.round(tw(ctx,"answered 7 Nov",28,700)+28);wc_badge(ctx,620+M6_RQW-24-bw,184,"answered 7 Nov");});},{dy:16});
+    if(b>0.01)withA(ctx,b,()=>{const bw=Math.round(tw(ctx,"answered 7 Dec",28,700)+28);wc_badge(ctx,620+M6_RQW-24-bw,184,"answered 7 Dec");});},{dy:16});
   // how it used to be: four offices, each searching its own system, dimmed, then gone
   const old=fin(t,tFour-0.3,0.5)*(1-fin(t,tNow-0.2,0.6));
   if(old>0.01)withA(ctx,0.62*old,()=>M6_OFF.forEach(([n,x,y],i)=>arrive(ctx,x+165,y+46,t,tFour-0.3+i*0.18,()=>m6_search(ctx,x,y,n,t+i),{dy:12})));

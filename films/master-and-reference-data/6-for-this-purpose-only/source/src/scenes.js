@@ -138,7 +138,7 @@ scene("purposes",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
   const tt=[[w("student","teaching"),w("student","awards")],[w("alumna","news"),w("alumna","events"),w("alumna","fundraising")],[w("tutor","employment")],[w("researcher","her project")]];
   // the appeal's request knocks at each door: the student's stays shut, the alumna's opens, the tutor's and the researcher's stay shut
   const kS=tWr+0.1,kA=tDoor,kT=tNo+0.45,kR=tNo+1.25;
-  const ring=clamp((t-tOwn-0.1)/0.8,0,1),xs=M6_PL.x+30+tw(ctx,"purposes",30,800)+tw(ctx," · ",28,600),xe=M6_PL.x+30+tw(ctx,"purposes",30,800)+tw(ctx," · owner: privacy office · from Mar 2026",28,600);
+  const ring=clamp((t-tOwn-0.1)/0.8,0,1),xs=M6_PL.x+30+tw(ctx,"purposes",30,800)+tw(ctx," · ",28,600),xe=M6_PL.x+30+tw(ctx,"purposes",30,800)+tw(ctx," · owner: privacy office · from Nov 2026",28,600);
   m6_doors(ctx,t,{fig:fin(t,0.2,0.8),ra:[0,1,2,3].map(i=>tOath+i*0.2),tt,open:[0,fin(t,kA+0.15,0.9),0,0],shake:[m6_shake(t,kS),0,m6_shake(t,kT),m6_shake(t,kR)],list:tOne-0.3});
   if(ring>0)wc_ring(ctx,(xs+xe)/2+6,M6_PL.y+40,(xe-xs)/2+2,32,ring,{seed:13});
   arrive(ctx,M6_TOP[0],M6_TOP[1],t,tOnly-0.2,()=>wc_tag(ctx,M6_TOP[0],M6_TOP[1],"only for a purpose written on it",{align:"center"}),{dy:8});
@@ -232,7 +232,7 @@ scene("again",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   arrive(ctx,M6_AC.x+M6_AC.w/2,M6_AC.y+M6_AC.h/2,t,tNext-0.2,()=>m6_count(ctx,clamp((t-tSels)/1.6,0,1),clamp((t-tOff)/0.5,0,1),clamp((t-tSits)/0.6,0,1)),{dy:16});
   const lh=78+M6_ANAMES.length*50;
   arrive(ctx,M6_AL.x+M6_AL.w/2,M6_AL.y+lh/2,t,tSels+0.3,()=>m6_alist(ctx,clamp((t-tBec)/1.2,0,1)),{dy:16});
-  const nw=tw(ctx,"Linh Nguyen",28,600);wc_ring(ctx,M6_AL.x+30+nw/2,M6_AL.y+190,nw/2+30,32,clamp((t-tLinh)/0.8,0,1),{seed:23});
+  const nw=tw(ctx,"Thi Linh Nguyen",28,600);wc_ring(ctx,M6_AL.x+30+nw/2,M6_AL.y+190,nw/2+30,32,clamp((t-tLinh)/0.8,0,1),{seed:23});
   // the alumni's details open to the appeal, as their role allows; the results, behind the student's door, stay shut
   const aOpen=fin(t,tAllow+0.2,0.9),kR=tStay+0.05;
   arrive(ctx,M6_AX[0]+M6_RW/2,M6_RY+M6_RH/2,t,tAlu-0.2,()=>m6_rec(ctx,t,M6_AX[0],M6_RY,"alumna","Alumni","details",{tags:["news","events","fundraising"],tt:[-9,-9,-9],open:aOpen,vals:["alumni","email · address"]}),{dy:16});
@@ -256,7 +256,7 @@ scene("request",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   arrive(ctx,220,154,t,0.6,()=>wc_info(ctx,40,100,360,108,"Mei Tanaka","registrar's office",{mono:false}),{dy:12});
   // her request, and later, when it was answered
   arrive(ctx,620+M6_RQW/2,149,t,tAsks-0.3,()=>{m6_request(ctx,620,90);const b=fin(t,w("days","ready in days")-0.1,0.5);
-    if(b>0.01)withA(ctx,b,()=>{const bw=Math.round(tw(ctx,"answered 7 Nov",28,700)+28);wc_badge(ctx,620+M6_RQW-24-bw,184,"answered 7 Nov");});},{dy:16});
+    if(b>0.01)withA(ctx,b,()=>{const bw=Math.round(tw(ctx,"answered 7 Dec",28,700)+28);wc_badge(ctx,620+M6_RQW-24-bw,184,"answered 7 Dec");});},{dy:16});
   // how it used to be: four offices, each searching its own system, dimmed, then gone
   const old=fin(t,tFour-0.3,0.5)*(1-fin(t,tNow-0.2,0.6));
   if(old>0.01)withA(ctx,0.62*old,()=>M6_OFF.forEach(([n,x,y],i)=>arrive(ctx,x+165,y+46,t,tFour-0.3+i*0.18,()=>m6_search(ctx,x,y,n,t+i),{dy:12})));

@@ -1,0 +1,6 @@
+id: ROL-003
+name: data steward
+kind: business role
+definition: Drafts definitions, rules and fixes for an owner, and keeps them true day to day.
+owner: Yusuf Demir, data governance lead
+status: confirmed

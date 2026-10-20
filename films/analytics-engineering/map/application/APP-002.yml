@@ -1,0 +1,6 @@
+id: APP-002
+name: document library
+kind: application component
+definition: Where policies are kept, as documents.
+owner: Yusuf Demir, data governance lead
+status: confirmed

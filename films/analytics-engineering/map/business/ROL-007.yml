@@ -1,0 +1,6 @@
+id: ROL-007
+name: analytics engineer
+kind: business role
+definition: Builds and tests the models, in the dbt project.
+owner: Yusuf Demir, data governance lead
+status: confirmed

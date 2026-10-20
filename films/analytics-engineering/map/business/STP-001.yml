@@ -1,0 +1,10 @@
+id: STP-001
+name: ask for a term
+kind: business process
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: ROL-008 · requester
+- access (writes): OBJ-001
+- realization: SRV-002 · define or change a term
+- triggering: STP-002 · draft the definition
+status: confirmed

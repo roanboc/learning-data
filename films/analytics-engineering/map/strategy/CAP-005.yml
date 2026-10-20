@@ -1,0 +1,11 @@
+id: CAP-005
+name: keep data fit for use
+kind: capability
+definition: Every rule about the data runs as a test with an owner, and its result is read from the run.
+owner: Yusuf Demir, data governance lead
+relationships:
+- composition: CAP-001 · govern data
+heat: green
+evidence: 'every test has an owner and a dimension; the scorecard is read from the run; emails checked
+  where they''re typed (project: scorecard.md, DEC-SC-04) · 20 Oct 2026'
+status: confirmed

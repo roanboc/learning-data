@@ -1,0 +1,6 @@
+id: ROL-006
+name: data architect
+kind: business role
+definition: Keeps the map and the models, and the flows between the homes of each artifact.
+owner: Yusuf Demir, data governance lead
+status: confirmed

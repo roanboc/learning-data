@@ -1,0 +1,16 @@
+id: OBJ-004
+name: business term
+kind: business object
+owner: Mei Tanaka, registrar's office
+home: APP-003 · architecture map
+copies:
+- in: APP-001 · business glossary
+  synced from: APP-003 · architecture map
+  drift check: 'yes'
+- in: APP-004 · dbt project
+  synced from: APP-001 · business glossary
+  drift check: 'yes'
+- in: APP-005 · data platform
+  synced from: APP-001 · business glossary
+  drift check: 'yes'
+status: confirmed

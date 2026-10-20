@@ -45,6 +45,7 @@ Then, if you like:
 | `python scripts/generate/scorecard.py` | After a build: the data quality scorecard, `docs/scorecard.md`, every test by domain and quality dimension, with what didn't pass and its owner |
 | `python scripts/generate/codeowners.py` | Regenerates `CODEOWNERS` from the owners in the metadata, so a change asks its owner to review it |
 | `python scripts/check/governance.py --measures` | Checks data governance's rules (an owner, a glossary term or a confirmed absence, classified columns, tests with an owner and a dimension), and measures them |
+| `python ../map/check.py` | Checks the governance part of Noor's map (`../map/`, kept beside the project as text) and writes its views: governance's services and promises, and who does what |
 | `python scripts/generate/definitions.py` | Regenerates each domain's definitions (`_<domain>__definitions.md`) and `seeds/reference/shared/key_sets.csv` from the conceptual models |
 | `pip install dbt-metricflow==0.15.0`, then `DBT_PROFILES_DIR=. mf query --metrics learners_near_graduate_certificate --group-by learner_award__faculty_name` | Planning's answer, from the semantic layer's metric |
 | `dbt clean --profiles-dir .` | Deletes `target/`, the database with it, for a clean start |

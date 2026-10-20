@@ -182,10 +182,10 @@ slaProperties:
   value: 07:00
   description: Ready by 7 a.m. on census day.
 team:
-  name: Planning
+  name: Clara Jensen, Planning
   members:
-  - username: planning@uni.example
-    name: Planning
+  - username: clara.jensen@uni.example
+    name: Clara Jensen, Planning
     role: owner
 support:
 - channel: planning-data

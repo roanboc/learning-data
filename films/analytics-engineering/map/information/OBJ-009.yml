@@ -1,0 +1,6 @@
+id: OBJ-009
+name: test and its result
+kind: business object
+owner: Noor, data architect
+home: APP-004 · dbt project
+status: confirmed

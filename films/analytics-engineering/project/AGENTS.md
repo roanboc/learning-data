@@ -63,6 +63,7 @@ dbt build --profiles-dir .              # green; the one warning is by design (L
 python scripts/generate/definitions.py --check   # the doc blocks match the conceptual models
 python scripts/generate/diagrams.py --check      # the physical diagrams match the YAML
 python scripts/generate/decisions.py --check     # the decision logs are valid and indexed
+python scripts/generate/codeowners.py --check    # CODEOWNERS matches the owners in the metadata
 python scripts/check/requirements.py             # only open requirements, each saying when it's done
 python scripts/check/governance.py               # an owner, a glossary term, classified columns, owned tests
 ```
@@ -78,4 +79,5 @@ Say in the pull request what you changed, why, what you checked, and the evidenc
 | The code: models, tests, macros | Jun Park, analytics engineer, in review |
 | A consumer contract | Its consumer: Planning, or the wallet app team |
 
+`CODEOWNERS`, generated from the owners in the metadata, asks each of them to review what they own.
 The agent recommends; people approve.

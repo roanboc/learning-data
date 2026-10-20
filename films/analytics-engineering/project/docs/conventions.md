@@ -117,7 +117,7 @@ Every file in the project has one of four lifecycles. A file's header, or its fo
 | Lifecycle | Files | How they change |
 |---|---|---|
 | **Permanent**, written by hand | Sources, models, exposures, seeds, tests, macros, analyses, scripts; conceptual models (`_<domain>__conceptual.yml`, `_<domain>__conceptual.md`); decision logs (`_<scope>__decisions.yml`); `meta.limitations`; `docs/process.md`, `docs/conventions.md` | Edited in a pull request and reviewed. A decision is never deleted: when it's replaced, it's marked `superseded` and relates to what replaced it |
-| **Generated**, never edited by hand | `_<domain>__definitions.md`, `_<domain>__physical.md`, `models/_shared/_shared__conceptual.md`, `docs/decisions.md`, `seeds/reference/shared/key_sets.csv` | Rewritten by `scripts/generate/*` from the permanent files. Each says so in its first lines. CI fails if one is out of date: change the source, then run the script |
+| **Generated**, never edited by hand | `_<domain>__definitions.md`, `_<domain>__physical.md`, `models/_shared/_shared__conceptual.md`, `docs/decisions.md`, `seeds/reference/shared/key_sets.csv`, `CODEOWNERS` | Rewritten by `scripts/generate/*` from the permanent files. Each says so in its first lines. CI fails if one is out of date: change the source, then run the script |
 | **Temporary**, deleted when done | Items in `requirements/`; a deprecated model version (`core_credential` v1) | Live only while the work they're about is under way, then go (below). CI fails on a requirement that's done |
 | **Build output**, never committed | `target/`, `logs/`, `*.duckdb`, `dbt_packages/` | Written by dbt, ignored by git, removed by `dbt clean` |
 
@@ -268,3 +268,9 @@ models and the marts.
 `python scripts/check/governance.py --measures` also prints how much of the project meets each rule.
 A new column with no class, a new entity with no term and a new test with no owner all fail the
 check: add what it asks for, in the place it names.
+
+Owners route reviews too. `CODEOWNERS` is generated from the owners in the metadata
+(`scripts/generate/codeowners.py`, `--check` in CI): a change to a domain's conceptual model asks
+its owners, the data architect and data governance to review it; a change to a seed the business
+owns asks its owner. Every owner the metadata names must be in `models/_shared/_shared__owners.yml`,
+with where their reviews go, or the script stops.

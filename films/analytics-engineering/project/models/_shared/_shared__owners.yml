@@ -1,0 +1,30 @@
+# Who each owner the project's metadata names is, and how a change reaches them. The metadata names
+# owners as people and offices know them ("Mei Tanaka, registrar's office"); this says where a
+# review request goes. scripts/generate/codeowners.py reads it, with the owners in the metadata,
+# and writes CODEOWNERS: a change to what an owner decides asks that owner to review it.
+#
+# Every owner the metadata names must be here, or the generator fails. The emails are the
+# university's, fictional. Not parsed by dbt (.dbtignore).
+
+owners:
+  - {name: "Mei Tanaka, registrar's office", email: mei.tanaka@uni.example}
+  - {name: "Registrar's office", email: registrar@uni.example}
+  - {name: "Registrar's office, with the faculties", email: registrar@uni.example}
+  - {name: "Census team, registrar's office", email: census@uni.example}
+  - {name: Learning team, email: learning@uni.example}
+  - {name: The faculties, email: faculties@uni.example}
+  - {name: Admissions office, email: admissions@uni.example}
+  - {name: HR, email: hr@uni.example}
+  - {name: Research office, email: research@uni.example}
+  - {name: Graduate research school, email: research.school@uni.example}
+  - {name: Alumni office, email: alumni@uni.example}
+  - {name: Planning, email: planning@uni.example}
+  - {name: Finance, email: finance@uni.example}
+  - {name: Wallet app team, email: wallet@uni.example}
+  - {name: "Noor, data architect", email: noor@uni.example}
+
+# Who reviews what isn't owned by a business owner (AGENTS.md, Who approves what).
+reviewers:
+  code: {name: "Jun Park, analytics engineer", email: jun.park@uni.example}
+  model: {name: "Noor, data architect", email: noor@uni.example}
+  governance: {name: "Yusuf Demir, data governance lead", email: data.governance@uni.example}

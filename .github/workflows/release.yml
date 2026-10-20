@@ -544,7 +544,7 @@ jobs:
           - *In the weeds of data crafting*, ten films for analytics engineers, from a question to tested and documented dbt models: \`declare-it-then-build-it.mp4\`, \`start-from-a-question.mp4\`, \`what-makes-it-the-same-one.mp4\`, \`one-row-of-what-and-when.mp4\`, \`promises-and-proofs.mp4\`, \`built-in-layers.mp4\`, \`who-owns-what.mp4\`, \`an-agent-on-the-team.mp4\`, \`written-once.mp4\`, \`end-to-end.mp4\` (English, with English and Spanish captions).
           - *The map before the data*, a series on enterprise architecture and why it matters for data, eight of eleven films: \`day-one.mp4\`, \`who-it-serves.mp4\`, \`why-it-moves.mp4\`, \`what-it-must-do.mp4\`, \`how-value-reaches-people.mp4\`, \`who-does-it.mp4\`, \`today-and-where-its-going.mp4\`, \`now-the-questions-appear.mp4\` (English, with English and Spanish captions).
           - *The same one, everywhere*, a series on master and reference data, nine films coming out one by one, such as \`one-person-many-roles.mp4\` (English, with English and Spanish captions).
-          - *Governance you can use*, a series on data governance that runs where the work happens, sixteen films coming out one by one, such as \`off-the-shelf.mp4\` (English, with English and Spanish captions).
+          - *Governance you can use*, a series on data governance that runs where the work happens, nineteen films coming out one by one, such as \`off-the-shelf.mp4\` (English, with English and Spanish captions).
 
           Rendered for this release, from commit $GITHUB_SHA: ${RENDERED:-none; every video is carried over from the previous release}.
 

@@ -101,8 +101,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "una regla como prueba, una aprobación en la revisión y una versión cuando cambia.",
 "Over nine more films, Yusuf takes the binder off the shelf, one kind of policy at a time.":
 "En nueve películas más, Yusuf baja la carpeta del estante, un tipo de política a la vez.",
-"Then six more show how to build them, with dbt and Databricks.":
-"Luego, seis más muestran cómo construirlas, con dbt y Databricks.",
+"Then three more design governance as a capability that lasts.":
+"Luego, tres más diseñan la gobernanza como una capacidad que perdura.",
+"And six show how to build each piece, with dbt and Databricks.":
+"Y seis muestran cómo construir cada pieza, con dbt y Databricks.",
 "A policy that doesn't run anywhere is a wish.":
 "Una política que no se ejecuta en ningún lado es un deseo."
 });

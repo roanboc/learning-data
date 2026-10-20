@@ -1,6 +1,6 @@
 # Data governance · Off the shelf: script
 
-*The script of the opening film of the data governance series (its title is still open), as made: 5:12, in ten chapters, in English, painted in watercolour, 17 October 2026. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 10. Made to read on a phone: on-screen text is at least 28 px in the frame, nothing sits under the captions, and no caption runs to three lines.*
+*The script of the opening film of the data governance series, *Governance you can use*, as made: 5:16, in ten chapters, in English, painted in watercolour, 17 October 2026; since 20 October 2026, its last chapter names the series' three parts. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 10. Made to read on a phone: on-screen text is at least 28 px in the frame, nothing sits under the captions, and no caption runs to three lines.*
 
 ## The promise
 
@@ -29,7 +29,7 @@ In 1215, Magna Carta promised one measure of wine, ale and corn for the whole ki
 | Speech bubbles in each office, and the answers pinned on Yusuf's board | Listening: what slows people down |
 | Three highlighters, green, gold and grey, on policy 12's page | The test for every line of the binder: runs in the work, a decision someone owns, or can go |
 | The data team's poster of the loop of ten steps, and gold pins on it | Where governance decisions enter the work |
-| Nine binders lighting up on the shelf; six cards on the data team's board | The series: nine films on kinds of policy, then six with the tools |
+| Nine binders lighting up on the shelf; three cards on Yusuf's board; six on the data team's | The series: nine films on kinds of policy, three on governance as a capability, then six with the tools |
 | A soft wash behind each person: gold, cyan, or warm umber | The business side, the technical side, people of the past |
 
 ## The look
@@ -120,17 +120,17 @@ The times are the film's, from its timeline. Words on screen are on paper, scree
 
 **On screen.** How we build · a question · the sources · the consumers · gaps · contracts · tests first · build in layers · validate · review · ship · written once · evolve · Another meeting? · a term · a classification · an owner · a contract · a rule · an approval · a version
 
-### 10 · The series · 4:49–5:12
+### 10 · The series · 4:49–5:16
 
-**Narration.** Over nine more films, Yusuf takes the binder off the shelf, one kind of policy at a time. Then six more show how to build them, with dbt and Databricks. A policy that doesn't run anywhere is a wish.
+**Narration.** Over nine more films, Yusuf takes the binder off the shelf, one kind of policy at a time. Then three more design governance as a capability that lasts. And six show how to build each piece, with dbt and Databricks. A policy that doesn't run anywhere is a wish.
 
-**Picture.** Yusuf's office: as the films are named, nine binders on the shelf light up and slide forward, one for each film to come, and he takes the first down: "Who decides". On "six more", the data team's board, close: "With the tools", and six cards pinned up one by one, each with its number, its tools' logos and its title. On the floor, Yusuf carries "Who decides" down the corridor, towards the offices where the work is done, and Jun looks up. The end card.
+**Picture.** Yusuf's office: as the films are named, nine binders on the shelf light up and slide forward, one for each film to come, and he takes the first down: "Who decides". On "three more", Yusuf's board, close: "Governance as a capability", and three cards pinned up one by one, each with its number, a pencil sign and its title (a capability above the three it holds, three steps end to end, a home and its copy). On "six", the data team's board, close: "With the tools", and six cards pinned up one by one, each with its number, its tools' logos and its title. On the floor, Yusuf carries "Who decides" down the corridor, towards the offices where the work is done, and Jun looks up. The end card.
 
-**On screen.** Who decides · With the tools · 11 · Governed in dbt · 12 · Governed in Unity Catalog · 13 · Meaning on the platform · 14 · Quality on the platform · 15 · Products in open formats · 16 · The marketplace · A policy that doesn't run anywhere is a wish. · Off the shelf · Film 1 of 16 · data governance · Learning Data
+**On screen.** Who decides · Governance as a capability · 11 · A capability, not a project · 12 · Who does what, end to end · 13 · Where each piece lives · With the tools · 14 · Governed in dbt · 15 · Governed in Unity Catalog · 16 · Meaning on the platform · 17 · Quality on the platform · 18 · Products in open formats · 19 · The marketplace · A policy that doesn't run anywhere is a wish. · Off the shelf · Film 1 of 19 · data governance · Learning Data
 
 ## Sound
 
-A new palette for a new series ([`source/tools/score.py`](source/tools/score.py)). A soft brass choir, warm and unhurried, holds the chords: D dorian in open fifths for the market town, F major once the measures hold, and for the university today. A low music box, small and close, marks the moments that land, and means the same thing all through: 1-3-5 rising for a rule, a copy and someone who checks (chapters 1 and 5), two notes a semitone apart for a question no one can answer yet, a note a little out of tune for each bushel. The series' mark, four notes, 1-5-4-8, on one horn with the music box above, plays under the title and the end card. One low pulse, leaning on the semitone at 96 beats a minute, runs under the two numbers that disagree, from "the same week" to "both are right". The effects are wooden knocks, paper, cork pins, rubber stamps and a mallet's thud, each at the moment its thing appears, all below about 2.5 kHz. The mix is -16.6 LUFS: the music sits 20.3 dB under the voice while it speaks and 19.8 dB under in the pauses, near *The map before the data*'s 21 and 18.5; the pulse sits 8 dB under the music; and with the voice silent, the sound above 4 kHz is 0.00013 of full scale (RMS).
+A new palette for a new series ([`source/tools/score.py`](source/tools/score.py)). A soft brass choir, warm and unhurried, holds the chords: D dorian in open fifths for the market town, F major once the measures hold, and for the university today. A low music box, small and close, marks the moments that land, and means the same thing all through: 1-3-5 rising for a rule, a copy and someone who checks (chapters 1 and 5), two notes a semitone apart for a question no one can answer yet, a note a little out of tune for each bushel. The series' mark, four notes, 1-5-4-8, on one horn with the music box above, plays under the title and the end card. One low pulse, leaning on the semitone at 96 beats a minute, runs under the two numbers that disagree, from "the same week" to "both are right". The effects are wooden knocks, paper, cork pins, rubber stamps and a mallet's thud, each at the moment its thing appears, all below about 2.5 kHz. The mix is -16.6 LUFS: the music sits 20.4 dB under the voice while it speaks and 19.8 dB under in the pauses, near *The map before the data*'s 21 and 18.5; the pulse sits 8 dB under the music; and with the voice silent, the sound above 4 kHz is 0.00014 of full scale (RMS).
 
 ## Pause and think
 
@@ -184,7 +184,7 @@ From `source/tools/pace.py`, 17 October 2026, with the recorded voice:
 | 7 · Listen first | 39.4 s | 133 | 70% | 2.8 s |
 | 8 · Where does it run? | 24.9 s | 132 | 64% | 2.8 s |
 | 9 · Where decisions enter | 31.0 s | 136 | 65% | 4.8 s (the pinned poster, wordless) |
-| 10 · The series | 22.7 s | 103 | 54% | 6.8 s (the end card, wordless) |
-| **Film** | **5:11.5** | **126** | **70%** | |
+| 10 · The series | 26.9 s | 109 | 58% | 6.8 s (the end card, wordless) |
+| **Film** | **5:15.8** | **126** | **70%** | |
 
-652 words. Every sentence has at least 0.5 s after it, and no stop inside a chapter lasts 2.5 s or more, apart from the three wordless moments. Chapter 3 is slow on purpose: two numbers, read aloud, need time to land.
+662 words. Every sentence has at least 0.5 s after it, and no stop inside a chapter lasts 2.5 s or more, apart from the three wordless moments. Chapter 3 is slow on purpose: two numbers, read aloud, need time to land.

@@ -124,9 +124,9 @@ def village(s, g=0.032, pan=-0.25, notes=None):
     for dt, m, gg in notes or [(0, 45, 0.9), (0.17, 52, 0.75), (0.34, 57, 0.75), (0.51, 60, 0.7), (1.05, 64, 0.9), (1.6, 62, 0.8),
                                (2.0, 60, 0.8), (2.36, 59, 0.8), (2.8, 57, 0.95), (2.8, 52, 0.55), (2.83, 45, 0.7)]:
         lute_(m, s + dt, g * gg, pan)
-def dulcian(m, start, sec, g=0.03, pan=0.0):
+def dulcian(m, start, sec, g=0.03, pan=0.0, cents=0.0):
     """a dulcian, the bassoon's ancestor, played softly: a warm double reed, gently tongued, and held steady, without vibrato"""
-    f = mf(m); x = tt(sec); ph = 2 * np.pi * f * x; s = np.zeros_like(x)
+    f = mf(m) * 2 ** (cents / 1200); x = tt(sec); ph = 2 * np.pi * f * x; s = np.zeros_like(x)
     for k in range(1, 17):
         fk = f * k
         if fk > 2200:
@@ -134,9 +134,11 @@ def dulcian(m, start, sec, g=0.03, pan=0.0):
         s += np.sin(k * ph + 0.5 * k) * (1 / k) * (0.3 + np.exp(-((fk - 480) / 220) ** 2) + 0.5 * np.exp(-((fk - 1150) / 300) ** 2))
     br = filt(noise(sec), 'band', (300, 1500)) * 0.03 * np.exp(-x * 3)
     put(norm(filt(((s + br) * env(sec, 0.12, min(0.9, sec * 0.4))).astype(np.float32), 'low', 1800)), start, g * NOTE, pan)
+PURE_D = -1.96  # the person's D, in cents from equal temperament: a pure fifth under A
 def person(s, g=0.03, pan=0.0):
-    """the person: the D, and the A above it, on the dulcian, the same two notes wherever someone stands in white paper as one person"""
-    dulcian(50, s, 3.0, g, pan); dulcian(57, s + 0.55, 2.4, g * 0.55, pan + 0.15)
+    """the person: the D, and the A above it, on the dulcian, the same two notes wherever someone stands in white paper as one person;
+    the D a pure fifth under the A, 2 cents low, so the D's third partial and the A's second are one note and don't beat"""
+    dulcian(50, s, 3.0, g, pan, PURE_D); dulcian(57, s + 0.55, 2.4, g * 0.55, pan + 0.15)
 def clarinet(m, start, sec, g=0.04, pan=0.0):
     """a soft clarinet: odd harmonics, a breath as it speaks, and held steady, without vibrato, as clarinettists play (the series'
     mark is always on it)"""
@@ -506,7 +508,7 @@ knock(tCome - 0.05, 0.016, P(380))
 ring(tCome + 0.2, 0.6, 0.014, P(476)); ring(tCome + 0.45, 0.6, 0.014, P(1096))
 for i, m in enumerate([50, 55, 57, 62]):
     harp_(m, B + 0.15 + i * 0.16, 0.018, -0.3 + 0.2 * i)
-dulcian(50, B + 0.9, 2.6, 0.02, 0.0)
+dulcian(50, B + 0.9, 2.6, 0.02, 0.0, PURE_D)
 
 # 10. Elsewhere: D minor. The hospital's card; two patients in white paper, each on a note of their own, a third apart;
 #     their wristbands; the bands slid together by mistake, and only the first one's note left; the test result slid to the wrong one,

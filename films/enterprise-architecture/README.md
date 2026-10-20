@@ -4,7 +4,7 @@
 
 A new enterprise architect, Tomás, joins a publicly owned energy utility and doesn't yet know how it works, so he doesn't yet know which questions it needs to answer. Over eleven films he builds a map of it, layer by layer, from why it exists down to what runs it, and then shows what that map does for data: the questions that matter, rules with a home, a change in strategy, and a map that people and agents can read. The plan is in the [proposal](proposal.md).
 
-**Status:** eight of eleven films are built and [on the site](https://roanboc.github.io/learning-data/enterprise-architecture/), each with three Pause and think questions. Labs and scenarios will come later, as one set for the whole series rather than one per film. On the site, the series sits under the topic *Enterprise architecture*.
+**Status:** the films come out one by one, and the table below lists those [on the site](https://roanboc.github.io/learning-data/enterprise-architecture/), each with three Pause and think questions. One set of labs and scenarios covers the whole series, rather than one per film ([below](#labs-and-scenarios)). On the site, the series sits under the topic *Enterprise architecture*.
 
 ## The films
 
@@ -20,6 +20,8 @@ A new enterprise architect, Tomás, joins a publicly owned energy utility and do
 | [Today, and where it's going](https://roanboc.github.io/learning-data/enterprise-architecture/today-and-where-its-going/) | Applications, technology and the path to a target | 5 min | 10 | 3 questions | [script](7-today-and-where-its-going/script.md) · [source](7-today-and-where-its-going/source/README.md) |
 | [Now the questions appear](https://roanboc.github.io/learning-data/enterprise-architecture/now-the-questions-appear/) | Decisions, questions and measures | 6 min | 11 | 3 questions | [script](8-now-the-questions-appear/script.md) · [source](8-now-the-questions-appear/source/README.md) |
 | [Rules with a home](https://roanboc.github.io/learning-data/enterprise-architecture/rules-with-a-home/) | Objects, owners and rules | 7 min | 11 | 3 questions | [script](9-rules-with-a-home/script.md) · [source](9-rules-with-a-home/source/README.md) |
+
+For the whole series, on the site: [12 labs](https://roanboc.github.io/learning-data/enterprise-architecture/labs/) and [25 scenarios](https://roanboc.github.io/learning-data/enterprise-architecture/scenarios/), in English and Spanish, from the words in [site/assets/enterprise-architecture/](../../site/assets/enterprise-architecture/).
 <!-- /films -->
 
 ## The look and the sound
@@ -41,3 +43,14 @@ Like the other series, each film is generated from code. The series keeps what's
 | `shared/src/page.html` | The standalone player page |
 | `shared/tools/lang.py`, `build.py` | Where everything lives, and what a film is made of; motion and the video's finishing pass come from *In the weeds of data crafting* |
 | `shared/tools/run.py` | Runs a tool on a film: this series' own `lang.py` and `build.py`, and *From words to data*'s other tools and instruments unchanged |
+
+## Labs and scenarios
+
+One set for the whole series, on two pages: [*Take it apart*](https://roanboc.github.io/learning-data/enterprise-architecture/labs/), twelve labs, one for each film and a twelfth on ArchiMate 4, and [*Make the call*](https://roanboc.github.io/learning-data/enterprise-architecture/scenarios/), 25 scenarios, each naming its film (`scenarios/#film-3` opens on one film's). Each film's Pause and think questions open its own lab. Films 9 to 11 are being made: their labs and scenarios follow the [approved draft](proposal.md#9-rules-with-a-home), say the film is coming, and get their chapter (`chapter`, now `null`) when the film is on the site.
+
+- **The engine** is `site/assets/enterprise-architecture/learn.js` and `learn.css`. It draws with the series' own components, from *Now the questions appear*'s player (`bundle` in the series' entry in `site-tools/build_series.py`), and has seven kinds of lab: `deal` (deal cards onto a picture: the layers, a canvas, a chain, systems under capabilities, the skipper's test, ArchiMate 4), `change` (survive a restructure), `night` (the storm night's rule and its facts), `gate` (what crosses the wall), `rule` (a rule with a home, and a case that must fail), `walk` (a change walked down the layers) and `navigator` (the map's own checks, then its agent).
+- **The words** are in `learn.en.js` and `learn.es.js`, with the same keys, ids and numbers. Every word a picture draws comes from them. The Spanish follows the films' Spanish captions (capacidad, flujo de valor, impulsor, punto de conexión, electrodependiente, cuadrilla, comercialización, atribuciones), and the map's IDs (`CAP-004`, from *A map people and agents can read*) stay as they are.
+- **ArchiMate 4** is the standard of films 9 to 11, which don't say what changed from version 3.2. The lab *Redraw it in ArchiMate 4* and five scenarios do: the contract as a business object, a gap as an assessment, a constraint as a requirement, an AI agent as software assigned to a role where film 6 drew an actor, an interaction as a process a collaboration performs, a rule's limit kept as a rule rather than drawn as a multiplicity, and why the series keeps "layers" for its six while version 4 says domains.
+- **Progress** stays in the visitor's browser, under `ld-enterprise-architecture`: `visited` (the labs) and `quiz` (the scenarios, numbered by film and place: 31 is the first of *Why it moves*).
+- **Checks.** `site-tools/check_site.py` checks that both languages have the same labs and scenarios, each lab on one of its film's chapters and each scenario on a lab. `site-tools/smoke.py --only series-learn` opens every lab from its link and plays it through at 320 px in both languages, with `site-tools/smoke/enterprise-architecture.js`, then answers every scenario.
+- **When a film lands:** set its lab's `chapter` in both files (film 9's lab to `split`, *Two rules, not one*; film 10's to `walk`, *Down every layer*; film 11's to `text`, *From slides to text*), check the names and numbers against its script, and run `python site-tools/build_series.py`.

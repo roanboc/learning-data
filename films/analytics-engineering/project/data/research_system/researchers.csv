@@ -1,0 +1,4 @@
+member_id,display_name,email,staff_id,country_of_birth,_valid_from,_valid_to,_is_current,_loaded_at
+R-0457,A. Ruiz,ana.ruiz@uni.example,E-1093,ES,2024-11-01 02:00:00,,true,2024-11-01 02:00:00
+R-2961,M. Webb,marcus.webb@uni.example,E-4529,GB,2025-02-26 02:00:00,,true,2025-02-26 02:00:00
+R-3082,L. Nguyen,linh.nguyen@uni.example,E-4417,VN,2026-02-25 02:00:00,,true,2026-02-25 02:00:00

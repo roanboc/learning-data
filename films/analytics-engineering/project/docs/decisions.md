@@ -81,6 +81,7 @@ What was decided, why, and who decided, for every source, domain and consumer, a
 | ID | Scope | Decision | Why | Who | When | Status |
 |---|---|---|---|---|---|---|
 | [DEC-PRJ-02](../models/_shared/_shared__decisions.yml) | project | **Every core model is versioned.** Every core model is versioned, from version 1, and consumers pin the version they read. | A breaking change then arrives as a new version beside the old one, with a deprecation date, not as a surprise. | Noor, data architect | 10 Oct 2026 | agreed |
+| [DEC-PRJ-12](../models/_shared/_shared__decisions.yml) | project | **Governance's rules run as a check on every pull request.** Four of data governance's rules run as a check, scripts/check/governance.py, in CI and before every pull request: an owner on every domain, entity and shared model; a glossary term, or governance's confirmation that there's none, for every core entity; every column of a public model or mart classified as direct, pseudonymous or none; every test with an owner and a quality dimension. Data governance owns what the rules ask; the data architect owns the check's code; each owner named in the metadata answers for their own. | A policy that lives only in a document isn't followed. Written into the work, it is checked on every change, at the moment someone can still fix it, and it measures itself. | Yusuf Demir, data governance lead, with Noor, data architect | 20 Oct 2026 | agreed |
 | [DEC-STU-07](../models/core/student/_student__decisions.yml) | domain `student` | **core_credential version 2 replaces is_revoked with status.** core_credential version 2 replaces is_revoked with status (valid, expired or revoked). Version 1 stays until 31 March 2027, built from version 2. | A credential can also expire, and a true/false can't say so. Consumers get time to move; the exposures say who to tell. | Noor and Mei Tanaka Told: Wallet app team. | 13 Oct 2026 | agreed |
 
 ## By scope and step
@@ -89,7 +90,7 @@ How many decisions each log holds at each step. A domain's project, when it has 
 
 | Scope | `scope` | `source_reality` | `consumer_output` | `gaps_and_contracts` | `tests` | `build` | `written_once` | `operate_and_evolve` |
 |---|---|---|---|---|---|---|---|---|
-| project | 1 | 1 |  |  |  | 4 | 4 | 1 |
+| project | 1 | 1 |  |  |  | 4 | 4 | 2 |
 | domain `course` |  |  |  |  |  | 1 |  |  |
 | domain `person` | 3 |  |  |  |  |  |  |  |
 | domain `student` | 4 | 2 |  | 1 |  | 1 |  | 1 |

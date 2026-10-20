@@ -139,3 +139,20 @@ decisions:
     status: agreed
     relates_to: [DEC-PRJ-04]
     implemented_in: [_course__conceptual.yml, definitions.py, sync-the-glossary]
+
+  - id: DEC-PRJ-12
+    step: operate_and_evolve
+    title: Governance's rules run as a check on every pull request
+    text: 'Four of data governance''s rules run as a check, scripts/check/governance.py, in CI and before every
+      pull request: an owner on every domain, entity and shared model; a glossary term, or governance''s
+      confirmation that there''s none, for every core entity; every column of a public model or mart
+      classified as direct, pseudonymous or none; every test with an owner and a quality dimension. Data
+      governance owns what the rules ask; the data architect owns the check''s code; each owner named in
+      the metadata answers for their own.'
+    why: A policy that lives only in a document isn't followed. Written into the work, it is checked on every
+      change, at the moment someone can still fix it, and it measures itself.
+    decided_by: Yusuf Demir, data governance lead, with Noor, data architect
+    decided_on: 2026-10-20
+    status: agreed
+    relates_to: [DEC-PRJ-04, DEC-PRJ-11]
+    implemented_in: [governance.py, builtin.sql, dbt_project.yml]

@@ -238,7 +238,7 @@ to itself, and they meet only on the public core. `examples/planning/` sketches 
 - `meta.domain`: the domain that owns the model, seed or source: `registrar`, `learning`, `hr`, `research` or `alumni` (application domains: the teams whose systems are the sources), `person`, `student` or `course` (data domains), `planning`, `wallet` or `finance` (business domains), or `shared`.
 - `meta.glossary_term`: the term in the domain's conceptual model a model or key holds.
 - `meta.limitations` on a model or a source table: what anyone using it needs to know and can't change, as `[{id: LIM-<SCOPE>-<nn>, text}]`, with `was:` naming the gap it came from, if any. An accepted gap ends here, with the decision that accepted it in the scope's log.
-- `meta.personal_data` on columns: `direct` (identifies a person: name, email, student ID, or a key that contains one) or `pseudonymous` (a hash of one). A column with neither holds no personal data.
+- `meta.personal_data` on every column of a public model or mart: `direct` (identifies a person: name, email, student ID, or a key that contains one), `pseudonymous` (a hash of one) or `none` (identifies no one). Elsewhere, a column with neither holds no personal data.
 - A description used in more than one place is a doc block, written once, in the folder of the domain that owns it (`_<domain>__columns.md`), or in `models/_shared/_shared__columns.md` when every domain shares it. A definition is written once, in the domain's conceptual model, or taken from the glossary term it names in `source:`.
 
 ### Definitions from the business glossary
@@ -251,3 +251,20 @@ hold, such as keys, identity rules and history. An entity the glossary doesn't d
 in the conceptual model, once governance confirms there's no term for it. The copy flows one way,
 from the glossary in: `skills/sync-the-glossary/` compares them on a schedule, and a changed term
 arrives as a pull request that says what it touches, for the owner to approve (DEC-PRJ-11).
+
+## Governance
+
+Data governance's rules for the project run as a check, `scripts/check/governance.py`, in CI and
+before every pull request (DEC-PRJ-12). They apply to what other teams read: the public core
+models and the marts.
+
+| Rule | What to add | Where |
+|---|---|---|
+| An owner | `owner:` on every domain, entity, kind and relationship; `meta.owner` and `meta.domain` on every public model and mart | The map (`_shared__conceptual.yml`), each domain's conceptual model, the model's YAML |
+| A glossary term, or a confirmed absence | `source:` with the term data governance named (DEC-PRJ-11), or `no_glossary_term: {confirmed_by, confirmed_on}` once governance confirms there's none; `meta.glossary_term` on every public model | Each core domain's conceptual model, the model's YAML |
+| Classified columns | `meta.personal_data`: `direct`, `pseudonymous` or `none` | Each column of a public model or mart |
+| Tests with an owner and a dimension | `meta.owner`: the owner of the data it checks; `meta.dimension`: completeness, uniqueness, validity, consistency, accuracy or timeliness, DAMA's six | Owners by folder in `dbt_project.yml`, or the test's own `meta` when its data has another owner; dimensions once per kind of test, in `tests/generic/` (dbt's four built-in tests are in `builtin.sql`, running dbt's own SQL), or the test's own `meta` |
+
+`python scripts/check/governance.py --measures` also prints how much of the project meets each rule.
+A new column with no class, a new entity with no term and a new test with no owner all fail the
+check: add what it asks for, in the place it names.

@@ -64,6 +64,7 @@ python scripts/generate/definitions.py --check   # the doc blocks match the conc
 python scripts/generate/diagrams.py --check      # the physical diagrams match the YAML
 python scripts/generate/decisions.py --check     # the decision logs are valid and indexed
 python scripts/check/requirements.py             # only open requirements, each saying when it's done
+python scripts/check/governance.py               # an owner, a glossary term, classified columns, owned tests
 ```
 
 Say in the pull request what you changed, why, what you checked, and the evidence.

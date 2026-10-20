@@ -60,6 +60,10 @@ def block(name, title, item):
     if source:
         lines.append(f"- Source of the definition: the term {source['term']} in {one_line(source['glossary'])}, "
                      f"named by {source['named_by']}; synced on {source['synced_on']}.")
+    absent = item.get("no_glossary_term")
+    if absent:
+        lines.append(f"- Not in the business glossary: {absent['confirmed_by']} confirmed there's no term for it, "
+                     f"on {absent['confirmed_on']}.")
     lines.append("{% enddocs %}")
     return "\n".join(lines)
 

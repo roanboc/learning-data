@@ -82,7 +82,9 @@ scene("kenya",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
     if(dp>0)d10_trace(ctx,[[D10_KX-24,cy(1)],[D10_KX-24,cy(5)]],dp,STR,{lw:5});
     if(t>tLk+1.0)d10_trace(ctx,[[D10_KX-24,cy(5)],[D10_KX-24,cy(5)+40],[900,800],[760,760],[668,700]],clamp((t-tLk-1.0)/0.7,0,1),STR,{lw:5,a:1-gu});
     arrive(ctx,1310,810,t,w("link","every layer")+0.5,()=>withA(ctx,1-fin(t,tG+1.0,0.5),()=>tag(ctx,1310,810,"every layer, down to the counter",STR,{align:"center",size:30})),{dy:8});
-    if(fl>0&&fl<1)sticky(ctx,lerp(nx,D10_KX+cw/2,fl),lerp(ny,cy(1),fl),lerp(nW(nz),cw,fl),lerp(nz*2.2,52,fl),D10_NOTE,{col:NOTEC[0],edge:STR,glass:fl,size:lerp(nz,28,fl),rot:-0.015});});
+    // on its way into the layer, the note's words become the chip's halfway, and the box is never narrower than its words on one line
+    if(fl>0&&fl<1){const mt=fl<0.5?D10_NOTE:D10_CHIP,ms=lerp(nz,28,fl);
+      sticky(ctx,lerp(nx,D10_KX+cw/2,fl),lerp(ny,cy(1),fl),Math.max(lerp(nW(nz),cw,fl),tw(ctx,mt,ms,700)+34),lerp(nz*2.2,52,fl),mt,{col:NOTEC[0],edge:STR,glass:fl,size:ms,rot:-0.015});}});
   if(fl<=0)arrive(ctx,nx,ny,t,tS+0.1,()=>sticky(ctx,nx,ny,nW(nz),nz*2.2,D10_NOTE,{col:NOTEC[0],size:nz,rot:-0.015,src:nSa>0.01?nSrc:null,srcA:nSa}),{dy:-24,from:1.06});
   // the counter: cash into mobile money at an agent's; then, close, upcountry, the man's family takes the cash he sent
   const coA=fin(t,tA+0.1,0.6),gv=clamp((t-w("link","where people")+0.3)/4.6,0,1);
@@ -174,7 +176,8 @@ scene("walk",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   // the camera: the whole column; then each layer in turn, close; then back, with the column on the left and who must agree beside it
   const cam=d10_camAt(t,[[0,960,1207,0.46],[L[0]-0.5,960,D10_LY(0)+250,1.0,1.8],[L[2]-0.6,960,D10_LY(1)+250,1.0,1.6],[L[3]-0.6,960,D10_LY(2)+250,1.0,1.6],[L[4]-0.6,960,D10_LY(3)+250,1.0,1.6],[L[5]-0.6,960,D10_LY(4)+330,1.0,1.6],[tO+0.6,2060,1207,0.46,2.2]]);
   cam.z*=1+0.02*Math.sin(Math.PI*clamp(t/sc.dur,0,1));
-  const D=cam.z<0.85?1:0,lv=t<L[0]?-1:t<L[2]?0:t<L[3]?1:t<L[4]?2:t<L[5]?3:t<tO?5:5;
+  // texture while the camera moves between the whole column and a layer: the text is read only when it settles, close
+  const D=cam.z<0.99?1:0,lv=t<L[0]?-1:t<L[2]?0:t<L[3]?1:t<L[4]?2:t<L[5]?3:t<tO?5:5;
   // how far down the light has run: to the top layer as the walk begins, then a layer at a time
   const yRun=t<w("walk","layer by")?lerp(-400,D10_LY(0)+20,ease(clamp((t-tW-0.4)/2.0,0,1))):D10_LY(0)+20+[L[2],L[3],L[4],L[5],w("runs","secure exchange")].reduce((s_,tl)=>s_+330*ease(clamp((t-tl+0.6)/1.2,0,1)),0)+(D10_LH-20)*ease(clamp((t-B+0.6)/1.4,0,1));
   ctx.save();d10_camApply(ctx,cam);

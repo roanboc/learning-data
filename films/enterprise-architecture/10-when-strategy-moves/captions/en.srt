@@ -7,197 +7,201 @@ Kenya, 2007. A man working in Nairobi sends part of his wages to his family, upc
 The money goes with a bus driver or a friend, and not all of it arrives.
 
 3
-00:00:15,347 --> 00:00:21,939
-In March, a mobile network launches M-Pesa: money sent from a phone, confirmed by a text message.
+00:00:15,347 --> 00:00:19,970
+A mobile network sets a new strategy: to carry money, as well as calls.
 
 4
-00:00:23,239 --> 00:00:30,962
-It began as a pilot for repaying small loans. People used it to send money to others, and sending money home became the plan.
+00:00:21,470 --> 00:00:27,127
+In March, it launches M-Pesa: money sent from a phone, confirmed by a text message.
 
 5
-00:00:32,462 --> 00:00:36,296
-The idea fits in a sentence. Making it real takes much more.
+00:00:28,427 --> 00:00:32,369
+That strategy fits in a sentence. Making it real takes much more.
 
 6
-00:00:37,596 --> 00:00:41,869
+00:00:33,669 --> 00:00:37,942
 The central bank lets it run, with customers' money held in trust at a bank.
 
 7
-00:00:42,969 --> 00:00:48,106
+00:00:39,042 --> 00:00:44,179
 Shops that sell airtime become agents, changing cash into mobile money and back.
 
 8
-00:00:49,206 --> 00:00:54,700
+00:00:45,279 --> 00:00:50,773
 Customers register with an identity card, and a short menu works on the simplest phones.
 
 9
-00:00:56,000 --> 00:01:01,293
-A change of strategy reaches every layer, down to the shop counter, where people meet it.
+00:00:52,073 --> 00:00:57,106
+That one sentence reaches every layer, down to the shop counter, where people meet it.
 
 10
-00:01:08,393 --> 00:01:12,642
+00:01:04,206 --> 00:01:08,455
 Tomás's note asks what a change in strategy means for the data.
 
 11
-00:01:13,942 --> 00:01:17,756
+00:01:09,755 --> 00:01:13,569
 In November, the government, the utility's owner, sends a direction.
 
 12
-00:01:18,456 --> 00:01:26,785
+00:01:14,269 --> 00:01:22,598
 From the first of July, every eligible household gets a social tariff, a discount on its bill, automatically, with no forms.
 
 13
-00:01:28,385 --> 00:01:34,850
+00:01:24,198 --> 00:01:30,663
 Who is eligible is known to another organisation, the social services agency, not to the utility.
 
 14
-00:01:36,350 --> 00:01:39,499
+00:01:32,163 --> 00:01:35,312
 The minister's office asks what it will take, by tomorrow.
 
 15
-00:01:42,199 --> 00:01:44,923
-Tomás walks it down the map, layer by layer.
+00:01:38,012 --> 00:01:41,035
+As with M-Pesa, the sentence is the easy part.
 
 16
-00:01:46,023 --> 00:01:52,858
-In motivation: a new driver, the direction, under a goal the utility already has, keep bills affordable.
+00:01:42,335 --> 00:01:45,059
+Tomás walks it down the map, layer by layer.
 
 17
-00:01:54,158 --> 00:01:57,683
-And an outcome to check: eligible households on the tariff.
+00:01:46,159 --> 00:01:52,994
+In motivation: a new driver, the direction, under a goal the utility already has, keep bills affordable.
 
 18
-00:01:59,183 --> 00:02:05,231
-In strategy, three capabilities: selling energy, serving customers, and meeting obligations.
+00:01:54,294 --> 00:01:57,819
+And an outcome to check: eligible households on the tariff.
 
 19
-00:02:06,531 --> 00:02:12,539
-In business: a new product, a new step in billing, and a new partner, the agency, with an agreement.
+00:01:59,319 --> 00:02:05,367
+In strategy, three capabilities: selling energy, serving customers, and meeting obligations.
 
 20
-00:02:13,839 --> 00:02:18,325
-In information: a new business object, eligibility, with its dates.
+00:02:06,667 --> 00:02:12,675
+In business: a new product, a new step in billing, and a new partner, the agency, with an agreement.
 
 21
-00:02:19,625 --> 00:02:25,840
-And in what runs it: the billing system, the customer system, and a secure exchange with the agency.
+00:02:13,975 --> 00:02:18,461
+In information: a new business object, eligibility, with its dates.
 
 22
-00:02:27,140 --> 00:02:32,288
-Every element it touches has an owner. So the walk is also the list of who must agree.
+00:02:19,761 --> 00:02:25,976
+And in what runs it: the billing system, the customer system, and a secure exchange with the agency.
 
 23
-00:02:37,788 --> 00:02:46,274
-The agency already knows who is eligible. Once only, as in Tartu: don't make a household prove what the government already knows.
+00:02:27,276 --> 00:02:32,424
+Every element it touches has an owner. So the walk is also the list of who must agree.
 
 24
-00:02:47,874 --> 00:02:57,520
-So the agreement asks for the least. The utility sends its account holders' matching details. The agency answers only: eligible, from this date.
+00:02:37,924 --> 00:02:46,410
+The agency already knows who is eligible. Once only, as in Tartu: don't make a household prove what the government already knows.
 
 25
-00:02:59,020 --> 00:03:01,025
-Never which support a household gets.
+00:02:48,010 --> 00:02:57,656
+So the agreement asks for the least. The utility sends its account holders' matching details. The agency answers only: eligible, from this date.
 
 26
-00:03:02,525 --> 00:03:06,010
-And the agreement starts today. It will take longer than the code.
+00:02:59,156 --> 00:03:01,161
+Never which support a household gets.
 
 27
-00:03:08,710 --> 00:03:14,865
-Tomás's first draft sends the list to the network too, to take the discount off the network charge.
+00:03:02,661 --> 00:03:07,538
+And the agreement starts today: agreeing it will take longer than changing the systems.
 
 28
-00:03:16,365 --> 00:03:22,276
-Ama checks it against the third principle: customer information stays with the business that collected it.
+00:03:10,238 --> 00:03:16,393
+Tomás's first draft sends the list to the network too, to take the discount off the network charge.
 
 29
-00:03:23,576 --> 00:03:26,302
-The list would cross the wall. She crosses it out.
+00:03:17,893 --> 00:03:23,804
+Ama checks it against the third principle: customer information stays with the business that collected it.
 
 30
-00:03:27,902 --> 00:03:34,279
-The decision is written down, with why: retail applies the whole discount, and nothing new crosses the wall.
+00:03:25,104 --> 00:03:27,830
+The list would cross the wall. She crosses it out.
 
 31
-00:03:35,879 --> 00:03:40,540
-Checked against the principles first, a hard call goes the same way every time.
+00:03:29,430 --> 00:03:35,807
+The decision is written down, with why: retail applies the whole discount, and nothing new crosses the wall.
 
 32
-00:03:43,240 --> 00:03:47,917
-Eligibility brings new rules, and each gets a home, an owner and a reason.
+00:03:37,407 --> 00:03:42,068
+Checked against the principles first, a hard call goes the same way every time.
 
 33
-00:03:49,217 --> 00:03:55,137
-The discount applies to every bill from the date the agency gives. Its reason is the direction.
+00:03:44,768 --> 00:03:49,445
+Eligibility brings new rules, and each gets a home, an owner and a reason.
 
 34
-00:03:56,637 --> 00:04:01,147
-An answer is kept only until the next match. Its reason is the agreement.
+00:03:50,745 --> 00:03:56,665
+The discount applies to every bill from the date the agency gives. Its reason is the direction.
 
 35
-00:04:02,647 --> 00:04:08,789
-And only billing reads it. In the catalogue, the call centre sees on the social tariff, and nothing more.
+00:03:58,165 --> 00:04:02,675
+An answer is kept only until the next match. Its reason is the agreement.
 
 36
-00:04:11,489 --> 00:04:17,670
-Then down to the counter, where households meet it: a line on the bill, a letter, and the call centre's answer.
+00:04:04,175 --> 00:04:10,317
+And only billing reads it. In the catalogue, the call centre sees on the social tariff, and nothing more.
 
 37
-00:04:19,570 --> 00:04:27,447
-Farah asks who the match will miss: tenants whose account is in a landlord's name. The agency knows them; the utility doesn't.
+00:04:13,017 --> 00:04:19,198
+Then down to the counter, where households meet it: a line on the bill, a letter, and the call centre's answer.
 
 38
-00:04:29,547 --> 00:04:35,092
-Found now, not in the first bills, they get a second route: an application, later in the year.
+00:04:21,098 --> 00:04:28,975
+Farah asks who the match will miss: tenants whose account is in a landlord's name. The agency knows them; the utility doesn't.
 
 39
-00:04:38,192 --> 00:04:44,069
-Bills now carry a discount line, so the accounts and bills product changes what amount due means.
+00:04:31,075 --> 00:04:36,620
+Found now, not in the first bills, they get a second route: an application, later in the year.
 
 40
-00:04:45,669 --> 00:04:52,805
-Its contract isn't changed in place. Version two goes beside version one, with a date for the old one to go.
+00:04:39,720 --> 00:04:48,814
+Bills now carry a discount line, so the accounts and bills product gets a new column for it. Amount due keeps its meaning: what the household pays.
 
 41
-00:04:54,405 --> 00:05:02,631
-Lineage finds everyone who reads it: a measure, a report for the regulator, and a collections job. Each owner is told first.
+00:04:50,714 --> 00:05:00,804
+A new column breaks nothing that reads it, so the contract stays at version one. A second version is the last resort, for removing or redefining a column.
 
 42
-00:05:04,331 --> 00:05:10,516
-The exchange with the agency gets its own contract too: what goes, what comes back, and how often.
+00:05:02,704 --> 00:05:12,037
+Lineage finds everyone who reads it: a measure, a report for the regulator, and a collections job. Each owner hears of it before the first bills.
 
 43
-00:05:13,216 --> 00:05:17,408
-The path is drawn in plateaus, in the order their dependencies allow.
+00:05:13,937 --> 00:05:20,122
+The exchange with the agency gets its own contract too: what goes, what comes back, and how often.
 
 44
-00:05:18,708 --> 00:05:27,128
-By the first of July: the match, the bills and the call centre's answer. By December: the second route. Next year: the outcome, measured.
+00:05:22,822 --> 00:05:27,014
+The path is drawn in plateaus, in the order their dependencies allow.
 
 45
-00:05:29,828 --> 00:05:37,503
-By the morning, the minister's office has one page: what changes, who owns each change, what's ready by July, and what isn't.
+00:05:28,314 --> 00:05:36,734
+By the first of July: the match, the bills and the call centre's answer. By December: the second route. Next year: the outcome, measured.
 
 46
-00:05:39,103 --> 00:05:44,027
-What a mapped organisation answers in a day, an unmapped one finds out in production.
+00:05:39,434 --> 00:05:47,109
+By the morning, the minister's office has one page: what changes, who owns each change, what's ready by July, and what isn't.
 
 47
-00:05:46,727 --> 00:05:54,224
-On the first of July, the first bills carry the discount. About nine in ten eligible households get it without asking.
+00:05:48,709 --> 00:05:53,633
+What a mapped organisation answers in a day, an unmapped one finds out in production.
 
 48
-00:05:55,724 --> 00:06:04,504
-And the head of retail confirms the measure Farah has asked for since 2024: households falling behind. Now the goal can be steered.
+00:05:56,333 --> 00:06:03,830
+On the first of July, the first bills carry the discount. About nine in ten eligible households get it without asking.
 
 49
-00:06:06,104 --> 00:06:13,130
-In Kenya, within a few years, most households had someone using M-Pesa, and money sent home arrived in minutes.
+00:06:05,330 --> 00:06:14,110
+And the head of retail confirms the measure Farah has asked for since 2024: households falling behind. Now the goal can be steered.
 
 50
-00:06:14,830 --> 00:06:24,607
-Tomás's note has an answer: a change in strategy lands in every layer, and walked down the map, it's a list of owners, rules and contracts, in order.
+00:06:15,710 --> 00:06:22,736
+In Kenya, within a few years, most households had someone using M-Pesa, and money sent home arrived in minutes.
 
 51
-00:06:26,207 --> 00:06:31,599
+00:06:24,436 --> 00:06:34,213
+Tomás's note has an answer: a change in strategy lands in every layer, and walked down the map, it's a list of owners, rules and contracts, in order.
+
+52
+00:06:35,813 --> 00:06:41,205
 But a map that's used every week goes stale. Next: a map people and agents can read.

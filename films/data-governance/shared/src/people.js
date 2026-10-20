@@ -1,10 +1,11 @@
 /* ===== The data governance series: its people =====
-   The cast of When things go wrong and In the weeds of data crafting (Mei, Sam, David, Jun), and two more: Yusuf Demir, the
-   university's new data governance lead, and Clara Jensen, in Planning. They're drawn the way the master and reference data series
-   draws people (its shared/src/people.js, bundled as it is): a pencil line, paint in the paper's grain, and behind each person a soft
-   wash of their side's colour, gold for the business side and cyan for the technical side. The people of the past get a warm umber
-   wash, and wear their own time: tunics and gowns of wool in 1215, a furred gown in 1497, a frock coat and a top hat, or a waistcoat
-   and an apron, in the 1880s. People can hold things (a charter, a jug, a binder, a notebook, a hammer) and face either way. */
+   The cast of When things go wrong and In the weeds of data crafting (Mei, Sam, David, Jun), and three more: Yusuf Demir, the
+   university's new data governance lead, Clara Jensen, in Planning, and Anil Kurian, an analyst in the Faculty of Health. They're
+   drawn the way the master and reference data series draws people (its shared/src/people.js, bundled as it is): a pencil line, paint
+   in the paper's grain, and behind each person a soft wash of their side's colour, gold for the business side and cyan for the
+   technical side. The people of the past get a warm umber wash, and wear their own time: tunics and gowns of wool in 1215, a furred
+   gown in 1497, a frock coat and a top hat, or a waistcoat and an apron, in the 1880s. People can hold things (a charter, a jug, a
+   binder, a notebook, a hammer) and face either way. */
 
 // the wash behind people of the past, and the colours of what people hold
 const GV_PAST=[184,146,104],GV_HOLD={teal:[64,150,146],walnut:[156,110,74],navy:[66,86,128],gold:[232,176,52]};
@@ -15,6 +16,9 @@ PEOPLE.yusuf={name:"Yusuf Demir",role:"Data governance lead",side:"Business",doe
 PEOPLE.clara={name:"Clara Jensen",role:"Planning",side:"Business",does:"uses",edge:BIZ,seed:16,
   skin:[238,204,180],hair:{style:"bob",c:[170,120,70],streak:[214,176,120]},earrings:[255,214,140],
   top:{kind:"sweater",c:[226,160,70]},bottom:{c:[60,64,84]},shoe:[60,46,40],build:{sh:66,hip:60,h:0.96}};
+PEOPLE.anil={name:"Anil Kurian",role:"Faculty of Health",side:"Business",does:"uses",edge:BIZ,seed:17,
+  skin:[156,106,78],hair:{style:"cropped",c:[30,26,26]},
+  top:{kind:"cardigan",c:[128,74,96],inner:[232,234,238]},bottom:{c:[112,100,82]},shoe:[58,42,34],build:{sh:72,hip:60,h:0.99}};
 
 // ---- clothes of other times: the shared engine stays as it is; these wrap its torso and head for their own kinds only ----
 const _govTorso=torso,_govHead=head;

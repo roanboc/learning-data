@@ -361,6 +361,16 @@ jobs:
                        "films/enterprise-architecture/shared", "films/analytics-engineering/shared", "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js",
                        "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
                        "films/a-sharper-sketch/source/src",
+                       "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts"]},
+            {"name": "Lists everyone uses", "key": "lists-everyone-uses-en",
+             "dir": "films/master-and-reference-data/5-lists-everyone-uses/source", "lang": "en",
+             "player": "dist/film.js", "site_player": "site/assets/lists-everyone-uses/film.js",
+             "video": "dist/lists-everyone-uses.mp4", "file": "lists-everyone-uses.mp4",
+             "captions": [["films/master-and-reference-data/5-lists-everyone-uses/captions/en.srt", "lists-everyone-uses.en.srt"], ["films/master-and-reference-data/5-lists-everyone-uses/captions/es.srt", "lists-everyone-uses.es.srt"]],
+             "paths": ["films/master-and-reference-data/5-lists-everyone-uses/source", ":(exclude)films/master-and-reference-data/5-lists-everyone-uses/source/src/i18n/es/captions.js", "films/master-and-reference-data/shared",
+                       "films/enterprise-architecture/shared", "films/analytics-engineering/shared", "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js",
+                       "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
+                       "films/a-sharper-sketch/source/src",
                        "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts"]}
           ]
           EOF

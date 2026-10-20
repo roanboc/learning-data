@@ -299,4 +299,5 @@ On Databricks, the class goes to the platform too (DEC-PRJ-13, `macros/governanc
 after each table builds, every classified column gets a Unity Catalog tag, `personal_data`, with its
 class; and when the var `personal_data_readers` names a group, each column of direct personal data
 gets a mask, so only that group sees the value. Nothing repeats the class: change it in the YAML and
-the next build changes the tag. DuckDB has no tags or masks, and leaves both out.
+the next build changes the tag. DuckDB has no tags or masks, and leaves both out. How to set it up,
+with one policy by tag instead of a mask per column, and the product catalogue: `docs/databricks-governance.md`.

@@ -5,11 +5,11 @@
    witnesses' record, the judges and their bench; the two shelves of master and reference data; the master record and its stamp;
    the university's systems, their records and the pairs a duplicate check proposes; records side by side, the score's gauge and
    the steward's decision cards; the AI helper's note; a balance of a false merge against a missed match; hospital wristbands; and
-   the dbt and Databricks cards. Every name starts with m2_ (this film) or M2_. */
+   the cards of the pairs, the queue, its test and the links. Every name starts with m2_ (this film) or M2_. */
 
-// the logos (dbt, Databricks) and the Vietnamese letters (fonts.js) load with everything else before the film starts: the series'
-// prepAssets (post.js) doesn't load them
-const m2_prep0=prepAssets;prepAssets=async function(){await Promise.all([m2_prep0(),loadLogos(),m2_fontsVi()]);};
+// the Vietnamese letters (fonts.js) load with everything else before the film starts: the series' prepAssets (post.js) doesn't load
+// them
+const m2_prep0=prepAssets;prepAssets=async function(){await Promise.all([m2_prep0(),m2_fontsVi()]);};
 
 /* ---------- the places ---------- */
 // Artigat: the near ground, where Martin's house stands and the road runs; the rise the village stands on; the far hills
@@ -426,9 +426,10 @@ function m2_band(ctx,x,y,name,mrn){wc_panel(ctx,x,y,560,92,{kind:"card",seed:mrn
   wc_T(ctx,name,x+28,y+40,{w:800,size:30,col:WC_DARK});wc_T(ctx,mrn,x+28,y+78,{w:500,size:28,f:"mono",col:WC_INK});}
 
 /* ---------- 11. decided once ---------- */
-// a card with a tool's logo, its name, and lines of code or rows, in mono; returns its height
-function m2_tool(ctx,x,y,w,logoK,name,file,lines,o){o=o||{};const h=o.h||(150+lines.length*46);wc_panel(ctx,x,y,w,h,{kind:"sheet",seed:name.length+3});
-  const lw=logo(ctx,logoK,x+30,y+28,46);wc_T(ctx,name,x+44+Math.max(lw,46),y+66,{w:800,size:36,col:WC_DARK});
+// a card with its name, the file or table it is in, and lines of code or rows, in mono; returns its height. No tool's logo: the series
+// names no tool as the home of its rules (its Decided table, 20 October 2026)
+function m2_tool(ctx,x,y,w,name,file,lines,o){o=o||{};const h=o.h||(150+lines.length*46);
+  wc_panel(ctx,x,y,w,h,{kind:"sheet",seed:[...name].reduce((a,ch)=>a+ch.charCodeAt(0),0)});wc_T(ctx,name,x+36,y+66,{w:800,size:36,col:WC_DARK});
   if(file)wc_T(ctx,file,x+w-30,y+64,{w:500,size:28,f:"mono",align:"right",col:WC_MUTED});
   lines.forEach((l,i)=>{const a=o.la?o.la[i]:1;if(a<=0.01)return;const s=typeof l==="string"?l:l[0],col=typeof l==="string"?(s.startsWith("--")?WC_MUTED:WC_INK):l[1];
     withA(ctx,a,()=>wc_T(ctx,s,x+36,y+140+i*46,{w:500,size:28,f:"mono",col}));});return h;}

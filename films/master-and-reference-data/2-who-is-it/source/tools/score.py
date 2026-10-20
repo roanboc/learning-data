@@ -1,22 +1,24 @@
 # Who is it?: the music and sounds, played by tools/audio.py with From words to data's instruments (shared/tools/music.py).
 # The palette is new for this film (PLAYBOOK.md: vary the sound itself, film to film), and it starts where the film does, in a
-# sixteenth-century village and its court: a consort of viols holds the chords, the voices coming in one after another, each in its own
-# place across the room and changing bow at its own time, the way a court hears witnesses; a lute is the village of Artigat, and its
-# tune comes back when the man who came back is taken in; a harp is the roles, each on the note it has had since film 1 (the student D,
-# the applicant E, the researcher G, the tutor A, the alumna the D above), so a record's role is heard as it arrives or is linked; a
-# dulcian, the bassoon's ancestor, is the person: whenever someone stands in white paper as one person, it plays the D and the A above
-# it, the notes film 1's cello gave her, and the two patients called Jo Lee get a note each, a semitone apart, heard together only while
-# they're merged by mistake; and the clarinet carries the series' mark, one note, its octave, its fifth and the note again (1-8-5-1),
-# this time on A. The film starts in A minor, in Artigat in 1548, and ends in A major. A needle moving across a score is heard on the
-# harp, a note for each step it passes, rising or falling with it. The effects are the paper's and the people's: a pencil or a quill,
-# a card, a sheet, a few muffled keys, a stamp, footsteps on the road and on the court's stone, a wooden leg and its crutch, a seal
-# pressed for each decision Mei writes down, the balance's creak, the lock.
+# sixteenth-century village and its court: a consort of viols holds the chords under that story, the voices coming in one after another,
+# each in its own place across the room and changing bow at its own time, the way a court hears witnesses, and it comes back only for
+# the last line and the end card; in between, the harp spreads each chapter's chord as it starts, and lets it die away; a lute is the
+# village of Artigat, and its tune comes back when the man who came back is taken in; a harp is the roles, each on the note it has had
+# since film 1 (the student D, the applicant E, the researcher G, the tutor A, the alumna the D above), so a record's role is heard as it
+# arrives or is linked; a dulcian, the bassoon's ancestor, is the person: whenever someone stands in white paper as one person, it plays
+# the D and the A above it, the notes film 1's cello gave her, and the two patients called Jo Lee get a short note each, a semitone
+# apart, heard together only while they're merged by mistake; and the clarinet carries the series' mark, one note, its octave, its fifth
+# and the note again (1-8-5-1), this time on A. The film starts in A minor, in Artigat in 1548, and ends in A major. A needle moving
+# across a score is heard on the harp, a note for each step it passes, rising or falling with it. The effects are the paper's and the
+# people's: a pencil or a quill, a card, a sheet, a few muffled keys, a stamp, footsteps on the road and on the court's stone, a wooden
+# leg and its crutch, a seal pressed for each decision Mei writes down, the balance's creak, the lock.
 # The rules from In the weeds of data crafting hold:
-#  - Nothing loops. The music is a bed of sustained chords that change with the narration; nothing repeats in the background.
+#  - Nothing loops, and nothing is held under the explaining. The author found the consort, held under every chapter of the first cut,
+#    tense under the explanations (20 October 2026), so after the opening story the music comes now and then: a chapter's chord on the
+#    harp as it starts, a role's or the person's notes, the needle's steps, the village's tune as a real Martin might walk in.
 #  - Every sound is an event on screen, at the moment it appears. Each effect below uses the same timing as the picture in
 #    src/scenes.js (the same word, and the same offset), so sound and picture stay together when the voice is re-timed.
-#  - The one exception is feeling: when linking the two Aishas would show one student the other's results, a low, muted pulse
-#    (music.py's urgent()) rises under the scene, leaning on the semitone, and fades as the balance comes in.
+#  - No pulse: the first cut's, under linking the two Aishas, went with the held chords. The picture, a cross and the balance carry it.
 # And everything stays low and soft: knocks, paper, muffled keys, a pencil, low notes, filtered below about 2.5 kHz.
 
 # when a word of a line is spoken, as the film's own kt_w() estimates it: along the line's voiced length, from the words the voice reads
@@ -88,6 +90,11 @@ def bed(keys, end, g=0.012):
     for i, (t0, ch) in enumerate(keys):
         t1 = keys[i + 1][0] if i + 1 < len(keys) else end
         consort(ch, t0 - 0.9, t1 - t0 + 2.4, g)
+def turn(ch, s, g=0.012, pan=0.0):
+    """a chapter's chord, spread up on the harp as its first picture comes in, and left to die away: after the opening story, the music
+    comes now and then instead of being held under the voice"""
+    for k, m in enumerate(ch[:5]):
+        harp_(m, s + 0.13 * k, g * (1.1 if k == 0 else 0.85), pan - 0.3 + 0.15 * k, 3.4)
 def harp_(m, start, g=0.03, pan=0.0, sec=2.8):
     """the harp, plucked and kept low: a role"""
     f = mf(m); x = tt(sec)
@@ -294,7 +301,7 @@ J = 'words'
 tTwo, tM, tLinh, tR, tT = W(J, 'first', 'two words'), C(J, 'master'), W(J, 'master', 'Linh'), C(J, 'ref'), C(J, 'test')
 tAsk, tThen, tPk, tRef, tList = W(J, 'test', 'is this'), W(J, 'test', "Then it's"), W(J, 'pick', 'pick a value'), W(J, 'pick', "it's reference"), W(J, 'line', 'a list')
 tOwn, tLife, tBec = W(J, 'line', 'owners'), W(J, 'line', 'a life'), W(J, 'line', 'becomes')
-bed([(S0(J), CMAJ9), (tR - 0.3, AM7), (tT - 0.3, FMAJ9), (C(J, 'pick', -0.3), G6), (C(J, 'line', -0.3), DM9), (tBec - 0.3, CMAJ7)], E(J) + 1.0)
+turn(CMAJ9, S0(J) + 0.2)
 knock(tTwo - 0.15, 0.018, P(520), 220); knock(tTwo + 0.35, 0.018, P(1400), 250)
 knock(tM - 0.05, 0.02, P(460), 180)
 person(tLinh - 0.1, 0.026, P(250))
@@ -331,7 +338,7 @@ knock(tBec + 0.45, 0.018, P(700), 260)
 J = 'golden'
 tB, tGold, tId, tBest, tLab, tLk, tKept = C(J, 'builds'), W(J, 'builds', 'golden'), C(J, 'id'), C(J, 'best'), W(J, 'best', 'labelled'), C(J, 'links'), W(J, 'links', 'each kept')
 tVal, tLbl = W(J, 'undo', 'value by value'), W(J, 'undo', 'link by link')
-bed([(S0(J), FMAJ9), (tId - 0.3, DM9), (tBest - 0.3, BBMAJ9), (tLk - 0.3, GM7), (tKept - 0.3, C9SUS), (C(J, 'undo', -0.3), FMAJ7)], E(J) + 1.0)
+turn(FMAJ9, S0(J) + 0.2)
 paper(tB - 0.3, 0.034, P(960), 0.6)
 person(tB - 0.1, 0.026, P(720))
 knock(tGold + 0.1, 0.018, P(900), 260)
@@ -356,7 +363,7 @@ J = 'check'
 tL, tNew, tR, tDup, tAcr, tBil = C(J, 'linh'), W(J, 'linh', 'a new student'), C(J, 'runs'), W(J, 'runs', 'a duplicate check'), W(J, 'runs', 'across'), C(J, 'billion')
 tSh, tTh, tProp, tHere = C(J, 'share'), C(J, 'three'), W(J, 'three', 'proposes'), W(J, 'three', 'Here are')
 kt = [W(J, 'share', 'an email'), W(J, 'share', 'a number'), W(J, 'share', 'a birth year')]
-bed([(S0(J), DM9), (tR - 0.3, BBMAJ9), (tBil - 0.3, GM7), (tSh - 0.3, FMAJ7), (tTh - 0.3, DSUS2)], E(J) + 1.0)
+turn(DM9, S0(J) + 0.2)
 paper(tL - 0.2, 0.026, P(400)); role('student', tL - 0.1, 0.026, P(400))
 paper(tNew - 0.1, 0.026, P(1520)); role('student', tNew, 0.026, P(1520))
 air(tNew + 0.4, 0.5, 0.012, P(1100)); cross(tNew + 1.0, 0.016, P(960))
@@ -385,7 +392,7 @@ knock(W(J, 'three', 'the steward', -0.15), 0.02, P(1650))
 #    decision typed in; the gold link, and its decision sealed; the two cards slid into one, and the tag
 J = 'first'; KF = [[0, 960, 540, 1], [C(J, 'pair', 0.3), 800, 450, 1.2], [C(J, 'score', -0.4), 1000, 520, 1.06], [C(J, 'before', -0.4), 960, 540, 1]]
 tP, tS, t93, tLine, tBef, tLk, tOwn = C(J, 'pair'), C(J, 'score'), W(J, 'score', 'scores 93'), W(J, 'score', 'over the line'), C(J, 'before'), C(J, 'links'), W(J, 'merge', 'in its own')
-bed([(S0(J), GMAJ9), (tS - 0.3, EM9), (C(J, 'term', -0.3), CMAJ7), (tBef - 0.3, AM7), (tLk - 0.3, GMAJ7), (C(J, 'merge', -0.3), CMAJ9)], E(J) + 1.0)
+turn(GMAJ9, S0(J) + 0.2)
 paper(tP - 0.2, 0.026, Pc(tP, 400, KF)); paper(tP + 0.3, 0.026, Pc(tP + 0.3, 1120, KF))
 for word in ('Same name', 'same birth'):
     t0 = W(J, 'pair', word); tick_(t0, 0.016, Pc(t0, 1354, KF))
@@ -406,7 +413,7 @@ tSec, tNew, tHR, tAway, tT, tPer = C(J, 'second'), W(J, 'second', 'her new'), W(
 tAg, t93 = W(J, 'flip', 'agreed'), W(J, 'flip', '93')
 rowT = [[W(J, 'names', 'Given name'), W(J, 'names', 'plus three')], [W(J, 'names', 'Family name'), W(J, 'names', 'plus two.')],
         [W(J, 'date', 'Birth date'), W(J, 'date', 'plus two point')], [W(J, 'date', 'Email'), W(J, 'date', 'minus')]]
-bed([(S0(J), EM9), (C(J, 'weigh', -0.3), CMAJ9), (C(J, 'names', -0.3), AM7), (C(J, 'date', -0.3), BM7), (tT - 0.3, B7SUS4), (C(J, 'flip', -0.3), GMAJ9)], E(J) + 1.0)
+turn(EM9, S0(J) + 0.2)
 paper(tSec - 0.2, 0.034, P(960), 0.6)
 role('student', tNew - 0.05, 0.024, P(520)); role('tutor', tHR - 0.05, 0.024, P(960))
 for i in range(4):
@@ -422,14 +429,14 @@ brush(tAg - 0.3, 0.012, P(960), 0.5); paper(tAg - 0.1, 0.012, P(1000), 0.35); qu
 needle(tAg + 0.2, t93 - tAg, lambda u: score100(wsum + 2.2 * u), GAUGE['Em'], 0.018, P(960))
 ring(t93 + 0.1, 0.7, 0.015, P(1400))
 
-# 7. It suggests, Mei decides: C major, ending unresolved on the next film's question. The AI helper's note set down, its lines typed in
+# 7. It suggests, Mei decides: C major. The AI helper's note set down, its lines typed in
 #    and the names shaded out; the note slid up out of the way, and the two tags; HR's card, on the tutor's note; her contract; the
 #    typo ringed, and written; her decision typed in, and sealed; the two birth dates, on their systems' notes; the question mark;
 #    the next film's tag
 J = 'note'
 tD, tHid, tSug, tMd, tAsk, tCon, tTy, tLk, tNx = (C(J, 'drafts'), W(J, 'drafts', 'names hidden'), W(J, 'asks', 'It suggests'), W(J, 'asks', 'Mei decides'),
                                                   W(J, 'asks', 'She asks'), W(J, 'asks', 'her contract'), W(J, 'asks', 'a typo'), C(J, 'links'), C(J, 'next'))
-bed([(S0(J), CMAJ9), (C(J, 'asks', -0.3), AM9), (tAsk - 0.3, FMAJ9), (tLk - 0.3, CMAJ7), (tNx - 0.3, G9SUS)], E(J) + 1.0)
+turn(CMAJ9, S0(J) + 0.2)
 paper(tD - 0.1, 0.03, P(930), 0.5)
 typing(W(J, 'drafts', 'drafts a note'), 0.9, 0.011, P(800), 7)
 quill(tHid, 0.35, 0.01, P(760)); quill(tHid + 0.15, 0.3, 0.008, P(900))
@@ -445,14 +452,14 @@ quill(tNx + 0.4, 0.3, 0.016, P(680))
 knock(W(J, 'next', 'the next film', -0.05), 0.018, P(420))
 
 # 8. Two Aishas: D minor. The learning platform's card; the student card, on the student's note; ticks for the same given name and number;
-#    the family names, and a cross; the number ringed, "typed in by mistake" written; the score's tag; the dashed link, under a low
-#    pulse; the result slid across to the wrong student, and crossed; the balance, its creak as a false merge outweighs a missed match;
+#    the family names, and a cross; the number ringed, "typed in by mistake" written; the score's tag; the dashed link; the result
+#    slid across to the wrong student, and crossed; the balance, its creak as a false merge outweighs a missed match;
 #    her decision typed in, and sealed; the lock; the tag
 J = 'aisha'
 tAcc, tKar, tRah, tMis = W(J, 'third', 'a learning'), W(J, 'third', "Aisha Karimi's"), W(J, 'rahman', "Aisha Rahman's"), W(J, 'rahman', 'typed in')
 tLink, tSees, tTwo, tWo, tCost = W(J, 'results', 'Link them'), W(J, 'results', "sees the other's"), W(J, 'results', 'Two people'), C(J, 'worse'), W(J, 'worse', 'costs more')
 tKeep, tBind = W(J, 'apart', 'keeps them'), W(J, 'apart', 'binds')
-bed([(S0(J), DM9), (C(J, 'rahman', -0.3), BBMAJ9), (C(J, 'results', -0.3), DM7), (tWo - 0.3, GM7), (C(J, 'apart', -0.3), C69)], E(J) + 1.0)
+turn(DM9, S0(J) + 0.2)
 paper(tAcc - 0.2, 0.026, P(420))
 paper(tKar - 0.2, 0.026, P(1500)); role('student', tKar - 0.1, 0.024, P(1500))
 tick_(tKar + 0.4, 0.015, P(960)); tick_(tKar + 0.7, 0.015, P(960))
@@ -461,7 +468,6 @@ ring(tMis, 0.6, 0.016, P(440)); quill(tMis - 0.1, 0.9, 0.012, P(400))
 knock(G(J, 'third') + _DUR[J + '/third'] - 0.35, 0.018, P(960))
 air(tLink, 0.6, 0.016, P(960))
 paper(tLink + 0.4, 0.02, P(1500), 0.4); slide(tSees - 0.3, 1.2, P(1500), P(420), 0.014); cross(tTwo, 0.018, P(660))
-urgent(tLink - 0.3, C(J, 'worse', 0.6), bpm=96, root=38, g=0.044, steps=(0, 0, 1, 0))
 creak(tCost, 1.0, 0.012, P(960), 34, 60); knock(tCost + 0.95, 0.014, P(800), 180)
 paper(tKeep - 0.2, 0.026, P(960)); seal(tKeep, 0.05, P(780)); typing(tKeep + 0.05, 2.1, 0.01, P(960), 11)
 lock(tBind - 0.05, 0.03, P(1220))
@@ -473,7 +479,7 @@ knock(tBind + 0.35, 0.016, P(960))
 #    their notes; the rule's card, crossed; the tag; the two student numbers ringed; then, wordless, her roles' notes and the person's D
 J = 'link'; B = C(J, 'breath')
 tF, tDec, tPt, tMar, tAny, tR, tCome = C(J, 'five'), W(J, 'five', 'Two decisions'), W(J, 'five', 'point to'), W(J, 'kept', 'a real Martin'), W(J, 'kept', 'any link'), C(J, 'rule'), W(J, 'rule', 'A student who')
-bed([(S0(J), FMAJ9), (C(J, 'kept', -0.3), DM9), (tMar - 0.3, BBMAJ9), (tR - 0.3, C9SUS), (B, FMAJ7)], E(J) + 1.0)
+turn(FMAJ9, S0(J) + 0.2)
 LC = [('old', 340, 'student'), ('new', 960, 'student'), ('tutor', 1580, 'tutor'), ('alumna', 340, 'alumna'), ('researcher', 1580, 'researcher')]
 for i, (k, x, r) in enumerate(LC):
     paper(tF + 0.1 + i * 0.15, 0.014, P(x), 0.35)
@@ -495,37 +501,40 @@ for i, m in enumerate([50, 55, 57, 62]):
     harp_(m, B + 0.15 + i * 0.16, 0.018, -0.3 + 0.2 * i)
 dulcian(50, B + 0.9, 2.6, 0.02, 0.0)
 
-# 10. Elsewhere: D minor, then F and C. The hospital's card; two patients in white paper, each on a note of their own, a semitone apart;
+# 10. Elsewhere: D minor. The hospital's card; two patients in white paper, each on a note of their own, a semitone apart;
 #     their wristbands; the bands slid together by mistake, and the two notes heard together; the test result slid to the wrong one,
 #     and crossed; each number's issuer, a knock each; the bands slid apart, and the two notes heard one after the other; the result
 #     slid back, and ticked; the tag
 J = 'elsewhere'
 tH, tToo, tMg, tRes, tWr, tI, tKeep, tUn = (C(J, 'hospital'), W(J, 'hospital', 'match people'), W(J, 'hospital', 'Merge two'), W(J, 'hospital', 'a test result'),
                                            W(J, 'hospital', 'the wrong one'), C(J, 'issuer'), W(J, 'issuer', 'keep each'), W(J, 'issuer', 'undoing'))
-bed([(S0(J), DM9), (tMg - 0.3, BBMAJ9), (tWr - 0.3, GM7), (tI - 0.3, FMAJ9), (tUn - 0.3, C69)], E(J) + 1.0)
+turn(DM9, S0(J) + 0.2)
 paper(tH - 0.2, 0.032, P(960), 0.6)
-dulcian(52, tToo - 0.2, 2.2, 0.022, P(640)); dulcian(53, tToo + 0.1, 2.2, 0.022, P(1280))
+dulcian(52, tToo - 0.2, 0.9, 0.02, P(640)); dulcian(53, tToo + 0.1, 0.9, 0.02, P(1280))
 paper(tToo - 0.1, 0.016, P(640), 0.35); paper(tToo + 0.2, 0.016, P(1280), 0.35)
 slide(tMg, 1.0, P(640), P(900), 0.01); slide(tMg, 1.0, P(1280), P(960), 0.01)
-dulcian(52, tMg + 0.75, 2.0, 0.018, -0.1); dulcian(53, tMg + 0.75, 2.0, 0.018, 0.1)
+dulcian(52, tMg + 0.75, 1.1, 0.014, -0.1); dulcian(53, tMg + 0.75, 1.1, 0.014, 0.1)
 paper(tToo + 0.6, 0.016, P(1560), 0.35); slide(tRes, 1.2, P(1560), P(360), 0.012); cross(tWr, 0.016, P(500))
 knock(tKeep - 0.05, 0.014, P(700), 230); knock(tKeep + 0.1, 0.014, P(1260), 250)
 slide(tUn, 1.0, P(900), P(640), 0.01); slide(tUn, 1.0, P(960), P(1280), 0.01)
-dulcian(52, tUn + 0.7, 1.8, 0.016, P(640)); dulcian(53, tUn + 1.05, 1.8, 0.016, P(1280))
+dulcian(52, tUn + 0.7, 0.9, 0.016, P(640)); dulcian(53, tUn + 1.05, 0.9, 0.016, P(1280))
 slide(tUn + 0.4, 1.2, P(360), P(1560), 0.012); tick_(tUn + 1.6, 0.015, P(1700))
 knock(tUn + 0.65, 0.016, P(960))
 
-# 11. Decided once: A major at the end. The dbt card set down, its lines, a key each; the comment underlined; the queue's card and its
-#     rows; the test's card, its failing row a low knock, its owner; Databricks' card and its rows; the line; the line carried down onto
-#     the end card, and the series' mark
+# 11. Decided once: A major at the end. The pairs' card set down, its lines, a key each; its tag laid on; the comment underlined; the
+#     queue's card and its rows; the test's card, its failing row a low knock, its owner; the links' card and its rows; the line, with
+#     the consort back; the line carried down onto the end card, and the series' mark
 J = 'once'; B = C(J, 'breath')
-tQ, tWo, tDec, tQu, tFa, tWk, tOw, tMr, tLk, tWho, tK = (W(J, 'dbt', 'a query'), W(J, 'dbt', 'without comparing'), W(J, 'dbt', 'the decisions table'), W(J, 'dbt', "the person's queue"),
-                                                         W(J, 'test', 'fails'), W(J, 'test', 'more than a week'), W(J, 'test', 'an owner'), W(J, 'tables', 'the master records'),
-                                                         W(J, 'tables', 'their links'), W(J, 'tables', 'who decided'), C(J, 'decide'))
-bed([(S0(J), DMAJ9), (C(J, 'test', -0.3), BM7), (C(J, 'tables', -0.3), E7SUS4), (tK - 0.3, AMAJ9), (B, A69)], TOT + 1.0)
+tQ, tWo, tDec, tQu, tFa, tWk, tOw, tMr, tLk, tWho, tK = (W(J, 'pairs', 'a query'), W(J, 'pairs', 'without comparing'), W(J, 'pairs', 'the decisions table'), W(J, 'pairs', "the person's queue"),
+                                                         W(J, 'test', 'fails'), W(J, 'test', 'more than a week'), W(J, 'test', 'an owner'), W(J, 'links', 'the master records'),
+                                                         W(J, 'links', 'their links'), W(J, 'links', 'who decided'), C(J, 'decide'))
+turn(DMAJ9, S0(J) + 0.2)
+# the last line and the end card: the consort comes back, as in Artigat, and holds A major, open and plain, to the end
+consort([45, 52, 57, 61, 64], tK - 0.6, TOT + 1.0 - (tK - 0.6), 0.011)
 paper(tQ - 0.3, 0.03, P(510), 0.5)
 for i in range(5):
     tap(tQ + 0.3 + i * 0.18, 0.011, P(510))
+paper(tQ + 1.1, 0.014, P(700), 0.3)
 quill(tWo, 0.55, 0.012, P(400))
 paper(tDec - 0.3, 0.03, P(1410), 0.5)
 for i in range(4):

@@ -375,21 +375,25 @@ function m2_underline(ctx,x,y,w,p){if(p<=0)return;ctx.save();ctx.strokeStyle=rgb
 const M2_SQL=["-- pairs that share a key, not everyone","select a.record_key, b.record_key","from blocked_records a","join blocked_records b using (block_key)","where a.record_key < b.record_key"];
 const M2_QROWS=["-- each pair, and its decision","S-17142 · S-20436   D-005","S-20436 · E-4417    D-006","u-88231 · S-20417   D-003",["S-20512 · E-5120    waiting 2 days",[150,92,0]]];
 const M2_TROWS=["-- fails when a pair waits over 7 days",["S-20577 · S-19902   8 days   FAIL",WC_NO],["owner: Mei's office · limit: 7 days",WC_DARK]];
+const M2_FORM="the simplest form: SQL";
 const M2_LROWS=["-- master records and their links","P-10482 · S-17142 · D-005","P-10482 · S-20436 · D-005","P-10482 · E-4417  · D-006",["D-006 · Mei Tanaka · contract: a typo",WC_ROLEINK.tutor]];
 scene("once",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
-  const tD=c("dbt"),tQ=w("dbt","a query"),tWo=w("dbt","without comparing"),tDec=w("dbt","the decisions table"),tQu=w("dbt","the person's queue"),tT=c("test"),tFa=w("test","fails"),tWk=w("test","more than a week"),
-    tOw=w("test","an owner"),tTb=c("tables"),tMr=w("tables","the master records"),tLk=w("tables","their links"),tWho=w("tables","who decided"),tK=c("decide");
+  const tQ=w("pairs","a query"),tWo=w("pairs","without comparing"),tDec=w("pairs","the decisions table"),tQu=w("pairs","the person's queue"),tT=c("test"),tFa=w("test","fails"),tWk=w("test","more than a week"),
+    tOw=w("test","an owner"),tTb=c("links"),tMr=w("links","the master records"),tLk=w("links","their links"),tWho=w("links","who decided"),tK=c("decide");
   // the camera stays back: the card being talked about is lit, and the ones already told step back
   m2_open(ctx,S,t,sc,"plain",[[0,960,540,1]]);
   const turn=[tQ-0.4,tDec-0.3,tT-0.3,tTb-0.3,1e9],end=fin(t,tK-0.4,0.6),lit=i=>0.48+0.52*Math.max(fin(t,turn[i],0.5)*(1-fin(t,turn[i+1],0.5)),end);
   // and all of them step back while the line is said, so it reads on its own
   const rb=1-0.7*end;
-  withA(ctx,rb*lit(0),()=>arrive(ctx,510,270,t,tQ-0.3,()=>{m2_tool(ctx,100,80,820,"dbt","dbt","int_person_pairs.sql",M2_SQL,{la:M2_SQL.map((s,i)=>fin(t,tQ+0.3+i*0.18,0.4))});
+  withA(ctx,rb*lit(0),()=>arrive(ctx,510,270,t,tQ-0.3,()=>{m2_tool(ctx,100,80,820,"the pairs",null,M2_SQL,{la:M2_SQL.map((s,i)=>fin(t,tQ+0.3+i*0.18,0.4))});
+    // master data tools often keep the rules in screens; SQL is their simplest form, and the card says so, on a tag where the others
+    // name their file
+    const fw=tw(ctx,M2_FORM,28,600)+40;arrive(ctx,894-fw/2,133,t,tQ+1.1,()=>wc_tag(ctx,894,133,M2_FORM,{size:28,w:600,align:"right",col:WC_DARK}),{dy:8});
     // without comparing everyone: the comment that says so, underlined
     m2_underline(ctx,136,232,tw(ctx,M2_SQL[0],28,500,"mono"),clamp((t-tWo)/0.6,0,1));},{dy:16}));
-  withA(ctx,rb*lit(1),()=>arrive(ctx,1410,270,t,tDec-0.3,()=>m2_tool(ctx,1000,80,820,"dbt","the person queue","person_queue.sql",M2_QROWS,{la:M2_QROWS.map((s,i)=>fin(t,(i<4?tDec+0.2:tQu)+i*0.15,0.4))}),{dy:16}));
-  withA(ctx,rb*lit(2),()=>arrive(ctx,510,644,t,tFa-0.4,()=>m2_tool(ctx,100,500,820,"dbt","a test","decided_within_a_week",M2_TROWS,{la:[fin(t,tFa,0.4),fin(t,tWk,0.4),fin(t,tOw-0.1,0.4)]}),{dy:16}));
-  withA(ctx,rb*lit(3),()=>arrive(ctx,1410,690,t,tMr-0.4,()=>m2_tool(ctx,1000,500,820,"databricks","person_link",null,M2_LROWS,{la:[fin(t,tMr,0.4),fin(t,tLk,0.4),fin(t,tLk+0.2,0.4),fin(t,tLk+0.4,0.4),fin(t,tWho,0.4)]}),{dy:16}));
+  withA(ctx,rb*lit(1),()=>arrive(ctx,1410,270,t,tDec-0.3,()=>m2_tool(ctx,1000,80,820,"the person queue","person_queue.sql",M2_QROWS,{la:M2_QROWS.map((s,i)=>fin(t,(i<4?tDec+0.2:tQu)+i*0.15,0.4))}),{dy:16}));
+  withA(ctx,rb*lit(2),()=>arrive(ctx,510,644,t,tFa-0.4,()=>m2_tool(ctx,100,500,820,"a test","decided_within_a_week",M2_TROWS,{la:[fin(t,tFa,0.4),fin(t,tWk,0.4),fin(t,tOw-0.1,0.4)]}),{dy:16}));
+  withA(ctx,rb*lit(3),()=>arrive(ctx,1410,690,t,tMr-0.4,()=>m2_tool(ctx,1000,500,820,"the links","person_link",M2_LROWS,{la:[fin(t,tMr,0.4),fin(t,tLk,0.4),fin(t,tLk+0.2,0.4),fin(t,tLk+0.4,0.4),fin(t,tWho,0.4)]}),{dy:16}));
   m2_close(ctx,S);wc_paperOver(ctx,S);
   // the line, then carried down onto the end card, above the veil, landing where the card's own line fades in and takes it over
   const KL="Decide a match once, with a reason, and keep it.",kl=fin(t,tK-0.1,0.6),ky=lerp(128,420,fin(t,B+0.3,1.1)),kg=kl*(1-fin(t,B+0.8,0.9));

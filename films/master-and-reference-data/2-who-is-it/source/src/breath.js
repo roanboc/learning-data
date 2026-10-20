@@ -12,5 +12,5 @@ const BREATH={
 "aisha":{"hold":{"third":0.6,"rahman":0.8,"results":0.9,"worse":0.8}},
 "link":{"hold":{"five":0.8,"kept":0.7},"breathe":1.6},
 "elsewhere":{"hold":{"hospital":1.2}},
-"once":{"hold":{"dbt":0.6,"test":0.6,"tables":0.7},"breathe":5.0}
+"once":{"hold":{"pairs":0.6,"test":0.6,"links":0.7},"breathe":5.0}
 };

@@ -1,6 +1,6 @@
 # For this purpose only: the music and sounds, played by tools/audio.py with From words to data's instruments
 # (shared/tools/music.py). The palette is the film's own (PLAYBOOK.md: vary the sound itself, film to film), with the series' mark:
-# a string section holds the chords, bowed, every note starting together and swelling slowly, the violins to the left and the
+# a string section holds the chords, bowed softly, every note starting together and swelling slowly, the violins to the left and the
 # cellos to the right; a harp plucks the roles, each on the note it has in the whole series (the student's D, the tutor's A, the
 # researcher's G, the alumna's high D), so a door rings its role's note when it arrives or opens; a horn, softly, is the person:
 # whenever Linh stands in white paper, it plays the same D and the A above it; and the clarinet carries the series' mark, one note,
@@ -13,6 +13,8 @@
 #    chord; under a moment on screen (a door's note, the person's); and on the end card. It's never a constant bed under the voice.
 #  - Nothing loops, trembles or pulses: one steady voice to a note, since voices a little out of tune with each other beat on a
 #    phone's speaker; no vibrato, even on the horn and the clarinet; and no urgent pulse, not even when the appeal's email reaches Linh.
+#    Two notes a fifth apart beat a little in their upper partials when equal-tempered, so the strings' upper partials are weak, and
+#    the A played with the person's D is tuned pure (pure() below). tools/quiet.py checks all of it.
 #  - Every sound is an event on screen, at the moment it appears. Each effect below uses the same timing as the picture in
 #    src/scenes.js (the same word, and the same offset), so sound and picture stay together when the voice is re-timed.
 # And everything stays low and soft: knocks, paper, muffled keys, a pencil, low notes, filtered below about 2.5 kHz.
@@ -35,16 +37,18 @@ _rng = np.random.default_rng(66)  # the film's own randomness: the fire's cracks
 # the music's levels: the strings sit about 21 dB under the voice through the opening, as in the other series' films, and a turn's chord
 # about as far under it in its pause; a harp's note or the horn's comes through a chord by about 4 dB at its peak (measured, as
 # tools/audio.py mixes them)
-BED, NOTE, HARP, HORN = 1.8, 1.6, 1.6, 1.4
+BED, NOTE, HARP, HORN = 1.55, 1.6, 1.6, 1.4
 def strings(ch, start, sec, g=0.03, a=1.8, r=2.6):
-    """a string section holding a chord, bowed: every note starts together and swells (over a seconds) and fades (over r); one steady
-    voice to a note, with no vibrato, since voices a little out of tune with each other beat on a phone's speaker, and a little noise
-    from the bow; the high notes to the left, as the violins sit, the low ones to the right; nothing above about 1.5 kHz"""
+    """a string section holding a chord, bowed softly over the fingerboard: every note starts together and swells (over a seconds) and
+    fades (over r); one steady voice to a note, with no vibrato, since voices a little out of tune with each other beat on a phone's
+    speaker, and a little noise from the bow; the tone round, its upper partials weak, so an equal-tempered fifth's slow beat (the top
+    note's second partial against the bottom one's third) stays too faint to hear; the high notes to the left, as the violins sit, the
+    low ones to the right; nothing above about 1.5 kHz"""
     x = tt(sec); n = len(ch)
     e = np.clip(x / a, 0, 1) ** 1.6 * np.clip((sec - x) / r, 0, 1) * (1 - 0.15 * np.clip((x - 2.4) / max(1.0, sec - 5.0), 0, 1))
     for k, m in enumerate(ch):
         pan = 0.5 - 1.0 * k / max(1, n - 1); f = mf(m); ph = 2 * np.pi * f * x
-        s = sum(np.sin(h * ph + 0.9 * h * k) / h * np.exp(-0.2 * h) for h in range(1, 7))
+        s = sum(np.sin(h * ph + 0.9 * h * k) / h * np.exp(-0.5 * (h - 1)) for h in range(1, 7))
         s = s + 0.05 * norm(filt(noise(sec), 'band', (f, min(f * 4, 1400))))
         put(filt((s * e).astype(np.float32), 'low', 1500), start, g * BED * 1.7 / n, pan)
 def bed(keys, end, g=0.03):
@@ -63,9 +67,13 @@ def turn(ch, s0, s1, g=0.03):
     one's first line begins (s1), so it plays in the pause without words between them"""
     a = s0 + 0.1; sec = s1 + 0.5 - a
     strings(ch, a, sec, g, a=min(1.0, sec * 0.4), r=min(1.5, sec * 0.55))
+def pure(m):
+    """a moment's note, tuned to the person's D: an A is a pure fifth above the D under it, as a horn player and a harpist tune to each
+    other, since an equal-tempered A beats with the D's third partial when the person's notes and the tutor's sound together"""
+    return mf(m - 7) * 1.5 if m % 12 == 9 else mf(m)
 def harp_(m, start, g=0.03, pan=0.0, sec=2.4):
     """a harp string, plucked: round, its top fading fast, and nothing above about 2 kHz"""
-    f = mf(m); x = tt(sec)
+    f = pure(m); x = tt(sec)
     s = sum(np.sin(2 * np.pi * f * k * x + 0.3 * k) * (1 / k ** 1.5) * np.exp(-x * (0.9 + 0.5 * k * k)) for k in range(1, 9))
     s = s * np.minimum(1, x / 0.003) + 0.03 * filt(noise(sec), 'band', (f * 2, min(f * 6, 2400))) * np.exp(-x * 60)
     put(norm(filt(s.astype(np.float32), 'low', 2000)), start, g * NOTE * HARP, pan)
@@ -76,7 +84,7 @@ def role(r, s, g=0.03, pan=0.0):
     harp_(ROLE[r], s, g, pan)
 def horn(m, start, sec, g=0.03, pan=0.0):
     """a horn, softly: slow to speak, round, held steady, its tone opening as it swells and closing again as it fades"""
-    f = mf(m); x = tt(sec); e = env(sec, 0.24, min(1.1, sec * 0.45))
+    f = pure(m); x = tt(sec); e = env(sec, 0.24, min(1.1, sec * 0.45))
     ph = 2 * np.pi * f * x
     s = sum(np.sin(h * ph) * (1 / h ** 1.2) * e ** (1 + 0.45 * (h - 1)) for h in range(1, 9))
     s = s + 0.02 * filt(noise(sec), 'band', (f, f * 4)) * np.exp(-x * 12)

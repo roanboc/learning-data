@@ -290,11 +290,12 @@ function m4_d(s){const [y,m,d]=s.split("-").map(Number),t0=Date.UTC(y,0,1),t1=Da
 const M4_ROWS=["student","tutor","researcher","alumna","applicant"];
 const M4_OWN={student:"registrar's office",tutor:"HR",researcher:"research office",alumna:"alumni office",applicant:"admissions"};
 // her roles, dated: from is inclusive, to exclusive, and an open role has no end. The tutor's one band is One person, many roles' picture;
-// HR's contracts, one each semester, replace it in chapter 5
+// HR's contracts, one each semester, replace it in chapter 5. The dates are the example project's: a contract's or a project's ends_on is
+// its last day, so to is the day after
 const M4_PER=[{k:"app1",r:"applicant",a:"2018-08-13",b:"2019-02-25"},{k:"stu1",r:"student",a:"2019-02-25",b:"2022-12-15"},{k:"alu",r:"alumna",a:"2022-12-15",b:null},
-  {k:"tut",r:"tutor",a:"2023-02-20",b:null},{k:"app2",r:"applicant",a:"2025-06-02",b:"2025-07-21"},{k:"stu2",r:"student",a:"2025-07-21",b:null},{k:"res",r:"researcher",a:"2026-03-02",b:"2026-12-19"}];
-const M4_TERMS=[["S1","2023-02-20","2023-06-30"],["S2","2023-07-17","2023-11-24"],["S1","2024-02-19","2024-06-28"],["S2","2024-07-15","2024-11-22"],["S1","2025-02-24","2025-06-27"],
-  ["S2","2025-07-21","2025-11-21"],["S1","2026-02-23","2026-06-27"]];
+  {k:"tut",r:"tutor",a:"2023-02-20",b:null},{k:"app2",r:"applicant",a:"2025-06-02",b:"2025-07-21"},{k:"stu2",r:"student",a:"2025-07-21",b:null},{k:"res",r:"researcher",a:"2026-03-02",b:"2026-12-20"}];
+const M4_TERMS=[["S1","2023-02-20","2023-06-24"],["S2","2023-07-17","2023-11-18"],["S1","2024-02-19","2024-06-22"],["S2","2024-07-15","2024-11-16"],["S1","2025-02-24","2025-06-28"],
+  ["S2","2025-07-21","2025-11-22"],["S1","2026-02-23","2026-06-28"]];
 M4_PER.forEach(p=>{p.A=m4_d(p.a);p.B=p.b?m4_d(p.b):null;});
 const M4_TUT=M4_TERMS.map(([s,a,b],i)=>({k:"t"+i,r:"tutor",s,a,b,A:m4_d(a),B:m4_d(b)}));
 // the story's today: after the census report was published, in April 2026; census date, and the same day a year before
@@ -486,15 +487,15 @@ function m4_heart(ctx,x,y,s,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx
   ctx.fillStyle=rgba(M4_HEART,0.95);ctx.fill();ctx.strokeStyle=rgba(wc_dim(M4_HEART,0.35),0.9);ctx.lineWidth=1.6/s;ctx.stroke();ctx.restore();});}
 
 /* ---------- 9. one table, any date ---------- */
-// the role table, as Jun builds it: a row for each role, the tutor's earlier contracts folded into one line, and the day each row was
-// recorded, which comes in last
+// the role table, as Jun builds it: a row for each role, the tutor's earlier contracts folded into one line, and the day the platform
+// recorded each row's latest change (for a role that has ended, its end), which comes in last
 // columns laid out from their widest text at 28 px, about 24 apart, with room either side of valid_from for the ring round it
 const M4_TB2={x:404,y:84,w:1472,h:540};
 const M4_TC=[["person_key",32],["role_type",222],["owner",412],["relates_to",654],["valid_from",864],["valid_to",1068],["recorded_at",1260]];
-const M4_TROWS=[["applicant","admissions","bachelor's","2018-08-13","2019-02-25","2018-08-13"],["student","registrar's office","bachelor's","2019-02-25","2022-12-15","2019-02-25"],
-  ["alumna","alumni office","bachelor's","2022-12-15",null,"2022-12-16"],["tutor","HR",null],["applicant","admissions","master's","2025-06-02","2025-07-21","2025-06-02"],
-  ["student","registrar's office","master's","2025-07-21",null,"2025-07-21"],["tutor","HR","unit · S1 2026","2026-02-23","2026-06-27","2026-04-06"],
-  ["researcher","research office","project","2026-03-02","2026-12-19","2026-03-02"]];
+const M4_TROWS=[["applicant","admissions","bachelor's","2018-08-13","2019-02-25","2019-02-26"],["student","registrar's office","bachelor's","2019-02-25","2022-12-15","2022-12-16"],
+  ["alumna","alumni office","bachelor's","2022-12-15",null,"2024-11-01"],["tutor","HR",null],["applicant","admissions","master's","2025-06-02","2025-07-21","2025-07-22"],
+  ["student","registrar's office","master's","2025-07-21",null,"2025-07-22"],["tutor","HR","unit · S1 2026","2026-02-23","2026-06-28","2026-04-06"],
+  ["researcher","research office","project","2026-03-02","2026-12-20","2026-02-25"]];
 const M4_TRY=i=>M4_TB2.y+186+i*46;
 // o.rows: rows in (0 to 1); o.col[k]: column k lit; o.rec: the recorded_at column in; o.hiRow: the late contract's row lit
 function m4_table(ctx,t,o){const T=M4_TB2,X=k=>T.x+M4_TC[k][1];wc_panel(ctx,T.x,T.y,T.w,T.h,{kind:"sheet",seed:93});

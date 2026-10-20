@@ -45,6 +45,7 @@ Before story or pictures, the concept is settled. [`AGENTS.md`](AGENTS.md) gives
 - **List your sources with the date you checked them.**
 - **Don't say a tool can't do what it can.** The first cut of *Meaning machines can read* said Genie couldn't read the stacking policy, a PDF; assistants read documents and web pages. The real problem is a policy and an old page that disagree, with no owner and no version, outside a managed glossary. Show that, and check what today's tools can do on the day.
 - **Show the source of truth, and the platform it feeds.** Platforms now carry a glossary's definitions next to the data (in Databricks, on each table's page, where Genie reads them). Show the managed source first, then where it reaches, and say which parts are in preview.
+- **Take a film's dates from the project's data, and check them.** *Roles come and go* showed a contract's last day, 27 June, on HR's card, then the same day as the table's `valid_to`, which is exclusive, and it dated some rows before their ends were known. A last day becomes a `valid_to` the day after, and `recorded_at` is when the platform recorded the row's latest change. Where the example project holds the data, the film's `tools/check.py` compares every date the film shows with it before checking the frames.
 
 *Ask: which line would I be unable to defend in front of the product team?*
 

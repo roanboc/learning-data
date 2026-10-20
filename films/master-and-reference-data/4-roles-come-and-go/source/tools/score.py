@@ -14,8 +14,8 @@
 # paper, footsteps on a pavement, and a heart.
 # The series' sound (the author, 20 October 2026, after Who is it?): music plays under the opening, where its story from real life is
 # told, then comes in from time to time, never as a constant bed under the voice. So the choir sings under Rome, and after that only at a
-# few turns: a question before two of the stops for Pause and think (the wrong answer about last year, the late contract), the answer
-# after the first, the move to an energy company, and the end card. In between, the music is what's on screen: a role's note as it's
+# few turns: night falling as chapter 3 begins, a question before two of the stops for Pause and think (the wrong answer about last
+# year, the late contract), the answer after the first, the move to an energy company, and the end card. In between, the music is what's on screen: a role's note as it's
 # painted on, pinned or counted, the person's notes whenever someone stands in white paper, the tutor's contracts. The sounds come in
 # from time to time, too: one for each thing on screen that matters (a card set down, a line drawn, a date pinned, a red ring), not one
 # for every stroke, key or step of the picture.
@@ -214,7 +214,7 @@ def heart(s, g=0.04, pan=0.0):
 # chords (MIDI note numbers), low to high, voiced for the choir: where two chords follow each other, they share what they can
 GMADD9 = [43, 50, 58, 62, 69]; EBMAJ9 = [39, 46, 58, 62, 65]; CM9 = [48, 51, 58, 62, 67]; D7SUS4 = [38, 50, 57, 60, 67]; BBMAJ7 = [46, 53, 57, 62, 65]
 GM9 = [43, 50, 58, 65, 69]; EBMAJ7S11 = [39, 46, 57, 62, 67]; DSUS4 = [38, 50, 57, 62, 67]
-A7SUS4 = [45, 52, 55, 57, 62]; DMAJ9 = [38, 50, 57, 61, 64]; BBMAJ9 = [46, 53, 57, 60, 62]; DMAJ9END = [38, 45, 54, 57, 61, 64]
+DM9 = [38, 50, 57, 60, 64]; A7SUS4 = [45, 52, 55, 57, 62]; DMAJ9 = [38, 50, 57, 61, 64]; BBMAJ9 = [46, 53, 57, 60, 62]; DMAJ9END = [38, 45, 54, 57, 61, 64]
 
 
 # 1. A ladder of offices: G minor, the opening, with the choir under it while its story is told. The stone tablet set down, and his name
@@ -249,14 +249,16 @@ pin(W(J, 'date', 'university', -0.1), 0.022, P(261))
 ring(W(J, 'date', 'thirty-first', -0.1), 0.7, 0.015, P(261))
 paper(tPl - 0.1, 0.03, P(1380)); paper(tAl - 0.1, 0.03, P(1380))
 
-# 3. True for a day: the four systems set down; the moon, a low swell; the platform's copy; each status on its role's note as it's
-#    named; each night the moon, and every status rubbed out to be written again; Planning's card asking about last year; a pencil round
-#    today's date; the red ring on "student". Nothing pulses under the error: after its last words, the choir asks a question, a chord
-#    on A held open, and has let go before the film stops there for Pause and think
+# 3. True for a day: night falls at the turn, in the pause after the alumni office's question, on the choir's open chord on D, let go as
+#    the chapter's first line begins and the moon, a low swell, comes up in tune with it. The four systems set down; the platform's copy;
+#    each status on its role's note as it's named; each night the moon, and every status rubbed out to be written again; Planning's card
+#    asking about last year; a pencil round today's date; the red ring on "student". Nothing pulses under the error: after its last
+#    words, the choir asks a question, a chord on A held open, and has let go before the film stops there for Pause and think
 J = 'flags'; tN, tPf = C(J, 'night'), W(J, 'night', 'platform'); tPl = W(J, 'again', 'Planning')
 tSt = [W(J, 'says', 'enrolled'), W(J, 'says', 'casual staff'), W(J, 'says', 'project member'), W(J, 'says', 'graduate')]
 nights = [W(J, 'over', 'a day', 0.15), W(J, 'over', 'the next', 0.05)]
 SX = [285, 735, 1185, 1635]
+bloom(DM9, L('census', 'alumni', 1.7), C(J, 'night', 1.1), 0.026, step=0.2, att=0.9, rel=1.4, ref=57)
 knock(tN + 0.25, 0.018, P(SX[0]), 210)
 moon(W(J, 'night', 'night', -0.1), 0.016)
 paper(tPf - 0.2, 0.026, P(910))

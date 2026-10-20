@@ -17,10 +17,10 @@ const NARR={
  {"id":"disagree","gap":0.8,"text":"But her records don't agree."},
  {"id":"counts","gap":0.8,"text":"Four ways of writing her name. Two birth dates. Two mobile numbers. Four emails."},
  {"id":"which","gap":0.8,"text":"Which value wins?"}]},
-"hidden":{"name":"One order, hidden in the SQL","lead":0.8,"tail":1.0,"vo":[
+"hidden":{"name":"One order, hidden in the code","lead":0.8,"tail":1.0,"vo":[
  {"id":"picks","gap":0.8,"text":"The university's model already picks one."},
  {"id":"order","gap":0.8,"text":"For the learner, it takes the student system first, then the learning platform, then short courses."},
- {"id":"every","gap":0.8,"text":"One order, for every field, inside the SQL, where the people who own the data can't see it."},
+ {"id":"every","gap":0.8,"text":"One order, for every field, inside the code, where the people who own the data can't see it."},
  {"id":"quick","gap":0.8,"text":"For the person, the quick fix is to let the newest value win."},
  {"id":"resend","gap":0.8,"text":"But HR sends its whole file again every teaching period, so its values always look new."},
  {"id":"typo","gap":0.8,"text":"Her birth date becomes HR's typo, and her old mobile comes back."},
@@ -36,7 +36,7 @@ const NARR={
  {"id":"class","gap":0.8,"text":"Her class lists and her ID card, the one she chose."},
  {"id":"rule","gap":0.8,"text":"So the person keeps two names, and each needs its own rule."}]},
 "rules":{"name":"A rule for each field","lead":1.0,"tail":1.0,"vo":[
- {"id":"writes","gap":0.8,"text":"So Jun writes the rules down, field by field, in the model's YAML."},
+ {"id":"writes","gap":0.8,"text":"So Jun writes the rules down, field by field, in one place, where the steps that build her record read them."},
  {"id":"trust","gap":0.8,"text":"Like the Beagle's standards, each field has the source it trusts most."},
  {"id":"legal","gap":0.8,"text":"Her legal name, from the student system, which checked her passport."},
  {"id":"preferred","gap":0.8,"text":"Her preferred name, from Linh herself."},
@@ -45,7 +45,8 @@ const NARR={
  {"id":"pin","gap":0.8,"text":"HR's still has the typo, so Mei pins the right one, with a reason, until next year."},
  {"id":"mobile","gap":0.8,"text":"Her mobile: the newest one she confirmed, not the newest one sent."},
  {"id":"chain","gap":0.8,"text":"Every other field falls back on the same order: the most trusted source, then the newest confirmed value, then the most complete."},
- {"id":"dbt","gap":0.8,"text":"And dbt turns the rules into the SQL, and into tests that check them."}]},
+ {"id":"tools","gap":0.8,"text":"Master data tools let people set rules like these on screens of their own."},
+ {"id":"simplest","gap":0.8,"text":"In the simplest form, they're a file like this one, and the code and the tests are written from it."}]},
 "emails":{"name":"Four emails, each for something","lead":1.0,"tail":1.0,"vo":[
  {"id":"column","gap":0.8,"text":"An email column holds one email. Linh has four."},
  {"id":"study","gap":0.8,"text":"Her student email, for her studies. Her staff email, for her tutoring."},
@@ -76,5 +77,5 @@ const NARR={
  {"id":"out","gap":0.8,"text":"After five years around the world, its clocks were out by just thirty-three seconds."},
  {"id":"settled","gap":0.8,"text":"Which clock to trust was settled before they disagreed, and checked at every port."},
  {"id":"same","gap":0.8,"text":"Linh's rules work the same way: written down before her records disagree, and tested every night."},
- {"id":"declared","gap":0.8,"text":"The rule is declared, not hidden in the SQL."}]}
+ {"id":"declared","gap":0.8,"text":"The rule is declared, not hidden in the code."}]}
 };

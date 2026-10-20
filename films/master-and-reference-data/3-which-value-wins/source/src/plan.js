@@ -3,8 +3,9 @@
    the data team's office, the paper with a little sky and land for the chapters that explain, a second one for the other places,
    and Falmouth in October 1836. The pictures are the film's own things: the Beagle, at anchor and under sail; the clocks, their
    boxes and the rate book; how a ship finds its longitude; Linh's five records, and her record, the person, with each field's values
-   in their sources' colours; the model's SQL; HR's file, sent again; her two names; the YAML Jun writes, and the SQL and the tests dbt
-   writes from it; her contact points; the dry run; a bank and a shop. Every name starts with m3_ (this film) or M3_. */
+   in their sources' colours; the model's SQL; HR's file, sent again; her two names; the rules Jun writes, the same rule on a master
+   data tool's screen, and the SQL and the tests written from the rules; her contact points; the dry run; a bank and a shop. Every
+   name starts with m3_ (this film) or M3_. */
 
 /* ---------- the people ---------- */
 // Jun Park, In the weeds of data crafting's analytics engineer (films/analytics-engineering/shared/src/people.js), whom this series'
@@ -317,7 +318,7 @@ function m3_fly(ctx,k,p,from,to,o){if(p<=0)return;const src=M3_V[k][1],q=ease(cl
   if(u<0.99){const x=lerp(from[0]+12,to[0]+26,q),y=lerp(from[1],to[1],q)-Math.sin(q*Math.PI)*36;m3_dot(ctx,x,y,src,clamp(p*6,0,1)*(1-u));}
   if(u>0.01){ctx.save();ctx.beginPath();ctx.rect(to[0]-6,to[1]-M3_VH/2-8,12+m3_vw(k)*u,M3_VH+16);ctx.clip();m3_val(ctx,to[0],to[1],k,o);ctx.restore();}}
 
-/* ---------- 3. one order, hidden in the SQL; the newest wins ---------- */
+/* ---------- 3. one order, hidden in the code; the newest wins ---------- */
 // the model's SQL, as int_learner_timeline.sql has it (lines 166, 173 and 174): one order for every field; the comment wraps as an
 // editor shows it, and the third source is left out
 const M3_CODE={x:80,y:150,w:1210,h:420};
@@ -362,21 +363,22 @@ function m3_use(ctx,x,y,w,title,line,o){o=o||{};wc_panel(ctx,x,y,w,120,{kind:"ca
   wc_T(ctx,line,x+28,y+94,{w:700,size:30,col:WC_INK});if(o.photo)wc_white(ctx,"linh",x+w-48,y+108,0.1,[],{shadow:false});}
 
 /* ---------- 5. a rule for each field ---------- */
-// the YAML Jun writes: one field's rule at a time, each folding to a line once it's written. Source names are in their source's ink
-const M3_Y={x:350,y:90,w:640,h:610};
-const M3_YF=[["legal_name",[["    config:"],["      meta:"],["        trust: [",["student_system","sis"],"]"],["        checked_against: passport"]]],
-  ["preferred_name",[["    config:"],["      meta:"],["        trust: [",["self_service","self"],"]"]]],
-  ["birth_date",[["    config:"],["      meta:"],["        trust: [",["student_system","sis"],"]"],["        others: review"]]],
-  ["mobile",[["    config:"],["      meta:"],["        rule: newest_confirmed"]]]];
+// the rules Jun writes, in their simplest form, a file of YAML: one field's rule at a time, each folding to a line once it's written.
+// Source names are in their source's ink
+const M3_Y={x:350,y:90,w:640,h:610},M3_YT="person_rules.yml";
+const M3_YF=[["legal_name",[["    trust: [",["student_system","sis"],"]"],["    checked_against: passport"]]],
+  ["preferred_name",[["    trust: [",["self_service","self"],"]"]]],
+  ["birth_date",[["    trust: [",["student_system","sis"],"]"],["    others: review"]]],
+  ["mobile",[["    rule: newest_confirmed"]]]];
 // a line of YAML, typed in up to n characters; its parts are plain strings, or [text, source] in the source's ink
 function m3_yline(ctx,x,y,parts,n){let cx=x,left=n;for(const p of parts){if(left<=0)break;const s=typeof p==="string"?p:p[0],sub=s.slice(0,left);
   wc_T(ctx,sub,cx,y,{w:500,size:28,f:"mono",col:typeof p==="string"?WC_DARK:m3_ink(p[1])});cx+=tw(ctx,s,28,500,"mono");left-=s.length;}}
 // o.type[i]: field i typed in, 0 to 1; o.fold[i]: folded to its one line, 0 to 1
 function m3_yaml(ctx,o){const Y=M3_Y,x=Y.x,y=Y.y,lh=44;wc_panel(ctx,x,y,Y.w,Y.h,{kind:"card",seed:9});
-  wc_T(ctx,"_core_person__models.yml",x+30,y+54,{w:600,size:28,f:"mono",col:WC_DARK});
+  wc_T(ctx,M3_YT,x+30,y+54,{w:600,size:28,f:"mono",col:WC_DARK});
   ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.35);ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(x+30,y+80);ctx.lineTo(x+Y.w-30,y+80);ctx.stroke();ctx.restore();
-  let yy=y+130;wc_T(ctx,"columns:",x+30,yy,{w:500,size:28,f:"mono",col:WC_DARK});yy+=lh;
-  M3_YF.forEach(([name,lines],i)=>{const ty=o.type[i]||0;if(ty<=0)return;const fo=ease(clamp(o.fold[i]||0,0,1)),head="  - name: "+name,all=[head].concat(lines.map(l=>l.map(p=>typeof p==="string"?p:p[0]).join(""))),
+  let yy=y+130;wc_T(ctx,"fields:",x+30,yy,{w:500,size:28,f:"mono",col:WC_DARK});yy+=lh;
+  M3_YF.forEach(([name,lines],i)=>{const ty=o.type[i]||0;if(ty<=0)return;const fo=ease(clamp(o.fold[i]||0,0,1)),head="  "+name+":",all=[head].concat(lines.map(l=>l.map(p=>typeof p==="string"?p:p[0]).join(""))),
       tot=all.reduce((a,s)=>a+s.length,0);let n=Math.round(tot*clamp(ty,0,1));
     m3_yline(ctx,x+30,yy,[head],n);if(fo>0.5)withA(ctx,(fo-0.5)*2,()=>wc_T(ctx,"…",x+30+tw(ctx,head+" ",28,500,"mono"),yy,{w:500,size:28,f:"mono",col:WC_MUTED}));n-=head.length;yy+=lh;
     lines.forEach(parts=>{const s=parts.map(p=>typeof p==="string"?p:p[0]).join("");if(fo<0.99)withA(ctx,1-fo,()=>m3_yline(ctx,x+30,yy,parts,n));n-=s.length;yy+=lh*(1-fo);});});}
@@ -386,13 +388,28 @@ function m3_chain(ctx,cx,y,a){const ws=M3_CHAIN.map(s=>Math.round(tw(ctx,s,28,70
   M3_CHAIN.forEach((s,i)=>{const xx=x,ai=a[i]||0;if(ai>0.01)arrive(ctx,xx+ws[i]/2,y,ai*2,0,()=>{wc_panel(ctx,xx,y-27,ws[i],54,{kind:"tag",wash:M3_GOLD,washA:0.35,seed:i+21});
       wc_T(ctx,s,xx+22,y+10,{w:700,size:28,col:WC_DARK});},{dy:8,d:1});
     x+=ws[i];if(i<2&&(a[i+1]||0)>0.01)m3_arrow(ctx,x+12,y,x+58,y,clamp((a[i+1]||0)*3,0,1),{lw:2.6,a:0.8});x+=70;});}
-// what dbt writes from the YAML: the SQL, and the tests that read the same rules
-function m3_sqlCard(ctx,x,y,w,p){wc_panel(ctx,x,y,w,232,{kind:"card",seed:23});wc_T(ctx,"SQL, written by dbt",x+30,y+52,{w:800,size:30,col:WC_DARK});
+// what's written from the rules: the SQL that applies them, and the tests that read the same rules
+function m3_sqlCard(ctx,x,y,w,p){wc_panel(ctx,x,y,w,232,{kind:"card",seed:23});wc_T(ctx,"SQL, written from the rules",x+30,y+52,{w:800,size:30,col:WC_DARK});
   const L=["min_by(legal_name, trust_rank)","  filter (where legal_name is not null)","  as legal_name,"];let n=Math.round(L.join("").length*clamp(p,0,1));
   L.forEach((s,i)=>{if(n<=0)return;wc_T(ctx,s.slice(0,n),x+30,y+110+i*44,{w:500,size:28,f:"mono",col:WC_DARK});n-=s.length;});}
 function m3_testCard(ctx,x,y,w,a){wc_panel(ctx,x,y,w,196,{kind:"card",seed:25});wc_T(ctx,"tests",x+30,y+52,{w:800,size:30,col:WC_DARK});
   ["every value has a source","legal name only from a trusted source"].forEach((s,i)=>{const p=a[i]||0;if(p<=0)return;const yy=y+108+i*52;
     wc_tick(ctx,x+46,yy-10,30,WC_ROLEINK.alumna,clamp(p/0.4,0,1),4);withA(ctx,clamp((p-0.2)/0.5,0,1),()=>wc_T(ctx,s,x+78,yy,{w:600,size:28,col:WC_INK}));});}
+// the same rule on a master data tool's screen, under the gold of the business side: the legal name's trusted source and what it's
+// checked against, each chosen from a list, then saved. p: its rows coming in, 0 to 1; o.saved: the tick once it's saved, 0 to 1
+function m3_screen(ctx,x,y,w,p,o){o=o||{};const h=372;wc_panel(ctx,x,y,w,h,{kind:"card",role:M3_GOLD,sw:w-30,sy:14,sh:66,seed:27});
+  wc_T(ctx,"rules · legal name",x+32,y+60,{w:800,size:30,col:WC_DARK});
+  [["trusted source","student system","sis"],["checked against","passport",null]].forEach(([k,v,src],i)=>{const a=clamp(p*2-i*0.7,0,1);if(a<=0.01)return;
+    const yy=y+150+i*92,bx=x+292,bw=w-324;withA(ctx,a,()=>{wc_T(ctx,k,x+32,yy,{w:600,size:28,col:WC_MUTED});
+      wc_panel(ctx,bx,yy-40,bw,60,{kind:"card",fill:WC_PAPER,seed:28+i});wc_T(ctx,v,bx+22,yy,{w:600,size:28,col:src?m3_ink(src):WC_INK});
+      // a list to choose from: a small chevron at the box's end
+      ctx.save();ctx.strokeStyle=rgba(WC_INK,0.8);ctx.lineWidth=2.6;ctx.lineCap="round";ctx.lineJoin="round";ctx.beginPath();
+      ctx.moveTo(bx+bw-42,yy-18);ctx.lineTo(bx+bw-31,yy-7);ctx.lineTo(bx+bw-20,yy-18);ctx.stroke();ctx.restore();});});
+  const sa=clamp(p*2-1.3,0,1);if(sa>0.01)withA(ctx,sa,()=>{const bw=M3_SAVE.w,bx=x+w-32-bw,by=y+h-86;wc_panel(ctx,bx,by,bw,58,{kind:"pill",seed:29});
+    wc_T(ctx,"save",bx+bw/2,by+39,{w:700,size:28,align:"center",col:WC_DARK});wc_tick(ctx,bx-34,by+20,30,WC_ROLEINK.alumna,o.saved||0,4);});}
+// the save button's width, and where the pointer presses it from the screen's top left corner: just past and below its word, so the
+// word stays readable
+const M3_SAVE={w:112,dx:740-32-112+90,dy:372-86+46};
 
 /* ---------- 6. four emails, each for something ---------- */
 // a contact point: the address, what it's for, where it comes from and when she last confirmed it

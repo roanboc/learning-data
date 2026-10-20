@@ -10,6 +10,7 @@ Before story or pictures, the concept is settled. [`AGENTS.md`](AGENTS.md) gives
 - **Check it against practice.** Concepts and processes come from what practitioners really do; the author's own experience goes into the brief.
 - **Keep the essential.** Name the bodies of knowledge once, then teach the insights they share, as *From words to data* did with modelling techniques and *The map before the data* with EA frameworks.
 - **Tools show, they don't lead.** Databricks and dbt demonstrate the ideas; a topic never exists because a product feature does.
+- **Show where the practice lives.** Not every idea lives where the demo tools would put it. The first cut of *Which value wins* said dbt turns the master data rules into SQL, but such rules are a specification, usually set on a master data tool's screens by people who don't write code. Say what the thing is (rules written down in one place, where the steps that build the record read them), show the screen people use without naming a product, and show a file and its SQL as the simplest form.
 
 *Ask: would an expert in each framework agree, and would a practitioner recognise it?*
 

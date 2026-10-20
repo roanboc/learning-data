@@ -63,201 +63,205 @@ El modelo de la universidad ya elige uno.
 Para el estudiante, toma primero el sistema de estudiantes, después la plataforma de aprendizaje y los cursos cortos.
 
 17
-00:01:24,252 --> 00:01:29,607
-Un solo orden, para todos los campos, dentro del SQL, donde los responsables de los datos no pueden verlo.
+00:01:24,252 --> 00:01:29,485
+Un solo orden, para todos los campos, dentro del código, donde los responsables de los datos no pueden verlo.
 
 18
-00:01:31,107 --> 00:01:34,735
+00:01:30,985 --> 00:01:34,613
 Para la persona, la solución rápida es dejar que gane el valor más nuevo.
 
 19
-00:01:35,835 --> 00:01:41,297
+00:01:35,713 --> 00:01:41,175
 Pero RR. HH. vuelve a enviar su archivo completo cada periodo lectivo, así que sus valores siempre parecen nuevos.
 
 20
-00:01:42,597 --> 00:01:46,850
+00:01:42,475 --> 00:01:46,728
 Su fecha de nacimiento queda con la errata de RR. HH., y vuelve su viejo celular.
 
 21
-00:01:48,150 --> 00:01:51,318
+00:01:48,028 --> 00:01:51,196
 Su certificado de notas saldría con su nombre como lo tipeó RR. HH.
 
 22
-00:01:52,618 --> 00:01:53,961
+00:01:52,496 --> 00:01:53,839
 Lo más nuevo no es lo más cierto.
 
 23
-00:01:56,661 --> 00:02:02,482
+00:01:56,539 --> 00:02:02,360
 Su nombre legal es Nguyễn Thị Linh: primero el apellido, con sus acentos, como en su pasaporte.
 
 24
-00:02:03,982 --> 00:02:06,521
+00:02:03,860 --> 00:02:06,399
 El sistema de estudiantes lo verificó al matricularse.
 
 25
-00:02:07,621 --> 00:02:12,191
+00:02:07,499 --> 00:02:12,069
 Su registro antiguo perdió los acentos, y RR. HH. lo dio vuelta: Linh Nguyen.
 
 26
-00:02:13,691 --> 00:02:16,218
+00:02:13,569 --> 00:02:16,096
 El nombre que usa, Linh, lo eligió ella misma.
 
 27
-00:02:17,418 --> 00:02:19,363
+00:02:17,296 --> 00:02:19,241
 Los dos son suyos, para cosas distintas.
 
 28
-00:02:20,063 --> 00:02:22,142
+00:02:19,941 --> 00:02:22,020
 Su certificado de notas lleva su nombre legal.
 
 29
-00:02:23,142 --> 00:02:26,449
+00:02:23,020 --> 00:02:26,327
 Sus listas de clase y su credencial, el que eligió.
 
 30
-00:02:27,749 --> 00:02:31,114
+00:02:27,627 --> 00:02:30,992
 Así que la persona tiene dos nombres, y cada uno, su propia regla.
 
 31
-00:02:33,814 --> 00:02:37,970
-Así que Jun anota las reglas, campo por campo, en el YAML del modelo.
+00:02:33,692 --> 00:02:40,017
+Así que Jun anota las reglas, campo por campo, en un solo lugar, donde las leen los pasos que arman su registro.
 
 32
-00:02:39,170 --> 00:02:42,949
+00:02:41,717 --> 00:02:45,496
 Como los relojes patrón del Beagle, cada campo tiene su fuente más confiable.
 
 33
-00:02:43,649 --> 00:02:47,261
+00:02:46,596 --> 00:02:50,208
 Su nombre legal, del sistema de estudiantes, que verificó su pasaporte.
 
 34
-00:02:48,561 --> 00:02:50,639
+00:02:51,708 --> 00:02:53,786
 Su nombre preferido, de la propia Linh.
 
 35
-00:02:51,839 --> 00:02:53,897
+00:02:54,986 --> 00:02:57,044
 Su fecha de nacimiento, del sistema de estudiantes.
 
 36
-00:02:54,897 --> 00:02:57,989
+00:02:58,244 --> 00:03:01,336
 Si otro sistema envía una distinta, espera a Mei.
 
 37
-00:02:59,089 --> 00:03:04,382
+00:03:02,436 --> 00:03:07,729
 La de RR. HH. aún tiene la errata, así que Mei fija la correcta, con un motivo, hasta el próximo año.
 
 38
-00:03:05,882 --> 00:03:09,828
+00:03:09,229 --> 00:03:13,175
 Su celular: el más nuevo que ella confirmó, no el más nuevo que llegó.
 
 39
-00:03:11,328 --> 00:03:18,980
+00:03:14,675 --> 00:03:22,327
 Todos los demás campos recurren al mismo orden: la fuente más confiable, luego el valor confirmado más nuevo, luego el más completo.
 
 40
-00:03:20,480 --> 00:03:24,960
-Y dbt convierte las reglas en el SQL, y en pruebas que las verifican.
+00:03:24,027 --> 00:03:28,692
+Las herramientas de datos maestros permiten fijar reglas como estas en sus propias pantallas.
 
 41
-00:03:29,660 --> 00:03:32,910
-Una columna de correo guarda un correo. Linh tiene cuatro.
+00:03:30,292 --> 00:03:35,612
+En su forma más simple, son un archivo como este, y el código y las pruebas se escriben a partir de él.
 
 42
-00:03:34,210 --> 00:03:38,337
-Su correo de estudiante, para sus estudios. Su correo de personal, para sus tutorías.
+00:03:40,312 --> 00:03:43,562
+Una columna de correo guarda un correo. Linh tiene cuatro.
 
 43
-00:03:39,537 --> 00:03:43,743
-Uno personal de 2019, y otro más nuevo de su postulación.
+00:03:44,862 --> 00:03:48,989
+Su correo de estudiante, para sus estudios. Su correo de personal, para sus tutorías.
 
 44
-00:03:45,043 --> 00:03:47,583
-Ninguno está mal. Cada uno sirve para algo.
+00:03:50,189 --> 00:03:54,395
+Uno personal de 2019, y otro más nuevo de su postulación.
 
 45
-00:03:48,683 --> 00:03:54,443
-Así que cada uno se guarda como punto de contacto: su propósito, su fuente y el día en que lo confirmó por última vez.
+00:03:55,695 --> 00:03:58,235
+Ninguno está mal. Cada uno sirve para algo.
 
 46
-00:03:55,943 --> 00:04:00,469
-RR. HH. le escribe a su correo de personal. La oficina de egresados, a uno personal.
+00:03:59,335 --> 00:04:05,095
+Así que cada uno se guarda como punto de contacto: su propósito, su fuente y el día en que lo confirmó por última vez.
 
 47
-00:04:03,169 --> 00:04:08,939
-Ahora cada valor del registro de Linh dice de dónde vino, qué regla lo eligió y qué antigüedad tiene.
+00:04:06,595 --> 00:04:11,121
+RR. HH. le escribe a su correo de personal. La oficina de egresados, a uno personal.
 
 48
-00:04:10,639 --> 00:04:13,588
-Los valores que perdieron siguen ahí, a un clic.
+00:04:13,821 --> 00:04:19,591
+Ahora cada valor del registro de Linh dice de dónde vino, qué regla lo eligió y qué antigüedad tiene.
 
 49
-00:04:15,288 --> 00:04:20,210
-Así, si alguien pregunta por qué su registro dice 14 de marzo, la respuesta está ahí mismo.
+00:04:21,291 --> 00:04:24,240
+Los valores que perdieron siguen ahí, a un clic.
 
 50
-00:04:21,910 --> 00:04:25,923
-Su certificado de notas, su lista de clase y la oficina de egresados leen de él.
+00:04:25,940 --> 00:04:30,862
+Así, si alguien pregunta por qué su registro dice 14 de marzo, la respuesta está ahí mismo.
 
 51
-00:04:28,623 --> 00:04:29,854
-Las reglas también cambian.
+00:04:32,562 --> 00:04:36,575
+Su certificado de notas, su lista de clase y la oficina de egresados leen de él.
 
 52
-00:04:30,554 --> 00:04:36,887
-La oficina de egresados pide una nueva: para el correo personal, el que cada persona confirmó más recientemente.
+00:04:39,275 --> 00:04:40,506
+Las reglas también cambian.
 
 53
-00:04:38,187 --> 00:04:41,838
-Antes de aplicarla, una simulación lista cada valor que cambiaría.
+00:04:41,206 --> 00:04:47,539
+La oficina de egresados pide una nueva: para el correo personal, el que cada persona confirmó más recientemente.
 
 54
-00:04:42,938 --> 00:04:46,185
-1284, entre ellos el de Linh.
+00:04:48,839 --> 00:04:52,490
+Antes de aplicarla, una simulación lista cada valor que cambiaría.
 
 55
-00:04:47,685 --> 00:04:51,823
-Mei revisa una muestra, y la jefatura de registro, responsable de los datos, la aprueba.
+00:04:53,590 --> 00:04:56,837
+1284, entre ellos el de Linh.
 
 56
-00:04:53,323 --> 00:04:55,792
-Luego se aplica, como versión dos, con su fecha.
+00:04:58,337 --> 00:05:02,475
+Mei revisa una muestra, y la jefatura de registro, responsable de los datos, la aprueba.
 
 57
-00:04:58,492 --> 00:05:00,096
-Un banco también conoce dos nombres.
+00:05:03,975 --> 00:05:06,444
+Luego se aplica, como versión dos, con su fecha.
 
 58
-00:05:01,096 --> 00:05:03,722
-Los estados de cuenta llevan su nombre legal.
+00:05:09,144 --> 00:05:10,748
+Un banco también conoce dos nombres.
 
 59
-00:05:04,822 --> 00:05:07,071
-La app saluda con el nombre que eligió.
+00:05:11,748 --> 00:05:14,374
+Los estados de cuenta llevan su nombre legal.
 
 60
-00:05:08,271 --> 00:05:12,187
-Una tienda guarda una dirección de facturación y una de envío, cada una para algo.
+00:05:15,474 --> 00:05:17,723
+La app saluda con el nombre que eligió.
 
 61
-00:05:13,487 --> 00:05:17,933
-Lugares distintos, la misma pregunta: qué valor, para qué, y quién lo dice.
+00:05:18,923 --> 00:05:22,839
+Una tienda guarda una dirección de facturación y una de envío, cada una para algo.
 
 62
-00:05:20,833 --> 00:05:23,970
-En octubre de 1836, el Beagle volvió a casa.
+00:05:24,139 --> 00:05:28,585
+Lugares distintos, la misma pregunta: qué valor, para qué, y quién lo dice.
 
 63
-00:05:25,570 --> 00:05:30,425
-Tras cinco años dando la vuelta al mundo, sus relojes se desviaron apenas 33 segundos.
+00:05:31,485 --> 00:05:34,622
+En octubre de 1836, el Beagle volvió a casa.
 
 64
-00:05:32,025 --> 00:05:36,651
-En qué reloj confiar se decidió antes de que discreparan, y se comprobó en cada puerto.
+00:05:36,222 --> 00:05:41,077
+Tras cinco años dando la vuelta al mundo, sus relojes se desviaron apenas 33 segundos.
 
 65
-00:05:38,151 --> 00:05:44,360
-Las reglas de Linh funcionan igual: escritas antes de que sus registros discrepen, y probadas cada noche.
+00:05:42,677 --> 00:05:47,303
+En qué reloj confiar se decidió antes de que discreparan, y se comprobó en cada puerto.
 
 66
-00:05:45,960 --> 00:05:48,608
-La regla se declara, no se esconde en el SQL.
+00:05:48,803 --> 00:05:55,012
+Las reglas de Linh funcionan igual: escritas antes de que sus registros discrepen, y probadas cada noche.
+
+67
+00:05:56,612 --> 00:05:59,198
+La regla se declara, no se esconde en el código.

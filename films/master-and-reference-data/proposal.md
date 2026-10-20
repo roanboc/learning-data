@@ -61,6 +61,7 @@
 | 18 October 2026 | The appeal's numbers in *For this purpose only*: 2,140 alumni selected, 37 who said no taken off, 2,103 asked. They're invented, and kept plausible. |
 | 18 October 2026 | The sound of *For this purpose only* is a new palette: strings for the chords, a harp for each role on its note in the series, a horn for the person, and the series' mark on the clarinet, from E minor to E major. The music sits about 21 dB under the voice and the effects' peaks about 13 dB under the music; the one pulse plays only when the appeal's email reaches Linh. |
 | 18 October 2026 | The poster of *For this purpose only* is the end of chapter 5: Linh's no on her, as the person, and her four doors, each with its purposes and its latch. |
+| 20 October 2026 | The person queue's time limit is 7 days in every film: in *Who is it?* a test fails when a pair waits more than a week, and in *Kept, not cleaned* the oldest case's gauge and its alert use the same limit. |
 
 ## The brief
 

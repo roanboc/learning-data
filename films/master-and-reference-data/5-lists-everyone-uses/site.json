@@ -1,0 +1,30 @@
+{
+  "kicker": "Reference data, with an owner and a date",
+  "kicker_es": "Datos de referencia, con responsable y fecha",
+  "title_es": "Listas que todos usan",
+  "h1": "Lists everyone uses: reference data with an owner, a date and one home",
+  "h1_es": "Listas que todos usan: datos de referencia con responsable, fecha y un solo hogar",
+  "lead": "Airport codes outlive their reasons, because changing one costs everyone who uses it. At the university, Linh's tutor role has three names in three systems, and nothing written down says they match. A list of statuses is typed again in two tests, and a count lists her country three times. Jun gives each list one home: a table with each value's code and label, its owner, and the date it applies from. The tests read the list instead of typing it, a change is a pull request its owner approves, countries come from the international standard, and lists about people stay short and are asked for only with a purpose.",
+  "lead_es": "Los códigos de aeropuerto sobreviven a su razón, porque cambiar uno les cuesta a todos los que lo usan. En la universidad, el rol de tutora de Linh tiene tres nombres en tres sistemas, y nada escrito dice que coinciden. Una lista de estados se vuelve a escribir en dos pruebas, y un conteo muestra su país tres veces. Jun le da a cada lista un solo hogar: una tabla con el código y la etiqueta de cada valor, su responsable y la fecha desde la que aplica. Las pruebas leen la lista en vez de escribirla, un cambio es un pull request que aprueba su responsable, los países vienen del estándar internacional, y las listas sobre personas se mantienen cortas y solo se piden con un propósito.",
+  "description": "A film about reference data: airport codes that outlive their reasons; one role under three names; a list of statuses typed again by hand; a country counted three times; each list given one home, with an owner and the date each value applies from; tests that read the list; a change made as a pull request its owner approves; countries from ISO 3166; lists about people kept short; and the same lists in a bank and a hospital.",
+  "description_es": "Una película sobre datos de referencia: códigos de aeropuerto que sobreviven a su razón; un rol con tres nombres; una lista de estados escrita otra vez a mano; un país contado tres veces; cada lista con un solo hogar, un responsable y la fecha desde la que aplica cada valor; pruebas que leen la lista; un cambio hecho como un pull request que aprueba su responsable; los países desde ISO 3166; listas sobre personas que se mantienen cortas; y las mismas listas en un banco y un hospital.",
+  "card": "Three names for one role, and a country counted three times. Give each list an owner, a date and one home.",
+  "card_es": "Tres nombres para un rol, y un país contado tres veces. Dale a cada lista un responsable, una fecha y un solo hogar.",
+  "chapters_es": {
+    "codes": "Un código sobrevive a su razón",
+    "names": "Un rol, tres nombres",
+    "typed": "Escrito otra vez",
+    "kinds": "Las listas que clasifican",
+    "home": "Un hogar para cada lista",
+    "read": "Leído, no escrito",
+    "change": "Un cambio, con fecha",
+    "outside": "De fuera",
+    "people": "Listas sobre personas",
+    "elsewhere": "En otros lugares",
+    "keeps": "Quién la mantiene"
+  },
+  "next_h": "You've given each list an owner, a date and one home. More films in the series are on the way.",
+  "next_h_es": "Le diste a cada lista un responsable, una fecha y un solo hogar. Vienen más películas de la serie.",
+  "past": ["Airport codes: Toronto's YYZ, after Malton's old station code, and SGN, which still says Saigon", "A code outlives its reason, because changing it costs everyone who uses it."],
+  "past_es": ["Códigos de aeropuerto: YYZ de Toronto, por el antiguo código de estación de Malton, y SGN, que aún dice Saigón", "Un código sobrevive a su razón, porque cambiarlo les cuesta a todos los que lo usan."]
+}

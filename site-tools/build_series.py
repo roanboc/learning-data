@@ -3,10 +3,11 @@
 
     python site-tools/build_series.py
 
-The site is organised in big topics (TOPICS below), each holding films and series. Three series are built this way:
+The site is organised in big topics (TOPICS below), each holding films and series. Four series are built this way:
 From words to data (films/from-words-to-data/, on the site at from-words-to-data/), In the weeds of data crafting
-(films/analytics-engineering/, at in-the-weeds/) and The map before the data (films/enterprise-architecture/, at
-enterprise-architecture/). Each is described once, in SERIES below: its folder, its place on the site, its names, the
+(films/analytics-engineering/, at in-the-weeds/), The map before the data (films/enterprise-architecture/, at
+enterprise-architecture/) and The same one, everywhere (films/master-and-reference-data/, at master-and-reference-data/).
+Each is described once, in SERIES below: its folder, its place on the site, its names, the
 hand-written pages that show its cards, and what each film builds on. The films and series whose pages are written by hand
 (The Inner Life of Data, A Sharper Sketch, When things go wrong) are described, for their cards, in HAND.
 For each series: its page (site/<slug>/) and, for each film, its Watch page (site/<slug>/<film>/) and, if it has them, its
@@ -72,6 +73,17 @@ def ea_builds_on(lg, f, all_films, R):
     return after_previous(lg, f, all_films)
 
 
+def mr_builds_on(lg, f, all_films, R):
+    """The same one, everywhere: the first film builds on What makes it the same one (In the weeds of data crafting), where a learner
+    is matched across three systems, and on Who does it, and where meaning changes (The map before the data), where an actor is
+    assigned to roles; each later film builds on the one before."""
+    if f["index"] == 0:
+        RE = R if lg == "en" else R[3:]
+        return (f'<p class="builds-on">Builds on <a href="{RE}in-the-weeds/what-makes-it-the-same-one/"><i>What makes it the same one</i></a> and <a href="{RE}enterprise-architecture/who-does-it/"><i>Who does it, and where meaning changes</i></a></p>' if lg == "en" else
+                f'<p class="builds-on">Amplía <a href="{RE}in-the-weeds/what-makes-it-the-same-one/"><i>Qué lo hace el mismo</i></a> y <a href="{RE}enterprise-architecture/who-does-it/"><i>Quién lo hace, y dónde cambia el significado</i></a></p>')
+    return after_previous(lg, f, all_films)
+
+
 # ---------------------------------------------------------------- the series
 # id: the series' key; dir: its folder under films/; slug: its path on the site; name: its title; builds_on: what each film builds on;
 # place: where its films happen, as its footer says it ("The university, people, numbers and records… are fictional"); marks: the
@@ -92,6 +104,11 @@ SERIES = [
          place={"en": "utility", "es": "empresa de energía"}, blocks=[],
          marks={"en": "TOGAF and ArchiMate are trademarks of The Open Group, and Zachman of Zachman International, named only to identify those frameworks; this project is not affiliated with or endorsed by them.",
                 "es": "TOGAF y ArchiMate son marcas de The Open Group, y Zachman de Zachman International, nombradas solo para identificar esos marcos; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
+    dict(id="master-and-reference-data", dir="master-and-reference-data", slug="master-and-reference-data",
+         name={"en": "The same one, everywhere", "es": "El mismo, en todas partes"}, builds_on=mr_builds_on,
+         place={"en": "university", "es": "universidad"}, blocks=[],
+         marks={"en": "DAMA and DAMA-DMBOK are trademarks of DAMA International, and ArchiMate of The Open Group, named or drawn only to identify that body of knowledge and that notation. LakeFusion is a product name of its owner, named only as one example of a master data hub. This project is not affiliated with or endorsed by them.",
+                "es": "DAMA y DAMA-DMBOK son marcas de DAMA International, y ArchiMate de The Open Group, nombradas o dibujadas solo para identificar ese cuerpo de conocimiento y esa notación. LakeFusion es un nombre de producto de su titular, nombrado solo como un ejemplo de hub de datos maestros. Este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
 ]
 for _S in SERIES:
     _S["root"] = ROOT / "films" / _S["dir"]
@@ -128,6 +145,13 @@ def minutes(sec):
     return str(h // 2) + ("½" if h % 2 else "")
 
 
+def number(d, i):
+    """A film's place in its series, from 0: its folder's number less one ("3-which-value-wins" is 2), so a series' films can come
+    out in any order; a folder without a number takes its place in series.json's list."""
+    m = re.match(r"\d+", d)
+    return int(m.group()) - 1 if m else i
+
+
 def films(S=FW):
     """Every film of a series whose player is on the site, in order, with everything its pages need."""
     series = json.loads((S["root"] / "series.json").read_text())
@@ -151,7 +175,7 @@ def films(S=FW):
         nt = len(re.findall(r'[{,]q:"', think.read_text())) if think.exists() else 0
         N = load_obj(src / "src" / "narration.js")
         out.append(dict(dir=d, key=key, title=meta["title"], site=site, labs=nl, quiz=nq, think=nt, len=minutes(length(src)), sec=length(src),
-                        chapters=[(k, v["name"]) for k, v in N.items()], prefix="ld-" + key, index=i, series=S))
+                        chapters=[(k, v["name"]) for k, v in N.items()], prefix="ld-" + key, index=number(d, i), series=S))
     return series, out
 
 
@@ -209,6 +233,11 @@ TOPICS = [
          who={"en": "For architects, and anyone new to an organisation", "es": "Para arquitectos, y para quien llega nuevo a una organización"},
          line={"en": "How an organisation works, in layers, before you ask what its data should answer.",
                "es": "Cómo funciona una organización, por capas, antes de preguntar qué deberían responder sus datos."}),
+    dict(id="master-data", items=["master-and-reference-data"],
+         name={"en": "Master and reference data", "es": "Datos maestros y de referencia"},
+         who={"en": "For data stewards and architects, and anyone whose data lives in many systems", "es": "Para custodios y arquitectos de datos, y para quien tiene sus datos en muchos sistemas"},
+         line={"en": "The people and things a business is about, kept once and shared across its systems, and the lists that sort them.",
+               "es": "Las personas y las cosas de las que trata un negocio, guardadas una vez y compartidas entre sus sistemas, y las listas que las clasifican."}),
 ]
 
 
@@ -505,13 +534,15 @@ def series_page(lg, series, films_, S=FW):
             f'<section class="module" id="films" aria-labelledby="films-h">\n<div class="mhead"><div><h2 id="films-h">{T(lg, "The films", "Las películas")}</h2><p>{E(series[T(lg, "order", "order_es")])}</p></div></div>\n'
             f'<div class="topic-grid" data-progress-text=\'{PT[lg]}\'>\n' + "\n".join(card(lg, x, "", R) for x in films_) + '\n</div>\n</section>\n\n')
     if "coming" in series:
-        rows = "\n".join(f'<li><span class="n">{i}</span><span><b>{E(t)}</b> · {E(d)}</span></li>' for i, t, d in series[T(lg, "coming", "coming_es")])
+        out = {x["index"] + 1 for x in films_}  # a film that is out leaves the list by itself
+        rows = "\n".join(f'<li><span class="n">{i}</span><span><b>{E(t)}</b> · {E(d)}</span></li>' for i, t, d in series[T(lg, "coming", "coming_es")] if i not in out)
         body += (f'<section class="module" id="coming" aria-labelledby="coming-h">\n<div class="mhead"><div><h2 id="coming-h">{E(series[T(lg, "coming_h", "coming_h_es")])}</h2><p>{E(series[T(lg, "coming_p", "coming_p_es")])}</p></div></div>\n'
                  f'<ol class="series-list coming">\n{rows}\n</ol>\n</section>\n\n')
     body += f'<section class="module" id="thread" aria-labelledby="thread-h">\n<div class="mhead"><div><h2 id="thread-h">{E(series[T(lg, "thread_h", "thread_h_es")])}</h2><p>{E(series[T(lg, "thread", "thread_es")])}</p></div></div>\n</section>\n\n'
     if "past" in series:
-        past = series[T(lg, "past", "past_es")]
-        rows = "\n".join(f'<tr><td>{E(x["title"] if lg == "en" else x["site"]["title_es"])}</td><td>{E(past[x["index"]][0])}</td><td>{E(past[x["index"]][1])}</td></tr>' for x in films_)
+        # a film's row is in its own site.json ("past", "past_es") if it has one, else at its place in series.json's list
+        past = lambda x: x["site"].get(T(lg, "past", "past_es")) or series[T(lg, "past", "past_es")][x["index"]]
+        rows = "\n".join(f'<tr><td>{E(x["title"] if lg == "en" else x["site"]["title_es"])}</td><td>{E(past(x)[0])}</td><td>{E(past(x)[1])}</td></tr>' for x in films_)
         body += (f'<section class="module" id="past" aria-labelledby="past-h">\n<div class="mhead"><div><h2 id="past-h">{E(series[T(lg, "past_h", "past_h_es")])}</h2></div></div>\n'
                  f'<div class="prose"><table><thead><tr><th>{T(lg, "Film", "Película")}</th><th>{T(lg, "Opens with", "Empieza con")}</th><th>{T(lg, "Still true today", "Sigue siendo cierto")}</th></tr></thead><tbody>\n{rows}\n</tbody></table></div>\n</section>\n\n')
     people = "\n".join(f'<div class="card {k}"><h3>{E(a)}</h3><p>{E(b)}</p></div>' for k, a, b in series[T(lg, "people", "people_es")])
@@ -546,10 +577,10 @@ def topic_card(lg, e, RL, R):
 
 TOPICS_PAGE = {
     "title": {"en": "Topics · Learning Data", "es": "Temas · Learning Data"},
-    "desc": {"en": "Short films on data, in five topics: data platforms, data modelling, analytics engineering, data quality and change, and enterprise architecture. Start with how a data platform works, then pick the topic you need.",
-             "es": "Películas cortas sobre datos, en cinco temas: plataformas de datos, modelado de datos, ingeniería analítica, calidad de datos y cambios, y arquitectura empresarial. Empieza por cómo funciona una plataforma de datos y luego elige el tema que necesitas."},
-    "lead": {"en": "Five topics, each with its films and series. Start with how a data platform works, then pick the topic you need. Your progress stays in this browser.",
-             "es": "Cinco temas, cada uno con sus películas y series. Empieza por cómo funciona una plataforma de datos y luego elige el tema que necesitas. Tu progreso se guarda en este navegador."},
+    "desc": {"en": "Short films on data, in six topics: data platforms, data modelling, analytics engineering, data quality and change, enterprise architecture, and master and reference data. Start with how a data platform works, then pick the topic you need.",
+             "es": "Películas cortas sobre datos, en seis temas: plataformas de datos, modelado de datos, ingeniería analítica, calidad de datos y cambios, arquitectura empresarial, y datos maestros y de referencia. Empieza por cómo funciona una plataforma de datos y luego elige el tema que necesitas."},
+    "lead": {"en": "Six topics, each with its films and series. Start with how a data platform works, then pick the topic you need. Your progress stays in this browser.",
+             "es": "Seis temas, cada uno con sus películas y series. Empieza por cómo funciona una plataforma de datos y luego elige el tema que necesitas. Tu progreso se guarda en este navegador."},
     "foot": {"en": "The university, the utility, people, numbers and records in the films, the labs and the scenarios are fictional. The narration is a synthetic voice. Code: MIT licence. Films, scripts, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them.",
              "es": "La universidad, la empresa de energía, las personas, las cifras y los registros de las películas, los labs y las situaciones son ficticios. La narración es una voz sintética. Código: licencia MIT. Películas, guiones, subtítulos, imágenes y texto: CC BY 4.0. Los logotipos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo."},
 }
@@ -567,7 +598,7 @@ def topics_page(lg):
     jump = "".join(f'<a href="#{t["id"]}">{E(t["name"][lg])}</a>' for t in TOPICS)
     body = (f'<body>\n{header(lg, path, R, cur="page")}\n<main>\n<section class="hero cine"><div class="bg mosaic" aria-hidden="true">{mosaic}</div><canvas class="fx" aria-hidden="true"></canvas>\n'
             f'<p class="eyebrow">Learning Data</p>\n<h1>{T(lg, "Topics", "Temas")}</h1>\n<p class="lead">{TOPICS_PAGE["lead"][lg]}</p>\n'
-            f'<nav class="topic-jump" aria-label="{T(lg, "The five topics", "Los cinco temas")}">{jump}</nav>\n</section>\n')
+            f'<nav class="topic-jump" aria-label="{T(lg, "The six topics", "Los seis temas")}">{jump}</nav>\n</section>\n')
     for t in TOPICS:
         cards = "\n".join(topic_card(lg, e, RL, R) for e in es[t["id"]])
         body += (f'\n<section class="module topic" id="{t["id"]}" aria-labelledby="{t["id"]}-h">\n'

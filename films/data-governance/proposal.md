@@ -1,6 +1,6 @@
 # Data governance, off the shelf
 
-*Proposal for a series on data governance that works where data work happens, v0.4. The folder is named after the topic; the series title is still open. Status: proposed, 16 October 2026; the opening film, *Off the shelf*, made 17 October 2026; the plan for the other films revised on 20 October 2026, with a new part on governance as a capability, and with the author for approval. The films below are the plan of 16 October; they are rewritten from the approved plan. A companion series on master and reference data is proposed beside it, in [`../master-and-reference-data/proposal.md`](../master-and-reference-data/proposal.md).*
+*Proposal for a series on data governance that works where data work happens, v0.5: *Governance you can use* (*Gobernanza que puedes usar*), named on 20 October 2026; the folder is named after the topic. Status: proposed, 16 October 2026; the opening film, *Off the shelf*, made 17 October 2026; the plan for films 2 to 19 approved by the author on 20 October 2026, with a new part on governance as a capability: nineteen films in three parts. A companion series on master and reference data is proposed beside it, in [`../master-and-reference-data/proposal.md`](../master-and-reference-data/proposal.md).*
 
 ## Decided
 
@@ -27,6 +27,16 @@
 | 17 October 2026 | A caption of more than about 140 characters runs to three lines in the player, and its box covers the picture: the series' `build.py` stops on one, in English and in every language's captions. Review found the last line of *Where decisions enter* at 163 characters, covering a label on the poster; it's now two lines, with the same words. |
 | 20 October 2026 | A new part after the films on what governance needs, and before the films on the tools: two or three films (three proposed) that design data governance as a capability, in enterprise architecture terms, end to end: the services it offers, its processes, the roles and actors, the business glossary run as a business product, the information assets and the models. It links to *The map before the data*, and the tools films get the architectural context: governance artifacts are kept in several repositories and apps. The tools films move to the end of the series. |
 | 20 October 2026 | Early in the films on what governance needs, the series shows one of governance's key challenges: having one trusted business glossary, where most organisations have many, siloed, inconsistent, invisible to others and unused. Then other tools use its definitions and stay in sync. *One word, one home* opens its story with it, and *Who decides* hands over to it. |
+| 20 October 2026 | The author approved the plan for films 2 to 19, as revised that day: one series of nineteen films in three parts, *What governance needs* (films 1 to 10), *Governance as a capability* (11 to 13) and *With the tools* (14 to 19). The story, the people and the university carry over, and each tools film says which films it expands. Each film still gets its own script, its fact checks and the author's review of its video. |
+| 20 October 2026 | Part two has three films, each a decision of its own: the capability and the services it offers (*A capability, not a project*), one service followed end to end, with the glossary run as a product (*Who does what, end to end*), and one home for every governance artifact across repositories and apps (*Where each piece lives*). |
+| 20 October 2026 | Part two's reference is what *The map before the data* teaches (capabilities, services, processes, roles and actors, business objects, drawn in ArchiMate 4), with DAMA-DMBOK's roles and DCAM's capabilities for governance itself, so the two series read as one. DAMA and DCAM stay named once, in *Off the shelf*. |
+| 20 October 2026 | A definition is written once, in Noor's architecture map, which publishes it to the business glossary, as *Meaning machines can read* and *The map before the data* show. The glossary is still run as the business's product, and every other tool syncs from it, one way. |
+| 20 October 2026 | Ontos is the example for products and contracts (*Products in open formats*, *The marketplace*), said plainly to be a Databricks Labs project without formal support. The open contract file is the part that lasts. |
+| 20 October 2026 | *Rules that run* opens in Cairo, in 861: the Nilometer, where the year's tax followed the river's measured height, not a report. No opening in this series or its companion came from Africa, and each already opened once in Rome. It's checked against Egyptian sources when the film is scripted. |
+| 20 October 2026 | The films are made one thread per film, side by side, after *Off the shelf* and one shared pass that adds the places several films need to the series' shared pictures (a film may not change them for itself). The example project's additions come from one thread, the governance check first, and each file exists before the film that shows it is scripted. Films 11 to 13 start once part one's scripts are approved, and films 14 to 19 once part two's are. |
+| 20 October 2026 | Labs and scenarios come per film, as in *In the weeds of data crafting*: each film has its own fix to practise. |
+| 20 October 2026 | The series is *Governance you can use* (*Gobernanza que puedes usar*), the name the site already used; the other two options, *Off the shelf* and *Rules that run*, are film titles. |
+| 20 October 2026 | *Off the shelf*'s last chapter names the three parts: on "three more", three cards on Yusuf's board for the films on governance as a capability, and the films on the tools, numbered 14 to 19, on the data team's board. The title and end cards say "Film 1 of 19". The film also takes the master and reference data series' fix that blotches a wash right to the frame's edge, which removes pale bands along the top and left of some walls; the author agreed to take it the same day. |
 
 ## The brief
 
@@ -53,7 +63,9 @@ On 20 October 2026, after reading the plan for the other films: "I like the appr
 - **One test for every policy line: where does it run?** Every line of the binder ends the series in one of three places: it runs somewhere (a required field, a check, a tag, a route, a test), it's a decision someone owns and has recorded, or it's retired.
 - **Enable first, then enforce.** An enabler first makes the right thing easier (a field pre-filled, a definition already there, a mask applied for you); only then does a check stop what's still wrong. A check without the enabler is just a new way to say no.
 - **Governance decides; the platform does.** Governance sets decision rights and a few shared rules. Owners decide meaning in their domains. The platform and the pipeline carry the rules out, on every change.
-- **Measured by use, not by maturity.** The final film replaces the maturity assessment with measures read from the work itself.
+- **Measured by use, not by maturity.** *Teachers of data* replaces the maturity assessment with measures read from the work itself.
+- **One trusted glossary, not many.** Most organisations have several glossaries: siloed, inconsistent, invisible to others and unused. Keeping one that everyone trusts, and making every other tool read from it, is one of governance's key challenges, and *One word, one home* is about it.
+- **Governance as a capability, on the architecture map.** Part two designs governance the way *The map before the data* designs any part of an organisation: a capability that outlasts projects, the services it offers people, who does what end to end, and one home for every governance artifact across repositories and apps. The tools films then build each flow knowing where it belongs.
 
 ## The spine: where does each policy line run?
 
@@ -62,7 +74,7 @@ The university's governance programme starts the series with a binder: 34 polici
 | The binder says | Where it runs | Film |
 |---|---|---|
 | "Every critical data element has an accountable owner." | `owner` is required on every domain, entity and public model; a change asks its owner to review it, automatically | Who decides |
-| "Business terms are defined consistently across the organisation." | The business glossary is the home of a definition; a sync flags drift and proposes the change as a pull request (DEC-PRJ-11) | One word, one home |
+| "Business terms are defined consistently across the organisation." | One trusted business glossary in place of many; every other tool reads or syncs from it; a sync flags drift and proposes the change as a pull request (DEC-PRJ-11) | One word, one home |
 | "Personal data is classified and protected." | Every column of a public model is classified; the platform masks by classification, wherever the column travels | Who may see it |
 | "Data quality is monitored and issues are remediated." | Each rule is a test with an owner, a threshold and a reason; a scorecard is read from the last run; a failure opens an issue for its owner | Rules that run |
 | "Root causes of data quality issues are addressed." | Each issue is traced to where the data was made, fixed there, and turned into a check at entry; monitoring watches for what no rule names | Fixed where it starts |
@@ -70,6 +82,7 @@ The university's governance programme starts the series with a binder: 34 polici
 | "Data is managed as an asset with clear accountability." | Data products with an owner, a contract, service levels and a lifecycle, published where consumers find and request them | A product with an owner |
 | "AI use follows the organisation's data policies." | Agents read the same rules as checks and skills, with least privilege; they draft and flag, people approve | An agent that checks |
 | "Governance maturity is assessed annually." | Measures read from the metadata and the runs, every day; a stewards' community, guidance beside every check, and rollouts that warn first | Teachers of data |
+| "The data governance programme has a charter, and the council reviews it every year." | Governance on the architecture map as a capability, with services people ask for, roles end to end, and one home for every artifact; a budget line every year, not a project | A capability, not a project; Who does what, end to end; Where each piece lives |
 
 ## Foundations: DAMA, named once
 
@@ -81,8 +94,8 @@ Governance sits at the centre of DAMA's wheel because it's where the other knowl
 
 | Knowledge area | Where it's covered | Films |
 |---|---|---|
-| Data governance | This series; touched in every series that shows people approving | Here: all, centrally *Off the shelf*, *Who decides*, *Teachers of data*. Also *Keeping it true*, *An agent on the team* |
-| Data architecture | *The map before the data*; *In the weeds of data crafting* | All of *The map before the data*; *Who owns what*. Here: *Who decides*, *A product with an owner* |
+| Data governance | This series; touched in every series that shows people approving | Here: all, centrally *Off the shelf*, *Who decides*, *Teachers of data*, *A capability, not a project*, *Who does what, end to end*. Also *Keeping it true*, *An agent on the team* |
+| Data architecture | *The map before the data*; *In the weeds of data crafting* | All of *The map before the data*; *Who owns what*. Here: *Who decides*, *A product with an owner*, *Where each piece lives* |
 | Data modelling and design | *A Sharper Sketch*; *From words to data*; *In the weeds of data crafting* | All of *From words to data*; *Declare it, then build it* to *Built in layers*. Companion: *One person, many roles*, *Roles come and go* |
 | Data storage and operations | *The Inner Life of Data*; *From words to data* | *Into the platform*, *Two speeds* (chapters); *Both at once*; *Built in layers* (physical choices) |
 | Data security | *The Inner Life of Data*; this series; its companion | *Meaning* (chapter: access control, masks). Here: *Who may see it*, *Governed in Unity Catalog*, *The marketplace*. Companion: *For this purpose only* |
@@ -90,14 +103,14 @@ Governance sits at the centre of DAMA's wheel because it's where the other knowl
 | Document and content management | Not covered | Parked |
 | Reference and master data | The companion series; *In the weeds of data crafting* | All of the companion; *What makes it the same one* (key sets, code mappings) |
 | Data warehousing and business intelligence | *The Inner Life of Data*; *From words to data*; *In the weeds of data crafting* | *Refining with dbt*, *Gold*, *Apps and Genie* (chapters); *Built to write, built to read*, *Many ways to read*; *One row of what, and when*, *Built in layers* |
-| Metadata management | *The Inner Life of Data*; *From words to data*; *In the weeds of data crafting*; this series | *Meaning* (chapter); *Meaning machines can read*, *Keeping it true*; *Written once*. Here: *One word, one home*, *Governed in dbt*, *Meaning on the platform* |
+| Metadata management | *The Inner Life of Data*; *From words to data*; *In the weeds of data crafting*; this series | *Meaning* (chapter); *Meaning machines can read*, *Keeping it true*; *Written once*. Here: *One word, one home*, *Where each piece lives*, *Governed in dbt*, *Meaning on the platform* |
 | Data quality | *When things go wrong*; *In the weeds of data crafting*; this series; its companion | *Too good to be true*; *Promises and proofs*. Here: *Rules that run*, *Fixed where it starts*, *Quality on the platform*. Companion: *Kept, not cleaned* |
 
 The site could show the same map: the wheel on the Topics page, each area linking to its films (a decision for the author, below).
 
 ## The world, and the people
 
-**The same university, platform and people** as the other series, and the same example dbt project ([`../analytics-engineering/project/`](../analytics-engineering/project/)): every enabler shown is a file in it, or a file this series adds to it. Mei Tanaka owns the meaning of *award* and decides learner identity; Noor Rahman, the data architect, owns the model; Jun Park builds it; Sam Okafor runs the platform; Leila and Rosa own admissions' data and system.
+**The same university, platform and people** as the other series, and the same example dbt project ([`../analytics-engineering/project/`](../analytics-engineering/project/)): every enabler shown is a file in it, or a file this series adds to it. Mei Tanaka owns the meaning of *award* and decides learner identity; Noor Rahman, the data architect, owns the model; Jun Park builds it; Sam Okafor runs the platform; Leila and Rosa own admissions' data and system; Clara Jensen reports for Planning; Tom Whitfield runs short courses. In part two, Noor works beside Yusuf: her architecture map, from *The map before the data* and *Meaning machines can read*, gains governance one layer at a time.
 
 **One new character: Yusuf Demir, the data governance lead,** new to the role. Yusuf inherits the binder, and is asked to "fix governance" before the university's next government submission. Yusuf is the guide of the series, as Sam is of *When things go wrong* and Noor of *From words to data*.
 
@@ -107,17 +120,17 @@ The site could show the same map: the wheel on the Topics page, each area linkin
 
 The university reports its awards to the government every year. This year, the draft submission and the census report disagree on how many awards were conferred. The same week, the glossary's term *award* changes: microcredentials of at least 6 credit points now count (the kind of drift `skills/sync-the-glossary/` is built to catch). Yusuf is asked to make sure the reported number can be trusted, in time for the submission.
 
-None of the 34 policies would have caught either problem. Each film puts one enabler in place; the last film sends the submission, and shows what's left on the shelf.
+None of the 34 policies would have caught either problem. Each film of part one puts one enabler in place, and *Teachers of data* sends the submission and shows what's left on the shelf. Part two makes governance last beyond the submission, and part three builds each piece.
 
 ## The series at a glance
 
-Sixteen films of 4 to 6 minutes, in two parts. The first ten show what governance needs, and the enabler that delivers each. The last six open the tools, Databricks and dbt, and show how each enabler is built; each names the films it expands.
+Nineteen films of 4 to 6 minutes, in three parts. The first ten show what governance needs, and the enabler that delivers each. The next three design governance as a capability, on the university's architecture map. The last six open the tools, Databricks and dbt, and show how each enabler is built, along the flow part two's map gives it; each names the films it expands.
 
-| Part | # | Working title | The enabler | The idea to take away |
+| Part | # | Working title | What it puts in place | The idea to take away |
 |---|---|---|---|---|
 | What governance needs | 1 | **Off the shelf** | The map of where governance enters the work | A policy that doesn't run anywhere is a wish. |
 | | 2 | **Who decides** | Owners as required metadata; approvals routed from it | A decision right is real when the work asks for it. |
-| | 3 | **One word, one home** | The business glossary and its sync | Define once, sync one way, review every change. |
+| | 3 | **One word, one home** | One trusted glossary in place of many; every tool synced from it | Many glossaries are no glossary: keep one, and sync every tool from it. |
 | | 4 | **Who may see it** | Classification on the column; masks by classification | Classify once; let the platform protect it everywhere. |
 | | 5 | **Rules that run** | Owned tests and a scorecard read from the runs | A quality rule is a test with an owner. |
 | | 6 | **Fixed where it starts** | Issues traced to their source; checks at entry; monitoring for the unknown | Fix the cause, then make the fix a check. |
@@ -125,12 +138,15 @@ Sixteen films of 4 to 6 minutes, in two parts. The first ten show what governanc
 | | 8 | **A product with an owner** | Data products with an owner, a contract, service levels and a lifecycle | Own the product, not only the meaning. |
 | | 9 | **An agent that checks** | A governance review skill | Agents follow what's written as a check. People decide. |
 | | 10 | **Teachers of data** | The stewards' community, guidance beside every check, warn-then-error rollouts, measures read from the work | Governance is people's work; tools remember what people agreed. |
-| With the tools | 11 | **Governed in dbt** | `meta`, groups and access, contracts, versions, exposures, checks in CI | The project carries governance with the code. |
-| | 12 | **Governed in Unity Catalog** | Grants, governed tags, attribute-based policies, masks, lineage, audit | The platform enforces what the metadata says. |
-| | 13 | **Meaning on the platform** | Unity Catalog's Glossary, metric views, semantic models | One meaning, read by people, BI and agents. |
-| | 14 | **Quality on the platform** | dbt tests, pipeline expectations, quality monitoring, alerts routed to owners | Rules you write, and monitoring for the rest. |
-| | 15 | **Products in open formats** | Ontos: domains, data products (ODPS) and contracts (ODCS) over Unity Catalog | A contract in an open format outlives the tool. |
-| | 16 | **The marketplace** | Discover, request, approve, grant, with an end date; share outside | Finding and getting data is part of governance. |
+| Governance as a capability | 11 | **A capability, not a project** | Governance as a capability on the architecture map, and the services it offers, each with a promise | Governance is something the university can always do, offered as services people ask for. |
+| | 12 | **Who does what, end to end** | One service followed end to end: roles, actors, steps and the information each step needs; the glossary run as a product | Model the service end to end, and run the glossary as a product. |
+| | 13 | **Where each piece lives** | One home for every governance artifact across repositories and apps, and copies synced one way | Each artifact has one home and an owner; every copy is synced one way and says where it came from. |
+| With the tools | 14 | **Governed in dbt** | `meta`, groups and access, contracts, versions, exposures, checks in CI | The project carries governance with the code. |
+| | 15 | **Governed in Unity Catalog** | Grants, governed tags, attribute-based policies, masks, lineage, audit | The platform enforces what the metadata says. |
+| | 16 | **Meaning on the platform** | Unity Catalog's Glossary, metric views, semantic models | One meaning, read by people, reports and agents. |
+| | 17 | **Quality on the platform** | dbt tests, pipeline expectations, quality monitoring, alerts routed to owners | Rules you write, and monitoring for the rest. |
+| | 18 | **Products in open formats** | Ontos: domains, data products (ODPS) and contracts (ODCS) over Unity Catalog | A contract in an open format outlives the tool. |
+| | 19 | **The marketplace** | Discover, request, approve, grant, with an end date; share outside | Finding and getting data is part of governance. |
 
 ## Openings: other places, other times
 
@@ -140,14 +156,17 @@ Sixteen films of 4 to 6 minutes, in two parts. The first ten show what governanc
 | 2 | The andon cord: anyone on the line can stop it | Japan | 1950s–60s |
 | 3 | One script, one set of measures, across a newly unified empire | China | 221 BC |
 | 4 | A court stops a census: the right to decide what happens to your data | Germany | 1983 |
-| 5 | Frontinus measures the aqueducts and finds the records wrong | Rome | 97 AD |
+| 5 | The Nilometer: the year's tax follows the river's measured height, not a report | Cairo, Egypt | 861 |
 | 6 | Semmelweis has doctors wash their hands, and deaths on the ward fall | Vienna, Austria | 1847 |
 | 7 | Dagen H: a whole country switches to driving on the right, overnight, prepared for years | Sweden | 1967 |
 | 8 | A covered market where every stall has a maker who answers for it | Istanbul | 1460s onwards |
 | 9 | An agent reviews a change at 3 a.m. (imagined) | The university | Imagined, near future |
 | 10 | Mimes instead of fines: a city changes how people cross the street | Bogotá, Colombia | 1995 |
+| 11 | The water boards keep the land dry, before and after every flood: "interest, payment, say" | The Netherlands | Since the 1200s |
+| 12 | One dictionary, made together by the academies of the Spanish language, a word at a time | Madrid, and the Americas | 1713 to today |
+| 13 | The Annals written once, printed, and kept in distant archives; one saved copy rebuilt the rest | Korea | 1392 to 1863 |
 
-The tools films (11 to 16) don't open in the past. Each opens on the screen, with one line from the film it expands, and stays in the present: they're for the people who build it.
+The tools films (14 to 19) don't open in the past. Each opens on the screen, with one line from the film it expands, and stays in the present: they're for the people who build it.
 
 ## The films
 
@@ -173,7 +192,7 @@ The tools films (11 to 16) don't open in the past. Each opens on the screen, wit
 
 **Opening.** Japan, the 1950s and 60s: on a car assembly line, any worker who sees a defect pulls a cord, the andon, and the line stops. A right that comes with a cord gets used; one written in a manual doesn't.
 
-**Story.** The RACI says "Data steward: TBC" for half the domains, and learner identity is decided in email threads. Yusuf finds the owners are already written down, in the university's map of domains (`_shared__conceptual.yml`) and in each model's `meta.owner`. Yusuf and Noor make the owner required, and route every change from it: a change to the course domain's conceptual model asks Mei to review it, without anyone remembering to.
+**Story.** The RACI says "Data steward: TBC" for half the domains, and learner identity is decided in email threads. Yusuf finds the owners are already written down, in the university's map of domains (`_shared__conceptual.yml`) and in each model's `meta.owner`. Yusuf and Noor make the owner required, and route every change from it: a change to the course domain's conceptual model asks Mei to review it, without anyone remembering to. Then Mei asks which *award* she owns: she has found five definitions.
 
 **Ideas.** Decision rights, in three roles: the owner (accountable for meaning), the steward (does the daily work, such as Mei's identity decisions), the custodian (runs the platform). Federated: domains decide their own meaning; governance sets a few shared rules (the glossary, key sets, classification, conventions), as in *Who owns what*. The council decides only conflicts and exceptions, with a time limit and an escalation path. Every decision recorded where the work is, with who and when (the decision logs).
 
@@ -187,19 +206,19 @@ The tools films (11 to 16) don't open in the past. Each opens on the screen, wit
 
 ### 3. One word, one home
 
-**Opening.** China, 221 BC: a newly unified empire takes one script, one set of weights and measures, and one axle width, so a word, a weight and a road mean the same in every former state.
+**Opening.** China, 221 BC: a newly unified empire takes one script, one set of weights and measures, and one axle width, so a word, a weight and a cart mean the same in every former state. Shown at a market and on a road.
 
-**Story.** The glossary term *award* changes in Unity Catalog's Glossary. Before, someone would have noticed months later, in a dashboard. Now the scheduled sync finds the drift and opens a pull request with its impact: the near-award mart, the wallet, the census dashboard and their owners. Mei approves the new meaning; governance confirms the term still applies; Jun sees that "at least 6 credit points" is a number, so it belongs in a var.
+**Story.** Mei owns *award*, but which one? Yusuf finds five glossaries: Planning's spreadsheet, the registrar's policy appendix, the data team's model notes, the dashboards' own descriptions, and a glossary tool bought in 2019, with 600 terms nobody opens. They're siloed, they disagree (three different awards), two are invisible to anyone but the people who made them, and the biggest is unused. The owners choose one glossary everyone can trust: the business glossary on the platform, each term with its owner from *Who decides*. The others are retired or made to read from it: the project copies each term with its source, and a nightly sync flags any drift (DEC-PRJ-11); the dashboards read one shared definition; Planning's spreadsheet links to the term instead of keeping its own words. Then the term changes: microcredentials of at least 6 credit points now count. Before, someone noticed months later, in a dashboard. Now the sync finds the change and opens a pull request listing what it touches (the near-award mart, the wallet, the census dashboard) and who owns each part. Mei approves the new meaning, and Jun sees that "6 credit points" is a number, so it becomes a setting (a var).
 
-**Ideas.** Business glossary, data dictionary and catalog: three different things. A term has a definition, an owner, a status and a date. The glossary is the home of a definition it holds; the model takes its words and records where they came from (DEC-PRJ-11). One direction of sync. A definition change is reviewed with what it touches. A definition with a number in it is also a rule.
+**Ideas.** Why organisations end up with many glossaries, and why many is the same as none: nobody knows which to trust. Business glossary, data dictionary and catalog: three different things. A term has a definition, an owner, a status and a date. One glossary is the home of a definition it holds; every other tool reads it, or keeps a synced copy that records where it came from (DEC-PRJ-11). One direction of sync. A glossary is retired, or made to read from the trusted one; never two homes. A definition change is reviewed with what it touches. A definition with a number in it is also a rule.
 
-**The enabler.** The glossary, and the `sync-the-glossary` skill, already in the project, run on a schedule and in CI.
+**The enabler.** One trusted glossary, with the `sync-the-glossary` skill, already in the project, run on a schedule and in CI; the other glossaries retired or pointed at it.
 
-**On screen.** A term moving one way: glossary, conceptual model, doc block, catalog. A second arrow, backwards, crossed out.
+**On screen.** Five glossaries side by side on Yusuf's desk and screens, *award* marked in each, three of them different; the old tool's login page, gathering dust; then one glossary, and the pull request arriving with its list of owners; Mei reading it; the workshop where she and the faculties argued the words out, remembered.
 
-**The people side.** The words were agreed in a workshop where Mei and the faculties argued them out. The glossary keeps the agreement; it doesn't make it.
+**The people side.** The words were agreed in a workshop where Mei and the faculties argued them out. The glossary keeps the agreement; it doesn't make it. The people who kept the other glossaries lose something they built: they're thanked, and their best definitions move into the one that stays.
 
-**Labs (candidates).** *Glossary, dictionary or catalog?* *Read the drift report.*
+**Labs (candidates).** *Which glossary do you trust?* *Glossary, dictionary or catalog?* *Read the drift report.*
 
 ### 4. Who may see it
 
@@ -219,7 +238,7 @@ The tools films (11 to 16) don't open in the past. Each opens on the screen, wit
 
 ### 5. Rules that run
 
-**Opening.** Rome, 97 AD: Frontinus, the new water commissioner, measures what the aqueducts take in and what they deliver, and finds the official records wrong, and water stolen by illegal pipes. Measure; don't trust the register.
+**Opening.** Cairo, 861: on Roda Island, the Nilometer measures how high the Nile rises each summer, and the year's tax follows the measured height, not a report. Measure; don't trust the register. (Chosen on 20 October 2026 in place of Frontinus at Rome's aqueducts; checked against Egyptian sources when scripted.)
 
 **Story.** The programme measured quality with a survey: "rate your system's data quality from 1 to 5". Yusuf replaces it with what already runs. Each rule is a test with an owner, a threshold agreed with that owner (warn and error, as in *Too good to be true*) and a reason; the scorecard is read from last night's run, by domain and dimension; a failing rule opens an issue for its owner, with a date, and the fix happens at the source (Rosa's team, as in *Too good to be true*).
 
@@ -269,7 +288,7 @@ The tools films (11 to 16) don't open in the past. Each opens on the screen, wit
 
 **Opening.** Istanbul, from the 1460s: the covered market grows into streets of stalls, each trade with its guild and rules, each stall with a maker who answers for what it sells. A buyer finds what they need, knows who stands behind it, and comes back.
 
-**Story.** Planning's census mart is used by the census dashboard, two faculties' spreadsheets and, it turns out, Finance. When it was late last term, nobody knew who to call: Jun built it, Noor owns the model, Planning asked for it. Yusuf, Noor and Planning name it a data product: an owner who answers for it (Planning's lead), a contract that says what it promises (*Promises and proofs*), service levels (fresh by 7 a.m. on census day), documentation, a version and a lifecycle, from draft to retired. The registrar's learner and award models are products too, owned by the registrar's office, which publishes them for everyone else to build on.
+**Story.** Planning's census mart is used by the census dashboard, two faculties' spreadsheets and, it turns out, Finance. When it was late last term, nobody knew who to call: Jun built it, Noor owns the model, Planning asked for it. Yusuf, Noor and Planning name it a data product: an owner who answers for it (Clara Jensen, for Planning), a contract that says what it promises (*Promises and proofs*), service levels (fresh by 7 a.m. on census day), documentation, a version and a lifecycle, from draft to retired. The registrar's learner and award models are products too, owned by the registrar's office, which publishes them for everyone else to build on.
 
 **Ideas.** A data product is data plus a promise: owner, contract, service levels, documentation, version and lifecycle. Its owner answers for the product; the data owner answers for meaning; they may be different people. Products belong to domains (*Who owns what*, *Who does it, and where meaning changes*). Source-aligned, aggregate and consumer-aligned products. Consumers are known by name, through exposures and access requests. Not everything is a product: most models are steps.
 
@@ -277,7 +296,7 @@ The tools films (11 to 16) don't open in the past. Each opens on the screen, wit
 
 **On screen.** One table, three people pointing at each other; then a product card with one name on it, and a line of consumers behind it.
 
-**The people side.** Planning's lead has to want the job. Yusuf shows who depends on the mart, what it's worth to them, and what support comes with owning it.
+**The people side.** Clara has to want the job. Yusuf shows who depends on the mart, what it's worth to them, and what support comes with owning it.
 
 **Labs (candidates).** *Product or step?* *Write the product card.*
 
@@ -313,13 +332,73 @@ The tools films (11 to 16) don't open in the past. Each opens on the screen, wit
 
 **Labs (candidates).** *Warn first, or stop?* *Plan the rollout of a check.* *Measure it from the work.*
 
-*Part two: with the tools*
+*Part two: governance as a capability*
 
-The films of this part show the same university, the same project and the same people, on Databricks and dbt, with the files and screens a practitioner uses. Each one says which films it expands, recaps them in a line, and goes straight to how it's built. Product names change often: they're kept to labels, and checked in each film's rigour sheet.
+After the submission, Yusuf and Noor, the data architect, put governance on the university's architecture map: what it must be able to do, the services it offers, who does what end to end, and where each piece lives. Each film adds one layer to Noor's map, with the ideas of *The map before the data* (drawn in ArchiMate 4, as that series draws them), and DAMA-DMBOK's roles and DCAM's capabilities as checklists for governance itself. At most one diagram-like picture per film, as in every film: here, it's Noor's map, painted as a board in her room, which gains a layer in each film.
 
-### 11. Governed in dbt
+### 11. A capability, not a project
 
-**Expands** *Who decides*, *Rules that run*, *Change without surprises*; builds on *Promises and proofs*, *Who owns what* and *Written once*.
+**Opening.** The Netherlands, since the 1200s: the water boards have kept the land dry. Floods brought big projects, but the boards were there before and after: elected by the people they serve, paid for by them, under one rule, "interest, payment, say". A flood gets a project; keeping the land dry is a capability.
+
+**Story.** The submission is in, and the project that paid for Yusuf's team ends in June. The deputy vice-chancellor asks what the university would lose without it. Yusuf brings the binder; Noor says that's what governance wrote, not what it does. On her map they place one capability, *Govern data*, with seven beneath it, each named for what the university must be able to do: define what words mean, decide who owns what, protect who sees what, keep data fit for use, change without surprises, provide data products, and teach. Each passes the test from *The map before the data*: it survives a restructure, a new system and a new process. Part one's evidence colours them: green where a check runs, amber where people still have to remember, red where nothing happens yet. Then the services people can ask for, each with a promise: what does this number mean, define or change a term, access with a purpose, is this product fit to use, fix it where it starts, and what does this change touch. The deputy vice-chancellor reads one page of services, not the binder, and governance becomes a budget line every year, not a project.
+
+**Ideas.** A capability is what the organisation must be able to do, whoever does it and however; it outlasts projects, restructures and systems (*What it must be able to do*). Governance as one capability with a few beneath it, assessed from evidence in the work, not a maturity survey. Services: what people can ask governance for, each with a promise and a way to ask (*Who it serves, and how it pays*). DCAM's capabilities and DAMA-DMBOK's functions as checklists, not as the map. A capability is funded every year; a project, once.
+
+**What it puts in place.** Governance on the architecture map: the capability and the seven beneath it, coloured by evidence, and one page of services with their promises.
+
+**On screen.** Noor's board: the capability cards, coloured, with the two numbers and the hidden column pinned as evidence; then the services as a one-page menu on the deputy vice-chancellor's desk, each with its promise.
+
+**The people side.** The deputy vice-chancellor isn't against governance, only unable to see what it does. A page of services, in the university's words, is something a budget can hold.
+
+**Builds on** *What it must be able to do* and *Who it serves, and how it pays*, in *The map before the data*.
+
+**Labs (candidates).** *Capability or project?* *Write a service's promise.*
+
+### 12. Who does what, end to end
+
+**Opening.** Madrid, 1713: the Spanish Royal Academy is founded to make a dictionary. Today 23 academies, across Spain, the Americas and beyond, make one dictionary together: a word goes from a proposal, through a commission, to the academies' agreement, and the online dictionary publishes each update with what changed. A dictionary is a product, with owners, a process and readers who rely on it.
+
+**Story.** Clara, in Planning, asks for *completion* to be defined: three faculties count it three ways. Noor and Yusuf follow that one request as a service, end to end, through the rooms where it happens. Clara asks; a steward drafts; the owner decides; the glossary publishes; and the sync carries the term to every tool that reads it: the project's copy, the platform, the dashboards and Genie. Each step belongs to a role, not a person, and actors fill the roles: people, a team, and the agent from *An agent that checks*, whose rights are written down. Each step reads or writes an information asset: the request, the draft, the decision record, the term and its copies. The chart of who's responsible for what, from *Who decides*, is now drawn from this model, not typed by hand. Then the glossary is run as a product: an owner, its users (people, reports, models and agents), a promise (every term has an owner, a definition, an example and a status, and a change is decided within ten working days), a weekly list of what changed, and measures of use, so terms nobody reads are retired.
+
+**Ideas.** A service followed end to end, through the processes that deliver it (*How value reaches people*). Roles, not people: actors fill roles, and an agent can be an actor with written rights (*Who does it, and where meaning changes*). The information each step reads and writes, as business objects. A responsibility chart drawn from the model, not typed by hand. DAMA-DMBOK's governance roles (owner, steward, custodian) placed on the map. The glossary as a product: an owner, users, a promise, a list of changes, measures of use, and terms retired when nobody reads them (*A product with an owner*).
+
+**What it puts in place.** The glossary service modelled end to end: roles, actors, steps and information assets; the responsibility chart generated from it; the glossary's product card, its promise and its weekly list of changes.
+
+**On screen.** Clara's request travelling down the floor from desk to desk, a role card at each step, and the papers and screens it passes; Noor's board gains services, roles and objects; the glossary's weekly list of what changed, on Planning's screen.
+
+**The people side.** A steward is a role with time to do it, not a name on a chart: when someone moves on, the role is handed over and the chart follows. Clara sees where her request is without chasing it.
+
+**Builds on** *How value reaches people* and *Who does it, and where meaning changes*, in *The map before the data*, and *A product with an owner*.
+
+**Labs (candidates).** *Role or person?* *Follow the request end to end.*
+
+### 13. Where each piece lives
+
+**Opening.** Korea, 1392 to 1863: the Annals of the Joseon Dynasty were written once, printed, and the copies kept in archives in distant mountains. No copy was ever edited on its own. When war in 1592 burned all but one, the one saved copy rebuilt the rest. A copy can be trusted when it's made from one source, one way.
+
+**Story.** Sam is planning the platform's next year and asks where governance's pieces live. Yusuf counts seven places: the glossary; policies in the document library; Noor's map in its own repository; owners, classes, models, contracts and tests in the dbt project; tags, access rules, lineage and the audit log on the platform; products in the product catalogue; and decisions and issues in the tracker. Some hold copies of the same thing, and one has drifted: the catalogue still names Jun as the owner of a table Mei now owns. Noor puts each on the map as an application and the artifacts it holds, under one rule: every artifact has exactly one home and an owner, and every other place keeps a copy synced one way from that home, saying where it came from and when, with a check that flags drift. Then the flows between homes, each one way: definitions from the map to the glossary, and from the glossary to the project and the platform, where dashboards and Genie read them; concepts from the map to the models; the project's classes to the platform's tags and access rules; contracts from the repository to the product catalogue. The map becomes part three's brief: each tools film builds one of these flows.
+
+**Ideas.** Governance artifacts as information assets, each with a home, an owner and a lifecycle. Applications, the data they hold, and the flows between them (*Today, and where it's going*). One home, and copies synced one way that say where they came from, as DEC-PRJ-11 does for terms. Drift is something a check finds, not something a person remembers. A definition is written once, in the map, and published to the glossary (*Meaning machines can read*, *A map people and agents can read*).
+
+**What it puts in place.** The governance part of Noor's map: each artifact's home and owner, its copies, the one-way flows between them, and a drift check for each copy.
+
+**On screen.** Yusuf walking the floor with a card for each artifact, sticking it on the screen where it lives; Noor's board with homes drawn solid, copies dashed and every arrow one way; the drifted owner put right by the sync.
+
+**The people side.** Each team keeps working in its own tool. What changes is that each knows which copy is theirs to change, and which only to read.
+
+**Builds on** *Today, and where it's going* and *A map people and agents can read*, in *The map before the data*, and *Meaning machines can read*, in *From words to data*.
+
+**Labs (candidates).** *Home or copy?* *Draw the flow, one way.*
+
+The openings of part two are checked against Dutch, Spanish and Korean sources when each film is scripted.
+
+*Part three: with the tools*
+
+The films of this part show the same university, the same project and the same people, on Databricks and dbt, with the files and screens a practitioner uses. Each one builds one of the flows *Where each piece lives* drew, says which films it expands, recaps them in a line, and goes straight to how it's built. Product names change often: they're kept to labels, and checked in each film's rigour sheet.
+
+### 14. Governed in dbt
+
+**Expands** *Who decides*, *Rules that run*, *Change without surprises* and *Where each piece lives*; builds on *Promises and proofs*, *Who owns what* and *Written once*.
 
 **Story.** Jun opens the project and shows where each governance element lives in dbt: `meta` on models and columns (owner, domain, glossary term, personal data class), groups and `access` (who may `ref()` what), enforced contracts, model versions with deprecation dates, exposures naming consumers and their owners, tests carrying their owner and dimension. Then the checks that make it stick: a CI step that fails a public model without an owner, a term or classified columns; `CODEOWNERS` generated from `meta`; `state:modified+` running only what changed and what depends on it; `persist_docs` pushing descriptions to the catalog.
 
@@ -327,9 +406,9 @@ The films of this part show the same university, the same project and the same p
 
 **On screen.** One model's YAML, each governance line lit and labelled with the film it comes from; a red CI check, then green.
 
-### 12. Governed in Unity Catalog
+### 15. Governed in Unity Catalog
 
-**Expands** *Who may see it*, *Who decides*, *Change without surprises*.
+**Expands** *Who may see it*, *Who decides*, *Change without surprises* and *Where each piece lives*.
 
 **Story.** Sam shows the platform's side. Catalogs and schemas laid out by domain; grants to groups, never to people; governed tags, set from the project's `personal_data`, and attribute-based policies that mask direct personal data and filter rows by tag, on every table that carries it; lineage down to the column, from source to dashboard; audit logs and system tables that answer "who read this, and when"; access requests that expire.
 
@@ -337,17 +416,17 @@ The films of this part show the same university, the same project and the same p
 
 **On screen.** A tag set in YAML, travelling to a column in the catalog; a mask applied as a planner queries it; the audit log line that records the query.
 
-### 13. Meaning on the platform
+### 16. Meaning on the platform
 
-**Expands** *One word, one home*; builds on *Written once* and *Meaning machines can read*.
+**Expands** *One word, one home*, *Who does what, end to end* and *Where each piece lives*; builds on *Written once* and *Meaning machines can read*.
 
-**Story.** Mei's term *award* in Unity Catalog's Glossary, linked to the tables and columns that hold it; the sync that keeps the conceptual model in step; a metric view that defines "awards conferred" once, for dashboards and Genie alike; and the semantic model in Ontos, which links business concepts to the assets that hold them.
+**Story.** Mei, with Jun: her term *award* in Unity Catalog's Glossary, published there from Noor's map and linked to the tables and columns that hold it; the sync that keeps the conceptual model in step; a metric view that defines "awards conferred" once, for dashboards and Genie alike; and the semantic model in Ontos, which links business concepts to the assets that hold them.
 
 **Ideas.** Glossary, metrics and semantic models: three layers of meaning, each with one home. Agents read the same meaning people do.
 
 **On screen.** One term, its linked assets lighting up across the catalog; a question to Genie answered with the governed metric and its definition.
 
-### 14. Quality on the platform
+### 17. Quality on the platform
 
 **Expands** *Rules that run* and *Fixed where it starts*; builds on *Too good to be true* and *Promises and proofs*.
 
@@ -357,9 +436,9 @@ The films of this part show the same university, the same project and the same p
 
 **On screen.** The loop of checks along the lineage, from source to mart, each with its owner's name; one alert travelling to one person.
 
-### 15. Products in open formats
+### 18. Products in open formats
 
-**Expands** *A product with an owner* and *Change without surprises*; builds on *Who owns what*.
+**Expands** *A product with an owner*, *Change without surprises* and *Where each piece lives*; builds on *Who owns what*.
 
 **Story.** Noor sets up Ontos, a Databricks Labs project that adds a business catalog over Unity Catalog: the university's domains, teams and projects; the census mart registered as a data product, described in the Open Data Product Standard (ODPS); its promise as a data contract in the Open Data Contract Standard (ODCS): schema, quality rules, service levels and meaning. The contract is a file, in an open format, kept in the repository beside the dbt contract it matches, and checked against it in CI. Stewards approve a product before it goes to production; compliance rules run on a schedule and tag, notify or block.
 
@@ -367,11 +446,11 @@ The films of this part show the same university, the same project and the same p
 
 **On screen.** A product card in the catalog; behind it, two files side by side, the ODCS contract and the dbt YAML, the matching lines linked.
 
-### 16. The marketplace
+### 19. The marketplace
 
-**Expands** *A product with an owner* and *Who may see it*.
+**Expands** *A product with an owner*, *Who may see it* and *A capability, not a project*.
 
-**Story.** A faculty analyst needs learners near an award. Before, they'd ask around. Now they search the university's catalog of products, read the contract and the service levels, see the owner, and request access, stating a purpose. The owner approves; access is granted to a group, with an end date; the request is the record. For a partner outside the university (the government's reporting, a partner university), the product is shared through OpenSharing or a private listing in the Databricks Marketplace, with the same contract.
+**Story.** A faculty analyst needs learners near an award. Before, they'd ask around. Now they search the university's catalog of products, read the contract and the service levels, see the owner, and request access, stating a purpose. Clara, the product's owner, approves; access is granted to a group, with an end date; the request is the record. For a partner outside the university (the government's reporting, a partner university), the product is shared through OpenSharing or a private listing in the Databricks Marketplace, with the same contract.
 
 **Ideas.** Discovery, request, approval, grant and expiry as one flow. Internal marketplaces and external sharing. Consumers become known, so changes reach them (*Change without surprises*).
 
@@ -379,21 +458,22 @@ The films of this part show the same university, the same project and the same p
 
 ## What the example project gains
 
-So every enabler on screen is real, the series adds to [the example dbt project](../analytics-engineering/project/), and the films draw from it:
+So every enabler on screen is real, the series adds to [the example dbt project](../analytics-engineering/project/), and the films draw from it. One thread makes them, in this order, and each file exists before the film that shows it is scripted:
 
 | Addition | For film |
 |---|---|
-| A governance check: owner on every domain, entity and public model; a glossary term or a confirmed absence; every column of a public model classified; tests with `meta` owner and dimension | 2, 4, 5, 9, 11 |
-| `CODEOWNERS`, generated from the owners in the metadata | 2, 11 |
-| Tags and masks on Databricks applied from `personal_data`, left out on DuckDB (as DEC-PRJ-09 does for keys) | 4, 12 |
-| A scorecard generated from the run results, by domain and dimension | 5, 10, 14 |
-| An impact report on pull requests, generalised from the glossary sync's | 7 |
-| A `review-for-governance` skill | 9 |
+| A governance check: owner on every domain, entity and public model; a glossary term or a confirmed absence; every column of a public model classified; tests with `meta` owner and dimension. First, since five films show it | 2, 4, 5, 9, 14 |
+| `CODEOWNERS`, generated from the owners in the metadata | 2, 14 |
 | A decision in the project's log: governance's checks, and who owns them | 1, 2 |
+| A scorecard generated from the run results, by domain and dimension | 5, 10, 17 |
+| An impact report on pull requests, generalised from the glossary sync's | 7 |
 | A fix at entry for short-course emails, and the staging clean-up turned into a test | 6 |
-| Product descriptors (owner, domain, contract, service levels, consumers, status) for the public core models and the marts | 8, 15 |
-| ODCS contracts and ODPS descriptors generated from, or checked against, the dbt contracts in CI | 15 |
-| A Databricks target that applies governed tags and policies, and an Ontos setup that registers the products (both optional; DuckDB stays the default) | 12, 15, 16 |
+| A `review-for-governance` skill | 9 |
+| Product descriptors (owner, domain, contract, service levels, consumers, status) for the public core models and the marts | 8, 18 |
+| ODCS contracts and ODPS descriptors generated from, or checked against, the dbt contracts in CI | 18 |
+| The governance part of Noor's map, kept as text: the capability and the seven beneath it, the services and their promises, the roles and actors, each artifact's home, and the one-way flows between homes | 11, 12, 13 |
+| Tags and masks on Databricks applied from `personal_data`, left out on DuckDB (as DEC-PRJ-09 does for keys) | 4, 15 |
+| A Databricks target that applies governed tags and policies, and an Ontos setup that registers the products (both optional; DuckDB stays the default) | 15, 18, 19 |
 
 ## What the series covers, and where
 
@@ -401,7 +481,7 @@ So every enabler on screen is real, the series adds to [the example dbt project]
 |---|---|
 | Governance and management; DAMA-DMBOK and its wheel, named once; policy to enabler | 1 |
 | Decision rights; owners, stewards and custodians; federated governance; the council; escalation | 2 |
-| Business glossary, data dictionary, catalog; one direction of sync; metadata management | 3 |
+| Many glossaries and one trusted glossary; business glossary, data dictionary, catalog; one direction of sync; metadata management | 3 |
 | Classification, masking by policy, least privilege, purpose, expiry, retention, access reviews | 4 |
 | Quality dimensions, rules as owned tests, thresholds, scorecards | 5 |
 | Issue management, root cause, prevention at entry, quality service levels, monitoring | 6 |
@@ -409,12 +489,15 @@ So every enabler on screen is real, the series adds to [the example dbt project]
 | Data products, product ownership, service levels, lifecycle, domains, consumers | 8 |
 | Agents under governance, and governance by agents; evidence; human approval | 9 |
 | People and change: change management, guidance, support, communities of practice; measuring governance; starting small; DAMA's wheel brought together | 10 |
-| dbt: `meta`, groups and access, contracts, versions, exposures, CI checks, `CODEOWNERS`, `persist_docs` | 11 |
-| Unity Catalog: grants, governed tags, attribute-based policies, masks and row filters, lineage, audit, system tables | 12 |
-| Glossary, metric views, semantic models, Genie | 13 |
-| Tests, pipeline expectations, quality monitoring, alerting | 14 |
-| Ontos; ODPS and ODCS; approvals; compliance rules | 15 |
-| Internal marketplace, access requests, OpenSharing, Databricks Marketplace | 16 |
+| Governance as a capability; capabilities assessed from evidence; governance services and their promises; funding a capability, not a project | 11 |
+| A service end to end: processes, roles and actors (agents among them), information assets; a responsibility chart drawn from the model; the glossary as a product | 12 |
+| Governance artifacts and their homes across repositories and apps; copies synced one way; drift checks; where a definition is written | 13 |
+| dbt: `meta`, groups and access, contracts, versions, exposures, CI checks, `CODEOWNERS`, `persist_docs` | 14 |
+| Unity Catalog: grants, governed tags, attribute-based policies, masks and row filters, lineage, audit, system tables | 15 |
+| Glossary, metric views, semantic models, Genie | 16 |
+| Tests, pipeline expectations, quality monitoring, alerting | 17 |
+| Ontos; ODPS and ODCS; approvals; compliance rules | 18 |
+| Internal marketplace, access requests, OpenSharing, Databricks Marketplace | 19 |
 
 **Parked:** document and content management; records retention schedules in depth; regulatory specifics by country (kept generic); data ethics as its own film; comparing catalog tools beyond Databricks and dbt.
 
@@ -428,11 +511,14 @@ So every enabler on screen is real, the series adds to [the example dbt project]
 - ***Who owns what*** names data products and domains; *A product with an owner* gives the product its owner, service levels and lifecycle, and *Products in open formats* writes them down in ODPS and ODCS.
 - ***Meaning machines can read*** explains semantic layers and ontologies; *Meaning on the platform* shows them on Databricks.
 - ***An agent on the team*** sets the agent's guardrails; *An agent that checks* gives it governance's checks.
+- ***What it must be able to do*** and ***Who it serves, and how it pays*** (*The map before the data*) teach capabilities and services; *A capability, not a project* uses them on governance itself.
+- ***How value reaches people*** and ***Who does it, and where meaning changes*** teach value streams, processes, roles and actors; *Who does what, end to end* follows one governance service through them.
+- ***Today, and where it's going*** and ***A map people and agents can read*** draw applications, the data they hold and the map as the source; *Where each piece lives* gives every governance artifact one home on it.
 - **The master and reference data series** takes over the identity, survivorship and code lists that *Who decides* and *Rules that run* point at.
 
 ## Rigour to check when scripting
 
-- **The openings:** Semmelweis's ward, his figures, and how slowly his advice was accepted; the Grand Bazaar's founding and its guilds; Magna Carta's clause on measures and how measures were standardised later (the 1824 Weights and Measures Act and the standards sent to towns); the andon cord and its history at Toyota; the Qin standardisation of script, measures and axle widths; the 1983 census ruling (*Volkszählungsurteil*); Frontinus's *De aquaeductu* and what he found; Dagen H's date, hour and preparation; Bogotá's mimes, their number and what the road-death figures can and can't be credited to.
+- **The openings:** Semmelweis's ward, his figures, and how slowly his advice was accepted; the Grand Bazaar's founding and its guilds; Magna Carta's clause on measures and how measures were standardised later (the 1824 Weights and Measures Act and the standards sent to towns); the andon cord and its history at Toyota; the Qin standardisation of script, measures and axle widths; the 1983 census ruling (*Volkszählungsurteil*); the Nilometer on Roda Island (built in 861), and how the Nile's measured height set the year's tax, checked against Egyptian sources; the Dutch water boards, their age, how they're elected and paid for, and "interest, payment, say"; the Spanish Royal Academy's founding in 1713, the 23 academies of ASALE, and how the online dictionary publishes its updates; the Annals of the Joseon Dynasty, their archives, and the copy that survived the war of 1592; Dagen H's date, hour and preparation; Bogotá's mimes, their number and what the road-death figures can and can't be credited to.
 - **DAMA-DMBOK:** the current edition, and the current names of its knowledge areas and quality dimensions. DCAM, ISO 8000 and ISO/IEC 38505: current versions, named only.
 - **Databricks:** Unity Catalog's Glossary (its status, and how a term is read; see *Written once*'s rigour sheet); governed tags, attribute-based access control, column masks and row filters; how dbt-databricks applies tags; data quality monitoring. Product names change: keep them to labels and the rigour sheet.
 - **Ontos:** what it does today (domains, teams, projects, data products, data contracts, semantic models, compliance rules, approvals, MCP), which ODCS and ODPS versions it reads and writes, its licence (the repository and third-party pages disagree), and its status as a Databricks Labs project, without formal support. Checked on 16 October 2026 from [its repository](https://github.com/databrickslabs/ontos): ODCS v3.1.0 for contracts, ODPS for products, runs as a Databricks App.
@@ -442,21 +528,20 @@ So every enabler on screen is real, the series adds to [the example dbt project]
 - **Change models:** Kotter's steps and ADKAR, named only, with their sources.
 - **DAMA's wheel:** the current edition's knowledge areas and how it draws governance at the centre; the coverage map above checked against the films as made.
 - **Privacy:** keep it generic ("in many places, the law…"); no jurisdiction-specific advice.
+- **Part two:** capabilities, services, value streams, roles, actors and business objects as *The map before the data* draws them, in ArchiMate 4; DCAM's capabilities and DAMA-DMBOK's governance roles, named only; a governance service catalogue as practitioners keep one.
 
-## Decisions for the author
+## Still open
 
-1. **The series title.** *Off the shelf* · *Rules that run* · *Governance you can use*. The site uses *Governance you can use* until you choose (17 October 2026).
-2. **Sixteen films in one series, or two series.** The tools films could be their own series, for practitioners, as *In the weeds* is to *From words to data*.
-3. **Ontos as the example for products and contracts.** It's open and built on Unity Catalog, but a Labs project without formal support. Alternatives: Unity Catalog alone, with ODCS files in the repository; or a commercial catalog, named once.
-4. **The new character.** Yusuf Demir, the data governance lead, outlined in gold (the business side), or a name you'd prefer.
-5. **DAMA's wheel on the site.** Show the coverage map above on the Topics page, each knowledge area linking to its films.
-6. **The topic on the site.** A new topic, *Data governance*, holding this series and the master and reference data series, or both under *Data quality and change*. The master and reference data series opened its own topic; this series now has *Data governance* to itself until you decide (17 October 2026).
-7. **Labs and scenarios:** per film, as in *In the weeds*, or one set for the series, as in *The map before the data*.
-8. **Your governance enablers.** Share the checks, templates or policies you use, so the films show them rather than a generic version.
+The author approved the plan on 20 October 2026, and with it the series' title, one series in three parts, Ontos, *Rules that run*'s opening, one thread per film and labs per film (see *Decided*). These can wait:
+
+1. **DAMA's wheel on the site.** Show the coverage map above on the Topics page, each knowledge area linking to its films.
+2. **The topic on the site.** Whether the master and reference data series joins *Data governance*, or each keeps its own topic, as now.
+3. **The author's own material.** Governance checks, templates or policies used at work, so the films show them rather than a generic version; for part two, a capability map, a list of governance services or a chart of roles.
 
 ## Next checkpoints
 
-1. The author agrees this proposal and decides the points above.
-2. Yusuf's character card, and the binder and loop as components.
-3. The project's additions above, starting with the governance check, so the opening films draw from real files.
-4. A script and rigour sheet for *Off the shelf*.
+1. *Off the shelf*: the author's review of its video, then its pull request.
+2. One shared pass: the places several films need (the registrar's office close up, a meeting room for the stewards, the platform team's room, a faculty analyst's desk, and Noor's room with her map board), added once to the series' shared pictures.
+3. The example project's additions, in one thread, the governance check first.
+4. Films 2 to 10, one thread each, side by side; each owns its folder and its opening, and shares the story's facts (names, numbers, dates) from one place.
+5. Films 11 to 13, once part one's scripts are approved; films 14 to 19, once part two's are. Each film goes live on the site when the author approves its pull request.

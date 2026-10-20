@@ -40,6 +40,7 @@ Then, if you like:
 | `python scripts/generate/diagrams.py` | Regenerates each domain's physical diagram (`_<domain>__physical.md`) from `target/manifest.json` |
 | `python scripts/generate/decisions.py` | Checks every decision log and regenerates their index, `docs/decisions.md` |
 | `python scripts/check/requirements.py` | Checks the open requirements in `requirements/`, and lists them |
+| `python scripts/check/governance.py --measures` | Checks data governance's rules (an owner, a glossary term or a confirmed absence, classified columns, tests with an owner and a dimension), and measures them |
 | `python scripts/generate/definitions.py` | Regenerates each domain's definitions (`_<domain>__definitions.md`) and `seeds/reference/shared/key_sets.csv` from the conceptual models |
 | `pip install dbt-metricflow==0.15.0`, then `DBT_PROFILES_DIR=. mf query --metrics learners_near_graduate_certificate --group-by learner_award__faculty_name` | Planning's answer, from the semantic layer's metric |
 | `dbt clean --profiles-dir .` | Deletes `target/`, the database with it, for a clean start |
@@ -165,7 +166,7 @@ project/
 │   ├── planning/             Planning's near-award rule and count, written once
 │   └── adapters/             engine workarounds: DuckDB constraints
 ├── tests/
-│   ├── generic/              custom generic tests
+│   ├── generic/              custom generic tests, and dbt's four built-in ones, each with its quality dimension
 │   ├── rules/                business rules that must hold: identity decisions
 │   ├── reconciliation/       a mart against an expected seed: the census report, the tuition report
 │   └── governance/           rules about the project itself: no model reads an expected seed
@@ -185,7 +186,8 @@ project/
 │   ├── generate/             definitions.py, diagrams.py and decisions.py: write the [generated]
 │   │                         files; --check in CI
 │   ├── check/                check_metric.py: the metric against the census report; requirements.py:
-│   │                         only open requirements, with what shows they're done; both in CI
+│   │                         only open requirements, with what shows they're done; governance.py:
+│   │                         data governance's rules, and their measures; all in CI
 │   ├── tools/                diff_against_main.py: a branch's table against main's, for review
 │   └── setup/                load_databricks.sql: loads the sample sources into Databricks
 ├── examples/planning/        Planning's own project, refing the core across projects (dbt Cloud only)

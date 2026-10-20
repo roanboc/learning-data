@@ -94,3 +94,31 @@ seeds:
         +group: planning
       finance:
         +group: finance
+
+# Who owns each test: the owner of the data it checks, by folder. A test whose data has another
+# owner names its own in its meta, which wins. Each kind of test names its quality dimension where
+# it's defined (tests/generic/). The governance check fails on a test with no owner or dimension.
+data_tests:
+  credentials:
+    staging:
+      student_system: {+meta: {owner: "Registrar's office"}}
+      learning_platform: {+meta: {owner: Learning team}}
+      short_courses: {+meta: {owner: Learning team}}
+      hr_system: {+meta: {owner: HR}}
+      research_system: {+meta: {owner: Research office}}
+      alumni_system: {+meta: {owner: Alumni office}}
+    intermediate:
+      +meta: {owner: "Mei Tanaka, registrar's office"}
+    core:
+      +meta: {owner: "Mei Tanaka, registrar's office"}
+    marts:
+      planning: {+meta: {owner: Planning}}
+      wallet: {+meta: {owner: Wallet app team}}
+      finance: {+meta: {owner: Finance}}
+    reference:
+      student: {+meta: {owner: "Mei Tanaka, registrar's office"}}
+      finance: {+meta: {owner: Finance}}
+      shared: {+meta: {owner: "Noor, data architect"}}
+    expected:
+      planning: {+meta: {owner: "Census team, registrar's office"}}
+      finance: {+meta: {owner: Finance}}

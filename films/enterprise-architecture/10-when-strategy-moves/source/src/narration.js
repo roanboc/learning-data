@@ -4,13 +4,13 @@ const NARR={
 "kenya":{"name":"Money by phone","lead":1.4,"tail":1.0,"vo":[
  {"id":"home","gap":0.8,"text":"Kenya, 2007. A man working in Nairobi sends part of his wages to his family, upcountry."},
  {"id":"cash","gap":0.8,"text":"The money goes with a bus driver or a friend, and not all of it arrives."},
- {"id":"launch","gap":0.8,"text":"In March, a mobile network launches M-Pesa: money sent from a phone, confirmed by a text message."},
- {"id":"pilot","gap":0.8,"text":"It began as a pilot for repaying small loans. People used it to send money to others, and sending money home became the plan."},
- {"id":"idea","gap":0.8,"text":"The idea fits in a sentence. Making it real takes much more."},
+ {"id":"strategy","gap":0.8,"text":"A mobile network sets a new strategy: to carry money, as well as calls."},
+ {"id":"launch","gap":0.8,"text":"In March, it launches M-Pesa: money sent from a phone, confirmed by a text message."},
+ {"id":"idea","gap":0.8,"text":"That strategy fits in a sentence. Making it real takes much more."},
  {"id":"bank","gap":0.8,"text":"The central bank lets it run, with customers' money held in trust at a bank."},
  {"id":"agents","gap":0.8,"text":"Shops that sell airtime become agents, changing cash into mobile money and back."},
  {"id":"menu","gap":0.8,"text":"Customers register with an identity card, and a short menu works on the simplest phones."},
- {"id":"link","gap":0.8,"text":"A change of strategy reaches every layer, down to the shop counter, where people meet it."}]},
+ {"id":"link","gap":0.8,"text":"That one sentence reaches every layer, down to the shop counter, where people meet it."}]},
 "direction":{"name":"A direction","lead":1.0,"tail":1.0,"vo":[
  {"id":"note","gap":0.8,"text":"Tomás's note asks what a change in strategy means for the data."},
  {"id":"letter","gap":0.8,"text":"In November, the government, the utility's owner, sends a direction."},
@@ -18,6 +18,7 @@ const NARR={
  {"id":"agency","gap":0.8,"text":"Who is eligible is known to another organisation, the social services agency, not to the utility."},
  {"id":"ask","gap":0.8,"text":"The minister's office asks what it will take, by tomorrow."}]},
 "walk":{"name":"Down every layer","lead":1.0,"tail":1.0,"vo":[
+ {"id":"easy","gap":0.8,"text":"As with M-Pesa, the sentence is the easy part."},
  {"id":"walk","gap":0.8,"text":"Tomás walks it down the map, layer by layer."},
  {"id":"mot","gap":0.8,"text":"In motivation: a new driver, the direction, under a goal the utility already has, keep bills affordable."},
  {"id":"out","gap":0.8,"text":"And an outcome to check: eligible households on the tariff."},
@@ -30,7 +31,7 @@ const NARR={
  {"id":"knows","gap":0.8,"text":"The agency already knows who is eligible. Once only, as in Tartu: don't make a household prove what the government already knows."},
  {"id":"least","gap":0.8,"text":"So the agreement asks for the least. The utility sends its account holders' matching details. The agency answers only: eligible, from this date."},
  {"id":"never","gap":0.8,"text":"Never which support a household gets."},
- {"id":"first","gap":0.8,"text":"And the agreement starts today. It will take longer than the code."}]},
+ {"id":"first","gap":0.8,"text":"And the agreement starts today: agreeing it will take longer than changing the systems."}]},
 "wall":{"name":"The wall holds","lead":1.0,"tail":1.0,"vo":[
  {"id":"draft","gap":0.8,"text":"Tomás's first draft sends the list to the network too, to take the discount off the network charge."},
  {"id":"check","gap":0.8,"text":"Ama checks it against the third principle: customer information stays with the business that collected it."},
@@ -47,9 +48,9 @@ const NARR={
  {"id":"miss","gap":0.8,"text":"Farah asks who the match will miss: tenants whose account is in a landlord's name. The agency knows them; the utility doesn't."},
  {"id":"route","gap":0.8,"text":"Found now, not in the first bills, they get a second route: an application, later in the year."}]},
 "lands":{"name":"Where the data lands","lead":1.0,"tail":1.0,"vo":[
- {"id":"line","gap":0.8,"text":"Bills now carry a discount line, so the accounts and bills product changes what amount due means."},
- {"id":"version","gap":0.8,"text":"Its contract isn't changed in place. Version two goes beside version one, with a date for the old one to go."},
- {"id":"lineage","gap":0.8,"text":"Lineage finds everyone who reads it: a measure, a report for the regulator, and a collections job. Each owner is told first."},
+ {"id":"line","gap":0.8,"text":"Bills now carry a discount line, so the accounts and bills product gets a new column for it. Amount due keeps its meaning: what the household pays."},
+ {"id":"version","gap":0.8,"text":"A new column breaks nothing that reads it, so the contract stays at version one. A second version is the last resort, for removing or redefining a column."},
+ {"id":"lineage","gap":0.8,"text":"Lineage finds everyone who reads it: a measure, a report for the regulator, and a collections job. Each owner hears of it before the first bills."},
  {"id":"exchange","gap":0.8,"text":"The exchange with the agency gets its own contract too: what goes, what comes back, and how often."}]},
 "path":{"name":"The path","lead":1.0,"tail":1.0,"vo":[
  {"id":"plateaus","gap":0.8,"text":"The path is drawn in plateaus, in the order their dependencies allow."},

@@ -1,12 +1,12 @@
 /* ===== When strategy moves: scenes =====
    Eleven chapters, as in ../script.md. Kenya in 2007: a man in Nairobi sends part of his wages home, upcountry, with a bus driver,
-   and not all of it arrives; the phones that send it and confirm it; the pilot for repaying loans, in which people sent money to
-   others; the idea, in a sentence, and what it took on every layer of the map, down to an agent's counter. Then the utility: Tomás's
+   and not all of it arrives; a mobile network's new strategy, on a note; the phones that send the money and confirm it; the
+   strategy, in a sentence, and what it took on every layer of the map, down to an agent's counter. Then the utility: Tomás's
    note; the government's direction, a social tariff for every eligible household, automatically; the eligibility only the social
    services agency knows; the change walked down the map, layer by layer, each element it touches lit with its owner; the agreement
    that asks the agency for the least; the wall that holds, and the decision written down; new rules with homes; the counter, where
-   households meet it, and the tenants an automatic match would miss; where the data lands, a contract versioned and its readers
-   found through lineage; the path in plateaus; the page the minister's office reads in the morning; and the first of July.
+   households meet it, and the tenants an automatic match would miss; where the data lands, a new column in a contract that stays
+   at version 1, and its readers found through lineage; the path in plateaus; the page the minister's office reads in the morning; and the first of July.
    Made to read on a phone (tools/legible.py): text is at least 28 px in the frame; names drawn small are texture. Motion: every
    shot drifts slowly and things arrive with a spring. Sound: every effect in tools/score.py fires at the same moment as the thing
    it belongs to here, so keep the two in step. */
@@ -18,19 +18,18 @@ const D10_MID=[(D10_NAI[0]+D10_UP[0])/2,(D10_NAI[1]+D10_UP[1])/2];
 const D10_FAM=[[-24,2,30],[0,-2,32],[22,4,22]];
 // the notes that don't arrive: where along the road each falls from the bus, and which way it drifts
 const D10_LOST=[[0.34,-1],[0.55,1],[0.76,-1]];
-// the pilot: five phones round a circle; the lender they repaid; the phones outside it that people sent money to; and who sent to whom
-const D10_PIL=[0,1,2,3,4].map(i=>{const an=-Math.PI/2+i*TAU/5;return[720+Math.cos(an)*175,500+Math.sin(an)*165];});
-const D10_LEND=[1290,540],D10_OUT=[[330,330],[300,690],[560,830],[1010,250],[1060,800]],D10_P2P=[[4,0],[3,1],[3,2],[0,3],[2,4]];
-// what the idea needed on each layer: [layer, words, line, the word they're said at]
+// the network's new strategy, on a note: the sentence the rest of the chapter makes real
+const D10_NOTE="Carry money, as well as calls.",D10_CHIP="carry money, as well as calls";
+// what the strategy needed on each layer: [layer, words, line, the word they're said at]
 const D10_KL=[[0,"the central bank lets it run","bank","central bank"],[2,"money held in trust at a bank","bank","held in trust"],[2,"shops become agents","agents","become agents"],
   [3,"registered with an identity card","menu","register"],[4,"a short menu","menu","short menu"],[5,"the simplest phones","menu","simplest"]];
 const D10_KX=1000;
 scene("kenya",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
-  const tC=c("cash"),tL=c("launch"),tP=c("pilot"),tI=c("idea"),tA=c("agents"),tK=c("link");
+  const tC=c("cash"),tS=c("strategy"),tL=c("launch"),tI=c("idea"),tA=c("agents"),tK=c("link");
   setScreen(ctx,S);ctx.fillStyle="#0b0f16";ctx.fillRect(0,0,W,H);
   // the camera: Kenya and its neighbours; the road west from Nairobi to the town upcountry; then centred between the two, for the phones
   const cam=d10_camAt(t,[[0,960,560,0.95],[2.8,D10_MID[0]+40,D10_MID[1]+16,2.1,4.4],[tL-0.7,D10_MID[0],D10_MID[1]-10,2.1,1.8]]);cam.z*=1+0.03*ease(t/sc.dur);
-  const k=1/cam.z,dim=0.72*fin(t,tP-0.5,1.0)+0.12*fin(t,tI-0.2,1.0);
+  const k=1/cam.z,dim=0.72*fin(t,tI-0.5,1.0)+0.12*fin(t,tI-0.2,1.0);
   // the bus west: it leaves Nairobi as the narration names it, and three notes fall from it on the way
   const tB0=tC+0.2,bu=t=>0.94*ease(clamp((t-tB0)/4.6,0,1)),u=bu(t);
   ctx.save();d10_camApply(ctx,cam);
@@ -46,52 +45,45 @@ scene("kenya",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
     d10_note(ctx,q.x+nx*44*k*dr,q.y+ny*44*k*dr+12*k*dt,q.an+side*dt*2.2,26*k,j%2?[150,112,104]:[132,118,96],(1-fin(t,td+0.6,1.4))*pa);});
   d10_bus(ctx,bp.x,bp.y,bp.an,80*k,ba);
   // the envelope rides on the bus, and is thinner when it arrives
-  const env=fin(t,tB0-0.2,0.4)*(1-fin(t,tP-0.6,0.6))*pa,es=lerp(20,14,sstep(0.3,0.8,u/0.94))*k,ea_=sstep(0.9,0.94,u)*fin(t,tB0+4.7,0.5);
+  const env=fin(t,tB0-0.2,0.4)*(1-fin(t,tL-0.6,0.6))*pa,es=lerp(20,14,sstep(0.3,0.8,u/0.94))*k,ea_=sstep(0.9,0.94,u)*fin(t,tB0+4.7,0.5);
   d10_envelope(ctx,lerp(bp.x,D10_UP[0]+34*k,ea_),lerp(bp.y-22*k,D10_UP[1]-6*k,ea_),es,env);
   ctx.restore();
   // what the bus carries, and what arrives
-  const tg=1-fin(t,tL-0.7,0.5),rm=d10_roadAt(0.5),[mx_,my_]=d10_toS(cam,rm.x,rm.y),[ux_,uy_]=d10_toS(cam,D10_UP[0],D10_UP[1]);
+  const tg=1-fin(t,tS-0.5,0.5),rm=d10_roadAt(0.5),[mx_,my_]=d10_toS(cam,rm.x,rm.y),[ux_,uy_]=d10_toS(cam,D10_UP[0],D10_UP[1]);
   arrive(ctx,mx_+40,my_+70,t,w("cash","bus driver")-0.1,()=>withA(ctx,tg,()=>tag(ctx,mx_+40,my_+70,"with a bus driver, or a friend",[236,214,170],{align:"center",size:28})),{dy:8});
   arrive(ctx,ux_-140,uy_+50,t,w("cash","not all")+0.2,()=>withA(ctx,tg,()=>d10_tag(ctx,ux_-36,uy_+50,"not all of it arrives",[255,176,150],{align:"right",size:30})),{dy:8});
 
   // the phones: his in town, sending; theirs, upcountry, confirmed by a text message
-  const tSel=w("launch","money sent")-0.3,tOK=w("launch","from a phone")+0.2,tGo=w("launch","confirmed")-0.7,tIn=tGo+1.0,pha=fin(t,tL+0.3,0.6)*(1-fin(t,tP-0.5,0.6));
+  const tSel=w("launch","money sent")-0.3,tOK=w("launch","from a phone")+0.2,tGo=w("launch","confirmed")-0.7,tIn=tGo+1.0,pha=fin(t,tL+0.3,0.6)*(1-fin(t,tI-0.5,0.6));
   const snd=t<tOK?{title:"M-PESA",lines:["Send money","Withdraw cash","Buy airtime"],hi:t>tSel?0:null,hiA:fin(t,tSel,0.2)}:t<tGo+0.1?{title:"Send money",lines:["KSh 2,000","OK"],hi:t>tGo-0.5?1:null,hiA:fin(t,tGo-0.5,0.15)}:{title:"Sent.",lines:["KSh 2,000"]};
   if(pha>0.01){const[nx_,ny_]=d10_toS(cam,D10_NAI[0],D10_NAI[1]),pts=[[1300,424],[nx_,ny_]];for(let i=1;i<=16;i++){const f=i/16;pts.push([lerp(nx_,ux_,f),lerp(ny_,uy_,f)-Math.sin(Math.PI*f)*120]);}pts.push([620,424]);
     withA(ctx,pha*0.5,()=>d10_trace(ctx,pts,1,D10_SIG,{lw:2,a:0.35,dash:[6,8],nohead:1}));withA(ctx,pha,()=>d10_trace(ctx,pts,clamp((t-tGo)/1.0,0,1),D10_SIG,{lw:3.5,a:1-fin(t,tIn+0.4,0.6)}));}
   d10_phone(ctx,1300,130,560,700,t,{a:pha,bg:"room",skin:[104,66,46],sleeve:[70,92,120],...snd,lab:"Nairobi"});
   d10_phone(ctx,60,130,560,700,t,{a:pha,bg:"out",skin:[122,80,56],sleeve:[156,96,62],env:fin(t,tIn,0.3),clock:t>tIn?null:"18:42",lines:t>tIn?["Confirmed.","KSh 2,000","received"]:[],lab:"his family, upcountry"});
 
-  // the pilot: phones that repaid loans to a lender; then people used them to send money to others, and sending money home became the plan
-  const plA=fin(t,tP+0.1,0.5)*(1-fin(t,tI+0.1,0.6)),tRp=w("pilot","repaying"),tSd=w("pilot","send money"),tPl=w("pilot","became the plan"),loan=1-0.75*fin(t,tPl-0.2,0.6);
-  if(plA>0.01)withA(ctx,plA,()=>{
-    D10_PIL.forEach(([x,y],i)=>d10_trace(ctx,[[x+(D10_LEND[0]-x)*0.12,y+(D10_LEND[1]-60-y)*0.12],[D10_LEND[0]-70,D10_LEND[1]-50+(i-2)*14]],clamp((t-tRp-i*0.12)/0.8,0,1),[255,214,170],{lw:2.5,a:0.8*loan,dash:[8,8],nohead:1}));
-    D10_P2P.forEach(([i,j],n)=>{const[x0,y0]=D10_PIL[i],[x1,y1]=D10_OUT[j],t0=tSd-0.1+n*0.16,mx=(x0+x1)/2-(y1-y0)*0.25,my=(y0+y1)/2+(x1-x0)*0.25,P=[];for(let q=0;q<=12;q++){const f=q/12,g=1-f;P.push([g*g*x0+2*g*f*mx+f*f*x1,g*g*y0+2*g*f*my+f*f*y1]);}
-      d10_trace(ctx,P.slice(1,-1),clamp((t-t0)/0.7,0,1),TRUST,{lw:3,a:0.9});});
-    arrive(ctx,D10_LEND[0],D10_LEND[1]-40,t,tRp-0.3,()=>d10_lender(ctx,D10_LEND[0],D10_LEND[1],110,[255,214,170],loan),{dy:-12});
-    D10_PIL.forEach(([x,y],i)=>arrive(ctx,x,y,t,tP+0.3+i*0.08,()=>d10_phoneIcon(ctx,x,y,26,1,D10_SIG),{dy:-10}));
-    D10_OUT.forEach(([x,y],j)=>arrive(ctx,x,y,t,tSd-0.4+j*0.1,()=>d10_phoneIcon(ctx,x,y,22,1,TRUST),{dy:-10}));
-    arrive(ctx,D10_LEND[0],D10_LEND[1]-190,t,w("pilot","small loans")-0.1,()=>withA(ctx,loan,()=>tag(ctx,D10_LEND[0],D10_LEND[1]-190,"repaying small loans",[255,214,170],{align:"center",size:30})),{dy:8});
-    arrive(ctx,720,180,t,w("pilot","sending money home"),()=>tag(ctx,720,180,"sending money home",TRUST,{align:"center",size:30}),{dy:8});});
-
-  // the idea, on paper; then the map's six layers, and what it took on each, down to an agent's counter
+  // the strategy, on paper; then the map's six layers, and what it took on each, down to an agent's counter
   const tMk=w("idea","Making it real"),tFly=w("idea","much more")+0.3,fl=ease(clamp((t-tFly)/1.2,0,1)),tLk=w("link","every layer")-0.3,tG=w("link","shop counter")-0.1,gu=ease(clamp((t-tG)/1.6,0,1));
   const stA=1-0.97*gu,R=layerStack(ctx,700,170,1120,{a:0,sh:80,gap:18});
+  // the strategy's note: large, over the empty land east of the road, as the network sets it; small, at the top, while the phones
+  // show it working; larger as it's said to fit in a sentence; then into the strategy layer, as glass. Always one line, so its words
+  // never re-wrap as it moves; its source tag goes as the layers come, which it would cover
+  const mvL=easeCam(clamp((t-tL+0.6)/1.1,0,1)),mvI=easeCam(clamp((t-tI+0.5)/1.1,0,1)),nz=lerp(lerp(50,30,mvL),46,mvI),nx=lerp(1400,960,mvL),ny=lerp(lerp(250,68,mvL),92,mvI),
+    nW=sz=>tw(ctx,D10_NOTE,sz,700)+64,nSrc="a mobile network's strategy",nSa=1-fin(t,tMk-0.3,0.4);
   const hi=[0,0,0,0,0,0];D10_KL.forEach(([li,,ln,wd])=>{hi[li]+=pulseAt(t,w(ln,wd)+0.1,1.2)*0.8;});hi[1]+=pulseAt(t,tFly+1.1,1.2)*0.8;
   // the change, as a light that runs down every layer to the counter
   const dp=clamp((t-tLk)/1.1,0,1);for(let i=1;i<6;i++)hi[i]+=pulseAt(t,tLk+1.1*(i-1)/4,0.9)*0.9;
   layerStack(ctx,700,170,1120,{a:stA,p:clamp((t-tMk+0.2)/1.4,0,1),sh:80,gap:18,size:30,hi});
   const kx=[D10_KX,D10_KX,D10_KX,D10_KX,D10_KX,D10_KX],cy=i=>R[i][1]+R[i][3]/2;
   withA(ctx,stA,()=>{
-    // the idea itself, a chip in strategy once its note has landed there
-    const cw=tw(ctx,"money, sent by phone",28,700)+36;
-    if(fl>=1)d10_chip(ctx,D10_KX,cy(1),"money, sent by phone",STR,{hi:hi[1]});
+    // the strategy itself, a chip in the strategy layer once its note has landed there
+    const cw=tw(ctx,D10_CHIP,28,700)+36;
+    if(fl>=1)d10_chip(ctx,D10_KX,cy(1),D10_CHIP,STR,{hi:hi[1]});
     D10_KL.forEach(([li,s_,ln,wd])=>{const x=kx[li],t0=w(ln,wd)-0.2;kx[li]+=tw(ctx,s_,28,700)+36+18;arrive(ctx,x+120,cy(li),t,t0,()=>d10_chip(ctx,x,cy(li),s_,LAY6[li][1],{hi:hi[li]}),{dy:-10});});
     if(dp>0)d10_trace(ctx,[[D10_KX-24,cy(1)],[D10_KX-24,cy(5)]],dp,STR,{lw:5});
     if(t>tLk+1.0)d10_trace(ctx,[[D10_KX-24,cy(5)],[D10_KX-24,cy(5)+40],[900,800],[760,760],[668,700]],clamp((t-tLk-1.0)/0.7,0,1),STR,{lw:5,a:1-gu});
     arrive(ctx,1310,810,t,w("link","every layer")+0.5,()=>withA(ctx,1-fin(t,tG+1.0,0.5),()=>tag(ctx,1310,810,"every layer, down to the counter",STR,{align:"center",size:30})),{dy:8});
-    if(fl>0&&fl<1)sticky(ctx,lerp(430,D10_KX+cw/2,fl),lerp(240,cy(1),fl),lerp(560,cw,fl),lerp(150,52,fl),"Money, sent by phone.",{col:NOTEC[0],edge:STR,glass:fl,size:lerp(44,28,fl),rot:-0.02});});
-  if(fl<=0)arrive(ctx,430,240,t,tI+0.1,()=>sticky(ctx,430,240,560,150,"Money, sent by phone.",{col:NOTEC[0],size:44,rot:-0.02}),{dy:-24,from:1.06});
+    if(fl>0&&fl<1)sticky(ctx,lerp(nx,D10_KX+cw/2,fl),lerp(ny,cy(1),fl),lerp(nW(nz),cw,fl),lerp(nz*2.2,52,fl),D10_NOTE,{col:NOTEC[0],edge:STR,glass:fl,size:lerp(nz,28,fl),rot:-0.015});});
+  if(fl<=0)arrive(ctx,nx,ny,t,tS+0.1,()=>sticky(ctx,nx,ny,nW(nz),nz*2.2,D10_NOTE,{col:NOTEC[0],size:nz,rot:-0.015,src:nSa>0.01?nSrc:null,srcA:nSa}),{dy:-24,from:1.06});
   // the counter: cash into mobile money at an agent's; then, close, upcountry, the man's family takes the cash he sent
   const coA=fin(t,tA+0.1,0.6),gv=clamp((t-w("link","where people")+0.3)/4.6,0,1);
   if(coA>0.01){ctx.save();const s_=lerp(1,1.3,gu);ctx.translate(lerp(360,960,gu),lerp(590,530,gu));ctx.scale(s_,s_);ctx.translate(-360,-590);
@@ -101,8 +93,8 @@ scene("kenya",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
   const ct=1-fin(t,tK-0.4,0.5);
   arrive(ctx,90,290,t,w("agents","changing cash")-0.1,()=>withA(ctx,ct,()=>tag(ctx,90,290,"cash in",[255,214,170],{size:28})),{dy:8});
   arrive(ctx,250,290,t,w("agents","and back")-0.1,()=>withA(ctx,ct,()=>tag(ctx,250,290,"cash out",[255,214,170],{size:28})),{dy:8});
-  eaYear(ctx,90,90,"Kenya · 2007",CLAY,fin(t,0.6,0.6)*(1-fin(t,tL-0.3,0.4)));eaYear(ctx,90,90,"March 2007",CLAY,fin(t,tL,0.4)*(1-fin(t,tP-0.3,0.4)));
-  eaYear(ctx,90,90,"2005 · a pilot",CLAY,fin(t,tP,0.4)*(1-fin(t,tI-0.3,0.4)));eaYear(ctx,90,90,"2007",CLAY,fin(t,tI,0.4)*(1-fin(t,B-0.4,0.6)));
+  eaYear(ctx,90,90,"Kenya · 2007",CLAY,fin(t,0.6,0.6)*(1-fin(t,tL-0.3,0.4)));eaYear(ctx,90,90,"March 2007",CLAY,fin(t,tL,0.4)*(1-fin(t,tI-0.3,0.4)));
+  eaYear(ctx,90,90,"2007",CLAY,fin(t,tI,0.4)*(1-fin(t,B-0.4,0.6)));
   fadeIn(ctx,S,t);vign(ctx,S);
   eaTitle(ctx,S,t,B+1.0,"When strategy moves","one change, down every layer",EAC,"Film 10 of 11 · enterprise architecture, for data");});
 
@@ -149,14 +141,15 @@ scene("direction",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s
   // the question, from the minister's office: what will it take, by tomorrow?
   arrive(ctx,930,700,t,tAsk+0.1,()=>{sticky(ctx,930,700,640,190,"What will it take? "+d10_nb("By tomorrow."),{col:NOTEC[1],size:44,rot:0.03,src:"the minister's office"});},{dy:-30,from:1.06});
   d10_clock(ctx,1222,618,38,t*(1+3*fin(t,w("ask","by tomorrow")-0.2,0.4)),fin(t,w("ask","by tomorrow")-0.2,0.4),[255,150,170]);
-  // a ring each second, in time with the pulse under it (tools/score.py: 120 a minute, its drum on every other beat)
+  // a ring each second as the clock hurries, silent: no pulse under it (tools/score.py)
   if(t>w("ask","by tomorrow"))ring(ctx,1222,618,38+30*((t-w("ask","by tomorrow"))%1.0),[255,150,170],0.6*(1-((t-w("ask","by tomorrow"))%1.0)),2);
   ctx.restore();
   eaYear(ctx,90,90,"November 2026",CLAY,fin(t,tLt,0.5));
   vign(ctx,S);});
 
 /* ---------- 3. Down every layer ---------- */
-// The map as one tall column of six layers, walked from the top: a light runs down its left edge, layer by layer, and in each one
+// First the direction, as a sentence on a note beside the whole map, as Kenya's strategy was: the easy part. Then the map as one
+// tall column of six layers, walked from the top: a light runs down its left edge, layer by layer, and in each one
 // the elements the change touches light up with their owners' tags, while the rest of the map stays dark. Every element is
 // [layer, x, y offset, width, height, name, kind, new?, owner, line, word]; the rest, [layer, x, y offset, width, height, name, kind].
 const D10_LY=i=>120+i*330,D10_LH=270;
@@ -214,6 +207,8 @@ scene("walk",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   ctx.restore();
   // who must agree, beside the map
   const tl=fin(t,tO+1.0,0.6);
+  // the direction, in a sentence, on paper beside the whole map: gone as the walk reaches the first layer
+  const nA=1-fin(t,L[0]-0.9,0.5);if(nA>0.01)withA(ctx,nA,()=>arrive(ctx,270,470,t,c("easy")+0.2,()=>sticky(ctx,270,470,450,250,d10_nb("Every eligible household")+" gets "+d10_nb("a social tariff,")+" automatically.",{col:NOTEC[0],size:34,rot:-0.02,src:"the government's direction"}),{dy:-24,from:1.06}));
   arrive(ctx,1440,500,t,tO+1.0,()=>{glass(ctx,1010,180,850,650,22,TRUST,{glow:14,ea:0.8,fill:"rgba(16,13,6,0.94)"});T(ctx,"who must agree",1046,230,{f:"mono",w:500,size:28,color:rgba(TRUST,1)});
     D10_AGREE.forEach(([nm,what],i)=>{const y=300+i*104,a=fin(t,tO+1.3+i*0.3,0.5);withA(ctx,a,()=>{d10_owner(ctx,1046,y,nm,1,{pre:"",hi:pulseAt(t,tA+0.2+i*0.2,1.2)+pulseAt(t,B+0.4+i*0.25,1.0)});T(ctx,what,1046,y+52,{w:700,size:28,color:rgba(SOFT,0.95)});});});},{dy:-16});
   eaYear(ctx,90,90,"November 2026",CLAY,fin(t,0.4,0.5)*(1-fin(t,L[0]-0.8,0.5)));
@@ -223,7 +218,7 @@ scene("walk",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
 // The agency, which knows who is eligible, on the right; the utility, which doesn't, on the left; the principle that spares the
 // household from proving it, and the form it won't fill in. Then the agreement between them, which asks for the least: what goes
 // (every account holder's matching details), what comes back (only the eligible, with a date), and what never does; and, below,
-// when it starts: today, and for longer than the code
+// when it starts: today, and for longer than changing the systems
 const D10_AG=[640,300,640,392],D10_ROWY=[498,582,666];
 scene("once",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   const tK=c("knows"),tL=c("least"),tF=c("first"),tO=w("knows","Once only")-0.1,tAg=w("least","the agreement")-0.1;
@@ -262,8 +257,8 @@ scene("once",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
       withA(ctx,q,()=>{const red=i===2;T(ctx,k,ax+30,yy-40,{f:"mono",w:500,size:28,color:red?rgba(D10_RED,1):rgba(BUS,0.9)});T(ctx,v,ax+30,yy,{w:700,size:30,color:red?"rgba(255,206,196,0.85)":rgba(INK,0.96)});
         if(red){const sw=tw(ctx,v,30,700);ctx.save();ctx.strokeStyle=rgba(D10_RED,1);ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(ax+24,yy-10);ctx.lineTo(ax+24+(sw+12)*ease(clamp((t-t0-0.5)/0.5,0,1)),yy-10);ctx.stroke();ctx.restore();}});});},{dy:-16});
   flow(0,1,tGo+0.2,INK);flow(1,-1,tBack+0.2,TRUST);flow(2,-1,tNo+0.1,D10_RED,1);
-  // when it starts: the agreement today, for longer than the code
-  d10_gantt(ctx,340,744,1240,t,[["the agreement",0,5.5,BUS,w("first","starts today")-0.2],["the code",3,6.5,APL,w("first","the code")-0.3]],fin(t,tF-0.1,0.6));
+  // when it starts: the agreement today, for longer than changing the systems
+  d10_gantt(ctx,340,744,1240,t,[["the agreement",0,5.5,BUS,w("first","starts today")-0.2],["changing the systems",3,6.5,APL,w("first","changing the systems")-0.3]],fin(t,tF-0.1,0.6));
   ctx.restore();
   vign(ctx,S);});
 
@@ -378,13 +373,15 @@ scene("counter",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
   vign(ctx,S);});
 
 /* ---------- 8. Where the data lands ---------- */
-// The bill's new line, carried from the counter, into the data product it comes from: accounts and bills, whose amount due now
-// means something else. Its contract isn't changed in place: the new meaning stops at version 1's edge, and version 2 goes beside
-// it, in dbt, with a date for version 1 to go. The catalogue's lineage finds everyone who reads version 1, and each owner is told
-// first. Then the exchange with the agency, and its own contract, under the agreement: what goes, what comes back, and how often
-// the contract in dbt, line by line: [text, its row before version 2, its row after, what it is]
-const D10_YML=[["models:",0,0],["  - name: accounts_and_bills",1,1],["    latest_version: 2",2,2,"v2"],["    config:",2,3],["      contract: {enforced: true}",3,4,"contract"],["    versions:",4,5],
-  ["      - v: 2",5,6,"v2"],["      - v: 1",5,7,"v1"],["        deprecation_date: 2027-09-30",6,8,"date"]];
+// The bill's new line, carried from the counter, into the data product it comes from: accounts and bills, which gets a new column,
+// the discount, while amount due keeps its meaning, what the household pays. In dbt, the column is added to the contract, nothing
+// that reads it breaks, and the contract stays at version 1; a second version, drawn faint, is the last resort, only for removing
+// or redefining a column. The catalogue's lineage finds everyone who reads the product, and each owner hears of the new column
+// before the first bills. Then the exchange with the agency, and its own contract, under the agreement: what goes, what comes back,
+// and how often
+// the contract in dbt, line by line: [text, what it is]
+const D10_YML=[["models:"],["  - name: accounts_and_bills"],["    config:"],["      contract: {enforced: true}","contract"],["    columns:"],
+  ["      - name: amount_due"],["        data_type: decimal(10,2)"],["        description: what the household pays","meaning"],["      - name: discount","add"],["        data_type: decimal(10,2)","add"]];
 const D10_GR=[150,240,170],D10_AMB=[255,190,120];
 scene("lands",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   const tV=c("version"),tL=c("lineage"),tX=c("exchange");
@@ -392,31 +389,29 @@ scene("lands",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   // A. the bill, from the counter, its new line lit; it slides out as the contract comes in
   const mvB=easeCam(clamp((t-0.2)/1.6,0,1)),goA=fin(t,tV-0.9,0.6),bX=lerp(438,80,mvB)-60*goA,bY=lerp(68,256,mvB),bS=lerp(0.6,0.96,mvB),tLn=w("line","discount line")-0.2;
   if(goA<1)withA(ctx,1-goA,()=>{ctx.save();ctx.translate(bX,bY);ctx.scale(bS,bS);d10_bill(ctx,0,0,560,470,{hi:pulseAt(t,tLn,1.6)+fin(t,tLn,0.6)*0.5,deco:bS<0.955});ctx.restore();});
-  // the product it comes from: accounts and bills, retail's, as Now the questions appear found it; up, for its versions
+  // the product it comes from: accounts and bills, retail's, as Now the questions appear found it; up, for its contract
   const tP=w("line","the accounts")-0.3,mvP=easeCam(clamp((t-tV+1.0)/1.4,0,1)),goP=fin(t,tL-0.9,0.5),pX=lerp(720,80,mvP),pY=lerp(256,230,mvP),pW=lerp(1100,820,mvP);
   if(goP<1)arrive(ctx,pX+pW/2,pY+62,t,tP,()=>withA(ctx,1-goP,()=>{d10_product(ctx,pX,pY,pW,124,"accounts and bills","sell energy · serve customers",{hi:pulseAt(t,tP+0.6,1.4)});
     withA(ctx,fin(t,tP+0.5,0.5)*(1-mvP),()=>d10_owner(ctx,1820,426,"head of retail",1,{align:"right",hi:pulseAt(t,tP+0.8,1.2)}));}),{dy:-14});
   // the bill's new line flows into it
   if(goA<1){const P=[];for(let k=0;k<=20;k++){const f=k/20,g=1-f;P.push([g*g*g*605+3*g*g*f*666+3*g*f*f*650+f*f*f*716,g*g*g*523+3*g*g*f*523+3*g*f*f*322+f*f*f*322]);}d10_trace(ctx,P,clamp((t-tP-0.3)/0.7,0,1),TRUST,{lw:3.5,a:0.9*(1-goA)});}
-  // what amount due means: what it was, struck out, and what it is now
-  const tCh=w("line","changes")-0.3;arrive(ctx,1270,615,t,tCh,()=>d10_meaning(ctx,720,470,1100,{a:1-goA,strike:clamp((t-w("line","amount due")-0.1)/0.6,0,1),now:fin(t,w("line","means")-0.2,0.5)}),{dy:-14});
+  // its columns: amount due keeps its meaning, and the discount comes in, a new column
+  const tCo=w("line","gets a new")-0.3,tNw=w("line","new column")-0.1,tKp=w("line","keeps its meaning")-0.2;
+  arrive(ctx,1270,615,t,tCo,()=>d10_cols(ctx,720,470,1100,{a:1-goA,nw:fin(t,tNw,0.5),keep:fin(t,tKp,0.5)}),{dy:-14});
 
-  // B. the contract, in dbt; version 1 as it is; the new meaning, stopped at its edge; version 2 beside it; a date for version 1
-  const tK=w("version","contract")-0.2,tIP=w("version","in place")-0.3,tV2=w("version","Version two")-0.2,tV1=w("version","version one")-0.2,tDt=w("version","a date")-0.1,goB=fin(t,tL-0.9,0.5);
-  const g2=ease(fin(t,tV2,0.6)),dd=fin(t,tDt,0.5);
+  // B. the contract, in dbt: the column added, nothing that reads it broken, so version 1 it stays; then a second version, faint, the
+  // last resort, only for removing or redefining a column, and gone again before lineage
+  const tAd=w("version","A new column")-0.1,tBr=w("version","breaks nothing")-0.1,tSt=w("version","stays at")-0.2,tS2=w("version","A second version")-0.2,tLr=w("version","last resort")-0.1,
+    tRm=w("version","removing or")-0.1,goB=fin(t,tL-0.9,0.5),ad=fin(t,tAd,0.5),g2=fin(t,tS2,0.5)*(1-fin(t,tL-1.7,0.6));
   if(goB<1&&t>tV-1.4)withA(ctx,1-goB,()=>{
-    arrive(ctx,1410,490,t,tK,()=>d10_yml(ctx,980,230,860,520,"accounts_and_bills.yml",D10_YML.map(([s,r0,r1,k])=>({s,at:lerp(r0,r1,g2),a:k==="v2"?g2:k==="date"?dd:1,
-      hi:k==="contract"?pulseAt(t,tK+0.4,1.8):k==="v2"?pulseAt(t,tV2+0.3,1.6)+0.3*g2:k==="v1"?pulseAt(t,tV1+0.2,1.4):k==="date"?pulseAt(t,tDt+0.3,1.6)+0.3*dd:0,col:k==="v2"?D10_GR:k==="date"?D10_AMB:TRUST}))),{dy:-16});
-    arrive(ctx,277,555,t,tV-0.3,()=>d10_ver(ctx,80,420,395,1,[["amount_due","before the discount"],["goes",d10_nb("30 September 2027"),D10_AMB,dd]],{hi:pulseAt(t,tV1+0.2,1.4)+pulseAt(t,tDt+0.2,1.4)}),{dy:-14});
-    // the new meaning tries version 1, and stops at its edge
-    const ch=fin(t,tIP-0.6,0.3)*(1-fin(t,tV2+0.2,0.4)),u=ease(clamp((t-tIP+0.6)/0.6,0,1)),bk=ease(clamp((t-tIP-0.1)/0.5,0,1)),cx=lerp(lerp(560,490,u),518,bk),cy=lerp(800,568,u);
-    if(ch>0.01)withA(ctx,ch,()=>d10_tag(ctx,cx,cy,"after the discount",D10_GR,{size:28}));
-    const sa=fin(t,tIP,0.25)*(1-fin(t,tV2+0.6,0.5));if(sa>0.01)withA(ctx,sa,()=>{ctx.save();ctx.strokeStyle=rgba(D10_RED,1);ctx.lineWidth=6;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(482,538);ctx.lineTo(482,598);ctx.stroke();ctx.restore();});
-    const r=clamp((t-tIP)/0.8,0,1);if(r>0&&r<1)ring(ctx,482,568,14+44*r,D10_RED,0.8*(1-r),3);
-    withA(ctx,fin(t,tIP+0.1,0.4)*(1-fin(t,tV2+1.2,0.5)),()=>d10_tag(ctx,490,387,"not changed in place",D10_RED,{align:"center",size:28}));
-    arrive(ctx,702,555,t,tV2,()=>d10_ver(ctx,505,420,395,2,[["amount_due","after the discount",D10_GR],["discount","its own column",D10_GR]],{badge:1,hi:pulseAt(t,tV2+0.4,1.4)}),{dy:-14});});
+    arrive(ctx,1410,490,t,tV-0.3,()=>d10_yml(ctx,980,206,860,566,"accounts_and_bills.yml",D10_YML.map(([s,k],i)=>({s,at:i,a:k==="add"?ad:1,
+      hi:k==="contract"?pulseAt(t,tSt+0.3,1.6):k==="add"?ad*(0.5+0.5*pulseAt(t,tAd+0.3,1.4)):0,col:k==="add"?D10_GR:TRUST}))),{dy:-16});
+    arrive(ctx,277,555,t,tV-0.3,()=>d10_ver(ctx,80,420,395,1,[["amount_due","what the household pays"],["discount","added",D10_GR,ad]],{hi:pulseAt(t,tAd+0.2,1.2)+pulseAt(t,tSt+0.2,1.4)}),{dy:-14});
+    withA(ctx,fin(t,tBr,0.4),()=>d10_tag(ctx,277,387,"breaks nothing",D10_GR,{align:"center",size:28}));
+    if(g2>0.01)withA(ctx,g2,()=>{d10_ver(ctx,505,420,395,2,[["only for","a column removed",D10_AMB,fin(t,tRm,0.4)],["or","its meaning changed",D10_AMB,fin(t,tRm+0.5,0.4)]],{ghost:D10_AMB});
+      withA(ctx,fin(t,tLr,0.4),()=>d10_tag(ctx,702,387,"the last resort",D10_AMB,{align:"center",size:28}));});});
 
-  // C. lineage, in the catalogue: everyone who reads version 1; each owner, told first
+  // C. lineage, in the catalogue: everyone who reads the product; each owner, told before the first bills
   const tE=[w("lineage","a measure")-0.2,w("lineage","a report")-0.2,w("lineage","collections")-0.3],tT=w("lineage","Each owner")-0.1,goC=fin(t,tX-0.9,0.5);
   if(goC<1&&t>tL-0.6)arrive(ctx,960,470,t,tL-0.5,()=>withA(ctx,1-goC,()=>{d10_lineage(ctx,80,150,1760,620,t,{e:tE.map(x=>clamp((t-x)/0.8,0,1)),draft:1});
     // lineage looks downstream from the table
@@ -425,7 +420,7 @@ scene("lands",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
       withA(ctx,oa,()=>d10_owner(ctx,1504,cy,own,1,{pre:"",hi:pulseAt(t,tt+0.9,1.2)}));
       if(ar>0&&ar<1){const[ex,ey]=ar<0.8?d10_linAt(i,ar/0.8):[lerp(D10_LNX,1504,(ar-0.8)/0.2),cy];d10_envelope(ctx,ex,ey-26,22,1);}
       withA(ctx,fin(t,tt+0.9,0.3),()=>kt_gtick(ctx,1504+ow+28,cy,15,1));});
-    arrive(ctx,960,846,t,w("lineage","told first")-0.2,()=>d10_tag(ctx,960,846,"told before version 1 goes",TRUST,{align:"center",size:30}),{dy:8});}),{dy:-16,from:1.03});
+    arrive(ctx,960,846,t,w("lineage","before the first bills")-0.2,()=>d10_tag(ctx,960,846,"told before the first bills",TRUST,{align:"center",size:30}),{dy:8});}),{dy:-16,from:1.03});
 
   // D. the exchange with the agency, and its own contract, under the agreement: what goes, what comes back, and how often
   const xA=fin(t,tX-0.5,0.6),tXc=tX-0.1,tOwn=w("exchange","own contract")-0.2,tToo=w("exchange","too")-0.3,tGo=w("exchange","what goes")-0.1,tBk=w("exchange","comes back")-0.1,tOf=w("exchange","how often")-0.1,XC=[520,250,880,500],RY=[452,562,672];
@@ -531,7 +526,7 @@ function d10_mini(ctx,m,p,lit,hi){layerStack(ctx,m.x,m.y,m.w,{p,sh:m.h,gap:m.g,s
 // what the walk found, lifted off the map into a list: each owner, rule and contract, with the element it comes off ([layer, x, width])
 const D10_OWN=[["Ama",[0,110,360]],["head of retail",[2,110,300]],["IT",[5,1000,360]],["the agency",[2,1300,300]]];
 const D10_RMIN=[["RUL-023","from the agency's date"],["RUL-024","until the next match"],["RUL-025","only billing reads it"]],D10_RSRC=[3,760,400];
-const D10_CON=[["version 2","accounts and\u00a0bills","product",[4,420,340]],["monthly","the exchange with\u00a0the\u00a0agency","object",[5,1000,360]]],D10_LX=[930,1216,1598];
+const D10_CON=[["new column","accounts and\u00a0bills","product",[4,420,340]],["monthly","the exchange with\u00a0the\u00a0agency","object",[5,1000,360]]],D10_LX=[930,1216,1598];
 const D10_ANS="It lands in every layer. Walked down the map, it's a list of owners, rules and contracts, in order.";
 scene("july",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   const tB=c("bills"),tM=c("measure"),tK=c("kenya"),tA=c("answer"),tN=c("next");

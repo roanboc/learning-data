@@ -6,12 +6,12 @@
 # village of Artigat, and its tune comes back when the man who came back is taken in; a harp is the roles, each on the note it has had
 # since film 1 (the student D, the applicant E, the researcher G, the tutor A, the alumna the D above), so a record's role is heard as it
 # arrives or is linked; a dulcian, the bassoon's ancestor, is the person: whenever someone stands in white paper as one person, it plays
-# the D and the A above it, the notes film 1's cello gave her, and the two patients called Jo Lee get a short note each, a semitone
-# apart, heard together only while they're merged by mistake; and the clarinet carries the series' mark, one note, its octave, its fifth
-# and the note again (1-8-5-1), this time on A. The film starts in A minor, in Artigat in 1548, and ends in A major. A needle moving
-# across a score is heard on the harp, a note for each step it passes, rising or falling with it. The effects are the paper's and the
-# people's: a pencil or a quill, a card, a sheet, a few muffled keys, a stamp, footsteps on the road and on the court's stone, a wooden
-# leg and its crutch, a seal pressed for each decision Mei writes down, the balance's creak, the lock.
+# the D and the A above it, the notes film 1's cello gave her, and the two patients called Jo Lee get a short note each, a third
+# apart, only one of them heard while they're merged by mistake; and the clarinet carries the series' mark, one note, its octave,
+# its fifth and the note again (1-8-5-1), this time on A. The film starts in A minor, in Artigat in 1548, and ends in A major. A
+# needle moving across a score is heard on the harp, a note for each step it passes, rising or falling with it. The effects are the
+# paper's and the people's: a pencil or a quill, a card, a sheet, a few muffled keys, a stamp, footsteps on the road and on the court's
+# stone, a wooden leg and its crutch, a seal pressed for each decision Mei writes down, the balance's creak, the lock.
 # The rules from In the weeds of data crafting hold:
 #  - Nothing loops, and nothing is held under the explaining. The author found the consort, held under every chapter of the first cut,
 #    tense under the explanations (20 October 2026), so after the opening story the music comes now and then: a chapter's chord on the
@@ -19,6 +19,8 @@
 #  - Every sound is an event on screen, at the moment it appears. Each effect below uses the same timing as the picture in
 #    src/scenes.js (the same word, and the same offset), so sound and picture stay together when the voice is re-timed.
 #  - No pulse: the first cut's, under linking the two Aishas, went with the held chords. The picture, a cross and the balance carry it.
+#  - Nothing trembles (the series' rule, 20 October 2026): no vibrato, one string to each of the lute's notes, the viols' pitch moving
+#    together, and the end chord tuned pure, so no two voices are a little out of tune on one note, which beats on a phone's speaker.
 # And everything stays low and soft: knocks, paper, muffled keys, a pencil, low notes, filtered below about 2.5 kHz.
 
 # when a word of a line is spoken, as the film's own kt_w() estimates it: along the line's voiced length, from the words the voice reads
@@ -50,12 +52,17 @@ ease = lambda u: 0.5 - 0.5 * np.cos(np.pi * min(1.0, max(0.0, u)))  # the film's
 # ---- the film's instruments, all kept low ----
 # the music's levels: the bed sits about 21 dB under the voice, as in the series' other films, and the notes over it a little less
 BED, NOTE = 1.8, 1.8
-def viol(m, start, sec, g=0.012, pan=0.0, seed=0, att=0.7, rel=1.5):
+_DR = np.random.default_rng(1548).random(3)  # the consort's one drift
+# the end chord, held on its own, is tuned pure: in equal temperament a major third's partials beat 4 to 9 times a second, and a
+# phone's speaker, which drops the low notes, keeps them. Chapter 1's chords change and share notes, so they keep equal temperament,
+# like every other instrument here. In cents from equal temperament, for each note of A major
+PURE_A = {9: 0, 4: 1.96, 1: -13.69}
+def viol(m, start, sec, g=0.012, pan=0.0, seed=0, att=0.7, rel=1.5, tune=None):
     """a viol, bowed without vibrato as a consort plays it: a reedy, slightly nasal tone that speaks slowly, swells a little on each
     bow, and changes bow every few seconds with a dip and a breath of rosin; nothing above about 1.5 kHz"""
     if sec <= 0.2:
         return
-    f = mf(m); x = tt(sec); n = len(x); r = np.random.default_rng(abs(seed))
+    f = mf(m) * 2 ** ((tune or {}).get(m % 12, 0) / 1200); x = tt(sec); n = len(x); r = np.random.default_rng(abs(seed))
     # the bow: strokes of 2.6 to 4.2 seconds, the first already under way, so no two voices change bow together
     amp = np.ones(n, np.float32); bow = np.zeros(n, np.float32); a = -r.uniform(0.3, 2.4)
     while a < sec:
@@ -66,8 +73,10 @@ def viol(m, start, sec, g=0.012, pan=0.0, seed=0, att=0.7, rel=1.5):
             if a > 0:
                 k = min(n - i0, int(0.12 * SR)); bow[i0:i0 + k] += np.exp(-np.arange(k) / SR * 30).astype(np.float32)
         a = b
-    # the pitch, never quite still: the bow's weight, not a vibrato
-    dr = 1 + 0.0011 * np.sin(2 * np.pi * (0.17 + 0.05 * r.random()) * x + 6 * r.random()) + 0.0005 * np.sin(2 * np.pi * 0.53 * x + 6 * r.random())
+    # the pitch, never quite still: the bow's weight, not a vibrato; every viol moves with the same drift, in the film's time, so two
+    # voices an octave apart stay in tune with each other and never beat
+    T = start + x
+    dr = 1 + 0.0011 * np.sin(2 * np.pi * (0.17 + 0.05 * _DR[0]) * T + 6 * _DR[1]) + 0.0005 * np.sin(2 * np.pi * 0.53 * T + 6 * _DR[2])
     ph = 2 * np.pi * np.cumsum(f * dr) / SR
     s = np.zeros(n, np.float32)
     for k in range(1, 19):
@@ -80,11 +89,11 @@ def viol(m, start, sec, g=0.012, pan=0.0, seed=0, att=0.7, rel=1.5):
     e = (np.sin(np.pi / 2 * np.clip(x / att, 0, 1)) ** 2 * np.clip((sec - x) / rel, 0, 1) ** 1.3).astype(np.float32)
     put(norm(filt(((s / 3.2 + ros) * amp * e).astype(np.float32), 'low', 1500)), start, g * BED, pan)
 VPAN = [0.0, -0.42, 0.42, -0.72, 0.72, -0.18]
-def consort(ch, start, sec, g=0.012):
+def consort(ch, start, sec, g=0.012, tune=None):
     """a held chord on a consort of viols: the lowest first, the others coming in one after another, each in its own place"""
     for k, m in enumerate(ch):
         d = 0.34 * k
-        viol(m, start + d, sec - d, g * (1.12 if k == 0 else 0.9), VPAN[k % len(VPAN)], seed=int(start * 100) * 7 + k)
+        viol(m, start + d, sec - d, g * (1.12 if k == 0 else 0.9), VPAN[k % len(VPAN)], seed=int(start * 100) * 7 + k, tune=tune)
 def bed(keys, end, g=0.012):
     """the chapter's chords, each from its moment (a little early, so it has come in by then) until a little after the next one starts"""
     for i, (t0, ch) in enumerate(keys):
@@ -105,10 +114,9 @@ ROLE = {'student': 50, 'applicant': 52, 'researcher': 55, 'tutor': 57, 'alumna':
 def role(r, s, g=0.03, pan=0.0):
     harp_(ROLE[r], s, g, pan)
 def lute_(m, start, g=0.03, pan=0.0, sec=1.9):
-    """a lute: two strings to a course, a little apart in tune, plucked near the bridge's end of the string, and soon quiet"""
-    f = mf(m); x = tt(sec); s = np.zeros_like(x)
-    for det in (0.9991, 1.0009):
-        s += sum(np.sin(2 * np.pi * f * det * k * x + 0.2 * k) * abs(np.sin(np.pi * k * 0.18)) / k ** 1.05 * np.exp(-x * (1.7 + 0.9 * k)) for k in range(1, 12))
+    """a lute, plucked near the bridge's end of the string, and soon quiet: one string to a note, since two a little apart in tune beat"""
+    f = mf(m); x = tt(sec)
+    s = sum(np.sin(2 * np.pi * f * k * x + 0.2 * k) * abs(np.sin(np.pi * k * 0.18)) / k ** 1.05 * np.exp(-x * (1.7 + 0.9 * k)) for k in range(1, 12))
     s = s * np.minimum(1, x / 0.002) + 0.04 * filt(noise(sec), 'band', (f * 3, 2200)) * np.exp(-x * 90)
     put(norm(filt(s.astype(np.float32), 'low', 2000)), start, g * NOTE, pan)
 def village(s, g=0.032, pan=-0.25, notes=None):
@@ -117,9 +125,8 @@ def village(s, g=0.032, pan=-0.25, notes=None):
                                (2.0, 60, 0.8), (2.36, 59, 0.8), (2.8, 57, 0.95), (2.8, 52, 0.55), (2.83, 45, 0.7)]:
         lute_(m, s + dt, g * gg, pan)
 def dulcian(m, start, sec, g=0.03, pan=0.0):
-    """a dulcian, the bassoon's ancestor, played softly: a warm double reed, gently tongued, a slow vibrato that comes in late"""
-    f = mf(m); x = tt(sec); vib = 1 + 0.003 * np.sin(2 * np.pi * 4.8 * x) * np.clip((x - 0.5) / 0.6, 0, 1)
-    ph = 2 * np.pi * np.cumsum(f * vib) / SR; s = np.zeros_like(x)
+    """a dulcian, the bassoon's ancestor, played softly: a warm double reed, gently tongued, and held steady, without vibrato"""
+    f = mf(m); x = tt(sec); ph = 2 * np.pi * f * x; s = np.zeros_like(x)
     for k in range(1, 17):
         fk = f * k
         if fk > 2200:
@@ -131,9 +138,9 @@ def person(s, g=0.03, pan=0.0):
     """the person: the D, and the A above it, on the dulcian, the same two notes wherever someone stands in white paper as one person"""
     dulcian(50, s, 3.0, g, pan); dulcian(57, s + 0.55, 2.4, g * 0.55, pan + 0.15)
 def clarinet(m, start, sec, g=0.04, pan=0.0):
-    """a soft clarinet: odd harmonics, a breath as it speaks, a slow vibrato that comes in late (the series' mark is always on it)"""
-    f = mf(m); x = tt(sec); vib = 1 + 0.0035 * np.sin(2 * np.pi * 5.0 * x) * np.clip((x - 0.35) / 0.5, 0, 1)
-    ph = 2 * np.pi * np.cumsum(f * vib) / SR
+    """a soft clarinet: odd harmonics, a breath as it speaks, and held steady, without vibrato, as clarinettists play (the series'
+    mark is always on it)"""
+    f = mf(m); x = tt(sec); ph = 2 * np.pi * f * x
     s = np.sin(ph) + 0.05 * np.sin(2 * ph) + 0.36 * np.sin(3 * ph) + 0.16 * np.sin(5 * ph) + 0.07 * np.sin(7 * ph)
     br = filt(noise(sec), 'band', (f * 0.9, f * 3)) * 0.12 * np.exp(-x * 6)
     put(norm(filt(((s + br) * env(sec, 0.09, min(0.35, sec * 0.4))).astype(np.float32), 'low', 2200)), start, g * NOTE, pan)
@@ -501,23 +508,23 @@ for i, m in enumerate([50, 55, 57, 62]):
     harp_(m, B + 0.15 + i * 0.16, 0.018, -0.3 + 0.2 * i)
 dulcian(50, B + 0.9, 2.6, 0.02, 0.0)
 
-# 10. Elsewhere: D minor. The hospital's card; two patients in white paper, each on a note of their own, a semitone apart;
-#     their wristbands; the bands slid together by mistake, and the two notes heard together; the test result slid to the wrong one,
-#     and crossed; each number's issuer, a knock each; the bands slid apart, and the two notes heard one after the other; the result
-#     slid back, and ticked; the tag
+# 10. Elsewhere: D minor. The hospital's card; two patients in white paper, each on a note of their own, a third apart;
+#     their wristbands; the bands slid together by mistake, and only the first one's note left; the test result slid to the wrong one,
+#     and crossed; each number's issuer, a knock each; the bands slid apart, and the two notes heard again, one after the other; the
+#     result slid back, and ticked; the tag
 J = 'elsewhere'
 tH, tToo, tMg, tRes, tWr, tI, tKeep, tUn = (C(J, 'hospital'), W(J, 'hospital', 'match people'), W(J, 'hospital', 'Merge two'), W(J, 'hospital', 'a test result'),
                                            W(J, 'hospital', 'the wrong one'), C(J, 'issuer'), W(J, 'issuer', 'keep each'), W(J, 'issuer', 'undoing'))
 turn(DM9, S0(J) + 0.2)
 paper(tH - 0.2, 0.032, P(960), 0.6)
-dulcian(52, tToo - 0.2, 0.9, 0.02, P(640)); dulcian(53, tToo + 0.1, 0.9, 0.02, P(1280))
+dulcian(52, tToo - 0.2, 0.9, 0.02, P(640)); dulcian(55, tToo + 0.1, 0.9, 0.02, P(1280))
 paper(tToo - 0.1, 0.016, P(640), 0.35); paper(tToo + 0.2, 0.016, P(1280), 0.35)
 slide(tMg, 1.0, P(640), P(900), 0.01); slide(tMg, 1.0, P(1280), P(960), 0.01)
-dulcian(52, tMg + 0.75, 1.1, 0.014, -0.1); dulcian(53, tMg + 0.75, 1.1, 0.014, 0.1)
+dulcian(52, tMg + 0.75, 1.1, 0.016, P(930))
 paper(tToo + 0.6, 0.016, P(1560), 0.35); slide(tRes, 1.2, P(1560), P(360), 0.012); cross(tWr, 0.016, P(500))
 knock(tKeep - 0.05, 0.014, P(700), 230); knock(tKeep + 0.1, 0.014, P(1260), 250)
 slide(tUn, 1.0, P(900), P(640), 0.01); slide(tUn, 1.0, P(960), P(1280), 0.01)
-dulcian(52, tUn + 0.7, 0.9, 0.016, P(640)); dulcian(53, tUn + 1.05, 0.9, 0.016, P(1280))
+dulcian(52, tUn + 0.7, 0.9, 0.016, P(640)); dulcian(55, tUn + 1.05, 0.9, 0.016, P(1280))
 slide(tUn + 0.4, 1.2, P(360), P(1560), 0.012); tick_(tUn + 1.6, 0.015, P(1700))
 knock(tUn + 0.65, 0.016, P(960))
 
@@ -529,8 +536,8 @@ tQ, tWo, tDec, tQu, tFa, tWk, tOw, tMr, tLk, tWho, tK = (W(J, 'pairs', 'a query'
                                                          W(J, 'test', 'fails'), W(J, 'test', 'more than a week'), W(J, 'test', 'an owner'), W(J, 'links', 'the master records'),
                                                          W(J, 'links', 'their links'), W(J, 'links', 'who decided'), C(J, 'decide'))
 turn(DMAJ9, S0(J) + 0.2)
-# the last line and the end card: the consort comes back, as in Artigat, and holds A major, open and plain, to the end
-consort([45, 52, 57, 61, 64], tK - 0.6, TOT + 1.0 - (tK - 0.6), 0.011)
+# the last line and the end card: the consort comes back, as in Artigat, and holds A major, open, plain and pure, to the end
+consort([45, 52, 57, 61, 64], tK - 0.6, TOT + 1.0 - (tK - 0.6), 0.011, PURE_A)
 paper(tQ - 0.3, 0.03, P(510), 0.5)
 for i in range(5):
     tap(tQ + 0.3 + i * 0.18, 0.011, P(510))

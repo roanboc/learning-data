@@ -165,15 +165,17 @@ Four questions, one at the end of each of four chapters, as the site shows them 
 
 | On screen | In the example project |
 |---|---|
-| Linh, S-20436 | `data/student_system/learners.csv` (line 50) |
+| Linh, S-20436, a master's from July 2025 | `data/student_system/learners.csv` (line 50). The project has her in the Graduate Certificate in Health Informatics (GCHI) where the film says a master's: an open point in the proposal's *Decisions for the author* |
+| S-17142, her bachelor's, 2019–22, not linked to S-20436 | `data/student_system/past_learners.csv`, the student system's archive of records closed before November 2024 (enrolled 25 February 2019, completed 15 December 2022). No key joins it to S-20436: `analyses/profiling/profile_keys_held.sql` |
+| The four systems that need to know her | `data/student_system/`, `data/hr_system/` (E-4417), `data/research_system/` (R-3082, which holds E-4417) and `data/alumni_system/` (A-61207, which holds S-17142 only), each with its sources under `sources/` and its key set in `seeds/reference/shared/key_sets.csv` |
 | Mei's links (the registry the university already has) | `seeds/reference/student/learner_identity_decisions.csv`: decisions such as D-001, each with who decided, when and why. None links Linh's two student numbers before *Who is it?* does, on 8 October 2026 |
 | The copy in the lakehouse | `models/core/student/core_learner.sql`: the learner, a consolidated copy for analysis, with keys from three systems |
 | A product that others read, with an enforced contract | `dbt_project.yml` lines 46 to 52: core models are `access: public`, with `contract: enforced: true` |
 | Version 1 | `models/core/student/_core_student__models.yml` lines 7 and 107 to 109: `latest_version: 1`, `versions: - v: 1` |
 | Owned by Mei's office | `models/core/student/_core_student__models.yml` line 11, and the groups' owners in `models/_groups.yml` |
 | Who may read it | `dbt_project.yml` line 64: `+grants`, Unity Catalog's `select`, for named groups |
-| The person, the search at the application, the synced table | New: the series adds the person (with *Who is it?*'s links and *Which value wins*'s rules) and a search the application calls |
-| Linh's birth date and personal email, the second Linh, S-21907, the PhD | Invented for the film; the project holds no birth dates, and Linh's email in its data is the shared family one, which the series doesn't use |
+| The person, the search at the application, the synced table | The person domain is in the project as a draft for its owners (`models/core/person/_person__conceptual.yml`, with DEC-PER-01 to 03 proposed). The person model, the search the application calls and the synced table are new, this film's own addition, with *Who is it?*'s links and *Which value wins*'s rules |
+| Linh's birth date, 14 March 2001, her personal email, the second Linh, S-21907, the PhD | Invented for the film, as in *Who is it?*. The project's student system holds no birth date; HR's `data/hr_system/staff.csv` holds hers as 2001-05-14, the typo *Who is it?* finds. Her email in the student system's data is the shared family one, which the series doesn't use |
 
 ## Rigour to check before recording
 
@@ -211,5 +213,5 @@ Built on 17 October 2026, from this script, in watercolour. What changed on the 
 ## Next
 
 1. The author watches the film, and approves it or asks for corrections.
-2. The project's additions it needs: the person published as a model, with its owner, contract, version and grants; the search the application calls.
+2. The project's additions it needs: the person published as a model in the person domain (a draft since 20 October 2026), with its owner, contract, version and grants; the search the application calls.
 3. Labs, in the series' interactive learning: the candidates above.

@@ -8,10 +8,10 @@
 # never as a constant bed under the voice; and nothing in it is tense, trembles or pulses.
 #  - Sackbuts, the trombone's softer ancestors, hold the chords: all through the Beagle's story in the first chapter, then only at
 #    each chapter's turn, swelling in the pause between two chapters and let go as the new one's voice begins; in the pause before
-#    the master data tool's screen and in the wordless moment for the rules, written and tested; after the thirty-three seconds;
-#    and from the film's last line to the end card. One player to a note, low to the left and high to the right, and a note the
-#    next chord keeps is held through the change: two players on one note would beat against each other, a slow pulse on a phone's
-#    speaker. The chords are in E flat and its relative C minor, voiced with no two notes a semitone apart.
+#    the master data tool's screen and in the wordless moment for the rules, written and tested; and from the pause before the
+#    film's last line to the end card. One player to a note, low to the left and high to the right, and a note the next chord keeps
+#    is held through the change: two players on one note would beat against each other, a slow pulse on a phone's speaker. The
+#    chords are in E flat and its relative C minor, voiced with no two notes a semitone apart, and tuned pure over E flat.
 #  - A harpsichord gives each source its note: the note of the role whose colour it wears, the same as in every film of the series
 #    (the student system the student's D, HR the tutor's A, the research office the researcher's G, the alumni office the alumna's
 #    D above), so a value carried from a record sounds where it came from.
@@ -32,7 +32,7 @@
 # And everything stays low and soft: knocks, paper, muffled keys, a pencil, low notes, filtered below about 2.5 kHz.
 
 # when a word of a line is spoken, as the film's own kt_w() estimates it: along the line's voiced length, from the words the voice reads
-import json as _json, pathlib as _pl
+import itertools, json as _json, pathlib as _pl
 _obj = lambda f: (lambda s: _json.loads(s[s.index('{'):s.rindex('}') + 1]))((_pl.Path('src') / f).read_text())
 _NARR, _DUR = _obj('narration.js'), _obj('vodur.js')
 def W(sid, lid, word, off=0):
@@ -53,12 +53,32 @@ def _bell(F):
     """how loud a soft sackbut's harmonic at F Hz is: round and warm from its narrow bell, strongest below about 600 Hz, a little
     edge near 1.1 kHz, almost nothing above"""
     return 1 / (1 + (F / 560) ** 2) + 0.1 * np.exp(-((F - 1100) / 220) ** 2)
-def sackbut(m, sec, seed):
-    """one sackbut, the trombone's softer ancestor, holding note m: it speaks with a breath of air and a slight rise into its pitch,
-    its upper harmonics opening a moment after the lower; held straight, without vibrato, with a player's slow, small drift"""
-    R = np.random.default_rng(seed); f0 = mf(m); x = tt(sec).astype(np.float64)
-    drift = 1 + 0.0007 * np.sin(2 * np.pi * R.uniform(0.06, 0.13) * x + R.uniform(0, 6.3)) + 0.0004 * np.sin(2 * np.pi * R.uniform(0.2, 0.35) * x + R.uniform(0, 6.3))
-    ph = 2 * np.pi * np.cumsum(f0 * drift * (1 - 0.005 * np.exp(-x / 0.045))) / SR
+# the tuning: every note pure over E flat, the film's home. In equal temperament a held major third beats four to eight times a
+# second, a tremble that a phone's speaker brings out, so, as in Lists everyone uses, each pitch takes a just ratio over E flat. F, A,
+# C and D flat can each take either of two (F is 9/8 over E flat a fifth above B flat, but 10/9 a fifth under C; A a major third over
+# either F), and each chord takes, of its notes' ratios, the set whose partials beat least; a note held into the next chord keeps its
+# tuning
+RATIO = {0: (1,), 2: (9 / 8, 10 / 9), 4: (5 / 4,), 5: (4 / 3,), 6: (45 / 32, 25 / 18), 7: (3 / 2,), 9: (5 / 3, 27 / 16), 10: (16 / 9, 9 / 5), 11: (15 / 8,)}
+def hz(m, r=None):
+    """a note's frequency, tuned over E flat: r is the ratio its pitch takes, by default the first (and equal temperament for a pitch
+    the film doesn't play)"""
+    pc = (m - 63) % 12
+    return mf(63) * (r or RATIO.get(pc, (2 ** (pc / 12),))[0]) * 2 ** ((m - 63) // 12)
+def rough(fs):
+    """how much held sackbuts at these frequencies beat against each other: each pair of partials a few hertz apart counts, most at
+    six beats a second, by the softer of the two"""
+    ps = [(h * f, h ** -0.5 * _bell(h * f)) for f in fs for h in range(1, 16) if h * f < 1500]; d = 0.0
+    for i, (f1, a1) in enumerate(ps):
+        for f2, a2 in ps[i + 1:]:
+            df = abs(f2 - f1)
+            if 0 < df < 40:
+                d += min(a1, a2) * df / 6 * np.exp(1 - df / 6)
+    return d
+def sackbut(m, sec, seed, f0=None):
+    """one sackbut, the trombone's softer ancestor, holding note m (at f0 Hz, if given): it speaks with a breath of air and a slight
+    rise into its pitch, its upper harmonics opening a moment after the lower; then held steady, without vibrato"""
+    R = np.random.default_rng(seed); f0 = f0 or hz(m); x = tt(sec).astype(np.float64)
+    ph = 2 * np.pi * np.cumsum(f0 * (1 - 0.005 * np.exp(-x / 0.045))) / SR
     s = np.zeros_like(x)
     for h in range(1, 16):
         F = h * f0
@@ -67,12 +87,12 @@ def sackbut(m, sec, seed):
         s += np.sin(h * ph + R.uniform(0, 6.3)) * h ** -0.5 * _bell(F) * np.clip((x - 0.01 * h) / (0.06 + 0.015 * h), 0, 1)
     air = filt(noise(sec), 'band', (300, 1400)) * (0.015 + 0.06 * np.exp(-x / 0.07))
     return (s + air) * (1 + 0.03 * np.sin(2 * np.pi * R.uniform(0.05, 0.1) * x + R.uniform(0, 6.3)))
-def hold(m, start, sec, n, g=0.03, rel=1.8, a=0.5):
-    """note m held on a sackbut from start, one of n in its chord: it swells in over a seconds, and is let go over rel seconds; low
-    notes to the left and high to the right, as the players sit. One player to a note: two on one note beat against each other, and
-    a phone's one speaker turns that into a slow pulse"""
+def hold(m, start, sec, n, g=0.03, rel=1.8, a=0.5, f=None):
+    """note m held on a sackbut from start (at f Hz, if given), one of n in its chord: it swells in over a seconds, and is let go over
+    rel seconds; low notes to the left and high to the right, as the players sit. One player to a note: two on one note beat against
+    each other, and a phone's one speaker turns that into a slow pulse"""
     x = tt(sec); e = (np.clip(x / a, 0, 1) ** 1.5 * np.clip((sec - x) / rel, 0, 1)).astype(np.float32)
-    put(filt((sackbut(m, sec, m * 31 + int(start * 7)) * e / n).astype(np.float32), 'low', 1200), start, g * BED, max(-0.5, min(0.5, (m - 52) / 26)))
+    put(filt((sackbut(m, sec, m * 31 + int(start * 7), f) * e / n).astype(np.float32), 'low', 1200), start, g * BED, max(-0.5, min(0.5, (m - 52) / 26)))
 _BED = []
 def bed(keys, end, g=0.03, a=0.5, rel=1.8):
     """chords, each from its moment, until end: kept, so play_bed() plays the whole film's at once. Their notes swell in over a
@@ -82,26 +102,37 @@ def play_bed():
     """the film's chords on the sackbuts: a player whose note the next chord keeps holds it through the change, the others let go
     just after it, and the new notes come in a little before it, so they have spoken by then. A note a semitone from one that's let
     go comes in at the change itself, and the other is let go quickly, as one player moving a step would: the two never sound
-    together, where they would rub. A note that leaves for a passing chord and comes straight back is let go quickly enough to come
-    back in, so it never sounds twice at once. A note too low for the bed is played an octave up"""
+    together, where they would rub. So does a note whose overtones would beat against one that's let go, where the next chord tunes
+    an F or a C the other way. A note that leaves for a passing chord and comes straight back is let go quickly enough to come back
+    in, so it never sounds twice at once. A note too low for the bed is played an octave up. Each chord is tuned pure (rough()),
+    around the notes it keeps from the chord before"""
     K = [(t, sorted(set(m + 12 if m < 38 else m for m in ch)), end, g, a, rel) for keys, end, g, a, rel in _BED for t, ch in keys]
     K.sort(key=lambda k: k[0])
     on = lambda j: j + 1 < len(K) and K[j + 1][0] <= K[j][2]  # the next chord comes while this one still sounds
     H = []  # each note held: its pitch, when it comes in, when it is let go, its chord's size and level, how long letting go takes,
-    # and how long swelling in takes
+    # how long swelling in takes, and its frequency
+    F = []  # each chord's notes, tuned
     for i, (t0, ch, end, g, a, rel) in enumerate(K):
         prev = K[i - 1][1] if i and on(i - 1) else []
+        keep = {m: F[i - 1][m] for m in ch if m in prev}; new = [m for m in ch if m not in prev]
+        rs = min(itertools.product(*[RATIO.get((m - 63) % 12, (None,)) for m in new]),
+                 key=lambda rs: rough(list(keep.values()) + [hz(m, r) for m, r in zip(new, rs)]))
+        F.append({**keep, **{m: hz(m, r) for m, r in zip(new, rs)}})
         for m in ch:
             if m in prev:
                 continue
             j = i
             while on(j) and m in K[j + 1][1]:
                 j += 1
-            H.append([m, t0 - 0.6, K[j + 1][0] if on(j) else K[j][2], len(ch), g, K[j][5], a])
+            H.append([m, t0 - 0.6, K[j + 1][0] if on(j) else K[j][2], len(ch), g, K[j][5], a, F[i][m]])
+    def clash(f1, f2):
+        """two notes whose overtones, up to the sixth, almost meet: a few hertz and under 3% apart, so they would beat"""
+        return any(0.3 <= abs(a * f1 - b * f2) <= min(12, 0.03 * min(a * f1, b * f2))
+                   for a in range(1, 7) for b in range(1, 7) if max(a * f1, b * f2) < 1500)
     for o in H:
         for i in H:
-            if abs(o[0] - i[0]) == 1 and o[1] < i[1] < o[2] + o[5]:
-                if i[1] < o[2]:  # it comes in at a change: a step
+            if o[1] < i[1] < o[2] + o[5] and (abs(o[0] - i[0]) == 1 or i[1] > o[2] - 0.61 and clash(o[7], i[7])):
+                if i[1] < o[2]:  # it comes in at a change: a step, or a retuning
                     i[1], i[6], o[5] = o[2] - 0.15, min(i[6], 0.45), 0.35
                 else:  # it comes in as the other is let go
                     o[5] = max(0.25, i[1] + 0.3 - o[2])
@@ -109,13 +140,13 @@ def play_bed():
         back = [b[1] for b in H if b[0] == h[0] and h[2] <= b[1] < h[2] + h[5]]
         if back:
             h[5] = max(0.25, min(back) - h[2])
-    for m, s, t1, n, g, rel, a in H:
-        hold(m, s, t1 - s + rel, n, g, rel, a)
+    for m, s, t1, n, g, rel, a, f in H:
+        hold(m, s, t1 - s + rel, n, g, rel, a, f)
 def harpsichord(m, start, g=0.03, pan=0.0, sec=2.6):
     """a harpsichord, one string to a note: a quill plucks it near its end, so it speaks at once, bright and a little hollow, its upper
     harmonics dying first, until the damper falls; darkened below about 2.2 kHz. A pluck is short, so it's set a little louder (1.3)
     to sit with the voice as the score's other notes do"""
-    f = mf(m); x = tt(sec).astype(np.float64); s = np.zeros_like(x)
+    f = hz(m); x = tt(sec).astype(np.float64); s = np.zeros_like(x)
     for h in range(1, 30):
         F = h * f * np.sqrt(1 + 0.00008 * h * h)
         if F > 2600:
@@ -126,7 +157,7 @@ def harpsichord(m, start, g=0.03, pan=0.0, sec=2.6):
     put(norm(filt(s.astype(np.float32), 'low', 2200)), start, g * NOTE * 1.3, pan)
 def clarinet(m, start, sec, g=0.04, pan=0.0):
     """a soft clarinet: odd harmonics and a breath as it speaks, held straight, as clarinettists play"""
-    f = mf(m); x = tt(sec)
+    f = hz(m); x = tt(sec)
     ph = 2 * np.pi * f * x.astype(np.float64)
     s = np.sin(ph) + 0.05 * np.sin(2 * ph) + 0.36 * np.sin(3 * ph) + 0.16 * np.sin(5 * ph) + 0.07 * np.sin(7 * ph)
     br = filt(noise(sec), 'band', (f * 0.9, f * 3)) * 0.12 * np.exp(-x * 6)
@@ -139,7 +170,7 @@ def mark(start, root=63, g=0.042):
 def cor(m, start, sec, g=0.03, pan=0.0):
     """a cor anglais, softly: a double reed's dark, veiled voice, its harmonics gathered near 1 kHz, a breath as it speaks, held
     straight; nothing above about 2.2 kHz"""
-    f = mf(m); x = tt(sec)
+    f = hz(m); x = tt(sec)
     ph = 2 * np.pi * f * x.astype(np.float64)
     w = lambda F: 0.3 + np.exp(-((F - 1000) / 380) ** 2) + 0.25 * np.exp(-((F - 2100) / 300) ** 2)
     s = sum(np.sin(h * ph + 0.2 * h) * w(h * f) / h ** 0.7 for h in range(1, 12))
@@ -245,8 +276,8 @@ def beats(rate, a, b):
 # chords (MIDI note numbers), low to high: E flat major, its relative C minor, and their neighbours, with no two notes a semitone
 # apart, where they would rub. Where a source's note or the person's sounds, the chord holds it or keeps a step away from it
 EB_ADD9 = [39, 46, 51, 53, 55, 58]; EB_MAJ9 = [39, 46, 50, 55, 58, 65]; EB_MAJ7 = [39, 46, 50, 55, 58]; EB_69 = [39, 46, 51, 55, 60, 65]
-AB_MAJ9 = [44, 51, 55, 58, 60]; AB_MAJ7 = [44, 51, 55, 60, 63]; AB6 = [44, 51, 53, 56, 60]; FM7 = [41, 48, 51, 56, 60]; F9 = [41, 48, 51, 55, 57]
-CM_ADD9 = [36, 43, 51, 55, 62]; GM7 = [43, 50, 53, 58, 62]; BB_SUS4 = [34, 46, 51, 53, 58]; BB_ADD9 = [34, 46, 50, 53, 60]; BB6 = [34, 46, 50, 53, 55]
+AB_MAJ9 = [44, 51, 55, 58, 60]; AB_MAJ7 = [44, 51, 55, 60, 63]; FM7 = [41, 53, 56, 60, 63]; F9 = [41, 48, 51, 55, 57]
+CM_ADD9 = [36, 43, 51, 55, 62]; GM7 = [43, 50, 53, 58, 62]; BB_SUS4 = [34, 46, 51, 53, 58]; BB6 = [34, 46, 50, 53, 55]
 DB_MAJ9 = [49, 53, 56, 60, 63]
 
 # the voice's lines, chapter by chapter: when each starts and ends
@@ -271,7 +302,7 @@ def moment(t0, t1, chord, g=0.03):
 J = 'clocks'; B = C(J, 'breath'); tT, tDr, tTwo, tM = C(J, 'time'), W(J, 'drift', 'And clocks drift'), C(J, 'two'), C(J, 'many')
 tR, tWr, tStd, tChk, tDec = C(J, 'rated'), W(J, 'rated', 'written down'), W(J, 'standards', 'the standards'), W(J, 'standards', 'checked against'), W(J, 'before', 'decided before')
 bed([(S0(J), EB_ADD9), (C(J, 'time', -0.3), AB_MAJ9), (C(J, 'drift', -0.3), FM7), (C(J, 'two', -0.3), CM_ADD9), (C(J, 'many', -0.3), AB_MAJ7),
-     (C(J, 'rated', -0.3), BB_SUS4), (C(J, 'standards', -0.3), EB_MAJ7), (C(J, 'before', -0.3), AB6), (B + 0.3, EB_69)], E(J) + 0.6)
+     (C(J, 'rated', -0.3), BB_SUS4), (C(J, 'standards', -0.3), EB_MAJ7), (C(J, 'before', -0.3), AB_MAJ9), (B + 0.3, EB_69)], E(J) + 0.6)
 sea(S0(J), tM - S0(J) + 0.5, 0.05)
 knock(W(J, 'plymouth', 'HMS Beagle', 0.1), 0.016, P(1124))
 card(tT - 0.3, 0.026, P(960))
@@ -310,22 +341,16 @@ shut(tDec + 0.6, 0.03, P(430))
 card(tDec + 0.6, 0.02, P(1150), 0.35)
 mark(B + 0.9)
 
-# 2. Linked, and still different: the title's chord turns to B flat, and is let go as the voice begins. Linh in white paper, and the
-#    person's two notes; her five records set down, each on its source's note; the lines to her; Mei's office's tag; the sheet for the
-#    person, and its fields; the records shaking their heads; then each value carried over from its record and opening in its place,
-#    on its source's note; the question written in pencil
-J = 'linked'; tFive, tC, tWh = W(J, 'linked', 'five records'), C(J, 'counts'), C(J, 'which')
+# 2. Linked, and still different: the opening's last chord is let go as the voice begins. Linh in white paper, and the person's two
+#    notes; her five records, each on its source's note; Mei's office's tag; the sheet for the person; the records shaking their heads;
+#    then each value carried over from its record and opening in its place, on its source's note; the question written in pencil
+J = 'linked'; tFive, tWh = W(J, 'linked', 'five records'), C(J, 'which')
 GR = [W(J, 'counts', 'Four ways'), W(J, 'counts', 'Two birth dates'), W(J, 'counts', 'Two mobile'), W(J, 'counts', 'Four emails')]
-turn(J, BB_ADD9, S0(J) - 0.3)
 person(C(J, 'linked', -0.3), 0.03, P(196))
-key(C(J, 'linked'), 0.012, P(196))
 for i, k in enumerate(['sis', 'sis', 'ao', 'hr', 'ro']):
     src(k, tFive - 0.1 + i * 0.16 + 0.12, 0.022, P(652))
-slide(tFive + 0.2, 1.3, 0.012, P(400))
 knock(W(J, 'linked', "Mei's office", -0.05), 0.018, P(652), 230)
 card(C(J, 'needs', -0.2), 0.026, P(1445), 0.45)
-for t0 in (W(J, 'needs', 'one name'), W(J, 'needs', 'one birth date'), W(J, 'needs', 'a way to reach'), W(J, 'needs', 'a way to reach', 0.3)):
-    key(t0, 0.01, P(1100))
 flutter(W(J, 'disagree', 'agree'), 1.0, 0.016, P(652))
 FIELDS = [['sis', 'ao', 'hr', 'ro'], ['sis', 'hr'], ['sis', 'hr'], ['sis', 'hr', 'ao', 'sis']]
 for g, ks in enumerate(FIELDS):
@@ -333,183 +358,139 @@ for g, ks in enumerate(FIELDS):
         src(k, GR[g] + j * 0.3 + 0.47, 0.024, P(1300))
 pencil(tWh - 0.05, 0.9, 0.012, P(1700))
 
-# 3. One order, hidden in the code: the turn on F minor. The code card; the three sources numbered as they're named; the pencil round
-#    both lines and its tag; "in the code"; Mei's card, and her question mark. Then her record, under "newest wins"; HR's card on its
-#    note, and its file sent twice; HR's values take the fields, on HR's note over a low A; the typo and the old mobile ringed and
-#    written; the name as HR typed it ringed; the transcript; the cross, and "newest isn't truest" written
-J = 'hidden'; tQ, tF1, tF2, tTru = C(J, 'quick'), W(J, 'resend', 'its whole file'), W(J, 'resend', 'every teaching'), C(J, 'truest')
-tTypo, tOld, tPr, tNew = W(J, 'typo', "HR's typo"), W(J, 'typo', 'her old mobile'), W(J, 'transcript', 'print her name'), W(J, 'resend', 'always look new')
+# 3. One order, hidden in the code: the turn on F minor. The code card; the pencil round both lines; "in the code"; Mei's card. Then her
+#    record, under "newest wins"; HR's card on its note, and its file sent again; HR's values take the fields, on HR's note over a low
+#    A; the typo and the old mobile ringed; the transcript; the cross, and "newest isn't truest" written
+J = 'hidden'; tQ, tF2, tTru = C(J, 'quick'), W(J, 'resend', 'every teaching'), C(J, 'truest')
+tTypo, tOld, tNew = W(J, 'typo', "HR's typo"), W(J, 'typo', 'her old mobile'), W(J, 'resend', 'always look new')
 turn(J, FM7)
 card(C(J, 'picks', -0.3), 0.028, P(685), 0.5)
-for word in ('the student system', 'the learning platform', 'short courses'):
-    pencil(W(J, 'order', word), 0.16, 0.013, P(260))
 pring(W(J, 'every', 'for every field'), 0.9, 0.013, P(680))
-card(W(J, 'every', 'for every field', 0.6), 0.016, P(640), 0.3)
 knock(W(J, 'every', 'inside the code', 0.1), 0.018, P(1180))
 card(W(J, 'every', 'the people who own', -0.2), 0.022, P(1480))
-pencil(W(J, 'every', "can't see"), 0.4, 0.013, P(1650))
-slide(tQ - 1.0, 0.6, 0.014, P(600))
 card(tQ - 0.35, 0.028, P(545), 0.5)
-knock(W(J, 'quick', 'the newest value', 0.1), 0.02, P(870))
 card(W(J, 'resend', 'HR sends', -0.2), 0.024, P(1610)); src('hr', W(J, 'resend', 'HR sends', -0.1), 0.026, P(1610))
-for t0, x in ((tF1, 1290), (tF2, 1560)):
-    slide(t0, 0.7, 0.014, P(x)); card(t0 + 0.55, 0.016, P(x), 0.3)
+card(tF2 + 0.55, 0.016, P(1560), 0.3)
 src('hr', tNew + 0.15, 0.026, P(545)); harpsichord(45, tNew + 0.15, 0.018, P(545))
-pring(tTypo, 0.7, 0.014, P(760)); pencil(tTypo + 0.4, 0.5, 0.012, P(900))
-pring(tOld, 0.7, 0.014, P(720)); pencil(tOld + 0.4, 0.4, 0.012, P(840))
-pring(tPr, 0.7, 0.014, P(500))
+pring(tTypo, 0.7, 0.014, P(760))
+pring(tOld, 0.7, 0.014, P(720))
 card(C(J, 'transcript', 0.2), 0.026, P(1540))
 pcross(tTru - 0.5, 0.014, P(1740))
 pencil(tTru - 0.05, 1.0, 0.012, P(1540))
 
-# 4. Two names, both hers: the turn on A flat. Her legal name set down; what each part is, in pencil; the accents ringed; her
-#    passport, and the student system's tick and tag, on its note; the name without its accents, on the alumni office's note, its
-#    missing marks ringed; the name turned round, on HR's, and the pencil that swaps it; the name she chose, on her own note; what
-#    each is for, a line and a card each; the two rules still to write
-J = 'names'; tFam, tAcc, tCk, tLo, tLa, tHR, tCh = W(J, 'legal', 'family name first'), W(J, 'legal', 'with its accents'), C(J, 'checked'), C(J, 'lost'), W(J, 'lost', 'lost the accents'), W(J, 'lost', 'HR turned'), C(J, 'chose')
-tTr, tCl, tID, tRu, tOwn = C(J, 'transcript'), C(J, 'class'), W(J, 'class', 'her ID card'), C(J, 'rule'), W(J, 'rule', 'its own rule')
+# 4. Two names, both hers: the turn on A flat. Her legal name set down, and its accents ringed; her passport, and the student system's
+#    tick, on its note; the name without its accents, on the alumni office's note; the name turned round, on HR's; the name she chose,
+#    on her own note; what each is for, a card each; the two rules still to write
+J = 'names'; tAcc, tCk, tLo, tHR, tCh = W(J, 'legal', 'with its accents'), C(J, 'checked'), C(J, 'lost'), W(J, 'lost', 'HR turned'), C(J, 'chose')
+tTr, tCl, tID, tRu = C(J, 'transcript'), C(J, 'class'), W(J, 'class', 'her ID card'), C(J, 'rule')
 turn(J, AB_MAJ9)
 card(C(J, 'legal', -0.2), 0.03, P(760), 0.5)
-for i, x in enumerate([420, 700, 980]):
-    pencil(tFam + i * 0.45, 0.6, 0.011, P(x))
-for j, x in enumerate([560, 830]):
-    pring(tAcc + j * 0.3, 0.5, 0.012, P(x))
+pring(tAcc, 0.5, 0.012, P(560))
 card(W(J, 'legal', 'her passport', -0.2), 0.026, P(1550))
-ptick(tCk + 0.35, 0.014, P(1710)); card(tCk + 0.5, 0.016, P(1550), 0.3); src('sis', tCk + 0.5, 0.026, P(1550))
-card(tLo, 0.024, P(380)); src('ao', tLo + 0.05, 0.024, P(380))
-pring(tLa - 0.2, 0.5, 0.012, P(230)); pring(tLa + 0.1, 0.5, 0.012, P(330))
-card(tHR - 0.1, 0.024, P(960)); src('hr', tHR - 0.05, 0.024, P(960))
-pencil(W(J, 'lost', 'Linh Nguyen'), 0.7, 0.012, P(800))
-card(tCh + 0.3, 0.024, P(1570)); src('self', tCh + 0.35, 0.026, P(1570))
-slide(tTr, 0.6, 0.012, P(670)); card(tTr + 0.3, 0.022, P(670))
-slide(tCl, 0.6, 0.011, P(1350)); card(tCl + 0.3, 0.02, P(1350))
-slide(tID, 0.6, 0.011, P(1690)); card(tID + 0.3, 0.02, P(1690))
+ptick(tCk + 0.35, 0.014, P(1710)); src('sis', tCk + 0.5, 0.026, P(1550))
+src('ao', tLo + 0.05, 0.024, P(380))
+src('hr', tHR - 0.05, 0.024, P(960))
+src('self', tCh + 0.35, 0.026, P(1570))
+for t0, x in ((tTr, 670), (tCl, 1350), (tID, 1690)):
+    card(t0 + 0.3, 0.02, P(x))
 for i, x in enumerate([340, 1420]):
-    knock(tRu + 0.45 + i * 0.5, 0.018, P(x), 230 + 20 * i); key(tOwn + i * 0.3 + 0.1, 0.012, P(x + 240))
+    knock(tRu + 0.45 + i * 0.5, 0.018, P(x), 230 + 20 * i)
 
-# 5. A rule for each field: the turn on E flat. Jun's card; the rules card and her record set down; each field's rule typed in, a few
+# 5. A rule for each field: the turn on E flat. The rules card and her record set down; the first two fields' rules typed in, a few
 #    muffled keys; the four most trusted sources ringed in gold, as the standards were; each winner taking its field on its source's
-#    note, the losers sliding aside; "waits for Mei", the typo written, Mei's pin; the order every other field falls back on, three
-#    chips; then, in the pause, a chord on B flat, as her record slides away for a master data tool's screen, set down, its trusted
-#    source on the student system's note, and the rule saved with a click and a tick; the screen sliding away, the file opening out,
-#    its name underlined, the SQL typed and the tests ticked; and the wordless moment for the rules, written and tested, on E flat
-J = 'rules'; tLe, tPf, tBi, tMo, tCh, tTo, tSi = C(J, 'legal'), C(J, 'preferred'), C(J, 'birth'), C(J, 'mobile'), C(J, 'chain'), C(J, 'tools'), C(J, 'simplest')
-tMost, tPass, tFL, tWM, tTy, tPins, tConf = W(J, 'trust', 'trusts most'), W(J, 'legal', 'checked her passport'), W(J, 'preferred', 'from Linh'), W(J, 'waits', 'waits for Mei'), W(J, 'pin', 'still has the typo'), W(J, 'pin', 'Mei pins'), W(J, 'mobile', 'she confirmed')
-tSet, tFile, tSQL, tTest = W(J, 'tools', 'set rules'), W(J, 'simplest', 'a file like this'), W(J, 'simplest', 'the code'), W(J, 'simplest', 'the tests')
-turn(J, EB_MAJ9); moment(tTo - 0.8, tTo + 2.0, BB6); moment(C(J, 'breath', -0.9), E(J) + 0.2, EB_69)
-card(C(J, 'writes', -0.1), 0.022, P(180), 0.35)
+#    note; "waits for Mei", and Mei's pin; the order every other field falls back on; then, in the pause, a chord on B flat, as a master
+#    data tool's screen is set down, its trusted source on the student system's note, and the rule saved with a click; the file opening
+#    out, the SQL and the tests set down, and the tests ticked; and the wordless moment for the rules, written and tested, on E flat,
+#    let go as the next chapter's voice begins
+J = 'rules'; tLe, tPf, tBi, tTo, tSi = C(J, 'legal'), C(J, 'preferred'), C(J, 'birth'), C(J, 'tools'), C(J, 'simplest')
+tMost, tPass, tFL, tWM, tPins, tConf = W(J, 'trust', 'trusts most'), W(J, 'legal', 'checked her passport'), W(J, 'preferred', 'from Linh'), W(J, 'waits', 'waits for Mei'), W(J, 'pin', 'Mei pins'), W(J, 'mobile', 'she confirmed')
+tSet, tSQL, tTest = W(J, 'tools', 'set rules'), W(J, 'simplest', 'the code'), W(J, 'simplest', 'the tests')
+turn(J, EB_MAJ9); moment(tTo - 0.8, tTo + 2.0, BB6); moment(C(J, 'breath', -0.9), C('emails', 'column'), EB_69)
 card(C(J, 'writes', 0.0), 0.028, P(670), 0.5); card(C(J, 'writes', 0.4), 0.024, P(1440), 0.45)
-for t0, sec, n in ((tLe - 0.2, 1.9, 4), (tPf - 0.2, 1.3, 3), (tBi - 0.2, 1.9, 4), (tMo - 0.2, 1.4, 3)):
+for t0, sec, n in ((tLe - 0.2, 1.9, 4), (tPf - 0.2, 1.3, 3)):
     typing(t0, sec, 0.011, P(670), n)
-for i in range(4):
-    pring(tMost + i * 0.18, 0.45, 0.01, P(1096))
-slide(tPass, 0.6, 0.012, P(1250)); src('sis', tPass + 0.25, 0.026, P(1250)); knock(tPass + 0.55, 0.016, P(1420))
+pring(tMost, 0.9, 0.01, P(1096))
+src('sis', tPass + 0.25, 0.026, P(1250))
 src('self', tFL + 0.1, 0.026, P(1250))
-src('sis', tBi + 1.0, 0.026, P(1250)); slide(tBi + 0.9, 0.6, 0.011, P(1300))
+src('sis', tBi + 1.0, 0.026, P(1250))
 knock(tWM - 0.05, 0.016, P(1380), 200)
-pencil(tTy + 0.1, 0.7, 0.012, P(1400))
 pin(tPins + 0.35, 0.02, P(1260))
-src('sis', tConf + 0.1, 0.026, P(1250)); slide(tConf, 0.6, 0.011, P(1300))
-for i, word in enumerate(['the most trusted source', 'the newest confirmed', 'the most complete']):
-    knock(W(J, 'chain', word, 0.1), 0.018, P(1250 + 300 * (i - 1)), 220 + 20 * i)
-slide(tTo - 0.3, 0.6, 0.011, P(1440)); card(tTo + 0.2, 0.024, P(1470), 0.45); src('sis', tSet + 0.05, 0.02, P(1520))
-click(tSet + 1.8, 0.016, P(1786)); ptick(tSet + 2.15, 0.012, P(1662))
-slide(tSi - 0.2, 0.6, 0.011, P(1470)); slide(tSi + 0.1, 0.9, 0.008, P(670)); pencil(tFile, 0.6, 0.011, P(510))
-slide(tSQL - 0.5, 0.6, 0.014, P(1020))
-card(tSQL - 0.2, 0.024, P(1470)); typing(tSQL, 1.6, 0.011, P(1470), 4)
-slide(tTest - 0.2, 0.6, 0.014, P(1020)); card(tTest - 0.1, 0.022, P(1470))
+src('sis', tConf + 0.1, 0.026, P(1250))
+knock(W(J, 'chain', 'the most trusted source', 0.1), 0.018, P(950), 220)
+card(tTo + 0.2, 0.024, P(1470), 0.45); src('sis', tSet + 0.05, 0.02, P(1520))
+click(tSet + 1.8, 0.016, P(1786))
+slide(tSi + 0.1, 0.9, 0.008, P(670))
+card(tSQL - 0.2, 0.024, P(1470)); card(tTest - 0.1, 0.022, P(1470))
 ptick(tTest + 0.45, 0.014, P(1150)); ptick(tTest + 1.05, 0.014, P(1150))
 
-# 6. Four emails, each for something: the last chapter's chord turns to E flat's major seventh. The email column; the three that don't
-#    fit sliding in and stopping at its edge; then four contact points, each set down on its source's note; what each is for, one
-#    after another; its purpose ringed, its source and its day underlined; the two offices that write to her, each on its note, and
-#    the line to the address it uses
-J = 'emails'; tFour, tSt, tStaff, tPe, tNewer, tEach = W(J, 'column', 'Linh has four'), C(J, 'study'), W(J, 'study', 'Her staff email'), C(J, 'personal'), W(J, 'personal', 'a newer one'), W(J, 'none', 'Each is for')
-tPu, tSo, tDay, tUs, tHR, tAO = W(J, 'kept', 'its purpose'), W(J, 'kept', 'its source'), W(J, 'kept', 'the day she'), C(J, 'use'), W(J, 'use', 'HR writes'), W(J, 'use', 'The alumni office')
-turn(J, EB_MAJ7, S0(J) - 0.3)
+# 6. Four emails, each for something: the rules' chord is let go as the voice begins. The email column, and the three that don't fit
+#    stopping at its edge; then four contact points, each on its source's note; its purpose ringed; the two offices that write to her,
+#    each on its note
+J = 'emails'; tFour, tSt, tStaff, tPe, tNewer = W(J, 'column', 'Linh has four'), C(J, 'study'), W(J, 'study', 'Her staff email'), C(J, 'personal'), W(J, 'personal', 'a newer one')
+tPu, tHR, tAO = W(J, 'kept', 'its purpose'), W(J, 'use', 'HR writes'), W(J, 'use', 'The alumni office')
 card(C(J, 'column', -0.2), 0.026, P(660))
-for i in range(3):
-    slide(tFour + i * 0.25, 0.5, 0.01, P(1300)); knock(tFour + i * 0.25 + 0.62, 0.014, P(1000), 260)
-for t0, k, i in ((tSt - 0.1, 'sis', 0), (tStaff - 0.1, 'hr', 1), (tPe + 0.1, 'ao', 2), (tNewer - 0.1, 'sis', 3)):
-    card(t0 + 0.1, 0.022, P(710)); src(k, t0 + 0.15, 0.024, P(710))
-for i in range(4):
-    knock(tEach + i * 0.15 + 0.1, 0.012, P(1100), 250 + 15 * i)
+knock(tFour + 0.62, 0.016, P(1000), 260)
+for t0, k in ((tSt - 0.1, 'sis'), (tStaff - 0.1, 'hr'), (tPe + 0.1, 'ao'), (tNewer - 0.1, 'sis')):
+    src(k, t0 + 0.15, 0.024, P(710))
 pring(tPu, 0.6, 0.012, P(1060))
-pencil(tSo, 0.45, 0.011, P(420)); pencil(tDay, 0.45, 0.011, P(680))
-slide(tUs - 0.9, 1.2, 0.012, P(800))
-card(tHR, 0.022, P(1550)); src('hr', tHR + 0.05, 0.024, P(1550)); slide(tHR + 0.3, 0.6, 0.01, P(1300))
-card(tAO, 0.022, P(1550)); src('ao', tAO + 0.05, 0.024, P(1550)); slide(tAO + 0.3, 0.6, 0.01, P(1300)); pencil(tAO + 0.5, 0.6, 0.011, P(600))
+src('hr', tHR + 0.05, 0.024, P(1550)); src('ao', tAO + 0.05, 0.024, P(1550))
 
 # 7. Every value, with its source: the turn on G minor. Her record; each value's source, its rule and its age, appearing in turn; the
-#    record stepping aside; the values that lost, one click away, each on its source's note; the answer to "why 14 March" underlined;
-#    the three that read from it, each a line and a card
-J = 'sources'; tWhere, tRule, tOldS, tLo, tStill, tClick = W(J, 'says', 'where it came from'), W(J, 'says', 'which rule'), W(J, 'says', 'how old'), C(J, 'lost'), W(J, 'lost', 'still there'), W(J, 'lost', 'one click')
-tMar, tTrn, tCls, tAOs = W(J, 'why', 'the fourteenth of March'), W(J, 'read', 'Her transcript'), W(J, 'read', 'her class list'), W(J, 'read', 'the alumni office')
+#    values that lost, one click away, each on its source's note; the answer to "why 14 March" underlined; her transcript, the first of
+#    the three that read from it
+J = 'sources'; tWhere, tRule, tOldS, tClick = W(J, 'says', 'where it came from'), W(J, 'says', 'which rule'), W(J, 'says', 'how old'), W(J, 'lost', 'one click')
+tMar, tTrn = W(J, 'why', 'the fourteenth of March'), W(J, 'read', 'Her transcript')
 turn(J, GM7)
 card(S0(J) + 0.05, 0.022, P(680), 0.45)
 for t0 in (tWhere, tRule, tOldS):
-    key(t0 + 0.05, 0.012, P(700)); key(t0 + 0.17, 0.009, P(760))
-slide(tLo - 0.5, 1.0, 0.012, P(700))
-knock(tStill - 0.3, 0.016, P(930)); click(tClick, 0.02, P(990))
-slide(tClick + 0.1, 0.5, 0.011, P(1150)); card(tClick + 0.3, 0.022, P(1540))
+    key(t0 + 0.05, 0.012, P(700))
+click(tClick, 0.02, P(990))
 for i, k in enumerate(['ao', 'hr', 'ro']):
     src(k, tClick + 0.45 + i * 0.12, 0.018, P(1540))
 pencil(tMar, 0.7, 0.012, P(600))
-for t0 in (tTrn, tCls, tAOs):
-    card(t0, 0.02, P(1580)); slide(t0 + 0.2, 0.5, 0.009, P(1300))
+card(tTrn, 0.02, P(1580))
 
-# 8. See it before it changes: the turn on F. Mei's card; the rule as it is; the alumni office's request, on its note, typed; the new
-#    rule, a draft, the old one stepping back, its text typed; the dry run set down, its rows listed; the count; Linh's row lit, on
-#    her own note; Mei's ticks on the sample; the registrar's stamp; version two
-J = 'dryrun'; tAs, tPE, tNw, tRec, tDry, tList, tOne, tLinh = C(J, 'asks'), W(J, 'asks', 'for personal email'), W(J, 'asks', 'asks for a new one'), W(J, 'asks', 'confirmed most recently'), W(J, 'dry', 'a dry run'), W(J, 'dry', 'lists every value'), W(J, 'count', 'One thousand'), W(J, 'count', "Linh's among")
-tSmp, tAps, tV2, tDate = W(J, 'approve', 'checks a sample'), W(J, 'approve', 'approves'), W(J, 'runs', 'version two'), W(J, 'runs', 'with its date')
+# 8. See it before it changes: the turn on F. The rule as it is; the alumni office's request, on its note, typed; the new rule, a
+#    draft; the dry run set down; the count; Linh's row lit, on her own note; Mei's tick on the sample; the registrar's stamp; version two
+J = 'dryrun'; tAs, tPE, tNw, tDry, tOne, tLinh = C(J, 'asks'), W(J, 'asks', 'for personal email'), W(J, 'asks', 'asks for a new one'), W(J, 'dry', 'a dry run'), W(J, 'count', 'One thousand'), W(J, 'count', "Linh's among")
+tSmp, tAps, tV2 = W(J, 'approve', 'checks a sample'), W(J, 'approve', 'approves'), W(J, 'runs', 'version two')
 turn(J, F9)
-card(S0(J) + 0.55, 0.018, P(1528), 0.35)
 card(C(J, 'change', -0.1), 0.024, P(360))
-card(tAs, 0.022, P(1120)); src('ao', tAs + 0.05, 0.024, P(1120)); typing(tPE, 1.4, 0.01, P(1120), 4)
-card(tNw + 0.1, 0.024, P(360)); slide(tNw, 0.6, 0.01, P(450))
-typing(tRec - 0.4, 0.9, 0.01, P(360), 3)
+src('ao', tAs + 0.05, 0.024, P(1120)); typing(tPE, 1.4, 0.01, P(1120), 4)
+card(tNw + 0.1, 0.024, P(360))
 card(tDry - 0.2, 0.028, P(740), 0.5)
-typing(tList, 1.3, 0.009, P(500), 4)
 knock(tOne, 0.018, P(1150))
 src('self', tLinh + 0.1, 0.022, P(600))
-ptick(tSmp + 0.1, 0.014, P(1330)); ptick(tSmp + 0.6, 0.014, P(1330))
+ptick(tSmp + 0.1, 0.014, P(1330))
 stamp(tAps + 0.15, 0.06)
 knock(tV2 + 0.1, 0.016, P(360))
 
-# 9. Elsewhere: the turn on D flat. The bank, its statement and her legal name on it; the app that greets her by the one she chose;
-#    the shop, its order, the two addresses and what each is for; then the three parts of the question, one after another, rising on
-#    the harpsichord, in E flat
+# 9. Elsewhere: the turn on D flat. The bank, and its statement; the app that greets her by the one she chose; the shop, and what each
+#    address is for; then the three parts of the question, one after another, rising on the harpsichord, in E flat
 J = 'elsewhere'; tSh, tEach, tQ = C(J, 'shop'), W(J, 'shop', 'each for'), [W(J, 'same', 'which value'), W(J, 'same', 'for what'), W(J, 'same', 'who says so')]
 turn(J, DB_MAJ9)
 card(C(J, 'bank', -0.2), 0.026, P(960), 0.5)
-card(C(J, 'statements', -0.1), 0.022, P(860)); knock(W(J, 'statements', 'legal name', -0.1), 0.014, P(760))
-knock(W(J, 'app', 'greets them', -0.25), 0.016, P(1250), 300); key(W(J, 'app', 'greets them', 0.1), 0.012, P(1250)); key(W(J, 'app', 'greets them', 0.22), 0.01, P(1250))
-slide(tSh - 1.2, 1.0, 0.012, P(700))
+card(C(J, 'statements', -0.1), 0.022, P(860))
+knock(W(J, 'app', 'greets them', -0.25), 0.016, P(1250), 300)
 card(tSh - 0.1, 0.026, P(1425), 0.5)
-knock(W(J, 'shop', 'a billing address'), 0.012, P(1250)); knock(W(J, 'shop', 'a delivery address'), 0.012, P(1250))
-knock(tEach + 0.1, 0.016, P(1700), 250); knock(tEach + 0.4, 0.016, P(1700), 270)
+knock(tEach + 0.1, 0.016, P(1700), 250)
 for i, (t0, m) in enumerate(zip(tQ, [63, 67, 70])):
-    knock(t0, 0.016, P(620 + 340 * i), 230 + 20 * i); harpsichord(m, t0 + 0.02, 0.018, P(620 + 340 * i))
+    harpsichord(m, t0 + 0.02, 0.018, P(620 + 340 * i))
 
-# 10. Thirty-three seconds: Falmouth in autumn, the turn on E flat, and the sea; the card, and its 33 seconds, then, in the pause, a
-#     chord on B flat; in turn, the rate book set down, and every port ticked, one after another, and the tag; the book carried across
-#     to Linh's rules; their card, its tag, and the night's tick; from the pause before the last line, A flat, and on the end card,
-#     E flat and the series' mark
-J = 'home'; B = C(J, 'breath'); tSa, tBef, tPort, tWr, tNight = C(J, 'same'), W(J, 'settled', 'settled before'), W(J, 'settled', 'checked at every port'), W(J, 'same', 'written down'), W(J, 'same', 'tested every night')
-turn(J, EB_MAJ9); moment(C(J, 'settled', -0.8), C(J, 'settled', 2.0), BB_SUS4)
+# 10. Thirty-three seconds: Falmouth in autumn, the turn on E flat, and the sea; the card, and its 33 seconds; the rate book set down,
+#     and the ports ticked; Linh's rules, their card, and the night's tick; from the pause before the last line, A flat, and on the end
+#     card, E flat and the series' mark
+J = 'home'; B = C(J, 'breath'); tBef, tPort, tWr, tNight = W(J, 'settled', 'settled before'), W(J, 'settled', 'checked at every port'), W(J, 'same', 'written down'), W(J, 'same', 'tested every night')
+turn(J, EB_MAJ9)
 bed([(C(J, 'declared', -0.8), AB_MAJ9), (B + 0.3, EB_69)], TOT + 1.0, 0.03, 1.2, 2.8)
 sea(S0(J), C(J, 'out') - S0(J) + 1.5, 0.05)
 card(W(J, 'out', 'five years', -0.2), 0.024, P(690))
 knock(W(J, 'out', 'thirty-three seconds', 0.0), 0.016, P(580))
 book(tBef - 0.1, 0.028, P(430))
-for i in range(7):
+for i in (0, 3, 6):
     ptick(tPort + i * 0.18 + 0.15, 0.009, P(700 + 78 * i))
-card(tPort + 0.75, 0.016, P(934), 0.3)
-slide(tSa - 0.6, 0.9, 0.012, P(450))
-knock(tSa + 0.45, 0.014, P(470))
-card(tWr - 0.1, 0.026, P(1250)); knock(tWr + 0.45, 0.014, P(1250))
-ptick(tNight + 0.1, 0.014, P(1088)); card(tNight + 0.35, 0.016, P(1278), 0.3)
+card(tWr - 0.1, 0.026, P(1250))
+ptick(tNight + 0.1, 0.014, P(1088))
 mark(B + 1.1)
 
 # and the chords, where they come in

@@ -75,6 +75,10 @@ models:
       +group: credential_model
       +access: protected
 
+    # Databricks only: each column's class (meta.personal_data) as a Unity Catalog tag, and a mask
+    # on direct personal data when the var personal_data_readers names a group (DEC-PRJ-13).
+    +post-hook: "{{ apply_personal_data() }}"
+
 # Seeds are split by purpose first, then by domain. Never mix the two purposes in one folder.
 seeds:
   credentials:
@@ -125,3 +129,8 @@ data_tests:
     expected:
       planning: {+meta: {owner: "Census team, registrar's office"}}
       finance: {+meta: {owner: Finance}}
+
+# Databricks only, when the var personal_data_readers names a group: the mask on direct personal
+# data (macros/governance/personal_data.sql, DEC-PRJ-13).
+on-run-start:
+  - "{{ create_personal_data_mask() }}"

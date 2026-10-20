@@ -156,3 +156,20 @@ decisions:
     status: agreed
     relates_to: [DEC-PRJ-04, DEC-PRJ-11]
     implemented_in: [governance.py, builtin.sql, dbt_project.yml]
+
+  - id: DEC-PRJ-13
+    step: operate_and_evolve
+    title: Each column's class becomes a tag on Databricks, and direct personal data is masked
+    text: 'On Databricks, every classified column of a table gets a Unity Catalog tag, personal_data, with
+      its class from the model''s YAML (direct, pseudonymous or none). When the var personal_data_readers
+      names a group, each column of direct personal data also gets a mask: that group sees the value,
+      everyone else sees ***. The identity that runs dbt is in the group. On DuckDB, neither: it has no
+      tags or masks, as DEC-PRJ-09 leaves keys out there.'
+    why: The class is decided once, where the model is, and checked on every pull request (DEC-PRJ-12).
+      Pushed to the platform from there, the platform protects what the project says is personal, and
+      the two can't drift.
+    decided_by: Yusuf Demir, data governance lead, with Noor, data architect
+    decided_on: 2026-10-20
+    status: agreed
+    relates_to: [DEC-PRJ-09, DEC-PRJ-12]
+    implemented_in: [personal_data.sql, dbt_project.yml]

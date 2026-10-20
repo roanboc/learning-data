@@ -1,19 +1,23 @@
 # One person, many systems: the music and sounds, played by tools/audio.py with From words to data's instruments
 # (shared/tools/music.py). The palette is new for this film (PLAYBOOK.md: vary the sound itself, film to film): a reed organ holds the
-# chords, both its ranks drawing on one bellows, so each chord swells in as the air comes and fades as it goes, with the slow beat of
-# two reeds a hair apart; a soft horn carries the series' mark, one note, its octave, its fifth and the note again (1-8-5-1), a nod
-# to the post horn of 1874, with its echo coming back off the valley; a harp is the roles, each on the note it has had since
-# *One person, many roles*, so a role sounds the same wherever it's added; and a low flute is the person: whenever Linh stands in white
-# paper as the person, it plays the same D and the A above it, whatever the chapter's key. The film starts in F major, in the valley of
-# 1874, and ends in D major. The effects are the paper's, as in film 1: a pencil, a quill, a wet brush, a card or an envelope, a stamp,
-# a few muffled keys; and the valley's own: the treaty's wax, a coin by each door, a pin.
+# chords, one reed to a note, so each chord swells in as the bellows fill and fades as the air goes, and nothing beats; a soft horn
+# carries the series' mark, one note, its octave, its fifth and the note again (1-8-5-1), a nod to the post horn of 1874, with its
+# echo coming back off the valley; a harp is the roles, each on the note it has had since *One person, many roles*, so a role sounds
+# the same wherever it's added; and a low flute is the person: whenever Linh stands in white paper as the person, it plays the same D
+# and the A above it, whatever the chapter's key. The film starts in F major, in the valley of 1874, and ends in D major. The effects
+# are the paper's, as in film 1: a pencil, a quill, a wet brush, a card or an envelope, a stamp, a few muffled keys; and the valley's
+# own: the treaty's wax, a coin by each door, a pin.
+# The series' rule (the author, 20 October 2026: "some sounds and music from time to time instead of constant sounds"):
+#  - Music plays under the opening's story from real life, the valley of 1874. After that it comes in from time to time: a chord at
+#    each chapter's turn, which swells in the pause before the chapter's first line and fades under it; a chord under a moment on
+#    screen (the diagram opening out into the picture); and a chord in each pause without words. Never a bed under the voice.
+#  - Nothing is tense, trembling or pulsing: no pulse, no vibrato, and no two voices a little out of tune on one note, which beat on
+#    a phone's speaker. The organ's two ranks a hair apart, and the pulse under the third number, went on 20 October 2026.
 # The rules from In the weeds of data crafting hold:
-#  - Nothing loops. The music is a bed of sustained chords that change with the narration; nothing repeats in the background, and
-#    where the picture repeats (the questions running down the registry's links), the sound plays the first round only.
+#  - Nothing loops. Nothing repeats in the background, and where the picture repeats (the questions running down the registry's
+#    links), the sound plays the first round only.
 #  - Every sound is an event on screen, at the moment it appears. Each effect below uses the same timing as the picture in
 #    src/scenes.js (the same word, and the same offset), so sound and picture stay together when the voice is re-timed.
-#  - The one exception is feeling: when the application would make her a third number, a low, muted pulse (music.py's urgent())
-#    rises under the stamp, leaning on the semitone, and fades as the four systems come in.
 # And everything stays low and soft: knocks, paper, muffled keys, a pencil, low notes, filtered below about 2.5 kHz.
 
 # when a word of a line is spoken, as the film's own kt_w() estimates it: along the line's voiced length, from the words the voice reads
@@ -34,36 +38,41 @@ P = lambda x: max(-0.85, min(0.85, (x - 960) / 960 * 0.9))  # where something is
 # the music's levels: the organ sits about 21 dB under the voice, as in the other series' films, and the notes over it a little less.
 # Each instrument is trimmed to come out as loud as its part in One person, many roles at the same gain (measured on its own, as
 # integrated loudness): the organ as its chords, the horn as its clarinet, the harp as its plucked cello, the flute as its bowed one
-REED, NOTE = 3.3, 1.5
+REED, NOTE = 3.7, 1.5
 TRIM = {'horn': 1.33, 'harp': 0.8, 'flute': 0.92}
-# one cycle of a reed's tone, kept as a table: a strong fundamental and a long, falling row of harmonics, as a harmonium's reeds speak
+# one cycle of a reed's tone, kept as a table: a strong fundamental and a falling row of harmonics, as a harmonium's reeds speak,
+# softened so the harmonics of a chord's notes can't beat against each other on a phone
 _N = 4096
-_TAB = (lambda p: sum(a * np.sin(2 * np.pi * (k + 1) * p + 0.4 * k) for k, a in enumerate([1, 0.62, 0.48, 0.30, 0.22, 0.14, 0.10, 0.07, 0.05])))(np.arange(_N + 1) / _N)
+_TAB = (lambda p: sum(a * np.sin(2 * np.pi * (k + 1) * p + 0.4 * k) for k, a in enumerate([1, 0.5, 0.3, 0.16, 0.09, 0.05, 0.03, 0.02, 0.01])))(np.arange(_N + 1) / _N)
 _TAB = _TAB / np.abs(_TAB).max()
 def _reed(ph):
     p = (ph % 1.0) * _N; i = p.astype(np.int64); fr = p - i
     return _TAB[i] * (1 - fr) + _TAB[i + 1] * fr
 def organ(ch, start, sec, g=0.03):
-    """a held chord on a reed organ: both ranks draw on one bellows, so the chord swells in over about two seconds, grows a little
-    while it's held, breathes with the treadles and fades as the air goes; the ranks are a hair apart, one each side, and beat
-    slowly against each other; nothing above about 1.3 kHz"""
+    """a held chord on a reed organ, one reed to a note, each held steady: the bellows fill, so the chord swells in over about two
+    seconds, grows a little while it's held and fades as the air goes; its notes spread a little across the room, the lowest on the
+    left; nothing above about 1.3 kHz"""
     x = tt(sec).astype(np.float64)
-    e = np.clip(x / 1.8, 0, 1) ** 1.6 * np.clip((sec - x) / 2.6, 0, 1) * (1 + 0.14 * x / sec) * (1 + 0.05 * np.sin(2 * np.pi * 0.17 * x + start))
-    for pan, det in ((-0.6, 0.9982), (0.6, 1.0018)):
-        s = np.zeros_like(x)
-        for k, m in enumerate(ch):
-            ph = np.cumsum(mf(m) * det * (1 + 0.0003 * np.sin(2 * np.pi * (0.11 + 0.02 * k) * x + k))) / SR
-            s += _reed(ph) * (0.8 if k == 0 else 1.0)
-        put(filt((s * e / len(ch)).astype(np.float32), 'low', 1300), start, g * REED, pan)
+    e = np.clip(x / 1.8, 0, 1) ** 1.6 * np.clip((sec - x) / 2.6, 0, 1) * (1 + 0.14 * x / sec)
+    for k, m in enumerate(ch):
+        s = _reed(mf(m) * x) * (0.8 if k == 0 else 1.0) * e / len(ch)
+        put(filt(s.astype(np.float32), 'low', 1300), start, g * REED, -0.35 + 0.7 * k / max(1, len(ch) - 1))
 def bed(keys, end, g=0.03):
-    """the chapter's chords, each from its moment (a little early, so it has swelled by then) until a little after the next one starts"""
+    """the opening's chords, under its story: each from its moment (a little early, so it has swelled by then) until a little after
+    the next one starts"""
     for i, (t0, ch) in enumerate(keys):
         t1 = keys[i + 1][0] if i + 1 < len(keys) else end
         organ(ch, t0 - 1.2, t1 - t0 + 3.6, g)
+def turn(t, ch, g=0.03):
+    """a chapter's turn: the chapter's chord swells in the pause before its first line (at t), and fades under the line"""
+    organ(ch, t - 2.4, 4.6, g)
+def bloom(ch, t0, t1, g=0.03):
+    """a chord for a moment on screen, or a pause without words: it swells in from t0 and has faded by t1"""
+    organ(ch, t0, t1 - t0, g)
 def horn(m, start, sec, g=0.04, pan=0.0):
-    """a soft horn, far off: it scoops up onto the note, its brass opens a little as it swells, a slow vibrato comes in late; and
-    the valley gives it back, twice, fainter and duller each time, from the other side"""
-    f = mf(m); x = tt(sec); fr = (1 - 0.022 * np.exp(-x / 0.05)) * (1 + 0.003 * np.sin(2 * np.pi * 4.8 * x) * np.clip((x - 0.45) / 0.5, 0, 1))
+    """a soft horn, far off: it scoops up onto the note and its brass opens a little as it swells, held steady; and the valley
+    gives it back, twice, fainter and duller each time, from the other side"""
+    f = mf(m); x = tt(sec); fr = 1 - 0.022 * np.exp(-x / 0.05)
     ph = 2 * np.pi * np.cumsum(f * fr) / SR; op = 0.5 + 0.5 * np.clip(x / 0.25, 0, 1)
     s = np.sin(ph) + (0.45 * np.sin(2 * ph) + 0.22 * np.sin(3 * ph) + 0.10 * np.sin(4 * ph) + 0.04 * np.sin(5 * ph)) * op
     s = norm(filt((s * env(sec, 0.07, min(0.5, sec * 0.45))).astype(np.float32), 'low', 1500))
@@ -76,12 +85,11 @@ def harp(m, start, g=0.03, pan=0.0, sec=2.6):
     s = s * np.minimum(1, x / 0.003) + 0.05 * filt(noise(sec), 'band', (f * 2, f * 6)) * np.exp(-x * 60)
     put(norm(filt(s.astype(np.float32), 'low', 1700)), start, g * NOTE * TRIM['harp'], pan)
 def flute(m, start, sec, g=0.03, pan=0.0):
-    """a low flute: mostly breath and fundamental, a soft chiff as it speaks, a slow vibrato that comes in late"""
-    f = mf(m); x = tt(sec); vib = 1 + 0.0035 * np.sin(2 * np.pi * 4.6 * x) * np.clip((x - 0.5) / 0.7, 0, 1)
-    ph = 2 * np.pi * np.cumsum(f * vib) / SR
+    """a low flute, held steady: mostly breath and fundamental, and a soft chiff as it speaks"""
+    f = mf(m); x = tt(sec); ph = 2 * np.pi * f * x.astype(np.float64)
     s = np.sin(ph) + 0.18 * np.sin(2 * ph) + 0.04 * np.sin(3 * ph)
     br = filt(noise(sec), 'band', (f * 0.7, f * 2.5)) * (0.16 + 0.25 * np.exp(-x * 8))
-    s = (s + br) * env(sec, 0.16, min(0.6, sec * 0.4)) * (1 + 0.05 * np.sin(2 * np.pi * 0.7 * x))
+    s = (s + br) * env(sec, 0.16, min(0.6, sec * 0.4))
     put(norm(filt(s.astype(np.float32), 'low', 1400)), start, g * NOTE * TRIM['flute'], pan)
 def person(s, g=0.026, pan=0.0):
     """the person: the flute's D, and the A above it, the same two notes wherever she stands in white paper"""
@@ -169,12 +177,13 @@ PO = [220, 540, 930, 1380, 1700, 1240, 690]; SYS = ['student', 'tutor', 'researc
 #    wax; a letter on its way, a stamp at each border; the treaty of Bern written, signed by twenty-one, and sealed; the old treaties
 #    lifting away, the new one pinned up and the territory drawn round; the union's letter and its one stamp; a coin by each door;
 #    the post office for the world that nobody built, sketched and crossed out; each office lifted in turn; the rules running out to
-#    them; the letter's flight across the valley in the hush, and the series' mark, on the horn, under the title
+#    them; the letter's flight across the valley in the hush, and the series' mark, on the horn, under the title. The chords play under
+#    the whole story, the one place the music stays under the voice, and fade at the turn as chapter 2's comes in
 J = 'bern'; B = C(J, 'breath'); tPair, tTr, tR, tPr = W(J, 'pairs', 'every pair'), W(J, 'pairs', 'postal treaty'), C(J, 'route'), W(J, 'route', 'its route')
 tBern, t21, tSig, tOne = W(J, 'signed', 'in Bern'), W(J, 'signed', 'twenty-one'), W(J, 'signed', 'signed'), C(J, 'one')
 tTer, tRate, tKept = W(J, 'one', 'postal territory'), W(J, 'one', 'one rate'), W(J, 'one', 'each kept')
 tNob, tWorld, tEach, tRules, tE = W(J, 'own', 'Nobody'), W(J, 'own', 'for the world'), W(J, 'own', 'Each country'), W(J, 'own', 'shared the rules'), END(J, 'own')
-bed([(S0(J), FMAJ9), (C(J, 'route', -0.3), DM9), (C(J, 'signed', -0.3), BBMAJ9), (tOne - 0.3, F69), (C(J, 'own', -0.3), GM9), (tE, FMAJ9), (B + 0.3, BBMAJ9)], E(J) + 1.0)
+bed([(S0(J), FMAJ9), (C(J, 'route', -0.3), DM9), (C(J, 'signed', -0.3), BBMAJ9), (tOne - 0.3, F69), (C(J, 'own', -0.3), GM9), (tE, FMAJ9), (B + 0.3, BBMAJ9)], C('again', 'today', -2.0))
 quill(tPair + 0.1, 4.0, 0.011, 0.0)
 for k in range(3):
     wax(tPair + 0.1 + k * 0.17 + 0.6, 0.014, P([1310, 615, 810][k]))
@@ -203,13 +212,13 @@ air(tRules - 0.4, 1.4, 0.016, 0.0); knock(tRules + 0.2, 0.016, P(1300))
 fly(tE + 0.1, 2.2, 0.02, P(220), P(1700)); paper(tE + 2.2, 0.016, P(1700), 0.3)
 mark(B + 0.8)
 
-# 2. Applying again: D minor, late 2025. Her name card; her two student records, each on the student's note, and the second one's
-#    number stamped on; the pencil line between them, stopped by a cross, and its badge; the PhD application, on the applicant's
-#    note; the arrow to the person it would create, the empty record, and the stamp over it, under the pulse; then the four systems,
-#    each on its role's note
-J = 'again'; tSt, tApp, tCre, tNob, tF = C(J, 'still'), W(J, 'still', 'application'), W(J, 'still', 'creates a person'), W(J, 'still', 'nobody looks'), C(J, 'four')
+# 2. Applying again: D minor at the turn, late 2025. Her name card; her two student records, each on the student's note, and the
+#    second one's number stamped on; the pencil line between them, stopped by a cross, and its badge; the PhD application, on the
+#    applicant's note; the arrow to the person it would create, the empty record, and the stamp over it, with no music under it;
+#    then the four systems, each on its role's note
+J = 'again'; tApp, tCre, tNob = W(J, 'still', 'application'), W(J, 'still', 'creates a person'), W(J, 'still', 'nobody looks')
 tL, tSec, tNum, tLnk, tTwo = C(J, 'last'), W(J, 'last', 'second student'), W(J, 'last', 'number'), W(J, 'last', 'linked'), W(J, 'last', 'the two')
-bed([(S0(J), DM9), (tL - 0.3, BBMAJ7), (tSt - 0.3, GM7D), (tF - 0.2, F69)], E(J) + 1.0)
+turn(C(J, 'today'), DM9)
 knock(W(J, 'today', 'Linh Nguyen', -0.2), 0.022, P(340))
 paper(tL, 0.026, P(370)); role('student', tL + 0.1, 0.03, P(370))
 paper(tSec - 0.2, 0.026, P(370)); role('student', tSec - 0.1, 0.028, P(370))
@@ -219,15 +228,14 @@ paper(tApp - 0.3, 0.03, P(1530)); role('applicant', tApp - 0.2, 0.026, P(1530))
 air(tCre, 0.6, 0.016, P(1360)); paper(tCre + 0.2, 0.024, P(1590)); knock(tCre + 0.3, 0.018, P(1360))
 air(tCre + 0.6, 0.5, 0.014, P(1660))
 knock(tNob, 0.018, P(1590))
-urgent(tSt - 0.3, tF + 0.3, bpm=92, root=38, g=0.058, steps=(0, 0, 1, 0))
 for i, word in enumerate(['student system', 'HR', 'research office', 'alumni office']):
     t0 = W(J, 'four', word); knock(t0 - 0.25, 0.016, P(270 + 460 * i), 220 + 20 * i); role(SYS[i], t0 - 0.15, 0.028, P(270 + 460 * i))
 
-# 3. Four ways: C major, on Noor's wall. Her name; the four cards pinned up; the registry's card and its links in pencil, and the
+# 3. Four ways: C major at the turn, on Noor's wall. Her name; the four cards pinned up; the registry's card and its links in pencil, and the
 #    first round of questions down them; the lakehouse's copy, and its chart, bar by bar; the master, and the person on the flute as
 #    she's kept in one place; the central way's arrows out
 J = 'ways'; tKn, tAsk, tGa, tRep, tBk, tCr = W(J, 'registry', 'knows'), W(J, 'registry', 'asks each'), W(J, 'copy', 'gathers'), W(J, 'copy', 'reports'), W(J, 'master', 'read back'), W(J, 'central', 'creates every')
-bed([(S0(J), CMAJ9), (C(J, 'registry', -0.3), AM7), (C(J, 'copy', -0.3), FMAJ9), (C(J, 'master', -0.3), G6), (C(J, 'central', -0.3), EM7)], E(J) + 1.0)
+turn(C(J, 'noor'), CMAJ9)
 knock(C(J, 'noor'), 0.022, P(240))
 for i in range(4):
     pin(W(J, 'noor', 'four ways', -0.1 + i * 0.18), 0.014, P(720 + 340 * i))
@@ -240,10 +248,10 @@ for k in range(3):
 air(tBk - 0.3, 1.0, 0.014, 0.0); person(W(J, 'master', 'one place', -0.2), 0.022, 0.0)
 air(tCr - 0.3, 1.0, 0.014, 0.0)
 
-# 4. After the fact: A minor. The first two cards marked "already here", and "after the fact" under each; the third number neither
+# 4. After the fact: A minor at the turn. The first two cards marked "already here", and "after the fact" under each; the third number neither
 #    stops; the last two ticked, and what they cost
 J = 'after'; tTwo, tFact, tDo, tEv = W(J, 'have', 'first two'), W(J, 'late', 'after the fact'), W(J, 'cost', 'last two'), W(J, 'cost', 'every system')
-bed([(S0(J), AM9), (C(J, 'late', -0.3), FMAJ7), (C(J, 'cost', -0.3), DM9)], E(J) + 1.0)
+turn(C(J, 'have'), AM9)
 for i, x in enumerate([720, 1060]):
     knock(tTwo + 0.1 + i * 0.25, 0.018, P(x), 230 + 20 * i); knock(tFact + i * 0.2, 0.014, P(x), 200)
 knock(W(J, 'late', 'Neither', 0.2), 0.018, P(890))
@@ -251,12 +259,12 @@ for k, x in enumerate([1400, 1740]):
     knock(tDo + 0.1 + k * 0.2, 0.016, P(x)); tick_(tDo + 0.3 + k * 0.2, 0.016, P(x - 40))
 knock(tEv + 0.2, 0.018, P(1570))
 
-# 5. The lightest that works: from the question to C major. The coexistence card lifted forward; its diagram opening out into the
-#    picture, a long breath, each system's chip landing on its own card on its role's note; the two doors where people are created,
-#    each on its system's note; the links; the badge; Bern, small, with one far note of the horn; each system lifted; and the person,
-#    on the flute, as they share her
+# 5. The lightest that works: the question at the turn, then C major as the coexistence card is lifted forward and its diagram
+#    opens out into the picture, a long breath, each system's chip landing on its own card on its role's note; the two doors where
+#    people are created, each on its system's note; the links; the badge; Bern, small, with one far note of the horn; each system
+#    lifted; and the person, on the flute, as they share her, and a chord through the pause without words that follows
 J = 'lightest'; tW, tLk, tShare = C(J, 'which'), W(J, 'those', 'links are'), W(J, 'bern', 'share the person')
-bed([(S0(J), G7SUS), (tW + 3.0, CMAJ9), (C(J, 'those', -0.3), AM7), (C(J, 'bern', -0.3), FMAJ9), (tShare - 0.2, C69)], E(J) + 1.0)
+turn(tW, G7SUS); bloom(CMAJ9, tW + 1.0, tW + 5.4); bloom(C69, tShare - 0.4, C('elsewhere', 'bank', -0.9))
 air(tW + 0.3, 0.6, 0.014, P(1400)); air(tW + 1.2, 1.8, 0.018, P(1100))
 BIG = [310, 760, 1210, 1660]
 for j in range(4):
@@ -270,10 +278,10 @@ for i, x in enumerate(BIG):
     knock(W(J, 'bern', 'Each system', 0.2 + i * 0.15), 0.014, P(x), 210 + 15 * i)
 person(tShare, 0.024, 0.0)
 
-# 6. Elsewhere: E flat major. "A heavier way"; the bank's panel and the country's, each set down; each hub, and the systems or
+# 6. Elsewhere: E flat major at the turn. "A heavier way"; the bank's panel and the country's, each set down; each hub, and the systems or
 #    agencies that read it, one after another
 J = 'elsewhere'
-bed([(S0(J), EBMAJ7), (C(J, 'country', -0.3), GM9)], E(J) + 1.0)
+turn(C(J, 'bank'), EBMAJ7)
 knock(W(J, 'bank', 'heavier'), 0.018, P(960))
 for i, x in enumerate([500, 1420]):
     paper(C(J, 'bank', 0.1 + i * 0.25), 0.026, P(x))
@@ -282,11 +290,11 @@ for i, (lid, hub, many, x) in enumerate([('bank', 'customer hub', 'every product
     for k in range(3):
         knock(W(J, lid, many, 0.1 + k * 0.25), 0.014, P(x + 590), 230 + 20 * k)
 
-# 7. Search before create: D major. The application and its door, on the applicant's note; each field lit with a brush as it's
+# 7. Search before create: D major at the turn. The application and its door, on the applicant's note; each field lit with a brush as it's
 #    named; the search's line, its tag and its lens; the three lanes as they're said: a role added (a tick, and the applicant's note),
 #    a card into Mei's queue, and a new person, given her first role
 J = 'search'; tCh, tSea, tRo, tMe, tNw = W(J, 'door', 'one change'), W(J, 'door', 'searches'), W(J, 'clear', 'adds a role'), W(J, 'clear', "Mei's office"), W(J, 'nobody', 'new person')
-bed([(S0(J), DMAJ9), (C(J, 'compares', -0.3), BM7), (C(J, 'clear', -0.3), GMAJ9), (C(J, 'nobody', -0.3), A69)], E(J) + 1.0)
+turn(C(J, 'door'), DMAJ9)
 paper(tCh - 0.4, 0.028, P(470)); role('applicant', tCh - 0.3, 0.024, P(470)); door(tCh, 0.02, P(790))
 for word in ['the name', 'birth date', 'email', 'number from']:
     brush(W(J, 'compares', word, -0.1), 0.016, P(470), 0.4)
@@ -297,10 +305,10 @@ tick_(tRo, 0.016, P(1400)); role('applicant', tRo, 0.024, P(1320))
 air(tMe, 0.6, 0.012, P(1250)); paper(tMe + 0.6, 0.02, P(1340), 0.3)
 role('applicant', tNw, 0.024, P(1320))
 
-# 8. Who may create a person: G major. The sheet set down; Mei's card; each system's row, on its role's note, and a tick for the two
+# 8. Who may create a person: G major at the turn. The sheet set down; Mei's card; each system's row, on its role's note, and a tick for the two
 #    that may create; Mei's office's bar, a brush, and her tick
 J = 'rule'; tTh = W(J, 'add', 'already there')
-bed([(S0(J), GMAJ7), (C(J, 'add', -0.3), EM9), (tTh - 0.2, A7SUS)], E(J) + 1.0)
+turn(C(J, 'write'), GMAJ7)
 paper(C(J, 'write', 0.2), 0.034, P(960), 0.6); knock(C(J, 'write', 0.8), 0.02, P(1675))
 for i, (r, lid, word, off) in enumerate([('applicant', 'write', 'only the application', 0.2), ('tutor', 'write', 'HR', 0.1), ('researcher', 'add', 'research', 0.1), ('alumna', 'add', 'alumni', 0.1)]):
     t0 = W(J, lid, word, off); role(r, t0, 0.024, P(560))
@@ -308,11 +316,11 @@ for i, (r, lid, word, off) in enumerate([('applicant', 'write', 'only the applic
         tick_(t0 + 0.3, 0.016, P(994))
 brush(W(J, 'add', 'add roles'), 0.02, P(960), 0.8); tick_(tTh + 0.2, 0.018, P(890))
 
-# 9. Found: D major, October 2026. Her application, on the applicant's note, and its fields typed in; the search's line to her, a tick
+# 9. Found: D major at the turn, October 2026. Her application, on the applicant's note, and its fields typed in; the search's line to her, a tick
 #    for each value that matches, and for the person found; the person's notes as she's found; the applicant's band painted in, its
 #    note, and its chip; the stamp that would have made a third number lifting away; the tags
 J = 'found'; tFi, tAppl, tNo = W(J, 'finds', 'finds her'), W(J, 'adds', 'applicant'), W(J, 'adds', 'No new number')
-bed([(S0(J), DMAJ9), (C(J, 'finds', -0.3), GADD9), (C(J, 'adds', -0.3), A69), (tNo - 0.2, DMAJ7)], E(J) + 1.0)
+turn(C(J, 'applies'), DMAJ9)
 paper(C(J, 'applies', -0.3), 0.03, P(1460)); role('applicant', C(J, 'applies', -0.2), 0.026, P(1460))
 typing(W(J, 'applies', 'Linh applies'), 1.7, 0.011, P(1500), 8)
 air(tFi, 0.8, 0.018, P(800))
@@ -323,10 +331,10 @@ brush(tAppl - 0.1, 0.02, P(560), 0.6); role('applicant', tAppl, 0.03, P(560)); k
 air(tNo - 0.1, 1.0, 0.016, P(1724))
 knock(tNo + 0.3, 0.018, P(1500)); knock(W(J, 'adds', 'nothing to merge', 0.2), 0.018, P(1500))
 
-# 10. Kept apart: B minor. The other Linh's name card; the search's table laid down, and a tick or a cross for each value; the tag;
+# 10. Kept apart: B minor at the turn. The other Linh's name card; the search's table laid down, and a tick or a cross for each value; the tag;
 #     her own person, in white paper, given the applicant's note; her record, and her own number stamped on; the tag
 J = 'apart'; tAn, tNp = W(J, 'other', 'another Linh'), W(J, 'only', 'new person')
-bed([(S0(J), BM9), (C(J, 'born', -0.3), GMAJ7), (C(J, 'only', -0.3), EM9), (tNp - 0.2, A7SUS)], E(J) + 1.0)
+turn(C(J, 'other'), BM9)
 paper(tAn - 0.1, 0.028, P(932)); knock(tAn, 0.02, P(1630))
 tick_(tAn + 0.85, 0.016, P(956))
 for word in ['another year', 'another email', 'never studied']:
@@ -335,11 +343,11 @@ knock(W(J, 'only', 'name agrees'), 0.018, P(932))
 air(tNp - 0.1, 0.9, 0.016, P(1660)); paper(tNp + 0.2, 0.024, P(1630)); role('applicant', tNp + 0.4, 0.026, P(1660))
 knock(tNp + 0.6, 0.016, P(1630)); stamp(W(J, 'only', 'own number', 0.06), 0.06)
 
-# 11. The person, published: C major. The product's card; its badge; each promise lit with a brush as it's said, and the platform's
+# 11. The person, published: C major at the turn. The product's card; its badge; each promise lit with a brush as it's said, and the platform's
 #     lines with it; the platform's card, and its grant, each set down, and who may read it typed in; the synced table, its arrow,
 #     and the application on the applicant's note, its arrow and its tag
 J = 'product'; tCn, tVe, tNo, tSt, tAp = W(J, 'contract', 'contract'), W(J, 'contract', 'new version'), W(J, 'contract', 'nothing that reads'), W(J, 'synced', 'synced table'), W(J, 'synced', 'application')
-bed([(S0(J), CMAJ9), (C(J, 'contract', -0.3), AM7), (C(J, 'tools', -0.3), FMAJ9), (C(J, 'synced', -0.3), G6)], E(J) + 1.0)
+turn(C(J, 'behind'), CMAJ9)
 paper(W(J, 'behind', 'the person', -0.4), 0.03, P(840)); knock(W(J, 'behind', 'data product'), 0.018, P(1100))
 brush(W(J, 'behind', 'owned by'), 0.016, P(900), 0.6)
 paper(C(J, 'contract', -0.3), 0.026, P(1330)); brush(C(J, 'contract'), 0.014, P(1200), 0.6)
@@ -350,10 +358,11 @@ paper(W(J, 'tools', 'governs', -0.3), 0.026, P(1330)); typing(W(J, 'tools', 'who
 paper(tSt - 0.3, 0.026, P(1060)); air(tSt, 0.5, 0.014, P(790))
 air(tAp, 0.5, 0.014, P(1340)); role('applicant', tAp + 0.1, 0.024, P(1630)); knock(W(J, 'synced', 'applicant waits'), 0.016, P(1630))
 
-# 12. One person, shared: B flat major, the valley again; each office lifted, and the rules running out to them; the campus; each
-#     system lifted, on its role's note; the person on the flute, shared; D major for the line, and the series' mark on the end card
+# 12. One person, shared: B flat major at the turn, the valley again; each office lifted, and the rules running out to them; the
+#     campus; each system lifted, on its role's note; the person on the flute, shared; the last line alone, then D major through the
+#     pause without words, and the series' mark on the end card
 J = 'shared'; B = C(J, 'breath'); tRu, tHe, tEa = W(J, 'bern', 'shared the rules'), C(J, 'here'), W(J, 'here', 'each system')
-bed([(S0(J), BBMAJ9), (tHe - 0.6, FMAJ9), (C(J, 'idea', -0.3), DMAJ9)], TOT + 1.0)
+turn(C(J, 'bern'), BBMAJ9); bloom(DMAJ9, END(J, 'idea', -0.6), TOT + 1.0)
 for i, x in enumerate(PO):
     knock(W(J, 'bern', 'post office', 0.15 + i * 0.12), 0.013, P(x), 200 + 12 * i)
 for i, x in enumerate(PO):

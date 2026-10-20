@@ -1,0 +1,98 @@
+models:
+
+  - name: stg_hr_system__staff
+    description: One row per version of a staff member's record, as the HR system recorded it.
+    config:
+      meta: {owner: HR, domain: hr}
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [staff_bk, recorded_from]
+    columns:
+      - name: staff_key
+        description: The hash of staff_bk.
+      - name: staff_bk
+        description: '{{ doc("qualified_key") }}'
+        data_tests: [not_null]
+        config:
+          meta: {personal_data: direct}
+      - name: given_name
+        config:
+          meta: {personal_data: direct}
+      - name: family_name
+        config:
+          meta: {personal_data: direct}
+      - name: birth_date
+        description: The date of birth HR holds, as it was typed when the person was hired.
+        config:
+          meta: {personal_data: direct}
+      - name: country_of_birth
+        description: The country of birth, in HR's own words.
+        config:
+          meta: {personal_data: direct}
+      - name: email
+        description: The work email HR holds, trimmed and lower case.
+        config:
+          meta: {personal_data: direct}
+      - name: recorded_from
+        description: '{{ doc("recorded_from") }}'
+      - name: recorded_to
+        description: '{{ doc("recorded_to") }}'
+      - name: is_current_version
+        description: '{{ doc("is_current_version") }}'
+      - name: loaded_at
+        description: '{{ doc("loaded_at") }}'
+
+  - name: stg_hr_system__contracts
+    description: One row per version of a contract of employment, as the HR system recorded it.
+    config:
+      meta: {owner: HR, domain: hr}
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [contract_bk, recorded_from]
+    columns:
+      - name: contract_key
+        description: The hash of contract_bk.
+      - name: contract_bk
+        description: '{{ doc("qualified_key") }}'
+        data_tests: [not_null]
+      - name: staff_bk
+        description: The staff member the contract is with.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_hr_system__staff')
+                field: staff_bk
+        config:
+          meta: {personal_data: direct}
+      - name: position_type
+        description: '{{ doc("position_type") }}'
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [Casual Academic, Academic]
+      - name: pay_type
+        description: '{{ doc("pay_type") }}'
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [CAS, FT, CON]
+      - name: unit_code
+        description: The unit a casual contract is to teach. Null for an appointment.
+      - name: teaching_period
+        description: The teaching period a casual contract is for, like 2026-S1. Null for an appointment.
+      - name: starts_on
+        description: The contract's first day.
+        data_tests: [not_null]
+      - name: ends_on
+        description: The contract's last day, inclusive. Null for a continuing appointment.
+      - name: recorded_from
+        description: '{{ doc("recorded_from") }}'
+      - name: recorded_to
+        description: '{{ doc("recorded_to") }}'
+      - name: is_current_version
+        description: '{{ doc("is_current_version") }}'
+      - name: loaded_at
+        description: '{{ doc("loaded_at") }}'

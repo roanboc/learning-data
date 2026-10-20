@@ -38,7 +38,7 @@ Watercolour, as in every film of the series ([the script of *One person, many ro
 
 - **Dujiangyan** is painted in the series' own watercolour, not in a borrowed style: mountains in layered washes, the river in blue, the levee and its trees in pencil and wash, the plain as strips of field. The past is the same watercolour, with the year in the corner. The people who dig in the dry season are small figures in plain working clothes of hemp, belted at the waist, with cloths tied round their heads, and wooden spades and baskets: dressed for the work and the time, with no costume clichés. One language on screen: the rule is shown in English only, as a strip of paper, and its six characters are said, not drawn.
 - **The measures** are gauges on paper, like the iron bars: each has a level and a mark at its limit, so "past its limit" reads without colour. A tick in green ink means within the limit, a red-ink mark past it, and a word says which.
-- **The tools** appear once, small, with their official logos: dbt writes and tests the measures; Databricks runs them, keeps them and shows them.
+- **No tool is named.** Two small cards on the dashboard say what happens: each measure has a test for its limit, and the platform works them out every night, keeps them and shows them (the series' rule of 20 October 2026: no film names a tool as the home of its rules).
 - **People.** Mei (gold, the business side) in the registrar's office; Leila of the admissions office (gold) approving the list's change; Yusuf, the data governance lead (gold), at his scorecard; Sam, Ben and Rosa (cyan, the technical side) with Mei in the clean-up's team of four; and Linh, at the end, as the person.
 
 ## Script
@@ -75,15 +75,15 @@ Watercolour, as in every film of the series ([the script of *One person, many ro
 
 **On screen.** Application · search first · found: add a role · maybe: to Mei's queue · new: a new person · Feb 2026 · Jul 2026 · 44 · 29 · limit: 50 · the search · Mei's queue
 
-### 5 · The steward's iron bars · 1:57–2:41
+### 5 · The steward's iron bars · 1:57–2:40
 
-**Narration.** So keeping the person right isn't a project that ends. It's everyday work. Mei's office has its own iron bars: five measures, each with a limit. New duplicates per intake. How long the queue's oldest case has waited. Roles past their end date, like a tutor whose term contract ended, but who's still active. Values with no source. And requests for what the university holds about someone, answered on time. dbt writes the measures and tests them. Databricks runs them every night, keeps them, and shows them on a dashboard.
+**Narration.** So keeping the person right isn't a project that ends. It's everyday work. Mei's office has its own iron bars: five measures, each with a limit. New duplicates per intake. How long the queue's oldest case has waited. Roles past their end date, like a tutor whose term contract ended, but who's still active. Values with no source. And requests for what the university holds about someone, answered on time. Each has a test for its limit. Every night, the platform works them out, keeps them, and shows them on a dashboard.
 
-**Picture.** Mei's office, Mei edged in gold. A dashboard, pinned up like a sheet of paper, with five gauges, each lighting as it's named. Each gauge is a column with a level, and an iron bar lying across it at its limit, with what it's read from beneath: *new duplicates this intake* (29, limit 50, from the queue); *oldest case in the queue* (3 days, limit 7 days, from the queue); *roles past their end date* (0, limit 0, from the role table), with a tutor's chip, "term contract ended", ringed and then closed; *values with no source* (0, limit 0, from the tests); *requests answered on time* (14 of 14, from the request log). Each gauge ticks in green ink. Along the bottom, two small cards with the tools' logos: *dbt* "writes and tests the measures", *Databricks* "runs them nightly, keeps them, shows them". A wordless moment on the five gauges.
+**Picture.** Mei's office, Mei edged in gold. A dashboard, pinned up like a sheet of paper, with five gauges, each lighting as it's named. Each gauge is a column with a level, and an iron bar lying across it at its limit, with what it's read from beneath: *new duplicates this intake* (29, limit 50, from the queue); *oldest case in the queue* (3 days, limit 7 days, from the queue); *roles past their end date* (0, limit 0, from the role table), with a tutor's chip, "term contract ended", ringed and then closed; *values with no source* (0, limit 0, from the tests); *requests answered on time* (14 of 14, from the request log). Each gauge ticks in green ink. In the sixth place, two small cards: *each measure* "has a test for its limit", *the platform* "works them out nightly, keeps them, shows them". A wordless moment on the five gauges.
 
-**On screen.** new duplicates this intake · oldest case in the queue · roles past their end date · values with no source · requests answered on time · limit · from the queue · from the role table · from the tests · from the request log · term contract ended · writes and tests the measures · runs them nightly, keeps them, shows them
+**On screen.** new duplicates this intake · oldest case in the queue · roles past their end date · values with no source · requests answered on time · limit · from the queue · from the role table · from the tests · from the request log · term contract ended · each measure · has a test for its limit · the platform · works them out nightly, keeps them, shows them
 
-### 6 · Past its limit · 2:41–3:02
+### 6 · Past its limit · 2:40–3:01
 
 **Narration.** One Monday, an alert: the oldest case had waited twelve days. It was waiting for HR to confirm a birth date, one digit apart. Mei rang HR, and the case was decided that morning, with its reason. The alert pointed at a case, not at a person to blame.
 
@@ -91,7 +91,7 @@ Watercolour, as in every film of the series ([the script of *One person, many ro
 
 **On screen.** Monday · 12 days · past its limit · alert · the queue's oldest case · its limit: 7 · S-21388 · E-5263 · 3 June · 8 June · waiting for HR · HR: 3 June, a typo · linked · reason kept · 2 days · a case, not a person to blame
 
-### 7 · Proposed, then decided · 3:02–3:27
+### 7 · Proposed, then decided · 3:01–3:26
 
 **Narration.** Lists from outside change too. This year, the government's list of visa types added one. An agent drafted how it maps to the university's fee categories, with its evidence, as a change to the list. The list's owner, the admissions office, checked it and approved it. The agent proposes. The owner decides.
 
@@ -99,7 +99,7 @@ Watercolour, as in every film of the series ([the script of *One person, many ro
 
 **On screen.** visa types · the government's list · student visa · graduate visa · visitor visa · graduate research visa · new · drafted by an agent · Map a new visa type · international fees · the government's notice · closest value: student visa · for: the admissions office · approved by the admissions office · the agent proposes · the owner decides
 
-### 8 · On the scorecard · 3:27–3:42
+### 8 · On the scorecard · 3:26–3:41
 
 **Narration.** Yusuf, who leads data governance, reads the same measures on his scorecard, beside every other domain's. Owners, limits, and a way to change them: the person now has all three.
 
@@ -107,7 +107,7 @@ Watercolour, as in every film of the series ([the script of *One person, many ro
 
 **On screen.** governance scorecard · domain · owner · within limits · course · academic registrar · fees · finance office · research · research office · person · Mei's office · 5 of 5 · an owner · a limit · a way to change it
 
-### 9 · Elsewhere · 3:42–3:56
+### 9 · Elsewhere · 3:41–3:55
 
 **Narration.** Every industry knows this picture. A bank cleans up its customer records every three years, and the duplicates come back every time. One check at entry ends the cycle.
 
@@ -115,7 +115,7 @@ Watercolour, as in every film of the series ([the script of *One person, many ro
 
 **On screen.** a bank's duplicate customers · clean-up · every three years · one check at entry · a hospital's patients · a shop's suppliers
 
-### 10 · Kept · 3:56–4:26
+### 10 · Kept · 3:55–4:25
 
 **Narration.** February 2027. Linh starts her PhD: a new role, on the person she already is. That intake made thirty-eight new duplicates. She isn't one of them. And at Dujiangyan, every spring, when the repairs are done, the water is let back in. Clean it once, and it decays. Keep it, and it lasts.
 
@@ -169,7 +169,7 @@ Sources checked on 17 October 2026.
 - **A clean-up decays.** Duplicate records keep being made while the way records are made is unchanged; a one-off clean-up removes the stock, not the flow. This is common practice in master data management, said without citing one standard; DAMA-DMBOK (named in *One person, many roles*) treats master data management as an ongoing programme, not a project.
 - **Duplicates per intake.** Returning students come in through more than one door, such as Galway's undergraduate and postgraduate application systems, each giving a new number ([University of Galway, *Merging numbers*](https://www.ugal.ie/media/registrationoffice/files/Merging-numbers.pdf)); Glasgow's registry lists graduates applying again among the causes ([duplicate student records](https://www.gla.ac.uk/myglasgow/registry/staff/studentrecords/duplicatestudentrecords/)). Neither is named in the film. The numbers (2,000 merged; 640 and 460 in 2025; 44, 29 and 38 after the search) are invented, for a university of about 30,000 students.
 - **The steward's measures** are ones data stewards run: duplicates created, the age of the oldest open case against a service level, records past their end date, values without lineage or a source, and access requests answered within their deadline. Each limit is agreed with its owner, as the example project's tests already record theirs (see above). No jurisdiction's deadline for requests is named.
-- **dbt and Databricks, checked on the day.** dbt tests take `warn_if` and `error_if` thresholds (the project uses them). On Databricks: Lakeflow Jobs run the build nightly; Unity Catalog keeps the measures' table; AI/BI dashboards show them; Databricks SQL alerts, generally available since 14 May 2026, check a query on a schedule and notify, and an alert task in Lakeflow Jobs has been generally available since 29 June 2026 ([Databricks release notes, May and June 2026](https://docs.databricks.com/aws/en/release-notes/product/2026/may)). Nothing shown is in preview.
+- **The platform, unnamed in the film, checked on the day.** In the example project the measures would be dbt models, whose tests take `warn_if` and `error_if` thresholds (the project uses them). On Databricks: Lakeflow Jobs run the build nightly; Unity Catalog keeps the measures' table; AI/BI dashboards show them; Databricks SQL alerts, generally available since 14 May 2026, check a query on a schedule and notify, and an alert task in Lakeflow Jobs has been generally available since 29 June 2026 ([Databricks release notes, May and June 2026](https://docs.databricks.com/aws/en/release-notes/product/2026/may)). Nothing shown is in preview.
 - **Agents propose, people decide.** An agent drafting a reference-data mapping as a change for its owner's review matches the series' rule from film 8 (rules act, AI suggests, people decide) and the governance series' change control. The visa type, its mapping and the government's list are invented; no country's visas are named.
 - **The scorecard** follows the governance series' *Rules that run*: a scorecard read from the runs, by domain, each with an owner.
 - **The bank.** Generic and plausible: no real organisation; "every three years" is an example.
@@ -177,14 +177,15 @@ Sources checked on 17 October 2026.
 
 ## Built
 
-Built from 17 to 20 October 2026, from this script, in watercolour: 4 minutes 26 seconds, 551 words at 124 words a minute, the voice speaking 68% of the time (at most 72% in any chapter).
+Built from 17 to 20 October 2026, from this script, in watercolour: 4 minutes 25 seconds, 553 words at 125 words a minute, the voice speaking 68% of the time (at most 72% in any chapter).
 
 - **The queue's limit is 7 days,** not 10, the same as the test in *Who is it?*, so the two films show one rule (decided on 20 October 2026 with that film's thread). The voice never says the number, so only the gauge, its iron bar and the alert card changed; twelve days is still past it.
+- **No tool is named.** Chapter 5 first said that dbt writes the measures and Databricks runs them, on two cards with their logos. The series decided on 20 October 2026, from the author's note, that no film names a tool as the home of its rules, so the line now says each measure has a test for its limit and the platform works them out every night, and the two cards say it in words.
 - **The poster** is the steward's five gauges, settled, each within its limit, at the end of chapter 5.
-- **Sound.** A palette of its own, in `source/tools/score.py`: a choir of flutes, from a contrabass flute up, holds the chords, each player breathing at their own moment while the others hold, so the sound is kept going; a celesta plays each role an octave above the note it has had since *One person, many roles*, and a list's new value on B; the bowed cello's D and A are the person; the clarinet's mark is on B flat under the title and on D on the end card; and each of the five measures is a tubular bell, its iron bar, struck with the note a semitone above it when the oldest case passes its limit. The first mix had a humming choir and a felt piano, which *Roles come and go* chose the same night, so this film changed. Measured with the voice as the yardstick: the music sits 21 to 23 dB under it while it speaks, the effects peak at least 8 dB under its level, and less than 5% of their energy is above 2.5 kHz.
+- **Sound.** A palette of its own, in `source/tools/score.py`: a choir of flutes, from a contrabass flute up, holds the chords, each player breathing at their own moment while the others hold, so the sound is kept going; a celesta plays each role an octave above the note it has had since *One person, many roles*, and a list's new value on B; the bowed cello's D and A are the person; the clarinet's mark is on B flat under the title and on D on the end card; and each of the five measures is a tubular bell, its iron bar, struck with the note a semitone above it when the oldest case passes its limit. The first mix had a humming choir and a felt piano, which *Roles come and go* chose the same night, so this film changed. Measured with the voice as the yardstick: the music sits 21 to 23 dB under it while it speaks, the effects peak at least 7.5 dB under its level, and less than 5% of their energy is above 2.5 kHz.
 - **Captions.** Spanish captions in Latin American Spanish, about as long as each English line: an intake is an *admisión*, a measure an *indicador*, the steward *la oficina de Mei*, as the voice calls it, and the admissions office, as the list's owner, *la responsable*.
 - **Pause and think.** The four questions above, after chapters 3, 4, 5 and 7.
-- **Checks.** Every moment draws; 235 pieces of text, none under 28 px. The overlap check lists only moments in passing: the camera panning from the chart to the two applications, the applications sliding into one, and the case laid over the dashboard.
+- **Checks.** Every moment draws; 236 pieces of text, none under 28 px. The overlap check lists only moments in passing: the camera panning from the chart to the two applications, the applications sliding into one, and the case laid over the dashboard.
 
 ## Next
 

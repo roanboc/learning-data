@@ -32,7 +32,7 @@ const NARR={
  {"id":"roles","gap":0.6,"text":"Roles past their end date, like a tutor whose term contract ended, but who's still active."},
  {"id":"source","gap":0.6,"text":"Values with no source."},
  {"id":"requests","gap":0.8,"text":"And requests for what the university holds about someone, answered on time."},
- {"id":"tools","gap":0.8,"text":"dbt writes the measures and tests them. Databricks runs them every night, keeps them, and shows them on a dashboard."}]},
+ {"id":"nightly","gap":0.8,"text":"Each has a test for its limit. Every night, the platform works them out, keeps them, and shows them on a dashboard."}]},
 "alert":{"name":"Past its limit","lead":0.8,"tail":1.0,"vo":[
  {"id":"monday","gap":0.8,"text":"One Monday, an alert: the oldest case had waited twelve days."},
  {"id":"waiting","gap":0.8,"text":"It was waiting for HR to confirm a birth date, one digit apart."},

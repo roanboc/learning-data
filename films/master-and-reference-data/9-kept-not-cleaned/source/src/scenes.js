@@ -158,7 +158,7 @@ function m9_mei(ctx,t,o){const [x,y,s]=M9_MEI;m9_person(ctx,"mei",x,y,s,Object.a
 function m9_dash(ctx,t,o){wc_panel(ctx,M9_DB.x,M9_DB.y,M9_DB.w,M9_DB.h,{kind:"sheet",seed:44});}
 scene("measures",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");
   const tPj=w("process","a project"),tEv=w("process","everyday work"),tIron=w("bars","iron bars"),tTut=w("roles","like a tutor"),
-    tAct=w("roles","still active"),tT=c("tools"),tDbx=w("tools","Databricks");
+    tAct=w("roles","still active"),tT=c("nightly"),tPf=w("nightly","the platform");
   const ts=["dups","oldest","roles","source","requests"].map(c),te=ts.slice(1).concat([tT]);
   // the camera: Mei's office; in on the whole dashboard as the measures are named, each lit in turn (all six places in the frame, so nothing
   // is cut at its edge, and every line above the captions); out, for a moment, on all five
@@ -173,9 +173,9 @@ scene("measures",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,
       barIn:clamp((t-tIron-0.1-i*0.1)/0.5,0,1),ok:clamp((t-ts[i]-0.9)/0.8,0,1)}),{dy:14,d:0.7});}
     // what the third measure finds: a tutor whose contract ended, still active; ringed, then closed
     const [rx,ry]=m9_cell(5);arrive(ctx,rx+190,ry+90,t,tTut-0.2,()=>withA(ctx,1-fin(t,tT-0.9,0.5),()=>m9_tutor(ctx,t,rx+34,ry+40,{ring:clamp((t-tAct)/0.7,0,1),close:clamp((t-te[2]+0.1)/1.0,0,1)})),{dy:12});
-    // the tools, in the sixth place
-    arrive(ctx,rx+207,ry+90,t,tT,()=>m9_tool(ctx,rx+8,ry+10,398,160,"dbt","dbt",["writes and tests","the measures"]),{dy:12});
-    arrive(ctx,rx+207,ry+262,t,tDbx,()=>m9_tool(ctx,rx+8,ry+182,398,160,"databricks","Databricks",["runs them nightly,","keeps them, shows them"]),{dy:12});},{dy:24,d:0.9,from:0.96});
+    // in the sixth place, two cards: each measure has a test for its limit, and the platform works them out every night
+    arrive(ctx,rx+207,ry+90,t,tT,()=>m9_tool(ctx,rx+8,ry+10,398,160,"test","each measure",["has a test","for its limit"]),{dy:12});
+    arrive(ctx,rx+207,ry+262,t,tPf,()=>m9_tool(ctx,rx+8,ry+182,398,160,"platform","the platform",["works them out nightly,","keeps them, shows them"]),{dy:12});},{dy:24,d:0.9,from:0.96});
   m9_close(ctx,S);wc_paperOver(ctx,S);});
 
 /* ---------- 6. Past its limit ---------- */
@@ -188,7 +188,7 @@ scene("alert",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   // the oldest case's wait: past its limit (7 days, as in Who is it?) on Monday, at 0.4807 of its eased rise; back to two days once decided
   const t0=tAl-0.2,D=tTw+0.5-t0,up=ease(clamp((t-t0)/D,0,1)),dn=ease(clamp((t-tB+0.2)/1.0,0,1)),n=lerp(lerp(3,12,up),2,dn),tX=t0+0.4807*D,tBk=tB-0.2+0.3;
   m9_dash(ctx,t);for(let i=0;i<5;i++)m9_gauge(ctx,t,i,i===1?{n,g:{v:Math.round(n)+" days"},past:t<tBk?clamp((t-tX)/0.8,0,1):0,ok:t<tX?1:clamp((t-tBk-0.4)/0.8,0,1),lit:fin(t,tAl-0.3,0.5)*(1-fin(t,tW,0.6))}:{});
-  const [rx,ry]=m9_cell(5);m9_tool(ctx,rx+8,ry+10,398,160,"dbt","dbt",["writes and tests","the measures"]);m9_tool(ctx,rx+8,ry+182,398,160,"databricks","Databricks",["runs them nightly,","keeps them, shows them"]);
+  const [rx,ry]=m9_cell(5);m9_tool(ctx,rx+8,ry+10,398,160,"test","each measure",["has a test","for its limit"]);m9_tool(ctx,rx+8,ry+182,398,160,"platform","the platform",["works them out nightly,","keeps them, shows them"]);
   arrive(ctx,1580,198,t,tAl+0.3,()=>withA(ctx,1-fin(t,tW-0.4,0.5),()=>m9_alert(ctx,1320,100)),{dy:-20,d:0.7});
   // the case it points at comes forward over the dashboard, and goes back once it's decided; Mei, after the veil, stays clear on the phone
   const ca=fin(t,tW-0.3,0.5)*(1-fin(t,tB-0.4,0.6));m9_hush(ctx,0.72*ca);

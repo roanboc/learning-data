@@ -54,8 +54,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Valores sin origen.",
 "And requests for what the university holds about someone, answered on time.":
 "Y los pedidos de lo que la universidad guarda sobre alguien, respondidos a tiempo.",
-"dbt writes the measures and tests them. Databricks runs them every night, keeps them, and shows them on a dashboard.":
-"dbt escribe los indicadores y los prueba. Databricks los ejecuta cada noche, los guarda y los muestra en un tablero.",
+"Each has a test for its limit. Every night, the platform works them out, keeps them, and shows them on a dashboard.":
+"Cada uno tiene una prueba para su límite. Cada noche, la plataforma los calcula, los guarda y los muestra en un tablero.",
 "One Monday, an alert: the oldest case had waited twelve days.":
 "Un lunes, una alerta: el caso más antiguo llevaba doce días esperando.",
 "It was waiting for HR to confirm a birth date, one digit apart.":

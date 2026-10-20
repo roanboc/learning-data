@@ -51,7 +51,7 @@ const NARR={
 "table":{"name":"One table, any date","lead":0.8,"tail":1.0,"vo":[
  {"id":"row","gap":0.8,"text":"On the platform, it's one table, with a row for each role."},
  {"id":"cols","gap":0.8,"text":"Each row holds the person, the role type, its owner, what it relates to, and the dates it's valid from and to."},
- {"id":"tests","gap":0.8,"text":"Jun builds it in dbt, with two tests. A role can't end before it starts, and every role belongs to a person."},
+ {"id":"tests","gap":0.8,"text":"Jun builds it, with two tests. A role can't end before it starts, and every role belongs to a person."},
  {"id":"asat","gap":0.8,"text":"Then any question can take a date: census date, last year, or today."},
  {"id":"late","gap":0.8,"text":"Each row also keeps when it was recorded, so a contract entered late still counts from the day it began."}]},
 "stays":{"name":"The person stays","lead":0.8,"tail":1.0,"vo":[

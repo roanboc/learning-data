@@ -459,7 +459,7 @@ const NARR={
 "table":{"name":"One table, any date","lead":0.8,"tail":1.0,"vo":[
  {"id":"row","gap":0.8,"text":"On the platform, it's one table, with a row for each role."},
  {"id":"cols","gap":0.8,"text":"Each row holds the person, the role type, its owner, what it relates to, and the dates it's valid from and to."},
- {"id":"tests","gap":0.8,"text":"Jun builds it in dbt, with two tests. A role can't end before it starts, and every role belongs to a person."},
+ {"id":"tests","gap":0.8,"text":"Jun builds it, with two tests. A role can't end before it starts, and every role belongs to a person."},
  {"id":"asat","gap":0.8,"text":"Then any question can take a date: census date, last year, or today."},
  {"id":"late","gap":0.8,"text":"Each row also keeps when it was recorded, so a contract entered late still counts from the day it began."}]},
 "stays":{"name":"The person stays","lead":0.8,"tail":1.0,"vo":[
@@ -469,7 +469,7 @@ const NARR={
  {"id":"last","gap":0.8,"text":"A role has a start and an end. The person stays."}]}
 };
 
-const VODUR={"rome/ladder": 6.339, "rome/cato": 6.985, "rome/roles": 6.03, "rome/census": 6.661, "census/date": 7.283, "census/planning": 4.335, "census/alumni": 7.777, "flags/night": 3.755, "flags/says": 8.11, "flags/over": 3.043, "flags/again": 6.031, "flags/wrong": 5.014, "bands/know": 2.781, "bands/shape": 7.853, "bands/under": 2.068, "bands/first": 4.716, "bands/tutor": 2.199, "bands/again": 4.176, "bands/research": 2.54, "bands/stays": 4.786, "terms/drew": 3.61, "terms/hr": 7.699, "terms/every": 2.723, "terms/jan": 4.402, "line/draw": 3.784, "line/open": 3.576, "line/once": 5.851, "line/back": 4.117, "line/kept": 1.856, "line/filter": 5.242, "line/since": 2.601, "relates/for": 2.196, "relates/items": 8.786, "relates/people": 4.837, "relates/ends": 4.824, "elsewhere/energy": 2.359, "elsewhere/moves": 3.608, "elsewhere/need": 5.552, "elsewhere/kept": 4.093, "table/row": 3.276, "table/cols": 6.56, "table/tests": 7.54, "table/asat": 4.206, "table/late": 6.128, "stays/today": 3.824, "stays/next": 3.665, "stays/come": 1.14, "stays/last": 2.935};
+const VODUR={"rome/ladder": 6.339, "rome/cato": 6.985, "rome/roles": 6.03, "rome/census": 6.661, "census/date": 7.283, "census/planning": 4.335, "census/alumni": 7.777, "flags/night": 3.755, "flags/says": 8.11, "flags/over": 3.043, "flags/again": 6.031, "flags/wrong": 5.014, "bands/know": 2.781, "bands/shape": 7.853, "bands/under": 2.068, "bands/first": 4.716, "bands/tutor": 2.199, "bands/again": 4.176, "bands/research": 2.54, "bands/stays": 4.786, "terms/drew": 3.61, "terms/hr": 7.699, "terms/every": 2.723, "terms/jan": 4.402, "line/draw": 3.784, "line/open": 3.576, "line/once": 5.851, "line/back": 4.117, "line/kept": 1.856, "line/filter": 5.242, "line/since": 2.601, "relates/for": 2.196, "relates/items": 8.786, "relates/people": 4.837, "relates/ends": 4.824, "elsewhere/energy": 2.359, "elsewhere/moves": 3.608, "elsewhere/need": 5.552, "elsewhere/kept": 4.093, "table/row": 3.276, "table/cols": 6.56, "table/tests": 6.428, "table/asat": 4.206, "table/late": 6.128, "stays/today": 3.824, "stays/next": 3.665, "stays/come": 1.14, "stays/last": 2.935};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -3203,7 +3203,7 @@ scene("elsewhere",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s
 const M4_JUN=[262,900],M4_CY2=648;
 scene("table",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const tPf=w("row","platform"),tRow=w("row","a row"),tCol=[w("cols","the person"),w("cols","role type"),w("cols","its owner"),w("cols","relates"),w("cols","valid from"),w("cols","and to")],
-    tJun=c("tests"),tDbt=w("tests","dbt"),tE=w("tests","end before"),tBel=w("tests","belongs"),tQ=w("asat","question"),tP=[w("asat","census date"),w("asat","last year"),w("asat","today")],
+    tJun=c("tests"),tTwo=w("tests","two tests"),tE=w("tests","end before"),tBel=w("tests","belongs"),tQ=w("asat","question"),tP=[w("asat","census date"),w("asat","last year"),w("asat","today")],
     tRec=w("late","recorded"),tCon=w("late","a contract"),tBeg=w("late","the day it began");
   m4_open(ctx,S,t,sc,"office",[[0,960,540,1]],{z:0.015});
   // Jun, who builds it
@@ -3212,7 +3212,7 @@ scene("table",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const col=tCol.map((s,k)=>fin(t,s-0.1,0.3)*(1-fin(t,(k===4?tCol[5]:tCol[k+1]||s)+(k>=4?1.4:0.2),0.4)));
   arrive(ctx,M4_TB2.x+M4_TB2.w/2,M4_TB2.y+M4_TB2.h/2,t,tPf-0.3,()=>m4_table(ctx,t,{rows:clamp((t-tRow+0.2)/1.6,0,1),col,rec:fin(t,tRec-0.2,0.6),hiRow:fin(t,tCon-0.1,0.5)}),{dy:20,d:0.9});
   // its two tests, in plain words; then the question, and the dates it can take
-  arrive(ctx,M4_TB2.x+345,M4_CY2+118,t,tDbt-0.2,()=>m4_yaml(ctx,M4_TB2.x,M4_CY2,{t1:clamp((t-tE+0.4)/1.4,0,1),t2:clamp((t-tBel+0.4)/1.4,0,1)}),{dy:16});
+  arrive(ctx,M4_TB2.x+345,M4_CY2+118,t,tTwo-0.2,()=>m4_yaml(ctx,M4_TB2.x,M4_CY2,{t1:clamp((t-tE+0.4)/1.4,0,1),t2:clamp((t-tBel+0.4)/1.4,0,1)}),{dy:16});
   const on=tP.reduce((k,s,i)=>t>=s-0.2?i:k,-1),qx=M4_TB2.x+M4_TB2.w-690;
   arrive(ctx,qx+345,M4_CY2+118,t,tQ-0.3,()=>m4_query(ctx,qx,M4_CY2,{pins:tP.map(s=>fin(t,s-0.2,0.3)),t,t0:tP.map(s=>s-0.2),on}),{dy:16});
   // the contract entered late counts from the day it began

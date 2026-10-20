@@ -85,8 +85,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En la plataforma, es una tabla, con una fila por cada rol.",
 "Each row holds the person, the role type, its owner, what it relates to, and the dates it's valid from and to.":
 "Cada fila guarda la persona, el tipo de rol, su responsable, con qué se relaciona, y las fechas en que es válido.",
-"Jun builds it in dbt, with two tests. A role can't end before it starts, and every role belongs to a person.":
-"Jun la construye en dbt, con dos pruebas. Un rol no puede terminar antes de empezar, y cada rol pertenece a una persona.",
+"Jun builds it, with two tests. A role can't end before it starts, and every role belongs to a person.":
+"Jun la construye, con dos pruebas. Un rol no puede terminar antes de empezar, y cada rol pertenece a una persona.",
 "Then any question can take a date: census date, last year, or today.":
 "Así, cualquier pregunta puede llevar una fecha: la del censo, el año pasado, o hoy.",
 "Each row also keeps when it was recorded, so a contract entered late still counts from the day it began.":

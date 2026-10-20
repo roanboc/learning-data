@@ -163,29 +163,29 @@ En la plataforma, es una tabla, con una fila por cada rol.
 Cada fila guarda la persona, el tipo de rol, su responsable, con qué se relaciona, y las fechas en que es válido.
 
 42
-00:04:33,634 --> 00:04:41,274
-Jun la construye en dbt, con dos pruebas. Un rol no puede terminar antes de empezar, y cada rol pertenece a una persona.
+00:04:33,634 --> 00:04:40,162
+Jun la construye, con dos pruebas. Un rol no puede terminar antes de empezar, y cada rol pertenece a una persona.
 
 43
-00:04:43,374 --> 00:04:47,680
+00:04:42,262 --> 00:04:46,568
 Así, cualquier pregunta puede llevar una fecha: la del censo, el año pasado, o hoy.
 
 44
-00:04:49,580 --> 00:04:55,808
+00:04:48,468 --> 00:04:54,696
 Cada fila guarda también cuándo se registró, así que un contrato cargado tarde cuenta desde el día en que empezó.
 
 45
-00:05:00,908 --> 00:05:04,832
+00:04:59,796 --> 00:05:03,720
 Hoy, Linh es estudiante, tutora, investigadora y egresada.
 
 46
-00:05:06,132 --> 00:05:09,897
+00:05:05,020 --> 00:05:08,785
 En diciembre, el proyecto termina. Algún día, se graduará otra vez.
 
 47
-00:05:11,397 --> 00:05:12,637
+00:05:10,285 --> 00:05:11,525
 Los roles van y vienen.
 
 48
-00:05:13,937 --> 00:05:16,972
+00:05:12,825 --> 00:05:15,860
 Un rol tiene un inicio y un fin. La persona se queda.

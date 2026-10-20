@@ -1,15 +1,18 @@
 # Which value wins: the music and sounds, played by tools/audio.py with From words to data's instruments (shared/tools/music.py).
-# The palette is this film's own (PLAYBOOK.md: vary the sound itself, film to film), and it keeps what the series carries from film to
-# film: the clarinet's mark (1-8-5-1), each role's note, and the D and the A above it for the person.
-#  - The bed is low voices, humming with their mouths closed: one singer on each note of the chord, placed across the room by pitch,
-#    each with their own breath and vibrato, as twenty-two clocks keep one time between them. The chords change with the narration,
-#    in E flat and its relative C minor. A second singer on a note would beat against the first, a slow pulse on a phone's speaker.
-#  - A felt piano gives each source its note: the note of the role whose colour it wears, the same as in every film of the series
+# The palette is this film's own (PLAYBOOK.md: vary the sound itself, film to film; the choir and the felt piano are Roles come and
+# go's, and the series' viols, strings, reed organ, harps, glass, flutes, celesta, cello and tubular bells other films'), and it keeps
+# what the series carries from film to film: the clarinet's mark (1-8-5-1), each role's note, and the D and the A above it for the
+# person.
+#  - The bed is sackbuts, the trombone's softer ancestors, holding the chords: one player to a note, low to the left and high to the
+#    right, keeping one time between them as twenty-two clocks do. The chords change with the narration, in E flat and its relative
+#    C minor, and a note the next chord keeps is held through the change. Two players on one note would beat against each other, a
+#    slow pulse on a phone's speaker.
+#  - A harpsichord gives each source its note: the note of the role whose colour it wears, the same as in every film of the series
 #    (the student system the student's D, HR the tutor's A, the research office the researcher's G, the alumni office the alumna's
 #    D above), so a value carried from a record sounds where it came from.
 #  - A cor anglais is the person: whenever Linh stands in white paper it plays the same D and the A above it, and a value she gives
 #    herself comes in on its D.
-#  - The clarinet carries the series' mark, under the title and on the end card, here in E flat, over a low piano note.
+#  - The clarinet carries the series' mark, under the title and on the end card, here in E flat, over a low harpsichord note.
 # The Beagle's chronometers tick as they're seen: each of the twenty-two keeps its own rate, and its beat is heard where its second
 # hand steps. The sea washes under the two harbours. The effects are the paper's and the desk's: a pencil, cards set down, a book
 # shut, muffled keys, a click, a stamp, a pin.
@@ -39,37 +42,72 @@ def speaking(t):
 
 # ---- this film's instruments, all low-passed ----
 # the music's levels against the voice, set by measuring (PLAYBOOK.md §5): the bed about 21 dB under the voice as it speaks
-BED, NOTE, FX = 2.1, 1.2, 1.2
-def _hum(F):
-    """how loud a hummed harmonic at F Hz is, mouth closed: strong through the chest, a nasal ring near 260 Hz, little above 1 kHz"""
-    return 1 / (1 + (F / 420) ** 2) + 0.5 * np.exp(-((F - 260) / 90) ** 2) + 0.06 * np.exp(-((F - 1050) / 220) ** 2)
-def hum(ch, start, sec, g=0.03):
-    """low voices humming a chord, mouths closed: one singer on each note, placed across the room by pitch, each coming in at their
-    own moment, with their own slow vibrato and swell; dark, nothing above about 1.2 kHz. A note too low to hum is sung an octave up.
-    Two singers on one note, a hair apart, beat against each other, and a phone's one speaker turns that into a slow pulse"""
-    x = tt(sec); e = (np.clip(x / 1.2, 0, 1) ** 1.5 * np.clip((sec - x) / 2.4, 0, 1)).astype(np.float32)
-    R = np.random.default_rng(int(start * 100) % 2 ** 31); notes = sorted(set(m + 12 if m < 38 else m for m in ch))
-    for m in notes:
-        f = mf(m) * (1 + (R.random() - 0.5) * 0.0012)
-        vib = 1 + (0.0028 + 0.0016 * R.random()) * np.sin(2 * np.pi * (4.4 + 0.8 * R.random()) * x + 6.28 * R.random()) * np.clip((x - 0.8) / 1.2, 0, 1)
-        ph = 2 * np.pi * np.cumsum(f * vib) / SR + 6.28 * R.random()
-        tone = sum(np.sin(h * ph) * _hum(h * f) / h ** 0.6 for h in range(1, 10))
-        s = tone * (1 + 0.06 * np.sin(2 * np.pi * (0.045 + 0.02 * R.random()) * x + 6.28 * R.random())) * np.clip((x - 0.5 * R.random()) / 0.9, 0, 1)
-        s += 0.012 * filt(noise(sec), 'band', (180, 900)) * np.sqrt(len(notes))  # their breath
-        put(filt((s * e / len(notes)).astype(np.float32), 'low', 1200), start, g * BED, max(-0.5, min(0.5, (m - 52) / 26)))
+BED, NOTE, FX = 2.4, 1.2, 1.2
+def _bell(F):
+    """how loud a soft sackbut's harmonic at F Hz is: round and warm from its narrow bell, strongest below about 600 Hz, a little
+    edge near 1.1 kHz, almost nothing above"""
+    return 1 / (1 + (F / 560) ** 2) + 0.1 * np.exp(-((F - 1100) / 220) ** 2)
+def sackbut(m, sec, seed):
+    """one sackbut, the trombone's softer ancestor, holding note m: it speaks with a breath of air and a slight rise into its pitch,
+    its upper harmonics opening a moment after the lower; held straight, without vibrato, with a player's slow, small drift"""
+    R = np.random.default_rng(seed); f0 = mf(m); x = tt(sec).astype(np.float64)
+    drift = 1 + 0.0007 * np.sin(2 * np.pi * R.uniform(0.06, 0.13) * x + R.uniform(0, 6.3)) + 0.0004 * np.sin(2 * np.pi * R.uniform(0.2, 0.35) * x + R.uniform(0, 6.3))
+    ph = 2 * np.pi * np.cumsum(f0 * drift * (1 - 0.005 * np.exp(-x / 0.045))) / SR
+    s = np.zeros_like(x)
+    for h in range(1, 16):
+        F = h * f0
+        if F > 1500:
+            break
+        s += np.sin(h * ph + R.uniform(0, 6.3)) * h ** -0.5 * _bell(F) * np.clip((x - 0.01 * h) / (0.06 + 0.015 * h), 0, 1)
+    air = filt(noise(sec), 'band', (300, 1400)) * (0.015 + 0.06 * np.exp(-x / 0.07))
+    return (s + air) * (1 + 0.03 * np.sin(2 * np.pi * R.uniform(0.05, 0.1) * x + R.uniform(0, 6.3)))
+def hold(m, start, sec, n, g=0.03, rel=1.8):
+    """note m held on a sackbut from start, one of n in its chord: it swells in, and is let go over rel seconds, about two; low notes
+    to the left and high to the right, as the players sit. One player to a note: two on one note beat against each other, and a
+    phone's one speaker turns that into a slow pulse"""
+    x = tt(sec); e = (np.clip(x / 0.5, 0, 1) ** 1.5 * np.clip((sec - x) / rel, 0, 1)).astype(np.float32)
+    put(filt((sackbut(m, sec, m * 31 + int(start * 7)) * e / n).astype(np.float32), 'low', 1200), start, g * BED, max(-0.5, min(0.5, (m - 52) / 26)))
+_BED = []
 def bed(keys, end, g=0.03):
-    """the chapter's chords, each from its moment (a little early, so the singers have come in by then) until a little after the next"""
-    for i, (t0, ch) in enumerate(keys):
-        t1 = keys[i + 1][0] if i + 1 < len(keys) else end
-        hum(ch, t0 - 0.9, t1 - t0 + 3.0, g)
-def piano(m, start, g=0.03, pan=0.0, sec=2.8):
-    """a felt piano: a soft hammer on three strings a hair apart, a little stiff (its upper partials a touch sharp), the top dying first"""
-    f = mf(m); x = tt(sec); s = np.zeros_like(x)
-    for det, a in ((0.9994, 0.8), (1.0, 1.0), (1.0007, 0.8)):
-        for h in range(1, 9):
-            s += np.sin(2 * np.pi * f * det * h * np.sqrt(1 + 0.00035 * h * h) * x + 0.37 * h) * a / h ** 1.5 * np.exp(-x * (0.8 + 0.5 * h))
-    s = s * np.minimum(1, x / 0.005) + 0.03 * filt(noise(sec), 'band', (f * 0.7, f * 3)) * np.exp(-x * 55)
-    put(norm(filt(s.astype(np.float32), 'low', 1800)), start, g * NOTE, pan)
+    """the chapter's chords, each from its moment, until the chapter's end: kept, so play_bed() plays the whole film's at once"""
+    _BED.append((sorted(keys), end, g))
+def play_bed():
+    """the film's chords on the sackbuts: a player whose note the next chord keeps holds it through the change, within a chapter or
+    into the next, the others let go just after it, and the new notes come in a little before it, so they have spoken by then. A
+    note that leaves for a passing chord and comes straight back is let go quickly enough to come back in, so it never sounds twice
+    at once. A note too low for the bed is played an octave up"""
+    K = [(t, sorted(set(m + 12 if m < 38 else m for m in ch)), end, g) for keys, end, g in _BED for t, ch in keys]
+    K.sort(key=lambda k: k[0])
+    on = lambda j: j + 1 < len(K) and K[j + 1][0] <= K[j][2]  # the next chord comes while this one still sounds
+    H = []  # each note held: its pitch, when it comes in, when it is let go, its chord's size and level, and how long letting go takes
+    for i, (t0, ch, end, g) in enumerate(K):
+        prev = K[i - 1][1] if i and on(i - 1) else []
+        for m in ch:
+            if m in prev:
+                continue
+            j = i
+            while on(j) and m in K[j + 1][1]:
+                j += 1
+            H.append([m, t0 - 0.6, K[j + 1][0] if on(j) else K[j][2], len(ch), g, 1.8])
+    for h in H:
+        back = [b[1] for b in H if b[0] == h[0] and h[2] <= b[1] < h[2] + h[5]]
+        if back:
+            h[5] = max(0.25, min(back) - h[2])
+    for m, s, t1, n, g, rel in H:
+        hold(m, s, t1 - s + rel, n, g, rel)
+def harpsichord(m, start, g=0.03, pan=0.0, sec=2.6):
+    """a harpsichord, one string to a note: a quill plucks it near its end, so it speaks at once, bright and a little hollow, its upper
+    harmonics dying first, until the damper falls; darkened below about 2.2 kHz. A pluck is short, so it's set a little louder (1.3)
+    to sit with the voice as the score's other notes do"""
+    f = mf(m); x = tt(sec).astype(np.float64); s = np.zeros_like(x)
+    for h in range(1, 30):
+        F = h * f * np.sqrt(1 + 0.00008 * h * h)
+        if F > 2600:
+            break
+        s += np.sin(2 * np.pi * F * x + 0.3 * h) * abs(np.sin(np.pi * h * 0.13)) / h ** 1.1 * np.exp(-x * (0.9 + 0.22 * h))
+    s = s * np.minimum(1, x / 0.002) + 0.04 * filt(noise(sec), 'band', (900, 2400)) * np.exp(-x * 120)
+    s = s * np.clip((sec - x) / 0.08, 0, 1)
+    put(norm(filt(s.astype(np.float32), 'low', 2200)), start, g * NOTE * 1.3, pan)
 def clarinet(m, start, sec, g=0.04, pan=0.0):
     """a soft clarinet: odd harmonics, a breath as it speaks, a slow vibrato that comes in late"""
     f = mf(m); x = tt(sec); vib = 1 + 0.0035 * np.sin(2 * np.pi * 5.0 * x) * np.clip((x - 0.35) / 0.5, 0, 1)
@@ -78,10 +116,10 @@ def clarinet(m, start, sec, g=0.04, pan=0.0):
     br = filt(noise(sec), 'band', (f * 0.9, f * 3)) * 0.12 * np.exp(-x * 6)
     put(norm(filt(((s + br) * env(sec, 0.09, min(0.35, sec * 0.4))).astype(np.float32), 'low', 2200)), start, g * NOTE, pan)
 def mark(start, root=63, g=0.042):
-    """the series' mark, 1-8-5-1, on the clarinet, here in E flat, over the low E flat on the piano"""
+    """the series' mark, 1-8-5-1, on the clarinet, here in E flat, over the low E flat on the harpsichord"""
     for i, iv in enumerate([0, 12, 7, 0]):
         clarinet(root + iv, start + i * 0.42, 0.9 if i < 3 else 2.8, g * (1 if i == 0 else 0.85), (i - 1.5) * 0.1)
-    piano(root - 24, start, g * 0.6); piano(root - 24, start + 1.26, g * 0.5)
+    harpsichord(root - 24, start, g * 0.6); harpsichord(root - 24, start + 1.26, g * 0.5)
 def cor(m, start, sec, g=0.03, pan=0.0):
     """a cor anglais, softly: a double reed's dark, veiled voice, its harmonics gathered near 1 kHz, a breath as it speaks and a slow
     vibrato late in long notes; nothing above about 2.2 kHz"""
@@ -97,11 +135,11 @@ def person(s, g=0.03, pan=0.0):
 # each source on the note of the role whose colour it wears, the same in every film of the series since One person, many roles
 SRC = {'sis': 50, 'hr': 57, 'ro': 55, 'ao': 62}
 def src(k, s, g=0.03, pan=0.0):
-    """a source's note on the felt piano; a value from Linh herself comes in on the person's cor anglais, its D"""
+    """a source's note on the harpsichord; a value from Linh herself comes in on the person's cor anglais, its D"""
     if k == 'self':
         cor(62, s, 1.4, g * 0.8, pan)
     else:
-        piano(SRC[k], s, g, pan)
+        harpsichord(SRC[k], s, g, pan)
 def pencil(s, sec=0.6, g=0.014, pan=0.0):
     """a pencil on paper: graphite, a dry scratch that flutters with the strokes"""
     x = tt(sec); fl = 0.5 + 0.5 * np.abs(np.sin(2 * np.pi * 5.5 * x + 2.4 * np.sin(2 * np.pi * 1.7 * x)))
@@ -289,7 +327,7 @@ knock(W(J, 'quick', 'the newest value', 0.1), 0.02, P(870))
 card(W(J, 'resend', 'HR sends', -0.2), 0.024, P(1610)); src('hr', W(J, 'resend', 'HR sends', -0.1), 0.026, P(1610))
 for t0, x in ((tF1, 1290), (tF2, 1560)):
     slide(t0, 0.7, 0.014, P(x)); card(t0 + 0.55, 0.016, P(x), 0.3)
-src('hr', tNew + 0.15, 0.026, P(545)); piano(45, tNew + 0.15, 0.018, P(545))
+src('hr', tNew + 0.15, 0.026, P(545)); harpsichord(45, tNew + 0.15, 0.018, P(545))
 pring(tTypo, 0.7, 0.014, P(760)); pencil(tTypo + 0.4, 0.5, 0.012, P(900))
 pring(tOld, 0.7, 0.014, P(720)); pencil(tOld + 0.4, 0.4, 0.012, P(840))
 pring(tPr, 0.7, 0.014, P(500))
@@ -425,7 +463,7 @@ card(tSh - 0.1, 0.026, P(1425), 0.5)
 knock(W(J, 'shop', 'a billing address'), 0.012, P(1250)); knock(W(J, 'shop', 'a delivery address'), 0.012, P(1250))
 knock(tEach + 0.1, 0.016, P(1700), 250); knock(tEach + 0.4, 0.016, P(1700), 270)
 for i, (t0, m) in enumerate(zip(tQ, [63, 67, 70])):
-    knock(t0, 0.016, P(620 + 340 * i), 230 + 20 * i); piano(m, t0 + 0.02, 0.018, P(620 + 340 * i))
+    knock(t0, 0.016, P(620 + 340 * i), 230 + 20 * i); harpsichord(m, t0 + 0.02, 0.018, P(620 + 340 * i))
 
 # 10. Thirty-three seconds: E flat, Falmouth in autumn. The sea; the card, and its 33 seconds; then, in turn, the rate book set down,
 #     and every port ticked, one after another, and the tag; the book carried across to Linh's rules; their card, its tag, and the
@@ -445,3 +483,6 @@ knock(tSa + 0.45, 0.014, P(470))
 card(tWr - 0.1, 0.026, P(1250)); knock(tWr + 0.45, 0.014, P(1250))
 ptick(tNight + 0.1, 0.014, P(1088)); card(tNight + 0.35, 0.016, P(1278), 0.3)
 mark(B + 1.1)
+
+# and under it all, the film's chords
+play_bed()

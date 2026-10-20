@@ -8,9 +8,11 @@
 # are the paper's, as in film 1: a pencil, a quill, a wet brush, a card or an envelope, a stamp, a few muffled keys; and the valley's
 # own: the treaty's wax, a coin by each door, a pin.
 # The series' rule (the author, 20 October 2026: "some sounds and music from time to time instead of constant sounds"):
-#  - Music plays under the opening's story from real life, the valley of 1874. After that it comes in from time to time: a chord at
-#    each chapter's turn, which swells in the pause before the chapter's first line and fades under it; a chord under a moment on
-#    screen (the diagram opening out into the picture); and a chord in each pause without words. Never a bed under the voice.
+#  - Music plays under the opening's story from real life, the valley of 1874 (film.json's "story"). After that it comes in from
+#    time to time: a chord at the turn into a chapter that starts something new (today, the four ways, elsewhere, the search, found,
+#    the person published), which swells in the pause before the chapter's first line and fades as it starts; a chord as chapter 5's
+#    diagram opens out into the picture, and in the pause without words after it; the roles' and the person's notes as they appear;
+#    and the series' mark, alone, on the end card. Never a bed under the voice: tools/quiet.py checks it.
 #  - Nothing is tense, trembling or pulsing: no pulse, no vibrato, and no two voices a little out of tune on one note, which beat on
 #    a phone's speaker. The organ's two ranks a hair apart, and the pulse under the third number, went on 20 October 2026.
 # The rules from In the weeds of data crafting hold:
@@ -38,22 +40,22 @@ P = lambda x: max(-0.85, min(0.85, (x - 960) / 960 * 0.9))  # where something is
 # the music's levels: the organ sits about 21 dB under the voice, as in the other series' films, and the notes over it a little less.
 # Each instrument is trimmed to come out as loud as its part in One person, many roles at the same gain (measured on its own, as
 # integrated loudness): the organ as its chords, the horn as its clarinet, the harp as its plucked cello, the flute as its bowed one
-REED, NOTE = 3.7, 1.5
+REED, NOTE = 3.0, 1.5
 TRIM = {'horn': 1.33, 'harp': 0.8, 'flute': 0.92}
-# one cycle of a reed's tone, kept as a table: a strong fundamental and a falling row of harmonics, as a harmonium's reeds speak,
-# softened so the harmonics of a chord's notes can't beat against each other on a phone
+# one cycle of the organ's soft stop, kept as a table: a strong fundamental, and each harmonic about a quarter of the one before, so
+# where two notes of a chord have harmonics a little apart (as equal temperament leaves them), one is too faint to beat (tools/quiet.py)
 _N = 4096
-_TAB = (lambda p: sum(a * np.sin(2 * np.pi * (k + 1) * p + 0.4 * k) for k, a in enumerate([1, 0.5, 0.3, 0.16, 0.09, 0.05, 0.03, 0.02, 0.01])))(np.arange(_N + 1) / _N)
+_TAB = (lambda p: sum(a * np.sin(2 * np.pi * (k + 1) * p + 0.4 * k) for k, a in enumerate([1, 0.25, 0.06, 0.015, 0.004])))(np.arange(_N + 1) / _N)
 _TAB = _TAB / np.abs(_TAB).max()
 def _reed(ph):
     p = (ph % 1.0) * _N; i = p.astype(np.int64); fr = p - i
     return _TAB[i] * (1 - fr) + _TAB[i + 1] * fr
-def organ(ch, start, sec, g=0.03):
-    """a held chord on a reed organ, one reed to a note, each held steady: the bellows fill, so the chord swells in over about two
-    seconds, grows a little while it's held and fades as the air goes; its notes spread a little across the room, the lowest on the
-    left; nothing above about 1.3 kHz"""
+def organ(ch, start, sec, g=0.03, att=1.8, rel=2.6):
+    """a held chord on a reed organ's soft stop, one reed to a note, each held steady: the bellows fill, so the chord swells in over
+    about two seconds (att), grows a little while it's held and fades as the air goes (rel); its notes spread a little across the
+    room, the lowest on the left; nothing above about 1.3 kHz"""
     x = tt(sec).astype(np.float64)
-    e = np.clip(x / 1.8, 0, 1) ** 1.6 * np.clip((sec - x) / 2.6, 0, 1) * (1 + 0.14 * x / sec)
+    e = np.clip(x / att, 0, 1) ** 1.6 * np.clip((sec - x) / rel, 0, 1) * (1 + 0.14 * x / sec)
     for k, m in enumerate(ch):
         s = _reed(mf(m) * x) * (0.8 if k == 0 else 1.0) * e / len(ch)
         put(filt(s.astype(np.float32), 'low', 1300), start, g * REED, -0.35 + 0.7 * k / max(1, len(ch) - 1))
@@ -64,15 +66,15 @@ def bed(keys, end, g=0.03):
         t1 = keys[i + 1][0] if i + 1 < len(keys) else end
         organ(ch, t0 - 1.2, t1 - t0 + 3.6, g)
 def turn(t, ch, g=0.03):
-    """a chapter's turn: the chapter's chord swells in the pause before its first line (at t), and fades under the line"""
-    organ(ch, t - 2.4, 4.6, g)
+    """a chapter's turn: the chapter's chord swells in the pause before its first line (at t), and fades as the line starts"""
+    organ(ch, t - 2.2, 4.0, g, 1.6, 2.2)
 def bloom(ch, t0, t1, g=0.03):
     """a chord for a moment on screen, or a pause without words: it swells in from t0 and has faded by t1"""
     organ(ch, t0, t1 - t0, g)
 def horn(m, start, sec, g=0.04, pan=0.0):
     """a soft horn, far off: it scoops up onto the note and its brass opens a little as it swells, held steady; and the valley
     gives it back, twice, fainter and duller each time, from the other side"""
-    f = mf(m); x = tt(sec); fr = 1 - 0.022 * np.exp(-x / 0.05)
+    f = mf(m); x = tt(sec).astype(np.float64); fr = 1 - 0.022 * np.exp(-x / 0.05)
     ph = 2 * np.pi * np.cumsum(f * fr) / SR; op = 0.5 + 0.5 * np.clip(x / 0.25, 0, 1)
     s = np.sin(ph) + (0.45 * np.sin(2 * ph) + 0.22 * np.sin(3 * ph) + 0.10 * np.sin(4 * ph) + 0.04 * np.sin(5 * ph)) * op
     s = norm(filt((s * env(sec, 0.07, min(0.5, sec * 0.45))).astype(np.float32), 'low', 1500))
@@ -248,10 +250,9 @@ for k in range(3):
 air(tBk - 0.3, 1.0, 0.014, 0.0); person(W(J, 'master', 'one place', -0.2), 0.022, 0.0)
 air(tCr - 0.3, 1.0, 0.014, 0.0)
 
-# 4. After the fact: A minor at the turn. The first two cards marked "already here", and "after the fact" under each; the third number neither
+# 4. After the fact: no chord, as it goes on from the four ways. The first two cards marked "already here", and "after the fact" under each; the third number neither
 #    stops; the last two ticked, and what they cost
 J = 'after'; tTwo, tFact, tDo, tEv = W(J, 'have', 'first two'), W(J, 'late', 'after the fact'), W(J, 'cost', 'last two'), W(J, 'cost', 'every system')
-turn(C(J, 'have'), AM9)
 for i, x in enumerate([720, 1060]):
     knock(tTwo + 0.1 + i * 0.25, 0.018, P(x), 230 + 20 * i); knock(tFact + i * 0.2, 0.014, P(x), 200)
 knock(W(J, 'late', 'Neither', 0.2), 0.018, P(890))
@@ -259,12 +260,12 @@ for k, x in enumerate([1400, 1740]):
     knock(tDo + 0.1 + k * 0.2, 0.016, P(x)); tick_(tDo + 0.3 + k * 0.2, 0.016, P(x - 40))
 knock(tEv + 0.2, 0.018, P(1570))
 
-# 5. The lightest that works: the question at the turn, then C major as the coexistence card is lifted forward and its diagram
+# 5. The lightest that works: the question with no chord, then C major as the coexistence card is lifted forward and its diagram
 #    opens out into the picture, a long breath, each system's chip landing on its own card on its role's note; the two doors where
 #    people are created, each on its system's note; the links; the badge; Bern, small, with one far note of the horn; each system
 #    lifted; and the person, on the flute, as they share her, and a chord through the pause without words that follows
 J = 'lightest'; tW, tLk, tShare = C(J, 'which'), W(J, 'those', 'links are'), W(J, 'bern', 'share the person')
-turn(tW, G7SUS); bloom(CMAJ9, tW + 1.0, tW + 5.4); bloom(C69, tShare - 0.4, C('elsewhere', 'bank', -0.9))
+bloom(CMAJ9, tW + 1.0, tW + 5.4); bloom(C69, tShare - 0.4, C('elsewhere', 'bank', -0.9))
 air(tW + 0.3, 0.6, 0.014, P(1400)); air(tW + 1.2, 1.8, 0.018, P(1100))
 BIG = [310, 760, 1210, 1660]
 for j in range(4):
@@ -305,10 +306,9 @@ tick_(tRo, 0.016, P(1400)); role('applicant', tRo, 0.024, P(1320))
 air(tMe, 0.6, 0.012, P(1250)); paper(tMe + 0.6, 0.02, P(1340), 0.3)
 role('applicant', tNw, 0.024, P(1320))
 
-# 8. Who may create a person: G major at the turn. The sheet set down; Mei's card; each system's row, on its role's note, and a tick for the two
+# 8. Who may create a person: no chord, as it goes on from the search. The sheet set down; Mei's card; each system's row, on its role's note, and a tick for the two
 #    that may create; Mei's office's bar, a brush, and her tick
 J = 'rule'; tTh = W(J, 'add', 'already there')
-turn(C(J, 'write'), GMAJ7)
 paper(C(J, 'write', 0.2), 0.034, P(960), 0.6); knock(C(J, 'write', 0.8), 0.02, P(1675))
 for i, (r, lid, word, off) in enumerate([('applicant', 'write', 'only the application', 0.2), ('tutor', 'write', 'HR', 0.1), ('researcher', 'add', 'research', 0.1), ('alumna', 'add', 'alumni', 0.1)]):
     t0 = W(J, lid, word, off); role(r, t0, 0.024, P(560))
@@ -331,10 +331,9 @@ brush(tAppl - 0.1, 0.02, P(560), 0.6); role('applicant', tAppl, 0.03, P(560)); k
 air(tNo - 0.1, 1.0, 0.016, P(1724))
 knock(tNo + 0.3, 0.018, P(1500)); knock(W(J, 'adds', 'nothing to merge', 0.2), 0.018, P(1500))
 
-# 10. Kept apart: B minor at the turn. The other Linh's name card; the search's table laid down, and a tick or a cross for each value; the tag;
+# 10. Kept apart: no chord, as it goes on from found. The other Linh's name card; the search's table laid down, and a tick or a cross for each value; the tag;
 #     her own person, in white paper, given the applicant's note; her record, and her own number stamped on; the tag
 J = 'apart'; tAn, tNp = W(J, 'other', 'another Linh'), W(J, 'only', 'new person')
-turn(C(J, 'other'), BM9)
 paper(tAn - 0.1, 0.028, P(932)); knock(tAn, 0.02, P(1630))
 tick_(tAn + 0.85, 0.016, P(956))
 for word in ['another year', 'another email', 'never studied']:
@@ -358,11 +357,10 @@ paper(W(J, 'tools', 'governs', -0.3), 0.026, P(1330)); typing(W(J, 'tools', 'who
 paper(tSt - 0.3, 0.026, P(1060)); air(tSt, 0.5, 0.014, P(790))
 air(tAp, 0.5, 0.014, P(1340)); role('applicant', tAp + 0.1, 0.024, P(1630)); knock(W(J, 'synced', 'applicant waits'), 0.016, P(1630))
 
-# 12. One person, shared: B flat major at the turn, the valley again; each office lifted, and the rules running out to them; the
-#     campus; each system lifted, on its role's note; the person on the flute, shared; the last line alone, then D major through the
-#     pause without words, and the series' mark on the end card
+# 12. One person, shared: the valley again, with no chord; each office lifted, and the rules running out to them; the campus; each
+#     system lifted, on its role's note; the person on the flute, shared; the last line alone, and the series' mark, alone, on the end
+#     card, like a post horn across the valley
 J = 'shared'; B = C(J, 'breath'); tRu, tHe, tEa = W(J, 'bern', 'shared the rules'), C(J, 'here'), W(J, 'here', 'each system')
-turn(C(J, 'bern'), BBMAJ9); bloom(DMAJ9, END(J, 'idea', -0.6), TOT + 1.0)
 for i, x in enumerate(PO):
     knock(W(J, 'bern', 'post office', 0.15 + i * 0.12), 0.013, P(x), 200 + 12 * i)
 for i, x in enumerate(PO):

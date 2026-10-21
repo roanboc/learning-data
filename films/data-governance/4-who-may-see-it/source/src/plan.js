@@ -9,8 +9,9 @@
    key cards; the scrambler. Every name starts with ws_ or WS_. */
 
 /* ---------- colours ---------- */
-// the classes: direct personal data in plum, pseudonymous in a paler plum (still personal, so the same family), none in plain paper
-const WS_DIRECT=[146,52,112],WS_DIRECTINK=[112,30,84],WS_PSEUDO=[214,160,198],WS_PSEUDOINK=[150,84,130],WS_NONE=[250,248,242];
+// the classes, as the series keeps them (GV_CLASS in shared/src/rooms.js): direct personal data in plum, pseudonymous in a paler plum
+// (still personal, so the same family), none in plain paper
+const WS_DIRECT=GV_CLASS.direct,WS_DIRECTINK=GV_CLASSINK.direct,WS_PSEUDO=GV_CLASS.pseudonymous,WS_PSEUDOINK=GV_CLASSINK.pseudonymous,WS_NONE=GV_CLASS.none;
 // a pale yellow where something is pointed out
 const WS_HI=[242,204,92];
 // 1983's materials: a register office's oak and green, the court's red, the forms' grey-green paper, a tin box
@@ -403,17 +404,8 @@ function ws_whoList(ctx,fill,grey,gather,dec){const [X,Y,Wd,Hd]=GV_SC;
     if(grey>0)wc_T(ctx,"9 moved on",X+260,Y+Hd-30,{w:700,size:30,col:[150,148,160],a:fa*clamp(grey*2,0,1)});}}
 
 /* ---------- today: the classes, and the mask ---------- */
-// a class, as a chip beside a column: direct in deep plum, pseudonymous in a paler plum, none in plain paper; returns its width
-const WS_CLS={direct:WS_DIRECT,pseudonymous:WS_PSEUDO,none:WS_NONE};
-function ws_chip(ctx,x,y,cls,o){o=o||{};const s=o.size||28,w=Math.round(tw(ctx,cls,s,700)+44),h=s+22;
-  wc_panel(ctx,x,y-h/2,w,h,{kind:"chip",fill:WS_CLS[cls],seed:cls.length+3});wc_T(ctx,cls,x+22,y+s*0.36,{w:700,size:s,col:cls==="direct"?[255,255,255]:WC_DARK});return w;}
-// a chip coming in at t0: it lands a little large and settles
-function ws_chipAt(ctx,t,t0,x,y,cls,o){const u=fin(t,t0,0.4);if(u<=0)return;const k=lerp(1.25,1,spring(fin(t,t0,0.55)));ctx.save();ctx.translate(x,y);ctx.scale(k,k);
-  withA(ctx,clamp(u*2,0,1),()=>ws_chip(ctx,0,0,cls,o));ctx.restore();}
-// the mask: a plum band with stars on it, over a value, sliding in from the left as u goes 0 to 1; everyone outside the registrar's office
-// reads ***
-function ws_mask(ctx,x,y,w,h,u,o){if(u<=0)return;o=o||{};const e=easeCam(clamp(u,0,1)),s=o.size||28;ctx.save();ctx.beginPath();ctx.rect(x-10,y-10,(w+20)*e,h+20);ctx.clip();
-  wc_panel(ctx,x,y,w,h,{kind:"card",fill:WS_DIRECT,seed:(w+h)|0});wc_T(ctx,"***",x+18,y+h/2+s*0.5,{w:800,size:s+4,f:"mono",col:[255,255,255]});ctx.restore();}
+// a class as a chip beside a column (gv_classChip, gv_classChipAt) and the mask over a value (gv_mask) are the series' own, in
+// shared/src/rooms.js, so every film draws them alike: everyone outside the registrar's office reads ***
 
 /* ---------- today: the learner table, as the registrar's office sees it ---------- */
 // five of core_learner's columns, with a value from the example project's sample data (Aisha Karimi, the learner the series follows)
@@ -426,7 +418,7 @@ function ws_colList(ctx,o){o=o||{};const [X,Y,Wd,Hd]=GV_SC,L=WS_CL;gv_screen(ctx
   wc_T(ctx,"column",L.x,Y+110,{w:700,size:28,col:WC_MUTED});wc_T(ctx,"class",L.chip,Y+110,{w:700,size:28,col:WC_MUTED});wc_T(ctx,"value",L.val,Y+110,{w:700,size:28,col:WC_MUTED});
   WS_COLS.forEach(([n,cls,v],i)=>{const y=L.y+i*L.dy,hi=o.hi?o.hi(i):0;if(hi>0.01)gv_tint(ctx,X+20,y-44,Wd-40,72,WS_HI,0.6*hi);
     wc_T(ctx,n,L.x,y,{w:500,size:30,f:"mono",col:WC_DARK});wc_T(ctx,v,L.val,y,{w:500,size:30,f:"mono",col:WC_INK,a:o.vals==null?1:o.vals});
-    if(o.chip&&!(o.lift&&i===3))ws_chipAt(ctx,o.t,o.chip(i),L.chip,y-10,cls,{size:30});});}
+    if(o.chip&&!(o.lift&&i===3))gv_classChipAt(ctx,o.t,o.chip(i),L.chip,y-10,cls,{size:30});});}
 // the project's own lines for the email column (models/core/student/_core_student__models.yml, lines 79 to 83; the description cut),
 // the class lit (hi, 0 to 1)
 const WS_YAML=[["79","- name: email"],["80","  description: The learner's email, lower case, …"],["81","  data_type: string"],["82","  config:"],["83","    meta: {personal_data: direct}"]];
@@ -454,18 +446,18 @@ function ws_keys(ctx,o){const [X,Y,Wd,Hd]=GV_SC,K=WS_KY;gv_screen(ctx,X,Y,Wd,Hd,
       const u=clamp(o.id*1.5-0.3,0,1);if(u>0)withA(ctx,u,()=>wc_tag(ctx,K.x+pre+w/2,y+62,"student ID",{align:"center",size:30,wash:WS_DIRECT,washA:0.35,seed:19}));}
     wc_T(ctx,k,K.x,y,{w:500,size:K.size,f:"mono",col:WC_DARK});wc_T(ctx,n,K.note,y-4,{w:600,size:30,col:WC_MUTED});
     if(i<2&&o.ticks)wc_tick(ctx,K.note-46,y-18,34,WC_PENCIL,o.ticks(i),4);});
-  if(o.chip!=null)ws_chipAt(ctx,o.t,o.chip,K.x+tw(ctx,"credential_bk",36,500,"mono")+40,Y+148,"direct",{size:32});}
+  if(o.chip!=null)gv_classChipAt(ctx,o.t,o.chip,K.x+tw(ctx,"credential_bk",36,500,"mono")+40,Y+148,"direct",{size:32});}
 
 /* ---------- today: the mask follows the column ---------- */
 // on Sam's screens at the platform team's desk (GV_PX): the email column with its tag (tag, 0 to 1, as the chip lands), and the one rule
 // that reads the tag
 function ws_tagScreen(ctx,t,t0){const [x,y,w,h]=GV_PX.screens[0];gv_screen(ctx,x,y,w,h,"core_learner",null,{barH:44,titleSize:28});
   wc_T(ctx,"email",x+30,y+98,{w:500,size:30,f:"mono",col:WC_DARK});wc_T(ctx,"tag",x+30,y+158,{w:700,size:28,col:WC_MUTED});
-  if(t0!=null)ws_chipAt(ctx,t,t0,x+30,y+214,"personal_data = direct",{size:28});}
+  if(t0!=null)gv_classChipAt(ctx,t,t0,x+30,y+214,"personal_data = direct",{size:28});}
 // and on the second screen, the one rule that reads the tag: values for the registrar's office, stars for everyone else (band slides them in)
 function ws_ruleScreen(ctx,a,band){const [x,y,w,h]=GV_PX.screens[1];gv_screen(ctx,x,y,w,h,"rule",null,{barH:44,titleSize:28});withA(ctx,a,()=>{
   wc_T(ctx,"where the tag is direct:",x+30,y+96,{w:700,size:28,col:WC_MUTED});wc_T(ctx,"registrar's office: values",x+30,y+160,{w:700,size:30,col:WC_DARK});
-  wc_T(ctx,"everyone else:",x+30,y+232,{w:700,size:30,col:WC_DARK});ws_mask(ctx,x+260,y+200,120,48,band,{size:28});});}
+  wc_T(ctx,"everyone else:",x+30,y+232,{w:700,size:30,col:WC_DARK});gv_mask(ctx,x+260,y+200,120,48,band,{size:28});});}
 // the data team's board: cards on strings, from the systems the learner table is built from, through it, to what's built on it
 // (WS_BD); each card's rows are columns. ws_bdAnchor: where a card's string leaves (side 1, right) or arrives (side -1, left)
 const WS_BD={src:[[262,118,"student system"],[262,300,"learning platform"],[262,482,"short courses"]],
@@ -478,7 +470,7 @@ const ws_bdAnchor=(c,side)=>c.rows?[side>0?c.x+c.w:c.x,c.y+ws_bdH(c)/2]:[side>0?
 // a card: paper, a pin, its title, its rows; o.mask(r): the band over row r's values (0 to 1); o.lit: its title lit
 function ws_bdCard(ctx,c,o){o=o||{};const h=ws_bdH(c);wc_panel(ctx,c.x,c.y,c.w,h,{kind:"card",seed:(c.x+c.y)|0});gv_pin(ctx,c.x+c.w/2,c.y+14,GV.grey,1.1);
   wc_T(ctx,c.title,c.x+28,c.y+60,{w:800,size:32,col:WC_DARK});ctx.save();ctx.fillStyle=rgba(WC_PENCIL,0.25);ctx.fillRect(c.x+24,c.y+80,c.w-48,2);ctx.restore();
-  c.rows.forEach((r,i)=>{const y=c.y+126+i*50;wc_T(ctx,r,c.x+28,y,{w:500,size:28,f:"mono",col:WC_INK});if(o.mask){const u=o.mask(i);if(u>0)ws_mask(ctx,c.x+150,y-34,c.w-178,46,u,{size:28});}});}
+  c.rows.forEach((r,i)=>{const y=c.y+126+i*50;wc_T(ctx,r,c.x+28,y,{w:500,size:28,f:"mono",col:WC_INK});if(o.mask){const u=o.mask(i);if(u>0)gv_mask(ctx,c.x+150,y-34,c.w-178,46,u,{size:28});}});}
 function ws_srcCard(ctx,s){const [x,y,n]=s;wc_panel(ctx,x,y,320,88,{kind:"card",seed:x+y});gv_pin(ctx,x+160,y+12,GV.grey,1);wc_T(ctx,n,x+160,y+58,{w:800,size:30,align:"center",col:WC_DARK});}
 // a string between two pins, sagging a little (p draws it on); and a bead travelling along it (u), plum for the mask, paler for the key
 function ws_strPts(a,b){const pts=[];for(let i=0;i<=20;i++){const u=i/20;pts.push([lerp(a[0],b[0],u),lerp(a[1],b[1],u)+26*Math.sin(Math.PI*u)]);}return pts;}
@@ -531,7 +523,7 @@ function ws_maskTable(ctx,o){o=o||{};const [X,Y,Wd,Hd]=GV_SC;gv_screen(ctx,X,Y,W
   if(o.hi>0.01)for(const k of [0,4])gv_tint(ctx,X+WS_MT[k][0]-16,Y+86,k?200:230,40+WS_LT.length*86+30,WS_HI,0.6*o.hi);
   WS_MT.forEach(([cx,s])=>wc_T(ctx,s,X+cx,Y+118,{w:500,size:28,f:"mono",col:WC_MUTED}));ctx.save();ctx.fillStyle=rgba(WC_PENCIL,0.2);ctx.fillRect(X+30,Y+136,Wd-60,2);ctx.restore();
   WS_LT.forEach(([k,st],i)=>{const y=Y+196+i*86;wc_T(ctx,k,X+WS_MT[0][0],y,{w:500,size:30,f:"mono",col:WC_INK});wc_T(ctx,st,X+WS_MT[4][0],y,{w:500,size:30,f:"mono",col:WC_INK});
-    for(const k2 of [1,2,3])ws_mask(ctx,X+WS_MT[k2][0],y-36,200,50,1,{size:28});});
+    for(const k2 of [1,2,3])gv_mask(ctx,X+WS_MT[k2][0],y-36,200,50,1,{size:28});});
   if(o.pulse>0.01){ctx.save();ctx.globalCompositeOperation="screen";for(const k2 of [1,2,3])wc_glowAt(ctx,X+WS_MT[k2][0]+100,Y+330,260,[255,200,240],0.25*o.pulse);ctx.restore();}}
 
 /* ---------- today: a key is still personal data ---------- */
@@ -589,7 +581,7 @@ function ws_colsTable(ctx,a,band){if(a<=0.01)return;const T_=WS_TB;withA(ctx,a,(
   T_.cols.forEach(([x,s])=>wc_T(ctx,s,x,T_.y+70,{w:800,size:34,col:WC_DARK}));ctx.save();ctx.fillStyle=rgba(WS_FORMINK,0.5);ctx.fillRect(T_.x+24,T_.y+94,T_.w-48,3);
   for(let r=0;r<8;r++){const y=T_.y+140+r*56;ctx.fillStyle=rgba(WS_FORMINK,0.18);ctx.fillRect(T_.x+24,y+24,T_.w-48,1.5);
     T_.cols.forEach(([x],k)=>{ctx.fillStyle=rgba(k>=3?[70,60,80]:WS_FORMINK,k>=3?0.5:0.4);ctx.fillRect(x,y,(k>=3?92:70)*(0.55+0.45*hash(r*5+k,9)),8);});}ctx.restore();
-  if(band>0)ws_mask(ctx,T_.div+24,T_.y+112,T_.x+T_.w-T_.div-48,T_.h-140,band,{size:34});});}
+  if(band>0)gv_mask(ctx,T_.div+24,T_.y+112,T_.x+T_.w-T_.div-48,T_.h-140,band,{size:34});});}
 
 /* ---------- the places, painted once ---------- */
 // 1983's four places and their front layers (the counter, the bench), then the university's, from the series' shared set; a screen close

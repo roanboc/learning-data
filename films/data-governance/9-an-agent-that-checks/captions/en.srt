@@ -1,0 +1,179 @@
+1
+00:00:01,600 --> 00:00:04,617
+Imagined: the university, a few years from now.
+
+2
+00:00:05,917 --> 00:00:13,837
+Before going home, Anil Kurian, an analyst in the Faculty of Health, adds a column to a list: each learner's date of birth.
+
+3
+00:00:15,337 --> 00:00:20,072
+At three in the morning, an agent reads the change against governance's written rules.
+
+4
+00:00:21,572 --> 00:00:25,876
+Nothing says the new column is personal data, so nothing would protect it.
+
+5
+00:00:26,576 --> 00:00:33,037
+The agent doesn't change it, or approve it. It leaves a comment: the line, the rule, and a fix to consider.
+
+6
+00:00:34,537 --> 00:00:39,150
+At eight, Anil reads it, agrees, and marks the column as personal data.
+
+7
+00:00:40,450 --> 00:00:47,879
+What this shows: rules written as checks, applied by an agent to every change, at any hour, and a person who decides.
+
+8
+00:00:55,379 --> 00:00:58,787
+Back to today, and Anil's first change: the list itself.
+
+9
+00:00:59,487 --> 00:01:06,572
+Every learner studying for one of the faculty's awards, how far each is from finishing, and a name and an email to call.
+
+10
+00:01:08,072 --> 00:01:10,399
+Three checks fail, with thirteen problems.
+
+11
+00:01:11,899 --> 00:01:16,445
+Each says what's missing. None says what's right for this list, or who decides.
+
+12
+00:01:17,645 --> 00:01:23,243
+So Anil asks Jun, and waits. Every change that nobody else owns waits for Jun.
+
+13
+00:01:26,443 --> 00:01:32,931
+So Yusuf and Noor write governance's rules as a skill: the steps an agent follows on every change.
+
+14
+00:01:34,231 --> 00:01:38,009
+It's a file in the project, in plain words, for anyone to read.
+
+15
+00:01:39,509 --> 00:01:46,303
+Run the checks. Find the owner. Take each definition from the glossary, or have governance confirm there's none.
+
+16
+00:01:48,003 --> 00:01:54,292
+Class every column, with evidence. Test each rule about the data; track the ones about what people do.
+
+17
+00:01:55,992 --> 00:01:59,854
+Name what it touches. Then report, once, to the people who decide.
+
+18
+00:02:01,354 --> 00:02:06,859
+And it never approves, edits the glossary, weakens a test, or shows a value from the data.
+
+19
+00:02:10,359 --> 00:02:17,224
+The agent reviews Anil's change. Two things pass: it touches nothing else, and needs no new glossary term.
+
+20
+00:02:18,724 --> 00:02:23,707
+Then three findings, each with its line, the rule it breaks, a draft, and who decides.
+
+21
+00:02:25,207 --> 00:02:29,508
+One: nobody answers for it, so no owner would be asked to review a change.
+
+22
+00:02:31,008 --> 00:02:34,686
+Two: ten columns don't say whether they identify a person.
+
+23
+00:02:35,986 --> 00:02:41,530
+It counts, and shows no values: all seven rows of the email column look like an email.
+
+24
+00:02:43,230 --> 00:02:51,349
+Three: a rule, only the faculty's own awards, has no test. The draft checks that every row's faculty is HLT.
+
+25
+00:02:55,049 --> 00:02:57,215
+Where the agent wasn't sure, it said so.
+
+26
+00:02:57,915 --> 00:03:02,259
+Two columns look alike: long coded keys. One stands for a learner.
+
+27
+00:03:03,559 --> 00:03:09,164
+The other has two values for seven learners, and its description says it's made from the award's code.
+
+28
+00:03:10,664 --> 00:03:16,299
+Maybe not a person at all. But when in doubt, the skill says, draft the stricter class, and ask.
+
+29
+00:03:17,799 --> 00:03:20,468
+Anil confirms: a course, not a person.
+
+30
+00:03:21,768 --> 00:03:26,211
+So it's classed as identifying no one, with Anil's reason in the review.
+
+31
+00:03:27,711 --> 00:03:33,971
+Then the owners decide: the faculty, its classes and its rule; Yusuf, the new owner; Jun, the code.
+
+32
+00:03:35,871 --> 00:03:41,273
+The agent decided nothing. It brought each decision to the right person, with the evidence.
+
+33
+00:03:44,573 --> 00:03:51,537
+Binder 26 says: AI use follows the organisation's data policies. The agent is governed, too.
+
+34
+00:03:53,037 --> 00:03:58,768
+It has its own identity, reads only what it's granted, and writes only in its own workspace.
+
+35
+00:04:00,268 --> 00:04:06,184
+It works from counts and small samples, never bulk personal data, and only reads the glossary.
+
+36
+00:04:07,684 --> 00:04:12,084
+And it can't approve: approvals come from owners, and the agent owns nothing.
+
+37
+00:04:13,584 --> 00:04:20,040
+So the binder's line goes green: it runs, in the agent's access, its steps, and the owners' approvals.
+
+38
+00:04:23,940 --> 00:04:27,965
+An agent can only follow what's written down, plainly enough to check.
+
+39
+00:04:29,065 --> 00:04:35,522
+Remember policy 12's last line: “Staff take care to use terms correctly.” No agent can check care.
+
+40
+00:04:37,122 --> 00:04:41,633
+And the steps themselves are open: anyone can read them, and argue with them.
+
+41
+00:04:42,833 --> 00:04:49,194
+A change to a step is reviewed like any other: data governance approves it, and the next review follows it.
+
+42
+00:04:50,494 --> 00:04:53,787
+People trust a review they can read, question and overrule.
+
+43
+00:04:57,087 --> 00:05:00,715
+That night, a few years from now, is made of what you've just seen:
+
+44
+00:05:00,915 --> 00:05:07,123
+rules written as checks, steps in plain words, an agent with little access, and people who decide.
+
+45
+00:05:09,023 --> 00:05:11,814
+An agent checks what's written. People decide.

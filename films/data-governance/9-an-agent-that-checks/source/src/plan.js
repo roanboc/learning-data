@@ -1,11 +1,11 @@
 /* ===== An agent that checks: the places and the pictures =====
-   The places are painted once and kept (shared/src/finish.js). Only the university's own places (the series' rooms.js): the campus
-   at dusk and at night, the Faculty of Health's office in the old building (by day, at dusk, at night and in the morning), screens
-   close up, the data team's room and its board, Yusuf's office, his board and his desk, and the platform team's desk. The pictures are
-   the film's own things: the agent's sign (a small turning star on a dashed cyan card, never a person), Anil's change and its checks,
-   the call list with its names and emails as grey bars, the review queue on Jun's board, the skill's page, the agent's review and its
-   three findings, the two coded keys, the approvals, the agent's card of access, the list of who reviews what, binders 26 and 12, and
-   the tags. Every name starts with ac_ or AC_. */
+   The places are painted once and kept (shared/src/finish.js). Only the university's own places (the series' rooms.js): the campus at
+   dusk and at night, the Faculty of Health's office in the old building (by day, at dusk and in the morning), screens close up (its own
+   at night and in the morning), the data team's room and its board, Yusuf's office, his board and his desk, and the platform team's
+   desk. The pictures are the film's own things: the agent's sign (a small turning star on a dashed cyan card, never a person), Anil's
+   change and its checks, the call list with its names and emails as grey bars, the review queue on Jun's board, the skill's page, the
+   agent's review and its three findings, the two coded keys, the approvals, the agent's card of access, the list of who reviews what,
+   binders 26 and 12, and the tags. Every name starts with ac_ or AC_. */
 
 /* ---------- light: dusk, night and morning over a painted place ---------- */
 // a grade over everything painted so far: dusk (a warm violet sky, deeper below), night (deep blue, darker at the edges) or
@@ -47,9 +47,8 @@ function ac_paintNight(c){gv_paintCampus(c);ac_grade(c,"night");const R=wc_rng(2
   // the clock, lit a little by the lamp on the tower's door
   c.save();c.globalCompositeOperation="screen";wc_glowAt(c,AC_CLOCK[0],AC_CLOCK[1],60,[200,190,160],0.3);c.restore();}
 
-/* ---------- the faculty's office: day, dusk, night, morning ---------- */
+/* ---------- the faculty's office: by day, at dusk and in the morning ---------- */
 function ac_paintFacDusk(c){gv_paintFaculty(c);ac_grade(c,"dusk");}
-function ac_paintFacNight(c){gv_paintFaculty(c);ac_grade(c,"night");}
 function ac_paintFacMorning(c){gv_paintFaculty(c);ac_grade(c,"morning");}
 // the desk in front, kept once for each light, drawn over whoever sits there
 function ac_facDesk(ctx,kind){ctx.drawImage(wc_kept("acFacDesk|"+(kind||"day"),W,H,c=>{gv_paintFacultyDesk(c);if(kind)ac_grade(c,kind,{atop:true});}),0,0);}
@@ -68,7 +67,6 @@ function ac_paintScreenFac(c){ac_paintScreenDesk(c,GV_ROOM.fac);}
 function ac_paintScreenFacNight(c){ac_paintScreenDesk(c,GV_ROOM.fac);ac_grade(c,"night");}
 function ac_paintScreenFacMorning(c){ac_paintScreenDesk(c,GV_ROOM.fac);ac_grade(c,"morning");}
 function ac_paintScreenPlat(c){ac_paintScreenDesk(c,GV_ROOM.plat);}
-function ac_paintScreenData(c){ac_paintScreenDesk(c,GV_ROOM.data);}
 
 /* ---------- pages close up: binder 12, binder 26, the skill ---------- */
 // a page of a binder filling the frame, the holes for the rings down the left (as Off the shelf drew policy 12's)
@@ -130,12 +128,12 @@ function ac_comment(ctx,t,a,k,ln,res){const x=AC_SC[0]+140,y=AC_PG.y0+4*AC_PG.dy
   withA(ctx,a,()=>{ctx.save();ctx.strokeStyle=rgba(AC_CYAN,0.8);ctx.setLineDash([6,7]);ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(x+40,y-18);ctx.lineTo(x+40,y);ctx.stroke();ctx.restore();});
   ac_card(ctx,x,y,w,h,t,[{s:"date_of_birth has no class",a:ln[0]},{s:"Every column says whether it identifies a person.",size:28,a:ln[1]},{s:"To consider:  personal_data: direct",f:"mono",size:28,a:ln[2]}],{a,k,y0:50,gap:16});
   if(res>0)wc_tick(ctx,x+w-60,y+48,46,GV.gold,res,8);}
-// a change on the faculty's screen, seen from the desk: its title (o.title), its columns (o.rows), those from o.added on new and green, the
+// a change on the faculty's screen, seen from the desk: its title (o.title), its columns (o.rows; left out, the close-up's), those from o.added on new and green, the
 // last typed in as it's written (typed: letters so far, 0 to 1; left out, already there), and the button that opens it for review (sent:
 // pressed, 0 to 1); lights (three, 0 red to 1 green, when shown) are its checks; dim darkens it as the screen sleeps
-function ac_smallChange(ctx,t,o){o=o||{};const [x,y,w,h]=GV_FX.screen,rows=o.rows||["learner_key","full_name","email","date_of_birth"],
-    from=o.added==null?rows.length-1:o.added;gv_screen(ctx,x,y,w,h,o.title||"Add each learner's date of birth",q=>{
-    rows.forEach((c,i)=>{const ry=y+92+i*42,typing=i===rows.length-1&&o.typed!=null,n=typing?Math.round(c.length*clamp(o.typed,0,1)):c.length;if(n<=0)return;
+function ac_smallChange(ctx,t,o){o=o||{};const [x,y,w,h]=GV_FX.screen,rows=o.rows||AC_ROWS.map(r=>r[0]),
+    from=o.added==null?rows.length-1:o.added,dy=rows.length>4?38:42;gv_screen(ctx,x,y,w,h,o.title||"Add each learner's date of birth",q=>{
+    rows.forEach((c,i)=>{const ry=y+92+i*dy,typing=i===rows.length-1&&o.typed!=null,n=typing?Math.round(c.length*clamp(o.typed,0,1)):c.length;if(n<=0)return;
       if(i>=from){q.save();q.fillStyle=rgba([214,240,214],0.9);q.fillRect(x+12,ry-30,w-24,42);q.restore();wc_T(q,"+",x+20,ry,{w:800,size:26,col:GV.greenInk});}
       wc_T(q,c.slice(0,n),x+48,ry,{w:600,size:26,col:WC_DARK,f:"mono"});
       if(typing&&n<c.length&&Math.floor(t*3)%2===0){q.save();q.fillStyle=rgba(WC_DARK,0.8);q.fillRect(x+48+tw(q,c.slice(0,n),26,600,"mono")+3,ry-24,3,28);q.restore();}});
@@ -454,7 +452,7 @@ function ac_agentsPage(ctx,t,o){o=o||{};const A=AC_AG,u=o.land==null?1:o.land;if
   wc_T(ctx,"AGENTS.md",44,66,{w:500,size:28,col:WC_MUTED,f:"mono"});["Working here","as an AI agent"].forEach((s,i)=>wc_T(ctx,s,44,146+i*54,{w:800,size:42,col:WC_DARK}));
   [["What you may do",3],["Your access",3],["What you must not do",4]].forEach(([s,n],i)=>{const y=290+i*140;wc_T(ctx,s,44,y,{w:700,size:30,col:WC_INK});gv_lines(ctx,44,y+28,A.w-110,n,24,0.9);});
   ac_star(ctx,A.w-92,76,1.4,t,o.star||0);ctx.restore();}
-// the platform team's desk, close: its front, drawn over Sam; on his left screen a log, on the right, small, the agent's access (a, 0 to 1)
+// the platform team's desk, close: its front, drawn over Sam; on the left screen a log, on the right, small, the agent's access (a, 0 to 1)
 function ac_platDesk(ctx){ctx.drawImage(wc_kept("acPlatDesk",W,H,gv_paintPlatformDesk),0,0);}
 function ac_platScreens(ctx,t,a){const [[x1,y1,w1,h1],[x2,y2,w2,h2]]=GV_PX.screens;gv_screen(ctx,x1,y1,w1,h1,null,q=>gv_lines(q,x1+30,y1+80,w1-80,7,30,0.9));
   gv_screen(ctx,x2,y2,w2,h2,"Access",q=>{if(a<=0.01)return;withA(q,a,()=>{wc_panel(q,x2+20,y2+58,w2-40,h2-76,{kind:"card",dashed:true,role:WC_SIDE.tech,seed:83});
@@ -565,7 +563,7 @@ function ac_parts(ctx,t,a){const T_=AC_PT;AC_PARTS.forEach(([s_,k],i)=>{const p=
       else wc_tick(ctx,x+58,cy-4,40,GV.goldInk,1,7);}
     wc_T(ctx,s_,x+104,cy+13,{w:700,size:36,col:WC_DARK});});ctx.restore();});}
 
-const WC_PLACES={screenMorning:ac_paintScreenFacMorning,dusk:ac_paintDusk,night:ac_paintNight,faculty:gv_paintFaculty,facDusk:ac_paintFacDusk,facNight:ac_paintFacNight,facMorning:ac_paintFacMorning,
-  screenFac:ac_paintScreenFac,screenNight:ac_paintScreenFacNight,screenPlat:ac_paintScreenPlat,screenData:ac_paintScreenData,data:gv_paintData,
-  boardData:c=>gv_paintBoardClose(c,GV_ROOM.data),office:gv_paintOffice,boardGov:c=>gv_paintBoardClose(c,GV_ROOM.gov),desk:gv_paintDesk,
+const WC_PLACES={screenMorning:ac_paintScreenFacMorning,dusk:ac_paintDusk,night:ac_paintNight,faculty:gv_paintFaculty,facDusk:ac_paintFacDusk,facMorning:ac_paintFacMorning,
+  screenFac:ac_paintScreenFac,screenNight:ac_paintScreenFacNight,screenPlat:ac_paintScreenPlat,data:gv_paintData,
+  boardData:c=>gv_paintBoardClose(c,GV_ROOM.data),office:gv_paintOffice,boardGov:c=>gv_paintBoardClose(c,GV_ROOM.gov),
   platClose:gv_paintPlatformClose,page:ac_paintPage,sheet:ac_paintSheet,screenBig:ac_paintScreenBig,desk26:ac_paintDesk26,desk12:ac_paintDesk12};

@@ -14,7 +14,7 @@
 # A major for the imagined night, then and at the end; D major for today, which shares every note of A major but B.
 # The rules of the series' sound (decided with the master data films, 20 October 2026) hold, and tools/quiet.py checks them:
 #  - Music under the opening, then only from time to time, never as a bed under the voice: after the opening no chapter has music for
-#    more than half its length, or for 12 seconds without a break. Under a line, the opening's guitar keeps to the thumb and a finger.
+#    more than half its length, or for 12 seconds without a break. Under a line, the opening's guitar plays fewer notes, and softer.
 #  - Nothing tense, trembling or pulsing: no urgent pulse, even at the three failed checks; no tremolo on the piano; a slight vibrato.
 #  - Nothing beats on a phone's one speaker: every note is tuned just, a whole-number ratio of A (or of the D a fourth above it), so
 #    the overtones of a chord meet exactly.

@@ -1,13 +1,25 @@
 -- The learning team's follow-up list (DEC-SC-01): each current short-course enrolment with no
 -- email, which can't be matched to a learner until the team finds who it is. A test checks the
 -- data (warn on any, stop above five); this list tracks what people do about each one
--- (docs/conventions.md, Tests). It reads staging: an enrolment with no email never reaches the core.
+-- (docs/conventions.md, Tests).
+--
+-- It reads the source, not staging: on the night more than five enrolments have no email, the
+-- staging test fails and dbt skips what's built from staging, and this list is what the team
+-- needs that morning. So it repeats staging's two steps it needs: trim, and qualify the key.
 
 with
 
 enrolments as (
 
-    select * from {{ ref('stg_short_courses__enrolments') }}
+    select
+        {{ business_key('SC', 'upper(trim(enrolment_id))') }} as enrolment_bk,
+        nullif(lower(trim(customer_email)), '') as email,
+        trim(course_code) as course_code,
+        trim(course_name) as course_name,
+        lower(trim(enrolment_status)) as enrolment_status,
+        cast(_valid_from as timestamp) as recorded_from,
+        cast(_is_current as boolean) as is_current_version
+    from {{ source('short_courses', 'enrolments') }}
 
 ),
 
@@ -31,4 +43,4 @@ select
 from enrolments
 inner join first_recorded on enrolments.enrolment_bk = first_recorded.enrolment_bk
 where enrolments.is_current_version
-    and enrolments.customer_bk is null
+    and enrolments.email is null

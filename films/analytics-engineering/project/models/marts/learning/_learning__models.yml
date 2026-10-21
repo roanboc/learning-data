@@ -7,9 +7,6 @@ models:
       their email at the platform; an enrolment leaves the list when it has one (DEC-SC-01). A rule
       about what people do, tracked here, not failed as a test.
     config:
-      # In the credential model's group: it reads staging, which is private to that group. An
-      # enrolment with no email never reaches the core.
-      group: credential_model
       meta:
         grain: One row per current short-course enrolment with no email
         owner: Learning team

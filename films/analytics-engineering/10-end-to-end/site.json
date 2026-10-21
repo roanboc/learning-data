@@ -44,5 +44,7 @@
     "once": ["skills/review-metadata/find_repeats.py", "models/core/course/_course__columns.md", "models/marts/finance/_finance__models.yml", "models/marts/planning/_planning__models.yml"],
     "evolve": ["models/marts/finance/mart_finance__tuition_forgone.sql", "models/marts/finance/", "exposures/finance/", "seeds/reference/finance/", "seeds/expected/finance/", "docs/conventions.md"],
     "building": ["sources/", "models/core/", "models/marts/", "docs/conventions.md"]
-  }
+  },
+  "past": ["York Minster's tracing floor, the 1300s", "The drawings were for the work; the windows are what stayed."],
+  "past_es": ["El piso de trazado de la catedral de York, siglo XIV", "Los dibujos eran para el trabajo; las ventanas son lo que quedó."]
 }

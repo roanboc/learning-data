@@ -1,0 +1,15 @@
+[
+  {
+    "name": "What it must be able to do",
+    "key": "what-it-must-do-en",
+    "dir": "films/enterprise-architecture/4-what-it-must-do/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/what-it-must-do/film.js",
+    "video": "dist/what-it-must-do.mp4",
+    "file": "what-it-must-do.mp4",
+    "captions": [["films/enterprise-architecture/4-what-it-must-do/captions/en.srt", "what-it-must-do.en.srt"], ["films/enterprise-architecture/4-what-it-must-do/captions/es.srt", "what-it-must-do.es.srt"]],
+    "paths": ["films/enterprise-architecture/4-what-it-must-do/source", ":(exclude)films/enterprise-architecture/4-what-it-must-do/source/src/i18n/es/captions.js", "films/enterprise-architecture/shared", "films/analytics-engineering/shared", "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js", "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src", "films/a-sharper-sketch/source/src", "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts"],
+    "legibility": {"texts": 201, "under_28": "0%", "under_20": 0, "median": 30, "status": "Drawn to the rule"}
+  }
+]

@@ -20,6 +20,7 @@ A new enterprise architect, Tomás, joins a publicly owned energy utility and do
 | [Today, and where it's going](https://roanboc.github.io/learning-data/enterprise-architecture/today-and-where-its-going/) | Applications, technology and the path to a target | 5 min | 10 | 3 questions | [script](7-today-and-where-its-going/script.md) · [source](7-today-and-where-its-going/source/README.md) |
 | [Now the questions appear](https://roanboc.github.io/learning-data/enterprise-architecture/now-the-questions-appear/) | Decisions, questions and measures | 6 min | 11 | 3 questions | [script](8-now-the-questions-appear/script.md) · [source](8-now-the-questions-appear/source/README.md) |
 | [Rules with a home](https://roanboc.github.io/learning-data/enterprise-architecture/rules-with-a-home/) | Objects, owners and rules | 8 min | 12 | 4 questions | [script](9-rules-with-a-home/script.md) · [source](9-rules-with-a-home/source/README.md) |
+| [When strategy moves](https://roanboc.github.io/learning-data/enterprise-architecture/when-strategy-moves/) | Change, owners and contracts | 7 min | 11 | 3 questions | [script](10-when-strategy-moves/script.md) · [source](10-when-strategy-moves/source/README.md) |
 
 For the whole series, on the site: [12 labs](https://roanboc.github.io/learning-data/enterprise-architecture/labs/) and [26 scenarios](https://roanboc.github.io/learning-data/enterprise-architecture/scenarios/), in English and Spanish, from the words in [site/assets/enterprise-architecture/](../../site/assets/enterprise-architecture/).
 <!-- /films -->

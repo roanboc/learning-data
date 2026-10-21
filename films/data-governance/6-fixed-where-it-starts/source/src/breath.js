@@ -1,0 +1,13 @@
+/* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
+   hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
+   Three wordless moments: the basin at the door, then the title; the mop put away; and the ending. */
+const BREATH={
+"clinics":{"hold":{"first":0.4,"second":0.6,"autopsy":0.5,"wash":0.4,"fall":0.6,"showed":0.6},"breathe":4.6},
+"monday":{"hold":{"amber":0.5,"what":0.4,"issue":0.6,"jun":0.4,"wallet":0.4,"others":0.4,"mop":0.6}},
+"back":{"hold":{"follow":0.3,"path":0.6,"box":0.3,"space":0.6,"third":0.8}},
+"entry":{"hold":{"time":0.5,"email":0.3,"trims":0.3,"work":0.5},"breathe":3.0},
+"never":{"hold":{"stays":0.6,"fails":0.7,"green":0.8}},
+"unknown":{"hold":{"night":0.6,"half":0.4,"pass":0.5,"wallet":0.4,"shape":0.4,"usual":0.8}},
+"rule":{"hold":{"cause":0.6,"rule":0.6,"three":0.8}},
+"blame":{"hold":{"blamed":0.6,"vienna":0.4,"proof":0.4,"letters":0.5,"after":0.8,"lasts":0.6},"breathe":5.0}
+};

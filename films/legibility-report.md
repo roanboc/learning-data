@@ -13,6 +13,7 @@
 
 "Texts" counts the different pieces of on-screen text; "under 28 px" is the share too small to read on a phone; "median" is the typical size, in pixels of the 1920-wide frame. This report now measures the text as it's drawn, after the phone layer, where the first report measured the size each component asked for.
 
+<!-- films: made by site-tools/build_series.py from each film's release.json -->
 | Film | Texts | Under 28 px | Under 20 px | Median | Status |
 |---|---|---|---|---|---|
 | The Inner Life of Data, English | 262 | 0% | 0 | 28 | Reworked |
@@ -47,9 +48,14 @@
 | Who does it, and where meaning changes | 191 | 0% | 0 | 30 | Drawn to the rule |
 | Today, and where it's going | 175 | 0% | 0 | 28.5 | Drawn to the rule |
 | Now the questions appear | 242 | 0% | 0 | 28.7 | Drawn to the rule |
+| Rules with a home | 386 | 0% | 0 | 29.8 | Drawn to the rule |
+| When strategy moves | 423 | 0% | 0 | 28.4 | Drawn to the rule |
+| A map people and agents can read | 617 | 0% | 0 | 28 | Drawn to the rule |
 | One person, many roles | 314 | 0% | 0 | 30 | Drawn to the rule |
+| Who is it? | 299 | 0% | 0 | 28.5 | Drawn to the rule |
 | Which value wins | 303 | 0% | 0 | 28.5 | Drawn to the rule |
 | Lists everyone uses | 285 | 0% | 0 | 28.5 | Drawn to the rule |
+<!-- /films -->
 
 ## What's left
 

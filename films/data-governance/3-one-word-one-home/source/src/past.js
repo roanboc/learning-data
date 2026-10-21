@@ -3,9 +3,9 @@
    a road through the loess hills, two ox carts rolling in the same pair of ruts; the town gate, a stall with the standard measure and
    weight, and a courier bringing the court's orders; the court's slips, close; the county office at Qianling, scribes kneeling at low
    tables, the board of word rules at one scribe's elbow; and the board close, as it was and as it was found in 2002. Its people wear
-   their own time, as the First Emperor's mausoleum museum describes its civil officials (pit K0006): a long robe crossed at the
-   collar and belted, trousers, square-toed shoes; a long cap tied under the chin for an official, a headcloth for others; a writing
-   knife and a whetstone at a scribe's belt; dark colours, black favoured. Nothing borrows a style from Chinese painting, and no
+   their own time (the script's rigour sheet has the sources): a long cap for the official, a headcloth for the others; a long robe
+   crossed at the collar, the left panel over the right, and belted; long trousers and square-toed shoes; a writing knife and a
+   whetstone at a scribe's belt; dark colours, black favoured. Nothing borrows a style from Chinese painting, and no
    characters are drawn: the ink is faint strokes too small to read, and the rules are given in English on cards. The places are
    painted once and kept (the series' finish.js); what moves is drawn every frame. Every name starts with ow_ or OW. */
 

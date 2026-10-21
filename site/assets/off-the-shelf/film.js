@@ -1879,6 +1879,11 @@ const GV={gold:[236,170,34],goldInk:[146,96,0],green:[40,160,96],greenInk:[22,12
 // the meeting room a quiet stone, Noor's room a pale rose, a faculty's office in the old building warm plaster over dark panelling,
 // and the learning team's office (Tom's) a soft apricot
 const GV_ROOM={gov:[244,230,204],plan:[218,230,206],reg:[212,222,238],data:[226,218,238],plat:[206,230,226],meet:[228,224,214],noor:[238,222,224],fac:[242,228,204],learn:[248,218,192]};
+// colours several films share, each with an ink for words on it: the three meanings of award (Who decides, One word, one home):
+// violet the glossary's words, rose the words before Monday, olive degrees only; and the classes of personal data (Who may see it):
+// plum for direct, a paler plum for pseudonymous (still personal, so the same family), plain paper for none
+const GV_MEAN={violet:[110,92,190],rose:[214,96,140],olive:[150,156,56]},GV_MEANINK={violet:[78,58,160],rose:[168,50,98],olive:[94,100,22]};
+const GV_CLASS={direct:[146,52,112],pseudonymous:[214,160,198],none:[250,248,242]},GV_CLASSINK={direct:[112,30,84],pseudonymous:[150,84,130]};
 
 /* ---------- timing ---------- */
 // when a word of a line is said: the line's start, plus the word's share of the line (a whole word: shared/tools/cues.py checks)

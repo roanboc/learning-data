@@ -23,5 +23,7 @@
     "end": "Tres dibujos"
   },
   "next_h": "You've seen today, the target and the path. More films in the series are on the way.",
-  "next_h_es": "Viste hoy, el objetivo y el camino. Vienen más películas de la serie."
+  "next_h_es": "Viste hoy, el objetivo y el camino. Vienen más películas de la serie.",
+  "past": ["An imagined morning in the utility's region, 2045", "Where it's going is drawn as carefully as where it is, and the path between is its own drawing."],
+  "past_es": ["Una mañana imaginada en la región de la empresa, 2045", "Hacia dónde va se dibuja con el mismo cuidado que dónde está, y el camino entre los dos es su propio dibujo."]
 }

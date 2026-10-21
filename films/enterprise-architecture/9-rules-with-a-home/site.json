@@ -25,5 +25,7 @@
     "end": "De vuelta en Tartu"
   },
   "next_h": "You've seen where each rule belongs. More films in the series are on the way.",
-  "next_h_es": "Viste dónde va cada regla. Vienen más películas de la serie."
+  "next_h_es": "Viste dónde va cada regla. Vienen más películas de la serie.",
+  "past": ["A birth in Tartu, Estonia, today", "Each fact has one home and one owner, so it's asked for once."],
+  "past_es": ["Un nacimiento en Tartu, Estonia, hoy", "Cada hecho tiene un solo hogar y un solo responsable, así que se pide una vez."]
 }

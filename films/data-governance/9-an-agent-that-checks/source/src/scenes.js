@@ -42,7 +42,7 @@ scene("night",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
       ac_facDesk(x,"morning");ac_farScreen(x,fx,fy,fw,fh,tt,{cm:1,ok:0});}},
     // the screen: he marks the column, in gold, and the check passes
     {at:P.marks-0.4,place:"screenMorning",keys:[[P.marks-0.4,960,540,1]],push:0.02,draw:(x,tt)=>{
-      ac_change(x,tt,{q:1,cls:fin(tt,P.marks+0.1,0.5),ok:fin(tt,P.pd+0.4,0.5)});ac_comment(x,tt,1,1,null,0);}},
+      ac_change(x,tt,{q:1,clsAt:P.marks+0.1,ok:fin(tt,P.pd+0.4,0.5)});ac_comment(x,tt,1,1,null,0);}},
     // the office: what this shows, each part beside what it stands for
     {at:P.shows,place:"facMorning",keys:[[P.shows,960,540,1]],push:0.02,draw:(x,tt)=>{const g=fin(tt,P.tg[2]-0.1,0.6);
       gv_halo(x,seat[0]-260,GV_FX.top-440,520,440,GV.gold,0.9*g);
@@ -54,7 +54,7 @@ scene("night",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
       ac_tagAt(x,tt,P.tg[2]-0.1,null,seat[0]+40,GV_FX.top-470,"a person who decides",{size:34,wash:GV.gold,washA:0.3});}},
     // wordless: Anil ticks the comment resolved
     {at:P.br,place:"screenMorning",keys:[[P.br,960,540,1.02],[P.br+0.1,960,560,1.06]],d:2.4,push:0,draw:(x,tt)=>{
-      ac_change(x,tt,{q:1,cls:1,ok:1});ac_comment(x,tt,1,1,null,clamp((tt-P.br-0.4)/0.6,0,1));}}]);
+      ac_change(x,tt,{q:1,clsAt:-99,ok:1});ac_comment(x,tt,1,1,null,clamp((tt-P.br-0.4)/0.6,0,1));}}]);
   // imagined, and said so; and who Anil is
   wc_year(ctx,56,72,"Imagined · a few years from now",fin(t,0.5,0.5)*(1-fin(t,P.title,0.4)));
   ac_nameCard(ctx,1250,170,"Anil Kurian","analyst, Faculty of Health",gv_io(t,P.anil-0.1,P.col+0.3,0.4));
@@ -155,7 +155,7 @@ scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id
       gv_behind(x,"anil",seat[0],GV_FX.top,seat[1],{pose:"listen",pose2:"write",mix:gv_io(tt,P.conf-0.4,P.conf+1.8,0.3),flip:true,t:tt,expr:typing?null:"smile"});
       ac_facDesk(x);ac_smallReply(x,tt,{a:fin(tt,P.conf-0.3,0.4),typed:clamp((tt-P.conf)/1.6,0,1)});}},
     // the table again: award_key is none, with Anil's reason; full_name is direct
-    {at:P.cl,place:"screenBig",keys:[[P.cl,960,500,1]],push:0.02,draw:(x,tt)=>ac_classes(x,tt,{unsure:1,ok:clamp((tt-P.classed+0.2)/0.8,0,1),why:clamp((tt-P.reason+0.2)/0.8,0,1)})},
+    {at:P.cl,place:"screenBig",keys:[[P.cl,960,500,1]],push:0.02,draw:(x,tt)=>ac_classes(x,tt,{unsure:1,okAt:P.classed-0.2,why:clamp((tt-P.reason+0.2)/0.8,0,1)})},
     // the change's page: the owners approve, each in gold; the agent's findings fade back, and a gold thread runs from each to who decided it
     {at:P.ow,place:"screenBig",keys:[[P.ow,960,500,1]],push:0.02,draw:(x,tt)=>ac_approvals(x,tt,{ap:[fin(tt,P.yusuf-0.2,0.9),fin(tt,P.fac-0.2,0.9),fin(tt,P.jun-0.2,0.9)],
       dim:fin(tt,P.nothing,0.8),th:clamp((tt-P.brought+0.2)/2.0,0,1)})}]);
@@ -227,7 +227,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
       ac_parts(x,tt,P.tg.map(s=>fin(tt,s-0.15,0.45)));}},
     // eight in the morning: the column marked by a person, in gold
     {at:P.morn,place:"screenMorning",keys:[[P.morn,960,540,1]],push:0.02,draw:(x,tt)=>{
-      gv_halo(x,AC_PG.cls-40,AC_PG.y0+4*AC_PG.dy-58,300,90,GV.gold,0.9*fin(tt,P.dec-0.1,0.6));ac_change(x,tt,{q:1,cls:1,ok:1});ac_comment(x,tt,1,1,null,1);}}]);
+      gv_halo(x,AC_PG.cls-40,AC_PG.y0+4*AC_PG.dy-58,300,90,GV.gold,0.9*fin(tt,P.dec-0.1,0.6));ac_change(x,tt,{q:1,clsAt:-99,ok:1});ac_comment(x,tt,1,1,null,1);}}]);
   wc_year(ctx,56,72,"Imagined · a few years from now",fin(t,0.4,0.5)*(1-fin(t,P.end,0.4)));
   gv_end(ctx,S,t,P.end,"An agent that checks","An agent checks what's written. People decide.","Film 9 of 19");
   wc_paperOver(ctx,S);});

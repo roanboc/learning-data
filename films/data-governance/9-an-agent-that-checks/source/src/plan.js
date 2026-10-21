@@ -89,6 +89,12 @@ function ac_card(ctx,x,y,w,h,t,lines,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.
 // a cyan line moving across a row as the agent reads it
 function ac_reading(ctx,x,y,w,h,a){if(a<=0.01)return;ctx.save();ctx.globalCompositeOperation="multiply";ctx.globalAlpha=a;const g=ctx.createLinearGradient(x,0,x+w,0);
   g.addColorStop(0,rgba([170,214,246],0.0));g.addColorStop(0.15,rgba([170,214,246],0.95));g.addColorStop(1,rgba([170,214,246],0.6));ctx.fillStyle=g;ctx.fillRect(x,y,w,h);ctx.restore();}
+// how wide the series' chip for a class is (gv_classChip's own measure)
+const ac_chipW=(q,cls)=>Math.round(tw(q,cls,28,700)+44);
+// a gold ring round something a person has decided (a, 0 to 1)
+function ac_goldRing(q,x,y,w,h,a){if(a<=0.01)return;q.save();q.strokeStyle=rgba(GV.gold,0.95*a);q.lineWidth=4.5;rr(q,x,y,w,h,h/2);q.stroke();q.restore();}
+// a class the agent drafts: the series' chip in a dashed cyan pill, the agent's, centred on y; returns its width
+function ac_drafted(q,x,y,cls){const w=ac_chipW(q,cls)+24;wc_panel(q,x,y-36,w,72,{kind:"pill",dashed:true,role:WC_SIDE.tech,seed:93});gv_classChip(q,x+12,y,cls);return w;}
 // a red question mark: something nobody has said yet (grey, col: nothing there to check)
 function ac_redQ(ctx,x,y,s,p,col){if(p<=0)return;const k=spring(p);ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,clamp(p*2,0,1),()=>wc_T(ctx,"?",0,0,{w:800,size:s,align:"center",col:col||GV.redInk}));ctx.restore();}
 // a name card: a person's name and what they do
@@ -102,8 +108,9 @@ function ac_tagAt(ctx,t,t0,t1,x,y,s,o){const a=t1==null?fin(t,t0,0.35):gv_io(t,t
 /* ---------- the change, on a screen close up ---------- */
 // the change's page: its title in the bar; the list's name, the governance check's light (ok: 0 red to 1 green) and the approve and
 // merge buttons, grey, which only people use (btn rings them); then its columns, what each says about identifying a person, and the new
-// one marked; what the agent reads (read: the row it's on, fractional; readA), a red question mark where nothing is said (q), and the
-// class Anil writes, in gold (cls); fade sets what's on it back, under something laid over it
+// one marked; each class as the series' chip (gv_classChip); what the agent reads (read: the row it's on, fractional; readA), a red
+// question mark where nothing is said (q), and the class Anil gives it, landing at clsAt in a gold ring, a person's decision; fade sets
+// what's on it back, under something laid over it
 const AC_ROWS=[["learner_key","pseudonymous"],["full_name","direct"],["email","direct"],["award_code","none"],["date_of_birth",""]];
 const AC_PG={x0:400,band:AC_SC[1]+114,head:AC_SC[1]+182,y0:AC_SC[1]+242,dy:58,cls:1010,read:[372,1150],chk:640};
 function ac_change(ctx,t,o){o=o||{};const [x,y,w,h]=AC_SC,P=AC_PG;gv_screen(ctx,x,y,w,h,o.title||"Add each learner's date of birth",q=>withA(q,1-0.85*(o.fade||0),()=>{
@@ -117,11 +124,11 @@ function ac_change(ctx,t,o){o=o||{};const [x,y,w,h]=AC_SC,P=AC_PG;gv_screen(ctx,
   wc_T(q,"column",P.x0,P.head,{w:700,size:28,col:WC_MUTED});wc_T(q,"personal data",P.cls,P.head,{w:700,size:28,col:WC_MUTED});
   AC_ROWS.forEach(([c,k],i)=>{const ry=P.y0+i*P.dy;if(i===AC_ROWS.length-1){q.save();q.fillStyle=rgba([214,240,214],0.9);q.fillRect(x+30,ry-40,w-60,56);q.restore();
       wc_T(q,"+",x+46,ry,{w:800,size:32,col:GV.greenInk});}
-    wc_T(q,c,P.x0,ry,{w:600,size:32,col:WC_DARK,f:"mono"});if(k)wc_T(q,k,P.cls,ry,{w:600,size:32,col:WC_INK,f:"mono"});});
+    wc_T(q,c,P.x0,ry,{w:600,size:32,col:WC_DARK,f:"mono"});if(k)gv_classChip(q,P.cls,ry-11,k);});
   // the agent reading, row by row
   if(o.read!=null&&o.readA>0){const ry=P.y0+o.read*P.dy;ac_reading(q,P.read[0],ry-42,P.read[1],58,o.readA);ac_star(q,P.read[0]-4,ry-13,0.9,t,o.readA);}
-  const ly=P.y0+4*P.dy;ac_redQ(q,P.cls+30,ly+6,56,(o.q||0)*(1-(o.cls||0)));
-  if(o.cls>0){gv_tint(q,P.cls-14,ly-40,236,56,GV.gold,0.8*o.cls);withA(q,o.cls,()=>wc_T(q,"direct",P.cls,ly,{w:700,size:32,col:GV.goldInk,f:"mono"}));}}),{titleSize:32,barH:54});}
+  const ly=P.y0+4*P.dy,cu=o.clsAt==null?0:fin(t,o.clsAt,0.4);ac_redQ(q,P.cls+30,ly+6,56,(o.q||0)*(1-cu));
+  if(cu>0){gv_classChipAt(q,t,o.clsAt,P.cls,ly-11,"direct");ac_goldRing(q,P.cls-9,ly-45,ac_chipW(q,"direct")+18,68,cu);}}),{titleSize:32,barH:54});}
 // the agent's comment, pinned under the new row: the line, the rule and a fix to consider, each coming in (ln: three, 0 to 1); res,
 // Anil's gold tick
 function ac_comment(ctx,t,a,k,ln,res){const x=AC_SC[0]+140,y=AC_PG.y0+4*AC_PG.dy+34,w=960,h=170;if(a<=0.01)return;ln=ln||[1,1,1];
@@ -337,28 +344,28 @@ function ac_tally(ctx,t,o){o=o||{};const [x,y,w,h]=AC_BIG,T_=AC_TL;gv_screen(ctx
   q.save();q.strokeStyle=rgba(WC_PENCIL,0.25);q.lineWidth=1.5;q.beginPath();q.moveTo(760,270);q.lineTo(760,760);q.stroke();q.restore();
   const s=o.says||0;[["7 rows",0],["6 distinct",1],["7 look like an email",2]].forEach(([l,k])=>{const a=clamp(s-k,0,1);if(a>0.01)withA(q,a,()=>wc_T(q,l,T_.rx,T_.ry[k]+8*(1-a),{w:700,size:40,col:WC_DARK}));});
   const d=clamp(s-3,0,1);if(d>0.01)withA(q,d,()=>{wc_T(q,"drafted class",T_.rx,T_.ry[3]-64,{w:600,size:28,col:WC_MUTED});
-    wc_panel(q,T_.rx,T_.ry[3]-42,190,60,{kind:"pill",dashed:true,role:WC_SIDE.tech,seed:93});wc_T(q,"direct",T_.rx+95,T_.ry[3]-2,{w:700,size:32,col:WC_DARK,f:"mono",align:"center"});});},
+    ac_drafted(q,T_.rx,T_.ry[3]-12,"direct");});},
   {titleSize:32,barH:54});}
 
 /* ---------- people decide: what the agent wasn't sure of, Anil's answer, and the owners' approvals ---------- */
-// the drafted classes and their evidence, as the review lists them; two are marked "not sure" (unsure, 0 to 1); once Anil has answered
-// (ok, 0 to 1), award_key is none, in gold, and full_name is direct, in gold; his reason takes the place of award_key's counts (why)
+// the drafted classes, each the series' chip, and their evidence, as the review lists them; two are marked "not sure" (unsure, 0 to 1);
+// once Anil has answered (from okAt), their rows are washed gold, a person's decision: award_key's chip turns to none, full_name's stays
+// direct; his reason takes the place of award_key's counts (why)
 const AC_CLS=[["email","direct","7 rows · 6 distinct · 7 look like an email"],["full_name","direct","7 rows · 7 distinct",1],
   ["learner_key","pseudonymous","7 rows · 7 distinct · 7 look like a hash"],["award_key","pseudonymous","7 rows · 2 distinct · 7 look like a hash",1],
   ...["award_code","award_name","faculty_code","credit_points_required","credit_points_earned","credit_points_remaining"].map(c=>[c,"none","no email, ID or hash"])];
 function ac_notSure(q,x,y,a){if(a<=0.01)return;withA(q,a,()=>{wc_panel(q,x,y-34,140,46,{kind:"pill",seed:97});wc_T(q,"not sure",x+70,y-2,{w:700,size:28,col:WC_INK,align:"center"});});}
-function ac_classes(ctx,t,o){o=o||{};const [x,y,w,h]=AC_BIG,ok=clamp(o.ok||0,0,1),un=clamp(o.unsure||0,0,1);gv_screen(ctx,x,y,w,h,"Add the advisers' call list",q=>{ac_f2Panel(q);
-  [["column",200],["drafted class",640],["evidence",1060]].forEach(([s,hx])=>wc_T(q,s,hx,272,{w:700,size:28,col:WC_MUTED}));
-  AC_CLS.forEach(([c,k,ev,ns],i)=>{const ry=328+i*52,ak=c==="award_key";
-    if(ns){gv_tint(q,180,ry-38,1580,50,WC_SIDE.tech,0.55*un*(1-ok));gv_tint(q,180,ry-38,1580,50,GV.gold,0.6*ok);}
+function ac_classes(ctx,t,o){o=o||{};const [x,y,w,h]=AC_BIG,ok=o.okAt==null?0:clamp((t-o.okAt)/0.8,0,1),un=clamp(o.unsure||0,0,1);gv_screen(ctx,x,y,w,h,"Add the advisers' call list",q=>{ac_f2Panel(q);
+  [["column",200],["drafted class",640],["evidence",1100]].forEach(([s,hx])=>wc_T(q,s,hx,272,{w:700,size:28,col:WC_MUTED}));
+  AC_CLS.forEach(([c,k,ev,ns],i)=>{const ry=328+i*54,ak=c==="award_key";
+    if(ns){gv_tint(q,180,ry-39,1580,54,WC_SIDE.tech,0.55*un*(1-ok));gv_tint(q,180,ry-39,1580,54,GV.gold,0.6*ok);}
     wc_T(q,c,200,ry,{w:600,size:28,col:WC_DARK,f:"mono"});
-    const kc=ns?mix(WC_DARK,GV.goldInk,ok):WC_DARK;
-    if(ak){withA(q,1-ok,()=>wc_T(q,k,640,ry,{w:600,size:28,col:WC_DARK,f:"mono"}));withA(q,ok,()=>wc_T(q,"none",640,ry,{w:600,size:28,col:GV.goldInk,f:"mono"}));}
-    else wc_T(q,k,640,ry,{w:600,size:28,col:kc,f:"mono"});
-    if(ns)ac_notSure(q,640+tw(q,k,28,600,"mono")+22,ry,un*(1-ok));
-    if(ak){const wy=clamp(o.why==null?ok:o.why,0,1);withA(q,1-wy,()=>wc_T(q,ev,1060,ry,{w:500,size:28,col:WC_INK}));
-      withA(q,wy,()=>wc_T(q,"a course, not a person (Anil Kurian)",1060,ry,{w:600,size:28,col:GV.goldInk}));}
-    else wc_T(q,ev,1060,ry,{w:500,size:28,col:k==="none"?WC_MUTED:WC_INK});});},{titleSize:32,barH:54});}
+    if(ak){withA(q,1-ok,()=>gv_classChip(q,640,ry-10,k));if(ok>0)gv_classChipAt(q,t,o.okAt,640,ry-10,"none");}
+    else gv_classChip(q,640,ry-10,k);
+    if(ns)ac_notSure(q,640+ac_chipW(q,k)+22,ry,un*(1-ok));
+    if(ak){const wy=clamp(o.why==null?ok:o.why,0,1);withA(q,1-wy,()=>wc_T(q,ev,1100,ry,{w:500,size:28,col:WC_INK}));
+      withA(q,wy,()=>wc_T(q,"a course, not a person (Anil Kurian)",1100,ry,{w:600,size:28,col:GV.goldInk}));}
+    else wc_T(q,ev,1100,ry,{w:500,size:28,col:k==="none"?WC_MUTED:WC_INK});});},{titleSize:32,barH:54});}
 // the two keys side by side, as the agent sees them: long coded strings, grey bars of one length, whose marks stand for their values, so
 // rows with one value look alike (lp, ap: the marks, 0 to 1); their counts, line by line (lc, ac, 0 to 1; the learner key's ends with a
 // sign of a person); "looks like a hash" under both (tag); the award key's
@@ -381,8 +388,7 @@ function ac_keys(ctx,t,o){o=o||{};const [x,y,w,h]=AC_BIG,s=easeCam(clamp(o.s||0,
     wc_T(q,"4   Classified columns",1074,340,{w:700,size:32,col:WC_DARK});gv_tint(q,1030,372,tw(q,"when in doubt, propose the stricter class",30,500)+20,50,GV.green,0.75*clamp(st*2-1,0,1));
     wc_T(q,"when in doubt, propose the stricter class",1040,408,{w:500,size:30,col:WC_DARK});});
   const dr=o.draft||0;if(dr>0.01)withA(q,dr,()=>{wc_T(q,"drafted class",1000,524,{w:600,size:28,col:WC_MUTED});
-    wc_panel(q,1000,542,250,56,{kind:"pill",dashed:true,role:WC_SIDE.tech,seed:93});wc_T(q,"pseudonymous",1125,580,{w:600,size:30,col:WC_DARK,f:"mono",align:"center"});
-    ac_notSure(q,1272,582,1);});
+    ac_notSure(q,1000+ac_drafted(q,1000,570,"pseudonymous")+18,582,1);});
   ac_card(q,1000,630,740,140,t,["If it hashes the award's code,","it's none: please confirm."],{a:o.ask||0,size:30,y0:58,gap:14,head:false});},{titleSize:32,barH:54});}
 // the agent's question and Anil's answer on his screen, seen from the desk: the answer is typed (typed, 0 to 1), in gold
 function ac_smallReply(ctx,t,o){o=o||{};const [x,y,w,h]=GV_FX.screen;gv_screen(ctx,x,y,w,h,"Add the advisers' call list",q=>{

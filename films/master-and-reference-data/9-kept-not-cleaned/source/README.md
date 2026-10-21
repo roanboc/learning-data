@@ -4,7 +4,7 @@
 
 | File | What it holds |
 |---|---|
-| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Nguyen, Linh, HR, Sichuan, Chengdu, Li Bing, Dujiangyan), and the moment its poster shows (the steward's five gauges, settled, each within the iron bar at its limit). |
+| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Nguyen, Linh, HR, Sichuan, Chengdu, Li Bing, Dujiangyan), and the moment its poster shows (from the opening story: the Min River split in two, its inner and outer channels). |
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). Five lines carry a `say`, so the voice reads their years as years ("two fifty-six B C", "twenty twenty-four", "twenty twenty-five", "twenty twenty-six", "twenty twenty-seven"). The film re-times itself to the voice. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/breath.js` | The few longer pauses: holds after some lines, a pause before data governance in the last chapter, and four wordless moments (the river in spring, then the title; the steward's five measures, settled; the river in spring again, under Kept's last line; and the end card). |

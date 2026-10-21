@@ -18,5 +18,7 @@
   "labs_lead": "Three labs, one idea each, in the order of the film. Break an update, declare a grain, and sort tasks by the shape that does them fastest.",
   "labs_lead_es": "Tres labs, una idea cada uno, en el orden de la película. Rompe una actualización, declara un grano y ordena las tareas según la forma que las hace más rápido.",
   "quiz_lead": "Eight situations about writing and reading: a copy that was missed, half an award, a report on the busiest morning, history overwritten. Decide what you'd do; each answer explains why.",
-  "quiz_lead_es": "Ocho situaciones sobre escribir y leer: una copia que se pasó por alto, medio título, un informe en la mañana más ocupada, la historia sobrescrita. Decide qué harías; cada respuesta explica por qué."
+  "quiz_lead_es": "Ocho situaciones sobre escribir y leer: una copia que se pasó por alto, medio título, un informe en la mañana más ocupada, la historia sobrescrita. Decide qué harías; cada respuesta explica por qué.",
+  "past": ["Pacioli's journal and ledger, 1494", "One set of facts: a shape for writing, a shape for reading."],
+  "past_es": ["El diario y el libro mayor de Pacioli, 1494", "Un conjunto de hechos: una forma para escribir, una forma para leer."]
 }

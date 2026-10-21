@@ -1,0 +1,22 @@
+{
+  "key": "which-value-wins",
+  "title": "Which value wins",
+  "sub": "The same one, everywhere, a series on master and reference data: HMS Beagle's twenty-two clocks, and which one to trust; Linh's records, linked to one person and still disagreeing; one order for every field, hidden in the code, and why the newest value isn't the truest; her legal name and the name she chose; a rule for each field, declared in one place and tested; four emails, each kept for what it's for; every value with its source; a rule change seen before it runs; and the same question at a bank and a shop.",
+  "howto": "The film is drawn in watercolour. Each source wears its role's colour: the student system teal, HR violet, the research office coral, the alumni office green; Linh, as a source of her own details, is the white of the paper. Cyan edges the technical side, gold the business side, and red ink marks the error.",
+  "src": [
+    "fonts.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": ["linked", "which", 1.5],
+  "story": ["clocks"],
+  "say": [
+    ["\\bNguyễn\\b", "Nwin"],
+    ["\\bNguyen\\b", "Nwin"],
+    ["\\bThị\\b", "Tee"],
+    ["\\bLinh's\\b", "Lin's"],
+    ["\\bLinh\\b", "Lin"],
+    ["\\bHR\\b", "H R"],
+    ["\\bHMS\\b", "H M S"]
+  ]
+}

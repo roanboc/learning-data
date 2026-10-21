@@ -95,7 +95,8 @@ def mr_builds_on(lg, f, all_films, R):
 # trademarks its footer names, if not the Databricks and dbt logos; learn: the series' own labs and scenarios, for all its films,
 # if it has them (see series_learn below): dir, the folder under site/assets/ of their engine and words; bundle, the film whose
 # bundle their pages load for its parts (the newest film's if not given); coming, True to count and show those of the films still
-# being made (series.json's "coming") too;
+# being made (series.json's "coming") too; next: the id of the series to watch after this one, which its last film's page offers
+# (in Where next? and beside the series' films) once that series has a film on the site;
 # blocks: the hand-written pages that show its first film's card, between <!-- <id>: made by site-tools/build_series.py --> and
 # <!-- /<id> -->: (path under site/, language, "card", the path from that page to the site's root, and to the series' folder).
 # The series' place among the topics, and its card on the Topics and home pages, are in TOPICS below.
@@ -115,7 +116,7 @@ SERIES = [
                 "es": "TOGAF y ArchiMate son marcas de The Open Group, y Zachman de Zachman International, nombradas solo para identificar esos marcos; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
     dict(id="master-and-reference-data", dir="master-and-reference-data", slug="master-and-reference-data",
          name={"en": "The same one, everywhere", "es": "El mismo, en todas partes"}, builds_on=mr_builds_on,
-         place={"en": "university", "es": "universidad"}, blocks=[],
+         place={"en": "university", "es": "universidad"}, blocks=[], next="data-governance",
          marks={"en": "DAMA and DAMA-DMBOK are trademarks of DAMA International, and ArchiMate of The Open Group, named or drawn only to identify that body of knowledge and that notation. This project is not affiliated with or endorsed by them.",
                 "es": "DAMA y DAMA-DMBOK son marcas de DAMA International, y ArchiMate de The Open Group, nombradas o dibujadas solo para identificar ese cuerpo de conocimiento y esa notación. Este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
 ]
@@ -162,14 +163,24 @@ def minutes(sec):
 
 def number(d, i):
     """A film's place in its series, from 0: its folder's number less one ("3-which-value-wins" is 2), so a series' films can come
-    out in any order; a folder without a number takes its place in series.json's list."""
+    out in any order; a folder without a number takes its place in series_data()'s list."""
     m = re.match(r"\d+", d)
     return int(m.group()) - 1 if m else i
 
 
+def series_data(S):
+    """A series' series.json, with "films": its films' folders, in order. A film is a numbered folder with a source/film.json,
+    so a new film needs no line in a shared list (a folder without a number can still be listed in series.json's "films")."""
+    series = json.loads((S["root"] / "series.json").read_text())
+    found = sorted((d.name for d in S["root"].iterdir() if re.match(r"\d+-", d.name) and (d / "source" / "film.json").exists()),
+                   key=lambda d: int(re.match(r"\d+", d).group()))
+    series["films"] = found + [d for d in series.get("films", []) if d not in found]
+    return series
+
+
 def films(S=FW):
     """Every film of a series whose player is on the site, in order, with everything its pages need."""
-    series = json.loads((S["root"] / "series.json").read_text())
+    series = series_data(S)
     out = []
     for i, d in enumerate(series["films"]):
         src = S["root"] / d / "source"
@@ -411,7 +422,7 @@ def crumbs(lg, R, S, up=None):
 def num(lg, f):
     """A film's place in its series, always as "Film 2 of 7": site-tools/check_site.py allows numbering only in this form.
     A series still being made counts the films it plans ("planned" in its series.json), not only those made so far."""
-    ser = json.loads((f["series"]["root"] / "series.json").read_text())
+    ser = series_data(f["series"])
     n = ser.get("planned", len(ser["films"]))  # a series still being made says how many films it will have
     return T(lg, "Film", "Película") + f' {f["index"] + 1} {T(lg, "of", "de")} {n}'
 
@@ -452,13 +463,26 @@ def builds_on(lg, f, all_films_, R):
     return f["series"]["builds_on"](lg, f, all_films_, R)
 
 
+def next_series(f):
+    """The series to watch after f's ("next" in SERIES), with its films on the site, if f is the last film its series plans and that
+    series has a film on the site; else None."""
+    S = f["series"]; ser = series_data(S)
+    if not S.get("next") or f["index"] + 1 < ser.get("planned", len(ser["films"])):
+        return None
+    after = next((x for x in SERIES if x["id"] == S["next"]), None)
+    shown = films(after)[1] if after else []
+    return (after, shown) if shown else None
+
+
 def series_nav(lg, f, films_, R, rel):
     """In the series: the previous and the next film, as cards, and every film of the series, numbered, with this one marked.
     rel is the path from the page to the series folder."""
     by = {x["index"]: x for x in films_}; prv, nxt = by.get(f["index"] - 1), by.get(f["index"] + 1)
     nm = lambda x: E(x["title"] if lg == "en" else x["site"]["title_es"])
+    after = None if nxt else next_series(f)  # the last film: the next series' first film
     cards = ([card(lg, prv, rel, R, kicker=f'← {T(lg, "Previous", "Anterior")} · {num(lg, prv)}')] if prv else []) + \
-            ([card(lg, nxt, rel, R, kicker=f'{T(lg, "Next", "Siguiente")} · {num(lg, nxt)} →')] if nxt else [])
+            ([card(lg, nxt, rel, R, kicker=f'{T(lg, "Next", "Siguiente")} · {num(lg, nxt)} →')] if nxt else []) + \
+            ([card(lg, after[1][0], f'{R if lg == "en" else R[3:]}{after[0]["slug"]}/', R, kicker=f'{T(lg, "Next series", "Siguiente serie")} · {SN(lg, after[0])} →')] if after else [])
     lis = "\n".join(f'<li><a href="{rel}{x["key"]}/"' + (' aria-current="page"' if x is f else "") + f'><span class="n">{x["index"] + 1}</span>{nm(x)}</a></li>' for x in films_)
     return (f'<section class="module" id="in-the-series" aria-labelledby="series-h">\n<div class="mhead"><div><h2 id="series-h">{T(lg, "In the series", "En la serie")}: <a href="{rel}">{SN(lg, f["series"])}</a></h2>'
             f'<p>{num(lg, f)}.</p></div></div>\n'
@@ -515,7 +539,9 @@ def film_page(lg, f, films_, series):
     meta = (f'<p class="meta-row"><span>{f["len"]} min</span>{extra}<span>Pause and think</span><span>English captions</span></p>' if lg == "en" else
             f'<p class="meta-row"><span>{f["len"]} min</span>{extra}<span>Pausa para pensar</span><span>En inglés, con subtítulos en español</span></p>')
     nm = lambda x: E(x["title"] if lg == "en" else x["site"]["title_es"])
+    after = None if nxt else next_series(f)  # the last film: the series to watch next, once it's on the site
     third = (f'<a class="btn" href="../{nxt["key"]}/">{T(lg, "Next in the series", "Sigue en la serie")}: {nm(nxt)}</a>' if nxt else
+             f'<a class="btn" href="{R if lg == "en" else R[3:]}{after[0]["slug"]}/">{T(lg, "Next series", "Siguiente serie")}: {SN(lg, after[0])}</a>' if after else
              f'<a class="btn" href="../">{T(lg, "The whole series", "Toda la serie")}: {SN(lg, S)}</a>')
     player = (f'<div class="player" data-labs="{"labs/" if learn else "../labs/" if SL else ""}">\n<audio id="snd" preload="metadata" src="{R}assets/{key}/soundtrack.mp3"></audio><div class="poster"><img src="{R}assets/{key}-poster.jpg" alt="" width="1280" height="720" data-play>'
               f'<div class="poster-cta"><button type="button" class="play-badge" data-play>{T(lg, "▶ Play the film", "▶ Ver la película")} · {f["len"]} min</button><button type="button" class="think-badge" data-think>{T(lg, "Play with pauses to think", "Ver con pausas para pensar")}</button></div></div>'
@@ -613,9 +639,9 @@ def series_page(lg, series, films_, S=FW):
         body += (f'<section class="module" id="coming" aria-labelledby="coming-h">\n<div class="mhead"><div><h2 id="coming-h">{E(series[T(lg, "coming_h", "coming_h_es")])}</h2><p>{E(series[T(lg, "coming_p", "coming_p_es")])}</p></div></div>\n'
                  f'<ol class="series-list coming">\n{rows}\n</ol>\n</section>\n\n')
     body += f'<section class="module" id="thread" aria-labelledby="thread-h">\n<div class="mhead"><div><h2 id="thread-h">{E(series[T(lg, "thread_h", "thread_h_es")])}</h2><p>{E(series[T(lg, "thread", "thread_es")])}</p></div></div>\n</section>\n\n'
-    if "past" in series:
-        # a film's row is in its own site.json ("past", "past_es") if it has one, else at its place in series.json's list
-        past = lambda x: x["site"].get(T(lg, "past", "past_es")) or series[T(lg, "past", "past_es")][x["index"]]
+    if "past_h" in series:
+        # a film's row is in its own site.json ("past", "past_es")
+        past = lambda x: x["site"][T(lg, "past", "past_es")]
         rows = "\n".join(f'<tr><td>{E(x["title"] if lg == "en" else x["site"]["title_es"])}</td><td>{E(past(x)[0])}</td><td>{E(past(x)[1])}</td></tr>' for x in films_)
         body += (f'<section class="module" id="past" aria-labelledby="past-h">\n<div class="mhead"><div><h2 id="past-h">{E(series[T(lg, "past_h", "past_h_es")])}</h2></div></div>\n'
                  f'<div class="prose"><table><thead><tr><th>{T(lg, "Film", "Película")}</th><th>{T(lg, "Opens with", "Empieza con")}</th><th>{T(lg, "Still true today", "Sigue siendo cierto")}</th></tr></thead><tbody>\n{rows}\n</tbody></table></div>\n</section>\n\n')
@@ -814,7 +840,7 @@ def block(lg, what, R, rel, films_, S=FW):
     """A series' card on a hand-written page: its first film, with a kicker that names the series."""
     if not films_:
         return ""
-    n = len(json.loads((S["root"] / "series.json").read_text())["films"])
+    n = len(series_data(S)["films"])
     kicker = f'{SN(lg, S)}: {NUM[lg][n - 1]} {T(lg, "films", "películas")}' if n > 1 else SN(lg, S)
     return card(lg, films_[0], rel, R, kicker=kicker) + "\n"
 
@@ -854,6 +880,63 @@ def readme(S=FW):
     return src[:i + len(o)] + "\n" + "\n".join(rows) + "\n" + src[j:]
 
 
+# ---------------------------------------------------------------- the lists every film has a row in
+# Each film keeps its rows in its own folder, so two films never edit the same line: its Decided rows in decided.md, and its
+# videos with their legibility in release.json (which .github/scripts/films.py also gathers for the release workflow). lists()
+# makes the shared lists from them: each series' Decided table in its proposal.md, and the table of films/legibility-report.md.
+DECIDED = ("<!-- decided: made by site-tools/build_series.py from decided.md, the series' and each film's -->", "<!-- /decided -->")
+LEGIBLE = ("<!-- films: made by site-tools/build_series.py from each film's release.json -->", "<!-- /films -->")
+MONTHS = "January February March April May June July August September October November December".split()
+
+
+def fill(src, marks, rows):
+    """src with the lines between the two marks replaced by rows."""
+    i, j = src.index(marks[0]), src.index(marks[1])
+    return src[:i + len(marks[0])] + "\n" + "\n".join(rows) + "\n" + src[j:]
+
+
+def decided_rows(p):
+    """A decided.md's rows: "| 16 October 2026 | the decision |"."""
+    return [l for l in p.read_text().split("\n") if re.match(r"\| \d", l)] if p.exists() else []
+
+
+def when(row, p):
+    """A row's date, to sort by."""
+    m = re.match(r"\| (\d{1,2}) (\w+) (\d{4}) \|", row)
+    if not m or m.group(2) not in MONTHS:
+        sys.exit(f"{p.relative_to(ROOT)}: a row must start with its date, as \"| 16 October 2026 |\": {row[:60]}")
+    return (int(m.group(3)), MONTHS.index(m.group(2)), int(m.group(1)))
+
+
+def decided(folder):
+    """A series' proposal.md with its Decided table made from its decided.md and each film's (films/<series>/<n-film>/decided.md),
+    by date; rows of the same day keep their order, the series' first, then the films' by number."""
+    files = [folder / "decided.md"] + [d / "decided.md" for d in sorted((d for d in folder.iterdir() if re.match(r"\d+-", d.name)),
+                                                                        key=lambda d: int(re.match(r"\d+", d.name).group()))]
+    rows = [(when(r, p), r) for p in files for r in decided_rows(p)]
+    rows.sort(key=lambda x: x[0])
+    return fill((folder / "proposal.md").read_text(), DECIDED, ["| Date | Decision |", "|---|---|"] + [r for _, r in rows])
+
+
+def legibility():
+    """films/legibility-report.md, with its table of films made from each film's release.json."""
+    sys.path.insert(0, str(ROOT / ".github" / "scripts"))
+    import films as release_films
+    rows = ["| Film | Texts | Under 28 px | Under 20 px | Median | Status |", "|---|---|---|---|---|---|"]
+    for e in release_films.films():
+        L = e.get("legibility")
+        if L:
+            rows.append(f"| {e['name']} | {L['texts']} | {L['under_28']} | {L['under_20']} | {L['median']} | {L['status']} |")
+    return fill((ROOT / "films" / "legibility-report.md").read_text(), LEGIBLE, rows)
+
+
+def lists():
+    """Every shared list made from the films' own rows: (path from the repository's root, text)."""
+    out = [(p.parent / "proposal.md", decided(p.parent)) for p in sorted((ROOT / "films").glob("*/proposal.md"))
+           if DECIDED[0] in p.read_text()]
+    return [(p.relative_to(ROOT).as_posix(), s) for p, s in out] + [("films/legibility-report.md", legibility())]
+
+
 def pages():
     """Every generated page, of every series, and the Topics page: (path under site/, html)."""
     out = [("topics/index.html", topics_page("en")), ("es/topics/index.html", topics_page("es"))]
@@ -882,9 +965,13 @@ if __name__ == "__main__":
         p.parent.mkdir(parents=True, exist_ok=True)
         if not p.exists() or p.read_text() != text:
             p.write_text(text); n += 1
+    for rel, text in lists():
+        if (ROOT / rel).read_text() != text:
+            (ROOT / rel).write_text(text); n += 1
     for S in SERIES:
         if readme(S) != (S["root"] / "README.md").read_text():
             (S["root"] / "README.md").write_text(readme(S)); n += 1
         series, films_ = films(S)
         print(f"{S['name']['en']}: {len(films_)} film{'s' if len(films_) != 1 else ''}: " + ", ".join(f"{f['title']} ({f['len']} min, {offers('en', f)})" for f in films_))
-    print(f"wrote {n} of {len(pages()) + len(blocks())} pages (the series' own and the Topics page, and their blocks in {len(blocks())} others)")
+    print(f"wrote {n} of {len(pages()) + len(blocks()) + len(lists()) + len(SERIES)} files (the series' own pages and the Topics page, their blocks in {len(blocks())} others, "
+          f"the series' READMEs, and {len(lists())} lists the films have rows in)")

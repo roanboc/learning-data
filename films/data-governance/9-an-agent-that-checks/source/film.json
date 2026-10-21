@@ -1,0 +1,33 @@
+{
+  "key": "an-agent-that-checks",
+  "title": "An agent that checks",
+  "sub": "The ninth film of a series on data governance: governance's rules, written as steps an agent follows on every change. It finds, drafts and flags; people decide. And the agent is governed too.",
+  "howto": "The film is painted in watercolour, in the university's own rooms. Behind each person, a soft wash of their side: gold for the business side, cyan for the technical side. The agent is a small turning star on a dashed cyan card, never a person. Gold is a person's decision; green runs in the work, grey can go, and red is what nobody owns yet.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "decides",
+    "decides",
+    30
+  ],
+  "say": [
+    [
+      "\\bAnil Kurian\\b",
+      "Unnil Coo-rean"
+    ],
+    [
+      "\\bAnil\\b",
+      "Unnil"
+    ],
+    [
+      "\\bYusuf Demir\\b",
+      "Yoosoof Demeer"
+    ],
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ]
+  ]
+}

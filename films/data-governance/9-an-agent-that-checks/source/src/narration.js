@@ -39,7 +39,7 @@ const NARR={
  {"id":"owners","gap":0.8,"text":"Then the owners decide: the faculty, its classes and its rule; Yusuf, the new owner; Jun, the code."},
  {"id":"decided","gap":0.8,"text":"The agent decided nothing. It brought each decision to the right person, with the evidence."}]},
 "agent":{"name":"Governed, too","lead":1.0,"tail":1.0,"vo":[
- {"id":"binder","gap":0.8,"text":"Binder 26 says: AI use follows the organisation's data policies. The agent is governed, too.","say":"Binder twenty-six says: A. I. use follows the organisation's data policies. The agent is governed, too."},
+ {"id":"binder","gap":0.8,"text":"Binder 26 says: AI use follows the organisation's data policies. The agent is governed, too."},
  {"id":"own","gap":0.8,"text":"It has its own identity, reads only what it's granted, and writes only in its own workspace."},
  {"id":"samples","gap":0.8,"text":"It works from counts and small samples, never bulk personal data, and only reads the glossary."},
  {"id":"approve","gap":0.8,"text":"And it can't approve: approvals come from owners, and the agent owns nothing."},
@@ -51,6 +51,7 @@ const NARR={
  {"id":"change","gap":0.8,"text":"A change to a step is reviewed like any other: data governance approves it, and the next review follows it."},
  {"id":"trust","gap":0.8,"text":"People trust a review they can read, question and overrule."}]},
 "close":{"name":"That night","lead":1.0,"tail":1.0,"vo":[
- {"id":"made","gap":0.8,"text":"That night, a few years from now, is made of what you've just seen: rules written as checks, steps in plain words, an agent with little access, and people who decide."},
+ {"id":"made","gap":0.3,"text":"That night, a few years from now, is made of what you've just seen:"},
+ {"id":"parts","gap":0.8,"text":"rules written as checks, steps in plain words, an agent with little access, and people who decide."},
  {"id":"last","gap":0.8,"text":"An agent checks what's written. People decide."}]}
 };

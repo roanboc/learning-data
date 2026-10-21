@@ -23,5 +23,7 @@
     "end": "Comprobado, por ahora"
   },
   "next_h": "You've seen why the utility must change. Next: what it must be able to do.",
-  "next_h_es": "Viste por qué la empresa tiene que cambiar. Lo siguiente: qué tiene que ser capaz de hacer."
+  "next_h_es": "Viste por qué la empresa tiene que cambiar. Lo siguiente: qué tiene que ser capaz de hacer.",
+  "past": ["The north-east blackout, 1965", "When no one sees the whole, shared rules hold it together."],
+  "past_es": ["El apagón del noreste, 1965", "Cuando nadie ve el conjunto, las reglas compartidas lo sostienen."]
 }

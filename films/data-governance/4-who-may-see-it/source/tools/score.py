@@ -268,14 +268,15 @@ for k, (r, dt) in enumerate([(0, 0.0), (3, 0.35), (4, 0.6), (1, 0.85), (0, 1.1),
     paper(copied - 0.2 + dt, 0.012, -0.8 + 0.4 * r, 0.2)
 
 # 8. Read from the grants: a turn into December; the plan into the tray; the calendar's page; the high E as the access ends; air as
-#    the names gather, a knock for each group's card; on the table, E and C again for the two permissions, a knock for each tag, a
-#    falling third as the band settles, the chip set down; the strings and the mark under the end card
+#    the names glide into their groups, a knock as each group's card comes in over them; on the table, E and C again for the two
+#    permissions, a knock for each tag, a falling third as the band settles, the chip set down; the strings and the mark under the
+#    end card
 turn(CADD9, S0('grants'), (67, 72))
 paper(W('grants', 'plan', 'faculties'), 0.02, -0.6, 0.6); paper(W('grants', 'plan', 'fifteenth', 0.3), 0.016, -0.3, 0.25)
 ends = W('grants', 'plan', 'ends'); piano(76, ends, 0.024, -0.6); air(ends, 1.0, 0.008, -0.6)
-two = W('grants', 'two', 'two'); air(two - 0.3, 2.2, 0.01, 0.0)
+two = W('grants', 'two', 'two'); air(two + 0.3, 1.4, 0.01, 0.0)
 for k in range(2):
-    knock(two + 0.6 + 0.15 * k, 0.014, -0.3 + 0.6 * k, 300)
+    knock(two + 0.95 + 0.11 * k, 0.014, -0.3 + 0.6 * k, 300)
 piano(64, G('grants', 'one'), 0.032, 0.3); knock(G('grants', 'one', 0.2), 0.014, -0.3)
 piano(60, G('grants', 'another'), 0.032, -0.3); knock(G('grants', 'another', 0.2), 0.014, 0.3)
 masked(W('grants', 'another', 'another', 0.6), 0.036, 0.3); chip(W('grants', 'write', 'once', 0.05), 0.02, 0.3)

@@ -2390,16 +2390,16 @@ function gv_signoff(ctx,x,y,w,o){o=o||{};const k=w/1000,rows=o.rows||[],ask=o.as
 // stewards, Who may see it's classes, Rules that run's rules, Teachers of data's sign-offs). Drawn at (x,y), w wide: at 1000, in a
 // close-up, its words are 28 px or more. o.kicker, the register's name, above o.title, the page's; o.cols, the headings, each
 // [heading, share of the width]; o.rows, each an array of cells. A cell is words, null for a gap (lit red as o.missA goes 0 to 1),
-// or {t, mono, red, hand, strike} (a code, a "TBC" in red, words written by hand, struck through as strike goes 0 to 1), or
-// {chip:"direct", p} for a class chip (popping in as p goes 0 to 1). o.p (0 to 1) brings the rows in one by one; o.hi, a row's
-// index or several, washed gold as o.hiA goes 0 to 1; o.foot, a line written by hand at the foot as o.footP goes 0 to 1 ("classed
-// by Mei Tanaka"). o.turn (0 to 1) turns the page over: it folds from its right edge towards the binding, its blank back over its
-// front, so the page a film draws under it shows. A chip is 28 px, so "pseudonymous" needs a column of 0.3 of the width or more.
-// gv_registerH(o) is its height at 1000 wide. Returns the page's height, each row's middle and each column's left edge, so a film
-// can point at a cell
+// or {t, mono, red, hand, strike} (a code, a "TBC" in red, words written by hand as p goes 0 to 1, struck through as strike goes
+// 0 to 1), or {chip:"direct", p} for a class chip (popping in as p goes 0 to 1). o.p (0 to 1) brings the rows in one by one; o.hi,
+// a row's index or several, washed gold as o.hiA goes 0 to 1; o.foot, a line written by hand at the foot as o.footP goes 0 to 1
+// ("classed by Mei Tanaka"). o.turn (0 to 1) turns the page over: it folds from its right edge towards the binding, its blank back
+// over its front, so the page a film draws under it shows; o.h, the page's height at 1000 wide, so two pages of one book match (the
+// taller one's gv_registerH). A chip is 28 px, so "pseudonymous" needs a column of 0.3 of the width or more. gv_registerH(o) is its
+// height at 1000 wide. Returns the page's height, each row's middle and each column's left edge, so a film can point at a cell
 const GV_REG={top:172,head:206,row:66,pad:16};
 function gv_registerH(o){return GV_REG.head+22+GV_REG.row*(o.rows||[]).length+(o.foot?96:28)+20;}
-function gv_register(ctx,x,y,w,o){o=o||{};const k=w/1000,rows=o.rows||[],cols=o.cols||[],n=rows.length,p=o.p==null?1:o.p,mA=o.missA==null?1:o.missA,h=gv_registerH(o),
+function gv_register(ctx,x,y,w,o){o=o||{};const k=w/1000,rows=o.rows||[],cols=o.cols||[],n=rows.length,p=o.p==null?1:o.p,mA=o.missA==null?1:o.missA,h=Math.max(gv_registerH(o),o.h||0),
     turn=clamp(o.turn||0,0,1),hi=[].concat(o.hi==null?[]:o.hi),line=(x0,x1,ly,col,a,lw)=>{ctx.strokeStyle=rgba(col,a);ctx.lineWidth=lw||2;ctx.beginPath();ctx.moveTo(x0,ly);ctx.lineTo(x1,ly);ctx.stroke();};
   const cx=[48];cols.forEach(([,s],i)=>cx.push(cx[i]+904*s));const R=rows.map((_,i)=>y+(GV_REG.head+22+GV_REG.row*i+33)*k),C=cx.slice(0,-1).map(c=>x+c*k);
   if(turn>=1)return{h:h*k,rows:R,cols:C};
@@ -2421,7 +2421,7 @@ function gv_register(ctx,x,y,w,o){o=o||{};const k=w/1000,rows=o.rows||[],cols=o.
         if(c.chip){const q=c.p==null?1:c.p;if(q>0.01){const s=lerp(1.25,1,spring(q));ctx.save();ctx.translate(x0,ry+33);ctx.scale(s,s);withA(ctx,clamp(q*2,0,1),()=>gv_classChip(ctx,0,0,c.chip,{size:28}));ctx.restore();}return;}
         const t=typeof c==="string"?c:c.t,f=c.mono?"mono":undefined,wt=c.mono?500:c.red?700:600,col=c.red?GV.redInk:c.hand?GV_SIGN.ink:WC_DARK,
           s=clamp(30*room/Math.max(1,tw(ctx,t,30,wt,f)),28,30);
-        if(c.hand)wc_hand(ctx,t,x0+4,ty,{size:s+2,w:600,col});else wc_T(ctx,t,x0,ty,{w:wt,size:s,col,f});
+        if(c.hand)wc_hand(ctx,t,x0+4,ty,{size:s+2,w:600,col,p:c.p==null?1:c.p});else wc_T(ctx,t,x0,ty,{w:wt,size:s,col,f});
         if(c.strike){const e=easeCam(clamp(c.strike,0,1));line(x0-4,x0-4+(Math.min(room,tw(ctx,t,s,wt,f))+8)*e,ty-s*0.32,GV.redInk,0.85,3);}});
       line(48,952,ry+GV_REG.row,WC_MUTED,0.22,1.6);});});
   if(o.foot)wc_hand(ctx,o.foot,56,bottom+64,{size:32,w:600,col:GV_SIGN.ink,p:o.footP==null?1:o.footP});

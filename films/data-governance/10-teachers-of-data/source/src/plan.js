@@ -557,7 +557,7 @@ function tt_paintOffice(ctx){gv_paintOffice(ctx);const [x,y,w,h]=GV_OFF.score;ct
   gv_wallFloor(ctx,GV_ROOM.gov,GV_OFF.fy,{seed:11,vx:900});gv_lightGlow(ctx,960,0,520);ctx.restore();}
 // close-ups that are the series' rooms painted again, nearer, so they stay sharp: the stewards' whiteboard, the calendar beside it, the
 // wall where the score hung. What's drawn on them is drawn in the room's own coordinates, through the same lens (tt_inZ)
-const TT_Z={board:{z:2.4,x:440,y:380},cal:{z:3.6,x:851,y:310},wall:{z:2.36,x:1238,y:352}};
+const TT_Z={board:{z:2.4,x:440,y:380},cal:{z:3.6,x:851,y:310},wall:{z:2.0,x:1238,y:330}};
 function tt_inZ(x,Z,fn){x.save();x.translate(960,540);x.scale(Z.z,Z.z);x.translate(-Z.x,-Z.y);fn(x);x.restore();}
 // the colours of a number, a warning and a link
 const TT_NUM=[40,96,150],TT_AMBER=[232,156,24],TT_AMBERINK=[166,100,0],TT_LINK=[24,104,168];
@@ -775,18 +775,30 @@ function tt_calendar(x,st){const C=TT_CAL;x.drawImage(wc_kept("ttCalPaper",(C.w+
 const tt_frameImg=()=>{const [,,w,h]=GV_OFF.score;return wc_kept("ttFrame",(w+68)*2,(h+68)*2,q=>{q.scale(2,2);q.translate(34,34);q.fillStyle="rgba(60,50,40,0.16)";q.fillRect(-10,-6,w+28,h+28);gv_frame(q,0,0,w,h);});};
 // the framed score from the first week, maturity 2.1 out of 5, at (X, Y), its top left; glow lights it as it's named; deco, for a shot
 // that shows it from afar
-function tt_frame(x,X,Y,a,glow,deco){if(a<=0.01)return;const [,,w,h]=GV_OFF.score,cx=X+w/2;withA(x,a,()=>{if(glow>0.01)gv_halo(x,X-30,Y-30,w+60,h+60,GV.gold,0.85*glow);
-  x.drawImage(tt_frameImg(),X-34,Y-34,w+68,h+68);
+function tt_frame(x,X,Y,a,glow,deco){if(a<=0.01)return;const [,,w,h]=GV_OFF.score,cx=X+w/2;withA(x,a,()=>{if(glow>0.01){gv_halo(x,X-30,Y-30,w+60,h+60,GV.gold,0.85*glow);
+    x.save();x.globalCompositeOperation="screen";wc_glowAt(x,cx,Y+h/2,w*0.95,[255,214,120],0.5*glow);x.restore();}
+  x.drawImage(tt_frameImg(),X-34,Y-34,w+68,h+68);if(glow>0.01){x.save();x.strokeStyle=rgba(GV.gold,0.95*glow);x.lineWidth=6;x.lineJoin="round";x.strokeRect(X-22,Y-22,w+44,h+44);x.restore();}
   tt_deco(deco,()=>{wc_T(x,"maturity",cx,Y+36,{w:600,size:24,align:"center",col:WC_MUTED});wc_T(x,"2.1 out of 5",cx,Y+80,{w:800,size:27,align:"center",col:WC_DARK});});
   for(let i=0;i<5;i++){const bx=X+24+i*26;x.fillStyle=rgba(WC_MUTED,0.25);x.fillRect(bx,Y+100,22,12);const f=clamp(2.1-i,0,1);if(f>0){x.fillStyle=rgba(GV.gold,0.95);x.fillRect(bx,Y+100,22*f,12);}}});}
+// where the frame hung, once it's down: the wall a little paler where it kept the light off, and its nail
+function tt_frameGhost(x,a){if(a<=0.01)return;const [X,Y,w,h]=GV_OFF.score;withA(x,a,()=>{x.save();x.globalCompositeOperation="screen";x.fillStyle="rgba(255,250,236,0.14)";
+  x.fillRect(X-12,Y-12,w+24,h+24);x.restore();x.fillStyle=rgba(WC_PENCIL,0.85);x.beginPath();x.arc(X+w/2,Y+6,3.4,0,TAU);x.fill();});}
+// the frame in someone's hands, drawn in the room's coordinates: its bottom edge on their hands (hands, as tt_handsAt gives them), off
+// (px) above or below them; and their fingers over it
+function tt_frameHeld(x,id,s,hands,off,deco){const [,,w,h]=GV_OFF.score,mx=(hands[0][0]+hands[1][0])/2,my=(hands[0][1]+hands[1][1])/2;
+  tt_frame(x,mx-w/2,my+off-14-h,1,0,deco);const P_=PEOPLE[id],k=s*P_.build.h;for(const [hx,hy] of hands){x.save();x.translate(hx,hy);x.scale(k,k);fingers(x,P_,[[0,0]]);x.restore();}}
+// where a person's hands are in the room, as person() puts them, for something held there and drawn in the room's coordinates
+function tt_handsAt(id,X,Y,s,o){const P_=PEOPLE[id],po=blendPose(POSE[o.pose||"stand"],POSE[o.pose2],o.mix),k=s*P_.build.h,br=Math.sin((o.t||0)*1.7+P_.seed)*1.4,f=o.flip?-1:1;
+  return[handAt(P_,-1,po.L,br),handAt(P_,1,po.R,br)].map(h=>[X+f*h[0]*k,Y+h[1]*k]);}
 // the box on the floor by the desk, marked "retired": what governance stops doing goes in it. st: forms, frame, pages (0 to 1, as each
 // lands in it)
-const TT_BOX={x:560,base:858,w:180,h:128};
+const TT_BOX={x:560,base:858,w:230,h:128};
 function tt_box(x,st,deco){const B=TT_BOX,X=B.x-B.w/2,Y=B.base-B.h;
   // what's in it, standing up over its rim
-  if(st.frame>0.01){x.save();x.translate(B.x+18,Y+10-40*easeCam(clamp(st.frame,0,1)));x.rotate(0.12);x.drawImage(tt_frameImg(),-60,-60,122,102);x.restore();}
   if(st.forms>0.01)for(let i=0;i<6;i++){const e=easeCam(clamp(st.forms*1.3-i*0.05,0,1));x.save();x.translate(B.x-26+i*5,Y+8-24*e);x.rotate(-0.08+i*0.03);x.fillStyle=rgba(i%2?[248,246,238]:[240,236,226],1);x.fillRect(-56,-10,112,30);x.strokeStyle=rgba(WC_PENCIL,0.4);x.lineWidth=1;x.strokeRect(-56,-10,112,30);x.restore();}
   if(st.pages>0.01)for(let i=0;i<5;i++){const e=easeCam(clamp(st.pages*1.3-i*0.06,0,1));x.save();x.translate(B.x+30+i*4,Y+6-30*e);x.rotate(0.1-i*0.04);x.fillStyle=rgba(mix(GV.grey,[255,255,255],0.45+0.1*(i%2)),1);x.fillRect(-46,-12,92,30);x.restore();}
+  // the frame, last in: let down from where it was held (81 px above), it stands leaning a little
+  if(st.frame>0.01){const e=easeCam(clamp(st.frame,0,1)),[,,fw,fh]=GV_OFF.score;x.save();x.translate(B.x-6,Y-40-81*(1-e));x.rotate(-0.06*e);tt_frame(x,-fw/2,-fh/2,1,0,deco);x.restore();}
   x.drawImage(wc_kept("ttBox",B.w+40,B.h+40,q=>{q.translate(20,20);wc_contact(q,-10,B.w+10,B.h+2,0.9,0.3);wc_part(q,wc_rect(0,0,B.w,B.h),[198,164,120],1);wc_part(q,wc_rect(-4,-6,B.w+8,14),[210,178,134],1);
     wc_flat(q,wc_rect(B.w/2-56,40,112,44),WC_CARD,1,"label");}),X-20,Y-20);tt_deco(deco,()=>wc_hand(x,"retired",B.x,Y+72,{size:24,w:700,col:WC_DARK,align:"center"}));}
 // the in-tray at the desk's left end, stacked with forms awaiting approval; tip (0 to 1) tips it, and the forms slide out into the box
@@ -804,14 +816,16 @@ function tt_doorCard(x,u,deco){if(u<=0.01)return;const k=lerp(1.15,1,easeCam(cla
   wc_T(x,"Thursdays,",0,22,{w:600,size:24,align:"center",col:WC_INK});wc_T(x,"2 to 3 pm",0,50,{w:600,size:24,align:"center",col:WC_INK});});});x.restore();}
 // the three measures, pinned up where the score hung, in the room's coordinates: what the project says, what last night's run said,
 // who came to office hours. st: up(i), row(i, j) lights a row
-const TT_MS=[[1128,160,220,120],[1128,290,220,120],[1128,420,220,120]];
+const TT_MS=[[1120,148,236,124],[1120,282,236,100],[1120,392,236,100]];
 const TT_MROWS=[["Governance's measures",[["an owner","37 of 37"],["a glossary term","13 of 13"],["a class","119 of 119"],["a description","119 of 119"]]],
   ["Quality scorecard",[["160 tests","160 passed"],["1 warning","owner: Learning team"]]],["Office hours",[["came","31"],["came back","12"]]]];
-function tt_measures(x,st,deco){tt_deco(deco,()=>TT_MS.forEach(([X,Y,w,h],i)=>{const u=st.up?st.up(i):1;if(u<=0.01)return;const k=lerp(1.12,1,easeCam(clamp(u,0,1)));
-  x.save();x.translate(X+w/2,Y+h/2);x.scale(k,k);x.rotate([0.01,-0.008,0.012][i]);x.translate(-X-w/2,-Y-h/2);withA(x,clamp(u*3,0,1),()=>{gv_sheet(x,X,Y,w,h);gv_pin(x,X+w/2,Y+6,GV.red,0.5);
-    const [hd,rows]=TT_MROWS[i];wc_T(x,hd,X+12,Y+26,{w:800,size:14.5,col:WC_DARK});
-    rows.forEach(([a,b],j)=>{const l=st.row?st.row(i,j):0,y=i===0?Y+50+j*19:Y+56+j*28,warn=i===1&&j===1;
-      if(warn)gv_tint(x,X+6,y-14,w-12,22,TT_AMBER,0.9);gv_tint(x,X+6,y-14,w-12,i===0?19:22,warn?TT_AMBER:GV.green,0.8*l);
+function tt_measures(x,st,deco){tt_deco(deco,()=>TT_MS.forEach(([X,Y,w,h],i)=>{const u=st.up?st.up(i):1;if(u<=0.01)return;const k=lerp(1.12,1,easeCam(clamp(u,0,1))),g=st.glow?st.glow(i):0;
+  x.save();x.translate(X+w/2,Y+h/2);x.scale(k,k);x.rotate([0.01,-0.008,0.012][i]);x.translate(-X-w/2,-Y-h/2);withA(x,clamp(u*3,0,1),()=>{
+    if(g>0.01){x.save();x.globalCompositeOperation="screen";wc_glowAt(x,X+w/2,Y+h/2,w*0.75,[255,214,120],0.5*g);x.restore();}gv_sheet(x,X,Y,w,h);
+    if(g>0.01){x.save();x.strokeStyle=rgba(GV.gold,0.95*g);x.lineWidth=4;x.lineJoin="round";x.strokeRect(X-5,Y-5,w+10,h+10);x.restore();}gv_pin(x,X+w/2,Y+6,GV.red,0.5);
+    const [hd,rows]=TT_MROWS[i];wc_T(x,hd,X+12,Y+25,{w:800,size:14.5,col:WC_DARK});
+    rows.forEach(([a,b],j)=>{const l=st.row?st.row(i,j):0,y=i===0?Y+49+j*19:Y+53+j*25,warn=i===1&&j===1;
+      if(warn)gv_tint(x,X+6,y-14,w-12,20,TT_AMBER,0.9);gv_tint(x,X+6,y-14,w-12,i===0?18:20,warn?TT_AMBER:GV.green,0.8*l);
       wc_T(x,i===2?a+":":a,X+12,y,{w:600,size:12.5,col:WC_INK});wc_T(x,b,X+w-12,y,{w:800,size:12.5,align:"right",col:warn?TT_AMBERINK:i===2?TT_NUM:GV.greenInk});});});x.restore();}));}
 // the shelf's 34 binders, as film 1 stood them on its two middle shelves, numbered along each row from the left; slim (0 to 1) thins
 // them; o.missing leaves one out (binder 29, in Yusuf's hands); o.out slides one forward
@@ -819,28 +833,60 @@ const TT_BIND={w:24,h:146,gap:26.6,x:1393,cols:[[96,118,150],[150,90,80],[120,14
 const tt_bindCol=i=>TT_BIND.cols[Math.floor(hash(i,17)*TT_BIND.cols.length)];
 function tt_binders(x,o){o=o||{};const B=TT_BIND,s=o.slim||0;for(let i=0;i<34;i++){if(o.missing===i)continue;const row=i<17?0:1,bx=B.x+(i%17)*B.gap,y=GV_OFF.shelf.rows[1+row],u=o.out===i?(o.u||0):0,
     bw=Math.round(lerp(B.w,10,s));x.save();x.translate(0,-10*u);gv_binder(x,bx+(B.w-bw)/2-u*3,y-B.h,bw+u*6,B.h,tt_bindCol(i));x.restore();}}
-// binder 29 open on the desk, from above: its policy page, the line on maturity; the green highlighter over it (hi, 0 to 1) and the note
-// written beside it (note); open (0 to 1) swings the cover over
-const TT_OPEN={x:250,y:120,w:1420,h:800,mid:960};
-function tt_open29(x,st){const B=TT_OPEN,col=tt_bindCol(28),L=B.mid-40-640,R=B.mid+40,pw=640,top=B.y+24,ph=B.h-48;
-  x.drawImage(wc_kept("ttOpen29",W,H,q=>{q.save();q.filter="blur(16px)";q.fillStyle="rgba(70,50,30,0.3)";q.fillRect(B.x+20,B.y+30,B.w,B.h);q.restore();
-    wc_wash(q,wc_rrPts(B.x,B.y,B.w,B.h,18),col,{kind:"cover",lw:1.6,seed:29});for(const px of [L,R])wc_wash(q,wc_rect(px,top,pw,ph),[252,250,244],{kind:"page",lw:1.3,seed:px|0});
-    for(const ry of [top+130,top+ph/2,top+ph-130]){wc_wash(q,wc_ell(B.mid,ry,22,30,24),GV.metal,{kind:"thing",lw:1.4,seed:ry|0});}}),0,0);
-  // the left page: the binder's own title page
-  const lc=L+pw/2;wc_T(x,"Data policies",lc,top+250,{w:600,size:32,align:"center",col:WC_MUTED});wc_T(x,"Policy 29",lc,top+352,{w:800,size:76,align:"center",col:WC_DARK});
-  wc_T(x,"Maturity assessment",lc,top+430,{w:700,size:42,align:"center",col:WC_INK});
-  // the right page: its lines; the first is the one this film moves
-  const rx=R+46,ly=top+150;wc_T(x,"Policy 29 · Maturity assessment",rx,top+70,{w:600,size:28,col:WC_MUTED});
-  if(st.hi>0.01){const c=wc_kept("ttHi29",1200,150,q=>{wc_wash(q,wc_resample(wc_rect(10,12,560,48),12),GV.green,{kind:"swatch",line:false,a:0.62,seed:71});wc_wash(q,wc_resample(wc_rect(10,84,380,48),12),GV.green,{kind:"swatch",line:false,a:0.62,seed:72});});
-    const p=easeCam(clamp(st.hi,0,1));x.save();x.beginPath();x.rect(rx+66,ly-56,600*clamp(p*2,0,1),70);x.rect(rx+66,ly+16,420*clamp(p*2-1,0,1),70);x.clip();x.drawImage(c,rx+60,ly-50);x.restore();}
-  wc_T(x,"29.1",rx,ly,{w:700,size:32,col:WC_MUTED});wc_T(x,"Governance maturity is",rx+76,ly,{w:600,size:38,col:WC_DARK});wc_T(x,"assessed annually.",rx+76,ly+52,{w:600,size:38,col:WC_DARK});
-  [[ly+262,"29.2"],[ly+392,"29.3"]].forEach(([y,n])=>{wc_T(x,n,rx,y,{w:700,size:32,col:WC_MUTED});gv_lines(x,rx+76,y-14,460,3,40,0.9);});
-  if(st.note>0.01){wc_hand(x,"measured from the work,",rx+76,ly+122,{size:36,w:700,col:GV.greenInk,p:clamp(st.note*1.6,0,1)});
-    wc_hand(x,"every day",rx+76,ly+168,{size:36,w:700,col:GV.greenInk,p:clamp(st.note*1.6-0.7,0,1)});}
-  // the cover, before it's open, lying over the right page
-  const op=clamp(st.open==null?1:st.open,0,1);if(op<1){const c=Math.cos(Math.PI*op);if(c>0){x.save();x.translate(B.mid,0);x.scale(c,1);x.translate(-B.mid,0);
-    wc_wash(x,wc_rrPts(B.mid-20,B.y,B.x+B.w-B.mid+20,B.h,18),col,{kind:"cover",lw:1.6,seed:31});wc_flat(x,wc_rect(B.mid+220,B.y+250,300,170),WC_CARD,1,"label");
-    wc_T(x,"29",B.mid+370,B.y+352,{w:800,size:84,align:"center",col:WC_DARK});x.restore();}}}
+// binder 29 open on the desk, from above, as the first film opened binder 12: the cover open flat round the pages, the rings down the
+// middle, the back of the page before on the left, policy 29 on the right. st.hi (0 to 1) runs the green highlighter over its line, one
+// line after the other; st.note writes under it
+const TT_OPEN={x:230,y:110,w:1460,h:830,mid:960,pw:660,rings:[280,525,770]},TT_P29=["Governance maturity is","assessed annually."],
+  TT_N29=["measured from the work,","every day"];
+const tt_p29=()=>{const B=TT_OPEN,top=B.y+26;return{top,px:B.mid+46+64,ly:top+350};};
+function tt_open29(x,st){st=st||{};const B=TT_OPEN,top=B.y+26,ph=B.h-52,L=B.mid-46-B.pw,R=B.mid+46,col=tt_bindCol(28);x.drawImage(wc_kept("ttOpen29",W,H,q=>{
+    q.save();q.filter="blur(16px)";q.fillStyle="rgba(70,50,30,0.32)";q.fillRect(B.x+16,B.y+24,B.w,B.h);q.restore();
+    wc_wash(q,wc_rrPts(B.x,B.y,B.w,B.h,18),col,{kind:"cover",lw:1.6,seed:29});wc_flat(q,wc_rect(B.mid-40,B.y+8,80,B.h-16),wc_dim(col,0.22),1,"spine");
+    // each side: the pages under the top one, their edges showing; the top page, and the holes the rings go through
+    for(const px of [L,R]){const s=px<B.mid?-1:1;for(let k=3;k>=1;k--)wc_flat(q,wc_rect(px+s*k*3,top+k*3,B.pw,ph),wc_dim(GV.paper,0.05*k),1,"pages");
+      wc_wash(q,wc_rect(px,top,B.pw,ph),GV.paper,{kind:"page",lw:1.3,seed:(px|0)+29});
+      for(const ry of B.rings)wc_wash(q,wc_ell(B.mid+s*80,ry,11,11,16),wc_dim(col,0.1),{kind:"thing",line:false,flat:true});}
+    // the back of the page before, its lines showing through faintly
+    gv_lines(q,L+70,top+110,B.pw-170,13,50,0.3);
+    // the rings' mechanism down the middle, and the three rings through the pages
+    wc_wash(q,wc_rrPts(B.mid-26,B.rings[0]-60,52,B.rings[2]-B.rings[0]+120,14),GV.metal,{kind:"thing",lw:1.4,seed:30});
+    for(const ry of B.rings){q.save();q.strokeStyle=rgba(wc_dim(GV.metal,0.28),1);q.lineWidth=10;q.beginPath();q.ellipse(B.mid,ry,80,17,0,0,TAU);q.stroke();
+      q.strokeStyle="rgba(255,255,255,0.65)";q.lineWidth=3;q.beginPath();q.ellipse(B.mid,ry-3,76,13,0,Math.PI*1.15,Math.PI*1.85);q.stroke();q.restore();}}),0,0);
+  const {px,ly}=tt_p29();wc_T(x,"Data policies",px,top+80,{w:600,size:28,col:WC_MUTED});wc_T(x,"Policy 29",px,top+184,{w:800,size:66,col:WC_DARK});
+  wc_T(x,"Maturity assessment",px,top+244,{w:600,size:36,col:WC_MUTED});
+  // the green highlighter over its line, under the words
+  const ws=TT_P29.map(l=>tw(x,l,42,600));if(st.hi>0.01){const c=wc_kept("ttHi29",1000,180,q=>ws.forEach((w,i)=>wc_wash(q,wc_resample(wc_rect(12,12+i*58,w+20,52),12),GV.green,{kind:"swatch",line:false,a:0.6,seed:71+i})));
+    const f=ws[0]/(ws[0]+ws[1]),p1=clamp(st.hi/f,0,1),p2=clamp((st.hi-f)/(1-f),0,1);x.save();x.beginPath();x.rect(px-14,ly-44,(ws[0]+28)*p1,58);if(p2>0)x.rect(px-14,ly+14,(ws[1]+28)*p2,58);x.clip();
+    x.drawImage(c,px-22,ly-50);x.restore();}
+  TT_P29.forEach((l,i)=>wc_T(x,l,px,ly+i*58,{w:600,size:42,col:WC_INK}));
+  // the note under it, in green, one line after the other; then the policy's other lines
+  if(st.note>0.01)TT_N29.forEach((l,i)=>wc_hand(x,l,px,ly+150+i*50,{size:36,w:700,col:GV.greenInk,p:i?clamp((st.note-0.72)/0.28,0,1):clamp(st.note/0.7,0,1)}));
+  gv_lines(x,px,ly+250,B.pw-150,3,40);}
+// where the green marker's tip is while it highlights (st.hi) and writes (st.note): at the edge of what it has done so far
+function tt_penAt29(x,st){const {px,ly}=tt_p29(),ws=TT_P29.map(l=>tw(x,l,42,600)),f=ws[0]/(ws[0]+ws[1]);
+  if(st.note>0.01){const i=st.note<0.71?0:1,p=i?clamp((st.note-0.72)/0.28,0,1):clamp(st.note/0.7,0,1),l=TT_N29[i],sub=l.slice(0,Math.ceil(l.length*p));return[px+tw(x,sub,36,700)+4,ly+150+i*50-10];}
+  const h=clamp(st.hi||0,0,1);return h<f?[px-14+(ws[0]+28)*clamp(h/f,0,1),ly-14]:[px-14+(ws[1]+28)*clamp((h-f)/(1-f),0,1),ly+44];}
+// the green marker, from above, its tip at (X, Y)
+function tt_pen(x,X,Y,a){if(a<=0.01)return;withA(x,a,()=>{x.save();x.translate(X,Y);x.rotate(-0.62);
+  x.save();x.filter="blur(7px)";x.fillStyle="rgba(60,40,20,0.3)";x.fillRect(14,20,30,180);x.restore();
+  x.fillStyle=rgba(wc_dim(GV.green,0.15),1);x.beginPath();x.moveTo(-5,0);x.lineTo(5,0);x.lineTo(12,24);x.lineTo(-12,24);x.closePath();x.fill();
+  x.fillStyle=rgba([244,244,238],1);rr(x,-15,22,30,150,8);x.fill();x.strokeStyle=rgba(WC_PENCIL,0.6);x.lineWidth=1.5;x.stroke();
+  x.fillStyle=rgba(GV.green,1);rr(x,-16,124,32,58,8);x.fill();x.stroke();x.restore();});}
+// binder 29 shut, lying on the desk where it's about to open: its cover over the right-hand half, and its label
+function tt_cover29(x){const B=TT_OPEN,X=B.mid-40,w=B.x+B.w-X,col=tt_bindCol(28);x.drawImage(wc_kept("ttCover29",W,H,q=>{
+    wc_wash(q,wc_rrPts(X,B.y,w,B.h,18),col,{kind:"cover",lw:1.6,seed:31});wc_flat(q,wc_rect(X,B.y+8,54,B.h-16),wc_dim(col,0.2),1,"spine");
+    wc_wash(q,wc_rect(X+w/2-130,B.y+250,300,190),WC_CARD,{kind:"page",lw:1.3,seed:32});}),0,0);
+  const cx=X+w/2+20;wc_T(x,"29",cx,B.y+352,{w:800,size:84,align:"center",col:WC_DARK});wc_T(x,"Maturity assessment",cx,B.y+412,{w:600,size:28,align:"center",col:WC_MUTED});}
+// binder 29 opening (u, 0 to 1): the cover swings over from the right-hand half to the left, about the rings
+function tt_opening29(x,u,st){const B=TT_OPEN;if(u>=1)return tt_open29(x,st);const c=Math.cos(Math.PI*clamp(u,0,1));
+  x.save();x.beginPath();x.rect(B.mid-46,0,W,H);x.clip();tt_open29(x,st);x.restore();
+  x.save();x.translate(B.mid,0);x.scale(Math.max(0.02,Math.abs(c)),1);x.translate(-B.mid,0);
+  if(c>0)tt_cover29(x);else{x.beginPath();x.rect(0,0,B.mid-46,H);x.clip();tt_open29(x,st);}x.restore();}
+// binder 29 lying open on his desk, seen from the room
+function tt_deskBinder(x,a){if(a<=0.01)return;const X=922,Y=GV_OFF.desk[1],col=tt_bindCol(28);withA(x,a,()=>{x.fillStyle=rgba(wc_dim(col,0.1),1);x.fillRect(X,Y-6,160,6);
+  x.fillStyle=rgba([250,248,240],1);x.fillRect(X+6,Y-11,70,6);x.fillRect(X+84,Y-11,70,6);x.fillStyle=rgba(GV.metal,1);x.fillRect(X+77,Y-14,6,9);});}
+// binder 29, just taken off the shelf, upright in his hand
+function tt_heldBinder29(cx,P_,hands){const h=hands[1];cx.save();cx.translate(h[0],h[1]);gv_binder(cx,-15,-80,30,183,tt_bindCol(28));cx.restore();fingers(cx,P_,[h]);}
 
 /* ---------- Noor's map ---------- */
 // on Noor's map, close (GV_MC): "Govern data" lights gold in the strategy band, over one of the cards already there, and the next part's

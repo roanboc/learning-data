@@ -35,14 +35,14 @@ const WS_PST=[[0,790,372,118,168],[1,915,352,130,184],[2,1046,384,112,160]];
 // the table: where the form lies (centre, width, height), the tin box where names are kept apart, the shredder, the tally, the town
 // hall's card; the form's line, in the gap the name strip leaves as it lifts (split 0 to 1)
 const WS_F=[960,500,520,700],WS_BOX=[320,300],WS_SHR=[320,690],WS_TAL=[1460,380],WS_TH=[1580,160];
-const ws_cutY=split=>WS_F[1]-WS_F[3]/2+WS_F[3]*WS_FCUT-split*WS_F[3]*0.16;
+const ws_cutY=split=>WS_F[1]-WS_F[3]/2+WS_F[3]*WS_FCUT-split*WS_F[3]*0.12;
 // the name strip, wherever it is: its centre at (x,y), at scale k
 function ws_strip(ctx,x,y,k,a){if(a<=0.01)return;const [fx,fy,fw,fh]=WS_F,sy=fy-fh/2+fh*WS_FCUT/2;ctx.save();ctx.translate(x,y);ctx.scale(k,k);ctx.translate(-fx,-sy);
   withA(ctx,a,()=>ws_form(ctx,fx,fy,fw,fh,{top:true}));ctx.restore();}
 // the strip's way: lifted off the form (split), carried into the box (box), and from the box into the shredder (shred); each 0 to 1
-function ws_stripWay(ctx,split,box,shred){const [fx,fy,fw,fh]=WS_F,sy=fy-fh/2+fh*WS_FCUT/2-split*fh*0.32;if(shred>=1)return;
+function ws_stripWay(ctx,split,box,shred){const [fx,fy,fw,fh]=WS_F,sy=fy-fh/2+fh*WS_FCUT/2-split*fh*0.24;if(shred>=1)return;
   if(box<=0)return ws_strip(ctx,fx,sy,1,1);const e=easeCam(clamp(box,0,1)),k=lerp(1,0.42,e);
-  if(shred<=0)return ws_strip(ctx,lerp(fx,WS_BOX[0],e),lerp(sy,WS_BOX[1],e)-140*Math.sin(Math.PI*e),k,1);
+  if(shred<=0)return ws_strip(ctx,lerp(fx,WS_BOX[0],e),lerp(sy,WS_BOX[1],e)+30*Math.sin(Math.PI*e),k,1);
   const v=easeCam(clamp(shred/0.6,0,1));ws_strip(ctx,WS_BOX[0],lerp(WS_BOX[1],WS_SHR[1]-90,v),0.42,1-clamp((shred-0.6)/0.4,0,1));}
 // four answers lift off the form and come together round the outline of a person (u 0 to 1); ring draws the outline
 const WS_SLIPF=[[1050,370],[1070,470],[1035,575],[1060,680]],WS_SLIPT=[[1440,400],[1700,410],[1450,566],[1690,580]],WS_OUT=[1570,480];
@@ -108,9 +108,9 @@ scene("counted",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id
       if(y87){const dy=(1-nf)*760,fade=1-fin(tt,P.morph+0.6,0.9);
         if(fade>0.01)withA(x,fade,()=>{x.save();x.translate(0,dy);ws_form(x,fx,fy,fw,fh,{cut:true,ticks:true});if(box87<=0)ws_stripWay(x,sp87,0,0);x.restore();});
         if(box87>0&&(box87<1||open>0.5))ws_stripWay(x,0.5,box87,0);
-        const lp=fin(tt,P.y87+0.9,0.6);if(lp>0&&nf>=1){const [a,b]=gone>0?ws_lineAt(fin(tt,P.morph,1.6),[fx,fy-sp87*fh*0.16,fw,fh]):[[fx-fw/2-30,ws_cutY(sp87)],[fx+fw/2+30,ws_cutY(sp87)]];ws_line(x,a,b,lp);}
+        const lp=fin(tt,P.y87+0.9,0.6);if(lp>0&&nf>=1){const [a,b]=gone>0?ws_lineAt(fin(tt,P.morph,1.6),[fx,fy-sp87*fh*0.12,fw,fh]):[[fx-fw/2-30,ws_cutY(sp87)],[fx+fw/2+30,ws_cutY(sp87)]];ws_line(x,a,b,lp);}
         ws_colsTable(x,fin(tt,P.morph+0.4,1.0),0);
-        if(gone>0){const [a,b]=ws_lineAt(fin(tt,P.morph,1.6),[fx,fy-sp87*fh*0.16,fw,fh]);if(fin(tt,P.morph+0.4,1.0)>0)ws_line(x,a,b,1);}}
+        if(gone>0){const [a,b]=ws_lineAt(fin(tt,P.morph,1.6),[fx,fy-sp87*fh*0.12,fw,fh]);if(fin(tt,P.morph+0.4,1.0)>0)ws_line(x,a,b,1);}}
       // the four answers, put together, are someone
       const su=clamp((tt-P.slip)/1.3,0,1)*(1-clamp((tt-P.slipBack)/1.0,0,1));ws_slipsMove(x,su,clamp((tt-P.slip-1.1)/0.7,0,1)*(1-fin(tt,P.slipBack,0.5)));
       ws_pencil(x,lerp(fx-fw/2-30,fx+fw/2+30,easeCam(fin(tt,P.line,0.9))),ws_cutY(0),gv_io(tt,P.line-0.4,P.line+1.3,0.3));

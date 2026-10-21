@@ -567,18 +567,15 @@ function wd_sheetName(ctx,p,lit,grey){wd_drop(ctx,p,()=>{const S_=WD_SS,[c0,c1,c
   wc_T(ctx,"Mei Tanaka",gx+c0+c1+14,gy+40+rh+44,{w:600,size:34,col:mix(WC_DARK,[180,178,172],grey)});ctx.restore();});}
 
 /* ---------- 10 · Which award? Her screen asks her, and award turns out to be defined in five places ---------- */
-// the three meanings of award, as the series keeps them: violet, the glossary on the platform's (microcredentials of 6 credit points or
-// more count); rose, the words before Monday's (graduate certificates, masters and doctorates); olive, degrees only. A wash for each
-// head, and an ink for its word
-const WD_MEAN={violet:[110,92,190],rose:[214,96,140],olive:[150,156,56]},WD_MEANINK={violet:[78,58,160],rose:[168,50,98],olive:[94,100,22]};
 // Mei's screen: Jun's change, opened: its title, and the line it changes, award's, lit in gold; what it adds is left unread
 function wd_opened(ctx){const [x,y,w,h]=GV_RX.screen;gv_screen(ctx,x,y,w,h,"Jun Park · 1 file",q=>{
     ["Map award to the","government's definition"].forEach((l,i)=>wc_T(q,l,x+30,y+96+i*46,{w:800,size:36,col:WC_DARK}));
     q.fillStyle=rgba([238,240,244],1);q.fillRect(x+24,y+180,w-48,h-200);const cm=tw(q,"m",28,500,"mono");
     gv_tint(q,x+38+10*cm,y+194,5*cm+16,40,GV.gold,0.75);wd_yaml(q,"  - name: award",x+44,y+224);
     q.save();q.fillStyle=rgba(GV.green,0.14);q.fillRect(x+24,y+246,w-48,82);q.restore();gv_lines(q,x+70,y+268,w-170,2,32,0.9);},{titleSize:28});}
-// a head in one of the meanings' colours: "award", the wash coming in as col goes from 0 to 1
-function wd_head(ctx,x,y,w,m,col){if(col>0.01)gv_tint(ctx,x,y,w,58,WD_MEAN[m],0.9*col);wc_T(ctx,"award",x+16,y+43,{w:800,size:40,col:mix(WC_DARK,WD_MEANINK[m],col)});}
+// a head in one of award's three meanings' colours (the series' GV_MEAN and GV_MEANINK: violet, rose, olive): "award", the wash coming
+// in as col goes from 0 to 1
+function wd_head(ctx,x,y,w,m,col){if(col>0.01)gv_tint(ctx,x,y,w,58,GV_MEAN[m],0.9*col);wc_T(ctx,"award",x+16,y+43,{w:800,size:40,col:mix(WC_DARK,GV_MEANINK[m],col)});}
 // the five places award is defined, round Mei, each headed "award", each coming in (p, 0 to 1) and its meaning's colour washing in
 // (col, 0 to 1). From right to left, as One word, one home goes through them: her screen, the glossary on the platform (violet);
 // Planning's spreadsheet, printed (rose); the registrar's policy, stapled, at its appendix (rose); a faculty's dashboard on a tablet

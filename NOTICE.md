@@ -21,3 +21,5 @@ DAMA and DAMA-DMBOK are registered trademarks of DAMA International. *The same o
 ## Content
 
 The university, the energy utility, the people, numbers and records shown are fictional.
+
+*For this purpose only* quotes one line of the oath in India's Charaka Samhita, in the English of the Jamnagar edition (Shree Gulabkunverba Ayurvedic Society, 1949), and marks it on screen as a translation. Its sources are in the film's script.

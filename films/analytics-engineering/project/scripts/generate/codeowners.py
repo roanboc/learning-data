@@ -115,7 +115,7 @@ def main():
         rules.append((f"/exposures/{spec.parent.name}/", list(dict.fromkeys(owners)), None))
 
     rules.append((None, None, "Governance's rules (DEC-PRJ-12)"))
-    for path in ("/scripts/check/governance.py", "/tests/governance/", "/scripts/generate/codeowners.py"):
+    for path in ("/scripts/check/governance.py", "/tests/governance/", "/scripts/generate/codeowners.py", "/docs/how-to/"):
         rules.append((path, [reviewers["governance"], reviewers["model"]], None))
 
     if unknown:

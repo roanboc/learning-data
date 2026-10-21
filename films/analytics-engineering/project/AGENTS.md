@@ -67,7 +67,7 @@ python scripts/generate/codeowners.py --check    # CODEOWNERS matches the owners
 python scripts/generate/products.py --check      # the products' ODPS and ODCS files match the contracts
 python scripts/generate/scorecard.py             # the scorecard, from the build above
 python scripts/check/requirements.py             # only open requirements, each saying when it's done
-python scripts/check/governance.py               # an owner, a glossary term, classified columns, owned tests
+python scripts/check/governance.py               # an owner, a glossary term, classified columns, owned tests, descriptions
 python scripts/check/impact.py --base origin/main  # what your change touches, and who to tell: put it in the pull request
 ```
 

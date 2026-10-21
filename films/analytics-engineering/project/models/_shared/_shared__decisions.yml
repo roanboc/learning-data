@@ -174,3 +174,18 @@ decisions:
     status: agreed
     relates_to: [DEC-PRJ-09, DEC-PRJ-12]
     implemented_in: [personal_data.sql, dbt_project.yml]
+
+  - id: DEC-PRJ-14
+    step: operate_and_evolve
+    title: A new governance rule warns first, then fails from a date set when it's announced
+    text: 'A new rule is announced at the stewards'' meeting, with its how-to (docs/how-to/). It runs as a
+      warning for at least six weeks, each warning naming the day it becomes an error, and fails from the
+      date set when it''s announced. The first: every column of a shared model has a description, an
+      error from 1 December 2026.'
+    why: A rule that stops people the day it lands teaches them to resent it. Warned first, with a page that
+      says what to do and who to ask, people fix their own work before the rule stops anyone.
+    decided_by: Yusuf Demir, data governance lead, with the stewards
+    decided_on: 2026-10-21
+    status: agreed
+    relates_to: [DEC-PRJ-12]
+    implemented_in: [governance.py]

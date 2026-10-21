@@ -4,6 +4,7 @@
 
 ## Decided
 
+<!-- decided: made by site-tools/build_series.py from decided.md, the series' and each film's -->
 | Date | Decision |
 |---|---|
 | 29 September 2026 | A series for analytics engineers that continues *From words to data*, one level deeper: how modelling decisions become dbt code. |
@@ -17,6 +18,7 @@
 | 29 September 2026 | A new character, Jun, the analytics engineer, builds what Noor, the architect, owns. |
 | 30 September 2026 | The series title: *In the weeds of data crafting*. It says the content is technical; the title card and the opening film's narration say it's for analytics engineers. |
 | 30 September 2026 | The series gets its own sound: an electric piano, a plucked bass and a brushed pulse, and its own four-note mark. |
+<!-- /decided -->
 
 ## The brief
 

@@ -208,13 +208,17 @@ function wd_binder2(ctx,u,left,right){const sx=WD_OPEN.mid-40;u=clamp(u,0,1);
   if(u>0.5){ctx.save();ctx.translate(sx,0);ctx.scale(Math.max(0.02,-Math.cos(Math.PI*u)),1);ctx.translate(-sx,0);ctx.beginPath();ctx.rect(0,0,sx,H);ctx.clip();
     wd_open2(ctx);const k=-Math.cos(Math.PI*u);if(left&&k>0.86)withA(ctx,clamp((k-0.86)/0.12,0,1),()=>left(ctx));ctx.restore();}
   wd_cover2(ctx,u);}
+// how much of policy 2's page the frame shows (0 to 1): its words, its gold band and its tags come and go together, so the frame
+// never leaves one of them alone
+const wd_p2In=ctx=>wd_inFrame(ctx,wd_pageL()+50,wd_pageL()+670);
 // policy 2 on the left-hand page: its number and name, and its two lines: 2.1, the one the series' plan quotes, and 2.2, the one
 // the voice reads, lit (0 to 1) as it's read
-function wd_policy2(ctx,a,lit){const x=wd_pageL()+64,top=wd_pageTop();withA(ctx,a,()=>{wd_T(ctx,"Data policies",x,top+80,{w:600,size:28,col:WC_MUTED});
-  wd_T(ctx,"Policy 2",x,top+176,{w:800,size:66,col:WC_DARK});wd_T(ctx,"Decision rights",x,top+232,{w:600,size:36,col:WC_MUTED});
+function wd_policy2(ctx,a,lit){const x=wd_pageL()+64,top=wd_pageTop();withA(ctx,a,()=>{withA(ctx,wd_p2In(ctx),()=>{
+  wc_T(ctx,"Data policies",x,top+80,{w:600,size:28,col:WC_MUTED});
+  wc_T(ctx,"Policy 2",x,top+176,{w:800,size:66,col:WC_DARK});wc_T(ctx,"Decision rights",x,top+232,{w:600,size:36,col:WC_MUTED});
   if(lit>0.01)gv_tint(ctx,x-14,top+406,620,124,GV.gold,0.55*lit);
   [["2.1",["Every critical data element","has an accountable owner."],top+322],["2.2",["Every data domain has","an owner and a steward."],top+452]].forEach(([n,ls,y])=>{
-    wd_T(ctx,n,x,y,{w:700,size:30,col:WC_MUTED});ls.forEach((l,i)=>wd_T(ctx,l,x+70,y+i*52,{w:600,size:40,col:WC_INK}));});
+    wc_T(ctx,n,x,y,{w:700,size:30,col:WC_MUTED});ls.forEach((l,i)=>wc_T(ctx,l,x+70,y+i*52,{w:600,size:40,col:WC_INK}));});});
   gv_lines(ctx,x,top+600,WD_OPEN.pw-150,5,40);});}
 // the register, on the right-hand page: eight domains, an owner and a steward for each; tbc(k) says how far "TBC" is written in each
 // of the cells still to be confirmed (owners first, then stewards); tick(i) puts a gold tick by row i's owner, o.strike(i) strikes its

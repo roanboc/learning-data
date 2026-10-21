@@ -8,7 +8,9 @@
 const wd_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
 // a tag that springs in at t0 and goes at t1 (or stays)
 function wd_tagAt(ctx,t,t0,t1,x,y,s,o){const a=t1==null?fin(t,t0,0.35):gv_io(t,t0,t1,0.35);if(a<=0.01)return;const k=0.9+0.1*spring(fin(t,t0,0.5));
-  ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,a,()=>wc_tag(ctx,0,0,s,Object.assign({align:"center"},o||{})));ctx.restore();}
+  o=Object.assign({align:"center"},o||{});const w=tw(ctx,s,o.size||30,o.w||700,o.f)+40,x0=o.align==="center"?-w/2:o.align==="right"?-w:0;
+  // (a tag the frame would cut fades, as words do)
+  ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,a*wd_inFrame(ctx,x0,x0+w),()=>wc_tag(ctx,0,0,s,o));ctx.restore();}
 
 // ---- 1 · The cord: an engine line in 1960s Japan ----
 // The line at a moment, from back to front: the light on the floor, the lamps, the buttons, the cord, the supervisor, the workers, the
@@ -118,7 +120,7 @@ scene("tbc",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({desk:c.says-0.
     // and its line (close enough that the frame stops before the register's owners), then the register, and "TBC", one by one
     {at:P.desk,place:"deskTop",keys:[[P.desk,1085,520,1.15],[P.open-0.4,960,525,1],[P.every+0.4,640,500,1.5],[P.reg,1310,540,1.28]],d:1.8,push:0.015,draw:(x,tt)=>{const u=clamp((tt-P.open)/1.1,0,1);
       wd_binder2(x,easeCam(u),q=>wd_policy2(q,1,fin(tt,P.every,0.6)),q=>wd_register(q,1,k=>k<3?fin(tt,P.three+0.45*k,0.6):fin(tt,P.half+0.4*(k-3),0.6)));
-      wd_tagAt(x,tt,P.stu-0.1,null,320,wd_pageTop()+566,"students",{size:30});wd_tagAt(x,tt,P.cou-0.1,null,540,wd_pageTop()+566,"courses",{size:30});
+      withA(x,wd_p2In(x),()=>{wd_tagAt(x,tt,P.stu-0.1,null,320,wd_pageTop()+566,"students",{size:30});wd_tagAt(x,tt,P.cou-0.1,null,540,wd_pageTop()+566,"courses",{size:30});});
       // the eight domains, counted down the register as the voice says how many
       for(let i=0;i<8;i++){const g=gv_io(tt,P.eight+0.08*i,P.eight+0.8+0.08*i,0.2);if(g>0.01)gv_tint(x,WD_RG.x()-14,WD_RG.y0()+i*WD_RG.dy-38,190,54,GV.gold,0.5*g);}}},
     // his screen: the inbox, the thread about award with its twenty-three replies; it opens on four questions, and then, no decision

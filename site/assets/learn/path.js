@@ -1,5 +1,7 @@
 /* Learning Data: progress, kept in this browser only. One script for every film page except A Sharper Sketch's (sketch.js does it there).
    - A film's three-step path (.path[data-text]): the store prefix comes from data-store (default "ld"), the counts from data-labs and data-quiz (default 8 and 12).
+     The path of a series' own labs and scenarios, for all its films (data-store "ld-<series id>"), also has data-series, its films'
+     prefixes: its first step counts how many of them were watched.
    - "Watched" for the film in section#watch[data-store], once 85% of its length has actually played (seconds of playback,
      not where the playhead is: one late chapter isn't the film), or once it reaches the end after half of it has played.
      A page without it records nothing, so one film's page can never mark another film as watched.
@@ -25,7 +27,9 @@ if(/^#t=/.test(location.hash)&&watch)window.addEventListener("load",()=>watch.sc
 function paint(){
   if(path){const T=JSON.parse(path.dataset.text),li=path.querySelectorAll("li"),st=stats(path.dataset.store||"ld"),NL=+(path.dataset.labs||8),NQ=+(path.dataset.quiz||12);
     const put=(i,done,txt)=>{if(!li[i])return;li[i].classList.toggle("done",!!done);if(txt)li[i].querySelector("span:last-child").textContent=txt;};
-    put(0,st.watched,st.watched?T.watched:null);put(1,st.labs>=NL,st.labs?fill(T.labs,{n:st.labs}):null);put(2,st.n>=NQ,st.n?fill(T.quiz,st):null);}
+    const fs=(path.dataset.series||"").split(" ").filter(Boolean),nw=fs.filter(p=>stats(p).watched).length;
+    if(fs.length)put(0,nw>=fs.length,nw?fill(T.films,{n:nw}):null);else put(0,st.watched,st.watched?T.watched:null);
+    put(1,st.labs>=NL,st.labs?fill(T.labs,{n:st.labs}):null);put(2,st.n>=NQ,st.n?fill(T.quiz,st):null);}
   document.querySelectorAll("[data-progress]").forEach(el=>{const box=el.closest("[data-progress-text]");if(!box)return;
     const T=JSON.parse(box.dataset.progressText),st=stats(el.dataset.progress),out=[];
     if(st.watched)out.push(T.watched);

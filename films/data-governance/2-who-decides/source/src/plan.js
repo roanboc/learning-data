@@ -229,9 +229,11 @@ function wd_register(ctx,a,tbc,tick,o){o=o||{};const x=WD_RG.x(),top=wd_pageTop(
 const WD_MAIL=[["Clara","Does theirs count microcredentials?"],["Jun","Who signs this off?"],["Finance","Ask the registrar?"],["Mei","Can the council decide?"]];
 function wd_inbox(ctx,o){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,"Inbox",q=>{const open=o.open||0;
   // the list: other mail in grey, the thread in bold, with its count of replies
-  withA(q,1-open,()=>{for(let i=0;i<6;i++){const ry=y+120+i*92;if(i===1)continue;gv_lines(q,x+60,ry,w-420,1,0,0.9);gv_lines(q,x+60,ry+30,w-620,1,0,0.6);}
-    const ry=y+212;gv_tint(q,x+20,ry-60,w-40,96,GV.gold,0.3*(o.hl||0));wc_T(q,"Re: award in the government return",x+60,ry,{w:800,size:36,col:WC_DARK});
-    wc_tag(q,x+w-60,ry-12,"23 replies",{align:"right",size:30});});
+  withA(q,1-open,()=>{const grey=o.grey||0,gone=o.gone||0;for(let i=0;i<6;i++){const ry=y+120+i*92-(i>1?92*easeCam(gone):0);if(i===1)continue;
+      gv_lines(q,x+60,ry,w-420,1,0,0.9);gv_lines(q,x+60,ry+30,w-620,1,0,0.6);}
+    const ry=y+212;withA(q,1-gone,()=>{gv_tint(q,x+20,ry-60,w-40,96,GV.gold,0.3*(o.hl||0)*(1-grey));
+      wc_T(q,"Re: award in the government return",x+60,ry,{w:800,size:36,col:mix(WC_DARK,[150,150,150],grey)});
+      wc_tag(q,x+w-60,ry-12,"23 replies",{align:"right",size:30,col:mix(WC_INK,[150,150,150],grey)});});});
   // the thread, open: who wrote, and their question, each a little smaller than the one before
   if(open>0.01)withA(q,open,()=>{wc_T(q,"Re: award in the government return",x+40,y+100,{w:800,size:32,col:WC_MUTED});
     WD_MAIL.forEach(([who,s],i)=>{const a=o.msg?o.msg(i):1;if(a<=0.01)return;const sz=36-2*i,by=y+150+i*126;
@@ -351,6 +353,9 @@ function wd_mark(ctx,x,y,st,t){if(st===0){ctx.save();ctx.strokeStyle=rgba(WC_MUT
   if(st===1){ctx.save();ctx.strokeStyle=rgba([196,150,40],0.95);ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.arc(x,y,11,t*6,t*6+4.2);ctx.stroke();ctx.restore();return;}
   if(st===2){wc_tick(ctx,x,y,26,GV.greenInk,1,5);return;}
   ctx.save();ctx.strokeStyle=rgba(GV.redInk,1);ctx.lineWidth=5;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x-10,y-10);ctx.lineTo(x+10,y+10);ctx.moveTo(x+10,y-10);ctx.lineTo(x-10,y+10);ctx.stroke();ctx.restore();}
+// the button that puts a change in: grey, until it's reviewed; lit (0 to 1) washes it in gold
+function wd_merge(ctx,bx,by,lit){const bw=170;gv_tint(ctx,bx-12,by-10,bw+24,72,GV.gold,0.6*(lit||0));ctx.save();ctx.fillStyle="rgba(222,225,230,1)";rr(ctx,bx,by,bw,52,10);ctx.fill();ctx.restore();
+  wc_T(ctx,"Merge",bx+bw/2,by+36,{w:700,size:28,align:"center",col:[138,142,150]});}
 // Jun's change, on his screen: its title, its files, and the button that puts it in, grey until it's reviewed (o.before lights it).
 // Then its checks: o.checks brings in the governance check, o.dom and o.core tick its first two rows, o.fail stops it on the marts,
 // o.msg brings in its message, o.what and o.where light what to add and where; o.fix types the two lines Jun adds in its place, and
@@ -360,8 +365,7 @@ const WD_CHG={title:"Add a completions mart for Planning",files:["models/marts/p
   add:["+        owner: Planning","+        domain: planning"]};
 function wd_change(ctx,t,o){const [x,y,w,h]=GV_SC,g=k=>clamp(o[k]||0,0,1),re=g("rerun"),fail=g("fail");
   gv_screen(ctx,x,y,w,h,"Changes for review",q=>{wc_T(q,WD_CHG.title,x+40,y+120,{w:800,size:40,col:WC_DARK});wc_T(q,"Jun Park · 2 files",x+40,y+166,{w:600,size:28,col:WC_MUTED});
-    const bw=170,bx=x+w-40-bw,by=y+82;gv_tint(q,bx-12,by-10,bw+24,72,GV.gold,0.6*g("before"));q.save();q.fillStyle="rgba(222,225,230,1)";rr(q,bx,by,bw,52,10);q.fill();q.restore();
-    wc_T(q,"Merge",bx+bw/2,by+36,{w:700,size:28,align:"center",col:[138,142,150]});
+    wd_merge(q,x+w-210,y+82,g("before"));
     WD_CHG.files.forEach((f,i)=>wc_T(q,f,x+40,y+222+i*40,{f:"mono",w:500,size:28,col:WC_INK}));
     if(g("checks")<=0.01)return;withA(q,g("checks"),()=>{wc_T(q,"checks",x+40,y+330,{w:700,size:28,col:WC_MUTED});
       // the check, and its three rows: each comes in once the one before it passes; the rerun runs them all again
@@ -386,3 +390,110 @@ function wd_minutes(ctx,t,a,done){WD_MINS.forEach((m,i)=>{const x=270+i*120,y=10
     wc_T(ctx,"Data council · minutes · "+m+" 2026",x+48,y+62,{w:700,size:32,col:WC_MUTED});wc_T(ctx,"Action: name the data owners",x+48,y+120,{w:800,size:36,col:WC_DARK});
     if(!last)gv_stamp(ctx,x+800,y+96,"CARRIED FORWARD",1,{size:28,rot:-0.07,col:GV.redInk});
     else{gv_lines(ctx,x+48,y+190,880,6,40);gv_stamp(ctx,x+790,y+130,"DONE",done,{size:58,rot:-0.09,col:GV.greenInk});}});});}
+
+/* ---------- 7 · Asked by name: the list of who reviews what, written from the owners; a change that asks its owner ---------- */
+// a pane inside a screen: a bar with a path in type, then what fn draws under it
+function wd_pane(ctx,x,y,w,h,title,fn){ctx.save();ctx.fillStyle=rgba(GV.screen,1);ctx.fillRect(x,y,w,h);ctx.strokeStyle=rgba(WC_PENCIL,0.35);ctx.lineWidth=1.5;ctx.strokeRect(x,y,w,h);
+  ctx.fillStyle="rgba(88,110,150,1)";ctx.fillRect(x,y,w,42);ctx.restore();wc_T(ctx,title,x+18,y+30,{f:"mono",w:500,size:26,col:[255,255,255]});if(fn)fn(ctx);}
+// the course domain's model (lines 18 and 22: the award, and its owner), and the list of who reviews what, its first two lines and
+// the course domain's, as the example project has them; long lines wrap, as an editor wraps them, the number on the first part only
+const WD_CM=[[18,"  - name: award"],[22,"    owner: Mei Tanaka, registrar's office"]];
+const WD_CO=[[1,["# Generated by scripts/generate/codeowners.py from the owners","  in the project's metadata and"]],
+  [2,["# models/_shared/_shared__owners.yml. Don't edit it: change","  the metadata, then run the script."]],
+  [16,["# Meaning and contracts: core domains"]],
+  [17,["/models/core/course/_course__conceptual.yml","  mei.tanaka@uni.example noor@uni.example data.governance@uni.example"]],
+  [18,["/models/core/course/_course__decisions.yml","  mei.tanaka@uni.example noor@uni.example data.governance@uni.example"]]];
+const WD_PM=[350,90,1220,150],WD_PC=[350,258,1220,470],WD_CLH=34;
+// a row of the list in type: a comment muted, a path in blue ink, the addresses dark, Mei's in gold ink when mei is lit
+function wd_coRow(ctx,s,x,y,mei){const col=s.startsWith("#")||(s.startsWith("  ")&&!s.includes("@"))?WC_MUTED:s.startsWith("/")?WD_KEY:WC_DARK;
+  if(!s.includes("mei.tanaka@")||mei<=0.01){wc_T(ctx,s,x,y,{f:"mono",w:500,size:26,col});return;}
+  const i=s.indexOf("mei.tanaka@"),cw=tw(ctx,"m",26,500,"mono"),m="mei.tanaka@uni.example";wc_T(ctx,s,x,y,{f:"mono",w:500,size:26,col});
+  wc_T(ctx,m,x+i*cw,y,{f:"mono",w:500,size:26,col:mix(col,GV.goldInk,mei)});}
+// the list of who reviews what in a pane: its lines as given ([number, [parts]]), the parts of a long line wrapped, a gap where lines
+// are left out. o.fill(n) writes line n (0 to 1: its path, then its addresses), o.lit(n) washes it in gold, o.mei(n) turns Mei's
+// address gold; o.under and o.after draw under and over the text, given where each part sits
+function wd_coPane(q,R,lines,o){o=o||{};const cw=tw(q,"m",26,500,"mono"),X=R[0]+92,rows=[];let y=R[1]+42+40;
+  lines.forEach(([n,parts],i)=>{if(i&&n>lines[i-1][0]+1)y+=14;parts.forEach((p2,k)=>{rows.push({n,k,s:p2,y});y+=WD_CLH;});});
+  wd_pane(q,...R,"CODEOWNERS",()=>{if(o.under)o.under(rows,X,cw);
+    rows.forEach(r=>{const fill=o.fill?o.fill(r.n):1;if(fill<=0.01)return;const l=o.lit?o.lit(r.n):0;
+      if(l>0.01)gv_tint(q,X-8,r.y-27,r.s.length*cw+16,36,GV.gold,0.7*l);
+      if(!r.k)wc_T(q,String(r.n),R[0]+66,r.y,{f:"mono",w:500,size:24,align:"right",col:WC_MUTED,deco:true});
+      const u=clamp(fill*2-r.k,0,1),nn=Math.ceil(r.s.length*u);if(nn>0)wd_coRow(q,r.s.slice(0,nn),X,r.y,o.mei?o.mei(r.n):0);});
+    if(o.after)o.after(rows,X,cw);});return rows;}
+// a gold thread, drawn from (x0,y0) to (x1,y1) as p goes 0 to 1, bowing out to the left by bend
+function wd_thread(ctx,x0,y0,x1,y1,p,bend){if(p<=0)return;const n=48,m=Math.ceil(n*clamp(p,0,1)),cx=Math.min(x0,x1)-bend,cy=(y0+y1)/2;ctx.save();
+  ctx.strokeStyle=rgba(GV.goldInk,0.75);ctx.lineWidth=4;ctx.lineCap="round";ctx.lineJoin="round";ctx.beginPath();
+  for(let i=0;i<=m;i++){const u=i/n,a=(1-u)*(1-u),b=2*(1-u)*u,c=u*u,px=a*x0+b*cx+c*x1,py=a*y0+b*cy+c*y1;i?ctx.lineTo(px,py):ctx.moveTo(px,py);}ctx.stroke();
+  if(p>=1){ctx.fillStyle=rgba(GV.goldInk,0.9);ctx.beginPath();ctx.arc(x1,y1,6,0,TAU);ctx.fill();}ctx.restore();}
+// Jun's screen: the course domain's model above, the list of who reviews what below. o.lit lights the award's owner; o.fill(k) writes
+// line 17 or 18 of the list (k 0 or 1), o.thread(k) runs a thread from the owner to it; o.hand lights "Don't edit it", o.ok brings in
+// the check that the list is up to date
+function wd_owners(ctx,t,o){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,null,q=>{const cm=tw(q,"m",28,500,"mono"),f=n=>n>=17?(o.fill?o.fill(n-17):1):1;
+    wd_pane(q,...WD_PM,"models/core/course/_course__conceptual.yml",()=>{WD_CM.forEach(([n,s2],i)=>{const ly=WD_PM[1]+42+44+i*40;
+      if(i===1&&o.lit>0.01)gv_tint(q,WD_PM[0]+86,ly-29,WD_PM[2]-110,40,GV.gold,0.75*o.lit);
+      wc_T(q,String(n),WD_PM[0]+66,ly,{f:"mono",w:500,size:24,align:"right",col:WC_MUTED,deco:true});wd_yaml(q,s2,WD_PM[0]+92,ly);});});
+    wd_coPane(q,WD_PC,WD_CO,{fill:f,mei:n=>n>=17?clamp(f(n)*2-1,0,1):0,lit:n=>n===2?(o.hand||0):0,
+      // the threads, under the text: from Mei's name in the model to her address in each line of the list
+      under:(rows,X,cw)=>{const sx=WD_PM[0]+92+15*cm,sy=WD_PM[1]+42+44+40+10;
+        [17,18].forEach((n,k)=>{const r=rows.find(r2=>r2.n===n&&r2.k===1);if(o.thread)wd_thread(q,sx,sy,X+2*cw+4,r.y-30,o.thread(k),180+40*k);});},
+      // the check that the list matches the owners, at the foot of the pane
+      after:()=>{if(o.ok>0.01)withA(q,clamp(o.ok*2,0,1),()=>{const tx=WD_PC[0]+WD_PC[2]-30,ty=WD_PC[1]+WD_PC[3]-46,
+        tw2=wc_tag(q,tx,ty,"up to date",{align:"right",size:28,wash:GV.green,washA:0.45,col:GV.greenInk});wc_tick(q,tx-tw2-30,ty,30,GV.greenInk,o.ok,5);});}});},
+    {bar:GV.screen});}
+// someone's face in a small circle, as a list of reviewers shows it: the figure drawn small, its head in the circle
+function wd_face(ctx,id,cx,cy,r){ctx.save();ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.fillStyle=rgba([232,226,214],1);ctx.fill();ctx.clip();
+  const s=r/62;person(ctx,id,cx,cy+(560-60)*s*PEOPLE[id].build.h*0.98,s,{pose:"stand",shadow:false});ctx.restore();
+  ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.stroke();ctx.restore();}
+// Jun's next change, on his screen: one file, the course domain's model. Its reviewers, asked by the list of who reviews what, fill in
+// by themselves (rev(i), 0 to 1), each with "review requested"; say(i) lights a name as the voice says it
+const WD_REV=[["mei","Mei Tanaka"],["noor","Noor"],["yusuf","Yusuf Demir"]];
+function wd_change2(ctx,t,o){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,"Changes for review",q=>{
+    wc_T(q,"Map award to the government's definition",x+40,y+120,{w:800,size:40,col:WC_DARK});wc_T(q,"Jun Park · 1 file",x+40,y+166,{w:600,size:28,col:WC_MUTED});
+    wd_merge(q,x+w-210,y+82,0);wc_T(q,"models/core/course/_course__conceptual.yml",x+40,y+222,{f:"mono",w:500,size:28,col:WC_INK});
+    wc_T(q,"Reviewers",x+40,y+316,{w:700,size:30,col:WC_MUTED});wc_T(q,"asked by the list of who reviews what",x+210,y+316,{w:500,size:28,col:WC_MUTED});
+    WD_REV.forEach(([id,n],i)=>{const a=o.rev?o.rev(i):1;if(a<=0.01)return;const ry=y+392+i*86,k=0.9+0.1*spring(a);
+      withA(q,clamp(a*2,0,1),()=>{q.save();q.translate(x+80,ry);q.scale(k,k);q.translate(-x-80,-ry);wd_face(q,id,x+80,ry,32);
+        const l=o.say?o.say(i):0;if(l>0.01)gv_tint(q,x+120,ry-26,tw(q,n,34,700)+24,48,GV.gold,0.7*l);
+        wc_T(q,n,x+132,ry+12,{w:700,size:34,col:WC_DARK});wc_tag(q,x+460,ry,"review requested",{size:28,wash:GV.gold,washA:0.45,col:GV.goldInk});q.restore();});});},
+    {titleSize:28});}
+// Mei's screen: Jun's change asks her to review it; lit (0 to 1) brings it in, amber (0 to 1) lights it as a lamp lights on the line
+function wd_request(ctx,lit,amber){const [x,y,w,h]=GV_RX.screen;gv_screen(ctx,x,y,w,h,"Review requested",q=>{if(lit<=0.01)return;withA(q,lit,()=>{
+    wc_T(q,"Jun asks you to review",x+30,y+98,{w:600,size:28,col:WC_MUTED});
+    ["Map award to the","government's definition"].forEach((l,i)=>wc_T(q,l,x+30,y+154+i*48,{w:800,size:38,col:WC_DARK}));
+    wc_tag(q,x+30,y+278,"owner of: award",{size:28,wash:GV.gold,washA:0.45,col:GV.goldInk});});},{titleSize:28});
+  // lit as a lamp lights on the line: the screen's bar turns amber, and a warm light falls round it
+  if(amber>0.01){ctx.save();ctx.globalCompositeOperation="multiply";wc_glowAt(ctx,x+w/2,y+h/2,w*0.95,[255,214,150],0.55*amber);ctx.restore();
+    withA(ctx,amber,()=>{ctx.fillStyle=rgba(WD_LAMP.amber,1);ctx.fillRect(x,y,w,40);wc_T(ctx,"Review requested",x+18,y+29,{w:700,size:28,col:WC_DARK});});}}
+
+/* ---------- 8 · Where the work is: what, who, when and why, in a log beside the model ---------- */
+// four cards beside Mei's screen, one for each thing a decision records, each as the voice names it (p(i), 0 to 1)
+const WD_WWWW=["what","who","when","why"];
+function wd_fourCards(ctx,p){WD_WWWW.forEach((s2,i)=>wd_drop(ctx,p(i),()=>{const cx=770+(i%2)*184,cy=420+Math.floor(i/2)*112;
+  wc_panel(ctx,cx,cy,164,90,{kind:"card",wash:GV.gold,washA:0.45,seed:160+i});gv_pin(ctx,cx+82,cy+12,GV.red,1);
+  wc_T(ctx,s2,cx+82,cy+64,{w:800,size:40,align:"center",col:WC_DARK});}));}
+// the course domain's log, in the pane below its model: its first decision, then a new one, written as far as o.write (0 to 1) says:
+// Mei decides it, it's proposed, its date and its reason still to come (a cursor waits after "why:"). o.model lights the award's owner
+// above, o.folder the folder the two files share, o.mei the line that says who decides
+const WD_CL=[[10,"  - id: DEC-CRS-01"],[12,"    title: The award needs no intermediate step"],[16,"    status: agreed"]];
+const WD_CN=[[19,"  - id: DEC-CRS-02"],[20,"    step: consumer_output"],[21,"    title: How award maps to the government's definition"],
+  [22,"    decided_by: Mei Tanaka, registrar's office"],[23,"    decided_on:"],[24,"    why:"],[25,"    status: proposed"]];
+function wd_courseLog(ctx,t,o){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,null,q=>{const cm=tw(q,"m",28,500,"mono"),cb=tw(q,"m",26,500,"mono"),
+    folder=(R)=>{if(o.folder>0.01)gv_tint(q,R[0]+12,R[1]+6,"models/core/course/".length*cb+12,32,GV.gold,0.9*o.folder);};
+    wd_pane(q,...WD_PM,"models/core/course/_course__conceptual.yml",()=>{folder(WD_PM);WD_CM.forEach(([n,s2],i)=>{const ly=WD_PM[1]+42+44+i*40;
+      if(i===1&&o.model>0.01)gv_tint(q,WD_PM[0]+86,ly-29,WD_PM[2]-110,40,GV.gold,0.75*o.model);
+      wc_T(q,String(n),WD_PM[0]+66,ly,{f:"mono",w:500,size:24,align:"right",col:WC_MUTED,deco:true});wd_yaml(q,s2,WD_PM[0]+92,ly);});});
+    wd_pane(q,...WD_PC,"models/core/course/_course__decisions.yml",()=>{folder(WD_PC);const X=WD_PC[0]+92,y0=WD_PC[1]+42+42,lh=36;
+      const row=(n,s2,ly,u)=>{wc_T(q,String(n),WD_PC[0]+66,ly,{f:"mono",w:500,size:24,align:"right",col:WC_MUTED,deco:true});
+        const nn=Math.ceil(s2.length*u);if(nn>0)wd_yaml(q,s2.slice(0,nn),X,ly);};
+      WD_CL.forEach(([n,s2],i)=>row(n,s2,y0+i*lh,1));
+      // the new decision, typed line by line; the line that says who decides lit in gold
+      const wr=o.write||0,n0=WD_CN.length;WD_CN.forEach(([n,s2],i)=>{const ly=y0+14+(WD_CL.length+i)*lh,u=clamp(wr*n0-i,0,1);if(u<=0)return;
+        if(i===3&&o.mei>0.01)gv_tint(q,X-8,ly-28,s2.length*cm+16,38,GV.gold,0.7*o.mei);row(n,s2,ly,u);});
+      // the cursor, after "why:", waiting for her reason
+      if(wr>=1&&Math.floor(t*1.6)%2===0){const ly=y0+14+(WD_CL.length+5)*lh;q.save();q.fillStyle=rgba(WC_DARK,0.85);q.fillRect(X+(WD_CN[5][1].length+1)*cm,ly-24,3,30);q.restore();}});},
+    {bar:GV.screen});}
+// the list of who reviews what again, for the two logs Mei keeps: each line lit (lit(k), 0 to 1), her address in gold
+const WD_CO2=[[16,["# Meaning and contracts: core domains"]],[18,["/models/core/course/_course__decisions.yml","  mei.tanaka@uni.example noor@uni.example data.governance@uni.example"]],
+  [46,["# Data the business owns: each seed's owner"]],[51,["/seeds/reference/student/learner_identity_decisions.csv","  mei.tanaka@uni.example"]]];
+function wd_logOwners(ctx,t,o){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,null,q=>{const k=n=>n===18?0:n===51?1:-1;
+    wd_coPane(q,[350,200,1220,400],WD_CO2,{lit:n=>k(n)<0?0:o.lit(k(n)),mei:n=>k(n)<0?0:o.mei(k(n))});},{bar:GV.screen});}

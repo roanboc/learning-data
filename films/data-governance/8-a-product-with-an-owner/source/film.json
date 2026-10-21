@@ -1,0 +1,37 @@
+{
+  "key": "a-product-with-an-owner",
+  "title": "A product with an owner",
+  "sub": "Planning's census count was late, and nobody answered for it. The eighth film of a series on data governance: data as a product, with a promise, and an owner who keeps it.",
+  "howto": "The film is painted in watercolour, in the university's own rooms, and opens in Istanbul, at the market round the bedesten. Behind each person, a soft wash of their side: gold for the business side, cyan for the technical side, warm umber for the people of the past. Gold is governance's decisions; green runs in the work.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "promise",
+    "product",
+    1.5
+  ],
+  "say": [
+    [
+      "\\bYusuf Demir\\b",
+      "Yoosoof Demeer"
+    ],
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ],
+    [
+      "\\bbedesten\\b",
+      "bedess ten"
+    ],
+    [
+      "\\bAnil\\b",
+      "a Neel"
+    ],
+    [
+      "\\bMehmed\\b",
+      "Meh-med"
+    ]
+  ]
+}

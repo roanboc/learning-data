@@ -1,0 +1,287 @@
+1
+00:00:01,400 --> 00:00:12,083
+May 1976. The double-hulled canoe Hōkūleʻa leaves Maui for Tahiti, more than four thousand kilometres south, with no compass and no charts.
+
+2
+00:00:13,583 --> 00:00:20,881
+Its navigator, Mau Piailug, from Satawal in Micronesia, finds his way by the stars, the swells and the birds.
+
+3
+00:00:22,381 --> 00:00:28,731
+His map is in his memory: a star compass, the points on the horizon where the stars rise and set.
+
+4
+00:00:30,431 --> 00:00:38,332
+After thirty-one days, the crew sights Mataiva. Three days later, in Papeʻete, more than seventeen thousand people are waiting.
+
+5
+00:00:40,032 --> 00:00:44,573
+Few still held this knowledge. It passed only from navigator to apprentice.
+
+6
+00:00:45,873 --> 00:00:54,362
+Mau chose to teach it beyond his own island, so it wouldn't be lost. A young Hawaiian, Nainoa Thompson, learned it from him, and taught others.
+
+7
+00:00:55,862 --> 00:01:01,284
+Any map lives only while people use it, keep it true, and teach it to the next navigator.
+
+8
+00:01:02,584 --> 00:01:05,496
+The navigator's test: could someone else sail by it?
+
+9
+00:01:12,596 --> 00:01:15,660
+Tomás's last note asks how to keep the map alive.
+
+10
+00:01:17,160 --> 00:01:22,648
+It's used every week now: for the skipper's test, to give rules a home, and to answer the minister.
+
+11
+00:01:24,348 --> 00:01:25,831
+That's when a map goes stale.
+
+12
+00:01:27,031 --> 00:01:31,097
+It lives in slides, and in a modelling tool only Tomás edits.
+
+13
+00:01:32,397 --> 00:01:38,864
+Its applications were typed in by hand from the IT service management tool, and many have changed since.
+
+14
+00:01:40,364 --> 00:01:46,582
+Its views are copied into decks, and the copies drift. The glossary and the catalogue keep their own words.
+
+15
+00:01:48,282 --> 00:01:51,518
+A stale map is worse than none, because people trust it.
+
+16
+00:01:53,218 --> 00:01:58,559
+If Tomás left tomorrow, nobody could sail by it. It fails the navigator's test.
+
+17
+00:02:01,259 --> 00:02:07,965
+So he moves the map into an enterprise architecture tool that everyone can reach, with a database and a graph.
+
+18
+00:02:09,665 --> 00:02:12,331
+Much of what it holds is already kept somewhere else.
+
+19
+00:02:13,631 --> 00:02:22,664
+Strategy in documents, goals and initiatives in the project management tool, applications and servers in the IT service management tool.
+
+20
+00:02:24,564 --> 00:02:30,297
+The tool brings each one in with its source's ID, and keeps it in step, so nobody retypes it.
+
+21
+00:02:31,997 --> 00:02:38,456
+The rest is written in the map itself: capabilities, rules, decisions, and the links between everything.
+
+22
+00:02:40,156 --> 00:02:46,163
+Even the business glossary fits: each term is a business object, defined once by the business.
+
+23
+00:02:47,763 --> 00:02:52,547
+So keeping a map true is a data integration job, as well as a modelling one.
+
+24
+00:02:56,047 --> 00:03:02,510
+Each element is kept once: a capability, a step, a domain, a business object, a rule, a measure.
+
+25
+00:03:04,110 --> 00:03:10,110
+Each has a stable ID. Names change, but IDs don't, so everything else points to the ID.
+
+26
+00:03:11,710 --> 00:03:17,862
+Then its name, its definition, its owner, and its relationships, named as ArchiMate names them.
+
+27
+00:03:19,362 --> 00:03:26,249
+And his two rules from day one, on every element: its evidence, with a date, and whether its owner has confirmed it.
+
+28
+00:03:27,849 --> 00:03:30,297
+Decisions are kept too, each saying why.
+
+29
+00:03:31,597 --> 00:03:37,138
+A small map could keep all this as text files in a repository: the simplest approach.
+
+30
+00:03:38,738 --> 00:03:45,667
+With many sources, and many people in their roles, the utility needs the tool. Either way, the ideas are the same.
+
+31
+00:03:51,567 --> 00:03:55,194
+Every version of the map is kept, with who changed what, and when.
+
+32
+00:03:56,494 --> 00:04:01,075
+A change is proposed as a draft, and nothing changes until it's approved.
+
+33
+00:04:02,575 --> 00:04:07,935
+The owner of that part approves it: Grace for the network's, Ama for the obligations.
+
+34
+00:04:09,435 --> 00:04:12,062
+Checks run on the map itself, on every change.
+
+35
+00:04:12,762 --> 00:04:18,422
+Every element has an owner. Every rule, a reason and a home. Every measure, a definition.
+
+36
+00:04:20,022 --> 00:04:24,398
+Generating power still has no owner, and the check says so, every time.
+
+37
+00:04:27,098 --> 00:04:30,669
+Everything people read is generated from the map, one way.
+
+38
+00:04:32,169 --> 00:04:39,119
+The ArchiMate views, the glossary, the conceptual model, the ontology, the tests and tracking tables, and the heat map.
+
+39
+00:04:40,819 --> 00:04:43,787
+Each one answers the questions of the people who read it.
+
+40
+00:04:45,087 --> 00:04:50,955
+In dbt, each model carries its owner, its domain and the IDs of its rules.
+
+41
+00:04:52,455 --> 00:04:58,358
+In Databricks, each table shows its owner, its tags and its description, beside its lineage.
+
+42
+00:04:59,858 --> 00:05:04,097
+Nobody edits a view. A fix goes to the map, and every view follows.
+
+43
+00:05:06,797 --> 00:05:08,539
+Now an agent can read the map.
+
+44
+00:05:09,839 --> 00:05:16,417
+Given a request, it applies the skipper's test, and finds the decision, the capability and the owner, or nothing.
+
+45
+00:05:18,317 --> 00:05:25,321
+Given a change, it walks the layers, as Tomás did for the social tariff, and lists the owners who must agree.
+
+46
+00:05:27,321 --> 00:05:32,973
+Given a column in the catalogue, it finds the rule behind it, with its owner and its reason.
+
+47
+00:05:34,773 --> 00:05:38,812
+Every answer cites IDs and evidence, so a person can check it.
+
+48
+00:05:42,112 --> 00:05:48,926
+The agent is on the map itself: software, filling a role, with its rights written down, like the outage agent's.
+
+49
+00:05:50,426 --> 00:05:54,420
+It may read everything, and draft changes. It may not confirm one.
+
+50
+00:05:55,920 --> 00:05:59,738
+Where two sources disagree, it doesn't choose. It asks the owner.
+
+51
+00:06:01,238 --> 00:06:02,692
+Its owner is Tomás.
+
+52
+00:06:03,792 --> 00:06:10,824
+Agents draft, people confirm, every version is kept: the rule that keeps data models true, applied to the map.
+
+53
+00:06:13,524 --> 00:06:18,892
+Then the regulator changes the retail code, the rules every energy retailer must follow.
+
+54
+00:06:20,392 --> 00:06:27,143
+When an actual reading replaces an estimate, the bill must be corrected within ten working days, not on the next one.
+
+55
+00:06:29,043 --> 00:06:34,563
+The agent finds the one rule whose reason is that clause: retail's half of day one's rule.
+
+56
+00:06:36,463 --> 00:06:42,742
+It drafts the rule's new words, and lists what they touch: the billing team's tracking table, and two views.
+
+57
+00:06:44,642 --> 00:06:47,556
+The head of retail, who owns the rule, confirms it.
+
+58
+00:06:49,256 --> 00:06:54,650
+From the next morning, the tracking table shows each bill not corrected within ten working days.
+
+59
+00:06:57,750 --> 00:07:00,763
+Next spring, Zofia starts as a data engineer.
+
+60
+00:07:02,063 --> 00:07:07,507
+Her first day, like Tomás's, brings a badge, a page of acronyms and a list of systems.
+
+61
+00:07:09,107 --> 00:07:10,890
+This time, there's also a map.
+
+62
+00:07:12,190 --> 00:07:16,471
+She asks the agent who owns the readings data, and which rules it keeps.
+
+63
+00:07:17,771 --> 00:07:22,706
+Back come an owner, Grace, and two rules, each with its reason, and links to check them.
+
+64
+00:07:24,306 --> 00:07:28,755
+By the afternoon, she has drafted her first change, for Grace to confirm.
+
+65
+00:07:31,455 --> 00:07:38,689
+In 2007, on Satawal, Mau made five Hawaiians master navigators. Nainoa was one of them.
+
+66
+00:07:40,189 --> 00:07:43,462
+Mau died in 2010. What he taught lives on.
+
+67
+00:07:45,162 --> 00:07:53,072
+Fifty years after that first voyage, Hōkūleʻa is still sailing, navigated by people Mau taught, and by people they taught.
+
+68
+00:07:55,772 --> 00:08:00,261
+Grace confirms Zofia's change. The map passes the navigator's test.
+
+69
+00:08:01,661 --> 00:08:08,572
+Tomás's last note has an answer: a map stays alive while people use it, keep it true, and can pass it on.
+
+70
+00:08:10,172 --> 00:08:17,477
+Layer by layer: who it serves, why it moves, what it must do, how value reaches people, who does the work, and what runs it.
+
+71
+00:08:19,177 --> 00:08:25,273
+Then, for data: the questions that matter, rules with a home, and a change walked down every layer.
+
+72
+00:08:26,773 --> 00:08:33,482
+The map holds what the organisation means. Turning that meaning into data is where From words to data begins.

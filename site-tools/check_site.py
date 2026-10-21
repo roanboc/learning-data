@@ -38,7 +38,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 WEB = ROOT / "site"
 SITE = "https://roanboc.github.io/learning-data/"
 REPO = "https://github.com/roanboc/learning-data"
-RELEASE_YML = ROOT / ".github/workflows/release.yml"
+RELEASES = sorted(ROOT.glob("films/**/release.json"))  # each film's videos, as the release workflow publishes them
 
 # ---------------------------------------------------------------- the site's rules, in one place
 # pages with a real twin in the other language (§3.2); everything else has no hreflang
@@ -425,7 +425,7 @@ def main():
         pages[pg.file] = pg
     by_key = {pg.key: pg for pg in pages.values()}
     normal = [pg for pg in pages.values() if not pg.redirect]
-    release_names = RELEASE_YML.read_text() if RELEASE_YML.exists() else ""
+    release_names = "\n".join(p.read_text() for p in RELEASES)
     intro_stops = re.findall(r'\["(\w+)","\w+",\[', (WEB / "assets/learn/learn.js").read_text())
     sketch_labs = re.findall(r'\bid:"(\w+)"', (WEB / "assets/sketch/sketch.js").read_text())
 
@@ -962,6 +962,9 @@ def main():
         if build_series.readme(S) != (S["root"] / "README.md").read_text():
             s["fails"].append(f"films/{S['dir']}/README.md: its table of films is not what build_series.py makes")
         s["notes"].append(f"{S['name']['en']}: {len(build_series.films(S)[1])} films")
+    for rel, text in build_series.lists():
+        if (ROOT / rel).read_text() != text:
+            s["fails"].append(f"{rel}: its table is not what build_series.py makes from the films' own rows (decided.md, release.json): run python site-tools/build_series.py")
 
     s = rep.check("A series' own labs and scenarios: the same in both languages, each lab on one of its film's chapters, each scenario on a lab")
     for S, SL in SERIES_LEARN.values():

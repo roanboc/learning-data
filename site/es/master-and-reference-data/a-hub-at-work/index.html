@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Un hub en marcha · El mismo, en todas partes · Learning Data</title>
+<meta name="description" content="Una película sobre un hub de datos maestros en marcha: reglas que vinculan solas la mayoría de los registros; una cola para los casos dudosos; un puntaje explicado peso por peso; un asistente de IA que redacta una nota y solo sugiere; una persona que decide, con su razón guardada y la opción de deshacer; cambios publicados para que los sistemas los lean, con una máscara de columna para lo que una oficina no necesita; de dónde vino cada valor; una revisión a ciegas los viernes, con una regla que detiene la vinculación automática; y cinco preguntas para hacerle a cualquier hub.">
+<meta property="og:title" content="Un hub en marcha · El mismo, en todas partes · Learning Data"><meta property="og:description" content="Las reglas actúan, la IA sugiere, la gente decide: una semana en un hub de datos maestros, y cinco preguntas para cualquier hub."><meta property="og:image" content="https://roanboc.github.io/learning-data/assets/a-hub-at-work-poster.jpg"><meta property="og:locale" content="es_419">
+<link rel="alternate" hreflang="en" href="https://roanboc.github.io/learning-data/master-and-reference-data/a-hub-at-work/"><link rel="alternate" hreflang="es" href="https://roanboc.github.io/learning-data/es/master-and-reference-data/a-hub-at-work/">
+<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../../"><img src="../../../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../../">Empieza aquí</a><a href="../../topics/" aria-current="true">Temas</a><a href="../../journey/">Cómo se hizo</a><span class="lang" role="group" aria-label="Idioma"><a href="../../../master-and-reference-data/a-hub-at-work/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span></nav></div></header>
+<main>
+<section class="hero cine"><div class="bg" aria-hidden="true"><img src="../../../assets/a-hub-at-work-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow crumbs"><a href="../../topics/">Temas</a> › <a href="../../topics/#master-data">Datos maestros y de referencia</a> › <a href="../">El mismo, en todas partes</a></p>
+<h1>Un hub en marcha: las reglas actúan, la IA sugiere, la gente decide, y todo se puede explicar y deshacer</h1>
+<p class="lead">Durante un fin de semana, llegan al hub de la universidad 1240 cambios de cuatro sistemas. Sus reglas resuelven casi todos, y 8, demasiado dudosos, esperan a Mei. El primero es Rafael, un egresado que postula a una maestría: su solicitud lo buscó primero, y esperó en vez de crear un número nuevo. El hub muestra por qué las reglas dieron 74 a la coincidencia, un asistente de IA redacta una nota que sugiere, y Mei decide, con su razón guardada y un paso para deshacerlo. El cambio se publica para que cada sistema lo lea, la oficina de egresados nunca ve su fecha de nacimiento, y el viernes una revisión a ciegas de los vínculos automáticos de la semana mantiene honestas a las reglas. Cinco preguntas para hacerle a cualquier hub cierran la película.</p>
+<p class="meta-row"><span>4½ min</span><span>Pausa para pensar</span><span>En inglés, con subtítulos en español</span></p>
+<p class="note">La película está en inglés, con subtítulos en español. Esta página, los capítulos y las preguntas están en español.</p>
+<p class="builds-on">Amplía <a href="../one-person-many-systems/"><i>Una persona, muchos sistemas</i></a></p>
+</section>
+<section class="module" id="watch" data-store="ld-a-hub-at-work" aria-labelledby="watch-h">
+<div class="mhead"><div><h2 id="watch-h">Mira la película</h2><p>Presiona Reproducir, o salta a un capítulo. Activa <b>Pausa para pensar</b> y la película se detiene con una pregunta al final de los capítulos.</p></div></div>
+<div class="player" data-labs="">
+<audio id="snd" preload="metadata" src="../../../assets/a-hub-at-work/soundtrack.mp3"></audio><div class="poster"><img src="../../../assets/a-hub-at-work-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Ver la película · 4½ min</button><button type="button" class="think-badge" data-think>Ver con pausas para pensar</button></div></div><canvas id="film" width="1280" height="720" aria-label="Película animada, en inglés: A hub at work"></canvas>
+<div class="bar"><button id="play">Reproducir</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="time">0:00</span><button id="think" aria-pressed="false" title="Detenerse al final de cuatro capítulos, con una pregunta cada vez">Pausa para pensar</button><button id="cc" class="on" aria-pressed="true">Subtítulos</button><button id="fs">Pantalla completa</button></div>
+</div>
+<div class="chapters" id="chapters" aria-label="Capítulos"></div>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/a-hub-at-work.mp4">Descargar el video (en inglés)</a><a href="https://github.com/roanboc/learning-data/tree/main/films/master-and-reference-data/8-a-hub-at-work/captions">Archivos de subtítulos</a><a href="https://github.com/roanboc/learning-data/blob/main/films/master-and-reference-data/8-a-hub-at-work/script.md" hreflang="en">Leer el guion (en inglés)</a></p>
+<template id="next-panel"><div class="think-card"><p class="think-k">¿Y ahora?</p><h3>Viste un hub en marcha. Vienen más películas de la serie.</h3>
+<div class="next-opts"><a class="btn primary" href="#think-it-through">Piénsalo: 4 preguntas</a><a class="btn" href="../">Toda la serie: El mismo, en todas partes</a></div>
+<div class="think-foot"><button type="button" class="btn" data-again>Ver de nuevo</button></div></div></template>
+</section>
+
+<section class="module" id="think-it-through" aria-labelledby="think-h">
+<div class="mhead"><div><h2 id="think-h">Piénsalo</h2><p>Las cuatro preguntas de Pausa para pensar, para una clase o un equipo. Abre una para ver la respuesta.</p></div></div>
+<div id="think-list"></div>
+</section>
+
+<section class="module" id="in-the-series" aria-labelledby="series-h">
+<div class="mhead"><div><h2 id="series-h">En la serie: <a href="../">El mismo, en todas partes</a></h2><p>Película 8 de 9.</p></div></div>
+<div class="topic-grid series-pn" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}'>
+<article class="topic-card">
+<img src="../../../assets/one-person-many-systems-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">← Anterior · Película 7 de 9</p>
+<h3><a href="../one-person-many-systems/">Una persona, muchos sistemas</a></h3>
+<p>Cuatro formas de darles una sola persona a muchos sistemas. Busca antes de crear, y elige la forma más liviana que resuelva el problema.</p>
+<p class="meta">5 min · Pausa para pensar · El mismo, en todas partes · En inglés</p>
+<p class="tc-progress" data-progress="ld-one-person-many-systems" hidden></p>
+</div>
+</article>
+</div>
+<ol class="series-list" aria-label="Todas las películas de la serie">
+<li><a href="../one-person-many-roles/"><span class="n">1</span>Una persona, muchos roles</a></li>
+<li><a href="../who-is-it/"><span class="n">2</span>¿Quién es?</a></li>
+<li><a href="../which-value-wins/"><span class="n">3</span>Qué valor gana</a></li>
+<li><a href="../roles-come-and-go/"><span class="n">4</span>Los roles van y vienen</a></li>
+<li><a href="../lists-everyone-uses/"><span class="n">5</span>Listas que todos usan</a></li>
+<li><a href="../for-this-purpose-only/"><span class="n">6</span>Solo para este propósito</a></li>
+<li><a href="../one-person-many-systems/"><span class="n">7</span>Una persona, muchos sistemas</a></li>
+<li><a href="../a-hub-at-work/" aria-current="page"><span class="n">8</span>Un hub en marcha</a></li>
+</ol>
+</section>
+</main>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. DAMA y DAMA-DMBOK son marcas de DAMA International, y ArchiMate de The Open Group, nombradas o dibujadas solo para identificar ese cuerpo de conocimiento y esa notación. Este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
+<script>window.L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla completa",fsExit:"Salir de pantalla completa"}};</script>
+<script src="../../../assets/a-hub-at-work/captions.es.js"></script>
+<script src="../../../assets/a-hub-at-work/film.js"></script>
+<script>/* the film is in English; its chapter buttons and the Pause and think kicker use these Spanish names */
+{const N={"monday": "Lunes por la mañana", "rules": "Las reglas actúan", "saturday": "Espera, en vez de un número nuevo", "why": "Por qué 74", "ai": "La IA sugiere", "decide": "La gente decide", "publish": "Publicado, no enviado", "source": "De dónde vino", "friday": "Revisar a quien revisa", "five": "Cinco preguntas", "end": "Explicable y reversible"};SCENES.forEach(s=>{if(N[s.id])s.name=N[s.id];});}</script>
+<script src="../../../assets/a-hub-at-work/think.es.js"></script>
+<script src="../../../assets/learn/think.js"></script>
+<script src="../../../assets/learn/path.js"></script>
+<script src="../../../assets/learn/next.js"></script>
+<script src="../../../assets/ambient.js"></script>
+</body>
+</html>

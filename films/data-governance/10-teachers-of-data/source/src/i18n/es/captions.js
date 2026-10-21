@@ -2,7 +2,7 @@
    Only the captions change: the picture, the voice and the timings stay English, so the site plays the same film, and the video, which has no captions on its picture, takes es.srt.
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption.
    Words as in the series: gobernanza, título for an award, Planificación, dueño, la carpeta 29, control for a check and prueba for a test, glosario. The stewards are
-   los custodios, as series.json names them for this film. In Bogotá, a zebra crossing is la cebra, as Bogotanos say it, a car un carro, and the officer un agente de
+   los responsables de datos, as the series names them (proposal.md, 21 October 2026), so dueño, responsable and custodio never share a word. In Bogotá, a zebra crossing is la cebra, as Bogotanos say it, a car un carro, and the officer un agente de
    tránsito. A rule is una regla, in the street and in the work, so the two read as one idea; office hours are el horario de atención; a warning is una advertencia.
    The new colleague is quien acaba de llegar, as the film leaves them unnamed. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
@@ -60,7 +60,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Ahora tiene horario de atención, cada jueves por la tarde, para quien un control haya detenido.",
 
 "Once a month, the stewards meet: the people who look after the data in each office and faculty.":
-"Una vez al mes, se reúnen los custodios: quienes cuidan los datos en cada oficina y facultad.",
+"Una vez al mes, se reúnen los responsables de datos: quienes los cuidan en cada oficina y facultad.",
 "They don't meet to approve anything.":
 "No se reúnen para aprobar nada.",
 "They bring what broke, and what helped, so nobody has to learn it the hard way twice.":
@@ -79,7 +79,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "First, why. A reader who can't tell what a column holds will guess, and two guesses make two numbers.":
 "Primero, por qué. Quien no sabe qué contiene una columna adivina, y dos suposiciones dan dos números.",
 "The stewards agree it, and set a date.":
-"Los custodios la acuerdan, y fijan una fecha.",
+"Los responsables de datos la acuerdan, y fijan una fecha.",
 "Until then, the check only warns.":
 "Hasta entonces, el control solo advierte.",
 "Each warning links its page, and names the day it becomes an error: the first of December.":
@@ -117,7 +117,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "So every new analyst starts with a path: short films, and labs to practise on.":
 "Por eso, cada analista que llega sigue un camino: películas cortas y laboratorios para practicar.",
 "And the stewards pass it on. Anil shows a new colleague the page that helped him.":
-"Y los custodios lo transmiten. Anil le muestra a quien acaba de llegar la página que lo ayudó.",
+"Y los responsables de datos lo transmiten. Anil le muestra a quien acaba de llegar la página que lo ayudó.",
 
 "And the binder? Of its 215 lines, 92 now run in the work, 64 are decisions someone owns, and 59 are gone.":
 "¿Y la carpeta? De sus 215 líneas, 92 ya se ejecutan en el trabajo, 64 son decisiones con dueño, y 59 ya no están.",

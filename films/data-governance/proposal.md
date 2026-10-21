@@ -38,6 +38,7 @@
 | 20 October 2026 | The series is *Governance you can use* (*Gobernanza que puedes usar*), the name the site already used; the other two options, *Off the shelf* and *Rules that run*, are film titles. |
 | 20 October 2026 | *Off the shelf*'s last chapter names the three parts: on "three more", three cards on Yusuf's board for the films on governance as a capability, and the films on the tools, numbered 14 to 19, on the data team's board. The title and end cards say "Film 1 of 19". The film also takes the master and reference data series' fix that blotches a wash right to the frame's edge, which removes pale bands along the top and left of some walls; the author agreed to take it the same day. |
 | 20 October 2026 | The places the later films share are painted once, in the series' shared pictures (`shared/src/rooms.js`): the stewards' meeting room, with a long table people sit behind; the registrar's, the platform team's and a faculty analyst's desks close up, each with a screen for what the film shows; and Noor's room, whose wall is her architecture map in the six layers and colours of *The map before the data*, with room in each layer for the cards part two pins up. One new person, Anil Kurian, an analyst in the Faculty of Health, is the faculty's analyst the films need, such as in *An agent that checks*. |
+| 21 October 2026 | The story's numbers and dates that more than one film touches are kept in one place, *The facts the films share* below, so no two films choose differently. A film that needs a new one asks the thread of *Off the shelf*, which adds it there. The first were asked for by *Teachers of data*: the binder's 215 lines and where they end, the number on submission day, the stewards' monthly meeting and Tuesday office hours, and a fifth rule for the governance check that warns until 1 December 2026. |
 
 ## The brief
 
@@ -122,6 +123,19 @@ The site could show the same map: the wheel on the Topics page, each area linkin
 The university reports its awards to the government every year. This year, the draft submission and the census report disagree on how many awards were conferred. The same week, the glossary's term *award* changes: microcredentials of at least 6 credit points now count (the kind of drift `skills/sync-the-glossary/` is built to catch). Yusuf is asked to make sure the reported number can be trusted, in time for the submission.
 
 None of the 34 policies would have caught either problem. Each film of part one puts one enabler in place, and *Teachers of data* sends the submission and shows what's left on the shelf. Part two makes governance last beyond the submission, and part three builds each piece.
+
+## The facts the films share
+
+The story's numbers and dates, in one place, so no two films choose differently. A film that needs a new one asks the thread of *Off the shelf* to add it here.
+
+| Fact | Set by |
+|---|---|
+| The binder: 34 policies, one binder each on Yusuf's shelf, 215 lines in all. A maturity assessment of 2.1 out of 5; a chart of who's responsible for what, with "TBC" against who decides how *award* maps to the government's definition; a council that meets monthly. Policy 12, *Data definitions*, has seven lines. | *Off the shelf*; the 215 lines, *Teachers of data* |
+| Yusuf's first week. On Monday, the glossary's *award* changes: microcredentials of at least 6 credit points now count. Planning's census report ran on the Friday before, and says 4,812 awards; the draft submission ran on Wednesday, after the change, and says 4,867. | *Off the shelf* |
+| Submission day: the submission and Planning's census report both say 4,867 awards, counted by the glossary's meaning. How that meaning maps to the government's definition is Mei's recorded decision. | *Teachers of data* |
+| The stewards' community meets once a month; the films show October's meeting, on Tuesday 20 October 2026. Data governance holds office hours every Tuesday. | *Teachers of data* |
+| The governance check has four rules: an owner; a glossary term, or a confirmed absence; classified columns; tests with an owner and a dimension (DEC-PRJ-12). A fifth, "every column other teams read says what it holds", is announced at October's meeting, warns for six weeks, and becomes an error on 1 December 2026 (DEC-PRJ-14). | The example project; *Teachers of data* |
+| The binder at the end of part one: of its 215 lines, 92 run in the work, 64 are decisions someone owns and has recorded, and 59 are retired. | *Teachers of data* |
 
 ## The series at a glance
 
@@ -544,5 +558,5 @@ The author approved the plan on 20 October 2026, and with it the series' title, 
 1. *Off the shelf*: the author's review of its video, then its pull request.
 2. One shared pass: the places several films need (the registrar's office close up, a meeting room for the stewards, the platform team's room, a faculty analyst's desk, and Noor's room with her map board), added once to the series' shared pictures. Done on 20 October 2026.
 3. The example project's additions, in one thread, the governance check first.
-4. Films 2 to 10, one thread each, side by side; each owns its folder and its opening, and shares the story's facts (names, numbers, dates) from one place.
+4. Films 2 to 10, one thread each, side by side; each owns its folder and its opening, and shares the story's facts (names, numbers, dates) from one place, *The facts the films share*.
 5. Films 11 to 13, once part one's scripts are approved; films 14 to 19, once part two's are. Each film goes live on the site when the author approves its pull request.

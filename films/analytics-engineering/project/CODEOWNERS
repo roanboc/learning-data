@@ -27,6 +27,7 @@
 /models/marts/finance/_finance__conceptual.yml           finance@uni.example noor@uni.example
 /models/marts/finance/_finance__decisions.yml            finance@uni.example noor@uni.example
 /models/marts/finance/_finance__models.yml               finance@uni.example jun.park@uni.example
+/models/marts/learning/_learning__models.yml             learning@uni.example jun.park@uni.example
 /models/marts/planning/_planning__conceptual.yml         planning@uni.example noor@uni.example
 /models/marts/planning/_planning__decisions.yml          planning@uni.example noor@uni.example
 /models/marts/planning/_planning__models.yml             planning@uni.example jun.park@uni.example
@@ -55,6 +56,7 @@
 /products/learner_records.yml                            mei.tanaka@uni.example
 /products/learner_wallet.yml                             wallet@uni.example
 /products/learners_near_an_award.yml                     clara.jensen@uni.example
+/products/short_course_follow_ups.yml                    learning@uni.example
 /products/tuition_forgone.yml                            finance@uni.example
 
 # Who uses it: each consumer

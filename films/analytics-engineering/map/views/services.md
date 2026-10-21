@@ -12,7 +12,7 @@
 | CAP-004 protect who sees what | Yusuf Demir, data governance lead | amber | every column of a shared model classified, and tagged and masked on the platform from that class (project: governance.py, DEC-PRJ-13); no access requests with a purpose and an end date yet · 20 Oct 2026 |
 | CAP-005 keep data fit for use | Yusuf Demir, data governance lead | green | every test has an owner and a dimension; the scorecard is read from the run; emails checked where they're typed (project: scorecard.md, DEC-SC-04) · 20 Oct 2026 |
 | CAP-006 change without surprises | Yusuf Demir, data governance lead | green | impact report on every pull request; versioned contracts (project: impact.py, DEC-PRJ-02) · 20 Oct 2026 |
-| CAP-007 provide data products | Yusuf Demir, data governance lead | amber | five products, in ODPS and ODCS (project: products/); no catalogue or access requests yet · 20 Oct 2026 |
+| CAP-007 provide data products | Yusuf Demir, data governance lead | amber | six products, in ODPS and ODCS (project: products/); no catalogue or access requests yet · 20 Oct 2026 |
 | CAP-008 teach | Yusuf Demir, data governance lead | red | nothing yet: no guidance, no community of practice, no onboarding · 20 Oct 2026 |
 
 ## The services it offers

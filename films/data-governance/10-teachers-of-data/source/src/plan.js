@@ -658,10 +658,11 @@ function tt_anilScreen(x,st){gv_screen(x,0,0,1260,690,"learner_progress",q=>{
     if(ok>0.5)withA(q,clamp(ok*2-1,0,1),()=>wc_T(q,"Governance's rules are met",60,500,{w:700,size:36,col:GV.greenInk}));});
   // the page, over the screen as it opens
   if(st.page>0.01){const e=easeCam(clamp(st.page,0,1));q.save();q.translate(0,40*(1-e));withA(q,clamp(st.page*2.5,0,1),()=>tt_howPage(q,st.lit||(()=>0)));q.restore();}},{titleSize:30,barH:54});}
-// the page: what the check asks, why, how in three steps, and who to ask (the project's docs/how-to/classify-a-column.md)
+// the page: what the check asks, why, how in three steps, and who to ask (the project's docs/how-to/classify-a-column.md); X and w
+// place it on the screen
 const TT_HOW=[["What the check asks",["Each column says whether it identifies a person."]],["Why",["So access and masks follow the column wherever it's read."]],
   ["How",["1 · Find the column in its model's file","2 · Add personal_data: direct, pseudonymous or none","3 · Run the check again"]],["Who to ask",["Data governance's office hours, Thursdays from 2 to 3 pm"]]];
-function tt_howPage(q,lit){const X=300,Y=70,w=920,h=606;q.save();q.filter="blur(10px)";q.fillStyle="rgba(40,40,60,0.28)";q.fillRect(X+10,Y+14,w,h);q.restore();q.fillStyle=rgba(GV.paper,1);q.fillRect(X,Y,w,h);
+function tt_howPage(q,lit,X,w){X=X||300;w=w||920;const Y=70,h=606;q.save();q.filter="blur(10px)";q.fillStyle="rgba(40,40,60,0.28)";q.fillRect(X+10,Y+14,w,h);q.restore();q.fillStyle=rgba(GV.paper,1);q.fillRect(X,Y,w,h);
   q.fillStyle=rgba([70,96,140],1);q.fillRect(X,Y,w,8);wc_T(q,"Classify a column",X+40,Y+66,{w:800,size:44,col:WC_DARK});let y=Y+118;
   TT_HOW.forEach(([hd,ls],j)=>{const hh=40+ls.length*36;gv_tint(q,X+24,y-8,w-48,hh+6,GV.gold,0.8*clamp(lit(j),0,1));wc_T(q,hd,X+40,y+24,{w:800,size:30,col:WC_DARK});
     ls.forEach((l,i)=>wc_T(q,l,X+40,y+60+i*36,{w:600,size:28,col:WC_INK}));y+=hh+18;});}
@@ -684,9 +685,9 @@ function tt_junScreen(x,st){gv_screen(x,0,0,1260,690,"governance check",q=>{
 
 /* ---------- the university: the stewards' meeting room ---------- */
 // the screen on the wall: the meeting's name; then the three faculties who join from their own rooms, each face lighting as it comes
-// (st.faces(j), 0 to 1; st.pose(j), what each of them does)
-function tt_meetScreen(x,st,t){const [sx,sy,sw,sh]=GV_MT.screen;gv_screen(x,sx,sy,sw,sh,"Stewards, October",q=>{const f=st.faces||(()=>0),any=[0,1,2].some(j=>f(j)>0.01);
-  if(!any)wc_T(q,"Stewards, October",sx+sw/2,sy+sh/2+30,{w:800,size:40,align:"center",col:WC_DARK});
+// (st.faces(j), 0 to 1; st.pose(j), what each of them does; st.title, which month's meeting it is)
+function tt_meetScreen(x,st,t){const [sx,sy,sw,sh]=GV_MT.screen,ttl=st.title||"Stewards, October";gv_screen(x,sx,sy,sw,sh,ttl,q=>{const f=st.faces||(()=>0),any=[0,1,2].some(j=>f(j)>0.01);
+  if(!any)wc_T(q,ttl,sx+sw/2,sy+sh/2+30,{w:800,size:40,align:"center",col:WC_DARK});
   ["ttFac1","ttFac2","ttFac3"].forEach((id,j)=>{const u=f(j);if(u<=0.01)return;const tx=sx+16+j*(sw-32)/3,tw_=(sw-32)/3-12,ty=sy+64,th=sh-84;
     withA(q,clamp(u*2,0,1),()=>{q.fillStyle=rgba([[222,214,200],[212,222,228],[228,218,222]][j],1);q.fillRect(tx,ty,tw_,th);q.save();q.beginPath();q.rect(tx,ty,tw_,th);q.clip();
       q.fillStyle=rgba([[200,186,166],[186,200,210],[210,194,200]][j],1);q.fillRect(tx,ty+th*0.62,tw_,4);
@@ -888,6 +889,69 @@ function tt_deskBinder(x,a){if(a<=0.01)return;const X=922,Y=GV_OFF.desk[1],col=t
 // binder 29, just taken off the shelf, upright in his hand
 function tt_heldBinder29(cx,P_,hands){const h=hands[1];cx.save();cx.translate(h[0],h[1]);gv_binder(cx,-15,-80,30,183,tt_bindCol(28));cx.restore();fingers(cx,P_,[h]);}
 
+/* ---------- the university: teaching ---------- */
+// a clipboard held up at the chest, out a little towards whoever it's for, and a sketch drawn on it as it's explained: three boxes, an
+// arrow between each, the middle one ringed. In the holder's units, as they face (TT_SK, the board; TT_SKG, the sketch's middle and
+// scale). tt_skAt(p) follows the pen over it, lifted between strokes: where its tip is at p (0 to 1) of the way, and the strokes so far
+const TT_SK={x:-49,y:-336,w:150,h:100},TT_SKG={x:-49,y:-338,k:0.62};
+const TT_SKETCH=(()=>{const box=c=>[[c-20,-25],[c+20,-25],[c+20,5],[c-20,5],[c-20,-25]],arr=(a,b)=>[[a,-10],[b,-10],[b-7,-16],[b,-10],[b-7,-4]],ring=[];
+  for(let i=0;i<=36;i++){const a=-2.1+i/36*TAU*1.06;ring.push([Math.cos(a)*33,-10+Math.sin(a)*27]);}
+  const G=TT_SKG,S=[box(-62),arr(-40,-24),box(0),arr(24,40),box(62),ring].map(s=>s.map(([x,y])=>[G.x+x*G.k,G.y+y*G.k])),seg=[];let L=0,prev=null;
+  for(const st of S){if(prev)seg.push({a:prev,b:st[0],up:true});for(let i=1;i<st.length;i++)seg.push({a:st[i-1],b:st[i],up:false,first:i===1});prev=st[st.length-1];}
+  for(const g of seg){g.l=Math.hypot(g.b[0]-g.a[0],g.b[1]-g.a[1]);L+=g.l;}return{seg,L};})();
+function tt_skAt(p){const {seg,L}=TT_SKETCH;let left=clamp(p,0,1)*L,tip=seg[0].a;const lines=[];
+  for(const g of seg){if(left<=0)break;const u=Math.min(1,left/g.l),b=[lerp(g.a[0],g.b[0],u),lerp(g.a[1],g.b[1],u)];left-=g.l;tip=b;
+    if(g.up)continue;if(g.first||!lines.length)lines.push([g.a]);lines[lines.length-1].push(b);}
+  return{tip,lines};}
+// where the hand holding the pen goes, for its tip at p, up and behind the tip, in the holder's units as they face (what tt_ik takes for
+// the arm nearer the viewer's right); once it's drawn, the hand lifts (off, 0 to 1) to the board's top corner, out of the sketch's way
+const tt_skGrip=(p,off)=>{const {tip}=tt_skAt(p);return[lerp(tip[0]+14,20,off||0),lerp(tip[1]-26,-400,off||0)];};
+function tt_heldSketch(p,off){return(cx,P_,hands)=>{const B=TT_SK,{lines}=tt_skAt(p),g=tt_skGrip(p,off),tip=[g[0]-14,g[1]+26],X=B.x-B.w/2,Y=B.y-B.h/2;
+  cx.fillStyle="rgba(60,50,40,0.2)";rr(cx,X+6,Y+8,B.w,B.h,9);cx.fill();cx.fillStyle=rgba(GV_HOLD.walnut,1);rr(cx,X,Y,B.w,B.h,9);cx.fill();
+  cx.fillStyle="#fffdf6";rr(cx,X+7,Y+12,B.w-14,B.h-19,4);cx.fill();cx.fillStyle="rgba(170,176,190,1)";rr(cx,B.x-22,Y-7,44,17,4);cx.fill();
+  cx.save();cx.strokeStyle=rgba([60,110,170],0.95);cx.lineWidth=3;cx.lineCap="round";cx.lineJoin="round";
+  for(const l of lines){cx.beginPath();cx.moveTo(l[0][0],l[0][1]);for(let i=1;i<l.length;i++)cx.lineTo(l[i][0],l[i][1]);cx.stroke();}
+  // the pen: from its tip on the sheet, up through the hand that holds it, which is drawn over it
+  const h=hands[0],dx=h[0]-tip[0],dy=h[1]-tip[1],d=Math.hypot(dx,dy)||1,ux=dx/d,uy=dy/d;cx.lineWidth=6;cx.strokeStyle=rgba([46,52,66],1);
+  cx.beginPath();cx.moveTo(tip[0]+ux*3,tip[1]+uy*3);cx.lineTo(tip[0]+ux*50,tip[1]+uy*50);cx.stroke();cx.strokeStyle=rgba([60,110,170],1);cx.lineWidth=7;
+  cx.beginPath();cx.moveTo(tip[0]+ux*40,tip[1]+uy*40);cx.lineTo(tip[0]+ux*52,tip[1]+uy*52);cx.stroke();cx.restore();
+  // the other hand at the board's near edge
+  fingers(cx,P_,[[X+2,B.y+10]]);};}
+// the new analyst's screen: their first weeks, a path along the top; each week a short film, and under it a lab to practise on. st:
+// film(j) and lab(j) light each one as it's named; done ticks week 1's; page brings up, over it, the page Anil shows them (tt_howPage),
+// its parts lit by lit(j)
+const TT_PATH={x:200,w:236,gap:20,y:164,fy:210,fh:150,ly:420,lh:176};
+const tt_pathX=j=>TT_PATH.x+j*(TT_PATH.w+TT_PATH.gap);
+function tt_lit(q,X,Y,w,h,a){if(a<=0.01)return;q.save();q.globalCompositeOperation="screen";wc_glowAt(q,X+w/2,Y+h/2,w*0.7,[255,214,120],0.45*a);q.restore();
+  q.save();q.strokeStyle=rgba(GV.gold,0.95*a);q.lineWidth=5;q.lineJoin="round";q.strokeRect(X-5,Y-5,w+10,h+10);q.restore();}
+function tt_pathScreen(x,st){gv_screen(x,0,0,1260,690,"Your first weeks",q=>{const P=TT_PATH,f=j=>st.film?st.film(j):0,lb=j=>st.lab?st.lab(j):0,done=st.done||0;
+  // the path: a line through the four weeks, the first of them reached
+  q.save();q.strokeStyle=rgba(WC_PENCIL,0.55);q.lineWidth=3;q.lineCap="round";q.setLineDash([2,11]);q.beginPath();q.moveTo(tt_pathX(0)+P.w/2,P.y-44);q.lineTo(tt_pathX(3)+P.w/2,P.y-44);q.stroke();q.restore();
+  for(let j=0;j<4;j++){const cx=tt_pathX(j)+P.w/2;q.fillStyle=rgba(j?[206,204,198]:GV.gold,1);q.beginPath();q.arc(cx,P.y-44,j?8:12,0,TAU);q.fill();
+    wc_T(q,"week "+(j+1),cx,P.y,{w:700,size:28,align:"center",col:j?WC_MUTED:WC_DARK});}
+  wc_T(q,"films",40,P.fy+P.fh/2+10,{w:800,size:30,col:WC_DARK});wc_T(q,"labs",40,P.ly+P.lh/2+10,{w:800,size:30,col:WC_DARK});
+  for(let j=0;j<4;j++){const X=tt_pathX(j),col=[[96,118,150],[150,90,80],[120,140,104],[186,160,110]][j];
+    // the film: a still in its colour, its play button
+    q.fillStyle=rgba(wc_lit(col,0.35),1);q.fillRect(X,P.fy,P.w,P.fh);q.fillStyle=rgba(col,0.85);q.fillRect(X,P.fy+P.fh*0.62,P.w,P.fh*0.38);
+    q.fillStyle=rgba(wc_lit(col,0.6),1);q.beginPath();q.arc(X+P.w*0.3,P.fy+P.fh*0.34,16,0,TAU);q.fill();
+    q.fillStyle="rgba(255,255,255,0.9)";q.beginPath();q.arc(X+P.w/2,P.fy+P.fh/2,30,0,TAU);q.fill();q.fillStyle=rgba(col,1);q.beginPath();q.moveTo(X+P.w/2-9,P.fy+P.fh/2-14);
+    q.lineTo(X+P.w/2+15,P.fy+P.fh/2);q.lineTo(X+P.w/2-9,P.fy+P.fh/2+14);q.closePath();q.fill();tt_lit(q,X,P.fy,P.w,P.fh,f(j));
+    // under it, an arrow down to its lab: a little editor, its lines of code, its run button
+    q.save();q.strokeStyle=rgba(WC_PENCIL,0.5);q.lineWidth=3;q.lineCap="round";q.beginPath();q.moveTo(X+P.w/2,P.fy+P.fh+12);q.lineTo(X+P.w/2,P.ly-14);q.moveTo(X+P.w/2-8,P.ly-22);
+    q.lineTo(X+P.w/2,P.ly-14);q.lineTo(X+P.w/2+8,P.ly-22);q.stroke();q.restore();
+    q.fillStyle=rgba([238,240,244],1);q.fillRect(X,P.ly,P.w,P.lh);q.fillStyle=rgba([84,92,110],1);q.fillRect(X,P.ly,P.w,26);
+    for(let i=0;i<3;i++){q.fillStyle=rgba([[236,110,96],[240,190,80],[110,190,120]][i],1);q.beginPath();q.arc(X+16+i*16,P.ly+13,5,0,TAU);q.fill();}
+    [[0.5,GV.green],[0.72,TT_LINK],[0.4,WC_MUTED],[0.6,GV.green]].forEach(([w,c],i)=>{q.fillStyle=rgba(c,0.55);q.fillRect(X+18+(i%2)*18,P.ly+46+i*22,(P.w-60)*w,8);});
+    q.fillStyle=rgba(GV.green,0.9);q.beginPath();q.arc(X+P.w-30,P.ly+P.lh-28,16,0,TAU);q.fill();q.fillStyle="rgba(255,255,255,0.95)";q.beginPath();q.moveTo(X+P.w-35,P.ly+P.lh-37);
+    q.lineTo(X+P.w-22,P.ly+P.lh-28);q.lineTo(X+P.w-35,P.ly+P.lh-19);q.closePath();q.fill();tt_lit(q,X,P.ly,P.w,P.lh,lb(j));
+    if(j===0){tt_tickBadge(q,X+P.w-6,P.fy+4,22,done,401);tt_tickBadge(q,X+P.w-6,P.ly+4,22,clamp(done*1.4-0.4,0,1),402);}}
+  // the page, over the screen as it opens
+  if(st.page>0.01){const e=easeCam(clamp(st.page,0,1));q.save();q.translate(0,40*(1-e));withA(q,clamp(st.page*2.5,0,1),()=>tt_howPage(q,st.lit||(()=>0),170,1050));q.restore();}},{titleSize:30,barH:54});}
+// the faculty's office from its other side, where the new analyst sits: the room as the series paints it, turned round, so the window is
+// at the right and the shelves at the left (the places facultyB and facultyDeskB); the seat and the screen there
+const TT_FB={seat:590,screen:[820,300,540,330]};
+const tt_turned=fn=>c=>{c.translate(W,0);c.scale(-1,1);fn(c);};
+
 /* ---------- Noor's map ---------- */
 // on Noor's map, close (GV_MC): "Govern data" lights gold in the strategy band, over one of the cards already there, and the next part's
 // three films go up beside it, in the band's free part. st: gov (0 to 1), next(j)
@@ -905,4 +969,4 @@ const WC_PLACES={bogota:c=>tt_paintBogota(c,TT_CAM.wide,{year:1995}),bogotaMid:c
   floor:gv_paintFloor,registrarClose:gv_paintRegistrarClose,registrarDesk:gv_paintRegistrarDesk,office:tt_paintOffice,officeZ:c=>tt_inZ(c,TT_Z.wall,tt_paintOffice),
   boardGov:c=>gv_paintBoardClose(c,GV_ROOM.gov),desk:gv_paintDesk,faculty:gv_paintFaculty,facultyDesk:gv_paintFacultyDesk,screenFac:c=>gv_paintScreenDesk(c,GV_ROOM.fac),
   data:gv_paintData,screenData:c=>gv_paintScreenDesk(c,GV_ROOM.data),meeting:gv_paintMeeting,meetingTable:gv_paintMeetingTable,meetZ:c=>tt_inZ(c,TT_Z.board,gv_paintMeeting),
-  calZ:c=>tt_inZ(c,TT_Z.cal,gv_paintMeeting),mapClose:gv_paintMapClose};
+  calZ:c=>tt_inZ(c,TT_Z.cal,gv_paintMeeting),mapClose:gv_paintMapClose,facultyB:tt_turned(gv_paintFaculty),facultyDeskB:tt_turned(gv_paintFacultyDesk)};

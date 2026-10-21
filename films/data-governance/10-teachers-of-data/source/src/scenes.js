@@ -252,11 +252,11 @@ POSE.tt_tell={L:[0.14,-0.08],R:[0.2,2.75],hand:"open",feet:26,shift:6,tilt:-0.08
 POSE.tt_hear={L:[0.14,-0.08],R:[0.1,0.05],feet:26,shift:-4,tilt:0.08,turn:0.5,gaze:[1,0],look:0};
 // the stewards, in their seats from the left, each with where they look after the data
 const TT_STEW=[["mei","Mei","registrar's office"],["leila","Leila","admissions"],["tom","Tom","short courses"],["clara","Clara","Planning"],["anil","Anil","Faculty of Health"]];
-// the meeting room: the screen (o.faces), the whiteboard (o.board, as tt_meetBoard takes it), the stamp's box on the windowsill; Yusuf by the
+// the meeting room: the screen (o.faces; o.title, the month), the whiteboard (o.board, as tt_meetBoard takes it), the stamp's box on the windowsill; Yusuf by the
 // board (o.yusuf, his options, or false; o.yx where he stands); the stewards at the table (o.pose(j), each one's options), and their names on cards (o.tent(j))
 // (o.yusuf a function draws him itself); the board's notes and the calendar are small from here, so only the close-ups read them, and
 // the stamp and the cards only where o.read names them
-function tt_meeting(x,tt,o){o=o||{};const M=GV_MT,rd=o.read||[];if(o.screen!==false)tt_meetScreen(x,{faces:o.faces,pose:o.fpose},tt);
+function tt_meeting(x,tt,o){o=o||{};const M=GV_MT,rd=o.read||[];if(o.screen!==false)tt_meetScreen(x,{faces:o.faces,pose:o.fpose,title:o.title},tt);
   tt_deco(true,()=>{if(o.board)tt_meetBoard(x,o.board);tt_calendar(x,o.cal||{});});tt_stampBox(x,!rd.includes("stamp"));
   if(typeof o.yusuf==="function")o.yusuf(x);else if(o.yusuf!==false)person(x,"yusuf",o.yx||200,905,M.s,Object.assign({pose:"tt_marker",t:tt,carry:tt_heldMarker},o.yusuf||{}));
   TT_STEW.forEach(([id],j)=>gv_behind(x,id,M.seats[j],M.top,M.s,Object.assign({pose:"listen",t:tt,flip:j>=3},o.pose?o.pose(j):{})));
@@ -395,4 +395,56 @@ scene("measured",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(i
       person(x,"yusuf",1440,905,0.8,{pose:"listen",t:tt,flip:true,expr:"smile",nod:tt_nodAt(tt,P.used,P.used+1.6,0)});}}]);
   wc_paperOver(ctx,S);});
 
-["teach","lasts"].forEach(id=>scene(id,(ctx,S,t,sc)=>{setScreen(ctx,S);ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_paperOver(ctx,S);}));
+// ---- 7 · Teachers of data: Yusuf's office hours; the wheel of data work, governance at its centre, each part with the films that teach
+//      it; a new analyst's first weeks; and Anil shows a new colleague the page that helped him ----
+// Tom, turned to what Yusuf shows him, leaning in a little; and Yusuf at the whiteboard, his marker up to it
+POSE.tt_lookIn=Object.assign({},POSE.listen,{shift:5,tilt:0.07,turn:0.35,gaze:[0.85,0.45]});
+POSE.tt_board={L:[0.14,-0.08],R:[1.5,2.9],feet:28,shift:4,tilt:-0.04,turn:0.35,gaze:[0.7,-0.5],look:0};
+// the wheel as it's drawn and lit: the centre, the parts one by one, the gold lines in, then each part lit with its films (documents has
+// none, and stays dark)
+const tt_wheelAt=(tt,P)=>({centre:clamp((tt-P.c0)/0.8,0,1),part:k=>clamp((tt-P.p0-0.27*k)/0.5,0,1),joins:clamp((tt-P.j0)/0.9,0,1),
+  lit:k=>k===5?0:fin(tt,P.l0+0.24*(k<5?k:k-1),0.45)});
+// the stewards' calendar by now: the weeks crossed off, down to none, and the first of December ringed
+const TT_CAL7={off:k=>k<5?1:0,tick:1,ring:1};
+// Yusuf sketching on his clipboard for whoever is at his right (he faces them): the pen's hand where the sketch has got to (p), the
+// other under the board; looking down at it, then up (up, 0 to 1), the pen lifted off it
+function tt_sketcher(x,tt,X,p,up){POSE.tt_sk=Object.assign({},POSE.write,{L:tt_ik(...tt_skGrip(p,up)),R:[0.3,-1.6],feet:26,shift:2,tilt:lerp(0.05,-0.02,up),turn:0.3,
+    gaze:[lerp(0.4,0.9,up),lerp(1,0.05,up)],look:1-up});
+  person(x,"yusuf",X,905,0.8,{pose:"tt_sk",t:tt,flip:true,carry:tt_heldSketch(p,up),carryBehind:true,expr:up>0.5?"smile":"calm"});}
+scene("teach",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o),teach=w("day","It teaches");
+    return{sk0:0.5,sk1:teach-0.5,teach,mt:c.centre-0.35,mz:w("centre","the centre")-0.1,c0:w("centre","the centre")+0.15,p0:w("centre","data work")-0.1,j0:w("centre","meets")-0.1,
+      l0:w("fit","how the pieces")-0.2,fz:c.path-0.5,nc:w("path","new analyst")-0.15,sz:w("path","a path")-0.15,fl:w("path","short films")-0.05,lb:w("path","labs")-0.05,
+      dn:w("path","practise")+0.15,az:c.pass-0.35,aw:c.pass-0.05,show:w("pass","Anil shows"),col:w("pass","a new colleague"),pz:w("pass","the page")-0.2,how:w("pass","the page")+0.25};});
+  const sk=tt=>clamp((tt-P.sk0)/(P.sk1-P.sk0),0,1);
+  gv_shots(ctx,S,t,sc.dur,[
+    // office hours: the card on Yusuf's door; Tom, and Yusuf sketching for him on a clipboard; Yusuf looks up, and Tom nods
+    {at:0,place:"office",keys:[[0,800,550,1.2],[1.3,900,560,1.35]],d:2.5,push:0,draw:(x,tt)=>{
+      tt_office(x,tt,{board:TT_BRD6,frame:0,ghost:1,ms:{row:()=>1},tip:1,box:{forms:1,frame:1},door:1,read:["door"]});
+      person(x,"tom",790,905,0.8,{pose:"tt_lookIn",t:tt,expr:tt>P.teach?"smile":"calm",nod:tt_nodAt(tt,P.teach+0.05,P.mt+1,0)});
+      tt_sketcher(x,tt,1020,sk(tt),fin(tt,P.teach-0.35,0.5));}},
+    // the stewards' meeting room: Yusuf at the whiteboard, and round the table, the stewards turned to it
+    {at:P.mt,place:"meeting",keys:[[P.mt,900,560,1.2],[P.mt+0.1,640,520,1.45]],d:1.5,push:0,draw:(x,tt)=>tt_meeting(x,tt,{board:{wheel:tt_wheelAt(tt,P)},cal:TT_CAL7,
+      faces:()=>1,title:"Stewards, November",yx:260,yusuf:{pose2:"tt_board",mix:fin(tt,P.mt+0.5,0.6)},pose:()=>({flip:true})})},
+    // the whiteboard, close: the wheel he once found in a book, governance at its centre, the ten other parts round it, each named as it's
+    // drawn, gold lines to the centre; then each part lit, with the films that teach it
+    {at:P.mz,place:"meetZ",keys:[[P.mz,960,514,1.05]],push:0.03,draw:(x,tt)=>tt_inZ(x,TT_Z.board,q=>{tt_meetBoard(q,{wheel:tt_wheelAt(tt,P)});tt_deco(true,()=>tt_calendar(q,TT_CAL7));})},
+    // the faculty's office, its other side: a new analyst at their desk, and on the screen, their first weeks
+    {at:P.fz,place:"facultyB",keys:[[P.fz,960,540,1],[P.fz+0.1,900,520,1.12]],d:2.4,push:0,draw:(x,tt)=>{gv_behind(x,"ttNew",TT_FB.seat,GV_FX.top,1.7,{pose:"listen",t:tt});
+      x.drawImage(gv_place("facultyDeskB"),0,0,W,H);tt_onScreen(x,TT_FB.screen,q=>tt_pathScreen(q,{}),true);}},
+    // the screen, close: the films light as they're named, then the labs; week 1's are done
+    {at:P.sz,place:"screenFac",keys:[[P.sz,960,470,1.04]],push:0.02,draw:(x,tt)=>tt_onScreen(x,GV_SC,q=>tt_pathScreen(q,{film:j=>fin(tt,P.fl+0.2*j,0.4),
+      lab:j=>fin(tt,P.lb+0.2*j,0.4),done:fin(tt,P.dn,0.5)}))},
+    // the office again: Anil comes over, and points at the screen, where the page that helped him opens (his arm is drawn again where
+    // it reaches in front of the screen and the plant on the sill, which the desk's layer holds)
+    {at:P.az,place:"facultyB",keys:[[P.az,1000,540,1.02]],push:0.03,draw:(x,tt)=>{const wk=gv_walk(tt,P.aw,2100,1765,300),
+        anil=()=>gv_behind(x,"anil",wk.x,GV_FX.top,1.7,{standing:true,t:tt,flip:true,expr:"smile",pose:wk.moving?"stand":"listen",
+          pose2:wk.moving?(wk.swing>0?"walkA":"walkB"):"point",mix:wk.moving?Math.abs(wk.swing):gv_io(tt,P.show-0.15,99,0.45)});
+      anil();gv_behind(x,"ttNew",TT_FB.seat,GV_FX.top,1.7,{pose:"listen",t:tt,expr:tt>P.col?"smile":"calm",nod:tt_nodAt(tt,P.col+0.2,P.pz+0.6,0)});
+      x.drawImage(gv_place("facultyDeskB"),0,0,W,H);tt_onScreen(x,TT_FB.screen,q=>tt_pathScreen(q,{done:1,page:fin(tt,P.show+0.3,0.7)}),true);
+      x.save();x.beginPath();x.rect(1240,430,360,180);x.clip();anil();x.restore();}},
+    // the screen, close: the page, Classify a column, and its How
+    {at:P.pz,place:"screenFac",keys:[[P.pz,960,470,1.04],[P.pz+0.1,1010,500,1.08]],d:2.6,push:0,draw:(x,tt)=>tt_onScreen(x,GV_SC,q=>tt_pathScreen(q,{done:1,page:1,
+      lit:j=>j===2?fin(tt,P.how,0.5):0}))}]);
+  tt_nameCard(ctx,90,250,"New analyst","Faculty of Health, week 1",gv_io(t,P.nc,P.sz-0.1,0.4));
+  wc_paperOver(ctx,S);});
+scene("lasts",(ctx,S,t,sc)=>{setScreen(ctx,S);ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_paperOver(ctx,S);});

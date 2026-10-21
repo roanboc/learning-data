@@ -10,10 +10,10 @@
 
 /* ---------- colours ---------- */
 // the past: the hospital's ochre and stone, its plaster and flagstones, dark oak doors, iron beds, grey blankets, white enamel; today:
-// the learning team's walls, a soft apricot, the leak's blue-grey and the bucket's tin
+// the leak's blue-grey and the bucket's tin (the learning team's soft apricot walls are the series', GV_ROOM.learn)
 const FW={ochre:[238,214,166],stone:[218,208,188],plaster:[236,226,204],dado:[190,172,144],flag:[202,192,172],door:[120,86,58],
   iron:[70,72,82],sheet:[248,246,240],blanket:[150,152,162],enamel:[246,246,242],lime:[226,232,228],wood:[150,106,70],walnut:[110,74,50],
-  learn:[246,212,180],leak:[106,140,172],tin:[170,178,190],cotton:[232,222,196],amber:[232,164,40],amberInk:[150,92,0]};
+  leak:[106,140,172],tin:[170,178,190],cotton:[232,222,196],amber:[232,164,40],amberInk:[150,92,0]};
 // the skin of the hands at the basin, and the same skin after weeks of chlorinated lime
 const FW_SKIN=[234,196,166],FW_RAW=[226,150,130];
 
@@ -426,7 +426,7 @@ function fw_lineage(ctx,lit){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,"Lineag
 // the learning team's office, close, the camera at the height of someone sitting: apricot walls, a window onto the campus, a poster of
 // this term's short courses, a shelf of brochures; the desk (its front layer) with a screen, a keyboard, a mug, a stack of leaflets
 const FW_TX={top:800,seat:[1450,1.7],screen:[430,286,660,388],win:[70,60,300,440],poster:[1180,64,520,300]};
-function fw_paintTom(ctx){const X=FW_TX,wall=FW.learn;ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),wall,{kind:"plaster",line:false,seed:101});
+function fw_paintTom(ctx){const X=FW_TX,wall=GV_ROOM.learn;ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),wall,{kind:"plaster",line:false,seed:101});
   gv_lightGlow(ctx,900,-60,760);const [wx,wy,ww,wh]=X.win;gv_window(ctx,wx,wy,ww,wh,{wall,seed:30,tx:0.55});
   // the poster: this term's short courses, a tile each (the words on the tiles are decoration)
   const [px,py,pw,ph]=X.poster;wc_wash(ctx,wc_rect(px,py,pw,ph),[251,250,245],{kind:"paper",lw:1.4,seed:102});for(const gx of [px+26,px+pw-26])gv_pin(ctx,gx,py+22,GV.red,1);
@@ -603,5 +603,5 @@ function fw_evidence(ctx,u){const [sx,sy,sw,sh]=GV_MT.screen;if(u<=0)return;with
 
 const WC_PLACES={court:fw_paintCourt,corridor:fw_paintCorridor,hands:fw_paintHands,register:fw_paintRegister,ward:fw_paintWard,pestTop:fw_paintPestTop,pest:fw_paintPest,
   pestDesk:fw_paintPestDesk,office:c=>{gv_paintOffice(c);fw_paintOfficeWall(c);},policy:fw_paintPolicy,screenGov:c=>gv_paintScreenDesk(c,GV_ROOM.gov),boardGov:c=>gv_paintBoardClose(c,GV_ROOM.gov),
-  data:c=>{gv_paintData(c);fw_paintDataBoard(c);},screenData:c=>gv_paintScreenDesk(c,GV_ROOM.data),tom:fw_paintTom,tomDesk:fw_paintTomDesk,screenLearn:c=>gv_paintScreenDesk(c,FW.learn),phone:fw_paintPhone,
+  data:c=>{gv_paintData(c);fw_paintDataBoard(c);},screenData:c=>gv_paintScreenDesk(c,GV_ROOM.data),tom:fw_paintTom,tomDesk:fw_paintTomDesk,screenLearn:c=>gv_paintScreenDesk(c,GV_ROOM.learn),phone:fw_paintPhone,
   platform:gv_paintPlatformClose,platformDesk:gv_paintPlatformDesk,meeting:gv_paintMeeting,meetingTable:gv_paintMeetingTable};

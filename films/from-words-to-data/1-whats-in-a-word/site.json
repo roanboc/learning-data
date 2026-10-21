@@ -18,5 +18,7 @@
   "labs_lead": "Four labs, one idea each, in the order of the film. Count, sort, choose a grain and write a definition, and see what each choice does to the number.",
   "labs_lead_es": "Cuatro labs, una idea cada uno, en el orden de la película. Cuenta, clasifica, elige un grano y escribe una definición, y mira qué le hace cada decisión a la cifra.",
   "quiz_lead": "Eight situations about words and numbers: two numbers for one question, a new word, a grain misread, a definition by example. Decide what you'd do; each answer explains why.",
-  "quiz_lead_es": "Ocho situaciones sobre palabras y cifras: dos cifras para una pregunta, una palabra nueva, un grano mal leído, una definición con un ejemplo. Decide qué harías; cada respuesta explica por qué."
+  "quiz_lead_es": "Ocho situaciones sobre palabras y cifras: dos cifras para una pregunta, una palabra nueva, un grano mal leído, una definición con un ejemplo. Decide qué harías; cada respuesta explica por qué.",
+  "past": ["Vervet monkeys' alarm calls", "A signal can stand for a kind of thing."],
+  "past_es": ["Las llamadas de alarma de los monos vervet", "Una señal puede representar una clase de cosas."]
 }

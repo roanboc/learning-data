@@ -467,7 +467,7 @@ function labGate(Lb){const W=Lb.w,F=W.facts,box=h("div",{class:"lab ea-lab"}),sa
 function labRule(Lb){const W=Lb.w,box=h("div",{class:"lab ea-lab"}),say=say0(),S={split:0,slots:{net:{},ret:{}},fail:0,gen:0,plant:0};
   const sideCol=s=>K.dom[s==="net"?0:1],cards=W.cards,LB={};
   const st=picOf(Lb,()=>1)?stage((lw,ctx)=>{const m=10,wall=14,cw=Math.floor((lw-m*2-wall-20)/2),o={lw,m,wall,cw,top:40,card:{}};
-      // each card as tall as its rule and its four answers, whole (up to eight lines and four)
+      // each card as tall as its rule and its answers, whole (up to eight lines, and four for each answer)
       cards.forEach(c=>{let hh=10+Math.min(8,LN(ctx,c.must,cw-20,13).length)*15.6+8;c.slots.forEach(sl=>{hh+=Math.min(4,LN(ctx,sl.label+": "+sl.opts.find(x=>x[0]==="ok")[1],cw-20,12.5).length)*15+3;});o.card[c.side]={y:o.top+44,h:Math.round(hh+10)};});
       const ch=Math.max(o.card.net.h,o.card.ret.h),gh=W.gen.items.map(g=>Math.max(24,Math.round(fitL(ctx,g,cw-38,12.5,3)[0].length*14+9))),gy=[];let yy=8;
       gh.forEach(v=>{gy.push(yy);yy+=v+6;});o.gen={y:o.top+44+ch+16,h:yy+24,ys:gy,hs:gh};o.h=o.gen.y+o.gen.h+8;return o;},(ctx,o,now)=>{ground(ctx,o.lw,o.h,rgb(Lb.c));
@@ -480,7 +480,10 @@ function labRule(Lb){const W=Lb.w,box=h("div",{class:"lab ea-lab"}),say=say0(),S
       if(sp1>0)cards.forEach(c=>{const r=o.card[c.side],x=c.side==="net"?o.m:o.lw-o.m-o.cw,dx=(c.side==="net"?1:-1)*(1-sp1)*(o.cw/2),col=sideCol(c.side);withA(ctx,sp1,()=>{
         glass(ctx,x+dx,r.y,o.cw,r.h,12,col,{fill:"rgba(7,12,24,0.95)",glow:12});let y=r.y+20;const ls=LN(ctx,c.must,o.cw-20,13).slice(0,8);ls.forEach((l,i)=>T(ctx,l,x+dx+10,y+i*15.6,{w:700,size:13}));y+=ls.length*15.6+6;
         c.slots.forEach((sl,k)=>{const got=S.slots[c.side][k];if(!got)return;const a=eo(since(now,got)/500),txt=sl.label+": "+sl.opts.find(x=>x[0]==="ok")[1],l2=LN(ctx,txt,o.cw-20,12.5).slice(0,4);
-          withA(ctx,a,()=>l2.forEach((l,i)=>T(ctx,l,x+dx+10,y+i*15,{w:700,size:12.5,color:rgbaS(mixC(col,K.ink,0.4),1)})));y+=l2.length*15+3;});});});
+          withA(ctx,a,()=>l2.forEach((l,i)=>T(ctx,l,x+dx+10,y+i*15,{w:700,size:12.5,color:rgbaS(mixC(col,K.ink,0.4),1)})));
+          // an answer that names an element gets its glyph, after its last line, where the line leaves room
+          if(sl.glyph){const gx=x+dx+10+TW(ctx,l2[l2.length-1],12.5,700)+16;if(gx+12<=x+dx+o.cw-8)withA(ctx,a,()=>glyph(ctx,sl.glyph,gx,y+(l2.length-1)*15-4.5,8,K.lay[0]));}
+          y+=l2.length*15+3;});});});
       if(sp1>0.9){const y=o.card.net.y+18,a=eo(since(now,S.split)/900-0.6);arrow(ctx,o.m+o.cw+2,y,o.lw-o.m-o.cw-4,y,K.gold,a,{lw:2.2});withA(ctx,a,()=>pill(ctx,o.lw/2,o.top+12,W.pic.crosses,K.gold,{size:12.5,align:"center"}));}
       // the checks drawn from each rule, one way; a planted case must fail
       if(S.gen){const a=eo(since(now,S.gen)/700);cards.forEach(c=>{const r=o.card[c.side],x=c.side==="net"?o.m:o.lw-o.m-o.cw,col=sideCol(c.side);W.gen.items.forEach((g,k)=>{const y=o.gen.y+o.gen.ys[k],gh=o.gen.hs[k],fail=S.plant&&c.side==="ret"&&k===0&&since(now,S.plant)>500;
@@ -495,7 +498,7 @@ function labRule(Lb){const W=Lb.w,box=h("div",{class:"lab ea-lab"}),say=say0(),S
       g.querySelectorAll("button").forEach(x=>x.disabled=true);el_.classList.add("ok");fb.replaceChildren(why(true,whyOk));done();}},t));});area.append(wrap);focusIn(g.querySelector("button"));return wrap;}
   function step0(){area.replaceChildren();ask(W.split.t,W.split.opts,W.split.b,W.split.no,W.split.why,11,()=>{S.split=performance.now();if(st)st.kick(1800);sayIt(say,W.split.why);later(()=>card(0,0),500);});}
   function card(ci,k){const c=cards[ci];if(k===0)area.append(h("p",{class:"ea-cardt "+c.side},h("b",null,(c.side==="net"?W.pic.net:W.pic.ret)+": "),c.must));const sl=c.slots[k];
-    ask(sl.label,sl.opts,"ok",sl.no,sl.why,20+ci*4+k,()=>{S.slots[c.side][k]=performance.now();if(st){st.relayout();st.kick(700);}sayIt(say,sl.label+": "+sl.opts.find(x=>x[0]==="ok")[1]+". "+sl.why);
+    ask(sl.label,sl.opts,"ok",sl.no,sl.why,20+ci*5+k,()=>{S.slots[c.side][k]=performance.now();if(st){st.relayout();st.kick(700);}sayIt(say,sl.label+": "+sl.opts.find(x=>x[0]==="ok")[1]+". "+sl.why);
       later(()=>{if(k+1<c.slots.length)card(ci,k+1);else if(ci+1<cards.length)card(ci+1,0);else fail();},350);});}
   function fail(){const F2=W.fail;ask(F2.t,F2.opts,F2.b,F2.no,F2.why,40,()=>{S.fail=performance.now();if(st)st.kick(700);sayIt(say,F2.why);later(gen,350);});}
   function gen(){const G=W.gen;S.gen=performance.now();if(st)st.kick(1400);const pl=btn(G.plant,()=>{S.plant=performance.now();if(st)st.kick(1900);pl.disabled=true;endSay(say,G.failed+" "+W.end);const again=btn(U.again,()=>{S.split=0;S.slots={net:{},ret:{}};S.fail=0;S.gen=0;S.plant=0;sayIt(say,"");if(st)st.relayout();step0();},"sm");
@@ -608,7 +611,7 @@ if(app.id==="series-quiz"){app.textContent="";const QS=L.qs,ans=get("quiz",{})||
   function foot(q){const Q=list(),last=cur===Q.length-1;return h("div",{class:"qfoot"},h("a",{class:"link",href:"../labs/#"+q.lab},U.explore+" "+labOf(q.lab).name),
     h("button",{type:"button",class:"btn primary",onclick:()=>{if(last)results(true);else{cur+=1;render(true);}}},last?U.results:U.nextQ));}
   function render(focus){paintBar();const Q=list(),q=Q[cur];if(!q)return;const f=VIS[q.vis.k],a=ans[q.n],body=h("div",{class:"qbody"}),out=h("div"),S={done:a?performance.now()-1e5:0};
-    const vis=DRAW&&f?stage(lw=>({lw,h:Math.round(cl(lw*0.56,190,300))}),(ctx,o,now)=>f(ctx,o,now,q,S),(L.pics.alt&&L.pics.alt[q.vis.k])||q.title):null;
+    const vis=DRAW&&f?stage(lw=>({lw,h:Math.round(f.h?f.h(lw):cl(lw*0.56,190,300))}),(ctx,o,now)=>f(ctx,o,now,q,S),(L.pics.alt&&L.pics.alt[q.vis.k])||q.title):null;
     const F=FILMS[q.film]||{};body.append(h("p",{class:"qtag",style:"--c:"+labOf(q.lab).c},h("i"),U.scenario+" "+(cur+1)+" "+U.of+" "+Q.length+" · "+filmN(q.film)+(F.t?", "+F.t:"")),h("h3",{tabindex:"-1"},q.title),h("p",{class:"qsit"},q.sit));
     const fin=(ok,pick)=>{if(!a)done(q,ok,pick);S.done=performance.now();if(vis)vis.kick(1600);out.replaceChildren(feed(ok,q),foot(q));};
     if(q.type==="choice"||q.type==="spot"){const O=q.type==="choice"?q.opts:q.lines,ix=order(O.map(o=>[o.ok?"ok":"x"]),q.n),bx=h("div",{class:"qopts"+(q.type==="spot"?" spot":"")});
@@ -638,7 +641,8 @@ if(app.id==="series-quiz"){app.textContent="";const QS=L.qs,ans=get("quiz",{})||
     const Q=list(),first=Q.findIndex(q=>!ans[q.n]);if(first<0)results(false);else{cur=first;render(false);}}
   sel.addEventListener("change",()=>setFilm(+sel.value));
   const fromHash=()=>{const m=(location.hash||"").match(/^#film-(\d+)$/);return m?+m[1]:0;};
-  window.addEventListener("hashchange",()=>setFilm(fromHash(),true));setFilm(fromHash(),true);}
+  // the first one waits for the rest of this file, where the pictures are
+  window.addEventListener("hashchange",()=>setFilm(fromHash(),true));Promise.resolve().then(()=>setFilm(fromHash(),true));}
 
 /* ---------- the scenarios' pictures ---------- */
 // Each draws the situation, not its answer; once it's answered (S.done), some show how it ends
@@ -697,4 +701,24 @@ VIS.glyphs=(ctx,o,now,q,S)=>{ground(ctx,o.lw,o.h,K.lay[0]);const it=(L.labs.find
   T(ctx,(L.labs.find(x=>x.id==="notation").w.pic||{}).v3||"3.2",m+w/2,y-16,{w:800,size:13,align:"center",color:rgbaS(K.soft,1)});T(ctx,(L.labs.find(x=>x.id==="notation").w.pic||{}).v4||"4",m+w+gap+w/2,y-16,{w:800,size:13,align:"center",color:rgbaS(K.ink,0.95)});
   el(ctx,m,y,w,hh,it.fromT,KIND_COL(it.from),it.from,{size:14});arrow(ctx,m+w+5,y+hh/2,m+w+gap-5,y+hh/2,K.soft,0.8,{dash:[4,4]});
   if(!S.done)chip(ctx,m+w+gap,y,w,hh,"?",K.soft,{dash:1,tint:0.04,glow:0,size:20});else{const t=since(now,S.done),v=V4(it);scaled(ctx,m+w+gap,y,w,hh,lp(0.85,1,sp(t/600)),()=>el(ctx,m+w+gap,y,w,hh,it.toT,KIND_COL(v.kind),v.kind,{size:14,g2:v.g2,c2:KIND_COL(v.g2),a:eo(t/500),hi:0.5}));}};
+// a rule's place in ArchiMate 4: its reason, its step, its owner (in gold, as the film draws owners) and its data around an empty place;
+// once answered, a requirement, with each joined as ArchiMate draws it, and named: an influence (dashed, an open head), a realisation
+// (dotted, a hollow head), an association
+VIS.links=(ctx,o,now,q,S)=>{ground(ctx,o.lw,o.h,K.lay[0]);const P2=PK.links,m=12,g=12,ew=Math.min(230,(o.lw-m*2-g)/2),eh=Math.min(50,(o.h-24-g*2)/3),gy=(o.h-24-eh*3)/2,
+    y0=12,y1=y0+eh+gy,y2=y1+eh+gy,rw=Math.min(200,o.lw*0.46),rx=o.lw/2-rw/2,t=S.done?since(now,S.done):-1,
+    E=[[P2.code,"driver",K.lay[0],m,y0,"infl"],[P2.owner,"actor",K.gold,o.lw-m-ew,y0,"assoc"],[P2.step,"stream",K.lay[1],m,y2,"real"],[P2.obj,"object",K.lay[3],o.lw-m-ew,y2,"assoc"]];
+  const rel=(x0,y0_,x1,y1_,k,p)=>{if(p<=0)return;const an=Math.atan2(y1_-y0_,x1-x0),hz=9,end=p>=1&&k==="real"?hz*0.9:0;ctx.save();ctx.strokeStyle=rgbaS(K.lay[0],1);ctx.lineWidth=1.8;ctx.lineCap="round";
+    if(k!=="assoc")ctx.setLineDash(k==="infl"?[6,4]:[2,4]);ctx.beginPath();ctx.moveTo(x0,y0_);ctx.lineTo(lp(x0,x1,p)-Math.cos(an)*end,lp(y0_,y1_,p)-Math.sin(an)*end);ctx.stroke();ctx.setLineDash([]);
+    if(p>=1&&k!=="assoc"){ctx.beginPath();ctx.moveTo(x1-hz*Math.cos(an-0.45),y1_-hz*Math.sin(an-0.45));ctx.lineTo(x1,y1_);ctx.lineTo(x1-hz*Math.cos(an+0.45),y1_-hz*Math.sin(an+0.45));
+      if(k==="real"){ctx.closePath();ctx.fillStyle="rgba(7,12,24,1)";ctx.fill();}ctx.stroke();}ctx.restore();};
+  E.forEach(([nm,kind,col,x,y,k],i)=>{const top=y<y1,left=x<rx,ax=left?x+ew*0.75:x+ew*0.25,ay=top?y+eh:y,bx=o.lw/2+(left?-1:1)*rw*0.25,by=top?y1:y1+eh;
+    if(t<0){ctx.save();ctx.strokeStyle=rgbaS(K.soft,0.4);ctx.setLineDash([3,4]);ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(bx,by);ctx.stroke();ctx.restore();}
+    else{rel(ax,ay,bx,by,k,eo(cl((t-300-i*220)/400,0,1)));
+      // its name beside the line's middle, clear of it however steep the line
+      const off=8+6*Math.abs((bx-ax)/(by-ay));withA(ctx,eo(cl((t-1000)/400,0,1)),()=>T(ctx,P2.rel[k],(ax+bx)/2+(left?-off:off),(ay+by)/2+4.5,{w:700,size:12.5,align:left?"right":"left",color:rgbaS(K.lay[0],1)}));}
+    el(ctx,x,y,ew,eh,nm,col,kind,{size:13});});
+  if(t<0)chip(ctx,rx,y1,rw,eh,"?",K.soft,{dash:1,tint:0.04,glow:0,size:20});
+  else scaled(ctx,rx,y1,rw,eh,lp(0.85,1,sp(t/600)),()=>el(ctx,rx,y1,rw,eh,P2.rule,K.lay[0],"requirement",{size:14,a:eo(t/500),hi:0.5}));};
+// taller than the others, for the names of the lines
+VIS.links.h=lw=>cl(lw*0.7,250,320);
 })();

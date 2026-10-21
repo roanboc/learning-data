@@ -1,7 +1,6 @@
 {
   "title": "Governance you can use",
   "title_es": "Gobernanza que puedes usar",
-  "films": ["1-off-the-shelf"],
   "planned": 19,
   "lead": "A series on data governance that runs where the work happens. Yusuf Demir starts as the university's data governance lead, with a shelf of thirty-four policies, and the same week two reports disagree on one number. Film by film, he takes the binder off the shelf, one kind of policy at a time: who decides, one word in one home, who may see it, rules that run, fixes at the source, change without surprises, products with owners, an agent that checks, and the people who teach it all. Then three films design governance as a capability, on the university's architecture map, and six show how to build each piece, with dbt and Databricks.",
   "lead_es": "Una serie sobre gobernanza de datos que se ejecuta donde ocurre el trabajo. Yusuf Demir empieza como líder de gobernanza de datos de la universidad, con un estante de treinta y cuatro políticas, y esa misma semana dos informes no coinciden en un número. Película a película, baja la carpeta del estante, un tipo de política a la vez: quién decide, una palabra en un solo lugar, quién puede verlo, reglas que se ejecutan, arreglos en el origen, cambios sin sorpresas, productos con dueño, un agente que revisa, y las personas que lo enseñan todo. Luego, tres películas diseñan la gobernanza como una capacidad, en el mapa de arquitectura de la universidad, y seis muestran cómo construir cada pieza, con dbt y Databricks.",
@@ -17,12 +16,6 @@
   "thread_es": "Cada año, la universidad informa sus títulos al gobierno. Este año, el informe del censo dice 4,812 y el borrador de la entrega dice 4,867, y esa misma semana cambia el significado de título. Ninguna de las treinta y cuatro políticas lo habría detectado. Película a película, Yusuf pone una pieza de gobernanza donde ocurre el trabajo, para que el número sea confiable el día en que se envía, y muestra lo que queda en el estante.",
   "past_h": "Every film opens somewhere else, at another time",
   "past_h_es": "Cada película empieza en otro lugar, en otra época",
-  "past": [
-    ["England, from Magna Carta in 1215 to the inspectors of the 1880s", "A rule works when there's a copy where the work happens, and someone who checks against it."]
-  ],
-  "past_es": [
-    ["Inglaterra, de la Carta Magna en 1215 a los inspectores de la década de 1880", "Una regla funciona cuando hay una copia donde se hace el trabajo, y alguien que verifica con ella."]
-  ],
   "coming_h": "Still to come",
   "coming_h_es": "Lo que viene",
   "coming_p": "The series has three parts: what governance needs, which this film opens; governance as a capability; and building it with the tools.",

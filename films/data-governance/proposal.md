@@ -4,6 +4,7 @@
 
 ## Decided
 
+<!-- decided: made by site-tools/build_series.py from decided.md, the series' and each film's -->
 | Date | Decision |
 |---|---|
 | 16 October 2026 | A series on data governance, and a companion series on master and reference data. Both align with the series on definitions and modelling (*From words to data*, *In the weeds of data crafting*). |
@@ -42,6 +43,7 @@
 | 21 October 2026 | Each policy is a binder of the same number, and each film of part one opens its own: 2 (*Who decides*), 12 (*One word, one home*, the binder *Off the shelf* already opens), then 6, 9, 15, 19, 22, 26 and 29 for *Who may see it* to *Teachers of data*, so no two films show the same one. *Off the shelf*'s shelf shows no numbers. Policy 26 is *AI and automated tools*. |
 | 21 October 2026 | Two additions to the series' shared pictures, asked for by the films that show them, so every film draws them the same way: Marta Nowak, who leads the wallet app team, joins the shared people (`shared/src/people.js`) for *Change without surprises*; and the learning team's office, Tom's, has soft apricot walls (`GV_ROOM.learn`, in `shared/src/rooms.js`), for *Rules that run* and *Fixed where it starts*. |
 | 21 October 2026 | In Spanish, the three roles of *Who decides* are *dueño* (owner), *responsable de datos* (steward) and *custodio* (custodian), so no two share a word. Spanish governance sources give *custodio* to the custodian who keeps the systems; *responsable* is also the R of a chart of who's responsible for what, the one who does the daily work. *Teachers of data* calls its stewards *responsables de datos*. |
+<!-- /decided -->
 
 ## The brief
 

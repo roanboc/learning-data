@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Meaning machines can read",
+    "key": "meaning-machines-can-read-en",
+    "dir": "films/from-words-to-data/6-meaning-machines-can-read/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/meaning-machines-can-read/film.js",
+    "video": "dist/meaning-machines-can-read.mp4",
+    "file": "meaning-machines-can-read.mp4",
+    "captions": [["films/from-words-to-data/6-meaning-machines-can-read/captions/en.srt", "meaning-machines-can-read.en.srt"], ["films/from-words-to-data/6-meaning-machines-can-read/captions/es.srt", "meaning-machines-can-read.es.srt"]],
+    "paths": ["films/from-words-to-data/6-meaning-machines-can-read/source", ":(exclude)films/from-words-to-data/6-meaning-machines-can-read/source/src/i18n/es/captions.js", "films/from-words-to-data/shared", "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src", "films/a-sharper-sketch/source/src", "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts"],
+    "legibility": {"texts": 415, "under_28": "0%", "under_20": 0, "median": 28, "status": "Reworked"}
+  }
+]

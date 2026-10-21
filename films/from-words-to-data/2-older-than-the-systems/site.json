@@ -18,5 +18,7 @@
   "labs_lead": "Three labs, one idea each, in the order of the film. Sort a thousand years of credentials into the same five parts, give each fact its source, and hold three platforms up to the logical model.",
   "labs_lead_es": "Tres labs, una idea cada uno, en el orden de la película. Clasifica mil años de credenciales en las mismas cinco partes, dale a cada dato su fuente, y mide tres plataformas con el modelo lógico.",
   "quiz_lead": "Eight situations about systems and meaning: a vendor's standard model, a sixth system, two emails, a platform that says customer, a revoked credential still counted. Decide what you'd do; each answer explains why.",
-  "quiz_lead_es": "Ocho situaciones sobre sistemas y significado: el modelo estándar de un proveedor, un sexto sistema, dos correos, una plataforma que dice cliente, una credencial revocada que todavía se cuenta. Decide qué harías; cada respuesta explica por qué."
+  "quiz_lead_es": "Ocho situaciones sobre sistemas y significado: el modelo estándar de un proveedor, un sexto sistema, dos correos, una plataforma que dice cliente, una credencial revocada que todavía se cuenta. Decide qué harías; cada respuesta explica por qué.",
+  "past": ["A guild's masterpiece, a sealed licence to teach", "Someone trusted makes a claim about someone, in a way others can check."],
+  "past_es": ["La obra maestra de un gremio, una licencia para enseñar con sello", "Alguien de confianza afirma algo sobre alguien, de un modo que otros pueden comprobar."]
 }

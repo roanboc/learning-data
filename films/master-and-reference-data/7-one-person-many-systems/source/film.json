@@ -1,0 +1,20 @@
+{
+  "key": "one-person-many-systems",
+  "title": "One person, many systems",
+  "sub": "The same one, everywhere, a series on master and reference data: the postal union of 1874; Linh applying again to the university that gave her two student numbers; four ways to give many systems one person, and what each costs; the lightest that works, chosen for the two places where people are created; a bank's hub and a country's register; a search before the application creates anyone; who may create a person; Linh found, and a namesake kept apart; and the person published as a data product.",
+  "howto": "The film is drawn in watercolour. Each role has its own colour: student teal, applicant amber, tutor violet, researcher coral, alumna green. The person, as the master record, is left as white paper and banded in her roles' colours. Cyan edges the technical side, gold the business side.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": ["lightest", "breath", 1.0],
+  "story": ["bern"],
+  "say": [
+    ["\\bNguyen\\b", "Nwin"],
+    ["\\bLinh's\\b", "Lin's"],
+    ["\\bLinh\\b", "Lin"],
+    ["\\bPhD\\b", "pee aitch dee"],
+    ["\\bdbt\\b", "dee bee tee"],
+    ["\\bHR\\b", "H R"]
+  ]
+}

@@ -67,3 +67,4 @@
 /tests/governance/                                       data.governance@uni.example noor@uni.example
 /scripts/generate/codeowners.py                          data.governance@uni.example noor@uni.example
 /docs/how-to/                                            data.governance@uni.example noor@uni.example
+/skills/review-for-governance/                           data.governance@uni.example noor@uni.example

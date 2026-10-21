@@ -2386,6 +2386,63 @@ function gv_signoff(ctx,x,y,w,o){o=o||{};const k=w/1000,rows=o.rows||[],ask=o.as
     if(o.signer)wc_hand(ctx,o.signer,vx+12,sy,{size:38,w:600,col:GV_SIGN.ink,p:o.signP==null?1:o.signP});ry+=92;}
   if(o.stamp){const ok=o.stamp==="signed";gv_stamp(ctx,952-150,h-66,o.stamp.toUpperCase(),o.stampP==null?1:o.stampP,{size:38,col:ok?GV.greenInk:GV.redInk,rot:ok?-0.05:-0.08});}
   ctx.restore();return{h:h*k,rows:R,x:x+vx*k};}
+// a register: a page of the university's own ledger, ruled in columns, kept by whoever owns what it lists (Who decides' owners and
+// stewards, Who may see it's classes, Rules that run's rules, Teachers of data's sign-offs). Drawn at (x,y), w wide: at 1000, in a
+// close-up, its words are 28 px or more. o.kicker, the register's name, above o.title, the page's; o.cols, the headings, each
+// [heading, share of the width]; o.rows, each an array of cells. A cell is words, null for a gap (lit red as o.missA goes 0 to 1),
+// or {t, mono, red, hand, strike} (a code, a "TBC" in red, words written by hand, struck through as strike goes 0 to 1), or
+// {chip:"direct", p} for a class chip (popping in as p goes 0 to 1). o.p (0 to 1) brings the rows in one by one; o.hi, a row's
+// index or several, washed gold as o.hiA goes 0 to 1; o.foot, a line written by hand at the foot as o.footP goes 0 to 1 ("classed
+// by Mei Tanaka"). o.turn (0 to 1) turns the page over: it folds from its right edge towards the binding, its blank back over its
+// front, so the page a film draws under it shows. A chip is 28 px, so "pseudonymous" needs a column of 0.3 of the width or more.
+// gv_registerH(o) is its height at 1000 wide. Returns the page's height, each row's middle and each column's left edge, so a film
+// can point at a cell
+const GV_REG={top:172,head:206,row:66,pad:16};
+function gv_registerH(o){return GV_REG.head+22+GV_REG.row*(o.rows||[]).length+(o.foot?96:28)+20;}
+function gv_register(ctx,x,y,w,o){o=o||{};const k=w/1000,rows=o.rows||[],cols=o.cols||[],n=rows.length,p=o.p==null?1:o.p,mA=o.missA==null?1:o.missA,h=gv_registerH(o),
+    turn=clamp(o.turn||0,0,1),hi=[].concat(o.hi==null?[]:o.hi),line=(x0,x1,ly,col,a,lw)=>{ctx.strokeStyle=rgba(col,a);ctx.lineWidth=lw||2;ctx.beginPath();ctx.moveTo(x0,ly);ctx.lineTo(x1,ly);ctx.stroke();};
+  const cx=[48];cols.forEach(([,s],i)=>cx.push(cx[i]+904*s));const R=rows.map((_,i)=>y+(GV_REG.head+22+GV_REG.row*i+33)*k),C=cx.slice(0,-1).map(c=>x+c*k);
+  if(turn>=1)return{h:h*k,rows:R,cols:C};
+  const fold=1000*(1-easeCam(turn));ctx.save();ctx.translate(x,y);ctx.scale(k,k);
+  if(turn>0){ctx.beginPath();ctx.rect(-30,-30,fold+30,h+60);ctx.clip();}gv_sheet(ctx,0,0,1000,h,{rot:o.rot});ctx.lineCap="round";
+  // the binding: the page's left edge sinks into the book
+  const gut=ctx.createLinearGradient(0,0,70,0);gut.addColorStop(0,"rgba(70,60,50,0.24)");gut.addColorStop(1,"rgba(70,60,50,0)");ctx.fillStyle=gut;ctx.fillRect(0,0,70,h);
+  if(o.kicker)wc_T(ctx,o.kicker,48,66,{w:700,size:28,col:WC_MUTED});wc_T(ctx,o.title||"",48,124,{w:800,size:42,col:WC_DARK});line(48,952,GV_REG.top-16,WC_MUTED,0.45,2);
+  cols.forEach(([hd],i)=>wc_T(ctx,hd,i?cx[i]+GV_REG.pad:48,GV_REG.head-12,{w:700,size:28,col:WC_MUTED}));
+  line(48,952,GV_REG.head+4,WC_MUTED,0.5,2);line(48,952,GV_REG.head+11,WC_MUTED,0.5,2);
+  const bottom=GV_REG.head+22+GV_REG.row*n;ctx.strokeStyle=rgba(WC_MUTED,0.18);ctx.lineWidth=1.6;
+  for(let i=1;i<cols.length;i++){ctx.beginPath();ctx.moveTo(cx[i],GV_REG.top);ctx.lineTo(cx[i],bottom);ctx.stroke();}
+  rows.forEach((cells,r)=>{const a=clamp(p*n-r,0,1),ry=GV_REG.head+22+GV_REG.row*r,hA=hi.includes(r)?(o.hiA==null?1:o.hiA):0;if(a<=0.01)return;
+    withA(ctx,a,()=>{
+      if(hA>0.01){ctx.save();ctx.globalCompositeOperation="multiply";ctx.fillStyle=rgba(wc_lit(GV.gold,0.6),hA);wc_tr(ctx,wc_rrPts(40,ry+4,920,GV_REG.row-8,8));ctx.fill();ctx.restore();}
+      cells.forEach((c,i)=>{const x0=i?cx[i]+GV_REG.pad:48,room=cx[i+1]-x0-GV_REG.pad,ty=ry+44;
+        if(c==null){if(mA>0.01){ctx.save();ctx.globalCompositeOperation="multiply";ctx.fillStyle=rgba(wc_lit(GV.red,0.72),mA);wc_tr(ctx,wc_rrPts(x0-8,ry+8,room+16,GV_REG.row-14,8));ctx.fill();ctx.restore();}
+          line(x0,x0+room,ry+GV_REG.row-6,GV.redInk,0.3+0.5*mA,2.6);return;}
+        if(c.chip){const q=c.p==null?1:c.p;if(q>0.01){const s=lerp(1.25,1,spring(q));ctx.save();ctx.translate(x0,ry+33);ctx.scale(s,s);withA(ctx,clamp(q*2,0,1),()=>gv_classChip(ctx,0,0,c.chip,{size:28}));ctx.restore();}return;}
+        const t=typeof c==="string"?c:c.t,f=c.mono?"mono":undefined,wt=c.mono?500:c.red?700:600,col=c.red?GV.redInk:c.hand?GV_SIGN.ink:WC_DARK,
+          s=clamp(30*room/Math.max(1,tw(ctx,t,30,wt,f)),28,30);
+        if(c.hand)wc_hand(ctx,t,x0+4,ty,{size:s+2,w:600,col});else wc_T(ctx,t,x0,ty,{w:wt,size:s,col,f});
+        if(c.strike){const e=easeCam(clamp(c.strike,0,1));line(x0-4,x0-4+(Math.min(room,tw(ctx,t,s,wt,f))+8)*e,ty-s*0.32,GV.redInk,0.85,3);}});
+      line(48,952,ry+GV_REG.row,WC_MUTED,0.22,1.6);});});
+  if(o.foot)wc_hand(ctx,o.foot,56,bottom+64,{size:32,w:600,col:GV_SIGN.ink,p:o.footP==null?1:o.footP});
+  if(turn>0){// the page's back, the same paper folded over at the fold: shaded where it lifts off the front, light where it bends; its
+    // shadow on the front beside its edge, and on the page beneath beside the fold
+    const x0=Math.max(0,2*fold-1000);if(x0>0){const e=ctx.createLinearGradient(x0-24,0,x0,0);e.addColorStop(0,"rgba(50,40,30,0)");e.addColorStop(1,"rgba(50,40,30,0.2)");ctx.fillStyle=e;ctx.fillRect(x0-24,0,24,h);}
+    ctx.save();ctx.beginPath();ctx.rect(x0,-30,fold-x0,h+60);ctx.clip();ctx.translate(2*fold,0);ctx.scale(-1,1);ctx.drawImage(gv_sheetPaper(1000,h),-20,-20);ctx.restore();
+    const bk=ctx.createLinearGradient(x0,0,fold,0);bk.addColorStop(0,"rgba(60,50,40,0.16)");bk.addColorStop(0.75,"rgba(60,50,40,0.04)");bk.addColorStop(1,"rgba(255,255,255,0.18)");
+    ctx.fillStyle=bk;ctx.fillRect(x0,0,fold-x0,h);ctx.restore();ctx.save();ctx.translate(x,y);ctx.scale(k,k);
+    const sh=ctx.createLinearGradient(fold,0,fold+46,0);sh.addColorStop(0,"rgba(50,40,30,0.3)");sh.addColorStop(1,"rgba(50,40,30,0)");ctx.fillStyle=sh;ctx.fillRect(fold,0,46,h);}
+  ctx.restore();return{h:h*k,rows:R,cols:C};}
+// a register's cover, closed, lying flat: cloth boards in o.col (a deep blue by default), a darker spine and corners, and a paper
+// label with its name and whose it is ("Classification register", "registrar's office"); at 700 wide its words are 30 px or more.
+// Kept per size and colour, the words drawn every frame
+function gv_registerCover(ctx,x,y,w,h,title,sub,o){o=o||{};const col=o.col||[58,82,118],k=w/700,
+    c=wc_kept("regcover|"+[w,h,col].join(","),w+40,h+40,q=>{q.translate(20,20);q.save();q.filter="blur(6px)";q.fillStyle="rgba(50,40,30,0.3)";q.fillRect(6,10,w,h);q.restore();
+      wc_wash(q,wc_rect(0,0,w,h),col,{kind:"cover",lw:1.4,seed:w+h});const dk=wc_dim(col,0.35),cc=w*0.13;wc_flat(q,wc_rect(0,0,w*0.1,h),dk,1,"spine");
+      wc_flat(q,[[w-cc,0],[w,0],[w,cc]],dk,1,"corner");wc_flat(q,[[w,h-cc],[w,h],[w-cc,h]],dk,1,"corner");
+      wc_flat(q,wc_rect(w*0.2,h*0.2,w*0.68,Math.max(150*k,h*0.24)),WC_CARD,1,"label");});
+  ctx.drawImage(c,x-20,y-20);const lx=x+w*0.2,ly=y+h*0.2,lw=w*0.68;
+  wc_T(ctx,title,lx+lw/2,ly+64*k,{w:800,size:Math.max(30,40*k),col:WC_DARK,align:"center"});if(sub)wc_T(ctx,sub,lx+lw/2,ly+114*k,{w:600,size:Math.max(28,30*k),col:WC_MUTED,align:"center"});}
 
 /* ---------- people moving ---------- */
 // someone walking from x0 to x1 from t0 at v px a second: where they are, the step's bob and swing, when they arrive, which way they face

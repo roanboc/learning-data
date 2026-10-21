@@ -208,17 +208,18 @@ function fw_paintPestTop(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,
   wc_wash(ctx,wc_ell(1640,180,70,70,40),[60,56,60],{kind:"thing",lw:1.5,seed:82});wc_wash(ctx,wc_ell(1640,180,40,40,30),[24,22,30],{kind:"thing",line:false,seed:83});
   ctx.save();ctx.translate(1700,320);ctx.rotate(-0.7);wc_wash(ctx,[[-6,-170],[6,-170],[3,40],[-3,40]],[226,214,186],{kind:"thing",lw:1.1,seed:84});ctx.restore();
   wc_wash(ctx,wc_ell(250,180,96,96,40),[196,160,80],{kind:"thing",lw:1.5,seed:85});wc_wash(ctx,wc_ell(250,180,30,30,24),[246,238,214],{kind:"thing",lw:1.2,seed:86});}
-// the journal of 1858, open, and the book of 1861, closed (a, b: 0 to 1, each laid on the desk); the words are decoration but the year
+// the journal of 1858, open, and the book of 1861, closed (a, b: 0 to 1, each laid on the desk). Their titles are bars without letters,
+// as a title seen from afar (the film shows no words in another language, and the tags say what they are); each one's year is drawn
+function fw_title(ctx,cx,y,ws,h,step,col){ctx.save();ctx.fillStyle=col;ws.forEach((w,i)=>{rr(ctx,cx-w/2,y+i*step,w,h,h/2);ctx.fill();});ctx.restore();}
 function fw_pestPapers(ctx,a,b){if(a>0.01){const k=lerp(1.1,1,easeCam(clamp(a,0,1)));ctx.save();ctx.translate(820,560);ctx.scale(k,k);ctx.rotate(-0.04);withA(ctx,clamp(a*2.5,0,1),()=>{
     gv_sheet(ctx,-520,-380,520,760,{col:[244,236,214]});gv_sheet(ctx,0,-380,520,760,{col:[246,238,216]});
-    wc_T(ctx,"Orvosi Hetilap",-260,-300,{w:800,size:40,align:"center",col:WCP.parchInk,deco:1});wc_T(ctx,"1858",-260,-250,{w:700,size:30,align:"center",col:WC_MUTED});
+    fw_title(ctx,-260,-330,[330,210],16,30,rgba(WCP.parchInk,0.62));wc_T(ctx,"1858",-260,-244,{w:700,size:30,align:"center",col:WC_MUTED});
     for(const cx of [-480,-250,40,270])gv_lines(ctx,cx,-200+(cx>0?-80:0),200,cx>0?18:15,30,0.9);});ctx.restore();}
   if(b>0.01){const k=lerp(1.12,1,easeCam(clamp(b,0,1)));ctx.save();ctx.translate(1230,600);ctx.scale(k,k);ctx.rotate(0.05);withA(ctx,clamp(b*2.5,0,1),()=>{
     ctx.drawImage(wc_kept("fwBook",540,700,q=>{q.translate(20,20);q.save();q.filter="blur(12px)";q.fillStyle="rgba(30,20,10,0.4)";q.fillRect(14,20,500,660);q.restore();
       wc_flat(q,wc_rect(14,652,486,22),[236,226,200],1,"pages");wc_wash(q,wc_rrPts(0,0,500,660,10),[96,52,40],{kind:"cover",lw:1.6,seed:87});wc_flat(q,wc_rect(0,6,36,648),[72,38,30],1,"spine");
       for(const ry of [120,520])wc_flat(q,wc_rect(70,ry,380,5),[214,186,120],0.9,"rule");}),-270,-350);
-    wc_T(ctx,"Die Aetiologie,",0,-150,{w:700,size:34,align:"center",col:[232,214,170],deco:1});wc_T(ctx,"der Begriff und die",0,-108,{w:600,size:30,align:"center",col:[232,214,170],deco:1});
-    wc_T(ctx,"Prophylaxis des",0,-68,{w:600,size:30,align:"center",col:[232,214,170],deco:1});wc_T(ctx,"Kindbettfiebers",0,-24,{w:700,size:34,align:"center",col:[232,214,170],deco:1});
+    fw_title(ctx,0,-172,[270,330,290,310],16,42,rgba([232,214,170],0.85));
     wc_T(ctx,"1861",0,120,{w:700,size:36,align:"center",col:[232,214,170]});});ctx.restore();}}
 const FW_PS={top:780,seat:[1080,1.55]};
 function fw_paintPest(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),[224,206,174],{kind:"plaster",line:false,seed:88});
@@ -236,10 +237,10 @@ function fw_paintPestDesk(ctx){const top=FW_PS.top;gv_deskFront(ctx,top,[120,80,
   wc_part(ctx,wc_rect(1380,top-30,160,30),[60,56,60],1);wc_wash(ctx,wc_ell(1460,top-34,40,10,20),[24,22,30],{kind:"thing",line:false,seed:92});
   for(let i=0;i<4;i++)wc_flat(ctx,wc_rect(560+i*4,top-8-i*7,420,9),i%2?[240,230,206]:[246,238,214],1,"paper");
   wc_part(ctx,wc_rect(300,top-26,90,26),[196,160,80],1);wc_part(ctx,wc_rect(334,top-150,22,124),[244,236,214],1);wc_wash(ctx,[[345,top-178],[352,top-152],[338,top-152]],[255,206,110],{kind:"thing",line:false,seed:93});}
-// his open letters, flying from the desk as he finishes each (k, 0 to 1 along its flight); the heading in his hand, slanted as wc_hand
-// slants it, is decoration (the tag beside them says what they are)
+// his open letters, flying from the desk as he finishes each (k, 0 to 1 along its flight); the heading is a bolder stroke of his hand,
+// without words (the tag beside them says what they are)
 function fw_letter(ctx,x,y,rot,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.rotate(rot);ctx.scale(s,s);gv_sheet(ctx,-150,-200,300,400,{col:[246,238,214]});
-  ctx.save();ctx.translate(-120,-140);ctx.transform(1,0,-0.2,1,0,0);wc_T(ctx,"Offener Brief",0,0,{size:32,w:700,col:WCP.parchInk,deco:1});ctx.restore();ctx.save();ctx.strokeStyle=rgba(WCP.parchInk,0.5);ctx.lineWidth=2.4;ctx.lineCap="round";
+  ctx.save();ctx.strokeStyle=rgba(WCP.parchInk,0.8);ctx.lineWidth=6;ctx.lineCap="round";ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(-120,-146);for(let k=1;k<=7;k++)ctx.lineTo(-120+k*27,-146-k*1.4+Math.sin(k*2.3)*3.2);ctx.stroke();ctx.restore();ctx.save();ctx.strokeStyle=rgba(WCP.parchInk,0.5);ctx.lineWidth=2.4;ctx.lineCap="round";
   for(let i=0;i<9;i++){ctx.beginPath();ctx.moveTo(-120,-90+i*30);for(let k=0;k<=8;k++)ctx.lineTo(-120+k*30*(i===8?0.5:1),-90+i*30+Math.sin(k*1.9+i)*2.5);ctx.stroke();}ctx.restore();ctx.restore();}
 
 /* ---------- today: Yusuf's office ---------- */

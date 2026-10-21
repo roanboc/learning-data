@@ -56,7 +56,7 @@
     [7, "Cambios sin sorpresas", "el impacto de cada cambio, visible antes de integrarlo, y versiones"],
     [8, "Un producto con dueño", "productos de datos con dueño, contrato y niveles de servicio"],
     [9, "Un agente que revisa", "una revisión de gobernanza que hace un agente, mientras las personas deciden"],
-    [10, "Docentes de datos", "el lado humano: custodios, una guía junto a cada control, y medidas que salen del trabajo"],
+    [10, "Docentes de datos", "el lado humano: responsables de datos, una guía junto a cada control, y medidas que salen del trabajo"],
     [11, "Una capacidad, no un proyecto", "la gobernanza como capacidad: servicios que la gente puede pedir, cada uno con una promesa"],
     [12, "Quién hace qué, de principio a fin", "un servicio seguido de principio a fin, y el glosario gestionado como un producto"],
     [13, "Dónde vive cada pieza", "un solo lugar para cada artefacto de gobernanza, y copias sincronizadas en un sentido"],

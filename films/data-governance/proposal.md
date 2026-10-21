@@ -4,6 +4,7 @@
 
 ## Decided
 
+<!-- decided: made by site-tools/build_series.py from decided.md, the series' and each film's -->
 | Date | Decision |
 |---|---|
 | 16 October 2026 | A series on data governance, and a companion series on master and reference data. Both align with the series on definitions and modelling (*From words to data*, *In the weeds of data crafting*). |
@@ -43,6 +44,7 @@
 | 21 October 2026 | Two additions to the series' shared pictures, asked for by the films that show them, so every film draws them the same way: Marta Nowak, who leads the wallet app team, joins the shared people (`shared/src/people.js`) for *Change without surprises*; and the learning team's office, Tom's, has soft apricot walls (`GV_ROOM.learn`, in `shared/src/rooms.js`), for *Rules that run* and *Fixed where it starts*. |
 | 21 October 2026 | In Spanish, the three roles of *Who decides* are *dueño* (owner), *responsable de datos* (steward) and *custodio* (custodian), so no two share a word. Spanish governance sources give *custodio* to the custodian who keeps the systems; *responsable* is also the R of a chart of who's responsible for what, the one who does the daily work. *Teachers of data* calls its stewards *responsables de datos*. |
 | 21 October 2026 | *Teachers of data*'s sound is a double-reed trio, oboe, cor anglais and bassoon, made in its own `tools/score.py`: G major for Bogotá in 1995 and 1996, E-flat major for the university (tuned from G, so the notes the two keys share stay put), E-flat minor for Bogotá in 2012, and the series' mark on the cor anglais, answered by the bassoon. No other film of the series takes the reeds. Its opening keeps to what Mockus's own account (IDB, 2001) supports, three drivers in four keeping the crossings clear by 1996, and credits no fall in road deaths to the mimes, as other measures came at the same time. Its Pause and think stops after *A page beside the check*, *Warn first* and *Measured by use*. |
+<!-- /decided -->
 
 ## The brief
 
@@ -366,7 +368,7 @@ The tools films (14 to 19) don't open in the past. Each opens on the screen, wit
 
 ### 10. Teachers of data
 
-**Opening.** Bogotá, 1995: the mayor sends mimes into the streets. When a driver stops on a crossing, people whistle, a mime invites the driver to back up, and only then does a traffic officer write the fine, to applause: the last step of a sequence meant to teach. With other measures, deaths on the roads fall. People follow a rule more readily when they understand it, and when following it is easy, visible and normal.
+**Opening.** Bogotá, 1995: the mayor sends mimes into the streets. When a driver stops on a crossing, people whistle, a mime invites the driver to back up, and only then does a traffic officer write the fine, to applause: the last step of a sequence meant to teach. By 1996, three drivers in four kept the crossings clear. People follow a rule more readily when they understand it, and when following it is easy, visible and normal.
 
 **Story.** Submission day. The number is the same in the submission and the census report, and its definition is the glossary's. Yusuf knows why it worked: not because of the checks alone, but because people understood them. So the governance team's work changes. A stewards' community meets every month to share what broke and what helped. Office hours replace approval queues. Every check's message links to a short how-to, written for the person it stops. A new check is announced, explained, runs as a warning first, and becomes an error only on a date everyone knows. Every new analyst starts with these films and their labs. The maturity assessment isn't repeated; the measures come from the work: how many public models have an owner, a term and classified columns; how long a drift takes to close; how many failures were fixed at the source; how long access takes to grant; how many people came to office hours, and came back. The binder: of 34 policies, some became checks, some became decisions with owners, and the rest were retired.
 

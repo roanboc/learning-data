@@ -18,8 +18,10 @@ DCAM is a trademark of the EDM Association (formerly the EDM Council). *Off the 
 ## Third-party components
 
 - **Narration:** a synthetic voice generated with [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) (Apache License 2.0), run through [kokoro-onnx](https://github.com/thewh1teagle/kokoro-onnx). The model is not included in this repository.
-- **Fonts:** Manrope and IBM Plex Mono, under the SIL Open Font License 1.1, loaded from Google Fonts by the web pages. Copies for rendering the film, with their licences, are in `films/inner-life-of-data/source/fonts/`.
+- **Fonts:** Manrope and IBM Plex Mono, under the SIL Open Font License 1.1, loaded from Google Fonts by the web pages. Copies for rendering the film, with their licences, are in `films/inner-life-of-data/source/fonts/`. *Who is it?* also carries their Vietnamese subsets, from Google Fonts under the same licence, in `films/master-and-reference-data/2-who-is-it/source/src/fonts.js`.
 
 ## Content
 
 The university, the energy utility, the people, numbers and records shown are fictional.
+
+*For this purpose only* quotes one line of the oath in India's Charaka Samhita, in the English of the Jamnagar edition (Shree Gulabkunverba Ayurvedic Society, 1949), and marks it on screen as a translation. Its sources are in the film's script.

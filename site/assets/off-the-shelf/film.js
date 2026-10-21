@@ -2347,6 +2347,46 @@ function gv_classChipAt(ctx,t,t0,x,y,cls,o){const u=fin(t,t0,0.4);if(u<=0)return
 function gv_mask(ctx,x,y,w,h,u,o){if(u<=0)return;o=o||{};const e=easeCam(clamp(u,0,1)),s=o.size||28;ctx.save();ctx.beginPath();ctx.rect(x-10,y-10,(w+20)*e,h+20);ctx.clip();
   ctx.fillStyle=rgba(GV_CLASS.direct,1);wc_tr(ctx,wc_rrPts(x+2,y+2,w-4,h-4,10));ctx.fill();wc_panel(ctx,x,y,w,h,{kind:"card",fill:GV_CLASS.direct,seed:(w+h)|0});wc_T(ctx,"***",x+18,y+h/2+s*0.5,{w:800,size:s+4,f:"mono",col:[255,255,255]});ctx.restore();}
 
+/* ---------- papers several films share ---------- */
+// a sign-off sheet: a change comes back on paper with what's missing in plain words (Who decides, Who may see it, Rules that run and
+// Teachers of data share it). Drawn at (x,y), w wide: at 1000, in a close-up, its words are 30 px or more. o.title is the change;
+// o.rows its lines, [label, value], with null for a value that's missing; o.ask[i], the question written in red under row i; o.how,
+// a line to the guide that says how to fix it; o.stamp, "sent back" (red) or "signed" (green), landing as o.stampP goes 0 to 1;
+// o.signer, the name written on the signature line as o.signP goes 0 to 1 ("" leaves the line empty). o.p (0 to 1) brings the rows
+// in one by one; o.missA (0 to 1) lights what's missing red; o.askP (0 to 1) writes the questions, wrapped to the value's column.
+// gv_signoffH(ctx,rows,o) is its height at 1000 wide. Returns the sheet's height and each row's middle, so a film can point at one.
+const GV_SIGN={ink:[34,44,92]};
+// where the values start: after the longest label (at 30 px), at 36% of the sheet or more
+function gv_signoffVX(ctx,rows,o){return Math.round(Math.min(560,Math.max(1000*((o||{}).split||0.36),48+Math.max(0,...rows.map(r=>tw(ctx,r[0],30,600)))+40)));}
+// the question under a row, in lines that fit the value's column (written at 30 px in the sheet's units), as even as they can be;
+// a question with line breaks keeps them
+function gv_askLines(ctx,s,vx){if(s.includes("\n"))return s.split("\n");const room=952-vx-24,wrap=r=>{const out=[];let cur="";
+    s.split(" ").forEach(wd=>{const t=cur?cur+" "+wd:wd;if(cur&&tw(ctx,t,30,700)>r){out.push(cur);cur=wd;}else cur=t;});if(cur)out.push(cur);return out;};
+  const L=wrap(room);if(L.length<2)return L;for(let r=tw(ctx,s,30,700)/L.length;r<room;r+=12){const E=wrap(r);if(E.length===L.length)return E;}return L;}
+function gv_signoffH(ctx,rows,o){o=o||{};const ask=o.ask||{},vx=gv_signoffVX(ctx,rows,o);return 214+rows.reduce((s,r,i)=>s+66+(ask[i]?8+42*gv_askLines(ctx,ask[i],vx).length:0),0)+
+  (o.how?72:0)+(o.signer!=null?92:0)+(o.stamp&&!o.how&&o.signer==null?96:0)+40;}
+function gv_signoff(ctx,x,y,w,o){o=o||{};const k=w/1000,rows=o.rows||[],ask=o.ask||{},n=rows.length,p=o.p==null?1:o.p,mA=o.missA==null?1:o.missA,
+    vx=gv_signoffVX(ctx,rows,o),h=gv_signoffH(ctx,rows,o),R=[],line=(x0,x1,ly,col,a,lw)=>{ctx.strokeStyle=rgba(col,a);ctx.lineWidth=lw||2;ctx.beginPath();ctx.moveTo(x0,ly);ctx.lineTo(x1,ly);ctx.stroke();};
+  ctx.save();ctx.translate(x,y);ctx.scale(k,k);gv_sheet(ctx,0,0,1000,h,{rot:o.rot});ctx.lineCap="round";
+  wc_T(ctx,o.kicker||"Sign-off",48,66,{w:800,size:28,col:WC_MUTED});wc_T(ctx,o.title||"",48,124,{w:800,size:42,col:WC_DARK});line(48,952,156,WC_MUTED,0.45,2);
+  let ry=172;
+  rows.forEach(([lab,val],i)=>{const a=clamp(p*n-i,0,1),miss=val==null;R.push(y+(ry+33)*k);
+    if(a>0.01)withA(ctx,a,()=>{
+      if(miss&&mA>0.01){ctx.save();ctx.globalCompositeOperation="multiply";ctx.fillStyle=rgba(wc_lit(GV.red,0.72),mA);wc_tr(ctx,wc_rrPts(vx-14,ry+8,952-vx+14,52,8));ctx.fill();ctx.restore();}
+      wc_T(ctx,lab,48,ry+44,{w:600,size:30,col:WC_MUTED});
+      if(!miss){const s=clamp(32*(952-vx)/Math.max(1,tw(ctx,val,32,600)),28,32);wc_T(ctx,val,vx,ry+44,{w:600,size:s,col:WC_DARK});}
+      line(vx,952,ry+58,miss?GV.redInk:WC_MUTED,miss?0.55+0.35*mA:0.3,miss?2.6:1.6);
+      if(ask[i]){const L=gv_askLines(ctx,ask[i],vx),q=o.askP==null?1:o.askP;L.forEach((l,j)=>wc_hand(ctx,l,vx+4,ry+102+42*j,{size:30,w:700,col:GV.redInk,p:clamp(q*L.length-j,0,1)}));}});
+    ry+=66+(ask[i]?8+42*gv_askLines(ctx,ask[i],vx).length:0);});
+  line(48,952,ry+14,WC_MUTED,0.45,2);ry+=14;
+  if(o.how){const hy=ry+50;ctx.save();ctx.strokeStyle=rgba(GV.cyanInk,0.9);ctx.lineWidth=2.4;ctx.lineJoin="round";
+      ctx.beginPath();ctx.moveTo(48,hy-22);ctx.lineTo(66,hy-26);ctx.lineTo(84,hy-22);ctx.lineTo(84,hy+2);ctx.lineTo(66,hy-2);ctx.lineTo(48,hy+2);ctx.closePath();ctx.moveTo(66,hy-26);ctx.lineTo(66,hy-2);ctx.stroke();ctx.restore();
+    wc_T(ctx,o.how,102,hy,{w:700,size:30,col:GV.cyanInk});line(102,102+tw(ctx,o.how,30,700),hy+8,GV.cyanInk,0.7,2);ry+=72;}
+  if(o.signer!=null){const sy=ry+58;wc_T(ctx,"Signed",48,sy,{w:600,size:30,col:WC_MUTED});line(vx,vx+340,sy+10,WC_MUTED,0.5,1.6);
+    if(o.signer)wc_hand(ctx,o.signer,vx+12,sy,{size:38,w:600,col:GV_SIGN.ink,p:o.signP==null?1:o.signP});ry+=92;}
+  if(o.stamp){const ok=o.stamp==="signed";gv_stamp(ctx,952-150,h-66,o.stamp.toUpperCase(),o.stampP==null?1:o.stampP,{size:38,col:ok?GV.greenInk:GV.redInk,rot:ok?-0.05:-0.08});}
+  ctx.restore();return{h:h*k,rows:R,x:x+vx*k};}
+
 /* ---------- people moving ---------- */
 // someone walking from x0 to x1 from t0 at v px a second: where they are, the step's bob and swing, when they arrive, which way they face
 function gv_walk(t,t0,x0,x1,v){const L=Math.abs(x1-x0),T_=Math.max(0.3,L/(v||300)),u=clamp((t-t0)/T_,0,1),e=u<0.5?2*u*u:1-2*(1-u)*(1-u),moving=u>0&&u<1,ph=(t-t0)*Math.PI*3.4;

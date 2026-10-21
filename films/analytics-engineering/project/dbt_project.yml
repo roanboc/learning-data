@@ -122,6 +122,7 @@ data_tests:
       planning: {+meta: {owner: Planning}}
       wallet: {+meta: {owner: Wallet app team}}
       finance: {+meta: {owner: Finance}}
+      learning: {+meta: {owner: Learning team}}
     reference:
       student: {+meta: {owner: "Mei Tanaka, registrar's office"}}
       finance: {+meta: {owner: Finance}}

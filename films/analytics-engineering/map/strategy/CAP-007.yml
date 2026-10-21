@@ -6,6 +6,6 @@ owner: Yusuf Demir, data governance lead
 relationships:
 - composition: CAP-001 · govern data
 heat: amber
-evidence: 'five products, in ODPS and ODCS (project: products/); no catalogue or access requests yet ·
+evidence: 'six products, in ODPS and ODCS (project: products/); no catalogue or access requests yet ·
   20 Oct 2026'
 status: confirmed

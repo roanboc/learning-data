@@ -36,5 +36,7 @@
     "validate": ["skills/reconcile-and-diff/SKILL.md", "scripts/tools/diff_against_main.py"],
     "ship": ["scripts/tools/diff_against_main.py", "README.md", "AGENTS.md"],
     "next": ["skills/review-metadata/SKILL.md"]
-  }
+  },
+  "past": ["The Nautical Almanac, 1766", "Computed twice, and compared, before anything is printed."],
+  "past_es": ["El Almanaque Náutico, 1766", "Calculado dos veces, y comparado, antes de imprimir nada."]
 }

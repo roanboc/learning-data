@@ -244,4 +244,98 @@ scene("beside",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,
   tt_nameCard(ctx,1480,250,"Anil Kurian","Faculty of Health",gv_io(t,1.2,P.add-0.2,0.4));
   wc_paperOver(ctx,S);});
 
-["each","warn","measured","teach","lasts"].forEach(id=>scene(id,(ctx,S,t,sc)=>{setScreen(ctx,S);ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_paperOver(ctx,S);}));
+// ---- 4 · Each other: once a month the stewards meet, to bring what broke and what helped; Yusuf began with the few who wanted to ----
+// Yusuf at the board, a marker in his hand; and a steward telling the one beside them something, a hand open
+POSE.tt_marker={L:[0.14,-0.08],R:[0.3,-1.25],hand:"open",feet:26,shift:4,tilt:0.03,turn:0.2,gaze:[0.5,0],look:0};
+POSE.tt_tell={L:[0.14,-0.08],R:[0.2,2.75],hand:"open",feet:26,shift:6,tilt:-0.08,turn:0.5,gaze:[1,0.1],look:0};
+// and the one listening: turned to them, the head a little on one side
+POSE.tt_hear={L:[0.14,-0.08],R:[0.1,0.05],feet:26,shift:-4,tilt:0.08,turn:0.5,gaze:[1,0],look:0};
+// the stewards, in their seats from the left, each with where they look after the data
+const TT_STEW=[["mei","Mei","registrar's office"],["leila","Leila","admissions"],["tom","Tom","short courses"],["clara","Clara","Planning"],["anil","Anil","Faculty of Health"]];
+// the meeting room: the screen (o.faces), the whiteboard (o.board, as tt_meetBoard takes it), the stamp's box on the windowsill; Yusuf by the
+// board (o.yusuf, his options, or false; o.yx where he stands); the stewards at the table (o.pose(j), each one's options), and their names on cards (o.tent(j))
+// (o.yusuf a function draws him itself); the board's notes and the calendar are small from here, so only the close-ups read them, and
+// the stamp and the cards only where o.read names them
+function tt_meeting(x,tt,o){o=o||{};const M=GV_MT,rd=o.read||[];if(o.screen!==false)tt_meetScreen(x,{faces:o.faces,pose:o.fpose},tt);
+  tt_deco(true,()=>{if(o.board)tt_meetBoard(x,o.board);tt_calendar(x,o.cal||{});});tt_stampBox(x,!rd.includes("stamp"));
+  if(typeof o.yusuf==="function")o.yusuf(x);else if(o.yusuf!==false)person(x,"yusuf",o.yx||200,905,M.s,Object.assign({pose:"tt_marker",t:tt,carry:tt_heldMarker},o.yusuf||{}));
+  TT_STEW.forEach(([id],j)=>gv_behind(x,id,M.seats[j],M.top,M.s,Object.assign({pose:"listen",t:tt,flip:j>=3},o.pose?o.pose(j):{})));
+  x.drawImage(gv_place("meetingTable"),0,0,W,H);tt_deco(!rd.includes("tents"),()=>TT_STEW.forEach(([id,n,r],j)=>tt_tent(x,M.seats[j],n,r,o.tent?o.tent(j):1)));}
+
+scene("each",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o),t0=w("meet","the people")+0.1,h0=w("bring","what broke")-0.15,h1=w("bring","what helped")-0.15;
+    return{t0,dt:(w("meet","faculty")+0.3-t0)/4,ap:c.approve-0.5,bz:c.bring-0.4,h:[h0,h1],n:[h0+0.75,h0+1.15,h1+0.8,h1+1.3,h1+1.8],wc:c.few-0.35,
+      few:w("few","the few")+0.1,oth:c.joined+0.2,fac:w("joined","working")-0.6,cr:c.crossing+0.2,lit:w("crossing","the crossing")-0.2,
+      col:w("crossing","colleagues")+0.1,rm:w("crossing","long before")-0.4};});
+  const named=j=>P.t0+j*P.dt;
+  gv_shots(ctx,S,t,sc.dur,[
+    // the meeting room: the stewards at the table, each named as the camera comes to them; then, on the windowsill, the box Yusuf's
+    // stamp lives in, shut
+    {at:0,place:"meeting",keys:[[0,960,540,1],[1.8,960,575,1.5],[P.ap,1240,545,1.5]],d:2.2,push:0,draw:(x,tt)=>tt_meeting(x,tt,{read:["tents","stamp"],tent:j=>fin(tt,named(j),0.45),
+      pose:j=>({expr:tt>named(j)?"smile":"calm",nod:tt_nodAt(tt,named(j),named(j)+1.1,0)})})},
+    // the whiteboard, close: what broke, what helped; a note under one or the other as each of them speaks
+    {at:P.bz,place:"meetZ",keys:[[P.bz,700,430,1.4]],push:0.02,draw:(x,tt)=>tt_inZ(x,TT_Z.board,q=>{
+      tt_meetBoard(q,{heads:j=>clamp((tt-P.h[j])/0.7,0,1),note:j=>fin(tt,P.n[j],0.5)});tt_stampBox(q,true);})},
+    // Yusuf's board: who he asked to the first meeting, the few who came ticked, then the others; then the crossing's first panel lights,
+    // and under it, the stewards
+    {at:P.wc,place:"boardGov",keys:[[P.wc,1240,380,1.6],[P.cr,760,340,1.6]],d:2.2,push:0,draw:(x,tt)=>tt_boardClose(x,{lit:[fin(tt,P.lit,0.6),0,0],B:[fin(tt,P.col,0.4),1,1],
+      q:[1-fin(tt,P.col-0.2,0.3),0,0],who:{a:fin(tt,P.wc+0.3,0.5),tick:j=>j<2?fin(tt,P.few+0.45*j,0.4):fin(tt,P.oth+0.45*(j-2),0.4),fac:clamp((tt-P.fac)/0.9,0,1)}})},
+    // the room again: the faculties who joined light on the screen; and round the table, the stewards tell each other things
+    {at:P.rm,place:"meeting",keys:[[P.rm,1060,575,1.5]],push:0.02,draw:(x,tt)=>{const turn=a=>gv_io(tt,P.rm+a,sc.dur+1,0.5);
+      tt_meeting(x,tt,{read:["tents"],faces:j=>fin(tt,P.rm+0.4+0.4*j,0.5),board:{heads:1,note:()=>1},pose:j=>[
+        {pose2:"tt_tell",mix:turn(0.9)},{flip:true,pose2:"tt_hear",mix:turn(1.1),expr:"smile",nod:tt_nodAt(tt,P.rm+1.6,sc.dur,0.3)},
+        {pose2:"tt_hear",mix:turn(1.5),expr:"smile",nod:tt_nodAt(tt,P.rm+2.1,sc.dur,1.1)},{pose2:"tt_tell",mix:turn(1.3)},
+        {pose2:"tt_hear",mix:turn(1.7),nod:tt_nodAt(tt,P.rm+2.4,sc.dur,2)}][j]});}}]);
+  wc_paperOver(ctx,S);});
+
+// ---- 5 · Warn first: a new rule starts at the stewards' meeting; why, first; agreed and dated; it warns until then; the warnings go ----
+// a guess at what a column holds, in a speech bubble: who's speaking, then what they'd count, its number rung in amber (ring)
+function tt_guess(x,X,Y,name,pre,num,tx,ty,a,ring){if(a<=0.01)return;const s=pre+" "+num,w=Math.round(Math.max(tw(x,s,36,700),tw(x,name,28,600))+56),h=118,k=0.92+0.08*spring(clamp(a,0,1));
+  x.save();x.translate(tx,ty);x.scale(k,k);x.translate(-tx,-ty);withA(x,clamp(a*2.5,0,1),()=>{const bx=clamp(tx,X+40,X+w-40);
+    x.beginPath();x.moveTo(bx-18,Y+h-2);x.lineTo(tx,ty);x.lineTo(bx+18,Y+h-2);x.closePath();x.fillStyle=rgba(WC_CARD,1);x.fill();x.strokeStyle=rgba(WC_PENCIL,0.85);x.lineWidth=2;x.stroke();
+    wc_panel(x,X,Y,w,h,{kind:"card",seed:Math.round(X+Y)});x.fillStyle=rgba(WC_CARD,1);x.fillRect(bx-15,Y+h-4,30,5);
+    wc_T(x,name,X+28,Y+42,{w:600,size:28,col:WC_MUTED});wc_T(x,s,X+28,Y+94,{w:700,size:36,col:WC_DARK});
+    if(ring>0.01)wc_ring(x,X+30+tw(x,pre+" ",36,700)+tw(x,num,36,700)/2,Y+81,22,27,ring,{col:TT_AMBER,lw:4});});x.restore();}
+// Bogotá, a moment after the fine: the mime bows, and the officer, his notebook shut, touches his cap
+function tt_worldBow(t,t0){const P0=tt_P(),Wd=tt_world95(P0.applaud+2.6+Math.max(0,t-t0),P0),b=gv_io(t,t0+0.4,t0+1.7,0.4),cap=gv_io(t,t0+1.0,t0+2.8,0.35);
+  Wd.people.forEach(q=>{if(q.id==="ttMime1")q.o=Object.assign({},q.o,b>0?{pose:"tt_bow",pose2:null,bow:b,expr:"smile"}:{pose:"stand",pose2:null,bow:0,expr:"smile"});
+    if(q.id==="ttOfficer")q.o=Object.assign({},q.o,{pose:"stand",pose2:"tt_cap",mix:cap,carry:tt_heldShutL,look:0});});return Wd;}
+
+scene("warn",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o),wr=w("brings","every column")-0.1;
+    return{walk:1.0,pin:w("brings","Yusuf brings")-0.3,mz:wr-0.5,write:wr,wend:sc.ends.brings-0.2,why:c.why-0.3,col:w("why","First, why")+0.1,g1:w("why","will guess")-0.2,
+      g2:w("why","two guesses")+0.1,two:w("why","two numbers"),rm:c.agree-0.4,up:w("agree","stewards")+0.2,dz:w("agree","set a date")-0.05,date:w("agree","date")-0.1,
+      jz:c.warns-0.35,warn:w("warns","only warns")-0.2,link:w("links","links its page")-0.1,day:w("links","names the day"),cz:c.gone-0.6,wk:w("gone","Four weeks")-0.1,
+      tick:w("nothing","nothing left"),bg:sc.ends.nothing+1.5,mime:w("mime","The mime"),fine:w("mime","before the fine"),bo:sc.ends.mime-0.3};});
+  // the whiteboard as the chapter goes: the notes from before; the new rule pinned up and written; the column nobody described; its date
+  const brd=tt=>({heads:1,note:()=>1,rule:fin(tt,P.pin+0.2,0.4),write:clamp((tt-P.write)/(P.wend-P.write),0,1),col:fin(tt,P.col,0.45),date:clamp((tt-P.date)/0.8,0,1)});
+  const board=(x,tt)=>tt_inZ(x,TT_Z.board,q=>{tt_meetBoard(q,brd(tt));tt_deco(true,()=>tt_calendar(q,{}));tt_stampBox(q,true);});
+  gv_shots(ctx,S,t,sc.dur,[
+    // the meeting room: Yusuf brings a card to the board and pins it up
+    {at:0,place:"meeting",keys:[[0,640,575,1.5]],push:0.02,draw:(x,tt)=>{const wk=gv_walk(tt,P.walk,200,300,140),pin=gv_io(tt,P.pin-0.45,P.pin+0.9,0.35);
+      tt_meeting(x,tt,{board:brd(tt),faces:()=>1,read:["tents"],yusuf:q=>gv_walker(q,"yusuf",wk,905,GV_MT.s,{t:tt,pose:wk.moving?null:"tt_marker",pose2:wk.moving?null:"tt_pin",mix:pin,
+        carry:tt<P.pin+0.3?tt_heldCard:tt_heldMarker})});}},
+    // the whiteboard, close: the new rule written as it's said; then the column nobody described, and two readers' guesses at it
+    {at:P.mz,place:"meetZ",keys:[[P.mz,1120,630,1.2],[P.why,960,540,1]],d:1.8,push:0,draw:(x,tt)=>{board(x,tt);
+      tt_guess(x,960,196,"Clara","with microcredentials?","2",1420,356,fin(tt,P.g1,0.5),fin(tt,P.two,0.6));
+      tt_guess(x,1250,372,"Anil","without?","1",1540,530,fin(tt,P.g2,0.5),fin(tt,P.two+0.25,0.6));}},
+    // the room: hands go up round the table, and on the screen
+    {at:P.rm,place:"meeting",keys:[[P.rm,960,560,1.15]],push:0.02,draw:(x,tt)=>{const up=j=>gv_io(tt,P.up+0.1*j,P.dz+0.8,0.22);
+      tt_meeting(x,tt,{board:brd(tt),faces:()=>1,fpose:j=>({pose2:"tt_handUp",mix:up(j+5)}),pose:j=>({pose2:"tt_handUp",mix:up(j),expr:"smile"}),yx:300,
+        yusuf:{expr:"smile",nod:tt_nodAt(tt,P.up+0.5,P.dz+0.5,0.5)}});}},
+    // the board, close: the date, in gold
+    {at:P.dz,place:"meetZ",keys:[[P.dz,1120,630,1.2]],push:0.02,draw:board},
+    // Jun's screen in the data team's room: the check warns, links its page, names the day; the rules are still met; Jun describes it
+    {at:P.jz,place:"screenData",keys:[[P.jz,960,470,1.04],[P.day+1.4,990,480,1.04]],d:2,push:0,draw:(x,tt)=>tt_onScreen(x,GV_SC,q=>tt_junScreen(q,{warn:fin(tt,P.warn,0.5),
+      link:fin(tt,P.link,0.5),date:fin(tt,P.day,0.5),typed:clamp((tt-P.day-1.5)/1.6,0,1)}))},
+    // the stewards' calendar: 1 December ringed; the weeks crossed off, the warnings left each week, down to none; a tick
+    {at:P.cz,place:"calZ",keys:[[P.cz,960,540,1]],push:0.02,draw:(x,tt)=>tt_inZ(x,TT_Z.cal,q=>{tt_deco(true,()=>tt_meetBoard(q,brd(99)));
+      tt_calendar(q,{off:k=>k<5?fin(tt,P.wk+0.62*k,0.5):0,tick:fin(tt,P.tick,0.5),ring:fin(tt,P.cz+0.6,0.8)});})},
+    // Yusuf's board: the three panels light in turn, and under each, the new rule's step
+    {at:P.bg,place:"boardGov",keys:[[P.bg,760,360,1.35]],push:0.02,draw:(x,tt)=>{const L=[P.mime-0.1,P.mime+0.45,P.fine];
+      tt_boardClose(x,{lit:i=>fin(tt,L[i],0.4)*(1-0.55*fin(tt,L[i]+0.9,0.6)),B:[1,1,1],C:i=>fin(tt,L[i]+0.15,0.45),who:{a:1,tick:()=>1,fac:1}});}},
+    // Bogotá, for a moment
+    {at:P.bo,place:"bogotaMid",keys:[[P.bo,930,540,1.22]],push:0.02,draw:(x,tt)=>tt_drawWorld(x,TT_CAM.mid,tt_worldBow(tt,P.bo))}]);
+  tt_nameCard(ctx,1640,250,"Jun Park","data team",gv_io(t,P.jz+0.4,P.cz-0.2,0.4));
+  wc_year(ctx,56,72,"Bogotá · 1995",fin(t,P.bo+0.2,0.4));
+  wc_paperOver(ctx,S);});
+
+["measured","teach","lasts"].forEach(id=>scene(id,(ctx,S,t,sc)=>{setScreen(ctx,S);ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_paperOver(ctx,S);}));

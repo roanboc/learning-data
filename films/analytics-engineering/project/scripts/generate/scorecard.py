@@ -5,7 +5,8 @@ The scorecard isn't a survey or an opinion: each cell counts the tests that ran,
 target/run_results.json, and each test's owner and dimension come from its meta (the governance
 check makes sure every test has both). A test that warns passed, but over a limit its owner
 agreed to watch; a test that fails, or errors, stops the build, and its owner is named below the
-table. Tests in tests/governance/ check the project, not the data, and aren't scored.
+table. A test that didn't run, because an earlier one failed and dbt skipped what's downstream,
+counts as not run, never as failed. Tests in tests/governance/ check the project, not the data, and aren't scored.
 
     dbt build --profiles-dir .
     python scripts/generate/scorecard.py           # write docs/scorecard.md from the last run
@@ -44,6 +45,8 @@ def cell(counts):
     passed = counts["pass"] + counts["warn"]
     text = f"{passed}/{counts['total']}"
     notes = [f"{counts[k]} {k}" for k in ("warn", "fail", "error") if counts[k]]
+    if counts["skipped"]:
+        notes.append(f"{counts['skipped']} not run")
     return text + (f" ({', '.join(notes)})" if notes else "")
 
 
@@ -60,7 +63,7 @@ def main():
 
     table = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
     totals = defaultdict(lambda: defaultdict(int))
-    problems = []
+    problems, skipped = [], defaultdict(int)
     for unique_id, test in sorted(manifest["nodes"].items()):
         if test["resource_type"] != "test" or test["original_file_path"].startswith("tests/governance/"):
             continue
@@ -69,11 +72,16 @@ def main():
             raise SystemExit(f"{test['name']} didn't run in the last run: run the whole build, then the scorecard")
         status = result["status"]
         meta = test["meta"]
+        if not meta.get("dimension"):
+            raise SystemExit(f"{test['name']} has no meta.dimension. A partial parse can drop it: run dbt build "
+                             "--no-partial-parse, then the scorecard (or fix the test, with scripts/check/governance.py)")
         domain, dimension = domain_of(test, nodes), meta.get("dimension", "unknown")
         for counts in (table[domain][dimension], totals[dimension], table[domain]["all"], totals["all"]):
             counts[status] += 1
             counts["total"] += 1
-        if status != "pass":
+        if status == "skipped":
+            skipped[domain] += 1
+        elif status != "pass":
             problems.append((status, domain, dimension, test["name"], meta.get("owner", "no owner"),
                              result.get("failures")))
 
@@ -83,7 +91,7 @@ def main():
              "Don't edit it: run the build, then the script. CI fails if it's out of date.*", "",
              "Every test that ran, by the domain of the data it checks and its quality dimension: how many "
              "passed, of how many. A warning passed, over a limit its owner agreed to watch; a failure stops "
-             "the build. Each test's owner and dimension are in its `meta` (docs/conventions.md, *Governance*).", "",
+             "the build, and the tests on what's built from it don't run. Each test's owner and dimension are in its `meta` (docs/conventions.md, *Governance*).", "",
              "| Domain | " + " | ".join(used) + " | All |",
              "|---|" + "---|" * (len(used) + 1)]
     for domain in sorted(table):
@@ -91,10 +99,15 @@ def main():
                      + f" | {cell(table[domain]['all'])} |")
     lines.append("| **All** | " + " | ".join(cell(totals[d]) for d in used) + f" | {cell(totals['all'])} |")
     lines += ["", "## Not passed", ""]
-    if problems:
+    if problems or skipped:
         lines += ["| Status | Domain | Dimension | Test | Owner | Rows |", "|---|---|---|---|---|---|"]
         for status, domain, dimension, name, owner, failures in sorted(problems):
             lines.append(f"| {status} | `{domain}` | {dimension} | `{name}` | {owner} | {failures} |")
+        # Tests dbt skipped: one line per domain, with the failures that stopped them.
+        stopped = ", ".join(f"`{name}`" for status, _, _, name, _, _ in sorted(problems) if status in ("fail", "error"))
+        for domain, count in sorted(skipped.items()):
+            lines.append(f"| not run | `{domain}` | | {count} test{'s' if count > 1 else ''} | | "
+                         f"an earlier test failed: {stopped or 'see the run'} |")
     else:
         lines.append("Every test passed.")
     text = "\n".join(lines) + "\n"

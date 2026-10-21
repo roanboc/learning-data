@@ -4,7 +4,7 @@
 
 | File | What it holds |
 |---|---|
-| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Rafael, Mei, Linh), and the moment its poster shows (the waterfall, with 74 in the band where a person decides). |
+| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Rafael, Mei, Linh), and the moment its poster shows (from the opening: Mei at her desk on Monday morning, the hub's rules on her screen). |
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). Eight lines carry a `say`, so the voice reads their numbers as words: "twelve hundred and forty", "seventy-four", "twenty nineteen". The film re-times itself to the voice. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/breath.js` | The few longer pauses: holds after some lines, and three wordless moments (the weekend's count on the hub's screen, then the title; this week's result under the Friday rule; and the end card). |

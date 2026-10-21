@@ -4,7 +4,7 @@
 
 | File | What it holds |
 |---|---|
-| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Nguyen, Linh, HR, YYZ, SGN, ENR, CAS, VN), and the moment its poster shows (Linh's three values, each with its list, its owner and its date). |
+| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Nguyen, Linh, HR, YYZ, SGN, ENR, CAS, VN), and the moment its poster shows (from the opening story: two suitcases at an airport, tagged YYZ and SGN). |
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). Two lines carry a `say`, so the voice reads "nineteen seventy-six" and "ISO 3166" as people say them. The film re-times itself to the voice. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/breath.js` | The few longer pauses: holds after some lines, and three wordless moments (the two luggage tags and everyone who reads them, then the title; the list, with every test that reads it pinned to it; and the end card). |

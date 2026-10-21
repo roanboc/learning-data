@@ -20,6 +20,8 @@ Linh Nguyen graduated from the university in 2022 and came back to study health 
 | [One person, many systems](https://roanboc.github.io/learning-data/master-and-reference-data/one-person-many-systems/) | Master data, shared across systems | 5 min | 12 | 4 questions | [script](7-one-person-many-systems/script.md) · [source](7-one-person-many-systems/source/README.md) |
 | [A hub at work](https://roanboc.github.io/learning-data/master-and-reference-data/a-hub-at-work/) | A master data hub, at work every day | 4½ min | 11 | 4 questions | [script](8-a-hub-at-work/script.md) · [source](8-a-hub-at-work/source/README.md) |
 | [Kept, not cleaned](https://roanboc.github.io/learning-data/master-and-reference-data/kept-not-cleaned/) | Master data, looked after every day | 5½ min | 11 | 4 questions | [script](9-kept-not-cleaned/script.md) · [source](9-kept-not-cleaned/source/README.md) |
+
+For the whole series, on the site: [29 labs](https://roanboc.github.io/learning-data/master-and-reference-data/labs/) and [72 scenarios](https://roanboc.github.io/learning-data/master-and-reference-data/scenarios/), in English and Spanish, from the words in [site/assets/master-and-reference-data/](../../site/assets/master-and-reference-data/).
 <!-- /films -->
 
 ## The look and the sound

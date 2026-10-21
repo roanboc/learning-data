@@ -16,30 +16,6 @@
   "thread_es": "Linh se graduó en la universidad en 2022 y volvió para estudiar informática en salud, con un nuevo número de estudiante. Da tutorías en una materia de primer año, y este año entró en un proyecto de investigación. Cada sistema conoce una parte de ella, con su propio número. Película a película, la universidad le da un registro que todos los sistemas pueden leer: roles que empiezan y terminan, cada valor con la etiqueta de dónde vino, coincidencias decididas una vez por quienes las cuidan, las listas que clasifican a las personas con responsable y fecha, y los datos de cada rol usados solo para su propósito.",
   "past_h": "Most films open somewhere else, at another time",
   "past_h_es": "La mayoría de las películas empieza en otro lugar, en otra época",
-  "coming_h": "Still to come",
-  "coming_h_es": "Lo que viene",
-  "coming_p": "After the opening film, the series continues in four parts: who someone is, roles and lists, sharing it safely, and keeping it right.",
-  "coming_p_es": "Tras la película que la abre, la serie sigue en cuatro partes: quién es alguien, roles y listas, compartirlo con seguridad, y mantenerlo bien.",
-  "coming": [
-    [2, "Who is it?", "master or reference data, the golden record, and deciding a match"],
-    [3, "Which value wins", "a rule for each piece of the person"],
-    [4, "Roles come and go", "roles and relationships, with dates"],
-    [5, "Lists everyone uses", "reference data with an owner and a date"],
-    [6, "For this purpose only", "purpose and consent on each role"],
-    [7, "One person, many systems", "the ways to keep master data, and the lightest that works"],
-    [8, "A hub at work", "a master data hub: rules, a review queue, AI helpers, and undo"],
-    [9, "Kept, not cleaned", "looking after it every day, and checks at entry"]
-  ],
-  "coming_es": [
-    [2, "¿Quién es?", "dato maestro o de referencia, el registro maestro, y decidir una coincidencia"],
-    [3, "Qué valor gana", "una regla para cada dato de la persona"],
-    [4, "Los roles van y vienen", "roles y relaciones, con fechas"],
-    [5, "Listas que todos usan", "datos de referencia con responsable y fecha"],
-    [6, "Solo para este propósito", "propósito y consentimiento en cada rol"],
-    [7, "Una persona, muchos sistemas", "las formas de mantener datos maestros, y la más liviana que sirve"],
-    [8, "Un hub en marcha", "un hub de datos maestros: reglas, una cola de revisión, ayudantes de IA y deshacer"],
-    [9, "Mantenido, no limpiado", "cuidarlo cada día, y controles al ingresar los datos"]
-  ],
   "people_h": "Who knows the person",
   "people_h_es": "Quién conoce a la persona",
   "people": [
@@ -53,5 +29,11 @@
     ["tech", "Dibuja el modelo", "Noor, la arquitecta de datos de la universidad"],
     ["biz", "Cuida a la persona", "Mei, cuya oficina decide quién es alguien, y si dos registros son uno"],
     ["tech", "Construye el modelo", "Jun, de ingeniería analítica, que convierte lo decidido en código, con pruebas"]
-  ]
+  ],
+  "learn_p": "{Labs} hands-on labs, film by film, then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs interactivos, película por película, y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} hands-on labs, film by film. Each puts one idea from a film in your hands: change things and see what happens.",
+  "labs_lead_es": "{Labs} labs interactivos, película por película. Cada uno pone en tus manos una idea de una película: cambia cosas y mira qué pasa.",
+  "quiz_lead": "{quiz} situations that the people who look after master data really face, from every film. Decide what you'd do; each answer explains why, and points back to the lab that covers it.",
+  "quiz_lead_es": "{quiz} situaciones que de verdad enfrentan quienes cuidan los datos maestros, de todas las películas. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

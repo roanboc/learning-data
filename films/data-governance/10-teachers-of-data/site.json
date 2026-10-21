@@ -1,0 +1,27 @@
+{
+  "kicker": "Data governance, and its people side",
+  "kicker_es": "Gobernanza de datos, y su lado humano",
+  "title_es": "Docentes de datos",
+  "h1": "Teachers of data: mimes at Bogotá's crossings in 1995, a page beside every check, and a new rule that warns before it stops anyone",
+  "h1_es": "Docentes de datos: mimos en los cruces de Bogotá en 1995, una página junto a cada control, y una regla nueva que advierte antes de detener a nadie",
+  "lead": "In Bogotá in 1995, the mayor sent mimes into the streets. When a car stopped on a crossing, the people around it whistled, a mime invited the driver to back up, and only if that failed did a traffic officer write a fine, to applause. The fine still came, but last. At the university, on the day the awards go to the government, the checks have helped, because the people they stop knew why they were there. So most of governance's work comes before its checks: a page beside every check, written for the person it stops; office hours in place of a queue of approvals; stewards who share what broke and what helped; a new rule agreed with them, explained, and only a warning until a date everyone knows; and measures read from the work, not a maturity score. Governance is people's work. Tools remember what people agreed.",
+  "lead_es": "En Bogotá, en 1995, el alcalde mandó mimos a las calles. Cuando un carro paraba sobre una cebra, la gente alrededor le silbaba, un mimo invitaba al conductor a retroceder, y solo si eso no funcionaba un agente de tránsito escribía una multa, entre aplausos. La multa seguía ahí, pero llegaba al final. En la universidad, el día en que los títulos se envían al gobierno, los controles han ayudado, porque la gente a la que detienen sabía por qué estaban ahí. Por eso, casi todo el trabajo de la gobernanza viene antes de sus controles: una página junto a cada control, escrita para quien detiene; un horario de atención en lugar de una fila de aprobaciones; responsables de datos que comparten lo que falló y lo que ayudó; una regla nueva acordada con ellos, explicada, y que solo advierte hasta una fecha que todos conocen; y medidas que salen del trabajo, no una puntuación de madurez. La gobernanza es trabajo de personas. Las herramientas recuerdan lo que la gente acordó.",
+  "description": "A film about the people side of data governance: Antanas Mockus's mimes at Bogotá's crossings in 1995, and why most people keep a rule; checks as governance's fines, and the work that comes before them; a page beside every check, written for the person it stops; office hours in place of a queue of approvals; stewards who meet to share what broke and what helped; a new rule agreed, explained, and a warning first, until a date everyone knows; governance measured from the work, not by a maturity score; a governance team that teaches how the pieces fit; and what change needs to last.",
+  "description_es": "Una película sobre el lado humano de la gobernanza de datos: los mimos de Antanas Mockus en los cruces de Bogotá en 1995, y por qué la mayoría cumple una regla; los controles como las multas de la gobernanza, y el trabajo que viene antes; una página junto a cada control, escrita para quien detiene; un horario de atención en lugar de una fila de aprobaciones; responsables de datos que se reúnen a compartir lo que falló y lo que ayudó; una regla nueva acordada, explicada, y primero una advertencia, hasta una fecha que todos conocen; la gobernanza medida desde el trabajo, no con una puntuación de madurez; un equipo de gobernanza que enseña cómo encajan las piezas; y lo que necesita un cambio para durar.",
+  "card": "In Bogotá, the mime came before the fine. Most people keep a rule because they understand it: teach first, and keep the fine for the few.",
+  "card_es": "En Bogotá, el mimo llegaba antes que la multa. La mayoría cumple una regla porque la entiende: enseña primero, y deja la multa para unos pocos.",
+  "chapters_es": {
+    "crossing": "El mimo antes de la multa",
+    "today": "El día de la entrega",
+    "beside": "Una página junto al control",
+    "each": "Entre colegas",
+    "warn": "Primero, advertir",
+    "measured": "Medida por el uso",
+    "teach": "Docentes de datos",
+    "lasts": "Lo que dura"
+  },
+  "past": ["Bogotá, the mimes at the crossings in 1995", "Most people keep a rule because they understand it, and the fine is for the few."],
+  "past_es": ["Bogotá, los mimos en los cruces en 1995", "La mayoría cumple una regla porque la entiende, y la multa es para unos pocos."],
+  "next_h": "You've seen why most people keep a rule, and how governance teaches before a check has to stop anyone. More films in the series are on the way.",
+  "next_h_es": "Viste por qué la mayoría cumple una regla, y cómo la gobernanza enseña antes de que un control tenga que detener a alguien. Vienen más películas de la serie."
+}

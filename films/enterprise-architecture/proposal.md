@@ -369,7 +369,7 @@ Chapter by chapter, with narration: [the script](8-now-the-questions-appear/scri
 
 ### 11. A map people and agents can read
 
-*Built from the draft of 17 October 2026, which the author approved. Revised on 20 October 2026 after his review, for his approval: the film is tool-first.*
+*Built from the draft of 17 October 2026, which the author approved. Revised on 20 October 2026 after the author's review: the film is tool-first. The author approved it as built on 20 October 2026.*
 
 **The idea.** A map is only alive while people use it, keep it true and can pass it on. Much of what it holds is already kept in other systems, so keeping it true is a data integration job as well as a modelling one. At the utility's scale it lives in an enterprise architecture tool: one repository that everyone can reach, with a database and a graph. The tool brings each element in from where it's kept, with the source's ID, and keeps the rest once, each element with a stable ID, an owner and its evidence. Every change is reviewed and versioned, every view is generated from it, and agents can read it: they draft, and people confirm. Text files in a repository are the simplest way to keep the same map, enough for a small one, and the ideas don't change. This is where *From words to data* begins: from the organisation's meaning to the data's.
 

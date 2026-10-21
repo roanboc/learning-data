@@ -185,7 +185,7 @@ decisions:
     why: A rule that stops people the day it lands teaches them to resent it. Warned first, with a page that
       says what to do and who to ask, people fix their own work before the rule stops anyone.
     decided_by: Yusuf Demir, data governance lead, with the stewards
-    decided_on: 2026-10-21
+    decided_on: 2026-10-20
     status: agreed
     relates_to: [DEC-PRJ-12]
     implemented_in: [governance.py]

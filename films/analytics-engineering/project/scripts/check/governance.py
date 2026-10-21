@@ -1,6 +1,6 @@
 """Checks what data governance asks of the project, and measures it.
 
-Four rules, each a line of the university's data governance policy that runs on every pull request
+Five rules, each a line of the university's data governance policy that runs on every pull request
 (DEC-PRJ-12). They apply to what other teams read: the public core models and the marts.
 
 1. **An owner.** Every domain on the university's map, every entity, kind and relationship in a
@@ -14,18 +14,26 @@ Four rules, each a line of the university's data governance policy that runs on 
 4. **Tests with an owner and a dimension.** Every test on the data has meta.owner (by folder, in
    dbt_project.yml, or its own) and meta.dimension, one of DAMA's six (tests/generic/builtin.sql).
    Tests in tests/governance/ check the project, not the data, so they need an owner only.
+5. **Described columns.** Every column of a public model or mart has a description. A warning
+   until 1 December 2026, then an error.
+
+A new rule warns first (DEC-PRJ-14): until its start date (STARTS, below), its problems print as
+warnings that name the date, and don't fail the check. Each problem links the how-to for its rule,
+in docs/how-to/, written for the person the check stops.
 
 It reads the conceptual models and target/manifest.json, so run dbt parse first, with
 --no-partial-parse: a partial parse can drop a test's meta. Each problem says
-what to add, and where; the rules are explained in docs/conventions.md, *Governance*.
+what to add, and where, and links its how-to; the rules are explained in docs/conventions.md, *Governance*.
 
     dbt parse --profiles-dir . --no-partial-parse
     python scripts/check/governance.py              # fail on any problem
     python scripts/check/governance.py --measures   # and print the measures
+    python scripts/check/governance.py --on 2026-12-01   # as it will be on that day
 """
 import argparse
 import json
 import sys
+from datetime import date
 from pathlib import Path
 
 import yaml
@@ -37,7 +45,15 @@ DOMAINS = sorted((ROOT / "models" / "core").glob("*/_*__conceptual.yml"))
 CONSUMERS = sorted((ROOT / "models" / "marts").glob("*/_*__conceptual.yml"))
 CLASSES = {"direct", "pseudonymous", "none"}
 DIMENSIONS = {"completeness", "uniqueness", "validity", "consistency", "accuracy", "timeliness"}
-HOW = "see docs/conventions.md, Governance"
+HOWTO = {"owner": "docs/how-to/add-an-owner.md", "glossary": "docs/how-to/name-the-glossary-term.md",
+         "columns": "docs/how-to/classify-a-column.md", "tests": "docs/how-to/give-a-test-an-owner.md",
+         "described": "docs/how-to/describe-a-column.md"}
+# A rule with a start date warns until then, and fails from that day (DEC-PRJ-14).
+STARTS = {"described": date(2026, 12, 1)}
+
+
+def how(rule):
+    return f"how to: {HOWTO[rule]}"
 
 
 def shared(node):
@@ -57,25 +73,27 @@ def owned(items, where, problems, counts):
         if item.get("owner"):
             counts["owner"][0] += 1
         else:
-            problems.append(f"owner: {where}: {item['name']} has no owner. Name who decides what it means ({HOW})")
+            problems.append(f"owner: {where}: {item['name']} has no owner. Name who decides what it means ({how('owner')})")
         for kind in item.get("kinds", []):
             counts["owner"][1] += 1
             if kind.get("owner"):
                 counts["owner"][0] += 1
             else:
-                problems.append(f"owner: {where}: kind {kind['name']} of {item['name']} has no owner ({HOW})")
+                problems.append(f"owner: {where}: kind {kind['name']} of {item['name']} has no owner ({how('owner')})")
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--measures", action="store_true", help="print how much of the project meets each rule")
+    parser.add_argument("--on", type=date.fromisoformat, default=date.today(),
+                        help="check as on this day (YYYY-MM-DD), for a rule's start date; today by default")
     args = parser.parse_args()
     if not MANIFEST.exists():
         raise SystemExit("target/manifest.json is missing: run dbt parse --profiles-dir . first")
     manifest = json.loads(MANIFEST.read_text())
     problems = []
     # Each measure: [how many meet the rule, how many it applies to].
-    counts = {name: [0, 0] for name in ("owner", "glossary", "columns", "tests")}
+    counts = {name: [0, 0] for name in ("owner", "glossary", "columns", "tests", "described")}
 
     # 1. An owner: on the map's domains, and in each domain's and consumer's conceptual model.
     university = yaml.safe_load(MAP.read_text())
@@ -85,7 +103,7 @@ def main():
         if domain.get("owner"):
             counts["owner"][0] += 1
         else:
-            problems.append(f"owner: {MAP.relative_to(ROOT)}: domain {domain['name']} has no owner ({HOW})")
+            problems.append(f"owner: {MAP.relative_to(ROOT)}: domain {domain['name']} has no owner ({how('owner')})")
         mapped |= {entity["name"] for entity in domain.get("entities", [])}
     for path in DOMAINS + CONSUMERS:
         model = yaml.safe_load(path.read_text())
@@ -103,7 +121,7 @@ def main():
                 else:
                     problems.append(f"glossary: {where}: {entity['name']} has neither source: (the glossary term "
                                     f"it takes its definition from) nor no_glossary_term: (who confirmed there's "
-                                    f"none, and when). Ask data governance ({HOW})")
+                                    f"none, and when). Ask data governance ({how('glossary')})")
 
     for node in sorted(manifest["nodes"].values(), key=lambda n: n["unique_id"]):
         if shared(node):
@@ -111,7 +129,7 @@ def main():
             counts["owner"][1] += 1
             missing = [key for key in ("owner", "domain") if not meta.get(key)]
             if missing:
-                problems.append(f"owner: {where} has no meta.{' or meta.'.join(missing)} ({HOW})")
+                problems.append(f"owner: {where} has no meta.{' or meta.'.join(missing)} ({how('owner')})")
             else:
                 counts["owner"][0] += 1
             if node.get("access") == "public":
@@ -119,7 +137,7 @@ def main():
                 if meta.get("glossary_term"):
                     counts["glossary"][0] += 1
                 else:
-                    problems.append(f"glossary: {where} has no meta.glossary_term: name the entity it holds ({HOW})")
+                    problems.append(f"glossary: {where} has no meta.glossary_term: name the entity it holds ({how('glossary')})")
 
             # 3. Classified columns.
             for column in node["columns"].values():
@@ -130,7 +148,15 @@ def main():
                 else:
                     says = f"meta.personal_data {value!r}" if value else "no meta.personal_data"
                     problems.append(f"columns: {where}: {column['name']} has {says}: say whether it identifies "
-                                    f"a person, with direct, pseudonymous or none ({HOW})")
+                                    f"a person, with direct, pseudonymous or none ({how('columns')})")
+
+                # 5. Described columns.
+                counts["described"][1] += 1
+                if (column.get("description") or "").strip():
+                    counts["described"][0] += 1
+                else:
+                    problems.append(f"described: {where}: {column['name']} has no description: say what it holds, "
+                                    f"in a sentence its readers know ({how('described')})")
 
         # 4. Tests with an owner and a dimension.
         elif node["resource_type"] == "test":
@@ -141,7 +167,7 @@ def main():
             if meta.get("dimension") and meta["dimension"] not in DIMENSIONS:
                 missing.append(f"dimension from {', '.join(sorted(DIMENSIONS))} (it says {meta['dimension']!r})")
             if missing:
-                problems.append(f"tests: {where}: {node['name']} has no meta.{' or meta.'.join(missing)} ({HOW})")
+                problems.append(f"tests: {where}: {node['name']} has no meta.{' or meta.'.join(missing)} ({how('tests')})")
             else:
                 counts["tests"][0] += 1
 
@@ -149,16 +175,26 @@ def main():
         names = {"owner": "Domains, entities and shared models with an owner",
                  "glossary": "Core entities and public models with a glossary term, or none confirmed",
                  "columns": "Columns of shared models classified",
-                 "tests": "Tests with an owner and a dimension"}
+                 "tests": "Tests with an owner and a dimension",
+                 "described": "Columns of shared models described"}
         print("| Measure | Meets it | Of | |\n|---|---|---|---|")
         for key, (met, of) in counts.items():
             print(f"| {names[key]} | {met} | {of} | {round(100 * met / of) if of else 100}% |")
+    # A rule that hasn't started yet warns, naming the day it becomes an error.
+    errors, warnings = [], []
     for problem in problems:
-        print(problem)
-    if problems:
-        print(f"{len(problems)} problem(s): governance's rules aren't met", file=sys.stderr)
+        start = STARTS.get(problem.split(":")[0])
+        if start and args.on < start:
+            warnings.append(f"warning: {problem} (an error from {start.day} {start:%B %Y})")
+        else:
+            errors.append(problem)
+    for line in warnings + errors:
+        print(line)
+    if errors:
+        print(f"{len(errors)} problem(s): governance's rules aren't met", file=sys.stderr)
         sys.exit(1)
-    print("Governance's rules are met: every owner, glossary term, column class and test is in place.")
+    print("Governance's rules are met: every owner, glossary term, column class, test and description is in place"
+          + (f", with {len(warnings)} warning(s) to fix before their date." if warnings else "."))
 
 
 if __name__ == "__main__":

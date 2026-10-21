@@ -265,10 +265,14 @@ models and the marts.
 | A glossary term, or a confirmed absence | `source:` with the term data governance named (DEC-PRJ-11), or `no_glossary_term: {confirmed_by, confirmed_on}` once governance confirms there's none; `meta.glossary_term` on every public model | Each core domain's conceptual model, the model's YAML |
 | Classified columns | `meta.personal_data`: `direct`, `pseudonymous` or `none` | Each column of a public model or mart |
 | Tests with an owner and a dimension | `meta.owner`: the owner of the data it checks; `meta.dimension`: completeness, uniqueness, validity, consistency, accuracy or timeliness, DAMA's six | Owners by folder in `dbt_project.yml`, or the test's own `meta` when its data has another owner; dimensions once per kind of test, in `tests/generic/` (dbt's four built-in tests are in `builtin.sql`, running dbt's own SQL), or the test's own `meta` |
+| Described columns | A `description` | Each column of a public model or mart. A warning until 1 December 2026, then an error |
 
 `python scripts/check/governance.py --measures` also prints how much of the project meets each rule.
 A new column with no class, a new entity with no term and a new test with no owner all fail the
-check: add what it asks for, in the place it names.
+check: add what it asks for, in the place it names. Each message links a how-to in `docs/how-to/`,
+written for the person it stops. A new rule warns first: announced at the stewards' meeting, it runs
+as a warning with its how-to for at least six weeks, and fails from the date set when it's announced
+(DEC-PRJ-14, `STARTS` in the check).
 
 Owners route reviews too. `CODEOWNERS` is generated from the owners in the metadata
 (`scripts/generate/codeowners.py`, `--check` in CI): a change to a domain's conceptual model asks

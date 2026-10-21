@@ -20,8 +20,8 @@ never weaken a test.
    python scripts/generate/codeowners.py --check
    python scripts/check/impact.py --base origin/main --report impact.md
    ```
-   `governance.py` names each missing owner, glossary term, column class and test owner or
-   dimension, and where it goes (`docs/conventions.md`, *Governance*). `impact.py` names what the
+   `governance.py` names each missing owner, glossary term, column class, test owner or
+   dimension, and description, and links its how-to (`docs/how-to/`). `impact.py` names what the
    change touches and who to ask, and fails on a breaking contract change with no new version.
 2. **An owner.** For each new entity, kind, model, source or seed with no owner, find who decides
    what it means: the owner of the domain on the university's map (`_shared__conceptual.yml`), or

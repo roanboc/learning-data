@@ -1,0 +1,15 @@
+[
+  {
+    "name": "What's in a word",
+    "key": "whats-in-a-word-en",
+    "dir": "films/from-words-to-data/1-whats-in-a-word/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/whats-in-a-word/film.js",
+    "video": "dist/whats-in-a-word.mp4",
+    "file": "whats-in-a-word.mp4",
+    "captions": [["films/from-words-to-data/1-whats-in-a-word/captions/en.srt", "whats-in-a-word.en.srt"], ["films/from-words-to-data/1-whats-in-a-word/captions/es.srt", "whats-in-a-word.es.srt"]],
+    "paths": ["films/from-words-to-data/1-whats-in-a-word/source", ":(exclude)films/from-words-to-data/1-whats-in-a-word/source/src/i18n/es/captions.js", "films/from-words-to-data/shared", "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src", "films/a-sharper-sketch/source/src", "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts"],
+    "legibility": {"texts": 239, "under_28": "0%", "under_20": 0, "median": 28, "status": "Reworked"}
+  }
+]

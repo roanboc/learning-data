@@ -26,7 +26,7 @@ sj = film.parent / 'series.json'
 series = json.loads(sj.read_text()) if sj.exists() else {}
 script = (film / 'script.md').read_text()
 series_title = series.get('title') or re.match(r'# (.+?) · ', script).group(1)
-planned = series.get('planned') or len(series.get('films', []))
+planned = series.get('planned') or len([d for d in film.parent.iterdir() if re.match(r'\d+-', d.name) and (d / 'source' / 'film.json').exists()])
 num = re.match(r'(\d+)-', film.name)
 eyebrow = series_title + (' · Film %s of %s' % (num.group(1), planned) if num and planned else '')
 

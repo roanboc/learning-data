@@ -1,7 +1,6 @@
 {
   "title": "The same one, everywhere",
   "title_es": "El mismo, en todas partes",
-  "films": ["1-one-person-many-roles", "5-lists-everyone-uses", "6-for-this-purpose-only"],
   "planned": 9,
   "lead": "A series on master and reference data. Linh graduated from one university, and now studies, tutors and does research there. She is five records in four systems, and nobody sees they are one person. Film by film, the university learns to keep the person apart from her roles, decide once who is who and which value wins, date the roles, own the lists that sort people, use each role's data only for its purpose, share one person across its systems, and keep it right.",
   "lead_es": "Una serie sobre datos maestros y de referencia. Linh se graduó en una universidad, y ahora estudia, da tutorías e investiga ahí. Es cinco registros en cuatro sistemas, y nadie ve que son una sola persona. Película a película, la universidad aprende a separar a la persona de sus roles, decidir una vez quién es quién y qué valor gana, poner fechas a los roles, tener un responsable para las listas que clasifican a las personas, usar los datos de cada rol solo para su propósito, compartir una persona entre sus sistemas, y mantenerla bien.",
@@ -17,12 +16,6 @@
   "thread_es": "Linh se graduó en la universidad en 2022 y volvió para estudiar informática en salud, con un nuevo número de estudiante. Da tutorías en una materia de primer año, y este año entró en un proyecto de investigación. Cada sistema conoce una parte de ella, con su propio número. Película a película, la universidad le da un registro que todos los sistemas pueden leer: roles que empiezan y terminan, cada valor con la etiqueta de dónde vino, coincidencias decididas una vez por quienes las cuidan, las listas que clasifican a las personas con responsable y fecha, y los datos de cada rol usados solo para su propósito.",
   "past_h": "Every film opens somewhere else, at another time",
   "past_h_es": "Cada película empieza en otro lugar, en otra época",
-  "past": [
-    ["Sweden's parish books, 1686, and a number for life, 1947", "One person, written down once, and followed wherever they go."]
-  ],
-  "past_es": [
-    ["Los libros parroquiales de Suecia, 1686, y un número para toda la vida, 1947", "Una persona, anotada una sola vez, y seguida adondequiera que vaya."]
-  ],
   "coming_h": "Still to come",
   "coming_h_es": "Lo que viene",
   "coming_p": "After the opening film, the series continues in four parts: who someone is, roles and lists, sharing it safely, and keeping it right.",

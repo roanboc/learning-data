@@ -94,7 +94,7 @@ On the site, [`site-tools/build_series.py`](../../site-tools/build_series.py) ma
 
 ## Making the next one
 
-1. Add a folder, copy `film.json`, `requirements.txt`, `.gitignore` and the one-line tools from another film, and add the folder to `series.json`.
+1. Add a folder, copy `film.json`, `requirements.txt`, `.gitignore` and the one-line tools from another film: `site-tools/build_series.py` finds the numbered folder by itself. Give it a `release.json`, a `site.json` and a `decided.md` (see *Each film keeps its own rows* in the root README).
 2. Write the narration first, and voice it (`tools/tts.py`); check the pace (`tools/pace.py`).
 3. Draw the film's own pictures and scenes, reviewing stills (`tools/stills.py`) at every cue, until `tools/check.py` says every moment draws.
 4. Give it its own sound in `tools/score.py`, with the series' motif at the title and the end.

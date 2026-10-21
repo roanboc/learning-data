@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Today, and where it's going",
+    "key": "today-and-where-its-going-en",
+    "dir": "films/enterprise-architecture/7-today-and-where-its-going/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/today-and-where-its-going/film.js",
+    "video": "dist/today-and-where-its-going.mp4",
+    "file": "today-and-where-its-going.mp4",
+    "captions": [["films/enterprise-architecture/7-today-and-where-its-going/captions/en.srt", "today-and-where-its-going.en.srt"], ["films/enterprise-architecture/7-today-and-where-its-going/captions/es.srt", "today-and-where-its-going.es.srt"]],
+    "paths": ["films/enterprise-architecture/7-today-and-where-its-going/source", ":(exclude)films/enterprise-architecture/7-today-and-where-its-going/source/src/i18n/es/captions.js", "films/enterprise-architecture/shared", "films/analytics-engineering/shared", "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js", "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src", "films/a-sharper-sketch/source/src", "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts"],
+    "legibility": {"texts": 175, "under_28": "0%", "under_20": 0, "median": 28.5, "status": "Drawn to the rule"}
+  }
+]

@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Both at once",
+    "key": "both-at-once-en",
+    "dir": "films/from-words-to-data/5-both-at-once/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/both-at-once/film.js",
+    "video": "dist/both-at-once.mp4",
+    "file": "both-at-once.mp4",
+    "captions": [["films/from-words-to-data/5-both-at-once/captions/en.srt", "both-at-once.en.srt"], ["films/from-words-to-data/5-both-at-once/captions/es.srt", "both-at-once.es.srt"]],
+    "paths": ["films/from-words-to-data/5-both-at-once/source", ":(exclude)films/from-words-to-data/5-both-at-once/source/src/i18n/es/captions.js", "films/from-words-to-data/shared", "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src", "films/a-sharper-sketch/source/src", "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts"],
+    "legibility": {"texts": 262, "under_28": "0%", "under_20": 0, "median": 28, "status": "Reworked"}
+  }
+]

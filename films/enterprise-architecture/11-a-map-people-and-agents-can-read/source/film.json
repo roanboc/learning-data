@@ -1,0 +1,23 @@
+{
+  "key": "a-map-people-and-agents-can-read",
+  "title": "A map people and agents can read",
+  "sub": "The map before the data, a series on enterprise architecture and why it matters for data: a map that's used goes stale, so it moves into an enterprise architecture tool that brings in what other systems already keep, each element kept once with a stable ID, an owner and its evidence; every change reviewed and versioned; every view generated from it; and agents that read it, draft changes and never confirm one.",
+  "howto": "Paper on a wall is a draft; glass in the layers' colours is the confirmed model; a window with a side panel is the map's tool, and lines of text are the same map kept as files, the simplest approach. Sand marks what other systems already keep. Cyan outlines the technical side, gold the business side, and a gold tick is an owner's confirmation. The small glass figure with a ring is the map's agent.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": ["stars", "ring", 4.6],
+  "say": [
+    ["\\bTomás's\\b", "Toh-mahs's"],
+    ["\\bTomás\\b", "Toh-mahs"],
+    ["\\bAma\\b", "Ah-mah"],
+    ["\\bArchiMate\\b", "Arky-mate"],
+    ["Hōkūleʻa", "Ho-kooleh-ah"],
+    ["Papeʻete", "Papa-etay"],
+    ["\\bSatawal\\b", "Sahtawahl"],
+    ["\\bMataiva\\b", "Mata-eeva"],
+    ["\\bNainoa\\b", "Nynoa"],
+    ["\\bIT\\b", "I T"]
+  ]
+}

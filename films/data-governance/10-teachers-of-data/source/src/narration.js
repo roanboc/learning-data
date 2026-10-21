@@ -1,0 +1,72 @@
+// Teachers of data, film 10 of the data governance series. One line per id; the film re-times itself to the voice.
+// "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
+const NARR={
+"crossing":{"name":"The mime before the fine","lead":1.6,"tail":1.0,"vo":[
+ {"id":"b95","gap":0.8,"text":"Bogotá, 1995.","say":"Bogotá, nineteen ninety-five."},
+ {"id":"stop","gap":0.8,"text":"In the city centre, drivers stop on the zebra crossings, and people on foot weave between the cars."},
+ {"id":"mayor","gap":0.8,"text":"The new mayor, Antanas Mockus, sends mimes into the streets."},
+ {"id":"whistle","gap":0.8,"text":"When a car stops on a crossing, the people around it whistle."},
+ {"id":"mime","gap":0.8,"text":"A mime steps in and, without a word, invites the driver to back up."},
+ {"id":"fine","gap":0.8,"text":"If the driver still won't, a traffic officer writes a fine, and the people watching applaud."},
+ {"id":"last","gap":0.8,"text":"The fine still came. But it came last, in an order meant to teach."},
+ {"id":"y96","gap":0.8,"text":"By 1996, three drivers in four were keeping the crossings clear.","say":"By nineteen ninety-six, three drivers in four were keeping the crossings clear."},
+ {"id":"most","gap":0.8,"text":"Most people keep a rule because they understand it, and because the people around them keep it."},
+ {"id":"few","gap":0.8,"text":"The fine is for the few."}]},
+"today":{"name":"Submission day","lead":1.0,"tail":1.0,"vo":[
+ {"id":"sends","gap":0.8,"text":"Today, the university sends its awards to the government."},
+ {"id":"agree","gap":0.8,"text":"The submission and Planning's census report agree: 4,867 awards, counted by the glossary's meaning.","say":"The submission and Planning's census report agree: four thousand, eight hundred and sixty-seven awards, counted by the glossary's meaning."},
+ {"id":"mei","gap":0.8,"text":"How that maps to the government's definition is a decision Mei owns, and has written down."},
+ {"id":"helped","gap":0.8,"text":"The checks helped. But they worked because the people they stop knew why they were there."},
+ {"id":"fines","gap":0.8,"text":"Governance has its fines too: the checks that stop the work."},
+ {"id":"before","gap":0.8,"text":"Most of its work comes before them."}]},
+"beside":{"name":"A page beside the check","lead":1.0,"tail":1.0,"vo":[
+ {"id":"anil","gap":0.8,"text":"Anil is an analyst in the Faculty of Health."},
+ {"id":"adds","gap":0.8,"text":"He adds a column to the call list he made for the faculty's advisers, and the governance check stops him."},
+ {"id":"no","gap":0.8,"text":"But it doesn't just say no."},
+ {"id":"says","gap":0.3,"text":"Its message says what's missing, and links a page written for him:"},
+ {"id":"what","gap":0.8,"text":"what the rule asks, and why, how to fix it, and who to ask."},
+ {"id":"two","gap":0.8,"text":"Anil fixes it in two minutes."},
+ {"id":"mime","gap":0.8,"text":"A check that only says no is a fine with no mime."},
+ {"id":"queue","gap":0.8,"text":"Governance used to be a queue of approvals."},
+ {"id":"hours","gap":0.8,"text":"Now it keeps office hours, every Thursday afternoon, for anyone a check has stopped."}]},
+"each":{"name":"Each other","lead":1.0,"tail":1.0,"vo":[
+ {"id":"meet","gap":0.8,"text":"Once a month, the stewards meet: the people who look after the data in each office and faculty."},
+ {"id":"approve","gap":0.8,"text":"They don't meet to approve anything."},
+ {"id":"bring","gap":0.8,"text":"They bring what broke, and what helped, so nobody has to learn it the hard way twice."},
+ {"id":"few","gap":0.8,"text":"Yusuf started with the few who wanted to come."},
+ {"id":"joined","gap":0.8,"text":"Others joined once they saw it working."},
+ {"id":"crossing","gap":0.8,"text":"Like the people at the crossing, colleagues remind each other, long before a check has to."}]},
+"warn":{"name":"Warn first","lead":1.0,"tail":1.0,"vo":[
+ {"id":"starts","gap":0.8,"text":"A new rule starts here too."},
+ {"id":"brings","gap":0.8,"text":"At October's meeting, Yusuf brings one: every column other teams read says what it holds."},
+ {"id":"why","gap":0.8,"text":"First, why. A reader who can't tell what a column holds will guess, and two guesses make two numbers."},
+ {"id":"agree","gap":0.8,"text":"The stewards agree it, and set a date."},
+ {"id":"warns","gap":0.8,"text":"Until then, the check only warns."},
+ {"id":"links","gap":0.8,"text":"Each warning links its page, and names the day it becomes an error: the first of December."},
+ {"id":"gone","gap":0.8,"text":"Four weeks in, the warnings are gone."},
+ {"id":"nothing","gap":0.8,"text":"There's nothing left for the date to stop."},
+ {"id":"mime","gap":0.8,"text":"The mime came before the fine."}]},
+"measured":{"name":"Measured by use","lead":1.0,"tail":1.0,"vo":[
+ {"id":"score","gap":0.8,"text":"And the maturity score of 2.1?","say":"And the maturity score of two point one?"},
+ {"id":"binder","gap":0.8,"text":"Yusuf opens binder 29. Its policy says governance maturity is assessed every year.","say":"Yusuf opens binder twenty-nine. Its policy says governance maturity is assessed every year."},
+ {"id":"nobody","gap":0.8,"text":"Nobody assesses it again."},
+ {"id":"work","gap":0.8,"text":"Governance is measured from the work instead, every day."},
+ {"id":"project","gap":0.8,"text":"From the project: how much of what other teams read has an owner, a glossary term, a class and a description."},
+ {"id":"run","gap":0.8,"text":"From last night's run: which tests failed, and whose they are."},
+ {"id":"people","gap":0.8,"text":"And from people: who came to office hours, and who came back."},
+ {"id":"paper","gap":0.8,"text":"A score said how governance looked on paper. These say whether it's used."}]},
+"teach":{"name":"Teachers of data","lead":1.0,"tail":1.0,"vo":[
+ {"id":"day","gap":0.8,"text":"So what does a governance team do all day? It teaches."},
+ {"id":"centre","gap":0.8,"text":"Governance sits at the centre of data work, where every other part of it meets."},
+ {"id":"fit","gap":0.8,"text":"Someone has to show how the pieces fit."},
+ {"id":"path","gap":0.8,"text":"So every new analyst starts with a path: short films, and labs to practise on."},
+ {"id":"pass","gap":0.8,"text":"And the stewards pass it on. Anil shows a new colleague the page that helped him."}]},
+"lasts":{"name":"What lasts","lead":1.0,"tail":1.0,"vo":[
+ {"id":"binder","gap":0.8,"text":"And the binder? Of its 215 lines, 92 now run in the work, 64 are decisions someone owns, and 59 are gone.","say":"And the binder? Of its two hundred and fifteen lines, ninety-two now run in the work, sixty-four are decisions someone owns, and fifty-nine are gone."},
+ {"id":"models","gap":0.3,"text":"Change models, from Kotter's eight steps to ADKAR, agree on what people need:"},
+ {"id":"needs","gap":0.8,"text":"to know why, to want it, to know how, to be able to, and to see it last."},
+ {"id":"hardest","gap":0.8,"text":"The last is the hardest."},
+ {"id":"faded","gap":0.8,"text":"In Bogotá, within about ten years, the habits had faded: the campaigns weren't kept up."},
+ {"id":"ends","gap":0.8,"text":"So governance can't be a project that ends. It has to be something the university can always do."},
+ {"id":"agreed","gap":0.8,"text":"Governance is people's work. Tools remember what people agreed."}]}
+};

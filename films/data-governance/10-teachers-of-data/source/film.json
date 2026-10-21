@@ -7,6 +7,9 @@
     "plan.js",
     "scenes.js"
   ],
+  "story": [
+    "crossing"
+  ],
   "poster": [
     "crossing",
     "mime",

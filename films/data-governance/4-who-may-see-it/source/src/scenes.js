@@ -139,7 +139,7 @@ function ws_regScreen(x,title,a){const [sx,sy,sw,sh]=GV_RX.screen;gv_screen(x,sx
 // Planning's wall screen, as Clara reads the learner table there: the key, the stars, the status
 function ws_planScreen(x,pulse){const [sx,sy,sw,sh]=GV_PL.screen;gv_screen(x,sx,sy,sw,sh,"learner table",null,{barH:46,titleSize:28});
   [[30,"learner_key"],[270,"full_name"],[500,"status"]].forEach(([cx,s2])=>wc_T(x,s2,sx+cx,sy+92,{w:500,size:28,f:"mono",col:WC_MUTED}));
-  WS_LT.slice(0,3).forEach(([k,st],i)=>{const y=sy+160+i*70;wc_T(x,k,sx+30,y,{w:500,size:28,f:"mono",col:WC_INK});ws_mask(x,sx+270,y-34,190,48,1,{size:28});wc_T(x,st,sx+500,y,{w:500,size:28,f:"mono",col:WC_INK});});
+  WS_LT.slice(0,3).forEach(([k,st],i)=>{const y=sy+160+i*70;wc_T(x,k,sx+30,y,{w:500,size:28,f:"mono",col:WC_INK});gv_mask(x,sx+270,y-34,190,48,1,{size:28});wc_T(x,st,sx+500,y,{w:500,size:28,f:"mono",col:WC_INK});});
   if(pulse>0.01){x.save();x.globalCompositeOperation="screen";wc_glowAt(x,sx+365,sy+230,200,[255,200,240],0.3*pulse);x.restore();}}
 // the list of student IDs and the keys they give, side by side on the desk: the keys written down row by row (f, rows done), the last
 // row's match lit (m); the row going through now lit on the IDs' list
@@ -246,7 +246,7 @@ scene("mask",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s,
   gv_shots(ctx,S,t,sc.dur,[
     // the class, in the file; it lifts off with its column and goes
     {at:0,place:"screenReg",keys:[[0,960,440,1.04],[0.1,980,430,1.08]],d:3,push:0.01,draw:(x,tt)=>{ws_yaml(x,1);const u=fin(tt,P.lift,1.0),e=easeCam(u);if(u<=0)return;
-      const [X,Y]=GV_SC;x.save();x.translate(lerp(X+300,X+1600,e*e),lerp(Y+510,Y+380,e)-90*Math.sin(Math.PI*e));withA(x,1-clamp((u-0.85)/0.15,0,1),()=>ws_chip(x,0,0,"direct",{size:32}));x.restore();}},
+      const [X,Y]=GV_SC;x.save();x.translate(lerp(X+300,X+1600,e*e),lerp(Y+510,Y+380,e)-90*Math.sin(Math.PI*e));withA(x,1-clamp((u-0.85)/0.15,0,1),()=>gv_classChip(x,0,0,"direct",{size:32}));x.restore();}},
     // the platform team's desk: the tag arrives with the column; the one rule that reads it
     {at:P.plat,place:"platform",keys:[[P.plat,900,540,1],[P.plat+0.1,880,530,1.05]],d:3,draw:(x,tt)=>{ws_sam(x,tt,{pose:"write"});x.drawImage(gv_place("platformDesk"),0,0,W,H);
       ws_tagScreen(x,tt,P.tag);ws_ruleScreen(x,fin(tt,P.rule,0.5),fin(tt,P.stars,0.8));}},
@@ -339,7 +339,7 @@ scene("grants",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,
     {at:P.tb,place:"table83",keys:[[P.tb,960,540,1],[P.tb+0.1,960,520,1.04]],d:4,push:0.02,draw:(x,tt)=>{const [fx,fy,fw,fh]=WS_F,m=fin(tt,P.tb+0.2,1.6);
       ws_colsTable(x,1,fin(tt,P.band,0.9));const [a,b]=ws_lineAt(1,[fx,fy,fw,fh]);ws_line(x,a,b,1);
       ws_tagAt(x,tt,c.one+0.2,null,(WS_TB.x+WS_TB.div)/2,WS_TB.y-60,"counting",{size:32});ws_tagAt(x,tt,c.another+0.2,null,(WS_TB.div+WS_TB.x+WS_TB.w)/2,WS_TB.y-60,"knowing who",{size:32});
-      ws_chipAt(x,tt,P.once,WS_TB.div+30,WS_TB.y+140,"direct",{size:28});}}]);
+      gv_classChipAt(x,tt,P.once,WS_TB.div+30,WS_TB.y+140,"direct",{size:28});}}]);
   wc_year(ctx,56,72,"December 2026",fin(t,0.3,0.5)*(1-fin(t,P.rev,0.4)));
   gv_end(ctx,S,t,P.end,"Who may see it","Classify once; let the platform protect it everywhere.","Film 4 of 19");
   wc_paperOver(ctx,S);});

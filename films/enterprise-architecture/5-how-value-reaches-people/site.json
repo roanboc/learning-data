@@ -23,5 +23,7 @@
     "end": "Vuelve la luz"
   },
   "next_h": "You've seen how value reaches people. More films in the series are on the way.",
-  "next_h_es": "Viste cómo llega el valor a la gente. Vienen más películas de la serie."
+  "next_h_es": "Viste cómo llega el valor a la gente. Vienen más películas de la serie.",
+  "past": ["Mumbai's dabbawalas, since 1890", "Value reaches people through hand-offs, and the detail lives there."],
+  "past_es": ["Los dabbawalas de Mumbai, desde 1890", "El valor llega a la gente a través de traspasos, y el detalle vive ahí."]
 }

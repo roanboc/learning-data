@@ -14,9 +14,9 @@ const OW={loess:[226,194,134],loessDk:[196,158,100],loessLt:[240,218,170],field:
   rammed:[216,186,134],timber:[116,84,58],timberDk:[86,62,46],tile:[94,96,106],plaster:[234,216,178],floor:[204,176,130],mat:[224,200,142],
   wood:[204,168,118],woodDk:[150,112,74],black:[52,50,60],hemp:[204,190,158],brown:[124,94,66],slate:[80,88,106],cinnabar:[172,66,52],
   bronze:[184,138,70],bronzeDk:[118,84,42],ox:[150,108,76],slip:[232,212,166],ink:[60,48,42],board:[214,184,132],boardOld:[112,82,58],mount:[74,84,102]};
-// the colours of the three meanings of award, as Who decides painted them: violet (the new words, with microcredentials), rose (the
-// words before Monday), olive (degrees only); a wash for paper, an ink for words
-const OW_MEAN=[[110,92,190],[214,96,140],[150,156,56]],OW_MEANINK=[[78,58,160],[168,50,98],[94,100,22]];
+// the three meanings of award, in the series' colours (GV_MEAN, as Who decides paints them): violet (the new words, with
+// microcredentials), rose (the words before Monday), olive (degrees only); a wash for paper, an ink for words
+const OW_MEAN=[GV_MEAN.violet,GV_MEAN.rose,GV_MEAN.olive],OW_MEANINK=[GV_MEANINK.violet,GV_MEANINK.rose,GV_MEANINK.olive];
 
 /* ---------- places in depth ---------- */
 // the road and the gate are painted as the camera sees them: x across, y up, z away from us, in metres; F is the lens, hz the horizon on

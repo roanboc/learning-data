@@ -161,4 +161,73 @@ scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id
       dim:fin(tt,P.nothing,0.8),th:clamp((tt-P.brought+0.2)/2.0,0,1)})}]);
   wc_paperOver(ctx,S);});
 
-["agent","written","close"].forEach(id=>scene(id,(ctx,S,t,sc)=>{gv_shots(ctx,S,t,sc.dur,[{at:0,place:"office",keys:[[0,960,540,1]],d:1.4}]);wc_paperOver(ctx,S);}));
+// ---- 6 · Governed, too: binder 26's line; the agent's own identity and least access; it can't approve; the line goes green ----
+scene("agent",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{ag:w("binder","The agent"),gov:w("binder","governed"),pl:sc.ends.binder+0.25,acc:w("own","reads")-0.5,id:w("own","identity"),
+      rows:[w("own","identity"),w("own","reads"),w("own","writes"),w("own","workspace")+0.2,w("samples","counts"),w("samples","bulk"),w("samples","only reads")],
+      works:c.samples,who:c.approve-0.4,cant:w("approve","can't"),owners:w("approve","owners,"),owns:w("approve","owns"),gr:c.green-0.5,green:w("green","green:"),
+      hw:[w("green","agent's access"),w("green","its steps"),w("green","owners' approvals")]};});
+  gv_shots(ctx,S,t,sc.dur,[
+    // Yusuf's desk, from above: binder 26 open at its line; then, beside it, the project's page for agents, and the agent's star comes onto it
+    {at:0,place:"desk26",keys:[[0,1050,420,1.45],[P.ag-0.5,960,540,1]],d:1.6,draw:(x,tt)=>{ac_open26(x,tt);
+      ac_agentsPage(x,tt,{land:clamp((tt-P.ag+0.4)/0.9,0,1),star:fin(tt,P.gov-0.1,0.6)});}},
+    // the platform team's desk, close: Sam gives the agent an identity of its own
+    {at:P.pl,place:"platClose",keys:[[P.pl,960,540,1.04],[P.pl+0.1,1010,540,1.1]],d:2.4,draw:(x,tt)=>{
+      gv_behind(x,"sam",GV_PX.seat[0],GV_PX.top,GV_PX.seat[1],{pose:"listen",pose2:"reach",mix:gv_io(tt,c.own-0.4,P.id+0.2,0.3),flip:true,t:tt});
+      ac_platDesk(x);ac_platScreens(x,tt,fin(tt,c.own-0.1,0.5));}},
+    // his screen, close: the agent's access, each line as it's said; then how it works with the data
+    {at:P.acc,place:"screenPlat",keys:[[P.acc,860,500,1.16],[P.works-0.5,1070,500,1.16]],d:1.8,draw:(x,tt)=>ac_access(x,tt,{rows:P.rows.map((s,i)=>i?clamp((tt-s+0.1)/0.6,0,1):fin(tt,P.acc,0.3))})},
+    // who reviews what: approvals come from the owners; the agent is on no line, and its approve button stays grey
+    {at:P.who,place:"screenBig",keys:[[P.who,960,500,1]],push:0.02,draw:(x,tt)=>ac_who(x,tt,{own:fin(tt,P.owners-0.2,0.6),ag:fin(tt,P.cant-0.1,0.5),
+      tags:[[P.owns-0.1,AC_WX.by+260,AC_WX.card[1]+AC_WX.card[3]/2,"owners only",GV.gold]]})},
+    // the desk again: the binder's line goes green, and Yusuf writes where it runs
+    {at:P.gr,place:"desk26",keys:[[P.gr,960,540,1],[P.gr+0.1,1060,480,1.22]],d:1.8,push:0,draw:(x,tt)=>{
+      ac_open26(x,tt,{hi:clamp((tt-P.green+0.2)/0.9,0,1),hw:P.hw.map(s=>clamp((tt-s+0.1)/0.8,0,1))});ac_agentsPage(x,tt,{star:1});}}]);
+  ac_nameCard(ctx,250,150,"Sam Okafor","platform team",gv_io(t,P.pl+0.3,P.acc-0.1,0.4));
+  wc_paperOver(ctx,S);});
+
+// ---- 7 · Only what's written: an agent follows only what's written plainly; policy 12.7 can't be checked; the steps are open, and change by review ----
+scene("written",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{follow:w("plain","follow"),pb:w("plain","plainly")-0.4,pg:c.care-0.5,staff:w("care","Staff"),no:w("care","No agent"),care2:sc.ends.care-0.3,
+      rm:c.open-0.5,open:w("open","open:"),bc:w("open","anyone")-0.3,argue:w("open","argue"),who:c.change-0.5,step:w("change","step"),dg:w("change","data governance"),
+      nx:w("change","next")-0.5,next:w("change","next"),fa:c.trust-0.4,rd:w("trust","read,"),qu:w("trust","question"),over:w("trust","overrule")};});
+  const seat=GV_FX.seat,rowAt=(tt,t0,t1)=>clamp((tt-t0)/(t1-t0),0,1)*6.99;
+  gv_shots(ctx,S,t,sc.dur,[
+    // Yusuf's desk: the skill's page, and the agent's star reads down its steps; then, beside it, binder 12, closed, his notes sticking out
+    {at:0,place:"desk12",keys:[[0,1182,525,1.3],[P.pb,960,540,1]],d:1.8,draw:(x,tt)=>{ac_closed12(x);
+      ac_skillSheet(x,tt,{read:rowAt(tt,P.follow-0.2,P.pb+0.2),readA:gv_io(tt,P.follow-0.4,P.pb+0.6,0.3)});}},
+    // policy 12's page, as Off the shelf left it: its last line struck through, can go; the star reads along it, and finds nothing to check
+    {at:P.pg,place:"page",keys:[[P.pg,960,540,1],[P.staff-0.9,990,665,1.3]],d:1.6,draw:(x,tt)=>ac_policy12(x,tt,{star:clamp((tt-P.no)/1.0,0,1),
+      starA:gv_io(tt,P.no-0.2,P.care2+1.0,0.3),q:fin(tt,P.care2,0.5)})},
+    // the data team's room: the skill's page pinned on their board; Anil and Jun read it
+    {at:P.rm,place:"data",keys:[[P.rm,800,520,1.2],[P.rm+0.1,820,515,1.24]],d:3,draw:(x,tt)=>{ac_boardPage(x);
+      person(x,"anil",360,905,0.8,{pose:"listen",t:tt});person(x,"jun",990,905,0.8,{pose:"listen",flip:true,t:tt,nod:ac_nod(tt,P.open)});}},
+    // the board, close: anyone can read the steps, and argue with them: Anil's question, in pencil, beside step 4
+    {at:P.bc,place:"boardData",keys:[[P.bc,960,500,1.04],[P.bc+0.1,980,500,1.08]],d:3,push:0.02,draw:(x,tt)=>ac_boardSkill(x,tt,{note:clamp((tt-P.argue+0.3)/1.4,0,1)})},
+    // who reviews what: the skill's line, owned by data governance and Noor; data governance approves a change to it
+    {at:P.who,place:"screenBig",keys:[[P.who,960,500,1]],push:0.02,draw:(x,tt)=>ac_who(x,tt,{rows:AC_WHO7,focus:AC_WHO7.length-1,dim:fin(tt,P.step-0.2,0.6),own:fin(tt,P.dg-0.2,0.6),
+      tags:[[P.dg,AC_WX.files+250,822,"data governance approves",GV.gold]]})},
+    // the skill's page again: the next review follows it, step by step
+    {at:P.nx,place:"sheet",keys:[[P.nx,960,540,1]],push:0.03,draw:(x,tt)=>ac_skillRead(x,tt,{read:rowAt(tt,P.next,P.fa-0.2),readA:gv_io(tt,P.next-0.2,P.fa+0.5,0.3),tag:P.next-0.1})},
+    // the faculty's office: Anil reads the agent's review; he can read it, question it, and overrule it
+    {at:P.fa,place:"faculty",keys:[[P.fa,900,540,1.16],[P.fa+0.1,930,530,1.22]],d:3,draw:(x,tt)=>{
+      gv_behind(x,"anil",seat[0],GV_FX.top,seat[1],{pose:"listen",flip:true,t:tt,expr:tt>P.over+0.4?"smile":null});ac_facDesk(x);
+      ac_smallChange(x,tt,Object.assign({lights:[0,0,0]},AC_TODAY));ac_smallReview(x,tt,{a:1});
+      [["read it",P.rd],["question it",P.qu],["overrule it",P.over]].forEach(([s,t0],i)=>ac_tagAt(x,tt,t0-0.1,null,330,340+i*100,s,i===2?{size:36,wash:GV.gold,washA:0.35}:{size:36}));}}]);
+  wc_paperOver(ctx,S);});
+
+// ---- 8 · That night: the imagined night again, made of what the film has shown; then morning, and a person's decision ----
+scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{scr:c.parts-0.7,tg:[w("parts","rules written"),w("parts","steps in"),w("parts","an agent"),w("parts","people")],morn:c.last-0.5,dec:w("last","People decide"),end:c.breath-0.2};});
+  gv_shots(ctx,S,t,sc.dur,[
+    // the campus at night again, the clock at three; close in on the old building's lit window
+    {at:0,place:"night",keys:[[0,760,560,1.12],[0.5,330,590,2.1]],d:3.2},
+    // the screen: the agent's comment on the date of birth; then what the night is made of, each on the sign its chapter gave it
+    {at:P.scr,place:"screenNight",keys:[[P.scr,960,540,1]],push:0.02,draw:(x,tt)=>{ac_change(x,tt,{q:1,fade:fin(tt,P.tg[0]-0.4,0.6)});ac_comment(x,tt,1,1,null,0);
+      ac_parts(x,tt,P.tg.map(s=>fin(tt,s-0.15,0.45)));}},
+    // eight in the morning: the column marked by a person, in gold
+    {at:P.morn,place:"screenMorning",keys:[[P.morn,960,540,1]],push:0.02,draw:(x,tt)=>{
+      gv_halo(x,AC_PG.cls-40,AC_PG.y0+4*AC_PG.dy-58,300,90,GV.gold,0.9*fin(tt,P.dec-0.1,0.6));ac_change(x,tt,{q:1,cls:1,ok:1});ac_comment(x,tt,1,1,null,1);}}]);
+  wc_year(ctx,56,72,"Imagined · a few years from now",fin(t,0.4,0.5)*(1-fin(t,P.end,0.4)));
+  gv_end(ctx,S,t,P.end,"An agent that checks","An agent checks what's written. People decide.","Film 9 of 19");
+  wc_paperOver(ctx,S);});

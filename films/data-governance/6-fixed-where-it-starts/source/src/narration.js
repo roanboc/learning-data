@@ -11,11 +11,11 @@ const NARR={
  {"id":"fall","gap":0.8,"text":"Within months, deaths in the first clinic fall to the level of the second."},
  {"id":"showed","gap":0.8,"text":"The fever showed in the beds. It started on the doctors' hands, on their way in."},
  {"id":"lesson","gap":0.8,"text":"Where a problem shows is often not where it starts."}]},
-"monday":{"name":"Amber every Monday","lead":1.0,"tail":1.0,"vo":[
+"monday":{"name":"Still amber","lead":1.0,"tail":1.0,"vo":[
  {"id":"binder","gap":0.8,"text":"Today, Yusuf opens binder 15. Its policy says the root causes of data quality issues are addressed.","say":"Today, Yusuf opens binder fifteen. Its policy says the root causes of data quality issues are addressed."},
- {"id":"amber","gap":0.8,"text":"But on the quality scorecard, one cell is amber every Monday."},
+ {"id":"amber","gap":0.8,"text":"But on the quality scorecard, one cell is still amber."},
  {"id":"what","gap":0.8,"text":"Short-course emails, with spaces and capitals."},
- {"id":"issue","gap":0.8,"text":"Every week, an issue goes to their owner, Tom's learning team. And every week, it's closed: cleaned in staging."},
+ {"id":"issue","gap":0.8,"text":"The issue goes to their owner, Tom's learning team. The first answer is the old one: it's cleaned in staging."},
  {"id":"jun","gap":0.8,"text":"Every night for a year, staging has trimmed each email and written it in lower case."},
  {"id":"wallet","gap":0.8,"text":"Without it, one learner could end up with two wallets."},
  {"id":"others","gap":0.8,"text":"And every system that reads these emails cleans them again."},

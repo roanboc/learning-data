@@ -1,12 +1,12 @@
 {
   "title": "The map before the data",
   "title_es": "El mapa antes de los datos",
-  "films": ["1-day-one", "2-who-it-serves", "3-why-it-moves", "4-what-it-must-do", "5-how-value-reaches-people", "6-who-does-it", "7-today-and-where-its-going", "8-now-the-questions-appear", "9-rules-with-a-home", "11-a-map-people-and-agents-can-read"],
+  "films": ["1-day-one", "2-who-it-serves", "3-why-it-moves", "4-what-it-must-do", "5-how-value-reaches-people", "6-who-does-it", "7-today-and-where-its-going", "8-now-the-questions-appear", "9-rules-with-a-home", "10-when-strategy-moves", "11-a-map-people-and-agents-can-read"],
   "planned": 11,
   "lead": "A series on enterprise architecture, and why it matters for data. Tomás, a new enterprise architect at a publicly owned energy utility, learns how the place works before he asks what its data should answer: who it serves, why it must change, what it must be able to do, how value reaches people, who does the work, and what runs it.",
   "lead_es": "Una serie sobre arquitectura empresarial, y por qué importa para los datos. Tomás, arquitecto empresarial recién llegado a una empresa pública de energía, aprende cómo funciona antes de preguntar qué deberían responder sus datos: a quién sirve, por qué tiene que cambiar, qué tiene que ser capaz de hacer, cómo llega el valor a la gente, quién hace el trabajo y qué la hace funcionar.",
-  "description": "Short films on enterprise architecture for data: an organisation in layers, its customers and offerings, why it must change, its capabilities, its value streams and processes, who does the work and where meaning changes, what runs it today and where it's going, which questions matter, and why every data rule needs a home on the map.",
-  "description_es": "Películas cortas sobre arquitectura empresarial para datos: una organización en capas, sus clientes y ofertas, por qué tiene que cambiar, sus capacidades, sus flujos de valor y procesos, quién hace el trabajo y dónde cambia el significado, qué la hace funcionar hoy y hacia dónde va, qué preguntas importan, y por qué cada regla de datos necesita un lugar en el mapa.",
+  "description": "Short films on enterprise architecture for data: an organisation in layers, its customers and offerings, why it must change, its capabilities, its value streams and processes, who does the work and where meaning changes, what runs it today and where it's going, which questions matter, why every data rule needs a home on the map, and what a change in strategy means for the data.",
+  "description_es": "Películas cortas sobre arquitectura empresarial para datos: una organización en capas, sus clientes y ofertas, por qué tiene que cambiar, sus capacidades, sus flujos de valor y procesos, quién hace el trabajo y dónde cambia el significado, qué la hace funcionar hoy y hacia dónde va, qué preguntas importan, por qué cada regla de datos necesita un lugar en el mapa, y qué significa para los datos un cambio de estrategia.",
   "card": "A new enterprise architect maps a public energy utility, layer by layer, before asking what its data should answer.",
   "card_es": "Un arquitecto empresarial recién llegado mapea una empresa pública de energía, capa por capa, antes de preguntar qué deberían responder sus datos.",
   "order": "Watch them in order: each film adds a layer to the map.",
@@ -38,18 +38,6 @@
     ["Una mañana imaginada en la región de la empresa, 2045", "Hacia dónde va se dibuja con el mismo cuidado que dónde está, y el camino entre los dos es su propio dibujo."],
     ["Los pescadores de Kerala, 1997", "Una pregunta importa cuando alguien va a actuar a partir de su respuesta, a tiempo."],
     ["Un nacimiento en Tartu, Estonia, hoy", "Cada hecho tiene un solo hogar y un solo responsable, así que se pide una vez."]
-  ],
-  "coming_h": "Still to come",
-  "coming_h_es": "Lo que viene",
-  "coming_p": "The last films, on what the map does for data.",
-  "coming_p_es": "Las últimas películas, sobre lo que el mapa hace por los datos.",
-  "coming": [
-    [10, "When strategy moves", "one change, walked through every layer"],
-    [11, "A map people and agents can read", "the model as something kept, not drawn once"]
-  ],
-  "coming_es": [
-    [10, "Cuando la estrategia se mueve", "un cambio, recorrido por todas las capas"],
-    [11, "Un mapa que personas y agentes pueden leer", "el modelo como algo que se mantiene, no que se dibuja una vez"]
   ],
   "people_h": "Who knows the place",
   "people_h_es": "Quién conoce el lugar",

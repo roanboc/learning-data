@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Written once",
+    "key": "written-once-en",
+    "dir": "films/analytics-engineering/9-written-once/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/written-once/film.js",
+    "video": "dist/written-once.mp4",
+    "file": "written-once.mp4",
+    "captions": [["films/analytics-engineering/9-written-once/captions/en.srt", "written-once.en.srt"], ["films/analytics-engineering/9-written-once/captions/es.srt", "written-once.es.srt"]],
+    "paths": ["films/analytics-engineering/9-written-once/source", ":(exclude)films/analytics-engineering/9-written-once/source/src/i18n/es/captions.js", "films/analytics-engineering/shared", "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js", "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src", "films/a-sharper-sketch/source/src", "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts"],
+    "legibility": {"texts": 653, "under_28": "0%", "under_20": 0, "median": 28, "status": "Reworked"}
+  }
+]

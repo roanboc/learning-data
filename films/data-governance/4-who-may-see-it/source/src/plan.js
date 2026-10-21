@@ -350,9 +350,10 @@ function ws_calBaseC(){return wc_kept("calbase",360,380,q=>{q.translate(20,40);q
   wc_wash(q,wc_rect(0,0,300,300),[96,110,140],{kind:"cover",lw:1.4,seed:71});});}
 function ws_calRingsC(){return wc_kept("calrings",360,80,q=>{q.translate(20,40);for(let i=0;i<9;i++){q.strokeStyle=rgba([84,88,100],0.95);q.lineWidth=4.5;q.beginPath();q.ellipse(36+i*29,22,7,14,0,0,TAU);q.stroke();}});}
 function ws_calPageC(){return wc_kept("calpage",312,300,q=>{q.translate(20,20);wc_wash(q,wc_rect(0,0,272,262),GV.paper,{kind:"page",lw:1.2,seed:72});wc_flat(q,wc_rect(2,2,268,58),[198,96,74],1,"band");});}
-function ws_calPage(ctx,x,y,m,d,k){if(k<=0.02)return;const d0=k<0.95?1:0;ctx.save();ctx.translate(x,y-126);ctx.scale(1,k);ctx.drawImage(ws_calPageC(),-156,-20);
-  wc_T(ctx,m,0,42,{w:800,size:32,align:"center",col:[255,255,255],deco:d0});wc_T(ctx,d,0,196,{w:800,size:116,align:"center",col:WC_DARK,deco:d0});ctx.restore();}
-function ws_calendar(ctx,x,y,cur,next,flip){ctx.drawImage(ws_calBaseC(),x-170,y-190);if(flip>0.001&&next)ws_calPage(ctx,x,y,next[0],next[1],1);
+function ws_calPage(ctx,x,y,m,d,k,ta){if(k<=0.02)return;const d0=k<0.95?1:0,a=ta==null?1:ta;ctx.save();ctx.translate(x,y-126);ctx.scale(1,k);ctx.drawImage(ws_calPageC(),-156,-20);
+  if(a>0.01){wc_T(ctx,m,0,42,{w:800,size:32,align:"center",col:[255,255,255],deco:d0,a});wc_T(ctx,d,0,196,{w:800,size:116,align:"center",col:WC_DARK,deco:d0,a});}ctx.restore();}
+// the next page's words come in as the turning page lifts off them, so they're never drawn under it
+function ws_calendar(ctx,x,y,cur,next,flip){ctx.drawImage(ws_calBaseC(),x-170,y-190);if(flip>0.001&&next)ws_calPage(ctx,x,y,next[0],next[1],1,clamp((flip-0.25)/0.35,0,1));
   ws_calPage(ctx,x,y,cur[0],cur[1],1-clamp(flip,0,1));ctx.drawImage(ws_calRingsC(),x-170,y-190);}
 // the whole learner table, printed: a long sheet unrolling across the desk from the left (u, 0 to 1), every column filled, names and
 // emails too
@@ -388,15 +389,17 @@ const ws_whoAt=i=>{const [x,y]=GV_SC;return[x+50+Math.floor(i/11)*300,y+150+(i%1
 function ws_whoList(ctx,fill,grey,gather,dec){const [X,Y,Wd,Hd]=GV_SC;
   gv_screen(ctx,X,Y,Wd,Hd,"learner table · who can read"+(dec?" · December 2026":""),null,{barH:52,titleSize:30});
   const cards=[[X+120,Y+250,480,"registrar's office","keeps the learners' records",WS_REG],[X+660,Y+250,480,"data team","builds the models",WS_DATA]];
-  const g=easeCam(clamp(gather,0,1));
-  if(g>0)cards.forEach(([cx,cy,cw,a,b],k)=>withA(ctx,clamp(gather*2.2-0.9-k*0.15,0,1),()=>{wc_panel(ctx,cx,cy,cw,170,{kind:"card",wash:GV.gold,washA:0.12,seed:90+k});
-    wc_T(ctx,a,cx+cw/2,cy+70,{w:800,size:34,align:"center",col:WC_DARK});wc_T(ctx,b,cx+cw/2,cy+122,{w:600,size:30,align:"center",col:WC_INK});}));
+  // in December: first the names that don't stay fade where they are, the nine who moved on first; then the others glide together
+  // into their group's card, fading as they go, and the cards come in over them, so no name is drawn across another or a card's words
+  const g=clamp(gather,0,1);
   WS_WHO.forEach((s,i)=>{const u=clamp(fill*1.25-i/41*0.25,0,1)*clamp((fill*41-i)*1.5,0,1);if(u<=0.01)return;const gone=WS_GONE.includes(i),gr=gone?clamp(grey,0,1):0;
     let [x,y]=ws_whoAt(i),a=u;const k=WS_REG.indexOf(i)>=0?0:WS_DATA.indexOf(i)>=0?1:-1;
-    if(g>0){if(k>=0){const [cx,cy,cw]=cards[k],v=easeCam(clamp(gather*1.6-0.1-0.25*((i*7)%11)/11,0,1));x=lerp(x,cx+cw/2-60,v);y=lerp(y,cy+86,v);a*=1-clamp(v*1.4-0.4,0,1);}
-      else{const v=clamp(gather*1.8-0.2-(gone?0:0.3),0,1);y+=v*v*120;a*=1-v;}}
+    if(g>0){if(k>=0){const [cx,cy,cw]=cards[k],v=easeCam(clamp((g-0.3)/0.45,0,1));x=lerp(x,cx+cw/2-60,v);y=lerp(y,cy+86,v);a*=1-clamp(v*2.2-0.3,0,1);}
+      else{const v=clamp(g*3.2-(gone?0:0.15),0,1);y+=v*v*30;a*=1-v;}}
     if(a>0.01)wc_T(ctx,s,x,y,{w:600,size:28,col:mix(WC_INK,[176,174,184],gr),a});});
-  const fa=clamp(fill*3-2,0,1)*(1-g);if(fa>0.01){wc_T(ctx,"41 people",X+50,Y+Hd-30,{w:800,size:30,col:WC_DARK,a:fa});
+  if(g>0)cards.forEach(([cx,cy,cw,a,b],k)=>withA(ctx,clamp((g-0.42-k*0.05)/0.3,0,1),()=>{wc_panel(ctx,cx,cy,cw,170,{kind:"card",wash:GV.gold,washA:0.12,seed:90+k});
+    wc_T(ctx,a,cx+cw/2,cy+70,{w:800,size:34,align:"center",col:WC_DARK});wc_T(ctx,b,cx+cw/2,cy+122,{w:600,size:30,align:"center",col:WC_INK});}));
+  const fa=clamp(fill*3-2,0,1)*(1-clamp(g*3.2,0,1));if(fa>0.01){wc_T(ctx,"41 people",X+50,Y+Hd-30,{w:800,size:30,col:WC_DARK,a:fa});
     if(grey>0)wc_T(ctx,"9 moved on",X+260,Y+Hd-30,{w:700,size:30,col:[150,148,160],a:fa*clamp(grey*2,0,1)});}}
 
 /* ---------- today: the classes, and the mask ---------- */
@@ -545,11 +548,13 @@ function ws_scramblerC(){const S=WS_SCR;return wc_kept("scrambler",S.w+80,S.h+80
 function ws_scrambler(ctx,crank){const S=WS_SCR;ctx.drawImage(ws_scramblerC(),S.x-S.w/2-40,S.y-S.h/2-40);const cx=S.x+S.w/2-84,cy=S.y,a=crank*TAU;
   ctx.save();ctx.strokeStyle=rgba([70,78,74],1);ctx.lineWidth=12;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(a)*70,cy+Math.sin(a)*70);ctx.stroke();
   ctx.fillStyle=rgba([150,92,64],1);ctx.beginPath();ctx.arc(cx+Math.cos(a)*70,cy+Math.sin(a)*70,15,0,TAU);ctx.fill();ctx.restore();}
-// a paper slip with one value on it, in mono (o.glow lights it; o.cut clips it at a slot: only what's left of cutL, or right of cutR, shows)
+// a paper slip with one value on it, in mono (o.glow lights it; o.cut clips it at a slot: only what's left of cutL, or right of cutR, shows,
+// and words wholly behind the slot aren't drawn)
 function ws_slip(ctx,x,y,s,o){o=o||{};const sz=o.size||34,w=Math.round(tw(ctx,s,sz,500,"mono")+56),h=sz+38;ctx.save();if(o.cutL!=null||o.cutR!=null){ctx.beginPath();
     const l=o.cutR!=null?o.cutR:-W,r=o.cutL!=null?o.cutL:2*W;ctx.rect(l,y-200,r-l,400);ctx.clip();}
   withA(ctx,o.a==null?1:o.a,()=>{wc_panel(ctx,x-w/2,y-h/2,w,h,{kind:"card",wash:o.wash,washA:o.washA||0.35,seed:(s.length*7+w)|0});if(o.glow>0.01)gv_tint(ctx,x-w/2+8,y-h/2+8,w-16,h-16,WS_HI,0.8*o.glow);
-    wc_T(ctx,s,x,y+sz*0.36,{w:500,size:sz,f:"mono",align:"center",col:WC_DARK});});ctx.restore();return w;}
+    const tw2=(w-56)/2;if(!(o.cutL!=null&&x-tw2>=o.cutL)&&!(o.cutR!=null&&x+tw2<=o.cutR))wc_T(ctx,s,x,y+sz*0.36,{w:500,size:sz,f:"mono",align:"center",col:WC_DARK});});
+  ctx.restore();return w;}
 // the student IDs that went through the scrambler, and the first characters of the key each gave
 const WS_IDS=[["SIS|S-20401","9dc82789…"],["SIS|S-20402","66efb51c…"],["SIS|S-20403","0abde902…"],["SIS|S-20404","9a496a9f…"],["SIS|S-20405","7467ec4e…"],
   ["SIS|S-20406","e1c4f13e…"],["SIS|S-20407","4c6425db…"],["SIS|S-20408","5f8a7901…"],["SIS|S-20409","fdb9e5a9…"],["SIS|S-20410","5440b46d…"],["SIS|S-20411","459c5ea5…"],

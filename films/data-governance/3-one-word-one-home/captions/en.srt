@@ -1,0 +1,183 @@
+1
+00:00:01,400 --> 00:00:09,109
+In 221 BC, the king of Qin conquered the last of his rivals, and became China's first emperor.
+
+2
+00:00:09,809 --> 00:00:14,898
+The old states had their own scripts, weights and cart widths. The empire made them one.
+
+3
+00:00:16,098 --> 00:00:21,696
+It even decided which words its officials used: what had been the king's was now the emperor's.
+
+4
+00:00:22,796 --> 00:00:29,396
+Far to the south, a county scribe kept those rules on a wooden board, found in a well in 2002.
+
+5
+00:00:30,696 --> 00:00:36,857
+The county's records use the new words almost every time. The board was a glossary, and it was used.
+
+6
+00:00:38,157 --> 00:00:44,308
+A university needs the same: one glossary that everyone trusts, and every tool reading from it.
+
+7
+00:00:51,408 --> 00:00:55,707
+Mei owns what award means, and she has found it defined in five places.
+
+8
+00:00:56,407 --> 00:00:59,162
+Yusuf goes to look. There are five glossaries.
+
+9
+00:01:00,262 --> 00:01:06,501
+The business glossary on the platform, with the words Mei approved. The data team's models copy from it.
+
+10
+00:01:07,601 --> 00:01:08,812
+Planning's spreadsheet.
+
+11
+00:01:09,312 --> 00:01:11,572
+An appendix to the registrar's policy.
+
+12
+00:01:12,072 --> 00:01:15,188
+The faculties' dashboards, each with its own description.
+
+13
+00:01:15,688 --> 00:01:19,623
+And a glossary tool bought in 2019, with six hundred terms.
+
+14
+00:01:20,723 --> 00:01:22,729
+Between them, three different awards.
+
+15
+00:01:26,229 --> 00:01:31,307
+Each was made for a good reason: a team needed words it could use, so it wrote its own.
+
+16
+00:01:32,407 --> 00:01:38,568
+So they disagree. One counts microcredentials, three don't, and one says an award is a degree.
+
+17
+00:01:39,868 --> 00:01:42,644
+Two can only be found by the people who made them.
+
+18
+00:01:43,644 --> 00:01:49,831
+And the biggest is the one nobody opens: the 2019 tool, last opened fourteen months ago.
+
+19
+00:01:51,031 --> 00:01:56,154
+When award changed on Monday, only one glossary changed. The other four never heard.
+
+20
+00:01:57,654 --> 00:02:03,343
+Five glossaries are no glossary. Nobody knows which to trust, so everyone keeps their own.
+
+21
+00:02:06,843 --> 00:02:10,756
+So Yusuf brings the terms' owners together, to keep one glossary.
+
+22
+00:02:11,856 --> 00:02:18,656
+Not the biggest. The one they can trust, and every tool can read: the glossary on the platform, beside the data.
+
+23
+00:02:19,956 --> 00:02:25,086
+Each term there has a definition, an owner, a status, and the date it last changed.
+
+24
+00:02:26,486 --> 00:02:28,142
+It holds the business's words.
+
+25
+00:02:28,642 --> 00:02:35,496
+A data dictionary describes each table and column. A catalog helps people find the data, and shows both.
+
+26
+00:02:38,996 --> 00:02:41,952
+The other four are retired, or made to read from it.
+
+27
+00:02:43,052 --> 00:02:49,171
+The 2019 tool is retired. Its terms with an owner move across; the rest are archived.
+
+28
+00:02:50,471 --> 00:02:54,507
+Planning's spreadsheet links to each term, instead of keeping its own words.
+
+29
+00:02:55,707 --> 00:03:00,742
+The registrar's policy now says: award, as defined in the business glossary.
+
+30
+00:03:01,942 --> 00:03:08,232
+The faculties' dashboards show the glossary's words, read from the platform, so they can't say anything else.
+
+31
+00:03:09,432 --> 00:03:16,096
+The data team's copy already worked this way: it names where its words came from, and a sync checks it every night.
+
+32
+00:03:17,396 --> 00:03:21,819
+Every copy is made from the glossary, one way, never the other way round.
+
+33
+00:03:25,719 --> 00:03:31,450
+Without a sync, a change like Monday's is found months later, in a dashboard, when a number moves.
+
+34
+00:03:33,150 --> 00:03:39,557
+On Monday night, the sync found it, and opened a pull request: what the new words touch, and who owns each part.
+
+35
+00:03:41,357 --> 00:03:46,194
+Planning's list of learners near an award. The wallet app. The census dashboard.
+
+36
+00:03:47,994 --> 00:03:52,460
+Mei approved the new meaning. This time, she could see where her words are used.
+
+37
+00:03:54,360 --> 00:03:57,241
+Jun saw a number in the words: six credit points.
+
+38
+00:03:58,541 --> 00:04:03,970
+A number in a meaning is a rule too. So it's kept in one place, as a setting the code reads.
+
+39
+00:04:07,870 --> 00:04:09,893
+Monday's words weren't written at a desk.
+
+40
+00:04:10,693 --> 00:04:17,427
+Mei and the faculties argued them out in a workshop: should a microcredential count, and from how many credit points?
+
+41
+00:04:18,827 --> 00:04:22,413
+The glossary keeps what they agreed. It doesn't make the agreement.
+
+42
+00:04:24,013 --> 00:04:27,597
+And the people who kept the other glossaries lose something they built.
+
+43
+00:04:28,597 --> 00:04:32,590
+So they're thanked, and their best definitions move into the one that stays.
+
+44
+00:04:36,090 --> 00:04:39,966
+Policy 12 said reports count by the glossary's definitions.
+
+45
+00:04:40,666 --> 00:04:44,181
+Now each word has one home, and every tool reads from it.
+
+46
+00:04:45,681 --> 00:04:50,054
+Many glossaries are no glossary. Keep one, and sync every tool from it.

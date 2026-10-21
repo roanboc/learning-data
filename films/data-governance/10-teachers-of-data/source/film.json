@@ -29,6 +29,10 @@
       "Yoosoof"
     ],
     [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
       "\\bADKAR\\b",
       "add car"
     ]

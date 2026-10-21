@@ -70,7 +70,17 @@ function wd_lamps(ctx,lamps){const L=WD_LN;for(let i=0;i<L.n;i++){const x=wd_stX
   if(on>0.01){ctx.save();ctx.globalCompositeOperation="screen";wc_glowAt(ctx,x,y,150,WD_GLOW[st],0.6*on);ctx.restore();}
   ctx.save();ctx.fillStyle=rgba(col,1);rr(ctx,x-64,y-29,128,58,10);ctx.fill();ctx.strokeStyle=rgba([40,42,48],0.9);ctx.lineWidth=3;ctx.stroke();
   if(on>0.01){ctx.globalAlpha=0.45*on;ctx.fillStyle="#ffffff";rr(ctx,x-52,y-23,104,14,6);ctx.fill();ctx.globalAlpha=1;}ctx.restore();
-  wc_T(ctx,String(i+1),x,y+12,{w:800,size:34,align:"center",col:mix([226,224,214],[60,36,14],on)});}}
+  const k=wd_inFrame(ctx,x-24,x+24)*(1-WD_PILL.a*wd_underPill(ctx,x,y));if(k>0.01)wc_T(ctx,String(i+1),x,y+12,{w:800,size:34,align:"center",col:mix([226,224,214],[60,36,14],on),a:k});}}
+// how much of something from x0 to x1 the frame shows: 1 inside, fading to 0 as it reaches the frame's edge, so the frame never cuts a
+// word or a number in half (the floor's office names do the same)
+function wd_inFrame(ctx,x0,x1){const m=ctx.getTransform(),vl=-m.e/m.a,vr=(ctx.canvas.width-m.e)/m.a;return clamp(Math.min(x0-vl,vr-x1)/30,0,1);}
+// the corner tag with the place and decade: how far (0 to 1) a point lies under it, and how much it shows (the opening sets WD_PILL.a)
+const WD_PILL={a:0};
+function wd_underPill(ctx,x,y){const m=ctx.getTransform(),sx=(m.a*x+m.c*y+m.e)*1920/ctx.canvas.width,sy=(m.b*x+m.d*y+m.f)*1080/ctx.canvas.height;
+  return clamp((430-sx)/40,0,1)*clamp((170-sy)/40,0,1);}
+// a word that fades as it nears the frame's edge
+function wd_T(ctx,s,x,y,o){const w=tw(ctx,s,o.size||28,o.w||700,o.f),x0=o.align==="center"?x-w/2:o.align==="right"?x-w:x,a=wd_inFrame(ctx,x0,x0+w);
+  if(a>0.01)wc_T(ctx,s,x,y,Object.assign({},o,{a:(o.a==null?1:o.a)*a}));}
 
 // the cord: from post to post through the eyelets, sagging a little; pulled (pulls[i], a hand's point) it runs down to the hand
 function wd_cord(ctx,pulls){const L=WD_LN,pts=[[-40,L.cord+2]];for(let k=0;k<=L.n;k++){const x=L.x0+k*L.sw;
@@ -194,17 +204,17 @@ function wd_cover2(ctx,u){if(u>=0.5)return;const B=WD_OPEN,x=B.mid-40,w=B.x+B.w-
 // the binder on the desk, its cover turning open as u goes from 0 to 1: closed, only the right-hand half shows, under the cover; the
 // cover rises to stand on the spine, then lies down on the left, the left-hand page with it. left and right draw what is on each page
 function wd_binder2(ctx,u,left,right){const sx=WD_OPEN.mid-40;u=clamp(u,0,1);
-  ctx.save();ctx.beginPath();ctx.rect(sx,0,W,H);ctx.clip();wd_open2(ctx);if(right)right(ctx);ctx.restore();
+  ctx.save();ctx.beginPath();ctx.rect(sx,0,W,H);ctx.clip();wd_open2(ctx);if(right&&u>0.3)withA(ctx,clamp((u-0.3)/0.2,0,1),()=>right(ctx));ctx.restore();
   if(u>0.5){ctx.save();ctx.translate(sx,0);ctx.scale(Math.max(0.02,-Math.cos(Math.PI*u)),1);ctx.translate(-sx,0);ctx.beginPath();ctx.rect(0,0,sx,H);ctx.clip();
-    wd_open2(ctx);if(left)left(ctx);ctx.restore();}
+    wd_open2(ctx);const k=-Math.cos(Math.PI*u);if(left&&k>0.86)withA(ctx,clamp((k-0.86)/0.12,0,1),()=>left(ctx));ctx.restore();}
   wd_cover2(ctx,u);}
 // policy 2 on the left-hand page: its number and name, and its two lines: 2.1, the one the series' plan quotes, and 2.2, the one
 // the voice reads, lit (0 to 1) as it's read
-function wd_policy2(ctx,a,lit){const x=wd_pageL()+64,top=wd_pageTop();withA(ctx,a,()=>{wc_T(ctx,"Data policies",x,top+80,{w:600,size:28,col:WC_MUTED});
-  wc_T(ctx,"Policy 2",x,top+176,{w:800,size:66,col:WC_DARK});wc_T(ctx,"Decision rights",x,top+232,{w:600,size:36,col:WC_MUTED});
+function wd_policy2(ctx,a,lit){const x=wd_pageL()+64,top=wd_pageTop();withA(ctx,a,()=>{wd_T(ctx,"Data policies",x,top+80,{w:600,size:28,col:WC_MUTED});
+  wd_T(ctx,"Policy 2",x,top+176,{w:800,size:66,col:WC_DARK});wd_T(ctx,"Decision rights",x,top+232,{w:600,size:36,col:WC_MUTED});
   if(lit>0.01)gv_tint(ctx,x-14,top+406,620,124,GV.gold,0.55*lit);
   [["2.1",["Every critical data element","has an accountable owner."],top+322],["2.2",["Every data domain has","an owner and a steward."],top+452]].forEach(([n,ls,y])=>{
-    wc_T(ctx,n,x,y,{w:700,size:30,col:WC_MUTED});ls.forEach((l,i)=>wc_T(ctx,l,x+70,y+i*52,{w:600,size:40,col:WC_INK}));});
+    wd_T(ctx,n,x,y,{w:700,size:30,col:WC_MUTED});ls.forEach((l,i)=>wd_T(ctx,l,x+70,y+i*52,{w:600,size:40,col:WC_INK}));});
   gv_lines(ctx,x,top+600,WD_OPEN.pw-150,5,40);});}
 // the register, on the right-hand page: eight domains, an owner and a steward for each; tbc(k) says how far "TBC" is written in each
 // of the cells still to be confirmed (owners first, then stewards); tick(i) puts a gold tick by row i's owner, o.strike(i) strikes its
@@ -214,11 +224,11 @@ const WD_REG=[["person","Registrar's office",null],["student","Registrar's offic
 const WD_TBC=(()=>{const o=[];WD_REG.forEach((r,i)=>{if(!r[1])o.push([i,1]);});WD_REG.forEach((r,i)=>{if(!r[2])o.push([i,2]);});return o;})();
 const WD_RG={x:()=>wd_pageR()+46,y0:()=>wd_pageTop()+214,dy:62,cols:[0,240,504]};
 function wd_register(ctx,a,tbc,tick,o){o=o||{};const x=WD_RG.x(),top=wd_pageTop(),y0=WD_RG.y0(),C=WD_RG.cols;withA(ctx,a,()=>{
-  wc_T(ctx,"Register",x,top+84,{w:800,size:44,col:WC_DARK});
-  ["domain","owner","steward"].forEach((h,j)=>wc_T(ctx,h,x+C[j],top+142,{w:700,size:28,col:WC_MUTED}));
+  wd_T(ctx,"Register",x,top+84,{w:800,size:44,col:WC_DARK});
+  ["domain","owner","steward"].forEach((h,j)=>wd_T(ctx,h,x+C[j],top+142,{w:700,size:28,col:WC_MUTED}));
   ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.35);ctx.lineWidth=1.6;for(let i=0;i<=WD_REG.length;i++){ctx.beginPath();ctx.moveTo(x-10,y0-40+i*WD_RG.dy);ctx.lineTo(x+WD_OPEN.pw-80,y0-40+i*WD_RG.dy);ctx.stroke();}ctx.restore();
-  WD_REG.forEach((r,i)=>{const y=y0+i*WD_RG.dy;wc_T(ctx,r[0],x+C[0],y,{w:700,size:28,col:WC_DARK});
-    for(const j of [1,2])if(r[j])wc_T(ctx,r[j],x+C[j],y,{w:500,size:28,col:WC_INK});});
+  WD_REG.forEach((r,i)=>{const y=y0+i*WD_RG.dy;wd_T(ctx,r[0],x+C[0],y,{w:700,size:28,col:WC_DARK});
+    for(const j of [1,2])if(r[j])wd_T(ctx,r[j],x+C[j],y,{w:500,size:28,col:WC_INK});});
   WD_TBC.forEach(([i,j],k)=>{const p=tbc?tbc(k):0;if(p<=0)return;wc_hand(ctx,"TBC",x+C[j]+6,y0+i*WD_RG.dy+2,{p,size:36,col:GV.redInk});
     const sp=j===1&&o.strike?o.strike(i):0;if(sp>0){ctx.save();ctx.strokeStyle=rgba(GV.goldInk,0.9);ctx.lineWidth=4;ctx.lineCap="round";const sx=x+C[j],sy=y0+i*WD_RG.dy-11;
       ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(sx+90*sp,sy-5*sp);ctx.stroke();ctx.restore();}});
@@ -248,7 +258,7 @@ const WD_MAP=[[18,"domains:"],[20,"  - name: person"],[21,"    owner: Registrar'
   [40,"  - name: course"],[41,"    owner: Registrar's office, with the faculties"],[54,"  - name: organisation"],[55,"    owner: Planning"],
   [63,"  - name: admissions"],[64,"    owner: Admissions office"],[71,"  - name: staff"],[72,"    owner: HR"],[78,"  - name: research"],
   [79,"    owner: Graduate research school"],[85,"  - name: fees"],[86,"    owner: Finance"]];
-const WD_MODEL=[[1,"models:"],[2,""],[3,"  - name: core_award"],[4,"    description: >"],[5,"      An award the university offers, as it stood from valid_from until valid_to."],
+const WD_MODEL=[[1,"models:"],[2,""],[3,"  - name: core_award"],[4,"    description: >"],[5,"      An award the university offers, as it stood from"],[0,"      valid_from until valid_to."],
   [6,"      {{ doc(\"award\") }}"],[7,"    latest_version: 1"],[8,"    config:"],[9,"      meta:"],[10,"        grain: One row per award per version"],
   [11,"        owner: Mei Tanaka, registrar's office"],[12,"        domain: course"],[13,"        glossary_term: award"]];
 // a line of a file in type: a key in blue ink, the rest dark, the dash of a list muted
@@ -263,7 +273,7 @@ const WD_LH=36,wd_lineY=i=>GV_SC[1]+54+44+i*WD_LH;
 function wd_file(ctx,path,lines,o){o=o||{};const [x,y,w,h]=GV_SC,bar=54,show=o.show==null?1:o.show;
   gv_screen(ctx,x,y,w,h,null,q=>{wc_T(q,path,x+22,y+bar*0.7,{f:"mono",w:500,size:28,col:[255,255,255]});q.save();q.beginPath();q.rect(x,y+bar,w,h-bar);q.clip();
     lines.forEach(([n,s],i)=>{const ly=wd_lineY(i),a=clamp(show*lines.length*1.25-i,0,1);if(a<=0.01)return;const l=o.lit?o.lit(i):0;
-      withA(q,a,()=>{if(l>0.01)gv_tint(q,x+92,ly-28,w-116,WD_LH+2,GV.gold,0.75*l);wc_T(q,String(n),x+72,ly,{f:"mono",w:500,size:24,align:"right",col:WC_MUTED,deco:true});
+      withA(q,a,()=>{if(l>0.01)gv_tint(q,x+92,ly-28,w-116,WD_LH+2,GV.gold,0.75*l);if(n)wc_T(q,String(n),x+72,ly,{f:"mono",w:500,size:24,align:"right",col:WC_MUTED,deco:true});
         if(s)wd_yaml(q,s,x+100,ly);});});q.restore();},{barH:bar});}
 // a gold tick on an office's glass on the floor, under its name, as its owner is confirmed (p 0 to 1)
 function wd_glassTick(ctx,i,p){if(p<=0)return;const F=GV_FL,x=F.x(i)+F.w-48,y=F.top+124,k=0.9+0.1*spring(p);ctx.save();ctx.translate(x,y);ctx.scale(k,k);
@@ -407,8 +417,8 @@ const WD_PM=[350,90,1220,150],WD_PC=[350,258,1220,470],WD_CLH=34;
 // a row of the list in type: a comment muted, a path in blue ink, the addresses dark, Mei's in gold ink when mei is lit
 function wd_coRow(ctx,s,x,y,mei){const col=s.startsWith("#")||(s.startsWith("  ")&&!s.includes("@"))?WC_MUTED:s.startsWith("/")?WD_KEY:WC_DARK;
   if(!s.includes("mei.tanaka@")||mei<=0.01){wc_T(ctx,s,x,y,{f:"mono",w:500,size:26,col});return;}
-  const i=s.indexOf("mei.tanaka@"),cw=tw(ctx,"m",26,500,"mono"),m="mei.tanaka@uni.example";wc_T(ctx,s,x,y,{f:"mono",w:500,size:26,col});
-  wc_T(ctx,m,x+i*cw,y,{f:"mono",w:500,size:26,col:mix(col,GV.goldInk,mei)});}
+  const i=s.indexOf("mei.tanaka@"),cw=tw(ctx,"m",26,500,"mono"),j=i+"mei.tanaka@uni.example".length,o={f:"mono",w:500,size:26,col};
+  if(i>0)wc_T(ctx,s.slice(0,i),x,y,o);wc_T(ctx,s.slice(i,j),x+i*cw,y,Object.assign({},o,{col:mix(col,GV.goldInk,mei)}));if(s.length>j)wc_T(ctx,s.slice(j),x+j*cw,y,o);}
 // the list of who reviews what in a pane: its lines as given ([number, [parts]]), the parts of a long line wrapped, a gap where lines
 // are left out. o.fill(n) writes line n (0 to 1: its path, then its addresses), o.lit(n) washes it in gold, o.mei(n) turns Mei's
 // address gold; o.under and o.after draw under and over the text, given where each part sits
@@ -497,3 +507,100 @@ const WD_CO2=[[16,["# Meaning and contracts: core domains"]],[18,["/models/core/
   [46,["# Data the business owns: each seed's owner"]],[51,["/seeds/reference/student/learner_identity_decisions.csv","  mei.tanaka@uni.example"]]];
 function wd_logOwners(ctx,t,o){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,null,q=>{const k=n=>n===18?0:n===51?1:-1;
     wd_coPane(q,[350,200,1220,400],WD_CO2,{lit:n=>k(n)<0?0:o.lit(k(n)),mei:n=>k(n)<0?0:o.mei(k(n))});},{bar:GV.screen});}
+
+/* ---------- 9 · Time to answer: time agreed with her manager, a small scope, someone to ask ---------- */
+// the university registrar, Mei's manager: drawn here, as no other film has needed her yet
+PEOPLE.wd_reg={name:"",role:"University registrar",side:"Business",does:"uses",edge:BIZ,seed:73,
+  skin:[214,170,136],hair:{style:"curly",c:[186,182,180]},glasses:[70,58,54],earrings:[255,214,140],
+  top:{kind:"blazer",c:[120,48,62],inner:[238,232,222]},bottom:{c:[46,48,60]},shoe:[40,32,32],build:{sh:68,hip:60,h:0.98}};
+// Mei's screen before her role: her own work, lines of it
+function wd_meiWork(ctx){const [x,y,w,h]=GV_RX.screen;gv_screen(ctx,x,y,w,h,"Student records",q=>gv_lines(q,x+30,y+92,w-80,6,38,0.9),{titleSize:28});}
+// the calendar on Mei's wall, close: October 2026, Monday first, a week to a row (the 1st is a Thursday). The paper, its band and its
+// grid are painted once; its words are drawn every frame. Two days are ringed in red, where the calendar in the shared picture has them
+const WD_CAL={x:250,y:96,w:1420,band:104,head:52,dh:124,first:3,days:31};
+const wd_calXY=(r,c)=>[WD_CAL.x+c*WD_CAL.w/7,WD_CAL.y+WD_CAL.band+WD_CAL.head+r*WD_CAL.dh];
+function wd_paintCal(ctx){const C=WD_CAL,dw=C.w/7,top=C.y+C.band+C.head;ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);
+  wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),GV_ROOM.reg,{kind:"plaster",line:false,seed:44});gv_lightGlow(ctx,900,-60,820);
+  ctx.save();ctx.filter="blur(10px)";ctx.fillStyle="rgba(60,70,90,0.22)";ctx.fillRect(C.x+10,C.y+16,C.w,top+5*C.dh+20-C.y);ctx.restore();
+  wc_flat(ctx,wc_rect(C.x,C.y,C.w,top+5*C.dh+20-C.y),GV.paper,1,"page");wc_flat(ctx,wc_rect(C.x,C.y,C.w,C.band),[96,118,150],1,"band");
+  wc_flat(ctx,wc_rect(C.x+5*dw,top,2*dw,5*C.dh),[238,236,230],0.9,"weekend");
+  ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.3);ctx.lineWidth=1.6;for(let r=0;r<=5;r++){ctx.beginPath();ctx.moveTo(C.x,top+r*C.dh);ctx.lineTo(C.x+C.w,top+r*C.dh);ctx.stroke();}
+  for(let c=1;c<7;c++){ctx.beginPath();ctx.moveTo(C.x+c*dw,top);ctx.lineTo(C.x+c*dw,top+5*C.dh);ctx.stroke();}ctx.restore();
+  gv_pin(ctx,C.x+C.w/2,C.y-4,GV.red,1.6);}
+function wd_calWords(ctx){const C=WD_CAL,dw=C.w/7;wc_T(ctx,"October 2026",C.x+40,C.y+70,{w:900,size:48,col:[255,255,255]});
+  ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].forEach((d,c)=>wc_T(ctx,d,C.x+c*dw+18,C.y+C.band+38,{w:300,size:28,col:WC_MUTED}));
+  for(let d=1;d<=C.days;d++){const i=C.first+d-1,[x,y]=wd_calXY(Math.floor(i/7),i%7);wc_T(ctx,String(d),x+16,y+38,{w:200,size:30,col:i%7>4?WC_MUTED:WC_DARK});}
+  for(const d of [7,23]){const i=C.first+d-1,[x,y]=wd_calXY(Math.floor(i/7),i%7);ctx.save();ctx.strokeStyle=rgba([204,62,50],0.8);ctx.lineWidth=3.5;
+    ctx.beginPath();ctx.ellipse(x+33,y+27,30,24,0.1,0,TAU);ctx.stroke();ctx.restore();}}
+// her two hours, on Tuesday mornings: a gold label in each week's Tuesday, painted in from the left (p(k), 0 to 1, for week k)
+function wd_calBlocks(ctx,p){const C=WD_CAL,dw=C.w/7;[6,13,20,27].forEach((d,k)=>{const u=p(k);if(u<=0)return;const i=C.first+d-1,[x,y]=wd_calXY(Math.floor(i/7),i%7),
+    bx=x+10,by=y+52,bw=dw-20,bh=60;ctx.save();ctx.beginPath();ctx.rect(bx-8,by-8,(bw+16)*easeCam(clamp(u*1.4,0,1)),bh+16);ctx.clip();
+    wc_panel(ctx,bx,by,bw,bh,{kind:"card",wash:GV.gold,washA:0.6,seed:180+k});ctx.restore();
+    withA(ctx,clamp(u*2-0.8,0,1),()=>wc_T(ctx,"owner · 2 h",bx+bw/2,by+41,{w:400,size:28,align:"center",col:GV.goldInk}));});}
+// Yusuf's desk again, from above: the cards he writes for Mei's role, each a gold card placed on the desk (p, 0 to 1); o.line(i)
+// brings in each line as it's said, o.dy and o.rot lift a card away. WD_DK: where each card's centre is
+const WD_DK={w:380,h:200,time:[900,230],own:[1210,560],ask:[1520,230]};
+function wd_dkCard(ctx,at,head,lines,p,o){o=o||{};wd_drop(ctx,p,()=>{const [cx,cy]=at,w=WD_DK.w,h=WD_DK.h;ctx.save();ctx.translate(cx,cy+(o.dy||0));ctx.rotate(o.rot||0);
+  wc_panel(ctx,-w/2,-h/2,w,h,{kind:"card",wash:GV.gold,washA:0.5,seed:o.seed||190});wc_T(ctx,head,-w/2+30,-h/2+50,{w:600,size:28,col:WC_MUTED});
+  lines.forEach((l,i)=>{const a=o.line?o.line(i):1,ly=lines.length===1?-h/2+128:-h/2+108+i*54;if(a>0.01)withA(ctx,a,()=>wc_T(ctx,l,-w/2+30,ly,{w:600,size:44,col:WC_DARK}));});
+  ctx.restore();});}
+// round what she owns, in grey on slips of paper, words her office also uses that aren't hers (p(i), 0 to 1), set a little apart
+const WD_NOT=[["enrolment",850,470],["census date",1570,470],["unit",880,700],["credit point",1560,700]];
+function wd_notHers(ctx,p){WD_NOT.forEach(([s2,x,y],i)=>{const u=p(i);if(u<=0)return;const dx=(x<1210?-1:1)*22*easeCam(u),w=tw(ctx,s2,30,700)+40;
+  withA(ctx,clamp(u*1.6,0,1),()=>{wc_panel(ctx,x+dx-w/2,y-36,w,56,{kind:"card",seed:200+i});wc_T(ctx,s2,x+dx,y+2,{w:700,size:30,align:"center",col:WC_MUTED});});});}
+// a spreadsheet, printed: a name in a cell, and nothing else. lit (0 to 1) washes its row in gold; grey (0 to 1) greys the name
+const WD_SS={x:110,y:150,w:540,h:560,rot:-0.012,rh:64,cols:[56,200,244],n:7};
+function wd_sheetName(ctx,p,lit,grey){wd_drop(ctx,p,()=>{const S_=WD_SS,[c0,c1,c2]=S_.cols,gx=S_.x+20,gy=S_.y+30,gw=c0+c1+c2,rh=S_.rh;
+  ctx.save();ctx.translate(S_.x+S_.w/2,S_.y+S_.h/2);ctx.rotate(S_.rot);ctx.translate(-S_.x-S_.w/2,-S_.y-S_.h/2);gv_sheet(ctx,S_.x,S_.y,S_.w,S_.h);
+  ctx.fillStyle=rgba([232,234,238],1);ctx.fillRect(gx,gy,gw,40);ctx.fillRect(gx,gy,c0,40+S_.n*rh);
+  if(lit>0.01)gv_tint(ctx,gx+c0,gy+40+rh,c1+c2,rh,GV.gold,0.6*lit);
+  ctx.strokeStyle=rgba(WC_PENCIL,0.28);ctx.lineWidth=1.4;for(let r=0;r<=S_.n;r++){ctx.beginPath();ctx.moveTo(gx,gy+40+r*rh);ctx.lineTo(gx+gw,gy+40+r*rh);ctx.stroke();}
+  for(const cx of [gx,gx+c0,gx+c0+c1,gx+gw]){ctx.beginPath();ctx.moveTo(cx,gy);ctx.lineTo(cx,gy+40+S_.n*rh);ctx.stroke();}
+  ["A","B"].forEach((l,j)=>wc_T(ctx,l,gx+c0+(j?c1+c2/2:c1/2),gy+30,{w:500,size:28,align:"center",col:WC_MUTED,deco:true}));
+  for(let r=0;r<S_.n;r++)wc_T(ctx,String(r+1),gx+c0/2,gy+40+r*rh+42,{w:500,size:28,align:"center",col:WC_MUTED,deco:true});
+  wc_T(ctx,"element",gx+c0+14,gy+40+42,{w:600,size:30,col:WC_MUTED});wc_T(ctx,"owner",gx+c0+c1+14,gy+40+42,{w:600,size:30,col:WC_MUTED});
+  wc_T(ctx,"award",gx+c0+14,gy+40+rh+44,{w:600,size:34,col:mix(WC_DARK,WC_MUTED,grey)});
+  wc_T(ctx,"Mei Tanaka",gx+c0+c1+14,gy+40+rh+44,{w:600,size:34,col:mix(WC_DARK,[180,178,172],grey)});ctx.restore();});}
+
+/* ---------- 10 · Which award? Her screen asks her, and award turns out to be defined in five places ---------- */
+// the three meanings of award, as the series keeps them: violet, the glossary on the platform's (microcredentials of 6 credit points or
+// more count); rose, the words before Monday's (graduate certificates, masters and doctorates); olive, degrees only. A wash for each
+// head, and an ink for its word
+const WD_MEAN={violet:[110,92,190],rose:[214,96,140],olive:[150,156,56]},WD_MEANINK={violet:[78,58,160],rose:[168,50,98],olive:[94,100,22]};
+// Mei's screen: Jun's change, opened: its title, and the line it changes, award's, lit in gold; what it adds is left unread
+function wd_opened(ctx){const [x,y,w,h]=GV_RX.screen;gv_screen(ctx,x,y,w,h,"Jun Park · 1 file",q=>{
+    ["Map award to the","government's definition"].forEach((l,i)=>wc_T(q,l,x+30,y+96+i*46,{w:800,size:36,col:WC_DARK}));
+    q.fillStyle=rgba([238,240,244],1);q.fillRect(x+24,y+180,w-48,h-200);const cm=tw(q,"m",28,500,"mono");
+    gv_tint(q,x+38+10*cm,y+194,5*cm+16,40,GV.gold,0.75);wd_yaml(q,"  - name: award",x+44,y+224);
+    q.save();q.fillStyle=rgba(GV.green,0.14);q.fillRect(x+24,y+246,w-48,82);q.restore();gv_lines(q,x+70,y+268,w-170,2,32,0.9);},{titleSize:28});}
+// a head in one of the meanings' colours: "award", the wash coming in as col goes from 0 to 1
+function wd_head(ctx,x,y,w,m,col){if(col>0.01)gv_tint(ctx,x,y,w,58,WD_MEAN[m],0.9*col);wc_T(ctx,"award",x+16,y+43,{w:800,size:40,col:mix(WC_DARK,WD_MEANINK[m],col)});}
+// the five places award is defined, round Mei, each headed "award", each coming in (p, 0 to 1) and its meaning's colour washing in
+// (col, 0 to 1). From right to left, as One word, one home goes through them: her screen, the glossary on the platform (violet);
+// Planning's spreadsheet, printed (rose); the registrar's policy, stapled, at its appendix (rose); a faculty's dashboard on a tablet
+// (olive); the 2019 tool's printout, yellowed (rose). WD_FIVE: each one's box [x, y, w, h], its tilt and its meaning
+const WD_FIVE=[[GV_RX.screen,0,"violet"],[[880,98,300,228],0.03,"rose"],[[650,34,232,280],-0.04,"rose"],[[186,84,292,200],0.035,"olive"],[[22,336,272,300],-0.06,"rose"]];
+const WD_YELLOW=[238,224,176];
+function wd_five(ctx,k,p,col){if(p<=0.001)return;const [[x,y,w,h],rot,m]=WD_FIVE[k];
+  if(k===0){withA(ctx,p,()=>gv_screen(ctx,x,y,w,h,"Business glossary",q=>{wd_head(q,x+18,y+62,w-36,m,col);gv_lines(q,x+30,y+160,w-90,4,36,0.9);},{titleSize:28}));return;}
+  const e=easeCam(clamp(p,0,1)),s=0.9+0.1*spring(clamp(p,0,1));ctx.save();ctx.translate(x+w/2,y+h/2+36*(1-e));ctx.rotate(rot);ctx.scale(s,s);ctx.translate(-w/2,-h/2);
+  withA(ctx,clamp(p*2,0,1),()=>{
+    // a spreadsheet, printed: grey bands for its letters and its numbers, and a grid
+    if(k===1){gv_sheet(ctx,0,0,w,h);const g0=78,rh=26,cs=[12,36,124,214,w-12];ctx.save();ctx.fillStyle=rgba([226,229,234],1);ctx.fillRect(12,g0,w-24,18);ctx.fillRect(12,g0,24,h-g0-12);
+      ctx.strokeStyle=rgba(WC_PENCIL,0.45);ctx.lineWidth=1.2;for(let y=g0;y<=h-12;y+=rh){ctx.beginPath();ctx.moveTo(12,y);ctx.lineTo(w-12,y);ctx.stroke();}
+      for(const cx of cs){ctx.beginPath();ctx.moveTo(cx,g0);ctx.lineTo(cx,h-12);ctx.stroke();}ctx.restore();wd_head(ctx,12,12,w-24,m,col);
+      for(let r=0;r<3;r++)for(let j=1;j<4;j++)gv_lines(ctx,cs[j]+8,g0+18+r*rh+10,cs[j+1]-cs[j]-22,1,0,0.9);}
+    // the registrar's policy, stapled, open at its appendix: a page behind, a title line, its definitions
+    if(k===2){ctx.save();ctx.translate(16,10);ctx.rotate(0.05);gv_sheet(ctx,0,0,w,h);ctx.restore();gv_sheet(ctx,0,0,w,h);
+      ctx.save();ctx.strokeStyle=rgba([120,124,134],0.95);ctx.lineWidth=5;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(14,34);ctx.lineTo(40,10);ctx.stroke();ctx.restore();
+      ctx.save();ctx.fillStyle=rgba(WC_INK,0.5);ctx.fillRect(56,22,w-100,7);ctx.restore();wd_head(ctx,14,46,w-28,m,col);gv_lines(ctx,28,134,w-60,4,30,0.9);
+      ctx.save();ctx.fillStyle=rgba(WC_MUTED,0.4);ctx.fillRect(w/2-10,h-24,20,5);ctx.restore();}
+    if(k===3){ctx.save();ctx.fillStyle=rgba(GV.bezel,1);rr(ctx,0,0,w,h,22);ctx.fill();ctx.fillStyle=rgba(GV.screen,1);ctx.fillRect(16,16,w-32,h-32);ctx.restore();
+      wd_head(ctx,16,18,w-32,m,col);[0.55,0.8,0.4,0.68].forEach((v,j)=>{ctx.save();ctx.fillStyle=rgba([140,168,200],0.9);ctx.fillRect(36+j*58,h-28-v*96,38,v*96);ctx.restore();});}
+    if(k===4){ctx.save();ctx.shadowColor="rgba(70,60,40,0.25)";ctx.shadowBlur=12;ctx.shadowOffsetY=6;ctx.fillStyle=rgba(WD_YELLOW,1);ctx.fillRect(0,0,w,h);ctx.restore();
+      ctx.save();const g=ctx.createRadialGradient(w/2,h/2,h*0.2,w/2,h/2,h*0.8);g.addColorStop(0,"rgba(214,190,120,0)");g.addColorStop(1,"rgba(196,166,96,0.4)");ctx.fillStyle=g;ctx.fillRect(0,0,w,h);ctx.restore();
+      wd_head(ctx,12,16,w-24,m,col);gv_lines(ctx,24,104,w-50,5,32,0.75);}});
+  ctx.restore();}
+// Mei's screen changing what it shows (a, 0 to 1): the old fades to a blank screen, then the new comes in
+function wd_swap(ctx,a,from,to){const [x,y,w,h]=GV_RX.screen,blank=()=>gv_screen(ctx,x,y,w,h,null,()=>{});
+  if(a<=0)return from();if(a>=1)return to();if(a<0.5){from();withA(ctx,a*2,blank);}else{blank();withA(ctx,a*2-1,to);}}

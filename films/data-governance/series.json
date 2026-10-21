@@ -1,7 +1,7 @@
 {
   "title": "Governance you can use",
   "title_es": "Gobernanza que puedes usar",
-  "films": ["1-off-the-shelf"],
+  "films": ["1-off-the-shelf", "3-one-word-one-home"],
   "planned": 19,
   "lead": "A series on data governance that runs where the work happens. Yusuf Demir starts as the university's data governance lead, with a shelf of thirty-four policies, and the same week two reports disagree on one number. Film by film, he takes the binder off the shelf, one kind of policy at a time: who decides, one word in one home, who may see it, rules that run, fixes at the source, change without surprises, products with owners, an agent that checks, and the people who teach it all. Then three films design governance as a capability, on the university's architecture map, and six show how to build each piece, with dbt and Databricks.",
   "lead_es": "Una serie sobre gobernanza de datos que se ejecuta donde ocurre el trabajo. Yusuf Demir empieza como líder de gobernanza de datos de la universidad, con un estante de treinta y cuatro políticas, y esa misma semana dos informes no coinciden en un número. Película a película, baja la carpeta del estante, un tipo de política a la vez: quién decide, una palabra en un solo lugar, quién puede verlo, reglas que se ejecutan, arreglos en el origen, cambios sin sorpresas, productos con dueño, un agente que revisa, y las personas que lo enseñan todo. Luego, tres películas diseñan la gobernanza como una capacidad, en el mapa de arquitectura de la universidad, y seis muestran cómo construir cada pieza, con dbt y Databricks.",

@@ -1,7 +1,7 @@
 {
   "key": "fixed-where-it-starts",
   "title": "Fixed where it starts",
-  "sub": "A warning that comes back every week, followed to where the data is typed, fixed there and turned into a check; then monitoring catches what no rule names.",
+  "sub": "A warning that keeps coming back, followed to where the data is typed, fixed there and kept as a check; then monitoring catches what no rule names.",
   "howto": "The film is painted in watercolour, in the university's own rooms, and in a Vienna hospital in 1847. Behind each person, a soft wash of their side: gold for the business side, cyan for the technical side, warm umber for the people of the past. On the scorecard, green passes, amber warns and red fails.",
   "src": [
     "plan.js",

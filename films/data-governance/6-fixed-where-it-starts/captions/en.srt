@@ -1,0 +1,195 @@
+1
+00:00:01,400 --> 00:00:06,600
+Vienna, 1847. The city's general hospital has two maternity clinics.
+
+2
+00:00:07,300 --> 00:00:12,597
+In the first, where doctors and their students work, about one mother in ten dies of fever.
+
+3
+00:00:13,697 --> 00:00:16,763
+In the second, where midwives work, about one in thirty.
+
+4
+00:00:18,063 --> 00:00:22,493
+Ignaz Semmelweis, a young doctor in the first clinic, looks for what's different.
+
+5
+00:00:23,193 --> 00:00:27,907
+The doctors and students come to the ward from the autopsy room. The midwives don't.
+
+6
+00:00:29,107 --> 00:00:34,195
+So he has everyone wash their hands in chlorinated lime before they examine a mother.
+
+7
+00:00:35,295 --> 00:00:39,225
+Within months, deaths in the first clinic fall to the level of the second.
+
+8
+00:00:40,525 --> 00:00:45,148
+The fever showed in the beds. It started on the doctors' hands, on their way in.
+
+9
+00:00:46,448 --> 00:00:49,127
+Where a problem shows is often not where it starts.
+
+10
+00:00:56,427 --> 00:01:03,392
+Today, Yusuf opens binder 15. Its policy says the root causes of data quality issues are addressed.
+
+11
+00:01:04,592 --> 00:01:07,608
+But on the quality scorecard, one cell is still amber.
+
+12
+00:01:08,808 --> 00:01:11,787
+Short-course emails, with spaces and capitals.
+
+13
+00:01:12,887 --> 00:01:19,562
+The issue goes to their owner, Tom's learning team. The first answer is the old one: it's cleaned in staging.
+
+14
+00:01:20,862 --> 00:01:25,783
+Every night for a year, staging has trimmed each email and written it in lower case.
+
+15
+00:01:26,883 --> 00:01:29,730
+Without it, one learner could end up with two wallets.
+
+16
+00:01:30,830 --> 00:01:34,287
+And every system that reads these emails cleans them again.
+
+17
+00:01:35,387 --> 00:01:39,598
+It's a mop under a leak. It works every night, and the leak never stops.
+
+18
+00:01:43,298 --> 00:01:45,970
+Yusuf follows one email back to where it's made.
+
+19
+00:01:46,970 --> 00:01:50,520
+From the wallet, through staging, to the short-course sign-up form.
+
+20
+00:01:51,820 --> 00:01:57,788
+The form keeps each email as it's typed, in a plain text box, so phones start it with a capital.
+
+21
+00:01:58,788 --> 00:02:01,848
+And picking a suggestion can leave a space at the end.
+
+22
+00:02:03,148 --> 00:02:05,877
+More than one email in three arrives that way.
+
+23
+00:02:07,377 --> 00:02:12,447
+Nobody typed anything wrong. It shows in staging, but it starts here, at the form.
+
+24
+00:02:15,147 --> 00:02:20,379
+This time, the issue has an owner, a cause, a date, and a check that proves it's closed.
+
+25
+00:02:21,579 --> 00:02:26,293
+Tom's team makes the box an email box, so phones stop adding the capital.
+
+26
+00:02:27,293 --> 00:02:32,725
+And the form trims each email, writes it in lower case and checks its shape, before it's saved.
+
+27
+00:02:33,725 --> 00:02:37,216
+Nobody has to type more carefully. The form does the work.
+
+28
+00:02:38,416 --> 00:02:43,904
+Tom's team corrects the old emails in their platform. Then the clean-up in staging can go.
+
+29
+00:02:50,004 --> 00:02:55,324
+The rule stays, as a test that should never fail: a promise to everyone who reads them.
+
+30
+00:02:56,624 --> 00:03:00,372
+If it ever fails, the form has broken, and its owner hears first.
+
+31
+00:03:01,772 --> 00:03:07,588
+The cell turns green: not because the emails were cleaned, but because they were right where they were typed.
+
+32
+00:03:11,288 --> 00:03:14,646
+One night, the learning platform sends something no rule names.
+
+33
+00:03:15,946 --> 00:03:21,919
+Half the new badges arrive with zero credit. Most are microcredentials that should carry five.
+
+34
+00:03:23,019 --> 00:03:26,346
+Every test passes. The value is there, and it's a number.
+
+35
+00:03:27,546 --> 00:03:30,958
+But the wallet shows them as plain badges, with no credit.
+
+36
+00:03:32,058 --> 00:03:39,261
+Monitoring knows each table's usual shape: when it arrives, how many rows, how many empty, how the values spread.
+
+37
+00:03:40,361 --> 00:03:44,795
+Usually, one badge in twelve has no credit. Last night, one in two.
+
+38
+00:03:46,295 --> 00:03:49,514
+It tells the owner the metadata names: the learning team.
+
+39
+00:03:52,214 --> 00:03:58,953
+The cause is last week's update to the learning platform. Tom's team fixes it there, and sends the badges again.
+
+40
+00:04:00,253 --> 00:04:05,984
+Then the surprise becomes a rule: a microcredential carries credit. A test, with an owner.
+
+41
+00:04:07,284 --> 00:04:11,804
+Prevent what you can, where it starts. Test what you know. Watch for what you don't.
+
+42
+00:04:13,304 --> 00:04:15,914
+And every surprise you confirm becomes a rule.
+
+43
+00:04:18,614 --> 00:04:25,371
+Nobody blamed Tom's team. The form did what it was built to do. They got the evidence, and help to change it.
+
+44
+00:04:26,671 --> 00:04:31,612
+Back in Vienna, Semmelweis was right. But the washing was slow, and it hurt the skin.
+
+45
+00:04:32,712 --> 00:04:38,272
+Germs weren't known yet, so his only proof was his numbers. He waited years to publish them.
+
+46
+00:04:39,372 --> 00:04:43,451
+And when doctors doubted him, he blamed them, in angry open letters.
+
+47
+00:04:44,651 --> 00:04:48,757
+Washing became the rule only after his death, once germs were known.
+
+48
+00:04:50,257 --> 00:04:55,812
+A fix at the start lasts when it's easy to keep, and when people get the evidence, not the blame.
+
+49
+00:04:57,112 --> 00:04:59,481
+Fix the cause. Then make the fix a check.

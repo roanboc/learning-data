@@ -1,0 +1,27 @@
+{
+  "kicker": "Data governance, and fixing problems where they start",
+  "kicker_es": "Gobernanza de datos, y los problemas arreglados en su origen",
+  "title_es": "Arreglado en el origen",
+  "h1": "Fixed where it starts: a fever traced to the doctors' hands in 1847, an amber cell cleaned every night, and a fix made where the email is typed",
+  "h1_es": "Arreglado en el origen: una fiebre rastreada hasta las manos de los médicos en 1847, una celda en ámbar que se limpia cada noche, y un arreglo donde se escribe el correo",
+  "lead": "In Vienna in 1847, mothers died of fever far more often in the clinic where doctors worked than in the one where midwives did. Ignaz Semmelweis found the cause on the doctors' hands, on their way in from the autopsy room, and stopped it at the door. At the university, binder 15 says the root causes of data quality issues are addressed, yet one cell on the quality scorecard is still amber, and the first answer is the old one: staging cleans it. Yusuf follows one email back to where it's typed, a sign-up form on a phone. Tom's team fixes the form and corrects the old emails, so the clean-up can go, and its rule stays as a test that should never fail. Then one night the learning platform sends something no rule names, and monitoring tells the owner.",
+  "lead_es": "En Viena, en 1847, las madres morían de fiebre mucho más en la clínica donde trabajaban los médicos que en la de las parteras. Ignaz Semmelweis encontró la causa en las manos de los médicos, que llegaban de la sala de autopsias, y la detuvo en la puerta. En la universidad, la carpeta 15 dice que se atienden las causas raíz de los problemas de calidad de datos, pero una celda del tablero de calidad sigue en ámbar, y la primera respuesta es la de siempre: staging la limpia. Yusuf sigue un correo hasta donde se escribe, un formulario de inscripción en un teléfono. El equipo de Tom arregla el formulario y corrige los correos antiguos, así que la limpieza se puede quitar, y su regla se queda como una prueba que nunca debería fallar. Luego, una noche, la plataforma de aprendizaje envía algo que ninguna regla nombra, y el monitoreo avisa al dueño.",
+  "description": "A film about data quality fixed at the source: Semmelweis and the two maternity clinics of Vienna in 1847; where a problem shows and where it starts; an issue closed by a clean-up downstream, and one closed for good, with an owner, a cause, a date and a check; one email followed back through its lineage to the form where it's typed; prevention where the data is entered, and the old records corrected; the rule kept as a test that should never fail; monitoring for what no rule names, told to the owner the metadata names; a confirmed surprise that becomes a rule; and evidence, not blame.",
+  "description_es": "Una película sobre la calidad de datos arreglada en el origen: Semmelweis y las dos clínicas de maternidad de Viena en 1847; dónde se ve un problema y dónde empieza; una incidencia cerrada con una limpieza posterior, y otra cerrada para siempre, con dueño, causa, fecha y un control; un correo seguido por su linaje hasta el formulario donde se escribe; la prevención donde se ingresan los datos, y los registros antiguos corregidos; la regla guardada como una prueba que nunca debería fallar; el monitoreo de lo que ninguna regla nombra, que avisa al dueño que dicen los metadatos; una sorpresa confirmada que se vuelve regla; y evidencia, no culpa.",
+  "card": "The fever showed in the beds, and started on the doctors' hands. Follow a problem back to where it starts, fix it there, and keep the fix as a check.",
+  "card_es": "La fiebre se veía en las camas, y empezaba en las manos de los médicos. Sigue un problema hasta su origen, arréglalo ahí, y guarda el arreglo como un control.",
+  "chapters_es": {
+    "clinics": "Dos clínicas",
+    "monday": "Sigue en ámbar",
+    "back": "Seguir el rastro",
+    "entry": "Arreglado donde se escribe",
+    "never": "Nunca debería fallar",
+    "unknown": "Lo que ninguna regla nombra",
+    "rule": "Una sorpresa se vuelve regla",
+    "blame": "Nadie a quien culpar"
+  },
+  "past": ["Vienna, the maternity clinics of 1847", "Where a problem shows is often not where it starts."],
+  "past_es": ["Viena, las clínicas de maternidad de 1847", "Donde un problema se ve no suele ser donde empieza."],
+  "next_h": "You've seen a problem followed back to where it starts, fixed there, and kept as a check. More films in the series are on the way.",
+  "next_h_es": "Viste un problema seguido hasta su origen, arreglado ahí y guardado como un control. Vienen más películas de la serie."
+}

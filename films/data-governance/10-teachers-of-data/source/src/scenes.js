@@ -6,6 +6,8 @@
 
 // made once per chapter, the first time it draws: its cues are known by then
 const tt_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
+// the crossing's moments, for the panels painted from it, wherever they're pinned up
+const tt_P=()=>{const sc=SCENES.find(q=>q.id==="crossing");return tt_once(sc,"P",()=>tt_crossCues(sc));};
 // a tag that springs in at t0 and goes at t1 (or stays)
 function tt_tagAt(ctx,t,t0,t1,x,y,s,o){const a=t1==null?fin(t,t0,0.35):gv_io(t,t0,t1,0.35);if(a<=0.01)return;const k=0.9+0.1*spring(fin(t,t0,0.5));
   ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,a,()=>wc_tag(ctx,0,0,s,Object.assign({align:"center"},o||{})));ctx.restore();}
@@ -102,10 +104,11 @@ const TT_PANEL=[{key:"around",label:"the people around",box:[240,290,740,655]},{
 function tt_panelImg(i,P){const B=TT_PANEL[i],T=[P.whistle,P.invites+0.82,P.writes+0.9][i],w=520,h=380;return wc_kept("ttPanel"+i,w,h,q=>{const [x0,y0,x1,y1]=B.box,k=Math.max(w/(x1-x0),h/(y1-y0));
   q.save();q.scale(k,k);q.translate(-(x0+x1)/2+w/2/k,-(y0+y1)/2+h/2/k);q.drawImage(gv_place("bogotaMid"),0,0,W,H);tt_drawWorld(q,TT_CAM.mid,tt_world95(T,P));q.restore();});}
 // a panel pinned up: paper, its picture, a pin, its number and its words
-function tt_panelAt(ctx,i,P,x,y,a,s){if(a<=0.01)return;const img=tt_panelImg(i,P),w=520,h=380;ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.rotate([-0.025,0.015,-0.01][i]);
+// (o.lab: the size of its words, larger on Yusuf's board, where the panels are smaller)
+function tt_panelAt(ctx,i,P,x,y,a,s,o){o=o||{};if(a<=0.01)return;const img=tt_panelImg(i,P),w=520,h=380,ls=o.lab||32,r=ls*0.69;ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.rotate([-0.025,0.015,-0.01][i]);
   withA(ctx,a,()=>{wc_panel(ctx,-w/2-18,-h/2-18,w+36,h+96,{kind:"card",seed:200+i});ctx.drawImage(img,-w/2,-h/2,w,h);gv_pin(ctx,0,-h/2-6,[GV.red,GV.gold,GV.green][i],1.2);
-    wc_wash(ctx,wc_ell(-w/2+22,h/2+40,22,22,24),wc_lit(GV.goldInk,0.1),{kind:"thing",lw:1.2,seed:140+i});wc_T(ctx,String(i+1),-w/2+22,h/2+50,{w:800,size:28,align:"center",col:[255,255,255]});
-    wc_T(ctx,TT_PANEL[i].label,-w/2+60,h/2+51,{w:700,size:32,col:WC_DARK});});ctx.restore();}
+    wc_wash(ctx,wc_ell(-w/2+r,h/2+40,r,r,24),wc_lit(GV.goldInk,0.1),{kind:"thing",lw:1.2,seed:140+i});wc_T(ctx,String(i+1),-w/2+r,h/2+40+ls*0.31,{w:800,size:ls*0.875,align:"center",col:[255,255,255]});
+    wc_T(ctx,TT_PANEL[i].label,-w/2+2*r+16,h/2+40+ls*0.34,{w:700,size:ls,col:WC_DARK});});ctx.restore();}
 
 scene("crossing",(ctx,S,t,sc)=>{const P=tt_once(sc,"P",()=>tt_crossCues(sc)),cutMid=P.whistleLine-0.2;
   const mid95=(x,tt)=>tt_drawWorld(x,TT_CAM.mid,tt_world95(tt,P)),wide96=(x,tt)=>tt_drawWorld(x,TT_CAM.wide,tt_world96(tt,P));
@@ -135,4 +138,110 @@ scene("crossing",(ctx,S,t,sc)=>{const P=tt_once(sc,"P",()=>tt_crossCues(sc)),cut
   gv_title(ctx,S,t,P.breath+1.2,"Teachers of data","why people keep a rule","Film 10 of 19 · data governance");
   wc_paperOver(ctx,S);});
 
-["today","beside","each","warn","measured","teach","lasts"].forEach(id=>scene(id,(ctx,S,t,sc)=>{setScreen(ctx,S);ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_paperOver(ctx,S);}));
+// ---- the university: what the chapters share ----
+// the floor: the people at work behind the glass, as the first film drew them (o.out leaves someone out, o.pose changes what someone is
+// doing), then the glass, then the offices' names (a name the frame would cut fades out)
+const TT_AT={clara:0,mei:1,yusuf:2,jun:3,sam:4},TT_WORK={clara:{pose:"reach"},mei:{pose:"hold",carry:heldNotebook},yusuf:{pose:"write",carry:heldNotebook},jun:{pose:"reach"},sam:{pose:"phone"}};
+function tt_floor(x,tt,o){o=o||{};const F=GV_FL;Object.keys(TT_AT).forEach(id=>{const i=TT_AT[id];if((o.out||[]).includes(id))return;
+    person(x,id,F.spot(i),806,0.5,Object.assign({pose:"stand",t:tt,flip:i%2===1},TT_WORK[id],(o.pose||{})[id]||{}));});
+  gv_floorGlass(x);const m=x.getTransform(),vl=-m.e/m.a,vr=(x.canvas.width-m.e)/m.a,a=o.names==null?1:o.names;
+  F.rooms.forEach((r,i)=>{const cx=F.x(i)+F.w/2,hw=tw(x,r[1],30,800)/2+6;gv_floorName(x,i,a*clamp(Math.min(cx-hw-vl,vr-cx-hw)/30,0,1));});}
+// a green tick in a small round wash, springing in
+function tt_tickBadge(x,cx,cy,r,u,seed){if(u<=0.01)return;const k=0.85+0.15*spring(clamp(u,0,1));x.save();x.translate(cx,cy);x.scale(k,k);
+  withA(x,clamp(u*3,0,1),()=>{wc_wash(x,wc_ell(0,0,r,r,24),wc_lit(GV.green,0.15),{kind:"thing",lw:1.2,seed:seed||150});wc_tick(x,1,-1,r*1.15,[255,255,255],clamp(u*2-0.3,0,1),Math.max(3,r*0.19));});x.restore();}
+// a nod: the head dips and lifts, now and then, between t0 and t1
+const tt_nodAt=(tt,t0,t1,ph)=>0.06*Math.max(0,Math.sin((tt-t0)*TAU*0.9+(ph||0)))*gv_io(tt,t0,t1,0.3);
+// a card held up in one hand, to pin it up
+function tt_heldCard(cx,P_,hands){const h=hands[1];cx.save();cx.translate(h[0]+10,h[1]-34);cx.rotate(-0.12);cx.fillStyle="rgba(60,50,40,0.2)";cx.fillRect(-60,-30,128,72);
+  cx.fillStyle="#fffdf6";cx.fillRect(-64,-36,128,72);cx.fillStyle=rgba(WC_MUTED,0.45);cx.fillRect(-40,-10,80,6);cx.fillRect(-30,8,60,6);cx.restore();fingers(cx,P_,[h]);}
+// Yusuf's office, and what changes in it over the film: his board's content, small (o.board, as tt_govBoard takes it); the framed score
+// (o.frame, 1 on the wall, 0 taken down; o.glow); the measures where it hung (o.ms); the shelf (o.bind); the in-tray (o.tip; o.tray false
+// once it's gone); the box (o.box, as tt_box takes it); the card on the door (o.door). Small type is drawn on purpose (o.read lists what
+// this shot reads, and is left to the legibility check)
+function tt_office(x,tt,o){o=o||{};const r=o.read||[];tt_govBoard(x,GV_OFF.board,o.board||{},{deco:true});
+  const fr=o.frame==null?1:o.frame;if(fr>0.01)tt_frame(x,GV_OFF.score[0],GV_OFF.score[1],fr,o.glow||0,!r.includes("frame"));
+  if(o.ms)tt_measures(x,o.ms,true);tt_binders(x,o.bind||{});if(o.tray!==false)tt_tray(x,o.tip||0,!r.includes("tray"));
+  if(o.box)tt_box(x,o.box,!r.includes("box"));tt_doorCard(x,o.door||0,!r.includes("door"));}
+// Yusuf's board, close: where the film keeps what it has found (tt_govBoard, at the size of the close-up)
+const tt_boardClose=(x,st)=>tt_govBoard(x,GV_BC,st);
+
+// ---- 2 · Submission day: the two reports agree; Mei sends; the checks worked because people knew why; the fines come last ----
+scene("today",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{move:c.sends+0.7,sub:w("agree","The submission"),cen:w("agree","census report"),agree:w("agree","agree:"),count:w("agree","counted"),m:c.mei-0.5,
+      gold:w("mei","the government's"),down:w("mei","written down"),send:c.helped-1.7,fl:c.helped-0.4,helped:w("helped","helped"),knew:w("helped","knew why"),
+      of:c.fines-0.5,bc:w("fines","the checks")-0.6,checks:w("fines","the checks"),before:w("before","before")};});
+  const F=GV_FL,cy=F.top+250;
+  // the two reports' cards on the glass: Planning's turns over to the new count, the submission's comes in; both ticked, and joined
+  const cards=(x,tt)=>{tt_glassCard(x,0,fin(tt,0.4,0.5),["census report","4,812 awards"],{flip:clamp((tt-P.cen-0.2)/0.6,0,1),back:["census report","4,867 awards"]});
+    tt_glassCard(x,1,fin(tt,P.sub-0.1,0.45),["submission","4,867 awards"]);
+    for(const i of [0,1])tt_tickBadge(x,F.x(i)+F.w-30,cy+4,24,fin(tt,P.agree+0.15*i,0.45),160+i);
+    tt_arc(x,F.x(0)+F.w/2,cy-6,F.x(1)+F.w/2,cy-6,64,clamp((tt-P.count+0.3)/0.9,0,1),GV.gold,5);};
+  gv_shots(ctx,S,t,sc.dur,[
+    // the floor where the work is done; then closer, on Planning's glass and the registrar's
+    {at:0,place:"floor",keys:[[0,960,540,1],[P.move,640,456,1.5]],d:2.4,push:0,draw:(x,tt)=>{tt_floor(x,tt,{});cards(x,tt);}},
+    // Mei's desk: the submission on her screen, how it maps, and who decided; the decision's card; Send, and Sent
+    {at:P.m,place:"registrarClose",keys:[[P.m,1010,520,1.04],[P.m+0.1,1030,510,1.08]],d:5,draw:(x,tt)=>{const sent=fin(tt,P.send+0.35,0.4);
+      tt_dropCard(x,915,476,320,150,["decided","written down"],clamp((tt-P.down+0.25)/0.9,0,1));
+      gv_behind(x,"mei",GV_RX.seat[0],GV_RX.top,GV_RX.seat[1],{pose:"listen",t:tt,expr:sent>0.5?"smile":"calm",nod:tt_nodAt(tt,P.send+0.5,P.fl,0.4)});
+      x.drawImage(gv_place("registrarDesk"),0,0,W,H);
+      tt_meiScreen(x,{gold:fin(tt,P.gold-0.1,0.6),press:gv_io(tt,P.send,P.send+0.4,0.15),sent});}},
+    // the floor: a tick on each office's glass where the work is done; and the people look up, and nod
+    {at:P.fl,place:"floor",keys:[[P.fl,960,540,1]],push:0.02,draw:(x,tt)=>{const pose={};
+      ["clara","mei","jun","sam","yusuf"].forEach((id,k)=>pose[id]={pose2:"listen",mix:fin(tt,P.knew-0.2+0.1*k,0.5),nod:tt_nodAt(tt,P.knew+0.1*k,P.of+0.6,k)});
+      tt_floor(x,tt,{pose});cards(x,99);[0,1,3,4].forEach((i,k)=>tt_tickBadge(x,F.x(i)+F.w-26,F.top+56,20,fin(tt,P.helped-0.2+0.3*k,0.45),170+i));}},
+    // Yusuf's office: he takes a card to his board
+    {at:P.of,place:"office",keys:[[P.of,960,500,1.24],[P.of+0.1,940,490,1.28]],d:3,draw:(x,tt)=>{tt_office(x,tt,{board:{panel:[1,1,1]},box:{}});
+      person(x,"yusuf",1180,905,0.8,{pose:"listen",pose2:"tt_pin",mix:fin(tt,P.of+0.6,0.7),t:tt,flip:true,carry:tt_heldCard});}},
+    // his board, close: the three panels from Bogotá; under the fine, "the checks"; under the other two, a pencilled question
+    {at:P.bc,place:"boardGov",keys:[[P.bc,1000,340,1.6],[P.before-0.5,760,340,1.6]],d:2.0,push:0,draw:(x,tt)=>tt_boardClose(x,{
+      lit:[0,0,fin(tt,P.checks-0.4,0.6)*(1-0.6*fin(tt,P.before-0.3,0.6))],B:[0,0,fin(tt,P.checks+0.1,0.4)],q:[fin(tt,P.before-0.15,0.35),fin(tt,P.before+0.25,0.35),0]})}]);
+  wc_year(ctx,56,72,"Today",fin(t,0.3,0.5)*(1-fin(t,P.m,0.4)));
+  wc_paperOver(ctx,S);});
+
+// ---- 3 · A page beside the check: Anil is stopped, and shown how; governance's queue becomes office hours ----
+// something carried in both hands while walking (a laptop): the arms stay, the legs step
+POSE.tt_carry={L:[0.16,-2.05],R:[0.16,-2.05],feet:24,shift:0,tilt:0,turn:0.06,gaze:[0.3,0.1],look:0};
+POSE.tt_carryA=Object.assign({},POSE.tt_carry,{feet:14,shift:-5,tilt:0.03});POSE.tt_carryB=Object.assign({},POSE.tt_carryA,{shift:5,tilt:-0.03});
+function tt_carrier(x,id,w,y,s,carry,o){person(x,id,w.x,y-w.bob,s,Object.assign({pose:"tt_carry",pose2:w.moving?(w.swing>0?"tt_carryA":"tt_carryB"):null,mix:Math.abs(w.swing),flip:w.flip,carry},o||{}));}
+// the adviser's printed call list, held low over the desk in one hand; and her pose holding it
+POSE.tt_list={L:[0.13,-0.1],R:[0.3,-1.0],hand:"open",feet:26,shift:3,tilt:0.02,turn:0.2,gaze:[0.6,0.1],look:0};
+function tt_heldList(cx,P_,hands){const h=hands[1];cx.save();cx.translate(h[0]+36,h[1]-46);cx.rotate(0.06);cx.fillStyle="rgba(60,50,40,0.2)";cx.fillRect(-56,-70,120,150);
+  cx.fillStyle="#fffdf6";cx.fillRect(-60,-76,120,150);cx.fillStyle=rgba([70,96,140],0.8);cx.fillRect(-50,-66,100,10);cx.fillStyle=rgba(WC_MUTED,0.45);
+  for(let i=0;i<8;i++){cx.fillRect(-50,-46+i*14,62,5);cx.fillRect(18,-46+i*14,32,5);}cx.restore();fingers(cx,P_,[h]);}
+// Yusuf's hand to the tray on his desk, to tip it
+POSE.tt_tray={L:[0.13,-0.1],R:[1.0,1.3],hand:"open",feet:32,shift:6,tilt:-0.05,turn:0.3,gaze:[0.8,0.5],look:1};
+
+scene("beside",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{add:w("adds","adds a column"),stops:w("adds","stops"),sc:c.no-0.6,link:w("no","say no"),page:w("says","a page"),parts:[w("what","what the rule"),w("what","why"),w("what","how to"),w("what","who to")],
+      two:c.two,bc:c.mime-0.5,nomime:w("mime","no mime"),of:c.queue-0.5,tip:c.queue+1.3,go:c.queue+2.7,hours:w("hours","office hours"),anyone:w("hours","anyone")};});
+  const clockM=tt=>14+2*easeCam(clamp((tt-P.two-0.6)/1.0,0,1)),pin=P.go+1.95,back=pin+1.3;
+  gv_shots(ctx,S,t,sc.dur,[
+    // the faculty's office: Anil at his desk; an adviser stops by with the printed call list; his change on the screen, and the check's red
+    {at:0,place:"faculty",keys:[[0,960,540,1],[P.add+0.3,860,470,1.18]],d:3,draw:(x,tt)=>{const X=GV_FX,top=X.top,wk=gv_walk(tt,0.5,-160,180,300),ask=gv_io(tt,2.2,P.add+0.6,0.35);
+      tt_clock(x,1250,180,60,clockM(tt));
+      gv_behind(x,"ttAdviser",wk.x,top,1.7,{standing:true,pose:wk.moving?"stand":"tt_list",pose2:wk.moving?(wk.swing>0?"walkA":"walkB"):null,mix:Math.abs(wk.swing),t:tt,carry:tt_heldList,expr:"smile"});
+      gv_behind(x,"anil",X.seat[0],top,X.seat[1],{pose:"listen",t:tt,flip:true,nod:tt_nodAt(tt,3.6,5.4,0),expr:tt>P.stops+0.2?"concerned":"calm"});
+      x.drawImage(gv_place("facultyDesk"),0,0,W,H);
+      tt_onScreen(x,X.screen,q=>tt_anilScreen(q,{add:fin(tt,P.add,0.5),check:fin(tt,P.stops,0.4)}),true);
+      gv_say(x,250,140,["which school?"],196,440,{a:ask,k:0.92+0.08*spring(fin(tt,2.2,0.5))});}},
+    // the screen, close: the check's message, its link; the page it links; the line Anil types, and the tick
+    {at:P.sc,place:"screenFac",keys:[[P.sc,960,470,1.04],[P.two-0.6,1000,480,1.04]],d:2,push:0,draw:(x,tt)=>{
+      tt_clock(x,1760,190,92,clockM(tt));const open=fin(tt,P.page-0.1,0.7)*(1-fin(tt,P.two-0.3,0.5));
+      tt_onScreen(x,GV_SC,q=>tt_anilScreen(q,{add:1,check:1,link:fin(tt,P.link-0.1,0.5),page:open,lit:j=>fin(tt,P.parts[j]-0.1,0.4),
+        typed:clamp((tt-P.two-0.1)/1.1,0,1),ok:fin(tt,P.two+1.6,0.6)}));}},
+    // Yusuf's board: the mime lights; under it, a page beside every check
+    {at:P.bc,place:"boardGov",keys:[[P.bc,760,340,1.6]],push:0.02,draw:(x,tt)=>tt_boardClose(x,{lit:[0,fin(tt,P.nomime-0.4,0.6),0],B:[0,fin(tt,P.nomime+0.1,0.4),1],q:[1,1-fin(tt,P.nomime-0.1,0.3),0]})},
+    // his office: the in-tray of forms awaiting approval, tipped into the box marked retired; a card on his door; two people come with
+    // their laptops, and he waves them in
+    {at:P.of,place:"office",keys:[[P.of,800,640,1.4],[P.go+0.2,640,560,1.3],[back+0.2,700,560,1.22]],d:1.8,draw:(x,tt)=>{
+      const tip=clamp((tt-P.tip)/1.1,0,1),forms=clamp((tt-P.tip-0.6)/0.6,0,1),w1=gv_walk(tt,P.go,1000,420,300),w2=gv_walk(tt,back,420,760,300),
+        lw=gv_walk(tt,P.anyone-0.6,-150,300,260),tw_=gv_walk(tt,P.anyone-0.2,-180,500,300);
+      tt_office(x,tt,{board:{lit:[0,0,0],B:[0,1,1],q:[1,0,0]},tip,box:{forms},door:fin(tt,pin+0.25,0.5),read:["tray","box","door"]});
+      if(tt<P.go)person(x,"yusuf",1000,905,0.8,{pose:"listen",pose2:"tt_tray",mix:gv_io(tt,P.tip-0.6,P.tip+1.0,0.4),t:tt,flip:true});
+      else if(tt<back)gv_walker(x,"yusuf",w1,905,0.8,{t:tt,pose:w1.moving?null:"listen",pose2:w1.moving?null:"tt_pin",mix:gv_io(tt,pin-0.1,pin+0.9,0.3),flip:true});
+      else gv_walker(x,"yusuf",w2,905,0.8,{t:tt,pose:w2.moving?null:"listen",pose2:w2.moving?null:"wave",mix:w2.moving?0:gv_io(tt,w2.end+0.1,sc.dur+1,0.4),flip:w2.moving?false:true,expr:"smile"});
+      if(tt>P.anyone-0.7){tt_carrier(x,"leila",lw,905,0.8,tt_heldLaptop,{t:tt});tt_carrier(x,"tom",tw_,905,0.8,tt_heldLaptop,{t:tt});}}}]);
+  tt_nameCard(ctx,1480,250,"Anil Kurian","Faculty of Health",gv_io(t,1.2,P.add-0.2,0.4));
+  wc_paperOver(ctx,S);});
+
+["each","warn","measured","teach","lasts"].forEach(id=>scene(id,(ctx,S,t,sc)=>{setScreen(ctx,S);ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_paperOver(ctx,S);}));

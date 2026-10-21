@@ -205,8 +205,8 @@ function tt_ground(ctx,c,o){const yr=o.year||1995,R=wc_rng(yr),dn=tt_dnear(c),gq
     const S=tt_gq(c,TT_ST.stop[0],TT_ST.stop[1],0.1,TT_ST.far-0.1,0);if(S)wc_flat(q,S,TT.line,1,"stop");
     for(let k=0;k<14;k++){const d=0.25+k;if(d<dn)continue;wc_wash(q,tt_poly(c,[[TT_ST.zebra[0],d,0],[TT_ST.zebra[1],d,0],[TT_ST.zebra[1],d+0.5,0],[TT_ST.zebra[0],d+0.5,0]]),TT.line,{kind:"trim",line:false,seed:80+k});}};
   if(yr<2000)marks(ctx);
-  else{const [mc,mx]=wc_buf("ttMarks",W,H);mx.fillStyle=rgba(TT.asphalt,1);mx.fillRect(0,0,W,H);marks(mx);mx.globalCompositeOperation="destination-out";mx.globalAlpha=0.7;mx.drawImage(WC.blotch,-180,-90,W+360,H+180);
-    mx.globalAlpha=0.5;mx.drawImage(WC.blotch,200,40,W*0.7,H*0.7);ctx.save();ctx.globalAlpha=0.55;ctx.globalCompositeOperation="lighten";ctx.drawImage(mc,0,0);ctx.restore();}
+  else{const [mc,mx]=wc_buf("ttMarks",W,H);mx.fillStyle=rgba(TT.asphalt,1);mx.fillRect(0,0,W,H);marks(mx);mx.globalCompositeOperation="destination-out";mx.globalAlpha=0.8;mx.drawImage(WC.blotch,-180,-90,W+360,H+180);
+    mx.globalAlpha=0.6;mx.drawImage(WC.blotch,200,40,W*0.7,H*0.7);mx.globalAlpha=0.4;mx.drawImage(WC.blotch,-400,200,W*0.9,H*0.9);ctx.save();ctx.globalAlpha=0.42;ctx.globalCompositeOperation="lighten";ctx.drawImage(mc,0,0);ctx.restore();}
   tt_wet(ctx,c);
   // kerbs: the far kerb's stone face either side of the side street, the near kerb's
   const kerb=(X0,X1,d)=>{const m=1200*(c.d0+d)/c.f;X0=Math.max(X0,c.X-m);X1=Math.min(X1,c.X+m);if(d>dn)wc_wash(ctx,tt_poly(c,[[X0,d,0],[X1,d,0],[X1,d,0.15],[X0,d,0.15]]),TT.kerb,{kind:"trim",lw:1,seed:Math.round(X0)});};
@@ -293,8 +293,14 @@ const TT_MODEL={
   sedan:{L:4.06,w:1.63,h:1.4,r:0.29,wheels:[0.78,3.32],seat:2.22,doors:[1.28,2.1,2.94],
     out:[[0.04,0.32],[0,0.62],[0.06,0.9],[0.78,0.95,1],[1.26,1.37],[2.42,1.4,1],[3.02,0.96],[3.94,0.86],[4.04,0.74],[4.06,0.5],[4.03,0.32]],
     win:[[[1.3,0.98],[2.02,0.98],[2.02,1.35],[1.38,1.35]],[[2.1,0.98],[2.96,0.98],[2.4,1.37],[2.1,1.37]]]}};
-// the cars' colours, faded the way paint was on a city's cars: cream, red, pale blue, beige, green, grey, a mustard yellow
-const TT_PAINT={cream:[234,228,212],red:[178,58,50],blue:[132,162,190],beige:[208,188,148],green:[90,124,98],grey:[110,114,122],mustard:[210,170,72],white:[240,240,236]};
+// and one of the 2010s, for 2012: longer and taller, its windscreen raked further, its corners rounder
+TT_MODEL.round={L:3.92,w:1.7,h:1.5,r:0.31,wheels:[0.66,3.26],seat:1.8,doors:[1.3,2.42],
+  out:[[0.04,0.36],[0,0.68],[0.04,0.98,1],[0.34,1.44],[0.6,1.5],[1.98,1.5,1],[2.86,0.98],[3.66,0.84],[3.84,0.7],[3.92,0.48],[3.88,0.34]],
+  win:[[[0.3,1.0],[1.22,1.0],[1.22,1.42],[0.46,1.42]],[[1.32,1.0],[2.66,1.0],[1.98,1.45],[1.32,1.45]]]};
+// the cars' colours, faded the way paint was on a city's cars: cream, red, pale blue, beige, green, grey, a mustard yellow; and in 2012,
+// silver and a dark red
+const TT_PAINT={cream:[234,228,212],red:[178,58,50],blue:[132,162,190],beige:[208,188,148],green:[90,124,98],grey:[110,114,122],mustard:[210,170,72],white:[240,240,236],
+  silver:[180,184,190],wine:[120,46,52]};
 // one car's right side, painted once for its size: the body with its windows cut out, the arches, bumpers, a trim line, the seams and
 // handles, its lamps, a mirror; twice the size it's drawn at, so the camera can close in
 function tt_carSide(m,col,k){const M=TT_MODEL[m],key="ttCar|"+m+"|"+col.join(",")+"|"+Math.round(k*2);return wc_kept(key,Math.ceil(M.L*k*2+40),Math.ceil(M.h*k*2+40),q=>{
@@ -383,6 +389,19 @@ Object.assign(PEOPLE,{
   ttDrv1:{name:"",role:"driver",side:"",edge:GV_PAST,seed:76,skin:[220,180,146],hair:{style:"side",c:[44,34,30]},top:{kind:"shirt",c:[226,214,190]},bottom:{c:[70,70,80]},shoe:[40,30,26],build:{sh:74,hip:60,h:1.0}},
   ttDrv2:{name:"",role:"driver",side:"",edge:GV_PAST,seed:77,skin:[190,146,110],hair:{style:"cropped",c:[30,26,24]},glasses:[40,40,44],top:{kind:"blazer",c:[60,62,74],inner:[230,230,236]},bottom:{c:[60,62,74]},shoe:[30,28,30],build:{sh:76,hip:62,h:1.0}},
   ttDrv3:{name:"",role:"driver",side:"",edge:GV_PAST,seed:78,skin:[226,188,158],hair:{style:"bob",c:[96,60,40],streak:[150,110,80]},top:{kind:"sweater",c:[140,60,70]},bottom:{c:[60,60,70]},shoe:[40,30,26],build:{sh:64,hip:60,h:0.94}}});
+// the people at the crossing in 2012, dressed for their time, each with a phone; one who crosses; a driver
+Object.assign(PEOPLE,{
+  tt12a:{name:"",role:"",side:"",edge:GV_PAST,seed:91,skin:[214,172,140],hair:{style:"long",c:[44,30,26]},earrings:[220,200,150],
+    top:{kind:"overshirt",c:[78,104,142],inner:[236,232,226]},bottom:{c:[62,78,112]},shoe:[236,234,228],build:{sh:64,hip:60,h:0.93}},
+  tt12b:{name:"",role:"",side:"",edge:GV_PAST,seed:92,skin:[186,138,104],hair:{style:"cropped",c:[30,26,24]},
+    top:{kind:"sweater",c:[118,124,134]},bottom:{c:[56,58,66]},shoe:[44,40,40],build:{sh:74,hip:62,h:1.0}},
+  tt12c:{name:"",role:"",side:"",edge:GV_PAST,seed:93,skin:[160,112,82],hair:{style:"curly",c:[28,24,24]},
+    top:{kind:"shirt",c:[184,90,70]},bottom:{c:[70,84,110]},shoe:[230,226,220],build:{sh:70,hip:60,h:0.97}},
+  tt12d:{name:"",role:"",side:"",edge:GV_PAST,seed:94,skin:[226,190,160],hair:{style:"bun",c:[96,62,40]},glasses:[50,44,44],
+    top:{kind:"blazer",c:[60,62,72],inner:[232,228,220]},bottom:{c:[60,62,72]},shoe:[40,34,34],build:{sh:64,hip:60,h:0.94}},
+  tt12e:{name:"",role:"",side:"",edge:GV_PAST,seed:95,skin:[200,156,120],hair:{style:"side",c:[36,28,26]},
+    top:{kind:"overshirt",c:[170,136,92],inner:[60,60,68]},bottom:{c:[58,64,80]},shoe:[70,52,40],build:{sh:72,hip:60,h:0.98}},
+  tt12Drv:{name:"",role:"driver",side:"",edge:GV_PAST,seed:96,skin:[230,196,166],hair:{style:"side",c:[120,84,52]},top:{kind:"shirt",c:[208,220,232]},bottom:{c:[60,60,70]},shoe:[40,30,26],build:{sh:72,hip:60,h:0.98}}});
 // what the people of the crossing do: whistle with two fingers, clap with their hands up (seen over the cars), bow, show the way back with
 // open palms, hold an umbrella or a bag
 Object.assign(POSE,{
@@ -634,7 +653,7 @@ function tt_whoSheet(x,W_){const [X,Y,w,h]=TT_GB.who;gv_sheet(x,X,Y,w,h,{rot:0.0
 function tt_bar(x,B){const [X,Y,w,h]=TT_GB.bar;let x0=X;wc_hand(x,"215 lines",X+w,Y-14,{size:36,w:600,col:WC_INK,align:"right"});
   TT_BAR.forEach(([n,col,ink,s],j)=>{const bw=w*n/215,p=B.fill(j);if(p>0.01){const c=wc_kept("ttBar"+j+"|"+Math.round(bw),Math.round(bw)+24,h+24,q=>wc_wash(q,wc_resample(wc_rect(8,8,bw+4,h+4),10),col,{kind:"swatch",line:false,a:0.8,seed:60+j}));
       x.save();x.beginPath();x.rect(x0-6,Y-12,(bw+14)*easeCam(clamp(p,0,1)),h+28);x.clip();x.drawImage(c,x0-10,Y-10);x.restore();
-      withA(x,clamp(p*3-1.2,0,1),()=>wc_T(x,s,x0+18,Y+h/2+11,{w:700,size:30,col:ink}));}x0+=bw;});}
+      withA(x,clamp(p*3-1.2,0,1),()=>wc_T(x,s,x0+16,Y+h/2+10,{w:700,size:27,col:ink}));}x0+=bw;});}
 
 /* ---------- the university: Anil's screen and its page, Jun's screen ---------- */
 // a screen drawn in a design of 1260 x 690 (the screen close up, GV_SC) and scaled to any other screen's box
@@ -652,7 +671,7 @@ function tt_anilScreen(x,st){gv_screen(x,0,0,1260,690,"learner_progress",q=>{
   // the check's panel: red while it stops him, then green
   const ck=st.check||0,ok=st.ok||0;if(ck>0.01)withA(q,clamp(ck*2,0,1),()=>{const col=mix(GV.red,GV.green,ok);q.fillStyle=rgba(wc_lit(col,0.86),1);q.fillRect(24,372,1212,300);q.fillStyle=rgba(col,0.9);q.fillRect(24,372,10,300);
     if(ok<0.5)wc_cross(q,74,418,44,GV.red,clamp(ck*1.5,0,1));else wc_tick(q,74,420,48,GV.green,clamp(ok*2-1,0,1),7);wc_T(q,"governance",112,432,{w:800,size:34,col:WC_DARK});
-    withA(q,1-clamp(ok*2,0,1),()=>{wc_T(q,"school_name has no meta.personal_data",60,500,{w:800,size:38,col:GV.redInk});
+    withA(q,(1-clamp(ok*2,0,1))*(1-clamp((st.page||0)*2.5,0,1)),()=>{wc_T(q,"school_name has no meta.personal_data",60,500,{w:800,size:38,col:GV.redInk});
       wc_T(q,"say whether it identifies a person,",60,550,{w:600,size:30,col:WC_INK});wc_T(q,"with direct, pseudonymous or none",60,590,{w:600,size:30,col:WC_INK});
       gv_tint(q,50,612,430,44,GV.gold,0.9*(st.link||0));wc_T(q,"how to: classify-a-column",60,644,{w:700,size:30,col:mix(TT_LINK,GV.goldInk,st.link||0)});q.fillStyle=rgba(mix(TT_LINK,GV.goldInk,st.link||0),0.8);q.fillRect(60,650,tw(q,"how to: classify-a-column",30,700),2.5);});
     if(ok>0.5)withA(q,clamp(ok*2-1,0,1),()=>wc_T(q,"Governance's rules are met",60,500,{w:700,size:36,col:GV.greenInk}));});
@@ -691,7 +710,10 @@ function tt_meetScreen(x,st,t){const [sx,sy,sw,sh]=GV_MT.screen,ttl=st.title||"S
   ["ttFac1","ttFac2","ttFac3"].forEach((id,j)=>{const u=f(j);if(u<=0.01)return;const tx=sx+16+j*(sw-32)/3,tw_=(sw-32)/3-12,ty=sy+64,th=sh-84;
     withA(q,clamp(u*2,0,1),()=>{q.fillStyle=rgba([[222,214,200],[212,222,228],[228,218,222]][j],1);q.fillRect(tx,ty,tw_,th);q.save();q.beginPath();q.rect(tx,ty,tw_,th);q.clip();
       q.fillStyle=rgba([[200,186,166],[186,200,210],[210,194,200]][j],1);q.fillRect(tx,ty+th*0.62,tw_,4);
-      person(q,id,tx+tw_/2,ty+th*0.42+502*0.56,0.58,Object.assign({pose:"stand",expr:"smile",t},st.pose?st.pose(j):{}));q.restore();q.strokeStyle=rgba(GV.gold,0.9*u);q.lineWidth=4;q.strokeRect(tx,ty,tw_,th);});});},{titleSize:24,barH:36});}
+      person(q,id,tx+tw_/2,ty+th*0.42+502*0.56,0.58,Object.assign({pose:"stand",expr:"smile",t},st.pose?st.pose(j):{}));q.restore();q.strokeStyle=rgba(GV.gold,0.9*u);q.lineWidth=4;q.strokeRect(tx,ty,tw_,th);});});},{titleSize:30,barH:44});}
+// a chair pulled up to the table, its back as the room's own chairs are painted, for someone who sits at x
+function tt_chairAt(x,X){const M=GV_MT;x.drawImage(wc_kept("ttChair",180,210,q=>{q.translate(20,20);wc_part(q,wc_rrPts(0,0,140,170,30),[74,84,104],1,{seed:96});
+  wc_flat(q,wc_rect(20,22,100,8),wc_lit([74,84,104],0.18),1,"seam");}),X-90,M.top-170);}
 // a name card folded on the table in front of someone: their name, and where they look after the data
 function tt_tent(x,X,name,role,u){if(u<=0.01)return;const w=200,h=54,y0=GV_MT.top+38-h,k=0.9+0.1*spring(clamp(u,0,1));x.save();x.translate(X,y0+h);x.scale(k,k);x.translate(-X,-y0-h);
   withA(x,clamp(u*2.5,0,1),()=>{x.fillStyle="rgba(70,60,50,0.18)";x.fillRect(X-w/2+5,y0+5,w,h);wc_panel(x,X-w/2,y0,w,h,{kind:"card",seed:Math.round(X)});
@@ -797,11 +819,22 @@ const TT_BOX={x:560,base:858,w:230,h:128};
 function tt_box(x,st,deco){const B=TT_BOX,X=B.x-B.w/2,Y=B.base-B.h;
   // what's in it, standing up over its rim
   if(st.forms>0.01)for(let i=0;i<6;i++){const e=easeCam(clamp(st.forms*1.3-i*0.05,0,1));x.save();x.translate(B.x-26+i*5,Y+8-24*e);x.rotate(-0.08+i*0.03);x.fillStyle=rgba(i%2?[248,246,238]:[240,236,226],1);x.fillRect(-56,-10,112,30);x.strokeStyle=rgba(WC_PENCIL,0.4);x.lineWidth=1;x.strokeRect(-56,-10,112,30);x.restore();}
-  if(st.pages>0.01)for(let i=0;i<5;i++){const e=easeCam(clamp(st.pages*1.3-i*0.06,0,1));x.save();x.translate(B.x+30+i*4,Y+6-30*e);x.rotate(0.1-i*0.04);x.fillStyle=rgba(mix(GV.grey,[255,255,255],0.45+0.1*(i%2)),1);x.fillRect(-46,-12,92,30);x.restore();}
-  // the frame, last in: let down from where it was held (81 px above), it stands leaning a little
+  // the frame: let down from where it was held (81 px above), it stands leaning a little
   if(st.frame>0.01){const e=easeCam(clamp(st.frame,0,1)),[,,fw,fh]=GV_OFF.score;x.save();x.translate(B.x-6,Y-40-81*(1-e));x.rotate(-0.06*e);tt_frame(x,-fw/2,-fh/2,1,0,deco);x.restore();}
+  // the binder's grey pages, last in, in front of the frame: dropped from where they were held (st.from, as tt_pagesAt gives it), or
+  // put in
+  if(st.pages>0.01){const f=st.from||[B.x+40,Y+16],tx=st.from?clamp(f[0],B.x-80,B.x+60):B.x+40;for(let i=0;i<5;i++){const u=clamp(st.pages*1.3-i*0.06,0,1),e=st.from?u*u:easeCam(u);
+    tt_greySheet(x,lerp(f[0],tx,e)+i*4,lerp(f[1],Y-14,e),0.1-i*0.04,i);}}
   x.drawImage(wc_kept("ttBox",B.w+40,B.h+40,q=>{q.translate(20,20);wc_contact(q,-10,B.w+10,B.h+2,0.9,0.3);wc_part(q,wc_rect(0,0,B.w,B.h),[198,164,120],1);wc_part(q,wc_rect(-4,-6,B.w+8,14),[210,178,134],1);
     wc_flat(q,wc_rect(B.w/2-56,40,112,44),WC_CARD,1,"label");}),X-20,Y-20);tt_deco(deco,()=>wc_hand(x,"retired",B.x,Y+72,{size:24,w:700,col:WC_DARK,align:"center"}));}
+// one of the binder's pages that are gone, grey, at (cx, cy), turned by rot
+function tt_greySheet(x,cx,cy,rot,i){x.save();x.translate(cx,cy);x.rotate(rot);x.fillStyle=rgba(mix(GV.grey,[255,255,255],0.45+0.1*(i%2)),1);x.fillRect(-46,-12,92,30);
+  x.strokeStyle=rgba(WC_PENCIL,0.35);x.lineWidth=1;x.strokeRect(-46,-12,92,30);x.restore();}
+// the grey pages held by their edge in someone's hand, in the room's coordinates (hand, as tt_handsAt gives it), the fingers over them;
+// tt_pagesAt, where the stack is, for the box to drop it from
+const tt_pagesAt=h=>[h[0]+36,h[1]+4];
+function tt_pagesHeld(x,id,s,h){const [px,py]=tt_pagesAt(h);for(let i=0;i<5;i++)tt_greySheet(x,px+i*4,py,0.1-i*0.04,i);
+  const P_=PEOPLE[id],k=s*P_.build.h;x.save();x.translate(h[0],h[1]);x.scale(k,k);fingers(x,P_,[[0,0]]);x.restore();}
 // the in-tray at the desk's left end, stacked with forms awaiting approval; tip (0 to 1) tips it, and the forms slide out into the box
 const TT_TRAY={x:740,w:176,top:664};
 function tt_tray(x,tip,deco){const T_=TT_TRAY,e=easeCam(clamp(tip,0,1)),ang=-0.62*Math.sin(Math.PI*clamp(tip,0,1));x.save();x.translate(T_.x,T_.top);x.rotate(ang);
@@ -878,11 +911,12 @@ function tt_cover29(x){const B=TT_OPEN,X=B.mid-40,w=B.x+B.w-X,col=tt_bindCol(28)
     wc_wash(q,wc_rrPts(X,B.y,w,B.h,18),col,{kind:"cover",lw:1.6,seed:31});wc_flat(q,wc_rect(X,B.y+8,54,B.h-16),wc_dim(col,0.2),1,"spine");
     wc_wash(q,wc_rect(X+w/2-130,B.y+250,300,190),WC_CARD,{kind:"page",lw:1.3,seed:32});}),0,0);
   const cx=X+w/2+20;wc_T(x,"29",cx,B.y+352,{w:800,size:84,align:"center",col:WC_DARK});wc_T(x,"Maturity assessment",cx,B.y+412,{w:600,size:28,align:"center",col:WC_MUTED});}
-// binder 29 opening (u, 0 to 1): the cover swings over from the right-hand half to the left, about the rings
+// binder 29 opening (u, 0 to 1): the cover swings over from the right-hand half to the left, about the rings. Words under the cover,
+// and on the cover or the page while they swing, aren't read
 function tt_opening29(x,u,st){const B=TT_OPEN;if(u>=1)return tt_open29(x,st);const c=Math.cos(Math.PI*clamp(u,0,1));
-  x.save();x.beginPath();x.rect(B.mid-46,0,W,H);x.clip();tt_open29(x,st);x.restore();
+  x.save();x.beginPath();x.rect(B.mid-46,0,W,H);x.clip();tt_deco(c>0,()=>tt_open29(x,st));x.restore();
   x.save();x.translate(B.mid,0);x.scale(Math.max(0.02,Math.abs(c)),1);x.translate(-B.mid,0);
-  if(c>0)tt_cover29(x);else{x.beginPath();x.rect(0,0,B.mid-46,H);x.clip();tt_open29(x,st);}x.restore();}
+  tt_deco(u>0,()=>{if(c>0)tt_cover29(x);else{x.beginPath();x.rect(0,0,B.mid-46,H);x.clip();tt_open29(x,st);}});x.restore();}
 // binder 29 lying open on his desk, seen from the room
 function tt_deskBinder(x,a){if(a<=0.01)return;const X=922,Y=GV_OFF.desk[1],col=tt_bindCol(28);withA(x,a,()=>{x.fillStyle=rgba(wc_dim(col,0.1),1);x.fillRect(X,Y-6,160,6);
   x.fillStyle=rgba([250,248,240],1);x.fillRect(X+6,Y-11,70,6);x.fillRect(X+84,Y-11,70,6);x.fillStyle=rgba(GV.metal,1);x.fillRect(X+77,Y-14,6,9);});}
@@ -954,18 +988,18 @@ const tt_turned=fn=>c=>{c.translate(W,0);c.scale(-1,1);fn(c);};
 
 /* ---------- Noor's map ---------- */
 // on Noor's map, close (GV_MC): "Govern data" lights gold in the strategy band, over one of the cards already there, and the next part's
-// three films go up beside it, in the band's free part. st: gov (0 to 1), next(j)
+// three films go up beside it, from just after it to the band's end. st: gov (0 to 1), next(j)
 const TT_NEXT=[["11","A capability,","not a project"],["12","Who does what,","end to end"],["13","Where each","piece lives"]];
 function tt_mapCards(x,st){const [mx,my,mw,mh]=GV_MC,[bx,by,bw,bh]=gv_mapBand(mx,my,mw,mh,1),cw=bw*0.1,ch=bh*0.58,gx=bx+bw*0.17+2*(cw+bw*0.035),gy=by+(bh-ch)/2;
   if(st.gov>0.01){const g=st.gov,k=1+0.06*Math.sin(Math.PI*clamp(g,0,1));x.save();x.translate(gx+cw/2,gy+ch/2);x.scale(k,k);x.save();x.globalCompositeOperation="screen";wc_glowAt(x,0,0,cw*1.1,[255,214,120],0.55*g);x.restore();
     withA(x,clamp(g*2,0,1),()=>{wc_panel(x,-cw/2-6,-ch/2-6,cw+12,ch+12,{kind:"card",wash:GV.gold,washA:0.6,seed:90});gv_pin(x,0,-ch/2,wc_dim(GV.gold,0.3),0.8);
       wc_T(x,"Govern",0,-2,{w:800,size:27,align:"center",col:GV.goldInk});wc_T(x,"data",0,28,{w:800,size:27,align:"center",col:GV.goldInk});});x.restore();}
-  const [fx,,fw]=gv_mapFree(mx,my,mw,mh,1),w=(fw-40)/3,h=bh+26;TT_NEXT.forEach((L,j)=>{const u=st.next?st.next(j):0;if(u<=0.01)return;const cx=fx+10+j*(w+10)+w/2,cy=by+bh/2,e=easeCam(clamp(u,0,1));
+  const fx=gx+cw+18,fw=bx+bw-6-fx,w=(fw-20)/3,h=bh+26;TT_NEXT.forEach((L,j)=>{const u=st.next?st.next(j):0;if(u<=0.01)return;const cx=fx+j*(w+10)+w/2,cy=by+bh/2,e=easeCam(clamp(u,0,1));
     x.save();x.translate(cx,cy-16*(1-e));x.rotate([0.014,-0.012,0.01][j]);withA(x,clamp(u*3,0,1),()=>{wc_panel(x,-w/2,-h/2,w,h,{kind:"card",seed:94+j});gv_pin(x,0,-h/2+10,GV.red,0.8);
       wc_T(x,L[0],-w/2+16,-h/2+40,{w:800,size:28,col:GV.goldInk});wc_T(x,L[1],-w/2+16,-h/2+80,{w:700,size:26,col:WC_DARK});wc_T(x,L[2],-w/2+16,-h/2+112,{w:700,size:26,col:WC_DARK});});x.restore();});}
 
 // the places, painted once and kept: Bogotá from each camera, and the university's rooms, some of them nearer (TT_Z)
-const WC_PLACES={bogota:c=>tt_paintBogota(c,TT_CAM.wide,{year:1995}),bogotaMid:c=>tt_paintBogota(c,TT_CAM.mid,{year:1995}),bogota12:c=>tt_paintBogota(c,TT_CAM.wide,{year:2012}),
+const WC_PLACES={bogota:c=>tt_paintBogota(c,TT_CAM.wide,{year:1995}),bogotaMid:c=>tt_paintBogota(c,TT_CAM.mid,{year:1995}),bogota12:c=>tt_paintBogota(c,TT_CAM.wide,{year:2012}),bogota12Mid:c=>tt_paintBogota(c,TT_CAM.mid,{year:2012}),
   floor:gv_paintFloor,registrarClose:gv_paintRegistrarClose,registrarDesk:gv_paintRegistrarDesk,office:tt_paintOffice,officeZ:c=>tt_inZ(c,TT_Z.wall,tt_paintOffice),
   boardGov:c=>gv_paintBoardClose(c,GV_ROOM.gov),desk:gv_paintDesk,faculty:gv_paintFaculty,facultyDesk:gv_paintFacultyDesk,screenFac:c=>gv_paintScreenDesk(c,GV_ROOM.fac),
   data:gv_paintData,screenData:c=>gv_paintScreenDesk(c,GV_ROOM.data),meeting:gv_paintMeeting,meetingTable:gv_paintMeetingTable,meetZ:c=>tt_inZ(c,TT_Z.board,gv_paintMeeting),

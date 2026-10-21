@@ -91,8 +91,8 @@ function ac_card(ctx,x,y,w,h,t,lines,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.
 // a cyan line moving across a row as the agent reads it
 function ac_reading(ctx,x,y,w,h,a){if(a<=0.01)return;ctx.save();ctx.globalCompositeOperation="multiply";ctx.globalAlpha=a;const g=ctx.createLinearGradient(x,0,x+w,0);
   g.addColorStop(0,rgba([170,214,246],0.0));g.addColorStop(0.15,rgba([170,214,246],0.95));g.addColorStop(1,rgba([170,214,246],0.6));ctx.fillStyle=g;ctx.fillRect(x,y,w,h);ctx.restore();}
-// a red question mark: something nobody has said yet
-function ac_redQ(ctx,x,y,s,p){if(p<=0)return;const k=spring(p);ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,clamp(p*2,0,1),()=>wc_T(ctx,"?",0,0,{w:800,size:s,align:"center",col:GV.redInk}));ctx.restore();}
+// a red question mark: something nobody has said yet (grey, col: nothing there to check)
+function ac_redQ(ctx,x,y,s,p,col){if(p<=0)return;const k=spring(p);ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,clamp(p*2,0,1),()=>wc_T(ctx,"?",0,0,{w:800,size:s,align:"center",col:col||GV.redInk}));ctx.restore();}
 // a name card: a person's name and what they do
 function ac_nameCard(ctx,x,y,name,role,a){if(a<=0.01)return;const w=Math.round(Math.max(tw(ctx,name,32,800),tw(ctx,role,28,600))+60);
   withA(ctx,a,()=>{ctx.save();ctx.translate(0,12*(1-a));wc_panel(ctx,x,y,w,112,{kind:"card",seed:5});wc_T(ctx,name,x+30,y+48,{w:800,size:32,col:WC_DARK});
@@ -105,10 +105,10 @@ function ac_tagAt(ctx,t,t0,t1,x,y,s,o){const a=t1==null?fin(t,t0,0.35):gv_io(t,t
 // the change's page: its title in the bar; the list's name, the governance check's light (ok: 0 red to 1 green) and the approve and
 // merge buttons, grey, which only people use (btn rings them); then its columns, what each says about identifying a person, and the new
 // one marked; what the agent reads (read: the row it's on, fractional; readA), a red question mark where nothing is said (q), and the
-// class Anil writes, in gold (cls)
+// class Anil writes, in gold (cls); fade sets what's on it back, under something laid over it
 const AC_ROWS=[["learner_key","pseudonymous"],["full_name","direct"],["email","direct"],["award_code","none"],["date_of_birth",""]];
 const AC_PG={x0:400,band:AC_SC[1]+114,head:AC_SC[1]+182,y0:AC_SC[1]+242,dy:58,cls:1010,read:[372,1150],chk:640};
-function ac_change(ctx,t,o){o=o||{};const [x,y,w,h]=AC_SC,P=AC_PG;gv_screen(ctx,x,y,w,h,o.title||"Add each learner's date of birth",q=>{
+function ac_change(ctx,t,o){o=o||{};const [x,y,w,h]=AC_SC,P=AC_PG;gv_screen(ctx,x,y,w,h,o.title||"Add each learner's date of birth",q=>withA(q,1-0.85*(o.fade||0),()=>{
   wc_T(q,"Call list",P.x0,P.band,{w:800,size:32,col:WC_DARK});
   const ok=o.ok||0;q.save();q.fillStyle=rgba(mix(GV.red,GV.green,ok),1);q.beginPath();q.arc(P.chk,P.band-10,12,0,TAU);q.fill();q.restore();
   wc_T(q,ok>0.5?"governance check · passed":"governance check · 1 problem",P.chk+24,P.band,{w:700,size:28,col:ok>0.5?GV.greenInk:GV.redInk});
@@ -123,7 +123,7 @@ function ac_change(ctx,t,o){o=o||{};const [x,y,w,h]=AC_SC,P=AC_PG;gv_screen(ctx,
   // the agent reading, row by row
   if(o.read!=null&&o.readA>0){const ry=P.y0+o.read*P.dy;ac_reading(q,P.read[0],ry-42,P.read[1],58,o.readA);ac_star(q,P.read[0]-4,ry-13,0.9,t,o.readA);}
   const ly=P.y0+4*P.dy;ac_redQ(q,P.cls+30,ly+6,56,(o.q||0)*(1-(o.cls||0)));
-  if(o.cls>0){gv_tint(q,P.cls-14,ly-40,236,56,GV.gold,0.8*o.cls);withA(q,o.cls,()=>wc_T(q,"direct",P.cls,ly,{w:700,size:32,col:GV.goldInk,f:"mono"}));}},{titleSize:32,barH:54});}
+  if(o.cls>0){gv_tint(q,P.cls-14,ly-40,236,56,GV.gold,0.8*o.cls);withA(q,o.cls,()=>wc_T(q,"direct",P.cls,ly,{w:700,size:32,col:GV.goldInk,f:"mono"}));}}),{titleSize:32,barH:54});}
 // the agent's comment, pinned under the new row: the line, the rule and a fix to consider, each coming in (ln: three, 0 to 1); res,
 // Anil's gold tick
 function ac_comment(ctx,t,a,k,ln,res){const x=AC_SC[0]+140,y=AC_PG.y0+4*AC_PG.dy+34,w=960,h=170;if(a<=0.01)return;ln=ln||[1,1,1];
@@ -253,8 +253,8 @@ function ac_stepSign(ctx,i,x,y,a){if(a<=0.01)return;ctx.save();ctx.translate(x,y
   else if(i===5){ctx.moveTo(-13,0);ctx.lineTo(0,0);ctx.lineTo(12,-10);ctx.moveTo(0,0);ctx.lineTo(12,10);ctx.moveTo(6,-11);ctx.lineTo(12,-10);ctx.lineTo(10,-4);ctx.moveTo(6,11);ctx.lineTo(12,10);ctx.lineTo(10,4);}
   else{ctx.moveTo(-13,-10);ctx.lineTo(13,-10);ctx.lineTo(13,6);ctx.lineTo(-2,6);ctx.lineTo(-8,12);ctx.lineTo(-7,6);ctx.lineTo(-13,6);ctx.closePath();}
   ctx.stroke();ctx.restore();}
-// a cross in pencil, drawn as it's said (p, 0 to 1)
-function ac_cross(ctx,x,y,s,p){if(p<=0)return;ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.9);ctx.lineWidth=4;ctx.lineCap="round";const u=clamp(p*2,0,1),v=clamp(p*2-1,0,1);
+// a cross in pencil (or col), drawn as it's said (p, 0 to 1)
+function ac_cross(ctx,x,y,s,p,col){if(p<=0)return;ctx.save();ctx.strokeStyle=rgba(col||WC_PENCIL,0.9);ctx.lineWidth=4;ctx.lineCap="round";const u=clamp(p*2,0,1),v=clamp(p*2-1,0,1);
   ctx.beginPath();ctx.moveTo(x-s,y-s);ctx.lineTo(x-s+2*s*u,y-s+2*s*u);if(v>0){ctx.moveTo(x+s,y-s);ctx.lineTo(x+s-2*s*v,y-s+2*s*v);}ctx.stroke();ctx.restore();}
 function ac_skillPage(ctx,t,o){o=o||{};const K=AC_SK;
   withA(ctx,o.path==null?1:o.path,()=>wc_T(ctx,"skills/review-for-governance/SKILL.md",K.x,K.path,{w:500,size:28,col:WC_MUTED,f:"mono"}));
@@ -415,7 +415,157 @@ function ac_approvals(ctx,t,o){o=o||{};const [x,y,w,h]=AC_BIG,R=AC_RV,Y=AC_APY;g
       wc_T(q,A.name,A.x+30,Y.card+64,{w:800,size:32,col:WC_DARK});wc_T(q,A.what,A.x+30,Y.card+108,{w:600,size:28,col:WC_INK});});
     gv_stamp(q,A.x+R.cw-130,Y.card+140,"APPROVED",clamp(a*2-1,0,1),{size:28,col:GV.goldInk,rot:-0.07});});},{titleSize:32,barH:54});}
 
+/* ---------- 6 · Governed, too ---------- */
+// binder 26, open on Yusuf's desk, from above, as Off the shelf drew binder 12: the cover open flat round the pages, the rings down the
+// middle, the back of the page before on the left, policy 26 on the right; a green highlighter; and room beside it for the project's page
+// for agents, printed (AC_AG). Clear of his mug, his keyboard and his pencil.
+const AC_OPEN={x:250,y:70,w:1060,h:830,mid:780,pw:460,rings:[250,485,720]},AC_AG={x:1366,y:118,w:500,h:740,rot:0.02};
+// a highlighter lying on the desk, from above, and its stroke behind a line of text, drawn from the left as p goes from 0 to 1 (Off the shelf's)
+function ac_marker(c,x,y,rot,col){c.save();c.translate(x,y);c.rotate(rot);c.drawImage(wc_kept("acMarker|"+col,300,100,q=>{
+    q.save();q.filter="blur(5px)";q.fillStyle="rgba(70,50,30,0.26)";q.fillRect(30,46,236,30);q.restore();
+    wc_wash(q,wc_rrPts(26,30,196,42,14),mix(col,[255,255,255],0.6),{kind:"thing",lw:1.3,seed:col[0]});
+    wc_wash(q,wc_rrPts(204,27,70,48,12),col,{kind:"thing",lw:1.3,seed:col[1]});wc_wash(q,[[28,40],[8,46],[8,56],[28,62]],wc_dim(col,0.1),{kind:"thing",lw:1.1,seed:col[2]});}),-150,-50);
+  c.restore();}
+function ac_hiStroke(ctx,x,y,w,col,p,seed,h){if(p<=0)return;h=h||58;const c=wc_kept("acHi|"+col+"|"+seed,1200,70,q=>wc_wash(q,wc_resample(wc_rect(8,10,1180,48),12),col,{kind:"swatch",line:false,a:0.5,seed}));
+  const top=y-12-h/2;ctx.save();ctx.beginPath();ctx.rect(x-12,top-6,(w+24)*clamp(p,0,1),h+12);ctx.clip();ctx.globalCompositeOperation="multiply";ctx.drawImage(c,x-12,top,w+24,h);ctx.restore();}
+function ac_paintDesk26(c){gv_paintDesk(c);const B=AC_OPEN,top=B.y+26,ph=B.h-52,L=B.mid-46-B.pw,R=B.mid+46,col=ac_bindCol(26);
+  c.save();c.filter="blur(16px)";c.fillStyle="rgba(70,50,30,0.32)";c.fillRect(B.x+16,B.y+24,B.w,B.h);c.restore();
+  wc_wash(c,wc_rrPts(B.x,B.y,B.w,B.h,18),col,{kind:"cover",lw:1.6,seed:26});wc_flat(c,wc_rect(B.mid-40,B.y+8,80,B.h-16),wc_dim(col,0.22),1,"spine");
+  for(const px of [L,R]){const s=px<B.mid?-1:1;for(let k=3;k>=1;k--)wc_flat(c,wc_rect(px+s*k*3,top+k*3,B.pw,ph),wc_dim(GV.paper,0.05*k),1,"pages");
+    wc_wash(c,wc_rect(px,top,B.pw,ph),GV.paper,{kind:"page",lw:1.3,seed:px|0});
+    for(const ry of B.rings)wc_wash(c,wc_ell(B.mid+s*80,ry,11,11,16),wc_dim(col,0.1),{kind:"thing",line:false,flat:true});}
+  gv_lines(c,L+60,top+110,B.pw-150,13,50,0.3);
+  wc_wash(c,wc_rrPts(B.mid-26,B.rings[0]-60,52,B.rings[2]-B.rings[0]+120,14),GV.metal,{kind:"thing",lw:1.4,seed:13});
+  for(const ry of B.rings){c.save();c.strokeStyle=rgba(wc_dim(GV.metal,0.28),1);c.lineWidth=10;c.beginPath();c.ellipse(B.mid,ry,80,17,0,0,TAU);c.stroke();
+    c.strokeStyle="rgba(255,255,255,0.65)";c.lineWidth=3;c.beginPath();c.ellipse(B.mid,ry-3,76,13,0,Math.PI*1.15,Math.PI*1.85);c.stroke();c.restore();}
+  ac_marker(c,1250,962,-0.3,GV.green);}
+// policy 26's page: its line, a green stroke behind it as it goes green (hi), and where it runs, in Yusuf's hand, green (hw, three, 0 to 1)
+const AC_P26={x:AC_OPEN.mid+46+64,top:AC_OPEN.y+26,size:38,lh:52,lines:["AI use follows the","organisation's data","policies."],
+  note:["the agent's access","its steps","owners' approvals"]};
+function ac_open26(ctx,t,o){o=o||{};const P=AC_P26,x=P.x,top=P.top,n=P.lines.length,u=o.hi||0;
+  wc_T(ctx,"Data policies",x,top+64,{w:600,size:28,col:WC_MUTED,deco:1});wc_T(ctx,"Policy 26",x,top+150,{w:800,size:56,col:WC_DARK});
+  wc_T(ctx,"AI and automated tools",x,top+200,{w:600,size:32,col:WC_MUTED});
+  P.lines.forEach((s,i)=>{const y=top+290+i*P.lh;ac_hiStroke(ctx,x,y,tw(ctx,s,P.size,600),GV.green,clamp(u*n-i,0,1),60+i);wc_T(ctx,s,x,y,{w:600,size:P.size,col:WC_INK});});
+  P.note.forEach((s,i)=>wc_hand(ctx,s,x,top+484+i*58,{size:36,w:700,col:GV.greenInk,p:(o.hw||[])[i]||0}));}
+// the project's page for agents, printed: its title and what it says, as headings over typed lines. It's laid on the desk from the right
+// (land, 0 to 1), and the agent's star comes onto it (star)
+function ac_agentsPage(ctx,t,o){o=o||{};const A=AC_AG,u=o.land==null?1:o.land;if(u<=0)return;const k=1-Math.pow(1-u,3);ctx.save();
+  ctx.translate(A.x+A.w/2+(1-k)*720,A.y+A.h/2);ctx.rotate(A.rot+(1-k)*0.06);ctx.drawImage(gv_sheetPaper(A.w,A.h),-A.w/2-20,-A.h/2-20);ctx.translate(-A.w/2,-A.h/2);
+  wc_T(ctx,"AGENTS.md",44,66,{w:500,size:28,col:WC_MUTED,f:"mono"});["Working here","as an AI agent"].forEach((s,i)=>wc_T(ctx,s,44,146+i*54,{w:800,size:42,col:WC_DARK}));
+  [["What you may do",3],["Your access",3],["What you must not do",4]].forEach(([s,n],i)=>{const y=290+i*140;wc_T(ctx,s,44,y,{w:700,size:30,col:WC_INK});gv_lines(ctx,44,y+28,A.w-110,n,24,0.9);});
+  ac_star(ctx,A.w-92,76,1.4,t,o.star||0);ctx.restore();}
+// the platform team's desk, close: its front, drawn over Sam; on his left screen a log, on the right, small, the agent's access (a, 0 to 1)
+function ac_platDesk(ctx){ctx.drawImage(wc_kept("acPlatDesk",W,H,gv_paintPlatformDesk),0,0);}
+function ac_platScreens(ctx,t,a){const [[x1,y1,w1,h1],[x2,y2,w2,h2]]=GV_PX.screens;gv_screen(ctx,x1,y1,w1,h1,null,q=>gv_lines(q,x1+30,y1+80,w1-80,7,30,0.9));
+  gv_screen(ctx,x2,y2,w2,h2,"Access",q=>{if(a<=0.01)return;withA(q,a,()=>{wc_panel(q,x2+20,y2+58,w2-40,h2-76,{kind:"card",dashed:true,role:WC_SIDE.tech,seed:83});
+    ac_star(q,x2+54,y2+94,0.8,t,1);gv_lines(q,x2+84,y2+88,w2-200,1,0,0.9);gv_lines(q,x2+54,y2+140,w2-130,4,30,0.9);});});}
+// the agent's access on Sam's screen, close: a dashed cyan card with its star; its own identity; then what it reads and writes, and how it
+// works with the data, each ticked (cyan: it may) or crossed (it may not) as it's said (rows, seven, 0 to 1)
+const AC_ACC=[["its own identity, never a person's"],["reads: the core, the marts",1],["writes: its own workspace",1],["writes: production",0],
+  ["counts and small samples",1],["bulk personal data",0],["the glossary: read only",1]],AC_AX={cx:374,cy:236,cw:1172,ch:520,col:[70,630],r0:498,dy:84};
+function ac_access(ctx,t,o){o=o||{};const [x,y,w,h]=AC_SC,X=AC_AX,r=o.rows||[];gv_screen(ctx,x,y,w,h,"Access",q=>{
+  wc_panel(q,X.cx,X.cy,X.cw,X.ch,{kind:"card",dashed:true,role:WC_SIDE.tech,seed:84});ac_star(q,X.cx+60,X.cy+62,1.3,t,1);
+  wc_T(q,"the agent",X.cx+110,X.cy+76,{w:800,size:36,col:WC_DARK});
+  withA(q,r[0]||0,()=>wc_T(q,AC_ACC[0][0],X.cx+110,X.cy+134,{w:600,size:32,col:WC_INK}));
+  q.save();q.strokeStyle=rgba(AC_CYAN,0.35);q.lineWidth=2;q.setLineDash([10,8]);q.beginPath();q.moveTo(X.cx+40,X.cy+186);q.lineTo(X.cx+X.cw-40,X.cy+186);q.stroke();q.restore();
+  AC_ACC.slice(1).forEach(([s,ok],i)=>{const a=r[i+1]||0;if(a<=0.01)return;const rx=X.cx+X.col[i<3?0:1],ry=X.r0+(i%3)*X.dy,m=clamp(a*2-0.6,0,1);
+    withA(q,clamp(a*2,0,1),()=>wc_T(q,s,rx+56,ry,{w:600,size:32,col:WC_INK}));
+    if(ok)wc_tick(q,rx+16,ry-12,34,AC_CYAN,m,6);else ac_cross(q,rx+16,ry-12,12,m,WC_INK);});},{titleSize:32,barH:54});}
+// who reviews what, close: each path, and who's asked to review a change to it (the first line is for everything nobody else owns);
+// the owners light gold (own), only the focus line's if one is kept bright as the rest fade back (focus, dim); below, the agent's card,
+// its approve button grey (ag); tags as they come in ([time, x, y, words, colour])
+const AC_WHO=["# The code, everywhere: the analytics engineer",["*",["jun.park@uni.example"]],null,
+  ["/models/marts/health/_health__conceptual.yml",["health.data@uni.example","noor@uni.example"]],["/models/marts/health/_health__models.yml",["health.data@uni.example","jun.park@uni.example"]],
+  null,["/products/health_learner_progress.yml",["health.data@uni.example"]]],
+  AC_WX={files:170,by:1010,head:178,y0:244,dy:48,blank:62,card:[170,692,900,128]};
+function ac_who(ctx,t,o){o=o||{};const [x,y,w,h]=AC_BIG,X=AC_WX,rows=o.rows||AC_WHO;gv_screen(ctx,x,y,w,h,"Who reviews what",q=>{let ry=X.y0,k=0;
+  wc_T(q,"files",X.files,X.head,{w:700,size:28,col:WC_MUTED});wc_T(q,"reviewed by",X.by,X.head,{w:700,size:28,col:WC_MUTED});
+  rows.forEach((L,i)=>{if(L==="")return ry+=X.dy*0.5;if(!L){gv_lines(q,X.files,ry-22,1500,2,24,0.7);ry+=X.blank;return;}const on=o.focus==null||o.focus===i;
+    withA(q,on?1:1-0.6*(o.dim||0),()=>{if(typeof L==="string"){wc_T(q,L,X.files,ry,{w:500,size:28,col:WC_MUTED,f:"mono"});return;}
+      wc_T(q,L[0],X.files,ry,{w:500,size:28,col:WC_INK,f:"mono"});let ex=X.by;
+      L[1].forEach(e=>{const g=on?clamp((o.own||0)*3-0.25*k++,0,1):0,ew=tw(q,e,28,500,"mono");if(g>0)gv_tint(q,ex-5,ry-31,ew+10,42,GV.gold,0.8*g);
+        wc_T(q,e,ex,ry,{w:500,size:28,col:WC_INK,f:"mono"});ex+=ew+tw(q," ",28,500,"mono");});});ry+=X.dy;});
+  const ag=o.ag||0;if(ag>0.01){const [cx,cy,cw,ch]=X.card;withA(q,ag,()=>{q.save();q.translate(0,14*(1-ag));
+    wc_panel(q,cx,cy,cw,ch,{kind:"card",dashed:true,role:WC_SIDE.tech,seed:86});ac_star(q,cx+52,cy+ch/2,1.2,t,1);wc_T(q,"the agent",cx+100,cy+ch/2+12,{w:800,size:34,col:WC_DARK});
+    wc_panel(q,cx+cw-300,cy+ch/2-32,250,64,{kind:"pill",wash:WC_MUTED,washA:0.2,seed:87});wc_T(q,"Approve",cx+cw-175,cy+ch/2+10,{w:700,size:30,col:WC_MUTED,align:"center"});q.restore();});}
+  (o.tags||[]).forEach(([t0,tx,ty,s_,col])=>ac_tagAt(q,t,t0,null,tx,ty,s_,{size:34,wash:col,washA:0.35}));},{titleSize:32,barH:54});}
+
+/* ---------- 7 · Only what's written ---------- */
+// Yusuf's desk, from above: binder 12, closed, as Off the shelf left it, his two notes sticking out of it as flags; beside it, the skill's
+// page, printed (AC_SS)
+const AC_STICK=[250,214,208],AC_SS={x:960,y:104,w:860,h:772};
+function ac_paintDesk12(c){gv_paintDesk(c);const col=ac_bindCol(12),x=300,y=170,w=560,h=740;
+  c.save();c.filter="blur(14px)";c.fillStyle="rgba(70,50,30,0.3)";c.fillRect(x+14,y+20,w,h);c.restore();
+  for(const [fy,r] of [[330,-0.06],[520,0.05]]){c.save();c.translate(x+w+20,fy);c.rotate(r);wc_wash(c,wc_rect(-70,-28,110,56),AC_STICK,{kind:"page",lw:1.1,seed:fy});c.restore();}
+  wc_flat(c,wc_rect(x+16,y+h-6,w-20,16),wc_dim(GV.paper,0.08),1,"pages");wc_flat(c,wc_rect(x+w-6,y+16,16,h-20),wc_dim(GV.paper,0.08),1,"pages");
+  wc_wash(c,wc_rrPts(x,y,w,h,16),col,{kind:"cover",lw:1.6,seed:21});wc_flat(c,wc_rect(x,y+8,54,h-16),wc_dim(col,0.2),1,"spine");
+  wc_wash(c,wc_rect(x+150,y+170,300,190),WC_CARD,{kind:"page",lw:1.3,seed:22});const S_=AC_SS;gv_sheet(c,S_.x,S_.y,S_.w,S_.h);}
+function ac_closed12(ctx){wc_T(ctx,"12",600,435,{w:800,size:84,align:"center",col:WC_DARK});wc_T(ctx,"Data definitions",600,500,{w:600,size:30,align:"center",col:WC_MUTED});}
+// the skill's page on the desk: its path, title, first line and steps; the agent's star reading down the steps (read: the row,
+// fractional; readA)
+function ac_skillSheet(ctx,t,o){o=o||{};const S_=AC_SS,x0=S_.x+40,y0=S_.y+346;
+  wc_T(ctx,"skills/review-for-governance/SKILL.md",x0,S_.y+62,{w:500,size:28,col:WC_MUTED,f:"mono"});
+  ["Review a pull request","for governance"].forEach((s_,i)=>wc_T(ctx,s_,x0,S_.y+130+i*50,{w:800,size:42,col:WC_DARK}));
+  wc_T(ctx,"You find, draft and flag. People decide.",x0,S_.y+236,{w:600,size:30,col:WC_INK});wc_T(ctx,"Steps",x0,S_.y+296,{w:800,size:28,col:WC_MUTED});
+  if(o.readA>0){const ry=y0+Math.min(6,o.read)*54;ac_reading(ctx,x0-12,ry-34,S_.w-56,46,o.readA);ac_star(ctx,S_.x+16,ry-11,0.7,t,o.readA);}
+  AC_STEPS.forEach((st,i)=>{const y=y0+i*54;ac_stepSign(ctx,i,x0+10,y-10,1);wc_T(ctx,String(i+1),x0+38,y,{w:800,size:30,col:WC_DARK});wc_T(ctx,st,x0+66,y,{w:600,size:30,col:WC_INK});});}
+// policy 12's page, as Off the shelf left it: each line marked by where it runs (green, gold, grey), Yusuf's notes beside them, his key at
+// the top, and 12.7 struck through: it can go. The agent's star reads along 12.7 (star, 0 to 1; starA) and finds nothing to check (q)
+const AC_PL=[["12.1","Each term has a named owner."],["12.2","Each term used in a report is in the glossary."],["12.3","Terms about people are marked as personal data."],
+  ["12.4","Reports count by the glossary's definitions."],["12.5","Each term's owner decides its definition,","and how it maps to the government's."],
+  ["12.6","Each decision is written down with the term."],["12.7","Staff take care to use terms correctly."]],
+  AC_PLW=[0,0,0,0,1,1,2],AC_PLN=["a required field","a check","a tag","a test","award: Mei decides","in the glossary",null],
+  AC_PLC=[GV.green,GV.gold,GV.grey],AC_PLI=[GV.greenInk,GV.goldInk,GV.greyInk],AC_PLK=["runs in the work","a decision someone owns","can go"],
+  AC_PLG={x:300,tx:384,y0:290,dy:78,lh:44,size:34,note:1350};
+function ac_policy12(ctx,t,o){o=o||{};const P=AC_PLG;wc_T(ctx,"Policy 12 · Data definitions",P.x,128,{w:800,size:50,col:WC_DARK});
+  wc_T(ctx,"Business terms are defined consistently across the organisation.",P.x,188,{w:600,size:30,col:WC_MUTED});
+  let y=P.y0;AC_PL.forEach((L,k)=>{const rows=L.slice(1),c=AC_PLW[k],n=rows.length;
+    rows.forEach((s_,i)=>ac_hiStroke(ctx,P.tx,y+i*P.lh,tw(ctx,s_,P.size,600),AC_PLC[c],1,40+k*3+i,64));
+    wc_T(ctx,L[0],P.x,y,{w:700,size:P.size,col:WC_MUTED});rows.forEach((s_,i)=>wc_T(ctx,s_,P.tx,y+i*P.lh,{w:600,size:P.size,col:c===2?WC_MUTED:WC_INK}));
+    if(c===2){const w=tw(ctx,rows[0],P.size,600);ctx.save();ctx.strokeStyle=rgba(GV.greyInk,0.9);ctx.lineWidth=4;ctx.lineCap="round";
+      ctx.beginPath();ctx.moveTo(P.tx-8,y-11);ctx.quadraticCurveTo(P.tx+w/2,y-15,P.tx-8+w+16,y-10);ctx.stroke();ctx.restore();
+      const a=o.starA||0;if(a>0.01){const u=easeCam(clamp(o.star||0,0,1));ac_reading(ctx,P.tx-12,y-38,(w+24)*u,50,a*0.8);ac_star(ctx,P.tx-12+(w+24)*u,y-12,0.9,t,a);}
+      ac_redQ(ctx,P.tx+w+80,y+10,76,o.q||0,GV.greyInk);}
+    if(AC_PLN[k])wc_hand(ctx,AC_PLN[k],P.note,y+(n-1)*P.lh/2,{size:36,w:700,col:AC_PLI[c]});y+=P.dy+(n-1)*P.lh;});
+  AC_PLK.forEach((s_,j)=>{const ky=84+j*44;ac_hiStroke(ctx,P.note,ky,44,AC_PLC[j],1,70+j,34);wc_hand(ctx,s_,P.note+70,ky,{size:30,w:700,col:AC_PLI[j]});});}
+// the data team's room: the skill's page pinned on their board, small (its lines too small to read)
+function ac_boardPage(ctx){const [bx,by]=GV_DT.board;gv_sheet(ctx,bx+90,by+30,250,320,{rot:-0.015});gv_lines(ctx,bx+112,by+74,190,1,0,1);gv_lines(ctx,bx+112,by+112,196,8,26,0.9);
+  gv_pin(ctx,bx+215,by+42,GV.gold,1);}
+// the board, close: the skill's page pinned up for anyone to read; its steps; Anil's question beside step 4, in pencil (note, 0 to 1)
+const AC_BP={x:350,y:84,w:1220,h:770};
+function ac_boardSkill(ctx,t,o){o=o||{};const B=AC_BP,x0=B.x+60,y0=B.y+284;gv_sheet(ctx,B.x,B.y,B.w,B.h,{rot:0.006});gv_pin(ctx,B.x+B.w/2,B.y+22,GV.gold,1.4);
+  wc_T(ctx,"skills/review-for-governance/SKILL.md",x0,B.y+80,{w:500,size:28,col:WC_MUTED,f:"mono"});
+  wc_T(ctx,"Review a pull request for governance",x0,B.y+152,{w:800,size:46,col:WC_DARK});wc_T(ctx,"Steps",x0,B.y+226,{w:800,size:28,col:WC_MUTED});
+  AC_STEPS.forEach((st,i)=>{const y=y0+i*64;ac_stepSign(ctx,i,x0+12,y-11,1);wc_T(ctx,String(i+1),x0+52,y,{w:800,size:32,col:WC_DARK});wc_T(ctx,st,x0+90,y,{w:600,size:32,col:WC_INK});});
+  const u=clamp(o.note||0,0,1);if(u<=0)return;const ny=y0+3*64,ax=x0+90+tw(ctx,AC_STEPS[3],32,600)+40;
+  ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.9);ctx.lineWidth=3.5;ctx.lineCap="round";const v=clamp(u*4,0,1);ctx.beginPath();ctx.moveTo(ax+70,ny-11);ctx.lineTo(ax+70-60*v,ny-11);
+  if(v>=1){ctx.moveTo(ax+24,ny-21);ctx.lineTo(ax+10,ny-11);ctx.lineTo(ax+24,ny-1);}ctx.stroke();ctx.restore();
+  wc_hand(ctx,"why the stricter class?",ax+92,ny,{size:38,w:700,col:WC_PENCIL,p:clamp(u*1.25-0.25,0,1)});}
+// who reviews what, at its end: who reviews the consumers' exposures; then governance's own rules, the skill among them, each owned by data
+// governance and Noor ("" is a blank line)
+const AC_WHO7=[null,"# Who uses it: each consumer",...["finance","planning","wallet"].map(c=>["/exposures/"+c+"/",[c+"@uni.example"]]),"","# Governance's rules (DEC-PRJ-12)",...["/scripts/check/governance.py","/tests/governance/","/scripts/generate/codeowners.py","/docs/how-to/",
+  "/skills/review-for-governance/"].map(f=>[f,["data.governance@uni.example","noor@uni.example"]])];
+// the skill's page again, as the next review follows it: the star reads down the steps, each lit as it's followed (read, readA); a tag
+function ac_skillRead(ctx,t,o){o=o||{};const K=AC_SK,r=o.read||0;ac_skillPage(ctx,t,{steps:AC_STEPS.map((_,i)=>clamp(r-i+0.6,0,1)),donts:[1,1,1,1]});
+  if(o.readA>0){const ry=K.y0+Math.min(6,r)*K.dy;ac_reading(ctx,K.x+50,ry-42,880,56,o.readA);ac_star(ctx,K.x-28,ry-12,0.85,t,o.readA);}
+  if(o.tag!=null)ac_tagAt(ctx,t,o.tag,null,1560,236,"the next review",{size:34,wash:WC_SIDE.tech,washA:0.3});}
+
+/* ---------- 8 · That night ---------- */
+// what the night is made of, each on the sign its chapter gave it: a check that passes, in green; the skill's printed page; the agent's
+// dashed cyan card; a person's decision, in gold (a, four, 0 to 1)
+const AC_PARTS=[["rules written as checks","green"],["steps in plain words","page"],["an agent with little access","agent"],["people who decide","gold"]],
+  AC_PT={xs:[300,980],ys:[290,456],w:640,h:128};
+function ac_parts(ctx,t,a){const T_=AC_PT;AC_PARTS.forEach(([s_,k],i)=>{const p=a[i]||0;if(p<=0.01)return;const x=T_.xs[i%2],y=T_.ys[i>>1],cy=y+T_.h/2,sp=0.9+0.1*spring(p);
+  ctx.save();ctx.translate(x+T_.w/2,cy);ctx.scale(sp,sp);ctx.translate(-x-T_.w/2,-cy);withA(ctx,clamp(p*1.6,0,1),()=>{
+    if(k==="page"){gv_sheet(ctx,x,y,T_.w,T_.h,{rot:-0.008});ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.85);ctx.lineWidth=3;ctx.lineCap="round";
+      for(let j=0;j<3;j++){ctx.beginPath();ctx.moveTo(x+36,cy-22+j*20);ctx.lineTo(x+76-(j===2?14:0),cy-22+j*20);ctx.stroke();}ctx.restore();}
+    else if(k==="agent"){ctx.fillStyle=rgba(GV.screen,1);ctx.fillRect(x+4,y+4,T_.w-8,T_.h-8);wc_panel(ctx,x,y,T_.w,T_.h,{kind:"card",dashed:true,role:WC_SIDE.tech,seed:121});ac_star(ctx,x+56,cy,1.1,t,1);}
+    else{wc_panel(ctx,x,y,T_.w,T_.h,{kind:"card",wash:k==="green"?GV.green:GV.gold,washA:0.32,seed:120+i});
+      if(k==="green"){ctx.save();ctx.fillStyle=rgba(GV.green,1);ctx.beginPath();ctx.arc(x+56,cy,20,0,TAU);ctx.fill();ctx.restore();wc_tick(ctx,x+57,cy-2,24,[255,255,255],1,4);}
+      else wc_tick(ctx,x+58,cy-4,40,GV.goldInk,1,7);}
+    wc_T(ctx,s_,x+104,cy+13,{w:700,size:36,col:WC_DARK});});ctx.restore();});}
+
 const WC_PLACES={screenMorning:ac_paintScreenFacMorning,dusk:ac_paintDusk,night:ac_paintNight,faculty:gv_paintFaculty,facDusk:ac_paintFacDusk,facNight:ac_paintFacNight,facMorning:ac_paintFacMorning,
   screenFac:ac_paintScreenFac,screenNight:ac_paintScreenFacNight,screenPlat:ac_paintScreenPlat,screenData:ac_paintScreenData,data:gv_paintData,
   boardData:c=>gv_paintBoardClose(c,GV_ROOM.data),office:gv_paintOffice,boardGov:c=>gv_paintBoardClose(c,GV_ROOM.gov),desk:gv_paintDesk,
-  platClose:gv_paintPlatformClose,page:ac_paintPage,sheet:ac_paintSheet,screenBig:ac_paintScreenBig};
+  platClose:gv_paintPlatformClose,page:ac_paintPage,sheet:ac_paintSheet,screenBig:ac_paintScreenBig,desk26:ac_paintDesk26,desk12:ac_paintDesk12};

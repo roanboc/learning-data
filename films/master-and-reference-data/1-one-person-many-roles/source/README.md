@@ -4,7 +4,7 @@
 
 | File | What it holds |
 |---|---|
-| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Nguyen, Linh, DAMA, HR), and the moment its poster shows (the person, her roles, her contact points and her identifiers, drawn apart). |
+| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Nguyen, Linh, DAMA, HR), and the moment its poster shows (from the opening story: the parish in 1686, the household's book with Olof gone to Uppsala parish, and his certificate carried down the road). |
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). Two lines carry a `say`, so the voice reads their years as years: "sixteen eighty-six" and "nineteen forty-seven". The film re-times itself to the voice. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/breath.js` | The few longer pauses: holds after some lines, and three wordless moments (the two parish books side by side, then the title; the four lanes, settled; and the end card). |

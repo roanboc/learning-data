@@ -4,7 +4,7 @@
 
 | File | What it holds |
 |---|---|
-| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Nguyen, Linh, PhD, dbt, HR), the moment its poster shows (the lightest way, settled, with Bern beside it), and its opening's story (`story`: chapter 1, 1874), where `tools/quiet.py` lets music play throughout. |
+| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Nguyen, Linh, PhD, dbt, HR), the moment its poster shows (from the opening story: the treaty signed at Bern on 9 October 1874, over the tangle of routes it replaced), and its opening's story (`story`: chapter 1, 1874), where `tools/quiet.py` lets music play throughout. |
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). One line carries a `say`, so the voice reads its year as a year: "eighteen seventy-four". The film re-times itself to the voice. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/breath.js` | The few longer pauses: holds after some lines, and three wordless moments (the letter crossing the one postal territory, then the title; the lightest way, settled, with Bern beside it; and the end card). |

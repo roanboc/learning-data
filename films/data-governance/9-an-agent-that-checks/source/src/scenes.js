@@ -175,7 +175,7 @@ scene("agent",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
     {at:P.pl,place:"platClose",keys:[[P.pl,960,540,1.04],[P.pl+0.1,1010,540,1.1]],d:2.4,draw:(x,tt)=>{
       gv_behind(x,"sam",GV_PX.seat[0],GV_PX.top,GV_PX.seat[1],{pose:"listen",pose2:"reach",mix:gv_io(tt,c.own-0.4,P.id+0.2,0.3),flip:true,t:tt});
       ac_platDesk(x);ac_platScreens(x,tt,fin(tt,c.own-0.1,0.5));}},
-    // his screen, close: the agent's access, each line as it's said; then how it works with the data
+    // Sam's screen, close: the agent's access, each line as it's said; then how it works with the data
     {at:P.acc,place:"screenPlat",keys:[[P.acc,860,500,1.16],[P.works-0.5,1070,500,1.16]],d:1.8,draw:(x,tt)=>ac_access(x,tt,{rows:P.rows.map((s,i)=>i?clamp((tt-s+0.1)/0.6,0,1):fin(tt,P.acc,0.3))})},
     // who reviews what: approvals come from the owners; the agent is on no line, and its approve button stays grey
     {at:P.who,place:"screenBig",keys:[[P.who,960,500,1]],push:0.02,draw:(x,tt)=>ac_who(x,tt,{own:fin(tt,P.owners-0.2,0.6),ag:fin(tt,P.cant-0.1,0.5),

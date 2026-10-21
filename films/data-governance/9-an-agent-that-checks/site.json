@@ -1,0 +1,25 @@
+{
+  "kicker": "Data governance, checked on every change",
+  "kicker_es": "Gobernanza de datos, revisada en cada cambio",
+  "title_es": "Un agente que revisa",
+  "h1": "An agent that checks: governance's rules as steps an agent follows on every change, and people who decide",
+  "h1_es": "Un agente que revisa: las reglas de gobernanza como pasos que un agente sigue en cada cambio, y personas que deciden",
+  "lead": "Imagined, a few years from now: at three in the morning, an agent reads Anil's change against governance's written rules and leaves a comment, and at eight Anil decides. Back to today, his first change fails three checks with thirteen problems, and waits for Jun, like every change nobody else owns. So Yusuf and Noor write governance's rules as a skill: plain steps an agent follows on every change. It finds, drafts and flags, says where it isn't sure, and brings each decision to the right person. And the agent is governed too: its own identity, little access, and no approvals.",
+  "lead_es": "Imaginado, dentro de unos años: a las tres de la mañana, un agente lee el cambio de Anil frente a las reglas escritas de gobernanza y deja un comentario, y a las ocho Anil decide. De vuelta a hoy, su primer cambio falla tres verificaciones con trece problemas y espera a Jun, como todo cambio sin otro dueño. Así que Yusuf y Noor escriben las reglas de gobernanza como una skill: pasos simples que un agente sigue en cada cambio. Encuentra, propone y señala, dice dónde no está seguro, y lleva cada decisión a la persona indicada. Y el agente también está gobernado: su propia identidad, pocos accesos y ninguna aprobación.",
+  "description": "A film about data governance and AI agents: an imagined night when an agent checks a change and a person decides; today's change, with thirteen problems and one person to ask; governance's rules written as a skill, step by step; the agent's review, each finding with its line, rule, draft and who decides; what it wasn't sure of, and the owners' approvals; the agent governed too, with its own identity and little access; and why it can only check what's written plainly.",
+  "description_es": "Una película sobre gobernanza de datos y agentes de IA: una noche imaginada en la que un agente revisa un cambio y una persona decide; el cambio de hoy, con trece problemas y una sola persona a quien preguntar; las reglas de gobernanza escritas como una skill, paso a paso; la revisión del agente, cada hallazgo con su línea, su regla, un borrador y quién decide; lo que no sabía con certeza, y las aprobaciones de los dueños; el agente también gobernado, con su propia identidad y pocos accesos; y por qué solo puede revisar lo que está escrito con claridad.",
+  "card": "Thirteen problems, and one person every change waits for. Write governance's rules as steps an agent follows on every change, and let people decide.",
+  "card_es": "Trece problemas, y una sola persona a la que espera cada cambio. Escribe las reglas de gobernanza como pasos que un agente sigue en cada cambio, y deja que las personas decidan.",
+  "chapters_es": {
+    "night": "Una noche, imaginada",
+    "today": "Trece problemas",
+    "skill": "Reglas que un agente puede seguir",
+    "review": "Tres hallazgos",
+    "decides": "Las personas deciden",
+    "agent": "También gobernado",
+    "written": "Solo lo que está escrito",
+    "close": "Esa noche"
+  },
+  "next_h": "You've seen an agent check every change while people decide. More films in the series are on the way.",
+  "next_h_es": "Viste a un agente revisar cada cambio mientras las personas deciden. Vienen más películas de la serie."
+}

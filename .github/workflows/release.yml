@@ -352,6 +352,16 @@ jobs:
                        "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
                        "films/a-sharper-sketch/source/src",
                        "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts"]},
+            {"name": "Rules with a home", "key": "rules-with-a-home-en",
+             "dir": "films/enterprise-architecture/9-rules-with-a-home/source", "lang": "en",
+             "player": "dist/film.js", "site_player": "site/assets/rules-with-a-home/film.js",
+             "video": "dist/rules-with-a-home.mp4", "file": "rules-with-a-home.mp4",
+             "captions": [["films/enterprise-architecture/9-rules-with-a-home/captions/en.srt", "rules-with-a-home.en.srt"], ["films/enterprise-architecture/9-rules-with-a-home/captions/es.srt", "rules-with-a-home.es.srt"]],
+             "paths": ["films/enterprise-architecture/9-rules-with-a-home/source", ":(exclude)films/enterprise-architecture/9-rules-with-a-home/source/src/i18n/es/captions.js", "films/enterprise-architecture/shared",
+                       "films/analytics-engineering/shared", "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js",
+                       "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src",
+                       "films/a-sharper-sketch/source/src",
+                       "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts"]},
             {"name": "A map people and agents can read", "key": "a-map-people-and-agents-can-read-en",
              "dir": "films/enterprise-architecture/11-a-map-people-and-agents-can-read/source", "lang": "en",
              "player": "dist/film.js", "site_player": "site/assets/a-map-people-and-agents-can-read/film.js",
@@ -543,7 +553,7 @@ jobs:
           - *Data for Films* and *That's not quite right*, the Making of films, on how the films are drawn and how they're made: \`data-for-films.mp4\` and \`thats-not-quite-right.mp4\` (English, with English and Spanish captions).
           - *From words to data*, seven films on data modelling, from language and meaning to keeping it true with AI: \`whats-in-a-word.mp4\`, \`older-than-the-systems.mp4\`, \`built-to-write-built-to-read.mp4\`, \`many-ways-to-read.mp4\`, \`both-at-once.mp4\`, \`meaning-machines-can-read.mp4\`, \`keeping-it-true.mp4\` (English, with English and Spanish captions).
           - *In the weeds of data crafting*, ten films for analytics engineers, from a question to tested and documented dbt models: \`declare-it-then-build-it.mp4\`, \`start-from-a-question.mp4\`, \`what-makes-it-the-same-one.mp4\`, \`one-row-of-what-and-when.mp4\`, \`promises-and-proofs.mp4\`, \`built-in-layers.mp4\`, \`who-owns-what.mp4\`, \`an-agent-on-the-team.mp4\`, \`written-once.mp4\`, \`end-to-end.mp4\` (English, with English and Spanish captions).
-          - *The map before the data*, a series on enterprise architecture and why it matters for data, eight of eleven films: \`day-one.mp4\`, \`who-it-serves.mp4\`, \`why-it-moves.mp4\`, \`what-it-must-do.mp4\`, \`how-value-reaches-people.mp4\`, \`who-does-it.mp4\`, \`today-and-where-its-going.mp4\`, \`now-the-questions-appear.mp4\` (English, with English and Spanish captions).
+          - *The map before the data*, a series on enterprise architecture and why it matters for data, nine of eleven films: \`day-one.mp4\`, \`who-it-serves.mp4\`, \`why-it-moves.mp4\`, \`what-it-must-do.mp4\`, \`how-value-reaches-people.mp4\`, \`who-does-it.mp4\`, \`today-and-where-its-going.mp4\`, \`now-the-questions-appear.mp4\`, \`rules-with-a-home.mp4\` (English, with English and Spanish captions).
           - *The same one, everywhere*, a series on master and reference data, nine films coming out one by one, such as \`one-person-many-roles.mp4\` (English, with English and Spanish captions).
 
           Rendered for this release, from commit $GITHUB_SHA: ${RENDERED:-none; every video is carried over from the previous release}.

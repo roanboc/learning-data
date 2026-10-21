@@ -22,8 +22,8 @@
     "table": "Una tabla, cualquier fecha",
     "stays": "La persona se queda"
   },
-  "next_h": "You've given every role a start, an end and an owner. More films in the series are on the way.",
-  "next_h_es": "Le diste a cada rol un inicio, un fin y un responsable. Vienen más películas de la serie.",
+  "next_h": "You've given every role a start, an end and an owner.",
+  "next_h_es": "Le diste a cada rol un inicio, un fin y un responsable.",
   "past": ["Rome, 204 to 184 BC: Cato's ladder of offices, each held for a year, and the census", "Each role has its start and its end, and the person outlives them all."],
   "past_es": ["Roma, del 204 al 184 a. C.: la escalera de cargos de Catón, cada uno por un año, y el censo", "Cada rol tiene su inicio y su fin, y la persona los sobrevive a todos."]
 }

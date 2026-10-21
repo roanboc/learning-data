@@ -310,10 +310,10 @@ function tt_carSide(m,col,k){const M=TT_MODEL[m],key="ttCar|"+m+"|"+col.join(","
   // door seams and handles, in pencil
   q.strokeStyle=rgba(wc_dim(col,0.45),0.75);q.lineWidth=Math.max(1,K*0.008);q.beginPath();for(const dx of M.doors){q.moveTo(X(dx),Y(0.3));q.lineTo(X(dx),Y(0.98));}q.stroke();
   q.fillStyle=rgba(wc_dim(col,0.5),0.9);for(let i=0;i<M.doors.length-1;i++)q.fillRect(X(M.doors[i]+0.08),Y(0.86),0.16*K,Math.max(1,0.03*K));
-  // the lamps: red at the back, amber and white at the front; a mirror by the front window
+  // the lamps: red at the back, amber and white at the front; a mirror at the front window's front corner
   q.fillStyle="rgba(196,56,46,0.95)";q.fillRect(X(0),Y(0.86),0.09*K,0.2*K);q.fillStyle="rgba(236,170,60,0.95)";q.fillRect(X(M.L-0.1),Y(0.74),0.1*K,0.08*K);
   q.fillStyle="rgba(246,244,232,0.95)";q.fillRect(X(M.L-0.08),Y(0.86),0.08*K,0.1*K);
-  const mw=M.win[M.win.length-1][0];q.fillStyle=rgba([50,50,56],0.95);q.beginPath();q.ellipse(X(mw[0]+0.62),Y(1.02),0.07*K,0.05*K,0,0,TAU);q.fill();});}
+  const mw=M.win[M.win.length-1][1];q.fillStyle=rgba([50,50,56],0.95);q.beginPath();q.ellipse(X(mw[0]-0.04),Y(1.02),0.07*K,0.05*K,0,0,TAU);q.fill();});}
 // a car on the avenue: its model and colour, the back of it at X, its lane's centre at d; o.wheel turns the wheels (metres travelled),
 // o.brake lights its brake lamps, o.reverse its white reversing lamps, o.driver(ctx, x, y, k) draws the driver in the front window
 function tt_car(ctx,c,m,col,X,d,o){o=o||{};const M=TT_MODEL[m],dn=d-M.w/2,df=d+M.w/2,k=c.f/(c.d0+dn);if(c.d0+dn<0.5)return;
@@ -376,21 +376,32 @@ Object.assign(PEOPLE,{
     top:{kind:"sweater",c:[44,44,50]},bottom:{c:[38,38,44]},shoe:[24,22,24],build:{sh:70,hip:60,h:0.99}},
   ttOfficer:{name:"",role:"traffic officer",side:"",edge:GV_PAST,seed:75,skin:[196,150,112],hair:{style:"cropped",c:[26,22,22]},hat:"ttCap",hatC:[88,100,76],
     top:{kind:"blazer",c:[94,106,80],inner:[224,222,204]},bottom:{c:[88,98,76]},shoe:[24,22,24],build:{sh:76,hip:62,h:1.0}},
+  ttGrey:{name:"",role:"",side:"",edge:GV_PAST,seed:69,skin:[222,184,150],hair:{style:"bun",c:[176,172,166]},earrings:[200,200,210],
+    top:{kind:"cardigan",c:[96,110,130],inner:[234,228,214]},bottom:{kind:"skirt",c:[110,86,74]},legs:[200,164,134],shoe:[60,46,40],build:{sh:64,hip:62,h:0.9}},
+  ttCurly:{name:"",role:"",side:"",edge:GV_PAST,seed:70,skin:[150,104,76],hair:{style:"coily",c:[26,22,22]},
+    top:{kind:"overshirt",c:[64,70,84],inner:[226,206,150]},bottom:{c:[110,100,86]},shoe:[40,32,30],build:{sh:72,hip:60,h:0.98}},
   ttDrv1:{name:"",role:"driver",side:"",edge:GV_PAST,seed:76,skin:[220,180,146],hair:{style:"side",c:[44,34,30]},top:{kind:"shirt",c:[226,214,190]},bottom:{c:[70,70,80]},shoe:[40,30,26],build:{sh:74,hip:60,h:1.0}},
   ttDrv2:{name:"",role:"driver",side:"",edge:GV_PAST,seed:77,skin:[190,146,110],hair:{style:"cropped",c:[30,26,24]},glasses:[40,40,44],top:{kind:"blazer",c:[60,62,74],inner:[230,230,236]},bottom:{c:[60,62,74]},shoe:[30,28,30],build:{sh:76,hip:62,h:1.0}},
   ttDrv3:{name:"",role:"driver",side:"",edge:GV_PAST,seed:78,skin:[226,188,158],hair:{style:"bob",c:[96,60,40],streak:[150,110,80]},top:{kind:"sweater",c:[140,60,70]},bottom:{c:[60,60,70]},shoe:[40,30,26],build:{sh:64,hip:60,h:0.94}}});
-// what the people of the crossing do: whistle with two fingers, clap, bow, show the way back with open palms, hold an umbrella or a bag
+// what the people of the crossing do: whistle with two fingers, clap with their hands up (seen over the cars), bow, show the way back with
+// open palms, hold an umbrella or a bag
 Object.assign(POSE,{
   tt_whistle:{L:[0.12,-0.06],R:[2.67,-1.27],feet:26,shift:2,tilt:-0.04,turn:0.1,gaze:[0,-0.3],look:0},
   tt_lips:{L:[0.12,-0.06],R:[0.1,0.05],feet:26,shift:3,tilt:-0.07,turn:0.14,gaze:[0.2,-0.2],look:0},
-  tt_clapA:{L:[0.35,-1.62],R:[0.35,-1.62],feet:26,shift:2,tilt:0.02,turn:0.08,gaze:[0.2,0],look:0},
-  tt_clapB:{L:[0.35,-2.12],R:[0.35,-2.12],feet:26,shift:2,tilt:0.02,turn:0.08,gaze:[0.2,0],look:0},
+  tt_clapA:{L:[2.75,-2.45],R:[2.75,-2.45],feet:26,shift:2,tilt:0.0,turn:0.05,gaze:[0.2,-0.4],look:0},
+  tt_clapB:{L:[2.75,-2.9],R:[2.75,-2.9],feet:26,shift:2,tilt:0.0,turn:0.05,gaze:[0.2,-0.4],look:0},
   tt_bow:{L:[0.3,-1.3],R:[0.95,1.45],hand:"open",feet:20,shift:0,tilt:0.12,turn:0,gaze:[0,1],look:1},
   tt_palms:{L:[0.55,1.3],R:[0.5,1.25],hand:"open",both:true,feet:30,shift:-4,tilt:-0.05,turn:-0.25,gaze:[-0.8,0],look:0},
   tt_sweep:{L:[1.3,2.35],R:[0.42,0.95],hand:"open",both:true,feet:32,shift:-6,tilt:-0.08,turn:-0.3,gaze:[-0.9,-0.1],look:0},
   tt_umbrella:{L:[0.12,-0.06],R:[0.3,2.64],feet:24,shift:2,tilt:0.02,turn:0.06,gaze:[0,0],look:0},
   tt_bag:{L:[0.12,-0.08],R:[0.08,0.02],feet:24,shift:-2,tilt:0.03,turn:0.08,gaze:[0,0],look:0},
-  tt_nod:{L:[0.13,-0.1],R:[0.09,0.06],feet:25,shift:3,tilt:0.05,turn:0.18,gaze:[0.5,0.2],look:0}});
+  tt_nod:{L:[0.13,-0.1],R:[0.09,0.06],feet:25,shift:3,tilt:0.05,turn:0.18,gaze:[0.5,0.2],look:0},
+  // "after you": one open hand shows the way back, low; the other on the heart. tt_after2 points back over the car, to behind the line
+  tt_after:{L:[0.95,1.05],R:[0.3,-2.36],hand:"open",feet:30,shift:-4,tilt:-0.02,turn:-0.3,gaze:[-0.8,0.3],look:0},
+  tt_after2:{L:[1.5,1.95],R:[0.3,-2.36],hand:"open",feet:32,shift:-6,tilt:-0.05,turn:-0.34,gaze:[-0.9,-0.1],look:0},
+  // looking to one side: our left (tt_lookL) or right (tt_lookR)
+  tt_lookL:{L:[0.13,-0.1],R:[0.09,0.06],feet:25,shift:-2,tilt:-0.03,turn:-0.36,gaze:[-0.9,0.1],look:0},
+  tt_lookR:{L:[0.13,-0.1],R:[0.09,0.06],feet:25,shift:2,tilt:0.03,turn:0.36,gaze:[0.9,0.1],look:0}});
 // a whistle's mouth, a laugh, a stubborn look
 EXPR.ttWhistle={bi:-3,bo:-1,arch:-3,eye:0.9,smile:0,open:0.55,mw:9};
 EXPR.ttLaugh={bi:-2,bo:-3.5,arch:-4,eye:0.62,happy:1,smile:1,open:1,mw:26};
@@ -416,16 +427,36 @@ torso=function(ctx,P,br,sh){tt_torso0(ctx,P,br,sh);if(!P.braces)return;const y0=
 // a pose with both palms open: the left arm drawn as the right one, mirrored
 const tt_arm0=arm;
 arm=function(ctx,P,s,a,br,po){if(s===-1&&po.both){ctx.save();ctx.scale(-1,1);tt_arm0(ctx,P,1,a,br,po);ctx.restore();return;}return tt_arm0(ctx,P,s,a,br,po);};
+// a notebook shut, held in front in both hands
+function tt_heldShut(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my+6);cx.rotate(-0.06);cx.fillStyle=rgba(GV_HOLD.teal,1);rr(cx,-60,-48,120,96,8);cx.fill();
+  cx.fillStyle=rgba(darken(GV_HOLD.teal,0.3),1);cx.fillRect(-60,-48,14,96);cx.restore();fingers(cx,P_,[[mx-60,my+12],[mx+60,my+8]]);}
 // a shopping bag in the hand, hanging
 function tt_heldBag(col){return(cx,P_,hands)=>{const h=hands[1];cx.save();cx.translate(h[0],h[1]);cx.strokeStyle=rgba(darken(col,0.3),1);cx.lineWidth=5;cx.beginPath();cx.moveTo(-22,34);cx.quadraticCurveTo(-18,-6,0,-6);cx.quadraticCurveTo(18,-6,22,34);cx.stroke();
   cx.beginPath();cx.moveTo(-40,30);cx.lineTo(40,30);cx.lineTo(46,150);cx.lineTo(-46,150);cx.closePath();litFill(cx,col,-46,30,46,150);seam(cx,col,0.5);
   cx.fillStyle=rgba([214,170,90],1);cx.beginPath();cx.ellipse(-12,30,18,9,0,0,TAU);cx.fill();cx.fillStyle=rgba([120,150,100],1);cx.beginPath();cx.ellipse(14,26,12,12,0,0,TAU);cx.fill();cx.restore();fingers(cx,P_,[h]);};}
 
+// the series' person (its shared people.js), able to do two things more: bow (o.bow, 0 to 1: the body above the hips leans towards us, so
+// it looks shorter and the head comes down) and nod (o.pitch, 0 to 1: the head dips). Without them it is the series' person
+function tt_person(ctx,id,x,y,s,o){o=o||{};const b=o.bow||0,pt=o.pitch||0;if(b<=0.001&&pt<=0.001)return person(ctx,id,x,y,s,o);
+  const P_=PEOPLE[id],po=blendPose(POSE[o.pose||"stand"],POSE[o.pose2],o.mix),E=o.E||EXPR[o.expr||"calm"],t=o.t||0,k=s*P_.build.h,br=Math.sin(t*1.7+P_.seed)*1.4,front=a=>Math.abs(a[1])>Math.PI*0.55;
+  if(!WC_RAW&&o.shadow!==false){ctx.save();ctx.translate(x,y);ctx.scale(k,k);const g=ctx.createRadialGradient(0,-4,4,0,-4,110);g.addColorStop(0,rgba([90,80,96],0.22));g.addColorStop(1,rgba([90,80,96],0));
+    ctx.fillStyle=g;ell(ctx,0,-4,110,17);ctx.fill();ctx.restore();}
+  outlined(ctx,cx=>{if(o.flip)cx.scale(-1,1);legs(cx,P_,po);cx.save();cx.translate(0,-292);cx.scale(1+0.05*b,1-0.3*b);cx.translate(0,292);
+    if(!front(po.L))arm(cx,P_,-1,po.L,br,po);if(!front(po.R))arm(cx,P_,1,po.R,br,po);
+    limb(cx,[[0,-470+br],[0,-440+br]],30,30,darken(P_.skin,0.12),[-20,-470,20,-440]);torso(cx,P_,br,po.shift);
+    cx.save();cx.translate(po.shift*0.2,-452+br);cx.rotate(po.tilt+(o.nod||0));cx.translate(0,-50+po.look*2+9*pt);cx.scale(1,(1-0.1*b-0.08*pt)/(1-0.3*b));head(cx,P_,E,Object.assign({},po,{look:Math.max(po.look,pt)}),t);cx.restore();
+    const hands=()=>[handAt(P_,-1,po.L,br),handAt(P_,1,po.R,br)];
+    if(front(po.L))arm(cx,P_,-1,po.L,br,po);if(front(po.R))arm(cx,P_,1,po.R,br,po);
+    if(o.carry){if(o.flip)cx.scale(-1,1);o.carry(cx,P_,o.flip?hands().map(h=>[-h[0],h[1]]):hands());if(o.flip)cx.scale(-1,1);}cx.restore();},
+    x,y,k,P_.edge,[o.wide?-400:-250,P_.hat?-720:-650,o.wide?400:250,10],o.glow);}
+// several poses at once, for someone going from one thing to the next: each [name, weight] blended over the ones before it, from standing.
+// Kept under key (one per person) for this frame's drawing
+function tt_mix(key,list){let po=POSE.stand;for(const [n,w] of list)if(w>0.001)po=blendPose(po,POSE[n],Math.min(1,w));POSE[key]=po;return key;}
 // a person of the crossing standing at (X, d), on the pavement (0.15 m up) or the road; drawn at a size rounded to a step and scaled the
 // rest of the way, so someone walking towards us doesn't need a new canvas every frame. o.bob lifts them (metres), o.umbrella opens one
 // over them, o.marks draws what they're doing (whistling, clapping) above them; other options go to the series' person
 function tt_who(ctx,c,id,X,d,o){o=o||{};if(c.d0+d<0.8)return;const Y=o.Y==null?(d>TT_ST.far-0.1||d<0.1?0.15:0):o.Y,p=tt_pr(c,X,d,Y),s=p[2]*1.7/560;if(p[0]<-300||p[0]>W+300)return;
-  const q=Math.max(0.04,Math.round(s/0.016)*0.016),r=s/q,x=p[0],y=p[1]-(o.bob||0)*p[2];ctx.save();ctx.translate(x,y);ctx.scale(r,r);person(ctx,id,0,0,q,o);ctx.restore();
+  const q=Math.max(0.04,Math.round(s/0.016)*0.016),r=s/q,x=p[0],y=p[1]-(o.bob||0)*p[2];ctx.save();ctx.translate(x,y);ctx.scale(r,r);tt_person(ctx,id,0,0,q,o);ctx.restore();
   const k=s*PEOPLE[id].build.h;if(o.umbrella)tt_umbrellaOver(ctx,PEOPLE[id],x,y,k,o.umbrella,o);if(o.marks)o.marks(ctx,x,y,k);}
 // an umbrella over someone, from their right hand: a dome of cloth with its ribs, on a dark shaft
 function tt_umbrellaOver(ctx,P,x,y,k,col,o){const po=blendPose(POSE[o.pose||"stand"],POSE[o.pose2],o.mix),h=handAt(P,1,po.R,0),hx=x+(o.flip?-h[0]:h[0])*k,hy=y+h[1]*k,tx=x+(o.flip?-30:30)*k,ty=y-700*k;
@@ -433,13 +464,42 @@ function tt_umbrellaOver(ctx,P,x,y,k,col,o){const po=blendPose(POSE[o.pose||"sta
   const R_=190*k,pts=[];for(let i=0;i<=24;i++){const a=Math.PI+i/24*Math.PI;pts.push([tx+Math.cos(a)*R_,ty+Math.sin(a)*R_*0.5]);}for(let i=8;i>=0;i--){const u=i/8;pts.push([tx-R_+2*R_*u,ty+R_*0.08*Math.sin(u*Math.PI*8)**2]);}
   wc_wash(ctx,pts,col,{kind:"thing",lw:1.2,seed:P.seed});ctx.save();ctx.strokeStyle=rgba(wc_dim(col,0.35),0.6);ctx.lineWidth=Math.max(1,2.4*k);for(const u of [-0.5,0,0.5]){ctx.beginPath();ctx.moveTo(tx,ty-R_*0.5);ctx.quadraticCurveTo(tx+u*R_*0.7,ty-R_*0.42,tx+u*R_,ty);ctx.stroke();}ctx.restore();}
 // a whistle: small curved strokes rising from the mouth, in pencil, each fading as it rises (u: 0 to 1 through the whistle)
-function tt_whistleMarks(ctx,x,y,k,t,a){if(a<=0.01)return;const mx=x+8*k,my=y-478*k;ctx.save();ctx.lineCap="round";ctx.lineWidth=Math.max(1.4,5*k);
-  for(let i=0;i<3;i++){const u=((t*1.4+i/3)%1),r=(30+u*70)*k;ctx.strokeStyle=rgba(WC_PENCIL,a*0.85*(1-u));ctx.beginPath();ctx.arc(mx+20*k+u*40*k,my-u*90*k,r,-1.1,-0.2);ctx.stroke();}ctx.restore();}
-// a clap: short strokes flying out from the hands as they meet
-function tt_clapMarks(ctx,x,y,k,e,a){if(a<=0.01||e<=0.01)return;const cx=x,cy=y-372*k;ctx.save();ctx.lineCap="round";ctx.lineWidth=Math.max(1.2,4*k);ctx.strokeStyle=rgba(WC_PENCIL,a*e*0.85);
-  for(const an of [-2.4,-1.57,-0.74]){const r0=(46+20*(1-e))*k,r1=r0+40*k;ctx.beginPath();ctx.moveTo(cx+Math.cos(an)*r0,cy+Math.sin(an)*r0);ctx.lineTo(cx+Math.cos(an)*r1,cy+Math.sin(an)*r1);ctx.stroke();}ctx.restore();}
+function tt_whistleMarks(ctx,x,y,k,t,a){if(a<=0.01)return;const q=Math.max(k,0.32),mx=x+8*k,my=y-478*k;ctx.save();ctx.lineCap="round";ctx.lineWidth=Math.max(2.4,6*q);
+  for(let i=0;i<3;i++){const u=((t*1.4+i/3)%1),r=(40+u*90)*q;ctx.strokeStyle=rgba(WC_PENCIL,a*0.9*(1-u*0.8));ctx.beginPath();ctx.arc(mx+20*q+u*50*q,my-u*110*q,r,-1.1,-0.2);ctx.stroke();}ctx.restore();}
+// a clap: short strokes flying out from the hands as they meet, above the head
+function tt_clapMarks(ctx,x,y,k,e,a){if(a<=0.01||e<=0.01)return;const q=Math.max(k,0.32),cx=x,cy=y-600*k;ctx.save();ctx.lineCap="round";ctx.lineWidth=Math.max(2.2,5*q);ctx.strokeStyle=rgba(WC_PENCIL,a*e*0.9);
+  for(const an of [-2.4,-1.57,-0.74]){const r0=(50+24*(1-e))*q,r1=r0+50*q;ctx.beginPath();ctx.moveTo(cx+Math.cos(an)*r0,cy+Math.sin(an)*r0);ctx.lineTo(cx+Math.cos(an)*r1,cy+Math.sin(an)*r1);ctx.stroke();}ctx.restore();}
 // a driver at the wheel, seen through the car's far window: the person drawn with their head under the roof, kd pixels a metre
-function tt_driver(id,o){return(ctx,x,y,kd)=>{const s=kd*1.7/560,q=Math.max(0.04,Math.round(s/0.016)*0.016),r=s/q;ctx.save();ctx.translate(x,y+1.42*kd);ctx.scale(r,r);person(ctx,id,0,0,q,Object.assign({shadow:false},o));ctx.restore();};}
+function tt_driver(id,o){return(ctx,x,y,kd)=>{const s=kd*1.7/560,q=Math.max(0.04,Math.round(s/0.016)*0.016),r=s/q;ctx.save();ctx.translate(x,y+1.42*kd);ctx.scale(r,r);tt_person(ctx,id,0,0,q,Object.assign({shadow:false},o));ctx.restore();};}
+
+/* ---------- Bogotá: moving ---------- */
+// a ramp from 0 to 1 that speeds up over the first a of the way and slows down over the last a
+const tt_ramp=(u,a)=>u<=0?0:u>=1?1:u<a?u*u/(2*a*(1-a)):u>1-a?1-(1-u)*(1-u)/(2*a*(1-a)):(u-a/2)/(1-a);
+// someone walking a path of points (X, d) at v metres a second from t0: where they are, their step's swing and bob, when they arrive,
+// and which way they face (people face us; walking mostly sideways, they turn the way they go)
+function tt_path(t,t0,pts,v){let L=0;const seg=[];for(let i=1;i<pts.length;i++){const l=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);seg.push(l);L+=l;}
+  const T_=Math.max(0.2,L/v),a=Math.min(0.3,0.35/T_),u=clamp((t-t0)/T_,0,1),s=L*tt_ramp(u,a),moving=u>0&&u<1;let left=s,i=0;while(i<seg.length-1&&left>seg[i]){left-=seg[i];i++;}
+  const A=pts[i],B=pts[Math.min(i+1,pts.length-1)],k=seg[i]?clamp(left/seg[i],0,1):0,ph=s/0.7*Math.PI,amp=moving?Math.min(1,Math.min(u,1-u)*T_*2.5):0;
+  return{X:lerp(A[0],B[0],k),d:lerp(A[1],B[1],k),moving,swing:Math.sin(ph)*amp,bob:Math.abs(Math.sin(ph))*0.022*amp,end:t0+T_,flip:Math.abs(B[0]-A[0])>Math.abs(B[1]-A[1])*0.7&&B[0]<A[0]};}
+// a walker drawn: arms swinging while they move (o.keep: a pose held, an umbrella say, and only the bob)
+function tt_walker(ctx,c,id,w,o){o=o||{};const m=w.moving&&!o.keep?{pose2:w.swing>0?"walkA":"walkB",mix:Math.abs(w.swing)}:{};tt_who(ctx,c,id,w.X,w.d,Object.assign({bob:w.bob},o,m,w.moving?{flip:w.flip}:{}));}
+// a car along the avenue at t: it rolls up from v metres a second and stops with its back at X1 by t1 (over Ta seconds); then each move
+// [t0, t1, X] eases it to X, and [t0, "go"] drives it off. Returns where its back is, how far its wheels have turned, and its lamps
+function tt_drive(t,c){const Ta=c.Ta||2.4,D=c.v*Ta/2;let X,vel;
+  if(c.pass){X=c.X1+c.v*(t-c.t1);vel=c.v;return{X,wheel:X,brake:0,reverse:0};}
+  if(t<c.t1-Ta){X=c.X1-D-c.v*(c.t1-Ta-t);vel=c.v;}else if(t<c.t1){const u=(t-(c.t1-Ta))/Ta;X=c.X1-D*(1-u)*(1-u);vel=2*D*(1-u)/Ta;}else{X=c.X1;vel=0;}
+  let go=false;for(const m of c.moves||[]){if(t<m[0])break;if(m[1]==="go"){const dt=t-m[0];X+=1.3*dt*dt;vel=2.6*dt;go=true;break;}const u=clamp((t-m[0])/(m[1]-m[0]),0,1),X0=X;X=lerp(X0,m[2],ease(u));
+    vel=u>0&&u<1?(m[2]-X0)/(m[1]-m[0]):0;}
+  return{X,wheel:X,brake:!go&&vel>=0&&vel<3.5&&t>c.t1-Ta*0.8?1:0,reverse:vel<-0.05?1:0};}
+// the signal's lamp at t, from a list of [time, lamp]: the latest change passed, with a quick fade between
+function tt_lampAt(t,L){let i=0;for(let k=1;k<L.length;k++)if(t>=L[k][0])i=k;return{lamp:L[i][1],a:i>0?clamp((t-L[i][0])/0.12,0,1):1};}
+
+// the street's moving things drawn, the furthest first: cars as {m, col, X, d, o} and people as {id, X, d, o, walk, a} (a: how much
+// they've faded in, for people who come from far off)
+function tt_drawWorld(ctx,c,Wd){ctx.save();if(Wd.lamp)tt_signal(ctx,c,Wd.lamp.lamp,Wd.lamp.a);
+  const one=q=>q.walk?tt_walker(ctx,c,q.id,q.walk,q.o):tt_who(ctx,c,q.id,q.X,q.d,q.o);
+  const all=Wd.cars.map(k=>({z:k.d+0.4,f:()=>tt_car(ctx,c,k.m,k.col,k.X,k.d,k.o)})).concat(Wd.people.filter(q=>q.a==null||q.a>0.01).map(q=>({z:q.d,f:()=>q.a!=null&&q.a<1?withA(ctx,q.a,()=>one(q)):one(q)})));
+  all.sort((a,b)=>b.z-a.z).forEach(a=>a.f());ctx.restore();}
 
 /* the whole street, painted once for each camera and year */
 function tt_paintBogota(ctx,c,o){o=o||{};tt_sky(ctx,c,o.year===2012?12:5);tt_city(ctx,c);tt_hills(ctx,c);tt_streetEnd(ctx,c);

@@ -1,0 +1,11 @@
+id: CAP-007
+name: provide data products
+kind: capability
+definition: Shared data is offered as products, each with an owner, a contract, service levels and a lifecycle.
+owner: Yusuf Demir, data governance lead
+relationships:
+- composition: CAP-001 · govern data
+heat: amber
+evidence: 'six products, in ODPS and ODCS (project: products/); no catalogue or access requests yet ·
+  20 Oct 2026'
+status: confirmed

@@ -1,0 +1,12 @@
+id: CAP-006
+name: change without surprises
+kind: capability
+definition: A change says what it touches, and who to tell, before it's made; a breaking change is a new
+  version.
+owner: Yusuf Demir, data governance lead
+relationships:
+- composition: CAP-001 · govern data
+heat: green
+evidence: 'impact report on every pull request; versioned contracts (project: impact.py, DEC-PRJ-02) ·
+  20 Oct 2026'
+status: confirmed

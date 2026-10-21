@@ -1,0 +1,11 @@
+id: STP-004
+name: publish in the glossary
+kind: business process
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: ROL-001 · data governance lead
+- access (reads): OBJ-003
+- access (writes): OBJ-004
+- realization: SRV-002 · define or change a term
+- triggering: STP-005 · sync to every tool
+status: confirmed

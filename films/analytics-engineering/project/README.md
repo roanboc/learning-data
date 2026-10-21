@@ -40,6 +40,14 @@ Then, if you like:
 | `python scripts/generate/diagrams.py` | Regenerates each domain's physical diagram (`_<domain>__physical.md`) from `target/manifest.json` |
 | `python scripts/generate/decisions.py` | Checks every decision log and regenerates their index, `docs/decisions.md` |
 | `python scripts/check/requirements.py` | Checks the open requirements in `requirements/`, and lists them |
+| `python scripts/check/impact.py --base origin/main` | What a branch's change touches: changed and downstream models, contracts (additive or breaking), the meaning, decisions, tests, exposures, and who to ask. CI writes it on every pull request |
+| `python scripts/generate/products.py` | Writes each data product (`products/<name>.yml`) as an ODPS descriptor, and each of its outputs as an ODCS contract, from the dbt contracts, and validates them against the standards' schemas |
+| `python scripts/generate/scorecard.py` | After a build: the data quality scorecard, `docs/scorecard.md`, every test by domain and quality dimension, with what didn't pass and its owner |
+| `python scripts/generate/issues.py` | After a build: one issue per owner with a test that didn't pass, with the date to answer by and what closes it, in `target/issues/` (a dry run: the owners are fictional) |
+| `python scripts/generate/codeowners.py` | Regenerates `CODEOWNERS` from the owners in the metadata, so a change asks its owner to review it |
+| `python scripts/check/governance.py --measures` | Checks data governance's rules (an owner, a glossary term or a confirmed absence, classified columns, tests with an owner and a dimension, described columns), each message with its how-to in `docs/how-to/`, and measures them |
+| `python ../map/check.py` | Checks the governance part of Noor's map (`../map/`, kept beside the project as text) and writes its views: governance's services and promises, and who does what |
+| `dbt build --target databricks --profiles-dir . --vars '{personal_data_readers: <group>}'` | On Databricks: tags each column with its class, and masks direct personal data for everyone outside the group. One policy by tag instead, and Ontos: `docs/databricks-governance.md` |
 | `python scripts/generate/definitions.py` | Regenerates each domain's definitions (`_<domain>__definitions.md`) and `seeds/reference/shared/key_sets.csv` from the conceptual models |
 | `pip install dbt-metricflow==0.15.0`, then `DBT_PROFILES_DIR=. mf query --metrics learners_near_graduate_certificate --group-by learner_award__faculty_name` | Planning's answer, from the semantic layer's metric |
 | `dbt clean --profiles-dir .` | Deletes `target/`, the database with it, for a clean start |
@@ -144,7 +152,8 @@ project/
 │   ├── _groups.yml           who owns which models
 │   ├── _shared/              the university's map: its domains and key entities, at most 50
 │   │                         (_shared__conceptual.yml; _shared__conceptual.md [generated]); the
-│   │                         project's decision log; the version columns' doc blocks; the time spine
+│   │                         project's decision log; the version columns' doc blocks; the time spine;
+│   │                         who each owner is, and where their reviews go (_shared__owners.yml)
 │   ├── staging/<system>/     one view per source table
 │   ├── intermediate/student/ identity candidates and matches, timelines, the credit rule; unit tests
 │   ├── core/student/         learner, credential, credit towards an award ┐ the enterprise contract:
@@ -160,12 +169,16 @@ project/
 │                               _<domain>__definitions.md           [generated] doc blocks
 │                               _<domain>__physical.md              [generated] physical diagram
 ├── exposures/<consumer>/     who uses it: the census dashboard, the wallet app, the revenue forecast
+├── products/                 the data products: <name>.yml, each with its owner, domain, status,
+│                             outputs, service levels and support; odps/ and odcs/ [generated], the
+│                             same in the open standards, ODPS and ODCS; schemas/, the standards'
+│                             JSON schemas
 ├── macros/
 │   ├── shared/               conventions every domain uses: keys and hashes, point in time
 │   ├── planning/             Planning's near-award rule and count, written once
 │   └── adapters/             engine workarounds: DuckDB constraints
 ├── tests/
-│   ├── generic/              custom generic tests
+│   ├── generic/              custom generic tests, and dbt's four built-in ones, each with its quality dimension
 │   ├── rules/                business rules that must hold: identity decisions
 │   ├── reconciliation/       a mart against an expected seed: the census report, the tuition report
 │   └── governance/           rules about the project itself: no model reads an expected seed
@@ -180,18 +193,24 @@ project/
 │                             open → in_progress → done → what lasts moves to its home → deleted.
 │                             See requirements/README.md
 ├── docs/                     how the work is done: the process and the conventions; decisions.md
-│                             [generated], the index of every decision log
+│                             [generated], the index of every decision log; scorecard.md
+│                             [generated], the data quality scorecard from the last run
 ├── scripts/
-│   ├── generate/             definitions.py, diagrams.py and decisions.py: write the [generated]
-│   │                         files; --check in CI
+│   ├── generate/             definitions.py, diagrams.py, decisions.py, codeowners.py, scorecard.py
+│   │                         and products.py: write the [generated] files; --check in CI
 │   ├── check/                check_metric.py: the metric against the census report; requirements.py:
-│   │                         only open requirements, with what shows they're done; both in CI
+│   │                         only open requirements, with what shows they're done; governance.py:
+│   │                         data governance's rules, and their measures; impact.py: what a pull
+│   │                         request touches, and who to tell; all in CI
 │   ├── tools/                diff_against_main.py: a branch's table against main's, for review
 │   └── setup/                load_databricks.sql: loads the sample sources into Databricks
 ├── examples/planning/        Planning's own project, refing the core across projects (dbt Cloud only)
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
-├── skills/                   six skills for an agent: draft the conceptual model, profile, draft
-│                             a model, reconcile and diff, review metadata, sync the glossary
+├── CODEOWNERS                [generated] who reviews a change, from the owners in the metadata. An
+│                             example here: GitHub reads it only at a repository's root
+├── skills/                   seven skills for an agent: draft the conceptual model, profile, draft
+│                             a model, reconcile and diff, review metadata, sync the glossary,
+│                             review a pull request for governance
 └── target/, logs/            [build output] dbt's artifacts and the DuckDB database; dbt clean
 ```
 

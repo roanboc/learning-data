@@ -1,0 +1,8 @@
+id: ACT-002
+name: Mei Tanaka
+kind: business actor
+actor: person
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: ROL-002 · data owner
+status: confirmed

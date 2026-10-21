@@ -11,7 +11,7 @@ every step, a person approves. This page says what an agent may and may not do.
 - The conceptual model: [the university's map](models/_shared/_shared__conceptual.md) of domains and key entities, and each core domain and mart's own, in its folder ([`student`](models/core/student/_student__conceptual.yml), [`course`](models/core/course/_course__conceptual.yml), [`planning`](models/marts/planning/_planning__conceptual.yml), [`wallet`](models/marts/wallet/_wallet__conceptual.yml)): what each entity means, its key and its owner, and each consumer's question.
 - [`docs/decisions.md`](docs/decisions.md): every decision and why, indexed from each scope's log (`_<scope>__decisions.yml`, next to what it's about). Known limitations are on the model or source they affect (`meta.limitations`).
 - [`requirements/`](requirements/): what's still open while something is built. Temporary: when an item is done, move what lasts to its home and delete it. It's not a backlog: the team's backlog tool tracks the work (who, when, how big), and you can read it.
-- [`skills/`](skills/): how to do the six jobs agents do most here: draft the conceptual model, profile a source, draft a model, reconcile and diff, review metadata, sync the glossary.
+- [`skills/`](skills/): how to do the seven jobs agents do most here: draft the conceptual model, profile a source, draft a model, reconcile and diff, review metadata, sync the glossary, review a pull request for governance.
 
 ## What you may do
 
@@ -63,7 +63,12 @@ dbt build --profiles-dir .              # green; the one warning is by design (L
 python scripts/generate/definitions.py --check   # the doc blocks match the conceptual models
 python scripts/generate/diagrams.py --check      # the physical diagrams match the YAML
 python scripts/generate/decisions.py --check     # the decision logs are valid and indexed
+python scripts/generate/codeowners.py --check    # CODEOWNERS matches the owners in the metadata
+python scripts/generate/products.py --check      # the products' ODPS and ODCS files match the contracts
+python scripts/generate/scorecard.py             # the scorecard, from the build above
 python scripts/check/requirements.py             # only open requirements, each saying when it's done
+python scripts/check/governance.py               # an owner, a glossary term, classified columns, owned tests, descriptions
+python scripts/check/impact.py --base origin/main  # what your change touches, and who to tell: put it in the pull request
 ```
 
 Say in the pull request what you changed, why, what you checked, and the evidence.
@@ -77,4 +82,5 @@ Say in the pull request what you changed, why, what you checked, and the evidenc
 | The code: models, tests, macros | Jun Park, analytics engineer, in review |
 | A consumer contract | Its consumer: Planning, or the wallet app team |
 
+`CODEOWNERS`, generated from the owners in the metadata, asks each of them to review what they own.
 The agent recommends; people approve.

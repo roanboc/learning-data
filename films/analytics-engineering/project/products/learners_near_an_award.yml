@@ -1,0 +1,24 @@
+# A data product: what it's for, who answers for it, what it promises and to whom. Written by hand,
+# owned by its owner. scripts/generate/products.py writes its ODPS descriptor and an ODCS contract
+# for each output, from this file and the dbt contracts. The product's owner answers for the product;
+# the owners in the models' meta answer for what the data means.
+
+name: learners_near_an_award
+title: Learners near an award
+owner: "Clara Jensen, Planning"
+domain: planning
+status: active
+version: 1.0.0
+description:
+  purpose: How many learners are near a graduate certificate (within the near_award_credit_points var),
+    by faculty, as at census date. Planning's answer for the census, and for anyone who plans support
+    for those learners.
+  usage: Count learners with is_near_award. The numbers are as at census date, and reconcile with
+    the census report.
+outputs:
+  - {model: mart_planning__near_award}
+service_levels:
+  - {property: latency, value: 1, unit: d, description: Built every night.}
+  - {property: timeOfAvailability, value: "07:00", description: Ready by 7 a.m. on census day.}
+support:
+  - {channel: planning-data, tool: email, url: "mailto:planning@uni.example", scope: issues}

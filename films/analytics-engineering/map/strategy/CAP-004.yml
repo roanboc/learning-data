@@ -1,0 +1,13 @@
+id: CAP-004
+name: protect who sees what
+kind: capability
+definition: Personal data is classified where it's kept, and seen only by those with a purpose, for a
+  time.
+owner: Yusuf Demir, data governance lead
+relationships:
+- composition: CAP-001 · govern data
+heat: amber
+evidence: 'every column of a shared model classified, and tagged and masked on the platform from that
+  class (project: governance.py, DEC-PRJ-13); no access requests with a purpose and an end date yet ·
+  20 Oct 2026'
+status: confirmed

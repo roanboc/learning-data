@@ -1,0 +1,6 @@
+id: ROL-002
+name: data owner
+kind: business role
+definition: Decides what the data of a domain means, and who may use it.
+owner: Yusuf Demir, data governance lead
+status: confirmed

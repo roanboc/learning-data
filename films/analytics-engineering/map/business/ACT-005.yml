@@ -1,0 +1,8 @@
+id: ACT-005
+name: Noor
+kind: business actor
+actor: person
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: ROL-006 · data architect
+status: confirmed

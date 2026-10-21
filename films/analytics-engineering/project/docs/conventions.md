@@ -117,7 +117,7 @@ Every file in the project has one of four lifecycles. A file's header, or its fo
 | Lifecycle | Files | How they change |
 |---|---|---|
 | **Permanent**, written by hand | Sources, models, exposures, seeds, tests, macros, analyses, scripts; conceptual models (`_<domain>__conceptual.yml`, `_<domain>__conceptual.md`); decision logs (`_<scope>__decisions.yml`); `meta.limitations`; `docs/process.md`, `docs/conventions.md` | Edited in a pull request and reviewed. A decision is never deleted: when it's replaced, it's marked `superseded` and relates to what replaced it |
-| **Generated**, never edited by hand | `_<domain>__definitions.md`, `_<domain>__physical.md`, `models/_shared/_shared__conceptual.md`, `docs/decisions.md`, `seeds/reference/shared/key_sets.csv` | Rewritten by `scripts/generate/*` from the permanent files. Each says so in its first lines. CI fails if one is out of date: change the source, then run the script |
+| **Generated**, never edited by hand | `_<domain>__definitions.md`, `_<domain>__physical.md`, `models/_shared/_shared__conceptual.md`, `docs/decisions.md`, `seeds/reference/shared/key_sets.csv`, `CODEOWNERS`, `docs/scorecard.md`, `products/odps/`, `products/odcs/` | Rewritten by `scripts/generate/*` from the permanent files. Each says so in its first lines. CI fails if one is out of date: change the source, then run the script |
 | **Temporary**, deleted when done | Items in `requirements/`; a deprecated model version (`core_credential` v1) | Live only while the work they're about is under way, then go (below). CI fails on a requirement that's done |
 | **Build output**, never committed | `target/`, `logs/`, `*.duckdb`, `dbt_packages/` | Written by dbt, ignored by git, removed by `dbt clean` |
 
@@ -229,6 +229,7 @@ to itself, and they meet only on the public core. `examples/planning/` sketches 
 - Every relationship is tested (`relationships`); every closed set of values too (`accepted_values`).
 - A rule with logic gets unit tests, with mock rows (`unit_tests:`).
 - Severity is agreed with the data's owner, and written in the test's description.
+- A test checks the data: values, keys, links, numbers that add up. A rule about what people or processes do (a bill corrected on the next one) isn't a failing build: it's an exceptions model, owned by the team that acts on it, that tracks each case.
 - **A failing test is never weakened, deleted or given a lower severity to make it pass.** Fix the data, the code, or, with the owner's agreement, the expectation.
 
 ## Metadata
@@ -238,7 +239,7 @@ to itself, and they meet only on the public core. `examples/planning/` sketches 
 - `meta.domain`: the domain that owns the model, seed or source: `registrar`, `learning`, `hr`, `research` or `alumni` (application domains: the teams whose systems are the sources), `person`, `student` or `course` (data domains), `planning`, `wallet` or `finance` (business domains), or `shared`.
 - `meta.glossary_term`: the term in the domain's conceptual model a model or key holds.
 - `meta.limitations` on a model or a source table: what anyone using it needs to know and can't change, as `[{id: LIM-<SCOPE>-<nn>, text}]`, with `was:` naming the gap it came from, if any. An accepted gap ends here, with the decision that accepted it in the scope's log.
-- `meta.personal_data` on columns: `direct` (identifies a person: name, email, student ID, or a key that contains one) or `pseudonymous` (a hash of one). A column with neither holds no personal data.
+- `meta.personal_data` on every column of a public model or mart: `direct` (identifies a person: name, email, student ID, or a key that contains one), `pseudonymous` (a hash of one) or `none` (identifies no one). Elsewhere, a column with neither holds no personal data.
 - A description used in more than one place is a doc block, written once, in the folder of the domain that owns it (`_<domain>__columns.md`), or in `models/_shared/_shared__columns.md` when every domain shares it. A definition is written once, in the domain's conceptual model, or taken from the glossary term it names in `source:`.
 
 ### Definitions from the business glossary
@@ -251,3 +252,56 @@ hold, such as keys, identity rules and history. An entity the glossary doesn't d
 in the conceptual model, once governance confirms there's no term for it. The copy flows one way,
 from the glossary in: `skills/sync-the-glossary/` compares them on a schedule, and a changed term
 arrives as a pull request that says what it touches, for the owner to approve (DEC-PRJ-11).
+
+## Governance
+
+Data governance's rules for the project run as a check, `scripts/check/governance.py`, in CI and
+before every pull request (DEC-PRJ-12). They apply to what other teams read: the public core
+models and the marts.
+
+| Rule | What to add | Where |
+|---|---|---|
+| An owner | `owner:` on every domain, entity, kind and relationship; `meta.owner` and `meta.domain` on every public model and mart | The map (`_shared__conceptual.yml`), each domain's conceptual model, the model's YAML |
+| A glossary term, or a confirmed absence | `source:` with the term data governance named (DEC-PRJ-11), or `no_glossary_term: {confirmed_by, confirmed_on}` once governance confirms there's none; `meta.glossary_term` on every public model | Each core domain's conceptual model, the model's YAML |
+| Classified columns | `meta.personal_data`: `direct`, `pseudonymous` or `none` | Each column of a public model or mart |
+| Tests with an owner and a dimension | `meta.owner`: the owner of the data it checks; `meta.dimension`: completeness, uniqueness, validity, consistency, accuracy or timeliness, DAMA's six | Owners by folder in `dbt_project.yml`, or the test's own `meta` when its data has another owner; dimensions once per kind of test, in `tests/generic/` (dbt's four built-in tests are in `builtin.sql`, running dbt's own SQL), or the test's own `meta` |
+| Described columns | A `description` | Each column of a public model or mart. A warning until 1 December 2026, then an error |
+
+`python scripts/check/governance.py --measures` also prints how much of the project meets each rule.
+A new column with no class, a new entity with no term and a new test with no owner all fail the
+check: add what it asks for, in the place it names. Each message links a how-to in `docs/how-to/`,
+written for the person it stops. A new rule warns first: announced at the stewards' meeting, it runs
+as a warning with its how-to for at least six weeks, and fails from the date set when it's announced
+(DEC-PRJ-14, `STARTS` in the check).
+
+Owners route reviews too. `CODEOWNERS` is generated from the owners in the metadata
+(`scripts/generate/codeowners.py`, `--check` in CI): a change to a domain's conceptual model asks
+its owners, the data architect and data governance to review it; a change to a seed the business
+owns asks its owner. Every owner the metadata names must be in `models/_shared/_shared__owners.yml`,
+with where their reviews go, or the script stops.
+
+The tests' owners and dimensions make the scorecard: `scripts/generate/scorecard.py` reads the last
+run and writes `docs/scorecard.md`, every test by the domain of the data it checks and its quality
+dimension, and what didn't pass, with its owner. It's read from what ran, never from a survey.
+
+Every pull request says what it touches. `scripts/check/impact.py` compares the branch with its
+base: the models, seeds and tests that changed, what's downstream, each public model's and mart's
+contract (an added column is additive; a removed, renamed or retyped one breaks consumers and needs
+a new version, and the check fails without one), the entities whose meaning changed, the decisions
+implemented in them, the exposures, and the owners to ask. CI writes it into the run's summary.
+
+Every public model and mart is an output of one data product, in `products/<name>.yml`: its owner,
+domain, status (draft, active, deprecated or retired), purpose and usage, outputs, service levels
+and support, written by its owner. `scripts/generate/products.py` writes each product in the open
+standards, from that file and the dbt contracts: an ODPS descriptor (`products/odps/`) and an ODCS
+contract for each output (`products/odcs/`), with the columns, types, keys, classes, tests and known
+limitations taken from the models' YAML, and the consumers from the lineage. `--check` in CI fails
+if they're out of date, don't validate against the standards' schemas, or a shared model is in no
+product.
+
+On Databricks, the class goes to the platform too (DEC-PRJ-13, `macros/governance/personal_data.sql`):
+after each table builds, every classified column gets a Unity Catalog tag, `personal_data`, with its
+class; and when the var `personal_data_readers` names a group, each column of direct personal data
+gets a mask, so only that group sees the value. Nothing repeats the class: change it in the YAML and
+the next build changes the tag. DuckDB has no tags or masks, and leaves both out. How to set it up,
+with one policy by tag instead of a mask per column, and the product catalogue: `docs/databricks-governance.md`.

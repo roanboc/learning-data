@@ -1,0 +1,6 @@
+id: ROL-005
+name: product owner
+kind: business role
+definition: 'Answers for a data product: its contract, service levels, consumers and lifecycle.'
+owner: Yusuf Demir, data governance lead
+status: confirmed

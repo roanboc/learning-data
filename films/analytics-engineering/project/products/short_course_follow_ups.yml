@@ -1,0 +1,20 @@
+# A data product: what it's for, who answers for it, what it promises and to whom. Written by hand,
+# owned by its owner. scripts/generate/products.py writes its ODPS descriptor and an ODCS contract
+# for each output, from this file and the dbt contracts.
+
+name: short_course_follow_ups
+title: Short-course follow-ups
+owner: Learning team
+domain: learning
+status: active
+version: 1.0.0
+description:
+  purpose: The short-course enrolments the learning team still has to match to a learner, because
+    they have no email, and how long each has been waiting (DEC-SC-01).
+  usage: For the learning team's follow-up, each morning. It names no one; the platform holds who enrolled.
+outputs:
+  - {model: mart_learning__enrolments_to_follow_up}
+service_levels:
+  - {property: latency, value: 1, unit: d, description: Built every night.}
+support:
+  - {channel: learning-data, tool: email, url: "mailto:learning@uni.example", scope: issues}

@@ -4,6 +4,7 @@
 
 ## Decided
 
+<!-- decided: made by site-tools/build_series.py from decided.md, the series' and each film's -->
 | Date | Decision |
 |---|---|
 | 16 October 2026 | A series on data governance, and a companion series on master and reference data. Both align with the series on definitions and modelling (*From words to data*, *In the weeds of data crafting*). |
@@ -13,6 +14,7 @@
 | 16 October 2026 | A second part, *With the tools*: films on Databricks and dbt that implement the governance elements, each expanding the films of the first part it names. It includes data products and a marketplace with open formats for contracts and products, with Ontos (Databricks Labs) as the example. |
 | 16 October 2026 | Governance is about people and processes first. Tools help, and the series shows them, but governance is human work: understanding, motivation, change management, support and guidance. Every film shows its people side, and the last film, *Teachers of data*, is about it. |
 | 16 October 2026 | The governance team are the teachers of data, where all the pieces come together, as DAMA's wheel shows with governance at its centre. The proposal maps which of DAMA's knowledge areas each series and film covers. |
+<!-- /decided -->
 
 ## The brief
 

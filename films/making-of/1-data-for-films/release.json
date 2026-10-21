@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Data for Films",
+    "key": "data-for-films-en",
+    "dir": "films/making-of/1-data-for-films/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/making-of/data-for-films.js",
+    "video": "dist/data-for-films.mp4",
+    "file": "data-for-films.mp4",
+    "captions": [["films/making-of/1-data-for-films/captions/en.srt", "data-for-films.en.srt"], ["films/making-of/1-data-for-films/captions/es.srt", "data-for-films.es.srt"]],
+    "paths": ["films/making-of/1-data-for-films/source", ":(exclude)films/making-of/1-data-for-films/source/src/i18n/es/captions.js", "films/from-words-to-data/shared/src/phone.js", "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts"],
+    "legibility": {"texts": 463, "under_28": "0%", "under_20": 0, "median": 28, "status": "Reworked"}
+  }
+]

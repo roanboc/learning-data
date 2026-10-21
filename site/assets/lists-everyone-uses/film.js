@@ -3002,8 +3002,8 @@ scene("elsewhere",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s
       wc_white(ctx,"linh",x+108,M5_PY+600,0.5,[],{a:fin(t,t1-0.2,0.6)});
       arrive(ctx,x+500,M5_PY+330,t,t1-0.1,()=>m5_grid(ctx,x+196,M5_PY+210,604,list,cols,rows,{rowA:rows.map((r,k)=>fin(t,t1+0.2+k*0.15,0.4)),
         hi:[[bad,1,WC_BADGE,fin(t,t2,0.5)],[bad,0,WC_NO,fin(t,tW+0.3,0.5)*0.5]]}),{dy:14});
-      // the wrong value, and a real person it happens to; the ring pulses with the score's beat (92 a minute, from tPer - 0.3)
-      const wp=fin(t,tPer-0.3,0.5);if(wp>0.01){const pulse=0.5+0.5*Math.cos((t-tPer+0.3)*Math.PI*2*92/60);wc_ring(ctx,x+108,M5_PY+460,78,180,clamp((t-tPer+0.3)/0.7,0,1),{seed:100+i,col:WC_NO,a:0.6+0.3*pulse});}});});
+      // the wrong value, and a real person it happens to, ringed in red: drawn once, and then still
+      const wp=fin(t,tPer-0.3,0.5);if(wp>0.01)wc_ring(ctx,x+108,M5_PY+460,78,180,clamp((t-tPer+0.3)/0.7,0,1),{seed:100+i,col:WC_NO,a:0.75});});});
   m5_close(ctx,S);wc_paperOver(ctx,S);});
 
 /* ---------- 11. Who keeps it ---------- */

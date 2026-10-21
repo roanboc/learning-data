@@ -9,6 +9,7 @@
     "scenes.js"
   ],
   "poster": ["keeps", "line", -0.8],
+  "story": ["codes"],
   "say": [
     ["\\bNguyen\\b", "Nwin"],
     ["\\bLinh's\\b", "Lin's"],

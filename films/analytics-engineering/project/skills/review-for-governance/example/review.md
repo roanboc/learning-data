@@ -20,7 +20,7 @@ counts from the built mart, never its values.
 `models/marts/health/_health__models.yml`, line 8: the mart's `meta` has no `owner` and no `domain`
 (`governance.py`). The conceptual model names the Faculty of Health as the owner of *learner progress*
 (`_health__conceptual.yml`, line 26), but `models/_shared/_shared__owners.yml` doesn't say how to reach the
-faculty (`codeowners.py`), so no one is asked to review a change to it: the impact report says "Who to ask:
+faculty (`codeowners.py`), so no owner is asked to review a change to it: the impact report says "Who to ask:
 Nobody named". And the mart is in no product (`products.py`).
 
 - **The rule:** every model other teams read has an owner (the governance check, rule 1), and every mart is part
@@ -29,7 +29,7 @@ Nobody named". And the mart is in no product (`products.py`).
   `_shared__owners.yml`, with the address its reviews go to (**which address?** I haven't guessed one); a product,
   `products/health_learner_progress.yml`, owned by the faculty; the faculty as the owner of tests in `marts/health`
   (`dbt_project.yml`); and a `health` group, like the other consumers'.
-- **Who decides:** data governance, for a new owner; Noor, for the owner register.
+- **Who decides:** data governance, for a new owner and the owner register.
 
 ### 2. Ten columns don't say whether they identify a person
 
@@ -41,7 +41,7 @@ each does, nothing masks it: on Databricks, the mask follows the class (DEC-PRJ-
 | `email` | direct | 7 rows, 6 distinct; 7 look like an email |
 | `full_name` | direct, **not sure** | 7 rows, 7 distinct. Its name says it's a name; please confirm |
 | `learner_key` | pseudonymous | 7 rows, 7 distinct; 7 look like a hash |
-| `award_key` | pseudonymous, **not sure** | 7 rows, only 2 distinct; 7 look like a hash. Two values for seven learners: it may not identify a person. What does it hash? |
+| `award_key` | pseudonymous, **not sure** | 7 rows, only 2 distinct; 7 look like a hash. Its description says it's the award's hash key, and two values for seven learners agree: it may not identify a person. If it hashes the award's code, it's `none`: please confirm |
 | `award_code`, `award_name`, `faculty_code`, `credit_points_required`, `credit_points_earned`, `credit_points_remaining` | none | no email, ID or hash in any of them |
 
 - **The rule:** every column of a model other teams read says whether it identifies a person, with `direct`,

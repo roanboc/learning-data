@@ -155,12 +155,12 @@ const tt_nodAt=(tt,t0,t1,ph)=>0.06*Math.max(0,Math.sin((tt-t0)*TAU*0.9+(ph||0)))
 function tt_heldCard(cx,P_,hands){const h=hands[1];cx.save();cx.translate(h[0]+10,h[1]-34);cx.rotate(-0.12);cx.fillStyle="rgba(60,50,40,0.2)";cx.fillRect(-60,-30,128,72);
   cx.fillStyle="#fffdf6";cx.fillRect(-64,-36,128,72);cx.fillStyle=rgba(WC_MUTED,0.45);cx.fillRect(-40,-10,80,6);cx.fillRect(-30,8,60,6);cx.restore();fingers(cx,P_,[h]);}
 // Yusuf's office, and what changes in it over the film: his board's content, small (o.board, as tt_govBoard takes it); the framed score
-// (o.frame, 1 on the wall, 0 taken down; o.glow); the measures where it hung (o.ms); the shelf (o.bind); the in-tray (o.tip; o.tray false
-// once it's gone); the box (o.box, as tt_box takes it); the card on the door (o.door). Small type is drawn on purpose (o.read lists what
-// this shot reads, and is left to the legibility check)
+// (o.frame, 1 on the wall, 0 taken down; o.glow; o.ghost, where it hung); the measures there (o.ms); the shelf (o.bind); binder 29 open on
+// the desk (o.desk29); the in-tray (o.tip; o.tray false once it's gone); the box (o.box, as tt_box takes it); the card on the door
+// (o.door). Small type is drawn on purpose (o.read lists what this shot reads, and is left to the legibility check)
 function tt_office(x,tt,o){o=o||{};const r=o.read||[];tt_govBoard(x,GV_OFF.board,o.board||{},{deco:true});
-  const fr=o.frame==null?1:o.frame;if(fr>0.01)tt_frame(x,GV_OFF.score[0],GV_OFF.score[1],fr,o.glow||0,!r.includes("frame"));
-  if(o.ms)tt_measures(x,o.ms,true);tt_binders(x,o.bind||{});if(o.tray!==false)tt_tray(x,o.tip||0,!r.includes("tray"));
+  const fr=o.frame==null?1:o.frame;if(fr>0.01)tt_frame(x,GV_OFF.score[0],GV_OFF.score[1],fr,o.glow||0,!r.includes("frame"));if(o.ghost)tt_frameGhost(x,o.ghost);
+  if(o.ms)tt_measures(x,o.ms,true);tt_binders(x,o.bind||{});if(o.desk29)tt_deskBinder(x,o.desk29);if(o.tray!==false)tt_tray(x,o.tip||0,!r.includes("tray"));
   if(o.box)tt_box(x,o.box,!r.includes("box"));tt_doorCard(x,o.door||0,!r.includes("door"));}
 // Yusuf's board, close: where the film keeps what it has found (tt_govBoard, at the size of the close-up)
 const tt_boardClose=(x,st)=>tt_govBoard(x,GV_BC,st);
@@ -338,4 +338,61 @@ scene("warn",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s,
   wc_year(ctx,56,72,"Bogotá · 1995",fin(t,P.bo+0.2,0.4));
   wc_paperOver(ctx,S);});
 
-["measured","teach","lasts"].forEach(id=>scene(id,(ctx,S,t,sc)=>{setScreen(ctx,S);ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_paperOver(ctx,S);}));
+// ---- 6 · Measured by use: binder 29 says maturity is assessed every year, and nobody does; the score comes down; three measures from
+//      the work go up where it hung ----
+// both arms reaching one point (U out from the middle, V up from the feet, in Yusuf's units, the same for each hand), the elbows out:
+// the angles person() takes
+function tt_ik(U,V){const L1=108,L2=113,dx=U-62,dy=V+416,d=Math.min(Math.hypot(dx,dy),L1+L2-0.5),th=Math.atan2(dx,dy),al=Math.acos(clamp((L1*L1+d*d-L2*L2)/(2*L1*d),-1,1)),
+    a0=Math.sin(th+al)>Math.sin(th-al)?th+al:th-al;return[a0,Math.atan2(dx-L1*Math.sin(a0),dy-L1*Math.cos(a0))];}
+// Yusuf looking up at the frame; reaching a binder at his shoulder's height; his hands at the frame's lower corners, at V (tt_frameArms):
+// raised to it, or low, carrying it (tt_holdLow, and its steps)
+POSE.tt_up={L:[0.14,-0.08],R:[0.1,0.05],feet:26,shift:4,tilt:-0.06,turn:0.3,gaze:[0.6,-0.7],look:0};
+POSE.tt_take={L:[0.13,-0.1],R:[0.75,1.96],hand:"open",feet:30,shift:6,tilt:-0.02,turn:0.3,gaze:[0.8,0.2],look:0};
+const tt_frameArms=(V,o)=>{const a=tt_ik(100,V);return Object.assign({L:a,R:a.slice(),hand:"open",feet:26,shift:0,tilt:0,turn:0,gaze:[0,V<-500?-0.8:0.5],look:0},o||{});};
+POSE.tt_holdLow=tt_frameArms(-205,{turn:0.06});
+POSE.tt_holdLowA=Object.assign({},POSE.tt_holdLow,{feet:14,shift:-5,tilt:0.03});POSE.tt_holdLowB=Object.assign({},POSE.tt_holdLowA,{shift:5,tilt:-0.03});
+// his board as it stands from here on: the three panels, the stewards and the new rule's steps, the who sheet
+const TT_BRD6={B:[1,1,1],C:()=>1,who:{a:1,tick:()=>1,fac:1}};
+// he lifts the frame down, his hands at its lower corners, carries it to the box, steps behind it and lets it in
+function tt_takeDown(x,tt,P){const wk=gv_walk(tt,P.walk,1238,560,330),walking=tt>=P.walk,lw=clamp((tt-wk.end-0.05)/0.45,0,1),
+    X=walking?wk.x:1238,Y=lerp(864,846,easeCam(clamp((tt-P.walk)/(wk.end-P.walk),0,1)))-wk.bob;
+  tt_office(x,tt,{board:TT_BRD6,frame:tt<P.tc?1:0,ghost:fin(tt,P.tc+0.15,0.5),bind:{missing:28},tip:1,door:1,desk29:1,read:["frame"]});
+  let o;if(!walking){POSE.tt_lower=tt_frameArms(lerp(-630,-205,easeCam(clamp((tt-P.dn)/0.6,0,1))));o={pose:tt_mix("tt_raise",[["listen",1],["tt_lower",fin(tt,P.fr,0.5)]]),t:tt};}
+  else if(wk.moving)o={pose:"tt_holdLow",pose2:wk.swing>0?"tt_holdLowA":"tt_holdLowB",mix:Math.abs(wk.swing),flip:true,t:tt};
+  else o={pose:"tt_holdLow",pose2:"listen",mix:fin(tt,wk.end+0.3,0.45),flip:true,t:tt,expr:"smile"};
+  person(x,"yusuf",X,Y,0.8,o);
+  if(tt>=P.tc&&lw<=0)tt_frameHeld(x,"yusuf",0.8,tt_handsAt("yusuf",X,Y,0.8,o),lerp(-10,6,fin(tt,P.dn,0.6)),false);
+  tt_box(x,{forms:1,frame:lw},true);}
+// the desk, from above: the green marker comes in, runs over the policy's line, writes under it, and goes
+function tt_markUp(x,tt,P){const hi=clamp((tt-P.hi)/1.0,0,1),note=clamp((tt-P.nt)/1.35,0,1),st={hi,note};tt_open29(x,st);
+  const L=(p,q,u)=>[lerp(p[0],q[0],u),lerp(p[1],q[1],u)],rest=[1640,980],a=tt_penAt29(x,{hi:0}),b=tt_penAt29(x,{hi:1}),n0=tt_penAt29(x,{hi:1,note:0.02}),n1=tt_penAt29(x,{hi:1,note:1});
+  const pos=tt<P.hi?L(rest,a,easeCam(clamp((tt-P.hz)/(P.hi-P.hz),0,1))):tt<P.hi+1.0?tt_penAt29(x,{hi}):tt<P.nt?L(b,n0,easeCam(clamp((tt-P.hi-1.0)/(P.nt-P.hi-1.0),0,1))):
+    tt<P.nt+1.35?tt_penAt29(x,st):L(n1,rest,easeCam(clamp((tt-P.nt-1.35)/0.4,0,1)));
+  tt_pen(x,pos[0],pos[1],1);}
+
+scene("measured",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o),fr=c.nobody-0.35;
+    return{two:w("score","two point one"),turn:c.binder-0.8,dk:c.binder+0.4,open:w("binder","twenty-nine")-0.1,fr,tc:fr+0.5,dn:fr+0.6,walk:fr+1.25,
+      hz:c.work+0.3,hi:w("work","measured")-0.2,nt:w("work","the work")+0.1,wz:sc.ends.work+0.15,
+      rows:[["an owner","a glossary term","a class","a description"].map(s=>w("project",s)-0.1),[w("run","which tests")-0.1,w("run","whose")-0.1],
+        [w("people","office hours")-0.1,w("people","came back")-0.1]],run:c.run,ppl:c.people,of2:c.paper-0.15,used:w("paper","used")};});
+  gv_shots(ctx,S,t,sc.dur,[
+    // his office: the framed score glows as it's named; he turns to the shelf and takes binder 29 down
+    {at:0,place:"office",keys:[[0,1182,470,1.3]],push:0.02,draw:(x,tt)=>{const got=tt>=P.turn+0.85;
+      tt_office(x,tt,{board:TT_BRD6,glow:fin(tt,P.two-0.15,0.5)*(1-fin(tt,P.turn+0.3,0.6)),bind:got?{missing:28}:{out:28,u:fin(tt,P.turn+0.5,0.3)},tip:1,box:{forms:1},door:1,read:["frame"]});
+      person(x,"yusuf",1500,905,0.8,{pose:"tt_up",pose2:"tt_take",mix:fin(tt,P.turn+0.05,0.45),t:tt,flip:tt<P.turn,wide:true,carry:got?tt_heldBinder29:null});}},
+    // the desk, from above: binder 29, shut; it opens at its policy, and the camera goes to its line
+    {at:P.dk,place:"desk",keys:[[P.dk,960,540,1],[P.open+0.75,1152,470,1.25]],d:1.8,push:0,draw:(x,tt)=>tt_opening29(x,clamp((tt-P.open)/0.8,0,1),{})},
+    // the office: he lifts the frame down and carries it to the box marked retired
+    {at:P.fr,place:"office",keys:[[P.fr,1060,500,1.25],[P.walk,760,520,1.25]],d:1.9,push:0,draw:(x,tt)=>tt_takeDown(x,tt,P)},
+    // the desk again: the green marker over the policy's line, and what he writes under it
+    {at:P.hz,place:"desk",keys:[[P.hz,1152,470,1.25]],push:0.02,draw:(x,tt)=>tt_markUp(x,tt,P)},
+    // the wall where the frame hung: three sheets go up; each lights its rows as they're named, the camera moving down them
+    {at:P.wz,place:"officeZ",keys:[[P.wz,960,540,1.2],[P.run-0.5,960,560,1.24],[P.ppl-0.5,960,610,1.3]],d:1.6,push:0,draw:(x,tt)=>tt_inZ(x,TT_Z.wall,q=>{tt_frameGhost(q,1);
+      tt_measures(q,{up:i=>fin(tt,P.wz+0.45+0.25*i,0.45),row:(i,j)=>fin(tt,P.rows[i][j],0.4)},false);})},
+    // the office: the frame in the box, on paper; then the three sheets, lit as they're named used, and Yusuf by them, nodding
+    {at:P.of2,place:"office",keys:[[P.of2,790,560,1.3],[P.used-1.9,1170,430,1.3]],d:1.8,push:0,draw:(x,tt)=>{
+      tt_office(x,tt,{board:TT_BRD6,frame:0,ghost:1,ms:{row:()=>1,glow:i=>fin(tt,P.used-0.1+0.15*i,0.5)},bind:{missing:28},tip:1,box:{forms:1,frame:1},door:1,desk29:1,read:["box"]});
+      person(x,"yusuf",1440,905,0.8,{pose:"listen",t:tt,flip:true,expr:"smile",nod:tt_nodAt(tt,P.used,P.used+1.6,0)});}}]);
+  wc_paperOver(ctx,S);});
+
+["teach","lasts"].forEach(id=>scene(id,(ctx,S,t,sc)=>{setScreen(ctx,S);ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_paperOver(ctx,S);}));

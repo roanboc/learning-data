@@ -4,7 +4,7 @@
 
 | File | What it holds |
 |---|---|
-| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Nguyễn, Nguyen, Thị, Linh, HR, HMS), and the moment its poster shows (Linh's five records, linked, beside the person's sheet with every value that disagrees). |
+| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Nguyễn, Nguyen, Thị, Linh, HR, HMS), and the moment its poster shows (from the opening story: HMS Beagle at Plymouth, December 1831). |
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). Five lines carry a `say`, so the voice reads the years, "14 March" and "1,284" as people say them. The film re-times itself to the voice. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/breath.js` | The few longer pauses: holds after some lines, and three wordless moments (the cabin of ticking clocks, then the title; the rules, written and tested; and the end card). |

@@ -16,8 +16,9 @@ const GV={gold:[236,170,34],goldInk:[146,96,0],green:[40,160,96],greenInk:[22,12
   cyanInk:[24,104,168],wood:[198,152,106],woodDark:[146,104,72],oak:[222,186,138],cork:[208,166,114],metal:[166,172,184],bezel:[60,64,78],glass:[198,222,238],
   floor:[214,196,170],corridor:[230,224,212],ceiling:[246,242,234],chair:[84,92,112],paper:[253,252,248],screen:[248,250,252]};
 // each room's walls: governance warm cream, Planning sage, the registrar's office blue, the data team lilac, the platform team pale teal;
-// the meeting room a quiet stone, Noor's room a pale rose, and a faculty's office in the old building warm plaster over dark panelling
-const GV_ROOM={gov:[244,230,204],plan:[218,230,206],reg:[212,222,238],data:[226,218,238],plat:[206,230,226],meet:[228,224,214],noor:[238,222,224],fac:[242,228,204]};
+// the meeting room a quiet stone, Noor's room a pale rose, a faculty's office in the old building warm plaster over dark panelling,
+// and the learning team's office (Tom's) a soft apricot
+const GV_ROOM={gov:[244,230,204],plan:[218,230,206],reg:[212,222,238],data:[226,218,238],plat:[206,230,226],meet:[228,224,214],noor:[238,222,224],fac:[242,228,204],learn:[248,218,192]};
 
 /* ---------- timing ---------- */
 // when a word of a line is said: the line's start, plus the word's share of the line (a whole word: shared/tools/cues.py checks)

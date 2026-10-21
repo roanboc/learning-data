@@ -1,0 +1,30 @@
+{
+  "kicker": "A master data hub, at work every day",
+  "kicker_es": "Un hub de datos maestros, en marcha cada día",
+  "title_es": "Un hub en marcha",
+  "h1": "A hub at work: rules act, AI suggests, people decide, and everything can be explained and undone",
+  "h1_es": "Un hub en marcha: las reglas actúan, la IA sugiere, la gente decide, y todo se puede explicar y deshacer",
+  "lead": "Over a weekend, 1,240 changes reach the university's hub from four systems. Its rules match nearly all of them, and 8 too close to call wait for Mei. The first is Rafael, a graduate applying for a master's: his application looked for him first, and waited instead of making a new number. The hub shows why the rules gave the match 74, an AI helper drafts a note that suggests, and Mei decides, with her reason kept and one step to undo it. The change is published for each system to read, the alumni office never sees his birth date, and on Friday a blind check of the week's automatic links keeps the rules honest. Five questions to ask any hub close the film.",
+  "lead_es": "Durante un fin de semana, llegan al hub de la universidad 1240 cambios de cuatro sistemas. Sus reglas resuelven casi todos, y 8, demasiado dudosos, esperan a Mei. El primero es Rafael, un egresado que postula a una maestría: su solicitud lo buscó primero, y esperó en vez de crear un número nuevo. El hub muestra por qué las reglas dieron 74 a la coincidencia, un asistente de IA redacta una nota que sugiere, y Mei decide, con su razón guardada y un paso para deshacerlo. El cambio se publica para que cada sistema lo lea, la oficina de egresados nunca ve su fecha de nacimiento, y el viernes una revisión a ciegas de los vínculos automáticos de la semana mantiene honestas a las reglas. Cinco preguntas para hacerle a cualquier hub cierran la película.",
+  "description": "A film about a master data hub at work: rules that link most records on their own; a queue for the close calls; a score explained weight by weight; an AI helper that drafts a note and only suggests; a person who decides, with her reason kept and an undo; changes published for systems to read, with a column mask for what an office doesn't need; where each value came from; a blind check on Fridays, with a rule that stops automatic linking; and five questions to ask any hub.",
+  "description_es": "Una película sobre un hub de datos maestros en marcha: reglas que vinculan solas la mayoría de los registros; una cola para los casos dudosos; un puntaje explicado peso por peso; un asistente de IA que redacta una nota y solo sugiere; una persona que decide, con su razón guardada y la opción de deshacer; cambios publicados para que los sistemas los lean, con una máscara de columna para lo que una oficina no necesita; de dónde vino cada valor; una revisión a ciegas los viernes, con una regla que detiene la vinculación automática; y cinco preguntas para hacerle a cualquier hub.",
+  "card": "Rules act, AI suggests, people decide: a week in a master data hub, and five questions to ask any hub.",
+  "card_es": "Las reglas actúan, la IA sugiere, la gente decide: una semana en un hub de datos maestros, y cinco preguntas para cualquier hub.",
+  "chapters_es": {
+    "monday": "Lunes por la mañana",
+    "rules": "Las reglas actúan",
+    "saturday": "Espera, en vez de un número nuevo",
+    "why": "Por qué 74",
+    "ai": "La IA sugiere",
+    "decide": "La gente decide",
+    "publish": "Publicado, no enviado",
+    "source": "De dónde vino",
+    "friday": "Revisar a quien revisa",
+    "five": "Cinco preguntas",
+    "end": "Explicable y reversible"
+  },
+  "past": ["Today, not the past: a Monday morning at the hub", "What the earlier films decided, at work every day."],
+  "past_es": ["Hoy, no el pasado: un lunes por la mañana en el hub", "Lo que decidieron las películas anteriores, en marcha cada día."],
+  "next_h": "You've seen a hub at work. More films in the series are on the way.",
+  "next_h_es": "Viste un hub en marcha. Vienen más películas de la serie."
+}

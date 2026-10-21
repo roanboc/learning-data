@@ -12,7 +12,8 @@ const NARR={
  {"id":"showed","gap":0.8,"text":"The fever showed in the beds. It started on the doctors' hands, on their way in."},
  {"id":"lesson","gap":0.8,"text":"Where a problem shows is often not where it starts."}]},
 "monday":{"name":"Amber every Monday","lead":1.0,"tail":1.0,"vo":[
- {"id":"amber","gap":0.8,"text":"Today, one cell on the university's quality scorecard is amber every Monday."},
+ {"id":"binder","gap":0.8,"text":"Today, Yusuf opens binder 15. Its policy says the root causes of data quality issues are addressed.","say":"Today, Yusuf opens binder fifteen. Its policy says the root causes of data quality issues are addressed."},
+ {"id":"amber","gap":0.8,"text":"But on the quality scorecard, one cell is amber every Monday."},
  {"id":"what","gap":0.8,"text":"Short-course emails, with spaces and capitals."},
  {"id":"issue","gap":0.8,"text":"Every week, an issue goes to their owner, Tom's learning team. And every week, it's closed: cleaned in staging."},
  {"id":"jun","gap":0.8,"text":"Every night for a year, staging has trimmed each email and written it in lower case."},
@@ -37,8 +38,8 @@ const NARR={
  {"id":"fails","gap":0.8,"text":"If it ever fails, the form has broken, and its owner hears first."},
  {"id":"green","gap":0.8,"text":"The cell turns green: not because the emails were cleaned, but because they were right where they were typed."}]},
 "unknown":{"name":"What no rule names","lead":1.0,"tail":1.0,"vo":[
- {"id":"night","gap":0.8,"text":"Then one night, something nobody wrote a rule for."},
- {"id":"half","gap":0.8,"text":"Half the new badges from the learning platform arrive with zero credit. A microcredential carries five."},
+ {"id":"night","gap":0.8,"text":"One night, the learning platform sends something no rule names."},
+ {"id":"half","gap":0.8,"text":"Half the new badges arrive with zero credit. Most are microcredentials that should carry five."},
  {"id":"pass","gap":0.8,"text":"Every test passes. The value is there, and it's a number."},
  {"id":"wallet","gap":0.8,"text":"But the wallet shows them as plain badges, with no credit."},
  {"id":"shape","gap":0.8,"text":"Monitoring knows each table's usual shape: when it arrives, how many rows, how many empty, how the values spread."},

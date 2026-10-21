@@ -430,6 +430,9 @@ arm=function(ctx,P,s,a,br,po){if(s===-1&&po.both){ctx.save();ctx.scale(-1,1);tt_
 // a notebook shut, held in front in both hands
 function tt_heldShut(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my+6);cx.rotate(-0.06);cx.fillStyle=rgba(GV_HOLD.teal,1);rr(cx,-60,-48,120,96,8);cx.fill();
   cx.fillStyle=rgba(darken(GV_HOLD.teal,0.3),1);cx.fillRect(-60,-48,14,96);cx.restore();fingers(cx,P_,[[mx-60,my+12],[mx+60,my+8]]);}
+// a notebook shut, in the left hand at the side, the right hand free
+function tt_heldShutL(cx,P_,hands){const h=hands[0];cx.save();cx.translate(h[0]-2,h[1]+34);cx.rotate(0.06);cx.fillStyle=rgba(GV_HOLD.teal,1);rr(cx,-32,-50,64,100,8);cx.fill();
+  cx.fillStyle=rgba(darken(GV_HOLD.teal,0.3),1);cx.fillRect(-32,-50,10,100);cx.restore();fingers(cx,P_,[h]);}
 // a shopping bag in the hand, hanging
 function tt_heldBag(col){return(cx,P_,hands)=>{const h=hands[1];cx.save();cx.translate(h[0],h[1]);cx.strokeStyle=rgba(darken(col,0.3),1);cx.lineWidth=5;cx.beginPath();cx.moveTo(-22,34);cx.quadraticCurveTo(-18,-6,0,-6);cx.quadraticCurveTo(18,-6,22,34);cx.stroke();
   cx.beginPath();cx.moveTo(-40,30);cx.lineTo(40,30);cx.lineTo(46,150);cx.lineTo(-46,150);cx.closePath();litFill(cx,col,-46,30,46,150);seam(cx,col,0.5);
@@ -522,7 +525,7 @@ Object.assign(PEOPLE,{
     top:{kind:"sweater",c:[120,150,110]},bottom:{c:[60,60,70]},shoe:[50,40,36],build:{sh:66,hip:60,h:0.96}},
   ttFac2:{name:"",role:"steward",side:"Business",does:"uses",edge:BIZ,seed:86,skin:[150,104,76],hair:{style:"cropped",c:[28,24,24]},glasses:[40,40,44],
     top:{kind:"shirt",c:[220,206,236]},bottom:{c:[60,60,70]},shoe:[50,40,36],build:{sh:72,hip:60,h:0.99}},
-  ttFac3:{name:"",role:"steward",side:"Business",does:"uses",edge:BIZ,seed:87,skin:[214,166,128],hair:{style:"bob",c:[36,28,26]},earrings:[220,200,150],
+  ttFac3:{name:"",role:"steward",side:"Business",does:"uses",edge:BIZ,seed:87,skin:[214,166,128],hair:{style:"bob",c:[36,28,26],streak:[92,76,70]},earrings:[220,200,150],
     top:{kind:"cardigan",c:[176,96,84],inner:[236,228,214]},bottom:{c:[60,60,70]},shoe:[50,40,36],build:{sh:64,hip:60,h:0.94}}});
 // pinning something up beside them; a hand up, to agree; a hand to the cap's peak; reaching down to something on a desk beside them
 Object.assign(POSE,{
@@ -531,6 +534,10 @@ Object.assign(POSE,{
   tt_cap:{L:[0.13,-0.1],R:[1.9,-2.3],hand:"open",feet:25,shift:2,tilt:0,turn:0.12,gaze:[0.2,0],look:0},
   tt_tip:{L:[0.12,-0.08],R:[0.9,1.4],hand:"open",feet:30,shift:5,tilt:-0.05,turn:0.3,gaze:[0.8,0.6],look:1}});
 // a closed laptop, held to the chest in both hands
+// a whiteboard marker held in the right hand, its blue cap up
+function tt_heldMarker(cx,P_,hands){const h=hands[1];cx.save();cx.translate(h[0]+2,h[1]-4);cx.rotate(0.35);cx.fillStyle="rgba(60,50,40,0.2)";rr(cx,-5,-44,16,58,5);cx.fill();
+  cx.fillStyle=rgba([238,240,242],1);rr(cx,-8,-48,16,56,5);cx.fill();cx.strokeStyle=rgba(WC_PENCIL,0.7);cx.lineWidth=1.6;cx.stroke();
+  cx.fillStyle=rgba([60,110,170],1);rr(cx,-8,-60,16,16,4);cx.fill();cx.restore();fingers(cx,P_,[h]);}
 function tt_heldLaptop(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-8);cx.rotate(-0.05);
   cx.fillStyle="rgba(60,50,40,0.2)";rr(cx,-92,-58,190,124,10);cx.fill();cx.fillStyle=rgba([150,156,168],1);rr(cx,-96,-64,192,124,10);cx.fill();
   cx.fillStyle=rgba([184,190,200],1);rr(cx,-90,-58,180,110,8);cx.fill();cx.fillStyle="rgba(255,255,255,0.5)";cx.beginPath();cx.arc(0,-4,9,0,TAU);cx.fill();cx.restore();
@@ -677,32 +684,42 @@ function tt_junScreen(x,st){gv_screen(x,0,0,1260,690,"governance check",q=>{
 
 /* ---------- the university: the stewards' meeting room ---------- */
 // the screen on the wall: the meeting's name; then the three faculties who join from their own rooms, each face lighting as it comes
+// (st.faces(j), 0 to 1; st.pose(j), what each of them does)
 function tt_meetScreen(x,st,t){const [sx,sy,sw,sh]=GV_MT.screen;gv_screen(x,sx,sy,sw,sh,"Stewards, October",q=>{const f=st.faces||(()=>0),any=[0,1,2].some(j=>f(j)>0.01);
   if(!any)wc_T(q,"Stewards, October",sx+sw/2,sy+sh/2+30,{w:800,size:40,align:"center",col:WC_DARK});
   ["ttFac1","ttFac2","ttFac3"].forEach((id,j)=>{const u=f(j);if(u<=0.01)return;const tx=sx+16+j*(sw-32)/3,tw_=(sw-32)/3-12,ty=sy+64,th=sh-84;
-    withA(q,clamp(u*2,0,1),()=>{q.fillStyle=rgba([226,222,214],1);q.fillRect(tx,ty,tw_,th);q.save();q.beginPath();q.rect(tx,ty,tw_,th);q.clip();
-      person(q,id,tx+tw_/2,ty+th+300*0.36,0.36,{pose:"stand",expr:"smile",t});q.restore();q.strokeStyle=rgba(GV.gold,0.9*u);q.lineWidth=4;q.strokeRect(tx,ty,tw_,th);});});},{titleSize:24,barH:36});}
+    withA(q,clamp(u*2,0,1),()=>{q.fillStyle=rgba([[222,214,200],[212,222,228],[228,218,222]][j],1);q.fillRect(tx,ty,tw_,th);q.save();q.beginPath();q.rect(tx,ty,tw_,th);q.clip();
+      q.fillStyle=rgba([[200,186,166],[186,200,210],[210,194,200]][j],1);q.fillRect(tx,ty+th*0.62,tw_,4);
+      person(q,id,tx+tw_/2,ty+th*0.42+502*0.56,0.58,Object.assign({pose:"stand",expr:"smile",t},st.pose?st.pose(j):{}));q.restore();q.strokeStyle=rgba(GV.gold,0.9*u);q.lineWidth=4;q.strokeRect(tx,ty,tw_,th);});});},{titleSize:24,barH:36});}
 // a name card folded on the table in front of someone: their name, and where they look after the data
-function tt_tent(x,X,name,role,u){if(u<=0.01)return;const top=GV_MT.top,w=236,h=70,y0=top+24-h,k=0.9+0.1*spring(clamp(u,0,1));x.save();x.translate(X,top+24);x.scale(k,k);x.translate(-X,-top-24);
-  withA(x,clamp(u*2.5,0,1),()=>{x.fillStyle="rgba(70,60,50,0.18)";x.fillRect(X-w/2+6,y0+6,w,h);wc_panel(x,X-w/2,y0,w,h,{kind:"card",seed:Math.round(X)});
-    wc_T(x,name,X,y0+32,{w:800,size:26,align:"center",col:WC_DARK});wc_T(x,role,X,y0+60,{w:600,size:24,align:"center",col:WC_MUTED});});x.restore();}
-// Yusuf's stamp, in its box on the table, the lid shut
-function tt_stampBox(x,X,lid){const y=GV_MT.top+20;x.drawImage(wc_kept("ttStampBox",240,140,q=>{q.translate(20,20);wc_part(q,wc_rect(0,40,200,62),[150,104,70],1);wc_part(q,wc_rect(-6,26,212,20),[170,122,84],1);}),X-120,y-122);
-  wc_T(x,"APPROVED",X,y-50,{w:800,size:20,align:"center",col:GV.goldInk});}
+function tt_tent(x,X,name,role,u){if(u<=0.01)return;const w=200,h=54,y0=GV_MT.top+38-h,k=0.9+0.1*spring(clamp(u,0,1));x.save();x.translate(X,y0+h);x.scale(k,k);x.translate(-X,-y0-h);
+  withA(x,clamp(u*2.5,0,1),()=>{x.fillStyle="rgba(70,60,50,0.18)";x.fillRect(X-w/2+5,y0+5,w,h);wc_panel(x,X-w/2,y0,w,h,{kind:"card",seed:Math.round(X)});
+    wc_T(x,name,X,y0+24,{w:800,size:22,align:"center",col:WC_DARK});wc_T(x,role,X,y0+46,{w:600,size:19,align:"center",col:WC_MUTED});});x.restore();}
+// Yusuf's stamp, in its box on the windowsill, the lid shut and a cobweb at its corner; on its front, a label: "APPROVED", in gold
+function tt_stampBox(x,deco){const X=1700,y=GV_MT.win[1]+GV_MT.win[3]+2;x.drawImage(wc_kept("ttStampBox",176,100,q=>{q.translate(24,22);q.fillStyle="rgba(70,60,50,0.2)";q.fillRect(5,9,124,52);
+    wc_part(q,wc_rect(0,10,124,48),[150,104,70],1,{lw:1.2,seed:71});wc_part(q,wc_rect(-4,0,132,16),[170,122,84],1,{lw:1.2,seed:72});
+    q.fillStyle=rgba([250,246,234],1);q.fillRect(8,22,108,30);q.strokeStyle=rgba(WC_PENCIL,0.6);q.lineWidth=1.2;q.strokeRect(8,22,108,30);}),X-62-24,y-58-22);
+  x.save();x.strokeStyle="rgba(150,150,150,0.55)";x.lineWidth=0.9;const cx=X-64,cy=y-58,R=[[cx-26,cy-34],[cx-30,cy-8],[cx-10,cy-40]];
+  for(const [px,py] of R){x.beginPath();x.moveTo(cx,cy);x.lineTo(px,py);x.stroke();}for(const r of [0.45,0.8]){x.beginPath();x.moveTo(lerp(cx,R[0][0],r),lerp(cy,R[0][1],r));
+    x.quadraticCurveTo(lerp(cx,R[1][0],r)+4,lerp(cy,R[1][1],r)-6,lerp(cx,R[1][0],r),lerp(cy,R[1][1],r));x.moveTo(lerp(cx,R[0][0],r),lerp(cy,R[0][1],r));
+    x.quadraticCurveTo(lerp(cx,R[2][0],r)-6,lerp(cy,R[2][1],r)+4,lerp(cx,R[2][0],r),lerp(cy,R[2][1],r));x.stroke();}x.restore();
+  tt_deco(deco,()=>wc_T(x,"APPROVED",X,y-15,{w:800,size:20,align:"center",col:GV.goldInk}));}
 // the whiteboard: what the stewards brought (o.notes), the new rule (o.rule), the column nobody had described (o.col), or, another day, the
 // wheel (o.wheel). Drawn in the room's coordinates; small type, so the close-ups (TT_Z.board) read it and the room shows it from afar
 const TT_NOTES=[[0,["a test","nobody owned"],0],[0,["emails typed","with spaces"],1],[1,["a page beside","the check"],2],[1,["office hours"],3],[1,["asked by name"],0]];
 function tt_meetBoard(x,st){const [bx,by,bw,bh]=GV_MT.board;
   if(st.wheel){x.drawImage(wc_kept("ttCleanBoard",bw+20,bh+20,q=>wc_flat(q,wc_rect(10,10,bw,bh),[250,251,250],1,"board")),bx-10,by-10);tt_wheel(x,st.wheel);return;}
   // what broke, what helped: two headings, and a note going up under one as each person speaks
-  if(st.heads>0.01)withA(x,st.heads,()=>{[["what broke",122],["what helped",256]].forEach(([s,hx])=>{wc_hand(x,s,hx,182,{size:14,w:700,col:[60,110,170]});x.fillStyle=rgba([60,110,170],0.6);x.fillRect(hx,186,112,1.6);});});
+  // (heads(j), 0 to 1, writes each heading in turn)
+  const hd=j=>typeof st.heads==="function"?st.heads(j):(st.heads||0);[["what broke",122],["what helped",256]].forEach(([s,hx],j)=>{const p=hd(j);if(p<=0.01)return;
+    wc_hand(x,s,hx,182,{size:14,w:700,col:[60,110,170],p});x.fillStyle=rgba([60,110,170],0.6);x.fillRect(hx,186,112*clamp(p*1.5-0.5,0,1),1.6);});
   TT_NOTES.forEach(([c,ls,col],j)=>{const u=st.note?st.note(j):0;if(u<=0.01)return;const row=c?j-2:j,cx=c?318:184,cy=226+row*64,k=lerp(1.25,1,easeCam(clamp(u,0,1)));
     x.save();x.translate(cx,cy);x.scale(k,k);x.rotate([0.03,-0.02,0.02,-0.03,0.015][j]);withA(x,clamp(u*3,0,1),()=>{tt_noteAt(x,0,0,118,58,GV_NOTE[col],0,400+j);
       ls.forEach((l,i)=>wc_T(x,l,0,(ls.length>1?-3:5)+i*16,{w:700,size:12.5,align:"center",col:WC_DARK}));});x.restore();});
   // the new rule: a card, the rule written under its heading, and its date in gold
   if(st.rule>0.01){const X=412,Y=384,w=350,h=96;withA(x,clamp(st.rule*3,0,1),()=>{wc_panel(x,X,Y,w,h,{kind:"card",seed:77});gv_pin(x,X+w/2,Y+8,GV.red,0.5);
     wc_T(x,"new rule",X+14,Y+24,{w:800,size:13,col:GV.redInk});});
-    wc_hand(x,"Every column other teams read",X+14,Y+48,{size:12.5,w:600,col:WC_INK,p:st.write||0});wc_hand(x,"says what it holds.",X+14,Y+66,{size:12.5,w:600,col:WC_INK,p:clamp((st.write||0)*2-1,0,1)});
+    wc_hand(x,"Every column other teams read",X+14,Y+48,{size:12.5,w:600,col:WC_INK,p:clamp((st.write||0)/0.6,0,1)});wc_hand(x,"says what it holds.",X+14,Y+66,{size:12.5,w:600,col:WC_INK,p:clamp(((st.write||0)-0.6)/0.4,0,1)});
     if(st.date>0.01)wc_hand(x,"1 December",X+w-14,Y+88,{size:14,w:800,col:GV.goldInk,align:"right",p:st.date});}
   // the column nobody had described: its card, and one learner's row
   if(st.col>0.01){const X=120,Y=392,w=262,h=96;withA(x,clamp(st.col*3,0,1),()=>{wc_panel(x,X,Y,w,h,{kind:"card",seed:78});gv_pin(x,X+w/2,Y+8,GV.red,0.5);

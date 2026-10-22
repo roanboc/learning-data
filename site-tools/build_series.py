@@ -28,7 +28,7 @@ import html, json, math, pathlib, re, sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 WEB = ROOT / "site"
-BASE = "https://roanboc.github.io/learning-data/"
+BASE = "https://data.learn-all.org/"
 REPO = "https://github.com/roanboc/learning-data"
 E = lambda s: html.escape(s, quote=False).replace('"', "&quot;")
 NUM = {"en": "one two three four five six seven eight nine ten eleven twelve".split(),

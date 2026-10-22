@@ -2,7 +2,7 @@
 
 Learning artifacts for data: short, visual explanations of how modern data platforms work, from capture to decision.
 
-**Site:** [https://roanboc.github.io/learning-data/](https://roanboc.github.io/learning-data/)
+**Site:** [https://data.learn-all.org/](https://data.learn-all.org/)
 
 ## The films
 
@@ -10,16 +10,16 @@ The site has six big topics. Start with the first, the overview; then pick the t
 
 | Topic | Films and series | For |
 |---|---|---|
-| Data platforms | [The Inner Life of Data](https://roanboc.github.io/learning-data/), in English and Spanish: how a data platform works, with eight labs and twelve scenarios | Everyone: start here |
-| Data modelling | [A Sharper Sketch](https://roanboc.github.io/learning-data/sketch/), one film; [From words to data](https://roanboc.github.io/learning-data/from-words-to-data/), seven films, from language and meaning to keeping models true with AI | Anyone who designs models, definitions or reports |
-| Analytics engineering | [In the weeds of data crafting](https://roanboc.github.io/learning-data/in-the-weeds/), ten films on data modelling with dbt; its code and data come from [an example dbt project](films/analytics-engineering/project/) that runs on dbt Core with DuckDB | Analytics engineers |
-| Data quality and change | [When things go wrong](https://roanboc.github.io/learning-data/when-things-go-wrong/), two films: *Silent change* (changes and data contracts) and *Too good to be true* (data quality checks) | Anyone who builds pipelines, or owns a source system or a data product |
-| Enterprise architecture | [The map before the data](https://roanboc.github.io/learning-data/enterprise-architecture/), eleven films: how an organisation works, in layers, before you ask what its data should answer | Architects, and anyone new to an organisation |
-| Master and reference data | [The same one, everywhere](https://roanboc.github.io/learning-data/master-and-reference-data/), nine films, coming out one by one: the people and things a business is about, kept once and shared across its systems, and the lists that sort them | Data stewards and architects, and anyone whose data lives in many systems |
+| Data platforms | [The Inner Life of Data](https://data.learn-all.org/), in English and Spanish: how a data platform works, with eight labs and twelve scenarios | Everyone: start here |
+| Data modelling | [A Sharper Sketch](https://data.learn-all.org/sketch/), one film; [From words to data](https://data.learn-all.org/from-words-to-data/), seven films, from language and meaning to keeping models true with AI | Anyone who designs models, definitions or reports |
+| Analytics engineering | [In the weeds of data crafting](https://data.learn-all.org/in-the-weeds/), ten films on data modelling with dbt; its code and data come from [an example dbt project](films/analytics-engineering/project/) that runs on dbt Core with DuckDB | Analytics engineers |
+| Data quality and change | [When things go wrong](https://data.learn-all.org/when-things-go-wrong/), two films: *Silent change* (changes and data contracts) and *Too good to be true* (data quality checks) | Anyone who builds pipelines, or owns a source system or a data product |
+| Enterprise architecture | [The map before the data](https://data.learn-all.org/enterprise-architecture/), eleven films: how an organisation works, in layers, before you ask what its data should answer | Architects, and anyone new to an organisation |
+| Master and reference data | [The same one, everywhere](https://data.learn-all.org/master-and-reference-data/), nine films, coming out one by one: the people and things a business is about, kept once and shared across its systems, and the lists that sort them | Data stewards and architects, and anyone whose data lives in many systems |
 
 Every film has chapters, Pause and think questions and Spanish pages; most have hands-on labs and scenarios too.
 
-And on the [Making of page](https://roanboc.github.io/learning-data/journey/), two short films about the films themselves: *Data for Films*, how they're drawn, and *That's not quite right*, how they're made, by a person and Claude.
+And on the [Making of page](https://data.learn-all.org/journey/), two short films about the films themselves: *Data for Films*, how they're drawn, and *That's not quite right*, how they're made, by a person and Claude.
 
 ## What's here
 

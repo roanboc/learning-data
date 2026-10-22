@@ -37,6 +37,7 @@ from collections import Counter, defaultdict
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 WEB = ROOT / "site"
 SITE = "https://data.learn-all.org/"
+LANDING = "welcome/index.html"  # the Learn All landing page: its own header and no Spanish twin
 REPO = "https://github.com/roanboc/learning-data"
 RELEASES = sorted(ROOT.glob("films/**/release.json"))  # each film's videos, as the release workflow publishes them
 
@@ -541,6 +542,8 @@ def main():
     # -- header
     s = rep.check("Header: Start here · Topics · Making of · EN/ES on every page, with the right current page")
     for pg in normal:
+        if pg.file == LANDING:  # the landing page links to both series, so its header is its own
+            continue
         lang = "es" if pg.es else "en"
         head = pg.dom.first("header", cls="top")
         nav = head.first("nav") if head else None
@@ -635,6 +638,8 @@ def main():
     for pg in normal:
         alts[pg.file] = {n.attrs.get("hreflang"): n.attrs.get("href") for n in pg.dom.all("link", rel="alternate") if n.attrs.get("hreflang")}
     for pg in normal:
+        if pg.file == LANDING:
+            continue
         a = alts[pg.file]
         twin = pg.twin_key()
         if twin is None:

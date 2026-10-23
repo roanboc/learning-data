@@ -23,5 +23,7 @@
     "end": "Confirmado, por ahora"
   },
   "next_h": "You've seen what the utility must be able to do. Next: how value reaches people.",
-  "next_h_es": "Viste lo que la empresa tiene que ser capaz de hacer. Lo siguiente: cómo llega el valor a la gente."
+  "next_h_es": "Viste lo que la empresa tiene que ser capaz de hacer. Lo siguiente: cómo llega el valor a la gente.",
+  "past": ["The Inca's relay runners, the Andes, 1400s", "Runners and roads change; the ability to move a message stays."],
+  "past_es": ["Los corredores de relevo incas, los Andes, siglo XV", "Cambian los corredores y los caminos; la capacidad de llevar un mensaje se queda."]
 }

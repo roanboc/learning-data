@@ -7,7 +7,7 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": ["stays", "come", 1.95],
+  "poster": ["rome", "roles", -0.6],
   "story": ["rome"],
   "say": [
     ["\\bNguyen\\b", "Nwin"],

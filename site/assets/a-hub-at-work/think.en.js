@@ -1,7 +1,7 @@
 /* Learning Data: "Pause and think" for A hub at work, in English. Keep the keys in step with think.es.js.
    The film stops at the end of four chapters (why, ai, publish, friday), with one question each. think.js shows them,
-   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question has a "stop",
-   and the page's .player data-labs is empty. */
+   and lists them again under "Think it through" (#think-list). The series' labs and scenarios are its own, for all its films
+   (assets/master-and-reference-data/), so no question has a "stop"; the page's .player data-labs leads to them. */
 window.LEARN={lang:"en",
 think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
   qs:{

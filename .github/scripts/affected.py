@@ -93,9 +93,9 @@ def loads():
                 continue
             path = urllib.parse.unquote(u.path)
             if path.startswith("/"):
-                if not path.startswith("/learning-data/"):
+                if not path.startswith("/"):
                     continue
-                path = path[len("/learning-data/"):]
+                path = path[len("/"):]
             else:
                 path = posixpath.normpath(posixpath.join(here, path))
             got.add(path)

@@ -1,0 +1,25 @@
+{
+  "key": "the-same-problem-everywhere",
+  "title": "The same problem, everywhere",
+  "sub": "The prologue to a series on data governance: a bank in 2008 that can't add up its risks, the people who first met in 1980 to share what they'd learned about data, the body of knowledge they wrote, and why governance is still at its centre, with ethics and AI.",
+  "howto": "The film is painted in watercolour. Every scene from the past has its place and year in the corner, and behind each person of the past is a soft wash of warm umber. Gold is governance's decisions, green is what holds, and red is what nobody can trust.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "centre",
+    "grows",
+    -0.8
+  ],
+  "say": [
+    [
+      "\\bDAMA\\b",
+      "Dahma"
+    ],
+    [
+      "\\bDMBOK\\b",
+      "Dee-em-bock"
+    ]
+  ]
+}

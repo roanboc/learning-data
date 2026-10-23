@@ -7,7 +7,7 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": ["lightest", "breath", 1.0],
+  "poster": ["bern", "one", -0.6],
   "story": ["bern"],
   "say": [
     ["\\bNguyen\\b", "Nwin"],

@@ -102,8 +102,10 @@ def gov_builds_on(lg, f, all_films, R):
 
 # ---------------------------------------------------------------- the series
 # id: the series' key; dir: its folder under films/; slug: its path on the site; name: its title; builds_on: what each film builds on;
-# place: where its films happen, as its footer says it ("The university, people, numbers and records… are fictional"); marks: the
-# trademarks its footer names, if not the Databricks and dbt logos; learn: the series' own labs and scenarios, for all its films,
+# place: where its films happen, as its footer says it ("The university, people, numbers and records… are fictional"; a film whose
+# history is real, such as a prologue, says its own line instead, its site.json's "fiction", and the series' page adds its
+# "fiction_series");
+# marks: the trademarks its footer names, if not the Databricks and dbt logos; learn: the series' own labs and scenarios, for all its films,
 # if it has them (see series_learn below): dir, the folder under site/assets/ of their engine and words; bundle, the film whose
 # bundle their pages load for its parts (the newest film's if not given); coming, True to count and show those of the films still
 # being made (series.json's "coming") too; next: the id of the series to watch after this one, which its last film's page offers
@@ -179,7 +181,8 @@ def minutes(sec):
 
 def number(d, i):
     """A film's place in its series, from 0: its folder's number less one ("3-which-value-wins" is 2), so a series' films can come
-    out in any order; a folder without a number takes its place in series_data()'s list."""
+    out in any order; a folder without a number takes its place in series_data()'s list. A prologue, folder 0, is -1: it comes
+    before the first film and isn't counted among the films (see num())."""
     m = re.match(r"\d+", d)
     return int(m.group()) - 1 if m else i
 
@@ -347,8 +350,9 @@ def entry(lg, item_id):
     S = next((x for x in SERIES if x["id"] == item_id), None)
     if S is not None:
         series, films_ = films(S)
-        n, planned = len(films_), series.get("planned", len(series["films"]))
-        many = T(lg, f"{n} of {planned} films", f"{n} de {planned} películas") if planned > n else T(lg, f"{n} films", f"{n} películas")
+        n, planned = sum(x["index"] >= 0 for x in films_), series.get("planned", len(series["films"]))  # a prologue isn't one of the films
+        many = (T(lg, f"{n} of {planned} films", f"{n} de {planned} películas") if planned > n else T(lg, f"{n} films", f"{n} películas")) + \
+            (T(lg, " and a prologue", " y un prólogo") if any(x["index"] < 0 for x in films_) else "")
         extra = T(lg, "labs and scenarios", "labs y situaciones") if any(x["labs"] for x in films_) or series_learn(S) else T(lg, "Pause and think", "Pausa para pensar")
         return dict(kind="series", href=S["slug"] + "/", title=SN(lg, S), title_lang=None, posters=[f'{x["key"]}-poster.jpg' for x in films_],
                     card=series[T(lg, "card", "card_es")], kicker=T(lg, "Series · ", "Serie · ") + many,
@@ -385,17 +389,19 @@ SOURCE = {"en": '<p class="foot-links"><a href="https://github.com/roanboc/learn
           "es": '<p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p>'}
 
 
-def foot(lg, S=FW, learn=True, many=False):
+def foot(lg, S=FW, learn=True, many=False, own=None, also=""):
     """The footer of a series' pages: what's fictional (the series' place; the labs and scenarios too, if its films have them), the voice, the licences.
-    many: the page is about the whole series (its labs and scenarios, or its page when it has them), so it speaks of its films."""
+    many: the page is about the whole series (its labs and scenarios, or its page when it has them), so it speaks of its films.
+    own: a film's own line, in place of the series' (its site.json's "fiction"), for a film whose history is real, such as a prologue;
+    also: what the series' page adds for such a film (its "fiction_series")."""
     if lg == "en":
-        what = f'The {S["place"]["en"]}, people, numbers and records in the film' + ("s" if many else "") + (", the labs and the scenarios" if learn else "") + " are fictional."
+        what = own or (f'The {S["place"]["en"]}, people, numbers and records in the film' + ("s" if many else "") + (", the labs and the scenarios" if learn else "") + " are fictional.")
         lic = "The narration is a synthetic voice. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0."
     else:
         art = "La" if S["place"]["es"] in ("universidad", "empresa de energía") else "El"
-        what = f'{art} {S["place"]["es"]}, las personas, las cifras y los registros de ' + ("las películas" if many else "la película") + (", los labs y las situaciones" if learn else "") + " son ficticios."
+        what = own or (f'{art} {S["place"]["es"]}, las personas, las cifras y los registros de ' + ("las películas" if many else "la película") + (", los labs y las situaciones" if learn else "") + " son ficticios.")
         lic = "La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0."
-    return f'<footer>{SOURCE[lg]}<p>{what} {lic} {S.get("marks", LOGOS)[lg]} {NOTICES[lg]}</p></footer>'
+    return f'<footer>{SOURCE[lg]}<p>{E(what)}{" " + E(also) if also else ""} {lic} {S.get("marks", LOGOS)[lg]} {NOTICES[lg]}</p></footer>'
 
 
 PT = {"en": '{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}', "es": '{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}'}
@@ -442,7 +448,10 @@ def crumbs(lg, R, S, up=None):
 
 def num(lg, f):
     """A film's place in its series, always as "Film 2 of 7": site-tools/check_site.py allows numbering only in this form.
-    A series still being made counts the films it plans ("planned" in its series.json), not only those made so far."""
+    A series still being made counts the films it plans ("planned" in its series.json), not only those made so far.
+    A prologue (folder 0) comes before the films, and is "Prologue"."""
+    if f["index"] < 0:
+        return T(lg, "Prologue", "Prólogo")
     ser = series_data(f["series"])
     n = ser.get("planned", len(ser["films"]))  # a series still being made says how many films it will have
     return T(lg, "Film", "Película") + f' {f["index"] + 1} {T(lg, "of", "de")} {n}'
@@ -589,7 +598,7 @@ def film_page(lg, f, films_, series):
             f'<section class="module" id="think-it-through" aria-labelledby="think-h">\n<div class="mhead"><div><h2 id="think-h">{T(lg, "Think it through", "Piénsalo")}</h2><p>{T(lg, f"The {ntw} Pause and think questions, for a class or a team. Open one to see the answer.", f"Las {ntw} preguntas de Pausa para pensar, para una clase o un equipo. Abre una para ver la respuesta.")}</p></div></div>\n<div id="think-list"></div>\n</section>\n\n'
             + (film_learn_section(lg, f, SL) if SL else "")
             + series_nav(lg, f, films_, R, "../") + '</main>\n'
-            f'{foot(lg, S, learn)}\n'
+            f'{foot(lg, S, learn, own=s.get(T(lg, "fiction", "fiction_es")))}\n'
             + ('' if lg == "en" else '<script>window.L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla completa",fsExit:"Salir de pantalla completa"}};</script>\n')
             + ('' if lg == "en" else f'<script src="{R}assets/{key}/captions.es.js"></script>\n')
             + f'<script src="{R}assets/{key}/film.js"></script>\n' + ('' if lg == "en" else es_scenes(f) + "\n")
@@ -669,7 +678,7 @@ def series_page(lg, series, films_, S=FW):
     people = "\n".join(f'<div class="card {k}"><h3>{E(a)}</h3><p>{E(b)}</p></div>' for k, a, b in series[T(lg, "people", "people_es")])
     body += (f'<section class="module" id="four-sides" aria-labelledby="four-sides-h">\n<div class="mhead"><div><h2 id="four-sides-h">{E(series[T(lg, "people_h", "people_h_es")])}</h2><p>'
              + T(lg, "Cyan outlines are technical; gold outlines are business.", "Los contornos cian son del lado técnico; los dorados, del lado de negocio.") + f'</p></div></div>\n<div class="four">\n{people}\n</div>\n</section>\n</main>\n'
-             f'{foot(lg, S, learn, bool(SL))}\n<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/ambient.js"></script>\n</body>\n</html>\n')
+             f'{foot(lg, S, learn, bool(SL), also=" ".join(x["site"][T(lg, "fiction_series", "fiction_series_es")] for x in films_ if "fiction_series" in x["site"]))}\n<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/ambient.js"></script>\n</body>\n</html>\n')
     return h + "</head>\n" + body
 
 

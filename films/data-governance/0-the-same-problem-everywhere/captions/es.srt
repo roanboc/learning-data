@@ -1,0 +1,187 @@
+1
+00:00:01,600 --> 00:00:03,290
+Otoño de 2008.
+
+2
+00:00:03,990 --> 00:00:12,691
+La crisis financiera se extiende, y la junta de un banco pregunta a su equipo de riesgos: si quiebra otro banco, ¿cuánto podemos perder?
+
+3
+00:00:13,991 --> 00:00:21,429
+La respuesta está en alguna parte del banco, en cada línea de negocio, cada una con sus sistemas y sus nombres para los mismos clientes.
+
+4
+00:00:22,629 --> 00:00:24,662
+Para el lunes, nadie consigue sumarlo.
+
+5
+00:00:26,262 --> 00:00:27,659
+No fue solo un banco.
+
+6
+00:00:29,059 --> 00:00:34,082
+Más tarde, los reguladores vieron que muchos bancos no podían sumar sus riesgos con rapidez ni precisión.
+
+7
+00:00:35,182 --> 00:00:36,555
+Los números estaban todos ahí.
+
+8
+00:00:37,555 --> 00:00:40,545
+Nadie podía juntarlos, ni decir en cuáles confiar.
+
+9
+00:00:48,045 --> 00:00:49,629
+Tampoco era un problema nuevo.
+
+10
+00:00:50,329 --> 00:00:54,772
+En los 70, las empresas empezaron a compartir datos entre áreas.
+
+11
+00:00:55,472 --> 00:00:59,443
+Eso trajo preguntas nuevas: ¿de quién son estos datos y quién puede verlos?
+
+12
+00:01:00,743 --> 00:01:07,376
+Surgió un oficio nuevo para cuidarlos: la administración de datos, con un diccionario de lo que significaba cada dato.
+
+13
+00:01:08,576 --> 00:01:14,885
+En 1980, en Los Ángeles, quienes hacían ese oficio empezaron a reunirse para compartir lo aprendido.
+
+14
+00:01:16,185 --> 00:01:20,108
+Su asociación, DAMA, pronto tuvo capítulos en una ciudad tras otra.
+
+15
+00:01:21,808 --> 00:01:25,248
+Cada organización había ido aprendiendo sola las mismas lecciones.
+
+16
+00:01:26,248 --> 00:01:27,848
+Ahora podían aprenderlas juntas.
+
+17
+00:01:31,548 --> 00:01:39,939
+En 2002, tras escándalos contables, una ley de Estados Unidos obligó a los directores ejecutivos a firmar las cifras de su empresa,
+
+18
+00:01:40,139 --> 00:01:42,278
+y a responder por los controles tras ellas.
+
+19
+00:01:43,578 --> 00:01:47,537
+Ahora alguien de la alta dirección respondía por los números y por cómo se elaboraban.
+
+20
+00:01:51,437 --> 00:01:59,661
+En 2009, DAMA publicó lo que sus miembros habían aprendido, como un cuerpo de conocimiento de gestión de datos: el DMBOK.
+
+21
+00:02:00,961 --> 00:02:06,805
+Dibuja el trabajo como una rueda: arquitectura, modelado, seguridad, calidad, metadatos y más.
+
+22
+00:02:08,505 --> 00:02:10,829
+En el centro, como un eje, está la gobernanza.
+
+23
+00:02:12,329 --> 00:02:18,215
+Las demás áreas solo encajan, y se mantienen en equilibrio, cuando alguien tiene autoridad para decidir.
+
+24
+00:02:20,115 --> 00:02:22,924
+Otras guías cubren el mismo terreno, o parte de él.
+
+25
+00:02:25,224 --> 00:02:28,319
+Esta serie toma aquello en lo que coinciden y lo muestra en acción.
+
+26
+00:02:32,019 --> 00:02:40,059
+Tras la crisis, los reguladores escribieron principios para los datos de los bancos; el primero, la gobernanza: condición de todo lo demás.
+
+27
+00:02:41,559 --> 00:02:45,376
+Los datos de riesgo debían tener un dueño que respondiera por su calidad.
+
+28
+00:02:46,576 --> 00:02:51,168
+Diez años después, solo dos de los treinta y un bancos más grandes del mundo los cumplían todos.
+
+29
+00:02:52,768 --> 00:02:57,879
+Sus programas solían tener poco presupuesto, poco alcance y poca atención de sus juntas directivas.
+
+30
+00:02:59,379 --> 00:03:02,021
+Que los datos cuadren requiere más que sistemas.
+
+31
+00:03:03,021 --> 00:03:06,248
+Requiere decisiones, dinero y atención de la alta dirección.
+
+32
+00:03:10,348 --> 00:03:13,593
+Al crecer los datos, crecieron las preguntas sobre cómo se usan.
+
+33
+00:03:14,593 --> 00:03:22,683
+En 2017, la segunda edición del DMBOK dio más espacio a la ética: no solo si podemos usar los datos, sino si debemos.
+
+34
+00:03:24,383 --> 00:03:31,765
+En 2018, una ley europea obligó a las organizaciones a responder por los datos personales que tienen, y a poder demostrarlo.
+
+35
+00:03:33,365 --> 00:03:37,206
+Gobernar datos ya era también responder ante las personas que describen.
+
+36
+00:03:41,106 --> 00:03:44,386
+Ahora las máquinas aprenden de los datos, enseñen lo que enseñen.
+
+37
+00:03:45,486 --> 00:03:51,357
+Así que quienes las entrenan deben preguntarse: ¿de dónde salieron estos datos y quién decidió que podíamos usarlos?
+
+38
+00:03:52,657 --> 00:03:57,948
+En 2024, una revisión del DMBOK agregó gobernanza y ética para la IA.
+
+39
+00:03:59,248 --> 00:04:05,366
+Ese mismo año, la ley europea de IA pidió gobernanza de los datos con que aprenden los sistemas de alto riesgo.
+
+40
+00:04:06,666 --> 00:04:13,162
+Y se está escribiendo una tercera edición, con secciones nuevas sobre gobernanza de la IA, ética de datos y sostenibilidad.
+
+41
+00:04:14,662 --> 00:04:17,238
+Sus autores la llaman un cuerpo de conocimiento vivo.
+
+42
+00:04:18,538 --> 00:04:20,478
+Está prevista para 2027.
+
+43
+00:04:24,178 --> 00:04:26,603
+¿Y por qué el DMBOK sigue importando hoy?
+
+44
+00:04:27,703 --> 00:04:30,330
+Porque la pregunta que responde nunca cambió.
+
+45
+00:04:31,430 --> 00:04:39,079
+En 1980, en 2008 y en cada sistema que aprende: ¿quién decide sobre estos datos y quién responde por ellos?
+
+46
+00:04:40,579 --> 00:04:43,655
+El libro no deja de crecer, pero la gobernanza sigue en el centro.
+
+47
+00:04:45,155 --> 00:04:50,744
+Hoy, en una universidad, un nuevo líder de gobernanza de datos está por toparse con la misma pregunta.

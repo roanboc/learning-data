@@ -4,7 +4,7 @@
 
 | File | What it holds |
 |---|---|
-| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Nguyen, Linh, HR, Guerre, Bertrande), and the moment its poster shows (HR's record weighed against her new student record, the score settled at 74). |
+| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Nguyen, Linh, HR, Guerre, Bertrande), and the moment its poster shows (from the opening story: the court at Toulouse in 1560, with the man called Martin Guerre and the real Martin Guerre before the judges). |
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). Three lines carry a `say`, so the voice reads the year as a year ("fifteen forty-eight") and the weights as numbers ("plus three point two"). The film re-times itself to the voice. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/breath.js` | The few longer pauses: holds after some lines, and three wordless moments (the two men side by side, then the title; Linh's five records, joined to one person; and the end card). |

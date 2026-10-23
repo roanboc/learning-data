@@ -4,7 +4,7 @@
 
 | File | What it holds |
 |---|---|
-| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Charaka Samhita, Nguyen, Linh, Mei, Jun), the moment its poster shows (the end of chapter 5: Linh's no on her as the person, and her four doors, each with its purposes and a latch from her wish), and the opening's story (`story`: chapter 1), where the music may play throughout. |
+| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Charaka Samhita, Nguyen, Linh, Mei, Jun), the moment its poster shows (from the opening story: the teacher and his student at the fire altar, where the oath is given), and the opening's story (`story`: chapter 1), where the music may play throughout. |
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). Three lines carry a `say`, so the voice reads their numbers in words: "twenty twenty-two", "two thousand, one hundred and forty" and "thirty-seven". The film re-times itself to the voice. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/breath.js` | The few longer pauses: holds after some lines, and three wordless moments (the road, the closed door and its light, then the title; the appeal's numbers; and the end card). |

@@ -24,8 +24,8 @@
     "series": "La serie",
     "found": "Encontrada primero"
   },
-  "next_h": "You've met the person behind the roles. More films in the series are on the way.",
-  "next_h_es": "Conociste a la persona detrás de los roles. Vienen más películas de la serie.",
+  "next_h": "You've met the person behind the roles.",
+  "next_h_es": "Conociste a la persona detrás de los roles.",
   "past": ["Sweden's parish books, 1686, and a number for life, 1947", "One person, written down once, and followed wherever they go."],
   "past_es": ["Los libros parroquiales de Suecia, 1686, y un número para toda la vida, 1947", "Una persona, anotada una sola vez, y seguida adondequiera que vaya."]
 }

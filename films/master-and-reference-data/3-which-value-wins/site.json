@@ -22,8 +22,8 @@
     "elsewhere": "En otros lugares",
     "home": "Treinta y tres segundos"
   },
-  "next_h": "You've given each field its own rule, declared and tested. More films in the series are on the way.",
-  "next_h_es": "Le diste a cada campo su propia regla, declarada y probada. Vienen más películas de la serie.",
+  "next_h": "You've given each field its own rule, declared and tested.",
+  "next_h_es": "Le diste a cada campo su propia regla, declarada y probada.",
   "past": ["HMS Beagle's twenty-two chronometers, 1831 to 1836", "Which clock to trust is decided before the clocks disagree."],
   "past_es": ["Los veintidós cronómetros del HMS Beagle, de 1831 a 1836", "En qué reloj confiar se decide antes de que los relojes discrepen."]
 }

@@ -8,7 +8,7 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": ["linked", "which", 1.5],
+  "poster": ["clocks", "plymouth", 4.0],
   "story": ["clocks"],
   "say": [
     ["\\bNguyễn\\b", "Nwin"],

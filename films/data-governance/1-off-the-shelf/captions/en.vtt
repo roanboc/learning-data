@@ -1,0 +1,157 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:04.345
+In 1215, Magna Carta made a promise.
+
+00:00:05.045 --> 00:00:10.973
+“There is to be one measure of wine throughout our kingdom, and one measure of ale, and one measure of corn.”
+
+00:00:12.273 --> 00:00:17.725
+For six hundred years, the promise was repeated, and measures still differed from town to town.
+
+00:00:19.025 --> 00:00:23.064
+Kings sent standards to the towns. Officers checked them now and then.
+
+00:00:24.164 --> 00:00:32.723
+It wasn't enough. In 1871, a member of Parliament said that in his county alone, a bushel meant thirty-two different measures.
+
+00:00:34.223 --> 00:00:36.335
+What finally worked was all of it together:
+
+00:00:36.535 --> 00:00:44.568
+one definition in law, a copy in every county, and an inspector who checked against it, again and again, with the law behind him.
+
+00:00:51.868 --> 00:00:56.197
+Today, Yusuf Demir starts as the university's data governance lead.
+
+00:00:57.297 --> 00:01:03.151
+He inherits a shelf of thirty-four policies, and a maturity score: 2.1 out of 5.
+
+00:01:04.451 --> 00:01:09.078
+A chart of who's responsible for what, with half its names still to be confirmed.
+
+00:01:10.278 --> 00:01:13.071
+And the minutes of a council that meets once a month.
+
+00:01:13.771 --> 00:01:17.625
+His brief: fix governance before the next submission to the government.
+
+00:01:20.325 --> 00:01:22.639
+The same week, two reports disagree.
+
+00:01:23.339 --> 00:01:28.899
+Planning's census report says 4,812 awards were conferred this year.
+
+00:01:29.999 --> 00:01:34.969
+The draft submission to the government says 4,867.
+
+00:01:36.169 --> 00:01:37.465
+Which number is right?
+
+00:01:40.965 --> 00:01:42.820
+Yusuf follows the numbers back.
+
+00:01:43.520 --> 00:01:46.421
+Both are right, each by its own meaning of award.
+
+00:01:47.521 --> 00:01:52.838
+On Monday, the word changed: microcredentials of at least six credit points now count.
+
+00:01:53.538 --> 00:01:56.441
+One report ran before the change, the other after.
+
+00:01:57.741 --> 00:02:02.924
+But the government counts awards by its own definition. Who decides how ours maps to it?
+
+00:02:04.224 --> 00:02:10.125
+Mei owns what award means here. Jun builds what the model says. Planning reports what it's given.
+
+00:02:11.225 --> 00:02:13.278
+And the chart says: to be confirmed.
+
+00:02:15.978 --> 00:02:20.017
+Policy 12 says that business terms are defined consistently.
+
+00:02:20.717 --> 00:02:24.385
+It doesn't say who decides, or how a decision reaches the work.
+
+00:02:25.685 --> 00:02:31.545
+That's what governance is for: deciding who decides, and making sure each decision reaches the work.
+
+00:02:33.145 --> 00:02:38.729
+Like the inspector at the market: a rule, a copy where the work happens, and someone who checks.
+
+00:02:39.929 --> 00:02:44.189
+Governance sets the rules and checks they're kept. Management does the work.
+
+00:02:46.889 --> 00:02:50.135
+Data management has a body of knowledge: DAMA's.
+
+00:02:50.835 --> 00:02:55.929
+It draws eleven areas as a wheel, with governance at the centre, where the others meet.
+
+00:02:57.229 --> 00:03:07.917
+Others cover the same ground, or part of it: DCAM, ISO 8000 for data quality, and ISO/IEC 38505 for governing data.
+
+00:03:08.617 --> 00:03:11.898
+This series takes what they agree on, and shows where it runs.
+
+00:03:14.598 --> 00:03:20.929
+Yusuf doesn't write a thirty-fifth policy. He asks everyone the same question: what slows you down?
+
+00:03:22.229 --> 00:03:25.228
+For Jun, the rules arrive after the work is built.
+
+00:03:26.428 --> 00:03:29.579
+Mei approves the words, then never sees where they're used.
+
+00:03:30.779 --> 00:03:34.211
+Sam could protect a column in minutes, if anyone said which.
+
+00:03:35.511 --> 00:03:37.617
+Planning doesn't know which number to trust.
+
+00:03:38.817 --> 00:03:43.049
+The people who wrote the binder weren't the problem. They wrote what they were asked for.
+
+00:03:44.349 --> 00:03:50.255
+Governance is people's work. Tools can carry out what people agree, but they can't make them agree.
+
+00:03:54.355 --> 00:03:58.879
+So he opens the binder, with one question for every line: where does it run?
+
+00:04:00.179 --> 00:04:05.926
+Some lines can run in the work itself, as a required field, a check, a tag or a test.
+
+00:04:07.526 --> 00:04:12.457
+Some are decisions: someone owns each one, and writes it down where the work can find it.
+
+00:04:14.057 --> 00:04:15.171
+And some can go.
+
+00:04:19.171 --> 00:04:21.108
+And the work already has places for them.
+
+00:04:22.308 --> 00:04:26.992
+The data team builds in a loop of ten steps, from a question to a new version.
+
+00:04:28.692 --> 00:04:32.828
+Governance doesn't need another meeting. It needs a pin at the right steps:
+
+00:04:34.128 --> 00:04:39.591
+a term when the question is asked, a classification at the source, an owner and a contract,
+
+00:04:39.791 --> 00:04:44.163
+a rule as a test, an approval at review, and a version when it changes.
+
+00:04:49.863 --> 00:04:55.596
+Over nine more films, Yusuf takes the binder off the shelf, one kind of policy at a time.
+
+00:04:56.796 --> 00:05:00.432
+Then three more design governance as a capability that lasts.
+
+00:05:01.132 --> 00:05:05.239
+And six show how to build each piece, with dbt and Databricks.
+
+00:05:06.539 --> 00:05:09.094
+A policy that doesn't run anywhere is a wish.

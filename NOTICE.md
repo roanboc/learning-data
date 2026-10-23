@@ -13,6 +13,8 @@ TOGAF and ArchiMate are registered trademarks of The Open Group, and Zachman is 
 
 DAMA and DAMA-DMBOK are registered trademarks of DAMA International. *The same one, everywhere* names them, and draws its own picture of the knowledge areas, only to identify that body of knowledge; *One person, many roles* also draws ArchiMate's actor and role symbols. This project is not affiliated with or endorsed by DAMA International or The Open Group.
 
+DCAM is a trademark of the EDM Association (formerly the EDM Council). *The same problem, everywhere* and *Off the shelf*, from the series on data governance, name DAMA-DMBOK and DCAM, and draw their own pictures of DAMA's knowledge areas and of the DMBOK's covers, only to identify those bodies of knowledge; this project is not affiliated with or endorsed by DAMA International or the EDM Association.
+
 ## Third-party components
 
 - **Narration:** a synthetic voice generated with [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) (Apache License 2.0), run through [kokoro-onnx](https://github.com/thewh1teagle/kokoro-onnx). The model is not included in this repository.
@@ -21,5 +23,7 @@ DAMA and DAMA-DMBOK are registered trademarks of DAMA International. *The same o
 ## Content
 
 The university, the energy utility, the people, numbers and records shown are fictional.
+
+*The same problem, everywhere*, the prologue of the series on data governance, tells real history: its dates, laws, figures and the DMBOK's editions are real, with their sources in its script. Its bank is a composite, and its people are invented.
 
 *For this purpose only* quotes one line of the oath in India's Charaka Samhita, in the English of the Jamnagar edition (Shree Gulabkunverba Ayurvedic Society, 1949), and marks it on screen as a translation. Its sources are in the film's script.

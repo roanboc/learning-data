@@ -35,5 +35,7 @@
     "was": ["macros/shared/time.sql", "models/marts/planning/mart_planning__near_award.sql", "models/marts/planning/_planning__decisions.yml", "models/marts/wallet/_wallet__decisions.yml"],
     "stitch": ["models/intermediate/student/int_learner_timeline.sql"],
     "late": ["analyses/profiling/profile_late_changes.sql", "models/intermediate/student/int_learner_timeline.sql", "models/core/student/_core_student__models.yml"]
-  }
+  },
+  "past": ["The United States census of 1 June 1890", "One card per person, as at one day."],
+  "past_es": ["El censo de Estados Unidos del 1 de junio de 1890", "Una tarjeta por persona, tal como estaba un día."]
 }

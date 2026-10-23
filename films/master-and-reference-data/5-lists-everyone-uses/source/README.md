@@ -4,14 +4,14 @@
 
 | File | What it holds |
 |---|---|
-| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Nguyen, Linh, HR, YYZ, SGN, ENR, CAS, VN), and the moment its poster shows (Linh's three values, each with its list, its owner and its date). |
+| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Nguyen, Linh, HR, YYZ, SGN, ENR, CAS, VN), and the moment its poster shows (from the opening story: two suitcases at an airport, tagged YYZ and SGN). |
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). Two lines carry a `say`, so the voice reads "nineteen seventy-six" and "ISO 3166" as people say them. The film re-times itself to the voice. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/breath.js` | The few longer pauses: holds after some lines, and three wordless moments (the two luggage tags and everyone who reads them, then the title; the list, with every test that reads it pinned to it; and the end card). |
 | `src/plan.js` | This film's places and pictures (prefixed `m5_` and `M5_`): the airport terminal and its runway, the campus, plain paper and the office window (`m5_terminal`, `m5_campus`, `m5_plain`, `m5_plainB`, `m5_office`); the suitcases, their luggage tags, the plane, the old names and everyone who reads a code (`m5_case`, `m5_tag`, `m5_smallTag`, `m5_plane`, `m5_rename`, `M5_USERS`); Linh's card and her role bands (`m5_linhCard`, `m5_bands`); a system's card, HR's email and a test or mapping file (`m5_sys`, `m5_email`, `m5_file`); the count by country and its bracket (`m5_report`, `m5_bracket`); a list with a yellow tab, a table, and a small list card (`m5_list`, `m5_grid`, `m5_mini`); a code's drum and a label's reader (`m5_drum`, `m5_reader`); the platform's lineage and the pin where a test reads a list (`m5_platform`, `m5_node`, `m5_pin`); the pull request, the years and the past contracts (`m5_pr`, `m5_years`, `m5_contract`); the form's choices (`m5_choices`); and an industry's panel (`m5_ind`). |
 | `src/scenes.js` | The eleven chapters. The title card ends chapter 1, the end card chapter 11. The camera moves in on whatever the narration is about, and things arrive with a spring. |
 | `src/i18n/es/captions.js` | The Spanish captions, one per English line, in Latin American Spanish. |
-| `tools/score.py` | The film's music and sounds, a new palette: a bed of strings that follows the chapters, from B minor at the airport to D major at the end; a plucked guitar note for each role and a B for a list's value; a bowed cello for the person; the series' clarinet mark. A low pulse, at 92 a minute, rises only under the wrong lists in chapter 10. Each effect (a tag swinging in, a card or a sheet set down, a felt-tip pen that writes, rings, ticks and strikes through, a pin, a few muffled keys, a plane's engines far off) fires at the same moment, with the same word and offset, as the thing it belongs to in `src/scenes.js`: change one, change both. |
+| `tools/score.py` | The film's music and sounds, a new palette: chords on a small string section, from B minor at the airport to D major at the end; a plucked guitar note for each role and a B for a list's value; a bowed cello for the person; the series' clarinet mark. The strings play under the airport's story and the title, then only at moments: a chord at a chapter's turn, in a pause, on the first of January and on the end card. Nothing pulses or trembles, and every note is tuned pure over D (`tune()` picks each chord's ratios), so no chord beats on a phone's speaker. Each effect (a tag swinging in, a card or a sheet set down, a felt-tip pen that writes, rings, ticks and strikes through, a pin, a few muffled keys, a plane's engines far off) fires at the same moment, with the same word and offset, as the thing it belongs to in `src/scenes.js`: change one, change both. |
 | `tools/` | Each tool runs the series' tool (`../../shared/tools/run.py`) on this film. |
 
 ## Setup (once)
@@ -30,6 +30,7 @@ python tools/legible.py --overlaps   # every piece of text must read on a phone 
 python tools/pace.py       # pacing per chapter
 python tools/stills.py [chapter ...] [--at 12.5 ...] [--every 2] --size 1920   # review stills -> build/stills/
 python tools/audio.py      # mixes dist/soundtrack.mp3 from build/vo and tools/score.py
+python tools/quiet.py      # the series' sound: after the opening, music only from time to time, and nothing beats or pulses
 python tools/build.py      # again, to embed the soundtrack
 python tools/captions.py   # ../captions/en.srt and en.vtt
 FILM_LANG=es python tools/captions.py   # ../captions/es.srt and es.vtt

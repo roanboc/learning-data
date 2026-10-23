@@ -23,5 +23,7 @@
     "end": "Dibujado, por ahora"
   },
   "next_h": "You've seen who does the work, and where meaning changes. More films in the series are on the way.",
-  "next_h_es": "Viste quién hace el trabajo, y dónde cambia el significado. Vienen más películas de la serie."
+  "next_h_es": "Viste quién hace el trabajo, y dónde cambia el significado. Vienen más películas de la serie.",
+  "past": ["Japan's two frequencies, 1890s and 2011", "The same word can mean something different on each side of a line; what crosses must be translated."],
+  "past_es": ["Las dos frecuencias de Japón, década de 1890 y 2011", "La misma palabra puede significar algo distinto a cada lado de una línea; lo que cruza hay que traducirlo."]
 }

@@ -25,6 +25,6 @@
   },
   "past": ["Today, not the past: a Monday morning at the hub", "What the earlier films decided, at work every day."],
   "past_es": ["Hoy, no el pasado: un lunes por la mañana en el hub", "Lo que decidieron las películas anteriores, en marcha cada día."],
-  "next_h": "You've seen a hub at work. More films in the series are on the way.",
-  "next_h_es": "Viste un hub en marcha. Vienen más películas de la serie."
+  "next_h": "You've seen a hub at work.",
+  "next_h_es": "Viste un hub en marcha."
 }

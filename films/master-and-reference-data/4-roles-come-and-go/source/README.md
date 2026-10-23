@@ -4,7 +4,7 @@
 
 | File | What it holds |
 |---|---|
-| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Nguyen, Linh, HR, Cato), and the moment its poster shows (her whole timeline at the end, roles starting and ending all along it, and the line at today). |
+| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Nguyen, Linh, HR, Cato), and the moment its poster shows (from the opening story: Cato in Rome, beside the stone that lists his offices, quaestor to consul). |
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). Eight lines carry a `say`, so the voice reads dates and years as said: "the thirty-first of March", "twenty twenty-five". The film re-times itself to the voice. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/breath.js` | The few longer pauses: holds after some lines, and three wordless moments (the census list and the word "census", then the title; Linh's table, read before it's asked about; and the end card). |

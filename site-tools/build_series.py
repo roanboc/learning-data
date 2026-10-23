@@ -28,7 +28,7 @@ import html, json, math, pathlib, re, sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 WEB = ROOT / "site"
-BASE = "https://roanboc.github.io/learning-data/"
+BASE = "https://data.learn-all.org/"
 REPO = "https://github.com/roanboc/learning-data"
 E = lambda s: html.escape(s, quote=False).replace('"', "&quot;")
 NUM = {"en": "one two three four five six seven eight nine ten eleven twelve".split(),
@@ -130,6 +130,7 @@ SERIES = [
     dict(id="master-and-reference-data", dir="master-and-reference-data", slug="master-and-reference-data",
          name={"en": "The same one, everywhere", "es": "El mismo, en todas partes"}, builds_on=mr_builds_on,
          place={"en": "university", "es": "universidad"}, blocks=[], next="data-governance",
+         learn=dict(dir="master-and-reference-data", bundle="one-person-many-roles"),
          marks={"en": "DAMA and DAMA-DMBOK are trademarks of DAMA International, and ArchiMate of The Open Group, named or drawn only to identify that body of knowledge and that notation. This project is not affiliated with or endorsed by them.",
                 "es": "DAMA y DAMA-DMBOK son marcas de DAMA International, y ArchiMate de The Open Group, nombradas o dibujadas solo para identificar ese cuerpo de conocimiento y esa notación. Este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
     dict(id="data-governance", dir="data-governance", slug="data-governance",

@@ -2415,18 +2415,23 @@ const M1_G1=x=>650-100*Math.exp(-Math.pow((x-480)/310,8))+4*Math.sin(x/150),M1_C
 const M1_G2=x=>712+14*Math.sin(x/260+2)-44*Math.exp(-Math.pow((x-1010)/320,2));
 const M1_G3=x=>812+22*Math.sin((x+200)/420)+8*Math.sin(x/130);
 const M1_FF=x=>540+18*Math.sin(x/300+0.4)+6*Math.sin(x/110);
-// the road from the farm to Uppsala, which the certificate travels
-const M1_ROAD=wc_smooth([[1036,M1_G2(1036)+8],[1120,M1_G2(1120)-4],[1210,646],[1300,610],[1380,578],[1450,550],[1500,536]],8);
+// the road from the farm to Uppsala, which the certificate travels: from the door, over the hill's brow and behind its spruces, then
+// across the fields
+const M1_ROAD=wc_smooth([[1024,M1_G2(1024)+8],[1120,M1_G2(1120)-4],[1210,646],[1300,610],[1380,578],[1450,550],[1500,536]],8);
+// the farm hill's spruces; the road and its walker pass behind the three by the road
+const M1_SPRUCE=[[1196,150],[1236,178],[1272,140],[1716,140],[1760,170],[1804,128]];
+// the road, painted with each ground it crosses (only below that ground's line f), so the brow and the trees in front of it hide it
+function m1_road(ctx,f){ctx.save();if(f){ctx.beginPath();ctx.moveTo(-60,H+60);for(let x=-60;x<=W+60;x+=10)ctx.lineTo(x,f(x));ctx.lineTo(W+60,H+60);ctx.closePath();ctx.clip();}
+  wc_wash(ctx,wc_band(M1_ROAD,30,6),WCP.road,{depth:0.62,kind:"road",line:false});ctx.restore();}
 // 1686: a parish church on its hill, a lake, a falu-red farmhouse, the road to Uppsala and its cathedral far off, a roundpole fence
 function m1_parish(ctx){const P=WCP;wc_sky(ctx,604,1,{sun:[1660,170]});
   wc_forest(ctx,x=>500+14*Math.sin(x/210)+8*Math.sin(x/80+1.3),P.farForest,0.05,11,{h:30,w:18});wc_cathedral(ctx,1430,532,0.8,0.14);
   wc_land(ctx,M1_FF,P.far,0.22);wc_fieldStrips(ctx,M1_FF,4,64,4,[P.far,P.field],0.24,3);
-  wc_treeRow(ctx,x=>M1_FF(x)+2,1120,1420,46,34,0.24,7);wc_treeRow(ctx,x=>M1_FF(x)+2,1560,1900,44,32,0.24,9);wc_lake(ctx,574,860,0.34);
-  wc_land(ctx,M1_G1,P.mid,0.5);wc_contact(ctx,276,694,M1_CH+3,0.52);wc_church(ctx,296,M1_CH,1.18,0.52);
+  wc_treeRow(ctx,x=>M1_FF(x)+2,1120,1420,46,34,0.24,7);wc_treeRow(ctx,x=>M1_FF(x)+2,1560,1900,44,32,0.24,9);wc_lake(ctx,574,860,0.34);m1_road(ctx);
+  wc_land(ctx,M1_G1,P.mid,0.5);m1_road(ctx,M1_G1);wc_contact(ctx,276,694,M1_CH+3,0.52);wc_church(ctx,296,M1_CH,1.18,0.52);
   wc_birch(ctx,208,M1_G1(208)+8,210,0.56,-0.03);wc_birch(ctx,770,M1_G1(770)+6,236,0.58,0.03);wc_birch(ctx,800,M1_G1(800)+8,190,0.58,-0.03);
-  wc_land(ctx,M1_G2,P.mid2,0.6);for(const [x,h] of [[1196,150],[1236,178],[1272,140],[1716,140],[1760,170],[1804,128]])wc_spruce(ctx,x,M1_G2(x)+6,h,0.6);
+  wc_land(ctx,M1_G2,P.mid2,0.6);m1_road(ctx,M1_G2);for(const [x,h] of M1_SPRUCE)wc_spruce(ctx,x,M1_G2(x)+6,h,0.6);
   wc_contact(ctx,860,1130,M1_G2(1000)+6,0.64);wc_farmhouse(ctx,876,M1_G2(1000)+4,1.24,0.64);
-  wc_wash(ctx,wc_band(M1_ROAD,30,6),P.road,{depth:0.62,kind:"road",line:false});
   wc_land(ctx,M1_G3,P.near,0.86);wc_fence(ctx,x=>M1_G3(x)+34,-40,1000,0.86);wc_tufts(ctx,M1_G3,0,1030,56,0.95,8);
   const R=wc_rng(5);for(let i=0;i<46;i++){const x=R()*1020,y=M1_G3(x)+90+R()*(H-M1_G3(x)-90),r=3+R()*3+(y-880)/60;wc_wash(ctx,wc_ell(x,y,r,r*0.9,12),[P.flowerA,P.flowerB,P.flowerC][i%3],{kind:"dab",flat:true});}}
 // today: the university's old building and its glass wing, a lawn, terraced houses across the street, a lamp
@@ -2497,9 +2502,16 @@ function m1_book2(ctx,t,cx,cy,t0){const w=560,h=250,L=cx-w/2+34,R=cx+26,top=cy-h
 function m1_cert(ctx,x,y,s,rot,a){if(a<=0.01)return;const c=wc_kept("cert",150,120,q=>{q.translate(15,12);wc_wash(q,[[0,8],[110,0],[118,80],[6,90]],WCP.parchment,{kind:"paper",lw:1.6});
     q.strokeStyle=rgba(WCP.parchInk,0.45);q.lineWidth=1.6;for(let i=0;i<3;i++){q.beginPath();q.moveTo(16,30+i*16);q.lineTo(80-i*10,26+i*16);q.stroke();}wc_wash(q,wc_rect(88,2,10,86),WC_ROLE.student,{kind:"ribbon",flat:true});});
   ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);ctx.scale(s,s);withA(ctx,a,()=>ctx.drawImage(c,-75,-60));ctx.restore();}
-// the walker who carries it, kept, with a step's bob
-function m1_walker(ctx,x,y,t,a){if(a<=0.01)return;const c=wc_kept("walker",120,130,q=>{wc_walker(q,52,120,100,WCP.coat,0.9,{paper:true});});
-  withA(ctx,a,()=>ctx.drawImage(c,x-52,y-120-Math.abs(Math.sin(t*5.4))*3));}
+// where the walker is, u of the way along the road: the feet, and the size, smaller as the road goes away
+function m1_walkerAt(u){const [x,y]=wc_along(M1_ROAD,u),k=lerp(0.34,0.76,clamp((y-536)/(M1_ROAD[0][1]-536),0,1));return [x,y+6*k,k];}
+// a spruce's outline, as wc_spruce draws it and a little wider, added to the path
+function m1_spruceEdge(ctx,x,y,h){const w=h*0.44,L=[],R=[];
+  for(let i=0;i<5;i++){const yy=y-h*0.08-i/5*h*0.86,hw=w*(1-i/5)*0.5+5,nx=y-h*0.08-(i+1)/5*h*0.86+h*0.06;L.push([x-hw,yy],[x-hw*0.42,nx]);R.unshift([x+hw*0.42,nx],[x+hw,yy]);}
+  const p=[[x-w*0.08-3,y-h*0.08]].concat(L,[[x,y-h-4]],R,[[x+w*0.08+3,y-h*0.08]]);ctx.moveTo(p[0][0],p[0][1]);for(const q of p)ctx.lineTo(q[0],q[1]);ctx.closePath();}
+// the walker who carries it, u of the way to Uppsala, kept, with a step's bob; behind the spruces, out of sight
+function m1_walker(ctx,u,t,a){if(a<=0.01)return;const c=wc_kept("walker",120,130,q=>{wc_walker(q,52,120,100,WCP.coat,0.9,{paper:true});}),[x,y,k]=m1_walkerAt(u);
+  ctx.save();for(const [sx,h] of M1_SPRUCE){ctx.beginPath();ctx.rect(-60,-60,W+120,H+120);m1_spruceEdge(ctx,sx,M1_G2(sx)+6,h);ctx.clip("evenodd");}
+  withA(ctx,a,()=>ctx.drawImage(c,x-52*k,y-(120+Math.abs(Math.sin(t*5.4))*3)*k,120*k,130*k));ctx.restore();}
 // the card of 1947, and the number stamped on it at ts: the impression lands a little large and settles, in violet ink inside a double
 // rule, and the card gives under it
 const M1_STAMP=[58,52,120];
@@ -2776,10 +2788,10 @@ scene("parish",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
     // the household's book, written as the narration names what it holds
     arrive(ctx,M1_B1[0],M1_B1[1],t,tBook-0.4,()=>m1_bookRows(ctx,t,M1_B1[0],M1_B1[1],{head:tHouse,names:tWho-0.15,moved:tMv,read:tRead}),{dy:40,d:0.9});
     arrive(ctx,1000,452,t,tHouse,()=>withA(ctx,1-fin(t,tMv-0.6,0.5),()=>wc_tag(ctx,1000,452,"every household",{align:"center"})),{dy:10});
-    // the certificate leaves the page, and is carried along the road to Uppsala
-    const lift=clamp((t-tCarry)/0.9,0,1),walk=clamp((t-tCarry-0.9)/(tNext-tCarry+0.6),0,1),wp=wc_along(M1_ROAD,walk);
-    if(lift>0&&lift<1)m1_cert(ctx,lerp(M1_B1[0]+190,1040,ease(lift)),lerp(M1_B1[1]-40,660,ease(lift))-Math.sin(lift*Math.PI)*120,lerp(0.9,0.42,ease(lift)),lerp(-0.1,0.2,lift),1);
-    m1_walker(ctx,wp[0],wp[1]+6,t,fin(t,tCarry+0.8,0.3)*(1-fin(t,tNext+1.2,0.6)));
+    // the certificate leaves the page for the walker's hand at the farmhouse door, and is carried along the road to Uppsala
+    const lift=clamp((t-tCarry)/0.9,0,1),walk=clamp((t-tCarry-0.9)/(tNext-tCarry+0.6),0,1),[hx,hy,hk]=m1_walkerAt(0);
+    if(lift>0&&lift<1)m1_cert(ctx,lerp(M1_B1[0]+190,hx+24*hk,ease(lift)),lerp(M1_B1[1]-40,hy-64*hk,ease(lift))-Math.sin(lift*Math.PI)*120,lerp(0.9,0.19*hk,ease(lift)),-0.1+0.3*Math.sin(lift*Math.PI),1);
+    m1_walker(ctx,walk,t,fin(t,tCarry+0.8,0.3)*(1-fin(t,tNext+1.2,0.6)));
     arrive(ctx,1700,480,t,tNew-0.2,()=>withA(ctx,1-fin(t,tNum-0.6,0.5),()=>wc_tag(ctx,1700,480,"Uppsala parish",{align:"center"})),{dy:10});
     // the next parish's book takes the name in
     arrive(ctx,M1_B2[0],M1_B2[1],t,tNext-0.3,()=>m1_book2(ctx,t,M1_B2[0],M1_B2[1],tNext),{dy:30,d:0.9});});

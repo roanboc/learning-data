@@ -1,0 +1,37 @@
+{
+  "kicker": "Where data governance comes from",
+  "kicker_es": "De dónde viene la gobernanza de datos",
+  "title_es": "El mismo problema, en todas partes",
+  "h1": "The same problem, everywhere: a bank that can't add up its risks, a body of knowledge written by the people who did the work, and why governance is still at its centre",
+  "h1_es": "El mismo problema, en todas partes: un banco que no logra sumar sus riesgos, un cuerpo de conocimiento escrito por quienes hacían el trabajo, y por qué la gobernanza sigue en su centro",
+  "lead": "In 2008, a bank's board asks how much it stands to lose if another bank fails, and nobody can add it up: the numbers are all there, but nobody can put them together, or say which to trust. It wasn't a new problem. In 1980, the people who looked after the data companies shared between departments started meeting to share what they'd learned, and in 2009 their association, DAMA, wrote it down as a body of knowledge for data management, the DMBOK, with governance at the centre of its wheel. Regulators, laws and new technology have asked the same question ever since: who decides about this data, and who answers for it? The book has grown with them, with ethics in 2017 and AI in 2024, and a third edition is being written. Governance stays at the centre.",
+  "lead_es": "En 2008, la junta de un banco pregunta cuánto podría perder si quiebra otro banco, y nadie logra sumarlo: los números están todos, pero nadie puede juntarlos, ni decir en cuáles confiar. No era un problema nuevo. En 1980, quienes cuidaban los datos que las empresas compartían entre áreas empezaron a reunirse para compartir lo aprendido, y en 2009 su asociación, DAMA, lo puso por escrito como un cuerpo de conocimiento para la gestión de datos, el DMBOK, con la gobernanza en el centro de su rueda. Desde entonces, reguladores, leyes y tecnologías nuevas han hecho la misma pregunta: ¿quién decide sobre estos datos y quién responde por ellos? El libro ha crecido con ellos, con la ética en 2017 y la IA en 2024, y se está escribiendo una tercera edición. La gobernanza sigue en el centro.",
+  "description": "A film about where data governance comes from: a bank in 2008 that can't add up its risks; data shared between departments in the 1970s, and the people who met in 1980 to share what they'd learned; a law that made chief executives sign for their figures; the DMBOK and its wheel, with governance at the centre; the banks' principles, and why so few banks met them; ethics, a European law on personal data, and AI; and why the DMBOK still matters today.",
+  "description_es": "Una película sobre de dónde viene la gobernanza de datos: un banco que en 2008 no logra sumar sus riesgos; los datos compartidos entre áreas en los años 70, y quienes se reunieron en 1980 para compartir lo aprendido; una ley que obligó a los directores ejecutivos a firmar sus cifras; el DMBOK y su rueda, con la gobernanza en el centro; los principios de los bancos, y por qué tan pocos los cumplieron; la ética, una ley europea sobre datos personales y la IA; y por qué el DMBOK sigue importando hoy.",
+  "card": "In 2008, a bank couldn't add up its risks. People had met over the same problem since 1980. Why is governance still at the centre?",
+  "card_es": "En 2008, un banco no logró sumar sus riesgos. Desde 1980, había gente reunida por el mismo problema. ¿Por qué la gobernanza sigue en el centro?",
+  "fiction": "The bank, the university and the people in the film are invented; the history, its dates and its figures are real, with their sources in the script.",
+  "fiction_es": "El banco, la universidad y las personas de la película son inventados; la historia, sus fechas y sus cifras son reales, con sus fuentes en el guion.",
+  "fiction_series": "The prologue's history, its dates and its figures are real, with their sources in its script.",
+  "fiction_series_es": "La historia del prólogo, sus fechas y sus cifras son reales, con sus fuentes en su guion.",
+  "chapters_es": {
+    "question": "Una pregunta",
+    "notnew": "No es un problema nuevo",
+    "signs": "Alguien firma",
+    "written": "Por escrito",
+    "first": "La gobernanza primero",
+    "should": "¿Deberíamos?",
+    "machines": "Máquinas que aprenden",
+    "centre": "Sigue en el centro"
+  },
+  "next_h": "You've seen where data governance comes from. Next, a new governance lead meets the same question at a university.",
+  "next_h_es": "Viste de dónde viene la gobernanza de datos. Sigue un nuevo líder de gobernanza, que se topa con la misma pregunta en una universidad.",
+  "past": [
+    "A bank in 2008, then data management's own history, from the 1970s to the DMBOK's third edition",
+    "The question never changed: who decides about this data, and who answers for it?"
+  ],
+  "past_es": [
+    "Un banco en 2008, y luego la historia de la gestión de datos, de los años 70 a la tercera edición del DMBOK",
+    "La pregunta nunca cambió: ¿quién decide sobre estos datos y quién responde por ellos?"
+  ]
+}

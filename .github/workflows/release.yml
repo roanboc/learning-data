@@ -213,7 +213,7 @@ jobs:
 
           Rendered for this release, from commit $GITHUB_SHA: ${RENDERED:-none; every video is carried over from the previous release}.
 
-          Watch them with chapters, then try the hands-on labs and scenarios: https://roanboc.github.io/learning-data/
+          Watch them with chapters, then try the hands-on labs and scenarios: https://data.learn-all.org/
 
           The narration is a synthetic voice. The university, people and numbers are fictional. The films are licensed CC BY 4.0; the Databricks and dbt logos belong to their owners (see NOTICE.md).
           EOF

@@ -1,7 +1,7 @@
 {
   "key": "who-may-see-it",
   "title": "Who may see it",
-  "sub": "The fourth film of a series on data governance: a planner asks for learner data, and the line a court drew in 1983 runs between columns. Classify once, at the column, and let the platform protect it everywhere.",
+  "sub": "The fourth film of a series on data governance: a planner asks for learner data, and the line a court drew in 1983 runs between columns. Classify once, at the column, and protect it everywhere.",
   "howto": "The film is painted in watercolour, in the university's own rooms and in West Germany in 1983. Behind each person, a soft wash of their side: gold for the business side, cyan for the technical side, warm umber for the people of the past. Plum is direct personal data, a paler plum pseudonymous, plain paper none; a mask is a plum band of stars. Gold is governance's decisions.",
   "src": [
     "plan.js",

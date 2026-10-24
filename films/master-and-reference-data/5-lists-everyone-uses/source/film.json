@@ -8,7 +8,8 @@
     "plan.js",
     "scenes.js"
   ],
-  "poster": ["keeps", "line", -0.8],
+  "poster": ["codes", "yyz", -0.3],
+  "story": ["codes"],
   "say": [
     ["\\bNguyen\\b", "Nwin"],
     ["\\bLinh's\\b", "Lin's"],

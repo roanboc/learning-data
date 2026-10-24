@@ -23,8 +23,8 @@
     "elsewhere": "En otros lugares",
     "keeps": "Quién la mantiene"
   },
-  "next_h": "You've given each list an owner, a date and one home. More films in the series are on the way.",
-  "next_h_es": "Le diste a cada lista un responsable, una fecha y un solo hogar. Vienen más películas de la serie.",
+  "next_h": "You've given each list an owner, a date and one home.",
+  "next_h_es": "Le diste a cada lista un responsable, una fecha y un solo hogar.",
   "past": ["Airport codes: Toronto's YYZ, after Malton's old station code, and SGN, which still says Saigon", "A code outlives its reason, because changing it costs everyone who uses it."],
   "past_es": ["Códigos de aeropuerto: YYZ de Toronto, por el antiguo código de estación de Malton, y SGN, que aún dice Saigón", "Un código sobrevive a su razón, porque cambiarlo les cuesta a todos los que lo usan."]
 }

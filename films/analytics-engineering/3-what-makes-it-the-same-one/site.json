@@ -35,5 +35,7 @@
     "apart": ["seeds/reference/student/learner_identity_decisions.csv", "models/intermediate/student/int_learner_key_candidates.sql", "tests/rules/keys_decided_different_stay_apart.sql"],
     "hash": ["macros/shared/keys.sql"],
     "codes": ["seeds/reference/student/status_map.csv", "seeds/reference/student/_student__seeds.yml"]
-  }
+  },
+  "past": ["Bertillon's measurements, Paris, the 1880s", "Looking alike isn't being the same."],
+  "past_es": ["Las medidas de Bertillon, París, década de 1880", "Parecerse no es ser el mismo."]
 }

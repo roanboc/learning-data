@@ -18,5 +18,7 @@
   "labs_lead": "Three labs, one idea each. Decide where each idea's source of truth lives, apply a log of changes in order (and out of it), and set how fresh each answer must be.",
   "labs_lead_es": "Tres labs, una idea cada uno. Decide dónde vive la fuente de verdad de cada idea, aplica un registro de cambios en orden (y fuera de orden), y define qué tan al día tiene que estar cada respuesta.",
   "quiz_lead": "Eight situations from a university running a hybrid database: counting at census, a replay out of order, a delete that never arrives, two owners for one table. Decide what you'd do; each answer explains why.",
-  "quiz_lead_es": "Ocho situaciones de una universidad con una base de datos híbrida: contar en la fecha de censo, una repetición fuera de orden, un borrado que nunca llega, dos responsables para una tabla. Decide qué harías; cada respuesta explica por qué."
+  "quiz_lead_es": "Ocho situaciones de una universidad con una base de datos híbrida: contar en la fecha de censo, una repetición fuera de orden, un borrado que nunca llega, dos responsables para una tabla. Decide qué harías; cada respuesta explica por qué.",
+  "past": ["The cash register, 1879", "Recording and counting in one place."],
+  "past_es": ["La caja registradora, 1879", "Registrar y contar en un solo lugar."]
 }

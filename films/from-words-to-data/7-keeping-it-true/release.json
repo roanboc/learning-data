@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Keeping it true",
+    "key": "keeping-it-true-en",
+    "dir": "films/from-words-to-data/7-keeping-it-true/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/keeping-it-true/film.js",
+    "video": "dist/keeping-it-true.mp4",
+    "file": "keeping-it-true.mp4",
+    "captions": [["films/from-words-to-data/7-keeping-it-true/captions/en.srt", "keeping-it-true.en.srt"], ["films/from-words-to-data/7-keeping-it-true/captions/es.srt", "keeping-it-true.es.srt"]],
+    "paths": ["films/from-words-to-data/7-keeping-it-true/source", ":(exclude)films/from-words-to-data/7-keeping-it-true/source/src/i18n/es/captions.js", "films/from-words-to-data/shared", "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src", "films/a-sharper-sketch/source/src", "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts"],
+    "legibility": {"texts": 475, "under_28": "0%", "under_20": 0, "median": 28, "status": "Reworked"}
+  }
+]

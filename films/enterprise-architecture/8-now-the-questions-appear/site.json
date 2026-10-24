@@ -24,5 +24,7 @@
     "end": "Las preguntas que importan"
   },
   "next_h": "You've seen which questions matter. More films in the series are on the way.",
-  "next_h_es": "Viste qué preguntas importan. Vienen más películas de la serie."
+  "next_h_es": "Viste qué preguntas importan. Vienen más películas de la serie.",
+  "past": ["Kerala's fishermen, 1997", "A question matters when someone will act on its answer, in time."],
+  "past_es": ["Los pescadores de Kerala, 1997", "Una pregunta importa cuando alguien va a actuar a partir de su respuesta, a tiempo."]
 }

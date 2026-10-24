@@ -1,7 +1,8 @@
 /* The map before the data: plays the series' labs and scenarios through, for site-tools/smoke.py's series-learn check, from their
    words (window.EA) and only by what a visitor can click. A lab gets the right answers, with one wrong pick on its first card or
    question where it has one, and must reach its end, say what happened in words (its end only once), draw every word whole
-   (window.EA_MISS, from learn.js), and start again. Every scenario gets its right answer, and the results must count them all.
+   (window.EA_MISS, from learn.js), and start again. Every scenario must have its picture, the first one too, and get its right
+   answer, and the results must count them all.
    Each returns what went wrong, as text. */
 ({
 lab: async (id) => {
@@ -86,6 +87,7 @@ quiz: async () => {
     if (!qq) { out.push("a scenario that isn't in the words: " + t); break; }
     if (seen.has(qq.n)) { out.push("scenario " + qq.n + " came twice"); break; }
     seen.add(qq.n);
+    if (!app.querySelector(".qvis canvas")) out.push("scenario " + qq.n + " has no picture");
     if (qq.type === "choice" || qq.type === "spot") {
       const O = qq.type === "choice" ? qq.opts : qq.lines, j = O.findIndex(o => o.ok), b = app.querySelector('.qopt[data-j="' + j + '"]');
       if (!b) { out.push("scenario " + qq.n + ": no right answer to pick"); break; }

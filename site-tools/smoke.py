@@ -3,14 +3,14 @@
 
     python site-tools/smoke.py
 
-It serves site/ at http://localhost:8110/learning-data/, as GitHub Pages does, with http-server (npx), which
+It serves site/ at http://localhost:8110/, as GitHub Pages does, with http-server (npx), which
 answers HTTP Range requests: the players seek their soundtrack, and Python's http.server can't do that.
 It stops the server at the end. It prints what each check found, and exits with 1 if anything fails.
 
 Needs: pip install playwright, Chromium for Playwright, and Node (for npx http-server).
 Options:
   --port N          serve on another port (default 8110)
-  --base URL        test a copy of this checkout that is already served, such as https://roanboc.github.io/learning-data/
+  --base URL        test a copy of this checkout that is already served, such as https://data.learn-all.org/
                     after a push (the pages and links to test still come from site/ here)
   --only a,b        run only these checks (see --list)
   --pages JSON      run each check only on these pages, a JSON list of page keys ("" is the home page, "topics/" the Topics
@@ -47,7 +47,7 @@ import check_site  # noqa: E402  (the same page parser and rules as the static c
 
 WIDTHS = [320, 360, 390, 768, 1280]
 THEMES = ["light", "dark"]
-PUBLIC = "https://roanboc.github.io/learning-data/"
+PUBLIC = "https://data.learn-all.org/"
 # film pages: their chapter count, and the Spanish chapter names of the English films on Spanish pages
 FILMS = {
     "": 11, "es/": 11, "sketch/": 9, "es/sketch/": 9,
@@ -142,11 +142,10 @@ def fill(s, o):
 def start_server(port):
     if shutil.which("npx") is None:
         sys.exit("smoke.py needs Node's npx (for http-server), or --base to test a site that is already served")
-    root = pathlib.Path(tempfile.mkdtemp(prefix=f"ld-srv-{port}-"))
-    (root / "learning-data").symlink_to(WEB)
+    root = WEB  # the site sits at the domain root, as on GitHub Pages
     proc = subprocess.Popen(["npx", "--yes", "http-server", str(root), "-p", str(port), "-c-1", "-s"],
                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
-    base = f"http://127.0.0.1:{port}/learning-data/"
+    base = f"http://127.0.0.1:{port}/"
     for _ in range(120):
         try:
             with urllib.request.urlopen(base, timeout=1) as r:
@@ -170,7 +169,8 @@ def stop_server(proc, root):
             os.killpg(proc.pid, signal.SIGKILL)
         except Exception:  # noqa: BLE001
             pass
-    shutil.rmtree(root, ignore_errors=True)
+    if root != WEB:  # the site folder itself is kept
+        shutil.rmtree(root, ignore_errors=True)
 
 
 # ---------------------------------------------------------------- fonts: fetched here, handed to the browser

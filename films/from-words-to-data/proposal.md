@@ -4,6 +4,7 @@
 
 ## Decided
 
+<!-- decided: made by site-tools/build_series.py from decided.md, the series' and each film's -->
 | Date | Decision |
 |---|---|
 | 28 September 2026 | Seven films, of 6 to 7 minutes each. |
@@ -12,6 +13,7 @@
 | 28 September 2026 | The opening film starts before writing: how language began, how the brain links words to things, and how other animals handle concepts. |
 | 16 October 2026 | *Meaning machines can read* gains a fifth chapter, *One map, many views*: each concept is written once, in Noor's architecture map (in ArchiMate, or any other architecture modelling language), with its definition, owned by the business, its relationships and its rules; the glossary, the conceptual model, the logical model (which alone adds how many, and the keys), the ontology in OWL and the tests are views drawn from it, one way, so they agree instead of competing. A first cut, *Ontology or model?*, set the ontology and the data model side by side as rivals with different jobs; it was reworked the same day to show them as one connected thing. Two labs, four scenarios and a fifth Pause and think question go with it, and *What's in a word* names its glossary and its conceptual model on screen. |
 | 17 October 2026 | After review of *Meaning machines can read*: an assistant can read documents and web pages, so Genie's problem is not a PDF it can't open, but a policy and an old page that disagree, with no owner and no version, outside a managed glossary. *Genie, again* opens on the glossary as the source of truth, its definitions carried on each table's page in Databricks, next to the data, where Genie reads them. The closing triangle shows the word in the glossary only: a second language on screen read as forced, and Spanish stays in the captions. |
+<!-- /decided -->
 
 ## The brief
 

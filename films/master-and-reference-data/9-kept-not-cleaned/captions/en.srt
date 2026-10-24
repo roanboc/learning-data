@@ -1,0 +1,203 @@
+1
+00:00:01,600 --> 00:00:11,182
+Around 256 BC, in what is now Sichuan, the governor Li Bing split the Min River in two, without a dam, to water the Chengdu plain.
+
+2
+00:00:12,482 --> 00:00:15,999
+Its shape sends most of the river's gravel down the outer channel.
+
+3
+00:00:17,299 --> 00:00:23,356
+And every dry season, the inner channel is closed off and dug out, down to a mark buried in its bed.
+
+4
+00:00:24,656 --> 00:00:28,019
+Stone horses, it's said, at first, and later iron bars.
+
+5
+00:00:29,519 --> 00:00:34,117
+Its rule is six characters long: dig the riverbed deep, keep the weir low.
+
+6
+00:00:35,717 --> 00:00:39,060
+More than two thousand years later, it still waters the plain.
+
+7
+00:00:40,160 --> 00:00:43,549
+It wasn't cleaned out once and left. It's kept, every year.
+
+8
+00:00:50,849 --> 00:00:57,500
+At the university, in 2024, a clean-up project merged two thousand duplicate records of people.
+
+9
+00:00:58,700 --> 00:01:02,168
+It took a team of four, for six months, and it finished on time.
+
+10
+00:01:03,468 --> 00:01:05,569
+For a while, the duplicates were gone.
+
+11
+00:01:08,069 --> 00:01:10,696
+A year later, there were eleven hundred new ones.
+
+12
+00:01:11,996 --> 00:01:13,506
+Every intake made more.
+
+13
+00:01:14,506 --> 00:01:20,033
+Graduates came back to study, and people applied through two routes, each giving them a new number.
+
+14
+00:01:21,333 --> 00:01:25,192
+Linh's second number, in July 2025, was one of them.
+
+15
+00:01:26,792 --> 00:01:30,266
+The clean-up fixed the records. It didn't change how they were made.
+
+16
+00:01:32,766 --> 00:01:37,654
+In 2026, the application started searching before it creates a person.
+
+17
+00:01:38,854 --> 00:01:43,890
+A clear match adds a role to someone already known. A likely one goes to Mei's queue.
+
+18
+00:01:45,290 --> 00:01:48,665
+New duplicates fell under fifty an intake, and stayed there.
+
+19
+00:01:50,165 --> 00:01:55,268
+Like the river's shape, the search keeps most of them out. Mei's queue digs out the rest.
+
+20
+00:01:57,768 --> 00:02:02,219
+So keeping the person right isn't a project that ends. It's everyday work.
+
+21
+00:02:03,419 --> 00:02:07,857
+Mei's office has its own iron bars: five measures, each with a limit.
+
+22
+00:02:09,157 --> 00:02:10,871
+New duplicates per intake.
+
+23
+00:02:11,771 --> 00:02:14,169
+How long the queue's oldest case has waited.
+
+24
+00:02:15,069 --> 00:02:20,776
+Roles past their end date, like a tutor whose term contract ended, but who's still active.
+
+25
+00:02:21,776 --> 00:02:23,257
+Values with no source.
+
+26
+00:02:24,057 --> 00:02:28,216
+And requests for what the university holds about someone, answered on time.
+
+27
+00:02:29,416 --> 00:02:35,982
+Each has a test for its limit. Every night, the platform works them out, keeps them, and shows them on a dashboard.
+
+28
+00:02:40,482 --> 00:02:44,411
+One Monday, an alert: the oldest case had waited twelve days.
+
+29
+00:02:45,711 --> 00:02:49,721
+It was waiting for HR to confirm a birth date, one digit apart.
+
+30
+00:02:50,921 --> 00:02:55,231
+Mei rang HR, and the case was decided that morning, with its reason.
+
+31
+00:02:56,631 --> 00:02:59,773
+The alert pointed at a case, not at a person to blame.
+
+32
+00:03:02,273 --> 00:03:07,695
+Lists from outside change too. This year, the government's list of visa types added one.
+
+33
+00:03:08,995 --> 00:03:15,596
+An agent drafted how it maps to the university's fee categories, with its evidence, as a change to the list.
+
+34
+00:03:17,096 --> 00:03:20,359
+The list's owner, the admissions office, checked it and approved it.
+
+35
+00:03:21,559 --> 00:03:24,198
+The agent proposes. The owner decides.
+
+36
+00:03:26,698 --> 00:03:33,190
+Yusuf, who leads data governance, reads the same measures on his scorecard, beside every other domain's.
+
+37
+00:03:34,690 --> 00:03:39,047
+Owners, limits, and a way to change them: the person now has all three.
+
+38
+00:03:41,547 --> 00:03:49,688
+Every industry knows this picture. A bank cleans up its customer records every three years, and the duplicates come back every time.
+
+39
+00:03:50,988 --> 00:03:53,098
+One check at entry ends the cycle.
+
+40
+00:03:55,798 --> 00:04:02,144
+February 2027. Linh starts her PhD: a new role, on the person she already is.
+
+41
+00:04:03,744 --> 00:04:07,636
+That intake made thirty-eight new duplicates. She isn't one of them.
+
+42
+00:04:09,136 --> 00:04:14,085
+And at Dujiangyan, every spring, when the repairs are done, the water is let back in.
+
+43
+00:04:15,685 --> 00:04:18,752
+Clean it once, and it decays. Keep it, and it lasts.
+
+44
+00:04:24,452 --> 00:04:29,529
+Nine films followed Linh, until the university knew her as the same one, everywhere.
+
+45
+00:04:30,829 --> 00:04:36,083
+Who someone is: decide each match once, with a reason, and declare which value wins.
+
+46
+00:04:37,083 --> 00:04:42,624
+Roles and lists: give each role a start and an end, and each list an owner and one home.
+
+47
+00:04:43,624 --> 00:04:50,332
+Sharing it safely: use each role's data for its purpose only, and share the person the lightest way that works.
+
+48
+00:04:51,332 --> 00:04:57,267
+Keeping it right: make every change one you can explain and undo, and stop duplicates at the door.
+
+49
+00:04:59,767 --> 00:05:03,491
+Master data is one of the things data governance looks after.
+
+50
+00:05:05,091 --> 00:05:12,713
+And it needs the rest of governance: someone who decides, one meaning for each word, access for a purpose, and rules that run.
+
+51
+00:05:14,313 --> 00:05:20,166
+The next series follows Yusuf as he puts each of these in place, for all of the university's data.

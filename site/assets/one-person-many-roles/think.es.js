@@ -1,7 +1,7 @@
 /* Learning Data: "Pausa para pensar" de One person, many roles, en español. Mantén las claves iguales a think.en.js.
    La película se detiene al final de cuatro capítulos (five, apart, keeps, entities), con una pregunta cada vez. think.js las muestra,
-   y las lista otra vez en "Piénsalo" (#think-list). La serie todavía no tiene labs, así que ninguna pregunta tiene "stop",
-   y el .player data-labs de la página está vacío. */
+   y las lista otra vez en "Piénsalo" (#think-list). Los labs y las situaciones son de la serie, para todas sus películas
+   (assets/master-and-reference-data/), así que ninguna pregunta tiene "stop"; el .player data-labs de la página lleva a ellos. */
 window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
   qs:{

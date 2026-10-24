@@ -35,5 +35,7 @@
     "tests": ["models/core/course/_core_course__models.yml", "tests/generic/versions_do_not_overlap.sql", "seeds/expected/planning/census_report.csv", "tests/reconciliation/reconcile_planning_with_census_report.sql"],
     "unit": ["models/intermediate/student/_int_student__models.yml"],
     "levels": ["models/staging/short_courses/_short_courses__models.yml", "sources/short_courses/_short_courses__decisions.yml", "sources/student_system/_student_system__sources.yml"]
-  }
+  },
+  "past": ["The hallmark, from 1300", "Tested before it's marked; then trusted without testing again."],
+  "past_es": ["El contraste de la plata, desde 1300", "Se ensaya antes de marcarse; después se confía sin volver a ensayar."]
 }

@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Too good to be true",
+    "key": "too-good-to-be-true-en",
+    "dir": "films/when-things-go-wrong/2-too-good-to-be-true/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/too-good-to-be-true/film.js",
+    "video": "dist/too-good-to-be-true.mp4",
+    "file": "too-good-to-be-true.mp4",
+    "captions": [["films/when-things-go-wrong/2-too-good-to-be-true/captions/en.srt", "too-good-to-be-true.en.srt"], ["films/when-things-go-wrong/2-too-good-to-be-true/captions/es.srt", "too-good-to-be-true.es.srt"]],
+    "paths": ["films/when-things-go-wrong/2-too-good-to-be-true/source", ":(exclude)films/when-things-go-wrong/2-too-good-to-be-true/source/src/i18n/es/captions.js", "films/from-words-to-data/shared/src/phone.js", "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src", "films/a-sharper-sketch/source/src", "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts"],
+    "legibility": {"texts": 246, "under_28": "0%", "under_20": 0, "median": 28, "status": "Reworked"}
+  }
+]

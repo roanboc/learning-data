@@ -1,0 +1,217 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:12.083
+Mayo de 1976. La canoa de doble casco Hōkūleʻa sale de Maui hacia Tahití, a más de cuatro mil kilómetros al sur, sin brújula y sin cartas náuticas.
+
+00:00:13.583 --> 00:00:20.881
+Su navegante, Mau Piailug, de Satawal, en Micronesia, se orienta por las estrellas, el oleaje y las aves.
+
+00:00:22.381 --> 00:00:28.731
+Su mapa está en su memoria: una brújula de estrellas, los puntos del horizonte por donde salen y se ponen las estrellas.
+
+00:00:30.431 --> 00:00:38.332
+Después de treinta y un días, la tripulación avista Mataiva. Tres días más tarde, en Papeʻete, los esperan más de diecisiete mil personas.
+
+00:00:40.032 --> 00:00:44.573
+Pocos conservaban todavía este saber. Pasaba solo de navegante a aprendiz.
+
+00:00:45.873 --> 00:00:54.362
+Mau decidió enseñarlo más allá de su isla, para que no se perdiera. Un joven hawaiano, Nainoa Thompson, lo aprendió de él, y lo enseñó a otros.
+
+00:00:55.862 --> 00:01:01.284
+Todo mapa vive solo mientras la gente lo usa, lo mantiene fiel y lo enseña al próximo navegante.
+
+00:01:02.584 --> 00:01:05.496
+La prueba del navegante: ¿podría otra persona navegar con él?
+
+00:01:12.596 --> 00:01:15.660
+La última nota de Tomás pregunta cómo mantener vivo el mapa.
+
+00:01:17.160 --> 00:01:22.648
+Ahora se usa cada semana: para la prueba del capitán, para dar un hogar a las reglas y para responderle al ministro.
+
+00:01:24.348 --> 00:01:25.831
+Ahí es cuando un mapa se desactualiza.
+
+00:01:27.031 --> 00:01:31.097
+Vive en diapositivas, y en una herramienta de modelado que solo Tomás edita.
+
+00:01:32.397 --> 00:01:38.864
+Sus aplicaciones se copiaron a mano de la herramienta de gestión de servicios de TI, y muchas cambiaron desde entonces.
+
+00:01:40.364 --> 00:01:46.582
+Sus vistas se copian en presentaciones, y las copias se desfasan. El glosario y el catálogo guardan sus propias palabras.
+
+00:01:48.282 --> 00:01:51.518
+Un mapa desactualizado es peor que ninguno: la gente confía en él.
+
+00:01:53.218 --> 00:01:58.559
+Si Tomás se fuera mañana, nadie podría navegar con él. No pasa la prueba del navegante.
+
+00:02:01.259 --> 00:02:07.965
+Así que lleva el mapa a una herramienta de arquitectura empresarial que todos pueden usar, con una base de datos y un grafo.
+
+00:02:09.665 --> 00:02:12.331
+Mucho de lo que contiene ya se guarda en otra parte.
+
+00:02:13.631 --> 00:02:22.664
+La estrategia, en documentos; objetivos e iniciativas, en la herramienta de gestión de proyectos; aplicaciones y servidores, en la de gestión de servicios de TI.
+
+00:02:24.564 --> 00:02:30.297
+La herramienta trae cada uno con el ID de su fuente y lo mantiene al día, así que nadie lo vuelve a escribir.
+
+00:02:31.997 --> 00:02:38.456
+El resto se escribe en el propio mapa: capacidades, reglas, decisiones y los vínculos entre todo.
+
+00:02:40.156 --> 00:02:46.163
+Hasta el glosario de negocio cabe: cada término es un objeto de negocio, definido una vez por el negocio.
+
+00:02:47.763 --> 00:02:52.547
+Así que mantener fiel un mapa es un trabajo de integración de datos, además de modelado.
+
+00:02:56.047 --> 00:03:02.510
+Cada elemento se guarda una vez: una capacidad, un paso, un dominio, un objeto de negocio, una regla, una medida.
+
+00:03:04.110 --> 00:03:10.110
+Cada uno tiene un ID estable. Los nombres cambian, pero los ID no, así que todo lo demás apunta al ID.
+
+00:03:11.710 --> 00:03:17.862
+Luego su nombre, su definición, su responsable y sus relaciones, con los nombres que usa ArchiMate.
+
+00:03:19.362 --> 00:03:26.249
+Y sus dos reglas del primer día, en cada elemento: su evidencia, con fecha, y si su responsable lo confirmó.
+
+00:03:27.849 --> 00:03:30.297
+Las decisiones también se guardan, con su porqué.
+
+00:03:31.597 --> 00:03:37.138
+Un mapa pequeño podría guardar todo esto en archivos de texto, en un repositorio: el enfoque más simple.
+
+00:03:38.738 --> 00:03:45.667
+Con muchas fuentes, y muchas personas en sus roles, la empresa necesita la herramienta. De un modo u otro, las ideas son las mismas.
+
+00:03:51.567 --> 00:03:55.194
+Se guarda cada versión del mapa: quién cambió qué, y cuándo.
+
+00:03:56.494 --> 00:04:01.075
+Un cambio se propone como borrador, y nada cambia hasta que se aprueba.
+
+00:04:02.575 --> 00:04:07.935
+Lo aprueba quien es responsable de esa parte: Grace, lo de la red; Ama, las obligaciones.
+
+00:04:09.435 --> 00:04:12.062
+Los controles corren sobre el propio mapa, en cada cambio.
+
+00:04:12.762 --> 00:04:18.422
+Cada elemento tiene un responsable. Cada regla, una razón y un hogar. Cada medida, una definición.
+
+00:04:20.022 --> 00:04:24.398
+Generar energía sigue sin responsable, y el control lo dice, cada vez.
+
+00:04:27.098 --> 00:04:30.669
+Todo lo que la gente lee se genera del mapa, en un solo sentido.
+
+00:04:32.169 --> 00:04:39.119
+Las vistas de ArchiMate, el glosario, el modelo conceptual, la ontología, las pruebas y las tablas de seguimiento, y el mapa de calor.
+
+00:04:40.819 --> 00:04:43.787
+Cada una responde las preguntas de quienes la leen.
+
+00:04:45.087 --> 00:04:50.955
+En dbt, cada modelo lleva su responsable, su dominio y los ID de sus reglas.
+
+00:04:52.455 --> 00:04:58.358
+En Databricks, cada tabla muestra su responsable, sus etiquetas y su descripción, junto a su linaje.
+
+00:04:59.858 --> 00:05:04.097
+Nadie edita una vista. La corrección va al mapa, y todas las vistas la siguen.
+
+00:05:06.797 --> 00:05:08.539
+Ahora un agente puede leer el mapa.
+
+00:05:09.839 --> 00:05:16.417
+Ante un pedido, aplica la prueba del capitán, y encuentra la decisión, la capacidad y el responsable, o nada.
+
+00:05:18.317 --> 00:05:25.321
+Ante un cambio, recorre las capas, como hizo Tomás con la tarifa social, y nombra a los responsables que deben estar de acuerdo.
+
+00:05:27.321 --> 00:05:32.973
+Ante una columna del catálogo, encuentra la regla que hay detrás, con su responsable y su razón.
+
+00:05:34.773 --> 00:05:38.812
+Cada respuesta cita ID y evidencia, para que una persona pueda comprobarla.
+
+00:05:42.112 --> 00:05:48.926
+El agente está en el propio mapa: software que ocupa un rol, con sus atribuciones por escrito, como las del agente de cortes.
+
+00:05:50.426 --> 00:05:54.420
+Puede leer todo y redactar cambios. No puede confirmar ninguno.
+
+00:05:55.920 --> 00:05:59.738
+Donde dos fuentes no coinciden, no elige. Le pregunta al responsable.
+
+00:06:01.238 --> 00:06:02.692
+Su responsable es Tomás.
+
+00:06:03.792 --> 00:06:10.824
+Los agentes redactan, las personas confirman y se guarda cada versión: la regla que mantiene al día los modelos de datos, aplicada al mapa.
+
+00:06:13.524 --> 00:06:18.892
+Luego el regulador cambia el código de comercialización, que todo comercializador de energía debe cumplir.
+
+00:06:20.392 --> 00:06:27.143
+Cuando una lectura real reemplaza una estimación, la factura debe corregirse en diez días hábiles, no en la siguiente.
+
+00:06:29.043 --> 00:06:34.563
+El agente halla la única regla cuya razón es esa cláusula: la mitad de comercialización de la regla del primer día.
+
+00:06:36.463 --> 00:06:42.742
+Redacta el nuevo texto de la regla y lista lo que toca: la tabla de seguimiento del equipo de facturación y dos vistas.
+
+00:06:44.642 --> 00:06:47.556
+Lo confirma quien dirige comercialización, a cargo de la regla.
+
+00:06:49.256 --> 00:06:54.650
+Desde la mañana siguiente, la tabla de seguimiento muestra cada factura no corregida en diez días hábiles.
+
+00:06:57.750 --> 00:07:00.763
+En primavera, Zofia empieza como ingeniera de datos.
+
+00:07:02.063 --> 00:07:07.507
+Su primer día, como el de Tomás, trae una credencial, una página de siglas y una lista de sistemas.
+
+00:07:09.107 --> 00:07:10.890
+Esta vez, también hay un mapa.
+
+00:07:12.190 --> 00:07:16.471
+Le pregunta al agente quién es responsable de los datos de lecturas, y qué reglas cumplen.
+
+00:07:17.771 --> 00:07:22.706
+Vuelven una responsable, Grace, y dos reglas, cada una con su razón, y enlaces para comprobarlas.
+
+00:07:24.306 --> 00:07:28.755
+Por la tarde, ya redactó su primer cambio, para que Grace lo confirme.
+
+00:07:31.455 --> 00:07:38.689
+En 2007, en Satawal, Mau nombró maestros navegantes a cinco hawaianos. Nainoa fue uno de ellos.
+
+00:07:40.189 --> 00:07:43.462
+Mau murió en 2010. Lo que enseñó sigue vivo.
+
+00:07:45.162 --> 00:07:53.072
+Cincuenta años después de aquel primer viaje, Hōkūleʻa sigue navegando, guiada por personas a quienes Mau enseñó, y por quienes ellas enseñaron.
+
+00:07:55.772 --> 00:08:00.261
+Grace confirma el cambio de Zofia. El mapa pasa la prueba del navegante.
+
+00:08:01.661 --> 00:08:08.572
+La última nota de Tomás tiene una respuesta: un mapa sigue vivo mientras la gente lo usa, lo mantiene fiel y puede transmitirlo.
+
+00:08:10.172 --> 00:08:17.477
+Capa por capa: a quién sirve, qué la mueve, qué tiene que hacer, cómo llega el valor a la gente, quién hace el trabajo y qué la hace funcionar.
+
+00:08:19.177 --> 00:08:25.273
+Luego, para los datos: las preguntas que importan, reglas con un hogar y un cambio recorrido por todas las capas.
+
+00:08:26.773 --> 00:08:33.482
+El mapa guarda lo que significa la organización. Convertir ese significado en datos es donde empieza De las palabras a los datos.

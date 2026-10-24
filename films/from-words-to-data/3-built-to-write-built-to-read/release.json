@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Built to write, built to read",
+    "key": "built-to-write-built-to-read-en",
+    "dir": "films/from-words-to-data/3-built-to-write-built-to-read/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/built-to-write-built-to-read/film.js",
+    "video": "dist/built-to-write-built-to-read.mp4",
+    "file": "built-to-write-built-to-read.mp4",
+    "captions": [["films/from-words-to-data/3-built-to-write-built-to-read/captions/en.srt", "built-to-write-built-to-read.en.srt"], ["films/from-words-to-data/3-built-to-write-built-to-read/captions/es.srt", "built-to-write-built-to-read.es.srt"]],
+    "paths": ["films/from-words-to-data/3-built-to-write-built-to-read/source", ":(exclude)films/from-words-to-data/3-built-to-write-built-to-read/source/src/i18n/es/captions.js", "films/from-words-to-data/shared", "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src", "films/a-sharper-sketch/source/src", "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts"],
+    "legibility": {"texts": 426, "under_28": "0%", "under_20": 0, "median": 28, "status": "Reworked"}
+  }
+]

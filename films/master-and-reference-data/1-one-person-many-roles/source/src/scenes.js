@@ -32,10 +32,10 @@ scene("parish",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
     // the household's book, written as the narration names what it holds
     arrive(ctx,M1_B1[0],M1_B1[1],t,tBook-0.4,()=>m1_bookRows(ctx,t,M1_B1[0],M1_B1[1],{head:tHouse,names:tWho-0.15,moved:tMv,read:tRead}),{dy:40,d:0.9});
     arrive(ctx,1000,452,t,tHouse,()=>withA(ctx,1-fin(t,tMv-0.6,0.5),()=>wc_tag(ctx,1000,452,"every household",{align:"center"})),{dy:10});
-    // the certificate leaves the page, and is carried along the road to Uppsala
-    const lift=clamp((t-tCarry)/0.9,0,1),walk=clamp((t-tCarry-0.9)/(tNext-tCarry+0.6),0,1),wp=wc_along(M1_ROAD,walk);
-    if(lift>0&&lift<1)m1_cert(ctx,lerp(M1_B1[0]+190,1040,ease(lift)),lerp(M1_B1[1]-40,660,ease(lift))-Math.sin(lift*Math.PI)*120,lerp(0.9,0.42,ease(lift)),lerp(-0.1,0.2,lift),1);
-    m1_walker(ctx,wp[0],wp[1]+6,t,fin(t,tCarry+0.8,0.3)*(1-fin(t,tNext+1.2,0.6)));
+    // the certificate leaves the page for the walker's hand at the farmhouse door, and is carried along the road to Uppsala
+    const lift=clamp((t-tCarry)/0.9,0,1),walk=clamp((t-tCarry-0.9)/(tNext-tCarry+0.6),0,1),[hx,hy,hk]=m1_walkerAt(0);
+    if(lift>0&&lift<1)m1_cert(ctx,lerp(M1_B1[0]+190,hx+24*hk,ease(lift)),lerp(M1_B1[1]-40,hy-64*hk,ease(lift))-Math.sin(lift*Math.PI)*120,lerp(0.9,0.19*hk,ease(lift)),-0.1+0.3*Math.sin(lift*Math.PI),1);
+    m1_walker(ctx,walk,t,fin(t,tCarry+0.8,0.3)*(1-fin(t,tNext+1.2,0.6)));
     arrive(ctx,1700,480,t,tNew-0.2,()=>withA(ctx,1-fin(t,tNum-0.6,0.5),()=>wc_tag(ctx,1700,480,"Uppsala parish",{align:"center"})),{dy:10});
     // the next parish's book takes the name in
     arrive(ctx,M1_B2[0],M1_B2[1],t,tNext-0.3,()=>m1_book2(ctx,t,M1_B2[0],M1_B2[1],tNext),{dy:30,d:0.9});});

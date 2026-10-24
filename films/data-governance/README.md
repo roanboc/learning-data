@@ -4,14 +4,15 @@
 
 Yusuf Demir starts as the university's data governance lead. He inherits a shelf of thirty-four policies, a maturity score of 2.1 out of 5, a chart with half its names still to be confirmed, and a brief: fix governance before the next submission to the government. The same week, two reports disagree on how many awards were conferred. Over ten films, he takes the binder off the shelf, one kind of policy at a time, and asks every line where it runs: who decides, one trusted glossary in place of many, who may see it, rules that run, fixes at the source, change without surprises, products with owners, an agent that checks, and the people who teach it all. In three more, he and Noor, the data architect, design governance as a capability that lasts: the services it offers, who does what end to end, and where each piece lives. The last six films show how to build each piece with dbt and Databricks, nineteen films in all. The plan is in the [proposal](proposal.md).
 
-**Status:** the opening film is built and [on the site](https://roanboc.github.io/learning-data/data-governance/), with three Pause and think questions. Labs and scenarios will come later. On the site, the series sits under the topic *Data governance*.
+**Status:** the prologue, *The same problem, everywhere*, and the opening film are built and [on the site](https://data.learn-all.org/data-governance/), each with three Pause and think questions. The prologue tells the real history behind the series: why data management got a body of knowledge, the DMBOK, why governance is at its centre, and why it still matters, with its additions for ethics and AI. Labs and scenarios will come later. On the site, the series sits under the topic *Data governance*.
 
 ## The films
 
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
-| [Off the shelf](https://roanboc.github.io/learning-data/data-governance/off-the-shelf/) | Data governance, and where each policy runs | 5½ min | 10 | 3 questions | [script](1-off-the-shelf/script.md) · [source](1-off-the-shelf/source/README.md) |
+| [The same problem, everywhere](https://data.learn-all.org/data-governance/the-same-problem-everywhere/) | Where data governance comes from | 5 min | 8 | 3 questions | [script](0-the-same-problem-everywhere/script.md) · [source](0-the-same-problem-everywhere/source/README.md) |
+| [Off the shelf](https://data.learn-all.org/data-governance/off-the-shelf/) | Data governance, and where each policy runs | 5½ min | 10 | 3 questions | [script](1-off-the-shelf/script.md) · [source](1-off-the-shelf/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound
@@ -28,7 +29,7 @@ Like the other series, each film is generated from code. The series keeps what's
 
 | File | What it holds |
 |---|---|
-| `shared/src/rooms.js` | The university's places, in watercolour: the campus, Yusuf's office, the floor of offices behind glass, the rooms where the numbers are made, and a desk seen from above; the places the later films share (the stewards' meeting room, three desks close up, and Noor's room with her architecture map), with people sitting or standing behind a table or desk; the things on their walls and desks (binders, papers, screens, cards, pins, stamps, speech bubbles); a camera that cuts between shots; and the title and end cards. It paints with the master and reference data series' `wash.js`, bundled as it is |
+| `shared/src/rooms.js` | The colours several films share (each room's walls, award's three meanings, the classes of personal data), and the university's places, in watercolour: the campus, Yusuf's office, the floor of offices behind glass, the rooms where the numbers are made, and a desk seen from above; the places the later films share (the stewards' meeting room, three desks close up, and Noor's room with her architecture map), with people sitting or standing behind a table or desk; the things on their walls and desks (binders, papers, screens, cards, pins, stamps, speech bubbles); a column's class as a chip, and the mask over a value; a camera that cuts between shots; and the title and end cards. It paints with the master and reference data series' `wash.js`, bundled as it is |
 | `shared/src/people.js` | The series' people, drawn in pencil and wash with the master data series' `people.js`, bundled as it is: the cast of *When things go wrong* and *In the weeds of data crafting*, Yusuf, Clara, Anil and Marta, and the people of the past in their own clothes |
 | `shared/src/finish.js` | What a film needs before it starts (the fonts, the logos, the paper, and each place, painted once), and the video's finishing pass: motion blur, with no glow and no film grain |
 | `shared/src/page.html` | The standalone player page |

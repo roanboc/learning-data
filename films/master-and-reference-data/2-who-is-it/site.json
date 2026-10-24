@@ -1,0 +1,30 @@
+{
+  "kicker": "Master or reference data, the golden record, and deciding a match",
+  "kicker_es": "Dato maestro o de referencia, el registro dorado, y decidir una coincidencia",
+  "title_es": "¿Quién es?",
+  "h1": "Who is it? Master or reference data, the golden record, and a match decided once",
+  "h1_es": "¿Quién es? Dato maestro o de referencia, el registro dorado, y una coincidencia decidida una vez",
+  "lead": "In 1556, a village took the wrong man for Martin Guerre, because so much matched. At the university, a duplicate check proposes three pairs, and Mei's office decides each one: Linh's two student numbers, linked with a reason; HR's record of her, scored weight by weight, its birth date one digit apart; and two students called Aisha who share a number but are two people. A golden record keeps every source as it arrived, so any link can be undone.",
+  "lead_es": "En 1556, una aldea tomó al hombre equivocado por Martin Guerre, porque coincidía tanto. En la universidad, una búsqueda de duplicados propone tres pares, y la oficina de Mei decide cada uno: los dos números de estudiante de Linh, vinculados con un motivo; su registro en RR. HH., puntuado peso por peso, con la fecha de nacimiento a un dígito; y dos estudiantes llamadas Aisha que comparten un número pero son dos personas. Un registro dorado guarda cada fuente tal como llegó, así que cualquier vínculo se puede deshacer.",
+  "description": "A film about master and reference data: a village takes the wrong man for Martin Guerre; master and reference data, told apart; what a master, or golden, record is; a duplicate check that compares only records that share something; Linh's two student numbers, linked by a steward with a reason; a score made weight by weight; an AI helper that suggests while a person decides; two students who share a number but are two people; why a false merge costs more than a missed match; links that can be undone; and the queue, the test and the tables that keep each decision.",
+  "description_es": "Una película sobre datos maestros y de referencia: una aldea toma al hombre equivocado por Martin Guerre; datos maestros y de referencia, bien distinguidos; qué es un registro maestro, o dorado; una búsqueda de duplicados que solo compara registros que comparten algo; los dos números de estudiante de Linh, vinculados por una encargada con un motivo; una puntuación hecha peso por peso; un asistente de IA que sugiere mientras una persona decide; dos estudiantes que comparten un número pero son dos personas; por qué una fusión falsa cuesta más que una coincidencia perdida; vínculos que se pueden deshacer; y la cola, la prueba y las tablas que guardan cada decisión.",
+  "card": "Two records, one person? A check proposes pairs, weights make a score, and a steward decides the hard ones once, with a reason.",
+  "card_es": "¿Dos registros, una persona? Una búsqueda propone pares, los pesos dan una puntuación, y una encargada decide los difíciles una vez, con un motivo.",
+  "chapters_es": {
+    "guerre": "Tomados por uno",
+    "words": "Dos palabras que se confunden",
+    "golden": "Un registro dorado",
+    "check": "La búsqueda de duplicados",
+    "first": "De vuelta a estudiar",
+    "weights": "A un dígito",
+    "note": "Sugiere, Mei decide",
+    "aisha": "Dos Aishas",
+    "link": "Vincular, no destruir",
+    "elsewhere": "En otros lugares",
+    "once": "Decidido una vez"
+  },
+  "past": ["Martin Guerre's village, Artigat, 1548 to 1560", "A man taken for another, because so much matched."],
+  "past_es": ["La aldea de Martin Guerre, Artigat, de 1548 a 1560", "Un hombre tomado por otro, porque coincidía tanto."],
+  "next_h": "You've seen who is who decided once, with a reason.",
+  "next_h_es": "Viste cómo se decide una vez, con un motivo, quién es quién."
+}

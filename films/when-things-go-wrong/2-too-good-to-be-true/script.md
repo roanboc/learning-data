@@ -1,6 +1,6 @@
 # When things go wrong · 2. Too good to be true: script
 
-*The script of [Too good to be true](treatment.md), in [When things go wrong](../README.md), as filmed: 6:10, in eight chapters, in English. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The timings are the voiced ones (see [Pacing report](#pacing-report)). The film plays at [/when-things-go-wrong/too-good-to-be-true/](https://roanboc.github.io/learning-data/when-things-go-wrong/too-good-to-be-true/).*
+*The script of [Too good to be true](treatment.md), in [When things go wrong](../README.md), as filmed: 6:10, in eight chapters, in English. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The timings are the voiced ones (see [Pacing report](#pacing-report)). The film plays at [/when-things-go-wrong/too-good-to-be-true/](https://data.learn-all.org/when-things-go-wrong/too-good-to-be-true/).*
 
 ## The promise
 

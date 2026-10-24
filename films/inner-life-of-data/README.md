@@ -2,27 +2,27 @@
 
 A 7-minute film that follows one enrolment at a fictional university, from a tap on a phone to a decision. It shows how data is captured, refined through bronze, silver and gold with dbt on Databricks, given meaning through a shared conceptual model, and shared without copies. It is written for anyone aged 14 and up, with nothing a data engineer would need to correct.
 
-- **Watch, with chapters:** [https://roanboc.github.io/learning-data/#watch](https://roanboc.github.io/learning-data/#watch). Turn on *Pause and think* to stop after most chapters for one question. Then try the [hands-on labs](https://roanboc.github.io/learning-data/labs/) and the [scenarios](https://roanboc.github.io/learning-data/scenarios/).
+- **Watch, with chapters:** [https://data.learn-all.org/#watch](https://data.learn-all.org/#watch). Turn on *Pause and think* to stop after most chapters for one question. Then try the [hands-on labs](https://data.learn-all.org/labs/) and the [scenarios](https://data.learn-all.org/scenarios/).
 - **Download the video (MP4, 1080p):** [https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.mp4](https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.mp4)
 - **Script, with rigour notes and sources:** [script.md](script.md)
 - **Captions:** [en.vtt](captions/en.vtt), [en.srt](captions/en.srt)
-- **En español (Latin American Spanish, 8:24):** [watch](https://roanboc.github.io/learning-data/es/#watch), [download](https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.es.mp4), captions [es.vtt](captions/es.vtt) and [es.srt](captions/es.srt)
+- **En español (Latin American Spanish, 8:24):** [watch](https://data.learn-all.org/es/#watch), [download](https://github.com/roanboc/learning-data/releases/latest/download/inner-life-of-data.es.mp4), captions [es.vtt](captions/es.vtt) and [es.srt](captions/es.srt)
 
 ## Chapters
 
 | Time | Chapter |
 |---|---|
-| 0:00 | [The tap](https://roanboc.github.io/learning-data/#t=0) |
-| 0:25 | [Into the platform](https://roanboc.github.io/learning-data/#t=26) |
-| 1:11 | [The sketch](https://roanboc.github.io/learning-data/#t=72) |
-| 1:45 | [Refining with dbt](https://roanboc.github.io/learning-data/#t=106) |
-| 2:42 | [Gold](https://roanboc.github.io/learning-data/#t=163) |
-| 3:29 | [The layers together](https://roanboc.github.io/learning-data/#t=210) |
-| 4:00 | [Meaning](https://roanboc.github.io/learning-data/#t=241) |
-| 4:53 | [Two speeds](https://roanboc.github.io/learning-data/#t=294) |
-| 5:20 | [Ways out](https://roanboc.github.io/learning-data/#t=321) |
-| 6:17 | [Apps and Genie](https://roanboc.github.io/learning-data/#t=378) |
-| 6:53 | [Pull back](https://roanboc.github.io/learning-data/#t=414) |
+| 0:00 | [The tap](https://data.learn-all.org/#t=0) |
+| 0:25 | [Into the platform](https://data.learn-all.org/#t=26) |
+| 1:11 | [The sketch](https://data.learn-all.org/#t=72) |
+| 1:45 | [Refining with dbt](https://data.learn-all.org/#t=106) |
+| 2:42 | [Gold](https://data.learn-all.org/#t=163) |
+| 3:29 | [The layers together](https://data.learn-all.org/#t=210) |
+| 4:00 | [Meaning](https://data.learn-all.org/#t=241) |
+| 4:53 | [Two speeds](https://data.learn-all.org/#t=294) |
+| 5:20 | [Ways out](https://data.learn-all.org/#t=321) |
+| 6:17 | [Apps and Genie](https://data.learn-all.org/#t=378) |
+| 6:53 | [Pull back](https://data.learn-all.org/#t=414) |
 
 ## How it was made
 

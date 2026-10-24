@@ -23,5 +23,7 @@
     "end": "La primera nota"
   },
   "next_h": "You've seen the map's empty layers. Now fill the first one.",
-  "next_h_es": "Viste las capas vacías del mapa. Ahora llena la primera."
+  "next_h_es": "Viste las capas vacías del mapa. Ahora llena la primera.",
+  "past": ["The Domesday survey, England, 1086", "Before you can govern a place, you have to know what it is."],
+  "past_es": ["El catastro de Domesday, Inglaterra, 1086", "Antes de gobernar un lugar, hay que saber qué es."]
 }

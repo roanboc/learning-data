@@ -1,17 +1,18 @@
 """How well each film reads on a phone: python site-tools/legibility.py [--json report.json]
 Builds nothing: run each film's tools/build.py first (its dist/render.html is what's measured). For every film the release workflow
-renders, and The map before the data's, it draws the film once a second and records the size every piece of text is drawn at, after
+renders (each film's release.json), it draws the film once a second and records the size every piece of text is drawn at, after
 the camera's zoom and the phone layer (films/from-words-to-data/shared/src/phone.js), while clearly visible. A phone held sideways
 shows the 1920-pixel frame about 850 pixels wide, so text under about 28 px in the frame is too small to read there (each film's
-tools/legible.py checks one film, frame by frame, and the playbook has the rule). Text drawn as decoration is skipped."""
-import argparse, json, pathlib, re, statistics
+tools/legible.py checks one film, frame by frame, and the playbook has the rule). Text drawn as decoration is skipped.
+Each film's row in films/legibility-report.md comes from "legibility" in its release.json: write the numbers there, and run
+site-tools/build_series.py, which makes the report's table."""
+import argparse, json, pathlib, re, statistics, sys
 from playwright.sync_api import sync_playwright
 ap = argparse.ArgumentParser(description=__doc__); ap.add_argument('--json'); A = ap.parse_args()
 R = pathlib.Path(__file__).resolve().parents[1]
-wf = (R / '.github' / 'workflows' / 'release.yml').read_text()
-films = json.loads(wf[wf.index("cat > films.json <<'EOF'") + 24:wf.index("\n          EOF")])
-films += [x for x in [{"name": "Day one", "dir": "films/enterprise-architecture/1-day-one/source", "player": "dist/film.js"},
-          {"name": "Who it serves, and how it pays", "dir": "films/enterprise-architecture/2-who-it-serves/source", "player": "dist/film.js"}] if x["dir"] not in {f["dir"] for f in films}]
+sys.path.insert(0, str(R / '.github' / 'scripts'))
+import films as release_films  # every film's release.json
+films = release_films.films()
 JS = """([EV])=>{const seen={};let sid="",deco=0;
   const c=document.createElement('canvas');c.width=1920;c.height=1080;const x=c.getContext('2d');
   const T0=window.T;window.T=function(ctx,s,X,Y,o){const d=deco;if(o&&o.deco)deco++;try{return T0(ctx,s,X,Y,o);}finally{deco=d;}};

@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Day one",
+    "key": "day-one-en",
+    "dir": "films/enterprise-architecture/1-day-one/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/day-one/film.js",
+    "video": "dist/day-one.mp4",
+    "file": "day-one.mp4",
+    "captions": [["films/enterprise-architecture/1-day-one/captions/en.srt", "day-one.en.srt"], ["films/enterprise-architecture/1-day-one/captions/es.srt", "day-one.es.srt"]],
+    "paths": ["films/enterprise-architecture/1-day-one/source", ":(exclude)films/enterprise-architecture/1-day-one/source/src/i18n/es/captions.js", "films/enterprise-architecture/shared", "films/analytics-engineering/shared", "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js", "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src", "films/a-sharper-sketch/source/src", "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts"],
+    "legibility": {"texts": 213, "under_28": "0%", "under_20": 0, "median": 30.3, "status": "Drawn to the rule"}
+  }
+]

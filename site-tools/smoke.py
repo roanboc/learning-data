@@ -375,10 +375,12 @@ async def check_pages(run):
                     }""")
                     expect(sec, focus, f"{where}: icon link needs keyboard focus, a visible outline and an action hint")
                     destination = await link.get_attribute("href")
-                    # The context blocks external traffic; still verify the attempted navigation.
-                    async with pg.expect_event("requestfailed", predicate=lambda r: r.url.startswith(destination)) as navigation:
+                    # A 204 records the navigation without leaving the page or contacting the external site.
+                    await pg.route(destination + "**", lambda route: route.fulfill(status=204))
+                    async with pg.expect_response(lambda r: r.url.startswith(destination)) as navigation:
                         await pg.keyboard.press("Enter")
-                    request = await navigation.value
+                    response = await navigation.value
+                    request = response.request
                     expect(sec, request.is_navigation_request() and request.url in (destination, destination + "/"),
                            f"{where}: Enter on the icon link must navigate to {destination}, got {request.url}")
             finally:

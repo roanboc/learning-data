@@ -400,11 +400,20 @@ def header(lg, path, R, cur="true"):
     if lg == "en":
         return (f'<header class="top"><div class="top-in"><a class="brand" href="{R}"><img src="{R}assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Site">'
                 f'<a href="{R}">Start here</a><a href="{R}topics/" aria-current="{cur}">Topics</a><a href="{R}journey/">Making of</a><span class="lang" role="group" aria-label="Language">'
-                f'<a href="./" aria-current="true" lang="en">EN</a><a href="{R}es/{path}" lang="es" hreflang="es">ES</a></span></nav></div></header>')
+                f'<a href="./" aria-current="true" lang="en">EN</a><a href="{R}es/{path}" lang="es" hreflang="es">ES</a></span></nav>{external_nav(lg)}</div></header>')
     RE = R[3:]
     return (f'<header class="top"><div class="top-in"><a class="brand" href="{RE}"><img src="{R}assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Sitio">'
             f'<a href="{RE}">Empieza aquí</a><a href="{RE}topics/" aria-current="{cur}">Temas</a><a href="{RE}journey/">Cómo se hizo</a><span class="lang" role="group" aria-label="Idioma">'
-            f'<a href="{R}{path}" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span></nav></div></header>')
+            f'<a href="{R}{path}" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span></nav>{external_nav(lg)}</div></header>')
+
+
+def external_nav(lg):
+    home, contact = (("Ir a learn-all.org", "Contactar a Rodrigo en LinkedIn") if lg == "es"
+                     else ("Go to learn-all.org", "Contact Rodrigo on LinkedIn"))
+    return (f'<div class="nav-tools"><a class="parent-site" href="https://learn-all.org" aria-label="{home}">'
+            '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a>'
+            f'<a href="https://www.linkedin.com/in/roanboc" aria-label="{contact}">'
+            '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></a></div>')
 
 
 def SN(lg, S):

@@ -323,9 +323,11 @@ async def check_pages(run):
                 m = await pg.evaluate("""() => {
                   const top = document.querySelector('header.top'), r = top ? top.getBoundingClientRect() : null;
                   const vis = e => e && getComputedStyle(e).display !== 'none' && e.getClientRects().length > 0;
-                  const items = [...document.querySelectorAll('header.top .brand, header.top nav > a, header.top nav > .lang')];
+                  const items = [...document.querySelectorAll('header.top .brand, header.top nav > a, header.top nav > .lang, .nav-tools a')];
                   return {sw: document.documentElement.scrollWidth, iw: innerWidth, h: r ? r.height : null,
-                    shown: items.filter(vis).map(e => ({t: e.textContent.trim(), y: Math.round(e.getBoundingClientRect().top)})),
+                    shown: items.filter(vis).map(e => {const b = e.getBoundingClientRect(); return {
+                      t: e.getAttribute('aria-label') || e.textContent.trim(), y: Math.round(b.top + b.height / 2),
+                      x: b.left, top: b.top, right: b.right, bottom: b.bottom, w: b.width, h: b.height};}),
                     hidden: items.filter(e => !vis(e)).map(e => e.textContent.trim())};}""")
                 where = f"{key or '/'} @{width} {theme}"
                 for p in log_problems(log):
@@ -336,16 +338,49 @@ async def check_pages(run):
                     return
                 if width <= 360:
                     expect(sec, m["h"] <= 100, f"{where}: the header is {m['h']:.0f} px tall (at most 100)")
-                if width <= 640:
+                for x in m["shown"]:
+                    expect(sec, x["x"] >= 0 and x["right"] <= width and x["bottom"] <= m["h"],
+                           f"{where}: header item outside the header: {x['t']}")
+                for i, a in enumerate(m["shown"]):
+                    for b in m["shown"][i + 1:]:
+                        overlap = (min(a["right"], b["right"]) - max(a["x"], b["x"]) > 1 and
+                                   min(a["bottom"], b["bottom"]) - max(a["top"], b["top"]) > 1)
+                        expect(sec, not overlap, f"{where}: header items overlap: {a['t']} and {b['t']}")
+                if width <= 900:
                     shown = [x["t"] for x in m["shown"]]
                     rows = []
                     for x in m["shown"]:
                         if not any(abs(x["y"] - y) <= 6 for y in rows):
                             rows.append(x["y"])
-                    expect(sec, len(shown) == 5 and len(rows) == 1,
-                           f"{where}: the header shows {shown} on {len(rows)} lines; expected the brand, Start here, Topics, Making of and EN/ES on one")
+                    expect(sec, len(shown) == 7 and len(rows) == 2,
+                           f"{where}: the header shows {shown} on {len(rows)} lines; expected brand and icon links, then site navigation and EN/ES")
                 else:
                     expect(sec, not m["hidden"], f"{where}: header items hidden on a wide screen: {m['hidden']}")
+                tools = pg.locator(".nav-tools a")
+                for i in range(await tools.count()):
+                    link = tools.nth(i)
+                    box = await link.bounding_box()
+                    expect(sec, box is not None and box["width"] >= 44 and box["height"] >= 44,
+                           f"{where}: icon link needs a 44 px touch target")
+                    # Reach the anchor with the keyboard, not a programmatic focus call.
+                    await pg.evaluate("() => { document.activeElement.blur(); }")
+                    for _ in range(12):
+                        await pg.keyboard.press("Tab")
+                        if await link.evaluate("(e) => e === document.activeElement"):
+                            break
+                    focus = await link.evaluate("""e => {
+                      const s = getComputedStyle(e), hint = getComputedStyle(e, '::after');
+                      return e === document.activeElement && e.matches(':focus-visible') &&
+                        s.outlineStyle !== 'none' && parseFloat(s.outlineWidth) >= 2 && hint.opacity === '1';
+                    }""")
+                    expect(sec, focus, f"{where}: icon link needs keyboard focus, a visible outline and an action hint")
+                    destination = await link.get_attribute("href")
+                    # The context blocks external traffic; still verify the attempted navigation.
+                    async with pg.expect_event("requestfailed", predicate=lambda r: r.url.startswith(destination)) as navigation:
+                        await pg.keyboard.press("Enter")
+                    request = await navigation.value
+                    expect(sec, request.is_navigation_request() and request.url in (destination, destination + "/"),
+                           f"{where}: Enter on the icon link must navigate to {destination}, got {request.url}")
             finally:
                 await ctx.close()
 

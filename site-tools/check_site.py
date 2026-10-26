@@ -621,6 +621,31 @@ def main():
             s["fails"].append(f"{pg.file}: current marker {[name(c) for c in cur] or 'none'}, expected {[name(exp)] if exp else 'none'}")
     s["notes"].append(f"{len(normal)} pages with a header; {len(pages) - len(normal)} redirect pages skipped")
 
+    s = rep.check("Header: localized parent-site and contact links, with decorative icons")
+    for pg in normal:
+        head = pg.dom.first("header", cls="top")
+        if head is None:
+            s["fails"].append(f"{pg.file}: no header.top for the external links")
+            continue
+        tools = head.all(cls="nav-tools")
+        links = tools[0].all("a") if len(tools) == 1 else []
+        labels = (["Ir a learn-all.org", "Contactar a Rodrigo en LinkedIn"] if pg.es
+                  else ["Go to learn-all.org", "Contact Rodrigo on LinkedIn"])
+        targets = ["https://learn-all.org", "https://www.linkedin.com/in/roanboc"]
+        if [a.attrs.get("href") for a in links] != targets:
+            s["fails"].append(f"{pg.file}: expected one parent-site and one contact link")
+        for href in targets:
+            if len([a for a in head.all("a") if a.attrs.get("href") == href]) != 1:
+                s["fails"].append(f"{pg.file}: duplicate or missing header link to {href}")
+        for a, label in zip(links, labels):
+            if a.attrs.get("aria-label") != label or "title" in a.attrs:
+                s["fails"].append(f"{pg.file}: external link needs one localized action name, without a duplicate title: {label}")
+            icons = a.all("svg")
+            if len(icons) != 1 or icons[0].attrs.get("aria-hidden") != "true" or icons[0].attrs.get("focusable") != "false" or icons[0].all("title"):
+                s["fails"].append(f"{pg.file}: external link needs one decorative, non-focusable SVG")
+            if "tabindex" in a.attrs or "aria-current" in a.attrs:
+                s["fails"].append(f"{pg.file}: external links must keep native keyboard behavior and not claim the current page")
+
     # -- leftover labels
     s = rep.check("Nav: no leftover labels (Watch, Take it apart, Sharpen it, All films, Mira, Desarma…)")
     for pg in pages.values():

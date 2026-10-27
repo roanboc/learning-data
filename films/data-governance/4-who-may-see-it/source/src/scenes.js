@@ -171,11 +171,11 @@ scene("path",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s,
     return{take:c.binder+0.3,desk:c.policy-0.3,which:w("which","which"),how:w("which","how"),mem:c.until-0.1,later:c.weeks,whole:w("weeks","whole"),
       grant:w("weeks","granted"),ended:w("ended","ended"),plat:c.checks-0.4,list:w("checks","today")-0.3,forty:w("checks","forty"),nine:c.nine,back:c.nobody-0.4,noend:c.noend};});
   gv_shots(ctx,S,t,sc.dur,[
-    // his office: Yusuf takes the next binder off the shelf, its label the film's title
+    // his office: Yusuf takes the next binder off the shelf, its label the film's title; the newest DMBOK stands on his desk, as in every film
     {at:0,place:"office",keys:[[0,1250,560,1.3],[0.2,1270,540,1.36]],d:3,draw:(x,tt)=>{const out=fin(tt,P.take,0.5),has=tt>=P.take+0.55;
-      ws_binders(x,{out,taken:has});
+      ws_binders(x,{out,taken:has});gv_deskBook(x);
       person(x,"yusuf",1370,905,0.8,{pose:has?"hold":"listen",pose2:has?null:"reach",mix:has?0:gv_io(tt,P.take-0.5,P.take+0.6,0.4),t:tt,carry:has?ws_heldTitled(["Who may","see it"],ws_bindCol(5)):null});
-      ws_nameCard(x,880,600,"Yusuf Demir","data governance lead",gv_io(tt,0.5,P.desk-0.3,0.4));}},
+      ws_nameCard(x,700,390,"Yusuf Demir","data governance lead",gv_io(tt,0.5,P.desk-0.3,0.4));}},
     // the binder open on his desk: policy 6, what it says; and what it doesn't
     {at:P.desk,place:"desk",keys:[[P.desk,1152,432,1.25],[P.mem,960,540,1]],d:2.4,draw:(x,tt)=>{ws_openBinder(x,1);
       gv_qmark(x,1205,300,46,fin(tt,P.which,0.6));gv_qmark(x,1372,418,46,fin(tt,P.how,0.6));
@@ -219,10 +219,12 @@ scene("column",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,
       ws_regScreen(x,"learner table");ws_nameCard(x,830,560,"Mei Tanaka","registrar's office",gv_io(tt,0.5,P.top-0.3,0.4));}},
     // the register on her desk, from above: its cover opens on the learner table's page; each column's class lands as it's said, and she
     // initials the page. Then a change comes back to her on the series' sign-off sheet: its class empty, with a question
-    {at:P.top,place:"regTop",keys:[[P.top,960,540,1],[P.open,960,520,1.12]],d:1.6,draw:(x,tt)=>{const [hi,hiA]=ws_chipHi(tt,P.chip),fp=fin(tt,P.init,1.4);
-      const r=ws_regPage(x,"learner table",WS_RGL,{chips:i=>fin(tt,P.chip[i],0.5),hi,hiA,foot:"classed by Mei Tanaka",footP:fp});
-      gv_tint(x,r.cols[2]+4,WS_RG.y+160,WS_RG.x+952-r.cols[2]-8,46,WS_HI,0.7*gv_io(tt,P.head-0.1,P.chip[1]-0.3,0.3));
-      ws_regCover(x,fin(tt,P.open,1.4));
+    {at:P.top,place:"regTop",keys:[[P.top,960,540,1],[P.open,960,520,1.12]],d:1.6,draw:(x,tt)=>{const [hi,hiA]=ws_chipHi(tt,P.chip),fp=fin(tt,P.init,1.4),open=fin(tt,P.open,1.4);
+      // the page is drawn once the cover starts to open, and its words give way as the sheet comes over it (the paper under them stays)
+      if(open>0){const g=fin(tt,P.every,0.5);if(g>0)gv_sheet(x,WS_RG.x,WS_RG.y,WS_RG.w,WS_RG.h);withA(x,1-0.65*g,()=>{
+        const r=ws_regPage(x,"learner table",WS_RGL,{chips:i=>fin(tt,P.chip[i],0.5),hi,hiA,foot:"classed by Mei Tanaka",footP:fp});
+        gv_tint(x,r.cols[2]+4,WS_RG.y+160,WS_RG.x+952-r.cols[2]-8,46,WS_HI,0.7*gv_io(tt,P.head-0.1,P.chip[1]-0.3,0.3));});}
+      ws_regCover(x,open);
       const [px,py]=ws_penAt(x,"classed by Mei Tanaka",WS_RG.x+56,WS_RG.y+GV_REG.head+22+GV_REG.row*WS_RGL.length+64,32,fp);ws_pen(x,px,py,gv_io(tt,P.init-0.4,P.init+1.6,0.3));
       const u=fin(tt,P.every,0.9);if(u>0)ws_sheet(x,lerp(1980,480,easeCam(u)),226,{p:fin(tt,P.every+0.4,1.2),missA:fin(tt,P.no,0.4),sent:fin(tt,P.goes,0.4),askP:fin(tt,P.ask,1.2)});}},
     // Mei at her desk, the sheet in her hands

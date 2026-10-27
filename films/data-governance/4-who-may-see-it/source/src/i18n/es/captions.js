@@ -8,14 +8,16 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Alemania Occidental, abril de 1983.",
 "Every resident is to answer the census, so the country can plan housing, schools and transport.":
 "Cada residente debe responder el censo, para que el país planifique vivienda, escuelas y transporte.",
-"But the same law lets each town hall correct its register of residents from the answers.":
-"Pero la misma ley deja que cada municipio corrija su registro de residentes con las respuestas.",
+"But the same law lets each town hall use the answers to check up on its residents, by name.":
+"Pero la misma ley deja que cada municipio use las respuestas para controlar a sus residentes, por nombre.",
 "Hundreds of groups call for a boycott.":
 "Cientos de grupos llaman al boicot.",
 "Two weeks before census day, the Constitutional Court stops the count.":
 "Dos semanas antes del día del censo, el Tribunal Constitucional detiene el conteo.",
-"In December, it rules that, in principle, each person decides what is disclosed about them, and how it's used.":
-"En diciembre, falla que, en principio, cada persona decide qué se revela sobre ella y cómo se usa.",
+"The country still needs a way to count, without knowing who said what.":
+"El país aún necesita una forma de contar, sin saber quién dijo qué.",
+"In December, the court rules that, in principle, each person decides what is disclosed about them, and how it's used.":
+"En diciembre, el tribunal falla que, en principio, cada persona decide qué se revela sobre ella y cómo se usa.",
 "With computers, no data can be assumed insignificant.":
 "Con computadoras, ningún dato puede darse por insignificante.",
 "The court doesn't forbid counting.":
@@ -24,8 +26,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Traza una línea.",
 "Names and addresses are kept apart from the answers, and removed as soon as possible.":
 "Los nombres y las direcciones se guardan aparte de las respuestas, y se eliminan lo antes posible.",
-"And answers given to be counted don't go back to the town hall.":
-"Y las respuestas dadas para contar no vuelven al municipio.",
+"And answers given to be counted don't go back to the town hall to check up on anyone.":
+"Y las respuestas dadas para contar no vuelven al municipio para controlar a nadie.",
 "In 1987, the count goes ahead that way.":
 "En 1987, el censo se hace así.",
 "Counting people is one permission.":

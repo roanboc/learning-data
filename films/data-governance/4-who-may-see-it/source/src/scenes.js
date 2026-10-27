@@ -56,10 +56,20 @@ function ws_townHall(ctx,a,p,x){if(a<=0.01)return;const [tx,ty]=WS_TH;withA(ctx,
     if(p>=1){ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.92);ctx.lineWidth=4;ctx.lineCap="round";const an=Math.atan2(B[1]-A[1],B[0]-A[0]);
       for(const s of [-1,1]){ctx.beginPath();ctx.moveTo(B[0],B[1]);ctx.lineTo(B[0]-26*Math.cos(an+s*0.5),B[1]-26*Math.sin(an+s*0.5));ctx.stroke();}ctx.restore();}}
   wc_cross(ctx,(A[0]+B[0])/2,(A[1]+B[1])/2,80,WC_PENCIL,x);});}
+// a question in pencil, in the form's left margin, level with the gap between the name and the answers: the country still needs a way
+// to count without knowing who said what. Drawn p of the way (0 to 1): the hook and the stem, then the dot; ws_qAt says where the
+// pencil's point is on the way. It gives way to the court's line, drawn in the same gap
+const WS_QX=622;
+function ws_qPts(){const qy=ws_cutY(0),pts=[];for(let i=0;i<=28;i++){const a=Math.PI*(0.86+1.54*i/28);pts.push([WS_QX+Math.cos(a)*30,qy-37+Math.sin(a)*30]);}
+  pts.push([WS_QX+2,qy-3],[WS_QX,qy+10],[WS_QX,qy+22]);return pts;}
+function ws_qAt(p){const q=ws_qPts();if(p>0.88)return[WS_QX,ws_cutY(0)+47];let tot=0;const L=q.map((v,i)=>i?(tot+=Math.hypot(v[0]-q[i-1][0],v[1]-q[i-1][1])):0),d=clamp(p/0.88,0,1)*tot;
+  for(let i=1;i<q.length;i++)if(L[i]>=d){const u=(d-L[i-1])/(L[i]-L[i-1]||1);return[lerp(q[i-1][0],q[i][0],u),lerp(q[i-1][1],q[i][1],u)];}return q[q.length-1];}
+function ws_question(ctx,p,a){if(p<=0||a<=0.01)return;withA(ctx,a,()=>{wc_pencil(ctx,ws_qPts(),clamp(p/0.88,0,1),{lw:6,seed:33,amp:1.2});
+  const d=clamp((p-0.9)/0.1,0,1);if(d>0){ctx.fillStyle=rgba(WC_PENCIL,0.9*d);ctx.beginPath();ctx.arc(WS_QX,ws_cutY(0)+47,6.5,0,TAU);ctx.fill();}});}
 
 scene("counted",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
-    return{lift:c.answer+0.2,plan:[w("answer","housing"),w("answer","schools"),w("answer","transport")],tb:c.correct-0.3,link:w("correct","correct"),
-      reg:w("correct","register"),st:c.boycott-0.4,hl:c.stops-0.5,down:w("stops","stops"),tie:w("stops","stops",0.9),ct:c.rules-0.4,dec:w("rules","decides"),
+    return{lift:c.answer+0.2,plan:[w("answer","housing"),w("answer","schools"),w("answer","transport")],tb:c.correct-0.3,link:w("correct","check"),
+      reg:w("correct","town"),st:c.boycott-0.4,hl:c.stops-0.5,down:w("stops","stops"),tie:w("stops","stops",0.9),need:w("need","still",-0.1),q:w("need","without",-0.1),ct:c.rules-0.4,dec:w("rules","decides"),
       tbl:c.insig-0.4,slip:w("insig","computers"),slipBack:c.forbid+0.1,count:w("forbid","counting"),line:c.line+0.05,split:w("apart","kept"),rem:w("apart","removed"),
       th:c.back-0.2,arrow:w("back","given"),cross:w("back","don't"),y87:c.y1987-0.1,one:c.one,two:c.another,betw:c.between-0.2,uni:w("between","university's"),
       morph:w("between","between"),title:c.breath+0.7};});
@@ -72,7 +82,8 @@ scene("counted",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id
       // housing, schools, transport: each card lifts off the form and flies to the town's map
       P.plan.forEach((t0,k)=>{const u=clamp((tt-t0+0.15)/0.9,0,1);if(u<=0)return;const e=easeCam(u),[mx,my]=WS_PLAN[k],px=lerp(800,mx,e),py=lerp(585,my,e)-110*Math.sin(Math.PI*e);
         ws_planCard(x,k,px,py,lerp(0.4,0.6,e));});}},
-    // the same law lets the town hall correct its register from the answers: the form beside a card from the register, the names linked
+    // the same law lets the town hall use the answers to check up on its residents, by name: the form beside a card from the register,
+    // the names linked
     {at:P.tb,place:"table83",keys:[[P.tb,960,540,1],[P.tb+0.1,980,520,1.06]],d:3,draw:(x,tt)=>{ws_form(x,790,520,440,600,{rot:-0.03,ticks:true});ws_regCard(x,1250,400,360,220,0.04);
       wc_link(x,860,262,1170,314,WC_PENCIL,{p:fin(tt,P.link-0.1,0.8),lw:4,a:0.85});ws_tagAt(x,tt,P.tb+0.4,null,790,170,"census form");
       ws_tagAt(x,tt,P.reg-0.1,null,1250,236,"register of residents");}},
@@ -85,6 +96,10 @@ scene("counted",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id
     {at:P.hl,place:"hall83",keys:[[P.hl,860,425,1.28],[P.hl+0.1,850,425,1.32]],d:3,draw:(x,tt)=>{const down=fin(tt,P.down,0.6);
       ws_clerk(x,tt,{pose:"hold",pose2:"listen",mix:down,expr:tt>P.down?"concerned":"calm"},down<0.5);x.drawImage(gv_place("counter83"),0,0,W,H);ws_bundles(x,fin(tt,P.tie,0.6));
       ws_tagAt(x,tt,P.down+0.1,null,1110,150,"13 April 1983 · census stopped",{size:30});}},
+    // the country still needs a way to count without knowing who said what: the form alone on the table, and the pencil asks it, in the
+    // margin, level with the gap between the name and the answers
+    {at:P.need,place:"table83",keys:[[P.need,960,540,1],[P.need+0.1,860,480,1.1]],d:2.4,draw:(x,tt)=>{const [fx,fy,fw,fh]=WS_F,q=fin(tt,P.q,1.1);
+      ws_form(x,fx,fy,fw,fh,{ticks:true});ws_question(x,q,1);const [px,py]=ws_qAt(q);ws_pencil(x,px,py,gv_io(tt,P.q-0.35,P.q+1.4,0.25));}},
     // December: the court's judges at their bench, and the judgment's words over them
     {at:P.ct,place:"court",keys:[[P.ct,960,500,1.1],[P.ct+0.1,960,470,1.16]],d:4,draw:(x,tt)=>{const C=WS_CT;
       C.judges.forEach((jx,i)=>gv_behind(x,"ws_judge"+i,jx,C.top,C.s,{pose:"listen",t:tt+i*0.7,flip:jx>960}));x.drawImage(gv_place("bench"),0,0,W,H);
@@ -103,6 +118,8 @@ scene("counted",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id
       if(nf<1){ws_form(x,fx,fy,fw,fh,{cut:true,ticks:true});if(sp83<=0)ws_line(x,[fx-fw/2-30,ws_cutY(0)],[fx+fw/2+30,ws_cutY(0)],fin(tt,P.line,0.9));
         else if(!y87)ws_line(x,[fx-fw/2-30,ws_cutY(sp83)],[fx+fw/2+30,ws_cutY(sp83)],1);}
       if(!y87)ws_stripWay(x,sp83,box83,shred83);
+      // the question asked before the court ruled, until the line answers it
+      ws_question(x,1,1-fin(tt,P.line-0.2,0.4));
       ws_townHall(x,gv_io(tt,P.th,P.y87,0.4),fin(tt,P.arrow,0.7),fin(tt,P.cross,0.5));
       // 1987: a new form slides in over the old, the same line, the same split, its strip into the box
       if(y87){const dy=(1-nf)*760,fade=1-fin(tt,P.morph+0.6,0.9);

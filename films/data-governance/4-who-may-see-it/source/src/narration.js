@@ -1,18 +1,19 @@
 // Who may see it, the fourth film of the data governance series. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
 const NARR={
-"counted":{"name":"Counted, not known","lead":1.4,"tail":1.0,"vo":[
+"counted":{"name":"Counted, not known","lead":1.2,"tail":1.0,"vo":[
  {"id":"wg","gap":0.8,"text":"West Germany, April 1983.","say":"West Germany, April, nineteen eighty-three."},
  {"id":"answer","gap":0.8,"text":"Every resident is to answer the census, so the country can plan housing, schools and transport."},
- {"id":"correct","gap":0.8,"text":"But the same law lets each town hall correct its register of residents from the answers."},
+ {"id":"correct","gap":0.8,"text":"But the same law lets each town hall use the answers to check up on its residents, by name."},
  {"id":"boycott","gap":0.8,"text":"Hundreds of groups call for a boycott."},
  {"id":"stops","gap":0.8,"text":"Two weeks before census day, the Constitutional Court stops the count."},
- {"id":"rules","gap":0.8,"text":"In December, it rules that, in principle, each person decides what is disclosed about them, and how it's used."},
+ {"id":"need","gap":0.8,"text":"The country still needs a way to count, without knowing who said what."},
+ {"id":"rules","gap":0.8,"text":"In December, the court rules that, in principle, each person decides what is disclosed about them, and how it's used."},
  {"id":"insig","gap":0.8,"text":"With computers, no data can be assumed insignificant."},
  {"id":"forbid","gap":0.6,"text":"The court doesn't forbid counting."},
  {"id":"line","gap":0.8,"text":"It draws a line."},
  {"id":"apart","gap":0.8,"text":"Names and addresses are kept apart from the answers, and removed as soon as possible."},
- {"id":"back","gap":0.8,"text":"And answers given to be counted don't go back to the town hall."},
+ {"id":"back","gap":0.8,"text":"And answers given to be counted don't go back to the town hall to check up on anyone."},
  {"id":"y1987","gap":0.8,"text":"In 1987, the count goes ahead that way.","say":"In nineteen eighty-seven, the count goes ahead that way."},
  {"id":"one","gap":0.6,"text":"Counting people is one permission."},
  {"id":"another","gap":0.8,"text":"Knowing who they are is another."},

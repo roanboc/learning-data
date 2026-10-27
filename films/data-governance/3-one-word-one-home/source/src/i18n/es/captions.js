@@ -72,8 +72,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Sin una revisión nocturna, un cambio como el del lunes aparece meses después, en un tablero, cuando un número se mueve.",
 "On Monday night, the check found it, and sent a change notice: what the new words touch, and who owns each part.":
 "El lunes en la noche, la revisión lo encontró y envió un aviso de cambio: qué tocan las palabras nuevas, y de quién es cada parte.",
-"Planning's list of learners near an award. The wallet app. The census dashboard.":
-"La lista de Planificación de estudiantes cerca de un título. La app de billetera. El tablero del censo.",
+"A list of learners near an award, and its dashboard. The wallet app.":
+"Una lista de estudiantes cerca de un título, y su tablero. La app de billetera.",
 "Mei approved the new meaning. This time, she could see where her words are used.":
 "Mei aprobó el nuevo significado. Esta vez, pudo ver dónde se usan sus palabras.",
 "Jun saw a number in the words: six credit points.":

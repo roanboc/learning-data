@@ -449,7 +449,7 @@ const NARR={
 "change":{"name":"When a word changes","lead":1.4,"tail":1.4,"vo":[
  {"id":"before","gap":0.8,"text":"Without a nightly check, a change like Monday's is found months later, in a dashboard, when a number moves."},
  {"id":"night","gap":0.8,"text":"On Monday night, the check found it, and sent a change notice: what the new words touch, and who owns each part."},
- {"id":"list","gap":0.8,"text":"Planning's list of learners near an award. The wallet app. The census dashboard."},
+ {"id":"list","gap":0.8,"text":"A list of learners near an award, and its dashboard. The wallet app."},
  {"id":"mei","gap":0.8,"text":"Mei approved the new meaning. This time, she could see where her words are used."},
  {"id":"number","gap":0.8,"text":"Jun saw a number in the words: six credit points."},
  {"id":"rule","gap":0.8,"text":"A number in a meaning is a rule too. So it's kept in one place, as a business rule every report reads."}]},
@@ -465,7 +465,7 @@ const NARR={
  {"id":"idea","gap":0.8,"text":"Many glossaries are no glossary. Keep one, and sync every tool from it."}]}
 };
 
-const VODUR={"script/qin": 7.609, "script/one": 4.989, "script/words": 5.498, "script/board": 6.5, "script/used": 6.061, "script/bridge": 6.051, "five/mei": 4.199, "five/look": 2.655, "five/platform": 5.519, "five/sheet": 1.111, "five/appendix": 2.16, "five/dash": 3.016, "five/tool": 3.835, "five/three": 1.906, "none/reason": 4.978, "none/differ": 6.061, "none/hidden": 2.676, "none/unused": 6.087, "none/monday": 5.023, "none/none": 5.589, "trust/meet": 3.813, "trust/not": 6.7, "trust/term": 5.03, "trust/words": 1.556, "trust/dict": 6.754, "read/others": 2.856, "read/tool": 6.019, "read/sheet": 3.936, "read/policy": 4.935, "read/dash": 6.19, "read/copy": 7.189, "read/way": 4.323, "change/before": 6.058, "change/night": 5.995, "change/list": 4.737, "change/mei": 4.366, "change/number": 2.781, "change/rule": 6.305, "agree/desk": 1.923, "agree/workshop": 6.634, "agree/keeps": 3.486, "agree/lose": 3.484, "agree/thanks": 3.893, "home/policy": 3.776, "home/home": 3.415, "home/idea": 4.273};
+const VODUR={"script/qin": 7.609, "script/one": 4.989, "script/words": 5.498, "script/board": 6.5, "script/used": 6.061, "script/bridge": 6.051, "five/mei": 4.199, "five/look": 2.655, "five/platform": 5.519, "five/sheet": 1.111, "five/appendix": 2.16, "five/dash": 3.016, "five/tool": 3.835, "five/three": 1.906, "none/reason": 4.978, "none/differ": 6.061, "none/hidden": 2.676, "none/unused": 6.087, "none/monday": 5.023, "none/none": 5.589, "trust/meet": 3.813, "trust/not": 6.7, "trust/term": 5.03, "trust/words": 1.556, "trust/dict": 6.754, "read/others": 2.856, "read/tool": 6.019, "read/sheet": 3.936, "read/policy": 4.935, "read/dash": 6.19, "read/copy": 7.189, "read/way": 4.323, "change/before": 6.058, "change/night": 5.995, "change/list": 3.891, "change/mei": 4.366, "change/number": 2.781, "change/rule": 6.305, "agree/desk": 1.923, "agree/workshop": 6.634, "agree/keeps": 3.486, "agree/lose": 3.484, "agree/thanks": 3.893, "home/policy": 3.776, "home/home": 3.415, "home/idea": 4.273};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -476,7 +476,7 @@ const BREATH={
 "none":{"hold":{"reason":0.4,"differ":0.6,"hidden":0.3,"unused":0.5,"monday":0.8,"none":0.8}},
 "trust":{"hold":{"meet":0.4,"not":0.6,"term":0.7,"dict":0.8}},
 "read":{"hold":{"others":0.4,"tool":0.6,"sheet":0.5,"policy":0.5,"dash":0.5,"copy":0.6,"way":0.8}},
-"change":{"hold":{"before":1.0,"night":1.5,"list":1.1,"mei":1.2,"number":1.2,"rule":1.2}},
+"change":{"hold":{"before":1.0,"night":1.5,"list":1.6,"mei":1.55,"number":1.2,"rule":1.2}},
 "agree":{"hold":{"desk":0.3,"workshop":0.7,"keeps":0.9,"lose":0.3,"thanks":0.8}},
 "home":{"hold":{"home":0.8},"breathe":5.0}
 };
@@ -3183,8 +3183,9 @@ function ow_stepChart(ctx,x,y,w,h,p,q){ctx.save();ctx.fillStyle=rgba(GV.screen,1
   ["Jan","Mar","May","Jul","Sep","Nov"].forEach((s,i)=>wc_T(ctx,s,gx+gw*(i*2)/(n-1),gy+gh+44,{w:600,size:28,align:"center",col:WC_MUTED}));
   if(q>0){const [sx,sy]=pts[8];gv_halo(ctx,sx-60,sy-40,120,160,GV.red,0.6*q);const k=spring(q);ctx.save();ctx.translate(sx+64,sy+10);ctx.scale(k,k);wc_T(ctx,"?",0,0,{w:800,size:84,align:"center",col:GV.redInk});ctx.restore();}}
 // Monday's change notice, which the nightly check sends: its title; what changed, the old words struck and the new in bold; what the
-// new words touch, with each part's owner as it's named (o.rows[]); and who signs, the meaning's owner and data governance (o.owners)
-const OW_NT={x:360,y:96,w:1200,h:700,rows:[["learners near an award","Planning"],["wallet app","Wallet app team"],["census dashboard","Planning"]],own:[["the meaning","Mei Tanaka"],["the term still applies","data governance"]]};
+// new words touch, with each part's owner as it's named (o.rows[]); and who signs, the meaning's owner and data governance (o.owners).
+// On Monday night the list of learners near an award has no owner yet, only the team that asked for it: its owner line is empty
+const OW_NT={x:360,y:96,w:1200,h:700,rows:[["learners near an award","","asked for by Planning"],["near-award dashboard","Planning"],["wallet app","Wallet app team"]],own:[["the meaning","Mei Tanaka"],["the term still applies","data governance"]]};
 function ow_notice(ctx,x,y,w,o){o=o||{};const h=OW_NT.h;wc_panel(ctx,x,y,w,h,{kind:"card",seed:481});wc_T(ctx,"Change notice · award",x+28,y+64,{w:800,size:36,col:WC_DARK});
   // what changed: the old words and the new, the parts that differ struck in the old words' rose and set in the new words' violet
   const c=o.changed||0;if(c>0.01)withA(ctx,c,()=>{wc_T(ctx,"what changed",x+28,y+130,{w:700,size:28,col:WC_MUTED});
@@ -3192,10 +3193,13 @@ function ow_notice(ctx,x,y,w,o){o=o||{};const h=OW_NT.h;wc_panel(ctx,x,y,w,h,{ki
       const yy=y+180+j*46;wc_T(ctx,lab,x+28,yy,{w:600,size:28,col:WC_MUTED});let xx=x+100;
       seg.forEach(([s,k])=>{const wt=k>0?800:600,ww=tw(ctx,s,30,wt);wc_T(ctx,s,xx,yy,{w:wt,size:30,col:k<0?OW_MEANINK[1]:k>0?OW_MEANINK[0]:j?WC_INK:WC_MUTED});
         if(k<0){ctx.save();ctx.strokeStyle=rgba(OW_MEANINK[1],0.9);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(xx,yy-10);ctx.lineTo(xx+ww,yy-11);ctx.stroke();ctx.restore();}xx+=ww;});});});
-  const t_=o.touch||0;if(t_>0.01)withA(ctx,t_,()=>wc_T(ctx,"what the new words touch",x+28,y+292,{w:700,size:28,col:WC_MUTED}));
-  const rows=o.rows||[];OW_NT.rows.forEach(([a,b],i)=>{const u=rows[i]||0;if(u<=0.01)return;const yy=y+342+i*58;
+  const t_=o.touch||0;if(t_>0.01)withA(ctx,t_,()=>{wc_T(ctx,"what the new words touch",x+28,y+292,{w:700,size:28,col:WC_MUTED});
+    wc_T(ctx,"owner",x+w-28,y+292,{w:700,size:28,align:"right",col:WC_MUTED});});
+  const rows=o.rows||[];OW_NT.rows.forEach(([a,b,n],i)=>{const u=rows[i]||0;if(u<=0.01)return;const yy=y+342+i*58;
     withA(ctx,u,()=>{ctx.save();ctx.translate(16*(1-u),0);ctx.fillStyle=rgba(GV.cyanInk,0.8);ctx.beginPath();ctx.arc(x+40,yy-10,6,0,TAU);ctx.fill();
-      wc_T(ctx,a,x+62,yy,{w:700,size:30,col:WC_DARK});wc_T(ctx,b,x+w-28,yy,{w:600,size:28,align:"right",col:WC_MUTED});ctx.restore();});});
+      wc_T(ctx,a,x+62,yy,{w:700,size:30,col:WC_DARK});if(n)wc_T(ctx,"· "+n,x+62+tw(ctx,a+" ",30,700),yy,{w:600,size:28,col:WC_MUTED});
+      if(b)wc_T(ctx,b,x+w-28,yy,{w:600,size:28,align:"right",col:WC_INK});
+      else{ctx.strokeStyle=rgba(WC_MUTED,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+w-188,yy+6);ctx.lineTo(x+w-28,yy+6);ctx.stroke();}ctx.restore();});});
   const ow_=o.owners||0;if(ow_>0.01)withA(ctx,ow_,()=>{ctx.save();ctx.strokeStyle=rgba(WC_MUTED,0.35);ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+28,y+508);ctx.lineTo(x+w-28,y+508);ctx.stroke();ctx.restore();
     wc_T(ctx,"who signs",x+28,y+554,{w:700,size:28,col:WC_MUTED});
     OW_NT.own.forEach(([a,b],i)=>{const yy=y+604+i*50;wc_T(ctx,a,x+28,yy,{w:600,size:28,col:WC_INK});wc_T(ctx,b,x+w-28,yy,{w:700,size:28,align:"right",col:i?GV.goldInk:OW_MEANINK[0]});});});}
@@ -3460,7 +3464,7 @@ scene("read",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({stamp:wAt(sc,
 
 // ---- 6 · When a word changes: Monday's change, as a change notice Mei signs ----
 scene("change",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({months:wAt(sc,"before","found months"),moves:wAt(sc,"before","when a number"),night:c.night-0.4,chk:wAt(sc,"night","the check"),found:wAt(sc,"night","found it"),nt:wAt(sc,"night","sent a"),
-    touch:wAt(sc,"night","what the new"),rows:[c.list,wAt(sc,"list","The wallet"),wAt(sc,"list","The census")],mei:c.mei-0.4,appr:wAt(sc,"mei","approved"),used:wAt(sc,"mei","where her"),
+    touch:wAt(sc,"night","what the new"),rows:[c.list,wAt(sc,"list","its dashboard"),wAt(sc,"list","The wallet")],mei:c.mei-0.4,appr:wAt(sc,"mei","approved"),used:wAt(sc,"mei","where her"),
     num:c.number-0.4,six:wAt(sc,"number","six credit"),kept:wAt(sc,"rule","So it's"),sets:wAt(sc,"rule","as a business"),every:wAt(sc,"rule","every report")}));
   gv_shots(ctx,S,t,sc.dur,[
     // without a nightly check: a dashboard's number moves, months later, and nobody knows why

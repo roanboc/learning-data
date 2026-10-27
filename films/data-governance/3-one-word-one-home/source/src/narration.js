@@ -41,7 +41,7 @@ const NARR={
 "change":{"name":"When a word changes","lead":1.4,"tail":1.4,"vo":[
  {"id":"before","gap":0.8,"text":"Without a nightly check, a change like Monday's is found months later, in a dashboard, when a number moves."},
  {"id":"night","gap":0.8,"text":"On Monday night, the check found it, and sent a change notice: what the new words touch, and who owns each part."},
- {"id":"list","gap":0.8,"text":"Planning's list of learners near an award. The wallet app. The census dashboard."},
+ {"id":"list","gap":0.8,"text":"A list of learners near an award, and its dashboard. The wallet app."},
  {"id":"mei","gap":0.8,"text":"Mei approved the new meaning. This time, she could see where her words are used."},
  {"id":"number","gap":0.8,"text":"Jun saw a number in the words: six credit points."},
  {"id":"rule","gap":0.8,"text":"A number in a meaning is a rule too. So it's kept in one place, as a business rule every report reads."}]},

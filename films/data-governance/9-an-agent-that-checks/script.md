@@ -1,6 +1,6 @@
 # Data governance · An agent that checks: script
 
-*The script of the ninth film of the data governance series, *Governance you can use*: about 5:27, in eight chapters, in English, painted in watercolour. Drafted on 21 October 2026, and revised on 27 October for pack 1 of the series' plan in three packs, which the author approved on 23 October: no files, code or tool screens, only the university's own papers, and plain words. Nothing is recorded or rendered before the author approves it. Once the film is made, the narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); where this page and those files differ, the source wins. The title card follows chapter 1; the end card follows chapter 8. Made to read on a phone: on-screen text is at least 28 px in the frame, nothing sits under the captions, and no caption runs to three lines.*
+*The script of the ninth film of the data governance series, *Governance you can use*: about 5:28, in eight chapters, in English, painted in watercolour. Drafted on 21 October 2026, and revised on 27 October for pack 1 of the series' plan in three packs, which the author approved on 23 October: no files, code or tool screens, only the university's own papers, and plain words. Nothing is recorded or rendered before the author approves it. Once the film is made, the narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); where this page and those files differ, the source wins. The title card follows chapter 1; the end card follows chapter 8. Made to read on a phone: on-screen text is at least 28 px in the frame, nothing sits under the captions, and no caption runs to three lines.*
 
 ## What changed for pack 1
 
@@ -91,7 +91,7 @@ The times come from the voice, timed in a scratch copy of the narration (the fil
 
 **On screen.** Noor Rahman · data architect · SENT BACK · who answers for this list? · 10 columns: does each identify a person? · the faculty isn't in the register · which product is it part of? · what I check · How we review a change / for governance (by hand) · How we review a change for governance · You find, draft and flag. People decide. · Steps · 1 Run the checks · 2 An owner · 3 A glossary term, or governance confirms none · 4 A class for every column · 5 Each stated rule: checked, or tracked · 6 What it touches · 7 Report once · Don't · approve a change · edit the glossary · weaken a check · show a value from the data
 
-### 4 · Three findings · 2:12–3:00
+### 4 · Three findings · 2:12–3:01
 
 **Narration.** The data team's AI agent reviews Anil's change. Two things pass: it touches nothing else, and needs no new glossary term. Then three findings, each with where it is, the rule it breaks, a draft, and who decides. One: nobody answers for it, so no owner would be asked to review a change. Two: ten columns don't say whether they identify a person. It counts, and shows no values: all seven rows of the email column look like an email. Three, which no check could find: the faculty wrote a rule, only its own awards, and nothing checks it. The draft checks that every row's faculty is Health.
 
@@ -99,7 +99,7 @@ The times come from the voice, timed in a scratch copy of the narration (the fil
 
 **On screen.** Change request · Call list · Governance review · a note, not an approval · Passed · touches nothing else · no new glossary term · 1 · Nobody answers for it · 2 · Ten columns with no class · 3 · A rule with no check · where · our rule · who decides · drafted · the list: no owner · every table other teams read has an owner · data governance · owner: Faculty of Health · who to ask: nobody named · all 10 columns · every column says whether it identifies a person · Faculty of Health · a class for each · counts, never values · email · 7 rows · 6 different · 7 look like an email · direct · no check could find this · the list's description · Only the faculty's own awards. · a rule about the data has a check · check: every row's faculty is Health · passes: 7 of 7 · Faculty of Health, for the rule · Jun, for how it's built
 
-### 5 · People decide · 3:00–3:50
+### 5 · People decide · 3:01–3:50
 
 **Narration.** Where the agent wasn't sure, it said so. Two columns look alike: long codes. One stands for a learner. The other has two values for seven learners, and its description says it's made from the award. Maybe not a person at all. But when in doubt, the checklist says, draft the stricter class, and ask. Anil confirms: a course, not a person. So it's classed as identifying no one, with Anil's reason in the review. Then the owners decide: the faculty, its classes and its rule; Yusuf, the new owner; Jun, how it's built. The agent decided nothing. It brought each decision to the right person, with the evidence.
 
@@ -107,7 +107,7 @@ The times come from the voice, timed in a scratch copy of the narration (the fil
 
 **On screen.** 2 · Ten columns with no class · counts, never values · column · drafted class · evidence · email · direct · 7 rows · 6 different · 7 look like an email · name · 7 different · learner code · pseudonymous · 7 look like a long code · award code · 2 different · award · award name · faculty · credits needed · credits earned · credits to go · none · no email, student number or long code · not sure · looks like a long code · “A long code for the award, made from its short name.” · ? · 4 A class for every column · when in doubt, draft the stricter class, and ask · If it's made from the award, it identifies no one: please confirm. · Anil Kurian · It's made from the award: a course, not a person. · a course, not a person (Anil Kurian) · Sign-off · Change: the advisers' call list · owner · Faculty of Health · class · all 10 columns · who to ask · the faculty's data desk · product · Learner progress, Health · Approvals · Faculty of Health · its classes and its rule · APPROVED · Yusuf Demir · the new owner · Jun Park · how it's built · SIGNED · 1 · Nobody answers for it · 3 · A rule with no check
 
-### 6 · Governed, too · 3:50–4:31
+### 6 · Governed, too · 3:50–4:32
 
 **Narration.** Binder 26 says: AI use follows the organisation's data policies. The agent is governed too, by the rules for AI helpers. It has its own identity, reads only what Sam grants it, and writes only in its own workspace. It works from counts and small samples, never bulk personal data, and only reads the glossary. And it can't approve: owners sign off, and the agent owns nothing. So the binder's line goes green: it runs, in the agent's access, its checklist, and the owners' approvals.
 
@@ -115,7 +115,7 @@ The times come from the voice, timed in a scratch copy of the narration (the fil
 
 **On screen.** Policy 26 · AI and automated tools · AI use follows the organisation's data policies. · Rules for AI helpers · What a helper may do · Its access · What it must not do · Sam Okafor · platform team · Access request · for: the review agent · its own identity, never a person's · purpose: review changes for governance · reads: the tables other teams read · writes: its own workspace · writes: live tables · counts and small samples · personal data in bulk · the glossary: read only · reviewed: with everyone's access · Yes, as the rules for AI helpers say. Sam Okafor · Register of owners and stewards · Who signs off what · what · signs off · anything nobody else owns · Jun Park · the call list: what it means · Faculty of Health, with Noor · the call list: how it's built · Faculty of Health, with Jun · the register of owners · data governance, with Noor · the review checklist · approve · owners only · the agent's access · its checklist · owners' approvals
 
-### 7 · Only what's written · 4:31–5:05
+### 7 · Only what's written · 4:32–5:05
 
 **Narration.** An agent can only follow what's written down, plainly enough to check. Remember policy 12's last line: "Staff take care to use terms correctly." No agent can check care. And the checklist itself is open: anyone can read it, and argue with it. A change to the checklist is reviewed like any other: data governance approves it, and the next review follows it. People trust a review they can read, question and overrule.
 
@@ -123,7 +123,7 @@ The times come from the voice, timed in a scratch copy of the narration (the fil
 
 **On screen.** 12 · Data definitions · How we review a change for governance · You find, draft and flag. People decide. · Steps · 1 Run the checks · 2 An owner · 3 A glossary term, or governance confirms none · 4 A class for every column · 5 Each stated rule: checked, or tracked · 6 What it touches · 7 Report once · Policy 12 · Data definitions · Business terms are defined consistently across the organisation. · 12.1 Each term has a named owner. · a field no one can leave empty · 12.2 Each term used in a report is in the glossary. · checked every night · 12.3 Reports count by the glossary's definitions. · checked every night · 12.4 Terms about people are marked as personal data. · a label · 12.5 Each term's owner decides its definition, and how it maps to the government's. · award: Mei decides · 12.6 Each decision is written down with the term. · in the glossary · 12.7 Staff take care to use terms correctly. · runs in the work · a decision someone owns · can go · ? · why the stricter class? · Register of owners and stewards · Who signs off what · the review checklist · data governance, with Noor · data governance approves · Don't · approve a change · edit the glossary · weaken a check · show a value from the data · the next review · Change request · Call list · Governance review · read it · question it · overrule it
 
-### 8 · That night · 5:05–5:27
+### 8 · That night · 5:05–5:28
 
 **Narration.** That night, a few years from now, is made of what you've just seen: a checklist in plain words, rules for AI helpers, a register of who signs off what, and people who decide. An agent checks what's written. People decide.
 
@@ -198,11 +198,11 @@ Timed on 27 October 2026 from the narration above, voiced in a scratch copy with
 | 1 · A night, imagined | 56.2 s | 126 | 70% | 6.6 s (the note resolved, and the title, wordless) |
 | 2 · Sent back | 32.5 s | 135 | 72% | 2.6 s |
 | 3 · Rules an agent can follow | 43.6 s | 128 | 73% | 2.6 s |
-| 4 · Three findings | 48.1 s | 135 | 75% | 2.8 s |
+| 4 · Three findings | 48.3 s | 134 | 72% | 2.8 s |
 | 5 · People decide | 49.2 s | 133 | 72% | 2.4 s |
 | 6 · Governed, too | 41.7 s | 122 | 72% | 3.0 s |
 | 7 · Only what's written | 33.1 s | 132 | 73% | 2.4 s |
 | 8 · That night | 22.9 s | 107 | 58% | 6.4 s (the end card, wordless) |
-| **Film** | **5:27.4** | **128** | **71%** | |
+| **Film** | **5:27.6** | **128** | **71%** | |
 
-700 words, 180 words a minute while speaking. Every sentence has at least 0.5 s after it, and no stop between two lines lasts 2.5 s or more: each chapter's longest quiet is at its end, before the next chapter's turn, and in chapters 1 and 8 it is the wordless moment.
+700 words, 181 words a minute while speaking. Every sentence has at least 0.5 s after it, and no stop between two lines lasts 2.5 s or more: each chapter's longest quiet is at its end, before the next chapter's turn, and in chapters 1 and 8 it is the wordless moment.

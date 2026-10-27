@@ -41,12 +41,12 @@ Then, if you like:
 | `python scripts/generate/decisions.py` | Checks every decision log and regenerates their index, `docs/decisions.md` |
 | `python scripts/check/requirements.py` | Checks the open requirements in `requirements/`, and lists them |
 | `python scripts/check/impact.py --base origin/main` | What a branch's change touches: changed and downstream models, contracts (additive or breaking), the meaning, decisions, tests, exposures, and who to ask. CI writes it on every pull request |
-| `python scripts/generate/products.py` | Writes each data product (`products/<name>.yml`) as an ODPS descriptor, and each of its outputs as an ODCS contract, from the dbt contracts, and validates them against the standards' schemas |
+| `python scripts/generate/products.py` | Writes each data product (`governance/4-data-products/<name>.yml`) as a product descriptor, and each of its outputs as a contract, in the open standards, from the dbt contracts, and validates them against the standards' schemas |
 | `python scripts/generate/scorecard.py` | After a build: the data quality scorecard, `docs/scorecard.md`, every test by domain and quality dimension, with what didn't pass and its owner |
 | `python scripts/generate/issues.py` | After a build: one issue per owner with a test that didn't pass, with the date to answer by and what closes it, in `target/issues/` (a dry run: the owners are fictional) |
 | `python scripts/generate/codeowners.py` | Regenerates `CODEOWNERS` from the owners in the metadata, so a change asks its owner to review it |
 | `python scripts/check/governance.py --measures` | Checks data governance's rules (an owner, a glossary term or a confirmed absence, classified columns, tests with an owner and a dimension, described columns), each message with its how-to in `docs/how-to/`, and measures them |
-| `python ../map/check.py` | Checks the governance part of Noor's map (`../map/`, kept beside the project as text) and writes its views: governance's services and promises, and who does what |
+| `python scripts/check/architecture_map.py` | Checks the governance part of Noor's map (`governance/3-architecture-map/`) and writes its views: governance's services and promises, and who does what |
 | `dbt build --target databricks --profiles-dir . --vars '{personal_data_readers: <group>}'` | On Databricks: tags each column with its class, and masks direct personal data for everyone outside the group. One policy by tag instead, and Ontos: `docs/databricks-governance.md` |
 | `python scripts/generate/definitions.py` | Regenerates each domain's definitions (`_<domain>__definitions.md`) and `seeds/reference/shared/key_sets.csv` from the conceptual models |
 | `pip install dbt-metricflow==0.15.0`, then `DBT_PROFILES_DIR=. mf query --metrics learners_near_graduate_certificate --group-by learner_award__faculty_name` | Planning's answer, from the semantic layer's metric |
@@ -152,8 +152,7 @@ project/
 │   ├── _groups.yml           who owns which models
 │   ├── _shared/              the university's map: its domains and key entities, at most 50
 │   │                         (_shared__conceptual.yml; _shared__conceptual.md [generated]); the
-│   │                         project's decision log; the version columns' doc blocks; the time spine;
-│   │                         who each owner is, and where their reviews go (_shared__owners.yml)
+│   │                         project's decision log; the version columns' doc blocks; the time spine
 │   ├── staging/<system>/     one view per source table
 │   ├── intermediate/student/ identity candidates and matches, timelines, the credit rule; unit tests
 │   ├── core/student/         learner, credential, credit towards an award ┐ the enterprise contract:
@@ -169,10 +168,15 @@ project/
 │                               _<domain>__definitions.md           [generated] doc blocks
 │                               _<domain>__physical.md              [generated] physical diagram
 ├── exposures/<consumer>/     who uses it: the census dashboard, the wallet app, the revenue forecast
-├── products/                 the data products: <name>.yml, each with its owner, domain, status,
-│                             outputs, service levels and support; odps/ and odcs/ [generated], the
-│                             same in the open standards, ODPS and ODCS; schemas/, the standards'
-│                             JSON schemas
+├── governance/               what isn't dbt's, and could live in another tool or repository:
+│   ├── 1-glossary/           every acronym the project can't avoid, and what it stands for
+│   ├── 2-owners/             who each owner is, and where their reviews go
+│   ├── 3-architecture-map/   the governance part of Noor's map, one file per element, by layer;
+│   │                         6-views/ [generated]: services and promises, who does what
+│   ├── 4-data-products/      each product: owner, domain, status, outputs, service levels, support
+│   ├── 5-data-contracts/     [generated] each output's contract, in the open contract standard
+│   ├── 6-product-descriptors/ [generated] each product, in the open product standard
+│   └── 7-standards/          the two standards' schemas, that the generated files are checked against
 ├── macros/
 │   ├── shared/               conventions every domain uses: keys and hashes, point in time
 │   ├── planning/             Planning's near-award rule and count, written once

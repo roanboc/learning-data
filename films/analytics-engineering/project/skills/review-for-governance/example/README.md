@@ -14,6 +14,8 @@ engineer approve the drafts. *Data governance* film 9, *An agent that checks*, s
 The Health mart is only in these patches, not in the project's models: in the models, it would
 change the governance measures other films show.
 
+The patches and the review use the project's paths at `0028f45`. Since then, governance's own files moved into `governance/`: the owners register is `governance/2-owners/owners.yml` and the products are in `governance/4-data-products/`.
+
 ## Run it again
 
 From the repository's root, in a scratch worktree, so your own checkout stays as it is:

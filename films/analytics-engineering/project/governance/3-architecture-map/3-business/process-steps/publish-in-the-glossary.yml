@@ -1,0 +1,10 @@
+name: publish in the glossary
+kind: business process
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: data governance lead
+- access (reads): term decision
+- access (writes): business term
+- realization: define or change a term
+- triggering: sync to every tool
+status: confirmed

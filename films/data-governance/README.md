@@ -12,7 +12,7 @@ Yusuf Demir starts as the university's data governance lead. He inherits a shelf
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [The same problem, everywhere](https://data.learn-all.org/data-governance/the-same-problem-everywhere/) | Where data governance comes from | 5 min | 8 | 3 questions | [script](0-the-same-problem-everywhere/script.md) · [source](0-the-same-problem-everywhere/source/README.md) |
-| [Off the shelf](https://data.learn-all.org/data-governance/off-the-shelf/) | Data governance, and where each policy runs | 5½ min | 10 | 3 questions | [script](1-off-the-shelf/script.md) · [source](1-off-the-shelf/source/README.md) |
+| [Off the shelf](https://data.learn-all.org/data-governance/off-the-shelf/) | Data governance, and where each policy runs | 5 min | 9 | 4 questions | [script](1-off-the-shelf/script.md) · [source](1-off-the-shelf/source/README.md) |
 | [One word, one home](https://data.learn-all.org/data-governance/one-word-one-home/) | Data governance, and one meaning for each word | 5½ min | 8 | 4 questions | [script](3-one-word-one-home/script.md) · [source](3-one-word-one-home/source/README.md) |
 <!-- /films -->
 
@@ -30,7 +30,7 @@ Like the other series, each film is generated from code. The series keeps what's
 
 | File | What it holds |
 |---|---|
-| `shared/src/rooms.js` | The colours several films share (each room's walls, award's three meanings, the classes of personal data), and the university's places, in watercolour: the campus, Yusuf's office, the floor of offices behind glass, the rooms where the numbers are made, and a desk seen from above; the places the later films share (the stewards' meeting room, three desks close up, and Noor's room with her architecture map), with people sitting or standing behind a table or desk; the things on their walls and desks (binders, papers, screens, cards, pins, stamps, speech bubbles); a column's class as a chip, and the mask over a value; a camera that cuts between shots; and the title and end cards. It paints with the master and reference data series' `wash.js`, bundled as it is |
+| `shared/src/rooms.js` | The colours several films share (each room's walls, award's three meanings, the classes of personal data, amber for a warning), and the university's places, in watercolour: the campus, Yusuf's office, the floor of offices behind glass, the rooms where the numbers are made, and a desk seen from above; the places the later films share (the stewards' meeting room, three desks close up, and Noor's room with her architecture map), with people sitting or standing behind a table or desk; the things on their walls and desks (binders, papers, screens, cards, pins, stamps, speech bubbles); a column's class as a chip, and the mask over a value; the data quality scorecard *Rules that run* and *Fixed where it starts* share; a camera that cuts between shots; and the title and end cards. It paints with the master and reference data series' `wash.js`, bundled as it is |
 | `shared/src/people.js` | The series' people, drawn in pencil and wash with the master data series' `people.js`, bundled as it is: the cast of *When things go wrong* and *In the weeds of data crafting*, Yusuf, Clara, Anil and Marta, and the people of the past in their own clothes |
 | `shared/src/finish.js` | What a film needs before it starts (the fonts, the logos, the paper, and each place, painted once), and the video's finishing pass: motion blur, with no glow and no film grain |
 | `shared/src/page.html` | The standalone player page |

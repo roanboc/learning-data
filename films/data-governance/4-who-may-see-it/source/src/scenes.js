@@ -71,7 +71,7 @@ scene("counted",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id
     return{lift:c.answer+0.2,plan:[w("answer","housing"),w("answer","schools"),w("answer","transport")],tb:c.correct-0.3,link:w("correct","check"),
       reg:w("correct","town"),st:c.boycott-0.4,hl:c.stops-0.5,down:w("stops","stops"),tie:w("stops","stops",0.9),need:w("need","still",-0.1),q:w("need","without",-0.1),ct:c.rules-0.4,dec:w("rules","decides"),
       tbl:c.insig-0.4,slip:w("insig","computers"),slipBack:c.forbid+0.1,count:w("forbid","counting"),line:c.line+0.05,split:w("apart","kept"),rem:w("apart","removed"),
-      th:c.back-0.2,arrow:w("back","given"),cross:w("back","don't"),y87:c.y1987-0.1,one:c.one,two:c.another,betw:c.between-0.2,uni:w("between","university's"),
+      th:c.back-0.2,arrow:w("back","given"),cross:w("back","don't"),y87:c.y1987-0.1,num:w("y1987","country"),priv:w("y1987","privacy"),one:c.one,two:c.another,betw:c.between-0.2,uni:w("between","university's"),
       morph:w("between","between"),title:c.breath+0.7};});
   const mk=[[0,"West Germany · 1983"],[P.ct,"Karlsruhe · 1983"],[P.tbl,"West Germany · 1983"],[P.y87,"West Germany · 1987"]];
   gv_shots(ctx,S,t,sc.dur,[
@@ -110,10 +110,10 @@ scene("counted",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id
       const [fx,fy,fw,fh]=WS_F,y87=tt>=P.y87,gone=fin(tt,P.morph-0.2,0.8),nf=y87?easeCam(fin(tt,P.y87,0.8)):0;
       // the box, the shredder and the tally come when they're needed; the box opens for each strip
       const sp83=0.5*easeCam(fin(tt,P.split,0.6)),box83=fin(tt,P.split+0.6,1.3),shred83=clamp((tt-P.rem)/1.2,0,1);
-      const sp87=0.5*easeCam(fin(tt,P.y87+1.6,0.5)),box87=fin(tt,P.y87+2.1,1.2),open=y87?gv_io(tt,P.y87+1.9,P.morph-0.4,0.4):gv_io(tt,P.split+0.3,P.rem+1.4,0.4);
-      withA(x,fin(tt,P.split,0.5)*(1-gone),()=>ws_tinBox(x,WS_BOX[0],WS_BOX[1],open,0));
+      const sp87=0.5*easeCam(fin(tt,P.y87+1.6,0.5)),box87=fin(tt,P.y87+2.1,1.2),open=y87?gv_io(tt,P.y87+1.9,P.priv-0.3,0.4):gv_io(tt,P.split+0.3,P.rem+1.4,0.4);
+      withA(x,fin(tt,P.split,0.5)*(1-gone),()=>ws_tinBox(x,WS_BOX[0],WS_BOX[1],open,y87?fin(tt,P.priv+0.2,0.5):0));
       const shr=gv_io(tt,P.rem-0.6,P.y87,0.5);if(shr>0.01)withA(x,shr,()=>ws_shredder(x,WS_SHR[0],WS_SHR[1],clamp((tt-P.rem-0.7)/1.4,0,1)));
-      const tal=fin(tt,P.count-0.3,0.5)*(1-gone);if(tal>0.01)withA(x,tal,()=>ws_tally(x,WS_TAL[0],WS_TAL[1],clamp((tt-P.count)/0.8,0,1)*5+clamp((tt-P.y87-2.0)/2.6,0,1)*20));
+      const tal=fin(tt,P.count-0.3,0.5)*(1-gone);if(tal>0.01)withA(x,tal,()=>ws_tally(x,WS_TAL[0],WS_TAL[1],clamp((tt-P.count)/0.8,0,1)*5+clamp((tt-P.num)/(P.priv-P.num-0.2),0,1)*20));
       // 1983's form: its answers lift off and come back; the line; the strip to the box, then to the shredder; the answers stay, counted
       if(nf<1){ws_form(x,fx,fy,fw,fh,{cut:true,ticks:true});if(sp83<=0)ws_line(x,[fx-fw/2-30,ws_cutY(0)],[fx+fw/2+30,ws_cutY(0)],fin(tt,P.line,0.9));
         else if(!y87)ws_line(x,[fx-fw/2-30,ws_cutY(sp83)],[fx+fw/2+30,ws_cutY(sp83)],1);}
@@ -121,7 +121,8 @@ scene("counted",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id
       // the question asked before the court ruled, until the line answers it
       ws_question(x,1,1-fin(tt,P.line-0.2,0.4));
       ws_townHall(x,gv_io(tt,P.th,P.y87,0.4),fin(tt,P.arrow,0.7),fin(tt,P.cross,0.5));
-      // 1987: a new form slides in over the old, the same line, the same split, its strip into the box
+      // 1987: a new form slides in over the old, the same line, the same split, its strip into the box; the country gets its numbers, the
+      // tally filling, and people keep their privacy, the box shut and locked
       if(y87){const dy=(1-nf)*760,fade=1-fin(tt,P.morph+0.6,0.9);
         if(fade>0.01)withA(x,fade,()=>{x.save();x.translate(0,dy);ws_form(x,fx,fy,fw,fh,{cut:true,ticks:true});if(box87<=0)ws_stripWay(x,sp87,0,0);x.restore();});
         if(box87>0&&(box87<1||open>0.5))ws_stripWay(x,0.5,box87,0);
@@ -334,14 +335,14 @@ scene("purpose",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id
 
 // ---- 7 · Why the stars: Yusuf tells Clara why, and the way to more ----
 scene("stars",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
-    return{ask:c.asks,why:w("why","why"),more:w("more","the way"),fl:c.no-0.3,copied:w("no","copied")};});
+    return{ask:c.asks,why:w("why","why"),yb:w("why","Planning",-0.2),more:w("more","the way"),fl:c.no-0.3,copied:w("no","copied")};});
   gv_shots(ctx,S,t,sc.dur,[
     // Planning: Clara asks why the names are stars; Yusuf tells her why, and shows her the way to more
-    {at:0,place:"planning",keys:[[0,960,500,1.08],[0.1,960,490,1.1]],d:4,draw:(x,tt)=>{ws_planScreen(x,gv_io(tt,P.ask+1.0,c.rule,0.4));
-      person(x,"clara",440,905,0.8,{pose:"point",pose2:"listen",mix:fin(tt,c.rule,0.6),t:tt});
+    {at:0,place:"planning",keys:[[0,960,500,1.08],[0.1,960,490,1.1]],d:4,draw:(x,tt)=>{ws_planScreen(x,gv_io(tt,P.ask+1.0,c.why,0.4));
+      person(x,"clara",440,905,0.8,{pose:"point",pose2:"listen",mix:fin(tt,c.why,0.6),t:tt});
       person(x,"yusuf",1320,905,0.8,{pose:"listen",pose2:"explain",mix:gv_io(tt,P.why-0.3,P.fl,0.5),t:tt,flip:true});
-      ws_say(x,tt,P.ask+0.6,c.rule+0.6,90,250,["Why stars?"],420,468);
-      ws_say(x,tt,P.why,P.more-0.2,1236,128,["Planning counts learners.","It doesn't need to know who they are."],1320,466,{size:28});
+      ws_say(x,tt,P.ask+0.6,P.yb,90,250,["Why stars?"],420,468);
+      ws_say(x,tt,P.yb,P.more-0.2,1236,128,["Planning counts learners.","It doesn't need to know who they are."],1320,466,{size:28});
       const n=fin(tt,P.more,0.45);if(n>0.01){x.save();x.translate(0,14*(1-n));withA(x,n,()=>gv_card(x,1236,124,560,196,["Need names?","Ask the registrar's office,","and say what for."],{size:30,wash:GV.gold,washA:0.18,pin:true}));x.restore();}}},
     // the floor: a no without a way forward, and the table copied into spreadsheets, office after office
     {at:P.fl,place:"floor",keys:[[P.fl,960,540,1],[P.fl+0.1,960,530,1.02]],d:4,push:0.01,draw:(x,tt)=>{ws_floor(x,tt,{under:x=>{
@@ -362,7 +363,8 @@ function ws_heldPlan(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[
 const WS_OBD=[1.6,1.6,1.2];
 scene("grants",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{tray:w("plan","faculties"),dec:w("plan","fifteenth"),ends:w("plan","ends"),rev:c.review-0.3,sweep:w("review","access"),two:w("two","two"),bind:c.policy-0.4,
-      notes:[c.owners+0.1,w("platform","platform"),w("platform","reviews")],tb:c.one-0.3,band:w("another","another"),once:w("classify","once"),end:c.breath-0.2};});
+      notes:[w("policy","owners",0.1),w("platform","platform"),w("platform","reviews")],tb:c.like-0.3,morph:w("like","Planning",-0.1),
+      num:w("like","numbers"),who:w("like","learners"),band:w("like","privacy"),once:w("classify","once"),end:c.breath-0.2};});
   gv_shots(ctx,S,t,sc.dur,[
     // Planning: the plan goes to the faculties; the calendar turns to the 15th, and the access card on the wall goes by itself
     {at:0,place:"planning",keys:[[0,700,520,1.12],[0.1,680,520,1.16]],d:4,draw:(x,tt)=>{const put=fin(tt,P.tray-0.4,0.6);ws_planChart(x);
@@ -379,11 +381,16 @@ scene("grants",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,
       ws_openBinder(x,1,{notes:n,tick:fin(tt,P.notes[2]+1.0,0.5)});
       [[1205,300],[1372,418]].forEach(([qx,qy],i)=>withA(x,1-0.75*clamp(n[i]*1.5,0,1),()=>gv_qmark(x,qx,qy,46,1)));
       P.notes.forEach((t0,i)=>{const a=gv_io(tt,t0-0.3,t0+WS_OBD[i]+0.25,0.25);if(a<=0.01)return;const [px,py]=ws_penAt(x,WS_OBN[i],ws_obNoteX(),ws_obNoteY(i),ws_obNoteS(x),n[i]);ws_pen(x,px,py,a,0.3);});}},
-    // the table: the court's line, between columns; the mask over the side that says who, and the class on it
-    {at:P.tb,place:"table83",keys:[[P.tb,960,540,1],[P.tb+0.1,960,520,1.04]],d:4,push:0.02,draw:(x,tt)=>{const [fx,fy,fw,fh]=WS_F;
-      ws_colsTable(x,1,fin(tt,P.band,0.9));const [a,b]=ws_lineAt(1,[fx,fy,fw,fh]);ws_line(x,a,b,1);
-      ws_tagAt(x,tt,c.one+0.2,null,(WS_TB.x+WS_TB.div)/2,WS_TB.y-60,"counting",{size:32});ws_tagAt(x,tt,c.another+0.2,null,(WS_TB.div+WS_TB.x+WS_TB.w)/2,WS_TB.y-60,"knowing who",{size:32});
+    // the census of 1987 again, as the first chapter left it: the tally full, the box shut and locked, the court's line across the answers.
+    // Then, as in the first chapter, the line becomes the line between the table's columns: counting on one side; the side that says who
+    // masked; the class on it
+    {at:P.tb,place:"table83",keys:[[P.tb,960,540,1],[P.tb+0.1,960,520,1.04]],d:4,push:0.02,draw:(x,tt)=>{const [fx,fy,fw,fh]=WS_F,f87=[fx,fy-0.5*fh*0.12,fw,fh];
+      const gone=fin(tt,P.morph-0.2,0.8),fade=1-fin(tt,P.morph+0.6,0.9);
+      if(gone<1)withA(x,1-gone,()=>{ws_tinBox(x,WS_BOX[0],WS_BOX[1],0,1);ws_tally(x,WS_TAL[0],WS_TAL[1],25);});
+      if(fade>0.01)withA(x,fade,()=>ws_form(x,fx,fy,fw,fh,{cut:true,ticks:true}));
+      ws_colsTable(x,fin(tt,P.morph+0.4,1.0),fin(tt,P.band,0.9));const [a,b]=ws_lineAt(fin(tt,P.morph,1.6),f87);ws_line(x,a,b,1);
+      ws_tagAt(x,tt,P.num,null,(WS_TB.x+WS_TB.div)/2,WS_TB.y-60,"counting",{size:32});ws_tagAt(x,tt,P.who,null,(WS_TB.div+WS_TB.x+WS_TB.w)/2,WS_TB.y-60,"knowing who",{size:32});
       gv_classChipAt(x,tt,P.once,WS_TB.div+30,WS_TB.y+140,"direct",{size:28});}}]);
-  wc_year(ctx,56,72,"December 2026",fin(t,0.3,0.5)*(1-fin(t,P.rev,0.4)));
+  wc_year(ctx,56,72,"December 2026",fin(t,0.3,0.5)*(1-fin(t,P.rev,0.4)));wc_year(ctx,56,72,"West Germany · 1987",gv_io(t,P.tb,P.morph,0.4));
   gv_end(ctx,S,t,P.end,"Who may see it","Classify once; protect it everywhere.","Film 4 of 19");
   wc_paperOver(ctx,S);});

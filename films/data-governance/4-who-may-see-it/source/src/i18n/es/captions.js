@@ -28,8 +28,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Los nombres y las direcciones se guardan aparte de las respuestas, y se eliminan lo antes posible.",
 "And answers given to be counted don't go back to the town hall to check up on anyone.":
 "Y las respuestas dadas para contar no vuelven al municipio para controlar a nadie.",
-"In 1987, the count goes ahead that way.":
-"En 1987, el censo se hace así.",
+"In 1987, the count goes ahead that way: the country gets its numbers, and people keep their privacy.":
+"En 1987, el censo se hace así: el país obtiene sus cifras, y las personas conservan su privacidad.",
 "Counting people is one permission.":
 "Contar personas es un permiso.",
 "Knowing who they are is another.":
@@ -122,10 +122,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "El agente de IA del equipo de datos también ve asteriscos, y trabaja con conteos y muestras.",
 "Clara asks Yusuf why the names are stars.":
 "Clara pregunta a Yusuf por qué los nombres son asteriscos.",
-"He doesn't just point to the rule.":
-"Él no se limita a señalar la regla.",
-"He tells her why: Planning counts learners; it doesn't need to know who they are.":
-"Le dice por qué: Planificación cuenta estudiantes; no necesita saber quiénes son.",
+"He tells her why, as the court did: Planning counts learners; it doesn't need to know who they are.":
+"Le dice por qué, como hizo el tribunal: Planificación cuenta estudiantes; no necesita saber quiénes son.",
 "And he shows her the way to more: if a purpose needs names, she asks the registrar's office, and says what it's for.":
 "Y le muestra cómo obtener más: si un propósito necesita nombres, le pide a la oficina de registro, y dice para qué.",
 "A no without a way forward is how tables end up copied into spreadsheets.":
@@ -136,12 +134,12 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Más tarde ese mes, la revisión de Yusuf toma minutos: lee la propia lista de accesos.",
 "The forty-one names are two groups now, each with a reason to be there.":
 "Los cuarenta y un nombres son ahora dos grupos, cada uno con una razón para estar ahí.",
-"Policy 6 now says which data, and how.":
-"La política 6 ahora dice qué datos, y cómo.",
-"Owners class each column, and decide who may see it, for what, and until when.":
-"Los dueños clasifican cada columna, y deciden quién puede verla, para qué y hasta cuándo.",
+"Policy 6 now says which data, and how: owners class each column, and decide who may see it, for what, and until when.":
+"La política 6 ahora dice qué datos, y cómo: los dueños clasifican cada columna, y deciden quién puede verla, para qué y hasta cuándo.",
 "The platform team protects each class, and Yusuf reviews who has access.":
 "El equipo de plataforma protege cada clase, y Yusuf revisa quién tiene acceso.",
+"Like the census of 1987, Planning gets its numbers, and learners keep their privacy.":
+"Como en el censo de 1987, Planificación obtiene sus cifras, y los estudiantes conservan su privacidad.",
 "Classify once, at the column, and protect it everywhere.":
 "Clasifica una vez, en la columna, y protégela en todas partes."
 });

@@ -1,7 +1,7 @@
 // Who may see it, the fourth film of the data governance series. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
 const NARR={
-"counted":{"name":"Counted, not known","lead":1.2,"tail":1.0,"vo":[
+"counted":{"name":"Counted, not known","lead":1.0,"tail":1.0,"vo":[
  {"id":"wg","gap":0.8,"text":"West Germany, April 1983.","say":"West Germany, April, nineteen eighty-three."},
  {"id":"answer","gap":0.8,"text":"Every resident is to answer the census, so the country can plan housing, schools and transport."},
  {"id":"correct","gap":0.8,"text":"But the same law lets each town hall use the answers to check up on its residents, by name."},
@@ -14,7 +14,7 @@ const NARR={
  {"id":"line","gap":0.8,"text":"It draws a line."},
  {"id":"apart","gap":0.8,"text":"Names and addresses are kept apart from the answers, and removed as soon as possible."},
  {"id":"back","gap":0.8,"text":"And answers given to be counted don't go back to the town hall to check up on anyone."},
- {"id":"y1987","gap":0.8,"text":"In 1987, the count goes ahead that way.","say":"In nineteen eighty-seven, the count goes ahead that way."},
+ {"id":"y1987","gap":0.8,"text":"In 1987, the count goes ahead that way: the country gets its numbers, and people keep their privacy.","say":"In nineteen eighty-seven, the count goes ahead that way: the country gets its numbers, and people keep their privacy."},
  {"id":"one","gap":0.6,"text":"Counting people is one permission."},
  {"id":"another","gap":0.8,"text":"Knowing who they are is another."},
  {"id":"between","gap":0.8,"text":"In a university's data, the court's line runs between columns: who may see each one, for what, and until when."}]},
@@ -65,20 +65,17 @@ const NARR={
  {"id":"list","gap":0.8,"text":"But with the registrar's list, it leads back to a person."},
  {"id":"personal","gap":0.8,"text":"So it's still personal data: even codes come with a purpose and an end date."},
  {"id":"agent","gap":0.8,"text":"The data team's AI agent sees stars too, and works from counts and samples."}]},
-"stars":{"name":"Why the stars","lead":1.4,"tail":1.0,"vo":[
+"stars":{"name":"Why the stars","lead":1.0,"tail":1.0,"vo":[
  {"id":"asks","gap":0.8,"text":"Clara asks Yusuf why the names are stars."},
- {"id":"rule","gap":0.8,"text":"He doesn't just point to the rule."},
- {"id":"why","gap":0.8,"text":"He tells her why: Planning counts learners; it doesn't need to know who they are."},
+ {"id":"why","gap":0.8,"text":"He tells her why, as the court did: Planning counts learners; it doesn't need to know who they are."},
  {"id":"more","gap":0.8,"text":"And he shows her the way to more: if a purpose needs names, she asks the registrar's office, and says what it's for."},
  {"id":"no","gap":0.8,"text":"A no without a way forward is how tables end up copied into spreadsheets."}]},
 "grants":{"name":"Read from the access list","lead":1.0,"tail":1.0,"vo":[
  {"id":"plan","gap":0.8,"text":"Clara's plan goes to the faculties, and on 15 December her access ends by itself.","say":"Clara's plan goes to the faculties, and on the fifteenth of December her access ends by itself."},
  {"id":"review","gap":0.8,"text":"Later that month, Yusuf's review takes minutes: he reads the access list itself."},
  {"id":"two","gap":0.8,"text":"The forty-one names are two groups now, each with a reason to be there."},
- {"id":"policy","gap":0.8,"text":"Policy 6 now says which data, and how.","say":"Policy six now says which data, and how."},
- {"id":"owners","gap":0.8,"text":"Owners class each column, and decide who may see it, for what, and until when."},
+ {"id":"policy","gap":0.8,"text":"Policy 6 now says which data, and how: owners class each column, and decide who may see it, for what, and until when.","say":"Policy six now says which data, and how: owners class each column, and decide who may see it, for what, and until when."},
  {"id":"platform","gap":0.8,"text":"The platform team protects each class, and Yusuf reviews who has access."},
- {"id":"one","gap":0.6,"text":"Counting people is one permission."},
- {"id":"another","gap":0.8,"text":"Knowing who they are is another."},
+ {"id":"like","gap":0.8,"text":"Like the census of 1987, Planning gets its numbers, and learners keep their privacy.","say":"Like the census of nineteen eighty-seven, Planning gets its numbers, and learners keep their privacy."},
  {"id":"classify","gap":0.8,"text":"Classify once, at the column, and protect it everywhere."}]}
 };

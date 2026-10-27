@@ -10,8 +10,9 @@
 # Every sound is an event on screen, at the moment it appears. Each effect below uses the same timing as the picture in
 # src/scenes.js (the same word, and the same offset), so sound and picture stay together when the voice is re-timed: paper, a
 # string round a bundle of forms, a pencil, a tin box's lid, a small shredder, a binder slid along a shelf, keys typed, a key dropped,
-# a pin pressed into cork, a class's chip set down, a scrambler's gears, a wooden knock for each card that arrives and a breath of air
-# for each thing carried across. Everything is soft and stays below about 2.5 kHz (soften() at the end makes sure of it).
+# a pin pressed into cork, a register's cover opening, a class's chip set down, a pen on paper, a rubber stamp, a label's string drawn
+# tight, a wooden knock for each card that arrives and a breath of air for each thing carried across. Everything is soft and stays
+# below about 2.5 kHz (soften() at the end makes sure of it).
 
 # when a word of a line is spoken, as the film's own wAt() estimates it: along the line's voiced length, from the words the voice reads
 import json as _json, pathlib as _pl
@@ -134,12 +135,19 @@ def air(s, sec=0.9, g=0.014, pan=0.0):
 def chip(s, g=0.02, pan=0.0):
     """a class's chip set down beside a column"""
     s_knock(s, g, pan, 320); paper(s, g * 0.5, pan, 0.12)
-def gears(s, sec, g=0.018, pan=0.0):
-    """the scrambler's small gears turning: soft ticks over a low whirr"""
-    x = tt(sec); w = filt(noise(sec), 'band', (150, 700))[:len(x)] * 0.4; tk = np.zeros_like(x); step = int(SR / 14); seg = int(0.02 * SR)
-    for i in range(0, len(x), step):
-        j = min(len(x), i + seg); tk[i:j] += np.exp(-np.arange(j - i) / SR * 250) * (1.0 if (i // step) % 2 else 0.6)
-    X(norm(filt(((w + tk) * env(sec, 0.1, 0.2)).astype(np.float32), 'low', 1800)), s, g, pan)
+def pen(s, sec=1.2, g=0.014, pan=0.0):
+    """a pen on paper: smoother than the pencil, a soft hiss that follows the hand"""
+    x = tt(sec); gr = np.abs(filt(noise(sec), 'low', 12))[:len(x)]; gr = gr / (gr.max() + 1e-6)
+    X(filt(noise(sec), 'band', (350, 1500))[:len(x)] * (0.4 + 0.6 * gr) * env(sec, 0.05, 0.1), s, g, pan)
+def stamp(s, g=0.03, pan=0.0):
+    """a rubber stamp pressed on paper: a soft, low thump, and the paper under it"""
+    s_knock(s, g, pan, 150); s_knock(s + 0.01, g * 0.5, pan, 260); paper(s, g * 0.4, pan, 0.12)
+def tie(s, g=0.02, pan=0.0):
+    """a label's string drawn tight round a column: a short rasp, and the loop pulled"""
+    twine(s, g, pan, 0.3)
+def cover(s, g=0.024, pan=0.0):
+    """a register's cloth cover opening: a slow swish, and the board laid down"""
+    paper(s, g, pan, 1.0); s_knock(s + 1.1, g * 0.5, pan, 180)
 
 # chords (MIDI note numbers): A minor for 1983, C major for today
 AM9 = [45, 52, 59, 60, 64]; AM7 = [45, 52, 55, 60, 64]; FMAJ7 = [41, 48, 52, 57, 64]; DM9 = [38, 45, 53, 57, 64]; ESUS = [40, 47, 52, 57, 59]
@@ -213,50 +221,51 @@ paper(W('path', 'weeks', 'whole', -0.2), 0.022, -0.5, 1.4); keydrop(W('path', 'w
 plat = G('path', 'checks', -0.4); keys(plat + 0.4, 7, 0.012, 0.3); knock(plat + 0.4, 0.012, 0.0, 300)
 piano(45, G('path', 'nine', 0.3), 0.03, 0.0)
 
-# 4. At the column: a turn up into C as the path starts somewhere else; a knock for Mei's card; a chip set down as each class is
-#    said; a breath as the file's line lights; two low notes, a semitone together, as the check stops a column; ticks for the codes;
-#    a ring round the student's ID; the chip for direct, and the court's line drawn at the column; two notes rising as the check passes
+# 4. At the column: a turn up into C as the path starts somewhere else; a knock for Mei's card; the register's cover opening; a chip
+#    set down as each class is said; her pen as she initials the page; the sign-off sheet slid on, the red stamp as it goes back, the
+#    question written; paper in her hands; ticks for the codes; a pencil ring round the student number; the chip for direct, her pen,
+#    the green stamp; then the court's line, drawn at the column, in two notes rising
 turn(CADD9, S0('column'), (60, 64, 67))
-knock(S0('column') + 0.6, 0.012, -0.2, 300)
+knock(S0('column') + 0.5, 0.012, -0.2, 300)
+cover(G('column', 'class', 0.4), 0.022, 0.0)
 for k, (lid_, word) in enumerate([('pseudo', 'Pseudonymous'), ('direct', 'identifies'), ('direct', 'name'), ('direct', 'email'), ('none', 'none')]):
-    chip(W('column', lid_, word, 0.05), 0.02, -0.1 + 0.05 * k)
-air(W('column', 'written', 'beside'), 0.6, 0.01, 0.0)
-stops = W('column', 'written', 'stops'); piano(52, stops, 0.024, -0.1); piano(53, stops, 0.024, 0.1)
+    chip(W('column', lid_, word, 0.05), 0.02, 0.1 + 0.05 * k)
+pen(W('column', 'register', 'writes'), 1.4, 0.014, -0.2)
+every = W('column', 'checked', 'every'); air(every, 0.9, 0.012, 0.4); paper(every + 0.7, 0.018, 0.1, 0.3)
+stamp(W('column', 'checked', 'goes'), 0.03, 0.3); pen(W('column', 'checked', 'with a'), 1.2, 0.012, 0.1)
+paper(G('column', 'reached', -0.2), 0.016, -0.2, 0.4); air(G('column', 'looks', -0.3), 0.8, 0.01, 0.5)
 for k in range(2):
-    tick(W('column', 'looks', 'most', 0.25 * k), 0.014, 0.2)
-pencil(G('column', 'nothing'), 0.8, 0.014, 0.0)
-chip(G('column', 'mei', 0.6), 0.022, -0.2)
-cl = W('column', 'mei', "court's"); pencil(cl, 1.0, 0.018, -0.3); line2(cl + 0.1)
-ok = G('column', 'mei', 3.6); piano(67, ok + 0.2, 0.03, -0.1); piano(72, ok + 0.45, 0.03, 0.1)
+    tick(W('column', 'looks', 'most', 0.3 * k), 0.014, 0.3)
+pencil(G('column', 'nothing'), 0.9, 0.014, 0.4)
+cl = W('column', 'mei', 'classed'); chip(cl, 0.022, -0.1); pen(cl + 0.4, 0.7, 0.014, -0.2); stamp(cl + 1.15, 0.028, 0.0)
+dr = W('column', 'mei', 'drawn'); chip(dr + 0.2, 0.016, -0.3); pencil(dr + 0.3, 1.0, 0.018, -0.4); line2(dr + 0.4)
 
-# 5. The mask follows: a turn as the class leaves the file; air as the chip flies; the chip set down as the column's tag; a knock for
-#    the rule; then on the board, a falling third each time a mask settles: the learner table, the wallet, the table built tomorrow,
-#    each after a breath of air along its string; the near-award list, which never had the email, a chord rolled
+# 5. The mask follows: a turn as the class leaves the register; air as the label lifts off and flies; on the board, its string drawn
+#    tight on the learner table's email, air along the string to the wallet, and tied again; at Sam's desk, the rule card pinned, air
+#    as its stars slide in; then a falling third as the masks settle over both emails at once, and again for the table built
+#    tomorrow, after its card is pinned and the label runs along its string; the near-award list, which never had the email, a chord
+#    rolled
 turn(FMAJ7, S0('mask'), (65, 69))
-air(W('mask', 'stay', 'stay'), 1.0, 0.014, 0.3)
-keys(G('mask', 'built', 0.0), 5, 0.01, 0.3); chip(W('mask', 'built', 'as a tag', 0.05), 0.02, -0.3)
-knock(G('mask', 'rule'), 0.014, 0.2, 300); air(W('mask', 'rule', 'stars'), 0.8, 0.01, 0.2)
-bytag, every, tom = W('mask', 'bytag', 'by tag'), W('mask', 'every', 'every'), W('mask', 'every', 'tables built')
-air(bytag, 0.8, 0.01, -0.1); masked(bytag + 0.5, 0.036, -0.1)
-air(every, 0.9, 0.01, 0.2); masked(every + 1.4, 0.036, 0.3)
-pin(tom + 0.4, 0.022, 0.3); air(tom + 0.2, 0.9, 0.01, 0.3); masked(tom + 1.4, 0.034, 0.35)
-rolled([48, 55, 60, 64], G('mask', 'never', 0.1), 0.026)
+lift = W('mask', 'stay', 'stay'); paper(lift - 0.15, 0.01, 0.2, 0.2); air(lift, 1.4, 0.014, 0.4)
+lab = W('mask', 'travels', 'label'); air(lab - 1.5, 1.4, 0.012, -0.5); tie(lab, 0.02, -0.1)
+ev = W('mask', 'travels', 'every'); air(ev, 0.9, 0.01, 0.2); tie(ev + 0.9, 0.02, 0.3)
+pin(W('mask', 'rule', 'one', 0.2), 0.022, 0.4); air(W('mask', 'rule', 'stars'), 0.8, 0.01, 0.4)
+by = W('mask', 'bylabel', 'by'); air(by, 0.8, 0.01, 0.0); masked(by + 0.5, 0.036, 0.1)
+tom = W('mask', 'every', 'tables', -0.2); pin(tom + 0.3, 0.022, 0.3); air(tom + 0.4, 0.9, 0.01, 0.3); tie(tom + 1.3, 0.018, 0.35); masked(tom + 1.9, 0.034, 0.35)
+rolled([48, 55, 60, 64], G('mask', 'every') + _DUR['mask/every'] + 0.6, 0.026)
 
-# 6. A purpose and a date: a turn as the request reaches its owner; Mei's yes on the screen, a knock and two notes rising, as when the
-#    check passed; the access card carried across the floor and pinned; a high E, soft, for each end date; the scrambler's gears for
-#    the one ID, and again for the list of them, a pencil writing each key down; two low notes as one matches; a knock for the tag,
-#    paper for the card, a knock for the agent's card
+# 6. A purpose and a date: a turn as the request reaches its owner; paper in Mei's hands; her yes on the form, a tick, her pen and two
+#    notes rising; the access card carried across the floor and pinned; a high E, soft, for each end date; the slip on Yusuf's desk, the
+#    registrar's list slid in beside it, a pencil line from one to the other; a knock for the tag, a knock for the agent's card
 turn(CADD9, S0('purpose'), (64, 60))
-yes = W('purpose', 'yes', 'yes'); knock(yes + 0.1, 0.016, 0.0, 300); piano(67, yes + 0.2, 0.03, -0.1); piano(72, yes + 0.45, 0.03, 0.1)
+paper(W('purpose', 'goes', 'request', -0.3), 0.018, -0.2, 0.5)
+yes = W('purpose', 'yes', 'yes'); tick(yes + 0.1, 0.016, -0.3); pen(yes + 0.8, 0.8, 0.014, -0.2); piano(67, yes + 0.2, 0.03, -0.1); piano(72, yes + 0.45, 0.03, 0.1)
 grp = W('purpose', 'group', 'a Planning'); air(grp - 0.2, 1.0, 0.014, -0.2); pin(grp + 0.8, 0.024, -0.4)
 piano(76, W('purpose', 'group', 'ends'), 0.024, -0.3)
-scram = W('purpose', 'key', 'scrambled'); paper(scram - 0.6, 0.012, -0.3, 0.6); gears(scram - 0.2, 1.0, 0.018); paper(scram + 0.2, 0.012, 0.3, 0.6)
-back = W('purpose', 'back', 'Anyone'); gears(back + 0.3, 2.6, 0.016)
-for k in range(8):
-    tick(back + 0.3 + 0.325 * (k + 1), 0.009, 0.5)
-piano(57, back + 2.9, 0.028, 0.0); piano(60, back + 3.05, 0.026, 0.2); pencil(back + 2.9, 0.4, 0.012, 0.3)
-so = W('purpose', 'back', 'so even'); knock(so, 0.014, 0.0, 300); paper(so, 0.012, 0.6, 0.3)
-piano(76, W('purpose', 'back', 'end date'), 0.024, 0.6)
+paper(G('purpose', 'code', -0.1), 0.014, -0.4, 0.25)
+paper(W('purpose', 'list', "registrar's", -0.2), 0.02, 0.4, 0.7); pencil(W('purpose', 'list', 'leads'), 0.8, 0.016, 0.0)
+st = W('purpose', 'personal', 'still'); knock(st, 0.014, 0.0, 300); paper(st + 0.4, 0.012, 0.6, 0.3)
+piano(76, W('purpose', 'personal', 'end date'), 0.024, 0.6)
 knock(W('purpose', 'agent', 'agent'), 0.014, -0.3, 300)
 
 # 7. Why the stars: a knock as each speech bubble comes; the gold card pinned, and a chord rolled for the way to more; paper as the
@@ -267,19 +276,24 @@ copied = W('stars', 'no', 'copied')
 for k, (r, dt) in enumerate([(0, 0.0), (3, 0.35), (4, 0.6), (1, 0.85), (0, 1.1), (3, 1.3), (4, 1.5), (1, 1.7)]):
     paper(copied - 0.2 + dt, 0.012, -0.8 + 0.4 * r, 0.2)
 
-# 8. Read from the grants: a turn into December; the plan into the tray; the calendar's page; the high E as the access ends; air as
-#    the names glide into their groups, a knock as each group's card comes in over them; on the table, E and C again for the two
-#    permissions, a knock for each tag, a falling third as the band settles, the chip set down; the strings and the mark under the
-#    end card
+# 8. Read from the access list: a turn into December; the plan into the tray; the calendar's page; the high E as the access ends; air
+#    as a soft light runs down the access list, and as the names glide into their groups, a knock as each group's card comes in over
+#    them; binder 6 again, Yusuf's pen for each of his three lines, and a tick; on the table, E and C again for the two permissions, a
+#    knock for each tag, a falling third as the band settles, the chip set down; the strings and the mark under the end card
 turn(CADD9, S0('grants'), (67, 72))
 paper(W('grants', 'plan', 'faculties'), 0.02, -0.6, 0.6); paper(W('grants', 'plan', 'fifteenth', 0.3), 0.016, -0.3, 0.25)
 ends = W('grants', 'plan', 'ends'); piano(76, ends, 0.024, -0.6); air(ends, 1.0, 0.008, -0.6)
+air(W('grants', 'review', 'access'), 1.4, 0.008, 0.0)
 two = W('grants', 'two', 'two'); air(two + 0.3, 1.4, 0.01, 0.0)
 for k in range(2):
     knock(two + 0.95 + 0.11 * k, 0.014, -0.3 + 0.6 * k, 300)
+paper(G('grants', 'policy', -0.4), 0.016, 0.1, 0.5)
+for lid_, word, off, sec in [('owners', 'Owners', 0.1, 1.6), ('platform', 'platform', 0, 1.6), ('platform', 'reviews', 0, 1.2)]:
+    pen(W('grants', lid_, word, off), sec, 0.013, 0.2)
+tick(W('grants', 'platform', 'reviews', 1.0), 0.016, -0.1)
 piano(64, G('grants', 'one'), 0.032, 0.3); knock(G('grants', 'one', 0.2), 0.014, -0.3)
 piano(60, G('grants', 'another'), 0.032, -0.3); knock(G('grants', 'another', 0.2), 0.014, 0.3)
-masked(W('grants', 'another', 'another', 0.6), 0.036, 0.3); chip(W('grants', 'write', 'once', 0.05), 0.02, 0.3)
+masked(W('grants', 'another', 'another', 0.6), 0.036, 0.3); chip(W('grants', 'classify', 'once', 0.05), 0.02, 0.3)
 endc = G('grants', 'breath', -0.2); strings(CMAJ9, endc - 1.0, E('grants') - endc + 2.0, 0.026)
 mark(endc + 0.7)
 

@@ -352,8 +352,10 @@ async def check_pages(run):
                     for x in m["shown"]:
                         if not any(abs(x["y"] - y) <= 6 for y in rows):
                             rows.append(x["y"])
-                    expect(sec, len(shown) == 7 and len(rows) == 2,
-                           f"{where}: the header shows {shown} on {len(rows)} lines; expected brand and icon links, then site navigation and EN/ES")
+                    # phones: the brand and the icon links, then the site's links and EN/ES; tablets: all on one line
+                    lines = 2 if width <= 720 else 1
+                    expect(sec, len(shown) == 7 and len(rows) == lines,
+                           f"{where}: the header shows {shown} on {len(rows)} lines; expected the brand, Start here, Topics, Making of, EN/ES and the two icon links on {lines}")
                 else:
                     expect(sec, not m["hidden"], f"{where}: header items hidden on a wide screen: {m['hidden']}")
                 tools = pg.locator(".nav-tools a")

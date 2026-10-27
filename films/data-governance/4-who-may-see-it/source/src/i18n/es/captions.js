@@ -2,7 +2,7 @@
    Only the captions change: the picture, the voice and the timings stay English, so the site plays the same film, and the video, which has no captions on its picture, takes es.srt.
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption.
    Words as in the series: Planificación, título for an award, dueño, gobernanza; the registrar's office is la oficina de registro, as in the master data films. The classes are
-   directa, seudónima and ninguna; the stars of a mask are asteriscos; the grants are los accesos concedidos. */
+   directa, seudónima and ninguna; the stars of a mask are asteriscos; the access list is la lista de accesos, a label una etiqueta, a code un código, a student number un número de estudiante. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "West Germany, April 1983.":
 "Alemania Occidental, abril de 1983.",
@@ -68,54 +68,56 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "El camino no tenía final.",
 "Now the path starts somewhere else: at the column.":
 "Ahora el camino empieza en otro lugar: en la columna.",
-"Every column other teams read now carries a class: what it tells about a person.":
-"Cada columna que leen otros equipos lleva ahora una clase: lo que dice de una persona.",
+"Every column other teams read carries a class: what it tells about a person.":
+"Cada columna que leen otros equipos lleva una clase: lo que dice de una persona.",
 "Direct, if it identifies someone by itself, like a name or an email.":
 "Directa, si identifica a alguien por sí sola, como un nombre o un correo.",
 "Pseudonymous, if it only can with something kept elsewhere.":
 "Seudónima, si solo puede con algo que se guarda en otro lugar.",
 "Or none.":
 "O ninguna.",
-"It's written beside the column when it's made, and a check on every change stops a column without one.":
-"Se escribe junto a la columna al crearla, y una verificación en cada cambio detiene una columna sin clase.",
-"Each owner classed their own columns, and one surprised them.":
-"Cada dueño clasificó sus propias columnas, y una los sorprendió.",
-"A credential's key looks like a code, and most are.":
-"La clave de una credencial parece un código, y casi todas lo son.",
-"But an award's key holds the student's ID.":
-"Pero la clave de un título lleva el ID del estudiante.",
+"Each owner writes the classes in a register, column by column.":
+"Cada dueño escribe las clases en un registro, columna por columna.",
+"And every change is checked: a column with no class goes to its owner, with a question.":
+"Y cada cambio se revisa: una columna sin clase va a su dueño, con una pregunta.",
+"One reached Mei: a credential's code.":
+"Una llegó a Mei: el código de una credencial.",
+"It looks harmless, and most are.":
+"Parece inofensivo, y casi todos lo son.",
+"But an award's code holds the student number.":
+"Pero el código de un título lleva el número de estudiante.",
 "Nothing can be assumed insignificant.":
 "Nada puede darse por insignificante.",
 "Mei classed it direct: the court's line, drawn at the column.":
 "Mei la clasificó directa: la línea del tribunal, trazada en la columna.",
-"The class doesn't stay in the file.":
-"La clase no se queda en el archivo.",
-"Every time the tables are built, it goes with its column to the platform, as a tag.":
-"Cada vez que se construyen las tablas, viaja con su columna a la plataforma, como etiqueta.",
-"One rule there reads the tag: direct columns show their values to the registrar's office, and stars to everyone else.":
-"Allí, una regla lee la etiqueta: las columnas directas muestran sus valores a la oficina de registro, y asteriscos a los demás.",
-"Not table by table: by tag.":
-"No tabla por tabla: por etiqueta.",
-"So the email is masked in every model it reaches, and in tables built tomorrow.":
-"Así, el correo se enmascara en cada modelo al que llega, y en las tablas de mañana.",
-"Planning's list never had it.":
-"La lista de Planificación nunca lo tuvo.",
+"The class doesn't stay in the register.":
+"La clase no se queda en el registro.",
+"It travels with its column, as a label, into every table the column reaches.":
+"Viaja con su columna, como etiqueta, a cada tabla a la que llega la columna.",
+"And one rule reads the label: direct personal data shows its values to the registrar's office, and stars to everyone else.":
+"Y una regla lee la etiqueta: los datos personales directos muestran sus valores a la oficina de registro, y asteriscos a los demás.",
+"The platform team applies it by label, not table by table.":
+"El equipo de plataforma la aplica por etiqueta, no tabla por tabla.",
+"So the email is masked in every table it reaches, and in tables built tomorrow.":
+"Así, el correo se enmascara en cada tabla a la que llega, y en las tablas de mañana.",
 "Clara's request goes to the registrar's office, which owns the learner table.":
 "La solicitud de Clara va a la oficina de registro, dueña de la tabla de estudiantes.",
 "Mei says yes, for her office: to plan next term's places, until 15 December.":
 "Mei dice que sí, por su oficina: para planificar los cupos, hasta el 15 de diciembre.",
 "The access goes to a Planning group, not to Clara by name, and ends by itself on that date.":
 "El acceso va a un grupo de Planificación, no a Clara por nombre, y termina solo en esa fecha.",
-"Clara sees each learner's key and status.":
-"Clara ve la clave y el estado de cada estudiante.",
-"Names and emails are stars.":
-"Nombres y correos son asteriscos.",
-"The key is the student's ID, scrambled.":
-"La clave es el ID del estudiante, codificado.",
-"Anyone with the list of IDs could work it back, so even keys come with a purpose and an end date.":
-"Cualquiera con la lista de IDs podría revertirlo, así que hasta las claves llevan un propósito y una fecha de fin.",
-"The data team's agent sees stars too, and works from counts and samples.":
-"El agente del equipo de datos también ve asteriscos, y trabaja con conteos y muestras.",
+"Clara sees each learner's code and status.":
+"Clara ve el código y el estado de cada estudiante.",
+"Student numbers, names and emails are stars.":
+"Números de estudiante, nombres y correos son asteriscos.",
+"The learner code names no one by itself.":
+"El código de estudiante no nombra a nadie por sí solo.",
+"But with the registrar's list, it leads back to a person.":
+"Pero con la lista de la oficina de registro, lleva hasta una persona.",
+"So it's still personal data: even codes come with a purpose and an end date.":
+"Así que sigue siendo personal: hasta los códigos llevan un propósito y una fecha de fin.",
+"The data team's AI agent sees stars too, and works from counts and samples.":
+"El agente de IA del equipo de datos también ve asteriscos, y trabaja con conteos y muestras.",
 "Clara asks Yusuf why the names are stars.":
 "Clara pregunta a Yusuf por qué los nombres son asteriscos.",
 "He doesn't just point to the rule.":
@@ -128,10 +130,16 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Un no sin salida es como las tablas terminan copiadas en hojas de cálculo.",
 "Clara's plan goes to the faculties, and on 15 December her access ends by itself.":
 "El plan de Clara va a las facultades, y el 15 de diciembre su acceso termina solo.",
-"Later that month, Yusuf's review of who can read the learner table takes minutes: it reads the grants, not a spreadsheet.":
-"Más tarde ese mes, Yusuf revisa en minutos quién puede leer la tabla de estudiantes: lee los accesos concedidos, no una hoja de cálculo.",
+"Later that month, Yusuf's review takes minutes: he reads the access list itself.":
+"Más tarde ese mes, la revisión de Yusuf toma minutos: lee la propia lista de accesos.",
 "The forty-one names are two groups now, each with a reason to be there.":
 "Los cuarenta y un nombres son ahora dos grupos, cada uno con una razón para estar ahí.",
-"Write it once, at the column, and let the platform keep it, everywhere.":
-"Escríbelo una vez, en la columna, y deja que la plataforma lo cuide, en todas partes."
+"Policy 6 now says which data, and how.":
+"La política 6 ahora dice qué datos, y cómo.",
+"Owners class each column, and decide who may see it, for what, and until when.":
+"Los dueños clasifican cada columna, y deciden quién puede verla, para qué y hasta cuándo.",
+"The platform team protects each class, and Yusuf reviews who has access.":
+"El equipo de plataforma protege cada clase, y Yusuf revisa quién tiene acceso.",
+"Classify once, at the column, and protect it everywhere.":
+"Clasifica una vez, en la columna, y protégela en todas partes."
 });

@@ -117,7 +117,7 @@ scene("counted",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id
       ws_pencil(x,lerp(fx-fw/2-30,fx+fw/2+30,easeCam(fin(tt,P.y87+0.9,0.6))),ws_cutY(0),gv_io(tt,P.y87+0.6,P.y87+1.7,0.25));
       ws_tagAt(x,tt,P.one+0.1,P.betw,WS_TAL[0]+180,WS_TAL[1]-40,"counting",{size:32});ws_tagAt(x,tt,P.two+0.1,P.betw,WS_BOX[0],WS_BOX[1]+150,"knowing who",{size:32});}}]);
   ws_pill(ctx,t,mk,fin(t,0.6,0.5)*(1-fin(t,P.betw,0.5)));
-  gv_title(ctx,S,t,P.title,"Who may see it","classify once, protect everywhere","Film 4 of 19 · data governance");
+  gv_title(ctx,S,t,P.title,"Who may see it","classify once, protect it everywhere","Film 4 of 19 · data governance");
   wc_paperOver(ctx,S);});
 
 
@@ -136,20 +136,11 @@ function ws_gridRows(x,sx,sy,sw,n){x.save();for(let r=0;r<=n;r++)for(let k=0;k<4
   x.fillRect(sx+k*sw/4,sy+r*34,(sw/4-28)*(r?0.5+0.45*hash(r*4+k,5):0.8),r?7:9);}x.restore();}
 // what the registrar's screen shows at her desk, small: a title and lines nobody needs to read
 function ws_regScreen(x,title,a){const [sx,sy,sw,sh]=GV_RX.screen;gv_screen(x,sx,sy,sw,sh,title,null,{barH:44,titleSize:28});withA(x,a==null?1:a,()=>gv_lines(x,sx+30,sy+90,sw-80,6,36,0.8));}
-// Planning's wall screen, as Clara reads the learner table there: the key, the stars, the status
+// Planning's wall screen, as Clara reads the learner table there: the code, the stars, the status
 function ws_planScreen(x,pulse){const [sx,sy,sw,sh]=GV_PL.screen;gv_screen(x,sx,sy,sw,sh,"learner table",null,{barH:46,titleSize:28});
-  [[30,"learner_key"],[270,"full_name"],[500,"status"]].forEach(([cx,s2])=>wc_T(x,s2,sx+cx,sy+92,{w:500,size:28,f:"mono",col:WC_MUTED}));
-  WS_LT.slice(0,3).forEach(([k,st],i)=>{const y=sy+160+i*70;wc_T(x,k,sx+30,y,{w:500,size:28,f:"mono",col:WC_INK});gv_mask(x,sx+270,y-34,190,48,1,{size:28});wc_T(x,st,sx+500,y,{w:500,size:28,f:"mono",col:WC_INK});});
+  [[30,"learner code"],[270,"name"],[500,"status"]].forEach(([cx,s2])=>wc_T(x,s2,sx+cx,sy+92,{w:600,size:28,col:WC_MUTED}));
+  WS_LT.slice(0,3).forEach(([k,st],i)=>{const y=sy+160+i*70;wc_T(x,k,sx+30,y,{w:500,size:28,f:"mono",col:WC_INK});gv_mask(x,sx+270,y-34,190,48,1,{size:28});wc_T(x,st,sx+500,y,{w:600,size:28,col:WC_INK});});
   if(pulse>0.01){x.save();x.globalCompositeOperation="screen";wc_glowAt(x,sx+365,sy+230,200,[255,200,240],0.3*pulse);x.restore();}}
-// the list of student IDs and the keys they give, side by side on the desk: the keys written down row by row (f, rows done), the last
-// row's match lit (m); the row going through now lit on the IDs' list
-function ws_idLists(x,f,m,a){if(a<=0.01)return;const rows=WS_IDS.slice(-8);withA(x,a,()=>{
-  [[110,"student IDs",0],[1410,"keys",1]].forEach(([sx,title,k])=>{gv_sheet(x,sx,300,400,470);wc_T(x,title,sx+30,352,{w:600,size:30,col:WC_DARK});
-    rows.forEach((r,i)=>{const show=k?clamp(f-i-0.5,0,1)*2:1,yy=410+i*44;if(i===7&&m>0)gv_tint(x,sx+16,yy-32,368,42,WS_HI,0.8*m);
-      if(show>0.01)wc_T(x,r[k],sx+30,yy,{w:500,size:28,f:"mono",col:WC_INK,a:Math.min(1,show)});});});
-  if(f>0&&f<8)gv_tint(x,126,410+Math.floor(f)*44-32,368,42,WS_HI,0.45);});}
-// a scrap of paper on its way into the scrambler or out of it
-function ws_paperBit(x,px,py,on){if(!on)return;x.save();x.translate(px,py);x.rotate(-0.04);wc_flat(x,wc_rect(-46,-14,92,28),[250,248,240],1,"bit");x.strokeStyle=rgba(WC_PENCIL,0.5);x.lineWidth=1.5;x.strokeRect(-46,-14,92,28);x.restore();}
 // Clara's plan for next term on Planning's wall screen: places by faculty, as bars (the film doesn't need the numbers), on the right of
 // the screen, where Clara standing in front of it doesn't hide them
 function ws_planChart(x){const [sx,sy,sw,sh]=GV_PL.screen;gv_screen(x,sx,sy,sw,sh,"next term · places",null,{barH:46,titleSize:28});
@@ -212,89 +203,111 @@ scene("path",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s,
   wc_year(ctx,56,72,"until now",gv_io(t,P.mem+0.3,P.plat,0.4));
   wc_paperOver(ctx,S);});
 
-// ---- 4 · At the column: every column other teams read carries a class, written beside it and checked on every change ----
+// ---- 4 · At the column: every column other teams read carries a class, which its owner writes in a register; a change that leaves
+// one empty goes back to its owner, with a question ----
+// where the register lies shut on Mei's desk, seen from the front: its left edge, its foot, its width
+const WS_RGF=[400,804,420];
+// the register's row lit gold while its class lands: the latest chip in, for a second and a half. Returns [row, how lit]
+function ws_chipHi(tt,ts){let i=-1;ts.forEach((t0,k)=>{if(tt>=t0-0.1&&(i<0||t0>ts[i]))i=k;});return i<0?[null,0]:[i,fin(tt,ts[i]-0.1,0.3)*(1-fin(tt,ts[i]+1.4,0.4))];}
 scene("column",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
-    return{list:c.class-0.4,chip:[w("pseudo","Pseudonymous"),w("direct","identifies"),w("direct","name"),w("direct","email"),w("none","none")],
-      yaml:c.written-0.3,beside:w("written","beside"),chk:w("written","a check")-0.3,stops:w("written","stops"),own:c.owners-0.4,surp:w("owners","surprised"),
-      keys:c.looks-0.4,most:w("looks","most"),id:w("holds","student's"),ring:c.nothing,mei:c.mei,line:w("mei","court's"),ok:c.mei+3.6};});
+    return{top:c.class-1.6,open:c.class+0.4,head:w("class","a class"),chip:[w("pseudo","Pseudonymous"),w("direct","identifies"),w("direct","name"),w("direct","email"),w("none","none")],
+      init:w("register","writes"),every:w("checked","every"),no:w("checked","no class"),goes:w("checked","goes"),ask:w("checked","with a"),held:c.reached-0.4,
+      codes:c.looks-0.45,most:w("looks","most"),id:w("holds","student"),ring:c.nothing,classed:w("mei","classed"),page:w("mei","drawn")-0.1,line:w("mei","drawn")+0.3};});
   gv_shots(ctx,S,t,sc.dur,[
-    // the registrar's office: Mei at her desk, the learner table on her screen
-    {at:0,place:"registrar",keys:[[0,900,540,1],[0.1,960,520,1.06]],d:3.4,draw:(x,tt)=>{ws_mei(x,tt);x.drawImage(gv_place("registrarDesk"),0,0,W,H);ws_regScreen(x,"learner table");
-      ws_nameCard(x,830,560,"Mei Tanaka","registrar's office",gv_io(tt,0.6,P.list-0.3,0.4));}},
-    // her screen, close: each column's class, as it's said
-    {at:P.list,place:"screenReg",keys:[[P.list,960,440,1.04],[P.list+0.1,960,430,1.07]],d:4,push:0.01,draw:(x,tt)=>
-      ws_colList(x,{t:tt,chip:i=>P.chip[i],hi:i=>gv_io(tt,P.chip[i]-0.1,P.chip[i]+1.2,0.3)})},
-    // written beside the column, in the project's own file
-    {at:P.yaml,place:"screenReg",keys:[[P.yaml,960,440,1.04],[P.yaml+0.1,980,430,1.08]],d:3,push:0.01,draw:(x,tt)=>ws_yaml(x,fin(tt,P.beside,0.6))},
-    // the governance check, on every change: a column with no class stops it
-    {at:P.chk,place:"screen",keys:[[P.chk,960,440,1.04],[P.chk+0.1,960,430,1.07]],d:3,push:0.01,draw:(x,tt)=>ws_check(x,fin(tt,P.stops,0.4),0)},
-    // each owner classed their own; one surprised them
-    {at:P.own,place:"registrar",keys:[[P.own,1000,520,1.06],[P.own+0.1,980,500,1.1]],d:3,draw:(x,tt)=>{ws_mei(x,tt,{pose:"listen",expr:tt>P.surp?"worried":"calm"});
-      x.drawImage(gv_place("registrarDesk"),0,0,W,H);ws_regScreen(x,"credentials");}},
-    // the credentials' keys: codes, most of them; an award's holds the student's ID; the court's line, drawn at the column
-    {at:P.keys,place:"screenReg",keys:[[P.keys,960,440,1.04],[P.keys+0.1,960,430,1.07]],d:4,push:0.01,draw:(x,tt)=>
-      ws_keys(x,{t:tt,ticks:i=>fin(tt,P.most+i*0.25,0.4),id:fin(tt,P.id,0.6),ring:fin(tt,P.ring,0.8),line:fin(tt,P.line,1.0),chip:P.mei+0.6})},
-    // and the check passes
-    {at:P.ok-0.4,place:"screen",keys:[[P.ok-0.4,960,440,1.04],[P.ok,960,430,1.07]],d:2,push:0.01,draw:(x,tt)=>ws_check(x,1,fin(tt,P.ok+0.2,0.8))}]);
+    // the registrar's office: Mei at her desk, the register shut in front of her, the learner table on her screen
+    {at:0,place:"registrar",keys:[[0,900,540,1],[0.1,940,520,1.06]],d:3,draw:(x,tt)=>{ws_mei(x,tt);x.drawImage(gv_place("registrarDesk"),0,0,W,H);ws_regFlat(x,...WS_RGF);
+      ws_regScreen(x,"learner table");ws_nameCard(x,830,560,"Mei Tanaka","registrar's office",gv_io(tt,0.5,P.top-0.3,0.4));}},
+    // the register on her desk, from above: its cover opens on the learner table's page; each column's class lands as it's said, and she
+    // initials the page. Then a change comes back to her on the series' sign-off sheet: its class empty, with a question
+    {at:P.top,place:"regTop",keys:[[P.top,960,540,1],[P.open,960,520,1.12]],d:1.6,draw:(x,tt)=>{const [hi,hiA]=ws_chipHi(tt,P.chip),fp=fin(tt,P.init,1.4);
+      const r=ws_regPage(x,"learner table",WS_RGL,{chips:i=>fin(tt,P.chip[i],0.5),hi,hiA,foot:"classed by Mei Tanaka",footP:fp});
+      gv_tint(x,r.cols[2]+4,WS_RG.y+160,WS_RG.x+952-r.cols[2]-8,46,WS_HI,0.7*gv_io(tt,P.head-0.1,P.chip[1]-0.3,0.3));
+      ws_regCover(x,fin(tt,P.open,1.4));
+      const [px,py]=ws_penAt(x,"classed by Mei Tanaka",WS_RG.x+56,WS_RG.y+GV_REG.head+22+GV_REG.row*WS_RGL.length+64,32,fp);ws_pen(x,px,py,gv_io(tt,P.init-0.4,P.init+1.6,0.3));
+      const u=fin(tt,P.every,0.9);if(u>0)ws_sheet(x,lerp(1980,480,easeCam(u)),226,{p:fin(tt,P.every+0.4,1.2),missA:fin(tt,P.no,0.4),sent:fin(tt,P.goes,0.4),askP:fin(tt,P.ask,1.2)});}},
+    // Mei at her desk, the sheet in her hands
+    {at:P.held,place:"registrar",keys:[[P.held,940,520,1.06],[P.held+0.1,880,520,1.12]],d:2.4,draw:(x,tt)=>{
+      ws_mei(x,tt,{pose:"hold",expr:tt>P.held+1.2?"concerned":"calm",carry:ws_heldSheet});x.drawImage(gv_place("registrarDesk"),0,0,W,H);ws_regFlat(x,...WS_RGF);ws_regScreen(x,"learner table");}},
+    // on her desk: the sheet, and a card of three credentials and their codes. Most are only codes; an award's holds the student number;
+    // a pencil ring round it. She classes it direct, signs, and it's stamped
+    {at:P.codes,place:"regTop",keys:[[P.codes,960,540,1],[P.codes+0.1,980,520,1.04]],d:2.4,draw:(x,tt)=>{const sp=fin(tt,P.classed+0.4,0.7);
+      const r=ws_sheet(x,110,200,{sent:1,chip:fin(tt,P.classed,0.5),signP:sp,ok:fin(tt,P.classed+1.15,0.35)});
+      const kx=lerp(1980,1180,easeCam(fin(tt,P.codes+0.15,0.8))),ky=250,rp=fin(tt,P.ring,0.9);ws_codes(x,kx,ky,{ticks:i=>fin(tt,P.most+0.3*i,0.4),id:fin(tt,P.id,0.6),ring:rp});
+      const [qx,qy]=ws_ringAt(...ws_codeRing(x,kx,ky),rp);ws_pencil(x,qx,qy,gv_io(tt,P.ring-0.3,P.ring+1.2,0.3));
+      const [px,py]=ws_penAt(x,"Mei Tanaka",r.sign[0],r.sign[1],38,sp);ws_pen(x,px,py,gv_io(tt,P.classed+0.15,P.classed+1.2,0.25));}},
+    // the register again, open at the credentials table's page: the code and its class; and under its row, the court's line, drawn in
+    // pencil across the page as 1983's was drawn across the form
+    {at:P.page,place:"regTop",keys:[[P.page,960,520,1.12],[P.page+0.1,940,540,1.2]],d:2,draw:(x,tt)=>{ws_regLeft(x,true);
+      const r=ws_regPage(x,"credentials table",WS_RGCR,{chips:i=>i===2?fin(tt,P.page+0.3,0.5):1,foot:"classed by Mei Tanaka"});
+      const ly=r.rows[2]+GV_REG.row/2+12,x0=WS_RG.x+30,x1=WS_RG.x+970,lp=fin(tt,P.line,1.0);ws_line(x,[x0,ly],[x1,ly],lp,5);ws_pencil(x,lerp(x0,x1,lp),ly,gv_io(tt,P.line-0.3,P.line+1.3,0.3));}}]);
   wc_paperOver(ctx,S);});
 
-// ---- 5 · The mask follows: the class goes with its column to the platform as a tag, and one rule there reads it ----
+// ---- 5 · The mask follows: the class travels with its column as a label, and one rule reads the label ----
+// the data team's board: the systems, the learner table, what's built from it. o: the label on the learner table's and the wallet's
+// email (lt, wal) and the masks over them (ltM, walM), each 0 to 1; the near-award list lit (near); the card built tomorrow (tom: its
+// card, string, label and mask, each 0 to 1)
+function ws_board(x,o){const B=WS_BD,lt=ws_bdAnchor(B.lt,-1),ltR=ws_bdAnchor(B.lt,1),T=o.tom||{};
+  B.src.forEach(s=>{ws_srcCard(x,s);ws_string(x,ws_bdAnchor(s,1),lt,1);});
+  ws_string(x,ltR,ws_bdAnchor(B.wal,-1),1);ws_string(x,ltR,ws_bdAnchor(B.near,-1),1);if(T.str>0)ws_string(x,ltR,ws_bdAnchor(B.tom,-1),T.str);
+  ws_bdCard(x,B.lt,{label:r=>r===1?o.lt||0:0,mask:r=>r===1?o.ltM||0:0});ws_bdCard(x,B.wal,{label:r=>r===1?o.wal||0:0,mask:r=>r===1?o.walM||0:0});
+  ws_bdCard(x,B.near);if(o.near>0.01)gv_tint(x,B.near.x+8,B.near.y+8,B.near.w-16,ws_bdH(B.near)-16,WS_HI,0.5*o.near);
+  if(T.a>0.01){x.save();x.translate(0,(1-easeCam(T.a))*-40);withA(x,clamp(T.a*2,0,1),()=>ws_bdCard(x,B.tom,{label:r=>r===1?T.label||0:0,mask:r=>r===1?T.mask||0:0}));x.restore();}}
 scene("mask",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
-    return{lift:w("stay","stay"),plat:c.built-0.3,tag:w("built","as a tag"),rule:c.rule,stars:w("rule","stars"),board:c.bytag-0.3,bytag:w("bytag","by tag"),
-      every:w("every","every"),tom:w("every","tables built"),never:c.never};});
+    return{lift:w("stay","stay"),board:c.travels-0.4,tie:w("travels","label"),every:w("travels","every"),plat:c.rule-0.3,one:w("rule","one"),stars:w("rule","stars"),
+      board2:c.bylabel-0.3,by:w("bylabel","by"),tom:w("every","tables")-0.2,near:sc.ends.every+0.6};});
   const B=WS_BD;
   gv_shots(ctx,S,t,sc.dur,[
-    // the class, in the file; it lifts off with its column and goes
-    {at:0,place:"screenReg",keys:[[0,960,440,1.04],[0.1,980,430,1.08]],d:3,push:0.01,draw:(x,tt)=>{ws_yaml(x,1);const u=fin(tt,P.lift,1.0),e=easeCam(u);if(u<=0)return;
-      const [X,Y]=GV_SC;x.save();x.translate(lerp(X+300,X+1600,e*e),lerp(Y+510,Y+380,e)-90*Math.sin(Math.PI*e));withA(x,1-clamp((u-0.85)/0.15,0,1),()=>gv_classChip(x,0,0,"direct",{size:32}));x.restore();}},
-    // the platform team's desk: the tag arrives with the column; the one rule that reads it
-    {at:P.plat,place:"platform",keys:[[P.plat,900,540,1],[P.plat+0.1,880,530,1.05]],d:3,draw:(x,tt)=>{ws_sam(x,tt,{pose:"write"});x.drawImage(gv_place("platformDesk"),0,0,W,H);
-      ws_tagScreen(x,tt,P.tag);ws_ruleScreen(x,fin(tt,P.rule,0.5),fin(tt,P.stars,0.8));}},
-    // the data team's board: the email masked in the learner table, in the wallet built from it, and in a table built tomorrow; Planning's list
-    // never had it
-    {at:P.board,place:"boardData",keys:[[P.board,960,500,1.06],[P.board+0.1,960,490,1.1]],d:3,push:0.01,draw:(x,tt)=>{
-      const lt=ws_bdAnchor(B.lt,-1),ltR=ws_bdAnchor(B.lt,1),tomA=ws_bdAnchor(B.tom,-1),tu=fin(tt,P.tom-0.2,0.6);
-      B.src.forEach(s2=>{ws_srcCard(x,s2);ws_string(x,ws_bdAnchor(s2,1),lt,1);});
-      ws_string(x,ltR,ws_bdAnchor(B.wal,-1),1);ws_string(x,ltR,ws_bdAnchor(B.near,-1),1);ws_string(x,ltR,tomA,clamp((tt-P.tom-0.2)/0.6,0,1));
-      ws_bdCard(x,B.lt,{mask:r=>r===1?fin(tt,P.bytag,0.8):0});ws_bdCard(x,B.wal,{mask:r=>r===1?fin(tt,P.every+0.9,0.8):0});
-      if(fin(tt,P.never,0.5)>0.01){const h=ws_bdH(B.near);gv_tint(x,B.near.x+8,B.near.y+8,B.near.w-16,h-16,WS_HI,0.5*gv_io(tt,P.never,sc.dur+1,0.5));}
-      ws_bdCard(x,B.near);
-      if(tu>0.01){x.save();x.translate(0,(1-easeCam(tu))*-40);withA(x,tu,()=>ws_bdCard(x,B.tom,{mask:r=>r===1?fin(tt,P.tom+0.9,0.8):0}));x.restore();}
-      ws_bead(x,ltR,ws_bdAnchor(B.wal,-1),(tt-P.every)/0.9,WS_DIRECT,11);ws_bead(x,ltR,tomA,(tt-P.tom-0.2)/0.9,WS_DIRECT,11);}}]);
+    // the register, as chapter 4 left it: a label lifts off the email's class, which stays where it is, and goes
+    {at:0,place:"regTop",keys:[[0,960,520,1.12],[0.1,980,520,1.14]],d:2,draw:(x,tt)=>{ws_regLeft(x);const r=ws_regPage(x,"learner table",WS_RGL,{foot:"classed by Mei Tanaka"});
+      const u=clamp((tt-P.lift+0.2)/1.6,0,1);if(u<=0||u>=1)return;const x0=r.cols[2]+28,y0=r.rows[3],a1=easeCam(clamp(u/0.35,0,1)),b=Math.pow(clamp((u-0.35)/0.65,0,1),2);
+      ws_label(x,lerp(x0,x0+170,a1)+(2160-x0-170)*b,lerp(y0,y0-6,a1)-90*b,{a:clamp(u*5,0,1),rot:-0.03*a1+0.06*b,k:lerp(1,1.1,a1)});}},
+    // the data team's board: the label comes in from the left and ties on to the learner table's email; it runs along the string to the
+    // wallet, built from it, and ties on there too
+    {at:P.board,place:"boardData",keys:[[P.board,960,540,1]],d:2,push:0.01,draw:(x,tt)=>{ws_board(x,{lt:fin(tt,P.tie,1.0),wal:fin(tt,P.every+0.9,1.0)});
+      const u=clamp((tt-P.tie+1.6)/1.6,0,1);if(u>0&&u<1){const [hx,hy]=ws_bdTie(x,B.lt,1),e=easeCam(u);ws_label(x,lerp(-180,hx,e),lerp(hy-240,hy,e)-70*Math.sin(Math.PI*e),{rot:0.25*(1-e)});}
+      ws_bead(x,ws_bdAnchor(B.lt,1),ws_bdAnchor(B.wal,-1),(tt-P.every)/0.9,WS_DIRECT,11);}},
+    // the platform team's desk: Sam pins the one rule up over it, and its band of stars slides in. He's mirrored, so the arm that goes up
+    // and comes down swings over the screens, not out of the frame
+    {at:P.plat,place:"platform",keys:[[P.plat,1000,540,1],[P.plat+0.1,1010,520,1.05]],d:2.4,draw:(x,tt)=>{const u=fin(tt,P.one-0.3,0.3);
+      if(u>0){x.save();const k=lerp(0.96,1,u),{x:rx,y:ry,w:rw,h:rh}=WS_RC;x.translate(rx+rw/2,ry+rh/2);x.scale(k,k);x.translate(-rx-rw/2,-ry-rh/2);ws_ruleCard(x,fin(tt,P.stars,0.8),u);x.restore();}
+      ws_sam(x,tt,{pose:"listen",pose2:"ws_pinUp",mix:gv_io(tt,P.one-0.7,P.one+0.9,0.45),flip:true});x.drawImage(gv_place("platformDesk"),0,0,W,H);
+      const [sx,sy,sw,sh]=GV_PX.screens[0];gv_screen(x,sx,sy,sw,sh,"learner table",null,{barH:44,titleSize:28});ws_gridRows(x,sx+30,sy+84,sw-60,6);
+      const [rx,ry,rw,rh]=GV_PX.screens[1];gv_screen(x,rx,ry,rw,rh,"wallet",null,{barH:44,titleSize:28});ws_gridRows(x,rx+30,ry+84,rw-60,6);}},
+    // the board again: the masks slide over both labelled emails at once. A card built tomorrow: its string, the label along it, its
+    // email masked. The near-award list had no email, and nothing to mask
+    {at:P.board2,place:"boardData",keys:[[P.board2,960,540,1]],d:2,push:0.01,draw:(x,tt)=>{const m=fin(tt,P.by,0.8);
+      ws_board(x,{lt:1,wal:1,ltM:m,walM:m,near:fin(tt,P.near,0.6),tom:{a:fin(tt,P.tom,0.5),str:clamp((tt-P.tom-0.2)/0.6,0,1),label:fin(tt,P.tom+1.3,1.0),mask:fin(tt,P.tom+1.6,0.8)}});
+      ws_bead(x,ws_bdAnchor(B.lt,1),ws_bdAnchor(B.tom,-1),(tt-P.tom-0.4)/0.9,WS_DIRECT,11);}}]);
   wc_paperOver(ctx,S);});
 
-// ---- 6 · A purpose and a date: the owner says yes, for a purpose, to a group, until a date; even keys are still personal data ----
+// ---- 6 · A purpose and a date: the owner says yes, for a purpose, to a group, until a date; even codes are still personal data ----
 scene("purpose",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
-    return{req:c.yes-0.3,yes:w("yes","yes"),pl:w("yes","to plan"),until:w("yes","until"),fl:c.group-0.3,grp:w("group","a Planning"),name:w("group","not to"),ends:w("group","ends"),
-      scr:c.sees-0.3,ks:w("sees","key"),stars:w("stars","stars"),desk:c.key-0.3,scram:w("key","scrambled"),back:w("back","Anyone"),keys:w("back","so even"),end:w("back","end date"),
-      agent:c.agent-0.3,ag:w("agent","agent")};});
+    return{req:w("goes","request"),form:c.yes-0.45,yes:w("yes","yes"),pl:w("yes","to plan"),until:w("yes","until"),fl:c.group-0.3,grp:w("group","a Planning"),ends:w("group","ends"),
+      scr:c.sees-0.3,code:w("sees","code"),stars:w("stars","stars"),desk:c.code-0.3,list:w("list","registrar's"),leads:w("list","leads"),still:w("personal","still"),
+      end:w("personal","end date"),agent:c.agent-0.3,ag:w("agent","agent")};});
   const F=GV_FL,cardTo=[F.x(0)+F.w/2,F.top+250];
   gv_shots(ctx,S,t,sc.dur,[
-    // the registrar's office: the request comes to the table's owner
-    {at:0,place:"registrar",keys:[[0,960,540,1],[0.1,980,520,1.06]],d:3,draw:(x,tt)=>{ws_mei(x,tt);x.drawImage(gv_place("registrarDesk"),0,0,W,H);ws_regScreen(x,"access request",fin(tt,0.6,0.6));}},
-    // her screen: who asks, what for, until when; yes, for her office
-    {at:P.req,place:"screenReg",keys:[[P.req,960,440,1.04],[P.req+0.1,960,430,1.07]],d:4,push:0.01,draw:(x,tt)=>{const [X,Y]=GV_SC;ws_request(x,1,fin(tt,P.yes,0.8));
-      gv_tint(x,X+44,Y+262,560,54,WS_HI,0.6*gv_io(tt,P.pl-0.1,P.until-0.1,0.3));gv_tint(x,X+44,Y+324,440,54,WS_HI,0.6*gv_io(tt,P.until-0.1,P.fl,0.3));}},
+    // the registrar's office: Clara's request comes to the table's owner, on the university's form
+    {at:0,place:"registrar",keys:[[0,960,540,1],[0.1,980,520,1.06]],d:3,draw:(x,tt)=>{const h=fin(tt,P.req-0.3,0.6);
+      ws_mei(x,tt,{pose:"listen",pose2:"hold",mix:h,carry:h>0.5?ws_heldReq:null});x.drawImage(gv_place("registrarDesk"),0,0,W,H);ws_regFlat(x,...WS_RGF);ws_regScreen(x,"learner table");}},
+    // on her desk, the request close: her yes, for her office; what for, and until when
+    {at:P.form,place:"regTop",keys:[[P.form,960,540,1],[P.form+0.1,960,560,1.04]],d:2.4,draw:(x,tt)=>{const X=460,Y=170,ok=fin(tt,P.yes,1.6);
+      ws_reqPaper(x,X,Y,{ok,hi:i=>i===1?gv_io(tt,P.pl-0.1,P.until-0.1,0.3):i===2?gv_io(tt,P.until-0.1,P.fl+0.5,0.3):0});
+      const [px,py]=ws_penAt(x,"Mei Tanaka",X+144,Y+648,38,clamp(ok*2-1,0,1));ws_pen(x,px,py,gv_io(tt,P.yes+0.6,P.yes+1.75,0.25),0.25);}},
     // the floor: the access goes to Planning's group, not to Clara by name, and ends on its date by itself
     {at:P.fl,place:"floor",keys:[[P.fl,738,480,1.3],[P.fl+0.1,730,480,1.32]],d:4,push:0,draw:(x,tt)=>{ws_floor(x,tt,{out:["yusuf"],pose:{mei:{pose:"listen",pose2:"point",mix:gv_io(tt,P.grp-0.6,P.grp+0.6,0.4),flip:true}}});
       const u=fin(tt,P.grp-0.2,1.0),e=easeCam(u),from=[F.x(1)+F.w/2,F.top+300];if(u<=0)return;
       ws_accessCard(x,lerp(from[0],cardTo[0],e),lerp(from[1],cardTo[1],e)-90*Math.sin(Math.PI*e),{rot:lerp(0.08,-0.03,e),pin:u>=1,glow:fin(tt,P.ends,0.6)});}},
-    // Clara's screen: the key and status as they are, names and emails as stars
-    {at:P.scr,place:"screenPlan",keys:[[P.scr,960,440,1.04],[P.scr+0.1,960,430,1.07]],d:4,push:0.01,draw:(x,tt)=>ws_maskTable(x,{hi:gv_io(tt,P.ks-0.2,P.stars,0.3),pulse:gv_io(tt,P.stars,P.desk,0.4)})},
-    // his desk: a key is the student's ID, scrambled; with the list of IDs it can be worked back, so keys too come with a purpose and an end date
-    {at:P.desk,place:"desk",keys:[[P.desk,960,540,1],[P.back,960,520,1.04]],d:2.4,draw:(x,tt)=>{const S_=WS_SCR,L=S_.x-S_.w/2,R=S_.x+S_.w/2;
-      wc_T(x,"learner_key",S_.x,170,{w:600,size:30,f:"mono",align:"center",col:WC_MUTED});ws_slip(x,S_.x,236,"0905e6e2…",{size:40,glow:gv_io(tt,P.back+2.9,P.agent,0.3)});
-      // the student's ID goes in and its key comes out
-      const g=clamp((tt-P.scram+0.6)/1.6,0,1);ws_scrambler(x,(tt-P.desk)*0.6);
-      if(g<1){ws_slip(x,lerp(L-260,L+120,easeCam(clamp(g*1.6,0,1))),S_.y,"SIS|S-20417",{size:34,cutL:L});}
-      const o1=clamp((tt-P.scram-0.2)/0.9,0,1)*(1-fin(tt,P.back,0.4));if(o1>0)ws_slip(x,lerp(R-120,R+230,easeCam(o1)),S_.y,"0905e6e2…",{size:34,cutR:R});
-      // anyone with the list of IDs: each one through it in turn, its key written down, until one matches the key above
-      const f=clamp((tt-P.back-0.3)/2.6,0,1)*8,m=fin(tt,P.back+2.9,0.4);ws_idLists(x,f,m,gv_io(tt,P.back-0.3,P.agent,0.4));
-      if(f>0&&f<8){const v=f-Math.floor(f),ry=410+Math.floor(f)*44-12;ws_paperBit(x,lerp(510,L+40,easeCam(clamp(v*2,0,1))),lerp(ry,S_.y,easeCam(clamp(v*2,0,1))),v<0.5);
-        ws_paperBit(x,lerp(R-40,1410,easeCam(clamp(v*2-1,0,1))),lerp(S_.y,ry,easeCam(clamp(v*2-1,0,1))),v>=0.5);}
-      if(m>0)wc_link(x,S_.x+150,236,1404,708,WC_PENCIL,{p:m,lw:4,a:0.85*(1-fin(tt,P.agent-0.4,0.4))});
-      ws_tagAt(x,tt,P.keys,P.agent,S_.x,800,"pseudonymous: still personal data",{size:30,wash:WS_PSEUDO,washA:0.4});
-      ws_accessCard(x,1640,182,{rot:0.03,a:fin(tt,P.keys,0.5),glow:fin(tt,P.end,0.6)});}},
+    // Clara's screen: the code and status as they are, student numbers, names and emails as stars
+    {at:P.scr,place:"screenPlan",keys:[[P.scr,960,440,1.04],[P.scr+0.1,960,430,1.07]],d:4,push:0.01,draw:(x,tt)=>ws_maskTable(x,{rows:6,hi:gv_io(tt,P.code-0.2,P.stars,0.3),pulse:gv_io(tt,P.stars,P.desk,0.4)})},
+    // his desk: a learner code on a slip names no one, close; the camera draws back as the registrar's list comes in beside it and leads
+    // back to a person. So a code is still personal data, and comes with a purpose and an end date
+    {at:P.desk,place:"desk",keys:[[P.desk,565,400,1.7],[P.list-0.6,980,520,1.04]],d:1.6,draw:(x,tt)=>{const lk=fin(tt,P.leads,0.8),u=fin(tt,P.list-0.2,0.8);
+      wc_T(x,"learner code",360,300,{w:600,size:30,align:"center",col:WC_MUTED});ws_slip(x,360,370,"0905e6e2…",{size:40,glow:gv_io(tt,P.leads+0.6,P.agent,0.3)});
+      if(u>0){x.save();x.translate((1-easeCam(u))*1300,0);ws_regList(x,700,260,{hi:fin(tt,P.leads+0.6,0.5)});x.restore();}
+      if(lk>0)wc_link(x,514,370,728,ws_rlRow(260,2)-12,WC_PENCIL,{p:lk,lw:4,a:0.85*(1-fin(tt,P.agent-0.4,0.4))});
+      ws_tagAt(x,tt,P.still,P.agent,960,800,"pseudonymous: still personal data",{size:30,wash:WS_PSEUDO,washA:0.4});
+      ws_accessCard(x,1720,190,{rot:0.03,a:fin(tt,P.still+0.4,0.5),glow:fin(tt,P.end,0.6)});}},
     // the data team's screen: their agent reads stars too, and works from counts and samples
     {at:P.agent,place:"screen",keys:[[P.agent,960,440,1.04],[P.agent+0.1,960,450,1.07]],d:4,push:0.01,draw:(x,tt)=>{ws_maskTable(x,{title:"learner table, as the agent reads it"});
       const [X,Y]=GV_SC;ws_agentCard(x,X+50,Y+556,fin(tt,P.ag,0.5));}}]);
@@ -318,13 +331,19 @@ scene("stars",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s
         withA(x,u,()=>x.drawImage(ws_copyC(),-85,-105));x.restore();});}});}}]);
   wc_paperOver(ctx,S);});
 
-// ---- 8 · Read from the grants: the plan goes out, the access ends on its date, and the review reads the grants ----
-// Clara's plan for next term, on a sheet in her hands, before it goes in the faculties' tray
-const ws_heldPlan=heldBoard(cx=>{cx.fillStyle=rgba(WC_DARK,1);cx.textAlign="center";cx.font=font(800,34);cx.fillText("next term",0,-70);cx.fillStyle=rgba([140,176,210],0.9);
-  [0.5,0.8,0.6,0.9].forEach((v,j)=>cx.fillRect(-70+j*38,90-v*130,26,v*130));});
+// ---- 8 · Read from the access list: the plan goes out, the access ends on its date, the review reads the access list itself, and
+// binder 6 now says which data, how, and who decides and who acts ----
+// Clara's plan for next term, on a clipboard in her hands, before it goes in the faculties' tray: held low, below her chin, so her face
+// shows (the series' held board is big enough to hide it at this size)
+function ws_heldPlan(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2,w=190,h=210;cx.save();cx.translate(mx,my+30);
+  cx.fillStyle=rgba(GV_HOLD.walnut,1);rr(cx,-w/2,-h/2,w,h,10);cx.fill();cx.fillStyle="#fffdf6";rr(cx,-w/2+10,-h/2+14,w-20,h-24,5);cx.fill();
+  cx.fillStyle="rgba(170,176,190,1)";rr(cx,-26,-h/2-8,52,20,5);cx.fill();cx.fillStyle=rgba(WC_DARK,1);cx.textAlign="center";cx.font=font(800,30);cx.fillText("next term",0,-h/2+52);
+  cx.fillStyle=rgba([140,176,210],0.9);[0.5,0.8,0.6,0.9].forEach((v,j)=>cx.fillRect(-62+j*34,h/2-22-v*90,24,v*90));cx.restore();fingers(cx,P_,[[mx-w/2+2,my+20],[mx+w/2-2,my+16]]);}
+// how long each of Yusuf's three lines in binder 6 takes to write
+const WS_OBD=[1.6,1.6,1.2];
 scene("grants",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
-    return{tray:w("plan","faculties"),dec:w("plan","fifteenth"),ends:w("plan","ends"),rev:c.review-0.3,two:w("two","two"),tb:c.one-0.6,band:w("another","another"),
-      once:w("write","once"),end:c.breath-0.2};});
+    return{tray:w("plan","faculties"),dec:w("plan","fifteenth"),ends:w("plan","ends"),rev:c.review-0.3,sweep:w("review","access"),two:w("two","two"),bind:c.policy-0.4,
+      notes:[c.owners+0.1,w("platform","platform"),w("platform","reviews")],tb:c.one-0.3,band:w("another","another"),once:w("classify","once"),end:c.breath-0.2};});
   gv_shots(ctx,S,t,sc.dur,[
     // Planning: the plan goes to the faculties; the calendar turns to the 15th, and the access card on the wall goes by itself
     {at:0,place:"planning",keys:[[0,700,520,1.12],[0.1,680,520,1.16]],d:4,draw:(x,tt)=>{const put=fin(tt,P.tray-0.4,0.6);ws_planChart(x);
@@ -333,13 +352,19 @@ scene("grants",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,
       person(x,"clara",700,905,0.8,{pose:put<0.5?"hold":"listen",pose2:put<0.5?"reach":null,mix:put*2,t:tt,carry:put<0.5?ws_heldPlan:null});
       const s2=clamp((tt-P.tray)/0.6,0,1);if(s2>0&&s2<1){const e=easeCam(s2);gv_sheet(x,lerp(640,105,e),lerp(560,600,e),130,100,{rot:-0.04});}
       if(s2>=1)gv_sheet(x,105,600,130,40,{rot:-0.02});}},
-    // Sam's screen, in December: who can read the learner table now, two groups, each with a reason to be there
-    {at:P.rev,place:"screenPlat",keys:[[P.rev,960,440,1.04],[P.rev+0.1,960,430,1.07]],d:4,push:0.01,draw:(x,tt)=>ws_whoList(x,1,1,clamp((tt-P.two+0.3)/2.2,0,1),true)},
-    // the table: the court's line, between columns; the mask over the side that says who
-    {at:P.tb,place:"table83",keys:[[P.tb,960,540,1],[P.tb+0.1,960,520,1.04]],d:4,push:0.02,draw:(x,tt)=>{const [fx,fy,fw,fh]=WS_F,m=fin(tt,P.tb+0.2,1.6);
+    // Sam's screen, in December: the access list itself, read through once; two groups now, each with a reason to be there
+    {at:P.rev,place:"screenPlat",keys:[[P.rev,960,440,1.04],[P.rev+0.1,960,430,1.07]],d:4,push:0.01,draw:(x,tt)=>
+      ws_whoList(x,1,1,clamp((tt-P.two+0.3)/2.2,0,1),true,clamp((tt-P.sweep)/1.4,0,1))},
+    // his desk: binder 6 again, its two questions answered in his hand, which data and how, and the access under them; a green tick
+    {at:P.bind,place:"desk",keys:[[P.bind,1152,432,1.25]],d:2,draw:(x,tt)=>{const n=P.notes.map((t0,i)=>clamp((tt-t0)/WS_OBD[i],0,1));
+      ws_openBinder(x,1,{notes:n,tick:fin(tt,P.notes[2]+1.0,0.5)});
+      [[1205,300],[1372,418]].forEach(([qx,qy],i)=>withA(x,1-0.75*clamp(n[i]*1.5,0,1),()=>gv_qmark(x,qx,qy,46,1)));
+      P.notes.forEach((t0,i)=>{const a=gv_io(tt,t0-0.3,t0+WS_OBD[i]+0.25,0.25);if(a<=0.01)return;const [px,py]=ws_penAt(x,WS_OBN[i],ws_obNoteX(),ws_obNoteY(i),ws_obNoteS(x),n[i]);ws_pen(x,px,py,a,0.3);});}},
+    // the table: the court's line, between columns; the mask over the side that says who, and the class on it
+    {at:P.tb,place:"table83",keys:[[P.tb,960,540,1],[P.tb+0.1,960,520,1.04]],d:4,push:0.02,draw:(x,tt)=>{const [fx,fy,fw,fh]=WS_F;
       ws_colsTable(x,1,fin(tt,P.band,0.9));const [a,b]=ws_lineAt(1,[fx,fy,fw,fh]);ws_line(x,a,b,1);
       ws_tagAt(x,tt,c.one+0.2,null,(WS_TB.x+WS_TB.div)/2,WS_TB.y-60,"counting",{size:32});ws_tagAt(x,tt,c.another+0.2,null,(WS_TB.div+WS_TB.x+WS_TB.w)/2,WS_TB.y-60,"knowing who",{size:32});
       gv_classChipAt(x,tt,P.once,WS_TB.div+30,WS_TB.y+140,"direct",{size:28});}}]);
   wc_year(ctx,56,72,"December 2026",fin(t,0.3,0.5)*(1-fin(t,P.rev,0.4)));
-  gv_end(ctx,S,t,P.end,"Who may see it","Classify once; let the platform protect it everywhere.","Film 4 of 19");
+  gv_end(ctx,S,t,P.end,"Who may see it","Classify once; protect it everywhere.","Film 4 of 19");
   wc_paperOver(ctx,S);});

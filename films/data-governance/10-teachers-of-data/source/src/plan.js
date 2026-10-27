@@ -542,6 +542,9 @@ Object.assign(PEOPLE,{
     top:{kind:"blazer",c:[64,98,130],inner:[240,234,222]},bottom:{c:[58,60,74]},shoe:[60,44,40],build:{sh:64,hip:60,h:0.95}},
   ttNew:{name:"",role:"new analyst",side:"Business",does:"uses",edge:BIZ,seed:82,skin:[190,140,104],hair:{style:"bun",c:[40,30,28]},glasses:[56,50,56],
     top:{kind:"overshirt",c:[60,128,124],inner:[238,234,226]},bottom:{c:[74,68,62]},shoe:[230,228,222],build:{sh:66,hip:60,h:0.95}},
+  // the Faculty of Business colleague at the workshop on award, drawn as One word, one home draws them
+  ttBiz:{name:"",role:"Faculty of Business",side:"Business",does:"uses",edge:BIZ,seed:49,skin:[188,138,104],hair:{style:"curly",c:[40,30,26]},
+    top:{kind:"sweater",c:[86,110,150]},bottom:{c:[60,60,70]},shoe:[48,40,36],build:{sh:70,hip:60,h:0.97}},
   ttFac1:{name:"",role:"steward",side:"Business",does:"uses",edge:BIZ,seed:85,skin:[236,200,170],hair:{style:"curly",c:[150,100,60]},
     top:{kind:"sweater",c:[120,150,110]},bottom:{c:[60,60,70]},shoe:[50,40,36],build:{sh:66,hip:60,h:0.96}},
   ttFac2:{name:"",role:"steward",side:"Business",does:"uses",edge:BIZ,seed:86,skin:[150,104,76],hair:{style:"cropped",c:[28,24,24]},glasses:[40,40,44],
@@ -773,6 +776,22 @@ function tt_meetBoard(x,st){const [bx,by,bw,bh]=GV_MT.board;
 // a sticky note, oblong, washed in its colour, kept sharp for the close-ups
 function tt_noteAt(x,cx,cy,w,h,col,rot,seed){const c=wc_kept("ttNote|"+col.join(",")+"|"+seed,(w+20)*3,(h+20)*3,q=>{q.scale(3,3);q.translate(10,10);q.fillStyle="rgba(70,60,50,0.16)";q.fillRect(3,5,w,h);
     wc_wash(q,wc_rect(0,0,w,h),col,{kind:"swatch",seed});});x.save();x.translate(cx,cy);x.rotate(rot||0);x.drawImage(c,-w/2-10,-h/2-10,w+20,h+20);x.restore();}
+// the workshop on award, weeks before submission day, as One word, one home shows it: the screen asks the question; Mei at the
+// whiteboard, and Anil, Ana and the Faculty of Business at the table; a note goes up as each says what they need (st.note(j), 0 to 1),
+// each lifted again as its own need is named (st.lift(j)); then the last is ringed (st.ring) and the meaning they agreed, "at least 6",
+// written by it (st.agreed). st.pose(id) gives each person's options
+const TT_WS=[["a micro-","credential?",[245,262],-0.04],["3 points?","",[312,452],0.05],["6 points?","",[508,452],-0.03]];
+function tt_workshop(x,tt,st){const M=GV_MT,[sx,sy,sw,sh]=M.screen,[bx,by,bw,bh]=M.board,po=id=>Object.assign({t:tt},st.pose?st.pose(id):{});
+  gv_screen(x,sx,sy,sw,sh,"Workshop",q=>["What counts","as an award?"].forEach((l,i)=>wc_T(q,l,sx+sw/2,sy+160+i*54,{w:800,size:40,align:"center",col:WC_DARK})),{titleSize:30,barH:44});
+  x.drawImage(wc_kept("ttCleanBoard",bw+20,bh+20,q=>wc_flat(q,wc_rect(10,10,bw,bh),[250,251,250],1,"board")),bx-10,by-10);
+  TT_WS.forEach(([l1,l2,[cx,cy],rot],j)=>{const a=st.note?st.note(j):0;if(a<=0.01)return;const s=150,k=(0.92+0.08*spring(a))*(1+0.1*(st.lift?st.lift(j):0));
+    x.save();x.translate(cx,cy);x.scale(k,k);x.rotate(rot);withA(x,clamp(a*2,0,1),()=>{tt_noteAt(x,0,0,s,s,GV_NOTE[j],0,500+j);
+      wc_hand(x,l1,-s/2+14,l2?-6:10,{size:25,w:600,col:WC_DARK});if(l2)wc_hand(x,l2,-s/2+14,28,{size:25,w:600,col:WC_DARK});});x.restore();});
+  const [cx,cy]=TT_WS[2][2];if(st.ring>0)wc_ring(x,cx,cy+2,100,88,st.ring,{col:GV.goldInk,lw:4});
+  if(st.agreed>0)wc_hand(x,"at least 6",cx+108,cy+12,{size:26,w:700,col:GV.goldInk,p:st.agreed});
+  person(x,"mei",M.stand[0]+20,M.stand[1],M.s,Object.assign({pose:"stand",flip:false},po("mei")));
+  [["anil",0],["ana",1],["ttBiz",2]].forEach(([id,i])=>gv_behind(x,id,M.seats[i],M.top,M.s,Object.assign({pose:"listen",flip:false},po(id))));
+  x.drawImage(gv_place("meetingTable"),0,0,W,H);}
 // a small chip of words on a board, at y's middle
 function tt_chip(x,X,y,s,col){const w=tw(x,s,12,700)+16;x.fillStyle=rgba(col,0.9);rr(x,X,y-10,w,20,10);x.fill();wc_T(x,s,X+8,y+4.3,{w:700,size:12,col:WC_DARK});}
 // the wheel Yusuf draws: data governance at the centre, the ten other parts of data work round it, each named as it's drawn; gold lines
@@ -781,6 +800,8 @@ const TT_WH={x:440,y:338,r0:52,r1:116,rl:132},TT_PARTS=[["architecture",4],["mod
   ["master data",4],["warehousing",3],["metadata",4],["quality",3]];
 const tt_whA=k=>-Math.PI/2+k*TAU/10;
 function tt_wheel(x,W_){const R=TT_WH,mk=[60,110,170];x.save();x.lineCap="round";x.lineJoin="round";
+  // the centre glowing, as it matters more (W_.halo)
+  if(W_.halo>0.01)wc_glowAt(x,R.x,R.y,R.r0*1.9,[252,212,110],0.55*clamp(W_.halo,0,1));
   // the centre, in gold
   if(W_.centre>0.01){const p=clamp(W_.centre,0,1);x.strokeStyle=rgba(GV.goldInk,0.9);x.lineWidth=3.4;x.beginPath();x.arc(R.x,R.y,R.r0-6,-Math.PI/2,-Math.PI/2+TAU*easeCam(p));x.stroke();
     withA(x,clamp(p*2-0.6,0,1),()=>{wc_T(x,"data",R.x,R.y-2,{w:800,size:14,align:"center",col:GV.goldInk});wc_T(x,"governance",R.x,R.y+15,{w:800,size:14,align:"center",col:GV.goldInk});});}
@@ -800,6 +821,9 @@ function tt_wheel(x,W_){const R=TT_WH,mk=[60,110,170];x.save();x.lineCap="round"
   // where every part meets the centre
   if(W_.joins>0.01){x.strokeStyle=rgba(GV.goldInk,0.85);x.lineWidth=3;for(let k=0;k<10;k++){const a=tt_whA(k),e=easeCam(clamp(W_.joins*1.6-k*0.06,0,1));if(e<=0)continue;
     x.beginPath();x.moveTo(R.x+Math.cos(a)*R.r0,R.y+Math.sin(a)*R.r0);x.lineTo(R.x+Math.cos(a)*lerp(R.r0,R.r1-6,e),R.y+Math.sin(a)*lerp(R.r0,R.r1-6,e));x.stroke();}}
+  // as the other parts get easier to run, a light runs in along each gold line, from its part to the centre (W_.flow, 0 to 1)
+  if(W_.flow>0.01)for(let k=0;k<10;k++){const a=tt_whA(k),e=clamp(W_.flow*1.6-k*0.06,0,1);if(e<=0||e>=1)continue;const r=lerp(R.r1-6,R.r0,easeCam(e));
+    wc_glowAt(x,R.x+Math.cos(a)*r,R.y+Math.sin(a)*r,9,[255,200,80],0.95*Math.sin(Math.PI*e));}
   x.restore();}
 // the stewards' wall calendar, between the whiteboard and the screen: a row for each Tuesday, October to December; as each week is
 // crossed off (st.off(j)), the warnings left that week come in beside it; the 0 gets a green tick (st.tick), and 1 December is ringed
@@ -945,6 +969,45 @@ function tt_deskBinder(x,a){if(a<=0.01)return;const X=922,Y=GV_OFF.desk[1],col=t
 // binder 29, just taken off the shelf, upright in his hand
 function tt_heldBinder29(cx,P_,hands){const h=hands[1];cx.save();cx.translate(h[0],h[1]);gv_binder(cx,-15,-80,30,183,tt_bindCol(28));cx.restore();fingers(cx,P_,[h]);}
 
+/* ---------- the university: what governance asks of people ---------- */
+// Yusuf's notepad, open on his desk, seen from above, on submission day: his heading, "getting people to take part", written and
+// underlined (st.head, 0 to 1), and under it what that asks of people, each line written in pencil as it's named (st.line(j))
+const TT_PAD={x:560,y:52,w:920,h:1040,mx:672,head:292,lines:[392,492,592,692],size:36},TT_PADH="getting people to take part",
+  TT_ASK=["– understand the data and its rules","– look after it, and answer for it","– decide what's theirs, respect what isn't","– do what their role asks"];
+const TT_GRAPHITE=[62,60,70];
+function tt_pad(x,st){const P=TT_PAD;x.drawImage(wc_kept("ttPad",W,H,q=>{
+    q.save();q.filter="blur(14px)";q.fillStyle="rgba(70,50,30,0.3)";q.fillRect(P.x+14,P.y+22,P.w,P.h);q.restore();
+    wc_wash(q,wc_rect(P.x,P.y,P.w,P.h),[252,250,240],{kind:"page",lw:1.3,seed:61});
+    // its ruled lines, its margin, and the wire along its top
+    q.save();q.strokeStyle="rgba(110,140,186,0.32)";q.lineWidth=2;for(let y=P.head-88;y<P.y+P.h-20;y+=100){q.beginPath();q.moveTo(P.x+18,y);q.lineTo(P.x+P.w-18,y);q.stroke();}
+    q.strokeStyle="rgba(204,112,112,0.38)";q.beginPath();q.moveTo(P.mx-30,P.y+70);q.lineTo(P.mx-30,P.y+P.h-8);q.stroke();q.restore();
+    for(let i=0;i<20;i++){const cx=P.x+46+i*((P.w-92)/19);wc_wash(q,wc_ell(cx,P.y+26,7,7,12),[70,64,60],{kind:"thing",line:false,flat:true});
+      q.save();q.strokeStyle=rgba(wc_dim(GV.metal,0.12),1);q.lineWidth=5;q.lineCap="round";q.beginPath();q.ellipse(cx,P.y+6,8,22,0,Math.PI*0.62,Math.PI*1.38);q.stroke();q.restore();}}),0,0);
+  const hd=clamp(st.head==null?1:st.head,0,1);wc_hand(x,TT_PADH,P.mx,P.head,{size:40,w:700,col:TT_GRAPHITE,p:clamp(hd/0.8,0,1)});
+  if(hd>0.8){const uw=tw(x,TT_PADH,40,700);x.save();x.strokeStyle=rgba(TT_GRAPHITE,0.8);x.lineWidth=3;x.lineCap="round";x.beginPath();x.moveTo(P.mx-6,P.head+14);
+    x.lineTo(P.mx-6+(uw+12)*easeCam(clamp((hd-0.8)/0.2,0,1)),P.head+11);x.stroke();x.restore();}
+  TT_ASK.forEach((l,j)=>{const u=st.line?st.line(j):0;if(u>0.01)wc_hand(x,l,P.mx,P.lines[j],{size:P.size,w:600,col:TT_GRAPHITE,p:u});});}
+// where the pencil's point is at tt, as the notepad is written to the schedule T (the heading from T.h, for T.hd s; each line j from
+// T.L[j], for T.D[j] s): at the end of what's written so far, moving on to the next line between them, and resting at the page's right
+// before the heading and after the last line
+function tt_padPen(x,tt,T){const P=TT_PAD,rest=[1550,690],hw=tw(x,TT_PADH,40,700),
+    at=(s,y,size,w,p)=>[P.mx+tw(x,s.slice(0,Math.ceil(s.length*clamp(p,0,1))),size,w)+2,y-10],
+    ends=[[P.mx+hw+6,P.head+11]].concat(TT_ASK.map((l,j)=>at(l,P.lines[j],P.size,600,1))),
+    go=(a,b,t0,t1)=>{const e=easeCam(clamp((tt-t0)/Math.max(0.05,t1-t0),0,1));return[lerp(a[0],b[0],e),lerp(a[1],b[1],e)];},h1=T.h+T.hd;
+  if(tt<T.h)return go(rest,[P.mx,P.head-10],T.h-0.5,T.h);
+  if(tt<h1){const u=(tt-T.h)/T.hd;return u<0.8?at(TT_PADH,P.head,40,700,u/0.8):[P.mx-6+(hw+12)*easeCam((u-0.8)/0.2),P.head+11];}
+  for(let j=0;j<4;j++){const s=T.L[j],e=s+T.D[j],prev=j?T.L[j-1]+T.D[j-1]:h1;
+    if(tt<s)return go(ends[j],[P.mx,P.lines[j]-10],Math.max(prev,s-0.5),s);
+    if(tt<e)return at(TT_ASK[j],P.lines[j],P.size,600,(tt-s)/T.D[j]);}
+  const last=T.L[3]+T.D[3];return go(ends[4],rest,last+0.2,last+0.8);}
+// a yellow pencil, from above, its point at (X, Y)
+function tt_pencilAt(x,X,Y,a){if(a<=0.01)return;withA(x,a,()=>{x.save();x.translate(X,Y);x.rotate(-0.62);
+  x.save();x.filter="blur(7px)";x.fillStyle="rgba(60,40,20,0.3)";x.fillRect(12,24,22,210);x.restore();
+  x.fillStyle=rgba([226,192,146],1);x.beginPath();x.moveTo(-2.5,6);x.lineTo(2.5,6);x.lineTo(9,30);x.lineTo(-9,30);x.closePath();x.fill();
+  x.fillStyle=rgba(TT_GRAPHITE,1);x.beginPath();x.moveTo(0,0);x.lineTo(2.8,7);x.lineTo(-2.8,7);x.closePath();x.fill();
+  x.fillStyle=rgba([244,196,80],1);x.fillRect(-9,30,18,176);x.fillStyle=rgba(wc_dim([244,196,80],0.16),1);x.fillRect(-9,30,5,176);
+  x.fillStyle=rgba(GV.metal,1);x.fillRect(-9.5,204,19,15);x.fillStyle=rgba([228,150,150],1);rr(x,-9,218,18,20,5);x.fill();x.restore();});}
+
 /* ---------- the university: teaching ---------- */
 // a clipboard held up at the chest, out a little towards whoever it's for, and a sketch drawn on it as it's explained: three boxes, an
 // arrow between each, the middle one ringed. In the holder's units, as they face (TT_SK, the board; TT_SKG, the sketch's middle and
@@ -1019,6 +1082,25 @@ function tt_mapCards(x,st){const [mx,my,mw,mh]=GV_MC,[bx,by,bw,bh]=gv_mapBand(mx
   const fx=gx+cw+18,fw=bx+bw-6-fx,w=(fw-20)/3,h=bh+26;TT_NEXT.forEach((L,j)=>{const u=st.next?st.next(j):0;if(u<=0.01)return;const cx=fx+j*(w+10)+w/2,cy=by+bh/2,e=easeCam(clamp(u,0,1));
     x.save();x.translate(cx,cy-16*(1-e));x.rotate([0.014,-0.012,0.01][j]);withA(x,clamp(u*3,0,1),()=>{wc_panel(x,-w/2,-h/2,w,h,{kind:"card",seed:94+j});gv_pin(x,0,-h/2+10,GV.red,0.8);
       wc_T(x,L[0],-w/2+16,-h/2+40,{w:800,size:28,col:GV.goldInk});wc_T(x,L[1],-w/2+16,-h/2+80,{w:700,size:26,col:WC_DARK});wc_T(x,L[2],-w/2+16,-h/2+112,{w:700,size:26,col:WC_DARK});});x.restore();});}
+
+// the tools on Noor's map: small cards scattered over the application and technology bands, askew, none pinned, none joined, under a
+// grey haze (st.show, st.haze, 0 to 1); as that changes (st.order), each settles into a row in its band and is pinned, the haze lifts,
+// and a gold thread runs along each row (st.join). TT_TOOLS: where each lies, scattered, its tilt, its band, and its place in the row
+const TT_TOOLS=[[1150,668,-0.22,4,0],[1330,742,0.18,4,1],[1490,646,-0.1,4,2],[1655,712,0.26,4,3],[1210,830,0.14,5,0],[1420,806,-0.2,5,1],[1610,846,0.12,5,2]],
+  TT_TOOLC=[150,196,226];
+function tt_mapTools(x,st){const [mx,my,mw,mh]=GV_MC,w=118,h=62,sh=st.show||0;if(sh<=0.01)return;const o=easeCam(clamp(st.order||0,0,1)),
+    row=(b,i)=>{const [fx,fy,fw,fh]=gv_mapFree(mx,my,mw,mh,b),n=b===4?4:3;return[fx+fw*(i+0.5)/n,fy+fh/2];},
+    at=T=>{const r=row(T[3],T[4]);return[lerp(T[0],r[0],o),lerp(T[1],r[1],o),T[2]*(1-o)];};
+  // a gold thread along each row, behind the cards
+  if((st.join||0)>0.01)for(const b of [4,5]){const n=b===4?4:3,a=row(b,0),z=row(b,n-1),e=easeCam(clamp(st.join,0,1));x.save();x.strokeStyle=rgba(GV.goldInk,0.85);x.lineWidth=3.2;
+    x.lineCap="round";x.beginPath();x.moveTo(a[0],a[1]);x.lineTo(lerp(a[0],z[0],e),a[1]);x.stroke();x.restore();}
+  TT_TOOLS.forEach((T,i)=>{const [cx,cy,r]=at(T),u=easeCam(clamp(sh*1.6-i*0.09,0,1));if(u<=0.01)return;x.save();x.translate(cx,cy-10*(1-u));x.rotate(r);
+    withA(x,u,()=>{wc_panel(x,-w/2,-h/2,w,h,{kind:"card",wash:TT_TOOLC,washA:0.45,seed:120+i});x.strokeStyle=rgba(wc_dim(TT_TOOLC,0.6),0.6);x.lineWidth=2.4;x.lineCap="round";
+      for(let l=0;l<2;l++){x.beginPath();x.moveTo(-w/2+18,-h/2+26+l*16);x.lineTo(-w/2+(l?62:88),-h/2+26+l*16);x.stroke();}
+      if(o>0.5)gv_pin(x,0,-h/2+6,wc_dim(TT_TOOLC,0.35),0.7*clamp((o-0.5)*2,0,1));});x.restore();});
+  // the haze over them, a pale fog that fades them towards the paper, lifting as they settle
+  const hz=(st.haze||0)*(1-o);if(hz>0.01)withA(x,0.7*clamp(hz,0,1),()=>x.drawImage(wc_kept("ttToolHaze",W,H,q=>{const [fx,fy,fw]=gv_mapFree(mx,my,mw,mh,4),[,gy,,gh]=gv_mapFree(mx,my,mw,mh,5);
+    q.filter="blur(18px)";q.fillStyle=rgba([238,236,230],1);q.fillRect(fx+4,fy+2,fw-14,gy+gh-fy-4);q.filter="none";}),0,0));}
 
 // the places, painted once and kept: Bogotá from each camera, and the university's rooms, some of them nearer (TT_Z)
 const WC_PLACES={bogota:c=>tt_paintBogota(c,TT_CAM.wide,{year:1995}),bogotaMid:c=>tt_paintBogota(c,TT_CAM.mid,{year:1995}),bogota12:c=>tt_paintBogota(c,TT_CAM.wide,{year:2012}),bogota12Mid:c=>tt_paintBogota(c,TT_CAM.mid,{year:2012}),

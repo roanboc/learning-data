@@ -440,8 +440,11 @@ function ws_coverC(w,h){return wc_kept("regInside|"+w+"x"+h,w+40,h+40,q=>{q.tran
   wc_flat(q,wc_rect(22,22,w-44,h-44),[236,228,206],1,"endpaper");});}
 function ws_regLeft(ctx,pages){const {x,y,w,h}=WS_RG;ctx.save();ctx.translate(x,y);ctx.scale(-1,1);ctx.drawImage(ws_coverC(w,h),-20,-20);ctx.restore();if(!pages)return;
   gv_sheet(ctx,x-w+16,y+8,w-16,h-16);ctx.save();const g=ctx.createLinearGradient(x-70,0,x,0);g.addColorStop(0,"rgba(70,60,50,0)");g.addColorStop(1,"rgba(70,60,50,0.24)");ctx.fillStyle=g;ctx.fillRect(x-70,y+8,70,h-16);ctx.restore();}
+// the cover's front, its words and all, kept as one picture for the turn, so the words are clipped at the fold with the cloth
+function ws_coverFrontC(w,h){return wc_kept("regFront|"+w+"x"+h,w+40,h+40,q=>gv_registerCover(q,20,20,w,h,"Classification register","registrar's office"));}
 function ws_regCover(ctx,turn){const {x,y,w,h}=WS_RG,u=clamp(turn,0,1);if(u>=1)return ws_regLeft(ctx);const fold=w*(1-easeCam(u)),x0=2*fold-w;
-  ctx.save();if(u>0){ctx.beginPath();ctx.rect(x-30,y-30,fold+30,h+60);ctx.clip();}gv_registerCover(ctx,x,y,w,h,"Classification register","registrar's office");ctx.restore();
+  ctx.save();if(u>0){ctx.beginPath();ctx.rect(x-30,y-30,fold+30,h+60);ctx.clip();ctx.drawImage(ws_coverFrontC(w,h),x-20,y-20);}
+  else gv_registerCover(ctx,x,y,w,h,"Classification register","registrar's office");ctx.restore();
   if(u<=0)return;ctx.save();ctx.beginPath();ctx.rect(x+x0,y-30,fold-x0,h+60);ctx.clip();ctx.translate(x+2*fold,y);ctx.scale(-1,1);ctx.drawImage(ws_coverC(w,h),-20,-20);ctx.restore();
   ctx.save();const bk=ctx.createLinearGradient(x+x0,0,x+fold,0);bk.addColorStop(0,"rgba(60,50,40,0.18)");bk.addColorStop(0.75,"rgba(60,50,40,0.05)");bk.addColorStop(1,"rgba(255,255,255,0.16)");
   ctx.fillStyle=bk;ctx.fillRect(x+x0,y,fold-x0,h);const sh=ctx.createLinearGradient(x+fold,0,x+fold+50,0);sh.addColorStop(0,"rgba(50,40,30,0.3)");sh.addColorStop(1,"rgba(50,40,30,0)");

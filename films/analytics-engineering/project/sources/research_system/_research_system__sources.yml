@@ -24,6 +24,7 @@ sources:
             - {key: member_id, case: upper, example: R-3082}
             - {key: project_code, case: upper, example: RP-26017}
           example: RES|R-3082
+        domain: research
     tables:
       - name: researchers
         description: One row per version of a researcher's record. The system key is the member ID.

@@ -1,0 +1,9 @@
+name: sync to every tool
+kind: business process
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: analytics engineer
+- access (reads): business term
+- access (writes): business term
+- realization: define or change a term
+status: confirmed

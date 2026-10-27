@@ -1,0 +1,9 @@
+name: access with a purpose
+kind: business service
+promise: Access granted or refused within three working days, to a group, with a purpose and an end date;
+  the request is the record.
+how_to_ask: a request in the product catalogue
+owner: Yusuf Demir, data governance lead
+relationships:
+- realization: protect who sees what
+status: confirmed

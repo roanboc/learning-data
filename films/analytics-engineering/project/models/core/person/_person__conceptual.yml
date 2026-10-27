@@ -41,6 +41,7 @@ entities:
       - "Preferred name and home address: set by the person, through self-service."
       - "Work details: from the HR system. Kept by HR."
     history: Every version of every record is kept. Joining two records into one person, or parting them, is dated and recorded.
+    no_glossary_term: {confirmed_by: data governance, confirmed_on: 2026-10-20}
 
   - name: role
     definition: >
@@ -75,6 +76,7 @@ entities:
       - "Each role relates to what it's for: a student role to an award, a tutor role to a unit in a teaching period, a researcher role to a project."
       - The owner of each kind of role decides what it means and who holds it. The registrar's office decides who the person is.
     history: Every role keeps its dates, and every change to them is a new version.
+    no_glossary_term: {confirmed_by: data governance, confirmed_on: 2026-10-20}
 
   - name: contact_point
     label: contact point
@@ -89,6 +91,7 @@ entities:
       - A contact point can reach more than one person. A shared home address is one contact point, for each person who lives there.
       - A contact point is never the person. Two records that share one aren't one person for that alone.
     history: Every contact point keeps when it was added, last confirmed and closed.
+    no_glossary_term: {confirmed_by: data governance, confirmed_on: 2026-10-20}
 
   - name: identifier
     definition: >
@@ -104,6 +107,7 @@ entities:
       - When two records turn out to be one person, both identifiers stay. The issuing system says which one it keeps as its main one.
       - A number one system holds for another (a staff ID in the research system) is the issuer's identifier, not a new one.
     history: An identifier is kept for good, with the day it was issued and, if it's retired, the day it was retired.
+    no_glossary_term: {confirmed_by: data governance, confirmed_on: 2026-10-20}
 
 relationships:
 

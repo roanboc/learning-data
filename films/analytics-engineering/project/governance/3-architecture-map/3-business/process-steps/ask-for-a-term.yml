@@ -1,0 +1,9 @@
+name: ask for a term
+kind: business process
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: requester
+- access (writes): term request
+- realization: define or change a term
+- triggering: draft the definition
+status: confirmed

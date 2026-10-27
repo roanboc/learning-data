@@ -30,7 +30,7 @@ function os_trayWalk(x,tt,w){const [,y,s]=OS_TEAM.nurse;person(x,"os_nurse",w.x,
   mix:Math.abs(w.swing),flip:w.flip,carry:os_heldTray,t:tt});}
 // the steps everyone knew, each a tag by its own thing (the wristband, the antibiotic, the sponges on the trolley), with a pencil line
 // to it; a (0 to 1) as it comes in, k (0 to 1) as it's struck through in red pencil
-const OS_KNEW=[["the right patient",660,500,[646,586]],["the antibiotic",580,300,[478,548]],["every sponge counted",1450,560,[1506,602]]];
+const OS_KNEW=[["the right patient",700,500,[700,596]],["the antibiotic",580,300,[552,534]],["every sponge counted",1450,560,[1506,602]]];
 function os_knew(x,i,a,k){if(a<=0.01)return;const [s,tx,ty,[px,py]]=OS_KNEW[i];withA(x,a,()=>{wc_pencil(x,[[tx+(px-tx)*0.2,ty+26],[px,py]],1,{seed:40+i,lw:2.4});
   const w=wc_tag(x,tx,ty,s,{align:"center"});if(k>0)wc_pencil(x,[[tx-w/2-10,ty+6],[tx+w/2+10,ty-4]],k,{col:GV.redInk,lw:5,seed:50+i});});}
 // a paper veil over the room but not the patient: the room fades back (a, 0 to 1), and the patient, asleep on the table, stays clear
@@ -61,7 +61,7 @@ scene("checklist",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({right:wA
   gv_shots(ctx,S,t,sc.dur,[
     // an operating room: the team, and the patient, awake; the steps everyone knew, each by its own thing as it's named
     {at:0,place:"theatre",keys:[[0,960,540,1],[4.4,920,560,1.07]],d:2.6,draw:(x,tt)=>{const a=stepsA(tt),inj=fin(tt,P.give,0.6);
-      gv_halo(x,596,550,110,80,GV.gold,0.8*a[0]);gv_halo(x,436,470,100,120,GV.gold,0.8*a[1]);gv_halo(x,1456,580,110,80,GV.gold,0.8*a[2]);
+      gv_halo(x,712,604,110,70,GV.gold,0.8*a[0]);gv_halo(x,530,510,100,100,GV.gold,0.8*a[1]);gv_halo(x,1456,580,110,80,GV.gold,0.8*a[2]);
       os_team(x,tt,{awake:true,anaes:{pose:"stand",pose2:"os_inject",mix:inj,carry:inj>0.5?os_heldSyringe:null},nurse:false});
       [0,1,2].forEach(i=>os_knew(x,i,a[i],0));}},
     // the steps were written down: the guidelines on a shelf down the corridor
@@ -95,7 +95,7 @@ scene("checklist",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({right:wA
       os_team(x,tt,{anaes:{pose:"stand",pose2:"os_inject",mix:inj,carry:inj>0.5?os_heldSyringe:null},surgeon:{pose:"os_sterileUp",carry:os_heldScalpel},
         nurse:{pose:"os_read",pose2:"os_stop",mix:st,carry:st>0.5?os_heldClipL:os_heldClip,flip:true}});
       gv_say(x,1300,286,["Wait."],1660,470,{a:fin(tt,P.hold-0.2,0.3)*(1-fin(tt,P.done+0.2,0.3)),k:0.92+0.08*spring(fin(tt,P.hold-0.2,0.5))});
-      gv_halo(x,436,470,100,120,GV.gold,0.8*fin(tt,P.done-0.3,0.5));os_tagAt(x,tt,P.done-0.1,null,580,300,"antibiotic given",{wash:GV.green,washA:0.3});}},
+      gv_halo(x,530,510,100,100,GV.gold,0.8*fin(tt,P.done-0.3,0.5));os_tagAt(x,tt,P.done-0.1,null,580,300,"antibiotic given",{wash:GV.green,washA:0.3});}},
     // what changed: deaths after surgery nearly halved
     {at:P.fell,place:"worldmap",keys:[[P.fell,980,470,1.02]],push:0.01,draw:(x,tt)=>{OS_CITY.forEach((_,i)=>os_cityPin(x,i,1,true));
       x.fillStyle=rgba(WC_PAPER,0.6*fin(tt,P.fell+0.1,0.6));x.fillRect(0,0,W,H);os_result(x,fin(tt,P.from-0.2,0.9),fin(tt,P.to-0.2,0.9),fin(tt,P.fell+0.2,0.5));}},
@@ -156,6 +156,8 @@ scene("shelf",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b:c.shelf-0.
 // the floor: the people at work behind the glass (o.out leaves someone out), then the glass, then the offices' names (a name the
 // frame would cut fades out)
 const OS_AT={clara:0,mei:1,yusuf:2,jun:3,sam:4},OS_WORK={clara:{pose:"reach"},mei:{pose:"hold",carry:heldNotebook},jun:{pose:"reach"},sam:{pose:"phone"}};
+// Yusuf at work in his office, writing in his notebook, while the data team looks into the two numbers
+const OS_YUSUF={pose:"write",carry:heldNotebook};
 function os_floor(x,tt,o){o=o||{};const F=GV_FL;Object.keys(OS_AT).forEach(id=>{const i=OS_AT[id];if(id==="yusuf"?!o.yusufIn:(o.out||[]).includes(id))return;
     person(x,id,F.spot(i),806,0.5,Object.assign({pose:"stand",t:tt,flip:i%2===1},OS_WORK[id]||{},(o.pose||{})[id]||{}));});
   gv_floorGlass(x);const m=x.getTransform(),vl=-m.e/m.a,vr=(x.canvas.width-m.e)/m.a,a=o.names==null?1:o.names;
@@ -164,24 +166,25 @@ function os_floor(x,tt,o){o=o||{};const F=GV_FL;Object.keys(OS_AT).forEach(id=>{
 scene("numbers",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({pl:c.census-0.6,rg:c.draft-0.6,wh:c.which-0.6,
     four1:wAt(sc,"census","four"),four2:wAt(sc,"draft","four")}));
   gv_shots(ctx,S,t,sc.dur,[
-    // the same week: Yusuf walks down the floor, past the offices where the work is done
-    {at:0,place:"floor",keys:[[0,1080,560,1.14],[0.3,760,560,1.14]],d:3.0,draw:(x,tt)=>{const w=gv_walk(tt,0.3,1180,640,190);
-      os_floor(x,tt,{names:fin(tt,0.4,0.6)});gv_walker(x,"yusuf",w,GV_FL.walk,0.62,{t:tt,flip:true});}},
+    // the same week: Jun, from the data team, walks down the floor, past the offices where the work is done; Yusuf is at his desk
+    {at:0,place:"floor",keys:[[0,1080,560,1.14],[0.3,760,560,1.14]],d:3.0,draw:(x,tt)=>{const w=gv_walk(tt,0.3,1250,640,210);
+      os_floor(x,tt,{names:fin(tt,0.4,0.6),out:["jun"],yusufIn:true,pose:{yusuf:OS_YUSUF}});gv_walker(x,"jun",w,GV_FL.walk,0.62,{t:tt,flip:true});}},
     // Planning: Clara shows him the census report
     {at:P.pl,place:"planning",keys:[[P.pl,900,540,1.1],[P.pl+0.1,880,520,1.16]],d:5,draw:(x,tt)=>{os_census(x,fin(tt,P.four1-0.1,0.5));
-      person(x,"clara",440,905,0.8,{pose:"point",t:tt});person(x,"yusuf",1270,905,0.8,{pose:"listen",t:tt,flip:true});}},
+      person(x,"clara",440,905,0.8,{pose:"point",t:tt});person(x,"jun",1270,905,0.8,{pose:"listen",t:tt,flip:true});}},
     // the registrar's office: Mei holds up the draft submission
     {at:P.rg,place:"registrar",keys:[[P.rg,1180,540,1.12],[P.rg+0.1,1200,520,1.18]],d:5,draw:(x,tt)=>{
-      person(x,"mei",1000,905,0.84,{pose:"hold",t:tt,carry:os_draft(fin(tt,P.four2-0.1,0.5))});person(x,"yusuf",1290,905,0.8,{pose:"listen",t:tt,flip:true});}},
-    // the floor again: two reports, two numbers, and Yusuf between them
+      person(x,"mei",1000,905,0.84,{pose:"hold",t:tt,carry:os_draft(fin(tt,P.four2-0.1,0.5))});person(x,"jun",1290,905,0.8,{pose:"listen",t:tt,flip:true});}},
+    // the floor again: two reports, two numbers, and Jun between them
     {at:P.wh,place:"floor",keys:[[P.wh,700,540,1.22],[P.wh+0.1,690,530,1.28]],d:4,draw:(x,tt)=>{const F=GV_FL;
-      os_floor(x,tt,{pose:{clara:{pose:"listen"},mei:{pose:"listen"}}});
-      person(x,"yusuf",F.x(1)-16,F.walk,0.62,{pose:"stand",expr:"concerned",t:tt});
+      os_floor(x,tt,{pose:{clara:{pose:"listen"},mei:{pose:"listen"},yusuf:OS_YUSUF},out:["jun"],yusufIn:true});
+      person(x,"jun",F.x(1)-16,F.walk,0.62,{pose:"stand",expr:"concerned",t:tt});
       [[0,"census report","4,812 awards"],[1,"draft submission","4,867 awards"]].forEach(([i,a,b],k)=>os_glassCard(x,tt,i,P.wh+0.1+0.15*k,[a,b]));
       gv_qmark(x,F.x(1)-16,F.walk-0.62*560-50,96,fin(tt,c.which+0.1,0.6));}}]);
   wc_paperOver(ctx,S);});
 
-// ---- 4 · Who decides? Both numbers are right; no one has decided how ours maps to the government's ----
+// ---- 4 · Who decides? The data team finds both numbers right; no one agrees which matches the government's definition, so they
+//      take it to data governance ----
 // something carried in both hands while walking: the arms stay, the legs step
 POSE.os_carry=Object.assign({},POSE.os_box,{gaze:[0.3,0.1],turn:0.06});
 function os_carrier(x,id,w,y,s,carry,o){person(x,id,w.x,y-w.bob,s,Object.assign({pose:"os_carry",pose2:w.moving?(w.swing>0?"os_boxA":"os_boxB"):null,mix:Math.abs(w.swing),flip:w.flip,carry},o||{}));}
@@ -189,18 +192,19 @@ function os_carrier(x,id,w,y,s,carry,o){person(x,id,w.x,y-w.bob,s,Object.assign(
 function os_glassCard(x,tt,i,t0,lines,o){o=o||{};const u=fin(tt,t0,0.45);if(u<=0)return;const F=GV_FL,k=0.92+0.08*spring(u),sz=o.size||30,h=82+(lines.length-1)*(sz+12);
   x.save();x.translate(F.x(i)+F.w/2,F.top+(o.top||250)+h/2);x.scale(k,k);withA(x,u,()=>gv_card(x,-F.w/2+(o.pad||22),-h/2,F.w-2*(o.pad||22),h,lines,{size:sz,align:"center",pin:false,y0:52,wash:o.wash||OS_NUM,washA:o.washA||0.14}));x.restore();}
 
-scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b1:c.both-0.5,s:c.monday-0.6,b3:c.before-0.6,cc:c.gov-0.6,d:c.answers-0.6,e:c.tbc-0.6,
+scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b1:c.both-0.5,s:c.monday-0.6,b3:c.before-0.6,cc:c.gov-0.6,k:c.ask-0.6,d:c.answers-0.6,e:c.tbc-0.6,
     right:wAt(sc,"both","right"),word:wAt(sc,"monday","the word"),micro:wAt(sc,"monday","microcredentials"),bef:wAt(sc,"before","before"),aft:wAt(sc,"before","after"),
-    ours:wAt(sc,"gov","ours"),who:wAt(sc,"gov","Who"),mei:wAt(sc,"answers","Mei"),jun:wAt(sc,"answers","Jun"),plan:wAt(sc,"answers","Planning"),tobe:wAt(sc,"tbc","to be"),
+    ours:wAt(sc,"gov","which"),who:wAt(sc,"gov","matches"),takes:wAt(sc,"ask","takes"),ask:wAt(sc,"ask","who"),
+    mei:wAt(sc,"answers","Mei"),jun:wAt(sc,"answers","Jun"),plan:wAt(sc,"answers","Planning"),tobe:wAt(sc,"tbc","to be"),
     rm:c.room-0.5,own:wAt(sc,"room","everyone"),none:wAt(sc,"room","no one")}));
   const board=(x,tt,mon)=>{os_reportCard(x,OS_RC.census,"census report","ran Friday","4,812",fin(tt,P.right-0.1,0.35));
     os_reportCard(x,OS_RC.draft,"draft submission","ran Wednesday","4,867",fin(tt,P.right-0.02,0.35));
     if(mon>0){const [mx,my,mw,mh]=OS_RC.monday;x.save();x.translate(0,-60*(1-easeCam(mon)));withA(x,clamp(mon*3,0,1),()=>os_mondayCard(x));x.restore();}};
   gv_shots(ctx,S,t,sc.dur,[
-    // Yusuf follows the numbers back, down the floor to the data team; it starts as the last chapter left the floor, so nothing doubles
-    // as the two dissolve
-    {at:0,place:"floor",keys:[[0,732,530,1.312],[0.4,1180,560,1.14]],d:2.6,draw:(x,tt)=>{const w=gv_walk(tt,0.2,368,1090,300);
-      os_floor(x,tt,{pose:{clara:{pose:"listen"},mei:{pose:"listen"},jun:{pose:"wave"}}});os_carrier(x,"yusuf",w,GV_FL.walk,0.62,heldNotebook,{t:tt});}},
+    // the data team checks both numbers: Jun takes them back down the floor to his team; it starts as the last chapter left the floor,
+    // so nothing doubles as the two dissolve
+    {at:0,place:"floor",keys:[[0,732,530,1.312],[0.4,1180,560,1.14]],d:2.6,draw:(x,tt)=>{const w=gv_walk(tt,0.1,368,1250,380);
+      os_floor(x,tt,{pose:{clara:{pose:"listen"},mei:{pose:"listen"},yusuf:OS_YUSUF},out:["jun"],yusufIn:true});os_carrier(x,"jun",w,GV_FL.walk,0.62,heldNotebook,{t:tt});}},
     // the data team's board: both reports are right, each by its own meaning of award
     {at:P.b1,place:"boardData",keys:[[P.b1,960,500,1.08],[P.b1+0.1,960,490,1.12]],d:3,push:0,draw:(x,tt)=>board(x,tt,0)},
     // Jun's screen: the glossary's term, and the row added on Monday
@@ -212,10 +216,14 @@ scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b1:c.both-
     {at:P.cc,place:"registrar",keys:[[P.cc,1000,560,1.22],[P.cc+0.1,1010,540,1.26]],d:5,draw:(x,tt)=>{const [mx,my,mw]=OS_RD.manual,[tx,ty,tw_]=OS_RD.tent;
       withA(x,fin(tt,c.gov+0.1,0.3),()=>os_manual(x));withA(x,fin(tt,P.ours-0.1,0.3),()=>os_tent(x));
       os_tagAt(x,tt,c.gov+0.2,null,mx+mw/2,770,"the government's definition",{size:26});os_tagAt(x,tt,P.ours,null,tx+tw_/2,770,"ours",{size:26});
-      const top=os_arc(x,tx+tw_/2,ty-14,mx+mw/2,my-14,200,fin(tt,P.who-0.1,0.9));if(top)gv_qmark(x,top[0],top[1]-14,84,fin(tt,P.who+0.5,0.6));
-      person(x,"mei",560,905,0.8,{pose:"listen",pose2:"shrug",mix:fin(tt,P.who+0.3,0.5),expr:"concerned",t:tt});}},
-    // the floor: who does what with the word, as each is named
-    {at:P.d,place:"floor",keys:[[P.d,960,540,1]],push:0,draw:(x,tt)=>{os_floor(x,tt,{});person(x,"yusuf",GV_FL.x(2)+176,GV_FL.walk,0.62,{pose:"listen",t:tt});
+      const top=os_arc(x,tx+tw_/2,ty-14,mx+mw/2,my-14,200,fin(tt,P.ours,0.9));if(top)gv_qmark(x,top[0],top[1]-14,84,fin(tt,P.who,0.6));
+      person(x,"mei",560,905,0.8,{pose:"listen",pose2:"shrug",mix:fin(tt,P.who-0.1,0.5),expr:"concerned",t:tt});}},
+    // so the data team takes it to data governance: Jun walks to Yusuf's office, and Yusuf looks up; the question, over them both. Then
+    // the floor, as each is named: who does what with the word
+    {at:P.k,place:"floor",keys:[[P.k,1120,600,1.22],[P.d-0.2,960,540,1]],d:1.8,push:0,draw:(x,tt)=>{const w=gv_walk(tt,P.k+0.1,1330,1170,150),
+        up=fin(tt,P.takes+0.5,0.5);
+      os_floor(x,tt,{out:["jun"],yusufIn:true,pose:{yusuf:Object.assign({pose2:"listen",mix:up},OS_YUSUF)}});gv_walker(x,"jun",w,GV_FL.walk,0.62,{t:tt,flip:true});
+      withA(x,1-fin(tt,P.mei-0.5,0.4),()=>gv_qmark(x,1094,GV_FL.walk-0.62*560-30,90,fin(tt,P.ask-0.05,0.6)));
       os_glassCard(x,tt,1,P.mei-0.1,["Mei","owns the meaning"]);os_glassCard(x,tt,3,P.jun-0.1,["Jun","builds the model"]);os_glassCard(x,tt,0,P.plan-0.1,["Planning","reports what","it's given"]);}},
     // and the chart, close: the government submission's row lights; the one accountable is still to be confirmed
     {at:P.e,place:"boardGov",keys:[[P.e,960,520,1],[P.e+0.1,960,540,1.06]],d:3,push:0,draw:(x,tt)=>{const st=fin(tt,P.tobe-0.2,0.3);os_chart(x,()=>1,{light:2,lightA:fin(tt,c.tbc-0.1,0.8),hide:st>0.4?[2,1]:null});

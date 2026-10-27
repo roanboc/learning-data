@@ -1,6 +1,6 @@
 # Data governance · Who decides: script
 
-*The script of *Who decides*, the film after *Off the shelf* in the data governance series, *Governance you can use*, revised for the series' first pack, which shows no technical files (the plan in three packs, approved by the author on 23 October 2026). Drafted for the author's review on 27 October 2026, before anything is recorded, with its pictures as they're drawn in stills the same day: about six minutes, in ten chapters, in English, painted in watercolour. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 10. Made to read on a phone: on-screen text is at least 28 px in the frame, nothing sits under the captions, and no caption runs to three lines.*
+*The script of *Who decides*, the film after *Off the shelf* in the data governance series, *Governance you can use*, revised for the series' first pack, which shows no technical files (the plan in three packs, approved by the author on 23 October 2026). Drafted for the author's review on 27 October 2026, with its pictures in stills, and approved, recorded and rendered the same day: 5:25, in ten chapters, in English, painted in watercolour. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 10. Made to read on a phone: on-screen text is at least 28 px in the frame, nothing sits under the captions, and no caption runs to three lines.*
 
 ## The promise
 
@@ -178,12 +178,12 @@ The opening, the roles and the council were checked on 20 and 21 October 2026, t
 - **"Area", for a domain.** St Mary's speaks of "a defined data area"; DAMA and the series' other films say *domain*. Pack 1 says *area*, the plain word, for the same thing: the university's eight, as the data team's map of domains names them (person, student, course, organisation, admissions, staff, research and fees). Pack 2 draws them as domains on Noor's map.
 - **Federated decisions.** Data governance's operating models are usually described as centralised, replicated or federated (DAMA-DMBOK2, chapter 3, as its commentators report it; the book wasn't read). The series' is federated, as *Who owns what* (*In the weeds of data crafting*) built it: each area decides its own meaning and publishes what others build on, and governance sets a few shared rules. The narration names two of them (one glossary, one way to classify data); the others in the plan, key sets and conventions, come in later films.
 - **The council.** It meets monthly (*The facts the films share*), so its time limit is its next meeting. That it decides only conflicts and exceptions, and that the deputy vice-chancellor decides when it can't agree, are the series' design, written in *Who decides* for the first time; the next films keep it.
-- **Papers, not files.** Pack 1 shows no technical file or tool (the author's direction of 21 October 2026, in the plan approved on 23 October). Each paper stands for something in the example project, as pull request #53 holds it (branch `claude/project-thread-ltr3tq`, at 8e70ba2, checked again on 27 October 2026), and film 14, *Governed in dbt*, shows the files:
+- **Papers, not files.** Pack 1 shows no technical file or tool (the author's direction of 21 October 2026, in the plan approved on 23 October). Each paper stands for something in the example project, as it has been on main since pull request #53 was merged (at 055ebf4, checked on 27 October 2026, when its tool-neutral definitions moved to a `governance/` folder), and film 14, *Governed in dbt*, shows the files:
 
   | On screen in *Who decides* | In the example project |
   |---|---|
   | The data team's list, *Who we ask*, a name for each area | The owners on the map of domains (`models/_shared/_shared__conceptual.yml`, one `owner:` for each of the eight domains), and each public model's `meta.owner` |
-  | The register's names, and the slip's | `models/_shared/_shared__owners.yml`: who each owner is, and where a review request goes |
+  | The register's names, and the slip's | `governance/2-owners/owners.yml`: who each owner is, and where a review request goes |
   | The sign-off sheet whose owner's line is never blank, sent back with "No owner: add who answers for what it means." | The governance check's first rule (`scripts/check/governance.py`, rule 1): a public model or mart without `meta.owner` and `meta.domain` fails, and the message points to `docs/how-to/add-an-owner.md` |
   | A routing slip on every change request, filled in from the register: "change a name there, and every slip follows" | `CODEOWNERS`, written from the owners by `scripts/generate/codeowners.py` ("without anyone remembering to", its docstring says), and checked to be up to date on every change |
   | Mei's log book, *Same learner?* | `seeds/reference/student/learner_identity_decisions.csv`: D-001 to D-004, decided by Mei on 6 and 7 October 2026, each reason shortened in her hand (Linh's family email, Daniel Kim's work email, Aisha Rahman's account with Aisha Karimi's ID, the look-alikes on one course and day) |
@@ -197,18 +197,18 @@ The opening, the roles and the council were checked on 20 and 21 October 2026, t
 
 ## Pacing report
 
-Estimated on 27 October 2026 by `source/tools/pace.py` from the lines' lengths, at about 171 words a minute while speaking, before any voice is recorded; the recorded voice replaces it. With the title and end cards, the film runs about 5:58.
+Measured on 27 October 2026 by `source/tools/pace.py` with the recorded voice, which speaks at about 190 words a minute. The film runs 5:25, with the title card and the end card. After recording, a few holds were made longer (`source/src/breath.js`), so that no chapter runs above 134 words a minute.
 
 | Chapter | Words | Length | Words a minute | Voice |
 |---|---|---|---|---|
-| 1 · The cord | 99 | 49.1 s | 121 | 71% |
-| 2 · To be confirmed | 69 | 32.3 s | 128 | 75% |
-| 3 · Already written | 76 | 36.8 s | 124 | 73% |
-| 4 · Three roles | 76 | 35.2 s | 130 | 76% |
-| 5 · Who decides what | 60 | 29.1 s | 124 | 72% |
-| 6 · Required | 72 | 34.9 s | 124 | 72% |
-| 7 · Asked by name | 71 | 34.9 s | 122 | 71% |
-| 8 · Where the work is | 60 | 28.9 s | 125 | 73% |
-| 9 · Time to answer | 65 | 31.7 s | 123 | 72% |
-| 10 · Which award? | 56 | 31.1 s | 108 | 63% |
-| **Film** | **704** | **about 5:44** | **123** | **72%** |
+| 1 · The cord | 99 | 44.8 s | 133 | 66% |
+| 2 · To be confirmed | 69 | 32.0 s | 129 | 75% |
+| 3 · Already written | 76 | 34.0 s | 134 | 67% |
+| 4 · Three roles | 76 | 34.2 s | 133 | 72% |
+| 5 · Who decides what | 60 | 28.7 s | 126 | 72% |
+| 6 · Required | 72 | 32.5 s | 133 | 70% |
+| 7 · Asked by name | 71 | 33.4 s | 128 | 70% |
+| 8 · Where the work is | 60 | 26.9 s | 134 | 67% |
+| 9 · Time to answer | 65 | 29.4 s | 132 | 66% |
+| 10 · Which award? | 56 | 29.1 s | 116 | 60% |
+| **Film** | **704** | **5:25** | **130** | **68%** |

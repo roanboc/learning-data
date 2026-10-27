@@ -28,6 +28,14 @@
     [
       "\\bJun\\b",
       "Joon"
+    ],
+    [
+      "\\bandon\\b",
+      "ahndohn"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
     ]
   ]
 }

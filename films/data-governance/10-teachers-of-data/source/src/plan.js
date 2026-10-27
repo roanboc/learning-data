@@ -617,7 +617,7 @@ function tt_nameCard(x,X,Y,name,role,a){if(a<=0.01)return;const w=Math.round(Mat
 // and scaled to the office's board. st says what's up and what's lit: panel(i) and lit(i), 0 to 1; B, the cards under the panels, as
 // [lines, u]; q(i), the "?" cards; C(i), the new rule's steps; who, {a, tick(j), fac}; bar, {a, fill(j)}; five(j); glow5
 const TT_GB={w:1500,h:820,px:[190,550,910],py:170,ps:0.6,cw:322,rowB:[350,112],rowC:[480,100],who:[1110,40,360,520],bar:[30,604,1440,56],five:[30,684,276,132,15]};
-const TT_BTEXT=[["the stewards"],["a page beside","every check"],["the checks"]],TT_CTEXT=[["agreed with","the stewards"],["warns, with","its page"],["an error from","1 December"]];
+const TT_BTEXT=[["the stewards"],["a page beside","every check"],["the checks"]],TT_CTEXT=[["agreed with","the stewards"],["warns, with","its page"],["required from","1 December"]];
 const TT_FIVE=[["know why","the reason,","said first"],["want it","the willing","first"],["know how","a page beside","every check"],["be able to","office hours,","and time"],["see it last","measured,","every day"]];
 const TT_BAR=[[92,GV.green,GV.greenInk,"92 · run in the work"],[64,GV.gold,GV.goldInk,"64 · decisions someone owns"],[59,GV.grey,GV.greyInk,"59 · gone"]];
 // a card pinned to the board: its lines centred; or, with o.q, a pencilled "?"; u brings it in with a small spring
@@ -655,32 +655,44 @@ function tt_bar(x,B){const [X,Y,w,h]=TT_GB.bar;let x0=X;wc_hand(x,"215 lines",X+
       x.save();x.beginPath();x.rect(x0-6,Y-12,(bw+14)*easeCam(clamp(p,0,1)),h+28);x.clip();x.drawImage(c,x0-10,Y-10);x.restore();
       withA(x,clamp(p*3-1.2,0,1),()=>wc_T(x,s,x0+16,Y+h/2+10,{w:700,size:27,col:ink}));}x0+=bw;});}
 
-/* ---------- the university: Anil's screen and its page, Jun's screen ---------- */
+/* ---------- the university: Anil's call list and the sheet it comes back on, the guide beside it, Jun's wallet ---------- */
 // a screen drawn in a design of 1260 x 690 (the screen close up, GV_SC) and scaled to any other screen's box
 function tt_onScreen(x,box,fn,deco){const [sx,sy,sw,sh]=box,k=sw/1260;x.save();x.translate(sx,sy+(sh-690*k)/2);x.scale(k,k);x.beginPath();x.rect(0,0,1260,690);x.clip();tt_deco(deco,()=>fn(x));x.restore();}
-// a line of code typed in, letter by letter
+// words typed in, letter by letter
 const tt_typed=(s,p)=>s.slice(0,Math.ceil(s.length*clamp(p,0,1)));
-// Anil's screen: the call list's columns, his new one; the governance check under them, its message with the key words larger and the
-// link by the page's name; then the page itself, Classify a column, each part lit as it's named; then his line typed, and the tick.
-// st: add, check, link, page (0 to 1 open), lit(j), typed, ok
-function tt_anilScreen(x,st){gv_screen(x,0,0,1260,690,"learner_progress",q=>{
-  wc_T(q,"columns",40,104,{w:700,size:28,col:WC_MUTED});
-  ["learner_id","programme","adviser"].forEach((s,j)=>wc_T(q,s,40,152+j*46,{w:500,size:32,f:"mono",col:WC_INK}));
-  if(st.add>0.01)withA(q,clamp(st.add*2,0,1),()=>{gv_tint(q,28,262,560,42,GV.green,0.5);wc_T(q,"+ school_name",40,290,{w:500,size:32,f:"mono",col:GV.greenInk});});
-  if(st.typed>0.01)wc_T(q,tt_typed("  personal_data: none",st.typed),40,334,{w:500,size:30,f:"mono",col:GV.greenInk});
-  // the check's panel: red while it stops him, then green
-  const ck=st.check||0,ok=st.ok||0;if(ck>0.01)withA(q,clamp(ck*2,0,1),()=>{const col=mix(GV.red,GV.green,ok);q.fillStyle=rgba(wc_lit(col,0.86),1);q.fillRect(24,372,1212,300);q.fillStyle=rgba(col,0.9);q.fillRect(24,372,10,300);
-    if(ok<0.5)wc_cross(q,74,418,44,GV.red,clamp(ck*1.5,0,1));else wc_tick(q,74,420,48,GV.green,clamp(ok*2-1,0,1),7);wc_T(q,"governance",112,432,{w:800,size:34,col:WC_DARK});
-    withA(q,(1-clamp(ok*2,0,1))*(1-clamp((st.page||0)*2.5,0,1)),()=>{wc_T(q,"school_name has no meta.personal_data",60,500,{w:800,size:38,col:GV.redInk});
-      wc_T(q,"say whether it identifies a person,",60,550,{w:600,size:30,col:WC_INK});wc_T(q,"with direct, pseudonymous or none",60,590,{w:600,size:30,col:WC_INK});
-      gv_tint(q,50,612,430,44,GV.gold,0.9*(st.link||0));wc_T(q,"how to: classify-a-column",60,644,{w:700,size:30,col:mix(TT_LINK,GV.goldInk,st.link||0)});q.fillStyle=rgba(mix(TT_LINK,GV.goldInk,st.link||0),0.8);q.fillRect(60,650,tw(q,"how to: classify-a-column",30,700),2.5);});
-    if(ok>0.5)withA(q,clamp(ok*2-1,0,1),()=>wc_T(q,"Governance's rules are met",60,500,{w:700,size:36,col:GV.greenInk}));});
-  // the page, over the screen as it opens
+// someone's table on their screen, in plain words: its headings along the top, and a grey line in each column for every row under them;
+// with add (0 to 1), the last heading is new, and comes in green with its column. Only the room's view reads it, from afar, and a sheet
+// covers it close up, so its words are decoration
+function tt_table(q,heads,add){heads.forEach((s,j)=>{const nw=add!=null&&j===heads.length-1,a=nw?clamp(add*2,0,1):1,X=40+j*300;if(a<=0.01)return;
+  withA(q,a,()=>{if(nw)gv_tint(q,X-14,78,tw(q,"+ "+s,32,700)+28,48,GV.green,0.5);tt_deco(true,()=>wc_T(q,nw?"+ "+s:s,X,112,{w:700,size:32,col:nw?GV.greenInk:WC_DARK}));
+    q.fillStyle=rgba(WC_MUTED,0.3);for(let i=0;i<9;i++)q.fillRect(X,152+i*56,Math.round(130+90*hash(i*7+j,23)),6);});});
+  q.fillStyle=rgba(WC_MUTED,0.45);q.fillRect(40,130,1180,2);}
+// a question on the series' sign-off sheet, kept as room on the same sheet once it's answered: as many lines as the question took, of
+// no-break spaces, which nothing reads, so nothing on the sheet moves
+const tt_room=(q,o,i)=>Array(gv_askLines(q,o.ask[i],gv_signoffVX(q,o.rows,o)).length).fill(" ").join("\n");
+// Anil's change as the sign-off sheet brings it back: the class empty, in red, the question under it, and the line to the guide (TT_SA);
+// then the same sheet signed, the class said (TT_SB, where tt_classIn puts its chip)
+const TT_SA={title:"Change: the faculty's call list",rows:[["column","School"],["owner","Faculty of Health"],["class",null]],
+  ask:{2:"this column doesn't say whether it identifies a person"},how:"how to: Classify a column",stamp:"sent back"};
+const TT_SB=Object.assign({},TT_SA,{rows:[["column","School"],["owner","Faculty of Health"],["class",""]],stamp:"signed"});
+// the class chosen, landing in its row (r, as gv_signoff returns it) a little large and settling as u goes 0 to 1
+function tt_classIn(q,r,j,cls,u){if(u<=0.001)return;const k=lerp(1.25,1,spring(u));q.save();q.translate(r.x,r.rows[j]);q.scale(k,k);withA(q,clamp(u*2.5,0,1),()=>gv_classChip(q,0,0,cls));q.restore();}
+// a sheet's line to its guide, lit gold as it's pointed to (r, as gv_signoff returns it, at 1000 wide)
+const tt_howLit=(q,X,Y,r,o,a)=>gv_tint(q,X+40,Y+r.h-126,tw(q,o.how,30,700)+80,50,GV.gold,0.9*a);
+// Anil's screen: the faculty's call list, and his new column; his change coming back on the sign-off sheet (sheet, 0 to 1, slides it
+// up), its line to the guide lit (link); the guide itself, Classify a column, each part lit as it's named; then the class he chose,
+// "none", landing in its row (fix), the sheet signed under it as the sent-back one goes (ok), and its stamp (signed). The sheet steps
+// back while the guide is open over it. st: add, sheet, link, page (0 to 1 open), lit(j), fix, ok, signed
+function tt_anilScreen(x,st){gv_screen(x,0,0,1260,690,"The faculty's call list",q=>{tt_table(q,["Learner","Programme","Adviser","School"],st.add||0);
+  const e=easeCam(clamp(st.sheet||0,0,1));if(e>0.001)withA(q,1-clamp((st.page||0)*2.5,0,1),()=>{const X=130,Y=62+700*(1-e),A=TT_SA,ok=clamp(st.ok||0,0,1),fix=clamp(st.fix||0,0,1);
+    if(ok>0.001){const r=gv_signoff(q,X,Y,1000,Object.assign({},TT_SB,{ask:{2:tt_room(q,A,2)},stampP:st.signed||0}));tt_classIn(q,r,2,"none",fix);}
+    if(ok<0.999)withA(q,1-ok,()=>{const r=gv_signoff(q,X,Y,1000,Object.assign({},A,{missA:1-fix}));tt_howLit(q,X,Y,r,A,st.link||0);tt_classIn(q,r,2,"none",fix);});});
+  // the guide, over the sheet as it opens
   if(st.page>0.01){const e=easeCam(clamp(st.page,0,1));q.save();q.translate(0,40*(1-e));withA(q,clamp(st.page*2.5,0,1),()=>tt_howPage(q,st.lit||(()=>0)));q.restore();}},{titleSize:30,barH:54});}
-// the page: what the check asks, why, how in three steps, and who to ask (the project's docs/how-to/classify-a-column.md); X and w
-// place it on the screen
-const TT_HOW=[["What the check asks",["Each column says whether it identifies a person."]],["Why",["So access and masks follow the column wherever it's read."]],
-  ["How",["1 · Find the column in its model's file","2 · Add personal_data: direct, pseudonymous or none","3 · Run the check again"]],["Who to ask",["Data governance's office hours, Thursdays from 2 to 3 pm"]]];
+// the guide beside the check: what the rule asks, why, how in three steps, and who to ask, in the words of the person it stops (the
+// example project's how-to pages say the same for its tools); X and w place it on the screen
+const TT_HOW=[["What the rule asks",["Each column says whether it identifies a person."]],["Why",["So who may see it follows the column, wherever it's read."]],
+  ["How",["1 · Ask: could it tell who someone is?","2 · Choose direct, pseudonymous or none","3 · Send the change again"]],["Who to ask",["Data governance's office hours, Thursdays from 2 to 3 pm"]]];
 function tt_howPage(q,lit,X,w){X=X||300;w=w||920;const Y=70,h=606;q.save();q.filter="blur(10px)";q.fillStyle="rgba(40,40,60,0.28)";q.fillRect(X+10,Y+14,w,h);q.restore();q.fillStyle=rgba(GV.paper,1);q.fillRect(X,Y,w,h);
   q.fillStyle=rgba([70,96,140],1);q.fillRect(X,Y,w,8);wc_T(q,"Classify a column",X+40,Y+66,{w:800,size:44,col:WC_DARK});let y=Y+118;
   TT_HOW.forEach(([hd,ls],j)=>{const hh=40+ls.length*36;gv_tint(q,X+24,y-8,w-48,hh+6,GV.gold,0.8*clamp(lit(j),0,1));wc_T(q,hd,X+40,y+24,{w:800,size:30,col:WC_DARK});
@@ -690,17 +702,24 @@ function tt_clock(x,cx,cy,r,m){wc_wash(x,wc_ell(cx,cy,r+8,r+8,40),[96,84,74],{ki
   x.save();x.strokeStyle=rgba(WC_DARK,0.8);x.lineCap="round";for(let i=0;i<12;i++){const a=i/12*TAU;x.lineWidth=i%3?2:4;x.beginPath();x.moveTo(cx+Math.sin(a)*r*0.8,cy-Math.cos(a)*r*0.8);x.lineTo(cx+Math.sin(a)*r*0.92,cy-Math.cos(a)*r*0.92);x.stroke();}
   const hand=(a,l,lw)=>{x.lineWidth=lw;x.beginPath();x.moveTo(cx,cy);x.lineTo(cx+Math.sin(a)*l,cy-Math.cos(a)*l);x.stroke();};hand((11+m/60)/12*TAU,r*0.5,6);hand(m/60*TAU,r*0.76,4);
   x.fillStyle=rgba(WC_DARK,0.9);x.beginPath();x.arc(cx,cy,5,0,TAU);x.fill();x.restore();}
-// Jun's screen: the check's warning, in amber, with its page and its date; that the rules are still met; then the description, typed.
-// st: warn, link, date, typed
-function tt_junScreen(x,st){gv_screen(x,0,0,1260,690,"governance check",q=>{
-  if(st.warn>0.01)withA(q,clamp(st.warn*2,0,1),()=>{q.fillStyle=rgba(wc_lit(TT_AMBER,0.84),1);q.fillRect(24,72,1212,330);q.fillStyle=rgba(TT_AMBER,0.95);q.fillRect(24,72,10,330);
-    wc_badge(q,58,112,"warning",{size:30,role:TT_AMBER});wc_T(q,"awards_held has no description",58,186,{w:800,size:40,col:TT_AMBERINK});
-    wc_T(q,"say what it holds, in a sentence its readers know",58,236,{w:600,size:30,col:WC_INK});
-    gv_tint(q,48,262,410,44,GV.gold,0.9*(st.link||0));wc_T(q,"how to: describe-a-column",58,294,{w:700,size:30,col:mix(TT_LINK,GV.goldInk,st.link||0)});q.fillStyle=rgba(mix(TT_LINK,GV.goldInk,st.link||0),0.8);q.fillRect(58,300,tw(q,"how to: describe-a-column",30,700),2.5);
-    gv_tint(q,48,326,470,46,TT_AMBER,0.9*(st.date||0));wc_T(q,"an error from 1 December 2026",58,360,{w:800,size:30,col:TT_AMBERINK});
-    wc_T(q,"Governance's rules are met",40,456,{w:700,size:34,col:GV.greenInk});wc_T(q,"1 warning to fix before its date",40,500,{w:600,size:30,col:WC_INK});});
-  if(st.typed>0.01){q.fillStyle=rgba([238,240,244],1);q.fillRect(24,532,1212,146);wc_T(q,"awards_held:",44,584,{w:500,size:30,f:"mono",col:WC_INK});
-    wc_T(q,tt_typed("  description: Valid awards conferred on the learner.",st.typed),44,632,{w:500,size:30,f:"mono",col:GV.greenInk});}},{titleSize:30,barH:54});}
+// Jun's change, signed: until its date the rule only warns, so the change goes through, its warning written on the sheet in amber where
+// Anil's question was red: Awards held has no description yet, required from 1 December (TT_SJ); then the same sheet with what Jun
+// writes (TT_SJ2). The description is the example project's own
+const TT_DESC="Valid awards conferred on the learner.";
+const TT_SJ={title:"Change: the wallet",rows:[["column","Awards held"],["description",null]],ask:{1:"required from 1 December"},how:"how to: Describe a column",stamp:"signed"};
+const TT_SJ2=Object.assign({},TT_SJ,{rows:[["column","Awards held"],["description",TT_DESC]]});
+// the series' sign-off sheet with what's missing in amber, not red: a warning, which stops nothing yet
+function tt_signoffWarn(q,X,Y,w,o){const r=GV.red,ri=GV.redInk;GV.red=TT_AMBER;GV.redInk=TT_AMBERINK;try{return gv_signoff(q,X,Y,w,o);}finally{GV.red=r;GV.redInk=ri;}}
+// Jun's screen: the wallet, his table; his change come back signed (its stamp, stamp), with the warning in amber (warn), the line to its
+// guide lit (link), and the day lit (date); then the description, typed into its row (typed), and the sheet without its warning (ok).
+// st: stamp, warn, link, date, typed, ok
+function tt_junScreen(x,st){gv_screen(x,0,0,1260,690,"The wallet",q=>{tt_table(q,["Learner","Credentials","Awards held"]);
+  const X=130,Y=62,ok=clamp(st.ok||0,0,1),wn=clamp(st.warn||0,0,1),sp=st.stamp==null?1:st.stamp;
+  if(ok>0.001)gv_signoff(q,X,Y,1000,Object.assign({},TT_SJ2,{ask:{1:tt_room(q,TT_SJ,1)},stampP:sp}));
+  if(ok<0.999)withA(q,1-ok,()=>{const r=tt_signoffWarn(q,X,Y,1000,Object.assign({},TT_SJ,{missA:wn,askP:wn,stampP:sp})),ay=r.rows[1]+69;
+    tt_howLit(q,X,Y,r,TT_SJ,st.link||0);gv_tint(q,r.x-8,ay-34,tw(q,TT_SJ.ask[1],30,700)+28,48,TT_AMBER,0.9*(st.date||0));
+    // what he writes, where the description goes, at the size the sheet would set it
+    if(st.typed>0.01)wc_T(q,tt_typed(TT_DESC,st.typed),r.x,r.rows[1]+11,{w:600,size:clamp(32*(X+952-r.x)/Math.max(1,tw(q,TT_DESC,32,600)),28,32),col:WC_DARK});});},{titleSize:30,barH:54});}
 
 /* ---------- the university: the stewards' meeting room ---------- */
 // the screen on the wall: the meeting's name; then the three faculties who join from their own rooms, each face lighting as it comes
@@ -729,7 +748,7 @@ function tt_stampBox(x,deco){const X=1700,y=GV_MT.win[1]+GV_MT.win[3]+2;x.drawIm
   tt_deco(deco,()=>wc_T(x,"APPROVED",X,y-15,{w:800,size:20,align:"center",col:GV.goldInk}));}
 // the whiteboard: what the stewards brought (o.notes), the new rule (o.rule), the column nobody had described (o.col), or, another day, the
 // wheel (o.wheel). Drawn in the room's coordinates; small type, so the close-ups (TT_Z.board) read it and the room shows it from afar
-const TT_NOTES=[[0,["a test","nobody owned"],0],[0,["emails typed","with spaces"],1],[1,["a page beside","the check"],2],[1,["office hours"],3],[1,["asked by name"],0]];
+const TT_NOTES=[[0,["a check","nobody owned"],0],[0,["emails typed","with spaces"],1],[1,["a page beside","the check"],2],[1,["office hours"],3],[1,["asked by name"],0]];
 function tt_meetBoard(x,st){const [bx,by,bw,bh]=GV_MT.board;
   if(st.wheel){x.drawImage(wc_kept("ttCleanBoard",bw+20,bh+20,q=>wc_flat(q,wc_rect(10,10,bw,bh),[250,251,250],1,"board")),bx-10,by-10);tt_wheel(x,st.wheel);return;}
   // what broke, what helped: two headings, and a note going up under one as each person speaks
@@ -746,7 +765,7 @@ function tt_meetBoard(x,st){const [bx,by,bw,bh]=GV_MT.board;
     if(st.date>0.01)wc_hand(x,"1 December",X+w-14,Y+88,{size:14,w:800,col:GV.goldInk,align:"right",p:st.date});}
   // the column nobody had described: its card, and one learner's row
   if(st.col>0.01){const X=120,Y=392,w=262,h=96;withA(x,clamp(st.col*3,0,1),()=>{wc_panel(x,X,Y,w,h,{kind:"card",seed:78});gv_pin(x,X+w/2,Y+8,GV.red,0.5);
-    wc_T(x,"awards_held",X+14,Y+28,{w:500,size:14,f:"mono",col:WC_DARK});wc_hand(x,"?",X+w-30,Y+30,{size:18,w:600,col:WC_PENCIL});x.fillStyle=rgba(WC_PENCIL,0.4);x.fillRect(X+10,Y+38,w-20,1.2);
+    wc_T(x,"Awards held",X+14,Y+28,{w:700,size:14,col:WC_DARK});wc_hand(x,"?",X+w-30,Y+30,{size:18,w:600,col:WC_PENCIL});x.fillStyle=rgba(WC_PENCIL,0.4);x.fillRect(X+10,Y+38,w-20,1.2);
     wc_T(x,"Linh Nguyen",X+14,Y+58,{w:700,size:12.5,col:WC_INK});tt_chip(x,X+14,Y+78,"degree",[200,210,236]);tt_chip(x,X+92,Y+78,"microcredential",[236,214,200]);});}}
 // a sticky note, oblong, washed in its colour, kept sharp for the close-ups
 function tt_noteAt(x,cx,cy,w,h,col,rot,seed){const c=wc_kept("ttNote|"+col.join(",")+"|"+seed,(w+20)*3,(h+20)*3,q=>{q.scale(3,3);q.translate(10,10);q.fillStyle="rgba(70,60,50,0.16)";q.fillRect(3,5,w,h);
@@ -848,11 +867,11 @@ function tt_tray(x,tip,deco){const T_=TT_TRAY,e=easeCam(clamp(tip,0,1)),ang=-0.6
 function tt_doorCard(x,u,deco){if(u<=0.01)return;const k=lerp(1.15,1,easeCam(clamp(u,0,1)));x.save();x.translate(150,566);x.scale(k,k);x.rotate(-0.02);withA(x,clamp(u*3,0,1),()=>{
   wc_panel(x,-92,-62,184,124,{kind:"card",seed:66});gv_pin(x,0,-50,GV.red,0.9);tt_deco(deco,()=>{wc_T(x,"Office hours",0,-12,{w:800,size:26,align:"center",col:WC_DARK});
   wc_T(x,"Thursdays,",0,22,{w:600,size:24,align:"center",col:WC_INK});wc_T(x,"2 to 3 pm",0,50,{w:600,size:24,align:"center",col:WC_INK});});});x.restore();}
-// the three measures, pinned up where the score hung, in the room's coordinates: what the project says, what last night's run said,
-// who came to office hours. st: up(i), row(i, j) lights a row
+// the three measures, pinned up where the score hung, in the room's coordinates: what each night's checks count, which of them failed
+// and whose they are, who came to office hours. st: up(i), row(i, j) lights a row
 const TT_MS=[[1120,148,236,124],[1120,282,236,100],[1120,392,236,100]];
 const TT_MROWS=[["Governance's measures",[["an owner","37 of 37"],["a glossary term","13 of 13"],["a class","119 of 119"],["a description","119 of 119"]]],
-  ["Quality scorecard",[["160 tests","160 passed"],["1 warning","owner: Learning team"]]],["Office hours",[["came","31"],["came back","12"]]]];
+  ["Quality scorecard",[["160 checks","160 passed"],["1 warning","owner: Learning team"]]],["Office hours",[["came","31"],["came back","12"]]]];
 function tt_measures(x,st,deco){tt_deco(deco,()=>TT_MS.forEach(([X,Y,w,h],i)=>{const u=st.up?st.up(i):1;if(u<=0.01)return;const k=lerp(1.12,1,easeCam(clamp(u,0,1))),g=st.glow?st.glow(i):0;
   x.save();x.translate(X+w/2,Y+h/2);x.scale(k,k);x.rotate([0.01,-0.008,0.012][i]);x.translate(-X-w/2,-Y-h/2);withA(x,clamp(u*3,0,1),()=>{
     if(g>0.01){x.save();x.globalCompositeOperation="screen";wc_glowAt(x,X+w/2,Y+h/2,w*0.75,[255,214,120],0.5*g);x.restore();}gv_sheet(x,X,Y,w,h);

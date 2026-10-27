@@ -5,8 +5,8 @@
 # rings above the voice.
 #  - The film is about teaching, so its one figure is a phrase that one voice plays and another copies: five notes, 3-5-4-2-1, the
 #    first two asking and the last three answering. In 1996 the oboe plays it as people understand the rule, and the cor anglais copies
-#    it as the people around them keep it; when Anil's page opens the cor anglais plays it, and the bassoon copies it as his check
-#    turns green; Yusuf's oboe plays it as a governance team teaches; and as the stewards pass it on, all three play it in turn. In
+#    it as the people around them keep it; when Anil's guide opens the cor anglais plays it, and the bassoon copies it as his change
+#    is signed; Yusuf's oboe plays it as a governance team teaches; and as the stewards pass it on, all three play it in turn. In
 #    Bogotá in 2012 the oboe plays it once more, in E-flat minor, and stops a note short: nobody copies it. At the end it's whole again.
 #  - The mimes get a light trio, each gesture on a soft staccato note, as a silent film would score them; a check that warns first,
 #    governance's mime, gets the mime's notes. The officer's fine is one low bassoon note, and so is each check that stops the work.
@@ -394,8 +394,8 @@ bf = tw('before', 'before')
 pencil(bf - 0.15, 0.010, -0.3, 0.25); pencil(bf + 0.25, 0.010, 0.0, 0.25)
 line('oboe', [(bf - 0.1, bf + 0.35, 70, 0.85), (bf + 0.35, bf + 1.5, 72, 0.85)], 0.85, att=0.1, rel=0.5)
 
-# 3. A page beside the check: the call list's new column typed; the check's red, on the fine's low note; its link; as the page opens
-#    the cor anglais plays the phrase, and as Anil's fix turns the check green the bassoon copies it; the board's mime lights on the
+# 3. A page beside the check: the call list's new column typed; the change sent back, on the fine's low note; the line to its guide;
+#    as the guide opens the cor anglais plays the phrase; the class he chooses, and as the sheet is signed the bassoon copies it; the board's mime lights on the
 #    mime's notes; the in-tray tipped into the box; the card pinned to the door; and as two come with their laptops and Yusuf waves
 #    them in, a chord on four, then on one
 bw = lambda lid, word, off=0: W('beside', lid, word, off)
@@ -406,8 +406,8 @@ tap(bw('no', 'say no') - 0.1, 0.012, 0.2)
 pg = bw('says', 'a page')
 air(pg - 0.1, 0.6, 0.010, 0.1)
 phrase('cor', TEACH['Eb'], pg + 0.1, 0.9)
-keys(bc('two', 0.1), 5, 0.011, 0.1, 0.2)
-phrase('bsn', [m - 12 for m in TEACH['Eb']], bc('two', 1.6), 0.9)
+tap(bc('two', 0.25), 0.012, 0.1)
+phrase('bsn', [m - 12 for m in TEACH['Eb']], bc('two', 1.5), 0.9)
 nm = bw('mime', 'no mime')
 figure('oboe', [70, 63], nm - 0.35, 0.3, 0.8, 'Eb'); pencil(nm + 0.1, 0.012, 0.0, 0.5)
 tip = bc('queue', 1.3)
@@ -460,7 +460,8 @@ write(ww('agree', 'date') - 0.1, 0.8, 0.011, 0.1)
 wn = ww('warns', 'only warns') - 0.2
 figure('oboe', [63, 67, 70], wn + 0.1, 0.15, 0.8, 'Eb')
 tap(ww('links', 'links its page') - 0.1, 0.012, 0.1); tap(ww('links', 'names the day'), 0.012, 0.1)
-keys(ww('links', 'names the day') + 1.5, 6, 0.010, 0.1, 0.24)
+ty = ww('links', 'names the day') + 0.8; ty1 = max(ty + 0.8, min(ty + 1.4, wc('gone', -1.7)))  # Jun's typing, as in the scene
+keys(ty, 6, 0.010, 0.1, (ty1 - ty) / 6)
 cz, wk = wc('gone', -0.6), ww('gone', 'Four weeks') - 0.1
 marker(cz + 0.6, 0.012, 0.3, 0.8)
 for k in range(5):  # Bb, Ab, G, F, then E-flat, the warnings' none
@@ -470,9 +471,9 @@ pencil(ww('nothing', 'nothing left'), 0.010, 0.4, 0.3)
 chord({'bsn': 51, 'cor': 58, 'oboe': 67}, END('warn', 'nothing') - 0.1, END('warn', 'nothing') + 2.2, 0.6, step=0.25, att=0.6, rel=0.6)
 L5 = [ww('mime', 'The mime') - 0.1, ww('mime', 'The mime') + 0.45, ww('mime', 'before the fine')]
 for t0_, (inst, m) in zip(L5, [('oboe', 70), ('cor', 55), ('bsn', 39)]):
-    note(inst, m, t0_, END('warn', 'mime') - 0.3 - t0_, 0.75, att=0.15, rel=0.3)
+    note(inst, m, t0_, END('warn', 'mime') + 0.5 - t0_, 0.75, att=0.15, rel=0.3)
     pencil(t0_ + 0.15, 0.008, 0.0, 0.35)
-bo5 = END('warn', 'mime') - 0.3
+bo5 = END('warn', 'mime') + 0.5
 figure('oboe', [74, 71, 67], bo5 + 0.4, 0.3, 0.8, 'G'); stacc('bsn', 43, bo5 + 1.05, 0.7, 'G')
 
 # 6. Measured by use: the framed score glows on a hollow fifth; binder 29 drawn off the shelf, and opened; the frame lifted off its

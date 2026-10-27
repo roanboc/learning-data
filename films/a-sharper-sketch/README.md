@@ -2,8 +2,8 @@
 
 A 5½-minute film from Learning Data about data modelling. Two trusted numbers disagree about how many students were enrolled in Data Science 101 on census date. To find out why, the film goes back to the sketch from *The Inner Life of Data*, calls it what it was, an oversimplification, and sharpens it one question at a time, checking each change against a reference model. It notes that MortarCAPS (MCDS) is the standard many universities actually use, and checks against TCSI, one of the choices, because it is public. It is written for anyone aged 14 and up, with nothing a data modeller would need to correct, and it is about modelling only: what the model says, not how the pipelines build it.
 
-- **Watch, with labs and scenarios:** [https://roanboc.github.io/learning-data/sketch/](https://roanboc.github.io/learning-data/sketch/)
-- **In Spanish, around the English film:** [https://roanboc.github.io/learning-data/es/sketch/](https://roanboc.github.io/learning-data/es/sketch/)
+- **Watch, with labs and scenarios:** [https://data.learn-all.org/sketch/](https://data.learn-all.org/sketch/)
+- **In Spanish, around the English film:** [https://data.learn-all.org/es/sketch/](https://data.learn-all.org/es/sketch/)
 - **Download the video (MP4, 1080p):** [https://github.com/roanboc/learning-data/releases/latest/download/a-sharper-sketch.mp4](https://github.com/roanboc/learning-data/releases/latest/download/a-sharper-sketch.mp4)
 - **Script, with rigour notes and sources:** [script.md](script.md)
 - **Treatment:** [treatment.md](treatment.md)
@@ -23,7 +23,7 @@ A 5½-minute film from Learning Data about data modelling. Two trusted numbers d
 | 4:34 | Check, adopt, extend, record |
 | 5:09 | Pull back |
 
-To link to a chapter, add `#t=` and its start in seconds, rounded up, to the page's address: for example [`/sketch/#t=207`](https://roanboc.github.io/learning-data/sketch/#t=207) for *Enrolled when?* (it starts at 206.2 s). Rounding down lands on the last frame of the chapter before.
+To link to a chapter, add `#t=` and its start in seconds, rounded up, to the page's address: for example [`/sketch/#t=207`](https://data.learn-all.org/sketch/#t=207) for *Enrolled when?* (it starts at 206.2 s). Rounding down lands on the last frame of the chapter before.
 
 ## What it teaches
 

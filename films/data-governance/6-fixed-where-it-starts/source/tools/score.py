@@ -236,24 +236,28 @@ def strokes(sid, a, b, n=4):
 
 # =============================================================================================================================
 # 1. Two clinics: the glass under the whole story. E minor for the hospital and its two clinics, the doctors and the students, and
-#    the autopsy room; a B major chord for Semmelweis' question; G major once the hands go into the lime. The fix's phrase as the
-#    hands dip; C, D and G as the deaths fall to the second clinic's level; a bell where the fever shows, and the G under it where it
-#    starts; the mark under the title, and the chord's D held into the present's first chord, D major, as Today comes up
+#    the autopsy room; A minor as the women beg not to be sent to the first clinic, and E minor again as nobody can explain it; a B
+#    major chord for Semmelweis' question; G major once the hands go into the lime. The fix's phrase as the hands dip; C, D and G as
+#    the deaths fall to the second clinic's level, the G opened out as a mother goes home; a bell where the fever shows, and the G
+#    under it where it starts; the mark under the title, and the chord's D held into the present's first chord, D major, as Today
+#    comes up
 reg = G('clinics', 'fall', -0.5); hands = W('clinics', 'wash', 'before', -0.2); ward = G('clinics', 'showed', -0.5)
 c_hd = W('clinics', 'showed', 'hands'); c_shows = W('clinics', 'showed', 'showed'); dip = G('clinics', 'lesson', 2.9)
 title = G('clinics', 'breath', 0.7); today = S0('monday')
-EM, C_, GM, B_, D_ = [55, 59, 64], [55, 60, 64], [55, 59, 62], [59, 63, 66], [57, 62, 66]
+EM, C_, GM, B_, D_, AM = [55, 59, 64], [55, 60, 64], [55, 59, 62], [59, 63, 66], [57, 62, 66], [57, 60, 64]
 chords([(0.4, G('clinics', 'first', -0.3), EM),
         (G('clinics', 'first', -0.3), G('clinics', 'second', -0.5), C_),
-        (G('clinics', 'second', -0.5), G('clinics', 'looks', -0.4), GM),
-        (G('clinics', 'looks', -0.4), W('clinics', 'looks', 'looks', -0.2), EM),
+        (G('clinics', 'second', -0.5), G('clinics', 'beg', -0.4), GM),
+        (G('clinics', 'beg', -0.4), G('clinics', 'why', -0.4), AM),
+        (G('clinics', 'why', -0.4), W('clinics', 'looks', 'looks', -0.2), EM),
         (W('clinics', 'looks', 'looks', -0.2), G('clinics', 'autopsy', -0.2), B_),
         (G('clinics', 'autopsy', -0.2), W('clinics', 'autopsy', 'The midwives', -0.3), EM),
         (W('clinics', 'autopsy', 'The midwives', -0.3), G('clinics', 'wash', -0.3), C_),
         (G('clinics', 'wash', -0.3), reg, GM),
         (reg, W('clinics', 'fall', 'deaths', -0.2), C_),
         (W('clinics', 'fall', 'deaths', -0.2), W('clinics', 'fall', 'the level', -0.3), D_),
-        (W('clinics', 'fall', 'the level', -0.3), ward, GM),
+        (W('clinics', 'fall', 'the level', -0.3), G('clinics', 'home', -0.4), GM),
+        (G('clinics', 'home', -0.4), ward, [59, 62, 67]),  # the G opened out: its low G lifts an octave
         (ward, W('clinics', 'showed', 'It started', -0.3), EM),
         (W('clinics', 'showed', 'It started', -0.3), W('clinics', 'lesson', 'not where', -0.2), [60, 64, 67]),  # C, the G above: the bells bring the G below
         (W('clinics', 'lesson', 'not where', -0.2), G('clinics', 'breath', -0.4), D_),
@@ -267,10 +271,13 @@ mark(title + 0.55)
 for w, p in [(W('clinics', 'first', 'doctors', -0.3), 875), (W('clinics', 'second', 'midwives', -0.3), 1415), (W('clinics', 'looks', 'Ignaz'), 1370)]:
     knock(w + 0.06, 0.02, px(p), 260)
 come, mid = W('clinics', 'autopsy', 'come'), W('clinics', 'autopsy', 'midwives')
-for o, c, p in [(come - 0.9, come + 1.6, 295), (come + 1.5, come + 3.7, 875), (mid + 0.5, None, 1415)]:  # the last closes as the shot dissolves
+why, home = G('clinics', 'why'), G('clinics', 'home')
+# each door's latch as it opens and its knock as it lands shut; the second clinic's closes as the shot dissolves
+for o, c, p in [(why + 0.1, why + 2.6, 875), (come - 0.9, come + 1.6, 295), (come + 1.5, come + 3.7, 875), (mid + 0.5, None, 1415),
+                (home - 0.2, home + 1.8, 750)]:  # the last: the mother going home, the camera close on the door
     latch(o + 0.08, 0.016, px(p))
     if c:
-        shut(c - 0.05, 0.012, px(p))
+        shut(c + 0.32, 0.012, px(p))
 plunge(G('clinics', 'wash', -0.4) + 0.8, 0.018, px(640))  # the doctor at the basin by the first clinic's door
 plunge(hands + 0.95, 0.03, 0.0); rub(hands + 1.3, 1.3, 0.016)  # his hands, close, into the milky water, and rubbed
 for k, d in enumerate([0, 0.7, 1.4, 2.0, 2.6]):  # each month written into the register; after two, softer

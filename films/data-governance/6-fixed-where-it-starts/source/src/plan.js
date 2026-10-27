@@ -21,7 +21,9 @@ const FW_SKIN=[234,196,166],FW_RAW=[226,150,130];
 
 /* ---------- the people of 1847 ---------- */
 // doctors in dark frock coats, waistcoats and cravats (white coats came decades later), a student in a lighter coat, a midwife in a
-// dark dress, a white apron and a cap; all of them invented but Semmelweis, who wears what a young doctor wore
+// dark dress, a white apron and a cap; a porter in a grey-green coat, with the admissions book; a woman in labour, her hair in a bun
+// and a shawl round her shoulders, and a mother going home, in a linen cap; all of them invented but Semmelweis, who wears what a
+// young doctor wore
 Object.assign(PEOPLE,{
   semmelweis:{name:"Ignaz Semmelweis",role:"first clinic",side:"",edge:GV_PAST,seed:61,skin:FW_SKIN,hair:{style:"side",c:[92,66,46]},
     top:{kind:"frock",c:[44,46,58],vest:[104,90,74],inner:[246,244,238],tie:[30,28,34]},bottom:{c:[58,58,66]},shoe:[24,22,24],build:{sh:74,hip:60,h:1.0}},
@@ -32,11 +34,29 @@ Object.assign(PEOPLE,{
   student:{name:"",role:"student",side:"",edge:GV_PAST,seed:64,skin:[236,200,172],hair:{style:"cropped",c:[136,96,60]},
     top:{kind:"frock",c:[104,92,80],vest:[150,132,104],inner:[246,244,238],tie:[60,46,40]},bottom:{c:[90,84,80]},shoe:[40,32,28],build:{sh:72,hip:60,h:0.98}},
   midwife:{name:"",role:"midwife",side:"",edge:GV_PAST,seed:65,skin:[230,190,162],hair:{style:"cropped",c:[86,60,44]},hat:"coif",hatC:[246,244,238],
-    top:{kind:"gown",c:[72,62,76],inner:[240,236,228],apron:[246,244,236]},bottom:{c:[60,54,62]},shoe:[40,32,30],build:{sh:66,hip:62,h:0.95}}
+    top:{kind:"gown",c:[72,62,76],inner:[240,236,228],apron:[246,244,236]},bottom:{c:[60,54,62]},shoe:[40,32,30],build:{sh:66,hip:62,h:0.95}},
+  porter:{name:"",role:"porter",side:"",edge:GV_PAST,seed:66,skin:[226,184,154],hair:{style:"cropped",c:[156,150,144]},beard:[166,160,152],
+    top:{kind:"frock",c:[98,108,94],vest:[72,76,68],inner:[236,232,222],tie:[56,52,50]},bottom:{c:[80,82,76]},shoe:[36,30,28],build:{sh:76,hip:64,h:0.99}},
+  mother:{name:"",role:"mother",side:"",edge:GV_PAST,seed:67,skin:[232,194,166],hair:{style:"bun",c:[96,66,44]},
+    top:{kind:"gown",c:[86,100,124],inner:[232,226,212],cape:[132,94,80]},bottom:{c:[70,70,80]},shoe:[54,42,34],build:{sh:64,hip:66,h:0.94}},
+  mother2:{name:"",role:"mother",side:"",edge:GV_PAST,seed:68,skin:[218,176,146],hair:{style:"cropped",c:[60,44,34]},hat:"coif",hatC:[238,232,216],
+    top:{kind:"gown",c:[128,98,76],inner:[236,230,216],cape:[178,152,112]},bottom:{c:[80,70,64]},shoe:[54,42,34],build:{sh:64,hip:62,h:0.95}}
 });
-// a hand cupped at the basin, both hands rubbed together, and writing fast at a desk
+// a hand cupped at the basin, both hands rubbed together, and writing fast at a desk; hands clasped high, bowed a little, begging
 Object.assign(POSE,{fw_wash:{L:[0.3,-0.8],R:[0.3,-0.8],feet:22,shift:0,tilt:0.1,turn:0,gaze:[0,1],look:1},
-  fw_rub:{L:[0.3,-2.0],R:[0.3,-2.0],feet:24,shift:0,tilt:0.04,turn:0.05,gaze:[0.1,0.8],look:1}});
+  fw_rub:{L:[0.3,-2.0],R:[0.3,-2.0],feet:24,shift:0,tilt:0.04,turn:0.05,gaze:[0.1,0.8],look:1},
+  fw_beg:{L:[0.3,-2.4],R:[0.3,-2.4],feet:20,shift:0,tilt:0.12,turn:0.1,gaze:[0.5,-0.4],look:0}});
+// what they hold, in the figure's units: the porter's admissions book, bound in leather, in his hanging hand; a baby in its mother's
+// arms, swaddled in white linen, in a little cap, asleep, its head up by her shoulder (drawn behind her arms)
+function fw_ledger(cx,P_,hands){const [hx,hy]=hands[0];cx.save();cx.translate(hx-2,hy+46);cx.rotate(0.05);
+  cx.fillStyle=rgba([84,56,40],1);rr(cx,-34,-60,68,120,6);cx.fill();cx.fillStyle=rgba([230,220,194],1);cx.fillRect(28,-55,5,110);
+  cx.fillStyle=rgba([118,80,56],1);rr(cx,-34,-60,14,120,4);cx.fill();cx.restore();fingers(cx,P_,[[hx,hy]]);}
+function fw_baby(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2,lin=[246,242,232],sk=[240,206,182];cx.save();cx.translate(mx-6,my-42);cx.rotate(-0.6);
+  cx.beginPath();cx.ellipse(0,0,64,30,0,0,TAU);litFill(cx,lin,-64,-30,64,30);seam(cx,lin,0.4);
+  cx.strokeStyle=rgba([196,188,172],0.7);cx.lineWidth=2;cx.beginPath();cx.moveTo(-38,-24);cx.quadraticCurveTo(-8,0,-31,27);cx.moveTo(-8,-28);cx.quadraticCurveTo(18,0,4,28);cx.stroke();
+  cx.beginPath();cx.arc(46,-3,23,0,TAU);litFill(cx,sk,23,-26,69,20);seam(cx,sk,0.35);
+  cx.beginPath();cx.arc(46,-3,24,Math.PI*0.85,Math.PI*1.9);cx.lineTo(46,-3);cx.closePath();litFill(cx,lin,23,-28,71,-3);seam(cx,lin,0.3);
+  cx.strokeStyle=rgba([120,90,80],0.8);cx.lineWidth=1.8;for(const ex of [40,54]){cx.beginPath();cx.arc(ex,2,4,0.15*Math.PI,0.85*Math.PI);cx.stroke();}cx.restore();}
 
 /* ---------- 1847: the hospital's courtyard ---------- */
 // a long building of two storeys round a courtyard of lime trees: rows of tall windows, an arched gateway under a pediment, a lamp,

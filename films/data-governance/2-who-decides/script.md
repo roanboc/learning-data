@@ -60,9 +60,9 @@ Japan, the 1960s. On a car maker's engine line, any worker who finds a problem p
 
 ## Script
 
-The times are estimates from the draft's line lengths; the recorded voice sets them. Words on screen are on paper, boards, screens, tags and speech bubbles.
+The times are the recorded film's. Words on screen are on paper, boards, screens, tags and speech bubbles.
 
-### 1 · The cord · 0:00–0:51
+### 1 · The cord · 0:00–0:45
 
 **Narration.** Japan, the 1960s. A car maker's engine line moves on, past a row of workers. Any worker who finds a problem pulls a cord, or presses a button, within reach. A lamp lights on the andon, the board above the line, and the supervisor comes at once, to help. If it can't be fixed before the job is done, the line stops, and the team fixes it together. Every worker could stop the line, and they did. It was within reach, and it brought someone who could decide, at once. A right to decide about data needs the same.
 
@@ -70,7 +70,7 @@ The times are estimates from the draft's line lengths; the recorded voice sets t
 
 **On screen.** Japan · 1960s · 1 · 2 · 3 · 4 · 5 · 6 · 7 · 8 · Who decides · owners in the work, asked by name · Film 2 of 19 · data governance
 
-### 2 · To be confirmed · 0:51–1:25
+### 2 · To be confirmed · 0:45–1:17
 
 **Narration.** Today, Yusuf opens the binder called Who decides. Its policy says every area of data, like students or courses, has an owner and a steward. Its register lists eight areas. Three owners, and half the stewards, are still to be confirmed. So decisions are made in email, or not at all. How award maps to the government's definition has gone round a thread of twenty-three replies. Nobody has decided.
 
@@ -78,7 +78,7 @@ The times are estimates from the draft's line lengths; the recorded voice sets t
 
 **On screen.** Today · Who decides · policy 2 · Data policies · Policy 2 · Decision rights · 2.1 · Every critical data element has an accountable owner. · 2.2 · Every area of data has an owner and a steward. · students · courses · Register of owners and stewards · Who answers for each area · area · owner · steward · person · student · course · organisation · admissions · staff · research · fees · Registrar's office · Planning · Admissions office · HR · Research office · Finance · TBC · Inbox · Re: award in the government return · 23 replies · Clara · Does theirs count microcredentials? · Jun · Who signs this off? · Finance · Ask the registrar? · Mei · Can the council decide? · no decision
 
-### 3 · Already written · 1:25–2:03
+### 3 · Already written · 1:17–1:51
 
 **Narration.** Then he asks the data team who they ask, when a meaning isn't clear. Noor, the data architect, shows him the list on their board: who we ask, area by area. Every area has a name. For award, they ask Mei Tanaka, in the registrar's office. They wrote it down as they built, because they needed someone to ask. Yusuf takes each name to its office to confirm it, and asks for the names still missing.
 
@@ -86,7 +86,7 @@ The times are estimates from the draft's line lengths; the recorded voice sets t
 
 **On screen.** Who do you ask, when a meaning isn't clear? · Who we ask · when a meaning isn't clear · area · we ask · person · student · course · organisation · admissions · staff · research · fees · Registrar's office · Planning · Admissions office · HR · Graduate research school · Finance · award: Mei Tanaka, registrar's office · We needed someone to ask. · Registrar's office · Data governance · Data team · Platform team · Planning · Register of owners and stewards · Who answers for each area · owner · steward · TBC · Registrar's office · Graduate research school · Finance · Mei Tanaka · HR
 
-### 4 · Three roles · 2:03–2:40
+### 4 · Three roles · 1:51–2:25
 
 **Narration.** On the way, he sorts out three roles, whatever a policy calls them. The owner answers for what the data means. Mei decides what an award is. The steward keeps it right, day to day. Mei also decides whether two records are the same learner, and writes down why. One person can hold both roles. The custodian runs the platform it lives on. Sam's team can change any table, but doesn't decide what an award means.
 
@@ -94,7 +94,7 @@ The times are estimates from the draft's line lengths; the recorded voice sets t
 
 **On screen.** owner · steward · custodian · the names vary from one policy to the next · Glossary · award · owner: Mei Tanaka · answers for what it means · keeps it right, day to day · person · Log book · person area · October 2026 · Same learner? · when · same learner? · decided by · why · 6 Oct · 7 Oct · same · different · Mei Tanaka · One email, two learners: Linh confirmed the course was hers. · Daniel Kim used his work email, and gave his student ID. · Two Aishas: one's ID was typed on the other's account. · Look-alikes on the same course, the same day: two people. · Tables · awards · credentials · learners · enrolments · Platform · runs the platform · Sam's team · What award means? Ask Mei.
 
-### 5 · Who decides what · 2:40–3:10
+### 5 · Who decides what · 2:25–2:54
 
 **Narration.** Each area decides what its own words mean. Governance sets only the few rules they all share, such as one glossary, and one way to classify data. When two areas disagree, or someone needs an exception, the council decides, by its next meeting. If it can't agree, the deputy vice-chancellor decides. Everything else, the owner decides, where the work is.
 
@@ -102,7 +102,7 @@ The times are estimates from the draft's line lengths; the recorded voice sets t
 
 **On screen.** person · student · course · organisation · admissions · staff · research · fees · Registrar's office · Planning · Admissions office · HR · Graduate research school · Finance · shared by every area · one glossary · one way to classify data · the council decides: · conflicts · exceptions · by the next meeting · if it can't agree: · the deputy vice-chancellor · deputy vice-chancellor
 
-### 6 · Required · 3:10–3:46
+### 6 · Required · 2:54–3:26
 
 **Narration.** Then Yusuf and Noor make the owner required. Anything new that other teams will read has a sign-off sheet. One line on it is never left blank: who answers for what it means. Jun's new report for Planning comes back with that line empty, and a note saying what to add. He asks Planning. Clara Jensen will answer for it, and signs. The council's oldest action, name the data owners, is closed.
 
@@ -110,7 +110,7 @@ The times are estimates from the draft's line lengths; the recorded voice sets t
 
 **On screen.** owner: required · Sign-off sheet · For anything other teams will read · What it is · Made by · Read by · Who answers for what it means · Signed · Completions for Planning · Who completed, each term · Jun Park, data team · Planning and the faculties · No owner: add who answers for what it means. · SENT BACK · Will you answer for what it means? · I will. · Clara Jensen, Planning · Clara Jensen · SIGNED · Data council · minutes · June 2026 · July 2026 · August 2026 · September 2026 · Action: name the data owners · CARRIED FORWARD · DONE
 
-### 7 · Asked by name · 3:46–4:22
+### 7 · Asked by name · 3:26–4:00
 
 **Narration.** Next, every change request gets a routing slip, filled in from the register. Yusuf keeps the register: change a name there, and every slip follows. Jun's next change request maps award to the government's definition. Its slip sends it to Mei, by name, then to Noor and Yusuf. Nobody had to remember to. Like the cord on the line: the work calls the person who decides, at the moment it matters.
 
@@ -118,7 +118,7 @@ The times are estimates from the draft's line lengths; the recorded voice sets t
 
 **On screen.** Change request · Jun Park, data team · Add offer dates to the admissions report · area: admissions · Routing slip · 1 · 2 · 3 · Admissions office · Noor Rahman · Yusuf Demir · the register as chapter 3 left it, too small to read here but for · kept by Yusuf Demir · Leila Haddad · Map award to the government's definition · area: course · Mei Tanaka · her log book and the decision book, too small to read · 4 · 5 · 6 · 7 · Student records
 
-### 8 · Where the work is · 4:22–4:52
+### 8 · Where the work is · 4:00–4:26
 
 **Narration.** When Mei decides, her decision is written down where the work is: what, who, when and why. She already keeps a log book of which records are the same learner. The mapping will go in the course area's decision book. Each area keeps its own, so the next person can find why. Not in an email thread nobody can find.
 
@@ -126,7 +126,7 @@ The times are estimates from the draft's line lengths; the recorded voice sets t
 
 **On screen.** Student records · what · who · when · why · person · Log book · person area · October 2026 · Same learner? · same learner? · decided by · 6 Oct · 7 Oct · same · different · Mei Tanaka · the four reasons, as in chapter 4 · course · Decision book · course area · Course decisions · An award counts from the day it's conferred. · 14 March 2026 · Ceremonies move; the day it's conferred doesn't. · How award maps to the government's definition · Inbox · Re: award in the government return · 23 replies
 
-### 9 · Time to answer · 4:52–5:25
+### 9 · Time to answer · 4:26–4:56
 
 **Narration.** Mei didn't ask to be an owner. She was named because she always answered. So Yusuf asks her manager for the time it takes: two hours a week. He keeps her scope small and clear: award, not every word her office uses. And she has someone to ask: Yusuf, or the council, when owners disagree. A role without time is a name in a spreadsheet.
 
@@ -134,7 +134,7 @@ The times are estimates from the draft's line lengths; the recorded voice sets t
 
 **On screen.** Student records · Mei, does this count as an award? · Mei, which award code is it? · Mei, are these the same student? · October 2026 · Mon · Tue · Wed · Thu · Fri · Sat · Sun · 1 to 31 · owner · 2 h · Mei's time · 2 h a week · Mei owns · award · enrolment · census date · unit · credit point · Mei asks · Yusuf · the council · element · owner · Mei Tanaka
 
-### 10 · Which award? · 5:25–5:58
+### 10 · Which award? · 4:56–5:25
 
 **Narration.** On the line, the cord brought someone who could decide. Here, every change asks its owner. A decision right is real when the work asks for it. Then Mei opens Jun's change request, and asks a question nobody expected. Which award does she own? She has found it defined in five places, and they don't agree.
 

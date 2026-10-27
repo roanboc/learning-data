@@ -219,7 +219,7 @@ bed([(S0(J), D5), (G(J, 'steps', -0.4), DM), (G(J, 'skipped', -0.4), GM7), (G(J,
      (G(J, 'y2008', -0.4), CSUS), (G(J, 'pause', -0.4), D5),
      (G(J, 'hold', -0.4), ASUS), (G(J, 'fell', -0.4), FMAJ9), (G(J, 'worked', -0.4), BBMAJ9), (W(J, 'three', 'someone', -0.3), FMAJ9),
      (close, FOPEN)], first('shelf'), 0.03, 1.5, 3.0)
-KNEW = [660, 580, 1450]  # where each step's note is, across the frame (OS_KNEW)
+KNEW = [700, 580, 1450]  # where each step's note is, across the frame (OS_KNEW)
 for word, off, x in zip(['right', 'antibiotic', 'sponge'], [-0.1, -0.15, -0.15], KNEW):
     tap(W(J, 'steps', word, off + 0.1), 0.016, P(x))
 slide(W(J, 'skipped', 'written', -0.2), 0.022, P(650), 0.6)
@@ -261,9 +261,9 @@ comb(65, W(J, 'census', 'four', -0.1), 0.05, -0.3)
 comb(69, W(J, 'draft', 'four', -0.1), 0.05, 0.3)
 ask(G(J, 'which')); knock(G(J, 'which'), 0.026, 0.0, 200)
 # 4. Who decides? The turn on C, open, as the question rings. The two numbers' notes together, a third apart, as both are right; the chip and the new row on
-#    the glossary; a pin for Monday's card; knocks for the two definitions; air as the arc is drawn, and the question; three notes
-#    that don't resolve for three answers; the TBC stamp; and the operating room before the checklist, a pencil's tap as each one's
-#    step is named, and the question no one can answer yet, where no one checks them all
+#    the glossary; a pin for Monday's card; knocks for the two definitions; air as the arc is drawn; a knock as Jun reaches Yusuf's
+#    office, and the question; three notes that don't resolve for three answers; the TBC stamp; and the operating room before the
+#    checklist, a pencil's tap as each one's step is named, and the question no one can answer yet, where no one checks them all
 J = 'decides'
 turn(J, CSUS)
 right = W(J, 'both', 'right')
@@ -271,8 +271,9 @@ comb(65, right, 0.045, -0.2); comb(69, right + 0.08, 0.045, 0.3)
 knock(W(J, 'monday', 'the word', 0.08), 0.024, 0.3, 320)
 tap(W(J, 'monday', 'microcredentials', 0.0), 0.02, 0.2)
 pin(G(J, 'before', 0.0), 0.03, 0.0)
-knock(G(J, 'gov', 0.2), 0.026, -0.3); knock(W(J, 'gov', 'ours', 0.0), 0.026, 0.3, 280)
-air(W(J, 'gov', 'Who'), 0.9, 0.018, 0.0); ask(W(J, 'gov', 'Who', 0.6))
+knock(G(J, 'gov', 0.2), 0.026, -0.3); knock(W(J, 'gov', 'which', 0.0), 0.026, 0.3, 280)
+air(W(J, 'gov', 'which'), 0.9, 0.018, 0.0)
+knock(W(J, 'ask', 'takes', 0.5), 0.024, 0.15, 260); ask(W(J, 'ask', 'who', 0.05))
 for k, word in enumerate(['Mei', 'Jun', 'Planning']):
     comb([69, 67, 64][k], W(J, 'answers', word, -0.1), 0.045, [-0.5, 0.5, 0.0][k])
 rubber(W(J, 'tbc', 'to be', -0.07), 0.05)

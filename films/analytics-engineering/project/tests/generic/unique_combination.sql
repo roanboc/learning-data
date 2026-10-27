@@ -3,6 +3,7 @@
     Fails with one row per combination that appears more than once.
 -#}
 {% test unique_combination(model, columns) %}
+    {{ config(meta={'dimension': 'uniqueness'}) }}
 
 select
     {{ columns | join(', ') }},

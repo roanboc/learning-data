@@ -44,3 +44,21 @@ decisions:
     implemented_in: [int_credentials_unioned]
     relates_to: [DEC-STU-02]
     was: GAP-SC-03
+
+  - id: DEC-SC-04
+    step: operate_and_evolve
+    title: Emails are checked where they're typed, from 2 November 2026
+    text: 'From 2 November 2026 the short-course platform trims each email, writes it in lower case and
+      checks its shape where it''s typed: the sign-up form and the enrolment form. A test on the source,
+      entered_clean, fails on any email recorded since then that isn''t. Staging still trims and lower-cases
+      the emails recorded before, until the learning team corrects them (REQ-SC-01); then the clean-up in
+      staging goes, and the test checks every row.'
+    why: For a year staging cleaned the same spaces and capitals every night, and every other system that
+      read the platform had to clean them again. Fixed where the email is typed, it's right for everyone,
+      and a test that should never fail says if it ever stops being.
+    decided_by: Learning team, with data governance
+    decided_on: 2026-10-20
+    status: agreed
+    evidence: [analyses/profiling/profile_emails_as_typed.sql]
+    implemented_in: [entered_clean]
+    relates_to: [DEC-SC-02]

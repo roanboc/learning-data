@@ -28,7 +28,8 @@ function fw_ghost(ctx,a,fn){if(a<=0.01)return;if(a>=0.99){fn(ctx);return;}const 
 // a face between two expressions
 function fw_face(a,b,m){const A=EXPR[a],B=EXPR[b];if(m<=0)return A;if(m>=1)return B;const o={};new Set([...Object.keys(A),...Object.keys(B)]).forEach(k=>o[k]=lerp(A[k]||0,B[k]||0,m));return o;}
 
-// ---- 1 · Two clinics: Vienna, 1847; the fever shows in the beds, and starts on the doctors' hands on their way in ----
+// ---- 1 · Two clinics: Vienna, 1847; women beg not to be sent to the first clinic; the fever shows in the beds, and starts on the
+// doctors' hands on their way in; washed off there, and mothers go home ----
 // people in the corridor walk at FW_WK.y, at FW_WK.s; someone walks from one door to another, coming out of the first and going in at
 // the second, and turns the way they go
 const FW_WK={y:906,s:0.62,v:230};
@@ -38,23 +39,37 @@ function fw_goes(ctx,id,t,t0,x0,x1,o){o=o||{};const w=gv_walk(t,t0,x0,x1,o.v||FW
 const FW_PL={first:[875,290],second:[1415,290],autopsy:[295,322],rate:190};
 
 scene("clinics",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({cr:c.first-0.7,firstC:wAt(sc,"first","doctors")-0.3,firstR:wAt(sc,"first","one mother")-0.1,
-    secondC:wAt(sc,"second","midwives")-0.3,secondR:wAt(sc,"second","one in thirty")-0.1,walk:c.second+0.7,ign:wAt(sc,"looks","Ignaz"),lookL:wAt(sc,"looks","looks")-0.1,
+    secondC:wAt(sc,"second","midwives")-0.3,secondR:wAt(sc,"second","one in thirty")-0.1,bg:c.beg,begW:wAt(sc,"beg","beg"),why:c.why,
+    walk:c.looks-3.1,ign:wAt(sc,"looks","Ignaz"),lookL:wAt(sc,"looks","looks")-0.1,
     lookR:wAt(sc,"looks","different"),come:wAt(sc,"autopsy","come"),aut:wAt(sc,"autopsy","autopsy"),mid:wAt(sc,"autopsy","midwives"),
-    basin:c.wash-0.4,lime:wAt(sc,"wash","chlorinated"),hands:wAt(sc,"wash","before")-0.2,reg:c.fall-0.5,level:wAt(sc,"fall","the level"),
+    basin:c.wash-0.4,lime:wAt(sc,"wash","chlorinated"),hands:wAt(sc,"wash","before")-0.2,reg:c.fall-0.5,level:wAt(sc,"fall","the level"),home:c.home-0.4,
     ward:c.showed-0.5,shows:wAt(sc,"showed","showed"),started:wAt(sc,"showed","It started"),hd:wAt(sc,"showed","hands"),lesson:c.lesson-0.2,
     dip:c.lesson+2.9,title:c.breath+0.7}));
   gv_shots(ctx,S,t,sc.dur,[
     // the general hospital's courtyard: a long building round a courtyard of lime trees
     {at:0,place:"court",keys:[[0,960,540,1],[0.2,960,520,1.06]],d:5.5,push:0.01},
-    // the maternity corridor: the two clinics' doors, each named as the voice names it, and its deaths over it; Semmelweis walks in
-    // and looks from one door to the other; doctors and a student come out of the autopsy room and go straight in at the first clinic,
-    // and a midwife comes from the far end to the second
-    {at:P.cr,place:"corridor",keys:[[P.cr,960,540,1],[P.ign-0.6,1030,560,1.08],[P.come-0.9,960,540,1]],d:1.8,push:0.015,draw:(x,tt)=>{const D=FW_CR;
-      fw_doorOpen(x,0,gv_io(tt,P.come-0.9,P.come+1.6,0.4),[40,34,32]);fw_doorOpen(x,1,gv_io(tt,P.come+1.5,P.come+3.7,0.4),[236,224,196]);
+    // the maternity corridor: the two clinics' doors, each named as the voice names it, and its deaths over it; a woman in labour,
+    // brought to the first clinic on its day, begs the porter not to send her in, and goes in; Semmelweis walks in and looks from one
+    // door to the other; doctors and a student come out of the autopsy room and go straight in at the first clinic, and a midwife comes
+    // from the far end to the second
+    {at:P.cr,place:"corridor",keys:[[P.cr,960,540,1],[P.bg-0.9,900,560,1.2],[P.why+1.0,960,540,1],[P.ign-0.6,1030,560,1.08],[P.come-0.9,960,540,1]],d:1.8,push:0.015,
+      draw:(x,tt)=>{const D=FW_CR;
+      fw_doorOpen(x,0,gv_io(tt,P.come-0.9,P.come+1.6,0.4),[40,34,32]);
+      fw_doorOpen(x,1,Math.max(gv_io(tt,P.why+0.1,P.why+2.6,0.4),gv_io(tt,P.come+1.5,P.come+3.7,0.4)),[236,224,196]);
       fw_doorOpen(x,2,gv_io(tt,P.mid+0.5,P.mid+2.1,0.4),[236,224,196]);
       fw_plate(x,tt,P.firstC,null,...FW_PL.first,["first clinic","doctors and students"]);fw_plate(x,tt,P.secondC,null,...FW_PL.second,["second clinic","midwives"]);
       fw_tagAt(x,tt,P.firstR,null,FW_PL.first[0],FW_PL.rate,"about 1 mother in 10");fw_tagAt(x,tt,P.secondR,null,FW_PL.second[0],FW_PL.rate,"about 1 in 30");
       fw_tagAt(x,tt,P.aut-0.1,null,...FW_PL.autopsy,"autopsy room",{size:28});
+      // the woman comes from the far end and the porter from the near one, to the first clinic's door; she clasps her hands and begs
+      // him, and he points to the door; it opens, he goes in with his book, and she follows him, slowly
+      const inP=tt>=P.why+0.3,wp=inP?gv_walk(tt,P.why+0.3,690,860,200):gv_walk(tt,P.bg-1.0,420,690,300),
+        ap=fin(tt,P.bg-1.15,0.35)*(inP?1-fin(tt,wp.end-0.25,0.4):1);
+      if(ap>0.01)fw_ghost(x,ap,q=>gv_walker(q,"porter",wp,FW_WK.y,FW_WK.s,Object.assign({t:tt,carry:fw_ledger},
+        wp.moving?{}:{pose:"stand",pose2:"point",mix:inP?0:gv_io(tt,P.begW+0.5,P.why-0.3,0.4),flip:false})));
+      const inW=tt>=P.why+1.0,wm=inW?gv_walk(tt,P.why+1.0,1080,875,160):gv_walk(tt,P.bg-1.0,1700,1080,280),
+        am=fin(tt,P.bg-1.15,0.35)*(inW?1-fin(tt,wm.end-0.25,0.4):1);
+      if(am>0.01)fw_ghost(x,am,q=>gv_walker(q,"mother",wm,FW_WK.y,FW_WK.s,Object.assign({t:tt,expr:"worried"},
+        wm.moving?{}:{pose:"stand",pose2:"fw_beg",mix:inW?0:gv_io(tt,P.begW-0.3,P.why+0.2,0.5),flip:true})));
       // Semmelweis: walks in, looks at the first clinic's door, then the second's, then watches the doctors come
       const w=gv_walk(tt,P.walk,-80,1150,300),look=tt<P.lookR?1:tt<P.come-0.5?0:1;
       gv_walker(x,"semmelweis",w,FW_WK.y,FW_WK.s,{t:tt,pose:w.moving?null:"listen",flip:w.moving?false:look===1&&tt>=P.lookL});
@@ -73,6 +88,13 @@ scene("clinics",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({cr:c.first
     // clinic's level, dashed
     {at:P.reg,place:"register",keys:[[P.reg,960,560,1],[P.reg+0.1,940,580,1.04]],d:3,push:0.01,draw:(x,tt)=>
       fw_register(x,k=>clamp((tt-P.reg-0.3-[0,0.7,1.4,2.0,2.6][k])/0.9,0,1),clamp((tt-P.level+0.2)/1.0,0,1),fin(tt,P.reg+0.1,0.8))},
+    // the corridor again, the basin by the first clinic's door: the door opens, and a mother comes out with her baby in her arms and
+    // walks slowly towards the far end
+    {at:P.home,place:"corridor",keys:[[P.home,1060,600,1.15],[P.home+0.1,1080,600,1.18]],d:3,push:0.01,draw:(x,tt)=>{
+      fw_doorOpen(x,1,gv_io(tt,P.home+0.2,P.home+2.2,0.4),[236,224,196]);fw_basin(x,FW_CR.basin,880,1.0,1);
+      fw_plate(x,tt,-9,null,...FW_PL.first,["first clinic","doctors and students"]);fw_plate(x,tt,-9,null,...FW_PL.second,["second clinic","midwives"]);
+      const w=gv_walk(tt,P.home+0.5,875,1250,150),a=fin(tt,P.home+0.35,0.4);
+      if(a>0.01)fw_ghost(x,a,q=>gv_walker(q,"mother2",w,FW_WK.y,FW_WK.s,{t:tt,pose:"hold",carry:fw_baby,carryBehind:true,expr:"smile"}));}},
     // the first clinic's ward: the fever showed in the beds; the camera goes to the door from the corridor, where a doctor comes in
     // and washes: it started there; then both, wide, for the lesson
     {at:P.ward,place:"ward",keys:[[P.ward,960,540,1],[P.started-0.3,1280,560,1.5],[P.lesson,960,540,1]],d:1.6,push:0,draw:(x,tt)=>{const D=FW_WD,

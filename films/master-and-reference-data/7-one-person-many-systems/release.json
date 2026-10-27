@@ -1,0 +1,15 @@
+[
+  {
+    "name": "One person, many systems",
+    "key": "one-person-many-systems-en",
+    "dir": "films/master-and-reference-data/7-one-person-many-systems/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/one-person-many-systems/film.js",
+    "video": "dist/one-person-many-systems.mp4",
+    "file": "one-person-many-systems.mp4",
+    "captions": [["films/master-and-reference-data/7-one-person-many-systems/captions/en.srt", "one-person-many-systems.en.srt"], ["films/master-and-reference-data/7-one-person-many-systems/captions/es.srt", "one-person-many-systems.es.srt"]],
+    "paths": ["films/master-and-reference-data/7-one-person-many-systems/source", ":(exclude)films/master-and-reference-data/7-one-person-many-systems/source/src/i18n/es/captions.js", "films/master-and-reference-data/shared", "films/enterprise-architecture/shared", "films/analytics-engineering/shared", "films/from-words-to-data/shared", "films/from-words-to-data/7-keeping-it-true/source/src/true.js", "films/when-things-go-wrong/characters", "films/when-things-go-wrong/1-silent-change/source/src", "films/a-sharper-sketch/source/src", "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts"],
+    "legibility": {"texts": 193, "under_28": "0%", "under_20": 0, "median": 29.1, "status": "Drawn to the rule"}
+  }
+]

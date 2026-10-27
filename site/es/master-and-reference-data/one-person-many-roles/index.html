@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Una persona, muchos roles · El mismo, en todas partes · Learning Data</title>
 <meta name="description" content="Una película sobre datos maestros y de referencia: una persona guardada como cinco registros en cuatro sistemas, con dos números de estudiante; los tipos de datos; un modelo con un estudiante pero sin persona; la persona separada de sus roles, sus puntos de contacto y sus identificadores; quién mantiene cada dato; el mismo patrón en un hospital, un banco y una empresa de energía; las cuatro formas de mantener datos maestros según DAMA; y cuatro preguntas que dicen qué hay que gestionar como dato maestro.">
-<meta property="og:title" content="Una persona, muchos roles · El mismo, en todas partes · Learning Data"><meta property="og:description" content="Una persona, cuatro sistemas, cinco registros. Separa a la persona de sus roles, y haz cuatro preguntas para saber qué es un dato maestro."><meta property="og:image" content="https://roanboc.github.io/learning-data/assets/one-person-many-roles-poster.jpg"><meta property="og:locale" content="es_419">
-<link rel="alternate" hreflang="en" href="https://roanboc.github.io/learning-data/master-and-reference-data/one-person-many-roles/"><link rel="alternate" hreflang="es" href="https://roanboc.github.io/learning-data/es/master-and-reference-data/one-person-many-roles/">
+<meta property="og:title" content="Una persona, muchos roles · El mismo, en todas partes · Learning Data"><meta property="og:description" content="Una persona, cuatro sistemas, cinco registros. Separa a la persona de sus roles, y haz cuatro preguntas para saber qué es un dato maestro."><meta property="og:image" content="https://data.learn-all.org/assets/one-person-many-roles-poster.jpg"><meta property="og:locale" content="es_419">
+<link rel="alternate" hreflang="en" href="https://data.learn-all.org/master-and-reference-data/one-person-many-roles/"><link rel="alternate" hreflang="es" href="https://data.learn-all.org/es/master-and-reference-data/one-person-many-roles/">
 <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
@@ -25,14 +25,14 @@
 </section>
 <section class="module" id="watch" data-store="ld-one-person-many-roles" aria-labelledby="watch-h">
 <div class="mhead"><div><h2 id="watch-h">Mira la película</h2><p>Presiona Reproducir, o salta a un capítulo. Activa <b>Pausa para pensar</b> y la película se detiene con una pregunta al final de los capítulos.</p></div></div>
-<div class="player" data-labs="">
+<div class="player" data-labs="../labs/">
 <audio id="snd" preload="metadata" src="../../../assets/one-person-many-roles/soundtrack.mp3"></audio><div class="poster"><img src="../../../assets/one-person-many-roles-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Ver la película · 6 min</button><button type="button" class="think-badge" data-think>Ver con pausas para pensar</button></div></div><canvas id="film" width="1280" height="720" aria-label="Película animada, en inglés: One person, many roles"></canvas>
 <div class="bar"><button id="play">Reproducir</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="time">0:00</span><button id="think" aria-pressed="false" title="Detenerse al final de cuatro capítulos, con una pregunta cada vez">Pausa para pensar</button><button id="cc" class="on" aria-pressed="true">Subtítulos</button><button id="fs">Pantalla completa</button></div>
 </div>
 <div class="chapters" id="chapters" aria-label="Capítulos"></div>
 <p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/one-person-many-roles.mp4">Descargar el video (en inglés)</a><a href="https://github.com/roanboc/learning-data/tree/main/films/master-and-reference-data/1-one-person-many-roles/captions">Archivos de subtítulos</a><a href="https://github.com/roanboc/learning-data/blob/main/films/master-and-reference-data/1-one-person-many-roles/script.md" hreflang="en">Leer el guion (en inglés)</a></p>
-<template id="next-panel"><div class="think-card"><p class="think-k">¿Y ahora?</p><h3>Conociste a la persona detrás de los roles. Vienen más películas de la serie.</h3>
-<div class="next-opts"><a class="btn primary" href="#think-it-through">Piénsalo: 4 preguntas</a><a class="btn" href="../">Toda la serie: El mismo, en todas partes</a></div>
+<template id="next-panel"><div class="think-card"><p class="think-k">¿Y ahora?</p><h3>Conociste a la persona detrás de los roles.</h3>
+<div class="next-opts"><a class="btn primary" href="../labs/#kinds">Desarma: Cuatro tipos de datos →</a><a class="btn" href="../scenarios/#film-1">Tú decides: 8 situaciones</a><a class="btn" href="../who-is-it/">Sigue en la serie: ¿Quién es?</a></div>
 <div class="think-foot"><button type="button" class="btn" data-again>Ver de nuevo</button></div></div></template>
 </section>
 
@@ -41,18 +41,39 @@
 <div id="think-list"></div>
 </section>
 
+<section class="module" id="take-it-apart" aria-labelledby="take-h">
+<div class="mhead"><div><h2 id="take-h">Desarma, y luego tú decides</h2><p>Los labs de esta película, y sus situaciones, entre los 29 labs y las 72 situaciones de la serie. Tu avance queda en este navegador.</p></div></div>
+<p class="stop-nav"><a class="btn primary" href="../labs/#kinds">Desarma: Cuatro tipos de datos →</a><a class="btn" href="../labs/#apart">Desarma: Cuatro cosas, separadas</a><a class="btn" href="../labs/#keeps">Desarma: Quién mantiene qué</a><a class="btn" href="../labs/#master_it">Desarma: ¿Dato maestro o no?</a><a class="btn" href="../scenarios/#film-1">Tú decides: 8 situaciones</a><a class="btn" href="../labs/">Todos los labs</a></p>
+</section>
+
 <section class="module" id="in-the-series" aria-labelledby="series-h">
 <div class="mhead"><div><h2 id="series-h">En la serie: <a href="../">El mismo, en todas partes</a></h2><p>Película 1 de 9.</p></div></div>
 <div class="topic-grid series-pn" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}'>
-
+<article class="topic-card">
+<img src="../../../assets/who-is-it-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Siguiente · Película 2 de 9 →</p>
+<h3><a href="../who-is-it/">¿Quién es?</a></h3>
+<p>¿Dos registros, una persona? Una búsqueda propone pares, los pesos dan una puntuación, y una encargada decide los difíciles una vez, con un motivo.</p>
+<p class="meta">5½ min · Pausa para pensar · El mismo, en todas partes · En inglés</p>
+<p class="tc-progress" data-progress="ld-who-is-it" hidden></p>
+</div>
+</article>
 </div>
 <ol class="series-list" aria-label="Todas las películas de la serie">
 <li><a href="../one-person-many-roles/" aria-current="page"><span class="n">1</span>Una persona, muchos roles</a></li>
+<li><a href="../who-is-it/"><span class="n">2</span>¿Quién es?</a></li>
+<li><a href="../which-value-wins/"><span class="n">3</span>Qué valor gana</a></li>
+<li><a href="../roles-come-and-go/"><span class="n">4</span>Los roles van y vienen</a></li>
 <li><a href="../lists-everyone-uses/"><span class="n">5</span>Listas que todos usan</a></li>
+<li><a href="../for-this-purpose-only/"><span class="n">6</span>Solo para este propósito</a></li>
+<li><a href="../one-person-many-systems/"><span class="n">7</span>Una persona, muchos sistemas</a></li>
+<li><a href="../a-hub-at-work/"><span class="n">8</span>Un hub en marcha</a></li>
+<li><a href="../kept-not-cleaned/"><span class="n">9</span>Mantenido, no limpiado</a></li>
 </ol>
 </section>
 </main>
-<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. DAMA y DAMA-DMBOK son marcas de DAMA International, y ArchiMate de The Open Group, nombradas o dibujadas solo para identificar ese cuerpo de conocimiento y esa notación. LakeFusion es un nombre de producto de su titular, nombrado solo como un ejemplo de hub de datos maestros. Este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. DAMA y DAMA-DMBOK son marcas de DAMA International, y ArchiMate de The Open Group, nombradas o dibujadas solo para identificar ese cuerpo de conocimiento y esa notación. Este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
 <script>window.L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla completa",fsExit:"Salir de pantalla completa"}};</script>
 <script src="../../../assets/one-person-many-roles/captions.es.js"></script>
 <script src="../../../assets/one-person-many-roles/film.js"></script>

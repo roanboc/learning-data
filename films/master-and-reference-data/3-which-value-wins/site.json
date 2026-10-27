@@ -1,0 +1,29 @@
+{
+  "kicker": "Survivorship: a rule declared for each field",
+  "kicker_es": "Supervivencia: una regla declarada para cada campo",
+  "title_es": "Qué valor gana",
+  "h1": "Which value wins: a rule for each field, declared in one place, not hidden in the code",
+  "h1_es": "Qué valor gana: una regla para cada campo, declarada en un solo lugar, no escondida en el código",
+  "lead": "In 1831, HMS Beagle sailed with twenty-two clocks, and which ones to trust was decided before they could disagree. At the university, Linh's five records are now linked to one person, and their values still disagree: four ways of writing her name, two birth dates, two mobile numbers, four emails. The model already picks one, with a single order for every field, hidden in the code, and letting the newest value win would hand her record to HR's resent file, typo and all. Jun writes a rule for each field in one place, where the steps that build her record read them: on a master data tool's screens or, in the simplest form, in a file. Mei pins the right birth date with a reason, and every value keeps its source, its rule and its age.",
+  "lead_es": "En 1831, el HMS Beagle zarpó con veintidós relojes, y en cuáles confiar se decidió antes de que pudieran discrepar. En la universidad, los cinco registros de Linh ya están vinculados a una sola persona, y sus valores aún no coinciden: cuatro formas de escribir su nombre, dos fechas de nacimiento, dos números de celular, cuatro correos. El modelo ya elige uno, con un solo orden para todos los campos, escondido en el código, y dejar que gane el valor más nuevo le entregaría su registro al archivo que RR. HH. reenvía, con errata y todo. Jun escribe una regla para cada campo en un solo lugar, donde las leen los pasos que arman su registro: en las pantallas de una herramienta de datos maestros o, en su forma más simple, en un archivo. Mei fija la fecha de nacimiento correcta con un motivo, y cada valor guarda su fuente, su regla y su antigüedad.",
+  "description": "A film about survivorship in master data: HMS Beagle's twenty-two chronometers, and the standards chosen before they disagree; one person's linked records, still disagreeing; one source order for every field, hidden in the code; why the newest value isn't the truest; a legal name and a preferred name, both kept; a rule for each field, written down in one place, with a steward's pin and a fallback order, set on a master data tool's screens or kept, in the simplest form, in a file the code and the tests are written from; four emails kept as contact points, each with its purpose; every value with its source, its rule and its age; a rule change seen in a dry run before it runs; and the same question at a bank and a shop.",
+  "description_es": "Una película sobre la supervivencia en los datos maestros: los veintidós cronómetros del HMS Beagle, y los patrones elegidos antes de que discrepen; los registros vinculados de una persona, que aún no coinciden; un solo orden de fuentes para todos los campos, escondido en el código; por qué el valor más nuevo no es el más cierto; un nombre legal y un nombre preferido, los dos guardados; una regla para cada campo, escrita en un solo lugar, con un valor fijado a mano, con su motivo, y un orden de respaldo, fijada en las pantallas de una herramienta de datos maestros o guardada, en su forma más simple, en un archivo del que se escriben el código y las pruebas; cuatro correos guardados como puntos de contacto, cada uno con su propósito; cada valor con su fuente, su regla y su antigüedad; un cambio de regla visto en una simulación antes de aplicarlo; y la misma pregunta en un banco y una tienda.",
+  "card": "Five linked records, and the values still disagree. Declare a rule for each field, not one order hidden in the code.",
+  "card_es": "Cinco registros vinculados, y los valores aún no coinciden. Declara una regla para cada campo, no un orden escondido en el código.",
+  "chapters_es": {
+    "clocks": "Veintidós relojes",
+    "linked": "Vinculados, y aún distintos",
+    "hidden": "Un orden, escondido en el código",
+    "names": "Dos nombres, los dos suyos",
+    "rules": "Una regla para cada campo",
+    "emails": "Cuatro correos, cada uno para algo",
+    "sources": "Cada valor, con su fuente",
+    "dryrun": "Verlo antes de que cambie",
+    "elsewhere": "En otros lugares",
+    "home": "Treinta y tres segundos"
+  },
+  "next_h": "You've given each field its own rule, declared and tested.",
+  "next_h_es": "Le diste a cada campo su propia regla, declarada y probada.",
+  "past": ["HMS Beagle's twenty-two chronometers, 1831 to 1836", "Which clock to trust is decided before the clocks disagree."],
+  "past_es": ["Los veintidós cronómetros del HMS Beagle, de 1831 a 1836", "En qué reloj confiar se decide antes de que los relojes discrepen."]
+}

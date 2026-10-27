@@ -1,0 +1,15 @@
+[
+  {
+    "name": "That's not quite right",
+    "key": "thats-not-quite-right-en",
+    "dir": "films/making-of/2-the-process/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/making-of/thats-not-quite-right.js",
+    "video": "dist/thats-not-quite-right.mp4",
+    "file": "thats-not-quite-right.mp4",
+    "captions": [["films/making-of/2-the-process/captions/en.srt", "thats-not-quite-right.en.srt"], ["films/making-of/2-the-process/captions/es.srt", "thats-not-quite-right.es.srt"]],
+    "paths": ["films/making-of/2-the-process/source", ":(exclude)films/making-of/2-the-process/source/src/i18n/es/captions.js", "films/from-words-to-data/shared/src/phone.js", "films/making-of/1-data-for-films/source/src", "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts"],
+    "legibility": {"texts": 146, "under_28": "0%", "under_20": 0, "median": 28, "status": "Reworked"}
+  }
+]

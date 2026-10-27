@@ -7,8 +7,8 @@ It only reads files: no browser and no network (site-tools/smoke.py does the bro
 It prints what each check found, and exits with 1 if anything fails.
 
 What it checks, page by page (every .html under site/):
-- links: every local href and src resolves to a file (a folder means its index.html; /learning-data/... and
-  https://roanboc.github.io/learning-data/... map to site/), every #id exists on its target page (except #t=,
+- links: every local href and src resolves to a file (a folder means its index.html; /... and
+  https://data.learn-all.org/... map to site/), every #id exists on its target page (except #t=,
   and the lab and old home hashes that scripts read), GitHub blob/tree links name a file in this repo, and
   download links name a file the release workflow publishes. Links inside the "Pause and think" packs count too.
 - header: Start here, Topics, Making of, then EN and ES, with the right targets and the right current page.
@@ -36,9 +36,9 @@ from collections import Counter, defaultdict
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 WEB = ROOT / "site"
-SITE = "https://roanboc.github.io/learning-data/"
+SITE = "https://data.learn-all.org/"
 REPO = "https://github.com/roanboc/learning-data"
-RELEASE_YML = ROOT / ".github/workflows/release.yml"
+RELEASES = sorted(ROOT.glob("films/**/release.json"))  # each film's videos, as the release workflow publishes them
 
 # ---------------------------------------------------------------- the site's rules, in one place
 # pages with a real twin in the other language (§3.2); everything else has no hreflang
@@ -312,10 +312,10 @@ def resolve(page, ref):
         return "special", None, None
     url, frag = urllib.parse.urldefrag(urllib.parse.urljoin(page.url, ref))
     if url.startswith(SITE) or url + "/" == SITE:
-        path = urllib.parse.unquote(urllib.parse.urlsplit(url).path)[len("/learning-data/"):]
+        path = urllib.parse.unquote(urllib.parse.urlsplit(url).path)[len("/"):]
         return "site", path, frag
     if urllib.parse.urlsplit(url).netloc == urllib.parse.urlsplit(SITE).netloc:
-        return "outside", url, frag  # too many ../: the link climbs out of /learning-data/
+        return "outside", url, frag  # too many ../: the link climbs out of /
     m = re.match(re.escape(REPO) + r"/(?:blob|tree)/main/(.*)$", url)
     if m:
         return "repo", urllib.parse.unquote(m.group(1)).rstrip("/"), frag
@@ -425,7 +425,7 @@ def main():
         pages[pg.file] = pg
     by_key = {pg.key: pg for pg in pages.values()}
     normal = [pg for pg in pages.values() if not pg.redirect]
-    release_names = RELEASE_YML.read_text() if RELEASE_YML.exists() else ""
+    release_names = "\n".join(p.read_text() for p in RELEASES)
     intro_stops = re.findall(r'\["(\w+)","\w+",\[', (WEB / "assets/learn/learn.js").read_text())
     sketch_labs = re.findall(r'\bid:"(\w+)"', (WEB / "assets/sketch/sketch.js").read_text())
 
@@ -499,8 +499,8 @@ def main():
                 v = n.attrs.get(a)
                 if v is None or (n.tag == "link" and n.attrs.get("rel") in ("preconnect", "dns-prefetch")):
                     continue
-                if pg.is404 and not re.match(r"(/learning-data/|https?:|#|mailto:)", v):
-                    s["fails"].append(f"{pg.file}:{n.line}: {a}=\"{v}\" is relative; the 404 page is served at any depth, so use /learning-data/…")
+                if pg.is404 and not re.match(r"(/|https?:|#|mailto:)", v):
+                    s["fails"].append(f"{pg.file}:{n.line}: {a}=\"{v}\" is relative; the 404 page is served at any depth, so use /…")
                 check_link(pg, v, f"{pg.file}:{n.line}")
             if n.tag == "img" and n.attrs.get("srcset"):
                 for part in n.attrs["srcset"].split(","):
@@ -962,6 +962,9 @@ def main():
         if build_series.readme(S) != (S["root"] / "README.md").read_text():
             s["fails"].append(f"films/{S['dir']}/README.md: its table of films is not what build_series.py makes")
         s["notes"].append(f"{S['name']['en']}: {len(build_series.films(S)[1])} films")
+    for rel, text in build_series.lists():
+        if (ROOT / rel).read_text() != text:
+            s["fails"].append(f"{rel}: its table is not what build_series.py makes from the films' own rows (decided.md, release.json): run python site-tools/build_series.py")
 
     s = rep.check("A series' own labs and scenarios: the same in both languages, each lab on one of its film's chapters, each scenario on a lab")
     for S, SL in SERIES_LEARN.values():

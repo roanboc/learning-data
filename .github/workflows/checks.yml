@@ -1,7 +1,7 @@
 # Runs only the checks a change needs: the site's static checks when the site changed, its browser checks on the pages
 # the change touched (a changed page, or one that loads a changed file), and each film's checks (build, the site plays
-# that build, every moment draws) when that film's source or the shared code it draws with changed, or its entry in the
-# release workflow's FILMS list. .github/scripts/affected.py picks them; run it locally too.
+# that build, every moment draws) when that film's source or the shared code it draws with changed, or its release.json
+# (its entry in the release workflow's list of films). .github/scripts/affected.py picks them; run it locally too.
 # On a pull request it compares with the base branch, on a push to main with the commit before it.
 # Run every check by hand: Actions → Checks → Run workflow.
 # The dbt project has its own workflow, credential-project.yml.

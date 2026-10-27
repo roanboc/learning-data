@@ -36,5 +36,7 @@
     "name": ["models/staging/student_system/stg_student_system__learners.sql"],
     "models": ["models/"],
     "lives": ["models/core/student/_core_student__models.yml", "models/core/student/_student__conceptual.md", "models/core/student/_student__decisions.yml"]
-  }
+  },
+  "past": ["Blueprints, the 1870s", "A plan says exactly what the building will be, and lays no brick."],
+  "past_es": ["Los cianotipos, década de 1870", "Un plano dice exactamente cómo será el edificio, y no pone ni un ladrillo."]
 }

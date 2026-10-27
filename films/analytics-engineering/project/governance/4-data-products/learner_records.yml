@@ -1,0 +1,28 @@
+# A data product: what it's for, who answers for it, what it promises and to whom. Written by hand,
+# owned by its owner. scripts/generate/products.py writes its product descriptor and a data contract
+# for each output, from this file and the dbt contracts: the columns, types, keys, classes, tests
+# and known limitations come from the models' YAML, written once there.
+
+name: learner_records
+title: Learner records
+owner: "Mei Tanaka, registrar's office"
+domain: student
+status: active
+version: 1.0.0
+description:
+  purpose: Every learner the university has recorded learning with, in any system, as one learner
+    with one key; the credentials they hold; and the credit they hold towards each award, version by
+    version. The enterprise record that every consumer builds on.
+  usage: Pin the version you read (ref('core_credential', v=2)). Join on the hash keys; show the
+    readable keys only where people need them. Read as at a date with valid_from and valid_to.
+outputs:
+  - {model: core_learner, version: 1}
+  - {model: core_credential, version: 2}
+  - {model: core_credential, version: 1}
+  - {model: core_credit_towards_award, version: 1}
+service_levels:
+  - {property: latency, value: 1, unit: d, description: Built every night from the night's loads.}
+  - {property: timeOfAvailability, value: "07:00", description: "Ready by 7 a.m., university time."}
+  - {property: retention, value: 7, unit: y, description: Every version kept for seven years.}
+support:
+  - {channel: registrar-data, tool: email, url: "mailto:registrar@uni.example", scope: issues}

@@ -47,8 +47,8 @@ flows one way: from the glossary into the project, never back.
    columns or meaning is a new version (`docs/conventions.md`).
 5. **Hand it to the owners.** The owner of the meaning in the conceptual model approves; data
    governance confirms the term still applies; the exposures' owners are told.
-6. **Entities without a source.** For each, ask data governance whether the glossary has a term
-   for it now. If it does, propose `source:` and the term's definition, as above.
+6. **Entities without a source.** Each says `no_glossary_term:`, governance's confirmation. Ask
+   again whether the glossary has a term for it now. If it does, propose `source:` in its place.
 
 Run it on a schedule (a recurring job, or the team's reminder), and whenever data governance
 announces a changed term. CI runs it on `example_glossary.json`, which matches the conceptual

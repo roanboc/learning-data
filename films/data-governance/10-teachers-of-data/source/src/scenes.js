@@ -15,14 +15,14 @@ function tt_tagAt(ctx,t,t0,t1,x,y,s,o){const a=t1==null?fin(t,t0,0.35):gv_io(t,t
 function tt_pill(ctx,t,mk,a){if(a<=0.01)return;let i=0;for(let k=1;k<mk.length;k++)if(t>=mk[k][0])i=k;const u=i>0?fin(t,mk[i][0],0.35):1;
   if(u<1)wc_year(ctx,56,72,mk[i-1][1],a*(1-u));wc_year(ctx,56,72,mk[i][1],a*u);}
 
-// ---- 1 · The mime before the fine: Bogotá, 1995, and a year on ----
+// ---- 1 · The mime before the fine: Bogotá, 1995; it worked, and a year on ----
 // the chapter's moments, from its cues and words
 function tt_crossCues(sc){const c=sc.cues,w=(id,s)=>wAt(sc,id,s);
   return{amber:c.b95+0.2,red:c.b95+1.5,drivers:w("stop","drivers stop"),zebra:w("stop","zebra"),weave:w("stop","weave"),risk:c.risk,danger:w("risk","dangerous"),
     thousand:w("risk","a thousand"),need:c.need,mayor:c.mayor,mimes:w("mayor","mimes"),whistleLine:c.whistle,around:w("whistle","around"),
     whistle:w("whistle","whistle"),mimeLine:c.mime,steps:w("mime","steps"),word:w("mime","without a word"),invites:w("mime","invites"),backUp:w("mime","back up"),fineLine:c.fine,
     wont:w("fine","still won't"),officer:w("fine","a traffic officer"),writes:w("fine","writes"),applaud:w("fine","applaud"),last:c.last,cameLast:w("last","came last"),
-    order:w("last","an order"),y96:c.y96,three:w("y96","three drivers"),safe:c.safe,front:w("safe","in front of"),most:c.most,understand:w("most","understand"),
+    order:w("last","an order"),worked:c.worked,y96:c.y96,three:w("y96","three drivers"),safe:c.safe,front:w("safe","in front of"),most:c.most,understand:w("most","understand"),
     around2:w("most","the people around"),fewLine:c.few,
     few:w("few","few"),breath:c.breath};}
 // a whistle and a clap, drawn over the person who does them
@@ -85,14 +85,17 @@ function tt_world95(t,P){const people=[],cars=[];
   for(const q of people)if(q.walk)q.d=q.walk.d;
   return{lamp,cars,people};}
 
+// 1996's four cars at the light (model, colour, lane, where it stops, how long after the year it does, its driver): three stop behind
+// the line, the beige one over it; and the three that keep the crossing clear, ticked when Bogotá measures it
+const TT_CARS96=[["hatch",TT_PAINT.red,1.75,-6.0,0.4,"ttDrv3"],["box",TT_PAINT.green,5.25,-6.0,0.9,"ttDrv1"],["sedan",TT_PAINT.beige,8.75,-3.66,1.3,"ttDrv2"],["hatch",TT_PAINT.blue,12.25,-6.1,0.6,null]],
+  TT_KEPT96=TT_CARS96.filter(([m,,,X1])=>X1+TT_MODEL[m].L<TT_ST.stop[1]);
 // 1996: four cars at the light, three behind the line and one over it; people wait at the kerb, then cross on the stripes in front of the
 // cars and go off along our pavement; the mime and the people beside him nod to each other; the officer, by the car over the line,
 // writes the one fine and shuts his notebook; then the light turns green
 function tt_world96(t,P){const people=[],cars=[],go=P.breath+0.5;
   const lamp=tt_lampAt(t,[[0,0],[go,2]]);
-  [["hatch",TT_PAINT.red,1.75,-6.0,P.y96+0.4,"ttDrv3"],["box",TT_PAINT.green,5.25,-6.0,P.y96+0.9,"ttDrv1"],["sedan",TT_PAINT.beige,8.75,-3.66,P.y96+1.3,"ttDrv2"],["hatch",TT_PAINT.blue,12.25,-6.1,P.y96+0.6,null]]
-    .forEach(([m,col,d,X1,t1,drv],i)=>{const r=tt_drive(t,{X1,t1,v:8,moves:[[go+0.3+i*0.25,"go"]]});if(r.X>40)return;
-      cars.push({m,col,X:r.X,d,o:{wheel:r.wheel,brake:r.brake,driver:drv?tt_driver(drv,{pose:"tt_nod",t}):null}});});
+  TT_CARS96.forEach(([m,col,d,X1,dt,drv],i)=>{const r=tt_drive(t,{X1,t1:P.y96+dt,v:8,moves:[[go+0.3+i*0.25,"go"]]});if(r.X>40)return;
+    cars.push({m,col,X:r.X,d,o:{wheel:r.wheel,brake:r.brake,driver:drv?tt_driver(drv,{pose:"tt_nod",t}):null}});});
   // waiting at the kerb; the two beside the mime nod with him
   const nod=gv_io(t,P.around2-0.2,P.fewLine,0.4),pitch=nod*(0.5+0.5*Math.sin((t-P.around2)*TAU*0.8));
   [["ttSpecs",-5.6,15.5],["ttBag",-4.4,15.8,{pose:"tt_bag",carry:tt_heldBag([150,110,170])}],["ttFlatCap",-3.2,15.3,{pose2:"tt_lookR",mix:nod,pitch}],["ttGrey",-2.0,15.6,{pose2:"tt_lookR",mix:nod,pitch}],
@@ -126,9 +129,10 @@ scene("crossing",(ctx,S,t,sc)=>{const P=tt_once(sc,"P",()=>tt_crossCues(sc)),cut
     // from the pavement, close to the people at the kerb: the whistles, and the first car backs off; then the mime steps in and shows the
     // next driver back; the third won't move; the fine; then back to the people at the kerb, who applaud
     {at:cutMid,place:"bogotaMid",keys:[[cutMid,740,480,1.35],[P.steps-1.4,1010,580,1.2],[P.wont-0.6,930,540,1.22],[P.applaud-0.9,738,470,1.3]],d:1.8,push:0,draw:mid95},
-    // the three panels
+    // the three panels; as it worked, each lights in its order
     {at:P.last-0.3,keys:[[0,960,540,1]],push:0,draw:(x,tt)=>{x.fillStyle=rgba(WC_PAPER,1);x.fillRect(0,0,W,H);
-      [P.last+0.1,P.last+0.9,P.cameLast-0.1].forEach((t0,j)=>tt_panelAt(x,j,P,[380,960,1540][j],420,fin(tt,t0,0.4),0.94+0.06*spring(fin(tt,t0,0.6))));
+      [P.last+0.1,P.last+0.9,P.cameLast-0.1].forEach((t0,j)=>{const a=fin(tt,t0,0.4),s=0.94+0.06*spring(fin(tt,t0,0.6));
+        tt_panelLit(x,[380,960,1540][j],420,s,a*fin(tt,P.worked-0.1+0.2*j,0.5));tt_panelAt(x,j,P,[380,960,1540][j],420,a,s);});
       const o=fin(tt,P.order,0.5);if(o>0)withA(x,o,()=>{x.strokeStyle=rgba(WC_PENCIL,0.7);x.lineWidth=4;x.lineCap="round";for(const ax of [670,1250]){x.beginPath();x.moveTo(ax-26,766);x.lineTo(ax+26,766);x.moveTo(ax+12,754);x.lineTo(ax+26,766);x.lineTo(ax+12,778);x.stroke();}});}},
     // 1996: four cars wait at the light, three behind the line; then closer, as people on foot cross in front of them
     {at:P.y96-0.3,place:"bogota",keys:[[P.y96-0.3,960,520,1.04],[P.safe-0.4,910,660,1.2]],d:2.4,push:0,draw:(x,tt)=>{wide96(x,tt);}},
@@ -193,10 +197,11 @@ scene("today",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s
       gv_behind(x,"mei",GV_RX.seat[0],GV_RX.top,GV_RX.seat[1],{pose:"listen",t:tt,expr:sent>0.5?"smile":"calm",nod:tt_nodAt(tt,P.send+0.5,P.fl,0.4)});
       x.drawImage(gv_place("registrarDesk"),0,0,W,H);
       tt_meiScreen(x,{gold:fin(tt,P.gold-0.1,0.6),press:gv_io(tt,P.send,P.send+0.4,0.15),sent});}},
-    // the floor: a tick on each office's glass where the work is done; and the people look up, and nod
-    {at:P.fl,place:"floor",keys:[[P.fl,960,540,1]],push:0.02,draw:(x,tt)=>{const pose={};
+    // the floor: a tick on each office's glass where the work is done; and the people look up, and nod (a gentle push, a little to the
+    // right, so the last tick and the first card both stay in the frame)
+    {at:P.fl,place:"floor",keys:[[P.fl,968,540,1]],push:0.01,draw:(x,tt)=>{const pose={};
       ["clara","mei","jun","sam","yusuf"].forEach((id,k)=>pose[id]={pose2:"listen",mix:fin(tt,P.knew-0.2+0.1*k,0.5),nod:tt_nodAt(tt,P.knew+0.1*k,P.of+0.6,k)});
-      tt_floor(x,tt,{pose});cards(x,99);[0,1,3,4].forEach((i,k)=>tt_tickBadge(x,F.x(i)+F.w-26,F.top+56,20,fin(tt,P.helped-0.2+0.3*k,0.45),170+i));}},
+      tt_floor(x,tt,{pose});cards(x,99);[0,1,2,3,4].forEach(i=>tt_tickBadge(x,F.x(i)+F.w-14,F.top+56,20,fin(tt,P.helped-0.2+0.3*i,0.45),170+i));}},
     // Yusuf's office: he takes a card to his board
     {at:P.of,place:"office",keys:[[P.of,960,500,1.24],[P.of+0.1,940,490,1.28]],d:3,draw:(x,tt)=>{tt_office(x,tt,{board:{panel:[1,1,1]},box:{}});
       person(x,"yusuf",1180,905,0.8,{pose:"listen",pose2:"tt_pin",mix:fin(tt,P.of+0.6,0.7),t:tt,flip:true,carry:tt_heldCard});}},
@@ -352,7 +357,7 @@ scene("warn",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s,
   wc_paperOver(ctx,S);});
 
 // ---- 6 · Measured by use: binder 29 says maturity is assessed every year, and nobody does; the score comes down; three measures from
-//      the work go up where it hung ----
+//      the work go up where it hung; and Bogotá, which measured its crossings the same way ----
 // both arms reaching one point (U out from the middle, V up from the feet, in Yusuf's units, the same for each hand), the elbows out:
 // the angles person() takes
 function tt_ik(U,V){const L1=108,L2=113,dx=U-62,dy=V+416,d=Math.min(Math.hypot(dx,dy),L1+L2-0.5),th=Math.atan2(dx,dy),al=Math.acos(clamp((L1*L1+d*d-L2*L2)/(2*L1*d),-1,1)),
@@ -387,8 +392,9 @@ scene("measured",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(i
     return{two:w("score","two point one"),turn:c.binder-0.8,dk:c.binder+0.4,open:w("binder","twenty-nine")-0.1,fr,tc:fr+0.5,dn:fr+0.6,walk:fr+1.25,
       hz:c.work+0.3,hi:w("work","measured")-0.2,nt:w("work","the work")+0.1,wz:sc.ends.work+0.15,
       rows:[["an owner","a glossary term","a class","a description"].map(s=>w("project",s)-0.1),[w("run","Which checks")-0.1,w("run","whose")-0.1],
-        [w("people","office hours")-0.1,w("people","came back")-0.1]],run:c.run,ppl:c.people,of2:c.paper-0.15,used:w("paper","used")};});
-  gv_shots(ctx,S,t,sc.dur,[
+        [w("people","office hours")-0.1,w("people","came back")-0.1]],run:c.run,ppl:c.people,of2:c.paper-0.15,used:w("paper","used"),
+      bo:c.bogota-0.3,many:w("bogota","how many"),kept:w("bogota","kept them clear")};});
+  const i=gv_shots(ctx,S,t,sc.dur,[
     // his office: the framed score glows as it's named; he turns to the shelf and takes binder 29 down
     {at:0,place:"office",keys:[[0,1182,470,1.3]],push:0.02,draw:(x,tt)=>{const got=tt>=P.turn+0.85;
       tt_office(x,tt,{board:TT_BRD6,glow:fin(tt,P.two-0.15,0.5)*(1-fin(tt,P.turn+0.3,0.6)),bind:got?{missing:28}:{out:28,u:fin(tt,P.turn+0.5,0.3)},tip:1,box:{forms:1},door:1,read:["frame"]});
@@ -405,11 +411,16 @@ scene("measured",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(i
     // the office: the frame in the box, on paper; then the three sheets, lit as they're named used, and Yusuf by them, nodding
     {at:P.of2,place:"office",keys:[[P.of2,790,560,1.3],[P.used-1.9,1170,430,1.3]],d:1.8,push:0,draw:(x,tt)=>{
       tt_office(x,tt,{board:TT_BRD6,frame:0,ghost:1,ms:{row:()=>1,glow:i=>fin(tt,P.used-0.1+0.15*i,0.5)},bind:{missing:28},tip:1,box:{forms:1,frame:1},door:1,desk29:1,read:["box"]});
-      person(x,"yusuf",1440,905,0.8,{pose:"listen",t:tt,flip:true,expr:"smile",nod:tt_nodAt(tt,P.used,P.used+1.6,0)});}}]);
+      person(x,"yusuf",1440,905,0.8,{pose:"listen",t:tt,flip:true,expr:"smile",nod:tt_nodAt(tt,P.used,P.used+1.6,0)});}},
+    // Bogotá in 1996, measured the same way: the cars at the light, and a tick on each one that keeps the crossing clear
+    {at:P.bo,place:"bogota",keys:[[P.bo,760,600,1.2]],push:0.02,draw:(x,tt)=>{const P0=tt_P();tt_drawWorld(x,TT_CAM.wide,tt_world96(P0.y96+1.8+Math.max(0,tt-P.bo),P0));
+      TT_KEPT96.forEach(([m,,d,X1],j)=>{const M=TT_MODEL[m],q=tt_pr(TT_CAM.wide,X1+M.L*0.4,d,M.h-0.05);tt_tickBadge(x,q[0],q[1],Math.max(18,q[2]*0.3),fin(tt,P.kept+0.3*j,0.45),190+j);});}}]);
+  if(i===6)tt_tagAt(ctx,t,P.many-0.3,null,960,190,"1996 · three drivers in four keep the crossing clear",{size:34});
+  wc_year(ctx,56,72,"Bogotá · 1996",fin(t,P.bo+0.2,0.4));
   wc_paperOver(ctx,S);});
 
-// ---- 7 · Teachers of data: Yusuf's office hours; the wheel of data work, governance at its centre, each part with the films that teach
-//      it; a new analyst's first weeks; and Anil shows a new colleague the page that helped him ----
+// ---- 7 · Teachers of data: Yusuf's office hours, where like the mimes it teaches; the wheel of data work, governance at its centre, each
+//      part with the films that teach it; a new analyst's first weeks; and Anil shows a new colleague the page that helped him ----
 // Tom, turned to what Yusuf shows him, leaning in a little; and Yusuf at the whiteboard, his marker up to it
 POSE.tt_lookIn=Object.assign({},POSE.listen,{shift:5,tilt:0.07,turn:0.35,gaze:[0.85,0.45]});
 POSE.tt_board={L:[0.14,-0.08],R:[1.5,2.9],feet:28,shift:4,tilt:-0.04,turn:0.35,gaze:[0.7,-0.5],look:0};
@@ -424,15 +435,16 @@ const TT_CAL7={off:k=>k<5?1:0,tick:1,ring:1};
 function tt_sketcher(x,tt,X,p,up){POSE.tt_sk=Object.assign({},POSE.write,{L:tt_ik(...tt_skGrip(p,up)),R:[0.3,-1.6],feet:26,shift:2,tilt:lerp(0.05,-0.02,up),turn:0.3,
     gaze:[lerp(0.4,0.9,up),lerp(1,0.05,up)],look:1-up});
   person(x,"yusuf",X,905,0.8,{pose:"tt_sk",t:tt,flip:true,carry:tt_heldSketch(p,up),carryBehind:true,expr:up>0.5?"smile":"calm"});}
-scene("teach",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o),teach=w("day","It teaches");
-    return{sk0:0.5,sk1:teach-0.5,teach,mt:c.centre-0.35,mz:w("centre","the centre")-0.1,c0:w("centre","the centre")+0.15,p0:w("centre","data work")-0.1,j0:w("centre","meets")-0.1,
+scene("teach",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o),teach=w("day","it teaches");
+    return{sk0:0.5,sk1:teach-0.5,teach,mimes:w("day","the mimes"),mt:c.centre-0.35,mz:w("centre","the centre")-0.1,c0:w("centre","the centre")+0.15,p0:w("centre","data work")-0.1,j0:w("centre","meets")-0.1,
       l0:w("fit","how the pieces")-0.2,fz:c.path-0.5,nc:w("path","new analyst")-0.15,sz:w("path","a path")-0.15,fl:w("path","short films")-0.05,lb:w("path","labs")-0.05,
       dn:w("path","practise")+0.15,az:c.pass-0.35,aw:c.pass-0.05,show:w("pass","Anil shows"),col:w("pass","a new colleague"),pz:w("pass","the page")-0.2,how:w("pass","the page")+0.25};});
   const sk=tt=>clamp((tt-P.sk0)/(P.sk1-P.sk0),0,1);
   gv_shots(ctx,S,t,sc.dur,[
-    // office hours: the card on Yusuf's door; Tom, and Yusuf sketching for him on a clipboard; Yusuf looks up, and Tom nods
+    // office hours: the card on Yusuf's door; Tom, and Yusuf sketching for him on a clipboard; like the mimes, the board's mime lights
+    // behind them; Yusuf looks up, and Tom nods
     {at:0,place:"office",keys:[[0,800,550,1.2],[1.3,900,560,1.35]],d:2.5,push:0,draw:(x,tt)=>{
-      tt_office(x,tt,{board:TT_BRD6,frame:0,ghost:1,ms:{row:()=>1},tip:1,box:{forms:1,frame:1},door:1,read:["door"]});
+      tt_office(x,tt,{board:Object.assign({},TT_BRD6,{lit:k=>k===1?gv_io(tt,P.mimes-0.2,P.teach+1.0,0.4):0,litW:18}),frame:0,ghost:1,ms:{row:()=>1},tip:1,box:{forms:1,frame:1},door:1,read:["door"]});
       person(x,"tom",790,905,0.8,{pose:"tt_lookIn",t:tt,expr:tt>P.teach?"smile":"calm",nod:tt_nodAt(tt,P.teach+0.05,P.mt+1,0)});
       tt_sketcher(x,tt,1020,sk(tt),fin(tt,P.teach-0.35,0.5));}},
     // the stewards' meeting room: Yusuf at the whiteboard, and round the table, the stewards turned to it
@@ -462,7 +474,8 @@ scene("teach",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s
   wc_paperOver(ctx,S);});
 
 // ---- 8 · What lasts: the binder's 215 lines, 92 run in the work, 64 decisions someone owns, 59 gone; what change models agree people
-//      need, the last the hardest; Bogotá years later, the habits faded; governance as something the university can always do ----
+//      need, the last the hardest; Bogotá years later, the habits faded; governance as something the university can always do; and kept
+//      up, what it gives, as the mimes gave the crossings: rules most people keep, numbers that agree, a check for the few ----
 // Yusuf beside the box, holding the binder's grey pages up over it by their edge, above the old score
 POSE.tt_dropR={L:[0.14,-0.08],R:tt_ik(172,-440),feet:26,shift:3,tilt:0.02,turn:0.25,gaze:[0.6,0.7],look:0.6};
 // 2012: the light is red; a car rolls up and stops on the faded stripes, one waits over the line and one behind it; on the far pavement,
@@ -487,12 +500,20 @@ function tt_dropPages(x,tt,P,o){const X=380,Y=905,key=tt_mix("tt_drop8",[["tt_dr
 function tt_end(ctx,S,t,t0,title,lines,n){const oA=fin(t,t0,1.0),tA=fin(t,t0+0.6,0.9);if(oA<=0)return;wc_veil(ctx,S,oA*0.94);setScreen(ctx,S);
   withA(ctx,tA,()=>{lines.forEach((l,i)=>wc_T(ctx,l,960,372+i*66,{w:700,size:48,align:"center",col:WC_DARK}));gv_mark(ctx,960,520,360,(t-t0-0.7)/1.0,1);
     wc_T(ctx,title,960,622,{w:800,size:44,align:"center",col:WC_DARK});wc_T(ctx,(n?n+" · ":"")+"data governance · Learning Data",960,680,{w:600,size:28,align:"center",col:WC_MUTED});});}
+// the two reports on the glass, as submission day left them: both 4,867, each ticked, joined in gold; a halo along the line as they agree (lit)
+function tt_reportsDone(x,lit){const F=GV_FL,cy=F.top+250,x0=F.x(0)+F.w/2,x1=F.x(1)+F.w/2;
+  tt_glassCard(x,0,1,["census report","4,812 awards"],{flip:1,back:["census report","4,867 awards"]});tt_glassCard(x,1,1,["submission","4,867 awards"]);
+  for(const i of [0,1])tt_tickBadge(x,F.x(i)+F.w-30,cy+4,24,1,160+i);
+  if(lit>0.01)withA(x,0.35*lit,()=>tt_arc(x,x0,cy-6,x1,cy-6,64,1,GV.gold,18));
+  tt_arc(x,x0,cy-6,x1,cy-6,64,1,GV.gold,5);}
 // the wheel on the whiteboard, as Yusuf left it: every part lit with its films but documents; and where the new analyst sits
 const TT_WH8={centre:1,part:()=>1,joins:1,lit:k=>k===5?0:1},TT_NEWX=1590;
 scene("lasts",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{sl:0.85,bz:w("binder","two hundred")-0.1,lines:w("binder","two hundred")-0.05,f:["ninety-two","sixty-four","fifty-nine"].map(s=>w("binder",s)-0.1),
       oz:sc.ends.binder+0.05,drop:sc.ends.binder+0.75,look:c.models+0.2,fz:c.needs-0.4,five:["know why","want it","know how","be able","see it last"].map(s=>w("needs",s)-0.15),
-      hard:w("hardest","hardest")-0.3,bo:c.faded-0.3,bm:w("faded","the campaigns")-0.5,mp:c.ends-0.3,gov:w("ends","something")-0.2,nx:w("ends","always")-0.3,mt:c.agreed-0.3,end:c.breath-0.2};});
+      hard:w("hardest","hardest")-0.3,bo:c.faded-0.3,bm:w("faded","the campaigns")-0.5,mp:c.ends-0.3,gov:w("ends","something")-0.2,nx:w("ends","always")-0.3,
+      kz:c.kept-0.3,fl:c.keep-0.3,tk:w("keep","keep the rules"),az:w("agree","Nobody")-0.2,ag:w("agree","the numbers agree"),
+      mz:c.minutes-0.3,fix:w("minutes","fix it"),mt:c.agreed-0.3,end:c.breath-0.2};});
   // Yusuf's board, with the binder's last count across it; his office as it is by now, the binders thinner
   const brd=(tt,o)=>Object.assign({},TT_BRD6,{bar:{a:fin(tt,P.lines,0.5),fill:j=>clamp((tt-P.f[j])/0.8,0,1)}},o||{}),
     room=(tt,o)=>Object.assign({board:brd(tt),frame:0,ghost:1,ms:{row:()=>1},tip:1,box:{forms:1,frame:1},door:1,bind:{slim:0.7}},o||{});
@@ -511,10 +532,22 @@ scene("lasts",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s
     {at:P.bm,place:"bogota12Mid",keys:[[P.bm,560,470,1.3]],push:0.03,draw:(x,tt)=>tt_drawWorld(x,TT_CAM.mid,tt_world12(tt,P))},
     // Noor's map, close: "Govern data" lights gold in the strategy band, and the next part's three films go up beside it
     {at:P.mp,place:"mapClose",keys:[[P.mp,960,540,1],[P.mp+0.6,960,470,1.15]],d:2.6,push:0.02,draw:(x,tt)=>tt_mapCards(x,{gov:fin(tt,P.gov,0.8),next:j=>fin(tt,P.nx+0.35*j,0.5)})},
+    // Bogotá in 1996 again, what the mimes did for the crossings: people on foot cross in front of the cars
+    {at:P.kz,place:"bogota",keys:[[P.kz,960,530,1.04],[P.kz+0.1,920,600,1.14]],d:3.2,push:0,draw:(x,tt)=>{const P0=tt_P();
+      tt_drawWorld(x,TT_CAM.wide,tt_world96(P0.safe+1.6+Math.max(0,tt-P.kz),P0));}},
+    // the floor where the work is done: people at work, and a tick on each office's glass, as most keep the rules; then closer, on the
+    // two reports, which agree
+    {at:P.fl,place:"floor",keys:[[P.fl,960,540,1],[P.az,640,456,1.5]],d:2.2,push:0,draw:(x,tt)=>{const F=GV_FL;tt_floor(x,tt,{});tt_reportsDone(x,gv_io(tt,P.ag-0.2,P.mz+0.6,0.5));
+      [0,1,2,3,4].forEach(i=>tt_tickBadge(x,F.x(i)+F.w-14,F.top+56,20,fin(tt,P.tk+0.3*i,0.45),170+i));}},
+    // Anil's screen, close: the change the check stopped; he fixes it, two minutes later, and it's signed
+    {at:P.mz,place:"screenFac",keys:[[P.mz,960,470,1.04],[P.fix-0.3,1000,480,1.04]],d:2,push:0,draw:(x,tt)=>{
+      tt_clock(x,1760,190,92,14+2*easeCam(clamp((tt-P.fix-0.1)/1.0,0,1)));
+      tt_onScreen(x,GV_SC,q=>tt_anilScreen(q,{add:1,sheet:1,link:1,fix:fin(tt,P.fix,0.55),ok:fin(tt,P.fix+0.75,0.45),signed:fin(tt,P.fix+1.25,0.5)}));}},
     // the stewards' meeting room: everyone at the table, the new analyst at its end; Yusuf at the whiteboard, the wheel behind him
     {at:P.mt,place:"meeting",keys:[[P.mt,960,550,1.06]],push:0.04,draw:(x,tt)=>tt_meeting(x,tt,{board:{wheel:TT_WH8},cal:TT_CAL7,faces:()=>1,title:"Stewards",yx:230,
       yusuf:{expr:"smile",nod:tt_nodAt(tt,P.mt+0.8,P.end+1,0.4)},pose:j=>({flip:true,expr:"smile",nod:tt_nodAt(tt,P.mt+0.5+0.3*j,P.end+1,j)}),
       more:q=>{tt_chairAt(q,TT_NEWX);gv_behind(q,"ttNew",TT_NEWX,GV_MT.top,GV_MT.s,{pose:"listen",t:tt,flip:true,expr:"smile",nod:tt_nodAt(tt,P.mt+1.2,P.end+1,2.2)});}})}]);
   wc_year(ctx,56,72,"Bogotá · 2012",fin(t,P.bo+0.3,0.4)*(1-fin(t,P.mp-0.25,0.3)));
+  wc_year(ctx,56,72,"Bogotá · 1996",fin(t,P.kz+0.3,0.4)*(1-fin(t,P.fl-0.25,0.3)));
   tt_end(ctx,S,t,P.end,"Teachers of data",["Governance is people's work.","Tools remember what people agreed."],"Film 10 of 19");
   wc_paperOver(ctx,S);});

@@ -1,7 +1,7 @@
 /* One word, one home: Latin American Spanish captions, over the English film. Each English narration line (the key, exactly as in src/narration.js) maps to its caption.
    Only the captions change: the picture, the voice and the timings stay English, so the site plays the same film, and the video, which has no captions on its picture, takes es.srt.
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption.
-   Words as in the series: título for an award, Planificación, la oficina de registro, dueño, tablero, la app de billetera, glosario de negocio, un pull request.
+   Words as in the series: título for an award, Planificación, la oficina de registro, dueño, tablero, la app de billetera, glosario de negocio, un aviso de cambio, una regla de negocio.
    "One home" is "un solo lugar", as in the film's Spanish title, Una palabra, un solo lugar. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "In 221 BC, the king of Qin conquered the last of his rivals, and became China's first emperor.":
@@ -20,8 +20,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Mei es dueña de lo que significa título, y lo encontró definido en cinco lugares.",
 "Yusuf goes to look. There are five glossaries.":
 "Yusuf va a mirar. Hay cinco glosarios.",
-"The business glossary on the platform, with the words Mei approved. The data team's models copy from it.":
-"El glosario de negocio en la plataforma, con las palabras que aprobó Mei. Los modelos del equipo de datos copian de él.",
+"The business glossary on the platform, with the words Mei approved. The data team copies from it.":
+"El glosario de negocio en la plataforma, con las palabras que aprobó Mei. El equipo de datos copia de él.",
 "Planning's spreadsheet.":
 "La hoja de cálculo de Planificación.",
 "An appendix to the registrar's policy.":
@@ -64,22 +64,22 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La política de registro ahora dice: título, como lo define el glosario de negocio.",
 "The faculties' dashboards show the glossary's words, read from the platform, so they can't say anything else.":
 "Los tableros de las facultades muestran las palabras del glosario, leídas de la plataforma, así que no pueden decir otra cosa.",
-"The data team's copy already worked this way: it names where its words came from, and a sync checks it every night.":
-"La copia del equipo de datos ya funcionaba así: dice de dónde vienen sus palabras, y una sincronización la revisa cada noche.",
+"The data team's copy already worked this way: it says where its words came from, and it's checked against the glossary every night.":
+"La copia del equipo de datos ya funcionaba así: dice de dónde vienen sus palabras, y cada noche se compara con el glosario.",
 "Every copy is made from the glossary, one way, never the other way round.":
 "Cada copia se hace a partir del glosario, en un solo sentido, nunca al revés.",
-"Without a sync, a change like Monday's is found months later, in a dashboard, when a number moves.":
-"Sin sincronización, un cambio como el del lunes aparece meses después, en un tablero, cuando un número se mueve.",
-"On Monday night, the sync found it, and opened a pull request: what the new words touch, and who owns each part.":
-"El lunes en la noche, la sincronización lo encontró y abrió un pull request: qué tocan las palabras nuevas, y de quién es cada parte.",
+"Without a nightly check, a change like Monday's is found months later, in a dashboard, when a number moves.":
+"Sin una revisión nocturna, un cambio como el del lunes aparece meses después, en un tablero, cuando un número se mueve.",
+"On Monday night, the check found it, and sent a change notice: what the new words touch, and who owns each part.":
+"El lunes en la noche, la revisión lo encontró y envió un aviso de cambio: qué tocan las palabras nuevas, y de quién es cada parte.",
 "Planning's list of learners near an award. The wallet app. The census dashboard.":
 "La lista de Planificación de estudiantes cerca de un título. La app de billetera. El tablero del censo.",
 "Mei approved the new meaning. This time, she could see where her words are used.":
 "Mei aprobó el nuevo significado. Esta vez, pudo ver dónde se usan sus palabras.",
 "Jun saw a number in the words: six credit points.":
 "Jun vio un número en las palabras: seis créditos.",
-"A number in a meaning is a rule too. So it's kept in one place, as a setting the code reads.":
-"Un número en un significado es también una regla. Se guarda en un lugar, como un parámetro que lee el código.",
+"A number in a meaning is a rule too. So it's kept in one place, as a business rule every report reads.":
+"Un número en un significado también es una regla. Se guarda en un lugar, como regla de negocio que lee cada informe.",
 "Monday's words weren't written at a desk.":
 "Las palabras del lunes no salieron de un escritorio.",
 "Mei and the faculties argued them out in a workshop: should a microcredential count, and from how many credit points?":

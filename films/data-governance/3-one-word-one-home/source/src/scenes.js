@@ -132,7 +132,7 @@ scene("trust",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({big:wAt(sc,"
 // ---- 5 · Every tool reads it: four glossaries retired or made to read from it ----
 scene("read",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({stamp:wAt(sc,"tool","is retired"),move:wAt(sc,"tool","Its terms"),arch:wAt(sc,"tool","the rest"),plan:c.sheet-0.35,link:wAt(sc,"sheet","links"),
     click:wAt(sc,"sheet","instead"),pol:c.policy-0.35,says:wAt(sc,"policy","now says"),as:wAt(sc,"policy","award, as"),dash:c.dash-0.35,read:wAt(sc,"dash","read from"),night:c.copy-0.4,
-    names:wAt(sc,"copy","it names"),sync:wAt(sc,"copy","a sync"),way:c.way-0.4,one:wAt(sc,"way","one way")}));
+    names:wAt(sc,"copy","it says"),sync:wAt(sc,"copy","checked against"),way:c.way-0.4,one:wAt(sc,"way","one way")}));
   gv_shots(ctx,S,t,sc.dur,[
     // the board: the glossary on the platform stays; the 2019 tool is stamped retired, its owned terms move across, the rest archived
     {at:0,place:"boardGov",keys:[[0,960,488,1.04],[P.stamp-0.3,1040,480,1.06]],d:2.2,draw:(x,tt)=>{gv_halo(x,OW_BX.cx(0)-150,OW_BX.top,300,OW_BX.h,OW_MEAN[0],0.6*fin(tt,c.others,0.8));
@@ -146,9 +146,9 @@ scene("read",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({stamp:wAt(sc,
     // Anil's dashboard: the glossary's words, read from the platform
     {at:P.dash,place:"faculty",keys:[[P.dash,960,540,1.0],[P.dash+0.7,830,465,1.7]],d:1.8,draw:(x,tt)=>{gv_behind(x,"anil",GV_FX.seat[0],GV_FX.top,GV_FX.seat[1],{pose:"stand",t:tt,flip:true});
       x.drawImage(gv_place("facultyDesk"),0,0,W,H);const [sx,sy,sw,sh]=GV_FX.screen;ow_dash(x,sx,sy,sw,sh,"glossary",fin(tt,P.read,0.5));}},
-    // the data team's room at night, and the copy that names where its words came from
+    // the data team's room at night, and its copy of award, which says where its words came from, checked against the glossary every night
     {at:P.night,place:"dataNight",keys:[[P.night,960,540,1.0],[P.night+0.1,900,520,1.06]],d:3,draw:(x,tt)=>{GV_DT.mon.forEach(([mx,my,mw,mh])=>{x.save();x.fillStyle=rgba([226,232,244],0.92);x.fillRect(mx,my,mw,mh);x.restore();gv_lines(x,mx+14,my+22,mw-30,4,22,1);});}},
-    {at:P.names-0.3,place:"screenNight",keys:[[P.names-0.3,960,420,1.0],[P.names,920,400,1.08]],d:2.4,draw:(x,tt)=>{const [sx,sy,sw,sh]=GV_SC;ow_yaml(x,sx,sy,sw,sh,fin(tt,P.names+0.3,0.6));
+    {at:P.names-0.3,place:"screenNight",keys:[[P.names-0.3,960,420,1.0],[P.names,920,400,1.08]],d:2.4,draw:(x,tt)=>{const [sx,sy,sw,sh]=GV_SC;ow_copy(x,sx,sy,sw,sh,{lit:fin(tt,P.names+0.3,0.6)});
       ow_tagAt(x,tt,P.sync,null,1290,690,"checked every night",{size:32});}},
     // one way: from the glossary to every office's screen, never back
     {at:P.way,place:"floor",keys:[[P.way,960,540,1.0]],d:2,draw:(x,tt)=>{ow_floor(x,tt);const p=clamp((tt-P.way-0.4)/1.6,0,1)*1.32;ow_oneWay(x,960,300,p,1);
@@ -156,26 +156,29 @@ scene("read",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({stamp:wAt(sc,
   setScreen(ctx,S);ow_nameCard(ctx,24,740,"Clara Jensen","Planning",gv_io(t,P.plan+0.3,P.pol-0.3,0.4));ow_nameCard(ctx,24,740,"Anil Kurian","Faculty of Health",gv_io(t,P.dash+0.3,P.dash+2.4,0.4));
   wc_paperOver(ctx,S);});
 
-// ---- 6 · When a word changes: Monday's change, as a pull request ----
-scene("change",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({months:wAt(sc,"before","found months"),moves:wAt(sc,"before","when a number"),night:c.night-0.4,found:wAt(sc,"night","found it"),pr:wAt(sc,"night","opened a"),
+// ---- 6 · When a word changes: Monday's change, as a change notice Mei signs ----
+scene("change",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({months:wAt(sc,"before","found months"),moves:wAt(sc,"before","when a number"),night:c.night-0.4,chk:wAt(sc,"night","the check"),found:wAt(sc,"night","found it"),nt:wAt(sc,"night","sent a"),
     touch:wAt(sc,"night","what the new"),rows:[c.list,wAt(sc,"list","The wallet"),wAt(sc,"list","The census")],mei:c.mei-0.4,appr:wAt(sc,"mei","approved"),used:wAt(sc,"mei","where her"),
-    num:c.number-0.4,six:wAt(sc,"number","six credit"),kept:wAt(sc,"rule","So it's"),sets:wAt(sc,"rule","as a setting")}));
+    num:c.number-0.4,six:wAt(sc,"number","six credit"),kept:wAt(sc,"rule","So it's"),sets:wAt(sc,"rule","as a business"),every:wAt(sc,"rule","every report")}));
   gv_shots(ctx,S,t,sc.dur,[
-    // without a sync: a dashboard's number moves, months later, and nobody knows why
+    // without a nightly check: a dashboard's number moves, months later, and nobody knows why
     {at:0,place:"screenFac",keys:[[0,960,450,1.0],[0.2,980,440,1.06]],d:4,draw:(x,tt)=>{const [sx,sy,sw,sh]=GV_SC;ow_stepChart(x,sx,sy,sw,sh,clamp((tt-1.0)/((P.moves-1.0)/0.75),0,1),fin(tt,P.moves,0.5));
-      ow_tagAt(x,tt,1.0,null,560,186,"without a sync",{size:32,wash:GV.grey,washA:0.35});ow_tagAt(x,tt,P.months,null,1290,250,"found months later",{size:32});}},
-    // Monday night: the sync finds the change and opens a pull request, listing what the new words touch and who owns each part
-    {at:P.night,place:"screenNight",keys:[[P.night,960,450,1.0],[P.touch-0.3,960,500,1.1]],d:2,draw:(x,tt)=>{const a=fin(tt,P.pr+0.15,0.35);
-      ow_tagAt(x,tt,P.night+0.3,null,960,40,"Monday night",{size:30});if(a<0.99)ow_syncLog(x,560,300,800,fin(tt,P.night+0.5,0.5),fin(tt,P.found-0.35,0.4),tt);if(a>0.01){x.save();x.translate(60*(1-a),0);withA(x,a,()=>ow_prCard(x,OW_PR.x,OW_PR.y,OW_PR.w,{changed:fin(tt,P.pr+0.3,0.5),
+      ow_tagAt(x,tt,1.0,null,560,186,"without a nightly check",{size:32,wash:GV.grey,washA:0.35});ow_tagAt(x,tt,P.months,null,1290,250,"found months later",{size:32});}},
+    // Monday night: the nightly check finds the data team's copy still in the old words, and sends a change notice, listing what the new
+    // words touch and who owns each part
+    {at:P.night,place:"screenNight",keys:[[P.night,960,450,1.0],[P.touch-0.3,960,500,1.1]],d:2,draw:(x,tt)=>{const a=fin(tt,P.nt+0.5,0.35),[sx,sy,sw,sh]=GV_SC;
+      ow_tagAt(x,tt,P.night+0.3,null,960,52,"Monday night",{size:30});
+      if(a<0.99){ow_copy(x,sx,sy,sw,sh,{m:1,ring:clamp((tt-P.chk)/0.8,0,1)});ow_tagAt(x,tt,P.found,null,1300,322,"out of date",{size:32});}
+      if(a>0.01){x.save();x.translate(60*(1-a),0);withA(x,a,()=>ow_notice(x,OW_NT.x,OW_NT.y,OW_NT.w,{changed:fin(tt,P.nt+0.65,0.5),
         touch:fin(tt,P.touch,0.4),rows:P.rows.map(r=>fin(tt,r-0.1,0.45)),owners:fin(tt,P.rows[2]+1.3,0.5)}));x.restore();}}},
-    // Mei approves the new meaning, and sees where her words go
-    {at:P.mei,place:"regClose",keys:[[P.mei,1160,500,1.4],[P.appr-0.3,1371,505,1.75]],d:1.6,draw:(x,tt)=>{const smile=fin(tt,P.used+0.8,0.6);
+    // Tuesday morning: Mei signs the notice, and sees where her words go; then the camera comes back to her, smiling
+    {at:P.mei,place:"regClose",keys:[[P.mei,1160,500,1.4],[P.appr-0.3,1371,505,1.75],[P.used+0.2,1150,520,1.32]],d:1.6,draw:(x,tt)=>{const smile=fin(tt,P.used+0.8,0.6);
       gv_behind(x,"mei",GV_RX.seat[0],GV_RX.top,GV_RX.seat[1],{pose:"stand",expr:smile>0.5?"smile":"calm",t:tt});x.drawImage(gv_place("regDesk"),0,0,W,H);
-      const [sx,sy,sw,sh]=GV_RX.screen,cl=P.appr+0.15;ow_approve(x,sx,sy,sw,sh,{ok:fin(tt,cl+0.1,0.4),glow:[0,1,2].map(i=>fin(tt,P.used+0.3*i,0.4))});
-      const e=easeCam(clamp((tt-P.mei-0.4)/(cl-P.mei-0.4),0,1));ow_cursor(x,lerp(sx+sw-80,sx+120,e),lerp(sy+120,sy+sh-50,e),0.8,clamp((tt-cl)/0.5,0,1));}},
-    // Jun: a number in the words, kept as a setting the code reads
+      const [sx,sy,sw,sh]=GV_RX.screen;ow_signNotice(x,sx,sy,sw,sh,{sign:clamp((tt-P.appr-0.1)/0.8,0,1),ok:fin(tt,P.appr+0.95,0.4),glow:[0,1,2].map(i=>fin(tt,P.used+0.3*i,0.4))});
+      ow_tagAt(x,tt,P.mei+0.3,null,1420,262,"Tuesday morning",{size:30});}},
+    // Jun: a number in the words, kept in one place, as a business rule every report reads
     {at:P.num,place:"screenData",keys:[[P.num,960,450,1.0],[P.kept-0.4,960,520,1.08]],d:2,draw:(x,tt)=>{const [sx,sy,sw,sh]=GV_SC;
-      ow_vars(x,sx,sy,sw,sh,{under:clamp((tt-P.six)/0.6,0,1),note:fin(tt,P.six+0.7,0.5),type:clamp((tt-P.kept-0.2)/1.5,0,1),green:fin(tt,P.sets,0.5)});}}]);
+      ow_ruleScreen(x,sx,sy,sw,sh,{under:clamp((tt-P.six)/0.6,0,1),note:fin(tt,P.six+0.7,0.5),card:clamp((tt-P.kept-0.1)/0.7,0,1),green:fin(tt,P.sets,0.5),read:fin(tt,P.every,0.45)});}}]);
   setScreen(ctx,S);ow_nameCard(ctx,24,740,"Jun Park","Analytics engineer",gv_io(t,P.num+0.3,P.kept-0.4,0.4));
   wc_paperOver(ctx,S);});
 

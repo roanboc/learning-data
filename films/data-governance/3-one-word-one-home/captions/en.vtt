@@ -24,116 +24,116 @@ Mei owns what award means, and she has found it defined in five places.
 00:00:56.407 --> 00:00:59.162
 Yusuf goes to look. There are five glossaries.
 
-00:01:00.262 --> 00:01:06.501
-The business glossary on the platform, with the words Mei approved. The data team's models copy from it.
+00:01:00.262 --> 00:01:05.881
+The business glossary on the platform, with the words Mei approved. The data team copies from it.
 
-00:01:07.601 --> 00:01:08.812
+00:01:06.981 --> 00:01:08.192
 Planning's spreadsheet.
 
-00:01:09.312 --> 00:01:11.572
+00:01:08.692 --> 00:01:10.952
 An appendix to the registrar's policy.
 
-00:01:12.072 --> 00:01:15.188
+00:01:11.452 --> 00:01:14.568
 The faculties' dashboards, each with its own description.
 
-00:01:15.688 --> 00:01:19.623
+00:01:15.068 --> 00:01:19.003
 And a glossary tool bought in 2019, with six hundred terms.
 
-00:01:20.723 --> 00:01:22.729
+00:01:20.103 --> 00:01:22.109
 Between them, three different awards.
 
-00:01:26.229 --> 00:01:31.307
+00:01:25.609 --> 00:01:30.687
 Each was made for a good reason: a team needed words it could use, so it wrote its own.
 
-00:01:32.407 --> 00:01:38.568
+00:01:31.787 --> 00:01:37.948
 So they disagree. One counts microcredentials, three don't, and one says an award is a degree.
 
-00:01:39.868 --> 00:01:42.644
+00:01:39.248 --> 00:01:42.024
 Two can only be found by the people who made them.
 
-00:01:43.644 --> 00:01:49.831
+00:01:43.024 --> 00:01:49.211
 And the biggest is the one nobody opens: the 2019 tool, last opened fourteen months ago.
 
-00:01:51.031 --> 00:01:56.154
+00:01:50.411 --> 00:01:55.534
 When award changed on Monday, only one glossary changed. The other four never heard.
 
-00:01:57.654 --> 00:02:03.343
+00:01:57.034 --> 00:02:02.723
 Five glossaries are no glossary. Nobody knows which to trust, so everyone keeps their own.
 
-00:02:06.843 --> 00:02:10.756
+00:02:06.223 --> 00:02:10.136
 So Yusuf brings the terms' owners together, to keep one glossary.
 
-00:02:11.856 --> 00:02:18.656
+00:02:11.236 --> 00:02:18.036
 Not the biggest. The one they can trust, and every tool can read: the glossary on the platform, beside the data.
 
-00:02:19.956 --> 00:02:25.086
+00:02:19.336 --> 00:02:24.466
 Each term there has a definition, an owner, a status, and the date it last changed.
 
-00:02:26.486 --> 00:02:28.142
+00:02:25.866 --> 00:02:27.522
 It holds the business's words.
 
-00:02:28.642 --> 00:02:35.496
+00:02:28.022 --> 00:02:34.876
 A data dictionary describes each table and column. A catalog helps people find the data, and shows both.
 
-00:02:38.996 --> 00:02:41.952
+00:02:38.376 --> 00:02:41.332
 The other four are retired, or made to read from it.
 
-00:02:43.052 --> 00:02:49.171
+00:02:42.432 --> 00:02:48.551
 The 2019 tool is retired. Its terms with an owner move across; the rest are archived.
 
-00:02:50.471 --> 00:02:54.507
+00:02:49.851 --> 00:02:53.887
 Planning's spreadsheet links to each term, instead of keeping its own words.
 
-00:02:55.707 --> 00:03:00.742
+00:02:55.087 --> 00:03:00.122
 The registrar's policy now says: award, as defined in the business glossary.
 
-00:03:01.942 --> 00:03:08.232
+00:03:01.322 --> 00:03:07.612
 The faculties' dashboards show the glossary's words, read from the platform, so they can't say anything else.
 
-00:03:09.432 --> 00:03:16.096
-The data team's copy already worked this way: it names where its words came from, and a sync checks it every night.
+00:03:08.812 --> 00:03:16.101
+The data team's copy already worked this way: it says where its words came from, and it's checked against the glossary every night.
 
-00:03:17.396 --> 00:03:21.819
+00:03:17.401 --> 00:03:21.824
 Every copy is made from the glossary, one way, never the other way round.
 
-00:03:25.719 --> 00:03:31.450
-Without a sync, a change like Monday's is found months later, in a dashboard, when a number moves.
+00:03:25.724 --> 00:03:31.882
+Without a nightly check, a change like Monday's is found months later, in a dashboard, when a number moves.
 
-00:03:33.150 --> 00:03:39.557
-On Monday night, the sync found it, and opened a pull request: what the new words touch, and who owns each part.
+00:03:33.582 --> 00:03:39.677
+On Monday night, the check found it, and sent a change notice: what the new words touch, and who owns each part.
 
-00:03:41.357 --> 00:03:46.194
+00:03:41.877 --> 00:03:46.714
 Planning's list of learners near an award. The wallet app. The census dashboard.
 
-00:03:47.994 --> 00:03:52.460
+00:03:48.514 --> 00:03:52.980
 Mei approved the new meaning. This time, she could see where her words are used.
 
-00:03:54.360 --> 00:03:57.241
+00:03:54.880 --> 00:03:57.761
 Jun saw a number in the words: six credit points.
 
-00:03:58.541 --> 00:04:03.970
-A number in a meaning is a rule too. So it's kept in one place, as a setting the code reads.
+00:03:59.661 --> 00:04:06.066
+A number in a meaning is a rule too. So it's kept in one place, as a business rule every report reads.
 
-00:04:07.870 --> 00:04:09.893
+00:04:10.366 --> 00:04:12.389
 Monday's words weren't written at a desk.
 
-00:04:10.693 --> 00:04:17.427
+00:04:13.189 --> 00:04:19.923
 Mei and the faculties argued them out in a workshop: should a microcredential count, and from how many credit points?
 
-00:04:18.827 --> 00:04:22.413
+00:04:21.323 --> 00:04:24.909
 The glossary keeps what they agreed. It doesn't make the agreement.
 
-00:04:24.013 --> 00:04:27.597
+00:04:26.509 --> 00:04:30.093
 And the people who kept the other glossaries lose something they built.
 
-00:04:28.597 --> 00:04:32.590
+00:04:31.093 --> 00:04:35.086
 So they're thanked, and their best definitions move into the one that stays.
 
-00:04:36.090 --> 00:04:39.966
+00:04:38.586 --> 00:04:42.462
 Policy 12 said reports count by the glossary's definitions.
 
-00:04:40.666 --> 00:04:44.181
+00:04:43.162 --> 00:04:46.677
 Now each word has one home, and every tool reads from it.
 
-00:04:45.681 --> 00:04:50.054
+00:04:48.177 --> 00:04:52.550
 Many glossaries are no glossary. Keep one, and sync every tool from it.

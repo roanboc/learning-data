@@ -6,11 +6,11 @@
 #    after; and after that only now and then, at a chapter's turn, under a moment on screen, or in a pause without words (the series'
 #    sound, 20 October 2026): the present is in D major, and the end goes back to G for the series' mark.
 #  - Handbells, struck softly with a padded mallet, mark the moments that land, and mean the same all through: one bell, D, where a
-#    problem shows; the G under it, then the D again, where it starts; three rising for prevent, test and watch; one low bell, left to
+#    problem shows; the G under it, then the D again, where it starts; three rising for prevent, check and watch; one low bell, left to
 #    ring, for what's wrong and still going on (the leak that never stops, the night of one in two).
 #  - The glass has two figures of its own. A phrase of four falling notes, 5-3-2-1, is the fix made where the problem starts: as the
 #    hands go into the basin, as the clamps go on, and as binder 15's line is marked green. A rising fifth is a fix that's become a
-#    rule or a check: the cell turning green, the surprise that becomes a test, and the washing that became the rule in Vienna.
+#    rule or a check: the cell turning green, the surprise that becomes a check, and the washing that became the rule in Vienna.
 #  - The series' mark, four notes, 1-5-4-8, on the handbells, with the glass under them, plays under the title and the end card.
 # The rules the series keeps:
 #  - Nothing trembles, pulses or beats (the series, 20 October 2026): no urgent pulse, even on the night of one in two; every note has
@@ -280,19 +280,19 @@ plunge(W('clinics', 'showed', 'It started', 0.975), 0.016, px(1560))  # the doct
 plunge(dip + 1.1, 0.024, 0.0)  # wordless: the hands in the basin again, and the water settling
 
 # 2. Still amber: the present's chord, at the turn (above); binder 15 slid out and taken down, and its page; one cell amber; the issue
-#    card pinned up, stamped closed with the old answer; the room with the leak, drop by drop, while the bucket's in the shot; the
-#    staging code, the two wallets and the question between them, the two more buckets set down, Jun mopping; one low bell, left to
-#    ring, as the leak never stops
+#    log's page on Tom's desk, its line stamped closed with the old answer; the room with the leak, drop by drop, while the bucket's in
+#    the shot; the clean-up's card, what it takes away ringed in pencil, the two wallets and the question between them, the two more
+#    buckets set down, Jun mopping; one low bell, left to ring, as the leak never stops
 take = G('monday', 'binder', 0.2)
 slide(take - 0.4, 0.022, px(1420)); paper(take + 0.15, 0.016, 0.3, 0.3)
 paper(W('monday', 'binder', 'the root', -0.5), 0.022, 0.0, 0.5)
 tap(W('monday', 'amber', 'one cell'), 0.012, 0.1)
-board = W('monday', 'issue', 'The first', -0.5)
-pin(board + 0.25, 0.028, 0.0); rubber(W('monday', 'issue', 'cleaned', -0.15) + 0.12, 0.036, 0.05)
-room, stg = G('monday', 'jun', -0.5), G('monday', 'jun', 1.2)
-drips('monday', rel('monday', room), rel('monday', stg) + 0.25, lambda i, t: 1.0)
-for w in [W('monday', 'jun', 'trimmed', -0.1), W('monday', 'jun', 'lower case', -0.2)]:
-    tap(w, 0.012, 0.0)
+log = W('monday', 'issue', 'The first', -0.5)
+paper(log + 0.15, 0.016, 0.0, 0.35); rubber(W('monday', 'issue', 'cleaned', -0.15) + 0.12, 0.036, 0.0)
+room, card = G('monday', 'jun', -0.5), G('monday', 'jun', 1.2)
+drips('monday', rel('monday', room), rel('monday', card) + 0.25, lambda i, t: 1.0)
+for w, x in [(W('monday', 'jun', 'trimmed', -0.1), 1290), (W('monday', 'jun', 'lower case', -0.1), 700)]:
+    pencil(w + 0.05, 0.009, px(x), 0.4)
 wal = G('monday', 'wallet', -0.4)
 knock(wal + 0.3, 0.018, -0.3, 300); knock(wal + 0.55, 0.018, 0.3, 300); tap(W('monday', 'wallet', 'two wallets'), 0.012, 0.0)
 wide, fin2, mail = G('monday', 'others', -0.4), W('monday', 'others', 'every system'), W('monday', 'others', 'cleans', -0.4)
@@ -304,13 +304,13 @@ drips('monday', rel('monday', mop) + 0.25, ST['monday']['dur'] + 0.25, lambda i,
 strokes('monday', mop, E('monday'))
 bell(45, W('monday', 'mop', 'stops', 0.45), BL * 1.05, 0.15, 'D', damp=7.5)  # the leak never stops: a low A, left to ring
 
-# 3. Follow it back: the room still dripping; the lineage lit, card by card; Tom's plate; the phone's keys, and the suggestion picked;
+# 3. Follow it back: the room still dripping; the trail of cards pinned up, card by card; Tom's plate, and the tag on the form; the
+#    phone's keys, and the suggestion picked;
 #    the learners as saved; the bucket again, where it shows (the D), and the phone, where it starts (the G under it, and the D)
 drips('back', 0, rel('back', G('back', 'path', -0.5)) + 0.25, lambda i, t: 1.0, {0: (0, None)})
-wallet_, staging_ = W('back', 'path', 'wallet'), W('back', 'path', 'staging')
-for k, w in enumerate([wallet_, (wallet_ + staging_) / 2, staging_, W('back', 'path', 'short-course'), W('back', 'path', 'sign-up')]):
-    tap(w - 0.05, 0.012, 0.5 - 0.25 * k)
-knock(G('back', 'box', -0.3) + 0.06, 0.018, px(1690), 260)
+for k, w in enumerate(['wallet', 'clean-up', 'short-course', 'sign-up']):
+    pin(W('back', 'path', w, 0.05), 0.022, px([1524, 1148, 772, 396][k]))
+knock(G('back', 'box', -0.3) + 0.06, 0.018, px(1690), 260); knock(W('back', 'box', 'plain text', 0.05), 0.012, px(760), 320)
 ph, cap, sug = W('back', 'box', 'phones', -0.4), W('back', 'box', 'capital'), W('back', 'space', 'picking')
 for w in [ph + 0.9, cap + 0.45, cap + 0.85, sug + 0.35]:
     tap(w + 0.02, 0.013, 0.1)
@@ -323,7 +323,7 @@ starts(here - 0.05, pan=-0.3)
 
 # 4. Fixed where it's typed: a chord for "this time"; the gold issue pinned, and a pencil for each of its lines; the box's setting
 #    clicked; the keys, the suggestion, and the button; another learner's long press and paste; the old emails corrected, and the
-#    clean-up taken out of staging. Then, wordless, the clamps go on, one at each joint, the last drops fall, and the fix's phrase
+#    clean-up's card stamped retired. Then, wordless, the clamps go on, one at each joint, the last drops fall, and the fix's phrase
 #    plays, in D: A, F sharp, E, D
 chords([(G('entry', 'time', -0.9), G('entry', 'time', 2.6), [55, 59, 62, 67])], 'D', GL * 0.9)
 pin(S0('entry') + 0.55, 0.028, 0.0)
@@ -338,7 +338,7 @@ tap(gr + 0.7, 0.012, 0.1); tap(gr + 1.5, 0.013, 0.1)
 fixw = W('entry', 'before', 'corrects')
 for k in range(3):
     tap(fixw + 0.6 * k + 0.3, 0.011, 0.0)
-paper(W('entry', 'before', 'can go'), 0.016, 0.1, 0.8)
+rubber(W('entry', 'before', 'can go') + 0.1, 0.034, px(1340))
 eroom = G('entry', 'breath', -0.6)
 for k, i in enumerate((0, 1, 2)):
     clamp_(eroom + 0.62 + 0.07 * k, 0.026, px(JOINTS[i]))
@@ -346,14 +346,14 @@ drips('entry', rel('entry', eroom), ST['entry']['dur'] + 0.25, lambda i, t: 1.0 
 phrase([69, 66, 64, 62], eroom + 1.45, k='D', last=3.2)
 
 # 5. Should never fail: the sensor's tag, and the dashed line to who it tells; the cell turning green, on the glass's rising fifth; the
-#    gold card stamped closed because the test passes
-knock(max(W('never', 'stays', 'a test', -0.1), S0('never') + 2.4) + 0.06, 0.016, 0.0, 300)
+#    gold card stamped closed because the check passes
+knock(max(W('never', 'stays', 'a check', -0.1), S0('never') + 2.4) + 0.06, 0.016, 0.0, 300)
 owner = W('never', 'fails', 'its owner')
 air(owner - 0.3, 0.8, 0.012, 0.4); knock(owner + 0.36, 0.016, 0.6, 300)
 fifth(62, W('never', 'green', 'turns green', -0.05))
 rubber(W('never', 'green', 'right where') + 0.12, 0.042, 0.25)
 
-# 6. What no rule names: a dim chord for the night; the badges arriving, one by one, then softer; the tests' ticks; the wallet; the
+# 6. What no rule names: a dim chord for the night; the badges arriving, one by one, then softer; the checks' ticks; the wallet; the
 #    morning, and monitoring's four panels; one low bell for one in two, left to ring, with no pulse; the alert flying to its owner
 arr = G('unknown', 'night', 1.2)
 chords([(G('unknown', 'night', -1.1), G('unknown', 'night', 1.9), [59, 62, 66])], 'D', GL * 0.8)
@@ -366,21 +366,20 @@ for w in ['when it arrives', 'how many rows', 'how many empty', 'spread']:
     knock(W('unknown', 'shape', w, -0.1) + 0.06, 0.014, px(1050), 320)
 bell(47, W('unknown', 'usual', 'one in two', -0.05), BL * 1.05, 0.2, 'D', damp=6.5)  # one in two: a low B
 knock(W('unknown', 'tells', 'the owner') + 0.05, 0.014, px(1200), 300)
-air(W('unknown', 'tells', 'names', -0.2), 0.8, 0.016, 0.5)
+air(W('unknown', 'tells', 'on record', -0.2), 0.8, 0.016, 0.5)
 knock(W('unknown', 'tells', 'the learning', -0.3) + 0.35, 0.016, 0.1, 280)
 
-# 7. A surprise becomes a rule: the three microcredentials set back to five, and the badges sent again; the rule's lines typed, and
-#    its owner; then three cards pinned, each on a bell, rising (prevent, test, watch), and the card that moves from watch to test,
-#    on the glass's rising fifth: a surprise confirmed becomes a test
+# 7. A surprise becomes a rule: the three microcredentials set back to five, and the badges sent again; the rule card set down on
+#    Tom's desk, signed in pen and stamped; then three cards pinned, each on a bell, rising (prevent, check, watch), and the card
+#    that moves from watch to check, on the glass's rising fifth: a surprise confirmed becomes a check
 for k in range(3):
     tap(W('rule', 'cause', 'fixes', 0.35 * k + 0.2), 0.012, -0.2 + 0.2 * k)
 send = W('rule', 'cause', 'sends')
 tap(send, 0.016, 0.4); air(send + 0.25, 1.0, 0.014, 0.5)
-mc = W('rule', 'rule', 'a microcredential')
-for k in range(4):
-    tap(mc - 0.2 + 0.35 * k + 0.1, 0.011, 0.0)
-knock(W('rule', 'rule', 'with an owner') + 0.05, 0.016, 0.5, 300)
-for k, (w, m) in enumerate([('Prevent', 62), ('Test what', 66), ('Watch', 69)]):
+paper(G('rule', 'rule', -0.4) + 0.12, 0.016, 0.0, 0.35)
+own = W('rule', 'rule', 'with an owner')
+pen(own, 0.012, 0.05, 0.7); rubber(own + 0.85, 0.036, 0.25)
+for k, (w, m) in enumerate([('Prevent', 62), ('Check what', 66), ('Watch', 69)]):
     t = W('rule', 'three', w, -0.1) + 0.25
     pin(t, 0.024, px([520, 960, 1400][k])); bell(m, t, BL * 0.85, px([520, 960, 1400][k]) * 0.6, 'D', damp=3.2)
 conf = W('rule', 'every', 'confirm')

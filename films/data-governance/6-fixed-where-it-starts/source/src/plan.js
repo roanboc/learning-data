@@ -4,9 +4,10 @@
    register of deaths, the first clinic's ward), then Semmelweis's room in Pest, 1858 to 1862. Today, only the university's own places
    (the series' rooms.js): Yusuf's office, his screen and his board, binder 15's page, the data team's room and Jun's screen, the
    learning team's desk (Tom's, new in this film) and its screen, a learner's phone over the campus, the platform team's desk at night,
-   and the stewards' meeting room. The pictures are the film's own things: the scorecard, the issue cards, the clean-up in staging, the
-   two wallets, the pipe, the buckets, the mop and the leak sensor, the lineage, the sign-up form and the phone's keyboard, the badges,
-   monitoring's panels, the rule, the three cards. Every name starts with fw_ or FW_. */
+   and the stewards' meeting room, and Tom's desk from above. The pictures are the film's own things, all of them the university's own
+   papers, in plain words: the scorecard, the issue log and the issue card, the data team's clean-up on its card, the two wallets, the
+   pipe, the buckets, the mop and the leak sensor, the trail of cards, the sign-up form and the phone's keyboard, the badges, the usual
+   shape of the badges, the rule card, the three cards. Every name starts with fw_ or FW_. */
 
 /* ---------- colours ---------- */
 // the past: the hospital's ochre and stone, its plaster and flagstones, dark oak doors, iron beds, grey blankets, white enamel; today:
@@ -292,83 +293,166 @@ function fw_marker(ctx,x,y,rot,col){ctx.save();ctx.translate(x,y);ctx.rotate(rot
 function fw_policy15(ctx,hi,note){const P=FW_PG;wc_T(ctx,"Data policies",P.x,150,{w:600,size:30,col:WC_MUTED});wc_T(ctx,"Policy 15",P.x,250,{w:800,size:70,col:WC_DARK});
   wc_T(ctx,"Data quality issues",P.x,310,{w:600,size:38,col:WC_MUTED});const lw=tw(ctx,P.line,P.size,700);
   fw_hiStroke(ctx,P.x,P.y,lw,GV.green,hi||0,61);wc_T(ctx,P.line,P.x,P.y,{w:700,size:P.size,col:WC_DARK});
-  gv_lines(ctx,P.x,P.y+110,1180,6,48,0.7);if(note>0)wc_hand(ctx,"at the form, then a test",P.x+30,P.y+80,{size:40,w:700,col:GV.greenInk,p:note});
+  gv_lines(ctx,P.x,P.y+110,1180,6,48,0.7);if(note>0)wc_hand(ctx,"at the form, then a check",P.x+30,P.y+80,{size:40,w:700,col:GV.greenInk,p:note});
   if(hi>0&&hi<1.05)fw_marker(ctx,P.x-14+(lw+28)*clamp(hi,0,1),P.y+6,-0.12,GV.green);}
 
 /* ---------- today: the scorecard ---------- */
-// the data quality scorecard on a screen, as Rules that run draws it and as the generator writes it: every domain down the side and the
-// five dimensions across, each cell "passed/total" on its wash (green, a pass; amber, a warning; bare paper, no test); under it, what
-// didn't pass. The camera shows it in turns: the whole page (too small to read, on purpose), the learning row, then what didn't pass.
-// fix (0 to 1) turns the learning row's warnings into passes, as they are a Monday after the form's fix.
-const FW_SCC=["completeness","uniqueness","validity","consistency","accuracy","All"];
-const FW_SCR=[["alumni","3/3","1/1","","1/1","","5/5"],["course","","1/1","1/1","1/1","","3/3"],["finance","1/1","4/4","2/2","1/1","1/1","9/9"],["hr","4/4","2/2","2/2","1/1","","9/9"],
-  ["learning","7/7","5/5","7/7 (2 warn)","3/3","","22/22 (2 warn)"],["planning","","3/3","1/1","1/1","1/1","6/6"],["registrar","9/9","4/4","5/5","2/2","","20/20"],
-  ["research","8/8","3/3","1/1","5/5","","17/17"],["shared","1/1","1/1","","","","2/2"],["student","21/21","16/16","8/8","18/18","","63/63"],["wallet","","2/2","1/1","1/1","","4/4"],
-  ["All","54/54","42/42","28/28 (2 warn)","34/34","2/2","160/160 (2 warn)"]];
-const FW_NP=[["warn","learning","validity","short_courses_enrolments_email_entered_clean","Learning team","6"],["warn","learning","validity","short_courses_learners_email_entered_clean","Learning team","3"]];
-// where things are on the screen (GV_SC): the table's left, its first row, a row's height, the columns; the "Not passed" rows
-const FW_SK={x:380,y:178,rh:31,c0:150,cw:176,np:548,npc:[0,70,186,302,830,1004],sz:19};
-const fw_skRow=i=>FW_SK.y+(i+1)*FW_SK.rh,fw_skCol=j=>FW_SK.x+FW_SK.c0+j*FW_SK.cw;
-function fw_scorecard(ctx,cam,o){o=o||{};const [x,y,w,h]=GV_SC,K=FW_SK,fix=clamp(o.fix||0,0,1),z=cam&&cam.z?cam.z:1,dz=sz=>z*sz<27?1:0,deco=dz(K.sz),lit=o.lit||0;
-  gv_screen(ctx,x,y,w,h,"Data quality scorecard",q=>{
-    if(lit>0)gv_tint(q,K.x-10,fw_skRow(4)-K.rh*0.72,K.c0+6*K.cw+10,K.rh,GV.gold,0.55*lit);
-    FW_SCC.forEach((s,j)=>wc_T(q,s,fw_skCol(j)+K.cw/2,K.y,{w:700,size:K.sz-1,align:"center",col:WC_MUTED,deco:dz(K.sz-1)}));
-    FW_SCR.forEach((r,i)=>{const yy=fw_skRow(i),all=i===FW_SCR.length-1;wc_T(q,r[0],K.x,yy,{w:all?800:600,size:K.sz,col:WC_DARK,deco});
-      r.slice(1).forEach((v,j)=>{if(!v)return;const warn=/warn/.test(v)&&(i===4||all),u=warn?fix:1,cx=fw_skCol(j);
-        const col=warn?mix(FW.amber,GV.green,u):GV.green;q.save();q.globalCompositeOperation="multiply";q.fillStyle=rgba(wc_lit(col,warn&&u<0.5?0.3:0.62),1);q.fillRect(cx+6,yy-K.rh*0.66,K.cw-12,K.rh-5);q.restore();
-        const s=warn&&u>0.5?v.replace(/ \(2 warn\)/,""):v;wc_T(q,s,cx+K.cw/2,yy,{w:all||warn?800:600,size:K.sz,align:"center",col:warn&&u<0.5?FW.amberInk:WC_INK,deco});});});
-    // under the table, what didn't pass, as the generator lists it
-    const np=1-fix;wc_T(q,"Not passed",K.x,y+K.np-14,{w:800,size:K.sz+3,col:WC_DARK,deco});
-    if(np>0.01)withA(q,np,()=>{["Status","Domain","Dimension","Test","Owner","Rows"].forEach((s,j)=>wc_T(q,s,K.x+K.npc[j],y+K.np+22,{w:700,size:K.sz-1,col:WC_MUTED,deco:dz(K.sz-1)}));
-      FW_NP.forEach((r,i)=>{const yy=y+K.np+56+i*K.rh;q.save();q.globalCompositeOperation="multiply";q.fillStyle=rgba(wc_lit(FW.amber,0.55),1);q.fillRect(K.x-6,yy-K.rh*0.66,58,K.rh-5);q.restore();
-        r.forEach((s,j)=>wc_T(q,s,K.x+K.npc[j],yy,{w:j===3?500:600,size:K.sz,f:j===3?"mono":null,col:j===0?FW.amberInk:WC_INK,deco}));});});
-    else withA(q,clamp(fix*2-1,0,1),()=>wc_T(q,"Every test passed.",K.x,y+K.np+28,{w:600,size:K.sz,col:GV.greenInk,deco}));},{titleSize:32,barH:54});}
-// where the camera looks for each turn: the whole page; then the learning row, near the top of the frame, with what didn't pass under
-// it, above the captions
-const FW_SKV={all:[960,415,1.02],row:[960,fw_skRow(4)+155,1.55]};
+// the data quality scorecard on a screen, in plain words, as Rules that run draws it too: "last night's checks", the areas down the
+// side and the five dimensions across, and in each cell how many checks passed, of how many, on its wash: green, passed; amber, with
+// warnings; red, with a failure; grey and hatched, not checked; bare paper, no check of that kind. The words always say it too. Under
+// it, what didn't pass and whose it is, in sections ("Failed", "Warnings", "Not checked"), each only when it has lines. Each column is
+// as wide as its words; when they don't all fit across the page, a cell breaks after its count. The camera shows it in turns: the
+// whole page (too small to read, on purpose; the washes carry it), then close on a row and the lines under it.
+// A cell is "passed/total", then w (warnings), f (failed) or n (not checked), each with how many: "7/7w2", "6/7f1w2", "1/3n2"; ""
+// is no check of that kind. FW_SKA is the night before Yusuf opens binder 15 (the example project's checks of Tuesday 20 October 2026,
+// put in plain words): the two email checks warn on every row. FW_SKF is a night after the form's fix.
+const FW_SKD=["Completeness","Uniqueness","Validity","Consistency","Accuracy","All"];
+const FW_SKA=[["Alumni","3/3","1/1","","1/1","","5/5"],["Course","","1/1","1/1","1/1","","3/3"],["Finance","1/1","4/4","2/2","1/1","1/1","9/9"],["HR","4/4","2/2","2/2","1/1","","9/9"],
+  ["Learning","7/7","5/5","7/7w2","3/3","","22/22w2"],["Planning","","3/3","1/1","1/1","1/1","6/6"],["Registrar","9/9","4/4","5/5","2/2","","20/20"],
+  ["Research","8/8","3/3","1/1","5/5","","17/17"],["Shared","1/1","1/1","","","","2/2"],["Student","21/21","16/16","8/8","18/18","","63/63"],["Wallet","","2/2","1/1","1/1","","4/4"],
+  ["All","54/54","42/42","28/28w2","34/34","2/2","160/160w2"]];
+const FW_SKF=FW_SKA.map(r=>r.map(c=>c.replace(/w\d+/,"")));
+// a section under the table: its title, its state's colour, its lines (each check in plain words, its owner, its rows), and its
+// headings (heads: [heading, where it starts along the table], or false for none)
+const FW_SKW=[{title:"Warnings",state:"warn",rows:[["Short-course enrolments: emails as typed","Learning team","6"],["Short-course learners: emails as typed","Learning team","3"]]}];
+// where the table is on the screen (GV_SC): its left, its width, its headings' line, a row's height and a second line's, the words'
+// size, the room each side of a cell's words; each state's wash, how pale it is, and its ink
+const FW_SK={x:380,w:1160,y:200,rh:31,lh:24,sz:19,pad:12,heads:[["Check",0],["Owner",0.62],["Rows",0.9]]};
+const FW_SKST={pass:[GV.green,0.62,WC_INK],warn:[FW.amber,0.3,FW.amberInk],fail:[GV.red,0.36,GV.redInk],skip:[GV.grey,0.55,GV.greyInk]};
+function fw_skCell(s){const m=s?/^(\d+)\/(\d+)(.*)$/.exec(s):null;if(!m)return null;const n={};(m[3].match(/[wfn]\d+/g)||[]).forEach(k=>n[k[0]]=+k.slice(1));
+  const notes=[];if(n.f)notes.push(n.f+" failed");if(n.w)notes.push(n.w+(n.w>1?" warnings":" warning"));if(n.n)notes.push(n.n+" not checked");
+  return{main:m[1]+" of "+m[2],notes,state:n.f?"fail":n.n?"skip":n.w?"warn":"pass"};}
+// where everything goes, for the nights drawn (one, or two when one turns into the next): each column's left and width, each row's
+// top, height and words' line, the table's foot. Kept for each set of nights, as it's measured once
+const FW_SKL=new Map();
+function fw_skLay(ctx,nights){const key=JSON.stringify(nights);if(FW_SKL.has(key))return FW_SKL.get(key);const K=FW_SK,cells=nights.map(rows=>rows.map(r=>r.slice(1).map(fw_skCell))),
+    last=nights[0].length-1,wt=i=>i===last?800:600,one=c=>c?[[c.main,...c.notes].join(" · ")]:[],two=c=>c?[c.main,c.notes.join(" · ")]:[],
+    widths=f=>[Math.max(tw(ctx,"Area",K.sz,700),...nights[0].map((r,i)=>tw(ctx,r[0],K.sz,wt(i)))),
+      ...FW_SKD.map((d,j)=>Math.max(tw(ctx,d,K.sz,700),...cells.flatMap(rows=>rows.map((r,i)=>Math.max(0,...f(r[j]).map(s=>tw(ctx,s,K.sz,wt(i))))))))].map(v=>v+2*K.pad);
+  let cw=widths(one),wrap=false;if(cw.reduce((a,b)=>a+b,0)>K.w){cw=widths(two);wrap=true;}
+  const spare=Math.max(0,K.w-cw.reduce((a,b)=>a+b,0))/cw.length,cx=[K.x];cw=cw.map(v=>v+spare);cw.forEach((v,i)=>cx.push(cx[i]+v));
+  let top=K.y+K.rh*0.28;const rows=nights[0].map((_,i)=>{const h=K.rh+(wrap&&cells.some(r=>r[i].some(c=>c&&c.notes.length))?K.lh:0),r={top,h,base:top+K.rh*0.72};top+=h;return r;});
+  const L={cx,cw,rows,wrap,bottom:top};FW_SKL.set(key,L);return L;}
+// grey hatching over a cell that wasn't checked
+function fw_hatch(ctx,x,y,w,h,a){ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();ctx.strokeStyle=rgba(GV.greyInk,0.34*a);ctx.lineWidth=2;ctx.beginPath();
+  for(let k=-h;k<w;k+=10){ctx.moveTo(x+k,y+h);ctx.lineTo(x+k+h,y);}ctx.stroke();ctx.restore();}
+// the scorecard: o.rows the night (FW_SKA by default), o.date beside "last night's checks"; o.after, the next night, which it turns
+// into as o.mx goes 0 to 1 (the washes change all the way; the old words go in the first half and the new come in the second); o.p (0 to 1) fills it in, the headings first, then a wash in each cell as its count arrives; o.hi, a row lit
+// gold as o.hiA goes 0 to 1; o.sections under it (and o.afterSections, the next night's), and o.clear, said when there are none
+// ("Every check passed."). Returns where everything is (fw_skLay's, and L.sec: each section's title and lines, and its columns), so a
+// scene can light a cell or an owner
+function fw_scorecard(ctx,cam,o){o=o||{};const [x,y,w,h]=GV_SC,K=FW_SK,z=cam&&cam.z?cam.z:1,dz=s=>z*s<27?1:0,deco=dz(K.sz),rows=o.rows||FW_SKA,after=o.after,
+    e=after?easeCam(clamp(o.mx||0,0,1)):0,eo=1-clamp(e*2,0,1),en=clamp(e*2-1,0,1),p=o.p==null?1:clamp(o.p,0,1),secA=o.sections||[],
+    secB=after?(o.afterSections||[]):secA;let L;
+  gv_screen(ctx,x,y,w,h,"Data quality scorecard",q=>{L=fw_skLay(q,after?[rows,after]:[rows]);const nd=FW_SKD.length,N=rows.length*nd,hd=clamp(p*8,0,1);
+    withA(q,hd,()=>wc_T(q,"last night's checks"+(o.date?" · "+o.date:""),K.x+K.pad,K.y-46,{w:600,size:K.sz+3,col:WC_MUTED,deco:dz(K.sz+3)}));
+    if(o.hi!=null&&o.hiA>0.01){const r=L.rows[o.hi];gv_tint(q,K.x,r.top,K.w,r.h,GV.gold,0.55*o.hiA);}
+    withA(q,hd,()=>["Area",...FW_SKD].forEach((s,j)=>wc_T(q,s,j?L.cx[j]+L.cw[j]/2:K.x+K.pad,K.y,{w:700,size:K.sz,align:j?"center":"left",col:WC_MUTED,deco})));
+    // a cell's words, on one line or broken after its count
+    const words=(c,j,r,wt,a,col)=>{if(!c||a<=0.01)return;(L.wrap&&c.notes.length?[c.main,c.notes.join(" · ")]:[[c.main,...c.notes].join(" · ")]).forEach((s,k)=>
+      wc_T(q,s,L.cx[j]+L.cw[j]/2,r.base+k*K.lh,{w:wt,size:K.sz,align:"center",col,a,deco}));};
+    rows.forEach((row,i)=>{const r=L.rows[i],wt=i===rows.length-1?800:600;withA(q,hd,()=>wc_T(q,row[0],K.x+K.pad,r.base,{w:wt,size:K.sz,col:WC_DARK,deco}));
+      for(let j=1;j<=nd;j++){const A=fw_skCell(row[j]),B=after?fw_skCell(after[i][j]):A,u=clamp((p-0.12)/0.88*N-(i*nd+j-1),0,1);if(u<=0||(!A&&!B))continue;
+        const SA=A&&FW_SKST[A.state],SB=B&&FW_SKST[B.state],col=SA&&SB?mix(SA[0],SB[0],e):(SA||SB)[0],pale=SA&&SB?lerp(SA[1],SB[1],e):(SA||SB)[1],
+          wa=u*(SA&&SB?1:SA?1-e:e),bx=L.cx[j]+6,by=r.top+2,bw=L.cw[j]-12,bh=r.h-5;
+        withA(q,wa,()=>{q.save();q.globalCompositeOperation="multiply";q.fillStyle=rgba(wc_lit(col,pale),1);q.fillRect(bx,by,bw,bh);q.restore();});
+        const ha=u*((A&&A.state==="skip"?1-e:0)+(B&&B.state==="skip"?e:0));if(ha>0.01)fw_hatch(q,bx,by,bw,bh,ha);
+        if(!after||row[j]===after[i][j])words(A,j,r,wt,u,SA[2]);else{words(A,j,r,wt,u*eo,SA&&SA[2]);words(B,j,r,wt,u*en,SB&&SB[2]);}}});
+    // under the table: each section, its title and headings, and a line for each check with a swatch of its colour
+    const sections=(S,a)=>{const out=[];let ty=L.bottom+32;S.forEach(s=>{const st=FW_SKST[s.state],heads=s.heads===false?null:s.heads||K.heads,
+        hx=(heads||[[null,0]]).map(([,f],k)=>k?K.x+f*K.w:K.x+K.pad+32);let ry=ty;
+      withA(q,a,()=>{wc_T(q,s.title,K.x+K.pad,ty,{w:800,size:K.sz+3,col:WC_DARK,deco:dz(K.sz+3)});if(heads){ry+=30;heads.forEach(([hs],k)=>wc_T(q,hs,hx[k],ry,{w:700,size:K.sz,col:WC_MUTED,deco}));}});
+      const ys=s.rows.map((cells,k)=>{const yy=ry+K.rh*(k+1);withA(q,a,()=>{q.save();q.globalCompositeOperation="multiply";q.fillStyle=rgba(wc_lit(st[0],st[1]),1);
+          q.fillRect(K.x+K.pad,yy-K.sz*0.8,20,20);q.restore();cells.forEach((c,m)=>wc_T(q,c,hx[m]==null?hx[0]:hx[m],yy,{w:600,size:K.sz,col:m?WC_INK:WC_DARK,deco}));});return yy;});
+      out.push({title:ty,rows:ys,cols:hx});ty=(ys.length?ys[ys.length-1]:ry)+50;});return out;};
+    const same=secA===secB;L.sec=sections(secA,same?1:eo);L.secB=same?null:sections(secB,en);
+    const clr=same?(secA.length?0:1):(secA.length?0:eo)+(secB.length?0:en);
+    if(clr>0.01)wc_T(q,o.clear||"Every check passed.",K.x+K.pad,L.bottom+46,{w:700,size:K.sz+3,col:GV.greenInk,a:clr,deco:dz(K.sz+3)});},{titleSize:32,barH:54});
+  return L;}
+// where the camera looks for each turn: the whole page; then the learning row, near the top of the frame, with the lines under it,
+// above the captions
+const FW_SKV={all:[960,415,1.02],row:[960,FW_SK.y+5*FW_SK.rh+156,1.55]};
+
+/* ---------- today: Tom's desk, from above ---------- */
+// the learning team's desk from above, for the papers on it: pale beech with its grain, Tom's blue mug, a pencil, the edge of his
+// keyboard and a fan of this term's leaflets
+const FW_TT={wood:[214,178,138],log:[310,176,1300],card:[460,150,1000]};
+function fw_paintTomTop(ctx){const col=FW_TT.wood;ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),col,{kind:"plaster",line:false,seed:111});
+  ctx.save();ctx.globalCompositeOperation="multiply";const R=wc_rng(12);for(let i=0;i<60;i++){const y=R()*H;ctx.strokeStyle=rgba(wc_dim(col,0.18+R()*0.1),0.16+R()*0.12);ctx.lineWidth=1+R()*2.2;
+    ctx.beginPath();ctx.moveTo(-20,y);for(let x=0;x<=W+40;x+=80)ctx.lineTo(x,y+5*Math.sin(x/320+i)+3*Math.sin(x/95+i*2));ctx.stroke();}ctx.restore();
+  ctx.save();ctx.globalCompositeOperation="screen";wc_glowAt(ctx,300,-120,1400,[255,250,236],0.3);ctx.restore();
+  // the keyboard's edge, top right; the mug, top left; a pencil; the leaflets, bottom right
+  wc_part(ctx,wc_rect(1540,-40,420,110),[226,228,234],1);for(let i=0;i<8;i++)for(let j=0;j<2;j++)wc_flat(ctx,wc_rect(1556+i*48,-26+j*44,40,36),[244,245,248],1,"key");
+  wc_wash(ctx,wc_ell(130,150,80,80,40),[96,160,176],{kind:"thing",lw:1.6,seed:112});wc_wash(ctx,wc_ell(130,150,60,60,40),[150,104,70],{kind:"thing",line:false,seed:113});
+  wc_part(ctx,[[60,980],[330,900],[336,912],[66,994]],[244,196,80],1);wc_flat(ctx,[[330,900],[360,892],[336,912]],[60,54,58],1,"tip");
+  [[1690,900,-0.18,[236,170,34]],[1720,930,-0.05,[96,160,176]],[1745,960,0.1,[200,110,90]]].forEach(([lx,ly,r,c],i)=>{ctx.save();ctx.translate(lx,ly);ctx.rotate(r);
+    gv_sheet(ctx,-120,-150,240,300,{col:[251,250,245]});wc_flat(ctx,wc_rect(-104,-134,208,90),c,0.7,"leaflet");ctx.restore();});}
+// a pen lying on the desk or writing, its tip at (x,y)
+function fw_pen(ctx,x,y,rot){ctx.save();ctx.translate(x,y);ctx.rotate(rot==null?-0.75:rot);ctx.fillStyle="rgba(40,30,20,0.22)";ctx.fillRect(14,12,220,12);
+  wc_part(ctx,[[0,0],[26,-8],[26,8]],[200,200,206],1,{lw:1});wc_part(ctx,wc_rrPts(26,-9,210,18,8),[34,44,92],1,{kind:"thing",lw:1.1,seed:115});ctx.restore();}
 
 /* ---------- today: the issues ---------- */
-// Monday's issue, on Yusuf's board: the scorecard's warning, sent to its owner, then closed (stamp, 0 to 1) as cleaned in staging
-function fw_issueCard(ctx,x,y,rot,u,stamp){if(u<=0)return;const e=easeCam(clamp(u,0,1)),k=lerp(1.12,1,e);ctx.save();ctx.translate(x,y-14*(1-e));ctx.rotate(rot);ctx.scale(k,k);
-  withA(ctx,clamp(u*2.5,0,1),()=>{wc_panel(ctx,-300,-140,600,300,{kind:"card",wash:FW.amber,washA:0.18,seed:110+(x|0)});gv_pin(ctx,0,-124,GV.red,1.2);
-    wc_T(ctx,"Issue · learning · validity",-260,-62,{w:800,size:32,col:WC_DARK});wc_T(ctx,"Short-course emails as typed",-260,-14,{w:600,size:30,col:WC_INK});
-    wc_T(ctx,"Owner: Learning team",-260,32,{w:600,size:30,col:WC_INK});gv_stamp(ctx,20,96,"CLOSED: cleaned in staging",stamp,{size:30,rot:-0.05});});ctx.restore();}
-// the issue that closes it for good: the next Monday's, with an owner, a cause, a date and the check that proves it's closed (line(k));
-// stamped closed (closed, 0 to 1) once the test passes
-const FW_IS=[["Owner:","Learning team"],["Cause:","the form keeps each email as typed"],["Due:","2 November"],["Closed when:","the test passes with no clean-up"]];
+// the data quality issue log, as Rules that run keeps it: the series' register page, open in its blue boards on Tom's desk, the
+// learning team's. Its line for the emails, from the Monday's warnings, is lit gold (hiA), then stamped as the old answer closes it
+// (stamp, 0 to 1), under the line, so the stamp and the line both read
+const FW_IL={kicker:"Issue log",title:"Data quality",h:440,cols:[["Opened",0.13],["Issue",0.48],["Owner",0.25],["Due",0.14]],
+  rows:[["19 Oct","Short-course emails as typed","Learning team","26 Oct"]]};
+function fw_issueBook(ctx){const [x,y,w]=FW_TT.log,h=FW_IL.h*w/1000;ctx.drawImage(wc_kept("fwIssueBook",w+160,h+120,q=>{q.translate(70,40);
+    q.save();q.filter="blur(10px)";q.fillStyle="rgba(50,40,30,0.3)";q.fillRect(-40,-8,w+70,h+44);q.restore();
+    wc_wash(q,wc_rrPts(-46,-22,w+72,h+44,10),[58,82,118],{kind:"cover",lw:1.4,seed:116});wc_flat(q,wc_rect(-46,-22,34,h+44),[40,58,88],1,"spine");
+    for(let i=3;i>0;i--)wc_flat(q,wc_rect(i*3,i*3,w,h),[240-i*8,236-i*8,226-i*8],1,"pages");}),x-70,y-40);}
+function fw_issueLog(ctx,hiA,stamp){const [x,y,w]=FW_TT.log;fw_issueBook(ctx);const r=gv_register(ctx,x,y,w,Object.assign({hi:0,hiA},FW_IL));
+  if(stamp>0)gv_stamp(ctx,x+w/2,r.rows[0]+128*w/1000,"CLOSED: cleaned downstream",stamp,{size:40,rot:-0.04});return r;}
+// the issue that closes it for good: the next Monday's, on Yusuf's board, with an owner, a cause, a date and the check that proves it's
+// closed (line(k)); stamped closed (closed, 0 to 1) once the check passes
+const FW_IS=[["Owner:","Learning team"],["Cause:","the form keeps each email as typed"],["Due:","2 November"],["Closed when:","the check passes with no clean-up"]];
 function fw_issueGold(ctx,u,line,closed){if(u<=0)return;const e=easeCam(clamp(u,0,1)),k=lerp(1.1,1,e),x=520,y=230,w=1080,h=540;ctx.save();ctx.translate(0,-16*(1-e));
   withA(ctx,clamp(u*2.5,0,1),()=>{ctx.save();ctx.translate(x+w/2,y+h/2);ctx.scale(k,k);ctx.translate(-x-w/2,-y-h/2);
     wc_panel(ctx,x,y,w,h,{kind:"card",wash:GV.gold,washA:0.42,seed:131});gv_pin(ctx,x+w/2,y+16,GV.red,1.4);
     wc_T(ctx,"Issue · short-course emails as typed",x+56,y+92,{w:800,size:40,col:WC_DARK});
     FW_IS.forEach(([a,b],i)=>{const p=line(i);if(p<=0)return;const yy=y+176+i*70;withA(ctx,clamp(p*2,0,1),()=>{if(a)wc_T(ctx,a,x+56,yy,{w:800,size:36,col:GV.goldInk});
       wc_T(ctx,b,x+(i>=3?330:250),yy,{w:600,size:36,col:WC_DARK});});});
-    if(closed>0)gv_stamp(ctx,x+w-250,y+h-84,"CLOSED: the test passes",closed,{size:32,col:GV.greenInk,rot:-0.05});ctx.restore();});ctx.restore();}
+    if(closed>0)gv_stamp(ctx,x+w-250,y+h-84,"CLOSED: the check passes",closed,{size:32,col:GV.greenInk,rot:-0.05});ctx.restore();});ctx.restore();}
 
-/* ---------- today: the clean-up in staging ---------- */
-// Jun's screen, close: the first step of the build, where each email is trimmed and written in lower case; cut (0 to 1) takes the
-// trim and the lower-casing away, as they leave once the old emails are corrected
-const FW_SQL=["renamed as (","","    select","        nullif(lower(trim(customer_email)), '') as email,","        trim(customer_name) as customer_name,","        trim(cast(status as string)) as status_code,"];
-function fw_staging(ctx,lit,cut,ex){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,"staging · the first step of the build",q=>{const lx=x+56,sz=30,cw=tw(q,"m",sz,500,"mono");
-  FW_SQL.forEach((s,i)=>{const yy=y+136+i*50;if(i!==3){wc_T(q,s,lx,yy,{w:500,size:sz,f:"mono",col:i>3?WC_MUTED:WC_INK});return;}
-    // the email's line: "lower(trim(" and "))" lit, then gone
-    const pre="        nullif(",a="lower(trim(",mid="customer_email",b="))",post=", '') as email,",c=clamp(cut||0,0,1),g=1-easeCam(c);
-    let cx=lx;wc_T(q,pre,cx,yy,{w:500,size:sz,f:"mono"});cx+=cw*pre.length;
-    const piece=(s2,on)=>{if(on){if(lit>0)gv_tint(q,cx-4,yy-sz*0.82,cw*s2.length*g+8,sz*1.1,GV.gold,0.75*lit*g);withA(q,g,()=>{q.save();q.translate(cx,yy);q.scale(Math.max(0.02,g),1);
-        wc_T(q,s2,0,0,{w:500,size:sz,f:"mono",col:WC_DARK});q.restore();});cx+=cw*s2.length*g;}else{wc_T(q,s2,cx,yy,{w:500,size:sz,f:"mono"});cx+=cw*s2.length;}};
-    piece(a,true);piece(mid,false);piece(b,true);piece(post,false);});
-  // an email as typed, and as staging writes it
-  if(ex>0)withA(q,ex,()=>{const yy=y+520;wc_T(q,"as typed",lx,yy,{w:700,size:30,col:WC_MUTED});wc_T(q," DanielKim.Work@mail.example",lx+190,yy,{w:500,size:30,f:"mono",col:WC_INK});
-    wc_T(q,"in staging",lx,yy+62,{w:700,size:30,col:WC_MUTED});wc_T(q,"danielkim.work@mail.example",lx+190,yy+62,{w:500,size:30,f:"mono",col:GV.greenInk});});},{titleSize:30,barH:54});}
+/* ---------- today: the data team's clean-up ---------- */
+// an email in the normal type, each space shown as a small grey bar where it was left (a little wider than a space, so it shows); returns
+// where each letter starts and where the email ends, for a ring or a caret
+function fw_email(ctx,s,x,y,o){o=o||{};const sz=o.size||28,wt=o.w||600,a=o.a==null?1:o.a,sp=Math.max(tw(ctx," ",sz,wt),sz*0.5),xs=[];let cx=x,rx=x,run="";
+  const flush=()=>{if(run&&a>0.01)wc_T(ctx,run,rx,y,{w:wt,size:sz,col:o.col||WC_INK,a,deco:o.deco});run="";};
+  for(const ch of s){xs.push(cx);if(ch===" "){flush();if(a>0.01){ctx.fillStyle=rgba(WC_MUTED,0.65*a);ctx.fillRect(cx+2,y+4,sp-4,Math.max(5,sz*0.2));}cx+=sp;rx=cx;}
+    else{if(!run)rx=cx;run+=ch;cx=rx+tw(ctx,run,sz,wt);}}
+  flush();xs.push(cx);return xs;}
+// a red ring round letter i of an email drawn at size sz (xs from fw_email), or round a space
+function fw_ringAt(ctx,xs,i,y,sz,p,col){if(p<=0)return;const x0=xs[i],x1=xs[i+1],cx=(x0+x1)/2;wc_ring(ctx,cx,y-sz*0.34,Math.max(sz*0.36,(x1-x0)*0.6),sz*0.58,p,{col:col||GV.red,lw:Math.max(3,sz*0.12)});}
+// the clean-up, on a card pinned to the data team's board: what it does every night, an email as typed and after; the capitals and the
+// space it takes away ringed red as "trimmed" (trim) and "lower case" (low) light; after shows what it writes; retired (0 to 1)
+// stamps it once the form does the work
+const FW_CU={x:330,y:190,w:1260,h:600,em:"DanielKim.Work@mail.example "};
+function fw_cleanCard(ctx,o){const C=FW_CU,{x,y,w,h}=C;ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(-0.012);ctx.translate(-x-w/2,-y-h/2);
+  wc_panel(ctx,x,y,w,h,{kind:"card",wash:GV.grey,washA:0.12,seed:141});gv_pin(ctx,x+60,y+24,GV.red,1.2);gv_pin(ctx,x+w-60,y+24,GV.red,1.2);
+  wc_T(ctx,"The data team's clean-up",x+70,y+108,{w:800,size:48,col:WC_DARK});wc_T(ctx,"every night",x+w-70,y+108,{w:600,size:34,align:"right",col:WC_MUTED});
+  ctx.fillStyle=rgba(WC_MUTED,0.4);ctx.fillRect(x+70,y+140,w-140,2);
+  const ex=x+330,sz=44,t=o.trim||0,l=o.low||0;wc_T(ctx,"as typed",x+70,y+246,{w:700,size:32,col:WC_MUTED});
+  const xs=fw_email(ctx,C.em,ex,y+246,{size:sz,col:WC_DARK});
+  fw_ringAt(ctx,xs,0,y+246,sz,l);fw_ringAt(ctx,xs,C.em.indexOf("W"),y+246,sz,l);
+  if(t>0){const i=C.em.length-1;wc_ring(ctx,(xs[i]+xs[i+1])/2,y+252,(xs[i+1]-xs[i])*0.8+8,sz*0.32,t,{col:GV.red,lw:5});}
+  // what it does, between: two chips, lighting as they're said
+  [["trimmed",t],["lower case",l]].forEach(([s,u],i)=>{const tx=ex+(i?250:0),k=lerp(0.92,1,spring(clamp(u,0,1)));ctx.save();ctx.translate(tx,y+346);ctx.scale(k,k);
+    withA(ctx,0.3+0.7*clamp(u*1.5,0,1),()=>wc_tag(ctx,0,0,s,{size:32,wash:GV.gold,washA:0.15+0.3*u}));ctx.restore();});
+  ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.6);ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x+200,y+300);ctx.lineTo(x+200,y+402);ctx.moveTo(x+188,y+390);ctx.lineTo(x+200,y+404);
+  ctx.lineTo(x+212,y+390);ctx.stroke();ctx.restore();
+  wc_T(ctx,"after",x+70,y+466,{w:700,size:32,col:WC_MUTED});fw_email(ctx,C.em.trim().toLowerCase(),ex,y+466,{size:sz,col:GV.greenInk,a:o.after==null?1:o.after});
+  if(o.retired>0)gv_stamp(ctx,x+w-250,y+h-74,"RETIRED",o.retired,{size:44,col:GV.greenInk,rot:-0.06});ctx.restore();}
 // the wallet, close: two of them for one learner, one for each way his email was typed, and a question mark between
 function fw_wallets(ctx,u,q){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,"Wallet",c=>{[["DanielKim.Work@mail.example",x+70],["danielkim.work@mail.example",x+w-70-500]].forEach(([em,cx],i)=>{
     const p=fin(u,i*0.25,0.4);if(p<=0)return;withA(c,p,()=>{wc_panel(c,cx,y+150,500,330,{kind:"card",wash:GV_LOOPC,washA:0.18,seed:150+i});
-      wc_T(c,"Daniel Kim",cx+40,y+230,{w:800,size:44,col:WC_DARK});wc_T(c,em,cx+22,y+290,{w:500,size:28,f:"mono",col:WC_INK});
+      wc_T(c,"Daniel Kim",cx+40,y+230,{w:800,size:44,col:WC_DARK});wc_T(c,em,cx+40,y+290,{w:600,size:30,col:WC_INK});
       for(let b=0;b<3;b++)wc_wash(c,wc_ell(cx+76+b*96,y+394,34,34,24),[[236,170,34],[96,160,176],[150,120,190]][b],{kind:"thing",lw:1.2,seed:160+b+i*3});});});
   gv_qmark(c,x+w/2,y+380,110,q);},{titleSize:30,barH:54});}
 
 /* ---------- today: the leak in the data team's room ---------- */
 // the metaphor, said once: a pipe along the top of the wall, leaking at three joints; under each a bucket, the first by Jun's desk
-// ("staging"), with a mop leaning beside it ("the clean-up"); the others ("finance", "mailing list") further along. When the cause is
+// ("data team"), with a mop leaning beside it ("the clean-up"); the others ("finance", "mailing list") further along. When the cause is
 // fixed, the leaks stop, the buckets and the mop go, and a small leak sensor stays where the first bucket stood.
 const FW_LK={y:58,joints:[1356,862,318],floor:870};
 function fw_pipe(ctx,fixed){ctx.drawImage(wc_kept("fwPipe",W,140,q=>{wc_wash(q,wc_rect(-40,FW_LK.y-14,W+80,30),[150,160,176],{kind:"iron",lw:1.4,seed:5});
@@ -413,15 +497,36 @@ function fw_leak(ctx,t,o){const fx=o.fixed||0;fw_pipe(ctx,fx);if(o.sensor)fw_sen
   if(o.mop)fw_mop(ctx,FW_BK.mop,FW_BK.y-4,0.9,o.mop);}
 
 /* ---------- today: following it back ---------- */
-// the lineage on Jun's screen: where the wallet's email comes from, five cards from the sign-up form to the wallet, lit right to left
-// as the film follows it back (lit(k), k 0 the wallet)
-const FW_LN=[["wallet"],["learners"],["staging"],["short-course","platform"],["sign-up form"]];
-function fw_lineage(ctx,lit){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,"Lineage · the wallet's email",q=>{const cw=200,ch=140,gap=48,x0=x+(w-5*cw-4*gap)/2,cy=y+300;
-  for(let k=0;k<5;k++){const cx=x0+(4-k)*(cw+gap),u=lit(k);if(k<4){const ax=cx-gap+8,bx=cx-8;q.save();q.strokeStyle=rgba(WC_PENCIL,0.6);q.lineWidth=3;q.beginPath();q.moveTo(ax,cy);q.lineTo(bx,cy);
-      q.moveTo(bx-10,cy-8);q.lineTo(bx,cy);q.lineTo(bx-10,cy+8);q.stroke();q.restore();}
-    wc_panel(q,cx,cy-ch/2,cw,ch,{kind:"card",wash:k===4?GV.gold:GV_LOOPC,washA:0.15+0.3*u,seed:170+k});if(u>0)gv_halo(q,cx-20,cy-ch/2-20,cw+40,ch+40,k===4?GV.gold:GV_LOOPC,0.8*u);
-    FW_LN[k].forEach((s,i,a)=>wc_T(q,s,cx+cw/2,cy+12+(i-(a.length-1)/2)*36,{w:700,size:30,align:"center",col:WC_DARK}));}
-  wc_T(q,"made here",x0+cw/2,cy+ch/2+50,{w:600,size:28,align:"center",col:WC_MUTED});wc_T(q,"seen here",x0+4*(cw+gap)+cw/2,cy+ch/2+50,{w:600,size:28,align:"center",col:WC_MUTED});},{titleSize:30,barH:54});}
+// on the data team's board: a card for each place the email passes, pinned right to left as they're named (lit(k), k 0 the wallet), each
+// with a small picture of the place as the film drew it, so it reads before its words; a red thread runs over them from pin to pin as
+// each one goes up; "seen here" under the wallet, "made here" under the form
+const FW_TR=[["wallet"],["the data team's","clean-up"],["short-course","platform"],["sign-up form"]],FW_TRX=[1524,1148,772,396],FW_TRC={y:300,w:320,h:280};
+// the pictures, kept at twice the frame's resolution like the cards: the wallet's card with its badges; the data team's bucket and the
+// mop; the platform's list on a screen; the form on a phone, its email box lit gold
+function fw_trailIcon(ctx,k,x,y){ctx.drawImage(wc_kept("fwTrail"+k,220*WC_SC,130*WC_SC,q=>{q.scale(WC_SC,WC_SC);q.translate(110,65);const grey=[150,154,162],frame=[70,76,88];
+    if(k===0){wc_panel(q,-64,-42,128,84,{kind:"card",wash:GV_LOOPC,washA:0.18,seed:191});wc_flat(q,wc_rect(-48,-27,66,10),[70,74,84],1,"name");wc_flat(q,wc_rect(-48,-11,90,6),grey,1,"mail");
+      for(let b=0;b<3;b++)wc_wash(q,wc_ell(-34+b*34,18,12,12,18),[[236,170,34],[96,160,176],[150,120,190]][b],{kind:"thing",lw:1,seed:192+b});}
+    else if(k===1){fw_bucket(q,-20,58,0.6,1);fw_mop(q,44,60,0.22,1);}
+    else if(k===2){wc_wash(q,wc_rrPts(-62,-52,124,84,8),frame,{kind:"thing",lw:1.2,seed:195});wc_flat(q,wc_rect(-54,-44,108,68),[242,243,246],1,"glass");
+      wc_flat(q,wc_rect(-54,-44,108,13),[96,160,176],1,"bar");for(let i=0;i<3;i++)wc_flat(q,wc_rect(-46,-22+i*14,i===1?52:74,6),grey,1,"line"+i);
+      wc_wash(q,[[-9,32],[9,32],[14,48],[-14,48]],frame,{kind:"thing",lw:1,seed:196});wc_wash(q,wc_rect(-32,47,64,8),frame,{kind:"thing",lw:1,seed:197});}
+    else{wc_wash(q,wc_rrPts(-32,-60,64,120,12),[44,46,54],{kind:"thing",lw:1.2,seed:198});wc_flat(q,wc_rrPts(-26,-52,52,104,7),[244,244,240],1,"glass");
+      [[-30,0],[0,1]].forEach(([yy,lit])=>{wc_flat(q,wc_rect(-20,yy-13,22,4),grey,1,"label"+lit);q.save();q.strokeStyle=rgba(lit?[204,150,24]:[120,124,132],1);q.lineWidth=lit?2.6:1.6;
+        q.strokeRect(-20,yy-5,40,14);q.restore();});wc_flat(q,wc_rrPts(-20,28,40,13,4),[96,160,176],1,"button");}}),x-110,y-65,220,130);}
+function fw_trail(ctx,lit){const C=FW_TRC,pin=k=>[FW_TRX[k],C.y+16];
+  for(let k=0;k<4;k++){const u=clamp(lit(k),0,1);if(u<=0)continue;const cx=FW_TRX[k],e=easeCam(clamp(u*1.6,0,1)),s=lerp(1.12,1,e),gold=k===3;
+    ctx.save();ctx.translate(cx,C.y+C.h/2-12*(1-e));ctx.rotate([0.02,-0.015,0.012,-0.02][k]);ctx.scale(s,s);withA(ctx,clamp(u*2.5,0,1),()=>{
+      wc_panel(ctx,-C.w/2,-C.h/2,C.w,C.h,{kind:"card",wash:gold?GV.gold:GV_LOOPC,washA:gold?0.4:0.2,seed:170+k});fw_trailIcon(ctx,k,0,-C.h/2+92);
+      FW_TR[k].forEach((s2,i,a)=>wc_T(ctx,s2,0,C.h/2-54+(i-(a.length-1)/2)*44,{w:800,size:38,align:"center",col:WC_DARK}));});ctx.restore();}
+  // the thread, over the cards: from each card's pin to the next one's, drawn as the next one goes up; then the pins over it
+  for(let k=1;k<4;k++){const u=easeCam(clamp(lit(k)*1.4,0,1));if(u<=0)continue;const [ax,ay]=pin(k-1),[bx,by]=pin(k),mx=lerp(ax,bx,u),my=lerp(ay,by,u);
+    const path=(dx,dy)=>{ctx.beginPath();ctx.moveTo(ax+dx,ay+dy);ctx.quadraticCurveTo((ax+mx)/2+dx,(ay+my)/2+26*u+dy,mx+dx,my+dy);};ctx.save();ctx.lineCap="round";
+    path(2,4);ctx.strokeStyle="rgba(60,40,30,0.18)";ctx.lineWidth=5;ctx.stroke();path(0,0);ctx.strokeStyle=rgba([176,48,40],0.9);ctx.lineWidth=3;ctx.stroke();ctx.restore();}
+  for(let k=0;k<4;k++)if(lit(k)>0)gv_pin(ctx,...pin(k),GV.red,1.3);
+  // where it's seen and where it's made
+  fw_trailTag(ctx,0,lit(0),"seen here");fw_trailTag(ctx,3,lit(3),"made here");}
+function fw_trailTag(ctx,k,u,s){const a=clamp(u*2-0.6,0,1);if(a<=0)return;withA(ctx,a,()=>wc_tag(ctx,FW_TRX[k],FW_TRC.y+FW_TRC.h+62,s,{align:"center",size:32,
+  wash:k===3?GV.gold:null,washA:0.3}));}
 
 /* ---------- today: the learning team's desk, Tom's ---------- */
 // the learning team's office, close, the camera at the height of someone sitting: apricot walls, a window onto the campus, a poster of
@@ -445,19 +550,22 @@ function fw_tomScreen(ctx,mode,o){o=o||{};const [x,y,w,h]=FW_TX.screen;if(mode==
     [["Name","Daniel Kim"],["Email",""]].forEach(([l,v],i)=>{const yy=y+134+i*96;wc_T(q,l,x+40,yy,{w:600,size:28,col:WC_MUTED});q.fillStyle="#fff";q.fillRect(x+40,yy+10,w-80,48);
       if(i===1&&o.lit>0)gv_halo(q,x+30,yy,w-60,68,GV.gold,o.lit);
       q.strokeStyle=rgba(i===1?GV.goldInk:WC_PENCIL,i===1?0.9:0.4);q.lineWidth=i===1?3:2;q.strokeRect(x+40,yy+10,w-80,48);if(v)wc_T(q,v,x+56,yy+44,{w:600,size:28,col:WC_INK});});
-    // the box's setting, under the form
-    if(o.setting!=null)withA(q,o.settingA==null?1:o.settingA,()=>{const u=o.setting,yy=y+h-44;wc_T(q,"Email box:",x+40,yy,{w:700,size:30,col:WC_DARK});
-      withA(q,1-u,()=>wc_T(q,"plain text",x+220,yy,{w:600,size:30,f:"mono",col:WC_INK}));withA(q,u,()=>{wc_T(q,"email",x+220,yy,{w:600,size:30,f:"mono",col:GV.greenInk});wc_tick(q,x+340,yy-10,34,GV.green,clamp(u*1.5-0.4,0,1),5);});});},{titleSize:28,barH:46});
-  if(mode==="alert")gv_screen(ctx,x,y,w,h,"Monitoring · learning platform",q=>{const u=o.u==null?1:o.u;withA(q,u,()=>{wc_panel(q,x+36,y+80,w-72,h-120,{kind:"card",wash:FW.amber,washA:0.3,seed:181});
-    wc_T(q,"to: Learning team (owner)",x+66,y+140,{w:700,size:28,col:WC_MUTED});wc_T(q,"Badges with no credit:",x+66,y+200,{w:800,size:34,col:WC_DARK});
+    // what the email box is, on a tag under it: "a plain text box", springing in as o.tag goes 0 to 1, then "an email box", ticked, as
+    // o.fix goes 0 to 1
+    if(o.tag>0){const u=clamp(o.fix||0,0,1),k=0.9+0.1*spring(clamp(o.tag,0,1));q.save();q.translate(x+w/2,y+h-58);q.scale(k,k);
+      withA(q,clamp(o.tag*2,0,1)*(1-u),()=>wc_tag(q,0,0,"a plain text box",{align:"center",size:30,wash:FW.amber,washA:0.3}));
+      withA(q,u,()=>{const tw2=wc_tag(q,0,0,"an email box",{align:"center",size:30,wash:GV.green,washA:0.3});wc_tick(q,tw2/2+30,-6,34,GV.green,clamp(u*1.5-0.4,0,1),5);});q.restore();}},{titleSize:28,barH:46});
+  // the notice, landing with the owner on record
+  if(mode==="alert")gv_screen(ctx,x,y,w,h,"Notice · the learning platform's badges",q=>{const u=o.u==null?1:o.u;withA(q,u,()=>{wc_panel(q,x+36,y+80,w-72,h-120,{kind:"card",wash:FW.amber,washA:0.3,seed:181});
+    wc_T(q,"to: Learning team, the owner",x+66,y+140,{w:700,size:28,col:WC_MUTED});wc_T(q,"Badges with no credit:",x+66,y+200,{w:800,size:34,col:WC_DARK});
     wc_T(q,"1 in 2 last night",x+66,y+250,{w:800,size:34,col:FW.amberInk});wc_T(q,"(usually 1 in 12)",x+66,y+298,{w:600,size:30,col:WC_INK});});},{titleSize:28,barH:46});}
 // Tom's screen, close: the learners the form has saved, as they're typed (fixed, 0 to 1, lowers them one by one); the courses on the
-// learning platform and their credit points (set(k)), then "Send badges again"
-const FW_LR=[" Aisha.K@Mail.example ","aisha.r@mail.example","DanielKim.Work@mail.example"," Nguyen.Family@mail.example","tom.becker@mail.example","omar.haddad@mail.example",
+// learning platform and their credit points (set(k)), then "badges sent again"
+const FW_LR=[" Aisha.K@Mail.example ","aisha.r@mail.example","DanielKim.Work@mail.example "," Nguyen.Family@mail.example","tom.becker@mail.example","omar.haddad@mail.example",
   "grace.okafor@mail.example","peter.novak@mail.example"],FW_LRX=[0,2,3];
-function fw_learners(ctx,lit,fixed,tag){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,"Short-course platform · learners",q=>{FW_LR.forEach((s,i)=>{const yy=y+120+i*62,bad=FW_LRX.indexOf(i),
-    f=bad<0?1:clamp(fixed*3-bad,0,1),v=bad<0||f<0.5?s:s.replace(/ /g,"").toLowerCase();if(bad>=0&&lit>0&&f<1)gv_tint(q,x+40,yy-36,700,50,FW.amber,0.65*lit*(1-f));
-    wc_T(q,v,x+60,yy,{w:500,size:30,f:"mono",col:bad>=0&&f<0.5?WC_DARK:WC_INK});if(bad>=0&&f>=0.5)wc_tick(q,x+790,yy-10,32,GV.green,clamp(f*2-1,0,1),5);});
+function fw_learners(ctx,lit,fixed,tag){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,"Short-course learners",q=>{FW_LR.forEach((s,i)=>{const yy=y+120+i*62,bad=FW_LRX.indexOf(i),
+    f=bad<0?1:clamp(fixed*3-bad,0,1),v=bad<0||f<0.5?s:s.trim().toLowerCase();if(bad>=0&&lit>0&&f<1)gv_tint(q,x+40,yy-36,700,50,FW.amber,0.65*lit*(1-f));
+    fw_email(q,v,x+60,yy,{size:30,col:bad>=0&&f<0.5?WC_DARK:WC_INK});if(bad>=0&&f>=0.5)wc_tick(q,x+790,yy-10,32,GV.green,clamp(f*2-1,0,1),5);});
   if(tag>0)withA(q,tag,()=>wc_badge(q,x+w-330,y+180,"3 of 8 as typed",{size:32,role:FW.amber}));},{titleSize:30,barH:54});}
 // the platform's ten microcredentials, as the example project's badges name them, in two columns; the update set three to 0
 const FW_CS=[["Data Visualisation",0],["Designing Digital Learning",5],["Finance for Managers",5],["Health Data Essentials",5],["Leading Teams",0],
@@ -467,8 +575,8 @@ function fw_courses(ctx,set,send,fly){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,
   let k=0;FW_CS.forEach(([s,c],i)=>{const cx=i<5?x+50:x+650,yy=y+176+(i%5)*64,fix=c===0?clamp(set(k++),0,1):1,v=c===0&&fix<0.5?0:5;
     if(c===0&&fix<1)gv_tint(q,cx-10,yy-40,580,54,FW.amber,0.55*(1-fix));
     wc_T(q,s,cx+14,yy,{w:600,size:32,col:WC_INK});wc_T(q,String(v),cx+500,yy,{w:800,size:34,align:"center",col:v?WC_DARK:FW.amberInk});});
-  const bx=x+w-420,by=y+h-104,u=clamp(send,0,1);q.save();q.fillStyle=rgba(mix([70,96,140],[40,140,90],u),1);rr(q,bx,by,360,66,12);q.fill();q.restore();
-  wc_T(q,"Send badges again",bx+180,by+44,{w:800,size:30,align:"center",col:[255,255,255]});
+  const bx=x+w-420,by=y+h-104,u=clamp(send,0,1);if(u>0)withA(q,clamp(u*2,0,1),()=>{wc_T(q,"badges sent again",bx+20,by+44,{w:800,size:32,col:GV.greenInk});
+    wc_tick(q,bx+20+tw(q,"badges sent again",32,800)+34,by+32,34,GV.green,clamp(u*1.6-0.3,0,1),5);});
   if(fly>0)for(let i=0;i<6;i++){const v=clamp(fly*1.6-i*0.12,0,1);if(v<=0||v>=1)continue;const ex=bx+180+v*560,ey=by+33-Math.sin(v*Math.PI)*160;
     wc_wash(q,wc_ell(ex,ey,22,22,18),[[236,170,34],[96,160,176],[150,120,190]][i%3],{kind:"thing",lw:1.1,seed:190+i});}},{titleSize:30,barH:54});}
 
@@ -505,23 +613,22 @@ function fw_phone(ctx,o){const P=FW_PH,[bx,by,bw,bh]=P.box,[nx,ny,nw,nh]=P.name,
   wc_T(ctx,"Name",P.sx+28,ny-16,{w:600,size:28,col:WC_MUTED});ctx.strokeStyle=rgba(WC_PENCIL,0.35);ctx.lineWidth=2;ctx.strokeRect(nx,ny,nw,nh);
   wc_T(ctx,o.name||"Daniel Kim",nx+16,ny+38,{w:600,size:30,col:WC_INK});
   wc_T(ctx,"Email",P.sx+28,by-16,{w:600,size:28,col:WC_MUTED});ctx.fillStyle="#fff";ctx.fillRect(bx,by,bw,bh);ctx.strokeStyle=rgba(o.ok>0?GV.green:GV.goldInk,0.9);ctx.lineWidth=3;ctx.strokeRect(bx,by,bw,bh);
-  const sz=P.sz,cw=tw(ctx,"m",sz,500,"mono"),tx=bx+14,ty=by+bh/2+sz*0.36,val=o.val||"",m=o.prev==null?1:clamp(o.mixv==null?1:o.mixv,0,1);
-  const show=(v,a)=>{if(a<=0.01||!v)return;withA(ctx,a,()=>{wc_T(ctx,v,tx,ty,{w:500,size:sz,f:"mono",col:WC_DARK});
-    // a space shows as a small grey bar where the phone left it
-    for(let i=0;i<v.length;i++)if(v[i]===" "){const sx=tx+cw*i;ctx.fillStyle=rgba(WC_MUTED,0.65);ctx.fillRect(sx+2,ty+4,cw-4,6);
-      if(o.spc>0)wc_ring(ctx,sx+cw/2,ty-sz*0.3,cw*1.3,sz*0.95,o.spc,{col:GV.red,lw:4});}});};
-  if(o.prev!=null)show(o.prev,1-m);show(val,m);
-  if(o.ring>0)wc_ring(ctx,tx+cw*((o.ringAt||0)+0.5),ty-sz*0.34,cw*0.95,sz*0.95,o.ring,{col:o.ringCol||GV.red,lw:4});
+  const sz=P.sz,tx=bx+14,ty=by+bh/2+sz*0.36,val=o.val||"",m=o.prev==null?1:clamp(o.mixv==null?1:o.mixv,0,1);
+  // what's typed, in the normal type: a space shows as a small grey bar where the phone left it (fw_email), ringed red as spc goes 0 to 1
+  const show=(v,a)=>{if(!v)return null;const xs=fw_email(ctx,v,tx,ty,{size:sz,col:WC_DARK,a});
+    if(a>0.01&&o.spc>0)for(let i=0;i<v.length;i++)if(v[i]===" ")withA(ctx,a,()=>wc_ring(ctx,(xs[i]+xs[i+1])/2,ty-sz*0.3,(xs[i+1]-xs[i])*0.9+6,sz*0.95,o.spc,{col:GV.red,lw:4}));return xs;};
+  if(o.prev!=null)show(o.prev,1-m);const xs=show(val,m)||[tx];
+  if(o.ring>0&&xs.length>1){const i=o.ringAt||0;wc_ring(ctx,(xs[i]+xs[i+1])/2,ty-sz*0.34,Math.max(sz*0.5,(xs[i+1]-xs[i])*0.8),sz*0.95,o.ring,{col:o.ringCol||GV.red,lw:4});}
   if(o.paste>0)withA(ctx,o.paste,()=>{ctx.fillStyle=rgba([40,40,48],0.94);rr(ctx,bx+120,by-70,140,58,12);ctx.fill();ctx.beginPath();ctx.moveTo(bx+178,by-12);ctx.lineTo(bx+190,by);
     ctx.lineTo(bx+202,by-12);ctx.closePath();ctx.fill();wc_T(ctx,"Paste",bx+190,by-31,{w:700,size:28,align:"center",col:[255,255,255]});});
-  if(o.caret&&Math.floor((o.t||0)*2)%2===0){ctx.fillStyle=rgba(GV.cyanInk,0.9);ctx.fillRect(tx+cw*val.length+2,by+16,3,bh-32);}
+  if(o.caret&&Math.floor((o.t||0)*2)%2===0){ctx.fillStyle=rgba(GV.cyanInk,0.9);ctx.fillRect(xs[xs.length-1]+2,by+16,3,bh-32);}
   if(o.ok>0)wc_tick(ctx,bx+bw-26,by-28,34,GV.green,o.ok,5);
   // the button, under the keyboard until it's put away
   const [ux,uy,uw,uh]=P.btn,pr=clamp(o.btn||0,0,1);if(kb<0.99){ctx.fillStyle=rgba(mix([70,96,140],[40,64,104],pr),1);rr(ctx,ux,uy+3*pr,uw,uh,12);ctx.fill();
     wc_T(ctx,"Sign up",ux+uw/2,uy+3*pr+38,{w:800,size:30,align:"center",col:[255,255,255]});}
   const dy=(1-easeCam(clamp(kb,0,1)))*640;ctx.save();ctx.translate(0,dy);
   const [gx,gy,gw,gh]=P.sug;ctx.fillStyle=rgba([226,229,235],1);ctx.fillRect(gx,gy,gw,gh);
-  if(o.sug>0)withA(ctx,o.sug,()=>wc_T(ctx,o.sugVal||"DanielKim.Work@mail.example",gx+gw/2,gy+gh/2+sz*0.36,{w:500,size:sz,f:"mono",align:"center",col:WC_DARK}));
+  if(o.sug>0)withA(ctx,o.sug,()=>wc_T(ctx,o.sugVal||"DanielKim.Work@mail.example",gx+gw/2,gy+gh/2+sz*0.36,{w:600,size:sz,align:"center",col:WC_DARK}));
   const pos=fw_keyboard(ctx,P.keys,o.shift||0,o.email,o.press);ctx.restore();for(const k in pos)pos[k]=[pos[k][0],pos[k][1]+dy];pos.sug=[gx+gw/2,gy+gh/2+dy];
   pos.box=[bx+bw*0.6,by+bh/2];pos.paste=[bx+190,by-41];pos.btn=[ux+uw/2,uy+uh/2];return pos;}
 // the hand holding the phone: three fingertips round its left edge, and the thumb, from the phone's lower right corner to (tx,ty),
@@ -546,22 +653,23 @@ function fw_screen(ctx,x,y,w,h,title,fn,o){o=o||{};gv_screen(ctx,x,y,w,h,null,q=
 // Sam's desk at night: the room dark blue, only the screens lit; in the morning, the room as it is
 function fw_night(ctx,a){if(a<=0.01)return;ctx.save();ctx.globalCompositeOperation="multiply";ctx.fillStyle=rgba(mix([255,255,255],[52,62,104],a),1);ctx.fillRect(-W,-H,3*W,3*H);ctx.restore();
   ctx.save();ctx.globalCompositeOperation="screen";for(const [sx,sy,sw,sh] of GV_PX.screens){wc_glowAt(ctx,sx+sw/2,sy+sh/2,sw*0.75,[150,180,230],0.5*a);}ctx.restore();}
-// the badges the platform sent last night, on the left screen: arriving one by one (n, how many), half with no credit (glow lights them)
-// each badge's code, as the platform writes it (a microcredential's starts MC-, the welcome badge's BD-), its name and its credit
-const FW_BG=[["MC-SQL","SQL for Analysis",5],["MC-PY","Python Foundations",0],["BD-WELCOME","Welcome to Online Learning",0],["MC-VIZ","Data Visualisation",0],
-  ["MC-STATS","Statistics Refresher",5],["MC-LEAD","Leading Teams",0],["MC-HDATA","Health Data Essentials",5],["MC-SEC","Security Fundamentals",5]];
-function fw_badges(ctx,n,glow,deco){const [x,y,w,h]=GV_PX.screens[0];fw_screen(ctx,x,y,w,h,"Badges · last night",q=>{wc_T(q,"credit",x+w-24,y+66,{w:700,size:20,align:"right",col:WC_MUTED,deco});
-  FW_BG.forEach(([cd,s,c],i)=>{const u=clamp(n-i,0,1);if(u<=0)return;const yy=y+92+i*28;withA(q,u,()=>{if(c===0&&glow>0)gv_tint(q,x+12,yy-20,w-24,26,FW.amber,0.6*glow);
-    wc_T(q,cd,x+18,yy,{w:500,size:17,f:"mono",col:WC_MUTED,deco});wc_T(q,s,x+150,yy,{w:600,size:19,col:WC_INK,deco});wc_T(q,String(c),x+w-40,yy,{w:800,size:21,align:"center",col:c?WC_DARK:FW.amberInk,deco});});});
+// the badges the platform sent last night, on the left screen: arriving one by one (n, how many), half with no credit (glow lights them);
+// each with its name, its kind (a microcredential, or a plain badge, as the welcome badge is) and its credit
+const FW_BG=[["SQL for Analysis","microcredential",5],["Python Foundations","microcredential",0],["Welcome to Online Learning","badge",0],["Data Visualisation","microcredential",0],
+  ["Statistics Refresher","microcredential",5],["Leading Teams","microcredential",0],["Health Data Essentials","microcredential",5],["Security Fundamentals","microcredential",5]];
+function fw_badges(ctx,n,glow,deco){const [x,y,w,h]=GV_PX.screens[0];fw_screen(ctx,x,y,w,h,"Badges · last night",q=>{
+  [["badge",x+18,"left"],["kind",x+276,"left"],["credit",x+w-40,"center"]].forEach(([s,hx,al])=>wc_T(q,s,hx,y+64,{w:700,size:18,align:al,col:WC_MUTED,deco}));
+  FW_BG.forEach(([s,kd,c],i)=>{const u=clamp(n-i,0,1);if(u<=0)return;const yy=y+94+i*28;withA(q,u,()=>{if(c===0&&glow>0)gv_tint(q,x+12,yy-20,w-24,26,FW.amber,0.6*glow);
+    wc_T(q,s,x+18,yy,{w:600,size:18,col:WC_INK,deco});wc_T(q,kd,x+276,yy,{w:600,size:18,col:WC_MUTED,deco});wc_T(q,String(c),x+w-40,yy,{w:800,size:20,align:"center",col:c?WC_DARK:FW.amberInk,deco});});});
 },{titleSize:20,barH:30,deco});}
 // what was checked, on the right screen: the credit is there, and it's a number (p, 0 to 1, ticks them)
-function fw_checks(ctx,p,deco){const [x,y,w,h]=GV_PX.screens[1];fw_screen(ctx,x,y,w,h,"Tests · last night",q=>{wc_T(q,"credit_points",x+30,y+84,{w:500,size:20,f:"mono",col:WC_MUTED,deco});
-  [["not empty",0],["a number",1]].forEach(([s,i])=>{const yy=y+150+i*70;wc_panel(q,x+30,yy-44,w-60,58,{kind:"card",wash:GV.green,washA:0.2,seed:201+i});
+function fw_checks(ctx,p,deco){const [x,y,w,h]=GV_PX.screens[1];fw_screen(ctx,x,y,w,h,"Checks · last night",q=>{wc_T(q,"credit",x+30,y+84,{w:700,size:20,col:WC_MUTED,deco});
+  [["filled in",0],["a number",1]].forEach(([s,i])=>{const yy=y+150+i*70;wc_panel(q,x+30,yy-44,w-60,58,{kind:"card",wash:GV.green,washA:0.2,seed:201+i});
     wc_T(q,s,x+56,yy-6,{w:700,size:24,col:WC_DARK,deco});wc_tick(q,x+w-80,yy-15,26,GV.green,clamp(p*2-i*0.6,0,1),4);});},{titleSize:20,barH:30,deco});}
 // the wallet's card for one of them, on the right screen: a microcredential shown as a plain badge
 function fw_walletBadge(ctx,u,deco){const [x,y,w,h]=GV_PX.screens[1];fw_screen(ctx,x,y,w,h,"Wallet",q=>{withA(q,u,()=>{wc_panel(q,x+40,y+64,w-80,h-100,{kind:"card",wash:GV_LOOPC,washA:0.15,seed:205});
   wc_wash(q,wc_ell(x+110,y+150,40,40,24),[200,204,212],{kind:"thing",lw:1.2,seed:206});wc_T(q,"Python Foundations",x+170,y+138,{w:800,size:24,col:WC_DARK,deco});
-  wc_T(q,"badge",x+170,y+172,{w:600,size:22,col:WC_MUTED,deco});wc_T(q,"0 credit points",x+80,y+244,{w:800,size:24,col:FW.amberInk,deco});});},{titleSize:20,barH:30,deco});}
+  wc_T(q,"badge",x+170,y+172,{w:600,size:22,col:WC_MUTED,deco});wc_T(q,"no credit",x+80,y+244,{w:800,size:24,col:FW.amberInk,deco});});},{titleSize:20,barH:30,deco});}
 // monitoring's panels, on the right screen: when the table arrives, how many rows, how many empty, and how the values spread: the
 // share of badges with no credit, night by night (k: how many panels are lit; last: last night's bar rising)
 function fw_monitor(ctx,k,last,deco){const [x,y,w,h]=GV_PX.screens[1];fw_screen(ctx,x,y,w,h,"Badges · usual shape",q=>{const pw=148,ph=96;
@@ -572,26 +680,31 @@ function fw_monitor(ctx,k,last,deco){const [x,y,w,h]=GV_PX.screens[1];fw_screen(
     // the bars on the left, what they say on the right
     for(let i=0;i<11;i++){const v=i===10?lerp(1/12,0.5,easeCam(clamp(last,0,1))):1/12*(0.85+0.3*hash(i,5)),bh=v*190,bx=px+20+i*22;q.fillStyle=rgba(i===10&&last>0.3?FW.amber:[150,186,222],1);q.fillRect(bx,py+ph2-14-bh,14,bh);}
     wc_T(q,"usually 1 in 12",px+pw2-16,py+76,{w:700,size:22,align:"right",col:WC_INK,deco});if(last>0.3)withA(q,clamp(last*2-0.6,0,1),()=>wc_T(q,"last night 1 in 2",px+pw2-16,py+110,{w:800,size:22,align:"right",col:FW.amberInk,deco}));});},{titleSize:20,barH:30,deco});}
-// the table's card on the screen: whose it is, from the metadata, lighting (u)
-function fw_ownerCard(ctx,u){if(u<=0)return;const [x,y,w]=GV_PX.screens[1];withA(ctx,clamp(u*2,0,1),()=>{gv_halo(ctx,x+w-210,y-90,200,64,GV.gold,0.8*u);wc_tag(ctx,x+w-10,y-60,"owner: Learning team",{align:"right",size:28,wash:GV.gold,washA:0.5});});}
+// over the screen: whose the badges are, the owner on record, lighting (u)
+function fw_ownerCard(ctx,u){if(u<=0)return;const [x,y,w]=GV_PX.screens[1];withA(ctx,clamp(u*2,0,1),()=>{const tw2=Math.round(tw(ctx,"owner on record: Learning team",28,700)+40);
+  gv_halo(ctx,x+w-10-tw2,y-92,tw2,64,GV.gold,0.8*u);wc_tag(ctx,x+w-10,y-60,"owner on record: Learning team",{align:"right",size:28,wash:GV.gold,washA:0.5});});}
 
 // the alert, flying from monitoring's screen towards its owner (u, 0 to 1 along its way): an amber card, too quick to read
 function fw_flyAlert(ctx,u){if(u<=0||u>=1)return;const e=easeCam(u),x=lerp(1050,2160,e),y=lerp(500,-160,e)-120*Math.sin(Math.PI*e),k=lerp(1,0.6,e);
   ctx.save();ctx.translate(x,y);ctx.rotate(lerp(0,0.3,e));ctx.scale(k,k);wc_panel(ctx,-130,-60,260,120,{kind:"card",wash:FW.amber,washA:0.4,seed:241});gv_lines(ctx,-100,-24,200,3,22,1);ctx.restore();}
 
 /* ---------- today: the rule, and the three cards ---------- */
-// the rule on Jun's screen: the badge's credit points, more than zero for a microcredential, in the project's file, and its owner
-const FW_YML=["- name: credit_points","  data_tests:","    - not_null","    # A microcredential badge carries credit (DEC-LMS-03).","    - positive:","        config:","          where: \"badge_code like 'MC-%'\""];
-function fw_rule(ctx,n,own){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,"The learning platform's badges · the models' file",q=>{FW_YML.forEach((s,i)=>{const u=clamp(n-i,0,1);if(u<=0)return;const yy=y+130+i*64,add=i>=3;
-    if(add)gv_tint(q,x+30,yy-42,w-60,60,GV.gold,0.55*u);withA(q,u,()=>wc_T(q,s,x+50,yy,{w:500,size:28,f:"mono",col:i===3?GV.goldInk:WC_INK}));});
-  if(own>0)withA(q,own,()=>wc_tag(q,x+w-60,y+h-60,"owner: Learning team",{align:"right",size:30,wash:GV.gold,washA:0.5}));},{titleSize:28,barH:54});}
-// on Yusuf's board: prevent, test, watch, a card each, with a small picture of what it is (the email box, the sensor, the bars); and
-// the small card that moves from watch to test (mv, 0 to 1)
-const FW_3=[["prevent","where it starts"],["test","what you know"],["watch","what you don't"]],FW_3X=[520,960,1400];
+// the rule, on Tom's desk: the series' sign-off sheet as a quality rule card, its lines coming in one by one (p), Tom's signature
+// written in as a pen moves along it (sign), and the green stamp (stamp)
+const FW_RL={kicker:"Quality rule",title:"A microcredential carries credit",
+  rows:[["Owner","Learning team"],["Dimension","validity"],["Level","stop on any"],["Why","the wallet shows it as a plain badge"]]};
+function fw_rule(ctx,p,sign,stamp){const [x,y,w]=FW_TT.card,r=gv_signoff(ctx,x,y,w,Object.assign({p,signer:"Tom Whitfield",signP:sign,stamp:"signed",stampP:stamp},FW_RL));
+  // the pen, at the end of what's written, then laid down beside the card
+  if(sign>0){const k=w/1000,n=Math.ceil(13*clamp(sign,0,1)),sx=r.x+(12+tw(ctx,"Tom Whitfield".slice(0,n),38,600))*k,sy=r.rows[r.rows.length-1]+105*k,
+      dn=clamp((stamp||0)*3,0,1);fw_pen(ctx,lerp(sx,x+w+110,dn),lerp(sy,y+r.h*0.62,dn),lerp(-0.75,-1.25,dn));}
+  return r;}
+// on Yusuf's board: prevent, check, watch, a card each, with a small picture of what it is (the email box, the sensor, the bars); and
+// the small card that moves from watch to check (mv, 0 to 1)
+const FW_3=[["prevent","where it starts"],["check","what you know"],["watch","what you don't"]],FW_3X=[520,960,1400];
 function fw_three(ctx,k,u,mv){if(u<=0)return;const e=easeCam(clamp(u,0,1)),x=FW_3X[k],y=470,w=400,h=330;ctx.save();ctx.translate(x,y-14*(1-e));ctx.rotate([-0.014,0.01,-0.008][k]);
   withA(ctx,clamp(u*2.5,0,1),()=>{wc_panel(ctx,-w/2,-h/2,w,h,{kind:"card",wash:[GV.green,GV.gold,GV_LOOPC][k],washA:0.25,seed:220+k});gv_pin(ctx,0,-h/2+18,GV.red,1.2);
     wc_T(ctx,FW_3[k][0],-w/2+34,-h/2+92,{w:800,size:48,col:WC_DARK});wc_T(ctx,FW_3[k][1],-w/2+34,-h/2+142,{w:600,size:32,col:WC_INK});
-    const py=40;if(k===0){ctx.fillStyle="#fff";ctx.fillRect(-150,py,300,56);ctx.strokeStyle=rgba(GV.green,0.9);ctx.lineWidth=3;ctx.strokeRect(-150,py,300,56);wc_T(ctx,"@",-120,py+40,{w:600,size:28,f:"mono",col:WC_MUTED});wc_tick(ctx,120,py+28,34,GV.green,1,5);}
+    const py=40;if(k===0){ctx.fillStyle="#fff";ctx.fillRect(-150,py,300,56);ctx.strokeStyle=rgba(GV.green,0.9);ctx.lineWidth=3;ctx.strokeRect(-150,py,300,56);wc_T(ctx,"@",-120,py+40,{w:600,size:30,col:WC_MUTED});wc_tick(ctx,120,py+28,34,GV.green,1,5);}
     if(k===1)fw_sensor(ctx,0,py+90,1.3,1,1);
     if(k===2)for(let i=0;i<8;i++){const bh=i===7?70:18+10*hash(i,3);ctx.fillStyle=rgba(i===7?FW.amber:[150,186,222],1);ctx.fillRect(-140+i*36,py+100-bh,24,bh);}});ctx.restore();
   if(k===2&&mv>0){const v=easeCam(clamp(mv,0,1)),cx=lerp(FW_3X[2],FW_3X[1],v),cy=y+250-120*Math.sin(v*Math.PI);ctx.save();ctx.translate(cx,cy);ctx.rotate(lerp(0.03,-0.02,v));
@@ -604,5 +717,5 @@ function fw_evidence(ctx,u){const [sx,sy,sw,sh]=GV_MT.screen;if(u<=0)return;with
 
 const WC_PLACES={court:fw_paintCourt,corridor:fw_paintCorridor,hands:fw_paintHands,register:fw_paintRegister,ward:fw_paintWard,pestTop:fw_paintPestTop,pest:fw_paintPest,
   pestDesk:fw_paintPestDesk,office:c=>{gv_paintOffice(c);fw_paintOfficeWall(c);},policy:fw_paintPolicy,screenGov:c=>gv_paintScreenDesk(c,GV_ROOM.gov),boardGov:c=>gv_paintBoardClose(c,GV_ROOM.gov),
-  data:c=>{gv_paintData(c);fw_paintDataBoard(c);},screenData:c=>gv_paintScreenDesk(c,GV_ROOM.data),tom:fw_paintTom,tomDesk:fw_paintTomDesk,screenLearn:c=>gv_paintScreenDesk(c,GV_ROOM.learn),phone:fw_paintPhone,
+  data:c=>{gv_paintData(c);fw_paintDataBoard(c);},screenData:c=>gv_paintScreenDesk(c,GV_ROOM.data),boardData:c=>gv_paintBoardClose(c,GV_ROOM.data),tomTop:fw_paintTomTop,tom:fw_paintTom,tomDesk:fw_paintTomDesk,screenLearn:c=>gv_paintScreenDesk(c,GV_ROOM.learn),phone:fw_paintPhone,
   platform:gv_paintPlatformClose,platformDesk:gv_paintPlatformDesk,meeting:gv_paintMeeting,meetingTable:gv_paintMeetingTable};

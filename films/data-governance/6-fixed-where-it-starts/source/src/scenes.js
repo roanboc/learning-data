@@ -88,7 +88,7 @@ scene("clinics",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({cr:c.first
   gv_title(ctx,S,t,P.title,"Fixed where it starts","where a problem begins","Film 6 of 19 · data governance");
   wc_paperOver(ctx,S);});
 
-// ---- 2 · Still amber: binder 15, the scorecard's amber cell, the old answer, and the mop under the leak ----
+// ---- 2 · Still amber: binder 15, the scorecard's amber cell, the issue log's old answer, the clean-up's card, and the mop under the leak ----
 // the data team's room, with the leak: Yusuf and Jun where they stand, the pipe, the buckets and their drips, the mop (o.mop: leaning,
 // 0 to 1; o.held: Jun mopping, from 0 to 1, in place of leaning)
 const FW_DR={yusuf:1000,jun:1760,mopper:1640};
@@ -99,31 +99,32 @@ function fw_dataRoom(x,tt,o){fw_leak(x,tt,{buckets:o.buckets,fixed:o.fixed,mop:o
 
 scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({take:c.binder+0.2,page:wAt(sc,"binder","the root")-0.5,
     sc:c.amber-0.5,cell:wAt(sc,"amber","one cell"),row:c.what-0.3,owner:wAt(sc,"issue","owner"),
-    board:wAt(sc,"issue","The first")-0.5,cleaned:wAt(sc,"issue","cleaned")-0.15,room:c.jun-0.5,stg:c.jun+1.2,trim:wAt(sc,"jun","trimmed"),
+    log:wAt(sc,"issue","The first")-0.5,cleaned:wAt(sc,"issue","cleaned")-0.15,room:c.jun-0.5,card:c.jun+1.2,trim:wAt(sc,"jun","trimmed"),
     low:wAt(sc,"jun","lower case"),wal:c.wallet-0.4,two:wAt(sc,"wallet","two wallets"),wide:c.others-0.4,fin:wAt(sc,"others","every system"),
     mail:wAt(sc,"others","cleans"),mop:c.mop-0.4,mopT:wAt(sc,"mop","mop"),leak:wAt(sc,"mop","a leak")}));
-  const K=FW_SK,cellX=fw_skCol(2),cellY=fw_skRow(4)-K.rh*0.72;
   gv_shots(ctx,S,t,sc.dur,[
     // Yusuf's office: binders 2, 12, 6 and 9 are out with the earlier films; he slides binder 15 out and takes it down
     {at:0,place:"office",keys:[[0,1180,540,1.22],[P.take+0.3,1260,560,1.34]],d:2,draw:(x,tt)=>{const got=tt>=P.take+0.1;
-      fw_officeScreen(x);fw_binders(x,got,fin(tt,P.take-0.4,0.4));
+      fw_officeScreen(x);gv_deskBook(x);fw_binders(x,got,fin(tt,P.take-0.4,0.4));
       person(x,"yusuf",1610,905,0.8,got?{pose:"reach",pose2:"hold",mix:fin(tt,P.take+0.1,0.5),t:tt,carry:fw_heldBinder}:{pose:"listen",pose2:"reach",mix:fin(tt,P.take-0.8,0.5),t:tt});}},
     // binder 15's page, close: its policy, and its line
     {at:P.page,place:"policy",keys:[[P.page,960,500,1],[P.page+0.1,900,450,1.08]],d:4,push:0.01,draw:x=>fw_policy15(x,0,0)},
     // his screen: the scorecard in turns, the whole page (its words too small to read, the washes carrying it), one cell amber; then
-    // the learning row, and what didn't pass, and whose it is
+    // the learning row, lit, and under it the warnings, and whose they are
     {at:P.sc,place:"screenGov",keys:[[P.sc,...FW_SKV.all],[P.row,...FW_SKV.row]],d:1.4,push:0,draw:(x,tt,cam)=>{
-      fw_scorecard(x,cam,{lit:fin(tt,P.row+0.4,0.5)});gv_halo(x,cellX-26,cellY-26,K.cw+52,K.rh+52,FW.amber,0.9*gv_io(tt,P.cell,P.row+0.6,0.4));
-      gv_tint(x,K.x+K.npc[4]-10,GV_SC[1]+K.np+56-K.rh*0.72,200,2*K.rh,GV.gold,0.7*fin(tt,P.owner,0.4));}},
-    // his board: the issue goes to its owner, and is closed with the old answer
-    {at:P.board,place:"boardGov",keys:[[P.board,960,500,1],[P.board+0.1,960,480,1.05]],d:3,push:0.02,draw:(x,tt)=>
-      fw_issueCard(x,960,450,-0.02,fin(tt,P.board+0.15,0.5),fin(tt,P.cleaned,0.3))},
+      const L=fw_scorecard(x,cam,{sections:FW_SKW,hi:4,hiA:fin(tt,P.row+0.4,0.5)}),r=L.rows[4],w=L.sec[0];
+      gv_halo(x,L.cx[3]-26,r.top-26,L.cw[3]+52,r.h+52,FW.amber,0.9*gv_io(tt,P.cell,P.row+0.6,0.4));
+      gv_tint(x,w.cols[1]-10,w.rows[0]-FW_SK.rh*0.74,tw(x,"Learning team",FW_SK.sz,600)+20,2*FW_SK.rh,GV.gold,0.7*fin(tt,P.owner,0.4));}},
+    // Tom's desk, the learning team's: the issue log, its line for the emails lit, and closed with the old answer
+    {at:P.log,place:"tomTop",keys:[[P.log,960,520,1],[P.log+0.1,960,500,1.04]],d:3,push:0.01,draw:(x,tt)=>
+      fw_issueLog(x,fin(tt,P.log+0.3,0.5),fin(tt,P.cleaned,0.3))},
     // the data team's room: Jun shows Yusuf where the emails are cleaned; along the ceiling, a pipe; under it, a bucket and a mop
     {at:P.room,place:"data",keys:[[P.room,1300,560,1.2],[P.room+0.1,1320,560,1.24]],d:2,draw:(x,tt)=>
       fw_dataRoom(x,tt,{buckets:[1,0,0],mop:1,jun:{pose:"explain"}})},
-    // Jun's screen: the first step of the build trims each email and writes it in lower case
-    {at:P.stg,place:"screenData",keys:[[P.stg,960,420,1],[P.stg+0.1,960,440,1.04]],d:3,push:0.01,draw:(x,tt)=>
-      fw_staging(x,fin(tt,P.trim-0.1,0.5),0,fin(tt,P.low-0.2,0.5))},
+    // the data team's board: the clean-up's card, an email as typed and after; "trimmed" and "lower case" light as they're said, and
+    // what each takes away is ringed
+    {at:P.card,place:"boardData",keys:[[P.card,960,500,1],[P.card+0.1,960,490,1.04]],d:3,push:0.01,draw:(x,tt)=>
+      fw_cleanCard(x,{trim:fin(tt,P.trim-0.1,0.5),low:fin(tt,P.low-0.1,0.5)})},
     // the wallet, close: without it, two wallets for one learner
     {at:P.wal,place:"screenData",keys:[[P.wal,960,420,1],[P.wal+0.1,960,430,1.03]],d:3,push:0.01,draw:(x,tt)=>fw_wallets(x,tt-P.wal-0.2,fin(tt,P.two,0.5))},
     // the room, wide: the pipe runs the width of the wall; two more buckets catch its drips, everyone else who cleans them again
@@ -132,11 +133,11 @@ scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({take:c.bind
       fw_tagAt(x,tt,P.fin+0.2,null,FW_LK.joints[1]-150,830,"finance");fw_tagAt(x,tt,P.mail-0.2,null,FW_LK.joints[2]-150,830,"mailing list");}},
     // the first bucket, close: the drip falls, Jun mops round it, and the drip keeps falling
     {at:P.mop,place:"data",keys:[[P.mop,1280,700,1.5]],d:2,push:0.015,draw:(x,tt)=>{fw_dataRoom(x,tt,{buckets:[1,1,1],held:1});
-      fw_tagAt(x,tt,P.mopT,null,1480,800,"the clean-up");fw_tagAt(x,tt,P.leak,null,FW_LK.joints[0]-150,830,"staging");}}]);
+      fw_tagAt(x,tt,P.mopT,null,1480,800,"the clean-up");fw_tagAt(x,tt,P.leak,null,FW_LK.joints[0]-150,830,"data team");}}]);
   wc_year(ctx,56,72,"Today",fin(t,0.3,0.5)*(1-fin(t,P.page,0.4)));
   wc_paperOver(ctx,S);});
 
-// ---- 3 · Follow it back: from the wallet, through staging, to the sign-up form, and the phone that types the email ----
+// ---- 3 · Follow it back: from the wallet, through the data team's clean-up, to the sign-up form, and the phone that types the email ----
 // the learning team's desk: the wall, Tom behind his desk, the desk and its screen, what the screen shows, the poster's heading
 function fw_tomDesk(x,tt,o,screen){gv_behind(x,"tom",FW_TX.seat[0],FW_TX.top,FW_TX.seat[1],Object.assign({pose:"listen",t:tt,flip:true},o||{}));
   x.drawImage(gv_place("tomDesk"),0,0,W,H);if(screen)screen(x);fw_tomPoster(x);}
@@ -156,23 +157,23 @@ function fw_typer(x,tt,o,presses){const pos=fw_phone(x,Object.assign({press:pres
   const th=presses?fw_typing(tt,presses,pos):{x:FW_REST[0],y:FW_REST[1],down:0};fw_thumb(x,th.x,th.y,th.down);}
 const FW_PHV=[960,500,1.2],FW_EM="DanielKim.Work@mail.example";
 
-scene("back",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({point:wAt(sc,"follow","back"),ln:c.path-0.5,wallet:wAt(sc,"path","wallet"),
-    staging:wAt(sc,"path","staging"),short:wAt(sc,"path","short-course"),form:wAt(sc,"path","sign-up"),tom:c.box-0.6,plain:wAt(sc,"box","plain text"),
+scene("back",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({point:wAt(sc,"follow","back"),tr:c.path-0.5,wallet:wAt(sc,"path","wallet"),
+    clean:wAt(sc,"path","clean-up"),short:wAt(sc,"path","short-course"),form:wAt(sc,"path","sign-up"),tom:c.box-0.6,plain:wAt(sc,"box","plain text"),
     ph:wAt(sc,"box","phones")-0.4,cap:wAt(sc,"box","capital"),sug:wAt(sc,"space","picking"),spc:wAt(sc,"space","a space"),lr:c.third-0.4,
     three:wAt(sc,"third","one email"),bk:c.starts-0.4,shows:wAt(sc,"starts","shows"),ph2:wAt(sc,"starts","but it")-0.2,here:wAt(sc,"starts","starts here")}));
-  const lit=[P.wallet,(P.wallet+P.staging)/2,P.staging,P.short,P.form],d0=P.ph+0.9,
+  const lit=[P.wallet,P.clean,P.short,P.form],d0=P.ph+0.9,
     presses=[[d0,"d"],[P.cap+0.45,"a"],[P.cap+0.85,"n"],[P.sug+0.35,"sug"]],
     typed=[[d0+0.05,"D"],[P.cap+0.5,"Da"],[P.cap+0.9,"Dan"],[P.sug+0.4,FW_EM+" "]];
   gv_shots(ctx,S,t,sc.dur,[
-    // the data team's room: Yusuf points at Jun's screen; they follow one email back
-    {at:0,place:"data",keys:[[0,1300,560,1.2],[0.2,1320,560,1.24]],d:2,draw:(x,tt)=>
-      fw_dataRoom(x,tt,{buckets:[1,1,1],mop:1,yusuf:{pose:"listen",pose2:"point",mix:fin(tt,P.point-0.3,0.5)}})},
-    // Jun's screen: the lineage, lit from the wallet back to the sign-up form
-    {at:P.ln,place:"screenData",keys:[[P.ln,960,400,1],[P.ln+0.1,960,410,1.03]],d:3,push:0.01,draw:(x,tt)=>fw_lineage(x,k=>fin(tt,lit[k]-0.1,0.4))},
-    // the learning team's office: Tom at his desk, the sign-up form on his screen, its email box a plain text box
+    // the data team's room: Yusuf turns to the team's board and points; they follow one email back
+    {at:0,place:"data",keys:[[0,960,540,1],[0.2,940,540,1.04]],d:2,draw:(x,tt)=>
+      fw_dataRoom(x,tt,{buckets:[1,1,1],mop:1,yusuf:{pose:"listen",pose2:"point",mix:fin(tt,P.point-0.3,0.5),flip:true}})},
+    // the board, close: a card for each place the email passes, pinned right to left as they're named, from the wallet back to the
+    // sign-up form, a thread from pin to pin
+    {at:P.tr,place:"boardData",keys:[[P.tr,960,482,1.2],[P.tr+0.1,960,478,1.23]],d:3,push:0.01,draw:(x,tt)=>fw_trail(x,k=>fin(tt,lit[k]-0.1,0.4))},
+    // the learning team's office: Tom at his desk, the sign-up form on his screen; its email box, a tag says, is a plain text box
     {at:P.tom,place:"tom",keys:[[P.tom,960,540,1],[P.plain-0.6,860,500,1.1]],d:1.8,push:0,draw:(x,tt)=>{
-      fw_tomDesk(x,tt,{},q=>fw_tomScreen(q,"form",{lit:fin(tt,P.tom+0.6,0.5),setting:0,settingA:fin(tt,P.plain-0.2,0.5)}));
-      gv_halo(x,FW_TX.screen[0]+20,FW_TX.screen[1]+FW_TX.screen[3]-78,440,56,GV.gold,0.7*fin(tt,P.plain,0.5));
+      fw_tomDesk(x,tt,{},q=>fw_tomScreen(q,"form",{lit:fin(tt,P.tom+0.6,0.5),tag:fin(tt,P.plain-0.1,0.5)}));
       fw_plate(x,tt,P.tom+0.3,P.plain-0.6,1690,470,["Tom Whitfield","learning team"]);}},
     // a learner's phone: the phone starts the email with a capital; picking a suggestion leaves a space at the end
     {at:P.ph,place:"phone",keys:[[P.ph,...FW_PHV]],d:1.6,push:0.01,draw:(x,tt)=>fw_typer(x,tt,{val:fw_val(tt,typed),shift:tt<d0+0.05?1:0,
@@ -191,7 +192,7 @@ scene("back",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({point:wAt(sc,
 scene("entry",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({own:wAt(sc,"time","an owner"),cause:wAt(sc,"time","a cause"),date:wAt(sc,"time","a date"),
     chk:wAt(sc,"time","a check"),tom:c.email-0.5,box:wAt(sc,"email","an email box"),ph:wAt(sc,"email","so phones")-0.4,stop:wAt(sc,"email","stop"),
     sug:c.trims-0.3,trim:wAt(sc,"trims","trims"),low:wAt(sc,"trims","lower case"),shape:wAt(sc,"trims","checks"),saved:wAt(sc,"trims","saved"),
-    gr:c.work-0.4,does:wAt(sc,"work","The form"),lr:c.before-0.4,fix:wAt(sc,"before","corrects"),stg:wAt(sc,"before","Then the")-0.3,go:wAt(sc,"before","can go"),
+    gr:c.work-0.4,does:wAt(sc,"work","The form"),lr:c.before-0.4,fix:wAt(sc,"before","corrects"),cu:wAt(sc,"before","Then the")-0.3,go:wAt(sc,"before","can go"),
     room:c.breath-0.6}));
   const d0=P.ph+0.8,presses=[[d0,"d"],[P.stop+0.5,"a"],[P.stop+0.88,"n"],[P.sug,"sug"],[P.saved+0.3,"btn"]],
     typed=[[d0+0.05,"d"],[P.stop+0.55,"da"],[P.stop+0.93,"dan"],[P.sug+0.05,FW_EM+" "]],
@@ -202,9 +203,9 @@ scene("entry",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({own:wAt(sc,"
     // Yusuf's board: this time, an issue with an owner, a cause, a date, and the check that closes it
     {at:0,place:"boardGov",keys:[[0,960,500,1],[0.1,960,490,1.04]],d:4,push:0.01,draw:(x,tt)=>
       fw_issueGold(x,fin(tt,0.4,0.6),i=>fin(tt,[P.own,P.cause,P.date,P.chk][i]-0.1,0.5),0)},
-    // Tom's desk: the form's email box becomes an email box
+    // Tom's desk: the form's email box becomes an email box, and its tag says so
     {at:P.tom,place:"tom",keys:[[P.tom,860,500,1.1]],d:1.8,push:0.01,draw:(x,tt)=>
-      fw_tomDesk(x,tt,{pose:"listen",pose2:"point",mix:fin(tt,P.box-0.5,0.5)},q=>fw_tomScreen(q,"form",{setting:fin(tt,P.box,0.6)}))},
+      fw_tomDesk(x,tt,{pose:"listen",pose2:"point",mix:fin(tt,P.box-0.5,0.5)},q=>fw_tomScreen(q,"form",{tag:1,fix:fin(tt,P.box,0.6)}))},
     // the phone: no capital now; then the form trims the space, writes the email in lower case and checks its shape, before it's saved
     {at:P.ph,place:"phone",keys:[[P.ph,...FW_PHV]],d:1.6,push:0.01,draw:(x,tt)=>fw_typer(x,tt,Object.assign(box(tt),{email:true,
       ring:gv_io(tt,P.stop-0.15,P.sug,0.3),ringCol:GV.green,sug:fin(tt,P.stop+1.0,0.3)*(1-fin(tt,P.sug+0.05,0.3)),sugVal:FW_EM,ok:fin(tt,P.shape,0.5),
@@ -216,36 +217,39 @@ scene("entry",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({own:wAt(sc,"
         ok:fin(tt,P.does+0.6,0.5),caret:tt<P.does},gPress);}},
     // Tom's screen: the team corrects the old emails, one by one
     {at:P.lr,place:"screenLearn",keys:[[P.lr,960,400,1],[P.lr+0.1,960,410,1.03]],d:3,push:0.01,draw:(x,tt)=>fw_learners(x,1,clamp((tt-P.fix)/1.8,0,1),0)},
-    // Jun's screen: the clean-up in staging goes
-    {at:P.stg,place:"screenData",keys:[[P.stg,960,420,1],[P.stg+0.1,960,430,1.03]],d:3,push:0.01,draw:(x,tt)=>fw_staging(x,fin(tt,P.stg+0.3,0.4),fin(tt,P.go,0.9),0)},
+    // the data team's board: the clean-up's card, stamped retired
+    {at:P.cu,place:"boardData",keys:[[P.cu,960,500,1],[P.cu+0.1,960,490,1.03]],d:3,push:0.01,draw:(x,tt)=>fw_cleanCard(x,{trim:1,low:1,retired:fin(tt,P.go,0.4)})},
     // wordless: the data team's room; the joints clamped, the drips stop, the buckets and the mop are put away
     {at:P.room,place:"data",keys:[[P.room,960,540,1]],d:2,push:0.012,draw:(x,tt)=>{const away=1-fin(tt,P.room+1.5,0.9);
       fw_dataRoom(x,tt,{buckets:[away,away,away],mop:away,fixed:fin(tt,P.room+0.5,0.7),yusuf:false,jun:{expr:"relieved"}});}}]);
   wc_paperOver(ctx,S);});
 
-// ---- 5 · Should never fail: the rule stays as a test; the cell turns green ----
-scene("never",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({tst:wAt(sc,"stays","a test"),owner:wAt(sc,"fails","its owner"),sc:c.green-0.5,
+// ---- 5 · Should never fail: the rule stays as a check; the cell turns green ----
+scene("never",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({chk:wAt(sc,"stays","a check"),owner:wAt(sc,"fails","its owner"),sc:c.green-0.5,
     turn:wAt(sc,"green","turns green"),bd:wAt(sc,"green","but because")-0.3,right:wAt(sc,"green","right where")}));
   const [jx]=FW_LK.joints;
   gv_shots(ctx,S,t,sc.dur,[
     // from the clamped joint down to where the bucket stood: a small leak sensor, its light green, and who it tells
     {at:0,place:"data",keys:[[0,1280,360,1.5],[0.5,1300,720,1.5]],d:2,push:0.012,draw:(x,tt)=>{fw_dataRoom(x,tt,{buckets:[0,0,0],fixed:1,sensor:1,yusuf:false,jun:false});
-      fw_tagAt(x,tt,Math.max(P.tst-0.1,2.4),null,1250,770,"a test that should never fail");
+      fw_tagAt(x,tt,Math.max(P.chk-0.1,2.4),null,1250,770,"a check that should never fail");
       const p=clamp((tt-P.owner+0.3)/0.8,0,1);wc_link(x,jx+30,FW_BK.y-20,1590,712,GV.goldInk,{p,dash:[10,10],lw:3});fw_tagAt(x,tt,P.owner+0.3,null,1740,700,"tells: Learning team",{wash:GV.gold,washA:0.3});}},
-    // the scorecard, a Monday after the fix: the learning row's validity cell turns green
-    {at:P.sc,place:"screenGov",keys:[[P.sc,...FW_SKV.row]],d:1.4,push:0,draw:(x,tt,cam)=>fw_scorecard(x,cam,{lit:fin(tt,P.sc+0.3,0.5),fix:fin(tt,P.turn,0.8)})},
-    // Yusuf's board: the issue's card, closed because the test passes
+    // the scorecard, a Monday after the fix: the learning row's validity cell turns green, and the row's and the page's with it; the
+    // warnings go
+    {at:P.sc,place:"screenGov",keys:[[P.sc,...FW_SKV.row]],d:1.4,push:0,draw:(x,tt,cam)=>
+      fw_scorecard(x,cam,{after:FW_SKF,mx:fin(tt,P.turn,1.0),sections:FW_SKW,hi:4,hiA:fin(tt,P.sc+0.3,0.5)})},
+    // Yusuf's board: the issue's card, closed because the check passes
     {at:P.bd,place:"boardGov",keys:[[P.bd,960,500,1],[P.bd+0.1,960,490,1.04]],d:3,push:0.01,draw:(x,tt)=>fw_issueGold(x,1,()=>1,fin(tt,P.right,0.4))}]);
   wc_paperOver(ctx,S);});
 
-// ---- 6 · What no rule names: the badges with no credit, every test passing, and monitoring that knows the usual shape ----
+// ---- 6 · What no rule names: the badges with no credit, every check passing, and monitoring that knows the usual shape ----
 scene("unknown",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({arr:c.night+1.2,z1:c.half-0.6,zero:wAt(sc,"half","zero credit"),pass:c.pass-0.3,
     tick:wAt(sc,"pass","passes"),num:wAt(sc,"pass","a number"),wal:c.wallet-0.3,morn:c.shape-0.8,arr2:wAt(sc,"shape","when it arrives"),
     rows:wAt(sc,"shape","how many rows"),empty:wAt(sc,"shape","how many empty"),spread:wAt(sc,"shape","spread"),last:wAt(sc,"usual","Last night"),
-    owner:wAt(sc,"tells","the owner"),fly:wAt(sc,"tells","names")-0.2,tom:wAt(sc,"tells","the learning")-0.3}));
+    owner:wAt(sc,"tells","the owner"),fly:wAt(sc,"tells","on record")-0.2,tom:wAt(sc,"tells","the learning")-0.3}));
   gv_shots(ctx,S,t,sc.dur,[
-    // the platform team's desk at night, then in the morning: last night's badges, the tests, the wallet, then monitoring
-    {at:0,place:"platform",keys:[[0,960,540,1],[P.z1,775,504,1.62],[P.pass,1050,504,1.62]],d:1.6,push:0,draw:(x,tt,cam)=>{const far=cam.z<1.57?1:0,night=1-fin(tt,P.morn,1.2),
+    // the platform team's desk at night, then in the morning: last night's badges, the checks, the wallet, then Sam's monitoring; in
+    // the morning the camera moves over to Sam, at his desk with his plate
+    {at:0,place:"platform",keys:[[0,960,540,1],[P.z1,775,504,1.62],[P.pass,1050,504,1.62],[P.morn,1320,504,1.62]],d:1.6,push:0,draw:(x,tt,cam)=>{const far=cam.z<1.57?1:0,night=1-fin(tt,P.morn,1.2),
         k=[P.arr2,P.rows,P.empty,P.spread].reduce((n,w)=>n+fin(tt,w-0.1,0.4),0);
       if(night<0.99)fw_ghost(x,1-night,q=>gv_behind(q,"sam",GV_PX.seat[0],GV_PX.top,GV_PX.seat[1],{pose:"listen",t:tt,flip:true}));
       x.drawImage(gv_place("platformDesk"),0,0,W,H);fw_night(x,night);
@@ -253,26 +257,26 @@ scene("unknown",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({arr:c.nigh
       const chk=1-fin(tt,P.wal,0.4),wal=fin(tt,P.wal,0.4)*(1-fin(tt,P.morn+0.3,0.5)),mon=fin(tt,P.morn+0.3,0.5);
       if(chk>0.01)withA(x,chk*fin(tt,P.pass,0.4),()=>fw_checks(x,fin(tt,P.tick-0.1,0.4)+fin(tt,P.num-0.1,0.4)*0.6,far));
       if(wal>0.01)withA(x,wal,()=>fw_walletBadge(x,1,far));if(mon>0.01)withA(x,mon,()=>fw_monitor(x,k,fin(tt,P.last-0.1,0.8),far));
-      fw_ownerCard(x,fin(tt,P.owner,0.5));fw_flyAlert(x,clamp((tt-P.fly)/0.7,0,1));}},
+      fw_plate(x,tt,P.morn+0.9,P.owner-0.3,1570,296,["Sam Okafor","platform team"]);fw_ownerCard(x,fin(tt,P.owner,0.5));fw_flyAlert(x,clamp((tt-P.fly)/0.7,0,1));}},
     // Tom's desk: the alert lands with its owner
     {at:P.tom,place:"tom",keys:[[P.tom,860,500,1.1]],d:1.8,push:0.01,draw:(x,tt)=>
       fw_tomDesk(x,tt,{expr:"concerned"},q=>fw_tomScreen(q,"alert",{u:fin(tt,P.tom+0.3,0.5)}))}]);
   wc_paperOver(ctx,S);});
 
-// ---- 7 · A surprise becomes a rule: fixed where it started, then a test with an owner; prevent, test, watch ----
+// ---- 7 · A surprise becomes a rule: fixed where it started, then a check with an owner; prevent, check, watch ----
 scene("rule",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({fix:wAt(sc,"cause","fixes"),send:wAt(sc,"cause","sends"),rl:c.rule-0.4,
-    mc:wAt(sc,"rule","a microcredential"),own:wAt(sc,"rule","with an owner"),bd:c.three-0.5,prev:wAt(sc,"three","Prevent"),test:wAt(sc,"three","Test what"),
+    mc:wAt(sc,"rule","a microcredential"),own:wAt(sc,"rule","with an owner"),bd:c.three-0.5,prev:wAt(sc,"three","Prevent"),chk:wAt(sc,"three","Check what"),
     watch:wAt(sc,"three","Watch"),conf:wAt(sc,"every","confirm")}));
   gv_shots(ctx,S,t,sc.dur,[
     // Tom's screen: the microcredentials' credit set back, and the badges sent again
     {at:0,place:"screenLearn",keys:[[0,960,420,1],[0.1,960,430,1.03]],d:4,push:0.01,draw:(x,tt)=>
       fw_courses(x,k=>fin(tt,P.fix+0.35*k,0.4),fin(tt,P.send,0.3),clamp((tt-P.send-0.2)/1.2,0,1))},
-    // Jun's screen: the rule, in the project's file, with its owner
-    {at:P.rl,place:"screenData",keys:[[P.rl,960,420,1],[P.rl+0.1,960,430,1.03]],d:3,push:0.01,draw:(x,tt)=>
-      fw_rule(x,3+clamp((tt-P.mc+0.2)/0.35,0,4),fin(tt,P.own,0.4))},
-    // Yusuf's board: prevent, test, watch; the card that moves from watch to test
+    // Tom's desk: the rule, on a quality rule card, its lines coming in; on "with an owner", Tom signs it, and it's stamped
+    {at:P.rl,place:"tomTop",keys:[[P.rl,960,500,1],[P.rl+0.1,960,480,1.03]],d:3,push:0.01,draw:(x,tt)=>
+      fw_rule(x,fin(tt,P.mc-0.4,1.2),clamp((tt-P.own+0.1)/0.7,0,1),fin(tt,P.own+0.75,0.3))},
+    // Yusuf's board: prevent, check, watch; the card that moves from watch to check
     {at:P.bd,place:"boardGov",keys:[[P.bd,960,500,1],[P.bd+0.1,960,490,1.03]],d:3,push:0.01,draw:(x,tt)=>{
-      for(let k=0;k<3;k++)fw_three(x,k,fin(tt,[P.prev,P.test,P.watch][k]-0.1,0.5),k===2?fin(tt,P.conf-0.2,1.4):0);}}]);
+      for(let k=0;k<3;k++)fw_three(x,k,fin(tt,[P.prev,P.chk,P.watch][k]-0.1,0.5),k===2?fin(tt,P.conf-0.2,1.4):0);}}]);
   wc_paperOver(ctx,S);});
 
 // ---- 8 · Nobody to blame: evidence and help; Semmelweis, right, and the reasons his washing spread slowly; policy 15 marked green ----
@@ -293,7 +297,7 @@ scene("blame",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({nod:wAt(sc,"
   gv_shots(ctx,S,t,sc.dur,[
     // the stewards' meeting: the evidence on the screen; nobody blames Tom's team; Jun offers help
     {at:0,place:"meeting",keys:[[0,960,500,1.06],[0.1,980,490,1.1]],d:4,push:0.01,draw:(x,tt)=>{fw_meeting(x,tt,P);
-      fw_say(x,tt,P.help-0.1,P.vi+0.5,1010,490,["We'll help you test it"],GV_MT.seats[3],572);}},
+      fw_say(x,tt,P.help-0.1,P.vi+0.5,1010,490,["We'll help you try it out"],GV_MT.seats[3],572);}},
     // Vienna again: doctors wait their turn at the basin
     {at:P.vi,place:"corridor",keys:[[P.vi,620,620,1.35]],d:1.6,push:0.015,draw:(x,tt)=>fw_queue(x,tt)},
     // a doctor's hands, close: reddened, rubbed

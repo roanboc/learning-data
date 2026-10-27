@@ -1,14 +1,18 @@
 // Off the shelf, the opening film of the data governance series. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
 const NARR={
-"measure":{"name":"One measure","lead":1.4,"tail":1.0,"vo":[
- {"id":"m1215","gap":0.8,"text":"In 1215, Magna Carta made a promise.","say":"In twelve fifteen, Magna Carta made a promise."},
- {"id":"quote","gap":0.8,"text":"“There is to be one measure of wine throughout our kingdom, and one measure of ale, and one measure of corn.”"},
- {"id":"repeat","gap":0.8,"text":"For six hundred years, the promise was repeated, and measures still differed from town to town."},
- {"id":"kings","gap":0.8,"text":"Kings sent standards to the towns. Officers checked them now and then."},
- {"id":"county","gap":0.8,"text":"It wasn't enough. In 1871, a member of Parliament said that in his county alone, a bushel meant thirty-two different measures.","say":"It wasn't enough. In eighteen seventy-one, a member of Parliament said that in his county alone, a bushel meant thirty-two different measures."},
- {"id":"worked","gap":0.3,"text":"What finally worked was all of it together:"},
- {"id":"three","gap":0.8,"text":"one definition in law, a copy in every county, and an inspector who checked against it, again and again, with the law behind him."}]},
+"checklist":{"name":"The checklist","lead":1.4,"tail":1.0,"vo":[
+ {"id":"known","gap":0.8,"text":"Surgical teams have long known the steps that keep patients safe."},
+ {"id":"steps","gap":0.8,"text":"Check it's the right patient. Give the antibiotic before the first cut. Count every sponge before closing."},
+ {"id":"skipped","gap":0.8,"text":"The steps were written in guidelines, but in a busy operating room, they were often skipped."},
+ {"id":"paid","gap":0.8,"text":"Patients paid for it: infections, mistakes, and deaths that could have been avoided."},
+ {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"y2008","gap":0.8,"text":"In 2008, a study in eight hospitals, in eight countries, tried one change.","say":"In two thousand eight, a study in eight hospitals, in eight countries, tried one change."},
+ {"id":"pause","gap":0.8,"text":"Three times in every operation, the team paused, and a nurse read a short checklist out loud."},
+ {"id":"hold","gap":0.8,"text":"Each step was confirmed, and the nurse could hold the team until it was done."},
+ {"id":"fell","gap":0.8,"text":"Deaths after surgery nearly halved, from 1.5 to 0.8 in every hundred patients.","say":"Deaths after surgery nearly halved, from one point five to zero point eight in every hundred patients."},
+ {"id":"worked","gap":0.3,"text":"What worked was all of it together:"},
+ {"id":"three","gap":0.8,"text":"one agreed list, a copy in the room where the work happens, and someone who checks every step, every time."}]},
 "shelf":{"name":"The shelf","lead":1.0,"tail":1.0,"vo":[
  {"id":"starts","gap":0.8,"text":"Today, Yusuf Demir starts as the university's data governance lead."},
  {"id":"shelf","gap":0.8,"text":"He inherits a shelf of thirty-four policies, and a maturity score: 2.1 out of 5.","say":"He inherits a shelf of thirty-four policies, and a maturity score: two point one out of five."},
@@ -27,12 +31,13 @@ const NARR={
  {"id":"before","gap":0.8,"text":"One report ran before the change, the other after."},
  {"id":"gov","gap":0.8,"text":"But the government counts awards by its own definition. Who decides how ours maps to it?"},
  {"id":"answers","gap":0.8,"text":"Mei owns what award means here. Jun builds what the model says. Planning reports what it's given."},
- {"id":"tbc","gap":0.8,"text":"And the chart says: to be confirmed."}]},
+ {"id":"tbc","gap":0.8,"text":"And the chart says: to be confirmed."},
+ {"id":"room","gap":0.8,"text":"Like an operating room before the checklist: everyone knows their own step, and no one checks them all."}]},
 "for":{"name":"What governance is for","lead":1.0,"tail":1.0,"vo":[
  {"id":"policy","gap":0.8,"text":"Policy 12 says that business terms are defined consistently.","say":"Policy twelve says that business terms are defined consistently."},
  {"id":"doesnt","gap":0.8,"text":"It doesn't say who decides, or how a decision reaches the work."},
  {"id":"for","gap":0.8,"text":"That's what governance is for: deciding who decides, and making sure each decision reaches the work."},
- {"id":"like","gap":0.8,"text":"Like the inspector at the market: a rule, a copy where the work happens, and someone who checks."},
+ {"id":"like","gap":0.8,"text":"Like the surgical checklist: a rule, a copy where the work happens, and someone who checks."},
  {"id":"mgmt","gap":0.8,"text":"Governance sets the rules and checks they're kept. Management does the work."}]},
 "listen":{"name":"Listen first","lead":1.0,"tail":1.0,"vo":[
  {"id":"ask","gap":0.8,"text":"Yusuf doesn't write a thirty-fifth policy. He asks everyone the same question: what slows you down?"},

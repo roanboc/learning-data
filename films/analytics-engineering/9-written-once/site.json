@@ -35,5 +35,7 @@
     "diagrams": ["models/core/student/_student__conceptual.md", "models/core/student/_student__physical.md"],
     "catalog": ["dbt_project.yml"],
     "version": ["models/core/student/_core_student__models.yml", "models/core/student/core_credential_v1.sql", "models/marts/wallet/mart_wallet__credentials.sql", "models/core/student/_student__decisions.yml"]
-  }
+  },
+  "past": ["One tuning fork for France, 1859", "Kept in one place, and everything else tuned from it."],
+  "past_es": ["Un diapasón para Francia, 1859", "Guardado en un solo lugar, y todo lo demás se afina con él."]
 }

@@ -2,7 +2,7 @@
 
 Two short films at the top of the site's [Making of page](../../site/journey/index.md), before the written story. Same design language and voice as the other films; no labs.
 
-- **Watch:** [https://roanboc.github.io/learning-data/journey/](https://roanboc.github.io/learning-data/journey/), and in Spanish, around the English films, [https://roanboc.github.io/learning-data/es/journey/](https://roanboc.github.io/learning-data/es/journey/).
+- **Watch:** [https://data.learn-all.org/journey/](https://data.learn-all.org/journey/), and in Spanish, around the English films, [https://data.learn-all.org/es/journey/](https://data.learn-all.org/es/journey/).
 - **Download the videos (MP4, 1080p):** [data-for-films.mp4](https://github.com/roanboc/learning-data/releases/latest/download/data-for-films.mp4) and [thats-not-quite-right.mp4](https://github.com/roanboc/learning-data/releases/latest/download/thats-not-quite-right.mp4).
 
 | Film | What it shows | Length | Files |

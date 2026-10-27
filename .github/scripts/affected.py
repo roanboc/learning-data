@@ -14,41 +14,36 @@ The checks it picks from:
              file no page names counts for the pages that load the files beside it. A change to the browser checks
              themselves checks every page, and one to a series' play script (site-tools/smoke/<series>.js) its labs and
              scenarios pages
-  films      for each film whose source changed (its "paths" in the release workflow's FILMS, shared code included,
+  films      for each film whose source changed (its "paths" in its release.json, shared code included,
              so a change to the first film's engine checks every film that draws with it): build the player, check
              that the site's copy is the one it builds, and check that every moment draws (tools/check.py)
 The dbt project (films/analytics-engineering/project) has its own workflow, credential-project.yml.
-A change to the checks themselves (this script, checks.yml) runs every check. A change to release.yml's FILMS list checks
-each film whose entry is new or changed.
+A change to the checks themselves (this script, checks.yml, films.py) runs every check. A change to a film's release.json
+checks that film.
 
 In CI, --github writes site, browser, pages (a JSON list, or "all"), films (a matrix) and count to $GITHUB_OUTPUT, and a table
 to $GITHUB_STEP_SUMMARY.
 """
 import argparse, html.parser, json, os, pathlib, posixpath, re, subprocess, sys, urllib.parse
 
+import films as release_films  # .github/scripts/films.py: every film's release.json
+
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-RELEASE_YML = ROOT / ".github/workflows/release.yml"
 # a change here can change what any check does, so it runs them all
-EVERYTHING = [".github/scripts/affected.py", ".github/workflows/checks.yml"]
-RELEASE = ".github/workflows/release.yml"  # its FILMS list: a film whose entry is new or changed is checked
+EVERYTHING = [".github/scripts/affected.py", ".github/workflows/checks.yml", ".github/scripts/films.py"]
 SMOKE = ["site-tools/smoke.py"]  # the browser checks themselves: a change runs them on every page
 PLAYS = "site-tools/smoke"        # a series' play script: its labs and scenarios pages
 USED = ["site-tools/check_site.py", "site-tools/build_series.py"]  # what smoke.py imports: a change starts it, with no page
 WEB = ROOT / "site"
 # what check_site.py reads besides site/ and site-tools/
-SITE_EXTRA = [re.compile(p) for p in [r".*\.md$", r"films/[^/]+/series\.json$", r"films/[^/]+/site\.json$",
-                                      r"films/.*/source/src/i18n/es/captions\.js$", r"films/.*/source/film\.json$"]]
+SITE_EXTRA = [re.compile(p) for p in [r".*\.md$", r"films/[^/]+/series\.json$", r"films/.*/site\.json$",
+                                      r"films/.*/source/src/i18n/es/captions\.js$", r"films/.*/source/film\.json$",
+                                      r"films/.*release\.json$", r"films/.*release-note\.md$"]]
 
 
-def films(text=None):
-    """The release workflow's FILMS list: one entry per video, with the paths it is built from (from text, if given: the
-    workflow at another commit)."""
-    m = re.search(r"cat > films\.json <<'EOF'\n(.*?)\n\s*EOF\n", RELEASE_YML.read_text() if text is None else text, re.S)
-    if not m:
-        if text is not None:
-            return None
-        sys.exit(f"Can't find the FILMS list in {RELEASE_YML.relative_to(ROOT)}")
-    return json.loads(m.group(1))
+def films():
+    """The FILMS list (films.py): one entry per video, with the paths it is built from, and the release.json it is in."""
+    return [dict(e, release=f.relative_to(ROOT).as_posix()) for f in release_films.files() for e in json.loads(f.read_text())]
 
 
 def under(path, prefixes):
@@ -98,9 +93,9 @@ def loads():
                 continue
             path = urllib.parse.unquote(u.path)
             if path.startswith("/"):
-                if not path.startswith("/learning-data/"):
+                if not path.startswith("/"):
                     continue
-                path = path[len("/learning-data/"):]
+                path = path[len("/"):]
             else:
                 path = posixpath.normpath(posixpath.join(here, path))
             got.add(path)
@@ -143,22 +138,14 @@ def changed(base):
     return mb, sorted({f for f in files if f})
 
 
-def films_at(commit):
-    """The FILMS list at a commit, or None if it can't be read there."""
-    r = subprocess.run(["git", "show", f"{commit}:{RELEASE}"], cwd=ROOT, capture_output=True, text=True)
-    return films(r.stdout) if r.returncode == 0 else None
-
-
-def plan(files, everything, before=None):
-    """What to check. before: the FILMS list where the branch left its base, when release.yml changed."""
+def plan(files, everything):
+    """What to check."""
     fl = films()
-    everything = everything or any(f in EVERYTHING for f in files) or (RELEASE in files and before is None)
+    everything = everything or any(f in EVERYTHING for f in files)
     if everything:
         pick = fl
     else:
-        old = {f["name"]: f for f in before or []}
-        pick = [f for f in fl if (RELEASE in files and old.get(f["name"]) != f)
-                or any(touches(p, f["paths"] + [f["site_player"]]) for p in files)]
+        pick = [f for f in fl if any(touches(p, f["paths"] + [f["site_player"], f["release"]]) for p in files)]
     keys = None if everything else pages(files)  # None: every page
     browser = keys is None or bool(keys) or any(p in USED for p in files)
     site = browser or any(under(p, ["site", "site-tools"]) for p in files) or any(r.match(p) for p in files for r in SITE_EXTRA)
@@ -219,7 +206,7 @@ def main():
     a.add_argument("--github", action="store_true", help="write the plan to $GITHUB_OUTPUT and $GITHUB_STEP_SUMMARY")
     o = a.parse_args()
     mb, files = (None, []) if o.all else changed(o.base)
-    p = plan(files, o.all, films_at(mb) if RELEASE in files else None)
+    p = plan(files, o.all)
     text = summary(p, files, o.base)
     print(text)
     if not o.all and files:

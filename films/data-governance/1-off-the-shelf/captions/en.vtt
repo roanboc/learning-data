@@ -84,74 +84,68 @@ Like the inspector at the market: a rule, a copy where the work happens, and som
 00:02:39.929 --> 00:02:44.189
 Governance sets the rules and checks they're kept. Management does the work.
 
-00:02:46.889 --> 00:02:50.135
-Data management has a body of knowledge: DAMA's.
-
-00:02:50.835 --> 00:02:55.929
-It draws eleven areas as a wheel, with governance at the centre, where the others meet.
-
-00:02:57.229 --> 00:03:07.917
-Others cover the same ground, or part of it: DCAM, ISO 8000 for data quality, and ISO/IEC 38505 for governing data.
-
-00:03:08.617 --> 00:03:11.898
-This series takes what they agree on, and shows where it runs.
-
-00:03:14.598 --> 00:03:20.929
+00:02:46.889 --> 00:02:53.220
 Yusuf doesn't write a thirty-fifth policy. He asks everyone the same question: what slows you down?
 
-00:03:22.229 --> 00:03:25.228
+00:02:54.520 --> 00:02:57.519
 For Jun, the rules arrive after the work is built.
 
-00:03:26.428 --> 00:03:29.579
+00:02:58.719 --> 00:03:01.870
 Mei approves the words, then never sees where they're used.
 
-00:03:30.779 --> 00:03:34.211
+00:03:03.070 --> 00:03:06.502
 Sam could protect a column in minutes, if anyone said which.
 
-00:03:35.511 --> 00:03:37.617
+00:03:07.802 --> 00:03:09.908
 Planning doesn't know which number to trust.
 
-00:03:38.817 --> 00:03:43.049
+00:03:11.108 --> 00:03:15.340
 The people who wrote the binder weren't the problem. They wrote what they were asked for.
 
-00:03:44.349 --> 00:03:50.255
+00:03:16.640 --> 00:03:22.546
 Governance is people's work. Tools can carry out what people agree, but they can't make them agree.
 
-00:03:54.355 --> 00:03:58.879
+00:03:26.646 --> 00:03:31.170
 So he opens the binder, with one question for every line: where does it run?
 
-00:04:00.179 --> 00:04:05.926
-Some lines can run in the work itself, as a required field, a check, a tag or a test.
+00:03:32.470 --> 00:03:40.039
+Some lines can run in the work itself, as a field no one can leave empty, a check that runs every night, or a label.
 
-00:04:07.526 --> 00:04:12.457
+00:03:41.639 --> 00:03:46.570
 Some are decisions: someone owns each one, and writes it down where the work can find it.
 
-00:04:14.057 --> 00:04:15.171
+00:03:48.170 --> 00:03:49.284
 And some can go.
 
-00:04:19.171 --> 00:04:21.108
-And the work already has places for them.
+00:03:53.284 --> 00:03:57.946
+Behind every line that stays, there's something worth keeping, and someone to keep it.
 
-00:04:22.308 --> 00:04:26.992
-The data team builds in a loop of ten steps, from a question to a new version.
+00:03:59.246 --> 00:04:02.770
+Rules, each with an owner, that reach Jun before he builds.
 
-00:04:28.692 --> 00:04:32.828
-Governance doesn't need another meeting. It needs a pin at the right steps:
+00:04:03.470 --> 00:04:08.102
+One glossary every report reads from, so Mei sees where her words are used.
 
-00:04:34.128 --> 00:04:39.591
-a term when the question is asked, a classification at the source, an owner and a contract,
+00:04:08.802 --> 00:04:13.614
+A class for each kind of personal data, so Sam knows which columns to protect.
 
-00:04:39.791 --> 00:04:44.163
-a rule as a test, an approval at review, and a version when it changes.
+00:04:14.314 --> 00:04:18.613
+And a list of who owns what, so Planning knows who answers for each number.
 
-00:04:49.863 --> 00:04:55.596
-Over nine more films, Yusuf takes the binder off the shelf, one kind of policy at a time.
+00:04:19.913 --> 00:04:22.948
+Owners decide. Stewards keep it all up to date.
 
-00:04:56.796 --> 00:05:00.432
-Then three more design governance as a capability that lasts.
+00:04:24.048 --> 00:04:27.532
+The teams who do the work use it, and governance checks it's kept.
 
-00:05:01.132 --> 00:05:05.239
-And six show how to build each piece, with dbt and Databricks.
+00:04:33.232 --> 00:04:40.406
+Over nine more films, Yusuf follows one symptom at a time to what's worth keeping, and to who decides and acts.
 
-00:05:06.539 --> 00:05:09.094
+00:04:41.606 --> 00:04:46.217
+Then three draw it all as one model, on the university's architecture map.
+
+00:04:47.317 --> 00:04:50.376
+And six build it, with dbt and Databricks.
+
+00:04:51.676 --> 00:04:54.231
 A policy that doesn't run anywhere is a wish.

@@ -4,7 +4,8 @@
    film's own things: the five glossaries (the glossary on the platform on Mei's screen, Planning's printed spreadsheet, the policy's
    appendix, a faculty's dashboard on a tablet, the 2019 tool's printout), the board of five cards, the tool's login page, the
    term card, the glossary, the dictionary and the catalog side by side, the links that replace the copies, the data team's
-   conceptual model, the sync's pull request, the setting, the workshop's notes, and binder 12. Every name starts with ow_ or OW. */
+   copy, the change notice Mei signs, the business rule, the workshop's notes, and binder 12. In plain words: the series' first pack
+   shows no file, code or technical screen. Every name starts with ow_ or OW. */
 
 /* ---------- helpers ---------- */
 // made once per chapter, the first time it draws: its cues are known by then
@@ -44,7 +45,7 @@ function ow_night(ctx,a,moon){if(a<=0.01)return;ctx.save();ctx.globalCompositeOp
 /* ---------- the five glossaries ---------- */
 // what each glossary is, says, and who made it: the meaning (0 violet, 1 rose, 2 olive), its name on Yusuf's board, the tag for who
 // made it and why, the word that differs
-const OW_GL=[{k:"screen",m:0,name:["Business","glossary"],tag:["the data team","for the models"],word:"microcredentials"},
+const OW_GL=[{k:"screen",m:0,name:["Business","glossary"],tag:["the data team","for its tables"],word:"microcredentials"},
   {k:"sheet",m:1,name:["Planning's","spreadsheet"],tag:["Planning","for the census"]},
   {k:"policy",m:1,name:["Policy","appendix"],tag:["registrar's office","for the policy"]},
   {k:"tab",m:2,name:["Faculty","dashboards"],tag:["each faculty","for dashboards"],word:"degrees"},
@@ -61,11 +62,11 @@ function ow_fiveHeadBox(k){const [[x,y,w]]=OW_FIVE[k],[hx,hy,hw]=OW_FIVEHEAD[k];
 // grey lines giving way to words as r goes from 0 to 1
 function ow_resolve(ctx,r,lines,words){if(r<0.99)withA(ctx,1-r,lines);if(r>0.01)withA(ctx,r,words);}
 function ow_five(ctx,k,r,o){o=o||{};const [[x,y,w,h],rot,m]=OW_FIVE[k],[hx,hy,hw]=OW_FIVEHEAD[k];
-  // her screen: the glossary on the platform, what counts, its owner, and that the data team's models copy it (o.copy, 0 to 1)
+  // her screen: the glossary on the platform, what counts, its owner, and that the data team copies it (o.copy, 0 to 1)
   if(k===0){gv_screen(ctx,x,y,w,h,"Business glossary",q=>{ow_fiveHead(q,x+hx,y+hy,w-hw,m);ow_resolve(q,r,()=>gv_lines(q,x+30,y+160,w-90,4,36,0.9),()=>{
       ["graduate certificates,","masters and doctorates,"].forEach((l,i)=>ow_T(q,l,x+30,y+164+i*34,{size:24,col:WC_INK}));
       ow_T(q,"microcredentials of 6 credit points or more",x+30,y+232,{size:24,w:700,col:OW_MEANINK[0],max:w-60});ow_T(q,"owner · Mei Tanaka",x+30,y+270,{size:22,col:WC_MUTED});
-      const c=o.copy||0;if(c>0.01)withA(q,c,()=>{const s="copied by the data team's models",sw=tw(q,s,20,600)+32;q.save();q.fillStyle=rgba(wc_lit(GV.cyanInk,0.8),1);rr(q,x+26,y+292,sw,36,18);q.fill();q.restore();
+      const c=o.copy||0;if(c>0.01)withA(q,c,()=>{const s="copied by the data team",sw=tw(q,s,20,600)+32;q.save();q.fillStyle=rgba(wc_lit(GV.cyanInk,0.8),1);rr(q,x+26,y+292,sw,36,18);q.fill();q.restore();
         ow_T(q,s,x+42,y+317,{size:20,col:GV.cyanInk});});});},{titleSize:28});return;}
   ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(rot);ctx.translate(-w/2,-h/2);
   // Planning's spreadsheet, printed: a grid; read, its tab of definitions and award's rows, across the merged cells
@@ -156,15 +157,18 @@ function ow_three(ctx,u){const [sx,sy]=OW_MS,pw=520,ph=690,gap=20,x0=sx+(OW_MS[2
   panel(0,"business glossary","the business's words",(x,y)=>{ow_head(ctx,x+20,y+100,pw-40,64,0,1,{size:38,pad:18});
     ["what counts:","graduate certificates","masters and doctorates","microcredentials,","6 credit points or more"].forEach((l,j)=>wc_T(ctx,l,x+28,y+214+j*44,{w:j>2?700:600,size:28,col:j>2?OW_MEANINK[0]:WC_INK}));
     wc_T(ctx,"owner · Mei Tanaka",x+28,y+460,{w:700,size:28,col:WC_INK});});
-  panel(1,"data dictionary","each table and column",(x,y)=>{wc_T(ctx,"core_award",x+28,y+140,{w:500,size:32,f:"mono",col:GV.cyanInk});
-    ctx.save();ctx.strokeStyle=rgba(WC_MUTED,0.35);ctx.lineWidth=1.5;for(let r=0;r<4;r++){ctx.beginPath();ctx.moveTo(x+24,y+168+r*62);ctx.lineTo(x+pw-24,y+168+r*62);ctx.stroke();}ctx.restore();
-    [["award_key","string"],["award_type","string"],["credit_points_required","int"]].forEach(([c,ty],j)=>wc_T(ctx,c+" · "+ty,x+28,y+212+j*62,{w:500,size:28,f:"mono",col:WC_INK}));});
+  // the table and three of its columns, each with what it holds, in plain words: the series' first pack names no column as code does
+  panel(1,"data dictionary","each table and column",(x,y)=>{wc_T(ctx,"Awards",x+28,y+144,{w:700,size:34,col:GV.cyanInk});
+    wc_T(ctx,"each award the university offers",x+28,y+190,{w:600,size:28,col:WC_MUTED});
+    ctx.save();ctx.strokeStyle=rgba(WC_MUTED,0.35);ctx.lineWidth=1.5;for(let r=0;r<4;r++){ctx.beginPath();ctx.moveTo(x+24,y+222+r*62);ctx.lineTo(x+pw-24,y+222+r*62);ctx.stroke();}ctx.restore();
+    [["award code","text"],["award type","text"],["credit points required","a number"]].forEach(([c,ty],j)=>{wc_T(ctx,c,x+28,y+266+j*62,{w:600,size:28,col:WC_INK});
+      wc_T(ctx,ty,x+pw-28,y+266+j*62,{w:600,size:28,align:"right",col:WC_MUTED});});});
   panel(2,"catalog","find the data · shows both",(x,y)=>{ctx.save();ctx.fillStyle="#ffffff";ctx.strokeStyle=rgba(WC_MUTED,0.6);ctx.lineWidth=2;rr(ctx,x+24,y+104,pw-48,64,32);ctx.fill();ctx.stroke();ctx.restore();
     ctx.save();ctx.strokeStyle=rgba(WC_MUTED,0.9);ctx.lineWidth=3;ctx.beginPath();ctx.arc(x+62,y+134,12,0,TAU);ctx.moveTo(x+71,y+143);ctx.lineTo(x+82,y+154);ctx.stroke();ctx.restore();
     wc_T(ctx,"award",x+96,y+146,{w:600,size:30,col:WC_DARK});
-    [[0,"award","business glossary"],[1,"core_award","table"]].forEach(([j,a_,b_])=>{const ry=y+200+j*130;wc_panel(ctx,x+24,ry,pw-48,110,{kind:"tag",seed:420+j});
+    [[0,"award","business glossary"],[1,"Awards","table"]].forEach(([j,a_,b_])=>{const ry=y+200+j*130;wc_panel(ctx,x+24,ry,pw-48,110,{kind:"tag",seed:420+j});
       ctx.save();ctx.fillStyle=rgba(j?GV.cyanInk:OW_MEAN[0],0.85);ctx.fillRect(x+40,ry+22,10,66);ctx.restore();
-      wc_T(ctx,a_,x+66,ry+50,{w:700,size:30,f:j?"mono":undefined,col:j?GV.cyanInk:OW_MEANINK[0]});wc_T(ctx,b_,x+66,ry+90,{w:600,size:28,col:WC_MUTED});});});}
+      wc_T(ctx,a_,x+66,ry+50,{w:700,size:30,col:j?GV.cyanInk:OW_MEANINK[0]});wc_T(ctx,b_,x+66,ry+90,{w:600,size:28,col:WC_MUTED});});});}
 
 /* ---------- every tool reads it ---------- */
 // the 2019 tool's terms with an owner, flying across into the glossary's card; the rest dropping into an archive box
@@ -216,14 +220,21 @@ function ow_dash(ctx,x,y,w,h,words,tag){ctx.save();ctx.fillStyle=rgba(GV.screen,
     :[["Awards: degrees",600,WC_INK],["conferred this year.",600,WC_INK]];
   L.forEach(([l,wt,col],i)=>ow_T(ctx,l,px+12,y+102+i*25,{size:18,w:wt,col,max:pw-24}));
   if(tag>0.01)withA(ctx,tag,()=>{const s="from the glossary",sw=tw(ctx,s,17,700)+28;ctx.save();ctx.fillStyle=rgba(wc_lit(OW_MEAN[0],0.7),1);rr(ctx,px+12,y+h-50,sw,30,15);ctx.fill();ctx.restore();ow_T(ctx,s,px+26,y+h-29,{size:17,w:700,col:OW_MEANINK[0]});});}
-// the data team's conceptual model on Jun's screen: the file, award's lines, and its source: lit (the glossary and the date stay grey)
-function ow_yaml(ctx,x,y,w,h,lit){ctx.save();ctx.fillStyle=rgba([250,250,252],1);ctx.fillRect(x,y,w,h);ctx.restore();ow_bar(ctx,x,y,w,44,"models/core/course/_course__conceptual.yml",[60,64,78],26);
-  // the file's own lines, numbered as they are in the example project (lines 23 to 26, its business key and history, folded)
-  const L=[["  - name: award",0,18],["    definition: >",0,19],["      …",0,20],["    owner: Mei Tanaka, registrar's office",0,22],["    …",0,23],["    source:",1,27],["      glossary:",-1,28],["      term: Award",1,29],["      named_by: data governance",1,30],["      synced_on:",-1,31]],lh=54;
-  L.forEach(([l,k,n],i)=>{const yy=y+104+i*lh;wc_T(ctx,String(n),x+24,yy,{w:500,size:24,f:"mono",col:[176,178,190],deco:1});
-    if(k>0&&lit>0)gv_tint(ctx,x+80,yy-38,w-120,lh-4,GV.gold,0.55*lit);
-    if(k<0){wc_T(ctx,l,x+90,yy,{w:500,size:30,f:"mono",col:[120,122,134]});gv_lines(ctx,x+90+tw(ctx,l,30,500,"mono")+16,yy-16,260,1,0,1);}
-    else wc_T(ctx,l,x+90,yy,{w:500,size:30,f:"mono",col:k?WC_DARK:WC_MUTED});});}
+// the data team's copy of award on Jun's screen: the words of its Awards table, as the glossary has them, where they came from and
+// whose they are. o.m: the meaning they're in (0, the new words; 1, the words before Monday), in two lines, the second the part that
+// changed on Monday; o.lit (0 to 1) lights where they came from; o.ring (0 to 1), a gold ring drawn round the part that changed, when the
+// nightly check finds the copy out of date
+const OW_DEF=[["A qualification the university confers, such as a graduate certificate,","a master or a microcredential, for at least 6 credit points."],
+  ["A qualification the university confers, such as a graduate certificate","or a master, for a set number of credit points."]];
+function ow_copy(ctx,x,y,w,h,o){o=o||{};const m=o.m||0,lit=o.lit||0;ctx.save();ctx.fillStyle=rgba([250,250,252],1);ctx.fillRect(x,y,w,h);ctx.restore();
+  ow_bar(ctx,x,y,w,44,"Data team · Awards table",[60,64,78],26);ow_head(ctx,x+30,y+78,w-60,70,m,1,{size:44,pad:24});
+  const L=OW_DEF[m],ly=y+212;L.forEach((l,j)=>wc_T(ctx,l,x+40,ly+j*50,{w:600,size:34,col:m?OW_MEANINK[1]:WC_INK}));
+  if(o.ring>0){const rw=tw(ctx,L[1],34,600);ow_ring(ctx,x+40+rw/2,ly+40,rw/2+22,28,o.ring,GV.goldInk,507);}
+  const ry=ly+L.length*50+60;if(lit>0)gv_tint(ctx,x+24,ry-42,w-48,58,GV.gold,0.55*lit);
+  [["from","the business glossary"],["owner","Mei Tanaka, registrar's office"]].forEach(([k,v],i)=>{wc_T(ctx,k,x+40,ry+i*70,{w:600,size:30,col:WC_MUTED});wc_T(ctx,v,x+220,ry+i*70,{w:600,size:34,col:WC_DARK});});}
+// a ring round a run of words, as a pencil draws it (p, 0 to 1): an ellipse, a little more than once round, its start overrun
+function ow_ring(ctx,cx,cy,rx,ry,p,col,seed){if(p<=0)return;const n=56,pts=[];for(let i=0;i<=n;i++){const a=-2.3+TAU*1.07*i/n,k=1+0.025*Math.sin(i*0.7);pts.push([cx+Math.cos(a)*rx*k,cy+Math.sin(a)*ry*k]);}
+  wc_pencil(ctx,pts,p,{col,lw:4.5,seed:seed||507});}
 // the floor with the glossary in the middle: a card over the data governance office, and an arrow from it to each office's screen, one
 // way (p: how far each has come)
 const OW_SCR=[274,516,1042,1284,1810].map(x=>[x,519]);
@@ -241,7 +252,7 @@ function ow_screenWord(ctx,i,a){if(a<=0.01)return;const [x,y]=OW_SCR[i];withA(ct
   wc_T(ctx,"award",x,y+8,{w:800,size:22,align:"center",col:OW_MEANINK[0],deco:1});});}
 
 /* ---------- when a word changes ---------- */
-// a dashboard without a sync: awards a month, and the step where the new meaning arrived unannounced; q (0 to 1) asks about it
+// a dashboard without a nightly check: awards a month, and the step where the new meaning arrived unannounced; q (0 to 1) asks about it
 function ow_stepChart(ctx,x,y,w,h,p,q){ctx.save();ctx.fillStyle=rgba(GV.screen,1);ctx.fillRect(x,y,w,h);ctx.restore();ow_bar(ctx,x,y,w,44,"Awards conferred, by month",[96,70,80],26);
   const gx=x+90,gy=y+90,gw=w-180,gh=h-200,n=12;ctx.save();ctx.strokeStyle=rgba(WC_MUTED,0.35);ctx.lineWidth=1.5;for(let r=0;r<=4;r++){ctx.beginPath();ctx.moveTo(gx,gy+gh*r/4);ctx.lineTo(gx+gw,gy+gh*r/4);ctx.stroke();}ctx.restore();
   const v=i=>0.42+0.03*Math.sin(i*1.7)+(i>=8?0.2:0),pts=[];for(let i=0;i<n;i++)pts.push([gx+gw*i/(n-1),gy+gh*(1-v(i))]);const m=Math.max(1,Math.round(1+(n-1)*clamp(p,0,1)));
@@ -249,47 +260,52 @@ function ow_stepChart(ctx,x,y,w,h,p,q){ctx.save();ctx.fillStyle=rgba(GV.screen,1
   for(let i=0;i<m;i++){ctx.fillStyle=rgba([96,70,80],1);ctx.beginPath();ctx.arc(pts[i][0],pts[i][1],6,0,TAU);ctx.fill();}ctx.restore();
   ["Jan","Mar","May","Jul","Sep","Nov"].forEach((s,i)=>wc_T(ctx,s,gx+gw*(i*2)/(n-1),gy+gh+44,{w:600,size:28,align:"center",col:WC_MUTED}));
   if(q>0){const [sx,sy]=pts[8];gv_halo(ctx,sx-60,sy-40,120,160,GV.red,0.6*q);const k=spring(q);ctx.save();ctx.translate(sx+64,sy+10);ctx.scale(k,k);wc_T(ctx,"?",0,0,{w:800,size:84,align:"center",col:GV.redInk});ctx.restore();}}
-// the sync's pull request on Jun's screen: its title; what changed, the old words struck and the new in bold; what it touches, with
-// each part's owner as it's named (u[]); the meaning's owner and data governance at the bottom
-// the sync at work on Monday night, before it opens the request: what it checks, then what it found (a: shown, f: found)
-function ow_syncLog(ctx,x,y,w,a,f,t){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.fillStyle=rgba([28,32,44],1);rr(ctx,x,y,w,236,14);ctx.fill();ctx.strokeStyle=rgba([92,102,130],0.9);ctx.lineWidth=2;ctx.stroke();ctx.restore();
-  wc_T(ctx,"glossary sync",x+36,y+62,{w:700,size:30,f:"mono",col:[178,190,220]});wc_T(ctx,"checking each term against the models",x+36,y+122,{w:500,size:30,f:"mono",col:[236,240,248]});
-  if(f>0.01)withA(ctx,f,()=>{wc_T(ctx,"award:",x+36,y+186,{w:700,size:30,f:"mono",col:wc_lit(OW_MEAN[0],0.45)});wc_T(ctx,"the words changed",x+36+tw(ctx,"award: ",30,700,"mono"),y+186,{w:500,size:30,f:"mono",col:[255,255,255]});});
-  // a slow cursor after the last line, so the screen reads as live
-  const cy=f>0.5?y+186:y+122,cx=x+36+tw(ctx,f>0.5?"award: the words changed ":"checking each term against the models ",30,500,"mono");if(Math.sin((t||0)*Math.PI*2)>-0.2){ctx.save();ctx.fillStyle=rgba([236,240,248],0.85);ctx.fillRect(cx,cy-24,16,30);ctx.restore();}});}
-const OW_PR={x:360,y:96,w:1200,rows:[["learners near an award","Planning"],["wallet app","Wallet app team"],["census dashboard","Planning"]],own:[["the meaning","Mei Tanaka"],["the term still applies","data governance"]]};
-function ow_prCard(ctx,x,y,w,o){o=o||{};const h=o.h||680;wc_panel(ctx,x,y,w,h,{kind:"card",seed:481});
-  ctx.save();ctx.fillStyle=rgba(GV.greenInk,0.9);rr(ctx,x+28,y+30,150,44,22);ctx.fill();ctx.restore();wc_T(ctx,"open",x+103,y+62,{w:700,size:28,align:"center",col:[255,255,255]});
-  wc_T(ctx,"Sync award from the glossary",x+200,y+64,{w:800,size:36,col:WC_DARK});
+// Monday's change notice, which the nightly check sends: its title; what changed, the old words struck and the new in bold; what the
+// new words touch, with each part's owner as it's named (o.rows[]); and who signs, the meaning's owner and data governance (o.owners)
+const OW_NT={x:360,y:96,w:1200,h:700,rows:[["learners near an award","Planning"],["wallet app","Wallet app team"],["census dashboard","Planning"]],own:[["the meaning","Mei Tanaka"],["the term still applies","data governance"]]};
+function ow_notice(ctx,x,y,w,o){o=o||{};const h=OW_NT.h;wc_panel(ctx,x,y,w,h,{kind:"card",seed:481});wc_T(ctx,"Change notice · award",x+28,y+64,{w:800,size:36,col:WC_DARK});
   // what changed: the old words and the new, the parts that differ struck in the old words' rose and set in the new words' violet
   const c=o.changed||0;if(c>0.01)withA(ctx,c,()=>{wc_T(ctx,"what changed",x+28,y+130,{w:700,size:28,col:WC_MUTED});
     [["was",[["…or a master, for ",0],["a set number of",-1],[" credit points",0]]],["now",[["…a master or ",0],["a microcredential",1],[", for ",0],["at least 6",1],[" credit points",0]]]].forEach(([lab,seg],j)=>{
       const yy=y+180+j*46;wc_T(ctx,lab,x+28,yy,{w:600,size:28,col:WC_MUTED});let xx=x+100;
       seg.forEach(([s,k])=>{const wt=k>0?800:600,ww=tw(ctx,s,30,wt);wc_T(ctx,s,xx,yy,{w:wt,size:30,col:k<0?OW_MEANINK[1]:k>0?OW_MEANINK[0]:j?WC_INK:WC_MUTED});
         if(k<0){ctx.save();ctx.strokeStyle=rgba(OW_MEANINK[1],0.9);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(xx,yy-10);ctx.lineTo(xx+ww,yy-11);ctx.stroke();ctx.restore();}xx+=ww;});});});
-  const t_=o.touch||0;if(t_>0.01)withA(ctx,t_,()=>wc_T(ctx,"what it touches",x+28,y+292,{w:700,size:28,col:WC_MUTED}));
-  const rows=o.rows||[];OW_PR.rows.forEach(([a,b],i)=>{const u=rows[i]||0;if(u<=0.01)return;const yy=y+342+i*58,g=o.glow?o.glow[i]||0:0;
-    withA(ctx,u,()=>{ctx.save();ctx.translate(16*(1-u),0);if(g>0)gv_tint(ctx,x+20,yy-38,w-40,52,GV.green,0.5*g);ctx.fillStyle=rgba(GV.cyanInk,0.8);ctx.beginPath();ctx.arc(x+40,yy-10,6,0,TAU);ctx.fill();
+  const t_=o.touch||0;if(t_>0.01)withA(ctx,t_,()=>wc_T(ctx,"what the new words touch",x+28,y+292,{w:700,size:28,col:WC_MUTED}));
+  const rows=o.rows||[];OW_NT.rows.forEach(([a,b],i)=>{const u=rows[i]||0;if(u<=0.01)return;const yy=y+342+i*58;
+    withA(ctx,u,()=>{ctx.save();ctx.translate(16*(1-u),0);ctx.fillStyle=rgba(GV.cyanInk,0.8);ctx.beginPath();ctx.arc(x+40,yy-10,6,0,TAU);ctx.fill();
       wc_T(ctx,a,x+62,yy,{w:700,size:30,col:WC_DARK});wc_T(ctx,b,x+w-28,yy,{w:600,size:28,align:"right",col:WC_MUTED});ctx.restore();});});
-  const ow_=o.owners||0;if(ow_>0.01)withA(ctx,ow_,()=>{ctx.save();ctx.strokeStyle=rgba(WC_MUTED,0.35);ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+28,y+526);ctx.lineTo(x+w-28,y+526);ctx.stroke();ctx.restore();
-    OW_PR.own.forEach(([a,b],i)=>{const yy=y+576+i*52;wc_T(ctx,a,x+28,yy,{w:600,size:28,col:WC_INK});wc_T(ctx,b,x+w-28,yy,{w:700,size:28,align:"right",col:i?GV.goldInk:OW_MEANINK[0]});});});}
-// Mei's screen: the request, where her words go, and the button that approves it (ok: 0 to 1 once she's clicked)
-function ow_approve(ctx,x,y,w,h,o){o=o||{};ctx.save();ctx.fillStyle=rgba(GV.screen,1);ctx.fillRect(x,y,w,h);ctx.restore();ow_bar(ctx,x,y,w,30,"Sync award from the glossary",[60,64,78],17);
+  const ow_=o.owners||0;if(ow_>0.01)withA(ctx,ow_,()=>{ctx.save();ctx.strokeStyle=rgba(WC_MUTED,0.35);ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+28,y+508);ctx.lineTo(x+w-28,y+508);ctx.stroke();ctx.restore();
+    wc_T(ctx,"who signs",x+28,y+554,{w:700,size:28,col:WC_MUTED});
+    OW_NT.own.forEach(([a,b],i)=>{const yy=y+604+i*50;wc_T(ctx,a,x+28,yy,{w:600,size:28,col:WC_INK});wc_T(ctx,b,x+w-28,yy,{w:700,size:28,align:"right",col:i?GV.goldInk:OW_MEANINK[0]});});});}
+// a stylus, its tip at (x, y), held as a right hand holds a pen
+function ow_pen(ctx,x,y){ctx.save();ctx.translate(x,y);ctx.rotate(-0.8);ctx.fillStyle=rgba([196,198,208],1);ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(14,-5);ctx.lineTo(14,5);ctx.closePath();ctx.fill();
+  ctx.fillStyle=rgba(GV_SIGN.ink,0.95);rr(ctx,13,-5,70,10,5);ctx.fill();ctx.restore();}
+// Mei's screen on Tuesday morning: the notice, where her words go, and her line, which she signs with a stylus (sign: 0 to 1 as her
+// name is written in; ok: 0 to 1, the tick once it's signed)
+function ow_signNotice(ctx,x,y,w,h,o){o=o||{};ctx.save();ctx.fillStyle=rgba(GV.screen,1);ctx.fillRect(x,y,w,h);ctx.restore();ow_bar(ctx,x,y,w,30,"Change notice · award",[60,64,78],17);
   ow_T(ctx,"your words go to:",x+20,y+62,{size:17,col:WC_MUTED});
-  OW_PR.rows.forEach(([a],i)=>{const g=o.glow?o.glow[i]||0:0,yy=y+96+i*34;if(g>0)gv_tint(ctx,x+12,yy-24,w-24,32,GV.green,0.6*g);ow_T(ctx,"· "+a,x+20,yy,{size:19,w:700,col:WC_DARK});});
-  const ok=o.ok||0,bx=x+20,by=y+h-74,bw=200,bh=46;ctx.save();ctx.fillStyle=rgba(ok>0?GV.greenInk:[70,96,140],1);rr(ctx,bx,by,bw,bh,10);ctx.fill();ctx.restore();
-  ow_T(ctx,ok>0?"approved":"Approve",bx+bw/2,by+31,{size:19,w:800,align:"center",col:[255,255,255]});if(ok>0)wc_tick(ctx,bx+bw+44,by+22,40,GV.greenInk,ok,5);}
-// Jun's screen: the new words with the number in them underlined, the report's note, and the project's vars, where the number goes
-function ow_vars(ctx,x,y,w,h,o){o=o||{};ctx.save();ctx.fillStyle=rgba([250,250,252],1);ctx.fillRect(x,y,w,h);ctx.restore();ow_bar(ctx,x,y,w,44,"Sync award from the glossary · the words",[60,64,78],26);
+  OW_NT.rows.forEach(([a],i)=>{const g=o.glow?o.glow[i]||0:0,yy=y+96+i*34;if(g>0)gv_tint(ctx,x+12,yy-24,w-24,32,GV.green,0.6*g);ow_T(ctx,"· "+a,x+20,yy,{size:19,w:700,col:WC_DARK});});
+  const ly=y+h-48,sx=x+122,sg=o.sign||0,nm="Mei Tanaka";ow_T(ctx,"signed",x+20,ly,{size:17,col:WC_MUTED});
+  ctx.save();ctx.strokeStyle=rgba(WC_MUTED,0.55);ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(sx-8,ly+8);ctx.lineTo(sx+250,ly+8);ctx.stroke();ctx.restore();
+  if(sg>0){wc_hand(ctx,nm,sx,ly,{size:28,w:600,col:GV_SIGN.ink,p:sg});if(sg<1)ow_pen(ctx,sx+tw(ctx,nm.slice(0,Math.ceil(nm.length*sg)),28,600)-4,ly-6);}
+  if(o.ok>0)wc_tick(ctx,sx+300,ly-12,36,GV.greenInk,o.ok,5);}
+// Jun's screen: the notice's new words, the number in them underlined, the notice's note, and the business rule that keeps the number
+// in one place (card: 0 to 1 as it comes in; green: 0 to 1 once it's the rule; read: 0 to 1, its line that every report reads it)
+function ow_ruleScreen(ctx,x,y,w,h,o){o=o||{};ctx.save();ctx.fillStyle=rgba([250,250,252],1);ctx.fillRect(x,y,w,h);ctx.restore();ow_bar(ctx,x,y,w,44,"Change notice · award · the words",[60,64,78],26);
   const s0="…a master or a microcredential, for at least ",s1="6 credit points",s2=".",yy=y+120;let xx=x+40;wc_T(ctx,s0,xx,yy,{w:600,size:30,col:WC_INK});xx+=tw(ctx,s0,30,600);
-  wc_T(ctx,s1,xx,yy,{w:800,size:30,col:WC_DARK});const uw=tw(ctx,s1,30,800);wc_T(ctx,s2,xx+uw,yy,{w:600,size:30,col:WC_INK});
-  if(o.under>0)ow_under(ctx,xx-2,yy+12,uw+4,mix(GV.goldInk,GV.greenInk,o.green||0),o.under,5);
+  wc_T(ctx,s1,xx,yy,{w:800,size:30,col:WC_DARK});const uw=tw(ctx,s1,30,800),gr=o.green||0;wc_T(ctx,s2,xx+uw,yy,{w:600,size:30,col:WC_INK});
+  if(o.under>0)ow_under(ctx,xx-2,yy+12,uw+4,mix(GV.goldInk,GV.greenInk,gr),o.under,5);
   if(o.note>0.01)withA(ctx,o.note,()=>{ctx.save();ctx.translate(14*(1-o.note),0);wc_panel(ctx,x+40,yy+46,700,70,{kind:"tag",seed:491,wash:GV.gold,washA:0.3});
-    wc_T(ctx,"a number in the meaning: a setting?",x+64,yy+92,{w:600,size:28,col:WC_INK});ctx.restore();});
-  const vy=y+330;wc_T(ctx,"dbt_project.yml",x+40,vy-20,{w:700,size:28,col:WC_MUTED});ctx.save();ctx.fillStyle=rgba([238,240,246],1);ctx.fillRect(x+30,vy,w-60,h-(vy-y)-30);ctx.restore();
-  const L=["vars:","  census_date: \"2026-03-31\"","  near_award_credit_points: 15"];L.forEach((l,i)=>wc_T(ctx,l,x+50,vy+50+i*48,{w:500,size:30,f:"mono",col:i?WC_MUTED:WC_DARK}));
-  const ty=o.type||0;if(ty>0){const s="  min_award_credit_points: 6",n=Math.ceil(s.length*clamp(ty,0,1)),ly=vy+50+3*48;gv_tint(ctx,x+40,ly-36,w-80,48,GV.green,0.5*fin(ty,0.9,0.4));
-    wc_T(ctx,s.slice(0,n),x+50,ly,{w:600,size:30,f:"mono",col:GV.greenInk});if(ty<1&&Math.floor(ty*30)%2===0){const cx_=x+50+tw(ctx,s.slice(0,n),30,600,"mono");ctx.save();ctx.fillStyle=rgba(WC_DARK,0.8);ctx.fillRect(cx_+2,ly-28,3,34);ctx.restore();}}}
+    wc_T(ctx,"a number in the meaning: a rule?",x+64,yy+92,{w:600,size:28,col:WC_INK});ctx.restore();});
+  const cd=o.card||0;if(cd<=0.01)return;const cx=x+40,cy=y+262,cw=w-80,ch=392,e=easeCam(clamp(cd,0,1));
+  withA(ctx,clamp(cd*1.6,0,1),()=>{ctx.save();ctx.translate(0,44*(1-e));wc_panel(ctx,cx,cy,cw,ch,{kind:"card",seed:497});
+    if(gr>0)gv_tint(ctx,cx+14,cy+14,cw-28,64,GV.green,0.5*gr);wc_T(ctx,"Business rule · award",cx+28,cy+58,{w:700,size:30,col:mix(WC_MUTED,GV.greenInk,gr)});
+    // the rule, its number in the new meaning's ink, as the words have it
+    const r0="A microcredential counts as an award from ",r1="6 credit points",r2=".",ry=cy+140;let rx=cx+28;wc_T(ctx,r0,rx,ry,{w:600,size:36,col:WC_DARK});rx+=tw(ctx,r0,36,600);
+    wc_T(ctx,r1,rx,ry,{w:800,size:36,col:OW_MEANINK[0]});wc_T(ctx,r2,rx+tw(ctx,r1,36,800),ry,{w:600,size:36,col:WC_DARK});
+    wc_T(ctx,"owner",cx+28,cy+228,{w:600,size:30,col:WC_MUTED});wc_T(ctx,"Mei Tanaka, registrar's office",cx+200,cy+228,{w:600,size:32,col:WC_DARK});
+    const rd=o.read||0;if(rd>0.01)withA(ctx,rd,()=>{ctx.save();ctx.translate(14*(1-rd),0);wc_T(ctx,"read by",cx+28,cy+306,{w:600,size:30,col:WC_MUTED});
+      wc_T(ctx,"every report that counts awards",cx+200,cy+306,{w:600,size:32,col:WC_DARK});ctx.restore();});ctx.restore();});}
 
 /* ---------- agreed by people ---------- */
 // the workshop's notes on the meeting room's whiteboard: big enough to read when the camera is close; circled (0 to 1) when agreed

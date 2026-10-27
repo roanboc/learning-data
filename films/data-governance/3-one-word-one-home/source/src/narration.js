@@ -11,7 +11,7 @@ const NARR={
 "five":{"name":"Five glossaries","lead":1.0,"tail":1.0,"vo":[
  {"id":"mei","gap":0.8,"text":"Mei owns what award means, and she has found it defined in five places."},
  {"id":"look","gap":0.8,"text":"Yusuf goes to look. There are five glossaries."},
- {"id":"platform","gap":0.8,"text":"The business glossary on the platform, with the words Mei approved. The data team's models copy from it."},
+ {"id":"platform","gap":0.8,"text":"The business glossary on the platform, with the words Mei approved. The data team copies from it."},
  {"id":"sheet","gap":0.6,"text":"Planning's spreadsheet."},
  {"id":"appendix","gap":0.6,"text":"An appendix to the registrar's policy."},
  {"id":"dash","gap":0.6,"text":"The faculties' dashboards, each with its own description."},
@@ -36,15 +36,15 @@ const NARR={
  {"id":"sheet","gap":0.8,"text":"Planning's spreadsheet links to each term, instead of keeping its own words."},
  {"id":"policy","gap":0.8,"text":"The registrar's policy now says: award, as defined in the business glossary."},
  {"id":"dash","gap":0.8,"text":"The faculties' dashboards show the glossary's words, read from the platform, so they can't say anything else."},
- {"id":"copy","gap":0.8,"text":"The data team's copy already worked this way: it names where its words came from, and a sync checks it every night."},
+ {"id":"copy","gap":0.8,"text":"The data team's copy already worked this way: it says where its words came from, and it's checked against the glossary every night."},
  {"id":"way","gap":0.8,"text":"Every copy is made from the glossary, one way, never the other way round."}]},
 "change":{"name":"When a word changes","lead":1.4,"tail":1.4,"vo":[
- {"id":"before","gap":0.8,"text":"Without a sync, a change like Monday's is found months later, in a dashboard, when a number moves."},
- {"id":"night","gap":0.8,"text":"On Monday night, the sync found it, and opened a pull request: what the new words touch, and who owns each part."},
+ {"id":"before","gap":0.8,"text":"Without a nightly check, a change like Monday's is found months later, in a dashboard, when a number moves."},
+ {"id":"night","gap":0.8,"text":"On Monday night, the check found it, and sent a change notice: what the new words touch, and who owns each part."},
  {"id":"list","gap":0.8,"text":"Planning's list of learners near an award. The wallet app. The census dashboard."},
  {"id":"mei","gap":0.8,"text":"Mei approved the new meaning. This time, she could see where her words are used."},
  {"id":"number","gap":0.8,"text":"Jun saw a number in the words: six credit points."},
- {"id":"rule","gap":0.8,"text":"A number in a meaning is a rule too. So it's kept in one place, as a setting the code reads."}]},
+ {"id":"rule","gap":0.8,"text":"A number in a meaning is a rule too. So it's kept in one place, as a business rule every report reads."}]},
 "agree":{"name":"Agreed by people","lead":1.0,"tail":1.0,"vo":[
  {"id":"desk","gap":0.6,"text":"Monday's words weren't written at a desk."},
  {"id":"workshop","gap":0.8,"text":"Mei and the faculties argued them out in a workshop: should a microcredential count, and from how many credit points?"},

@@ -17,8 +17,8 @@
 #    nothing beats on a phone's one speaker.
 #  - Nothing loops, and every sound is an event on screen, at the moment it appears. Each effect below uses the same timing as the
 #    picture in src/scenes.js (the same word, and the same offset), so sound and picture stay together when the voice is re-timed.
-# And everything stays low and soft: ox carts' wheels, wooden slips, a brush of ink, paper, pins in cork, sticky notes, muffled keys,
-# a rubber stamp and an archive box, filtered below about 2.5 kHz.
+# And everything stays low and soft: ox carts' wheels, wooden slips, a brush of ink, paper, pins in cork, sticky notes, a pen, muffled
+# keys, a rubber stamp and an archive box, filtered below about 2.5 kHz.
 
 # when a word of a line is spoken, as the film's own wAt() estimates it: along the line's voiced length, from the words the voice reads.
 # wAt() falls back to the line's start when a word isn't in it; here a missing word stops the mix, so a typo can't move a sound
@@ -298,7 +298,7 @@ paper(tCt - 0.1, 0.02, P(1500), 0.4); wood(VIO, tCt + 0.2, 0.011, P(1500)); wood
 #    owned terms flies across, and a knock and a note as it lands in the glossary's card; a knock for the archive box, and a dull knock
 #    for each card dropped in. Then each glossary steps home: Planning's sheet (a muffled key for the link, a click, then A to G as the
 #    term opens), the registrar's policy (a marker as its words are struck, keys as the glossary is named, A to G), the faculty's
-#    dashboard (F-sharp to G, read from the platform). The data team's room at night: air, and G as its copy names where its words came
+#    dashboard (F-sharp to G, read from the platform). The data team's room at night: air, and G as its copy says where its words came
 #    from, a knock for "checked every night". One way: every tool reading the glossary, a knock for the tag, and a G major chord, the
 #    moment on screen, as every office's screen reads award
 R = 'read'
@@ -321,18 +321,19 @@ home(ROSE, tAs + 1.0, 0.014, P(900))
 home(OLIVE, W(R, 'dash', 'read from', 0.1), 0.014, 0.0)
 tNt = C(R, 'copy', -0.4)
 air(tNt + 0.1, 1.4, 0.01, -0.2)
-wood(VIO, W(R, 'copy', 'it names', 0.4), 0.014, P(920))
-knock(W(R, 'copy', 'a sync', 0.05), 0.012, P(1290))
+wood(VIO, W(R, 'copy', 'it says', 0.4), 0.014, P(920))
+knock(W(R, 'copy', 'checked against', 0.05), 0.012, P(1290))
 tWy = C(R, 'way', -0.4)
 every([(tWy + 0.4 + 1.6 * (1 + 0.08 * i) / 1.32, x) for i, x in enumerate([274, 516, 1042, 1284, 1810])])
 knock(W(R, 'way', 'one way', 0.05), 0.012, 0.0)
 comes(GMAJ9, tWy + 2.0, 5.0, 0.024)
-# 6. When a word changes: without a sync, a muffled key for each month as the dashboard's line is drawn, a low, dull A as the number
-#    steps up, and a dull knock for its question; a knock for each tag. Monday night: an E minor chord at the turn, a knock for the tag,
-#    keys as the sync's log appears, and G as it finds award's words changed. The pull request: air and paper as it comes in, A and
-#    then G as the old words and the new are shown, a muffled key for what it touches, and a note for each part it touches, rising,
-#    and a knock for each owner. Mei: a click, a soft stamp and G and D as she approves, and the same three notes as her words' places
-#    light. Jun: a pencil under six credit points, paper for the note, keys as the setting is typed, and G as it runs
+# 6. When a word changes: without a nightly check, a muffled key for each month as the dashboard's line is drawn, a low, dull A as the
+#    number steps up, and a dull knock for its question; a knock for each tag. Monday night: an E minor chord at the turn, a knock for
+#    the tag, then a pencil and A as the copy's old words are ringed, and a knock for the tag that says why. The change notice: air and
+#    paper as it comes in, A and then G as the old words and the new are shown, a note for each part the new words touch, rising, and a
+#    knock for each who signs. Tuesday morning: a knock for the tag, a pen as Mei signs, G and D at the tick, and the same three notes
+#    as her words' places light. Jun: a pencil under six credit points, paper for the note and for the business rule's card, G as it's
+#    the rule, and a muffled key for its line that every report reads it
 H = 'change'
 tMs = W(H, 'before', 'when a number')
 for i in range(12):
@@ -343,27 +344,27 @@ knock(S0(H) + 1.05, 0.01, P(560)); knock(W(H, 'before', 'found months', 0.05), 0
 tNg = C(H, 'night', -0.4)
 comes(EM7, tNg + 0.5, 6.0, 0.022)
 knock(tNg + 0.35, 0.01, 0.0)
-typing(tNg + 0.5, 0.6, 0.007, 0.0, 4)
-tFo = W(H, 'night', 'found it', -0.35)
-tap(tFo, 0.008, 0.0); wood(VIO, tFo + 0.15, 0.014, 0.0)
-tPr = W(H, 'night', 'opened a')
-air(tPr + 0.1, 0.6, 0.012, 0.2); paper(tPr + 0.2, 0.026, 0.0, 0.5)
-wood(ROSE, tPr + 0.45, 0.011, -0.1); wood(VIO, tPr + 0.7, 0.012, -0.1)
-tap(W(H, 'night', 'what the new'), 0.008, -0.3)
+tCk = W(H, 'night', 'the check'); tFo = W(H, 'night', 'found it')
+pencil(tCk, 0.012, P(seen(750, 960, 1.0)), 0.8); wood(ROSE, tCk + 0.2, 0.013, 0.0); knock(tFo, 0.01, P(1300))
+tNt = W(H, 'night', 'sent a')
+air(tNt + 0.45, 0.6, 0.012, 0.2); paper(tNt + 0.55, 0.026, 0.0, 0.5)
+wood(ROSE, tNt + 0.8, 0.011, -0.1); wood(VIO, tNt + 1.05, 0.012, -0.1)
 for t0, m_ in zip([C(H, 'list'), W(H, 'list', 'The wallet'), W(H, 'list', 'The census')], [67, 71, 74]):
     knock(t0 - 0.05, 0.008, -0.2, 230); wood(m_, t0, 0.012, -0.2)
 tOw = W(H, 'list', 'The census', 1.3)
 knock(tOw + 0.1, 0.01, 0.4); knock(tOw + 0.3, 0.01, 0.4, 220)
-tAp = W(H, 'mei', 'approved', 0.15)
-tap(tAp, 0.012, 0.0); press(tAp + 0.12, 0.016); wood(VIO, tAp + 0.15, 0.014, 0.0); wood(74, tAp + 0.35, 0.011, 0.0)
+knock(C(H, 'mei', -0.1), 0.01, P(seen(1420, 1160, 1.4)))
+tAp = W(H, 'mei', 'approved')
+pencil(tAp + 0.1, 0.012, P(seen(1340, 1371, 1.75)), 0.8); wood(VIO, tAp + 0.95, 0.014, 0.0); wood(74, tAp + 1.15, 0.011, 0.0)
 tUs = W(H, 'mei', 'where her')
 for i, m_ in enumerate([67, 71, 74]):
     wood(m_, tUs + 0.3 * i + 0.1, 0.011, 0.0)
 tSx = W(H, 'number', 'six credit')
 pencil(tSx, 0.012, P(1100), 0.6); paper(tSx + 0.7, 0.02, P(700), 0.4)
-typing(W(H, 'rule', "So it's", 0.2), 1.5, 0.007, P(600))
-tSe = W(H, 'rule', 'as a setting')
+paper(W(H, 'rule', "So it's", 0.1), 0.022, P(960), 0.5)
+tSe = W(H, 'rule', 'as a business')
 knock(tSe, 0.01, P(700)); wood(VIO, tSe + 0.05, 0.014, P(700))
+tap(W(H, 'rule', 'every report'), 0.008, P(900))
 # 7. Agreed by people: paper for "a week before"; a sticky note pressed onto the board for each question as it's asked; a marker round
 #    the one they agree, G and its third, and the marker again as "at least 6" is written; air as the note flies to the screen, and G
 #    and D as its words go in. The keepers: a low E for Clara's definitions, and a low C for Anil's. Thanked: paper for the card, and

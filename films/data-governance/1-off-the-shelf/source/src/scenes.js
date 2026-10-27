@@ -1,4 +1,4 @@
-/* ===== Off the shelf: the ten chapters =====
+/* ===== Off the shelf: the nine chapters =====
    Each chapter is a few shots in the places of plan.js and the series' rooms.js, cut together with short dissolves (gv_shots). Times
    inside a chapter come from its cues (when each line starts) and the words of its lines (wAt), so the pictures stay with the voice if
    it's recorded again. Words on screen are on paper, screens, boards, tags and speech bubbles, at least 28 px as seen, and above the
@@ -103,9 +103,9 @@ scene("shelf",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b:c.shelf-0.
     // the campus: Yusuf's first day, a box of his things in his arms; he looks up at the building, then goes in
     {at:0,place:"campus",keys:[[0,1080,760,1.7],[0.4,1090,770,1.82],[P.walk,1250,730,1.82]],d:3.4,draw:(x,tt)=>{const w=gv_walk(tt,P.walk,1060,1360,90),k=(w.x-1060)/300;
       person(x,"yusuf",w.x,os_pathY(w.x)+2-w.bob,lerp(0.235,0.19,k),{pose:"os_box",pose2:w.moving?(w.swing>0?"os_boxA":"os_boxB"):null,mix:Math.abs(w.swing),t:tt,carry:os_heldBox});}},
-    // his office: the shelf of binders, 34 policies, and the score on the wall
+    // his office: the shelf of binders, 34 policies, and the score on the wall; the newest DMBOK on his desk, as the prologue left it
     {at:P.b,place:"office",keys:[[P.b,1100,560,1.2],[P.b+0.1,1180,540,1.32]],d:5,draw:(x,tt)=>{const [sx,sy,sw,sh]=GV_OFF.score;
-      os_chartSmall(x,0);gv_halo(x,sx-30,sy-30,sw+60,sh+60,GV.gold,0.85*gv_io(tt,P.mat-0.1,P.ch,0.5));os_score(x);os_binders(x);os_deskBox(x);
+      os_chartSmall(x,0);gv_halo(x,sx-30,sy-30,sw+60,sh+60,GV.gold,0.85*gv_io(tt,P.mat-0.1,P.ch,0.5));os_score(x);os_binders(x);os_deskBox(x);gv_deskBook(x);
       person(x,"yusuf",1190,895,0.8,{pose:"listen",t:tt});os_tagAt(x,tt,P.thirty-0.2,null,1621,290,"34 data policies");}},
     // the chart, close: half its names are still to be confirmed
     {at:P.ch,place:"boardGov",keys:[[P.ch,960,520,1],[P.ch+0.1,960,500,1.05]],d:4,push:0,draw:(x,tt)=>os_chart(x,k=>fin(tt,P.half-0.2+2.2*k/8,0.3))},
@@ -113,7 +113,7 @@ scene("shelf",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b:c.shelf-0.
     {at:P.co,place:"desk",keys:[[P.co,960,560,1],[P.co+0.1,960,520,1.08]],d:3.2,draw:(x,tt)=>os_minutes(x,fin(tt,P.once-0.16,0.3))},
     // the office again: Yusuf has taken binder 12 down; David, at the door, gives him his brief
     {at:P.br,place:"office",keys:[[P.br,960,540,1],[P.br+0.1,940,540,1.04]],d:4,draw:(x,tt)=>{
-      os_chartSmall(x,1);os_score(x);os_binders(x,{missing:i=>i===11});os_deskBox(x);
+      os_chartSmall(x,1);os_score(x);os_binders(x,{missing:i=>i===11});os_deskBox(x);gv_deskBook(x);
       person(x,"david",190,868,0.8,{pose:"explain",t:tt});person(x,"yusuf",1240,905,0.8,{pose:"hold",expr:"worried",t:tt,flip:true,carry:heldBinder("12",os_bindCol(11))});
       const q=c.brief+0.1;gv_say(x,250,190,["Can you fix governance","before the submission?"],205,400,{a:fin(tt,q,0.35),k:0.92+0.08*spring(fin(tt,q,0.5))});}}]);
   // today, and who Yusuf is
@@ -194,10 +194,11 @@ scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b1:c.both-
 function os_roomLit(x,i,col,a){const F=GV_FL;gv_tint(x,F.x(i),F.top,F.w,F.fy-F.top,col,a);}
 function os_roomGlow(x,i,a){if(a<=0.01)return;const F=GV_FL;x.save();x.beginPath();x.rect(F.x(i),F.top,F.w,F.fy-F.top);x.clip();x.globalCompositeOperation="screen";
   wc_glowAt(x,F.x(i)+F.w/2,F.top+300,430,[255,238,204],0.42*a);x.restore();}
-// a decision's card, flying from the governance office to the glass of an office where the work is done (u, 0 to 1), and pinned there
+// a decision's card, flying from the governance office (or the office from) to the glass of an office where the work is done (u, 0 to
+// 1), and pinned there; amend draws the line added to it by hand
 const OS_DEC_Y=GV_FL.top+300;
-function os_decFly(x,i,u,tick){if(u<=0)return;const F=GV_FL,e=easeCam(clamp(u,0,1));
-  os_decision(x,lerp(F.x(2)+F.w/2,F.x(i)+F.w/2,e),lerp(OS_DEC_Y+20,OS_DEC_Y,e)-130*Math.sin(Math.PI*e),lerp(0.5,1,e),tick);}
+function os_decFly(x,i,u,tick,from,amend){if(u<=0)return;const F=GV_FL,e=easeCam(clamp(u,0,1)),f=from==null?2:from;
+  os_decision(x,lerp(F.x(f)+F.w/2,F.x(i)+F.w/2,e),lerp(OS_DEC_Y+20,OS_DEC_Y,e)-130*Math.sin(Math.PI*e),lerp(0.5,1,e),tick,amend);}
 // a label over two offices of the floor, in the band above their glass, with a pencil bracket out to their edges
 function os_overRooms(x,tt,t0,i0,i1,s,o){const F=GV_FL,x0=F.x(i0)+16,x1=F.x(i1)+F.w-16,m=(x0+x1)/2,y=108,u=easeCam(fin(tt,t0,0.7));if(u<=0)return;
   x.save();x.strokeStyle=rgba(WC_PENCIL,0.8);x.lineWidth=3;x.lineCap="round";x.beginPath();x.moveTo(m-(m-x0)*u,y);x.lineTo(m+(x1-m)*u,y);
@@ -247,31 +248,7 @@ scene("for",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b:c.for-0.6,cc
   wc_year(ctx,56,72,"England · 1880s",gv_io(t,P.cc+0.2,P.d,0.4));
   wc_paperOver(ctx,S);});
 
-// ---- 6 · Governance at the centre: DAMA's book and its wheel; the other frameworks on the same ground; then where it runs ----
-scene("wheel",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b:c.wheel-0.6,d:c.takes-0.6,body:wAt(sc,"body","body"),eleven:wAt(sc,"wheel","eleven"),
-    gov:wAt(sc,"wheel","governance"),where:wAt(sc,"wheel","where"),dee:wAt(sc,"others","Dee"),i8:wAt(sc,"others","eight thousand"),i38:wAt(sc,"others","thirty"),
-    shows:wAt(sc,"takes","shows")}));
-  const out=P.d-1.4,ring=[[1,3],[0,4]];
-  gv_shots(ctx,S,t,sc.dur,[
-    // his desk: binder 12, closed, his two notes sticking out of it; DAMA's book set down beside it
-    {at:0,place:"desk",keys:[[0,960,540,1],[P.body,1170,520,1.1]],d:2,draw:(x,tt)=>{os_closed12(x);const u=fin(tt,P.body-0.5,0.3);if(u<=0)return;
-      x.save();x.translate(1330,520);const k=lerp(1.25,1,easeCam(u));x.scale(k,k);withA(x,clamp(u*3,0,1),()=>os_dmbok(x,0,0));x.restore();}},
-    // the book open at its wheel: ten areas round the centre, data governance, where they meet; then the frameworks that cover the same
-    // ground, or part of it; then close in on the centre
-    {at:P.b,place:"page",keys:[[P.b,960,500,1.04],[P.b+0.1,960,480,1.0],[out,960,448,2.3]],d:1.6,push:0.02,draw:(x,tt)=>{
-      const hi=tt>=P.i38-0.3?"centre":tt>=P.i8-0.2?9:-1;
-      os_wheel(x,{area:k=>fin(tt,P.eleven-0.1+k*0.24,0.5),centre:fin(tt,P.gov-0.1,0.6),joins:clamp((tt-P.where+0.2)/1.2,0,1),
-        ring:clamp((tt-P.dee+0.2)/1.4,0,1)*(1-fin(tt,out,0.4)),dim:gv_io(tt,P.dee-0.2,out,0.5),hi,
-        outline:hi==="centre"?gv_io(tt,P.i38-0.1,out,0.4):hi===9?fin(tt,P.i8-0.1,0.4):0,labels:1-fin(tt,out,0.4),fade:1-0.6*fin(tt,out,0.6)});
-      os_note(x,tt,P.dee-0.1,1660,150,["DCAM","the same ground"],{out});os_note(x,tt,P.i8-0.1,262,150,["ISO 8000","data quality"],{out});
-      os_note(x,tt,P.i38-0.1,1660,780,["ISO/IEC 38505","governing data"],{out});}},
-    // where it runs: the governance office at the centre of the floor, and the offices round it, at work
-    {at:P.d,place:"floor",keys:[[P.d,960,485,1.9],[P.d+0.4,960,540,1.0]],d:2.4,push:0.02,draw:(x,tt)=>{
-      os_roomLit(x,2,GV.gold,0.32+0.16*(1-fin(tt,P.d+0.4,1.6)));ring.forEach((r,j)=>r.forEach(i=>os_roomGlow(x,i,fin(tt,P.shows-0.1+0.3*j,0.6))));
-      os_floor(x,tt,{yusufIn:true,pose:{yusuf:{pose:"listen"}}});}}]);
-  wc_paperOver(ctx,S);});
-
-// ---- 7 · Listen first: no thirty-fifth policy; one question in every office, and what slows each one down ----
+// ---- 6 · Listen first: no thirty-fifth policy; one question in every office, and what slows each one down ----
 // someone answering while Yusuf writes it down: their bubble springs in at t0 and goes at t1
 function os_answer(x,tt,t0,t1,bx,by,lines,tx,ty){gv_say(x,bx,by,lines,tx,ty,{a:gv_io(tt,t0,t1,0.35),k:0.92+0.08*spring(fin(tt,t0,0.5)),size:34});}
 const os_noting=tt=>({pose:"write",carry:heldNotebook,t:tt});
@@ -307,7 +284,7 @@ scene("listen",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({a2:wAt(sc,"
     {at:P.f,place:"boardGov",keys:[[P.f,960,500,1],[P.f+0.1,960,490,1.04]],d:3,push:0.02,draw:(x,tt)=>{os_asked(x);
       for(let k=0;k<4;k++)os_ansCard(x,k,fin(tt,c.binder-0.2+0.45*k,0.35));}},
     // his office: the shelf the binder came from, in a warm light; what they wrote is what they were asked for
-    {at:P.they-0.5,place:"office",keys:[[P.they-0.5,1320,520,1.16],[P.they-0.4,1360,520,1.2]],d:3,draw:(x,tt)=>{os_chartSmall(x,1);os_ansSmall(x);os_score(x);
+    {at:P.they-0.5,place:"office",keys:[[P.they-0.5,1320,520,1.16],[P.they-0.4,1360,520,1.2]],d:3,draw:(x,tt)=>{os_chartSmall(x,1);os_ansSmall(x);os_score(x);gv_deskBook(x);
       os_binders(x,{missing:i=>i===11});const g=fin(tt,P.they-0.2,0.9),[sx,,sw]=[GV_OFF.shelf.x,0,GV_OFF.shelf.w];
       if(g>0){x.save();x.globalCompositeOperation="soft-light";wc_glowAt(x,sx+sw/2,520,560,[255,190,90],0.9*g);x.globalCompositeOperation="screen";
         wc_glowAt(x,sx+sw/2,470,500,[255,222,160],0.42*g);x.restore();}
@@ -316,17 +293,17 @@ scene("listen",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({a2:wAt(sc,"
     {at:P.g,place:"data",keys:[[P.g,1300,520,1.14],[P.g+0.1,1320,520,1.18]],d:3,draw:(x,tt)=>{const nod=k=>0.05*Math.sin(tt*3.1+k)*gv_io(tt,P.g+0.3,P.h,0.4);os_dataBoard(x);
       person(x,"yusuf",900,905,0.8,{pose:"listen",t:tt,nod:nod(1)});person(x,"mei",1330,905,0.8,{pose:"explain",t:tt});
       person(x,"jun",1600,905,0.8,{pose:"listen",t:tt,flip:true,nod:nod(2)});}},
-    // Jun's screen: what they agreed on Monday runs as a test, and passes; how award maps to the government's has no test, as no
-    // one has agreed it
+    // Jun's screen: the rules on award. What they agreed on Monday is checked every night, and holds; how award maps to the
+    // government's can't be checked, as no one has agreed it
     {at:P.h,place:"screen",keys:[[P.h,960,450,1],[P.cant-0.3,960,500,1.06]],d:1.8,push:0.02,draw:(x,tt)=>
-      os_tests(x,fin(tt,P.carry-0.3,0.5),fin(tt,P.carry+0.25,0.4),fin(tt,P.agree-0.1,0.6),fin(tt,P.cant-0.15,0.5))}]);
+      os_rules(x,fin(tt,P.carry-0.3,0.5),fin(tt,P.carry+0.25,0.4),fin(tt,P.agree-0.1,0.6),fin(tt,P.cant-0.15,0.5))}]);
   wc_paperOver(ctx,S);});
 
-// ---- 8 · Where does it run? Binder 12 open again, and every line of policy 12 marked by where it runs ----
+// ---- 7 · Where does it run? Binder 12 open again, and every line of policy 12 marked by where it runs ----
 scene("runs",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{open:w("takes","opens",-0.2),where:w("takes","where"),b:c.runs-0.6,key:[w("runs","run in",-0.1),w("owned","decisions",-0.1),w("go","go",-0.2)],
-      hi:[w("runs","required"),w("runs","a check"),w("runs","a tag"),w("runs","a test"),w("owned","owns"),w("owned","writes"),w("go","go")],
-      note:[w("runs","required"),w("runs","a check"),w("runs","a tag"),w("runs","a test"),w("owned","owns",0.3),w("owned","where the"),99]};});
+      hi:[w("runs","a field"),w("runs","a check"),w("runs","every night"),w("runs","a label"),w("owned","owns"),w("owned","writes"),w("go","go")],
+      note:[w("runs","a field"),w("runs","a check"),w("runs","every night"),w("runs","a label"),w("owned","owns",0.3),w("owned","where the"),99]};});
   gv_shots(ctx,S,t,sc.dur,[
     // his desk: binder 12, closed, and three highlighters; he opens it, and sticks his question beside policy 12
     {at:0,place:"desk",keys:[[0,1300,520,1.1],[P.open,960,520,1],[P.b-0.9,1300,500,1.25]],d:1.6,draw:(x,tt)=>{
@@ -339,53 +316,54 @@ scene("runs",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,s,
       j=>fin(tt,P.key[j],0.6),fin(tt,P.hi[6]+0.35,0.5))}]);
   wc_paperOver(ctx,S);});
 
-// ---- 9 · Where decisions enter: the data team's loop, and a gold pin at each step where a decision enters it ----
-// a face between two expressions (m, 0 to 1)
-function os_face(a,b,m){const A=EXPR[a],B=EXPR[b];if(m<=0)return A;if(m>=1)return B;const o={};new Set([...Object.keys(A),...Object.keys(B)]).forEach(k=>o[k]=lerp(A[k]||0,B[k]||0,m));return o;}
-scene("enter",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
-    return{places:w("places","places"),lp:c.loop-0.6,go:w("loop","loop",-0.1),end:w("loop","new version",0.1),m:c.pin-0.6,meet:w("pin","another meeting"),
-      needs:w("pin","It needs"),pin:w("pin","a pin"),q:c.pins-0.6,
-      pins:OS_PINS.map(([,word])=>w(sc.vo.find(v=>v.id==="pins").text.includes(word)?"pins":"pins2",word,-0.15)),two:w("pins","a contract",-0.1),br:c.breath-0.3};});
-  const [qx,qy,qw,qh]=GV_PC,[px,py,pw,ph]=GV_DT.poster,
-    pins=(x,tt,R,lab)=>OS_PINS.forEach(([i,,lines],k)=>os_goldPin(x,i,R[0],R[1],R[2],R[3],fin(tt,P.pins[k],0.3),clamp((tt-P.pins[k]-0.05)/0.5,0,1),lines,
-      lab&&(j=>clamp((tt-(j?P.two:P.pins[k]+0.1))/0.6,0,1))));
+// ---- 8 · What's worth keeping: under each answer on Yusuf's board, what's worth keeping so it stops; then who decides, and who acts ----
+scene("keep",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{worth:w("keep","worth"),b:c.rules-0.6,card:[w("rules","Rules"),w("words","One"),w("classes","A class"),w("owners","a list")],f:c.decide-0.6,
+      own:w("decide","Owners"),stw:w("decide","Stewards"),teams:w("act","The teams"),use:w("act","use it"),gov:w("act","governance"),kept:w("act","kept")};});
   gv_shots(ctx,S,t,sc.dur,[
-    // the data team's room: Yusuf comes in with a box of gold pins; Jun turns from his desk; the poster of how they build catches the light
-    {at:0,place:"data",keys:[[0,1000,520,1.08],[0.4,1060,515,1.14]],d:3.2,draw:(x,tt)=>{const wk=gv_walk(tt,0.2,300,860,220);
-      os_dataBoard(x);os_warm(x,px+pw/2,py+ph/2,420,fin(tt,P.places-0.4,0.8));
-      person(x,"jun",1600,905,0.8,{pose:"stand",pose2:"listen",mix:fin(tt,wk.end-0.7,0.6),t:tt,flip:true});os_carrier(x,"yusuf",wk,905,0.8,heldPins,{t:tt});}},
-    // the poster, close: the loop they build in, going round from a question to a new version
-    {at:P.lp,place:"poster",keys:[[P.lp,960,500,1.06],[P.lp+0.1,960,490,1]],d:2.4,push:0.02,draw:(x,tt)=>
-      withA(x,1-fin(tt,P.m-0.7,0.6),()=>os_loopRun(x,qx,qy,qw,qh,clamp((tt-P.go)/((P.end-P.go)/0.9),0,1)))},
-    // the room again: Jun expects another meeting; Yusuf holds up the pins instead
-    {at:P.m,place:"data",keys:[[P.m,1120,520,1.16],[P.m+0.1,1100,515,1.2]],d:4,draw:(x,tt)=>{os_dataBoard(x);os_warm(x,px+pw/2,py+ph/2,420,1);
-      person(x,"yusuf",880,905,0.8,{pose:"hold",pose2:"holdUp",mix:fin(tt,P.needs-0.1,0.5),E:os_face("calm","smile",fin(tt,P.needs,0.5)),t:tt,carry:heldPins});
-      person(x,"jun",1480,905,0.8,{pose:"listen",E:os_face("concerned","relieved",fin(tt,P.pin,0.6)),t:tt,flip:true});
-      os_answer(x,tt,P.meet-0.25,P.pin+0.3,1500,330,["Another meeting?"],1462,456);}},
-    // the poster, close: a gold pin at each step where a decision enters, and what enters there
-    {at:P.q,place:"poster",keys:[[P.q,960,500,1.04],[P.q+0.1,960,490,1]],d:2.4,push:0.02,draw:(x,tt)=>pins(x,tt,GV_PC,true)},
-    // the room: the team's own loop, with six gold pins in it
-    {at:P.br,place:"data",keys:[[P.br,1060,520,1.1],[P.br+0.1,1060,515,1.13]],d:2.4,draw:(x,tt)=>{os_dataBoard(x);os_warm(x,px+pw/2,py+ph/2,420,1);pins(x,99,GV_DT.poster,false);
-      person(x,"yusuf",860,905,0.8,{pose:"hold",expr:"smile",t:tt,carry:heldPins});person(x,"jun",1560,905,0.8,{pose:"listen",expr:"smile",t:tt,flip:true});}}]);
+    // his office: Yusuf at his board, a stack of gold cards in his hands; the four answers catch a warm light
+    {at:0,place:"office",keys:[[0,1060,520,1.14],[P.worth-0.6,930,440,1.4]],d:2.4,draw:(x,tt)=>{const [bx,by,bw,bh]=GV_OFF.board;
+      os_chartSmall(x,1);os_ansSmall(x);os_warm(x,bx+bw/2,by+bh*0.6,220,fin(tt,P.worth-0.2,0.8));os_score(x);os_binders(x,{missing:i=>i===11});gv_deskBook(x);
+      person(x,"yusuf",1190,905,0.8,{pose:"hold",expr:"calm",t:tt,flip:true,carry:os_heldGold});}},
+    // the board, close: under each answer, what's worth keeping so it stops, on a gold card
+    {at:P.b,place:"boardGov",keys:[[P.b,960,520,1.03],[P.b+0.1,960,510,1]],d:2.4,push:0.02,draw:(x,tt)=>{os_asked(x,OS_KB.ask);
+      for(let k=0;k<4;k++){os_ansCard(x,k,1,OS_KB.ans);os_keepArrow(x,k,clamp((tt-P.card[k]+0.45)/0.45,0,1));os_keepCard(x,k,fin(tt,P.card[k],0.35));}}},
+    // the floor: the owners decide, and the stewards keep it up to date, a line added by hand; a copy goes to each team that uses it;
+    // governance checks it's kept
+    {at:P.f,place:"floor",keys:[[P.f,960,540,1]],push:0.025,draw:(x,tt)=>{const F=GV_FL,own=fin(tt,P.own-0.15,0.6),go=k=>P.use-0.55+0.14*k,
+        land=k=>fin(tt,go(k)+0.75,0.4),tick=k=>fin(tt,P.kept-0.2+0.12*k,0.4),amend=k=>clamp((tt-P.stw-0.1-0.25*k)/0.9,0,1);
+      [0,1].forEach(i=>os_roomLit(x,i,GV.gold,0.3*own));[3,4].forEach((i,k)=>os_roomLit(x,i,GV.cyanInk,0.2*land(k)));os_roomLit(x,2,GV.gold,0.32*fin(tt,P.gov-0.15,0.5));
+      const ex=(t0,t1)=>gv_io(tt,t0,t1,0.45);
+      os_floor(x,tt,{yusufIn:true,pose:{clara:{pose2:"explain",mix:ex(P.own-0.25,P.stw+0.2)},mei:{pose2:"write",mix:fin(tt,P.stw-0.15,0.5)},
+        jun:{pose2:"listen",mix:ex(go(0)-0.3,go(0)+1.1)},sam:{pose2:"listen",mix:ex(go(1)-0.3,go(1)+1.1)},yusuf:{pose:"listen",pose2:"write",mix:fin(tt,P.gov-0.25,0.5),carry:heldNotebook}}});
+      // the owners' decisions on their glass, a line added to each, and a copy of each flying to a team's
+      [0,1].forEach((i,k)=>{const u=fin(tt,P.own+0.1*k,0.45);if(u>0)withA(x,clamp(u*2.5,0,1),()=>os_decision(x,F.x(i)+F.w/2,OS_DEC_Y,lerp(1.15,1,spring(u)),tick(k),amend(k)));});
+      [3,4].forEach((i,k)=>os_decFly(x,i,clamp((tt-go(k))/0.85,0,1),tick(k+2),k,1));
+      os_overRooms(x,tt,P.own-0.2,0,1,"owners decide · stewards keep it up to date");os_overRooms(x,tt,P.teams-0.15,3,4,"the teams who do the work · use it");
+      os_glassCard(x,tt,2,P.gov-0.1,["governance","checks it's kept"],{wash:GV.gold,washA:0.32});}}]);
   wc_paperOver(ctx,S);});
 
-// ---- 10 · The series: nine binders for the films on what governance needs, three cards on Yusuf's board for the films on governance
-//      as a capability, six on the data team's for the films on the tools ----
+// ---- 9 · The series: nine binders for the films on why governance, three cards on Noor's architecture map for the films that draw it
+//     as one model, six on the data team's board for the films that build it ----
 scene("series",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
-    return{nine:w("next","nine",-0.1),take:w("next","takes"),ml:c.map-0.6,three:w("map","three",-0.1),tl:c.tools-0.6,six:w("tools","six",-0.1),f:c.wish-0.6,end:c.breath-0.2};});
+    return{nine:w("next","nine",-0.1),take:w("next","follows"),ml:c.map-0.6,mc:w("map","as one",-0.2),three:w("map","on the"),tl:c.tools-0.6,six:w("tools","six",-0.1),
+      f:c.wish-0.6,end:c.breath-0.2};});
   const B1=OS_NINE[0],held=os_heldTitled(["Who","decides"],os_bindCol(B1));
   gv_shots(ctx,S,t,sc.dur,[
     // his office: nine binders on the shelf light up, one for each film to come; he takes the first down
     {at:0,place:"office",keys:[[0,1120,520,1.2],[P.take+0.5,1270,560,1.4]],d:1.8,draw:(x,tt)=>{const n=j=>fin(tt,P.nine+0.12*j,0.35),got=tt>=P.take+0.55,
         r1=fin(tt,P.take-0.1,0.5),r2=fin(tt,P.take+0.55,0.5);
-      os_chartSmall(x,1);os_ansSmall(x);os_score(x);
+      os_chartSmall(x,1);os_ansSmall(x);os_keepSmall(x);os_score(x);gv_deskBook(x);
       os_binders(x,{missing:i=>i===11||(got&&i===B1),glow:i=>{const j=OS_NINE.indexOf(i);return j<0?0:0.85*n(j);},
         out:i=>{const j=OS_NINE.indexOf(i);return j<0?0:Math.max(0.5*n(j),i===B1?fin(tt,P.take+0.1,0.35):0);}});
       person(x,"yusuf",1250,905,0.8,got?{pose:"reach",pose2:"hold",mix:r2,t:tt,carry:held}:{pose:"listen",pose2:"reach",mix:r1,t:tt});}},
-    // Yusuf's board, close: three cards, one for each film on governance as a capability
-    {at:P.ml,place:"boardGov",keys:[[P.ml,960,500,1.04],[P.ml+0.1,960,490,1]],d:2.4,push:0.02,draw:(x,tt)=>{os_capHead(x,fin(tt,P.ml+0.3,0.6));
-      for(let k=0;k<3;k++)os_capCard(x,k,fin(tt,P.three+0.3*k,0.35));}},
-    // the data team's board, close: six cards, one for each film on the tools
+    // Noor's room: the university's architecture map on her wall, and Noor, the data architect, at it
+    {at:P.ml,place:"noor",keys:[[P.ml,860,500,1.1],[P.ml+0.1,800,470,1.16]],d:2,draw:(x,tt)=>{
+      person(x,"noor",1250,905,0.8,{pose:"listen",pose2:"point",mix:fin(tt,P.ml+0.5,0.6),t:tt,flip:true});
+      os_nameCard(x,1330,236,"Noor Rahman","data architect",gv_io(tt,P.ml+0.4,P.mc,0.4));}},
+    // the map, close: three cards, one in each layer the films add to
+    {at:P.mc,place:"mapClose",keys:[[P.mc,960,520,1.03],[P.mc+0.1,960,510,1]],d:2.4,push:0.02,draw:(x,tt)=>{for(let k=0;k<3;k++)os_mapCard(x,k,fin(tt,P.three+0.3*k,0.35));}},
+    // the data team's board, close: six cards, one for each film that builds it with the tools
     {at:P.tl,place:"boardData",keys:[[P.tl,960,500,1.04],[P.tl+0.1,960,490,1]],d:2.4,push:0.02,draw:(x,tt)=>{os_toolsHead(x,fin(tt,P.tl+0.3,0.6));
       for(let k=0;k<6;k++)os_toolCard(x,k,fin(tt,P.six+0.3*k,0.35));}},
     // the floor: he takes the binder to where the work is done; Jun looks up

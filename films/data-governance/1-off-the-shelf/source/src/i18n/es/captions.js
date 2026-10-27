@@ -59,14 +59,6 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Como el inspector del mercado: una regla, una copia donde se hace el trabajo y alguien que verifica.",
 "Governance sets the rules and checks they're kept. Management does the work.":
 "La gobernanza fija las reglas y verifica que se cumplan. La gestión hace el trabajo.",
-"Data management has a body of knowledge: DAMA's.":
-"La gestión de datos tiene un cuerpo de conocimiento: el de DAMA.",
-"It draws eleven areas as a wheel, with governance at the centre, where the others meet.":
-"Dibuja once áreas como una rueda, con la gobernanza en el centro, donde se unen las demás.",
-"Others cover the same ground, or part of it: DCAM, ISO 8000 for data quality, and ISO/IEC 38505 for governing data.":
-"Otros cubren el mismo terreno, o parte de él: DCAM, ISO 8000 para la calidad de datos e ISO/IEC 38505 para gobernar los datos.",
-"This series takes what they agree on, and shows where it runs.":
-"Esta serie toma aquello en lo que coinciden y muestra dónde se ejecuta.",
 "Yusuf doesn't write a thirty-fifth policy. He asks everyone the same question: what slows you down?":
 "Yusuf no escribe una política número treinta y cinco. Les hace a todos la misma pregunta: ¿qué te frena?",
 "For Jun, the rules arrive after the work is built.":
@@ -83,28 +75,32 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La gobernanza es trabajo de personas. Las herramientas ejecutan lo que la gente acuerda, pero no logran que se pongan de acuerdo.",
 "So he opens the binder, with one question for every line: where does it run?":
 "Así que abre la carpeta, con una pregunta para cada línea: ¿dónde se ejecuta?",
-"Some lines can run in the work itself, as a required field, a check, a tag or a test.":
-"Algunas pueden ejecutarse en el trabajo: un campo obligatorio, una validación, una etiqueta o una prueba.",
+"Some lines can run in the work itself, as a field no one can leave empty, a check that runs every night, or a label.":
+"Algunas pueden ejecutarse en el trabajo: un campo que nadie puede dejar vacío, una validación cada noche o una etiqueta.",
 "Some are decisions: someone owns each one, and writes it down where the work can find it.":
 "Otras son decisiones: cada una tiene un dueño, que la anota donde el trabajo pueda encontrarla.",
 "And some can go.":
 "Y otras sobran.",
-"And the work already has places for them.":
-"Y el trabajo ya tiene lugares para ellas.",
-"The data team builds in a loop of ten steps, from a question to a new version.":
-"El equipo de datos trabaja en un ciclo de diez pasos, de una pregunta a una nueva versión.",
-"Governance doesn't need another meeting. It needs a pin at the right steps:":
-"La gobernanza no necesita otra reunión. Necesita una tachuela en los pasos correctos:",
-"a term when the question is asked, a classification at the source, an owner and a contract,":
-"un término al hacer la pregunta, una clasificación en la fuente, un dueño y un contrato,",
-"a rule as a test, an approval at review, and a version when it changes.":
-"una regla como prueba, una aprobación en la revisión y una versión cuando cambia.",
-"Over nine more films, Yusuf takes the binder off the shelf, one kind of policy at a time.":
-"En nueve películas más, Yusuf baja la carpeta del estante, un tipo de política a la vez.",
-"Then three more design governance as a capability that lasts.":
-"Luego, tres más diseñan la gobernanza como una capacidad que perdura.",
-"And six show how to build each piece, with dbt and Databricks.":
-"Y seis muestran cómo construir cada pieza, con dbt y Databricks.",
+"Behind every line that stays, there's something worth keeping, and someone to keep it.":
+"Detrás de cada línea que queda hay algo que vale la pena mantener, y alguien que lo mantenga.",
+"Rules, each with an owner, that reach Jun before he builds.":
+"Reglas, cada una con su dueño, que le llegan a Jun antes de construir.",
+"One glossary every report reads from, so Mei sees where her words are used.":
+"Un solo glosario para todos los informes, así Mei ve dónde se usan sus palabras.",
+"A class for each kind of personal data, so Sam knows which columns to protect.":
+"Una clase para cada tipo de dato personal, para que Sam sepa qué columnas proteger.",
+"And a list of who owns what, so Planning knows who answers for each number.":
+"Y una lista de dueños, para que Planificación sepa quién responde por cada cifra.",
+"Owners decide. Stewards keep it all up to date.":
+"Los dueños deciden. Los responsables de datos lo actualizan.",
+"The teams who do the work use it, and governance checks it's kept.":
+"Los equipos que hacen el trabajo lo usan, y la gobernanza revisa que se mantenga.",
+"Over nine more films, Yusuf follows one symptom at a time to what's worth keeping, and to who decides and acts.":
+"En nueve películas más, Yusuf sigue un síntoma a la vez hasta lo que vale la pena mantener, y hasta quién decide y actúa.",
+"Then three draw it all as one model, on the university's architecture map.":
+"Luego, tres lo dibujan como un solo modelo, en el mapa de arquitectura de la universidad.",
+"And six build it, with dbt and Databricks.":
+"Y seis lo construyen, con dbt y Databricks.",
 "A policy that doesn't run anywhere is a wish.":
 "Una política que no se ejecuta en ningún lado es un deseo."
 });

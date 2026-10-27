@@ -170,7 +170,8 @@ for k, m in enumerate([64, 60, 57]):
 twine(lift - 0.5, 0.024, -0.1, 0.45); paper(lift, 0.022, -0.1, 0.4)
 for k, word in enumerate(['housing', 'schools', 'transport']):
     t0 = W('counted', 'answer', word); air(t0 - 0.15, 0.9, 0.01, 0.1 + 0.1 * k); pin(t0 + 0.75, 0.018, 0.1 + 0.1 * k)
-paper(G('counted', 'correct', -0.2), 0.018, 0.0, 0.4); pencil(W('counted', 'correct', 'correct', -0.1), 0.8, 0.018, 0.1)
+paper(G('counted', 'correct', -0.2), 0.018, 0.0, 0.4); pencil(W('counted', 'correct', 'check', -0.1), 0.8, 0.018, 0.1)
+pencil(W('counted', 'need', 'without', -0.1), 1.0, 0.018, -0.35)
 for i in range(3):
     paper(G('counted', 'boycott', 0.15 + 0.6 * i), 0.022, -0.15 + 0.12 * i, 0.7)
 piano(45, down, 0.03, 0.0); paper(down, 0.022, -0.1, 0.4); twine(tie, 0.026, -0.1, 0.5); knock(down + 0.1, 0.016, 0.2, 300)

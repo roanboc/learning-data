@@ -113,23 +113,24 @@ scene("tbc",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({desk:c.says-0.
     stu:wAt(sc,"says","students"),cou:wAt(sc,"says","courses"),reg:c.register-0.5,eight:wAt(sc,"register","eight"),three:wAt(sc,"register","Three"),half:wAt(sc,"register","half"),
     mail:c.email-0.4,hl:wAt(sc,"thread","award"),open2:wAt(sc,"thread","thread")+0.1,none:wAt(sc,"thread","decided")-0.1}));
   gv_shots(ctx,S,t,sc.dur,[
-    // his office: Yusuf at his desk, the binder he took off the shelf held up in front of him
-    {at:0,place:"office",keys:[[0,1000,500,1.15],[1.2,990,560,1.6]],d:2.4,draw:(x,tt)=>{
-      gv_behind(x,"yusuf",1000,GV_OFF.desk[1],0.8,{pose:"hold",t:tt,carry:wd_heldTitled(["Who","decides"],WD_B2),gaze:[0,0.4]});x.drawImage(gv_place("officeDesk"),0,0,W,H);}},
+    // his office: Yusuf on his feet behind his desk, the binder he took off the shelf held up in front of him; the newest DMBOK stands
+    // on the desk beside him
+    {at:0,place:"office",keys:[[0,940,480,1.12],[1.2,900,470,1.4]],d:2.4,draw:(x,tt)=>{
+      gv_behind(x,"yusuf",850,GV_OFF.desk[1],0.8,{standing:true,pose:"hold",t:tt,carry:wd_heldTitled(["Who","decides"],WD_B2),gaze:[0,0.4]});x.drawImage(gv_place("officeDesk"),0,0,W,H);}},
     // his desk from above: the binder, its cover; back to see it open whole, so the frame cuts no word as the page lands; in to policy 2
-    // and its line (close enough that the frame stops before the register's owners), then the register, and "TBC", one by one
+    // and its line (close enough that the frame stops before the register), then the register: its eight areas counted, and "TBC",
+    // written in red, one by one: three owners, then four stewards
     {at:P.desk,place:"deskTop",keys:[[P.desk,1085,520,1.15],[P.open-0.4,960,525,1],[P.every+0.4,640,500,1.5],[P.reg,1310,540,1.28]],d:1.8,push:0.015,draw:(x,tt)=>{const u=clamp((tt-P.open)/1.1,0,1);
-      wd_binder2(x,easeCam(u),q=>wd_policy2(q,1,fin(tt,P.every,0.6)),q=>wd_register(q,1,k=>k<3?fin(tt,P.three+0.45*k,0.6):fin(tt,P.half+0.4*(k-3),0.6)));
-      withA(x,wd_p2In(x),()=>{wd_tagAt(x,tt,P.stu-0.1,null,320,wd_pageTop()+566,"students",{size:30});wd_tagAt(x,tt,P.cou-0.1,null,540,wd_pageTop()+566,"courses",{size:30});});
-      // the eight domains, counted down the register as the voice says how many
-      for(let i=0;i<8;i++){const g=gv_io(tt,P.eight+0.08*i,P.eight+0.8+0.08*i,0.2);if(g>0.01)gv_tint(x,WD_RG.x()-14,WD_RG.y0()+i*WD_RG.dy-38,190,54,GV.gold,0.5*g);}}},
+      wd_binder2(x,easeCam(u),q=>wd_policy2(q,1,fin(tt,P.every,0.6)),q=>wd_reg(q,{tbc:k=>k<3?fin(tt,P.three+0.45*k,0.6):fin(tt,P.half+0.4*(k-3),0.6),
+        lit:i=>gv_io(tt,P.eight+0.08*i,P.eight+0.8+0.08*i,0.2)}));
+      withA(x,wd_p2In(x),()=>{wd_tagAt(x,tt,P.stu-0.1,null,320,wd_pageTop()+566,"students",{size:30});wd_tagAt(x,tt,P.cou-0.1,null,540,wd_pageTop()+566,"courses",{size:30});});}},
     // his screen: the inbox, the thread about award with its twenty-three replies; it opens on four questions, and then, no decision
     {at:P.mail,place:"screenGov",keys:[[P.mail,960,440,1.02],[P.open2,960,420,1.08]],d:2.2,push:0.01,draw:(x,tt)=>{
       wd_inbox(x,{hl:fin(tt,P.hl,0.5),open:fin(tt,P.open2,0.5),msg:i=>fin(tt,P.open2+0.3+0.45*i,0.4),none:fin(tt,P.none,0.5)});}}]);
   wd_pill(ctx,t,"Today",fin(t,0.4,0.5)*(1-fin(t,P.desk-0.3,0.3)));
   wc_paperOver(ctx,S);});
 
-// ---- 3 · Already written: the data team's map names every domain's owner, and so does every model other teams read ----
+// ---- 3 · Already written: the data team's list of who they ask, area by area; each name confirmed with its office ----
 // the floor: the people at work behind the glass, then the glass, then the offices' names (a name the frame would cut fades out)
 const WD_AT={clara:0,mei:1,jun:3,sam:4},WD_WORK={clara:{pose:"reach"},mei:{pose:"hold",carry:heldNotebook},jun:{pose:"reach"},sam:{pose:"phone"}};
 function wd_floor(x,tt,o){o=o||{};const F=GV_FL;Object.keys(WD_AT).forEach(id=>{const i=WD_AT[id];
@@ -139,29 +140,30 @@ function wd_floor(x,tt,o){o=o||{};const F=GV_FL;Object.keys(WD_AT).forEach(id=>{
 // someone walking with a notebook held in both hands: the arms stay, the legs step
 POSE.wd_carry=Object.assign({},POSE.hold,{gaze:[0.3,0.1],turn:0.06,look:0});
 POSE.wd_carryA=Object.assign({},POSE.wd_carry,{feet:14,shift:-5,tilt:0.03});POSE.wd_carryB=Object.assign({},POSE.wd_carryA,{shift:5,tilt:-0.03});
-function wd_carrier(x,id,w,y,s,carry,o){person(x,id,w.x,y-w.bob,s,Object.assign({pose:"wd_carry",pose2:w.moving?(w.swing>0?"wd_carryA":"wd_carryB"):null,mix:Math.abs(w.swing),flip:w.flip,carry},o||{}));}
+// (o.base names other poses to walk with: the same name, and A and B for the steps)
+POSE.wd_low=Object.assign({},POSE.wd_carry,{L:[0.12,-0.62],R:[0.12,-0.62]});
+POSE.wd_lowA=Object.assign({},POSE.wd_low,{feet:14,shift:-5,tilt:0.03});POSE.wd_lowB=Object.assign({},POSE.wd_lowA,{shift:5,tilt:-0.03});
+function wd_carrier(x,id,w,y,s,carry,o){o=o||{};const b=o.base||"wd_carry";person(x,id,w.x,y-w.bob,s,Object.assign({pose:b,pose2:w.moving?b+(w.swing>0?"A":"B"):null,mix:Math.abs(w.swing),flip:w.flip,carry},o));}
 // a speech bubble that springs in at t0 and goes at t1
 function wd_say(x,tt,t0,t1,bx,by,lines,tx,ty){return gv_say(x,bx,by,lines,tx,ty,{a:gv_io(tt,t0,t1,0.35),k:0.92+0.08*spring(fin(tt,t0,0.5)),size:34});}
-scene("written",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({who:wAt(sc,"asks","who"),noor:wAt(sc,"map","Noor"),open:wAt(sc,"map","opens")-0.2,
-    every:wAt(sc,"map","Every"),mod:c.models-0.35,evm:wAt(sc,"models","every"),aw:wAt(sc,"models","award's"),mei:wAt(sc,"models","Mei"),
-    built:c.built-0.35,bec:wAt(sc,"built","because"),fl:c.confirm-0.35,reg:sc.ends.confirm+0.15}));
-  const owners=[2,4,6,8,10,12,14,16];
+// Noor turning to the board on her left, pointing up at the list
+POSE.wd_toBoard=Object.assign({},POSE.point,{gaze:[0.7,-0.5],turn:0.3});
+scene("written",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({who:wAt(sc,"asks","who"),noor:wAt(sc,"list","Noor"),shows:wAt(sc,"list","shows"),
+    board:wAt(sc,"list","board"),area:wAt(sc,"list","area"),every:wAt(sc,"list","Every"),aw:c.award-0.2,mei:wAt(sc,"award","Mei"),
+    built:c.built-0.35,bec:wAt(sc,"built","because"),fl:c.confirm-0.35,reg:wAt(sc,"confirm","asks")-0.25}));
   gv_shots(ctx,S,t,sc.dur,[
-    // the data team's room: Yusuf comes in and asks Jun and Noor who they ask; Noor answers by showing him
-    {at:0,place:"data",keys:[[0,1100,520,1.12],[2.2,1080,515,1.16]],d:3,draw:(x,tt)=>{const wk=gv_walk(tt,0.2,330,830,230),up=fin(tt,wk.end-0.8,0.6);
+    // the data team's room: Yusuf comes in and asks Jun and Noor who they ask; Noor turns to their board to show him
+    {at:0,place:"data",keys:[[0,1100,520,1.12],[2.2,1080,515,1.16],[P.shows-0.4,960,515,1.12]],d:3,draw:(x,tt)=>{const wk=gv_walk(tt,0.2,330,830,230),up=fin(tt,wk.end-0.8,0.6),pt=fin(tt,P.shows-0.2,0.6);
+      wd_boardSmall(x);
       person(x,"jun",1600,905,0.8,{pose:"reach",pose2:"listen",mix:up,t:tt,flip:true});
-      person(x,"noor",1290,905,0.8,{pose:"stand",pose2:"listen",mix:up,t:tt,flip:true,...(tt>P.noor?{pose:"listen",pose2:"explain",mix:fin(tt,P.noor,0.5)}:{})});
+      person(x,"noor",1290,905,0.8,pt>0?{pose:"listen",pose2:"wd_toBoard",mix:pt,t:tt,flip:true}:{pose:"stand",pose2:"listen",mix:up,t:tt,flip:true});
       wd_carrier(x,"yusuf",wk,905,0.8,heldNotebook,{t:tt});
       wd_say(x,tt,P.who-0.2,P.noor-0.2,470,170,["Who do you ask, when","a meaning isn't clear?"],850,440);}},
-    // the screen: their map of the university's domains, as the data team keeps it; under each domain, its owner, lit one by one
-    {at:P.open,place:"screenData",keys:[[P.open,960,440,1.02],[P.every-0.4,960,450,1.06]],d:2.4,push:0.01,draw:(x,tt)=>{
-      wd_file(x,"models/_shared/_shared__conceptual.yml",WD_MAP,{show:fin(tt,P.open+0.25,0.7),lit:i=>{const k=owners.indexOf(i);return k<0?0:fin(tt,P.every+0.22*k,0.4);}});}},
-    // and the course domain's model of the award, which other teams read: its owner, Mei Tanaka
-    {at:P.mod,place:"screenData",keys:[[P.mod,960,440,1.04],[P.aw-0.5,880,470,1.18]],d:2.2,push:0.01,draw:(x,tt)=>{
-      wd_file(x,"models/core/course/_core_course__models.yml",WD_MODEL,{show:fin(tt,P.mod+0.15,0.5),lit:i=>i===11?fin(tt,P.evm,0.5):0});
-      const cw=tw(x,"m",28,500,"mono");wd_tagAt(x,tt,P.mei-0.1,null,GV_SC[0]+100+8*cw,wd_lineY(13)+78,"Mei Tanaka · registrar's office",{align:"left",size:32,wash:GV.gold,washA:0.5});}},
+    // their board, close: the list, a name for each area, lit one by one; then the line written in for award
+    {at:P.board-0.1,place:"boardData",keys:[[P.board-0.1,900,500,1],[P.aw,840,560,1.08]],d:2.4,push:0.006,draw:(x,tt)=>{
+      wd_whoList(x,{lit:i=>fin(tt,P.area+0.16*i,0.35)*(1-0.5*fin(tt,P.aw,0.6)),award:fin(tt,P.mei-0.2,0.5)});}},
     // the room again: why they wrote it down
-    {at:P.built,place:"data",keys:[[P.built,1080,520,1.14],[P.built+0.1,1080,515,1.17]],d:3,draw:(x,tt)=>{
+    {at:P.built,place:"data",keys:[[P.built,1080,520,1.14],[P.built+0.1,1080,515,1.17]],d:3,draw:(x,tt)=>{wd_boardSmall(x);
       person(x,"jun",1600,905,0.8,{pose:"explain",expr:"smile",t:tt,flip:true});person(x,"noor",1290,905,0.8,{pose:"listen",t:tt,flip:true});
       person(x,"yusuf",830,905,0.8,{pose:"write",carry:heldNotebook,t:tt});
       wd_say(x,tt,P.bec-0.1,sc.dur,1250,190,["We needed someone","to ask."],1590,440);}},
@@ -170,9 +172,10 @@ scene("written",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({who:wAt(sc
       // he stops at the registrar's office, where Mei nods, and the tick goes up on its glass; then on Planning's, the next along
       wd_floor(x,tt,{pose:{mei:{pose:"listen",nod:0.05*Math.sin(tt*3)*gv_io(tt,wk.end-0.6,wk.end+1.0,0.3)},clara:{pose:"listen"}}});
       wd_carrier(x,"yusuf",wk,F.walk,0.62,heldNotebook,{t:tt});wd_glassTick(x,1,fin(tt,wk.end-0.1,0.6));wd_glassTick(x,0,fin(tt,wk.end+0.7,0.6));}},
-    // the register, close: a gold tick by each owner, the owners still to be confirmed struck through, and his note: they're in the map
-    {at:P.reg,place:"deskTop",keys:[[P.reg,1330,520,1.3]],push:0.015,draw:(x,tt)=>{const tick=i=>fin(tt,P.reg+0.3+0.12*i,0.35);
-      wd_binder2(x,1,q=>wd_policy2(q,1,0),q=>wd_register(q,1,()=>1,tick,{strike:i=>fin(tt,P.reg+0.35+0.12*i,0.35),note:fin(tt,P.reg+0.9,1.2)}));}}]);
+    // the register, close: each TBC gives way to its name, written in, with a gold tick: the owners from the list, the stewards each
+    // office named
+    {at:P.reg,place:"deskTop",keys:[[P.reg,1330,520,1.3]],push:0.015,draw:(x,tt)=>{
+      wd_binder2(x,1,q=>wd_policy2(q,1,0),q=>wd_reg(q,{tbc:()=>1,name:k=>fin(tt,P.reg+0.35+0.3*k,0.7)}));}}]);
   wc_paperOver(ctx,S);});
 
 // ---- 4 · Three roles: the owner and the steward (both Mei), and the custodian (Sam's team) ----
@@ -195,9 +198,9 @@ scene("roles",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({three:wAt(sc
       wc_hand(x,"the names vary from one policy to the next",960,640,{p:fin(tt,P.names,1.4),size:36,col:WC_DARK,align:"center"});}},
     // the registrar's office: Mei at her desk; she owns award, and she keeps it right
     {at:P.ow,place:"regClose",keys:[[P.ow,960,540,1],[P.ow+0.2,920,520,1.08]],d:4,push:0.012,draw:(x,tt)=>mei(x,tt,0,fin(tt,P.meid,0.5))},
-    // her screen, close: her log of identity decisions: same learner or not, decided by her, and why
-    {at:P.log,place:"screenReg",keys:[[P.log,960,450,1.08],[P.why-0.6,1080,460,1.14]],d:2.2,push:0.008,draw:(x,tt)=>{
-      wd_log(x,{lit:[0,fin(tt,P.same,0.5),fin(tt,P.log+0.4,0.5),0,fin(tt,P.why,0.5)],rows:i=>fin(tt,P.log+0.15+0.12*i,0.4)});}},
+    // her desk from above: her log book, of which records are the same learner: decided by her, and why
+    {at:P.log,place:"meiTop",keys:[[P.log,558,557,1.72],[P.why-0.6,566,560,1.74]],d:2.2,push:0.004,draw:(x,tt)=>{wd_decBook(x);
+      wd_logBook(x,{lit:[0,fin(tt,P.same,0.5),fin(tt,P.log+0.4,0.5),fin(tt,P.why,0.5)],rows:i=>fin(tt,P.log+0.15+0.12*i,0.4)});}},
     // her desk again: one person, both roles
     {at:P.both,place:"regClose",keys:[[P.both,920,520,1.08],[P.both+0.1,900,510,1.12]],d:3,push:0.01,draw:(x,tt)=>mei(x,tt,fin(tt,P.bth-0.2,0.9),1)},
     // the platform team: Sam's desk, the platform's tables; he can change any of them, but what award means is Mei's
@@ -207,7 +210,7 @@ scene("roles",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({three:wAt(sc
       wd_say(x,tt,P.dsn,sc.dur,1110,236,["What award means?","Ask Mei."],1528,408);}}]);
   wc_paperOver(ctx,S);});
 
-// ---- 5 · Who decides what: each domain its own words; governance a few shared rules; the council conflicts and exceptions ----
+// ---- 5 · Who decides what: each area its own words; governance a few shared rules; the council conflicts and exceptions ----
 // the council round the stewards' table, facing Yusuf at the board (look: 0 to 1, turning to the door on the right)
 const WD_COUNCIL=["mei","clara","anil","noor","sam"];
 POSE.wd_lookBack=Object.assign({},POSE.listen,{gaze:[-0.7,0.05],turn:-0.08,tilt:-0.03});
@@ -222,13 +225,13 @@ function wd_council(x,tt,look){WD_COUNCIL.forEach((id,i)=>gv_behind(x,id,GV_MT.s
 scene("domains",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({own:wAt(sc,"own","own"),gov:wAt(sc,"shared","Governance"),glo:wAt(sc,"shared","glossary"),
     cla:wAt(sc,"shared","classify"),mt:c.council-0.3,wb:wAt(sc,"council","council")-0.35,cdec:wAt(sc,"council","decides"),next:wAt(sc,"council","next"),
     lim:c.limit,dvc:wAt(sc,"limit","deputy"),door:sc.ends.limit-0.2,rest:c.rest-0.3,ow:wAt(sc,"rest","owner")}));
-  // the board: the eight domains, their gold dots, the band of shared rules; glow: the domains lit as the owner decides the rest
+  // the board: the eight areas, their gold dots, the band of shared rules; glow: the areas lit as the owner decides the rest
   const board=(x,tt,glow)=>{wd_band(x,fin(tt,P.gov,0.5),fin(tt,P.glo-0.2,0.5),fin(tt,P.cla-0.3,0.5));
     for(let i=0;i<8;i++)wd_drop(x,fin(tt,0.1+0.08*i,0.45),()=>wd_domCard(x,i,fin(tt,P.own+0.09*i,0.4),glow?fin(tt,P.ow+0.07*i,0.5):0));};
   // what's written on the meeting room's board, small: the close-up reads it
   const [mbx,mby,mbw]=GV_MT.board,rule=(x,tt)=>wd_councilRule(x,[fin(tt,P.wb-1.2,2.0),fin(tt,P.cdec,0.8),fin(tt,P.next-0.1,0.8),fin(tt,P.dvc-0.5,0.6),fin(tt,P.dvc,0.9)],mbx-6,mby-14,mbw/WD_MB[2],true);
   gv_shots(ctx,S,t,sc.dur,[
-    // Yusuf's board: each domain, with its owner, decides what its own words mean; over them, the few rules every domain shares
+    // Yusuf's board: each area, with its owner, decides what its own words mean; over them, the few rules every area shares
     {at:0,place:"boardGov",keys:[[0,960,520,1],[P.gov-0.6,960,480,1.04]],d:3,push:0.008,draw:(x,tt)=>board(x,tt,false)},
     // the stewards' meeting room: the council round the table, Yusuf at the board
     {at:P.mt,place:"meeting",keys:[[P.mt,900,520,1.08],[P.mt+0.1,880,515,1.12]],d:4,draw:(x,tt)=>{rule(x,tt);wd_atBoard(x,tt);wd_council(x,tt,0);}},
@@ -243,7 +246,7 @@ scene("domains",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({own:wAt(sc
     {at:P.rest,place:"boardGov",keys:[[P.rest,960,520,1.02],[P.rest+0.1,960,540,1.06]],d:3,push:0.008,draw:(x,tt)=>board(x,tt,true)}]);
   wc_paperOver(ctx,S);});
 
-// ---- 6 · Required: every change is checked for its owners; the council's oldest action closes ----
+// ---- 6 · Required: anything other teams will read has a sign-off sheet, its owner's line never blank; the council's oldest action closes ----
 // Noor pins the card to the team's board (k: 0 to 1, her reach; drop: how far the card has come down), Yusuf beside her, looking up
 // at it; Jun turns from his screen to look (look: 0 to 1)
 POSE.wd_upLeft=Object.assign({},POSE.listen,{gaze:[0.6,-0.45],turn:0.06});
@@ -252,75 +255,92 @@ function wd_pinning(x,tt,k,drop,look){const C=WD_TC(),s=0.8;
   person(x,"noor",960,905,s,{t:tt,pose:"listen",pose2:"wd_now",mix:k,flip:true});
   person(x,"yusuf",1190,905,s,{t:tt,pose:"wd_upLeft",expr:"smile",flip:true});
   person(x,"jun",1660,905,s,{t:tt,pose:"wd_lookBack",pose2:"wd_upLeft",mix:look,flip:true});}
-scene("required",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({own:wAt(sc,"required","owner"),chg:c.proposed+0.9,bef:wAt(sc,"proposed","before"),
-    dom:wAt(sc,"check","domain"),mod:wAt(sc,"check","model"),fail:wAt(sc,"fails","fails"),says:wAt(sc,"fails","says"),what:wAt(sc,"fails","what"),
-    where:wAt(sc,"fails","where"),fix:sc.ends.fails+0.3,min:c.closed-0.3,cl:wAt(sc,"closed","closed")}));
+scene("required",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({own:wAt(sc,"required","owner"),sheet:c.sheet-0.3,so:wAt(sc,"sheet","sheet"),
+    one:wAt(sc,"sheet","One"),who:wAt(sc,"sheet","who"),back:c.back-0.3,empty:wAt(sc,"back","empty"),note:wAt(sc,"back","note"),
+    asks:c.signs-0.3,clara:wAt(sc,"signs","Clara"),sgn:wAt(sc,"signs","signs"),min:c.closed-0.3,cl:wAt(sc,"closed","closed")}));
   gv_shots(ctx,S,t,sc.dur,[
-    // the data team's room: Noor pins a gold card to the team's board, Yusuf beside her, and Jun looks round from his desk
-    {at:0,place:"data",keys:[[0,1060,520,1.12],[0.4,980,520,1.2]],d:3.2,draw:(x,tt)=>{const drop=fin(tt,P.own-0.25,0.6);wd_teamCard(x,drop);
-      wd_pinning(x,tt,gv_io(tt,P.own-0.9,P.chg,0.6),drop,fin(tt,P.own,0.8));}},
-    // Jun's screen: a change proposed for review, grey until it's reviewed; the governance check runs, stops on the marts, and says
-    // what to add and where; Jun adds the two lines, and it passes
-    {at:P.chg,place:"screenData",keys:[[P.chg,960,430,1.08],[P.says-0.6,910,520,1.18]],d:2.2,push:0.004,draw:(x,tt)=>{
-      wd_change(x,tt,{before:gv_io(tt,P.bef-0.1,c.check+0.3,0.4),checks:fin(tt,c.check-0.1,0.5),dom:fin(tt,P.dom+0.15,0.3),core:fin(tt,P.mod+0.15,0.3),
-        fail:fin(tt,P.fail,0.3),msg:fin(tt,P.says-0.1,0.4),what:fin(tt,P.what,0.4),where:fin(tt,P.where,0.4),fix:fin(tt,P.fix,1.2),rerun:fin(tt,P.fix+1.2,0.7)});}},
+    // the data team's room: Noor pins a gold card to the team's board, under their list, Yusuf beside her, and Jun looks round
+    {at:0,place:"data",keys:[[0,1060,520,1.12],[0.4,980,520,1.2]],d:3.2,draw:(x,tt)=>{wd_boardSmall(x);const drop=fin(tt,P.own-0.25,0.6);wd_teamCard(x,drop);
+      wd_pinning(x,tt,gv_io(tt,P.own-0.9,P.sheet,0.6),drop,fin(tt,P.own,0.8));}},
+    // Jun's desk from above: a sign-off sheet, blank, as everything new that other teams will read gets one; its owner's line lit gold.
+    // Then his report's comes back, over it: that line empty and lit red, a note in red saying what to add, and the stamp
+    {at:P.sheet,place:"junTop",keys:[[P.sheet,960,510,1.06],[P.one-0.3,960,480,1.13],[P.back+0.3,960,500,1.08],[P.note,1000,540,1.12]],d:2.2,push:0.004,draw:(x,tt)=>{
+      const u=fin(tt,P.back,0.9),bl=()=>wd_signBlank(x,fin(tt,P.sheet+0.2,1.4),fin(tt,P.one,0.6),260*(1-easeCam(fin(tt,P.sheet,0.9))));if(u<1)(u>0?wd_asDeco(bl):bl());
+      if(u>0)wd_signJun(x,{y:1000*(1-easeCam(u)),miss:fin(tt,P.empty,0.5),ask:fin(tt,P.note+0.1,1.4),back:fin(tt,P.note+1.3,0.5)});}},
+    // Planning's room, their chart on the big screen: Jun brings the sheet to Clara and asks; she will answer for it
+    {at:P.asks,place:"planning",keys:[[P.asks,1000,530,1.16],[P.asks+0.1,990,525,1.19]],d:2.4,draw:(x,tt)=>{wd_planChart(x);const wk=gv_walk(tt,P.asks,1640,1200,300);
+      person(x,"clara",760,905,0.8,{pose:"listen",nod:wd_nod(tt,P.clara+0.2),expr:tt>P.clara?"smile":"calm",t:tt});
+      wd_carrier(x,"jun",wk,905,0.8,wd_heldSheet,{t:tt,base:"wd_low"});
+      wd_say(x,tt,P.asks+0.4,P.clara-0.1,1140,150,["Will you answer","for what it means?"],1220,430);
+      wd_say(x,tt,P.clara,99,420,190,["I will."],720,440);}},
+    // the sheet again: Clara's name on the line, the note struck through, her signature, and it's signed
+    {at:P.sgn-0.4,place:"junTop",keys:[[P.sgn-0.4,1000,545,1.1],[P.sgn+0.2,990,545,1.13]],d:2.2,push:0.004,draw:(x,tt)=>{
+      wd_signJun(x,{miss:1,ask:1,back:1,fill:fin(tt,P.sgn-0.3,0.9),strike:fin(tt,P.sgn+0.6,0.4),sign:fin(tt,P.sgn+0.4,0.8),signed:fin(tt,P.sgn+1.0,0.5)});}},
     // the desk from above: the council's minutes; the action carried forward month after month, closed at last
     {at:P.min,place:"deskTop",keys:[[P.min,960,540,1],[P.min+0.2,1050,590,1.1]],d:3.2,push:0.01,draw:(x,tt)=>wd_minutes(x,tt,1,fin(tt,P.cl-0.05,0.5))}]);
   wc_paperOver(ctx,S);});
 
-// ---- 7 · Asked by name: the list of who reviews what, written from the owners; Jun's change asks Mei, by name ----
+// ---- 7 · Asked by name: every change request gets a routing slip from the register; Jun's goes to Mei, by name ----
 POSE.wd_meiDown=Object.assign({},POSE.stand,{gaze:[-0.4,1],look:1,tilt:0.09,turn:-0.2});
 POSE.wd_meiUp=Object.assign({},POSE.stand,{gaze:[1,-0.3],look:0,tilt:-0.03,turn:0.4});
-// Mei at her desk (up: 0 to 1, from the papers on her desk to her screen), and her screen: Jun's request (lit, and amber, 0 to 1)
-function wd_meiDesk(x,tt,up,lit,amber){gv_behind(x,"mei",GV_RX.seat[0],GV_RX.top,GV_RX.seat[1],{pose:"wd_meiDown",pose2:"wd_meiUp",mix:up,nod:0.12*(1-up),t:tt});
-  x.drawImage(gv_place("regDesk"),0,0,W,H);wd_request(x,lit,amber);}
-// Jun at his desk in the data team's room, typing, his eyes on his screen; his two screens show the change he's making, small
-function wd_junDesk(x,tt){GV_DT.mon.forEach(([mx,my,mw,mh],k)=>{x.save();x.fillStyle="rgba(70,96,140,1)";x.fillRect(mx+6,my+6,mw-12,12);x.restore();
-    gv_lines(x,mx+14,my+34+(k?8:0),mw-40,k?4:5,16,0.9);});POSE.wd_now=wd_hands("jun",1390,905,0.8,{base:"stand",R:[1536+5*Math.sin(tt*9),674+3*Math.sin(tt*13)],L:[1500+4*Math.sin(tt*8+1),680],extra:{gaze:[0.7,0.25],turn:0.12}});
-  person(x,"jun",1390,905,0.8,{t:tt,pose:"wd_now"});}
+POSE.wd_meiRead=Object.assign({},POSE.hold,{L:[0.14,-1.9],R:[0.7,2.75],gaze:[0.8,-0.15],look:0,tilt:-0.04,turn:0.25});
+// the two requests: one for admissions, whose slip changes when the register does; Jun's, on award
+const WD_ADREQ={from:"Jun Park, data team",title:["Add offer dates to","the admissions report"],area:"admissions",slip:["Admissions office","Noor Rahman","Yusuf Demir"]};
+const WD_AWREQ={from:"Jun Park, data team",title:["Map award to the","government's definition"],area:"course",slip:["Mei Tanaka","Noor Rahman","Yusuf Demir"]};
+// Mei at her desk, holding Jun's request up beside her face to read it (am: its slip lit like a lamp, 0 to 1); her screen shows her own
+// work. The slip's light falls round it, drawn over the picture where her hand holds the request
+function wd_meiHolds(x,tt,am,o){const [sx,s]=GV_RX.seat;gv_behind(x,"mei",sx,GV_RX.top,s,Object.assign({pose:"wd_meiRead",t:tt,carry:wd_heldReq(am),wide:true},o||{}));
+  x.drawImage(gv_place("regDesk"),0,0,W,H);wd_meiWork(x);
+  if(am>0.01){const P_=PEOPLE.mei,k=s*P_.build.h,h=handAt(P_,1,POSE.wd_meiRead.R,0),gx=sx+(h[0]+WD_HR.slip[0])*k,gy=GV_RX.top+GV_SIT*s+(h[1]+WD_HR.slip[1])*k;
+    wc_glowAt(x,gx,gy,110*k,[255,190,90],0.38*am);x.save();x.globalCompositeOperation="screen";wc_glowAt(x,gx,gy,64*k,[255,226,150],0.7*am);x.restore();}}
 // the line again, at station i: a hand pulls the cord at t0, the lamp lights amber, and the supervisor comes at once
 function wd_callAt(x,tt,t0,i,off){const N=WD_LN,wx=wd_stX(i),up=gv_io(tt,t0-0.4,t0+1.4,0.45),pull=clamp((tt-t0-0.15)/0.35,0,1),lamps=[...Array(N.n)].map(()=>["off",0]);
   lamps[i]=["amber",fin(tt,t0+0.3,0.2)];const sp=wd_supAt(tt,wx+420,wx+92,t0+0.35,sx=>POSE.listen);
   wd_scene1(x,tt,{off,lamps,pulls:up>0?{[i]:[wx+66,N.cord+4+44*pull*up]}:{},who:{[i]:{po:blendPose(POSE.stand,wd_onCord("wd_w"+(i+1),wx,wx+66,pull),up)}},sup:sp});}
-scene("asked",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({names:wAt(sc,"route","names"),written:wAt(sc,"list","written"),never:wAt(sc,"list","never"),
-    drift:wAt(sc,"list","drift"),jun:c.jun-0.3,chg:wAt(sc,"jun","map")-0.3,mei:wAt(sc,"mei","Mei"),noor:wAt(sc,"mei","Noor"),yus:wAt(sc,"mei","Yusuf"),
-    nob:wAt(sc,"mei","Nobody")-0.3,like:c.like-0.3,work:wAt(sc,"like","work")-0.25}));
+// where the admissions request lies on the binder's left-hand page, over policy 2
+const WD_RQAT=[140,250];
+scene("asked",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({rt:wAt(sc,"slip","routing"),fill:wAt(sc,"slip","filled"),reg:wAt(sc,"slip","register"),
+    keeps:c.keeps-0.3,kp:wAt(sc,"keeps","keeps"),chg:wAt(sc,"keeps","change"),name:wAt(sc,"keeps","name"),fol:wAt(sc,"keeps","follows"),
+    jun:c.jun-0.3,aw:wAt(sc,"jun","award"),mei:c.mei-0.3,ms:["Mei","Noor","Yusuf"].map(k=>wAt(sc,"mei",k)),nob:wAt(sc,"mei","Nobody"),like:c.like-0.3,work:wAt(sc,"like","work")-0.25}));
+  // Yusuf's desk: the binder open at the register, the admissions request on the left-hand page; its slip clips on, and its first line
+  // comes from the register: the admissions steward's cell and the slip's line lit gold together. The register's keeper is written at
+  // its foot; the steward's name in it changes, and the slip's line with it, in a gold flash
+  const desk=(x,tt)=>{const ed={i:4,j:2,to:"Leila Haddad",s:fin(tt,P.chg,0.6),p:fin(tt,P.name,1.1)},lit=fin(tt,P.fill-0.1,0.5);
+    wd_binder2(x,1,q=>gv_lines(q,wd_pageL()+64,wd_pageTop()+600,WD_OPEN.pw-150,5,40),
+      q=>wd_reg(q,{tbc:()=>1,name:()=>1,foot:"kept by Yusuf Demir",footP:fin(tt,P.kp,1.0),edit:ed,cell:{i:4,j:2,a:lit}}));
+    wd_req(x,WD_RQAT[0],WD_RQAT[1],1,Object.assign({slipP:fin(tt,P.rt-0.1,0.6),names:i=>fin(tt,P.fill+0.25*i,0.5),lit:i=>i?0:lit,
+      edit:{i:0,to:"Leila Haddad",p:fin(tt,P.fol,0.8)}},WD_ADREQ));};
   gv_shots(ctx,S,t,sc.dur,[
-    // Jun's screen: the course domain's model, its owner lit; below it the list of who reviews what, written from the owners, line by
-    // line, a gold thread from Mei's name to each; its first lines say not to edit it, and its check says it's up to date
-    {at:0,place:"screenData",keys:[[0,960,420,1.1],[P.written-0.5,960,450,1.12]],d:2.4,push:0.003,draw:(x,tt)=>{
-      wd_owners(x,tt,{lit:fin(tt,P.names-0.1,0.5),fill:k=>fin(tt,P.written+0.35+1.1*k,1.2),thread:k=>fin(tt,P.written+1.1*k,0.7),hand:fin(tt,P.never,0.5),ok:fin(tt,P.drift-0.3,0.6)});}},
-    // the data team's room: Jun at his desk, making his change
-    {at:P.jun,place:"data",keys:[[P.jun,1320,600,1.6],[P.jun+0.2,1320,612,1.63]],d:2.6,draw:(x,tt)=>wd_junDesk(x,tt)},
-    // his screen: the change, and its reviewers, filling in by themselves
-    {at:P.chg,place:"screenData",keys:[[P.chg,960,430,1.08],[P.mei-0.5,930,480,1.14]],d:2.2,push:0.004,draw:(x,tt)=>{
-      wd_change2(x,tt,{rev:i=>fin(tt,P.mei-0.15+0.45*i,0.5),say:i=>gv_io(tt,[P.mei,P.noor,P.yus][i]-0.05,[P.mei,P.noor,P.yus][i]+0.9,0.3)});}},
-    // Mei's desk: the request lights her screen, and she looks up from her papers
-    {at:P.nob,place:"regClose",keys:[[P.nob,960,540,1.04],[P.nob+0.2,1010,520,1.1]],d:3,push:0.008,draw:(x,tt)=>wd_meiDesk(x,tt,fin(tt,P.nob+0.75,0.7),fin(tt,P.nob+0.35,0.5),0)},
+    {at:0,place:"deskTop",keys:[[0,960,540,1],[P.reg,955,535,1.06]],d:2.4,push:0.004,draw:(x,tt)=>desk(x,tt)},
+    {at:P.keeps,place:"deskTop",keys:[[P.keeps,985,535,1.15],[P.fol,985,540,1.16]],push:0.004,draw:(x,tt)=>desk(x,tt)},
+    // Jun's desk from above: his next change request, award in its title lit gold as it's said; its slip clips on, filled in from the
+    // register, and it goes, up and out of the frame, to Mei
+    {at:P.jun,place:"junTop",keys:[[P.jun,960,520,1.04],[P.jun+0.2,960,525,1.08]],d:2.6,push:0.004,draw:(x,tt)=>{const go=easeCam(fin(tt,P.mei-0.7,0.8)),sl=P.mei-1.9;
+      wd_req(x,610,250-1000*go,1,Object.assign({award:fin(tt,P.aw-0.1,0.6),slipP:fin(tt,sl,0.6),names:i=>fin(tt,sl+0.3+0.2*i,0.4)},WD_AWREQ));}},
+    // Mei's desk from above: his request comes to her, its slip naming her first, then Noor and Yusuf, each lit as the voice says it
+    {at:P.mei,place:"meiTop",keys:[[P.mei,960,520,1.08],[P.nob,960,530,1.12]],d:2.2,push:0.004,draw:(x,tt)=>{wd_logBook(x);wd_decBook(x);
+      const u=easeCam(fin(tt,P.mei+0.1,0.9));wd_req(x,610,200+900*(1-u),1,Object.assign({lit:i=>gv_io(tt,P.ms[i]-0.1,P.ms[i]+0.9,0.3)},WD_AWREQ));}},
     // like the cord on the line: a hand pulls it, the lamp lights, the supervisor comes
     {at:P.like,place:"line",keys:[[P.like,980,470,1.55],[P.like+0.2,1040,480,1.42]],d:3,push:0.01,draw:(x,tt)=>wd_callAt(x,tt,P.like+0.45,3,wd_run(tt-P.like,12)+40)},
-    // and Mei's screen, lit the same way: the work calls the person who decides
-    {at:P.work,place:"regClose",keys:[[P.work,960,540,1.04],[P.work+0.2,1010,515,1.16]],d:5,draw:(x,tt)=>wd_meiDesk(x,tt,1,1,fin(tt,P.work+0.2,0.8))}]);
+    // and Mei, at her desk, his request in her hands, its slip lit the same way: the work calls the person who decides
+    {at:P.work,place:"regClose",keys:[[P.work,960,540,1.04],[P.work+0.2,990,520,1.12]],d:5,draw:(x,tt)=>wd_meiHolds(x,tt,fin(tt,P.work+0.2,0.8))}]);
   wc_paperOver(ctx,S);});
 
-// ---- 8 · Where the work is: what, who, when and why; her logs, beside their models; not in an email thread ----
+// ---- 8 · Where the work is: what, who, when and why; her log book, and the course area's decision book; not in an email thread ----
 scene("logged",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({dec:wAt(sc,"written","decides"),ww:["what","who","when","why"].map(k=>wAt(sc,"written",k)),
-    log:c.logs-0.3,idn:wAt(sc,"logs","identity"),map:wAt(sc,"logs","mapping")-0.3,beside:wAt(sc,"logs","beside"),eit:c.either-0.3,either:wAt(sc,"either","either"),
-    her:wAt(sc,"either","asks"),not:c.not-0.3,thr:wAt(sc,"not","thread"),find:wAt(sc,"not","find")}));
+    log:c.logs-0.3,map:wAt(sc,"logs","mapping")-0.3,dbook:wAt(sc,"logs","decision"),next:c.next-0.3,own:wAt(sc,"next","own"),why:wAt(sc,"next","why"),
+    not:c.not-0.3,thr:wAt(sc,"not","thread"),find:wAt(sc,"not","find")}));
   gv_shots(ctx,S,t,sc.dur,[
     // Mei's desk: what, who, when and why go up beside her screen as the voice names them
     {at:0,place:"regClose",keys:[[0,1000,520,1.1],[0.2,960,540,1.06]],d:4,push:0.006,draw:(x,tt)=>{
       gv_behind(x,"mei",GV_RX.seat[0],GV_RX.top,GV_RX.seat[1],{pose:"wd_meiUp",nod:0.06*gv_io(tt,P.dec-0.1,P.dec+0.5,0.25),t:tt});
-      x.drawImage(gv_place("regDesk"),0,0,W,H);wd_request(x,1,1-fin(tt,0.2,1.2));wd_fourCards(x,i=>fin(tt,P.ww[i]-0.05,0.5));}},
-    // her screen: the log of her identity decisions, its columns lit in the same order: the decision, who, when and why
-    {at:P.log,place:"screenReg",keys:[[P.log,960,450,1.08],[P.log+0.2,1000,460,1.12]],d:2.4,push:0.006,draw:(x,tt)=>{
-      wd_log(x,{lit:[0,...[0,1,2,3].map(i=>gv_io(tt,P.idn+0.1+0.45*i,P.map-0.2,0.3))]});}},
-    // the course domain's log, in the folder beside its model; a new entry, Mei's, its reason still to come
-    {at:P.map,place:"screenReg",keys:[[P.map,960,420,1.1],[P.beside+0.2,960,470,1.14]],d:2.4,push:0.004,draw:(x,tt)=>{
-      wd_courseLog(x,tt,{model:fin(tt,P.beside+0.4,0.5),folder:gv_io(tt,P.beside-0.05,P.eit,0.4),write:fin(tt,P.map+0.6,2.6),mei:fin(tt,P.map+2.0,0.6)});}},
-    // the list of who reviews what: a change to either log asks her
-    {at:P.eit,place:"screenData",keys:[[P.eit,960,420,1.14],[P.eit+0.2,940,410,1.2]],d:2.4,push:0.004,draw:(x,tt)=>{
-      wd_logOwners(x,tt,{lit:k=>fin(tt,P.either+0.5*k,0.4),mei:k=>fin(tt,P.her-0.1+0.3*k,0.5)});}},
+      x.drawImage(gv_place("regDesk"),0,0,W,H);wd_meiWork(x);wd_fourCards(x,i=>fin(tt,P.ww[i]-0.05,0.5));}},
+    // her desk from above: her log book, its columns lit in the same order: the decision, who, when and why; then across the desk to
+    // the course area's decision book, where the mapping's entry is begun: what, and who decides. Back, to see both: each area keeps
+    // its own, and the why in each is lit
+    {at:P.log,place:"meiTop",keys:[[P.log,558,557,1.72],[P.map-0.1,562,557,1.74],[P.map+1.5,1362,557,1.72],[P.next,1356,557,1.74],[P.next+1.6,960,540,1]],d:2.4,push:0,
+      draw:(x,tt)=>{const lt=k=>gv_io(tt,P.log+0.5+0.5*k,P.map-0.3,0.3),wy=fin(tt,P.why-0.1,0.6);
+        wd_logBook(x,{lit:[lt(2),lt(0),lt(1),Math.max(lt(3),wy)]});wd_decBook(x,{what:fin(tt,P.dbook+0.2,1.6),who:fin(tt,P.dbook+1.6,0.7),why:wy});}},
     // Yusuf's screen: the thread of twenty-three replies greys out, and closes
     {at:P.not,place:"screenGov",keys:[[P.not,960,440,1.04],[P.not+0.2,960,430,1.08]],d:3,push:0.004,draw:(x,tt)=>{
       wd_inbox(x,{hl:1,grey:fin(tt,P.thr,0.6),gone:fin(tt,P.find+0.4,0.9)});}}]);
@@ -334,7 +354,7 @@ POSE.wd_meiR=Object.assign({},POSE.stand,{gaze:[1,-0.5],look:0,tilt:-0.02,turn:0
 function wd_poseAt(tt,keys){let o={pose:keys[0][1],pose2:null,mix:0};for(let i=1;i<keys.length;i++)if(tt>=keys[i][0])o={pose:keys[i-1][1],pose2:keys[i][1],mix:fin(tt,keys[i][0],0.4)};return o;}
 const wd_nod=(tt,t0)=>0.11*Math.sin(Math.PI*clamp((tt-t0)/0.55,0,1));
 // the questions she always answered, from people out of the picture: the lines, the bubble's corner, and where its tail points
-const WD_ASK=[[["Mei, does this count","as an award?"],100,80,-60,330],[["Mei, which code","is it?"],770,112,1150,-60],[["Mei, are these the","same student?"],1230,160,1760,-60]];
+const WD_ASK=[[["Mei, does this count","as an award?"],100,80,-60,330],[["Mei, which award","code is it?"],770,112,1150,-60],[["Mei, are these the","same student?"],1230,160,1760,-60]];
 scene("time",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({q:[1.1,2.4,3.7],alw:wAt(sc,"ask","always"),mgr:c.hours-0.3,tm:wAt(sc,"hours","time"),
     two:wAt(sc,"hours","two"),desk:c.scope-0.3,scope:wAt(sc,"scope","scope"),aw:wAt(sc,"scope","award"),every:wAt(sc,"scope","every"),
     some:wAt(sc,"someone","someone"),yus:wAt(sc,"someone","Yusuf"),cou:wAt(sc,"someone","council"),pull:sc.ends.someone+0.2,
@@ -364,32 +384,35 @@ scene("time",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({q:[1.1,2.4,3.
       wd_dkCard(x,WD_DK.time,"Mei's time",["2 h a week"],fin(tt,P.desk+0.2,0.6),{seed:190,dy:-720*easeCam(out),rot:-0.12*out});}}]);
   wc_paperOver(ctx,S);});
 
-// ---- 10 · Which award? Every change asks its owner; Mei opens Jun's, and finds award defined in five places ----
+// ---- 10 · Which award? Every change asks its owner; Mei reads Jun's, and finds award defined in five places ----
 // a face between calm and worried (u, 0 to 1)
 const wd_worry=u=>{const a=EXPR.calm,b=EXPR.worried,E={};new Set([...Object.keys(a),...Object.keys(b)]).forEach(k=>E[k]=lerp(a[k]||0,b[k]||0,u));return E;};
 scene("which",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({cord:wAt(sc,"line","cord"),here:wAt(sc,"line","Here")-0.35,own:wAt(sc,"line","owner"),
-    open:c.opens-0.3,opens:wAt(sc,"opens","opens"),asks:wAt(sc,"opens","asks"),which:c.five,found:wAt(sc,"five","found"),five:wAt(sc,"five","five"),
-    agree:wAt(sc,"five","agree"),end:c.breath+0.4}));
+    open:c.opens-0.3,asks:wAt(sc,"opens","asks"),which:c.five,found:wAt(sc,"five","found"),five:wAt(sc,"five","five"),agree:wAt(sc,"five","agree"),end:c.breath+0.4}));
   gv_shots(ctx,S,t,sc.dur,[
     // the line, close: a hand pulls the cord, the lamp lights, the supervisor comes
     {at:0,place:"line",keys:[[0,1330,470,1.5],[0.2,1360,480,1.42]],d:3,push:0.01,draw:(x,tt)=>wd_callAt(x,tt,P.cord+0.1,5,wd_run(tt,12)+40)},
-    // Mei's desk: Jun's change asks her, and her screen lights as the lamp did; she opens it, reads, and frowns. Then her screen shows the
-    // glossary on the platform, and four more places that define award come in round her, right to left; each is washed in its meaning's
-    // colour, three colours, and a gold question mark settles over her. She looks from one to the next
-    {at:P.here,place:"regClose",keys:[[P.here,960,540,1.04],[P.here+0.2,1000,520,1.12],[P.open,900,500,1.18],[P.which+0.4,960,540,1]],d:3,push:0,draw:(x,tt)=>{
-      const up=fin(tt,P.here+0.6,0.7),k=wd_poseAt(tt,[[0,"wd_meiDown"],[P.here+0.6,"wd_meiUp"],[P.found+0.3,"wd_meiT"],[P.five+0.6,"wd_meiL"],[P.agree+0.9,"wd_meiR"],[P.agree+2.2,"wd_meiUp"]]);
-      gv_behind(x,"mei",GV_RX.seat[0],GV_RX.top,GV_RX.seat[1],Object.assign(k,{nod:0.12*(1-up),t:tt,E:wd_worry(fin(tt,P.asks,0.8))}));
+    // Mei's desk: Jun's request in her hands, its slip lit as the lamp was
+    {at:P.here,place:"regClose",keys:[[P.here,960,540,1.04],[P.here+0.2,990,520,1.12]],d:3,push:0.004,draw:(x,tt)=>
+      wd_meiHolds(x,tt,fin(tt,P.here+0.3,0.6)*(1-fin(tt,P.open-0.8,0.8)),{E:wd_worry(0)})},
+    // her desk from above: the request, laid down to read; award, in its title, lit gold as she asks
+    {at:P.open,place:"meiTop",keys:[[P.open,960,500,1.1],[P.asks-0.2,830,470,1.3]],d:2.2,push:0.004,draw:(x,tt)=>{wd_logBook(x);wd_decBook(x);
+      wd_req(x,610,200,1,Object.assign({award:fin(tt,P.asks-0.1,0.6)},WD_AWREQ));}},
+    // her desk again: her screen shows the glossary on the platform, and four more places that define award come in round her, right to
+    // left; each is washed in its meaning's colour, three colours, and a gold question mark settles over her. She looks from one to the
+    // next. The picture One word, one home opens on
+    {at:P.which-0.4,place:"regClose",keys:[[P.which-0.4,930,525,1.1],[P.which+1.4,960,540,1]],d:3,push:0,draw:(x,tt)=>{
+      const k=wd_poseAt(tt,[[0,"wd_meiUp"],[P.found+0.3,"wd_meiT"],[P.five+0.6,"wd_meiL"],[P.agree+0.9,"wd_meiR"],[P.agree+2.2,"wd_meiUp"]]);
+      gv_behind(x,"mei",GV_RX.seat[0],GV_RX.top,GV_RX.seat[1],Object.assign(k,{t:tt,E:wd_worry(fin(tt,P.asks,0.8))}));
       x.drawImage(gv_place("regDesk"),0,0,W,H);
-      const col=j=>fin(tt,P.agree-0.3+0.15*j,0.6),o2=fin(tt,P.which+0.1,0.6);
+      const col=j=>fin(tt,P.agree-0.3+0.15*j,0.6);
       // (under the end card, the screen and the items go with the rest of the picture)
-      withA(x,1-fin(tt,P.end,0.8),()=>{
-        if(o2<=0)wd_swap(x,fin(tt,P.opens-0.1,0.6),()=>wd_request(x,fin(tt,P.here+0.2,0.5),fin(tt,P.own-0.2,0.6)*(1-fin(tt,P.open-0.6,0.8))),()=>wd_opened(x));
-        else wd_swap(x,o2,()=>wd_opened(x),()=>wd_five(x,0,1,col(0)));
+      withA(x,1-fin(tt,P.end,0.8),()=>{wd_swap(x,fin(tt,P.which+0.1,0.6),()=>wd_meiWork(x),()=>wd_five(x,0,1,col(0)));
         for(let j=1;j<5;j++)wd_five(x,j,fin(tt,P.found+0.2+0.45*(j-1),0.6),col(j));gv_qmark(x,560,400,150,fin(tt,P.agree+0.2,0.8));});}}]);
   gv_end(ctx,S,t,P.end,"Who decides","A decision right is real when the work asks for it.","Film 2 of 19");
   wc_paperOver(ctx,S);});
 
 const WC_PLACES={line:wd_paintLine,lineFront:wd_paintLineFront,office:gv_paintOffice,officeDesk:wd_paintOfficeDesk,deskTop:wd_paintDeskTop,
-  screenGov:c=>gv_paintScreenDesk(c,GV_ROOM.gov),data:gv_paintData,screenData:c=>gv_paintScreenDesk(c,GV_ROOM.data),floor:gv_paintFloor,
-  boardGov:c=>gv_paintBoardClose(c,GV_ROOM.gov),regClose:gv_paintRegistrarClose,regDesk:gv_paintRegistrarDesk,screenReg:c=>gv_paintScreenDesk(c,GV_ROOM.reg),
+  screenGov:c=>gv_paintScreenDesk(c,GV_ROOM.gov),data:gv_paintData,boardData:wd_paintTeamBoard,floor:gv_paintFloor,planning:gv_paintPlanning,
+  boardGov:c=>gv_paintBoardClose(c,GV_ROOM.gov),regClose:gv_paintRegistrarClose,regDesk:gv_paintRegistrarDesk,meiTop:wd_paintMeiTop,junTop:wd_paintJunTop,
   platClose:gv_paintPlatformClose,registrar:gv_paintRegistrar,wdCal:wd_paintCal,platDesk:gv_paintPlatformDesk,meeting:gv_paintMeeting,meetTable:gv_paintMeetingTable,meetBoard:wd_paintMeetBoard};

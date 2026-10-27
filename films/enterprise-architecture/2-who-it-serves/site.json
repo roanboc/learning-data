@@ -23,5 +23,7 @@
     "end": "Una respuesta, por ahora"
   },
   "next_h": "You've seen who the utility serves. Next: why it has to change.",
-  "next_h_es": "Viste a quién sirve la empresa. Lo siguiente: por qué tiene que cambiar."
+  "next_h_es": "Viste a quién sirve la empresa. Lo siguiente: por qué tiene que cambiar.",
+  "past": ["Edison's customers on Pearl Street, 1882", "People buy what an offering does for them: light, not electricity."],
+  "past_es": ["Los clientes de Edison en Pearl Street, 1882", "La gente compra lo que una oferta hace por ella: luz, no electricidad."]
 }

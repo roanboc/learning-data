@@ -44,6 +44,7 @@ models:
         description: '{{ doc("census_date") }}'
         data_type: date
         constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
       - name: learner_key
         description: '{{ doc("learner_key") }}'
         data_type: string
@@ -60,13 +61,15 @@ models:
         data_type: string
         constraints: [{type: not_null}]
         config:
-          meta: {glossary_term: award}
+          meta: {glossary_term: award, personal_data: none}
       - name: award_code
         description: '{{ doc("award_code") }}'
         data_type: string
+        config: {meta: {personal_data: none}}
       - name: award_name
         description: '{{ doc("award_name") }} On the census date.'
         data_type: string
+        config: {meta: {personal_data: none}}
       - name: award_type
         description: '{{ doc("award_type") }}'
         data_type: string
@@ -74,37 +77,47 @@ models:
           - accepted_values:
               arguments:
                 values: [graduate certificate, master]
+        config: {meta: {personal_data: none}}
       - name: faculty_code
         description: '{{ doc("faculty_code") }}'
         data_type: string
         constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
       - name: faculty_name
         description: '{{ doc("faculty_name") }}'
         data_type: string
+        config: {meta: {personal_data: none}}
       - name: learner_status
         description: '{{ doc("learner_status") }} On the census date.'
         data_type: string
+        config: {meta: {personal_data: none}}
       - name: is_enrolled
         description: True when the learner was enrolled in this award on the census date.
         data_type: boolean
         constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
       - name: credit_points_required
         description: '{{ doc("credit_points_required") }}'
         data_type: int
+        config: {meta: {personal_data: none}}
       - name: credit_points_from_units
         description: '{{ doc("credit_points_from_units") }} On the census date.'
         data_type: int
+        config: {meta: {personal_data: none}}
       - name: credit_points_from_microcredentials
         description: '{{ doc("credit_points_from_microcredentials") }} On the census date.'
         data_type: int
+        config: {meta: {personal_data: none}}
       - name: credit_points_earned
         description: '{{ doc("credit_points_earned") }} On the census date.'
         data_type: int
         constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
       - name: credit_points_remaining
         description: '{{ doc("credit_points_remaining") }}'
         data_type: int
         constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
       - name: is_near_award
         description: >
           True when, on the census date, the learner was studying, enrolled in this award, and
@@ -112,5 +125,5 @@ models:
           that many.
         data_type: boolean
         config:
-          meta: {glossary_term: near_award}
+          meta: {glossary_term: near_award, personal_data: none}
         constraints: [{type: not_null}]

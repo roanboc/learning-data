@@ -22,6 +22,7 @@ sources:
             - {key: customer_email, case: lower, example: grace.okafor@mail.example}
             - {key: enrolment_id, case: upper, example: C-88}
           example: SC|grace.okafor@mail.example
+        domain: learning
     tables:
       - name: learners
         description: >
@@ -30,6 +31,13 @@ sources:
         config:
           meta:
             system_key: [customer_email]
+        columns:
+          - name: customer_email
+            description: The customer's email, as typed. Checked at entry from 2 November 2026 (DEC-SC-04).
+            data_tests:
+              - entered_clean:
+                  name: short_courses_learners_email_entered_clean
+                  arguments: {since: "2026-11-02", case: lower, pattern: "%_@_%._%"}
       - name: enrolments
         description: One row per version of an enrolment in a short course. The system key is the enrolment ID.
         config:
@@ -46,5 +54,11 @@ sources:
                   Walk-in enrolments can have no email. The build warns on any, and stops above
                   five.
         columns:
+          - name: customer_email
+            description: The customer's email, as typed. Checked at entry from 2 November 2026 (DEC-SC-04).
+            data_tests:
+              - entered_clean:
+                  name: short_courses_enrolments_email_entered_clean
+                  arguments: {since: "2026-11-02", case: lower, pattern: "%_@_%._%"}
           - name: certificate_type
             description: '{{ doc("certificate_type") }}'

@@ -1,0 +1,9 @@
+name: concept and relationship
+kind: business object
+owner: Noor, data architect
+home: architecture map
+copies:
+- in: dbt project
+  synced from: architecture map
+  drift check: 'yes'
+status: confirmed

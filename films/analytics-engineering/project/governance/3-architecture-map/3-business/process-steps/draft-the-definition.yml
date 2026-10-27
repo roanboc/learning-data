@@ -1,0 +1,11 @@
+name: draft the definition
+kind: business process
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: data steward
+- access (reads): term request
+- access (reads): business term
+- access (writes): term draft
+- realization: define or change a term
+- triggering: decide
+status: confirmed

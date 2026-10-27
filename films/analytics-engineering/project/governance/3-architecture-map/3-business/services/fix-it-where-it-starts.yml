@@ -1,0 +1,9 @@
+name: fix it where it starts
+kind: business service
+promise: An issue gets an owner and a due date within one working day, and is closed by a test that proves
+  it.
+how_to_ask: an issue in the tracker
+owner: Yusuf Demir, data governance lead
+relationships:
+- realization: keep data fit for use
+status: confirmed

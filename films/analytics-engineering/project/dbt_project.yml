@@ -75,6 +75,10 @@ models:
       +group: credential_model
       +access: protected
 
+    # Databricks only: each column's class (meta.personal_data) as a Unity Catalog tag, and a mask
+    # on direct personal data when the var personal_data_readers names a group (DEC-PRJ-13).
+    +post-hook: "{{ apply_personal_data() }}"
+
 # Seeds are split by purpose first, then by domain. Never mix the two purposes in one folder.
 seeds:
   credentials:
@@ -94,3 +98,40 @@ seeds:
         +group: planning
       finance:
         +group: finance
+
+# Who owns each test: the owner of the data it checks, by folder. A test whose data has another
+# owner names its own in its meta, which wins. Each kind of test names its quality dimension where
+# it's defined (tests/generic/). The governance check fails on a test with no owner or dimension.
+data_tests:
+  credentials:
+    # Tests on a source, in sources/<system>/: its owner. Only systems with source tests are listed
+    # (an unused path fails the Databricks parse); the governance check asks for any new one.
+    short_courses: {+meta: {owner: Learning team}}
+    staging:
+      student_system: {+meta: {owner: "Registrar's office"}}
+      learning_platform: {+meta: {owner: Learning team}}
+      short_courses: {+meta: {owner: Learning team}}
+      hr_system: {+meta: {owner: HR}}
+      research_system: {+meta: {owner: Research office}}
+      alumni_system: {+meta: {owner: Alumni office}}
+    intermediate:
+      +meta: {owner: "Mei Tanaka, registrar's office"}
+    core:
+      +meta: {owner: "Mei Tanaka, registrar's office"}
+    marts:
+      planning: {+meta: {owner: Planning}}
+      wallet: {+meta: {owner: Wallet app team}}
+      finance: {+meta: {owner: Finance}}
+      learning: {+meta: {owner: Learning team}}
+    reference:
+      student: {+meta: {owner: "Mei Tanaka, registrar's office"}}
+      finance: {+meta: {owner: Finance}}
+      shared: {+meta: {owner: "Noor, data architect"}}
+    expected:
+      planning: {+meta: {owner: "Census team, registrar's office"}}
+      finance: {+meta: {owner: Finance}}
+
+# Databricks only, when the var personal_data_readers names a group: the mask on direct personal
+# data (macros/governance/personal_data.sql, DEC-PRJ-13).
+on-run-start:
+  - "{{ create_personal_data_mask() }}"

@@ -139,3 +139,53 @@ decisions:
     status: agreed
     relates_to: [DEC-PRJ-04]
     implemented_in: [_course__conceptual.yml, definitions.py, sync-the-glossary]
+
+  - id: DEC-PRJ-12
+    step: operate_and_evolve
+    title: Governance's rules run as a check on every pull request
+    text: 'Four of data governance''s rules run as a check, scripts/check/governance.py, in CI and before every
+      pull request: an owner on every domain, entity and shared model; a glossary term, or governance''s
+      confirmation that there''s none, for every core entity; every column of a public model or mart
+      classified as direct, pseudonymous or none; every test with an owner and a quality dimension. Data
+      governance owns what the rules ask; the data architect owns the check''s code; each owner named in
+      the metadata answers for their own.'
+    why: A policy that lives only in a document isn't followed. Written into the work, it is checked on every
+      change, at the moment someone can still fix it, and it measures itself.
+    decided_by: Yusuf Demir, data governance lead, with Noor, data architect
+    decided_on: 2026-10-20
+    status: agreed
+    relates_to: [DEC-PRJ-04, DEC-PRJ-11]
+    implemented_in: [governance.py, builtin.sql, dbt_project.yml]
+
+  - id: DEC-PRJ-13
+    step: operate_and_evolve
+    title: Each column's class becomes a tag on Databricks, and direct personal data is masked
+    text: 'On Databricks, every classified column of a table gets a Unity Catalog tag, personal_data, with
+      its class from the model''s YAML (direct, pseudonymous or none). When the var personal_data_readers
+      names a group, each column of direct personal data also gets a mask: that group sees the value,
+      everyone else sees ***. The identity that runs dbt is in the group. Or, with the var
+      personal_data_policy, one Unity Catalog policy masks every column tagged direct, instead of a mask
+      per column. On DuckDB, neither: it has no tags or masks, as DEC-PRJ-09 leaves keys out there.'
+    why: The class is decided once, where the model is, and checked on every pull request (DEC-PRJ-12).
+      Pushed to the platform from there, the platform protects what the project says is personal, and
+      the two can't drift.
+    decided_by: Yusuf Demir, data governance lead, with Noor, data architect
+    decided_on: 2026-10-20
+    status: agreed
+    relates_to: [DEC-PRJ-09, DEC-PRJ-12]
+    implemented_in: [personal_data.sql, dbt_project.yml]
+
+  - id: DEC-PRJ-14
+    step: operate_and_evolve
+    title: A new governance rule warns first, then fails from a date set when it's announced
+    text: 'A new rule is announced at the stewards'' meeting, with its how-to (docs/how-to/). It runs as a
+      warning for at least six weeks, each warning naming the day it becomes an error, and fails from the
+      date set when it''s announced. The first: every column of a shared model has a description, an
+      error from 1 December 2026.'
+    why: A rule that stops people the day it lands teaches them to resent it. Warned first, with a page that
+      says what to do and who to ask, people fix their own work before the rule stops anyone.
+    decided_by: Yusuf Demir, data governance lead, with the stewards
+    decided_on: 2026-10-20
+    status: agreed
+    relates_to: [DEC-PRJ-12]
+    implemented_in: [governance.py]

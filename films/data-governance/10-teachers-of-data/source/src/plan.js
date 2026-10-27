@@ -571,9 +571,10 @@ function tt_heldSheet(fn){return(cx,P_,hands)=>{const h=hands[1];cx.save();cx.tr
 let PH_OFF=0;
 function tt_deco(on,fn){if(on)PH_OFF++;try{fn();}finally{if(on)PH_OFF--;}}
 // Yusuf's office as the series paints it, with the framed score drawn every frame (tt_frame), because this film takes it down: the wall
-// under it is painted again, from the same wash
+// under it is painted again, from the same wash. The newest DMBOK stands on his desk, as in every film that shows his office
+// (gv_deskBook); binder 29, open on the desk in chapter 6, lies in front of it
 function tt_paintOffice(ctx){gv_paintOffice(ctx);const [x,y,w,h]=GV_OFF.score;ctx.save();ctx.beginPath();ctx.rect(x-34,y-34,w+68,h+68);ctx.clip();
-  gv_wallFloor(ctx,GV_ROOM.gov,GV_OFF.fy,{seed:11,vx:900});gv_lightGlow(ctx,960,0,520);ctx.restore();}
+  gv_wallFloor(ctx,GV_ROOM.gov,GV_OFF.fy,{seed:11,vx:900});gv_lightGlow(ctx,960,0,520);ctx.restore();gv_deskBook(ctx);}
 // close-ups that are the series' rooms painted again, nearer, so they stay sharp: the stewards' whiteboard, the calendar beside it, the
 // wall where the score hung. What's drawn on them is drawn in the room's own coordinates, through the same lens (tt_inZ)
 const TT_Z={board:{z:2.4,x:440,y:380},cal:{z:3.6,x:851,y:310},wall:{z:2.0,x:1238,y:330}};

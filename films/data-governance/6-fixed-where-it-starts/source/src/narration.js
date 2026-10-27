@@ -29,13 +29,15 @@ const NARR={
  {"id":"box","gap":0.8,"text":"The form keeps each email as it's typed, in a plain text box, so phones start it with a capital."},
  {"id":"space","gap":0.8,"text":"And picking a suggestion can leave a space at the end."},
  {"id":"third","gap":0.8,"text":"More than one email in three arrives that way."},
- {"id":"starts","gap":0.8,"text":"Nobody typed anything wrong. It shows downstream, but it starts here, at the form."}]},
+ {"id":"starts","gap":0.8,"text":"Nobody typed anything wrong. As in Vienna, it shows downstream, but it starts here, at the form."}]},
 "entry":{"name":"Fixed where it's typed","lead":1.0,"tail":1.0,"vo":[
  {"id":"time","gap":0.8,"text":"This time, the issue has an owner, a cause, a date, and a check that proves it's closed."},
  {"id":"email","gap":0.8,"text":"Tom's team makes the box an email box, so phones stop adding the capital."},
  {"id":"trims","gap":0.8,"text":"And the form trims each email, writes it in lower case and checks its shape, before it's saved."},
  {"id":"work","gap":0.8,"text":"Nobody has to type more carefully. The form does the work."},
- {"id":"before","gap":0.8,"text":"Tom's team corrects the old emails in their platform. Then the data team's clean-up can go."}]},
+ {"id":"basin","gap":0.8,"text":"Like the basin in Vienna, the form stops the problem on its way in."},
+ {"id":"before","gap":0.8,"text":"Tom's team corrects the old emails in their platform. Then the data team's clean-up can go."},
+ {"id":"relief","gap":0.8,"text":"No system cleans them again, and every learner keeps one wallet."}]},
 "never":{"name":"Should never fail","lead":1.4,"tail":1.2,"vo":[
  {"id":"stays","gap":0.8,"text":"The rule stays, as a check that should never fail: a promise to everyone who reads them."},
  {"id":"fails","gap":0.8,"text":"If it ever fails, the form has broken, and its owner hears first."},
@@ -47,10 +49,12 @@ const NARR={
  {"id":"wallet","gap":0.8,"text":"But the wallet shows them as plain badges, with no credit."},
  {"id":"shape","gap":0.8,"text":"Monitoring knows each table's usual shape: when it arrives, how many rows, how many empty, how the values spread."},
  {"id":"usual","gap":0.8,"text":"Usually, one badge in twelve has no credit. Last night, one in two."},
+ {"id":"numbers","gap":0.8,"text":"As in Vienna, the numbers show something's wrong before anyone knows why."},
  {"id":"tells","gap":0.8,"text":"It tells the owner on record: the learning team."}]},
 "rule":{"name":"A surprise becomes a rule","lead":1.0,"tail":1.0,"vo":[
  {"id":"cause","gap":0.8,"text":"The cause is last week's update to the learning platform. Tom's team fixes it there, and sends the badges again."},
  {"id":"rule","gap":0.8,"text":"Then the surprise becomes a rule: a microcredential carries credit. A check, with an owner."},
+ {"id":"next","gap":0.8,"text":"Next time, it's stopped before it reaches a wallet."},
  {"id":"three","gap":0.8,"text":"Prevent what you can, where it starts. Check what you know. Watch for what you don't."},
  {"id":"every","gap":0.8,"text":"And every surprise you confirm becomes a rule."}]},
 "blame":{"name":"Nobody to blame","lead":1.0,"tail":1.0,"vo":[
@@ -59,6 +63,8 @@ const NARR={
  {"id":"proof","gap":0.8,"text":"Germs weren't known yet, so his only proof was his numbers. He waited years to publish them."},
  {"id":"letters","gap":0.8,"text":"And when doctors doubted him, he blamed them, in angry open letters."},
  {"id":"after","gap":0.8,"text":"Washing became the rule only after his death, once germs were known."},
+ {"id":"now","gap":0.8,"text":"It's basic hygiene now, and it saves mothers and babies every day."},
  {"id":"lasts","gap":0.8,"text":"A fix at the start lasts when it's easy to keep, and when people get the evidence, not the blame."},
- {"id":"close","gap":0.8,"text":"Fix the cause. Then make the fix a check."}]}
+ {"id":"close","gap":0.8,"text":"Fix the cause. Then make the fix a check."},
+ {"id":"brings","gap":0.8,"text":"That's what data governance brings: less cleaning, data everyone can trust, and an owner who hears first."}]}
 };

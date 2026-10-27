@@ -37,6 +37,21 @@ function fw_goes(ctx,id,t,t0,x0,x1,o){o=o||{};const w=gv_walk(t,t0,x0,x1,o.v||FW
   fw_ghost(ctx,a,c=>gv_walker(c,id,w,o.y||FW_WK.y,o.s||FW_WK.s,{t,pose:w.moving?null:"stand",flip:x1<x0}));}
 // the doors' plates, and the two clinics' deaths over them
 const FW_PL={first:[875,290],second:[1415,290],autopsy:[295,322],rate:190};
+// Vienna, as the film comes back to it: the mother going home, her baby asleep in her arms, out of the first clinic's door and past
+// the basin (from t0); a doctor washing at the basin, then going in at that door with his hands clean (from t0, in at tIn); and the two
+// clinics' doors with their deaths over them, the numbers glowing (at tg)
+function fw_goingHome(x,tt,t0){fw_doorOpen(x,1,gv_io(tt,t0+0.2,t0+2.2,0.4),[236,224,196]);fw_basin(x,FW_CR.basin,880,1.0,1);
+  fw_plate(x,tt,-9,null,...FW_PL.first,["first clinic","doctors and students"]);fw_plate(x,tt,-9,null,...FW_PL.second,["second clinic","midwives"]);
+  const w=gv_walk(tt,t0+0.5,875,1250,150),a=fin(tt,t0+0.35,0.4);
+  if(a>0.01)fw_ghost(x,a,q=>gv_walker(q,"mother2",w,FW_WK.y,FW_WK.s,{t:tt,pose:"hold",carry:fw_baby,carryBehind:true,expr:"smile"}));}
+function fw_washIn(x,tt,t0,tIn){fw_doorOpen(x,1,gv_io(tt,tIn,tIn+1.9,0.4),[236,224,196]);fw_plate(x,tt,-9,null,...FW_PL.first,["first clinic","doctors and students"]);
+  const w=gv_walk(tt,tIn+0.2,640,870,180),a=1-fin(tt,w.end-0.25,0.4);
+  if(a>0.01)fw_ghost(x,a,q=>gv_walker(q,"doctor1",w,850,FW_WK.s,Object.assign({t:tt},
+    w.moving?{}:{pose:"stand",pose2:"fw_wash",mix:fin(tt,t0+0.3,0.5)*(1-fin(tt,tIn-0.5,0.5))})));
+  fw_basin(x,FW_CR.basin,880,1.0,1);}
+function fw_twoRates(x,tt,tg){fw_plate(x,tt,-9,null,...FW_PL.first,["first clinic","doctors and students"]);fw_plate(x,tt,-9,null,...FW_PL.second,["second clinic","midwives"]);
+  const g=0.8*fin(tt,tg,0.6);for(const px of [FW_PL.first[0],FW_PL.second[0]])gv_halo(x,px-210,FW_PL.rate-46,420,92,GV.gold,g);
+  fw_tagAt(x,tt,-9,null,FW_PL.first[0],FW_PL.rate,"about 1 mother in 10");fw_tagAt(x,tt,-9,null,FW_PL.second[0],FW_PL.rate,"about 1 in 30");}
 
 scene("clinics",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({cr:c.first-0.7,firstC:wAt(sc,"first","doctors")-0.3,firstR:wAt(sc,"first","one mother")-0.1,
     secondC:wAt(sc,"second","midwives")-0.3,secondR:wAt(sc,"second","one in thirty")-0.1,bg:c.beg,begW:wAt(sc,"beg","beg"),why:c.why,
@@ -90,11 +105,7 @@ scene("clinics",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({cr:c.first
       fw_register(x,k=>clamp((tt-P.reg-0.3-[0,0.7,1.4,2.0,2.6][k])/0.9,0,1),clamp((tt-P.level+0.2)/1.0,0,1),fin(tt,P.reg+0.1,0.8))},
     // the corridor again, the basin by the first clinic's door: the door opens, and a mother comes out with her baby in her arms and
     // walks slowly towards the far end
-    {at:P.home,place:"corridor",keys:[[P.home,1060,600,1.15],[P.home+0.1,1080,600,1.18]],d:3,push:0.01,draw:(x,tt)=>{
-      fw_doorOpen(x,1,gv_io(tt,P.home+0.2,P.home+2.2,0.4),[236,224,196]);fw_basin(x,FW_CR.basin,880,1.0,1);
-      fw_plate(x,tt,-9,null,...FW_PL.first,["first clinic","doctors and students"]);fw_plate(x,tt,-9,null,...FW_PL.second,["second clinic","midwives"]);
-      const w=gv_walk(tt,P.home+0.5,875,1250,150),a=fin(tt,P.home+0.35,0.4);
-      if(a>0.01)fw_ghost(x,a,q=>gv_walker(q,"mother2",w,FW_WK.y,FW_WK.s,{t:tt,pose:"hold",carry:fw_baby,carryBehind:true,expr:"smile"}));}},
+    {at:P.home,place:"corridor",keys:[[P.home,1060,600,1.15],[P.home+0.1,1080,600,1.18]],d:3,push:0.01,draw:(x,tt)=>fw_goingHome(x,tt,P.home)},
     // the first clinic's ward: the fever showed in the beds; the camera goes to the door from the corridor, where a doctor comes in
     // and washes: it started there; then both, wide, for the lesson
     {at:P.ward,place:"ward",keys:[[P.ward,960,540,1],[P.started-0.3,1280,560,1.5],[P.lesson,960,540,1]],d:1.6,push:0,draw:(x,tt)=>{const D=FW_WD,
@@ -211,12 +222,13 @@ scene("back",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({point:wAt(sc,
       fw_where(x,tt,P.here-0.1,null,"where it starts",470,365,[736,316,448,94]);}}]);
   wc_paperOver(ctx,S);});
 
-// ---- 4 · Fixed where it's typed: the issue with an owner, a cause, a date and a check; the email box; the old emails; the clean-up goes ----
+// ---- 4 · Fixed where it's typed: the issue with an owner, a cause, a date and a check; the email box, like the basin in Vienna; the old
+// emails; the clean-up goes, no system cleans them again, and each learner keeps one wallet ----
 scene("entry",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({own:wAt(sc,"time","an owner"),cause:wAt(sc,"time","a cause"),date:wAt(sc,"time","a date"),
     chk:wAt(sc,"time","a check"),tom:c.email-0.5,box:wAt(sc,"email","an email box"),ph:wAt(sc,"email","so phones")-0.4,stop:wAt(sc,"email","stop"),
     sug:c.trims-0.3,trim:wAt(sc,"trims","trims"),low:wAt(sc,"trims","lower case"),shape:wAt(sc,"trims","checks"),saved:wAt(sc,"trims","saved"),
-    gr:c.work-0.4,does:wAt(sc,"work","The form"),lr:c.before-0.4,fix:wAt(sc,"before","corrects"),cu:wAt(sc,"before","Then the")-0.3,go:wAt(sc,"before","can go"),
-    room:c.breath-0.6}));
+    gr:c.work-0.4,does:wAt(sc,"work","The form"),vb:c.basin-0.3,vw:wAt(sc,"basin","the form")-0.3,vin:wAt(sc,"basin","stops"),lr:c.before-0.4,fix:wAt(sc,"before","corrects"),
+    cu:wAt(sc,"before","Then the")-0.3,go:wAt(sc,"before","can go"),room:c.relief-3.6,one:wAt(sc,"relief","and every")-0.2}));
   const d0=P.ph+0.8,presses=[[d0,"d"],[P.stop+0.5,"a"],[P.stop+0.88,"n"],[P.sug,"sug"],[P.saved+0.3,"btn"]],
     typed=[[d0+0.05,"d"],[P.stop+0.55,"da"],[P.stop+0.93,"dan"],[P.sug+0.05,FW_EM+" "]],
     gPress=[[P.gr+0.7,"box",0.5],[P.gr+1.5,"paste"]],gEm=" Grace.Okafor@Mail.example";
@@ -238,13 +250,22 @@ scene("entry",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({own:wAt(sc,"
       fw_typer(x,tt,{name:"Grace Okafor",email:true,val:pasted&&tt<P.does?gEm:"",prev:tt>=P.does?gEm:null,mixv:fin(tt,P.does,0.6),
         ...(tt>=P.does?{val:gEm.trim().toLowerCase()}:{}),paste:gv_io(tt,P.gr+1.1,P.gr+1.6,0.15),spc:gv_io(tt,P.gr+1.9,P.does,0.3),
         ok:fin(tt,P.does+0.6,0.5),caret:tt<P.does},gPress);}},
+    // Vienna, a moment: a doctor's hands, close, dipping into the basin, as in 1847; then the corridor: he finishes at the basin by the
+    // first clinic's door, and goes in. The form stops the problem on its way in, as the basin did
+    {at:P.vb,place:"hands",keys:[[P.vb,960,540,1],[P.vb+0.1,960,560,1.05]],d:2.2,push:0.02,draw:(x,tt)=>
+      fw_hands(x,tt,fin(tt,P.vb+0.1,0.8),fin(tt,P.vb+0.7,0.6),{sleeve:PEOPLE.doctor1.top.c,rub:fin(tt,P.vb+1.1,0.4)})},
+    {at:P.vw,place:"corridor",keys:[[P.vw,760,600,1.3],[P.vw+0.1,780,600,1.33]],d:3,push:0.01,draw:(x,tt)=>fw_washIn(x,tt,P.vw-0.8,P.vin)},
     // Tom's screen: the team corrects the old emails, one by one
     {at:P.lr,place:"screenLearn",keys:[[P.lr,960,400,1],[P.lr+0.1,960,410,1.03]],d:3,push:0.01,draw:(x,tt)=>fw_learners(x,1,clamp((tt-P.fix)/1.8,0,1),0)},
     // the data team's board: the clean-up's card, stamped retired
     {at:P.cu,place:"boardData",keys:[[P.cu,960,500,1],[P.cu+0.1,960,490,1.03]],d:3,push:0.01,draw:(x,tt)=>fw_cleanCard(x,{trim:1,low:1,retired:fin(tt,P.go,0.4)})},
-    // wordless: the data team's room; the joints clamped, the drips stop, the buckets and the mop are put away
+    // wordless: the data team's room; the joints clamped, the drips stop, the buckets and the mop are put away; then, said: no system
+    // cleans them again
     {at:P.room,place:"data",keys:[[P.room,960,540,1]],d:2,push:0.012,draw:(x,tt)=>{const away=1-fin(tt,P.room+1.5,0.9);
-      fw_dataRoom(x,tt,{buckets:[away,away,away],mop:away,fixed:fin(tt,P.room+0.5,0.7),yusuf:false,jun:{expr:"relieved"}});}}]);
+      fw_dataRoom(x,tt,{buckets:[away,away,away],mop:away,fixed:fin(tt,P.room+0.5,0.7),yusuf:false,jun:{expr:"relieved"}});}},
+    // the wallet: one for each learner now, its email as it should be, ticked
+    {at:P.one,place:"screenData",keys:[[P.one,960,420,1],[P.one+0.1,960,430,1.03]],d:3,push:0.01,draw:(x,tt)=>fw_walletOne(x,tt-P.one-0.2)}]);
+  fw_pill(ctx,t,[[P.vb,"Vienna · 1847"]],gv_io(t,P.vb+0.2,P.lr-0.3,0.4));
   wc_paperOver(ctx,S);});
 
 // ---- 5 · Should never fail: the rule stays as a check; the cell turns green ----
@@ -264,15 +285,15 @@ scene("never",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({chk:wAt(sc,"
     {at:P.bd,place:"boardGov",keys:[[P.bd,960,500,1],[P.bd+0.1,960,490,1.04]],d:3,push:0.01,draw:(x,tt)=>fw_issueGold(x,1,()=>1,fin(tt,P.right,0.4))}]);
   wc_paperOver(ctx,S);});
 
-// ---- 6 · What no rule names: the badges with no credit, every check passing, and monitoring that knows the usual shape ----
+// ---- 6 · What no rule names: the badges with no credit, every check passing, and monitoring that knows the usual shape; as in Vienna,
+// the numbers show something's wrong before anyone knows why ----
 scene("unknown",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({arr:c.night+1.2,z1:c.half-0.6,zero:wAt(sc,"half","zero credit"),pass:c.pass-0.3,
     tick:wAt(sc,"pass","passes"),num:wAt(sc,"pass","a number"),wal:c.wallet-0.3,morn:c.shape-0.8,arr2:wAt(sc,"shape","when it arrives"),
     rows:wAt(sc,"shape","how many rows"),empty:wAt(sc,"shape","how many empty"),spread:wAt(sc,"shape","spread"),last:wAt(sc,"usual","Last night"),
-    owner:wAt(sc,"tells","the owner"),fly:wAt(sc,"tells","on record")-0.2,tom:wAt(sc,"tells","the learning")-0.3}));
-  gv_shots(ctx,S,t,sc.dur,[
-    // the platform team's desk at night, then in the morning: last night's badges, the checks, the wallet, then Sam's monitoring; in
-    // the morning the camera moves over to Sam, at his desk with his plate
-    {at:0,place:"platform",keys:[[0,960,540,1],[P.z1,775,504,1.62],[P.pass,1050,504,1.62],[P.morn,1320,504,1.62]],d:1.6,push:0,draw:(x,tt,cam)=>{const far=cam.z<1.57?1:0,night=1-fin(tt,P.morn,1.2),
+    owner:wAt(sc,"tells","the owner"),fly:wAt(sc,"tells","on record")-0.2,tom:wAt(sc,"tells","the learning")-0.3,vn:c.numbers-0.3,
+    nb:wAt(sc,"numbers","the numbers")-0.1,back:c.tells-0.4}));
+  // the platform team's desk at night, then in the morning: last night's badges, the checks, the wallet, then Sam's monitoring
+  const plat=(x,tt,cam)=>{const far=cam.z<1.57?1:0,night=1-fin(tt,P.morn,1.2),
         k=[P.arr2,P.rows,P.empty,P.spread].reduce((n,w)=>n+fin(tt,w-0.1,0.4),0);
       if(night<0.99)fw_ghost(x,1-night,q=>gv_behind(q,"sam",GV_PX.seat[0],GV_PX.top,GV_PX.seat[1],{pose:"listen",t:tt,flip:true}));
       x.drawImage(gv_place("platformDesk"),0,0,W,H);fw_night(x,night);
@@ -280,29 +301,40 @@ scene("unknown",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({arr:c.nigh
       const chk=1-fin(tt,P.wal,0.4),wal=fin(tt,P.wal,0.4)*(1-fin(tt,P.morn+0.3,0.5)),mon=fin(tt,P.morn+0.3,0.5);
       if(chk>0.01)withA(x,chk*fin(tt,P.pass,0.4),()=>fw_checks(x,fin(tt,P.tick-0.1,0.4)+fin(tt,P.num-0.1,0.4)*0.6,far));
       if(wal>0.01)withA(x,wal,()=>fw_walletBadge(x,1,far));if(mon>0.01)withA(x,mon,()=>fw_monitor(x,k,fin(tt,P.last-0.1,0.8),far));
-      fw_plate(x,tt,P.morn+0.9,P.owner-0.3,1570,296,["Sam Okafor","platform team"]);fw_ownerCard(x,fin(tt,P.owner,0.5));fw_flyAlert(x,clamp((tt-P.fly)/0.7,0,1));}},
+      fw_plate(x,tt,P.morn+0.9,P.owner-0.3,1570,296,["Sam Okafor","platform team"]);fw_ownerCard(x,fin(tt,P.owner,0.5));fw_flyAlert(x,clamp((tt-P.fly)/0.7,0,1));};
+  gv_shots(ctx,S,t,sc.dur,[
+    // the desk: in the morning the camera moves over to Sam, at his desk with his plate
+    {at:0,place:"platform",keys:[[0,960,540,1],[P.z1,775,504,1.62],[P.pass,1050,504,1.62],[P.morn,1320,504,1.62]],d:1.6,push:0,draw:plat},
+    // Vienna, a moment: the two clinics' doors and their deaths over them; the numbers showed something was wrong before anyone knew why
+    {at:P.vn,place:"corridor",keys:[[P.vn,1063,520,1.12],[P.vn+0.1,1063,515,1.15]],d:3,push:0.01,draw:(x,tt)=>fw_twoRates(x,tt,P.nb)},
+    // back at Sam's desk: the owner on record, and the notice on its way
+    {at:P.back,place:"platform",keys:[[P.back,1320,504,1.62]],d:1.6,push:0,draw:plat},
     // Tom's desk: the alert lands with its owner
     {at:P.tom,place:"tom",keys:[[P.tom,860,500,1.1]],d:1.8,push:0.01,draw:(x,tt)=>
       fw_tomDesk(x,tt,{expr:"concerned"},q=>fw_tomScreen(q,"alert",{u:fin(tt,P.tom+0.3,0.5)}))}]);
+  fw_pill(ctx,t,[[P.vn,"Vienna · 1847"]],gv_io(t,P.vn+0.2,P.back-0.3,0.4));
   wc_paperOver(ctx,S);});
 
 // ---- 7 · A surprise becomes a rule: fixed where it started, then a check with an owner; prevent, check, watch ----
 scene("rule",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({fix:wAt(sc,"cause","fixes"),send:wAt(sc,"cause","sends"),rl:c.rule-0.4,
     mc:wAt(sc,"rule","a microcredential"),own:wAt(sc,"rule","with an owner"),bd:c.three-0.5,prev:wAt(sc,"three","Prevent"),chk:wAt(sc,"three","Check what"),
-    watch:wAt(sc,"three","Watch"),conf:wAt(sc,"every","confirm")}));
+    watch:wAt(sc,"three","Watch"),conf:wAt(sc,"every","confirm"),nx:c.next-0.3,stp:wAt(sc,"next","stopped")}));
   gv_shots(ctx,S,t,sc.dur,[
     // Tom's screen: the microcredentials' credit set back, and the badges sent again
     {at:0,place:"screenLearn",keys:[[0,960,420,1],[0.1,960,430,1.03]],d:4,push:0.01,draw:(x,tt)=>
       fw_courses(x,k=>fin(tt,P.fix+0.35*k,0.4),fin(tt,P.send,0.3),clamp((tt-P.send-0.2)/1.2,0,1))},
-    // Tom's desk: the rule, on a quality rule card, its lines coming in; on "with an owner", Tom signs it, and it's stamped
-    {at:P.rl,place:"tomTop",keys:[[P.rl,960,500,1],[P.rl+0.1,960,480,1.03]],d:3,push:0.01,draw:(x,tt)=>
-      fw_rule(x,fin(tt,P.mc-0.4,1.2),clamp((tt-P.own+0.1)/0.7,0,1),fin(tt,P.own+0.75,0.3))},
+    // Tom's desk: the rule, on a quality rule card, its lines coming in; on "with an owner", Tom signs it, and it's stamped; next time,
+    // a badge with no credit comes in and stops at the rule, stamped, so it never reaches a wallet
+    {at:P.rl,place:"tomTop",keys:[[P.rl,960,500,1],[P.rl+0.1,960,480,1.03]],d:3,push:0.01,draw:(x,tt)=>{
+      fw_rule(x,fin(tt,P.mc-0.4,1.2),clamp((tt-P.own+0.1)/0.7,0,1),fin(tt,P.own+0.75,0.3));
+      fw_stopped(x,fin(tt,P.nx,0.9),fin(tt,P.stp-0.05,0.3));}},
     // Yusuf's board: prevent, check, watch; the card that moves from watch to check
     {at:P.bd,place:"boardGov",keys:[[P.bd,960,500,1],[P.bd+0.1,960,490,1.03]],d:3,push:0.01,draw:(x,tt)=>{
       for(let k=0;k<3;k++)fw_three(x,k,fin(tt,[P.prev,P.chk,P.watch][k]-0.1,0.5),k===2?fin(tt,P.conf-0.2,1.4):0);}}]);
   wc_paperOver(ctx,S);});
 
-// ---- 8 · Nobody to blame: evidence and help; Semmelweis, right, and the reasons his washing spread slowly; policy 15 marked green ----
+// ---- 8 · Nobody to blame: evidence and help; Semmelweis, right, and the reasons his washing spread slowly; basic hygiene now, and the
+// mother going home again; what data governance brings; policy 15 marked green ----
 // the corridor of 1847: doctors waiting at the basin
 function fw_queue(x,tt){person(x,"doctor1",330,FW_WK.y,FW_WK.s,{pose:"stand",t:tt});person(x,"student",470,FW_WK.y,FW_WK.s,{pose:"listen",t:tt});
   person(x,"doctor2",640,850,FW_WK.s,{pose:"fw_wash",t:tt});fw_basin(x,640,880,1.0,1);person(x,"semmelweis",900,FW_WK.y,FW_WK.s,{pose:"listen",t:tt,flip:true});}
@@ -315,8 +347,9 @@ function fw_meeting(x,tt,P){fw_evidence(x,1);gv_halo(x,GV_MT.screen[0]-20,GV_MT.
 
 scene("blame",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({nod:wAt(sc,"blamed","Nobody"),ev:wAt(sc,"blamed","the evidence"),help:wAt(sc,"blamed","help"),
     vi:c.vienna-0.5,hd:wAt(sc,"vienna","But the")-0.3,hurt:wAt(sc,"vienna","hurt"),rg:c.proof-0.4,nums:wAt(sc,"proof","numbers"),pt:wAt(sc,"proof","He waited")-0.3,
-    pub:wAt(sc,"proof","publish"),lt:c.letters-0.5,angry:wAt(sc,"letters","angry"),af:c.after-0.4,ph:c.lasts-0.4,easy:wAt(sc,"lasts","easy"),
-    evid:wAt(sc,"lasts","and when")-0.3,sn:c.close-0.4,pg:c.close+2.6,hi:c.breath+0.5,note:c.breath+2.0,end:c.breath+2.9}));
+    pub:wAt(sc,"proof","publish"),lt:c.letters-0.5,angry:wAt(sc,"letters","angry"),af:c.after-0.4,nw:c.now-0.3,ph:c.lasts-0.4,easy:wAt(sc,"lasts","easy"),
+    evid:wAt(sc,"lasts","and when")-0.3,sn:c.close-0.4,br:c.brings-0.4,less:wAt(sc,"brings","less"),trust:wAt(sc,"brings","data everyone"),
+    hear:wAt(sc,"brings","an owner"),pg:c.breath-0.5,hi:c.breath+0.5,note:c.breath+2.0,end:c.breath+2.9}));
   gv_shots(ctx,S,t,sc.dur,[
     // the stewards' meeting: the evidence on the screen; nobody blames Tom's team; Jun offers help
     {at:0,place:"meeting",keys:[[0,960,500,1.06],[0.1,980,490,1.1]],d:4,push:0.01,draw:(x,tt)=>{fw_meeting(x,tt,P);
@@ -340,6 +373,8 @@ scene("blame",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({nod:wAt(sc,"
       fw_tagAt(x,tt,P.angry+1.1,null,560,330,"an open letter to all professors of obstetrics");}},
     // the basin alone in the corridor, the water still: washing became the rule after his death
     {at:P.af,place:"corridor",keys:[[P.af,640,640,1.6]],d:1.6,push:0.015,draw:x=>fw_basin(x,640,880,1.0,1)},
+    // basic hygiene now: the first clinic's door opens, and the mother goes home with her baby, past the basin, as in 1847
+    {at:P.nw,place:"corridor",keys:[[P.nw,1060,600,1.15],[P.nw+0.1,1080,600,1.18]],d:3,push:0.01,draw:(x,tt)=>fw_goingHome(x,tt,P.nw)},
     // today: the email box, checked where it's typed, easy to keep
     {at:P.ph,place:"phone",keys:[[P.ph,...FW_PHV]],d:1.6,push:0.01,draw:(x,tt)=>{fw_typer(x,tt,{val:FW_EM.toLowerCase(),email:true,ok:1,kb:0});
       gv_halo(x,1086,246,120,100,GV.green,0.8*fin(tt,P.easy-0.1,0.5));}},
@@ -347,6 +382,9 @@ scene("blame",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({nod:wAt(sc,"
     {at:P.evid,place:"meeting",keys:[[P.evid,1204,322,1.8]],d:1.6,push:0.01,draw:(x,tt)=>fw_meeting(x,tt,P)},
     // the leak sensor, its light green
     {at:P.sn,place:"data",keys:[[P.sn,1356,810,2.0]],d:1.6,push:0.015,draw:(x,tt)=>fw_dataRoom(x,tt,{buckets:[0,0,0],fixed:1,sensor:1,yusuf:false,jun:false})},
+    // Yusuf's board: prevent, check, watch, and under each, as it's named, what data governance brings
+    {at:P.br,place:"boardGov",keys:[[P.br,960,520,1],[P.br+0.1,960,510,1.03]],d:3,push:0.01,draw:(x,tt)=>{
+      for(let k=0;k<3;k++){fw_three(x,k,1,0);fw_brings(x,k,fin(tt,[P.less,P.trust,P.hear][k]-0.1,0.5));}}},
     // wordless: binder 15's line, marked green with Yusuf's highlighter, and his note beside it; then the end card
     {at:P.pg,place:"policy",keys:[[P.pg,960,500,1],[P.pg+0.1,900,450,1.06]],d:4,push:0.01,draw:(x,tt)=>fw_policy15(x,clamp((tt-P.hi)/1.4,0,1),clamp((tt-P.note)/1.2,0,1))}]);
   fw_pill(ctx,t,[[P.vi,"Vienna · 1847"],[P.pt,"Pest · 1858"],[P.pub,"Pest · 1861"],[P.lt,"Pest · 1862"]],fin(t,P.vi+0.2,0.4)*(1-fin(t,P.af-0.2,0.4)));

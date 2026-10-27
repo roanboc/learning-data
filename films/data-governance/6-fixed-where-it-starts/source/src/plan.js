@@ -411,6 +411,12 @@ function fw_wallets(ctx,u,q){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,"Wallet
       wc_T(c,"Daniel Kim",cx+40,y+230,{w:800,size:44,col:WC_DARK});wc_T(c,em,cx+40,y+290,{w:600,size:30,col:WC_INK});
       for(let b=0;b<3;b++)wc_wash(c,wc_ell(cx+76+b*96,y+394,34,34,24),[[236,170,34],[96,160,176],[150,120,190]][b],{kind:"thing",lw:1.2,seed:160+b+i*3});});});
   gv_qmark(c,x+w/2,y+380,110,q);},{titleSize:30,barH:54});}
+// the wallet after the fix: one for the learner, his email as it should be, and a green tick where the question mark was (u, seconds in)
+function fw_walletOne(ctx,u){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,"Wallet",c=>{const cx=x+w/2-250,p=fin(u,0,0.4);if(p<=0)return;withA(c,p,()=>{
+    wc_panel(c,cx,y+150,500,330,{kind:"card",wash:GV_LOOPC,washA:0.18,seed:151});
+    wc_T(c,"Daniel Kim",cx+40,y+230,{w:800,size:44,col:WC_DARK});wc_T(c,"danielkim.work@mail.example",cx+40,y+290,{w:600,size:30,col:WC_INK});
+    for(let b=0;b<3;b++)wc_wash(c,wc_ell(cx+76+b*96,y+394,34,34,24),[[236,170,34],[96,160,176],[150,120,190]][b],{kind:"thing",lw:1.2,seed:161+b});});
+  wc_tick(c,cx+590,y+300,90,GV.green,fin(u,0.5,0.5),9);},{titleSize:30,barH:54});}
 
 /* ---------- today: the leak in the data team's room ---------- */
 // the metaphor, said once: a pipe along the top of the wall, leaking at three joints; under each a bucket, the first by Jun's desk
@@ -660,6 +666,12 @@ function fw_rule(ctx,p,sign,stamp){const [x,y,w]=FW_TT.card,r=gv_signoff(ctx,x,y
   if(sign>0){const k=w/1000,n=Math.ceil(13*clamp(sign,0,1)),sx=r.x+(12+tw(ctx,"Tom Whitfield".slice(0,n),38,600))*k,sy=r.rows[r.rows.length-1]+105*k,
       dn=clamp((stamp||0)*3,0,1);fw_pen(ctx,lerp(sx,x+w+110,dn),lerp(sy,y+r.h*0.62,dn),lerp(-0.75,-1.25,dn));}
   return r;}
+// next time: a badge with no credit comes in from the left, from the platform, and stops at the rule, stamped (u, stamp), so it never
+// reaches a wallet
+function fw_stopped(ctx,u,stamp){if(u<=0)return;const e=easeCam(clamp(u,0,1));ctx.save();ctx.translate(lerp(-240,232,e),470);ctx.rotate(lerp(-0.1,-0.03,e));
+  withA(ctx,clamp(u*3,0,1),()=>{wc_panel(ctx,-180,-105,360,210,{kind:"card",wash:[150,120,190],washA:0.14,seed:240});
+    wc_T(ctx,"Python Foundations",-156,-52,{w:800,size:30,col:WC_DARK});wc_T(ctx,"microcredential",-156,-12,{w:600,size:28,col:WC_INK});
+    wc_T(ctx,"credit 0",-156,26,{w:800,size:28,col:FW.amberInk});gv_stamp(ctx,40,72,"STOPPED",stamp,{size:30,col:GV.redInk,rot:-0.08});});ctx.restore();}
 // on Yusuf's board: prevent, check, watch, a card each, with a small picture of what it is (the email box, the sensor, the bars); and
 // the small card that moves from watch to check (mv, 0 to 1)
 const FW_3=[["prevent","where it starts"],["check","what you know"],["watch","what you don't"]],FW_3X=[520,960,1400];
@@ -671,6 +683,12 @@ function fw_three(ctx,k,u,mv){if(u<=0)return;const e=easeCam(clamp(u,0,1)),x=FW_
     if(k===2)for(let i=0;i<8;i++){const bh=i===7?70:18+10*hash(i,3);ctx.fillStyle=rgba(i===7?FW.amber:[150,186,222],1);ctx.fillRect(-140+i*36,py+100-bh,24,bh);}});ctx.restore();
   if(k===2&&mv>0){const v=easeCam(clamp(mv,0,1)),cx=lerp(FW_3X[2],FW_3X[1],v),cy=y+250-120*Math.sin(v*Math.PI);ctx.save();ctx.translate(cx,cy);ctx.rotate(lerp(0.03,-0.02,v));
     wc_panel(ctx,-170,-46,340,92,{kind:"card",wash:GV.gold,washA:0.45,seed:230});wc_T(ctx,"a microcredential",-150,-6,{w:700,size:28,col:WC_DARK});wc_T(ctx,"carries credit",-150,30,{w:600,size:28,col:WC_INK});ctx.restore();}}
+// what data governance brings, a gold note pinned under each card as it's named: under prevent, less cleaning; under check, data
+// everyone can trust; under watch, an owner who hears first
+const FW_BR=["less cleaning","data everyone can trust","an owner who hears first"];
+function fw_brings(ctx,k,u){if(u<=0)return;const e=easeCam(clamp(u,0,1));ctx.save();ctx.translate(FW_3X[k],740-12*(1-e));ctx.rotate([0.012,-0.01,0.008][k]);
+  withA(ctx,clamp(u*2.5,0,1),()=>{wc_panel(ctx,-205,-48,410,96,{kind:"card",wash:GV.gold,washA:0.45,seed:250+k});gv_pin(ctx,0,-34,GV.red,1.0);
+    wc_T(ctx,FW_BR[k],0,22,{w:700,size:30,align:"center",col:WC_DARK});});ctx.restore();}
 
 /* ---------- today: the stewards' meeting room ---------- */
 // what's on the room's screen: the evidence, plainly

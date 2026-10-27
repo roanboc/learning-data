@@ -23,15 +23,16 @@
 #    follow fw_drip() in src/plan.js drop by drop, while their bucket is in the shot.
 # And everything stays low and soft: water, a tin bucket, iron clamps, wood, paper, a pen, muffled keys, filtered below about 2.5 kHz.
 
-# when a word of a line is spoken, as the film's own wAt() estimates it: along the line's voiced length, from the words the voice reads.
-# wAt() falls back to the line's start when a word isn't in it; here a missing word stops the mix, so a typo can't move a sound
+# when a word of a line is spoken, as the film's own wAt() estimates it: along the line's voiced length, from the words the voice reads
+# (a line not voiced yet takes the length the film gives it, a word every 0.37 s, at least 1.3 s). wAt() falls back to the line's start
+# when a word isn't in it; here a missing word stops the mix, so a typo can't move a sound
 import json as _json, math as _math, pathlib as _pl
 _obj = lambda f: (lambda s: _json.loads(s[s.index('{'):s.rindex('}') + 1]))((_pl.Path('src') / f).read_text())
 _NARR, _DUR = _obj('narration.js'), _obj('vodur.js')
 def W(sid, lid, word, off=0):
     ln = next(v for v in _NARR[sid]['vo'] if v['id'] == lid); s = ln.get('say') or ln['text']; i = s.find(word)
     assert i >= 0, '%s/%s has no "%s"' % (sid, lid, word)
-    return G(sid, lid) + _DUR[sid + '/' + lid] * i / len(s) + off
+    return G(sid, lid) + (_DUR.get(sid + '/' + lid) or max(1.3, len(ln['text'].split()) / 2.7)) * i / len(s) + off
 def rel(sid, t):
     """a moment in the film, as seconds into its chapter"""
     return t - S0(sid)
@@ -329,9 +330,10 @@ shows(W('back', 'starts', 'shows', -0.05), pan=0.2)
 starts(here - 0.05, pan=-0.3)
 
 # 4. Fixed where it's typed: a chord for "this time"; the gold issue pinned, and a pencil for each of its lines; the box's setting
-#    clicked; the keys, the suggestion, and the button; another learner's long press and paste; the old emails corrected, and the
+#    clicked; the keys, the suggestion, and the button; another learner's long press and paste. Vienna, a moment, on the glass in G, as
+#    after the washing: the hands into the basin, and the first clinic's door as the doctor goes in. The old emails corrected, and the
 #    clean-up's card stamped retired. Then, wordless, the clamps go on, one at each joint, the last drops fall, and the fix's phrase
-#    plays, in D: A, F sharp, E, D
+#    plays, in D: A, F sharp, E, D, its D ringing on as each learner's one wallet is ticked
 chords([(G('entry', 'time', -0.9), G('entry', 'time', 2.6), [55, 59, 62, 67])], 'D', GL * 0.9)
 pin(S0('entry') + 0.55, 0.028, 0.0)
 for w in ['an owner', 'a cause', 'a date', 'a check']:
@@ -342,15 +344,20 @@ for w in [eph + 0.8, stop + 0.5, stop + 0.88, G('entry', 'trims', -0.3), W('entr
     tap(w + 0.02, 0.013, 0.1)
 gr = G('entry', 'work', -0.4)
 tap(gr + 0.7, 0.012, 0.1); tap(gr + 1.5, 0.013, 0.1)
+vb, vin = G('entry', 'basin', -0.3), W('entry', 'basin', 'stops')
+chords([(vb - 0.1, vin + 1.4, GM)], 'G', GL * 0.8)
+plunge(vb + 0.75, 0.022, 0.0); rub(vb + 1.1, 1.0, 0.012)  # the hands, close, into the water, and rubbed
+latch(vin + 0.08, 0.014, px(1086)); shut(vin + 2.22, 0.01, px(1086))  # the first clinic's door, as he goes in
 fixw = W('entry', 'before', 'corrects')
 for k in range(3):
     tap(fixw + 0.6 * k + 0.3, 0.011, 0.0)
 rubber(W('entry', 'before', 'can go') + 0.1, 0.034, px(1340))
-eroom = G('entry', 'breath', -0.6)
+eroom, one = G('entry', 'relief', -3.6), W('entry', 'relief', 'and every', -0.2)
 for k, i in enumerate((0, 1, 2)):
     clamp_(eroom + 0.62 + 0.07 * k, 0.026, px(JOINTS[i]))
-drips('entry', rel('entry', eroom), ST['entry']['dur'] + 0.25, lambda i, t: 1.0 - fin_(S0('entry') + t, eroom + 0.5, 0.7), {0: (1, None), 1: (1, None), 2: (1, None)}, 0.009)
+drips('entry', rel('entry', eroom), rel('entry', one) + 0.25, lambda i, t: 1.0 - fin_(S0('entry') + t, eroom + 0.5, 0.7), {0: (1, None), 1: (1, None), 2: (1, None)}, 0.009)
 phrase([69, 66, 64, 62], eroom + 1.45, k='D', last=3.2)
+tap(one + 0.75, 0.012, px(1310))  # the wallet's tick
 
 # 5. Should never fail: the sensor's tag, and the dashed line to who it tells; the cell turning green, on the glass's rising fifth; the
 #    gold card stamped closed because the check passes
@@ -361,7 +368,8 @@ fifth(62, W('never', 'green', 'turns green', -0.05))
 rubber(W('never', 'green', 'right where') + 0.12, 0.042, 0.25)
 
 # 6. What no rule names: a dim chord for the night; the badges arriving, one by one, then softer; the checks' ticks; the wallet; the
-#    morning, and monitoring's four panels; one low bell for one in two, left to ring, with no pulse; the alert flying to its owner
+#    morning, and monitoring's four panels; one low bell for one in two, left to ring, with no pulse; Vienna, a moment, on the glass in
+#    E minor, as before the washing, and the bell where the problem shows, as the numbers glow; the alert flying to its owner
 arr = G('unknown', 'night', 1.2)
 chords([(G('unknown', 'night', -1.1), G('unknown', 'night', 1.9), [59, 62, 66])], 'D', GL * 0.8)
 for k in range(8):
@@ -372,13 +380,17 @@ knock(G('unknown', 'wallet', -0.3) + 0.2, 0.016, px(1050), 300)
 for w in ['when it arrives', 'how many rows', 'how many empty', 'spread']:
     knock(W('unknown', 'shape', w, -0.1) + 0.06, 0.014, px(1050), 320)
 bell(47, W('unknown', 'usual', 'one in two', -0.05), BL * 1.05, 0.2, 'D', damp=6.5)  # one in two: a low B
+vn = G('unknown', 'numbers', -0.3)
+chords([(vn - 0.1, vn + 2.8, EM)], 'G', GL * 0.8)
+shows(W('unknown', 'numbers', 'show', -0.05))
 knock(W('unknown', 'tells', 'the owner') + 0.05, 0.014, px(1200), 300)
 air(W('unknown', 'tells', 'on record', -0.2), 0.8, 0.016, 0.5)
 knock(W('unknown', 'tells', 'the learning', -0.3) + 0.35, 0.016, 0.1, 280)
 
 # 7. A surprise becomes a rule: the three microcredentials set back to five, and the badges sent again; the rule card set down on
-#    Tom's desk, signed in pen and stamped; then three cards pinned, each on a bell, rising (prevent, check, watch), and the card
-#    that moves from watch to check, on the glass's rising fifth: a surprise confirmed becomes a check
+#    Tom's desk, signed in pen and stamped; next time, a badge with no credit slides in and is stamped stopped; then three cards
+#    pinned, each on a bell, rising (prevent, check, watch), and the card that moves from watch to check, on the glass's rising fifth:
+#    a surprise confirmed becomes a check
 for k in range(3):
     tap(W('rule', 'cause', 'fixes', 0.35 * k + 0.2), 0.012, -0.2 + 0.2 * k)
 send = W('rule', 'cause', 'sends')
@@ -386,6 +398,7 @@ tap(send, 0.016, 0.4); air(send + 0.25, 1.0, 0.014, 0.5)
 paper(G('rule', 'rule', -0.4) + 0.12, 0.016, 0.0, 0.35)
 own = W('rule', 'rule', 'with an owner')
 pen(own, 0.012, 0.05, 0.7); rubber(own + 0.85, 0.036, 0.25)
+paper(G('rule', 'next', -0.2), 0.014, px(150), 0.6); rubber(W('rule', 'next', 'stopped', 0.05), 0.034, px(251))
 for k, (w, m) in enumerate([('Prevent', 62), ('Check what', 66), ('Watch', 69)]):
     t = W('rule', 'three', w, -0.1) + 0.25
     pin(t, 0.024, px([520, 960, 1400][k])); bell(m, t, BL * 0.85, px([520, 960, 1400][k]) * 0.6, 'D', damp=3.2)
@@ -395,8 +408,10 @@ fifth(62, conf - 0.15, 2.4)
 
 # 8. Nobody to blame: the speech bubble; Vienna again, on the glass in E minor, the doctors at the basin and the red, rubbed hands;
 #    the register; his paper set down, then his book; the open letters flying; the basin alone, on the glass's rising fifth, G to D:
-#    washing became the rule; today's phone, the evidence, the sensor; and, wordless, binder 15's line marked green, on the fix's
-#    phrase, then the mark under the end card, the glass holding G
+#    washing became the rule; basic hygiene now, on the G opened out, as in the opening, the first clinic's door opening and closing
+#    as the mother goes home; today's phone, the evidence, the sensor; what data governance brings, a note pinned under each of
+#    prevent, check and watch, on their three bells; and, wordless, binder 15's line marked green, on the fix's phrase, then the mark
+#    under the end card, the glass holding G
 knock(W('blame', 'blamed', 'help', -0.1) + 0.06, 0.018, 0.1, 280)
 vi = G('blame', 'vienna', -0.5)
 chords([(vi - 0.2, vi + 3.4, [55, 59, 64])], 'G', GL * 0.9)
@@ -409,6 +424,12 @@ paper(pt + 0.45, 0.02, -0.2, 0.35); book(W('blame', 'proof', 'publish') + 0.3, 0
 for k in range(3):
     flutter(W('blame', 'letters', 'angry', -0.2 + 0.3 * k), 0.016, -0.2 - 0.15 * k, 0.8)
 fifth(55, G('blame', 'after', -0.2), 2.4, k='G')  # the basin alone, the water still
+nw = G('blame', 'now', -0.3)
+chords([(nw - 0.1, nw + 3.6, [59, 62, 67])], 'G', GL * 0.85)
+latch(nw + 0.28, 0.014, px(718)); shut(nw + 2.52, 0.01, px(718))
+for k, (w, m) in enumerate([('less', 62), ('data everyone', 66), ('an owner', 69)]):
+    t = W('blame', 'brings', w, -0.1) + 0.25
+    pin(t, 0.022, px([507, 960, 1413][k])); bell(m, t, BL * 0.7, px([507, 960, 1413][k]) * 0.6, 'D', damp=3.2)
 hi, end = G('blame', 'breath', 0.5), G('blame', 'breath', 2.9)
 marker(hi, 0.016, -0.1, 1.4); pencil(G('blame', 'breath', 2.0), 0.012, 0.3, 1.2)
 phrase([69, 66, 64, 62], hi + 0.1, k='D', last=TOT - (hi + 0.1 + 3 * 0.55))  # its D held to the end, under the mark

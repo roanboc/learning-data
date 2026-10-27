@@ -33,7 +33,7 @@ function ow_gate(x,tt,g0,o){const C=OW_GT,S=C.stall,u=tt-g0,zc=7.2+0.8*u,zr=11+1
 const OW_FLM=[1,1,1,0,0];
 scene("script",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{gate:c.one-0.2,script:w("one","script"),meas:w("one","measures"),carts:w("one","cart widths"),stall:c.pain-0.3,old:w("pain","in one state"),qin:w("pain","than in the next"),taxes:w("pain","so taxes"),doubt:w("pain","in doubt")-0.2,
-      back:c.need-0.3,n1:w("need","script"),n2:w("need","measures"),n3:w("need","cart widths"),made:w("need","set them"),slips:c.words-0.3,king:w("words","the king's"),emp:w("words","became"),
+      back:c.need-0.3,relief:c.relief-0.3,rsame:w("relief","the same everywhere"),rtrust:w("relief","could be trusted"),n1:w("need","script"),n2:w("need","measures"),n3:w("need","cart widths"),made:w("need","set them"),slips:c.words-0.3,king:w("words","the king's"),emp:w("words","became"),
       county:c.board-0.4,check:w("board","kept a list")-0.3,then:w("board","on a wooden")-0.25,rule:w("board","each old")-0.1,found:c.well,well:w("well","in an old"),recs:w("well","with thousands"),
       rec:w("used","use the new"),same:w("used","the same in"),
       glossary:c.glossary,bridge:c.bridge-0.45,word:w("bridge","one word"),diff:w("bridge","defined"),one:w("needs","one glossary"),every:w("needs","every tool"),title:c.breath-0.6};});
@@ -65,6 +65,12 @@ scene("script",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>{const w=(id,
       const [bx,by_]=ow_pj(C,C.board[0],2.32,C.board[1]),[mx,my]=ow_stallAt();
       ow_tagAt(x,tt,P.n1,null,bx,by_-44,"one script");ow_tagAt(x,tt,P.n2,null,mx,my-38,"one set of measures");
       ow_tagAt(x,tt,P.n3+0.05,null,(ra[0]+rb[0])/2,Math.max(ra[1],rb[1])+76,"one cart width");}},
+    // close on the seller's table again: the old measure is gone, and Qin's has to hold the same everywhere, so he can price by it; the
+    // question mark's place is the answer's
+    {at:P.relief,place:"stall",keys:[[P.relief,960,522,1.045],[P.relief+0.1,960,540,1.0]],d:6,draw:(x,tt)=>{const T=OW_ST;
+      ow_kneel(x,"ow_merchant",T.seller,T.top,T.s,{pose:"explain",expr:tt>P.rtrust?"smile":"calm",t:tt,flip:true,fy:T.edge+128});
+      x.drawImage(gv_place("stallTable"),0,0,W,H);ow_stallClose(x,{old:false});ow_tagAt(x,tt,P.relief+0.35,null,T.qin[0],424,"Qin's measure",{size:32});
+      ow_tagAt(x,tt,P.rsame,null,960,140,"the same everywhere",{size:36,wash:GV.green,washA:0.3});}},
     // the orders from the capital, unbundled on a mat, and a card: the old words struck out, the new ones written in
     {at:P.slips,place:"slips",keys:[[P.slips,960,540,1.0],[P.slips+0.1,990,530,1.05]],d:6,draw:(x,tt)=>{
       ow_tagAt(x,tt,P.slips+0.35,null,OW_SL.x+OW_SL.n*OW_SL.w/2,96,"orders from the capital");
@@ -73,9 +79,7 @@ scene("script",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>{const w=(id,
         const s=clamp((tt-P.emp+0.1)/0.5,0,1);if(s>0){x.save();x.strokeStyle=rgba(GV.redInk,0.85);x.lineWidth=5;x.lineCap="round";x.beginPath();x.moveTo(cx+34,cy+122);x.lineTo(cx+34+tw(x,"the king’s order",52,800)*s+8,cy+118);x.stroke();x.restore();}
         if(tt>P.emp+0.3){wc_T(x,"new words",cx+40,cy+200,{w:600,size:30,col:WC_MUTED});wc_hand(x,"the emperor’s edict",cx+40,cy+262,{size:52,col:GV.goldInk,p:clamp((tt-P.emp-0.4)/0.9,0,1)});}x.restore();});}}},
     // the county office at Qianling: three scribes at their low tables; the middle one checks the board at his elbow, and writes on
-    {at:P.county,place:"county",keys:[[P.county,960,560,1.0],[P.county+0.1,1030,610,1.42]],d:2.6,draw:(x,tt)=>{const O=OW_OF,ck=gv_io(tt,P.check+0.2,P.check+1.7,0.45);
-      ["ow_scribeA","ow_scribeB","ow_scribeC"].forEach((id,i)=>ow_kneel(x,id,O.seats[i],O.top,O.s,{pose:"write",pose2:i===1?"ow_check":null,mix:i===1?ck:0,t:tt+i*0.7,carry:ow_heldSlip,flip:i===2}));
-      x.drawImage(gv_place("countyTables"),0,0,W,H);const bw=O.board[1]*330*O.s,bh=bw*12.5/27.4;gv_halo(x,O.board[0]-16,O.top-bh-16,bw+38,bh+30,GV.gold,0.75*ck);}},
+    {at:P.county,place:"county",keys:[[P.county,960,560,1.0],[P.county+0.1,1030,610,1.42]],d:2.6,draw:(x,tt)=>ow_county(x,tt,gv_io(tt,P.check+0.2,P.check+1.7,0.45))},
     // the board, on the scribe's table, and two of its rules in English under it, each old word and the new one; then as it was found,
     // in 2002, with the county's own records beside it, and those records counted: the new word used, so the same word as in the capital
     {at:P.then,place:"boardThen",keys:[[P.then,960,540,1.0]],d:2,draw:(x,tt)=>ow_ruleCard(x,fin(tt,P.rule,0.5))},
@@ -142,14 +146,17 @@ scene("none",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({micro:wAt(sc,
 // the stewards round the meeting room's table, and Sam standing at its end
 function ow_meet(x,tt,o){o=o||{};const M=GV_MT,s=M.s;[["anil",0],["clara",1],["mei",2],["yusuf",3],["jun",4]].forEach(([id,i])=>gv_behind(x,id,M.seats[i],M.top,s,Object.assign({pose:"listen",t:tt+i*0.6,flip:M.seats[i]>1204},(o.pose||{})[id]||{})));
   x.drawImage(gv_place("meetingTable"),0,0,W,H);person(x,"sam",1730,905,s,{pose:"listen",t:tt,flip:true});}
-scene("trust",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({big:wAt(sc,"not","Not the"),pick:wAt(sc,"not","the glossary"),term:c.term-0.4,u:[wAt(sc,"term","a definition"),wAt(sc,"term","an owner"),wAt(sc,"term","a status"),wAt(sc,"term","the date")],
+scene("trust",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({big:wAt(sc,"not","Not the"),pick:wAt(sc,"not","the glossary"),elbow:c.elbow-0.3,work:wAt(sc,"elbow","where the work")-0.2,term:c.term-0.4,u:[wAt(sc,"term","a definition"),wAt(sc,"term","an owner"),wAt(sc,"term","a status"),wAt(sc,"term","the date")],
     words:c.words-0.3,dict:wAt(sc,"dict","A data"),cat:wAt(sc,"dict","A catalog")}));
   gv_shots(ctx,S,t,sc.dur,[
     {at:0,place:"meeting",keys:[[0,960,560,1.0],[c.not-0.5,1204,360,1.75]],d:1.8,draw:(x,tt)=>{ow_meetFive(x,fin(tt,P.big,0.8),fin(tt,P.pick-0.2,1.0));ow_meet(x,tt,{pose:{yusuf:{pose:"explain"}}});}},
+    // like the Qin board: back in the county office, where the scribe turns to the board at his elbow, where the work is done
+    {at:P.elbow,place:"county",keys:[[P.elbow,1010,600,1.32],[P.elbow+0.1,1030,610,1.42]],d:3,draw:(x,tt)=>{ow_county(x,tt,gv_io(tt,P.work,P.term-0.1,0.45));ow_tagAt(x,tt,P.work+0.3,null,1126,688,"the board",{size:30});}},
     // what a term holds, line by line
     {at:P.term,place:"meetScreen",keys:[[P.term,960,450,1.0]],d:2,draw:(x,tt)=>ow_termCard(x,280,170,1360,P.u.map(v=>tt-v+0.15),{h:570})},
     // the business's words; each table and column; finding the data
     {at:P.words,place:"meetScreen",keys:[[P.words,960,450,1.0]],d:2,draw:(x,tt)=>ow_three(x,[tt-P.words-0.1,tt-P.dict,tt-P.cat])}]);
+  ow_pill(ctx,t,[[0,"Qianling county · about 220 BC"]],gv_io(t,P.elbow+0.2,P.term-0.1,0.35));
   wc_paperOver(ctx,S);});
 
 // ---- 5 · Every tool reads it: four glossaries retired or made to read from it ----
@@ -181,19 +188,27 @@ scene("read",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({stamp:wAt(sc,
 
 // ---- 6 · When a word changes: Monday's change, as a change notice Mei signs ----
 scene("change",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({months:wAt(sc,"before","found months"),moves:wAt(sc,"before","when a number"),night:c.night-0.4,chk:wAt(sc,"night","the check"),found:wAt(sc,"night","found it"),nt:wAt(sc,"night","sent a"),
-    touch:wAt(sc,"night","what the new"),rows:[c.list,wAt(sc,"list","its dashboard"),wAt(sc,"list","The wallet")],mei:c.mei-0.4,appr:wAt(sc,"mei","approved"),used:wAt(sc,"mei","where her"),
+    like:c.like-0.3,old:wAt(sc,"like","the old words"),nu:wAt(sc,"like","the new ones"),back:c.touch-0.3,touch:wAt(sc,"touch","what the new"),rows:[c.list,wAt(sc,"list","its dashboard"),wAt(sc,"list","The wallet")],mei:c.mei-0.4,appr:wAt(sc,"mei","approved"),used:wAt(sc,"mei","where her"),
     num:c.number-0.4,six:wAt(sc,"number","six credit"),kept:wAt(sc,"rule","So it's"),sets:wAt(sc,"rule","as a business"),every:wAt(sc,"rule","every report")}));
+  // the notice on the night room's screen: the copy ringed first, then the notice in its place, listing what the new words touch and
+  // who owns each part
+  const night=(x,tt)=>{const a=fin(tt,P.nt+0.5,0.35),[sx,sy,sw,sh]=GV_SC;
+    ow_tagAt(x,tt,P.night+0.3,null,960,52,"Monday night",{size:30});
+    if(a<0.99){ow_copy(x,sx,sy,sw,sh,{m:1,ring:clamp((tt-P.chk)/0.8,0,1)});ow_tagAt(x,tt,P.found,null,1300,322,"out of date",{size:32});}
+    if(a>0.01){x.save();x.translate(60*(1-a),0);withA(x,a,()=>ow_notice(x,OW_NT.x,OW_NT.y,OW_NT.w,{changed:fin(tt,P.nt+0.65,0.5),
+      touch:fin(tt,P.touch,0.4),rows:P.rows.map(r=>fin(tt,r-0.1,0.45)),owners:fin(tt,P.rows[2]+1.3,0.5)}));x.restore();}};
   gv_shots(ctx,S,t,sc.dur,[
     // without a nightly check: a dashboard's number moves, months later, and nobody knows why
     {at:0,place:"screenFac",keys:[[0,960,450,1.0],[0.2,980,440,1.06]],d:4,draw:(x,tt)=>{const [sx,sy,sw,sh]=GV_SC;ow_stepChart(x,sx,sy,sw,sh,clamp((tt-1.0)/((P.moves-1.0)/0.75),0,1),fin(tt,P.moves,0.5));
       ow_tagAt(x,tt,1.0,null,560,186,"without a nightly check",{size:32,wash:GV.grey,washA:0.35});ow_tagAt(x,tt,P.months,null,1290,250,"found months later",{size:32});}},
-    // Monday night: the nightly check finds the data team's copy still in the old words, and sends a change notice, listing what the new
-    // words touch and who owns each part
-    {at:P.night,place:"screenNight",keys:[[P.night,960,450,1.0],[P.touch-0.3,960,500,1.1]],d:2,draw:(x,tt)=>{const a=fin(tt,P.nt+0.5,0.35),[sx,sy,sw,sh]=GV_SC;
-      ow_tagAt(x,tt,P.night+0.3,null,960,52,"Monday night",{size:30});
-      if(a<0.99){ow_copy(x,sx,sy,sw,sh,{m:1,ring:clamp((tt-P.chk)/0.8,0,1)});ow_tagAt(x,tt,P.found,null,1300,322,"out of date",{size:32});}
-      if(a>0.01){x.save();x.translate(60*(1-a),0);withA(x,a,()=>ow_notice(x,OW_NT.x,OW_NT.y,OW_NT.w,{changed:fin(tt,P.nt+0.65,0.5),
-        touch:fin(tt,P.touch,0.4),rows:P.rows.map(r=>fin(tt,r-0.1,0.45)),owners:fin(tt,P.rows[2]+1.3,0.5)}));x.restore();}}},
+    // Monday night: the nightly check finds the data team's copy still in the old words, and sends a change notice
+    {at:P.night,place:"screenNight",keys:[[P.night,960,450,1.0]],d:2,draw:night},
+    // like the Qin board, it shows the old words and the new ones: the board on the scribe's table, and under its rules the old words
+    // underlined in rose and the new ones in violet, as they're said, the notice's colours
+    {at:P.like,place:"boardThen",keys:[[P.like,960,560,1.0],[P.like+0.1,930,590,1.05]],d:3,draw:(x,tt)=>{ow_ruleCard(x,1);
+      ow_ruleMarks(x,clamp((tt-P.old-0.1)/0.6,0,1),clamp((tt-P.nu-0.1)/0.6,0,1));}},
+    // back to the notice: what the new words touch, and who owns each part
+    {at:P.back,place:"screenNight",keys:[[P.back,960,450,1.0],[P.back+0.2,960,500,1.1]],d:2,draw:night},
     // Tuesday morning: Mei signs the notice, and sees where her words go; then the camera comes back to her, smiling
     {at:P.mei,place:"regClose",keys:[[P.mei,1160,500,1.4],[P.appr-0.3,1371,505,1.75],[P.used+0.2,1150,520,1.32]],d:1.6,draw:(x,tt)=>{const smile=fin(tt,P.used+0.8,0.6);
       gv_behind(x,"mei",GV_RX.seat[0],GV_RX.top,GV_RX.seat[1],{pose:"stand",expr:smile>0.5?"smile":"calm",t:tt});x.drawImage(gv_place("regDesk"),0,0,W,H);
@@ -203,6 +218,7 @@ scene("change",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({months:wAt(
     {at:P.num,place:"screenData",keys:[[P.num,960,450,1.0],[P.kept-0.4,960,520,1.08]],d:2,draw:(x,tt)=>{const [sx,sy,sw,sh]=GV_SC;
       ow_ruleScreen(x,sx,sy,sw,sh,{under:clamp((tt-P.six)/0.6,0,1),note:fin(tt,P.six+0.7,0.5),card:clamp((tt-P.kept-0.1)/0.7,0,1),green:fin(tt,P.sets,0.5),read:fin(tt,P.every,0.45)});}}]);
   setScreen(ctx,S);ow_nameCard(ctx,24,740,"Jun Park","Analytics engineer",gv_io(t,P.num+0.3,P.kept-0.4,0.4));
+  ow_pill(ctx,t,[[0,"Qianling county · about 220 BC"]],gv_io(t,P.like+0.2,P.back-0.1,0.35));
   wc_paperOver(ctx,S);});
 
 // ---- 7 · Agreed by people: the workshop, and the keepers thanked ----
@@ -236,12 +252,24 @@ scene("agree",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({n:[wAt(sc,"w
   wc_paperOver(ctx,S);});
 
 // ---- 8 · One word, one home: policy 12's line runs in the work ----
-scene("home",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({tick:wAt(sc,"policy","glossary's"),floor:c.home-0.1,every:wAt(sc,"home","every tool"),end:sc.ends.idea+0.35}));
+scene("home",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({tick:wAt(sc,"policy","glossary's"),floor:c.home-0.1,every:wAt(sc,"home","every tool"),
+    used:c.used-0.4,gain:c.gain-0.3,g:[wAt(sc,"gain","Reports agree"),wAt(sc,"gain","a change"),wAt(sc,"gain","people can")],end:sc.ends.idea+0.35}));
+  // the floor: every office's screen reads the same award, from one glossary. Coming back to it (gain), what that gives the university,
+  // each as it's said: the reports agree, a change goes out along every arrow again, and the people smile
+  const floor=(x,tt,gain)=>{const go=1-fin(tt,P.end,0.6),sm=gain&&tt>P.g[2]+0.3?{expr:"smile"}:{},pose={yusuf:{pose:"stand",expr:"smile"}};
+    ["clara","mei","jun","sam"].forEach(id=>pose[id]=sm);ow_floor(x,tt,{names:go,pose});
+    ow_oneWay(x,960,300,1.32,1-fin(tt,c.idea,1.0),(tt-(gain?P.g[1]:P.every))/0.9);for(let i=0;i<5;i++)ow_screenWord(x,i,1);ow_floorCard(x,960,300,go);
+    if(gain)[[330,"reports agree"],[960,"a change reaches everyone"],[1590,"people can trust the numbers"]].forEach(([tx,s],i)=>
+      ow_tagAt(x,tt,P.g[i]+0.1,P.end,tx,96,s,{size:34,wash:GV.green,washA:0.3}));};
   gv_shots(ctx,S,t,sc.dur,[
     {at:0,place:"desk",keys:[[0,960,540,1.0],[0.3,1152,560,1.25]],d:2.4,draw:(x,tt)=>ow_binder12(x,370,160,fin(tt,P.tick,0.6),clamp((tt-P.tick-0.5)/1.2,0,1))},
-    // the floor: every office's screen reads the same award, from one glossary
-    {at:P.floor,place:"floor",keys:[[P.floor,960,540,1.0],[P.floor+1.5,960,520,1.08]],d:5,draw:(x,tt)=>{const go=1-fin(tt,P.end,0.6);ow_floor(x,tt,{names:go,pose:{yusuf:{pose:"stand",expr:"smile"}}});ow_oneWay(x,960,300,1.32,1-fin(tt,c.idea,1.0),(tt-P.every)/0.9);
-      for(let i=0;i<5;i++)ow_screenWord(x,i,1);ow_floorCard(x,960,300,go);}}]);
+    {at:P.floor,place:"floor",keys:[[P.floor,960,540,1.0],[P.floor+1.5,960,520,1.08]],d:5,draw:(x,tt)=>floor(x,tt,false)},
+    // like the Qin board, it's used: the board as it was found, the county's records beside it, and their count, as the opening left them
+    {at:P.used,place:"boardFound",keys:[[P.used,975,535,1.02],[P.used+0.1,990,530,1.04]],d:2.4,draw:(x,tt)=>{const k=P.used-9;ow_ruleCard(x,1);x.drawImage(gv_place("records"),0,0,W,H);
+      ow_tally(x,tt,k,k,k);ow_tagAt(x,tt,k,null,1550,806,"the same word as in the capital",{size:32,wash:GV.green,washA:0.3});
+      gv_halo(x,OW_BD.x-40,OW_BD.y-40,OW_BD.w+80,OW_BD.h+80,GV.gold,0.55*fin(tt,P.used+0.3,0.6));}},
+    {at:P.gain,place:"floor",keys:[[P.gain,960,540,1.0]],d:2,push:0.02,draw:(x,tt)=>floor(x,tt,true)}]);
+  ow_pill(ctx,t,[[0,"Liye · 2002"]],gv_io(t,P.used+0.2,P.gain-0.1,0.35));
   const a=fin(t,P.end+0.6,0.9);if(a>0){gv_end(ctx,S,t,P.end,"One word, one home","Keep one, and sync every tool from it.","Film 3 of 19");setScreen(ctx,S);
     withA(ctx,a,()=>wc_T(ctx,"Many glossaries are no glossary.",960,352,{w:700,size:48,align:"center",col:WC_DARK}));}
   wc_paperOver(ctx,S);});

@@ -388,7 +388,7 @@ function ow_paintStallTable(ctx){const S=OW_ST,x0=S.x0,x1=S.x1,T=S.top,E=S.edge,
   ctx.save();ctx.strokeStyle=rgba(wc_dim(OW.wood,0.24),0.32);ctx.lineWidth=1.5;for(const v of [0.35,0.7]){ctx.beginPath();ctx.moveTo(x0+30,T+(E-T)*v);ctx.lineTo(x1-30,T+(E-T)*v+1);ctx.stroke();}
     ctx.strokeStyle=rgba(wc_dim(OW.woodDk,0.3),0.36);for(const v of [0.4,0.75]){ctx.beginPath();ctx.moveTo(x0+12,E+(F-E)*v);ctx.lineTo(x1-12,E+(F-E)*v);ctx.stroke();}ctx.restore();}
 // the seller's things on the table, close: his old state's measure, Qin's, and the bronze weight
-function ow_stallClose(ctx){const S=OW_ST,b=S.top+(S.edge-S.top)*0.55;ow_oldMeasure(ctx,S.old[0],b,S.old[1]);ow_measure(ctx,S.qin[0],b,S.qin[1]);ow_weight(ctx,S.weight[0],b-2,S.weight[1]);}
+function ow_stallClose(ctx,o){const S=OW_ST,b=S.top+(S.edge-S.top)*0.55;if(!(o&&o.old===false))ow_oldMeasure(ctx,S.old[0],b,S.old[1]);ow_measure(ctx,S.qin[0],b,S.qin[1]);ow_weight(ctx,S.weight[0],b-2,S.weight[1]);}
 // where the stall's measure is on screen, for its tag
 const ow_stallAt=()=>ow_pj(OW_GT,2.5,0,OW_GT.stall.z0);
 // an ox cart's axle: where its two wheels meet the ground, on screen
@@ -469,8 +469,14 @@ function ow_heldSlip(cx,P_,hands){const [l,r]=hands;cx.save();cx.translate(l[0]+
   cx.strokeStyle=rgba(wc_dim(OW.slip,0.4),0.8);cx.lineWidth=1.6;cx.strokeRect(-8,-74,16,140);cx.fillStyle=rgba(OW.ink,0.55);for(let i=0;i<6;i++)cx.fillRect(-3.5,-62+i*17,7,7);cx.restore();
   cx.save();cx.translate(r[0],r[1]);cx.rotate(-0.8);cx.fillStyle=rgba([156,116,74],1);cx.fillRect(-3.5,-80,7,82);cx.fillStyle=rgba([40,34,32],1);cx.beginPath();cx.moveTo(-3.5,2);cx.lineTo(3.5,2);cx.lineTo(0,18);cx.closePath();cx.fill();cx.restore();
   fingers(cx,P_,[l,r]);}
-// looking aside, to the board at the elbow, the hands still at the slip
-POSE.ow_check=Object.assign({},POSE.write,{turn:-0.4,gaze:[-0.9,0.7],tilt:-0.06,look:1});
+// looking aside and down, to the board at the elbow (on our right of the middle scribe), the hands still at the slip
+POSE.ow_check=Object.assign({},POSE.write,{turn:1.1,gaze:[1.8,1.4],tilt:0.1,shift:6,look:1});
+
+// the county office's three scribes at work, the middle one turning to the board at his elbow as ck goes to 1, and the board's glow:
+// the opening's picture, and the one the film comes back to
+function ow_county(x,tt,ck){const O=OW_OF;
+  ["ow_scribeA","ow_scribeB","ow_scribeC"].forEach((id,i)=>ow_kneel(x,id,O.seats[i],O.top,O.s,{pose:"write",pose2:i===1?"ow_check":null,mix:i===1?ck:0,t:tt+i*0.7,carry:ow_heldSlip,flip:i===2}));
+  x.drawImage(gv_place("countyTables"),0,0,W,H);const bw=O.board[1]*330*O.s,bh=bw*12.5/27.4;gv_halo(x,O.board[0]-16,O.top-bh-16,bw+38,bh+30,GV.gold,0.75*ck);}
 
 /* ---------- the board, close ---------- */
 // 27.4 by 12.5 centimetres, landscape; two registers of entries, each a short column read right to left; 54 entries in all. Drawn
@@ -506,6 +512,11 @@ function ow_paintBoardFound(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0
 // the rules, in English, on a card under the board: two of its 54 entries, each old word and the new one to write instead
 function ow_ruleCard(ctx,a){if(a<=0.01)return;const x=150,y=662,w=1080,h=196;withA(ctx,a,()=>{ctx.save();ctx.translate(0,14*(1-a));wc_panel(ctx,x,y,w,h,{kind:"card",seed:201});
   wc_T(ctx,"for “the king’s order”, write “the emperor’s edict”",x+44,y+78,{w:700,size:36,col:WC_DARK});wc_T(ctx,"for “the king’s hunt”, write “the emperor’s hunt”",x+44,y+142,{w:700,size:36,col:WC_DARK});ctx.restore();});}
+// the rules' old words underlined in the old words' rose, and the new ones in the new words' violet, as the change notice marks them
+// (uo, un: 0 to 1, drawn on)
+function ow_ruleMarks(ctx,uo,un){const x=194;[["for “","the king’s order","”, write “","the emperor’s edict"],["for “","the king’s hunt","”, write “","the emperor’s hunt"]].forEach(([a,b,c,d],i)=>{
+  const y=750+i*64,x1=x+tw(ctx,a,36,700),w1=tw(ctx,b,36,700),x2=x1+w1+tw(ctx,c,36,700),w2=tw(ctx,d,36,700);
+  if(uo>0)wc_pencil(ctx,[[x1,y],[x1+w1,y+1]],uo,{col:OW_MEANINK[1],lw:4.5,seed:520+i});if(un>0)wc_pencil(ctx,[[x2,y+1],[x2+w2,y]],un,{col:OW_MEANINK[0],lw:4.5,seed:530+i});});}
 // the county's own records, found in the well with the board: slips dark with its water, whole and broken, on the mount beside it,
 // where the tally cards are pinned over them
 function ow_paintRecords(ctx){const R=wc_rng(231);[560,430,600,320,540,470,380,590,450].forEach((h,i)=>{const x=1322+i*52+R()*8,y=190+R()*36;

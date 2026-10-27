@@ -3,7 +3,7 @@
 # the chords, one recorder to a note, breathy and soft; a low marimba, played with soft mallets, gives the notes of what appears; and
 # the series' mark, 1-5-4-8, plays on the alto recorder with the marimba an octave under it, at the title and the end. E minor for
 # Qin and the county's board (no borrowed Chinese instruments or scales: the story is told in the series' own voice); G major, its
-# relative, from the moment a university needs the same, and for today.
+# relative, from the moment a university has the same problem, and for today.
 # The marimba means the same thing all through. Each meaning of award has its note: violet's, the one that stays, is G, the home
 # note; rose's is A and olive's is F-sharp, its neighbours on either side. Each glossary sounds its meaning's note as it's named, the
 # three sound together for "three different awards", and when a glossary is made to read from the one that stays, its note steps
@@ -185,31 +185,48 @@ THREE = [50, 57, 66, 67, 69]  # the three meanings' notes, F-sharp, G and A, hel
 
 
 # 1. One script: the opening, the one chapter with chords all through, E minor and its neighbours. The road: two ox carts' wooden
-#    wheels, low, going away up the road. The gate: the cart going in; a knock for each tag (one script, one set of measures, one axle
-#    width), a weight set down on the stall, and a pencil as the ruts are measured. The court's orders: the slips on their mat, a knock
-#    for the tag, paper for the card, a brush of ink as the king's word is struck and as the emperor's is written in, and the home
-#    note for the new word. The county: the scribes' brushes, and a wooden tock and the home note as the middle one checks the board.
-#    The board found: paper for its rules, a knock and an open fifth, low, as it's found in a well; paper and pins for the county's
-#    records, a pencil stroke for each time the new word was used, and one for the old; the home note and its third as the board is
-#    lit, a glossary that was used. Then air as its outline lifts and becomes the card on the floor, a knock as the card lands, and
-#    every tool reading from it; G major, open, under the title, and the mark
+#    wheels, low, going away up the road. The gate: the cart going in. Close on the seller's table, the film's notes for its meanings
+#    come in with the tags: A for his old state's measure, G, home, for Qin's; the two together, a second apart, for the doubt, over a
+#    suspended chord. Back at the gate: a knock for each tag as it's named (one script, one set of measures, one cart width) and a
+#    pencil as the ruts are measured; as the empire sets them by law, the old measure is put away (a low knock) and its A steps home to
+#    G, and the chords come home to E minor. The orders from the capital: the slips on their mat, a knock for the tag, paper for the
+#    card, a brush of ink as the king's order is struck and as the emperor's edict is written in, and the home note for the new words.
+#    The county: the scribes' brushes, and a wooden tock and the home note as the middle one checks the board; paper for its rules, each
+#    old word and the new one. The board found: a knock and an open fifth, low, as it's found in a well, and the county's own records
+#    laid out beside it (dry slips); pins for the tally cards, a pencil stroke for each time the new word was used, and one for the
+#    old; a knock and the home note for the same word as in the capital; the home note and its third as the board is lit, a glossary
+#    that was used. The floor: G major's neighbours, then suspended, for the university's same problem: each screen's note
+#    as its card comes up, A for the old words, G for the new, and the two together for the doubt; a breath as the one glossary comes
+#    in, in outline, and every tool reading from it; G major, open, under the title, and the mark
 S = 'script'
 bed(S, [EM9], 0, cq(S, 'one'))
-bed(S, [CMAJ7, DSUS4], cq(S, 'one'), cq(S, 'words'))
+bed(S, [CMAJ7], cq(S, 'one'), cq(S, 'pain'))
+bed(S, [AM9, DSUS4], cq(S, 'pain'), cq(S, 'need'))
+tMade = W(S, 'need', 'set them')
+comes(EM9, tMade, 5.0, 0.026)
 bed(S, [AM9, D69], cq(S, 'words'), cq(S, 'board'))
-bed(S, [EM9, CMAJ7], cq(S, 'board'), cq(S, 'used'))
-bed(S, [AM9, DSUS4], cq(S, 'used'), cq(S, 'bridge'))
-bed(S, [CADD9, GADD9], cq(S, 'bridge'), cq(S, 'breath'))
+bed(S, [EM9], cq(S, 'board'), cq(S, 'well'))
+bed(S, [CMAJ7], cq(S, 'well'), cq(S, 'used'))
+bed(S, [AM9, D69], cq(S, 'used'), cq(S, 'glossary'))
+bed(S, [EM9], cq(S, 'glossary'), cq(S, 'bridge'))
+bed(S, [CADD9, DSUS4], cq(S, 'bridge'), cq(S, 'needs'))
+bed(S, [GADD9], cq(S, 'needs'), cq(S, 'breath'))
 bed(S, [GOPEN], cq(S, 'breath') + 0.4, None, g=0.03, bassg=0.022)
-tGate, tMade, tSl = C(S, 'one', -0.2), W(S, 'one', 'made them'), C(S, 'words', -0.3)
+tGate, tStall, tBack, tSl = C(S, 'one', -0.2), C(S, 'pain', -0.3), C(S, 'need', -0.3), C(S, 'words', -0.3)
 wheels(-0.5, tGate + 0.9, 0.022, P(990), P(1010), 0)
 wheels(-0.5, tGate + 0.9, 0.01, P(1150), P(1110), 1)
-wheels(tGate - 0.4, tSl - tGate + 0.8, 0.016, P(720), P(960), 2)
-for k, x in enumerate([255, 1500, 720]):
-    knock(tMade + 0.35 * k + 0.05, 0.014, P(x), 250 + 14 * k)
-knock(tMade + 0.42, 0.012, P(1530), 190)
-pencil(tMade + 0.55, 0.009, P(720), 0.6)
-tKg, tEm = W(S, 'words', 'what had'), W(S, 'words', 'was now')
+wheels(tGate - 0.4, tStall - tGate + 0.8, 0.016, P(700), P(780), 2)
+wheels(tBack - 0.2, tSl - tBack + 0.5, 0.01, P(805), P(830), 3)
+tOld, tQin, tDoubt = W(S, 'pain', 'in one state'), W(S, 'pain', 'than in the next'), W(S, 'pain', 'in doubt', -0.2)
+knock(tOld + 0.05, 0.012, P(600)); wood(ROSE, tOld + 0.1, 0.012, P(600))
+knock(tQin + 0.05, 0.012, P(1320)); wood(VIO, tQin + 0.1, 0.012, P(1320))
+wood(ROSE, tDoubt + 0.15, 0.009, P(900)); wood(VIO, tDoubt + 0.15, 0.009, P(1020))
+tN = [W(S, 'need', 'script'), W(S, 'need', 'measures'), W(S, 'need', 'cart widths', 0.05)]
+for k, x in enumerate([205, 1510, 670]):
+    knock(tN[k] + 0.05, 0.014, P(x), 250 + 14 * k)
+pencil(tN[2] - 0.15, 0.009, P(670), 0.6)
+knock(tMade + 0.4, 0.012, P(1430), 170); home(ROSE, tMade + 0.15, 0.012, P(1460))
+tKg, tEm = W(S, 'words', "the king's"), W(S, 'words', 'became')
 slips(tSl + 0.1, 0.012, P(645))
 knock(tSl + 0.4, 0.014, P(645))
 paper(tKg - 0.2, 0.03, P(1460), 0.5)
@@ -217,22 +234,26 @@ inkbrush(tEm - 0.1, 0.5, 0.016, P(1300))
 tap(tEm + 0.3, 0.008, P(1250))
 inkbrush(tEm + 0.4, 0.45, 0.014, P(1330)); inkbrush(tEm + 0.85, 0.45, 0.012, P(1400))
 wood(VIO, tEm + 0.6, 0.014, P(1360))
-tCo, tCk = C(S, 'board', -0.4), W(S, 'board', 'kept those')
+tCo, tCk = C(S, 'board', -0.4), W(S, 'board', 'kept a list', -0.3)
 for k, (d, x) in enumerate([(0.3, 733), (0.9, 1670), (1.6, 733), (2.3, 1670)]):
     inkbrush(tCo + d, 0.35, 0.007, P(x))
 knock(tCk + 0.25, 0.012, P(1074), 210); wood(VIO, tCk + 0.3, 0.011, P(1074))
-tTh, tWl = W(S, 'board', 'on a wooden', -0.25), W(S, 'board', 'in a well')
-paper(tTh + 0.3, 0.024, P(690), 0.5)
+tRu, tWl = W(S, 'board', 'each old', -0.1), W(S, 'well', 'in an old')
+paper(tRu, 0.024, P(690), 0.5)
 knock(tWl + 0.05, 0.014, P(1090)); wood(40 + 12, tWl + 0.1, 0.014, P(690)); wood(47 + 12, tWl + 0.1, 0.011, P(690))
-tRc = C(S, 'used')
-paper(tRc, 0.02, P(1550), 0.4)
-pin(tRc + 0.6, 0.018, P(1550)); tallies(tRc + 0.65, 1.6, 34, 0.007, P(1550))
-pin(tRc + 2.4, 0.018, P(1550)); tallies(tRc + 2.45, 0.3, 1, 0.009, P(1550))
-tGl = W(S, 'used', 'The board was')
+tRs, tRc = W(S, 'well', 'with thousands'), W(S, 'used', 'use the new')
+slips(tRs + 0.1, 0.01, P(1550), 7)
+pin(tRc + 0.1, 0.018, P(1550)); tallies(tRc + 0.15, 1.6, 34, 0.007, P(1550))
+pin(tRc + 1.7, 0.018, P(1550)); tallies(tRc + 1.75, 0.3, 1, 0.009, P(1550))
+tSame = W(S, 'used', 'the same in')
+knock(tSame + 0.05, 0.012, P(1550)); wood(VIO, tSame + 0.12, 0.01, P(1550))
+tGl = C(S, 'glossary')
 wood(VIO, tGl + 0.15, 0.016, P(690)); wood(71, tGl + 0.4, 0.012, P(690))
-tBr, tEv = C(S, 'bridge', -0.45), W(S, 'bridge', 'every tool')
-glide(tBr - 0.2, 1.4, 0.014, P(690), P(960))
-knock(tBr + 1.05, 0.014, 0.0)
+tWord, tDiff, tOne, tEv = W(S, 'bridge', 'one word'), W(S, 'bridge', 'defined'), W(S, 'needs', 'one glossary'), W(S, 'needs', 'every tool')
+for i, x in enumerate([274, 516, 1042, 1284, 1810]):
+    wood(ROSE if i < 3 else VIO, tWord + 0.25 * i + 0.05, 0.011, P(x))
+wood(ROSE, tDiff + 0.4, 0.008, P(930)); wood(VIO, tDiff + 0.4, 0.008, P(990))
+air(tOne - 0.1, 0.8, 0.012, 0.0)
 every([(tEv - 0.2 + 1.4 * (1 + 0.08 * i) / 1.32, x) for i, x in enumerate([274, 516, 1042, 1284, 1810])])
 mark(G(S, 'breath', 0.2))
 # After the opening, music only from time to time: chords at a few turns, moments and pauses, and the marimba's notes as things appear

@@ -2,7 +2,7 @@
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
    Two wordless moments: the title, after the board; and the ending. */
 const BREATH={
-"script":{"hold":{"one":0.5,"words":0.4,"board":0.6,"used":0.6},"breathe":4.4},
+"script":{"hold":{"one":0.6,"pain":0.8,"need":0.7,"words":0.4,"board":0.6,"well":0.5,"used":0.8,"glossary":0.7,"bridge":0.6},"breathe":4.4},
 "five":{"hold":{"look":0.4,"platform":0.4,"tool":0.4,"three":0.8}},
 "none":{"hold":{"reason":0.4,"differ":0.6,"hidden":0.3,"unused":0.5,"monday":0.8,"none":0.8}},
 "trust":{"hold":{"meet":0.4,"not":0.6,"term":0.7,"dict":0.8}},

@@ -13,7 +13,8 @@
 const OW={loess:[226,194,134],loessDk:[196,158,100],loessLt:[240,218,170],field:[204,198,128],millet:[218,200,124],road:[222,196,148],rut:[150,116,78],
   rammed:[216,186,134],timber:[116,84,58],timberDk:[86,62,46],tile:[94,96,106],plaster:[234,216,178],floor:[204,176,130],mat:[224,200,142],
   wood:[204,168,118],woodDk:[150,112,74],black:[52,50,60],hemp:[204,190,158],brown:[124,94,66],slate:[80,88,106],cinnabar:[172,66,52],
-  bronze:[184,138,70],bronzeDk:[118,84,42],ox:[150,108,76],slip:[232,212,166],ink:[60,48,42],board:[214,184,132],boardOld:[112,82,58],mount:[74,84,102]};
+  bronze:[184,138,70],bronzeDk:[118,84,42],ox:[150,108,76],slip:[232,212,166],ink:[60,48,42],board:[214,184,132],boardOld:[112,82,58],mount:[74,84,102],
+  boxWood:[150,106,80],sack:[200,180,140],cloth:[226,214,184]};
 // the three meanings of award, in the series' colours (GV_MEAN, as Who decides paints them): violet (the new words, with
 // microcredentials), rose (the words before Monday), olive (degrees only); a wash for paper, an ink for words
 const OW_MEAN=[GV_MEAN.violet,GV_MEAN.rose,GV_MEAN.olive],OW_MEANINK=[GV_MEANINK.violet,GV_MEANINK.rose,GV_MEANINK.olive];
@@ -307,9 +308,10 @@ function ow_paintGate(ctx){const C=OW_GT,L=C.wall,[gw,gh]=C.gate,g=gw/2;wc_sky(c
   for(const [X,Z] of [[S.x0-0.35,S.z1+1.2],[S.x1+0.8,S.z1+1.2]])ow_q(ctx,[sp(X,0,Z),sp(X+0.07,0,Z),sp(X+0.07,2.32,Z),sp(X,2.32,Z)],OW.timber,1,{seed:56});
   for(const [X,Z,w,f] of [[S.x1+0.45,S.z1+0.75,0.34,0.9],[S.x1+0.62,S.z1+0.15,0.3,0.8]]){const [x,y]=sp(X,0,Z),k2=ow_ppm(C,Z),hw=w*k2,h=0.36*k2*f;
     ow_q(ctx,[[x-hw,y],[x+hw,y],[x+hw*1.12,y-h],[x-hw*1.12,y-h]],[176,140,92],1,{kind:"thing",seed:57+X});wc_wash(ctx,wc_ell(x,y-h,hw*1.12,h*0.22,20),[226,196,108],{kind:"thing",lw:1});}}
-// the parts of the stall nearer than its seller, drawn after him: the front poles and the awning's edge, and the low table with the
-// standard measure and the weight on it (lit: a glow round them)
-function ow_stallFront(ctx,lit){const C=OW_GT,S=C.stall,sp=(X,Y,Z)=>ow_pj(C,X,Y,Z),T=S.top;
+// the parts of the stall nearer than its seller, drawn after him: the front poles and the awning's edge, and the low table with his
+// old state's measure, Qin's measure and the weight on it (old: how much of the old one is still there, as it's put away; lit: a glow
+// round the standard ones)
+function ow_stallFront(ctx,lit,old){const C=OW_GT,S=C.stall,sp=(X,Y,Z)=>ow_pj(C,X,Y,Z),T=S.top;
   for(const X of [S.x0-0.35,S.x1+0.8])ow_q(ctx,[sp(X,0,S.z0-0.2),sp(X+0.07,0,S.z0-0.2),sp(X+0.07,2.2,S.z0-0.2),sp(X,2.2,S.z0-0.2)],OW.timber,1,{seed:58});
   const aw=[sp(S.x0-0.55,2.42,S.z1+1.3),sp(S.x1+1.0,2.42,S.z1+1.3),sp(S.x1+1.0,2.18,S.z0-0.3)];for(let i=0;i<=12;i++){const X=lerp(S.x1+1.0,S.x0-0.55,i/12);aw.push(sp(X,2.12-0.05*Math.sin(i/12*Math.PI*4)**2,S.z0-0.3));}
   ow_q(ctx,aw,[214,196,160],1,{seed:59,lw:1.2});
@@ -317,8 +319,76 @@ function ow_stallFront(ctx,lit){const C=OW_GT,S=C.stall,sp=(X,Y,Z)=>ow_pj(C,X,Y,
   for(const [X,Z] of [[S.x0+0.06,S.z0+0.02],[S.x1-0.12,S.z0+0.02]])ow_q(ctx,[sp(X,0,Z),sp(X+0.07,0,Z),sp(X+0.07,T,Z),sp(X,T,Z)],OW.woodDk,1,{seed:61});
   ow_q(ctx,[sp(S.x0,T,S.z0),sp(S.x1,T,S.z0),sp(S.x1,T,S.z1),sp(S.x0,T,S.z1)],wc_lit(OW.wood,0.1),1,{seed:62});
   ow_q(ctx,[sp(S.x0,T,S.z0),sp(S.x1,T,S.z0),sp(S.x1,T-0.06,S.z0),sp(S.x0,T-0.06,S.z0)],OW.woodDk,1,{seed:63});
-  const [mx,my]=sp(2.3,T,5.22),[wx,wy]=sp(2.72,T,5.18),k=ow_ppm(C,5.2);ow_measure(ctx,mx,my,0.24*k);ow_weight(ctx,wx,wy,0.18*k);
+  ow_tableCloth(ctx,[sp(S.x0,T-0.06,S.z0),sp(S.x1,T-0.06,S.z0),sp(S.x1,0.05,S.z0),sp(S.x0,0.05,S.z0)],7,64);
+  // his old measure, lowered off the back of the table as it goes
+  const [ox,oy]=sp(2.18,T,5.24),[mx,my]=sp(2.78,T,5.22),[wx,wy]=sp(3.26,T,5.18),k=ow_ppm(C,5.2);
+  if(old>0.01){const back=sp(2.18,T,S.z1)[1];ctx.save();ctx.beginPath();ctx.rect(-W,-H,3*W,back+H+2);ctx.clip();withA(ctx,clamp(old*2,0,1),()=>ow_oldMeasure(ctx,ox,oy+0.36*k*(1-old),0.31*k));ctx.restore();}
+  ow_measure(ctx,mx,my,0.24*k);ow_weight(ctx,wx,wy,0.18*k);
   if(lit>0)gv_halo(ctx,mx-0.24*k,my-0.34*k,wx-mx+0.42*k,0.4*k,GV.gold,0.7*lit);}
+// his old state's measure, from before the empire made them one: a wooden box, wider and taller than Qin's, bound with two bands, and
+// full of millet, struck level (seen a little from above, so the grain shows in its mouth)
+function ow_oldMeasure(ctx,x,y,w){const h=w*0.86,f=w*0.05,d=w*0.15,top=y-h,c=OW.boxWood;
+  wc_wash(ctx,[[x-w/2,y],[x+w/2,y],[x+w/2+f,top],[x-w/2-f,top]],c,{kind:"thing",lw:1.2,seed:73});
+  ctx.save();ctx.strokeStyle=rgba(wc_dim(c,0.34),0.5);ctx.lineWidth=Math.max(1,w*0.008);ctx.lineCap="round";
+  for(const u of [-1/6,1/6]){ctx.beginPath();ctx.moveTo(x+u*w,y-2);ctx.lineTo(x+u*(w+2*f),top+2);ctx.stroke();}ctx.restore();
+  for(const v of [0.16,0.76]){const yy=y-h*v,e=f*v,b=Math.max(1.5,w*0.03);wc_flat(ctx,[[x-w/2-e,yy-b],[x+w/2+e,yy-b],[x+w/2+e,yy+b],[x-w/2-e,yy+b]],OW.timberDk,1,"band");}
+  wc_wash(ctx,[[x-w/2-f,top],[x+w/2+f,top],[x+w/2+f*0.3,top-d],[x-w/2-f*0.3,top-d]],wc_dim(c,0.22),{kind:"thing",lw:1,seed:74});
+  wc_wash(ctx,[[x-w/2-f*0.6,top-1],[x+w/2+f*0.6,top-1],[x+w/2,top-d*0.8],[x-w/2,top-d*0.8]],OW.millet,{kind:"thing",lw:0.8,seed:75});
+  if(w>80){const R=wc_rng(77);ctx.save();ctx.fillStyle=rgba(wc_dim(OW.millet,0.22),0.5);for(let i=0;i<70;i++){const u=R(),v=R();ctx.beginPath();ctx.arc(x+(u-0.5)*(w+f*0.6)*(1-v*0.1),top-2-v*d*0.74,1.6,0,TAU);ctx.fill();}ctx.restore();}
+  ctx.save();ctx.strokeStyle=rgba(wc_lit(c,0.25),0.6);ctx.lineWidth=Math.max(1,w*0.012);ctx.beginPath();ctx.moveTo(x-w/2-f,top);ctx.lineTo(x+w/2+f,top);ctx.stroke();ctx.restore();}
+
+// a hemp cloth hanging over a table's front, as the stall's is: its folds falling, its hem a little uneven and darker (q: its four
+// corners, top left first; n: how many folds)
+function ow_tableCloth(ctx,q,n,seed){const [a,b,c2,d]=q,R=wc_rng(seed),bot=[];for(let i=0;i<=n*2;i++){const u=i/(n*2),j=(i%2?1:-1)*(1.5+R()*1.5);bot.push([lerp(d[0],c2[0],u),lerp(d[1],c2[1],u)+j]);}
+  const pts=[a,b].concat(bot.reverse());ow_q(ctx,pts,OW.cloth,1,{kind:"thing",lw:1,seed});const h=Math.hypot(d[0]-a[0],d[1]-a[1]);
+  ctx.save();wc_tr(ctx,pts);ctx.clip();ctx.lineCap="round";for(let i=1;i<n;i++){const u=(i+R()*0.4-0.2)/n,x0=lerp(a[0],b[0],u),y0=lerp(a[1],b[1],u),x1=lerp(d[0],c2[0],u),y1=lerp(d[1],c2[1],u);
+    ctx.strokeStyle=rgba(wc_dim(OW.cloth,0.28),0.32);ctx.lineWidth=Math.max(1,h*0.025);ctx.beginPath();ctx.moveTo(x0,y0+h*0.06);ctx.lineTo(x1,y1);ctx.stroke();
+    ctx.strokeStyle=rgba(wc_lit(OW.cloth,0.5),0.4);ctx.lineWidth=Math.max(1,h*0.03);ctx.beginPath();ctx.moveTo(x0+h*0.08,y0+h*0.1);ctx.lineTo(x1+h*0.08,y1);ctx.stroke();}
+  const hb=Math.max(2,h*0.09);ctx.fillStyle=rgba(wc_dim(OW.cloth,0.32),0.55);ctx.beginPath();ctx.moveTo(d[0],d[1]-hb);ctx.lineTo(c2[0],c2[1]-hb);ctx.lineTo(c2[0],c2[1]+4);ctx.lineTo(d[0],d[1]+4);ctx.closePath();ctx.fill();
+  ctx.restore();}
+
+/* ---------- the seller's table, close ---------- */
+// from the road, close on the stall: the town's wall behind it, soft with distance, and the sky over it; the awning's edge over us and
+// its front poles at either side; a sack and two baskets of millet on the mat. The table is the place's front layer (stallTable), drawn
+// over the seller; the measures stand on it, drawn with the frame, so they stay sharp as the camera closes in.
+const OW_ST={top:640,edge:660,x0:250,x1:1660,seller:960,s:1.45,old:[600,250],qin:[1320,190],weight:[1545,96]};
+function ow_paintStall(ctx){const S=OW_ST,wy0=196,wy1=720;wc_sky(ctx,wy0+20,29,{cx:240,cw:1400,cy:70,ch:60,clouds:3,sun:[1500,60]});
+  // the wall: rammed earth in its layers, the marks of the boards it was rammed between, the rain's streaks; lit along its top
+  wc_wash(ctx,wc_rect(-40,wy0,W+80,wy1-wy0+40),OW.rammed,{kind:"plaster",line:false,depth:0.6,seed:341});
+  ctx.save();ctx.beginPath();ctx.rect(-10,wy0,W+20,wy1-wy0+40);ctx.clip();ctx.lineCap="round";
+  for(let i=1;(wy0+i*15)<wy1+40;i++){const y=wy0+i*15,big=i%4===0;ctx.strokeStyle=rgba(wc_dim(OW.rammed,0.22),big?0.3:0.17);ctx.lineWidth=big?2:1.2;ctx.beginPath();ctx.moveTo(-10,y);ctx.lineTo(W+10,y+3);ctx.stroke();}
+  const R=wc_rng(343);for(let i=0;i<34;i++){const x=R()*W,y=wy0+30+R()*(wy1-wy0-60),l=30+R()*80;ctx.strokeStyle=rgba(wc_dim(OW.rammed,0.25),0.13);ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+4,y+l);ctx.stroke();}
+  const g=ctx.createLinearGradient(0,wy0,0,wy0+44);g.addColorStop(0,rgba([255,246,224],0.4));g.addColorStop(1,rgba([255,246,224],0));ctx.fillStyle=g;ctx.fillRect(0,wy0,W,44);ctx.restore();
+  // the trodden ground, and the reed mat the stall stands on
+  wc_wash(ctx,[[-60,wy1],[W+60,wy1],[W+60,H+60],[-60,H+60]],[226,206,158],{kind:"ground",depth:0.9,seed:345,line:false});
+  const mat=[[110,700],[1810,700],[1960,H+40],[-40,H+40]];ow_q(ctx,mat,OW.mat,1,{kind:"thing",lw:1.2,seed:347});
+  ctx.save();wc_tr(ctx,mat);ctx.clip();ctx.strokeStyle=rgba(wc_dim(OW.mat,0.2),0.34);ctx.lineWidth=2;for(let k=-14;k<=14;k++){ctx.beginPath();ctx.moveTo(960+k*61,700);ctx.lineTo(960+k*72,H+40);ctx.stroke();}
+    ctx.strokeStyle=rgba(wc_dim(OW.mat,0.12),0.22);ctx.lineWidth=5;for(let y=716;y<H+40;y+=26){ctx.beginPath();ctx.moveTo(-40,y);ctx.lineTo(W+40,y+2);ctx.stroke();}ctx.restore();
+  // a sack of millet at the left, tied at its neck
+  const sk=[[96,850],[300,850],[318,760],[296,640],[252,598],[228,560],[200,560],[178,598],[118,650],[90,760]];wc_contact(ctx,80,320,852,1,0.3);ow_q(ctx,sk,OW.sack,1,{kind:"thing",lw:1.3,seed:349});
+  ctx.save();ctx.strokeStyle=rgba(wc_dim(OW.sack,0.3),0.4);ctx.lineWidth=2;for(const [a,b,c2,d2] of [[150,640,130,820],[262,630,284,820],[206,610,210,830]]){ctx.beginPath();ctx.moveTo(a,b);ctx.quadraticCurveTo((a+c2)/2+8,(b+d2)/2,c2,d2);ctx.stroke();}ctx.restore();
+  ctx.save();ctx.strokeStyle=rgba([120,88,56],0.95);ctx.lineWidth=7;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(180,596);ctx.quadraticCurveTo(214,606,250,594);ctx.stroke();ctx.restore();
+  // two baskets of millet at the right, one behind the other
+  for(const [x,y,w,h,sd] of [[1745,760,190,150,351],[1800,880,230,170,353]]){wc_contact(ctx,x-w*0.6,x+w*0.6,y+2,1,0.28);ow_q(ctx,[[x-w/2,y],[x+w/2,y],[x+w*0.58,y-h],[x-w*0.58,y-h]],[176,140,92],1,{kind:"thing",seed:sd});
+    ctx.save();ctx.strokeStyle=rgba([128,98,60],0.45);ctx.lineWidth=2;for(let yy=y-h+16;yy<y-4;yy+=14){const e=(y-yy)/h*0.08;ctx.beginPath();ctx.moveTo(x-w*(0.5+e)+4,yy);ctx.lineTo(x+w*(0.5+e)-4,yy);ctx.stroke();}ctx.restore();
+    wc_wash(ctx,wc_ell(x,y-h,w*0.58,w*0.13,24),[226,196,108],{kind:"thing",lw:1,seed:sd+1});}
+  // the awning's edge over us, its shade on the wall under it, and the front poles that hold it
+  ctx.save();const sh=ctx.createLinearGradient(0,96,0,300);sh.addColorStop(0,rgba([90,70,50],0.2));sh.addColorStop(1,rgba([90,70,50],0));ctx.fillStyle=sh;ctx.fillRect(0,96,W,204);ctx.restore();
+  const aw=[[-40,-40],[W+40,-40],[W+40,84]];for(let i=0;i<=24;i++){const x=W+40-(W+80)*i/24;aw.push([x,84+12*Math.sin(i/24*Math.PI*8)**2]);}ow_q(ctx,aw,[214,196,160],1,{seed:355,lw:1.2});
+  wc_flat(ctx,wc_rect(-40,70,W+80,12),wc_dim([214,196,160],0.16),1,"hem");
+  for(const [x,sd] of [[58,357],[1868,359]]){ow_q(ctx,[[x-15,60],[x+15,60],[x+18,H+40],[x-18,H+40]],OW.timber,1,{seed:sd});
+    ctx.save();ctx.strokeStyle=rgba(wc_dim(OW.timber,0.3),0.4);ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(x-4,80);ctx.lineTo(x-6,H);ctx.stroke();ctx.restore();}}
+// the table, over the seller: its top, seen a little from above, its front plank, and a leg at each end
+function ow_paintStallTable(ctx){const S=OW_ST,x0=S.x0,x1=S.x1,T=S.top,E=S.edge,F=E+34;
+  wc_contact(ctx,x0-30,x1+30,812,1,0.34);
+  for(const lx of [x0+26,x1-58])ow_q(ctx,wc_rect(lx,F-4,32,808-F),OW.woodDk,1,{seed:361+lx});
+  ow_q(ctx,[[x0+14,T],[x1-14,T],[x1,E],[x0,E]],wc_lit(OW.wood,0.1),1,{kind:"thing",lw:1.2,seed:363});
+  ow_q(ctx,wc_rect(x0,E,x1-x0,F-E),OW.woodDk,1,{kind:"thing",lw:1.2,seed:365});
+  ow_tableCloth(ctx,[[x0+8,F-2],[x1-8,F-2],[x1-4,800],[x0+4,800]],13,367);
+  ctx.save();ctx.strokeStyle=rgba(wc_dim(OW.wood,0.24),0.32);ctx.lineWidth=1.5;for(const v of [0.35,0.7]){ctx.beginPath();ctx.moveTo(x0+30,T+(E-T)*v);ctx.lineTo(x1-30,T+(E-T)*v+1);ctx.stroke();}
+    ctx.strokeStyle=rgba(wc_dim(OW.woodDk,0.3),0.36);for(const v of [0.4,0.75]){ctx.beginPath();ctx.moveTo(x0+12,E+(F-E)*v);ctx.lineTo(x1-12,E+(F-E)*v);ctx.stroke();}ctx.restore();}
+// the seller's things on the table, close: his old state's measure, Qin's, and the bronze weight
+function ow_stallClose(ctx){const S=OW_ST,b=S.top+(S.edge-S.top)*0.55;ow_oldMeasure(ctx,S.old[0],b,S.old[1]);ow_measure(ctx,S.qin[0],b,S.qin[1]);ow_weight(ctx,S.weight[0],b-2,S.weight[1]);}
 // where the stall's measure is on screen, for its tag
 const ow_stallAt=()=>ow_pj(OW_GT,2.5,0,OW_GT.stall.z0);
 // an ox cart's axle: where its two wheels meet the ground, on screen
@@ -433,13 +503,19 @@ function ow_paintBoardThen(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,
   wc_wash(ctx,wc_rect(1640,760,220,130),[70,70,76],{kind:"thing",lw:1.4,seed:181});wc_flat(ctx,wc_ell(1720,820,52,30,24),[34,32,36],1,"ink");wc_wash(ctx,wc_ell(1810,800,24,24,18),[96,96,102],{kind:"thing",lw:1.2});}
 function ow_paintBoardFound(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),OW.mount,{kind:"plaster",line:false,seed:191});
   gv_lightGlow(ctx,700,-120,900);ow_boardArt(ctx,true);}
-// the rules, in English, on a card under the board: two of its 54 entries
+// the rules, in English, on a card under the board: two of its 54 entries, each old word and the new one to write instead
 function ow_ruleCard(ctx,a){if(a<=0.01)return;const x=150,y=662,w=1080,h=196;withA(ctx,a,()=>{ctx.save();ctx.translate(0,14*(1-a));wc_panel(ctx,x,y,w,h,{kind:"card",seed:201});
-  wc_T(ctx,"for “by royal command”, write “by imperial edict”",x+44,y+78,{w:700,size:36,col:WC_DARK});wc_T(ctx,"the king’s hunt is now the emperor’s hunt",x+44,y+142,{w:700,size:36,col:WC_DARK});ctx.restore();});}
-// the county's records, counted: the new word for the people against the old one, as tally cards
+  wc_T(ctx,"for “the king’s order”, write “the emperor’s edict”",x+44,y+78,{w:700,size:36,col:WC_DARK});wc_T(ctx,"for “the king’s hunt”, write “the emperor’s hunt”",x+44,y+142,{w:700,size:36,col:WC_DARK});ctx.restore();});}
+// the county's own records, found in the well with the board: slips dark with its water, whole and broken, on the mount beside it,
+// where the tally cards are pinned over them
+function ow_paintRecords(ctx){const R=wc_rng(231);[560,430,600,320,540,470,380,590,450].forEach((h,i)=>{const x=1322+i*52+R()*8,y=190+R()*36;
+  ctx.save();ctx.filter="blur(8px)";ctx.fillStyle="rgba(40,30,20,0.28)";ctx.fillRect(x+8,y+12,38,h);ctx.restore();
+  wc_wash(ctx,wc_rect(x,y,38,h),wc_dim(OW.boardOld,(i%3)*0.05),{kind:"page",lw:1.1,seed:232+i});ow_strokes(ctx,x+7,y+22,24,h-44,1,Math.round(h/30),0.5,240+i,[34,24,20]);});}
+// the county's records, counted: the new word for the people against the old one, as tally cards (with room under them for what
+// it meant: the same word as in the capital)
 function ow_tally(ctx,t,t0,t1,t2){const u0=fin(t,t0,0.4);if(u0<=0.01)return;const x=1300,w=500;
   withA(ctx,u0,()=>wc_T(ctx,"in the county’s records",x+w/2,140,{w:700,size:32,align:"center",col:WC_INK}));
-  [[t1,"the new word for “the people”","34 times",34,250],[t2,"the old one","once",1,560]].forEach(([tt,a,b,n,y],i)=>{const u=fin(t,tt,0.45);if(u<=0.01)return;const k=0.92+0.08*spring(u);
+  [[t1,"the new word for “the people”","34 times",34,196],[t2,"the old one","once",1,486]].forEach(([tt,a,b,n,y],i)=>{const u=fin(t,tt,0.45);if(u<=0.01)return;const k=0.92+0.08*spring(u);
     ctx.save();ctx.translate(x+w/2,y+130);ctx.scale(k,k);withA(ctx,clamp(u*2,0,1),()=>{wc_panel(ctx,-w/2,-130,w,260,{kind:"card",seed:211+i});gv_pin(ctx,0,-116,GV.red,1.2);
       wc_T(ctx,a,-w/2+30,-62,{w:700,size:30,col:WC_INK});wc_T(ctx,b,-w/2+30,4,{w:800,size:52,col:WC_DARK});
       // the tally itself: a pencil stroke for each, struck through in fives, drawn on as it's counted

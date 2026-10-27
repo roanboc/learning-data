@@ -5,10 +5,13 @@ const NARR={
  {"id":"v1847","gap":0.8,"text":"Vienna, 1847. The city's general hospital has two maternity clinics.","say":"Vienna, eighteen forty-seven. The city's general hospital has two maternity clinics."},
  {"id":"first","gap":0.8,"text":"In the first, where doctors and their students work, about one mother in ten dies of fever."},
  {"id":"second","gap":0.8,"text":"In the second, where midwives work, about one in thirty."},
+ {"id":"beg","gap":0.8,"text":"Women in labour beg not to be sent to the first clinic."},
+ {"id":"why","gap":0.8,"text":"Nobody can explain the difference. Something has to change."},
  {"id":"looks","gap":0.8,"text":"Ignaz Semmelweis, a young doctor in the first clinic, looks for what's different."},
  {"id":"autopsy","gap":0.8,"text":"The doctors and students come to the ward from the autopsy room. The midwives don't."},
  {"id":"wash","gap":0.8,"text":"So he has everyone wash their hands in chlorinated lime before they examine a mother."},
  {"id":"fall","gap":0.8,"text":"Within months, deaths in the first clinic fall to the level of the second."},
+ {"id":"home","gap":0.8,"text":"Hundreds of mothers who would have died go home."},
  {"id":"showed","gap":0.8,"text":"The fever showed in the beds. It started on the doctors' hands, on their way in."},
  {"id":"lesson","gap":0.8,"text":"Where a problem shows is often not where it starts."}]},
 "monday":{"name":"Still amber","lead":1.0,"tail":1.0,"vo":[

@@ -188,8 +188,10 @@ paper(rem, 0.014, -0.5, 0.3); shredder(rem + 0.6, 1.5, 0.022, -0.5); lid(rem + 1
 knock(th, 0.014, 0.5, 300); pencil(arrow, 0.7, 0.018, 0.4); tick(cross, 0.014, 0.4); tick(cross + 0.18, 0.014, 0.4)
 paper(y87, 0.024, 0.0, 0.8); piano(60, y87, 0.03, -0.1); piano(67, y87 + 0.5, 0.03, 0.1)
 pencil(y87 + 0.9, 0.6, 0.02, 0.0); line2(y87 + 0.95); paper(y87 + 1.6, 0.018, 0.0, 0.4); lid(y87 + 1.9, 0.022, -0.5); paper(y87 + 3.2, 0.016, -0.5, 0.25)
+num, priv = W('counted', 'y1987', 'country'), W('counted', 'y1987', 'privacy')
 for k in range(20):
-    tick(y87 + 2.0 + 0.13 * k, 0.008, 0.5)
+    tick(num + (priv - num - 0.2) * k / 20, 0.008, 0.5)
+lid(priv - 0.2, 0.02, -0.5, True); tick(priv + 0.65, 0.012, -0.5)
 piano(64, G('counted', 'one'), 0.032, 0.3); knock(G('counted', 'one', 0.1), 0.016, 0.5)
 piano(60, G('counted', 'another'), 0.032, -0.3); knock(G('counted', 'another', 0.1), 0.016, -0.5)
 air(morph, 1.6, 0.014, 0.0); line2(morph + 0.3); paper(morph + 0.4, 0.018, 0.0, 0.8)
@@ -279,8 +281,9 @@ for k, (r, dt) in enumerate([(0, 0.0), (3, 0.35), (4, 0.6), (1, 0.85), (0, 1.1),
 
 # 8. Read from the access list: a turn into December; the plan into the tray; the calendar's page; the high E as the access ends; air
 #    as a soft light runs down the access list, and as the names glide into their groups, a knock as each group's card comes in over
-#    them; binder 6 again, Yusuf's pen for each of his three lines, and a tick; on the table, E and C again for the two permissions, a
-#    knock for each tag, a falling third as the band settles, the chip set down; the strings and the mark under the end card
+#    them; binder 6 again, Yusuf's pen for each of his three lines, and a tick; the census of 1987 again, with its lift, and its line
+#    moving between the table's columns as in the first chapter; E and C again for the two permissions, a knock for each tag, a falling
+#    third as the band settles, the chip set down; the strings and the mark under the end card
 turn(CADD9, S0('grants'), (67, 72))
 paper(W('grants', 'plan', 'faculties'), 0.02, -0.6, 0.6); paper(W('grants', 'plan', 'fifteenth', 0.3), 0.016, -0.3, 0.25)
 ends = W('grants', 'plan', 'ends'); piano(76, ends, 0.024, -0.6); air(ends, 1.0, 0.008, -0.6)
@@ -289,12 +292,15 @@ two = W('grants', 'two', 'two'); air(two + 0.3, 1.4, 0.01, 0.0)
 for k in range(2):
     knock(two + 0.95 + 0.11 * k, 0.014, -0.3 + 0.6 * k, 300)
 paper(G('grants', 'policy', -0.4), 0.016, 0.1, 0.5)
-for lid_, word, off, sec in [('owners', 'Owners', 0.1, 1.6), ('platform', 'platform', 0, 1.6), ('platform', 'reviews', 0, 1.2)]:
+for lid_, word, off, sec in [('policy', 'owners', 0.1, 1.6), ('platform', 'platform', 0, 1.6), ('platform', 'reviews', 0, 1.2)]:
     pen(W('grants', lid_, word, off), sec, 0.013, 0.2)
 tick(W('grants', 'platform', 'reviews', 1.0), 0.016, -0.1)
-piano(64, G('grants', 'one'), 0.032, 0.3); knock(G('grants', 'one', 0.2), 0.014, -0.3)
-piano(60, G('grants', 'another'), 0.032, -0.3); knock(G('grants', 'another', 0.2), 0.014, 0.3)
-masked(W('grants', 'another', 'another', 0.6), 0.036, 0.3); chip(W('grants', 'classify', 'once', 0.05), 0.02, 0.3)
+tb8, m8 = G('grants', 'like', -0.3), W('grants', 'like', 'Planning', -0.1)
+paper(tb8, 0.016, 0.0, 0.5); piano(60, tb8 + 0.15, 0.026, -0.1); piano(67, tb8 + 0.65, 0.026, 0.1)
+air(m8, 1.6, 0.012, 0.0); line2(m8 + 0.3); paper(m8 + 0.4, 0.016, 0.0, 0.8)
+piano(64, W('grants', 'like', 'numbers', -0.2), 0.032, 0.3); knock(W('grants', 'like', 'numbers'), 0.014, -0.3)
+piano(60, W('grants', 'like', 'learners', -0.2), 0.032, -0.3); knock(W('grants', 'like', 'learners'), 0.014, 0.3)
+masked(W('grants', 'like', 'privacy', 0.6), 0.036, 0.3); chip(W('grants', 'classify', 'once', 0.05), 0.02, 0.3)
 endc = G('grants', 'breath', -0.2); strings(CMAJ9, endc - 1.0, E('grants') - endc + 2.0, 0.026)
 mark(endc + 0.7)
 

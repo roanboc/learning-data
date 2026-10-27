@@ -11,10 +11,11 @@
 
 /* ---------- colours ---------- */
 // the past: the hospital's ochre and stone, its plaster and flagstones, dark oak doors, iron beds, grey blankets, white enamel; today:
-// the leak's blue-grey and the bucket's tin (the learning team's soft apricot walls are the series', GV_ROOM.learn)
+// the leak's blue-grey and the bucket's tin; the warning's amber and the learning team's soft apricot walls are the series' (GV.amber,
+// GV_ROOM.learn)
 const FW={ochre:[238,214,166],stone:[218,208,188],plaster:[236,226,204],dado:[190,172,144],flag:[202,192,172],door:[120,86,58],
   iron:[70,72,82],sheet:[248,246,240],blanket:[150,152,162],enamel:[246,246,242],lime:[226,232,228],wood:[150,106,70],walnut:[110,74,50],
-  leak:[106,140,172],tin:[170,178,190],cotton:[232,222,196],amber:[232,164,40],amberInk:[150,92,0]};
+  leak:[106,140,172],tin:[170,178,190],cotton:[232,222,196],amber:GV.amber,amberInk:GV.amberInk};
 // the skin of the hands at the basin, and the same skin after weeks of chlorinated lime
 const FW_SKIN=[234,196,166],FW_RAW=[226,150,130];
 
@@ -297,81 +298,20 @@ function fw_policy15(ctx,hi,note){const P=FW_PG;wc_T(ctx,"Data policies",P.x,150
   if(hi>0&&hi<1.05)fw_marker(ctx,P.x-14+(lw+28)*clamp(hi,0,1),P.y+6,-0.12,GV.green);}
 
 /* ---------- today: the scorecard ---------- */
-// the data quality scorecard on a screen, in plain words, as Rules that run draws it too: "last night's checks", the areas down the
-// side and the five dimensions across, and in each cell how many checks passed, of how many, on its wash: green, passed; amber, with
-// warnings; red, with a failure; grey and hatched, not checked; bare paper, no check of that kind. The words always say it too. Under
-// it, what didn't pass and whose it is, in sections ("Failed", "Warnings", "Not checked"), each only when it has lines. Each column is
-// as wide as its words; when they don't all fit across the page, a cell breaks after its count. The camera shows it in turns: the
-// whole page (too small to read, on purpose; the washes carry it), then close on a row and the lines under it.
-// A cell is "passed/total", then w (warnings), f (failed) or n (not checked), each with how many: "7/7w2", "6/7f1w2", "1/3n2"; ""
-// is no check of that kind. FW_SKA is the night before Yusuf opens binder 15 (the example project's checks of Tuesday 20 October 2026,
-// put in plain words): the two email checks warn on every row. FW_SKF is a night after the form's fix.
-const FW_SKD=["Completeness","Uniqueness","Validity","Consistency","Accuracy","All"];
+// the series' data quality scorecard (gv_scorecard, shared/src/rooms.js), with this film's nights and its one section. A cell is
+// "passed/total", then w (warnings), f (failed) or n (not checked), each with how many: "7/7w2", "6/7f1w2", "1/3n2"; "" is no check
+// of that kind. FW_SKA is the night before Yusuf opens binder 15 (the example project's checks of Tuesday 20 October 2026, put in
+// plain words): the two email checks warn on every row. FW_SKF is a night after the form's fix.
 const FW_SKA=[["Alumni","3/3","1/1","","1/1","","5/5"],["Course","","1/1","1/1","1/1","","3/3"],["Finance","1/1","4/4","2/2","1/1","1/1","9/9"],["HR","4/4","2/2","2/2","1/1","","9/9"],
   ["Learning","7/7","5/5","7/7w2","3/3","","22/22w2"],["Planning","","3/3","1/1","1/1","1/1","6/6"],["Registrar","9/9","4/4","5/5","2/2","","20/20"],
   ["Research","8/8","3/3","1/1","5/5","","17/17"],["Shared","1/1","1/1","","","","2/2"],["Student","21/21","16/16","8/8","18/18","","63/63"],["Wallet","","2/2","1/1","1/1","","4/4"],
   ["All","54/54","42/42","28/28w2","34/34","2/2","160/160w2"]];
 const FW_SKF=FW_SKA.map(r=>r.map(c=>c.replace(/w\d+/,"")));
-// a section under the table: its title, its state's colour, its lines (each check in plain words, its owner, its rows), and its
-// headings (heads: [heading, where it starts along the table], or false for none)
+// the section under the table: its title, its state (for its swatches), its lines (each check in plain words, its owner, its rows)
 const FW_SKW=[{title:"Warnings",state:"warn",rows:[["Short-course enrolments: emails as typed","Learning team","6"],["Short-course learners: emails as typed","Learning team","3"]]}];
-// where the table is on the screen (GV_SC): its left, its width, its headings' line, a row's height and a second line's, the words'
-// size, the room each side of a cell's words; each state's wash, how pale it is, and its ink
-const FW_SK={x:380,w:1160,y:200,rh:31,lh:24,sz:19,pad:12,heads:[["Check",0],["Owner",0.62],["Rows",0.9]]};
-const FW_SKST={pass:[GV.green,0.62,WC_INK],warn:[FW.amber,0.3,FW.amberInk],fail:[GV.red,0.36,GV.redInk],skip:[GV.grey,0.55,GV.greyInk]};
-function fw_skCell(s){const m=s?/^(\d+)\/(\d+)(.*)$/.exec(s):null;if(!m)return null;const n={};(m[3].match(/[wfn]\d+/g)||[]).forEach(k=>n[k[0]]=+k.slice(1));
-  const notes=[];if(n.f)notes.push(n.f+" failed");if(n.w)notes.push(n.w+(n.w>1?" warnings":" warning"));if(n.n)notes.push(n.n+" not checked");
-  return{main:m[1]+" of "+m[2],notes,state:n.f?"fail":n.n?"skip":n.w?"warn":"pass"};}
-// where everything goes, for the nights drawn (one, or two when one turns into the next): each column's left and width, each row's
-// top, height and words' line, the table's foot. Kept for each set of nights, as it's measured once
-const FW_SKL=new Map();
-function fw_skLay(ctx,nights){const key=JSON.stringify(nights);if(FW_SKL.has(key))return FW_SKL.get(key);const K=FW_SK,cells=nights.map(rows=>rows.map(r=>r.slice(1).map(fw_skCell))),
-    last=nights[0].length-1,wt=i=>i===last?800:600,one=c=>c?[[c.main,...c.notes].join(" · ")]:[],two=c=>c?[c.main,c.notes.join(" · ")]:[],
-    widths=f=>[Math.max(tw(ctx,"Area",K.sz,700),...nights[0].map((r,i)=>tw(ctx,r[0],K.sz,wt(i)))),
-      ...FW_SKD.map((d,j)=>Math.max(tw(ctx,d,K.sz,700),...cells.flatMap(rows=>rows.map((r,i)=>Math.max(0,...f(r[j]).map(s=>tw(ctx,s,K.sz,wt(i))))))))].map(v=>v+2*K.pad);
-  let cw=widths(one),wrap=false;if(cw.reduce((a,b)=>a+b,0)>K.w){cw=widths(two);wrap=true;}
-  const spare=Math.max(0,K.w-cw.reduce((a,b)=>a+b,0))/cw.length,cx=[K.x];cw=cw.map(v=>v+spare);cw.forEach((v,i)=>cx.push(cx[i]+v));
-  let top=K.y+K.rh*0.28;const rows=nights[0].map((_,i)=>{const h=K.rh+(wrap&&cells.some(r=>r[i].some(c=>c&&c.notes.length))?K.lh:0),r={top,h,base:top+K.rh*0.72};top+=h;return r;});
-  const L={cx,cw,rows,wrap,bottom:top};FW_SKL.set(key,L);return L;}
-// grey hatching over a cell that wasn't checked
-function fw_hatch(ctx,x,y,w,h,a){ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();ctx.strokeStyle=rgba(GV.greyInk,0.34*a);ctx.lineWidth=2;ctx.beginPath();
-  for(let k=-h;k<w;k+=10){ctx.moveTo(x+k,y+h);ctx.lineTo(x+k+h,y);}ctx.stroke();ctx.restore();}
-// the scorecard: o.rows the night (FW_SKA by default), o.date beside "last night's checks"; o.after, the next night, which it turns
-// into as o.mx goes 0 to 1 (the washes change all the way; the old words go in the first half and the new come in the second); o.p (0 to 1) fills it in, the headings first, then a wash in each cell as its count arrives; o.hi, a row lit
-// gold as o.hiA goes 0 to 1; o.sections under it (and o.afterSections, the next night's), and o.clear, said when there are none
-// ("Every check passed."). Returns where everything is (fw_skLay's, and L.sec: each section's title and lines, and its columns), so a
-// scene can light a cell or an owner
-function fw_scorecard(ctx,cam,o){o=o||{};const [x,y,w,h]=GV_SC,K=FW_SK,z=cam&&cam.z?cam.z:1,dz=s=>z*s<27?1:0,deco=dz(K.sz),rows=o.rows||FW_SKA,after=o.after,
-    e=after?easeCam(clamp(o.mx||0,0,1)):0,eo=1-clamp(e*2,0,1),en=clamp(e*2-1,0,1),p=o.p==null?1:clamp(o.p,0,1),secA=o.sections||[],
-    secB=after?(o.afterSections||[]):secA;let L;
-  gv_screen(ctx,x,y,w,h,"Data quality scorecard",q=>{L=fw_skLay(q,after?[rows,after]:[rows]);const nd=FW_SKD.length,N=rows.length*nd,hd=clamp(p*8,0,1);
-    withA(q,hd,()=>wc_T(q,"last night's checks"+(o.date?" · "+o.date:""),K.x+K.pad,K.y-46,{w:600,size:K.sz+3,col:WC_MUTED,deco:dz(K.sz+3)}));
-    if(o.hi!=null&&o.hiA>0.01){const r=L.rows[o.hi];gv_tint(q,K.x,r.top,K.w,r.h,GV.gold,0.55*o.hiA);}
-    withA(q,hd,()=>["Area",...FW_SKD].forEach((s,j)=>wc_T(q,s,j?L.cx[j]+L.cw[j]/2:K.x+K.pad,K.y,{w:700,size:K.sz,align:j?"center":"left",col:WC_MUTED,deco})));
-    // a cell's words, on one line or broken after its count
-    const words=(c,j,r,wt,a,col)=>{if(!c||a<=0.01)return;(L.wrap&&c.notes.length?[c.main,c.notes.join(" · ")]:[[c.main,...c.notes].join(" · ")]).forEach((s,k)=>
-      wc_T(q,s,L.cx[j]+L.cw[j]/2,r.base+k*K.lh,{w:wt,size:K.sz,align:"center",col,a,deco}));};
-    rows.forEach((row,i)=>{const r=L.rows[i],wt=i===rows.length-1?800:600;withA(q,hd,()=>wc_T(q,row[0],K.x+K.pad,r.base,{w:wt,size:K.sz,col:WC_DARK,deco}));
-      for(let j=1;j<=nd;j++){const A=fw_skCell(row[j]),B=after?fw_skCell(after[i][j]):A,u=clamp((p-0.12)/0.88*N-(i*nd+j-1),0,1);if(u<=0||(!A&&!B))continue;
-        const SA=A&&FW_SKST[A.state],SB=B&&FW_SKST[B.state],col=SA&&SB?mix(SA[0],SB[0],e):(SA||SB)[0],pale=SA&&SB?lerp(SA[1],SB[1],e):(SA||SB)[1],
-          wa=u*(SA&&SB?1:SA?1-e:e),bx=L.cx[j]+6,by=r.top+2,bw=L.cw[j]-12,bh=r.h-5;
-        withA(q,wa,()=>{q.save();q.globalCompositeOperation="multiply";q.fillStyle=rgba(wc_lit(col,pale),1);q.fillRect(bx,by,bw,bh);q.restore();});
-        const ha=u*((A&&A.state==="skip"?1-e:0)+(B&&B.state==="skip"?e:0));if(ha>0.01)fw_hatch(q,bx,by,bw,bh,ha);
-        if(!after||row[j]===after[i][j])words(A,j,r,wt,u,SA[2]);else{words(A,j,r,wt,u*eo,SA&&SA[2]);words(B,j,r,wt,u*en,SB&&SB[2]);}}});
-    // under the table: each section, its title and headings, and a line for each check with a swatch of its colour
-    const sections=(S,a)=>{const out=[];let ty=L.bottom+32;S.forEach(s=>{const st=FW_SKST[s.state],heads=s.heads===false?null:s.heads||K.heads,
-        hx=(heads||[[null,0]]).map(([,f],k)=>k?K.x+f*K.w:K.x+K.pad+32);let ry=ty;
-      withA(q,a,()=>{wc_T(q,s.title,K.x+K.pad,ty,{w:800,size:K.sz+3,col:WC_DARK,deco:dz(K.sz+3)});if(heads){ry+=30;heads.forEach(([hs],k)=>wc_T(q,hs,hx[k],ry,{w:700,size:K.sz,col:WC_MUTED,deco}));}});
-      const ys=s.rows.map((cells,k)=>{const yy=ry+K.rh*(k+1);withA(q,a,()=>{q.save();q.globalCompositeOperation="multiply";q.fillStyle=rgba(wc_lit(st[0],st[1]),1);
-          q.fillRect(K.x+K.pad,yy-K.sz*0.8,20,20);q.restore();cells.forEach((c,m)=>wc_T(q,c,hx[m]==null?hx[0]:hx[m],yy,{w:600,size:K.sz,col:m?WC_INK:WC_DARK,deco}));});return yy;});
-      out.push({title:ty,rows:ys,cols:hx});ty=(ys.length?ys[ys.length-1]:ry)+50;});return out;};
-    const same=secA===secB;L.sec=sections(secA,same?1:eo);L.secB=same?null:sections(secB,en);
-    const clr=same?(secA.length?0:1):(secA.length?0:eo)+(secB.length?0:en);
-    if(clr>0.01)wc_T(q,o.clear||"Every check passed.",K.x+K.pad,L.bottom+46,{w:700,size:K.sz+3,col:GV.greenInk,a:clr,deco:dz(K.sz+3)});},{titleSize:32,barH:54});
-  return L;}
-// where the camera looks for each turn: the whole page; then the learning row, near the top of the frame, with the lines under it,
-// above the captions
-const FW_SKV={all:[960,415,1.02],row:[960,FW_SK.y+5*FW_SK.rh+156,1.55]};
+// the series' table and its camera turns, by this film's names; the scorecard draws FW_SKA unless it's given another night
+const FW_SK=GV_SK,FW_SKV=GV_SKV;
+function fw_scorecard(ctx,cam,o){return gv_scorecard(ctx,cam,Object.assign({rows:FW_SKA},o));}
 
 /* ---------- today: Tom's desk, from above ---------- */
 // the learning team's desk from above, for the papers on it: pale beech with its grain, Tom's blue mug, a pencil, the edge of his

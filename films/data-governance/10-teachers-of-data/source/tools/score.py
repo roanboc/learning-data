@@ -286,26 +286,35 @@ def claps(t0, t1, g, pan):
 
 # =============================================================================================================================
 # 1. The mime before the fine: Bogotá, 1995, and a year on, in G. As the picture draws it: two cars pass, three roll up and stop on
-#    the stripes, a bassoon note as each stops; the oboe weaves between them with the people on foot; the cor anglais tiptoes as the
-#    mimes come down the side street, and the first one bows; whistles, and the first car backs off; the mime bows to the next driver,
-#    invites him back and shows him the way, and bows his thanks as the car goes; the third driver won't, and the mime shrugs; the
-#    officer writes a fine, on one low bassoon note, to applause. Then the three panels, one voice each, in their order; 1996 in
-#    held chords, the cars stopping behind the line; the teaching phrase as people understand the rule, copied as the people round
-#    them keep it; the fine, low, for the few; the light turns green and the cars go; and the mark under the title
+#    the stripes, a bassoon note as each stops; the oboe weaves between them with the people on foot; a car edges forward at a student
+#    crossing in front of it, and the danger is held on a bare fifth, until the oboe climbs the teaching phrase's first two notes, its
+#    question, as the city needs another way; the cor anglais tiptoes as the mimes come down the side street, and the first one bows;
+#    whistles, and the first car backs off; the mime bows to the next driver, invites him back and shows him the way, and bows his
+#    thanks as the car goes; the third driver won't, and the mime shrugs; the officer writes a fine, on one low bassoon note, to
+#    applause. Then the three panels, one voice each, in their order; 1996 in held chords, the cars stopping behind the line, and G,
+#    home, as people on foot cross in front of them; the teaching phrase as people understand the rule, copied as the people round
+#    them keep it, the question answered; the fine, low, for the few; the light turns green and the cars go; and the mark under the title
 cw = lambda lid, word, off=0: W('crossing', lid, word, off)
 cc = lambda lid, off=0: G('crossing', lid, off)
 drivers, zebra, weave = cw('stop', 'drivers stop'), cw('stop', 'zebra'), cw('stop', 'weave')
+danger, need, needEnd = cw('risk', 'dangerous'), cc('need'), END('crossing', 'need')
 mimes, around, whistled = cw('mayor', 'mimes'), cw('whistle', 'around'), cw('whistle', 'whistle')
 steps, word, invites, backUp = cw('mime', 'steps'), cw('mime', 'without a word'), cw('mime', 'invites'), cw('mime', 'back up')
 wont, officer, writes, applaud = cw('fine', "still won't"), cw('fine', 'a traffic officer'), cw('fine', 'writes'), cw('fine', 'applaud')
 last, cameLast, order = cc('last'), cw('last', 'came last'), cw('last', 'an order')
-y96, understand, around2, few, breath = cc('y96'), cw('most', 'understand'), cw('most', 'the people around'), cw('few', 'few'), cc('breath')
+y96, safe, understand, around2, few, breath = cc('y96'), cc('safe'), cw('most', 'understand'), cw('most', 'the people around'), cw('few', 'few'), cc('breath')
 # the opening: Bogotá, 1995, an open G on the bassoon and the cor anglais, as the light turns red
 chord({'bsn': 43, 'cor': 62}, 0.4, cc('b95', 1.9), 0.75, 'G', step=0.3, att=0.5)
 car_by(2.0, 12, 0.0034, -0.75, 0.75); car_by(2.46, 13, 0.0027, -0.6, 0.85)  # the two that pass while it's still green
 for t1, v, m, p in [(drivers - 0.2, 9, 43, -0.15), (drivers + 0.4, 9, 50, 0.05), (zebra + 0.3, 10, 43, -0.05)]:  # three stop on the stripes
     car_in(t1, v, 0.0075, p); stacc('bsn', m, t1 - 0.05, 0.8)
 figure('oboe', [67, 71, 69, 72, 71, 74], weave - 0.1, 0.19, 0.8, fall=0.94)  # people on foot weave between the cars
+# the cream car edges forward at the student in front of it (the same roll as a car backing off, the other way), and a bare fifth
+# comes in under the danger, E and B, the bassoon and the cor anglais held (a third would roughen it), the oboe on the phrase's first
+# note; as the city needs another way, the oboe climbs to its second, the question the phrase answers in 1996
+car_back(danger - 0.1, danger + 0.4, 0.75, 0.0085, px(880))
+chord({'bsn': 40, 'cor': 59}, danger - 0.05, needEnd + 0.5, 0.6, 'G', step=0.2, att=0.6, rel=0.5)
+line('oboe', [(danger + 0.5, needEnd + 0.15, 71, 1.0), (needEnd + 0.15, needEnd + 1.7, 74, 1.0)], 0.6, 'G', 0.8, att=0.7, rel=0.6)
 # the mimes come down the side street, the cor anglais on tiptoe; the one nearest the crossing bows to everyone
 m_in = mimes - 4.4; m_bow = walk_end(m_in, [[1.5, 31], [1.5, 16.0], [-0.9, 15.0]], 2.3) + 0.2
 for i, m in enumerate([62, 64, 66, 67, 69, 67, 66, 64]):
@@ -353,7 +362,9 @@ for t1, p in [(y96 + 0.4, -0.3), (y96 + 0.6, 0.4), (y96 + 0.9, -0.1), (y96 + 1.3
     car_in(t1, 8, 0.007, p, pre=0.2, idle=2.0, cut=y96 - 0.3)
 pen(y96 + 1.8, 0.007, 0.0, 1.0)  # the officer writes the one fine, and shuts his notebook
 flap(few - 0.4, 0.008, 0.0, 0.15)
-chord({'bsn': 48, 'cor': 64, 'oboe': 67}, y96 - 0.1, cc('most', 0.2), 0.7, 'G', step=0.2, att=0.6, rel=0.5)
+# C, then G, home, as people cross in front of the cars: the bassoon and the cor anglais step down into it, the oboe's G held through
+for inst, a, (m0, m1) in [('bsn', y96 - 0.1, (48, 47)), ('cor', y96 + 0.1, (64, 62)), ('oboe', y96 + 0.3, (67, 67))]:
+    line(inst, [(a, safe + 0.05, m0, 1.0), (safe + 0.05, cc('most', 0.2), m1, 1.0)], 0.7, 'G', 0.8, att=0.6, rel=0.5, tie=True)
 chord({'bsn': 50, 'cor': 66}, cc('most', 0.2), understand - 0.15, 0.6, 'G', step=0.1, att=0.4, rel=0.4)
 note('bsn', 43, understand - 0.15, around2 + 2.6 - understand, 0.65, 'G', att=0.35, rel=0.5)
 phrase('oboe', TEACH['G'], understand, 0.9, 'G')

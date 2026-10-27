@@ -10,6 +10,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Bogotá, 1995.",
 "In the city centre, drivers stop on the zebra crossings, and people on foot weave between the cars.":
 "En el centro de la ciudad, los conductores paran sobre las cebras, y los peatones se cuelan entre los carros.",
+"It's dangerous: more than a thousand people a year die on the city's roads.":
+"Es peligroso: más de mil personas al año mueren en las vías de la ciudad.",
+"Fines alone haven't changed the habit. The city needs another way.":
+"Las multas solas no han cambiado la costumbre. La ciudad necesita otra salida.",
 "The new mayor, Antanas Mockus, sends mimes into the streets.":
 "El nuevo alcalde, Antanas Mockus, manda mimos a las calles.",
 "When a car stops on a crossing, the people around it whistle.":
@@ -22,6 +26,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La multa seguía ahí. Pero llegaba al final, en un orden pensado para enseñar.",
 "By 1996, three drivers in four were keeping the crossings clear.":
 "Para 1996, tres de cada cuatro conductores dejaban libres las cebras.",
+"People on foot could cross in front of the cars, not between them.":
+"Los peatones podían cruzar por delante de los carros, no entre ellos.",
 "Most people keep a rule because they understand it, and because the people around them keep it.":
 "La mayoría cumple una regla porque la entiende, y porque la gente a su alrededor la cumple.",
 "The fine is for the few.":

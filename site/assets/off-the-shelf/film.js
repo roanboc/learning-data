@@ -442,11 +442,6 @@ const NARR={
  {"id":"for","gap":0.8,"text":"That's what governance is for: deciding who decides, and making sure each decision reaches the work."},
  {"id":"like","gap":0.8,"text":"Like the inspector at the market: a rule, a copy where the work happens, and someone who checks."},
  {"id":"mgmt","gap":0.8,"text":"Governance sets the rules and checks they're kept. Management does the work."}]},
-"wheel":{"name":"Governance at the centre","lead":1.0,"tail":1.0,"vo":[
- {"id":"body","gap":0.8,"text":"Data management has a body of knowledge: DAMA's.","say":"Data management has a body of knowledge: Dahma's."},
- {"id":"wheel","gap":0.8,"text":"It draws eleven areas as a wheel, with governance at the centre, where the others meet."},
- {"id":"others","gap":0.8,"text":"Others cover the same ground, or part of it: DCAM, ISO 8000 for data quality, and ISO/IEC 38505 for governing data.","say":"Others cover the same ground, or part of it: Dee-cam, eye-so eight thousand for data quality, and eye-so, I E C, thirty-eight five oh five, for governing data."},
- {"id":"takes","gap":0.8,"text":"This series takes what they agree on, and shows where it runs."}]},
 "listen":{"name":"Listen first","lead":1.0,"tail":1.0,"vo":[
  {"id":"ask","gap":0.8,"text":"Yusuf doesn't write a thirty-fifth policy. He asks everyone the same question: what slows you down?"},
  {"id":"jun","gap":0.8,"text":"For Jun, the rules arrive after the work is built."},
@@ -457,38 +452,39 @@ const NARR={
  {"id":"tools","gap":0.8,"text":"Governance is people's work. Tools can carry out what people agree, but they can't make them agree."}]},
 "runs":{"name":"Where does it run?","lead":1.4,"tail":1.0,"vo":[
  {"id":"takes","gap":0.8,"text":"So he opens the binder, with one question for every line: where does it run?"},
- {"id":"runs","gap":0.8,"text":"Some lines can run in the work itself, as a required field, a check, a tag or a test."},
+ {"id":"runs","gap":0.8,"text":"Some lines can run in the work itself, as a field no one can leave empty, a check that runs every night, or a label."},
  {"id":"owned","gap":0.8,"text":"Some are decisions: someone owns each one, and writes it down where the work can find it."},
  {"id":"go","gap":0.8,"text":"And some can go."}]},
-"enter":{"name":"Where decisions enter","lead":1.3,"tail":1.0,"vo":[
- {"id":"places","gap":0.8,"text":"And the work already has places for them."},
- {"id":"loop","gap":0.8,"text":"The data team builds in a loop of ten steps, from a question to a new version."},
- {"id":"pin","gap":0.8,"text":"Governance doesn't need another meeting. It needs a pin at the right steps:"},
- {"id":"pins","text":"a term when the question is asked, a classification at the source, an owner and a contract,"},
- {"id":"pins2","gap":0.8,"text":"a rule as a test, an approval at review, and a version when it changes."}]},
+"keep":{"name":"What's worth keeping","lead":1.3,"tail":1.0,"vo":[
+ {"id":"keep","gap":0.8,"text":"Behind every line that stays, there's something worth keeping, and someone to keep it."},
+ {"id":"rules","gap":0.8,"text":"Rules, each with an owner, that reach Jun before he builds."},
+ {"id":"words","gap":0.8,"text":"One glossary every report reads from, so Mei sees where her words are used."},
+ {"id":"classes","gap":0.8,"text":"A class for each kind of personal data, so Sam knows which columns to protect."},
+ {"id":"owners","gap":0.8,"text":"And a list of who owns what, so Planning knows who answers for each number."},
+ {"id":"decide","gap":0.8,"text":"Owners decide. Stewards keep it all up to date."},
+ {"id":"act","gap":0.8,"text":"The teams who do the work use it, and governance checks it's kept."}]},
 "series":{"name":"The series","lead":1.0,"tail":1.0,"vo":[
- {"id":"next","gap":0.8,"text":"Over nine more films, Yusuf takes the binder off the shelf, one kind of policy at a time."},
- {"id":"map","gap":0.8,"text":"Then three more design governance as a capability that lasts."},
- {"id":"tools","gap":0.8,"text":"And six show how to build each piece, with dbt and Databricks."},
+ {"id":"next","gap":0.8,"text":"Over nine more films, Yusuf follows one symptom at a time to what's worth keeping, and to who decides and acts."},
+ {"id":"map","gap":0.8,"text":"Then three draw it all as one model, on the university's architecture map."},
+ {"id":"tools","gap":0.8,"text":"And six build it, with dbt and Databricks."},
  {"id":"wish","gap":0.8,"text":"A policy that doesn't run anywhere is a wish."}]}
 };
 
-const VODUR={"measure/m1215": 2.845, "measure/quote": 5.828, "measure/repeat": 5.352, "measure/kings": 3.939, "measure/county": 8.459, "measure/worked": 2.012, "measure/three": 7.933, "shelf/starts": 4.229, "shelf/shelf": 5.754, "shelf/chart": 4.527, "shelf/council": 2.693, "shelf/brief": 3.754, "numbers/week": 2.214, "numbers/census": 5.46, "numbers/draft": 4.87, "numbers/which": 1.196, "decides/follow": 1.755, "decides/both": 2.801, "decides/monday": 5.217, "decides/before": 2.803, "decides/gov": 5.083, "decides/answers": 5.801, "decides/tbc": 1.953, "for/policy": 3.939, "for/doesnt": 3.568, "for/for": 5.76, "for/like": 5.484, "for/mgmt": 4.16, "wheel/body": 3.146, "wheel/wheel": 4.994, "wheel/others": 10.588, "wheel/takes": 3.181, "listen/ask": 6.231, "listen/jun": 2.899, "listen/mei": 3.051, "listen/sam": 3.332, "listen/plan": 2.006, "listen/binder": 4.132, "listen/tools": 5.806, "runs/takes": 4.424, "runs/runs": 5.647, "runs/owned": 4.831, "runs/go": 1.014, "enter/places": 1.837, "enter/loop": 4.584, "enter/pin": 4.036, "enter/pins": 5.363, "enter/pins2": 4.272, "series/next": 5.633, "series/map": 3.536, "series/tools": 4.007, "series/wish": 2.455};
+const VODUR={"measure/m1215": 2.845, "measure/quote": 5.828, "measure/repeat": 5.352, "measure/kings": 3.939, "measure/county": 8.459, "measure/worked": 2.012, "measure/three": 7.933, "shelf/starts": 4.229, "shelf/shelf": 5.754, "shelf/chart": 4.527, "shelf/council": 2.693, "shelf/brief": 3.754, "numbers/week": 2.214, "numbers/census": 5.46, "numbers/draft": 4.87, "numbers/which": 1.196, "decides/follow": 1.755, "decides/both": 2.801, "decides/monday": 5.217, "decides/before": 2.803, "decides/gov": 5.083, "decides/answers": 5.801, "decides/tbc": 1.953, "for/policy": 3.939, "for/doesnt": 3.568, "for/for": 5.76, "for/like": 5.484, "for/mgmt": 4.16, "listen/ask": 6.231, "listen/jun": 2.899, "listen/mei": 3.051, "listen/sam": 3.332, "listen/plan": 2.006, "listen/binder": 4.132, "listen/tools": 5.806, "runs/takes": 4.424, "runs/runs": 7.469, "runs/owned": 4.831, "runs/go": 1.014, "keep/keep": 4.562, "keep/rules": 3.424, "keep/words": 4.532, "keep/classes": 4.712, "keep/owners": 4.199, "keep/decide": 2.935, "keep/act": 3.384, "series/next": 7.074, "series/map": 4.511, "series/tools": 2.959, "series/wish": 2.455};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
-   Two wordless moments: the inspector's stamp, then the title; and the ending. */
+   Three wordless moments: the inspector's stamp, then the title; the floor, once everyone knows what to keep and who keeps it; and the ending. */
 const BREATH={
 "measure":{"hold":{"quote":0.6,"repeat":0.6,"kings":0.4,"county":0.8},"breathe":4.6},
 "shelf":{"hold":{"starts":0.4,"shelf":0.6,"chart":0.5}},
 "numbers":{"hold":{"census":0.4,"draft":0.5,"which":0.8}},
 "decides":{"hold":{"both":0.4,"before":0.6,"gov":0.6,"answers":0.4}},
 "for":{"hold":{"doesnt":0.6,"for":0.9,"like":0.5}},
-"wheel":{"hold":{"wheel":0.6}},
 "listen":{"hold":{"ask":0.6,"jun":0.5,"mei":0.5,"sam":0.6,"plan":0.5,"binder":0.6,"tools":1.0}},
 "runs":{"hold":{"takes":0.6,"runs":0.9,"owned":0.9,"go":1.0}},
-"enter":{"hold":{"places":0.5,"loop":1.0,"pin":0.6,"pins2":0.8},"breathe":2.2},
-"series":{"hold":{"next":0.5,"tools":0.6},"breathe":5.0}
+"keep":{"hold":{"keep":0.6,"owners":0.6,"decide":0.4,"act":0.8},"breathe":2.2},
+"series":{"hold":{"next":0.5,"map":0.4,"tools":0.6},"breathe":5.0}
 };
 
 /* ===== Shared components for the v4 film ===== */
@@ -1871,8 +1867,9 @@ function heldBook(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])
 
 /* ---------- colours ---------- */
 // what the colours mean: gold is governance's decisions (and, behind a person, the business side, as in the master data series); cyan
-// the technical side; green what runs in the work; grey what can go; red what nobody owns yet
-const GV={gold:[236,170,34],goldInk:[146,96,0],green:[40,160,96],greenInk:[22,120,68],grey:[148,156,170],greyInk:[88,94,108],red:[204,62,50],redInk:[176,40,34],
+// the technical side; green what runs in the work; grey what can go; red what nobody owns yet; amber a warning, something to look at
+// that hasn't failed (an orange, so it reads apart from gold beside it)
+const GV={gold:[236,170,34],goldInk:[146,96,0],green:[40,160,96],greenInk:[22,120,68],grey:[148,156,170],greyInk:[88,94,108],red:[204,62,50],redInk:[176,40,34],amber:[236,136,44],amberInk:[150,66,0],
   cyanInk:[24,104,168],wood:[198,152,106],woodDark:[146,104,72],oak:[222,186,138],cork:[208,166,114],metal:[166,172,184],bezel:[60,64,78],glass:[198,222,238],
   floor:[214,196,170],corridor:[230,224,212],ceiling:[246,242,234],chair:[84,92,112],paper:[253,252,248],screen:[248,250,252]};
 // each room's walls: governance warm cream, Planning sage, the registrar's office blue, the data team lilac, the platform team pale teal;
@@ -2053,30 +2050,39 @@ function gv_floorName(ctx,i,a){if(a<=0.01)return;const F=GV_FL,x=F.x(i),name=F.r
 // The data team's room: a window, the cork board where the reports go, the poster of the loop they build in, Jun's desk and two
 // screens.
 const GV_DT={fy:856,win:[70,150,330,440],board:[450,150,430,380],poster:[920,130,560,360],desk:[1470,668,430],mon:[[1490,474,180,126],[1690,474,180,126]]};
-function gv_paintData(ctx){const D=GV_DT,wall=GV_ROOM.data;gv_wallFloor(ctx,wall,D.fy,{seed:21,vx:1000});gv_lightGlow(ctx,980,0,560);
+function gv_paintData(ctx,o){const D=GV_DT,wall=GV_ROOM.data;gv_wallFloor(ctx,wall,D.fy,{seed:21,vx:1000});gv_lightGlow(ctx,980,0,560);
   gv_window(ctx,D.win[0],D.win[1],D.win[2],D.win[3],{wall,seed:12,tx:0.4});gv_cork(ctx,D.board[0],D.board[1],D.board[2],D.board[3]);
-  gv_poster(ctx,D.poster[0],D.poster[1],D.poster[2],D.poster[3]);
+  gv_poster(ctx,D.poster[0],D.poster[1],D.poster[2],D.poster[3],o);
   gv_chair(ctx,1690,D.desk[1]-128,{col:[96,84,120]});gv_desk(ctx,D.desk[0],D.desk[1],D.desk[2],D.fy+6,{});D.mon.forEach(m=>gv_monitor(ctx,m[0],m[1],m[2],m[3]));
   gv_plant(ctx,428,D.fy,0.6);}
 // the data team's poster: how they build, in ten steps round a loop (In the weeds of data crafting's loop, as they'd pin it up), from
 // a question to a new version. Drawn for a poster 1260 wide (the close-up) and scaled to any other size; gv_loopPos says where step i is.
+// The series' first two parts show no technical words, and a step's name ("review · ship") or mark ("PR") is one: so by default each
+// name is a grey bar for each word, as text reads from across a room, and each step shows its number. A film of the third part, which
+// builds it in the tools, passes {words:true} for the names and marks (to gv_paintData, gv_paintPosterClose or gv_poster).
 const GV_LOOPC=[96,160,176];
+// a name too far off to read: a rounded grey bar as long as each word, a dot for a "·", on the line where the words would sit
+function gv_wordBars(ctx,s,x,y,size,align){ctx.save();ctx.font=font(700,size);const sp=ctx.measureText(" ").width,ws=s.split(" "),
+  wd=ws.map(t=>t==="·"?size*0.24:ctx.measureText(t).width),tot=wd.reduce((p,q)=>p+q,0)+sp*(ws.length-1),hh=size*0.42,cy=y-size*0.34;
+  let bx=align==="center"?x-tot/2:align==="right"?x-tot:x;ctx.fillStyle=ctx.strokeStyle=rgba(WC_MUTED,0.46);ctx.lineWidth=hh;ctx.lineCap="round";
+  ws.forEach((t,i)=>{ctx.beginPath();if(t==="·"){ctx.arc(bx+wd[i]/2,cy,size*0.1,0,TAU);ctx.fill();}
+    else{ctx.moveTo(bx+hh/2,cy);ctx.lineTo(bx+Math.max(hh/2,wd[i]-hh/2),cy);ctx.stroke();}bx+=wd[i]+sp;});ctx.restore();}
 function gv_loopPos(i,x,y,w,h){const k=w/1260,an=-Math.PI/2+i/10*TAU;return[x+w/2+Math.cos(an)*330*k,y+h*450/810+Math.sin(an)*270*k];}
-function gv_loopArt(ctx,x,y,w,h){const k=w/1260,cx=x+w/2,cy=y+h*450/810;
+function gv_loopArt(ctx,x,y,w,h,o){const k=w/1260,cx=x+w/2,cy=y+h*450/810,words=!!(o&&o.words);
   wc_T(ctx,"How we build",cx,y+86*k,{w:800,size:50*k,align:"center",col:WC_DARK});
   // the loop: a pencil line round it, a chevron between each two steps, going round clockwise
   ctx.save();ctx.strokeStyle=rgba(wc_dim(GV_LOOPC,0.2),0.6);ctx.lineWidth=3.2*k;ctx.setLineDash([3*k,11*k]);ctx.lineCap="round";ctx.beginPath();ctx.ellipse(cx,cy,330*k,270*k,0,0,TAU);ctx.stroke();ctx.restore();
   for(let i=0;i<10;i++){const an=-Math.PI/2+(i+0.5)/10*TAU,px=cx+Math.cos(an)*330*k,py=cy+Math.sin(an)*270*k,d=Math.atan2(Math.cos(an)*270,-Math.sin(an)*330);
     ctx.save();ctx.translate(px,py);ctx.rotate(d);ctx.strokeStyle=rgba(wc_dim(GV_LOOPC,0.3),0.8);ctx.lineWidth=3.4*k;ctx.lineCap="round";ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(-7*k,-9*k);ctx.lineTo(4*k,0);ctx.lineTo(-7*k,9*k);ctx.stroke();ctx.restore();}
-  // each step: a chip with its mark, and its name outside the loop
-  STEPS10.forEach(([nm,sym],i)=>{const [sx,sy]=gv_loopPos(i,x,y,w,h),an=-Math.PI/2+i/10*TAU,c=Math.cos(an),s=Math.sin(an),r=30*k;
+  // each step: a chip with its mark (or its number), and its name (or its bars) outside the loop
+  STEPS10.forEach(([nm,sym],i)=>{const [sx,sy]=gv_loopPos(i,x,y,w,h),an=-Math.PI/2+i/10*TAU,c=Math.cos(an),s=Math.sin(an),r=30*k,mk=words?sym:String(i+1);
     wc_wash(ctx,wc_ell(sx,sy,r,r,28),wc_lit(GV_LOOPC,0.5),{kind:"thing",lw:1.4*Math.max(0.6,k),seed:40+i});
-    wc_T(ctx,sym,sx,sy+(sym.length>1?8:10)*k,{w:800,size:(sym.length>2?21:sym.length>1?24:28)*k,align:"center",col:wc_dim(GV_LOOPC,0.55)});
+    wc_T(ctx,mk,sx,sy+(mk.length>1?8:10)*k,{w:800,size:(mk.length>2?21:mk.length>1?24:28)*k,align:"center",col:wc_dim(GV_LOOPC,0.55)});
     const top=i===0,bot=i===5,al=top||bot?"center":c>0?"left":"right",nx=top||bot?sx:sx+(c>0?1:-1)*(r+16*k),ny=top?sy-r-16*k:bot?sy+r+40*k:sy+10*k;
-    wc_T(ctx,nm,nx,ny,{w:700,size:29*k,align:al,col:WC_INK});});}
+    if(words)wc_T(ctx,nm,nx,ny,{w:700,size:29*k,align:al,col:WC_INK});else gv_wordBars(ctx,nm,nx,ny,29*k,al);});}
 // the poster on the wall: paper, a pin in each top corner, the loop
-function gv_poster(ctx,x,y,w,h){const k=w/1260;ctx.save();ctx.filter="blur("+Math.max(2,8*k)+"px)";ctx.fillStyle="rgba(70,60,50,0.18)";ctx.fillRect(x+8*k,y+12*k,w,h);ctx.restore();
-  wc_wash(ctx,wc_rect(x,y,w,h),[251,250,245],{kind:"paper",lw:Math.max(1,1.6*k),seed:5});gv_loopArt(ctx,x,y,w,h);for(const px of [x+30*k,x+w-30*k])gv_pin(ctx,px,y+28*k,GV.red,Math.max(0.5,1.5*k));}
+function gv_poster(ctx,x,y,w,h,o){const k=w/1260;ctx.save();ctx.filter="blur("+Math.max(2,8*k)+"px)";ctx.fillStyle="rgba(70,60,50,0.18)";ctx.fillRect(x+8*k,y+12*k,w,h);ctx.restore();
+  wc_wash(ctx,wc_rect(x,y,w,h),[251,250,245],{kind:"paper",lw:Math.max(1,1.6*k),seed:5});gv_loopArt(ctx,x,y,w,h,o);for(const px of [x+30*k,x+w-30*k])gv_pin(ctx,px,y+28*k,GV.red,Math.max(0.5,1.5*k));}
 
 // The platform team's room: two racks of servers, a whiteboard of what's connected to what, a desk and two screens, a window.
 const GV_PF={fy:856,win:[1500,150,330,430],rack:[[80,250,170,606],[262,250,170,606]],board:[540,190,420,300],desk:[1000,668,520],mon:[[1060,470,190,130],[1290,470,190,130]]};
@@ -2106,8 +2112,8 @@ function gv_paintScreenDesk(ctx,wall){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRec
   const [x,y,w,h]=GV_SC;wc_part(ctx,[[x+w/2-40,y+h+12],[x+w/2+40,y+h+12],[x+w/2+52,912],[x+w/2-52,912]],GV.metal,1);wc_wash(ctx,wc_ell(x+w/2,918,190,22,30),GV.metal,{kind:"thing",lw:1.4});
   gv_monitor(ctx,x,y,w,h,{stand:false});
   wc_part(ctx,wc_rect(1660,960,420,160),[226,228,234],1);wc_wash(ctx,wc_ell(160,990,70,40,30),[236,240,244],{kind:"thing",lw:1.4});}
-function gv_paintPosterClose(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),GV_ROOM.data,{kind:"plaster",line:false,seed:75});
-  gv_lightGlow(ctx,960,-60,900);const [x,y,w,h]=GV_PC;gv_poster(ctx,x,y,w,h);}
+function gv_paintPosterClose(ctx,o){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),GV_ROOM.data,{kind:"plaster",line:false,seed:75});
+  gv_lightGlow(ctx,960,-60,900);const [x,y,w,h]=GV_PC;gv_poster(ctx,x,y,w,h,o);}
 
 // Planning's office: a big screen on the wall, a desk, a window.
 const GV_PL={fy:856,screen:[560,172,700,390],win:[1500,150,320,430],desk:[90,668,470]};
@@ -2460,6 +2466,80 @@ function gv_registerCover(ctx,x,y,w,h,title,sub,o){o=o||{};const col=o.col||[58,
   ctx.drawImage(c,x-20,y-20);const lx=x+w*0.2,ly=y+h*0.2,lw=w*0.68;
   wc_T(ctx,title,lx+lw/2,ly+64*k,{w:800,size:Math.max(30,40*k),col:WC_DARK,align:"center"});if(sub)wc_T(ctx,sub,lx+lw/2,ly+114*k,{w:600,size:Math.max(28,30*k),col:WC_MUTED,align:"center"});}
 
+/* ---------- the data quality scorecard several films share ---------- */
+// the data quality scorecard on a screen, in plain words, as Rules that run and Fixed where it starts draw it: "last night's checks",
+// the areas down the side and the five dimensions across, and in each cell how many checks passed, of how many, on its wash: green,
+// passed; amber, with warnings; red, with a failure; grey and hatched, not checked; bare paper, no check of that kind. The words always
+// say it too. Under it, what didn't pass and whose it is, in sections ("Failed", "Warnings", "Not checked"), each only when it has
+// lines. Each column is as wide as its words; when they don't all fit across the page, a cell breaks after its count. The camera shows
+// it in turns (GV_SKV): the whole page (too small to read, on purpose; the washes carry it), then close on a row and the lines under it.
+// A cell is "passed/total", then w (warnings), f (failed) or n (not checked), each with how many: "7/7w2", "6/7f1w2", "1/3n2"; ""
+// is no check of that kind. Each film keeps its own nights (a row for each area, then a last row for all of them) and sections.
+const GV_SKD=["Completeness","Uniqueness","Validity","Consistency","Accuracy","All"];
+// where the table is on the screen (GV_SC): its left, its width, its headings' line, a row's height and a second line's, the words'
+// size, the room each side of a cell's words, and a section's headings; each state's wash, how pale it is, and its ink
+const GV_SK={x:380,w:1160,y:200,rh:31,lh:24,sz:19,pad:12,heads:[["Check",0],["Owner",0.62],["Rows",0.9]]};
+const GV_SKST={pass:[GV.green,0.62,WC_INK],warn:[GV.amber,0.3,GV.amberInk],fail:[GV.red,0.36,GV.redInk],skip:[GV.grey,0.55,GV.greyInk]};
+function gv_skCell(s){const m=s?/^(\d+)\/(\d+)(.*)$/.exec(s):null;if(!m)return null;const n={};(m[3].match(/[wfn]\d+/g)||[]).forEach(k=>n[k[0]]=+k.slice(1));
+  const notes=[];if(n.f)notes.push(n.f+" failed");if(n.w)notes.push(n.w+(n.w>1?" warnings":" warning"));if(n.n)notes.push(n.n+" not checked");
+  return{main:m[1]+" of "+m[2],notes,state:n.f?"fail":n.n?"skip":n.w?"warn":"pass"};}
+// where everything goes, for the nights drawn (one, or two when one turns into the next): each column's left and width, each row's
+// top, height and words' line, the table's foot. Kept for each set of nights, as it's measured once
+const GV_SKL=new Map();
+function gv_skLay(ctx,nights){const key=JSON.stringify(nights);if(GV_SKL.has(key))return GV_SKL.get(key);const K=GV_SK,cells=nights.map(rows=>rows.map(r=>r.slice(1).map(gv_skCell))),
+    last=nights[0].length-1,wt=i=>i===last?800:600,one=c=>c?[[c.main,...c.notes].join(" · ")]:[],two=c=>c?[c.main,c.notes.join(" · ")]:[],
+    widths=f=>[Math.max(tw(ctx,"Area",K.sz,700),...nights[0].map((r,i)=>tw(ctx,r[0],K.sz,wt(i)))),
+      ...GV_SKD.map((d,j)=>Math.max(tw(ctx,d,K.sz,700),...cells.flatMap(rows=>rows.map((r,i)=>Math.max(0,...f(r[j]).map(s=>tw(ctx,s,K.sz,wt(i))))))))].map(v=>v+2*K.pad);
+  let cw=widths(one),wrap=false;if(cw.reduce((a,b)=>a+b,0)>K.w){cw=widths(two);wrap=true;}
+  const spare=Math.max(0,K.w-cw.reduce((a,b)=>a+b,0))/cw.length,cx=[K.x];cw=cw.map(v=>v+spare);cw.forEach((v,i)=>cx.push(cx[i]+v));
+  let top=K.y+K.rh*0.28;const rows=nights[0].map((_,i)=>{const h=K.rh+(wrap&&cells.some(r=>r[i].some(c=>c&&c.notes.length))?K.lh:0),r={top,h,base:top+K.rh*0.72};top+=h;return r;});
+  const L={cx,cw,rows,wrap,bottom:top};GV_SKL.set(key,L);return L;}
+// grey hatching over a cell that wasn't checked
+function gv_hatch(ctx,x,y,w,h,a){ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();ctx.strokeStyle=rgba(GV.greyInk,0.34*a);ctx.lineWidth=2;ctx.beginPath();
+  for(let k=-h;k<w;k+=10){ctx.moveTo(x+k,y+h);ctx.lineTo(x+k+h,y);}ctx.stroke();ctx.restore();}
+// the scorecard: o.rows the night, o.date beside "last night's checks"; o.after, the next night, which it turns into as o.mx goes 0 to
+// 1 (the washes change all the way; the old words go in the first half and the new come in the second); o.p (0 to 1) fills it in, the
+// headings first, then a wash in each cell as its count arrives; o.hi, a row lit gold as o.hiA goes 0 to 1; o.sections under it (and
+// o.afterSections, the next night's): each a title, a state ("fail", "warn" or "skip", for its swatches), its lines (each check in
+// plain words, its owner, its rows) and its headings (heads: [heading, where it starts along the table], or false for none); and
+// o.clear, said when there are none ("Every check passed."). o.scroll moves the page up by that much, under the screen's title bar,
+// so a scene can go from the table down to the lines under it (0, by default). Returns where everything is on the page (gv_skLay's,
+// L.sec: each section's title and lines, and its columns, and L.scroll: on the screen, everything is that much higher), so a scene
+// can light a cell or an owner
+function gv_scorecard(ctx,cam,o){o=o||{};const [x,y,w,h]=GV_SC,K=GV_SK,z=cam&&cam.z?cam.z:1,dz=s=>z*s<27?1:0,deco=dz(K.sz),rows=o.rows||[],after=o.after,
+    e=after?easeCam(clamp(o.mx||0,0,1)):0,eo=1-clamp(e*2,0,1),en=clamp(e*2-1,0,1),p=o.p==null?1:clamp(o.p,0,1),secA=o.sections||[],
+    secB=after?(o.afterSections||[]):secA,sc=o.scroll||0,barH=54;let L;
+  gv_screen(ctx,x,y,w,h,"Data quality scorecard",q=>{if(sc){q.save();q.beginPath();q.rect(x,y+barH,w,h-barH);q.clip();q.translate(0,-sc);}
+    L=gv_skLay(q,after?[rows,after]:[rows]);const nd=GV_SKD.length,N=rows.length*nd,hd=clamp(p*8,0,1);
+    withA(q,hd,()=>wc_T(q,"last night's checks"+(o.date?" · "+o.date:""),K.x+K.pad,K.y-46,{w:600,size:K.sz+3,col:WC_MUTED,deco:dz(K.sz+3)}));
+    if(o.hi!=null&&o.hiA>0.01){const r=L.rows[o.hi];gv_tint(q,K.x,r.top,K.w,r.h,GV.gold,0.55*o.hiA);}
+    withA(q,hd,()=>["Area",...GV_SKD].forEach((s,j)=>wc_T(q,s,j?L.cx[j]+L.cw[j]/2:K.x+K.pad,K.y,{w:700,size:K.sz,align:j?"center":"left",col:WC_MUTED,deco})));
+    // a cell's words, on one line or broken after its count
+    const words=(c,j,r,wt,a,col)=>{if(!c||a<=0.01)return;(L.wrap&&c.notes.length?[c.main,c.notes.join(" · ")]:[[c.main,...c.notes].join(" · ")]).forEach((s,k)=>
+      wc_T(q,s,L.cx[j]+L.cw[j]/2,r.base+k*K.lh,{w:wt,size:K.sz,align:"center",col,a,deco}));};
+    rows.forEach((row,i)=>{const r=L.rows[i],wt=i===rows.length-1?800:600;withA(q,hd,()=>wc_T(q,row[0],K.x+K.pad,r.base,{w:wt,size:K.sz,col:WC_DARK,deco}));
+      for(let j=1;j<=nd;j++){const A=gv_skCell(row[j]),B=after?gv_skCell(after[i][j]):A,u=clamp((p-0.12)/0.88*N-(i*nd+j-1),0,1);if(u<=0||(!A&&!B))continue;
+        const SA=A&&GV_SKST[A.state],SB=B&&GV_SKST[B.state],col=SA&&SB?mix(SA[0],SB[0],e):(SA||SB)[0],pale=SA&&SB?lerp(SA[1],SB[1],e):(SA||SB)[1],
+          wa=u*(SA&&SB?1:SA?1-e:e),bx=L.cx[j]+6,by=r.top+2,bw=L.cw[j]-12,bh=r.h-5;
+        withA(q,wa,()=>{q.save();q.globalCompositeOperation="multiply";q.fillStyle=rgba(wc_lit(col,pale),1);q.fillRect(bx,by,bw,bh);q.restore();});
+        const ha=u*((A&&A.state==="skip"?1-e:0)+(B&&B.state==="skip"?e:0));if(ha>0.01)gv_hatch(q,bx,by,bw,bh,ha);
+        if(!after||row[j]===after[i][j])words(A,j,r,wt,u,SA[2]);else{words(A,j,r,wt,u*eo,SA&&SA[2]);words(B,j,r,wt,u*en,SB&&SB[2]);}}});
+    // under the table: each section, its title and headings, and a line for each check with a swatch of its colour
+    const sections=(S,a)=>{const out=[];let ty=L.bottom+32;S.forEach(s=>{const st=GV_SKST[s.state],heads=s.heads===false?null:s.heads||K.heads,
+        hx=(heads||[[null,0]]).map(([,f],k)=>k?K.x+f*K.w:K.x+K.pad+32);let ry=ty;
+      withA(q,a,()=>{wc_T(q,s.title,K.x+K.pad,ty,{w:800,size:K.sz+3,col:WC_DARK,deco:dz(K.sz+3)});if(heads){ry+=30;heads.forEach(([hs],k)=>wc_T(q,hs,hx[k],ry,{w:700,size:K.sz,col:WC_MUTED,deco}));}});
+      const ys=s.rows.map((cells,k)=>{const yy=ry+K.rh*(k+1);withA(q,a,()=>{q.save();q.globalCompositeOperation="multiply";q.fillStyle=rgba(wc_lit(st[0],st[1]),1);
+          q.fillRect(K.x+K.pad,yy-K.sz*0.8,20,20);q.restore();cells.forEach((c,m)=>wc_T(q,c,hx[m]==null?hx[0]:hx[m],yy,{w:600,size:K.sz,col:m?WC_INK:WC_DARK,deco}));});return yy;});
+      out.push({title:ty,rows:ys,cols:hx});ty=(ys.length?ys[ys.length-1]:ry)+50;});return out;};
+    const same=secA===secB;L.sec=sections(secA,same?1:eo);L.secB=same?null:sections(secB,en);L.scroll=sc;
+    const clr=same?(secA.length?0:1):(secA.length?0:eo)+(secB.length?0:en);
+    if(clr>0.01)wc_T(q,o.clear||"Every check passed.",K.x+K.pad,L.bottom+46,{w:700,size:K.sz+3,col:GV.greenInk,a:clr,deco:dz(K.sz+3)});
+    if(sc)q.restore();},{titleSize:32,barH});
+  return L;}
+// where the camera looks for each turn: the whole page; then the learning row (the fifth), near the top of the frame, with the lines
+// under it, above the captions
+const GV_SKV={all:[960,415,1.02],row:[960,GV_SK.y+5*GV_SK.rh+156,1.55]};
+
 /* ---------- people moving ---------- */
 // someone walking from x0 to x1 from t0 at v px a second: where they are, the step's bob and swing, when they arrive, which way they face
 function gv_walk(t,t0,x0,x1,v){const L=Math.abs(x1-x0),T_=Math.max(0.3,L/(v||300)),u=clamp((t-t0)/T_,0,1),e=u<0.5?2*u*u:1-2*(1-u)*(1-u),moving=u>0&&u<1,ph=(t-t0)*Math.PI*3.4;
@@ -2487,8 +2567,8 @@ function gv_end(ctx,S,t,t0,title,line,n){const oA=fin(t,t0,1.0),tA=fin(t,t0+0.6,
    university's own places (the series' rooms.js): the campus, Yusuf's office, the floor of offices, Planning, the registrar's office,
    the data team's room, and his desk from above. The pictures are the film's own things: the charter and the jugs, the king's
    standards, the bushels, the scale, the inspector's case and the Act; the shelf of binders, the score, the chart, the minutes, the two
-   reports, the glossary's term, the government's manual, binder 12 and the highlighters, DAMA's book and its wheel, the loop of ten
-   steps and the cards. Every name starts with os_ or OS_. */
+   reports, the glossary's term, the government's manual, binder 12 and the highlighters, the newest DMBOK on Yusuf's desk, the gold
+   cards of what's worth keeping, and the cards for the films to come, on Noor's map among them. Every name starts with os_ or OS_. */
 
 /* ---------- 1215: the market by the town wall ---------- */
 // the ground, the market cross (its steps' top is where the crier stands), the two stalls' tables
@@ -2834,57 +2914,13 @@ function os_sticky(ctx,cx,cy,w,h,rot,lines,size,land,write){if(land<=0)return;co
     const n=lines.join("").length,y0=-h/2+h*0.15+(h*0.85-lines.length*size*1.2)/2+size*0.92;let before=0;
     lines.forEach((s,i)=>{const p=clamp((write*n-before)/s.length,0,1);before+=s.length;wc_hand(ctx,s,-w/2+40,y0+i*size*1.2,{size,w:700,col:GV.redInk,p});});});
   ctx.restore();}
-/* ---------- today: governance at the centre ---------- */
-// binder 12 closed on the desk, from above: its cover and label, the pages' edge, Yusuf's two notes sticking out as flags
-function os_closed12(ctx){ctx.drawImage(wc_kept("closed12",W,H,q=>{const col=os_bindCol(11),x=300,y=170,w=560,h=740;
-    q.save();q.filter="blur(14px)";q.fillStyle="rgba(70,50,30,0.3)";q.fillRect(x+14,y+20,w,h);q.restore();
-    for(const [fy,r] of [[330,-0.06],[520,0.05]]){q.save();q.translate(x+w+20,fy);q.rotate(r);wc_wash(q,wc_rect(-70,-28,110,56),OS_STICK,{kind:"page",lw:1.1,seed:fy});q.restore();}
-    wc_flat(q,wc_rect(x+16,y+h-6,w-20,16),wc_dim(GV.paper,0.08),1,"pages");wc_flat(q,wc_rect(x+w-6,y+16,16,h-20),wc_dim(GV.paper,0.08),1,"pages");
-    wc_wash(q,wc_rrPts(x,y,w,h,16),col,{kind:"cover",lw:1.6,seed:21});wc_flat(q,wc_rect(x,y+8,54,h-16),wc_dim(col,0.2),1,"spine");
-    wc_wash(q,wc_rect(x+150,y+170,300,190),WC_CARD,{kind:"page",lw:1.3,seed:22});}),0,0);
-  wc_T(ctx,"12",600,435,{w:800,size:84,align:"center",col:WC_DARK});wc_T(ctx,"Data definitions",600,500,{w:600,size:30,align:"center",col:WC_MUTED});}
-// DAMA's book, closed, from above: a plain cloth cover, its title, the pages' edge; kept, drawn round its middle at (x,y)
-function os_dmbok(ctx,x,y){const w=620,h=820;ctx.drawImage(wc_kept("dmbok",w+80,h+80,q=>{q.translate(40,40);q.save();q.filter="blur(14px)";q.fillStyle="rgba(70,50,30,0.32)";q.fillRect(14,20,w,h);q.restore();
-    wc_flat(q,wc_rect(16,h-8,w-20,20),wc_dim(GV.paper,0.08),1,"pages");wc_flat(q,wc_rect(w-8,16,20,h-20),wc_dim(GV.paper,0.08),1,"pages");
-    wc_wash(q,wc_rrPts(0,0,w,h,10),[44,92,108],{kind:"cover",lw:1.6,seed:23});wc_flat(q,wc_rect(0,6,40,h-12),[34,74,88],1,"spine");
-    for(const ry of [196,540])wc_flat(q,wc_rect(90,ry,w-150,5),[226,214,180],0.9,"rule");}),x-w/2-40,y-h/2-40);
-  const cx=x+16;wc_T(ctx,"DAMA-DMBOK",cx,y-120,{w:800,size:58,align:"center",col:[246,238,214]});
-  wc_T(ctx,"Data Management",cx,y+10,{w:600,size:38,align:"center",col:[226,232,226]});wc_T(ctx,"Body of Knowledge",cx,y+62,{w:600,size:38,align:"center",col:[226,232,226]});}
-// a page of the book, close: the paper filling the frame, the fold into the spine on the left, the next pages' edges on the right
-function os_paintPage(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),[250,247,238],{kind:"paper",line:false,seed:91});
-  const g=ctx.createLinearGradient(0,0,170,0);g.addColorStop(0,"rgba(90,70,50,0.34)");g.addColorStop(0.45,"rgba(90,70,50,0.1)");g.addColorStop(1,"rgba(90,70,50,0)");ctx.fillStyle=g;ctx.fillRect(0,0,170,H);
-  ctx.save();ctx.strokeStyle="rgba(150,136,112,0.35)";ctx.lineWidth=1.5;for(let i=0;i<6;i++){ctx.beginPath();ctx.moveTo(W-14+i*2.6,0);ctx.lineTo(W-14+i*2.6,H);ctx.stroke();}ctx.restore();}
-// the wheel the book draws: ten areas of data management round data governance, the centre, where they meet; each area's name outside it
-const OS_WH={x:960,y:448,r0:122,r1:290,rl:342},OS_WHC=[[188,202,230],[204,196,230]];
-const OS_AREAS=[["data","architecture"],["data modelling","& design"],["data storage","& operations"],["data security"],["data integration","& interoperability"],["documents","& content"],
-  ["reference","& master data"],["data warehousing","& BI"],["metadata"],["data quality"]];
-const os_whAng=k=>-Math.PI/2+k*TAU/10;
-// an area's shape, a ring's slice, about the wheel's middle at (cx,cy)
-function os_wedgePts(k,cx,cy){const R=OS_WH,a0=os_whAng(k)-TAU/20+0.014,a1=os_whAng(k)+TAU/20-0.014,p=[];
-  for(let i=0;i<=12;i++){const a=lerp(a0,a1,i/12);p.push([cx+Math.cos(a)*R.r1,cy+Math.sin(a)*R.r1]);}for(let i=12;i>=0;i--){const a=lerp(a0,a1,i/12);p.push([cx+Math.cos(a)*(R.r0+8),cy+Math.sin(a)*(R.r0+8)]);}return p;}
-function os_wedgeC(k){const s=OS_WH.r1+30;return wc_kept("wedge"+k,2*s,2*s,q=>wc_wash(q,os_wedgePts(k,s,s),OS_WHC[k%2],{kind:"thing",lw:1.4,seed:30+k}));}
-// o: area(k) brings each area in (0 to 1); centre lights data governance; joins draws the gold where the areas meet it; ring goes round
-// the whole wheel; dim pales every area but hi; outline draws round area hi (a number) or the centre ("centre"); labels and fade take
-// the names and the areas away again
-function os_wheel(ctx,o){const R=OS_WH,s=R.r1+30,lab=o.labels==null?1:o.labels,fd=o.fade==null?1:o.fade;
-  OS_AREAS.forEach((lines,k)=>{const u=o.area(k);if(u<=0)return;const sp=0.6+0.4*spring(u),a=clamp(u*2.5,0,1)*(1-(o.dim||0)*(k===o.hi?0:0.55))*fd;
-    ctx.save();ctx.translate(R.x,R.y);ctx.scale(sp,sp);withA(ctx,a,()=>ctx.drawImage(os_wedgeC(k),-s,-s));ctx.restore();
-    const an=os_whAng(k),c=Math.cos(an),sn=Math.sin(an),ax=R.x+c*R.rl,ay=R.y+sn*R.rl,al=Math.abs(c)<0.3?"center":c>0?"left":"right",n=lines.length,
-      y0=al!=="center"?ay-(n-1)*18+10:sn<0?ay-(n-1)*38-6:ay+32;
-    if(lab>0.01)withA(ctx,clamp(u*2,0,1)*lab,()=>lines.forEach((l,i)=>wc_T(ctx,l,ax,y0+i*38,{w:i?600:700,size:30,align:al,col:WC_INK})));});
-  if(o.joins>0&&fd>0.01){const e=easeCam(clamp(o.joins,0,1)),r=lerp(R.r1,R.r0,e);ctx.save();ctx.strokeStyle=rgba(GV.goldInk,0.85*fd);ctx.lineWidth=6;ctx.lineCap="round";
-    for(let k=0;k<10;k++){const b=os_whAng(k)-TAU/20;ctx.beginPath();ctx.moveTo(R.x+Math.cos(b)*R.r1,R.y+Math.sin(b)*R.r1);ctx.lineTo(R.x+Math.cos(b)*r,R.y+Math.sin(b)*r);ctx.stroke();}ctx.restore();}
-  if(o.centre>0){const k=0.7+0.3*spring(o.centre);ctx.save();ctx.translate(R.x,R.y);ctx.scale(k,k);withA(ctx,clamp(o.centre*2,0,1),()=>{wc_glowAt(ctx,0,0,R.r0*1.6,[255,226,140],0.45);
-    ctx.drawImage(wc_kept("whCentre",2*R.r0+40,2*R.r0+40,q=>wc_wash(q,wc_ell(R.r0+20,R.r0+20,R.r0-2,R.r0-2,40),wc_lit(GV.gold,0.2),{kind:"thing",lw:1.6,seed:44})),-R.r0-20,-R.r0-20);
-    wc_T(ctx,"data",0,-6,{w:800,size:34,align:"center",col:GV.goldInk});wc_T(ctx,"governance",0,36,{w:800,size:34,align:"center",col:GV.goldInk});});ctx.restore();}
-  if(o.ring>0){ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.9);ctx.lineWidth=4;ctx.setLineDash([16,12]);ctx.lineCap="round";ctx.beginPath();
-    ctx.arc(R.x,R.y,R.r1+16,-Math.PI/2,-Math.PI/2+TAU*easeCam(clamp(o.ring,0,1)));ctx.stroke();ctx.restore();}
-  if(o.outline>0){ctx.save();ctx.globalAlpha*=clamp(o.outline,0,1);ctx.strokeStyle=rgba(WC_DARK,0.85);ctx.lineWidth=5;ctx.lineJoin="round";ctx.beginPath();
-    if(o.hi==="centre")ctx.arc(R.x,R.y,R.r0+4,0,TAU);else os_wedgePts(o.hi,R.x,R.y).forEach(([px,py],i)=>i?ctx.lineTo(px,py):ctx.moveTo(px,py));ctx.closePath();ctx.stroke();ctx.restore();}}
-
-// a decision, on a small gold card: a pin, typed lines; and a green tick once someone has checked it's kept (tick, 0 to 1)
-function os_decision(ctx,x,y,k,tick){ctx.save();ctx.translate(x,y);ctx.scale(k,k);wc_panel(ctx,-76,-56,152,112,{kind:"card",wash:GV.gold,washA:0.5,seed:7});
-  gv_lines(ctx,-50,-14,100,3,22,0.9);gv_pin(ctx,0,-42,GV.red,0.9);ctx.restore();if(tick>0)wc_tick(ctx,x+58,y+30,62,GV.green,tick,9);}
+// a decision, on a small gold card: a pin, typed lines, and a line added under them by hand in pencil, written left to right (amend, 0
+// to 1); and a green tick once someone has checked it's kept (tick, 0 to 1)
+function os_decision(ctx,x,y,k,tick,amend){ctx.save();ctx.translate(x,y);ctx.scale(k,k);wc_panel(ctx,-76,-56,152,112,{kind:"card",wash:GV.gold,washA:0.5,seed:7});
+  gv_lines(ctx,-50,-14,100,3,22,0.9);gv_pin(ctx,0,-42,GV.red,0.9);
+  if(amend>0){const n=Math.max(1,Math.round(30*clamp(amend,0,1)));ctx.strokeStyle=rgba(WC_PENCIL,0.85);ctx.lineWidth=2.6;ctx.lineCap="round";ctx.lineJoin="round";ctx.beginPath();
+    for(let i=0;i<=n;i++){const u=i/30,px=-50+84*u,py=44+2.4*Math.sin(u*29)+1.2*Math.sin(u*71);i?ctx.lineTo(px,py):ctx.moveTo(px,py);}ctx.stroke();}
+  ctx.restore();if(tick>0)wc_tick(ctx,x+58,y+30,62,GV.green,tick,9);}
 
 /* ---------- today: listen first ---------- */
 // a fresh page for a thirty-fifth policy, on the desk from above: its heading and nothing else; th (0 to π) turns it over, unwritten,
@@ -2900,10 +2936,10 @@ function os_page35(ctx,th){const P=OS_P35,c=Math.cos(th),lift=Math.sin(clamp(th,
 const OS_ANS=[["Jun",["rules arrive","after the build"]],["Mei",["never sees where","the words go"]],["Sam",["no one says","which column"]],
   ["Planning",["which number","to trust?"]]];
 const OS_ANSC={w:330,h:262,x:[440,790,1140,1490],y:570,rot:[-0.03,0.02,-0.012,0.028]};
-function os_asked(ctx){ctx.save();ctx.translate(960,254);ctx.rotate(-0.012);wc_panel(ctx,-330,-66,660,132,{kind:"card",seed:61});gv_pin(ctx,0,-52,GV.red,1.2);
+function os_asked(ctx,y){ctx.save();ctx.translate(960,y||254);ctx.rotate(-0.012);wc_panel(ctx,-330,-66,660,132,{kind:"card",seed:61});gv_pin(ctx,0,-52,GV.red,1.2);
   wc_hand(ctx,"What slows you down?",0,22,{size:50,w:700,align:"center",col:WC_INK});ctx.restore();}
-function os_ansCard(ctx,k,u){if(u<=0)return;const A=OS_ANSC,[name,lines]=OS_ANS[k],s=lerp(1.12,1,easeCam(clamp(u,0,1)));
-  ctx.save();ctx.translate(A.x[k],A.y-14*(1-easeCam(clamp(u,0,1))));ctx.rotate(A.rot[k]);ctx.scale(s,s);withA(ctx,clamp(u*2.5,0,1),()=>{
+function os_ansCard(ctx,k,u,y){if(u<=0)return;const A=OS_ANSC,[name,lines]=OS_ANS[k],s=lerp(1.12,1,easeCam(clamp(u,0,1)));
+  ctx.save();ctx.translate(A.x[k],(y||A.y)-14*(1-easeCam(clamp(u,0,1))));ctx.rotate(A.rot[k]);ctx.scale(s,s);withA(ctx,clamp(u*2.5,0,1),()=>{
     wc_panel(ctx,-A.w/2,-A.h/2,A.w,A.h,{kind:"card",seed:70+k});gv_pin(ctx,0,-A.h/2+18,GV.red,1.1);
     wc_hand(ctx,name,-A.w/2+30,-A.h/2+92,{size:42,w:800,col:WC_DARK});lines.forEach((l,i)=>wc_hand(ctx,l,-A.w/2+30,-A.h/2+156+i*48,{size:34,w:600,col:WC_INK}));});
   ctx.restore();}
@@ -2915,20 +2951,22 @@ function os_ansSmall(ctx){const [bx,by]=GV_OFF.board;for(let k=0;k<4;k++){const 
 function os_dataBoard(ctx){const [bx,by]=GV_DT.board;[[bx+8,by+42,160,124,0],[bx+178,by+66,80,92,1],[bx+268,by+42,160,124,0]].forEach(([x,y,w,h,mon],k)=>{
   wc_panel(ctx,x,y,w,h,{kind:"card",wash:mon?GV.gold:null,washA:0.35,seed:90+k});gv_pin(ctx,x+w/2,y+10,GV.red,0.7);
   if(mon)gv_lines(ctx,x+16,y+36,w-32,3,16,0.9);else{gv_lines(ctx,x+18,y+34,w-60,2,14,0.9);ctx.fillStyle=rgba(OS_NUM,0.75);ctx.fillRect(x+34,y+82,w-68,14);wc_tick(ctx,x+w-26,y+64,30,GV.green,1,4);}});}
-// Jun's screen, close: the data team's tests on award. The first is the rule Mei and Jun agreed on Monday: it runs (run, 0 to 1), then
-// passes (pass), and the agreement behind it lights gold (gold); the second has no test, as there's no agreed rule to test (row2).
-function os_tests(ctx,run,pass,gold,row2){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,"Tests · award",q=>{const r1=y+262,r2=y+486,cx=x+96;
+// Jun's screen, close: the rules on award, in words. The first is the rule Mei and Jun agreed on Monday: it's checked (run, 0 to 1), it
+// holds (pass), and the agreement behind it lights gold (gold); the second can't be checked, as there's no agreed rule yet (row2).
+// Each badge ends a set way in from the screen's right edge.
+function os_rules(ctx,run,pass,gold,row2){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,"Rules on award",q=>{const r1=y+262,r2=y+486,cx=x+96,
+    bx=s=>x+w-56-Math.round(tw(q,s,30,700)+28);
   if(gold>0)gv_tint(q,x+28,r1-86,w-56,160,GV.gold,0.7*gold);
-  // the first test: a ring while it runs, a green tick once it passes
+  // the first rule: a ring while it's checked, a green tick once it holds
   if(pass>0)wc_tick(q,cx,r1-20,58,GV.green,pass,9);
   else{q.save();q.lineWidth=6;q.lineCap="round";q.strokeStyle=rgba(WC_MUTED,0.35);q.beginPath();q.arc(cx,r1-20,24,0,TAU);q.stroke();
     if(run>0){const a=run*TAU*1.6;q.strokeStyle=rgba(GV.cyanInk,0.9);q.beginPath();q.arc(cx,r1-20,24,a-1.8,a);q.stroke();}q.restore();}
   wc_T(q,"award counts microcredentials",x+160,r1-30,{w:700,size:38,col:WC_DARK});wc_T(q,"of 6 credit points or more",x+160,r1+22,{w:600,size:38,col:WC_INK});
-  if(pass>0)withA(q,clamp(pass*2,0,1),()=>wc_badge(q,x+w-196,r1-22,"passed",{size:30,role:GV.green}));
-  // the second: no test yet, only the question, dashed
+  if(pass>0)withA(q,clamp(pass*2,0,1),()=>wc_badge(q,bx("checked every night"),r1-22,"checked every night",{size:30,role:GV.green}));
+  // the second: no rule yet, only the question, dashed
   if(row2>0)withA(q,row2,()=>{q.save();q.lineWidth=5;q.setLineDash([9,9]);q.strokeStyle=rgba(WC_MUTED,0.7);q.beginPath();q.arc(cx,r2-20,24,0,TAU);q.stroke();q.restore();
     wc_T(q,"award mapped to the",x+160,r2-30,{w:700,size:38,col:WC_MUTED});wc_T(q,"government's definition",x+160,r2+22,{w:600,size:38,col:WC_MUTED});
-    wc_badge(q,x+w-330,r2-22,"no agreed rule yet",{size:30,role:GV.red});});},{titleSize:32,barH:54});}
+    wc_badge(q,bx("no agreed rule yet"),r2-22,"no agreed rule yet",{size:30,role:GV.red});});},{titleSize:32,barH:54});}
 
 /* ---------- today: where does it run? ---------- */
 // binder 12 opening on the desk, from above (u, 0 to 1): its cover lies over the right-hand page, then swings over the rings to the left
@@ -2953,12 +2991,13 @@ function os_paintPolicy(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H
   const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"rgba(255,250,236,0)");g.addColorStop(1,"rgba(150,130,100,0.1)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
 // what policy 12 says, line by line; where each line runs (0: in the work, green; 1: a decision someone owns, gold; 2: it can go, grey),
 // and what Yusuf writes beside it
-const OS_LINES=[["12.1","Each term has a named owner."],["12.2","Each term used in a report is in the glossary."],["12.3","Terms about people are marked as personal data."],
-  ["12.4","Reports count by the glossary's definitions."],["12.5","Each term's owner decides its definition,","and how it maps to the government's."],
+const OS_LINES=[["12.1","Each term has a named owner."],["12.2","Each term used in a report is in the glossary."],["12.3","Reports count by the glossary's definitions."],
+  ["12.4","Terms about people are marked as personal data."],["12.5","Each term's owner decides its definition,","and how it maps to the government's."],
   ["12.6","Each decision is written down with the term."],["12.7","Staff take care to use terms correctly."]];
-const OS_WHERE=[0,0,0,0,1,1,2],OS_NOTES=["a required field","a check","a tag","a test","award: Mei decides","in the glossary",null];
+const OS_WHERE=[0,0,0,0,1,1,2],OS_NOTES=["a field no one can leave empty","checked every night","checked every night","a label","award: Mei decides",
+  "in the glossary",null];
 const OS_HIC=[GV.green,GV.gold,GV.grey],OS_HINK=[GV.greenInk,GV.goldInk,GV.greyInk],OS_KEY=["runs in the work","a decision someone owns","can go"];
-const OS_PG={x:300,tx:384,y0:290,dy:78,lh:44,size:34,note:1350};
+const OS_PG={x:300,tx:384,y0:290,dy:78,lh:44,size:34,note:1290};
 // a highlighter's stroke behind a line of text, as long as the text, drawn from the left as p goes from 0 to 1; kept per colour.
 // h: how tall it is (a line of the page, or a swatch in his key)
 function os_hiStroke(ctx,x,y,w,col,p,seed,h=64){if(p<=0)return;const c=wc_kept("hiStroke|"+col+"|"+seed,1200,70,q=>wc_wash(q,wc_resample(wc_rect(8,10,1180,48),12),col,{kind:"swatch",line:false,a:0.5,seed}));
@@ -2977,29 +3016,47 @@ function os_policy(ctx,hi,note,key,strike){const P=OS_PG;wc_T(ctx,"Policy 12 · 
   OS_KEY.forEach((s,j)=>{const u=key(j);if(u<=0)return;const ky=84+j*44;os_hiStroke(ctx,P.note,ky,44,OS_HIC[j],clamp(u*2,0,1),70+j,34);
     wc_hand(ctx,s,P.note+70,ky,{size:30,w:700,col:OS_HINK[j],p:clamp(u*2-0.6,0,1)});});}
 
-/* ---------- today: where decisions enter ---------- */
+/* ---------- today: what's worth keeping ---------- */
 // a warm light coming up on something (a, 0 to 1), as on the shelf when he listened
 function os_warm(ctx,cx,cy,r,a){if(a<=0.01)return;ctx.save();ctx.globalCompositeOperation="soft-light";wc_glowAt(ctx,cx,cy+50,r*1.1,[255,190,90],0.9*a);
   ctx.globalCompositeOperation="screen";wc_glowAt(ctx,cx,cy,r,[255,222,160],0.42*a);ctx.restore();}
-// the steps of the data team's loop where a decision enters: the step, the words that name it, and what Yusuf writes there
-const OS_PINS=[[0,"a term",["a term"]],[1,"a classification",["a classification"]],[3,"an owner",["an owner","a contract"]],[4,"a rule",["a rule"]],
-  [7,"an approval",["an approval"]],[9,"a version",["a version"]]];
-// the loop going round on the poster (x,y,w,h), from the first step (u 0) past the last (u 0.9) and back to the first (u 1): a firmer
-// line along it, and each step darkening, with a little lift, as the line reaches it
-function os_loopRun(ctx,x,y,w,h,u){if(u<=0)return;const k=w/1260,cx=x+w/2,cy=y+h*450/810,a0=-Math.PI/2,gap=0.13;
-  ctx.save();ctx.strokeStyle=rgba(wc_dim(GV_LOOPC,0.15),0.8);ctx.lineWidth=6*k;ctx.lineCap="round";
-  for(let i=0;i<10;i++){const s=a0+i/10*TAU+gap,e=Math.min(a0+(i+1)/10*TAU-gap,a0+u*TAU);if(e<=s)break;ctx.beginPath();ctx.ellipse(cx,cy,330*k,270*k,0,s,e);ctx.stroke();}
-  ctx.restore();
-  for(let i=0;i<10;i++){const v=clamp((u-i/10)*12,0,1);if(v<=0)break;const [sx,sy]=gv_loopPos(i,x,y,w,h),r=30*k*(1+0.14*Math.sin(Math.PI*clamp(v*1.4,0,1)));
-    ctx.save();ctx.globalCompositeOperation="multiply";ctx.fillStyle=rgba(wc_lit(GV_LOOPC,0.25),0.6*v);ctx.beginPath();ctx.arc(sx,sy,r,0,TAU);ctx.fill();ctx.restore();}}
-// at step i of the poster (x,y,w,h): a gold pin pushed in at its edge (u), a gold ring drawn round it (ring), and what Yusuf writes
-// there, a line at a time (lab(j), 0 to 1): under the step's name or, for the first step, inside the loop
-function os_goldPin(ctx,i,x,y,w,h,u,ring,lines,lab){const k=w/1260,[sx,sy]=gv_loopPos(i,x,y,w,h),c=Math.cos(-Math.PI/2+i/10*TAU);
-  if(ring>0){ctx.save();ctx.strokeStyle=rgba(GV.gold,0.95);ctx.lineWidth=Math.max(2,5*k);ctx.lineCap="round";ctx.beginPath();
-    ctx.arc(sx,sy,38*k,-Math.PI/2,-Math.PI/2+TAU*easeCam(clamp(ring,0,1)));ctx.stroke();ctx.restore();}
-  if(u>0){const d=easeCam(clamp(u,0,1));withA(ctx,clamp(u*3,0,1),()=>gv_pin(ctx,sx+26*k,sy-30*k-(1-d)*40*k,GV.gold,lerp(2.4,1.6,d)*k));}
-  if(!lab)return;const top=i===0,al=top?"center":c>0?"left":"right",nx=top?sx:sx+(c>0?1:-1)*(i===1||i===9?100:46)*k,ny=top?sy+80*k:sy+56*k;
-  lines.forEach((s,j)=>{const p=lab(j);if(p>0)wc_hand(ctx,s,nx,ny+j*38*k,{size:32*k,w:700,align:al,col:GV.goldInk,p});});}
+// a stack of gold index cards, held in both hands (in the figure's units, like the series' heldPins)
+function os_heldGold(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my+6);
+  for(let i=3;i>=0;i--){cx.save();cx.translate(i*4-6,-i*6);cx.rotate(-0.05+i*0.03);cx.fillStyle="rgba(70,50,30,0.18)";rr(cx,-58,-36,124,80,6);cx.fill();
+    cx.fillStyle=rgba(mix(GV.gold,[255,255,255],0.45),1);rr(cx,-62,-42,124,80,6);cx.fill();cx.strokeStyle=rgba(wc_dim(GV.gold,0.45),0.75);cx.lineWidth=2;cx.stroke();cx.restore();}
+  cx.fillStyle=rgba(wc_dim(GV.gold,0.5),0.55);for(let i=0;i<3;i++)cx.fillRect(-44,-24+i*15,i===2?46:80,4);cx.restore();
+  fingers(cx,P_,[[mx-62,my+14],[mx+62,my+10]]);}
+// what's worth keeping, under each answer on Yusuf's board, so that what slows each one down stops: its name on a gold card, and a sign
+// in pencil. The board makes room for them: his question goes higher (ask), the answers under it (ans), the gold cards under those (y).
+const OS_KEEP=[["Rules, each","with an owner"],["One glossary"],["Classes of","personal data"],["Who owns","what"]];
+const OS_KB={ask:150,ans:394,y:684,w:330,h:206,rot:[0.02,-0.014,0.018,-0.022]};
+// the signs: a list ticked off, and its owner; a book; a label in the plum of personal data; a chart with someone in each row
+function os_keepSign(ctx,k,x,y){ctx.save();ctx.translate(x,y);ctx.lineWidth=2.4;ctx.lineJoin="round";ctx.lineCap="round";
+  const ink=rgba(WC_PENCIL,0.85),fill=rgba(wc_lit(GV.gold,0.55),1),paper=rgba(WC_CARD,1);
+  const box=(bx,by,bw,bh,f)=>{rr(ctx,bx,by,bw,bh,3);ctx.fillStyle=f||paper;ctx.fill();ctx.strokeStyle=ink;ctx.stroke();};
+  const head=(hx,hy,r)=>{ctx.beginPath();ctx.arc(hx,hy,r,0,TAU);ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=ink;ctx.stroke();
+    ctx.beginPath();ctx.arc(hx,hy+r*2.5,r*1.5,Math.PI*1.15,Math.PI*1.85);ctx.stroke();};
+  const line=(x0,x1,ly)=>{ctx.beginPath();ctx.moveTo(x0,ly);ctx.lineTo(x1,ly);ctx.strokeStyle=ink;ctx.stroke();};
+  if(k===0){for(let i=0;i<3;i++){box(0,i*17,12,12);line(20,i===2?58:72,i*17+6);}
+    ctx.beginPath();for(let i=0;i<3;i++){ctx.moveTo(2,i*17+6);ctx.lineTo(5,i*17+10);ctx.lineTo(11,i*17+1);}ctx.strokeStyle=rgba(GV.greenInk,0.95);ctx.stroke();head(98,12,9);}
+  else if(k===1){box(6,2,50,48,fill);ctx.fillStyle=rgba(wc_dim(GV.gold,0.35),1);ctx.fillRect(7,3,8,46);box(24,12,24,12);line(24,48,34);line(24,42,41);}
+  else if(k===2){ctx.beginPath();ctx.moveTo(0,10);ctx.lineTo(16,-2);ctx.lineTo(70,-2);ctx.lineTo(70,36);ctx.lineTo(16,36);ctx.closePath();ctx.fillStyle=rgba(GV_CLASS.direct,1);ctx.fill();
+    ctx.strokeStyle=rgba(GV_CLASSINK.direct,1);ctx.stroke();ctx.beginPath();ctx.arc(16,17,4.5,0,TAU);ctx.fillStyle=paper;ctx.fill();
+    ctx.beginPath();ctx.moveTo(12,17);ctx.quadraticCurveTo(-4,30,6,48);ctx.strokeStyle=ink;ctx.stroke();}
+  else{box(0,0,104,50);line(0,17,17);line(0,34,34);line(56,0,0);ctx.beginPath();ctx.moveTo(56,0);ctx.lineTo(56,50);ctx.stroke();
+    for(let i=0;i<3;i++){line(8,44,i*17+9);ctx.beginPath();ctx.arc(80,i*17+8.5,4.5,0,TAU);ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=ink;ctx.stroke();}}
+  ctx.restore();}
+function os_keepCard(ctx,k,u){if(u<=0)return;const K=OS_KB,lines=OS_KEEP[k],e=easeCam(clamp(u,0,1)),s=lerp(1.12,1,e),w=K.w,h=K.h;
+  ctx.save();ctx.translate(OS_ANSC.x[k],K.y-14*(1-e));ctx.rotate(K.rot[k]);ctx.scale(s,s);withA(ctx,clamp(u*2.5,0,1),()=>{
+    wc_panel(ctx,-w/2,-h/2,w,h,{kind:"card",wash:GV.gold,washA:0.5,seed:150+k});gv_pin(ctx,0,-h/2+18,GV.red,1.1);os_keepSign(ctx,k,-w/2+32,-h/2+46);
+    lines.forEach((l,i)=>wc_T(ctx,l,-w/2+32,-h/2+(lines.length>1?142:164)+i*44,{w:800,size:34,col:WC_DARK}));});ctx.restore();}
+// a pencil arrow from answer k down to where its gold card goes, drawn as p goes from 0 to 1
+function os_keepArrow(ctx,k,p){if(p<=0)return;const K=OS_KB,x=OS_ANSC.x[k],y0=K.ans+OS_ANSC.h/2+10,y1=K.y-K.h/2-6,y=lerp(y0,y1,easeCam(clamp(p,0,1)));
+  ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.85);ctx.lineWidth=4;ctx.lineCap="round";ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(x,y0);ctx.lineTo(x,y);
+  if(p>0.8){const d=13*clamp((p-0.8)/0.2,0,1);ctx.moveTo(x-d,y-d);ctx.lineTo(x,y);ctx.lineTo(x+d,y-d);}ctx.stroke();ctx.restore();}
+// the gold cards, small, on the office's board, over the foot of each small answer (the first n)
+function os_keepSmall(ctx,n){const [bx,by]=GV_OFF.board;for(let k=0;k<(n==null?4:n);k++){ctx.save();ctx.translate(bx+68+k*92,by+364);ctx.rotate(OS_KB.rot[k]);
+  wc_panel(ctx,-36,-19,72,38,{kind:"card",wash:GV.gold,washA:0.5,seed:160+k});gv_lines(ctx,-24,-5,48,2,12,0.9);ctx.restore();}}
 
 /* ---------- today: the films to come ---------- */
 // which of the shelf's binders stand for the nine films on what governance needs; he takes the first
@@ -3028,35 +3085,22 @@ function os_toolCard(ctx,k,u){if(u<=0)return;const T=OS_TC,[s,tools]=OS_TOOLS[k]
     wc_T(ctx,String(k+14),-w/2+56,-h/2+83,{w:800,size:28,align:"center",col:[255,255,255]});
     let lx=-w/2+104;tools.forEach(id=>{lx+=logo(ctx,id,lx,-h/2+48,48)+18;});
     os_wrap(ctx,s,36,w-64).forEach((l,i,a)=>wc_T(ctx,l,-w/2+32,-h/2+(a.length>1?160:178)+i*46,{w:800,size:36,col:WC_DARK}));});ctx.restore();}
-// the films on governance as a capability, on Yusuf's board: a card each, with its number, a pencil sign where the tools' cards
-// have logos, and its title in two lines
-const OS_CAP=[["A capability,","not a project"],["Who does what,","end to end"],["Where each","piece lives"]];
-const OS_CC={y:600,rot:[0.014,-0.012,0.01]};
-function os_capHead(ctx,u){if(u<=0)return;ctx.save();ctx.translate(960,326);ctx.rotate(-0.008);withA(ctx,clamp(u*2.5,0,1),()=>{wc_panel(ctx,-380,-60,760,120,{kind:"card",seed:66});
-  gv_pin(ctx,0,-46,GV.red,1.2);wc_hand(ctx,"Governance as a capability",0,20,{size:52,w:700,align:"center",col:WC_INK,p:clamp(u*1.6-0.3,0,1)});});ctx.restore();}
-// the signs: a capability above the three it holds; three steps, end to end; a home, and its copy made one way
-function os_capSign(ctx,k,x,y){ctx.save();ctx.translate(x,y);ctx.lineWidth=2.4;ctx.lineJoin="round";ctx.lineCap="round";
-  const ink=rgba(WC_PENCIL,0.85),fill=rgba(wc_lit(GV.gold,0.55),1);
-  const box=(bx,by,bw,bh,copy)=>{rr(ctx,bx,by,bw,bh,4);ctx.fillStyle=copy?rgba(WC_CARD,1):fill;ctx.fill();ctx.setLineDash(copy?[6,5]:[]);ctx.strokeStyle=ink;ctx.stroke();ctx.setLineDash([]);};
-  const arrow=(x0,x1,yy)=>{ctx.beginPath();ctx.moveTo(x0,yy);ctx.lineTo(x1,yy);ctx.moveTo(x1-8,yy-6);ctx.lineTo(x1,yy);ctx.lineTo(x1-8,yy+6);ctx.strokeStyle=ink;ctx.stroke();};
-  if(k===0){box(0,0,112,18);for(let i=0;i<3;i++)box(i*39,26,34,22);}
-  else if(k===1){for(let i=0;i<3;i++){ctx.beginPath();ctx.arc(12+i*48,24,11,0,TAU);ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=ink;ctx.stroke();if(i<2)arrow(28+i*48,44+i*48,24);}}
-  else{box(0,4,44,40);arrow(52,82,24);box(90,4,44,40,true);}
-  ctx.restore();}
-function os_capCard(ctx,k,u){if(u<=0)return;const T=OS_TC,lines=OS_CAP[k],e=easeCam(clamp(u,0,1)),sc=lerp(1.12,1,e),w=T.w,h=T.h;
-  ctx.save();ctx.translate(T.x[k],OS_CC.y-14*(1-e));ctx.rotate(OS_CC.rot[k]);ctx.scale(sc,sc);withA(ctx,clamp(u*2.5,0,1),()=>{
-    wc_panel(ctx,-w/2,-h/2,w,h,{kind:"card",seed:130+k});gv_pin(ctx,0,-h/2+18,GV.red,1.1);
-    wc_wash(ctx,wc_ell(-w/2+56,-h/2+72,28,28,24),wc_lit(GV.goldInk,0.1),{kind:"thing",lw:1.2,seed:140+k});
-    wc_T(ctx,String(k+11),-w/2+56,-h/2+83,{w:800,size:28,align:"center",col:[255,255,255]});
-    os_capSign(ctx,k,-w/2+104,-h/2+48);
-    lines.forEach((l,i)=>wc_T(ctx,l,-w/2+32,-h/2+160+i*46,{w:800,size:36,col:WC_DARK}));});ctx.restore();}
+// the films that draw governance as one model, on Noor's architecture map, close: a card each, pinned in the free part of the layer it
+// adds to (strategy, business, application), with its number in gold and its title
+const OS_MAPF=[[1,"A capability, not a project"],[2,"Who does what, end to end"],[4,"Where each piece lives"]],OS_MROT=[0.008,-0.01,0.012];
+function os_mapCard(ctx,k,u){if(u<=0)return;const [i,s]=OS_MAPF[k],[x,y,w,h]=GV_MC,[fx,fy,fw,fh]=gv_mapFree(x,y,w,h,i),e=easeCam(clamp(u,0,1)),sc=lerp(1.12,1,e),
+    cw=fw-44,ch=Math.min(fh-18,98);
+  ctx.save();ctx.translate(fx+fw/2,fy+fh/2-10*(1-e));ctx.rotate(OS_MROT[k]);ctx.scale(sc,sc);withA(ctx,clamp(u*2.5,0,1),()=>{
+    wc_panel(ctx,-cw/2,-ch/2,cw,ch,{kind:"card",seed:170+k});gv_pin(ctx,0,-ch/2+14,GV.red,1);
+    wc_wash(ctx,wc_ell(-cw/2+48,4,27,27,24),wc_lit(GV.goldInk,0.1),{kind:"thing",lw:1.2,seed:180+k});
+    wc_T(ctx,String(k+11),-cw/2+48,15,{w:800,size:28,align:"center",col:[255,255,255]});wc_T(ctx,s,-cw/2+94,16,{w:800,size:34,col:WC_DARK});});ctx.restore();}
 
 const WC_PLACES={market:os_paintMarket,hall:os_paintHall,exchange:os_paintExchange,shop:os_paintShop,stamp:os_paintStamp,campus:gv_paintCampus,office:gv_paintOffice,
   boardGov:c=>gv_paintBoardClose(c,GV_ROOM.gov),desk:gv_paintDesk,floor:gv_paintFloor,planning:gv_paintPlanning,registrar:gv_paintRegistrar,data:gv_paintData,
-  boardData:c=>gv_paintBoardClose(c,GV_ROOM.data),screen:c=>gv_paintScreenDesk(c,GV_ROOM.data),platform:gv_paintPlatform,poster:gv_paintPosterClose,page:os_paintPage,
-  policy:os_paintPolicy};
+  boardData:c=>gv_paintBoardClose(c,GV_ROOM.data),screen:c=>gv_paintScreenDesk(c,GV_ROOM.data),platform:gv_paintPlatform,policy:os_paintPolicy,
+  noor:gv_paintNoor,mapClose:gv_paintMapClose};
 
-/* ===== Off the shelf: the ten chapters =====
+/* ===== Off the shelf: the nine chapters =====
    Each chapter is a few shots in the places of plan.js and the series' rooms.js, cut together with short dissolves (gv_shots). Times
    inside a chapter come from its cues (when each line starts) and the words of its lines (wAt), so the pictures stay with the voice if
    it's recorded again. Words on screen are on paper, screens, boards, tags and speech bubbles, at least 28 px as seen, and above the
@@ -3161,9 +3205,9 @@ scene("shelf",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b:c.shelf-0.
     // the campus: Yusuf's first day, a box of his things in his arms; he looks up at the building, then goes in
     {at:0,place:"campus",keys:[[0,1080,760,1.7],[0.4,1090,770,1.82],[P.walk,1250,730,1.82]],d:3.4,draw:(x,tt)=>{const w=gv_walk(tt,P.walk,1060,1360,90),k=(w.x-1060)/300;
       person(x,"yusuf",w.x,os_pathY(w.x)+2-w.bob,lerp(0.235,0.19,k),{pose:"os_box",pose2:w.moving?(w.swing>0?"os_boxA":"os_boxB"):null,mix:Math.abs(w.swing),t:tt,carry:os_heldBox});}},
-    // his office: the shelf of binders, 34 policies, and the score on the wall
+    // his office: the shelf of binders, 34 policies, and the score on the wall; the newest DMBOK on his desk, as the prologue left it
     {at:P.b,place:"office",keys:[[P.b,1100,560,1.2],[P.b+0.1,1180,540,1.32]],d:5,draw:(x,tt)=>{const [sx,sy,sw,sh]=GV_OFF.score;
-      os_chartSmall(x,0);gv_halo(x,sx-30,sy-30,sw+60,sh+60,GV.gold,0.85*gv_io(tt,P.mat-0.1,P.ch,0.5));os_score(x);os_binders(x);os_deskBox(x);
+      os_chartSmall(x,0);gv_halo(x,sx-30,sy-30,sw+60,sh+60,GV.gold,0.85*gv_io(tt,P.mat-0.1,P.ch,0.5));os_score(x);os_binders(x);os_deskBox(x);gv_deskBook(x);
       person(x,"yusuf",1190,895,0.8,{pose:"listen",t:tt});os_tagAt(x,tt,P.thirty-0.2,null,1621,290,"34 data policies");}},
     // the chart, close: half its names are still to be confirmed
     {at:P.ch,place:"boardGov",keys:[[P.ch,960,520,1],[P.ch+0.1,960,500,1.05]],d:4,push:0,draw:(x,tt)=>os_chart(x,k=>fin(tt,P.half-0.2+2.2*k/8,0.3))},
@@ -3171,7 +3215,7 @@ scene("shelf",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b:c.shelf-0.
     {at:P.co,place:"desk",keys:[[P.co,960,560,1],[P.co+0.1,960,520,1.08]],d:3.2,draw:(x,tt)=>os_minutes(x,fin(tt,P.once-0.16,0.3))},
     // the office again: Yusuf has taken binder 12 down; David, at the door, gives him his brief
     {at:P.br,place:"office",keys:[[P.br,960,540,1],[P.br+0.1,940,540,1.04]],d:4,draw:(x,tt)=>{
-      os_chartSmall(x,1);os_score(x);os_binders(x,{missing:i=>i===11});os_deskBox(x);
+      os_chartSmall(x,1);os_score(x);os_binders(x,{missing:i=>i===11});os_deskBox(x);gv_deskBook(x);
       person(x,"david",190,868,0.8,{pose:"explain",t:tt});person(x,"yusuf",1240,905,0.8,{pose:"hold",expr:"worried",t:tt,flip:true,carry:heldBinder("12",os_bindCol(11))});
       const q=c.brief+0.1;gv_say(x,250,190,["Can you fix governance","before the submission?"],205,400,{a:fin(tt,q,0.35),k:0.92+0.08*spring(fin(tt,q,0.5))});}}]);
   // today, and who Yusuf is
@@ -3252,10 +3296,11 @@ scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b1:c.both-
 function os_roomLit(x,i,col,a){const F=GV_FL;gv_tint(x,F.x(i),F.top,F.w,F.fy-F.top,col,a);}
 function os_roomGlow(x,i,a){if(a<=0.01)return;const F=GV_FL;x.save();x.beginPath();x.rect(F.x(i),F.top,F.w,F.fy-F.top);x.clip();x.globalCompositeOperation="screen";
   wc_glowAt(x,F.x(i)+F.w/2,F.top+300,430,[255,238,204],0.42*a);x.restore();}
-// a decision's card, flying from the governance office to the glass of an office where the work is done (u, 0 to 1), and pinned there
+// a decision's card, flying from the governance office (or the office from) to the glass of an office where the work is done (u, 0 to
+// 1), and pinned there; amend draws the line added to it by hand
 const OS_DEC_Y=GV_FL.top+300;
-function os_decFly(x,i,u,tick){if(u<=0)return;const F=GV_FL,e=easeCam(clamp(u,0,1));
-  os_decision(x,lerp(F.x(2)+F.w/2,F.x(i)+F.w/2,e),lerp(OS_DEC_Y+20,OS_DEC_Y,e)-130*Math.sin(Math.PI*e),lerp(0.5,1,e),tick);}
+function os_decFly(x,i,u,tick,from,amend){if(u<=0)return;const F=GV_FL,e=easeCam(clamp(u,0,1)),f=from==null?2:from;
+  os_decision(x,lerp(F.x(f)+F.w/2,F.x(i)+F.w/2,e),lerp(OS_DEC_Y+20,OS_DEC_Y,e)-130*Math.sin(Math.PI*e),lerp(0.5,1,e),tick,amend);}
 // a label over two offices of the floor, in the band above their glass, with a pencil bracket out to their edges
 function os_overRooms(x,tt,t0,i0,i1,s,o){const F=GV_FL,x0=F.x(i0)+16,x1=F.x(i1)+F.w-16,m=(x0+x1)/2,y=108,u=easeCam(fin(tt,t0,0.7));if(u<=0)return;
   x.save();x.strokeStyle=rgba(WC_PENCIL,0.8);x.lineWidth=3;x.lineCap="round";x.beginPath();x.moveTo(m-(m-x0)*u,y);x.lineTo(m+(x1-m)*u,y);
@@ -3305,31 +3350,7 @@ scene("for",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b:c.for-0.6,cc
   wc_year(ctx,56,72,"England · 1880s",gv_io(t,P.cc+0.2,P.d,0.4));
   wc_paperOver(ctx,S);});
 
-// ---- 6 · Governance at the centre: DAMA's book and its wheel; the other frameworks on the same ground; then where it runs ----
-scene("wheel",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b:c.wheel-0.6,d:c.takes-0.6,body:wAt(sc,"body","body"),eleven:wAt(sc,"wheel","eleven"),
-    gov:wAt(sc,"wheel","governance"),where:wAt(sc,"wheel","where"),dee:wAt(sc,"others","Dee"),i8:wAt(sc,"others","eight thousand"),i38:wAt(sc,"others","thirty"),
-    shows:wAt(sc,"takes","shows")}));
-  const out=P.d-1.4,ring=[[1,3],[0,4]];
-  gv_shots(ctx,S,t,sc.dur,[
-    // his desk: binder 12, closed, his two notes sticking out of it; DAMA's book set down beside it
-    {at:0,place:"desk",keys:[[0,960,540,1],[P.body,1170,520,1.1]],d:2,draw:(x,tt)=>{os_closed12(x);const u=fin(tt,P.body-0.5,0.3);if(u<=0)return;
-      x.save();x.translate(1330,520);const k=lerp(1.25,1,easeCam(u));x.scale(k,k);withA(x,clamp(u*3,0,1),()=>os_dmbok(x,0,0));x.restore();}},
-    // the book open at its wheel: ten areas round the centre, data governance, where they meet; then the frameworks that cover the same
-    // ground, or part of it; then close in on the centre
-    {at:P.b,place:"page",keys:[[P.b,960,500,1.04],[P.b+0.1,960,480,1.0],[out,960,448,2.3]],d:1.6,push:0.02,draw:(x,tt)=>{
-      const hi=tt>=P.i38-0.3?"centre":tt>=P.i8-0.2?9:-1;
-      os_wheel(x,{area:k=>fin(tt,P.eleven-0.1+k*0.24,0.5),centre:fin(tt,P.gov-0.1,0.6),joins:clamp((tt-P.where+0.2)/1.2,0,1),
-        ring:clamp((tt-P.dee+0.2)/1.4,0,1)*(1-fin(tt,out,0.4)),dim:gv_io(tt,P.dee-0.2,out,0.5),hi,
-        outline:hi==="centre"?gv_io(tt,P.i38-0.1,out,0.4):hi===9?fin(tt,P.i8-0.1,0.4):0,labels:1-fin(tt,out,0.4),fade:1-0.6*fin(tt,out,0.6)});
-      os_note(x,tt,P.dee-0.1,1660,150,["DCAM","the same ground"],{out});os_note(x,tt,P.i8-0.1,262,150,["ISO 8000","data quality"],{out});
-      os_note(x,tt,P.i38-0.1,1660,780,["ISO/IEC 38505","governing data"],{out});}},
-    // where it runs: the governance office at the centre of the floor, and the offices round it, at work
-    {at:P.d,place:"floor",keys:[[P.d,960,485,1.9],[P.d+0.4,960,540,1.0]],d:2.4,push:0.02,draw:(x,tt)=>{
-      os_roomLit(x,2,GV.gold,0.32+0.16*(1-fin(tt,P.d+0.4,1.6)));ring.forEach((r,j)=>r.forEach(i=>os_roomGlow(x,i,fin(tt,P.shows-0.1+0.3*j,0.6))));
-      os_floor(x,tt,{yusufIn:true,pose:{yusuf:{pose:"listen"}}});}}]);
-  wc_paperOver(ctx,S);});
-
-// ---- 7 · Listen first: no thirty-fifth policy; one question in every office, and what slows each one down ----
+// ---- 6 · Listen first: no thirty-fifth policy; one question in every office, and what slows each one down ----
 // someone answering while Yusuf writes it down: their bubble springs in at t0 and goes at t1
 function os_answer(x,tt,t0,t1,bx,by,lines,tx,ty){gv_say(x,bx,by,lines,tx,ty,{a:gv_io(tt,t0,t1,0.35),k:0.92+0.08*spring(fin(tt,t0,0.5)),size:34});}
 const os_noting=tt=>({pose:"write",carry:heldNotebook,t:tt});
@@ -3365,7 +3386,7 @@ scene("listen",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({a2:wAt(sc,"
     {at:P.f,place:"boardGov",keys:[[P.f,960,500,1],[P.f+0.1,960,490,1.04]],d:3,push:0.02,draw:(x,tt)=>{os_asked(x);
       for(let k=0;k<4;k++)os_ansCard(x,k,fin(tt,c.binder-0.2+0.45*k,0.35));}},
     // his office: the shelf the binder came from, in a warm light; what they wrote is what they were asked for
-    {at:P.they-0.5,place:"office",keys:[[P.they-0.5,1320,520,1.16],[P.they-0.4,1360,520,1.2]],d:3,draw:(x,tt)=>{os_chartSmall(x,1);os_ansSmall(x);os_score(x);
+    {at:P.they-0.5,place:"office",keys:[[P.they-0.5,1320,520,1.16],[P.they-0.4,1360,520,1.2]],d:3,draw:(x,tt)=>{os_chartSmall(x,1);os_ansSmall(x);os_score(x);gv_deskBook(x);
       os_binders(x,{missing:i=>i===11});const g=fin(tt,P.they-0.2,0.9),[sx,,sw]=[GV_OFF.shelf.x,0,GV_OFF.shelf.w];
       if(g>0){x.save();x.globalCompositeOperation="soft-light";wc_glowAt(x,sx+sw/2,520,560,[255,190,90],0.9*g);x.globalCompositeOperation="screen";
         wc_glowAt(x,sx+sw/2,470,500,[255,222,160],0.42*g);x.restore();}
@@ -3374,17 +3395,17 @@ scene("listen",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({a2:wAt(sc,"
     {at:P.g,place:"data",keys:[[P.g,1300,520,1.14],[P.g+0.1,1320,520,1.18]],d:3,draw:(x,tt)=>{const nod=k=>0.05*Math.sin(tt*3.1+k)*gv_io(tt,P.g+0.3,P.h,0.4);os_dataBoard(x);
       person(x,"yusuf",900,905,0.8,{pose:"listen",t:tt,nod:nod(1)});person(x,"mei",1330,905,0.8,{pose:"explain",t:tt});
       person(x,"jun",1600,905,0.8,{pose:"listen",t:tt,flip:true,nod:nod(2)});}},
-    // Jun's screen: what they agreed on Monday runs as a test, and passes; how award maps to the government's has no test, as no
-    // one has agreed it
+    // Jun's screen: the rules on award. What they agreed on Monday is checked every night, and holds; how award maps to the
+    // government's can't be checked, as no one has agreed it
     {at:P.h,place:"screen",keys:[[P.h,960,450,1],[P.cant-0.3,960,500,1.06]],d:1.8,push:0.02,draw:(x,tt)=>
-      os_tests(x,fin(tt,P.carry-0.3,0.5),fin(tt,P.carry+0.25,0.4),fin(tt,P.agree-0.1,0.6),fin(tt,P.cant-0.15,0.5))}]);
+      os_rules(x,fin(tt,P.carry-0.3,0.5),fin(tt,P.carry+0.25,0.4),fin(tt,P.agree-0.1,0.6),fin(tt,P.cant-0.15,0.5))}]);
   wc_paperOver(ctx,S);});
 
-// ---- 8 · Where does it run? Binder 12 open again, and every line of policy 12 marked by where it runs ----
+// ---- 7 · Where does it run? Binder 12 open again, and every line of policy 12 marked by where it runs ----
 scene("runs",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{open:w("takes","opens",-0.2),where:w("takes","where"),b:c.runs-0.6,key:[w("runs","run in",-0.1),w("owned","decisions",-0.1),w("go","go",-0.2)],
-      hi:[w("runs","required"),w("runs","a check"),w("runs","a tag"),w("runs","a test"),w("owned","owns"),w("owned","writes"),w("go","go")],
-      note:[w("runs","required"),w("runs","a check"),w("runs","a tag"),w("runs","a test"),w("owned","owns",0.3),w("owned","where the"),99]};});
+      hi:[w("runs","a field"),w("runs","a check"),w("runs","every night"),w("runs","a label"),w("owned","owns"),w("owned","writes"),w("go","go")],
+      note:[w("runs","a field"),w("runs","a check"),w("runs","every night"),w("runs","a label"),w("owned","owns",0.3),w("owned","where the"),99]};});
   gv_shots(ctx,S,t,sc.dur,[
     // his desk: binder 12, closed, and three highlighters; he opens it, and sticks his question beside policy 12
     {at:0,place:"desk",keys:[[0,1300,520,1.1],[P.open,960,520,1],[P.b-0.9,1300,500,1.25]],d:1.6,draw:(x,tt)=>{
@@ -3397,53 +3418,54 @@ scene("runs",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,s,
       j=>fin(tt,P.key[j],0.6),fin(tt,P.hi[6]+0.35,0.5))}]);
   wc_paperOver(ctx,S);});
 
-// ---- 9 · Where decisions enter: the data team's loop, and a gold pin at each step where a decision enters it ----
-// a face between two expressions (m, 0 to 1)
-function os_face(a,b,m){const A=EXPR[a],B=EXPR[b];if(m<=0)return A;if(m>=1)return B;const o={};new Set([...Object.keys(A),...Object.keys(B)]).forEach(k=>o[k]=lerp(A[k]||0,B[k]||0,m));return o;}
-scene("enter",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
-    return{places:w("places","places"),lp:c.loop-0.6,go:w("loop","loop",-0.1),end:w("loop","new version",0.1),m:c.pin-0.6,meet:w("pin","another meeting"),
-      needs:w("pin","It needs"),pin:w("pin","a pin"),q:c.pins-0.6,
-      pins:OS_PINS.map(([,word])=>w(sc.vo.find(v=>v.id==="pins").text.includes(word)?"pins":"pins2",word,-0.15)),two:w("pins","a contract",-0.1),br:c.breath-0.3};});
-  const [qx,qy,qw,qh]=GV_PC,[px,py,pw,ph]=GV_DT.poster,
-    pins=(x,tt,R,lab)=>OS_PINS.forEach(([i,,lines],k)=>os_goldPin(x,i,R[0],R[1],R[2],R[3],fin(tt,P.pins[k],0.3),clamp((tt-P.pins[k]-0.05)/0.5,0,1),lines,
-      lab&&(j=>clamp((tt-(j?P.two:P.pins[k]+0.1))/0.6,0,1))));
+// ---- 8 · What's worth keeping: under each answer on Yusuf's board, what's worth keeping so it stops; then who decides, and who acts ----
+scene("keep",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{worth:w("keep","worth"),b:c.rules-0.6,card:[w("rules","Rules"),w("words","One"),w("classes","A class"),w("owners","a list")],f:c.decide-0.6,
+      own:w("decide","Owners"),stw:w("decide","Stewards"),teams:w("act","The teams"),use:w("act","use it"),gov:w("act","governance"),kept:w("act","kept")};});
   gv_shots(ctx,S,t,sc.dur,[
-    // the data team's room: Yusuf comes in with a box of gold pins; Jun turns from his desk; the poster of how they build catches the light
-    {at:0,place:"data",keys:[[0,1000,520,1.08],[0.4,1060,515,1.14]],d:3.2,draw:(x,tt)=>{const wk=gv_walk(tt,0.2,300,860,220);
-      os_dataBoard(x);os_warm(x,px+pw/2,py+ph/2,420,fin(tt,P.places-0.4,0.8));
-      person(x,"jun",1600,905,0.8,{pose:"stand",pose2:"listen",mix:fin(tt,wk.end-0.7,0.6),t:tt,flip:true});os_carrier(x,"yusuf",wk,905,0.8,heldPins,{t:tt});}},
-    // the poster, close: the loop they build in, going round from a question to a new version
-    {at:P.lp,place:"poster",keys:[[P.lp,960,500,1.06],[P.lp+0.1,960,490,1]],d:2.4,push:0.02,draw:(x,tt)=>
-      withA(x,1-fin(tt,P.m-0.7,0.6),()=>os_loopRun(x,qx,qy,qw,qh,clamp((tt-P.go)/((P.end-P.go)/0.9),0,1)))},
-    // the room again: Jun expects another meeting; Yusuf holds up the pins instead
-    {at:P.m,place:"data",keys:[[P.m,1120,520,1.16],[P.m+0.1,1100,515,1.2]],d:4,draw:(x,tt)=>{os_dataBoard(x);os_warm(x,px+pw/2,py+ph/2,420,1);
-      person(x,"yusuf",880,905,0.8,{pose:"hold",pose2:"holdUp",mix:fin(tt,P.needs-0.1,0.5),E:os_face("calm","smile",fin(tt,P.needs,0.5)),t:tt,carry:heldPins});
-      person(x,"jun",1480,905,0.8,{pose:"listen",E:os_face("concerned","relieved",fin(tt,P.pin,0.6)),t:tt,flip:true});
-      os_answer(x,tt,P.meet-0.25,P.pin+0.3,1500,330,["Another meeting?"],1462,456);}},
-    // the poster, close: a gold pin at each step where a decision enters, and what enters there
-    {at:P.q,place:"poster",keys:[[P.q,960,500,1.04],[P.q+0.1,960,490,1]],d:2.4,push:0.02,draw:(x,tt)=>pins(x,tt,GV_PC,true)},
-    // the room: the team's own loop, with six gold pins in it
-    {at:P.br,place:"data",keys:[[P.br,1060,520,1.1],[P.br+0.1,1060,515,1.13]],d:2.4,draw:(x,tt)=>{os_dataBoard(x);os_warm(x,px+pw/2,py+ph/2,420,1);pins(x,99,GV_DT.poster,false);
-      person(x,"yusuf",860,905,0.8,{pose:"hold",expr:"smile",t:tt,carry:heldPins});person(x,"jun",1560,905,0.8,{pose:"listen",expr:"smile",t:tt,flip:true});}}]);
+    // his office: Yusuf at his board, a stack of gold cards in his hands; the four answers catch a warm light
+    {at:0,place:"office",keys:[[0,1060,520,1.14],[P.worth-0.6,930,440,1.4]],d:2.4,draw:(x,tt)=>{const [bx,by,bw,bh]=GV_OFF.board;
+      os_chartSmall(x,1);os_ansSmall(x);os_warm(x,bx+bw/2,by+bh*0.6,220,fin(tt,P.worth-0.2,0.8));os_score(x);os_binders(x,{missing:i=>i===11});gv_deskBook(x);
+      person(x,"yusuf",1190,905,0.8,{pose:"hold",expr:"calm",t:tt,flip:true,carry:os_heldGold});}},
+    // the board, close: under each answer, what's worth keeping so it stops, on a gold card
+    {at:P.b,place:"boardGov",keys:[[P.b,960,520,1.03],[P.b+0.1,960,510,1]],d:2.4,push:0.02,draw:(x,tt)=>{os_asked(x,OS_KB.ask);
+      for(let k=0;k<4;k++){os_ansCard(x,k,1,OS_KB.ans);os_keepArrow(x,k,clamp((tt-P.card[k]+0.45)/0.45,0,1));os_keepCard(x,k,fin(tt,P.card[k],0.35));}}},
+    // the floor: the owners decide, and the stewards keep it up to date, a line added by hand; a copy goes to each team that uses it;
+    // governance checks it's kept
+    {at:P.f,place:"floor",keys:[[P.f,960,540,1]],push:0.025,draw:(x,tt)=>{const F=GV_FL,own=fin(tt,P.own-0.15,0.6),go=k=>P.use-0.55+0.14*k,
+        land=k=>fin(tt,go(k)+0.75,0.4),tick=k=>fin(tt,P.kept-0.2+0.12*k,0.4),amend=k=>clamp((tt-P.stw-0.1-0.25*k)/0.9,0,1);
+      [0,1].forEach(i=>os_roomLit(x,i,GV.gold,0.3*own));[3,4].forEach((i,k)=>os_roomLit(x,i,GV.cyanInk,0.2*land(k)));os_roomLit(x,2,GV.gold,0.32*fin(tt,P.gov-0.15,0.5));
+      const ex=(t0,t1)=>gv_io(tt,t0,t1,0.45);
+      os_floor(x,tt,{yusufIn:true,pose:{clara:{pose2:"explain",mix:ex(P.own-0.25,P.stw+0.2)},mei:{pose2:"write",mix:fin(tt,P.stw-0.15,0.5)},
+        jun:{pose2:"listen",mix:ex(go(0)-0.3,go(0)+1.1)},sam:{pose2:"listen",mix:ex(go(1)-0.3,go(1)+1.1)},yusuf:{pose:"listen",pose2:"write",mix:fin(tt,P.gov-0.25,0.5),carry:heldNotebook}}});
+      // the owners' decisions on their glass, a line added to each, and a copy of each flying to a team's
+      [0,1].forEach((i,k)=>{const u=fin(tt,P.own+0.1*k,0.45);if(u>0)withA(x,clamp(u*2.5,0,1),()=>os_decision(x,F.x(i)+F.w/2,OS_DEC_Y,lerp(1.15,1,spring(u)),tick(k),amend(k)));});
+      [3,4].forEach((i,k)=>os_decFly(x,i,clamp((tt-go(k))/0.85,0,1),tick(k+2),k,1));
+      os_overRooms(x,tt,P.own-0.2,0,1,"owners decide · stewards keep it up to date");os_overRooms(x,tt,P.teams-0.15,3,4,"the teams who do the work · use it");
+      os_glassCard(x,tt,2,P.gov-0.1,["governance","checks it's kept"],{wash:GV.gold,washA:0.32});}}]);
   wc_paperOver(ctx,S);});
 
-// ---- 10 · The series: nine binders for the films on what governance needs, three cards on Yusuf's board for the films on governance
-//      as a capability, six on the data team's for the films on the tools ----
+// ---- 9 · The series: nine binders for the films on why governance, three cards on Noor's architecture map for the films that draw it
+//     as one model, six on the data team's board for the films that build it ----
 scene("series",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
-    return{nine:w("next","nine",-0.1),take:w("next","takes"),ml:c.map-0.6,three:w("map","three",-0.1),tl:c.tools-0.6,six:w("tools","six",-0.1),f:c.wish-0.6,end:c.breath-0.2};});
+    return{nine:w("next","nine",-0.1),take:w("next","follows"),ml:c.map-0.6,mc:w("map","as one",-0.2),three:w("map","on the"),tl:c.tools-0.6,six:w("tools","six",-0.1),
+      f:c.wish-0.6,end:c.breath-0.2};});
   const B1=OS_NINE[0],held=os_heldTitled(["Who","decides"],os_bindCol(B1));
   gv_shots(ctx,S,t,sc.dur,[
     // his office: nine binders on the shelf light up, one for each film to come; he takes the first down
     {at:0,place:"office",keys:[[0,1120,520,1.2],[P.take+0.5,1270,560,1.4]],d:1.8,draw:(x,tt)=>{const n=j=>fin(tt,P.nine+0.12*j,0.35),got=tt>=P.take+0.55,
         r1=fin(tt,P.take-0.1,0.5),r2=fin(tt,P.take+0.55,0.5);
-      os_chartSmall(x,1);os_ansSmall(x);os_score(x);
+      os_chartSmall(x,1);os_ansSmall(x);os_keepSmall(x);os_score(x);gv_deskBook(x);
       os_binders(x,{missing:i=>i===11||(got&&i===B1),glow:i=>{const j=OS_NINE.indexOf(i);return j<0?0:0.85*n(j);},
         out:i=>{const j=OS_NINE.indexOf(i);return j<0?0:Math.max(0.5*n(j),i===B1?fin(tt,P.take+0.1,0.35):0);}});
       person(x,"yusuf",1250,905,0.8,got?{pose:"reach",pose2:"hold",mix:r2,t:tt,carry:held}:{pose:"listen",pose2:"reach",mix:r1,t:tt});}},
-    // Yusuf's board, close: three cards, one for each film on governance as a capability
-    {at:P.ml,place:"boardGov",keys:[[P.ml,960,500,1.04],[P.ml+0.1,960,490,1]],d:2.4,push:0.02,draw:(x,tt)=>{os_capHead(x,fin(tt,P.ml+0.3,0.6));
-      for(let k=0;k<3;k++)os_capCard(x,k,fin(tt,P.three+0.3*k,0.35));}},
-    // the data team's board, close: six cards, one for each film on the tools
+    // Noor's room: the university's architecture map on her wall, and Noor, the data architect, at it
+    {at:P.ml,place:"noor",keys:[[P.ml,860,500,1.1],[P.ml+0.1,800,470,1.16]],d:2,draw:(x,tt)=>{
+      person(x,"noor",1250,905,0.8,{pose:"listen",pose2:"point",mix:fin(tt,P.ml+0.5,0.6),t:tt,flip:true});
+      os_nameCard(x,1330,236,"Noor Rahman","data architect",gv_io(tt,P.ml+0.4,P.mc,0.4));}},
+    // the map, close: three cards, one in each layer the films add to
+    {at:P.mc,place:"mapClose",keys:[[P.mc,960,520,1.03],[P.mc+0.1,960,510,1]],d:2.4,push:0.02,draw:(x,tt)=>{for(let k=0;k<3;k++)os_mapCard(x,k,fin(tt,P.three+0.3*k,0.35));}},
+    // the data team's board, close: six cards, one for each film that builds it with the tools
     {at:P.tl,place:"boardData",keys:[[P.tl,960,500,1.04],[P.tl+0.1,960,490,1]],d:2.4,push:0.02,draw:(x,tt)=>{os_toolsHead(x,fin(tt,P.tl+0.3,0.6));
       for(let k=0;k<6;k++)os_toolCard(x,k,fin(tt,P.six+0.3*k,0.35));}},
     // the floor: he takes the binder to where the work is done; Jun looks up
@@ -3523,13 +3545,16 @@ window.addEventListener("DOMContentLoaded",async()=>{
    Loaded after the engine, so its prepAssets is the one the engine calls: the fonts and the tools' logos, then the paper and the
    pigment's grain of the master data series' watercolour (its wash.js), then each place the film paints (WC_PLACES, in the film's own
    pictures). The rendered video and the checks paint every place before they start; the site's player paints the first, then the
-   others one by one while the film plays, so it starts quickly. The same as the master data series' post.js, with the logos.
+   others one by one while the film plays, so it starts quickly. The same as the master data series' post.js, with the logos, but
+   each of the others waits until the page is idle (or a second has passed): back to back, the prologue's 38 places held the
+   page for seconds at a time on a slow machine, so a click on "Watch again" landed late and the film had run on.
    Then, for the video only (tools/render.py calls renderAt), motion blur: each video frame is the average of MB moments across a third
    of a frame (a 126-degree shutter), so movement reads as filmed. No glow: it would wash out the paper. No film grain: the paper is
    the grain. */
 async function prepAssets(){await fontsReady3();await loadLogos();wc_prep();const ks=typeof WC_PLACES!=="undefined"?Object.keys(WC_PLACES):[];
   if(window.__RENDER__){ks.forEach(gv_place);return;}
-  if(ks.length)gv_place(ks[0]);let i=1;const next=()=>{if(i>=ks.length)return;gv_place(ks[i++]);setTimeout(next,60);};setTimeout(next,200);}
+  if(ks.length)gv_place(ks[0]);let i=1;const idle=f=>window.requestIdleCallback?requestIdleCallback(f,{timeout:1000}):setTimeout(f,60);
+  const next=()=>{if(i>=ks.length)return;gv_place(ks[i++]);idle(next);};setTimeout(()=>idle(next),200);}
 if(window.__RENDER__){(function(){const MB=8,SHUT=0.35/30,out=document.querySelector("canvas"),ox=out.getContext("2d"),
     M=mkCanvas(W,H),mx=M.getContext("2d"),A=mkCanvas(W,H),ax=A.getContext("2d");
   window.renderAt=function(t,q){

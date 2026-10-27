@@ -34,11 +34,6 @@ const NARR={
  {"id":"for","gap":0.8,"text":"That's what governance is for: deciding who decides, and making sure each decision reaches the work."},
  {"id":"like","gap":0.8,"text":"Like the inspector at the market: a rule, a copy where the work happens, and someone who checks."},
  {"id":"mgmt","gap":0.8,"text":"Governance sets the rules and checks they're kept. Management does the work."}]},
-"wheel":{"name":"Governance at the centre","lead":1.0,"tail":1.0,"vo":[
- {"id":"body","gap":0.8,"text":"Data management has a body of knowledge: DAMA's.","say":"Data management has a body of knowledge: Dahma's."},
- {"id":"wheel","gap":0.8,"text":"It draws eleven areas as a wheel, with governance at the centre, where the others meet."},
- {"id":"others","gap":0.8,"text":"Others cover the same ground, or part of it: DCAM, ISO 8000 for data quality, and ISO/IEC 38505 for governing data.","say":"Others cover the same ground, or part of it: Dee-cam, eye-so eight thousand for data quality, and eye-so, I E C, thirty-eight five oh five, for governing data."},
- {"id":"takes","gap":0.8,"text":"This series takes what they agree on, and shows where it runs."}]},
 "listen":{"name":"Listen first","lead":1.0,"tail":1.0,"vo":[
  {"id":"ask","gap":0.8,"text":"Yusuf doesn't write a thirty-fifth policy. He asks everyone the same question: what slows you down?"},
  {"id":"jun","gap":0.8,"text":"For Jun, the rules arrive after the work is built."},
@@ -49,18 +44,20 @@ const NARR={
  {"id":"tools","gap":0.8,"text":"Governance is people's work. Tools can carry out what people agree, but they can't make them agree."}]},
 "runs":{"name":"Where does it run?","lead":1.4,"tail":1.0,"vo":[
  {"id":"takes","gap":0.8,"text":"So he opens the binder, with one question for every line: where does it run?"},
- {"id":"runs","gap":0.8,"text":"Some lines can run in the work itself, as a required field, a check, a tag or a test."},
+ {"id":"runs","gap":0.8,"text":"Some lines can run in the work itself, as a field no one can leave empty, a check that runs every night, or a label."},
  {"id":"owned","gap":0.8,"text":"Some are decisions: someone owns each one, and writes it down where the work can find it."},
  {"id":"go","gap":0.8,"text":"And some can go."}]},
-"enter":{"name":"Where decisions enter","lead":1.3,"tail":1.0,"vo":[
- {"id":"places","gap":0.8,"text":"And the work already has places for them."},
- {"id":"loop","gap":0.8,"text":"The data team builds in a loop of ten steps, from a question to a new version."},
- {"id":"pin","gap":0.8,"text":"Governance doesn't need another meeting. It needs a pin at the right steps:"},
- {"id":"pins","text":"a term when the question is asked, a classification at the source, an owner and a contract,"},
- {"id":"pins2","gap":0.8,"text":"a rule as a test, an approval at review, and a version when it changes."}]},
+"keep":{"name":"What's worth keeping","lead":1.3,"tail":1.0,"vo":[
+ {"id":"keep","gap":0.8,"text":"Behind every line that stays, there's something worth keeping, and someone to keep it."},
+ {"id":"rules","gap":0.8,"text":"Rules, each with an owner, that reach Jun before he builds."},
+ {"id":"words","gap":0.8,"text":"One glossary every report reads from, so Mei sees where her words are used."},
+ {"id":"classes","gap":0.8,"text":"A class for each kind of personal data, so Sam knows which columns to protect."},
+ {"id":"owners","gap":0.8,"text":"And a list of who owns what, so Planning knows who answers for each number."},
+ {"id":"decide","gap":0.8,"text":"Owners decide. Stewards keep it all up to date."},
+ {"id":"act","gap":0.8,"text":"The teams who do the work use it, and governance checks it's kept."}]},
 "series":{"name":"The series","lead":1.0,"tail":1.0,"vo":[
- {"id":"next","gap":0.8,"text":"Over nine more films, Yusuf takes the binder off the shelf, one kind of policy at a time."},
- {"id":"map","gap":0.8,"text":"Then three more design governance as a capability that lasts."},
- {"id":"tools","gap":0.8,"text":"And six show how to build each piece, with dbt and Databricks."},
+ {"id":"next","gap":0.8,"text":"Over nine more films, Yusuf follows one symptom at a time to what's worth keeping, and to who decides and acts."},
+ {"id":"map","gap":0.8,"text":"Then three draw it all as one model, on the university's architecture map."},
+ {"id":"tools","gap":0.8,"text":"And six build it, with dbt and Databricks."},
  {"id":"wish","gap":0.8,"text":"A policy that doesn't run anywhere is a wish."}]}
 };

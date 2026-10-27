@@ -111,97 +111,89 @@ Como el inspector del mercado: una regla, una copia donde se hace el trabajo y a
 La gobernanza fija las reglas y verifica que se cumplan. La gestión hace el trabajo.
 
 29
-00:02:46,889 --> 00:02:50,135
-La gestión de datos tiene un cuerpo de conocimiento: el de DAMA.
-
-30
-00:02:50,835 --> 00:02:55,929
-Dibuja once áreas como una rueda, con la gobernanza en el centro, donde se unen las demás.
-
-31
-00:02:57,229 --> 00:03:07,917
-Otros cubren el mismo terreno, o parte de él: DCAM, ISO 8000 para la calidad de datos e ISO/IEC 38505 para gobernar los datos.
-
-32
-00:03:08,617 --> 00:03:11,898
-Esta serie toma aquello en lo que coinciden y muestra dónde se ejecuta.
-
-33
-00:03:14,598 --> 00:03:20,929
+00:02:46,889 --> 00:02:53,220
 Yusuf no escribe una política número treinta y cinco. Les hace a todos la misma pregunta: ¿qué te frena?
 
-34
-00:03:22,229 --> 00:03:25,228
+30
+00:02:54,520 --> 00:02:57,519
 Para Jun, las reglas llegan cuando el trabajo ya está hecho.
 
-35
-00:03:26,428 --> 00:03:29,579
+31
+00:02:58,719 --> 00:03:01,870
 Mei aprueba las palabras y luego nunca ve dónde se usan.
 
-36
-00:03:30,779 --> 00:03:34,211
+32
+00:03:03,070 --> 00:03:06,502
 Sam podría proteger una columna en minutos, si alguien le dijera cuál.
 
-37
-00:03:35,511 --> 00:03:37,617
+33
+00:03:07,802 --> 00:03:09,908
 Planificación no sabe en qué número confiar.
 
-38
-00:03:38,817 --> 00:03:43,049
+34
+00:03:11,108 --> 00:03:15,340
 Quienes escribieron la carpeta no eran el problema. Escribieron lo que se les pidió.
 
-39
-00:03:44,349 --> 00:03:50,255
+35
+00:03:16,640 --> 00:03:22,546
 La gobernanza es trabajo de personas. Las herramientas ejecutan lo que la gente acuerda, pero no logran que se pongan de acuerdo.
 
-40
-00:03:54,355 --> 00:03:58,879
+36
+00:03:26,646 --> 00:03:31,170
 Así que abre la carpeta, con una pregunta para cada línea: ¿dónde se ejecuta?
 
-41
-00:04:00,179 --> 00:04:05,926
-Algunas pueden ejecutarse en el trabajo: un campo obligatorio, una validación, una etiqueta o una prueba.
+37
+00:03:32,470 --> 00:03:40,039
+Algunas pueden ejecutarse en el trabajo: un campo que nadie puede dejar vacío, una validación cada noche o una etiqueta.
 
-42
-00:04:07,526 --> 00:04:12,457
+38
+00:03:41,639 --> 00:03:46,570
 Otras son decisiones: cada una tiene un dueño, que la anota donde el trabajo pueda encontrarla.
 
-43
-00:04:14,057 --> 00:04:15,171
+39
+00:03:48,170 --> 00:03:49,284
 Y otras sobran.
 
+40
+00:03:53,284 --> 00:03:57,946
+Detrás de cada línea que queda hay algo que vale la pena mantener, y alguien que lo mantenga.
+
+41
+00:03:59,246 --> 00:04:02,770
+Reglas, cada una con su dueño, que le llegan a Jun antes de construir.
+
+42
+00:04:03,470 --> 00:04:08,102
+Un solo glosario para todos los informes, así Mei ve dónde se usan sus palabras.
+
+43
+00:04:08,802 --> 00:04:13,614
+Una clase para cada tipo de dato personal, para que Sam sepa qué columnas proteger.
+
 44
-00:04:19,171 --> 00:04:21,108
-Y el trabajo ya tiene lugares para ellas.
+00:04:14,314 --> 00:04:18,613
+Y una lista de dueños, para que Planificación sepa quién responde por cada cifra.
 
 45
-00:04:22,308 --> 00:04:26,992
-El equipo de datos trabaja en un ciclo de diez pasos, de una pregunta a una nueva versión.
+00:04:19,913 --> 00:04:22,948
+Los dueños deciden. Los responsables de datos lo actualizan.
 
 46
-00:04:28,692 --> 00:04:32,828
-La gobernanza no necesita otra reunión. Necesita una tachuela en los pasos correctos:
+00:04:24,048 --> 00:04:27,532
+Los equipos que hacen el trabajo lo usan, y la gobernanza revisa que se mantenga.
 
 47
-00:04:34,128 --> 00:04:39,591
-un término al hacer la pregunta, una clasificación en la fuente, un dueño y un contrato,
+00:04:33,232 --> 00:04:40,406
+En nueve películas más, Yusuf sigue un síntoma a la vez hasta lo que vale la pena mantener, y hasta quién decide y actúa.
 
 48
-00:04:39,791 --> 00:04:44,163
-una regla como prueba, una aprobación en la revisión y una versión cuando cambia.
+00:04:41,606 --> 00:04:46,217
+Luego, tres lo dibujan como un solo modelo, en el mapa de arquitectura de la universidad.
 
 49
-00:04:49,863 --> 00:04:55,596
-En nueve películas más, Yusuf baja la carpeta del estante, un tipo de política a la vez.
+00:04:47,317 --> 00:04:50,376
+Y seis lo construyen, con dbt y Databricks.
 
 50
-00:04:56,796 --> 00:05:00,432
-Luego, tres más diseñan la gobernanza como una capacidad que perdura.
-
-51
-00:05:01,132 --> 00:05:05,239
-Y seis muestran cómo construir cada pieza, con dbt y Databricks.
-
-52
-00:05:06,539 --> 00:05:09,094
+00:04:51,676 --> 00:04:54,231
 Una política que no se ejecuta en ningún lado es un deseo.

@@ -1,0 +1,7 @@
+name: Registrar's office stewards
+kind: business actor
+actor: team
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: data steward
+status: confirmed

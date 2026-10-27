@@ -12,7 +12,7 @@ The series starts before technology, with how minds turn the world into words, a
 | Film | Topic | Length | Chapters | Labs and scenarios | Script |
 |---|---|---|---|---|---|
 | [What's in a word](https://data.learn-all.org/from-words-to-data/whats-in-a-word/) | Language and meaning | 6 min | 10 | 4 labs, 8 scenarios | [script](1-whats-in-a-word/script.md) · [source](1-whats-in-a-word/source/README.md) |
-| [Older than the systems](https://data.learn-all.org/from-words-to-data/older-than-the-systems/) | Models and systems | 5½ min | 8 | 3 labs, 8 scenarios | [script](2-older-than-the-systems/script.md) · [source](2-older-than-the-systems/source/README.md) |
+| [Older than the systems](https://data.learn-all.org/from-words-to-data/older-than-the-systems/) | Models and systems | 5½ min | 8 | 5 labs, 8 scenarios | [script](2-older-than-the-systems/script.md) · [source](2-older-than-the-systems/source/README.md) |
 | [Built to write, built to read](https://data.learn-all.org/from-words-to-data/built-to-write-built-to-read/) | Shapes for data | 5 min | 8 | 3 labs, 8 scenarios | [script](3-built-to-write-built-to-read/script.md) · [source](3-built-to-write-built-to-read/source/README.md) |
 | [Many ways to read](https://data.learn-all.org/from-words-to-data/many-ways-to-read/) | Shapes for reading | 4 min | 8 | 3 labs, 8 scenarios | [script](4-many-ways-to-read/script.md) · [source](4-many-ways-to-read/source/README.md) |
 | [Both at once](https://data.learn-all.org/from-words-to-data/both-at-once/) | Hybrid databases | 4 min | 9 | 3 labs, 8 scenarios | [script](5-both-at-once/script.md) · [source](5-both-at-once/source/README.md) |

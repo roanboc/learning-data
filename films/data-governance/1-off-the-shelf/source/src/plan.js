@@ -11,10 +11,13 @@
 // The operating room: pale green walls, a grey-green floor; at the head of the table the anaesthetic machine and its screen, a glass
 // cabinet, the drip stand, a lit X-ray screen, the clock, the count board and the door; the light over the table. The table, the
 // patient under the drape and the instrument trolley are drawn after the people who stand behind them (os_orFront).
-const OS_OR={fy:862,wall:[204,222,214],floor:[180,192,188],table:[430,1300,646],pole:452,bag:[452,292],port:[476,566],wrist:[652,602],
+const OS_OR={fy:862,wall:[204,222,214],floor:[180,192,188],table:[430,1300,646],pole:452,bag:[452,292],port:[552,544],
+  head:[452,590],shoulder:[544,614],elbow:[624,630],wrist:[700,610],
   cab:[536,176,262,232],xray:[1010,214,190,150],clock:[1346,112],count:[1250,192,350,214],door:[1648,252,186],trolley:[1340,1590,652],
   light:[1004,150]};
 const OS_DRAPE=[112,166,172],OS_STEEL=[184,192,198],OS_SCRUB=[96,150,186],OS_GOWN=[156,190,212],OS_CAPLITE=[214,226,236];
+// the patient's hospital gown: pale, with a small print
+const OS_PGOWN=[206,218,230],OS_PDOT=[126,154,194];
 
 /* the team, in 2008: scrubs, caps and masks; the surgeon and the scrub nurse in sterile gowns and gloves. Invented people, drawn as the
    series draws people of the past, with a warm umber wash behind them. */
@@ -28,7 +31,7 @@ Object.assign(PEOPLE,{
   os_nurse:{name:"",role:"nurse",side:"",edge:GV_PAST,seed:44,skin:[204,152,114],hair:{style:"cropped",c:[36,28,26]},hat:"os_cap",hatC:[66,138,140],capDots:[244,204,100],
     mask:[198,220,232],top:{kind:"scrubs",c:[80,148,152],rolled:true},bottom:{c:[80,148,152]},shoe:[230,232,236],build:{sh:72,hip:62,h:0.99}},
   os_patient:{name:"",role:"patient",side:"",edge:GV_PAST,seed:45,skin:[228,192,162],hair:{style:"cropped",c:[176,170,166]},hat:"os_cap",hatC:OS_CAPLITE,
-    top:{kind:"shirt",c:[220,226,232]},bottom:{c:[200,200,200]},shoe:[200,200,200],build:{sh:66,hip:60,h:1}}
+    top:{kind:"shirt",c:OS_PGOWN},bottom:{c:[200,200,200]},shoe:[200,200,200],build:{sh:66,hip:60,h:1}}
 });
 // their clothes: the series' engine stays as it is; these wrap its torso, head and arms for this film's own kinds only
 const os_torsoBase=torso,os_headBase=head,os_armBase=arm;
@@ -70,13 +73,13 @@ head=function(ctx,P,E,po,t){os_headBase(ctx,P,E,po,t);if(P.hat==="os_cap")os_cap
 // gloved hands: the hands take the gloves' colour, the sleeves go to the wrist
 arm=function(ctx,P,s,a,br,po){if(!P.gloves)return os_armBase(ctx,P,s,a,br,po);const sk=P.skin;P.skin=P.gloves;os_armBase(ctx,P,s,a,br,po);P.skin=sk;};
 // how they stand: hands up and clear, as a sterile team keeps them; reading the checklist; a hand held up to wait; giving the antibiotic
-// through the drip; carrying a tray; a tick on the clipboard
+// into the drip's port, the arm over the patient's head; carrying a tray; a tick on the clipboard
 Object.assign(POSE,{
   os_sterile:{L:[0.24,-2.66],R:[0.24,-2.66],feet:24,shift:0,tilt:0.02,turn:0.02,gaze:[0.1,0.7],look:1},
   os_sterileUp:{L:[0.24,-2.66],R:[0.24,-2.66],feet:24,shift:2,tilt:-0.02,turn:0.1,gaze:[0.6,0.1],look:0},
   os_read:{L:[0.25,-1.45],R:[0.25,-1.45],feet:26,shift:2,tilt:0.04,turn:0.05,gaze:[0.1,1],look:1},
   os_stop:{L:[0.25,-1.45],R:[0.5,2.9],hand:"open",feet:30,shift:4,tilt:-0.03,turn:0.25,gaze:[0.8,0],look:0},
-  os_inject:{L:[0.16,-0.1],R:[0.3,2.62],feet:30,shift:6,tilt:-0.04,turn:0.3,gaze:[0.8,0.6],look:1},
+  os_inject:{L:[0.16,-0.1],R:[2.435,1.094],feet:30,shift:6,tilt:-0.04,turn:0.3,gaze:[0.8,0.6],look:1},
   os_tray:{L:[0.3,-1.75],R:[0.3,-1.75],feet:24,shift:0,tilt:0,turn:0.1,gaze:[0.4,0.2],look:0},
   os_tick:{L:[0.25,-1.45],R:[0.15,-1.9],feet:26,shift:2,tilt:0.05,turn:0.05,gaze:[0.1,1],look:1}
 });
@@ -161,24 +164,26 @@ function os_counts(ctx,n,a){if(a<=0.01)return;const [bx,by,bw]=OS_OR.count;withA
   wc_T(ctx,s,x,by+42,{w:600,size:20,align:"center",col:[60,110,170],deco:true});const k=n[i];ctx.save();ctx.strokeStyle=rgba([60,110,170],0.85);ctx.lineWidth=3;ctx.lineCap="round";
   for(let j=0;j<k;j++){const g=Math.floor(j/5),r=j%5,x0=x-36+g*0+(r<4?r*12:0),y0=by+76+g*44;ctx.beginPath();if(r<4){ctx.moveTo(x0,y0);ctx.lineTo(x0,y0+30);}else{ctx.moveTo(x-40,y0+26);ctx.lineTo(x+6,y0+4);}ctx.stroke();}ctx.restore();});});}
 
-// what's in front of the people behind the table: the table and its column, the patient under the drape, the patient's arm on it with
-// the band at the wrist and the drip's line to the hand, the pillow; the instrument trolley, its cloth, the instruments, the sponges
+// what's in front of the people behind the table: the table and its column, the drape over the patient from the chest down, the pillow,
+// the patient (os_patientBody) and the drip's line, from the bag to the port by the head and on to the back of the hand; the instrument
+// trolley, its cloth, the instruments, the sponges
 function os_orFront(ctx){ctx.drawImage(wc_kept("orFront",W,H,q=>{const O=OS_OR,[t0,t1,ty]=O.table,F=O.fy;
   wc_contact(q,840,1160,F+2,0.9,0.32);wc_part(q,wc_rect(930,ty+150,90,F-ty-160),[150,158,166],1,{lw:1.2});wc_part(q,[[836,F-14],[1114,F-14],[1100,F+4],[850,F+4]],[136,144,152],1,{lw:1.1});
-  // the drape over the patient: high at the chest and the feet, falling over the table's edge in folds
-  const top=[[t0+70,ty-30],[t0+150,ty-58],[t0+250,ty-76],[t0+380,ty-68],[t0+500,ty-50],[t0+630,ty-42],[t0+740,ty-56],[t0+800,ty-64],[t1-110,ty-52],[t1-50,ty-74],[t1-12,ty-66],[t1+14,ty-38]];
-  const drape=[[t0+40,ty]].concat(top,[[t1+30,ty],[t1+42,ty+150],[t1-60,ty+164],[t0+600,ty+170],[t0+120,ty+164],[t0+20,ty+150]]);
+  // the drape: flat on the table under the patient's shoulders, then over the patient from the chest down, high at the chest and the
+  // feet, falling over the table's edge in folds
+  const top=[[t0+250,ty-76],[t0+380,ty-68],[t0+500,ty-50],[t0+630,ty-42],[t0+740,ty-56],[t0+800,ty-64],[t1-110,ty-52],[t1-50,ty-74],[t1-12,ty-66],[t1+14,ty-38]];
+  const drape=[[t0+40,ty],[t0+90,ty-4],[t0+168,ty-6],[t0+182,ty-40],[t0+192,ty-72]].concat(top,[[t1+30,ty],[t1+42,ty+150],[t1-60,ty+164],[t0+600,ty+170],[t0+120,ty+164],[t0+20,ty+150]]);
   wc_wash(q,wc_smooth(drape,6),OS_DRAPE,{kind:"build",lw:1.6,seed:30});q.save();wc_tr(q,wc_smooth(drape,6));q.clip();q.strokeStyle=rgba(wc_dim(OS_DRAPE,0.3),0.35);q.lineWidth=3;q.lineCap="round";
   for(let x=t0+80;x<t1;x+=96){q.beginPath();q.moveTo(x,ty+6);q.quadraticCurveTo(x+18,ty+80,x+6,ty+160);q.stroke();}q.strokeStyle=rgba(wc_lit(OS_DRAPE,0.35),0.4);q.lineWidth=7;
-  q.beginPath();q.moveTo(t0+100,ty-12);for(const [x,y] of top.slice(1))q.lineTo(x,y+12);q.stroke();q.restore();
+  q.beginPath();q.moveTo(t0+200,ty-62);for(const [x,y] of top)q.lineTo(x,y+12);q.stroke();q.restore();
   // the pillow, under the head (drawn after this, os_patientHead)
-  wc_wash(q,wc_ell(O.wrist[0]-196,ty-24,76,26,30),[246,248,250],{kind:"thing",lw:1.3,seed:32});
-  // the arm, lying on the drape, the band at the wrist, the hand; the drip's line comes down to the back of the hand
-  const P=PEOPLE.os_patient,[wx,wy]=O.wrist;q.save();q.lineCap="round";q.strokeStyle=rgba(wc_dim(P.skin,0.35),0.5);q.lineWidth=30;q.beginPath();q.moveTo(t0+96,ty-34);q.quadraticCurveTo(wx-120,wy-8,wx,wy);q.stroke();
-  q.strokeStyle=rgba(P.skin,1);q.lineWidth=26;q.stroke();wc_wash(q,wc_ell(wx+30,wy+2,24,15,20),P.skin,{kind:"thing",lw:1.1,seed:33});
-  wc_wash(q,wc_rrPts(wx-16,wy-16,16,32,5),[250,250,252],{kind:"thing",lw:1.2,seed:34});q.fillStyle=rgba([96,140,190],0.9);q.fillRect(wx-13,wy-6,10,12);
-  q.strokeStyle=rgba([210,226,236],0.95);q.lineWidth=3;q.beginPath();q.moveTo(O.bag[0],O.bag[1]+46);q.bezierCurveTo(O.bag[0]+6,O.port[1]-90,O.port[0]-4,O.port[1]-30,O.port[0],O.port[1]);
-  q.quadraticCurveTo(O.port[0]+90,O.port[1]+64,wx+32,wy-6);q.stroke();q.fillStyle=rgba([226,232,236],1);q.fillRect(O.port[0]-5,O.port[1]-8,10,16);q.restore();
+  wc_wash(q,wc_ell(O.head[0]+4,ty-24,76,26,30),[246,248,250],{kind:"thing",lw:1.3,seed:32});
+  os_patientBody(q);
+  // the drip's line: down from the bag to the port the anaesthetist uses, above the patient's shoulder, and on to the back of the hand
+  const [wx,wy]=O.wrist,[px,py]=O.port;q.save();q.lineCap="round";q.strokeStyle=rgba([210,226,236],0.95);q.lineWidth=3;q.beginPath();q.moveTo(O.bag[0],O.bag[1]+46);
+  q.bezierCurveTo(O.bag[0]+4,py-100,px-10,py-50,px,py);q.bezierCurveTo(px+50,py+24,wx-40,wy-30,wx+20,wy-12);q.stroke();
+  q.fillStyle=rgba([226,232,236],1);q.strokeStyle=rgba(WC_PENCIL,0.6);q.lineWidth=1.2;q.beginPath();rr(q,px-6,py-9,12,18,3);q.fill();q.stroke();
+  q.fillStyle=rgba([70,120,190],0.95);q.beginPath();rr(q,px+5,py-4,7,8,2);q.fill();q.restore();
   // the trolley: four legs on wheels, a shelf, the cloth over its top; the instruments on a tray, the sponges in a stack, a bowl
   const [r0,r1,ry]=O.trolley;wc_contact(q,r0-10,r1+10,F+2,0.9,0.3);for(const x of [r0+16,r1-28])wc_part(q,wc_rect(x,ry+20,12,F-ry-34),OS_STEEL,1,{lw:1});
   for(const x of [r0+22,r1-22])wc_wash(q,wc_ell(x,F-8,12,12,12),[70,74,84],{kind:"thing",lw:1});wc_part(q,wc_rect(r0+8,F-150,r1-r0-16,12),OS_STEEL,1,{lw:1});
@@ -189,8 +194,44 @@ function os_orFront(ctx){ctx.drawImage(wc_kept("orFront",W,H,q=>{const O=OS_OR,[
   wc_wash(q,[[r1-28,ry-30],[r1+8,ry-30],[r1+2,ry-8],[r1-22,ry-8]],OS_STEEL,{kind:"thing",lw:1.1,seed:38});
   // the light's glow on the drape
   q.save();q.globalCompositeOperation="screen";wc_glowAt(q,O.light[0],ty-30,420,[255,248,226],0.28);q.restore();}),0,0);}
+// the patient, lying on the table: the neck, from under the jaw, and the shoulders in a hospital gown; the drape's edge turned back across
+// the chest; the arm out of the gown's sleeve, lying on the drape, the band at the wrist, the cannula on the back of the hand. Drawn the
+// way the people are, so the head (os_patientHead, on the pillow) joins on.
+function os_patientBody(q){const P=PEOPLE.os_patient,O=OS_OR,[hx,hy]=O.head,[sx,sy]=O.shoulder,[ex,ey]=O.elbow,[wx,wy]=O.wrist;
+  const dots=(cx,pts,x0,y0,x1,y1)=>{cx.save();wc_tr(cx,pts);cx.clip();cx.fillStyle=rgba(OS_PDOT,0.7);
+    for(let y=y0,r=0;y<y1;y+=10,r++)for(let x=x0+(r%2)*6;x<x1;x+=12){cx.beginPath();cx.arc(x,y,1.5,0,TAU);cx.fill();}cx.restore();};
+  const line=(cx,pts,a)=>{cx.beginPath();cx.moveTo(pts[0][0],pts[0][1]);cx.quadraticCurveTo(pts[1][0],pts[1][1],pts[2][0],pts[2][1]);cx.strokeStyle=rgba(wc_dim(OS_PGOWN,0.5),a);
+    cx.lineWidth=1.6;cx.lineCap="round";cx.stroke();};
+  const d=[(wx-ex)/Math.hypot(wx-ex,wy-ey),(wy-ey)/Math.hypot(wx-ex,wy-ey)],ang=Math.atan2(d[1],d[0]);
+  outlined(q,cx=>{
+    // the neck, in the head's own turn: from under the jaw into the gown's collar, a shadow under the jaw
+    cx.save();cx.translate(hx,hy);cx.scale(0.8,0.8);cx.rotate(-1.32);cx.beginPath();cx.moveTo(-20,24);cx.quadraticCurveTo(-22,58,-29,90);cx.lineTo(29,90);
+    cx.quadraticCurveTo(22,58,20,24);cx.closePath();litFill(cx,P.skin,-29,24,29,90);seam(cx,P.skin,0.3,1.4);
+    cx.save();cx.clip();const g=cx.createLinearGradient(0,40,0,72);g.addColorStop(0,rgba(wc_dim(P.skin,0.25),0.5));g.addColorStop(1,rgba(wc_dim(P.skin,0.25),0));
+    cx.fillStyle=g;cx.fillRect(-40,24,80,50);cx.restore();cx.restore();
+    // the gown over the shoulders and the chest, its neckline scooped round the neck
+    const gw=wc_smooth([[507,580],[530,576],[560,573],[596,571],[624,570],[636,600],[638,648],[600,652],[548,652],[512,648],[498,638],[497,624],[511,602]],5);
+    wc_tr(cx,gw);litFill(cx,OS_PGOWN,500,571,638,652);seam(cx,OS_PGOWN,0.4,1.4);dots(cx,gw,498,572,644,656);
+    // the arm, lying on the drape beside the body, and the hand, palm down
+    limb(cx,[[sx,sy],[ex,ey],[wx,wy]],25,21,P.skin,[sx,sy-20,wx,wy+20]);
+    cx.save();cx.translate(wx,wy);cx.rotate(ang+0.22);ell(cx,13,8,6,4.5,0.3);litFill(cx,P.skin,7,3,19,13);seam(cx,P.skin,0.3,1.2);
+    cx.beginPath();cx.moveTo(-2,-9);cx.bezierCurveTo(12,-11,24,-9,31,-4);cx.quadraticCurveTo(37,2,33,8);cx.bezierCurveTo(24,11,10,10,-2,9);cx.closePath();
+    litFill(cx,P.skin,0,-11,36,10);seam(cx,P.skin,0.3,1.2);cx.strokeStyle=rgba(wc_dim(P.skin,0.4),0.45);cx.lineWidth=1.2;
+    for(const y of [-2,3]){cx.beginPath();cx.moveTo(22,y);cx.lineTo(31,y+0.6);cx.stroke();}cx.restore();
+    // the sleeve, over the shoulder's round and the top of the arm; its edge, and the fold where the arm meets the body
+    const sl=wc_smooth([[sx-20,sy-16],[sx-2,sy-21],[sx+20,sy-17],[sx+34,sy-10],[sx+33,sy+8],[sx+30,sy+20],[sx+6,sy+18],[sx-18,sy+16]],4);
+    wc_tr(cx,sl);litFill(cx,OS_PGOWN,sx-20,sy-21,sx+34,sy+20);dots(cx,sl,sx-26,sy-24,sx+40,sy+24);
+    line(cx,[[sx-22,sy-12],[sx,sy-26],[sx+22,sy-18]],0.75);line(cx,[[sx+34,sy-10],[sx+38,sy+4],[sx+30,sy+20]],0.9);line(cx,[[sx-10,sy+14],[sx+8,sy+22],[sx+26,sy+20]],0.4);
+  },0,0,1,P.edge,[440,540,800,680]);
+  // the drape's edge, turned back across the chest, under the arm
+  const [bc,bx]=wc_buf("osHem",W,H);bx.clearRect(0,0,W,H);wc_wash(bx,wc_smooth([[606,579],[616,572],[628,571],[631,606],[634,650],[622,652],[612,650],[609,612]],4),wc_lit(OS_DRAPE,0.12),{kind:"build",lw:1.4,seed:31});
+  bx.save();bx.globalCompositeOperation="destination-out";bx.lineCap="round";bx.lineJoin="round";bx.lineWidth=31;bx.beginPath();bx.moveTo(sx,sy);bx.lineTo(ex,ey);bx.lineTo(wx,wy);bx.stroke();bx.restore();
+  q.drawImage(bc,0,0);
+  // the band at the wrist, with its label; the cannula, taped to the back of the hand
+  wc_wash(q,wc_rrPts(wx-9,wy-15,13,30,5),[250,250,252],{kind:"thing",lw:1.2,seed:34});q.fillStyle=rgba([96,140,190],0.9);q.fillRect(wx-7,wy-6,9,12);
+  wc_wash(q,wc_rrPts(wx+12,wy-16,15,9,3),[246,246,240],{kind:"thing",lw:1,seed:35});}
 // the patient's head on the pillow, turned towards us; awake (o.awake) or asleep
-function os_patientHead(ctx,t,awake){const P=PEOPLE.os_patient,x=OS_OR.wrist[0]-200,y=OS_OR.table[2]-56,E=awake?EXPR.calm:{bi:0,bo:0,arch:-2,eye:0.05,smile:0.1,open:0,mw:15};
+function os_patientHead(ctx,t,awake){const P=PEOPLE.os_patient,[x,y]=OS_OR.head,E=awake?EXPR.calm:{bi:0,bo:0,arch:-2,eye:0.05,smile:0.1,open:0,mw:15};
   outlined(ctx,cx=>{cx.rotate(-1.32);head(cx,P,E,Object.assign({},POSE.stand,{turn:0,look:0,gaze:[0.4,-0.3]}),awake?t:0.3);},x,y,0.8,P.edge,[-110,-120,110,110]);}
 
 /* the theatre office down the corridor: a steel shelf of binders and manuals, and on it the guidelines the steps were written in */

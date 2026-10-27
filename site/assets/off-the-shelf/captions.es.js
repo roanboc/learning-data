@@ -43,16 +43,18 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "El borrador de la entrega al gobierno dice 4,867.",
 "Which number is right?":
 "¿Cuál número es el correcto?",
-"Yusuf follows the numbers back.":
-"Yusuf sigue el rastro de los números.",
+"The data team checks both numbers.":
+"El equipo de datos revisa los dos números.",
 "Both are right, each by its own meaning of award.":
 "Ambos son correctos, cada uno con su sentido de título.",
 "On Monday, the word changed: microcredentials of at least six credit points now count.":
 "El lunes, la palabra cambió: ahora cuentan las microcredenciales de al menos seis créditos.",
 "One report ran before the change, the other after.":
 "Un informe se generó antes del cambio; el otro, después.",
-"But the government counts awards by its own definition. Who decides how ours maps to it?":
-"Pero el gobierno cuenta los títulos con su propia definición. ¿Quién decide cómo se mapea la nuestra a la suya?",
+"But the government counts awards by its own definition, and no one agrees which number matches it.":
+"Pero el gobierno cuenta los títulos con su propia definición, y nadie se pone de acuerdo en cuál número coincide con ella.",
+"So the data team takes it to Yusuf, in data governance: who decides?":
+"Así que el equipo de datos se lo lleva a Yusuf, en gobernanza de datos: ¿quién decide?",
 "Mei owns what award means here. Jun builds what the model says. Planning reports what it's given.":
 "Mei es dueña de lo que significa título aquí. Jun construye lo que dice el modelo. Planificación informa lo que recibe.",
 "And the chart says: to be confirmed.":

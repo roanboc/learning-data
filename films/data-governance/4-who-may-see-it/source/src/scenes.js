@@ -204,7 +204,7 @@ scene("path",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s,
       const ca=fin(tt,P.later-0.3,0.5);if(ca>0.01){const f=clamp((tt-P.later)/1.2,0,3)+clamp((tt-P.ended)/1.8,0,5),i=Math.min(WS_MONTHS.length-2,Math.floor(f)),fl=Math.min(1,f-i);
         withA(x,ca,()=>ws_calendar(x,O.cal[0],O.cal[1],WS_MONTHS[i],WS_MONTHS[i+1],i>=WS_MONTHS.length-2?0:fl));}
       ws_printout(x,O.print[0],O.print[1],(tt-P.whole+0.2)/1.4,1);ws_keyTag(x,O.key[0],O.key[1]+(1-easeCam(fin(tt,P.grant,0.6)))*-60,O.key[2],"Clara Jensen",fin(tt,P.grant,0.5));}},
-    // the platform team's desk: Yusuf asks Sam who can read the learner table today
+    // the platform team's desk: Sam checks who can read the learner table today, and shows Yusuf, standing behind him
     {at:P.plat,place:"platform",keys:[[P.plat,1000,540,1],[P.plat+0.1,1040,520,1.06]],d:2.6,draw:(x,tt)=>{
       gv_behind(x,"yusuf",1790,GV_PX.top,1.55,{standing:true,pose:"listen",t:tt,flip:true});ws_sam(x,tt,{pose:"write"});x.drawImage(gv_place("platformDesk"),0,0,W,H);
       const [sx,sy,sw,sh]=GV_PX.screens[0];gv_screen(x,sx,sy,sw,sh,"who can read",null,{barH:44,titleSize:28});gv_lines(x,sx+30,sy+90,sw-120,6,34,0.8);

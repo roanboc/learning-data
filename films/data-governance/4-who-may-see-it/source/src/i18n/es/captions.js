@@ -60,8 +60,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Tres semanas después, toda la tabla de estudiantes, con nombres y correos, concedida a ella por nombre.",
 "And nothing ever ended it.":
 "Y nada le puso fin.",
-"Yusuf checks who can read that table today: forty-one people.":
-"Yusuf revisa quién puede leer esa tabla hoy: cuarenta y una personas.",
+"The platform team checks who can read that table today: forty-one people.":
+"El equipo de plataforma revisa quién puede leer esa tabla hoy: cuarenta y una personas.",
 "Nine have moved to other jobs.":
 "Nueve ya están en otros puestos.",
 "Nobody did anything wrong.":

@@ -9,5 +9,5 @@ const BREATH={
 "steps":{"hold":{"every":0.6,"models":0.6,"rest":0.6,"check":0.8,"source":0.3,"join":0.3}},
 "readers":{"hold":{"knows":0.6,"dash":0.5,"three":0.6},"breathe":1.0},
 "life":{"hold":{"life":0.5,"draft":0.6,"dep":0.8,"v1":0.6},"breathe":1.0},
-"found":{"hold":{"finds":0.6,"like":0.8,"runs":0.8},"breathe":5.0}
+"found":{"hold":{"finds":0.6,"like":0.8,"runs":0.8,"own":1.2},"breathe":5.0}
 };

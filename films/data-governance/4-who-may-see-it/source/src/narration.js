@@ -32,7 +32,7 @@ const NARR={
  {"id":"approval","gap":0.6,"text":"An approval, by email."},
  {"id":"weeks","gap":0.8,"text":"Three weeks later, the whole learner table, names and emails included, granted to her by name."},
  {"id":"ended","gap":0.8,"text":"And nothing ever ended it."},
- {"id":"checks","gap":0.8,"text":"Yusuf checks who can read that table today: forty-one people."},
+ {"id":"checks","gap":0.8,"text":"The platform team checks who can read that table today: forty-one people."},
  {"id":"nine","gap":0.8,"text":"Nine have moved to other jobs."},
  {"id":"nobody","gap":0.6,"text":"Nobody did anything wrong."},
  {"id":"noend","gap":0.8,"text":"The path just had no end."}]},

@@ -35,7 +35,7 @@ Autumn 2008: a bank's board asks how much it stands to lose if another bank fail
 
 *Watercolour,* the series' look, as in *Off the shelf*.
 
-- **The place and year in the corner** of every scene from the past, as *Off the shelf*'s market town has: "2008 · a bank", "Los Angeles · 1980", "United States · 2002", "Basel · 2013".
+- **The place and year in the corner** of every scene from the past, as *Off the shelf*'s operating room has its year: "2008 · a bank", "Los Angeles · 1980", "United States · 2002", "Basel · 2013".
 - **Other organisations' rooms, on purpose,** because the point is that the problem is everywhere: a bank's risk floor at night, a 1970s office floor, a meeting room in Los Angeles, a boardroom, the regulators' table, an office in Europe, a team training a model. No company is named and no logo appears. The film ends in the university, where *Off the shelf* begins.
 - **People invented, and dressed for their time:** wide collars, earth tones and big glasses in the 1970s and 1980; dark suits in 2002 and 2013; shirtsleeves and lanyards late at night in 2008; smart and casual from 2017 on.
 - **The thread on a shelf.** An empty shelf takes the first edition in 2009; the second joins it in 2017 with a tab for ethics; the revision of 2024 with a tab for AI, and a draft marked "3.0" leans beside them. At the end, the newest copy is on Yusuf's desk.

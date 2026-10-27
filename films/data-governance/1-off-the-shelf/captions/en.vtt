@@ -1,151 +1,166 @@
 WEBVTT
 
-00:00:01.400 --> 00:00:04.345
-In 1215, Magna Carta made a promise.
+00:00:01.400 --> 00:00:05.052
+Surgical teams have long known the steps that keep patients safe.
 
-00:00:05.045 --> 00:00:10.973
-“There is to be one measure of wine throughout our kingdom, and one measure of ale, and one measure of corn.”
+00:00:05.752 --> 00:00:12.265
+Check it's the right patient. Give the antibiotic before the first cut. Count every sponge before closing.
 
-00:00:12.273 --> 00:00:17.725
-For six hundred years, the promise was repeated, and measures still differed from town to town.
+00:00:13.565 --> 00:00:18.644
+The steps were written in guidelines, but in a busy operating room, they were often skipped.
 
-00:00:19.025 --> 00:00:23.064
-Kings sent standards to the towns. Officers checked them now and then.
+00:00:19.744 --> 00:00:24.370
+Patients paid for it: infections, mistakes, and deaths that could have been avoided.
 
-00:00:24.164 --> 00:00:32.723
-It wasn't enough. In 1871, a member of Parliament said that in his county alone, a bushel meant thirty-two different measures.
+00:00:25.070 --> 00:00:26.458
+Something had to change.
 
-00:00:34.223 --> 00:00:36.335
-What finally worked was all of it together:
+00:00:27.758 --> 00:00:32.767
+In 2008, a study in eight hospitals, in eight countries, tried one change.
 
-00:00:36.535 --> 00:00:44.568
-one definition in law, a copy in every county, and an inspector who checked against it, again and again, with the law behind him.
+00:00:33.867 --> 00:00:39.648
+Three times in every operation, the team paused, and a nurse read a short checklist out loud.
 
-00:00:51.868 --> 00:00:56.197
+00:00:40.348 --> 00:00:44.405
+Each step was confirmed, and the nurse could hold the team until it was done.
+
+00:00:45.705 --> 00:00:52.181
+Deaths after surgery nearly halved, from 1.5 to 0.8 in every hundred patients.
+
+00:00:53.681 --> 00:00:55.365
+What worked was all of it together:
+
+00:00:55.565 --> 00:01:01.705
+one agreed list, a copy in the room where the work happens, and someone who checks every step, every time.
+
+00:01:09.605 --> 00:01:13.934
 Today, Yusuf Demir starts as the university's data governance lead.
 
-00:00:57.297 --> 00:01:03.151
+00:01:15.034 --> 00:01:20.888
 He inherits a shelf of thirty-four policies, and a maturity score: 2.1 out of 5.
 
-00:01:04.451 --> 00:01:09.078
+00:01:22.188 --> 00:01:26.815
 A chart of who's responsible for what, with half its names still to be confirmed.
 
-00:01:10.278 --> 00:01:13.071
+00:01:28.015 --> 00:01:30.808
 And the minutes of a council that meets once a month.
 
-00:01:13.771 --> 00:01:17.625
+00:01:31.508 --> 00:01:35.362
 His brief: fix governance before the next submission to the government.
 
-00:01:20.325 --> 00:01:22.639
+00:01:38.062 --> 00:01:40.376
 The same week, two reports disagree.
 
-00:01:23.339 --> 00:01:28.899
+00:01:41.076 --> 00:01:46.636
 Planning's census report says 4,812 awards were conferred this year.
 
-00:01:29.999 --> 00:01:34.969
+00:01:47.736 --> 00:01:52.706
 The draft submission to the government says 4,867.
 
-00:01:36.169 --> 00:01:37.465
+00:01:53.906 --> 00:01:55.202
 Which number is right?
 
-00:01:40.965 --> 00:01:42.820
+00:01:58.702 --> 00:02:00.557
 Yusuf follows the numbers back.
 
-00:01:43.520 --> 00:01:46.421
+00:02:01.557 --> 00:02:04.458
 Both are right, each by its own meaning of award.
 
-00:01:47.521 --> 00:01:52.838
+00:02:05.558 --> 00:02:10.875
 On Monday, the word changed: microcredentials of at least six credit points now count.
 
-00:01:53.538 --> 00:01:56.441
+00:02:11.575 --> 00:02:14.478
 One report ran before the change, the other after.
 
-00:01:57.741 --> 00:02:02.924
+00:02:15.778 --> 00:02:20.961
 But the government counts awards by its own definition. Who decides how ours maps to it?
 
-00:02:04.224 --> 00:02:10.125
+00:02:22.261 --> 00:02:28.162
 Mei owns what award means here. Jun builds what the model says. Planning reports what it's given.
 
-00:02:11.225 --> 00:02:13.278
+00:02:29.262 --> 00:02:31.315
 And the chart says: to be confirmed.
 
-00:02:15.978 --> 00:02:20.017
+00:02:32.815 --> 00:02:38.680
+Like an operating room before the checklist: everyone knows their own step, and no one checks them all.
+
+00:02:41.380 --> 00:02:45.419
 Policy 12 says that business terms are defined consistently.
 
-00:02:20.717 --> 00:02:24.385
+00:02:46.119 --> 00:02:49.787
 It doesn't say who decides, or how a decision reaches the work.
 
-00:02:25.685 --> 00:02:31.545
+00:02:51.087 --> 00:02:56.947
 That's what governance is for: deciding who decides, and making sure each decision reaches the work.
 
-00:02:33.145 --> 00:02:38.729
-Like the inspector at the market: a rule, a copy where the work happens, and someone who checks.
+00:02:58.547 --> 00:03:03.815
+Like the surgical checklist: a rule, a copy where the work happens, and someone who checks.
 
-00:02:39.929 --> 00:02:44.189
+00:03:05.015 --> 00:03:09.275
 Governance sets the rules and checks they're kept. Management does the work.
 
-00:02:46.889 --> 00:02:53.220
+00:03:11.975 --> 00:03:18.306
 Yusuf doesn't write a thirty-fifth policy. He asks everyone the same question: what slows you down?
 
-00:02:54.520 --> 00:02:57.519
+00:03:19.606 --> 00:03:22.605
 For Jun, the rules arrive after the work is built.
 
-00:02:58.719 --> 00:03:01.870
+00:03:23.805 --> 00:03:26.956
 Mei approves the words, then never sees where they're used.
 
-00:03:03.070 --> 00:03:06.502
+00:03:28.156 --> 00:03:31.588
 Sam could protect a column in minutes, if anyone said which.
 
-00:03:07.802 --> 00:03:09.908
+00:03:32.888 --> 00:03:34.994
 Planning doesn't know which number to trust.
 
-00:03:11.108 --> 00:03:15.340
+00:03:36.194 --> 00:03:40.426
 The people who wrote the binder weren't the problem. They wrote what they were asked for.
 
-00:03:16.640 --> 00:03:22.546
+00:03:41.726 --> 00:03:47.632
 Governance is people's work. Tools can carry out what people agree, but they can't make them agree.
 
-00:03:26.646 --> 00:03:31.170
+00:03:51.732 --> 00:03:56.256
 So he opens the binder, with one question for every line: where does it run?
 
-00:03:32.470 --> 00:03:40.039
+00:03:57.556 --> 00:04:05.125
 Some lines can run in the work itself, as a field no one can leave empty, a check that runs every night, or a label.
 
-00:03:41.639 --> 00:03:46.570
+00:04:06.725 --> 00:04:11.656
 Some are decisions: someone owns each one, and writes it down where the work can find it.
 
-00:03:48.170 --> 00:03:49.284
+00:04:13.256 --> 00:04:14.370
 And some can go.
 
-00:03:53.284 --> 00:03:57.946
+00:04:18.370 --> 00:04:23.032
 Behind every line that stays, there's something worth keeping, and someone to keep it.
 
-00:03:59.246 --> 00:04:02.770
+00:04:24.332 --> 00:04:27.856
 Rules, each with an owner, that reach Jun before he builds.
 
-00:04:03.470 --> 00:04:08.102
+00:04:28.556 --> 00:04:33.188
 One glossary every report reads from, so Mei sees where her words are used.
 
-00:04:08.802 --> 00:04:13.614
+00:04:33.888 --> 00:04:38.700
 A class for each kind of personal data, so Sam knows which columns to protect.
 
-00:04:14.314 --> 00:04:18.613
+00:04:39.400 --> 00:04:43.699
 And a list of who owns what, so Planning knows who answers for each number.
 
-00:04:19.913 --> 00:04:22.948
+00:04:44.999 --> 00:04:48.034
 Owners decide. Stewards keep it all up to date.
 
-00:04:24.048 --> 00:04:27.532
+00:04:49.134 --> 00:04:52.618
 The teams who do the work use it, and governance checks it's kept.
 
-00:04:33.232 --> 00:04:40.406
+00:04:58.318 --> 00:05:05.492
 Over nine more films, Yusuf follows one symptom at a time to what's worth keeping, and to who decides and acts.
 
-00:04:41.606 --> 00:04:46.217
+00:05:06.692 --> 00:05:11.303
 Then three draw it all as one model, on the university's architecture map.
 
-00:04:47.317 --> 00:04:50.376
+00:05:12.403 --> 00:05:15.462
 And six build it, with dbt and Databricks.
 
-00:04:51.676 --> 00:04:54.231
+00:05:16.762 --> 00:05:19.317
 A policy that doesn't run anywhere is a wish.

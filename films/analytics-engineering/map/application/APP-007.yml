@@ -1,6 +1,0 @@
-id: APP-007
-name: tracker
-kind: application component
-definition: Requests, issues and governance's decisions, each with an owner and a date.
-owner: Yusuf Demir, data governance lead
-status: confirmed

@@ -61,9 +61,10 @@ Some of ABAC is in Beta (policies on views, on the whole metastore): check what'
 Ontos, from Databricks Labs, is a business catalogue for Unity Catalog: data products, data contracts,
 glossaries and semantic models, with review workflows. It runs as a Databricks App (its README:
 `databricks bundle deploy`, then `databricks apps deploy`). It follows ODCS v3.1.0, the version of the
-contracts in `products/odcs/`, and the Open Data Product Standard, as `products/odps/` does. Load the
+contracts in `governance/5-data-contracts/`, and the Open Data Product Standard, as
+`governance/6-product-descriptors/` does. Load the
 contracts and products from there; the files in this repository stay their home, and the catalogue
-keeps a copy (Noor's map, OBJ-008 and OBJ-012 in `../map/`).
+keeps a copy (Noor's map: *data contract* and *data product* in `governance/3-architecture-map/4-information/`).
 
 Ontos is in Databricks Labs, and its README states no support terms. In the films it's an example; the project names
 no tool as the only way.

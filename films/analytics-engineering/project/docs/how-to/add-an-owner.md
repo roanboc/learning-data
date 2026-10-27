@@ -8,7 +8,7 @@
 
 1. Open the file the message names.
 2. Find the line it names, and add who decides what it means, as people know them.
-3. If that owner is new, add them to `models/_shared/_shared__owners.yml`, with the email their reviews go to.
+3. If that owner is new, add them to `governance/2-owners/owners.yml`, with the email their reviews go to.
 
 For a shared model, both an owner and a domain:
 

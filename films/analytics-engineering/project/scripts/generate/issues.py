@@ -1,7 +1,7 @@
 """Writes an issue for each owner with a test that didn't pass in the last run: what didn't pass,
 and the date to answer by. The scorecard shows everyone; this goes to each owner.
 
-Each issue names its owner and where it goes (models/_shared/_shared__owners.yml), and for each of
+Each issue names its owner and where it goes (governance/2-owners/owners.yml), and for each of
 their tests: the test, its domain and dimension, the rows it found, why its limit is set where it
 is (the test's description, or its column's, where the agreed level is written), a cause for the owner to write in, the date
 to answer by, and what closes it: the test passing. A failure is due the next working day; a
@@ -27,7 +27,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = ROOT / "target" / "manifest.json"
 RESULTS = ROOT / "target" / "run_results.json"
-REGISTER = ROOT / "models" / "_shared" / "_shared__owners.yml"
+REGISTER = ROOT / "governance" / "2-owners" / "owners.yml"
 TARGET = ROOT / "target" / "issues"
 
 # The scorecard's way of finding a test's domain.

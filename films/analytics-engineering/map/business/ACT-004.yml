@@ -1,9 +1,0 @@
-id: ACT-004
-name: Clara Jensen
-kind: business actor
-actor: person
-owner: Yusuf Demir, data governance lead
-relationships:
-- assignment: ROL-005 · product owner
-- assignment: ROL-008 · requester
-status: confirmed

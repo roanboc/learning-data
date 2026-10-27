@@ -64,7 +64,7 @@ python scripts/generate/definitions.py --check   # the doc blocks match the conc
 python scripts/generate/diagrams.py --check      # the physical diagrams match the YAML
 python scripts/generate/decisions.py --check     # the decision logs are valid and indexed
 python scripts/generate/codeowners.py --check    # CODEOWNERS matches the owners in the metadata
-python scripts/generate/products.py --check      # the products' ODPS and ODCS files match the contracts
+python scripts/generate/products.py --check      # the products' contracts and descriptors match the models
 python scripts/generate/scorecard.py             # the scorecard, from the build above
 python scripts/check/requirements.py             # only open requirements, each saying when it's done
 python scripts/check/governance.py               # an owner, a glossary term, classified columns, owned tests, descriptions

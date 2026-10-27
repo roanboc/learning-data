@@ -1,8 +1,0 @@
-id: PRN-001
-name: one home for every artifact
-kind: principle
-definition: Every governance artifact has exactly one home and an owner. Every other place keeps a copy,
-  synced one way from where it came, saying where and when, with a check that flags drift.
-owner: Noor, data architect
-evidence: Where each piece lives · 20 Oct 2026
-status: confirmed

@@ -16,7 +16,7 @@ DAMA and DAMA-DMBOK are registered trademarks of DAMA International. *The same o
 ## Third-party components
 
 - **Narration:** a synthetic voice generated with [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) (Apache License 2.0), run through [kokoro-onnx](https://github.com/thewh1teagle/kokoro-onnx). The model is not included in this repository.
-- **Open standards' schemas:** the JSON schemas of the Open Data Contract Standard and the Open Data Product Standard, Bitol projects at the Linux Foundation, under the Apache License 2.0, copied unchanged into `films/analytics-engineering/project/products/schemas/` (its README says from where).
+- **Open standards' schemas:** the JSON schemas of the Open Data Contract Standard and the Open Data Product Standard, Bitol projects at the Linux Foundation, under the Apache License 2.0, copied unchanged into `films/analytics-engineering/project/governance/7-standards/` (its README says from where).
 - **Fonts:** Manrope and IBM Plex Mono, under the SIL Open Font License 1.1, loaded from Google Fonts by the web pages. Copies for rendering the film, with their licences, are in `films/inner-life-of-data/source/fonts/`.
 
 ## Content

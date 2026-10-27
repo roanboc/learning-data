@@ -1,24 +1,25 @@
 """Writes each data product's descriptor in the open standards, from the product's own file
-(products/<name>.yml) and the dbt contracts, so the two can't drift:
+(governance/4-data-products/<name>.yml) and the dbt contracts, so the two can't drift:
 
-- products/odps/<name>.odps.yaml: the product in ODPS v1.0.0 (Open Data Product Standard): its
+- governance/6-product-descriptors/<name>.yaml: the product in the Open Data Product Standard 1.0.0: its
   owner, domain, status, purpose and usage, its output ports (one per model version, each with its
   contract), its input ports (the other products' contracts it reads), its team and support;
-- products/odcs/<model>_v<version>.odcs.yaml: one contract per output port in ODCS v3.1.0 (Open Data
-  Contract Standard), generated from the model's YAML: each column with its type, whether it's
+- governance/5-data-contracts/<model>_v<version>.yaml: one contract per output port in the Open Data
+  Contract Standard 3.1.0, generated from the model's YAML: each column with its type, whether it's
   required, the primary key, its class (meta.personal_data), its description and its tests as
-  quality rules (with their dimension: ODCS calls validity "conformity"); the known limitations;
+  quality rules (with their dimension: the contract standard calls validity "conformity"); the known limitations;
   the product's service levels, team and support.
 
-Both standards are Bitol's, at the Linux Foundation. ODCS v3.1.0 is the version Ontos reads and
-writes; their JSON schemas are kept in products/schemas/ (README there, with the newer versions). The descriptors carry the
+Both standards are Bitol's, at the Linux Foundation. Contract standard 3.1.0 is the version Ontos
+reads and writes; their JSON schemas are kept in governance/7-standards/ (README there, with the newer
+versions). The descriptors carry the
 consumers too: the exposures and the other products that read each output.
 
 It reads target/manifest.json (dbt parse first). It fails if a public model or mart is in no
-product, or in two; if an owner can't be reached (models/_shared/_shared__owners.yml); or if a file
+product, or in two; if an owner can't be reached (governance/2-owners/owners.yml); or if a file
 it writes doesn't validate against its schema.
 
-    python scripts/generate/products.py           # write products/odps/ and products/odcs/
+    python scripts/generate/products.py           # write the contracts and product descriptors
     python scripts/generate/products.py --check   # fail if any is out of date, or invalid
 """
 import argparse
@@ -31,12 +32,14 @@ import jsonschema
 import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
-PRODUCTS = ROOT / "products"
+GOVERNANCE = ROOT / "governance"
+PRODUCTS = GOVERNANCE / "4-data-products"
+FOLDERS = {"odcs": GOVERNANCE / "5-data-contracts", "odps": GOVERNANCE / "6-product-descriptors"}
 MANIFEST = ROOT / "target" / "manifest.json"
-REGISTER = ROOT / "models" / "_shared" / "_shared__owners.yml"
+REGISTER = GOVERNANCE / "2-owners" / "owners.yml"
 ODCS, ODPS = "v3.1.0", "v1.0.0"
-SCHEMAS = {"odcs": PRODUCTS / "schemas" / "odcs-json-schema-v3.1.0.json",
-           "odps": PRODUCTS / "schemas" / "odps-json-schema-v1.0.0.json"}
+SCHEMAS = {"odcs": GOVERNANCE / "7-standards" / "open-data-contract-standard-3.1.0.schema.json",
+           "odps": GOVERNANCE / "7-standards" / "open-data-product-standard-1.0.0.schema.json"}
 NAMESPACE = uuid.uuid5(uuid.NAMESPACE_DNS, "uni.example")
 LOGICAL = {"string": "string", "int": "integer", "integer": "integer", "bigint": "integer", "date": "date",
            "timestamp": "timestamp", "boolean": "boolean", "decimal": "number", "numeric": "number", "double": "number"}
@@ -71,7 +74,7 @@ def quality(test):
     else:
         rule.update(type="custom", engine="dbt", implementation=f"{kind}: {test['name']}")
     meta = test.get("meta") or {}
-    # ODCS names DAMA's validity "conformity"; the other five are the same words.
+    # The contract standard names DAMA's validity "conformity"; the other five are the same words.
     rule["dimension"] = {"validity": "conformity"}.get(meta.get("dimension"), meta.get("dimension"))
     rule["severity"] = test["config"].get("severity", "error").lower()
     if test.get("description"):
@@ -117,7 +120,7 @@ def main():
         shared = node["resource_type"] == "model" and (
             node.get("access") == "public" or node["original_file_path"].startswith("models/marts/"))
         if shared and node["unique_id"] not in output_of:
-            problems.append(f"{port_name(node)} is shared but in no product: add it to a product's outputs in products/")
+            problems.append(f"{port_name(node)} is shared but in no product: add it to a product's outputs in {PRODUCTS.relative_to(ROOT)}/")
     if problems:
         raise SystemExit("\n".join(problems))
 
@@ -180,7 +183,7 @@ def main():
                                      {"property": "consumers", "value": readers(node["unique_id"])}]
                                     + ([{"property": "deprecationDate", "value": str(deprecated)[:10]}] if deprecated else []),
             }
-            files[PRODUCTS / "odcs" / f"{port_name(node)}.odcs.yaml"] = ("odcs", contract, path)
+            files[FOLDERS["odcs"] / f"{port_name(node)}.yaml"] = ("odcs", contract, path)
             first = " ".join(node["description"].split()).split(". ")[0].rstrip(".") + "."
             port = {"name": port_name(node), "description": first,
                     "type": "table", "version": semver(node), "contractId": contract_id}
@@ -201,7 +204,7 @@ def main():
                       **({"inputPorts": list(input_ports.values())} if input_ports else {}),
                       "outputPorts": output_ports, "team": team(owner, emails), "support": product["support"],
                       "customProperties": [{"property": "consumers", "value": consumers}]}
-        files[PRODUCTS / "odps" / f"{name}.odps.yaml"] = ("odps", descriptor, path)
+        files[FOLDERS["odps"] / f"{name}.yaml"] = ("odps", descriptor, path)
 
     stale, invalid = [], []
     for target, (kind, document, source) in sorted(files.items()):
@@ -216,8 +219,8 @@ def main():
         else:
             target.parent.mkdir(exist_ok=True)
             target.write_text(text)
-    for folder in ("odcs", "odps"):
-        for extra in sorted((PRODUCTS / folder).glob("*.yaml")) if (PRODUCTS / folder).exists() else []:
+    for folder in FOLDERS.values():
+        for extra in sorted(folder.glob("*.yaml")) if folder.exists() else []:
             if extra not in files:
                 stale.append(f"{extra.relative_to(ROOT)} (no product has it)")
                 if not args.check:
@@ -228,8 +231,8 @@ def main():
         print("out of date: run python scripts/generate/products.py\n" + "\n".join(stale), file=sys.stderr)
         sys.exit(1)
     print(f"{len(files)} files {'are up to date and valid' if args.check else 'written, and valid'}: "
-          f"{sum(1 for k, _, _ in files.values() if k == 'odps')} products (ODPS {ODPS}), "
-          f"{sum(1 for k, _, _ in files.values() if k == 'odcs')} contracts (ODCS {ODCS})")
+          f"{sum(1 for k, _, _ in files.values() if k == 'odps')} products (product standard {ODPS}), "
+          f"{sum(1 for k, _, _ in files.values() if k == 'odcs')} contracts (contract standard {ODCS})")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,5 @@
+name: project decision
+kind: business object
+owner: Noor, data architect
+home: dbt project
+status: confirmed

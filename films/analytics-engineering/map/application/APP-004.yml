@@ -1,6 +1,0 @@
-id: APP-004
-name: dbt project
-kind: application component
-definition: 'The models, their owners, classes, contracts, tests and decisions: films/analytics-engineering/project/.'
-owner: Noor, data architect
-status: confirmed

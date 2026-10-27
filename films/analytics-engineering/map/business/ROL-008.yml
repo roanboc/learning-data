@@ -1,6 +1,0 @@
-id: ROL-008
-name: requester
-kind: business role
-definition: 'Asks a governance service for something: a meaning, a term, access, a fix.'
-owner: Yusuf Demir, data governance lead
-status: confirmed

@@ -1,8 +1,0 @@
-id: ACT-007
-name: Platform team
-kind: business actor
-actor: team
-owner: Yusuf Demir, data governance lead
-relationships:
-- assignment: ROL-004 · data custodian
-status: confirmed

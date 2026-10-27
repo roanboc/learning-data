@@ -3,4 +3,3 @@
 # the decision logs.
 models/**/_*__conceptual.yml
 **/_*__decisions.yml
-models/_shared/_shared__owners.yml

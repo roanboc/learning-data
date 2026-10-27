@@ -1,6 +1,0 @@
-id: APP-005
-name: data platform
-kind: application component
-definition: 'Databricks and Unity Catalog: the tables, their tags, access rules, lineage and audit log.'
-owner: Sam, platform team
-status: confirmed

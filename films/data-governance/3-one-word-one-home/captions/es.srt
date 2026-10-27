@@ -1,0 +1,227 @@
+1
+00:00:01,400 --> 00:00:09,109
+En el 221 a. C., el rey de Qin venció al último de sus rivales y se convirtió en el primer emperador de China.
+
+2
+00:00:09,809 --> 00:00:14,286
+Pero cada viejo estado tenía su propia escritura, sus propias medidas y su propio ancho de carro.
+
+3
+00:00:15,586 --> 00:00:21,172
+Una medida de grano contenía más en un estado que en el vecino, así que impuestos y precios quedaban en duda.
+
+4
+00:00:22,672 --> 00:00:28,317
+El imperio necesitaba la misma escritura, las mismas medidas y el mismo ancho de carro, y los fijó por ley.
+
+5
+00:00:29,917 --> 00:00:35,402
+Ahora una medida de grano debía contener lo mismo en todas partes, y se podía confiar en impuestos y precios.
+
+6
+00:00:37,102 --> 00:00:43,728
+El imperio hasta decidió qué palabras usaban sus funcionarios: «la orden del rey» pasó a ser «el edicto del emperador».
+
+7
+00:00:44,828 --> 00:00:52,005
+Muy al sur, la oficina de un condado tenía una lista en una tabla de madera: cada palabra vieja y la nueva que debía usarse.
+
+8
+00:00:53,305 --> 00:01:00,148
+En 2002, unos arqueólogos hallaron la tabla en un pozo antiguo, junto con miles de registros del propio condado.
+
+9
+00:01:01,448 --> 00:01:07,941
+Esos registros usan casi siempre las palabras nuevas: una palabra significaba lo mismo en el condado que en la capital.
+
+10
+00:01:09,441 --> 00:01:11,779
+La tabla era un glosario, y se usaba.
+
+11
+00:01:13,179 --> 00:01:18,531
+Una universidad tiene el mismo problema: una palabra, definida de otro modo en muchos lugares.
+
+12
+00:01:19,831 --> 00:01:24,134
+Necesita un glosario en el que todos confíen, y cada herramienta leyendo de él.
+
+13
+00:01:31,234 --> 00:01:35,533
+Mei es dueña de lo que significa título, y lo encontró definido en cinco lugares.
+
+14
+00:01:36,233 --> 00:01:38,988
+Yusuf va a mirar. Hay cinco glosarios.
+
+15
+00:01:40,088 --> 00:01:45,707
+El glosario de negocio en la plataforma, con las palabras que aprobó Mei. El equipo de datos copia de él.
+
+16
+00:01:46,807 --> 00:01:48,018
+La hoja de cálculo de Planificación.
+
+17
+00:01:48,518 --> 00:01:50,778
+Un anexo de la política de la oficina de registro.
+
+18
+00:01:51,278 --> 00:01:54,394
+Los tableros de las facultades, cada uno con su propia descripción.
+
+19
+00:01:54,894 --> 00:01:58,829
+Y una herramienta de glosario comprada en 2019, con seiscientos términos.
+
+20
+00:01:59,929 --> 00:02:01,935
+Entre todos, tres sentidos de título.
+
+21
+00:02:05,435 --> 00:02:10,513
+Cada uno tuvo una buena razón: un equipo necesitaba palabras que usar, y escribió las suyas.
+
+22
+00:02:11,613 --> 00:02:17,774
+Así que no coinciden. Uno cuenta las microcredenciales, tres no, y uno dice que solo los grados son títulos.
+
+23
+00:02:19,074 --> 00:02:21,850
+A dos solo los encuentran quienes los hicieron.
+
+24
+00:02:22,850 --> 00:02:29,037
+Y el más grande es el que nadie abre: la herramienta de 2019, abierta por última vez hace catorce meses.
+
+25
+00:02:30,237 --> 00:02:35,360
+Cuando título cambió el lunes, solo un glosario cambió. Los otros cuatro nunca se enteraron.
+
+26
+00:02:36,860 --> 00:02:42,549
+Cinco glosarios son como ninguno. Nadie sabe en cuál confiar, así que cada uno guarda el suyo.
+
+27
+00:02:46,049 --> 00:02:49,962
+Así que Yusuf reúne a los dueños de los términos, para mantener un solo glosario.
+
+28
+00:02:51,262 --> 00:02:58,062
+No el más grande: uno confiable, que toda herramienta pueda leer. El glosario en la plataforma, junto a los datos.
+
+29
+00:02:59,662 --> 00:03:03,477
+Como la tabla de Qin, está donde se hace el trabajo, así que se usa.
+
+30
+00:03:05,177 --> 00:03:10,307
+Cada término allí tiene una definición, un dueño, un estado y la fecha en que cambió por última vez.
+
+31
+00:03:11,907 --> 00:03:13,563
+Guarda las palabras del negocio.
+
+32
+00:03:14,063 --> 00:03:20,917
+Un diccionario de datos describe cada tabla y columna. Un catálogo ayuda a encontrar los datos, y muestra ambos.
+
+33
+00:03:24,417 --> 00:03:27,373
+Los otros cuatro se retiran, o pasan a leer de él.
+
+34
+00:03:28,473 --> 00:03:34,592
+La herramienta de 2019 se retira. Sus términos con dueño pasan al glosario; el resto se archiva.
+
+35
+00:03:35,892 --> 00:03:39,928
+La hoja de Planificación enlaza a cada término, en vez de guardar sus propias palabras.
+
+36
+00:03:41,128 --> 00:03:46,163
+La política de registro ahora dice: título, como lo define el glosario de negocio.
+
+37
+00:03:47,363 --> 00:03:53,653
+Los tableros de las facultades muestran las palabras del glosario, leídas de la plataforma, así que no pueden decir otra cosa.
+
+38
+00:03:54,853 --> 00:04:02,142
+La copia del equipo de datos ya funcionaba así: dice de dónde vienen sus palabras, y cada noche se compara con el glosario.
+
+39
+00:04:03,442 --> 00:04:07,865
+Cada copia se hace a partir del glosario, en un solo sentido, nunca al revés.
+
+40
+00:04:11,765 --> 00:04:17,923
+Sin una revisión nocturna, un cambio como el del lunes aparece meses después, en un tablero, cuando un número se mueve.
+
+41
+00:04:19,623 --> 00:04:22,797
+El lunes en la noche, la revisión lo encontró y envió un aviso de cambio.
+
+42
+00:04:24,397 --> 00:04:27,843
+Como la tabla de Qin, muestra las palabras viejas y las nuevas.
+
+43
+00:04:29,343 --> 00:04:32,203
+Y qué tocan las palabras nuevas, y de quién es cada parte.
+
+44
+00:04:33,903 --> 00:04:37,894
+Una lista de estudiantes cerca de un título, y su tablero. La app de billetera.
+
+45
+00:04:40,194 --> 00:04:44,660
+Mei aprobó el nuevo significado. Esta vez, pudo ver dónde se usan sus palabras.
+
+46
+00:04:46,910 --> 00:04:49,791
+Jun vio un número en las palabras: seis créditos.
+
+47
+00:04:51,691 --> 00:04:58,096
+Un número en un significado también es una regla. Se guarda en un lugar, como regla de negocio que lee cada informe.
+
+48
+00:05:02,396 --> 00:05:04,419
+Las palabras del lunes no salieron de un escritorio.
+
+49
+00:05:05,219 --> 00:05:11,953
+Mei y las facultades las discutieron en un taller: ¿debía contar una microcredencial, y desde cuántos créditos?
+
+50
+00:05:13,353 --> 00:05:16,939
+El glosario guarda lo que acordaron. No hace el acuerdo.
+
+51
+00:05:18,539 --> 00:05:22,123
+Y quienes mantenían los otros glosarios pierden algo que construyeron.
+
+52
+00:05:23,123 --> 00:05:27,116
+Así que se les agradece, y sus mejores definiciones pasan al que se queda.
+
+53
+00:05:30,616 --> 00:05:34,492
+La política 12 decía: los informes cuentan según las definiciones del glosario.
+
+54
+00:05:35,192 --> 00:05:38,707
+Ahora cada palabra tiene un solo lugar, y toda herramienta lee de él.
+
+55
+00:05:40,207 --> 00:05:41,964
+Como la tabla de Qin, se usa.
+
+56
+00:05:42,664 --> 00:05:48,027
+Los informes coinciden, un cambio llega a todos los que toca, y la gente puede confiar en los números.
+
+57
+00:05:48,727 --> 00:05:53,100
+Muchos glosarios son como ninguno. Quédate con uno, y sincroniza cada herramienta con él.

@@ -1,0 +1,10 @@
+name: provide data products
+kind: capability
+definition: Shared data is offered as products, each with an owner, a contract, service levels and a lifecycle.
+owner: Yusuf Demir, data governance lead
+relationships:
+- composition: govern data
+heat: amber
+evidence: 'six products, with descriptors and contracts in the open standards (project: governance/4-data-products/); no catalogue or access requests yet ·
+  20 Oct 2026'
+status: confirmed

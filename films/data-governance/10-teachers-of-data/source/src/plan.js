@@ -628,13 +628,13 @@ function tt_bcard(x,cx,y,w,h,lines,u,o){o=o||{};if(u<=0.01)return;const k=0.9+0.
   withA(x,clamp(u*2.5,0,1),()=>{wc_panel(x,-w/2,-h/2,w,h,{kind:"card",wash:o.wash,washA:o.washA||0.3,seed:o.seed||Math.round(cx+y)});gv_pin(x,0,-h/2+13,o.pin||GV.red,1);
     if(o.q)wc_hand(x,"?",-12,24,{size:62,w:600,col:WC_PENCIL});
     else lines.forEach((l,i)=>wc_T(x,l,0,-h/2+(lines.length>1?56:70)+i*(o.gap||36),{w:o.w||700,size:o.size||30,align:"center",col:WC_DARK}));});x.restore();}
-// a panel lit: a warm light round it, and a gold edge
-function tt_panelLit(x,cx,cy,s,l){if(l<=0.01)return;const w=(520+36)*s,h=(380+96)*s,y0=cy-(190+18)*s;x.save();x.globalCompositeOperation="screen";wc_glowAt(x,cx,y0+h/2,w*0.8,[255,214,120],0.5*l);x.restore();
-  x.save();x.strokeStyle=rgba(GV.gold,0.95*l);x.lineWidth=7;x.lineJoin="round";x.strokeRect(cx-w/2-8,y0-8,w+16,h+16);x.restore();}
+// a panel lit: a warm light round it, and a gold edge (lw, wider where the board is seen small: st.litW on the board)
+function tt_panelLit(x,cx,cy,s,l,lw){if(l<=0.01)return;const w=(520+36)*s,h=(380+96)*s,y0=cy-(190+18)*s;x.save();x.globalCompositeOperation="screen";wc_glowAt(x,cx,y0+h/2,w*0.8,[255,214,120],0.5*l);x.restore();
+  x.save();x.strokeStyle=rgba(GV.gold,0.95*l);x.lineWidth=lw||7;x.lineJoin="round";x.strokeRect(cx-w/2-8,y0-8,w+16,h+16);x.restore();}
 function tt_govBoard(x,box,st,o){o=o||{};const [bx,by,bw,bh]=box,k=bw/TT_GB.w,G=TT_GB,P=tt_P(),f=(v,i,d)=>v==null?d:typeof v==="function"?v(i):v[i]!=null?v[i]:d;
   x.save();x.translate(bx,by+(bh-G.h*k)/2);x.scale(k,k);tt_deco(o.deco,()=>{
   // the panels, and how lit each is
-  for(let i=0;i<3;i++){const a=f(st.panel,i,1),l=f(st.lit,i,0);if(a<=0.01)continue;tt_panelLit(x,G.px[i],G.py,G.ps,l*a);tt_panelAt(x,i,P,G.px[i],G.py,a,G.ps,{lab:48});}
+  for(let i=0;i<3;i++){const a=f(st.panel,i,1),l=f(st.lit,i,0);if(a<=0.01)continue;tt_panelLit(x,G.px[i],G.py,G.ps,l*a,st.litW);tt_panelAt(x,i,P,G.px[i],G.py,a,G.ps,{lab:48});}
   // under each panel, a "?" until what governance does there goes up over it; under those, the new rule's steps
   for(let i=0;i<3;i++){const q=f(st.q,i,0),b=st.B&&st.B[i]?st.B[i]:0,cx=G.px[i];tt_bcard(x,cx,G.rowB[0],G.cw-40,G.rowB[1],null,q,{q:1,seed:300+i,rot:[0.02,-0.015,0.01][i]});
     tt_bcard(x,cx,G.rowB[0],G.cw,G.rowB[1],TT_BTEXT[i],b,{seed:310+i,pin:[GV.red,GV.gold,GV.green][i],rot:[-0.012,0.01,-0.008][i]});

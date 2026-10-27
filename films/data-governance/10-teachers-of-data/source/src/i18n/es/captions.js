@@ -24,6 +24,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Si aun así no lo hace, un agente de tránsito escribe una multa, y la gente que mira aplaude.",
 "The fine still came. But it came last, in an order meant to teach.":
 "La multa seguía ahí. Pero llegaba al final, en un orden pensado para enseñar.",
+"It worked.":
+"Funcionó.",
 "By 1996, three drivers in four were keeping the crossings clear.":
 "Para 1996, tres de cada cuatro conductores dejaban libres las cebras.",
 "People on foot could cross in front of the cars, not between them.":
@@ -113,9 +115,11 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Y desde la gente: quién vino al horario de atención, y quién volvió.",
 "A score said how governance looked on paper. These say whether it's used.":
 "Una puntuación decía cómo se veía la gobernanza en papel. Estas dicen si se usa.",
+"Bogotá measured its crossings the same way: by how many drivers kept them clear.":
+"Bogotá midió sus cebras igual: por cuántos conductores las dejaban libres.",
 
-"So what does a governance team do all day? It teaches.":
-"Entonces, ¿qué hace todo el día un equipo de gobernanza? Enseña.",
+"So what does a governance team do all day? Like the mimes, it teaches.":
+"Entonces, ¿qué hace todo el día un equipo de gobernanza? Como los mimos, enseña.",
 "Governance sits at the centre of data work, where every other part of it meets.":
 "La gobernanza está en el centro del trabajo con datos, donde se unen todas sus otras partes.",
 "Someone has to show how the pieces fit.":
@@ -137,6 +141,14 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En Bogotá, en unos diez años, los hábitos se habían perdido: las campañas no se mantuvieron.",
 "So governance can't be a project that ends. It has to be something the university can always do.":
 "Por eso, la gobernanza no puede ser un proyecto que termina. Debe ser algo que la universidad siempre pueda hacer.",
+"Kept up, it does for data what the mimes did for the crossings.":
+"Si se mantiene, hace por los datos lo que los mimos hicieron por las cebras.",
+"Most people keep the rules before a check has to stop them.":
+"La mayoría cumple las reglas antes de que un control tenga que detenerla.",
+"Nobody has to guess what the data means, so the numbers agree.":
+"Nadie tiene que adivinar qué significan los datos, así que los números coinciden.",
+"And a check stops only the few, who fix it in minutes.":
+"Y un control detiene solo a unos pocos, que lo arreglan en minutos.",
 "Governance is people's work. Tools remember what people agreed.":
 "La gobernanza es trabajo de personas. Las herramientas recuerdan lo que la gente acordó."
 });

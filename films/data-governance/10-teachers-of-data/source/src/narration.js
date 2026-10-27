@@ -11,6 +11,7 @@ const NARR={
  {"id":"mime","gap":0.8,"text":"A mime steps in and, without a word, invites the driver to back up."},
  {"id":"fine","gap":0.8,"text":"If the driver still won't, a traffic officer writes a fine, and the people watching applaud."},
  {"id":"last","gap":0.8,"text":"The fine still came. But it came last, in an order meant to teach."},
+ {"id":"worked","gap":0.8,"text":"It worked."},
  {"id":"y96","gap":0.8,"text":"By 1996, three drivers in four were keeping the crossings clear.","say":"By nineteen ninety-six, three drivers in four were keeping the crossings clear."},
  {"id":"safe","gap":0.8,"text":"People on foot could cross in front of the cars, not between them."},
  {"id":"most","gap":0.8,"text":"Most people keep a rule because they understand it, and because the people around them keep it."},
@@ -57,9 +58,10 @@ const NARR={
  {"id":"project","gap":0.8,"text":"From each night's checks: how much of what other teams read has an owner, a glossary term, a class and a description."},
  {"id":"run","gap":0.8,"text":"Which checks failed last night, and whose they are."},
  {"id":"people","gap":0.8,"text":"And from people: who came to office hours, and who came back."},
- {"id":"paper","gap":0.8,"text":"A score said how governance looked on paper. These say whether it's used."}]},
+ {"id":"paper","gap":0.8,"text":"A score said how governance looked on paper. These say whether it's used."},
+ {"id":"bogota","gap":0.8,"text":"Bogotá measured its crossings the same way: by how many drivers kept them clear."}]},
 "teach":{"name":"Teachers of data","lead":1.0,"tail":1.0,"vo":[
- {"id":"day","gap":0.8,"text":"So what does a governance team do all day? It teaches."},
+ {"id":"day","gap":0.8,"text":"So what does a governance team do all day? Like the mimes, it teaches."},
  {"id":"centre","gap":0.8,"text":"Governance sits at the centre of data work, where every other part of it meets."},
  {"id":"fit","gap":0.8,"text":"Someone has to show how the pieces fit."},
  {"id":"path","gap":0.8,"text":"So every new analyst starts with a path: short films, and labs to practise on."},
@@ -71,5 +73,9 @@ const NARR={
  {"id":"hardest","gap":0.8,"text":"The last is the hardest."},
  {"id":"faded","gap":0.8,"text":"In Bogotá, within about ten years, the habits had faded: the campaigns weren't kept up."},
  {"id":"ends","gap":0.8,"text":"So governance can't be a project that ends. It has to be something the university can always do."},
+ {"id":"kept","gap":0.8,"text":"Kept up, it does for data what the mimes did for the crossings."},
+ {"id":"keep","gap":0.8,"text":"Most people keep the rules before a check has to stop them."},
+ {"id":"agree","gap":0.8,"text":"Nobody has to guess what the data means, so the numbers agree."},
+ {"id":"minutes","gap":0.8,"text":"And a check stops only the few, who fix it in minutes."},
  {"id":"agreed","gap":0.8,"text":"Governance is people's work. Tools remember what people agreed."}]}
 };

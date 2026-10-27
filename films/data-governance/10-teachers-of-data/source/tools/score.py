@@ -7,7 +7,8 @@
 #    first two asking and the last three answering. In 1996 the oboe plays it as people understand the rule, and the cor anglais copies
 #    it as the people around them keep it; when Anil's guide opens the cor anglais plays it, and the bassoon copies it as his change
 #    is signed; Yusuf's oboe plays it as a governance team teaches; and as the stewards pass it on, all three play it in turn. In
-#    Bogotá in 2012 the oboe plays it once more, in E-flat minor, and stops a note short: nobody copies it. At the end it's whole again.
+#    Bogotá in 2012 the oboe plays it once more, in E-flat minor, and stops a note short: nobody copies it. At the end it's whole again:
+#    in Bogotá in 1996 once more, the oboe playing it and the cor anglais copying it, and with the stewards.
 #  - The mimes get a light trio, each gesture on a soft staccato note, as a silent film would score them; a check that warns first,
 #    governance's mime, gets the mime's notes. The officer's fine is one low bassoon note, and so is each check that stops the work.
 #  - The voices also come in one at a time as things arrive in order: the three panels (the people around, the mime, the fine last),
@@ -353,7 +354,8 @@ for X0 in [-5.8, -4.6, -3.6, -2.8, 11.8, 13.2]:
 for i in (0, 2, 3):  # three of the mimes clap too
     claps(cl0 + 0.15 * i, cl1, 0.005, [-0.4, 0, -0.5, 0.6][i])
 flap(applaud + 0.45, 0.010, 0.1, 0.15)
-# the three panels pinned up, one voice each, from the top: the people around, the mime, the fine, last; the pencilled arrows
+# the three panels pinned up, one voice each, from the top: the people around, the mime, the fine, last; the pencilled arrows; the
+# voices held as it worked and the panels light
 for t0, (inst, m), p in [(last + 0.1, ('oboe', 74), -0.5), (last + 0.9, ('cor', 59), 0.0), (cameLast - 0.1, ('bsn', 43), 0.5)]:
     pin(t0 + 0.05, 0.022, p); note(inst, m, t0 + 0.05, y96 - 0.2 - t0, 0.8, 'G', att=0.2, rel=0.4)
 pencil(order + 0.05, 0.010, -0.2, 0.3); pencil(order + 0.4, 0.010, 0.3, 0.3)
@@ -395,8 +397,8 @@ down = tw('mei', 'written down')
 paper(down - 0.25 + 0.55, 0.014, px(915), 0.3); knock(down - 0.25 + 0.85, 0.014, px(915), 260)
 send = tc('helped', -1.7)
 tap(send + 0.05, 0.014, 0.3)
-for k in range(4):
-    knock(tw('helped', 'helped') - 0.2 + 0.3 * k + 0.2, 0.012 if k < 2 else 0.008, px([300, 700, 1300, 1700][k]), 300)
+for k in range(5):
+    knock(tw('helped', 'helped') - 0.2 + 0.3 * k + 0.2, 0.012 if k < 2 else 0.008, px(354 + 384 * k), 300)
 pin(tc('fines', -0.5) + 1.3, 0.022, px(1180))
 chk = tw('fines', 'the checks')
 note('bsn', 39, chk - 0.05, 1.4, 0.9, att=0.08, rel=0.35)
@@ -489,7 +491,8 @@ figure('oboe', [74, 71, 67], bo5 + 0.4, 0.3, 0.8, 'G'); stacc('bsn', 43, bo5 + 1
 
 # 6. Measured by use: the framed score glows on a hollow fifth; binder 29 drawn off the shelf, and opened; the frame lifted off its
 #    nail, carried to the box and let in; the green marker along the policy's line, and the words under it; three sheets pinned up
-#    where the frame hung, three notes rising, in the pause before they're read; and as they glow, used, a chord
+#    where the frame hung, three notes rising, in the pause before they're read; and as they glow, used, a chord; then Bogotá in 1996,
+#    measured the same way, in G: the opening's open G, and as each car that keeps the crossing clear is ticked, a note, rising
 mw = lambda lid, word, off=0: W('measured', lid, word, off)
 mc = lambda lid, off=0: G('measured', lid, off)
 chord({'bsn': 51, 'cor': 58}, mw('score', 'two point one') - 0.15, mc('binder', -0.5), 0.6, step=0.1, att=0.4, rel=0.5)
@@ -504,14 +507,20 @@ for i in range(3):
 for i in range(3):
     note('oboe', [63, 67, 70][i], wz + 0.5 + 0.25 * i, 0.2 if i < 2 else 0.8, 0.7, att=0.03, rel=0.2 if i < 2 else 0.4)
 used = mw('paper', 'used')
-chord({'bsn': 51, 'cor': 55, 'oboe': 70}, used - 0.1, ST['measured']['start'] + ST['measured']['dur'] + 0.4, 0.75, step=0.15, att=0.4, rel=0.6)
+chord({'bsn': 51, 'cor': 55, 'oboe': 70}, used - 0.1, END('measured', 'paper') + 0.6, 0.75, step=0.15, att=0.4, rel=0.6)
+bo6 = mc('bogota', -0.3)
+chord({'bsn': 43, 'cor': 62}, bo6 + 0.3, bo6 + 2.7, 0.6, 'G', step=0.3, att=0.5, rel=0.6)
+kept6 = mw('bogota', 'kept them clear')
+for j, m in enumerate([67, 71, 74]):
+    note('oboe', m, kept6 + 0.3 * j + 0.05, 0.3 if j < 2 else 1.2, 0.65, 'G', att=0.04, rel=0.3 if j < 2 else 0.5)
 
-# 7. Teachers of data: Yusuf's pencil on the clipboard (the first strokes, then softer); as he looks up and it teaches, the oboe plays
-#    the phrase; the wheel drawn on the whiteboard, its centre and its parts (the first few, then softer) and the gold lines in; week 1
+# 7. Teachers of data: Yusuf's pencil on the clipboard (the first strokes, then softer); like the mimes, the board's mime lights on the
+#    mime's notes; as he looks up and it teaches, the oboe plays the phrase; the wheel drawn on the whiteboard, its centre and its parts (the first few, then softer) and the gold lines in; week 1
 #    done; and as Anil shows the page that helped him, all three play the phrase in turn
 xw = lambda lid, word, off=0: W('teach', lid, word, off)
 xc = lambda lid, off=0: G('teach', lid, off)
-teach = xw('day', 'It teaches')
+teach = xw('day', 'it teaches')
+figure('oboe', [70, 63], xw('day', 'the mimes') - 0.2, 0.3, 0.75, 'Eb')
 for k in range(5):
     pencil(S0('teach') + 0.6 + 0.62 * k, 0.010 if k < 2 else 0.006, 0.15, 0.4)
 phrase('oboe', TEACH['Eb'], teach + 0.05, 0.85)
@@ -527,8 +536,11 @@ phrase('oboe', TEACH['Eb'], ps, 0.8); phrase('cor', TEACH['Eb'], ps + 1.9, 0.8);
 # 8. What lasts: the binders thinner; the bar's three parts marked on the board; the grey pages dropped into the box; the five things
 #    people need, one note each as its card goes up, the last held longest, and swelling as it glows: the hardest; Bogotá, 2012, in
 #    E-flat minor, two cars rolling up to the faded stripes, and the oboe's phrase stopping a note short, nobody copying it; the
-#    pavement, quiet; back in E-flat major as "Govern data" lights on the map, the next films' cards; the stewards, the phrase whole;
-#    and the end card: the mark, the cor anglais, then the bassoon, and the chord held to the end
+#    pavement, quiet; back in E-flat major as "Govern data" lights on the map, the next films' cards; kept up, what it gives: Bogotá in
+#    1996 again, in G, the opening's open G and the phrase whole, the oboe playing it and the cor anglais copying it, as people cross in
+#    front of the cars; the floor, a tick on each office's glass (the first few, then softer); the two reports agree, and two voices
+#    meet on one note, as on submission day; Anil's change, stopped on the fine's low note, fixed and stamped signed; the stewards,
+#    the phrase whole; and the end card: the mark, the cor anglais, then the bassoon, and the chord held to the end
 lw = lambda lid, word, off=0: W('lasts', lid, word, off)
 lc = lambda lid, off=0: G('lasts', lid, off)
 paper(S0('lasts') + 0.85, 0.012, px(1320), 1.0)
@@ -552,6 +564,20 @@ chord({'bsn': 51, 'cor': 55}, gov, gov + 2.0, 0.6, step=0.2, att=0.5, rel=0.6)
 nx = lw('ends', 'always') - 0.3
 for j in range(3):
     knock(nx + 0.35 * j + 0.15, 0.014 if j < 2 else 0.010, [-0.3, 0.1, 0.5][j], 280)
+kz = lc('kept', -0.3)
+chord({'bsn': 43, 'cor': 62}, kz + 0.1, kz + 2.3, 0.6, 'G', step=0.3, att=0.5, rel=0.6)
+phrase('oboe', TEACH['G'], kz + 0.5, 0.85, 'G')
+phrase('cor', [m - 12 for m in TEACH['G']], kz + 0.5 + 1.9, 0.8, 'G')
+tk = lw('keep', 'keep the rules')
+for k in range(5):
+    knock(tk + 0.3 * k + 0.2, 0.012 if k < 2 else 0.008, px(354 + 384 * k), 300)
+ag8 = lw('agree', 'the numbers agree')
+line('oboe', [(ag8 - 0.45, ag8, 70, 0.8), (ag8, ag8 + 1.3, 67, 0.8)], 0.75, att=0.15, rel=0.4)
+line('cor', [(ag8 - 0.45, ag8, 63, 0.8), (ag8, ag8 + 1.3, 67, 0.8)], 0.75, att=0.15, rel=0.4)
+mz = lc('minutes', -0.3)
+note('bsn', 39, mz + 0.25, 1.1, 0.75, att=0.08, rel=0.35)
+fx = lw('minutes', 'fix it')
+tap(fx + 0.25, 0.012, 0.1); pat(fx + 1.3, 0.016, 0.3)
 mt = lc('agreed', -0.3)
 phrase('oboe', TEACH['Eb'], mt + 0.6, 0.8)
 end = lc('breath', -0.2)

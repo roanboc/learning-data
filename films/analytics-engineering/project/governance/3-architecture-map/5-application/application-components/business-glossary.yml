@@ -1,0 +1,5 @@
+name: business glossary
+kind: application component
+definition: 'The university''s glossary of business terms: Unity Catalog''s Glossary, on Databricks.'
+owner: Yusuf Demir, data governance lead
+status: confirmed

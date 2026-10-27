@@ -21,7 +21,7 @@ Linh Nguyen graduated from the university in 2022 and came back to study health 
 | [A hub at work](https://data.learn-all.org/master-and-reference-data/a-hub-at-work/) | A master data hub, at work every day | 4½ min | 11 | 4 questions | [script](8-a-hub-at-work/script.md) · [source](8-a-hub-at-work/source/README.md) |
 | [Kept, not cleaned](https://data.learn-all.org/master-and-reference-data/kept-not-cleaned/) | Master data, looked after every day | 5½ min | 11 | 4 questions | [script](9-kept-not-cleaned/script.md) · [source](9-kept-not-cleaned/source/README.md) |
 
-For the whole series, on the site: [29 labs](https://data.learn-all.org/master-and-reference-data/labs/) and [72 scenarios](https://data.learn-all.org/master-and-reference-data/scenarios/), in English and Spanish, from the words in [site/assets/master-and-reference-data/](../../site/assets/master-and-reference-data/).
+For the whole series, on the site: [30 labs](https://data.learn-all.org/master-and-reference-data/labs/) and [72 scenarios](https://data.learn-all.org/master-and-reference-data/scenarios/), in English and Spanish, from the words in [site/assets/master-and-reference-data/](../../site/assets/master-and-reference-data/).
 <!-- /films -->
 
 ## The look and the sound

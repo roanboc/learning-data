@@ -131,6 +131,7 @@
 | 21 October 2026 | The labs are on the site, as the author asked ("Merge the labs too"). The series' page has the course bar and a section that leads to them; the site's page builder makes their two pages, *Take it apart* and *Make the call*, in English and Spanish; each film's page offers its own labs and situations, and so does the *Where next?* panel at the film's end. With all nine films on the site, the series' page no longer lists films still to come, and the first eight films no longer say more are on the way. The site's browser checks play every lab and every situation on a phone. |
 | 21 October 2026 | Each film's poster, the picture on its page and its cards, is a moment from its opening story, so the nine look different from each other (the author asked for it): the parish in 1686, the court at Toulouse, HMS Beagle at Plymouth, Cato's stone in Rome, two suitcases at an airport, the oath at the fire, the treaty of Bern, Mei's Monday at the hub, and the Min River split in two. |
 | 21 October 2026 | In *One person, many roles*, the road to Uppsala leaves the farmhouse door, goes over the hill's brow and behind the farm's spruces, then crosses the fields to the cathedral. Each stretch is painted with the ground it lies on, so the brow and the trees stand in front of it, and the walker who carries the certificate grows smaller as the road goes away and passes behind the trees. The author saw the road drawn over the trees, as it had been since the first version. |
+| 23 October 2026 | A lab, *Actor or role?*, joins *One person, many roles* as the party lesson. The person is the master record, the party of the pattern (Silverston and Hay), and enterprise architecture's business actor: a person, team or organisation, assigned to roles that start and end. The lab shows the error of storing a role as one field on the person, which overwrites its history. The example keeps the word *person* (decided 20 October 2026). |
 <!-- /decided -->
 
 ## The brief
@@ -262,7 +263,7 @@ Nine films of 4 to 6 minutes; the case is what happens to Linh at the university
 
 **On screen.** One figure wearing four coloured cards; the cards slide off into four lanes; the figure clears to white paper, banded in their colours. At the end, a gallery of master entities across industries, each in its industry's colour, and the four questions as a checklist that lights for some and not others.
 
-**Labs (candidates).** *Person, role, contact point or identifier?* *Fill the inventory.*
+**Labs (candidates).** *Person, role, contact point or identifier?* *Fill the inventory.* *Actor or role?* (an actor, a person, team or organisation, is assigned to roles that start and end; a role stored as one field overwrites its history).
 
 ### 2. Who is it?
 

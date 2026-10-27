@@ -82,8 +82,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Los responsables de datos la acuerdan, y fijan una fecha.",
 "Until then, the check only warns.":
 "Hasta entonces, el control solo advierte.",
-"Each warning links its page, and names the day it becomes an error: the first of December.":
-"Cada advertencia enlaza su página, y dice qué día se vuelve un error: el 1 de diciembre.",
+"Each warning links its page, and names the day it's required: the first of December.":
+"Cada advertencia enlaza su página, y dice desde qué día será obligatorio: el 1 de diciembre.",
 "Four weeks in, the warnings are gone.":
 "A las cuatro semanas, ya no quedan advertencias.",
 "There's nothing left for the date to stop.":
@@ -99,10 +99,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Nadie la vuelve a evaluar.",
 "Governance is measured from the work instead, every day.":
 "En cambio, la gobernanza se mide desde el trabajo, cada día.",
-"From the project: how much of what other teams read has an owner, a glossary term, a class and a description.":
-"Desde el proyecto: cuánto de lo que leen otros equipos tiene dueño, término del glosario, clase y descripción.",
-"From last night's run: which tests failed, and whose they are.":
-"Desde la ejecución de anoche: qué pruebas fallaron, y de quién son.",
+"From each night's checks: how much of what other teams read has an owner, a glossary term, a class and a description.":
+"De los controles de cada noche: cuánto de lo que leen otros equipos tiene dueño, término del glosario, clase y descripción.",
+"Which checks failed last night, and whose they are.":
+"Qué controles fallaron anoche, y de quién son.",
 "And from people: who came to office hours, and who came back.":
 "Y desde la gente: quién vino al horario de atención, y quién volvió.",
 "A score said how governance looked on paper. These say whether it's used.":

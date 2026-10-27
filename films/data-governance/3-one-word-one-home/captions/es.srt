@@ -135,49 +135,49 @@ Sin una revisión nocturna, un cambio como el del lunes aparece meses después, 
 El lunes en la noche, la revisión lo encontró y envió un aviso de cambio: qué tocan las palabras nuevas, y de quién es cada parte.
 
 35
-00:03:41,877 --> 00:03:46,714
-La lista de Planificación de estudiantes cerca de un título. La app de billetera. El tablero del censo.
+00:03:41,877 --> 00:03:45,868
+Una lista de estudiantes cerca de un título, y su tablero. La app de billetera.
 
 36
-00:03:48,514 --> 00:03:52,980
+00:03:48,168 --> 00:03:52,634
 Mei aprobó el nuevo significado. Esta vez, pudo ver dónde se usan sus palabras.
 
 37
-00:03:54,880 --> 00:03:57,761
+00:03:54,884 --> 00:03:57,765
 Jun vio un número en las palabras: seis créditos.
 
 38
-00:03:59,661 --> 00:04:06,066
+00:03:59,665 --> 00:04:06,070
 Un número en un significado también es una regla. Se guarda en un lugar, como regla de negocio que lee cada informe.
 
 39
-00:04:10,366 --> 00:04:12,389
+00:04:10,370 --> 00:04:12,393
 Las palabras del lunes no salieron de un escritorio.
 
 40
-00:04:13,189 --> 00:04:19,923
+00:04:13,193 --> 00:04:19,927
 Mei y las facultades las discutieron en un taller: ¿debía contar una microcredencial, y desde cuántos créditos?
 
 41
-00:04:21,323 --> 00:04:24,909
+00:04:21,327 --> 00:04:24,913
 El glosario guarda lo que acordaron. No hace el acuerdo.
 
 42
-00:04:26,509 --> 00:04:30,093
+00:04:26,513 --> 00:04:30,097
 Y quienes mantenían los otros glosarios pierden algo que construyeron.
 
 43
-00:04:31,093 --> 00:04:35,086
+00:04:31,097 --> 00:04:35,090
 Así que se les agradece, y sus mejores definiciones pasan al que se queda.
 
 44
-00:04:38,586 --> 00:04:42,462
+00:04:38,590 --> 00:04:42,466
 La política 12 decía: los informes cuentan según las definiciones del glosario.
 
 45
-00:04:43,162 --> 00:04:46,677
+00:04:43,166 --> 00:04:46,681
 Ahora cada palabra tiene un solo lugar, y toda herramienta lee de él.
 
 46
-00:04:48,177 --> 00:04:52,550
+00:04:48,181 --> 00:04:52,554
 Muchos glosarios son como ninguno. Quédate con uno, y sincroniza cada herramienta con él.

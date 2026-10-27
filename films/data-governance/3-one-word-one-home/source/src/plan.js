@@ -261,8 +261,9 @@ function ow_stepChart(ctx,x,y,w,h,p,q){ctx.save();ctx.fillStyle=rgba(GV.screen,1
   ["Jan","Mar","May","Jul","Sep","Nov"].forEach((s,i)=>wc_T(ctx,s,gx+gw*(i*2)/(n-1),gy+gh+44,{w:600,size:28,align:"center",col:WC_MUTED}));
   if(q>0){const [sx,sy]=pts[8];gv_halo(ctx,sx-60,sy-40,120,160,GV.red,0.6*q);const k=spring(q);ctx.save();ctx.translate(sx+64,sy+10);ctx.scale(k,k);wc_T(ctx,"?",0,0,{w:800,size:84,align:"center",col:GV.redInk});ctx.restore();}}
 // Monday's change notice, which the nightly check sends: its title; what changed, the old words struck and the new in bold; what the
-// new words touch, with each part's owner as it's named (o.rows[]); and who signs, the meaning's owner and data governance (o.owners)
-const OW_NT={x:360,y:96,w:1200,h:700,rows:[["learners near an award","Planning"],["wallet app","Wallet app team"],["census dashboard","Planning"]],own:[["the meaning","Mei Tanaka"],["the term still applies","data governance"]]};
+// new words touch, with each part's owner as it's named (o.rows[]); and who signs, the meaning's owner and data governance (o.owners).
+// On Monday night the list of learners near an award has no owner yet, only the team that asked for it: its owner line is empty
+const OW_NT={x:360,y:96,w:1200,h:700,rows:[["learners near an award","","asked for by Planning"],["near-award dashboard","Planning"],["wallet app","Wallet app team"]],own:[["the meaning","Mei Tanaka"],["the term still applies","data governance"]]};
 function ow_notice(ctx,x,y,w,o){o=o||{};const h=OW_NT.h;wc_panel(ctx,x,y,w,h,{kind:"card",seed:481});wc_T(ctx,"Change notice · award",x+28,y+64,{w:800,size:36,col:WC_DARK});
   // what changed: the old words and the new, the parts that differ struck in the old words' rose and set in the new words' violet
   const c=o.changed||0;if(c>0.01)withA(ctx,c,()=>{wc_T(ctx,"what changed",x+28,y+130,{w:700,size:28,col:WC_MUTED});
@@ -270,10 +271,13 @@ function ow_notice(ctx,x,y,w,o){o=o||{};const h=OW_NT.h;wc_panel(ctx,x,y,w,h,{ki
       const yy=y+180+j*46;wc_T(ctx,lab,x+28,yy,{w:600,size:28,col:WC_MUTED});let xx=x+100;
       seg.forEach(([s,k])=>{const wt=k>0?800:600,ww=tw(ctx,s,30,wt);wc_T(ctx,s,xx,yy,{w:wt,size:30,col:k<0?OW_MEANINK[1]:k>0?OW_MEANINK[0]:j?WC_INK:WC_MUTED});
         if(k<0){ctx.save();ctx.strokeStyle=rgba(OW_MEANINK[1],0.9);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(xx,yy-10);ctx.lineTo(xx+ww,yy-11);ctx.stroke();ctx.restore();}xx+=ww;});});});
-  const t_=o.touch||0;if(t_>0.01)withA(ctx,t_,()=>wc_T(ctx,"what the new words touch",x+28,y+292,{w:700,size:28,col:WC_MUTED}));
-  const rows=o.rows||[];OW_NT.rows.forEach(([a,b],i)=>{const u=rows[i]||0;if(u<=0.01)return;const yy=y+342+i*58;
+  const t_=o.touch||0;if(t_>0.01)withA(ctx,t_,()=>{wc_T(ctx,"what the new words touch",x+28,y+292,{w:700,size:28,col:WC_MUTED});
+    wc_T(ctx,"owner",x+w-28,y+292,{w:700,size:28,align:"right",col:WC_MUTED});});
+  const rows=o.rows||[];OW_NT.rows.forEach(([a,b,n],i)=>{const u=rows[i]||0;if(u<=0.01)return;const yy=y+342+i*58;
     withA(ctx,u,()=>{ctx.save();ctx.translate(16*(1-u),0);ctx.fillStyle=rgba(GV.cyanInk,0.8);ctx.beginPath();ctx.arc(x+40,yy-10,6,0,TAU);ctx.fill();
-      wc_T(ctx,a,x+62,yy,{w:700,size:30,col:WC_DARK});wc_T(ctx,b,x+w-28,yy,{w:600,size:28,align:"right",col:WC_MUTED});ctx.restore();});});
+      wc_T(ctx,a,x+62,yy,{w:700,size:30,col:WC_DARK});if(n)wc_T(ctx,"· "+n,x+62+tw(ctx,a+" ",30,700),yy,{w:600,size:28,col:WC_MUTED});
+      if(b)wc_T(ctx,b,x+w-28,yy,{w:600,size:28,align:"right",col:WC_INK});
+      else{ctx.strokeStyle=rgba(WC_MUTED,0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+w-188,yy+6);ctx.lineTo(x+w-28,yy+6);ctx.stroke();}ctx.restore();});});
   const ow_=o.owners||0;if(ow_>0.01)withA(ctx,ow_,()=>{ctx.save();ctx.strokeStyle=rgba(WC_MUTED,0.35);ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+28,y+508);ctx.lineTo(x+w-28,y+508);ctx.stroke();ctx.restore();
     wc_T(ctx,"who signs",x+28,y+554,{w:700,size:28,col:WC_MUTED});
     OW_NT.own.forEach(([a,b],i)=>{const yy=y+604+i*50;wc_T(ctx,a,x+28,yy,{w:600,size:28,col:WC_INK});wc_T(ctx,b,x+w-28,yy,{w:700,size:28,align:"right",col:i?GV.goldInk:OW_MEANINK[0]});});});}

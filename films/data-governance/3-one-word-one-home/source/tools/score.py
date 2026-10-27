@@ -349,9 +349,9 @@ pencil(tCk, 0.012, P(seen(750, 960, 1.0)), 0.8); wood(ROSE, tCk + 0.2, 0.013, 0.
 tNt = W(H, 'night', 'sent a')
 air(tNt + 0.45, 0.6, 0.012, 0.2); paper(tNt + 0.55, 0.026, 0.0, 0.5)
 wood(ROSE, tNt + 0.8, 0.011, -0.1); wood(VIO, tNt + 1.05, 0.012, -0.1)
-for t0, m_ in zip([C(H, 'list'), W(H, 'list', 'The wallet'), W(H, 'list', 'The census')], [67, 71, 74]):
+for t0, m_ in zip([C(H, 'list'), W(H, 'list', 'its dashboard'), W(H, 'list', 'The wallet')], [67, 71, 74]):
     knock(t0 - 0.05, 0.008, -0.2, 230); wood(m_, t0, 0.012, -0.2)
-tOw = W(H, 'list', 'The census', 1.3)
+tOw = W(H, 'list', 'The wallet', 1.3)
 knock(tOw + 0.1, 0.01, 0.4); knock(tOw + 0.3, 0.01, 0.4, 220)
 knock(C(H, 'mei', -0.1), 0.01, P(seen(1420, 1160, 1.4)))
 tAp = W(H, 'mei', 'approved')

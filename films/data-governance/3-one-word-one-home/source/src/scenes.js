@@ -158,7 +158,7 @@ scene("read",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({stamp:wAt(sc,
 
 // ---- 6 · When a word changes: Monday's change, as a change notice Mei signs ----
 scene("change",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({months:wAt(sc,"before","found months"),moves:wAt(sc,"before","when a number"),night:c.night-0.4,chk:wAt(sc,"night","the check"),found:wAt(sc,"night","found it"),nt:wAt(sc,"night","sent a"),
-    touch:wAt(sc,"night","what the new"),rows:[c.list,wAt(sc,"list","The wallet"),wAt(sc,"list","The census")],mei:c.mei-0.4,appr:wAt(sc,"mei","approved"),used:wAt(sc,"mei","where her"),
+    touch:wAt(sc,"night","what the new"),rows:[c.list,wAt(sc,"list","its dashboard"),wAt(sc,"list","The wallet")],mei:c.mei-0.4,appr:wAt(sc,"mei","approved"),used:wAt(sc,"mei","where her"),
     num:c.number-0.4,six:wAt(sc,"number","six credit"),kept:wAt(sc,"rule","So it's"),sets:wAt(sc,"rule","as a business"),every:wAt(sc,"rule","every report")}));
   gv_shots(ctx,S,t,sc.dur,[
     // without a nightly check: a dashboard's number moves, months later, and nobody knows why

@@ -420,7 +420,9 @@ Object.assign(POSE,{
   tt_after2:{L:[1.5,1.95],R:[0.3,-2.36],hand:"open",feet:32,shift:-6,tilt:-0.05,turn:-0.34,gaze:[-0.9,-0.1],look:0},
   // looking to one side: our left (tt_lookL) or right (tt_lookR)
   tt_lookL:{L:[0.13,-0.1],R:[0.09,0.06],feet:25,shift:-2,tilt:-0.03,turn:-0.36,gaze:[-0.9,0.1],look:0},
-  tt_lookR:{L:[0.13,-0.1],R:[0.09,0.06],feet:25,shift:2,tilt:0.03,turn:0.36,gaze:[0.9,0.1],look:0}});
+  tt_lookR:{L:[0.13,-0.1],R:[0.09,0.06],feet:25,shift:2,tilt:0.03,turn:0.36,gaze:[0.9,0.1],look:0},
+  // a step back from a car that edges forward: both open hands up towards it, on our left
+  tt_flinch:{L:[0.85,1.95],R:[0.8,1.9],hand:"open",both:true,feet:32,shift:5,tilt:0.08,turn:-0.32,gaze:[-0.9,0],look:0}});
 // a whistle's mouth, a laugh, a stubborn look
 EXPR.ttWhistle={bi:-3,bo:-1,arch:-3,eye:0.9,smile:0,open:0.55,mw:9};
 EXPR.ttLaugh={bi:-2,bo:-3.5,arch:-4,eye:0.62,happy:1,smile:1,open:1,mw:26};
@@ -579,8 +581,8 @@ function tt_paintOffice(ctx){gv_paintOffice(ctx);const [x,y,w,h]=GV_OFF.score;ct
 // wall where the score hung. What's drawn on them is drawn in the room's own coordinates, through the same lens (tt_inZ)
 const TT_Z={board:{z:2.4,x:440,y:380},cal:{z:3.6,x:851,y:310},wall:{z:2.0,x:1238,y:330}};
 function tt_inZ(x,Z,fn){x.save();x.translate(960,540);x.scale(Z.z,Z.z);x.translate(-Z.x,-Z.y);fn(x);x.restore();}
-// the colours of a number, a warning and a link
-const TT_NUM=[40,96,150],TT_AMBER=[232,156,24],TT_AMBERINK=[166,100,0],TT_LINK=[24,104,168];
+// the colours of a number, a warning (the series' amber, which reads apart from governance's gold) and a link
+const TT_NUM=[40,96,150],TT_AMBER=GV.amber,TT_AMBERINK=GV.amberInk,TT_LINK=[24,104,168];
 
 /* ---------- the university: the floor, Mei's desk ---------- */
 // a card on an office's glass on the floor: its lines, centred; it comes in with u (0 to 1), and o.flip (0 to 1) turns it over to o.back

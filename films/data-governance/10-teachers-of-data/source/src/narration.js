@@ -4,12 +4,15 @@ const NARR={
 "crossing":{"name":"The mime before the fine","lead":1.6,"tail":1.0,"vo":[
  {"id":"b95","gap":0.8,"text":"Bogotá, 1995.","say":"Bogotá, nineteen ninety-five."},
  {"id":"stop","gap":0.8,"text":"In the city centre, drivers stop on the zebra crossings, and people on foot weave between the cars."},
+ {"id":"risk","gap":0.8,"text":"It's dangerous: more than a thousand people a year die on the city's roads."},
+ {"id":"need","gap":0.8,"text":"Fines alone haven't changed the habit. The city needs another way."},
  {"id":"mayor","gap":0.8,"text":"The new mayor, Antanas Mockus, sends mimes into the streets."},
  {"id":"whistle","gap":0.8,"text":"When a car stops on a crossing, the people around it whistle."},
  {"id":"mime","gap":0.8,"text":"A mime steps in and, without a word, invites the driver to back up."},
  {"id":"fine","gap":0.8,"text":"If the driver still won't, a traffic officer writes a fine, and the people watching applaud."},
  {"id":"last","gap":0.8,"text":"The fine still came. But it came last, in an order meant to teach."},
  {"id":"y96","gap":0.8,"text":"By 1996, three drivers in four were keeping the crossings clear.","say":"By nineteen ninety-six, three drivers in four were keeping the crossings clear."},
+ {"id":"safe","gap":0.8,"text":"People on foot could cross in front of the cars, not between them."},
  {"id":"most","gap":0.8,"text":"Most people keep a rule because they understand it, and because the people around them keep it."},
  {"id":"few","gap":0.8,"text":"The fine is for the few."}]},
 "today":{"name":"Submission day","lead":1.0,"tail":1.0,"vo":[

@@ -18,10 +18,12 @@ function tt_pill(ctx,t,mk,a){if(a<=0.01)return;let i=0;for(let k=1;k<mk.length;k
 // ---- 1 · The mime before the fine: Bogotá, 1995, and a year on ----
 // the chapter's moments, from its cues and words
 function tt_crossCues(sc){const c=sc.cues,w=(id,s)=>wAt(sc,id,s);
-  return{amber:c.b95+0.2,red:c.b95+1.5,drivers:w("stop","drivers stop"),zebra:w("stop","zebra"),weave:w("stop","weave"),mayor:c.mayor,mimes:w("mayor","mimes"),whistleLine:c.whistle,around:w("whistle","around"),
+  return{amber:c.b95+0.2,red:c.b95+1.5,drivers:w("stop","drivers stop"),zebra:w("stop","zebra"),weave:w("stop","weave"),risk:c.risk,danger:w("risk","dangerous"),
+    thousand:w("risk","a thousand"),need:c.need,mayor:c.mayor,mimes:w("mayor","mimes"),whistleLine:c.whistle,around:w("whistle","around"),
     whistle:w("whistle","whistle"),mimeLine:c.mime,steps:w("mime","steps"),word:w("mime","without a word"),invites:w("mime","invites"),backUp:w("mime","back up"),fineLine:c.fine,
     wont:w("fine","still won't"),officer:w("fine","a traffic officer"),writes:w("fine","writes"),applaud:w("fine","applaud"),last:c.last,cameLast:w("last","came last"),
-    order:w("last","an order"),y96:c.y96,three:w("y96","three drivers"),most:c.most,understand:w("most","understand"),around2:w("most","the people around"),fewLine:c.few,
+    order:w("last","an order"),y96:c.y96,three:w("y96","three drivers"),safe:c.safe,front:w("safe","in front of"),most:c.most,understand:w("most","understand"),
+    around2:w("most","the people around"),fewLine:c.few,
     few:w("few","few"),breath:c.breath};}
 // a whistle and a clap, drawn over the person who does them
 const tt_whistling=(t,t0,t1)=>t>t0&&t<t1?(x,X,Y,k)=>tt_whistleMarks(x,X,Y,k,t,gv_io(t,t0,t1,0.3)):null;
@@ -30,16 +32,17 @@ const tt_clapping=(t,t0,t1,ph)=>{if(t<=t0||t>=t1)return{};const a=gv_io(t,t0,t1,
 // a pose blended in at t0 and out at t1
 const tt_doing=(t,t0,t1,pose,d)=>({pose2:pose,mix:gv_io(t,t0,t1,d||0.35)});
 
-// 1995: the light turns red; three cars roll up and stop on the stripes, and people weave between them and away along our pavement; four
-// mimes come down the side street; the people whistle, and one car backs off; a mime bows to the next driver and shows him the way back;
-// the third driver won't move, the mime shrugs, and an officer writes a fine, to applause
+// 1995: the light turns red; three cars roll up and stop on the stripes, and people weave between them and away along our pavement; one
+// car edges further on, at a student crossing in front of it, who steps back; four mimes come down the side street; the people whistle,
+// and one car backs off; a mime bows to the next driver and shows him the way back; the third driver won't move, the mime shrugs, and
+// an officer writes a fine, to applause
 function tt_world95(t,P){const people=[],cars=[];
   const lamp=tt_lampAt(t,[[0,2],[P.amber,1],[P.red,0]]);
   // the cars: two pass while the light is still green or amber; three roll up and stop on the stripes. Drivers look at the mime, or away
   const C=[{m:"hatch",col:TT_PAINT.red,d:12.25,pass:true,X1:-24,t1:0,v:12},{m:"box",col:TT_PAINT.green,d:5.25,pass:true,X1:-32,t1:0,v:13},
     {m:"hatch",col:TT_PAINT.mustard,d:12.25,X1:-1.6,t1:P.drivers-0.2,v:9,moves:[[P.whistle+0.1,P.whistle+2.4,-6.0]],drv:"ttDrv3",
       ex:()=>t>P.around?"worried":"calm",look:()=>["tt_lookL",gv_io(t,P.around,P.whistle+2.6,0.3)]},
-    {m:"box",col:TT_PAINT.cream,d:8.75,X1:-2.36,t1:P.drivers+0.4,v:9,drv:"ttDrv2",ex:()=>t>P.wont-0.7?"ttStern":"calm",
+    {m:"box",col:TT_PAINT.cream,d:8.75,X1:-2.36,t1:P.drivers+0.4,v:9,moves:[[P.danger-0.1,P.danger+0.4,-1.61]],drv:"ttDrv2",ex:()=>t>P.wont-0.7?"ttStern":"calm",
       look:()=>t<P.wont-0.7?["tt_lookR",gv_io(t,P.steps,P.backUp+2.2,0.4)*0.6]:["tt_lookL",gv_io(t,P.wont-0.7,P.applaud+2,0.4)]},
     {m:"sedan",col:TT_PAINT.blue,d:5.25,X1:-1.66,t1:P.zebra+0.3,v:10,moves:[[P.backUp+0.3,P.backUp+2.3,-6.4]],drv:"ttDrv1",
       ex:()=>t>P.invites+0.8&&t<P.backUp+2.6?"ttLaugh":t>P.word-0.3?"worried":"calm",look:()=>["tt_lookR",gv_io(t,P.steps-0.6,P.backUp+2.4,0.4)]}];
@@ -53,12 +56,15 @@ function tt_world95(t,P){const people=[],cars=[];
   stand.forEach(([id,X,d,wp,ph])=>{const cl=tt_clapping(t,cl0,cl1,ph);people.push({id,X,d,o:Object.assign({t,pose:"stand"},tt_doing(t,wh0+ph*0.1,wh1,wp),
     wp==="tt_lips"&&t>wh0&&t<wh1?{expr:"ttWhistle"}:{},{marks:tt_whistling(t,wh0+0.3+ph*0.1,wh1)},cl)});});
   people.push({id:"ttBun",X:0.9,d:15.7,o:{t,pose:"tt_umbrella",umbrella:[178,62,58]}});
-  // three weave between the stopped cars, and go off along our pavement: one with a bag, one under an umbrella (round the cars' backs),
-  // a student
-  [["ttBag",[[2.55,14.7],[2.9,13.1],[2.8,10.1],[3.1,6.7],[2.95,3.3],[3.6,0.6],[7.2,-1.5],[12.5,-1.8]],P.drivers+0.1,1.5,{pose:"tt_bag",carry:tt_heldBag([196,120,80]),keep:true}],
-    ["ttSuit",[[0.3,14.8],[-2.3,13.4],[-3.1,10.0],[-2.9,7.4],[-2.3,3.6],[-1.4,0.6],[-4.8,-1.4],[-9.5,-1.8]],P.drivers+0.4,1.6,{pose:"tt_umbrella",umbrella:[44,44,52],keep:true}],
-    ["ttStudent",[[2.0,14.8],[3.2,13.0],[3.35,10.0],[3.5,6.8],[3.2,3.2],[4.2,0.4],[7.8,-1.0],[13.2,-1.4]],P.drivers+0.9,1.6,{}]]
+  // two weave between the stopped cars, and go off along our pavement: one with a bag, one under an umbrella (round the cars' backs)
+  [["ttBag",[[2.55,14.7],[2.9,13.1],[2.8,10.1],[3.1,6.7],[2.95,3.3],[3.6,0.6],[7.2,-1.5],[12.5,-1.8]],P.drivers+0.1,1.7,{pose:"tt_bag",carry:tt_heldBag([196,120,80]),keep:true}],
+    ["ttSuit",[[0.3,14.8],[-2.3,13.4],[-3.1,10.0],[-2.9,7.4],[-2.3,3.6],[-1.4,0.6],[-4.8,-1.4],[-9.5,-1.8]],P.drivers+0.4,1.6,{pose:"tt_umbrella",umbrella:[44,44,52],keep:true}]]
     .forEach(([id,pts,t0,v,o])=>people.push({id,d:0,walk:tt_path(t,t0,pts,v),o:Object.assign({t},o)}));
+  // a student comes after them, close round the cream car's front; on "dangerous" it edges forward, and the student steps back, hands
+  // up, then hurries on round it
+  const tL=P.danger-0.1,s1=[[2.0,14.8],[3.2,13.0],[2.9,10.4],[2.3,9.0]],s3=[[2.85,9.3],[3.3,7.6],[3.4,6.0],[3.2,3.2],[4.2,0.4],[7.8,-1.0],[13.2,-1.4]];
+  let sw=tt_path(t,tL+0.05-s1.slice(1).reduce((a,q,i)=>a+Math.hypot(q[0]-s1[i][0],q[1]-s1[i][1]),0)/1.6,s1,1.6);if(t>=tL+0.1)sw=tt_path(t,tL+0.1,[[2.3,9.0],[2.85,9.3]],1.6);if(t>=tL+1.15)sw=tt_path(t,tL+1.15,s3,1.7);
+  const fl=gv_io(t,tL+0.05,tL+1.25,0.22);people.push({id:"ttStudent",d:0,walk:sw,o:Object.assign({t},fl>0.01?{pose2:"tt_flinch",mix:fl,expr:"worried",keep:true}:{})});
   // the mimes come down both pavements of the side street, out of the distance, and take their places at the kerb; the one nearest the
   // crossing bows to everyone
   const M=[["ttMime2",[[1.5,31],[1.5,16.0],[-0.9,15.0]],P.mimes-4.4],["ttMime1",[[2.1,32.5],[2.1,16.2],[2.4,14.9]],P.mimes-4.0],
@@ -79,9 +85,9 @@ function tt_world95(t,P){const people=[],cars=[];
   for(const q of people)if(q.walk)q.d=q.walk.d;
   return{lamp,cars,people};}
 
-// 1996: four cars at the light, three behind the line and one over it; people cross on the stripes and go off along our pavement; the
-// mime and the people beside him nod to each other; the officer, by the car over the line, writes the one fine and shuts his notebook;
-// then the light turns green
+// 1996: four cars at the light, three behind the line and one over it; people wait at the kerb, then cross on the stripes in front of the
+// cars and go off along our pavement; the mime and the people beside him nod to each other; the officer, by the car over the line,
+// writes the one fine and shuts his notebook; then the light turns green
 function tt_world96(t,P){const people=[],cars=[],go=P.breath+0.5;
   const lamp=tt_lampAt(t,[[0,0],[go,2]]);
   [["hatch",TT_PAINT.red,1.75,-6.0,P.y96+0.4,"ttDrv3"],["box",TT_PAINT.green,5.25,-6.0,P.y96+0.9,"ttDrv1"],["sedan",TT_PAINT.beige,8.75,-3.66,P.y96+1.3,"ttDrv2"],["hatch",TT_PAINT.blue,12.25,-6.1,P.y96+0.6,null]]
@@ -91,8 +97,8 @@ function tt_world96(t,P){const people=[],cars=[],go=P.breath+0.5;
   const nod=gv_io(t,P.around2-0.2,P.fewLine,0.4),pitch=nod*(0.5+0.5*Math.sin((t-P.around2)*TAU*0.8));
   [["ttSpecs",-5.6,15.5],["ttBag",-4.4,15.8,{pose:"tt_bag",carry:tt_heldBag([150,110,170])}],["ttFlatCap",-3.2,15.3,{pose2:"tt_lookR",mix:nod,pitch}],["ttGrey",-2.0,15.6,{pose2:"tt_lookR",mix:nod,pitch}],
     ["ttCurly",13.2,15.6],["ttMime3",2.4,16.4]].forEach(([id,X,d,o])=>people.push({id,X,d,o:Object.assign({t,pose:"stand"},o||{})}));
-  // three cross on the stripes and go off along our pavement
-  [["ttLong",[[1.75,15.0],[1.85,1.0],[-3.6,-1.2],[-9.0,-1.6]],P.y96+0.2,1.45],["ttWorker",[[2.3,15.1],[2.4,0.8],[7.2,-1.2],[13.0,-1.6]],P.y96+0.7,1.45],["ttStudent",[[2.65,15.0],[2.8,1.2],[7.8,-0.8],[14.0,-1.2]],P.y96+1.2,1.5]]
+  // three cross on the stripes, in front of the cars, and go off along our pavement
+  [["ttLong",[[1.75,15.0],[1.85,1.0],[-3.6,-1.2],[-9.0,-1.6]],P.safe-1.2,1.45],["ttWorker",[[2.3,15.1],[2.4,0.8],[7.2,-1.2],[13.0,-1.6]],P.safe-0.7,1.45],["ttStudent",[[2.65,15.0],[2.8,1.2],[7.8,-0.8],[14.0,-1.2]],P.safe-0.2,1.5]]
     .forEach(([id,pts,t0,v])=>people.push({id,d:0,walk:tt_path(t,t0,pts,v),o:{t}}));
   people.push({id:"ttMime2",X:-0.9,d:15.0,o:{t,pose:"stand",pose2:"tt_lookL",mix:nod,pitch,expr:"smile"}});
   const wr=gv_io(t,P.y96+1.6,P.few-0.25,0.35);people.push({id:"ttOfficer",X:1.0,d:8.0,o:{t,pose:"stand",pose2:"write",mix:wr,carry:wr>0.5?heldNotebook:tt_heldShut,look:wr>0.5?1:0}});
@@ -114,8 +120,9 @@ scene("crossing",(ctx,S,t,sc)=>{const P=tt_once(sc,"P",()=>tt_crossCues(sc)),cut
   const mid95=(x,tt)=>tt_drawWorld(x,TT_CAM.mid,tt_world95(tt,P)),wide96=(x,tt)=>tt_drawWorld(x,TT_CAM.wide,tt_world96(tt,P));
   const i=gv_shots(ctx,S,t,sc.dur,[
     // Bogotá, 1995: the avenue from a first-floor window; the light turns red, the cars stop on the stripes, people weave between them;
-    // then closer to the far pavement as the mimes come round the corner
-    {at:0,place:"bogota",keys:[[0,960,540,1],[P.mayor-0.6,860,600,1.42]],d:2.6,push:0,draw:(x,tt)=>tt_drawWorld(x,TT_CAM.wide,tt_world95(tt,P))},
+    // closer as a car edges forward at the student crossing in front of it; then, as the city needs another way, on to the far pavement,
+    // where the mimes come round the corner
+    {at:0,place:"bogota",keys:[[0,960,540,1],[P.danger-2.4,900,690,1.32],[P.need-0.2,860,600,1.42]],d:2.6,push:0,draw:(x,tt)=>tt_drawWorld(x,TT_CAM.wide,tt_world95(tt,P))},
     // from the pavement, close to the people at the kerb: the whistles, and the first car backs off; then the mime steps in and shows the
     // next driver back; the third won't move; the fine; then back to the people at the kerb, who applaud
     {at:cutMid,place:"bogotaMid",keys:[[cutMid,740,480,1.35],[P.steps-1.4,1010,580,1.2],[P.wont-0.6,930,540,1.22],[P.applaud-0.9,738,470,1.3]],d:1.8,push:0,draw:mid95},
@@ -123,14 +130,15 @@ scene("crossing",(ctx,S,t,sc)=>{const P=tt_once(sc,"P",()=>tt_crossCues(sc)),cut
     {at:P.last-0.3,keys:[[0,960,540,1]],push:0,draw:(x,tt)=>{x.fillStyle=rgba(WC_PAPER,1);x.fillRect(0,0,W,H);
       [P.last+0.1,P.last+0.9,P.cameLast-0.1].forEach((t0,j)=>tt_panelAt(x,j,P,[380,960,1540][j],420,fin(tt,t0,0.4),0.94+0.06*spring(fin(tt,t0,0.6))));
       const o=fin(tt,P.order,0.5);if(o>0)withA(x,o,()=>{x.strokeStyle=rgba(WC_PENCIL,0.7);x.lineWidth=4;x.lineCap="round";for(const ax of [670,1250]){x.beginPath();x.moveTo(ax-26,766);x.lineTo(ax+26,766);x.moveTo(ax+12,754);x.lineTo(ax+26,766);x.lineTo(ax+12,778);x.stroke();}});}},
-    // 1996: four cars wait at the light, three behind the line
-    {at:P.y96-0.3,place:"bogota",keys:[[P.y96-0.3,960,520,1.04]],push:0.02,draw:(x,tt)=>{wide96(x,tt);}},
+    // 1996: four cars wait at the light, three behind the line; then closer, as people on foot cross in front of them
+    {at:P.y96-0.3,place:"bogota",keys:[[P.y96-0.3,960,520,1.04],[P.safe-0.4,910,660,1.2]],d:2.4,push:0,draw:(x,tt)=>{wide96(x,tt);}},
     // closer: people cross on the stripes; the mime and the people beside them nod; the officer shuts his notebook
     {at:P.most-0.3,place:"bogotaMid",keys:[[P.most-0.3,960,520,1.02],[P.few-0.8,860,500,1.16]],d:2.0,push:0,draw:(x,tt)=>tt_drawWorld(x,TT_CAM.mid,tt_world96(tt,P))},
     // the light turns green, and the cars go
     {at:P.breath,place:"bogota",keys:[[P.breath,960,540,1]],push:0.02,draw:wide96}],0.6);
   setScreen(ctx,S);
   // tags over the picture, in the frame's own coordinates
+  if(i===0)tt_tagAt(ctx,t,P.thousand-0.3,P.mayor-0.5,960,190,"1995 · more than 1,000 road deaths a year",{size:34});
   if(i===3)tt_tagAt(ctx,t,P.three-0.4,P.most-0.35,960,190,"1996 · three drivers in four keep the crossing clear",{size:34});
   if(i===4){tt_tagAt(ctx,t,P.understand,null,1340,250,"they understand it",{size:32});tt_tagAt(ctx,t,P.around2,null,560,250,"the people around keep it",{size:32});
     tt_tagAt(ctx,t,P.few-0.2,null,960,340,"the fine is for the few",{size:32,role:"amber"});}

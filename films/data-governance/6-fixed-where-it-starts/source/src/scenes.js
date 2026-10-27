@@ -115,8 +115,9 @@ scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({take:c.bind
       const L=fw_scorecard(x,cam,{sections:FW_SKW,hi:4,hiA:fin(tt,P.row+0.4,0.5)}),r=L.rows[4],w=L.sec[0];
       gv_halo(x,L.cx[3]-26,r.top-26,L.cw[3]+52,r.h+52,FW.amber,0.9*gv_io(tt,P.cell,P.row+0.6,0.4));
       gv_tint(x,w.cols[1]-10,w.rows[0]-FW_SK.rh*0.74,tw(x,"Learning team",FW_SK.sz,600)+20,2*FW_SK.rh,GV.gold,0.7*fin(tt,P.owner,0.4));}},
-    // Tom's desk, the learning team's: the issue log, its line for the emails lit, and closed with the old answer
-    {at:P.log,place:"tomTop",keys:[[P.log,960,520,1],[P.log+0.1,960,500,1.04]],d:3,push:0.01,draw:(x,tt)=>
+    // Tom's desk, the learning team's: the issue log, the night's failure closed for good, and the line for the emails lit, then
+    // closed with the old answer
+    {at:P.log,place:"tomTop",keys:[[P.log,960,550,1],[P.log+0.1,960,530,1.04]],d:3,push:0.01,draw:(x,tt)=>
       fw_issueLog(x,fin(tt,P.log+0.3,0.5),fin(tt,P.cleaned,0.3))},
     // the data team's room: Jun shows Yusuf where the emails are cleaned; along the ceiling, a pipe; under it, a bucket and a mop
     {at:P.room,place:"data",keys:[[P.room,1300,560,1.2],[P.room+0.1,1320,560,1.24]],d:2,draw:(x,tt)=>

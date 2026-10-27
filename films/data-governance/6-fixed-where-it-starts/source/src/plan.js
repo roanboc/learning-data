@@ -393,16 +393,18 @@ function fw_pen(ctx,x,y,rot){ctx.save();ctx.translate(x,y);ctx.rotate(rot==null?
 
 /* ---------- today: the issues ---------- */
 // the data quality issue log, as Rules that run keeps it: the series' register page, open in its blue boards on Tom's desk, the
-// learning team's. Its line for the emails, from the Monday's warnings, is lit gold (hiA), then stamped as the old answer closes it
-// (stamp, 0 to 1), under the line, so the stamp and the line both read
-const FW_IL={kicker:"Issue log",title:"Data quality",h:440,cols:[["Opened",0.13],["Issue",0.48],["Owner",0.25],["Due",0.14]],
-  rows:[["19 Oct","Short-course emails as typed","Learning team","26 Oct"]]};
+// learning team's, at the Monday's lines. The night's failure is already closed, with Rules that run's green stamp, a size smaller;
+// under it the emails' line, from the Monday's warnings, is lit gold (hiA), then stamped as the old answer closes it (stamp, 0 to
+// 1). Each stamp sits on the ruled line left blank under its own, so the stamps and the lines all read
+const FW_IL={kicker:"Issue log",title:"Data quality",h:540,cols:[["Opened",0.13],["Issue",0.48],["Owner",0.25],["Due",0.14]],
+  rows:[["19 Oct","Enrolments with no email, 6","Learning team","20 Oct"],["","","",""],["19 Oct","Short-course emails as typed","Learning team","26 Oct"],["","","",""]]};
 function fw_issueBook(ctx){const [x,y,w]=FW_TT.log,h=FW_IL.h*w/1000;ctx.drawImage(wc_kept("fwIssueBook",w+160,h+120,q=>{q.translate(70,40);
     q.save();q.filter="blur(10px)";q.fillStyle="rgba(50,40,30,0.3)";q.fillRect(-40,-8,w+70,h+44);q.restore();
     wc_wash(q,wc_rrPts(-46,-22,w+72,h+44,10),[58,82,118],{kind:"cover",lw:1.4,seed:116});wc_flat(q,wc_rect(-46,-22,34,h+44),[40,58,88],1,"spine");
     for(let i=3;i>0;i--)wc_flat(q,wc_rect(i*3,i*3,w,h),[240-i*8,236-i*8,226-i*8],1,"pages");}),x-70,y-40);}
-function fw_issueLog(ctx,hiA,stamp){const [x,y,w]=FW_TT.log;fw_issueBook(ctx);const r=gv_register(ctx,x,y,w,Object.assign({hi:0,hiA},FW_IL));
-  if(stamp>0)gv_stamp(ctx,x+w/2,r.rows[0]+128*w/1000,"CLOSED: cleaned downstream",stamp,{size:40,rot:-0.04});return r;}
+function fw_issueLog(ctx,hiA,stamp){const [x,y,w]=FW_TT.log,k=w/1000;fw_issueBook(ctx);const r=gv_register(ctx,x,y,w,Object.assign({hi:2,hiA},FW_IL));
+  gv_stamp(ctx,x+(48+904*(0.13+0.24))*k,r.rows[1],"CLOSED: the check passes",1,{size:30,col:GV.greenInk,rot:0.03});
+  if(stamp>0)gv_stamp(ctx,x+w/2,r.rows[3],"CLOSED: cleaned downstream",stamp,{size:40,rot:-0.04});return r;}
 // the issue that closes it for good: the next Monday's, on Yusuf's board, with an owner, a cause, a date and the check that proves it's
 // closed (line(k)); stamped closed (closed, 0 to 1) once the check passes
 const FW_IS=[["Owner:","Learning team"],["Cause:","the form keeps each email as typed"],["Due:","2 November"],["Closed when:","the check passes with no clean-up"]];

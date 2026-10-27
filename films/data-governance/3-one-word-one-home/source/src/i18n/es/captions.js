@@ -12,8 +12,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Una medida de grano contenía más en un estado que en el vecino, así que impuestos y precios quedaban en duda.",
 "The empire needed the same script, measures and cart widths everywhere, so it set them by law.":
 "El imperio necesitaba la misma escritura, las mismas medidas y el mismo ancho de carro, y los fijó por ley.",
-"It even decided which words its officials used: “the king's order” became “the emperor's edict”.":
-"Hasta decidió qué palabras usaban sus funcionarios: «la orden del rey» pasó a ser «el edicto del emperador».",
+"Now a measure of grain had to hold the same everywhere, so taxes and prices could be trusted.":
+"Ahora una medida de grano debía contener lo mismo en todas partes, y se podía confiar en impuestos y precios.",
+"The empire even decided which words its officials used: “the king's order” became “the emperor's edict”.":
+"El imperio hasta decidió qué palabras usaban sus funcionarios: «la orden del rey» pasó a ser «el edicto del emperador».",
 "Far to the south, a county office kept a list on a wooden board: each old word, and the new word to use instead.":
 "Muy al sur, la oficina de un condado tenía una lista en una tabla de madera: cada palabra vieja y la nueva que debía usarse.",
 "In 2002, archaeologists found the board in an old well, with thousands of the county's own records.":
@@ -58,6 +60,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Así que Yusuf reúne a los dueños de los términos, para mantener un solo glosario.",
 "Not the biggest. The one they can trust, and every tool can read: the glossary on the platform, beside the data.":
 "No el más grande: uno confiable, que toda herramienta pueda leer. El glosario en la plataforma, junto a los datos.",
+"Like the Qin board, it sits where the work is done, so it gets used.":
+"Como la tabla de Qin, está donde se hace el trabajo, así que se usa.",
 "Each term there has a definition, an owner, a status, and the date it last changed.":
 "Cada término allí tiene una definición, un dueño, un estado y la fecha en que cambió por última vez.",
 "It holds the business's words.":
@@ -80,8 +84,12 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Cada copia se hace a partir del glosario, en un solo sentido, nunca al revés.",
 "Without a nightly check, a change like Monday's is found months later, in a dashboard, when a number moves.":
 "Sin una revisión nocturna, un cambio como el del lunes aparece meses después, en un tablero, cuando un número se mueve.",
-"On Monday night, the check found it, and sent a change notice: what the new words touch, and who owns each part.":
-"El lunes en la noche, la revisión lo encontró y envió un aviso de cambio: qué tocan las palabras nuevas, y de quién es cada parte.",
+"On Monday night, the check found it, and sent a change notice.":
+"El lunes en la noche, la revisión lo encontró y envió un aviso de cambio.",
+"Like the Qin board, it shows the old words and the new ones.":
+"Como la tabla de Qin, muestra las palabras viejas y las nuevas.",
+"And what the new words touch, and who owns each part.":
+"Y qué tocan las palabras nuevas, y de quién es cada parte.",
 "A list of learners near an award, and its dashboard. The wallet app.":
 "Una lista de estudiantes cerca de un título, y su tablero. La app de billetera.",
 "Mei approved the new meaning. This time, she could see where her words are used.":
@@ -104,6 +112,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La política 12 decía: los informes cuentan según las definiciones del glosario.",
 "Now each word has one home, and every tool reads from it.":
 "Ahora cada palabra tiene un solo lugar, y toda herramienta lee de él.",
+"Like the Qin board, it's used.":
+"Como la tabla de Qin, se usa.",
+"Reports agree, a change reaches everyone it touches, and people can trust the numbers.":
+"Los informes coinciden, un cambio llega a todos los que toca, y la gente puede confiar en los números.",
 "Many glossaries are no glossary. Keep one, and sync every tool from it.":
 "Muchos glosarios son como ninguno. Quédate con uno, y sincroniza cada herramienta con él."
 });

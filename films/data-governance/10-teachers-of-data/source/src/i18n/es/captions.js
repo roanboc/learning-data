@@ -41,8 +41,16 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La entrega y el informe del censo de Planificación coinciden: 4,867 títulos, contados según el glosario.",
 "How that maps to the government's definition is a decision Mei owns, and has written down.":
 "Cómo corresponde a la definición del gobierno es una decisión de Mei, que ella dejó por escrito.",
-"The checks helped. But they worked because the people they stop knew why they were there.":
-"Los controles ayudaron. Pero funcionaron porque la gente a la que detienen sabía por qué estaban ahí.",
+"The glossary's meaning wasn't written at a desk: Mei and the faculties argued it out.":
+"El significado del glosario no salió de un escritorio: Mei y las facultades lo discutieron hasta acordarlo.",
+"Agreeing is hard. It's one part of the key challenge in data governance, and its first priority: getting people to take part.":
+"Ponerse de acuerdo es difícil. Es una parte del reto clave de la gobernanza de datos, y su primera prioridad: que la gente participe.",
+"To understand the data and its rules. To look after their data, and answer for it.":
+"Que entienda los datos y sus reglas. Que cuide sus datos, y responda por ellos.",
+"To make the decisions that are theirs, and respect the ones that aren't. And to do what their role asks.":
+"Que tome las decisiones que le tocan, y respete las que no. Y que haga lo que pide su rol.",
+"All of it is harder without tools that guide people, and show them what their work changes.":
+"Todo es más difícil sin herramientas que guíen a las personas y les muestren el efecto de su trabajo.",
 "Governance has its fines too: the checks that stop the work.":
 "La gobernanza también tiene multas: los controles que frenan el trabajo.",
 "Most of its work comes before them.":
@@ -122,6 +130,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Entonces, ¿qué hace todo el día un equipo de gobernanza? Como los mimos, enseña.",
 "Governance sits at the centre of data work, where every other part of it meets.":
 "La gobernanza está en el centro del trabajo con datos, donde se unen todas sus otras partes.",
+"As those parts get easier to run, the centre matters more, and the people in it most of all.":
+"Cuanto más fácil es operar esas partes, más importa el centro, y sobre todo las personas que están en él.",
 "Someone has to show how the pieces fit.":
 "Alguien tiene que mostrar cómo encajan las piezas.",
 "So every new analyst starts with a path: short films, and labs to practise on.":
@@ -141,8 +151,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En Bogotá, en unos diez años, los hábitos se habían perdido: las campañas no se mantuvieron.",
 "So governance can't be a project that ends. It has to be something the university can always do.":
 "Por eso, la gobernanza no puede ser un proyecto que termina. Debe ser algo que la universidad siempre pueda hacer.",
-"Kept up, it does for data what the mimes did for the crossings.":
-"Si se mantiene, hace por los datos lo que los mimos hicieron por las cebras.",
+"Scattered tools have long made governance hard to organise, and hard to see. That's changing, as the rest of the series shows.":
+"Con herramientas dispersas, la gobernanza ha sido difícil de organizar y de ver. Eso está cambiando, como muestra el resto de la serie.",
+"Kept up, governance does for data what the mimes did for the crossings.":
+"Si se mantiene, la gobernanza hace por los datos lo que los mimos hicieron por las cebras.",
 "Most people keep the rules before a check has to stop them.":
 "La mayoría cumple las reglas antes de que un control tenga que detenerla.",
 "Nobody has to guess what the data means, so the numbers agree.":

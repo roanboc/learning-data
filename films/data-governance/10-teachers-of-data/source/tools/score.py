@@ -380,9 +380,12 @@ mark('cor', 55, breath + 1.5, 0.9, 'G')
 mark('bsn', 43, breath + 1.5 + 1.8 + 0.1, 0.9, 'G', last=2.6)  # its last note, G, held into the university's E-flat
 
 # 2. Submission day, in E-flat: the bassoon's G becomes the third of E-flat as the cor anglais and the oboe come in; Planning's card
-#    turns over and the submission's comes in, and the two voices meet on one note as both are ticked; the decision's card; Send;
-#    a tick on each office's glass; Yusuf pins a card to his board; the fine's low note as it lights over "the checks"; the
-#    pencilled question marks, and the oboe's question
+#    turns over and the submission's comes in, and the two voices meet on one note as both are ticked; the decision's card; Send; the
+#    workshop weeks before, a note going up as each speaks; as "Agreeing is hard" is said, each voice on a note of its own as its
+#    speaker's note is lifted, and all three meeting on one as "one part" is ringed and the words written; Yusuf's notepad, the pencil
+#    writing his heading, a soft note as it's underlined, then each line; a tick on each office's glass, as the work shows what it
+#    changed; Yusuf pins a card to his board; the fine's low note as it lights over "the checks"; the pencilled question marks, and
+#    the oboe's question
 tw = lambda lid, word, off=0: W('today', lid, word, off)
 tc = lambda lid, off=0: G('today', lid, off)
 chord({'cor': 58, 'oboe': 63}, S0('today') + 0.4, S0('today') + 3.4, 0.7, step=0.3, att=0.6, rel=0.6)
@@ -393,12 +396,24 @@ for k in (0, 1):
 line('oboe', [(ag - 0.45, ag, 70, 0.8), (ag, ag + 1.3, 67, 0.8)], 0.8, att=0.15, rel=0.4)
 line('cor', [(ag - 0.45, ag, 63, 0.8), (ag, ag + 1.3, 67, 0.8)], 0.8, att=0.15, rel=0.4)
 air(tw('agree', 'counted') - 0.3, 0.9, 0.010, 0.0)
+for tn, x_ in zip([tw('argued', 'Mei and'), tw('argued', 'argued'), tw('argued', 'it out') + 0.15], [306, 390, 635]):
+    paper(tn + 0.05, 0.012, px(x_), 0.25)
+own, agk = tw('key', 'Agreeing'), tw('key', 'one part')
+for k, (inst, m0, m1) in enumerate((('oboe', 70, 67), ('cor', 63, 67), ('bsn', 51, 55))):
+    line(inst, [(own + 0.3 * k, agk, m0, 0.75), (agk, agk + 1.5, m1, 0.8)], 0.7, att=0.15, rel=0.45)
+marker(agk - 0.1, 0.012, px(660), 0.7); write(agk + 0.55, 0.6, 0.010, px(860))
+# the notepad (the film's tt_padPen): the heading over 1.5 s, its last fifth the underline; then each line, as long as it is
+hd = tw('key', 'getting people') - 0.05
+pen(hd, 0.011, -0.1, 1.15); pencil(hd + 1.2, 0.010, -0.05, 0.3)
+note('cor', 63, hd + 1.2, 1.6, 0.6, att=0.25, rel=0.6)
+for lid, word, n in (('asks', 'understand', 35), ('asks', 'look after', 34), ('decide', 'make the decisions', 42), ('decide', 'do what', 25)):
+    pen(tw(lid, word), 0.009, -0.15, 0.3 + 0.042 * n)
 down = tw('mei', 'written down')
 paper(down - 0.25 + 0.55, 0.014, px(915), 0.3); knock(down - 0.25 + 0.85, 0.014, px(915), 260)
-send = tc('helped', -1.7)
+send = END('today', 'mei') + 0.25
 tap(send + 0.05, 0.014, 0.3)
 for k in range(5):
-    knock(tw('helped', 'helped') - 0.2 + 0.3 * k + 0.2, 0.012 if k < 2 else 0.008, px(354 + 384 * k), 300)
+    knock(tw('tools', 'show them') - 0.1 + 0.3 * k + 0.2, 0.012 if k < 2 else 0.008, px(350 + 384 * k), 300)
 pin(tc('fines', -0.5) + 1.3, 0.022, px(1180))
 chk = tw('fines', 'the checks')
 note('bsn', 39, chk - 0.05, 1.4, 0.9, att=0.08, rel=0.35)
@@ -515,8 +530,10 @@ for j, m in enumerate([67, 71, 74]):
     note('oboe', m, kept6 + 0.3 * j + 0.05, 0.3 if j < 2 else 1.2, 0.65, 'G', att=0.04, rel=0.3 if j < 2 else 0.5)
 
 # 7. Teachers of data: Yusuf's pencil on the clipboard (the first strokes, then softer); like the mimes, the board's mime lights on the
-#    mime's notes; as he looks up and it teaches, the oboe plays the phrase; the wheel drawn on the whiteboard, its centre and its parts (the first few, then softer) and the gold lines in; week 1
-#    done; and as Anil shows the page that helped him, all three play the phrase in turn
+#    mime's notes; as he looks up and it teaches, the oboe plays the phrase; the wheel drawn on the whiteboard, its centre and its parts
+#    (the first few, then softer) and the gold lines in; as the parts get easier to run, a breath of air as the light runs in along the
+#    lines, and as the centre glows, a hollow fifth; week 1 done; and as Anil shows the page that helped him, all three play the phrase
+#    in turn
 xw = lambda lid, word, off=0: W('teach', lid, word, off)
 xc = lambda lid, off=0: G('teach', lid, off)
 teach = xw('day', 'it teaches')
@@ -529,6 +546,9 @@ marker(c0, 0.010, 0.0, 0.8)
 for k in range(10):
     write(p0 + 0.27 * k, 0.3, 0.008 if k < 3 else 0.004, -0.4 + 0.08 * k)
 marker(j0, 0.008, 0.0, 0.9)
+ez, cm = xw('matters', 'easier'), xw('matters', 'the centre matters')
+air(ez - 0.1, 1.5, 0.008, 0.0)
+chord({'bsn': 51, 'cor': 58}, cm - 0.1, cm + 2.6, 0.55, step=0.25, att=0.6, rel=0.7)
 tap(xw('path', 'practise') + 0.15, 0.010, -0.2)
 ps = xw('pass', 'pass it on')
 phrase('oboe', TEACH['Eb'], ps, 0.8); phrase('cor', TEACH['Eb'], ps + 1.9, 0.8); phrase('bsn', [m - 12 for m in TEACH['Eb']], ps + 3.8, 0.8)
@@ -536,7 +556,9 @@ phrase('oboe', TEACH['Eb'], ps, 0.8); phrase('cor', TEACH['Eb'], ps + 1.9, 0.8);
 # 8. What lasts: the binders thinner; the bar's three parts marked on the board; the grey pages dropped into the box; the five things
 #    people need, one note each as its card goes up, the last held longest, and swelling as it glows: the hardest; Bogotá, 2012, in
 #    E-flat minor, two cars rolling up to the faded stripes, and the oboe's phrase stopping a note short, nobody copying it; the
-#    pavement, quiet; back in E-flat major as "Govern data" lights on the map, the next films' cards; kept up, what it gives: Bogotá in
+#    pavement, quiet; back in E-flat major as "Govern data" lights on the map, the next films' cards; lower on the map, the tools
+#    dropping in, scattered, a low breath as the haze comes over them, then each pinned in its row (the first few, then softer) and the
+#    gold thread drawn along; kept up, what it gives: Bogotá in
 #    1996 again, in G, the opening's open G and the phrase whole, the oboe playing it and the cor anglais copying it, as people cross in
 #    front of the cars; the floor, a tick on each office's glass (the first few, then softer); the two reports agree, and two voices
 #    meet on one note, as on submission day; Anil's change, stopped on the fine's low note, fixed and stamped signed; the stewards,
@@ -564,13 +586,19 @@ chord({'bsn': 51, 'cor': 55}, gov, gov + 2.0, 0.6, step=0.2, att=0.5, rel=0.6)
 nx = lw('ends', 'always') - 0.3
 for j in range(3):
     knock(nx + 0.35 * j + 0.15, 0.014 if j < 2 else 0.010, [-0.3, 0.1, 0.5][j], 280)
+tl, see, chg = lw('scattered', 'Scattered'), lw('scattered', 'hard to see'), lw('scattered', "That's changing")
+flutter(tl - 0.15, 0.012, px(1450), 0.6)
+air(see - 0.2, 0.9, 0.007, px(1450))
+for k in range(7):
+    pin(chg + 0.6 + 0.07 * k, 0.014 if k < 2 else 0.008, px(1180 + 90 * (k % 4)))
+marker(chg + 0.8, 0.008, px(1400), 0.9)
 kz = lc('kept', -0.3)
 chord({'bsn': 43, 'cor': 62}, kz + 0.1, kz + 2.3, 0.6, 'G', step=0.3, att=0.5, rel=0.6)
 phrase('oboe', TEACH['G'], kz + 0.5, 0.85, 'G')
 phrase('cor', [m - 12 for m in TEACH['G']], kz + 0.5 + 1.9, 0.8, 'G')
 tk = lw('keep', 'keep the rules')
 for k in range(5):
-    knock(tk + 0.3 * k + 0.2, 0.012 if k < 2 else 0.008, px(354 + 384 * k), 300)
+    knock(tk + 0.3 * k + 0.2, 0.012 if k < 2 else 0.008, px(350 + 384 * k), 300)
 ag8 = lw('agree', 'the numbers agree')
 line('oboe', [(ag8 - 0.45, ag8, 70, 0.8), (ag8, ag8 + 1.3, 67, 0.8)], 0.75, att=0.15, rel=0.4)
 line('cor', [(ag8 - 0.45, ag8, 63, 0.8), (ag8, ag8 + 1.3, 67, 0.8)], 0.75, att=0.15, rel=0.4)

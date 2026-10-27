@@ -6,16 +6,26 @@
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "In 221 BC, the king of Qin conquered the last of his rivals, and became China's first emperor.":
 "En el 221 a. C., el rey de Qin venció al último de sus rivales y se convirtió en el primer emperador de China.",
-"The old states had their own scripts, weights and cart widths. The empire made them one.":
-"Los viejos estados tenían su propia escritura, sus pesos y su ancho de carro. El imperio los hizo uno.",
-"It even decided which words its officials used: what had been the king's was now the emperor's.":
-"Hasta decidió qué palabras usaban sus funcionarios: lo que había sido del rey ahora era del emperador.",
-"Far to the south, a county scribe kept those rules on a wooden board, found in a well in 2002.":
-"Muy al sur, un escriba de condado guardaba esas reglas en una tabla de madera, hallada en un pozo en 2002.",
-"The county's records use the new words almost every time. The board was a glossary, and it was used.":
-"Los registros del condado usan las palabras nuevas casi siempre. La tabla era un glosario, y se usaba.",
-"A university needs the same: one glossary that everyone trusts, and every tool reading from it.":
-"Una universidad necesita lo mismo: un glosario en el que todos confíen, y cada herramienta leyendo de él.",
+"But each old state had its own script, its own measures and its own cart widths.":
+"Pero cada viejo estado tenía su propia escritura, sus propias medidas y su propio ancho de carro.",
+"A measure of grain held more in one state than in the next, so taxes and prices were in doubt.":
+"Una medida de grano contenía más en un estado que en el vecino, así que impuestos y precios quedaban en duda.",
+"The empire needed the same script, measures and cart widths everywhere, so it set them by law.":
+"El imperio necesitaba la misma escritura, las mismas medidas y el mismo ancho de carro, y los fijó por ley.",
+"It even decided which words its officials used: “the king's order” became “the emperor's edict”.":
+"Hasta decidió qué palabras usaban sus funcionarios: «la orden del rey» pasó a ser «el edicto del emperador».",
+"Far to the south, a county office kept a list on a wooden board: each old word, and the new word to use instead.":
+"Muy al sur, la oficina de un condado tenía una lista en una tabla de madera: cada palabra vieja y la nueva que debía usarse.",
+"In 2002, archaeologists found the board in an old well, with thousands of the county's own records.":
+"En 2002, unos arqueólogos hallaron la tabla en un pozo antiguo, junto con miles de registros del propio condado.",
+"Those records use the new words almost every time, so a word meant the same in the county as in the capital.":
+"Esos registros usan casi siempre las palabras nuevas: una palabra significaba lo mismo en el condado que en la capital.",
+"The board was a glossary, and it was used.":
+"La tabla era un glosario, y se usaba.",
+"A university has the same problem: one word, defined differently in many places.":
+"Una universidad tiene el mismo problema: una palabra, definida de otro modo en muchos lugares.",
+"It needs one glossary that everyone trusts, and every tool reading from it.":
+"Necesita un glosario en el que todos confíen, y cada herramienta leyendo de él.",
 "Mei owns what award means, and she has found it defined in five places.":
 "Mei es dueña de lo que significa título, y lo encontró definido en cinco lugares.",
 "Yusuf goes to look. There are five glossaries.":

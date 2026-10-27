@@ -17,55 +17,78 @@ function ow_behindWalk(ctx,id,w,cutY,s,o){ctx.save();ctx.beginPath();ctx.rect(-W
 // ---- 1 · One script: Qin, 221 BC, to the board found at Liye ----
 // a person of Qin standing in depth at the gate, from their place on the ground (X, Z in metres)
 function ow_at(C,X,Z,h){const [x,y]=ow_pj(C,X,0,Z);return{x,y,s:(h||1.66)*ow_ppm(C,Z)/560};}
+// the town's gate: a cart going in, a courier with the court's orders on his back, the official at the gate, the seller at his stall with
+// his old state's measure, Qin's and the weight, and a townswoman listening. The cart and the courier keep going from g0, across cuts;
+// o.old is how much of the old measure is still on the stall, and o.lit the glow round the standard ones
+function ow_gate(x,tt,g0,o){const C=OW_GT,S=C.stall,u=tt-g0,zc=7.2+0.8*u,zr=11+1.15*u;
+  const of=ow_at(C,2.4,25,1.72);person(x,"ow_official",of.x,of.y,of.s,{pose:"stand",t:tt,flip:true,shadow:false});
+  [[zr,()=>{const p=ow_pj(C,C.road(zr)+1.25,0,zr);ow_back(x,"ow_courier",p[0],p[1],1.66*ow_ppm(C,zr)/560,{ph:tt*Math.PI*2.0,carry:ow_bundleBack});}],
+    [zc,()=>ow_cart(x,C,zc,0.9*u+3,{seed:5})]].sort((a,b)=>b[0]-a[0]).forEach(q=>q[1]());
+  const [sx]=ow_pj(C,S.seller[0],0,S.seller[1]),ss=1.66*ow_ppm(C,S.seller[1])/560,top=ow_pj(C,0,S.top,S.z1)[1];
+  ow_kneel(x,"ow_merchant",sx,top,ss,{pose:"explain",t:tt,flip:true,fy:ow_pj(C,0,0,S.seller[1]-0.2)[1]});
+  ow_stallFront(x,o.lit||0,o.old==null?1:o.old);
+  const by=ow_at(C,1.4,5.6,1.58);person(x,"ow_buyer",by.x,by.y,by.s,{pose:"listen",t:tt,flip:true});}
+// the floor's offices, and the meaning of award each one's screen shows: rose (the words before Monday) for Planning, the registrar's
+// office and data governance's 2019 tool; violet (the new words) for the data team and the platform team
+const OW_FLM=[1,1,1,0,0];
 scene("script",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
-    return{gate:c.one-0.2,made:w("one","made them"),slips:c.words-0.3,king:w("words","what had"),emp:w("words","was now"),county:c.board-0.4,check:w("board","kept those"),
-      then:w("board","on a wooden")-0.25,found:w("board","found"),well:w("board","in a well"),rec:c.used,glossary:w("used","The board was"),bridge:c.bridge-0.45,
-      every:w("bridge","every tool"),title:c.breath-0.6};});
+    return{gate:c.one-0.2,script:w("one","script"),meas:w("one","measures"),carts:w("one","cart widths"),stall:c.pain-0.3,old:w("pain","in one state"),qin:w("pain","than in the next"),taxes:w("pain","so taxes"),doubt:w("pain","in doubt")-0.2,
+      back:c.need-0.3,n1:w("need","script"),n2:w("need","measures"),n3:w("need","cart widths"),made:w("need","set them"),slips:c.words-0.3,king:w("words","the king's"),emp:w("words","became"),
+      county:c.board-0.4,check:w("board","kept a list")-0.3,then:w("board","on a wooden")-0.25,rule:w("board","each old")-0.1,found:c.well,well:w("well","in an old"),recs:w("well","with thousands"),
+      rec:w("used","use the new"),same:w("used","the same in"),
+      glossary:c.glossary,bridge:c.bridge-0.45,word:w("bridge","one word"),diff:w("bridge","defined"),one:w("needs","one glossary"),every:w("needs","every tool"),title:c.breath-0.6};});
   const mk=[[0,"221 BC · Qin"],[P.county,"Qianling county · about 220 BC"],[P.found,"Liye · 2002"]];
   gv_shots(ctx,S,t,sc.dur,[
     // the road through the loess hills: two ox carts in the same pair of ruts, going to the town, a carter walking by the nearer
     {at:0,place:"road",keys:[[0,960,540,1.0],[0.2,1010,530,1.1]],d:8,draw:(x,tt)=>{const C=OW_RD,za=16.9+0.6*tt,zb=28+0.6*tt;
       ow_cart(x,C,zb,0.6*tt,{ph:1.3,seed:3,ox:[140,104,80]});const zc=za+0.9,cp=ow_pj(C,C.road(zc)-1.3,0,zc);ow_back(x,"ow_carter",cp[0],cp[1],1.62*ow_ppm(C,zc)/560,{ph:tt*Math.PI*1.25});
       ow_cart(x,C,za,0.6*tt,{seed:1});}},
-    // the town's gate: a cart going in, a courier with the court's orders on his back, the official at the gate, the seller at his
-    // stall with the standard measure and weight; on "made them one", a tag for the notice board's script, the measures, and the ruts
-    {at:P.gate,place:"gate",keys:[[P.gate,960,540,1.0],[P.gate+0.1,990,540,1.05]],d:6,draw:(x,tt)=>{const C=OW_GT,S=C.stall,u=tt-P.gate,zc=7.2+0.8*u,zr=11+1.15*u;
-      const of=ow_at(C,2.4,25,1.72);person(x,"ow_official",of.x,of.y,of.s,{pose:"stand",t:tt,flip:true,shadow:false});
-      [[zr,()=>{const p=ow_pj(C,C.road(zr)+1.25,0,zr);ow_back(x,"ow_courier",p[0],p[1],1.66*ow_ppm(C,zr)/560,{ph:tt*Math.PI*2.0,carry:ow_bundleBack});}],
-        [zc,()=>ow_cart(x,C,zc,0.9*u+3,{seed:5})]].sort((a,b)=>b[0]-a[0]).forEach(q=>q[1]());
-      const [sx]=ow_pj(C,S.seller[0],0,S.seller[1]),ss=1.66*ow_ppm(C,S.seller[1])/560,top=ow_pj(C,0,S.top,S.z1)[1];
-      ow_kneel(x,"ow_merchant",sx,top,ss,{pose:"explain",t:tt,flip:true,fy:ow_pj(C,0,0,S.seller[1]-0.2)[1]});
-      ow_stallFront(x,fin(tt,P.made+0.35,0.5)*(1-fin(tt,P.slips-0.4,0.4)));
-      const by=ow_at(C,1.4,5.6,1.58);person(x,"ow_buyer",by.x,by.y,by.s,{pose:"listen",t:tt,flip:true});
-      // the ruts, measured where the cart has just been
-      const zm=7.2+0.8*(P.made+0.1-P.gate),[ra,rb]=ow_axle(C,zm),dp=clamp((tt-P.made-0.55)/0.6,0,1);
+    // the town's gate: each old state had its own script, measures and cart widths, and each glows as it's named, where its tag will
+    // come once the empire makes them one
+    {at:P.gate,place:"gate",keys:[[P.gate,960,540,1.0],[P.gate+0.1,990,540,1.05]],d:6,draw:(x,tt)=>{const C=OW_GT;ow_gate(x,tt,P.gate,{});
+      const glow=(t0,r)=>gv_halo(x,r[0],r[1],r[2],r[3],GV.gold,0.7*gv_io(tt,t0-0.1,t0+1.4,0.4)),[b0x,b0y]=ow_pj(C,C.board[0]-0.85,2.2,C.board[1]),[b1x,b1y]=ow_pj(C,C.board[0]+0.85,1.15,C.board[1]);
+      glow(P.script,[b0x-24,b0y-24,b1x-b0x+48,b1y-b0y+48]);const T=C.stall.top,[s0x,sy]=ow_pj(C,1.98,T,5.2),[s1x]=ow_pj(C,3.48,T,5.2),k=ow_ppm(C,5.2);glow(P.meas,[s0x,sy-0.42*k,s1x-s0x,0.5*k]);
+      const zc=7.2+0.8*(tt-P.gate),[ra,rb]=ow_axle(C,zc),q=ow_ppm(C,zc);glow(P.carts,[Math.min(ra[0],rb[0])-30,Math.min(ra[1],rb[1])-1.6*q,Math.abs(rb[0]-ra[0])+60,1.6*q+30]);}},
+    // close on the seller's table: his old state's measure, and Qin's, which holds less; which one prices and taxes go by, he can't say
+    {at:P.stall,place:"stall",keys:[[P.stall,960,540,1.0],[P.stall+0.1,960,522,1.045]],d:6,draw:(x,tt)=>{const T=OW_ST;
+      ow_kneel(x,"ow_merchant",T.seller,T.top,T.s,{pose:"explain",pose2:"shrug",mix:fin(tt,P.taxes,0.8),expr:tt>P.taxes?"concerned":"calm",t:tt,flip:true,fy:T.edge+128});
+      x.drawImage(gv_place("stallTable"),0,0,W,H);ow_stallClose(x);
+      ow_tagAt(x,tt,P.old,null,T.old[0],344,"his old state's measure",{size:32});ow_tagAt(x,tt,P.qin,null,T.qin[0],424,"Qin's measure",{size:32});
+      gv_qmark(x,960,188,100,clamp((tt-P.doubt)/0.9,0,1));}},
+    // back at the gate: the same script, measures and cart width everywhere, each tagged as it's named, and the old measure put away
+    // as they're set by law; the ruts measured where the cart has been
+    {at:P.back,place:"gate",keys:[[P.back,975,540,1.03],[P.back+0.1,1000,540,1.06]],d:5,draw:(x,tt)=>{const C=OW_GT;
+      ow_gate(x,tt,P.gate,{old:1-fin(tt,P.made,0.5),lit:fin(tt,P.made+0.3,0.5)});
+      const [ra,rb]=ow_axle(C,9.9),dp=clamp((tt-P.n3+0.1)/0.6,0,1);
       if(dp>0){const lo=24;wc_pencil(x,[[ra[0],ra[1]+6],[ra[0],ra[1]+lo+10]],dp,{col:WC_DARK,lw:2.4,seed:61});wc_pencil(x,[[rb[0],rb[1]+6],[rb[0],rb[1]+lo+10]],dp,{col:WC_DARK,lw:2.4,seed:62});
         wc_pencil(x,[[ra[0],ra[1]+lo],[rb[0],rb[1]+lo]],dp,{col:WC_DARK,lw:2.6,seed:63});}
       const [bx,by_]=ow_pj(C,C.board[0],2.32,C.board[1]),[mx,my]=ow_stallAt();
-      ow_tagAt(x,tt,P.made,null,bx,by_-44,"one script");ow_tagAt(x,tt,P.made+0.35,null,mx,my-38,"one set of measures");
-      ow_tagAt(x,tt,P.made+0.7,null,(ra[0]+rb[0])/2,Math.max(ra[1],rb[1])+76,"one axle width");}},
-    // the court's orders, unbundled on a mat: the old word struck out, the new one written in
+      ow_tagAt(x,tt,P.n1,null,bx,by_-44,"one script");ow_tagAt(x,tt,P.n2,null,mx,my-38,"one set of measures");
+      ow_tagAt(x,tt,P.n3+0.05,null,(ra[0]+rb[0])/2,Math.max(ra[1],rb[1])+76,"one cart width");}},
+    // the orders from the capital, unbundled on a mat, and a card: the old words struck out, the new ones written in
     {at:P.slips,place:"slips",keys:[[P.slips,960,540,1.0],[P.slips+0.1,990,530,1.05]],d:6,draw:(x,tt)=>{
-      ow_tagAt(x,tt,P.slips+0.35,null,OW_SL.x+OW_SL.n*OW_SL.w/2,96,"the court's orders");
+      ow_tagAt(x,tt,P.slips+0.35,null,OW_SL.x+OW_SL.n*OW_SL.w/2,96,"orders from the capital");
       const a=fin(tt,P.king-0.2,0.5);if(a>0.01){const cx=1160,cy=300;withA(x,a,()=>{x.save();x.translate(0,14*(1-a));wc_panel(x,cx,cy,600,300,{kind:"card",seed:221});
-        wc_T(x,"what had been",cx+40,cy+70,{w:600,size:30,col:WC_MUTED});wc_T(x,"the king's",cx+40,cy+140,{w:800,size:52,col:WC_DARK});
-        const s=clamp((tt-P.emp+0.1)/0.5,0,1);if(s>0){x.save();x.strokeStyle=rgba(GV.redInk,0.85);x.lineWidth=5;x.lineCap="round";x.beginPath();x.moveTo(cx+34,cy+122);x.lineTo(cx+34+tw(x,"the king's",52,800)*s+8,cy+118);x.stroke();x.restore();}
-        if(tt>P.emp+0.3){wc_T(x,"is now",cx+40,cy+200,{w:600,size:30,col:WC_MUTED});wc_hand(x,"the emperor's",cx+40,cy+262,{size:52,col:GV.goldInk,p:clamp((tt-P.emp-0.4)/0.9,0,1)});}x.restore();});}}},
+        wc_T(x,"old words",cx+40,cy+70,{w:600,size:30,col:WC_MUTED});wc_T(x,"the king’s order",cx+40,cy+140,{w:800,size:52,col:WC_DARK});
+        const s=clamp((tt-P.emp+0.1)/0.5,0,1);if(s>0){x.save();x.strokeStyle=rgba(GV.redInk,0.85);x.lineWidth=5;x.lineCap="round";x.beginPath();x.moveTo(cx+34,cy+122);x.lineTo(cx+34+tw(x,"the king’s order",52,800)*s+8,cy+118);x.stroke();x.restore();}
+        if(tt>P.emp+0.3){wc_T(x,"new words",cx+40,cy+200,{w:600,size:30,col:WC_MUTED});wc_hand(x,"the emperor’s edict",cx+40,cy+262,{size:52,col:GV.goldInk,p:clamp((tt-P.emp-0.4)/0.9,0,1)});}x.restore();});}}},
     // the county office at Qianling: three scribes at their low tables; the middle one checks the board at his elbow, and writes on
     {at:P.county,place:"county",keys:[[P.county,960,560,1.0],[P.county+0.1,1030,610,1.42]],d:2.6,draw:(x,tt)=>{const O=OW_OF,ck=gv_io(tt,P.check+0.2,P.check+1.7,0.45);
       ["ow_scribeA","ow_scribeB","ow_scribeC"].forEach((id,i)=>ow_kneel(x,id,O.seats[i],O.top,O.s,{pose:"write",pose2:i===1?"ow_check":null,mix:i===1?ck:0,t:tt+i*0.7,carry:ow_heldSlip,flip:i===2}));
       x.drawImage(gv_place("countyTables"),0,0,W,H);const bw=O.board[1]*330*O.s,bh=bw*12.5/27.4;gv_halo(x,O.board[0]-16,O.top-bh-16,bw+38,bh+30,GV.gold,0.75*ck);}},
-    // the board, on the scribe's table; then as it was found, in 2002, with its rules in English under it, and the county's records counted
-    {at:P.then,place:"boardThen",keys:[[P.then,960,540,1.0]],d:2,draw:(x,tt)=>ow_ruleCard(x,fin(tt,P.then+0.3,0.5))},
+    // the board, on the scribe's table, and two of its rules in English under it, each old word and the new one; then as it was found,
+    // in 2002, with the county's own records beside it, and those records counted: the new word used, so the same word as in the capital
+    {at:P.then,place:"boardThen",keys:[[P.then,960,540,1.0]],d:2,draw:(x,tt)=>ow_ruleCard(x,fin(tt,P.rule,0.5))},
     {at:P.found-0.1,place:"boardFound",keys:[[P.found-0.1,960,540,1.0],[P.found,990,530,1.04],[P.glossary,960,540,1.0]],d:2.2,draw:(x,tt)=>{ow_ruleCard(x,1);
-      ow_tagAt(x,tt,P.well,P.bridge-0.2,1090,160,"found in a well");ow_tally(x,tt,P.rec,P.rec+0.5,P.rec+2.3);
+      ow_tagAt(x,tt,P.well,P.bridge-0.2,1090,160,"found in a well");const ra=fin(tt,P.recs,0.6);if(ra>0.01)withA(x,ra,()=>x.drawImage(gv_place("records"),0,12*(1-ra),W,H));
+      ow_tally(x,tt,P.recs,P.rec,P.rec+1.6);ow_tagAt(x,tt,P.same,null,1550,806,"the same word as in the capital",{size:32,wash:GV.green,washA:0.3});
       gv_halo(x,OW_BD.x-40,OW_BD.y-40,OW_BD.w+80,OW_BD.h+80,GV.gold,0.55*gv_io(tt,P.glossary,P.bridge+0.4,0.6));}},
-    // the floor of offices: the board's outline lifts and becomes a card, "award", and every office's screen reads from it
+    // the floor of offices: one word on every screen, each in its own meaning's colour, and nobody sure which is right; then the one
+    // glossary they need, in outline, and every tool reading from it. The screens keep their colours: the film settles them
     {at:P.bridge,place:"floor",keys:[[P.bridge,960,540,1.0]],d:2,push:0.02,draw:(x,tt)=>{ow_floor(x,tt,{names:fin(tt,P.bridge+0.8,0.6)});
-      ow_oneWay(x,960,300,clamp((tt-P.every+0.2)/1.4,0,1)*1.32,1);ow_floorCard(x,960,300,fin(tt,P.bridge+1.0,0.5));}}]);
-  // the board's outline, from where it lies to the card's place
-  const m=clamp((t-P.bridge+0.2)/1.4,0,1);if(m>0&&m<1){setScreen(ctx,S);const e=easeCam(m),B=OW_BD,x0=lerp(B.x,790,e),y0=lerp(B.y,242,e),w=lerp(B.w,340,e),h=lerp(B.h,116,e);
-    ctx.save();ctx.globalAlpha=Math.sin(Math.PI*m);ctx.strokeStyle=rgba(GV.goldInk,0.9);ctx.lineWidth=4;ctx.setLineDash([12,8]);ctx.strokeRect(x0,y0,w,h);ctx.restore();}
+      OW_FLM.forEach((m,i)=>{const a=fin(tt,P.word+0.25*i,0.4);ow_screenWord(x,i,a,m);ow_screenPop(x,i,a,m);});
+      withA(x,1-fin(tt,P.one-0.1,0.4),()=>gv_qmark(x,960,330,120,clamp((tt-P.diff-0.3)/0.9,0,1)));
+      ow_oneWay(x,960,300,clamp((tt-P.every+0.2)/1.4,0,1)*1.32,1,null,{col:GV.goldInk,ey:OW_POP.dy+OW_POP.h/2+4});ow_needCard(x,960,300,fin(tt,P.one,0.5));}}]);
   ow_pill(ctx,t,mk,fin(t,0.6,0.5)*(1-fin(t,P.bridge,0.4)));
   gv_title(ctx,S,t,P.title,"One word, one home","one glossary everyone trusts, and every tool synced from it","Film 3 of 19 · data governance");
   wc_paperOver(ctx,S);});

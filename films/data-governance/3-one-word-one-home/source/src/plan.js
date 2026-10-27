@@ -240,16 +240,28 @@ function ow_ring(ctx,cx,cy,rx,ry,p,col,seed){if(p<=0)return;const n=56,pts=[];fo
 const OW_SCR=[274,516,1042,1284,1810].map(x=>[x,519]);
 function ow_floorCard(ctx,x,y,a,o){if(a<=0.01)return;o=o||{};const k=o.k||1;ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,a,()=>{wc_panel(ctx,-170,-58,340,116,{kind:"card",seed:471});
   ow_head(ctx,-156,-44,312,60,0,1,{size:40,pad:16});wc_T(ctx,"the business glossary",-150,44,{w:600,size:28,col:WC_INK});});ctx.restore();}
-// (q, when given, sends a soft light along each arrow, one after another: a sync reaching every screen)
-function ow_oneWay(ctx,x,y,p,a,q){if(a<=0.01)return;withA(ctx,a,()=>{OW_SCR.forEach(([sx,sy],i)=>{const u=clamp(p-i*0.08,0,1);if(u<=0)return;const ex=sx,ey=sy-34,x0=x+(sx-x)*0.12,y0=y+60;
+// (q, when given, sends a soft light along each arrow, one after another: a sync reaching every screen; o.col inks the arrows in another
+// colour, and o.ey ends them that far above each screen)
+function ow_oneWay(ctx,x,y,p,a,q,o){if(a<=0.01)return;o=o||{};const ink=o.col||OW_MEANINK[0];withA(ctx,a,()=>{OW_SCR.forEach(([sx,sy],i)=>{const u=clamp(p-i*0.08,0,1);if(u<=0)return;const ex=sx,ey=sy-(o.ey||34),x0=x+(sx-x)*0.12,y0=y+60;
   const pts=[];for(let j=0;j<=24;j++){const v=j/24*u;pts.push([lerp(x0,ex,v),lerp(y0,ey,v)-60*Math.sin(Math.PI*v)]);}
-  ctx.save();ctx.strokeStyle=rgba(OW_MEANINK[0],0.85);ctx.lineWidth=4;ctx.setLineDash([10,9]);ctx.lineCap="round";ctx.beginPath();pts.forEach((q,j)=>j?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]));ctx.stroke();ctx.restore();
-  if(u>=1){const [ax,ay]=pts[pts.length-1],[bx,by]=pts[pts.length-3],an=Math.atan2(ay-by,ax-bx);ctx.save();ctx.translate(ax,ay);ctx.rotate(an);ctx.fillStyle=rgba(OW_MEANINK[0],0.95);ctx.beginPath();ctx.moveTo(4,0);ctx.lineTo(-16,-10);ctx.lineTo(-16,10);ctx.closePath();ctx.fill();ctx.restore();}
+  ctx.save();ctx.strokeStyle=rgba(ink,0.85);ctx.lineWidth=4;ctx.setLineDash([10,9]);ctx.lineCap="round";ctx.beginPath();pts.forEach((q,j)=>j?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]));ctx.stroke();ctx.restore();
+  if(u>=1){const [ax,ay]=pts[pts.length-1],[bx,by]=pts[pts.length-3],an=Math.atan2(ay-by,ax-bx);ctx.save();ctx.translate(ax,ay);ctx.rotate(an);ctx.fillStyle=rgba(ink,0.95);ctx.beginPath();ctx.moveTo(4,0);ctx.lineTo(-16,-10);ctx.lineTo(-16,10);ctx.closePath();ctx.fill();ctx.restore();}
   const v=q==null?0:clamp(q-i*0.06,0,1);if(v>0&&v<1){const px=lerp(x0,ex,v),py=lerp(y0,ey,v)-60*Math.sin(Math.PI*v),f=Math.sin(Math.PI*v);
     wc_glowAt(ctx,px,py,42,wc_lit(OW_MEAN[0],0.6),0.85*f);ctx.save();ctx.fillStyle=rgba(wc_lit(OW_MEAN[0],0.25),f);ctx.beginPath();ctx.arc(px,py,9,0,TAU);ctx.fill();ctx.restore();}});});}
-// a small "award" on an office's screen, in violet, as it reads the glossary's words
-function ow_screenWord(ctx,i,a){if(a<=0.01)return;const [x,y]=OW_SCR[i];withA(ctx,a,()=>{ctx.save();ctx.fillStyle=rgba(wc_lit(OW_MEAN[0],0.55),1);ctx.fillRect(x-40,y-21,80,40);ctx.restore();
-  wc_T(ctx,"award",x,y+8,{w:800,size:22,align:"center",col:OW_MEANINK[0],deco:1});});}
+// a small "award" on an office's screen, in violet as it reads the glossary's words (or in its own meaning's colour, m)
+function ow_screenWord(ctx,i,a,m){if(a<=0.01)return;m=m||0;const [x,y]=OW_SCR[i];withA(ctx,a,()=>{ctx.save();ctx.fillStyle=rgba(wc_lit(OW_MEAN[m],0.55),1);ctx.fillRect(x-40,y-21,80,40);ctx.restore();
+  wc_T(ctx,"award",x,y+8,{w:800,size:22,align:"center",col:OW_MEANINK[m],deco:1});});}
+// what an office's screen says, held up over it to be read: a card with award in its meaning's colour, pointing down at the screen
+const OW_POP={dy:104,w:168,h:64};
+function ow_screenPop(ctx,i,a,m){if(a<=0.01)return;const [x,y]=OW_SCR[i],{w,h}=OW_POP,k=0.9+0.1*spring(a);ctx.save();ctx.translate(x,y-OW_POP.dy);ctx.scale(k,k);
+  withA(ctx,clamp(a*2,0,1),()=>{ctx.save();ctx.beginPath();ctx.moveTo(-13,h/2-3);ctx.lineTo(0,h/2+20);ctx.lineTo(13,h/2-3);ctx.closePath();ctx.fillStyle=rgba(WC_CARD,0.96);ctx.fill();
+      ctx.strokeStyle=rgba(WC_PENCIL,0.8);ctx.lineWidth=1.8;ctx.beginPath();ctx.moveTo(-13,h/2);ctx.lineTo(0,h/2+20);ctx.lineTo(13,h/2);ctx.stroke();ctx.restore();
+    wc_panel(ctx,-w/2,-h/2,w,h,{kind:"card",seed:481+i});const bw=w-20;ow_head(ctx,-bw/2,-h/2+9,bw,h-18,m,1,{size:34,pad:(bw-tw(ctx,"award",34,800))/2});});ctx.restore();}
+// the one glossary the floor needs, and doesn't have yet: a dashed outline in gold over the middle of the floor
+function ow_needCard(ctx,x,y,a){if(a<=0.01)return;const k=0.92+0.08*spring(a),w=340,h=116;ctx.save();ctx.translate(x,y);ctx.scale(k,k);
+  withA(ctx,clamp(a*1.6,0,1),()=>{wc_tr(ctx,wc_rrPts(-w/2,-h/2,w,h,14));ctx.fillStyle=rgba(WC_CARD,0.9);ctx.fill();
+    ctx.save();ctx.setLineDash([16,11]);ctx.lineWidth=4.5;ctx.lineCap="round";ctx.strokeStyle=rgba(GV.goldInk,0.92);wc_tr(ctx,wc_rrPts(-w/2+2,-h/2+2,w-4,h-4,13));ctx.stroke();ctx.restore();
+    wc_T(ctx,"one glossary",0,15,{w:800,size:42,align:"center",col:GV.goldInk});});ctx.restore();}
 
 /* ---------- when a word changes ---------- */
 // a dashboard without a nightly check: awards a month, and the step where the new meaning arrived unannounced; q (0 to 1) asks about it
@@ -375,8 +387,8 @@ function ow_paintNightScreen(ctx){gv_paintScreenDesk(ctx,GV_ROOM.data);ow_night(
   wc_glowAt(ctx,sx+sw/2,sy+sh/2,sw*0.72,[96,104,160],0.5);wc_glowAt(ctx,sx+sw/2,H+40,sw*0.55,[110,116,168],0.45);ctx.restore();
   ctx.save();const g=ctx.createLinearGradient(0,sy,0,sy+sh);g.addColorStop(0,rgba([136,146,188],1));g.addColorStop(1,rgba([114,122,164],1));ctx.fillStyle=g;ctx.fillRect(sx,sy,sw,sh);ctx.restore();}
 function ow_paintNightRoom(ctx){gv_paintData(ctx);ow_night(ctx,0.92,[200,250,26]);}
-const WC_PLACES={road:ow_paintRoad,gate:ow_paintGate,slips:ow_paintSlips,county:ow_paintOffice,countyTables:ow_paintOfficeTables,boardThen:ow_paintBoardThen,
-  boardFound:ow_paintBoardFound,floor:gv_paintFloor,regClose:gv_paintRegistrarClose,regDesk:gv_paintRegistrarDesk,boardGov:c=>gv_paintBoardClose(c,GV_ROOM.gov),
+const WC_PLACES={road:ow_paintRoad,gate:ow_paintGate,stall:ow_paintStall,stallTable:ow_paintStallTable,slips:ow_paintSlips,county:ow_paintOffice,countyTables:ow_paintOfficeTables,boardThen:ow_paintBoardThen,
+  boardFound:ow_paintBoardFound,records:ow_paintRecords,floor:gv_paintFloor,regClose:gv_paintRegistrarClose,regDesk:gv_paintRegistrarDesk,boardGov:c=>gv_paintBoardClose(c,GV_ROOM.gov),
   screenGov:c=>gv_paintScreenDesk(c,GV_ROOM.gov),meeting:gv_paintMeeting,meetingTable:gv_paintMeetingTable,meetScreen:ow_paintMeetScreen,
   screenPlan:c=>gv_paintScreenDesk(c,GV_ROOM.plan),screenReg:c=>gv_paintScreenDesk(c,GV_ROOM.reg),faculty:gv_paintFaculty,facultyDesk:gv_paintFacultyDesk,
   dataNight:ow_paintNightRoom,screenNight:ow_paintNightScreen,screenData:c=>gv_paintScreenDesk(c,GV_ROOM.data),screenFac:c=>gv_paintScreenDesk(c,GV_ROOM.fac),

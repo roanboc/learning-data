@@ -3,11 +3,16 @@
 const NARR={
 "script":{"name":"One script","lead":1.4,"tail":1.0,"vo":[
  {"id":"qin","gap":0.8,"text":"In 221 BC, the king of Qin conquered the last of his rivals, and became China's first emperor.","say":"In two hundred and twenty-one B C, the king of Qin conquered the last of his rivals, and became China's first emperor."},
- {"id":"one","gap":0.8,"text":"The old states had their own scripts, weights and cart widths. The empire made them one."},
- {"id":"words","gap":0.8,"text":"It even decided which words its officials used: what had been the king's was now the emperor's."},
- {"id":"board","gap":0.8,"text":"Far to the south, a county scribe kept those rules on a wooden board, found in a well in 2002.","say":"Far to the south, a county scribe kept those rules on a wooden board, found in a well in two thousand and two."},
- {"id":"used","gap":0.8,"text":"The county's records use the new words almost every time. The board was a glossary, and it was used."},
- {"id":"bridge","gap":0.8,"text":"A university needs the same: one glossary that everyone trusts, and every tool reading from it."}]},
+ {"id":"one","gap":0.8,"text":"But each old state had its own script, its own measures and its own cart widths."},
+ {"id":"pain","gap":0.8,"text":"A measure of grain held more in one state than in the next, so taxes and prices were in doubt."},
+ {"id":"need","gap":0.8,"text":"The empire needed the same script, measures and cart widths everywhere, so it set them by law."},
+ {"id":"words","gap":0.8,"text":"It even decided which words its officials used: “the king's order” became “the emperor's edict”."},
+ {"id":"board","gap":0.8,"text":"Far to the south, a county office kept a list on a wooden board: each old word, and the new word to use instead."},
+ {"id":"well","gap":0.8,"text":"In 2002, archaeologists found the board in an old well, with thousands of the county's own records.","say":"In two thousand and two, archaeologists found the board in an old well, with thousands of the county's own records."},
+ {"id":"used","gap":0.8,"text":"Those records use the new words almost every time, so a word meant the same in the county as in the capital."},
+ {"id":"glossary","gap":0.8,"text":"The board was a glossary, and it was used."},
+ {"id":"bridge","gap":0.8,"text":"A university has the same problem: one word, defined differently in many places."},
+ {"id":"needs","gap":0.8,"text":"It needs one glossary that everyone trusts, and every tool reading from it."}]},
 "five":{"name":"Five glossaries","lead":1.0,"tail":1.0,"vo":[
  {"id":"mei","gap":0.8,"text":"Mei owns what award means, and she has found it defined in five places."},
  {"id":"look","gap":0.8,"text":"Yusuf goes to look. There are five glossaries."},

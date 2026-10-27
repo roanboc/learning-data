@@ -375,14 +375,19 @@ async def check_pages(run):
                     }""")
                     expect(sec, focus, f"{where}: icon link needs keyboard focus, a visible outline and an action hint")
                     destination = await link.get_attribute("href")
-                    # A 204 records the navigation without leaving the page or contacting the external site.
-                    await pg.route(destination + "**", lambda route: route.fulfill(status=204))
-                    async with pg.expect_response(lambda r: r.url.startswith(destination)) as navigation:
-                        await pg.keyboard.press("Enter")
-                    response = await navigation.value
-                    request = response.request
-                    expect(sec, request.is_navigation_request() and request.url in (destination, destination + "/"),
-                           f"{where}: Enter on the icon link must navigate to {destination}, got {request.url}")
+                    # A stub page stands in for the external site, so it is never contacted; then back, for the next link.
+                    # (A 204 would leave the page half navigated, and the next link could not be found.)
+                    await pg.route(destination + "**", lambda route: route.fulfill(status=200, content_type="text/html", body="<title>stub</title>"))
+                    try:
+                        async with pg.expect_navigation(url=lambda u: u.startswith(destination), timeout=8000):
+                            await pg.keyboard.press("Enter")
+                    except Exception:  # noqa: BLE001
+                        pass
+                    expect(sec, pg.url in (destination, destination + "/"),
+                           f"{where}: Enter on the icon link must navigate to {destination}, got {pg.url}")
+                    if not pg.url.startswith(run.base):
+                        await pg.go_back()
+                        await run.ready(pg)
             finally:
                 await ctx.close()
 

@@ -12,7 +12,7 @@ Yusuf Demir starts as the university's data governance lead. He inherits a shelf
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [The same problem, everywhere](https://data.learn-all.org/data-governance/the-same-problem-everywhere/) | Where data governance comes from | 5 min | 8 | 3 questions | [script](0-the-same-problem-everywhere/script.md) · [source](0-the-same-problem-everywhere/source/README.md) |
-| [Off the shelf](https://data.learn-all.org/data-governance/off-the-shelf/) | Data governance, and where each policy runs | 5½ min | 10 | 3 questions | [script](1-off-the-shelf/script.md) · [source](1-off-the-shelf/source/README.md) |
+| [Off the shelf](https://data.learn-all.org/data-governance/off-the-shelf/) | Data governance, and where each policy runs | 5 min | 9 | 4 questions | [script](1-off-the-shelf/script.md) · [source](1-off-the-shelf/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

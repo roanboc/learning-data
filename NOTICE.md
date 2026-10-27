@@ -13,7 +13,7 @@ TOGAF and ArchiMate are registered trademarks of The Open Group, and Zachman is 
 
 DAMA and DAMA-DMBOK are registered trademarks of DAMA International. *The same one, everywhere* names them, and draws its own picture of the knowledge areas, only to identify that body of knowledge; *One person, many roles* also draws ArchiMate's actor and role symbols. This project is not affiliated with or endorsed by DAMA International or The Open Group.
 
-DCAM is a trademark of the EDM Association (formerly the EDM Council). *The same problem, everywhere* and *Off the shelf*, from the series on data governance, name DAMA-DMBOK and DCAM, and draw their own pictures of DAMA's knowledge areas and of the DMBOK's covers, only to identify those bodies of knowledge; this project is not affiliated with or endorsed by DAMA International or the EDM Association.
+DCAM is a trademark of the EDM Association (formerly the EDM Council). *The same problem, everywhere*, the prologue of the series on data governance, names DAMA-DMBOK and DCAM, and draws its own pictures of DAMA's knowledge areas and of the DMBOK's covers; *Off the shelf*, the film after it, draws its own picture of the newest DMBOK's cover, on a desk. Both do so only to identify those bodies of knowledge; this project is not affiliated with or endorsed by DAMA International or the EDM Association.
 
 ## Third-party components
 

@@ -49,13 +49,10 @@ const NARR={
  {"id":"every","gap":0.8,"text":"Not every table is a product."},
  {"id":"models","gap":0.8,"text":"The data team keeps thirty-three tables. Ten are used by other teams, and each of those belongs to one of six products."},
  {"id":"rest","gap":0.8,"text":"The rest are steps, which only the data team needs."},
- {"id":"check","gap":0.8,"text":"Every change is checked: a table other teams use must belong to exactly one product, or the change goes back."},
- {"id":"source","gap":0.8,"text":"Some products stay close to one system, like Awards."},
- {"id":"join","gap":0.8,"text":"Some join several, like Learner records."},
- {"id":"use","gap":0.8,"text":"And some serve one use, like Planning's."}]},
+ {"id":"goods","gap":0.8,"text":"Every change is checked, like goods in the bazaar: a table other teams use must belong to exactly one product, or the change goes back."},
+ {"id":"kinds","gap":0.8,"text":"Some products stay close to one system, some join several, and some serve one use."}]},
 "readers":{"name":"Known by name","lead":1.0,"tail":1.0,"vo":[
  {"id":"knows","gap":0.8,"text":"Each product also knows who uses it: not from a mailing list, but from the record of who uses what."},
- {"id":"dash","gap":0.8,"text":"The near-award dashboard uses Planning's product."},
  {"id":"three","gap":0.8,"text":"The registrar's learner records are used by three other products: the wallet's, Planning's and Finance's."},
  {"id":"mei","gap":0.8,"text":"Mei publishes them for everyone to build on, and she knows who does."}]},
 "life":{"name":"From draft to retired","lead":1.0,"tail":1.0,"vo":[
@@ -67,7 +64,9 @@ const NARR={
 "found":{"name":"Found, and trusted","lead":1.0,"tail":1.0,"vo":[
  {"id":"finds","gap":0.8,"text":"Now Anil finds Planning's product in the catalogue, among the others: its promise, its owner, and where to ask."},
  {"id":"like","gap":0.8,"text":"Like a buyer in the bazaar, he knows where to find it, what it will be, and who stands behind it."},
+ {"id":"late","gap":0.8,"text":"If it's ever late again, Clara answers for it."},
  {"id":"runs","gap":0.8,"text":"The policy runs in the work now: a product, an owner, and a check."},
+ {"id":"gives","gap":0.8,"text":"Order kept the bazaar's buyers coming back. Governance does the same for data: people find it, trust it, and build on it."},
  {"id":"own","gap":0.8,"text":"Own the product, not only the meaning."},
  {"id":"next","gap":0.8,"text":"Next, Anil makes a list of his own, for the faculty's advisers. It will need an owner too."}]}
 };

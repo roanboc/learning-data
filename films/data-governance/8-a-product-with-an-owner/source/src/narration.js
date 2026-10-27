@@ -37,7 +37,7 @@ const NARR={
  {"id":"two","gap":0.8,"text":"The meaning has an owner, and so does the product. They can be different people."}]},
 "job":{"name":"Wanting the job","lead":1.0,"tail":1.0,"vo":[
  {"id":"didnt","gap":0.8,"text":"But Clara didn't ask for this. “I'm not technical,” she says."},
- {"id":"depends","gap":0.8,"text":"So Yusuf shows her who depends on it: the census dashboard, and every faculty that plans from it."},
+ {"id":"depends","gap":0.8,"text":"So Yusuf shows her who depends on it: the near-award dashboard, and every faculty that plans from it."},
  {"id":"worth","gap":0.8,"text":"What it's worth to them: a number on time, from someone they can ask."},
  {"id":"comes","gap":0.8,"text":"And what comes with it: Jun still builds it, Noor designs it, Sam runs it, and any change to it needs her yes."},
  {"id":"code","gap":0.8,"text":"She answers for the promise, not the code."}]},
@@ -51,7 +51,7 @@ const NARR={
  {"id":"use","gap":0.8,"text":"And some serve one use, like Planning's."}]},
 "readers":{"name":"Known by name","lead":1.0,"tail":1.0,"vo":[
  {"id":"knows","gap":0.8,"text":"Each product also knows who uses it: not from a mailing list, but from the record of who uses what."},
- {"id":"dash","gap":0.8,"text":"The census dashboard uses Planning's product."},
+ {"id":"dash","gap":0.8,"text":"The near-award dashboard uses Planning's product."},
  {"id":"three","gap":0.8,"text":"The registrar's learner records are used by three other products: the wallet's, Planning's and Finance's."},
  {"id":"mei","gap":0.8,"text":"Mei publishes them for everyone to build on, and she knows who does."}]},
 "life":{"name":"From draft to retired","lead":1.0,"tail":1.0,"vo":[

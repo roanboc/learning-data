@@ -110,7 +110,7 @@ function cw_paintStreet(ctx,v){const C=CW_ST,Lt=CW_LIGHT[v],night=v==="night";
   // the lamps on their wires over the street
   C.lamps.forEach(z=>cw_wireLamp(ctx,C,z,0));
   // the kiosk, the baker's sign, the clock on its bracket, the pole with its two signs
-  cw_kiosk(ctx,C,v);cw_pretzel(ctx,C);cw_clockBracket(ctx,C);cw_pole(ctx,C,night?0:1);
+  cw_kiosk(ctx,C,v);cw_pretzel(ctx,C);cw_clockBracket(ctx,C);cw_pole(ctx,C,1);
 }
 // white paint on the road: laid over the wash (not into it), with the paper's grain through it
 function cw_mark(ctx,q){ctx.save();ctx.fillStyle="rgba(244,242,234,0.82)";wc_tr(ctx,q);ctx.fill();ctx.restore();wc_flat(ctx,q,[236,232,222],0.35,"mark");}
@@ -208,12 +208,18 @@ function cw_signs(ctx,C,nw,o){o=o||{};const Z=C.pole[1],k=cw_ppm(C,Z),r=C.sr*k;C
 function cw_sign(ctx,x,y,r,d){wc_flat(ctx,wc_ell(x,y,r,r,28),[250,250,250],1,"rim");wc_flat(ctx,wc_ell(x,y,r*0.86,r*0.86,28),CW.sign,1,"sign");
   ctx.save();ctx.translate(x,y);ctx.rotate(-d*Math.PI*0.25);ctx.fillStyle="rgba(250,250,250,0.96)";ctx.beginPath();ctx.moveTo(-r*0.12,-r*0.55);ctx.lineTo(r*0.12,-r*0.55);ctx.lineTo(r*0.12,r*0.14);
   ctx.lineTo(r*0.3,r*0.14);ctx.lineTo(0,r*0.58);ctx.lineTo(-r*0.3,r*0.14);ctx.lineTo(-r*0.12,r*0.14);ctx.closePath();ctx.fill();ctx.restore();}
-// the black cover over a sign, tied at the top: p is how much of it is on (it slides down over the sign, or up off it)
-function cw_cover(ctx,x,y,r,p){const e=easeCam(clamp(p,0,1)),top=y-r*1.25,bot=lerp(top+r*0.2,y+r*1.12,e);ctx.save();
-  ctx.fillStyle=rgba(CW.black,0.96);ctx.beginPath();ctx.moveTo(x-r*0.18,top);ctx.quadraticCurveTo(x-r*1.18,top+r*0.4,x-r*1.12,bot-r*0.15);ctx.quadraticCurveTo(x,bot+r*0.12,x+r*1.12,bot-r*0.15);
+// the black cover over a sign, tied at the top: p is how much of it is on (it slides down over the sign, or up off it). The bag is
+// shown down to where it has come, and the cloth gathered there in a roll
+function cw_cover(ctx,x,y,r,p){if(p<0.02)return;const e=easeCam(clamp(p,0,1)),top=y-r*1.25,full=y+r*1.12,hem=lerp(top+r*0.32,full,e);
+  ctx.save();ctx.beginPath();ctx.rect(x-r*1.6,top-r*0.3,r*3.2,hem-top+r*0.3);ctx.clip();
+  ctx.fillStyle=rgba(CW.black,0.96);ctx.beginPath();ctx.moveTo(x-r*0.18,top);ctx.quadraticCurveTo(x-r*1.18,top+r*0.4,x-r*1.12,full-r*0.15);ctx.quadraticCurveTo(x,full+r*0.12,x+r*1.12,full-r*0.15);
   ctx.quadraticCurveTo(x+r*1.18,top+r*0.4,x+r*0.18,top);ctx.closePath();ctx.fill();ctx.strokeStyle=rgba([90,88,96],0.6);ctx.lineWidth=Math.max(1,r*0.05);
-  for(const s of [-0.5,0.1,0.55]){ctx.beginPath();ctx.moveTo(x+s*r*0.4,top+r*0.15);ctx.quadraticCurveTo(x+s*r*1.1,(top+bot)/2,x+s*r*0.9,bot-r*0.1);ctx.stroke();}
-  ctx.fillStyle=rgba([70,66,60],1);ctx.fillRect(x-r*0.24,top-r*0.02,r*0.48,r*0.1);ctx.restore();}
+  for(const s of [-0.5,0.1,0.55]){ctx.beginPath();ctx.moveTo(x+s*r*0.4,top+r*0.15);ctx.quadraticCurveTo(x+s*r*1.1,(top+full)/2,x+s*r*0.9,full-r*0.1);ctx.stroke();}ctx.restore();
+  // the roll of cloth at the edge, thicker the less of the bag is down
+  if(e<0.97){const hw=r*(0.18+0.94*Math.sqrt(clamp((hem-top)/(r*1.6),0,1))),ry=r*(0.05+0.13*(1-e));ctx.save();ctx.fillStyle=rgba([26,26,30],1);ctx.beginPath();ctx.ellipse(x,hem,hw*1.04,ry,0,0,TAU);ctx.fill();
+    ctx.strokeStyle=rgba([96,94,102],0.7);ctx.lineWidth=Math.max(1,r*0.035);for(const d of [-0.55,-0.1,0.4]){ctx.beginPath();ctx.moveTo(x+d*hw-r*0.1,hem-ry*0.6);ctx.quadraticCurveTo(x+d*hw+r*0.05,hem,x+d*hw-r*0.02,hem+ry*0.7);ctx.stroke();}ctx.restore();}
+  // the tie at the top
+  ctx.save();ctx.fillStyle=rgba([70,66,60],1);ctx.fillRect(x-r*0.24,top-r*0.02,r*0.48,r*0.1);ctx.restore();}
 // The light of a moment, laid over a whole shot each frame, the place and everything moving in it alike: a colour multiplied over it
 // all, then what gives light, added over it (the sun low at the street's end, lamps, lit windows) and last the lights of the cars, kept
 // back while they're drawn (cw_glow) so the dusk or the night doesn't dim them
@@ -288,19 +294,25 @@ function cw_car(ctx,C,o){const crushed=!!o.crumpled,B=crushed?CW_CARX:CW_CARB,L=
         const sh=P(2.15,lb,0.98);q.fillStyle=rgba(tn(o.driver[2]||[70,74,90]),0.9);q.beginPath();q.ellipse(sh[0],sh[1],0.24*hk,0.1*hk,0,0,TAU);q.fill();q.restore();}
       // the sky's light along the glass
       q.save();cw_path(q,rw);q.clip();q.strokeStyle=rgba([255,255,255],0.22);q.lineWidth=Math.max(1,0.06*k);q.beginPath();const s0=P(1.3,0.2,1.02),s1=P(1.68,0.5,1.36);q.moveTo(s0[0],s0[1]);q.lineTo(s1[0],s1[1]);q.stroke();q.restore();}
-    if(V.ac>2.6)win([P(3.09,-0.7,0.99),P(3.09,0.7,0.99),P(2.74,0.58,1.39),P(2.74,-0.58,1.39)]);
+    if(V.ac>2.6){win([P(3.09,-0.7,0.99),P(3.09,0.7,0.99),P(2.74,0.58,1.39),P(2.74,-0.58,1.39)]);
+      // a crash cracks the windscreen: lines out from where it was hit
+      if(crushed){const c=P(2.95,0.22,1.15);q.strokeStyle="rgba(244,244,240,0.75)";q.lineWidth=Math.max(1,0.012*k);for(let i=0;i<7;i++){const t=i/7*TAU+0.3,e=P(2.95-Math.sin(t)*0.12,0.22+Math.cos(t)*(0.2+0.12*hash(i,4)),1.15+Math.sin(t)*0.14);
+        q.beginPath();q.moveTo(c[0],c[1]);q.lineTo(e[0],e[1]);q.stroke();}}}
     if(side){const yb=y=>side*lerp(0.79,0.64,(y-0.95)/0.48);win([P(1.36,yb(1.0),1.0),P(2.16,yb(1.0),1.0),P(2.16,yb(1.37),1.37),P(1.8,yb(1.37),1.37)]);
       win([P(2.26,yb(1.0),1.0),P(3.04,yb(1.0),1.0),P(2.66,yb(1.37),1.37),P(2.26,yb(1.37),1.37)]);}
     // the end we see: bumper, lights and a blank plate
     if(ends==="rear"){cw_poly(q,[P(0.01,-0.8,0.35),P(0.01,0.8,0.35),P(0.01,0.8,0.43),P(0.01,-0.8,0.43)],chrome);
       for(const s of [-1,1])cw_poly(q,[P(0.02,s*0.56,0.6),P(0.02,s*0.74,0.6),P(0.02,s*0.74,0.76),P(0.02,s*0.56,0.76)],tn([190,46,40]));
       cw_poly(q,[P(0.015,-0.25,0.45),P(0.015,0.25,0.45),P(0.015,0.25,0.56),P(0.015,-0.25,0.56)],tn([240,238,230]));}
-    if(ends==="front"){const fa=L-0.01;cw_poly(q,[P(fa,-0.8,0.33),P(fa,0.8,0.33),P(fa,crushed?0.6:0.8,crushed?0.36:0.41),P(fa,-0.8,0.41)],chrome);
-      cw_poly(q,[P(fa,-0.36,0.47),P(fa,0.36,0.47),P(fa,0.36,0.62),P(fa,-0.36,0.62)],tn([150,152,158]));
+    if(ends==="front"){const fa=L-0.01;
+      if(crushed){cw_poly(q,[P(fa,-0.34,0.45),P(fa,0.3,0.5),P(fa,0.33,0.62),P(fa,-0.36,0.6)],tn([52,50,56]));cw_poly(q,[P(fa,-0.82,0.33),P(fa,0.72,0.2),P(fa,0.7,0.29),P(fa,-0.82,0.41)],chrome);}
+      else{cw_poly(q,[P(fa,-0.8,0.33),P(fa,0.8,0.33),P(fa,0.8,0.41),P(fa,-0.8,0.41)],chrome);cw_poly(q,[P(fa,-0.36,0.47),P(fa,0.36,0.47),P(fa,0.36,0.62),P(fa,-0.36,0.62)],tn([150,152,158]));}
       for(const s of [-1,1]){if(crushed&&s>0)continue;const hc=P(fa,s*0.58,0.64),rr_=0.1*cw_ppm(C,o.z);q.fillStyle=rgba(chrome,1);q.beginPath();q.arc(hc[0],hc[1],rr_,0,TAU);q.fill();
         q.fillStyle=rgba(o.head?[255,250,232]:tn([226,224,210]),1);q.beginPath();q.arc(hc[0],hc[1],rr_*0.74,0,TAU);q.fill();}
-      if(crushed){// the bonnet's crease, and a dent where a headlight was
-        q.strokeStyle=rgba(wc_dim(col,0.4),0.8);q.lineWidth=Math.max(1,0.03*k);q.beginPath();const c0=P(3.2,-0.6,0.98),c1=P(3.5,0.05,1.06),c2=P(3.3,0.6,0.99);q.moveTo(c0[0],c0[1]);q.lineTo(c1[0],c1[1]);q.lineTo(c2[0],c2[1]);q.stroke();
+      if(crushed){// the bonnet pushed up into a ridge: its far slope in shade, the ridge catching the light; a dent where a headlight was
+        cw_poly(q,[P(3.12,0.04,1.0),P(3.86,0.06,0.84),P(3.86,0.72,0.8),P(3.12,0.8,0.95)],wc_dim(col,0.22));
+        q.strokeStyle=rgba(wc_lit(col,0.5),0.95);q.lineWidth=Math.max(1.5,0.035*k);q.beginPath();let c0=P(3.1,0.04,1.0),c1=P(3.55,0.05,1.06),c2=P(3.86,0.06,0.84);q.moveTo(c0[0],c0[1]);q.lineTo(c1[0],c1[1]);q.lineTo(c2[0],c2[1]);q.stroke();
+        q.strokeStyle=rgba(wc_dim(col,0.45),0.85);q.lineWidth=Math.max(1,0.025*k);c0=P(3.2,-0.6,0.98);c1=P(3.5,-0.25,1.03);c2=P(3.75,-0.55,0.86);q.beginPath();q.moveTo(c0[0],c0[1]);q.lineTo(c1[0],c1[1]);q.lineTo(c2[0],c2[1]);q.stroke();
         const dc=P(fa,0.58,0.62);q.fillStyle=rgba(wc_dim(col,0.45),1);q.beginPath();q.ellipse(dc[0],dc[1],0.12*k,0.08*k,0.3,0,TAU);q.fill();}}
     // the wheels on the side we see: the arch, the tyre, the hubcap
     if(side)for(const a of [0.78,L-0.75]){const ar=[];for(let i=0;i<=12;i++){const t=Math.PI*i/12;ar.push(P(a+Math.cos(t)*0.4,side*0.82,0.3+Math.sin(t)*0.42));}cw_poly(q,ar,wc_dim(col,0.55));
@@ -316,13 +328,13 @@ function cw_beam(ctx,pts,g0,g1,a){if(a<=0.01)return;ctx.save();ctx.globalComposi
   ctx.fillStyle=g;cw_path(ctx,pts);ctx.fill();ctx.restore();}
 
 // Boxy vehicles, built from boxes in their own frame: a lorry with a load under a canvas cover, a bus, and a tow truck with its crane.
-// Each part is [a0, a1, b0, b1, y0, y1, colour]; nearer parts are listed later
+// Each part is [a0, a1, b0, b1, y0, y1, colour]; they're drawn far to near from the camera
 function cw_boxes(ctx,V,parts,tn,o){const pts=[];parts.forEach(([a0,a1,b0,b1,y0,y1])=>{for(const a of [a0,a1])for(const b of [b0,b1])for(const y of [y0,y1])pts.push(V.p(a,b,y));});
   (o.wheels||[]).forEach(([a,r])=>{for(const s of [-1,1])pts.push(...cw_disc(V,a,s*(o.track||1.0),r,r,10));});
   const box=cw_bbox(pts),k=cw_ppm(V.C,V.z),dark=tn([34,32,38]);
   const fp=e=>[V.p(-e,-1.2-e,0),V.p(V.L+e,-1.2-e,0),V.p(V.L+e,1.2+e,0),V.p(-e,1.2+e,0)];cw_shade(ctx,fp(0.1),[100,96,118],0.28,0.18*k);
   cw_paint(ctx,[box[0]-4,box[1]-4,box[2]+8,box[3]+8],q=>{(o.wheels||[]).forEach(([a,r])=>{for(const s of [-1,1])cw_poly(q,cw_disc(V,a,s*(o.track||1.0),r,r),dark);});
-    parts.forEach(([a0,a1,b0,b1,y0,y1,c,kind])=>{const col=tn(c);cw_vfaces(V,a0,a1,b0,b1,y0,y1).forEach(([nm,f])=>cw_poly(q,f,nm==="top"?wc_lit(col,0.16):nm==="side"?wc_dim(col,0.08):wc_dim(col,0.16)));
+    parts.slice().sort((m,n)=>Math.abs((n[0]+n[1])/2-V.ac)-Math.abs((m[0]+m[1])/2-V.ac)).forEach(([a0,a1,b0,b1,y0,y1,c,kind])=>{const col=tn(c);cw_vfaces(V,a0,a1,b0,b1,y0,y1).forEach(([nm,f])=>cw_poly(q,f,nm==="top"?wc_lit(col,0.16):nm==="side"?wc_dim(col,0.08):wc_dim(col,0.16)));
       if(o.detail)o.detail(q,V,kind,[a0,a1,b0,b1,y0,y1],col);});
     // the wheels on the side we see
     const side=V.bc>1.2?1:V.bc<-1.2?-1:0;if(side)(o.wheels||[]).forEach(([a,r])=>{cw_poly(q,cw_disc(V,a,side*((o.track||1.0)+0.12),r,r),dark);cw_poly(q,cw_disc(V,a,side*((o.track||1.0)+0.13),r*0.5,r,12),tn([170,172,178]));});
@@ -346,15 +358,18 @@ function cw_bus(ctx,C,o){const V=cw_frame(C,o.x,o.z,o.h||0,10.8),tn=o.tone||CW_T
     {wheels:[[2.2,0.5],[8.4,0.5]],track:1.05,tail:o.tail,head:o.head,lights:[[0.01,-1.05,0.7],[0.01,1.05,0.7]],detail:(q,V,kind,b,col)=>{const [a0,a1,b0,b1,y0,y1]=b,gl=tn([118,134,160]);if(kind!=="win")return;
       const side=V.bc>b1?b1:V.bc<b0?b0:null;if(side!=null)for(let i=0;i<7;i++){const aa=0.5+i*1.42;cw_poly(q,[V.p(aa,side,1.5),V.p(aa+1.2,side,1.5),V.p(aa+1.2,side,2.35),V.p(aa,side,2.35)],gl);}
       if(V.ac<a0)cw_poly(q,[V.p(a0,-1.0,1.55),V.p(a0,1.0,1.55),V.p(a0,1.0,2.35),V.p(a0,-1.0,2.35)],gl);if(V.ac>a1)cw_poly(q,[V.p(a1,-1.15,1.4),V.p(a1,1.15,1.4),V.p(a1,1.15,2.42),V.p(a1,-1.15,2.42)],gl);}});}
-// a tow truck: its cab and bonnet at the front, a flat bed with a crane at its rear, and the crane's cable down to what it tows
-function cw_tow(ctx,C,o){const V=cw_frame(C,o.x,o.z,o.h||0,6.2),tn=o.tone||CW_TONE.day,col=o.col||[214,166,58],dk=[70,66,62];
-  return cw_boxes(ctx,V,[[0,3.1,-1.1,1.1,0.6,0.95,dk,"bed"],[3.2,4.8,-1.05,1.05,0.65,2.35,col,"cab"],[4.8,6.2,-0.85,0.85,0.65,1.6,col,"bonnet"]],tn,
+// a tow truck: its cab and bonnet at the front, a flat bed with a crane at its rear, and the crane's cable down to what it tows; an
+// amber lamp turning on the cab's roof (o.t is the time)
+function cw_tow(ctx,C,o){const V=cw_frame(C,o.x,o.z,o.h||0,6.2),tn=o.tone||CW_TONE.day,col=o.col||[214,166,58],dk=[70,66,62],gl=tn([112,128,156]);
+  cw_boxes(ctx,V,[[0,3.1,-1.1,1.1,0.6,0.95,dk,"bed"],[3.2,4.8,-1.05,1.05,0.65,2.6,col,"cab"],[3.85,4.15,-0.16,0.16,2.6,2.82,[226,140,40],"lamp"],[4.8,6.2,-0.85,0.85,0.65,1.6,col,"bonnet"]],tn,
     {wheels:[[1.2,0.46],[5.3,0.46]],track:0.95,tail:o.tail,lights:[[0.01,-0.95,0.8],[0.01,0.95,0.8]],detail:(q,V,kind,b)=>{if(kind!=="cab")return;const [a0,a1,b0,b1]=b,side=V.bc>b1?b1:V.bc<b0?b0:null;
-      if(side!=null)cw_poly(q,[V.p(3.5,side,1.5),V.p(4.5,side,1.5),V.p(4.5,side,2.15),V.p(3.5,side,2.15)],tn([112,128,156]));
-      if(V.ac<a0)cw_poly(q,[V.p(a0,-0.8,1.55),V.p(a0,0.8,1.55),V.p(a0,0.8,2.1),V.p(a0,-0.8,2.1)],tn([112,128,156]));},
+      if(side!=null)cw_poly(q,[V.p(3.5,side,1.6),V.p(4.5,side,1.6),V.p(4.5,side,2.4),V.p(3.5,side,2.4)],gl);
+      if(V.ac<a0)cw_poly(q,[V.p(a0,-0.8,1.7),V.p(a0,0.8,1.7),V.p(a0,0.8,2.35),V.p(a0,-0.8,2.35)],gl);},
      after:(q,V,tn,k)=>{// the crane: two beams from the bed rising over the rear, and its cable
-      q.strokeStyle=rgba(tn(col),1);q.lineCap="round";q.lineWidth=Math.max(2,0.16*k);for(const s of [-0.5,0.5]){const a=V.p(1.4,s,0.95),b=V.p(-0.5,s*0.3,2.5);q.beginPath();q.moveTo(a[0],a[1]);q.lineTo(b[0],b[1]);q.stroke();}
-      q.strokeStyle=rgba(tn([60,58,60]),1);q.lineWidth=Math.max(1,0.04*k);const t=V.p(-0.5,0,2.5),e=o.hook||V.p(-0.9,0,0.9);q.beginPath();q.moveTo(t[0],t[1]);q.lineTo(e[0],e[1]);q.stroke();}});}
+      q.strokeStyle=rgba(tn(col),1);q.lineCap="round";q.lineWidth=Math.max(2,0.16*k);for(const s of [-0.5,0.5]){const a=V.p(1.4,s,0.95),b=V.p(-0.5,s*0.3,3.0);q.beginPath();q.moveTo(a[0],a[1]);q.lineTo(b[0],b[1]);q.stroke();}
+      q.strokeStyle=rgba(tn([60,58,60]),1);q.lineWidth=Math.max(1,0.04*k);const t=V.p(-0.5,0,3.0),e=o.hook||V.p(-0.9,0,0.9);q.beginPath();q.moveTo(t[0],t[1]);q.lineTo(e[0],e[1]);q.stroke();}});
+  cw_glow(()=>{const [lx,ly]=V.p(4.0,0,2.72),k=cw_ppm(C,o.z),f=Math.pow(0.5+0.5*Math.sin((o.t||0)*TAU*1.3),2);cw_light(ctx,lx,ly,1.6*k,[255,168,60],0.18+0.4*f);cw_light(ctx,lx,ly,0.18*k,[255,220,150],0.6+0.35*f);});
+  return V;}
 
 /* ---------- the people of 1967 ---------- */
 // Invented people of a Swedish town, in the clothes of their time and their work, with the series' warm umber wash behind them: a
@@ -584,7 +599,7 @@ function cw_paintOffice63T(ctx){const O=CW_OF,y=O.top,wood=[146,110,80];
   wc_contact(ctx,60,1860,1000,1,0.3);
   for(const lx of [130,1760])wc_part(ctx,wc_rect(lx,y+30,40,H-y),wc_dim(wood,0.3),1);
   wc_part(ctx,[[90,y-30],[1830,y-30],[1870,y+8],[50,y+8]],wc_lit(wood,0.1),1,{seed:795});wc_part(ctx,wc_rect(50,y+8,1820,30),wc_dim(wood,0.12),1,{seed:796});
-  const R=wc_rng(799);for(const [px,w,rot] of [[300,190,-0.05],[560,170,0.04],[1180,200,-0.03],[1420,180,0.06]]){ctx.save();ctx.translate(px,y-12);ctx.rotate(rot);ctx.transform(1,0,0,0.3,0,0);
+  const R=wc_rng(799);for(const [px,w,rot] of [[300,190,-0.05],[560,170,0.04],[1180,200,-0.03],[1420,180,0.06]]){ctx.save();ctx.translate(px,y-14);ctx.rotate(rot);ctx.transform(1,0,0,0.13,0,0);
     wc_flat(ctx,wc_rect(-w/2,-w*0.7,w,w*1.4),[250,248,240],1,"sheet");ctx.restore();}
   // the telephone, black, with its handset on the cradle
   wc_part(ctx,[[1610,y-6],[1730,y-6],[1716,y-60],[1624,y-60]],[40,38,44],1,{kind:"thing",lw:1.3,seed:801});wc_part(ctx,[[1596,y-58],[1744,y-58],[1736,y-82],[1604,y-82]],[30,28,34],1,{kind:"thing",lw:1.2,seed:802});
@@ -689,15 +704,30 @@ function cw_paintDesk67(ctx){const O=CW_PD;gv_wallFloor(ctx,[198,212,194],O.fy,{
   for(const [px,py] of [[mx+14,my+14],[mx+mw-14,my+14]])gv_pin(ctx,px,py,[196,64,56],0.8);}
 function cw_paintDesk67T(ctx){const y=CW_PD.top,wood=[136,100,70];wc_part(ctx,wc_rect(-20,y+40,W+40,H-y),wc_dim(wood,0.1),1,{seed:861});
   wc_part(ctx,[[-20,y-30],[W+20,y-30],[W+20,y+40],[-20,y+40]],wc_lit(wood,0.14),1,{seed:862});
+  for(const dx of [140,1380]){wc_flat(ctx,wc_rect(dx,y+78,420,150),wc_dim(wood,0.16),1,"drawer");wc_flat(ctx,wc_rect(dx+8,y+86,404,134),wc_dim(wood,0.06),1,"drawer");wc_flat(ctx,wc_rect(dx+170,y+120,80,14),[176,170,156],1,"handle");}
   // the typewriter
-  wc_part(ctx,[[230,y-6],[560,y-6],[530,y-110],[260,y-110]],[60,64,70],1,{kind:"thing",lw:1.3,seed:863});wc_part(ctx,wc_rect(240,y-150,300,44),[44,46,52],1,{kind:"thing",lw:1.2,seed:864});
-  wc_flat(ctx,wc_rect(300,y-200,180,60),[250,248,240],1,"paper");ctx.save();ctx.fillStyle=rgba([200,200,196],0.9);for(let r=0;r<3;r++)for(let c=0;c<10;c++){ctx.beginPath();ctx.arc(290+c*24+r*6,y-84+r*22,7,0,TAU);ctx.fill();}ctx.restore();
-  cw_reports(ctx,1240,y-6,8,"September–October 1966",1);}
+  ctx.save();ctx.translate(-150,0);wc_part(ctx,[[230,y-6],[560,y-6],[530,y-110],[260,y-110]],[60,64,70],1,{kind:"thing",lw:1.3,seed:863});wc_part(ctx,wc_rect(240,y-150,300,44),[44,46,52],1,{kind:"thing",lw:1.2,seed:864});
+  wc_flat(ctx,wc_rect(300,y-200,180,60),[250,248,240],1,"paper");ctx.fillStyle=rgba([200,200,196],0.9);for(let r=0;r<3;r++)for(let c=0;c<10;c++){ctx.beginPath();ctx.arc(290+c*24+r*6,y-84+r*22,7,0,TAU);ctx.fill();}ctx.restore();
+  cw_reports(ctx,760,y-6,8,"September–October 1966",1);}
 // a stack of n report folders lying on the desk, seen from the front, buff with a darker edge, and a white label on the front of the
-// stack; (x, y) is the middle of its foot
-function cw_reports(ctx,x,y,n,label,a){if(a<=0.01)return;const w=420,t=17;ctx.save();ctx.globalAlpha*=a;
+// stack, low on it; (x, y) is the middle of its foot
+function cw_reports(ctx,x,y,n,label,a,la){if(a<=0.01)return;const w=380,t=22;ctx.save();ctx.globalAlpha*=a;
   for(let i=0;i<n;i++){const yy=y-(i+1)*t,dx=(hash(i*7+n)-0.5)*10;ctx.fillStyle=rgba(i%2?[214,186,132]:[226,198,144],1);ctx.fillRect(x-w/2+dx,yy,w,t);ctx.fillStyle=rgba([170,140,92],0.8);ctx.fillRect(x-w/2+dx,yy+t-3,w,3);}
   ctx.strokeStyle=rgba(WC_PENCIL,0.5);ctx.lineWidth=1.2;ctx.strokeRect(x-w/2-5,y-n*t,w+10,n*t);
-  ctx.save();ctx.translate(x,y-n*t);ctx.transform(1,0,0,0.3,0,0);ctx.fillStyle=rgba([228,200,146],1);ctx.fillRect(-w/2,-w*0.74,w,w*0.74);ctx.restore();ctx.restore();
-  if(label){const lw=tw(ctx,label,30,600)+36;withA(ctx,a,()=>{ctx.save();ctx.fillStyle="rgba(252,250,244,0.97)";ctx.fillRect(x-lw/2,y-n*t*0.5-26,lw,52);ctx.strokeStyle=rgba(WC_PENCIL,0.5);ctx.strokeRect(x-lw/2,y-n*t*0.5-26,lw,52);ctx.restore();
-    wc_T(ctx,label,x,y-n*t*0.5+11,{w:600,size:30,align:"center",col:WC_DARK});});}}
+  ctx.save();ctx.translate(x,y-n*t);ctx.transform(1,0,0,0.08,0,0);ctx.fillStyle=rgba([232,206,152],1);ctx.fillRect(-w/2,-w*0.74,w,w*0.74);ctx.restore();ctx.restore();
+  if(label){const lw=tw(ctx,label,30,600)+36,ly=Math.min(n*t*0.5,44);withA(ctx,a*(la==null?1:la),()=>{ctx.save();ctx.fillStyle="rgba(252,250,244,0.97)";ctx.fillRect(x-lw/2,y-ly-26,lw,52);ctx.strokeStyle=rgba(WC_PENCIL,0.5);ctx.strokeRect(x-lw/2,y-ly-26,lw,52);ctx.restore();
+    wc_T(ctx,label,x,y-ly+11,{w:600,size:30,align:"center",col:WC_DARK});});}}
+// an arm in from the right edge of a close shot, sliding something along with the tips of its fingers: the sleeve, the shirt's cuff,
+// the hand side on, its fingers together, the thumb along its side towards us. (x, y) is where the fingertips touch; k its size
+function cw_push(ctx,x,y,sleeve,skin,a,k){if(a<=0.01)return;k=k||1;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.scale(k,k);ctx.lineCap="round";ctx.lineJoin="round";
+  const dk=rgba(wc_dim(skin,0.34),0.85);
+  ctx.strokeStyle=rgba(sleeve,1);ctx.lineWidth=74;ctx.beginPath();ctx.moveTo(620,-190);ctx.quadraticCurveTo(330,-60,150,-4);ctx.stroke();
+  ctx.strokeStyle=rgba(wc_lit(sleeve,0.2),0.8);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(620,-224);ctx.quadraticCurveTo(330,-94,146,-40);ctx.stroke();
+  ctx.save();ctx.translate(134,-2);ctx.rotate(-0.3);ctx.fillStyle="rgb(234,238,244)";ctx.fillRect(-14,-38,28,76);ctx.strokeStyle=rgba(WC_PENCIL,0.45);ctx.lineWidth=1.2;ctx.strokeRect(-14,-38,28,76);ctx.restore();
+  // the back of the hand along the top, the fingertips against the end, the palm's edge below
+  ctx.fillStyle=rgba(skin,1);ctx.beginPath();ctx.moveTo(124,-30);ctx.quadraticCurveTo(70,-36,16,-22);ctx.quadraticCurveTo(2,-18,2,-6);ctx.quadraticCurveTo(2,6,16,8);
+  ctx.quadraticCurveTo(60,14,90,26);ctx.quadraticCurveTo(110,34,124,26);ctx.closePath();ctx.fill();ctx.strokeStyle=dk;ctx.lineWidth=1.8;ctx.stroke();
+  ctx.lineWidth=1.3;ctx.beginPath();ctx.moveTo(10,-7);ctx.quadraticCurveTo(36,-9,58,-7);ctx.stroke();ctx.beginPath();ctx.moveTo(60,-31);ctx.quadraticCurveTo(64,-21,62,-11);ctx.stroke();
+  // the thumb, its tip short of the fingers'
+  ctx.fillStyle=rgba(wc_lit(skin,0.08),1);ctx.beginPath();ctx.moveTo(98,20);ctx.quadraticCurveTo(66,30,44,22);ctx.quadraticCurveTo(34,16,44,9);ctx.quadraticCurveTo(70,3,100,3);ctx.closePath();ctx.fill();ctx.strokeStyle=dk;ctx.lineWidth=1.6;ctx.stroke();
+  ctx.restore();});}

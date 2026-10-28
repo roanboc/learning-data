@@ -38,7 +38,7 @@ function cw_border(x,tt,P){const C=CW_BD,u=tt-P.border;CW_LIT=[];cw_car(x,C,{x:1
 // out from behind the lorry, and he pulls back in
 function cw_overtake(x,tt,P){const C=CW_CR;CW_LIT=[];cw_roadMotion(x,C,14*(tt-P.road));
   const out=easeCam(clamp((tt-P.over-0.3)/1.0,0,1))*(1-easeCam(clamp((tt-P.see-0.35)/0.6,0,1))),zo=23-24*(tt-P.see-0.2),xc=-1.4+0.85*out,items=[];
-  if(zo>3.4&&zo<160)items.push([zo,()=>cw_car(x,C,{x:1.4,z:zo,h:Math.PI,col:CW_PAINT[1],head:1})]);
+  if(zo>3.4&&zo<160)items.push([zo,()=>cw_car(x,C,{x:1.4,z:zo,h:Math.PI,col:CW_PAINT[1],head:clamp((34-zo)/4,0,1)})]);
   items.push([18.1,()=>cw_lorry(x,C,{x:-1.4,z:18.1,tail:1})]);
   items.push([9.65,()=>{const V=cw_car(x,C,{x:xc,z:9.65,h:0.08*Math.sin(out*Math.PI),col:CW_PAINT[3],tail:1,driver:[0,[88,64,46],[96,108,128]],lean:0.14*out});
     // his seat, on the left, far from the middle of the road
@@ -46,14 +46,14 @@ function cw_overtake(x,tt,P){const C=CW_CR;CW_LIT=[];cw_roadMotion(x,C,14*(tt-P.
   cw_depth(items);cw_dusk(x,false);}
 // a little later on the same road: a tow truck pulls away a car with its front crumpled, lifted at the rear; the officer writes in his
 // notebook, and looks up
-function cw_towShot(x,tt,P){const C=CW_CR,u=tt-P.crash,zt=20+1.1*u;CW_LIT=[];cw_roadMotion(x,C,0);
-  const zc=zt-5.9,lift=a=>0.55*Math.max(0,1-a/3.86),Vc=cw_frame(C,-1.4,zc,Math.PI,3.86,lift);
-  cw_tow(x,C,{x:-1.4,z:zt,tail:1,hook:Vc.p(0.05,0,0.86)});cw_car(x,C,{x:-1.4,z:zc,h:Math.PI,col:CW_PAINT[0],crumpled:true,lift});
+function cw_towShot(x,tt,P){const C=CW_CR,u=tt-P.crash,zt=15.5+1.0*u;CW_LIT=[];cw_roadMotion(x,C,22);
+  const zc=zt-5.63,lift=a=>0.55*Math.max(0,1-a/3.86),Vc=cw_frame(C,-1.4,zc,Math.PI,3.86,lift);
+  cw_tow(x,C,{x:-1.4,z:zt,tail:1,t:tt,hook:Vc.p(0.05,0,0.86)});cw_car(x,C,{x:-1.4,z:zc,h:Math.PI,col:CW_PAINT[0],crumpled:true,lift});
   const [ox,oy]=cw_pj(C,-3.9,0,10),s=1.8*cw_ppm(C,10)/560,lk=easeCam(clamp((tt-P.change+0.2)/0.6,0,1));
   person(x,"cw_officer",ox,oy,s,{pose:"write",pose2:"stand",mix:lk,carry:lk<0.6?heldNotebook:null,t:tt,flip:true});cw_dusk(x,true);}
 // what many feared, at night, in grey: a car keeping right, and another coming at it on the same side, a driver who didn't know; the
 // picture stops before they meet
-function cw_whatIf(x,tt,P){const C=CW_ST,tf=Math.min(tt,P.meet+0.1),za=8+2.5*(tf-P.feared),zb=60-6.2*Math.max(0,tf-P.many);CW_LIT=[];
+function cw_whatIf(x,tt,P){const C=CW_ST,tf=Math.min(tt,P.meet+0.1),za=6+1.5*(tf-P.feared),vb=39/Math.max(1,P.meet+0.1-P.many),zb=70-vb*Math.max(0,tf-P.many);CW_LIT=[];
   if(tt>P.many)cw_car(x,C,{x:1.9,z:zb,h:Math.PI,col:CW_PAINT[2],head:1});cw_car(x,C,{x:1.9,z:za,col:CW_PAINT[0],tail:1,head:1,driver:[0,[70,52,40],[76,82,98]]});
   cw_streetLight(x,"night");const g=fin(tt,P.many,1.0);if(g>0){x.save();x.globalCompositeOperation="saturation";x.globalAlpha=0.9*g;x.fillStyle="rgb(128,128,128)";x.fillRect(-W,-H,3*W,3*H);x.restore();cw_grade(x,mix([255,255,255],[214,214,222],g));}}
 // 1963 to 1966, the change commission's office: planners at the long table, one at the plan on the wall, and their papers growing,
@@ -89,44 +89,44 @@ function cw_postman(x,tt,P){const O=CW_PS,u=tt-P.booklet,s=1.05,cut=O.top-12,py=
 function cw_milk(x,tt,P){const O=CW_GR,u=tt-P.milk,s=1.15,cut=O.top-22,py=cut+GV_STAND*s,set=easeCam(clamp((u-0.4)/0.9,0,1)),held=set<1;
   gv_behind(x,"cw_grocer",1040,cut,s,{standing:true,pose:"hold",pose2:"cw_set",mix:set,t:tt,carry:held?cw_heldTetra:null});x.drawImage(gv_place("x67grocerT"),0,0,W,H);
   if(!held){const [hx,hy]=cw_handAt("cw_grocer",1040,py,s,"cw_set",1),k=s*PEOPLE.cw_grocer.build.h;cw_tetra(x,hx+6*k,hy+52*k,104*k);}}
-// the crossroads the morning after: traffic on the right, a bus among it, people on the pavement of the side street
+// the crossroads the morning after: traffic on the right, a bus among it, people walking towards us on the pavements
 function cw_morning(x,tt,P){const C=CW_ST,u=tt-P.huge,items=[];CW_LIT=[];
   items.push([14+5*u,()=>cw_bus(x,C,{x:1.9,z:14+5*u})]);items.push([34+6*u,()=>cw_car(x,C,{x:1.9,z:34+6*u,col:CW_PAINT[4]})]);
   items.push([70-11*u,()=>cw_car(x,C,{x:-1.9,z:70-11*u,h:Math.PI,col:CW_PAINT[2]})]);items.push([118-10*u,()=>cw_car(x,C,{x:-1.9,z:118-10*u,h:Math.PI,col:CW_PAINT[0]})]);
-  for(const [id,X0,X1,t0] of [["cw_walkA",-15,-8.5,0],["cw_walkB",9.5,15.5,0.4]]){const w=gv_walk(tt,P.huge+t0,cw_pj(C,X0,0,26.6)[0],cw_pj(C,X1,0,26.6)[0],70),y=cw_pj(C,0,0,26.6)[1];
-    items.push([26.6,()=>gv_walker(x,id,w,y,1.7*cw_ppm(C,26.6)/560,{t:tt})]);}
+  for(const [id,X,z0,t0,v] of [["cw_walkA",-5.1,19.4,0,1.3],["cw_walkB",5.6,16.2,0.45,1.2]]){const u_=Math.max(0,tt-P.huge-t0),z=z0-v*u_,ph=u_*Math.PI*2.1,sw=Math.sin(ph),k=cw_ppm(C,z),[px,py]=cw_pj(C,X,0,z);
+    items.push([z,()=>person(x,id,px,py-Math.abs(sw)*0.025*k,1.7*k/560,{pose:"stand",pose2:sw>0?"walkA":"walkB",mix:Math.min(1,Math.abs(sw)*1.2),t:tt})]);}
   cw_depth(items);cw_lights();}
-// the police station: the officer, his cap off, sets the reports for September and October 1967 on the desk, beside the stack for
-// 1966, twice as tall; a pencil line marks half
-function cw_reportsAt(x,tt,P){const O=CW_PD,u=tt-P.half,dn=easeCam(clamp((u-0.4)/0.9,0,1));
-  gv_behind(x,"cw_officerH",1500,O.top-30,1.02,{t:tt,pose:"hold"});x.drawImage(gv_place("x67deskT"),0,0,W,H);
-  cw_reports(x,1680,lerp(O.top-170,O.top-6,dn),4,dn>0.97?"September–October 1967":null,1);
-  const p=clamp((u-1.8)/0.8,0,1);if(p>0)wc_pencil(x,[[1460,O.top-6-4*17],[lerp(1460,1450,p),O.top-6-4*17],[lerp(1460,1890,p),O.top-6-4*17]],1,{col:GV.gold,lw:4,seed:7});}
+// the police station, the desk close: the reports for September and October 1966 in a stack; the officer's hand slides in the
+// stack for 1967, half as tall, beside it, and goes; a pencil line marks half
+function cw_reportsAt(x,tt,P){const O=CW_PD,u=tt-P.half,foot=O.top-6,sl=easeCam(clamp((u-0.3)/1.2,0,1)),go=easeCam(clamp((u-1.8)/0.9,0,1)),sx=lerp(2000,1240,sl);
+  x.drawImage(gv_place("x67deskT"),0,0,W,H);cw_reports(x,sx,foot,4,"September–October 1967",1,fin(u,1.9,0.5));
+  cw_push(x,sx+193+go*900,foot-46,CW.navy,PEOPLE.cw_officer.skin,1,1.45);
+  const p=clamp((u-2.5)/0.9,0,1);if(p>0)wc_pencil(x,[[540,foot-88],[lerp(540,1460,p),foot-88]],1,{col:GV.gold,lw:4,seed:7});}
 // the crossroads at five, after the change: the cars on the right, the clock at five, the booklet in the kiosk's window; the three
 // things everyone knew, tagged as they're said; the officer lowers his glove
 function cw_atFive(x,tt,P){const C=CW_ST,u=tt-P.knew,items=[];CW_LIT=[];
   items.push([16.4+cw_go(tt,P.knew+0.6,1.6,9),()=>cw_car(x,C,{x:1.9,z:16.4+cw_go(tt,P.knew+0.6,1.6,9),col:CW_PAINT[4],tail:1,head:1,driver:[0,[70,52,40],[76,82,98]]})]);
   items.push([40+6*u,()=>cw_car(x,C,{x:1.9,z:40+6*u,col:CW_PAINT[1],tail:1,head:1})]);items.push([64-7*u,()=>cw_car(x,C,{x:-1.9,z:64-7*u,h:Math.PI,col:CW_PAINT[3],head:1})]);
-  items.push([22.5,()=>cw_officerAt(x,C,tt,1,1,easeCam(clamp((tt-P.breath-0.3)/0.9,0,1)))]);cw_depth(items);cw_clockHands(x,C,60);cw_streetLight(x,"dawn");
+  items.push([22.5,()=>cw_officerAt(x,C,tt,1,1,easeCam(clamp((tt-P.breath+0.1)/0.7,0,1)))]);cw_depth(items);cw_clockHands(x,C,60);cw_streetLight(x,"dawn");
   const out=P.title;cw_tagAt(x,tt,P.what,out,1601,452,"what would change");cw_tagAt(x,tt,P.when,out,1400,252,"when");cw_tagAt(x,tt,P.todo,out,250,560,"what to do");}
 scene("dawn",(ctx,S,t,sc)=>{const P=cw_once(sc,"P",()=>{const c=sc.cues,w=(id,s,o)=>wAt(sc,id,s,o);
     return{raise:0.6,every:w("stop","every car"),cross:c.cross+0.2,waited:w("cross","waited"),drove:w("five","drove"),name:c.name,
       border:c.left-0.2,road:c.wheel-0.2,wheelL:w("wheel","with the wheel"),over:c.overtake,see:w("overtake","couldn't see"),crash:w("overtake","and many")-0.2,change:c.change,
       feared:c.feared-0.1,many:w("feared","many feared"),meet:w("feared","head on"),know:c.know-0.3,y64:c.commission+0.5,y65:c.commission+1.1,y66:c.commission+1.7,
       signs:c.signs-0.2,night:w("signs","covered"),booklet:c.booklet-0.2,milk:w("booklet","and the change")-0.1,huge:c.huge-0.2,half:c.half-0.2,
-      knew:c.knew-0.2,what:w("knew","what would"),when:w("knew","when"),todo:w("knew","what they"),breath:c.breath,title:c.breath+0.6};});
+      knew:c.knew-0.2,what:w("knew","what would"),when:w("knew","when"),todo:w("knew","what they"),breath:c.breath,title:c.breath+0.9};});
   gv_shots(ctx,S,t,sc.dur,[
     {at:0,place:"x67dawn",keys:[[0,1270,470,1.55],[P.every-0.4,960,560,1.0],[P.name,990,540,1.1]],d:2.4,push:0.02,draw:(x,tt)=>cw_dawn(x,tt,P)},
-    {at:P.border,place:"x66border",keys:[[P.border,960,540,1.0],[P.border+0.3,1010,520,1.16]],d:3.6,draw:(x,tt)=>cw_border(x,tt,P)},
+    {at:P.border,place:"x66border",keys:[[P.border,960,540,1.0],[P.border+0.3,980,500,1.3]],d:3.8,draw:(x,tt)=>cw_border(x,tt,P)},
     {at:P.road,place:"x66road",keys:[[P.road,960,560,1.6],[P.wheelL+1.4,960,540,1.0]],d:1.8,push:0,draw:(x,tt)=>cw_overtake(x,tt,P)},
     {at:P.crash,place:"x66road",keys:[[P.crash,960,540,1.0],[P.change-0.6,760,560,1.2]],d:2.2,draw:(x,tt)=>cw_towShot(x,tt,P)},
-    {at:P.feared,place:"x67night",keys:[[P.feared,960,560,1.0],[P.many,1060,560,1.12]],d:3,draw:(x,tt)=>cw_whatIf(x,tt,P)},
+    {at:P.feared,place:"x67night",keys:[[P.feared,960,560,1.0],[P.feared+0.6,1090,580,1.55]],d:4.2,draw:(x,tt)=>cw_whatIf(x,tt,P)},
     {at:P.know,place:"x63office",keys:[[P.know,960,540,1.0]],draw:(x,tt)=>cw_commission(x,tt,P)},
     {at:P.signs,place:"x67pole",keys:[[P.signs,1100,540,1.0]],draw:(x,tt)=>cw_swap(x,tt,P)},
     {at:P.booklet,place:"x67post",keys:[[P.booklet,960,560,1.0]],draw:(x,tt)=>cw_postman(x,tt,P)},
-    {at:P.milk,place:"x67grocer",keys:[[P.milk,960,560,1.0]],draw:(x,tt)=>cw_milk(x,tt,P)},
+    {at:P.milk,place:"x67grocer",keys:[[P.milk,920,420,1.3]],draw:(x,tt)=>cw_milk(x,tt,P)},
     {at:P.huge,place:"x67day",keys:[[P.huge,960,540,1.0]],draw:(x,tt)=>cw_morning(x,tt,P)},
-    {at:P.half,place:"x67desk",keys:[[P.half,1060,560,1.0]],draw:(x,tt)=>cw_reportsAt(x,tt,P)},
+    {at:P.half,place:"x67desk",keys:[[P.half,1010,560,1.2]],draw:(x,tt)=>cw_reportsAt(x,tt,P)},
     {at:P.knew,place:"x67dawn",keys:[[P.knew,960,540,1.0]],draw:(x,tt)=>cw_atFive(x,tt,P)}],0.6);
   setScreen(ctx,S);const mk=[[0,"Sweden · 3 September 1967"],[P.border,"Sweden · 1966"],[P.know,"Sweden · 1963"],[P.y64,"Sweden · 1964"],[P.y65,"Sweden · 1965"],[P.y66,"Sweden · 1966"],
     [P.signs,"Sweden · 1967"],[P.huge,"Sweden · 3 September 1967"],[P.half,"Sweden · 1967"],[P.knew,"Sweden · 3 September 1967"]];

@@ -315,5 +315,28 @@ scene("steps",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s
   setScreen(ctx,S);po_pill(ctx,t,[[0,"Istanbul · 1600s"]],gv_io(t,P.baz+0.2,P.tom,0.4));
   wc_paperOver(ctx,S);});
 
+// ---- 7 · Known by name: each product knows who uses it, from the record of who uses what; the registrar's learner records and the
+// three that use them; Mei publishes them, and knows who builds on them ----
+// Mei at her desk, close; o: her options
+POSE.po_lookR=Object.assign({},POSE.listen,{gaze:[0.9,0.1],turn:0.18});POSE.po_lookUp=Object.assign({},POSE.listen,{gaze:[0.25,-0.3],tilt:0.02});
+// her screen: her own product, open
+function po_meiScreen(x){const [sx,sy,sw,sh]=GV_RX.screen;gv_screen(x,sx,sy,sw,sh,"Learner records",null,{barH:44,titleSize:28});gv_lines(x,sx+30,sy+90,sw-80,6,36,0.8);}
+function po_meiDesk(x,tt,o){gv_behind(x,"mei",GV_RX.seat[0],GV_RX.top,GV_RX.seat[1],Object.assign({pose:"listen",t:tt},o||{}));x.drawImage(gv_place("regDesk"),0,0,W,H);po_meiScreen(x);}
+scene("readers",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{top:w("knows","not from")-0.25,mail:w("knows","mailing"),rec:w("knows","the record")-0.1,row1:w("knows","who uses what")-0.3,lr:w("three","learner records")-0.4,
+      us:[w("three","wallet"),w("three","Planning"),w("three","Finance")].map(v=>v-0.15),back:c.mei-0.5,pub:w("mei","publishes"),ev:w("mei","for everyone"),kn:w("mei","she knows")};});
+  gv_shots(ctx,S,t,sc.dur,[
+    // the registrar's office: Mei at her desk
+    {at:0,place:"regClose",keys:[[0,880,540,1.0],[0.1,850,520,1.05]],d:4,draw:(x,tt)=>po_meiDesk(x,tt,{pose:"po_lookR"})},
+    // her desk from above: the mailing list she kept, greyed; the record of who uses what slides over it, close on its first row
+    {at:P.top,place:"regTop",keys:[[P.top,960,520,1.12],[P.row1,840,400,1.35]],d:1.6,draw:(x,tt)=>{po_mailList(x,easeCam(clamp((tt-P.mail)/0.6,0,1)));
+      const u=easeCam(clamp((tt-P.rec)/0.7,0,1));if(u>0)po_whoUses(x,{dx:(1-u)*1300,dy:(1-u)*-60,row1:1,card2:0});}},
+    // the learner records' row: the card, and the three products that use them, each coming in as it's named
+    {at:P.lr,place:"regTop",keys:[[P.lr,1047,500,1.1],[P.lr+0.1,1040,500,1.12]],d:4,draw:(x,tt)=>{po_whoUses(x,{row1:1,card2:easeCam(clamp((tt-P.lr-0.3)/0.6,0,1)),users:i=>clamp((tt-P.us[i])/0.6,0,1)});}},
+    // Mei looks up from it, and nods
+    {at:P.back,place:"regClose",keys:[[P.back,880,520,1.05],[P.back+0.1,860,510,1.09]],d:4,draw:(x,tt)=>{const n=Math.max(0,Math.sin(Math.PI*clamp((tt-P.pub-0.2)/1.0,0,1)));
+      po_meiDesk(x,tt,{pose:"po_lookR",pose2:"po_lookUp",mix:easeCam(clamp((tt-P.back-0.4)/0.6,0,1)),expr:tt>P.pub?"smile":"calm",nod:0.07*n});po_tagAt(x,tt,P.ev,null,1420,190,"for everyone to build on",{size:32});po_tagAt(x,tt,P.kn,null,1420,262,"she knows who does",{size:32});}}]);
+  wc_paperOver(ctx,S);});
+
 /* scaffold */
-["readers","life","found"].forEach(id=>scene(id,(ctx,S,t,sc)=>{gv_shots(ctx,S,t,sc.dur,[{at:0,place:"office",keys:[[0,960,540,1]]}]);wc_paperOver(ctx,S);}));
+["life","found"].forEach(id=>scene(id,(ctx,S,t,sc)=>{gv_shots(ctx,S,t,sc.dur,[{at:0,place:"office",keys:[[0,960,540,1]]}]);wc_paperOver(ctx,S);}));

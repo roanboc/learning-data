@@ -359,5 +359,39 @@ function po_prodCard(ctx,x,y,w,h,name,label,lines,a){if(a<=0.01)return;const k=0
     wc_T(ctx,label,30,154,{w:600,size:30,col:WC_MUTED});lines.forEach((l,i)=>wc_T(ctx,l,30,204+i*46,{w:600,size:32,col:WC_INK}));});ctx.restore();}
 const PO_KC=[[225,"Awards","made from:",["the student system"]],[725,"Learner records","made from:",["the student system","the learning platform","short courses"]],[1225,"Learners near an award","for:",["the near-award dashboard"]]];
 
-const WC_PLACES={st1520:c=>po_paintStreet(c,"1520"),st1600:c=>po_paintStreet(c,"1600"),gate:po_paintGate,hallIn:po_paintHallIn,hallInFront:po_paintHallInFront,clothClose:po_paintClothClose,clothFront:po_paintClothFront,plain:po_paintPlain,air:po_paintAir,airShops:po_paintAirShops,airCrowd:po_paintAirCrowd,airHall:po_paintAirHall,airTrade0:c=>po_paintAirTrade(c,0),airTrade1:c=>po_paintAirTrade(c,1),airTrade2:c=>po_paintAirTrade(c,2),office:gv_paintOffice,faculty:gv_paintFaculty,facDesk:po_paintFacDesk,facTop:po_paintFacTop,tomTop:po_paintTomTop,corridor:po_paintCorridor,planTable:po_paintPlanTable,planTop:po_paintPlanTop,data:gv_paintData,noor:gv_paintNoor,planning:gv_paintPlanning,floor:gv_paintFloor,
+/* ---------- 7 · Known by name: the record of who uses what, on Mei's desk ---------- */
+// Mei's desk, from above: oak, the office's stamp on its pad of red ink, the tray of certificates' corner, her mug
+function po_paintRegTop(ctx){const col=GV.oak;ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),col,{kind:"plaster",line:false,seed:491});
+  ctx.save();ctx.globalCompositeOperation="multiply";const R=wc_rng(37);for(let i=0;i<60;i++){const y=R()*H;ctx.strokeStyle=rgba(wc_dim(col,0.16+R()*0.12),0.14+R()*0.12);ctx.lineWidth=1+R()*2.2;ctx.beginPath();ctx.moveTo(-20,y);
+    for(let x=0;x<=W+40;x+=80)ctx.lineTo(x,y+5*Math.sin(x/250+i)+3*Math.sin(x/90+i*2));ctx.stroke();}ctx.restore();
+  wc_part(ctx,wc_rect(-40,-40,300,250),[150,156,168],1,{lw:1.3});[[248,240,220],[176,40,34],[248,240,220]].forEach((c,i)=>wc_flat(ctx,wc_rect(-30+i*8,-30+i*8,270,200),c,1,"folder"));
+  wc_part(ctx,wc_rect(1730,40,170,90),[70,72,80],1);wc_flat(ctx,wc_rect(1744,52,142,66),[176,40,34],1,"ink");
+  wc_wash(ctx,wc_ell(1790,900,70,70,40),[232,228,216],{kind:"thing",lw:1.6,seed:493});wc_wash(ctx,wc_ell(1790,900,52,52,40),[112,76,52],{kind:"thing",line:false,seed:494});}
+// the mailing list she used to keep, printed: its names in pencil; it greys as it's set aside (g, 0 to 1)
+const PO_ML={x:640,y:120,w:640,h:800};
+function po_mailList(ctx,g){const M=PO_ML,R=wc_rng(811);gv_sheet(ctx,M.x,M.y,M.w,M.h,{rot:-0.02});ctx.save();ctx.translate(M.x+M.w/2,M.y+M.h/2);ctx.rotate(-0.02);ctx.translate(-M.w/2,-M.h/2);
+  wc_T(ctx,"mailing list",44,82,{w:800,size:38,col:mix(WC_DARK,[150,150,156],g)});ctx.fillStyle=rgba(WC_MUTED,0.4);ctx.fillRect(44,106,M.w-88,2);
+  ctx.strokeStyle=rgba(mix(WC_PENCIL,[190,192,198],g),0.7-0.3*g);ctx.lineCap="round";ctx.lineWidth=6;for(let i=0;i<15;i++){const y=160+i*42;let cx=44;const n=2+(R()*2|0);
+    for(let j=0;j<n;j++){const l=50+R()*90;ctx.beginPath();ctx.moveTo(cx,y);for(let u=0;u<=l;u+=6)ctx.lineTo(cx+u,y+1.5*Math.sin(u*0.35+i));ctx.stroke();cx+=l+16;}}
+  if(g>0){ctx.fillStyle=rgba([226,226,230],0.35*g);ctx.fillRect(0,0,M.w,M.h);}ctx.restore();}
+// the record of who uses what: a page, a row for each product: its card (its name and its owner), and the products that use it, in a
+// line behind it as at a stall. PO_WU: the page, and each row's top; o.row1, o.card2 (0 to 1): the first row, the learner records' card;
+// o.users(i): each of its three users as it comes in
+const PO_WU={x:300,y:110,w:1500,h:820,rows:[230,430,640,780],cw:480,ux:860};
+function po_wuCard(ctx,x,y,name,own,a){if(a<=0.01)return;withA(ctx,a,()=>{wc_panel(ctx,x,y,PO_WU.cw,150,{kind:"card",seed:501+name.length});ctx.save();ctx.strokeStyle=rgba(GV.gold,0.85);ctx.lineWidth=3;rr(ctx,x-4,y-4,PO_WU.cw+8,158,13);ctx.stroke();ctx.restore();
+  wc_T(ctx,name,x+26,y+50,{w:800,size:32,col:WC_DARK});own.forEach((l,i)=>wc_T(ctx,l,x+26,y+92+i*34,{w:600,size:26,col:WC_INK}));});}
+function po_wuUser(ctx,x,y,s,a){if(a<=0.01)return;const u=easeCam(clamp(a,0,1)),k=0.9+0.1*spring(a);ctx.save();ctx.translate(x+80*(1-u),y);ctx.scale(k,k);withA(ctx,clamp(a*2,0,1),()=>wc_tag(ctx,0,0,s,{size:28}));ctx.restore();}
+function po_whoUses(ctx,o){o=o||{};const P_=PO_WU,a=o.a==null?1:o.a;if(a<=0.01)return;ctx.save();ctx.translate((o.dx||0),(o.dy||0));withA(ctx,a,()=>{gv_sheet(ctx,P_.x,P_.y,P_.w,P_.h,{rot:0.006});
+  wc_T(ctx,"Who uses what",P_.x+50,P_.y+76,{w:800,size:40,col:WC_DARK});ctx.fillStyle=rgba(WC_MUTED,0.45);ctx.fillRect(P_.x+50,P_.y+100,P_.w-100,2);
+  // the first row: Planning's product, and its one user
+  const r1=clamp(o.row1==null?1:o.row1,0,1),[y1,y2,y3,y4]=P_.rows;po_wuCard(ctx,P_.x+50,y1,"Learners near an award",["owner: Clara Jensen, Planning"],r1);
+  if(r1>0){withA(ctx,r1,()=>wc_T(ctx,"used by",P_.ux,y1+30,{w:600,size:28,col:WC_MUTED}));po_wuUser(ctx,P_.ux,y1+92,"the near-award dashboard",r1);}
+  // the second row: the registrar's learner records, and the three that use them; until it's named, the shape of a row only
+  const c2=clamp(o.card2||0,0,1);if(c2<1){ctx.save();ctx.globalAlpha*=1-c2;ctx.fillStyle=rgba(WC_MUTED,0.3);ctx.fillRect(P_.x+60,y2+40,300,9);ctx.fillRect(P_.x+60,y2+86,220,7);ctx.fillRect(P_.ux,y2+60,520,7);ctx.restore();}
+  po_wuCard(ctx,P_.x+50,y2,"Learner records",["owner: Mei Tanaka,","registrar's office"],c2);if(c2>0)withA(ctx,c2,()=>wc_T(ctx,"used by",P_.ux,y2+30,{w:600,size:28,col:WC_MUTED}));
+  let ux=P_.ux;["Learner wallet","Learners near an award","Tuition forgone"].forEach((s,i)=>{const w=tw(ctx,s,28,700)+40;po_wuUser(ctx,ux,y2+92,s,o.users?o.users(i):0);ux+=w+18;});
+  // more rows, too small to read
+  [y3,y4].forEach((y,i)=>{ctx.save();ctx.fillStyle=rgba(WC_MUTED,0.3);ctx.fillRect(P_.x+60,y+20,280-i*40,9);ctx.fillRect(P_.x+60,y+56,200,7);ctx.fillRect(P_.ux,y+36,360+i*120,7);ctx.restore();});});ctx.restore();}
+
+const WC_PLACES={st1520:c=>po_paintStreet(c,"1520"),st1600:c=>po_paintStreet(c,"1600"),gate:po_paintGate,hallIn:po_paintHallIn,hallInFront:po_paintHallInFront,clothClose:po_paintClothClose,clothFront:po_paintClothFront,plain:po_paintPlain,air:po_paintAir,airShops:po_paintAirShops,airCrowd:po_paintAirCrowd,airHall:po_paintAirHall,airTrade0:c=>po_paintAirTrade(c,0),airTrade1:c=>po_paintAirTrade(c,1),airTrade2:c=>po_paintAirTrade(c,2),office:gv_paintOffice,faculty:gv_paintFaculty,facDesk:po_paintFacDesk,facTop:po_paintFacTop,tomTop:po_paintTomTop,regTop:po_paintRegTop,corridor:po_paintCorridor,planTable:po_paintPlanTable,planTop:po_paintPlanTop,data:gv_paintData,noor:gv_paintNoor,planning:gv_paintPlanning,floor:gv_paintFloor,
   regClose:gv_paintRegistrarClose,regDesk:gv_paintRegistrarDesk,screenFac:c=>gv_paintScreenDesk(c,GV_ROOM.fac),meeting:gv_paintMeeting,desk:gv_paintDesk,boardData:c=>gv_paintBoardClose(c,GV_ROOM.data),platform:gv_paintPlatform};

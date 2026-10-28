@@ -1,0 +1,45 @@
+[
+  {
+    "name": "Where each piece lives",
+    "key": "where-each-piece-lives-en",
+    "dir": "films/governance-on-the-map/3-where-each-piece-lives/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/where-each-piece-lives/film.js",
+    "video": "dist/where-each-piece-lives.mp4",
+    "file": "where-each-piece-lives.mp4",
+    "captions": [
+      [
+        "films/governance-on-the-map/3-where-each-piece-lives/captions/en.srt",
+        "where-each-piece-lives.en.srt"
+      ],
+      [
+        "films/governance-on-the-map/3-where-each-piece-lives/captions/es.srt",
+        "where-each-piece-lives.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/governance-on-the-map/3-where-each-piece-lives/source",
+      ":(exclude)films/governance-on-the-map/3-where-each-piece-lives/source/src/i18n/es/captions.js",
+      "films/data-governance/shared",
+      "films/master-and-reference-data/shared",
+      "films/analytics-engineering/shared",
+      "films/from-words-to-data/shared",
+      "films/when-things-go-wrong/characters",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 327,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 30.1,
+      "status": "Drawn to the rule"
+    }
+  }
+]

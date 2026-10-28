@@ -1,0 +1,32 @@
+{
+  "kicker": "One home for every piece",
+  "kicker_es": "Un hogar para cada pieza",
+  "title_es": "Dónde vive cada pieza",
+  "h1": "Where each piece lives: one home, and its copies",
+  "h1_es": "Dónde vive cada pieza: un hogar, y sus copias",
+  "lead": "A planner's request waits nine days with the wrong person, because a page on the data platform still names the table's old owner. Yusuf counts seven places that hold governance's pieces, and Noor gives each piece one home and an owner, with every copy synced one way and checked every night.",
+  "lead_es": "La solicitud de una planificadora espera nueve días con la persona equivocada: la página de la tabla en la plataforma aún nombra a su antiguo dueño. Yusuf cuenta siete lugares con piezas de la gobernanza, y Noor da a cada pieza un hogar y un dueño, con cada copia sincronizada en un solo sentido y controlada cada noche.",
+  "description": "A film about where each piece of data governance lives: Korea under the Joseon kings, where one office made the annals of each reign from the court historians' notes and printed them, every copy the same, kept in four archives; 1592, when three of them burned and two local scholars guarded the last copy, Jeonju's, for more than a year; the annals printed again from it in five sets far apart, aired and checked by a historian every few years, and read by anyone online today; a planner's request that waits nine days, because the data platform's page for a table still names the person who built it; seven places that hold governance's pieces, named for what they do; one home for every piece, where it's changed, and an owner, who decides it, and in every other place a copy that says where it came from and when; the flows between them, each one way; a check every night that finds the copies that drifted, and tells each owner what changed; and every team still in its own tool, knowing which copy is theirs to change, and which only to read.",
+  "description_es": "Una película sobre dónde vive cada pieza de la gobernanza de datos: Corea bajo los reyes de Joseon, donde una oficina hacía los anales de cada reinado a partir de las notas de los historiadores de la corte y los imprimía, todas las copias iguales, guardadas en cuatro archivos; 1592, cuando tres de ellos ardieron y dos eruditos del lugar cuidaron la última copia, la de Jeonju, durante más de un año; los anales impresos de nuevo a partir de ella en cinco juegos lejos unos de otros, aireados y revisados por un historiador cada pocos años, y que hoy cualquiera lee en línea; la solicitud de una planificadora que espera nueve días, porque la página de una tabla en la plataforma de datos aún nombra a quien la construyó; siete lugares que guardan las piezas de la gobernanza, nombrados por lo que hacen; un solo hogar para cada pieza, donde se cambia, y un dueño, que la decide, y en cada otro lugar una copia que dice de dónde vino y cuándo; los flujos entre ellos, cada uno en un solo sentido; un control cada noche que encuentra las copias que se desviaron, y le avisa a cada dueño qué cambió; y cada equipo en su propia herramienta, sabiendo qué copia le toca cambiar, y cuál solo leer.",
+  "card": "A request waits nine days with the wrong person. Give every piece one home, and sync every copy one way.",
+  "card_es": "Una solicitud espera nueve días con la persona equivocada. Dale a cada pieza un hogar, y sincroniza cada copia en un solo sentido.",
+  "chapters_es": {
+    "copy": "Nadie escribe en una copia",
+    "nine": "Nueve días",
+    "seven": "Siete lugares",
+    "home": "Un hogar para cada una",
+    "way": "En un solo sentido",
+    "check": "Lo encuentra un control",
+    "theirs": "Lo que le toca cambiar"
+  },
+  "past": [
+    "Korea, the Joseon annals saved in 1592",
+    "A copy can be trusted when it's made from its home, one way, and checked."
+  ],
+  "past_es": [
+    "Corea, los anales de Joseon salvados en 1592",
+    "Se puede confiar en una copia cuando sale de su hogar, en un solo sentido, y se controla."
+  ],
+  "next_h": "You've seen every piece of governance given one home and an owner, and every copy made from it one way, and checked. The next series builds it in the tools: Governance you can use.",
+  "next_h_es": "Viste cómo cada pieza de la gobernanza recibe un hogar y un dueño, y cada copia sale de él en un solo sentido, y se controla. La próxima serie lo construye en las herramientas: Gobernanza que puedes usar."
+}

@@ -380,5 +380,56 @@ scene("life",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,
         po_slip(x,ex,ey,"credentials · edition 1",{lift,lit:gv_io(tt,P.first,P.ret-0.3,0.4),grey:fin(tt,P.ret+0.55,0.7)});}}}]);
   wc_paperOver(ctx,S);});
 
-/* scaffold */
-["found"].forEach(id=>scene(id,(ctx,S,t,sc)=>{gv_shots(ctx,S,t,sc.dur,[{at:0,place:"office",keys:[[0,960,540,1]]}]);wc_paperOver(ctx,S);}));
+/* ---------- 9 · Found, and trusted ---------- */
+// Anil finds Planning's product in the catalogue, among the others, and opens it: its promise, its owner, where to ask. Like the buyer at
+// the master's stall, he knows; he fills in his sheet of places. The corridor's card, gold now; binder 22, its line run in the work; the
+// shelf with one more gap. The street in the evening; the six products with their users coming up to them; Anil's next request, its
+// owner line empty. The end card
+scene("found",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{scr:w("finds","Planning")-0.15,find:w("finds","Planning"),cat:w("finds","catalogue"),among:w("finds","among"),open:w("finds","its promise")-0.6,
+      rows:[w("finds","its promise"),w("finds","its owner"),w("finds","where to ask")],bz:c.like-0.35,kn:[w("like","where to"),w("like","what it"),w("like","who stands")],
+      sheet:w("like","who stands")+0.6,late:c.late-0.3,gold:w("late","Clara")-0.2,runs:c.runs-0.3,hl:w("runs","runs"),note:w("runs","a product")-0.1,noteEnd:c.runs+3.82+0.15,
+      shelf:w("runs","a check")+0.35,eve:c.gives-0.3,data:w("gives","Governance")-0.25,tags:[w("gives","people find")+0.25,w("gives","trust it"),w("gives","build on")],
+      own:c.own,next:c.next-0.35,req:w("next","Next")+0.6,anil:w("next","a list")+0.4,owner:w("next","an owner"),end:c.breath-0.2};});
+  gv_shots(ctx,S,t,sc.dur,[
+    // Anil's office: he turns to his screen, where the catalogue is open
+    {at:0,place:"faculty",keys:[[0,1100,560,1.22],[0.1,1080,555,1.26]],d:3,draw:(x,tt)=>{
+      gv_behind(x,"anil",GV_FX.seat[0],GV_FX.top,GV_FX.seat[1],{pose:"listen",pose2:"po_lookR",mix:fin(tt,0.3,0.7),t:tt,flip:true});x.drawImage(gv_place("facDesk"),0,0,W,H);po_catSmall(x);}},
+    // his screen, close: the catalogue's plain page, the six products like stalls along a street; he finds Planning's, among the
+    // others, and opens it: its promise, its owner, and where to ask
+    {at:P.scr,place:"screenFac",keys:[[P.scr,1060,330,1.3],[P.cat-0.3,960,430,1.03],[P.open+0.1,960,440,1.1]],d:1.8,push:0.004,draw:(x,tt)=>{
+      const lit=i=>i===2?fin(tt,P.find+0.75,0.4):0.55*gv_io(tt,P.among+i*0.12,P.among+i*0.12+0.7,0.25)*(i===2?0:1);
+      po_catPage(x,{lit,open:clamp((tt-P.open)/0.6,0,1),rows:k=>fin(tt,P.rows[k],0.4)});
+      const [gx,gy,gw,gh]=po_cgRect(2),mv=easeCam(clamp((tt-P.find)/0.7,0,1));
+      po_cursor(x,lerp(1420,gx+gw*0.62,mv),lerp(700,gy+gh*0.58,mv),fin(tt,P.scr+0.2,0.3)*(1-fin(tt,P.open+0.3,0.3)),clamp((tt-P.open+0.25)/0.5,0,1));}},
+    // like a buyer in the bazaar: the woman at the master's stall, and what she knows there, as in the first chapter
+    {at:P.bz,place:"st1600",keys:[[P.bz,760,560,1.16],[P.bz+0.1,740,560,1.22]],d:3,draw:(x,tt)=>{const w_=po_stroll(PO_STR,tt,-100,0.3,11.5,-2.0,6.3,1.3);
+      po_master(x,tt,{pose:"po_offer",expr:"smile"});po_walker(x,"po_woman",w_,{t:tt,flip:true,expr:"smile"});po_knows(x,tt,P.kn,null);}},
+    // Anil, his sheet of places: he fills it in
+    {at:P.sheet,place:"facTop",keys:[[P.sheet,960,500,1.04],[P.sheet+0.1,1010,500,1.1]],d:3,draw:(x,tt)=>{const f=clamp((tt-P.sheet-0.25)/1.6,0,1);po_placesSheet(x,{fill:f});
+      const n=PO_PLACES.length,i=Math.min(n-1,Math.floor(f*n)),p=clamp(f*n-i,0,1),S_=PO_SP,[px,py]=po_penAt(x,PO_PLACES[i],S_.x+S_.w-200,S_.y+222+i*S_.row+44,36,p);
+      po_pen(x,px,py,gv_io(tt,P.sheet+0.05,P.sheet+2.1,0.25));}},
+    // the corridor: where the red question hung, a gold card now; the calendar at the next census day
+    {at:P.late,place:"corridor",keys:[[P.late,900,470,1.12],[P.late+0.1,960,470,1.06]],d:4,draw:(x,tt)=>{po_tableCard(x,640,250,{q:1,gold:fin(tt,P.gold,0.6)});
+      po_calendar(x,PO_CW.cal[0],PO_CW.cal[1],PO_CAL[5],null,0);po_tagAt(x,tt,P.late-1,null,PO_CW.cal[0],PO_CW.cal[1]+250,"next census day",{size:30});}},
+    // binder 22, open on Yusuf's desk: a green highlighter goes behind its line, and he writes under it how it runs now
+    {at:P.runs,place:"desk",keys:[[P.runs,1152,432,1.25],[P.runs+0.1,1140,440,1.3]],d:4,draw:(x,tt)=>{const nt=clamp((tt-P.note)/(P.noteEnd-P.note),0,1);
+      po_openBinder(x,1,{hl:clamp((tt-P.hl)/1.1,0,1),note:nt});const B=PO_OB,[px,py]=po_penAt(x,PO_OBN,po_obX()+70,B.y+420,32,nt);po_pen(x,px,py,gv_io(tt,P.note-0.35,P.noteEnd+0.3,0.3));}},
+    // his office: binder 22 on his desk, and on the shelf behind him one more gap
+    {at:P.shelf,place:"office",keys:[[P.shelf,1230,560,1.3],[P.shelf+0.1,1250,550,1.34]],d:3,draw:(x,tt)=>{po_binders(x,{taken:true});gv_deskBook(x);
+      person(x,"yusuf",1290,905,0.8,{pose:"listen",t:tt,expr:"smile",nod:0.05*Math.max(0,Math.sin(Math.PI*clamp((tt-P.shelf-0.3)/0.9,0,1)))});}},
+    // the cap makers' street in the evening: buyers come and go, the woman and her friend among them
+    {at:P.eve,place:"st1600",keys:[[P.eve,820,560,1.1],[P.eve+0.1,860,550,1.06]],d:4,draw:(x,tt)=>{po_evening(x,tt,P.eve-1.2);po_light(x,"eve",0.85);}},
+    // the six products again, like stalls along a street; their users come up to them, Anil among them; what governance gives; and on
+    // "own the product", each owner's name in gold
+    {at:P.data,place:"plain",keys:[[P.data,960,540,1.0],[P.data+0.1,960,530,1.03]],d:5,draw:(x,tt)=>{
+      po_sixStalls(x,{users:(i,j)=>clamp((tt-P.data-0.35-i*0.28-j*0.14)/0.55,0,1),own:i=>fin(tt,P.own+0.1+i*0.16,0.45)});
+      ["find it","trust it","build on it"].forEach((s_,k)=>po_tagAt(x,tt,P.tags[k],null,660+k*300,806,s_,{size:40,wash:GV.gold,washA:0.42}));}},
+    // Anil's desk: he starts his next change request, a list for the faculty's student advisers; its owner line stays empty
+    {at:P.next,place:"facTop",keys:[[P.next,960,450,1.18],[P.next+0.1,960,440,1.24]],d:4,draw:(x,tt)=>{const u=easeCam(fin(tt,P.req-0.4,0.8)),an=clamp((tt-P.anil)/1.1,0,1),cr={x:410,y:190,w:1100,h:480};
+      po_changeReq(x,cr.x,cr.y+520*(1-u),cr.w,cr.h,{name:"A list for the faculty's student advisers",lines:5,rot:-0.01,rows:[{l:"requested by:",v:"Anil Kurian",hand:true,p:an},{l:"owner:"}],
+        after:q=>{const [rx,ry]=po_crRowAt(q,cr.h,[{l:"requested by:"},{l:"owner:"}],1);gv_qmark(q,rx+106,ry+4,56,fin(tt,P.owner,0.5));}});
+      if(an>0&&an<1){const [rx,ry]=po_crRowAt(x,cr.h,[{l:"requested by:"},{l:"owner:"}],0),[px,py]=po_penAt(x,"Anil Kurian",cr.x+rx+4,cr.y+ry,30,an);po_pen(x,px,py,gv_io(tt,P.anil-0.3,P.anil+1.4,0.25));}}}]);
+  setScreen(ctx,S);po_pill(ctx,t,[[P.bz,"Istanbul · 1600s"]],gv_io(t,P.bz+0.1,P.sheet,0.35)+gv_io(t,P.eve+0.1,P.data,0.35));
+  gv_end(ctx,S,t,P.end,"A product with an owner","Own the product, not only the meaning.","Film 8 of 19");
+  wc_paperOver(ctx,S);});

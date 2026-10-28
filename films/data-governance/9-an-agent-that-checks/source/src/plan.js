@@ -111,10 +111,11 @@ const AC_COLS=[["learner code","pseudonymous"],["name","direct"],["email","direc
 // the form on the screen close up (AC_SC): the list's name, the change, its checks (ok: 0 red to 1 green), the columns and their
 // classes; the new row in green, a red question mark where its class should be (q), the agent's draft there (draft), or the class
 // Anil gives it, landing at clsAt in a gold ring; and "Signed", the empty line for the faculty's signature, ringed in pencil (ring).
-// read and readA: the agent's star and its cyan line on a row; fade sets the form back under what's laid over it
+// read and readA: the agent's star and its cyan line on a row; fade sets the form back under what's laid over it, its bar's title too,
+// so nothing reads through a title card
 const AC_F={x:380,list:230,title:284,chk:342,head:410,y0:466,dy:58,cls:716,sign:776,read:[362,640]};
-function ac_form(ctx,t,o){o=o||{};const [x,y,w,h]=AC_SC,F=AC_F,rows=AC_COLS.concat([[AC_NEW,null]]),ok=clamp(o.ok||0,0,1);
-  gv_screen(ctx,x,y,w,h,"Change request",q=>withA(q,1-0.8*(o.fade||0),()=>{
+function ac_form(ctx,t,o){o=o||{};const [x,y,w,h]=AC_SC,F=AC_F,rows=AC_COLS.concat([[AC_NEW,null]]),ok=clamp(o.ok||0,0,1),fa=clamp(1-0.8*(o.fade||0),0,1);
+  gv_screen(ctx,x,y,w,h,fa<1?null:"Change request",q=>{if(fa<1)withA(q,fa,()=>wc_T(q,"Change request",x+18,y+54*0.72,{w:700,size:32,col:[255,255,255]}));withA(q,fa,()=>{
     wc_T(q,"Call list",F.x,F.list,{w:700,size:30,col:WC_MUTED});wc_T(q,o.title||"Add each learner's date of birth",F.x,F.title,{w:800,size:40,col:WC_DARK});
     // its checks: a light and a line, red with a gap, green once they pass
     q.save();q.fillStyle=rgba(mix(GV.red,GV.green,ok),1);q.beginPath();q.arc(F.x+12,F.chk-10,12,0,TAU);q.fill();q.restore();
@@ -133,7 +134,7 @@ function ac_form(ctx,t,o){o=o||{};const [x,y,w,h]=AC_SC,F=AC_F,rows=AC_COLS.conc
     q.save();q.strokeStyle=rgba(WC_MUTED,0.4);q.lineWidth=2;q.beginPath();q.moveTo(F.x,F.sign-50);q.lineTo(x+650,F.sign-50);q.stroke();
     q.strokeStyle=rgba(WC_MUTED,0.6);q.lineWidth=1.8;q.beginPath();q.moveTo(F.x+134,F.sign+8);q.lineTo(F.x+520,F.sign+8);q.stroke();q.restore();
     wc_T(q,"Signed",F.x,F.sign,{w:600,size:30,col:WC_MUTED});if(o.ring>0)wc_ring(q,F.x+327,F.sign-2,190,34,o.ring,{col:WC_PENCIL,lw:4,seed:23});
-  }),{titleSize:32,barH:54});}
+  });},{titleSize:32,barH:54});}
 // the agent's note, pinned beside the new row: three dashed cyan cards under its star, "where", "our rule" and "who decides", each
 // coming in as it's named (p, three, 0 to 1; left out, all there); lit, a card washed green (a rule that runs) or cyan; res, the gold
 // tick that resolves it; a fades it all; at x0, y0 (the close-up's, left out)

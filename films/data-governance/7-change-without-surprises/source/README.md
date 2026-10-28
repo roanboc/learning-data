@@ -4,7 +4,7 @@
 
 | File | What it holds |
 |---|---|
-| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Yusuf, Mei, Dagen H), and the moment its poster shows (the crossroads at five, as the cars drive on along the right). |
+| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Yusuf, Jun, Mei, Dagen H), and the moment its poster shows (the crossroads at five, as the cars drive on along the right). |
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). The film re-times itself to the voice. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/breath.js` | The few longer pauses: holds after some lines, while something happens on screen (the cars crossing and driving on, the covers swapped, the owners writing their lines, Mei's stamp, the two notes side by side, Marta's nod, the last look at Thursday), and two wordless moments (the officer lowering his glove before the title, and the ending before the end card). |

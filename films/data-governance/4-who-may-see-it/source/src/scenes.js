@@ -137,7 +137,7 @@ scene("counted",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id
       ws_pencil(x,lerp(fx-fw/2-30,fx+fw/2+30,easeCam(fin(tt,P.y87+0.9,0.6))),ws_cutY(0),gv_io(tt,P.y87+0.6,P.y87+1.7,0.25));
       ws_tagAt(x,tt,P.mil,P.betw,WS_TAL[0]+180,WS_TAL[1]+350,"61 million people",{size:32});ws_tagAt(x,tt,P.one+0.1,P.betw,WS_TAL[0]+180,WS_TAL[1]-40,"counting",{size:32});ws_tagAt(x,tt,P.two+0.1,P.betw,WS_BOX[0],WS_BOX[1]+150,"knowing who",{size:32});}}]);
   ws_pill(ctx,t,mk,fin(t,0.6,0.5)*(1-fin(t,P.betw,0.5)));
-  gv_title(ctx,S,t,P.title,"Who may see it","classify once, protect it everywhere","Film 4 of 19 · data governance");
+  gv_title(ctx,S,t,P.title,"Who may see it","classify once, protect it everywhere","Film 4 of 10 · data governance");
   wc_paperOver(ctx,S);});
 
 
@@ -394,5 +394,5 @@ scene("grants",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,
       ws_tagAt(x,tt,P.num,null,(WS_TB.x+WS_TB.div)/2,WS_TB.y-60,"counting",{size:32});ws_tagAt(x,tt,P.who,null,(WS_TB.div+WS_TB.x+WS_TB.w)/2,WS_TB.y-60,"knowing who",{size:32});
       gv_classChipAt(x,tt,P.once,WS_TB.div+30,WS_TB.y+140,"direct",{size:28});}}]);
   wc_year(ctx,56,72,"December 2026",fin(t,0.3,0.5)*(1-fin(t,P.rev,0.4)));wc_year(ctx,56,72,"West Germany · 1987",gv_io(t,P.tb,P.morph,0.4));
-  gv_end(ctx,S,t,P.end,"Who may see it","Classify once; protect it everywhere.","Film 4 of 19");
+  gv_end(ctx,S,t,P.end,"Who may see it","Classify once; protect it everywhere.","Film 4 of 10");
   wc_paperOver(ctx,S);});

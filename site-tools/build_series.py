@@ -3,11 +3,14 @@
 
     python site-tools/build_series.py
 
-The site is organised in big topics (TOPICS below), each holding films and series. Five series are built this way:
+The site is organised in big topics (TOPICS below), each holding films and series. Seven series are built this way:
 From words to data (films/from-words-to-data/, on the site at from-words-to-data/), In the weeds of data crafting
 (films/analytics-engineering/, at in-the-weeds/), The map before the data (films/enterprise-architecture/, at
-enterprise-architecture/), The same one, everywhere (films/master-and-reference-data/, at master-and-reference-data/) and
-Governance you can use (films/data-governance/, at data-governance/). Each is described once, in SERIES below: its folder, its place on the site, its names, the
+enterprise-architecture/), The same one, everywhere (films/master-and-reference-data/, at master-and-reference-data/), and
+the three series of data governance: Governance principles (films/data-governance/, at data-governance/), Governance on the
+map (films/governance-on-the-map/, at governance-on-the-map/) and Governance you can use (films/governance-in-practice/, at
+governance-in-practice/). A series with no film on the site yet has no pages, and the topics leave it out until its first
+film is out. Each is described once, in SERIES below: its folder, its place on the site, its names, the
 hand-written pages that show its cards, and what each film builds on. The films and series whose pages are written by hand
 (The Inner Life of Data, A Sharper Sketch, When things go wrong) are described, for their cards, in HAND.
 For each series: its page (site/<slug>/) and, for each film, its Watch page (site/<slug>/<film>/) and, if it has them, its
@@ -90,13 +93,40 @@ def mr_builds_on(lg, f, all_films, R):
 
 
 def gov_builds_on(lg, f, all_films, R):
-    """Governance you can use: the first film builds on Declare it, then build it (In the weeds of data crafting), where the data
+    """Governance principles: the first film builds on Declare it, then build it (In the weeds of data crafting), where the data
     team's loop of ten steps is drawn, which it pins governance to, and on Who owns what, where each fact's meaning has an owner;
     each later film builds on the one before."""
     if f["index"] == 0:
         RE = R if lg == "en" else R[3:]
         return (f'<p class="builds-on">Builds on <a href="{RE}in-the-weeds/declare-it-then-build-it/"><i>Declare it, then build it</i></a> and <a href="{RE}in-the-weeds/who-owns-what/"><i>Who owns what</i></a></p>' if lg == "en" else
                 f'<p class="builds-on">Amplía <a href="{RE}in-the-weeds/declare-it-then-build-it/"><i>Decláralo, luego constrúyelo</i></a> y <a href="{RE}in-the-weeds/who-owns-what/"><i>Quién es dueño de qué</i></a></p>')
+    return after_previous(lg, f, all_films)
+
+
+def series_link(lg, RE, sid):
+    """A link to a series' page, by its id in SERIES, with its name, from a page whose path to its language's root is RE."""
+    S = next(x for x in SERIES if x["id"] == sid)
+    return f'<a href="{RE}{S["slug"]}/"><i>{S["name"][lg]}</i></a>'
+
+
+def gov_map_builds_on(lg, f, all_films, R):
+    """Governance on the map: the first film builds on the series before it, Governance principles, whose films find what's worth
+    keeping and who decides, and on The map before the data, whose kind of map it draws governance on; each later film builds on
+    the one before."""
+    if f["index"] == 0:
+        RE = R if lg == "en" else R[3:]
+        return (f'<p class="builds-on">{T(lg, "Builds on the series", "Amplía las series")} {series_link(lg, RE, "data-governance")} '
+                f'{T(lg, "and", "y")} {series_link(lg, RE, "enterprise-architecture")}</p>')
+    return after_previous(lg, f, all_films)
+
+
+def gov_use_builds_on(lg, f, all_films, R):
+    """Governance you can use: the first film builds on the two series before it, Governance principles and Governance on the map,
+    whose decisions and map it builds with the tools; each later film builds on the one before."""
+    if f["index"] == 0:
+        RE = R if lg == "en" else R[3:]
+        return (f'<p class="builds-on">{T(lg, "Builds on the series", "Amplía las series")} {series_link(lg, RE, "data-governance")} '
+                f'{T(lg, "and", "y")} {series_link(lg, RE, "governance-on-the-map")}</p>')
     return after_previous(lg, f, all_films)
 
 
@@ -111,8 +141,10 @@ def gov_builds_on(lg, f, all_films, R):
 # being made (series.json's "coming") too; next: the id of the series to watch after this one, which its last film's page offers
 # (in Where next? and beside the series' films) once that series has a film on the site;
 # blocks: the hand-written pages that show its first film's card, between <!-- <id>: made by site-tools/build_series.py --> and
-# <!-- /<id> -->: (path under site/, language, "card", the path from that page to the site's root, and to the series' folder).
-# The series' place among the topics, and its card on the Topics and home pages, are in TOPICS below.
+# <!-- /<id> -->: (path under site/, language, "card", the path from that page to the site's root, and to the series' folder);
+# project: the folder under films/ whose example project its films show (its own folder if not given).
+# The series' place among the topics, and its card on the Topics and home pages, are in TOPICS below. The three series of data
+# governance are one pack: principles, then the organisation's map, then making it work, each the next of the one before.
 SERIES = [
     dict(id="from-words-to-data", dir="from-words-to-data", slug="from-words-to-data",
          name={"en": "From words to data", "es": "De las palabras a los datos"}, builds_on=fw_builds_on,
@@ -134,10 +166,18 @@ SERIES = [
          marks={"en": "DAMA and DAMA-DMBOK are trademarks of DAMA International, and ArchiMate of The Open Group, named or drawn only to identify that body of knowledge and that notation. This project is not affiliated with or endorsed by them.",
                 "es": "DAMA y DAMA-DMBOK son marcas de DAMA International, y ArchiMate de The Open Group, nombradas o dibujadas solo para identificar ese cuerpo de conocimiento y esa notación. Este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
     dict(id="data-governance", dir="data-governance", slug="data-governance",
-         name={"en": "Governance you can use", "es": "Gobernanza que puedes usar"}, builds_on=gov_builds_on,
-         place={"en": "university", "es": "universidad"}, blocks=[],
+         name={"en": "Governance principles", "es": "Principios de gobernanza"}, builds_on=gov_builds_on,
+         place={"en": "university", "es": "universidad"}, blocks=[], next="governance-on-the-map",
          marks={"en": "DAMA and DAMA-DMBOK are trademarks of DAMA International, and DCAM of the EDM Association, named or drawn only to identify those bodies of knowledge; this project is not affiliated with or endorsed by them.",
                 "es": "DAMA y DAMA-DMBOK son marcas de DAMA International, y DCAM de la EDM Association, nombradas o dibujadas solo para identificar esos cuerpos de conocimiento; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
+    dict(id="governance-on-the-map", dir="governance-on-the-map", slug="governance-on-the-map",
+         name={"en": "Governance on the map", "es": "La gobernanza en el mapa"}, builds_on=gov_map_builds_on,
+         place={"en": "university", "es": "universidad"}, blocks=[], next="governance-in-practice",
+         marks={"en": "DAMA and DAMA-DMBOK are trademarks of DAMA International, DCAM of the EDM Association, and ArchiMate of The Open Group, named or drawn only to identify those bodies of knowledge and that notation; this project is not affiliated with or endorsed by them.",
+                "es": "DAMA y DAMA-DMBOK son marcas de DAMA International, DCAM de la EDM Association, y ArchiMate de The Open Group, nombradas o dibujadas solo para identificar esos cuerpos de conocimiento y esa notación; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
+    dict(id="governance-in-practice", dir="governance-in-practice", slug="governance-in-practice",
+         name={"en": "Governance you can use", "es": "Gobernanza que puedes usar"}, builds_on=gov_use_builds_on,
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering"),
 ]
 for _S in SERIES:
     _S["root"] = ROOT / "films" / _S["dir"]
@@ -332,7 +372,7 @@ TOPICS = [
          who={"en": "For data stewards and architects, and anyone whose data lives in many systems", "es": "Para custodios y arquitectos de datos, y para quien tiene sus datos en muchos sistemas"},
          line={"en": "The people and things a business is about, kept once and shared across its systems, and the lists that sort them.",
                "es": "Las personas y las cosas de las que trata un negocio, guardadas una vez y compartidas entre sus sistemas, y las listas que las clasifican."}),
-    dict(id="data-governance", items=["data-governance"],
+    dict(id="data-governance", items=["data-governance", "governance-on-the-map", "governance-in-practice"],
          name={"en": "Data governance", "es": "Gobernanza de datos"},
          who={"en": "For governance teams and data owners, and anyone asked to make the rules work", "es": "Para equipos de gobernanza y dueños de datos, y para quien debe hacer que las reglas funcionen"},
          line={"en": "Who decides what, and how each decision reaches the work: policies that run as checks, owners and tests, not on a shelf.",
@@ -343,6 +383,11 @@ TOPICS = [
 def topic_of(item_id):
     """The topic that holds a film or a series of HAND or SERIES."""
     return next(t for t in TOPICS if item_id in t["items"])
+
+
+def shown(t):
+    """The films and series a topic's cards show: all of them, but a series with no film on the site yet."""
+    return [i for i in t["items"] if all(S["id"] != i or films(S)[1] for S in SERIES)]
 
 
 def entry(lg, item_id):
@@ -376,7 +421,7 @@ def entry(lg, item_id):
 
 def series_totals():
     """The total length of every series a topic card shows, as "35 min": check_site.py allows these lengths."""
-    return {f'{e["meta"].split(" · ")[0]}' for t in TOPICS for i in t["items"] for e in [entry("en", i)] if e["kind"] == "series"}
+    return {f'{e["meta"].split(" · ")[0]}' for t in TOPICS for i in shown(t) for e in [entry("en", i)] if e["kind"] == "series"}
 
 
 # ---------------------------------------------------------------- page parts
@@ -561,9 +606,9 @@ def series_nav(lg, f, films_, R, rel):
 
 
 def project_url(f, path):
-    """A file or folder of the series' example project on GitHub: a folder ends with /."""
+    """A file or folder of the series' example project on GitHub (its "project" folder's, in SERIES): a folder ends with /."""
     kind = "tree" if path.endswith("/") or not path else "blob"
-    return f'{REPO}/{kind}/main/films/{f["series"]["dir"]}/project/{path}'.rstrip("/")
+    return f'{REPO}/{kind}/main/films/{f["series"].get("project", f["series"]["dir"])}/project/{path}'.rstrip("/")
 
 
 def project_section(lg, f):
@@ -859,7 +904,7 @@ def topics_page(lg):
     path = "topics/"
     h, R = head(lg, path, TOPICS_PAGE["title"][lg], TOPICS_PAGE["desc"][lg], TOPICS_PAGE["desc"][lg], "poster.jpg")
     RL = R if lg == "en" else R[3:]
-    es = {t["id"]: [entry(lg, i) for i in t["items"]] for t in TOPICS}
+    es = {t["id"]: [entry(lg, i) for i in shown(t)] for t in TOPICS}
     firsts = [e["posters"][0] for t in TOPICS for e in es[t["id"]]]
     seconds = [p for t in TOPICS for e in es[t["id"]] for p in e["posters"][1:2]]
     mosaic = "".join(f'<img src="{R}assets/{p}" alt="">' for p in (firsts + seconds)[:8])
@@ -884,7 +929,7 @@ def tiles(lg, R):
     out = []
     for t in TOPICS[1:]:
         rows = []
-        for i in t["items"]:
+        for i in shown(t):
             e = entry(lg, i)
             lang = ' lang="en"' if lg == "es" and e["title_lang"] == "en" else ""
             small = e["kicker"] if e["kind"] == "series" else f'{e["kicker"]} · {e["len"]} min'

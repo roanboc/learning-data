@@ -1,7 +1,7 @@
 {
   "key": "teachers-of-data",
   "title": "Teachers of data",
-  "sub": "The tenth film of a series on data governance, and the last of its first part: why most people keep a rule, and the governance team's daily work of teaching, from a page beside every check to a new rule that warns before it stops anyone.",
+  "sub": "The tenth and last film of a series on data governance: why most people keep a rule, and the governance team's daily work of teaching, from a page beside every check to a new rule that warns before it stops anyone.",
   "howto": "The film is painted in watercolour, in the university's own rooms, and at a crossing in Bogotá in 1995. Behind each person, a soft wash of their side: gold for the business side, cyan for the technical side, warm umber for the people of the past. Gold is governance's decisions, green runs in the work, grey can go, and amber is a warning.",
   "src": [
     "plan.js",

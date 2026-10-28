@@ -406,7 +406,7 @@ function ledFrame(ctx,x,y,w,h,c,img,o){o=o||{};const p=o.pad==null?Math.max(4,w*
 function plaque(ctx,x,y,w,rows,c){const h=20+rows.length*52;glass(ctx,x,y,w,h,14,c,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.9)"});
   rows.forEach((r,i)=>{const yy=y+16+i*52;let tx=x+18;if(r[2]){const lw=logo(ctx,r[2],tx,yy+8,28);tx+=Math.max(lw,26)+10;}T(ctx,r[0],tx,yy+16,{size:15,w:700,color:rgba(SOFT,0.95)});T(ctx,r[1],tx,yy+40,{size:21,w:700});});return h;}
 
-// Teachers of data, film 10 of the data governance series. One line per id; the film re-times itself to the voice.
+// Teachers of data, film 10 of 10 of Governance principles, the first series on data governance. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
 const NARR={
 "crossing":{"name":"The mime before the fine","lead":1.6,"tail":1.0,"vo":[
@@ -3659,16 +3659,20 @@ const TT_FB={seat:590,screen:[820,300,540,330]};
 const tt_turned=fn=>c=>{c.translate(W,0);c.scale(-1,1);fn(c);};
 
 /* ---------- Noor's map ---------- */
-// on Noor's map, close (GV_MC): "Govern data" lights gold in the strategy band, over one of the cards already there, and the next part's
-// three films go up beside it, from just after it to the band's end. st: gov (0 to 1), next(j)
-const TT_NEXT=[["11","A capability,","not a project"],["12","Who does what,","end to end"],["13","Where each","piece lives"]];
+// on Noor's map, close (GV_MC): "Govern data" lights gold in the strategy band, over one of the cards already there, and the next
+// series' three films go up beside it, from just after it to the band's end, each with its number in that series, under a card with
+// the series' name in the band above. st: gov (0 to 1), next(j), head (0 to 1)
+const TT_NEXT=[["1","A capability,","not a project"],["2","Who does what,","end to end"],["3","Where each","piece lives"]],TT_NEXT_SERIES="Governance on the map";
 function tt_mapCards(x,st){const [mx,my,mw,mh]=GV_MC,[bx,by,bw,bh]=gv_mapBand(mx,my,mw,mh,1),cw=bw*0.1,ch=bh*0.58,gx=bx+bw*0.17+2*(cw+bw*0.035),gy=by+(bh-ch)/2;
   if(st.gov>0.01){const g=st.gov,k=1+0.06*Math.sin(Math.PI*clamp(g,0,1));x.save();x.translate(gx+cw/2,gy+ch/2);x.scale(k,k);x.save();x.globalCompositeOperation="screen";wc_glowAt(x,0,0,cw*1.1,[255,214,120],0.55*g);x.restore();
     withA(x,clamp(g*2,0,1),()=>{wc_panel(x,-cw/2-6,-ch/2-6,cw+12,ch+12,{kind:"card",wash:GV.gold,washA:0.6,seed:90});gv_pin(x,0,-ch/2,wc_dim(GV.gold,0.3),0.8);
       wc_T(x,"Govern",0,-2,{w:800,size:27,align:"center",col:GV.goldInk});wc_T(x,"data",0,28,{w:800,size:27,align:"center",col:GV.goldInk});});x.restore();}
   const fx=gx+cw+18,fw=bx+bw-6-fx,w=(fw-20)/3,h=bh+26;TT_NEXT.forEach((L,j)=>{const u=st.next?st.next(j):0;if(u<=0.01)return;const cx=fx+j*(w+10)+w/2,cy=by+bh/2,e=easeCam(clamp(u,0,1));
     x.save();x.translate(cx,cy-16*(1-e));x.rotate([0.014,-0.012,0.01][j]);withA(x,clamp(u*3,0,1),()=>{wc_panel(x,-w/2,-h/2,w,h,{kind:"card",seed:94+j});gv_pin(x,0,-h/2+10,GV.red,0.8);
-      wc_T(x,L[0],-w/2+16,-h/2+40,{w:800,size:28,col:GV.goldInk});wc_T(x,L[1],-w/2+16,-h/2+80,{w:700,size:26,col:WC_DARK});wc_T(x,L[2],-w/2+16,-h/2+112,{w:700,size:26,col:WC_DARK});});x.restore();});}
+      wc_T(x,L[0],-w/2+16,-h/2+40,{w:800,size:28,col:GV.goldInk});wc_T(x,L[1],-w/2+16,-h/2+80,{w:700,size:26,col:WC_DARK});wc_T(x,L[2],-w/2+16,-h/2+112,{w:700,size:26,col:WC_DARK});});x.restore();});
+  const hu=st.head||0;if(hu<=0.01)return;const [,ty,,th]=gv_mapBand(mx,my,mw,mh,0),s=TT_NEXT_SERIES,hw=Math.min(fw-40,tw(x,s,40,700)+84),hh=Math.min(th-30,82),e=easeCam(clamp(hu,0,1));
+  x.save();x.translate(fx+fw/2,ty+th/2-12*(1-e));x.rotate(-0.008);withA(x,clamp(hu*2.5,0,1),()=>{wc_panel(x,-hw/2,-hh/2,hw,hh,{kind:"card",seed:97});
+    gv_pin(x,0,-hh/2+12,GV.red,0.9);wc_hand(x,s,0,14,{size:40,w:700,align:"center",col:WC_INK,p:clamp(hu*1.6-0.3,0,1)});});x.restore();}
 
 // the tools on Noor's map: small cards scattered over the application and technology bands, askew, none pinned, none joined, under a
 // grey haze (st.show, st.haze, 0 to 1); as that changes (st.order), each settles into a row in its band and is pinned, the haze lifts,
@@ -3846,7 +3850,7 @@ scene("crossing",(ctx,S,t,sc)=>{const P=tt_once(sc,"P",()=>tt_crossCues(sc)),cut
   if(i===4){tt_tagAt(ctx,t,P.understand,null,1340,250,"they understand it",{size:32});tt_tagAt(ctx,t,P.around2,null,560,250,"the people around keep it",{size:32});
     tt_tagAt(ctx,t,P.few-0.2,null,960,340,"the fine is for the few",{size:32,role:"amber"});}
   tt_pill(ctx,t,[[0,"Bogotá · 1995"],[P.y96-0.3,"Bogotá · 1996"]],(1-gv_io(t,P.last-0.3,P.y96-0.3,0.4))*(1-fin(t,P.breath+1.0,0.6)));
-  gv_title(ctx,S,t,P.breath+1.2,"Teachers of data","why people keep a rule","Film 10 of 19 · data governance");
+  gv_title(ctx,S,t,P.breath+1.2,"Teachers of data","why people keep a rule","Film 10 of 10 · data governance");
   wc_paperOver(ctx,S);});
 
 // ---- the university: what the chapters share ----
@@ -4268,7 +4272,7 @@ scene("lasts",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s
     // joined by a gold thread, the haze lifts, and the camera goes back up to the next films
     {at:P.mp,place:"mapClose",keys:[[P.mp,960,540,1],[P.mp+0.6,960,470,1.15],[P.sc,960,600,1.2],[P.rest-0.2,960,470,1.15]],d:2.4,push:0.02,draw:(x,tt)=>{
       tt_mapTools(x,{show:clamp((tt-P.tl+0.2)/1.2,0,1),haze:fin(tt,P.see-0.2,0.7),order:clamp((tt-P.chg)/1.1,0,1),join:clamp((tt-P.chg-0.8)/0.9,0,1)});
-      tt_mapCards(x,{gov:fin(tt,P.gov,0.8),next:j=>fin(tt,P.nx+0.35*j,0.5)});}},
+      tt_mapCards(x,{gov:fin(tt,P.gov,0.8),next:j=>fin(tt,P.nx+0.35*j,0.5),head:fin(tt,P.nx-0.25,0.6)});}},
     // Bogotá in 1996 again, what the mimes did for the crossings: people on foot cross in front of the cars
     {at:P.kz,place:"bogota",keys:[[P.kz,960,530,1.04],[P.kz+0.1,920,600,1.14]],d:3.2,push:0,draw:(x,tt)=>{const P0=tt_P();
       tt_drawWorld(x,TT_CAM.wide,tt_world96(P0.safe+1.6+Math.max(0,tt-P.kz),P0));}},
@@ -4286,7 +4290,7 @@ scene("lasts",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s
       more:q=>{tt_chairAt(q,TT_NEWX);gv_behind(q,"ttNew",TT_NEWX,GV_MT.top,GV_MT.s,{pose:"listen",t:tt,flip:true,expr:"smile",nod:tt_nodAt(tt,P.mt+1.2,P.end+1,2.2)});}})}]);
   wc_year(ctx,56,72,"Bogotá · 2012",fin(t,P.bo+0.3,0.4)*(1-fin(t,P.mp-0.25,0.3)));
   wc_year(ctx,56,72,"Bogotá · 1996",fin(t,P.kz+0.3,0.4)*(1-fin(t,P.fl-0.25,0.3)));
-  tt_end(ctx,S,t,P.end,"Teachers of data",["Governance is people's work.","Tools remember what people agreed."],"Film 10 of 19");
+  tt_end(ctx,S,t,P.end,"Teachers of data",["Governance is people's work.","Tools remember what people agreed."],"Film 10 of 10");
   wc_paperOver(ctx,S);});
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */

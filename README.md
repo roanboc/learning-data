@@ -16,7 +16,7 @@ The site has seven big topics. Start with the first, the overview; then pick the
 | Data quality and change | [When things go wrong](https://data.learn-all.org/when-things-go-wrong/), two films: *Silent change* (changes and data contracts) and *Too good to be true* (data quality checks) | Anyone who builds pipelines, or owns a source system or a data product |
 | Enterprise architecture | [The map before the data](https://data.learn-all.org/enterprise-architecture/), eleven films: how an organisation works, in layers, before you ask what its data should answer | Architects, and anyone new to an organisation |
 | Master and reference data | [The same one, everywhere](https://data.learn-all.org/master-and-reference-data/), nine films, coming out one by one: the people and things a business is about, kept once and shared across its systems, and the lists that sort them | Data stewards and architects, and anyone whose data lives in many systems |
-| Data governance | [Governance you can use](https://data.learn-all.org/data-governance/), a prologue and nineteen films, coming out one by one: who decides what, and how each decision reaches the work, as checks, owners and tests rather than policies on a shelf | Governance teams and data owners, and anyone asked to make the rules work |
+| Data governance | Three series, coming out one by one: [Governance principles](https://data.learn-all.org/data-governance/), a prologue and ten films on who decides what, and how each decision reaches the work, as checks, owners and tests rather than policies on a shelf; then *Governance on the map*, three films that design governance into the organisation's architecture map; and *Governance you can use*, six films that make it work with dbt and Databricks | Governance teams and data owners, and anyone asked to make the rules work |
 
 Every film has chapters, Pause and think questions and Spanish pages; most have hands-on labs and scenarios too.
 
@@ -40,7 +40,8 @@ site/                            the website, published to GitHub Pages as it is
   enterprise-architecture/       the series The map before the data, made the same way: a page for the series, and a folder per film
                                  (a Watch page with Pause and think; no labs or scenarios yet)
   master-and-reference-data/     the series The same one, everywhere, made the same way (a Watch page with Pause and think; no labs or scenarios yet)
-  data-governance/               the series Governance you can use, made the same way (a Watch page with Pause and think; no labs or scenarios yet)
+  data-governance/               the series Governance principles, made the same way (a Watch page with Pause and think; no labs or scenarios yet). Governance on the map
+                                 and Governance you can use, the two series that follow it, get their pages at governance-on-the-map/ and governance-in-practice/ with their opening films
   journey/                       Making of: two films (Data for Films, That's not quite right), then how the films were made; index.md (source) and index.html (generated)
   films/                         redirects: films/ goes to topics/, and the old player address films/inner-life-of-data/ to the home page
   404.html                       "Page not found", in English and Spanish
@@ -56,7 +57,7 @@ site/                            the website, published to GitHub Pages as it is
     whats-in-a-word/ …           each film of From words to data: its player and soundtrack, its Spanish captions (captions.es.js), its Pause and think
                                  questions (think.en.js, think.es.js) and the words of its labs and scenarios (learn.en.js, learn.es.js);
                                  the same for each film of In the weeds of data crafting, of The map before the data (whose labs and scenarios
-                                 are the series' own), of The same one, everywhere and of Governance you can use (without labs
+                                 are the series' own), of The same one, everywhere and of Governance principles (without labs
                                  and scenarios)
     enterprise-architecture/     The map before the data's labs and scenarios, one set for the whole series: learn.js and learn.css, drawn with
                                  the series' own components, and their words in learn.en.js and learn.es.js
@@ -84,10 +85,13 @@ films/                           one folder per film: script or story, captions/
                                  shared/ (its components, people and tools) and one folder per film, each with script.md, site.json, captions/ and source/
   master-and-reference-data/     the series The same one, everywhere, on master and reference data: its README, series.json, proposal.md, look/ (the
                                  reference frames of its watercolour), shared/ (its watercolour, people and tools) and one folder per film, made the same way
-  data-governance/               the series Governance you can use, on data governance, the companion of the one above: its README, series.json,
-                                 proposal.md, shared/ (its rooms in watercolour, people and tools) and one folder per film, made the same way
+  data-governance/               the series Governance principles, the first of three on data governance, the companion of the one above: its README, series.json,
+                                 proposal.md (the plan for all three), shared/ (its rooms in watercolour, people and tools, which the other two bundle too)
+                                 and one folder per film, made the same way
+  governance-on-the-map/         the series Governance on the map, the second on data governance: its README, series.json, proposal.md and decided.md, and a folder per film as they're made
+  governance-in-practice/        the series Governance you can use, the third on data governance, made the same way
 site-tools/                      build_pages.py turns the Markdown pages into site pages; build_series.py makes the pages of the series (From words to data, In the weeds of data crafting,
-                                 The map before the data, The same one, everywhere, Governance you can use), the Topics page, and the topics' tiles on the home page and at the end of the intro's scenarios;
+                                 The map before the data, The same one, everywhere, and the three on data governance), the Topics page, and the topics' tiles on the home page and at the end of the intro's scenarios;
                                  check_site.py and smoke.py check the site (smoke/ plays a series' own labs through); review_page.py makes a page to review a rendered film on
                                  (its chapters, captions and a 720p copy, which review_copy.py makes)
 .github/workflows/pages.yml      publishes site/ on every push to main
@@ -149,7 +153,7 @@ Write pages in Markdown and turn them into site pages with `python site-tools/bu
 
 ## Adding a film
 
-A new film of a series that `site-tools/build_series.py` makes (*From words to data*, *In the weeds of data crafting*, *The map before the data*, *The same one, everywhere*, *Governance you can use*) needs no hand-made page and no line in a shared list: add its numbered folder (such as `3-which-value-wins/`, found by its `source/film.json`), give it a `site.json` (with its `past` row, if the series has one), publish its player (`python tools/publish.py` in its source), and run `python site-tools/build_series.py`. A film with `learn.en.js` and `learn.es.js` in its assets gets labs and scenarios pages; one without gets a Watch page with its Pause and think questions. In a series with its own labs and scenarios (`learn` in `SERIES`), a new film's lab and scenarios go in the series' words, with the film's number, and its lab names a chapter once the film is on the site. A new series of the same kind goes in `SERIES`, and in a topic's `items` in `TOPICS`. The checks read the series and the topics from the same data.
+A new film of a series that `site-tools/build_series.py` makes (*From words to data*, *In the weeds of data crafting*, *The map before the data*, *The same one, everywhere*, and the three on data governance) needs no hand-made page and no line in a shared list: add its numbered folder (such as `3-which-value-wins/`, found by its `source/film.json`), give it a `site.json` (with its `past` row, if the series has one), publish its player (`python tools/publish.py` in its source), and run `python site-tools/build_series.py`. A film with `learn.en.js` and `learn.es.js` in its assets gets labs and scenarios pages; one without gets a Watch page with its Pause and think questions. In a series with its own labs and scenarios (`learn` in `SERIES`), a new film's lab and scenarios go in the series' words, with the film's number, and its lab names a chapter once the film is on the site. A new series of the same kind goes in `SERIES`, and in a topic's `items` in `TOPICS`. The checks read the series and the topics from the same data.
 
 The site is plain HTML, published as it is. For a new film:
 

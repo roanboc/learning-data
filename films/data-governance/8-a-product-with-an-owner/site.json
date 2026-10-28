@@ -1,0 +1,28 @@
+{
+  "kicker": "Data products",
+  "kicker_es": "Productos de datos",
+  "title_es": "Un producto con dueño",
+  "h1": "A product with an owner: a promise someone keeps",
+  "h1_es": "Un producto con dueño: una promesa que alguien cumple",
+  "lead": "On census day, Planning's count of learners near an award wasn't ready at seven, and nobody answered for it. Yusuf, Noor and Clara write down what the table promises, and Clara becomes its owner. Every table other teams use belongs to one product, with an owner, and each product knows who uses it.",
+  "lead_es": "El día del censo, el conteo de Planificación de estudiantes cerca de un título no estaba listo a las siete, y nadie respondía por él. Yusuf, Noor y Clara escriben lo que promete la tabla, y Clara se vuelve su dueña. Cada tabla que usan otros equipos pertenece a un producto, con un dueño, y cada producto sabe quién lo usa.",
+  "description": "A film about data products and their owners: Istanbul's market round the bedesten, where each trade had its street, its guild's rules and a master who answered for his stall; a count that was late on census day, with nobody who answered for it; a card in the university's catalogue that says what a table promises (what it's for, what's in it, its service levels, where to ask, a version and a status), and an owner who keeps the promise; the owner of a product and the owner of a meaning; owning a product as a job, with a team behind the owner; tables that are products and tables that are steps, checked on every change; the record of who uses what; and a product's life, from draft to retired.",
+  "description_es": "Una película sobre los productos de datos y sus dueños: el mercado de Estambul alrededor del bedesten, donde cada oficio tenía su calle, las reglas de su gremio y un maestro que respondía por su puesto; un conteo que llegó tarde el día del censo, sin nadie que respondiera por él; una ficha en el catálogo de la universidad que dice lo que promete una tabla (para qué sirve, qué contiene, sus niveles de servicio, dónde preguntar, una versión y un estado), y un dueño que cumple la promesa; el dueño de un producto y el dueño de un significado; ser dueño de un producto como un trabajo, con un equipo detrás; tablas que son productos y tablas que son pasos, revisadas en cada cambio; el registro de quién usa qué; y la vida de un producto, de borrador a retirado.",
+  "card": "A count that came late, and nobody who answered for it. Write down what the data promises, and name an owner who keeps it.",
+  "card_es": "Un conteo que llegó tarde, y nadie que respondiera por él. Escribe lo que prometen los datos, y nombra a un dueño que lo cumpla.",
+  "chapters_es": {
+    "bazaar": "Quién lo respalda",
+    "late": "La tabla de nadie",
+    "promise": "Datos con una promesa",
+    "answers": "Quién responde por qué",
+    "job": "Querer el trabajo",
+    "steps": "Productos y pasos",
+    "readers": "Conocidos por nombre",
+    "life": "De borrador a retirado",
+    "found": "Encontrado, y confiable"
+  },
+  "past": ["Istanbul, the market round the bedesten, from 1461", "Buyers come back when someone answers for the goods."],
+  "past_es": ["Estambul, el mercado alrededor del bedesten, desde 1461", "Los compradores vuelven cuando alguien responde por la mercancía."],
+  "next_h": "You've seen data written down as a product, with a promise and an owner who keeps it. More films in the series are on the way.",
+  "next_h_es": "Viste datos escritos como un producto, con una promesa y un dueño que la cumple. Vienen más películas de la serie."
+}

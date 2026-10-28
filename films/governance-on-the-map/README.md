@@ -11,6 +11,7 @@ The submission to the government is in, and the project that paid for Yusuf Demi
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [A capability, not a project](https://data.learn-all.org/governance-on-the-map/a-capability-not-a-project/) | Governance that lasts | 6½ min | 8 | 3 questions | [script](1-a-capability-not-a-project/script.md) · [source](1-a-capability-not-a-project/source/README.md) |
 <!-- /films -->
 
 ## How the films are made

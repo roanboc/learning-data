@@ -53,22 +53,26 @@ def harp(m, start, g=0.03, pan=0.0, sec=None):
     s = sum(np.sin(2 * np.pi * f * k * x + 0.3 * k) * k ** -1.7 * np.exp(-x * r * (1 + 0.7 * (k - 1) ** 1.4)) for k in range(1, 8))
     s = s * np.minimum(1, x / 0.004) + 0.04 * filt(noise(sec), 'band', (min(1.5 * f, 1200), min(5 * f, 2000)))[:len(x)] * np.exp(-x * 70)
     put(norm(filt(s.astype(np.float32), 'low', 1800)) * env(sec, 0.001, sec * 0.4), start, g, pan)
-def roll(ms, start, g=0.022, gap=0.09, pan=(-0.45, 0.45)):
-    """a chord on the harp, rolled up from its lowest string"""
+def roll(ms, start, g=0.022, gap=0.09, pan=(-0.45, 0.45), up=0):
+    """a chord on the harp, rolled up from its lowest string; up=12 plays it an octave above the strings holding the same chord, so
+    no string of the harp sounds a note the strings hold (two voices on one pitch can cancel each other)"""
     for k, m in enumerate(sorted(ms)):
-        harp(m, start + k * gap, g * (1 - 0.05 * k), pan[0] + (pan[1] - pan[0]) * k / max(1, len(ms) - 1))
-def market(start, g=0.02, n=6):
+        harp(m + up, start + k * gap, g * (1 - 0.05 * k), pan[0] + (pan[1] - pan[0]) * k / max(1, len(ms) - 1))
+def market(start, g=0.02, n=6, up=0):
     """the market's chord: G major, rolled on the harp, each time the story goes back to the bazaar (n strings of it, from the top)"""
-    roll([43, 50, 55, 59, 62, 67][-n:], start, g, 0.1)
+    roll([43, 50, 55, 59, 62, 67][-n:], start, g, 0.1, up=up)
+def section(m, start, sec, g, pan, j=0, a=1.6):
+    """one section of soft strings on one note, in tune, bowed in slowly over a seconds; the bow's weight breathes very slowly, no
+    vibrato"""
+    f = hz(m); x = tt(sec)
+    s = sum(np.sin(2 * np.pi * f * k * x + j + k) * (1 / k) * np.exp(-0.35 * k) for k in range(1, 8))
+    s = s * (1 + 0.05 * np.sin(2 * np.pi * (0.06 + 0.01 * j) * x + j)) * env(sec, a, 2.6)
+    put(filt(s.astype(np.float32), 'low', 1400), start, g, pan)
 def strings(ch, start, sec, g=0.028):
-    """soft strings: each note of the chord one section, in tune, bowed slowly in a little after the note below it, and spread across
-    the stereo field; the bow's weight breathes very slowly, no vibrato"""
+    """soft strings: each note of the chord one section, bowed in a little after the note below it, spread across the stereo field"""
     ms = sorted(ch); n = len(ms)
     for j, m in enumerate(ms):
-        d = 0.22 * j; f = hz(m); x = tt(sec)
-        s = sum(np.sin(2 * np.pi * f * k * x + j + k) * (1 / k) * np.exp(-0.35 * k) for k in range(1, 8))
-        s = s * (1 + 0.05 * np.sin(2 * np.pi * (0.06 + 0.01 * j) * x + j)) * env(sec, 1.6 + d, 2.6)
-        put(filt(s.astype(np.float32), 'low', 1400), start + d, g * 1.6 / n, -0.6 + 1.2 * j / max(1, n - 1))
+        section(m, start + 0.22 * j, sec, g * 1.6 / n, -0.6 + 1.2 * j / max(1, n - 1), j, 1.6 + 0.22 * j)
 def celesta(m, start, g=0.03, pan=0.0, sec=2.4):
     """a celesta, small and close: a steel bar struck by a felt hammer over its wooden box; the fundamental, round, a little of the
     octave, gone first, and the soft knock of the hammer"""
@@ -99,10 +103,18 @@ def mark(start, root=51, g=0.06):
         horn(root + iv, start + i * 0.45, 1.0 if i < 3 else 2.8, g * 0.8, (i - 1.5) * 0.12)
         harp(root + 12 + iv, start + i * 0.45, g * 0.42, (i - 1.5) * 0.15, 3.2 if i == 3 else 2.4)
 def bed(segs, end, g=0.028):
-    """the opening story's chords, one after another (each segment's start and chord), each blooming in under the end of the one before"""
+    """the opening story's chords, one after another (each segment's start and chord), each blooming in under the end of the one
+    before; a note the next chord keeps is held through the change, one section to a note, never bowed again"""
+    starts = [s for s, _ in segs] + [end]
     for i, (s, ch) in enumerate(segs):
-        e = segs[i + 1][0] if i + 1 < len(segs) else end
-        strings(ch, s - 1.2, e - s + 3.2, g)
+        ms = sorted(ch)
+        for j, m in enumerate(ms):
+            if i and m in segs[i - 1][1]:
+                continue
+            k = i
+            while k + 1 < len(segs) and m in segs[k + 1][1]:
+                k += 1
+            section(m, s - 1.2 + 0.22 * j, starts[k + 1] - s + 3.2 - 0.22 * j, g * 1.6 / len(ms), max(-0.6, min(0.6, -0.6 + 1.2 * (m - 38) / 31)), j, 1.6)
 def turn(ch, s, sec=6.0, g=0.024, notes=()):
     """a chapter's turn: the strings bloom on one chord and go, with a few notes of the harp over them"""
     strings(ch, s - 0.8, sec, g)
@@ -204,15 +216,15 @@ prod, prom, some = W('bazaar', 'data', 'a product'), W('bazaar', 'data', 'a prom
 eve, title = G('bazaar', 'breath', -0.2), G('bazaar', 'breath', 1.2)
 bed([(S0('bazaar'), G9), (most, CMAJ7), (air_, EM7), (y20, DMAJ), (st, EM9), (short, CMAJ7), (stop, BM), (order, DSUS), (named, GM),
      (g16, CADD9), (off, DMAJ), (cc, EM7), (buyer, CMAJ7), (back, GB), (data, EBMAJ7), (prom, ABMAJ7), (eve, EB9)], E('bazaar') + 1.5)
-roll(G9, S0('bazaar') + 0.3, 0.024)
+roll(G9, S0('bazaar') + 0.3, 0.024, up=12)
 knock(W('bazaar', 'hall', 'stone', 0.15), 0.014, P(600))
-roll(CMAJ7, most + 0.1, 0.018); knock(W('bazaar', 'hall', 'precious', 0.05), 0.014, 0.0)
+roll(CMAJ7, most + 0.1, 0.018, up=12); knock(W('bazaar', 'hall', 'precious', 0.05), 0.014, 0.0)
 air(air_ - 0.1, 1.8, 0.012, 0.0); harp(62, y20 + 0.2, 0.022, 0.2); air(y20 + 0.6, 1.6, 0.008, 0.0); knock(W('bazaar', 'y1520', 'eight', 0.05), 0.014, 0.0)
 for k, t0 in enumerate([search, poor, short]):
     knock(t0 + 0.05, 0.014 * (1 - 0.15 * k), P(790))
 cloth(poor - 0.15, 0.014, P(787), 0.5); cloth(short - 0.2, 0.016, P(787), 0.6); question(short + 0.2, 79, 0.028, -0.1)
 harp(47, stop + 0.2, 0.024, -0.2)
-air(order, 1.4, 0.01, 0.0); roll(GM, named + 0.1, 0.02)
+air(order, 1.4, 0.01, 0.0); roll(GM, named + 0.1, 0.02, up=12)
 for k in range(3):
     knock(named + 0.65 + k * 0.8, 0.013 * (1 - 0.15 * k), (-0.4, 0.1, 0.4)[k])
 knock(W('bazaar', 'guild', 'guild', 0.05), 0.014, P(330)); knock(W('bazaar', 'guild', 'rules', 0.05), 0.012, P(330)); knock(off + 0.05, 0.013, P(730))
@@ -222,8 +234,8 @@ for k in range(2):
 pencil(sold, 0.6, 0.016, 0.1); knock(sold + 0.25, 0.013, 0.1); harp(40, ans + 0.1, 0.024, -0.2)
 for k, w in enumerate(['find', 'what', 'who']):
     knock(W('bazaar', 'buyer', w, 0.05), 0.013 * (1 - 0.12 * k), P(470))
-promise(back + 0.35, 79, 0.03, 0.0); roll(GB, back + 0.1, 0.018)
-paper(data + 0.1, 0.018, P(600), 0.5); roll(EBMAJ7, data + 0.2, 0.02)
+promise(back + 0.35, 79, 0.03, 0.0); roll(GB, back + 0.1, 0.018, up=12)
+paper(data + 0.1, 0.018, P(600), 0.5); roll(EBMAJ7, data + 0.2, 0.02, up=12)
 for k in range(3):
     knock(same + 0.2 + 0.3 * k, 0.012 * (1 - 0.15 * k), P(1310))
 promise(prod, 75, 0.03, 0.2); celesta(79, prom + 0.05, 0.026, 0.3); celesta(82, some + 0.05, 0.024, 0.4)
@@ -262,7 +274,7 @@ for t0, d in [(W('promise', 'for', 'for', -0.2), 1.0), (W('promise', 'for', 'use
               (W('promise', 'levels', 'built', -0.1), 2.0), (W('promise', 'ask', 'ask', -0.2), 0.6), (W('promise', 'ask', 'version', 0.1), 0.9)]:
     pen(t0, d, 0.012, -0.1)
 frame = W('promise', 'product', 'data product', -0.1)
-turn(AB9, frame, 8.0, 0.024); roll(EB9, frame + 0.1, 0.02); promise(frame + 0.45, 75, 0.032, 0.1)
+turn(AB9, frame, 8.0, 0.024); roll(EB9, frame + 0.1, 0.02, up=12); promise(frame + 0.45, 75, 0.032, 0.1)
 for k, w in enumerate(['data,', 'a promise', 'an owner']):
     knock(W('promise', 'product', w, 0.05), 0.012 * (1 - 0.12 * k), P(1268))
 pencil(W('promise', 'product', 'an owner'), 0.8, 0.014, 0.0)
@@ -374,7 +386,7 @@ sheet = W('found', 'like', 'who stands', 0.6); paper(sheet - 0.1, 0.012, 0.0, 0.
 promise(W('found', 'late', 'Clara', -0.1), 75, 0.03, P(640))
 marker(W('found', 'runs', 'runs'), 1.1, 0.012, -0.1); note = W('found', 'runs', 'a product', -0.1); pen(note, G('found', 'runs', 3.97) - note, 0.012, 0.0)
 eveF, dataF = G('found', 'gives', -0.3), W('found', 'gives', 'Governance', -0.25)
-strings(GM, eveF - 0.6, dataF - eveF + 1.8, 0.018); market(eveF + 0.1, 0.016); roll([39, 46, 55, 58], dataF + 0.1, 0.02, 0.12)
+strings(GM, eveF - 0.6, dataF - eveF + 1.8, 0.018); market(eveF + 0.1, 0.016, up=12); roll([39, 46, 55, 58], dataF + 0.1, 0.02, 0.12)
 for k, (t0, m) in enumerate(zip([W('found', 'gives', 'people find', 0.25), W('found', 'gives', 'trust it'), W('found', 'gives', 'build on')], [75, 79, 82])):
     celesta(m, t0 + 0.05, 0.024, -0.3 + 0.3 * k); knock(t0 + 0.05, 0.01, P(660 + 300 * k))
 own = G('found', 'own')

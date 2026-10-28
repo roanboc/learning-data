@@ -57,16 +57,20 @@ models:
         description: '{{ doc("valid_from") }}'
         data_type: date
         constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
       - name: valid_to
         description: '{{ doc("valid_to") }}'
         data_type: date
+        config: {meta: {personal_data: none}}
       - name: is_current
         description: '{{ doc("is_current") }}'
         data_type: boolean
         constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
       - name: recorded_at
         description: '{{ doc("recorded_at") }}'
         data_type: timestamp
+        config: {meta: {personal_data: none}}
       - name: full_name
         description: The learner's name, from the student system if it knows them, then the learning platform, then short courses.
         data_type: string
@@ -84,6 +88,7 @@ models:
           - accepted_values:
               arguments:
                 values: [studying, inactive, withdrawn, completed]
+        config: {meta: {personal_data: none}}
       - name: enrolled_award_key
         description: The award the learner is enrolled in, in the student system. Null for learners it doesn't know.
         data_type: string
@@ -92,18 +97,23 @@ models:
               arguments:
                 to: ref('core_award')
                 field: award_key
+        config: {meta: {personal_data: none}}
       - name: enrolled_award_bk
         description: '{{ doc("award_bk") }}'
         data_type: string
+        config: {meta: {personal_data: none}}
       - name: key_set
         description: '{{ doc("learner_key_set") }}'
         data_type: string
+        config: {meta: {personal_data: none}}
       - name: keys_held
         description: '{{ doc("keys_held") }}'
         data_type: int
+        config: {meta: {personal_data: none}}
       - name: has_student_id
         description: '{{ doc("has_student_id") }}'
         data_type: boolean
+        config: {meta: {personal_data: none}}
     versions:
       - v: 1
         defined_in: core_learner
@@ -145,11 +155,12 @@ models:
         constraints: [{type: not_null}]
         data_tests: [unique, not_null]
         config:
-          meta: {glossary_term: credential}
+          meta: {glossary_term: credential, personal_data: pseudonymous}
       - name: credential_bk
         description: '{{ doc("credential_bk") }}'
         data_type: string
         constraints: [{type: not_null}]
+        config: {meta: {personal_data: direct}}
       - name: learner_key
         description: '{{ doc("learner_key") }}'
         data_type: string
@@ -175,6 +186,7 @@ models:
               arguments:
                 to: ref('key_sets')
                 field: key_set
+        config: {meta: {personal_data: none}}
       - name: credential_kind
         description: '{{ doc("credential_kind") }}'
         data_type: string
@@ -182,19 +194,24 @@ models:
           - accepted_values:
               arguments:
                 values: [award, microcredential, badge]
+        config: {meta: {personal_data: none}}
       - name: credential_code
         description: The issuing system's code for what the credential is for, like MC-SQL or GCDA.
         data_type: string
+        config: {meta: {personal_data: none}}
       - name: credential_name
         description: '{{ doc("credential_name") }}'
         data_type: string
+        config: {meta: {personal_data: none}}
       - name: credit_points
         description: '{{ doc("credential_credit_points") }}'
         data_type: int
+        config: {meta: {personal_data: none}}
       - name: issued_on
         description: '{{ doc("issued_on") }}'
         data_type: date
         constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
       - name: status
         description: '{{ doc("credential_status") }}'
         data_type: string
@@ -202,12 +219,15 @@ models:
           - accepted_values:
               arguments:
                 values: [valid, expired, revoked]
+        config: {meta: {personal_data: none}}
       - name: revoked_on
         description: '{{ doc("revoked_on") }}'
         data_type: date
+        config: {meta: {personal_data: none}}
       - name: loaded_at
         description: '{{ doc("loaded_at") }}'
         data_type: timestamp
+        config: {meta: {personal_data: none}}
     # Each version is its own table in the same schema, so each names its own primary key:
     # Unity Catalog wants constraint names unique within a schema.
     versions:
@@ -236,6 +256,7 @@ models:
           - name: is_revoked
             description: True when the credential was revoked. Replaced by status in version 2.
             data_type: boolean
+            config: {meta: {personal_data: none}}
 
   - name: core_credit_towards_award
     description: >
@@ -297,26 +318,33 @@ models:
               arguments:
                 to: ref('core_award')
                 field: award_key
+        config: {meta: {personal_data: none}}
       - name: award_bk
         description: '{{ doc("award_bk") }}'
         data_type: string
+        config: {meta: {personal_data: none}}
       - name: valid_from
         description: '{{ doc("valid_from") }}'
         data_type: date
         constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
       - name: valid_to
         description: '{{ doc("valid_to") }}'
         data_type: date
+        config: {meta: {personal_data: none}}
       - name: is_current
         description: '{{ doc("is_current") }}'
         data_type: boolean
         constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
       - name: credit_points_from_units
         description: '{{ doc("credit_points_from_units") }}'
         data_type: int
+        config: {meta: {personal_data: none}}
       - name: credit_points_from_microcredentials
         description: '{{ doc("credit_points_from_microcredentials") }}'
         data_type: int
+        config: {meta: {personal_data: none}}
       - name: credit_points_earned
         description: '{{ doc("credit_points_earned") }}'
         data_type: int
@@ -325,9 +353,11 @@ models:
           - type: check
             name: ck_core_credit_towards_award_earned
             expression: "credit_points_earned >= 0"
+        config: {meta: {personal_data: none}}
       - name: microcredentials_counted
         description: How many microcredentials count towards this award in this version.
         data_type: int
+        config: {meta: {personal_data: none}}
     versions:
       - v: 1
         defined_in: core_credit_towards_award

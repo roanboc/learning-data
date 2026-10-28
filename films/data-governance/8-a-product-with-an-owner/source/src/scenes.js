@@ -120,7 +120,7 @@ scene("bazaar",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,
     // the street in the evening light, people coming and going
     {at:P.eve,place:"st1600",keys:[[P.eve,820,560,1.1],[P.eve+0.1,860,550,1.06]],d:4,draw:(x,tt)=>{po_evening(x,tt,P.eve-1);po_light(x,"eve",0.85);}}]);
   setScreen(ctx,S);po_pill(ctx,t,[[0,"Istanbul · 1461"],[P.y20,"Istanbul · 1520s"],[P.named,"Istanbul · 1600s"]],fin(t,0.4,0.5)*(1-gv_io(t,P.data,P.eve,0.35)));
-  gv_title(ctx,S,t,P.title,"A product with an owner","data with a promise, and someone who keeps it","Film 8 of 19 · data governance");
+  gv_title(ctx,S,t,P.title,"A product with an owner","data with a promise, and someone who keeps it","Film 8 of 10 · data governance");
   wc_paperOver(ctx,S);});
 
 // ---- 2 · Nobody's table: last March, Planning's count of learners near an award wasn't ready, and nobody answered for it ----
@@ -435,5 +435,5 @@ scene("found",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s
         after:q=>{const [rx,ry]=po_crRowAt(q,cr.h,[{l:"requested by:"},{l:"owner:"}],1);gv_qmark(q,rx+106,ry+4,56,fin(tt,P.owner,0.5));}});
       if(an>0&&an<1){const [rx,ry]=po_crRowAt(x,cr.h,[{l:"requested by:"},{l:"owner:"}],0),[px,py]=po_penAt(x,"Anil Kurian",cr.x+rx+4,cr.y+ry,30,an);po_pen(x,px,py,gv_io(tt,P.anil-0.3,P.anil+1.4,0.25));}}}]);
   setScreen(ctx,S);po_pill(ctx,t,[[P.bz,"Istanbul · 1600s"]],gv_io(t,P.bz+0.1,P.sheet,0.35)+gv_io(t,P.eve+0.1,P.data,0.35));
-  gv_end(ctx,S,t,P.end,"A product with an owner","Own the product, not only the meaning.","Film 8 of 19");
+  gv_end(ctx,S,t,P.end,"A product with an owner","Own the product, not only the meaning.","Film 8 of 10");
   wc_paperOver(ctx,S);});

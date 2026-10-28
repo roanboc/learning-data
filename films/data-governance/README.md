@@ -11,12 +11,12 @@ Yusuf Demir starts as the university's data governance lead. He inherits a shelf
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
-| [The same problem, everywhere](https://data.learn-all.org/data-governance/the-same-problem-everywhere/) | Where data governance comes from | 5 min | 8 | 3 questions | [script](0-the-same-problem-everywhere/script.md) · [source](0-the-same-problem-everywhere/source/README.md) |
-| [Off the shelf](https://data.learn-all.org/data-governance/off-the-shelf/) | Data governance, and where each policy runs | 5½ min | 9 | 4 questions | [script](1-off-the-shelf/script.md) · [source](1-off-the-shelf/source/README.md) |
-| [Who decides](https://data.learn-all.org/data-governance/who-decides/) | Data governance, and the right to decide | 5½ min | 10 | 3 questions | [script](2-who-decides/script.md) · [source](2-who-decides/source/README.md) |
-| [One word, one home](https://data.learn-all.org/data-governance/one-word-one-home/) | Data governance, and one meaning for each word | 6 min | 8 | 4 questions | [script](3-one-word-one-home/script.md) · [source](3-one-word-one-home/source/README.md) |
-| [Who may see it](https://data.learn-all.org/data-governance/who-may-see-it/) | Data governance, and who may see each column | 6 min | 8 | 3 questions | [script](4-who-may-see-it/script.md) · [source](4-who-may-see-it/source/README.md) |
-| [Fixed where it starts](https://data.learn-all.org/data-governance/fixed-where-it-starts/) | Data governance, and fixing problems where they start | 6 min | 8 | 3 questions | [script](6-fixed-where-it-starts/script.md) · [source](6-fixed-where-it-starts/source/README.md) |
+| [The same problem, everywhere](https://data.learn-all.org/data-governance/the-same-problem-everywhere/) | Where governance comes from | 5 min | 8 | 3 questions | [script](0-the-same-problem-everywhere/script.md) · [source](0-the-same-problem-everywhere/source/README.md) |
+| [Off the shelf](https://data.learn-all.org/data-governance/off-the-shelf/) | Why data governance | 5½ min | 9 | 4 questions | [script](1-off-the-shelf/script.md) · [source](1-off-the-shelf/source/README.md) |
+| [Who decides](https://data.learn-all.org/data-governance/who-decides/) | Decision rights | 5½ min | 10 | 3 questions | [script](2-who-decides/script.md) · [source](2-who-decides/source/README.md) |
+| [One word, one home](https://data.learn-all.org/data-governance/one-word-one-home/) | One meaning for each word | 6 min | 8 | 4 questions | [script](3-one-word-one-home/script.md) · [source](3-one-word-one-home/source/README.md) |
+| [Who may see it](https://data.learn-all.org/data-governance/who-may-see-it/) | Who may see what | 6 min | 8 | 3 questions | [script](4-who-may-see-it/script.md) · [source](4-who-may-see-it/source/README.md) |
+| [Fixed where it starts](https://data.learn-all.org/data-governance/fixed-where-it-starts/) | Fixing data at the source | 6 min | 8 | 3 questions | [script](6-fixed-where-it-starts/script.md) · [source](6-fixed-where-it-starts/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

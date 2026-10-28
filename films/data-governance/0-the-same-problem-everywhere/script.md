@@ -1,6 +1,6 @@
 # Data governance · The same problem, everywhere: script
 
-*The script of the prologue to the data governance series,* Governance you can use*, which comes before* Off the shelf*, as made: 4:58, in eight chapters, in English, painted in watercolour, 23 October 2026. Made to read on a phone: on-screen text is at least 28 px in the frame, nothing sits under the captions, and no caption runs to three lines.*
+*The script of the prologue to the first data governance series,* Governance principles*, which comes before* Off the shelf*, as made: 4:58, in eight chapters, in English, painted in watercolour, 23 October 2026. Made to read on a phone: on-screen text is at least 28 px in the frame, nothing sits under the captions, and no caption runs to three lines.*
 
 ## The promise
 

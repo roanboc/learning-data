@@ -118,7 +118,7 @@ scene("clinics",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({cr:c.first
     {at:P.dip,place:"hands",keys:[[P.dip,960,540,1],[P.dip+0.1,960,550,1.04]],d:2.4,push:0.01,draw:(x,tt)=>
       fw_hands(x,tt,fin(tt,P.dip+0.1,0.9),fin(tt,P.dip+1.0,0.8),{sleeve:PEOPLE.doctor2.top.c})}]);
   fw_pill(ctx,t,[[0,"Vienna · 1847"]],fin(t,0.6,0.5)*(1-fin(t,P.title,0.4)));
-  gv_title(ctx,S,t,P.title,"Fixed where it starts","where a problem begins","Film 6 of 19 · data governance");
+  gv_title(ctx,S,t,P.title,"Fixed where it starts","where a problem begins","Film 6 of 10 · data governance");
   wc_paperOver(ctx,S);});
 
 // ---- 2 · Still amber: binder 15, the scorecard's amber cell, the issue log's old answer, the clean-up's card, and the mop under the leak ----
@@ -389,5 +389,5 @@ scene("blame",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({nod:wAt(sc,"
     {at:P.pg,place:"policy",keys:[[P.pg,960,500,1],[P.pg+0.1,900,450,1.06]],d:4,push:0.01,draw:(x,tt)=>fw_policy15(x,clamp((tt-P.hi)/1.4,0,1),clamp((tt-P.note)/1.2,0,1))}]);
   fw_pill(ctx,t,[[P.vi,"Vienna · 1847"],[P.pt,"Pest · 1858"],[P.pub,"Pest · 1861"],[P.lt,"Pest · 1862"]],fin(t,P.vi+0.2,0.4)*(1-fin(t,P.af-0.2,0.4)));
   wc_year(ctx,56,72,"Today",fin(t,P.ph+0.2,0.4)*(1-fin(t,P.end,0.6)));
-  gv_end(ctx,S,t,P.end,"Fixed where it starts","Fix the cause, then make the fix a check.","Film 6 of 19");
+  gv_end(ctx,S,t,P.end,"Fixed where it starts","Fix the cause, then make the fix a check.","Film 6 of 10");
   wc_paperOver(ctx,S);});

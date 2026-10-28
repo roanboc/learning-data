@@ -61,7 +61,7 @@
 | A hub at work | 239 | 0% | 0 | 30 | Drawn to the rule |
 | Kept, not cleaned | 287 | 0% | 0 | 30 | Drawn to the rule |
 | The same problem, everywhere | 237 | 0% | 0 | 32.5 | Drawn to the rule |
-| Off the shelf | 317 | 0% | 0 | 34.0 | Drawn to the rule |
+| Off the shelf | 315 | 0% | 0 | 34.0 | Drawn to the rule |
 | Who decides | 346 | 0% | 0 | 32.7 | Drawn to the rule |
 | One word, one home | 333 | 0% | 0 | 30.0 | Drawn to the rule |
 | Who may see it | 349 | 0% | 0 | 30.3 | Drawn to the rule |
@@ -70,7 +70,7 @@
 | Change without surprises | 489 | 0% | 0 | 32.2 | Drawn to the rule |
 | A product with an owner | 264 | 0% | 0 | 33.8 | Drawn to the rule |
 | An agent that checks | 451 | 0% | 0 | 30.3 | Drawn to the rule |
-| Teachers of data | 372 | 0% | 0 | 32.3 | Drawn to the rule |
+| Teachers of data | 370 | 0% | 0 | 32.3 | Drawn to the rule |
 <!-- /films -->
 
 ## What's left

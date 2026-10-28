@@ -3301,7 +3301,7 @@ scene("cord",(ctx,S,t,sc)=>{const c=sc.cues,N=WD_LN,P=wd_once(sc,"P",()=>{const 
     {at:P.data,place:"line",keys:[[P.data,960,540,1],[sc.dur,960,540,1.05]],d:2,push:0,draw:(x,tt)=>{
       const sp=wd_supAt(tt,N.sup,N.sup,1e9,sx=>POSE.listen);wd_scene1(x,tt,{off:P.off6(tt),lamps:lampsOff(),sup:sp,light:0.9});}}]);
   wd_pill(ctx,t,"Japan · 1960s",WD_PILL.a);WD_PILL.a=0;
-  gv_title(ctx,S,t,P.title,"Who decides","owners in the work, asked by name","Film 2 of 19 · data governance");
+  gv_title(ctx,S,t,P.title,"Who decides","owners in the work, asked by name","Film 2 of 10 · data governance");
   wc_paperOver(ctx,S);});
 // the place and the decade in the top corner
 function wd_pill(ctx,t,s,a){if(a>0.01)wc_year(ctx,56,72,s,a);}
@@ -3607,7 +3607,7 @@ scene("which",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({cord:wAt(sc,
       // (under the end card, the screen and the items go with the rest of the picture)
       withA(x,1-fin(tt,P.end,0.8),()=>{wd_swap(x,fin(tt,P.which+0.1,0.6),()=>wd_meiWork(x),()=>wd_five(x,0,1,col(0)));
         for(let j=1;j<5;j++)wd_five(x,j,fin(tt,P.found+0.2+0.45*(j-1),0.6),col(j));gv_qmark(x,560,400,150,fin(tt,P.agree+0.2,0.8));});}}]);
-  gv_end(ctx,S,t,P.end,"Who decides","A decision right is real when the work asks for it.","Film 2 of 19");
+  gv_end(ctx,S,t,P.end,"Who decides","A decision right is real when the work asks for it.","Film 2 of 10");
   wc_paperOver(ctx,S);});
 
 const WC_PLACES={line:wd_paintLine,lineFront:wd_paintLineFront,office:gv_paintOffice,officeDesk:wd_paintOfficeDesk,deskTop:wd_paintDeskTop,

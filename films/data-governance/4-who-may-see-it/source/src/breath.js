@@ -1,6 +1,7 @@
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
-   Three wordless moments: the pencil line across the form, then the title; the mask following the column down the board; and the ending. */
+   Two wordless moments: the court's line straightening into the line between a table's columns, then the title; and the ending.
+   The longest hold, after the mask's last line, lets the near-award list light: no email in it, and none to mask. */
 const BREATH={
 "counted":{"hold":{"picture":0.4,"boycott":0.6,"stops":0.2,"rules":0.4,"line":1.0,"y1987":0.2,"another":0.6},"breathe":4.2},
 "census":{"hold":{"too":0.5,"counts":0.7,"term":0.5,"status":0.4}},

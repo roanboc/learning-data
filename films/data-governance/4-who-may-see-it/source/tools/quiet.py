@@ -1,9 +1,9 @@
 """When the music plays: python tools/quiet.py, from this film's source folder, after tools/audio.py (it reads build/timeline.json).
 
 This film's sound (the author's review, 20 October 2026, as for the master data films, whose check this is): music plays under the
-opening story from history, West Germany's census of 1983 and the line its court drew; after that, music and sounds come in from time to time, at a chapter's
-turn, under a moment on screen or in a pause without words, never as a constant bed under the voice; and nothing in it trembles or
-pulses. This plays the film's score (tools/score.py) on its own and checks three things:
+opening story from history, West Germany's census of 1983 and the line its court drew; after that, music and sounds come in from
+time to time, at a chapter's turn, under a moment on screen or in a pause without words, never as a constant bed under the voice;
+and nothing in it trembles or pulses. This plays the film's score (tools/score.py) on its own and checks three things:
   - after the opening, no chapter has music for more than half its length, or for more than 12 seconds without a break;
   - no two held sounds are a little out of tune with each other, so that they beat, 0.3 to 12 times a second, when a phone's one
     speaker adds the two channels together, loud enough to move the music's level by a fifth or more;

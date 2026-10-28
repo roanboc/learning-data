@@ -75,213 +75,213 @@ En la universidad, la palabra título acaba de cambiar: ahora cuentan las microc
 Mei, dueña de la palabra, aprobó esta mañana el nuevo significado.
 
 20
-00:01:45,707 --> 00:01:48,024
+00:01:45,707 --> 00:01:48,142
 Ahora Jun debe cambiar lo que cuentan los informes.
 
 21
-00:01:49,324 --> 00:01:52,547
+00:01:49,442 --> 00:01:52,665
 La carpeta dice que primero se evalúa el impacto de los cambios.
 
 22
-00:01:54,147 --> 00:01:58,945
+00:01:54,265 --> 00:01:59,063
 En la práctica, es un comité de cambios, una vez al mes, y su formulario se responde de memoria.
 
 23
-00:02:00,245 --> 00:02:04,761
+00:02:00,363 --> 00:02:04,879
 El próximo comité se reúne después del borrador de la entrega, así que el borrador contaría como antes.
 
 24
-00:02:06,061 --> 00:02:08,522
+00:02:06,179 --> 00:02:08,640
 Y a quien nadie recuerda, nadie le avisa.
 
 25
-00:02:09,622 --> 00:02:11,060
+00:02:09,740 --> 00:02:11,194
 Jun necesita algo mejor.
 
 26
-00:02:15,360 --> 00:02:18,797
+00:02:15,494 --> 00:02:18,931
 Para ver a qué alcanza un cambio, hay que saber quién usa qué.
 
 27
-00:02:19,897 --> 00:02:26,499
+00:02:20,031 --> 00:02:26,636
 El equipo de Jun mantiene la tabla de cada credencial de los estudiantes: títulos, microcredenciales e insignias.
 
 28
-00:02:27,799 --> 00:02:33,028
+00:02:27,936 --> 00:02:33,165
 Pero nadie lleva un registro de todos los informes y apps que la usan, ni de quién responde por cada uno.
 
 29
-00:02:34,328 --> 00:02:37,192
+00:02:34,465 --> 00:02:37,329
 Así que empiezan uno: un registro de quién usa qué.
 
 30
-00:02:38,592 --> 00:02:41,825
+00:02:38,729 --> 00:02:41,937
 Cada dueño escribe su propia línea, y el equipo de Jun lo mantiene.
 
 31
-00:02:47,325 --> 00:02:54,637
+00:02:47,437 --> 00:02:54,719
 Ahora la solicitud de cambio de Jun lleva una nota de impacto: a qué alcanza, si rompe algo, y a quién hay que avisar.
 
 32
-00:02:55,637 --> 00:03:00,971
+00:02:55,719 --> 00:03:01,053
 Su primera versión reetiqueta como títulos las microcredenciales de seis créditos o más.
 
 33
-00:03:01,971 --> 00:03:04,884
+00:03:02,053 --> 00:03:04,966
 Según el registro, la nota enumera cinco cosas a las que alcanza.
 
 34
-00:03:06,284 --> 00:03:08,848
+00:03:06,366 --> 00:03:08,930
 Los dos informes que cuentan títulos lo pidieron.
 
 35
-00:03:09,748 --> 00:03:13,639
+00:03:09,830 --> 00:03:13,721
 El tablero de Planificación, el pronóstico de Finanzas y la app de billetera, no.
 
 36
-00:03:14,739 --> 00:03:19,970
+00:03:14,821 --> 00:03:20,052
 Cuatro dueños a consultar: Mei, Clara, Finanzas, y Marta, que dirige el equipo de la billetera.
 
 37
-00:03:23,870 --> 00:03:29,544
+00:03:23,952 --> 00:03:29,626
 El tablero de Planificación y el pronóstico de Finanzas cuentan los créditos que los estudiantes llevan hacia un título,
 
 38
-00:03:29,844 --> 00:03:32,228
+00:03:29,926 --> 00:03:32,310
 y parte de ellos viene de microcredenciales.
 
 39
-00:03:33,328 --> 00:03:37,936
+00:03:33,410 --> 00:03:38,018
 Reetiquetadas como títulos, las grandes saldrían de la cuenta, y ambos números se moverían.
 
 40
-00:03:39,236 --> 00:03:42,886
+00:03:39,318 --> 00:03:42,968
 Las billeteras de los estudiantes mostrarían sus microcredenciales como títulos.
 
 41
-00:03:43,986 --> 00:03:45,539
+00:03:44,068 --> 00:03:45,621
 La tabla se vería igual.
 
 42
-00:03:46,639 --> 00:03:49,674
+00:03:46,721 --> 00:03:49,756
 Pero cambiar lo que significan los datos existentes es romper.
 
 43
-00:03:50,574 --> 00:03:54,997
+00:03:50,656 --> 00:03:55,079
 Como cambiar de lado en la carretera, todos los que la usan deben cambiar a la vez.
 
 44
-00:03:56,197 --> 00:03:59,197
+00:03:56,279 --> 00:03:59,279
 Mei, dueña del significado, decide: este rompe.
 
 45
-00:04:03,097 --> 00:04:04,512
+00:04:03,179 --> 00:04:04,594
 Jun agrega, en cambio.
 
 46
-00:04:05,512 --> 00:04:12,697
+00:04:05,594 --> 00:04:12,779
 Cada microcredencial sigue siendo microcredencial, y una marca nueva dice cuáles cuentan como título: sí o no.
 
 47
-00:04:13,897 --> 00:04:17,127
+00:04:13,979 --> 00:04:17,209
 Nada cambia para nadie hasta que elija la marca nueva.
 
 48
-00:04:17,827 --> 00:04:24,634
+00:04:17,909 --> 00:04:24,716
 Ahora la nota solo enumera lo que usa credenciales: los dos informes y la app de billetera, con tres dueños a consultar.
 
 49
-00:04:25,634 --> 00:04:26,820
+00:04:25,716 --> 00:04:26,902
 Y nada se rompe.
 
 50
-00:04:30,520 --> 00:04:34,703
+00:04:30,602 --> 00:04:34,785
 Algunos cambios no se pueden agregar, como quitar un dato.
 
 51
-00:04:35,903 --> 00:04:43,161
+00:04:35,985 --> 00:04:43,243
 Entonces una edición nueva va junto a la vieja, como las señales nuevas de Suecia, y la vieja queda hasta una fecha que todos saben.
 
 52
-00:04:44,261 --> 00:04:47,296
+00:04:44,343 --> 00:04:47,378
 La tabla de credenciales ya tiene dos ediciones.
 
 53
-00:04:48,196 --> 00:04:52,359
+00:04:48,278 --> 00:04:52,441
 La edición 1 se retira el 31 de marzo de 2027.
 
 54
-00:04:53,559 --> 00:04:55,715
+00:04:53,641 --> 00:04:55,797
 Una edición nueva es el último recurso.
 
 55
-00:04:59,315 --> 00:05:03,131
+00:04:59,397 --> 00:05:03,213
 La nota dice a quién hay que avisar, y el equipo de la billetera no pidió esto.
 
 56
-00:05:04,131 --> 00:05:08,392
+00:05:04,213 --> 00:05:08,498
 Así que Jun les escribe antes de que entre el cambio, con sus palabras, no las de él.
 
 57
-00:05:09,792 --> 00:05:13,739
+00:05:09,898 --> 00:05:13,845
 Como el folleto de Suecia, dice qué cambia, desde cuándo, y qué hacer.
 
 58
-00:05:15,339 --> 00:05:16,665
+00:05:15,445 --> 00:05:16,821
 Jun agrega quién ayudará.
 
 59
-00:05:17,665 --> 00:05:19,943
+00:05:17,821 --> 00:05:20,099
 La mitad del control de cambios es avisar a la gente.
 
 60
-00:05:23,943 --> 00:05:30,139
+00:05:24,099 --> 00:05:30,295
 Desde el miércoles, el borrador de la entrega cuenta con la marca nueva, y el informe del censo, desde su próxima ejecución.
 
 61
-00:05:31,439 --> 00:05:39,012
+00:05:31,595 --> 00:05:39,168
 Como los autos a las cinco menos diez, el cambio espera a todos a quienes alcanza: Mei, Marta y Clara dicen cuándo están listas.
 
 62
-00:05:40,712 --> 00:05:44,110
+00:05:40,868 --> 00:05:44,266
 Entra cuando todas lo están, hoy, antes del borrador del miércoles.
 
 63
-00:05:48,410 --> 00:05:51,752
+00:05:48,566 --> 00:05:51,908
 En la oficina de Yusuf, la línea sobre los cambios sale del estante.
 
 64
-00:05:52,952 --> 00:05:57,323
+00:05:53,108 --> 00:05:57,479
 Cada solicitud de cambio lleva ahora una nota de impacto, llenada con los dueños.
 
 65
-00:05:58,423 --> 00:06:02,133
+00:05:58,579 --> 00:06:02,289
 Cada equipo que empieza a usar datos agrega su línea al registro.
 
 66
-00:06:03,333 --> 00:06:05,756
+00:06:03,489 --> 00:06:05,912
 El comité se reúne solo cuando un cambio lo necesita.
 
 67
-00:06:06,956 --> 00:06:08,972
+00:06:07,112 --> 00:06:09,128
 Gobernar los cambios así vale la pena.
 
 68
-00:06:09,972 --> 00:06:13,670
+00:06:10,128 --> 00:06:13,826
 Este cambio entró hoy, no en un mes, y el próximo también puede.
 
 69
-00:06:14,870 --> 00:06:17,569
+00:06:15,026 --> 00:06:17,725
 Nada se rompió, y los dos informes van a coincidir.
 
 70
-00:06:18,769 --> 00:06:22,503
+00:06:18,925 --> 00:06:22,659
 Como la mañana de Suecia, no sorprendió a nadie, porque todos sabían.
 
 71
-00:06:23,903 --> 00:06:26,980
+00:06:24,059 --> 00:06:27,136
 El control de cambios es un paso del cambio, no una reunión.
 
 72
-00:06:28,680 --> 00:06:33,385
+00:06:28,836 --> 00:06:33,541
 Queda una pregunta: cuando una tabla que usan muchos equipos llega tarde, ¿quién responde por ella?

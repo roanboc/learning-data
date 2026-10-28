@@ -131,7 +131,7 @@ scene("dawn",(ctx,S,t,sc)=>{const P=cw_once(sc,"P",()=>{const c=sc.cues,w=(id,s,
   setScreen(ctx,S);const mk=[[0,"Sweden · 3 September 1967"],[P.border,"Sweden · 1966"],[P.know,"Sweden · 1963"],[P.y64,"Sweden · 1964"],[P.y65,"Sweden · 1965"],[P.y66,"Sweden · 1966"],
     [P.signs,"Sweden · 1967"],[P.huge,"Sweden · 3 September 1967"],[P.half,"Sweden · 1967"],[P.knew,"Sweden · 3 September 1967"]];
   cw_pill(ctx,t,mk,fin(t,0.6,0.5)*(1-gv_io(t,P.feared+0.4,P.know-0.1,0.4))*(1-fin(t,P.title,0.4)));
-  gv_title(ctx,S,t,P.title,"Change without surprises","what a change reaches, shown before it goes in","Film 7 of 19 · data governance");wc_paperOver(ctx,S);});
+  gv_title(ctx,S,t,P.title,"Change without surprises","what a change reaches, shown before it goes in","Film 7 of 10 · data governance");wc_paperOver(ctx,S);});
 
 // ---- 2 · The change board: award's meaning changed this morning, and Jun must change what the reports count; the binder says the
 // impact is assessed first, and in practice that's a board once a month whose form is answered from memory ----
@@ -474,5 +474,5 @@ scene("step",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s,
     {at:P.late,place:"boardWide",keys:[[P.late,960,470,1.0],[P.late+0.1,962,468,1.03]],d:3,draw:(x,tt)=>{const a=fin(tt,P.near,0.6);withA(x,1-fin(tt,P.end,0.7),()=>{
       cw_who(x,...PG6,[1,1,1,1,1,1],{foot:1,rows:CW_WHO6,inks:CW_INK6});gv_pin(x,PG6[0]+PG6[2]/2,PG6[1]+16,GV.red,1.6);
       if(a>0.01)withA(x,a,()=>cw_boardClock(x,300,190,70,4,50));cw_nearCard(x,90,330,a,{owner:fin(tt,P.owner,1.0)});});}}]);
-  gv_end(ctx,S,t,P.end,"Change without surprises","Change control is a step in the change, not a meeting.","Film 7 of 19");
+  gv_end(ctx,S,t,P.end,"Change without surprises","Change control is a step in the change, not a meeting.","Film 7 of 10");
   setScreen(ctx,S);wc_year(ctx,56,72,"Sweden · 3 September 1967",gv_io(t,P.morn+0.3,P.idea,0.4));wc_paperOver(ctx,S);});

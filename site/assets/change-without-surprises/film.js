@@ -406,7 +406,7 @@ function ledFrame(ctx,x,y,w,h,c,img,o){o=o||{};const p=o.pad==null?Math.max(4,w*
 function plaque(ctx,x,y,w,rows,c){const h=20+rows.length*52;glass(ctx,x,y,w,h,14,c,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.9)"});
   rows.forEach((r,i)=>{const yy=y+16+i*52;let tx=x+18;if(r[2]){const lw=logo(ctx,r[2],tx,yy+8,28);tx+=Math.max(lw,26)+10;}T(ctx,r[0],tx,yy+16,{size:15,w:700,color:rgba(SOFT,0.95)});T(ctx,r[1],tx,yy+40,{size:21,w:700});});return h;}
 
-// Change without surprises, film 7 of 19 of the data governance series. One line per id; the film re-times itself to the voice.
+// Change without surprises, film 7 of 10 of the data governance series. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
 const NARR={
 "dawn":{"name":"Five in the morning","lead":1.4,"tail":1.0,"vo":[
@@ -493,7 +493,7 @@ const NARR={
  {"id":"late","gap":0.8,"text":"One question is left: when a table many teams use is late, who answers for it?"}]}
 };
 
-const VODUR={"dawn/stop": 7.386, "dawn/cross": 2.08, "dawn/five": 1.276, "dawn/name": 3.386, "dawn/left": 4.243, "dawn/wheel": 3.73, "dawn/overtake": 4.209, "dawn/change": 1.288, "dawn/feared": 6.943, "dawn/know": 1.09, "dawn/commission": 2.025, "dawn/signs": 3.029, "dawn/booklet": 4.543, "dawn/huge": 2.645, "dawn/half": 4.337, "dawn/knew": 3.005, "board/same": 5.867, "board/award": 6.65, "board/mei": 3.275, "board/jun": 2.217, "board/binder": 3.123, "board/practice": 4.698, "board/next": 4.416, "board/nobody": 2.361, "board/better": 1.338, "uses/see": 3.337, "uses/table": 6.502, "uses/nobody": 5.129, "uses/start": 2.764, "uses/lines": 3.133, "note/note": 7.212, "note/draft": 5.234, "note/five": 2.813, "note/asked": 2.464, "note/didnt": 3.791, "note/owners": 5.131, "breaks/credit": 5.574, "breaks/part": 2.284, "breaks/drop": 4.508, "breaks/wallet": 3.55, "breaks/same": 1.453, "breaks/meaning": 2.935, "breaks/road": 4.323, "breaks/decides": 2.9, "adds/adds": 1.315, "adds/mark": 7.085, "adds/choose": 3.13, "adds/lists": 6.707, "adds/nothing": 1.086, "edition/cant": 4.083, "edition/beside": 7.158, "edition/two": 2.935, "edition/retires": 4.063, "edition/last": 2.056, "words/told": 3.716, "words/writes": 4.161, "words/booklet": 3.847, "words/help": 1.226, "words/half": 2.178, "ready/wed": 6.096, "ready/wait": 7.473, "ready/goes": 3.298, "step/shelf": 3.242, "step/every": 4.271, "step/team": 3.61, "step/board": 2.323, "step/pays": 1.916, "step/today": 3.598, "step/broke": 2.599, "step/morning": 3.634, "step/idea": 2.977, "step/late": 4.605};
+const VODUR={"dawn/stop": 7.386, "dawn/cross": 2.08, "dawn/five": 1.276, "dawn/name": 3.386, "dawn/left": 4.243, "dawn/wheel": 3.73, "dawn/overtake": 4.209, "dawn/change": 1.288, "dawn/feared": 6.943, "dawn/know": 1.09, "dawn/commission": 2.025, "dawn/signs": 3.029, "dawn/booklet": 4.543, "dawn/huge": 2.645, "dawn/half": 4.337, "dawn/knew": 3.005, "board/same": 5.867, "board/award": 6.65, "board/mei": 3.275, "board/jun": 2.335, "board/binder": 3.123, "board/practice": 4.698, "board/next": 4.416, "board/nobody": 2.361, "board/better": 1.354, "uses/see": 3.337, "uses/table": 6.505, "uses/nobody": 5.129, "uses/start": 2.764, "uses/lines": 3.108, "note/note": 7.182, "note/draft": 5.234, "note/five": 2.813, "note/asked": 2.464, "note/didnt": 3.791, "note/owners": 5.131, "breaks/credit": 5.574, "breaks/part": 2.284, "breaks/drop": 4.508, "breaks/wallet": 3.55, "breaks/same": 1.453, "breaks/meaning": 2.935, "breaks/road": 4.323, "breaks/decides": 2.9, "adds/adds": 1.315, "adds/mark": 7.085, "adds/choose": 3.13, "adds/lists": 6.707, "adds/nothing": 1.086, "edition/cant": 4.083, "edition/beside": 7.158, "edition/two": 2.935, "edition/retires": 4.063, "edition/last": 2.056, "words/told": 3.716, "words/writes": 4.185, "words/booklet": 3.847, "words/help": 1.276, "words/half": 2.178, "ready/wed": 6.096, "ready/wait": 7.473, "ready/goes": 3.298, "step/shelf": 3.242, "step/every": 4.271, "step/team": 3.61, "step/board": 2.323, "step/pays": 1.916, "step/today": 3.598, "step/broke": 2.599, "step/morning": 3.634, "step/idea": 2.977, "step/late": 4.605};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -4025,7 +4025,7 @@ scene("dawn",(ctx,S,t,sc)=>{const P=cw_once(sc,"P",()=>{const c=sc.cues,w=(id,s,
   setScreen(ctx,S);const mk=[[0,"Sweden · 3 September 1967"],[P.border,"Sweden · 1966"],[P.know,"Sweden · 1963"],[P.y64,"Sweden · 1964"],[P.y65,"Sweden · 1965"],[P.y66,"Sweden · 1966"],
     [P.signs,"Sweden · 1967"],[P.huge,"Sweden · 3 September 1967"],[P.half,"Sweden · 1967"],[P.knew,"Sweden · 3 September 1967"]];
   cw_pill(ctx,t,mk,fin(t,0.6,0.5)*(1-gv_io(t,P.feared+0.4,P.know-0.1,0.4))*(1-fin(t,P.title,0.4)));
-  gv_title(ctx,S,t,P.title,"Change without surprises","what a change reaches, shown before it goes in","Film 7 of 19 · data governance");wc_paperOver(ctx,S);});
+  gv_title(ctx,S,t,P.title,"Change without surprises","what a change reaches, shown before it goes in","Film 7 of 10 · data governance");wc_paperOver(ctx,S);});
 
 // ---- 2 · The change board: award's meaning changed this morning, and Jun must change what the reports count; the binder says the
 // impact is assessed first, and in practice that's a board once a month whose form is answered from memory ----
@@ -4368,7 +4368,7 @@ scene("step",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s,
     {at:P.late,place:"boardWide",keys:[[P.late,960,470,1.0],[P.late+0.1,962,468,1.03]],d:3,draw:(x,tt)=>{const a=fin(tt,P.near,0.6);withA(x,1-fin(tt,P.end,0.7),()=>{
       cw_who(x,...PG6,[1,1,1,1,1,1],{foot:1,rows:CW_WHO6,inks:CW_INK6});gv_pin(x,PG6[0]+PG6[2]/2,PG6[1]+16,GV.red,1.6);
       if(a>0.01)withA(x,a,()=>cw_boardClock(x,300,190,70,4,50));cw_nearCard(x,90,330,a,{owner:fin(tt,P.owner,1.0)});});}}]);
-  gv_end(ctx,S,t,P.end,"Change without surprises","Change control is a step in the change, not a meeting.","Film 7 of 19");
+  gv_end(ctx,S,t,P.end,"Change without surprises","Change control is a step in the change, not a meeting.","Film 7 of 10");
   setScreen(ctx,S);wc_year(ctx,56,72,"Sweden · 3 September 1967",gv_io(t,P.morn+0.3,P.idea,0.4));wc_paperOver(ctx,S);});
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */

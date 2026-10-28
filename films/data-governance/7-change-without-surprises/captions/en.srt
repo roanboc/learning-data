@@ -75,213 +75,213 @@ At the university, the word award has just changed: microcredentials of at least
 Mei, who owns the word, signed off the new meaning this morning.
 
 20
-00:01:45,707 --> 00:01:48,024
+00:01:45,707 --> 00:01:48,142
 Now Jun must change what the reports count.
 
 21
-00:01:49,324 --> 00:01:52,547
+00:01:49,442 --> 00:01:52,665
 The binder says changes are assessed for impact first.
 
 22
-00:01:54,147 --> 00:01:58,945
+00:01:54,265 --> 00:01:59,063
 In practice, that's a change board, once a month, and its form is answered from memory.
 
 23
-00:02:00,245 --> 00:02:04,761
+00:02:00,363 --> 00:02:04,879
 The next board meets after the draft submission, so the draft would count the old way.
 
 24
-00:02:06,061 --> 00:02:08,522
+00:02:06,179 --> 00:02:08,640
 And anyone nobody remembers isn't told.
 
 25
-00:02:09,622 --> 00:02:11,060
+00:02:09,740 --> 00:02:11,194
 Jun needs a better way.
 
 26
-00:02:15,360 --> 00:02:18,797
+00:02:15,494 --> 00:02:18,931
 To see what a change reaches, you need to know who uses what.
 
 27
-00:02:19,897 --> 00:02:26,499
+00:02:20,031 --> 00:02:26,636
 Jun's team keeps the table of every credential learners hold: awards, microcredentials and badges.
 
 28
-00:02:27,799 --> 00:02:33,028
+00:02:27,936 --> 00:02:33,165
 But nobody keeps a record of all the reports and apps that use it, or who answers for each.
 
 29
-00:02:34,328 --> 00:02:37,192
+00:02:34,465 --> 00:02:37,329
 So they start one: a record of who uses what.
 
 30
-00:02:38,592 --> 00:02:41,825
+00:02:38,729 --> 00:02:41,937
 Each owner writes their own line, and Jun's team keeps it.
 
 31
-00:02:47,325 --> 00:02:54,637
+00:02:47,437 --> 00:02:54,719
 Now Jun's change request carries an impact note: what it reaches, whether it breaks anything, and who must be told.
 
 32
-00:02:55,637 --> 00:03:00,971
+00:02:55,719 --> 00:03:01,053
 His first draft relabels microcredentials of six credit points or more as awards.
 
 33
-00:03:01,971 --> 00:03:04,884
+00:03:02,053 --> 00:03:04,966
 From the record, the note lists five things it reaches.
 
 34
-00:03:06,284 --> 00:03:08,848
+00:03:06,366 --> 00:03:08,930
 The two reports that count awards asked for it.
 
 35
-00:03:09,748 --> 00:03:13,639
+00:03:09,830 --> 00:03:13,721
 Planning's dashboard, Finance's forecast and the wallet app didn't.
 
 36
-00:03:14,739 --> 00:03:19,970
+00:03:14,821 --> 00:03:20,052
 Four owners to ask: Mei, Clara, Finance, and Marta, who leads the wallet team.
 
 37
-00:03:23,870 --> 00:03:29,544
+00:03:23,952 --> 00:03:29,626
 Planning's dashboard and Finance's forecast both count the credit learners have towards an award,
 
 38
-00:03:29,844 --> 00:03:32,228
+00:03:29,926 --> 00:03:32,310
 and part of it comes from microcredentials.
 
 39
-00:03:33,328 --> 00:03:37,936
+00:03:33,410 --> 00:03:38,018
 Relabelled as awards, the big ones would drop out, and both numbers would move.
 
 40
-00:03:39,236 --> 00:03:42,886
+00:03:39,318 --> 00:03:42,968
 Learners' wallets would show their microcredentials as awards.
 
 41
-00:03:43,986 --> 00:03:45,539
+00:03:44,068 --> 00:03:45,621
 The table would look the same.
 
 42
-00:03:46,639 --> 00:03:49,674
+00:03:46,721 --> 00:03:49,756
 But changing what existing data means is breaking.
 
 43
-00:03:50,574 --> 00:03:54,997
+00:03:50,656 --> 00:03:55,079
 Like switching sides of the road, everyone who uses it must change at once.
 
 44
-00:03:56,197 --> 00:03:59,197
+00:03:56,279 --> 00:03:59,279
 Mei, who owns the meaning, decides: this one breaks.
 
 45
-00:04:03,097 --> 00:04:04,512
+00:04:03,179 --> 00:04:04,594
 So Jun adds instead.
 
 46
-00:04:05,512 --> 00:04:12,697
+00:04:05,594 --> 00:04:12,779
 Every microcredential stays a microcredential, and one new mark says which ones count as an award: yes or no.
 
 47
-00:04:13,897 --> 00:04:17,127
+00:04:13,979 --> 00:04:17,209
 Nothing changes for anyone until they choose the new mark.
 
 48
-00:04:17,827 --> 00:04:24,634
+00:04:17,909 --> 00:04:24,716
 Now the note lists only what uses credentials: the two reports and the wallet app, with three owners to ask.
 
 49
-00:04:25,634 --> 00:04:26,820
+00:04:25,716 --> 00:04:26,902
 And nothing breaks.
 
 50
-00:04:30,520 --> 00:04:34,703
+00:04:30,602 --> 00:04:34,785
 Some changes can't be added, like taking a piece of information away.
 
 51
-00:04:35,903 --> 00:04:43,161
+00:04:35,985 --> 00:04:43,243
 Then a new edition goes beside the old one, like Sweden's new signs, and the old one stays until a date everyone knows.
 
 52
-00:04:44,261 --> 00:04:47,296
+00:04:44,343 --> 00:04:47,378
 The table of credentials already has two editions.
 
 53
-00:04:48,196 --> 00:04:52,359
+00:04:48,278 --> 00:04:52,441
 Edition 1 retires on the thirty-first of March 2027.
 
 54
-00:04:53,559 --> 00:04:55,715
+00:04:53,641 --> 00:04:55,797
 A new edition is the last resort.
 
 55
-00:04:59,315 --> 00:05:03,131
+00:04:59,397 --> 00:05:03,213
 The note says who must be told, and the wallet team didn't ask for this.
 
 56
-00:05:04,131 --> 00:05:08,392
+00:05:04,213 --> 00:05:08,498
 So Jun writes to them before the change goes in, in their words, not his.
 
 57
-00:05:09,792 --> 00:05:13,739
+00:05:09,898 --> 00:05:13,845
 Like Sweden's booklet, it says what changes, from when, and what to do.
 
 58
-00:05:15,339 --> 00:05:16,665
+00:05:15,445 --> 00:05:16,821
 Jun adds who will help.
 
 59
-00:05:17,665 --> 00:05:19,943
+00:05:17,821 --> 00:05:20,099
 Half of change control is telling people.
 
 60
-00:05:23,943 --> 00:05:30,139
+00:05:24,099 --> 00:05:30,295
 From Wednesday, the draft submission counts with the new mark, and Planning's census report from its next run.
 
 61
-00:05:31,439 --> 00:05:39,012
+00:05:31,595 --> 00:05:39,168
 Like the cars at ten to five, the change waits for everyone it reaches: Mei, Marta and Clara each say when they're ready.
 
 62
-00:05:40,712 --> 00:05:44,110
+00:05:40,868 --> 00:05:44,266
 It goes in when they all are, today, before Wednesday's draft.
 
 63
-00:05:48,410 --> 00:05:51,752
+00:05:48,566 --> 00:05:51,908
 In Yusuf's office, the line about change leaves the shelf.
 
 64
-00:05:52,952 --> 00:05:57,323
+00:05:53,108 --> 00:05:57,479
 Every change request now carries an impact note, filled in with the owners.
 
 65
-00:05:58,423 --> 00:06:02,133
+00:05:58,579 --> 00:06:02,289
 Every team that starts using data adds its line to the record.
 
 66
-00:06:03,333 --> 00:06:05,756
+00:06:03,489 --> 00:06:05,912
 The board meets only when a change needs it.
 
 67
-00:06:06,956 --> 00:06:08,972
+00:06:07,112 --> 00:06:09,128
 Governing change this way pays off.
 
 68
-00:06:09,972 --> 00:06:13,670
+00:06:10,128 --> 00:06:13,826
 This change went in today, not in a month, and so can the next.
 
 69
-00:06:14,870 --> 00:06:17,569
+00:06:15,026 --> 00:06:17,725
 Nothing broke, and the two reports will agree.
 
 70
-00:06:18,769 --> 00:06:22,503
+00:06:18,925 --> 00:06:22,659
 Like Sweden's morning, it surprised no one, because everyone knew.
 
 71
-00:06:23,903 --> 00:06:26,980
+00:06:24,059 --> 00:06:27,136
 Change control is a step in the change, not a meeting.
 
 72
-00:06:28,680 --> 00:06:33,385
+00:06:28,836 --> 00:06:33,541
 One question is left: when a table many teams use is late, who answers for it?

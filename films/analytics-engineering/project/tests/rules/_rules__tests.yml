@@ -3,9 +3,9 @@ data_tests:
   - name: keys_decided_different_stay_apart
     description: A decision that two keys are different people holds, whatever the matching rules do.
     config:
-      meta: {owner: "Mei Tanaka, registrar's office"}
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: consistency}
 
   - name: alumni_graduated_under_a_known_student_id
     description: Every graduate the alumni office knows has a student ID the student system issued, in its current table or its archive.
     config:
-      meta: {owner: Alumni office}
+      meta: {owner: Alumni office, dimension: consistency}

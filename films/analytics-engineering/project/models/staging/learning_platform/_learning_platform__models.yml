@@ -63,4 +63,9 @@ models:
                 field: user_bk
       - name: credit_points
         description: Credit points the badge carries. Zero for a badge that's not a microcredential.
-        data_tests: [not_null]
+        data_tests:
+          - not_null
+          # A microcredential badge carries credit (DEC-LMS-03).
+          - positive:
+              config:
+                where: "badge_code like 'MC-%'"

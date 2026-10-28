@@ -1,216 +1,386 @@
 /* ===== Off the shelf: the places and the pictures =====
-   The places are painted once and kept (shared/src/finish.js). The past: the market by the town wall in 1215, the market hall in 1497,
-   a corn exchange in 1871 and a grocer's shop in the 1880s, places of trade and of the people who checked it. Today, only the
-   university's own places (the series' rooms.js): the campus, Yusuf's office, the floor of offices, Planning, the registrar's office,
-   the data team's room, and his desk from above. The pictures are the film's own things: the charter and the jugs, the king's
-   standards, the bushels, the scale, the inspector's case and the Act; the shelf of binders, the score, the chart, the minutes, the two
-   reports, the glossary's term, the government's manual, binder 12 and the highlighters, DAMA's book and its wheel, the loop of ten
-   steps and the cards. Every name starts with os_ or OS_. */
+   The places are painted once and kept (shared/src/finish.js). The past, in 2008: an operating room, a hospital's shelf of guidelines,
+   a map of the world with the study's eight cities, and the checklist on its clipboard, close. Today, only the university's own places
+   (the series' rooms.js): the campus, Yusuf's office, the floor of offices, Planning, the registrar's office, the data team's room, and
+   his desk from above. The pictures are the film's own things: the team in scrubs, caps and masks, the patient, the drip, the trolley
+   and the count board; the shelf of binders, the score, the chart, the minutes, the two reports, the glossary's term, the government's
+   manual, binder 12 and the highlighters, the newest DMBOK on Yusuf's desk, the gold cards of what's worth keeping, and the cards for
+   the films to come, on Noor's map among them. Every name starts with os_ or OS_. */
 
-/* ---------- 1215: the market by the town wall ---------- */
-// the ground, the market cross (its steps' top is where the crier stands), the two stalls' tables
-const OS_MK={fy:640,cross:840,shaft:770,step:662,crier:896,wine:[70,540,722],corn:[1190,1700,730]};
-const OS_EARTH=[218,194,154],OS_STONE=[204,194,172],OS_TIMBER=[150,112,78],OS_REDSTRIPE=[196,70,58],OS_BLUESTRIPE=[78,110,170],OS_CLOTH=[244,234,212];
-// a stall's awning: cloth in stripes between two poles, sloping towards us
-function os_awning(ctx,x0,x1,y,col,seed){const n=Math.round((x1-x0)/56),pts=k=>{const a=x0+(x1-x0)*k/n,b=x0+(x1-x0)*(k+1)/n;return[[a,y],[b,y],[b+(b-(x0+x1)/2)*0.08,y+86],[a+(a-(x0+x1)/2)*0.08,y+86]];};
-  for(let k=0;k<n;k++)wc_wash(ctx,pts(k),k%2?OS_CLOTH:col,{kind:"build",lw:1.2,seed:seed+k});
-  for(let k=0;k<n;k++){const p=pts(k);wc_wash(ctx,[p[3],p[2],[p[2][0],p[2][1]+16],[(p[2][0]+p[3][0])/2,p[2][1]+30],[p[3][0],p[3][1]+16]],k%2?OS_CLOTH:col,{kind:"build",lw:1.2,seed:seed+40+k});}}
-// a trestle table: a plank top at y, two trestles to the ground at fy
-function os_trestle(ctx,x0,x1,y,fy){for(const x of [x0+50,x1-70])wc_part(ctx,[[x,y+10],[x+20,y+10],[x+44,fy],[x+24,fy],[x+10,y+60],[x-4,fy],[x-24,fy]],wc_dim(OS_TIMBER,0.1),1);
-  wc_part(ctx,wc_rect(x0,y,x1-x0,22),OS_TIMBER,1);}
-// a barrel, standing
-function os_barrel(ctx,x,y,h){const w=h*0.72;wc_part(ctx,[[x-w*0.42,y],[x-w*0.5,y-h*0.5],[x-w*0.42,y-h],[x+w*0.42,y-h],[x+w*0.5,y-h*0.5],[x+w*0.42,y]],[172,128,88],1);
-  for(const k of [0.18,0.82])wc_flat(ctx,wc_rect(x-w*0.47,y-h*k-5,w*0.94,10),[92,84,84],1,"hoop");}
-// a sack of corn: a full body, the cloth gathered into a neck and tied with a cord, a tuft of cloth above the cord
-function os_sack(ctx,x,y,h,seed){const w=h*0.8,R=wc_rng(seed),j=v=>v*(0.94+0.12*R()),nk=y-h*0.8;
-  const body=wc_smooth([[x-w*0.46,y],[x-j(w*0.54),y-h*0.36],[x-j(w*0.42),y-h*0.66],[x-w*0.14,nk+4],[x+w*0.12,nk+4],[x+j(w*0.44),y-h*0.64],[x+j(w*0.54),y-h*0.34],[x+w*0.46,y],[x,y+4],[x-w*0.46,y]],6);
-  wc_wash(ctx,body,[226,206,156],{kind:"build",lw:1.4,seed});
-  wc_wash(ctx,wc_smooth([[x-w*0.12,nk+6],[x-w*0.2,nk-h*0.14],[x-w*0.04,nk-h*0.2],[x+w*0.1,nk-h*0.17],[x+w*0.2,nk-h*0.1],[x+w*0.12,nk+6],[x-w*0.12,nk+6]],5),[220,198,146],{kind:"build",lw:1.2,seed:seed+3});
-  wc_flat(ctx,wc_rect(x-w*0.17,nk-4,w*0.34,9),[150,110,70],1,"tie");
-  ctx.save();ctx.strokeStyle=rgba([170,146,100],0.45);ctx.lineWidth=2;ctx.lineCap="round";for(const k of [-0.22,0.02,0.24]){ctx.beginPath();ctx.moveTo(x+k*w*0.6,nk+12);ctx.quadraticCurveTo(x+k*w*1.1,y-h*0.4,x+k*w*0.9,y-6);ctx.stroke();}ctx.restore();}
-function os_paintMarket(ctx){const P=WCP;wc_sky(ctx,560,3,{sun:[1580,150],cx:120,cw:1500,cy:70,ch:180});
-  wc_land(ctx,x=>486+18*Math.sin(x/260+1)+7*Math.sin(x/90),P.far,0.2);wc_treeRow(ctx,x=>500+8*Math.sin(x/200),-40,1980,70,58,0.2,13,P.leaf2);
-  // the town wall, with merlons along its top, and the gatehouse behind the cross: two towers and an arched gate
-  const top=452,base=OS_MK.fy,wall=[[-60,base],[-60,top]];for(let x=-60;x<W+60;x+=56)wall.push([x,top],[x+30,top],[x+30,top+18],[x+56,top+18]);wall.push([W+60,top+18],[W+60,base]);
-  wc_part(ctx,wall,OS_STONE,0.55);ctx.save();ctx.strokeStyle=rgba(wc_dim(OS_STONE,0.25),0.28);ctx.lineWidth=1.6;for(let y=top+40;y<base;y+=26){const o=(y/26)%2?0:28;for(let x=-60+o;x<W+60;x+=56){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+50,y);ctx.stroke();}}ctx.restore();
-  const cx=OS_MK.cross;for(const tx of [cx-210,cx+90]){const tw_=120,tt=330;const tp=[[tx,base],[tx,tt]];for(let x=tx;x<tx+tw_;x+=30)tp.push([x,tt],[x+16,tt],[x+16,tt+16],[x+30,tt+16]);tp.push([tx+tw_,tt+16],[tx+tw_,base]);
-    wc_part(ctx,tp,wc_lit(OS_STONE,0.05),0.6);for(const sy of [400,480])wc_flat(ctx,wc_rect(tx+tw_/2-6,sy,12,34),[70,62,60],0.6,"slit");}
-  wc_part(ctx,wc_rect(cx-90,372,180,base-372),OS_STONE,0.6);wc_wash(ctx,wc_arched(cx-62,430,124,base-430),[96,86,80],{depth:0.6,kind:"door",lw:1.4});
-  // the market place: beaten earth, worn paler where people walk
-  wc_land(ctx,x=>base+4*Math.sin(x/140),OS_EARTH,0.8);wc_wash(ctx,wc_band(wc_smooth([[cx,base+10],[cx-20,800],[cx+40,1100]],8),120,520),wc_lit(OS_EARTH,0.12),{depth:0.8,kind:"path",line:false});
-  // the market cross: three steps, a shaft and its head
-  for(const [w,y] of [[300,OS_MK.step+44],[250,OS_MK.step+22],[200,OS_MK.step]])wc_part(ctx,wc_rect(cx-w/2,y,w,22),wc_lit(OS_STONE,0.06),1);
-  const sx=OS_MK.shaft;wc_part(ctx,wc_rect(sx-24,OS_MK.step-26,48,26),OS_STONE,1);wc_part(ctx,wc_rect(sx-11,300,22,OS_MK.step-326),OS_STONE,1);
-  wc_part(ctx,[[sx-34,322],[sx+34,322],[sx+34,340],[sx+11,340],[sx+11,346],[sx-11,346],[sx-11,340],[sx-34,340]],OS_STONE,1);wc_part(ctx,wc_rect(sx-11,276,22,30),OS_STONE,1);
-  // the wine stall: barrels, the table, the striped awning on its poles
-  const [w0,w1,wy]=OS_MK.wine;os_barrel(ctx,w0+30,base+90,110);os_barrel(ctx,w1-20,base+100,120);for(const x of [w0+14,w1-14])wc_part(ctx,wc_rect(x-7,452,14,wy-452+150),OS_TIMBER,1);
-  os_trestle(ctx,w0+40,w1-30,wy,wy+150);os_awning(ctx,w0-20,w1+20,440,OS_REDSTRIPE,11);
-  // the corn stall: sacks, the table, its awning
-  const [c0,c1,cy]=OS_MK.corn;for(const x of [c0+14,c1-14])wc_part(ctx,wc_rect(x-7,452,14,cy-452+150),OS_TIMBER,1);os_sack(ctx,c1-60,cy+150,120,5);os_sack(ctx,c1-150,cy+150,100,7);
-  os_trestle(ctx,c0+40,c1-30,cy,cy+150);[[c0+110,96],[c0+230,110],[c0+360,90]].forEach(([x,h],i)=>os_sack(ctx,x,cy+4,h,20+i));os_awning(ctx,c0-20,c1+20,440,OS_BLUESTRIPE,31);
-  const R=wc_rng(8);for(let i=0;i<40;i++){const x=R()*W,y=base+40+R()*(H-base-40);wc_wash(ctx,[[x,y],[x+16+R()*20,y-3],[x+20,y+2]],[220,196,120],{kind:"dab",flat:true});}}
-// an earthenware jug, kept once, and drawn at any height and width
-function os_jugAt(ctx,x,y,w,h){const c=wc_kept("jug",140,180,q=>{q.translate(20,10);wc_wash(q,[[30,0],[70,0],[74,10],[96,50],[100,110],[86,150],[50,160],[14,150],[0,110],[4,50],[26,10]],[188,124,86],{kind:"thing",lw:1.6,seed:3});
-    q.strokeStyle=rgba([150,94,60],1);q.lineWidth=9;q.beginPath();q.arc(96,64,24,-1.3,1.25);q.stroke();wc_flat(q,wc_rect(28,0,44,10),[120,74,48],1,"lip");});ctx.drawImage(c,x-w*70/100,y-h*170/160,w*140/100,h*180/160);}
-// the proclamation nailed to the stall's post: parchment, written lines and a red seal; flip (0 to 1) turns it over for the next year
-function os_proclaim(ctx,x,y,flip,seal){const c=wc_kept("proclaim",170,200,q=>{q.translate(14,10);wc_wash(q,[[0,4],[140,0],[144,150],[4,156]],WCP.parchment,{kind:"paper",lw:1.4});
-    q.strokeStyle=rgba(WCP.parchInk,0.55);q.lineWidth=2.2;for(let i=0;i<7;i++){q.beginPath();q.moveTo(16,24+i*16);q.lineTo(124-(i===6?50:0),22+i*16);q.stroke();}});
-  const k=Math.abs(Math.cos(flip*Math.PI));ctx.save();ctx.translate(x,y);ctx.scale(Math.max(0.04,k),1);ctx.drawImage(c,-85,-10);ctx.restore();
-  if(seal>0){const s=spring(seal);ctx.save();ctx.translate(x+40,y+122);ctx.scale(s,s);ctx.fillStyle=rgba([184,40,36],0.95);ctx.beginPath();ctx.arc(0,0,15,0,TAU);ctx.fill();ctx.strokeStyle=rgba([120,20,20],0.8);ctx.lineWidth=2;ctx.stroke();ctx.restore();}
-  wc_flat(ctx,wc_rect(x-4,y-4,8,8),[70,64,70],1,"nail");}
+/* ---------- 2008: an operating room, a hospital's shelf of guidelines, eight cities on a map, and the checklist ---------- */
+// The operating room: pale green walls, a grey-green floor; at the head of the table the anaesthetic machine and its screen, a glass
+// cabinet, the drip stand, a lit X-ray screen, the clock, the count board and the door; the light over the table. The table, the
+// patient under the drape and the instrument trolley are drawn after the people who stand behind them (os_orFront).
+const OS_OR={fy:862,wall:[204,222,214],floor:[180,192,188],table:[430,1300,646],pole:452,bag:[452,292],port:[552,544],
+  head:[452,590],shoulder:[544,614],elbow:[624,630],wrist:[700,610],
+  cab:[536,176,262,232],xray:[1010,214,190,150],clock:[1346,112],count:[1250,192,350,214],door:[1648,252,186],trolley:[1340,1590,652],
+  light:[1004,150]};
+const OS_DRAPE=[112,166,172],OS_STEEL=[184,192,198],OS_SCRUB=[96,150,186],OS_GOWN=[156,190,212],OS_CAPLITE=[214,226,236];
+// the patient's hospital gown: pale, with a small print
+const OS_PGOWN=[206,218,230],OS_PDOT=[126,154,194];
 
-/* ---------- 1497: the market hall ---------- */
-// the cupboard where the king's standards are kept, and the arch onto the square
-const OS_HL={fy:870,cup:[230,240,520,570],arch:[1120,250,560,620]};
-function os_paintHall(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);const F=OS_HL.fy,[ax,ay,aw]=OS_HL.arch;
-  // through the arch: the square in daylight, the town wall across it, the market cross on its steps, a stall under its awning
-  ctx.save();wc_tr(ctx,wc_arched(ax,ay,aw,F-ay));ctx.clip();wc_sky(ctx,640,5,{clouds:2,cx:ax,cw:aw-100,cy:ay+70,ch:110});
-  const wt=520,wb=652,wl=[[ax-60,wb],[ax-60,wt+14]];for(let x=ax-60;x<ax+aw+60;x+=40)wl.push([x,wt+14],[x,wt],[x+22,wt],[x+22,wt+14]);wl.push([ax+aw+60,wt+14],[ax+aw+60,wb]);wc_part(ctx,wl,OS_STONE,0.42);
-  wc_land(ctx,x=>wb+3*Math.sin(x/90),OS_EARTH,0.55);
-  const qx=ax+aw*0.3;for(const [w,y] of [[150,704],[120,692],[94,680]])wc_part(ctx,wc_rect(qx-w/2,y,w,12),wc_lit(OS_STONE,0.06),0.55);
-  wc_part(ctx,wc_rect(qx-7,486,14,194),OS_STONE,0.55);wc_part(ctx,wc_rect(qx-22,504,44,11),OS_STONE,0.55);
-  const s0=ax+aw*0.58,s1=ax+aw+30;for(const x of [s0+8,s1-8])wc_part(ctx,wc_rect(x-5,566,10,180),OS_TIMBER,0.6);os_trestle(ctx,s0+16,s1-16,700,746);
-  os_sack(ctx,s0+80,700,56,77);os_sack(ctx,s0+150,700,48,78);os_awning(ctx,s0-14,s1+14,556,OS_BLUESTRIPE,51);ctx.restore();
-  // the walls: stone in courses, the arch's frame, oak beams overhead, a flagged floor
-  const wall=[[-40,-40],[W+40,-40],[W+40,F],[ax+aw,F]].concat(wc_arched(ax,ay,aw,F-ay).slice().reverse()).concat([[ax,F],[-40,F]]);
-  wc_wash(ctx,wall,[222,210,186],{kind:"build",lw:1.4,seed:5});ctx.save();wc_tr(ctx,wall);ctx.clip();ctx.strokeStyle=rgba([150,136,112],0.25);ctx.lineWidth=1.6;
-  for(let y=40;y<F;y+=48){const o=(y/48)%2?0:60;ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();for(let x=o;x<W;x+=120){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y+48);ctx.stroke();}}ctx.restore();
-  wc_ink(ctx,wc_arched(ax-14,ay-14,aw+28,F-ay+14).slice(1,-1),false,3,WC_INK,0.5,7);
-  for(const by of [0,96])wc_part(ctx,wc_rect(-40,by,W+80,40),[124,90,62],1);
-  wc_wash(ctx,wc_rect(-40,F,W+80,H-F+40),[200,188,166],{kind:"ground",line:false,seed:8});ctx.save();ctx.strokeStyle=rgba([150,138,116],0.4);ctx.lineWidth=2;
-  for(let i=0;i<5;i++){const y=F+i*i*12+10;ctx.beginPath();ctx.moveTo(-20,y);ctx.lineTo(W+20,y);ctx.stroke();}for(let i=-12;i<=12;i++){ctx.beginPath();ctx.moveTo(960+i*90,F);ctx.lineTo(960+i*260,H+20);ctx.stroke();}ctx.restore();
-  // the cupboard: an oak frame, two shelves, its doors open to the sides
-  const [x,y,w,h]=OS_HL.cup;wc_contact(ctx,x-30,x+w+30,y+h+4,1,0.3);wc_part(ctx,wc_rect(x,y,w,h),[110,78,52],1);wc_part(ctx,wc_rect(x+24,y+24,w-48,h-48),[70,50,36],1);
-  for(const sy of [y+250,y+h-24])wc_part(ctx,wc_rect(x+24,sy-12,w-48,16),[150,110,76],1);
-  wc_part(ctx,[[x-90,y+10],[x,y],[x,y+h],[x-90,y+h-10]],[136,98,66],1);wc_part(ctx,[[x+w,y],[x+w+90,y+10],[x+w+90,y+h-10],[x+w,y+h]],[136,98,66],1);
-  wc_part(ctx,wc_rect(x-14,y-26,w+28,30),[136,98,66],1);}
-// the king's standards on the cupboard's shelves: a bushel, a gallon (until the clerk takes it), a quart, the yard, a pile of weights,
-// all of bronze; then the grille in front of them. glow lights them.
-const OS_BRONZE=[210,150,62];
-function os_vessel(ctx,x,y,w,h){wc_wash(ctx,[[x-w/2,y-h],[x+w/2,y-h],[x+w/2-3,y],[x-w/2+3,y]],OS_BRONZE,{kind:"thing",lw:1.6,seed:x|0});wc_wash(ctx,wc_ell(x,y-h,w/2,w*0.12,24),wc_dim(OS_BRONZE,0.3),{kind:"thing",lw:1.2,seed:(x|0)+3});
-  for(const k of [0.25,0.72])wc_flat(ctx,wc_rect(x-w/2+2,y-h*k-3,w-4,6),wc_dim(OS_BRONZE,0.2),1,"band");
-  // the shine of polished bronze: a pale stripe down one side
-  ctx.save();ctx.globalCompositeOperation="screen";ctx.fillStyle="rgba(255,236,190,0.42)";ctx.fillRect(x-w*0.3,y-h+w*0.1,w*0.09,h-w*0.14);ctx.restore();}
-function os_standards(ctx,taken,glow){const [x,y,w,h]=OS_HL.cup;ctx.drawImage(wc_kept("standards",W,H,q=>{os_vessel(q,x+130,y+238,170,130);os_vessel(q,x+380,y+238,84,104);
-    q.save();wc_part(q,wc_rect(x+60,y+h-140,w-120,14),OS_BRONZE,1);for(let i=0;i<4;i++)wc_wash(q,wc_rect(x+90+i*16-i*i*2,y+h-36-i*20,150-i*34,20),OS_BRONZE,{kind:"thing",lw:1.2,seed:60+i});q.restore();
-    os_vessel(q,x+380,y+h-36,50,62);}),0,0);
-  if(!taken)ctx.drawImage(os_gallonC(),x+215,y+120);gv_halo(ctx,x+40,y+40,w-80,h-80,[255,214,120],glow*0.7);
-  ctx.drawImage(wc_kept("grille",W,H,q=>{for(let gx=x+40;gx<x+w-30;gx+=36)wc_wash(q,wc_rect(gx,y+28,7,h-56),[70,66,72],{kind:"iron",lw:1});wc_wash(q,wc_rect(x+30,y+h/2-5,w-60,10),[70,66,72],{kind:"iron",lw:1});}),0,0);}
-// the gallon the clerk carries, kept
-function os_gallonC(){return wc_kept("gallon",120,140,q=>os_vessel(q,60,128,70,96));}
+/* the team, in 2008: scrubs, caps and masks; the surgeon and the scrub nurse in sterile gowns and gloves. Invented people, drawn as the
+   series draws people of the past, with a warm umber wash behind them. */
+Object.assign(PEOPLE,{
+  os_anaes:{name:"",role:"anaesthetist",side:"",edge:GV_PAST,seed:41,skin:[122,82,62],hair:{style:"cropped",c:[30,26,26]},hat:"os_cap",hatC:[60,78,118],capDots:[222,186,96],
+    mask:[198,220,232],top:{kind:"scrubs",c:[70,100,142],rolled:true},bottom:{c:[70,100,142]},shoe:[226,230,234],build:{sh:74,hip:62,h:1.0}},
+  os_surgeon:{name:"",role:"surgeon",side:"",edge:GV_PAST,seed:42,skin:[180,128,96],hair:{style:"cropped",c:[28,22,22]},glasses:[60,56,64],hat:"os_cap",hatC:[178,78,98],
+    capDots:[250,220,160],mask:[198,220,232],gloves:[230,208,172],top:{kind:"os_gown",c:OS_GOWN},bottom:{c:[112,150,182]},shoe:[232,234,238],build:{sh:66,hip:60,h:0.96}},
+  os_scrub:{name:"",role:"scrub nurse",side:"",edge:GV_PAST,seed:43,skin:[238,204,174],hair:{style:"cropped",c:[42,34,32]},hat:"os_cap",hatC:[132,176,206],
+    mask:[198,220,232],gloves:[230,208,172],top:{kind:"os_gown",c:OS_GOWN},bottom:{c:[112,150,182]},shoe:[232,234,238],build:{sh:64,hip:60,h:0.93}},
+  os_nurse:{name:"",role:"nurse",side:"",edge:GV_PAST,seed:44,skin:[204,152,114],hair:{style:"cropped",c:[36,28,26]},hat:"os_cap",hatC:[66,138,140],capDots:[244,204,100],
+    mask:[198,220,232],top:{kind:"scrubs",c:[80,148,152],rolled:true},bottom:{c:[80,148,152]},shoe:[230,232,236],build:{sh:72,hip:62,h:0.99}},
+  os_patient:{name:"",role:"patient",side:"",edge:GV_PAST,seed:45,skin:[228,192,162],hair:{style:"cropped",c:[176,170,166]},hat:"os_cap",hatC:OS_CAPLITE,
+    top:{kind:"shirt",c:OS_PGOWN},bottom:{c:[200,200,200]},shoe:[200,200,200],build:{sh:66,hip:60,h:1}}
+});
+// their clothes: the series' engine stays as it is; these wrap its torso, head and arms for this film's own kinds only
+const os_torsoBase=torso,os_headBase=head,os_armBase=arm;
+function os_gownPath(ctx,sw,hw,y0,sh,hem,fl){ctx.beginPath();ctx.moveTo(-16,y0);ctx.bezierCurveTo(-30,y0+4,-sw+26,y0+10,-sw+12,y0+20);ctx.quadraticCurveTo(-sw-4,y0+28,-sw-4,y0+52);
+  ctx.bezierCurveTo(-sw-4,y0+90,-hw-6,-352,-hw-2,-322);ctx.quadraticCurveTo(-hw-fl*0.5+sh*0.4,-230,-hw-fl+sh*0.5,hem);ctx.quadraticCurveTo(sh*0.5,hem+10,hw+fl+sh*0.5,hem);
+  ctx.quadraticCurveTo(hw+fl*0.5+sh*0.4,-230,hw+2,-322);ctx.bezierCurveTo(hw+6,-352,sw+4,y0+90,sw+4,y0+52);ctx.quadraticCurveTo(sw+4,y0+28,sw-12,y0+20);ctx.bezierCurveTo(sw-26,y0+10,30,y0+4,16,y0);ctx.closePath();}
+torso=function(ctx,P,br,sh){const T_=P.top;if(T_.kind!=="scrubs"&&T_.kind!=="os_gown")return os_torsoBase(ctx,P,br,sh);
+  const c=T_.c,sw=P.build.sh,hw=P.build.hip,y0=-448+br;
+  if(T_.kind==="scrubs"){os_torsoBase(ctx,P,br,sh);ctx.save();torsoPath(ctx,P,br,sh);ctx.clip();
+    // the V of the neck, the skin in it, and its band
+    ctx.beginPath();ctx.moveTo(-23,y0-4);ctx.lineTo(23,y0-4);ctx.lineTo(sh*0.3,y0+50);ctx.closePath();litFill(ctx,P.skin,-23,y0,23,y0+50,0.6);
+    ctx.strokeStyle=rgba(darken(c,0.3),0.95);ctx.lineWidth=6;ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(-24,y0-2);ctx.lineTo(sh*0.3,y0+52);ctx.lineTo(24,y0-2);ctx.stroke();
+    // a breast pocket with a pen in it
+    ctx.beginPath();rr(ctx,-sw+24,-402,44,42,5);ctx.fillStyle=rgba(darken(c,0.1),1);ctx.fill();seam(ctx,c,0.5,1.2);
+    ctx.fillStyle="rgba(250,250,252,0.95)";ctx.fillRect(-sw+36,-414,5,24);ctx.fillStyle=rgba([40,90,170],1);ctx.fillRect(-sw+36,-416,5,6);ctx.restore();
+    // the top hangs loose over the trousers
+    ctx.beginPath();ctx.moveTo(-hw-2,-264);ctx.quadraticCurveTo(sh*0.5,-250,hw+2+sh*0.6,-264);ctx.lineTo(hw+5+sh*0.6,-236);ctx.quadraticCurveTo(sh*0.5,-224,-hw-5,-236);ctx.closePath();
+    litFill(ctx,c,-hw,-264,hw,-224);seam(ctx,c,0.4);return;}
+  // a sterile gown to below the knee, with long sleeves (the arms), a round neck and its tie, and a tie at the waist
+  const hem=-118,fl=24;os_gownPath(ctx,sw,hw,y0,sh,hem,fl);litFill(ctx,c,-sw,y0,sw,hem);seam(ctx,c,0.5);
+  ctx.save();os_gownPath(ctx,sw,hw,y0,sh,hem,fl);ctx.clip();ctx.strokeStyle=rgba(darken(c,0.32),0.3);ctx.lineWidth=2.4;ctx.lineCap="round";
+  for(const k of [-0.6,-0.18,0.26,0.66]){ctx.beginPath();ctx.moveTo(k*hw*0.8+sh*0.3,-312);ctx.quadraticCurveTo(k*hw*1.05+sh*0.4,-220,k*(hw+fl)*0.95+sh*0.5,hem+4);ctx.stroke();}
+  ctx.strokeStyle=rgba(lighten(c,0.25),0.28);ctx.lineWidth=5;for(const k of [-0.38,0.44]){ctx.beginPath();ctx.moveTo(k*hw*0.8+sh*0.3,-306);ctx.quadraticCurveTo(k*hw+sh*0.4,-220,k*(hw+fl)*0.9+sh*0.5,hem+4);ctx.stroke();}
+  ctx.fillStyle=rgba(lighten(c,0.18),1);ctx.beginPath();ctx.moveTo(-19,y0-2);ctx.quadraticCurveTo(0,y0+16,19,y0-2);ctx.lineTo(16,y0-6);ctx.quadraticCurveTo(0,y0+8,-16,y0-6);ctx.closePath();ctx.fill();
+  ctx.strokeStyle=rgba(darken(c,0.3),0.8);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-19,y0-1);ctx.quadraticCurveTo(0,y0+17,19,y0-1);ctx.stroke();
+  ctx.fillStyle=rgba(darken(c,0.12),1);ctx.fillRect(-hw-6,-304,hw*2+12+sh*0.4,9);ctx.restore();
+  ctx.strokeStyle=rgba(darken(c,0.18),0.95);ctx.lineWidth=5;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(-hw+14,-300);ctx.quadraticCurveTo(-hw+4,-282,-hw+10,-262);ctx.moveTo(-hw+16,-300);ctx.quadraticCurveTo(-hw+26,-284,-hw+24,-266);ctx.stroke();};
+// a cap over the hair, plain or patterned, gathered at the forehead; a pleated mask over the nose and mouth
+function os_capOn(ctx,P){const c=P.hatC;ctx.beginPath();ctx.moveTo(-50,-4);ctx.bezierCurveTo(-62,-64,-36,-100,0,-100);ctx.bezierCurveTo(36,-100,62,-64,50,-4);
+  ctx.quadraticCurveTo(43,-22,24,-31);ctx.quadraticCurveTo(0,-37,-24,-31);ctx.quadraticCurveTo(-43,-22,-50,-4);ctx.closePath();litFill(ctx,c,-60,-100,60,-4);seam(ctx,c,0.4);
+  if(P.capDots){ctx.save();ctx.clip();ctx.fillStyle=rgba(P.capDots,0.85);for(let i=0;i<50;i++){ell(ctx,(hash(i,P.seed)-0.5)*116,-100+hash(i,P.seed+3)*92,2.8,2.8);ctx.fill();}ctx.restore();}
+  ctx.strokeStyle=rgba(darken(c,0.28),0.7);ctx.lineWidth=3.2;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(-48,-8);ctx.quadraticCurveTo(-41,-24,-23,-32);ctx.quadraticCurveTo(0,-38,23,-32);ctx.quadraticCurveTo(41,-24,48,-8);ctx.stroke();
+  ctx.strokeStyle=rgba(darken(c,0.2),0.35);ctx.lineWidth=1.6;for(const k of [-0.5,0,0.5]){ctx.beginPath();ctx.moveTo(k*44,-34);ctx.quadraticCurveTo(k*52,-62,k*30,-92);ctx.stroke();}}
+function os_maskOn(ctx,P,po){const c=P.mask,fx=po.turn*7;ctx.beginPath();ctx.moveTo(-41,6);ctx.quadraticCurveTo(-20,1,fx,4);ctx.quadraticCurveTo(20,1,41,6);
+  ctx.bezierCurveTo(42,24,35,41,22,50);ctx.quadraticCurveTo(fx,59,-22,50);ctx.bezierCurveTo(-35,41,-42,24,-41,6);ctx.closePath();litFill(ctx,c,-41,2,41,58);seam(ctx,c,0.35);
+  ctx.save();ctx.clip();ctx.strokeStyle=rgba(darken(c,0.22),0.5);ctx.lineWidth=1.6;for(const y of [17,27,37]){ctx.beginPath();ctx.moveTo(-44,y);ctx.quadraticCurveTo(fx,y+4,44,y);ctx.stroke();}ctx.restore();
+  ctx.strokeStyle=rgba(lighten(c,0.25),0.95);ctx.lineWidth=2.4;ctx.lineCap="round";for(const s of [-1,1]){ctx.beginPath();ctx.moveTo(s*41,8);ctx.quadraticCurveTo(s*49,1,s*45,-8);ctx.moveTo(s*36,42);ctx.quadraticCurveTo(s*49,31,s*46,10);ctx.stroke();}}
+head=function(ctx,P,E,po,t){os_headBase(ctx,P,E,po,t);if(P.hat==="os_cap")os_capOn(ctx,P);if(P.mask)os_maskOn(ctx,P,po);};
+// gloved hands: the hands take the gloves' colour, the sleeves go to the wrist
+arm=function(ctx,P,s,a,br,po){if(!P.gloves)return os_armBase(ctx,P,s,a,br,po);const sk=P.skin;P.skin=P.gloves;os_armBase(ctx,P,s,a,br,po);P.skin=sk;};
+// how they stand: hands up and clear, as a sterile team keeps them; reading the checklist; a hand held up to wait; giving the antibiotic
+// into the drip's port, the arm over the patient's head; carrying a tray; a tick on the clipboard
+Object.assign(POSE,{
+  os_sterile:{L:[0.24,-2.66],R:[0.24,-2.66],feet:24,shift:0,tilt:0.02,turn:0.02,gaze:[0.1,0.7],look:1},
+  os_sterileUp:{L:[0.24,-2.66],R:[0.24,-2.66],feet:24,shift:2,tilt:-0.02,turn:0.1,gaze:[0.6,0.1],look:0},
+  os_read:{L:[0.25,-1.45],R:[0.25,-1.45],feet:26,shift:2,tilt:0.04,turn:0.05,gaze:[0.1,1],look:1},
+  os_stop:{L:[0.25,-1.45],R:[0.5,2.9],hand:"open",feet:30,shift:4,tilt:-0.03,turn:0.25,gaze:[0.8,0],look:0},
+  os_inject:{L:[0.16,-0.1],R:[2.435,1.094],feet:30,shift:6,tilt:-0.04,turn:0.3,gaze:[0.8,0.6],look:1},
+  os_tray:{L:[0.3,-1.75],R:[0.3,-1.75],feet:24,shift:0,tilt:0,turn:0.1,gaze:[0.4,0.2],look:0},
+  os_tick:{L:[0.25,-1.45],R:[0.15,-1.9],feet:26,shift:2,tilt:0.05,turn:0.05,gaze:[0.1,1],look:1}
+});
+// turned to the screen of the anaesthetic machine
+POSE.os_screen={L:[0.1,0.1],R:[0.12,0.1],feet:24,shift:0,tilt:0.02,turn:0.4,gaze:[0.9,-0.3],look:0};
+// a step either way with the tray, walking
+POSE.os_trayA=Object.assign({},POSE.os_tray,{feet:14,shift:-5,tilt:0.03});POSE.os_trayB=Object.assign({},POSE.os_trayA,{shift:5,tilt:-0.03});
+// things in their hands, drawn in the figure's units: the clipboard with the checklist on it (both hands, or the left), the syringe, a tray
+function os_clipC(){return wc_kept("osClip",170,226,q=>{q.translate(10,16);wc_wash(q,wc_rrPts(0,0,150,200,10),[176,128,84],{kind:"thing",lw:1.4,seed:5});
+  wc_flat(q,wc_rect(14,22,122,166),[252,250,244],1,"page");wc_wash(q,wc_rrPts(45,-10,60,26,6),OS_STEEL,{kind:"thing",lw:1.2,seed:6});
+  q.fillStyle=rgba(WC_MUTED,0.55);q.fillRect(24,34,100,7);for(let c=0;c<3;c++)for(let i=0;i<5;i++){q.fillStyle=rgba(WC_MUTED,0.3);q.fillRect(22+c*40,56+i*24,30,4);
+    q.strokeStyle=rgba(WC_MUTED,0.45);q.lineWidth=1.2;q.strokeRect(22+c*40,62+i*24,8,8);}});}
+// the clipboard, at about three quarters of its kept size, in front of the body, its foot in the left hand: the right holds it too
+// (os_heldClip), is raised (os_heldClipL), or holds a pen (os_heldClipPen)
+function os_clipAt(cx,y){cx.save();cx.translate(0,y);cx.rotate(-0.04);cx.scale(0.72,0.72);cx.drawImage(os_clipC(),-85,-113);cx.restore();}
+function os_heldClip(cx,P_,hands){const [l,r]=hands;os_clipAt(cx,l[1]-40);fingers(cx,P_,[[l[0],l[1]-4],[r[0],r[1]-4]]);}
+function os_heldClipL(cx,P_,hands){const l=hands[0];os_clipAt(cx,l[1]-40);fingers(cx,P_,[[l[0],l[1]-4]]);}
+function os_heldClipPen(cx,P_,hands){const [l,r]=hands;os_clipAt(cx,l[1]-40);fingers(cx,P_,[[l[0],l[1]-4]]);
+  cx.save();cx.translate(r[0],r[1]);cx.rotate(0.45);wc_flat(cx,wc_rect(-4,-44,8,52),[40,90,170],1,"pen");cx.fillStyle=rgba([236,238,240],1);cx.fillRect(-4,4,8,6);cx.restore();fingers(cx,P_,[r]);}
+function os_heldSyringe(cx,P_,hands){const r=hands[1];cx.save();cx.translate(r[0],r[1]);cx.rotate(-0.5);cx.scale(1.3,1.3);
+  wc_flat(cx,wc_rect(-6,-66,12,56),[236,242,246],1,"barrel");cx.fillStyle="rgba(250,236,170,0.75)";cx.fillRect(-4,-40,8,28);cx.strokeStyle=rgba(WC_MUTED,0.6);cx.lineWidth=1;
+  for(let i=0;i<5;i++){cx.beginPath();cx.moveTo(-6,-60+i*10);cx.lineTo(-1,-60+i*10);cx.stroke();}wc_flat(cx,wc_rect(-2,-12,4,24),OS_STEEL,1,"needle");
+  wc_flat(cx,wc_rect(-10,-72,20,6),[200,206,212],1,"flange");wc_flat(cx,wc_rect(-2,-96,4,26),[200,206,212],1,"plunger");cx.restore();fingers(cx,P_,[[r[0]+2,r[1]-6]]);}
+const os_hand=P_=>({skin:P_.gloves||P_.skin});
+// a scalpel, held up and ready
+function os_heldScalpel(cx,P_,hands){const r=hands[1];cx.save();cx.translate(r[0],r[1]-8);cx.rotate(-0.3);cx.scale(1.6,1.6);wc_flat(cx,wc_rect(-4,-10,8,50),OS_STEEL,1,"handle");
+  cx.fillStyle=rgba([228,234,240],1);cx.strokeStyle=rgba(WC_PENCIL,0.7);cx.lineWidth=1.4;cx.beginPath();cx.moveTo(-4,-10);cx.quadraticCurveTo(-8,-34,0,-46);cx.lineTo(4,-10);cx.closePath();
+  cx.fill();cx.stroke();cx.restore();fingers(cx,os_hand(P_),[r]);}
+function os_heldTray(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-10);
+  wc_wash(cx,[[-90,-10],[90,-10],[80,10],[-80,10]],OS_STEEL,{kind:"thing",lw:1.2,seed:8});for(const [x,c] of [[-50,[250,250,250]],[-10,[236,240,246]],[34,[214,226,236]]])wc_flat(cx,wc_rect(x,-26,30,18),c,1,"pack");cx.restore();
+  fingers(cx,os_hand(P_),[[l[0],l[1]-4],[r[0],r[1]-4]]);}
 
-/* ---------- 1871: a corn exchange ---------- */
-const OS_EX={fy:880,table:[150,1770,716]};
-function os_paintExchange(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);const F=OS_EX.fy;
-  // the hall: a warm wall with three tall arched windows, iron columns, a glass roof's ribs above
-  wc_wash(ctx,wc_rect(-40,-40,W+80,F+40),[232,214,186],{kind:"plaster",line:false,seed:9});
-  for(const wx of [210,850,1490]){ctx.save();wc_tr(ctx,wc_arched(wx,150,220,470));ctx.clip();wc_sky(ctx,560,wx,{clouds:1,cx:wx,cw:120,cy:200,ch:80});ctx.restore();
-    wc_ink(ctx,wc_arched(wx,150,220,470),true,3,WC_INK,0.6,wx);ctx.save();ctx.strokeStyle=rgba([240,236,226],0.95);ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(wx+110,150);ctx.lineTo(wx+110,620);ctx.moveTo(wx,400);ctx.lineTo(wx+220,400);ctx.stroke();ctx.restore();
-    wc_wash(ctx,wc_rect(wx-24,616,268,22),[214,196,166],{kind:"trim",lw:1.4});}
-  // the glass roof: panes of pale sky between iron ribs, on a beam the columns hold up
-  wc_wash(ctx,wc_rect(-40,-40,W+80,104),[206,222,234],{kind:"glass",line:false,seed:13});ctx.save();ctx.strokeStyle=rgba([84,86,98],0.75);ctx.lineWidth=5;
-  for(let x=-20;x<W+40;x+=96){ctx.beginPath();ctx.moveTo(x,-10);ctx.lineTo(x,64);ctx.stroke();}ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-40,24);ctx.lineTo(W+40,24);ctx.stroke();ctx.restore();
-  wc_part(ctx,wc_rect(-40,54,W+80,22),[96,98,112],1,{kind:"iron"});
-  for(const cx of [120,700,1340,1800]){wc_part(ctx,wc_rect(cx-14,60,28,F-60),[96,98,112],1,{kind:"iron"});wc_part(ctx,wc_rect(cx-26,F-40,52,40),[96,98,112],1,{kind:"iron"});wc_part(ctx,[[cx-30,60],[cx+30,60],[cx+14,90],[cx-14,90]],[96,98,112],1,{kind:"iron"});}
-  wc_wash(ctx,wc_rect(-40,F,W+80,H-F+40),[206,186,152],{kind:"ground",line:false,seed:4});ctx.save();ctx.strokeStyle=rgba([150,128,96],0.35);ctx.lineWidth=2;for(let i=-14;i<=14;i++){ctx.beginPath();ctx.moveTo(960+i*70,F);ctx.lineTo(960+i*210,H+20);ctx.stroke();}ctx.restore();
-  // sacks of corn behind the merchant's table
-  [[260,120],[380,104],[1520,116],[1640,98],[1440,90]].forEach(([x,h],i)=>os_sack(ctx,x,OS_EX.table[2]-6,h,70+i));}
-// the merchant's table, drawn after the merchant behind it
-function os_exTable(ctx){const [x0,x1,y]=OS_EX.table;ctx.drawImage(wc_kept("exTable",W,H,q=>{wc_contact(q,x0,x1,OS_EX.fy+4,1,0.3);wc_part(q,wc_rect(x0+20,y+24,x1-x0-40,OS_EX.fy-y-24),[150,106,70],1);
-    for(let i=0;i<8;i++)wc_flat(q,wc_rect(x0+60+i*(x1-x0-120)/8,y+50,(x1-x0-120)/8-20,OS_EX.fy-y-80),[166,120,82],1,"panel");wc_part(q,wc_rect(x0,y,x1-x0,26),[176,128,88],1);}),0,0);}
-// a wooden measure, a bushel of one size or another: staves and two iron hoops, kept once and drawn at any size
-function os_measureAt(ctx,x,y,w,h){const c=wc_kept("measure",200,170,q=>{q.translate(10,20);wc_wash(q,[[0,22],[180,22],[176,140],[4,140]],[198,150,98],{kind:"thing",lw:1.6,seed:9});
-    q.strokeStyle=rgba([140,98,62],0.5);q.lineWidth=2;for(let i=1;i<9;i++){q.beginPath();q.moveTo(i*20,24);q.lineTo(i*20-1,138);q.stroke();}
-    wc_wash(q,wc_ell(90,22,90,20,32),[120,84,54],{kind:"thing",lw:1.4,seed:4});for(const k of [46,118])wc_flat(q,wc_rect(2,k,176,8),[84,80,84],1,"hoop");});
-  ctx.drawImage(c,x-w/2-w*10/180,y-h*160/118,w*200/180,h*170/118);}
+function os_paintTheatre(ctx){const O=OS_OR,F=O.fy;gv_wallFloor(ctx,O.wall,F,{floor:O.floor,seed:23,vx:1000});
+  // washable panels low on the wall, under a rail
+  wc_flat(ctx,wc_rect(-40,F-150,W+80,150),wc_dim(O.wall,0.05),1,"panel");wc_part(ctx,wc_rect(-40,F-160,W+80,12),wc_dim(O.wall,0.16),1,{lw:1});
+  for(let x=120;x<W;x+=240){ctx.save();ctx.strokeStyle=rgba(wc_dim(O.wall,0.2),0.35);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,F-148);ctx.lineTo(x,F);ctx.stroke();ctx.restore();}
+  // a glass cabinet of supplies
+  const [cx,cy,cw,ch]=O.cab;wc_part(ctx,wc_rect(cx-10,cy-10,cw+20,ch+20),[228,234,234],1,{lw:1.2});
+  for(let i=0;i<2;i++){const x0=cx+i*cw/2+8,w0=cw/2-16;wc_flat(ctx,wc_rect(x0,cy+6,w0,ch-12),[216,232,238],1,"window");
+    const R=wc_rng(31+i);for(const sy of [cy+76,cy+150,cy+ch-8]){wc_part(ctx,wc_rect(x0,sy,w0,6),[196,206,210],1,{lw:0.8});let bx=x0+8;
+      while(bx<x0+w0-26){const bw=18+R()*20,bh=26+R()*30,col=[[250,250,250],[196,220,236],[236,214,170],[226,236,226]][Math.floor(R()*4)];wc_part(ctx,wc_rect(bx,sy-bh,bw,bh),col,1,{lw:0.9});bx+=bw+6;}}
+    wc_flat(ctx,wc_rect(x0+w0-14,cy+ch/2-18,6,36),OS_STEEL,1,"handle");}
+  // the X-ray screen, lit, a film of a chest on it
+  const [xx,xy,xw,xh]=O.xray;wc_part(ctx,wc_rect(xx-12,xy-12,xw+24,xh+24),[226,230,232],1,{lw:1.2});ctx.save();ctx.beginPath();ctx.rect(xx,xy,xw,xh);ctx.clip();
+  ctx.fillStyle=rgba([226,240,248],1);ctx.fillRect(xx,xy,xw,xh);wc_flat(ctx,wc_rect(xx+20,xy+12,xw-40,xh-24),[64,74,88],1,"film");
+  ctx.globalCompositeOperation="screen";for(const s of [-1,1]){wc_glowAt(ctx,xx+xw/2+s*36,xy+xh/2+4,48,[170,190,206],0.7);}
+  ctx.strokeStyle=rgba([200,214,226],0.5);ctx.lineWidth=3;for(let i=0;i<5;i++)for(const s of [-1,1]){ctx.beginPath();ctx.moveTo(xx+xw/2+s*8,xy+40+i*17);ctx.quadraticCurveTo(xx+xw/2+s*50,xy+30+i*17,xx+xw/2+s*68,xy+52+i*17);ctx.stroke();}
+  ctx.restore();
+  // the clock: it matters when the antibiotic was given
+  const [kx,ky]=O.clock;wc_wash(ctx,wc_ell(kx,ky,48,48,40),[244,244,240],{kind:"clock",lw:1.6,seed:12});ctx.save();ctx.strokeStyle=rgba(WC_INK,0.8);ctx.lineCap="round";
+  for(let i=0;i<12;i++){const a=i/12*TAU;ctx.lineWidth=i%3?2:3.4;ctx.beginPath();ctx.moveTo(kx+Math.cos(a)*36,ky+Math.sin(a)*36);ctx.lineTo(kx+Math.cos(a)*42,ky+Math.sin(a)*42);ctx.stroke();}
+  ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(kx,ky);ctx.lineTo(kx+Math.cos(-2.2)*22,ky+Math.sin(-2.2)*22);ctx.stroke();ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(kx,ky);ctx.lineTo(kx+Math.cos(-0.6)*34,ky+Math.sin(-0.6)*34);ctx.stroke();ctx.restore();
+  // the count board, where the sponges, needles and instruments are counted (its marks are drawn with the people: os_counts)
+  const [bx,by,bw,bh]=O.count;wc_part(ctx,wc_rect(bx-10,by-10,bw+20,bh+20),OS_STEEL,1,{lw:1.2});wc_flat(ctx,wc_rect(bx,by,bw,bh),[250,251,250],1,"board");
+  ctx.save();ctx.strokeStyle=rgba([60,110,170],0.55);ctx.lineWidth=2.4;for(const k of [1,2]){ctx.beginPath();ctx.moveTo(bx+k*bw/3,by+16);ctx.lineTo(bx+k*bw/3,by+bh-14);ctx.stroke();}
+  ctx.beginPath();ctx.moveTo(bx+12,by+56);ctx.lineTo(bx+bw-12,by+56);ctx.stroke();ctx.restore();wc_part(ctx,wc_rect(bx+bw-70,by+bh+10,52,10),[60,110,170],1,{lw:0.8});
+  // the door, its window and its push plate
+  const [dx,dy,dw]=O.door;wc_wash(ctx,wc_rect(dx-14,dy-14,dw+28,F-dy+14),[226,232,232],{kind:"trim",lw:1.4});wc_wash(ctx,wc_rect(dx,dy,dw,F-dy),[176,198,204],{kind:"door",lw:1.6,seed:4});
+  wc_flat(ctx,wc_rect(dx+dw/2-44,dy+60,88,120),[214,232,240],1,"window");wc_flat(ctx,wc_rect(dx+dw-46,dy+300,26,120),OS_STEEL,1,"plate");
+  wc_flat(ctx,wc_rect(dx+18,F-110,dw-36,90),wc_dim([176,198,204],0.08),1,"kick");
+  // the anaesthetic machine: its screen on an arm, the gauges, the breathing bag, drawers
+  wc_contact(ctx,30,330,F+2,0.9,0.3);wc_part(ctx,wc_rect(44,420,250,F-420-16),[214,220,226],1,{lw:1.3});for(let i=0;i<3;i++)wc_part(ctx,wc_rect(64,640+i*62,210,52),[226,230,236],1,{lw:1});
+  for(let i=0;i<3;i++)wc_wash(ctx,wc_ell(84+i*80,F-8,14,14,12),[70,74,84],{kind:"thing",lw:1});wc_part(ctx,wc_rect(36,404,266,22),[196,204,212],1);
+  for(let i=0;i<4;i++){wc_flat(ctx,wc_rect(70+i*30,446,16,96),[236,244,248],1,"tube");wc_wash(ctx,wc_ell(78+i*30,520-i*16,7,7,10),[60,140,200],{kind:"thing",lw:0.8,flat:true});}
+  for(let i=0;i<2;i++){wc_wash(ctx,wc_ell(222+i*46,476,20,20,18),[244,244,240],{kind:"clock",lw:1.2,seed:14+i});}
+  wc_wash(ctx,wc_smooth([[300,560],[332,578],[340,640],[318,690],[296,650],[292,590]],6),[70,72,82],{kind:"thing",lw:1.2,seed:16});
+  wc_part(ctx,wc_rect(150,330,16,80),OS_STEEL,1);wc_part(ctx,wc_rect(36,206,258,150),[60,64,78],1,{kind:"thing"});wc_flat(ctx,wc_rect(50,220,230,122),[22,34,40],1,"screen");
+  ctx.save();ctx.lineWidth=3;ctx.lineJoin="round";for(const [y,c,amp] of [[252,[110,220,140],22],[292,[240,210,90],10],[324,[110,190,240],8]]){ctx.strokeStyle=rgba(c,0.9);ctx.beginPath();
+    for(let x=0;x<=170;x+=4){const u=x%56,v=y+(u>20&&u<26?-amp:u>=26&&u<30?amp*0.4:0)+Math.sin(x/9)*1.5;if(x)ctx.lineTo(62+x,v);else ctx.moveTo(62+x,v);}ctx.stroke();}ctx.restore();
+  // the drip stand: a bag of fluid at the top, its line down to the patient's hand
+  wc_contact(ctx,O.pole-60,O.pole+60,F+2,0.9,0.28);for(const a of [-0.9,-0.3,0.3,0.9]){ctx.save();ctx.translate(O.pole,F-18);ctx.rotate(a);wc_flat(ctx,wc_rect(-4,0,6,62),OS_STEEL,1,"leg");ctx.restore();}
+  wc_part(ctx,wc_rect(O.pole-5,236,10,F-254),OS_STEEL,1,{lw:1});wc_part(ctx,wc_rect(O.pole-42,232,84,8),OS_STEEL,1,{lw:0.8});
+  const [gx,gy]=O.bag;wc_wash(ctx,wc_rrPts(gx-30,gy-46,60,92,14),[238,246,250],{kind:"thing",lw:1.2,seed:18});wc_flat(ctx,wc_rect(gx-24,gy-6,48,46),[214,234,244],1,"fluid");
+  wc_flat(ctx,wc_rect(gx-14,gy-34,28,16),[250,250,250],1,"label");
+  // the light over the table, on its arm from the ceiling; its glow
+  const [lx,ly]=O.light;wc_part(ctx,wc_rect(lx+70,-20,16,96),OS_STEEL,1,{lw:1});wc_part(ctx,[[lx+70,62],[lx+86,72],[lx+16,ly-34],[lx,ly-44]],OS_STEEL,1,{lw:1});
+  wc_wash(ctx,wc_ell(lx,ly,158,56,48),[232,236,240],{kind:"thing",lw:1.6,seed:20});wc_wash(ctx,wc_ell(lx,ly+10,128,38,40),[250,244,214],{kind:"thing",lw:1,seed:21,flat:true});
+  ctx.save();ctx.globalCompositeOperation="screen";wc_glowAt(ctx,lx,ly+14,240,[255,246,214],0.55);ctx.restore();wc_part(ctx,wc_rect(lx-10,ly+30,20,30),OS_STEEL,1,{lw:1});}
 
-/* ---------- the 1880s: a grocer's shop ---------- */
-// the counter's top, where the scale stands, and where the inspector stands in front of it
-const OS_SH={fy:880,counter:[330,1560,646],scale:990};
-function os_paintShop(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);const F=OS_SH.fy;
-  wc_wash(ctx,wc_rect(-40,-40,W+80,F+40),[228,214,184],{kind:"plaster",line:false,seed:12});
-  // shelves of goods behind the counter: jars, tins, packets
-  const sx0=360,sx1=1720;wc_part(ctx,wc_rect(sx0,120,sx1-sx0,470),[136,96,66],1);const R=wc_rng(14);
-  for(const sy of [240,360,480,590]){wc_part(ctx,wc_rect(sx0-10,sy,sx1-sx0+20,16),[160,116,80],1);let x=sx0+24;while(x<sx1-60){const k=Math.floor(R()*4),w=k===0?44:k===1?52:k===2?36:60,h=k===0?70:k===1?84:k===2?96:56;
-      const col=[[226,232,236],[176,64,52],[214,180,96],[92,126,150]][k];if(k===0){wc_wash(ctx,wc_rect(x,sy-h,w,h),col,{kind:"thing",lw:1.2,seed:x|0});wc_flat(ctx,wc_rect(x+4,sy-h-8,w-8,10),[150,110,70],1,"lid");}
-      else wc_part(ctx,wc_rect(x,sy-h,w,h),col,1,{lw:1.2});x+=w+8+R()*10;}}
-  // the shop's window, onto the market square in daylight: the town wall across it, a stall under its awning, the market cross
-  ctx.save();ctx.beginPath();ctx.rect(30,170,250,520);ctx.clip();wc_sky(ctx,560,9,{clouds:1,cx:40,cw:150,cy:220,ch:80});
-  const wt=452,wb=540,wl=[[0,wb],[0,wt+12]];for(let x=0;x<320;x+=34)wl.push([x,wt+12],[x,wt],[x+18,wt],[x+18,wt+12]);wl.push([320,wt+12],[320,wb]);wc_part(ctx,wl,OS_STONE,0.42);
-  wc_land(ctx,x=>wb+2*Math.sin(x/40),OS_EARTH,0.55,{line:false});
-  const qx=222;for(const [w,y] of [[92,622],[72,610],[54,598]])wc_part(ctx,wc_rect(qx-w/2,y,w,12),wc_lit(OS_STONE,0.06),0.55);
-  wc_part(ctx,wc_rect(qx-6,452,12,148),OS_STONE,0.55);wc_part(ctx,wc_rect(qx-18,470,36,9),OS_STONE,0.55);
-  for(const x of [40,128])wc_part(ctx,wc_rect(x-4,500,8,124),OS_TIMBER,0.6);wc_part(ctx,wc_rect(36,580,100,10),OS_TIMBER,0.6);
-  for(const [x,h] of [[62,34],[98,28]])wc_wash(ctx,wc_rect(x-14,580-h,28,h),[226,206,156],{depth:0.6,kind:"build",lw:1,seed:x});
-  ctx.save();ctx.translate(30,490);ctx.scale(0.42,0.42);os_awning(ctx,0,250,0,OS_REDSTRIPE,61);ctx.restore();ctx.restore();
-  for(const r of [wc_rect(18,158,274,14),wc_rect(18,158,14,544),wc_rect(278,158,14,544),wc_rect(150,170,10,520),wc_rect(30,420,250,10)])wc_wash(ctx,r,[118,84,58],{kind:"trim",lw:1.2});
-  wc_wash(ctx,wc_rect(-40,F,W+80,H-F+40),[196,164,124],{kind:"ground",line:false,seed:6});ctx.save();ctx.strokeStyle=rgba([140,108,74],0.4);ctx.lineWidth=2;for(let i=-14;i<=14;i++){ctx.beginPath();ctx.moveTo(960+i*70,F);ctx.lineTo(960+i*220,H+20);ctx.stroke();}ctx.restore();
-  wc_wash(ctx,wc_rect(-40,F-18,W+80,20),[150,116,84],{kind:"trim",line:false,flat:true});}
-// the counter, drawn after the grocer behind it
-function os_counter(ctx){const [x0,x1,y]=OS_SH.counter;ctx.drawImage(wc_kept("counter",W,H,q=>{wc_contact(q,x0-10,x1+10,OS_SH.fy+4,1,0.3);wc_part(q,wc_rect(x0+10,y+26,x1-x0-20,OS_SH.fy-y-26),[132,72,52],1);
-    for(let i=0;i<6;i++)wc_flat(q,wc_rect(x0+44+i*(x1-x0-60)/6,y+60,(x1-x0-60)/6-30,OS_SH.fy-y-100),[150,86,62],1,"panel");wc_part(q,wc_rect(x0-10,y,x1-x0+20,28),[164,98,70],1);}),0,0);}
-// the beam scale on the counter: its pillar, the beam tilting by tilt (radians), two brass pans hanging level; what's in each pan
-function os_scaleAt(ctx,x,y,tilt,left,right){const L=150;ctx.drawImage(wc_kept("scaleStand",140,260,q=>{wc_part(q,wc_rect(54,40,22,200),[160,120,62],1);wc_part(q,wc_rect(20,236,90,16),[120,90,60],1);
-    wc_wash(q,wc_ell(65,40,14,14,16),[200,160,80],{kind:"thing",lw:1.2});}),x-65,y-252);
-  const py=y-212,c=Math.cos(tilt),s=Math.sin(tilt),ends=[[x-L*c,py-L*s],[x+L*c,py+L*s]];ctx.save();ctx.strokeStyle=rgba([140,104,48],1);ctx.lineWidth=8;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(ends[0][0],ends[0][1]);ctx.lineTo(ends[1][0],ends[1][1]);ctx.stroke();ctx.restore();
-  ends.forEach(([ex,ey],i)=>{ctx.save();ctx.strokeStyle=rgba([110,92,70],0.8);ctx.lineWidth=2;for(const d of [-40,40]){ctx.beginPath();ctx.moveTo(ex,ey);ctx.lineTo(ex+d,ey+110);ctx.stroke();}ctx.restore();
-    ctx.drawImage(wc_kept("pan",120,40,q=>wc_wash(q,[[6,6],[114,6],[96,30],[24,30]],[214,170,84],{kind:"thing",lw:1.4})),ex-60,ey+104);const what=i?right:left;if(what)what(ctx,ex,ey+110);});
-  return ends;}
-// a brass weight, an iron one, and the crown stamped on it (c, 0 to 1)
-function os_brass(ctx,x,y,s){s=s||1;ctx.drawImage(wc_kept("brass",80,80,q=>{wc_wash(q,[[12,70],[68,70],[60,26],[20,26]],[226,180,90],{kind:"thing",lw:1.4});wc_wash(q,wc_ell(40,20,12,9,14),[226,180,90],{kind:"thing",lw:1.2});}),x-40*s,y-74*s,80*s,80*s);}
-function os_iron(ctx,x,y,crown,s){s=s||1;ctx.drawImage(wc_kept("iron|"+s,Math.ceil(90*s),Math.ceil(80*s),q=>{q.scale(s,s);wc_wash(q,[[10,72],[80,72],[72,30],[18,30]],[96,96,104],{kind:"thing",lw:1.4/s});wc_wash(q,wc_ell(45,24,16,10,14),[96,96,104],{kind:"thing",lw:1.2/s});}),x-45*s,y-76*s);
-  if(crown>0){const k=s*lerp(1.4,1,ease(clamp(crown,0,1)));ctx.save();ctx.translate(x,y-30*s);ctx.scale(k,k);ctx.globalAlpha*=clamp(crown*2,0,1);ctx.fillStyle=rgba([244,224,170],0.95);ctx.beginPath();
-    ctx.moveTo(-14,8);ctx.lineTo(-16,-8);ctx.lineTo(-8,-1);ctx.lineTo(0,-12);ctx.lineTo(8,-1);ctx.lineTo(16,-8);ctx.lineTo(14,8);ctx.closePath();ctx.fill();ctx.restore();}}
-// the inspector's case: a wooden box, open, its lid up, brass weights in their velvet holes; and the Act, a printed book, on the counter
-function os_case(ctx,x,y,open){ctx.drawImage(wc_kept("caseBox",340,140,q=>{q.translate(10,10);wc_part(q,wc_rect(0,40,320,80),[120,80,52],1);wc_wash(q,wc_rect(14,44,292,46),[110,40,52],{kind:"thing",line:false});
-    [[50,26],[110,22],[166,18],[214,15],[254,12],[286,10]].forEach(([cx,r])=>{wc_wash(q,wc_ell(cx,64,r,r*0.5,16),[80,26,34],{kind:"thing",line:false,flat:true});wc_wash(q,[[cx-r*0.8,70],[cx+r*0.8,70],[cx+r*0.6,70-r*1.1],[cx-r*0.6,70-r*1.1]],[226,180,90],{kind:"thing",lw:1});});}),x-170,y-130);
-  if(open<1){const k=1-open;ctx.save();ctx.translate(x,y-80);ctx.scale(1,k);ctx.drawImage(wc_kept("caseLid",340,120,q=>{q.translate(10,10);wc_part(q,wc_rect(0,0,320,90),[120,80,52],1);wc_flat(q,wc_rect(140,40,40,12),[200,160,80],1,"clasp");}),-170,-10);ctx.restore();}
-  else{ctx.drawImage(wc_kept("caseLidUp",340,100,q=>{q.translate(10,6);wc_part(q,[[0,80],[320,80],[300,0],[20,0]],[120,80,52],1);wc_wash(q,[[16,72],[304,72],[290,10],[30,10]],[110,40,52],{kind:"thing",line:false});}),x-170,y-168);}}
-function os_act(ctx,x,y,s){s=s||1;ctx.drawImage(wc_kept("act|"+s,Math.ceil(300*s),Math.ceil(120*s),q=>{q.scale(s,s);q.translate(10,10);wc_part(q,[[0,90],[280,90],[262,0],[18,0]],[90,60,50],1);wc_wash(q,[[14,82],[136,82],[126,8],[26,8]],WCP.parchment,{kind:"page",lw:1});wc_wash(q,[[144,82],[266,82],[254,8],[154,8]],WCP.parchment,{kind:"page",lw:1});
-    q.strokeStyle=rgba(WCP.parchInk,0.45);q.lineWidth=1.6;for(let i=0;i<5;i++){q.beginPath();q.moveTo(36,24+i*12);q.lineTo(118,24+i*12);q.moveTo(162,24+i*12);q.lineTo(244,24+i*12);q.stroke();}
-    q.fillStyle=rgba(WCP.parchInk,0.7);q.beginPath();q.arc(80,14,6,0,TAU);q.fill();}),x-150*s,y-110*s);}
+// the count board's marks: so many in each column, written as tallies
+function os_counts(ctx,n,a){if(a<=0.01)return;const [bx,by,bw]=OS_OR.count;withA(ctx,a,()=>{["sponges","needles","instruments"].forEach((s,i)=>{const x=bx+i*bw/3+bw/6;
+  wc_T(ctx,s,x,by+42,{w:600,size:20,align:"center",col:[60,110,170],deco:true});const k=n[i];ctx.save();ctx.strokeStyle=rgba([60,110,170],0.85);ctx.lineWidth=3;ctx.lineCap="round";
+  for(let j=0;j<k;j++){const g=Math.floor(j/5),r=j%5,x0=x-36+g*0+(r<4?r*12:0),y0=by+76+g*44;ctx.beginPath();if(r<4){ctx.moveTo(x0,y0);ctx.lineTo(x0,y0+30);}else{ctx.moveTo(x-40,y0+26);ctx.lineTo(x+6,y0+4);}ctx.stroke();}ctx.restore();});});}
 
-/* ---------- the 1880s, close: the inspector's mark on the counter ---------- */
-// three iron weights in a row on the counter, and the Act open at the back of it; the punch, the mallet and his hands are drawn every
-// frame
-const OS_ST={top:540,base:812,s:3.2,weights:[540,900,1260],act:[1500,604,1.25]};
-function os_paintStamp(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);
-  // behind: the shop's shelves, close and out of focus, in shadow: painted sharp on a layer, then blurred once (a blur on each stroke stalled the page for seconds)
-  const L=mkCanvas(W+80,OS_ST.top+80),q=L.getContext("2d");q.translate(40,40);wc_wash(q,wc_rect(-40,-40,W+80,OS_ST.top+40),[118,84,60],{kind:"plaster",line:false,seed:81});const R=wc_rng(31);
-  for(const sy of [150,400]){let x=-30;while(x<W+20){const k=Math.floor(R()*4),w=[96,110,80,128][k],h=[150,176,196,116][k];
-      wc_part(q,wc_rect(x,sy-h,w,h),mix([[226,232,236],[176,64,52],[214,180,96],[92,126,150]][k],[118,84,60],0.35),1,{lw:1});x+=w+20+R()*28;}
-    wc_part(q,wc_rect(-40,sy,W+80,30),[150,108,74],1);}ctx.save();ctx.filter="blur(7px)";ctx.drawImage(L,-40,-40);ctx.restore();
-  // the counter's top, its grain running away from us, and its back edge
-  wc_wash(ctx,wc_rect(-40,OS_ST.top,W+80,H-OS_ST.top+40),[186,118,84],{kind:"plaster",line:false,seed:82});
-  ctx.save();ctx.globalCompositeOperation="multiply";ctx.strokeStyle=rgba([150,90,60],0.2);ctx.lineWidth=2.4;
-  for(let i=-14;i<=14;i++){ctx.beginPath();ctx.moveTo(960+i*80,OS_ST.top);ctx.quadraticCurveTo(960+i*130,OS_ST.top+300,960+i*190,H+40);ctx.stroke();}ctx.restore();
-  wc_wash(ctx,wc_rect(-40,OS_ST.top-8,W+80,14),[206,140,100],{kind:"trim",line:false,flat:true});
-  const [ax,ay,as]=OS_ST.act;wc_contact(ctx,ax-200*as,ax+200*as,ay+2,1,0.3);os_act(ctx,ax,ay,as);
-  for(const x of OS_ST.weights){wc_contact(ctx,x-150,x+150,OS_ST.base+2,1,0.45);os_iron(ctx,x,OS_ST.base,0,OS_ST.s);}}
-// the inspector's hands at a weight standing at (x,y), s times its usual size: from below the frame, the left holds a steel punch to
-// the weight's face, where the mark goes; the right brings a mallet down on the punch's head as u goes from 0 (raised) to 1 (struck).
-// lift raises both while they move to the next weight.
-const OS_CUFF=[246,244,238],OS_SLEEVE=[48,52,66];
-function os_fist(ctx,x,y,a,seed){const P=PEOPLE.inspector,dk=rgba(wc_dim(P.skin,0.35),0.6);ctx.save();ctx.translate(x,y);ctx.rotate(a);
-  wc_wash(ctx,wc_smooth([[-56,-40],[-20,-58],[30,-56],[58,-30],[60,26],[40,54],[-20,58],[-58,30],[-56,-40]],5),P.skin,{kind:"limb",lw:1.4,seed});
-  // the knuckles, the fingers curled round, and the thumb across them
-  ctx.strokeStyle=dk;ctx.lineWidth=3;ctx.lineCap="round";for(let i=0;i<3;i++){ctx.beginPath();ctx.moveTo(18,-26+i*26);ctx.quadraticCurveTo(40,-20+i*26,52,-28+i*26);ctx.stroke();}
-  wc_wash(ctx,wc_smooth([[-44,-30],[-6,-44],[30,-40],[34,-28],[-4,-22],[-40,-12],[-44,-30]],4),wc_dim(P.skin,0.06),{kind:"limb",lw:1.2,seed:seed+2});ctx.restore();}
-// a forearm in its sleeve, coming up from below the frame to the wrist at (wx,wy), widening as it nears us; then the white cuff
-function os_forearm(ctx,wx,wy,bx,seed){const d=Math.atan2(H+80-wy,bx-wx),nx=-Math.sin(d),ny=Math.cos(d),w0=56,w1=110;
-  wc_wash(ctx,[[wx+nx*w0,wy+ny*w0],[bx+nx*w1,H+80],[bx-nx*w1,H+80],[wx-nx*w0,wy-ny*w0]],OS_SLEEVE,{kind:"coat",lw:1.4,seed});
-  const c=[Math.cos(d),Math.sin(d)];wc_wash(ctx,[[wx+nx*58,wy+ny*58],[wx+nx*60+c[0]*44,wy+ny*60+c[1]*44],[wx-nx*60+c[0]*44,wy-ny*60+c[1]*44],[wx-nx*58,wy-ny*58]],OS_CUFF,{kind:"coat",lw:1.2,seed:seed+1});}
-function os_markTools(ctx,x,y,s,u,lift){lift=lift||0;const tip=[x,y-30*s-lift],a=-0.42,L=250,dir=[Math.sin(a),-Math.cos(a)],top=[tip[0]+dir[0]*L,tip[1]+dir[1]*L],
-    grip=[tip[0]+dir[0]*L*0.5,tip[1]+dir[1]*L*0.5];
-  // the left forearm and the punch it holds
-  os_forearm(ctx,grip[0]-56,grip[1]+66,grip[0]-300,5);
-  ctx.save();ctx.translate(tip[0],tip[1]);ctx.rotate(a);wc_wash(ctx,[[-10,0],[10,0],[13,-L+30],[-13,-L+30]],[160,166,176],{kind:"thing",lw:1.4,seed:9});
-  wc_wash(ctx,wc_rect(-18,-L,36,32),[128,134,146],{kind:"thing",lw:1.4,seed:10});ctx.restore();os_fist(ctx,grip[0],grip[1],a,11);
-  // the mallet turns about the right hand, from raised to its head on the punch's head; the right forearm below it
-  const hand=[top[0]+250,top[1]+130],hl=260,h1=Math.atan2(top[1]-44-hand[1],top[0]-hand[0]),th=lerp(h1+1.15,h1,u);
-  ctx.save();ctx.translate(hand[0],hand[1]);ctx.rotate(th);wc_wash(ctx,[[0,-9],[hl-34,-8],[hl-34,8],[0,9]],[156,112,72],{kind:"thing",lw:1.2,seed:12});
-  wc_wash(ctx,wc_rrPts(hl-40,-50,84,100,14),[120,84,56],{kind:"thing",lw:1.4,seed:13});ctx.restore();
-  os_forearm(ctx,hand[0]+44,hand[1]+62,hand[0]+300,14);os_fist(ctx,hand[0],hand[1],th+Math.PI/2,16);return{tip,top};}
+// what's in front of the people behind the table: the table and its column, the drape over the patient from the chest down, the pillow,
+// the patient (os_patientBody) and the drip's line, from the bag to the port by the head and on to the back of the hand; the instrument
+// trolley, its cloth, the instruments, the sponges
+function os_orFront(ctx){ctx.drawImage(wc_kept("orFront",W,H,q=>{const O=OS_OR,[t0,t1,ty]=O.table,F=O.fy;
+  wc_contact(q,840,1160,F+2,0.9,0.32);wc_part(q,wc_rect(930,ty+150,90,F-ty-160),[150,158,166],1,{lw:1.2});wc_part(q,[[836,F-14],[1114,F-14],[1100,F+4],[850,F+4]],[136,144,152],1,{lw:1.1});
+  // the drape: flat on the table under the patient's shoulders, then over the patient from the chest down, high at the chest and the
+  // feet, falling over the table's edge in folds
+  const top=[[t0+250,ty-76],[t0+380,ty-68],[t0+500,ty-50],[t0+630,ty-42],[t0+740,ty-56],[t0+800,ty-64],[t1-110,ty-52],[t1-50,ty-74],[t1-12,ty-66],[t1+14,ty-38]];
+  const drape=[[t0+40,ty],[t0+90,ty-4],[t0+168,ty-6],[t0+182,ty-40],[t0+192,ty-72]].concat(top,[[t1+30,ty],[t1+42,ty+150],[t1-60,ty+164],[t0+600,ty+170],[t0+120,ty+164],[t0+20,ty+150]]);
+  wc_wash(q,wc_smooth(drape,6),OS_DRAPE,{kind:"build",lw:1.6,seed:30});q.save();wc_tr(q,wc_smooth(drape,6));q.clip();q.strokeStyle=rgba(wc_dim(OS_DRAPE,0.3),0.35);q.lineWidth=3;q.lineCap="round";
+  for(let x=t0+80;x<t1;x+=96){q.beginPath();q.moveTo(x,ty+6);q.quadraticCurveTo(x+18,ty+80,x+6,ty+160);q.stroke();}q.strokeStyle=rgba(wc_lit(OS_DRAPE,0.35),0.4);q.lineWidth=7;
+  q.beginPath();q.moveTo(t0+200,ty-62);for(const [x,y] of top)q.lineTo(x,y+12);q.stroke();q.restore();
+  // the pillow, under the head (drawn after this, os_patientHead)
+  wc_wash(q,wc_ell(O.head[0]+4,ty-24,76,26,30),[246,248,250],{kind:"thing",lw:1.3,seed:32});
+  os_patientBody(q);
+  // the drip's line: down from the bag to the port the anaesthetist uses, above the patient's shoulder, and on to the back of the hand
+  const [wx,wy]=O.wrist,[px,py]=O.port;q.save();q.lineCap="round";q.strokeStyle=rgba([210,226,236],0.95);q.lineWidth=3;q.beginPath();q.moveTo(O.bag[0],O.bag[1]+46);
+  q.bezierCurveTo(O.bag[0]+4,py-100,px-10,py-50,px,py);q.bezierCurveTo(px+50,py+24,wx-40,wy-30,wx+20,wy-12);q.stroke();
+  q.fillStyle=rgba([226,232,236],1);q.strokeStyle=rgba(WC_PENCIL,0.6);q.lineWidth=1.2;q.beginPath();rr(q,px-6,py-9,12,18,3);q.fill();q.stroke();
+  q.fillStyle=rgba([70,120,190],0.95);q.beginPath();rr(q,px+5,py-4,7,8,2);q.fill();q.restore();
+  // the trolley: four legs on wheels, a shelf, the cloth over its top; the instruments on a tray, the sponges in a stack, a bowl
+  const [r0,r1,ry]=O.trolley;wc_contact(q,r0-10,r1+10,F+2,0.9,0.3);for(const x of [r0+16,r1-28])wc_part(q,wc_rect(x,ry+20,12,F-ry-34),OS_STEEL,1,{lw:1});
+  for(const x of [r0+22,r1-22])wc_wash(q,wc_ell(x,F-8,12,12,12),[70,74,84],{kind:"thing",lw:1});wc_part(q,wc_rect(r0+8,F-150,r1-r0-16,12),OS_STEEL,1,{lw:1});
+  wc_wash(q,[[r0-12,ry-6],[r1+12,ry-6],[r1+20,ry+64],[r0-20,ry+64]],OS_DRAPE,{kind:"build",lw:1.4,seed:36});
+  wc_part(q,wc_rect(r0+30,ry-26,130,20),OS_STEEL,1,{lw:1});for(let i=0;i<5;i++){q.save();q.translate(r0+44+i*24,ry-26);q.rotate(-0.12+i*0.05);wc_flat(q,wc_rect(-3,-34,6,36),[150,160,170],1,"instrument");
+    q.strokeStyle=rgba([140,150,160],1);q.lineWidth=2;q.beginPath();q.arc(-4,-40,6,0,TAU);q.arc(6,-40,6,0,TAU);q.stroke();q.restore();}
+  for(let i=0;i<6;i++){wc_flat(q,wc_rect(r1-118+i*1.5,ry-14-i*7,74,8),[250,250,250],1,"sponge");q.fillStyle=rgba([70,120,200],0.8);q.fillRect(r1-108+i*1.5,ry-12-i*7,30,2.4);}
+  wc_wash(q,[[r1-28,ry-30],[r1+8,ry-30],[r1+2,ry-8],[r1-22,ry-8]],OS_STEEL,{kind:"thing",lw:1.1,seed:38});
+  // the light's glow on the drape
+  q.save();q.globalCompositeOperation="screen";wc_glowAt(q,O.light[0],ty-30,420,[255,248,226],0.28);q.restore();}),0,0);}
+// the patient, lying on the table: the neck, from under the jaw, and the shoulders in a hospital gown; the drape's edge turned back across
+// the chest; the arm out of the gown's sleeve, lying on the drape, the band at the wrist, the cannula on the back of the hand. Drawn the
+// way the people are, so the head (os_patientHead, on the pillow) joins on.
+function os_patientBody(q){const P=PEOPLE.os_patient,O=OS_OR,[hx,hy]=O.head,[sx,sy]=O.shoulder,[ex,ey]=O.elbow,[wx,wy]=O.wrist;
+  const dots=(cx,pts,x0,y0,x1,y1)=>{cx.save();wc_tr(cx,pts);cx.clip();cx.fillStyle=rgba(OS_PDOT,0.7);
+    for(let y=y0,r=0;y<y1;y+=10,r++)for(let x=x0+(r%2)*6;x<x1;x+=12){cx.beginPath();cx.arc(x,y,1.5,0,TAU);cx.fill();}cx.restore();};
+  const line=(cx,pts,a)=>{cx.beginPath();cx.moveTo(pts[0][0],pts[0][1]);cx.quadraticCurveTo(pts[1][0],pts[1][1],pts[2][0],pts[2][1]);cx.strokeStyle=rgba(wc_dim(OS_PGOWN,0.5),a);
+    cx.lineWidth=1.6;cx.lineCap="round";cx.stroke();};
+  const d=[(wx-ex)/Math.hypot(wx-ex,wy-ey),(wy-ey)/Math.hypot(wx-ex,wy-ey)],ang=Math.atan2(d[1],d[0]);
+  outlined(q,cx=>{
+    // the neck, in the head's own turn: from under the jaw into the gown's collar, a shadow under the jaw
+    cx.save();cx.translate(hx,hy);cx.scale(0.8,0.8);cx.rotate(-1.32);cx.beginPath();cx.moveTo(-20,24);cx.quadraticCurveTo(-22,58,-29,90);cx.lineTo(29,90);
+    cx.quadraticCurveTo(22,58,20,24);cx.closePath();litFill(cx,P.skin,-29,24,29,90);seam(cx,P.skin,0.3,1.4);
+    cx.save();cx.clip();const g=cx.createLinearGradient(0,40,0,72);g.addColorStop(0,rgba(wc_dim(P.skin,0.25),0.5));g.addColorStop(1,rgba(wc_dim(P.skin,0.25),0));
+    cx.fillStyle=g;cx.fillRect(-40,24,80,50);cx.restore();cx.restore();
+    // the gown over the shoulders and the chest, its neckline scooped round the neck
+    const gw=wc_smooth([[507,580],[530,576],[560,573],[596,571],[624,570],[636,600],[638,648],[600,652],[548,652],[512,648],[498,638],[497,624],[511,602]],5);
+    wc_tr(cx,gw);litFill(cx,OS_PGOWN,500,571,638,652);seam(cx,OS_PGOWN,0.4,1.4);dots(cx,gw,498,572,644,656);
+    // the arm, lying on the drape beside the body, and the hand, palm down
+    limb(cx,[[sx,sy],[ex,ey],[wx,wy]],25,21,P.skin,[sx,sy-20,wx,wy+20]);
+    cx.save();cx.translate(wx,wy);cx.rotate(ang+0.22);ell(cx,13,8,6,4.5,0.3);litFill(cx,P.skin,7,3,19,13);seam(cx,P.skin,0.3,1.2);
+    cx.beginPath();cx.moveTo(-2,-9);cx.bezierCurveTo(12,-11,24,-9,31,-4);cx.quadraticCurveTo(37,2,33,8);cx.bezierCurveTo(24,11,10,10,-2,9);cx.closePath();
+    litFill(cx,P.skin,0,-11,36,10);seam(cx,P.skin,0.3,1.2);cx.strokeStyle=rgba(wc_dim(P.skin,0.4),0.45);cx.lineWidth=1.2;
+    for(const y of [-2,3]){cx.beginPath();cx.moveTo(22,y);cx.lineTo(31,y+0.6);cx.stroke();}cx.restore();
+    // the sleeve, over the shoulder's round and the top of the arm; its edge, and the fold where the arm meets the body
+    const sl=wc_smooth([[sx-20,sy-16],[sx-2,sy-21],[sx+20,sy-17],[sx+34,sy-10],[sx+33,sy+8],[sx+30,sy+20],[sx+6,sy+18],[sx-18,sy+16]],4);
+    wc_tr(cx,sl);litFill(cx,OS_PGOWN,sx-20,sy-21,sx+34,sy+20);dots(cx,sl,sx-26,sy-24,sx+40,sy+24);
+    line(cx,[[sx-22,sy-12],[sx,sy-26],[sx+22,sy-18]],0.75);line(cx,[[sx+34,sy-10],[sx+38,sy+4],[sx+30,sy+20]],0.9);line(cx,[[sx-10,sy+14],[sx+8,sy+22],[sx+26,sy+20]],0.4);
+  },0,0,1,P.edge,[440,540,800,680]);
+  // the drape's edge, turned back across the chest, under the arm
+  const [bc,bx]=wc_buf("osHem",W,H);bx.clearRect(0,0,W,H);wc_wash(bx,wc_smooth([[606,579],[616,572],[628,571],[631,606],[634,650],[622,652],[612,650],[609,612]],4),wc_lit(OS_DRAPE,0.12),{kind:"build",lw:1.4,seed:31});
+  bx.save();bx.globalCompositeOperation="destination-out";bx.lineCap="round";bx.lineJoin="round";bx.lineWidth=31;bx.beginPath();bx.moveTo(sx,sy);bx.lineTo(ex,ey);bx.lineTo(wx,wy);bx.stroke();bx.restore();
+  q.drawImage(bc,0,0);
+  // the band at the wrist, with its label; the cannula, taped to the back of the hand
+  wc_wash(q,wc_rrPts(wx-9,wy-15,13,30,5),[250,250,252],{kind:"thing",lw:1.2,seed:34});q.fillStyle=rgba([96,140,190],0.9);q.fillRect(wx-7,wy-6,9,12);
+  wc_wash(q,wc_rrPts(wx+12,wy-16,15,9,3),[246,246,240],{kind:"thing",lw:1,seed:35});}
+// the patient's head on the pillow, turned towards us; awake (o.awake) or asleep
+function os_patientHead(ctx,t,awake){const P=PEOPLE.os_patient,[x,y]=OS_OR.head,E=awake?EXPR.calm:{bi:0,bo:0,arch:-2,eye:0.05,smile:0.1,open:0,mw:15};
+  outlined(ctx,cx=>{cx.rotate(-1.32);head(cx,P,E,Object.assign({},POSE.stand,{turn:0,look:0,gaze:[0.4,-0.3]}),awake?t:0.3);},x,y,0.8,P.edge,[-110,-120,110,110]);}
+
+/* the theatre office down the corridor: a steel shelf of binders and manuals, and on it the guidelines the steps were written in */
+const OS_GD={fy:880,shelf:{x:520,w:900,h:700,rows:[300,480,660]},key:[2,1]};
+function os_paintGuides(ctx){const G=OS_GD,S=G.shelf,wall=[212,226,220];gv_wallFloor(ctx,wall,G.fy,{seed:27,vx:960,floor:[184,196,192]});gv_lightGlow(ctx,980,0,560);
+  // a window onto the hospital's other wing, across the way: its pale wall and rows of windows
+  const wx=90,wy=180,ww=300,wh=420,f=16;ctx.save();ctx.beginPath();ctx.rect(wx,wy,ww,wh);ctx.clip();wc_sky(ctx,wy+wh,9,{clouds:2,cx:wx+10,cw:ww-120,cy:wy+24,ch:wh*0.18});
+  wc_part(ctx,wc_rect(wx-20,wy+150,ww+40,wh),[232,226,214],0.4);for(let r=0;r<4;r++)for(let c=0;c<4;c++)wc_flat(ctx,wc_rect(wx+14+c*74,wy+176+r*62,44,36),[150,176,196],0.4,"pane");
+  ctx.restore();for(const r of [wc_rect(wx-f,wy-f,ww+2*f,f),wc_rect(wx-f,wy-f,f,wh+2*f),wc_rect(wx+ww,wy-f,f,wh+2*f),wc_rect(wx+ww/2-6,wy,12,wh),wc_rect(wx,wy+wh*0.42-6,ww,12)])
+    wc_wash(ctx,r,WC_PAPER,{kind:"trim",lw:1.4});wc_wash(ctx,wc_rect(wx-30,wy+wh,ww+60,24),wc_dim(wall,0.1),{kind:"trim",lw:1.5});
+  // the steel shelf: manuals on the top row, binders on the middle one, manuals again, and boxes of files at the bottom
+  gv_bookcase(ctx,S.x,G.fy,S.w,S.h,S.rows.concat([G.fy-40]),{col:[178,188,194]});
+  const R=wc_rng(19),cols=[[96,118,150],[80,120,128],[120,140,104],[132,136,150],[70,100,142],[110,140,160],[150,160,170]];
+  S.rows.forEach((ry,j)=>{let bx=S.x+34,k=0;while(bx<S.x+S.w-70){const w=j===1?54:30+R()*26,h=j===1?150:120+R()*40;
+    if(!(j===G.key[1]&&k===G.key[0]))j===1?gv_binder(ctx,bx,ry-h,w,h,cols[(k+j*3)%cols.length]):wc_part(ctx,wc_rect(bx,ry-h,w,h),cols[Math.floor(R()*cols.length)],1,{lw:1.2});
+    bx+=w+(j===1?10:4);k++;}});
+  for(let i=0;i<6;i++){const bx=S.x+40+i*140;wc_part(ctx,wc_rect(bx,G.fy-188,124,146),[214,200,172],1,{lw:1.2});wc_flat(ctx,wc_rect(bx+30,G.fy-160,64,34),WC_CARD,1,"label");}
+  // a notice board, papers pinned to it
+  gv_cork(ctx,1520,250,250,190);[[1546,272,70,92,-0.04],[1632,266,80,64,0.03],[1638,350,96,70,-0.02],[1540,384,70,40,0.05]].forEach(([x,y,w,h,r],i)=>{ctx.save();
+    ctx.translate(x+w/2,y+h/2);ctx.rotate(r);wc_flat(ctx,wc_rect(-w/2,-h/2,w,h),i===1?[250,236,170]:WC_CARD,1,"paper");ctx.fillStyle=rgba(WC_MUTED,0.35);
+    for(let k=0;k<Math.floor(h/16)-1;k++)ctx.fillRect(-w/2+10,-h/2+16+k*14,w-20-(k%2)*14,3);ctx.restore();gv_pin(ctx,x+w/2,y+8,GV.red,0.8);});
+  gv_plant(ctx,1660,G.fy,0.9);}
+// the binder of guidelines, pulled a little from the row (out, 0 to 1)
+const OS_GDB={w:64,h:170,col:[176,62,56]};
+function os_guideBinder(ctx,out){const G=OS_GD,S=G.shelf,x=S.x+34+G.key[0]*64,y=S.rows[1]-OS_GDB.h;ctx.save();ctx.translate(0,-10*out);
+  gv_binder(ctx,x,y+8*out,OS_GDB.w,OS_GDB.h,OS_GDB.col);ctx.restore();}
+
+/* eight cities on a map of the world: an atlas page, the sea washed blue, the land in sand and green; the pins are drawn every frame */
+const OS_LON=lon=>(lon+170)*W/360,OS_LAT=lat=>540-lat*W/360;
+const OS_CITY=[["Seattle",-122.33,47.61,1],["Toronto",-79.38,43.65,1],["London",-0.13,51.51,-1],["Amman",35.93,31.95,-1],["New Delhi",77.21,28.61,1],
+  ["Ifakara",36.68,-8.13,1],["Manila",120.98,14.6,1],["Auckland",174.76,-36.85,-1]];
+const OS_LAND=[
+  // North America, with the Gulf of California, the Gulf of Mexico and Hudson Bay
+  [[-168,65.5],[-166,68.8],[-162,70.2],[-156.5,71.3],[-151,70.6],[-145,70.1],[-141,69.7],[-135,69.4],[-128,70.2],[-120,69.3],[-114,68.4],[-106,68.6],[-98,67.8],[-94,69],
+   [-88,68.5],[-82,66.6],[-86,64],[-93,62],[-94.5,59],[-92,57],[-85,55.2],[-82,52.5],[-79,54.6],[-77,60],[-78,62.3],[-73,62],[-69,59],[-64.5,60.3],[-61,57],[-57,54],
+   [-56,51.5],[-60,50.2],[-66,49.2],[-64.5,48],[-61,45.7],[-66,44.5],[-70,43.5],[-70,41.7],[-74,40.5],[-76,38.5],[-75.5,35.3],[-81,31.5],[-80.1,26.8],[-80.4,25.2],
+   [-82.7,27.8],[-84.3,30],[-89,30.2],[-90,29.2],[-94,29.6],[-97.4,27.8],[-97.7,24],[-97.2,21.5],[-96.1,19.1],[-94.5,18.2],[-91,18.7],[-90.4,21],[-87,21.5],
+   [-87.5,18.5],[-88.3,16],[-84,15.9],[-83.3,15],[-83.5,12],[-83.8,10.9],[-82.6,9.6],[-79.5,9.6],[-77.4,8.7],[-78.3,7.8],[-80,7.4],[-82.9,8.2],[-85.7,9.9],
+   [-85.7,11.2],[-87.7,13.2],[-91.4,13.9],[-94,16],[-96.5,15.7],[-100,16.9],[-105.6,20.4],[-105.5,22.5],[-109,26.3],[-112.2,29.3],[-114.7,31.7],[-113,29.5],
+   [-111,26.5],[-109.9,22.9],[-112.2,24.8],[-114.2,28],[-116.7,31.9],[-118.5,34],[-120.6,34.6],[-122.5,37.8],[-124.2,40.4],[-124,46.2],[-124.6,48.4],[-123,49.2],
+   [-127.5,50.8],[-130.5,54.5],[-134,58],[-139.5,59.8],[-146,60.9],[-151.5,59.2],[-154,57.5],[-158,57],[-162.5,55],[-163,54.8],[-158,58.6],[-162,59.9],
+   [-165.5,62.5],[-164.5,63.2],[-161,64.5],[-166,65.5]],
+  // Greenland, Baffin Island and the islands of the Canadian Arctic; Iceland
+  [[-73,78.5],[-66,80.5],[-60,82],[-45,83],[-30,83.5],[-20,82],[-17,80],[-18,77],[-20,74],[-22,71],[-24,69.5],[-32,68],[-38,65.6],[-41,63],[-43.5,60],[-46,60.8],
+   [-49.5,62],[-51,64],[-53,66.5],[-54,69.5],[-56,72.5],[-60,76],[-68,77.5]],
+  [[-65,62],[-61.8,66.6],[-67,69.3],[-73,71.5],[-80,73.7],[-89,72.5],[-85,70],[-81,69],[-78,67],[-74,65.5],[-72,64]],
+  [[-80,83],[-62,82.5],[-75,78],[-90,79]],[[-118,73],[-102,73],[-101,69],[-117,69]],[[-125,74],[-116,74],[-120,71.5]],
+  [[-22.7,64],[-24,65.5],[-22,66.4],[-16,66.5],[-13.6,65.1],[-15,64.3],[-18.7,63.4]],
+  // Cuba and Hispaniola
+  [[-85,21.8],[-81,23.1],[-77,22],[-74.2,20.2],[-77.7,19.9],[-80,21.8]],[[-74.4,19.8],[-68.4,19],[-68.9,18.2],[-71.8,17.6],[-74.4,18.5]],
+  // South America
+  [[-77.4,8.7],[-75.5,10.5],[-71.5,12.4],[-67,10.6],[-62,10.7],[-60,8.3],[-57.2,6],[-52,4.5],[-50,1.8],[-48.5,-1.3],[-44,-2.5],[-41,-2.9],[-38.5,-3.7],[-35.2,-5.8],
+   [-34.9,-8],[-37,-11],[-38.5,-13],[-39.1,-17.6],[-40.9,-22],[-43.2,-22.9],[-48.5,-26.2],[-48.7,-28.5],[-50.8,-31],[-53.4,-33.8],[-55,-34.9],[-58.4,-34.6],
+   [-57.4,-36.3],[-57.6,-38.2],[-62.3,-38.8],[-62.2,-40.7],[-65,-41],[-64,-42.4],[-65.3,-44.6],[-67.5,-46.4],[-65.8,-47.8],[-68.2,-50.1],[-69,-51.6],[-68.6,-52.6],
+   [-66.5,-55],[-70.5,-55.2],[-74.5,-52.5],[-75.5,-48],[-74,-44],[-73.5,-41.5],[-73.6,-37],[-71.7,-33],[-71.4,-30],[-70.3,-23.6],[-70.3,-18.5],[-76.2,-14],
+   [-77.2,-12],[-79.6,-7.2],[-81.3,-4.7],[-80.3,-2.3],[-80,0],[-78.9,1.6],[-77.3,3.8],[-77.6,6.6]],
+  // Europe and Asia, with the Baltic, the Persian Gulf and the Bay of Bengal
+  [[-9.5,38.7],[-9.3,43.1],[-8,43.7],[-1.8,43.4],[-1.2,46.2],[-4.6,48.4],[-1.6,49.7],[0.2,49.6],[1.6,50.9],[4,51.5],[5.9,53.4],[8.6,53.9],[8.6,55.5],[8.2,56.8],
+   [10.6,57.7],[10.3,56.2],[10.9,54.4],[14,54],[18.5,54.7],[21,55.6],[21,56.8],[23.5,57.4],[24.2,58.5],[23.5,59.3],[28,59.6],[30,59.9],[25,60.2],[22,60.4],
+   [21.5,61.5],[22.5,63.5],[25.5,65.6],[22,65.8],[21.3,64.5],[17.5,62.5],[18.9,59.3],[16.5,57],[14.3,55.5],[12.9,55.6],[11.8,57.7],[11.2,59],[10.5,59.9],[8,58.1],
+   [5.6,58.9],[5,60.5],[5.2,62.5],[8.5,63.5],[11,64.8],[13.5,67],[15.5,68.5],[18,69.7],[22,70.5],[26,71],[28.5,70.9],[31,70.3],[33,69.4],[40,67.8],[44,68.5],
+   [53,68.5],[60,69.8],[68,68.4],[70,73],[77,72.4],[80,73.5],[87,74.5],[100,76.5],[112,73.6],[127,73.5],[140,72.5],[150,71.5],[160,70],[170,69.8],[180,68.9],
+   [190.3,66],[180,65],[178,64.5],[177,62.5],[170,60],[163.5,59.9],[163,58],[162,56],[160,53],[156.7,51],[156,53],[155.5,57],[152,59],[143,59.4],[140.7,58],
+   [137,54.5],[141,53],[140.5,48.5],[135,43.5],[132,42.8],[129.4,42.4],[129.5,36],[127,34.5],[126.2,37.5],[124.7,39.7],[121.6,40.9],[121.6,39],[117.8,39],
+   [118.5,38],[120.7,36.5],[122.6,37.4],[120,35],[121.9,31.7],[122,29.8],[119.6,25.4],[116.5,23],[113.5,22.2],[110.5,20.3],[108,21.6],[106.6,20.5],[105.9,19],
+   [108.8,15.3],[109.2,11.6],[106.8,10.4],[104.8,8.6],[105,10.3],[102.5,12.2],[100.9,13.4],[99.9,12.5],[99.2,10],[100.3,7],[102.2,6.2],[103.4,4.5],[104.3,1.4],
+   [101.4,2.8],[100.3,5],[98.3,8.1],[98.5,12],[97.6,16.5],[94.5,16],[94.2,19.5],[92.3,20.7],[91.8,22.4],[90.5,22],[88.5,21.7],[86.9,20.8],[85,19.3],[82.3,16.6],
+   [80.3,13.1],[79.8,10.3],[77.5,8.1],[76.3,9.9],[74.8,12.9],[73,17.5],[72.8,19],[72.6,21.4],[70,22.6],[69,22.4],[68.4,23.6],[66.8,25],[61.6,25.2],[57.3,25.9],
+   [56.3,27.2],[54,26.6],[51.4,27.9],[50,30.1],[48,30],[48.9,27.6],[50.2,26.2],[51.6,25.9],[54,24.2],[56.3,24.9],[56.6,24.5],[59.8,22.4],[58.5,20.5],[57,18.9],
+   [55.2,17.3],[52,16],[48.7,14],[45,12.8],[43.5,12.7],[42.8,15.5],[40,19.8],[38.8,21.7],[36.6,25.9],[35,28],[34.95,29.5],[34.3,31.3],[35,32.8],[35.6,34.5],
+   [36.2,35.8],[36,36.6],[32.5,36.1],[30.5,36.6],[28.2,36.7],[26.5,38.4],[26.2,39.5],[23.5,40.2],[22.9,37.5],[22.5,36.4],[21.1,37.7],[19.9,39.9],[19.4,41.8],
+   [18,42.7],[15.3,44.1],[13.6,45.6],[12.3,45.3],[12.4,44.2],[13.7,43.4],[16,41.5],[18.5,40.2],[17.2,39],[16.5,38.4],[15.6,38],[16.1,39.3],[15.6,40.1],[14.2,40.8],
+   [12.5,41.7],[10.5,43],[8.9,44.4],[7.5,43.8],[5,43.3],[3.1,42.9],[3.2,41.9],[0.9,41],[-0.3,39.5],[0.2,38.8],[-0.7,37.6],[-2.1,36.7],[-5.4,36.1],[-6.3,36.5],
+   [-7.4,37.2],[-8.9,37],[-8.8,38.5]],
+  // Great Britain and Ireland
+  [[-5.7,50.1],[-3.5,50.3],[1.3,51.1],[1.7,52.6],[0.2,53.4],[-0.1,54.1],[-1.2,54.6],[-1.6,55.6],[-2.1,57.1],[-1.8,57.6],[-3,58.6],[-5,58.6],[-5.7,57.8],[-5.8,56.5],
+   [-5.2,55.4],[-4.9,54.8],[-3.4,54.9],[-3,54.1],[-3.1,53.4],[-4.6,53.3],[-4.2,52.4],[-5.3,51.7],[-4,51.6],[-3.2,51.4],[-2.7,51.5],[-4.2,51.2],[-4.7,50.6]],
+  [[-6,52.2],[-6.1,53.4],[-6.2,54.6],[-7.3,55.4],[-8.5,55],[-10,54.2],[-10.2,53.4],[-9.4,52.6],[-10.4,51.9],[-9.8,51.5],[-8.4,51.7]],
+  // Africa (with Sinai) and Madagascar
+  [[34.95,29.5],[34.25,27.75],[32.55,29.95],[33.9,27],[35.5,23.9],[37.2,21],[37.2,19.6],[38.8,17.6],[39.5,15.5],[41.7,13.7],[43.2,11.6],[44.5,10.4],[51.2,11.8],
+   [51,10.4],[49,6.3],[46,2],[45.3,2],[42,-0.8],[40.2,-2.8],[39.7,-4.1],[39.3,-6.8],[40.4,-10.5],[40.6,-15],[37.6,-17.4],[35,-20],[35.5,-23.8],[32.9,-26],
+   [32.4,-28.8],[30.9,-29.9],[28,-32.9],[25.6,-34],[22,-34.2],[20,-34.8],[18.4,-34.2],[18.1,-32.5],[16.5,-28.6],[15.2,-27],[14.5,-22.9],[12,-18],[13.4,-12.6],
+   [13.2,-8.8],[12.2,-6],[11.8,-4.8],[9.3,-1],[9.4,0.4],[9.7,4],[8.5,4.6],[6,4.3],[3.4,6.4],[1.2,6.1],[-0.2,5.6],[-3,5.1],[-7.5,4.4],[-10.8,6.3],[-13.2,8.5],
+   [-15,10.9],[-16.7,12.4],[-17.5,14.7],[-16.5,16.5],[-16,18.1],[-17,21],[-15,24],[-12.9,27.9],[-9.8,29.7],[-9.2,32.3],[-6.8,34],[-5.9,35.8],[-2,35.1],[1.5,36.6],
+   [3,36.8],[8.6,36.9],[10.2,37.2],[11.1,36.9],[10.6,35.8],[10.2,34.3],[11.1,33.2],[13.2,32.9],[15.4,31.3],[18.5,30.4],[20,30.9],[20.1,32.1],[22.6,32.8],[25.1,31.6],
+   [29.9,31.2],[32.3,31.3],[34.2,31.3]],
+  [[49.3,-12],[50.4,-15.5],[49.6,-17.5],[48.3,-21.5],[47.1,-25],[45.1,-25.5],[43.7,-23.5],[44,-20],[44.4,-16.2],[46.3,-15.7],[48.2,-13.4]],
+  // Japan, Taiwan, Hainan, Sri Lanka, Sakhalin; the Philippines; Indonesia and New Guinea
+  [[130.9,34],[132.5,35.4],[135.7,35.8],[136.8,37.3],[139.5,38.2],[140,40.6],[141.4,41.4],[141.6,40.3],[142,39.3],[141,37.9],[140.9,36.9],[140.6,35.5],[139.8,35],
+   [138.8,34.6],[137,34.6],[135.8,33.5],[135.1,33.9],[134.6,34.7],[132.4,34.3]],
+  [[129.9,33.4],[130.9,33.9],[131.9,33.2],[131.4,31.4],[130.3,31.2],[130.2,32.7]],[[132.5,33.2],[134.1,33.3],[134.7,33.8],[133.5,34.4],[132.7,33.9]],
+  [[140,41.4],[141.2,41.8],[143.3,42],[145.6,43.3],[144.5,44],[141.9,45.4],[141.6,43.5],[140.4,43.3],[139.9,42.5]],[[142,46],[143.5,49],[143,54],[142,53],[141.8,49]],
+  [[120.1,23],[121.9,25],[121.6,22.9],[120.8,21.9]],[[108.6,19.2],[110.5,20.1],[111,19.6],[109.6,18.2]],[[79.8,6.2],[80,9.7],[81.9,7.5],[80.5,5.9]],
+  [[120.6,18.5],[122.3,18.4],[122,16],[121.6,15.7],[122.4,14.1],[124,13],[123.7,12.6],[122.5,13.4],[121.6,13.9],[120.6,13.9],[120.6,14.4],[120.2,14.8],[120,15.5],[119.8,16.4],[120.4,16.6]],
+  [[122,7],[123.3,7.5],[125.4,9.8],[126.6,7.2],[125.4,5.6],[124.1,6.4]],[[124.3,12.5],[125.7,11.2],[125,10.1],[124.3,11.3]],[[122,11.8],[123.2,10.5],[122.9,9.1],[122.2,10.5]],
+  [[117.2,8.4],[119.6,11.3],[119.2,10.6],[117.6,8.1]],
+  [[95.3,5.6],[97.5,5.2],[100.4,2.3],[104.1,-1.1],[106,-3],[105.8,-5.8],[104.5,-5.8],[102.3,-4],[100.4,-1],[98.7,1.7]],
+  [[105.2,-6.8],[106.8,-6.1],[110.4,-6.9],[112.7,-7.2],[114.4,-7.8],[114.6,-8.7],[111,-8.2],[108.3,-7.8],[105.4,-6.9]],
+  [[109.6,1.9],[111.2,2.6],[113,3.2],[115.5,5.2],[116.8,6.9],[119.2,5.2],[118,4.4],[118.5,1],[117.5,0.1],[116.6,-2.1],[116.2,-4],[114.6,-3.9],[111.8,-3.4],[110.2,-2.9],[109.1,-0.4]],
+  [[118.8,-2.8],[119.4,-5.5],[120.4,-5.4],[120.9,-3],[122.4,-4.8],[121.3,-1.9],[123.3,-1],[121.3,-0.9],[120.2,0.5],[124.9,1.6],[124.7,0.6],[120.2,0],[119.6,-0.6]],
+  [[131,-1.4],[134.2,-0.9],[135.1,-3.4],[137.9,-1.5],[141,-2.6],[145.8,-4.9],[147.6,-6.4],[147.9,-8],[150.2,-10.5],[147.1,-9.5],[146,-8.1],[144.2,-7.7],[143,-9.2],
+   [141,-9.1],[138.9,-8.1],[137.7,-5.3],[134,-4],[132.9,-4.1],[131.3,-3.4]],
+  // Australia, Tasmania, New Zealand
+  [[113.4,-22],[114.1,-26],[115,-29.5],[115.7,-31.8],[115.1,-33.6],[116,-35],[118,-35],[121.9,-33.9],[124,-33],[126,-32.3],[131.2,-31.5],[134.2,-32.8],[135.4,-34.6],
+   [137.5,-33],[138.6,-34.9],[139.7,-37.2],[140.8,-38],[143.5,-38.8],[144.9,-37.8],[146.4,-39.1],[148,-37.8],[150,-37.5],[150.6,-35.5],[151.2,-33.9],[152.7,-31.7],
+   [153.6,-28.6],[153.1,-27.4],[152.9,-25.3],[150.8,-22.7],[149.4,-21],[146.8,-19.3],[145.5,-16.9],[145.3,-15],[143.5,-14],[142.5,-10.7],[141.6,-12.7],[141.6,-16.8],
+   [140.5,-17.6],[139,-17],[136.8,-15.8],[135.9,-14.3],[136.8,-12.3],[136.2,-12],[132.5,-11.6],[130.8,-12.4],[129.4,-14.8],[127.8,-14.2],[125.4,-15.2],[122.2,-17.9],
+   [121,-19.5],[118.8,-20.3],[116.7,-20.6],[114.6,-21.8]],
+  [[144.7,-40.7],[148.3,-40.9],[148.2,-42.2],[147,-43.6],[145.3,-42.2]],
+  [[172.7,-34.5],[174.3,-35.2],[174.8,-36.8],[175.9,-37.1],[178.5,-37.7],[177.9,-39.1],[176.8,-40],[175.2,-41.6],[174.8,-41.3],[175,-39.9],[174,-39.3],[174.6,-38.2],[174.2,-36.5],[173,-35.2]],
+  [[172.7,-40.5],[174.3,-41.4],[173.4,-42.8],[172.8,-43.8],[171.2,-44.4],[170.6,-45.9],[169,-46.6],[166.5,-46],[166.8,-45.1],[168.3,-44],[170.5,-42.8],[171.5,-41.7],[172.1,-40.8]],
+  // Svalbard and Novaya Zemlya
+  [[15,79],[25,80],[22,77.5],[16,77]],[[52,71],[55,73],[60,76],[68,77],[60,74],[56,71]]];
+// the seas inside the land: the Black Sea, the Caspian and the Great Lakes
+const OS_SEAS=[[[28,41.6],[28.6,43.4],[30,45.8],[31.5,46.6],[33.5,46],[33.4,44.6],[36.6,45.3],[38.2,47.1],[39.8,47],[38,44.5],[41.5,42.6],[41.6,41.5],[36.5,41.3],[33,42],[29.2,41.2]],
+  [[47.5,45.5],[46.8,44.5],[47.5,43],[48.5,41],[49.5,38.5],[51,37],[53.9,37.2],[53.2,40],[52.9,42],[51.5,45.2],[53,46.8],[49.5,46.6]],
+  [[-92,46.7],[-89,48.3],[-85,48.5],[-84.6,46.5],[-88,47]],[[-87.8,42],[-86.5,42],[-85.5,45.8],[-87.5,45.8]],[[-84.5,45.8],[-81,46],[-80,44.5],[-82.5,43]],
+  [[-83.4,41.7],[-79,42.9],[-79.6,42.4],[-82.7,41.4]],[[-79.8,43.3],[-76.2,43.5],[-76.5,44.2],[-79.4,43.7]]];
+const os_ll=pts=>pts.map(([lo,la])=>[OS_LON(lo),OS_LAT(la)]);
+function os_paintMap(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);const sea=[190,214,228],land=[222,206,160];
+  wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),sea,{kind:"sea",line:false,seed:41});
+  ctx.save();ctx.strokeStyle=rgba(wc_dim(sea,0.3),0.3);ctx.lineWidth=1.6;for(let lo=-150;lo<=180;lo+=30){ctx.beginPath();ctx.moveTo(OS_LON(lo),0);ctx.lineTo(OS_LON(lo),H);ctx.stroke();}
+  for(let la=-60;la<=80;la+=30){ctx.beginPath();ctx.moveTo(0,OS_LAT(la));ctx.lineTo(W,OS_LAT(la));ctx.stroke();}ctx.restore();
+  OS_LAND.forEach((p,i)=>wc_wash(ctx,os_ll(p),i%3?land:wc_lit([196,206,150],0.1),{kind:"build",lw:1.3,seed:50+i}));
+  OS_SEAS.forEach((p,i)=>wc_wash(ctx,wc_smooth(os_ll(p),4),sea,{kind:"thing",lw:1,seed:90+i,flat:true}));}
+// a city's pin and its name (a, 0 to 1, as it drops in; bare, the pin alone)
+function os_cityPin(ctx,i,a,bare){if(a<=0.01)return;const [s,lo,la,side]=OS_CITY[i],x=OS_LON(lo),y=OS_LAT(la),k=spring(clamp(a,0,1));
+  ctx.save();ctx.translate(x,y);ctx.scale(k,k);gv_pin(ctx,0,-6,GV.red,1.3);ctx.restore();
+  if(!bare)withA(ctx,clamp(a*2-0.6,0,1),()=>wc_tag(ctx,x+side*22,y-30,s,{align:side<0?"right":"left",size:28}));}
+
+/* the checklist, close: the page on its clipboard, on the steel of a side table; what's written on it is drawn every frame (os_page) */
+const OS_PG2={x:250,y:110,w:1420,h:780,col:[60,440,820],row:[360,480,600]};
+function os_paintClip(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),[196,204,210],{kind:"steel",line:false,seed:61});
+  ctx.save();ctx.globalCompositeOperation="screen";for(const [x,y,r] of [[300,180,520],[1600,820,600]])wc_glowAt(ctx,x,y,r,[255,255,255],0.35);ctx.restore();
+  wc_wash(ctx,[[-40,780],[260,860],[420,1120],[-40,1120]],OS_DRAPE,{kind:"build",lw:1.4,seed:62});
+  const P=OS_PG2;ctx.save();ctx.filter="blur(14px)";ctx.fillStyle="rgba(40,40,60,0.35)";ctx.fillRect(P.x-30,P.y+10,P.w+80,P.h+60);ctx.restore();
+  wc_wash(ctx,wc_rrPts(P.x-40,P.y-40,P.w+80,P.h+90,22),[176,128,84],{kind:"thing",lw:1.6,seed:63});wc_flat(ctx,wc_rect(P.x,P.y,P.w,P.h),[252,250,244],1,"page");
+  wc_wash(ctx,wc_rrPts(W/2-170,P.y-70,340,96,16),OS_STEEL,{kind:"thing",lw:1.4,seed:64});wc_flat(ctx,wc_rect(W/2-120,P.y-30,240,16),wc_dim(OS_STEEL,0.12),1,"spring");
+  ctx.save();ctx.strokeStyle=rgba(WC_MUTED,0.35);ctx.lineWidth=2;for(const k of [1,2]){const x=P.x+P.col[k]-30;ctx.beginPath();ctx.moveTo(x,P.y+170);ctx.lineTo(x,P.y+P.h-40);ctx.stroke();}ctx.restore();}
+// the page: its title, the three pauses and their items, a box for each; ticks (a list of how far each box is ticked, 0 to 1), a halo
+const OS_STEPS=[["Sign in","before anaesthesia",["Patient confirmed","Site marked","Allergies known"]],["Time out","before the first cut",["Team introduced","Patient and site","Antibiotic given"]],
+  ["Sign out","before leaving the room",["Sponges counted","Specimens labelled","Concerns for recovery"]]];
+function os_boxAt(c,r){const P=OS_PG2;return[P.x+P.col[c]+18,P.y+P.row[r]-10];}
+function os_page(ctx,ticks,o){o=o||{};const P=OS_PG2;wc_T(ctx,"Surgical Safety Checklist",W/2,P.y+84,{w:800,size:52,align:"center",col:WC_DARK});
+  OS_STEPS.forEach(([h,sub,items],c)=>{const x=P.x+P.col[c];gv_tint(ctx,x-30,P.y+140,400,P.h-180,GV.gold,o.lit===c?0.42*(o.litA==null?1:o.litA):0);
+    wc_T(ctx,h,x,P.y+200,{w:800,size:44,col:WC_DARK});wc_T(ctx,sub,x,P.y+246,{w:500,size:28,col:WC_MUTED});
+    items.forEach((s,r)=>{const [bx,by]=os_boxAt(c,r),k=c*3+r;if(o.halo===k)gv_tint(ctx,bx-34,by-36,404,72,GV.gold,0.7*(o.haloA==null?1:o.haloA));
+      ctx.save();ctx.strokeStyle=rgba(WC_INK,0.8);ctx.lineWidth=3;ctx.strokeRect(bx-18,by-18,36,36);ctx.restore();wc_T(ctx,s,bx+36,by+12,{w:600,size:32,col:WC_INK});
+      const p=ticks[k]||0;if(p>0)wc_tick(ctx,bx+4,by-4,44,[36,120,80],p,5);});});}
 
 /* ---------- today: Yusuf's first day, and what he inherits ---------- */
 // a cardboard box of his things, the first day, a plant and a mug in it; kept, about 280 x 250, the box's middle at (140,170)
@@ -351,57 +521,13 @@ function os_sticky(ctx,cx,cy,w,h,rot,lines,size,land,write){if(land<=0)return;co
     const n=lines.join("").length,y0=-h/2+h*0.15+(h*0.85-lines.length*size*1.2)/2+size*0.92;let before=0;
     lines.forEach((s,i)=>{const p=clamp((write*n-before)/s.length,0,1);before+=s.length;wc_hand(ctx,s,-w/2+40,y0+i*size*1.2,{size,w:700,col:GV.redInk,p});});});
   ctx.restore();}
-/* ---------- today: governance at the centre ---------- */
-// binder 12 closed on the desk, from above: its cover and label, the pages' edge, Yusuf's two notes sticking out as flags
-function os_closed12(ctx){ctx.drawImage(wc_kept("closed12",W,H,q=>{const col=os_bindCol(11),x=300,y=170,w=560,h=740;
-    q.save();q.filter="blur(14px)";q.fillStyle="rgba(70,50,30,0.3)";q.fillRect(x+14,y+20,w,h);q.restore();
-    for(const [fy,r] of [[330,-0.06],[520,0.05]]){q.save();q.translate(x+w+20,fy);q.rotate(r);wc_wash(q,wc_rect(-70,-28,110,56),OS_STICK,{kind:"page",lw:1.1,seed:fy});q.restore();}
-    wc_flat(q,wc_rect(x+16,y+h-6,w-20,16),wc_dim(GV.paper,0.08),1,"pages");wc_flat(q,wc_rect(x+w-6,y+16,16,h-20),wc_dim(GV.paper,0.08),1,"pages");
-    wc_wash(q,wc_rrPts(x,y,w,h,16),col,{kind:"cover",lw:1.6,seed:21});wc_flat(q,wc_rect(x,y+8,54,h-16),wc_dim(col,0.2),1,"spine");
-    wc_wash(q,wc_rect(x+150,y+170,300,190),WC_CARD,{kind:"page",lw:1.3,seed:22});}),0,0);
-  wc_T(ctx,"12",600,435,{w:800,size:84,align:"center",col:WC_DARK});wc_T(ctx,"Data definitions",600,500,{w:600,size:30,align:"center",col:WC_MUTED});}
-// DAMA's book, closed, from above: a plain cloth cover, its title, the pages' edge; kept, drawn round its middle at (x,y)
-function os_dmbok(ctx,x,y){const w=620,h=820;ctx.drawImage(wc_kept("dmbok",w+80,h+80,q=>{q.translate(40,40);q.save();q.filter="blur(14px)";q.fillStyle="rgba(70,50,30,0.32)";q.fillRect(14,20,w,h);q.restore();
-    wc_flat(q,wc_rect(16,h-8,w-20,20),wc_dim(GV.paper,0.08),1,"pages");wc_flat(q,wc_rect(w-8,16,20,h-20),wc_dim(GV.paper,0.08),1,"pages");
-    wc_wash(q,wc_rrPts(0,0,w,h,10),[44,92,108],{kind:"cover",lw:1.6,seed:23});wc_flat(q,wc_rect(0,6,40,h-12),[34,74,88],1,"spine");
-    for(const ry of [196,540])wc_flat(q,wc_rect(90,ry,w-150,5),[226,214,180],0.9,"rule");}),x-w/2-40,y-h/2-40);
-  const cx=x+16;wc_T(ctx,"DAMA-DMBOK",cx,y-120,{w:800,size:58,align:"center",col:[246,238,214]});
-  wc_T(ctx,"Data Management",cx,y+10,{w:600,size:38,align:"center",col:[226,232,226]});wc_T(ctx,"Body of Knowledge",cx,y+62,{w:600,size:38,align:"center",col:[226,232,226]});}
-// a page of the book, close: the paper filling the frame, the fold into the spine on the left, the next pages' edges on the right
-function os_paintPage(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),[250,247,238],{kind:"paper",line:false,seed:91});
-  const g=ctx.createLinearGradient(0,0,170,0);g.addColorStop(0,"rgba(90,70,50,0.34)");g.addColorStop(0.45,"rgba(90,70,50,0.1)");g.addColorStop(1,"rgba(90,70,50,0)");ctx.fillStyle=g;ctx.fillRect(0,0,170,H);
-  ctx.save();ctx.strokeStyle="rgba(150,136,112,0.35)";ctx.lineWidth=1.5;for(let i=0;i<6;i++){ctx.beginPath();ctx.moveTo(W-14+i*2.6,0);ctx.lineTo(W-14+i*2.6,H);ctx.stroke();}ctx.restore();}
-// the wheel the book draws: ten areas of data management round data governance, the centre, where they meet; each area's name outside it
-const OS_WH={x:960,y:448,r0:122,r1:290,rl:342},OS_WHC=[[188,202,230],[204,196,230]];
-const OS_AREAS=[["data","architecture"],["data modelling","& design"],["data storage","& operations"],["data security"],["data integration","& interoperability"],["documents","& content"],
-  ["reference","& master data"],["data warehousing","& BI"],["metadata"],["data quality"]];
-const os_whAng=k=>-Math.PI/2+k*TAU/10;
-// an area's shape, a ring's slice, about the wheel's middle at (cx,cy)
-function os_wedgePts(k,cx,cy){const R=OS_WH,a0=os_whAng(k)-TAU/20+0.014,a1=os_whAng(k)+TAU/20-0.014,p=[];
-  for(let i=0;i<=12;i++){const a=lerp(a0,a1,i/12);p.push([cx+Math.cos(a)*R.r1,cy+Math.sin(a)*R.r1]);}for(let i=12;i>=0;i--){const a=lerp(a0,a1,i/12);p.push([cx+Math.cos(a)*(R.r0+8),cy+Math.sin(a)*(R.r0+8)]);}return p;}
-function os_wedgeC(k){const s=OS_WH.r1+30;return wc_kept("wedge"+k,2*s,2*s,q=>wc_wash(q,os_wedgePts(k,s,s),OS_WHC[k%2],{kind:"thing",lw:1.4,seed:30+k}));}
-// o: area(k) brings each area in (0 to 1); centre lights data governance; joins draws the gold where the areas meet it; ring goes round
-// the whole wheel; dim pales every area but hi; outline draws round area hi (a number) or the centre ("centre"); labels and fade take
-// the names and the areas away again
-function os_wheel(ctx,o){const R=OS_WH,s=R.r1+30,lab=o.labels==null?1:o.labels,fd=o.fade==null?1:o.fade;
-  OS_AREAS.forEach((lines,k)=>{const u=o.area(k);if(u<=0)return;const sp=0.6+0.4*spring(u),a=clamp(u*2.5,0,1)*(1-(o.dim||0)*(k===o.hi?0:0.55))*fd;
-    ctx.save();ctx.translate(R.x,R.y);ctx.scale(sp,sp);withA(ctx,a,()=>ctx.drawImage(os_wedgeC(k),-s,-s));ctx.restore();
-    const an=os_whAng(k),c=Math.cos(an),sn=Math.sin(an),ax=R.x+c*R.rl,ay=R.y+sn*R.rl,al=Math.abs(c)<0.3?"center":c>0?"left":"right",n=lines.length,
-      y0=al!=="center"?ay-(n-1)*18+10:sn<0?ay-(n-1)*38-6:ay+32;
-    if(lab>0.01)withA(ctx,clamp(u*2,0,1)*lab,()=>lines.forEach((l,i)=>wc_T(ctx,l,ax,y0+i*38,{w:i?600:700,size:30,align:al,col:WC_INK})));});
-  if(o.joins>0&&fd>0.01){const e=easeCam(clamp(o.joins,0,1)),r=lerp(R.r1,R.r0,e);ctx.save();ctx.strokeStyle=rgba(GV.goldInk,0.85*fd);ctx.lineWidth=6;ctx.lineCap="round";
-    for(let k=0;k<10;k++){const b=os_whAng(k)-TAU/20;ctx.beginPath();ctx.moveTo(R.x+Math.cos(b)*R.r1,R.y+Math.sin(b)*R.r1);ctx.lineTo(R.x+Math.cos(b)*r,R.y+Math.sin(b)*r);ctx.stroke();}ctx.restore();}
-  if(o.centre>0){const k=0.7+0.3*spring(o.centre);ctx.save();ctx.translate(R.x,R.y);ctx.scale(k,k);withA(ctx,clamp(o.centre*2,0,1),()=>{wc_glowAt(ctx,0,0,R.r0*1.6,[255,226,140],0.45);
-    ctx.drawImage(wc_kept("whCentre",2*R.r0+40,2*R.r0+40,q=>wc_wash(q,wc_ell(R.r0+20,R.r0+20,R.r0-2,R.r0-2,40),wc_lit(GV.gold,0.2),{kind:"thing",lw:1.6,seed:44})),-R.r0-20,-R.r0-20);
-    wc_T(ctx,"data",0,-6,{w:800,size:34,align:"center",col:GV.goldInk});wc_T(ctx,"governance",0,36,{w:800,size:34,align:"center",col:GV.goldInk});});ctx.restore();}
-  if(o.ring>0){ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.9);ctx.lineWidth=4;ctx.setLineDash([16,12]);ctx.lineCap="round";ctx.beginPath();
-    ctx.arc(R.x,R.y,R.r1+16,-Math.PI/2,-Math.PI/2+TAU*easeCam(clamp(o.ring,0,1)));ctx.stroke();ctx.restore();}
-  if(o.outline>0){ctx.save();ctx.globalAlpha*=clamp(o.outline,0,1);ctx.strokeStyle=rgba(WC_DARK,0.85);ctx.lineWidth=5;ctx.lineJoin="round";ctx.beginPath();
-    if(o.hi==="centre")ctx.arc(R.x,R.y,R.r0+4,0,TAU);else os_wedgePts(o.hi,R.x,R.y).forEach(([px,py],i)=>i?ctx.lineTo(px,py):ctx.moveTo(px,py));ctx.closePath();ctx.stroke();ctx.restore();}}
-
-// a decision, on a small gold card: a pin, typed lines; and a green tick once someone has checked it's kept (tick, 0 to 1)
-function os_decision(ctx,x,y,k,tick){ctx.save();ctx.translate(x,y);ctx.scale(k,k);wc_panel(ctx,-76,-56,152,112,{kind:"card",wash:GV.gold,washA:0.5,seed:7});
-  gv_lines(ctx,-50,-14,100,3,22,0.9);gv_pin(ctx,0,-42,GV.red,0.9);ctx.restore();if(tick>0)wc_tick(ctx,x+58,y+30,62,GV.green,tick,9);}
+// a decision, on a small gold card: a pin, typed lines, and a line added under them by hand in pencil, written left to right (amend, 0
+// to 1); and a green tick once someone has checked it's kept (tick, 0 to 1)
+function os_decision(ctx,x,y,k,tick,amend){ctx.save();ctx.translate(x,y);ctx.scale(k,k);wc_panel(ctx,-76,-56,152,112,{kind:"card",wash:GV.gold,washA:0.5,seed:7});
+  gv_lines(ctx,-50,-14,100,3,22,0.9);gv_pin(ctx,0,-42,GV.red,0.9);
+  if(amend>0){const n=Math.max(1,Math.round(30*clamp(amend,0,1)));ctx.strokeStyle=rgba(WC_PENCIL,0.85);ctx.lineWidth=2.6;ctx.lineCap="round";ctx.lineJoin="round";ctx.beginPath();
+    for(let i=0;i<=n;i++){const u=i/30,px=-50+84*u,py=44+2.4*Math.sin(u*29)+1.2*Math.sin(u*71);i?ctx.lineTo(px,py):ctx.moveTo(px,py);}ctx.stroke();}
+  ctx.restore();if(tick>0)wc_tick(ctx,x+58,y+30,62,GV.green,tick,9);}
 
 /* ---------- today: listen first ---------- */
 // a fresh page for a thirty-fifth policy, on the desk from above: its heading and nothing else; th (0 to π) turns it over, unwritten,
@@ -417,10 +543,10 @@ function os_page35(ctx,th){const P=OS_P35,c=Math.cos(th),lift=Math.sin(clamp(th,
 const OS_ANS=[["Jun",["rules arrive","after the build"]],["Mei",["never sees where","the words go"]],["Sam",["no one says","which column"]],
   ["Planning",["which number","to trust?"]]];
 const OS_ANSC={w:330,h:262,x:[440,790,1140,1490],y:570,rot:[-0.03,0.02,-0.012,0.028]};
-function os_asked(ctx){ctx.save();ctx.translate(960,254);ctx.rotate(-0.012);wc_panel(ctx,-330,-66,660,132,{kind:"card",seed:61});gv_pin(ctx,0,-52,GV.red,1.2);
+function os_asked(ctx,y){ctx.save();ctx.translate(960,y||254);ctx.rotate(-0.012);wc_panel(ctx,-330,-66,660,132,{kind:"card",seed:61});gv_pin(ctx,0,-52,GV.red,1.2);
   wc_hand(ctx,"What slows you down?",0,22,{size:50,w:700,align:"center",col:WC_INK});ctx.restore();}
-function os_ansCard(ctx,k,u){if(u<=0)return;const A=OS_ANSC,[name,lines]=OS_ANS[k],s=lerp(1.12,1,easeCam(clamp(u,0,1)));
-  ctx.save();ctx.translate(A.x[k],A.y-14*(1-easeCam(clamp(u,0,1))));ctx.rotate(A.rot[k]);ctx.scale(s,s);withA(ctx,clamp(u*2.5,0,1),()=>{
+function os_ansCard(ctx,k,u,y){if(u<=0)return;const A=OS_ANSC,[name,lines]=OS_ANS[k],s=lerp(1.12,1,easeCam(clamp(u,0,1)));
+  ctx.save();ctx.translate(A.x[k],(y||A.y)-14*(1-easeCam(clamp(u,0,1))));ctx.rotate(A.rot[k]);ctx.scale(s,s);withA(ctx,clamp(u*2.5,0,1),()=>{
     wc_panel(ctx,-A.w/2,-A.h/2,A.w,A.h,{kind:"card",seed:70+k});gv_pin(ctx,0,-A.h/2+18,GV.red,1.1);
     wc_hand(ctx,name,-A.w/2+30,-A.h/2+92,{size:42,w:800,col:WC_DARK});lines.forEach((l,i)=>wc_hand(ctx,l,-A.w/2+30,-A.h/2+156+i*48,{size:34,w:600,col:WC_INK}));});
   ctx.restore();}
@@ -432,32 +558,34 @@ function os_ansSmall(ctx){const [bx,by]=GV_OFF.board;for(let k=0;k<4;k++){const 
 function os_dataBoard(ctx){const [bx,by]=GV_DT.board;[[bx+8,by+42,160,124,0],[bx+178,by+66,80,92,1],[bx+268,by+42,160,124,0]].forEach(([x,y,w,h,mon],k)=>{
   wc_panel(ctx,x,y,w,h,{kind:"card",wash:mon?GV.gold:null,washA:0.35,seed:90+k});gv_pin(ctx,x+w/2,y+10,GV.red,0.7);
   if(mon)gv_lines(ctx,x+16,y+36,w-32,3,16,0.9);else{gv_lines(ctx,x+18,y+34,w-60,2,14,0.9);ctx.fillStyle=rgba(OS_NUM,0.75);ctx.fillRect(x+34,y+82,w-68,14);wc_tick(ctx,x+w-26,y+64,30,GV.green,1,4);}});}
-// Jun's screen, close: the data team's tests on award. The first is the rule Mei and Jun agreed on Monday: it runs (run, 0 to 1), then
-// passes (pass), and the agreement behind it lights gold (gold); the second has no test, as there's no agreed rule to test (row2).
-function os_tests(ctx,run,pass,gold,row2){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,"Tests · award",q=>{const r1=y+262,r2=y+486,cx=x+96;
+// Jun's screen, close: the rules on award, in words. The first is the rule Mei and Jun agreed on Monday: it's checked (run, 0 to 1), it
+// holds (pass), and the agreement behind it lights gold (gold); the second can't be checked, as there's no agreed rule yet (row2).
+// Each badge ends a set way in from the screen's right edge.
+function os_rules(ctx,run,pass,gold,row2){const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,"Rules on award",q=>{const r1=y+262,r2=y+486,cx=x+96,
+    bx=s=>x+w-56-Math.round(tw(q,s,30,700)+28);
   if(gold>0)gv_tint(q,x+28,r1-86,w-56,160,GV.gold,0.7*gold);
-  // the first test: a ring while it runs, a green tick once it passes
+  // the first rule: a ring while it's checked, a green tick once it holds
   if(pass>0)wc_tick(q,cx,r1-20,58,GV.green,pass,9);
   else{q.save();q.lineWidth=6;q.lineCap="round";q.strokeStyle=rgba(WC_MUTED,0.35);q.beginPath();q.arc(cx,r1-20,24,0,TAU);q.stroke();
     if(run>0){const a=run*TAU*1.6;q.strokeStyle=rgba(GV.cyanInk,0.9);q.beginPath();q.arc(cx,r1-20,24,a-1.8,a);q.stroke();}q.restore();}
   wc_T(q,"award counts microcredentials",x+160,r1-30,{w:700,size:38,col:WC_DARK});wc_T(q,"of 6 credit points or more",x+160,r1+22,{w:600,size:38,col:WC_INK});
-  if(pass>0)withA(q,clamp(pass*2,0,1),()=>wc_badge(q,x+w-196,r1-22,"passed",{size:30,role:GV.green}));
-  // the second: no test yet, only the question, dashed
+  if(pass>0)withA(q,clamp(pass*2,0,1),()=>wc_badge(q,bx("checked every night"),r1-22,"checked every night",{size:30,role:GV.green}));
+  // the second: no rule yet, only the question, dashed
   if(row2>0)withA(q,row2,()=>{q.save();q.lineWidth=5;q.setLineDash([9,9]);q.strokeStyle=rgba(WC_MUTED,0.7);q.beginPath();q.arc(cx,r2-20,24,0,TAU);q.stroke();q.restore();
     wc_T(q,"award mapped to the",x+160,r2-30,{w:700,size:38,col:WC_MUTED});wc_T(q,"government's definition",x+160,r2+22,{w:600,size:38,col:WC_MUTED});
-    wc_badge(q,x+w-330,r2-22,"no agreed rule yet",{size:30,role:GV.red});});},{titleSize:32,barH:54});}
+    wc_badge(q,bx("no agreed rule yet"),r2-22,"no agreed rule yet",{size:30,role:GV.red});});},{titleSize:32,barH:54});}
 
 /* ---------- today: where does it run? ---------- */
 // binder 12 opening on the desk, from above (u, 0 to 1): its cover lies over the right-hand page, then swings over the rings to the left
-function os_cover12(ctx){const B=OS_OPEN;ctx.drawImage(wc_kept("cover12",W,H,q=>{const col=os_bindCol(11),x=B.mid-40,w=B.x+B.w-x;
+function os_cover12(ctx,deco){const B=OS_OPEN;ctx.drawImage(wc_kept("cover12",W,H,q=>{const col=os_bindCol(11),x=B.mid-40,w=B.x+B.w-x;
     wc_wash(q,wc_rrPts(x,B.y,w,B.h,18),col,{kind:"cover",lw:1.6,seed:24});wc_flat(q,wc_rect(x,B.y+8,54,B.h-16),wc_dim(col,0.2),1,"spine");
     wc_wash(q,wc_rect(x+w/2-130,B.y+250,300,190),WC_CARD,{kind:"page",lw:1.3,seed:25});}),0,0);
-  const cx=B.mid-40+(B.x+B.w-B.mid+40)/2+20;wc_T(ctx,"12",cx,B.y+352,{w:800,size:84,align:"center",col:WC_DARK});
-  wc_T(ctx,"Data definitions",cx,B.y+414,{w:600,size:30,align:"center",col:WC_MUTED});}
+  const cx=B.mid-40+(B.x+B.w-B.mid+40)/2+20;wc_T(ctx,"12",cx,B.y+352,{w:800,size:84,align:"center",col:WC_DARK,deco:deco?1:0});
+  wc_T(ctx,"Data definitions",cx,B.y+414,{w:600,size:30,align:"center",col:WC_MUTED,deco:deco?1:0});}
 function os_opening12(ctx,u){const B=OS_OPEN;if(u>=1)return os_open12(ctx);
   const c=Math.cos(Math.PI*clamp(u,0,1));ctx.save();ctx.beginPath();ctx.rect(B.mid-46,0,W,H);ctx.clip();os_open12(ctx,{text:c>0?clamp((0.82-c)/0.67,0,1):1});ctx.restore();
   ctx.save();ctx.translate(B.mid,0);ctx.scale(Math.max(0.02,Math.abs(c)),1);ctx.translate(-B.mid,0);
-  if(c>0)os_cover12(ctx);else{ctx.beginPath();ctx.rect(0,0,B.mid-46,H);ctx.clip();os_open12(ctx,{text:0});}ctx.restore();}
+  if(c>0)os_cover12(ctx,c<0.9);else{ctx.beginPath();ctx.rect(0,0,B.mid-46,H);ctx.clip();os_open12(ctx,{text:0});}ctx.restore();}
 // a highlighter lying on the desk, from above: a pale body, the cap and the felt tip in its colour; kept per colour
 function os_marker(ctx,x,y,rot,col){ctx.save();ctx.translate(x,y);ctx.rotate(rot);ctx.drawImage(wc_kept("marker|"+col,300,100,q=>{
     q.save();q.filter="blur(5px)";q.fillStyle="rgba(70,50,30,0.26)";q.fillRect(30,46,236,30);q.restore();
@@ -470,12 +598,13 @@ function os_paintPolicy(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H
   const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"rgba(255,250,236,0)");g.addColorStop(1,"rgba(150,130,100,0.1)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
 // what policy 12 says, line by line; where each line runs (0: in the work, green; 1: a decision someone owns, gold; 2: it can go, grey),
 // and what Yusuf writes beside it
-const OS_LINES=[["12.1","Each term has a named owner."],["12.2","Each term used in a report is in the glossary."],["12.3","Terms about people are marked as personal data."],
-  ["12.4","Reports count by the glossary's definitions."],["12.5","Each term's owner decides its definition,","and how it maps to the government's."],
+const OS_LINES=[["12.1","Each term has a named owner."],["12.2","Each term used in a report is in the glossary."],["12.3","Reports count by the glossary's definitions."],
+  ["12.4","Terms about people are marked as personal data."],["12.5","Each term's owner decides its definition,","and how it maps to the government's."],
   ["12.6","Each decision is written down with the term."],["12.7","Staff take care to use terms correctly."]];
-const OS_WHERE=[0,0,0,0,1,1,2],OS_NOTES=["a required field","a check","a tag","a test","award: Mei decides","in the glossary",null];
+const OS_WHERE=[0,0,0,0,1,1,2],OS_NOTES=["a field no one can leave empty","checked every night","checked every night","a label","award: Mei decides",
+  "in the glossary",null];
 const OS_HIC=[GV.green,GV.gold,GV.grey],OS_HINK=[GV.greenInk,GV.goldInk,GV.greyInk],OS_KEY=["runs in the work","a decision someone owns","can go"];
-const OS_PG={x:300,tx:384,y0:290,dy:78,lh:44,size:34,note:1350};
+const OS_PG={x:300,tx:384,y0:290,dy:78,lh:44,size:34,note:1290};
 // a highlighter's stroke behind a line of text, as long as the text, drawn from the left as p goes from 0 to 1; kept per colour.
 // h: how tall it is (a line of the page, or a swatch in his key)
 function os_hiStroke(ctx,x,y,w,col,p,seed,h=64){if(p<=0)return;const c=wc_kept("hiStroke|"+col+"|"+seed,1200,70,q=>wc_wash(q,wc_resample(wc_rect(8,10,1180,48),12),col,{kind:"swatch",line:false,a:0.5,seed}));
@@ -494,29 +623,47 @@ function os_policy(ctx,hi,note,key,strike){const P=OS_PG;wc_T(ctx,"Policy 12 · 
   OS_KEY.forEach((s,j)=>{const u=key(j);if(u<=0)return;const ky=84+j*44;os_hiStroke(ctx,P.note,ky,44,OS_HIC[j],clamp(u*2,0,1),70+j,34);
     wc_hand(ctx,s,P.note+70,ky,{size:30,w:700,col:OS_HINK[j],p:clamp(u*2-0.6,0,1)});});}
 
-/* ---------- today: where decisions enter ---------- */
+/* ---------- today: what's worth keeping ---------- */
 // a warm light coming up on something (a, 0 to 1), as on the shelf when he listened
 function os_warm(ctx,cx,cy,r,a){if(a<=0.01)return;ctx.save();ctx.globalCompositeOperation="soft-light";wc_glowAt(ctx,cx,cy+50,r*1.1,[255,190,90],0.9*a);
   ctx.globalCompositeOperation="screen";wc_glowAt(ctx,cx,cy,r,[255,222,160],0.42*a);ctx.restore();}
-// the steps of the data team's loop where a decision enters: the step, the words that name it, and what Yusuf writes there
-const OS_PINS=[[0,"a term",["a term"]],[1,"a classification",["a classification"]],[3,"an owner",["an owner","a contract"]],[4,"a rule",["a rule"]],
-  [7,"an approval",["an approval"]],[9,"a version",["a version"]]];
-// the loop going round on the poster (x,y,w,h), from the first step (u 0) past the last (u 0.9) and back to the first (u 1): a firmer
-// line along it, and each step darkening, with a little lift, as the line reaches it
-function os_loopRun(ctx,x,y,w,h,u){if(u<=0)return;const k=w/1260,cx=x+w/2,cy=y+h*450/810,a0=-Math.PI/2,gap=0.13;
-  ctx.save();ctx.strokeStyle=rgba(wc_dim(GV_LOOPC,0.15),0.8);ctx.lineWidth=6*k;ctx.lineCap="round";
-  for(let i=0;i<10;i++){const s=a0+i/10*TAU+gap,e=Math.min(a0+(i+1)/10*TAU-gap,a0+u*TAU);if(e<=s)break;ctx.beginPath();ctx.ellipse(cx,cy,330*k,270*k,0,s,e);ctx.stroke();}
-  ctx.restore();
-  for(let i=0;i<10;i++){const v=clamp((u-i/10)*12,0,1);if(v<=0)break;const [sx,sy]=gv_loopPos(i,x,y,w,h),r=30*k*(1+0.14*Math.sin(Math.PI*clamp(v*1.4,0,1)));
-    ctx.save();ctx.globalCompositeOperation="multiply";ctx.fillStyle=rgba(wc_lit(GV_LOOPC,0.25),0.6*v);ctx.beginPath();ctx.arc(sx,sy,r,0,TAU);ctx.fill();ctx.restore();}}
-// at step i of the poster (x,y,w,h): a gold pin pushed in at its edge (u), a gold ring drawn round it (ring), and what Yusuf writes
-// there, a line at a time (lab(j), 0 to 1): under the step's name or, for the first step, inside the loop
-function os_goldPin(ctx,i,x,y,w,h,u,ring,lines,lab){const k=w/1260,[sx,sy]=gv_loopPos(i,x,y,w,h),c=Math.cos(-Math.PI/2+i/10*TAU);
-  if(ring>0){ctx.save();ctx.strokeStyle=rgba(GV.gold,0.95);ctx.lineWidth=Math.max(2,5*k);ctx.lineCap="round";ctx.beginPath();
-    ctx.arc(sx,sy,38*k,-Math.PI/2,-Math.PI/2+TAU*easeCam(clamp(ring,0,1)));ctx.stroke();ctx.restore();}
-  if(u>0){const d=easeCam(clamp(u,0,1));withA(ctx,clamp(u*3,0,1),()=>gv_pin(ctx,sx+26*k,sy-30*k-(1-d)*40*k,GV.gold,lerp(2.4,1.6,d)*k));}
-  if(!lab)return;const top=i===0,al=top?"center":c>0?"left":"right",nx=top?sx:sx+(c>0?1:-1)*(i===1||i===9?100:46)*k,ny=top?sy+80*k:sy+56*k;
-  lines.forEach((s,j)=>{const p=lab(j);if(p>0)wc_hand(ctx,s,nx,ny+j*38*k,{size:32*k,w:700,align:al,col:GV.goldInk,p});});}
+// a stack of gold index cards, held in both hands (in the figure's units, like the series' heldPins)
+function os_heldGold(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my+6);
+  for(let i=3;i>=0;i--){cx.save();cx.translate(i*4-6,-i*6);cx.rotate(-0.05+i*0.03);cx.fillStyle="rgba(70,50,30,0.18)";rr(cx,-58,-36,124,80,6);cx.fill();
+    cx.fillStyle=rgba(mix(GV.gold,[255,255,255],0.45),1);rr(cx,-62,-42,124,80,6);cx.fill();cx.strokeStyle=rgba(wc_dim(GV.gold,0.45),0.75);cx.lineWidth=2;cx.stroke();cx.restore();}
+  cx.fillStyle=rgba(wc_dim(GV.gold,0.5),0.55);for(let i=0;i<3;i++)cx.fillRect(-44,-24+i*15,i===2?46:80,4);cx.restore();
+  fingers(cx,P_,[[mx-62,my+14],[mx+62,my+10]]);}
+// what's worth keeping, under each answer on Yusuf's board, so that what slows each one down stops: its name on a gold card, and a sign
+// in pencil. The board makes room for them: his question goes higher (ask), the answers under it (ans), the gold cards under those (y).
+const OS_KEEP=[["Rules, each","with an owner"],["One glossary"],["Classes of","personal data"],["Who owns","what"]];
+const OS_KB={ask:150,ans:394,y:684,w:330,h:206,rot:[0.02,-0.014,0.018,-0.022]};
+// the signs: a list ticked off, and its owner; a book; a label in the plum of personal data; a chart with someone in each row
+function os_keepSign(ctx,k,x,y){ctx.save();ctx.translate(x,y);ctx.lineWidth=2.4;ctx.lineJoin="round";ctx.lineCap="round";
+  const ink=rgba(WC_PENCIL,0.85),fill=rgba(wc_lit(GV.gold,0.55),1),paper=rgba(WC_CARD,1);
+  const box=(bx,by,bw,bh,f)=>{rr(ctx,bx,by,bw,bh,3);ctx.fillStyle=f||paper;ctx.fill();ctx.strokeStyle=ink;ctx.stroke();};
+  const head=(hx,hy,r)=>{ctx.beginPath();ctx.arc(hx,hy,r,0,TAU);ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=ink;ctx.stroke();
+    ctx.beginPath();ctx.arc(hx,hy+r*2.5,r*1.5,Math.PI*1.15,Math.PI*1.85);ctx.stroke();};
+  const line=(x0,x1,ly)=>{ctx.beginPath();ctx.moveTo(x0,ly);ctx.lineTo(x1,ly);ctx.strokeStyle=ink;ctx.stroke();};
+  if(k===0){for(let i=0;i<3;i++){box(0,i*17,12,12);line(20,i===2?58:72,i*17+6);}
+    ctx.beginPath();for(let i=0;i<3;i++){ctx.moveTo(2,i*17+6);ctx.lineTo(5,i*17+10);ctx.lineTo(11,i*17+1);}ctx.strokeStyle=rgba(GV.greenInk,0.95);ctx.stroke();head(98,12,9);}
+  else if(k===1){box(6,2,50,48,fill);ctx.fillStyle=rgba(wc_dim(GV.gold,0.35),1);ctx.fillRect(7,3,8,46);box(24,12,24,12);line(24,48,34);line(24,42,41);}
+  else if(k===2){ctx.beginPath();ctx.moveTo(0,10);ctx.lineTo(16,-2);ctx.lineTo(70,-2);ctx.lineTo(70,36);ctx.lineTo(16,36);ctx.closePath();ctx.fillStyle=rgba(GV_CLASS.direct,1);ctx.fill();
+    ctx.strokeStyle=rgba(GV_CLASSINK.direct,1);ctx.stroke();ctx.beginPath();ctx.arc(16,17,4.5,0,TAU);ctx.fillStyle=paper;ctx.fill();
+    ctx.beginPath();ctx.moveTo(12,17);ctx.quadraticCurveTo(-4,30,6,48);ctx.strokeStyle=ink;ctx.stroke();}
+  else{box(0,0,104,50);line(0,17,17);line(0,34,34);line(56,0,0);ctx.beginPath();ctx.moveTo(56,0);ctx.lineTo(56,50);ctx.stroke();
+    for(let i=0;i<3;i++){line(8,44,i*17+9);ctx.beginPath();ctx.arc(80,i*17+8.5,4.5,0,TAU);ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=ink;ctx.stroke();}}
+  ctx.restore();}
+function os_keepCard(ctx,k,u){if(u<=0)return;const K=OS_KB,lines=OS_KEEP[k],e=easeCam(clamp(u,0,1)),s=lerp(1.12,1,e),w=K.w,h=K.h;
+  ctx.save();ctx.translate(OS_ANSC.x[k],K.y-14*(1-e));ctx.rotate(K.rot[k]);ctx.scale(s,s);withA(ctx,clamp(u*2.5,0,1),()=>{
+    wc_panel(ctx,-w/2,-h/2,w,h,{kind:"card",wash:GV.gold,washA:0.5,seed:150+k});gv_pin(ctx,0,-h/2+18,GV.red,1.1);os_keepSign(ctx,k,-w/2+32,-h/2+46);
+    lines.forEach((l,i)=>wc_T(ctx,l,-w/2+32,-h/2+(lines.length>1?142:164)+i*44,{w:800,size:34,col:WC_DARK}));});ctx.restore();}
+// a pencil arrow from answer k down to where its gold card goes, drawn as p goes from 0 to 1
+function os_keepArrow(ctx,k,p){if(p<=0)return;const K=OS_KB,x=OS_ANSC.x[k],y0=K.ans+OS_ANSC.h/2+10,y1=K.y-K.h/2-6,y=lerp(y0,y1,easeCam(clamp(p,0,1)));
+  ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.85);ctx.lineWidth=4;ctx.lineCap="round";ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(x,y0);ctx.lineTo(x,y);
+  if(p>0.8){const d=13*clamp((p-0.8)/0.2,0,1);ctx.moveTo(x-d,y-d);ctx.lineTo(x,y);ctx.lineTo(x+d,y-d);}ctx.stroke();ctx.restore();}
+// the gold cards, small, on the office's board, over the foot of each small answer (the first n)
+function os_keepSmall(ctx,n){const [bx,by]=GV_OFF.board;for(let k=0;k<(n==null?4:n);k++){ctx.save();ctx.translate(bx+68+k*92,by+364);ctx.rotate(OS_KB.rot[k]);
+  wc_panel(ctx,-36,-19,72,38,{kind:"card",wash:GV.gold,washA:0.5,seed:160+k});gv_lines(ctx,-24,-5,48,2,12,0.9);ctx.restore();}}
 
 /* ---------- today: the films to come ---------- */
 // which of the shelf's binders stand for the nine films on what governance needs; he takes the first
@@ -545,30 +692,17 @@ function os_toolCard(ctx,k,u){if(u<=0)return;const T=OS_TC,[s,tools]=OS_TOOLS[k]
     wc_T(ctx,String(k+14),-w/2+56,-h/2+83,{w:800,size:28,align:"center",col:[255,255,255]});
     let lx=-w/2+104;tools.forEach(id=>{lx+=logo(ctx,id,lx,-h/2+48,48)+18;});
     os_wrap(ctx,s,36,w-64).forEach((l,i,a)=>wc_T(ctx,l,-w/2+32,-h/2+(a.length>1?160:178)+i*46,{w:800,size:36,col:WC_DARK}));});ctx.restore();}
-// the films on governance as a capability, on Yusuf's board: a card each, with its number, a pencil sign where the tools' cards
-// have logos, and its title in two lines
-const OS_CAP=[["A capability,","not a project"],["Who does what,","end to end"],["Where each","piece lives"]];
-const OS_CC={y:600,rot:[0.014,-0.012,0.01]};
-function os_capHead(ctx,u){if(u<=0)return;ctx.save();ctx.translate(960,326);ctx.rotate(-0.008);withA(ctx,clamp(u*2.5,0,1),()=>{wc_panel(ctx,-380,-60,760,120,{kind:"card",seed:66});
-  gv_pin(ctx,0,-46,GV.red,1.2);wc_hand(ctx,"Governance as a capability",0,20,{size:52,w:700,align:"center",col:WC_INK,p:clamp(u*1.6-0.3,0,1)});});ctx.restore();}
-// the signs: a capability above the three it holds; three steps, end to end; a home, and its copy made one way
-function os_capSign(ctx,k,x,y){ctx.save();ctx.translate(x,y);ctx.lineWidth=2.4;ctx.lineJoin="round";ctx.lineCap="round";
-  const ink=rgba(WC_PENCIL,0.85),fill=rgba(wc_lit(GV.gold,0.55),1);
-  const box=(bx,by,bw,bh,copy)=>{rr(ctx,bx,by,bw,bh,4);ctx.fillStyle=copy?rgba(WC_CARD,1):fill;ctx.fill();ctx.setLineDash(copy?[6,5]:[]);ctx.strokeStyle=ink;ctx.stroke();ctx.setLineDash([]);};
-  const arrow=(x0,x1,yy)=>{ctx.beginPath();ctx.moveTo(x0,yy);ctx.lineTo(x1,yy);ctx.moveTo(x1-8,yy-6);ctx.lineTo(x1,yy);ctx.lineTo(x1-8,yy+6);ctx.strokeStyle=ink;ctx.stroke();};
-  if(k===0){box(0,0,112,18);for(let i=0;i<3;i++)box(i*39,26,34,22);}
-  else if(k===1){for(let i=0;i<3;i++){ctx.beginPath();ctx.arc(12+i*48,24,11,0,TAU);ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=ink;ctx.stroke();if(i<2)arrow(28+i*48,44+i*48,24);}}
-  else{box(0,4,44,40);arrow(52,82,24);box(90,4,44,40,true);}
-  ctx.restore();}
-function os_capCard(ctx,k,u){if(u<=0)return;const T=OS_TC,lines=OS_CAP[k],e=easeCam(clamp(u,0,1)),sc=lerp(1.12,1,e),w=T.w,h=T.h;
-  ctx.save();ctx.translate(T.x[k],OS_CC.y-14*(1-e));ctx.rotate(OS_CC.rot[k]);ctx.scale(sc,sc);withA(ctx,clamp(u*2.5,0,1),()=>{
-    wc_panel(ctx,-w/2,-h/2,w,h,{kind:"card",seed:130+k});gv_pin(ctx,0,-h/2+18,GV.red,1.1);
-    wc_wash(ctx,wc_ell(-w/2+56,-h/2+72,28,28,24),wc_lit(GV.goldInk,0.1),{kind:"thing",lw:1.2,seed:140+k});
-    wc_T(ctx,String(k+11),-w/2+56,-h/2+83,{w:800,size:28,align:"center",col:[255,255,255]});
-    os_capSign(ctx,k,-w/2+104,-h/2+48);
-    lines.forEach((l,i)=>wc_T(ctx,l,-w/2+32,-h/2+160+i*46,{w:800,size:36,col:WC_DARK}));});ctx.restore();}
+// the films that draw governance as one model, on Noor's architecture map, close: a card each, pinned in the free part of the layer it
+// adds to (strategy, business, application), with its number in gold and its title
+const OS_MAPF=[[1,"A capability, not a project"],[2,"Who does what, end to end"],[4,"Where each piece lives"]],OS_MROT=[0.008,-0.01,0.012];
+function os_mapCard(ctx,k,u){if(u<=0)return;const [i,s]=OS_MAPF[k],[x,y,w,h]=GV_MC,[fx,fy,fw,fh]=gv_mapFree(x,y,w,h,i),e=easeCam(clamp(u,0,1)),sc=lerp(1.12,1,e),
+    cw=fw-44,ch=Math.min(fh-18,98);
+  ctx.save();ctx.translate(fx+fw/2,fy+fh/2-10*(1-e));ctx.rotate(OS_MROT[k]);ctx.scale(sc,sc);withA(ctx,clamp(u*2.5,0,1),()=>{
+    wc_panel(ctx,-cw/2,-ch/2,cw,ch,{kind:"card",seed:170+k});gv_pin(ctx,0,-ch/2+14,GV.red,1);
+    wc_wash(ctx,wc_ell(-cw/2+48,4,27,27,24),wc_lit(GV.goldInk,0.1),{kind:"thing",lw:1.2,seed:180+k});
+    wc_T(ctx,String(k+11),-cw/2+48,15,{w:800,size:28,align:"center",col:[255,255,255]});wc_T(ctx,s,-cw/2+94,16,{w:800,size:34,col:WC_DARK});});ctx.restore();}
 
-const WC_PLACES={market:os_paintMarket,hall:os_paintHall,exchange:os_paintExchange,shop:os_paintShop,stamp:os_paintStamp,campus:gv_paintCampus,office:gv_paintOffice,
+const WC_PLACES={theatre:os_paintTheatre,guides:os_paintGuides,worldmap:os_paintMap,clip:os_paintClip,campus:gv_paintCampus,office:gv_paintOffice,
   boardGov:c=>gv_paintBoardClose(c,GV_ROOM.gov),desk:gv_paintDesk,floor:gv_paintFloor,planning:gv_paintPlanning,registrar:gv_paintRegistrar,data:gv_paintData,
-  boardData:c=>gv_paintBoardClose(c,GV_ROOM.data),screen:c=>gv_paintScreenDesk(c,GV_ROOM.data),platform:gv_paintPlatform,poster:gv_paintPosterClose,page:os_paintPage,
-  policy:os_paintPolicy};
+  boardData:c=>gv_paintBoardClose(c,GV_ROOM.data),screen:c=>gv_paintScreenDesk(c,GV_ROOM.data),platform:gv_paintPlatform,policy:os_paintPolicy,
+  noor:gv_paintNoor,mapClose:gv_paintMapClose};

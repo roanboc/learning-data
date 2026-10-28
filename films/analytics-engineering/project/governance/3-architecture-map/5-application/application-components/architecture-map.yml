@@ -1,0 +1,5 @@
+name: architecture map
+kind: application component
+definition: 'Noor''s map, kept as text in its own repository: this folder.'
+owner: Noor, data architect
+status: confirmed

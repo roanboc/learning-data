@@ -1,0 +1,17 @@
+/* Learning Data: "Pausa para pensar" de Fixed where it starts, en español. Mantén las claves iguales a think.en.js.
+   La película se detiene al final de tres capítulos (back, never, rule), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). La serie todavía no tiene labs, así que ninguna pregunta tiene "stop",
+   y el .player data-labs de la página está vacío. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  "back":{q:"El equipo de datos limpiaba los correos cada noche, y nada se rompía. ¿Por qué no bastaba?",
+    opts:[{t:"La limpieza era demasiado lenta para limpiar todos los correos a tiempo."},{t:"Limpiaba donde el problema se veía, no donde empezaba: el formulario seguía creando correos así, y cada sistema que los leía tenía que limpiarlos otra vez.",ok:true},{t:"La política no permite que el equipo de datos limpie correos."}],
+    why:"El trapeador trabaja cada noche, y la gotera nunca para. El formulario guardaba cada correo tal como se escribía, y finanzas y la lista de correo volvían a limpiar los mismos correos. Siguiendo el rastro, un correo llevó al formulario, donde nadie había escrito nada mal. Como en Viena, se veía aguas abajo, pero empezaba al entrar. ¿Dónde se limpia lo mismo dos veces en tu trabajo?"},
+  "never":{q:"Ahora el formulario recorta y verifica cada correo. ¿Para qué guardar un control que nunca debería fallar?",
+    opts:[{t:"El tablero necesita un control en esa celda para mostrar verde."},{t:"Es una promesa a todos los que leen los correos, y si el formulario alguna vez se rompe, por ejemplo tras una actualización, su dueño se entera primero, antes que nadie aguas abajo.",ok:true},{t:"El equipo de datos todavía limpia los correos, y el control vigila la limpieza."}],
+    why:"Un arreglo en el origen puede deshacerse solo: una nueva versión del formulario, una actualización del proveedor. La regla se queda como control, así que si alguna vez falla, el equipo de aprendizaje se entera primero, antes que nadie aguas abajo, y la limpieza del equipo de datos se puede quitar para siempre. ¿Cuál de tus arreglos dejaría de funcionar sin que nadie lo notara?"},
+  "rule":{q:"¿Regla o monitoreo? «Una microcredencial lleva créditos». «Las insignias de anoche no se parecen a las de otras noches».",
+    opts:[{t:"Las dos son reglas: escribe un control para cada una."},{t:"La primera es algo que sabes, así que es un control con dueño. La segunda es lo que detecta el monitoreo; cuando confirmas lo que encontró, se vuelve una regla.",ok:true},{t:"Las dos son monitoreo: deja que aprenda qué es lo normal."}],
+    why:"Verifica lo que sabes; vigila lo que no sabes. Todos los controles pasaron la noche en que la mitad de las insignias llegó con cero créditos, porque ninguna regla lo nombraba. El monitoreo conocía la forma habitual, una insignia de cada doce sin créditos, y avisó al dueño registrado. Cuando se confirmó la causa, la sorpresa se volvió una regla, un control con dueño, y la próxima vez se detiene antes de llegar a una billetera. ¿Qué sorpresa ha tenido tu equipo que ningún control detectaría todavía?"}
+  }}};

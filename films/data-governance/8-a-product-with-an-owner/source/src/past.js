@@ -231,7 +231,11 @@ function po_back(ctx,id,x,y,s,o){o=o||{};const P_=PEOPLE[id],k=s*P_.build.h,ph=o
     ctx.fillStyle=g;ell(ctx,0,-4,100,16);ctx.fill();ctx.restore();}
   outlined(ctx,cx=>{const st=Math.sin(ph),up=[Math.max(0,st)*16,Math.max(0,-st)*16];
     for(const [i,sd] of [[0,-1],[1,1]]){limb(cx,[[sd*20,-282],[sd*22,-146-up[i]*0.6],[sd*23,-26-up[i]]],46,36,P_.bottom.c,[-80,-300,80,0]);ell(cx,sd*24,-12-up[i],21,11);litFill(cx,P_.shoe,-40,-24,40,0);}
-    for(const sd of [-1,1])arm(cx,P_,sd,[0.12,-0.06+0.22*sd*st],0,{});
+    // what's carried in front, showing either side of them (o.under); the arms hang, or are hidden holding it (o.noArms); one raised to
+    // steady something on the shoulder (o.armUp: -1 left, 1 right)
+    if(o.under)o.under(cx,P_);
+    if(!o.noArms)for(const sd of [-1,1])if(sd!==o.armUp)arm(cx,P_,sd,[0.12,-0.06+0.22*sd*st],0,{});
+    if(o.armUp)arm(cx,P_,o.armUp,[0.62,3.02],0,{});
     po_robePath(cx,sw,hw,-448,0,hem,fl);litFill(cx,darken(c,0.06),-sw,-448,sw,hem);seam(cx,c,0.5);
     cx.save();po_robePath(cx,sw,hw,-448,0,hem,fl);cx.clip();cx.lineCap="round";
     cx.strokeStyle=rgba(darken(c,0.4),0.3);cx.lineWidth=2.4;for(const q of [-0.6,-0.2,0.24,0.62]){cx.beginPath();cx.moveTo(q*hw*0.8,-306);cx.quadraticCurveTo(q*hw*1.05,-220,q*(hw+fl)*0.95,hem+6);cx.stroke();}
@@ -249,7 +253,7 @@ function po_back(ctx,id,x,y,s,o){o=o||{};const P_=PEOPLE[id],k=s*P_.build.h,ph=o
         litFill(cx,c,-50,-40,50,36);seam(cx,c,0.45);cx.save();cx.clip();cx.lineCap="round";for(const y of [-24,-6,12]){cx.strokeStyle=rgba(darken(c,0.24),0.42);cx.lineWidth=2.4;cx.beginPath();cx.moveTo(-52,y+12);cx.quadraticCurveTo(0,y-8,52,y-6);cx.stroke();
           cx.strokeStyle=rgba(lighten(c,0.6),0.5);cx.beginPath();cx.moveTo(-52,y+16);cx.quadraticCurveTo(0,y-4,52,y-2);cx.stroke();}cx.restore();po_turban(cx,P_);}
       else{headPath(cx);litFill(cx,P_.hair.c,-42,-56,42,51);}}
-    cx.restore();},x,y,k,P_.edge,[-260,-720,260,10]);}
+    cx.restore();if(o.over)o.over(cx,P_);},x,y,k,P_.edge,[-300,-760,300,10]);}
 
 /* ---------- painting many small things cheaply ---------- */
 // a flat fill a touch uneven at its edge, and a pencil line; the grain comes once for the whole layer (po_grain), so a market of
@@ -311,13 +315,15 @@ function po_dome(ctx,P,cx,cz,y0,r,dr,o){o=o||{};const pts=[],kk=o.k||1;for(let i
   po_fill(ctx,h,lead,1,o.seed);ctx.save();wc_tr(ctx,h);ctx.clip();
   // the drum, a band darker than the dome; light on the right, shade on the left, a soft gleam high on the right
   const by=P(cx,y0+dr,cz-r)[1];ctx.fillStyle=rgba(wc_dim(lead,0.12),0.9);ctx.fillRect(x0-2,by,x1-x0+4,yb-by+2);
-  const g=ctx.createLinearGradient(x0,0,x1,0);g.addColorStop(0,rgba(wc_dim(lead,0.3),0.55));g.addColorStop(0.55,rgba(lead,0));g.addColorStop(1,rgba(wc_lit(lead,0.5),0.5));ctx.fillStyle=g;ctx.fillRect(x0,ya,x1-x0,yb-ya);
-  wc_glowAt(ctx,lerp(x0,x1,0.66),lerp(ya,by,0.3),(x1-x0)*0.3,[250,250,246],0.5);
+  // (o.left: the light comes from the left)
+  const g=ctx.createLinearGradient(o.left?x1:x0,0,o.left?x0:x1,0);g.addColorStop(0,rgba(wc_dim(lead,0.3),0.55));g.addColorStop(0.55,rgba(lead,0));g.addColorStop(1,rgba(wc_lit(lead,0.5),0.5));ctx.fillStyle=g;ctx.fillRect(x0,ya,x1-x0,yb-ya);
+  wc_glowAt(ctx,lerp(x0,x1,o.left?0.34:0.66),lerp(ya,by,0.3),(x1-x0)*0.3,[250,250,246],0.5);
   // the seams of the lead, from the crown down
-  ctx.strokeStyle=rgba(wc_dim(lead,0.35),0.35);ctx.lineWidth=Math.max(0.6,(x1-x0)/90);for(let i=0;i<12;i++){const a=Math.PI*(0.08+0.84*i/11);ctx.beginPath();
+  ctx.strokeStyle=rgba(wc_dim(lead,0.35),o.seams||0.35);ctx.lineWidth=Math.max(0.6,(x1-x0)/(o.seams?160:90));for(let i=0;i<12;i++){const a=Math.PI*(0.08+0.84*i/11);ctx.beginPath();
     for(let j=0;j<=8;j++){const e=j/8*Math.PI/2,p=P(cx+Math.cos(a)*r*Math.cos(e),y0+dr+r*kk*Math.sin(e),cz-Math.sin(a)*r*Math.cos(e));j?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]);}ctx.stroke();}
   ctx.restore();po_line(ctx,h,Math.max(0.8,(x1-x0)/70),0.55);
-  const fin=P(cx,y0+dr+r*kk+r*0.28,cz);ctx.strokeStyle=rgba(wc_dim(lead,0.4),0.9);ctx.lineWidth=Math.max(1,(x1-x0)/60);ctx.beginPath();ctx.moveTo(top[0],top[1]);ctx.lineTo(fin[0],fin[1]);ctx.stroke();
+  const fin=P(cx,y0+dr+r*kk+r*(o.seams?0.16:0.28),cz);ctx.strokeStyle=rgba(wc_dim(lead,0.4),0.9);ctx.lineWidth=Math.max(1,(x1-x0)/60);ctx.beginPath();ctx.moveTo(top[0],top[1]);ctx.lineTo(fin[0],fin[1]);ctx.stroke();
+  if(o.seams){ctx.fillStyle=rgba(wc_dim(lead,0.3),1);ctx.beginPath();ctx.arc(fin[0],fin[1],Math.max(1.5,(x1-x0)/70),0,TAU);ctx.fill();}
   return{x0,x1,ya,yb,bot};}
 // a wall face of the hall, from (X0, Z0) to (X1, Z1), with stone courses and bands of brick between them, high windows, and a gate
 function po_hallFace(ctx,P,X0,Z0,X1,Z1,h,o){o=o||{};const Q=(u,Y)=>P(lerp(X0,X1,u),Y,lerp(Z0,Z1,u)),face=[Q(0,0),Q(1,0),Q(1,h),Q(0,h)];
@@ -457,3 +463,334 @@ function po_airAt(x,o){x.drawImage(gv_place("air"),0,0,W,H);const g=o.g||0;
   x.drawImage(gv_place("airHall"),0,0,W,H);}
 // where each trade's tag hangs: over the middle of its street, high above it
 function po_tradeTagAt(i){const [si]=PO_TRADES[i],[x0,z0,x1,z1]=PO_STREETS[si];return po_air(lerp(x0,x1,0.55),16,lerp(z0,z1,0.55)+PO_AIR.Zc);}
+
+/* ---------- 1461: the bedesten from its yard ---------- */
+// at a person's height, across the open yard on a spring morning: the hall's long face runs away to the left from beyond the frame's
+// right edge, its gate in the middle; the front row of domes rises over the parapet, the rows behind it just showing; the last of the
+// builders' scaffold against the wall at the right, and a pile of its poles; the city beyond the hall's far end. A point on the face is u
+// metres along it from its near end, Y up, and d into the wall (po_gtW)
+const PO_GT={F:1250,ch:1.6,hz:690,x0:17,z0:16,th:0.52,L:44,h:11,gate:22,bays:[4.4,13.2,22,30.8,39.6]};
+function po_gtW(u,Y,d){const C=PO_GT,c=Math.cos(C.th),s=Math.sin(C.th);d=d||0;return po_pj(C,C.x0-u*c+d*s,Y,C.z0+u*s+d*c);}
+// a wall of the hall, seen close: courses of cut stone with three thin rows of brick between them every metre and a bit, the joints of
+// the stones, the rain's streaks under the cornice, the damp at its foot. Q(u, Y, d) places a point on it; L long, h high; light: how
+// much the morning sun is on it
+function po_wallEye(ctx,Q,L,h,o){o=o||{};const face=[Q(0,0),Q(L,0),Q(L,h),Q(0,h)],col=o.light?wc_lit(PO.stone,0.04*o.light):PO.stone,cs=o.course||1.0,R=wc_rng(o.seed||71);
+  wc_wash(ctx,face,col,{kind:"build",seed:o.seed||71,lw:1.6});ctx.save();wc_tr(ctx,face);ctx.clip();ctx.lineCap="round";
+  // the stones: a course of blocks between each band of brick, long and staggered, each a shade of its own; their joints
+  for(let Y=0.75-cs;Y<h;Y+=cs){const y0=Y+0.3,y1=Y+cs;let u=-R()*0.8;while(u<L){const w=0.55+R()*0.6,k=R();
+      po_fill(ctx,[Q(u,y0),Q(u+w,y0),Q(u+w,y1),Q(u,y1)],k<0.3?[214,190,150]:k<0.55?[204,198,184]:k<0.7?[236,222,196]:col,0.32+R()*0.2,(u*31+Y*7)|0);
+      const a=Q(u,y0),b=Q(u,y1);ctx.strokeStyle=rgba(wc_dim(PO.stone,0.34),0.38);ctx.lineWidth=0.9;ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();u+=w;}}
+  // three rows of brick in each band, a little uneven: some stretches redder, some paler, the mortar between them
+  for(let Y=0.75;Y<h-0.4;Y+=cs){for(let k=0;k<3;k++){const y=Y+k*0.095;for(let u=0;u<L;){const l=0.8+R()*1.6,c=mix(PO.brick,R()<0.5?[150,84,64]:[206,150,120],R()*0.6);
+        po_fill(ctx,[Q(u,y),Q(Math.min(L,u+l),y),Q(Math.min(L,u+l),y+0.068),Q(u,y+0.068)],c,0.5+R()*0.28,(y*100+u*7)|0);u+=l;}}
+    ctx.strokeStyle=rgba([236,226,204],0.45);ctx.lineWidth=0.8;for(let k=0;k<4;k++){const a=Q(0,Y-0.014+k*0.095),b=Q(L,Y-0.014+k*0.095);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();}
+    ctx.strokeStyle=rgba(wc_dim(PO.brick,0.3),0.3);for(let u=R()*0.3;u<L;u+=0.28+R()*0.08){const k=(u*10|0)%3,a=Q(u,Y+k*0.095),b=Q(u,Y+k*0.095+0.068);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();}}
+  // rain streaks from the cornice and the windows, the damp at the foot
+  for(let i=0;i<90;i++){const u=R()*L,y=h-0.3-R()*1.6,l=0.8+R()*3,a=Q(u,y),b=Q(u+0.05,y-l);ctx.strokeStyle=rgba(wc_dim(PO.stone,0.24),0.13);ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();}
+  const f0=Q(L/2,0),f1=Q(L/2,1.6),g=ctx.createLinearGradient(0,f1[1],0,f0[1]);g.addColorStop(0,"rgba(120,96,70,0)");g.addColorStop(1,"rgba(120,96,70,0.24)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  // the cornice's shade along the top; the sun's warmth, stronger towards it, and big soft blooms where the paint pooled
+  const c0=Q(L/2,h),c1=Q(L/2,h-1.4),gs=ctx.createLinearGradient(0,c0[1],0,c1[1]);gs.addColorStop(0,"rgba(110,90,70,0.2)");gs.addColorStop(1,"rgba(110,90,70,0)");ctx.fillStyle=gs;ctx.fillRect(0,0,W,H);
+  if(o.light){const a=Q(L,0),b=Q(0,0),gl=ctx.createLinearGradient(a[0],0,b[0],0);gl.addColorStop(0,rgba([255,232,188],0.3*o.light));gl.addColorStop(0.6,rgba([255,232,188],0.08*o.light));gl.addColorStop(1,rgba([120,100,90],0.08*o.light));ctx.fillStyle=gl;ctx.fillRect(0,0,W,H);}
+  ctx.globalAlpha=0.35;ctx.globalCompositeOperation="multiply";ctx.drawImage(wc_tint(WC.blotch,[214,196,170]),-((o.seed||71)%300),0,W+300,H);
+  ctx.restore();
+  // the cornice along the top, standing out a little
+  po_fill(ctx,[Q(0,h-0.35,-0.25),Q(L,h-0.35,-0.25),Q(L,h,-0.25),Q(0,h,-0.25)],wc_lit(PO.stone,0.14),1,(o.seed||71)+5);
+  po_line(ctx,[Q(0,h-0.35,-0.25),Q(L,h-0.35,-0.25),Q(L,h,-0.25),Q(0,h,-0.25)],1.2,0.55);
+  // the high windows: small, arched, with iron bars, one in each bay
+  (o.wins||[]).forEach(u=>{const ww=0.42,arc=[];for(let i=0;i<=12;i++){const a=Math.PI*i/12;arc.push(Q(u-ww*Math.cos(a),h-2.45+ww*Math.sin(a)));}const win=[Q(u-ww,h-3.7),Q(u+ww,h-3.7)].concat(arc.reverse());
+    const fr=[Q(u-ww-0.2,h-3.9),Q(u+ww+0.2,h-3.9)];for(let i=0;i<=12;i++){const a=Math.PI*(1-i/12);fr.push(Q(u-(ww+0.2)*Math.cos(a),h-2.45+(ww+0.2)*Math.sin(a)));}po_fill(ctx,fr,wc_lit(PO.stone,0.16),1,(u*77)|0);
+    po_fill(ctx,win,[64,56,54],0.94,(u*999)|0);ctx.strokeStyle=rgba(PO.iron,0.7);ctx.lineWidth=1.2;for(const q of [-0.2,0,0.2]){const m0=Q(u+q,h-3.7),m1=Q(u+q,h-2.1);ctx.beginPath();ctx.moveTo(m0[0],m0[1]);ctx.lineTo(m1[0],m1[1]);ctx.stroke();}
+    po_line(ctx,fr,0.8,0.35);po_line(ctx,win,1,0.55);});
+  if(o.gate!=null)po_gateEye(ctx,Q,o.gate,o);return face;}
+// the gate: a tall arch in a frame of dressed stone, its voussoirs; inside, the passage through the wall, and the iron-clad doors swung
+// back against it (we see the far one); beyond, the dim, warm hall. gw wide, springing at gs, gh to the top of its arch; deep: the wall
+function po_gateEye(ctx,Q,u0,o){const gw=o.gw||4,gs=o.gs||4.4,r=gw/2,gh=gs+r,dp=o.deep||1.8,arc=d=>{const a=[];for(let i=0;i<=20;i++){const t=Math.PI*i/20;a.push(Q(u0-r*Math.cos(t),gs+r*Math.sin(t),d));}return a;};
+  // the frame, standing out from the wall, a shade paler
+  const fr=[Q(u0-r-0.9,0,-0.12),Q(u0+r+0.9,0,-0.12),Q(u0+r+0.9,gh+1.2,-0.12),Q(u0-r-0.9,gh+1.2,-0.12)];wc_wash(ctx,fr,wc_lit(PO.stone,0.16),{kind:"build",seed:181,lw:1.4});
+  ctx.save();wc_tr(ctx,fr);ctx.clip();ctx.strokeStyle=rgba(wc_dim(PO.stone,0.3),0.32);ctx.lineWidth=1;for(let Y=0.6;Y<gh+1.2;Y+=0.6){const a=Q(u0-r-0.9,Y,-0.12),b=Q(u0+r+0.9,Y,-0.12);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();}ctx.restore();
+  // the voussoirs round the arch, and the keystone
+  ctx.strokeStyle=rgba(wc_dim(PO.stone,0.35),0.5);ctx.lineWidth=1.2;for(let i=0;i<=12;i++){const t=Math.PI*i/12,a=Q(u0-r*Math.cos(t),gs+r*Math.sin(t),-0.12),b=Q(u0-(r+0.7)*Math.cos(t),gs+(r+0.7)*Math.sin(t),-0.12);
+    ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();}
+  const ko=[];for(let i=0;i<=20;i++){const t=Math.PI*i/20;ko.push(Q(u0-(r+0.7)*Math.cos(t),gs+(r+0.7)*Math.sin(t),-0.12));}po_line(ctx,ko,1.1,0.5,false);
+  // the opening: the passage, its floor of stone, the dim hall beyond with light from above, and the far side of the passage
+  const op=[Q(u0-r,0,-0.12),Q(u0+r,0,-0.12)].concat(arc(-0.12).reverse());ctx.save();wc_tr(ctx,op);ctx.clip();
+  const b=wc_bbox(op);ctx.fillStyle=rgba([70,58,50],1);ctx.fillRect(b.x0-2,b.y0-2,b.w+4,b.h+4);
+  const far=[Q(u0-r,0,dp),Q(u0+r,0,dp)].concat(arc(dp).reverse());po_fill(ctx,far,[96,76,60],1,183);wc_glowAt(ctx,(b.x0+b.x1)/2,b.y0+b.h*0.62,b.w*0.55,[236,180,110],0.5);
+  // inside, far off: a pier, and light falling from a dome's window on a shelf of silk
+  const fb=wc_bbox(far);po_fill(ctx,[[fb.x0+fb.w*0.62,fb.y1],[fb.x0+fb.w*0.8,fb.y1],[fb.x0+fb.w*0.8,fb.y0+fb.h*0.2],[fb.x0+fb.w*0.62,fb.y0+fb.h*0.2]],[70,58,50],0.8,182);
+  for(let i=0;i<8;i++){const c=PO.silk[i%6],bx=fb.x0+fb.w*(0.16+(i%4)*0.1),by=fb.y0+fb.h*(0.58+Math.floor(i/4)*0.07);ctx.fillStyle=rgba(wc_dim(c,0.35),0.7);ctx.beginPath();ctx.arc(bx,by,fb.w*0.04,0,TAU);ctx.fill();}
+  po_fill(ctx,[Q(u0-r,0,-0.12),Q(u0+r,0,-0.12),Q(u0+r,0,dp),Q(u0-r,0,dp)],[176,160,134],1,184);
+  po_fill(ctx,[Q(u0+r,0,-0.12),Q(u0+r,0,dp),Q(u0+r,gs,dp),Q(u0+r,gs,-0.12)],[120,104,90],0.95,185);
+  // the far door, swung back against the passage: oak, clad in iron, bands across it and rows of studs; its top follows the arch
+  const lf=(v,Y)=>Q(u0+r-0.1,Y,v),top=[];for(let i=0;i<=10;i++){const v=i/10*gw/2;top.push(lf(v+0.05,gs+Math.sqrt(Math.max(0,r*r-(r-v)*(r-v)))));}
+  const leaf=[lf(0.05,0),lf(gw/2+0.05,0)].concat(top.reverse());po_fill(ctx,leaf,[96,74,58],1,186);ctx.save();wc_tr(ctx,leaf);ctx.clip();
+  for(let k=1;k<=6;k++){const Y=k*gh/7,a=lf(0,Y),c=lf(gw/2+0.1,Y),a2=lf(0,Y+0.16),c2=lf(gw/2+0.1,Y+0.16);po_fill(ctx,[a,c,c2,a2],PO.iron,0.88,187+k);
+    ctx.fillStyle=rgba([150,150,156],0.8);for(let j=1;j<6;j++){const p=lf(j*gw/12,Y+0.08);ctx.beginPath();ctx.arc(p[0],p[1],1.6,0,TAU);ctx.fill();}}ctx.restore();po_line(ctx,leaf,1,0.5);
+  ctx.restore();po_line(ctx,op,1.3,0.65,false);}
+// the yard: earth, trodden paler on the way to the gate; dust and chips of stone; a cut block or two left over, a heap of sand, a
+// mortar trough; the last scaffold against the wall, and a pile of its poles
+function po_paintGate(ctx){const C=PO_GT,Q=po_gtW,R=wc_rng(611);wc_sky(ctx,C.hz-40,61,{sun:[230,250],cx:120,cw:900,cy:70,ch:160,clouds:4});
+  // the city beyond the hall's far end: plaster and wooden houses on a slope, roofs of tile, cypresses, a far hill
+  wc_land(ctx,x=>C.hz-70+18*Math.sin(x/210+0.4)+8*Math.sin(x/77),[196,200,170],0.3,{seed:613,line:false});
+  const hs=[];for(let i=0;i<46;i++){const X=-130+R()*150,Z=70+R()*120;hs.push([X,Z]);}hs.sort((a,b)=>b[1]-a[1]).forEach(([X,Z],i)=>{const w=6+R()*5,hh=4+R()*4,[x0,y0]=po_pj(C,X,0,Z),k=po_ppm(C,Z),y=y0-(1.4+R()*0.6)*k*2.4;
+    if(x0>480)return;const wall=PO_HOUSE[i%PO_HOUSE.length],tile=PO_TILES[i%4];po_fill(ctx,[[x0,y],[x0+w*k,y],[x0+w*k,y-hh*k],[x0,y-hh*k]],wc_haze(wall,0.5),1,640+i);
+    po_fill(ctx,[[x0-0.4*k,y-hh*k],[x0+(w+0.4)*k,y-hh*k],[x0+(w-1.6)*k,y-(hh+1.6)*k],[x0+1.6*k,y-(hh+1.6)*k]],wc_haze(tile,0.5),1,700+i);
+    if(R()<0.4){const cx=x0+R()*w*k,ch=(7+R()*5)*k;po_fill(ctx,[[cx-0.7*k,y],[cx+0.7*k,y],[cx+0.2*k,y-ch],[cx,y-ch-0.6*k],[cx-0.2*k,y-ch]],wc_haze(PO.cypress,0.6),1,760+i);}});
+  po_grain(ctx,0.5);
+  // the domes: the rows behind first, each on its drum over the roof; the front row last, rising over the parapet
+  const Pd=(u,Y,v)=>Q(u,Y,v);for(let j=2;j>=0;j--)for(const u of C.bays)po_dome(ctx,Pd,u,5+j*10,C.h,3.6,0.9,{seed:620+j*5+u|0,k:0.72,left:true,seams:0.16});
+  // the long face, its high windows and its gate
+  po_wallEye(ctx,Q,C.L,C.h,{wins:C.bays.filter(u=>u!==C.gate),gate:C.gate,seed:631,light:1});
+  // aerial haze: the far end paler
+  ctx.save();const fa=Q(C.L,0),ne=Q(0,0),hz=ctx.createLinearGradient(fa[0],0,fa[0]+700,0);hz.addColorStop(0,rgba(WC_PAPER,0.3));hz.addColorStop(1,rgba(WC_PAPER,0));ctx.fillStyle=hz;ctx.fillRect(0,0,W,C.hz+60);ctx.restore();
+  // the ground
+  wc_wash(ctx,[[-60,C.hz-6],[W+60,C.hz-6],[W+60,H+60],[-60,H+60]],[222,204,166],{kind:"ground",seed:641,line:false});
+  const foot=[];for(let i=0;i<=20;i++)foot.push(Q(C.L*i/20,0));po_fill(ctx,foot.concat([[foot[20][0],foot[20][1]+6],[foot[0][0],foot[0][1]+14]]),[150,124,96],0.28,642);
+  // the trodden way to the gate, and the worn ground before it
+  const gp=Q(C.gate,0),tw=[];for(let i=0;i<=16;i++){const v=i/16,y=lerp(gp[1]+4,H+40,v*v),hw=lerp(60,640,v*v)+Math.sin(i*1.7)*14;tw.push([gp[0]-hw*1.1-v*v*260,y]);}
+  for(let i=16;i>=0;i--){const v=i/16,y=lerp(gp[1]+4,H+40,v*v),hw=lerp(60,560,v*v)+Math.cos(i*1.3)*12;tw.push([gp[0]+hw-v*v*260,y]);}
+  // lifted, as with a damp brush: the paper shows through where feet have worn the earth
+  ctx.save();ctx.filter="blur(10px)";wc_tr(ctx,tw);ctx.fillStyle=rgba([250,244,230],0.45);ctx.fill();ctx.filter="none";ctx.restore();
+  // stones, chips and tufts across the yard
+  for(let i=0;i<160;i++){const X=-24+R()*44,Z=5+R()*26,[x,y]=po_pj(C,X,0,Z),k=po_ppm(C,Z);if(y<C.hz+4)continue;const r=(0.04+R()*0.12)*k;
+    ctx.fillStyle=rgba(R()<0.5?[196,180,150]:[176,160,130],0.7);ctx.beginPath();ctx.ellipse(x,y,r*1.4,r*0.6,0,0,TAU);ctx.fill();}
+  for(let i=0;i<40;i++){const X=-24+R()*40,Z=6+R()*22,[x,y]=po_pj(C,X,0,Z),k=po_ppm(C,Z);ctx.strokeStyle=rgba([150,150,96],0.5);ctx.lineWidth=1;for(let j=0;j<4;j++){ctx.beginPath();ctx.moveTo(x+j*0.04*k,y);ctx.lineTo(x+(j-1.5)*0.06*k,y-0.12*k);ctx.stroke();}}
+  // the scaffold still against the wall, near the corner: two standards, a ledger and a brace, lashed with rope
+  for(const u of [6.6,10.4]){const a=Q(u,0,-0.6),b=Q(u,8.2,-0.6),w=Math.max(3,po_ppm(C,po_pjZ(u))*0.12);po_fill(ctx,[[a[0]-w/2,a[1]],[a[0]+w/2,a[1]],[b[0]+w/2,b[1]],[b[0]-w/2,b[1]]],PO.woodLt,1,650+u|0);po_line(ctx,[[a[0]-w/2,a[1]],[a[0]+w/2,a[1]],[b[0]+w/2,b[1]],[b[0]-w/2,b[1]]],0.8,0.45);}
+  for(const [u0,y0,u1,y1] of [[6.2,5.4,10.8,5.4],[6.6,0.6,10.4,5.4]]){const a=Q(u0,y0,-0.65),b=Q(u1,y1,-0.65);ctx.strokeStyle=rgba(PO.woodDk,0.9);ctx.lineWidth=Math.max(3,Math.hypot(b[0]-a[0],b[1]-a[1])*0.012);ctx.lineCap="round";ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();
+    ctx.strokeStyle=rgba(wc_lit(PO.woodLt,0.2),0.8);ctx.lineWidth*=0.4;ctx.beginPath();ctx.moveTo(a[0],a[1]-2);ctx.lineTo(b[0],b[1]-2);ctx.stroke();}
+  for(const u of [6.6,10.4]){const p=Q(u,5.4,-0.65);ctx.strokeStyle=rgba([214,196,150],0.95);ctx.lineWidth=3;for(let k=0;k<3;k++){ctx.beginPath();ctx.moveTo(p[0]-7,p[1]-6+k*4);ctx.lineTo(p[0]+7,p[1]-2+k*4);ctx.stroke();}}
+  // a heap of sand, a mortar trough, and two cut blocks left over
+  {const [x,y]=po_pj(C,4.6,0,14.5),k=po_ppm(C,14.5);wc_contact(ctx,x-1.8*k,x+1.8*k,y+2,1,0.25);po_q(ctx,[[x-1.7*k,y],[x+1.7*k,y],[x+0.9*k,y-0.5*k],[x+0.1*k,y-0.72*k],[x-0.8*k,y-0.5*k]],[226,202,150],{kind:"thing",seed:652});
+    const [tx,ty]=po_pj(C,1.4,0,15.5),tk=po_ppm(C,15.5);po_q(ctx,[[tx-1*tk,ty],[tx+1*tk,ty],[tx+1.08*tk,ty-0.36*tk],[tx-1.08*tk,ty-0.36*tk]],PO.woodDk,{kind:"thing",seed:653});po_fill(ctx,[[tx-0.98*tk,ty-0.36*tk],[tx+0.98*tk,ty-0.36*tk],[tx+0.9*tk,ty-0.44*tk],[tx-0.9*tk,ty-0.44*tk]],[214,206,192],1,654);}
+  for(const [X,Z,w,hh,sd] of [[-8.6,11.5,1.1,0.55,655],[-6.9,12.4,0.9,0.5,656]]){const [x,y]=po_pj(C,X,0,Z),k=po_ppm(C,Z);wc_contact(ctx,x-w*0.7*k,x+w*0.7*k,y+2,1,0.3);
+    po_q(ctx,[[x-w/2*k,y],[x+w/2*k,y],[x+w/2*k,y-hh*k],[x-w/2*k,y-hh*k]],wc_lit(PO.stone,0.04),{kind:"thing",seed:sd});po_fill(ctx,[[x-w/2*k,y-hh*k],[x+w/2*k,y-hh*k],[x+(w/2+0.18)*k,y-(hh+0.16)*k],[x-(w/2-0.18)*k,y-(hh+0.16)*k]],wc_lit(PO.stone,0.18),1,sd+9);}
+  // the pile of poles, taken down, at the right
+  for(let i=0;i<9;i++){const Z=9.6+i*0.13+(i%3)*0.05,Y=0.12+Math.floor(i/3)*0.16,a=po_pj(C,6.2+(i%2)*0.3,Y,Z+0.6),b=po_pj(C,13.5+(i%3)*0.4,Y,Z-0.4),w=po_ppm(C,Z)*0.13;
+    ctx.strokeStyle=rgba(wc_dim(PO.woodLt,0.12+(i%3)*0.06),1);ctx.lineWidth=w;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();
+    ctx.strokeStyle=rgba(WC_INK,0.35);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(a[0],a[1]+w/2);ctx.lineTo(b[0],b[1]+w/2);ctx.stroke();ctx.fillStyle=rgba(wc_lit(PO.woodLt,0.25),1);ctx.beginPath();ctx.ellipse(b[0],b[1],w*0.3,w/2,0,0,TAU);ctx.fill();}
+  po_grain(ctx,0.25);}
+// how far a point on the face is from the camera (for sizes along it)
+const po_pjZ=u=>PO_GT.z0+u*Math.sin(PO_GT.th);
+
+/* ---------- people walking in depth ---------- */
+// walking with something held in both arms, or a pole on the shoulder: the legs and the free arm swing, the held arms stay
+Object.assign(POSE,{
+  po_hold:{L:[0.16,-2.05],R:[0.16,-2.05],feet:24,shift:0,tilt:0,turn:0,gaze:[0.2,0],look:0},
+  po_holdA:{L:[0.16,-2.05],R:[0.16,-2.05],feet:14,shift:-5,tilt:0.03,turn:0.06,gaze:[0.3,0],look:0},
+  po_holdB:{L:[0.16,-2.05],R:[0.16,-2.05],feet:14,shift:5,tilt:-0.03,turn:0.06,gaze:[0.3,0],look:0},
+  po_poleA:{L:[0.34,0.3],R:[0.55,3.0],feet:14,shift:-5,tilt:0.03,turn:0.06,gaze:[0.3,0],look:0},
+  po_poleB:{L:[-0.26,-0.32],R:[0.55,3.0],feet:14,shift:5,tilt:-0.03,turn:0.06,gaze:[0.3,0],look:0}
+});
+// someone walking on the ground of a level camera C, from (X0, Z0) to (X1, Z1), from t0, at v metres a second: where their feet are on
+// the frame and how big they are, the step's bob and swing, when they arrive, which way they face
+function po_stroll(C,t,t0,X0,Z0,X1,Z1,v,h){const L=Math.hypot(X1-X0,Z1-Z0),T_=Math.max(0.3,L/(v||1.3)),u=clamp((t-t0)/T_,0,1),moving=u>0&&u<1,ph=(t-t0)*Math.PI*3.2,
+    e=u<0.06?u*u/0.12:u>0.94?1-(1-u)*(1-u)/0.12:u-0.03,X=lerp(X0,X1,e),Z=lerp(Z0,Z1,e),p=po_at(C,X,Z,h);
+  return{x:p.x,y:p.y,s:p.s,X,Z,moving,ph,swing:moving?Math.sin(ph):0,bob:moving?Math.abs(Math.sin(ph))*10*p.s:0,end:t0+T_,flip:X1<X0};}
+// a person drawn where po_stroll puts them: walking (pose names A and B swing), or standing in pose o.pose once they stop
+function po_walker(ctx,id,w,o){o=o||{};const A=o.walk||"walk",sw=w.swing;
+  person(ctx,id,w.x,w.y-w.bob,w.s,Object.assign({},o,{pose:w.moving?(o.base||"stand"):(o.pose||o.base||"stand"),pose2:w.moving?(sw>0?A+"A":A+"B"):o.pose2,mix:w.moving?Math.abs(sw):o.mix,
+    flip:o.flip!=null?o.flip:w.flip}));}
+// seen from behind: bolts of silk carried in the arms in front, their ends showing either side; a chest on the left shoulder
+function po_boltsBehind(cx,P_){const sw=P_.build.sh;[[-372,0],[-336,2],[-404,4]].forEach(([y,i],k)=>{const c=PO.silk[i],L=sw+78-k*8;
+  cx.beginPath();cx.moveTo(-L,y-30);cx.lineTo(L,y-30);cx.quadraticCurveTo(L+14,y,L,y+30);cx.lineTo(-L,y+30);cx.quadraticCurveTo(-L-14,y,-L,y-30);cx.closePath();litFill(cx,c,-L,y-30,L,y+30);seam(cx,c,0.5);
+  for(const sd of [-1,1]){cx.strokeStyle=rgba(lighten(c,0.3),0.6);cx.lineWidth=2;cx.beginPath();cx.ellipse(sd*L,y,7,22,0,0,TAU);cx.stroke();}});}
+function po_chestShoulder(cx,P_){const sw=P_.build.sh,w=150,h=100,x0=-sw-62,y0=-560,c=PO.wood;cx.save();cx.translate(x0+w/2,y0+h/2);cx.rotate(-0.06);
+  cx.beginPath();cx.rect(-w/2,-h/2+18,w,h-18);litFill(cx,c,-w/2,-h/2,w/2,h/2);seam(cx,c,0.6);cx.beginPath();cx.moveTo(-w/2,-h/2+18);cx.quadraticCurveTo(0,-h/2-12,w/2,-h/2+18);cx.closePath();
+  litFill(cx,lighten(c,0.08),-w/2,-h/2-12,w/2,-h/2+18);seam(cx,c,0.6);cx.fillStyle=rgba(PO.iron,0.9);for(const bx of [-w/2+16,w/2-24])cx.fillRect(bx,-h/2+4,8,h-4);cx.fillRect(-w/2,-h/2+16,w,6);cx.restore();}
+
+/* ---------- 1461: inside the bedesten ---------- */
+// at a person's height, inside, facing a wall: the arch of one bay rising out of the frame between its pilasters; the wall under it
+// lined with two rows of wooden cupboards, iron-hasped and locked, where merchants kept gold, silver, money and papers; a high window
+// letting in a shaft of the morning; at the left, a rack with bolts of silk and velvet; at the right, a goldsmith's low table and his
+// tray. A plane facing us, Z metres away, is drawn with po_pj (PO_IN)
+const PO_IN={F:1000,ch:1.6,hz:780,Z:10,cup:[1.1,1.6,0.5,2.25]};
+function po_paintHallIn(ctx){const C=PO_IN,Z=C.Z,P=(X,Y,z)=>po_pj(C,X,Y,z==null?Z:z),R=wc_rng(671);ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);
+  // the wall: stone and brick, dim; the pilasters and the arch over the bay; the wall of the next bays either side
+  const wall=[P(-14,0),P(14,0),P(14,12),P(-14,12)];wc_wash(ctx,wall,[198,180,150],{kind:"plaster",seed:672,line:false});
+  ctx.save();wc_tr(ctx,wall);ctx.clip();for(let Y=0.75;Y<12;Y+=1.0)for(let k=0;k<3;k++){const y=Y+k*0.095;po_fill(ctx,[P(-14,y),P(14,y),P(14,y+0.068),P(-14,y+0.068)],[160,96,74],0.45,(y*100)|0);}
+  for(let Y=-0.25;Y<12;Y+=1.0){let X=-14-R();while(X<14){const w=0.55+R()*0.6;const a=P(X,Y+0.3),b=P(X,Y+1.0);ctx.strokeStyle=rgba([150,130,104],0.35);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();X+=w;}}ctx.restore();
+  // the arch of the bay: its soffit, deep, and the pilasters it springs from; the arch of each bay beside it
+  for(const cx of [-9.2,0,9.2]){const r=4.0,sp=5.2,arc=[],arc2=[];for(let i=0;i<=24;i++){const a=Math.PI*i/24;arc.push(P(cx-r*Math.cos(a),sp+r*Math.sin(a)));arc2.push(P(cx-(r+0.7)*Math.cos(a),sp+(r+0.7)*Math.sin(a),Z-0.6));}
+    po_q(ctx,arc2.concat(arc.slice().reverse()),[196,172,138],{seed:673+cx|0,lw:1.3});
+    ctx.strokeStyle=rgba([120,100,80],0.45);ctx.lineWidth=1.3;for(let i=1;i<14;i++){const a=Math.PI*i/14,p=P(cx-r*Math.cos(a),sp+r*Math.sin(a)),q=P(cx-(r+0.7)*Math.cos(a),sp+(r+0.7)*Math.sin(a),Z-0.6);ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.lineTo(q[0],q[1]);ctx.stroke();}}
+  for(const X of [-4.6,4.6,-13.8,13.8]){const pl=[P(X-0.7,0,Z-0.6),P(X+0.7,0,Z-0.6),P(X+0.7,5.2,Z-0.6),P(X-0.7,5.2,Z-0.6)];po_q(ctx,pl,[206,188,158],{seed:680+X|0,lw:1.4});
+    ctx.save();wc_tr(ctx,pl);ctx.clip();for(let Y=0.75;Y<5.2;Y+=1.0)po_fill(ctx,[P(X-0.7,Y,Z-0.6),P(X+0.7,Y,Z-0.6),P(X+0.7,Y+0.26,Z-0.6),P(X-0.7,Y+0.26,Z-0.6)],[166,98,74],0.5,(X*10+Y*10)|0);ctx.restore();
+    po_fill(ctx,[P(X-0.85,5.0,Z-0.65),P(X+0.85,5.0,Z-0.65),P(X+0.85,5.3,Z-0.65),P(X-0.85,5.3,Z-0.65)],[220,206,180],1,690+X|0);}
+  // a high window in the bay, and the light it lets in
+  const wn=[];for(let i=0;i<=12;i++){const a=Math.PI*i/12;wn.push(P(-0.45*Math.cos(a),7.6+0.45*Math.sin(a)));}const win=[P(-0.45,6.4),P(0.45,6.4)].concat(wn.reverse());po_fill(ctx,win,[252,240,210],1,691);po_line(ctx,win,1.2,0.6);
+  ctx.strokeStyle=rgba(PO.iron,0.8);ctx.lineWidth=2;for(const q of [-0.18,0,0.18]){const a=P(q,6.4),b=P(q,8.0);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();}
+  // the stone floor in slabs, going away to the wall; a little light on it
+  const fl=[P(-14,0,0.6),P(14,0,0.6),P(14,0),P(-14,0)];wc_wash(ctx,[[-60,P(0,0)[1]],[W+60,P(0,0)[1]],[W+60,H+60],[-60,H+60]],[186,170,146],{kind:"ground",seed:692,line:false});
+  ctx.save();ctx.strokeStyle=rgba([130,114,94],0.35);ctx.lineWidth=1.2;for(let X=-14;X<=14;X+=1.2){const a=P(X,0),b=P(X*Z/1.2,0,1.2);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();}
+  for(let z=Z;z>1.4;z-=1.2){const a=P(-30,0,z),b=P(30,0,z);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();}ctx.restore();
+  // the stone bench along the wall, and the cupboards on it in two rows: oak, each with an iron hasp and a lock
+  const [cw,ch,y0,y1]=C.cup;po_q(ctx,[P(-14,0,Z-0.5),P(14,0,Z-0.5),P(14,y0,Z-0.5),P(-14,y0,Z-0.5)],[214,198,170],{seed:693,lw:1.3});
+  for(const Y of [y0,y1])for(let X=-13.2;X<13.2;X+=cw+0.08){if(Math.abs(Math.abs(X+cw/2)-4.6)<0.8||Math.abs(Math.abs(X+cw/2)-13.8)<0.8)continue;
+    const d=[P(X,Y),P(X+cw,Y),P(X+cw,Y+ch),P(X,Y+ch)],c=mix(PO.wood,[138,98,66],R()*0.6);po_fill(ctx,d,c,1,(X*13+Y*7)|0);
+    po_fill(ctx,[P(X+0.08,Y+0.08),P(X+cw-0.08,Y+0.08),P(X+cw-0.08,Y+ch-0.08),P(X+0.08,Y+ch-0.08)],wc_lit(c,0.08),1,(X*17+Y*5)|0);po_line(ctx,d,1,0.5);
+    const hp=P(X+cw/2,Y+ch*0.55),k=po_ppm(C,Z);ctx.fillStyle=rgba(PO.iron,0.95);ctx.fillRect(hp[0]-0.04*k,hp[1]-0.16*k,0.08*k,0.3*k);ctx.strokeStyle=rgba(PO.iron,1);ctx.lineWidth=Math.max(1.5,0.03*k);
+    ctx.beginPath();ctx.arc(hp[0],hp[1]+0.2*k,0.07*k,Math.PI,0);ctx.stroke();ctx.fillStyle=rgba([90,84,80],1);ctx.fillRect(hp[0]-0.08*k,hp[1]+0.2*k,0.16*k,0.14*k);
+    for(const q of [0.18,0.82]){const a=P(X+0.04,Y+ch*q),b=P(X+0.22,Y+ch*q);ctx.strokeStyle=rgba(PO.iron,0.8);ctx.lineWidth=Math.max(1.5,0.025*k);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();}}
+  po_grain(ctx,0.4);
+  // the dimness of the hall, and the shaft of light from the window down across the floor
+  ctx.save();ctx.globalCompositeOperation="multiply";ctx.fillStyle="rgba(188,160,132,0.55)";ctx.fillRect(0,0,W,H);
+  const dg=ctx.createRadialGradient(1060,620,160,960,560,1150);dg.addColorStop(0,"rgba(90,64,50,0)");dg.addColorStop(1,"rgba(90,64,50,0.5)");ctx.fillStyle=dg;ctx.fillRect(0,0,W,H);ctx.restore();
+  po_fill(ctx,win,[255,246,220],1,691);
+  ctx.save();ctx.filter="blur(14px)";const w0=P(-0.4,7.2),w1=P(0.4,7.2),f0=P(3.2,0,6.4),f1=P(5.6,0,6.4);const sh=ctx.createLinearGradient(w0[0],w0[1],(f0[0]+f1[0])/2,f0[1]);
+  sh.addColorStop(0,"rgba(255,242,210,0.7)");sh.addColorStop(1,"rgba(255,242,210,0.22)");ctx.fillStyle=sh;ctx.beginPath();ctx.moveTo(w0[0],w0[1]);ctx.lineTo(w1[0],w1[1]);ctx.lineTo(f1[0],f1[1]);ctx.lineTo(f0[0],f0[1]);ctx.closePath();ctx.fill();
+  ctx.filter="none";ctx.restore();const sp=P(4.4,0,6.4);wc_glowAt(ctx,sp[0],sp[1],220,[255,236,196],0.3);
+  ctx.strokeStyle=rgba(PO.iron,0.85);ctx.lineWidth=2.4;for(const q of [-0.18,0,0.18]){const a=P(q,6.4),b=P(q,8.0);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();}po_line(ctx,win,1.2,0.6);}
+// the things nearer than the merchants, drawn after them: the rack of silk and velvet at the left, and the goldsmith's low table, his
+// tray of rings, cups and coins, and a small balance, at the right
+function po_paintHallInFront(ctx){const C=PO_IN,P=(X,Y,z)=>po_pj(C,X,Y,z),R=wc_rng(701);wc_prep();
+  // the rack: two uprights, three shelves, bolts on each, their ends to us
+  const rz=5.6,k=po_ppm(C,rz);for(const X of [-6.2,-3.4]){const a=P(X,0,rz),b=P(X,2.4,rz);po_q(ctx,[[a[0]-0.05*k,a[1]],[a[0]+0.05*k,a[1]],[b[0]+0.05*k,b[1]],[b[0]-0.05*k,b[1]]],PO.woodDk,{kind:"thing",seed:702+X|0});}
+  wc_contact(ctx,P(-6.4,0,rz)[0],P(-3.2,0,rz)[0],P(0,0,rz)[1]+2,1,0.3);
+  [0.35,1.15,1.95].forEach((Y,j)=>{const a=P(-6.3,Y,rz),b=P(-3.3,Y,rz);po_q(ctx,[[a[0],a[1]],[b[0],b[1]],[b[0],b[1]+0.06*k],[a[0],a[1]+0.06*k]],PO.wood,{kind:"thing",seed:705+j});
+    for(let i=0;i<7;i++){const c=PO.silk[(i*5+j*3)%6],r=0.19*k,cx=a[0]+(0.22+i*0.4)*k,cy=a[1]-r*0.98;wc_wash(ctx,wc_ell(cx,cy,r,r*0.96,22),c,{kind:"thing",lw:1,seed:710+i+j*9});
+      ctx.strokeStyle=rgba(wc_lit(c,0.35),0.6);ctx.lineWidth=1.4;for(const q of [0.66,0.36]){ctx.beginPath();ctx.ellipse(cx,cy,r*q,r*q*0.96,0,0,TAU);ctx.stroke();}
+      ctx.fillStyle=rgba(wc_dim(c,0.4),1);ctx.beginPath();ctx.arc(cx,cy,r*0.1,0,TAU);ctx.fill();}});
+  // a length of silk unrolled from the middle shelf, hanging in folds
+  {const a=P(-4.1,1.15,rz),b=P(-3.55,1.15,rz),c=PO.silk[0],f=[];for(let i=0;i<=10;i++){const v=i/10;f.push([lerp(b[0],b[0]+0.06*k,v)+Math.sin(v*9)*0.03*k,lerp(b[1],P(0,0.3,rz)[1],v)]);}
+    const pts=[a].concat(f).concat([[a[0]+0.02*k,f[10][1]]]);wc_wash(ctx,pts,c,{kind:"thing",lw:1.1,seed:719});ctx.save();wc_tr(ctx,pts);ctx.clip();ctx.strokeStyle=rgba(wc_lit(c,0.35),0.5);ctx.lineWidth=0.04*k;
+    for(const q of [0.3,0.65]){ctx.beginPath();ctx.moveTo(lerp(a[0],b[0],q),a[1]);ctx.lineTo(lerp(a[0],b[0],q)+0.03*k,f[10][1]);ctx.stroke();}ctx.restore();}
+  // the goldsmith's table: low, with a cloth over it, and his things on it
+  const tz=4.8,tk=po_ppm(C,tz),tl=P(1.9,0.42,tz),tr=P(4.0,0.42,tz),bl=P(1.9,0.42,tz+0.8),br=P(4.0,0.42,tz+0.8);
+  for(const X of [2.0,3.9]){const a=P(X,0,tz),b=P(X,0.4,tz);po_fill(ctx,[[a[0]-0.04*tk,a[1]],[a[0]+0.04*tk,a[1]],[b[0]+0.04*tk,b[1]],[b[0]-0.04*tk,b[1]]],PO.woodDk,1,720+X|0);}
+  wc_contact(ctx,tl[0]-10,tr[0]+10,P(0,0,tz)[1]+2,1,0.3);po_q(ctx,[tl,tr,br,bl],[160,44,52],{kind:"thing",seed:722});po_q(ctx,[tl,tr,P(4.05,0.24,tz),P(1.85,0.24,tz)],[140,36,46],{kind:"thing",seed:723});
+  // the tray: copper, round, and on it rings, two cups, a little heap of coins
+  const tc=P(2.8,0.43,tz+0.4);wc_wash(ctx,wc_ell(tc[0],tc[1],0.56*tk,0.16*tk,30),[196,128,76],{kind:"thing",lw:1.2,seed:724});wc_wash(ctx,wc_ell(tc[0],tc[1]-2,0.46*tk,0.12*tk,30),[214,150,96],{kind:"thing",lw:0.8,seed:725});
+  for(let i=0;i<9;i++){const x=tc[0]+(R()-0.5)*0.5*tk,y=tc[1]-2+(R()-0.5)*0.1*tk;ctx.fillStyle=rgba(PO.gold,1);ctx.beginPath();ctx.ellipse(x,y,0.03*tk,0.012*tk,0,0,TAU);ctx.fill();ctx.fillStyle="rgba(255,250,224,0.9)";ctx.fillRect(x-0.01*tk,y-0.006*tk,0.01*tk,0.004*tk);}
+  for(const [dx,h] of [[-0.24,0.16],[0.2,0.13]]){const x=tc[0]+dx*tk,y=tc[1]-0.02*tk;po_q(ctx,[[x-0.06*tk,y],[x+0.06*tk,y],[x+0.08*tk,y-h*0.6*tk],[x+0.1*tk,y-h*tk],[x-0.1*tk,y-h*tk],[x-0.08*tk,y-h*0.6*tk]],PO.gold,{kind:"thing",lw:1,seed:727+dx*10|0});
+    ctx.fillStyle="rgba(255,250,224,0.8)";ctx.fillRect(x-0.06*tk,y-h*0.9*tk,0.025*tk,h*0.6*tk);}
+  for(let i=0;i<5;i++){const x=tc[0]+(0.02+i*0.05)*tk,y=tc[1]+0.04*tk;ctx.strokeStyle=rgba(PO.gold,1);ctx.lineWidth=Math.max(1.5,0.012*tk);ctx.beginPath();ctx.ellipse(x,y,0.022*tk,0.012*tk,0,0,TAU);ctx.stroke();}
+  // a small balance at the table's end
+  const bp=P(3.65,0.42,tz+0.3);ctx.strokeStyle=rgba([150,116,60],1);ctx.lineWidth=Math.max(2,0.015*tk);ctx.beginPath();ctx.moveTo(bp[0],bp[1]);ctx.lineTo(bp[0],bp[1]-0.36*tk);ctx.moveTo(bp[0]-0.22*tk,bp[1]-0.34*tk);ctx.lineTo(bp[0]+0.22*tk,bp[1]-0.34*tk);ctx.stroke();
+  for(const s of [-1,1]){ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(bp[0]+s*0.22*tk,bp[1]-0.34*tk);ctx.lineTo(bp[0]+s*0.22*tk,bp[1]-0.14*tk);ctx.stroke();wc_wash(ctx,wc_ell(bp[0]+s*0.22*tk,bp[1]-0.13*tk,0.07*tk,0.02*tk,16),[196,160,80],{kind:"thing",lw:0.8});}
+  po_grain(ctx,0.3);}
+
+/* ---------- a street of the market, at a person's height ---------- */
+// looking along a street of shops: wooden shops either side, each raised on its platform, its lower shutter let down as a counter for
+// its goods and its upper one propped up as a shade; a canvas stretched across the street here and there; houses beyond the shops'
+// roofs; at the end, the city (the 1520s, looking away from the hall) or the bedesten's gate (the cap makers' street of the 1600s). X
+// across, Y up, Z away (metres), the camera in the street's middle; the sun is high on the right, so the right-hand shops' fronts are in
+// shade and their roofs' shadow lies along that side of the street
+const PO_STR={F:1150,ch:1.6,hz:520,half:3.2,deep:2.7,z1:62};
+const po_st=(X,Y,Z)=>po_pj(PO_STR,X,Y,Z);
+// the shops either side, near to far: {s: side, z0, z1, kind}. In the 1600s the street is the cap makers': the master's stall is the
+// near one on the left, the cloth seller's next to it; in the 1520s the goods are of every kind
+const PO_KINDS=["caps","cloth","copper","slippers","spice","quilts","pots"];
+function po_strShops(era){const R=wc_rng(era==="1600"?911:913),L=[];
+  for(const s of [-1,1]){let z=s<0?4.5:3.0,i=0;while(z<PO_STR.z1-4){const w=s<0&&i<2?3.0:2.6+R()*0.9;
+      const kind=era==="1600"?(s<0&&i===1?"cloth":R()<0.86?"caps":PO_KINDS[1+Math.floor(R()*3)]):(s<0&&i===0?"caps":s>0&&i===1?"cloth":PO_KINDS[Math.floor(R()*PO_KINDS.length)]);
+      L.push({s,z0:z,z1:z+w,kind,seed:Math.floor(R()*1e6)});z+=w;i++;}
+}
+  return L;}
+// goods: a few things of a kind, set out at (x, y) on the frame, k pixels a metre, w metres of shelf
+function po_goods(ctx,kind,x,y,k,w,R){const n=Math.max(2,Math.round(w/0.34));
+  for(let i=0;i<n;i++){const gx=x+(i+0.5)*w*k/n,c=PO.felt[i%5];
+    if(kind==="caps"){const st=0.16*k;ctx.fillStyle=rgba(PO.woodDk,1);ctx.fillRect(gx-st*0.08,y-st,st*0.16,st);ctx.save();ctx.translate(gx,y-st);ctx.scale(k/420,k/420);po_capPaint(ctx,PO.felt[[2,0,4,2,1,3][(i+(R()*3|0))%6]],{turn:R()-0.5});ctx.restore();}
+    else if(kind==="cloth"){if(i%2)continue;const h=0.06*k;for(let j=0;j<3;j++){const cc=mix(PO.silk[(i+j*2+(R()*6|0))%6],[226,214,196],0.25),y0=y-j*h;
+        po_fill(ctx,[[gx-0.16*k,y0],[gx+0.16*k,y0],[gx+0.16*k,y0-h+1],[gx-0.16*k,y0-h+1]],cc,1,(gx*7+j)|0);ctx.strokeStyle=rgba(wc_dim(cc,0.3),0.6);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(gx-0.16*k,y0-h*0.5);ctx.lineTo(gx+0.12*k,y0-h*0.5);ctx.stroke();}}
+    else if(kind==="copper"){const r=(0.1+R()*0.05)*k;ctx.fillStyle=rgba([196,118,70],1);ctx.beginPath();ctx.ellipse(gx,y-r,r,r*0.9,0,0,TAU);ctx.fill();ctx.fillStyle=rgba([170,96,56],1);ctx.fillRect(gx-r*0.7,y-r*2.1,r*1.4,r*0.4);
+      ctx.fillStyle="rgba(255,236,200,0.7)";ctx.beginPath();ctx.ellipse(gx-r*0.35,y-r*1.25,r*0.2,r*0.35,0.4,0,TAU);ctx.fill();}
+    else if(kind==="slippers"){const cc=[[214,170,62],[176,52,48],[200,190,170]][i%3];ctx.fillStyle=rgba(cc,1);ctx.beginPath();ctx.moveTo(gx-0.12*k,y);ctx.quadraticCurveTo(gx-0.1*k,y-0.08*k,gx+0.06*k,y-0.07*k);ctx.quadraticCurveTo(gx+0.16*k,y-0.08*k,gx+0.14*k,y-0.12*k);
+      ctx.quadraticCurveTo(gx+0.18*k,y-0.02*k,gx+0.1*k,y);ctx.closePath();ctx.fill();}
+    else if(kind==="spice"){const cc=[[200,120,40],[176,60,40],[214,180,60],[120,110,60]][i%4],r=0.13*k;ctx.fillStyle=rgba([206,184,140],1);ctx.fillRect(gx-r,y-r*1.3,r*2,r*1.3);ctx.fillStyle=rgba(cc,1);ctx.beginPath();ctx.ellipse(gx,y-r*1.3,r*1.05,r*0.45,0,Math.PI,TAU);ctx.fill();}
+    else if(kind==="quilts"){if(i%2)continue;const h=0.07*k;for(let j=0;j<3;j++){const cc=mix([[200,70,70],[70,110,170],[220,180,70],[60,140,110]][(i+j)%4],[226,214,196],0.35),y0=y-j*h;
+        po_fill(ctx,[[gx-0.17*k,y0],[gx+0.17*k,y0],[gx+0.17*k,y0-h+1],[gx-0.17*k,y0-h+1]],cc,1,(gx*5+j)|0);ctx.strokeStyle=rgba([250,244,230],0.6);ctx.lineWidth=1;ctx.strokeRect(gx-0.12*k,y0-h*0.8,0.24*k,h*0.6);}}
+    else if(kind==="pots"){const r=(0.09+R()*0.04)*k;ctx.fillStyle=rgba([186,110,74],1);ctx.beginPath();ctx.moveTo(gx-r*0.4,y);ctx.quadraticCurveTo(gx-r*1.2,y-r,gx-r*0.5,y-r*1.9);ctx.lineTo(gx+r*0.5,y-r*1.9);ctx.quadraticCurveTo(gx+r*1.2,y-r,gx+r*0.4,y);ctx.closePath();ctx.fill();
+      ctx.fillStyle="rgba(255,230,200,0.4)";ctx.fillRect(gx-r*0.55,y-r*1.2,r*0.18,r*0.7);}}}
+// one shop: inside, its back wall, ceiling and raised floor, dim, and its far side wall facing us with shelves of goods; then its front:
+// the platform's boards, the counter let down with goods on it in the light, the posts and lintel, the shutter propped up as a shade and
+// the eave over it. The first shop of a row shows its near side wall. Far ones fade into the haze; the right-hand ones are in shade
+function po_strShop(ctx,sh,first){const P=po_st,C=PO_STR,s=sh.s,X0=s*C.half,X1=s*(C.half+C.deep),z0=sh.z0,z1=sh.z1,R=wc_rng(sh.seed),wood=mix(PO.wood,[126,96,70],R()*0.5),
+    dp=1-clamp((z0-8)/70,0,0.75),lit=(c,k)=>wc_haze(s>0?mix(wc_dim(c,0.24+(k||0)),[100,112,150],0.12):mix(wc_dim(c,k||0),[255,226,170],0.08),dp);
+  // inside: dark at the back, the floor of the platform, the ceiling
+  po_fill(ctx,[P(X1,0.7,z0),P(X1,0.7,z1),P(X1,2.9,z1),P(X1,2.9,z0)],lit([70,52,42]),1,sh.seed);
+  po_fill(ctx,[P(X0,2.9,z0),P(X1,2.9,z0),P(X1,2.9,z1),P(X0,2.9,z1)],lit([64,48,40]),1,sh.seed+1);
+  po_fill(ctx,[P(X0,0.7,z0),P(X1,0.7,z0),P(X1,0.7,z1),P(X0,0.7,z1)],lit([150,118,86]),1,sh.seed+2);
+  // the far side wall, its shelves and goods, in the shop's shade
+  const k=po_ppm(C,z1),pa=[P(X0,0.7,z1),P(X1,0.7,z1),P(X1,2.9,z1),P(X0,2.9,z1)];if(z1<16)wc_wash(ctx,pa,lit(wood,0.12),{kind:"build",seed:sh.seed+3,lw:1.1});else po_fill(ctx,pa,lit(wood,0.18),1,sh.seed+3);
+  ctx.save();wc_tr(ctx,pa);ctx.clip();ctx.strokeStyle=rgba(wc_dim(wood,0.45),0.35);ctx.lineWidth=Math.max(0.6,k*0.008);for(let X=0.24;X<C.deep;X+=0.24){const a=P(s*(C.half+X),0.7,z1),b=P(s*(C.half+X),2.9,z1);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();}
+  for(const Y of [1.5,2.25]){const a=P(X0,Y,z1),b=P(X1,Y,z1);po_fill(ctx,[[a[0],a[1]],[b[0],b[1]],[b[0],b[1]+0.045*k],[a[0],a[1]+0.045*k]],lit(PO.woodDk),1,sh.seed+(Y*10|0));
+    ctx.save();ctx.globalAlpha=0.85*dp;po_goods(ctx,sh.kind,Math.min(a[0],b[0])+0.12*k,a[1],k*0.8,(C.deep-0.3)/0.8,R);ctx.restore();}ctx.restore();
+  // the shade inside, deepest at the back and under the ceiling
+  ctx.save();ctx.globalCompositeOperation="multiply";const op=[P(X0,0.7,z0),P(X0,0.7,z1),P(X0,2.9,z1),P(X0,2.9,z0)],ob=wc_bbox(op),g=ctx.createLinearGradient(0,ob.y0,0,ob.y1);
+  g.addColorStop(0,rgba([120,100,92],0.75));g.addColorStop(0.6,rgba([150,128,112],0.5));g.addColorStop(1,rgba([190,170,150],0.3));ctx.fillStyle=g;wc_tr(ctx,op);ctx.fill();ctx.restore();
+  // the near side wall, where a row starts
+  if(first){const nw=[P(X0,0,z0),P(X1+s*0.4,0,z0),P(X1+s*0.4,3.5,z0),P(X0,3.5,z0)];wc_wash(ctx,nw,lit([232,218,192]),{kind:"build",seed:sh.seed+12,lw:1.4});
+    ctx.save();wc_tr(ctx,nw);ctx.clip();for(const Y of [0.9,1.9,2.9])for(let k=0;k<3;k++)po_fill(ctx,[P(X0,Y+k*0.09,z0),P(X1+s*0.4,Y+k*0.09,z0),P(X1+s*0.4,Y+k*0.09+0.06,z0),P(X0,Y+k*0.09+0.06,z0)],PO.brick,0.55,sh.seed+20+k);
+      const a=P(X0,0.5,z0),b=P(X0,0,z0);const gg=ctx.createLinearGradient(0,a[1],0,b[1]);gg.addColorStop(0,"rgba(120,96,70,0)");gg.addColorStop(1,"rgba(120,96,70,0.25)");ctx.fillStyle=gg;ctx.fillRect(0,0,W,H);ctx.restore();}
+  // the platform's front, boards; the counter let down from it, on its brackets, with goods in the light
+  const pf=[P(X0,0,z0),P(X0,0,z1),P(X0,0.7,z1),P(X0,0.7,z0)];if(z0<16)wc_wash(ctx,pf,lit(wood,0.06),{kind:"build",seed:sh.seed+5,lw:1.1});else po_fill(ctx,pf,lit(wood,0.08),1,sh.seed+5);
+  ctx.save();wc_tr(ctx,pf);ctx.clip();ctx.strokeStyle=rgba(wc_dim(wood,0.4),0.35);ctx.lineWidth=1;for(const Y of [0.23,0.46]){const a=P(X0,Y,z0),b=P(X0,Y,z1);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();}ctx.restore();
+  const cX=X0-s*0.5,ct=[P(X0,0.68,z0+0.1),P(X0,0.68,z1-0.1),P(cX,0.68,z1-0.1),P(cX,0.68,z0+0.1)],ce=[P(cX,0.61,z0+0.1),P(cX,0.61,z1-0.1),P(cX,0.68,z1-0.1),P(cX,0.68,z0+0.1)];
+  po_fill(ctx,ct,lit(wc_lit(wood,0.22)),1,sh.seed+6);po_fill(ctx,ce,lit(wood,0.25),1,sh.seed+7);if(dp>0.5)po_line(ctx,ct,0.8,0.35*dp);
+  const n=Math.max(2,Math.round((z1-z0)/0.62));for(let i=0;i<n;i++){const z=lerp(z0+0.35,z1-0.35,(i+0.5)/n),g=P(X0-s*0.25,0.68,z),gk=po_ppm(C,z);ctx.save();ctx.globalAlpha=dp;po_goods(ctx,sh.kind,g[0]-0.16*gk,g[1],gk,0.32,R);ctx.restore();}
+  // the posts at each end and the lintel
+  for(const z of [z0,z1]){const a=P(X0,0,z),b=P(X0,3.1,z),q=po_ppm(C,z)*0.07;po_fill(ctx,[[a[0]-q,a[1]],[a[0]+q,a[1]],[b[0]+q,b[1]],[b[0]-q,b[1]]],lit(PO.woodDk),1,sh.seed+(z*10|0));}
+  po_fill(ctx,[P(X0,2.9,z0),P(X0,2.9,z1),P(X0,3.1,z1),P(X0,3.1,z0)],lit(PO.woodDk),1,sh.seed+8);
+  // the shutter propped out over the counter on its stick, its underside catching the light off the street; the eave over it
+  const sX=X0-s*0.7,su=[P(X0,3.08,z0+0.06),P(X0,3.08,z1-0.06),P(sX,3.36,z1-0.06),P(sX,3.36,z0+0.06)];po_fill(ctx,su,lit(wc_lit(wood,0.1)),1,sh.seed+9);if(dp>0.5)po_line(ctx,su,0.8,0.35*dp);
+  const ck=po_ppm(C,(z0+z1)/2),st0=P(cX+s*0.05,0.68,z1-0.3),st1=P(sX+s*0.04,3.34,z1-0.3);ctx.strokeStyle=rgba(lit(PO.woodDk),1);ctx.lineWidth=Math.max(1,ck*0.028);ctx.lineCap="round";ctx.beginPath();ctx.moveTo(st0[0],st0[1]);ctx.lineTo(st1[0],st1[1]);ctx.stroke();
+  const ev=[P(X0+s*0.1,3.46,z0),P(X0+s*0.1,3.46,z1),P(X0-s*0.25,3.46,z1),P(X0-s*0.25,3.46,z0)];po_fill(ctx,ev,lit([110,72,56]),1,sh.seed+10);
+}
+// the street at its far end: the city's houses round a small square (the 1520s), or the bedesten's face with its gate (the 1600s)
+function po_strEnd(ctx,era){const C=PO_STR,P=po_st,Z=C.z1;
+  if(era==="1600"){const Q=(u,Y,d)=>P(-22+u,Y,Z+(d||0));for(const u of [4.4,13.2,22,30.8,39.6])po_dome(ctx,(uu,Y,v)=>Q(uu,Y,v),u,5,11,3.6,0.9,{seed:930+u|0,k:0.72,left:false,seams:0.16});
+    po_wallEye(ctx,Q,44,11,{wins:[4.4,13.2,30.8,39.6],gate:22,seed:931,light:0.6});return;}
+  // houses: plaster below, wooden upper floors standing out over the street, tiled roofs; a cypress; the square's fountain
+  const R=wc_rng(941);[[-16,Z+6,9,7.5],[-7,Z+4,7,9],[0.5,Z+9,8,7],[8,Z+5,7,8.5],[15,Z+7,9,7]].forEach(([X,z,w,h],i)=>{const wall=PO_HOUSE[(i*3)%7],tile=PO_TILES[i%4];
+    po_q(ctx,[P(X,0,z),P(X+w,0,z),P(X+w,h*0.5,z),P(X,h*0.5,z)],wall,{seed:942+i,lw:1.2});po_q(ctx,[P(X-0.4,h*0.5,z-0.6),P(X+w+0.4,h*0.5,z-0.6),P(X+w+0.4,h,z-0.6),P(X-0.4,h,z-0.6)],mix(PO.woodLt,[200,180,150],0.5),{seed:950+i,lw:1.2});
+    for(let j=0;j<Math.round(w/1.6);j++){const wx=X+0.5+j*1.6;po_fill(ctx,[P(wx,h*0.62,z-0.6),P(wx+0.8,h*0.62,z-0.6),P(wx+0.8,h*0.86,z-0.6),P(wx,h*0.86,z-0.6)],[96,84,76],0.85,960+i*9+j);}
+    po_q(ctx,[P(X-0.9,h,z-1.0),P(X+w+0.9,h,z-1.0),P(X+w-1.5,h+2.4,z+2),P(X+1.5,h+2.4,z+2)],tile,{seed:970+i,lw:1.2});});
+  for(const [cx,cz,hh] of [[-3.6,Z+12,13],[4.6,Z+14,11]]){const cp=P(cx,0,cz),ck=po_ppm(C,cz),pts=[];for(let i=0;i<=12;i++){const u=i/12,ww=1.1*ck*Math.sin(Math.PI*Math.pow(u,0.7))*(1-0.15*u);pts.push([cp[0]-ww,cp[1]-u*hh*ck]);}
+    for(let i=12;i>=0;i--){const u=i/12,ww=1.1*ck*Math.sin(Math.PI*Math.pow(u,0.7))*(1-0.15*u);pts.push([cp[0]+ww,cp[1]-u*hh*ck]);}po_fill(ctx,pts,wc_haze(PO.cypress,0.6),1,975+cx|0);po_line(ctx,pts,0.7,0.3);}
+  const fp=P(0,0,Z+2),fk=po_ppm(C,Z+2);po_q(ctx,[[fp[0]-1.2*fk,fp[1]],[fp[0]+1.2*fk,fp[1]],[fp[0]+1.2*fk,fp[1]-0.9*fk],[fp[0]-1.2*fk,fp[1]-0.9*fk]],wc_lit(PO.stone,0.1),{kind:"thing",seed:976});
+  po_q(ctx,[[fp[0]-0.5*fk,fp[1]-0.9*fk],[fp[0]+0.5*fk,fp[1]-0.9*fk],[fp[0]+0.3*fk,fp[1]-2.0*fk],[fp[0]-0.3*fk,fp[1]-2.0*fk]],wc_lit(PO.stone,0.06),{kind:"thing",seed:977});}
+// the houses over the shops' roofs, either side: plaster and wood, their upper floors and roofs
+function po_strHouses(ctx){const C=PO_STR,P=po_st,R=wc_rng(981);for(const s of [-1,1])for(let z=58;z>24;z-=6+R()*4){const X=s*(C.half+C.deep+1.2),w=5+R()*3,h=6+R()*3,wall=wc_haze(PO_HOUSE[(z|0)%7],0.45),tile=wc_haze(PO_TILES[(z|0)%4],0.45);
+    const f=[P(X,3,z),P(X,3,z+w),P(X,h,z+w),P(X,h,z)];po_fill(ctx,f,wc_dim(wall,s>0?0.12:0),1,(z*13)|0);
+    for(let j=0;j<Math.floor(w/1.8);j++){const zz=z+0.6+j*1.8;po_fill(ctx,[P(X,h*0.6+1,zz),P(X,h*0.6+1,zz+0.8),P(X,h*0.6+2.1,zz+0.8),P(X,h*0.6+2.1,zz)],[96,84,76],0.8,(zz*31)|0);}
+    po_fill(ctx,[P(X-s*0.5,h,z-0.4),P(X-s*0.5,h,z+w+0.4),P(X+s*2.5,h+2.2,z+w+0.4),P(X+s*2.5,h+2.2,z-0.4)],tile,1,(z*17)|0);po_line(ctx,f,0.8,0.35);}}
+// a canvas stretched across the street from eave to eave, sagging a little; its shadow on the ground under it
+function po_strCanvas(ctx,z,col,a){const C=PO_STR,P=po_st,top=[],bot=[];for(let i=0;i<=16;i++){const X=lerp(-C.half+0.4,C.half-0.4,i/16),sag=0.32*Math.sin(Math.PI*i/16);top.push(P(X,3.3-sag,z+3.2));bot.push(P(X,3.3-sag,z));}
+  const pts=top.concat(bot.reverse());po_fill(ctx,pts,col,a==null?0.92:a,(z*7)|0);po_line(ctx,pts,0.8,0.3);
+  // its ropes to the eaves
+  for(const sd of [-1,1]){const p=P(sd*(C.half-0.4),3.3,z),q=P(sd*(C.half-0.05),3.4,z);ctx.strokeStyle=rgba([120,100,80],0.7);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.lineTo(q[0],q[1]);ctx.stroke();}}
+// the street: the earth, trodden; cobbles along the shops' feet; the shade of the right-hand roofs along that side
+function po_strGround(ctx){const C=PO_STR,P=po_st;wc_wash(ctx,[[-60,C.hz-4],[W+60,C.hz-4],[W+60,H+60],[-60,H+60]],[220,200,162],{kind:"ground",seed:991,line:false});
+  const R=wc_rng(993);for(let i=0;i<120;i++){const X=-C.half+R()*C.half*2,Z=2+Math.pow(R(),1.6)*50,[x,y]=P(X,0,Z),k=po_ppm(C,Z),r=(0.03+R()*0.05)*k;if(r<0.6)continue;
+    ctx.fillStyle=rgba(R()<0.5?[196,178,146]:[184,166,134],0.4);ctx.beginPath();ctx.ellipse(x,y,r*1.5,r*0.5,0,0,TAU);ctx.fill();}
+  ctx.save();ctx.filter="blur(12px)";wc_tr(ctx,[P(-1.3,0,2),P(1.1,0,2),P(0.5,0,C.z1),P(-0.5,0,C.z1)]);ctx.fillStyle=rgba([250,244,230],0.35);ctx.fill();ctx.filter="none";ctx.restore();
+  for(const s of [-1,1]){const pts=[P(s*C.half,0,2),P(s*C.half,0,C.z1),P(s*(C.half-0.7),0,C.z1),P(s*(C.half-0.7),0,2)];po_fill(ctx,pts,[200,184,156],0.7,995+s);
+    for(let z=2.2;z<30;z+=0.3)for(let X=C.half-0.12;X>C.half-0.7;X-=0.26){const [x,y]=P(s*X,0,z+(X*7%0.3)),k=po_ppm(C,z);if(k<14)continue;ctx.strokeStyle=rgba([150,136,112],0.3);ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(x,y,0.1*k,0.035*k,0,0,TAU);ctx.stroke();}}
+  po_fill(ctx,[P(C.half,0,2),P(C.half,0,C.z1),P(C.half-1.5,0,C.z1),P(C.half-1.1,0,2)],[110,100,110],0.22,997);}
+// the market's crowd: men in robes and turbans of many colours, women in cloaks and veils; made once from a few choices, so no two near
+// each other look alike
+(()=>{const R=wc_rng(1201),robes=[[70,106,104],[120,58,56],[52,84,120],[110,74,104],[150,96,70],[96,104,72],[126,110,90],[64,82,62],[176,140,96],[90,70,60],[150,80,62],[60,64,90]],
+    sk=[[226,186,150],[214,170,132],[200,156,118],[190,142,104],[222,180,144]],cloaks=[[60,70,98],[110,72,64],[80,60,70],[70,84,76],[96,80,64]];
+  for(let i=0;i<16;i++){const woman=i%5===3,c=robes[i%robes.length];
+    PEOPLE["po_c"+i]=woman?{name:"",role:"buyer",side:"",edge:GV_PAST,seed:1300+i,skin:sk[i%5],hair:{style:"none",c:[50,38,32]},hat:"po_veil",hatC:[250,248,242],
+        top:{kind:"po_ferace",c:cloaks[i%5]},bottom:{c:[60,60,70]},shoe:[200,150,70],build:{sh:64,hip:62,h:0.93+R()*0.04}}
+      :{name:"",role:"",side:"",edge:GV_PAST,seed:1300+i,skin:sk[i%5],hair:{style:"none",c:[40,32,28]},beard:R()<0.85?[[46,36,30],[90,80,72],[150,140,130],[60,46,36]][i%4]:null,
+        hat:"po_turban",hatC:R()<0.8?[246,243,234]:[232,214,170],capC:R()<0.4?[150,60,52]:null,tb:0.88+R()*0.16,
+        top:{kind:"po_robe",c,inner:[234,224,204],sash:robes[(i*5+3)%robes.length],hem:R()<0.3?-150:-40,apron:R()<0.2?[210,196,170]:null},bottom:{c:[76,70,72]},shoe:[[200,156,64],[150,70,52],[96,70,48]][i%3],
+        build:{sh:72+R()*6,hip:60+R()*6,h:0.96+R()*0.08}};}})();
+// the crowd in a street, still, far to near: walking to and fro, a few stopped at the stalls. n: how many; seen from behind or in front
+function po_strCrowd(ctx,n,seed,zmin){const C=PO_STR,R=wc_rng(seed),L=[];for(let i=0;i<n;i++){const Z=(zmin||10)+Math.pow(R(),0.8)*40,stall=R()<0.3,sd=R()<0.5?-1:1,
+    X=stall?sd*(C.half-0.85-R()*0.25):(R()-0.5)*2*(C.half-1.2);L.push({X,Z,id:"po_c"+(i%16),back:stall?true:R()<0.5,ph:R()*TAU,flip:R()<0.5,walk:!stall});}
+  L.sort((a,b)=>b.Z-a.Z).forEach(p=>{const a=po_at(C,p.X,p.Z);if(p.back)po_back(ctx,p.id,a.x,a.y,a.s,{ph:p.walk?p.ph:0});
+    else person(ctx,p.id,a.x,a.y,a.s,{pose:"stand",pose2:p.ph>Math.PI?"walkA":"walkB",mix:0.8,flip:p.flip,t:p.ph*3});});}
+// the street, painted once: sky, the ground, the end, the houses, the shops and the canvases far to near, the crowd
+function po_paintStreet(ctx,era){const C=PO_STR;wc_sky(ctx,C.hz-60,era==="1600"?1203:1205,{cx:500,cw:900,cy:40,ch:120,clouds:3});wc_prep();
+  po_strGround(ctx);po_strEnd(ctx,era);po_grain(ctx,0.4);
+  const items=po_strShops(era).map((sh,i,L)=>({z:sh.z0,f:()=>po_strShop(ctx,sh,!L.some(o=>o.s===sh.s&&o.z0<sh.z0))}));
+  (era==="1600"?[[14,[230,218,190]],[30,[218,196,158]]]:[[12,[218,200,164]],[26,[230,218,190]],[40,[206,182,146]]]).forEach(([z,c])=>items.push({z:z+1.6,f:()=>po_strCanvas(ctx,z,c)}));
+  items.sort((a,b)=>b.z-a.z).forEach(it=>it.f());po_grain(ctx,0.35);
+  po_strCrowd(ctx,era==="1600"?18:44,era==="1600"?1207:1209,era==="1600"?12:9.5);
+  // the shade of the canvases on the ground, soft
+  ctx.save();ctx.filter="blur(8px)";for(const z of era==="1600"?[14,30]:[12,26,40]){const pts=[po_st(-C.half+0.6,0,z+1.4),po_st(C.half-0.6,0,z+1.4),po_st(C.half-0.4,0,z+4.6),po_st(-C.half+0.4,0,z+4.6)];
+    ctx.fillStyle="rgba(110,90,70,0.16)";wc_tr(ctx,pts);ctx.fill();}ctx.filter="none";ctx.restore();}

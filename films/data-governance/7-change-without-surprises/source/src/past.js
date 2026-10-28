@@ -60,11 +60,11 @@ function cw_shade(ctx,pts,col,a,blur){if(a<=0.01)return;ctx.save();ctx.globalCom
 
 /* ---------- the town's crossroads ---------- */
 // seen from a first floor's height over the street, looking along it. The main street's road runs from x -3.8 to 3.8, its pavements
-// out to the shop fronts at ±6.4; the side street crosses it from z 19.6 to 25.4, a pavement either side. Each block along the street
+// out to the shop fronts at ±6.4; the side street crosses it from z 19.6 to 25.4, a pavement either side, and a zebra crossing beyond it. Each block along the street
 // is [z0, z1, height, colour, shops]; the far corner blocks face the side street too. The officer stands in the middle of the
 // crossroads; a street clock hangs on a bracket on the right, a pole with two signs stands on the right pavement, a newspaper kiosk on
 // the left, and lamps hang on wires over the street.
-const CW_ST={F:1400,hz:420,ch:3.2,cx:0,road:3.8,front:6.4,near:17.6,far:27.4,cross:[19.6,25.4],zebra:[15.3,17.3],stop:15.0,end:120,
+const CW_ST={F:1400,hz:420,ch:3.2,cx:0,road:3.8,front:6.4,near:17.6,far:27.4,cross:[19.6,25.4],zebra:[25.9,27.9],end:120,
   L:[[8.4,13.4,10.2,"ochre",1],[13.4,17.6,9.4,"cream",1],[27.4,35.5,11,"terra",1],[35.5,46,10,"sage",0],[46,58,12.2,"yellow",1],[58,73,10.6,"rose",0],[73,92,11.4,"cream",1],[92,120,10,"ochre",0]],
   R:[[8.4,12.1,10.8,"rose",1],[12.1,17.6,10,"yellow",1],[27.4,37,10.4,"cream",1],[37,49,12,"ochre",0],[49,62,10,"terra",1],[62,78,11,"sage",0],[78,96,10.2,"yellow",1],[96,120,11.6,"rose",0]],
   clock:[5.75,4.75,12.9],pole:[4.8,11.4],signs:[[4.38,2.18],[5.22,2.18]],sr:0.3,kiosk:[-6.05,-4.55,10.3,11.6,2.6],officer:[0.3,22.5],lamps:[33,64],pretzel:[-5.55,3.7,12.2]};
@@ -98,7 +98,7 @@ function cw_paintStreet(ctx,v){const C=CW_ST,Lt=CW_LIGHT[v],night=v==="night";
     const a=cw_pj(C,s*C.road,0,z),b=cw_pj(C,s*C.front,0,z);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();}ctx.restore();
   // the road's markings: the crossing's stripes, the stop line, the centre line's dashes
   for(let i=0;i<8;i++){const X=-C.road+0.25+i*0.95;cw_mark(ctx,cw_q(C,[[X,0,C.zebra[0]],[X+0.5,0,C.zebra[0]],[X+0.5,0,C.zebra[1]],[X,0,C.zebra[1]]]));}
-  for(let z=7;z<E;z+=6){if(z+3>C.zebra[0]&&z<C.far+1)continue;cw_mark(ctx,cw_q(C,[[-0.07,0,z],[0.07,0,z],[0.07,0,z+3],[-0.07,0,z+3]]));}
+  for(let z=7;z<E;z+=6){if(z+3>C.cross[0]-1&&z<C.zebra[1]+0.6)continue;cw_mark(ctx,cw_q(C,[[-0.07,0,z],[0.07,0,z],[0.07,0,z+3],[-0.07,0,z+3]]));}
   // a soft shadow from the right-hand fronts across the road, at dawn
   if(Lt.shade>0){ctx.save();ctx.globalCompositeOperation="multiply";ctx.globalAlpha=Lt.shade;wc_tr(ctx,cw_band(C,z0,E,()=>-C.road-0.2,()=>C.front));ctx.fillStyle=rgba([196,200,222],1);ctx.fill();ctx.restore();}
   // the blocks, far to near on each side; where a block is taller than the one nearer it, its end wall shows over that one's roof. The
@@ -381,11 +381,14 @@ Object.assign(PEOPLE,{
   cw_walkB:{name:"",role:"",side:"",edge:GV_PAST,seed:49,skin:[240,208,186],hair:{style:"bob",c:[150,96,60],streak:[190,140,96]},
     top:{kind:"cw_coat",c:[176,122,96],inner:[236,230,220]},bottom:{kind:"skirt",c:[90,80,90]},legs:[226,194,172],shoe:[70,40,38],build:{sh:64,hip:60,h:0.94}}
 });
+PEOPLE.cw_officerH=Object.assign({},PEOPLE.cw_officer,{hat:null,seed:50});
 // the officer's signals: a raised white glove, palm out, that stops the traffic; an arm out to the side that sends it on
 Object.assign(POSE,{cw_halt:{L:[0.12,-0.06],R:[2.75,3.05],hand:"open",feet:30,shift:4,tilt:-0.02,turn:0.1,gaze:[0.3,-0.2],look:0},
   cw_on:{L:[0.12,-0.06],R:[1.52,1.62],hand:"open",feet:30,shift:4,tilt:-0.02,turn:0.28,gaze:[0.7,0],look:0},
   // on a ladder: both hands up at the signs
-  cw_up:{L:[2.5,3.0],R:[2.6,2.9],hand:"open",feet:20,shift:0,tilt:0.0,turn:0.05,gaze:[0.2,-1],look:0}});
+  cw_up:{L:[2.5,3.0],R:[2.6,2.9],hand:"open",feet:20,shift:0,tilt:0.0,turn:0.05,gaze:[0.2,-1],look:0},
+  // setting something down on a counter, the right hand out and low
+  cw_set:{L:[0.14,-0.08],R:[0.5,0.9],feet:28,shift:4,tilt:0.04,turn:0.15,gaze:[0.5,1],look:1}});
 
 // their clothes: the engine's people stay as they are; these wrap the torso, the head and the arms for their own kinds only
 const _cwTorso=torso,_cwHead=head,_cwArm=arm;
@@ -445,3 +448,256 @@ arm=function(ctx,P,s,a,br,po){if(!P.cw_glove)return _cwArm(ctx,P,s,a,br,po);cons
     p0=[w[0]-d[0]*30,w[1]-d[1]*30],p1=[w[0]+d[0]*4,w[1]+d[1]*4];
   ctx.beginPath();ctx.moveTo(p0[0]+n[0]*14,p0[1]+n[1]*14);ctx.lineTo(p1[0]+n[0]*19,p1[1]+n[1]*19);ctx.lineTo(p1[0]-n[0]*19,p1[1]-n[1]*19);ctx.lineTo(p0[0]-n[0]*14,p0[1]-n[1]*14);ctx.closePath();
   litFill(ctx,P.cw_glove,Math.min(p0[0],p1[0])-20,Math.min(p0[1],p1[1])-20,Math.max(p0[0],p1[0])+20,Math.max(p0[1],p1[1])+20);seam(ctx,[200,200,196],0.4);};
+
+/* ---------- the country: a border post in the hills, and a narrow road at dusk ---------- */
+// The same depth as the crossroads (cw_pj), from a car's height or a little over it. A road through the country: the sky and its light,
+// hills with forest, fields, the road with its centre line and its verges, and what stands by it (trees, telegraph poles, a barn), far
+// to near. The border post: a customs hut, a barrier striped red and white, and beyond them a sign on an island in the road that says
+// keep right. The country road runs between fields, telegraph poles along its right side.
+const CW_BD={F:1400,hz:430,ch:2.4,cx:0.5,road:3.0,end:420,bar:19.5,hut:[4.6,7.6,15.8,19.8,2.7],sign:[0,1.45,24],sr:0.45,top:[150,190,232],hzc:[236,236,226]};
+const CW_CR={F:1400,hz:470,ch:1.9,cx:-1.4,road:2.8,end:520,top:[112,120,184],hzc:[255,178,124],poles:3.0+1.9};
+function cw_country(ctx,C,o){
+  wc_sky(ctx,C.hz+30,o.seed,{clouds:o.clouds==null?3:o.clouds,cx:o.cx||260,cw:1300,cy:50,ch:140});
+  ctx.save();ctx.globalCompositeOperation="multiply";const g=ctx.createLinearGradient(0,0,0,C.hz+40);g.addColorStop(0,rgba(C.top,1));g.addColorStop(0.7,rgba(mix(C.top,C.hzc,0.6),1));
+  g.addColorStop(1,rgba(C.hzc,1));ctx.fillStyle=g;ctx.fillRect(0,0,W,C.hz+40);ctx.restore();
+  // hills far off, the forest on them, the land nearer
+  wc_land(ctx,x=>C.hz-44-26*Math.sin(x/300+o.seed)-12*Math.sin(x/97+2),WCP.far,0.3,{line:false});
+  wc_forest(ctx,x=>C.hz-12-18*Math.sin(x/240+1.3+o.seed)-6*Math.sin(x/70),WCP.farForest,0.45,o.seed*5+3,{h:30,w:18});
+  wc_land(ctx,()=>C.hz+2,o.ground||WCP.mid,0.62,{line:false});
+  if(o.fields)o.fields(ctx);
+  // the road and its verges, its edges, its centre line
+  const z0=2.5,E=C.end,asp=o.asphalt||[184,180,174];
+  for(const s of [-1,1])wc_wash(ctx,cw_band(C,z0,E,()=>s*C.road,()=>s*(C.road+2.2)),o.verge||WCP.near,{kind:"ground",line:false,seed:701+s});
+  wc_wash(ctx,cw_band(C,z0,E,()=>-C.road,()=>C.road),asp,{kind:"ground",line:false,seed:703});
+  ctx.save();ctx.strokeStyle=rgba(wc_dim(asp,0.3),0.5);ctx.lineWidth=2;for(const s of [-1,1]){const L=cw_line(C,z0,E,()=>s*C.road);ctx.beginPath();L.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.stroke();}ctx.restore();
+  for(let z=4;z<E;z+=9){if(o.noLine&&o.noLine(z))continue;cw_mark(ctx,cw_q(C,[[-0.07,0,z],[0.07,0,z],[0.07,0,z+3],[-0.07,0,z+3]]));}
+  (o.items||[]).slice().sort((a,b)=>b[1]-a[1]).forEach(it=>cw_roadside(ctx,C,it));}
+// one thing by the road at (X, Z): a spruce or a birch h metres tall, a telegraph pole, or a painter of its own
+function cw_roadside(ctx,C,it){const [X,Z,kind,h]=it,[x,y]=cw_pj(C,X,0,Z),k=cw_ppm(C,Z),d=clamp(1.08-Z/260,0.35,1);
+  if(typeof kind==="function")return kind(ctx,C,X,Z);
+  if(kind==="spruce")wc_spruce(ctx,x,y,h*k,d,WCP.pine);
+  else if(kind==="birch")wc_birch(ctx,x,y,h*k,d,(hash(Math.round(X*7+Z))-0.5)*0.06);
+  else if(kind==="pole"){const wd=Math.max(1.5,0.2*k);wc_wash(ctx,wc_rect(x-wd/2,y-h*k,wd,h*k),[112,90,72],{depth:d,kind:"trunk",lw:1.1});
+    wc_wash(ctx,wc_rect(x-0.7*k,y-(h-0.35)*k,1.4*k,Math.max(1.5,0.1*k)),[112,90,72],{depth:d,kind:"trunk",lw:1});}}
+// the wires from pole to pole, sagging between them
+function cw_wires(ctx,C,X,zs,h){ctx.save();ctx.strokeStyle=rgba([70,66,70],0.55);ctx.lineWidth=1.2;for(const b of [-0.55,0.55]){ctx.beginPath();zs.forEach((za,i)=>{const zb=zs[i+1];if(zb==null)return;
+    for(let j=0;j<=12;j++){const u=j/12,p=cw_pj(C,X+b,h-0.45-0.55*4*u*(1-u),lerp(za,zb,u));if(i===0&&j===0)ctx.moveTo(p[0],p[1]);else ctx.lineTo(p[0],p[1]);}});ctx.stroke();}ctx.restore();}
+
+function cw_paintBorder(ctx){const C=CW_BD,R=wc_rng(733),items=[];
+  // spruces and birches along both sides, none in front of the hut
+  for(let i=0;i<64;i++){const s=R()<0.5?-1:1,Z=8+Math.pow(R(),1.6)*210,X=s*(C.road+3+R()*16),spr=R()<0.62;if(s>0&&Z>11&&Z<26&&X<13)continue;items.push([X,Z,spr?"spruce":"birch",spr?9+R()*8:7+R()*5]);}
+  items.push([0,C.sign[2],cw_borderSign],[C.hut[0],C.hut[2],cw_hut]);
+  cw_country(ctx,C,{seed:7,clouds:3,items,noLine:z=>z>C.bar-1&&z<C.sign[2]+2});}
+// the barrier, a layer over the place, so a car beyond it passes behind it
+function cw_paintBorderBar(ctx){cw_barrier(ctx,CW_BD);}
+// the customs hut, Falu red with white corners: its front towards us, its side with a window on the road, its roof
+function cw_hut(ctx,C){const [x0,x1,z0,z1,h]=C.hut,red=WCP.falu,trim=[246,242,232],xm=(x0+x1)/2,rh=h+1.15;
+  wc_contact(ctx,cw_pj(C,x0,0,z0)[0]-10,cw_pj(C,x1,0,z0)[0]+20,cw_pj(C,x0,0,z0)[1]+2,1,0.3);
+  for(const [nm,q] of cw_boxFaces(C,x0,x1,0,h,z0,z1))if(nm!=="top")wc_wash(ctx,q,nm==="side"?wc_dim(red,0.08):red,{kind:"build",seed:nm==="side"?741:742});
+  wc_wash(ctx,cw_q(C,[[x0,h,z0],[x1,h,z0],[xm,rh,z0]]),red,{kind:"build",seed:743});
+  wc_wash(ctx,cw_q(C,[[x0-0.3,h-0.08,z0-0.3],[x0-0.3,h-0.08,z1+0.3],[xm,rh+0.05,z1+0.3],[xm,rh+0.05,z0-0.3]]),[92,90,100],{kind:"build",seed:744});
+  for(const X of [x0,x1])wc_flat(ctx,cw_faceQ(C,z0-0.02,X===x0?X:X-0.16,X===x0?X+0.16:X,0,h),trim,1,"trim");
+  for(const s of [-1,1])wc_flat(ctx,cw_q(C,[[xm+s*(x1-x0)/2+s*0.3,h-0.12,z0-0.31],[xm,rh-0.06,z0-0.31],[xm,rh+0.1,z0-0.31],[xm+s*(x1-x0)/2+s*0.3,h+0.04,z0-0.31]]),trim,1,"barge");
+  wc_flat(ctx,cw_sideQ(C,x0-0.03,z0+1.0,z0+3.0,0.95,2.1),trim,1,"frame");wc_flat(ctx,cw_sideQ(C,x0-0.04,z0+1.12,z0+2.88,1.06,1.98),[150,170,196],1,"pane");
+  wc_flat(ctx,cw_faceQ(C,z0-0.03,x0+0.9,x0+1.9,0,2.1),trim,1,"frame");wc_flat(ctx,cw_faceQ(C,z0-0.04,x0+1.02,x0+1.78,0,2.0),[110,128,140],1,"door");}
+// the barrier across the road, striped red and white, its post and counterweight by the hut
+function cw_barrier(ctx,C){const Z=C.bar,xp=C.hut[0]-0.6,xe=-C.road-0.25,k=cw_ppm(C,Z);
+  wc_wash(ctx,cw_faceQ(C,Z,xp-0.12,xp+0.12,0,1.22),[70,72,80],{kind:"iron",lw:1.2,seed:751});
+  wc_wash(ctx,cw_faceQ(C,Z-0.05,xp+0.05,xp+0.75,0.84,1.18),[70,72,80],{kind:"iron",lw:1.2,seed:752});
+  wc_flat(ctx,cw_faceQ(C,Z,xe,xp,0.93,1.09),[246,244,238],1,"bar");const n=Math.round((xp-xe)/0.55);
+  for(let i=0;i<n;i+=2)wc_flat(ctx,cw_faceQ(C,Z-0.01,lerp(xp,xe,i/n),lerp(xp,xe,(i+1)/n),0.93,1.09),[200,58,50],1,"stripe");
+  ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.6);ctx.lineWidth=1.2;wc_tr(ctx,cw_faceQ(C,Z,xe,xp,0.93,1.09));ctx.stroke();ctx.restore();
+  // its rest on the far side, a short post
+  wc_wash(ctx,cw_faceQ(C,Z+0.05,xe-0.05,xe+0.12,0,0.93),[70,72,80],{kind:"iron",lw:1,seed:753});}
+// a low island in the road beyond the barrier, its kerb painted white, and on it the sign: keep right
+function cw_borderSign(ctx,C){const [X,Y,Z]=C.sign,k=cw_ppm(C,Z),[x,y]=cw_pj(C,X,Y,Z),[,yb]=cw_pj(C,X,0.15,Z),r=C.sr*k;
+  wc_wash(ctx,cw_q(C,[[-0.55,0.15,Z-0.9],[0.55,0.15,Z-0.9],[0.55,0.15,Z+1.6],[-0.55,0.15,Z+1.6]]),[226,222,212],{kind:"build",seed:761});
+  wc_flat(ctx,cw_faceQ(C,Z-0.9,-0.55,0.55,0,0.15),[246,244,236],1,"kerb");
+  wc_wash(ctx,wc_rect(x-0.035*k,y,0.07*k,yb-y),CW.iron,{kind:"iron",lw:1,seed:762});cw_sign(ctx,x,y,r,1);}
+
+function cw_paintRoad66(ctx){const C=CW_CR,R=wc_rng(771),items=[];
+  // birches and a few spruces along the left; a red barn in the fields on the right. The telegraph poles along the right and the
+  // centre line pass the car, so they're drawn each frame (cw_roadMotion)
+  for(let i=0;i<34;i++){const Z=9+Math.pow(R(),1.5)*240,X=-(C.road+2.8+R()*9),b=R()<0.7;items.push([X,Z,b?"birch":"spruce",b?7+R()*5:9+R()*7]);}
+  items.push([30,95,cw_barn]);
+  cw_country(ctx,C,{seed:11,clouds:2,cx:420,ground:[204,196,138],verge:[156,172,112],items,noLine:()=>true,
+    fields:c=>wc_fieldStrips(c,()=>C.hz,4,620,8,[[222,204,136],[176,190,118],[210,188,124],[192,198,128]],0.68,13)});}
+// what passes a car on the road, d metres along it: the centre line's dashes, and the telegraph poles with their wires
+function cw_roadMotion(ctx,C,d){const off=((d%9)+9)%9,po=((d%40)+40)%40;ctx.save();ctx.fillStyle="rgba(244,242,234,0.85)";
+  for(let z=4-off;z<C.end;z+=9){if(z+3<2.6)continue;const za=Math.max(2.6,z);cw_path(ctx,cw_q(C,[[-0.07,0,za],[0.07,0,za],[0.07,0,z+3],[-0.07,0,z+3]]));ctx.fill();}ctx.restore();
+  const zs=[];for(let z=12-po-40;z<440;z+=40)zs.push(z);ctx.save();ctx.strokeStyle=rgba([70,66,70],0.55);ctx.lineWidth=1.2;
+  for(const b of [-0.55,0.55]){ctx.beginPath();let first=true;zs.forEach((za,i)=>{const zb=zs[i+1];if(zb==null)return;for(let j=0;j<=12;j++){const z=lerp(za,zb,j/12);if(z<1.2)continue;
+    const p=cw_pj(C,C.poles+b,7.2-0.45-0.55*4*(j/12)*(1-j/12),z);if(first){ctx.moveTo(p[0],p[1]);first=false;}else ctx.lineTo(p[0],p[1]);}});ctx.stroke();}ctx.restore();
+  zs.slice().reverse().forEach(z=>{if(z<2)return;const k=cw_ppm(C,z),[x,y]=cw_pj(C,C.poles,0,z),wd=Math.max(1.6,0.22*k),h=7.2*k,col=[100,80,64];
+    ctx.save();ctx.fillStyle=rgba(col,1);ctx.fillRect(x-wd/2,y-h,wd,h);ctx.fillRect(x-0.7*k,y-6.85*k,1.4*k,Math.max(1.5,0.1*k));ctx.strokeStyle=rgba(WC_PENCIL,0.5);ctx.lineWidth=1;ctx.strokeRect(x-wd/2,y-h,wd,h);ctx.restore();});}
+// a barn in the fields, Falu red, its big doors with a white cross on them
+function cw_barn(ctx,C,X,Z){const x0=X,x1=X+12,z0=Z,z1=Z+8,h=4.6,rh=8.4,xm=(x0+x1)/2,red=WCP.falu,trim=[246,242,232],k=cw_ppm(C,Z);
+  for(const [nm,q] of cw_boxFaces(C,x0,x1,0,h,z0,z1))if(nm!=="top")wc_wash(ctx,q,nm==="side"?wc_dim(red,0.12):red,{kind:"build",seed:781});
+  wc_wash(ctx,cw_q(C,[[x0,h,z0],[x1,h,z0],[xm,rh,z0]]),red,{kind:"build",seed:782});
+  wc_wash(ctx,cw_q(C,[[x0-0.4,h-0.1,z0-0.4],[x0-0.4,h-0.1,z1+0.4],[xm,rh+0.1,z1+0.4],[xm,rh+0.1,z0-0.4]]),[90,86,92],{kind:"build",seed:783});
+  const d=cw_faceQ(C,z0-0.05,xm-1.8,xm+1.8,0,3.4);wc_flat(ctx,d,[132,58,48],1,"door");
+  ctx.save();ctx.strokeStyle=rgba(trim,0.9);ctx.lineWidth=Math.max(1.2,0.12*k);ctx.beginPath();ctx.moveTo(d[0][0],d[0][1]);ctx.lineTo(d[2][0],d[2][1]);ctx.moveTo(d[1][0],d[1][1]);ctx.lineTo(d[3][0],d[3][1]);
+  wc_tr(ctx,d);ctx.stroke();ctx.restore();}
+// the light at dusk, laid over the road and everything on it: warm and dimmer, the sun's glow low on the right; later, a deeper blue
+const CW_DUSK={mul:[222,200,206],sun:[1400,454]},CW_LATE={mul:[150,142,172]};
+function cw_dusk(ctx,late){cw_grade(ctx,late?CW_LATE.mul:CW_DUSK.mul);const [sx,sy]=CW_DUSK.sun;cw_light(ctx,sx,sy,520,[255,176,110],late?0.12:0.3);if(!late)cw_light(ctx,sx,sy,160,[255,214,160],0.5);cw_lights();}
+
+/* ---------- the change commission's office, 1963 to 1966 ---------- */
+// A pale green office of the 1960s: a window with its blinds half down, a wall clock, a filing cabinet, and a plan of a crossroads
+// pinned to the wall, its traffic drawn on the right. The long table, with its papers, a telephone and an ashtray, is the front layer
+const CW_OF={wall:[202,214,188],floor:[176,150,118],fy:668,win:[110,130,330,330],plan:[1130,140,620,420],clock:[905,196,46],cab:[1786,330,124,345],top:704};
+function cw_paintOffice63(ctx){const O=CW_OF;gv_wallFloor(ctx,O.wall,O.fy,{floor:O.floor,seed:73});cw_blinds(ctx,...O.win,0.55,O.wall);
+  cw_wallClock(ctx,...O.clock,10,10);cw_plan(ctx,...O.plan);
+  const [fx,fy,fw,fh]=O.cab;wc_contact(ctx,fx-10,fx+fw+10,fy+fh,1,0.3);wc_wash(ctx,wc_rect(fx,fy,fw,fh),[150,162,152],{kind:"build",seed:793});
+  for(let i=0;i<4;i++){const y=fy+12+i*(fh-24)/4;wc_flat(ctx,wc_rect(fx+10,y,fw-20,(fh-24)/4-10),[168,178,168],1,"drawer");wc_flat(ctx,wc_rect(fx+fw/2-18,y+16,36,8),[104,108,106],1,"handle");}}
+// a window with venetian blinds let down to p of its height, its slats and cords
+function cw_blinds(ctx,x,y,w,h,p,wall){ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();const hz=y+h*0.7;wc_sky(ctx,hz,9,{clouds:1,cx:x+20,cw:w-80,cy:y+30,ch:h*0.2});
+  wc_land(ctx,()=>hz,WCP.far,0.4,{line:false});wc_roundTree(ctx,x+w*0.3,hz+30,h*0.4,0.5);ctx.restore();
+  const hb=h*p;wc_flat(ctx,wc_rect(x,y,w,hb),[236,230,214],1,"blind");ctx.save();ctx.strokeStyle=rgba([160,150,130],0.55);ctx.lineWidth=2;for(let yy=y+14;yy<y+hb;yy+=14){ctx.beginPath();ctx.moveTo(x,yy);ctx.lineTo(x+w,yy);ctx.stroke();}
+  ctx.strokeStyle=rgba([120,110,96],0.6);ctx.lineWidth=1.4;for(const cx of [x+w*0.25,x+w*0.75]){ctx.beginPath();ctx.moveTo(cx,y);ctx.lineTo(cx,y+hb);ctx.stroke();}ctx.restore();
+  wc_flat(ctx,wc_rect(x,y+hb-8,w,10),[200,190,170],1,"rail");
+  const f=16;for(const r of [wc_rect(x-f,y-f,w+2*f,f),wc_rect(x-f,y-f,f,h+2*f),wc_rect(x+w,y-f,f,h+2*f),wc_rect(x+w/2-6,y+hb,12,h-hb)])wc_wash(ctx,r,WC_PAPER,{kind:"trim",lw:1.4});
+  wc_wash(ctx,wc_rect(x-30,y+h,w+60,22),wc_dim(wall,0.1),{kind:"trim",lw:1.5});}
+// a round wall clock, its hands at h:m
+function cw_wallClock(ctx,cx,cy,r,hh,mm){wc_wash(ctx,wc_ell(cx,cy,r+7,r+7,30),[88,82,78],{kind:"clock",lw:1.2,seed:791});wc_flat(ctx,wc_ell(cx,cy,r,r,30),[250,246,232],1,"face");
+  ctx.save();ctx.strokeStyle=rgba(WC_DARK,0.85);ctx.lineCap="round";for(let i=0;i<12;i++){const a=i/12*TAU;ctx.lineWidth=i%3?1.5:2.6;ctx.beginPath();ctx.moveTo(cx+Math.sin(a)*r*0.84,cy-Math.cos(a)*r*0.84);ctx.lineTo(cx+Math.sin(a)*r*(i%3?0.74:0.68),cy-Math.cos(a)*r*(i%3?0.74:0.68));ctx.stroke();}
+  const ha=(hh+mm/60)/12*TAU,ma=mm/60*TAU;ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.sin(ha)*r*0.48,cy-Math.cos(ha)*r*0.48);ctx.stroke();
+  ctx.lineWidth=2.6;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.sin(ma)*r*0.72,cy-Math.cos(ma)*r*0.72);ctx.stroke();ctx.restore();}
+// the commission's plan of a crossroads: two roads crossing, the corner blocks, each road's dashed centre line, and the traffic
+// drawn on the right in blue arrows, with pencil notes too small to read; pinned at its corners
+function cw_plan(ctx,x,y,w,h){wc_contact(ctx,x,x+w,y+h+8,1,0.18);wc_wash(ctx,wc_rect(x,y,w,h),[248,242,226],{kind:"paper",lw:1.4,seed:797});
+  const cx=x+w*0.5,cy=y+h*0.52,rw=58,grey=[196,194,190],blue=[52,96,170];
+  wc_flat(ctx,wc_rect(x+24,cy-rw,w-48,rw*2),grey,1,"road");wc_flat(ctx,wc_rect(cx-rw,y+24,rw*2,h-48),grey,1,"road");
+  for(const [sx,sy] of [[-1,-1],[1,-1],[-1,1],[1,1]]){const bx=sx<0?x+40:cx+rw+16,by=sy<0?y+40:cy+rw+16,bw=sx<0?cx-rw-16-(x+40):x+w-40-(cx+rw+16),bh=sy<0?cy-rw-16-(y+40):y+h-40-(cy+rw+16);
+    wc_flat(ctx,wc_rect(bx,by,bw,bh),[226,214,190],1,"block");}
+  ctx.save();ctx.strokeStyle=rgba([250,250,246],0.95);ctx.lineWidth=3;ctx.setLineDash([12,10]);ctx.beginPath();ctx.moveTo(x+24,cy);ctx.lineTo(cx-rw,cy);ctx.moveTo(cx+rw,cy);ctx.lineTo(x+w-24,cy);
+  ctx.moveTo(cx,y+24);ctx.lineTo(cx,cy-rw);ctx.moveTo(cx,cy+rw);ctx.lineTo(cx,y+h-24);ctx.stroke();ctx.restore();
+  // the arrows: up the right half of the road below, down the left half above, right along the lower half on the left, left along the
+  // upper half on the right
+  const arrow=(ax,ay,dx,dy)=>{ctx.save();ctx.translate(ax,ay);ctx.rotate(Math.atan2(dy,dx));ctx.fillStyle=rgba(blue,0.92);ctx.beginPath();ctx.moveTo(-34,-6);ctx.lineTo(8,-6);ctx.lineTo(8,-15);ctx.lineTo(30,0);ctx.lineTo(8,15);ctx.lineTo(8,6);ctx.lineTo(-34,6);ctx.closePath();ctx.fill();ctx.restore();};
+  arrow(cx+rw/2,cy+rw+70,0,-1);arrow(cx-rw/2,cy-rw-70,0,1);arrow(cx-rw-90,cy+rw/2,1,0);arrow(cx+rw+90,cy-rw/2,-1,0);
+  // a pencil note in a corner block, too small to read
+  ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.5);ctx.lineWidth=1.6;for(let i=0;i<4;i++){const yy=y+h-100+i*16;ctx.beginPath();ctx.moveTo(x+60,yy);ctx.lineTo(x+60+120-i*18,yy);ctx.stroke();}ctx.restore();
+  for(const [px,py] of [[x+16,y+16],[x+w-16,y+16],[x+16,y+h-16],[x+w-16,y+h-16]])gv_pin(ctx,px,py,[196,64,56],0.8);}
+// the table, the front layer: its top, its edge and its legs; papers, a black telephone, an ashtray, pencils
+function cw_paintOffice63T(ctx){const O=CW_OF,y=O.top,wood=[146,110,80];
+  wc_contact(ctx,60,1860,1000,1,0.3);
+  for(const lx of [130,1760])wc_part(ctx,wc_rect(lx,y+30,40,H-y),wc_dim(wood,0.3),1);
+  wc_part(ctx,[[90,y-30],[1830,y-30],[1870,y+8],[50,y+8]],wc_lit(wood,0.1),1,{seed:795});wc_part(ctx,wc_rect(50,y+8,1820,30),wc_dim(wood,0.12),1,{seed:796});
+  const R=wc_rng(799);for(const [px,w,rot] of [[300,190,-0.05],[560,170,0.04],[1180,200,-0.03],[1420,180,0.06]]){ctx.save();ctx.translate(px,y-12);ctx.rotate(rot);ctx.transform(1,0,0,0.3,0,0);
+    wc_flat(ctx,wc_rect(-w/2,-w*0.7,w,w*1.4),[250,248,240],1,"sheet");ctx.restore();}
+  // the telephone, black, with its handset on the cradle
+  wc_part(ctx,[[1610,y-6],[1730,y-6],[1716,y-60],[1624,y-60]],[40,38,44],1,{kind:"thing",lw:1.3,seed:801});wc_part(ctx,[[1596,y-58],[1744,y-58],[1736,y-82],[1604,y-82]],[30,28,34],1,{kind:"thing",lw:1.2,seed:802});
+  wc_flat(ctx,wc_ell(1670,y-30,22,14,20),[230,226,214],1,"dial");
+  // the ashtray, glass
+  wc_part(ctx,wc_ell(820,y-10,46,14,24),[206,214,220],1,{kind:"thing",lw:1.2,seed:803});wc_flat(ctx,wc_ell(820,y-12,30,8,20),[170,176,180],1,"ash");}
+
+/* ---------- the sign pole at night, close ---------- */
+// The pole on the pavement at the crossroads, close, in front of a shop: the crossbar, its two signs (drawn each frame, with their
+// covers), a ladder against it, and the road worker on it (cw_back). The shop's front behind: plaster, a dark window with its blind
+// down, a fascia, the pavement
+const CW_PO={x:1100,bar:322,top:262,signs:[[958,486],[1242,486]],r:104,ground:1010};
+function cw_paintPole(ctx){const O=CW_PO;ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);
+  wc_wash(ctx,wc_rect(-40,-40,W+80,O.ground+40),[214,192,154],{kind:"plaster",line:false,seed:811});
+  for(const wx of [180,560,1380,1760])wc_flat(ctx,wc_rect(wx-110,40,220,250),CW.frame,1,"frame"),wc_flat(ctx,wc_rect(wx-96,54,192,222),[108,122,150],1,"pane");
+  wc_flat(ctx,wc_rect(-40,520,W+80,70),[132,138,146],1,"fascia");wc_flat(ctx,wc_rect(-40,590,W+80,20),wc_dim([214,192,154],0.2),1,"lintel");
+  wc_flat(ctx,wc_rect(80,620,1000,360),[86,96,120],1,"shop");wc_flat(ctx,wc_rect(96,636,968,250),CW.blind,1,"blind");wc_flat(ctx,wc_rect(1180,620,220,390),CW.door,1,"door");
+  wc_flat(ctx,wc_rect(1460,620,400,360),[86,96,120],1,"shop");wc_flat(ctx,wc_rect(1476,636,368,250),CW.blind,1,"blind");
+  wc_wash(ctx,wc_rect(-40,O.ground,W+80,H-O.ground+40),CW.walk,{kind:"ground",line:false,seed:813});
+  // the pole and its crossbar
+  wc_wash(ctx,wc_rect(O.x-14,O.top,28,H-O.top+20),CW.iron,{kind:"iron",lw:1.4,seed:815});wc_flat(ctx,wc_ell(O.x,O.top,16,8,16),wc_dim(CW.iron,0.2),1,"cap");
+  wc_wash(ctx,wc_rect(O.signs[0][0]-30,O.bar-11,O.signs[1][0]-O.signs[0][0]+60,22),CW.iron,{kind:"iron",lw:1.3,seed:817});
+  for(const [sx] of O.signs){wc_wash(ctx,wc_rect(sx-4,O.bar,8,O.signs[0][1]-O.r-O.bar+6),CW.iron,{kind:"iron",lw:1,seed:819});}}
+// the ladder against the crossbar
+function cw_ladder(ctx,x0,x1,yTop,yBot){const rails=[[x0,yBot],[x0+24,yTop],[x1-24,yTop],[x1,yBot]];ctx.save();ctx.lineCap="round";
+  for(const [a,b] of [[rails[0],rails[1]],[rails[3],rails[2]]]){ctx.strokeStyle=rgba([120,92,64],1);ctx.lineWidth=14;ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();
+    ctx.strokeStyle=rgba([170,136,96],0.8);ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(a[0]-3,a[1]);ctx.lineTo(b[0]-3,b[1]);ctx.stroke();}
+  ctx.strokeStyle=rgba([140,108,76],1);ctx.lineWidth=9;for(let y=yBot-60;y>yTop+20;y-=84){const u=(yBot-y)/(yBot-yTop);ctx.beginPath();ctx.moveTo(lerp(x0,x0+24,u)+6,y);ctx.lineTo(lerp(x1,x1-24,u)-6,y);ctx.stroke();}ctx.restore();}
+// a person seen from behind (the series' people face us): the road worker on his ladder, his left foot a rung higher (o.step), his arms
+// up at the signs (o.a, as a pose's arms), leaning across (o.lean, in his own units); his shirt, the back of his overalls and their
+// crossed straps, his cap from behind
+function cw_back(ctx,id,x,y,s,o){o=o||{};const P_=PEOPLE[id],k=s*P_.build.h,sw=P_.build.sh,hw=P_.build.hip,T_=P_.top,c=T_.c,bib=T_.cw_bib||c,ln=o.lean||0,st=o.step==null?84:o.step;
+  outlined(ctx,cx=>{for(const [sd,up] of [[-1,st],[1,0]]){limb(cx,[[sd*22,-282],[sd*25,-150-up*0.6],[sd*22,-26-up]],46,36,P_.bottom.c,[-80,-300,80,0]);ell(cx,sd*22,-12-up,22,11);litFill(cx,P_.shoe,-40,-24-up,40,-up);}
+    cx.save();cx.translate(ln,0);const a=o.a||[[2.5,3.0],[2.6,2.9]];arm(cx,P_,-1,a[0],0,{});arm(cx,P_,1,a[1],0,{hand:"open"});
+    cx.beginPath();cx.moveTo(-16,-448);cx.bezierCurveTo(-30,-444,-sw+26,-438,-sw+12,-428);cx.quadraticCurveTo(-sw-2,-420,-sw-2,-398);cx.bezierCurveTo(-sw-2,-364,-hw-2,-352,-hw+2,-322);
+    cx.lineTo(-hw-2,-276);cx.lineTo(hw+2,-276);cx.lineTo(hw-2,-322);cx.bezierCurveTo(hw+2,-352,sw+2,-364,sw+2,-398);cx.quadraticCurveTo(sw+2,-420,sw-12,-428);cx.bezierCurveTo(sw-26,-438,30,-444,16,-448);cx.closePath();
+    litFill(cx,darken(c,0.04),-sw,-448,sw,-276);seam(cx,c,0.5);
+    cx.beginPath();cx.moveTo(-hw-4,-334);cx.lineTo(hw+4,-334);cx.lineTo(hw+8,-262);cx.lineTo(-hw-8,-262);cx.closePath();litFill(cx,bib,-hw,-334,hw,-262);seam(cx,bib,0.45);
+    cx.strokeStyle=rgba(bib,1);cx.lineWidth=12;cx.lineCap="butt";for(const sd of [-1,1]){cx.beginPath();cx.moveTo(sd*16,-336);cx.lineTo(-sd*(sw-28),-442);cx.stroke();}
+    cx.strokeStyle=rgba(darken(bib,0.35),0.5);cx.lineWidth=1.6;for(const sd of [-1,1]){cx.beginPath();cx.moveTo(sd*16+6,-336);cx.lineTo(-sd*(sw-28)+6,-442);cx.stroke();}
+    limb(cx,[[0,-476],[0,-446]],28,28,darken(P_.skin,0.2),[-20,-476,20,-446]);
+    cx.save();cx.translate(0,-502);for(const sd of [-1,1]){ell(cx,sd*41,2,7,11);litFill(cx,darken(P_.skin,0.1),-50,-12,50,12);}
+    headPath(cx);litFill(cx,P_.hair.c,-42,-56,42,51);const hc=P_.hatC||[96,90,84];
+    cx.beginPath();cx.moveTo(-47,-8);cx.bezierCurveTo(-54,-48,-30,-64,0,-64);cx.bezierCurveTo(30,-64,54,-48,47,-8);cx.quadraticCurveTo(0,2,-47,-8);cx.closePath();litFill(cx,hc,-54,-64,54,2);seam(cx,hc,0.45);
+    cx.restore();cx.restore();},x,y,k,P_.edge,[-320,-720,320,10]);}
+
+/* ---------- a post office counter, a grocer's counter, a police desk ---------- */
+// The post office: the wall of pigeonholes behind the counter, letters in some of them, a clock; the counter is the front layer
+const CW_PS={fy:716,cab:[250,100,1420,520],top:700,clock:[1810,180,52]};
+function cw_paintPost(ctx){const O=CW_PS;gv_wallFloor(ctx,[214,206,182],O.fy,{floor:[160,128,98],seed:81});
+  const [x,y,w,h]=O.cab,nc=17,nr=7,cw_=w/nc,ch=h/nr,R=wc_rng(821);wc_wash(ctx,wc_rect(x-16,y-16,w+32,h+32),[170,126,84],{kind:"build",seed:822});
+  for(let i=0;i<nc;i++)for(let j=0;j<nr;j++){const cx=x+i*cw_+5,cy=y+j*ch+5;wc_flat(ctx,wc_rect(cx,cy,cw_-10,ch-10),[98,74,56],1,"hole");
+    if(R()<0.55){const n=1+Math.floor(R()*3);for(let m=0;m<n;m++){const lh=26+R()*16;wc_flat(ctx,wc_rect(cx+5+m*7,cy+ch-12-lh,cw_-26,lh),[244,238,222],1,"letter");}}}
+  cw_wallClock(ctx,...O.clock,4,40);}
+function cw_paintPostT(ctx){const y=CW_PS.top,wood=[150,108,72];wc_part(ctx,wc_rect(-20,y+40,W+40,H-y),wc_dim(wood,0.08),1,{seed:825});
+  for(let x=60;x<W;x+=300)wc_part(ctx,wc_rect(x,y+80,240,H-y-60),wc_dim(wood,0.16),1,{seed:826+x});
+  wc_part(ctx,[[-20,y-10],[W+20,y-10],[W+20,y+40],[-20,y+40]],wc_lit(wood,0.16),1,{seed:827});}
+// the booklet's cover, flat in the frame: white, a large H, a thin band; at (x, y) its middle, w wide, turned rot
+function cw_booklet(ctx,x,y,w,rot,a){if(a!=null&&a<=0.01)return;const h=w*1.38;ctx.save();ctx.translate(x,y);if(rot)ctx.rotate(rot);if(a!=null)ctx.globalAlpha*=a;
+  ctx.fillStyle="rgba(60,50,40,0.18)";ctx.fillRect(-w/2+4,-h/2+5,w,h);ctx.fillStyle=rgba([252,250,244],1);ctx.fillRect(-w/2,-h/2,w,h);ctx.strokeStyle=rgba(WC_PENCIL,0.55);ctx.lineWidth=1.4;ctx.strokeRect(-w/2,-h/2,w,h);
+  ctx.fillStyle=rgba([214,170,60],1);ctx.fillRect(-w/2,h/2-h*0.12,w,h*0.06);ctx.restore();cw_H(ctx,x+Math.sin(rot||0)*h*0.06,y-Math.cos(rot||0)*h*0.06,h*0.5,CW.navy,-(rot||0));}
+// a stack of booklets lying on the counter, seen from the front: their edges, and the top one's cover tilted towards us
+function cw_bookletStack(ctx,x,y,w,n){for(let i=0;i<n;i++){ctx.fillStyle=rgba(i%2?[240,236,226]:[250,248,240],1);ctx.fillRect(x-w/2,y-(i+1)*6,w,6);}ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.5);ctx.lineWidth=1.2;ctx.strokeRect(x-w/2,y-n*6,w,n*6);ctx.restore();
+  ctx.save();ctx.translate(x,y-n*6);ctx.transform(1,0,0,0.32,0,0);ctx.fillStyle=rgba([252,250,244],1);ctx.fillRect(-w/2,-w*1.38,w,w*1.38);cw_H(ctx,0,-w*0.72,w*0.62,CW.navy,0);ctx.restore();}
+// a postman's sack on the counter, open at the top: its back, then (o.front) its front over what's gone in
+function cw_sack(ctx,x,y,w,h,front){const col=[120,104,80];if(!front){wc_flat(ctx,[[x-w*0.46,y-h],[x+w*0.46,y-h],[x+w*0.4,y-h-24],[x-w*0.4,y-h-24]],wc_dim(col,0.3),1,"sackIn");return;}
+  ctx.save();ctx.beginPath();ctx.moveTo(x-w/2,y);ctx.quadraticCurveTo(x-w*0.56,y-h*0.5,x-w*0.46,y-h);ctx.quadraticCurveTo(x,y-h+14,x+w*0.46,y-h);ctx.quadraticCurveTo(x+w*0.56,y-h*0.5,x+w/2,y);ctx.closePath();
+  litFill(ctx,col,x-w/2,y-h,x+w/2,y);seam(ctx,col,0.5);ctx.restore();ctx.save();ctx.strokeStyle=rgba(wc_dim(col,0.4),0.6);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x-w*0.44,y-h+22);ctx.quadraticCurveTo(x,y-h+34,x+w*0.44,y-h+22);ctx.stroke();ctx.restore();}
+
+// The grocer's: shelves of tins and packets behind the counter; the counter, close, is the front layer, with a wire crate of milk in its
+// paper packs, the shape Swedish milk came in then, each with a large H
+const CW_GR={fy:650,top:742};
+function cw_paintGrocer(ctx){gv_wallFloor(ctx,[228,218,192],CW_GR.fy,{floor:[150,120,96],seed:83});const R=wc_rng(831);
+  for(let r=0;r<4;r++){const y=130+r*124;wc_wash(ctx,wc_rect(80,y+96,1760,16),[160,118,80],{kind:"build",seed:832+r});
+    for(let x=100;x<1800;){const tin=R()<0.6,w=tin?52+R()*14:70+R()*40,h=tin?60+R()*20:80+R()*14,col=[[196,72,60],[70,110,170],[226,190,90],[110,150,96],[230,226,214],[180,120,70]][Math.floor(R()*6)];
+      if(tin){wc_flat(ctx,wc_rect(x,y+96-h,w,h),col,1,"tin");wc_flat(ctx,wc_rect(x,y+96-h*0.66,w,h*0.32),wc_lit(col,0.5),1,"label");wc_flat(ctx,wc_ell(x+w/2,y+96-h,w/2,6,14),wc_lit([190,190,196],0.2),1,"lid");}
+      else{wc_flat(ctx,wc_rect(x,y+96-h,w,h),col,1,"pack");wc_flat(ctx,wc_rect(x+8,y+96-h+14,w-16,h*0.3),wc_lit(col,0.55),1,"label");}x+=w+6+R()*10;}}}
+function cw_paintGrocerT(ctx){const y=CW_GR.top,wood=[164,120,82];wc_part(ctx,wc_rect(-20,y+40,W+40,H-y),wc_dim(wood,0.1),1,{seed:841});
+  wc_part(ctx,[[-20,y-24],[W+20,y-24],[W+20,y+40],[-20,y+40]],wc_lit(wood,0.18),1,{seed:842});
+  // the wire crate, the milk in it, and a scale
+  const cx=520,cy=y+10;for(let i=0;i<4;i++)cw_tetra(ctx,cx-150+i*100,cy-40,120);
+  ctx.save();ctx.strokeStyle=rgba([90,92,100],0.85);ctx.lineWidth=4;ctx.strokeRect(cx-210,cy-110,400,110);for(let x=cx-210;x<=cx+190;x+=40){ctx.beginPath();ctx.moveTo(x,cy-110);ctx.lineTo(x,cy);ctx.stroke();}
+  ctx.beginPath();ctx.moveTo(cx-210,cy-55);ctx.lineTo(cx+190,cy-55);ctx.stroke();ctx.restore();
+  wc_part(ctx,[[1440,cy],[1700,cy],[1680,cy-40],[1460,cy-40]],[200,204,210],1,{kind:"thing",lw:1.3,seed:843});wc_part(ctx,wc_rect(1555,cy-150,30,110),[180,184,190],1,{kind:"thing",lw:1.2,seed:844});
+  wc_part(ctx,wc_ell(1570,cy-190,62,62,30),[236,236,232],1,{kind:"thing",lw:1.4,seed:845});wc_part(ctx,[[1470,cy-44],[1670,cy-44],[1690,cy-62],[1450,cy-62]],[214,170,80],1,{kind:"thing",lw:1.2,seed:846});}
+// milk in its paper pack, four triangular sides, sitting on one: its face towards us with a large H, a side in shade, the sealed edge
+// at its top; (x, y) is the middle of its foot, s its height
+function cw_tetra(ctx,x,y,s,a){if(a!=null&&a<=0.01)return;ctx.save();if(a!=null)ctx.globalAlpha*=a;const f=[[x-0.52*s,y],[x+0.44*s,y],[x-0.02*s,y-s]],sd=[[x+0.44*s,y],[x+0.6*s,y-0.16*s],[x-0.02*s,y-s]];
+  cw_path(ctx,f);litFill(ctx,[248,248,244],x-0.5*s,y-s,x+0.5*s,y);ctx.fill();seam(ctx,[150,160,180],0.6);cw_path(ctx,sd);ctx.fillStyle=rgba([178,196,222],1);ctx.fill();seam(ctx,[150,160,180],0.5);
+  ctx.strokeStyle=rgba([150,160,180],0.9);ctx.lineWidth=Math.max(2,s*0.035);ctx.beginPath();ctx.moveTo(x-0.16*s,y-0.95*s);ctx.lineTo(x+0.16*s,y-1.03*s);ctx.stroke();
+  ctx.fillStyle=rgba([60,104,170],1);ctx.fillRect(x-0.42*s,y-0.1*s,0.8*s,0.05*s);ctx.restore();cw_H(ctx,x-0.03*s,y-0.36*s,0.3*s,[44,80,150],0);}
+
+// The police station: a pale green wall, a window with blinds, a filing cabinet, a road map pinned up; the desk, close, is the front
+// layer, a typewriter on it; the reports for September and October 1966 already on it, in a stack (cw_reports)
+const CW_PD={fy:650,top:716,win:[1500,130,320,400],cab:[90,300,170,380],map:[520,150,560,330]};
+function cw_paintDesk67(ctx){const O=CW_PD;gv_wallFloor(ctx,[198,212,194],O.fy,{floor:[150,132,110],seed:85});cw_blinds(ctx,...O.win,0.62,[198,212,194]);
+  const [fx,fy,fw,fh]=O.cab;wc_contact(ctx,fx-10,fx+fw+10,fy+fh,1,0.3);wc_wash(ctx,wc_rect(fx,fy,fw,fh),[150,162,152],{kind:"build",seed:851});
+  for(let i=0;i<4;i++){const y=fy+12+i*(fh-24)/4;wc_flat(ctx,wc_rect(fx+10,y,fw-20,(fh-24)/4-10),[168,178,168],1,"drawer");wc_flat(ctx,wc_rect(fx+fw/2-18,y+16,36,8),[104,108,106],1,"handle");}
+  const [mx,my,mw,mh]=O.map;wc_wash(ctx,wc_rect(mx,my,mw,mh),[240,236,214],{kind:"paper",lw:1.3,seed:853});const R=wc_rng(855);ctx.save();ctx.lineCap="round";
+  for(let i=0;i<9;i++){ctx.strokeStyle=rgba(i<3?[200,90,70]:[150,140,120],i<3?0.8:0.6);ctx.lineWidth=i<3?4:2.4;ctx.beginPath();let px=mx+R()*mw,py=my+R()*mh;ctx.moveTo(px,py);
+    for(let j=0;j<4;j++){px=clamp(px+(R()-0.5)*260,mx+10,mx+mw-10);py=clamp(py+(R()-0.5)*160,my+10,my+mh-10);ctx.lineTo(px,py);}ctx.stroke();}ctx.restore();
+  for(const [px,py] of [[mx+14,my+14],[mx+mw-14,my+14]])gv_pin(ctx,px,py,[196,64,56],0.8);}
+function cw_paintDesk67T(ctx){const y=CW_PD.top,wood=[136,100,70];wc_part(ctx,wc_rect(-20,y+40,W+40,H-y),wc_dim(wood,0.1),1,{seed:861});
+  wc_part(ctx,[[-20,y-30],[W+20,y-30],[W+20,y+40],[-20,y+40]],wc_lit(wood,0.14),1,{seed:862});
+  // the typewriter
+  wc_part(ctx,[[230,y-6],[560,y-6],[530,y-110],[260,y-110]],[60,64,70],1,{kind:"thing",lw:1.3,seed:863});wc_part(ctx,wc_rect(240,y-150,300,44),[44,46,52],1,{kind:"thing",lw:1.2,seed:864});
+  wc_flat(ctx,wc_rect(300,y-200,180,60),[250,248,240],1,"paper");ctx.save();ctx.fillStyle=rgba([200,200,196],0.9);for(let r=0;r<3;r++)for(let c=0;c<10;c++){ctx.beginPath();ctx.arc(290+c*24+r*6,y-84+r*22,7,0,TAU);ctx.fill();}ctx.restore();
+  cw_reports(ctx,1240,y-6,8,"September–October 1966",1);}
+// a stack of n report folders lying on the desk, seen from the front, buff with a darker edge, and a white label on the front of the
+// stack; (x, y) is the middle of its foot
+function cw_reports(ctx,x,y,n,label,a){if(a<=0.01)return;const w=420,t=17;ctx.save();ctx.globalAlpha*=a;
+  for(let i=0;i<n;i++){const yy=y-(i+1)*t,dx=(hash(i*7+n)-0.5)*10;ctx.fillStyle=rgba(i%2?[214,186,132]:[226,198,144],1);ctx.fillRect(x-w/2+dx,yy,w,t);ctx.fillStyle=rgba([170,140,92],0.8);ctx.fillRect(x-w/2+dx,yy+t-3,w,3);}
+  ctx.strokeStyle=rgba(WC_PENCIL,0.5);ctx.lineWidth=1.2;ctx.strokeRect(x-w/2-5,y-n*t,w+10,n*t);
+  ctx.save();ctx.translate(x,y-n*t);ctx.transform(1,0,0,0.3,0,0);ctx.fillStyle=rgba([228,200,146],1);ctx.fillRect(-w/2,-w*0.74,w,w*0.74);ctx.restore();ctx.restore();
+  if(label){const lw=tw(ctx,label,30,600)+36;withA(ctx,a,()=>{ctx.save();ctx.fillStyle="rgba(252,250,244,0.97)";ctx.fillRect(x-lw/2,y-n*t*0.5-26,lw,52);ctx.strokeStyle=rgba(WC_PENCIL,0.5);ctx.strokeRect(x-lw/2,y-n*t*0.5-26,lw,52);ctx.restore();
+    wc_T(ctx,label,x,y-n*t*0.5+11,{w:600,size:30,align:"center",col:WC_DARK});});}}

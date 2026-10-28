@@ -338,5 +338,47 @@ scene("readers",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id
       po_meiDesk(x,tt,{pose:"po_lookR",pose2:"po_lookUp",mix:easeCam(clamp((tt-P.back-0.4)/0.6,0,1)),expr:tt>P.pub?"smile":"calm",nod:0.07*n});po_tagAt(x,tt,P.ev,null,1420,190,"for everyone to build on",{size:32});po_tagAt(x,tt,P.kn,null,1420,262,"she knows who does",{size:32});}}]);
   wc_paperOver(ctx,S);});
 
+/* ---------- 8 · From draft to retired ---------- */
+// The data team's board, the film's one diagram: the four steps painted along it; Planning's card, a draft, ticked by Clara and moved
+// on to active, the people who rely on it coming up under it; a card with no name moved on to deprecated, its date tag, its users asked
+// to move; then the registrar's learner records, opening to show the two editions of its credentials: edition 1 goes the same way,
+// nobody uses it now, the calendar turns to 31 March 2027, and it's retired
+const PO_LU=["anil","ana","david"],PO_LP=["leila","ben"];
+scene("life",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{st:[0,1,2,3].map(i=>c.life+0.1+i*0.32),card:w("draft","a draft")-0.3,tick:w("draft","says it")+0.05,act:w("draft","and active")-0.2,rely:w("draft","rely")-0.25,
+      no:w("dep","no longer")-0.3,dep:w("dep","deprecated")-0.3,date:w("dep","a date")-0.15,arr:w("dep","its users")-0.1,move:w("dep","asked to move")-0.05,
+      old:c.old-0.25,lr:c.old+0.1,open:w("old","goes the")-0.35,ed:w("old","the same")+0.05,edDate:c.old+2.25,first:c.first,none:w("first","no users")-0.1,
+      cal:w("first","so at")-0.15,ret:w("first","retired")-0.3};});
+  gv_shots(ctx,S,t,sc.dur,[
+    {at:0,place:"boardData",keys:[[0,960,540,1.0],[0.1,960,520,1.03],[P.card-0.9,680,380,1.45],[P.no-0.5,940,480,1.3],[P.old-0.35,1060,500,1.2],[P.ret+0.5,1110,500,1.25]],d:1.8,push:0.004,draw:(x,tt)=>{
+      const L=PO_LF,[A,B]=L.rows;po_lifeStrip(x,i=>clamp((tt-P.st[i])/0.6,0,1));
+      // the calendar, pinned up at today as the old edition comes; it turns, a page a month, to the day edition 1 goes
+      const cf=clamp((tt-P.cal)/2.1,0,1)*5,ci=Math.min(4,Math.floor(cf));po_lifeCal(x,PO_LCAL[ci],PO_LCAL[ci+1],cf-ci,fin(tt,P.old+0.3,0.5));
+      // Planning's card: a draft until Clara ticks it, then active, and the people who rely on it
+      const pa=fin(tt,P.card,0.45),mv=easeCam(clamp((tt-P.act)/0.8,0,1)),cxP=lerp(L.cx[0],L.cx[1],mv);
+      const hP=po_lifeCard(x,cxP,A+36*(1-easeCam(pa)),{name:["Learners near","an award"],owner:"owner: Clara Jensen",draft:true,ready:clamp((tt-P.act-0.2)/0.5,0,1),gold:clamp((tt-P.act-0.4)/0.5,0,1),
+        tick:clamp((tt-P.tick)/0.45,0,1),lift:gv_io(tt,P.act-0.15,P.act+0.75,0.2),a:pa});
+      po_lifeUsers(x,cxP,A+hP+30,PO_LU,i=>clamp((tt-P.rely-i*0.2)/0.5,0,1));
+      // the card with no name: no longer needed, on to deprecated, its date tag; its users asked to move, along the arrows
+      const pm=easeCam(clamp((tt-P.dep)/0.8,0,1)),cxD=lerp(L.cx[1],L.cx[2],pm),gone=fin(tt,P.old,0.5),dyG=-30*easeCam(gone);
+      if(gone<1){const hD=po_lifeCard(x,cxD,B+dyG,{pale:true,gold:1,lift:Math.max(gv_io(tt,P.dep-0.15,P.dep+0.75,0.2),gone),a:1-gone});
+        withA(x,1-gone,()=>{po_dateTag(x,cxD+100,B+hD+dyG,"goes on: a date",fin(tt,P.date,0.9));
+          // an arrow leads away from the card, from the left of its users; they go along it, one after the other, and are gone before its head
+          const ar=clamp((tt-P.arr)/0.7,0,1),uy=B+hD+34+dyG,ux=cxD-110,fx=ux-62;
+          if(ar>0){wc_pencil(x,[[fx,uy+2],[fx-110,uy+14],[fx-220,uy+16]],clamp(ar*1.4,0,1),{col:WC_INK,lw:4,a:0.8,seed:690});
+            if(ar>0.7)wc_pencil(x,[[fx-205,uy+1],[fx-222,uy+16],[fx-204,uy+30]],clamp((ar-0.7)/0.3,0,1),{col:WC_INK,lw:4,a:0.8,seed:695});}
+          po_lifeUsers(x,ux,uy,PO_LP,()=>1,{away:i=>clamp((tt-P.move-i*0.3)/(1.3+i*0.25),0,1),by:[-210,14]});
+          po_tagAt(x,tt,P.move+0.25,null,ux-120,uy+84,"users asked to move",{size:28});});}
+      // the registrar's learner records: it opens to show what it holds, the two editions of its credentials
+      const la=fin(tt,P.lr,0.45),op=clamp((tt-P.open)/0.7,0,1),out=tt>=P.ed;if(la>0)po_holds(x,L.cx[1],B+30*(1-easeCam(la)),op,{a:la,out});
+      // edition 1 goes the same way: on to deprecated, its date tag; nobody uses it now; on the day, on to retired, greyed
+      if(out){const hL=30+38+50,fy=B+hL+6,ex1=easeCam(clamp((tt-P.ed)/0.6,0,1)),ey1=easeCam(clamp((tt-P.ed-0.35)/0.7,0,1)),e2=easeCam(clamp((tt-P.ret)/0.8,0,1)),
+          ex=e2>0?lerp(L.cx[2],L.cx[3],e2):lerp(L.cx[1],L.cx[2],ex1),ey=e2>0?B+14:lerp(fy+82,B+14,ey1),lift=Math.max(gv_io(tt,P.ed-0.1,P.ed+0.85,0.2),gv_io(tt,P.ret-0.1,P.ret+0.75,0.2)),
+          fade=1-fin(tt,P.ret-0.2,0.4);
+        withA(x,fade,()=>{po_dateTag(x,ex+20,ey+60,"retired on 31 March 2027",fin(tt,P.edDate,0.9));
+          const nu=fin(tt,P.none,0.5);if(nu>0){po_lifeEmpty(x,ex-128,ey+186,2,nu);withA(x,nu,()=>wc_T(x,"used by: no one",ex-66,ey+196,{w:600,size:28,col:WC_MUTED}));}});
+        po_slip(x,ex,ey,"credentials · edition 1",{lift,lit:gv_io(tt,P.first,P.ret-0.3,0.4),grey:fin(tt,P.ret+0.55,0.7)});}}}]);
+  wc_paperOver(ctx,S);});
+
 /* scaffold */
-["life","found"].forEach(id=>scene(id,(ctx,S,t,sc)=>{gv_shots(ctx,S,t,sc.dur,[{at:0,place:"office",keys:[[0,960,540,1]]}]);wc_paperOver(ctx,S);}));
+["found"].forEach(id=>scene(id,(ctx,S,t,sc)=>{gv_shots(ctx,S,t,sc.dur,[{at:0,place:"office",keys:[[0,960,540,1]]}]);wc_paperOver(ctx,S);}));

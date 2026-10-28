@@ -393,5 +393,69 @@ function po_whoUses(ctx,o){o=o||{};const P_=PO_WU,a=o.a==null?1:o.a;if(a<=0.01)r
   // more rows, too small to read
   [y3,y4].forEach((y,i)=>{ctx.save();ctx.fillStyle=rgba(WC_MUTED,0.3);ctx.fillRect(P_.x+60,y+20,280-i*40,9);ctx.fillRect(P_.x+60,y+56,200,7);ctx.fillRect(P_.ux,y+36,360+i*120,7);ctx.restore();});});ctx.restore();}
 
+/* ---------- 8 · From draft to retired: a product's life, the film's one diagram, on the data team's board ---------- */
+// Four steps painted along a strip of paper pinned across the board's top, an arrow from each to the next; under each step, its
+// column, where the cards are pinned. PO_LF: the strip; each step's middle and their line; the cards' width; the rows' tops; the
+// calendar's middle and scale; each step's name and colour (a draft has none: it's a dashed pencil line, as it isn't real yet)
+const PO_LF={strip:[236,52,1448,164],cx:[420,780,1140,1500],cy:134,cw:340,rows:[236,462],cal:[1515,712,0.8],
+  steps:[["draft",null],["active",GV.green],["deprecated",GV.grey],["retired",[204,206,212]]]};
+function po_stepC(i){return wc_kept("poStep"+i,320,140,q=>{q.translate(160,70);const col=PO_LF.steps[i][1];
+  if(col)wc_wash(q,wc_ell(0,0,134,46,30),col,{kind:"thing",lw:1.2,a:i===3?0.42:0.6,seed:611+i});
+  else{q.save();q.setLineDash([13,10]);q.lineWidth=3.2;q.strokeStyle=rgba(WC_PENCIL,0.9);q.beginPath();q.ellipse(0,0,132,44,0,0,TAU);q.stroke();q.restore();}});}
+// the strip; rev(i), 0 to 1: step i painted in, and the arrow that leads to it
+function po_lifeStrip(ctx,rev){const L=PO_LF,[sx,sy,sw,sh]=L.strip;gv_sheet(ctx,sx,sy,sw,sh,{rot:-0.002});
+  [[sx+28,sy+24],[sx+sw-28,sy+24]].forEach(([x,y])=>gv_pin(ctx,x,y,[60,110,170],0.9));
+  L.steps.forEach(([s],i)=>{const r=clamp(rev(i),0,1);if(r<=0.01)return;const x=L.cx[i],y=L.cy;
+    if(i>0){const x0=L.cx[i-1]+142,x1=x-142;wc_pencil(ctx,[[x0,y+5],[(x0+x1)/2,y-3],[x1,y+1]],clamp(r*2,0,1),{col:WC_INK,lw:4.4,a:0.8,seed:620+i});
+      if(r>0.5)wc_pencil(ctx,[[x1-15,y-11],[x1,y+1],[x1-16,y+13]],clamp((r-0.5)/0.3,0,1),{col:WC_INK,lw:4.4,a:0.8,seed:630+i});}
+    const k=0.88+0.12*spring(r);ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,clamp(r*1.6,0,1),()=>{ctx.drawImage(po_stepC(i),-160,-70);
+      wc_T(ctx,s,0,14,{w:800,size:40,align:"center",col:i===3?WC_MUTED:WC_DARK});});ctx.restore();});}
+// a product's card on the board, centred on cx, its top at y: its name (a line or two) and its owner. o.draft: its edge a dashed pencil
+// line, as it isn't ready (o.ready, 0 to 1, as it becomes so); o.gold: its gold edge; o.tick: its owner's tick; o.lift: its pin out
+// while it moves; o.grey: greyed, as it goes; o.pale: a card with no name, its shape only; o.w, o.h: its size. Returns its height
+function po_lifeCard(ctx,cx,y,o){o=o||{};const lines=o.name?[].concat(o.name):[],w=o.w||PO_LF.cw,h=o.h||(o.pale?116:30+lines.length*38+(o.owner?50:0)),a=o.a==null?1:o.a;
+  if(a<=0.01)return h;const lf=clamp(o.lift||0,0,1),g=clamp(o.grey||0,0,1),rd=o.draft?clamp(o.ready||0,0,1):1,x=cx-w/2,yy=y-10*lf;
+  withA(ctx,a,()=>{if(lf>0.01){ctx.save();ctx.filter="blur(12px)";ctx.fillStyle=`rgba(60,44,30,${0.2*lf})`;ctx.fillRect(x+12,yy+18,w,h);ctx.restore();}
+    if(rd<1)withA(ctx,1-rd,()=>wc_panel(ctx,x,yy,w,h,{kind:"card",dashed:true,seed:641}));
+    if(rd>0)withA(ctx,rd,()=>wc_panel(ctx,x,yy,w,h,{kind:"card",seed:642+lines.length}));
+    const gd=clamp(o.gold||0,0,1)*(1-g);if(gd>0.01){ctx.save();ctx.strokeStyle=rgba(GV.gold,0.9*gd);ctx.lineWidth=4;rr(ctx,x-5,yy-5,w+10,h+10,14);ctx.stroke();ctx.restore();}
+    if(o.pale){ctx.save();ctx.fillStyle=rgba(WC_MUTED,0.34);ctx.fillRect(x+26,yy+44,190,11);ctx.fillRect(x+26,yy+78,130,8);ctx.restore();}
+    const tc=mix(WC_DARK,WC_MUTED,g),oc=mix(WC_INK,WC_MUTED,g);lines.forEach((l,i)=>wc_T(ctx,l,x+24,yy+52+i*38,{w:800,size:30,col:tc}));
+    const oy=yy+52+lines.length*38+8;if(o.owner)wc_T(ctx,o.owner,x+24,oy,{w:600,size:26,col:oc});
+    const tk=clamp(o.tick||0,0,1);if(tk>0){const tx=x+w-40;wc_pencil(ctx,[[tx-15,oy-12],[tx-4,oy],[tx+18,oy-28]],tk,{col:GV.greenInk,a:1,lw:5.5,seed:650});}
+    if(g>0.01){ctx.save();ctx.fillStyle=rgba([232,232,236],0.5*g);rr(ctx,x+2,yy+2,w-4,h-4,10);ctx.fill();ctx.restore();}
+    gv_pin(ctx,cx-5*lf,yy+16-16*lf,o.pinCol||[60,110,170],0.85);});return h;}
+// a card's users, as round magnets with their faces, in a line under it (cx their middle, y their row); us(i): user i, 0 to 1, as they
+// come; o.away(i), 0 to 1: as they go, moved by o.by, fading as they near its end. po_lifeEmpty: n dashed rings, where nobody is
+function po_lifeUsers(ctx,cx,y,ids,us,o){o=o||{};const n=ids.length,gap=58,x0=cx-(n-1)*gap/2;
+  ids.forEach((id,i)=>{const p=clamp(us(i),0,1),aw=o.away?clamp(o.away(i),0,1):0;if(p<=0.01||aw>=0.99)return;const e=easeCam(aw),k=0.8+0.2*spring(p),
+      by=o.by||[0,0],x=x0+i*gap+by[0]*e,yy=y+by[1]*e-18*(1-easeCam(p));
+    ctx.save();ctx.translate(x,yy);ctx.scale(k,k);withA(ctx,clamp(p*2,0,1)*(1-clamp((aw-0.45)/0.4,0,1)),()=>{ctx.save();ctx.filter="blur(5px)";ctx.fillStyle="rgba(60,44,30,0.22)";ctx.beginPath();ctx.arc(3,5,24,0,TAU);ctx.fill();ctx.restore();
+      po_face(ctx,id,0,0,24,{expr:"calm",bg:i%2?[214,232,242]:[246,232,196],ring:WC_PENCIL,ringA:0.8,lw:2.2});});ctx.restore();});}
+function po_lifeEmpty(ctx,cx,y,n,a){if(a<=0.01)return;const gap=58,x0=cx-(n-1)*gap/2;withA(ctx,a,()=>{ctx.save();ctx.setLineDash([7,6]);ctx.lineWidth=2.8;ctx.strokeStyle=rgba(WC_PENCIL,0.9);
+  for(let i=0;i<n;i++){ctx.beginPath();ctx.arc(x0+i*gap,y,23,0,TAU);ctx.stroke();}ctx.restore();});}
+// a date tag on a string, hanging from (x, y), swinging a little as it comes (a, 0 to 1); its text's middle sits under the knot
+function po_dateTag(ctx,x,y,s,a,o){o=o||{};if(a<=0.01)return;const sw=Math.sin(a*9)*0.12*(1-clamp(a,0,1))+(o.rot||0.03),len=o.len||34;ctx.save();ctx.translate(x,y);ctx.rotate(sw);
+  withA(ctx,clamp(a*2.2,0,1),()=>{ctx.strokeStyle=rgba(WC_PENCIL,0.85);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(0,len);ctx.stroke();
+    const tw_=tw(ctx,s,o.size||28,600)+44,h=(o.size||28)+24;wc_panel(ctx,-tw_/2,len,tw_,h,{kind:"tag",wash:o.wash||GV.grey,washA:o.washA||0.22,seed:660+s.length});
+    ctx.fillStyle=rgba(WC_PENCIL,0.9);ctx.beginPath();ctx.arc(0,len+9,3.2,0,TAU);ctx.fill();wc_T(ctx,s,0,len+h/2+(o.size||28)*0.36+2,{w:600,size:o.size||28,align:"center",col:o.col||WC_INK});});ctx.restore();}
+// a small slip, one line: an edition of a table the product holds (cx its middle, y its top)
+function po_slip(ctx,cx,y,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const w=o.w||324,h=60,lf=clamp(o.lift||0,0,1),g=clamp(o.grey||0,0,1),x=cx-w/2,yy=y-8*lf;
+  withA(ctx,a,()=>{if(lf>0.01){ctx.save();ctx.filter="blur(10px)";ctx.fillStyle=`rgba(60,44,30,${0.2*lf})`;ctx.fillRect(x+10,yy+14,w,h);ctx.restore();}
+    wc_panel(ctx,x,yy,w,h,{kind:"card",seed:670+s.length});if(o.lit>0.01)withA(ctx,clamp(o.lit,0,1)*(1-g),()=>{ctx.save();ctx.strokeStyle=rgba(GV.gold,0.9);ctx.lineWidth=4;rr(ctx,x-5,yy-5,w+10,h+10,12);ctx.stroke();ctx.restore();});
+    wc_T(ctx,s,x+18,yy+44,{w:600,size:28,col:mix(WC_DARK,WC_MUTED,g)});if(g>0.01){ctx.save();ctx.fillStyle=rgba([232,232,236],0.5*g);rr(ctx,x+2,yy+2,w-4,h-4,8);ctx.fill();ctx.restore();}
+    if(o.pin!==false)gv_pin(ctx,cx-4*lf,yy+10-14*lf,o.pinCol||[60,110,170],0.7);});}
+// the registrar's learner records' card, opening (op, 0 to 1) to show what it holds: the two editions of its credentials, edition 1
+// drawn only while it's still inside (o.out: it has left)
+function po_holds(ctx,cx,y,op,o){o=o||{};const w=PO_LF.cw,top=po_lifeCard(ctx,cx,y,{name:"Learner records",owner:"owner: Mei Tanaka",gold:1,a:o.a}),u=easeCam(clamp(op,0,1));
+  if(u<=0.01)return;const fh=PO_FOLD,fy=y+top+6,f0=fy-fh*(1-u);withA(ctx,o.a==null?1:o.a,()=>{ctx.save();ctx.beginPath();ctx.rect(cx-w/2-12,fy-4,w+24,fh*u+12);ctx.clip();
+    wc_panel(ctx,cx-w/2,f0,w,fh,{kind:"card",fill:[244,240,230],seed:681});ctx.save();ctx.strokeStyle=rgba(GV.gold,0.6);ctx.lineWidth=3;rr(ctx,cx-w/2-4,f0-4,w+8,fh+8,12);ctx.stroke();ctx.restore();
+    po_slip(ctx,cx,f0+14,"credentials · edition 2",{pin:false});if(!o.out)po_slip(ctx,cx,f0+82,"credentials · edition 1",{pin:false});
+    else{ctx.save();ctx.setLineDash([8,8]);ctx.lineWidth=2;ctx.strokeStyle=rgba(WC_PENCIL,0.45);rr(ctx,cx-162,f0+82,324,60,8);ctx.stroke();ctx.restore();}ctx.restore();});}
+const PO_FOLD=156;
+// the board's calendar, a page a month, pinned in the retired column (film 4's, as in chapter 2, smaller)
+function po_lifeCal(ctx,cur,next,flip,a){if(a<=0.01)return;const [x,y,k]=PO_LF.cal;ctx.save();ctx.translate(x,y-24*(1-easeCam(a)));ctx.scale(k,k);withA(ctx,a,()=>{po_calendar(ctx,0,0,cur,next,flip);gv_pin(ctx,0,-166,GV.red,1.1);});ctx.restore();}
+const PO_LCAL=[["October 2026","28"],["November 2026","1"],["December 2026","1"],["January 2027","1"],["February 2027","1"],["March 2027","31"]];
+
 const WC_PLACES={st1520:c=>po_paintStreet(c,"1520"),st1600:c=>po_paintStreet(c,"1600"),gate:po_paintGate,hallIn:po_paintHallIn,hallInFront:po_paintHallInFront,clothClose:po_paintClothClose,clothFront:po_paintClothFront,plain:po_paintPlain,air:po_paintAir,airShops:po_paintAirShops,airCrowd:po_paintAirCrowd,airHall:po_paintAirHall,airTrade0:c=>po_paintAirTrade(c,0),airTrade1:c=>po_paintAirTrade(c,1),airTrade2:c=>po_paintAirTrade(c,2),office:gv_paintOffice,faculty:gv_paintFaculty,facDesk:po_paintFacDesk,facTop:po_paintFacTop,tomTop:po_paintTomTop,regTop:po_paintRegTop,corridor:po_paintCorridor,planTable:po_paintPlanTable,planTop:po_paintPlanTop,data:gv_paintData,noor:gv_paintNoor,planning:gv_paintPlanning,floor:gv_paintFloor,
   regClose:gv_paintRegistrarClose,regDesk:gv_paintRegistrarDesk,screenFac:c=>gv_paintScreenDesk(c,GV_ROOM.fac),meeting:gv_paintMeeting,desk:gv_paintDesk,boardData:c=>gv_paintBoardClose(c,GV_ROOM.data),platform:gv_paintPlatform};

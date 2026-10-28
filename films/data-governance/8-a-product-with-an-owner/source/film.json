@@ -37,6 +37,14 @@
     [
       "\\bMehmed\\b",
       "Meh-med"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
     ]
   ]
 }

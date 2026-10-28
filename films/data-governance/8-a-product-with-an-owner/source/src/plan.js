@@ -457,5 +457,54 @@ const PO_FOLD=156;
 function po_lifeCal(ctx,cur,next,flip,a){if(a<=0.01)return;const [x,y,k]=PO_LF.cal;ctx.save();ctx.translate(x,y-24*(1-easeCam(a)));ctx.scale(k,k);withA(ctx,a,()=>{po_calendar(ctx,0,0,cur,next,flip);gv_pin(ctx,0,-166,GV.red,1.1);});ctx.restore();}
 const PO_LCAL=[["October 2026","28"],["November 2026","1"],["December 2026","1"],["January 2027","1"],["February 2027","1"],["March 2027","31"]];
 
+/* ---------- 9 · Found, and trusted: the catalogue's six products, like stalls along a street ---------- */
+// The six products, each with its owner, the colour of its awning, and the people who use it (their faces, as at a stall: Anil first
+// at Planning's). Each card wears a striped awning, as a stall along a street does
+const PO_SIX=[["Learner records","Mei Tanaka",[104,128,170],["tom","linh","sam"]],["Awards","Mei Tanaka",[176,104,88],["rosa","ben"]],
+  ["Learners near an award","Clara Jensen",[204,150,64],["anil","ana","david"]],["Learner wallet","Wallet app team",[110,146,104],["minh","leila"]],
+  ["Tuition forgone","Finance",[138,112,150],["marta","jun"]],["Short-course follow-ups","Learning team",[86,146,142],["noor","rosa"]]];
+// an awning w wide, kept: stripes of its colour and a paler one, the edge scalloped, a soft shadow under it
+function po_awningC(col,w){return wc_kept("poAwn"+col.join(",")+"|"+w,w+40,90,q=>{q.translate(20,14);const sw=w/Math.round(w/34),n=Math.round(w/sw),pale=mix(col,[255,250,240],0.62);
+  q.save();q.filter="blur(5px)";q.fillStyle="rgba(60,44,30,0.18)";q.fillRect(4,30,w-8,22);q.restore();
+  for(let k=0;k<n;k++){const x0=k*sw,P=[[x0,0],[x0+sw,0],[x0+sw,34]];for(let j=1;j<12;j++){const a=j/12*Math.PI;P.push([x0+sw/2+sw/2*Math.cos(a),34+sw/2*Math.sin(a)*0.8]);}P.push([x0,34]);
+    wc_flat(q,P,k%2?pale:col,1,"awning");}
+  wc_ink(q,[[0,0],[w,0]],false,2,WC_PENCIL,0.7,61,0.6);});}
+// a stall's card (top left x,y, w by h): its awning, its name (as large as fits, 28 px or more), its owner. o.lit: a gold ring round it;
+// o.own: its owner's name washed gold; o.a; o.size: the name's largest size; o.deco: its words only a picture (under an open card)
+function po_stall(ctx,i,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const [name,own,col]=PO_SIX[i],sz=o.size||32,ns=Math.max(28,Math.min(sz,sz*(w-40)/tw(ctx,name,sz,700)));
+  withA(ctx,a,()=>{wc_panel(ctx,x,y,w,h,{kind:"card",seed:700+i});ctx.drawImage(po_awningC(col,w+12),x-26,y-20);
+    const lit=clamp(o.lit||0,0,1);if(lit>0.01){ctx.save();ctx.strokeStyle=rgba(GV.gold,0.95*lit);ctx.lineWidth=5;rr(ctx,x-6,y-6,w+12,h+12,14);ctx.stroke();ctx.restore();}
+    const d=o.deco?1:0;wc_T(ctx,name,x+20,y+h*0.5+8,{w:700,size:ns,col:WC_DARK,deco:d});const oy=y+h*0.5+8+(o.gap||48),os=o.ownSize||28,ow=tw(ctx,"owner: "+own,os,600);
+    const g=clamp(o.own||0,0,1);if(g>0.01)wc_panel(ctx,x+12,oy-os*0.95,Math.round((ow+16)*easeCam(g))+2,Math.round(os*1.4),{kind:"tag",wash:GV.gold,washA:0.42,seed:720+i});
+    wc_T(ctx,"owner: ",x+20,oy,{w:600,size:os,col:WC_MUTED,deco:d});wc_T(ctx,own,x+20+tw(ctx,"owner: ",os,600),oy,{w:600,size:os,col:WC_INK,deco:d});});}
+// the catalogue on Anil's screen (the screen close-up, GV_SC): its plain page, the six cards in two rows of three; o.lit(i), o.dim: the
+// others dimmed while one is open; o.open (0 to 1): Planning's card opened, larger, over the page, its rows as far as o.rows(k)
+const PO_CG={x:370,y:176,w:372,h:228,gx:32,gy:42};
+const po_cgRect=i=>{const G=PO_CG;return[G.x+(i%3)*(G.w+G.gx),G.y+Math.floor(i/3)*(G.h+G.gy),G.w,G.h];};
+function po_catPage(ctx,o){o=o||{};const [sx,sy,sw,sh]=GV_SC;gv_screen(ctx,sx,sy,sw,sh,"Catalogue of data products",null,{barH:62,titleSize:34,bar:[84,112,96]});
+  const op=clamp(o.open||0,0,1);PO_SIX.forEach((_,i)=>{const [x,y,w,h]=po_cgRect(i);po_stall(ctx,i,x,y,w,h,{size:30,lit:o.lit?o.lit(i):0,gap:46,deco:op>0.3});});if(op<=0.01)return;const u=easeCam(op),[gx,gy,gw,gh]=po_cgRect(2),R=[530,226,860,410],r=[lerp(gx,R[0],u),lerp(gy,R[1],u),lerp(gw,R[2],u),lerp(gh,R[3],u)];
+  ctx.save();ctx.fillStyle=rgba([238,240,244],0.72*u);ctx.fillRect(sx,sy+62,sw,sh-62);ctx.restore();
+  withA(ctx,clamp(op*3,0,1),()=>{ctx.save();ctx.filter="blur(14px)";ctx.fillStyle=`rgba(40,40,50,${0.22*u})`;ctx.fillRect(r[0]+10,r[1]+18,r[2],r[3]);ctx.restore();
+    wc_panel(ctx,r[0],r[1],r[2],r[3],{kind:"card",seed:731});ctx.drawImage(po_awningC(PO_SIX[2][2],Math.round(r[2])+12),r[0]-26,r[1]-20);
+    ctx.save();ctx.strokeStyle=rgba(GV.gold,0.95);ctx.lineWidth=5;rr(ctx,r[0]-6,r[1]-6,r[2]+12,r[3]+12,14);ctx.stroke();ctx.restore();
+    if(u>0.92)withA(ctx,clamp((u-0.92)/0.08,0,1),()=>{const [x,y]=R;wc_T(ctx,"Learners near an award",x+44,y+122,{w:700,size:40,col:WC_DARK});ctx.fillStyle=rgba(WC_MUTED,0.4);ctx.fillRect(x+44,y+146,R[2]-88,2);
+      [["promise:","ready by 7 a.m. on census day"],["owner:","Clara Jensen"],["ask:","Planning's data desk"]].forEach(([l,v],k)=>{const p=clamp(o.rows?o.rows(k):1,0,1);if(p<=0.01)return;const ry=y+220+k*74;
+        withA(ctx,p,()=>{wc_T(ctx,l,x+44,ry,{w:600,size:30,col:WC_MUTED});wc_T(ctx,v,x+196+14*(1-easeCam(p)),ry,{w:700,size:34,col:WC_DARK});});});});});}
+// a pointer on the screen, its tip at (x,y); a click (k, 0 to 1) rings out from its tip
+function po_cursor(ctx,x,y,a,k){if(a<=0.01)return;withA(ctx,a,()=>{if(k>0&&k<1){ctx.save();ctx.strokeStyle=rgba(GV.goldInk,0.6*(1-k));ctx.lineWidth=3;ctx.beginPath();ctx.arc(x,y,10+30*k,0,TAU);ctx.stroke();ctx.restore();}
+  ctx.save();ctx.translate(x,y);ctx.scale(1.35,1.35);ctx.beginPath();[[0,0],[0,30],[8,23],[14,37],[20,34],[14,21],[24,21]].forEach(([px,py],j)=>j?ctx.lineTo(px,py):ctx.moveTo(px,py));ctx.closePath();
+  ctx.fillStyle="rgba(255,255,255,0.97)";ctx.fill();ctx.lineJoin="round";ctx.lineWidth=2.2;ctx.strokeStyle=rgba(WC_DARK,0.9);ctx.stroke();ctx.restore();});}
+// the same page, small, on Anil's screen in his office (GV_FX.screen): the shape of the page only, too small to read
+function po_catSmall(ctx){const [x,y,w,h]=GV_FX.screen;gv_screen(ctx,x,y,w,h,null,null,{barH:30,bar:[84,112,96]});ctx.save();ctx.fillStyle="rgba(255,255,255,0.8)";ctx.fillRect(x+14,y+11,170,8);ctx.restore();
+  for(let i=0;i<6;i++){const cw=(w-60)/3,ch=(h-90)/2,cx=x+18+(i%3)*(cw+12),cy=y+48+Math.floor(i/3)*(ch+14);ctx.save();ctx.fillStyle=rgba(WC_CARD,1);ctx.fillRect(cx,cy,cw,ch);
+    ctx.fillStyle=rgba(PO_SIX[i][2],0.85);ctx.fillRect(cx,cy,cw,12);ctx.fillStyle=rgba(WC_MUTED,0.45);ctx.fillRect(cx+10,cy+ch*0.5,cw*0.6,6);ctx.fillRect(cx+10,cy+ch*0.5+16,cw*0.4,5);ctx.restore();}}
+// the six again, on plain paper, as stalls along a street; their users come up to them, as to a stall (o.users(i,j), 0 to 1); o.own(i)
+const PO_SX={cx:[420,960,1500],y:[92,430],w:470,h:200};
+function po_sixStalls(ctx,o){o=o||{};const S=PO_SX;PO_SIX.forEach(([,,,ids],i)=>{const cx=S.cx[i%3],y=S.y[Math.floor(i/3)];
+  po_stall(ctx,i,cx-S.w/2,y,S.w,S.h,{size:34,own:o.own?o.own(i):0,lit:o.own?o.own(i):0,gap:50,ownSize:30});
+  const n=ids.length,gap=68,x0=cx-(n-1)*gap/2,fy=y+S.h+46;ids.forEach((id,j)=>{const p=clamp(o.users?o.users(i,j):1,0,1);if(p<=0.01)return;const e=easeCam(p),k=0.85+0.15*spring(p);
+    ctx.save();ctx.translate(x0+j*gap,fy+40*(1-e));ctx.scale(k,k);withA(ctx,clamp(p*2,0,1),()=>{ctx.save();ctx.filter="blur(5px)";ctx.fillStyle="rgba(60,44,30,0.2)";ctx.beginPath();ctx.arc(3,6,28,0,TAU);ctx.fill();ctx.restore();
+      po_face(ctx,id,0,0,28,{expr:"smile",bg:j%2?[214,232,242]:[246,232,196],ring:id==="anil"?GV.goldInk:WC_PENCIL,ringA:0.85,lw:id==="anil"?3.4:2.2});});ctx.restore();});});}
+
 const WC_PLACES={st1520:c=>po_paintStreet(c,"1520"),st1600:c=>po_paintStreet(c,"1600"),gate:po_paintGate,hallIn:po_paintHallIn,hallInFront:po_paintHallInFront,clothClose:po_paintClothClose,clothFront:po_paintClothFront,plain:po_paintPlain,air:po_paintAir,airShops:po_paintAirShops,airCrowd:po_paintAirCrowd,airHall:po_paintAirHall,airTrade0:c=>po_paintAirTrade(c,0),airTrade1:c=>po_paintAirTrade(c,1),airTrade2:c=>po_paintAirTrade(c,2),office:gv_paintOffice,faculty:gv_paintFaculty,facDesk:po_paintFacDesk,facTop:po_paintFacTop,tomTop:po_paintTomTop,regTop:po_paintRegTop,corridor:po_paintCorridor,planTable:po_paintPlanTable,planTop:po_paintPlanTop,data:gv_paintData,noor:gv_paintNoor,planning:gv_paintPlanning,floor:gv_paintFloor,
   regClose:gv_paintRegistrarClose,regDesk:gv_paintRegistrarDesk,screenFac:c=>gv_paintScreenDesk(c,GV_ROOM.fac),meeting:gv_paintMeeting,desk:gv_paintDesk,boardData:c=>gv_paintBoardClose(c,GV_ROOM.data),platform:gv_paintPlatform};

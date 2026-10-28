@@ -1,0 +1,217 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:04.345
+Fustat, en lo que hoy es El Cairo, en 861.
+
+00:00:05.445 --> 00:00:08.229
+La cosecha de Egipto depende de la crecida de verano del Nilo.
+
+00:00:08.929 --> 00:00:16.318
+Con una crecida baja, los campos quedan secos, y un impuesto adivinado se llevaría el grano que una familia campesina necesita para comer.
+
+00:00:17.718 --> 00:00:19.227
+Un impuesto justo necesita una medida.
+
+00:00:20.827 --> 00:00:27.582
+En la isla de Roda, se termina un nuevo nilómetro: un pozo abierto al Nilo, y una columna marcada en codos.
+
+00:00:28.882 --> 00:00:32.866
+El encargado lee el agua cada día, y los funcionarios reciben las lecturas.
+
+00:00:35.166 --> 00:00:37.849
+A los dieciséis codos, el impuesto se paga completo.
+
+00:00:38.349 --> 00:00:39.548
+Por debajo, no.
+
+00:00:40.648 --> 00:00:45.597
+Así, los campesinos pagan lo que el río permite, y los funcionarios conocen el impuesto antes de la cosecha.
+
+00:00:46.897 --> 00:00:54.502
+Así debe ser un puntaje de calidad: una medida diaria, un nivel fijado de antemano, para que quien decide sepa en qué datos confiar.
+
+00:01:01.602 --> 00:01:05.513
+En la universidad, la carpeta nueve dice que la calidad de datos se monitorea.
+
+00:01:06.213 --> 00:01:08.108
+Aquí, monitorear significa una encuesta.
+
+00:01:08.808 --> 00:01:12.816
+Cada primavera, el dueño de cada sistema califica sus datos del uno al cinco.
+
+00:01:13.816 --> 00:01:15.892
+La plataforma de cursos cortos: cuatro.
+
+00:01:16.392 --> 00:01:17.998
+Promedio: 3.9.
+
+00:01:20.298 --> 00:01:23.692
+David pregunta: ¿podemos confiar en el número que enviamos al gobierno?
+
+00:01:24.792 --> 00:01:26.060
+La encuesta no puede decirlo.
+
+00:01:26.760 --> 00:01:31.579
+Como adivinar la crecida, mide cómo se sienten las personas con sus datos, no los datos.
+
+00:01:32.879 --> 00:01:34.250
+Yusuf necesita una medida.
+
+00:01:36.950 --> 00:01:40.511
+Pero, como el encargado, el equipo de datos ya mide, cada noche.
+
+00:01:41.511 --> 00:01:46.224
+Mientras la actualización nocturna trae los datos de cada sistema, se ejecutan ciento sesenta controles.
+
+00:01:47.724 --> 00:01:49.298
+Cada estudiante tiene un ID.
+
+00:01:49.798 --> 00:01:51.378
+Ningún estudiante aparece dos veces.
+
+00:01:51.878 --> 00:01:54.620
+El número de Planificación coincide con el informe del censo.
+
+00:01:55.320 --> 00:01:57.596
+Cada control pasa, advierte o falla.
+
+00:01:58.696 --> 00:02:00.592
+Pero un resultado solo nombra el control.
+
+00:02:01.092 --> 00:02:04.048
+No de quién es, ni qué tipo de calidad verifica.
+
+00:02:07.348 --> 00:02:09.878
+Así que Yusuf pide dos cosas en cada control.
+
+00:02:10.578 --> 00:02:13.154
+Un dueño: quien sea dueño de los datos que verifica.
+
+00:02:13.854 --> 00:02:16.249
+Los controles de cursos cortos son del equipo de aprendizaje.
+
+00:02:17.249 --> 00:02:19.851
+Y una dimensión: el tipo de calidad que verifica.
+
+00:02:20.551 --> 00:02:26.826
+Hay seis comunes: completitud, unicidad, validez, consistencia, exactitud y oportunidad.
+
+00:02:28.126 --> 00:02:32.752
+Un control de valores vacíos es de completitud; uno de duplicados, de unicidad.
+
+00:02:33.752 --> 00:02:37.439
+Jun escribe los dos en el registro de reglas, junto a cada control.
+
+00:02:40.939 --> 00:02:44.236
+Ahora el tablero de calidad se escribe solo, con los controles de anoche.
+
+00:02:46.536 --> 00:02:52.800
+Una fila por área, una columna por dimensión, y en cada celda, cuántos controles pasaron, de cuántos.
+
+00:02:53.500 --> 00:02:55.822
+Debajo, lo que no pasó, y de quién es.
+
+00:02:56.922 --> 00:02:59.099
+Y la pregunta de David tiene respuesta.
+
+00:02:59.799 --> 00:03:04.026
+El número de Planificación coincide con el informe del censo, facultad por facultad.
+
+00:03:04.726 --> 00:03:07.473
+Ese control es de Planificación, y anoche pasó.
+
+00:03:10.973 --> 00:03:13.012
+Cada control necesita sus dieciséis codos.
+
+00:03:14.112 --> 00:03:15.347
+Pero ¿quién fija el nivel?
+
+00:03:15.847 --> 00:03:17.633
+No la gobernanza: su dueño.
+
+00:03:18.333 --> 00:03:24.690
+Una inscripción sin correo: una o dos en persona por periodo son normales, y el equipo de aprendizaje les da seguimiento.
+
+00:03:25.690 --> 00:03:29.724
+Así que eligieron: advertir con cualquiera, y detener la actualización con más de cinco.
+
+00:03:31.024 --> 00:03:32.551
+Planificación eligió lo contrario.
+
+00:03:33.051 --> 00:03:37.875
+Cualquier diferencia con el informe del censo la detiene, porque ese número va al gobierno.
+
+00:03:38.875 --> 00:03:44.361
+Cada dueño firma la regla, con su nivel y su motivo; el equipo de datos la escribe en el control.
+
+00:03:45.861 --> 00:03:49.840
+Una regla que su dueño no entiende se ignora, y luego se apaga.
+
+00:03:53.540 --> 00:03:56.716
+En el horario de atención del jueves, Tom lee la fila de aprendizaje.
+
+00:03:57.416 --> 00:04:03.029
+Conoce una celda ámbar: una inscripción en persona de febrero, cuyo certificado aún no llega a nadie.
+
+00:04:04.329 --> 00:04:10.240
+Y una que nunca vio: correos escritos con espacios y mayúsculas, advirtiendo cada noche desde hace un año.
+
+00:04:11.240 --> 00:04:13.838
+La actualización nocturna los limpia, así que nada se rompió.
+
+00:04:15.138 --> 00:04:17.681
+La advertencia no tenía dueño, así que nadie la leyó.
+
+00:04:18.381 --> 00:04:19.588
+Ahora es de su equipo.
+
+00:04:23.088 --> 00:04:25.271
+Seguir las inscripciones en persona no es un control.
+
+00:04:26.271 --> 00:04:32.705
+Trata de lo que hace la gente, no de los datos, así que nunca detiene la actualización: es una lista que atiende el equipo de aprendizaje.
+
+00:04:36.405 --> 00:04:39.449
+Una noche, llegan cinco inscripciones en persona más, sin correo.
+
+00:04:40.149 --> 00:04:43.455
+Son seis, más que los cinco del equipo de aprendizaje, así que el control falla.
+
+00:04:44.755 --> 00:04:50.036
+Todo lo que se construye con los cursos cortos se detiene y conserva los números de ayer, también los de Planificación.
+
+00:04:51.536 --> 00:04:56.541
+En la mañana, el tablero tiene una celda roja, y el equipo de aprendizaje, una incidencia con fecha.
+
+00:04:57.841 --> 00:04:59.271
+Tom sabe qué significa.
+
+00:04:59.771 --> 00:05:01.156
+Su equipo eligió el nivel.
+
+00:05:01.656 --> 00:05:03.055
+Su lista muestra las seis.
+
+00:05:04.355 --> 00:05:07.170
+Al mediodía, ya las registraron, con sus correos.
+
+00:05:08.670 --> 00:05:10.240
+Esa noche, la celda está verde.
+
+00:05:13.940 --> 00:05:21.734
+La línea de la carpeta nueve ya se ejecuta: cada regla, un control con dueño, nivel y motivo, y un tablero leído de lo que se ejecutó.
+
+00:05:23.034 --> 00:05:26.973
+Desde ahora, una regla sin dueño ni dimensión se devuelve.
+
+00:05:28.973 --> 00:05:32.321
+Como el nilómetro, el tablero es una medida: no se adivina.
+
+00:05:33.421 --> 00:05:39.135
+Cada mañana, la universidad sabe en qué datos puede confiar, qué quedó retenido, y quién lo arregla.
+
+00:05:40.635 --> 00:05:43.198
+Dónde empiezan problemas como estos, en la próxima película.
+
+00:05:44.498 --> 00:05:46.650
+Una regla de calidad es un control con dueño.

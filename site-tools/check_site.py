@@ -666,6 +666,32 @@ def main():
             s["fails"].append(f"{pg.file}: current marker {[name(c) for c in cur] or 'none'}, expected {[name(exp)] if exp else 'none'}")
     s["notes"].append(f"{len(normal)} pages with a header; {len(pages) - len(normal)} redirect pages skipped")
 
+    # Every header is made by header() in build_series.py, and every page is checked against what makes it (below), so its parts
+    # are checked once here, in each language, and each page only for coming from a generator.
+    s = rep.check("Header: made by build_series.py's header() on every page; its links to learn-all.org and LinkedIn, in each language")
+    made = {rel for rel, _ in build_series.pages()} | set(build_series.HAND_PAGES) | MAKING_OF_PAGES
+    for pg in normal:
+        if pg.file not in made:
+            s["fails"].append(f"{pg.file}: its header isn't made by header(): add the page to HAND_PAGES in site-tools/build_series.py")
+    targets = ["https://learn-all.org", "https://www.linkedin.com/in/roanboc"]
+    for lg, labels in (("en", ["Go to learn-all.org", "Contact Rodrigo on LinkedIn"]), ("es", ["Ir a learn-all.org", "Contactar a Rodrigo en LinkedIn"])):
+        p = Parser()
+        p.feed(build_series.header(lg, "", "../"))
+        head = p.root.first("header", cls="top")
+        tools = head.all(cls="nav-tools") if head else []
+        links = tools[0].all("a") if len(tools) == 1 else []
+        if [a.attrs.get("href") for a in links] != targets or [a.attrs.get("href") for a in head.all("a")].count(targets[0]) != 1:
+            s["fails"].append(f"header({lg}): expected one link to learn-all.org and one to LinkedIn, in .nav-tools")
+        for a, label in zip(links, labels):
+            if a.attrs.get("aria-label") != label or "title" in a.attrs:
+                s["fails"].append(f"header({lg}): the link needs one name in the page's language, without a title: {label}")
+            icons = a.all("svg")
+            if len(icons) != 1 or icons[0].attrs.get("aria-hidden") != "true" or icons[0].attrs.get("focusable") != "false" or icons[0].all("title"):
+                s["fails"].append(f"header({lg}): {label} needs one decorative, non-focusable icon")
+            if "tabindex" in a.attrs or "aria-current" in a.attrs:
+                s["fails"].append(f"header({lg}): {label} must keep the browser's own keyboard behaviour, and not claim the current page")
+    s["notes"].append(f"{len(normal)} pages with a header, each made by a generator")
+
     # -- leftover labels
     s = rep.check("Nav: no leftover labels (Watch, Take it apart, Sharpen it, All films, Mira, Desarma…)")
     for pg in pages.values():

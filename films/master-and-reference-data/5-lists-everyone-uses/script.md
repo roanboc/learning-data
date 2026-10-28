@@ -167,10 +167,10 @@ The example project is *In the weeds of data crafting*'s dbt project, in `films/
 |---|---|
 | Linh, `S-20436`, `u-88236` | `data/student_system/learners.csv` line 50, `data/learning_platform/users.csv` line 34 |
 | `status_map.csv`: SIS's ENR, LOA, WD and CMP, and the platform's active and inactive, mapped to studying, inactive, withdrawn and completed | `seeds/reference/student/status_map.csv` lines 2–7. The film leaves out its `source_label` column and the short-course system's two codes (lines 8–9). |
-| The two tests that type the statuses | `seeds/reference/student/_student__seeds.yml` lines 29–32 and `models/core/student/_core_student__models.yml` lines 80–86 |
+| The two tests that type the statuses | `seeds/reference/student/_student__seeds.yml` lines 29–32 and `models/core/student/_core_student__models.yml` lines 84–90 |
 | The statuses' owner, the registrar's office | `seeds/reference/student/_student__seeds.yml` line 10 (`owner: "Mei Tanaka, registrar's office"`) |
 | The statuses as a table, `learner_status`, with labels, an owner and dates, and the relationships test that reads it | New: the series adds it to the project |
-| The role types and their owners: student, the registrar's office; tutor, HR; researcher, the research office; alumni, the alumni office | `models/core/person/_person__conceptual.yml` lines 61–72, the person domain's kinds of role, a draft for their owners to approve. The film leaves out applicant (lines 58–60), and its labels and dates are its own. |
+| The role types and their owners: student, the registrar's office; tutor, HR; researcher, the research office; alumni, the alumni office | `models/core/person/_person__conceptual.yml` lines 62–73, the person domain's kinds of role, a draft for their owners to approve. The film leaves out applicant (lines 59–61), and its labels and dates are its own. |
 | The role types as a table, identifier types, relationship types and consent purposes, and each system's names mapped to them | New: lists the series adds to the project |
 | Countries copied from ISO 3166 every month | New: a scheduled copy the series adds |
 | The award's definition, copied from the glossary with its source | `models/core/course/_course__conceptual.yml` lines 18–30, under decision DEC-PRJ-11 (`models/_shared/_shared__decisions.yml` line 125, `docs/decisions.md` line 77). The film shortens it: it cuts the definition short and leaves out the owner, the business key, the history, and the source's `glossary` and `named_by` lines. |

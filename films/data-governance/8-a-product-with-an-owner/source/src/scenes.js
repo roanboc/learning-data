@@ -179,5 +179,42 @@ scene("late",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,
   po_tagAt(ctx,t,P.plan,P.juns-0.4,R.plan,R.y,"Planning · asked for it",{size:30});
   wc_paperOver(ctx,S);});
 
+// ---- 3 · Data with a promise: the card that says what the table promises, and who keeps the promise ----
+// pressing a pin into the wall at eye height; looking up and over to the right
+POSE.po_pinUp={L:[0.12,-0.08],R:[1.75,2.15],hand:"open",feet:30,shift:5,tilt:-0.03,turn:0.22,gaze:[0.6,-0.3],look:0};
+POSE.po_lookUpR=Object.assign({},POSE.listen,{gaze:[0.9,-0.45],turn:0.2,tilt:0.03});
+// the three at Planning's table: who sits where, and their poses (o.pose by name); Yusuf sits down (dy) as the chapter starts
+function po_planTable(x,tt,o){o=o||{};const T_=PO_PT;[["noor",0,false],["clara",1,false],["yusuf",2,true]].forEach(([id,i,fl])=>{if((o.out||[]).includes(id))return;
+  po_behind(x,id,T_.seats[i],T_.top,T_.s,id==="yusuf"?(o.dy||0):0,Object.assign({pose:"listen",t:tt+i*0.7,flip:fl},(o.pose||{})[id]||{}));});
+  x.drawImage(gv_place("planTable"),0,0,W,H);}
+// the wall screen: off until the catalogue is named, then the catalogue
+function po_planScreen(x,tt,on,fill){const [sx,sy,sw,sh]=GV_PL.screen;po_screenOff(x,sx,sy,sw,sh,1-on);po_catalogue(x,{on,fill,t:tt});}
+scene("promise",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{sat:w("sit","sits")+0.1,qc:c.question-0.3,q1:w("question","what does")-0.1,q2:w("question","who keeps")-0.1,card:c.write-0.3,cat:w("write","list it")-0.3,lit:w("write","catalogue")-0.6,
+      back:c.for-0.4,wr:[[w("for","for")-0.2,1.0],[w("for","use")-0.1,1.0],[w("for","Clara")-0.2,0.8],[c.contract+0.1,1.8],[w("levels","built")-0.1,2.0],[w("ask","ask")-0.2,0.6],[w("ask","version")+0.1,0.9]],
+      prod:c.product,frame:w("product","data product")-0.1,data:w("product","data,"),prom:w("product","a promise"),own:w("product","an owner"),pin:c.product+4.4};});
+  const wr=tt=>P.wr.map(([t0,d])=>clamp((tt-t0)/d,0,1)),pen=tt=>{const k=P.wr.findIndex(([t0,d])=>tt>=t0-0.4&&tt<t0+d+0.3);return k;};
+  gv_shots(ctx,S,t,sc.dur,[
+    // Planning's room: Yusuf sits down with Noor and Clara at the table
+    {at:0,place:"planning",keys:[[0,960,540,1.0],[0.1,960,520,1.06]],d:4,draw:(x,tt)=>{po_planScreen(x,tt,0,0);
+      po_planTable(x,tt,{dy:-70*(1-easeCam(clamp((tt-P.sat)/0.7,0,1))),pose:{yusuf:{pose:"listen",carry:heldNotebook}}});}},
+    // the table from above: Yusuf writes the question on a small card; then the card that answers it, still blank
+    {at:P.qc,place:"planTop",keys:[[P.qc,1355,318,1.7],[P.card,960,540,1.0]],d:1.8,draw:(x,tt)=>{const p1=clamp((tt-P.q1)/0.9,0,1),p2=clamp((tt-P.q2)/0.6,0,1);po_qCard(x,[p1,p2]);
+      const u=easeCam(fin(tt,P.card+0.2,0.7));po_card(x,{a:u});
+      if(tt<P.q2+1.0){const writing=tt<P.q2?[PO_QL[0],0,p1]:[PO_QL[1],1,p2],[px,py]=po_penAt(x,writing[0],PO_QC.x+44,PO_QC.y+86+writing[1]*70,40,writing[2]);po_pen(x,px,py,gv_io(tt,P.q1-0.4,P.q2+0.8,0.3));}}},
+    // Planning's screen: the university's catalogue of data products, and an empty place where the card will go
+    {at:P.cat,place:"planning",keys:[[P.cat,910,320,2.0],[P.cat+0.1,910,310,2.1]],d:3,draw:(x,tt)=>{po_planScreen(x,tt,easeCam(fin(tt,P.lit,0.6)),0);po_planTable(x,tt);}},
+    // the card again: each line written in as it's named; then the gold frame, the ring round its owner, and what it is
+    {at:P.back,place:"planTop",keys:[[P.back,857,482,1.12],[P.prod+0.1,960,540,1.0]],d:1.8,draw:(x,tt)=>{po_qCard(x,[1,1]);const ws=wr(tt);
+      po_card(x,{w:ws,frame:clamp((tt-P.frame)/1.1,0,1),ring:clamp((tt-P.own)/0.8,0,1)});const k=pen(tt);
+      if(k>=0){const [px,py]=po_cardPen(x,k,ws[k]);po_pen(x,px,py,gv_io(tt,P.wr[k][0]-0.4,P.wr[k][0]+P.wr[k][1]+0.3,0.25));}
+      [[P.data,"data"],[P.prom,"a promise"],[P.own,"an owner who keeps it"]].forEach(([t0,s],i)=>po_tagAt(x,tt,t0,null,1268,388+i*82,s,{size:32,align:"left",wash:GV.gold,washA:0.3}));}},
+    // Planning's room: Clara pins the card on the wall, the same card takes its place in the catalogue, and the three look at it
+    {at:P.pin,place:"planning",keys:[[P.pin,1000,520,1.06],[P.pin+0.1,1040,510,1.1]],d:3,draw:(x,tt)=>{const up=gv_io(tt,P.pin-0.2,P.pin+0.9,0.4),on=tt>=P.pin+0.35;
+      po_planScreen(x,tt,1,easeCam(fin(tt,P.pin+0.5,0.7)));po_wallCard(x,1372,412,on?1:0);
+      person(x,"clara",1580,905,0.8,{pose:"listen",pose2:"po_pinUp",mix:up,t:tt,flip:true,expr:"smile"});const look=fin(tt,P.pin+0.3,0.6);
+      po_planTable(x,tt,{out:["clara"],pose:{noor:{pose:"listen",pose2:"po_lookUpR",mix:look,flip:false,expr:"smile"},yusuf:{pose:"listen",pose2:"po_lookUpR",mix:look,flip:false,carry:heldNotebook}}});}}]);
+  setScreen(ctx,S);wc_paperOver(ctx,S);});
+
 /* scaffold */
-["promise","answers","job","steps","readers","life","found"].forEach(id=>scene(id,(ctx,S,t,sc)=>{gv_shots(ctx,S,t,sc.dur,[{at:0,place:"office",keys:[[0,960,540,1]]}]);wc_paperOver(ctx,S);}));
+["answers","answers","job","steps","readers","life","found"].forEach(id=>scene(id,(ctx,S,t,sc)=>{gv_shots(ctx,S,t,sc.dur,[{at:0,place:"office",keys:[[0,960,540,1]]}]);wc_paperOver(ctx,S);}));

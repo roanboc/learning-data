@@ -294,7 +294,8 @@ def claps(t0, t1, g, pan):
 #    thanks as the car goes; the third driver won't, and the mime shrugs; the officer writes a fine, on one low bassoon note, to
 #    applause. Then the three panels, one voice each, in their order; 1996 in held chords, the cars stopping behind the line, and G,
 #    home, as people on foot cross in front of them; the teaching phrase as people understand the rule, copied as the people round
-#    them keep it, the question answered; the fine, low, for the few; the light turns green and the cars go; and the mark under the title
+#    them keep it, the question answered; the fine, low, for the few; as it's the same with data, the opening's open G again, softly;
+#    the light turns green and the cars go; and the mark under the title
 cw = lambda lid, word, off=0: W('crossing', lid, word, off)
 cc = lambda lid, off=0: G('crossing', lid, off)
 drivers, zebra, weave = cw('stop', 'drivers stop'), cw('stop', 'zebra'), cw('stop', 'weave')
@@ -304,6 +305,7 @@ steps, word, invites, backUp = cw('mime', 'steps'), cw('mime', 'without a word')
 wont, officer, writes, applaud = cw('fine', "still won't"), cw('fine', 'a traffic officer'), cw('fine', 'writes'), cw('fine', 'applaud')
 last, cameLast, order = cc('last'), cw('last', 'came last'), cw('last', 'an order')
 y96, safe, understand, around2, few, breath = cc('y96'), cc('safe'), cw('most', 'understand'), cw('most', 'the people around'), cw('few', 'few'), cc('breath')
+data = cc('data')
 # the opening: Bogotá, 1995, an open G on the bassoon and the cor anglais, as the light turns red
 chord({'bsn': 43, 'cor': 62}, 0.4, cc('b95', 1.9), 0.75, 'G', step=0.3, att=0.5)
 car_by(2.0, 12, 0.0034, -0.75, 0.75); car_by(2.46, 13, 0.0027, -0.6, 0.85)  # the two that pass while it's still green
@@ -372,6 +374,7 @@ note('bsn', 43, understand - 0.15, around2 + 2.6 - understand, 0.65, 'G', att=0.
 phrase('oboe', TEACH['G'], understand, 0.9, 'G')
 phrase('cor', [m - 12 for m in TEACH['G']], around2, 0.85, 'G')
 note('bsn', 43, few - 0.05, 0.9, 0.85, 'G', att=0.05, rel=0.3)  # the fine is for the few
+chord({'bsn': 43, 'cor': 62}, data - 0.2, breath + 0.4, 0.5, 'G', step=0.3, att=0.6, rel=0.6)  # the same with data: the opening's open G
 # the light turns green and the cars go, one after another; the title, and the mark: the cor anglais, then the bassoon copying it
 go = breath + 0.5
 for i, p in enumerate([-0.3, -0.1, 0.15, 0.4]):

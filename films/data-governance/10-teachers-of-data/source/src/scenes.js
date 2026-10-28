@@ -24,7 +24,7 @@ function tt_crossCues(sc){const c=sc.cues,w=(id,s)=>wAt(sc,id,s);
     wont:w("fine","still won't"),officer:w("fine","a traffic officer"),writes:w("fine","writes"),applaud:w("fine","applaud"),last:c.last,cameLast:w("last","came last"),
     order:w("last","an order"),worked:c.worked,y96:c.y96,three:w("y96","three drivers"),safe:c.safe,front:w("safe","in front of"),most:c.most,understand:w("most","understand"),
     around2:w("most","the people around"),fewLine:c.few,
-    few:w("few","few"),breath:c.breath};}
+    few:w("few","few"),dataL:c.data,breath:c.breath};}
 // a whistle and a clap, drawn over the person who does them
 const tt_whistling=(t,t0,t1)=>t>t0&&t<t1?(x,X,Y,k)=>tt_whistleMarks(x,X,Y,k,t,gv_io(t,t0,t1,0.3)):null;
 const tt_clapping=(t,t0,t1,ph)=>{if(t<=t0||t>=t1)return{};const a=gv_io(t,t0,t1,0.25),m=0.5+0.5*Math.sin((t-t0)*TAU*2.6+(ph||0)),e=clamp((m-0.72)/0.28,0,1);
@@ -138,8 +138,9 @@ scene("crossing",(ctx,S,t,sc)=>{const P=tt_once(sc,"P",()=>tt_crossCues(sc)),cut
     {at:P.y96-0.3,place:"bogota",keys:[[P.y96-0.3,960,520,1.04],[P.safe-0.4,910,660,1.2]],d:2.4,push:0,draw:(x,tt)=>{wide96(x,tt);}},
     // closer: people cross on the stripes; the mime and the people beside them nod; the officer shuts his notebook
     {at:P.most-0.3,place:"bogotaMid",keys:[[P.most-0.3,960,520,1.02],[P.few-0.8,860,500,1.16]],d:2.0,push:0,draw:(x,tt)=>tt_drawWorld(x,TT_CAM.mid,tt_world96(tt,P))},
-    // the light turns green, and the cars go
-    {at:P.breath,place:"bogota",keys:[[P.breath,960,540,1]],push:0.02,draw:wide96}],0.6);
+    // wide again, as it's the same with data: the cars wait behind the line, the people at the kerb; then the light turns green, and
+    // the cars go
+    {at:P.dataL-0.3,place:"bogota",keys:[[P.dataL-0.3,960,540,1]],push:0.02,draw:wide96}],0.6);
   setScreen(ctx,S);
   // tags over the picture, in the frame's own coordinates
   if(i===0)tt_tagAt(ctx,t,P.thousand-0.3,P.mayor-0.5,960,190,"1995 · more than 1,000 road deaths a year",{size:34});

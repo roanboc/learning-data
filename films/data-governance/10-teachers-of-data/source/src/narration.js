@@ -3,7 +3,7 @@
 const NARR={
 "crossing":{"name":"The mime before the fine","lead":1.6,"tail":1.0,"vo":[
  {"id":"b95","gap":0.8,"text":"Bogotá, 1995.","say":"Bogotá, nineteen ninety-five."},
- {"id":"stop","gap":0.8,"text":"In the city centre, drivers stop on the zebra crossings, and people on foot weave between the cars."},
+ {"id":"stop","gap":0.8,"text":"In the city centre, drivers stop on the zebra crossings, so people on foot have to weave between the cars."},
  {"id":"risk","gap":0.8,"text":"It's dangerous: more than a thousand people a year die on the city's roads."},
  {"id":"need","gap":0.8,"text":"Fines alone haven't changed the habit. The city needs another way."},
  {"id":"mayor","gap":0.8,"text":"The new mayor, Antanas Mockus, sends mimes into the streets."},
@@ -15,7 +15,8 @@ const NARR={
  {"id":"y96","gap":0.8,"text":"By 1996, three drivers in four were keeping the crossings clear.","say":"By nineteen ninety-six, three drivers in four were keeping the crossings clear."},
  {"id":"safe","gap":0.8,"text":"People on foot could cross in front of the cars, not between them."},
  {"id":"most","gap":0.8,"text":"Most people keep a rule because they understand it, and because the people around them keep it."},
- {"id":"few","gap":0.8,"text":"The fine is for the few."}]},
+ {"id":"few","gap":0.8,"text":"The fine is for the few."},
+ {"id":"data","gap":0.8,"text":"It's the same with data. When most people keep the rules, everyone who uses the data can trust it."}]},
 "today":{"name":"Submission day","lead":1.0,"tail":1.0,"vo":[
  {"id":"sends","gap":0.8,"text":"Today, the university sends its awards to the government."},
  {"id":"agree","gap":0.8,"text":"The submission and Planning's census report agree: 4,867 awards, counted by the glossary's meaning.","say":"The submission and Planning's census report agree: four thousand, eight hundred and sixty-seven awards, counted by the glossary's meaning."},

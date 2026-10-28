@@ -291,7 +291,7 @@ scene("job",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,o
 // the check that sends a change back, as the bazaar's goods were checked; then three kinds of product ----
 scene("steps",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{reg:c.models-0.35,ten:w("models","Ten"),tags:w("models","each of"),steps:w("rest","steps"),baz:w("goods","like goods")-0.25,tom:w("goods","a table")-0.3,
-      must:w("goods","must"),wr:w("goods","or the")-0.8,back:sc.ends.goods-0.1,cards:w("kinds","close")-0.35,close:w("kinds","close")-0.1,join:w("kinds","some join")-0.1,serve:w("kinds","some serve")-0.1};});
+      must:w("goods","must"),stamp:w("goods","a table")+0.9,wr:w("goods","or the")-0.8,back:sc.ends.goods-0.1,cards:w("kinds","close")-0.35,close:w("kinds","close")-0.1,join:w("kinds","some join")-0.1,serve:w("kinds","some serve")-0.1};});
   const lit=tt=>i=>{const j=[1,4,6,9,12,15,19,22,26,30].indexOf(i);return clamp((tt-P.ten-0.09*j)/0.4,0,1);},rows=(p1,p2,wn)=>[{l:"product:",v:"Short-course follow-ups",hand:true,p:p1,warn:wn},{l:"owner:",v:"the learning team",hand:true,p:p2}];
   gv_shots(ctx,S,t,sc.dur,[
     // the data room: Jun at the board, where the team's register of tables hangs
@@ -301,11 +301,11 @@ scene("steps",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s
       po_rgTags(x,k=>clamp((tt-P.tags-k*0.42)/0.6,0,1));po_tagAt(x,tt,P.steps+0.15,null,570,580,"step · only the data team needs it",{size:30,col:WC_MUTED,wash:[196,196,196],washA:0.4});}},
     // the bazaar, a moment: the market inspector's rod goes along a bolt of cloth
     {at:P.baz,place:"clothClose",keys:[[P.baz,960,540,1.0],[P.baz+0.1,990,555,1.05]],d:3,draw:(x,tt)=>po_counter(x,tt,P,{steps:[P.baz+0.25,P.baz+1.15]})},
-    // Tom's desk: the change that brought the learning team's follow-up list comes back, its product line empty and stamped; he names
-    // its product, and its owner
+    // Tom's desk: the change that brought the learning team's follow-up list comes back, and as it lands the check stamps it, its product
+    // line empty; he names its product, and its owner
     {at:P.tom,place:"tomTop",keys:[[P.tom,910,490,1.12],[P.tom+0.1,905,485,1.16]],d:5,draw:(x,tt)=>{const u=easeCam(clamp((tt-P.tom-0.2)/0.7,0,1)),p1=clamp((tt-P.wr)/1.0,0,1),p2=clamp((tt-P.wr-1.15)/0.75,0,1);
       const R=rows(p1,p2,gv_io(tt,P.must-0.1,P.wr,0.4)),pen=gv_io(tt,P.wr-0.4,P.wr+2.2,0.3);
-      po_changeReq(x,410,270-(1-u)*760,1000,440,{rot:0.012*(1-u)-0.006,name:"the learning team's follow-up list",lines:3,rows:R,after:q=>{gv_stamp(q,700,206,"no product, no owner",1,{size:38,col:GV.redInk,rot:-0.07});
+      po_changeReq(x,410,270-(1-u)*760,1000,440,{rot:0.012*(1-u)-0.006,name:"the learning team's follow-up list",lines:3,rows:R,after:q=>{gv_stamp(q,700,206,"no product, no owner",clamp((tt-P.stamp)/0.3,0,1),{size:38,col:GV.redInk,rot:-0.07});
         if(pen>0.01){const i=tt<P.wr+1.1?0:1,[vx,ry]=po_crRowAt(q,440,R,i),[px,py]=po_penAt(q,R[i].v,vx,ry,30,i?p2:p1);po_pen(q,px,py,pen);}}});}},
     // the register again: the follow-up list's row lit, ticked; every table other teams use is in exactly one product
     {at:P.back,place:"boardData",keys:[[P.back,900,560,1.08],[P.back+0.1,905,556,1.11]],d:3,draw:(x,tt)=>{po_register(x,{lit:()=>1,grey:1,pulse:gv_io(tt,P.back+0.3,P.back+1.9,0.35),tick:clamp((tt-P.back-0.45)/0.4,0,1)});

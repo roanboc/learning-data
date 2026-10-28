@@ -1,0 +1,17 @@
+/* Learning Data: "Pausa para pensar" de Where each piece lives, en español. Mantén las claves iguales a think.en.js.
+   La película se detiene al final de tres capítulos (nine, home, check), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). La serie todavía no tiene labs, así que ninguna pregunta tiene "stop",
+   y el .player data-labs de la página está vacío. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  "nine":{q:"La solicitud de la planificadora esperó nueve días con Jun. ¿Por qué le llegó a él?",
+    opts:[{t:"Jun es el dueño de cada tabla que construye."},{t:"La página de la tabla en la plataforma de datos lo nombraba como su dueño. Se escribió a mano cuando él construyó la tabla, y nada la mantuvo al día, así que aún lo nombraba después de que Clara pasó a ser la dueña en octubre.",ok:true},{t:"Clara le había pedido a Jun que respondiera sus solicitudes mientras no estaba."}],
+    why:"La página era una copia de quién es el dueño de la tabla, escrita a mano una vez, y nadie la mantuvo al día con el hogar del dueño. Así que la solicitud fue a la persona equivocada, y si él hubiera dicho que sí, alguien que no es el dueño habría decidido quién puede verla. Donde trabajas, ¿a quién llegaría hoy una solicitud: al dueño, o a quien construyó la tabla?"},
+  "home":{q:"¿Qué significa un solo hogar, para una pieza de la gobernanza?",
+    opts:[{t:"Cada pieza se guarda en una herramienta, y las demás herramientas se apagan."},{t:"Es el único lugar donde la pieza se cambia, con un dueño que la decide. Cada otro lugar guarda una copia, hecha desde el hogar en un solo sentido, que dice de dónde vino y cuándo. Nadie escribe en una copia: una corrección va a su hogar, y cada copia la sigue.",ok:true},{t:"Cada equipo guarda su propia versión, y gana la más nueva."}],
+    why:"Cada equipo conserva su herramienta; lo que cambia es que cada pieza tiene un lugar donde se cambia, y un dueño que la decide. El dueño de un producto vive en el repositorio del equipo de datos, y el catálogo y la página de la plataforma lo copian. Como con los anales, nadie escribe en una copia. Elige una pieza donde trabajas, como el dueño de una tabla: ¿dónde está su hogar, y cuántas copias tiene?"},
+  "check":{q:"¿Por qué un control compara cada copia con su hogar, cada noche?",
+    opts:[{t:"Porque la sincronización siempre se equivoca, así que cada copia se escribe otra vez."},{t:"Porque una copia aún puede desviarse, si alguien escribe en ella o si se detiene una sincronización. El desvío es algo que encuentra un control, no algo que una persona recuerda, como los historiadores que subían a cada archivo y anotaban lo que encontraban.",ok:true},{t:"Para que el equipo de la plataforma decida cada mañana quién es el dueño de cada tabla."}],
+    why:"Incluso una copia hecha en un solo sentido puede desviarse: alguien escribe en ella, o una sincronización se detiene y nadie lo nota. La primera noche, el control encontró tres, y antes de la mañana la sincronización las había corregido y cada dueño sabía qué cambió. Donde trabajas, ¿qué copias notaría alguien si se desviaran?"}
+  }}};

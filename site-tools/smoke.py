@@ -310,7 +310,7 @@ def log_problems(log):
 
 # ---------------------------------------------------------------- 1. every page, every width, both themes
 async def check_pages(run):
-    sec = run.rep.sec("pages", f"Every page at {', '.join(map(str, WIDTHS))} px, light and dark: no errors, no failed request, no sideways scroll, a compact header")
+    sec = run.rep.sec("pages", f"Every page at {', '.join(map(str, WIDTHS))} px, light and dark: no errors, no failed request, no sideways scroll, a header")
     keys = run.pick(k for k, pg in run.static.items() if not pg.redirect and not pg.is404)
 
     async def one(key, width, theme):
@@ -320,32 +320,12 @@ async def check_pages(run):
                 pg, log = await run.page(ctx, key)
                 await run.ready(pg)
                 await pg.wait_for_timeout(250)
-                m = await pg.evaluate("""() => {
-                  const top = document.querySelector('header.top'), r = top ? top.getBoundingClientRect() : null;
-                  const vis = e => e && getComputedStyle(e).display !== 'none' && e.getClientRects().length > 0;
-                  const items = [...document.querySelectorAll('header.top .brand, header.top nav > a, header.top nav > .lang')];
-                  return {sw: document.documentElement.scrollWidth, iw: innerWidth, h: r ? r.height : null,
-                    shown: items.filter(vis).map(e => ({t: e.textContent.trim(), y: Math.round(e.getBoundingClientRect().top)})),
-                    hidden: items.filter(e => !vis(e)).map(e => e.textContent.trim())};}""")
+                m = await pg.evaluate("() => ({sw: document.documentElement.scrollWidth, iw: innerWidth, head: !!document.querySelector('header.top')})")
                 where = f"{key or '/'} @{width} {theme}"
                 for p in log_problems(log):
                     expect(sec, False, f"{where}: {p}")
                 expect(sec, m["sw"] <= m["iw"], f"{where}: scrolls sideways ({m['sw']} > {m['iw']} px)")
-                if m["h"] is None:
-                    expect(sec, False, f"{where}: no header.top")
-                    return
-                if width <= 360:
-                    expect(sec, m["h"] <= 100, f"{where}: the header is {m['h']:.0f} px tall (at most 100)")
-                if width <= 640:
-                    shown = [x["t"] for x in m["shown"]]
-                    rows = []
-                    for x in m["shown"]:
-                        if not any(abs(x["y"] - y) <= 6 for y in rows):
-                            rows.append(x["y"])
-                    expect(sec, len(shown) == 5 and len(rows) == 1,
-                           f"{where}: the header shows {shown} on {len(rows)} lines; expected the brand, Start here, Topics, Making of and EN/ES on one")
-                else:
-                    expect(sec, not m["hidden"], f"{where}: header items hidden on a wide screen: {m['hidden']}")
+                expect(sec, m["head"], f"{where}: no header.top")
             finally:
                 await ctx.close()
 
@@ -354,6 +334,85 @@ async def check_pages(run):
         sec["notes"].append(f"{len(keys)} pages × {len(WIDTHS)} widths × 2 themes = {len(keys) * len(WIDTHS) * 2} loads")
     if FONT_STATE["failed"] and not FONT_STATE["ok"]:
         sec["notes"].append("Google Fonts couldn't be fetched: fallback fonts were used")
+
+
+# ---------------------------------------------------------------- the header
+# Every page's header is made by header() in build_series.py, and check_site.py checks each page against it, so its layout and
+# its links are checked here on one page per language (the Spanish labels are the longest), not on every page.
+HEADER_WIDTHS = (320, 360, 390, 720, 721, 768, 1280)  # 720 and 721: either side of the switch to two lines
+
+
+async def check_header(run):
+    sec = run.rep.sec("header", f"Header at {', '.join(map(str, HEADER_WIDTHS))} px, in English and Spanish: every link shown, inside it, not overlapping; "
+                                "two lines on phones, one above 720 px; the icon links reached and followed by keyboard")
+    keys = [k for k in ("", "es/") if run.want(k)]
+
+    async def one(key, width):
+        async with run.sem:
+            ctx = await run.context(width, "light")
+            try:
+                pg, _ = await run.page(ctx, key)
+                await run.ready(pg)
+                m = await pg.evaluate("""() => {
+                  const r = document.querySelector('header.top').getBoundingClientRect();
+                  const vis = e => getComputedStyle(e).display !== 'none' && e.getClientRects().length > 0;
+                  const items = [...document.querySelectorAll('header.top .brand, header.top nav > a, header.top nav > .lang, .nav-tools a')];
+                  return {h: r.height, hidden: items.filter(e => !vis(e)).map(e => e.textContent.trim()),
+                    shown: items.filter(vis).map(e => { const b = e.getBoundingClientRect(); return {
+                      t: e.getAttribute('aria-label') || e.textContent.trim(), y: Math.round(b.top + b.height / 2),
+                      x: b.left, top: b.top, right: b.right, bottom: b.bottom}; })}; }""")
+                where = f"{key or '/'} @{width}"
+                expect(sec, not m["hidden"], f"{where}: header items hidden: {m['hidden']}")
+                expect(sec, m["h"] <= 100, f"{where}: the header is {m['h']:.0f} px tall (at most 100)")
+                for x in m["shown"]:
+                    expect(sec, x["x"] >= 0 and x["right"] <= width and x["bottom"] <= m["h"], f"{where}: header item outside the header: {x['t']}")
+                for i, a in enumerate(m["shown"]):
+                    for b in m["shown"][i + 1:]:
+                        overlap = min(a["right"], b["right"]) - max(a["x"], b["x"]) > 1 and min(a["bottom"], b["bottom"]) - max(a["top"], b["top"]) > 1
+                        expect(sec, not overlap, f"{where}: header items overlap: {a['t']} and {b['t']}")
+                rows = []
+                for x in m["shown"]:
+                    if not any(abs(x["y"] - y) <= 6 for y in rows):
+                        rows.append(x["y"])
+                # phones: the brand and the icon links, then the site's links and EN/ES; wider: all on one line
+                lines = 2 if width <= 720 else 1
+                expect(sec, len(m["shown"]) == 7 and len(rows) == lines,
+                       f"{where}: the header shows {[x['t'] for x in m['shown']]} on {len(rows)} lines; expected the brand, Start here, Topics, "
+                       f"Making of, EN/ES and the two icon links on {lines}")
+                if width not in (390, 1280):
+                    return
+                tools = pg.locator(".nav-tools a")
+                for i in range(await tools.count()):
+                    link = tools.nth(i)
+                    box = await link.bounding_box()
+                    expect(sec, box is not None and box["width"] >= 44 and box["height"] >= 44, f"{where}: icon link needs a 44 px touch target")
+                    # reached with the keyboard, not a programmatic focus call
+                    await pg.evaluate("() => document.activeElement.blur()")
+                    for _ in range(12):
+                        await pg.keyboard.press("Tab")
+                        if await link.evaluate("e => e === document.activeElement"):
+                            break
+                    focus = await link.evaluate("""e => { const s = getComputedStyle(e), hint = getComputedStyle(e, '::after');
+                      return e === document.activeElement && e.matches(':focus-visible') && s.outlineStyle !== 'none' &&
+                        parseFloat(s.outlineWidth) >= 2 && hint.opacity === '1'; }""")
+                    expect(sec, focus, f"{where}: icon link needs keyboard focus, a visible outline and an action hint")
+                    destination = await link.get_attribute("href")
+                    # A stub page stands in for the external site, so it is never contacted; then back, for the next link.
+                    # (A 204 would leave the page half navigated, and the next link could not be found.)
+                    await pg.route(destination + "**", lambda route: route.fulfill(status=200, content_type="text/html", body="<title>stub</title>"))
+                    try:
+                        async with pg.expect_navigation(url=lambda u: u.startswith(destination), timeout=8000):
+                            await pg.keyboard.press("Enter")
+                    except Exception:  # noqa: BLE001
+                        pass
+                    expect(sec, pg.url in (destination, destination + "/"), f"{where}: Enter on the icon link must go to {destination}, got {pg.url}")
+                    if not pg.url.startswith(run.base):
+                        await pg.go_back()
+                        await run.ready(pg)
+            finally:
+                await ctx.close()
+
+    await asyncio.gather(*(one(k, w) for k in keys for w in HEADER_WIDTHS))
 
 
 # ---------------------------------------------------------------- 2. the 404 page, at a deep missing path
@@ -1418,7 +1477,7 @@ async def take_shots(run):
     sec["notes"].append(f"{n} screenshots in {out}")
 
 
-CHECKS = {"pages": check_pages, "notfound": check_404, "deeplinks": check_deeplinks, "chapters": check_chapter_links,
+CHECKS = {"pages": check_pages, "header": check_header, "notfound": check_404, "deeplinks": check_deeplinks, "chapters": check_chapter_links,
           "players": check_players, "sealed": check_sealed, "nextpanel": check_next, "think-silent": check_think_silent,
           "think-home": check_think_home, "progress": check_progress, "nostorage": check_nostorage,
           "mobile": check_mobile, "a11y": check_a11y, "series-learn": check_series_learn, "drawn": check_drawn}

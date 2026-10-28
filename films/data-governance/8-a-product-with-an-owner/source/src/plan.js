@@ -152,5 +152,76 @@ function po_calendar(ctx,x,y,cur,next,flip){ctx.drawImage(po_calBaseC(),x-170,y-
 // from today to the next census day, a page a month
 const PO_CAL=[["October","28"],["November","1"],["December","1"],["January","1"],["February","1"],["March","31"]];
 
-const WC_PLACES={st1520:c=>po_paintStreet(c,"1520"),st1600:c=>po_paintStreet(c,"1600"),gate:po_paintGate,hallIn:po_paintHallIn,hallInFront:po_paintHallInFront,clothClose:po_paintClothClose,clothFront:po_paintClothFront,plain:po_paintPlain,air:po_paintAir,airShops:po_paintAirShops,airCrowd:po_paintAirCrowd,airHall:po_paintAirHall,airTrade0:c=>po_paintAirTrade(c,0),airTrade1:c=>po_paintAirTrade(c,1),airTrade2:c=>po_paintAirTrade(c,2),office:gv_paintOffice,faculty:gv_paintFaculty,facDesk:po_paintFacDesk,facTop:po_paintFacTop,corridor:po_paintCorridor,data:gv_paintData,noor:gv_paintNoor,planning:gv_paintPlanning,floor:gv_paintFloor,
+/* ---------- Planning's room: the table where the card is written ---------- */
+// someone sitting behind a table (cut off at its top, cutY), as the series' gv_behind, a little higher (dy < 0) while they sit down
+function po_behind(ctx,id,x,cutY,s,dy,o){ctx.save();ctx.beginPath();ctx.rect(-W,-H,3*W,cutY+H);ctx.clip();person(ctx,id,x,cutY+GV_SIT*s+(dy||0),s,o||{});ctx.restore();}
+// the table in Planning's room, over the three sitting at it (kept like a place, and drawn after them): its top and edge, the panel
+// under it, and on it a jug and glasses, a closed laptop, papers. PO_PT: the table's top, its left end and width, three seats, their scale
+const PO_PT={top:772,table:[400,1120],seats:[650,960,1270],s:0.8};
+function po_paintPlanTable(ctx){const T_=PO_PT,[x0,w]=T_.table,top=T_.top,col=[214,186,150];wc_contact(ctx,x0-30,x0+w+30,990,0.9,0.34);
+  wc_part(ctx,wc_rect(x0+44,top+56,w-88,930-top-56),wc_dim(col,0.26),1);for(const lx of [x0+16,x0+w-58])wc_part(ctx,wc_rect(lx,top+56,42,990-top-56),wc_dim(col,0.32),1);
+  wc_part(ctx,wc_rect(x0,top,w,40),wc_lit(col,0.12),1);wc_part(ctx,wc_rect(x0-6,top+38,w+12,20),wc_dim(col,0.06),1);
+  const S=T_.seats,mid=i=>(S[i]+S[i+1])/2,ty=top+26;
+  wc_part(ctx,[[mid(0)-30,ty],[mid(0)+30,ty],[mid(0)+34,ty-96],[mid(0)+20,ty-110],[mid(0)-26,ty-110],[mid(0)-34,ty-96]],[214,230,236],1,{kind:"thing",lw:1.3});
+  wc_flat(ctx,[[mid(0)-30,ty-4],[mid(0)+30,ty-4],[mid(0)+32,ty-62],[mid(0)-32,ty-62]],[176,208,222],1,"water");
+  for(const gx of [mid(0)+62,mid(1)-62]){wc_part(ctx,wc_rect(gx-16,ty-52,32,52),[226,236,240],1,{kind:"thing",lw:1.1});wc_flat(ctx,wc_rect(gx-14,ty-28,28,24),[186,214,226],1,"water");}
+  wc_part(ctx,[[mid(1)-70,ty+8],[mid(1)+70,ty+8],[mid(1)+60,ty-6],[mid(1)-60,ty-6]],[150,156,168],1,{lw:1.2});
+  for(let i=0;i<3;i++)wc_flat(ctx,wc_rect(x0+60+i*4,ty-4-i*6,190,8),i%2?[244,242,236]:[250,250,246],1,"paper");}
+// Planning's screen on the wall (GV_PL.screen): the catalogue of data products, a plain page like a register, and its one empty place,
+// where the card will go. o.on lights the screen (0 to 1); o.fill puts the card in its place (0 to 1), its gold edge with it
+function po_catalogue(ctx,o){o=o||{};const [x,y,w,h]=GV_PL.screen,on=clamp(o.on==null?1:o.on,0,1);if(on<=0.01)return;withA(ctx,on,()=>{
+  gv_screen(ctx,x,y,w,h,"Catalogue of data products",null,{barH:56,titleSize:32,bar:[84,112,96]});
+  ctx.save();ctx.fillStyle=rgba(WC_MUTED,0.12);for(let i=0;i<6;i++)ctx.fillRect(x+30,y+96+i*48,w-60,2);ctx.restore();
+  const sw=400,sh=150,sx=x+w/2-sw/2,sy=y+118,f=clamp(o.fill||0,0,1);
+  if(f<1){ctx.save();ctx.setLineDash([12,10]);ctx.lineWidth=3;ctx.strokeStyle=rgba(WC_MUTED,0.55*(1-f)*(0.8+0.2*Math.sin((o.t||0)*3)));ctx.strokeRect(sx,sy,sw,sh);ctx.restore();}
+  if(f>0.01){const k=lerp(1.25,1,easeCam(f));ctx.save();ctx.translate(sx+sw/2,sy+sh/2);ctx.scale(k,k);withA(ctx,f,()=>{wc_panel(ctx,-sw/2,-sh/2,sw,sh,{kind:"card",wash:GV.gold,washA:0.22,seed:401});
+    ctx.save();ctx.strokeStyle=rgba(GV.gold,0.95);ctx.lineWidth=5;rr(ctx,-sw/2-4,-sh/2-4,sw+8,sh+8,14);ctx.stroke();ctx.restore();
+    wc_T(ctx,"Learners near an award",0,-14,{w:800,size:30,align:"center",col:WC_DARK});wc_T(ctx,"Clara Jensen · Planning",0,32,{w:600,size:28,align:"center",col:WC_INK});});ctx.restore();}});}
+// a screen that's off: dark glass, a soft reflection across it
+function po_screenOff(ctx,x,y,w,h,a){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.fillStyle=rgba([62,68,80],1);ctx.fillRect(x,y,w,h);const g=ctx.createLinearGradient(x,y,x+w,y+h);
+  g.addColorStop(0,"rgba(255,255,255,0.10)");g.addColorStop(0.45,"rgba(255,255,255,0.02)");g.addColorStop(1,"rgba(255,255,255,0.08)");ctx.fillStyle=g;ctx.fillRect(x,y,w,h);ctx.restore();});}
+// Planning's table from above, light wood: a glass, a closed notebook, the pen-tray's edge
+function po_paintPlanTop(ctx){const col=[222,198,160];ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),col,{kind:"plaster",line:false,seed:411});
+  ctx.save();ctx.globalCompositeOperation="multiply";const R=wc_rng(19);for(let i=0;i<60;i++){const y=R()*H;ctx.strokeStyle=rgba(wc_dim(col,0.16+R()*0.1),0.14+R()*0.12);ctx.lineWidth=1+R()*2.2;ctx.beginPath();ctx.moveTo(-20,y);
+    for(let x=0;x<=W+40;x+=80)ctx.lineTo(x,y+5*Math.sin(x/280+i)+3*Math.sin(x/95+i*2));ctx.stroke();}ctx.restore();
+  wc_wash(ctx,wc_ell(1790,880,58,58,36),[226,236,240],{kind:"thing",lw:1.4,seed:413});wc_wash(ctx,wc_ell(1790,880,44,44,30),[186,214,226],{kind:"thing",line:false,seed:414});
+  wc_part(ctx,wc_rrPts(1240,900,420,300,14),[176,96,80],1,{seed:415});wc_flat(ctx,wc_rect(1600,900,14,300),wc_dim([176,96,80],0.4),1,"band");}
+// the question Yusuf writes on a small card between them (each line, 0 to 1, as the pen writes it)
+const PO_QC={x:1236,y:64,w:600,h:214},PO_QL=["What does it promise?","Who keeps it?"];
+function po_qCard(ctx,p,a){if((a==null?1:a)<=0.01)return;const Q=PO_QC;withA(ctx,a==null?1:a,()=>{ctx.save();ctx.translate(Q.x+Q.w/2,Q.y+Q.h/2);ctx.rotate(0.015);ctx.translate(-Q.w/2,-Q.h/2);
+  wc_panel(ctx,0,0,Q.w,Q.h,{kind:"card",seed:421});PO_QL.forEach((s,i)=>wc_hand(ctx,s,44,86+i*70,{size:40,w:600,col:GV_SIGN.ink,p:p[i]}));ctx.restore();});}
+// The product card, as the three of them fill it in: a printed form (its title, and the name of each line) and what they write on each
+// line in pen, as it's named (o.w[i], 0 to 1). When it's done, a gold frame goes round it (o.frame) and a gold ring round its owner
+// (o.ring). PO_PC: where it lies, and its layout; PO_PCL: each line's name, and what's written, already broken to fit
+const PO_PC={x:110,y:64,w:1000,h:800,lx:44,vx:300,y0:214,lh:38,gap:18,size:28};
+const PO_PCL=[["for",["how many learners are near a graduate","certificate, by faculty, as at census date"]],["use",["to plan each faculty's places in its final","units; the numbers are as at census date"]],
+  ["owner",["Clara Jensen, Planning"]],["in it",["17 columns, each in plain words,","and the checks they pass"]],["service levels",["built every night ·","ready by 7 a.m. on census day"]],
+  ["ask",["Planning's data desk"]],["version",["1 · active"]]];
+// each line's baselines, from the card's top
+const PO_PCY=(()=>{const P=PO_PC;let y=P.y0;return PO_PCL.map(([,v])=>{const ys=v.map((_,j)=>y+j*P.lh);y+=v.length*P.lh+P.gap;return ys;});})();
+function po_cardC(){const P=PO_PC;return wc_kept("poCard",P.w+40,P.h+40,q=>{q.save();q.filter="blur(8px)";q.fillStyle="rgba(60,44,30,0.26)";q.fillRect(28,34,P.w,P.h);q.restore();
+  wc_wash(q,wc_rrPts(20,20,P.w,P.h,12),WC_CARD,{kind:"page",lw:1.4,seed:431});q.fillStyle=rgba(WC_MUTED,0.45);q.fillRect(20+P.lx,20+150,P.w-2*P.lx,3);
+  q.fillStyle=rgba(WC_MUTED,0.12);PO_PCY.forEach(ys=>ys.forEach(y=>q.fillRect(20+P.vx,20+y+10,P.w-P.vx-P.lx,2)));});}
+function po_card(ctx,o){o=o||{};const P=PO_PC,a=o.a==null?1:o.a;if(a<=0.01)return;withA(ctx,a,()=>{const {x,y}=P;ctx.drawImage(po_cardC(),x-20,y-20);
+  wc_T(ctx,"Learners near an award",x+P.lx,y+82,{w:800,size:46,col:WC_DARK});wc_T(ctx,"data product",x+P.lx,y+126,{w:600,size:30,col:WC_MUTED});
+  PO_PCL.forEach(([l,v],i)=>{wc_T(ctx,l,x+P.lx,y+PO_PCY[i][0],{w:700,size:P.size,col:WC_MUTED});const n=v.reduce((s_,q)=>s_+q.length,0);let done=0;
+    v.forEach((q,j)=>{const p=clamp(((o.w||[])[i]||0)*n-done,0,q.length)/q.length;done+=q.length;if(p>0)wc_hand(ctx,q,x+P.vx,y+PO_PCY[i][j],{size:P.size,w:600,col:GV_SIGN.ink,p});});});
+  const r=clamp(o.ring||0,0,1);if(r>0){const tw_=tw(ctx,PO_PCL[2][1][0],P.size,600),cx=x+P.vx+tw_/2-4,cy=y+PO_PCY[2][0]-10;ctx.save();ctx.strokeStyle=rgba(GV.gold,0.95);ctx.lineWidth=5;ctx.lineCap="round";
+    ctx.beginPath();ctx.ellipse(cx,cy,tw_/2+34,34,-0.03,-Math.PI*0.6,-Math.PI*0.6+TAU*r*1.04);ctx.stroke();ctx.restore();}
+  const f=clamp(o.frame||0,0,1);if(f>0){ctx.save();ctx.strokeStyle=rgba(GV.gold,0.95);ctx.lineWidth=10;ctx.lineJoin="round";const L=2*(P.w+P.h+48);ctx.setLineDash([L*f,L]);
+    ctx.beginPath();ctx.moveTo(x-12,y-12);ctx.lineTo(x+P.w+12,y-12);ctx.lineTo(x+P.w+12,y+P.h+12);ctx.lineTo(x-12,y+P.h+12);ctx.closePath();ctx.stroke();ctx.restore();}});}
+// where the pen is while line i of the card is written (o.w[i] of the way): its tip at the end of what's written
+function po_cardPen(ctx,i,p){const P=PO_PC,v=PO_PCL[i][1],n=v.reduce((s_,q)=>s_+q.length,0);let done=0,at=null;
+  v.forEach((q,j)=>{const k=clamp(p*n-done,0,q.length);if(at===null&&(k<q.length||j===v.length-1))at=[q,j,k/q.length];done+=q.length;});
+  const [q,j,u]=at;return po_penAt(ctx,q,P.x+P.vx,P.y+PO_PCY[i][j],P.size,u);}
+// a pen lying at an angle, its point at (x,y) (film 4's, in this film's own name), and where it is while a hand writes s from (x,y)
+function po_pen(ctx,x,y,a,rot){if(a<=0.01)return;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.rotate(rot==null?0.62:rot);ctx.fillStyle="rgba(60,44,30,0.2)";ctx.fillRect(22,14,210,16);
+  ctx.fillStyle=rgba([196,200,210],1);ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(26,-7);ctx.lineTo(26,7);ctx.closePath();ctx.fill();ctx.fillStyle=rgba(GV_SIGN.ink,1);ctx.fillRect(0.5,-1.2,7,2.4);
+  ctx.fillStyle=rgba([44,56,104],1);rr(ctx,24,-9,190,18,8);ctx.fill();ctx.fillStyle=rgba([206,176,92],1);ctx.fillRect(150,-9,8,18);ctx.fillStyle=rgba([90,104,160],0.7);ctx.fillRect(30,-6,170,3);ctx.restore();});}
+const po_penAt=(ctx,s,x,y,sz,p)=>[x+tw(ctx,s.slice(0,Math.ceil(s.length*clamp(p,0,1))),sz,600)+4,y-sz*0.3+2*Math.sin(p*40)];
+// the card on Planning's wall, beside the screen, small: its gold frame, and lines too small to read, on purpose
+function po_wallCard(ctx,x,y,a){if(a<=0.01)return;const w=150,h=120;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.rotate(-0.02);wc_panel(ctx,-w/2,0,w,h,{kind:"card",seed:441});
+  ctx.strokeStyle=rgba(GV.gold,0.95);ctx.lineWidth=4;rr(ctx,-w/2-3,-3,w+6,h+6,10);ctx.stroke();gv_lines(ctx,-w/2+16,26,w-40,5,18,1);gv_pin(ctx,0,8,[60,110,170],0.8);ctx.restore();});}
+
+const WC_PLACES={st1520:c=>po_paintStreet(c,"1520"),st1600:c=>po_paintStreet(c,"1600"),gate:po_paintGate,hallIn:po_paintHallIn,hallInFront:po_paintHallInFront,clothClose:po_paintClothClose,clothFront:po_paintClothFront,plain:po_paintPlain,air:po_paintAir,airShops:po_paintAirShops,airCrowd:po_paintAirCrowd,airHall:po_paintAirHall,airTrade0:c=>po_paintAirTrade(c,0),airTrade1:c=>po_paintAirTrade(c,1),airTrade2:c=>po_paintAirTrade(c,2),office:gv_paintOffice,faculty:gv_paintFaculty,facDesk:po_paintFacDesk,facTop:po_paintFacTop,corridor:po_paintCorridor,planTable:po_paintPlanTable,planTop:po_paintPlanTop,data:gv_paintData,noor:gv_paintNoor,planning:gv_paintPlanning,floor:gv_paintFloor,
   regClose:gv_paintRegistrarClose,regDesk:gv_paintRegistrarDesk,screenFac:c=>gv_paintScreenDesk(c,GV_ROOM.fac),meeting:gv_paintMeeting,desk:gv_paintDesk,boardData:c=>gv_paintBoardClose(c,GV_ROOM.data),platform:gv_paintPlatform};

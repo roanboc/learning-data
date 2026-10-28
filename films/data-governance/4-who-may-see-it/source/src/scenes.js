@@ -329,7 +329,7 @@ scene("purpose",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id
       if(u>0){x.save();x.translate((1-easeCam(u))*1300,0);ws_regList(x,700,260,{hi:fin(tt,P.leads+0.6,0.5)});x.restore();}
       if(lk>0)wc_link(x,514,370,728,ws_rlRow(260,2)-12,WC_PENCIL,{p:lk,lw:4,a:0.85*(1-fin(tt,P.agent-0.4,0.4))});
       ws_tagAt(x,tt,P.still,P.agent,960,800,"pseudonymous: still personal data",{size:30,wash:WS_PSEUDO,washA:0.4});
-      ws_accessCard(x,1720,190,{rot:0.03,a:fin(tt,P.still+0.4,0.5),glow:fin(tt,P.end,0.6)});}},
+      ws_accessCard(x,1690,172,{rot:0.03,a:fin(tt,P.still+0.4,0.5),glow:fin(tt,P.end,0.6)});}},
     // the data team's screen: their agent reads stars too, and works from counts and samples
     {at:P.agent,place:"screen",keys:[[P.agent,960,440,1.04],[P.agent+0.1,960,450,1.07]],d:4,push:0.01,draw:(x,tt)=>{ws_maskTable(x,{title:"learner table, as the agent reads it"});
       const [X,Y]=GV_SC;ws_agentCard(x,X+50,Y+556,fin(tt,P.ag,0.5));}}]);
@@ -343,7 +343,7 @@ scene("stars",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s
     {at:0,place:"planning",keys:[[0,960,500,1.08],[0.1,960,490,1.1]],d:4,draw:(x,tt)=>{ws_planScreen(x,gv_io(tt,P.ask+1.0,c.why,0.4));
       person(x,"clara",440,905,0.8,{pose:"point",pose2:"listen",mix:fin(tt,c.why,0.6),t:tt});
       person(x,"yusuf",1320,905,0.8,{pose:"listen",pose2:"explain",mix:gv_io(tt,P.why-0.3,P.fl,0.5),t:tt,flip:true});
-      ws_say(x,tt,P.ask+0.6,P.yb,90,250,["Why stars?"],420,468);
+      ws_say(x,tt,P.ask+0.6,P.yb,150,250,["Why stars?"],420,468);
       ws_say(x,tt,P.yb,P.more-0.2,1236,128,["Planning counts learners.","It doesn't need to know who they are."],1320,466,{size:28});
       const n=fin(tt,P.more,0.45);if(n>0.01){x.save();x.translate(0,14*(1-n));withA(x,n,()=>gv_card(x,1236,124,560,196,["Need names?","Ask the registrar's office,","and say what for."],{size:30,wash:GV.gold,washA:0.18,pin:true}));x.restore();}}},
     // the floor: a no without a way forward, and the table copied into spreadsheets, office after office
@@ -381,7 +381,7 @@ scene("grants",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,
     // his desk: binder 6 again, its two questions answered in his hand, which data and how, and the access under them; a green tick
     {at:P.bind,place:"desk",keys:[[P.bind,1152,432,1.25]],d:2,draw:(x,tt)=>{const n=P.notes.map((t0,i)=>clamp((tt-t0)/WS_OBD[i],0,1));
       ws_openBinder(x,1,{notes:n,tick:fin(tt,P.notes[2]+1.0,0.5)});
-      [[1205,300],[1372,418]].forEach(([qx,qy],i)=>withA(x,1-0.75*clamp(n[i]*1.5,0,1),()=>gv_qmark(x,qx,qy,46,1)));
+      [[1205,300],[1372,418]].forEach(([qx,qy],i)=>withA(x,1-clamp(n[i]*1.5,0,1),()=>gv_qmark(x,qx,qy,46,1)));
       P.notes.forEach((t0,i)=>{const a=gv_io(tt,t0-0.3,t0+WS_OBD[i]+0.25,0.25);if(a<=0.01)return;const [px,py]=ws_penAt(x,WS_OBN[i],ws_obNoteX(),ws_obNoteY(i),ws_obNoteS(x),n[i]);ws_pen(x,px,py,a,0.3);});}},
     // the census of 1987 again, as the first chapter left it: the tally full, the box shut and locked, the court's line across the answers.
     // Then, as in the first chapter, the line becomes the line between the table's columns: counting on one side; the side that says who
